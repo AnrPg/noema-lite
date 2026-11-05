@@ -179,87 +179,28 @@
     }
     return r;
   }
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): an engine that evolves in time can be stepped by the parts orchestrator ----------
-     def.stepper = { init(model, inputs, ctx) → state,
-                     step(state, inputs, t, dt, ctx) → { state, out: {outputId: value}, dt? (taken ≤ dt: an early stop), events?: [{t, kind, data, to?}], fail?: code },
-                     snapshot?(state) → copy, restore?(copy) → state (default: a deep copy of plain data; null = cannot be iterated),
-                     output?(state, ctx) → out (the outputs at the start), onEvent?(state, ev, t) → state (an event of another part) }
-     ctx = { spec, seed, prepared, id, t0, rand (a seeded stream of this part) }. inputs: the part's numbers (consts, params, its inputs), held
-     over the step. out: the spec's output ids → a number (a scalar now; a series output collects one sample per step), an array (kept
-     whole), a scene or a sound. The same signature as NoemaSimKit.stepper / cosim (46_lib_simkit.js). Pure, bounded, never throws. */
-  const copyData = v => { if (v === null || typeof v !== 'object') return v; if (ArrayBuffer.isView(v)) return v.slice(); if (Array.isArray(v)) return v.map(copyData); const o = {}; for (const k of Object.keys(v)) o[k] = copyData(v[k]); return o; };
-  /** only the declared outputs of a step (arrays thinned to the plot limit) */
-  function pickStep(spec, out) {
-    const r = {};
-    if (!isObj(out)) return r;
-    for (const o of (spec && spec.outputs) || []) {
-      if (!o || typeof o.id !== 'string' || !has(out, o.id)) continue;
-      const v = out[o.id];
-      r[o.id] = Array.isArray(v) || ArrayBuffer.isView(v) ? thin(Array.from(v), MAX_POINTS) : typeof v === 'number' || typeof v === 'boolean' ? v : isObj(v) ? v : NaN;
-    }
-    return r;
-  }
-  /** the stepping side of an instance: init / step / snapshot / restore over one state (what the Worker's step messages call) */
-  function stepInstance(def, spec, seed, prepared) {
-    const S = def.stepper, snaps = [];
-    let state = null, ok = false;
-    const ctx = { spec, seed, prepared, id: def.id, t0: 0, rand: mulberry32(hash32(def.id + ':step', seed)) };
-    const scal = inp => { const env = {}; for (const [k, v] of Object.entries(inp || {})) if (typeof v === 'number' || typeof v === 'boolean') env[k] = v; return env; };
-    return {
-      stepInit(inp, t0) {
-        ctx.t0 = Number.isFinite(t0) ? t0 : 0; snaps.length = 0;
-        try { state = S.init(spec.model, scal(inp), ctx); ok = state !== undefined && state !== null; } catch (e) { state = null; ok = false; }
-        if (!ok) return { fail: 'part-failed', out: {} };
-        let o = {}; try { o = S.output ? S.output(state, ctx) || {} : {}; } catch (e) { o = {}; }
-        return { out: pickStep(spec, o) };
-      },
-      stepTo(inp, t, dt, inbox) {
-        if (!ok) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
-        if (S.onEvent) for (const ev of Array.isArray(inbox) ? inbox : []) { try { const s2 = S.onEvent(state, ev, t); if (s2 !== undefined) state = s2; } catch (e) { /* the event is dropped */ } }
-        let r = null; try { r = S.step(state, scal(inp), t, dt, ctx); } catch (e) { r = null; }
-        if (!isObj(r)) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
-        if (r.state !== undefined) state = r.state;
-        const taken = Number.isFinite(r.dt) ? Math.max(0, Math.min(r.dt, dt)) : dt;
-        const evs = (Array.isArray(r.events) ? r.events : []).filter(isObj).slice(0, 256).map(e => ({ t: Number.isFinite(e.t) ? e.t : t + taken, kind: String(e.kind != null ? e.kind : e.name || ''), data: e.data === undefined ? null : e.data, ...(Array.isArray(e.to) ? { to: e.to.map(String) } : {}), ...(Number.isFinite(e.prio) ? { prio: e.prio } : {}) }));
-        return { out: pickStep(spec, r.out), dt: taken, events: evs, ...(r.fail ? { fail: String(r.fail) } : {}) };
-      },
-      snapshot() {
-        if (!ok || S.snapshot === null) return -1;
-        let c; try { c = S.snapshot ? S.snapshot(state) : copyData(state); } catch (e) { return -1; }
-        snaps.length = 0; snaps.push(c); return 0;   // one slot: the master snapshots at the start of a macro step and may go back to it
-      },
-      restore(i) {
-        if (!(i >= 0 && i < snaps.length) || S.restore === null) return false;
-        try { state = S.restore ? S.restore(snaps[i]) : copyData(snaps[i]); return true; } catch (e) { return false; }
-      },
-    };
-  }
   function makeEngine(def) {
     const simEngine = {
       create(spec, opts) {
         const seed = ((opts && opts.seed) >>> 0) || 1;
         const prepared = def.prepare ? def.prepare(spec) : null;   // the model compiled once (its formulas through NoemaExpr)
         let key = null, res = null;
-        const inst = {
+        return {
           run(inp) {
-            const env = {}, series = {};
-            for (const [k, v] of Object.entries(inp || {})) if (typeof v === 'number' || typeof v === 'boolean') env[k] = v; else if (Array.isArray(v)) series[k] = v.slice(0, MAX_POINTS);   // a series input of a part (§1.5)
-            const hasS = Object.keys(series).length > 0, kk = hasS ? JSON.stringify([env, series]) : JSON.stringify(env);
-            if (kk !== key) { key = kk; try { res = def.run(spec, env, hasS ? { seed, prepared, series } : { seed, prepared }); } catch (e) { res = null; } }
+            const env = {};
+            for (const [k, v] of Object.entries(inp || {})) if (typeof v === 'number' || typeof v === 'boolean') env[k] = v;
+            const kk = JSON.stringify(env);
+            if (kk !== key) { key = kk; try { res = def.run(spec, env, { seed, prepared }); } catch (e) { res = null; } }
             return pick(spec, res);
           },
         };
-        if (def.stepper) Object.assign(inst, stepInstance(def, spec, seed, prepared));
-        return inst;
       },
-      ...(def.stepper ? { stepper: def.stepper } : {}),
     };
     const engine = {
       id: def.id,
       check: spec => def.checkSpec(spec).filter(p => p.level === 'error').map(p => `${p.path}: ${p.msg}`),
       create: (spec, opts) => simEngine.create(spec, opts),
       ...(def.scenes ? { scenes: true } : {}),
-      ...(def.stepper ? { stepper: true } : {}),
     };
     return { engine, simEngine };
   }
@@ -273,7 +214,7 @@
   root.NoemaLibCore = Object.freeze({
     MAX_POINTS, MAX_SCENE, ID_RE, NAME_RE, KEY_RE, RESERVED: Object.freeze(RESERVED.slice()), STATS: Object.freeze(STATS.slice()), ROLES: Object.freeze(ROLES.slice()),
     isObj, has, isNum, fail, checkKind, kindMsg, walk, problems, hasErrors, checkOutputs,
-    stats, thin, hash32, mulberry32, gauss, cx, scene, fitView, makeEngine, stepInstance, pickStep, copyData, workerSource, source,
+    stats, thin, hash32, mulberry32, gauss, cx, scene, fitView, makeEngine, workerSource, source,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

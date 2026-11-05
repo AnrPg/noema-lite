@@ -168,7 +168,7 @@
   /** subseed(seed, i) → a 32-bit seed derived from (seed, i) (splitmix32-like finaliser) */
   function subseed(seed, i) { let h = ((seed >>> 0) ^ Math.imul((i >>> 0) + 0x9E3779B9, 0x85EBCA6B)) >>> 0; h ^= h >>> 16; h = Math.imul(h, 0x7FEB352D) >>> 0; h ^= h >>> 15; h = Math.imul(h, 0x846CA68B) >>> 0; h ^= h >>> 16; return h >>> 0; }
   const PKG = [12345, 12345, 12345, 12345, 12345, 12345];   // the package seed of RngStreams
-  const streamCache = new Map(), subCache = new Map();
+  const streamCache = new Map();
   /** the start state of stream k = (seed, name): the package seed jumped by (seed·2^32 + fnv(name))·2^127 — distinct streams for
       every (seed, name) pair, each 2^127 long, split in 2^51 substreams of 2^76 */
   function streamState(seed, name) {
@@ -178,7 +178,7 @@
     const B1 = matPowN(J.a1p127, k0, M1), B2 = matPowN(J.a2p127, k0, M2);
     const C1 = matMul(matPowN(matPow2(J.a1p127, 32, M1), k1, M1), B1, M1), C2 = matMul(matPowN(matPow2(J.a2p127, 32, M2), k1, M2), B2, M2);
     const s = matVec(C1, PKG.slice(0, 3), M1).concat(matVec(C2, PKG.slice(3), M2));
-    if (streamCache.size > 4096) streamCache.clear();
+    if (streamCache.size > 256) streamCache.clear();
     streamCache.set(key, s); return s;
   }
   const P2_32 = 4294967296;
@@ -187,8 +187,7 @@
   function stream(seed, name, opts) {
     const anti = !!(opts && opts.antithetic), subI = opts && opts.sub > 0 ? floor(opts.sub) : 0;
     let s = opts && Array.isArray(opts.state) && opts.state.length === 6 ? opts.state.slice() : streamState(seed, name == null ? '' : String(name)).slice();
-    if (subI) { const key = (seed >>> 0) + '|' + name + '|' + subI, c = subCache.get(key);
-      if (c) s = c.slice(); else { const J = jumps(); s = matVec(matPowN(J.a1p76, subI, M1), s.slice(0, 3), M1).concat(matVec(matPowN(J.a2p76, subI, M2), s.slice(3), M2)); if (subCache.size > 4096) subCache.clear(); subCache.set(key, s.slice()); } }
+    if (subI) { const J = jumps(); s = matVec(matPowN(J.a1p76, subI, M1), s.slice(0, 3), M1).concat(matVec(matPowN(J.a2p76, subI, M2), s.slice(3), M2)); }
     let s0 = s[0], s1 = s[1], s2 = s[2], s3 = s[3], s4 = s[4], s5 = s[5];
     let draws = 0;
     function u01() {   // L'Ecuyer 1999, Fig. 1 (the floating-point implementation; every product < 2^53)
@@ -264,14 +263,14 @@
     const bad = { ok: false, mean: NaN, var: NaN, draw: () => NaN, scv: NaN };
     if (!isObj(d)) return bad;
     const g = k => (typeof d[k] === 'number' ? d[k] : NaN), has = k => typeof d[k] === 'number' && fin(d[k]);
-    const mk = (draw, mean, vr, ok) => { const good = !!ok && fin(mean) && fin(vr) && vr >= 0; return { ok: good, draw: good ? draw : () => NaN, mean: good ? mean : NaN, var: good ? vr : NaN, scv: good && mean ? vr / (mean * mean) : NaN }; };
+    const mk = (draw, mean, vr, ok) => ({ ok: ok && fin(mean) && fin(vr) && vr >= 0, draw, mean, var: vr, scv: mean ? vr / (mean * mean) : NaN });
     switch (d.dist) {
       case 'const': { const v = has('value') ? g('value') : g('mean'); return mk(() => v, v, 0, v >= 0); }
       case 'exp': { const m = has('mean') ? g('mean') : 1 / g('rate'); return mk(r => r.expMean(m), m, m * m, m > 0); }
       case 'uniform': { const a = g('min'), b = g('max'); return mk(r => r.uniform(a, b), (a + b) / 2, (b - a) * (b - a) / 12, a >= 0 && b >= a); }
       case 'tri': { const a = g('min'), c = g('mode'), b = g('max'); return mk(r => r.tri(a, c, b), (a + b + c) / 3, (a * a + b * b + c * c - a * b - a * c - b * c) / 18, a >= 0 && a <= c && c <= b && b > a); }
-      case 'normal': {   // unclipped; a duration takes truncated(d, 0) (exact, by inversion) or clips itself and says so
-        const m = g('mean'), sd = g('sd'); return mk(r => r.normal(m, sd), m, sd * sd, fin(m) && sd >= 0); }
+      case 'normal': {   // truncated at 0 by rejection-free reflection is wrong; the engines clip at 0 and count it (code 'clipped')
+        const m = g('mean'), sd = g('sd'); return mk(r => max(0, r.normal(m, sd)), m, sd * sd, m > 0 && sd >= 0); }
       case 'lognormal': {   // by its own mean and sd (L §6.2.2: σ² = ln(1 + sd²/m²), μ = ln m − σ²/2)
         const m = g('mean'), sd = g('sd'), s2 = log(1 + sd * sd / (m * m)), mu = log(m) - s2 / 2, s = sqrt(s2);
         return mk(r => r.lognormal(mu, s), m, sd * sd, m > 0 && sd >= 0); }
@@ -342,7 +341,7 @@
     const log = []; let logged = 0;
     let now = fin(o.t0) ? o.t0 : 0, events = 0, stopped = null, instT = NaN, instN = 0;
     const S = {
-      get now() { return now; }, get events() { return events; }, get pending() { return live; }, codes: C, eventLog: log, tEnd,
+      get now() { return now; }, get events() { return events; }, get pending() { return live; }, codes: C, log, tEnd,
       at(t, fn, op) {
         if (typeof t !== 'number' || Number.isNaN(t)) { C.code('nan-time', now); return -1; }
         if (t < now - eps * max(1, abs(now))) { C.code('past', now); t = now; }
@@ -575,30 +574,26 @@
     const st = { steps: 0, rejected: 0, nfev: 0 };
     const y0 = cfg && cfg.y0 ? Float64Array.from(cfg.y0) : null, n = y0 ? y0.length : 0;
     const t0 = cfg && fin(cfg.t0) ? cfg.t0 : 0, tEnd = cfg && cfg.tEnd;
-    let method = cfg && METHODS.includes(cfg.method) ? cfg.method : 'auto';
-    const done = (t, y, stop, evs) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, rejected: st.rejected, nfev: st.nfev, events: evs || [], stop, method, codes: C.list });
+    const done = (t, y, stop, evs) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, rejected: st.rejected, nfev: st.nfev, events: evs || [], stop, codes: C.list });
     if (!cfg || typeof cfg.f !== 'function' || !n || !fin(tEnd) || !(tEnd >= t0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
-    const pairs = Array.isArray(cfg.pairs) ? cfg.pairs.filter(p => Array.isArray(p) && p[0] >= 0 && p[0] < n && p[1] >= 0 && p[1] < n) : [];
-    const sym = method === 'verlet' || method === 'yoshida4';
-    if (['rk4', 'heun', 'euler', 'verlet', 'yoshida4'].includes(method) && !(cfg.dt > 0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
-    if (sym && pairs.length * 2 !== n) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    const method = METHODS.includes(cfg.method) ? cfg.method : 'dopri5';
+    if (method !== 'dopri5' && !(cfg.dt > 0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
     const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: cfg.atol > 0 ? cfg.atol : 1e-9, hmax: cfg.hmax > 0 ? cfg.hmax : max(abs(tEnd - t0), 1e-12), dt: cfg.dt };
-    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, maxEvents = fin(cfg.maxEvents) ? min(cfg.maxEvents, MAX_EVENTS) : 1000;
+    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, maxEvents = fin(cfg.maxEvents) ? cfg.maxEvents : 1000;
     const f = (t, y, dy) => { cfg.f(t, y, dy); };
-    const make = m => (m === 'dopri5' || m === 'auto' ? dopri(n, f, o, st) : m === 'rosenbrock' ? rosenbrock(n, f, o, st) : m === 'verlet' || m === 'yoshida4' ? symplectic(m, n, f, o, st, pairs) : fixed(m, n, f, o, st));
-    let S = make(method), auto = method === 'auto';
+    const S = method === 'dopri5' ? dopri(n, f, o, st) : fixed(method, n, f, o, st);
     const evs = (cfg.events || []).filter(e => e && typeof e.g === 'function');
-    const armed = evs.map(() => true), gv = new Float64Array(evs.length), ztol = cfg.gtol > 0 ? cfg.gtol : 1e-10, lastHit = evs.map(() => -Infinity);
+    const armed = evs.map(() => true), gv = new Float64Array(evs.length);
     const samples = cfg.samples || []; let si = 0;
     let t = t0; const y = Float64Array.from(y0), tmp = new Float64Array(n), ya = new Float64Array(n);
     if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
     const evalG = (tt, yy) => { for (let j = 0; j < evs.length; j++) gv[j] = evs[j].g(tt, yy); };
+    // hysteresis re-arm: after a hit the event is disarmed until g has gone past ±hyst on the far side
+    const rearm = () => { for (let j = 0; j < evs.length; j++) if (!armed[j]) { const hy = evs[j].hyst || 0; if (abs(gv[j]) > hy) armed[j] = true; } };
     S.reset(t, y); evalG(t, y);
-    // a g that is exactly 0 at the start takes the side it must leave towards for its direction (a ball put on the floor)
-    for (let j = 0; j < evs.length; j++) if (gv[j] === 0 && evs[j].dir) gv[j] = evs[j].dir < 0 ? 1e-300 : -1e-300;
     while (si < samples.length && samples[si] <= t) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
-    const hits = []; let ymax0 = 1; for (let i = 0; i < n; i++) ymax0 = max(ymax0, abs(y[i]));
-    let instT = NaN, instN = 0;
+    const hits = []; const ymax0 = max(1, ...Array.from(y, abs));
+    if (tEnd === t0) return done(t, y, 'end', hits);
     for (;;) {
       if (t >= tEnd) return done(t, y, 'end', hits);
       if (st.steps >= maxSteps) { C.code('budget', t); return done(t, y, 'budget', hits); }
@@ -606,46 +601,35 @@
       if (r.fail) { C.code(r.fail === 'time' ? 'step-underflow' : r.fail, t); return done(t, y, r.fail, hits); }
       st.steps++;
       const g0 = Float64Array.from(gv); evalG(r.t1, r.y1);
-      const loc = new Float64Array(evs.length).fill(Infinity), side = new Float64Array(evs.length);
-      let first = Infinity;
+      let first = Infinity, fj = -1;
       for (let j = 0; j < evs.length; j++) {
-        const a0 = g0[j], b0 = gv[j];
-        if (!armed[j]) { if (abs(b0) > (evs[j].hyst || 0)) armed[j] = true; continue; }   // hysteresis: re-armed once |g| > hyst
-        const dir = evs[j].dir || 0, up = a0 < 0 && b0 >= 0, down = a0 > 0 && b0 <= 0;
+        if (!armed[j]) continue;
+        const a0 = g0[j], b0 = gv[j], dir = evs[j].dir || 0, up = a0 < 0 && b0 >= 0, down = a0 > 0 && b0 <= 0;
         if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
         const tr = locate(tt => { r.seg(tt, tmp); return evs[j].g(tt, tmp); }, r.t0, r.t1, a0, b0, { tol: 1e-13 });
-        if (tr <= lastHit[j] + 1e-9 * max(1, abs(tr))) continue;   // the crossing just handled, seen again from its other side
-        loc[j] = tr; side[j] = up ? 1 : -1; if (tr < first) first = tr;
+        if (tr < first) { first = tr; fj = j; }
       }
-      if (first < Infinity) {   // the step is cut at the earliest event; simultaneous events (within 1e-12·t) fire together, in order
-        const tolS = 1e-12 * max(1, abs(first));
+      if (fj >= 0) {   // the step is cut at the earliest event; its handler may change y or stop the run
         r.seg(first, ya);
         while (si < samples.length && samples[si] <= first) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
-        let stop = false; const fired = [];
-        for (let j = 0; j < evs.length; j++) if (loc[j] <= first + tolS) {
-          fired.push(j); lastHit[j] = first; hits.push({ t: first, j, kind: evs[j].kind, dir: side[j] });
-          const act = evs[j].onEvent ? evs[j].onEvent(first, ya, { j, dir: side[j] }) : undefined;
-          if (act === 'stop' || evs[j].terminal) stop = true;
-        }
-        if (first === instT || abs(first - instT) <= tolS) instN += fired.length; else { instT = first; instN = fired.length; }
-        if (hits.length > maxEvents || instN > 100) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
-        t = first; y.set(ya);
-        if (stop) return done(t, y, 'event', hits);
+        hits.push({ t: first, j: fj });
+        if (hits.length > maxEvents) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
+        const act = evs[fj].onEvent ? evs[fj].onEvent(first, ya) : undefined;
+        t = first; y.set(ya); armed[fj] = false;
+        if (act === 'stop' || evs[fj].stop) return done(t, y, 'event', hits);
         if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
         S.reset(t, y); evalG(t, y);
-        // after a hit, a g left at (about) 0 takes the side it must leave towards for its direction (as at the start; ode@1's rule),
-        // so the next crossing is seen even when it fits in one step; a direction-free event takes the side the crossing went to.
-        // With hyst > 0 the event stays disarmed until |g| > hyst
-        for (const j of fired) { if (abs(gv[j]) <= ztol) { const d0 = evs[j].dir || 0; gv[j] = d0 ? (d0 < 0 ? 1e-300 : -1e-300) : side[j] * 1e-300; } if (evs[j].hyst > 0) armed[j] = false; }
+        // the event that just fired leaves g at 0: it is re-armed by hysteresis (or at once when hyst = 0 and g moved off 0)
+        if (!(evs[fj].hyst > 0)) { const tiny = gv[fj]; if (tiny !== 0) armed[fj] = true; else armed[fj] = false; }
         continue;
       }
       while (si < samples.length && samples[si] <= r.t1) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
       t = r.t1; y.set(r.y1);
       if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
-      let ym = 0; for (let i = 0; i < n; i++) ym = max(ym, abs(y[i]));
-      if (ym > 1e12 * ymax0) { C.code('blow-up', t); return done(t, y, 'blow-up', hits); }
-      if (auto && S.stiff) { C.code('stiff-switched', t); auto = false; method = 'rosenbrock'; S = make('rosenbrock'); S.reset(t, y); }   // like LSODA's switch (Petzold 1983)
-      else if (!auto && S.stiff && !C.has('stiff')) C.code('stiff', t);
+      if (max(...Array.from(y, abs)) > 1e12 * ymax0) { C.code('blow-up', t); return done(t, y, 'blow-up', hits); }
+      // an event left disarmed at 0 re-arms once g is clearly off 0 (in either direction)
+      for (let j = 0; j < evs.length; j++) if (!armed[j] && !(evs[j].hyst > 0) && gv[j] !== 0) armed[j] = true;
+      rearm();
     }
   }
 
@@ -820,473 +804,57 @@
   const TIME_UNITS = ['ms', 's', 'min', 'h', 'd', 'wk', 'yr'];
 
   /* ======================================================================================================================
-     Delay equations, stochastic kinetics and SDEs
-     ====================================================================================================================== */
-  /** dde({f(t, y, lag, dy) (lag(i, τ index) → y_i(t − τ)), y0, history(t) → array, lags: [τ…], t0, tEnd, rtol, atol, samples,
-      onSample, maxSteps}) — constant-lag delay equations by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003
-      ch. 3; Shampine & Thompson 2001): h ≤ the smallest lag so every lagged value lies on a finished step (or the history); the
-      steps are kept (≤ maxSteps) → {t, y, steps, stop, codes} */
-  function dde(cfg) {
-    const C = codes(['nan', 'budget', 'bad-config', 'step-underflow']);
-    const lags = Array.isArray(cfg && cfg.lags) ? cfg.lags.filter(v => v > 0) : [];
-    const y0 = cfg && cfg.y0 ? Array.from(cfg.y0) : [], n = y0.length, t0 = fin(cfg && cfg.t0) ? cfg.t0 : 0;
-    if (!cfg || typeof cfg.f !== 'function' || !n || !lags.length || !fin(cfg.tEnd) || !(cfg.tEnd > t0)) { C.code('bad-config'); return { t: t0, y: y0, steps: 0, stop: 'bad-config', codes: C.list }; }
-    const hist = typeof cfg.history === 'function' ? cfg.history : () => y0;
-    const segs = [], tmp = new Float64Array(n);   // finished steps: {t0, t1, seg}
-    const lagVal = (tq, i) => {
-      if (tq <= t0) { const h = hist(tq); return h[i]; }
-      let lo = 0, hi = segs.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (segs[m].t1 < tq) lo = m + 1; else hi = m; }
-      const sg = segs[lo]; if (!sg) return NaN; sg.seg(min(tq, sg.t1), tmp); return tmp[i];
-    };
-    let tCur = t0;
-    const f = (t, y, dy) => cfg.f(t, y, (i, k) => lagVal(t - lags[k || 0], i), dy);
-    const st = { steps: 0, rejected: 0, nfev: 0 };
-    const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: cfg.atol > 0 ? cfg.atol : 1e-9, hmax: min(...lags) };
-    const S = dopri(n, f, o, st); const y = Float64Array.from(y0);
-    S.reset(t0, y); const samples = cfg.samples || []; let si = 0;
-    while (si < samples.length && samples[si] <= t0) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
-    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS;
-    for (;;) {
-      if (tCur >= cfg.tEnd) return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'end', codes: C.list };
-      if (st.steps >= maxSteps) { C.code('budget', tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'budget', codes: C.list }; }
-      const r = S.step(cfg.tEnd); if (r.fail) { C.code(r.fail === 'time' ? 'step-underflow' : r.fail, tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: r.fail, codes: C.list }; }
-      st.steps++; segs.push({ t0: r.t0, t1: r.t1, seg: r.seg });
-      while (si < samples.length && samples[si] <= r.t1) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], Float64Array.from(tmp)); si++; }
-      tCur = r.t1; y.set(r.y1);
-      if (!y.every(fin)) { C.code('nan', tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'nan', codes: C.list }; }
-    }
-  }
-  /** dae({f(t, y, z, dy), g(t, y, z, res), y0, z0, …integrate's cfg}) — a semi-explicit index-1 DAE y' = f(t, y, z), 0 = g(t, y, z)
-      in its state-space form (Hairer & Wanner, Solving ODEs II, 2nd ed. 1996, §VI.1): at every evaluation the algebraic z is
-      solved from g = 0 by Newton (a finite-difference Jacobian, from the last z; ≤ 30 iterations, code 'dae-newton'), then y is
-      integrated by integrate() — 'auto' switches to Rosenbrock when the reduced system is stiff. → integrate's result + {z} */
-  function dae(cfg) {
-    const ny = cfg && cfg.y0 ? cfg.y0.length : 0, nz = cfg && cfg.z0 ? cfg.z0.length : 0;
-    if (!cfg || typeof cfg.f !== 'function' || typeof cfg.g !== 'function' || !ny || !nz) return { ...integrate(null), z: [] };
-    const z = Float64Array.from(cfg.z0), res = new Float64Array(nz), res2 = new Float64Array(nz), Jz = new Float64Array(nz * nz), piv = new Int32Array(nz), dz = new Float64Array(nz);
-    let newtonFail = false;
-    const solveZ = (t, y) => {
-      for (let it = 0; it < 30; it++) {
-        cfg.g(t, y, z, res); let nr = 0; for (let i = 0; i < nz; i++) nr = max(nr, abs(res[i]));
-        if (nr <= 1e-12 * (1 + max(...Array.from(z, abs)))) return true;
-        for (let j = 0; j < nz; j++) { const zj = z[j], d = 1.4901161193847656e-8 * max(1, abs(zj)); z[j] = zj + d; cfg.g(t, y, z, res2); z[j] = zj; for (let i = 0; i < nz; i++) Jz[i * nz + j] = (res2[i] - res[i]) / d; }
-        if (!luFactor(Jz, nz, piv)) return false;
-        for (let i = 0; i < nz; i++) dz[i] = -res[i]; luSolve(Jz, nz, piv, dz); for (let i = 0; i < nz; i++) z[i] += dz[i];
-      }
-      cfg.g(t, y, z, res); let nr = 0; for (let i = 0; i < nz; i++) nr = max(nr, abs(res[i])); return nr <= 1e-8 * (1 + max(...Array.from(z, abs)));
-    };
-    const f = (t, y, dy) => { if (!solveZ(t, y)) { newtonFail = true; for (let i = 0; i < ny; i++) dy[i] = NaN; return; } cfg.f(t, y, z, dy); };
-    const r = integrate({ ...cfg, f });
-    if (newtonFail) r.codes.push({ code: 'dae-newton', level: 'error' });
-    solveZ(r.t, Float64Array.from(r.y));
-    return { ...r, z: Array.from(z) };
-  }
-  /** ssa({x0, nu: [[Δ per species] per reaction], propensity(x, a) (fills a), tEnd, r (a stream), maxEvents, onEvent(t, x, j)})
-      — Gillespie's direct method (Gillespie 1977, J. Phys. Chem. 81:25): exact trajectories of the chemical master equation
-      → {t, x, events, stop, codes} */
-  function ssa(cfg) {
-    const C = codes(['budget', 'bad-config', 'nan']);
-    if (!cfg || !Array.isArray(cfg.x0) || !Array.isArray(cfg.nu) || typeof cfg.propensity !== 'function' || !fin(cfg.tEnd)) { C.code('bad-config'); return { t: 0, x: [], events: 0, stop: 'bad-config', codes: C.list }; }
-    const x = cfg.x0.slice(), m = cfg.nu.length, a = new Float64Array(m), r = cfg.r || stream(1, 'ssa');
-    let t = fin(cfg.t0) ? cfg.t0 : 0, ev = 0; const cap = fin(cfg.maxEvents) ? min(cfg.maxEvents, MAX_EVENTS) : MAX_EVENTS;
-    for (;;) {
-      cfg.propensity(x, a); let a0 = 0; for (let j = 0; j < m; j++) { if (!(a[j] >= 0)) { C.code('nan', t); return { t, x, events: ev, stop: 'nan', codes: C.list }; } a0 += a[j]; }
-      if (a0 <= 0) return { t: cfg.tEnd, x, events: ev, stop: 'extinct', codes: C.list };
-      const tau = -log(r()) / a0; if (t + tau > cfg.tEnd) return { t: cfg.tEnd, x, events: ev, stop: 'end', codes: C.list };
-      if (ev >= cap) { C.code('budget', t); return { t, x, events: ev, stop: 'budget', codes: C.list }; }
-      t += tau; const u = r() * a0; let c = 0, j = 0; for (; j < m - 1; j++) { c += a[j]; if (u < c) break; }
-      const nu = cfg.nu[j]; for (let i = 0; i < x.length; i++) x[i] += nu[i] || 0; ev++;
-      if (cfg.onEvent) cfg.onEvent(t, x, j);
-    }
-  }
-  /** tauLeap({…ssa, tau}) — explicit τ-leaping (Gillespie 2001, J. Chem. Phys. 115:4): each reaction fires Poisson(a_j τ) times in
-      a leap; a leap that would make a count negative is halved and retried (≤ 30 times), and when a0·τ < 10 the exact SSA step
-      is taken instead (Cao, Gillespie & Petzold 2006, J. Chem. Phys. 124: the switch to SSA). → {t, x, leaps, stop, codes} */
-  function tauLeap(cfg) {
-    const C = codes(['budget', 'bad-config', 'nan']);
-    if (!cfg || !Array.isArray(cfg.x0) || !Array.isArray(cfg.nu) || typeof cfg.propensity !== 'function' || !fin(cfg.tEnd) || !(cfg.tau > 0)) { C.code('bad-config'); return { t: 0, x: [], leaps: 0, stop: 'bad-config', codes: C.list }; }
-    const x = cfg.x0.slice(), m = cfg.nu.length, a = new Float64Array(m), r = cfg.r || stream(1, 'tauleap'), k = new Array(m);
-    let t = fin(cfg.t0) ? cfg.t0 : 0, leaps = 0; const cap = fin(cfg.maxEvents) ? min(cfg.maxEvents, MAX_EVENTS) : MAX_EVENTS;
-    while (t < cfg.tEnd) {
-      if (leaps >= cap) { C.code('budget', t); return { t, x, leaps, stop: 'budget', codes: C.list }; }
-      cfg.propensity(x, a); let a0 = 0; for (let j = 0; j < m; j++) a0 += a[j] > 0 ? a[j] : 0;
-      if (!fin(a0)) { C.code('nan', t); return { t, x, leaps, stop: 'nan', codes: C.list }; }
-      if (a0 <= 0) return { t: cfg.tEnd, x, leaps, stop: 'extinct', codes: C.list };
-      let tau = min(cfg.tau, cfg.tEnd - t);
-      if (a0 * tau < 10) {   // too few firings for a leap: one exact SSA step
-        const dt = -log(r()) / a0; if (t + dt > cfg.tEnd) { t = cfg.tEnd; break; }
-        t += dt; const u = r() * a0; let c = 0, j = 0; for (; j < m - 1; j++) { c += a[j]; if (u < c) break; } for (let i = 0; i < x.length; i++) x[i] += cfg.nu[j][i] || 0; leaps++; continue;
-      }
-      let okLeap = false;
-      for (let tries = 0; tries < 30 && !okLeap; tries++) {
-        for (let j = 0; j < m; j++) k[j] = a[j] > 0 ? r.poisson(a[j] * tau) : 0;
-        okLeap = true; for (let i = 0; i < x.length; i++) { let v = x[i]; for (let j = 0; j < m; j++) v += k[j] * (cfg.nu[j][i] || 0); if (v < 0) { okLeap = false; break; } }
-        if (!okLeap) tau /= 2;
-      }
-      if (!okLeap) { C.code('negative', t); for (let j = 0; j < m; j++) k[j] = 0; }
-      for (let i = 0; i < x.length; i++) for (let j = 0; j < m; j++) x[i] += k[j] * (cfg.nu[j][i] || 0);
-      t += tau; leaps++;
-    }
-    return { t, x, leaps, stop: 'end', codes: C.list };
-  }
-  /** sde({drift(t, x, out), diffusion(t, x, out) (diagonal noise: one Wiener process per state), dsig?(t, x, out) (∂σ_i/∂x_i, for
-      Milstein), x0, t0, tEnd, dt, method: 'em' | 'milstein', r, samples, onSample}) — Euler–Maruyama (strong order 0.5) and Milstein
-      (strong order 1) for Itô SDEs with diagonal noise (Kloeden & Platen 1992 §10.2, §10.3; Higham 2001, SIAM Review 43:3)
-      → {t, x, steps, codes} */
-  function sde(cfg) {
-    const C = codes(['nan', 'budget', 'bad-config']);
-    if (!cfg || typeof cfg.drift !== 'function' || typeof cfg.diffusion !== 'function' || !Array.isArray(cfg.x0) || !(cfg.dt > 0) || !fin(cfg.tEnd)) { C.code('bad-config'); return { t: 0, x: [], steps: 0, codes: C.list }; }
-    const n = cfg.x0.length, x = Float64Array.from(cfg.x0), mu = new Float64Array(n), sg = new Float64Array(n), ds = new Float64Array(n), r = cfg.r || stream(1, 'sde');
-    const mil = cfg.method === 'milstein' && typeof cfg.dsig === 'function';
-    let t = fin(cfg.t0) ? cfg.t0 : 0, steps = 0; const N = Math.ceil((cfg.tEnd - t) / cfg.dt - 1e-9);
-    if (N > MAX_STEPS) { C.code('budget'); return { t, x: Array.from(x), steps, codes: C.list }; }
-    const samples = cfg.samples || []; let si = 0;
-    for (let k = 0; k < N; k++) {
-      const h = min(cfg.dt, cfg.tEnd - t), sq = sqrt(h);
-      while (si < samples.length && samples[si] <= t + 1e-12) { cfg.onSample && cfg.onSample(samples[si], x); si++; }
-      cfg.drift(t, x, mu); cfg.diffusion(t, x, sg); if (mil) cfg.dsig(t, x, ds);
-      for (let i = 0; i < n; i++) { const dW = sq * normInv(r()); x[i] += mu[i] * h + sg[i] * dW + (mil ? 0.5 * sg[i] * ds[i] * (dW * dW - h) : 0); }
-      t += h; steps++;
-      if (!x.every(fin)) { C.code('nan', t); break; }
-    }
-    while (si < samples.length && samples[si] <= t + 1e-12) { cfg.onSample && cfg.onSample(samples[si], x); si++; }
-    return { t, x: Array.from(x), steps, codes: C.list };
-  }
-
-  /* ======================================================================================================================
-     Arrival schedules: non-homogeneous Poisson processes by thinning (Lewis & Shedler 1979; Law §8.6.2)
-     ====================================================================================================================== */
-  /** nhpp(rate(t), rateMax, t0, tEnd, r, cap) → arrival times of a Poisson process with intensity rate(t) ≤ rateMax */
-  function nhpp(rate, rmax, t0, tEnd, r, cap) {
-    const out = []; if (!(rmax > 0)) return out; let t = t0; const mx = fin(cap) ? cap : MAX_EVENTS;
-    for (let i = 0; i < 10 * mx && out.length < mx; i++) { t += -log(r()) / rmax; if (t > tEnd) break; if (r() * rmax <= rate(t)) out.push(t); }
-    return out;
-  }
-  /** piecewise(points [[t, value]…], {period, step}) → v(t): a schedule (rates of a day, staffing) — steps (piecewise constant, the
-      default) or linear between the points, repeated every `period` when given */
-  function piecewise(pts, o) {
-    const P = (pts || []).filter(p => Array.isArray(p) && fin(p[0]) && fin(p[1])).sort((a, b) => a[0] - b[0]), lin = o && o.step === false, per = o && o.period > 0 ? o.period : 0;
-    return t => { if (!P.length) return NaN; let tt = per ? t - floor(t / per) * per : t; if (tt < P[0][0]) return per ? P[P.length - 1][1] : P[0][1];
-      let i = 0; while (i + 1 < P.length && P[i + 1][0] <= tt) i++; if (!lin || i + 1 >= P.length) return P[i][1];
-      const [a, va] = P[i], [b, vb] = P[i + 1]; return va + (vb - va) * (tt - a) / (b - a); };
-  }
-
-  /* ======================================================================================================================
-     Distributions with cdf and quantile: truncation and mixtures (Law §8.2, §8.3); input modelling: fitting and goodness of fit (Law ch. 6)
-     ====================================================================================================================== */
-  /** cdfOf(d) and quantileOf(d) for the kinds that have them in closed form (exp, uniform, tri, normal, lognormal, weibull; gamma's cdf) */
-  function cdfOf(d) {
-    const D = dist(d); if (!D.ok) return null;
-    switch (d.dist) {
-      case 'exp': return x => (x <= 0 ? 0 : 1 - exp(-x / D.mean));
-      case 'uniform': return x => (x <= d.min ? 0 : x >= d.max ? 1 : (x - d.min) / (d.max - d.min));
-      case 'tri': return x => { const a = d.min, c = d.mode, b = d.max; return x <= a ? 0 : x >= b ? 1 : x <= c ? (x - a) * (x - a) / ((b - a) * (c - a)) : 1 - (b - x) * (b - x) / ((b - a) * (b - c)); };
-      case 'normal': return x => normCdf((x - d.mean) / d.sd);
-      case 'lognormal': { const s2 = log(1 + d.sd * d.sd / (d.mean * d.mean)), mu = log(d.mean) - s2 / 2, s = sqrt(s2); return x => (x <= 0 ? 0 : normCdf((log(x) - mu) / s)); }
-      case 'weibull': return x => (x <= 0 ? 0 : 1 - exp(-pow(x / d.scale, d.shape)));
-      case 'gamma': case 'erlang': { const k = d.dist === 'erlang' ? d.k : D.mean * D.mean / D.var, th = D.var / D.mean; return x => (x <= 0 ? 0 : gammaP(k, x / th)); }
-      default: return null;
-    }
-  }
-  function quantileOf(d) {
-    const D = dist(d); if (!D.ok) return null;
-    switch (d.dist) {
-      case 'exp': return u => -D.mean * log(1 - u);
-      case 'uniform': return u => d.min + u * (d.max - d.min);
-      case 'tri': return u => { const a = d.min, c = d.mode, b = d.max, F = (c - a) / (b - a); return u < F ? a + sqrt(u * (b - a) * (c - a)) : b - sqrt((1 - u) * (b - a) * (b - c)); };
-      case 'normal': return u => d.mean + d.sd * normInv(u);
-      case 'lognormal': { const s2 = log(1 + d.sd * d.sd / (d.mean * d.mean)), mu = log(d.mean) - s2 / 2, s = sqrt(s2); return u => exp(mu + s * normInv(u)); }
-      case 'weibull': return u => d.scale * pow(-log(1 - u), 1 / d.shape);
-      default: return null;
-    }
-  }
-  /** truncated(d, lo, hi) → {ok, draw(r), mean (estimated), exact}: by inversion on [F(lo), F(hi)] where the quantile is known
-      (one uniform, CRN-friendly: Law §8.2.1), else by rejection (≤ 1000 tries, then the nearer bound and the code 'truncation') */
-  function truncated(d, lo, hi) {
-    const D = dist(d), a = fin(lo) ? lo : -Infinity, b = fin(hi) ? hi : Infinity; if (!D.ok || !(b > a)) return { ok: false, draw: () => NaN, exact: false };
-    const F = cdfOf(d), Q = quantileOf(d);
-    if (F && Q) { const Fa = a === -Infinity ? 0 : F(a), Fb = b === Infinity ? 1 : F(b); if (!(Fb > Fa)) return { ok: false, draw: () => NaN, exact: true };
-      return { ok: true, exact: true, draw: r => min(b, max(a, Q(Fa + (Fb - Fa) * r()))) }; }
-    return { ok: true, exact: false, draw: r => { for (let i = 0; i < 1000; i++) { const x = D.draw(r); if (x >= a && x <= b) return x; } return fin(b) ? b : a; } };
-  }
-  /** mixture([{d, w}…]) → {ok, draw(r), mean, var}: a finite mixture (Law §8.2.3, composition) */
-  function mixture(parts) {
-    const P = (parts || []).map(p => ({ D: dist(p.d), w: p.w > 0 ? p.w : 0 })).filter(p => p.D.ok && p.w > 0), W = P.reduce((s, p) => s + p.w, 0);
-    if (!P.length || !(W > 0)) return { ok: false, draw: () => NaN, mean: NaN, var: NaN };
-    const mean = P.reduce((s, p) => s + p.w / W * p.D.mean, 0), m2 = P.reduce((s, p) => s + p.w / W * (p.D.var + p.D.mean * p.D.mean), 0);
-    const ws = P.map(p => p.w); return { ok: true, mean, var: m2 - mean * mean, draw: r => P[r.discrete(ws)].D.draw(r) };
-  }
-  function digamma(x) { let r = 0; while (x < 12) { r -= 1 / x; x += 1; } const f = 1 / (x * x); return r + log(x) - 0.5 / x - f * (1 / 12 - f * (1 / 120 - f * (1 / 252 - f * (1 / 240 - f / 132)))); }
-  function trigamma(x) { let r = 0; while (x < 12) { r += 1 / (x * x); x += 1; } const f = 1 / (x * x); return r + 1 / x + f / 2 + f / x * (1 / 6 - f * (1 / 30 - f * (1 / 42 - f / 30))); }
-  /** fit(data, kind) → a distribution object {dist, …} fitted by maximum likelihood (exp, normal, lognormal, gamma by Newton on
-      ψ(k) − ln k = mean(ln x) − ln x̄ (Choi & Wette 1969), weibull by Newton on the profile equation (Law §6.5)), or by moments
-      (uniform, tri by min/max/mode-from-mean, erlang, beta on [0, 1]); null when it cannot be fitted */
-  function fit(data, kind) {
-    const x = (data || []).filter(fin); const n = x.length; if (n < 2) return null;
-    let m = 0; for (const v of x) m += v; m /= n; let v2 = 0; for (const v of x) v2 += (v - m) * (v - m); const vmle = v2 / n, sd = sqrt(v2 / (n - 1));
-    const pos = x.every(v => v > 0);
-    switch (kind) {
-      case 'exp': return pos ? { dist: 'exp', mean: m } : null;
-      case 'normal': return { dist: 'normal', mean: m, sd: sqrt(vmle) };
-      case 'lognormal': { if (!pos) return null; let ml = 0; for (const v of x) ml += log(v); ml /= n; let s2 = 0; for (const v of x) s2 += (log(v) - ml) ** 2; s2 /= n;
-        const mean = exp(ml + s2 / 2); return { dist: 'lognormal', mean, sd: mean * sqrt(exp(s2) - 1) }; }
-      case 'gamma': { if (!pos) return null; let ml = 0; for (const v of x) ml += log(v); ml /= n; const s = log(m) - ml; if (!(s > 0)) return null;
-        let k = (3 - s + sqrt((s - 3) * (s - 3) + 24 * s)) / (12 * s);   // Minka 2002's start
-        for (let i = 0; i < 50; i++) { const g = log(k) - digamma(k) - s, dg = 1 / k - trigamma(k), kn = k - g / dg; if (!(kn > 0)) break; if (abs(kn - k) < 1e-12 * k) { k = kn; break; } k = kn; }
-        return { dist: 'gamma', shape: k, scale: m / k }; }
-      case 'weibull': { if (!pos) return null; const lx = x.map(v => log(v)); let ml = 0; for (const v of lx) ml += v; ml /= n;
-        let k = 1.2 / (sd / m || 1);
-        for (let i = 0; i < 100; i++) { let A = 0, B = 0, Cc = 0; for (let j = 0; j < n; j++) { const p = pow(x[j], k); A += p; B += p * lx[j]; Cc += p * lx[j] * lx[j]; }
-          const g = B / A - 1 / k - ml, dg = (Cc / A - (B / A) * (B / A)) + 1 / (k * k), kn = k - g / dg; if (!(kn > 0)) { k = k / 2; continue; } if (abs(kn - k) < 1e-12 * k) { k = kn; break; } k = kn; }
-        let A = 0; for (const v of x) A += pow(v, k); return { dist: 'weibull', shape: k, scale: pow(A / n, 1 / k) }; }
-      case 'uniform': { let lo = Infinity, hi = -Infinity; for (const v of x) { lo = min(lo, v); hi = max(hi, v); } const w = (hi - lo) / (n - 1); return { dist: 'uniform', min: max(0, lo - w), max: hi + w }; }   // the unbiased ends
-      case 'tri': { let lo = Infinity, hi = -Infinity; for (const v of x) { lo = min(lo, v); hi = max(hi, v); } const c = min(hi, max(lo, 3 * m - lo - hi)); return { dist: 'tri', min: lo, mode: c, max: hi }; }
-      case 'erlang': { const k = max(1, min(64, Math.round(m * m / (v2 / (n - 1))))); return { dist: 'erlang', k, mean: m }; }
-      case 'beta': { if (!x.every(v => v > 0 && v < 1)) return null; const vv = v2 / (n - 1), c = m * (1 - m) / vv - 1; return c > 0 ? { dist: 'beta', a: m * c, b: (1 - m) * c } : null; }
-      default: return null;
-    }
-  }
-  /** ksTest(data, d) → {D, p}: Kolmogorov–Smirnov with the asymptotic Kolmogorov distribution and Stephens' (1970) small-sample
-      correction √n + 0.12 + 0.11/√n (all parameters known; with fitted ones p is conservative: Law §6.6.2) */
-  function ksTest(data, d) {
-    const F = cdfOf(d), x = (data || []).filter(fin).sort((a, b) => a - b), n = x.length; if (!F || !n) return { D: NaN, p: NaN };
-    let D = 0; for (let i = 0; i < n; i++) { const f = F(x[i]); D = max(D, (i + 1) / n - f, f - i / n); }
-    const lam = (sqrt(n) + 0.12 + 0.11 / sqrt(n)) * D; let p = 0; for (let j = 1; j <= 100; j++) p += 2 * ((j % 2) ? 1 : -1) * exp(-2 * j * j * lam * lam);
-    return { D, p: min(1, max(0, lam < 0.2 ? 1 : p)) };
-  }
-  /** chiSquare(observed, expected, fitted = 0) → {X2, df, p}: Pearson's test, df = k − 1 − fitted (Law §6.6.2) */
-  function chiSquare(O, Ex, fitted) {
-    let X2 = 0, k = 0; for (let i = 0; i < O.length; i++) if (Ex[i] > 0) { X2 += (O[i] - Ex[i]) ** 2 / Ex[i]; k++; }
-    const df = k - 1 - (fitted || 0); return { X2, df, p: df > 0 ? 1 - gammaP(df / 2, X2 / 2) : NaN };
-  }
-  /** andersonDarling(data, d) → {A2}: the Anderson–Darling statistic (Anderson & Darling 1954), tail-sensitive */
-  function andersonDarling(data, d) {
-    const F = cdfOf(d), x = (data || []).filter(fin).sort((a, b) => a - b), n = x.length; if (!F || !n) return { A2: NaN };
-    let s = 0; for (let i = 0; i < n; i++) { const a = min(1 - 1e-15, max(1e-15, F(x[i]))), b = min(1 - 1e-15, max(1e-15, F(x[n - 1 - i]))); s += (2 * i + 1) * (log(a) + log(1 - b)); }
-    return { A2: -n - s / n };
-  }
-
-  /* ======================================================================================================================
-     Variance reduction and sequential precision (Law ch. 9, 11)
-     ====================================================================================================================== */
-  /** controlVariate(y, x, muX, level) → ci of Y adjusted by a control X with a known mean: Y − b(X − μX), b = cov(X, Y)/var(X)
-      (Law §11.4; Lavenberg & Welch 1981); also b and the variance ratio vr (< 1 = a gain) */
-  function controlVariate(y, x, muX, level) {
-    const n = min(y.length, x.length); if (n < 3) return { ...ci([], level), b: NaN, vr: NaN };
-    let my = 0, mx = 0; for (let i = 0; i < n; i++) { my += y[i]; mx += x[i]; } my /= n; mx /= n;
-    let sxy = 0, sxx = 0; for (let i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) ** 2; }
-    const b = sxx > 0 ? sxy / sxx : 0, adj = []; for (let i = 0; i < n; i++) adj.push(y[i] - b * (x[i] - muX));
-    const c = ci(adj, level), c0 = ci(y.slice(0, n), level); const r = ci(adj, level);
-    // one more degree of freedom is used by b: t with n − 2 (Law §11.4)
-    const half = n > 2 ? tq(1 - (1 - (level || 0.95)) / 2, n - 2) * r.sd * sqrt((n - 1) / (n - 2)) / sqrt(n) : NaN;
-    return { ...c, half, lo: c.mean - half, hi: c.mean + half, b, vr: c0.sd > 0 ? (r.sd * r.sd) / (c0.sd * c0.sd) : NaN };
-  }
-  /** untilPrecision(fn(i) → number, {gamma (relative error, 0.05), n0 (10), nMax (1000), level}) — the sequential procedure of Law
-      §9.4.1: replications are added until half/|mean| ≤ γ/(1 + γ) → ci + {reached, values} */
-  function untilPrecision(fn, o) {
-    const g = o && o.gamma > 0 ? o.gamma : 0.05, n0 = max(2, (o && o.n0) || 10), nMax = min(10000, (o && o.nMax) || 1000), lv = o && o.level, vals = [];
-    for (let i = 0; i < nMax; i++) { let v; try { v = fn(i); } catch (e) { v = NaN; } vals.push(v);
-      if (vals.length >= n0) { const c = ci(vals, lv); if (abs(c.mean) > 0 && c.half / abs(c.mean) <= g / (1 + g)) return { ...c, reached: true, values: vals }; } }
-    return { ...ci(vals, lv), reached: false, values: vals };
-  }
-  /** lhs(n, k, r) → n points of a Latin hypercube in [0, 1)^k (McKay, Beckman & Conover 1979): one point in each of n strata per axis */
-  function lhs(n, k, r) {
-    const rs = r || stream(1, 'lhs'), pts = Array.from({ length: n }, () => new Array(k));
-    for (let j = 0; j < k; j++) { const perm = rs.shuffle(Array.from({ length: n }, (_, i) => i)); for (let i = 0; i < n; i++) pts[i][j] = (perm[i] + rs()) / n; }
-    return pts;
-  }
-
-  /* ======================================================================================================================
-     Calibration and optimisation hooks
-     ====================================================================================================================== */
-  /** minimize(fn(x) → number, x0, {step, lo, hi, maxEval (≤ 20 000), tol}) — Nelder & Mead 1965 with the standard coefficients
-      (Lagarias et al. 1998), bounds by clamping; NaN values count as +∞ → {x, f, evals, converged} */
-  function minimize(fn, x0, o) {
-    const k = x0.length, lo = (o && o.lo) || [], hi = (o && o.hi) || [], cap = min(20000, (o && o.maxEval) || 2000), tol = (o && o.tol) || 1e-10;
-    const clampV = x => x.map((v, i) => min(fin(hi[i]) ? hi[i] : Infinity, max(fin(lo[i]) ? lo[i] : -Infinity, v)));
-    let evals = 0; const F = x => { evals++; const v = safe(fn, x); return Number.isNaN(v) ? Infinity : v; };
-    const stp = (o && o.step) || x0.map(v => (v !== 0 ? 0.1 * abs(v) : 0.1));
-    let S = [clampV(x0.slice())]; for (let i = 0; i < k; i++) { const x = x0.slice(); x[i] += Array.isArray(stp) ? stp[i] : stp; S.push(clampV(x)); }
-    let fv = S.map(F);
-    while (evals < cap) {
-      const idx = S.map((_, i) => i).sort((a, b) => fv[a] - fv[b]); S = idx.map(i => S[i]); fv = idx.map(i => fv[i]);
-      if (abs(fv[k] - fv[0]) <= tol * (abs(fv[0]) + tol) && S.every(x => x.every((v, i) => abs(v - S[0][i]) <= 1e-9 * max(1, abs(S[0][i]))))) return { x: S[0], f: fv[0], evals, converged: true };
-      const c = new Array(k).fill(0); for (let j = 0; j < k; j++) for (let i = 0; i < k; i++) c[i] += S[j][i] / k;
-      const at = s => clampV(c.map((v, i) => v + s * (S[k][i] - v)));
-      const xr = at(-1), fr = F(xr);
-      if (fr < fv[0]) { const xe = at(-2), fe = F(xe); if (fe < fr) { S[k] = xe; fv[k] = fe; } else { S[k] = xr; fv[k] = fr; } }
-      else if (fr < fv[k - 1]) { S[k] = xr; fv[k] = fr; }
-      else { const xc = fr < fv[k] ? at(-0.5) : at(0.5), fc = F(xc);
-        if (fc < min(fr, fv[k])) { S[k] = xc; fv[k] = fc; }
-        else for (let j = 1; j <= k; j++) { S[j] = clampV(S[j].map((v, i) => S[0][i] + 0.5 * (v - S[0][i]))); fv[j] = F(S[j]); } }
-    }
-    let b = 0; for (let j = 1; j <= k; j++) if (fv[j] < fv[b]) b = j; return { x: S[b], f: fv[b], evals, converged: false };
-  }
-  /** calibrate(model(params) → predictions, data, p0, opts) — least squares Σ(w(pred − obs))² by minimize → {x, sse, rmse, evals, converged} */
-  function calibrate(model, data, p0, o) {
-    const w = (o && o.weights) || null;
-    const sse = p => { const pr = model(p); if (!Array.isArray(pr) || pr.length !== data.length) return NaN; let s = 0; for (let i = 0; i < data.length; i++) { const e = (pr[i] - data[i]) * (w ? w[i] : 1); s += e * e; } return s; };
-    const r = minimize(sse, p0, o); return { x: r.x, sse: r.f, rmse: sqrt(r.f / max(1, data.length)), evals: r.evals, converged: r.converged };
-  }
-
-  /* ======================================================================================================================
-     For engine authors: the shared event record, the stepper interface and its adapters (docs/library/simkit.md §8)
-     ====================================================================================================================== */
-  let evSeq = 0;
-  /** event(t, source, kind, data, prio) → the event record every engine and the orchestrator exchange:
-      {t (model time), source (the part / engine id that raised it), kind (a short code: 'arrive', 'threshold', 'dose' …), data (plain
-      numbers / strings / arrays), prio (ties at the same t: smaller first), seq (creation order: the last tie-break)} */
-  function event(t, source, kind, data, prio) {
-    return { t: typeof t === 'number' ? t : NaN, source: source == null ? '' : String(source), kind: kind == null ? '' : String(kind), data: data === undefined ? null : data, prio: fin(prio) ? prio : 0, seq: evSeq++ };
-  }
-  const evLess = (a, b) => a.t - b.t || a.prio - b.prio || a.seq - b.seq;
-  /** clone(v): a deep copy of plain data (objects, arrays, typed arrays, Maps, Sets); functions are kept by reference */
-  function clone(v, depth) {
-    if ((depth || 0) > 64 || v === null || typeof v !== 'object') return v;
-    if (ArrayBuffer.isView(v)) return v.slice();
-    if (Array.isArray(v)) return v.map(x => clone(x, (depth || 0) + 1));
-    if (v instanceof Map) return new Map([...v].map(([k, x]) => [k, clone(x, (depth || 0) + 1)]));
-    if (v instanceof Set) return new Set([...v].map(x => clone(x, (depth || 0) + 1)));
-    const o = {}; for (const k of Object.keys(v)) o[k] = clone(v[k], (depth || 0) + 1); return o;
-  }
-  /** stepper(def) → the checked stepper interface of a part (what cosim and the parts orchestrator drive):
-        id · init(model, inputs, ctx) → state · step(state, inputs, t, dt, ctx) → {state, out, dt (taken ≤ asked: an early stop at
-        a state event), events: [event records]} (the same argument order as makeEngine's optional `stepper` of the parts orchestrator) · snapshot(state) → a copy · restore(snap) → state · output(state) → out (optional) ·
-        onEvent(state, ev, t) → state (optional: an event from another part)
-      The wrapper never throws: a failing step returns {state, out: {}, dt: 0, events: [], fail: 'part-failed'}; events are normalised
-      to event records with source = id; snapshot/restore default to clone (so a state must be plain data: no closures, or give your
-      own snapshot/restore, or set snapshot: null to say the part cannot be iterated). */
-  function stepper(def) {
-    if (!def || typeof def.step !== 'function') return null;
-    const id = def.id == null ? 'part' : String(def.id);
-    const norm = (evs, t) => (Array.isArray(evs) ? evs : []).filter(isObj).map(e => (e.seq != null && e.source != null && 'kind' in e ? e : event(fin(e.t) ? e.t : t, id, e.kind != null ? e.kind : e.name, e.data, e.prio))).map(e => (e.to ? e : Array.isArray(e.to) ? e : e));
-    const S = {
-      id, kind: 'stepper',
-      init(model, inputs, ctx) { try { return def.init ? def.init(model, inputs, ctx) : {}; } catch (e) { return null; } },
-      step(state, inputs, t, dt, ctx) {
-        let r; try { r = def.step(state, inputs || {}, t, dt, ctx); } catch (e) { r = null; }
-        if (!isObj(r)) return { state, out: {}, dt: 0, events: [], fail: 'part-failed' };
-        const taken = fin(r.dt) ? min(max(r.dt, 0), dt) : dt;
-        return { state: r.state === undefined ? state : r.state, out: isObj(r.out) ? r.out : {}, dt: taken, events: norm(r.events, (fin(t) ? t : 0) + taken), ...(r.fail ? { fail: r.fail } : {}) };
-      },
-      snapshot: def.snapshot === null ? null : (state => { try { return def.snapshot ? def.snapshot(state) : clone(state); } catch (e) { return null; } }),
-      restore: def.restore === null ? null : (snap => { try { return def.restore ? def.restore(snap) : clone(snap); } catch (e) { return null; } }),
-      output: def.output ? (state => { try { return def.output(state) || {}; } catch (e) { return {}; } }) : null,
-      onEvent: def.onEvent ? ((state, ev, t) => { try { const r = def.onEvent(state, ev, t); return r === undefined ? state : r; } catch (e) { return state; } }) : null,
-    };
-    return S;
-  }
-  /** odeStepper(def) — an adapter for an engine whose model is x' = f(t, x, inputs): it integrates with integrate() over each macro
-      step, stops early at a terminal state event and reports every event as a record.
-      def = {id, n, y0(model, inputs) → array, f(t, y, dy, inputs), method, rtol, atol, dt, hmax, pairs,
-             events: [{kind, g(t, y, inputs), dir, hyst, terminal, apply(t, y, inputs) (a jump, in place)}], out(t, y, inputs) → {}}
-      state = {t, y: [...], steps} (plain data: snapshot/restore work) */
-  function odeStepper(def) {
-    if (!def || typeof def.f !== 'function') return null;
-    return stepper({ id: def.id,
-      init(model, inputs) { const y = def.y0 ? Array.from(def.y0(model, inputs) || []) : []; return { t: fin(def.t0) ? def.t0 : 0, y, steps: 0 }; },
-      output: st => (def.out ? def.out(st.t, st.y, {}) : {}),
-      step(st, inputs, t, dt) {
-        const t0 = fin(t) ? t : st.t;
-        const evs = (def.events || []).map(e => ({ g: (t, y) => e.g(t, y, inputs), dir: e.dir, hyst: e.hyst, terminal: !!e.terminal, kind: e.kind,
-          onEvent: (t, y) => { if (e.apply) e.apply(t, y, inputs); } }));
-        const r = integrate({ f: (t, y, dy) => def.f(t, y, dy, inputs), y0: st.y, t0, tEnd: t0 + dt, method: def.method, rtol: def.rtol, atol: def.atol, dt: def.dt, hmax: def.hmax, pairs: def.pairs, events: evs, maxSteps: def.maxSteps });
-        const ns = { t: r.t, y: r.y, steps: st.steps + r.steps };
-        const out = def.out ? def.out(r.t, r.y, inputs) : {};
-        const fatal = r.codes.find(c => c.level === 'error');
-        return { state: ns, out, dt: r.t - t0, events: r.events.map(h => event(h.t, def.id, h.kind || ('event' + h.j), { dir: h.dir })), ...(fatal ? { fail: fatal.code } : {}) };
-      } });
-  }
-  /** wrapRun(id, run(inputs, t) → out) — an adapter for an engine with no time of its own (a formula, a chain part): each step
-      recomputes its outputs from the latest inputs at the step's end time */
-  function wrapRun(id, run) {
-    return stepper({ id, init: () => ({ t: 0 }), step(st, inputs, t, dt) { const t1 = (fin(t) ? t : st.t) + dt; return { state: { t: t1 }, out: run(inputs, t1) || {}, dt }; } });
-  }
-
-  /* ======================================================================================================================
-     Co-simulation master (the parts orchestrator's cosim mode). Rollback-free by default (no part is ever asked to go back in time):
+     Co-simulation master (the parts orchestrator's cosim mode). Rollback-free (no part is ever asked to go back in time):
        • each part has its own local time; the master always steps the parts that are furthest behind (the global time), in the
          declared order (Gauss–Seidel: a later part sees the outputs the earlier ones produced in the same macro step);
        • a macro step ends at min(t + dt, tEnd, the next event addressed to the part);
        • a part may stop early (it returns dt taken < dt asked: a state event inside the step) — the macro step then ends at that
          time for every part still to step in this round, so they meet the event at its time; parts already ahead wait;
-       • events a part emits (event records, with an optional `to: [part ids]`) go to the other parts: delivered by onEvent(state, ev)
-         at the start of the target's next step that reaches ev.t; a target already past ev.t gets it at once and the master records
-         the lateness (code 'late-event', info: the largest lag) — list the event-producing parts first to avoid it;
-       • iterate: {maxIter ≤ 50, tol} (optional, strong coupling): while every part is at the same time, a macro step is repeated
-         from the parts' snapshots until the exchanged scalar outputs change by ≤ tol (relative), else code 'no-converge' (the last
-         iterate is kept). Parts without snapshot/restore make it fall back to one pass (code 'no-snapshot').
-     cosim({tEnd, dt, t0, parts: [stepper or {id, init, step, inputs?(outs, t), onEvent?}], link?: {partId: (outs, t) → inputs},
-            order?, maxMacro, iterate, model, inputs0})
-       → {t, outs, trace: [{t, part, out}], events: [records], codes, macro, iterations}
-     (DEVS view: each part is an atomic model whose time advance is the macro step; Zeigler et al. 2018 ch. 6 and ch. 18; FMI 2.0
-     co-simulation master algorithms: Gomes et al. 2018, ACM Comput. Surv. 51:3) */
+       • events a part emits ({t, name, data, to?}) go to the other parts (or `to`): delivered by onEvent(state, ev) → state at the
+         start of the target's next step that reaches ev.t; a target already past ev.t gets it at once and the master records the
+         lateness (code 'late-event', info: the largest lag) — list the event-producing parts first to avoid it.
+     cosim({tEnd, dt, parts: [{id, init() → state, step(state, inputs, dt, t) → {state, out, dt?, events?}, inputs?(outs, t) → {},
+            onEvent?(state, ev, t) → state}], order?, maxMacro}) → {t, outs, trace: [{t, part, out}], events, codes, macro}
+     (DEVS view: each part is an atomic model whose time advance is the macro step; Zeigler et al. 2018 ch. 6; FMI 2.0 co-simulation
+     master algorithms: Gomes et al. 2018, ACM Comput. Surv. 51:3) */
   function cosim(cfg) {
     const C = codes(['budget', 'no-progress', 'bad-config', 'part-failed']);
-    const res = { t: 0, outs: {}, trace: [], events: [], codes: C.list, macro: 0, iterations: 0 };
+    const res = { t: 0, outs: {}, trace: [], events: [], codes: C.list, macro: 0 };
     if (!cfg || !Array.isArray(cfg.parts) || !cfg.parts.length || !(cfg.dt > 0) || !fin(cfg.tEnd)) { C.code('bad-config'); return res; }
     const t0 = fin(cfg.t0) ? cfg.t0 : 0, tEnd = cfg.tEnd, dt = cfg.dt, eps = 1e-12 * max(1, abs(tEnd));
-    const parts = cfg.parts.filter(p => p && typeof p.step === 'function');
-    const byId = new Map(parts.map(p => [p.id, p]));
-    const ord0 = Array.isArray(cfg.order) ? cfg.order.filter(id => byId.has(id)) : [];
-    const order = ord0.concat(parts.map(p => p.id).filter(id => !ord0.includes(id)));
-    const P = order.map(id => { const p = byId.get(id); let st = null; try { st = p.init ? p.init(cfg.model, cfg.inputs0 || {}, { id }) : null; } catch (e) { C.code('part-failed', t0, id); } return { p, id, t: t0, state: st, inbox: [] }; });
-    const outs = res.outs; for (const q of P) { let o0 = {}; try { o0 = q.p.output ? q.p.output(q.state) || {} : {}; } catch (e) { o0 = {}; } outs[q.id] = o0; }
+    const byId = new Map(cfg.parts.map(p => [p.id, p]));
+    const order = (Array.isArray(cfg.order) ? cfg.order.filter(id => byId.has(id)) : []).concat(cfg.parts.map(p => p.id).filter(id => !(cfg.order || []).includes(id)));
+    const P = order.map(id => { const p = byId.get(id); let st = null; try { st = p.init ? p.init() : null; } catch (e) { C.code('part-failed', t0, id); } return { p, id, t: t0, state: st, inbox: [] }; });
+    const outs = res.outs; for (const q of P) outs[q.id] = {};
     const maxMacro = min(fin(cfg.maxMacro) ? cfg.maxMacro : MAX_STEPS, MAX_STEPS);
-    const inputsOf = q => { try { const fn = q.p.inputs || (cfg.link && cfg.link[q.id]); return fn ? fn(outs, q.t) || {} : {}; } catch (e) { return {}; } };
-    const it0 = isObj(cfg.iterate) ? { maxIter: min(50, max(1, floor(cfg.iterate.maxIter) || 10)), tol: cfg.iterate.tol > 0 ? cfg.iterate.tol : 1e-6 } : null;
-    const canIter = it0 && P.every(q => q.p.snapshot && q.p.restore);
-    if (it0 && !canIter) C.code('no-snapshot');
     let lag = 0;
-    const deliver = (q, e) => { if (q.t > e.t + eps) { lag = max(lag, q.t - e.t); q.inbox.push({ ...e, t: q.t, late: true }); } else q.inbox.push(e); };
-    const outDiff = (a, b) => { let d = 0; for (const id of Object.keys(a)) for (const k of Object.keys(a[id] || {})) { const x = a[id][k], y = b[id] && b[id][k]; if (typeof x === 'number' && typeof y === 'number') { const s = max(1e-12, abs(x), abs(y)); d = max(d, x === y ? 0 : abs(x - y) / s); } } return d; };
-    // one round: every part behind steps once; → false on a failure
-    function round(tg, target) {
-      const emitted = [];
-      for (const q of P) {
-        if (q.t > tg + eps) continue;   // ahead: waits for the others
-        q.inbox.sort(evLess);
-        while (q.inbox.length && q.inbox[0].t <= q.t + eps) { const ev = q.inbox.shift(); if (q.p.onEvent) { try { const s2 = q.p.onEvent(q.state, ev, q.t); if (s2 !== undefined) q.state = s2; } catch (e) { C.code('part-failed', q.t, q.id); } } }
-        let T = target; if (q.inbox.length) T = min(T, q.inbox[0].t);
-        const ask = T - q.t; if (!(ask > eps)) continue;
-        let r = null; try { r = q.p.step(q.state, inputsOf(q), q.t, ask, { id: q.id }); } catch (e) { r = null; }
-        if (!isObj(r) || r.fail === 'part-failed') { C.code('part-failed', q.t, q.id); res.t = q.t; return false; }
-        if (r.fail) C.code(r.fail, q.t, q.id);
-        let taken = fin(r.dt) ? r.dt : ask; if (taken > ask) taken = ask;
-        if (!(taken > 0)) { C.code('no-progress', q.t, q.id); res.t = q.t; return false; }
-        if (r.state !== undefined) q.state = r.state;
-        q.t = taken >= ask - eps ? T : q.t + taken; outs[q.id] = isObj(r.out) ? r.out : {};
-        for (const ev of Array.isArray(r.events) ? r.events : []) {
-          if (!isObj(ev) || !fin(ev.t)) continue;
-          const e = ev.seq != null && ev.source ? ev : event(ev.t, q.id, ev.kind != null ? ev.kind : ev.name, ev.data, ev.prio);
-          if (ev.to) e.to = ev.to;
-          emitted.push([q, e]);
-          for (const o2 of P) if (o2 !== q && (!Array.isArray(ev.to) || ev.to.includes(o2.id))) deliver(o2, e);
-        }
-        if (taken < ask - eps) target = min(target, q.t);   // a state event stopped this part: the others stop there too
-      }
-      return emitted;
-    }
     for (let it = 0; it < maxMacro; it++) {
       let tg = Infinity; for (const q of P) tg = min(tg, q.t);
       if (tg >= tEnd - eps) { res.t = tEnd; if (lag > 0) C.code('late-event', undefined, lag); return res; }
-      const target = min(tEnd, tg + dt);
+      let target = min(tEnd, tg + dt);
       res.macro++;
-      const sync = P.every(q => abs(q.t - tg) <= eps);
-      let emitted;
-      if (canIter && sync) {   // strong coupling: repeat the round from the snapshots until the exchanged outputs settle
-        const snaps = P.map(q => ({ s: q.p.snapshot(q.state), t: q.t, inbox: q.inbox.slice() })); let prev = clone(outs), conv = false;
-        for (let k = 0; k < it0.maxIter; k++) {
-          res.iterations++;
-          if (k > 0) P.forEach((q, i) => { q.state = q.p.restore(snaps[i].s); q.t = snaps[i].t; q.inbox = snaps[i].inbox.slice(); });
-          emitted = round(tg, target); if (emitted === false) return res;
-          const d = outDiff(outs, prev); prev = clone(outs);
-          if (k > 0 && d <= it0.tol) { conv = true; break; }
+      for (const q of P) {
+        if (q.t > tg + eps) continue;   // ahead: waits for the others
+        // events due at the start of the step
+        q.inbox.sort((a, b) => a.t - b.t || a.seq - b.seq);
+        while (q.inbox.length && q.inbox[0].t <= q.t + eps) { const ev = q.inbox.shift(); if (q.p.onEvent) { try { q.state = q.p.onEvent(q.state, ev, q.t); } catch (e) { C.code('part-failed', q.t, q.id); } } }
+        let T = target; if (q.inbox.length) T = min(T, q.inbox[0].t);
+        const ask = T - q.t; if (!(ask > eps)) continue;
+        let inp = {}; try { inp = q.p.inputs ? q.p.inputs(outs, q.t) || {} : {}; } catch (e) { inp = {}; }
+        let r = null; try { r = q.p.step(q.state, inp, ask, q.t); } catch (e) { r = null; }
+        if (!isObj(r)) { C.code('part-failed', q.t, q.id); res.t = q.t; return res; }
+        let taken = fin(r.dt) ? r.dt : ask; if (taken > ask) taken = ask;
+        if (!(taken > 0)) { C.code('no-progress', q.t, q.id); res.t = q.t; return res; }
+        q.state = r.state; q.t = taken >= ask - eps ? T : q.t + taken; outs[q.id] = isObj(r.out) ? r.out : {};
+        if (res.trace.length < MAX_POINTS * 4) res.trace.push({ t: q.t, part: q.id, out: outs[q.id] });
+        for (const ev of Array.isArray(r.events) ? r.events : []) {
+          if (!isObj(ev) || !fin(ev.t)) continue;
+          const e = { t: ev.t, name: ev.name, data: ev.data, from: q.id, seq: res.events.length };
+          if (res.events.length < MAX_LOG) res.events.push(e);
+          for (const o2 of P) if (o2 !== q && (!Array.isArray(ev.to) || ev.to.includes(o2.id))) { if (o2.t > e.t + eps) { lag = max(lag, o2.t - e.t); o2.inbox.push({ ...e, t: o2.t }); } else o2.inbox.push(e); }
         }
-        if (!conv && it0.maxIter > 1) C.code('no-converge', tg);
-      } else { emitted = round(tg, target); if (emitted === false) return res; }
-      for (const [q, e] of emitted) { if (res.events.length < MAX_LOG) res.events.push(e); }
-      for (const q of P) if (res.trace.length < MAX_POINTS * 4) res.trace.push({ t: q.t, part: q.id, out: outs[q.id] });
+        if (taken < ask - eps) target = min(target, q.t);   // a state event stopped this part: the others stop there too
+      }
     }
     C.code('budget', tEnd); res.t = min(...P.map(q => q.t)); return res;
   }
@@ -1307,17 +875,11 @@
     // output analysis
     welford, timeAvg, ci, acf, batchMeans, mser5, replicate, littleCheck,
     // sweeps and sensitivity
-    linspace, oat, grid, morris, sobol, lhs,
-    // delay equations, stochastic kinetics, SDEs, schedules
-    dde, dae, ssa, tauLeap, sde, nhpp, piecewise,
-    // distributions and input modelling
-    cdfOf, quantileOf, truncated, mixture, fit, ksTest, chiSquare, andersonDarling, digamma, trigamma,
-    // variance reduction, precision, calibration
-    controlVariate, untilPrecision, minimize, calibrate,
+    linspace, oat, grid, morris, sobol,
     // verification
     richardson, conservation, deterministic, dim, sameDim, convert,
     // co-simulation
-    event, clone, stepper, odeStepper, wrapRun, cosim, source,
+    cosim, source,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

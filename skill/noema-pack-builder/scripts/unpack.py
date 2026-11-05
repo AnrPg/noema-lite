@@ -102,7 +102,4 @@ if acts:
             if re.fullmatch(r'[A-Za-z]{2,3}(-[A-Za-z0-9]{2,4}){0,2}', str(loc)): json.dump(tab, open(os.path.join(ad, f'strings.{loc}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         reg.append(e)
     json.dump({'format': (p.get('activities') or {}).get('format') or 'noema.activities/v1', 'items': reg}, open(os.path.join(d, 'activities', 'activities.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-    for pn, pd in ((p.get('activities') or {}).get('parts') or {}).items():   # activities/_parts/<name>.json: the parts the specs reuse ("use", docs/INTERACTIVE.md §12.8)
-        if re.fullmatch(r'[a-z0-9][a-z0-9-]{0,60}', str(pn)) and isinstance(pd, dict):
-            os.makedirs(os.path.join(d, 'activities', '_parts'), exist_ok=True); json.dump(pd, open(os.path.join(d, 'activities', '_parts', pn + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(f'unpacked {sid}: {len(p["chapters"])} chapters, {len(items)} pictures, {len(acts)} activities, {len(restored)} source file(s) → {d}' + (f'  ({len(kept)} source file(s) stay in the learner\'s account: {", ".join(kept)})' if kept else ''))

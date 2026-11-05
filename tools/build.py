@@ -397,7 +397,7 @@ def build_skill(out_zip):
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
         for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
-        for f in LIB_DOCS: z.write(os.path.join(ROOT, 'docs', 'library', f), f'noema-pack-builder/references/library/{f}')   # the engine library: one chapter per engine (docs/INTERACTIVE_LIBRARY.md)
+        z.writestr('noema-pack-builder/references/LIBRARY_ENGINES.md', '# The chapters of the engine library (docs/library/*.md), one per engine\n\n' + ''.join(f'\n\n---\n\n<!-- docs/library/{f} -->\n\n' + open(os.path.join(ROOT, 'docs', 'library', f), encoding='utf-8').read() for f in LIB_DOCS))   # the engine library: every engine's chapter in ONE file (claude.ai accepts at most 200 files in a skill)
         if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): z.write(os.path.join(ROOT, 'docs', 'PIPELINES.md'), 'noema-pack-builder/references/PIPELINES.md')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
         z.write(os.path.join(ROOT, 'docs', 'VISUAL.md'), 'noema-pack-builder/references/VISUAL.md')

@@ -692,81 +692,8 @@
     return runItem({ id: 'x', fn, opts, units }, {}, cin);
   }
 
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): med@1 in a co-simulation ----------
-     The PK items become compartment models stepped in time (the same pharmacokinetics as above, Rowland & Tozer 2019; integrated with
-     classical RK4, ≤ 0.05/k per substep, split exactly at each dose): pk.iv (central), pk.oral (gut → central, F, tlag), pk.infusion
-     (a zero-order rate for dur), pk.twocpt (central ⇄ peripheral, a bolus at the start), pk.mm (Michaelis–Menten elimination). Their
-     inputs are read at each step (a clearance another part computes, a dose a controller changes). Fields per step: c (the concentration
-     now; a series output collects one sample a step), t, cmax / cmin / auc (so far), the item's other numbers at the current inputs.
-     Every other item is recomputed at each step from the current inputs (a score of a vital sign that changes). Time: the co-simulation's. */
-  const PK_STATE = { 'pk.iv': 1, 'pk.oral': 2, 'pk.infusion': 1, 'pk.twocpt': 2, 'pk.mm': 1 };
-  function pkX(it, env, cin) { const x = {}; for (const { name } of sigIn(it.fn)) { let v = cin[name] ? cin[name](env) : NaN; if (typeof v === 'boolean') v = +v; x[name] = v; } return x; }
-  function pkDeriv(fn, x, tt, t0) {
-    const k = x.clear / x.v;
-    if (fn === 'pk.iv') return a => [-k * a[0]];
-    if (fn === 'pk.oral') { const f = fin(x.f) ? x.f : 1; return a => [-x.ka * a[0], x.ka * f * a[0] - k * a[1]]; }
-    if (fn === 'pk.infusion') { const dur = fin(x.dur) ? x.dur : Infinity; return (a, t) => [(t - t0 < dur ? x.rate : 0) - k * a[0]]; }
-    if (fn === 'pk.twocpt') return a => [-(x.k10 + x.k12) * a[0] + x.k21 * a[1], x.k12 * a[0] - x.k21 * a[1]];
-    return a => [(x.rate - x.vmax * a[0] / (x.km + a[0])) / x.v];   // pk.mm: a[0] is the concentration
-  }
-  const pkRate = (fn, x) => fn === 'pk.oral' ? Math.max(x.clear / x.v, x.ka) : fn === 'pk.twocpt' ? x.k10 + x.k12 + x.k21 : fn === 'pk.mm' ? x.vmax / (x.v * Math.max(x.km, 1e-12)) : x.clear / x.v;
-  const pkConcOf = (fn, x, a) => fn === 'pk.oral' ? a[1] / x.v : fn === 'pk.twocpt' ? a[0] / x.v1 : fn === 'pk.mm' ? a[0] : a[0] / x.v;
-  /** the doses (time, compartment, amount) of an item in [t, t + dt) */
-  function pkDoses(fn, x, t0, t, dt) {
-    const out = [], eps = 1e-12 * Math.max(1, Math.abs(t));
-    if (fn === 'pk.iv' || fn === 'pk.oral') {
-      const n = fin(x.doses) ? Math.max(1, Math.min(200, Math.round(x.doses))) : 1, tau = fin(x.tau) && x.tau > 0 ? x.tau : 0, lag = fn === 'pk.oral' && fin(x.tlag) ? x.tlag : 0;
-      for (let j = 0; j < (tau > 0 ? n : 1); j++) { const td = t0 + lag + j * tau; if (td >= t - eps && td < t + dt - eps) out.push([td, 0, x.dose]); }
-    } else if (fn === 'pk.twocpt' && t0 >= t - eps && t0 < t + dt - eps) out.push([t0, 0, x.dose]);
-    return out;
-  }
-  const stepper = {
-    init(model, inputs, sc) {
-      const items = isObj(model) && Array.isArray(model.items) ? model.items : [], cins = sc.prepared || prepare(sc.spec), st = { t: sc.t0 || 0, t0: sc.t0 || 0, pk: {} };
-      items.forEach((it, i) => { if (PK_STATE[it.fn]) { const x = pkX(it, inputs, cins[i] || {}); st.pk[it.id] = { a: it.fn === 'pk.mm' ? [fin(x.c0) ? x.c0 : 0] : new Array(PK_STATE[it.fn]).fill(0), cmax: -Infinity, cmin: Infinity, auc: 0, c: 0 }; } });
-      return st;
-    },
-    step(st, inputs, t, dt, sc) {
-      const items = sc.spec.model.items, cins = sc.prepared || prepare(sc.spec), env = inputs, ns = { t: t + dt, t0: st.t0, pk: {} }, R = {};
-      let fail = null;
-      items.forEach((it, i) => {
-        const cin = cins[i] || {};
-        if (!PK_STATE[it.fn]) { R[it.id] = runItem(it, env, cin); return; }
-        const x = pkX(it, env, cin), prev = st.pk[it.id], a = prev.a.slice(), f = pkDeriv(it.fn, x, t, st.t0);
-        const r = runItem(it, env, cin);   // the item's own numbers and codes at the current inputs
-        let cmax = prev.cmax, cmin = prev.cmin, auc = prev.auc, c = pkConcOf(it.fn, x, a);
-        const rate = pkRate(it.fn, x);
-        if (!(rate > 0) || !fin(rate)) { fail = fail || 'model'; R[it.id] = { ...r, v: { ...r.v, c: NaN, cmax: NaN, cmin: NaN, auc: NaN } }; ns.pk[it.id] = prev; return; }
-        const doses = pkDoses(it.fn, x, st.t0, t, dt), cuts = [t, ...doses.map(d => d[0]), t + dt].sort((p, q) => p - q);
-        let di = 0;
-        for (let s = 0; s + 1 < cuts.length; s++) {
-          while (di < doses.length && doses[di][0] <= cuts[s] + 1e-12 * Math.max(1, Math.abs(cuts[s]))) { a[doses[di][1]] += doses[di][2]; di++; c = pkConcOf(it.fn, x, a); cmax = Math.max(cmax, c); }
-          const span = cuts[s + 1] - cuts[s]; if (!(span > 0)) continue;
-          const m = Math.min(20000, Math.max(1, Math.ceil(span * rate / 0.05))), h = span / m;
-          for (let j = 0; j < m; j++) {
-            const tt = cuts[s] + j * h, k1 = f(a, tt), k2 = f(a.map((v, q) => v + h / 2 * k1[q]), tt + h / 2), k3 = f(a.map((v, q) => v + h / 2 * k2[q]), tt + h / 2), k4 = f(a.map((v, q) => v + h * k3[q]), tt + h);
-            for (let q = 0; q < a.length; q++) a[q] = Math.max(0, a[q] + h / 6 * (k1[q] + 2 * k2[q] + 2 * k3[q] + k4[q]));
-            const c2 = pkConcOf(it.fn, x, a); auc += h * (c + c2) / 2; c = c2; cmax = Math.max(cmax, c); cmin = Math.min(cmin, c);
-          }
-        }
-        if (!a.every(fin)) fail = fail || 'nan';
-        ns.pk[it.id] = { a, cmax, cmin, auc, c };
-        R[it.id] = { ...r, v: { ...r.v, c, cmax: fin(cmax) ? cmax : NaN, cmin: fin(cmin) ? cmin : NaN, auc } };
-      });
-      const out = {};
-      for (const o of sc.spec.outputs || []) {
-        const dot = o.of.indexOf('.'), iid = dot < 0 ? o.of : o.of.slice(0, dot), field = dot < 0 ? '' : o.of.slice(dot + 1), r = R[iid];
-        if (!r) continue;
-        const pk = !!ns.pk[iid];
-        if (o.kind === 'scalar') out[o.id] = field ? r.v[field] : r.v[words(SIG.fns[items.find(it => it.id === iid).fn].out)[0]];
-        else if (o.kind === 'series') out[o.id] = pk && field === 't' ? t + dt : pk && field === 'c' ? r.v.c : (r.s[field] || []);
-        else out[o.id] = r.sc || { view: [-1, 1, -1, 1], items: [] };
-      }
-      return { state: ns, out, dt, ...(fail ? { fail } : {}) };
-    },
-  };
-  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
+  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibMedModule, 'NoemaLibMed');
-  root.NoemaLibMed = Object.freeze({ id: ID, table: { model: { items: { $req: true, $list: { $obj: Object.assign({}, ITEM, { fn: 'enum:' + Object.keys(SIG.fns).join('|') + '!', opts: 'any' }) }, min: 1, max: 48 } }, outputs: { scalar: [], series: [], scene: [] }, offered: m => { const o = { scalar: [], series: [], scene: [] }; for (const it of (isObj(m) && Array.isArray(m.items) ? m.items : [])) { const S = isObj(it) && typeof it.id === 'string' ? SIG.fns[it.fn] : null; if (!S) continue; o.scalar.push(...S.out.split(' ').filter(Boolean).map(f => it.id + '.' + f)); o.series.push(...S.series.split(' ').filter(Boolean).map(f => it.id + '.' + f)); if (S.scene) o.scene.push(it.id); } return o; } }, SIG, RANGE, checkSpec, exprs, keys, run, compute, calc, engine: Object.freeze(engine), simEngine, stepper, prepare, moduleSource: () => noemaLibMedModule.toString() });
+  root.NoemaLibMed = Object.freeze({ id: ID, table: { model: { items: { $req: true, $list: { $obj: Object.assign({}, ITEM, { fn: 'enum:' + Object.keys(SIG.fns).join('|') + '!', opts: 'any' }) }, min: 1, max: 48 } }, outputs: { scalar: [], series: [], scene: [] }, offered: m => { const o = { scalar: [], series: [], scene: [] }; for (const it of (isObj(m) && Array.isArray(m.items) ? m.items : [])) { const S = isObj(it) && typeof it.id === 'string' ? SIG.fns[it.fn] : null; if (!S) continue; o.scalar.push(...S.out.split(' ').filter(Boolean).map(f => it.id + '.' + f)); o.series.push(...S.series.split(' ').filter(Boolean).map(f => it.id + '.' + f)); if (S.scene) o.scene.push(it.id); } return o; } }, SIG, RANGE, checkSpec, exprs, keys, run, compute, calc, engine: Object.freeze(engine), simEngine, prepare, moduleSource: () => noemaLibMedModule.toString() });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

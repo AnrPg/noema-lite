@@ -9,7 +9,6 @@ a form, sees the activity run beside it and downloads the folder that `make_pack
 |---|---|
 | `tools/schemas/noema.sim-spec.v1.schema.json` | the shape of a `sim-spec@1` spec (formula@1, circuit-mna@1, the bench); `$ref`s `noema.circuit.v1` for the netlist |
 | `tools/schemas/noema.activities.v1.schema.json` | the registry `activities/activities.json` and its entry (`$defs/item`) |
-| `engine/src/46_lib_schema.js` | `NoemaLibSchema`: a library engine's `table` → the schema of its activities (`specSchema`), what an output may compute (`ofs`), the line styles (docs/INTERACTIVE_LIBRARY.md §1.5) |
 | `engine/schemaform.js` | `NoemaSchemaForm`: registry + `$ref`, `validate`, `skeleton`, branches, `walk` (no DOM, runs in Node) and `form()` |
 | `engine/activity_author.js` | `NoemaActivityAuthor`: the page (`mount`, `view`), types, `check`, files, zip / unzip, import, the preview adapter |
 | `engine/activity_author.css` | its styles (the app's tokens; light, dark; 320 px up) |
@@ -44,15 +43,6 @@ validator messages land at their field (`setErrors([{path, msg}])`, with `aria-i
 
 ## The page (`NoemaActivityAuthor`)
 
-- **Library engines**: `lib:<engine id>` for every library engine the app has (registered through `ACT.engine`) whose module
-  exports `checkSpec` and `table`; the kind select groups them like the catalogue (`ENGINE_GROUPS`), with the engine's
-  `engine.engines.<slug>.name` and its `.what` in an ⓘ. Choosing one asks *Start from the reference activity* (`NoemaActivityRefs`
-  in `activity_author_schemas.js`, when the build ships it) or *Blank*. The form comes from `NoemaLibSchema.specSchema`:
-  outputs of kind `scalar`, `series`, `scene`, `sound`, their `of` with suggestions from the table (`ofs`), plots `function`,
-  `series` (lines with `style`), `scene` and `sound`; the engine's `checkSpec` messages land at their fields, formulas are
-  checked live only where `exprs(spec)` lists them, with the engine's local names.
-- **Layout**: details in tooltips (ⓘ); the bar's buttons in one row when they fit, icons only under 560 px, stacked under 420 px;
-  no horizontal scroll at 320 px.
 - **Kinds**: `sim-formula` (sim-spec@1 + formula@1), `sim-circuit` (+ circuit-mna@1); `registerType({id, label, runtime, schema,
   match, blank, convert})` for html-app@1, py-module@1, h5p@1 later (each with its schema and preview).
 - **Tabs**: Activity (the registry entry: id → entry and fallback picture follow), Simulation, Words (every key × every

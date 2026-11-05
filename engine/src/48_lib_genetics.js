@@ -1041,61 +1041,11 @@
     }
     return { out, codes: res.codes || [] };
   }
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): genetic drift in a co-simulation ----------
-     mode drift: the replicate populations are the state; each macro step runs the generations up to round(t + dt − t0) with the same
-     Wright–Fisher / Moran sampling as runDrift, and with the inputs of that step (a population size N an ecological part computes:
-     a bottleneck keeps the allele frequency, the copies are rescaled; a selection s that changes with the environment). Its seeded
-     stream lives in the state (a plain number), so a snapshot repeats the same draws. Per step: meanP, meanH, fixed, lost, segregating
-     (now), rep (one sample of replicate arg), t (the generation), meanPs / meanHs (one sample each), uTheory and the neutral times at the
-     current inputs. Every other mode is recomputed at each step from the current inputs. */
-  function dRand(st) { let a = st.rs = (st.rs + 0x6D2B79F5) >>> 0, t = Math.imul(a ^ (a >>> 15), a | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
-  const stepper = {
-    init(model, inputs, sc) {
-      const m = isObj(model) ? model : {};
-      if (m.mode !== 'drift') return { t: sc.t0 || 0, other: true };
-      const proc = m.process || 'wf', N = Math.round(num(m.N, inputs, NaN)), p0 = num(m.p0, inputs, NaN), reps = Math.round(num(m.reps, inputs, 20));
-      if (!(N >= 1 && N <= 1e6) || !(p0 >= 0 && p0 <= 1) || !(reps >= 1 && reps <= 10000)) return null;
-      const copies = proc === 'moran' ? N : 2 * N, i0 = Math.round(p0 * copies);
-      return { t0: sc.t0 || 0, g: 0, proc, copies, i: new Array(reps).fill(i0), tFix: new Array(reps).fill(-1), H0: 2 * (i0 / copies) * (1 - i0 / copies), dec: 0, rs: C.hash32('genetics-drift-step', sc.seed >>> 0) };
-    },
-    step(st, inputs, t, dt, sc) {
-      const m = sc.spec.model, outs = Array.isArray(sc.spec.outputs) ? sc.spec.outputs : [];
-      if (st.other) { const r = run(sc.spec, inputs, { seed: sc.seed }); return { state: { ...st, t: t + dt }, out: r.out, dt }; }
-      const ns = C.copyData(st), N = Math.round(num(m.N, inputs, NaN)), s = num(m.s, inputs, 0), h = num(m.h, inputs, 0.5), mu = num(m.mu, inputs, 0), nu = num(m.nu, inputs, 0);
-      if (!(N >= 1 && N <= 1e6) || !(s > -1) || !(mu >= 0 && mu <= 1) || !(nu >= 0 && nu <= 1)) return { state: st, out: {}, dt, fail: 'range' };
-      const copies = ns.proc === 'moran' ? N : 2 * N;
-      if (copies !== ns.copies) { ns.i = ns.i.map(i => Math.round(i / ns.copies * copies)); ns.copies = copies; }   // a new size: the same frequencies
-      const target = Math.round(t + dt - ns.t0), reps = ns.i.length;
-      if ((target - ns.g) * reps * (ns.proc === 'moran' ? N : 1) > BUDGET) return { state: st, out: {}, dt, fail: 'budget' };
-      for (; ns.g < target; ns.g++) for (let r = 0; r < reps; r++) {
-        let i = ns.i[r];
-        if (ns.proc === 'wf') {
-          const p = i / copies, q = 1 - p, wAA = 1 + s, wAa = 1 + h * s, wb = p * p * wAA + 2 * p * q * wAa + q * q;
-          let ps = (p * p * wAA + p * q * wAa) / wb; ps = ps * (1 - mu) + (1 - ps) * nu;
-          i = binomial(() => dRand(ns), copies, Math.min(1, Math.max(0, ps)));
-        } else for (let k = 0; k < N; k++) {
-          if ((i === 0 && nu === 0) || (i === N && mu === 0)) break;
-          const r1 = dRand(ns), r2 = dRand(ns), r3 = dRand(ns), fA = (1 + s) * i, tot = fA + (N - i);
-          let birthA = r1 * tot < fA; if (birthA ? r3 < mu : r3 < nu) birthA = !birthA;
-          i += (birthA ? 1 : 0) - (r2 * N < i ? 1 : 0);
-        }
-        ns.i[r] = i; if (i === copies && ns.tFix[r] < 0) ns.tFix[r] = ns.g + 1;
-      }
-      const ps = ns.i.map(i => i / copies), fixed = ps.filter(p => p === 1).length / reps, lost = ps.filter(p => p === 0).length / reps;
-      const meanP = ps.reduce((a, b) => a + b, 0) / reps, meanH = ps.reduce((a, p) => a + 2 * p * (1 - p), 0) / reps;
-      const p0 = num(m.p0, inputs, NaN), dec = ns.proc === 'wf' ? 1 - 1 / (2 * N) : Math.pow(1 - 2 / (N * N), N), Ne4 = ns.proc === 'wf' ? 4 * N : N;
-      const fx = ns.tFix.filter(x => x >= 0), v = { t: ns.g, meanP, meanH, meanPs: meanP, meanHs: meanH, fixed, lost, segregating: 1 - fixed - lost, hTheory: ns.H0 * Math.pow(dec, ns.g), hTheoryS: ns.H0 * Math.pow(dec, ns.g),
-        uNeutral: p0, uTheory: ns.proc === 'wf' ? kimuraU(N, s, h, p0) : NaN, tFix: p0 > 0 && p0 < 1 ? -Ne4 * (1 - p0) * Math.log(1 - p0) / p0 : NaN, meanTfix: fx.length ? fx.reduce((a, b) => a + b, 0) / fx.length : NaN, valid: 1 };
-      const out = {};
-      for (const o of outs) { if (!o || typeof o.id !== 'string') continue; out[o.id] = o.of === 'rep' ? (ps[Math.round(num(o.arg, inputs, 0))] ?? NaN) : has(v, o.of) ? v[o.of] : NaN; }
-      return { state: ns, out, dt };
-    },
-  };
-  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true, stepper });
+  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
   engine.workerSource = C.workerSource(noemaLibGeneticsModule, 'NoemaLibGenetics');
   root.NoemaLibGenetics = Object.freeze({
     table: { model: { $by: 'mode', $cases: TABLES }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(m => [m, Object.keys(OUTS[m]).reduce((a, k) => ((a[OUTS[m][k][0]] = a[OUTS[m][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'numx' } },   // the form of the activity author (46_lib_schema.js)
-    id: ID, MODES, TABLES, OUTS, EPI, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, stepper,
+    id: ID, MODES, TABLES, OUTS, EPI, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
     // the formulas, for tests
     logFact, lgamma, gammaQ, chi2Sf, erfc, Phi, PhiInv, intensity, binomial, poisson, hweExact, kimuraU, haldane, kosambi, rHaldane, rKosambi, tajimaD, aN, ratioOf, chainOf,
   });

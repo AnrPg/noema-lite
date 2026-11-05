@@ -1225,76 +1225,7 @@
     return { out, codes: ctx.codes, steps: ctx.steps, nfev: ctx.nfev };
   }
 
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): a flow or a map stepped by the parts orchestrator (co-simulation) ----------
-     The time is the co-simulation's (solve.t0/tEnd are not used); each macro step integrates from the state with the same methods, events and
-     budget as run(); the inputs are held over the step (zero-order hold). Outputs per step: state / t (series: one sample a step), final,
-     stat (over the step ends so far), ok, steps. A delay equation cannot be stepped (its history is not a state): fail 'no-stepper'. */
-  function stepEnv(M, inputs) { const env = Object.assign(Object.create(null), inputs || {}); evalParams(M, env); return env; }
-  const stepper = {
-    init(model, inputs, sc) {
-      const M = sc.prepared || prepare(sc.spec);
-      if (!M || M.kind === 'dde') return null;
-      const env = stepEnv(M, inputs);
-      for (const k of M.names) env[k] = NaN;
-      const y = M.init.map(f => f(env));
-      if (!y.every(fin)) return null;
-      return { t: sc.t0 || 0, y, steps: 0, acc: {}, fatal: false };
-    },
-    output(st, sc) {   // the outputs at the start: the initial states (the partners' first inputs)
-      const M = sc && (sc.prepared || prepare(sc.spec)), out = {}; if (!M) return out;
-      for (const o of objs(sc.spec.outputs)) { const i = M.names.indexOf(o.var); out[o.id] = o.of === 't' ? st.t : (o.of === 'state' || o.of === 'final') && i >= 0 ? st.y[i] : NaN; }
-      return out;
-    },
-    step(st, inputs, t, dt, sc) {
-      const M = sc.prepared || prepare(sc.spec), outs = objs(sc.spec.outputs);
-      if (!M) return { fail: 'part-failed' };
-      const env = stepEnv(M, inputs), ctx = makeCtx(M, env, Math.max(1000, MAX_STEPS - st.steps));
-      let y = Float64Array.from(st.y), t1 = t + dt, stop = false;
-      if (st.fatal) return { state: st, out: {}, dt };
-      if (M.kind === 'map') {
-        const { f } = makeRhs(M, ctx, null), y1 = new Float64Array(M.n);
-        const k0 = Math.round(t), k1 = Math.round(t + dt);
-        for (let k = k0; k < k1; k++) { ctx.steps++; f(k, y, y1); if (!y1.every(fin) || y1.some(v => abs(v) > 1e100)) { ctx.code('map-escape', k + 1); break; } y.set(y1); }
-      } else {
-        const { f, setEnv } = makeRhs(M, ctx, null), crossings = [], timed = [];
-        M.events.forEach(e => {
-          const apply = e.set.length ? (tt, yy) => { setEnv(tt, yy); const v = e.set.map(([i, fn]) => [i, fn(env)]); for (const [i, x] of v) yy[i] = x; } : null;
-          if (e.when) crossings.push({ g: (tt, yy) => { setEnv(tt, yy); return e.when(env); }, dir: e.dir, apply, stop: e.stop, onHit: () => {} });
-          else {
-            const a0 = e.at(env), ev = e.every ? e.every(env) : 0, cnt = e.count ? Math.round(e.count(env)) : (e.every ? MAX_EVENTS : 1);
-            if (!fin(a0)) return;
-            const k0 = ev > 0 ? Math.max(0, Math.ceil((t - a0) / ev - 1e-9)) : 0;
-            for (let k = k0; k < Math.min(cnt, k0 + MAX_EVENTS); k++) { const tk = a0 + k * (ev > 0 ? ev : 0); if (tk >= t + dt - 1e-12 * Math.max(1, abs(t)) || (k > 0 && !(ev > 0))) break; if (tk >= t - 1e-12 * Math.max(1, abs(t))) timed.push({ t: Math.max(tk, t), apply: (tt, yy) => { if (apply) apply(tt, yy); } }); }
-          }
-        });
-        const sv = M.solve, fdt = sv.dt ? sv.dt(env) : null;
-        let hmax = sv.hmax ? sv.hmax(env) : dt; if (!(hmax > 0) || hmax > dt) hmax = dt;
-        if (FIXED.includes(sv.method) && !(fdt > 0)) return { fail: 'time', state: st, out: {}, dt: 0 };
-        const r = flow({ n: M.n, f, y0: y, t0: t, tEnd: t + dt, method: sv.method, rtol: sv.rtol, atol: sv.atol, dt: fdt ? Math.min(fdt, dt) : null, hmax, pairs: M.pairs, samples: [], onSample: () => {}, crossings, timed }, ctx);
-        y = Float64Array.from(r.y); t1 = r.t; stop = r.stopped && t1 < t + dt;
-      }
-      const fatal = ctx.fatal();
-      const ns = { t: t1, y: Array.from(y), steps: st.steps + ctx.steps, acc: Object.assign({}, st.acc), fatal };
-      const { setEnv } = makeRhs(M, ctx, null);
-      const val = name => { const i = M.names.indexOf(name); if (i >= 0) return y[i]; setEnv(t1, y); return env[name]; };
-      const out = {};
-      for (const o of outs) {
-        let v = NaN;
-        if (o.kind === 'series') v = o.of === 't' ? t1 : o.of === 'state' && !fatal ? val(o.var) : NaN;
-        else if (o.kind === 'scalar') {
-          if (o.of === 'final') v = fatal ? NaN : val(o.var);
-          else if (o.of === 'stat' && !fatal) { const a = ns.acc[o.id] || { n: 0, s: 0, s2: 0, lo: Infinity, hi: -Infinity }, x = val(o.var); if (fin(x)) { a.n++; a.s += x; a.s2 += x * x; a.lo = Math.min(a.lo, x); a.hi = Math.max(a.hi, x); a.last = x; } ns.acc[o.id] = a;
-            v = !a.n ? NaN : o.stat === 'final' ? a.last : o.stat === 'min' ? a.lo : o.stat === 'max' ? a.hi : o.stat === 'mean' ? a.s / a.n : o.stat === 'pp' ? a.hi - a.lo : sqrt(a.s2 / a.n); }
-          else if (o.of === 'ok') v = fatal ? 0 : 1;
-          else if (o.of === 'steps') v = ns.steps;
-        }
-        out[o.id] = v;
-      }
-      const fc = ctx.codes.find(c => c.level === 'error');
-      return { state: ns, out, dt: stop ? Math.max(t1 - t, 0) : dt, ...(fc ? { fail: fc.code } : {}) };
-    },
-  };
-  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
+  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
   root.NoemaLibODE = Object.freeze({
     table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: { var: 'name', stat: 'enum:' + C.STATS.join('|'), t: 'numx', event: 'id', nth: 'int:-2000:2000', index: 'int:0:63', k: 'int:0:12', name: 'expr', code: 'enum:' + CODES.join('|'), x: 'name', y: 'name' } },   // the form of the activity author (46_lib_schema.js)

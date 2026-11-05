@@ -10,9 +10,7 @@
        tridiagonal solver and its periodic (Sherman–Morrison) form (for Crank–Nicolson and ADI);
      • stability: the FTCS diffusion limit, Courant numbers (Courant, Friedrichs & Lewy 1928), the von Neumann amplification factor
        of every scheme field@1 runs (Strikwerda 2004 ch. 2–3; Morton & Mayers 2005 §2.7, §4.4);
-     • neighbourhoods: Moore, von Neumann and hexagonal of any radius, torus wrapping; distances (Euclid, Manhattan, Chebyshev,
-       toroidal minimal image); random walks (lattice, Gaussian, correlated, Lévy) and their mean squared displacement;
-       spatial statistics: Moran's I and Geary's C over lattice or distance-band weights, Ripley's K / Besag's L, Clark–Evans R; spatial bucket index for radius queries in a continuous
+     • neighbourhoods: Moore and von Neumann of any radius, torus wrapping; spatial bucket index for radius queries in a continuous
        2-D space (torus minimal image); networks: CSR adjacency, ring, lattice, Erdős–Rényi 1959, Watts–Strogatz 1998, Barabási–Albert 1999;
      • scenes of fields within the 2000-item budget: a coarse heat map of poly cells (value classes → roles), marching-squares
        contour segments (Lorensen & Cline 1987), a space–time diagram of a 1-D field.
@@ -20,7 +18,7 @@
 (function noemaSpaceKitModule(root) {
   /* i18n-ignore-start */   // code, not text
   'use strict';
-  const MAX_N = 200, MAX_N1 = 2000, MAX_CELLS = 40000, GHOST = 2;
+  const MAX_N = 200, MAX_CELLS = 40000, GHOST = 2;
   const SIDES = ['left', 'right', 'bottom', 'top'];
   const BC_TYPES = ['dirichlet', 'neumann', 'robin', 'periodic'];
   const RAMP = ['muted', 'info', 'ok', 'warn', 'bad'];          // the role ramp of a heat map, low → high (roles, never colours)
@@ -32,7 +30,7 @@
      Storage: a padded array with GHOST = 2 ghost nodes on every bounded or periodic side of an axis that exists (1-D: one row). */
   function grid(o) {
     const dim = o && o.dim === 2 ? 2 : 1;
-    const nx = Math.max(2, Math.min(dim === 2 ? MAX_N : MAX_N1, Math.floor(o && o.nx) || 2));
+    const nx = Math.max(2, Math.min(MAX_N, Math.floor(o && o.nx) || 2));
     const ny = dim === 2 ? Math.max(2, Math.min(MAX_N, Math.floor(o && o.ny) || nx)) : 1;
     const x0 = fin(o && o.x0) ? o.x0 : 0, x1 = fin(o && o.x1) ? o.x1 : 1;
     const y0 = dim === 2 && fin(o.y0) ? o.y0 : 0, y1 = dim === 2 && fin(o.y1) ? o.y1 : (dim === 2 ? 1 : 0);
@@ -117,27 +115,22 @@
       solid (a padded Uint8Array, optional): a solid neighbour reflects the centre value (no flux through an insulated obstacle) */
   function laplacian(G, u, out, solid, nine) {
     const { nx, ny, sx } = G, ix2 = 1 / (G.dx * G.dx), iy2 = 1 / (G.dy * G.dy);
-    if (G.dim === 1) {
-      const k0 = G.at(0, 0);
-      if (!solid) for (let k = k0; k < k0 + nx; k++) out[k] = (u[k - 1] - 2 * u[k] + u[k + 1]) * ix2;
-      else for (let k = k0; k < k0 + nx; k++) { const c = u[k], w = solid[k - 1] ? c : u[k - 1], e = solid[k + 1] ? c : u[k + 1]; out[k] = (w - 2 * c + e) * ix2; }
-      return out;
-    }
-    if (nine) {   // (4·edges + corners − 20·c) / (6h²), for dx = dy
-      const f = ix2 / 6;
-      for (let j = 0; j < ny; j++) { let k = G.at(0, j); for (let i = 0; i < nx; i++, k++) {
-        const c = u[k], pick = q => (solid && solid[q] ? c : u[q]);
-        const ed = pick(k - 1) + pick(k + 1) + pick(k - sx) + pick(k + sx), co = pick(k - 1 - sx) + pick(k + 1 - sx) + pick(k - 1 + sx) + pick(k + 1 + sx);
-        out[k] = (4 * ed + co - 20 * c) * f; } }
-      return out;
-    }
-    const cc = 2 * (ix2 + iy2);
     for (let j = 0; j < ny; j++) {
-      const k0 = G.at(0, j), k1 = k0 + nx;
-      if (!solid) for (let k = k0; k < k1; k++) out[k] = (u[k - 1] + u[k + 1]) * ix2 + (u[k - sx] + u[k + sx]) * iy2 - cc * u[k];
-      else for (let k = k0; k < k1; k++) {
-        const c = u[k], w = solid[k - 1] ? c : u[k - 1], e = solid[k + 1] ? c : u[k + 1], s = solid[k - sx] ? c : u[k - sx], n = solid[k + sx] ? c : u[k + sx];
-        out[k] = (w - 2 * c + e) * ix2 + (s - 2 * c + n) * iy2;
+      let k = G.at(0, j);
+      for (let i = 0; i < nx; i++, k++) {
+        const c = u[k];
+        if (G.dim === 1) {
+          const w = solid && solid[k - 1] ? c : u[k - 1], e = solid && solid[k + 1] ? c : u[k + 1];
+          out[k] = (w - 2 * c + e) * ix2;
+        } else if (!nine) {
+          let w = u[k - 1], e = u[k + 1], s = u[k - sx], n = u[k + sx];
+          if (solid) { if (solid[k - 1]) w = c; if (solid[k + 1]) e = c; if (solid[k - sx]) s = c; if (solid[k + sx]) n = c; }
+          out[k] = (w - 2 * c + e) * ix2 + (s - 2 * c + n) * iy2;
+        } else {   // (4·edges + corners − 20·c) / (6h²), for dx = dy
+          const pick = q => (solid && solid[q] ? c : u[q]);
+          const ed = pick(k - 1) + pick(k + 1) + pick(k - sx) + pick(k + sx), co = pick(k - 1 - sx) + pick(k + 1 - sx) + pick(k - 1 + sx) + pick(k + 1 + sx);
+          out[k] = (4 * ed + co - 20 * c) * ix2 / 6;
+        }
       }
     }
     return out;
@@ -229,11 +222,8 @@
   }
   /** for every cell of an nx × ny lattice, its neighbour cells: CSR {off, nbr} */
   function latticeNeighbours(nx, ny, kind, r, torus) {
-    const O = kind === 'hex' ? null : offsets(kind, r), n = nx * ny, off = new Int32Array(n + 1), tmp = [];
-    const tor = kind === 'hex' ? torus && ny % 2 === 0 : torus;   // a hex torus needs an even number of rows
-    for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
-      const c = j * nx + i, cand = O ? O.map(([di, dj]) => [i + di, j + dj]) : hexOffsets(i, j, r);
-      const seen = new Set(); for (const [p, q2] of cand) { const q = wrapCell(p, q2, nx, ny, tor); if (q >= 0 && q !== c && !seen.has(q)) { seen.add(q); tmp.push(q); } } off[c + 1] = tmp.length; }
+    const O = offsets(kind, r), n = nx * ny, off = new Int32Array(n + 1), tmp = [];
+    for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) { const c = j * nx + i; for (const [di, dj] of O) { const q = wrapCell(i + di, j + dj, nx, ny, torus); if (q >= 0 && q !== c) tmp.push(q); } off[c + 1] = tmp.length; }
     return { off, nbr: Int32Array.from(tmp) };
   }
   /** the shortest signed difference on a periodic axis of length L (the minimal image) */
@@ -378,117 +368,13 @@
     return n;
   }
 
-  /* ---------- hexagonal lattices (offset "odd-r" storage, cube coordinates for distances; Patel, Red Blob Games 2013; Birch et al. 2007) ---------- */
-  /** odd-r offset (i, j) → cube (x, y, z), x + y + z = 0 */
-  const hexCube = (i, j) => { const x = i - (j - (j & 1)) / 2, z = j; return [x, -x - z, z]; };
-  /** the hex distance between two cells of an odd-r lattice */
-  const hexDist = (i1, j1, i2, j2) => { const a = hexCube(i1, j1), b = hexCube(i2, j2); return Math.max(Math.abs(a[0] - b[0]), Math.abs(a[1] - b[1]), Math.abs(a[2] - b[2])); };
-  /** the cells within hex distance r of (i, j) → [[i, j], …] without the centre (6 at r = 1, 3r(r+1) in all) */
-  function hexOffsets(i, j, r) { r = Math.max(1, Math.min(5, Math.floor(r) || 1)); const out = []; for (let q = j - r; q <= j + r; q++) for (let p = i - r - 1; p <= i + r + 1; p++) { if (p === i && q === j) continue; if (hexDist(i, j, p, q) <= r) out.push([p, q]); } return out; }
-  /** the centre of hex cell (i, j) of side 1 (pointy-top, odd rows shifted right) */
-  const hexCentre = (i, j) => [Math.sqrt(3) * (i + 0.5 * (j & 1)), 1.5 * j];
-
-  /* ---------- distances ---------- */
-  /** dist(dx, dy, metric) for euclid | manhattan | chebyshev; the differences already wrapped on a torus by the caller (wrapDelta) */
-  function dist(dx, dy, metric) { const a = Math.abs(dx), b = Math.abs(dy); return metric === 'manhattan' ? a + b : metric === 'chebyshev' ? Math.max(a, b) : Math.sqrt(a * a + b * b); }
-  /** the distance between (x1, y1) and (x2, y2) in a w × h box, toroidal when torus (the minimal image) */
-  function distance(x1, y1, x2, y2, o) { const q = o || {}; let dx = x2 - x1, dy = y2 - y1; if (q.torus) { dx = wrapDelta(dx, q.w); dy = wrapDelta(dy, q.h); } return dist(dx, dy, q.metric); }
-
-  /* ---------- random walks (rng: a NoemaSimKit stream; Pearson 1905; Kareiva & Shigesada 1983 correlated walks; Viswanathan et al. 1999 Lévy flights) ----------
-     walk(rng, steps, {kind: lattice | gauss | correlated | levy, dim 1|2, step (length; σ for gauss), kappa (correlated: the
-     concentration of the turning angle, wrapped normal of sd 1/√κ), mu (levy: the Pareto exponent 1 < μ ≤ 3 of the step lengths, lmin = step),
-     box: [x0, x1, y0, y1], boundary: none | reflect | periodic | absorb, x0, y0}) → {x: [...], y: [...], absorbed: step | −1} (steps + 1 points) */
-  function walk(rng, steps, o) {
-    const q = o || {}, kind = q.kind || 'lattice', dim = q.dim === 1 ? 1 : 2, L = fin(q.step) ? q.step : 1;
-    const n = Math.max(0, Math.min(200000, Math.floor(steps) || 0)), X = [fin(q.x0) ? q.x0 : 0], Y = [fin(q.y0) ? q.y0 : 0];
-    let x = X[0], y = Y[0], th = rng() * 2 * Math.PI, absorbed = -1;
-    const box = Array.isArray(q.box) && q.box.length === 4 ? q.box : null, bd = box ? (q.boundary || 'reflect') : 'none';
-    const gauss = () => Math.sqrt(-2 * Math.log(rng())) * Math.cos(2 * Math.PI * rng());
-    for (let s = 0; s < n; s++) {
-      let dx = 0, dy = 0;
-      if (kind === 'lattice') { const r = Math.floor(rng() * 2 * dim); if (r === 0) dx = L; else if (r === 1) dx = -L; else if (r === 2) dy = L; else dy = -L; }
-      else if (kind === 'gauss') { dx = L * gauss(); dy = dim === 2 ? L * gauss() : 0; }
-      else { const len = kind === 'levy' ? L * Math.pow(rng(), -1 / ((fin(q.mu) ? q.mu : 2) - 1)) : L;
-        th = kind === 'correlated' ? th + gauss() / Math.sqrt(fin(q.kappa) && q.kappa > 0 ? q.kappa : 1) : rng() * 2 * Math.PI;
-        dx = len * (dim === 1 ? (Math.cos(th) >= 0 ? 1 : -1) : Math.cos(th)); dy = dim === 2 ? len * Math.sin(th) : 0; }
-      x += dx; y += dy;
-      if (box && bd !== 'none') {
-        const [a0, a1, b0, b1] = box, w = a1 - a0, h = b1 - b0;
-        if (bd === 'periodic') { x = a0 + (((x - a0) % w) + w) % w; if (dim === 2) y = b0 + (((y - b0) % h) + h) % h; }
-        else if (bd === 'reflect') { for (let k = 0; k < 8 && (x < a0 || x > a1); k++) x = x < a0 ? 2 * a0 - x : 2 * a1 - x; if (dim === 2) for (let k = 0; k < 8 && (y < b0 || y > b1); k++) y = y < b0 ? 2 * b0 - y : 2 * b1 - y; }
-        else if (bd === 'absorb' && (x < a0 || x > a1 || (dim === 2 && (y < b0 || y > b1)))) { X.push(x); Y.push(y); absorbed = s + 1; break; }
-      }
-      X.push(x); Y.push(y);
-    }
-    return { x: X, y: Y, absorbed };
-  }
-  /** the mean squared displacement over many walks at each step: paths [{x, y}] → [MSD_0 … MSD_n] (E = n·step² lattice; 2·dim·D·t Brownian) */
-  function msd(paths) {
-    const n = paths.reduce((m, p) => Math.max(m, p.x.length), 0), out = new Float64Array(n), cnt = new Float64Array(n);
-    for (const p of paths) for (let s = 0; s < p.x.length; s++) { const dx = p.x[s] - p.x[0], dy = p.y[s] - p.y[0]; out[s] += dx * dx + dy * dy; cnt[s]++; }
-    return Array.from(out, (v, s) => (cnt[s] ? v / cnt[s] : NaN));
-  }
-
-  /* ---------- spatial statistics ---------- */
-  /** spatial weights of an nx × ny lattice: rook (von Neumann), queen (Moore) or hex → CSR (binary weights) */
-  function latticeWeights(nx, ny, kind, torus) {
-    if (kind === 'hex') { const n = nx * ny, off = new Int32Array(n + 1), tmp = []; for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) { for (const [p, q] of hexOffsets(i, j, 1)) { const c = wrapCell(p, q, nx, ny, torus && ny % 2 === 0); if (c >= 0) tmp.push(c); } off[j * nx + i + 1] = tmp.length; } return { off, nbr: Int32Array.from(tmp) }; }
-    return latticeNeighbours(nx, ny, kind === 'queen' ? 'moore' : 'vonneumann', 1, torus);
-  }
-  /** distance-band weights of points (w_ij = 1 for 0 < d ≤ band) → CSR */
-  function bandWeights(xs, ys, band, o) { const n = xs.length, off = new Int32Array(n + 1), tmp = []; for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) if (j !== i) { const d = distance(xs[i], ys[i], xs[j], ys[j], o); if (d <= band) tmp.push(j); } off[i + 1] = tmp.length; } return { off, nbr: Int32Array.from(tmp) }; }
-  /** Moran's I (Moran 1950) of values z over binary weights W (CSR), with E[I] = −1/(n−1) and the variance under the normality
-      assumption (Cliff & Ord 1981 eq. 1.38) → {I, E, V, z} */
-  function moranI(vals, W) {
-    const n = vals.length; let m = 0; for (const v of vals) m += v; m /= n;
-    let num = 0, den = 0, S0 = 0, S1 = 0; const rowS = new Float64Array(n), colS = new Float64Array(n);
-    for (let i = 0; i < n; i++) { den += (vals[i] - m) ** 2; for (let e = W.off[i]; e < W.off[i + 1]; e++) { const j = W.nbr[e]; num += (vals[i] - m) * (vals[j] - m); S0 += 1; rowS[i] += 1; colS[j] += 1; } }
-    // S1 = ½ Σ (w_ij + w_ji)²: symmetric binary weights give 2·S0
-    let sym = true; const set = new Set(); for (let i = 0; i < n; i++) for (let e = W.off[i]; e < W.off[i + 1]; e++) set.add(i * n + W.nbr[e]);
-    for (const key of set) { const i = Math.floor(key / n), j = key % n; if (!set.has(j * n + i)) { sym = false; break; } }
-    S1 = sym ? 2 * S0 : (() => { let s = 0; for (const key of set) { const i = Math.floor(key / n), j = key % n; s += (1 + (set.has(j * n + i) ? 1 : 0)) ** 2; } return s / 2; })();
-    let S2 = 0; for (let i = 0; i < n; i++) S2 += (rowS[i] + colS[i]) ** 2;
-    const I = den > 0 && S0 > 0 ? (n / S0) * num / den : NaN, E = -1 / (n - 1);
-    const V = (n * n * S1 - n * S2 + 3 * S0 * S0) / ((n * n - 1) * S0 * S0) - E * E;
-    return { I, E, V, z: (I - E) / Math.sqrt(V) };
-  }
-  /** Geary's C (Geary 1954) over binary weights: 1 under no autocorrelation, < 1 positive, > 1 negative */
-  function gearyC(vals, W) {
-    const n = vals.length; let m = 0; for (const v of vals) m += v; m /= n;
-    let num = 0, den = 0, S0 = 0;
-    for (let i = 0; i < n; i++) { den += (vals[i] - m) ** 2; for (let e = W.off[i]; e < W.off[i + 1]; e++) { num += (vals[i] - vals[W.nbr[e]]) ** 2; S0++; } }
-    return den > 0 ? (n - 1) * num / (2 * S0 * den) : NaN;
-  }
-  /** Ripley's K (Ripley 1976, 1977) of points in a w × h box at radii rs: edge correction none | torus | border (Diggle 2003 §4.1);
-      → {K: [...], L: [...] (Besag 1977: L = √(K/π), = r under complete spatial randomness)} */
-  function ripleyK(xs, ys, w, h, rs, corr) {
-    const n = xs.length, lam = n / (w * h), K = [], Lr = [];
-    for (const r of rs) {
-      let s = 0, used = 0;
-      for (let i = 0; i < n; i++) {
-        if (corr === 'border' && (xs[i] < r || xs[i] > w - r || ys[i] < r || ys[i] > h - r)) continue;
-        used++;
-        for (let j = 0; j < n; j++) if (j !== i) { let dx = xs[j] - xs[i], dy = ys[j] - ys[i]; if (corr === 'torus') { dx = wrapDelta(dx, w); dy = wrapDelta(dy, h); } if (dx * dx + dy * dy <= r * r) s++; }
-      }
-      const k = corr === 'border' ? (used ? s / (used * lam) : NaN) : s / (n * lam);
-      K.push(k); Lr.push(Math.sqrt(k / Math.PI));
-    }
-    return { K, L: Lr };
-  }
-  /** the Clark & Evans 1954 aggregation index R = mean nearest-neighbour distance / (0.5/√λ): 1 random, < 1 clustered, > 1 regular (2 on a square lattice) */
-  function clarkEvans(xs, ys, w, h, torus) {
-    const n = xs.length; if (n < 2) return NaN; let s = 0;
-    for (let i = 0; i < n; i++) { let b = Infinity; for (let j = 0; j < n; j++) if (j !== i) { let dx = xs[j] - xs[i], dy = ys[j] - ys[i]; if (torus) { dx = wrapDelta(dx, w); dy = wrapDelta(dy, h); } const d = dx * dx + dy * dy; if (d < b) b = d; } s += Math.sqrt(b); }
-    return (s / n) / (0.5 / Math.sqrt(n / (w * h)));
-  }
-
   const source = () => '(' + noemaSpaceKitModule.toString() + ')(self);';
   root.NoemaSpaceKit = Object.freeze({
-    MAX_N, MAX_N1, MAX_CELLS, GHOST, SIDES: Object.freeze(SIDES.slice()), BC_TYPES: Object.freeze(BC_TYPES.slice()), RAMP: Object.freeze(RAMP.slice()), SCHEMES: Object.freeze(SCHEMES.slice()),
+    MAX_N, MAX_CELLS, GHOST, SIDES: Object.freeze(SIDES.slice()), BC_TYPES: Object.freeze(BC_TYPES.slice()), RAMP: Object.freeze(RAMP.slice()), SCHEMES: Object.freeze(SCHEMES.slice()),
     grid, field, interior, nearest, sample, fillGhosts, fixedMask, laplacian, gradient, thomas, thomasPeriodic,
     ftcsLimit, diffusionNumber, courant, waveCourant, amplification, vonNeumann, LIMITERS: Object.freeze(Object.assign({}, LIMITERS)),
     offsets, wrapCell, latticeNeighbours, wrapDelta, buckets, adjacency, ring, erdosRenyi, wattsStrogatz, barabasiAlbert, latticeEdges, circleLayout,
-    classOf, heatmap, contour, hexCube, hexDist, hexOffsets, hexCentre, dist, distance, walk, msd, latticeWeights, bandWeights, moranI, gearyC, ripleyK, clarkEvans, source,
+    classOf, heatmap, contour, source,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
