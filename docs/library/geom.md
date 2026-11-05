@@ -134,7 +134,7 @@ Types: P point · L line (S segment, R ray) · C circle · K conic · G polygon 
 | `transform` | `{kind, of, …}` | the type of `of` | `translate` {by: [P, P]} \| {dx, dy}; `rotate` {center, angle, deg?}; `reflect` {line} \| {center}; `dilate` {center, factor}; `invert` {circle} (a line → a circle through the centre, a circle → a circle or a line); `shear` {k}; `affine` {m: 6 numbers}; `projective` {from: 4 points, to: 4 points} (the homography by the DLT; Hartley & Zisserman 2004). Affine and projective maps turn circles into conics |
 | `locus` | `{of: P}` | U | the path of a point over the sweep, broken where it is undefined or jumps |
 | `bezier`, `geodesic` | `[P…]` (2–20); `[P, P]` | U | de Casteljau 1959; the Poincaré-disk geodesic (the arc orthogonal to the unit circle; Poincaré 1882) |
-| `delaunay`, `voronoi` | `[P…]` | T | Bowyer 1981 / Watson 1981 with the exact `incircle`; the Voronoi edges are the dual (circumcentres of adjacent triangles) |
+| `delaunay`, `voronoi` | `[P…]` | T | Bowyer 1981 / Watson 1981 with the exact `incircle`; the Voronoi edges are the dual (circumcentres of adjacent triangles joined; a hull edge gives a ray outwards) |
 
 ## 3. Intersections and their classes
 
@@ -143,7 +143,7 @@ Types: P point · L line (S segment, R ray) · C circle · K conic · G polygon 
 | line–line | homogeneous coordinates, the cross product | `parallel` (a point at infinity, `defined` 0), `coincident` |
 | line–circle | the foot of the perpendicular and h = √(r² − d²) | two points; `tangent` (one, when \|d − r\| ≤ tol·S); `no-intersection` |
 | circle–circle | the radical axis, then line–circle | two; `tangent` (external or internal); `contained`, `separate`, `concentric`, `coincident` |
-| with a conic | the pencil of the two conics: a cubic for its degenerate member (Cardano, with the trigonometric branch), the pair of lines, then line–conic | up to four points, ordered by x then y |
+| with a conic | the pencil A + λB of the two conics: det = 0 is a cubic in λ (Cardano, with the trigonometric branch), its degenerate member split into two lines, then line–conic (Richter-Gebert, *Perspectives on Projective Geometry*, 2011, §11.4) | up to four points |
 
 Segments and rays keep only the points on them. A `pick` that names a point (`near:X`) uses the distance to it; `other:X` takes a
 point that is not X (the second point of a circle through X).
@@ -161,10 +161,10 @@ point that is not X (the second point of a circle through X).
 | `area`, `perimeter` | G \| C \| K \| P P P … | the shoelace formula (Gauss), unsigned unless `signed` (counter-clockwise > 0); πr², πab |
 | `radius`, `slope`, `eccentricity` | C; L; K \| C | |
 | `conicType` | K \| C | 1 ellipse (a circle too), 2 parabola, 3 hyperbola, 0 degenerate |
-| `count` | two of L S R C K | the number of intersection points (−1 when they coincide) |
+| `count` | two of L S R C K | the number of intersection points (NaN when they coincide) |
 | `power` | P C | d² − r² (Steiner 1826) |
 | `orient` | P P P | the exact sign: 1 counter-clockwise, −1 clockwise, 0 collinear |
-| `inside` | P G \| P C | 1 strictly inside (the winding number; Hormann & Agathos 2001), 0 otherwise |
+| `inside` | P G \| P C | 1 strictly inside (the winding number, Hormann & Agathos 2001; a point on the boundary is not inside), 0 otherwise |
 | `crossRatio` | P P P P | (A, B; C, D) on a line |
 | asserts | | 1 true, 0 false (tolerant, §1.2): `collinear` (P P P …), `concyclic` (P×4), `concurrent` (L×3), `parallel`, `perpendicular` (L L), `equal` (P P P P: \|AB\| = \|CD\|), `on` (P and any curve), `tangent` (line or circle, circle) |
 | `defined` | any | 1 when the object exists |
@@ -202,7 +202,7 @@ Every code is also a `flag` (with `at` for the object it is about).
 | `inversion-centre` | inverting the centre of inversion (it goes to infinity) |
 | `conic-degenerate`, `conic-not-unique` | five points on a pair of lines; four of them collinear (a pencil of conics) |
 | `no-solution` | Apollonius with no circle of those signs |
-| `self-intersecting`, `not-convex`, `not-collinear` | a polygon that crosses itself; a clip polygon that is not convex; a cross-ratio off one line |
+| `self-intersecting`, `not-convex`, `not-collinear` | a polygon that crosses itself; a clip polygon that is not convex; a Simson point off the circumcircle, or a cross-ratio of points off one line |
 | `outside-disk` | a geodesic point outside the Poincaré disk |
 | `huge-coordinates` | a constructed point beyond 1e8·S (nearly parallel lines) |
 | `locus-gaps` | the locus has several pieces |
@@ -218,7 +218,7 @@ Every code is also a `flag` (with `at` for the object it is about).
 - `always` is evidence, not a proof: a false statement that holds on a set of measure zero passes. 20 random placements make an
   accidental pass of a false polynomial identity vanishingly unlikely.
 - Delaunay uses a large bounding triangle (1000·S): points nearly cocircular with its corners near the hull may lose a hull
-  triangle. Voronoi edges of unbounded cells are omitted.
+  triangle. The unbounded Voronoi edges are rays outwards, clipped at 10·S.
 - A sweep rebuilds what its loci and series need, so its cost is samples × those objects; the static budget is samples × all
   objects ≤ 200 000.
 
