@@ -1,0 +1,8 @@
+{"title": "RC-Tiefpass",
+ "intro": "Ändern Sie R und C: Die Grenzfrequenz wandert entlang der Verstärkungskurve, und die Sprungantwort wird schneller oder langsamer.",
+ "resistance": "Widerstand R", "capacitance": "Kapazität C",
+ "fcLabel": "Grenzfrequenz fc = 1/(2πRC)", "tauLabel": "Zeitkonstante τ = RC", "errLabel": "Abstand zur Zielfrequenz",
+ "bodeTitle": "Verstärkung des Filters über der Frequenz (Bode-Diagramm)", "frequency": "Frequenz", "gain": "Verstärkung", "gainLine": "Verstärkung des Filters",
+ "fcMark": "fc", "targetMark": "Ziel", "minus3": "−3 dB",
+ "stepTitle": "Ausgang, wenn der Eingang von 0 auf 1 V springt", "time": "Zeit", "voltage": "Ausgang", "tauMark": "τ",
+ "checkFc": "Die Grenzfrequenz liegt nah genug am Ziel.", "checkC": "C ist weiterhin 100 nF."}
