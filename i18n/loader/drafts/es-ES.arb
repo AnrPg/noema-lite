@@ -1,0 +1,4 @@
+{
+  "@@locale": "es-ES",
+  "loader.export.missingActivities": "{n, plural, one {# elemento interactivo se ha quedado} many {# elementos interactivos se han quedado} other {# elementos interactivos se han quedado}} fuera del paquete: el archivo .h5p no está en este dispositivo ({items}). Abre la asignatura una vez con conexión y vuelve a exportarla."
+}

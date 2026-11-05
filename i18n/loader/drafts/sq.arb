@@ -1,0 +1,4 @@
+{
+  "@@locale": "sq",
+  "loader.export.missingActivities": "{n, plural, one {# element ndërveprues mbeti} other {# elemente ndërvepruese mbetën}} jashtë paketës: skedari .h5p nuk është në këtë pajisje ({items}). Hape lëndën një herë në linjë, pastaj eksportoje përsëri."
+}

@@ -1,0 +1,4 @@
+{
+  "@@locale": "de",
+  "loader.export.missingActivities": "{n, plural, one {# interaktives Element fehlt} other {# interaktive Elemente fehlen}} im Paket: Die .h5p-Datei ist nicht auf diesem Gerät ({items}). Öffne das Fach einmal online und exportiere es dann erneut."
+}

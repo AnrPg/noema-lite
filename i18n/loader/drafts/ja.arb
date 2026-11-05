@@ -1,0 +1,4 @@
+{
+  "@@locale": "ja",
+  "loader.export.missingActivities": "{n, plural, other {# 件のインタラクティブ項目}}をパッケージに含められませんでした。この端末に .h5p ファイルがありません（{items}）。一度オンラインで科目を開いてから、もう一度エクスポートしてください。"
+}
