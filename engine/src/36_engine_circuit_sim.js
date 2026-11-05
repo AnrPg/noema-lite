@@ -58,7 +58,7 @@
               if (o.ac !== undefined) {   // the AC analysis: a Bode plot's axes, or one number of it
                 const A = AC();
                 if (o.ac === 'f') { r[o.id] = A.f.slice(); continue; }
-                const a = A.nodes[o.node], b = o.ref !== undefined && A.nodes[o.ref] ? A.nodes[o.ref] : null;
+                const gz = nm => nm === 'gnd' || nm === '0', a = gz(o.node) ? { re: A.f.map(() => 0), im: A.f.map(() => 0) } : A.nodes[o.node], b = o.ref !== undefined && !gz(o.ref) ? A.nodes[o.ref] : null;   // either ground name reads 0
                 const st = C.acStats(A.f, a.re.map((v, i) => v - (b ? b.re[i] : 0)), a.im.map((v, i) => v - (b ? b.im[i] : 0)));
                 const curve = o.ac === 'db' ? st.db : o.ac === 'phase' ? st.phase : o.ac === 'mag' ? st.db.map(d => Math.pow(10, d / 20)) : null;
                 if (o.kind === 'series') { r[o.id] = curve ? curve.slice() : []; continue; }

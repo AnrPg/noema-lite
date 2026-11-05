@@ -523,6 +523,7 @@
     if (p.mode !== undefined && !(meter && ACT.MODES.includes(p.mode))) return false;
     if (p.zin !== undefined && !(p.kind === 'V' && isNum(p.zin) && p.zin >= 0)) return false;
     for (const k of ['tEnd', 'dt', 'tStart']) if (p[k] !== undefined && !(meter && isNum(p[k]) && (k === 'tStart' ? p[k] >= 0 : p[k] > 0))) return false;
+    if ((p.dt !== undefined || p.tStart !== undefined) && (p.tEnd === undefined || (p.tStart !== undefined && !(p.tStart < p.tEnd)))) return false;   // a window: tEnd, and tStart below it
     if (p.kind === 'V' || p.kind === 'R') return endpointOk(c, p.a) && (p.b === undefined || endpointOk(c, p.b));
     if (p.kind === 'I') { const e = typeof p.element === 'string' ? c.els.get(p.element) : null; return !!e && (p.pin === undefined || (Number.isInteger(p.pin) && p.pin >= 0 && p.pin < e.n.length)); }
     return false;
@@ -744,6 +745,7 @@
         const te = x.tEnd === undefined ? null : numOrExpr(x.tEnd, names, w + '.tEnd', E, true), dt = x.dt === undefined ? null : numOrExpr(x.dt, names, w + '.dt', E, true);
         if ('tStart' in x) numOrExpr(x.tStart, names, w + '.tStart', E, false);
         if (('dt' in x || 'tStart' in x) && !('tEnd' in x)) E.push(`${w}: the multimeter's averaging window needs tEnd`);
+        if (isNum(x.tStart) && isNum(te) && !(x.tStart < te)) E.push(`${w}: the multimeter's averaging window needs tStart below tEnd`);
         if (stepsOver(te, dt)) E.push(`${w}: tEnd / dt is more than ${L.steps} steps`);
       }
       if (scope) {

@@ -715,6 +715,7 @@ def _probe_ok(c, p):
     if "zin" in p and not (p.get("kind") == "V" and _num(p["zin"]) and p["zin"] >= 0): return False
     for k in ("tEnd", "dt", "tStart"):
         if k in p and not (meter and _num(p[k]) and (p[k] >= 0 if k == "tStart" else p[k] > 0)): return False
+    if ("dt" in p or "tStart" in p) and ("tEnd" not in p or ("tStart" in p and not p["tStart"] < p["tEnd"])): return False   # a window: tEnd, and tStart below it
     if p.get("kind") in ("V", "R"): return _endpoint_ok(c, p.get("a")) and ("b" not in p or _endpoint_ok(c, p["b"]))
     if p.get("kind") == "I":
         e = c["els"].get(p.get("element")) if isinstance(p.get("element"), str) else None
@@ -964,6 +965,7 @@ def check_bench(spec, names, seen, E, key, eng=CIRCUIT):
             dt = None if "dt" not in x else _num_or_expr(x["dt"], names, w + ".dt", E, True)
             if "tStart" in x: _num_or_expr(x["tStart"], names, w + ".tStart", E, False)
             if ("dt" in x or "tStart" in x) and "tEnd" not in x: E.append(f"{w}: the multimeter's averaging window needs tEnd")
+            if _num(x.get("tStart")) and _num(te) and not x["tStart"] < te: E.append(f"{w}: the multimeter's averaging window needs tStart below tEnd")
             if _steps_over(te, dt): E.append(f"{w}: tEnd / dt is more than {L['steps']} steps")
         if scope:
             te = None

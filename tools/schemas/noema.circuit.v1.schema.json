@@ -33,7 +33,7 @@
     "elements": { "type": "array", "maxItems": 200, "items": { "$ref": "#/$defs/element" } },
     "pickup": {
       "oneOf": [
-        { "type": "boolean", "description": "false: no pickup anywhere" },
+        { "const": false, "description": "false: no pickup anywhere (leave pickup out for the default)" },
         {
           "type": "object",
           "additionalProperties": false,
@@ -141,13 +141,13 @@
           "properties": {
             "noise": {
               "type": "object",
-              "required": ["rms"],
+              "required": ["rms", "bw"],
               "additionalProperties": false,
               "properties": {
                 "rms": { "$ref": "#/$defs/quantity" },
-                "bw": { "$ref": "#/$defs/quantity", "description": "bandwidth, Hz" },
+                "bw": { "$ref": "#/$defs/quantity", "description": "bandwidth, Hz (> 0)" },
                 "offset": { "$ref": "#/$defs/quantity" },
-                "seed": { "type": "integer" }
+                "seed": { "type": "number" }
               }
             }
           }

@@ -240,7 +240,7 @@ switch it off (the first model, kept only for comparisons in `tests/circuit2.js`
   every new numeric param can drift (a dried electrolytic: `C` factor 0.1; an aged op-amp: `gbw` factor 0.3).
 
 ### 9.2 Waveforms
-`{noise: {rms, bw = 1000, offset = 0, seed?}}`: seeded band-limited Gaussian noise (a sensor's noise, an input to filter).
+`{noise: {rms, bw, offset = 0, seed?}}` (bw in Hz, required): seeded band-limited Gaussian noise (a sensor's noise, an input to filter).
 
 ### 9.3 Analysis
 AC small-signal analysis linearises every device at the DC operating point and solves the complex MNA (C → jωC, L → jωL, a line →

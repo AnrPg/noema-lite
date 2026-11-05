@@ -425,6 +425,7 @@
           runner.measure(prep(base()), m.probe, r => {
             if (closed) return;
             e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' || r.kind === 'bode' ? r : r.kind === 'log' && !r.error ? { kind: 'log', counts: logCounts(r) }
+              : r.error ? { kind: r.kind, error: r.error }
               : r.kind === 'T' ? { kind: 'T', value: r.value, min: r.min, max: r.max } : r.kind === 'clock' ? { kind: 'clock', value: r.value, err: r.err }
               : { kind: r.kind, value: r.value, error: r.error, ...(r.mode ? { mode: r.mode } : {}) }) : { error: 'none' };
             paintLog(); showFace(e); saveSoon();

@@ -171,5 +171,14 @@ const codes = (nl, lvl) => C.check(nl, V2).filter(p => !lvl || p.level === lvl).
   const tl = mk([{ id: 'T1', type: 'TLINE', n: ['a', 'b'], params: { td: 1e-9 } }, { id: 'R', type: 'R', n: ['a', 'gnd'], value: 1 }, { id: 'R2', type: 'R', n: ['b', 'gnd'], value: 1 }], ['a', 'b']);
   ok(C.checkFaults(tl, [{ element: 'T1', kind: 'drift', param: 'z0', factor: 2 }], V2).length === 0 && C.checkFaults(tl, [{ element: 'T1', kind: 'drift', param: 'body' }], V2).length === 1, 'faults on the new parts');
 }
+{ // review fixes: a Bode probe on a pin reference, an empty meter window refused, the AC adapter reading either ground name
+  const nl = mk([{ id: 'V1', type: 'V', n: ['in', 'gnd'], value: 1 }, { id: 'R1', type: 'R', n: ['in', 'out'], value: 1000 }, { id: 'C1', type: 'C', n: ['out', 'gnd'], value: 1e-6 }], ['in', 'out']);
+  const s = sim2(nl), q = { kind: 'bode', source: 'V1', fStart: 10, fStop: 1e4, points: 61 };
+  const byName = s.measure({ ...q, node: 'out' }), byPin = s.measure({ ...q, node: '@C1.0' }), byRef = s.measure({ ...q, node: '@R1.0', ref: '@C1.0' });
+  ok(Math.abs(byPin.stats.f3db - byName.stats.f3db) < 1e-9 && Math.abs(byName.stats.f3db - 159.15) < 2 && byRef.stats.fLow3db > 100 && byRef.stats.fLow3db < 220, `a Bode probe on a pin reference reads the same curve (f3db ${byName.stats.f3db.toFixed(1)} Hz; across R1: a high-pass at ${byRef.stats.fLow3db.toFixed(1)} Hz)`);
+  const pw = mk([{ id: 'V1', type: 'V', n: ['in', 'gnd'], value: { pwm: { v: 5, freq: 1000, duty: 0.5 } } }, { id: 'R1', type: 'R', n: ['in', 'gnd'], value: 1000 }], ['in']);
+  let code = null; try { sim2(pw).measure({ kind: 'V', a: 'in', tEnd: 0.01, dt: 1e-5, tStart: 0.01 }); } catch (e) { code = e.code; }
+  ok(code === 'probe', `a meter window that averages nothing (tStart = tEnd) is refused (code ${code})`);
+}
 console.log(fails ? `\n${fails} of ${n} failed` : `\ncircuit physics: ${n} checks passed`);
 process.exit(fails ? 1 : 0);

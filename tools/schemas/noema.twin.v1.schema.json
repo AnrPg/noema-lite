@@ -517,7 +517,23 @@
             "sim.duration",
             "sim.samples",
             "sim.trace",
-            "sim.maxEvents"
+            "sim.maxEvents",
+            "battery.tempCap",
+            "env.temp",
+            "env.swing",
+            "env.cycle",
+            "clock.ppm",
+            "clock.tempco",
+            "clock.t0",
+            "clock.guard",
+            "clock.resync",
+            "network.nodes",
+            "network.period",
+            "network.airtime",
+            "network.jitter",
+            "network.capture",
+            "network.spread",
+            "network.offset"
           ]
         },
         "expr": {

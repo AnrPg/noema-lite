@@ -933,12 +933,13 @@
       const src = typeof o.source === 'string' ? ck.byId.get(o.source) : null;
       const f0 = num(o.fStart), f1 = num(o.fStop), np = o.points === undefined ? 200 : Math.round(num(o.points)), lin = o.scale === 'lin';
       if (!src || (src.type !== 'V' && src.type !== 'I') || !(f0 > 0) || !(f1 > f0) || !(np >= 2 && np <= 1000)) throw fail('bad-args');
-      const key = `${o.source}|${f0}|${f1}|${np}|${lin}`;
+      const idx = Array.isArray(o.idx) ? o.idx.filter(j => Number.isInteger(j) && j >= 0 && j < S) : [];   // extra unknowns to read (a pin reference's board node)
+      const key = `${o.source}|${f0}|${f1}|${np}|${lin}|${idx.join(',')}`;
       if (acCache && acCache.key === key) return acCache.r;
       const { x, ctx } = dcX('avg');
       stamp(Object.assign({}, ctx, { gsh: 0, src: 1 }), x);
       const A0 = Float64Array.from(A), Re = new Float64Array(S * S), Im = new Float64Array(S * S), br = new Float64Array(S), bi = new Float64Array(S), xr = new Float64Array(S), xi = new Float64Array(S), pm = new Int32Array(S);
-      const f = [], nodes = {}; for (const nm of ck.outNames) nodes[nm] = { re: [], im: [] };
+      const f = [], nodes = {}, at = {}; for (const nm of ck.outNames) nodes[nm] = { re: [], im: [] }; for (const j of idx) at[j] = { re: [], im: [] };
       const jG = (a, c, b) => { if (a >= 0) { Im[a * S + a] += b; if (c >= 0) { Im[a * S + c] -= b; Im[c * S + a] -= b; } } if (c >= 0) Im[c * S + c] += b; };
       for (let i = 0; i < np; i++) {
         const fr = lin ? f0 + (f1 - f0) * i / (np - 1) : f0 * Math.pow(f1 / f0, i / (np - 1)), w = 2 * Math.PI * fr;
@@ -959,8 +960,9 @@
         csubst(Re, Im, S, pm, br, bi, xr, xi);
         f.push(fr);
         for (const nm of ck.outNames) { const j = ck.resolveName(nm); nodes[nm].re.push(j < 0 ? 0 : xr[j]); nodes[nm].im.push(j < 0 ? 0 : xi[j]); }
+        for (const j of idx) { at[j].re.push(xr[j]); at[j].im.push(xi[j]); }
       }
-      const r = { f, nodes };
+      const r = { f, nodes, at };
       acCache = { key, r };
       return r;
     }
@@ -1089,7 +1091,7 @@
       };
       const nz = (v, d) => (v === undefined ? d : num(v));
       function windowOf(s) {
-        if (probe.tEnd !== undefined) { const te = num(probe.tEnd); return { tEnd: te, dt: nz(probe.dt, te / 2000), tStart: nz(probe.tStart, te / 2) }; }
+        if (probe.tEnd !== undefined) { const te = num(probe.tEnd), w = { tEnd: te, dt: nz(probe.dt, te / 2000), tStart: nz(probe.tStart, te / 2) }; if (!(w.tStart >= 0 && w.tStart < w.tEnd)) throw fail('probe'); return w; }
         if (!s.ck.varying) return null;
         let P = 0; for (const e of s.ck.sources) if (e.per > P) P = e.per;
         return P > 0 ? { tEnd: 50 * P, dt: P / 200, tStart: 30 * P } : null;
@@ -1145,10 +1147,11 @@
           return shifted(s, () => s.measure(q));
         }
         case 'bode': {
-          const r = inner.ac({ source: probe.source, fStart: probe.fStart, fStop: probe.fStop, points: probe.points });
           const na = probe.node, nb = probe.ref === undefined ? 'gnd' : probe.ref;
-          const pick = nm => { if (r.nodes[nm]) return r.nodes[nm]; const i = inner.where(nm); throw fail('unknown-node', { ref: nm, i }); };
-          const A = pick(na), B = isGnd(nb) ? null : pick(nb), re = A.re.map((v, i) => v - (B ? B.re[i] : 0)), im = A.im.map((v, i) => v - (B ? B.im[i] : 0));
+          const ia = isGnd(na) ? -1 : inner.where(na), ib = isGnd(nb) ? -1 : inner.where(nb);   // names, test points and pin references (on the faulted board)
+          const r = inner.ac({ source: probe.source, fStart: probe.fStart, fStop: probe.fStop, points: probe.points, idx: [ia, ib].filter(j => j >= 0) });
+          const n = r.f.length, zero = { re: new Array(n).fill(0), im: new Array(n).fill(0) }, pick = j => (j < 0 ? zero : r.at[j]);
+          const A = pick(ia), B = pick(ib), re = A.re.map((v, i) => v - B.re[i]), im = A.im.map((v, i) => v - B.im[i]);
           const st = acStats(r.f, re, im);
           return { kind: 'bode', f: r.f.slice(), db: st.db, phase: st.phase, stats: { dcDb: st.dcDb, peakDb: st.peakDb, fPeak: st.fPeak, f3db: st.f3db, fLow3db: st.fLow3db, fUnity: st.fUnity, pm: st.pm } };
         }

@@ -323,6 +323,9 @@ Object.assign(ccases, {
   'circuit: a lead label missing': p => { bn(p).instruments.push({ kind: 'scope', tEnd: 0.001, leads: [{ label: 'leadNope', lead: 0 }] }); },
   'circuit: a bode with no source': p => { bn(p).instruments.push({ kind: 'bode', source: 'R1', fStart: 1, fStop: 1e5 }); },
   'circuit: a bode without fStart': p => { bn(p).instruments.push({ kind: 'bode', source: 'V1', fStop: 1e5 }); },
+  'circuit: a probe window that averages nothing': p => { sp(p).outputs = [{ id: 'vm', kind: 'scalar', probe: { kind: 'V', a: 'a', tEnd: 0.01, tStart: 0.01 } }]; },
+  'circuit: a probe window without tEnd': p => { sp(p).outputs = [{ id: 'vm', kind: 'scalar', probe: { kind: 'V', a: 'a', dt: 1e-5 } }]; },
+  'circuit: a bench meter window that averages nothing': p => { bn(p).instruments[0].tEnd = 0.01; bn(p).instruments[0].tStart = 0.02; },
   'circuit: fStart on the scope': p => { bn(p).instruments.push({ kind: 'scope', tEnd: 0.001, fStart: 1 }); },
 });
 
