@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "fr",
+ "status": "draft",
+ "t": {
+  "Replikation#1": {
+   "t": "réplication",
+   "src": "1as8vud12j"
+  },
+  "beginnen#1": {
+   "t": "commence",
+   "src": "8mw989g7or"
+  },
+  "Replikationsursprung#1": {
+   "t": "origine de réplication",
+   "src": "f5tx7s1ppj"
+  },
+  "Helikase#1": {
+   "t": "hélicase",
+   "src": "9syu46dbv6"
+  },
+  "entwinden#1": {
+   "t": "déroule",
+   "src": "1onv4zd4u5"
+  },
+  "Doppelhelix#1": {
+   "t": "double hélice",
+   "src": "1guken1d48"
+  },
+  "Polymerase#1": {
+   "t": "polymérase",
+   "src": "kxqaea2brk"
+  },
+  "synthetisieren#1": {
+   "t": "synthétise",
+   "src": "1k1pfm61jh"
+  },
+  "neu#1": {
+   "t": "nouveau",
+   "src": "1vr5npdui7"
+  },
+  "Strang#1": {
+   "t": "brin",
+   "src": "1mzmbr144m"
+  },
+  "jeder#1": {
+   "t": "chaque",
+   "src": "1ojbjg01qm"
+  },
+  "Molekül#1": {
+   "t": "molécule",
+   "src": "lzjplcjgrg"
+  },
+  "behalten#1": {
+   "t": "conserve",
+   "src": "121qb5e1im"
+  },
+  "alt#1": {
+   "t": "ancien (parental)",
+   "src": "q2mmi313fm"
+  },
+  "semikonservativ#1": {
+   "t": "semi-conservative",
+   "src": "ascyu21028"
+  },
+  "Leitstrang#1": {
+   "t": "brin avancé",
+   "src": "15og1i11hi"
+  },
+  "kontinuierlich#1": {
+   "t": "continu",
+   "src": "7xts7pv8a5"
+  },
+  "Folgestrang#1": {
+   "t": "brin retardé",
+   "src": "o874wnb9px"
+  },
+  "Okazaki-Fragment#1": {
+   "t": "fragment d'Okazaki",
+   "src": "gj1sq61ajx"
+  }
+ },
+ "sections": {
+  "ch01-s01": "L'ADN se copie à partir des origines de réplication : l'hélicase déroule la double hélice et la polymérase construit les nouveaux brins, l'un en continu, l'autre en fragments d'Okazaki."
+ }
+}

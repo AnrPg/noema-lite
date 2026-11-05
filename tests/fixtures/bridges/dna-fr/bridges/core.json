@@ -1,0 +1,282 @@
+{
+ "format": "noema-bridge-core",
+ "v": 1,
+ "pack": "dna-fr",
+ "source": "fr",
+ "entries": [
+  {
+   "k": "réplication",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "copying DNA before a cell divides"
+    }
+   ],
+   "key": true
+  },
+  {
+   "k": "commencer",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to begin"
+    }
+   ],
+   "forms": [
+    "commence"
+   ]
+  },
+  {
+   "k": "origine de réplication",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a place on the DNA where copying starts"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "origines de réplication"
+   ]
+  },
+  {
+   "k": "hélicase",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the enzyme that opens the double helix"
+    }
+   ],
+   "key": true
+  },
+  {
+   "k": "dérouler",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to unwind"
+    }
+   ],
+   "forms": [
+    "déroule"
+   ]
+  },
+  {
+   "k": "double hélice",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the two twisted strands of DNA"
+    }
+   ],
+   "key": true
+  },
+  {
+   "k": "polymérase",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the enzyme that builds the new strand"
+    }
+   ],
+   "key": true
+  },
+  {
+   "k": "synthétiser",
+   "pos": "VERB",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to build (a molecule) from parts"
+    }
+   ],
+   "forms": [
+    "synthétise",
+    "synthétisé"
+   ]
+  },
+  {
+   "k": "nouveau",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "new"
+    }
+   ],
+   "forms": [
+    "nouvelle",
+    "nouveaux",
+    "nouvelles"
+   ]
+  },
+  {
+   "k": "brin",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "one strand of the DNA molecule"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "brins"
+   ]
+  },
+  {
+   "k": "chaque",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "each"
+    }
+   ]
+  },
+  {
+   "k": "molécule",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a molecule"
+    }
+   ],
+   "forms": [
+    "molécules"
+   ]
+  },
+  {
+   "k": "conserver",
+   "pos": "VERB",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "to keep"
+    }
+   ],
+   "forms": [
+    "conserve"
+   ]
+  },
+  {
+   "k": "ancien",
+   "pos": "ADJ",
+   "band": 1,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "old (here: the parent strand)"
+    }
+   ],
+   "forms": [
+    "ancienne"
+   ]
+  },
+  {
+   "k": "semi-conservatif",
+   "pos": "ADJ",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "each copy keeps one old strand"
+    }
+   ],
+   "key": true,
+   "forms": [
+    "semi-conservative"
+   ]
+  },
+  {
+   "k": "brin avancé",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the strand made in one piece"
+    }
+   ],
+   "key": true
+  },
+  {
+   "k": "continu",
+   "pos": "ADJ",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "without breaks"
+    }
+   ]
+  },
+  {
+   "k": "brin retardé",
+   "pos": "NOUN",
+   "band": 3,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "the strand made in pieces"
+    }
+   ],
+   "key": true
+  },
+  {
+   "k": "fragment",
+   "pos": "NOUN",
+   "band": 2,
+   "senses": [
+    {
+     "id": "1",
+     "gloss": "a piece, a fragment"
+    }
+   ],
+   "forms": [
+    "fragments"
+   ]
+  }
+ ],
+ "keep": [
+  "ADN",
+  "Okazaki"
+ ],
+ "sections": {
+  "ch01-s01": {
+   "terms": [
+    "réplication",
+    "origine de réplication",
+    "hélicase",
+    "double hélice",
+    "polymérase",
+    "brin",
+    "semi-conservatif",
+    "brin avancé",
+    "brin retardé"
+   ]
+  }
+ },
+ "anchors": []
+}

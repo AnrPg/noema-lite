@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "de",
+ "status": "draft",
+ "t": {
+  "αντιγραφή#1": {
+   "t": "Replikation",
+   "src": "zqpp0z2teu"
+  },
+  "ξεκινώ#1": {
+   "t": "beginnt",
+   "src": "f04wve8zqa"
+  },
+  "θέση έναρξης#1": {
+   "t": "Replikationsursprung",
+   "src": "1ovz2kbjcv"
+  },
+  "ελικάση#1": {
+   "t": "Helikase",
+   "src": "11onf651ga"
+  },
+  "ξετυλίγω#1": {
+   "t": "entwindet",
+   "src": "1xo7rmb1ui"
+  },
+  "διπλή έλικα#1": {
+   "t": "Doppelhelix",
+   "src": "mmnvvxavsh"
+  },
+  "πολυμεράση#1": {
+   "t": "Polymerase",
+   "src": "6m5b827ev8"
+  },
+  "συνθέτω#1": {
+   "t": "synthetisiert",
+   "src": "18jx8cv1hw"
+  },
+  "νέος#1": {
+   "t": "neu",
+   "src": "1q3xvsoqtv"
+  },
+  "αλυσίδα#1": {
+   "t": "Strang",
+   "src": "1l43idi1ge"
+  },
+  "μόριο#1": {
+   "t": "Molekül",
+   "src": "1yasuq5iqf"
+  },
+  "κρατώ#1": {
+   "t": "behält",
+   "src": "13gtu4vqnd"
+  },
+  "παλιός#1": {
+   "t": "alt (Elternstrang)",
+   "src": "1337upn1bs"
+  },
+  "ημισυντηρητικός#1": {
+   "t": "semikonservativ",
+   "src": "1ibya051c1"
+  },
+  "συνεχής#1": {
+   "t": "Leitstrang (kontinuierlich)",
+   "src": "rf4vs8qpvn"
+  },
+  "κατεύθυνση#1": {
+   "t": "Richtung",
+   "src": "fh6tw41qnk"
+  },
+  "ασυνεχής#1": {
+   "t": "Folgestrang (diskontinuierlich)",
+   "src": "1qh6bs9p5w"
+  },
+  "τμήμα#1": {
+   "t": "Fragment",
+   "src": "zfqwxq1j53"
+  },
+  "είδος#1": {
+   "t": "Art",
+   "src": "1dhiv011bk"
+  }
+ },
+ "sections": {
+  "ch01-s01": "Die DNA wird von den Replikationsursprüngen aus kopiert: Die Helikase entwindet die Doppelhelix, die Polymerase baut die neuen Stränge, den einen kontinuierlich, den anderen in Okazaki-Fragmenten."
+ }
+}

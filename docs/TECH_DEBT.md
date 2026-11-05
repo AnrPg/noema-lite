@@ -125,5 +125,6 @@ append.
 **Think first:** the new patch kind and its validator rule first; then one pilot chapter; the checker already only warns
 on packs without `subject.authoring.rules`, so nothing breaks meanwhile.
 They also lack the languages every new pack gets since 2026-10-21 (docs/PIPELINES.md §4b): full translations into
-English, Greek and Russian (Databricks: el, ru) and 文A bridges into Greek, Russian and Arabic — the Databricks bridges
+English, Greek and Russian, and since 2026-11-05 German and French too (Databricks: el, ru, de, fr), and 文A bridges for
+every pair into English, Greek, Russian, Arabic, German and French (Databricks has en → el, ru, ar only) — the Databricks bridges
 of PR #29 are drafts measured before the everyday-word minimum (`tools/bridge.py require`).

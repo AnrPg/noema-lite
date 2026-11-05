@@ -126,7 +126,7 @@ def local_check(kind, d, run):
             r = subprocess.run([sys.executable, find("make_pack.py"), d, td], capture_output=True, text=True)
         tail = (r.stdout + r.stderr).strip().splitlines()[-25:]
         return r.returncode == 0, tail
-    if kind == "translations":   # a full translation of every chapter into en, el, ru minus the pack's language (pack_rules.json "languages")
+    if kind == "translations":   # a full translation of every chapter into en, el, ru, de, fr minus the pack's language (pack_rules.json "languages")
         from noema_lib import required_locales
         s = rj(os.path.join(d, "subject.json")) or {}; need, _b = required_locales(s.get("language", "en"))
         chs = sorted(chapters_of(d, "chapters")); ok = bool(chs)
@@ -139,7 +139,7 @@ def local_check(kind, d, run):
             lack = [k for k in ("title", "appTitle", "description") if s.get(k) and not name.get(k)]
             if lack: ok = False; L.append(f"{loc}: the subject's name is not translated — {', '.join(lack)} (subject.json \"i18n\": {{\"{loc}\": {{\"title\", \"description\", \"hero\", …}}}})")
         return ok, L + ["each is checked against its chapter by make_pack.py (step checks)"]
-    if kind == "bridges":   # every pair (own language and each translation → en, el, ru, ar minus the language read), with enough of the content and everyday words
+    if kind == "bridges":   # every pair (own language and each translation → en, el, ru, ar, de, fr minus the language read), with enough of the content and everyday words
         r = subprocess.run([sys.executable, find("bridge.py"), "require", d], capture_output=True, text=True)
         return r.returncode == 0, (r.stdout + r.stderr).strip().splitlines()[-20:]
     if kind == "activities":   # interactive activities (docs/INTERACTIVE.md): none is fine; else the lint, then the browser test where Node + Playwright are here

@@ -90,8 +90,8 @@ exercises of the sources (`sourceQuestions`, Q3) and passes every check of §4 l
 | write | `validate.py` on the chapters |
 | blind_solve | `review/chNN.json` `blind`: every exercise solved without the key, every mismatch fixed |
 | review | `review/chNN.json` `rubric` on ≥ 15 learnables (or all) |
-| translate | every chapter has its translation into each of en, el, ru that is not the pack's language, and the subject's name in it (`subject.json` "i18n", §4b) |
-| bridges | `bridge.py require`: every pair — from the pack's language and from each translation into each of en, el, ru, ar other than the language read — with enough coverage (§4b) |
+| translate | every chapter has its translation into each of en, el, ru, de, fr that is not the pack's language, and the subject's name in it (`subject.json` "i18n", §4b) |
+| bridges | `bridge.py require`: every pair — from the pack's language and from each translation into each of en, el, ru, ar, de, fr other than the language read — with enough coverage (§4b) |
 | checks | `make_pack.py` builds the pack with every quality rule (§4) and checks every translation against its chapter |
 | upload | `noema_finish_upload` / `noema_save_pack` accepts it (the same checks again, then the source files and the translations), then `noema_save_bridge` per bridge; blocked by the network → `defer`, retried at the end (§1b) |
 | L.* | the language tools: `validate_lang.py`, `lang_phenomena.py`, `lang_refcheck.py --offline`, `lang_facade.py lint / parity`, `lang_strict_report.js`, `lang_course.py package`, `tests/lang_rules.py` |
@@ -145,11 +145,13 @@ core, think about splitting the node.
 
 | Pack language | Full translations | 文A bridges (every pair: language read → native) |
 | --- | --- | --- |
-| en | el, ru | en→el, en→ru, en→ar · el→en, el→ru, el→ar · ru→en, ru→el, ru→ar |
-| el | en, ru | el→en, el→ru, el→ar · en→el, en→ru, en→ar · ru→en, ru→el, ru→ar |
-| ru | en, el | ru→en, ru→el, ru→ar · en→el, en→ru, en→ar · el→en, el→ru, el→ar |
-| ar | en, el, ru | ar→en, ar→el, ar→ru · and from each translation into the other three |
-| any other | en, el, ru | into en, el, ru, ar · and from each translation into the other three |
+| en | el, ru, de, fr | en→el/ru/ar/de/fr · el→en/ru/ar/de/fr · ru→en/el/ar/de/fr · de→en/el/ru/ar/fr · fr→en/el/ru/ar/de (25) |
+| el | en, ru, de, fr | el→en/ru/ar/de/fr · and from each translation into the other five (25) |
+| ru | en, el, de, fr | ru→en/el/ar/de/fr · and from each translation into the other five (25) |
+| de | en, el, ru, fr | de→en/el/ru/ar/fr · and from each translation into the other five (25) |
+| fr | en, el, ru, de | fr→en/el/ru/ar/de · and from each translation into the other five (25) |
+| ar | en, el, ru, de, fr | ar→en/el/ru/de/fr · and from each translation into the other five (30) |
+| any other | en, el, ru, de, fr | into en, el, ru, ar, de, fr · and from each translation into the other five (31) |
 
 The order matters: **translations first, then the bridges** — a translation's bridges are made from its words
 (`bridge.py … --from <locale>`, docs/BRIDGE.md §2.4), and the check refuses a bridge from a translation that is not saved.

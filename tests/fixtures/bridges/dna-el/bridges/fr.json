@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "fr",
+ "status": "draft",
+ "t": {
+  "αντιγραφή#1": {
+   "t": "réplication",
+   "src": "zqpp0z2teu"
+  },
+  "ξεκινώ#1": {
+   "t": "commence",
+   "src": "f04wve8zqa"
+  },
+  "θέση έναρξης#1": {
+   "t": "origine de réplication",
+   "src": "1ovz2kbjcv"
+  },
+  "ελικάση#1": {
+   "t": "hélicase",
+   "src": "11onf651ga"
+  },
+  "ξετυλίγω#1": {
+   "t": "déroule",
+   "src": "1xo7rmb1ui"
+  },
+  "διπλή έλικα#1": {
+   "t": "double hélice",
+   "src": "mmnvvxavsh"
+  },
+  "πολυμεράση#1": {
+   "t": "polymérase",
+   "src": "6m5b827ev8"
+  },
+  "συνθέτω#1": {
+   "t": "synthétise",
+   "src": "18jx8cv1hw"
+  },
+  "νέος#1": {
+   "t": "nouveau",
+   "src": "1q3xvsoqtv"
+  },
+  "αλυσίδα#1": {
+   "t": "brin",
+   "src": "1l43idi1ge"
+  },
+  "μόριο#1": {
+   "t": "molécule",
+   "src": "1yasuq5iqf"
+  },
+  "κρατώ#1": {
+   "t": "conserve",
+   "src": "13gtu4vqnd"
+  },
+  "παλιός#1": {
+   "t": "ancien (parental)",
+   "src": "1337upn1bs"
+  },
+  "ημισυντηρητικός#1": {
+   "t": "semi-conservative",
+   "src": "1ibya051c1"
+  },
+  "συνεχής#1": {
+   "t": "avancé (continu)",
+   "src": "rf4vs8qpvn"
+  },
+  "κατεύθυνση#1": {
+   "t": "direction",
+   "src": "fh6tw41qnk"
+  },
+  "ασυνεχής#1": {
+   "t": "retardé (discontinu)",
+   "src": "1qh6bs9p5w"
+  },
+  "τμήμα#1": {
+   "t": "fragment",
+   "src": "zfqwxq1j53"
+  },
+  "είδος#1": {
+   "t": "type",
+   "src": "1dhiv011bk"
+  }
+ },
+ "sections": {
+  "ch01-s01": "L'ADN se copie à partir des origines de réplication : l'hélicase déroule la double hélice et la polymérase construit les nouveaux brins, l'un en continu, l'autre en fragments d'Okazaki."
+ }
+}

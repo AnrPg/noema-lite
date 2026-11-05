@@ -128,7 +128,7 @@ licence in `activity.json`.
    Add `"sim"` to the chapter map's `fits.types` (it is opt-in).
 5. **The fallback**: a still picture of the most telling state plus a text (>= 40 characters) that teaches the same idea in
    words; a learner who never sees the activity still learns it.
-6. **Translate** the string tables into every language the pack is read in (its own + en, el, ru), naturally, as for the
+6. **Translate** the string tables into every language the pack is read in (its own + en, el, ru, de, fr), naturally, as for the
    chapters; units and symbols stay.
 7. **Check** (docs/INTERACTIVE.md §11): `activity_lint.py`, `activity_test.py` (with solutions and wrong attempts),
    `activity_preview.py`, then `make_pack.py`.

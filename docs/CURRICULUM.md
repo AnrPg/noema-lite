@@ -321,7 +321,7 @@ on a map.
 
 ## 10. 🌐 A Roadmap in several languages (`c.i18n`)
 A Roadmap is written in one language (`c.language`), like a pack. Its own words are translated **together with its packs,
-into the same languages** (English, Greek and Russian minus its own — docs/PIPELINES.md §4b):
+into the same languages** (English, Greek, Russian, German and French minus its own — docs/PIPELINES.md §4b):
 ```json
 "i18n": { "el": { "title": "…", "goal": "…", "at": "<stamp>",
                   "nodes": { "<step id>": { "title": "…", "summary": "…", "learningGoals": ["…"], "domains": ["…"],

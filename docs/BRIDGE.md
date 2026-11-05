@@ -8,8 +8,9 @@ the pack and without a dictionary of the whole language.
 Code: `engine/wordlink.js` (finding words in a page), `engine/bridge.js` (everything the learner sees),
 `engine/src/36_bridge.css`, `NoemaPackCheck.checkBridge` in `engine/packcheck.js` (shared with the connector), the tool
 `tools/bridge.py`, words `i18n/bridge/` (en; drafts el, ru, fr, ar-EG). Test: `tests/bridge.js`. Pilot: Databricks (English) →
-Greek, Russian, Arabic, chapter 1 complete; test packs in Greek, Russian and Arabic (`tests/fixtures/bridges/`), each with
-bridges into the other three, so **all 12 directions among English, Greek, Russian and Arabic** are tested end to end.
+Greek, Russian, Arabic, chapter 1 complete; test packs in Greek, Russian, Arabic, German and French (`tests/fixtures/bridges/`), each with
+bridges into the other five, so **every direction among English, Greek, Russian, Arabic, German and French** that a pack
+needs (25 per English pack, §2.4) is tested end to end.
 
 ## 1. What the learner gets
 * **The 文A badge** on the subject (picker, Shelf, subject home): `文A RU +2`, the learner's native language first; the
@@ -92,7 +93,7 @@ Next to the subject (`library/subjects/<id>/bridges/`), or next to a pack's `.js
   how rare they are across the pack, so *table* or *file* give way to what the section is about; written with
   `"auto": true`, and a person's list (no `auto`) is kept.
 
-### 2.2 Every language pair (the first four: English, Greek, Russian, Arabic — 12 directions)
+### 2.2 Every language pair (the six bridge languages: English, Greek, Russian, Arabic, German, French)
 Any pack language can be bridged into any other language; the app, the tool and the checks know nothing of particular
 pairs. What differs is how the words of the *source* language are written down:
 
@@ -101,6 +102,8 @@ pairs. What differs is how the words of the *source* language are written down:
 | English | the lemma (`snapshot`), `forms` with the plurals and verb forms the pack uses (`snapshots`, `fails`, `failed`) | case and accents ignored |
 | Greek | the lemma (nominative singular, 1st person present: `αλυσίδα`, `συνθέτω`), `forms` with the cases and persons the pack uses (`αλυσίδας`, `συνθέτει`, `συντίθεται`) | accents, capitals and final ς ignored (`ΑΛΥΣΙΔΑ` = `αλυσίδα`) |
 | Russian | the lemma (`цепь`, `синтезировать`), `forms` with the cases and persons used (`цепи`, `синтезирует`, `синтезируется`) | case ignored, ё = е (`ещё` = `еще`) |
+| German | the lemma (nouns capitalised as written: `Strang`, `synthetisieren`), `forms` with the cases and persons used (`Stränge`, `synthetisiert`); a compound is one entry (`Replikationsursprung`, form `Replikationsursprüngen`), a hyphenated one too (`Okazaki-Fragment`) | case and umlaut marks ignored, ß = ss |
+| French | the word **without** its elision (`hélicase`, not `l'hélicase`), `forms` with plurals, feminines and verb forms (`brins`, `nouvelle`, `synthétise`); phrases as written (`double hélice`, `brin avancé`) | case and accents ignored; an elision l' d' j' m' n' s' t' c' qu' (jusqu' lorsqu' puisqu') in front of a word is recognised by itself (`l'hélicase`, `d'Okazaki`), with ' or ’ |
 | Arabic | the word **without** clitics or article (`سلسلة`, not `السلسلة`), `forms` with broken plurals and other stems (`سلاسل`); phrases as written (`لولب مزدوج`, form `اللولب المزدوج`) | vowel marks, tatweel, ى/ي ignored; the clitics و ف · ب ل ك · ال (لل) in front of a word are recognised by themselves (`والسلسلة`, `بسلسلة`) |
 
 Function words are never entries in any of them (`tools/bridge.py` knows them for en, el, ru, ar, fr, de, es, it, pt,
@@ -120,13 +123,16 @@ chapters, previews, entries) — that is where the badge comes from, without loa
 A bridge is one **pair**: from the language the learner reads to their native language. The language read is the pack's
 own **or one of its translations** (docs/i18n.md §10): a learner who opened the Greek translation of an English pack reads
 Greek, so the help they need is **el → ru**, not en → ru. Every new pack gets every pair (`tools/pack_rules.json`
-"languages" `"bridgesFrom": ["own", "translations"]`) — for an English pack translated into Greek and Russian:
+"languages" `"bridgesFrom": ["own", "translations"]`) — for an English pack translated into Greek, Russian, German and
+French (25 pairs):
 
 | reads | bridges |
 |---|---|
-| en (the pack) | en→el · en→ru · en→ar |
-| el (its translation) | el→en · el→ru · el→ar |
-| ru (its translation) | ru→en · ru→el · ru→ar |
+| en (the pack) | en→el · en→ru · en→ar · en→de · en→fr |
+| el (its translation) | el→en · el→ru · el→ar · el→de · el→fr |
+| ru (its translation) | ru→en · ru→el · ru→ar · ru→de · ru→fr |
+| de (its translation) | de→en · de→el · de→ru · de→ar · de→fr |
+| fr (its translation) | fr→en · fr→el · fr→ru · fr→ar · fr→de |
 
 A translation's bridge is made from **the translation's words** (its own entries, forms, senses and anchors), so it is made
 **after** the translation is saved — the check refuses a `source` the pack has no translation into.
@@ -178,7 +184,7 @@ python3 tools/bridge.py build SUBJ --native ru                # → bridges/<id>
 # then the same from each translation (after it is saved), in bridges/from-<locale>/ (§2.4):
 python3 tools/bridge.py todo SUBJ --from el             # the Greek translation's words
 python3 tools/bridge.py build SUBJ --from el --native ru      # → bridges/from-el/<id>.el.ru.bridge.json
-python3 tools/bridge.py require SUBJ                    # every pair: en→el/ru/ar, el→en/ru/ar, ru→en/el/ar
+python3 tools/bridge.py require SUBJ                    # every pair: en, el, ru, de, fr → the other five of en el ru ar de fr
 ```
 `SUBJ` is a library subject folder or a pack `.json` (the learner's pack, from `noema_get_pack_url`) with `bridges/`
 beside it. Then **📥 Import** the built file in the app, or save it with the connector: `noema_bridge_guide` (this text,
@@ -194,8 +200,8 @@ the section is about in 2–4 sentences; it never replaces the section. Work cha
 a chapter is useful when it is complete.
 
 **Every new pack needs them** (docs/PIPELINES.md §4b, `tools/pack_rules.json` "languages"): every pair of §2.4 — from the
-pack's language and from each of its translations into each of English, Greek, Russian and Arabic other than the language
-read, each made after its translation — covering ≥ 90 % of the content words and ≥ 80 % of the
+pack's language and from each of its translations into each of English, Greek, Russian, Arabic, German and French other than
+the language read, each made after its translation — covering ≥ 90 % of the content words and ≥ 80 % of the
 everyday ones — learners may be at A2/B1, so the everyday words of the explanations count, not only the field's terms.
 `bridge.py require` is the flow's `bridges` step; `noema_save_bridge` says when a saved bridge is below the minimum.
 
@@ -207,6 +213,9 @@ everyday ones — learners may be at A2/B1, so the everyday words of the explana
    whole Databricks pilot → el, ru, ar (1,739 words, 97% of the content words, all 13 chapters, a preview for each of
    the 184 sections). Still to do: a Greek pack of the learner's (e.g. DNA replication) → en, ru, ar once the learner's
    pack can be read.
+2b. **Done (2026-11-05)** — German and French join: every new pack is translated into them too and gets bridges into and
+   from them (25 pairs for an English pack); French elisions are matched (`l'hélicase` → `hélicase`); German and French
+   test packs.
 3. Explain this sentence (AI, in the learner's language) and *My words*: the words looked up, reviewed with spaced
    repetition, and drills on the pack's terms in both directions.
 4. Sharing: bridges of shared and public packs (the author, or others with the author's 🔔 permission), reviews by

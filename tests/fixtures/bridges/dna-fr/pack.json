@@ -1,0 +1,45 @@
+{
+ "format": "noema-pack",
+ "v": 1,
+ "subject": {
+  "id": "dna-fr",
+  "title": "Réplication de l'ADN",
+  "emoji": "🧬",
+  "group": "biology",
+  "description": "Comment l'ADN se copie",
+  "language": "fr",
+  "features": {
+   "math": false,
+   "code": false
+  }
+ },
+ "chapters": [
+  {
+   "id": "ch01",
+   "num": 1,
+   "title": "Comment l'ADN se copie",
+   "emoji": "🧬",
+   "sections": [
+    {
+     "id": "ch01-s01",
+     "title": "Comment l'ADN se copie",
+     "blocks": [
+      {
+       "t": "p",
+       "text": "La réplication de l'ADN commence aux origines de réplication. L'hélicase déroule la double hélice et la polymérase synthétise le nouveau brin."
+      },
+      {
+       "t": "p",
+       "text": "Chaque nouvelle molécule conserve un ancien brin : la réplication est semi-conservative. Le brin avancé est synthétisé en continu, le brin retardé en fragments d'Okazaki."
+      }
+     ]
+    }
+   ],
+   "exercises": [],
+   "flashcards": [],
+   "pitfalls": [],
+   "debug": [],
+   "objectives": []
+  }
+ ]
+}

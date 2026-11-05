@@ -1,0 +1,95 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "de",
+ "status": "draft",
+ "t": {
+  "يبدأ#1": {
+   "t": "beginnt",
+   "src": "14qlf5fi8h"
+  },
+  "تضاعف#1": {
+   "t": "Replikation",
+   "src": "n5vvww18xy"
+  },
+  "الحمض النووي#1": {
+   "t": "DNA",
+   "src": "1syy2eos5o"
+  },
+  "موقع البدء#1": {
+   "t": "Replikationsursprung",
+   "src": "1wvnax0712"
+  },
+  "يفك#1": {
+   "t": "entwindet",
+   "src": "17k5j0buih"
+  },
+  "هيليكاز#1": {
+   "t": "Helikase",
+   "src": "tbtho31adz"
+  },
+  "لولب مزدوج#1": {
+   "t": "Doppelhelix",
+   "src": "791oudgb8u"
+  },
+  "يبني#1": {
+   "t": "baut",
+   "src": "161hczyqr4"
+  },
+  "بوليميراز#1": {
+   "t": "Polymerase",
+   "src": "9dmqv01t9b"
+  },
+  "سلسلة#1": {
+   "t": "Strang",
+   "src": "1nxjmt514i"
+  },
+  "جديد#1": {
+   "t": "neu",
+   "src": "16ouytpm8d"
+  },
+  "يحتفظ#1": {
+   "t": "behält",
+   "src": "1ma400p9uc"
+  },
+  "جزيء#1": {
+   "t": "Molekül",
+   "src": "3j5irjduvv"
+  },
+  "قديم#1": {
+   "t": "alt (Elternstrang)",
+   "src": "76ea5wdxoa"
+  },
+  "واحد#1": {
+   "t": "ein",
+   "src": "1i85euo1mu"
+  },
+  "شبه محافظ#1": {
+   "t": "semikonservativ",
+   "src": "ajoy9j1he8"
+  },
+  "رائد#1": {
+   "t": "Leitstrang",
+   "src": "zulg9y1ibl"
+  },
+  "باستمرار#1": {
+   "t": "kontinuierlich",
+   "src": "ij6t3h1wzx"
+  },
+  "متأخر#1": {
+   "t": "Folgestrang",
+   "src": "i3bpj81u73"
+  },
+  "شكل#1": {
+   "t": "Form",
+   "src": "o8l0er1jmx"
+  },
+  "قطعة#1": {
+   "t": "Fragment",
+   "src": "1bqtdlw1o6"
+  }
+ },
+ "sections": {
+  "ch01-s01": "Die DNA wird von den Replikationsursprüngen aus kopiert: Die Helikase entwindet die Doppelhelix, die Polymerase baut die neuen Stränge, den einen kontinuierlich, den anderen in Okazaki-Fragmenten."
+ }
+}

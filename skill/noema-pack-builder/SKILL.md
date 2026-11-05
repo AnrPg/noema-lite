@@ -355,9 +355,9 @@ the existing sources keep the files the learner already has, and only NEW source
 by them). Add new chapters (next `chNN`) or `patches/*.json` with `appendBlocks` / `appendExercises`
 (reserve a fresh id range, e.g. `chNN-e7NN`), register the new source in `sources.json` (its file in `work/<id>/sources/`), rebuild, save.
 
-## Translations — every pack in English, Greek and Russian (flow step `translate`)
-A pack is written in one language (`subject.language`). **Every new pack also gets full translations into English, Greek
-and Russian — each of them that is not its own language** (the learner's rule; `pack_rules.json` "languages",
+## Translations — every pack in English, Greek, Russian, German and French (flow step `translate`)
+A pack is written in one language (`subject.language`). **Every new pack also gets full translations into English, Greek,
+Russian, German and French — each of them that is not its own language** (the learner's rule; `pack_rules.json` "languages",
 `references/PIPELINES.md` §4b). A learner whose app speaks one of them sees it, everyone else sees the original with a
 small language tag. Other languages only when the user asks. `pipeline.py check work/<id> translate` says which chapters
 — and which names — are still missing. **Translate everything the learner sees of the pack**: the chapters (terms in
@@ -383,11 +383,11 @@ brackets too), its name and tagline, and in a Roadmap everything its step's pane
   Roadmap (`noema_create_roadmap`) gets its title, goal and every step's title and summary translated right away.
   `noema_finish_upload` / `noema_save_translation` print the exact texts still untranslated.
 
-## Language help — 文A bridges: every pair of en, el, ru → en, el, ru, ar (flow step `bridges`, after `translate`)
+## Language help — 文A bridges: every pair of en, el, ru, de, fr → en, el, ru, ar, de, fr (flow step `bridges`, after `translate`)
 A bridge is one pair: the language the learner READS → their native language. The learner may read the pack's own
 language or one of its translations, so every new pack gets **every pair**: from its own language into each of en, el, ru,
-ar other than it, AND from each translation into each of en, el, ru, ar other than that translation's language (an English
-pack: en→el, en→ru, en→ar, el→en, el→ru, el→ar, ru→en, ru→el, ru→ar), **everyday words included** (≥ 90 % of the content
+ar, de, fr other than it, AND from each translation into each of en, el, ru, ar, de, fr other than that translation's language
+(an English pack: en→el/ru/ar/de/fr, el→en/ru/ar/de/fr, ru→en/el/ar/de/fr, de→en/el/ru/ar/fr, fr→en/el/ru/ar/de: 25 pairs), **everyday words included** (≥ 90 % of the content
 words and ≥ 80 % of the everyday ones; `python3 scripts/bridge.py require <pack>` checks every pair). A translation's
 bridges are made from **the translation's words**, so after it: the same steps with `--from <locale>` (files in
 `bridges/from-<locale>/`; the translation is `translations/<locale>/` or `build/<id>.tr.<locale>.json` beside the pack, or
@@ -402,8 +402,10 @@ pack is not changed. Contract and rules: `references/BRIDGE.md` (or `noema_bridg
    their forms, part of speech, band (1 everyday · 2 academic · 3 the field's term), senses as used in this pack (a
    `gloss` each), `keep` for names, `sections` key words. Per source language (BRIDGE.md §2.2): Greek and Russian — the
    lemma plus every inflected form the pack uses; Arabic — the word without clitics or article (`سلسلة`, never
-   `السلسلة`; و ف ب ل ك ال are recognised by themselves), broken plurals as forms. Any pair works (en, el, ru, ar into
-   each other are tested).
+   `السلسلة`; و ف ب ل ك ال are recognised by themselves), broken plurals as forms; German — the lemma (nouns capitalised as written) plus every form the pack uses, a
+   compound as one entry (`Replikationsursprung`, form `Replikationsursprüngen`); French — the word without its elision
+   (`hélicase`, never `l'hélicase`; l' d' qu' … are recognised by themselves), plurals and feminines as forms. Any pair
+   works (en, el, ru, ar, de, fr into each other are tested).
 3b. A word with two meanings in the pack: two senses, each with `cues` (words of the sentence that mean it), then
    `python3 scripts/bridge.py senses <pack.json> --word order` (every place and its sense) and
    `python3 scripts/bridge.py anchor <pack.json>` (anchors from the cues; write an anchor by hand where cues cannot tell).
