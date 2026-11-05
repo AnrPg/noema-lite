@@ -1,0 +1,44 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "timeline@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "olTarget": 75, "subTarget": 1 },
+ "params": [
+  { "id": "yb", "kind": "slider", "label": "yearBce", "min": 1, "max": 800, "step": 1, "default": 500 },
+  { "id": "mo", "kind": "slider", "label": "month", "min": 1, "max": 12, "step": 1, "default": 3 },
+  { "id": "dy", "kind": "slider", "label": "day", "min": 1, "max": 28, "step": 1, "default": 1 }
+ ],
+ "model": {
+  "options": { "auc": "varro", "olympiadMonth": 7 },
+  "events": [
+   { "id": "battle", "date": { "cal": "julian", "era": "bce", "y": "yb", "m": "mo", "d": "dy" }, "label": "evBattle", "lane": 1 },
+   { "id": "marathon", "date": { "cal": "julian", "era": "bce", "y": 490, "m": 9, "d": 12 }, "sd": 10, "label": "evMarathon", "lane": 0 }
+  ],
+  "periods": [
+   { "id": "wars", "start": { "cal": "julian", "era": "bce", "y": 499 }, "end": { "cal": "julian", "era": "bce", "y": 449, "m": 12, "d": 31 }, "label": "perWars", "lane": 2 }
+  ],
+  "axis": { "era": "julian", "from": { "cal": "julian", "era": "bce", "y": 560 }, "to": { "cal": "julian", "era": "bce", "y": 400 }, "bceKey": "bce" }
+ },
+ "outputs": [
+  { "id": "olYear", "kind": "scalar", "of": "convert", "event": "battle", "to": "olympiad", "field": "ol" },
+  { "id": "olSub", "kind": "scalar", "of": "convert", "event": "battle", "to": "olympiad", "field": "oy" },
+  { "id": "auc", "kind": "scalar", "of": "convert", "event": "battle", "to": "auc", "field": "y" },
+  { "id": "am", "kind": "scalar", "of": "convert", "event": "battle", "to": "hebrew", "field": "y" },
+  { "id": "nab", "kind": "scalar", "of": "convert", "event": "battle", "to": "nabonassar", "field": "y" },
+  { "id": "jdn", "kind": "scalar", "of": "convert", "event": "battle", "to": "jdn", "field": "j" },
+  { "id": "inWars", "kind": "scalar", "of": "relation", "a": "battle", "b": "wars", "rel": "during" },
+  { "id": "afterMarathon", "kind": "scalar", "of": "duration", "a": "marathon", "b": "battle", "unit": "calendarYears" },
+  { "id": "chart", "kind": "scene", "of": "timeline" }
+ ],
+ "readouts": [
+  { "label": "olLabel", "expr": "olYear", "format": "auto", "digits": 8 },
+  { "label": "olSubLabel", "expr": "olSub", "format": "auto", "digits": 8 },
+  { "label": "aucLabel", "expr": "auc", "format": "auto", "digits": 8 },
+  { "label": "amLabel", "expr": "am", "format": "auto", "digits": 8 },
+  { "label": "nabLabel", "expr": "nab", "format": "auto", "digits": 8 },
+  { "label": "jdnLabel", "expr": "jdn", "format": "auto", "digits": 8 },
+  { "label": "gapLabel", "expr": "afterMarathon", "format": "auto", "digits": 8 }
+ ],
+ "plots": [ { "kind": "scene", "of": "chart", "title": "chartTitle", "height": 260 } ]
+}

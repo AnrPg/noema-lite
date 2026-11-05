@@ -1,0 +1,1226 @@
+{
+"specs": [
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "ostia",
+"lat": 41.7556,
+"lon": 12.2914
+},
+{
+"id": "brun",
+"lat": 40.6327,
+"lon": 17.9418
+}
+],
+"projection": {
+"type": "lcc",
+"lat1": 33,
+"lat2": 43,
+"lat0": 38,
+"lon0": "k"
+},
+"view": {
+"bbox": [
+-12,
+25,
+45,
+50
+],
+"graticule": 10
+},
+"network": {
+"edges": [
+{
+"a": "roma",
+"b": "ostia",
+"mode": "road",
+"km": 30
+},
+{
+"a": "ostia",
+"b": "alex",
+"mode": "sea",
+"open": "k > 5"
+},
+{
+"a": "roma",
+"b": "brun",
+"mode": "road",
+"km": "560"
+},
+{
+"a": "brun",
+"b": "alex",
+"mode": "sea"
+}
+],
+"speeds": {
+"sea": "100 + k"
+}
+},
+"territories": [
+{
+"id": "rome",
+"from": -27,
+"to": 476,
+"rings": [
+[
+-10,
+35,
+40,
+35,
+40,
+50,
+-10,
+50
+]
+],
+"label": "rome",
+"c": "info"
+},
+{
+"id": "egy",
+"from": -30,
+"to": 641,
+"rings": [
+[
+25,
+22,
+35,
+22,
+35,
+32,
+25,
+32
+]
+]
+}
+]
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "distance",
+"from": "roma",
+"to": "alex",
+"unit": "romanMile",
+"bound": "min"
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "bearing",
+"from": "roma",
+"to": "alex"
+},
+{
+"id": "a",
+"kind": "scalar",
+"of": "area",
+"territory": "egy"
+},
+{
+"id": "ov",
+"kind": "scalar",
+"of": "overlap",
+"a": "rome",
+"b": "egy",
+"year": "k*10"
+},
+{
+"id": "r",
+"kind": "scalar",
+"of": "route",
+"from": "roma",
+"to": "alex",
+"by": "days"
+},
+{
+"id": "rk",
+"kind": "series",
+"of": "routeKm",
+"from": "roma",
+"to": "alex"
+},
+{
+"id": "map",
+"kind": "scene",
+"of": "map",
+"year": 100,
+"path": {
+"from": "roma",
+"to": "alex"
+}
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "map",
+"title": "mapTitle"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"projection": {
+"type": "mercator"
+}
+},
+"outputs": [
+{
+"id": "s",
+"kind": "scalar",
+"of": "scale",
+"lat": "k",
+"lon": 0,
+"what": "k"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"projection": {
+"type": "eqearth"
+}
+},
+"outputs": [
+{
+"id": "s",
+"kind": "scalar",
+"of": "scale",
+"lat": "k",
+"lon": 0,
+"what": "s"
+},
+{
+"id": "g",
+"kind": "series",
+"of": "lat",
+"from": -80,
+"to": 80,
+"n": 81
+},
+{
+"id": "sc",
+"kind": "series",
+"of": "scale",
+"what": "omega",
+"from": -80,
+"to": 80,
+"n": 81
+}
+],
+"plots": [
+{
+"kind": "series",
+"x": {
+"series": "g"
+},
+"series": [
+{
+"y": "sc"
+}
+]
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {},
+"outputs": [
+{
+"id": "era",
+"kind": "scalar",
+"of": "arcToCircle",
+"angle": 7.2,
+"base": 5000,
+"unit": "stade",
+"to": "km"
+},
+{
+"id": "o",
+"kind": "scalar",
+"of": "obliquity",
+"year": -239
+},
+{
+"id": "g",
+"kind": "scalar",
+"of": "gnomonLat",
+"shadow": "k",
+"gnomon": 120,
+"decl": 23.7
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+}
+]
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "distance",
+"from": "roma",
+"to": "nowhere"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "roma",
+"lat": 95,
+"lon": 0
+}
+]
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "distance",
+"from": "roma",
+"to": "alex",
+"method": "vincenty"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"projection": {
+"type": "lcc",
+"lat1": 30,
+"lat2": -30
+}
+},
+"outputs": [
+{
+"id": "x",
+"kind": "scalar",
+"of": "xy",
+"lat": 10,
+"lon": 10,
+"axis": "x"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"projection": {
+"type": "utm"
+}
+},
+"outputs": [
+{
+"id": "x",
+"kind": "scalar",
+"of": "xy",
+"lat": 10,
+"lon": 10,
+"axis": "z"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {},
+"outputs": [
+{
+"id": "x",
+"kind": "scalar",
+"of": "xy",
+"lat": 10,
+"lon": 10,
+"axis": "x"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"territories": [
+{
+"id": "t",
+"rings": [
+[
+0,
+0,
+1,
+1,
+2
+]
+]
+},
+{
+"id": "t",
+"rings": [
+[
+0,
+0,
+1,
+100,
+2,
+0
+]
+],
+"from": 10,
+"to": 5
+}
+]
+},
+"outputs": [
+{
+"id": "a",
+"kind": "scalar",
+"of": "area",
+"territory": "t"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "ostia",
+"lat": 41.7556,
+"lon": 12.2914
+},
+{
+"id": "brun",
+"lat": 40.6327,
+"lon": 17.9418
+}
+],
+"network": {
+"edges": [
+{
+"a": "roma",
+"b": "roma",
+"mode": "road"
+},
+{
+"a": "roma",
+"b": "x",
+"mode": "plane"
+}
+],
+"speeds": {
+"foot": 3
+}
+}
+},
+"outputs": [
+{
+"id": "r",
+"kind": "scalar",
+"of": "route",
+"from": "roma",
+"to": "alex"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "ostia",
+"lat": 41.7556,
+"lon": 12.2914
+},
+{
+"id": "brun",
+"lat": 40.6327,
+"lon": 17.9418
+}
+]
+},
+"outputs": [
+{
+"id": "r",
+"kind": "scalar",
+"of": "route",
+"from": "roma",
+"to": "alex"
+},
+{
+"id": "q",
+"kind": "series",
+"of": "routeDays",
+"from": "roma",
+"to": "alex"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"units": {
+"cubit": {
+"m": 0.5,
+"min": 0.6
+}
+}
+},
+"outputs": [
+{
+"id": "c",
+"kind": "scalar",
+"of": "convert",
+"value": "k",
+"from": "cubit",
+"to": "furlong"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"view": {
+"bbox": [
+0,
+50,
+10,
+40
+]
+}
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scene",
+"of": "map"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "ostia",
+"lat": 41.7556,
+"lon": 12.2914
+},
+{
+"id": "brun",
+"lat": 40.6327,
+"lon": 17.9418
+}
+],
+"routes": [
+{
+"id": "r1",
+"via": [
+"roma",
+"alex",
+"atlantis"
+],
+"method": "rhumb"
+}
+]
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scene",
+"of": "map",
+"labels": false
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "m"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"projection": {
+"type": "wintri"
+}
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scene",
+"of": "globe"
+},
+{
+"id": "n",
+"kind": "series",
+"of": "distance"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"projection": {
+"type": "ortho",
+"lat0": "k",
+"lon0": 20
+},
+"view": {
+"tissot": {
+"step": 30,
+"r": "k/4"
+}
+}
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scene",
+"of": "map"
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "m",
+"height": 400
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"territories": [
+{
+"id": "rome",
+"from": -27,
+"to": 476,
+"rings": [
+[
+-10,
+35,
+40,
+35,
+40,
+50,
+-10,
+50
+]
+],
+"label": "rome",
+"c": "info"
+},
+{
+"id": "egy",
+"from": -30,
+"to": 641,
+"rings": [
+[
+25,
+22,
+35,
+22,
+35,
+32,
+25,
+32
+]
+]
+}
+]
+},
+"outputs": [
+{
+"id": "n",
+"kind": "scalar",
+"of": "count",
+"year": "k*20"
+},
+{
+"id": "f",
+"kind": "scalar",
+"of": "inForce",
+"territory": "rome",
+"year": 0
+},
+{
+"id": "y",
+"kind": "series",
+"of": "years",
+"from": -100,
+"to": 700,
+"n": 801
+},
+{
+"id": "ar",
+"kind": "series",
+"of": "area",
+"territory": "rome",
+"from": -100,
+"to": 700,
+"n": 801,
+"unit": "mi2"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"ellipsoid": "mars",
+"radius": "",
+"projection": {
+"type": "albers",
+"lat1": 95,
+"lat2": 45
+}
+},
+"outputs": [
+{
+"id": "x",
+"kind": "scalar",
+"of": "xy",
+"lat": 0,
+"lon": 0,
+"axis": "y",
+"unit": "km",
+"zz": 1
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "ostia",
+"lat": 41.7556,
+"lon": 12.2914
+},
+{
+"id": "brun",
+"lat": 40.6327,
+"lon": 17.9418
+}
+],
+"territories": [
+{
+"id": "rome",
+"from": -27,
+"to": 476,
+"rings": [
+[
+-10,
+35,
+40,
+35,
+40,
+50,
+-10,
+50
+]
+],
+"label": "rome",
+"c": "info"
+},
+{
+"id": "egy",
+"from": -30,
+"to": 641,
+"rings": [
+[
+25,
+22,
+35,
+22,
+35,
+32,
+25,
+32
+]
+]
+}
+]
+},
+"outputs": [
+{
+"id": "c",
+"kind": "scalar",
+"of": "contains",
+"territory": "rome",
+"place": "alex",
+"year": "k"
+},
+{
+"id": "p",
+"kind": "scalar",
+"of": "perimeter",
+"territory": "egy",
+"unit": "stade",
+"bound": "max",
+"method": "sphere"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": "nope",
+"outputs": []
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "ostia",
+"lat": 41.7556,
+"lon": 12.2914
+},
+{
+"id": "brun",
+"lat": 40.6327,
+"lon": 17.9418
+}
+]
+},
+"outputs": [
+{
+"id": "t",
+"kind": "scalar",
+"of": "timeToLon",
+"minutes": "k*4"
+},
+{
+"id": "bb",
+"kind": "scalar",
+"of": "bearing",
+"from": "roma",
+"to": "alex",
+"method": "rhumb",
+"end": "final"
+},
+{
+"id": "h",
+"kind": "scalar",
+"of": "distance",
+"from": "roma",
+"to": "alex",
+"method": "haversine",
+"unit": "nmi"
+}
+],
+"readouts": [
+{
+"label": "tLabel",
+"expr": "t + h"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "map@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 90,
+"default": 10
+}
+],
+"model": {
+"places": [
+{
+"id": "roma",
+"lat": 41.8933,
+"lon": 12.4828,
+"label": "roma"
+},
+{
+"id": "alex",
+"lat": 31.1975,
+"lon": 29.8925,
+"label": "alex"
+},
+{
+"id": "ostia",
+"lat": 41.7556,
+"lon": 12.2914
+},
+{
+"id": "brun",
+"lat": 40.6327,
+"lon": 17.9418
+}
+],
+"projection": {
+"type": "tmerc",
+"lon0": "k",
+"k0": 0.9996
+}
+},
+"outputs": [
+{
+"id": "x",
+"kind": "scalar",
+"of": "xy",
+"lat": "k",
+"lon": "k + 3",
+"axis": "y"
+}
+]
+}
+]
+}

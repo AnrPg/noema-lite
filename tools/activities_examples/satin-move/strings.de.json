@@ -1,0 +1,11 @@
+{
+ "title": "Den Atlasversatz finden",
+ "intro": "Ein Atlas versteckt seine Bindungspunkte: In jedem Schuss geht ein Kettfaden nach unten, und im nächsten Schuss rückt dieser Punkt um eine feste Zahl von Fäden weiter, den Versatz. Wählen Sie die Zahl der Schäfte und den Versatz so, dass die Punkte nie nebeneinander liegen und keine Diagonale bilden.",
+ "shafts": "Schäfte",
+ "move": "Versatz (Fäden)",
+ "warpFloatLabel": "Längste Kettflottung (Schüsse)",
+ "weftFloatLabel": "Längste Schussflottung (Fäden)",
+ "satinsLabel": "Verschiedene regelmäßige Atlasse auf diesen Schäften",
+ "settLabel": "Kettdichte bei Garn mit 30 Wicklungen pro Zoll",
+ "drawdownTitle": "Bindungsbild (dunkel: Kette oben), darüber der Einzug, rechts der Trittplan"
+}

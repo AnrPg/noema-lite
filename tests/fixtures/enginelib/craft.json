@@ -1,0 +1,1670 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "fiber",
+    "sts": "18 + k",
+    "over": 10,
+    "width": 54,
+    "mult": 4,
+    "plus": 2,
+    "category": 4,
+    "distribute": {
+     "from": 100,
+     "change": "k",
+     "work": "flat"
+    },
+    "shape": {
+     "fromSts": 116,
+     "toSts": 100,
+     "overRows": 50
+    }
+   },
+   "outputs": [
+    {
+     "id": "co",
+     "kind": "scalar",
+     "of": "castOn"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "achievedWidth"
+    },
+    {
+     "id": "gaps",
+     "kind": "series",
+     "of": "gaps"
+    },
+    {
+     "id": "r",
+     "kind": "series",
+     "of": "shapeRows"
+    },
+    {
+     "id": "st",
+     "kind": "series",
+     "of": "shapeSts"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "distribution"
+    },
+    {
+     "id": "sh",
+     "kind": "scene",
+     "of": "shaping"
+    },
+    {
+     "id": "rg",
+     "kind": "scalar",
+     "of": "issue.range"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "d",
+     "title": "k"
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "r"
+     },
+     "series": [
+      {
+       "y": "st",
+       "style": "steps"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "fiber",
+    "craft": "crochet",
+    "sts": 14,
+    "circle": {
+     "start": 6,
+     "rounds": "k"
+    },
+    "yarn": {
+     "swatchGrams": 10,
+     "swatchArea": 225,
+     "projectArea": 12000,
+     "metersPerGram": 2.2,
+     "skeinMeters": 200,
+     "safety": 10
+    }
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "circleSts"
+    },
+    {
+     "id": "sk",
+     "kind": "scalar",
+     "of": "skeins"
+    },
+    {
+     "id": "cr",
+     "kind": "series",
+     "of": "circleRounds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "chart",
+    "kind": "color",
+    "work": "round",
+    "rows": [
+     "AABBBBBBAA",
+     "ABABABABAB"
+    ],
+    "maxFloat": "k"
+   },
+   "outputs": [
+    {
+     "id": "mf",
+     "kind": "scalar",
+     "of": "maxFloat"
+    },
+    {
+     "id": "lf",
+     "kind": "scalar",
+     "of": "longFloats"
+    },
+    {
+     "id": "rf",
+     "kind": "series",
+     "of": "rowFloat"
+    },
+    {
+     "id": "c",
+     "kind": "scene",
+     "of": "chart"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "c",
+     "title": "k",
+     "height": 300
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "chart",
+    "rows": [
+     "k k yo k2tog k k",
+     "p*6",
+     "c2/2l k k",
+     "ssk k k k2tog"
+    ],
+    "castOn": 6
+   },
+   "outputs": [
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "unbalancedRows"
+    },
+    {
+     "id": "ro",
+     "kind": "series",
+     "of": "rowOut"
+    },
+    {
+     "id": "c",
+     "kind": "scene",
+     "of": "chart"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "weave",
+    "structure": {
+     "type": "satin",
+     "shafts": 8,
+     "move": "k"
+    },
+    "wpi": 24,
+    "maxFloat": 5
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "regular"
+    },
+    {
+     "id": "wf",
+     "kind": "scalar",
+     "of": "warpFloat"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "sett"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "drawdown"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "weave",
+    "shafts": 4,
+    "treadles": 4,
+    "threading": [
+     1,
+     2,
+     3,
+     4,
+     3,
+     2
+    ],
+    "tieup": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "treadling": [
+     [
+      1
+     ],
+     [
+      2
+     ],
+     [
+      3
+     ],
+     [
+      4
+     ]
+    ],
+    "colors": {
+     "warp": [
+      0,
+      0,
+      1,
+      1
+     ],
+     "weft": [
+      1
+     ]
+    },
+    "warp": {
+     "width": 20,
+     "length": 72,
+     "epi": 12,
+     "drawIn": 10,
+     "shrink": 10,
+     "takeUp": 10,
+     "waste": 27,
+     "ppi": "k + 7"
+    },
+    "basket": {
+     "stakes": 17
+    }
+   },
+   "outputs": [
+    {
+     "id": "en",
+     "kind": "scalar",
+     "of": "warpEnds"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "warpTotalLong"
+    },
+    {
+     "id": "wt",
+     "kind": "scalar",
+     "of": "weftTotal"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "parityOk"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "drawdown"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "stitch",
+    "w": 140,
+    "h": 100,
+    "count": "k + 9",
+    "margin": 3,
+    "fabricW": 18,
+    "fabricH": 18,
+    "stitches": 5000
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "widthIn"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "fits"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "skeins"
+    },
+    {
+     "id": "l",
+     "kind": "scene",
+     "of": "layout"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "quilt",
+    "finished": "k",
+    "cols": 5,
+    "rows": 6,
+    "block": 12,
+    "sashing": 2,
+    "border": 4,
+    "binding": {
+     "extra": 12
+    },
+    "cut": {
+     "count": 40,
+     "w": 4.5,
+     "h": 4.5
+    },
+    "backing": {},
+    "bias": {
+     "square": 36,
+     "strip": 2.5
+    }
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "hst2"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "qst"
+    },
+    {
+     "id": "by",
+     "kind": "scalar",
+     "of": "backingYards"
+    },
+    {
+     "id": "l",
+     "kind": "scene",
+     "of": "layout"
+    },
+    {
+     "id": "h2",
+     "kind": "scene",
+     "of": "hst"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "symmetry",
+    "groupIndex": "k",
+    "cells": 3,
+    "classify": {
+     "rot": 4,
+     "mirrors": 1,
+     "onMirrors": 1
+    },
+    "vertex": [
+     4,
+     8,
+     8
+    ],
+    "orbifold": "*632"
+   },
+   "outputs": [
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "copies"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cost"
+    },
+    {
+     "id": "cl",
+     "kind": "scalar",
+     "of": "classified"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "tiles"
+    },
+    {
+     "id": "p",
+     "kind": "scene",
+     "of": "pattern"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "sew",
+    "skirt": {
+     "waist": 28,
+     "length": "20 + k",
+     "fraction": 0.5
+    },
+    "piece": {
+     "pts": [
+      0,
+      0,
+      10,
+      0,
+      10,
+      20,
+      0,
+      20
+     ],
+     "sa": 1
+    },
+    "grade": {
+     "rule": [
+      0,
+      0,
+      0.5,
+      0,
+      0.5,
+      0.25,
+      0,
+      0.25
+     ],
+     "steps": 2
+    },
+    "pack": {
+     "width": 45,
+     "rects": [
+      [
+       20,
+       30
+      ],
+      [
+       20,
+       30
+      ],
+      [
+       25,
+       10
+      ]
+     ]
+    },
+    "ease": {
+     "body": 36,
+     "ease": 2.5
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "skirtRadius"
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "saArea"
+    },
+    {
+     "id": "pl",
+     "kind": "scalar",
+     "of": "packLength"
+    },
+    {
+     "id": "pc",
+     "kind": "scene",
+     "of": "piece"
+    },
+    {
+     "id": "pk",
+     "kind": "scene",
+     "of": "pack"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "wood",
+    "species": "oak-red",
+    "width": 12,
+    "mcFrom": 6,
+    "mcTo": "6 + k",
+    "board": {
+     "t": 2,
+     "w": 6,
+     "l": 8
+    },
+    "emc": {
+     "tempF": 70,
+     "rh": "k * 9"
+    },
+    "shelf": {
+     "t": 0.75,
+     "w": 10,
+     "span": 36,
+     "load": 20
+    },
+    "cutlist": {
+     "stock": 96,
+     "kerf": 0.125,
+     "pieces": [
+      30,
+      30,
+      "k * 3",
+      24
+     ]
+    },
+    "dovetail": 8
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "movement"
+    },
+    {
+     "id": "em",
+     "kind": "scalar",
+     "of": "emc"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "emcRh"
+    },
+    {
+     "id": "y",
+     "kind": "series",
+     "of": "emcCurve"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "boards"
+    },
+    {
+     "id": "c",
+     "kind": "scene",
+     "of": "cutlist"
+    },
+    {
+     "id": "mv",
+     "kind": "scene",
+     "of": "movement"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "x"
+     },
+     "series": [
+      {
+       "y": "y"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "ceramic",
+    "fired": 10,
+    "shrink": "k + 7",
+    "cone": "6",
+    "rate": 60,
+    "tempC": 1230,
+    "recipe": [
+     {
+      "mat": "potash_feldspar",
+      "w": 40
+     },
+     {
+      "mat": "silica",
+      "w": 30
+     },
+     {
+      "mat": "whiting",
+      "w": "k * 4"
+     },
+     {
+      "mat": "frit3134",
+      "w": 10
+     }
+    ],
+    "materials": {
+     "frit3134": {
+      "CaO": 20.1,
+      "Na2O": 10.3,
+      "B2O3": 23.1,
+      "SiO2": 46.5
+     }
+    },
+    "target": {
+     "K2O": 0.3,
+     "CaO": 0.7,
+     "Al2O3": 0.4,
+     "SiO2": "3 + k / 10"
+    },
+    "batch": [
+     "potash_feldspar",
+     "whiting",
+     "kaolin",
+     "silica"
+    ],
+    "expansion": "appen",
+    "bodyCoe": 6
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "wet"
+    },
+    {
+     "id": "ct",
+     "kind": "scalar",
+     "of": "coneTemp"
+    },
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "umf.SiO2"
+    },
+    {
+     "id": "b0",
+     "kind": "scalar",
+     "of": "batch.0"
+    },
+    {
+     "id": "cn",
+     "kind": "series",
+     "of": "coneNo"
+    },
+    {
+     "id": "ctemps",
+     "kind": "series",
+     "of": "coneTemps"
+    },
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "stull"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "metal",
+    "size": "k",
+    "scale": "us",
+    "thickness": 1.5,
+    "width": 4,
+    "metal": "sterling",
+    "awg": 18,
+    "wireLength": 1000,
+    "alloy": {
+     "mass": 10,
+     "from": 750,
+     "to": 585
+    }
+   },
+   "outputs": [
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "diameter"
+    },
+    {
+     "id": "bm",
+     "kind": "scalar",
+     "of": "bandMass"
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "awgMm"
+    },
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "alloyAdd"
+    },
+    {
+     "id": "r",
+     "kind": "scene",
+     "of": "ring"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "book",
+    "pages": 200,
+    "folds": "k / 5 + 1",
+    "grain": "short",
+    "sheet": 1
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "signatures"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "grainOk"
+    },
+    {
+     "id": "i",
+     "kind": "scene",
+     "of": "imposition"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "leather",
+    "oz": 4,
+    "seam": 300,
+    "pitch": 4,
+    "tail": 150
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "thread"
+    },
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holes"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "dye",
+    "wof": 100,
+    "dos": "k / 2",
+    "stock": 1,
+    "mordant": 12,
+    "liquor": 30
+   },
+   "outputs": [
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "dyeGrams"
+    },
+    {
+     "id": "ml",
+     "kind": "scalar",
+     "of": "stockMl"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "fiber",
+    "sts": "zz * 2"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "gauge10"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "fiber",
+    "sts": 20
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "gauge10"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "a"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "knot"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "fiber"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "castOn"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "fiber",
+    "sts": 20,
+    "zz": 1,
+    "round": "sideways"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "nope"
+    },
+    {
+     "id": "b",
+     "kind": "series",
+     "of": "castOn"
+    },
+    {
+     "id": "c",
+     "kind": "sound",
+     "of": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": "model",
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "chart",
+    "rows": [
+     "k k zz k",
+     "k*200"
+    ],
+    "kind": "stitch"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "width"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "chart",
+    "kind": "color",
+    "rows": [
+     "AAxB",
+     ""
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "width"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "chart",
+    "rows": "k k"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "width"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "weave",
+    "shafts": 4
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "ends"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "weave",
+    "shafts": 4,
+    "threading": [
+     1,
+     2,
+     5
+    ],
+    "tieup": [
+     [
+      1
+     ],
+     [
+      2
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "treadling": [
+     [
+      1
+     ],
+     [
+      9
+     ]
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "ends"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "weave",
+    "structure": {
+     "type": "basket"
+    },
+    "threading": [
+     0,
+     33
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "ends"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "ceramic",
+    "recipe": [
+     {
+      "mat": "unobtainium",
+      "w": 1
+     },
+     {
+      "mat": "silica"
+     }
+    ],
+    "materials": {
+     "fritX": {
+      "Xy2O": 3,
+      "LOI": 2
+     }
+    },
+    "target": {
+     "Foo": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "umf.SiO3"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "batch.9"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "sew",
+    "piece": {
+     "pts": [
+      0,
+      0,
+      1,
+      0,
+      1
+     ],
+     "sa": 1
+    },
+    "grade": {
+     "rule": [
+      0
+     ]
+    },
+    "pack": {
+     "width": 45,
+     "rects": [
+      [
+       1,
+       2,
+       3
+      ]
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "area"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "sew",
+    "grade": {
+     "rule": [
+      0,
+      0
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "area"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "symmetry",
+    "group": "p5",
+    "orbifold": "2q",
+    "motif": [
+     0,
+     0,
+     1
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "copies"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "wood",
+    "species": "oak-pink",
+    "cutlist": {
+     "stock": 96
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "boards"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "metal",
+    "scale": "eu",
+    "alloy": {
+     "mass": 10
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "diameter"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "book",
+    "folds": 2
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "spine"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "craft@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "symmetry",
+    "vertex": [
+     2,
+     99
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "tiles"
+    }
+   ]
+  }
+ ]
+}
