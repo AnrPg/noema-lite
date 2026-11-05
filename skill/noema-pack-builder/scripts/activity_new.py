@@ -45,6 +45,9 @@ if runtime not in REF: sys.exit(f'✗ --runtime is one of {", ".join(REF)}')
 sdir, nid = os.path.abspath(a[0]), a[1]
 if not re.fullmatch(r'[a-z0-9][a-z0-9-]{1,60}', nid): sys.exit('✗ the id is lower-case letters, digits and - (2–61 characters)')
 ref = ref or REF[runtime]
+_ez = os.path.join(HERE, 'activities_examples.zip')   # the skill ships the references as one zip (claude.ai's 200-file limit)
+if not os.path.isdir(os.path.join(HERE, 'activities_examples')) and os.path.isfile(_ez):
+    import zipfile; zipfile.ZipFile(_ez).extractall(os.path.join(HERE, 'activities_examples'))
 src = next((d for d in (os.path.join(HERE, 'activities_examples', ref), os.path.join(HERE, '..', '..', '..', 'tools', 'activities_examples', ref)) if os.path.isdir(d)), None)
 if not src: sys.exit(f'✗ the reference activity (activities_examples/{ref}) is missing from the toolkit')
 dst = os.path.join(sdir, 'activities', nid)
