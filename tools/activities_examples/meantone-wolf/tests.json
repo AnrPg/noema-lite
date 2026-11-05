@@ -1,0 +1,128 @@
+{
+ "cases": [
+  {
+   "name": "Pythagorean (0): pure fifth 701.96 c, third 407.82 c beating ~16 Hz, wolf 678.49 c",
+   "steps": [
+    {
+     "set": "fr",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "values": {
+     "fifth": [
+      701.95,
+      701.96
+     ],
+     "third": [
+      407.81,
+      407.83
+     ],
+     "beats": [
+      16.2,
+      16.4
+     ],
+     "wolf": [
+      678.4,
+      678.6
+     ]
+    }
+   }
+  },
+  {
+   "name": "quarter comma: pure thirds that do not beat, wolf 737.64 c",
+   "steps": [
+    {
+     "set": "fr",
+     "value": 0.25
+    }
+   ],
+   "expect": {
+    "values": {
+     "fifth": [
+      696.57,
+      696.59
+     ],
+     "third": [
+      386.3,
+      386.33
+     ],
+     "beats": [
+      0,
+      0.01
+     ],
+     "wolf": [
+      737.6,
+      737.7
+     ]
+    }
+   }
+  },
+  {
+   "name": "a sixth of a comma: thirds 7 c wide, a milder wolf",
+   "steps": [
+    {
+     "set": "fr",
+     "value": 0.17
+    }
+   ],
+   "expect": {
+    "values": {
+     "third": [
+      392.9,
+      393.3
+     ],
+     "wolf": [
+      717,
+      719.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "a third of a comma: thirds narrower than pure, beating again",
+   "steps": [
+    {
+     "set": "fr",
+     "value": 0.33
+    }
+   ],
+   "expect": {
+    "values": {
+     "third": [
+      379.1,
+      379.5
+     ],
+     "beats": [
+      5,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the fraction is saved",
+   "steps": [
+    {
+     "set": "fr",
+     "value": 0.2
+    }
+   ],
+   "expect": {
+    "state": [
+     "fr"
+    ],
+    "values": {
+     "third": [
+      390.5,
+      390.7
+     ],
+     "wolf": [
+      725.7,
+      725.9
+     ]
+    }
+   }
+  }
+ ]
+}

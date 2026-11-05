@@ -1,0 +1,43 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "graph@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "dOld": 9, "wLeast": 7 },
+ "params": [
+  { "id": "wst", "kind": "slider", "label": "wLabel", "min": 1, "max": 15, "step": 1, "default": 10 },
+  { "id": "k", "kind": "slider", "label": "kLabel", "min": 0, "max": 7, "step": 1, "default": 0 }
+ ],
+ "model": {
+  "graph": {
+   "directed": true,
+   "nodes": [
+    { "id": "s", "x": 0, "y": 1 }, { "id": "t", "x": 1.4, "y": 2 }, { "id": "x", "x": 3.2, "y": 2 },
+    { "id": "y", "x": 1.4, "y": 0 }, { "id": "z", "x": 3.2, "y": 0 }
+   ],
+   "edges": [
+    { "u": "s", "v": "t", "w": "wst" }, { "u": "s", "v": "y", "w": 5 }, { "u": "t", "v": "x", "w": 1 }, { "u": "t", "v": "y", "w": 2 },
+    { "u": "y", "v": "t", "w": 3 }, { "u": "y", "v": "x", "w": 9 }, { "u": "y", "v": "z", "w": 2 }, { "u": "x", "v": "z", "w": 4 },
+    { "u": "z", "v": "x", "w": 6 }, { "u": "z", "v": "s", "w": 7 }
+   ]
+  },
+  "run": { "alg": "dijkstra", "source": "s", "target": "x", "step": "k" }
+ },
+ "outputs": [
+  { "id": "dx", "kind": "scalar", "of": "dist", "node": "x" },
+  { "id": "dt", "kind": "scalar", "of": "dist", "node": "t" },
+  { "id": "hops", "kind": "scalar", "of": "pathEdges" },
+  { "id": "steps", "kind": "scalar", "of": "steps" },
+  { "id": "frame", "kind": "scalar", "of": "frame" },
+  { "id": "net", "kind": "scene", "of": "drawing", "labels": "both" }
+ ],
+ "readouts": [
+  { "label": "frameLabel", "expr": "frame" },
+  { "label": "dtLabel", "expr": "dt" },
+  { "label": "dxLabel", "expr": "dx" },
+  { "label": "hopsLabel", "expr": "hops" }
+ ],
+ "plots": [
+  { "kind": "scene", "title": "sceneTitle", "of": "net", "height": 300 }
+ ]
+}

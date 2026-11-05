@@ -1,0 +1,17 @@
+{
+ "id": "euler-line",
+ "runtime": "sim-spec@1",
+ "entry": "activities/euler-line/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "euler-line-still",
+  "text": "The triangle A(0, 0), B(6, 0), C(2, 4) has its circumcentre at O(3, 1), its centroid at G(8/3, 4/3), its orthocentre at H(2, 2) and its nine-point centre at N(2.5, 1.5), the midpoint of OH. All four lie on the Euler line x + y = 4, and HG is exactly twice GO (Euler 1767). The line passes through the vertex C only when the triangle is isosceles with CA = CB (C straight above the midpoint of AB, x = 3) or right-angled at C, where H falls on C itself; for an equilateral triangle all the centres coincide and there is no Euler line. The picture shows the triangle with its circumcircle, its nine-point circle (half the radius) and the Euler line."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

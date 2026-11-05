@@ -1,0 +1,11 @@
+{
+ "title": "Trouver le décochement du satin",
+ "intro": "Un satin cache ses points de liage : à chaque duite un fil de chaîne passe dessous, et à la duite suivante ce point avance d'un nombre fixe de fils, le décochement. Choisissez le nombre de lames et le décochement pour que les points ne se touchent jamais et ne forment pas de diagonale.",
+ "shafts": "Lames",
+ "move": "Décochement (fils)",
+ "warpFloatLabel": "Plus long flotté de chaîne (duites)",
+ "weftFloatLabel": "Plus long flotté de trame (fils)",
+ "satinsLabel": "Satins réguliers distincts sur ces lames",
+ "settLabel": "Réduction pour un fil de 30 tours par pouce",
+ "drawdownTitle": "Mise en carte (foncé : chaîne dessus), avec le remettage au-dessus et le plan de levée à droite"
+}

@@ -1,0 +1,20 @@
+{
+ "title": "Die Druck-Volumen-Schleife der linken Herzkammer",
+ "intro": "Bei jedem Herzschlag zeichnet die linke Kammer eine Schleife: Sie füllt sich, kontrahiert bei geschlossenen Klappen, wirft das Blut in die Aorta aus und erschlafft. Verändern Sie, wie kräftig sie sich zusammenzieht (Ees, die Steigung der endsystolischen Geraden), mit welchem Druck sie gefüllt wird (der Druck im linken Vorhof) und gegen welchen Widerstand sie pumpt, und beobachten Sie die Schleife, das Schlagvolumen und den Blutdruck. Die Herzfrequenz bleibt bei 70 pro Minute, Reflexe gibt es keine: Sie sehen die Kammer für sich allein.",
+ "eesLabel": "Kontraktilität, Ees",
+ "plaLabel": "Füllungsdruck (linker Vorhof)",
+ "rLabel": "Peripherer Widerstand",
+ "svLabel": "Schlagvolumen",
+ "efLabel": "Ejektionsfraktion",
+ "edvLabel": "Enddiastolisches Volumen",
+ "esvLabel": "Endsystolisches Volumen",
+ "mapLabel": "Mittlerer arterieller Druck",
+ "coLabel": "Herzzeitvolumen",
+ "swLabel": "Schlagarbeit",
+ "loopTitle": "Druck-Volumen-Schleife",
+ "beatTitle": "Ein Herzzyklus",
+ "time": "Zeit (s)",
+ "pressure": "Druck (mmHg)",
+ "lvLine": "linke Kammer",
+ "aoLine": "Aorta"
+}

@@ -1,0 +1,17 @@
+{
+ "id": "satin-move",
+ "runtime": "sim-spec@1",
+ "entry": "activities/satin-move/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "satin-move-still",
+  "text": "An 8-shaft warp satin: each pick leaves exactly one end down, and the next pick moves that point by the same number of ends (the move). With a move of 3 (or 5) the interlacing points never touch, so the surface is smooth with no diagonal line: a regular satin. Moves 1 and 7 give a twill, and moves 2, 4 and 6 share a factor with 8, so some ends never interlace. Every end floats over 7 picks, and the sett for yarn of 30 wraps per inch is 30 × 8 / (8 + 2) = 24 ends per inch."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

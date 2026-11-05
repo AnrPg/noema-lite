@@ -1,0 +1,1724 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": {
+       "x": "ax",
+       "y": 0
+      }
+     },
+     {
+      "id": "B",
+      "point": [
+       6,
+       0
+      ]
+     },
+     {
+      "id": "C",
+      "point": [
+       2,
+       4
+      ],
+      "label": "ptC"
+     },
+     {
+      "id": "O",
+      "center": {
+       "kind": "circumcenter",
+       "of": [
+        "A",
+        "B",
+        "C"
+       ]
+      }
+     },
+     {
+      "id": "G",
+      "center": {
+       "kind": "centroid",
+       "of": [
+        "A",
+        "B",
+        "C"
+       ]
+      }
+     },
+     {
+      "id": "H",
+      "center": {
+       "kind": "orthocenter",
+       "of": [
+        "A",
+        "B",
+        "C"
+       ]
+      }
+     },
+     {
+      "id": "e",
+      "eulerLine": [
+       "A",
+       "B",
+       "C"
+      ],
+      "c": "warn"
+     },
+     {
+      "id": "T",
+      "polygon": [
+       "A",
+       "B",
+       "C"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "col",
+     "kind": "scalar",
+     "of": "collinear",
+     "at": [
+      "O",
+      "G",
+      "H"
+     ]
+    },
+    {
+     "id": "alw",
+     "kind": "scalar",
+     "of": "always",
+     "test": "collinear",
+     "at": [
+      "O",
+      "G",
+      "H"
+     ],
+     "samples": 10
+    },
+    {
+     "id": "area",
+     "kind": "scalar",
+     "of": "area",
+     "at": [
+      "T"
+     ]
+    },
+    {
+     "id": "ang",
+     "kind": "scalar",
+     "of": "angle",
+     "at": [
+      "B",
+      "A",
+      "C"
+     ],
+     "unit": "deg"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "d",
+     "title": "figTitle",
+     "height": 320
+    }
+   ],
+   "readouts": [
+    {
+     "label": "areaLabel",
+     "expr": "area"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "O",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "c",
+      "circle": {
+       "center": "O",
+       "r": 3
+      }
+     },
+     {
+      "id": "A",
+      "point": [
+       -3,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       3,
+       0
+      ]
+     },
+     {
+      "id": "P",
+      "pointOn": {
+       "on": "c",
+       "t": "u"
+      }
+     },
+     {
+      "id": "H",
+      "center": {
+       "kind": "orthocenter",
+       "of": [
+        "A",
+        "B",
+        "P"
+       ]
+      }
+     },
+     {
+      "id": "L",
+      "locus": {
+       "of": "H"
+      }
+     }
+    ],
+    "sweep": {
+     "var": "u",
+     "from": 0,
+     "to": "2*pi",
+     "samples": 400
+    },
+    "view": [
+     -5,
+     5,
+     -5,
+     5
+    ]
+   },
+   "outputs": [
+    {
+     "id": "u",
+     "kind": "series",
+     "of": "sweep"
+    },
+    {
+     "id": "apb",
+     "kind": "series",
+     "of": "angle",
+     "at": [
+      "A",
+      "P",
+      "B"
+     ]
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "drawing",
+     "labels": "none"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "u"
+     },
+     "series": [
+      {
+       "y": "apb"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "O",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "Q",
+      "point": {
+       "x": "ax",
+       "y": 0
+      }
+     },
+     {
+      "id": "c1",
+      "circle": {
+       "center": "O",
+       "r": 5
+      }
+     },
+     {
+      "id": "c2",
+      "circle": {
+       "center": "Q",
+       "r": "ax"
+      }
+     },
+     {
+      "id": "P",
+      "intersect": {
+       "of": [
+        "c1",
+        "c2"
+       ],
+       "pick": "near:Q"
+      }
+     },
+     {
+      "id": "t",
+      "tangent": {
+       "from": "Q",
+       "to": "c1",
+       "pick": "index:1"
+      }
+     },
+     {
+      "id": "r",
+      "radicalAxis": [
+       "c1",
+       "c2"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "count",
+     "at": [
+      "c1",
+      "c2"
+     ]
+    },
+    {
+     "id": "tg",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "tangent"
+    },
+    {
+     "id": "px",
+     "kind": "scalar",
+     "of": "x",
+     "at": [
+      "P"
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       2,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       -2,
+       0
+      ]
+     },
+     {
+      "id": "C",
+      "point": [
+       0,
+       1
+      ]
+     },
+     {
+      "id": "D",
+      "point": [
+       0,
+       -1
+      ]
+     },
+     {
+      "id": "E",
+      "point": [
+       1.4142135623730951,
+       0.7071067811865476
+      ]
+     },
+     {
+      "id": "k",
+      "conic": {
+       "points": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+       ]
+      }
+     },
+     {
+      "id": "F",
+      "focus": {
+       "of": "k",
+       "index": 0
+      }
+     },
+     {
+      "id": "k2",
+      "transform": {
+       "kind": "shear",
+       "of": "k",
+       "k": "ax"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "ecc",
+     "kind": "scalar",
+     "of": "eccentricity",
+     "at": [
+      "k"
+     ]
+    },
+    {
+     "id": "ty",
+     "kind": "scalar",
+     "of": "conicType",
+     "at": [
+      "k2"
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "O",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "U",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "u",
+      "circle": {
+       "center": "O",
+       "through": "U"
+      }
+     },
+     {
+      "id": "A",
+      "point": [
+       2,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       2,
+       1
+      ]
+     },
+     {
+      "id": "l",
+      "line": [
+       "A",
+       "B"
+      ]
+     },
+     {
+      "id": "i",
+      "transform": {
+       "kind": "invert",
+       "of": "l",
+       "circle": "u"
+      }
+     },
+     {
+      "id": "R",
+      "transform": {
+       "kind": "rotate",
+       "of": "A",
+       "center": "O",
+       "angle": "ax*30",
+       "deg": true
+      }
+     },
+     {
+      "id": "M",
+      "transform": {
+       "kind": "affine",
+       "of": "A",
+       "m": [
+        1,
+        "ax",
+        0,
+        0,
+        1,
+        0
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "radius",
+     "at": [
+      "i"
+     ]
+    },
+    {
+     "id": "rx",
+     "kind": "scalar",
+     "of": "x",
+     "at": [
+      "R"
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "P1",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "P2",
+      "point": [
+       4,
+       0
+      ]
+     },
+     {
+      "id": "P3",
+      "point": [
+       4,
+       3
+      ]
+     },
+     {
+      "id": "P4",
+      "point": [
+       2,
+       5
+      ]
+     },
+     {
+      "id": "P5",
+      "point": [
+       0,
+       3
+      ]
+     },
+     {
+      "id": "X",
+      "point": {
+       "x": "ax",
+       "y": 1
+      }
+     },
+     {
+      "id": "pg",
+      "polygon": [
+       "P1",
+       "P2",
+       "P3",
+       "P4",
+       "P5"
+      ]
+     },
+     {
+      "id": "h",
+      "hull": [
+       "P1",
+       "P2",
+       "P3",
+       "P4",
+       "P5",
+       "X"
+      ]
+     },
+     {
+      "id": "dt",
+      "delaunay": [
+       "P1",
+       "P2",
+       "P3",
+       "P4",
+       "P5",
+       "X"
+      ]
+     },
+     {
+      "id": "mc",
+      "mec": [
+       "P1",
+       "P2",
+       "P3",
+       "P4",
+       "P5"
+      ]
+     }
+    ],
+    "seed": 7
+   },
+   "outputs": [
+    {
+     "id": "inn",
+     "kind": "scalar",
+     "of": "inside",
+     "at": [
+      "X",
+      "pg"
+     ]
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "area",
+     "at": [
+      "pg"
+     ],
+     "signed": true
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": []
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "x",
+     "at": [
+      "A"
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "A",
+      "point": [
+       1,
+       1
+      ]
+     },
+     {
+      "point": [
+       1,
+       2
+      ]
+     },
+     {
+      "id": "9b",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B"
+     },
+     {
+      "id": "C",
+      "point": [
+       0,
+       0
+      ],
+      "line": [
+       "A",
+       "A"
+      ]
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0,
+       1
+      ]
+     },
+     {
+      "id": "B",
+      "point": {
+       "x": 1
+      }
+     },
+     {
+      "id": "C",
+      "point": "here"
+     },
+     {
+      "id": "D",
+      "midpoint": [
+       "A"
+      ]
+     },
+     {
+      "id": "E",
+      "polygon": "A"
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "l",
+      "line": [
+       "A",
+       "B"
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "m",
+      "midpoint": [
+       "A",
+       "zz"
+      ]
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "s",
+      "segment": [
+       "A",
+       "B"
+      ]
+     },
+     {
+      "id": "m",
+      "midpoint": [
+       "A",
+       "s"
+      ]
+     },
+     {
+      "id": "c",
+      "circle": {
+       "center": "s",
+       "r": 1
+      }
+     },
+     {
+      "id": "I",
+      "intersect": {
+       "of": [
+        "A",
+        "s"
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "c",
+      "circle": {
+       "center": "A"
+      }
+     },
+     {
+      "id": "c2",
+      "circle": {
+       "center": "A",
+       "r": -1
+      }
+     },
+     {
+      "id": "k",
+      "conic": {
+       "e": 2
+      }
+     },
+     {
+      "id": "k2",
+      "conic": {
+       "points": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+       ],
+       "e": -1
+      }
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "T",
+      "transform": {
+       "kind": "rotate",
+       "of": "A"
+      }
+     },
+     {
+      "id": "s",
+      "delaunay": [
+       "A",
+       "B",
+       "A"
+      ]
+     },
+     {
+      "id": "V",
+      "transform": {
+       "kind": "invert",
+       "of": "s",
+       "circle": "A"
+      }
+     },
+     {
+      "id": "L",
+      "locus": {
+       "of": "A"
+      }
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "c",
+      "circle": {
+       "center": "A",
+       "through": "B"
+      }
+     },
+     {
+      "id": "I",
+      "intersect": {
+       "of": [
+        "c",
+        "c"
+       ],
+       "pick": "nearest:B"
+      }
+     },
+     {
+      "id": "J",
+      "intersect": {
+       "of": [
+        "c",
+        "c"
+       ],
+       "pick": "near:zz"
+      }
+     },
+     {
+      "id": "K",
+      "center": {
+       "kind": "orthocentre",
+       "of": [
+        "A",
+        "B",
+        "A"
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ],
+      "hide": "yes",
+      "label": "Bad Key",
+      "c": "red",
+      "size": 3
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     }
+    ],
+    "tol": -1,
+    "sweep": {
+     "var": "t",
+     "from": 0
+    },
+    "extra": 1
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "C",
+      "point": [
+       2,
+       2
+      ]
+     },
+     {
+      "id": "s",
+      "segment": [
+       "A",
+       "B"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "q1",
+     "kind": "scalar",
+     "of": "area",
+     "at": [
+      "A",
+      "B"
+     ]
+    },
+    {
+     "id": "q2",
+     "kind": "scalar",
+     "of": "radius",
+     "at": [
+      "s"
+     ]
+    },
+    {
+     "id": "q3",
+     "kind": "scalar",
+     "of": "dist"
+    },
+    {
+     "id": "q4",
+     "kind": "scalar",
+     "of": "x",
+     "at": [
+      "zz"
+     ]
+    },
+    {
+     "id": "q5",
+     "kind": "scalar",
+     "of": "always",
+     "test": "equal",
+     "at": [
+      "A",
+      "B"
+     ]
+    },
+    {
+     "id": "q6",
+     "kind": "scalar",
+     "of": "residual"
+    },
+    {
+     "id": "q7",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "oops"
+    },
+    {
+     "id": "q8",
+     "kind": "scalar",
+     "of": "angle",
+     "at": [
+      "A",
+      "B",
+      "C"
+     ],
+     "unit": "grad",
+     "oriented": 1,
+     "samples": 0
+    },
+    {
+     "id": "q9",
+     "kind": "scalar",
+     "of": "nope"
+    },
+    {
+     "id": "qs",
+     "kind": "series",
+     "of": "sweep"
+    },
+    {
+     "id": "qd",
+     "kind": "scene",
+     "of": "drawing",
+     "labels": "all"
+    },
+    {
+     "id": "qx",
+     "kind": "scalar",
+     "of": "x",
+     "at": "A",
+     "code": "tangent",
+     "test": "on"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     }
+    ],
+    "sweep": {
+     "var": "u",
+     "from": 0,
+     "to": 1,
+     "samples": 2000
+    }
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "sweep"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "always",
+     "test": "collinear",
+     "at": [
+      "A",
+      "A",
+      "A"
+     ],
+     "samples": 200
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "T",
+      "transform": {
+       "kind": "translate",
+       "of": "A",
+       "dx": 1,
+       "dy": "ax"
+      }
+     },
+     {
+      "id": "R",
+      "transform": {
+       "kind": "reflect",
+       "of": "B",
+       "center": "A"
+      }
+     },
+     {
+      "id": "f",
+      "flag": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "x",
+     "at": [
+      "T"
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "C",
+      "point": [
+       0,
+       1
+      ]
+     },
+     {
+      "id": "g",
+      "polygon": [
+       "A",
+       "B",
+       "C"
+      ]
+     },
+     {
+      "id": "k",
+      "clip": [
+       "g",
+       "A"
+      ]
+     },
+     {
+      "id": "r",
+      "regular": {
+       "center": "A",
+       "vertex": "B",
+       "n": 2
+      }
+     },
+     {
+      "id": "ap",
+      "apollonius": {
+       "of": [
+        "A",
+        "B",
+        "C"
+       ],
+       "signs": [
+        1,
+        2,
+        0
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": "geom",
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "geom@1",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "axLabel",
+     "min": -5,
+     "max": 5,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "objects": [
+     {
+      "id": "A",
+      "point": [
+       0,
+       0
+      ]
+     },
+     {
+      "id": "B",
+      "point": [
+       1,
+       0
+      ]
+     },
+     {
+      "id": "C",
+      "point": [
+       0,
+       1
+      ]
+     },
+     {
+      "id": "c",
+      "circle": {
+       "points": [
+        "A",
+        "B",
+        "C"
+       ]
+      }
+     },
+     {
+      "id": "t",
+      "tangent": {
+       "from": "A",
+       "to": "c",
+       "pick": "other:B"
+      }
+     },
+     {
+      "id": "P",
+      "pointOn": {
+       "on": "c",
+       "t": "ax"
+      }
+     },
+     {
+      "id": "sm",
+      "simson": {
+       "point": "P",
+       "of": [
+        "A",
+        "B",
+        "C"
+       ]
+      }
+     },
+     {
+      "id": "b",
+      "bezier": [
+       "A",
+       "B",
+       "C"
+      ]
+     },
+     {
+      "id": "g",
+      "geodesic": [
+       "A",
+       "B"
+      ]
+     },
+     {
+      "id": "pr",
+      "transform": {
+       "kind": "projective",
+       "of": "c",
+       "from": [
+        "A",
+        "B",
+        "C",
+        "P"
+       ],
+       "to": [
+        "B",
+        "C",
+        "A",
+        "P"
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "defined",
+     "at": [
+      "pr"
+     ]
+    },
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "on",
+     "at": [
+      "P",
+      "c"
+     ]
+    }
+   ]
+  }
+ ]
+}

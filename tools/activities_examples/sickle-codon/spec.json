@@ -1,0 +1,160 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "seq@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  {
+   "id": "pos",
+   "kind": "slider",
+   "label": "posLabel",
+   "min": 1,
+   "max": 60,
+   "step": 1,
+   "default": 1
+  },
+  {
+   "id": "base",
+   "kind": "choice",
+   "label": "baseLabel",
+   "options": [
+    {
+     "value": 0,
+     "label": "baseA"
+    },
+    {
+     "value": 1,
+     "label": "baseC"
+    },
+    {
+     "value": 2,
+     "label": "baseG"
+    },
+    {
+     "value": 3,
+     "label": "baseT"
+    }
+   ],
+   "default": 0
+  }
+ ],
+ "model": {
+  "mode": "mutate",
+  "cds": ">HBB coding sequence (human beta-globin), c.1 = the A of ATG\nATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA",
+  "variants": [
+   {
+    "kind": "sub",
+    "pos": "pos",
+    "altIndex": "base"
+   }
+  ],
+  "enzymes": [
+   "Bsu36I"
+  ]
+ },
+ "outputs": [
+  {
+   "id": "effect",
+   "kind": "scalar",
+   "of": "effect",
+   "arg": 0
+  },
+  {
+   "id": "aaPos",
+   "kind": "scalar",
+   "of": "protPos",
+   "arg": 0
+  },
+  {
+   "id": "refAa",
+   "kind": "scalar",
+   "of": "refAa",
+   "arg": 0
+  },
+  {
+   "id": "altAa",
+   "kind": "scalar",
+   "of": "altAa",
+   "arg": 0
+  },
+  {
+   "id": "blosum",
+   "kind": "scalar",
+   "of": "blosum",
+   "arg": 0
+  },
+  {
+   "id": "transition",
+   "kind": "scalar",
+   "of": "transition",
+   "arg": 0
+  },
+  {
+   "id": "sitesRef",
+   "kind": "scalar",
+   "of": "sitesRef",
+   "arg": 0
+  },
+  {
+   "id": "sitesAlt",
+   "kind": "scalar",
+   "of": "sitesAlt",
+   "arg": 0
+  },
+  {
+   "id": "names",
+   "kind": "scene",
+   "of": "hgvs"
+  },
+  {
+   "id": "prot",
+   "kind": "scene",
+   "of": "protein",
+   "arg": 0
+  }
+ ],
+ "readouts": [
+  {
+   "label": "aaPosLabel",
+   "expr": "aaPos"
+  },
+  {
+   "label": "missenseLabel",
+   "expr": "effect == 1"
+  },
+  {
+   "label": "silentLabel",
+   "expr": "effect == 0"
+  },
+  {
+   "label": "nonsenseLabel",
+   "expr": "effect == 2"
+  },
+  {
+   "label": "blosumLabel",
+   "expr": "blosum"
+  },
+  {
+   "label": "transitionLabel",
+   "expr": "transition == 1"
+  },
+  {
+   "label": "sitesLabel",
+   "expr": "sitesAlt"
+  }
+ ],
+ "plots": [
+  {
+   "kind": "scene",
+   "of": "names",
+   "title": "namesTitle",
+   "height": 120
+  },
+  {
+   "kind": "scene",
+   "of": "prot",
+   "title": "protTitle",
+   "height": 160
+  }
+ ]
+}

@@ -1,0 +1,1050 @@
+{
+"specs": [
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "aen",
+"lang": "la",
+"body": "Arma virumque cano, Troiae qui primus ab oris\nItaliam fato profugus Lavinjaque venit\nlitora, multum ille et terris iactatus et alto",
+"label": "aenLabel"
+}
+],
+"metre": {
+"pattern": "hexameter"
+}
+},
+"outputs": [
+{
+"id": "n",
+"kind": "scalar",
+"of": "scansions",
+"line": 1
+},
+{
+"id": "f1",
+"kind": "scalar",
+"of": "foot",
+"line": 1,
+"n": 1
+},
+{
+"id": "cz",
+"kind": "scalar",
+"of": "caesura",
+"line": 1,
+"type": "penthemimeral"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "aen",
+"lang": "la",
+"body": "Arma virumque cano, Troiae qui primus ab oris\nItaliam fato profugus Lavinjaque venit\nlitora, multum ille et terris iactatus et alto"
+}
+],
+"metre": {
+"pattern": "hexameter"
+}
+},
+"outputs": [
+{
+"id": "cz",
+"kind": "scalar",
+"of": "caesura",
+"line": 1,
+"type": "masculine"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+}
+]
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scalar",
+"of": "mattr",
+"window": "w"
+},
+{
+"id": "d",
+"kind": "scalar",
+"of": "mtld",
+"threshold": 0.72
+},
+{
+"id": "z",
+"kind": "series",
+"of": "rankFreq",
+"top": 50
+},
+{
+"id": "r",
+"kind": "series",
+"of": "ranks",
+"top": 50
+}
+],
+"plots": [
+{
+"kind": "series",
+"x": {
+"series": "r",
+"scale": "log",
+"min": 1
+},
+"y": {
+"scale": "log",
+"min": 1
+},
+"series": [
+{
+"y": "z",
+"style": "points"
+}
+]
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+}
+]
+},
+"outputs": [
+{
+"id": "p",
+"kind": "scalar",
+"of": "assoc",
+"measure": "pmi",
+"o11": 20,
+"r1": 42,
+"c1": 20,
+"n": 14307668
+},
+{
+"id": "g",
+"kind": "scalar",
+"of": "assoc",
+"w1": "the",
+"w2": "cat",
+"measure": "g2",
+"span": 2
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+}
+]
+},
+"outputs": [
+{
+"id": "p",
+"kind": "scalar",
+"of": "assoc",
+"measure": "pmi",
+"w1": "the"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+}
+]
+},
+"outputs": [
+{
+"id": "p",
+"kind": "scalar",
+"of": "assoc",
+"measure": "mi",
+"w1": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+"w2": ""
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+},
+{
+"id": "t",
+"lang": "klingon"
+}
+]
+},
+"outputs": [
+{
+"id": "r",
+"kind": "scalar",
+"of": "readability",
+"formula": "flesch",
+"text": "u"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": []
+},
+"outputs": [
+{
+"id": "r",
+"kind": "scalar",
+"of": "tokens"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {},
+"outputs": [
+{
+"id": "r",
+"kind": "scalar",
+"of": "tokens"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "a",
+"body": "x"
+},
+{
+"id": "b",
+"body": "y"
+}
+]
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "delta",
+"a": "a",
+"b": "b"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "a",
+"body": "one two"
+},
+{
+"id": "b",
+"body": "two three"
+},
+{
+"id": "c",
+"body": "three four"
+}
+]
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "delta",
+"a": "a",
+"b": "c",
+"mfw": "w",
+"variant": "cosine"
+},
+{
+"id": "dm",
+"kind": "scene",
+"of": "deltaMap",
+"mfw": 3
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "dm",
+"title": "dTitle"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "s",
+"lang": "en",
+"body": "Shall I compare thee to a summer's day?\nThou art more lovely and more temperate:"
+}
+],
+"metre": {
+"pattern": "iambic5"
+},
+"lexicon": [
+{
+"w": "temperate",
+"p": "100"
+},
+{
+"w": "",
+"p": "1x"
+}
+]
+},
+"outputs": [
+{
+"id": "f",
+"kind": "scalar",
+"of": "metreFit",
+"line": 1
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "s",
+"lang": "en",
+"body": "Shall I compare thee to a summer's day?\nThou art more lovely and more temperate:"
+}
+],
+"metre": {
+"pattern": "iambic5"
+},
+"lexicon": [
+{
+"w": "temperate",
+"p": "100"
+}
+]
+},
+"outputs": [
+{
+"id": "f",
+"kind": "scalar",
+"of": "metreFit",
+"line": 1
+},
+{
+"id": "sy",
+"kind": "scalar",
+"of": "syllables",
+"line": 2
+},
+{
+"id": "rh",
+"kind": "scalar",
+"of": "rhyme",
+"a": 1,
+"b": 2
+},
+{
+"id": "sch",
+"kind": "scalar",
+"of": "scheme",
+"scheme": "AB"
+},
+{
+"id": "rs",
+"kind": "scene",
+"of": "rhymes"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "s",
+"lang": "en",
+"body": "a"
+}
+],
+"metre": {
+"pattern": "iambic5"
+}
+},
+"outputs": [
+{
+"id": "f",
+"kind": "scalar",
+"of": "scansions",
+"line": 1
+},
+{
+"id": "s2",
+"kind": "scalar",
+"of": "scheme",
+"scheme": "AB-AB"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "s",
+"lang": "en",
+"body": "a"
+}
+]
+},
+"outputs": [
+{
+"id": "f",
+"kind": "scalar",
+"of": "foot",
+"line": 1,
+"n": 7
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "g",
+"lang": "grc",
+"body": "μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος"
+}
+],
+"normalize": {
+"form": "NFD",
+"foldSigma": true,
+"diacritics": "strip"
+},
+"metre": {
+"pattern": "hexameter",
+"lang": "grc",
+"synizesis": true,
+"max": 8
+}
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "dactyls",
+"line": 1
+},
+{
+"id": "sc",
+"kind": "scene",
+"of": "scansion",
+"line": 1
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "sc"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "g",
+"lang": "grc",
+"body": "x"
+}
+],
+"metre": {
+"pattern": "alcaic"
+},
+"normalize": {
+"form": "NFX",
+"weird": 1
+}
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "dactyls",
+"line": 1
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+}
+]
+},
+"outputs": [
+{
+"id": "k",
+"kind": "scene",
+"of": "kwic",
+"word": "sat",
+"window": 3
+},
+{
+"id": "tw",
+"kind": "scene",
+"of": "topWords",
+"top": 10
+},
+{
+"id": "hv",
+"kind": "series",
+"of": "heapsV"
+},
+{
+"id": "hn",
+"kind": "series",
+"of": "heapsN"
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "k"
+},
+{
+"kind": "series",
+"x": {
+"series": "hn"
+},
+"series": [
+{
+"y": "hv"
+}
+]
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+}
+]
+},
+"outputs": [
+{
+"id": "k",
+"kind": "scene",
+"of": "kwic"
+},
+{
+"id": "q",
+"kind": "sound",
+"of": "tone"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "a",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+},
+{
+"id": "b",
+"lang": "en",
+"body": "dogs and cats"
+}
+]
+},
+"outputs": [
+{
+"id": "k",
+"kind": "scalar",
+"of": "keyness",
+"text": "a",
+"ref": "b",
+"word": "cat",
+"measure": "logRatio"
+},
+{
+"id": "f",
+"kind": "scalar",
+"of": "freq",
+"word": "the",
+"per": "w*1000"
+},
+{
+"id": "z",
+"kind": "scalar",
+"of": "zipf",
+"fit": "mle",
+"rmin": "w/10"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "a",
+"lang": "en",
+"body": "The cat sat on the mat and the dog sat on the log."
+}
+]
+},
+"outputs": [
+{
+"id": "k",
+"kind": "scalar",
+"of": "keyness",
+"text": "a",
+"word": "cat"
+},
+{
+"id": "x",
+"kind": "series",
+"of": "ttrCurve",
+"steps": 500
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "e",
+"lang": "la",
+"body": "Arma gravi numero violentaque bella parabam\nedere, materia conveniente modis."
+}
+],
+"metre": {
+"pattern": "elegiac",
+"mcl": "short"
+}
+},
+"outputs": [
+{
+"id": "n2",
+"kind": "scalar",
+"of": "scansions",
+"line": 2
+},
+{
+"id": "dz",
+"kind": "scalar",
+"of": "caesura",
+"line": 2,
+"type": "diaeresis"
+},
+{
+"id": "db",
+"kind": "series",
+"of": "dactylsByLine"
+},
+{
+"id": "la",
+"kind": "series",
+"of": "lineAxis"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "t",
+"lang": "zh",
+"body": "我们学习中文"
+}
+],
+"normalize": {
+"segment": "chars"
+}
+},
+"outputs": [
+{
+"id": "n",
+"kind": "scalar",
+"of": "tokens"
+},
+{
+"id": "h",
+"kind": "scalar",
+"of": "hdd",
+"sample": "w"
+},
+{
+"id": "wl",
+"kind": "series",
+"of": "wordLengths",
+"max": 10
+},
+{
+"id": "ax",
+"kind": "series",
+"of": "lengthAxis",
+"max": 10
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "text@1",
+"params": [
+{
+"id": "w",
+"kind": "slider",
+"label": "wLabel",
+"min": 5,
+"max": 100,
+"default": 50
+}
+],
+"model": {
+"texts": [
+{
+"id": "aen",
+"lang": "la",
+"body": "Arma virumque cano, Troiae qui primus ab oris\nItaliam fato profugus Lavinjaque venit\nlitora, multum ille et terris iactatus et alto"
+}
+],
+"metre": {
+"pattern": "hexameter"
+}
+},
+"outputs": [
+{
+"id": "a",
+"kind": "scalar",
+"of": "dactyls",
+"line": "w/25"
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "foot",
+"line": 2.5,
+"n": 2
+},
+{
+"id": "c",
+"kind": "scene",
+"of": "scansion",
+"line": 0
+}
+]
+}
+]
+}

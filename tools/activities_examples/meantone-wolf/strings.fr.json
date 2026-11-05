@@ -1,0 +1,13 @@
+{
+ "title": "Tempérer la quinte, trouver le loup",
+ "intro": "Un clavier compte douze touches par octave, mais un empilement de quintes justes (3:2, 701,96 cents) ne revient jamais à la note de départ, et quatre quintes justes donnent une tierce bien plus large que la tierce pure 5:4. Le tempérament mésotonique rétrécit chaque quinte d’une fraction du comma syntonique (21,51 cents) pour rapprocher les tierces de la pureté. Choisis la fraction : 0 est l’accord pythagoricien aux quintes justes. Observe la tierce majeure do–mi, la vitesse de ses battements par rapport à la tierce pure, et la seule quinte qui reste entre sol♯ et mi♭ sur un clavier accordé de mi♭ à sol♯ : le loup. Écoute l’accord de do majeur et la quinte du loup.",
+ "fraction": "Rétrécissement des quintes (fraction du comma syntonique)",
+ "fifthLabel": "Quinte do–sol",
+ "thirdLabel": "Tierce majeure do–mi",
+ "pureLabel": "Tierce moins la tierce pure (5:4)",
+ "wolfLabel": "Quinte du loup sol♯–mi♭",
+ "beatsLabel": "Battements de la tierce do4–mi4",
+ "kbTitle": "Do majeur au clavier : écart en cents par rapport au tempérament égal",
+ "chordTitle": "L’accord de do majeur",
+ "wolfTitle": "La quinte du loup sol♯3–mi♭4"
+}

@@ -1051,6 +1051,18 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .act-pyrun { position: relative; height: 0; overflow: hidden; }
 .act-pyset .row { gap: 8px; flex-wrap: wrap; align-items: center; }
 .act-pybar { flex: 1 1 140px; max-width: 260px; height: 8px; }
+/* the engine library's drawings (plot kind scene, docs/INTERACTIVE_LIBRARY.md §1.4): roles, never colours, so every theme and dark mode fit */
+.sim-scene { display: block; max-width: 100%; height: auto; }
+.sim-scene .sim-r-base { --r: var(--ink2); } .sim-scene .sim-r-muted { --r: var(--ink3); } .sim-scene .sim-r-hi { --r: var(--c); }
+.sim-scene .sim-r-ok { --r: var(--ok); } .sim-scene .sim-r-bad { --r: var(--bad); } .sim-scene .sim-r-warn { --r: var(--warn); } .sim-scene .sim-r-info { --r: var(--info); }
+.sim-scene .sim-pt { fill: var(--r); stroke: var(--bg, #fff); stroke-width: 1.2; }
+.sim-scene .sim-seg { stroke: var(--r); stroke-linecap: round; }
+.sim-scene .sim-circ, .sim-scene .sim-poly { fill: none; stroke: var(--r); stroke-width: 1.6; }
+.sim-scene .sim-fill { fill: var(--r); fill-opacity: .16; }
+.sim-scene .sim-sl { fill: var(--r); font-size: 12px; paint-order: stroke; stroke: var(--bg, #fff); stroke-width: 3px; stroke-linejoin: round; }
+.sim-scene .sim-arrowhead { fill: var(--ink2); }
+.sim-svg .sim-bar { opacity: .75; } .sim-svg .sim-dot { opacity: .8; }
+.sim-plot-sound .sim-svg { padding: .25rem 0; }
 
 /* ---- 35_visual.css ---- */
 /* ---------- visual exercises & figures (docs/VISUAL.md) ---------- */
@@ -1235,6 +1247,37 @@ body.vx-noscroll{overflow:hidden}
 .act-embed-credit { margin: 0; padding: 4px 10px; font-size: 0.8em; color: var(--ink3); border-top: 1px solid var(--line); overflow-wrap: anywhere; }
 .act-embed-card .act-embed-credit { padding: 0; border: 0; }
 .act-embed-credit a { color: inherit; }
+
+/* ---- 49_lib_view.css ---- */
+/* ---------- ⚙ #/engines (49_lib_view.js): the catalogue of engines and the requests for new ones — quiet, one column, wraps at 320px ---------- */
+.eng-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.eng-head h2 { margin: 0; }
+.eng-intro { max-width: 64ch; }
+.eng-sec { margin-top: 18px; }
+.eng-sec h3 { font-size: 1rem; margin: 0 0 6px; }
+.eng-list, .eng-reqs { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.eng-row { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; padding: 6px 10px; border-radius: 8px; background: var(--card, transparent); border: 1px solid var(--line, rgba(127,127,127,.18)); min-width: 0; }
+.eng-row b { font-weight: 600; }
+.eng-id { font-size: .78em; opacity: .65; }
+.eng-what { flex: 1 1 100%; font-size: .88em; opacity: .8; overflow-wrap: anywhere; }
+.eng-req { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line, rgba(127,127,127,.18)); display: grid; gap: 4px; min-width: 0; }
+.eng-req-h { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.eng-req-h b { overflow-wrap: anywhere; }
+.eng-st { font-size: .75em; padding: 1px 8px; border-radius: 99px; border: 1px solid currentColor; opacity: .75; }
+.eng-st-available { color: var(--ok, #3a8a5a); }
+.eng-st-declined, .eng-st-duplicate { color: var(--muted, #888); }
+.eng-answer { white-space: pre-wrap; overflow-wrap: anywhere; }
+.eng-req-tools { flex-wrap: wrap; gap: 6px; }
+.eng-admin { font-size: .9em; }
+.eng-admin .row { flex-wrap: wrap; gap: 6px; margin: 4px 0; }
+.eng-admin input, .eng-admin select { max-width: 100%; min-width: 0; }
+.eng-admin > input { width: 100%; box-sizing: border-box; }
+.eng-f { display: grid; gap: 3px; margin: 8px 0; }
+.eng-f span { font-size: .88em; opacity: .85; }
+.eng-f input, .eng-f textarea, .eng-f select { width: 100%; box-sizing: border-box; min-width: 0; }
+.eng-more > summary { cursor: pointer; margin: 8px 0 2px; font-size: .9em; opacity: .85; }
+.eng-sug:empty { display: none; }
+.eng-sug { margin: 4px 0 6px; }
 
 /* ---- 95_shell.css ---- */
 /* =====================================================================================

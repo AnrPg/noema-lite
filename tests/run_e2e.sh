@@ -27,6 +27,7 @@ node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in t
 node "$ROOT/tests/activity_author.js" --browser "$T"   # the activity author (P6): #/author in the built site, classic router and the frame (subject ⋮ › Create an activity), the form, preview, .zip, 320 px
 node "$ROOT/tests/activities_wasm.js" --app "$T"   # wasm-module@1 + engine wasm@1: parity with wasm_check.py, the ABI, no network in the worker, runaway, in the app (docs/INTERACTIVE_WASM.md)
 node "$ROOT/tests/activities_embed.js" --browser   # external-embed@1: the allow-list, JS = Python URL and item rules, the consent card, a hostile page (a local fake provider; docs/INTERACTIVE_EMBED.md)
+node "$ROOT/tests/enginelib.js"         # the engine library of sim-spec@1: the core, the catalogue, JS = Python checks of every engine (docs/INTERACTIVE_LIBRARY.md)
 node "$ROOT/tests/xapi.js"            # the xAPI 1.0.3 / cmi5 export (docs/INTERACTIVE_XAPI.md)
 python3 "$ROOT/tests/h5p_import.py"   # H5P import into the exercise types (docs/INTERACTIVE_AUTHORING.md §H5P)
 node "$ROOT/tests/shell.js" "$T"
@@ -39,6 +40,7 @@ node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
 node "$ROOT/tests/thinking_types.js" "$T"   # flaw, case, predict, tree, inquiry, debate; how sure, ⚑, source chip, facades
 node "$ROOT/tests/reports.js" "$T"         # ⚑ problem reports: the button, the locator, the admins' page, the connector tools (docs/REPORTS.md)
+node "$ROOT/tests/enginereq.js" "$T"       # ⚙ requests for new engines: #/engines, the form, the answers, the connector tools (docs/INTERACTIVE_LIBRARY.md §3)
 python3 "$ROOT/tests/validate_visual.py"
 node "$ROOT/tests/pack_rules.js"   # the quality rules, Python and JS alike (tools/pack_rules.json, docs/PIPELINES.md §4)
 python3 "$ROOT/tests/pipelines.py"   # the content flows, step by step (tools/pipelines/, docs/PIPELINES.md)

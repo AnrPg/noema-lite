@@ -1,0 +1,13 @@
+{
+ "title": "Eine verletzte Pflicht und ihre Wiedergutmachung",
+ "intro": "Am Tag 0 bittet dich ein Nachbar um Hilfe: Du sollst innerhalb von zwei Tagen hingehen. Eine zweite Norm sagt, was du tun sollst, wenn du die erste verletzt: Dann sollst du wenigstens innerhalb eines Tages anrufen (eine Pflicht für den Fall der Pflichtverletzung). Eine dritte verbietet Lärm in der Nacht. Schiebe den Tage-Regler, um der Woche zu folgen, und sieh, wie jede Norm fällig, erfüllt oder verletzt wird. Schalte die zweite Norm ab, um zu sehen, was sich ändert.",
+ "kLabel": "Gezeigte Tage",
+ "ctdLabel": "Die Norm der Wiedergutmachung gilt (1 = ja)",
+ "frameLabel": "Geprüfte Tage",
+ "vLabel": "Verletzungen bis jetzt",
+ "fLabel": "Erfüllte Pflichten bis jetzt",
+ "pLabel": "Noch geltende Normen",
+ "sceneTitle": "Die Normen im Lauf der Tage",
+ "checkBroken": "Eine Pflicht wurde verletzt.",
+ "checkFirstDay": "Es ist der erste Tag, an dem das sichtbar wird."
+}

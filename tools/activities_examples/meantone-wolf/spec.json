@@ -1,0 +1,36 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "music@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "pure": 386.3137, "wolfMax": 740 },
+ "params": [
+  { "id": "fr", "kind": "slider", "label": "fraction", "min": 0, "max": 0.5, "step": 0.01, "default": 0 }
+ ],
+ "model": {
+  "tuning": { "system": "meantone", "fraction": "fr", "layout": "keyboard", "chainStart": "Eb", "a4": 440 },
+  "sets": [ { "id": "triad", "notes": ["C4", "E4", "G4"] }, { "id": "wolfFifth", "notes": ["G#3", "Eb4"] } ],
+  "timbres": [ { "id": "organ", "kind": "harmonic", "n": 6, "decay": 0.7 } ]
+ },
+ "outputs": [
+  { "id": "fifth", "kind": "scalar", "of": "cents", "from": "C4", "to": "G4" },
+  { "id": "third", "kind": "scalar", "of": "cents", "from": "C4", "to": "E4" },
+  { "id": "wolf", "kind": "scalar", "of": "cents", "from": "G#4", "to": "Eb5" },
+  { "id": "beats", "kind": "scalar", "of": "beats", "a": "C4", "b": "E4", "p": 5, "q": 4 },
+  { "id": "kb", "kind": "scene", "of": "keyboard", "set": "triad", "from": "C4", "to": "B4", "cents": true },
+  { "id": "chord", "kind": "sound", "of": "play", "set": "triad", "timbre": "organ", "dur": 2 },
+  { "id": "wolfSound", "kind": "sound", "of": "play", "set": "wolfFifth", "timbre": "organ", "dur": 2 }
+ ],
+ "readouts": [
+  { "label": "fifthLabel", "expr": "fifth", "unit": "c", "format": "fixed", "digits": 2 },
+  { "label": "thirdLabel", "expr": "third", "unit": "c", "format": "fixed", "digits": 2 },
+  { "label": "pureLabel", "expr": "third - pure", "unit": "c", "format": "fixed", "digits": 2 },
+  { "label": "wolfLabel", "expr": "wolf", "unit": "c", "format": "fixed", "digits": 2 },
+  { "label": "beatsLabel", "expr": "beats", "unit": "Hz", "format": "fixed", "digits": 2 }
+ ],
+ "plots": [
+  { "kind": "scene", "of": "kb", "title": "kbTitle", "height": 220 },
+  { "kind": "sound", "of": "chord", "title": "chordTitle", "height": 120 },
+  { "kind": "sound", "of": "wolfSound", "title": "wolfTitle", "height": 120 }
+ ]
+}

@@ -1,0 +1,375 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "map@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": {
+  "openFrom": 4,
+  "openTo": 10
+ },
+ "params": [
+  {
+   "id": "month",
+   "kind": "slider",
+   "label": "month",
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "default": 1
+  },
+  {
+   "id": "seaSpeed",
+   "kind": "slider",
+   "label": "seaSpeed",
+   "min": 50,
+   "max": 200,
+   "step": 5,
+   "default": 130,
+   "unit": "km/d"
+  }
+ ],
+ "derived": [
+  {
+   "id": "seaOpen",
+   "expr": "month >= openFrom && month <= openTo"
+  }
+ ],
+ "model": {
+  "ellipsoid": "WGS84",
+  "projection": {
+   "type": "lcc",
+   "lat1": 33,
+   "lat2": 43,
+   "lat0": 37,
+   "lon0": 22
+  },
+  "view": {
+   "bbox": [
+    8,
+    29,
+    37,
+    45
+   ],
+   "graticule": 5
+  },
+  "places": [
+   {
+    "id": "roma",
+    "lat": 41.8933,
+    "lon": 12.4828,
+    "label": "roma",
+    "c": "hi"
+   },
+   {
+    "id": "ostia",
+    "lat": 41.7556,
+    "lon": 12.2914,
+    "label": "ostia"
+   },
+   {
+    "id": "capua",
+    "lat": 41.0833,
+    "lon": 14.25,
+    "label": "capua"
+   },
+   {
+    "id": "puteoli",
+    "lat": 40.8222,
+    "lon": 14.1222,
+    "label": "puteoli"
+   },
+   {
+    "id": "brundisium",
+    "lat": 40.6327,
+    "lon": 17.9418,
+    "label": "brundisium"
+   },
+   {
+    "id": "rhegium",
+    "lat": 38.11,
+    "lon": 15.6475,
+    "label": "rhegium"
+   },
+   {
+    "id": "corinthus",
+    "lat": 37.9058,
+    "lon": 22.88,
+    "label": "corinthus"
+   },
+   {
+    "id": "rhodus",
+    "lat": 36.4412,
+    "lon": 28.2225,
+    "label": "rhodus"
+   },
+   {
+    "id": "caesarea",
+    "lat": 32.5,
+    "lon": 34.8917,
+    "label": "caesarea"
+   },
+   {
+    "id": "alexandria",
+    "lat": 31.1975,
+    "lon": 29.8925,
+    "label": "alexandria",
+    "c": "hi"
+   }
+  ],
+  "network": {
+   "edges": [
+    {
+     "a": "roma",
+     "b": "ostia",
+     "mode": "road",
+     "km": 30
+    },
+    {
+     "a": "roma",
+     "b": "capua",
+     "mode": "road",
+     "km": 195
+    },
+    {
+     "a": "capua",
+     "b": "puteoli",
+     "mode": "road",
+     "km": 30
+    },
+    {
+     "a": "capua",
+     "b": "brundisium",
+     "mode": "road",
+     "km": 337
+    },
+    {
+     "a": "capua",
+     "b": "rhegium",
+     "mode": "road",
+     "km": 475
+    },
+    {
+     "a": "ostia",
+     "b": "alexandria",
+     "mode": "sea",
+     "open": "seaOpen"
+    },
+    {
+     "a": "puteoli",
+     "b": "alexandria",
+     "mode": "sea",
+     "open": "seaOpen"
+    },
+    {
+     "a": "rhegium",
+     "b": "alexandria",
+     "mode": "sea",
+     "open": "seaOpen"
+    },
+    {
+     "a": "brundisium",
+     "b": "corinthus",
+     "mode": "coast"
+    },
+    {
+     "a": "corinthus",
+     "b": "alexandria",
+     "mode": "sea",
+     "open": "seaOpen"
+    },
+    {
+     "a": "rhegium",
+     "b": "corinthus",
+     "mode": "coast"
+    },
+    {
+     "a": "corinthus",
+     "b": "rhodus",
+     "mode": "coast"
+    },
+    {
+     "a": "rhodus",
+     "b": "caesarea",
+     "mode": "coast"
+    },
+    {
+     "a": "caesarea",
+     "b": "alexandria",
+     "mode": "coast"
+    }
+   ],
+   "speeds": {
+    "sea": "seaSpeed",
+    "coast": "seaSpeed * 0.7"
+   },
+   "factor": 1.1
+  }
+ },
+ "outputs": [
+  {
+   "id": "days",
+   "kind": "scalar",
+   "of": "route",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "days"
+  },
+  {
+   "id": "km",
+   "kind": "scalar",
+   "of": "route",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "days",
+   "what": "km"
+  },
+  {
+   "id": "legs",
+   "kind": "scalar",
+   "of": "route",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "days",
+   "what": "legs"
+  },
+  {
+   "id": "cost",
+   "kind": "scalar",
+   "of": "route",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "days",
+   "what": "cost"
+  },
+  {
+   "id": "found",
+   "kind": "scalar",
+   "of": "route",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "days",
+   "what": "found"
+  },
+  {
+   "id": "cheapest",
+   "kind": "scalar",
+   "of": "route",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "cost",
+   "what": "cost"
+  },
+  {
+   "id": "direct",
+   "kind": "scalar",
+   "of": "distance",
+   "from": "roma",
+   "to": "alexandria",
+   "unit": "km"
+  },
+  {
+   "id": "miles",
+   "kind": "scalar",
+   "of": "distance",
+   "from": "roma",
+   "to": "alexandria",
+   "unit": "romanMile"
+  },
+  {
+   "id": "cumKm",
+   "kind": "series",
+   "of": "routeKm",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "days"
+  },
+  {
+   "id": "cumDays",
+   "kind": "series",
+   "of": "routeDays",
+   "from": "roma",
+   "to": "alexandria",
+   "by": "days"
+  },
+  {
+   "id": "map",
+   "kind": "scene",
+   "of": "map",
+   "path": {
+    "from": "roma",
+    "to": "alexandria",
+    "by": "days"
+   }
+  }
+ ],
+ "readouts": [
+  {
+   "label": "daysLabel",
+   "expr": "days",
+   "unit": "d",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "kmLabel",
+   "expr": "km",
+   "unit": "km",
+   "format": "auto",
+   "digits": 4
+  },
+  {
+   "label": "legsLabel",
+   "expr": "legs",
+   "format": "auto",
+   "digits": 4
+  },
+  {
+   "label": "costLabel",
+   "expr": "cost / cheapest",
+   "format": "fixed",
+   "digits": 2
+  },
+  {
+   "label": "directLabel",
+   "expr": "direct",
+   "unit": "km",
+   "format": "auto",
+   "digits": 4
+  },
+  {
+   "label": "milesLabel",
+   "expr": "miles",
+   "format": "auto",
+   "digits": 4
+  }
+ ],
+ "plots": [
+  {
+   "kind": "scene",
+   "of": "map",
+   "title": "mapTitle",
+   "height": 360
+  },
+  {
+   "kind": "series",
+   "title": "plotTitle",
+   "x": {
+    "series": "cumDays",
+    "label": "daysAxis",
+    "unit": "d"
+   },
+   "y": {
+    "label": "kmAxis",
+    "unit": "km",
+    "min": 0
+   },
+   "series": [
+    {
+     "y": "cumKm",
+     "label": "pathLine",
+     "style": "points"
+    }
+   ]
+  }
+ ]
+}

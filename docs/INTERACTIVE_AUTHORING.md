@@ -17,6 +17,17 @@ Make one only when **trying** teaches something that reading and pictures cannot
 by probing. Not for: a fact, a definition, a static diagram (use a figure), a quiz (use the exercise types). One or two
 well-made activities per chapter at most; most chapters need none.
 
+## First: the engine library
+
+A sim-spec@1 activity computes with an **engine of the library** whenever one fits (`docs/INTERACTIVE_LIBRARY.md`, decision
+2026-11-05): `formula@1` (any relation), `ode@1` (dynamical systems), `prob@1` (probability and statistics), `graph@1` (networks),
+`geom@1` (constructions), `genetics@1`, `seq@1`, `med@1` (physiology and pharmacology), `clinic@1` (clinical reasoning: virtual
+patients, differential diagnosis, decisions), `anatomy@1`, `timeline@1` (every calendar), `music@1`, `map@1`, `text@1`, `craft@1`.
+Each has its chapter in `docs/library/<name>.md` (its model, outputs, sources, limits and a reference activity). Search the
+catalogue with the subject's words (`NoemaEngineCatalog.suggest`, or the connector's `noema_request_engine` with `check_only`).
+Only when no engine fits: the free way below (html-app@1, py-module@1) — or, when the subject needs an exact model the library does
+not have, **ask for a new engine** (`noema_request_engine`, or ⋮ › *Engines of activities* in the app) and use the free way meanwhile.
+
 ## sim-spec@1 or html-app@1?
 
 **Start with sim-spec@1** whenever the idea is "these quantities depend on each other": sliders, number boxes, switches and
@@ -39,6 +50,15 @@ still a sim-spec, only the computing is a WebAssembly module (`docs/INTERACTIVE_
 wasm-oscillator`); **external-embed@1** for a well-known outside simulation (PhET, GeoGebra, Desmos) in a theory block — explore
 only, needs the network, off unless the site switches it on, mind the licences (`docs/INTERACTIVE_EMBED.md`). Write the theory
 so that it stands without either.
+
+**A mini-app that needs science: use the engines.** A game or puzzle (html-app@1) that needs a shortest path, a virtual patient,
+a date in another calendar, a tuning, a distribution… lists the engine in its registry entry (`"engines": ["graph@1"]`) and calls
+`noema.engine('graph@1').run({model, outputs}, inputs)`: the app runs the library's engine for it (`docs/INTERACTIVE.md` §8.1) — the
+same tested model as a sim-spec, nothing re-implemented in the bundle. Write the model as the engine's chapter says, check it once
+with `.check(spec)` while you write, handle a rejected promise (`e.code`) with your own words, and wait for the answer in
+`tests.json` with a step `{"waitFor": "<selector>"}`. Start from `activity_new.py --from cheapest-route` (a route game on `graph@1`).
+Use it when the game needs the engine's numbers; when the whole activity is "these quantities depend on each other", a sim-spec on
+that engine is still simpler.
 
 ## When Python (py-module@1)?
 

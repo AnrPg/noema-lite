@@ -1,0 +1,19 @@
+{
+ "title": "Der günstigste Weg",
+ "intro": "Sieben Orte sind durch Straßen verbunden, jede mit ihrer Maut. Fahre so günstig wie möglich von {from} nach {to}: Wähle immer eine Straße, dann vergleiche deinen Weg mit dem günstigsten, den die App mit dem Dijkstra-Algorithmus findet.",
+ "keyMine": "dein Weg",
+ "keyBest": "der günstigste Weg",
+ "at": "Du bist in {town}. Dein Weg bisher: {route} (Maut {cost}).",
+ "arrived": "Du hast das Ziel erreicht. Dein Weg kostet {cost}.",
+ "roads": "Straßen von hier",
+ "go": "Nach {town} (Maut {cost})",
+ "undo": "Eine Straße zurück",
+ "restart": "Neu beginnen",
+ "check": "Meinen Weg prüfen",
+ "another": "Eine andere Karte",
+ "computing": "Der günstigste Weg wird berechnet …",
+ "right": "Richtig: {cost} ist die geringste Maut, die es gibt.",
+ "more": "Dein Weg kostet {cost}; der günstigste kostet {best}: {path}.",
+ "engineError": "Die Wegsuche ist hier nicht verfügbar ({code}).",
+ "mapLabel": "Karte mit sieben Orten und ihren Straßen. Dein Weg: {route}, Maut {cost}."
+}

@@ -1,0 +1,1875 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "truth-table",
+    "formula": "~(p & q) <-> (~p | ~q)",
+    "assign": [
+     {
+      "atom": "p",
+      "value": "k"
+     },
+     {
+      "atom": "q",
+      "value": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "models"
+    },
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "value"
+    },
+    {
+     "id": "c",
+     "kind": "series",
+     "of": "column"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "vLabel",
+     "expr": "v"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "pic",
+     "title": "tTitle"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "equivalent",
+    "formulas": [
+     "p -> q",
+     "~q -> ~p"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "equivalent"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "countermodels"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "entails",
+    "premises": [
+     "p -> q",
+     "p"
+    ],
+    "goal": "q"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "entails"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "consistent"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "normal-form",
+    "form": "cnf",
+    "formula": "(p ∧ q) ∨ (r ∧ s)"
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "clauses"
+    },
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "literals"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "sat",
+    "solver": "cdcl",
+    "formulas": [
+     "a | b",
+     "~a | b",
+     "a | ~b",
+     "~a | ~b"
+    ],
+    "step": "k"
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "satisfiable"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "conflicts"
+    },
+    {
+     "id": "st",
+     "kind": "scalar",
+     "of": "steps"
+    },
+    {
+     "id": "lv",
+     "kind": "series",
+     "of": "levels"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "resolution",
+    "premises": [
+     "p -> q",
+     "q -> r",
+     "p"
+    ],
+    "goal": "r"
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "refuted"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "proofLength"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "proof",
+    "goal": "p -> r",
+    "proof": [
+     {
+      "f": "p -> q",
+      "rule": "premise"
+     },
+     {
+      "f": "q -> r",
+      "rule": "premise"
+     },
+     {
+      "f": "p",
+      "rule": "assume",
+      "depth": 1
+     },
+     {
+      "f": "q",
+      "rule": "impE",
+      "refs": [
+       1,
+       3
+      ],
+      "depth": 1
+     },
+     {
+      "f": "r",
+      "rule": "impE",
+      "refs": [
+       2,
+       4
+      ],
+      "depth": 1
+     },
+     {
+      "f": "p -> r",
+      "rule": "impI",
+      "boxes": [
+       3
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "errors"
+    },
+    {
+     "id": "lc",
+     "kind": "series",
+     "of": "lineCodes"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "horn",
+    "method": "forward",
+    "formulas": [
+     "p -> q",
+     "l & m -> p",
+     "b & l -> m",
+     "a & p -> l",
+     "a & b -> l",
+     "a",
+     "b"
+    ],
+    "goal": "q"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "entails"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "derived"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "many-valued",
+    "logic": "k3",
+    "formula": "p | ~p",
+    "assign": [
+     {
+      "atom": "p",
+      "value": 0.5
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    },
+    {
+     "id": "ok",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "c",
+     "kind": "series",
+     "of": "column"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "fol-eval",
+    "domain": [
+     "a",
+     "b",
+     "c"
+    ],
+    "preds": [
+     {
+      "name": "L",
+      "tuples": [
+       [
+        "a",
+        "b"
+       ],
+       [
+        "b",
+        "c"
+       ],
+       [
+        "c",
+        "a"
+       ]
+      ]
+     }
+    ],
+    "formula": "forall x. exists y. L(x, y)"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "domain"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "unify",
+    "terms": [
+     "f(x, g(y))",
+     "f(g(z), x)"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "unifiable"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "bindings"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "fol-resolution",
+    "premises": [
+     "∀x (Man(x) → Mortal(x))",
+     "Man(socrates)"
+    ],
+    "goal": "Mortal(socrates)"
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "refuted"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "syllogism",
+    "mood": "AAA",
+    "figure": 1
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "validTraditional"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "kripke",
+    "worlds": [
+     {
+      "id": "w1",
+      "holds": [
+       "p"
+      ],
+      "label": "wOne"
+     },
+     {
+      "id": "w2",
+      "x": "k",
+      "y": 0
+     },
+     {
+      "id": "w3",
+      "holds": [
+       "p"
+      ]
+     }
+    ],
+    "edges": [
+     {
+      "u": "w1",
+      "v": "w2",
+      "on": "k > 0"
+     },
+     {
+      "u": "w2",
+      "v": "w3"
+     }
+    ],
+    "formula": "[]p -> p",
+    "world": "w1"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    },
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "reflexive"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "axT"
+    },
+    {
+     "id": "tr",
+     "kind": "series",
+     "of": "truth"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "tableau",
+    "system": "D",
+    "premises": [
+     "O h",
+     "O(h -> t)",
+     "~h -> O ~t",
+     "~h"
+    ],
+    "goal": "⊥"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nodes"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "epistemic",
+    "puzzle": {
+     "kind": "muddy",
+     "n": 3,
+     "muddy": 2
+    },
+    "formula": "K_c1 m1",
+    "step": "k"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "worlds"
+    },
+    {
+     "id": "wl",
+     "kind": "series",
+     "of": "worldsLeft"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "empty"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "ltl",
+    "trace": [
+     {
+      "holds": [
+       "req"
+      ]
+     },
+     {
+      "holds": []
+     },
+     {
+      "holds": [
+       "grant"
+      ]
+     }
+    ],
+    "loop": 1,
+    "formula": "G(req -> F grant)",
+    "pos": 0
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    },
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "truth"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "ctl",
+    "preset": "mutex",
+    "formula": "AG ~(c1 & c2)",
+    "initial": "snn"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "worlds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "dyadic",
+    "worlds": [
+     {
+      "id": "w1",
+      "holds": [
+       "h",
+       "t"
+      ],
+      "rank": 0
+     },
+     {
+      "id": "w2",
+      "rank": 1
+     },
+     {
+      "id": "w3",
+      "holds": [
+       "t"
+      ],
+      "rank": 2
+     },
+     {
+      "id": "w4",
+      "holds": [
+       "h"
+      ],
+      "rank": 2
+     }
+    ],
+    "formula": "O(~t / ~h) & O(t / h)"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "io",
+    "op": "out3",
+    "norms": [
+     {
+      "id": "n1",
+      "cond": "a",
+      "act": "x"
+     },
+     {
+      "id": "n2",
+      "cond": "x",
+      "act": "y"
+     }
+    ],
+    "input": [
+     "a"
+    ],
+    "goal": "y",
+    "throughput": false
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "entails"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "triggered"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "norms",
+    "norms": [
+     {
+      "id": "pay",
+      "kind": "O",
+      "cond": "order",
+      "act": "paid",
+      "within": 2
+     },
+     {
+      "id": "fine",
+      "kind": "O",
+      "cond": "viol_pay",
+      "act": "paidFine",
+      "within": 3,
+      "on": "k >= 0"
+     }
+    ],
+    "trace": [
+     {
+      "facts": [
+       "order"
+      ]
+     },
+     {},
+     {},
+     {
+      "acts": [
+       "paidFine"
+      ]
+     }
+    ],
+    "step": "k"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "violations"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "fulfilments"
+    },
+    {
+     "id": "ps",
+     "kind": "series",
+     "of": "violationsPerStep"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "af",
+    "args": [
+     {
+      "id": "a",
+      "label": "argA"
+     },
+     {
+      "id": "b"
+     },
+     {
+      "id": "c"
+     }
+    ],
+    "attacks": [
+     {
+      "u": "a",
+      "v": "b"
+     },
+     {
+      "u": "b",
+      "v": "c",
+      "on": "k"
+     }
+    ],
+    "semantics": "preferred",
+    "arg": "c"
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "extensions"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "skeptical"
+    },
+    {
+     "id": "l",
+     "kind": "series",
+     "of": "labels"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "truth-table",
+    "formula": "(p & q"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "truth-table",
+    "formula": "[]p -> p"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "ctl",
+    "preset": "mutex",
+    "formula": "G(c1 -> F c2)"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "epistemic",
+    "worlds": [
+     {
+      "id": "w1"
+     },
+     {
+      "id": "w2"
+     }
+    ],
+    "agents": [
+     "a"
+    ],
+    "edges": [
+     {
+      "u": "w1",
+      "v": "w2",
+      "ag": "b"
+     }
+    ],
+    "formula": "K_b p & K q"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "kripke"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "satisfiable"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "levels"
+    },
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "net"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "truth-table",
+    "formula": "a&b&c&d&e&f&g&h&i&j&k1&l&m"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "horn",
+    "formulas": [
+     "p | q",
+     "a -> b"
+    ],
+    "goal": "~b"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "entails"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "fol-eval",
+    "domain": [
+     "a",
+     "b"
+    ],
+    "size": 2,
+    "preds": [
+     {
+      "name": "R",
+      "tuples": [
+       [
+        "a",
+        "b"
+       ],
+       [
+        "a"
+       ],
+       [
+        "c",
+        "a"
+       ]
+      ]
+     }
+    ],
+    "consts": [
+     {
+      "name": "k",
+      "value": "z"
+     }
+    ],
+    "formula": "R(a) & Q(b)"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "kripke",
+    "worlds": [
+     {
+      "id": "w1"
+     },
+     {
+      "id": "w1",
+      "holds": [
+       "p-q"
+      ]
+     }
+    ],
+    "edges": [
+     {
+      "u": "w1",
+      "v": "w9"
+     }
+    ],
+    "world": "w7",
+    "formula": "p"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "syllogism",
+    "mood": "AAX",
+    "figure": 2
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "truth-table",
+    "formula": "p"
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "nope"
+    },
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid",
+     "node": "x"
+    },
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "column",
+     "code": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": "nope",
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "magic"
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "af",
+    "args": [
+     {
+      "id": "a"
+     },
+     {
+      "id": "a"
+     }
+    ],
+    "attacks": [
+     {
+      "u": "a",
+      "v": "z"
+     }
+    ],
+    "arg": "q"
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "extensions"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "norms",
+    "norms": [
+     {
+      "id": "n",
+      "cond": "x"
+     },
+     {
+      "id": "n",
+      "kind": "O",
+      "act": "y",
+      "deadline": "(y"
+     }
+    ],
+    "trace": [
+     {}
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "violations"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "unify",
+    "terms": [
+     "f(x) & g(y)",
+     "~"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "unifiable"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "ltl",
+    "trace": [
+     {
+      "holds": [
+       "p"
+      ]
+     }
+    ],
+    "loop": 3,
+    "formula": "X p U"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "epistemic",
+    "puzzle": {
+     "kind": "muddy",
+     "n": 7,
+     "muddy": 4
+    },
+    "formula": "K_c9 m1"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "entails",
+    "premises": [
+     "p ∧ q ★"
+    ],
+    "goal": "q"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "entails"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "epistemic",
+    "puzzle": {
+     "kind": "muddy",
+     "n": 3,
+     "muddy": 4
+    },
+    "worlds": [
+     {
+      "id": "w"
+     }
+    ],
+    "formula": "C m1"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "equivalent",
+    "formulas": [
+     "p"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "equivalent"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "tableau",
+    "system": "S5",
+    "formula": "p"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "dyadic",
+    "worlds": [
+     {
+      "id": "w1",
+      "rank": 0
+     }
+    ],
+    "formula": "O(p | q / r)"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "value"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "normal-form",
+    "form": "prenex",
+    "formula": "forall x. P(x) -> exists y"
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "size"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "io",
+    "norms": [
+     {
+      "id": "n1",
+      "cond": "a",
+      "act": "x"
+     }
+    ],
+    "goal": "x"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "entails"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "title": "Un devoir manqué et sa réparation",
+ "intro": "Le jour 0, un voisin te demande de l'aide : tu dois y aller dans les deux jours. Une deuxième norme dit ce que tu dois faire si tu manques à la première : alors tu dois au moins téléphoner dans la journée (une obligation « contraire au devoir »). Une troisième interdit le bruit la nuit. Déplace le curseur des jours pour suivre la semaine et regarde chaque norme devenir exigible, être respectée ou violée. Désactive la deuxième norme pour voir ce qui change.",
+ "kLabel": "Jours affichés",
+ "ctdLabel": "La norme de réparation est en vigueur (1 = oui)",
+ "frameLabel": "Jours vérifiés",
+ "vLabel": "Violations jusqu'ici",
+ "fLabel": "Devoirs accomplis jusqu'ici",
+ "pLabel": "Normes encore en vigueur",
+ "sceneTitle": "Les normes au fil des jours",
+ "checkBroken": "Un devoir a été manqué.",
+ "checkFirstDay": "C'est le premier jour où cela apparaît."
+}

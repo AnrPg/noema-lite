@@ -1,0 +1,124 @@
+{
+ "cases": [
+  {
+   "name": "July: road to Ostia, then the open sea (2 stages, ~17.6 days)",
+   "steps": [
+    {
+     "set": "month",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "values": {
+     "days": [
+      17.4,
+      17.8
+     ],
+     "legs": [
+      2,
+      2
+     ],
+     "km": [
+      2150,
+      2220
+     ],
+     "found": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "January: the open sea is closed, the coastal route takes 6 stages (~45 days)",
+   "steps": [
+    {
+     "set": "month",
+     "value": 1
+    }
+   ],
+   "expect": {
+    "values": {
+     "days": [
+      44.5,
+      46
+     ],
+     "legs": [
+      6,
+      6
+     ],
+     "km": [
+      3000,
+      3060
+     ]
+    }
+   }
+  },
+  {
+   "name": "October is still sailing season",
+   "steps": [
+    {
+     "set": "month",
+     "value": 10
+    }
+   ],
+   "expect": {
+    "values": {
+     "legs": [
+      2,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "name": "slow ships (50 km a day) in July: still the sea route, ~44 days",
+   "steps": [
+    {
+     "set": "month",
+     "value": 7
+    },
+    {
+     "set": "seaSpeed",
+     "value": 50
+    }
+   ],
+   "expect": {
+    "values": {
+     "days": [
+      43.5,
+      44.6
+     ],
+     "legs": [
+      2,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "name": "the geodesic distance does not depend on the month: 1 953 km, ~1 320 Roman miles",
+   "steps": [
+    {
+     "set": "month",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "state": [
+     "month"
+    ],
+    "values": {
+     "direct": [
+      1952.5,
+      1953.1
+     ],
+     "miles": [
+      1319,
+      1322
+     ]
+    }
+   }
+  }
+ ]
+}

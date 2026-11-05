@@ -1,0 +1,2854 @@
+{
+ "names": [
+  "good: SIR template, sliders on beta and gamma",
+  "good: harmonic oscillator, Störmer–Verlet with pairs and an energy invariant",
+  "good: a custom logistic map with a cobweb and its Lyapunov exponent",
+  "good: a delay equation (Hutchinson) with its history",
+  "good: Lorenz template, a phase scene, the Lyapunov spectrum and Kaplan–Yorke",
+  "good: equilibria of a 2-D system, eigenvalues and the type",
+  "good: an orbit diagram of the Ricker map",
+  "good: oral dosing every tau (pk template)",
+  "good: a bouncing ball (a crossing with a jump)",
+  "good: Hodgkin–Huxley, a current step",
+  "good: Robertson kinetics with the stiff method",
+  "good: a Poincaré section of the forced Duffing oscillator",
+  "bad: no solve",
+  "bad: a parameter the template does not have",
+  "bad: states given to a template",
+  "bad: a quantity the template has not",
+  "bad: an output it does not compute",
+  "bad: a series of an unknown state",
+  "bad: an event time with nth 0",
+  "bad: a stat that is not one",
+  "bad: an expression with an unknown name",
+  "bad: a template kind mismatch",
+  "bad: an equation missing for a state, and one for no state",
+  "bad: a state with the name of a spec parameter",
+  "bad: an event with when and at",
+  "bad: rk4 without dt, and too many steps",
+  "bad: euler with a step too small for the budget",
+  "bad: verlet without pairs; the phase on a non-state",
+  "bad: a delay equation with Rosenbrock and no delays",
+  "bad: Lyapunov k above the states, eigenvalues without equilibria",
+  "bad: a map that has rhs, events and a non-integer length",
+  "bad: a cobweb of an ODE, a quantity without a template, a flag of no code",
+  "bad: a sweep over too many iterations, its var a spec name",
+  "bad: equilibria with a box on no state and too many starts",
+  "bad: the model is not an object",
+  "bad: an unknown model field and a set without a template"
+ ],
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "w",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.5,
+     "max": 3,
+     "default": 1
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     },
+     {
+      "id": "v",
+      "init": 0
+     }
+    ],
+    "rhs": {
+     "x": "v",
+     "v": "-w^2*x"
+    },
+    "pairs": [
+     {
+      "q": "x",
+      "p": "v"
+     }
+    ],
+    "invariants": [
+     {
+      "id": "E",
+      "expr": "0.5*v^2 + 0.5*w^2*x^2"
+     }
+    ],
+    "solve": {
+     "tEnd": "20*pi/w",
+     "method": "verlet",
+     "dt": 0.01
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "state",
+     "var": "x"
+    },
+    {
+     "id": "dE",
+     "kind": "scalar",
+     "of": "drift",
+     "var": "E"
+    },
+    {
+     "id": "E",
+     "kind": "series",
+     "of": "invariant",
+     "var": "E"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "t"
+     },
+     "series": [
+      {
+       "y": "x"
+      },
+      {
+       "y": "E",
+       "style": "points"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "r",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 2.5,
+     "max": 4,
+     "default": 3.2,
+     "step": 0.001
+    }
+   ],
+   "model": {
+    "kind": "map",
+    "states": [
+     {
+      "id": "x",
+      "init": 0.2
+     }
+    ],
+    "next": {
+     "x": "r*x*(1 - x)"
+    },
+    "solve": {
+     "tEnd": 400
+    },
+    "lyapunov": {
+     "k": 1,
+     "transient": 100
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "state",
+     "var": "x"
+    },
+    {
+     "id": "web",
+     "kind": "scene",
+     "of": "cobweb",
+     "var": "x"
+    },
+    {
+     "id": "lam",
+     "kind": "scalar",
+     "of": "lyap",
+     "k": 1
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "web",
+     "height": 320
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "n"
+     },
+     "series": [
+      {
+       "y": "x",
+       "style": "points"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "tau",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.2,
+     "max": 3,
+     "default": 1
+    }
+   ],
+   "model": {
+    "kind": "dde",
+    "states": [
+     {
+      "id": "x",
+      "init": 0.5
+     }
+    ],
+    "delays": [
+     {
+      "id": "xd",
+      "of": "x",
+      "tau": "tau",
+      "history": 0.5
+     }
+    ],
+    "rhs": {
+     "x": "x*(1 - xd)"
+    },
+    "solve": {
+     "tEnd": 100
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "state",
+     "var": "x"
+    },
+    {
+     "id": "pp",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "x",
+     "stat": "pp"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "rho",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 60,
+     "default": 28
+    }
+   ],
+   "model": {
+    "template": "lorenz",
+    "set": {
+     "rho": "rho"
+    },
+    "solve": {
+     "tEnd": 50,
+     "rtol": 1e-7
+    },
+    "phase": {
+     "x": "x",
+     "y": "z"
+    },
+    "lyapunov": {
+     "k": 3,
+     "transient": 10
+    }
+   },
+   "outputs": [
+    {
+     "id": "ph",
+     "kind": "scene",
+     "of": "phase"
+    },
+    {
+     "id": "l1",
+     "kind": "scalar",
+     "of": "lyap",
+     "k": 1
+    },
+    {
+     "id": "ky",
+     "kind": "scalar",
+     "of": "kaplanYorke"
+    },
+    {
+     "id": "lt",
+     "kind": "series",
+     "of": "lyapT"
+    },
+    {
+     "id": "lr",
+     "kind": "series",
+     "of": "lyapRun",
+     "k": 1
+    },
+    {
+     "id": "zm",
+     "kind": "series",
+     "of": "eventState",
+     "event": "zmax",
+     "var": "z"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "ph"
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "lt"
+     },
+     "series": [
+      {
+       "y": "lr"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "a",
+     "kind": "slider",
+     "label": "lbl",
+     "min": -2,
+     "max": 2,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     },
+     {
+      "id": "y",
+      "init": 0
+     }
+    ],
+    "rhs": {
+     "x": "y",
+     "y": "a*y - x + x^3"
+    },
+    "solve": {
+     "tEnd": 10
+    },
+    "equilibria": {
+     "box": {
+      "x": [
+       -2,
+       2
+      ],
+      "y": [
+       -1,
+       1
+      ]
+     },
+     "grid": 5
+    },
+    "phase": {
+     "x": "x",
+     "y": "y",
+     "xmin": -2,
+     "xmax": 2,
+     "ymin": -2,
+     "ymax": 2,
+     "field": 12
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "eqCount"
+    },
+    {
+     "id": "x0",
+     "kind": "scalar",
+     "of": "eq",
+     "index": 0,
+     "var": "x"
+    },
+    {
+     "id": "re",
+     "kind": "scalar",
+     "of": "eigRe",
+     "index": 1,
+     "k": 0
+    },
+    {
+     "id": "im",
+     "kind": "scalar",
+     "of": "eigIm",
+     "index": 1,
+     "k": 0
+    },
+    {
+     "id": "st",
+     "kind": "scalar",
+     "of": "eqStable",
+     "index": 1
+    },
+    {
+     "id": "ty",
+     "kind": "scalar",
+     "of": "eqType",
+     "index": 0
+    },
+    {
+     "id": "ph",
+     "kind": "scene",
+     "of": "phase"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "r0",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 1,
+     "max": 4,
+     "default": 2.5
+    }
+   ],
+   "model": {
+    "template": "ricker",
+    "set": {
+     "r": "rr"
+    },
+    "solve": {
+     "tEnd": 200,
+     "maxSteps": 100000
+    },
+    "sweep": {
+     "var": "rr",
+     "value": "r0",
+     "min": 1.5,
+     "max": 4,
+     "points": 200,
+     "of": "x",
+     "keep": 10,
+     "transient": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "orb",
+     "kind": "scene",
+     "of": "orbit"
+    },
+    {
+     "id": "sp",
+     "kind": "series",
+     "of": "sweepParam"
+    },
+    {
+     "id": "sv",
+     "kind": "series",
+     "of": "sweepValue"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "orb"
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "sp"
+     },
+     "series": [
+      {
+       "y": "sv",
+       "style": "points"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "tau",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 4,
+     "max": 24,
+     "default": 12,
+     "step": 1
+    },
+    {
+     "id": "dose",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 50,
+     "max": 500,
+     "default": 100,
+     "step": 10
+    }
+   ],
+   "model": {
+    "template": "pk",
+    "set": {
+     "tau": "tau",
+     "dose": "dose",
+     "doses": 10,
+     "ka": 1.2
+    },
+    "solve": {
+     "tEnd": "10*tau",
+     "points": 600
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "C",
+     "kind": "series",
+     "of": "state",
+     "var": "C"
+    },
+    {
+     "id": "cmax",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "CssMax"
+    },
+    {
+     "id": "cmin",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "CssMin"
+    },
+    {
+     "id": "doses",
+     "kind": "scalar",
+     "of": "eventCount",
+     "event": "dose"
+    },
+    {
+     "id": "c48",
+     "kind": "scalar",
+     "of": "at",
+     "var": "C",
+     "t": "4*tau"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "consts": {
+    "restit": 0.8
+   },
+   "params": [
+    {
+     "id": "h0",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.5,
+     "max": 5,
+     "default": 1
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "h",
+      "init": "h0"
+     },
+     {
+      "id": "v",
+      "init": 0
+     }
+    ],
+    "rhs": {
+     "h": "v",
+     "v": "-9.81"
+    },
+    "events": [
+     {
+      "id": "bounce",
+      "when": "h",
+      "dir": -1,
+      "set": {
+       "v": "-restit*v",
+       "h": "0"
+      }
+     }
+    ],
+    "solve": {
+     "tEnd": 5
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "h",
+     "kind": "series",
+     "of": "state",
+     "var": "h"
+    },
+    {
+     "id": "nb",
+     "kind": "scalar",
+     "of": "eventCount",
+     "event": "bounce"
+    },
+    {
+     "id": "t1",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "bounce",
+     "nth": 1
+    },
+    {
+     "id": "zeno",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "zeno"
+    },
+    {
+     "id": "ok",
+     "kind": "scalar",
+     "of": "ok"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "Iext",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 20,
+     "default": 10,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "template": "hh",
+    "set": {
+     "I": "Iext"
+    },
+    "solve": {
+     "tEnd": 100,
+     "rtol": 1e-7,
+     "points": 1000
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "V",
+     "kind": "series",
+     "of": "state",
+     "var": "V"
+    },
+    {
+     "id": "nsp",
+     "kind": "scalar",
+     "of": "eventCount",
+     "event": "spike"
+    },
+    {
+     "id": "isi",
+     "kind": "scalar",
+     "of": "eventPeriod",
+     "event": "spike"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "T",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 1,
+     "max": 1000,
+     "default": 40
+    }
+   ],
+   "model": {
+    "template": "robertson",
+    "solve": {
+     "tEnd": "T",
+     "method": "rosenbrock",
+     "rtol": 0.000001,
+     "atol": 1e-10
+    }
+   },
+   "outputs": [
+    {
+     "id": "y2",
+     "kind": "scalar",
+     "of": "final",
+     "var": "y2"
+    },
+    {
+     "id": "mass",
+     "kind": "scalar",
+     "of": "drift",
+     "var": "mass"
+    },
+    {
+     "id": "steps",
+     "kind": "scalar",
+     "of": "steps"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "g",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.1,
+     "max": 0.6,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "template": "duffing",
+    "set": {
+     "gamma": "g"
+    },
+    "solve": {
+     "tEnd": 600,
+     "points": 200,
+     "maxSteps": 100000
+    }
+   },
+   "outputs": [
+    {
+     "id": "sec",
+     "kind": "scene",
+     "of": "section",
+     "event": "strobe",
+     "x": "x",
+     "y": "v"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001,
+     "delta": 3
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    },
+    "states": [
+     {
+      "id": "S",
+      "init": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R1"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    },
+    {
+     "id": "zz",
+     "kind": "scalar",
+     "of": "wobble"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "Q"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 0
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "median"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta * zeta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.05,
+     "max": 1,
+     "default": 0.3,
+     "step": 0.01
+    },
+    {
+     "id": "gamma",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.5,
+     "default": 0.1,
+     "step": 0.01
+    }
+   ],
+   "derived": [
+    {
+     "id": "R0d",
+     "expr": "beta / gamma"
+    }
+   ],
+   "model": {
+    "template": "sir",
+    "set": {
+     "beta": "beta",
+     "gamma": "gamma",
+     "I0": 0.001
+    },
+    "solve": {
+     "tEnd": 200,
+     "points": 300
+    },
+    "kind": "map"
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "S",
+     "kind": "series",
+     "of": "state",
+     "var": "S"
+    },
+    {
+     "id": "I",
+     "kind": "series",
+     "of": "state",
+     "var": "I"
+    },
+    {
+     "id": "R",
+     "kind": "series",
+     "of": "state",
+     "var": "R"
+    },
+    {
+     "id": "R0",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "finalSize"
+    },
+    {
+     "id": "tPeak",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "peak",
+     "nth": 1
+    },
+    {
+     "id": "Imax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "I",
+     "stat": "max"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "lbl",
+     "expr": "R0"
+    },
+    {
+     "label": "lbl",
+     "expr": "Imax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "title": "lbl",
+     "x": {
+      "series": "t",
+      "label": "lbl"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "S",
+       "label": "lbl"
+      },
+      {
+       "y": "I"
+      },
+      {
+       "y": "R"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     },
+     {
+      "id": "y",
+      "init": 0
+     }
+    ],
+    "rhs": {
+     "x": "-k*x",
+     "z": "1"
+    },
+    "solve": {
+     "tEnd": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "var": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "x",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-x"
+    },
+    "solve": {
+     "tEnd": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "xe",
+     "kind": "scalar",
+     "of": "final",
+     "var": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-k*x"
+    },
+    "events": [
+     {
+      "id": "a",
+      "when": "x - 0.5",
+      "at": 1
+     },
+     {
+      "id": "b",
+      "at": 1,
+      "dir": 1
+     },
+     {
+      "id": "c",
+      "when": "x",
+      "every": 2,
+      "set": {
+       "q": "1"
+      }
+     }
+    ],
+    "solve": {
+     "tEnd": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "xe",
+     "kind": "scalar",
+     "of": "final",
+     "var": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-k*x"
+    },
+    "solve": {
+     "tEnd": 10,
+     "method": "rk4"
+    }
+   },
+   "outputs": [
+    {
+     "id": "xe",
+     "kind": "scalar",
+     "of": "final",
+     "var": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-k*x"
+    },
+    "solve": {
+     "tEnd": 10,
+     "method": "euler",
+     "dt": 0.00001
+    }
+   },
+   "outputs": [
+    {
+     "id": "xe",
+     "kind": "scalar",
+     "of": "final",
+     "var": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     },
+     {
+      "id": "v",
+      "init": 0
+     }
+    ],
+    "rhs": {
+     "x": "v",
+     "v": "-k*x"
+    },
+    "solve": {
+     "tEnd": 10,
+     "method": "verlet",
+     "dt": 0.01
+    },
+    "phase": {
+     "x": "x",
+     "y": "w"
+    }
+   },
+   "outputs": [
+    {
+     "id": "ph",
+     "kind": "scene",
+     "of": "phase"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "kind": "dde",
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-k*x"
+    },
+    "solve": {
+     "tEnd": 10,
+     "method": "rosenbrock"
+    }
+   },
+   "outputs": [
+    {
+     "id": "xe",
+     "kind": "scalar",
+     "of": "final",
+     "var": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-k*x"
+    },
+    "solve": {
+     "tEnd": 10
+    },
+    "lyapunov": {
+     "k": 2
+    }
+   },
+   "outputs": [
+    {
+     "id": "re",
+     "kind": "scalar",
+     "of": "eigRe",
+     "index": 0,
+     "k": 0
+    },
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "lyap",
+     "k": 1
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "r",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 4,
+     "default": 3
+    }
+   ],
+   "model": {
+    "kind": "map",
+    "states": [
+     {
+      "id": "x",
+      "init": 0.5
+     }
+    ],
+    "next": {
+     "x": "r*x*(1-x)"
+    },
+    "rhs": {
+     "x": "1"
+    },
+    "events": [
+     {
+      "id": "a",
+      "at": 1
+     }
+    ],
+    "solve": {
+     "tEnd": 10.5,
+     "dt": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "web",
+     "kind": "scene",
+     "of": "cobweb",
+     "var": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-k*x"
+    },
+    "solve": {
+     "tEnd": 10
+    }
+   },
+   "outputs": [
+    {
+     "id": "web",
+     "kind": "scene",
+     "of": "cobweb",
+     "var": "x"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "quantity",
+     "name": "R0"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "oops"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "r",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 4,
+     "default": 3
+    }
+   ],
+   "model": {
+    "template": "logisticmap",
+    "solve": {
+     "tEnd": 100
+    },
+    "sweep": {
+     "var": "r",
+     "value": 3,
+     "min": 2,
+     "max": 4,
+     "points": 400,
+     "of": "x",
+     "keep": 200,
+     "transient": 1000
+    }
+   },
+   "outputs": [
+    {
+     "id": "o",
+     "kind": "scene",
+     "of": "orbit"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     },
+     {
+      "id": "y",
+      "init": 1
+     },
+     {
+      "id": "z",
+      "init": 1
+     },
+     {
+      "id": "w",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-x",
+     "y": "-y",
+     "z": "-z",
+     "w": "-w"
+    },
+    "solve": {
+     "tEnd": 1
+    },
+    "equilibria": {
+     "box": {
+      "x": [
+       0,
+       1
+      ],
+      "y": [
+       0,
+       1
+      ],
+      "z": [
+       0,
+       1
+      ],
+      "w": [
+       0,
+       1
+      ],
+      "q": [
+       0,
+       1
+      ]
+     },
+     "grid": 4
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "eqCount"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": 3,
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "steps"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "ode@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "states": [
+     {
+      "id": "x",
+      "init": 1
+     }
+    ],
+    "rhs": {
+     "x": "-k*x"
+    },
+    "set": {
+     "k": 1
+    },
+    "solve": {
+     "tEnd": 1,
+     "colour": "red"
+    },
+    "wobble": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "var": "x"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "id": "sickle-codon",
+ "runtime": "sim-spec@1",
+ "entry": "activities/sickle-codon/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "sickle-codon-still",
+  "text": "The human beta-globin gene (HBB) starts ATG GTG CAT CTG ACT CCT GAG GAG …: codon 7 is GAG, glutamic acid (counted from the initiator methionine; the older count, which leaves the methionine out, calls it codon 6). Changing its middle base A to T (c.20A>T) turns GAG into GTG, valine: p.(Glu7Val), the sickle-cell mutation of haemoglobin S. It is a missense change between amino acids of opposite character (BLOSUM62 −2: a charged residue becomes a hydrophobic one on the protein's surface), and it removes the Bsu36I (MstII) site CCTNAGG at codons 6–8, which is how the allele used to be detected on a gel. The same codon changed to AAG gives lysine, haemoglobin C; changing its last base to A (GAA) is silent."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

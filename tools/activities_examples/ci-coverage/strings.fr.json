@@ -1,0 +1,22 @@
+{
+ "title": "Combien de fois un intervalle à 95 % tombe-t-il juste ?",
+ "intro": "Interrogez n personnes, comptez les k qui répondent oui et construisez un intervalle à 95 % pour la vraie proportion p. L'intervalle de Wald p̂ ± 1,96·√(p̂(1−p̂)/n) est celui de la plupart des manuels ; l'intervalle de Wilson inverse plutôt le test du score. Faites varier n et la vraie valeur de p, et observez la probabilité exacte que chaque intervalle contienne p. Pour un intervalle à 95 %, elle devrait rester proche de 95 %.",
+ "sampleSize": "Taille de l'échantillon n",
+ "trueP": "Vraie proportion p",
+ "phatLabel": "Proportion observée typique k/n",
+ "waldCiLabel": "Intervalle de Wald, borne inférieure",
+ "waldCiHiLabel": "Intervalle de Wald, borne supérieure",
+ "wilsonCiLabel": "Intervalle de Wilson, borne inférieure",
+ "wilsonCiHiLabel": "Intervalle de Wilson, borne supérieure",
+ "waldAtLabel": "Wald : probabilité de contenir p",
+ "wilsonAtLabel": "Wilson : probabilité de contenir p",
+ "waldMeanLabel": "Wald : couverture moyenne sur tous les p",
+ "wilsonMeanLabel": "Wilson : couverture moyenne sur tous les p",
+ "plotTitle": "Couverture exacte des deux intervalles pour chaque vraie valeur de p (les dents de scie sont réelles : k est toujours un nombre entier)",
+ "pAxis": "Vraie proportion p",
+ "coverAxis": "Probabilité que l'intervalle contienne p",
+ "waldLine": "Wald",
+ "wilsonLine": "Wilson",
+ "nominalMark": "les 95 % promis",
+ "pMark": "votre p"
+}

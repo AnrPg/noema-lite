@@ -1,0 +1,15 @@
+{
+ "id": "cheapest-route",
+ "runtime": "html-app@1",
+ "entry": "activities/cheapest-route/app.html",
+ "engines": ["graph@1"],
+ "stateVersion": 1,
+ "capabilities": ["state", "events", "resize", "result", "announce"],
+ "fallback": {
+  "media": "cheapest-route-still",
+  "text": "Seven towns A to G are joined by twelve roads, each with a toll. The learner picks a route from A to G one road at a time and then compares it with the cheapest route, which Dijkstra's algorithm finds (here A – D – E – G for 14): a route with fewer roads is not always cheaper, and the cheapest route to G passes only through towns reached at their own cheapest cost."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

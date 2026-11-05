@@ -1,0 +1,17 @@
+{
+ "id": "brachial-lesion",
+ "runtime": "sim-spec@1",
+ "entry": "activities/brachial-lesion/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "brachial-lesion-still",
+  "text": "A lesion of the upper trunk of the brachial plexus (C5–C6, Erb) paralyses deltoid, supraspinatus, infraspinatus, teres minor and supinator and weakens biceps, brachialis and brachioradialis: the arm hangs adducted and medially rotated with the elbow extended and the forearm pronated (waiter's tip), and the biceps reflex is lost. A radial nerve lesion in the axilla takes the triceps too; at the spiral groove the triceps is spared but the wrist drops. An ulnar lesion at the wrist claws the ring and little fingers more than one at the elbow, because flexor digitorum profundus still pulls (the ulnar paradox)."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

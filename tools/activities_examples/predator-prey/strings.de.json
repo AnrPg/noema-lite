@@ -1,0 +1,17 @@
+{
+ "title": "Räuber, Beute und das Paradox der Anreicherung",
+ "intro": "Die Beute wächst auf die Kapazität K ihrer Umwelt zu; Räuber fressen sie, doch jeder Räuber kann nur eine begrenzte Zahl von Beutetieren auf einmal bewältigen, und Räuber sterben mit konstanter Rate. Mach die Umwelt der Beute reicher, indem du K erhöhst, und sieh, was mit beiden Populationen geschieht, wenn die ersten Schwankungen abgeklungen sind.",
+ "kLabel": "Kapazität für die Beute, K",
+ "swingLabel": "Schwankung der Beute (Spitze zu Spitze, spät im Lauf)",
+ "xStarLabel": "Beutedichte bei Koexistenz, x*",
+ "stableLabel": "Der Koexistenzzustand ist stabil",
+ "plotTitle": "Beute und Räuber im Zeitverlauf",
+ "time": "Zeit",
+ "density": "Populationsdichte",
+ "preyLine": "Beute",
+ "predLine": "Räuber",
+ "phaseTitle": "Phasenebene: Räuber gegen Beute",
+ "checkRich": "Die Umwelt ist auf K = 2 oder mehr angereichert.",
+ "checkStable": "Beide Arten kommen zu einer stabilen Koexistenz.",
+ "checkPred": "Die Räuber überleben."
+}

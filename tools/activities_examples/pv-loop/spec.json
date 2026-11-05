@@ -1,0 +1,46 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "med@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "hr": 70 },
+ "params": [
+  { "id": "ees", "kind": "slider", "label": "eesLabel", "min": 0.5, "max": 4, "step": 0.1, "default": 2.5, "unit": "mmHg/mL" },
+  { "id": "pla", "kind": "slider", "label": "plaLabel", "min": 4, "max": 20, "step": 1, "default": 10, "unit": "mmHg" },
+  { "id": "r", "kind": "slider", "label": "rLabel", "min": 0.5, "max": 2, "step": 0.05, "default": 1, "unit": "mmHg·s/mL" }
+ ],
+ "model": {
+  "items": [
+   { "id": "lv", "fn": "cardio.pvloop", "in": { "ees": "ees", "hr": "hr", "pla": "pla", "r": "r" } }
+  ]
+ },
+ "outputs": [
+  { "id": "loop", "kind": "scene", "of": "lv" },
+  { "id": "t", "kind": "series", "of": "lv.t" },
+  { "id": "plv", "kind": "series", "of": "lv.p" },
+  { "id": "pao", "kind": "series", "of": "lv.pao" },
+  { "id": "edv", "kind": "scalar", "of": "lv.edv" },
+  { "id": "esv", "kind": "scalar", "of": "lv.esv" },
+  { "id": "sv", "kind": "scalar", "of": "lv.sv" },
+  { "id": "ef", "kind": "scalar", "of": "lv.ef" },
+  { "id": "map", "kind": "scalar", "of": "lv.map" },
+  { "id": "co", "kind": "scalar", "of": "lv.co" },
+  { "id": "sw", "kind": "scalar", "of": "lv.sw" }
+ ],
+ "readouts": [
+  { "label": "svLabel", "expr": "round(sv)", "unit": "mL", "format": "auto" },
+  { "label": "efLabel", "expr": "round(100 * ef)", "unit": "%", "format": "auto" },
+  { "label": "edvLabel", "expr": "round(edv)", "unit": "mL", "format": "auto" },
+  { "label": "esvLabel", "expr": "round(esv)", "unit": "mL", "format": "auto" },
+  { "label": "mapLabel", "expr": "round(map)", "unit": "mmHg", "format": "auto" },
+  { "label": "coLabel", "expr": "co", "unit": "L/min", "format": "fixed", "digits": 1 },
+  { "label": "swLabel", "expr": "sw / 7500", "unit": "J", "format": "fixed", "digits": 2 }
+ ],
+ "plots": [
+  { "kind": "scene", "of": "loop", "title": "loopTitle", "height": 320 },
+  { "kind": "series", "title": "beatTitle",
+    "x": { "series": "t", "label": "time" },
+    "y": { "min": 0, "label": "pressure" },
+    "series": [ { "y": "plv", "label": "lvLine" }, { "y": "pao", "label": "aoLine" } ] }
+ ]
+}

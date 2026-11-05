@@ -291,8 +291,8 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
-    os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
+    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
+    os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES, *LIB_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
     for f in ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
     shutil.copy(os.path.join(ENGINE, 'pyodide-sw.js'), os.path.join(out, 'engine', 'pyodide-sw.js'))   # py-module@1: the service worker that keeps Python offline (its files: tools/fetch_pyodide.py after this)
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
@@ -323,6 +323,12 @@ def build_site(metas):
 
 # the P6 engines of sim-spec@1 (docs/INTERACTIVE_ENGINES.md): their check code is loaded beside packcheck.js like NoemaCircuit; registered by 43_engines_p6.js
 P6_ENGINES = ('39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js')
+# the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core, every general engine (47–48_lib_*.js) and the catalogue
+# (which also registers them); loaded beside packcheck.js like the P6 engines; their Python twins tools/enginelib.py + tools/lib_<name>.py
+LIB_ENGINES = ('46_lib_core.js', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '46_lib_*.js')) if not f.endswith('46_lib_core.js')), *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '4[78]_lib_*.js'))), '49_lib_catalog.js')
+LIB_VENDOR = ('geographiclib-geodesic@2.2.0/noema-geodesic.js', 'world-atlas@2.0.2/noema-land-110m.js')   # vendored code of library engines (engine/vendor/, each with its licence), loaded before 46–49_lib_*.js: map@1's exact geodesics and land
+LIB_DOCS = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'docs', 'library', '*.md')))   # the chapters of the engine library (skill references/library/, the connector's guide part "interactive")
+LIB_TOOLS = ['enginelib.py', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'tools', 'lib_*.py')))]
 # py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the service worker's scope is /vendor/pyodide/ (its script lives in /engine/), the
 # versioned Pyodide folder and the wheels never change (immutable), the manifest is checked every time; ACAO/CORP only for a direct load
 PY_VERSION = json.load(open(os.path.join(ROOT, 'tools', 'pyodide_manifest.json'), encoding='utf-8'))['version']   # the pinned Pyodide (tools/fetch_pyodide.py)
@@ -372,7 +378,7 @@ def build_skill(out_zip):
     with zipfile.ZipFile(out_zip, 'w', zipfile.ZIP_DEFLATED) as z:
         for f in sorted(glob.glob(os.path.join(src, '**', '*'), recursive=True)):
             if os.path.isfile(f) and '__pycache__' not in f: z.write(f, os.path.join('noema-pack-builder', os.path.relpath(f, src)))
-        for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
+        for t in SKILL_TOOLS + LIB_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json'))): z.write(f, f'noema-pack-builder/scripts/pipelines/{os.path.basename(f)}')   # docs/PIPELINES.md
         # interactive activities (docs/INTERACTIVE.md): the reference activity, the app's runtime for the harness, the contract
         # the reference activities travel as ONE inner zip (claude.ai takes a skill zip of at most 200 files);
@@ -382,13 +388,16 @@ def build_skill(out_zip):
             for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
                 if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
         z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
-        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', *P6_ENGINES, '43_engines_p6.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', *P6_ENGINES, '43_engines_p6.js', *LIB_ENGINES, '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
+        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', f), 'noema-pack-builder/scripts/activity_host/vendor/' + os.path.basename(f))   # the library engines' vendored code (map@1), with its licences
+        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', os.path.dirname(f), next(l for l in os.listdir(os.path.join(ENGINE, 'vendor', os.path.dirname(f))) if l.startswith('LICENSE'))), 'noema-pack-builder/scripts/activity_host/vendor/LICENSE-' + os.path.dirname(f))
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
-        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
+        for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
+        z.writestr('noema-pack-builder/references/LIBRARY_ENGINES.md', '# The chapters of the engine library (docs/library/*.md), one per engine\n\n' + ''.join(f'\n\n---\n\n<!-- docs/library/{f} -->\n\n' + open(os.path.join(ROOT, 'docs', 'library', f), encoding='utf-8').read() for f in LIB_DOCS))   # the engine library: every engine's chapter in ONE file (claude.ai accepts at most 200 files in a skill)
         if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): z.write(os.path.join(ROOT, 'docs', 'PIPELINES.md'), 'noema-pack-builder/references/PIPELINES.md')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
         z.write(os.path.join(ROOT, 'docs', 'VISUAL.md'), 'noema-pack-builder/references/VISUAL.md')
@@ -416,7 +425,7 @@ def public_config():
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
 # the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/report.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
+MCP_ENGINE = ['engine/report.js', 'engine/enginereq.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), *('engine/src/' + f for f in LIB_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js']
 MCP_PRELUDE = 'globalThis.window = globalThis;\n'
 
 def build_stamp():
@@ -436,7 +445,7 @@ def build_mcp_function(metas, out_dir):
     cfg['languages'] = [{k: m.get(k) for k in ('id', 'title', 'languages', 'path', 'profiles')} for m in LANG_METAS]   # language courses (D13 peers, refills)
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     docs = {'workflow': rd('skill/noema-pack-builder/SKILL.md'), 'content': rd('tools/CONTENT_SPEC.md'), 'visual': rd('docs/VISUAL.md')}
-    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ''.join('\n\n---\n\n' + rd('docs/' + f) for f in ('INTERACTIVE_AUTHORING.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6 if os.path.exists(os.path.join(ROOT, 'docs', f)))   # interactive activities: the contract + the playbook + the expression language
+    if os.path.exists(os.path.join(ROOT, 'docs', 'INTERACTIVE.md')): docs['interactive'] = rd('docs/INTERACTIVE.md') + ''.join('\n\n---\n\n' + rd('docs/' + f) for f in ('INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', *('library/' + g for g in LIB_DOCS), 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6 if os.path.exists(os.path.join(ROOT, 'docs', f)))   # interactive activities: the contract + the playbook + the expression language
     if os.path.exists(os.path.join(ROOT, 'docs', 'BRIDGE.md')): docs['bridge'] = rd('docs/BRIDGE.md')   # 文A language bridges (noema_bridge_guide)
     # the content flows (noema_pipeline, docs/PIPELINES.md): the doc, the step library and every flow
     if os.path.exists(os.path.join(ROOT, 'docs', 'PIPELINES.md')): docs['pipelines'] = rd('docs/PIPELINES.md')
@@ -488,7 +497,7 @@ def build_bundle(metas):
     css = rd('engine/engine.css') + '\n' + rd('engine/activity_author.css')
     # every UI catalog inline (the single file works offline in any locale; pseudo-locales only for tests)
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
-    p6_scripts = ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in P6_ENGINES)   # the P6 engines' checks beside packcheck, like NoemaCircuit
+    p6_scripts = ''.join(f'<script>{esc(rd("engine/vendor/" + f))}</script>\n' for f in LIB_VENDOR) + ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (*P6_ENGINES, *LIB_ENGINES))   # the P6 engines' checks beside packcheck, like NoemaCircuit
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>
@@ -538,6 +547,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/search.js"))}</script>
 <script>{esc(rd("engine/vendor/modern-screenshot.umd.js"))}</script>
 <script>{esc(rd("engine/report.js"))}</script>
+<script>{esc(rd("engine/enginereq.js"))}</script>
 <script>{esc(rd("engine/shell.js"))}</script>
 <script>{esc(rd("engine/react.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>

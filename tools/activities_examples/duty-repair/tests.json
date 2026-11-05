@@ -1,0 +1,145 @@
+{
+ "cases": [
+  {
+   "name": "three days shown: the duty to help is broken on day 2 (passes)",
+   "exercise": "ch01-e932",
+   "steps": [
+    {
+     "set": "ctd",
+     "value": 1
+    },
+    {
+     "set": "k",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "v": [
+      0.5,
+      1.5
+     ],
+     "f": [
+      -0.5,
+      0.5
+     ],
+     "frame": [
+      2.5,
+      3.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "two days shown: nothing is broken yet (fails)",
+   "exercise": "ch01-e932",
+   "steps": [
+    {
+     "set": "ctd",
+     "value": 1
+    },
+    {
+     "set": "k",
+     "value": 2
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "v": [
+      -0.5,
+      0.5
+     ],
+     "p": [
+      0.5,
+      1.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "the whole week: a violation, then the repair by the call (fails: not the first day)",
+   "exercise": "ch01-e932",
+   "steps": [
+    {
+     "set": "ctd",
+     "value": 1
+    },
+    {
+     "set": "k",
+     "value": 6
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "v": [
+      0.5,
+      1.5
+     ],
+     "f": [
+      0.5,
+      1.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "without the contrary-to-duty norm the call repairs nothing",
+   "exercise": "ch01-e932",
+   "steps": [
+    {
+     "set": "ctd",
+     "value": 0
+    },
+    {
+     "set": "k",
+     "value": 6
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "v": [
+      0.5,
+      1.5
+     ],
+     "f": [
+      -0.5,
+      0.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the values are saved",
+   "steps": [
+    {
+     "set": "ctd",
+     "value": 0
+    },
+    {
+     "set": "k",
+     "value": 4
+    }
+   ],
+   "expect": {
+    "state": [
+     "k",
+     "ctd"
+    ],
+    "values": {
+     "frame": [
+      3.5,
+      4.5
+     ],
+     "steps": [
+      5.5,
+      6.5
+     ]
+    }
+   }
+  }
+ ]
+}

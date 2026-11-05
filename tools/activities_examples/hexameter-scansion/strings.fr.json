@@ -1,0 +1,20 @@
+{
+ "title": "Scander les hexamètres de Virgile",
+ "intro": "Le début de l'Énéide en hexamètre dactylique : six pieds, chacun des quatre premiers un dactyle (longue, brève, brève) ou un spondée (longue, longue), le cinquième presque toujours un dactyle, le sixième deux syllabes. Une syllabe est longue par nature (voyelle longue, notée ici d'un macron, ou diphtongue) ou par position (voyelle suivie de deux consonnes) ; une voyelle finale ou voyelle + m devant une voyelle s'élide. Le texte note les voyelles longues qui décident de la scansion et le i consonne de Lāvīnja-. Choisis un vers, coche les pieds que tu crois dactyliques, puis compare avec la scansion ci-dessous.",
+ "lineLabel": "Vers de l'Énéide 1",
+ "foot1": "Le pied 1 est un dactyle",
+ "foot2": "Le pied 2 est un dactyle",
+ "foot3": "Le pied 3 est un dactyle",
+ "foot4": "Le pied 4 est un dactyle",
+ "aenLabel": "Virgile, Énéide 1, 1–7",
+ "sylLabel": "Syllabes (après l'élision)",
+ "dactLabel": "Dactyles dans les pieds 1 à 5",
+ "rightLabel": "Pieds 1 à 4 bien notés",
+ "penLabel": "Césure après la troisième longue (penthémimère)",
+ "readLabel": "Scansions valides du vers",
+ "scanTitle": "Le vers scandé : – longue, ⏑ brève, ‖ césure",
+ "plotTitle": "Dactyles par vers",
+ "lineAxis": "Vers",
+ "dactAxis": "Dactyles",
+ "dactLine": "dactyles dans les pieds 1 à 5"
+}

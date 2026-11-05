@@ -1,0 +1,11 @@
+{
+ "title": "Find the satin move",
+ "intro": "A satin hides its interlacings: on every pick one end goes down, and on the next pick that point moves on by a fixed number of ends, the move. Pick the number of shafts and the move so that the points never sit side by side and never form a diagonal line.",
+ "shafts": "Shafts",
+ "move": "Move (ends)",
+ "warpFloatLabel": "Longest warp float (picks)",
+ "weftFloatLabel": "Longest weft float (ends)",
+ "satinsLabel": "Distinct regular satins on these shafts",
+ "settLabel": "Sett for 30 wraps per inch",
+ "drawdownTitle": "Drawdown (dark: warp on top), with the threading above and the lift plan on the right"
+}

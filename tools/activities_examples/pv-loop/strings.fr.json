@@ -1,0 +1,20 @@
+{
+ "title": "La boucle pression–volume du ventricule gauche",
+ "intro": "À chaque battement, le ventricule gauche décrit une boucle : il se remplit, se contracte valves fermées, éjecte le sang dans l'aorte puis se relâche. Modifiez la force de sa contraction (Ees, la pente de la droite télésystolique), la pression à laquelle il se remplit (la pression de l'oreillette gauche) et la résistance contre laquelle il éjecte, et observez la boucle, le volume d'éjection systolique et la pression artérielle. La fréquence cardiaque reste à 70 par minute et il n'y a aucun réflexe : c'est le ventricule seul.",
+ "eesLabel": "Contractilité, Ees",
+ "plaLabel": "Pression de remplissage (oreillette gauche)",
+ "rLabel": "Résistance périphérique",
+ "svLabel": "Volume d'éjection systolique",
+ "efLabel": "Fraction d'éjection",
+ "edvLabel": "Volume télédiastolique",
+ "esvLabel": "Volume télésystolique",
+ "mapLabel": "Pression artérielle moyenne",
+ "coLabel": "Débit cardiaque",
+ "swLabel": "Travail systolique",
+ "loopTitle": "Boucle pression–volume",
+ "beatTitle": "Un cycle cardiaque",
+ "time": "Temps (s)",
+ "pressure": "Pression (mmHg)",
+ "lvLine": "ventricule gauche",
+ "aoLine": "aorte"
+}

@@ -1,0 +1,1126 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "scr",
+     "kind": "slider",
+     "label": "scr",
+     "min": 0.3,
+     "max": 10,
+     "step": 0.1,
+     "default": 1.0
+    },
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    },
+    {
+     "id": "female",
+     "kind": "toggle",
+     "label": "female",
+     "default": false
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": "scr",
+       "age": "age",
+       "female": "female"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "egfr",
+     "kind": "scalar",
+     "of": "g.egfr"
+    },
+    {
+     "id": "stage",
+     "kind": "scalar",
+     "of": "g.stage"
+    },
+    {
+     "id": "bad",
+     "kind": "scalar",
+     "of": "g.flag.validity"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "egfrLabel",
+     "expr": "egfr",
+     "unit": "mL/min/1.73m²",
+     "digits": 3
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "dose",
+     "kind": "slider",
+     "label": "dose",
+     "min": 50,
+     "max": 1000,
+     "default": 500
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "pk",
+      "fn": "pk.oral",
+      "in": {
+       "dose": "dose",
+       "v": 50,
+       "clear": 5,
+       "ka": 1,
+       "tau": 12,
+       "doses": 6
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "pk.t"
+    },
+    {
+     "id": "c",
+     "kind": "series",
+     "of": "pk.c"
+    },
+    {
+     "id": "cmax",
+     "kind": "scalar",
+     "of": "pk.cmax"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "t"
+     },
+     "y": {},
+     "series": [
+      {
+       "y": "c",
+       "label": "conc"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "ees",
+     "kind": "slider",
+     "label": "ees",
+     "min": 0.5,
+     "max": 5,
+     "default": 2.5
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "lv",
+      "fn": "cardio.pvloop",
+      "in": {
+       "ees": "ees",
+       "hr": 70,
+       "pla": 10
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "loop",
+     "kind": "scene",
+     "of": "lv"
+    },
+    {
+     "id": "ef",
+     "kind": "scalar",
+     "of": "lv.ef"
+    },
+    {
+     "id": "v",
+     "kind": "series",
+     "of": "lv.v"
+    },
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "lv.p"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "loop",
+     "title": "loopTitle",
+     "height": 320
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "cr",
+     "kind": "slider",
+     "label": "cr",
+     "min": 30,
+     "max": 800,
+     "default": 80
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": "cr",
+       "age": 60,
+       "female": 0
+      },
+      "units": {
+       "scr": "umol/L"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "egfr",
+     "kind": "scalar",
+     "of": "g"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    },
+    {
+     "id": "lr",
+     "kind": "slider",
+     "label": "lr",
+     "min": 0.05,
+     "max": 20,
+     "scale": "log",
+     "default": 4
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "f",
+      "fn": "epi.fagan",
+      "in": {
+       "pre": "pre",
+       "lr": "lr"
+      }
+     },
+     {
+      "id": "d",
+      "fn": "epi.diag",
+      "in": {
+       "se": 0.9,
+       "sp": 0.8,
+       "prev": "pre"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "fag",
+     "kind": "scene",
+     "of": "f.scene"
+    },
+    {
+     "id": "post",
+     "kind": "scalar",
+     "of": "f.post"
+    },
+    {
+     "id": "ppv",
+     "kind": "scalar",
+     "of": "d.ppv"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "km",
+      "fn": "epi.km",
+      "opts": {
+       "times": [
+        1,
+        2,
+        2,
+        3,
+        4,
+        5
+       ],
+       "events": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        1
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "km.t"
+    },
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "km.s"
+    },
+    {
+     "id": "med",
+     "kind": "scalar",
+     "of": "km.median"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "sbp",
+     "kind": "slider",
+     "label": "sbp",
+     "min": 80,
+     "max": 220,
+     "default": 135
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "bp",
+      "fn": "cardio.bp",
+      "in": {
+       "sbp": "sbp",
+       "dbp": 85
+      },
+      "opts": {
+       "scheme": "accaha2025"
+      }
+     },
+     {
+      "id": "nw",
+      "fn": "score.news2",
+      "in": {
+       "rr": 24,
+       "spo2": 93,
+       "o2": 0,
+       "sbp": "sbp",
+       "hr": 115,
+       "cvpu": 0,
+       "temp": 38.5
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "cls",
+     "kind": "scalar",
+     "of": "bp.cls"
+    },
+    {
+     "id": "news",
+     "kind": "scalar",
+     "of": "nw.score"
+    },
+    {
+     "id": "band",
+     "kind": "scalar",
+     "of": "nw.band"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "ph",
+     "kind": "slider",
+     "label": "ph",
+     "min": 7.0,
+     "max": 7.7,
+     "default": 7.4
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "o",
+      "fn": "resp.odc",
+      "in": {
+       "ph": "ph"
+      },
+      "key": "odcKey"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "po2",
+     "kind": "series",
+     "of": "o.po2"
+    },
+    {
+     "id": "so2",
+     "kind": "series",
+     "of": "o.so2"
+    },
+    {
+     "id": "p50",
+     "kind": "scalar",
+     "of": "o.p50"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "ax",
+     "kind": "slider",
+     "label": "ax",
+     "min": -180,
+     "max": 180,
+     "default": 60
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "e",
+      "fn": "ecg.dipole",
+      "in": {
+       "axis": "ax"
+      }
+     },
+     {
+      "id": "q",
+      "fn": "ecg.qtc",
+      "in": {
+       "qt": 400,
+       "hr": "75"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "hex",
+     "kind": "scene",
+     "of": "e"
+    },
+    {
+     "id": "aVF",
+     "kind": "scalar",
+     "of": "e.aVF"
+    },
+    {
+     "id": "qtcB",
+     "kind": "scalar",
+     "of": "q.bazett"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "egfr",
+     "kind": "slider",
+     "label": "egfr",
+     "min": 5,
+     "max": 120,
+     "default": 50
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "k",
+      "fn": "renal.kdigo",
+      "in": {
+       "egfr": "egfr",
+       "acr": 120
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "grid",
+     "kind": "scene",
+     "of": "k.scene"
+    },
+    {
+     "id": "risk",
+     "kind": "scalar",
+     "of": "k.risk"
+    },
+    {
+     "id": "nflags",
+     "kind": "scalar",
+     "of": "k.flags"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.nope",
+      "in": {
+       "scr": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": 1,
+       "age": 50
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g.egfr"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": 1,
+       "age": 50,
+       "female": 0,
+       "weight": 70
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g.egfr"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": 1,
+       "age": 50,
+       "female": 0
+      },
+      "units": {
+       "scr": "mg/L",
+       "age": "y"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g.egfr"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": 1,
+       "age": 50,
+       "female": 0
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g.gfr"
+    },
+    {
+     "id": "y",
+     "kind": "series",
+     "of": "g.egfr"
+    },
+    {
+     "id": "z",
+     "kind": "scene",
+     "of": "g"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "h.egfr"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": 1,
+       "age": 50,
+       "female": 0
+      }
+     },
+     {
+      "id": "g",
+      "fn": "body.bsa",
+      "in": {
+       "weight": 70,
+       "height": 170
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "b",
+      "fn": "cardio.bp",
+      "in": {
+       "sbp": 120,
+       "dbp": 80
+      },
+      "opts": {
+       "scheme": "jnc7",
+       "extra": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "b.cls"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "km",
+      "fn": "epi.km",
+      "opts": {
+       "times": [
+        1,
+        2,
+        3
+       ],
+       "events": [
+        1,
+        0
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "km.median"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "km",
+      "fn": "epi.km"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "km.median"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": []
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": "",
+       "age": 50,
+       "female": 0
+      },
+      "key": "Bad Key",
+      "foo": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "sound",
+     "of": "g"
+    },
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "g.egfr",
+     "unit": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "g",
+      "fn": "renal.ckdepi",
+      "in": {
+       "scr": "scr2 * 2",
+       "age": 50,
+       "female": 0
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g.egfr"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "params": [
+    {
+     "id": "a",
+     "kind": "slider",
+     "label": "a",
+     "min": 0,
+     "max": 1,
+     "default": 0.5
+    }
+   ],
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "g"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "s",
+      "fn": "resp.sat",
+      "in": {
+       "po2": "age"
+      },
+      "opts": {
+       "model": "hill"
+      }
+     },
+     {
+      "id": "w",
+      "fn": "cardio.windkessel",
+      "in": {
+       "r": 1,
+       "c": 1.2,
+       "hr": 60,
+       "sv": 70
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "so2",
+     "kind": "scalar",
+     "of": "s.so2"
+    },
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "w.p"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "s.flag.nope"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "med@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "age",
+     "kind": "slider",
+     "label": "age",
+     "min": 18,
+     "max": 100,
+     "default": 54
+    }
+   ],
+   "model": {
+    "items": [
+     {
+      "id": "x1",
+      "fn": "score.gcs",
+      "in": {
+       "eye": 4,
+       "verbal": 5,
+       "motor": 6,
+       "pupils": 0
+      }
+     },
+     {
+      "id": "x2",
+      "fn": "score.meld3",
+      "in": {
+       "bili": 2,
+       "inr": 1.5,
+       "cr": 1.2,
+       "na": 130,
+       "alb": 3
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "gcs",
+     "kind": "scalar",
+     "of": "x1.gcs"
+    },
+    {
+     "id": "meld",
+     "kind": "scalar",
+     "of": "x2.meld"
+    }
+   ]
+  }
+ ]
+}

@@ -37,6 +37,25 @@
 <script src="engine/src/40_engine_pid.js"></script>
 <script src="engine/src/41_engine_rf.js"></script>
 <script src="engine/src/42_engine_twin.js"></script>
+<script src="engine/vendor/geographiclib-geodesic@2.2.0/noema-geodesic.js"></script><!-- vendored code of library engines (map@1: exact geodesics, Natural Earth land), before the engines -->
+<script src="engine/vendor/world-atlas@2.0.2/noema-land-110m.js"></script>
+<script src="engine/src/46_lib_core.js"></script><!-- the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): its checks beside packcheck.js, its catalogue for #/engines -->
+<script src="engine/src/47_lib_ode.js"></script>
+<script src="engine/src/47_lib_prob.js"></script>
+<script src="engine/src/47_lib_logic.js"></script>
+<script src="engine/src/47_lib_graph.js"></script>
+<script src="engine/src/47_lib_geom.js"></script>
+<script src="engine/src/48_lib_genetics.js"></script>
+<script src="engine/src/48_lib_seq.js"></script>
+<script src="engine/src/48_lib_med.js"></script>
+<script src="engine/src/48_lib_clinic.js"></script>
+<script src="engine/src/48_lib_anatomy.js"></script>
+<script src="engine/src/48_lib_timeline.js"></script>
+<script src="engine/src/48_lib_music.js"></script>
+<script src="engine/src/48_lib_map.js"></script>
+<script src="engine/src/48_lib_text.js"></script>
+<script src="engine/src/48_lib_craft.js"></script>
+<script src="engine/src/49_lib_catalog.js"></script>
 <script src="engine/packcheck.js"></script>
 <script src="engine/src/43_xapi.js"></script><!-- NoemaXAPI: the shell's "My subjects" ⋮ exports the learning record (xAPI) and the cmi5 package -->
 <script src="engine/src/44_activity_wasm.js"></script><!-- NoemaWasm and NoemaEmbed: packcheck.js checks wasm-module@1 and external-embed@1 items with them (P6) -->
@@ -57,6 +76,7 @@
 <script src="engine/catalog.js"></script>
 <script src="engine/search.js"></script>
 <script src="engine/report.js"></script><!-- ⚑ problem reports: screenshot + the exact place, for the app's admins (docs/REPORTS.md) -->
+<script src="engine/enginereq.js"></script><!-- requests for new engines of interactive activities (docs/INTERACTIVE_LIBRARY.md §3) -->
 <!-- 4. the frame every screen lives in (tabs, Today, Roadmaps, Progress, Me) and the character's reactions -->
 <script src="engine/shell.js"></script>
 <script src="engine/react.js"></script>

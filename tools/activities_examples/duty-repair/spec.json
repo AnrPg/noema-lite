@@ -1,0 +1,44 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "logic@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "k", "kind": "slider", "label": "kLabel", "min": 0, "max": 6, "step": 1, "default": 0 },
+  { "id": "ctd", "kind": "slider", "label": "ctdLabel", "min": 0, "max": 1, "step": 1, "default": 1 }
+ ],
+ "model": {
+  "task": "norms",
+  "norms": [
+   { "id": "help", "kind": "O", "cond": "asked", "act": "went", "within": 2 },
+   { "id": "call", "kind": "O", "cond": "viol_help", "act": "called", "within": 1, "on": "ctd" },
+   { "id": "quiet", "kind": "F", "cond": "night", "act": "noise" }
+  ],
+  "trace": [
+   { "t": 0, "facts": ["asked"] },
+   { "t": 1, "facts": [] },
+   { "t": 2, "facts": [] },
+   { "t": 3, "facts": [] },
+   { "t": 4, "facts": ["night"], "acts": ["called"] },
+   { "t": 5, "facts": ["night"] }
+  ],
+  "step": "k"
+ },
+ "outputs": [
+  { "id": "v", "kind": "scalar", "of": "violations" },
+  { "id": "f", "kind": "scalar", "of": "fulfilments" },
+  { "id": "p", "kind": "scalar", "of": "pending" },
+  { "id": "frame", "kind": "scalar", "of": "frame" },
+  { "id": "steps", "kind": "scalar", "of": "steps" },
+  { "id": "pic", "kind": "scene", "of": "drawing" }
+ ],
+ "readouts": [
+  { "label": "frameLabel", "expr": "frame" },
+  { "label": "vLabel", "expr": "v" },
+  { "label": "fLabel", "expr": "f" },
+  { "label": "pLabel", "expr": "p" }
+ ],
+ "plots": [
+  { "kind": "scene", "title": "sceneTitle", "of": "pic", "height": 220 }
+ ]
+}

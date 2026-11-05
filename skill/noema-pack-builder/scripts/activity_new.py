@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Start a new activity from a reference one (docs/INTERACTIVE_AUTHORING.md):
-  python3 activity_new.py SUBJECT_DIR NEW_ID [--runtime html-app@1 | sim-spec@1 | py-module@1 | h5p@1 | wasm-module@1] [--from alias-lab | rc-lowpass | rc-transient | led-bench | heatsink | pid-tune | lora-link | sensor-node | wasm-oscillator | py-filter | planets-quiz | FILE.h5p]
+  python3 activity_new.py SUBJECT_DIR NEW_ID [--runtime html-app@1 | sim-spec@1 | py-module@1 | h5p@1 | wasm-module@1] [--from alias-lab | rc-lowpass | rc-transient | led-bench | heatsink | pid-tune | lora-link | sensor-node | wasm-oscillator | py-filter | planets-quiz | cheapest-route | a library engine's reference (LIB_REFS: satin-move, calendar-synchronism, …) | FILE.h5p]
 html-app@1 (default) copies alias-lab (sampling and aliasing, a mini-app): activities/<NEW_ID>/app.html, strings.<locale>.json, tests.json.
+--from cheapest-route (html-app@1) copies a mini-game that uses an engine of the library (graph@1: the learner picks roads, Dijkstra
+finds the cheapest route; its registry entry lists "engines": ["graph@1"] and the bundle calls noema.engine('graph@1').run(…);
+docs/INTERACTIVE.md §8.1): app.html, strings.<locale>.json and its tests.json (with {"waitFor": …} steps for the engine's answer).
 sim-spec@1 copies rc-lowpass (an RC low-pass filter, a declarative simulation): activities/<NEW_ID>/spec.json, strings.<locale>.json, tests.json.
 h5p@1 copies planets-quiz (an ordinary H5P MultiChoice item): activities/<NEW_ID>/item.h5p, content.<locale>.json (its words in
 the other languages), tests.json; --from FILE.h5p takes your own .h5p file instead (checked at once with h5p_check.py; then write
@@ -29,7 +32,11 @@ if len(a) < 2: print(__doc__); sys.exit(1)
 REF = {'html-app@1': 'alias-lab', 'sim-spec@1': 'rc-lowpass', 'py-module@1': 'py-filter', 'h5p@1': 'planets-quiz', 'wasm-module@1': 'wasm-oscillator'}
 FROM = {'alias-lab': 'html-app@1', 'rc-lowpass': 'sim-spec@1', 'rc-transient': 'sim-spec@1', 'led-bench': 'sim-spec@1', 'heatsink': 'sim-spec@1',
         'pid-tune': 'sim-spec@1', 'lora-link': 'sim-spec@1', 'sensor-node': 'sim-spec@1', 'wasm-oscillator': 'wasm-module@1',
-        'py-filter': 'py-module@1', 'planets-quiz': 'h5p@1'}
+        'py-filter': 'py-module@1', 'planets-quiz': 'h5p@1',
+        'cheapest-route': 'html-app@1'}   # a mini-game on an engine of the library (graph@1, "engines" in its entry)
+# the engine library (docs/INTERACTIVE_LIBRARY.md): one reference activity per engine, each a sim-spec@1 spec; --from <name> starts from it
+LIB_REFS = {'satin-move': 'craft@1', 'calendar-synchronism': 'timeline@1', 'roman-itinerary': 'map@1', 'hexameter-scansion': 'text@1', 'predator-prey': 'ode@1', 'meantone-wolf': 'music@1', 'pv-loop': 'med@1', 'sepsis-case': 'clinic@1', 'wf-drift': 'genetics@1', 'dijkstra-steps': 'graph@1', 'euler-line': 'geom@1', 'brachial-lesion': 'anatomy@1', 'sickle-codon': 'seq@1', 'ci-coverage': 'prob@1', 'muddy-children': 'logic@1', 'duty-repair': 'logic@1'}
+FROM.update({k: 'sim-spec@1' for k in LIB_REFS})
 P6_REFS = ('heatsink', 'pid-tune', 'lora-link', 'sensor-node')   # the P6 engines thermal@1, pid@1, rf@1, twin@1 (docs/INTERACTIVE_ENGINES.md)
 ref = None; h5p_file = None
 if '--from' in a:
@@ -77,6 +84,8 @@ if runtime == 'h5p@1':   # "click" / "set" act inside the H5P item; "passed" is 
         {'name': 'TODO a tempting wrong answer', 'exercise': 'chNN-eNNN', 'steps': [{'click': 'TODO'}, {'click': '.h5p-question-check-answer'}], 'expect': {'passed': False}}]
     for c in cases:
         if c.get('exercise'): c['exercise'] = 'chNN-eNNN'
+elif ref == 'cheapest-route':   # a mini-game on graph@1: its own cases ("waitFor" the engine's answer, "click" the roads), to be made your own
+    cases = [{**c, 'name': 'TODO ' + c['name']} for c in json.load(open(os.path.join(src, 'tests.json'), encoding='utf-8')).get('cases', [])]
 elif runtime == 'html-app@1':
     cases = [{'name': 'TODO the right solution', 'exercise': 'chNN-eNNN', 'steps': [{'set': '#fs', 'value': '10'}], 'expect': {'passed': True}},
              {'name': 'TODO a tempting wrong one', 'exercise': 'chNN-eNNN', 'steps': [{'set': '#fs', 'value': '5'}], 'expect': {'passed': False}}]
@@ -88,10 +97,12 @@ elif ref == 'led-bench':   # a bench: "task" picks the hidden fault, "measure" t
 elif ref == 'wasm-oscillator':   # its own spec: "set" names a param, "values" the module's outputs and the derived values
     cases = [{'name': 'TODO the right solution', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'c', 'value': 1.6}], 'expect': {'passed': True, 'values': {'E': [0.04, 0.05]}}},
              {'name': 'TODO a tempting wrong one', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'c', 'value': 1}], 'expect': {'passed': False}}]
-elif ref in P6_REFS:   # the reference's first passing and first failing graded case, to be made your own
+elif ref in P6_REFS or ref in LIB_REFS:   # the reference's first passing and first failing graded case, to be made your own
     own = json.load(open(os.path.join(src, 'tests.json'), encoding='utf-8')).get('cases', [])
     pick = [next((c for c in own if c.get('exercise') and c.get('expect', {}).get('passed') is want), None) for want in (True, False)]
     cases = [{**c, 'name': 'TODO ' + c['name'], 'exercise': 'chNN-eNNN'} for c in pick if c]
+    if not cases and ref in LIB_REFS:   # a library reference with value cases only (an explorer): its first two, to be made your own
+        cases = [{**c, 'name': 'TODO ' + c['name']} for c in own[:2]]
 elif runtime == 'py-module@1':   # Python: "set" names a param of the spec; "values" are ranges of Python's scalar outputs
     cases = [{'name': 'TODO the right solution', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'N', 'value': 8}], 'expect': {'passed': True, 'values': {'att1k': [-130, -60]}}},
              {'name': 'TODO a tempting wrong one', 'exercise': 'chNN-eNNN', 'steps': [{'set': 'N', 'value': 16}], 'expect': {'passed': False}}]

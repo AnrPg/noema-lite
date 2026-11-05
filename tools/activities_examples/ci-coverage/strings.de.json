@@ -1,0 +1,22 @@
+{
+ "title": "Wie oft trifft ein 95-%-Intervall?",
+ "intro": "Befragen Sie n Personen, zählen Sie die k, die Ja sagen, und bilden Sie ein 95-%-Intervall für den wahren Anteil p. Das Wald-Intervall p̂ ± 1,96·√(p̂(1−p̂)/n) steht in den meisten Lehrbüchern; das Wilson-Intervall kehrt stattdessen den Score-Test um. Verändern Sie n und das wahre p und beobachten Sie die exakte Wahrscheinlichkeit, mit der jedes Intervall p überdeckt. Bei einem 95-%-Intervall sollte sie nahe bei 95 % bleiben.",
+ "sampleSize": "Stichprobenumfang n",
+ "trueP": "Wahrer Anteil p",
+ "phatLabel": "Typischer beobachteter Anteil k/n",
+ "waldCiLabel": "Wald-Intervall, untere Grenze",
+ "waldCiHiLabel": "Wald-Intervall, obere Grenze",
+ "wilsonCiLabel": "Wilson-Intervall, untere Grenze",
+ "wilsonCiHiLabel": "Wilson-Intervall, obere Grenze",
+ "waldAtLabel": "Wald: Wahrscheinlichkeit, p zu überdecken",
+ "wilsonAtLabel": "Wilson: Wahrscheinlichkeit, p zu überdecken",
+ "waldMeanLabel": "Wald: mittlere Überdeckung über alle p",
+ "wilsonMeanLabel": "Wilson: mittlere Überdeckung über alle p",
+ "plotTitle": "Exakte Überdeckung der beiden Intervalle für jedes wahre p (die Zacken sind echt: k ist immer eine ganze Zahl)",
+ "pAxis": "Wahrer Anteil p",
+ "coverAxis": "Wahrscheinlichkeit, dass das Intervall p überdeckt",
+ "waldLine": "Wald",
+ "wilsonLine": "Wilson",
+ "nominalMark": "versprochene 95 %",
+ "pMark": "Ihr p"
+}

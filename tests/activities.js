@@ -648,6 +648,98 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
   ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, host \? null : ACT\.engines\(\), host \? host\.check : undefined\)/.test(src) && /NoemaExpr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through NoemaExpr');
 }
 
+{ // html-app@1 + the engine library (docs/INTERACTIVE.md §8.1): the "engines" a mini-app lists — JS = Python word for word, pack.requires,
+  // the protocol messages, the host bridge (34_activity_html.js) and the reference mini-game cheapest-route (graph@1)
+  const CR = path.join(ROOT, 'tools', 'activities_examples', 'cheapest-route'), crHtml = fs.readFileSync(path.join(CR, 'app.html'), 'utf8');
+  const crItem = { ...JSON.parse(fs.readFileSync(path.join(CR, 'activity.json'), 'utf8')), html: crHtml, sha256: crypto.createHash('sha256').update(crHtml).digest('hex'), bytes: Buffer.byteLength(crHtml),
+    strings: Object.fromEntries(['en', 'el', 'ru', 'de', 'fr'].map(l => [l, JSON.parse(fs.readFileSync(path.join(CR, `strings.${l}.json`), 'utf8'))])) };
+  delete crItem.entry;
+  const gbase = () => { const p = base(); p.media['cheapest-route-still'] = { w: 600, h: 372 }; p.requires.push('engine:graph@1'); p.activities.items.push(JSON.parse(JSON.stringify(crItem)));
+    p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'cheapest-route' }); return p; };
+  const gi = p => p.activities.items[1], gEdit = (p, f) => { gi(p).html = f(gi(p).html); gi(p).sha256 = null; gi(p).bytes = null; };
+  const gcases = {
+    'engines good': p => p,
+    'engines good: two engines, one only declared': p => { gi(p).engines = ['graph@1', 'timeline@1']; p.requires.push('engine:timeline@1'); },
+    'engines: not a list': p => { gi(p).engines = 'graph@1'; },
+    'engines: an empty list': p => { gi(p).engines = []; },
+    'engines: not texts': p => { gi(p).engines = ['graph@1', 3]; },
+    'engines: too many': p => { gi(p).engines = ['graph@1', 'ode@1', 'prob@1', 'geom@1', 'genetics@1', 'seq@1', 'med@1', 'clinic@1', 'music@1']; },
+    'engines: unknown engine': p => { gi(p).engines = ['graph@1', 'warp@1']; },
+    'engines: a plugin (circuit-mna@1)': p => { gi(p).engines = ['graph@1', 'circuit-mna@1']; },
+    'engines: formula@1': p => { gi(p).engines = ['graph@1', 'formula@1']; },
+    'engines: twice': p => { gi(p).engines = ['graph@1', 'graph@1']; },
+    'engines: the bundle uses one not listed': p => { gEdit(p, h => h.replace("noema.engine('graph@1')", "noema.engine('graph@1'); var tl = noema.engine(\"timeline@1\")")); },
+    'engines: none listed, one used': p => { delete gi(p).engines; },
+    'engines: not in pack.requires': p => { p.requires = p.requires.filter(x => x !== 'engine:graph@1'); },
+    'engines: on another runtime': p => { const a = p.activities.items[0]; a.runtime = 'sim-spec@1'; a.engines = ['graph@1']; },
+  };
+  const GGOOD = new Set(['engines good', 'engines good: two engines, one only declared']);
+  const gpacks = Object.entries(gcases).map(([k, f]) => { const p = gbase(); f(p); return [k, p]; });
+  const gtmp = path.join(require('os').tmpdir(), 'noema-act-engines.json'); fs.writeFileSync(gtmp, JSON.stringify({ packs: gpacks, item: crItem }));
+  const gpy = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
+d = json.load(open(sys.argv[1], encoding='utf-8'))
+print(json.dumps({'packs': [A.check_activities(p, list((p.get('translations') or {}).keys())) for k, p in d['packs']], 'req': A.need_requires([d['item'], {**d['item'], 'id': 'x2', 'engines': ['ode@1', 'warp@1', 7]}])}, ensure_ascii=False))`, gtmp], { encoding: 'utf8', maxBuffer: 64 << 20 }));
+  const norm = l => l.map(m => m.replace(/'/g, '"'));
+  gpacks.forEach(([k, p], i) => {
+    const js = P.checkActivities(p, Object.keys(p.translations || {})), py = gpy.packs[i];
+    const same = JSON.stringify([norm(js.errors), norm(js.warnings)]) === JSON.stringify([norm(py[0]), norm(py[1])]);
+    ok(same && (GGOOD.has(k) ? js.errors.length === 0 : js.errors.length > 0), `${k}: the same ${js.errors.length} error(s) in JS and Python${GGOOD.has(k) ? ' (passes)' : ' — ' + (js.errors[0] || '').slice(0, 120)}${same ? '' : '  JS: ' + JSON.stringify(js) + '  PY: ' + JSON.stringify(py)}`);
+  });
+  const msg = k => P.checkActivities(gpacks.find(x => x[0] === k)[1]).errors.join(' | ');
+  ok(/engine "warp@1" is not an engine of the library/.test(msg('engines: unknown engine')) && /"circuit-mna@1" is not an engine of the library/.test(msg('engines: a plugin (circuit-mna@1)')) && /"formula@1" is not an engine/.test(msg('engines: formula@1'))
+    && /the bundle uses the engine "timeline@1": list it in "engines"/.test(msg('engines: the bundle uses one not listed')) && /only an html-app@1 item lists engines/.test(msg('engines: on another runtime')) && /pack\.requires must list engine:graph@1/.test(msg('engines: not in pack.requires')),
+    'engines: an unknown id, a plugin, formula@1, an engine the bundle uses but does not list, engines on another runtime and a missing pack.requires are refused with their own words');
+  const jreq = P.needRequires([crItem, { ...crItem, id: 'x2', engines: ['ode@1', 'warp@1', 7] }]);
+  ok(jreq.join() === 'activities/v1,runtime:html-app@1,engine:graph@1,engine:ode@1' && JSON.stringify(jreq) === JSON.stringify(gpy.req), 'pack.requires of mini-apps with engines: engine:<id> for each known engine they list (JS = Python) ' + JSON.stringify([jreq, gpy.req]));
+  const l = P.lintHtml ? P.lintHtml(crHtml) : { errors: [], warnings: [] };
+  ok(!l.errors.length && !l.warnings.length, 'the reference cheapest-route passes the bundle lint without a warning ' + JSON.stringify(l));
+  // the protocol: two request types, checked like every other message
+  ok(ACTP.check(M('engine:run', { engine: 'graph@1', spec: { model: {}, outputs: [] }, inputs: { k: 1 }, seed: 7 }, { id: 'e1' })).ok && ACTP.check(M('engine:check', { engine: 'graph@1', spec: {} }, { id: 'e2' })).ok, 'engine:run and engine:check are known messages');
+  ok(!ACTP.check(M('engine:run', { engine: 'graph@1', spec: 'x' })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, seed: -1 })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, inputs: [1] })).ok
+    && !ACTP.check(M('engine:check', { engine: 7, spec: {} })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: { big: 'x'.repeat(70 * 1024) } })).ok, 'a spec that is not an object, a bad seed, inputs that are a list, an engine that is not a text and a request over 64 KB are refused (strikes)');
+  // the host bridge: the frame's policy is unchanged (no Worker in the frame); only library engines, only declared ones, only in a Worker, with limits
+  const h34 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8'), s35 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
+  ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /NoemaEngineCatalog\?\.LIBRARY/.test(h34) && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
+    && /outBytes: 512 \* 1024, perSec: 30, timeouts: 3/.test(h34) && /bridge\.close\(\)/.test(h34) && /'superseded'/.test(h34),
+    'html-app@1: the frame still has no Worker and no network; the host runs only declared library engines, only in their Worker, ≤ 512 KB out, ≤ 30 requests/s, 3 timeouts and the engine is off, every Worker ended on unmount');
+  ok(/ACT\.engineRunner = engineRunner/.test(s35) && /function respec\(s2, o2\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
+  // the bridge itself, in Node with a fake Worker runner: codes, the queue, the limits
+  const vmctx = { console, Promise, Date, JSON, Object, Array, Set, String, Number, Math, Error, isFinite, setTimeout, clearTimeout };
+  vmctx.window = vmctx; vmctx.Worker = function () { };
+  let runs = [], closed = 0, inW = true;
+  const graphE = { id: 'graph@1', workerSource: 'x', check: sp => (sp.model.bad ? ['model.bad: no'] : []), create() { } };
+  vmctx.NoemaEngineCatalog = { LIBRARY: ['graph@1', 'timeline@1'] };
+  vmctx.ACTP = ACTP;
+  vmctx.ACT = { registerRuntime() { }, engine: id => (id === 'graph@1' ? graphE : null), engineRunner(E, spec, opts, onFail) { const r = { spec, opts, onFail, run(inp, done) { runs.push({ inp, done, r }); }, respec(sp, o) { r.spec = sp; r.opts = o; }, close() { closed++; }, inWorker: () => inW }; return r; } };
+  vm.createContext(vmctx);
+  vm.runInContext(h34.replace('ACT.registerRuntime({', 'globalThis.__bridge = engineBridge; ACT.registerRuntime({'), vmctx);
+  const out = [], B = vmctx.__bridge({ engines: ['graph@1', 'timeline@1', 'warp@1'] }, 99, (type, payload, extra) => out.push({ type, payload, re: extra.re }));
+  const last = () => out[out.length - 1].payload, spec = { model: { graph: {} }, outputs: [{ id: 'd', kind: 'scalar', of: 'result' }] };
+  const R = (id, type, payload) => B.handle({ type, id, payload });
+  ok(JSON.stringify(B.engines) === '["graph@1"]', 'the engines a mini-app gets: declared ∩ the library ∩ registered here (timeline@1 not loaded, warp@1 not of the library) ' + JSON.stringify(B.engines));
+  R('a', 'engine:run', { engine: 'ode@1', spec }); ok(last().code === 'undeclared', 'an engine the registry entry does not list: undeclared');
+  R('b', 'engine:run', { engine: 'timeline@1', spec }); ok(last().code === 'unavailable', 'a declared engine this app cannot run: unavailable');
+  R('c', 'engine:check', { engine: 'graph@1', spec: { model: { bad: 1 }, outputs: [] } }); ok(last().ok === true && last().errors[0] === 'model.bad: no', 'check: the engine\'s own problems, as a list');
+  R('d', 'engine:run', { engine: 'graph@1', spec: { model: { bad: 1 }, outputs: [] } }); ok(last().code === 'spec' && last().errors.length === 1, 'run with a model that fails its checks: spec, with the problems');
+  R('e', 'engine:run', { engine: 'graph@1', spec: { outputs: [] } }); ok(last().code === 'spec', 'a spec without model: spec');
+  R('f', 'engine:run', { engine: 'graph@1', spec, inputs: { 'a b': 1 } }); ok(last().code === 'inputs', 'inputs with a bad name: inputs');
+  R('g', 'engine:run', { engine: 'graph@1', spec, inputs: { k: 'x' } }); ok(last().code === 'inputs', 'inputs that are not numbers: inputs');
+  const n0 = out.length;
+  R('h', 'engine:run', { engine: 'graph@1', spec, inputs: { k: 1 } }); R('i', 'engine:run', { engine: 'graph@1', spec, inputs: { k: 2 } }); R('j', 'engine:run', { engine: 'graph@1', spec: { ...spec, model: { graph: { x: 1 } } }, inputs: { k: 3 } });
+  ok(runs.length === 1 && out.length === n0 + 1 && out[n0].re === 'i' && out[n0].payload.code === 'superseded' && runs[0].r.opts.seed === 99, 'one run at a time and one waiting: a newer request replaces the waiting one (superseded); the seed is the activity\'s');
+  runs[0].done({ d: 5 }); ok(out[out.length - 1].re === 'h' && out[out.length - 1].payload.ok && out[out.length - 1].payload.outputs.d === 5 && runs.length === 2 && runs[1].r.spec.model.graph.x === 1, 'the answer goes back to its request; the waiting run starts on the same Worker with its own model (respec)');
+  runs[1].done({ big: 'x'.repeat(600 * 1024) }); ok(out[out.length - 1].re === 'j' && out[out.length - 1].payload.code === 'too-big', 'outputs over 512 KB: too-big');
+  R('k', 'engine:run', { engine: 'graph@1', spec }); runs[2].done(null); ok(last().code === 'failed', 'an engine that cannot compute: failed');
+  for (let i = 0; i < 3; i++) { R('t' + i, 'engine:run', { engine: 'graph@1', spec }); runs[runs.length - 1].r.onFail('runaway'); }
+  R('u', 'engine:run', { engine: 'graph@1', spec }); ok(out.filter(o => /^t\d$/.test(o.re)).every(o => o.payload.code === 'timeout') && last().code === 'unavailable', 'a run over the time limit: timeout (the Worker is ended); after 3 the engine is off for this mount');
+  const B2 = vmctx.__bridge({ engines: ['graph@1'] }, 1, (type, payload, extra) => out.push({ type, payload, re: extra.re }));
+  inW = false; B2.handle({ type: 'engine:run', id: 'w', payload: { engine: 'graph@1', spec } }); ok(last().code === 'unavailable', 'no Worker here: unavailable (a mini-app\'s model never runs on the page\'s own thread)'); inW = true;
+  for (let i = 0; i < 40; i++) B2.handle({ type: 'engine:check', id: 'q' + i, payload: { engine: 'graph@1', spec } });
+  ok(last().code === 'rate', 'more than 30 requests a second: rate');
+  const B3 = vmctx.__bridge({ engines: ['graph@1'] }, 1, (type, payload, extra) => out.push({ type, payload, re: extra.re }));
+  const c0 = closed, r0 = runs.length; B3.handle({ type: 'engine:run', id: 'z', payload: { engine: 'graph@1', spec } }); B3.close(); ok(runs.length === r0 + 1 && closed === c0 + 1, 'unmounted: every Worker of the mini-app is ended');
+}
+
 // 4. never allow-same-origin
 const files = cp.execSync('git ls-files engine cloud tools skill', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
 const bad = [];
@@ -673,7 +765,7 @@ for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'act
 ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
 ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
 ok(/^P6_ENGINES = \('39_engine_thermal\.js', '40_engine_pid\.js', '41_engine_rf\.js', '42_engine_twin\.js'\)$/m.test(bld) && /'thermal\.py', 'pid\.py', 'rf\.py', 'twin\.py'/.test(bld) && /'36_engine_circuit_sim\.js', \*P6_ENGINES, '43_engines_p6\.js'/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
-  && /'engine\/src\/36_engine_circuit\.js', \*\('engine\/src\/' \+ f for f in P6_ENGINES\), 'engine\/packcheck\.js'/.test(bld) && /\{p6_scripts\}<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld) && /'36_engine_circuit\.js', \*P6_ENGINES\)\]/.test(bld),
+  && /'engine\/src\/36_engine_circuit\.js', \*\('engine\/src\/' \+ f for f in P6_ENGINES\), (?:\*\('engine\/src\/' \+ f for f in LIB_ENGINES\), )?'engine\/packcheck\.js'/.test(bld) && /\{p6_scripts\}<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld) && /'36_engine_circuit\.js', \*P6_ENGINES(?:, \*LIB_ENGINES)?\)\]/.test(bld),
   'the P6 engines: the skill zip carries thermal.py, pid.py, rf.py, twin.py and the engines for the harness; the connector, the site and the bundle load them beside packcheck; the guide part "interactive" includes INTERACTIVE_ENGINES.md');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), pc = html.indexOf('engine/packcheck.js');
   ok(['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js'].every(f => { const i = html.indexOf('engine/src/' + f); return i > 0 && i < pc; }), 'the shell loads the four P6 engines before packcheck.js (their checkSpec)'); }
@@ -687,9 +779,9 @@ ok(['wasm_check.py', 'embed_check.py', 'embed_allow.json', 'h5p_import.py'].ever
 { const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
   ok(/why === 'embed-refused' \|\| why === 'embed-graded' \? stop\(tE\('engine\.act\.embed\.refused'\), false\)/.test(src) && /why === 'embed-offline' \? stop\(tE\('engine\.act\.embed\.offline'\)\)/.test(src) && /why === 'embed-timeout' \? stop\(tE\('engine\.act\.embed\.timeout'/.test(src),
     'the core: a refused or graded outside page stops without Restart; offline or not loaded stops with Restart (retry)'); }
-ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', (?:\*\('engine\/src\/' \+ f for f in P6_ENGINES\), )?'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
+ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', (?:\*\('engine\/src\/' \+ f for f in P6_ENGINES\), )?(?:\*\('engine\/src\/' \+ f for f in LIB_ENGINES\), )?'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js'), c = html.indexOf('engine/src/36_engine_circuit.js');
-  ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'(?:, \*P6_ENGINES)?\)\]   # NoemaExpr, NoemaCircuit (and the P6 engines )?beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n(?:\{p6_scripts\})?<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
+  ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'(?:, \*P6_ENGINES)?(?:, \*LIB_ENGINES)?\)\]   # NoemaExpr, NoemaCircuit (and the P6 engines )?beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n(?:\{p6_scripts\})?<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
     'the shell, the site and the one-file bundle load NoemaExpr and NoemaCircuit before packcheck.js (a sim-spec pack imported before any subject is open is checked, not refused)'); }
 { // activity_new.py --runtime sim-spec@1 starts from rc-lowpass
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));

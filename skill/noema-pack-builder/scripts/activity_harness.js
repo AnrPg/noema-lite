@@ -21,6 +21,9 @@
    player): in every language of the pack (the subject's own and each content.<locale>.json); a step {"click": selector} or
    {"set": selector, "value": v} acts inside the item, "passed" is the score H5P reports (xAPI answered), "state" the saved
    state ({"h5p": …}), a case's "locale" plays it in that language.
+   html-app@1 mini-apps that list engines of the library ("engines": ["graph@1"], docs/INTERACTIVE.md §8.1) get them through
+   noema.engine(id) exactly as in the app (the host's checks, the engine's own Worker, its time limit); a step {"waitFor": selector}
+   waits (≤ 8 s) until the selector matches inside the mini-app, e.g. until the engine has answered.
    Called by activity_test.py and activity_preview.py. Needs Playwright with Chromium (npm i playwright; npx playwright install chromium). */
 const fs = require('fs'), path = require('path'), os = require('os'), http = require('http'), crypto = require('crypto');
 let pw; try { pw = require(process.env.PW || 'playwright'); } catch (e) {
@@ -81,6 +84,10 @@ const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'pack
 const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
 const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
 const P6 = ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js', '43_engines_p6.js'].filter(has);   // thermal@1, pid@1, rf@1, twin@1 (P6)
+// the engine library (docs/INTERACTIVE_LIBRARY.md): the core, every general engine and the catalogue that registers them, after the P6 engines
+const LIB = has('46_lib_core.js') ? ['46_lib_core.js', ...fs.readdirSync(srcDir).filter(f => /^46_lib_[a-z_]+\.js$/.test(f) && f !== '46_lib_core.js').sort(), ...fs.readdirSync(srcDir).filter(f => /^4[78]_lib_[a-z_]+\.js$/.test(f)).sort(), '49_lib_catalog.js'].filter(has) : [];
+// their vendored code (map@1: exact geodesics, Natural Earth land), loaded before them: the skill's activity_host/vendor/, or the repository's engine/vendor/<name@version>/
+const LIBV = !LIB.length ? [] : ['noema-geodesic.js', 'noema-land-110m.js'].map(b => [path.join(srcDir, 'vendor', b), ...(fs.existsSync(path.join(srcDir, '..', 'vendor')) ? fs.readdirSync(path.join(srcDir, '..', 'vendor')).map(d => path.join(srcDir, '..', 'vendor', d, b)) : [])].find(f => fs.existsSync(f))).filter(Boolean);
 const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
@@ -112,7 +119,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${P6.map(f => `<script>${rs(f)}</script>`).join('')}${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${LIBV.map(f => `<script>${inl(fs.readFileSync(f, 'utf8'))}</script>`).join('')}${[...P6, ...LIB].map(f => `<script>${rs(f)}</script>`).join('')}${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init, modules) {
@@ -241,6 +248,7 @@ window.run = function (act, init, modules) {
             const t0 = Date.now(); while (!off && Date.now() - t0 < 8000) { const done = await p.evaluate(n => { const l = document.querySelectorAll('#box .sim-log li'); return l.length > n && !/…$/.test(l[l.length - 1].textContent); }, n0); if (done) break; await p.waitForTimeout(50); }
           } else if (s.diagnose != null && SIM) await p.evaluate(v => { const e = document.querySelector('#box [data-bench="diagnosis"]'); if (!e) throw new Error('this activity has no bench'); e.value = String(v); e.dispatchEvent(new Event('change', { bubbles: true })); }, s.diagnose);
           else if (s.click) await frame.click(s.click);
+          else if (s.waitFor) { const tw = Date.now(); while (!(SIM ? await p.$('#box ' + s.waitFor) : await frame.$(s.waitFor))) { if (Date.now() - tw > 8000) throw new Error('waitFor ' + s.waitFor + ': nothing matched in 8 s'); await p.waitForTimeout(100); } }
           if (s.wait) await p.waitForTimeout(s.wait);
         }
         await p.waitForTimeout(500);

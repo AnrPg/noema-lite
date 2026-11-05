@@ -1,0 +1,14 @@
+{
+ "title": "La droite d’Euler",
+ "intro": "Tout triangle a un centre du cercle circonscrit O (le centre du cercle qui passe par ses sommets), un centre de gravité G (le point de rencontre des médianes), un orthocentre H (le point de rencontre des hauteurs) et le centre N du cercle des neuf points. Euler a découvert en 1767 que O, G et H sont toujours alignés, G se trouvant au tiers du chemin de O à H. Déplacez le sommet C et regardez la droite bouger.",
+ "cxLabel": "C, horizontalement",
+ "cyLabel": "C, verticalement",
+ "angLabel": "Angle en C",
+ "ratioLabel": "HG ÷ GO",
+ "colLabel": "O, G et H alignés",
+ "onLabel": "La droite d’Euler passe par C",
+ "sceneTitle": "Le triangle, ses centres et la droite d’Euler",
+ "checkOnC": "La droite d’Euler passe par le sommet C.",
+ "checkInside": "L’orthocentre H est à l’intérieur du triangle.",
+ "checkLine": "La droite d’Euler existe (le triangle n’est pas équilatéral)."
+}

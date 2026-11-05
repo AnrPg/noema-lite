@@ -1,0 +1,101 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "craft@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": {
+  "wpi": 30
+ },
+ "params": [
+  {
+   "id": "n",
+   "kind": "slider",
+   "label": "shafts",
+   "min": 4,
+   "max": 12,
+   "step": 1,
+   "default": 8
+  },
+  {
+   "id": "s",
+   "kind": "slider",
+   "label": "move",
+   "min": 1,
+   "max": 11,
+   "step": 1,
+   "default": 1
+  }
+ ],
+ "model": {
+  "mode": "weave",
+  "structure": {
+   "type": "satin",
+   "shafts": "n",
+   "move": "s",
+   "face": "warp"
+  },
+  "wpi": "wpi",
+  "repeat": true
+ },
+ "outputs": [
+  {
+   "id": "regular",
+   "kind": "scalar",
+   "of": "regular"
+  },
+  {
+   "id": "satins",
+   "kind": "scalar",
+   "of": "satins"
+  },
+  {
+   "id": "warpFloat",
+   "kind": "scalar",
+   "of": "warpFloat"
+  },
+  {
+   "id": "weftFloat",
+   "kind": "scalar",
+   "of": "weftFloat"
+  },
+  {
+   "id": "sett",
+   "kind": "scalar",
+   "of": "sett"
+  },
+  {
+   "id": "drawdown",
+   "kind": "scene",
+   "of": "drawdown"
+  }
+ ],
+ "readouts": [
+  {
+   "label": "warpFloatLabel",
+   "expr": "warpFloat"
+  },
+  {
+   "label": "weftFloatLabel",
+   "expr": "weftFloat"
+  },
+  {
+   "label": "satinsLabel",
+   "expr": "satins"
+  },
+  {
+   "label": "settLabel",
+   "expr": "sett",
+   "unit": "EPI",
+   "format": "fixed",
+   "digits": 1
+  }
+ ],
+ "plots": [
+  {
+   "kind": "scene",
+   "of": "drawdown",
+   "title": "drawdownTitle",
+   "height": 360
+  }
+ ]
+}

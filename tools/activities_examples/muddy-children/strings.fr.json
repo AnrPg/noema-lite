@@ -1,0 +1,11 @@
+{
+ "title": "Les enfants sales",
+ "intro": "Trois enfants ont joué au jardin ; deux d'entre eux ont de la boue sur le front. Chaque enfant voit les autres, mais pas lui-même. Le père annonce : au moins l'un de vous est sale. Puis il demande encore et encore : quelqu'un sait-il s'il est sale ? Chaque réponse est entendue de tous. Déplace le curseur pour ajouter les annonces une à une et regarde disparaître les mondes possibles.",
+ "kLabel": "Annonces faites",
+ "frameLabel": "Annonces jusqu'ici",
+ "leftLabel": "Mondes encore possibles",
+ "knowsLabel": "L'enfant 1 sait s'il est sale (1 = oui)",
+ "sceneTitle": "Les mondes possibles et ce que chaque enfant ne peut pas distinguer",
+ "checkKnows": "L'enfant 1 sait s'il est sale.",
+ "checkFirst": "C'est le premier moment où il le sait."
+}

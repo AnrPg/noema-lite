@@ -1,0 +1,1534 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "A",
+      "alleles": [
+       "A",
+       "a"
+      ]
+     },
+     {
+      "id": "B",
+      "alleles": [
+       "B",
+       "b"
+      ]
+     }
+    ],
+    "p1": {
+     "A": [
+      "A",
+      "a"
+     ],
+     "B": [
+      "B",
+      "b"
+     ]
+    },
+    "p2": {
+     "A": [
+      "A",
+      "a"
+     ],
+     "B": [
+      "B",
+      "b"
+     ]
+    },
+    "epistasis": {
+     "a": "A",
+     "b": "B",
+     "type": "recessive"
+    },
+    "classLabels": [
+     "purple",
+     "red",
+     "white"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r0",
+     "kind": "scalar",
+     "of": "ratio",
+     "arg": 0
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "frac",
+     "arg": "A_ b/b"
+    },
+    {
+     "id": "ci",
+     "kind": "series",
+     "of": "classIndex"
+    },
+    {
+     "id": "cf",
+     "kind": "series",
+     "of": "classFracs"
+    },
+    {
+     "id": "pq",
+     "kind": "scene",
+     "of": "punnett"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "rLabel",
+     "expr": "r0"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "pq",
+     "title": "pTitle"
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "ci"
+     },
+     "series": [
+      {
+       "y": "cf",
+       "style": "bars"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "ABO",
+      "alleles": [
+       "IA",
+       "IB",
+       "i"
+      ],
+      "codominant": [
+       [
+        "IA",
+        "IB"
+       ]
+      ]
+     }
+    ],
+    "p1": {
+     "ABO": [
+      "IA",
+      "i"
+     ]
+    },
+    "p2": {
+     "ABO": [
+      "IB",
+      "i"
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nClasses"
+    },
+    {
+     "id": "ab",
+     "kind": "scalar",
+     "of": "frac",
+     "arg": "IA/IB"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "W",
+      "alleles": [
+       "Wp",
+       "w"
+      ],
+      "chrom": "X"
+     }
+    ],
+    "p1": {
+     "W": [
+      "Wp",
+      "w"
+     ]
+    },
+    "p2": {
+     "W": [
+      "w"
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "frac",
+     "arg": "m: w/"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "A",
+      "alleles": [
+       "A",
+       "a"
+      ]
+     },
+     {
+      "id": "B",
+      "alleles": [
+       "B",
+       "b"
+      ]
+     }
+    ],
+    "p1": {
+     "A": [
+      "A",
+      "a"
+     ],
+     "B": [
+      "B",
+      "b"
+     ]
+    },
+    "p2": {
+     "A": [
+      "A",
+      "a"
+     ],
+     "B": [
+      "B",
+      "b"
+     ]
+    },
+    "linkage": [
+     {
+      "a": "A",
+      "b": "B",
+      "r": "k"
+     }
+    ],
+    "observed": [
+     40,
+     10,
+     10,
+     40
+    ]
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "chi2"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "pValue"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "Y",
+      "alleles": [
+       "Ay",
+       "a"
+      ],
+      "lethal": [
+       {
+        "genotype": [
+         "Ay",
+         "Ay"
+        ],
+        "viability": "k"
+       }
+      ]
+     }
+    ],
+    "p1": {
+     "Y": [
+      "Ay",
+      "a"
+     ]
+    },
+    "p2": {
+     "Y": [
+      "Ay",
+      "a"
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "survival"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "pedigree",
+    "inheritance": "AR",
+    "q": "k/10",
+    "people": [
+     {
+      "id": "I1",
+      "sex": "m"
+     },
+     {
+      "id": "I2",
+      "sex": "f"
+     },
+     {
+      "id": "II1",
+      "sex": "m",
+      "mother": "I2",
+      "father": "I1",
+      "affected": true
+     },
+     {
+      "id": "II2",
+      "sex": "f",
+      "mother": "I2",
+      "father": "I1",
+      "affected": false
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "carrier",
+     "arg": "II2"
+    },
+    {
+     "id": "pd",
+     "kind": "scene",
+     "of": "pedigree"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "hw",
+    "freqs": [
+     "k",
+     "1-k"
+    ],
+    "counts": [
+     30,
+     40,
+     30
+    ]
+   },
+   "outputs": [
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "geno",
+     "arg": "0/1"
+    },
+    {
+     "id": "pe",
+     "kind": "scalar",
+     "of": "pExact"
+    },
+    {
+     "id": "df",
+     "kind": "scene",
+     "of": "deFinetti"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "selection",
+    "p0": 0.1,
+    "w11": 1,
+    "w12": "1-k/2",
+    "w22": "1-k",
+    "gens": 300
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "p"
+    },
+    {
+     "id": "pf",
+     "kind": "scalar",
+     "of": "pFinal"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "t"
+     },
+     "series": [
+      {
+       "y": "p"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "drift",
+    "N": 50,
+    "p0": 0.5,
+    "s": "k",
+    "reps": 50,
+    "gens": 100
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "r0",
+     "kind": "series",
+     "of": "rep",
+     "arg": 0
+    },
+    {
+     "id": "fx",
+     "kind": "scalar",
+     "of": "fixed"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "map",
+    "r": "k",
+    "threePoint": {
+     "loci": [
+      "v",
+      "cv",
+      "ct"
+     ],
+     "classes": [
+      {
+       "alleles": [
+        0,
+        0,
+        0
+       ],
+       "n": 580
+      },
+      {
+       "alleles": [
+        1,
+        1,
+        1
+       ],
+       "n": 592
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "haldane"
+    },
+    {
+     "id": "g",
+     "kind": "scene",
+     "of": "geneMap"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "coalescent",
+    "n": 10,
+    "Ne": 1000,
+    "mu": "k/1000",
+    "reps": 100
+   },
+   "outputs": [
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "tajimaD"
+    },
+    {
+     "id": "tr",
+     "kind": "scene",
+     "of": "tree"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "ld",
+    "pA": 0.5,
+    "pB": 0.5,
+    "D": 0.2,
+    "c": "k",
+    "Ne": 1000
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "d",
+     "kind": "series",
+     "of": "Dt"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "quant",
+    "h2": "k",
+    "sigmaP": 5,
+    "sel": 0.1,
+    "sim": {
+     "N": 100,
+     "L": 10,
+     "gens": 20,
+     "sel": 0.2,
+     "h2": 0.5
+    }
+   },
+   "outputs": [
+    {
+     "id": "R",
+     "kind": "scalar",
+     "of": "R"
+    },
+    {
+     "id": "sm",
+     "kind": "series",
+     "of": "simMeans"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cros"
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "nClasses"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": "nope",
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "nClasses"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "A",
+      "alleles": [
+       "A",
+       "A_x",
+       "A"
+      ],
+      "codominant": [
+       [
+        "A",
+        "z"
+       ]
+      ],
+      "lethal": [
+       {
+        "genotype": [
+         "q"
+        ]
+       },
+       {
+        "genotype": [
+         "A"
+        ]
+       }
+      ]
+     },
+     {
+      "id": "A",
+      "alleles": [
+       "b",
+       "c"
+      ],
+      "chrom": "Z"
+     },
+     {
+      "id": "C",
+      "alleles": [
+       "c"
+      ],
+      "chrom": "X"
+     }
+    ],
+    "p1": {
+     "A": [
+      "A"
+     ],
+     "Q": [
+      "x"
+     ]
+    },
+    "p2": {
+     "A": [
+      "A",
+      "zz"
+     ]
+    },
+    "linkage": [
+     {
+      "a": "A",
+      "b": "Q",
+      "r": 0.1
+     },
+     {
+      "a": "A",
+      "b": "A",
+      "r": 0.1
+     },
+     {
+      "a": "A",
+      "b": "C",
+      "r": 0.1
+     }
+    ],
+    "epistasis": {
+     "a": "A",
+     "b": "A",
+     "type": "custom"
+    },
+    "extra": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "frac",
+     "arg": "A_"
+    },
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "ratio"
+    },
+    {
+     "id": "z",
+     "kind": "series",
+     "of": "nClasses"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "classFrac",
+     "arg": -1
+    },
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "nClasses",
+     "arg": 1,
+     "foo": 2
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "A",
+      "alleles": [
+       "A",
+       "a"
+      ]
+     },
+     {
+      "id": "B",
+      "alleles": [
+       "B",
+       "b",
+       "c"
+      ]
+     },
+     {
+      "id": "D",
+      "alleles": [
+       "D",
+       "d"
+      ]
+     },
+     {
+      "id": "E1",
+      "alleles": [
+       "E",
+       "e"
+      ]
+     }
+    ],
+    "p1": {
+     "A": [
+      "A",
+      "a"
+     ],
+     "B": [
+      "B",
+      "b"
+     ],
+     "D": [
+      "D",
+      "d"
+     ],
+     "E1": [
+      "E",
+      "e"
+     ]
+    },
+    "p2": {
+     "A": [
+      "A",
+      "a"
+     ],
+     "B": [
+      "B",
+      "b"
+     ],
+     "D": [
+      "D",
+      "d"
+     ],
+     "E1": [
+      "E",
+      "e"
+     ]
+    },
+    "linkage": [
+     {
+      "a": "A",
+      "b": "B",
+      "r": 0.1
+     },
+     {
+      "a": "B",
+      "b": "D",
+      "r": 0.1
+     },
+     {
+      "a": "D",
+      "b": "A",
+      "r": 0.1
+     },
+     {
+      "a": "A",
+      "b": "E1",
+      "r": 0.1
+     }
+    ],
+    "epistasis": {
+     "a": "A",
+     "b": "B",
+     "type": "dominant"
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "frac",
+     "arg": "A_ B/c D_"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "cross",
+    "loci": [
+     {
+      "id": "W",
+      "alleles": [
+       "Wp",
+       "w"
+      ],
+      "chrom": "X"
+     }
+    ],
+    "p1": {
+     "W": [
+      "w"
+     ]
+    },
+    "p2": {
+     "W": [
+      "w",
+      "Wp"
+     ]
+    },
+    "classLabels": [
+     "Bad Key"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "frac",
+     "arg": "w/"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "pedigree",
+    "inheritance": "XR",
+    "people": [
+     {
+      "id": "a",
+      "sex": "u"
+     },
+     {
+      "id": "b",
+      "sex": "f",
+      "mother": "a"
+     },
+     {
+      "id": "c",
+      "sex": "m",
+      "mother": "d",
+      "father": "c"
+     },
+     {
+      "id": "c",
+      "sex": "f",
+      "mother": "b",
+      "father": "b"
+     },
+     {
+      "id": "e",
+      "sex": "m",
+      "mother": "f2",
+      "father": "e2"
+     },
+     {
+      "id": "f2",
+      "sex": "f",
+      "mother": "e",
+      "father": "e2"
+     },
+     {
+      "id": "e2",
+      "sex": "m"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "carrier",
+     "arg": "zz"
+    },
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "carrier"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "pedigree",
+    "inheritance": "AD",
+    "people": [
+     {
+      "id": "p0",
+      "sex": "f"
+     },
+     {
+      "id": "p1",
+      "sex": "f"
+     },
+     {
+      "id": "p2",
+      "sex": "f"
+     },
+     {
+      "id": "p3",
+      "sex": "f"
+     },
+     {
+      "id": "p4",
+      "sex": "f"
+     },
+     {
+      "id": "p5",
+      "sex": "f"
+     },
+     {
+      "id": "p6",
+      "sex": "f"
+     },
+     {
+      "id": "p7",
+      "sex": "f"
+     },
+     {
+      "id": "p8",
+      "sex": "f"
+     },
+     {
+      "id": "p9",
+      "sex": "f"
+     },
+     {
+      "id": "p10",
+      "sex": "f"
+     },
+     {
+      "id": "p11",
+      "sex": "f"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "likelihood"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "hw",
+    "freqs": [
+     0.2,
+     0.3,
+     0.5
+    ],
+    "counts": [
+     1,
+     2,
+     3
+    ],
+    "chrom": "Y"
+   },
+   "outputs": [
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "geno",
+     "arg": "2/1"
+    },
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "geno",
+     "arg": "0/3"
+    },
+    {
+     "id": "k",
+     "kind": "scalar",
+     "of": "male",
+     "arg": 1.5
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "hw",
+    "freqs": [
+     0.5,
+     0.5
+    ],
+    "counts": [
+     1,
+     2
+    ],
+    "chrom": "X"
+   },
+   "outputs": [
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "het"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "hw",
+    "freqs": [
+     0.5,
+     0.5
+    ],
+    "counts": [
+     1,
+     2,
+     3
+    ],
+    "chrom": "X"
+   },
+   "outputs": [
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "het"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "map",
+    "threePoint": {
+     "loci": [
+      "a",
+      "a",
+      "b"
+     ],
+     "classes": [
+      {
+       "alleles": [
+        0,
+        0,
+        0
+       ],
+       "n": 5
+      },
+      {
+       "alleles": [
+        0,
+        0,
+        0
+       ],
+       "n": 5
+      },
+      {
+       "alleles": [
+        0,
+        2,
+        0
+       ],
+       "n": 1
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "middle"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "ld",
+    "pAB": 0.25,
+    "pA": 0.5,
+    "c": 0.1
+   },
+   "outputs": [
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "D"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "drift",
+    "N": "N2",
+    "p0": 0.5
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "fixed"
+    },
+    {
+     "id": "r",
+     "kind": "series",
+     "of": "rep",
+     "arg": 50000
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "quant",
+    "sim": {
+     "N": 10
+    }
+   },
+   "outputs": [
+    {
+     "id": "R",
+     "kind": "scalar",
+     "of": "R"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "selection",
+    "p0": 0.5
+   },
+   "outputs": "notalist"
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "genetics@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "coalescent",
+    "n": 10,
+    "Ne": 100
+   },
+   "outputs": [
+    5,
+    {
+     "id": "t",
+     "kind": "sound",
+     "of": "tree"
+    },
+    {
+     "id": "q",
+     "kind": "scalar"
+    }
+   ]
+  }
+ ]
+}

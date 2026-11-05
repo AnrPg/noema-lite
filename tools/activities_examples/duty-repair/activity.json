@@ -1,0 +1,17 @@
+{
+ "id": "duty-repair",
+ "runtime": "sim-spec@1",
+ "entry": "activities/duty-repair/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "duty-repair-still",
+  "text": "A neighbour asks for help on day 0: you ought to go within two days. You do not go, so on day 2 that duty is violated. A second, contrary-to-duty norm now applies: if you did not help, you ought at least to call within a day. The call on day 4 meets that deadline, so the repair duty is fulfilled while the first duty stays violated. A third norm forbids noise at night and is kept. The picture shows one row per norm along the days: a red mark where a norm was violated, a green mark where it was fulfilled, an amber mark where it is still in force. This is Chisholm's contrary-to-duty paradox (1963) told in time, the way norms with deadlines are checked in multi-agent systems."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

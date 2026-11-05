@@ -1,0 +1,1651 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.6,
+     "default": 0.15
+    },
+    {
+     "id": "dd",
+     "kind": "toggle",
+     "label": "dd",
+     "default": true
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "pe",
+       "prior": "pre",
+       "mustNotMiss": true,
+       "act": 0.02
+      },
+      {
+       "id": "pneu",
+       "prior": 0.3
+      },
+      {
+       "id": "msk",
+       "prior": "0.7 - pre"
+      }
+     ],
+     "findings": [
+      {
+       "id": "ddim",
+       "lik": {
+        "pe": 0.97,
+        "pneu": 0.6,
+        "msk": 0.3
+       },
+       "present": "dd"
+      },
+      {
+       "id": "fever",
+       "lik": {
+        "pe": 0.15,
+        "pneu": 0.8,
+        "msk": 0.05
+       },
+       "present": 0
+      },
+      {
+       "id": "ctpa",
+       "lik": {
+        "pe": 0.95,
+        "pneu": 0.05,
+        "msk": 0.05
+       }
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "pPE",
+     "kind": "scalar",
+     "of": "ddx.post.pe"
+    },
+    {
+     "id": "best",
+     "kind": "scalar",
+     "of": "ddx.best"
+    },
+    {
+     "id": "gainCt",
+     "kind": "scalar",
+     "of": "ddx.gain.ctpa"
+    },
+    {
+     "id": "bars",
+     "kind": "scene",
+     "of": "ddx"
+    },
+    {
+     "id": "step",
+     "kind": "series",
+     "of": "ddx.step"
+    },
+    {
+     "id": "trajPE",
+     "kind": "series",
+     "of": "ddx.traj.pe"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "bars",
+     "title": "barsTitle"
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "step"
+     },
+     "y": {
+      "min": 0,
+      "max": 1
+     },
+     "series": [
+      {
+       "y": "trajPE",
+       "label": "pe",
+       "style": "steps"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "threshold": {
+     "benefit": "B",
+     "harm": 1,
+     "se": 0.9,
+     "sp": 0.8,
+     "testRisk": 0,
+     "p": "pre"
+    }
+   },
+   "outputs": [
+    {
+     "id": "tt",
+     "kind": "scalar",
+     "of": "threshold.test"
+    },
+    {
+     "id": "ttt",
+     "kind": "scalar",
+     "of": "threshold.testTreat"
+    },
+    {
+     "id": "zone",
+     "kind": "scalar",
+     "of": "threshold.zone"
+    },
+    {
+     "id": "bar",
+     "kind": "scene",
+     "of": "threshold"
+    }
+   ],
+   "consts": {
+    "B": 10
+   }
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "tests": {
+     "se1": 0.9,
+     "sp1": 0.8,
+     "se2": 0.9,
+     "sp2": 0.8,
+     "prev": "pre",
+     "cost1": 10,
+     "cost2": 100
+    }
+   },
+   "outputs": [
+    {
+     "id": "sSe",
+     "kind": "scalar",
+     "of": "tests.serialSe"
+    },
+    {
+     "id": "pSp",
+     "kind": "scalar",
+     "of": "tests.parallelSp"
+    },
+    {
+     "id": "cost",
+     "kind": "scalar",
+     "of": "tests.serialCost"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "tree": {
+     "root": "d",
+     "nodes": [
+      {
+       "id": "d",
+       "type": "decision",
+       "children": [
+        {
+         "to": "tx",
+         "key": "treat"
+        },
+        {
+         "to": "no",
+         "key": "wait"
+        }
+       ]
+      },
+      {
+       "id": "tx",
+       "type": "chance",
+       "children": [
+        {
+         "to": "tD",
+         "p": "pre"
+        },
+        {
+         "to": "tN",
+         "p": "1 - pre"
+        }
+       ]
+      },
+      {
+       "id": "no",
+       "type": "chance",
+       "children": [
+        {
+         "to": "nD",
+         "p": "pre"
+        },
+        {
+         "to": "nN",
+         "p": "1 - pre"
+        }
+       ]
+      },
+      {
+       "id": "tD",
+       "type": "terminal",
+       "u": 0.9
+      },
+      {
+       "id": "tN",
+       "type": "terminal",
+       "u": 0.95
+      },
+      {
+       "id": "nD",
+       "type": "terminal",
+       "u": 0.5
+      },
+      {
+       "id": "nN",
+       "type": "terminal",
+       "u": 1
+      }
+     ],
+     "sweep": {
+      "name": "pre",
+      "min": 0,
+      "max": 0.5,
+      "points": 51
+     }
+    }
+   },
+   "outputs": [
+    {
+     "id": "ev",
+     "kind": "scalar",
+     "of": "tree.ev"
+    },
+    {
+     "id": "ch",
+     "kind": "scalar",
+     "of": "tree.choice.d"
+    },
+    {
+     "id": "th",
+     "kind": "scalar",
+     "of": "tree.threshold"
+    },
+    {
+     "id": "xs",
+     "kind": "series",
+     "of": "tree.sweep"
+    },
+    {
+     "id": "lt",
+     "kind": "series",
+     "of": "tree.line.tx"
+    },
+    {
+     "id": "ln",
+     "kind": "series",
+     "of": "tree.line.no"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "tree"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pS",
+     "kind": "slider",
+     "label": "ps",
+     "min": 0,
+     "max": 0.15,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "markov": {
+     "states": [
+      {
+       "id": "W",
+       "u": 1
+      },
+      {
+       "id": "S",
+       "u": 0.6,
+       "cost": 1000
+      },
+      {
+       "id": "D",
+       "u": 0,
+       "alive": false
+      }
+     ],
+     "P": [
+      [
+       0.85,
+       "pS",
+       0.05
+      ],
+      [
+       0,
+       0.8,
+       0.2
+      ],
+      [
+       0,
+       0,
+       1
+      ]
+     ],
+     "start": [
+      1,
+      0,
+      0
+     ],
+     "cycles": 40,
+     "discount": 0.03,
+     "halfCycle": true
+    }
+   },
+   "outputs": [
+    {
+     "id": "le",
+     "kind": "scalar",
+     "of": "markov.le"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "markov.qaly"
+    },
+    {
+     "id": "cy",
+     "kind": "series",
+     "of": "markov.cycle"
+    },
+    {
+     "id": "tw",
+     "kind": "series",
+     "of": "markov.trace.W"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "wtp",
+     "kind": "slider",
+     "label": "wtp",
+     "min": 0,
+     "max": 100000,
+     "default": 30000
+    }
+   ],
+   "model": {
+    "cea": {
+     "strategies": [
+      {
+       "id": "A",
+       "cost": 2000,
+       "qaly": 8
+      },
+      {
+       "id": "B",
+       "cost": 12000,
+       "qaly": 8.5
+      },
+      {
+       "id": "Cc",
+       "cost": 15000,
+       "qaly": 8.4
+      }
+     ],
+     "wtp": "wtp"
+    }
+   },
+   "outputs": [
+    {
+     "id": "icer",
+     "kind": "scalar",
+     "of": "cea.icer.B"
+    },
+    {
+     "id": "best",
+     "kind": "scalar",
+     "of": "cea.best"
+    },
+    {
+     "id": "domC",
+     "kind": "scalar",
+     "of": "cea.dominated.Cc"
+    },
+    {
+     "id": "plane",
+     "kind": "scene",
+     "of": "cea"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "hr2",
+     "kind": "toggle",
+     "label": "hr2",
+     "default": false
+    }
+   ],
+   "model": {
+    "triage": {
+     "esi": {
+      "highRisk": "hr2",
+      "resources": 2,
+      "hr": 110,
+      "rr": 18,
+      "spo2": 97
+     },
+     "news2": {
+      "rr": 24,
+      "spo2": 93,
+      "sbp": 105,
+      "hr": 115,
+      "temp": 38.5
+     },
+     "qsofa": {
+      "rr": 24,
+      "sbp": 95,
+      "gcs": 15
+     },
+     "shock": {
+      "hr": 120,
+      "sbp": 100
+     }
+    }
+   },
+   "outputs": [
+    {
+     "id": "esi",
+     "kind": "scalar",
+     "of": "triage.esi"
+    },
+    {
+     "id": "news",
+     "kind": "scalar",
+     "of": "triage.news2"
+    },
+    {
+     "id": "qs",
+     "kind": "scalar",
+     "of": "triage.qsofa"
+    },
+    {
+     "id": "si",
+     "kind": "scalar",
+     "of": "triage.shock"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "tLab",
+     "kind": "slider",
+     "label": "tLab",
+     "min": -1,
+     "max": 120,
+     "default": 5
+    },
+    {
+     "id": "tAbx",
+     "kind": "slider",
+     "label": "tAbx",
+     "min": -1,
+     "max": 240,
+     "default": 30
+    },
+    {
+     "id": "tFl",
+     "kind": "slider",
+     "label": "tFl",
+     "min": -1,
+     "max": 240,
+     "default": 10
+    },
+    {
+     "id": "tCt",
+     "kind": "slider",
+     "label": "tCt",
+     "min": -1,
+     "max": 240,
+     "default": -1
+    },
+    {
+     "id": "est0",
+     "kind": "slider",
+     "label": "est0",
+     "min": 0,
+     "max": 1,
+     "default": 0.4
+    },
+    {
+     "id": "est1",
+     "kind": "slider",
+     "label": "est1",
+     "min": 0,
+     "max": 1,
+     "default": 0.8
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "sepsis",
+       "prior": 0.4,
+       "mustNotMiss": true,
+       "act": 0.1,
+       "treatedBy": [
+        "abx"
+       ]
+      },
+      {
+       "id": "viral",
+       "prior": 0.6
+      }
+     ],
+     "truth": "sepsis",
+     "findings": [
+      {
+       "id": "lact",
+       "lik": {
+        "sepsis": 0.8,
+        "viral": 0.1
+       },
+       "present": 1
+      },
+      {
+       "id": "cxr",
+       "lik": {
+        "sepsis": 0.6,
+        "viral": 0.2
+       },
+       "present": 1
+      }
+     ],
+     "estimates": [
+      {
+       "hyp": "sepsis",
+       "p": "est0"
+      },
+      {
+       "hyp": "sepsis",
+       "after": "lact",
+       "p": "est1"
+      }
+     ]
+    },
+    "vp": {
+     "tEnd": 360,
+     "patient": {
+      "sepsis": 0.3,
+      "growth": 0.8
+     },
+     "budget": 200,
+     "actions": [
+      {
+       "id": "lactate",
+       "kind": "test",
+       "at": "tLab",
+       "turnaround": 20,
+       "reveals": [
+        "lact"
+       ],
+       "essential": 1,
+       "cost": 20,
+       "key": "actLactate"
+      },
+      {
+       "id": "cultures",
+       "kind": "test",
+       "at": "tLab",
+       "turnaround": 2880,
+       "essential": 1,
+       "deadline": 60,
+       "cost": 40,
+       "key": "actCultures"
+      },
+      {
+       "id": "abx",
+       "kind": "treat",
+       "at": "tAbx",
+       "effect": {
+        "abx": 1
+       },
+       "essential": 2,
+       "deadline": 60,
+       "after": [
+        "cultures"
+       ],
+       "cost": 30,
+       "key": "actAbx"
+      },
+      {
+       "id": "fluids",
+       "kind": "treat",
+       "at": "tFl",
+       "effect": {
+        "fluid": 2000,
+        "over": 60
+       },
+       "essential": 1,
+       "cost": 10,
+       "key": "actFluids"
+      },
+      {
+       "id": "ct",
+       "kind": "test",
+       "at": "tCt",
+       "lowYield": true,
+       "cost": 300,
+       "reveals": [
+        "cxr"
+       ],
+       "turnaround": 60,
+       "key": "actCt"
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "vp.t"
+    },
+    {
+     "id": "map",
+     "kind": "series",
+     "of": "vp.map"
+    },
+    {
+     "id": "lac",
+     "kind": "series",
+     "of": "vp.lactate"
+    },
+    {
+     "id": "outcome",
+     "kind": "scalar",
+     "of": "vp.outcome"
+    },
+    {
+     "id": "grade",
+     "kind": "scalar",
+     "of": "grade.total"
+    },
+    {
+     "id": "closure",
+     "kind": "scalar",
+     "of": "grade.closure"
+    },
+    {
+     "id": "pS",
+     "kind": "scalar",
+     "of": "ddx.post.sepsis"
+    },
+    {
+     "id": "err",
+     "kind": "scalar",
+     "of": "ddx.estErr"
+    },
+    {
+     "id": "line",
+     "kind": "scene",
+     "of": "vp"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "t"
+     },
+     "y": {},
+     "series": [
+      {
+       "y": "map",
+       "label": "map"
+      }
+     ]
+    },
+    {
+     "kind": "scene",
+     "of": "line"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0,
+     "max": 1,
+     "default": 0.7
+    },
+    {
+     "id": "ans",
+     "kind": "choice",
+     "label": "ans",
+     "options": [
+      {
+       "value": 1,
+       "label": "o1"
+      },
+      {
+       "value": 2,
+       "label": "o2"
+      },
+      {
+       "value": 3,
+       "label": "o3"
+      },
+      {
+       "value": 4,
+       "label": "o4"
+      },
+      {
+       "value": 5,
+       "label": "o5"
+      }
+     ],
+     "default": 4
+    }
+   ],
+   "model": {
+    "sct": {
+     "panel": [
+      0,
+      1,
+      2,
+      5,
+      2
+     ],
+     "answer": "ans"
+    },
+    "calib": {
+     "forecasts": [
+      {
+       "p": "pre",
+       "o": 1
+      },
+      {
+       "p": 0.2,
+       "o": 0
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "credit",
+     "kind": "scalar",
+     "of": "sct.credit"
+    },
+    {
+     "id": "brier",
+     "kind": "scalar",
+     "of": "calib.brier"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "D",
+       "prior": "pre"
+      },
+      {
+       "id": "N",
+       "prior": "1 - pre"
+      }
+     ],
+     "groups": [
+      {
+       "id": "g",
+       "rho": 0.5
+      }
+     ],
+     "findings": [
+      {
+       "id": "a",
+       "lr": {
+        "pos": 4,
+        "neg": 0.5
+       },
+       "target": "D",
+       "present": 1,
+       "group": "g"
+      },
+      {
+       "id": "b",
+       "lr": {
+        "pos": 4,
+        "neg": 0.5
+       },
+       "target": "D",
+       "present": 1,
+       "group": "g"
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "post",
+     "kind": "scalar",
+     "of": "ddx.post.D"
+    },
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "ddx.lo.D"
+    },
+    {
+     "id": "hi",
+     "kind": "scalar",
+     "of": "ddx.hi.D"
+    },
+    {
+     "id": "nf",
+     "kind": "scalar",
+     "of": "ddx.flags"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "ddx.top"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "A",
+       "prior": 0.5
+      },
+      {
+       "id": "A",
+       "prior": 0.5
+      }
+     ],
+     "findings": [
+      {
+       "id": "f",
+       "present": 1
+      },
+      {
+       "id": "g",
+       "lik": {
+        "Z": 0.5
+       },
+       "lr": {
+        "pos": 2,
+        "neg": 0.5
+       }
+      }
+     ],
+     "estimates": [
+      {
+       "hyp": "Q",
+       "after": "zz",
+       "p": 0.5
+      }
+     ],
+     "truth": "Y"
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "ddx.top"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "A",
+       "prior": 0.2
+      },
+      {
+       "id": "B",
+       "prior": 0.3
+      },
+      {
+       "id": "Cc",
+       "prior": 0.5
+      }
+     ],
+     "findings": [
+      {
+       "id": "f",
+       "lr": {
+        "pos": 3,
+        "neg": 0.4
+       },
+       "target": "A",
+       "group": "nog"
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "ddx.post.A"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "tree": {
+     "root": "zz",
+     "nodes": [
+      {
+       "id": "a",
+       "type": "decision"
+      },
+      {
+       "id": "b",
+       "type": "terminal",
+       "children": [
+        {
+         "to": "a"
+        }
+       ]
+      },
+      {
+       "id": "c",
+       "type": "chance",
+       "children": [
+        {
+         "to": "q"
+        },
+        {
+         "to": "b"
+        }
+       ]
+      }
+     ],
+     "sweep": {
+      "name": "nope",
+      "min": 1,
+      "max": 0
+     }
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "tree.ev"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "tree": {
+     "root": "a",
+     "nodes": [
+      {
+       "id": "a",
+       "type": "decision",
+       "children": [
+        {
+         "to": "b"
+        },
+        {
+         "to": "c"
+        }
+       ]
+      },
+      {
+       "id": "b",
+       "type": "terminal",
+       "u": 1
+      },
+      {
+       "id": "c",
+       "type": "decision",
+       "children": [
+        {
+         "to": "b"
+        }
+       ]
+      },
+      {
+       "id": "z",
+       "type": "terminal",
+       "u": 0
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "tree.ev"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "markov": {
+     "states": [
+      {
+       "id": "W",
+       "u": 1
+      },
+      {
+       "id": "W",
+       "u": 0
+      }
+     ],
+     "P": [
+      [
+       1,
+       0,
+       0
+      ]
+     ],
+     "start": [
+      1
+     ],
+     "cycles": 0
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "markov.le"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "vp": {
+     "actions": [
+      {
+       "id": "a",
+       "kind": "operate",
+       "at": 1,
+       "reveals": [
+        "f"
+       ],
+       "after": [
+        "b"
+       ]
+      }
+     ]
+    },
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "A",
+       "prior": 0.5,
+       "treatedBy": [
+        "zz"
+       ]
+      },
+      {
+       "id": "B",
+       "prior": 0.5
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "vp.outcome"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "threshold": {
+     "benefit": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "threshold.zone"
+    },
+    {
+     "id": "y",
+     "kind": "series",
+     "of": "threshold.treat"
+    },
+    {
+     "id": "z",
+     "kind": "scene",
+     "of": "tests"
+    },
+    {
+     "id": "w",
+     "kind": "sound",
+     "of": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "cea": {
+     "strategies": [
+      {
+       "id": "A",
+       "cost": 1,
+       "qaly": 1
+      }
+     ],
+     "wtp": 1
+    },
+    "sct": {
+     "panel": [
+      1
+     ],
+     "answer": 1
+    },
+    "calib": {
+     "forecasts": []
+    },
+    "extra": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "cea.best",
+     "label": "q"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "pe",
+       "prior": "pre",
+       "mustNotMiss": true,
+       "act": 0.02
+      },
+      {
+       "id": "pneu",
+       "prior": 0.3
+      },
+      {
+       "id": "msk",
+       "prior": "0.7 - pre"
+      }
+     ],
+     "findings": [
+      {
+       "id": "ddim",
+       "lik": {
+        "pe": 0.97,
+        "pneu": 0.6,
+        "msk": 0.3
+       },
+       "present": "dd"
+      },
+      {
+       "id": "fever",
+       "lik": {
+        "pe": 0.15,
+        "pneu": 0.8,
+        "msk": 0.05
+       },
+       "present": 0
+      },
+      {
+       "id": "ctpa",
+       "lik": {
+        "pe": 0.95,
+        "pneu": 0.05,
+        "msk": 0.05
+       }
+      }
+     ]
+    },
+    "triage": {
+     "news2": {
+      "rr": 20
+     }
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "ddx.post.pe"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.6,
+     "default": 0.15
+    },
+    {
+     "id": "dd",
+     "kind": "toggle",
+     "label": "dd",
+     "default": true
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "pe",
+       "prior": "pre",
+       "mustNotMiss": true,
+       "act": 0.02
+      },
+      {
+       "id": "pneu",
+       "prior": 0.3
+      },
+      {
+       "id": "msk",
+       "prior": "0.7 - pre"
+      },
+      {
+       "id": "x1",
+       "prior": "zz * 2"
+      }
+     ],
+     "findings": [
+      {
+       "id": "ddim",
+       "lik": {
+        "pe": 0.97,
+        "pneu": 0.6,
+        "msk": 0.3
+       },
+       "present": "dd"
+      },
+      {
+       "id": "fever",
+       "lik": {
+        "pe": 0.15,
+        "pneu": 0.8,
+        "msk": 0.05
+       },
+       "present": 0
+      },
+      {
+       "id": "ctpa",
+       "lik": {
+        "pe": 0.95,
+        "pneu": 0.05,
+        "msk": 0.05
+       }
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "ddx.post.pe"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "D",
+       "prior": 0.3,
+       "key": "Bad Key"
+      },
+      {
+       "id": "N",
+       "prior": 0.7,
+       "key": "hypN"
+      }
+     ],
+     "other": true,
+     "findings": [
+      {
+       "id": "f",
+       "lik": {
+        "D": 0.9,
+        "N": 0.1,
+        "other": 0.5
+       },
+       "present": 1
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "po",
+     "kind": "scalar",
+     "of": "ddx.post.other"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "clinic@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "pre",
+     "kind": "slider",
+     "label": "pre",
+     "min": 0.01,
+     "max": 0.99,
+     "default": 0.2
+    }
+   ],
+   "model": {
+    "ddx": {
+     "hypotheses": [
+      {
+       "id": "D",
+       "prior": 0.3,
+       "key": "hypD"
+      },
+      {
+       "id": "N",
+       "prior": 0.7,
+       "key": "hypN"
+      }
+     ],
+     "other": true,
+     "findings": [
+      {
+       "id": "f",
+       "lik": {
+        "D": 0.9,
+        "N": 0.1
+       },
+       "present": 1
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "po",
+     "kind": "scalar",
+     "of": "ddx.post.other"
+    },
+    {
+     "id": "pd",
+     "kind": "scalar",
+     "of": "ddx.post.D"
+    }
+   ]
+  }
+ ]
+}

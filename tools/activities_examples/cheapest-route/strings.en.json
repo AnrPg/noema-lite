@@ -1,0 +1,19 @@
+{
+ "title": "The cheapest route",
+ "intro": "Seven towns are joined by roads, each with its toll. Travel from {from} to {to} as cheaply as you can: choose one road at a time, then check your route against the cheapest one, which the app finds with Dijkstra's algorithm.",
+ "keyMine": "your route",
+ "keyBest": "the cheapest route",
+ "at": "You are in {town}. Your route so far: {route} (toll {cost}).",
+ "arrived": "You have reached the goal. Your route costs {cost}.",
+ "roads": "Roads from here",
+ "go": "To {town} (toll {cost})",
+ "undo": "Back one road",
+ "restart": "Start again",
+ "check": "Check my route",
+ "another": "Another map",
+ "computing": "Working out the cheapest route…",
+ "right": "Right: {cost} is the cheapest toll there is.",
+ "more": "Your route costs {cost}; the cheapest costs {best}: {path}.",
+ "engineError": "The route finder is not available here ({code}).",
+ "mapLabel": "Map of seven towns and their roads. Your route: {route}, toll {cost}."
+}

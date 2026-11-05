@@ -1,0 +1,45 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "geom@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "cx", "kind": "slider", "label": "cxLabel", "min": -2, "max": 8, "step": 0.1, "default": 2 },
+  { "id": "cy", "kind": "slider", "label": "cyLabel", "min": 0.5, "max": 8, "step": 0.1, "default": 4 }
+ ],
+ "model": {
+  "objects": [
+   { "id": "A", "point": [0, 0] },
+   { "id": "B", "point": [6, 0] },
+   { "id": "C", "point": { "x": "cx", "y": "cy" } },
+   { "id": "T", "polygon": ["A", "B", "C"] },
+   { "id": "O", "center": { "kind": "circumcenter", "of": ["A", "B", "C"] } },
+   { "id": "G", "center": { "kind": "centroid", "of": ["A", "B", "C"] } },
+   { "id": "H", "center": { "kind": "orthocenter", "of": ["A", "B", "C"] } },
+   { "id": "N", "center": { "kind": "ninepoint", "of": ["A", "B", "C"] } },
+   { "id": "cc", "triCircle": { "kind": "circumcircle", "of": ["A", "B", "C"] } },
+   { "id": "nc", "triCircle": { "kind": "ninepoint", "of": ["A", "B", "C"] } },
+   { "id": "eu", "eulerLine": ["A", "B", "C"] }
+  ],
+  "tol": 1e-6
+ },
+ "outputs": [
+  { "id": "onC", "kind": "scalar", "of": "on", "at": ["C", "eu"] },
+  { "id": "hIn", "kind": "scalar", "of": "inside", "at": ["H", "T"] },
+  { "id": "line", "kind": "scalar", "of": "defined", "at": ["eu"] },
+  { "id": "col", "kind": "scalar", "of": "collinear", "at": ["O", "G", "H"] },
+  { "id": "hg", "kind": "scalar", "of": "dist", "at": ["H", "G"] },
+  { "id": "go", "kind": "scalar", "of": "dist", "at": ["G", "O"] },
+  { "id": "angC", "kind": "scalar", "of": "angle", "at": ["A", "C", "B"] },
+  { "id": "fig", "kind": "scene", "of": "drawing" }
+ ],
+ "readouts": [
+  { "label": "angLabel", "expr": "angC", "unit": "°", "format": "fixed", "digits": 1 },
+  { "label": "ratioLabel", "expr": "hg / go", "format": "fixed", "digits": 3 },
+  { "label": "colLabel", "expr": "col == 1" },
+  { "label": "onLabel", "expr": "onC == 1" }
+ ],
+ "plots": [
+  { "kind": "scene", "title": "sceneTitle", "of": "fig", "height": 360 }
+ ]
+}

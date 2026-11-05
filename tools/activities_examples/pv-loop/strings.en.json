@@ -1,0 +1,20 @@
+{
+ "title": "The left ventricle's pressure–volume loop",
+ "intro": "Each beat the left ventricle draws one loop: it fills, contracts with both valves shut, ejects into the aorta and relaxes. Change how strongly it contracts (Ees, the slope of the end-systolic line), how hard it is filled (the left atrial pressure) and the resistance it pumps against, and watch the loop, the stroke volume and the blood pressure. The heart rate stays at 70 per minute and there are no reflexes: this is the ventricle on its own.",
+ "eesLabel": "Contractility, Ees",
+ "plaLabel": "Filling pressure (left atrium)",
+ "rLabel": "Peripheral resistance",
+ "svLabel": "Stroke volume",
+ "efLabel": "Ejection fraction",
+ "edvLabel": "End-diastolic volume",
+ "esvLabel": "End-systolic volume",
+ "mapLabel": "Mean arterial pressure",
+ "coLabel": "Cardiac output",
+ "swLabel": "Stroke work",
+ "loopTitle": "Pressure–volume loop",
+ "beatTitle": "One beat",
+ "time": "Time (s)",
+ "pressure": "Pressure (mmHg)",
+ "lvLine": "left ventricle",
+ "aoLine": "aorta"
+}

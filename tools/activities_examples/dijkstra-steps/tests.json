@@ -1,0 +1,160 @@
+{
+ "cases": [
+  {
+   "name": "road s → t at 7, watched to the end: x costs 8 (passes)",
+   "exercise": "ch01-e921",
+   "steps": [
+    {
+     "set": "wst",
+     "value": 7
+    },
+    {
+     "set": "k",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "dx": [
+      7.5,
+      8.5
+     ],
+     "hops": [
+      1.5,
+      2.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "the start: cost 10, step 0 — x still costs 9 by s → y → t → x",
+   "exercise": "ch01-e921",
+   "steps": [
+    {
+     "set": "wst",
+     "value": 10
+    },
+    {
+     "set": "k",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "dx": [
+      8.5,
+      9.5
+     ],
+     "hops": [
+      2.5,
+      3.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "cost 8: a tie, x still costs 9 (fails)",
+   "exercise": "ch01-e921",
+   "steps": [
+    {
+     "set": "wst",
+     "value": 8
+    },
+    {
+     "set": "k",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "dx": [
+      8.5,
+      9.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "cost 2: shorter, but cheaper than needed (fails)",
+   "exercise": "ch01-e921",
+   "steps": [
+    {
+     "set": "wst",
+     "value": 2
+    },
+    {
+     "set": "k",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "dx": [
+      2.5,
+      3.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "cost 7 but not stepped to the end (fails)",
+   "exercise": "ch01-e921",
+   "steps": [
+    {
+     "set": "wst",
+     "value": 7
+    },
+    {
+     "set": "k",
+     "value": 4
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "dx": [
+      7.5,
+      8.5
+     ],
+     "frame": [
+      3.5,
+      4.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the values are saved",
+   "steps": [
+    {
+     "set": "wst",
+     "value": 5
+    },
+    {
+     "set": "k",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "state": [
+     "wst",
+     "k"
+    ],
+    "values": {
+     "dt": [
+      4.5,
+      5.5
+     ],
+     "steps": [
+      6.5,
+      7.5
+     ]
+    }
+   }
+  }
+ ]
+}

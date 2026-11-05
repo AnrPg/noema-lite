@@ -1,0 +1,54 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "prob@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "n", "kind": "slider", "label": "sampleSize", "min": 5, "max": 200, "step": 1, "default": 30 },
+  { "id": "p", "kind": "slider", "label": "trueP", "min": 0.01, "max": 0.99, "step": 0.01, "default": 0.1 }
+ ],
+ "model": {
+  "mode": "ci",
+  "kind": "prop",
+  "k": "round(p * n)",
+  "n": "n",
+  "p": "p",
+  "conf": 0.95,
+  "method": "wilson",
+  "points": 197
+ },
+ "outputs": [
+  { "id": "phat", "kind": "scalar", "of": "est" },
+  { "id": "waldLo", "kind": "scalar", "of": "lo.wald" },
+  { "id": "waldHi", "kind": "scalar", "of": "hi.wald" },
+  { "id": "wilsonLo", "kind": "scalar", "of": "lo.wilson" },
+  { "id": "wilsonHi", "kind": "scalar", "of": "hi.wilson" },
+  { "id": "waldAt", "kind": "scalar", "of": "coverAt.wald" },
+  { "id": "wilsonAt", "kind": "scalar", "of": "coverAt.wilson" },
+  { "id": "waldMean", "kind": "scalar", "of": "meanCover.wald" },
+  { "id": "wilsonMean", "kind": "scalar", "of": "meanCover.wilson" },
+  { "id": "waldMin", "kind": "scalar", "of": "minCover.wald" },
+  { "id": "wilsonMin", "kind": "scalar", "of": "minCover.wilson" },
+  { "id": "ps", "kind": "series", "of": "covP" },
+  { "id": "waldCover", "kind": "series", "of": "cover.wald" },
+  { "id": "wilsonCover", "kind": "series", "of": "cover.wilson" }
+ ],
+ "readouts": [
+  { "label": "phatLabel", "expr": "phat", "format": "fixed", "digits": 3 },
+  { "label": "waldCiLabel", "expr": "waldLo", "format": "fixed", "digits": 3 },
+  { "label": "waldCiHiLabel", "expr": "waldHi", "format": "fixed", "digits": 3 },
+  { "label": "wilsonCiLabel", "expr": "wilsonLo", "format": "fixed", "digits": 3 },
+  { "label": "wilsonCiHiLabel", "expr": "wilsonHi", "format": "fixed", "digits": 3 },
+  { "label": "waldAtLabel", "expr": "100 * waldAt", "unit": "%", "format": "fixed", "digits": 1 },
+  { "label": "wilsonAtLabel", "expr": "100 * wilsonAt", "unit": "%", "format": "fixed", "digits": 1 },
+  { "label": "waldMeanLabel", "expr": "100 * waldMean", "unit": "%", "format": "fixed", "digits": 1 },
+  { "label": "wilsonMeanLabel", "expr": "100 * wilsonMean", "unit": "%", "format": "fixed", "digits": 1 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "ps", "label": "pAxis", "min": 0, "max": 1 },
+    "y": { "label": "coverAxis", "min": 0, "max": 1 },
+    "series": [ { "y": "waldCover", "label": "waldLine" }, { "y": "wilsonCover", "label": "wilsonLine" } ],
+    "marks": [ { "axis": "y", "expr": "0.95", "label": "nominalMark" }, { "axis": "x", "expr": "p", "label": "pMark" } ] }
+ ]
+}

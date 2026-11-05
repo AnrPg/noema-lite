@@ -1,0 +1,85 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "clinic@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "labs", "kind": "toggle", "label": "labsLabel", "default": false },
+  { "id": "tLab", "kind": "slider", "label": "tLabLabel", "min": 0, "max": 180, "step": 5, "default": 30, "unit": "min" },
+  { "id": "abx", "kind": "toggle", "label": "abxLabel", "default": false },
+  { "id": "tAbx", "kind": "slider", "label": "tAbxLabel", "min": 0, "max": 240, "step": 5, "default": 90, "unit": "min" },
+  { "id": "fluids", "kind": "toggle", "label": "fluidsLabel", "default": false },
+  { "id": "tFl", "kind": "slider", "label": "tFlLabel", "min": 0, "max": 240, "step": 5, "default": 60, "unit": "min" },
+  { "id": "ct", "kind": "toggle", "label": "ctLabel", "default": false },
+  { "id": "est0", "kind": "slider", "label": "est0Label", "min": 0, "max": 1, "step": 0.05, "default": 0.5 },
+  { "id": "est1", "kind": "slider", "label": "est1Label", "min": 0, "max": 1, "step": 0.05, "default": 0.5 }
+ ],
+ "model": {
+  "ddx": {
+   "hypotheses": [
+    { "id": "sepsis", "prior": 0.4, "mustNotMiss": true, "act": 0.1, "treatedBy": [ "abx" ], "key": "hypSepsis" },
+    { "id": "viral", "prior": 0.6, "key": "hypViral" }
+   ],
+   "truth": "sepsis",
+   "findings": [
+    { "id": "lact", "lik": { "sepsis": 0.8, "viral": 0.1 }, "present": 1, "key": "fLact" },
+    { "id": "cxr", "lik": { "sepsis": 0.6, "viral": 0.2 }, "present": 1, "key": "fCt" }
+   ],
+   "estimates": [
+    { "hyp": "sepsis", "p": "est0" },
+    { "hyp": "sepsis", "after": "lact", "p": "est1" }
+   ]
+  },
+  "vp": {
+   "tEnd": 360,
+   "patient": { "sepsis": 0.3, "growth": 0.8 },
+   "budget": 200,
+   "actions": [
+    { "id": "lactate", "kind": "test", "at": "labs ? tLab : -1", "turnaround": 20, "reveals": [ "lact" ], "essential": 1, "cost": 20, "key": "actLactate" },
+    { "id": "cultures", "kind": "test", "at": "labs ? tLab : -1", "turnaround": 2880, "essential": 1, "deadline": 60, "cost": 40, "key": "actCultures" },
+    { "id": "abx", "kind": "treat", "at": "abx ? tAbx : -1", "effect": { "abx": 1 }, "essential": 2, "deadline": 60, "after": [ "cultures" ], "cost": 30, "key": "actAbx" },
+    { "id": "fluids", "kind": "treat", "at": "fluids ? tFl : -1", "effect": { "fluid": 2000, "over": 60 }, "essential": 1, "cost": 10, "key": "actFluids" },
+    { "id": "ctScan", "kind": "test", "at": "ct ? 15 : -1", "lowYield": true, "cost": 300, "reveals": [ "cxr" ], "turnaround": 60, "key": "actCt" }
+   ]
+  }
+ },
+ "outputs": [
+  { "id": "t", "kind": "series", "of": "vp.t" },
+  { "id": "mapS", "kind": "series", "of": "vp.map" },
+  { "id": "hrS", "kind": "series", "of": "vp.hr" },
+  { "id": "lacS", "kind": "series", "of": "vp.lactate" },
+  { "id": "course", "kind": "scene", "of": "vp" },
+  { "id": "outcome", "kind": "scalar", "of": "vp.outcome" },
+  { "id": "mapEnd", "kind": "scalar", "of": "vp.final.map" },
+  { "id": "mapMin", "kind": "scalar", "of": "vp.min.map" },
+  { "id": "lacEnd", "kind": "scalar", "of": "vp.final.lactate" },
+  { "id": "hypo", "kind": "scalar", "of": "vp.timeHypo" },
+  { "id": "cost", "kind": "scalar", "of": "vp.cost" },
+  { "id": "pS", "kind": "scalar", "of": "ddx.post.sepsis" },
+  { "id": "err", "kind": "scalar", "of": "ddx.estErr" },
+  { "id": "grade", "kind": "scalar", "of": "grade.total" },
+  { "id": "timely", "kind": "scalar", "of": "grade.timely" },
+  { "id": "critical", "kind": "scalar", "of": "grade.critical" },
+  { "id": "closure", "kind": "scalar", "of": "grade.closure" },
+  { "id": "order", "kind": "scalar", "of": "grade.order" }
+ ],
+ "readouts": [
+  { "label": "mapEndLabel", "expr": "round(mapEnd)", "unit": "mmHg", "format": "auto" },
+  { "label": "lacEndLabel", "expr": "lacEnd", "unit": "mmol/L", "format": "fixed", "digits": 1 },
+  { "label": "hypoLabel", "expr": "round(hypo)", "unit": "min", "format": "auto" },
+  { "label": "pSLabel", "expr": "round(100 * pS)", "unit": "%", "format": "auto" },
+  { "label": "errLabel", "expr": "round(100 * err)", "unit": "%", "format": "auto" },
+  { "label": "gradeLabel", "expr": "round(100 * grade)", "unit": "%", "format": "auto" }
+ ],
+ "plots": [
+  { "kind": "series", "title": "vitalsTitle",
+    "x": { "series": "t", "label": "minutes" },
+    "y": { "min": 0, "label": "vitalsAxis" },
+    "series": [ { "y": "mapS", "label": "mapLine" }, { "y": "hrS", "label": "hrLine" } ] },
+  { "kind": "series", "title": "lacTitle",
+    "x": { "series": "t", "label": "minutes" },
+    "y": { "min": 0, "label": "lacAxis" },
+    "series": [ { "y": "lacS", "label": "lacLine" } ] },
+  { "kind": "scene", "of": "course", "title": "courseTitle", "height": 260 }
+ ]
+}

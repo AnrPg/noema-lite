@@ -1,0 +1,407 @@
+{
+ "cases": [
+  {
+   "name": "Aeneid 1.1: DDSSDS, 15 syllables, a unique scansion",
+   "steps": [
+    {
+     "set": "line",
+     "value": 1
+    },
+    {
+     "set": "d1",
+     "value": true
+    },
+    {
+     "set": "d2",
+     "value": true
+    },
+    {
+     "set": "d3",
+     "value": false
+    },
+    {
+     "set": "d4",
+     "value": false
+    }
+   ],
+   "expect": {
+    "values": {
+     "f1": [
+      1,
+      1
+     ],
+     "f2": [
+      1,
+      1
+     ],
+     "f3": [
+      0,
+      0
+     ],
+     "f4": [
+      0,
+      0
+     ],
+     "readings": [
+      1,
+      1
+     ],
+     "dact": [
+      3,
+      3
+     ],
+     "syl": [
+      15,
+      15
+     ],
+     "pen": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "Aeneid 1.2: DSDSDS, 15 syllables, a unique scansion",
+   "steps": [
+    {
+     "set": "line",
+     "value": 2
+    },
+    {
+     "set": "d1",
+     "value": true
+    },
+    {
+     "set": "d2",
+     "value": false
+    },
+    {
+     "set": "d3",
+     "value": true
+    },
+    {
+     "set": "d4",
+     "value": false
+    }
+   ],
+   "expect": {
+    "values": {
+     "f1": [
+      1,
+      1
+     ],
+     "f2": [
+      0,
+      0
+     ],
+     "f3": [
+      1,
+      1
+     ],
+     "f4": [
+      0,
+      0
+     ],
+     "readings": [
+      1,
+      1
+     ],
+     "dact": [
+      3,
+      3
+     ],
+     "syl": [
+      15,
+      15
+     ]
+    }
+   }
+  },
+  {
+   "name": "Aeneid 1.3: DSSSDS, 14 syllables, a unique scansion",
+   "steps": [
+    {
+     "set": "line",
+     "value": 3
+    },
+    {
+     "set": "d1",
+     "value": true
+    },
+    {
+     "set": "d2",
+     "value": false
+    },
+    {
+     "set": "d3",
+     "value": false
+    },
+    {
+     "set": "d4",
+     "value": false
+    }
+   ],
+   "expect": {
+    "values": {
+     "f1": [
+      1,
+      1
+     ],
+     "f2": [
+      0,
+      0
+     ],
+     "f3": [
+      0,
+      0
+     ],
+     "f4": [
+      0,
+      0
+     ],
+     "readings": [
+      1,
+      1
+     ],
+     "dact": [
+      2,
+      2
+     ],
+     "syl": [
+      14,
+      14
+     ]
+    }
+   }
+  },
+  {
+   "name": "Aeneid 1.4: DSDSDS, 15 syllables, a unique scansion",
+   "steps": [
+    {
+     "set": "line",
+     "value": 4
+    },
+    {
+     "set": "d1",
+     "value": true
+    },
+    {
+     "set": "d2",
+     "value": false
+    },
+    {
+     "set": "d3",
+     "value": true
+    },
+    {
+     "set": "d4",
+     "value": false
+    }
+   ],
+   "expect": {
+    "values": {
+     "f1": [
+      1,
+      1
+     ],
+     "f2": [
+      0,
+      0
+     ],
+     "f3": [
+      1,
+      1
+     ],
+     "f4": [
+      0,
+      0
+     ],
+     "readings": [
+      1,
+      1
+     ],
+     "dact": [
+      3,
+      3
+     ],
+     "syl": [
+      15,
+      15
+     ]
+    }
+   }
+  },
+  {
+   "name": "Aeneid 1.5: DSSSDS, 14 syllables, a unique scansion",
+   "steps": [
+    {
+     "set": "line",
+     "value": 5
+    },
+    {
+     "set": "d1",
+     "value": true
+    },
+    {
+     "set": "d2",
+     "value": false
+    },
+    {
+     "set": "d3",
+     "value": false
+    },
+    {
+     "set": "d4",
+     "value": false
+    }
+   ],
+   "expect": {
+    "values": {
+     "f1": [
+      1,
+      1
+     ],
+     "f2": [
+      0,
+      0
+     ],
+     "f3": [
+      0,
+      0
+     ],
+     "f4": [
+      0,
+      0
+     ],
+     "readings": [
+      1,
+      1
+     ],
+     "dact": [
+      2,
+      2
+     ],
+     "syl": [
+      14,
+      14
+     ]
+    }
+   }
+  },
+  {
+   "name": "Aeneid 1.6: SDDDDS, 16 syllables, a unique scansion",
+   "steps": [
+    {
+     "set": "line",
+     "value": 6
+    },
+    {
+     "set": "d1",
+     "value": false
+    },
+    {
+     "set": "d2",
+     "value": true
+    },
+    {
+     "set": "d3",
+     "value": true
+    },
+    {
+     "set": "d4",
+     "value": true
+    }
+   ],
+   "expect": {
+    "values": {
+     "f1": [
+      0,
+      0
+     ],
+     "f2": [
+      1,
+      1
+     ],
+     "f3": [
+      1,
+      1
+     ],
+     "f4": [
+      1,
+      1
+     ],
+     "readings": [
+      1,
+      1
+     ],
+     "dact": [
+      4,
+      4
+     ],
+     "syl": [
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "name": "Aeneid 1.7: SDSSDS, 14 syllables, a unique scansion",
+   "steps": [
+    {
+     "set": "line",
+     "value": 7
+    },
+    {
+     "set": "d1",
+     "value": false
+    },
+    {
+     "set": "d2",
+     "value": true
+    },
+    {
+     "set": "d3",
+     "value": false
+    },
+    {
+     "set": "d4",
+     "value": false
+    }
+   ],
+   "expect": {
+    "values": {
+     "f1": [
+      0,
+      0
+     ],
+     "f2": [
+      1,
+      1
+     ],
+     "f3": [
+      0,
+      0
+     ],
+     "f4": [
+      0,
+      0
+     ],
+     "readings": [
+      1,
+      1
+     ],
+     "dact": [
+      2,
+      2
+     ],
+     "syl": [
+      14,
+      14
+     ]
+    }
+   }
+  }
+ ]
+}

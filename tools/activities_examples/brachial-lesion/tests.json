@@ -1,0 +1,237 @@
+{
+ "cases": [
+  {
+   "name": "Erb: waiter's tip, shoulder abduction lost, elbow flexion weak, biceps reflex lost",
+   "steps": [
+    {
+     "set": "les",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "values": {
+     "sWaiter": [
+      1,
+      1
+     ],
+     "mAbd": [
+      2,
+      2
+     ],
+     "mElbF": [
+      1,
+      1
+     ],
+     "rBic": [
+      2,
+      2
+     ],
+     "sWing": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "Klumpke with avulsion: claw hand, no finger spreading, Horner",
+   "steps": [
+    {
+     "set": "les",
+     "value": 1
+    }
+   ],
+   "expect": {
+    "values": {
+     "sClaw": [
+      1,
+      1
+     ],
+     "mFing": [
+      2,
+      2
+     ],
+     "sHorner": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "Long thoracic: medial winging only",
+   "steps": [
+    {
+     "set": "les",
+     "value": 2
+    }
+   ],
+   "expect": {
+    "values": {
+     "sWing": [
+      1,
+      1
+     ],
+     "paralysed": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "Radial in the axilla: triceps reflex lost and wrist drop",
+   "steps": [
+    {
+     "set": "les",
+     "value": 5
+    }
+   ],
+   "expect": {
+    "values": {
+     "rTri": [
+      2,
+      2
+     ],
+     "mElbE": [
+      2,
+      2
+     ],
+     "sWrist": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "Radial at the spiral groove: wrist drop, triceps spared",
+   "steps": [
+    {
+     "set": "les",
+     "value": 6
+    }
+   ],
+   "expect": {
+    "values": {
+     "sWrist": [
+      1,
+      1
+     ],
+     "mElbE": [
+      0,
+      0
+     ],
+     "rTri": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "Posterior interosseous: finger drop without wrist drop",
+   "steps": [
+    {
+     "set": "les",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "values": {
+     "sFinger": [
+      1,
+      1
+     ],
+     "sWrist": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "Median at the elbow: benediction and ape hand",
+   "steps": [
+    {
+     "set": "les",
+     "value": 8
+    }
+   ],
+   "expect": {
+    "values": {
+     "sBen": [
+      1,
+      1
+     ],
+     "sApe": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "Carpal tunnel: ape hand, no benediction",
+   "steps": [
+    {
+     "set": "les",
+     "value": 9
+    }
+   ],
+   "expect": {
+    "values": {
+     "sApe": [
+      1,
+      1
+     ],
+     "sBen": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "Ulnar paradox: more clawing at the wrist than at the elbow",
+   "steps": [
+    {
+     "set": "les",
+     "value": 10
+    }
+   ],
+   "expect": {
+    "state": [
+     "les"
+    ],
+    "values": {
+     "claw": [
+      0.49,
+      0.51
+     ]
+    }
+   }
+  },
+  {
+   "name": "Ulnar at the wrist: full clawing of the ring and little fingers",
+   "steps": [
+    {
+     "set": "les",
+     "value": 11
+    }
+   ],
+   "expect": {
+    "values": {
+     "claw": [
+      0.99,
+      1.01
+     ],
+     "mFing": [
+      2,
+      2
+     ]
+    }
+   }
+  }
+ ]
+}

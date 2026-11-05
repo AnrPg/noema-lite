@@ -1,0 +1,19 @@
+{
+ "title": "Ein Datum, fünf Kalender der Antike",
+ "intro": "Antike Historiker datierten ein Ereignis nach Olympiaden, nach Jahren seit der Gründung Roms, nach den Regierungsjahren eines Königs. Wähle ein Datum im julianischen Kalender, in Jahren vor unserer Zeitrechnung, und sieh denselben Tag als Olympiade und ihr Jahr (das olympische Jahr beginnt im Hochsommer), als Jahr ab urbe condita (Varros Ära: Gründung Roms 753 v. u. Z.), als Jahr der jüdischen Weltära (anno mundi), als Jahr der Ära Nabonassars, die Ptolemaios benutzt (ab 747 v. u. Z.), und als julianische Tageszahl. Probiere die Schlacht von Salamis, Ende September 480 v. u. Z., oder die ersten Olympischen Spiele, Sommer 776 v. u. Z.",
+ "yearBce": "Jahr (v. u. Z.)",
+ "month": "Monat",
+ "day": "Tag",
+ "evBattle": "das gewählte Datum",
+ "evMarathon": "Marathon (Sept. 490 v. u. Z.)",
+ "perWars": "die Perserkriege (499–449 v. u. Z.)",
+ "bce": "v. u. Z.",
+ "olLabel": "Olympiade",
+ "olSubLabel": "Jahr der Olympiade (1–4)",
+ "aucLabel": "Jahr ab urbe condita (Varro)",
+ "amLabel": "Jahr der jüdischen Weltära (anno mundi)",
+ "nabLabel": "Jahr der Ära Nabonassars",
+ "jdnLabel": "Julianische Tageszahl",
+ "gapLabel": "Kalenderjahre nach Marathon",
+ "chartTitle": "Das gewählte Datum in den Perserkriegen"
+}

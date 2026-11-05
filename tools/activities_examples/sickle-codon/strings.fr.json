@@ -1,0 +1,19 @@
+{
+ "title": "Une base, une maladie : le codon de la drépanocytose",
+ "intro": "Voici la séquence codante du gène de la β-globine humaine (HBB), numérotée à partir du A du codon d'initiation ATG (c.1). Choisissez une position et une nouvelle base : le moteur nomme la variation comme l'écrit un généticien (HGVS), traduit les deux protéines et dit ce que fait la variation. Trouvez l'unique substitution qui change l'acide glutamique du codon 7 en valine.",
+ "posLabel": "Position dans la séquence codante (c.)",
+ "baseLabel": "Nouvelle base",
+ "baseA": "A (adénine)",
+ "baseC": "C (cytosine)",
+ "baseG": "G (guanine)",
+ "baseT": "T (thymine)",
+ "aaPosLabel": "Premier acide aminé modifié",
+ "missenseLabel": "Faux-sens (un autre acide aminé)",
+ "silentLabel": "Silencieuse (le même acide aminé)",
+ "nonsenseLabel": "Non-sens (un codon stop)",
+ "blosumLabel": "Score BLOSUM62 de l'échange",
+ "transitionLabel": "Transition (purine ↔ purine ou pyrimidine ↔ pyrimidine)",
+ "sitesLabel": "Sites Bsu36I restants (2 dans le gène normal)",
+ "namesTitle": "La variation au niveau de l'ADN (c.) et de la protéine (p.)",
+ "protTitle": "La protéine normale (en haut) et la protéine modifiée (en bas) autour de la variation"
+}

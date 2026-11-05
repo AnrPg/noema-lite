@@ -1,0 +1,17 @@
+{
+ "id": "wf-drift",
+ "runtime": "sim-spec@1",
+ "entry": "activities/wf-drift/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "wf-drift-still",
+  "text": "Twenty diploid individuals carry 40 copies of a gene, half of them allele A. Each generation the 40 copies of the next generation are drawn at random from the parents' copies, so the frequency of A wanders up and down with no selection at all. Within a few hundred generations each population ends with A fixed (frequency 1) or lost (0): about half of 200 populations fix A, exactly as the starting frequency predicts, and the mean heterozygosity falls by a factor 1 − 1/2N = 0.975 every generation. In larger populations the wandering is slower, and with selection a favoured allele still fixes only with Kimura's probability, (1 − e^(−2Nsp))/(1 − e^(−2Ns)) for additive effects."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

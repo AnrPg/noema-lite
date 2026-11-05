@@ -1,0 +1,1331 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "title": "title",
+   "intro": "intro",
+   "consts": {
+    "olTarget": 75,
+    "subTarget": 1
+   },
+   "params": [
+    {
+     "id": "yb",
+     "kind": "slider",
+     "label": "yearBce",
+     "min": 1,
+     "max": 800,
+     "step": 1,
+     "default": 500
+    },
+    {
+     "id": "mo",
+     "kind": "slider",
+     "label": "month",
+     "min": 1,
+     "max": 12,
+     "step": 1,
+     "default": 3
+    },
+    {
+     "id": "dy",
+     "kind": "slider",
+     "label": "day",
+     "min": 1,
+     "max": 28,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "options": {
+     "auc": "varro",
+     "olympiadMonth": 7
+    },
+    "events": [
+     {
+      "id": "battle",
+      "date": {
+       "cal": "julian",
+       "era": "bce",
+       "y": "yb",
+       "m": "mo",
+       "d": "dy"
+      },
+      "label": "evBattle",
+      "lane": 1
+     },
+     {
+      "id": "marathon",
+      "date": {
+       "cal": "julian",
+       "era": "bce",
+       "y": 490,
+       "m": 9,
+       "d": 12
+      },
+      "sd": 10,
+      "label": "evMarathon",
+      "lane": 0
+     }
+    ],
+    "periods": [
+     {
+      "id": "wars",
+      "start": {
+       "cal": "julian",
+       "era": "bce",
+       "y": 499
+      },
+      "end": {
+       "cal": "julian",
+       "era": "bce",
+       "y": 449,
+       "m": 12,
+       "d": 31
+      },
+      "label": "perWars",
+      "lane": 2
+     }
+    ],
+    "axis": {
+     "era": "julian",
+     "from": {
+      "cal": "julian",
+      "era": "bce",
+      "y": 560
+     },
+     "to": {
+      "cal": "julian",
+      "era": "bce",
+      "y": 400
+     },
+     "bceKey": "bce"
+    }
+   },
+   "outputs": [
+    {
+     "id": "olYear",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "battle",
+     "to": "olympiad",
+     "field": "ol"
+    },
+    {
+     "id": "olSub",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "battle",
+     "to": "olympiad",
+     "field": "oy"
+    },
+    {
+     "id": "auc",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "battle",
+     "to": "auc",
+     "field": "y"
+    },
+    {
+     "id": "am",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "battle",
+     "to": "hebrew",
+     "field": "y"
+    },
+    {
+     "id": "nab",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "battle",
+     "to": "nabonassar",
+     "field": "y"
+    },
+    {
+     "id": "jdn",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "battle",
+     "to": "jdn",
+     "field": "j"
+    },
+    {
+     "id": "inWars",
+     "kind": "scalar",
+     "of": "relation",
+     "a": "battle",
+     "b": "wars",
+     "rel": "during"
+    },
+    {
+     "id": "afterMarathon",
+     "kind": "scalar",
+     "of": "duration",
+     "a": "marathon",
+     "b": "battle",
+     "unit": "calendarYears"
+    },
+    {
+     "id": "chart",
+     "kind": "scene",
+     "of": "timeline"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "olLabel",
+     "expr": "olYear",
+     "format": "auto",
+     "digits": 8
+    },
+    {
+     "label": "olSubLabel",
+     "expr": "olSub",
+     "format": "auto",
+     "digits": 8
+    },
+    {
+     "label": "aucLabel",
+     "expr": "auc",
+     "format": "auto",
+     "digits": 8
+    },
+    {
+     "label": "amLabel",
+     "expr": "am",
+     "format": "auto",
+     "digits": 8
+    },
+    {
+     "label": "nabLabel",
+     "expr": "nab",
+     "format": "auto",
+     "digits": 8
+    },
+    {
+     "label": "jdnLabel",
+     "expr": "jdn",
+     "format": "auto",
+     "digits": 8
+    },
+    {
+     "label": "gapLabel",
+     "expr": "afterMarathon",
+     "format": "auto",
+     "digits": 8
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "chart",
+     "title": "chartTitle",
+     "height": 260
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "gregorian",
+       "y": "Y",
+       "m": 4,
+       "d": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "hebrew",
+     "field": "y"
+    },
+    {
+     "id": "i",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "islamic",
+     "field": "m"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "persian",
+     "field": "leap"
+    }
+   ],
+   "readouts": [
+    {
+     "label": "year",
+     "expr": "h"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "em",
+     "kind": "scalar",
+     "of": "easter",
+     "year": "Y",
+     "field": "month"
+    },
+    {
+     "id": "ed",
+     "kind": "scalar",
+     "of": "easter",
+     "year": "Y",
+     "rite": "orthodox",
+     "field": "day"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "gap",
+     "year": "Y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "c",
+      "c14": {
+       "age": "2450 + Y*0",
+       "sd": 25,
+       "curve": "linear"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "stat",
+     "event": "c",
+     "stat": "lo95",
+     "unit": "bp"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "density",
+     "event": "c",
+     "part": "x"
+    },
+    {
+     "id": "y",
+     "kind": "series",
+     "of": "density",
+     "event": "c",
+     "part": "y"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "x"
+     },
+     "series": [
+      {
+       "y": "y"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "c14curve": {
+     "calBP": [
+      0,
+      100,
+      200
+     ],
+     "age": [
+      0,
+      110,
+      190
+     ],
+     "sd": [
+      10,
+      10,
+      10
+     ]
+    },
+    "events": [
+     {
+      "id": "c",
+      "c14": {
+       "age": 100,
+       "sd": 20,
+       "curve": "model",
+       "reservoir": 0
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "stat",
+     "event": "c",
+     "stat": "mean"
+    },
+    {
+     "id": "cx",
+     "kind": "series",
+     "of": "c14curve",
+     "part": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "dendro": {
+     "synthetic": {
+      "n": 300,
+      "len": 60,
+      "offset": "Y % 200",
+      "noise": 0.1
+     },
+     "masterStart": 1000
+    }
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "crossdate",
+     "field": "lag"
+    },
+    {
+     "id": "tx",
+     "kind": "series",
+     "of": "crossdate",
+     "part": "x"
+    },
+    {
+     "id": "ty",
+     "kind": "series",
+     "of": "crossdate",
+     "part": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "options": {
+     "maya": "584283 + 0*Y"
+    },
+    "events": [
+     {
+      "id": "m",
+      "date": {
+       "cal": "maya",
+       "lc": [
+        9,
+        12,
+        11,
+        5,
+        18
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "tz",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "m",
+     "to": "maya",
+     "field": "tzName"
+    },
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "timeline",
+     "era": "maya"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "s"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "reigns": [
+     {
+      "id": "r",
+      "start": {
+       "cal": "julian",
+       "y": 1509,
+       "m": 4,
+       "d": 22
+      }
+     }
+    ],
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "julian",
+       "y": 1513,
+       "m": 6,
+       "d": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "regnal",
+     "reign": "r",
+     "event": "e"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "a",
+      "after": {
+       "cal": "julian",
+       "y": 79,
+       "m": 8,
+       "d": 24
+      },
+      "horizonYears": 1
+     },
+     {
+      "id": "b",
+      "before": {
+       "cal": "julian",
+       "y": 80
+      },
+      "horizonYears": 2
+     }
+    ],
+    "periods": [
+     {
+      "id": "p",
+      "start": {
+       "cal": "julian",
+       "y": 79
+      },
+      "end": {
+       "cal": "julian",
+       "y": 81
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "relation",
+     "a": "a",
+     "b": "p",
+     "rel": "during"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "within",
+     "event": "b",
+     "from": {
+      "cal": "julian",
+      "y": 79
+     },
+     "to": {
+      "cal": "julian",
+      "y": 80
+     }
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "chinese",
+       "y": 2023,
+       "m": 2,
+       "d": 1,
+       "leap": true
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "event": "e",
+     "flag": "nonexistent"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "julian",
+       "y": 0,
+       "era": "bce"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "auc",
+     "field": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "hebrew",
+       "y": 5785
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "julian",
+     "field": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "mars",
+       "y": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "julian",
+     "field": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e"
+     },
+     {
+      "id": "e",
+      "date": {
+       "cal": "jdn",
+       "j": 1
+      },
+      "sd": 3
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "julian",
+     "field": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "jdn",
+       "j": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "q",
+     "to": "hebrew",
+     "field": "eraYear"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "jdn",
+       "j": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "teleport"
+    },
+    {
+     "id": "s",
+     "kind": "sound",
+     "of": "timeline"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "crossdate",
+     "part": "x"
+    },
+    {
+     "id": "y",
+     "kind": "series",
+     "of": "c14curve",
+     "part": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "c14curve": {
+     "calBP": [
+      0,
+      200,
+      100
+     ],
+     "age": [
+      0,
+      1,
+      2
+     ],
+     "sd": [
+      1,
+      1,
+      1
+     ]
+    },
+    "events": [
+     {
+      "id": "c",
+      "c14": {
+       "age": 1,
+       "sd": 1,
+       "curve": "model"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "stat",
+     "event": "c",
+     "stat": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "c14curve": {
+     "calBP": [
+      0,
+      1
+     ],
+     "age": [
+      0
+     ],
+     "sd": [
+      1,
+      1
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "gap",
+     "year": 1
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "dendro": {
+     "masterStart": 3
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "crossdate",
+     "field": "t"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "c14": {
+       "age": 1,
+       "sd": 1,
+       "curve": "model"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "stat",
+     "event": "e",
+     "stat": "mode"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "japanese",
+       "y": 2
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "japanese",
+     "field": "era"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "gregorian",
+       "y": "Y + Z"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "e",
+     "to": "julian",
+     "field": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "gregorian",
+       "y": 2000
+      },
+      "label": "Not A Key"
+     }
+    ],
+    "mc": 10
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "easter",
+     "year": 2000
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "gregorian",
+       "y": 2000
+      }
+     }
+    ],
+    "periods": [
+     {
+      "id": "p",
+      "start": {
+       "cal": "gregorian",
+       "y": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "relation",
+     "a": "e",
+     "b": "zz",
+     "rel": "during"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "regnal",
+     "reign": "r",
+     "event": "e"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "timeline@1",
+   "params": [
+    {
+     "id": "Y",
+     "kind": "slider",
+     "label": "year",
+     "min": 1,
+     "max": 3000,
+     "step": 1,
+     "default": 2025
+    }
+   ],
+   "model": {
+    "events": [
+     {
+      "id": "e",
+      "date": {
+       "cal": "gregorian",
+       "y": 2000
+      },
+      "label": "evA"
+     }
+    ],
+    "axis": {
+     "era": "gregorian",
+     "bceKey": "bce"
+    }
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "timeline"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "s",
+     "title": "chartTitle"
+    }
+   ]
+  }
+ ]
+}

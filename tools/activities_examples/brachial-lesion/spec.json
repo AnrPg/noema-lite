@@ -1,0 +1,343 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "anatomy@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  {
+   "id": "les",
+   "kind": "choice",
+   "label": "lesion",
+   "options": [
+    {
+     "value": 0,
+     "label": "opt0"
+    },
+    {
+     "value": 1,
+     "label": "opt1"
+    },
+    {
+     "value": 2,
+     "label": "opt2"
+    },
+    {
+     "value": 3,
+     "label": "opt3"
+    },
+    {
+     "value": 4,
+     "label": "opt4"
+    },
+    {
+     "value": 5,
+     "label": "opt5"
+    },
+    {
+     "value": 6,
+     "label": "opt6"
+    },
+    {
+     "value": 7,
+     "label": "opt7"
+    },
+    {
+     "value": 8,
+     "label": "opt8"
+    },
+    {
+     "value": 9,
+     "label": "opt9"
+    },
+    {
+     "value": 10,
+     "label": "opt10"
+    },
+    {
+     "value": 11,
+     "label": "opt11"
+    }
+   ],
+   "default": 0
+  }
+ ],
+ "model": {
+  "mode": "lesion",
+  "lang": "la",
+  "lesions": [
+   {
+    "at": [
+     "upper-trunk"
+    ]
+   },
+   {
+    "at": [
+     "C8",
+     "T1"
+    ],
+    "avulsion": true
+   },
+   {
+    "at": [
+     "long-thoracic"
+    ]
+   },
+   {
+    "at": [
+     "quadrangular-space"
+    ]
+   },
+   {
+    "at": [
+     "musculocutaneous"
+    ]
+   },
+   {
+    "at": [
+     "radial@axilla"
+    ]
+   },
+   {
+    "at": [
+     "spiral-groove"
+    ]
+   },
+   {
+    "at": [
+     "supinator-arcade"
+    ]
+   },
+   {
+    "at": [
+     "median@elbow"
+    ]
+   },
+   {
+    "at": [
+     "carpal-tunnel"
+    ]
+   },
+   {
+    "at": [
+     "cubital-tunnel"
+    ]
+   },
+   {
+    "at": [
+     "guyon-canal"
+    ]
+   }
+  ],
+  "pick": "les"
+ },
+ "outputs": [
+  {
+   "id": "paralysed",
+   "kind": "scalar",
+   "of": "paralysed"
+  },
+  {
+   "id": "weak",
+   "kind": "scalar",
+   "of": "weak"
+  },
+  {
+   "id": "areas",
+   "kind": "scalar",
+   "of": "areasLost"
+  },
+  {
+   "id": "mAbd",
+   "kind": "scalar",
+   "of": "move.shoulder.abduction"
+  },
+  {
+   "id": "mElbF",
+   "kind": "scalar",
+   "of": "move.elbow.flexion"
+  },
+  {
+   "id": "mElbE",
+   "kind": "scalar",
+   "of": "move.elbow.extension"
+  },
+  {
+   "id": "mWrE",
+   "kind": "scalar",
+   "of": "move.wrist.extension"
+  },
+  {
+   "id": "mFing",
+   "kind": "scalar",
+   "of": "move.mcp.abduction"
+  },
+  {
+   "id": "mOpp",
+   "kind": "scalar",
+   "of": "move.thumb-cmc.opposition"
+  },
+  {
+   "id": "rBic",
+   "kind": "scalar",
+   "of": "reflex.biceps-reflex"
+  },
+  {
+   "id": "rTri",
+   "kind": "scalar",
+   "of": "reflex.triceps-reflex"
+  },
+  {
+   "id": "sWaiter",
+   "kind": "scalar",
+   "of": "sign.waiters-tip"
+  },
+  {
+   "id": "sWing",
+   "kind": "scalar",
+   "of": "sign.winged-scapula-medial"
+  },
+  {
+   "id": "sWrist",
+   "kind": "scalar",
+   "of": "sign.wrist-drop"
+  },
+  {
+   "id": "sFinger",
+   "kind": "scalar",
+   "of": "sign.finger-drop"
+  },
+  {
+   "id": "sBen",
+   "kind": "scalar",
+   "of": "sign.benediction"
+  },
+  {
+   "id": "sApe",
+   "kind": "scalar",
+   "of": "sign.ape-hand"
+  },
+  {
+   "id": "sClaw",
+   "kind": "scalar",
+   "of": "sign.claw-hand"
+  },
+  {
+   "id": "claw",
+   "kind": "scalar",
+   "of": "ulnarClaw"
+  },
+  {
+   "id": "sHorner",
+   "kind": "scalar",
+   "of": "sign.horner"
+  },
+  {
+   "id": "muscles",
+   "kind": "scene",
+   "of": "muscles"
+  },
+  {
+   "id": "ladder",
+   "kind": "scene",
+   "of": "ladder"
+  }
+ ],
+ "readouts": [
+  {
+   "label": "paralysedLabel",
+   "expr": "paralysed"
+  },
+  {
+   "label": "weakLabel",
+   "expr": "weak"
+  },
+  {
+   "label": "areasLabel",
+   "expr": "areas"
+  },
+  {
+   "label": "mAbdLabel",
+   "expr": "mAbd"
+  },
+  {
+   "label": "mElbFLabel",
+   "expr": "mElbF"
+  },
+  {
+   "label": "mElbELabel",
+   "expr": "mElbE"
+  },
+  {
+   "label": "mWrELabel",
+   "expr": "mWrE"
+  },
+  {
+   "label": "mFingLabel",
+   "expr": "mFing"
+  },
+  {
+   "label": "mOppLabel",
+   "expr": "mOpp"
+  },
+  {
+   "label": "rBicLabel",
+   "expr": "rBic"
+  },
+  {
+   "label": "rTriLabel",
+   "expr": "rTri"
+  },
+  {
+   "label": "sWaiterLabel",
+   "expr": "sWaiter"
+  },
+  {
+   "label": "sWingLabel",
+   "expr": "sWing"
+  },
+  {
+   "label": "sWristLabel",
+   "expr": "sWrist"
+  },
+  {
+   "label": "sFingerLabel",
+   "expr": "sFinger"
+  },
+  {
+   "label": "sBenLabel",
+   "expr": "sBen"
+  },
+  {
+   "label": "sApeLabel",
+   "expr": "sApe"
+  },
+  {
+   "label": "sClawLabel",
+   "expr": "sClaw"
+  },
+  {
+   "label": "sHornerLabel",
+   "expr": "sHorner"
+  },
+  {
+   "label": "clawLabel",
+   "expr": "claw",
+   "format": "fixed",
+   "digits": 2
+  }
+ ],
+ "plots": [
+  {
+   "kind": "scene",
+   "of": "muscles",
+   "title": "musclesTitle",
+   "height": 420
+  },
+  {
+   "kind": "scene",
+   "of": "ladder",
+   "title": "ladderTitle",
+   "height": 360
+  }
+ ]
+}

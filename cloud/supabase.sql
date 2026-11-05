@@ -1218,5 +1218,64 @@ create policy "error reports: mine or admins" on public.noema_error_reports for 
 create policy "error reports: admins answer"  on public.noema_error_reports for update to authenticated using (public.noema_is_admin()) with check (public.noema_is_admin());
 create policy "error reports: admins delete"  on public.noema_error_reports for delete to authenticated using (public.noema_is_admin());
 
--- 14) Check: should list the 26 noema_ tables with rls_enabled = true
+-- 16) ⚙ ENGINE REQUESTS (docs/INTERACTIVE_LIBRARY.md §3): anyone signed in may ask for a NEW engine of interactive activities from a
+--     description (the #/engines page "Request a new engine", or Claude through the connector: noema_request_engine). The requester
+--     sees their own requests and the answer; the app's admins (noema_admins, §13b) see and answer all of them (status, the engine
+--     that now does it, a note, the pull request) — on #/engines and with noema_engine_requests / noema_engine_request_update.
+--     At most 20 requests a person a day.
+create table if not exists public.noema_engine_requests (
+  id             uuid primary key default gen_random_uuid(),
+  requester      uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  requester_name text,
+  title          text not null check (char_length(title) between 1 and 120),
+  field          text check (char_length(field) <= 120),
+  what           text not null check (char_length(what) between 1 and 4000),
+  learner        text check (char_length(learner) <= 2000),
+  measure        text check (char_length(measure) <= 2000),
+  sources        text check (char_length(sources) <= 2000),
+  examples       text check (char_length(examples) <= 2000),
+  accuracy       text not null default 'teaching' check (accuracy in ('teaching', 'quantitative', 'research')),
+  subject        text check (char_length(subject) <= 120),
+  via            text not null default 'app' check (via in ('app', 'claude')),
+  locale         text check (char_length(locale) <= 16),
+  suggested      text[] not null default '{}' check (cardinality(suggested) <= 8),
+  status         text not null default 'new' check (status in ('new', 'seen', 'planned', 'building', 'available', 'declined', 'duplicate')),
+  engine_id      text check (engine_id is null or engine_id ~ '^[a-z][a-z0-9-]*@[0-9]+$'),
+  answer         text check (char_length(answer) <= 4000),
+  fixed_in       text check (char_length(fixed_in) <= 300),
+  created_at     timestamptz not null default now(),
+  updated_at     timestamptz not null default now()
+);
+create index if not exists noema_engine_requests_open on public.noema_engine_requests (status, created_at desc);
+create index if not exists noema_engine_requests_by on public.noema_engine_requests (requester, created_at desc);
+alter table public.noema_engine_requests enable row level security;
+-- what the requester writes is theirs; who they are, the status and the answer are the server's and the admins'
+create or replace function public.noema_engine_request_guard() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' then
+    new.requester := auth.uid(); new.status := 'new'; new.engine_id := null; new.answer := null; new.fixed_in := null; new.created_at := now(); new.updated_at := now();
+    new.requester_name := public.noema_vault_name(new.requester);
+    if (select count(*) from public.noema_engine_requests where requester = new.requester and created_at > now() - interval '1 day') >= 20 then
+      raise exception 'engine request limit: 20 a day' using errcode = 'P0001'; end if;
+  else
+    if not public.noema_is_admin() then raise exception 'admins only' using errcode = 'P0001'; end if;
+    new.id := old.id; new.requester := old.requester; new.requester_name := old.requester_name; new.title := old.title; new.field := old.field;
+    new.what := old.what; new.learner := old.learner; new.measure := old.measure; new.sources := old.sources; new.examples := old.examples;
+    new.accuracy := old.accuracy; new.subject := old.subject; new.via := old.via; new.locale := old.locale; new.suggested := old.suggested;
+    new.created_at := old.created_at; new.updated_at := now();
+  end if;
+  return new;
+end $$;
+drop trigger if exists noema_engine_request_guard on public.noema_engine_requests;
+create trigger noema_engine_request_guard before insert or update on public.noema_engine_requests for each row execute function public.noema_engine_request_guard();
+drop policy if exists "engine requests: send"           on public.noema_engine_requests;
+drop policy if exists "engine requests: mine or admins" on public.noema_engine_requests;
+drop policy if exists "engine requests: admins answer"  on public.noema_engine_requests;
+drop policy if exists "engine requests: admins delete"  on public.noema_engine_requests;
+create policy "engine requests: send"           on public.noema_engine_requests for insert to authenticated with check (requester = (select auth.uid()));
+create policy "engine requests: mine or admins" on public.noema_engine_requests for select to authenticated using (requester = (select auth.uid()) or public.noema_is_admin());
+create policy "engine requests: admins answer"  on public.noema_engine_requests for update to authenticated using (public.noema_is_admin()) with check (public.noema_is_admin());
+create policy "engine requests: admins delete"  on public.noema_engine_requests for delete to authenticated using (public.noema_is_admin());
+
+-- 14) Check: should list the 27 noema_ tables with rls_enabled = true
 select tablename, rowsecurity as rls_enabled from pg_tables where schemaname = 'public' and tablename like 'noema_%' order by 1;

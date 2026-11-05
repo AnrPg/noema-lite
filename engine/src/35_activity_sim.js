@@ -41,13 +41,14 @@
 
   /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource.
       run(inputs, done): the outputs (a newer run waiting replaces an older one: the latest inputs win);
-      measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s. */
+      measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s.
+      respec(spec, opts): the same Worker takes another model (queued: the runs after it use it) — the mini-apps' engines (34_activity_html.js). */
   function engineRunner(E, spec, opts, onFail) {
     let worker = null, url = null, inst = null, busy = null, timer = null, dead = false;
     const queue = [];
     if (E.workerSource && typeof Worker === 'function') {
       try {
-        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
+        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=null;self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
         url = URL.createObjectURL(new Blob([E.workerSource + '\n;' + bridge], { type: 'text/javascript' }));
         worker = new Worker(url);
         worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); d(m.t === 'out' ? m.out : null); };
@@ -60,6 +61,11 @@
     function pump() {
       if (dead || busy || !queue.length) return;
       const job = queue.shift();
+      if (job.t === 'create') {   // another model for the same instance (respec): no answer; the runs queued after it use it
+        if (worker) worker.postMessage({ t: 'create', spec: job.spec, opts: job.opts });
+        else { inst = null; try { inst = E.create(job.spec, job.opts); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); } }
+        return pump();
+      }
       if (!worker) {
         const t0 = performance.now(); let out = null;
         try { out = job.t === 'measure' ? inst.measure(job.inputs, job.probe) : (inst.run || inst.step).call(inst, job.inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
@@ -72,13 +78,14 @@
     }
     function run(inputs, done) {
       if (dead) return;
-      const i = queue.findIndex(j => j.t === 'run');   // the latest inputs win
+      const c = queue.map(j => j.t).lastIndexOf('create'), i = queue.findIndex((j, k) => k > c && j.t === 'run');   // the latest inputs win (never ahead of a new model)
       if (i >= 0) queue[i] = { t: 'run', inputs, done }; else queue.push({ t: 'run', inputs, done });
       pump();
     }
+    function respec(s2, o2) { if (dead) return; queue.push({ t: 'create', spec: s2, opts: o2 || opts }); pump(); }
     function measure(inputs, probe, done) { if (dead) return; queue.push({ t: 'measure', inputs, probe, done }); pump(); }
     function close() { dead = true; clearTimeout(timer); queue.length = 0; try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
-    return { run, measure, close, inWorker: () => !!worker };
+    return { run, measure, respec, close, inWorker: () => !!worker };
   }
   /** a seeded pick: the same seed draws the same item (mulberry32) */
   function seededIndex(seed, n) { let a = (seed ^ 0x9E3779B9) >>> 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return Math.floor(((t ^ t >>> 14) >>> 0) / 4294967296 * n); }
@@ -131,13 +138,27 @@
     const g = svg('g', { 'clip-path': `url(#${cid})` });
     const clampY = v => Math.max(-1e4, Math.min(1e4, v));
     data.lines.forEach((l, j) => {
+      const st = l.style || 'line', col = `stroke:${COLORS[j % COLORS.length]}`;
+      if (st === 'bars' || st === 'points') {   // the engine library's styles (docs/INTERACTIVE_LIBRARY.md §1.4): bars for a distribution or counts, points for samples
+        const xsN = data.xs.filter((x, i) => isNum(x) && isNum(l.ys[i])), gap = xsN.length > 1 ? Math.abs(X(xsN[1]) - X(xsN[0])) : 12, bw = Math.max(1, Math.min(40, gap * 0.8 / (data.lines.length || 1)));
+        const base = Y(ylog ? y0 : Math.max(y0, Math.min(y1, 0)));
+        for (let i = 0; i < data.xs.length; i++) {
+          const x = data.xs[i], y = l.ys[i];
+          if (!isNum(x) || !isNum(y) || (xlog && x <= 0) || (ylog && y <= 0)) continue;
+          if (st === 'points') { g.append(svg('circle', { cx: X(x).toFixed(1), cy: clampY(Y(y)).toFixed(1), r: 2.5, style: `fill:${COLORS[j % COLORS.length]}`, class: 'sim-dot' })); continue; }
+          const top = clampY(Y(y)), x0b = X(x) - bw * data.lines.length / 2 + j * bw;
+          g.append(svg('rect', { x: x0b.toFixed(1), y: Math.min(top, base).toFixed(1), width: bw.toFixed(1), height: Math.abs(base - top).toFixed(1), style: `fill:${COLORS[j % COLORS.length]}`, class: 'sim-bar' }));
+        }
+        return;
+      }
       let d = '', pen = false;
       for (let i = 0; i < data.xs.length; i++) {
         const x = data.xs[i], y = l.ys[i];
         if (!isNum(x) || !isNum(y) || (xlog && x <= 0) || (ylog && y <= 0)) { pen = false; continue; }
-        d += (pen ? 'L' : 'M') + X(x).toFixed(1) + ' ' + clampY(Y(y)).toFixed(1); pen = true;
+        if (st === 'steps' && pen) d += 'H' + X(x).toFixed(1);
+        d += (pen ? (st === 'steps' ? 'V' + clampY(Y(y)).toFixed(1) : 'L' + X(x).toFixed(1) + ' ' + clampY(Y(y)).toFixed(1)) : 'M' + X(x).toFixed(1) + ' ' + clampY(Y(y)).toFixed(1)); pen = true;
       }
-      g.append(svg('path', { d: d || 'M0 0', fill: 'none', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-dasharray': DASH[j % DASH.length] || null, style: `stroke:${COLORS[j % COLORS.length]}`, class: 'sim-line' }));
+      g.append(svg('path', { d: d || 'M0 0', fill: 'none', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-dasharray': DASH[j % DASH.length] || null, style: col, class: 'sim-line' }));
     });
     for (const m of data.marks) {
       if (!isNum(m.v)) continue;
@@ -146,6 +167,60 @@
     }
     s.append(g);
     return s;
+  }
+
+  /* ---------- the engine library's drawings and sounds (docs/INTERACTIVE_LIBRARY.md §1.4): a plot of kind scene / sound ---------- */
+  const ROLE = r => ['base', 'muted', 'hi', 'ok', 'bad', 'warn', 'info'].includes(r) ? r : 'base';
+  /** draw a scene {view: [x0, x1, y0, y1], items} into fig: the same scale on both axes, y upwards; words from the string tables */
+  function drawScene(fig, p, sc, ctx) {
+    const W = Math.max(220, Math.floor(fig.clientWidth || 320));
+    const v = Array.isArray(sc && sc.view) && sc.view.length === 4 && sc.view.every(isNum) && sc.view[1] > sc.view[0] && sc.view[3] > sc.view[2] ? sc.view : [-1, 1, -1, 1];
+    const aspect = (v[3] - v[2]) / (v[1] - v[0]);
+    const H = p.height || Math.round(Math.max(180, Math.min(520, W * aspect)));
+    const k = Math.min(W / (v[1] - v[0]), H / (v[3] - v[2])), ox = (W - k * (v[1] - v[0])) / 2, oy = (H - k * (v[3] - v[2])) / 2;
+    const X = x => (ox + (x - v[0]) * k), Y = y => (H - oy - (y - v[2]) * k);
+    const s = svg('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: 'img', 'aria-label': ctx.aria, focusable: 'false', class: 'sim-scene' });
+    const mid = 'simarr' + (++seq), defs = svg('defs'), mk = svg('marker', { id: mid, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' });
+    mk.append(svg('path', { d: 'M0 0L10 5L0 10z', class: 'sim-arrowhead' })); defs.append(mk); s.append(defs);
+    const word = it => it.key != null ? ctx.tt(it.key) : isNum(it.v) ? fmtNum(it.v, { digits: it.digits || 3 }, ctx.locale) : typeof it.s === 'string' ? it.s.slice(0, 64) : '';
+    const label = (x, y, it, anchor) => { const t = word(it); if (!t) return; const e = svg('text', { x: x.toFixed(1), y: y.toFixed(1), 'text-anchor': anchor || 'middle', class: 'sim-sl sim-r-' + ROLE(it.c) }); e.textContent = t; s.append(e); };
+    const items = Array.isArray(sc && sc.items) ? sc.items.slice(0, 2000) : [];
+    const order = { poly: 0, circ: 1, seg: 2, pt: 3, txt: 4 };
+    for (const it of items.slice().sort((a, b) => (order[a && a.k] ?? 9) - (order[b && b.k] ?? 9))) {
+      if (!it || typeof it !== 'object') continue;
+      const cls = 'sim-r-' + ROLE(it.c), dash = it.dash ? '5 4' : null;
+      if (it.k === 'pt' && isNum(it.x) && isNum(it.y)) { s.append(svg('circle', { cx: X(it.x).toFixed(1), cy: Y(it.y).toFixed(1), r: isNum(it.r) ? Math.max(1, Math.min(30, it.r)) : 4, class: 'sim-pt ' + cls })); label(X(it.x), Y(it.y) - 9, it); }
+      else if (it.k === 'seg' && [it.x1, it.y1, it.x2, it.y2].every(isNum)) { s.append(svg('line', { x1: X(it.x1).toFixed(1), y1: Y(it.y1).toFixed(1), x2: X(it.x2).toFixed(1), y2: Y(it.y2).toFixed(1), class: 'sim-seg ' + cls, 'stroke-width': isNum(it.w) ? Math.max(0.5, Math.min(12, it.w)) : 2, 'stroke-dasharray': dash, 'marker-end': it.arrow ? `url(#${mid})` : null })); label((X(it.x1) + X(it.x2)) / 2, (Y(it.y1) + Y(it.y2)) / 2 - 5, it); }
+      else if (it.k === 'circ' && [it.x, it.y, it.r].every(isNum)) s.append(svg('circle', { cx: X(it.x).toFixed(1), cy: Y(it.y).toFixed(1), r: Math.max(0, it.r * k).toFixed(1), class: 'sim-circ ' + cls + (it.fill ? ' sim-fill' : ''), 'stroke-dasharray': dash }));
+      else if (it.k === 'poly' && Array.isArray(it.pts) && it.pts.length >= 4 && it.pts.every(isNum)) {
+        const pts = []; for (let i = 0; i + 1 < it.pts.length; i += 2) pts.push(X(it.pts[i]).toFixed(1) + ',' + Y(it.pts[i + 1]).toFixed(1));
+        s.append(svg(it.closed === false ? 'polyline' : 'polygon', { points: pts.join(' '), class: 'sim-poly ' + cls + (it.fill ? ' sim-fill' : ''), 'stroke-dasharray': dash }));
+      } else if (it.k === 'txt' && isNum(it.x) && isNum(it.y)) label(X(it.x), Y(it.y), it, it.anchor === 'start' || it.anchor === 'end' ? it.anchor : 'middle');
+    }
+    return s;
+  }
+  /** play a sound {notes: [{f Hz, t s, d s, g 0–1}], wave?, partials?: [amplitudes]} with WebAudio (≤ 512 notes, ≤ 60 s); → stop() */
+  let AC = null;
+  function playSound(snd) {
+    const A = window.AudioContext || window.webkitAudioContext; if (!A || !snd || !Array.isArray(snd.notes)) return () => { };
+    AC = AC || new A(); if (AC.state === 'suspended') AC.resume();
+    const t0 = AC.currentTime + 0.05, out = AC.createGain(); out.gain.value = 0.25; out.connect(AC.destination);
+    let wave = ['sine', 'triangle', 'square', 'sawtooth'].includes(snd.wave) ? snd.wave : 'sine', custom = null;
+    if (Array.isArray(snd.partials) && snd.partials.length > 1 && snd.partials.every(isNum)) {
+      const n = Math.min(64, snd.partials.length), re = new Float32Array(n + 1), im = new Float32Array(n + 1);
+      for (let i = 0; i < n; i++) im[i + 1] = snd.partials[i];
+      custom = AC.createPeriodicWave(re, im);
+    }
+    const oscs = [];
+    for (const nt of snd.notes.slice(0, 512)) {
+      if (!nt || ![nt.f, nt.t, nt.d].every(isNum) || nt.f < 16 || nt.f > 20000 || nt.d <= 0 || nt.t < 0 || nt.t + nt.d > 60) continue;
+      const o = AC.createOscillator(), g = AC.createGain(), a = t0 + nt.t, e = a + nt.d, gv = isNum(nt.g) ? Math.max(0, Math.min(1, nt.g)) : 0.8;
+      if (custom) o.setPeriodicWave(custom); else o.type = wave;
+      o.frequency.value = nt.f;
+      g.gain.setValueAtTime(0, a); g.gain.linearRampToValueAtTime(gv, a + 0.01); g.gain.setValueAtTime(gv, Math.max(a + 0.01, e - 0.03)); g.gain.linearRampToValueAtTime(0, e);
+      o.connect(g); g.connect(out); o.start(a); o.stop(e + 0.02); oscs.push(o);
+    }
+    return () => { for (const o of oscs) try { o.stop(); } catch (x) { } try { out.disconnect(); } catch (x) { } };
   }
 
   /** The spec view: controls, readouts, plots (and a bench) drawn by the app from a spec. → port { send(type, payload), close(), values(), reveal(), saveSoon() }
@@ -175,8 +250,8 @@
       const params = spec.params, derived = (spec.derived || []).map(d => ({ id: d.id, f: C(d.expr) }));
       const readouts = (spec.readouts || []).map(r => ({ ...r, f: C(r.expr) }));
       const lim = v => typeof v === 'string' ? C(v) : (() => v);
-      const plots = (spec.plots || []).map(p => ({ p, xmin: p.x.min != null ? lim(p.x.min) : null, xmax: p.x.max != null ? lim(p.x.max) : null, ymin: p.y?.min != null ? lim(p.y.min) : null, ymax: p.y?.max != null ? lim(p.y.max) : null,
-        lines: p.series.map(s => ({ ...s, f: p.kind === 'function' ? C(s.expr) : null })), marks: (p.marks || []).map(m => ({ ...m, f: C(m.expr) })) }));
+      const plots = (spec.plots || []).map(p => p.kind === 'scene' || p.kind === 'sound' ? { p, lines: [], marks: [] } : ({ p, xmin: p.x.min != null ? lim(p.x.min) : null, xmax: p.x.max != null ? lim(p.x.max) : null, ymin: p.y?.min != null ? lim(p.y.min) : null, ymax: p.y?.max != null ? lim(p.y.max) : null,
+        lines: (p.series || []).map(s => ({ ...s, f: p.kind === 'function' ? C(s.expr) : null })), marks: (p.marks || []).map(m => ({ ...m, f: C(m.expr) })) }));
       const ev = (f, env) => { try { return f(env); } catch (e) { return NaN; } };
 
       /* the values: saved state, else the defaults */
@@ -238,7 +313,19 @@
       const roEls = readouts.map(r => { const dd = h('dd', {}); ro.append(h('div', {}, h('dt', {}, tt(r.label)), dd)); return dd; });
       if (ro) root.append(ro);
       const figs = plots.map(P => {
-        const p = P.p, fig = h('figure', { class: 'sim-plot' });
+        const p = P.p, fig = h('figure', { class: 'sim-plot' + (p.kind === 'scene' ? ' sim-plot-scene' : p.kind === 'sound' ? ' sim-plot-sound' : '') });
+        if (p.kind === 'scene' || p.kind === 'sound') {   // a drawing / a sound of the engine library
+          P.aria = (p.title ? tt(p.title) + '. ' : '') + tE(p.kind === 'scene' ? 'engine.act.sim.scene' : 'engine.act.sim.sound');
+          if (p.title) fig.append(h('figcaption', {}, tt(p.title)));
+          P.holder = h('div', { class: 'sim-svg' }); fig.append(P.holder);
+          if (p.kind === 'sound') {
+            let stop = null;
+            const b = h('button', { class: 'btn small', type: 'button', 'data-sound': p.of, 'aria-label': P.aria, onclick: () => { if (stop) { stop(); stop = null; b.textContent = '▶ ' + tE('engine.act.sim.play'); return; } stop = playSound(outputs[p.of]); b.textContent = '■ ' + tE('engine.act.sim.stop'); const dur = Math.max(0, ...((outputs[p.of]?.notes) || []).map(n => (n.t || 0) + (n.d || 0))); setTimeout(() => { if (stop) { stop = null; b.textContent = '▶ ' + tE('engine.act.sim.play'); } }, Math.min(60, dur) * 1000 + 200); } }, '▶ ' + tE('engine.act.sim.play'));
+            P.holder.append(b);
+          }
+          root.append(fig);
+          return fig;
+        }
         const axisLab = a => a && a.label ? tt(a.label) + (a.unit ? ' (' + a.unit + ')' : '') : (a && a.unit ? a.unit : '');
         P.xLabel = axisLab(p.x); P.yLabel = axisLab(p.y);
         P.aria = (p.title ? tt(p.title) + '. ' : '') + tE('engine.act.sim.plot', { y: P.yLabel || '—', x: P.xLabel || '—' });
@@ -471,6 +558,8 @@
         for (const d of declared) {
           const v = o && typeof o === 'object' ? o[d.id] : undefined;
           if (d.kind === 'scalar') r[d.id] = isNum(v) || typeof v === 'boolean' ? v : NaN;
+          else if (d.kind === 'scene') r[d.id] = v && typeof v === 'object' && Array.isArray(v.items) ? v : { view: [-1, 1, -1, 1], items: [] };
+          else if (d.kind === 'sound') r[d.id] = v && typeof v === 'object' && Array.isArray(v.notes) ? v : { notes: [] };
           else { let a = Array.isArray(v) || ArrayBuffer.isView(v) ? Array.from(v, x => +x) : []; if (a.length > MAX_POINTS) { const k = a.length / MAX_POINTS; a = Array.from({ length: MAX_POINTS }, (_, i) => a[Math.floor(i * k)]); } r[d.id] = a; }
         }
         return r;
@@ -492,17 +581,19 @@
       function render() {
         readouts.forEach((r, i) => { roEls[i].textContent = fmtNum(ev(r.f, env), r, locale); });
         plots.forEach((P, i) => {
+          if (P.p.kind === 'sound') return;
+          if (P.p.kind === 'scene') { P.last = outputs[P.p.of]; P.holder.replaceChildren(drawScene(figs[i], P.p, P.last, { locale, aria: P.aria, tt })); return; }
           const p = P.p, data = { lines: [], marks: P.marks.map(m => ({ axis: m.axis, v: ev(m.f, env), label: m.label ? tt(m.label) : '' })), yr: [P.ymin ? ev(P.ymin, env) : null, P.ymax ? ev(P.ymax, env) : null] };
           if (p.kind === 'function') {
             const a = ev(P.xmin, env), b = ev(P.xmax, env), n = Math.min(MAX_POINTS, p.points || 200), lg = p.x.scale === 'log' && a > 0 && b > 0;
             data.xr = [a, b]; data.xs = Array.from({ length: n }, (_, k) => lg ? a * Math.pow(b / a, k / (n - 1)) : a + (b - a) * k / (n - 1));
             const e2 = Object.assign({}, env);
-            data.lines = P.lines.map(l => ({ ys: data.xs.map(x => { e2[p.x.var] = x; const v = ev(l.f, e2); return typeof v === 'boolean' ? +v : v; }) }));
+            data.lines = P.lines.map(l => ({ style: l.style, ys: data.xs.map(x => { e2[p.x.var] = x; const v = ev(l.f, e2); return typeof v === 'boolean' ? +v : v; }) }));
           } else {
             data.xs = outputs[p.x.series] || [];
             let lo = Infinity, hi = -Infinity; for (const v of data.xs) if (isNum(v)) { if (v < lo) lo = v; if (v > hi) hi = v; }
             data.xr = [P.xmin ? ev(P.xmin, env) : (isFinite(lo) ? lo : 0), P.xmax ? ev(P.xmax, env) : (isFinite(hi) ? hi : 1)];
-            data.lines = P.lines.map(l => ({ ys: outputs[l.y] || [] }));
+            data.lines = P.lines.map(l => ({ style: l.style, ys: outputs[l.y] || [] }));
           }
           P.last = data;
           P.holder.replaceChildren(drawPlot(figs[i], p, data, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }));
@@ -513,7 +604,7 @@
         recompute(); saveSoon();
         if (commit) out('event', { name: 'param', data: { id: p.id, v: vals[p.id] } });
       }
-      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) { plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); B?.redraw(); } }); }) : null;
+      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) { plots.forEach((P, i) => P.last && P.p.kind !== 'sound' && P.holder.replaceChildren(P.p.kind === 'scene' ? drawScene(figs[i], P.p, P.last, { locale, aria: P.aria, tt }) : drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); B?.redraw(); } }); }) : null;
       ro2?.observe(root);
       for (const p of params) paint(p);
       recompute();
@@ -535,5 +626,6 @@
   }
   ACT.registerRuntime({ id: 'sim-spec@1', version: 1, autoHeight: true, mount: (box, ctx) => simView(box, ctx) });
   ACT.simView = simView;   // the same view for runtimes that compute the outputs themselves (py-module@1)
+  ACT.engineRunner = engineRunner;   // the same Worker runner for the engines a mini-app uses (html-app@1, 34_activity_html.js)
   /* i18n-ignore-end */
 })();

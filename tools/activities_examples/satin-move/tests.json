@@ -1,0 +1,16 @@
+{
+ "cases": [
+  { "name": "8 shafts, move 3: a regular satin, warp floats of 7", "steps": [ { "set": "n", "value": 8 }, { "set": "s", "value": 3 } ],
+    "expect": { "values": { "regular": [1, 1], "warpFloat": [7, 7], "weftFloat": [1, 1], "satins": [1, 1], "sett": [23.99, 24.01] } } },
+  { "name": "8 shafts, move 5: the mirror image of move 3, also regular", "steps": [ { "set": "n", "value": 8 }, { "set": "s", "value": 5 } ],
+    "expect": { "values": { "regular": [1, 1] } } },
+  { "name": "move 1 is a twill, not a satin", "steps": [ { "set": "n", "value": 8 }, { "set": "s", "value": 1 } ],
+    "expect": { "values": { "regular": [0, 0], "warpFloat": [7, 7] } } },
+  { "name": "move 2 shares a factor with 8: not regular", "steps": [ { "set": "n", "value": 8 }, { "set": "s", "value": 2 } ],
+    "expect": { "values": { "regular": [0, 0] } } },
+  { "name": "6 shafts have no regular satin at all", "steps": [ { "set": "n", "value": 6 }, { "set": "s", "value": 5 } ],
+    "expect": { "values": { "regular": [0, 0], "satins": [0, 0] } } },
+  { "name": "7 shafts: two distinct regular satins", "steps": [ { "set": "n", "value": 7 }, { "set": "s", "value": 2 } ],
+    "expect": { "state": [ "n", "s" ], "values": { "regular": [1, 1], "satins": [2, 2] } } }
+ ]
+}

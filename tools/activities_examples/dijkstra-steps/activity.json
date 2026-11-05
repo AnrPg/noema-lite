@@ -1,0 +1,17 @@
+{
+ "id": "dijkstra-steps",
+ "runtime": "sim-spec@1",
+ "entry": "activities/dijkstra-steps/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "dijkstra-steps-still",
+  "text": "Five towns s, t, x, y and z are joined by one-way roads with costs (the network of Cormen et al., Introduction to Algorithms, Fig. 24.6). Dijkstra's algorithm settles the towns in the order s (0), y (5), z (7), t (8), x (9): it always settles the open town with the smallest known cost, then relaxes the roads leaving it. With the road s → t at cost 10 the cheapest route to x is s → y → t → x, cost 9. Lowering that road to 7 or less makes s → t → x the cheapest, at cost 8 or less. The picture shows the network when the algorithm has finished, with the cheapest routes from s drawn bold."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

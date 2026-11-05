@@ -1,0 +1,202 @@
+{
+ "cases": [
+  {
+   "name": "Salamis, 22 Sep 480 BCE: Ol. 75.1, AUC 274, AM 3282, Nabonassar 268, JD 1 546 368",
+   "steps": [
+    {
+     "set": "yb",
+     "value": 480
+    },
+    {
+     "set": "mo",
+     "value": 9
+    },
+    {
+     "set": "dy",
+     "value": 22
+    }
+   ],
+   "expect": {
+    "values": {
+     "olYear": [
+      75,
+      75
+     ],
+     "olSub": [
+      1,
+      1
+     ],
+     "auc": [
+      274,
+      274
+     ],
+     "am": [
+      3282,
+      3282
+     ],
+     "nab": [
+      268,
+      268
+     ],
+     "jdn": [
+      1546368,
+      1546368
+     ],
+     "inWars": [
+      1,
+      1
+     ],
+     "afterMarathon": [
+      10,
+      10
+     ]
+    }
+   }
+  },
+  {
+   "name": "the first Olympic games, 15 Jul 776 BCE: Ol. 1.1, before the Persian Wars",
+   "steps": [
+    {
+     "set": "yb",
+     "value": 776
+    },
+    {
+     "set": "mo",
+     "value": 7
+    },
+    {
+     "set": "dy",
+     "value": 15
+    }
+   ],
+   "expect": {
+    "values": {
+     "olYear": [
+      1,
+      1
+     ],
+     "olSub": [
+      1,
+      1
+     ],
+     "jdn": [
+      1438185,
+      1438185
+     ],
+     "inWars": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "the founding of Rome, 21 Apr 753 BCE, is year 1 ab urbe condita",
+   "steps": [
+    {
+     "set": "yb",
+     "value": 753
+    },
+    {
+     "set": "mo",
+     "value": 4
+    },
+    {
+     "set": "dy",
+     "value": 21
+    }
+   ],
+   "expect": {
+    "values": {
+     "auc": [
+      1,
+      1
+     ],
+     "olYear": [
+      6,
+      6
+     ],
+     "olSub": [
+      3,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "name": "31 Dec 1 BCE: AUC 753, AM 3761, Ol. 194.4",
+   "steps": [
+    {
+     "set": "yb",
+     "value": 1
+    },
+    {
+     "set": "mo",
+     "value": 12
+    },
+    {
+     "set": "dy",
+     "value": 31
+    }
+   ],
+   "expect": {
+    "values": {
+     "auc": [
+      753,
+      753
+     ],
+     "am": [
+      3761,
+      3761
+     ],
+     "olYear": [
+      194,
+      194
+     ],
+     "olSub": [
+      4,
+      4
+     ],
+     "jdn": [
+      1721423,
+      1721423
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the date is saved",
+   "steps": [
+    {
+     "set": "yb",
+     "value": 449
+    },
+    {
+     "set": "mo",
+     "value": 6
+    },
+    {
+     "set": "dy",
+     "value": 1
+    }
+   ],
+   "expect": {
+    "state": [
+     "yb",
+     "mo",
+     "dy"
+    ],
+    "values": {
+     "inWars": [
+      1,
+      1
+     ],
+     "afterMarathon": [
+      41,
+      41
+     ]
+    }
+   }
+  }
+ ]
+}

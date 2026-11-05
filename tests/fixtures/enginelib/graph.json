@@ -1,0 +1,1837 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": true,
+     "nodes": [
+      {
+       "id": "s"
+      },
+      {
+       "id": "t"
+      },
+      {
+       "id": "x"
+      },
+      {
+       "id": "y"
+      },
+      {
+       "id": "z"
+      }
+     ],
+     "edges": [
+      {
+       "u": "s",
+       "v": "t",
+       "w": 10
+      },
+      {
+       "u": "s",
+       "v": "y",
+       "w": 5
+      },
+      {
+       "u": "t",
+       "v": "x",
+       "w": 1
+      },
+      {
+       "u": "t",
+       "v": "y",
+       "w": 2
+      },
+      {
+       "u": "y",
+       "v": "t",
+       "w": 3
+      },
+      {
+       "u": "y",
+       "v": "x",
+       "w": 9
+      },
+      {
+       "u": "y",
+       "v": "z",
+       "w": 2
+      },
+      {
+       "u": "x",
+       "v": "z",
+       "w": 4
+      },
+      {
+       "u": "z",
+       "v": "x",
+       "w": 6
+      },
+      {
+       "u": "z",
+       "v": "s",
+       "w": 7
+      }
+     ]
+    },
+    "run": {
+     "alg": "dijkstra",
+     "source": "s",
+     "target": "x",
+     "step": "k"
+    }
+   },
+   "outputs": [
+    {
+     "id": "dx",
+     "kind": "scalar",
+     "of": "dist",
+     "node": "x"
+    },
+    {
+     "id": "steps",
+     "kind": "scalar",
+     "of": "steps"
+    },
+    {
+     "id": "vals",
+     "kind": "series",
+     "of": "values"
+    },
+    {
+     "id": "idx",
+     "kind": "series",
+     "of": "nodeIndex"
+    },
+    {
+     "id": "net",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "net",
+     "title": "netTitle"
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "idx"
+     },
+     "series": [
+      {
+       "y": "vals",
+       "style": "bars"
+      }
+     ]
+    }
+   ],
+   "readouts": [
+    {
+     "label": "dxLabel",
+     "expr": "dx"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": [
+      {
+       "id": "A",
+       "x": 0,
+       "y": 0,
+       "label": "nodeA"
+      },
+      {
+       "id": "B",
+       "x": 2,
+       "y": 0
+      },
+      {
+       "id": "C",
+       "x": 1,
+       "y": "1 + k/10"
+      }
+     ],
+     "edges": [
+      {
+       "u": "A",
+       "v": "B",
+       "w": "k + 1"
+      },
+      {
+       "u": "B",
+       "v": "C",
+       "w": 2
+      },
+      {
+       "u": "C",
+       "v": "A",
+       "w": 3,
+       "cap": "2*k"
+      }
+     ]
+    },
+    "run": {
+     "alg": "kruskal",
+     "step": "k"
+    },
+    "layout": "given"
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "result"
+    },
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "non-unique-mst"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "drawing",
+     "labels": "id"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "karate"
+    },
+    "run": {
+     "alg": "pagerank",
+     "alpha": "0.5 + k/100"
+    }
+   },
+   "outputs": [
+    {
+     "id": "pr",
+     "kind": "scalar",
+     "of": "value",
+     "node": "n33"
+    },
+    {
+     "id": "top",
+     "kind": "scalar",
+     "of": "top"
+    },
+    {
+     "id": "res",
+     "kind": "series",
+     "of": "residual"
+    },
+    {
+     "id": "cc",
+     "kind": "scalar",
+     "of": "clustering"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "gnp",
+     "n": 100,
+     "p": "k/1000",
+     "seed": 3
+    }
+   },
+   "outputs": [
+    {
+     "id": "L",
+     "kind": "scalar",
+     "of": "largestComponent"
+    },
+    {
+     "id": "sz",
+     "kind": "series",
+     "of": "componentSizes"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "grid",
+     "rows": 6,
+     "cols": 6
+    },
+    "run": {
+     "alg": "astar",
+     "source": "n0",
+     "target": "n35",
+     "heuristic": "manhattan",
+     "hweight": "1 + k/10"
+    }
+   },
+   "outputs": [
+    {
+     "id": "L",
+     "kind": "scalar",
+     "of": "result"
+    },
+    {
+     "id": "ex",
+     "kind": "scalar",
+     "of": "expanded"
+    },
+    {
+     "id": "exr",
+     "kind": "scalar",
+     "of": "expandedRef"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "petersen"
+    },
+    "run": {
+     "alg": "hamilton",
+     "mode": "cycle"
+    }
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "result"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "girth"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "spanningTrees"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": true,
+     "nodes": [
+      {
+       "id": "a"
+      },
+      {
+       "id": "b"
+      },
+      {
+       "id": "c"
+      }
+     ],
+     "edges": [
+      {
+       "u": "a",
+       "v": "b"
+      },
+      {
+       "u": "b",
+       "v": "c"
+      }
+     ]
+    },
+    "run": {
+     "alg": "toposort"
+    }
+   },
+   "outputs": [
+    {
+     "id": "o",
+     "kind": "series",
+     "of": "order"
+    },
+    {
+     "id": "ok",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "konigsberg"
+    },
+    "run": {
+     "alg": "euler"
+    }
+   },
+   "outputs": [
+    {
+     "id": "eu",
+     "kind": "scalar",
+     "of": "result"
+    },
+    {
+     "id": "odd",
+     "kind": "scalar",
+     "of": "oddCount"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": true,
+     "nodes": [
+      {
+       "id": "s"
+      },
+      {
+       "id": "t"
+      },
+      {
+       "id": "x"
+      },
+      {
+       "id": "y"
+      },
+      {
+       "id": "z"
+      }
+     ],
+     "edges": [
+      {
+       "u": "s",
+       "v": "t",
+       "w": 10
+      },
+      {
+       "u": "s",
+       "v": "y",
+       "w": 5
+      },
+      {
+       "u": "t",
+       "v": "x",
+       "w": 1
+      },
+      {
+       "u": "t",
+       "v": "y",
+       "w": 2
+      },
+      {
+       "u": "y",
+       "v": "t",
+       "w": 3
+      },
+      {
+       "u": "y",
+       "v": "x",
+       "w": 9
+      },
+      {
+       "u": "y",
+       "v": "z",
+       "w": 2
+      },
+      {
+       "u": "x",
+       "v": "z",
+       "w": 4
+      },
+      {
+       "u": "z",
+       "v": "x",
+       "w": 6
+      },
+      {
+       "u": "z",
+       "v": "s",
+       "w": 7
+      }
+     ]
+    },
+    "run": {
+     "alg": "maxflow",
+     "source": "s",
+     "target": "x"
+    }
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "result"
+    },
+    {
+     "id": "cut",
+     "kind": "scalar",
+     "of": "count"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": true,
+     "nodes": [
+      {
+       "id": "s"
+      },
+      {
+       "id": "t"
+      },
+      {
+       "id": "x"
+      },
+      {
+       "id": "y"
+      },
+      {
+       "id": "z"
+      }
+     ],
+     "edges": [
+      {
+       "u": "s",
+       "v": "t",
+       "w": 10
+      },
+      {
+       "u": "s",
+       "v": "y",
+       "w": 5
+      },
+      {
+       "u": "t",
+       "v": "x",
+       "w": 1
+      },
+      {
+       "u": "t",
+       "v": "y",
+       "w": 2
+      },
+      {
+       "u": "y",
+       "v": "t",
+       "w": 3
+      },
+      {
+       "u": "y",
+       "v": "x",
+       "w": 9
+      },
+      {
+       "u": "y",
+       "v": "z",
+       "w": 2
+      },
+      {
+       "u": "x",
+       "v": "z",
+       "w": 4
+      },
+      {
+       "u": "z",
+       "v": "x",
+       "w": 6
+      },
+      {
+       "u": "z",
+       "v": "s",
+       "w": 7
+      }
+     ]
+    },
+    "generate": {
+     "kind": "karate"
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {},
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": [
+      {
+       "id": "a"
+      },
+      {
+       "id": "a"
+      },
+      {
+       "id": "b",
+       "x": 1
+      }
+     ],
+     "edges": [
+      {
+       "u": "a",
+       "v": "zz",
+       "id": "e1"
+      },
+      {
+       "u": "a",
+       "v": "b",
+       "id": "e1"
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": []
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": true,
+     "nodes": [
+      {
+       "id": "s"
+      },
+      {
+       "id": "t"
+      },
+      {
+       "id": "x"
+      },
+      {
+       "id": "y"
+      },
+      {
+       "id": "z"
+      }
+     ],
+     "edges": [
+      {
+       "u": "s",
+       "v": "t",
+       "w": 10
+      },
+      {
+       "u": "s",
+       "v": "y",
+       "w": 5
+      },
+      {
+       "u": "t",
+       "v": "x",
+       "w": 1
+      },
+      {
+       "u": "t",
+       "v": "y",
+       "w": 2
+      },
+      {
+       "u": "y",
+       "v": "t",
+       "w": 3
+      },
+      {
+       "u": "y",
+       "v": "x",
+       "w": 9
+      },
+      {
+       "u": "y",
+       "v": "z",
+       "w": 2
+      },
+      {
+       "u": "x",
+       "v": "z",
+       "w": 4
+      },
+      {
+       "u": "z",
+       "v": "x",
+       "w": 6
+      },
+      {
+       "u": "z",
+       "v": "s",
+       "w": 7
+      }
+     ]
+    },
+    "run": {
+     "alg": "dijkstra"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": false,
+     "nodes": [
+      {
+       "id": "a"
+      },
+      {
+       "id": "b"
+      }
+     ],
+     "edges": [
+      {
+       "u": "a",
+       "v": "b",
+       "w": -1
+      }
+     ]
+    },
+    "run": {
+     "alg": "dijkstra",
+     "source": "a",
+     "target": "b"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": true,
+     "nodes": [
+      {
+       "id": "s"
+      },
+      {
+       "id": "t"
+      },
+      {
+       "id": "x"
+      },
+      {
+       "id": "y"
+      },
+      {
+       "id": "z"
+      }
+     ],
+     "edges": [
+      {
+       "u": "s",
+       "v": "t",
+       "w": 10
+      },
+      {
+       "u": "s",
+       "v": "y",
+       "w": 5
+      },
+      {
+       "u": "t",
+       "v": "x",
+       "w": 1
+      },
+      {
+       "u": "t",
+       "v": "y",
+       "w": 2
+      },
+      {
+       "u": "y",
+       "v": "t",
+       "w": 3
+      },
+      {
+       "u": "y",
+       "v": "x",
+       "w": 9
+      },
+      {
+       "u": "y",
+       "v": "z",
+       "w": 2
+      },
+      {
+       "u": "x",
+       "v": "z",
+       "w": 4
+      },
+      {
+       "u": "z",
+       "v": "x",
+       "w": 6
+      },
+      {
+       "u": "z",
+       "v": "s",
+       "w": 7
+      }
+     ]
+    },
+    "run": {
+     "alg": "kruskal"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": [
+      {
+       "id": "A",
+       "x": 0,
+       "y": 0,
+       "label": "nodeA"
+      },
+      {
+       "id": "B",
+       "x": 2,
+       "y": 0
+      },
+      {
+       "id": "C",
+       "x": 1,
+       "y": "1 + k/10"
+      }
+     ],
+     "edges": [
+      {
+       "u": "A",
+       "v": "B",
+       "w": "k + 1"
+      },
+      {
+       "u": "B",
+       "v": "C",
+       "w": 2
+      },
+      {
+       "u": "C",
+       "v": "A",
+       "w": 3,
+       "cap": "2*k"
+      }
+     ]
+    },
+    "run": {
+     "alg": "scc"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "directed": true,
+     "nodes": [
+      {
+       "id": "s"
+      },
+      {
+       "id": "t"
+      },
+      {
+       "id": "x"
+      },
+      {
+       "id": "y"
+      },
+      {
+       "id": "z"
+      }
+     ],
+     "edges": [
+      {
+       "u": "s",
+       "v": "t",
+       "w": 10
+      },
+      {
+       "u": "s",
+       "v": "y",
+       "w": 5
+      },
+      {
+       "u": "t",
+       "v": "x",
+       "w": 1
+      },
+      {
+       "u": "t",
+       "v": "y",
+       "w": 2
+      },
+      {
+       "u": "y",
+       "v": "t",
+       "w": 3
+      },
+      {
+       "u": "y",
+       "v": "x",
+       "w": 9
+      },
+      {
+       "u": "y",
+       "v": "z",
+       "w": 2
+      },
+      {
+       "u": "x",
+       "v": "z",
+       "w": 4
+      },
+      {
+       "u": "z",
+       "v": "x",
+       "w": 6
+      },
+      {
+       "u": "z",
+       "v": "s",
+       "w": 7
+      }
+     ]
+    },
+    "run": {
+     "alg": "maxflow",
+     "source": "s",
+     "target": "s"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "grid",
+     "rows": 10,
+     "cols": 10
+    },
+    "run": {
+     "alg": "floyd-warshall"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "gnp",
+     "n": 10
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "hypercube",
+     "k": 11
+    },
+    "layout": "given"
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "gnm",
+     "n": 5,
+     "m": 20,
+     "wmin": 5,
+     "wmax": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "ba",
+     "n": 5,
+     "m": 5
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "karate"
+    },
+    "run": {
+     "alg": "pagerank",
+     "alpha": 1.2,
+     "source": "n99"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "karate"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    },
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "path"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "zzz"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "dist"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "nope"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "drawing",
+     "labels": "all",
+     "node": "n1"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "karate"
+    },
+    "run": {
+     "alg": "coloring",
+     "order": "exact"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "cycle",
+     "n": 2
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "karate",
+     "p": 2
+    },
+    "run": {
+     "alg": "bfs",
+     "foo": 1,
+     "maxIter": 0
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": [
+      {
+       "id": "a"
+      }
+     ]
+    },
+    "layout": "tilted",
+    "view": [
+     0,
+     1
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": [
+      {
+       "id": "A",
+       "x": 0,
+       "y": 0,
+       "label": "nodeA"
+      },
+      {
+       "id": "B",
+       "x": 2,
+       "y": 0
+      },
+      {
+       "id": "C",
+       "x": 1,
+       "y": "1 + k/10"
+      }
+     ],
+     "edges": [
+      {
+       "u": "A",
+       "v": "B",
+       "w": "k + 1"
+      },
+      {
+       "u": "B",
+       "v": "C",
+       "w": 2
+      },
+      {
+       "u": "C",
+       "v": "A",
+       "w": 3,
+       "cap": "2*k"
+      }
+     ]
+    },
+    "run": {
+     "alg": "astar",
+     "source": "A",
+     "target": "C",
+     "hweight": -1,
+     "heuristic": "euclid"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": [
+      {
+       "id": "a"
+      },
+      {
+       "id": "b"
+      }
+     ],
+     "edges": [
+      {
+       "u": "a",
+       "v": "b"
+      }
+     ]
+    },
+    "run": {
+     "alg": "astar",
+     "source": "a",
+     "target": "b",
+     "heuristic": "euclid"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "graph": {
+     "nodes": [
+      {
+       "id": "a"
+      }
+     ]
+    },
+    "run": {
+     "alg": "katz",
+     "alpha": -1
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "nothing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "karate"
+    },
+    "run": {
+     "alg": "hamilton"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "result"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": 5,
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "complete",
+     "n": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "graph@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "generate": {
+     "kind": "ws",
+     "n": 10,
+     "k": 12,
+     "p": 0.1
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "n"
+    }
+   ]
+  }
+ ]
+}
