@@ -306,9 +306,9 @@ window.NoemaSocial = (() => {
   }
 
   /* ======================= #/chat/<room>: one conversation ======================= */
-  let poll = 0;
+  let poll = 0, chatSeq = 0;   // the live conversation's poll; which drawing of #/chat is the newest
   async function chat(ctx, rid) {
-    const { h, page: pg, svg } = ctx;
+    const { h, page: pg, svg } = ctx, seq = ++chatSeq;
     clearInterval(poll);
     const v = pg({ tab: 'people', crumbs: [[T('title'), '#/people'], ['…']], back: '#/people', cls: 'so-view so-chatview', fab: false }, h('p', { class: 'ns-muted' }, T('loading')));
     if (!on()) { v.replaceChildren(); return signedOut(ctx, v); }
@@ -415,7 +415,11 @@ window.NoemaSocial = (() => {
       status.textContent = '';
     }
     await reload(true);
-    poll = setInterval(() => { if (!list.isConnected) { clearInterval(poll); return; } if (document.visibilityState === 'visible') reload(false); }, 4000);
+    // the page drawn again meanwhile (a re-route while this one loaded): the newer drawing polls, never this one. Each poll stops
+    // itself by its own id, so a stale one can never stop the poll of the conversation on screen.
+    if (seq !== chatSeq || !list.isConnected) return;
+    const mine = setInterval(() => { if (!list.isConnected) { clearInterval(mine); return; } if (document.visibilityState === 'visible') reload(false); }, 4000);
+    poll = mine;
   }
   /** one message: who (in a group, at the start of their run of messages), the text, an attachment, when; ⋮ edit / delete / report */
   function message(ctx, m, { dm, head, onChange }) {
