@@ -8,7 +8,7 @@ draws the network as a scene **in the algorithm's state after k steps**. A slide
 run: the frontier, each relaxation, each augmenting path, each union.
 
 The Python twin is `tools/lib_graph.py` (`ID`, `check_spec`, `exprs`, `keys` and the same lists). It checks and does not compute,
-and it gives the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_graph.js` (118
+and it gives the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_graph.js` (119
 assertions: published values, every edge case, the trace, the adapter, the Worker, speed, the reference activity) and
 `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/graph.json`, 36 specs: 11 good, 25 bad). The reference
 activity is `tools/activities_examples/dijkstra-steps`. The research behind this chapter is in the project's
@@ -216,9 +216,9 @@ Every code is also a `flag`. None stops the run: what cannot be computed is NaN.
 | `disconnected` | the graph is disconnected (an MST is a forest; the diameter is NaN) |
 | `unreachable`, `no-path` | a node, or the target, cannot be reached: its distance is +∞ |
 | `negative-weight` | a weight < 0 at run time (an expression) for Dijkstra or A*: NaN |
-| `negative-cycle`, `zero-cycle` | Bellman–Ford or Floyd–Warshall found one: the cycle is the `path`, distances behind it −∞ |
+| `negative-cycle` | Bellman–Ford or Floyd–Warshall found one: the cycle is the `path`, distances behind it −∞ |
 | `unbounded` | an s–t path of infinite capacity |
-| `ties` | equal keys broken by node index (the result is one of several) |
+| `ties` | Dijkstra found a second shortest way to a node: the first found (by node index) is kept, so the path is one of several |
 | `cyclic` | toposort or dag-path on a graph with a cycle |
 | `not-bipartite` | bipartite (with an odd cycle), matching or assignment on a non-bipartite graph |
 | `no-euler`, `non-hamiltonian`, `no-tour` | none exists (proved) |

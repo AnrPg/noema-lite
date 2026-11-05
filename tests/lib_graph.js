@@ -247,6 +247,8 @@ const KA = { generate: { kind: 'karate' } };
   ok(codes(big).includes('trace-truncated') && big.out.s <= 2000 && big.out.r > 1900, `trace-truncated: ${big.out.s} frames kept (≤ 2000 frames, ≤ 40 000 events); the result is still complete (${big.out.r} reached)`);
   const bud = R({ generate: { kind: 'complete', n: 200 }, run: { alg: 'betweenness' } }, [O('r', 'result')]);
   ok(codes(bud).includes('budget-exhausted') && Number.isNaN(bud.out.r), 'budget-exhausted: Brandes on K200 (≈ 8 M steps > 200 000) gives NaN and the code, never a partial number');
+  const ti = R({ graph: dg([['a', 'b'], ['a', 'c'], ['b', 'd'], ['c', 'd']]), run: { alg: 'dijkstra', source: 'a', target: 'd' } }, [S('p', 'path'), O('t', 'flag', { code: 'ties' })]);
+  ok(ti.out.t === 1 && ti.out.p.map(i => ti.graph.ids[i]).join('') === 'abd', 'ties: two shortest ways to d (via b and via c); the first found, through the lower index b, is kept');
   const dia = R({ graph: dg([['a', 'b'], ['c', 'd']]) }, [O('d', 'diameter'), O('L', 'avgPath')]);
   ok(Number.isNaN(dia.out.d) && Number.isNaN(dia.out.L) && codes(dia).includes('disconnected'), 'the diameter of a disconnected graph: NaN and disconnected');
 }

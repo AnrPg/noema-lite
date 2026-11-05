@@ -96,7 +96,7 @@ SCALAR_OF = MEASURES + ["flag", "always", "residual"]
 SERIES_OF = ["sweep"] + MEASURES + ["residual"]
 CODES = ["coincident-points", "collinear", "degenerate-triangle", "parallel", "coincident", "tangent", "no-intersection", "concentric", "contained",
          "separate", "point-at-infinity", "ill-conditioned", "undefined", "branch-switch", "fermat-vertex", "obtuse", "right-angle", "equilateral", "isosceles",
-         "euler-line-undefined", "inversion-centre", "conic-degenerate", "conic-not-unique", "huge-coordinates", "locus-gaps", "budget-exhausted",
+         "euler-line-undefined", "inversion-centre", "conic-degenerate", "conic-not-unique", "huge-coordinates", "locus-gaps",
          "self-intersecting", "not-convex", "inside-circle", "no-solution", "not-collinear", "outside-disk", "param"]
 OUT_FIELDS = ["id", "kind", "of", "at", "unit", "oriented", "signed", "code", "test", "samples", "labels"]
 

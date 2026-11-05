@@ -31,6 +31,7 @@ import thermal, pid, rf, twin   # the model checks of the P6 engines (docs/INTER
 import wasm_check as WK   # wasm-module@1 (docs/INTERACTIVE_WASM.md), twin of engine/src/44_activity_wasm.js
 import embed_check as EK   # external-embed@1 (docs/INTERACTIVE_EMBED.md), twin of engine/src/45_activity_embed.js
 import h5p_check as H5   # the package rules of h5p@1 (tools/h5p_allow.json), twin of NoemaH5P.check (engine/src/38_activity_h5p.js)
+_qv = lambda v: 'none' if v is None else f'"{v}"'   # quotes a value as packcheck.js qv() does (the same messages in JS and Python)
 
 FORMAT = "noema.activities/v1"
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,60}$")
@@ -573,7 +574,7 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
         keys.add(k)
     def name(n, where):
         if not (isinstance(n, str) and NAME_RE.match(n)) or n in SX.CONSTS or n in ('true', 'false') or SX.check(n):
-            E.append(f"{where}: {n!r} is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)"); return False
+            E.append(f"{where}: {_qv(n)} is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)"); return False
         if n in seen: E.append(f"{where}: the name {n} is used twice"); return False
         seen.add(n); return True
     def expr(src, names, where):

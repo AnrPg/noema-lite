@@ -41,7 +41,7 @@ ALG_SCALARS = ["result", "steps", "frame", "dist", "value", "reached", "pathEdge
 SCALARS = PROPS + ALG_SCALARS
 NODE_SCALARS = ["dist", "value", "reached"]
 SERIES = ["values", "degree", "degreeHist", "order", "path", "nodeIndex", "residual", "frontier", "componentSizes", "classes"]
-CODES = ["empty", "single-node", "self-loop", "multi-edge", "disconnected", "unreachable", "negative-weight", "negative-cycle", "zero-cycle",
+CODES = ["empty", "single-node", "self-loop", "multi-edge", "disconnected", "unreachable", "negative-weight", "negative-cycle",
          "no-path", "unbounded", "ties", "cyclic", "not-bipartite", "no-euler", "non-hamiltonian", "undecided", "budget-exhausted", "float-capacity",
          "heuristic-inadmissible", "non-unique-mst", "not-converged", "eigen-zero", "bounds-only", "trace-truncated", "nan-weight", "param", "no-tour",
          "infeasible", "adjacent", "size"]

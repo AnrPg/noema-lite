@@ -57,7 +57,7 @@
   const SCALARS = PROPS.concat(ALG_SCALARS);
   const NODE_SCALARS = ['dist', 'value', 'reached'];
   const SERIES = ['values', 'degree', 'degreeHist', 'order', 'path', 'nodeIndex', 'residual', 'frontier', 'componentSizes', 'classes'];
-  const CODES = ['empty', 'single-node', 'self-loop', 'multi-edge', 'disconnected', 'unreachable', 'negative-weight', 'negative-cycle', 'zero-cycle',
+  const CODES = ['empty', 'single-node', 'self-loop', 'multi-edge', 'disconnected', 'unreachable', 'negative-weight', 'negative-cycle',
     'no-path', 'unbounded', 'ties', 'cyclic', 'not-bipartite', 'no-euler', 'non-hamiltonian', 'undecided', 'budget-exhausted', 'float-capacity',
     'heuristic-inadmissible', 'non-unique-mst', 'not-converged', 'eigen-zero', 'bounds-only', 'trace-truncated', 'nan-weight', 'param', 'no-tour',
     'infeasible', 'adjacent', 'size'];
@@ -316,7 +316,7 @@
     else if (t === 'pred') { const o = S.pr[a]; if (o >= 0 && S.es[o] === 1) S.es[o] = 0; S.pr[a] = b; if (b >= 0) S.es[b] = 1; }
   }
   function tracer(G, D) {
-    const T = { frames: [], cur: null, events: 0, ops: 0, S: newState(G.n, G.E.length), over: false };
+    const T = { frames: [], cur: null, events: 0, ops: 0, S: newState(G.n, G.E.length), over: false, D };
     T.frame = () => { T.S.cn = -1; T.S.ce = []; if (T.frames.length < MAX_FRAMES && T.events < MAX_EVENTS) { T.cur = []; T.frames.push(T.cur); } else { if (T.cur !== null || !T.frames.length) D.add('trace-truncated'); T.cur = null; } };
     T.ev = (t, a, b) => { const e = [t, a, b]; apply(T.S, e); if (T.cur) { T.cur.push(e); T.events++; } };
     T.tick = k => { T.ops += k || 1; if (T.ops > BUDGET) { if (!T.over) D.add('budget-exhausted'); T.over = true; return false; } return true; };
@@ -443,7 +443,7 @@
         if (d[u] + w < d[v]) {
           if (done[v]) { if (!hfun) continue; done[v] = 0; }   // reopening: only with an inconsistent heuristic
           d[v] = d[u] + w; pr[v] = ei; H.push([d[v] + h(v), -d[v], v]); T.ev('ns', v, 1); T.ev('nv', v, d[v]); T.ev('pred', v, ei);
-        }
+        } else if (!hfun && !done[v] && d[u] + w === d[v] && pr[v] !== ei) T.D.add('ties');   // a second shortest way to v: the first found is kept
       }
       if (T.over) break;
     }
