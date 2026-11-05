@@ -1,0 +1,7 @@
+{"title": "Charge et décharge d’un condensateur",
+ "intro": "Un signal carré de 5 V charge le condensateur à travers R pendant 5 ms, puis le laisse se décharger pendant 5 ms. Changez R et C et regardez à quelle vitesse la tension du condensateur suit.",
+ "resistance": "Résistance R", "capacitance": "Capacité C",
+ "tauLabel": "Constante de temps τ = RC", "vAtLabel": "Tension du condensateur à 1 ms", "pctLabel": "Part de l’échelon de 5 V atteinte à 1 ms",
+ "scopeTitle": "Oscilloscope : entrée et tension du condensateur", "time": "Temps", "voltage": "Tension",
+ "inLine": "entrée (signal carré)", "outLine": "condensateur", "targetMark": "1 ms", "pctMark": "63 %",
+ "checkPct": "À 1 ms, le condensateur est à moins de 3 points de 63 % de l’échelon."}

@@ -11,10 +11,17 @@ sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physi
 echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
 # interactive activities: a pack with the reference activity, built and unpacked with the skill (tests/activities_app.js imports it)
 (cd "$T" && NOEMA_REBUILD_SKILL=1 NOEMA_ACT_PACK="$T/act-pack.json" python3 tests/activities_pack.py)
+# h5p@1 in the one-file bundle: that subject (with its H5P item) as the library's demo-physics, its .h5p inline (<= 2 MB) and over a tiny limit (the fallback)
+mv "$T/library/subjects/demo-physics" "$T/demo-physics.lib" && cp -r "$T/act-pack.json.subject" "$T/library/subjects/demo-physics"
+(cd "$T" && python3 tools/build.py bundle --subjects demo-physics >/dev/null && mv dist/noema-lite.html act-bundle-inline.html \
+  && NOEMA_H5P_INLINE_MAX=1000 python3 tools/build.py bundle --subjects demo-physics >/dev/null && mv dist/noema-lite.html act-bundle-big.html)
+rm -rf "$T/library/subjects/demo-physics" && mv "$T/demo-physics.lib" "$T/library/subjects/demo-physics"
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
 node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: JS and Python agree bit for bit (docs/INTERACTIVE_SIMEXPR.md)
+node "$ROOT/tests/circuit.js"           # the circuit engine circuit-mna@1: MNA, transients, faults, instruments (docs/INTERACTIVE_CIRCUIT.md)
+node "$ROOT/tests/activities_h5p.js"    # the h5p@1 runtime with a stub host: the sandbox, scores, state, languages, hostile libraries, 0 requests (docs/INTERACTIVE_H5P.md)
 node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules (html-app, sim-spec, checks), never allow-same-origin
-node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop; sim-spec@1 and the checks grader (BROWSERS=chromium,firefox,webkit)
+node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop; sim-spec@1, the checks grader, circuit-mna@1 and the fault bench; py-module@1 over http with the fetched Pyodide; h5p@1 beside the pack and in the one-file bundle (BROWSERS=chromium,firefox,webkit)
 node "$ROOT/tests/shell.js" "$T"
 node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
 node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)

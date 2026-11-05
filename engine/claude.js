@@ -403,7 +403,7 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
         const r = await api(key, `/v1/files/${meta.id}/content`, { raw: true, retries: 3 }); const blob = await r.blob();
         const b = await NoemaSrcFiles.readBundle(blob); const p = b.pack;
         if (!(p?.subject?.id && Array.isArray(p.chapters) && p.chapters.length)) continue;
-        const files = {}; for (const s of NoemaSrcFiles.packaged(p)) { const f = await b.file(s.file); if (f) files[s.file] = f; }
+        const files = await NoemaSrcFiles.bundleFiles(b, p);   // its source files and its H5P activities' files (activities/<id>/item.h5p)
         job.bundleFiles = files;   // kept with the job (IndexedDB) until the pack is imported
         log('📦 ' + CT('err.ui.claude.packageReceived', { file: meta.filename, mb: +(blob.size / 1048576).toFixed(1), n: Object.keys(files).length }));
         await fillWebPictures(p, job.images, log); return p;

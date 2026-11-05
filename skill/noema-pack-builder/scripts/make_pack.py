@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Validate a subject folder and build its package for noema-lite.
   python3 make_pack.py SUBJECT_DIR [OUT_DIR]
-    → OUT_DIR/<id>.noema.zip   THE PACKAGE: pack.json + sources/<every original file>  (default OUT_DIR: /mnt/user-data/outputs or .)
+    → OUT_DIR/<id>.noema.zip   THE PACKAGE: pack.json + sources/<every original file> + activities/<id>/item.h5p (each H5P
+                               activity's package)  (default OUT_DIR: /mnt/user-data/outputs or .)
     → SUBJECT_DIR/build/<id>.json   the pack alone (for noema_start_upload / noema_save_pack)
 Every source with "file": "sources/<name>" must have that file in SUBJECT_DIR/sources/ (exactly the files the learner
 gave — or the parts of a split PDF, one source per part), and every file there must belong to a source.
@@ -34,6 +35,16 @@ requires = ACTS.requires(acts)
 ae, aw = ACTS.check_activities({'activities': acts, 'media': media, 'subject': meta, 'chapters': chapters, 'requires': requires}, list(translations))
 errs += ['activities: ' + x for x in ae]
 for w in aw: print('WARN activities: ' + w)
+# h5p@1: each .h5p file travels BESIDE the pack (in the .noema.zip as activities/<id>/item.h5p; the connector asks for it as for the
+# source files) — checked here like the app and the connector check it: sha256, bytes, the package rules (tools/h5p_check.py)
+def _h5p_bytes(x):
+    f = os.path.join(sdir, *str(x.get('entry') or '').split('/'))
+    return open(f, 'rb').read() if os.path.isfile(f) else None
+h5p_files = {x['entry']: _h5p_bytes(x) for x in (acts or {}).get('items') or [] if isinstance(x, dict) and x.get('runtime') == ACTS.H5P and isinstance(x.get('entry'), str) and _h5p_bytes(x) is not None}
+if h5p_files:
+    he, hw = ACTS.check_h5p_packages({'activities': acts}, _h5p_bytes)
+    errs += ['activities: ' + x for x in he]
+    for w in hw: print('WARN activities: ' + w)
 for w in mrep + fwarns:
     if w.startswith('WARN'): print(w)
 auth = meta.get('authoring') or {}
@@ -61,7 +72,7 @@ for m in media:   # (an activity's still picture, its fallback, needs no exercis
     if used[m] < per_pic and m not in ACTS.fallback_media(acts): errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
 with tempfile.TemporaryDirectory() as td:
     mp = os.path.join(td, 'media.json'); json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in media.items()}, open(mp, 'w', encoding='utf-8'))
-    ap = os.path.join(td, 'activities.json'); json.dump({a['id']: {k: v for k, v in a.items() if k != 'html'} for a in (acts or {}).get('items', []) if isinstance(a, dict) and 'id' in a}, open(ap, 'w', encoding='utf-8'), ensure_ascii=False)
+    ap = os.path.join(td, 'activities.json'); json.dump({a['id']: {k: v for k, v in a.items() if k not in ('html', 'python')} for a in (acts or {}).get('items', []) if isinstance(a, dict) and 'id' in a}, open(ap, 'w', encoding='utf-8'), ensure_ascii=False)
     ax = ['--activities', ap] if acts else []
     for c in chapters:
         p = os.path.join(td, c['id'] + '.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
@@ -101,10 +112,11 @@ for loc, t in trfiles.items():   # build/<id>.tr.<locale>.json: what noema_finis
     with open(os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"), 'w', encoding='utf-8') as f: json.dump(t, f, ensure_ascii=False, separators=(',', ':'))
 os.makedirs(out_dir, exist_ok=True)
 out = os.path.join(out_dir, meta['id'] + '.noema.zip')
-write_bundle(out, pack, files, {f'translations/{loc}.json': t for loc, t in trfiles.items()})
+write_bundle(out, pack, files, {**{f'translations/{loc}.json': t for loc, t in trfiles.items()}, **h5p_files})
 mb = lambda n: f'{n / 1048576:.1f} MB' if n >= 1048576 else f'{n // 1024} KB'
 print(f'\n✓ {out}  ({mb(os.path.getsize(out))}) · {counts["chapters"]} chapters · {counts["exercises"]} exercises ({counts["visual"]} visual) · {counts["media"]} pictures · {len(files)} source file(s)')
 for sid, p, rel in files: print(f'   📎 {sid}: {rel} ({mb(os.path.getsize(p))})')
+for rel, b in h5p_files.items(): print(f'   🧩 {rel} ({mb(len(b))}): an H5P activity, beside the pack (noema_finish_upload asks for it)')
 print(f'  pack alone (for the connector upload): {jout}')
 for loc in trfiles: print(f'  translation {loc}: ' + os.path.join(sdir, 'build', f"{meta['id']}.tr.{loc}.json"))
 if int((meta.get('authoring') or {}).get('rules', 0)) >= 2:   # the languages every new pack gets (pack_rules.json "languages"; pipeline steps translate + bridges)

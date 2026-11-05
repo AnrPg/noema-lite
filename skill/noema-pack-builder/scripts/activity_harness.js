@@ -5,9 +5,20 @@
      node activity_harness.js preview SUBJECT_DIR ID [OUT_DIR]  → screenshots: light, dark, 360 px wide, the fallback
    sim-spec@1 activities run in the app's own sim runtime (35_activity_sim.js, with the spec check of packcheck.js); in their
    tests.json a step {"set": "<param id>", "value": v} sets a control, "values": {name: number | [lo, hi]} checks a computed value,
-   "passed" the exercise's checks grader, "state" the saved values.
+   "passed" the exercise's checks grader, "state" the saved values. A bench (circuit-mna@1, docs/INTERACTIVE.md §12.7): a step
+   {"measure": {"instrument": "V", "a": "TP3", "b": "GND"}} (or {"instrument": "I", "part": 0}) takes a measurement, {"diagnose": 6}
+   picks the 7th diagnosis; "readings": [[i, lo, hi]] checks the number of the i-th measurement, "log": n how many there are;
+   a case's "task" (e.g. {"fault": "rOpen"}) overrides the exercise's task.params.
+   py-module@1 (docs/INTERACTIVE_PYTHON.md) runs like sim-spec@1 (the same steps and expectations; "values" are Python's scalar outputs),
+   over a small local http server that also serves the pinned Python files: from $NOEMA_PYODIDE_SITE (a folder with vendor/pyodide/manifest.json,
+   e.g. dist/site after `python3 tools/fetch_pyodide.py`) or the repository's dist/site. Without them the Python activities are skipped
+   (and the harness exits 2 when nothing else was checked).
+   h5p@1 items (an ordinary .h5p file, docs/INTERACTIVE_H5P.md) play in the app's own H5P runtime (38_activity_h5p.js + the vendored
+   player): in every language of the pack (the subject's own and each content.<locale>.json); a step {"click": selector} or
+   {"set": selector, "value": v} acts inside the item, "passed" is the score H5P reports (xAPI answered), "state" the saved
+   state ({"h5p": …}), a case's "locale" plays it in that language.
    Called by activity_test.py and activity_preview.py. Needs Playwright with Chromium (npm i playwright; npx playwright install chromium). */
-const fs = require('fs'), path = require('path'), os = require('os');
+const fs = require('fs'), path = require('path'), os = require('os'), http = require('http'), crypto = require('crypto');
 let pw; try { pw = require(process.env.PW || 'playwright'); } catch (e) {
   console.log('✗ Playwright is not installed here. Install it:  npm i playwright && npx playwright install chromium   (then run again)'); process.exit(2);
 }
@@ -20,6 +31,8 @@ const SDIR = path.resolve(sdirArg);
 const srcDir = [path.join(HERE, 'activity_host'), path.join(HERE, '..', '..', '..', 'engine', 'src')].find(d => fs.existsSync(path.join(d, '34_activity_html.js')));
 if (!srcDir) { console.log('✗ the activity runtime (activity_host/34_activity_html.js) is missing from the toolkit'); process.exit(2); }
 const rd = f => fs.readFileSync(path.join(srcDir, f), 'utf8');
+const inl = s => s.replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\x21--');   // a source inlined in the host page: "</script" must not end the <script>, nor "<!--" … "<script" make the parser skip its end (tools/build.py esc)
+const rs = f => inl(rd(f));
 const s32 = rd('32_activities.js'), ACTP = s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = ('));
 
 /* the subject's activities, read like make_pack.py does */
@@ -32,6 +45,16 @@ const items = (rj(regPath).items || []).filter(a => !onlyId || a.id === onlyId).
   const entry = a.entry ? path.join(SDIR, a.entry) : null;
   const text = entry && fs.existsSync(entry) ? fs.readFileSync(entry, 'utf8') : '';
   if (a.runtime === 'sim-spec@1') { let spec = null; try { spec = JSON.parse(text); } catch (e) { spec = null; } return { ...a, spec, strings, _dir: dir }; }
+  if (a.runtime === 'py-module@1') {   // main.py + its spec.json beside it (like make_pack.py)
+    let spec = a.spec || null; const sf = path.join(dir, 'spec.json'); if (!spec && fs.existsSync(sf)) try { spec = rj(sf); } catch (e) { spec = null; }
+    const entryPy = entry || path.join(dir, 'main.py'), py = fs.existsSync(entryPy) ? fs.readFileSync(entryPy, 'utf8') : '';
+    return { ...a, python: py || null, sha256: py ? crypto.createHash('sha256').update(py).digest('hex') : null, bytes: Buffer.byteLength(py), spec, strings, _dir: dir };
+  }
+  if (a.runtime === 'h5p@1') {   // the package as the app gets it (inline here; the app reads it from beside the pack), its words per language
+    const buf = entry && fs.existsSync(entry) ? fs.readFileSync(entry) : null, by = { ...(a.h5pByLocale || {}) };
+    for (const f of fs.existsSync(dir) ? fs.readdirSync(dir) : []) { const m = f.match(/^(content|l10n)\.(.+)\.json$/); if (m) by[m[2]] = { ...(by[m[2]] || {}), [m[1]]: rj(path.join(dir, f)) }; }
+    return { ...a, h5p: buf ? buf.toString('base64') : null, sha256: buf ? require('crypto').createHash('sha256').update(buf).digest('hex') : null, h5pByLocale: by, strings, _dir: dir, _missing: !buf };
+  }
   return { ...a, html: text, strings, sha256: null, _dir: dir };
 });
 if (!items.length) { console.log('✗ no activity ' + (onlyId || '') + ' in activities.json'); process.exit(1); }
@@ -45,18 +68,36 @@ const THEMES = {
 const has = f => fs.existsSync(path.join(srcDir, f));
 const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
 const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
+const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
+// py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
+const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
+const PYSW = [PYSITE && path.join(PYSITE, 'engine', 'pyodide-sw.js'), path.join(srcDir, '..', 'pyodide-sw.js'), path.join(srcDir, 'pyodide-sw.js')].find(f => f && fs.existsSync(f));
+const PYOK = SIMOK && has('37_activity_py.js') && has('37_activity_py_ui.js') && !!PYSITE && !!PYSW;
+const NEEDHTTP = PYOK && items.some(a => a.runtime === 'py-module@1');
+// h5p@1: the runtime and the app's own H5P player (skill zip: activity_host/h5p/player.js; repository: engine/vendor/h5p/<version>/player.js)
+const playerPath = [path.join(srcDir, 'h5p', 'player.js'), path.join(srcDir, '..', 'vendor', 'h5p', '3.8.2', 'player.js')].find(f => fs.existsSync(f));
+const H5POK = has('38_activity_h5p.js') && !!playerPath;
+const OWN = (() => { try { return rj(path.join(SDIR, 'subject.json')).language || 'en'; } catch (e) { return 'en'; } })();
 // the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
-const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}' };
+const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
+  'engine.act.bench.instrument': 'Instrument', 'engine.act.bench.inst.V': 'Multimeter: voltage', 'engine.act.bench.inst.I': 'Multimeter: current', 'engine.act.bench.inst.R': 'Multimeter: resistance',
+  'engine.act.bench.inst.scope': 'Oscilloscope', 'engine.act.bench.inst.logic': 'Logic analyser', 'engine.act.bench.red': 'Red lead (+)', 'engine.act.bench.black': 'Black lead (−)', 'engine.act.bench.probe': 'Probe on',
+  'engine.act.bench.part': 'Current through', 'engine.act.bench.measure': 'Measure', 'engine.act.bench.left': '{left} measurements left', 'engine.act.bench.log': 'Measurements', 'engine.act.bench.logEmpty': 'No measurements yet.',
+  'engine.act.bench.scopeStats': '{pp} peak to peak, mean {mean}, frequency {freq}', 'engine.act.bench.logicStats': 'frequency {freq}, duty cycle {duty}', 'engine.act.bench.time': 'Time', 'engine.act.bench.voltage': 'Voltage',
+  'engine.act.bench.level': 'Logic level (0 or 1)', 'engine.act.bench.diagnosis': 'Your diagnosis', 'engine.act.bench.choose': 'Choose the fault…', 'engine.act.bench.commit': 'Check my diagnosis',
+  'engine.act.bench.right': 'Right: {fault}', 'engine.act.bench.wrong': 'Not this one. The fault was: {fault}', 'engine.act.bench.another': 'Another device', 'engine.act.bench.failed': 'this measurement could not be made',
+  "engine.common.sizeMB": "{size} MB", "engine.common.sizeKB": "{size} KB", "engine.common.sizeB": "{size} B", "engine.act.py.firstUse": "This activity runs Python: it downloads about {size} once, then works offline.", "engine.act.py.network": "The first time it also downloads {packages}, so it needs the internet.", "engine.act.py.download": "Download {size} and start", "engine.act.py.loading": "Getting Python ready… {done} of {total}", "engine.act.py.starting": "Starting Python…", "engine.act.py.stepError": "The activity's Python code stopped with an error ({code}).", "engine.act.py.noHere": "This activity runs Python, which works only on the website, not in a downloaded copy of the app. Here is what it shows.", "engine.act.py.offline": "Python is not on this device yet, and there is no connection. Connect once, or prepare Python ahead in Settings.", "engine.act.py.slow": "Python took too long to start." };
 const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}
 ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
-var RT = {}, EN = {}; var ACT = { registerRuntime: function (d) { RT[d.id] = d; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); } };
+var RT = {}, EN = {}; var ACT = { registerRuntime: function (d) { RT[d.id] = d; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); } };
+function nf(n) { return String(n); } function fmtBytes(n) { return n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B'; } function tip(t) { return document.createTextNode(''); }
 var WORDS = ${JSON.stringify(HOSTWORDS)};
-function tE(k, v) { return String(WORDS[k] || k).replace(/\{(\w+)\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
+function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('33_activity_guard.js')}</script><script>${rd('34_activity_html.js')}</script>${SIMOK ? `<script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(pcPath, 'utf8')}</script><script>${rd('35_activity_sim.js')}</script>` : ''}<script>
+</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init) {
@@ -75,35 +116,60 @@ window.run = function (act, init) {
 (async () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-act-')), hostFile = path.join(tmp, 'host.html');
   fs.writeFileSync(hostFile, HOST);
-  const browser = await pw.chromium.launch();
+  // py-module@1 needs a secure http origin with the Python files under /vendor/ (the file:// host has no Python, as in the app)
+  let base = 'file://' + hostFile, server = null;
+  if (NEEDHTTP) {
+    const TYPES = { '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.wasm': 'application/wasm', '.zip': 'application/zip', '.whl': 'application/zip', '.html': 'text/html; charset=utf-8', '.tar': 'application/x-tar' };
+    server = http.createServer((q, r) => {
+      const u = decodeURIComponent(new URL(q.url, 'http://x').pathname);
+      const send = (code, type, body, extra) => { r.writeHead(code, { 'content-type': type, ...(extra || {}) }); r.end(body); };
+      if (u === '/host.html') return send(200, 'text/html; charset=utf-8', HOST);
+      if (u === '/engine/pyodide-sw.js') return send(200, 'text/javascript', fs.readFileSync(PYSW), { 'service-worker-allowed': '/vendor/', 'cache-control': 'no-cache' });
+      if (u.startsWith('/vendor/') && !u.includes('..')) { const f = path.join(PYSITE, u); if (fs.existsSync(f) && fs.statSync(f).isFile()) return send(200, TYPES[path.extname(f)] || 'application/octet-stream', fs.readFileSync(f), { 'access-control-allow-origin': '*', 'cross-origin-resource-policy': 'cross-origin' }); }
+      send(404, 'text/plain', 'not found');
+    });
+    await new Promise(ok => server.listen(0, '127.0.0.1', ok));
+    base = `http://127.0.0.1:${server.address().port}/host.html`;
+  }
+  const browser = await pw.chromium.launch({ args: ['--disable-features=IsolateSandboxedIframes'] });   // (Playwright reaches the item's frame nested in the wrapper)
   let fails = 0, passes = 0;
   const say = (c, m) => { console.log((c ? '✓ ' : '✗ ') + m); if (c) passes++; else fails++; return c; };
   const open = async (width = 800, theme = 'light') => {
     const ctx = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1, colorScheme: theme });
     const p = await ctx.newPage(); const errs = [];
     p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/Unrecognized feature/.test(m.text())) errs.push(m.text()); });
-    await p.goto('file://' + hostFile); return { p, ctx, errs };
+    await p.goto(base); return { p, ctx, errs };
   };
   const start = async (p, a, o = {}) => {
     const init = { activityId: a.id, exerciseId: o.exerciseId || null, attemptId: 'test', seed: o.seed ?? 12345, task: o.task || {}, locale: o.locale, strings: a.strings[o.locale] || {},
       theme: THEMES[o.theme || 'light'], state: o.state || null, stateVersion: a.stateVersion || 1, capabilities: a.capabilities || [], limits: { msgBytes: 65536, stateBytes: 262144, eventsPerSec: 50 } };
     await p.evaluate(([act, init, th]) => { window.setTheme(th); window.run(act, init); }, [a, init, THEMES[o.theme || 'light']]);
     const t0 = Date.now(); while (Date.now() - t0 < 8000) { const L = await p.evaluate(() => window.LOG); if (L.some(m => m.type === 'ready' || m.type === 'fail')) break; await p.waitForTimeout(100); }
+    if (a.runtime === 'py-module@1') await pyValues(p);   // Python loads (first use: the whole runtime) and computes the first outputs
     await p.waitForTimeout(o.settle ?? 400);
-    const frame = a.runtime === 'sim-spec@1' ? p.mainFrame() : p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame());
+    const frame = a.runtime === 'sim-spec@1' || a.runtime === 'py-module@1' ? p.mainFrame() : p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame());
     return { frame, log: await p.evaluate(() => window.LOG) };
   };
   const visible = f => f.evaluate(() => document.body.innerText);
+  async function pyValues(p, ms = 120000) {   // until Python's outputs for the latest inputs are in (or it failed)
+    const t0 = Date.now(); while (Date.now() - t0 < ms) { const v = await p.evaluate(() => ({ v: window.H && window.H.values ? window.H.values() : null, f: window.LOG.some(m => m.type === 'fail') })); if (v.v || v.f) return v.v; await p.waitForTimeout(100); }
+    return null;
+  }
+  let skipped = 0;
 
   for (const a of items) {
     console.log(`\n— ${a.id} (${a.runtime})`);
-    const SIM = a.runtime === 'sim-spec@1';
-    if (!(a.runtime === 'html-app@1' || (SIM && SIMOK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ' and sim-spec@1' : ''} only for now`); continue; }
-    if (SIM && !a.spec) { say(false, `${a.entry || 'spec.json'}: not found or not JSON`); continue; }
-    const locs = Object.keys(a.strings);
+    const PY = a.runtime === 'py-module@1', SIM = a.runtime === 'sim-spec@1' || PY;
+    const H5 = a.runtime === 'h5p@1';
+    if (PY && !PYOK) { skipped++; console.log(`  (skipped: ${PYSITE ? 'the Python runner (activity_host/37_activity_py*.js) is missing from the toolkit' : 'the Python files are not here — set NOEMA_PYODIDE_SITE to a folder with vendor/pyodide/ (python3 tools/fetch_pyodide.py --site DIR)'})`); continue; }
+    if (!(a.runtime === 'html-app@1' || (SIM && SIMOK) || (H5 && H5POK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ', sim-spec@1, py-module@1' : ''}${H5POK ? ', h5p@1' : ''} only for now`); continue; }
+    if (H5 && a._missing) { say(false, `${a.entry || 'item.h5p'}: not found`); continue; }
+    if (SIM && !a.spec) { say(false, `${PY ? 'activities/' + a.id + '/spec.json' : a.entry || 'spec.json'}: not found or not JSON`); continue; }
+    if (PY && !a.python) { say(false, `${a.entry || 'activities/' + a.id + '/main.py'}: not found`); continue; }
+    const locs = H5 ? [...new Set([OWN, ...Object.keys(a.h5pByLocale || {})])] : Object.keys(a.strings);
     if (mode === 'preview') {
       const out = path.resolve(outArg || path.join(SDIR, 'build', 'preview', a.id)); fs.mkdirSync(out, { recursive: true });
-      const loc = a.strings.en ? 'en' : locs[0];
+      const loc = H5 ? OWN : a.strings.en ? 'en' : locs[0];
       for (const [name, width, theme] of [['light', 800, 'light'], ['dark', 800, 'dark'], ['phone-360', 360, 'light']]) {
         const { p, ctx, errs } = await open(width, theme); await start(p, a, { locale: loc, theme, settle: 800 });
         await p.screenshot({ path: path.join(out, name + '.png'), fullPage: true });
@@ -144,15 +210,22 @@ window.run = function (act, init) {
       const ex = c.exercise ? exercises[c.exercise] : null;
       if (c.exercise && !ex) { say(false, `case "${c.name}": exercise ${c.exercise} is not in chapters/`); continue; }
       const { p, ctx, errs } = await open();
-      const { frame } = await start(p, a, { locale: c.locale || (a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: ex?.task?.params || c.task || {}, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
+      const { frame } = await start(p, a, { locale: c.locale || (H5 ? OWN : a.strings.en ? 'en' : locs[0]), exerciseId: c.exercise || null, task: { ...(ex?.task?.params || {}), ...(c.task || {}) }, seed: Number.isInteger(ex?.task?.seed) ? ex.task.seed : 12345 });
       try {
         for (const s of c.steps || []) {
           if (s.set && SIM) await p.evaluate(([id, v]) => { const e = document.querySelector(`#box [data-param="${id}"]`); if (!e) throw new Error('no param ' + id); if (e.type === 'checkbox') e.checked = !!v; else e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
           else if (s.set) await frame.evaluate(([sel, v]) => { const e = document.querySelector(sel); if (!e) throw new Error('no ' + sel); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, [s.set, s.value]);
+          else if (s.measure && SIM) {   // a bench: choose the instrument and where it goes, then Measure; wait for the reading
+            const n0 = await p.evaluate(() => document.querySelectorAll('#box .sim-log li').length);
+            const off = await p.evaluate(m => { const set = (k, v) => { if (v == null) return; const e = document.querySelector(`#box [data-bench="${k}"]`); if (!e) throw new Error('no bench control ' + k); e.value = String(v); if (e.value !== String(v)) throw new Error(`no ${k} ${v} on this bench`); e.dispatchEvent(new Event('change', { bubbles: true })); };
+              set('instrument', m.instrument); set('a', m.a); set('b', m.b); set('part', m.part); const btn = document.querySelector('#box [data-bench="measure"]'); if (btn.disabled) return true; btn.click(); return false; }, s.measure);
+            const t0 = Date.now(); while (!off && Date.now() - t0 < 8000) { const done = await p.evaluate(n => { const l = document.querySelectorAll('#box .sim-log li'); return l.length > n && !/…$/.test(l[l.length - 1].textContent); }, n0); if (done) break; await p.waitForTimeout(50); }
+          } else if (s.diagnose != null && SIM) await p.evaluate(v => { const e = document.querySelector('#box [data-bench="diagnosis"]'); if (!e) throw new Error('this activity has no bench'); e.value = String(v); e.dispatchEvent(new Event('change', { bubbles: true })); }, s.diagnose);
           else if (s.click) await frame.click(s.click);
           if (s.wait) await p.waitForTimeout(s.wait);
         }
         await p.waitForTimeout(500);
+        if (PY) await pyValues(p, 20000);
         const log = await p.evaluate(() => window.LOG), st = [...log].reverse().find(m => m.type === 'state');
         let res = [...log].reverse().find(m => m.type === 'result');
         const vals = SIM ? await p.evaluate(() => window.H && window.H.values ? window.H.values() : null) : null;
@@ -165,13 +238,20 @@ window.run = function (act, init) {
         const stData = st ? (SIM ? st.payload.data && st.payload.data.values : st.payload.data) : null;
         for (const [sel, part] of Object.entries(c.expect?.text || {})) { const t = await frame.evaluate(s => document.querySelector(s)?.textContent || '', sel); if (!t.includes(part)) why.push(`${sel}: "${t.slice(0, 60)}" has no "${part}"`); }
         for (const k of c.expect?.state || []) if (!stData || !(k in stData)) why.push(`state has no ${k}`);
+        if (SIM && (c.expect?.readings || c.expect?.log != null)) {   // a bench: the numbers in the measurement log
+          const L = await p.evaluate(() => [...document.querySelectorAll('#box .sim-log li b')].map(b => b.textContent));
+          const val = t => { const m = String(t).replace(/\u2212/g, '-').match(/(-?[\d.,]+)\s*([pnµmkMG]?)/); if (!m) return NaN; return parseFloat(m[1].replace(',', '.')) * ({ p: 1e-12, n: 1e-9, 'µ': 1e-6, m: 1e-3, k: 1e3, M: 1e6, G: 1e9 }[m[2]] || 1); };
+          if (c.expect.log != null && L.length !== c.expect.log) why.push(`the log has ${L.length} measurements, expected ${c.expect.log}`);
+          for (const [i, lo, hi] of c.expect.readings || []) { const v = L[i] === 'OL' ? Infinity : val(L[i]); if (!(v >= lo && v <= hi)) why.push(`measurement ${i + 1} reads ${L[i]}, expected ${lo}…${hi}`); }
+        }
         if (errs.length) why.push('errors: ' + errs.slice(0, 2).join(' | '));
         say(!why.length, `case "${c.name}"${why.length ? ' — ' + why.join('; ') : ''}`);
       } catch (e) { say(false, `case "${c.name}": ${e.message.split('\n')[0]}`); }
       await ctx.close();
     }
   }
-  await browser.close();
-  console.log(fails ? `\n✗ ${fails} problem(s), ${passes} fine` : `\n✓ all ${passes} checks fine`);
+  await browser.close(); if (server) server.close();
+  if (!fails && !passes && skipped) { console.log(`\n— nothing checked: ${skipped} Python activit${skipped > 1 ? 'ies' : 'y'} skipped (no Python files here)`); process.exit(2); }
+  console.log(fails ? `\n✗ ${fails} problem(s), ${passes} fine` : `\n✓ all ${passes} checks fine${skipped ? ` (${skipped} Python activit${skipped > 1 ? 'ies' : 'y'} skipped)` : ''}`);
   process.exit(fails ? 1 : 0);
 })();

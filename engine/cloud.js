@@ -528,10 +528,10 @@
     async listPublic() { return call('/rest/v1/noema_public_packs?select=*&order=updated_at.desc', { auth: !!session() }); },
     /** The public rows of some subject ids (🔔 a new version of a subject taken from 🌍 Explore). */
     async publicRows(ids) { return ids.length ? call(`/rest/v1/noema_public_packs?select=owner,subject_id,owner_name,title,updated_at,meta&subject_id=in.(${ids.map(enc).join(',')})`, { auth: !!session() }) : []; },
-    /** files: [{ srcId, blob, name, type }] — the subject's source files go with it (pack.sharedFiles tells the receiver where). */
+    /** files: [{ srcId, blob, name, type, act? }] — the subject's source files and its h5p@1 items' .h5p files (act) go with it (pack.sharedFiles tells the receiver where). */
     async publish(pack, meta, { files = [], onProgress } = {}) {
       const id = pack.subject.id;
-      if (files.length) { const up = await this.uploadShareFiles('noema-public', f => `${uid()}/${id}/sources/${f.safe}/file.${f.ext}`, files, onProgress); pack = { ...pack, sharedFiles: up.map }; meta = { ...meta, filePaths: up.paths, sourceFiles: files.length, sourceBytes: files.reduce((a, f) => a + f.blob.size, 0) }; }
+      if (files.length) { const up = await this.uploadShareFiles('noema-public', f => `${uid()}/${id}/sources/${f.safe}/file.${f.ext}`, files, onProgress); pack = { ...pack, sharedFiles: up.map }; meta = { ...meta, filePaths: up.paths, sourceFiles: files.filter(f => !f.act).length, sourceBytes: files.reduce((a, f) => a + f.blob.size, 0) }; }
       else meta = { ...meta, filePaths: [], sourceFiles: 0 };
       const old = ((await this.myPublished().catch(() => [])) || []).find(r => r.subject_id === id);
       const stale = (old?.meta?.filePaths || []).filter(x => !(meta.filePaths || []).includes(x)); if (stale.length) await this.deleteObjects('noema-public', stale).catch(() => { });
@@ -575,7 +575,7 @@
         if (files.length) {
           const up = await this.uploadShareFiles('noema-shared', f => `${row.id}.src-${f.safe}.${f.ext}`, files, onProgress);
           pack = { ...pack, sharedFiles: up.map };
-          await call(`/rest/v1/noema_shares?id=eq.${row.id}`, { method: 'PATCH', body: { meta: { ...meta, filePaths: up.paths, sourceFiles: files.length, sourceBytes: files.reduce((a, f) => a + f.blob.size, 0) } }, headers: { Prefer: 'return=minimal' } });
+          await call(`/rest/v1/noema_shares?id=eq.${row.id}`, { method: 'PATCH', body: { meta: { ...meta, filePaths: up.paths, sourceFiles: files.filter(f => !f.act).length, sourceBytes: files.reduce((a, f) => a + f.blob.size, 0) } }, headers: { Prefer: 'return=minimal' } });
         }
         await call(`/storage/v1/object/noema-shared/${row.id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } });
       }

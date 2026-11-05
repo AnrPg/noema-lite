@@ -1,0 +1,49 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "circuit-mna@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "Vs": 5, "target": 0.001, "frac": 0.632, "tol": 0.03 },
+ "params": [
+  { "id": "R", "kind": "slider", "label": "resistance", "min": 100, "max": 10000, "scale": "log", "default": 4700, "unit": "Ω", "format": "si" },
+  { "id": "C", "kind": "slider", "label": "capacitance", "min": 1e-8, "max": 1e-5, "scale": "log", "default": 1e-6, "unit": "F", "format": "si" }
+ ],
+ "derived": [
+  { "id": "tau", "expr": "R * C" }
+ ],
+ "model": {
+  "netlist": {
+   "format": "noema.circuit/v1",
+   "nodes": ["in", "out"],
+   "elements": [
+    { "id": "V1", "type": "V", "n": ["in", "gnd"], "value": { "pulse": { "v1": 0, "v2": 5, "width": 0.005, "period": 0.01 } } },
+    { "id": "R1", "type": "R", "n": ["in", "out"], "value": 4700 },
+    { "id": "C1", "type": "C", "n": ["out", "gnd"], "value": 1e-6 }
+   ]
+  },
+  "bindings": [
+   { "element": "R1", "expr": "R" },
+   { "element": "C1", "expr": "C" }
+  ],
+  "transient": { "tEnd": 0.01, "dt": 0.00001 }
+ },
+ "outputs": [
+  { "id": "t", "kind": "series", "time": true },
+  { "id": "vin", "kind": "series", "node": "in" },
+  { "id": "vc", "kind": "series", "node": "out" },
+  { "id": "vAt", "kind": "scalar", "node": "out", "at": "target" },
+  { "id": "vMax", "kind": "scalar", "node": "out", "stat": "max" }
+ ],
+ "readouts": [
+  { "label": "tauLabel", "expr": "tau", "unit": "s", "format": "si", "digits": 3 },
+  { "label": "vAtLabel", "expr": "vAt", "unit": "V", "format": "fixed", "digits": 2 },
+  { "label": "pctLabel", "expr": "100 * vAt / Vs", "unit": "%", "format": "fixed", "digits": 1 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "scopeTitle",
+    "x": { "series": "t", "label": "time", "unit": "s", "format": "si" },
+    "y": { "min": -0.2, "max": 5.4, "label": "voltage", "unit": "V" },
+    "series": [{ "y": "vin", "label": "inLine" }, { "y": "vc", "label": "outLine" }],
+    "marks": [{ "axis": "x", "expr": "target", "label": "targetMark" }, { "axis": "y", "expr": "frac * Vs", "label": "pctMark" }] }
+ ]
+}

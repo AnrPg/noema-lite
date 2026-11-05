@@ -4685,5 +4685,209 @@
   "engine.act.sim.checks": "{met} of {total, plural, one {# condition} other {# conditions}} met",
   "@engine.act.sim.checks": {
     "description": "Shown after checking a simulation exercise; {met} conditions of the goal are met out of {total}. The list of the conditions follows."
+  },
+  "engine.act.bench.instrument": "Instrument",
+  "@engine.act.bench.instrument": {
+    "description": "Label of the list that picks the measuring instrument on a fault-finding bench (a virtual circuit with a hidden fault)."
+  },
+  "engine.act.bench.inst.V": "Multimeter: voltage",
+  "@engine.act.bench.inst.V": {
+    "description": "Instrument on a fault-finding bench: a multimeter set to measure voltage (volts) between two points."
+  },
+  "engine.act.bench.inst.I": "Multimeter: current",
+  "@engine.act.bench.inst.I": {
+    "description": "Instrument on a fault-finding bench: a multimeter set to measure the current through a part (amperes)."
+  },
+  "engine.act.bench.inst.R": "Multimeter: resistance",
+  "@engine.act.bench.inst.R": {
+    "description": "Instrument on a fault-finding bench: a multimeter set to measure resistance (ohms) between two points, with the circuit unpowered."
+  },
+  "engine.act.bench.inst.scope": "Oscilloscope",
+  "@engine.act.bench.inst.scope": {
+    "description": "Instrument on a fault-finding bench: an oscilloscope that shows the voltage at a point over time."
+  },
+  "engine.act.bench.inst.logic": "Logic analyser",
+  "@engine.act.bench.inst.logic": {
+    "description": "Instrument on a fault-finding bench: a logic analyser that shows a digital signal (high/low) over time."
+  },
+  "engine.act.bench.red": "Red lead (+)",
+  "@engine.act.bench.red": {
+    "description": "The positive (red) test lead of a multimeter: the point it touches."
+  },
+  "engine.act.bench.black": "Black lead (−)",
+  "@engine.act.bench.black": {
+    "description": "The negative (black, common) test lead of a multimeter: the point it touches."
+  },
+  "engine.act.bench.probe": "Probe on",
+  "@engine.act.bench.probe": {
+    "description": "The point of the circuit an oscilloscope or logic analyser probe touches."
+  },
+  "engine.act.bench.part": "Current through",
+  "@engine.act.bench.part": {
+    "description": "Label of the list that picks the part whose current the multimeter measures."
+  },
+  "engine.act.bench.measure": "Measure",
+  "@engine.act.bench.measure": {
+    "description": "Button: take one measurement with the chosen instrument at the chosen points."
+  },
+  "engine.act.bench.left": "{left, plural, =0 {No measurements left} one {# measurement left} other {# measurements left}}",
+  "@engine.act.bench.left": {
+    "description": "How many measurements the learner may still take on this bench; {left} = the number."
+  },
+  "engine.act.bench.log": "Measurements",
+  "@engine.act.bench.log": {
+    "description": "Heading of the list of the measurements taken so far on a fault-finding bench."
+  },
+  "engine.act.bench.logEmpty": "No measurements yet. Choose an instrument and where to put it, then press Measure.",
+  "@engine.act.bench.logEmpty": {
+    "description": "Shown while the measurement list is empty."
+  },
+  "engine.act.bench.scopeStats": "{pp} peak to peak, mean {mean}, frequency {freq}",
+  "@engine.act.bench.scopeStats": {
+    "description": "Summary of an oscilloscope trace; {pp}, {mean} are voltages with units, {freq} a frequency with unit (or —)."
+  },
+  "engine.act.bench.logicStats": "frequency {freq}, duty cycle {duty}",
+  "@engine.act.bench.logicStats": {
+    "description": "Summary of a logic analyser trace; {freq} a frequency with unit (or —), {duty} a percentage."
+  },
+  "engine.act.bench.time": "Time",
+  "@engine.act.bench.time": {
+    "description": "Horizontal axis of an oscilloscope or logic analyser trace."
+  },
+  "engine.act.bench.voltage": "Voltage",
+  "@engine.act.bench.voltage": {
+    "description": "Vertical axis of an oscilloscope trace."
+  },
+  "engine.act.bench.level": "Logic level (0 or 1)",
+  "@engine.act.bench.level": {
+    "description": "Vertical axis of a logic analyser trace: low = 0, high = 1."
+  },
+  "engine.act.bench.diagnosis": "Your diagnosis",
+  "@engine.act.bench.diagnosis": {
+    "description": "Label of the list where the learner picks which fault they think the circuit has."
+  },
+  "engine.act.bench.choose": "Choose the fault…",
+  "@engine.act.bench.choose": {
+    "description": "First, empty entry of the diagnosis list."
+  },
+  "engine.act.bench.commit": "Check my diagnosis",
+  "@engine.act.bench.commit": {
+    "description": "Button: commit the chosen diagnosis and learn whether it was the hidden fault."
+  },
+  "engine.act.bench.right": "Right: {fault}",
+  "@engine.act.bench.right": {
+    "description": "Shown after the diagnosis when it names the hidden fault; {fault} = the fault, in the activity's words."
+  },
+  "engine.act.bench.wrong": "Not this one. The fault was: {fault}",
+  "@engine.act.bench.wrong": {
+    "description": "Shown after a wrong diagnosis; {fault} = the real fault, in the activity's words."
+  },
+  "engine.act.bench.another": "Another device",
+  "@engine.act.bench.another": {
+    "description": "Button: start again with a new device that may have a different hidden fault."
+  },
+  "engine.act.bench.failed": "this measurement could not be made",
+  "@engine.act.bench.failed": {
+    "description": "Shown in place of a reading when the simulation could not compute it."
+  },
+  "engine.act.py.firstUse": "This activity runs Python: it downloads about {size} once, then works offline.",
+  "@engine.act.py.firstUse": {
+    "description": "One quiet line above a Python activity the first time it is opened on this device; {size} = the download, e.g. \"17 MB\"."
+  },
+  "engine.act.py.network": "The first time it also downloads {packages}, so it needs the internet.",
+  "@engine.act.py.network": {
+    "description": "Added after the first-use line when the activity needs an extra Python package that is downloaded the first time; {packages} = package names (e.g. \"quantiphy\")."
+  },
+  "engine.act.py.download": "Download {size} and start",
+  "@engine.act.py.download": {
+    "description": "Button on mobile data / data saver: start the first download of Python now; {size} = e.g. \"17 MB\"."
+  },
+  "engine.act.py.loading": "Getting Python ready… {done} of {total}",
+  "@engine.act.py.loading": {
+    "description": "Progress while Python is downloaded the first time; {done} and {total} are sizes like \"3.2 MB\"."
+  },
+  "engine.act.py.starting": "Starting Python…",
+  "@engine.act.py.starting": {
+    "description": "Shown while Python starts (a few seconds) before the activity can compute."
+  },
+  "engine.act.py.stepError": "The activity's Python code stopped with an error ({code}).",
+  "@engine.act.py.stepError": {
+    "description": "The activity's own Python code failed while computing; {code} = a short technical code for the author."
+  },
+  "engine.act.py.noHere": "This activity runs Python, which works only on the website, not in a downloaded copy of the app. Here is what it shows.",
+  "@engine.act.py.noHere": {
+    "description": "Note above the still picture of a Python activity in the downloaded copy / one-file version of the app, where Python cannot run."
+  },
+  "engine.act.py.offline": "Python is not on this device yet, and there is no connection. Connect once, or prepare Python ahead in Settings.",
+  "@engine.act.py.offline": {
+    "description": "Note above the still picture when Python has never been downloaded on this device and there is no connection; Settings has a button to prepare it ahead."
+  },
+  "engine.act.py.slow": "Python took too long to start.",
+  "@engine.act.py.slow": {
+    "description": "Note above the still picture when Python did not start in time (a Restart button follows)."
+  },
+  "engine.py.title": "Python for activities",
+  "@engine.py.title": {
+    "description": "Title of the Settings section that downloads Python (for interactive activities) ahead, for offline use."
+  },
+  "engine.py.info": "Some activities compute with Python (numpy, scipy). The first of them downloads it; prepare it here to use them without a connection. It stays in this browser.",
+  "@engine.py.info": {
+    "description": "Tooltip of that Settings section: what it is for."
+  },
+  "engine.py.checking": "Checking what is on this device…",
+  "@engine.py.checking": {
+    "description": "Shown for a moment while the section looks at what is stored on this device."
+  },
+  "engine.py.ready": "Ready offline",
+  "@engine.py.ready": {
+    "description": "Status pill: Python is fully stored on this device and works without a connection."
+  },
+  "engine.py.partly": "Partly here",
+  "@engine.py.partly": {
+    "description": "Status pill: some of the Python files are stored, not all (short)."
+  },
+  "engine.py.notReady": "Not on this device",
+  "@engine.py.notReady": {
+    "description": "Status pill: Python is not stored on this device (short)."
+  },
+  "engine.py.noFiles": "Python cannot be reached right now. Try again when you are online.",
+  "@engine.py.noFiles": {
+    "description": "The list of Python files could not be read (offline, or the website has none)."
+  },
+  "engine.py.have": "On this device: Python with numpy and scipy ({size}).",
+  "@engine.py.have": {
+    "description": "Status line when everything is stored; {size} = e.g. \"36.7 MB\"."
+  },
+  "engine.py.part": "{have} of {total} on this device.",
+  "@engine.py.part": {
+    "description": "Status line when part is stored; {have} and {total} are sizes like \"16.9 MB\"."
+  },
+  "engine.py.prepare": "Prepare Python for offline ({size})",
+  "@engine.py.prepare": {
+    "description": "Button: download Python now so that its activities work offline; {size} = what is still missing, e.g. \"36.7 MB\"."
+  },
+  "engine.py.progress": "Downloading… {done} of {total}",
+  "@engine.py.progress": {
+    "description": "Progress of that download; {done} and {total} are sizes."
+  },
+  "engine.py.saveData": "Data saver is on. Download anyway?",
+  "@engine.py.saveData": {
+    "description": "The browser asks to save data (data saver / mobile data): the app asks before downloading."
+  },
+  "engine.py.anyway": "Download anyway",
+  "@engine.py.anyway": {
+    "description": "Button after the data-saver question: download now."
+  },
+  "engine.py.failed": "{n, plural, one {One file could not be downloaded.} other {# files could not be downloaded.}} Try again when you are online.",
+  "@engine.py.failed": {
+    "description": "After the download: {n} files failed; ICU plural."
+  },
+  "engine.py.kept": "The browser has promised to keep these files.",
+  "@engine.py.kept": {
+    "description": "In the details tooltip: the browser granted persistent storage, so it will not remove the files by itself."
+  },
+  "engine.py.mayEvict": "The browser may remove these files when space runs low; they are then downloaded again the next time.",
+  "@engine.py.mayEvict": {
+    "description": "In the details tooltip: the browser may delete the files when it needs space."
   }
 }

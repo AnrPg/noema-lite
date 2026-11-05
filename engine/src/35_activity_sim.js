@@ -39,37 +39,49 @@
   /* ---------- engines ---------- */
   ACT.registerEngine({ id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) });   // the derived values are the model
 
-  /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource. */
+  /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource.
+      run(inputs, done): the outputs (a newer run waiting replaces an older one: the latest inputs win);
+      measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s. */
   function engineRunner(E, spec, opts, onFail) {
-    let worker = null, url = null, inst = null, busy = null, next = null, timer = null, dead = false;
+    let worker = null, url = null, inst = null, busy = null, timer = null, dead = false;
+    const queue = [];
     if (E.workerSource && typeof Worker === 'function') {
       try {
-        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
+        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
         url = URL.createObjectURL(new Blob([E.workerSource + '\n;' + bridge], { type: 'text/javascript' }));
         worker = new Worker(url);
+        worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); d(m.t === 'out' ? m.out : null); };
+        worker.onerror = e => { e.preventDefault?.(); console.warn('[noema] sim-spec engine worker', E.id, e.message); const d = busy?.done; finish(); d?.(null); };
         worker.postMessage({ t: 'create', spec, opts });
       } catch (e) { console.warn('[noema] sim-spec: no worker here, the engine runs inline', e); worker = null; }
     }
     if (!worker) inst = E.create(spec, opts);
-    function finish() { clearTimeout(timer); busy = null; if (next) { const n = next; next = null; run(n.inputs, n.done); } }
-    function run(inputs, done) {
-      if (dead) return;
+    function finish() { clearTimeout(timer); busy = null; pump(); }
+    function pump() {
+      if (dead || busy || !queue.length) return;
+      const job = queue.shift();
       if (!worker) {
         const t0 = performance.now(); let out = null;
-        try { out = (inst.run || inst.step).call(inst, inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
+        try { out = job.t === 'measure' ? inst.measure(job.inputs, job.probe) : (inst.run || inst.step).call(inst, job.inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
         const ms = performance.now() - t0; if (ms > 50) console.warn(`[noema] sim-spec: engine ${E.id} took ${Math.round(ms)} ms inline; give it a workerSource`);
-        return done(out);
+        job.done(out); return pump();
       }
-      if (busy) { next = { inputs, done }; return; }   // the latest inputs win
-      busy = { id: ++seq, done };
+      busy = { id: ++seq, done: job.done };
       timer = setTimeout(() => { if (!busy) return; dead = true; close(); onFail('runaway'); }, RUN_TIMEOUT);
-      worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); d(m.t === 'out' ? m.out : null); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); };
-      worker.onerror = e => { e.preventDefault?.(); console.warn('[noema] sim-spec engine worker', E.id, e.message); const d = busy?.done; finish(); d?.(null); };
-      worker.postMessage({ t: 'run', id: busy.id, inputs });
+      worker.postMessage({ t: job.t, id: busy.id, inputs: job.inputs, probe: job.probe });
     }
-    function close() { dead = true; clearTimeout(timer); try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
-    return { run, close, inWorker: () => !!worker };
+    function run(inputs, done) {
+      if (dead) return;
+      const i = queue.findIndex(j => j.t === 'run');   // the latest inputs win
+      if (i >= 0) queue[i] = { t: 'run', inputs, done }; else queue.push({ t: 'run', inputs, done });
+      pump();
+    }
+    function measure(inputs, probe, done) { if (dead) return; queue.push({ t: 'measure', inputs, probe, done }); pump(); }
+    function close() { dead = true; clearTimeout(timer); queue.length = 0; try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
+    return { run, measure, close, inWorker: () => !!worker };
   }
+  /** a seeded pick: the same seed draws the same item (mulberry32) */
+  function seededIndex(seed, n) { let a = (seed ^ 0x9E3779B9) >>> 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return Math.floor(((t ^ t >>> 14) >>> 0) / 4294967296 * n); }
 
   /* ---------- plots: SVG drawn by the app, coloured by the theme's tokens ---------- */
   function niceTicks(lo, hi, n) {
@@ -136,19 +148,22 @@
     return s;
   }
 
-  ACT.registerRuntime({
-    id: 'sim-spec@1', version: 1, autoHeight: true,
-    /** → port { send(type, payload), close(), values() } */
-    mount(box, { act, init, onMessage, onFail }) {
+  /** The spec view: controls, readouts, plots (and a bench) drawn by the app from a spec. → port { send(type, payload), close(), values(), reveal(), saveSoon() }
+      host (optional, py-module@1 in 37_activity_py_ui.js): another runtime that computes the outputs itself —
+        { engine: { id }, check: { python: true } (the options of checkSimSpec), runner(spec, opts, onFail) → { run(inputs, done), measure?, close },
+          stateExtra() → fields saved beside the values, decorate(root) → adds its own lines to the view }
+      Without host the outputs come from the spec's engine (ACT.registerEngine). */
+  function simView(box, { act, init, onMessage, onFail }, host) {
       const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
       const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
       let closed = false;
       const port = { send() { }, close() { closed = true; }, values: () => null };
       const spec = act.spec, tables = act.strings && typeof act.strings === 'object' ? act.strings : null;
-      const engId = spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
-      const E = typeof engId === 'string' ? ACT.engine(engId) : null;
+      const engId = host ? host.engine.id : spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
+      const E = host ? host.engine : typeof engId === 'string' ? ACT.engine(engId) : null;
       if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
-      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, ACT.engines()) : ['the spec checker is not loaded'];
+      if (spec && spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
+      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, host ? null : ACT.engines(), host ? host.check : undefined) : ['the spec checker is not loaded'];
       if (!probs.length && E.check) try { probs.push(...(E.check(spec) || [])); } catch (e) { probs.push(String(e.message || e)); }
       if (probs.length) { console.warn('[noema] sim-spec', act.id, probs.slice(0, 5).join(' | ')); later(() => onFail('spec')); return port; }
 
@@ -236,13 +251,181 @@
       });
       const busyNote = h('div', { class: 'sim-busy', 'aria-hidden': 'true' });
       const reset = h('button', { class: 'btn ghost small', type: 'button', onclick: () => { for (const p of params) { vals[p.id] = def(p); paint(p); } out('event', { name: 'reset' }); recompute(); saveSoon(); } }, '↺ ' + tE('engine.act.sim.reset'));
+      const B = spec.bench ? makeBench() : null;   // a fault-finding bench (§12.7): instruments, the measurement log, the diagnosis
+      if (B) root.append(B.el);
       root.append(h('div', { class: 'sim-foot' }, busyNote, reset));
+      host?.decorate?.(root);
       box.append(root);
 
       /* ---------- computing ---------- */
       let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
-      const runner = E.id === 'formula@1' ? null : engineRunner(E, spec, { seed: init.seed >>> 0, task: { ...consts } }, why => onFail(why));
+      const prep = typeof E.prepare === 'function' ? E.prepare(spec, C) : (x => x);   // the engine's expressions → numbers, on this thread
+      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
+      let runner = newRunner();
       const declared = spec.outputs || [];
+
+      /* ---------- the bench: the hidden fault lives only in this closure and in the engine (never in the page, the state or a label) ---------- */
+      function makeBench() {
+        const bn = spec.bench, exMode = !!init.exerciseId, opts = bn.diagnosis.options, budget = bn.budget || 0;
+        const savedB = !exMode && init.state?.data?.bench && typeof init.state.data.bench === 'object' ? init.state.data.bench : null;
+        let seed = isNum(savedB?.seed) ? savedB.seed >>> 0 : init.seed >>> 0, fault = 0, dx = null, done = false, count = 0, face = null;
+        const log = [];
+        function pick() {
+          const ids = bn.faults.map(f => f.id), tf = init.task?.fault;
+          const pool = typeof tf === 'string' && ids.includes(tf) ? [tf] : Array.isArray(tf) && tf.some(x => ids.includes(x)) ? tf.filter(x => ids.includes(x)) : ids;
+          fault = ids.indexOf(pool[seededIndex(seed, pool.length)]);
+        }
+        pick();
+        const pt = id => bn.points.find(p => p.id === id);
+        const instName = k => tE('engine.act.bench.inst.' + k);
+        const sel = (cls, label, items) => {   // a labelled select: items [{value, text}]
+          const id = uid + 'b-' + cls, s = h('select', { id, class: 'sim-sel', 'data-bench': cls }, items.map(o => h('option', { value: o.value }, o.text)));
+          return { s, row: h('div', { class: 'sim-p sim-bsel' }, h('label', { for: id, class: 'sim-lab' }, label), s) };
+        };
+        const inst = sel('instrument', tE('engine.act.bench.instrument'), bn.instruments.map(x => ({ value: x.kind, text: instName(x.kind) })));
+        const lab = new Map();   // the label element of each lead select (its words change with the instrument)
+        const ptItems = ids => ids.map(id => ({ value: id, text: tt(pt(id).label) }));
+        const A = sel('a', tE('engine.act.bench.red'), []), Bk = sel('b', tE('engine.act.bench.black'), []);
+        lab.set(A.s, A.row.querySelector('label'));
+        const part = sel('part', tE('engine.act.bench.part'), []);
+        const btn = h('button', { class: 'btn primary small', type: 'button', 'data-bench': 'measure', onclick: () => measure() }, tE('engine.act.bench.measure'));
+        const left = h('span', { class: 'sim-left', 'aria-live': 'polite' });
+        const faceEl = h('div', { class: 'sim-face', 'aria-live': 'polite' });
+        const logEl = h('ol', { class: 'sim-log' }), logEmpty = h('p', { class: 'sim-log-empty' }, tE('engine.act.bench.logEmpty'));
+        const dxSel = sel('diagnosis', bn.diagnosis.label ? tt(bn.diagnosis.label) : tE('engine.act.bench.diagnosis'), [{ value: '', text: tE('engine.act.bench.choose') }, ...opts.map((o, i) => ({ value: String(i), text: tt(o.label) }))]);
+        const dxBtn = exMode ? null : h('button', { class: 'btn small', type: 'button', 'data-bench': 'commit', onclick: () => { if (dx != null && !done) { reveal(); saveSoon(); } } }, tE('engine.act.bench.commit'));
+        const dxOut = h('p', { class: 'sim-dx-out', 'aria-live': 'polite' });
+        const another = exMode ? null : h('button', { class: 'btn ghost small', type: 'button', 'data-bench': 'another', onclick: () => newDevice() }, '↻ ' + tE('engine.act.bench.another'));
+        const cur = () => bn.instruments.find(x => x.kind === inst.s.value) || bn.instruments[0];
+        function setInstrument() {
+          const x = cur(), two = x.kind === 'V' || x.kind === 'R', ids = x.points || bn.points.map(p => p.id);
+          const keep = (s, items, fallback) => { const v = s.value; s.replaceChildren(...items.map(o => h('option', { value: o.value }, o.text))); s.value = items.some(o => o.value === v) ? v : fallback; };
+          if (x.kind === 'I') keep(part.s, (x.parts || []).map((q, i) => ({ value: String(i), text: tt(q.label) })), '0');
+          else {
+            const g = ids.find(id => /^(gnd|0)$/.test(String(pt(id).at))) || ids[ids.length - 1];
+            keep(A.s, ptItems(ids), ids.find(id => id !== g) || ids[0]);
+            if (two) keep(Bk.s, ptItems(ids), g);
+          }
+          lab.get(A.s).textContent = two ? tE('engine.act.bench.red') : tE('engine.act.bench.probe');
+          A.row.hidden = x.kind === 'I'; Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
+        }
+        inst.s.addEventListener('change', setInstrument);
+        dxSel.s.addEventListener('change', () => {
+          if (done) return;
+          dx = dxSel.s.value === '' ? null : +dxSel.s.value;
+          if (dx != null) out('event', { name: 'diagnose', data: { option: dx } });
+          saveSoon();
+        });
+        const tval = (v, d) => { const g = typeof v === 'string' ? C(v) : null; return g ? ev(g, base()) : (v === undefined ? d : v); };
+        function probeOf(x) {
+          if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}) }, ev: { i: 'I', part: +part.s.value } }; }
+          const a = pt(A.s.value), b = Bk.s.value ? pt(Bk.s.value) : null;
+          if (x.kind === 'V' || x.kind === 'R') return { probe: { kind: x.kind, a: a.at, b: b ? b.at : 'gnd' }, ev: { i: x.kind, a: a.id, b: b?.id } };
+          const tw = { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
+          if (x.kind === 'scope') return { probe: { kind: 'scope', node: a.at, ref: 'gnd', ...tw }, ev: { i: 'scope', a: a.id } };
+          return { probe: { kind: 'logic', nodes: [a.at], ...(x.threshold !== undefined ? { threshold: tval(x.threshold) } : {}), ...tw }, ev: { i: 'logic', a: a.id }, node: a.at };
+        }
+        function paintLeft() {
+          left.textContent = budget ? tE('engine.act.bench.left', { left: Math.max(0, budget - count) }) : '';
+          btn.disabled = done || (budget && count >= budget);
+          for (const s of [inst.s, A.s, Bk.s, part.s, dxSel.s]) s.disabled = done;
+          if (dxBtn) dxBtn.disabled = done;
+        }
+        const fm = (v, unit) => fmtNum(v, { format: 'si', unit, digits: 3 }, locale);
+        function reading(r) {   // the reading in words and numbers (never the fault)
+          if (!r || r.error) return tE('engine.act.bench.failed');
+          if (r.kind === 'V') return fm(r.value, 'V');
+          if (r.kind === 'I') return fm(r.value, 'A');
+          if (r.kind === 'R') return r.value === 'OL' ? 'OL' : fm(r.value, 'Ω');   // i18n-ignore (the meter's own display)
+          if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, 'V'), mean: fm(r.stats.mean, 'V'), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
+          const st = Object.values(r.traces || {})[0]?.stats || {};
+          return tE('engine.act.bench.logicStats', { freq: st.freq > 0 ? fm(st.freq, 'Hz') : '—', duty: fmtNum(100 * (st.duty || 0), { format: 'fixed', digits: 0, unit: '%' }, locale) });
+        }
+        /** a reading as it is kept in the saved state: the numbers the log shows, not the traces */
+        function slim(r) {
+          if (!r || typeof r !== 'object') return r;
+          if (r.kind === 'scope') return { kind: 'scope', stats: r.stats };
+          if (r.kind === 'logic') return { kind: 'logic', traces: Object.fromEntries(Object.entries(r.traces || {}).map(([k, v]) => [k, { stats: v.stats }])) };
+          return r;
+        }
+        function where(e) {
+          if (e.i === 'I') return tt(bn.instruments.find(x => x.kind === 'I')?.parts?.[e.part]?.label);
+          const a = pt(e.a), b = e.b ? pt(e.b) : null;
+          return a ? tt(a.label) + (b ? ' → ' + tt(b.label) : '') : '';
+        }
+        function paintLog() {
+          logEl.replaceChildren(...log.map(e => h('li', {}, h('span', { class: 'sim-log-i' }, instName(e.i)), ' ' + where(e) + ': ', h('b', {}, e.r === undefined ? '…' : reading(e.r)))));
+          logEmpty.hidden = log.length > 0;
+        }
+        function showFace(e) {
+          const r = e.r; faceEl.replaceChildren();
+          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
+          const fig = h('figure', { class: 'sim-plot sim-scope' }); faceEl.append(fig);
+          const xl = tE('engine.act.bench.time') + ' (s)';
+          let p, data, yl;
+          if (r.kind === 'scope') {
+            yl = tE('engine.act.bench.voltage') + ' (V)';
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: 'V' } };
+            data = { xs: r.t, lines: [{ ys: r.v }], marks: [], xr: [r.t[0], r.t[r.t.length - 1]], yr: [null, null] };
+          } else {   // a logic trace: steps from the level at the start and the edges
+            const tr = Object.values(r.traces)[0] || { level0: 0, edges: [] }, xs = [r.t0], ys = [tr.level0];
+            for (const ed of tr.edges) { xs.push(ed.t, ed.t); ys.push(ys[ys.length - 1], ed.to); }
+            xs.push(r.t1); ys.push(ys[ys.length - 1]);
+            yl = tE('engine.act.bench.level');
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', digits: 1 } };
+            data = { xs, lines: [{ ys }], marks: [], xr: [r.t0, r.t1], yr: [-0.15, 1.15] };
+          }
+          const aria = instName(e.i) + ', ' + where(e) + ': ' + reading(r);
+          const holder = h('div', { class: 'sim-svg' }); fig.append(h('figcaption', {}, aria), holder);
+          const draw = () => { if (holder.isConnected) holder.replaceChildren(drawPlot(holder, p, data, { locale, aria, xLabel: xl, yLabel: yl })); };
+          requestAnimationFrame(draw); face = draw;
+        }
+        function measure() {
+          if (done || (budget && count >= budget) || !runner) return;
+          const x = cur(), m = probeOf(x), e = { ...m.ev };
+          count++; log.push(e); paintLog(); paintLeft();
+          out('event', { name: 'measure', data: { ...m.ev } });
+          runner.measure(prep(base()), m.probe, r => {
+            if (closed) return;
+            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
+            paintLog(); showFace(e); saveSoon();
+          });
+        }
+        /** after the diagnosis: lock the bench and say what the fault was (the only time the page learns it) */
+        function reveal() {
+          if (done) return; done = true;
+          const right = dx != null && opts[dx]?.fault === bn.faults[fault].id, truth = opts.find(o => o.fault === bn.faults[fault].id);
+          dxOut.className = 'sim-dx-out ' + (right ? 'ok' : 'bad');
+          dxOut.textContent = right ? tE('engine.act.bench.right', { fault: tt(opts[dx].label) }) : tE('engine.act.bench.wrong', { fault: truth ? tt(truth.label) : '—' });
+          paintLeft();
+        }
+        function newDevice() {
+          seed = crypto.getRandomValues(new Uint32Array(1))[0] >>> 0; pick();
+          log.length = 0; count = 0; dx = null; done = false; dxSel.s.value = ''; dxOut.textContent = ''; dxOut.className = 'sim-dx-out'; faceEl.replaceChildren();
+          runner?.close(); runner = newRunner(); out('event', { name: 'reset' });
+          paintLog(); paintLeft(); recompute(); saveSoon();
+        }
+        if (savedB) {   // an explorer's bench comes back: the same device (seed), its log, the diagnosis
+          for (const e of Array.isArray(savedB.log) ? savedB.log.slice(0, 200) : []) if (e && typeof e === 'object' && typeof e.i === 'string') log.push(e);
+          count = log.length;
+          if (Number.isInteger(savedB.dx) && savedB.dx >= 0 && savedB.dx < opts.length) { dx = savedB.dx; dxSel.s.value = String(dx); }
+        }
+        setInstrument(); paintLog(); paintLeft();
+        if (savedB && savedB.done && dx != null) reveal();
+        const ctl = h('div', { class: 'sim-bctl' }, inst.row, A.row, Bk.row, part.row, h('div', { class: 'sim-brow' }, btn, left));
+        const el = h('section', { class: 'sim-bench' },
+          h('div', { class: 'sim-binst' }, ctl, faceEl),
+          h('h5', { class: 'sim-bh' }, tE('engine.act.bench.log')), logEmpty, logEl,
+          h('div', { class: 'sim-dx' }, dxSel.row, h('div', { class: 'sim-brow' }, dxBtn, another), dxOut));
+        return {
+          el, reveal, redraw: () => face?.(),
+          applied: () => JSON.parse(JSON.stringify(bn.faults[fault].apply || [])),
+          /** the bench's values for the checks grader: never shown (the validators keep them out of readouts and marks) */
+          values: () => ({ diagnosis: dx == null ? -1 : dx, measurements: count, correct: dx != null && opts[dx]?.fault === bn.faults[fault].id }),
+          ready: () => dx != null,
+          state: () => exMode ? undefined : { seed, log: log.map(e => ({ ...e, r: slim(e.r) })), dx, done },
+        };
+      }
       function cleanOutputs(o) {
         const r = {};
         for (const d of declared) {
@@ -264,7 +447,7 @@
         const e = base(), my = ++rev;   // values() is null until the latest inputs are computed (Check never grades older results)
         if (!runner) { env = e; doneRev = my; render(); return; }
         busyNote.textContent = tE('engine.act.sim.computing');
-        runner.run(e, o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
+        runner.run(prep(e), o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
       }
       function render() {
         readouts.forEach((r, i) => { roEls[i].textContent = fmtNum(ev(r.f, env), r, locale); });
@@ -285,12 +468,12 @@
           P.holder.replaceChildren(drawPlot(figs[i], p, data, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }));
         });
       }
-      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => out('state', { version: init.stateVersion || 1, data: { values: { ...vals } } }), 250); }
+      function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { const bs = B?.state(); out('state', { version: init.stateVersion || 1, data: { values: { ...vals }, ...(bs ? { bench: bs } : {}), ...(host?.stateExtra?.() || {}) } }); }, 250); }
       function changed(p, commit) {
         recompute(); saveSoon();
         if (commit) out('event', { name: 'param', data: { id: p.id, v: vals[p.id] } });
       }
-      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); }); }) : null;
+      const ro2 = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (!closed && !paused) { plots.forEach((P, i) => P.last && P.holder.replaceChildren(drawPlot(figs[i], P.p, P.last, { locale, aria: P.aria, xLabel: P.xLabel, yLabel: P.yLabel }))); B?.redraw(); } }); }) : null;
       ro2?.observe(root);
       for (const p of params) paint(p);
       recompute();
@@ -303,10 +486,14 @@
         if (type === 'destroy') return port.close();
       };
       port.close = () => { if (closed) return; closed = true; clearTimeout(saveT); cancelAnimationFrame(raf); ro2?.disconnect(); runner?.close(); root.remove(); };
-      port.values = () => closed || doneRev !== rev ? null : { ...env };
+      // what the checks grader reads: the values once the latest inputs are computed (and a bench's own, once a diagnosis is chosen: before that Check waits)
+      port.values = () => closed || doneRev !== rev ? null : B ? (B.ready() ? { ...env, ...B.values() } : null) : { ...env };
+      port.reveal = () => { if (!closed) B?.reveal(); };   // after Check: the bench says what the fault was
+      port.saveSoon = saveSoon;
       later(() => out('ready', { protocols: [1] }));
       return port;
-    },
-  });
+  }
+  ACT.registerRuntime({ id: 'sim-spec@1', version: 1, autoHeight: true, mount: (box, ctx) => simView(box, ctx) });
+  ACT.simView = simView;   // the same view for runtimes that compute the outputs themselves (py-module@1)
   /* i18n-ignore-end */
 })();

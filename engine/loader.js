@@ -325,7 +325,9 @@
   /** Delete a subject that belongs to this account (imported / made with Claude / shared with you / from Explore / a curriculum step):
       this device, the cloud copy, its metadata and source files. Progress is kept (it returns if the pack is imported again). */
   async function deleteSubject(acc, s) {
-    const locs = Object.keys((await IDB.get('packs', acc + '|' + s.id).catch(() => null))?.translations || {});   // its translations go with it (docs/i18n.md §10)
+    const stored = await IDB.get('packs', acc + '|' + s.id).catch(() => null);
+    const locs = Object.keys(stored?.translations || {});   // its translations go with it (docs/i18n.md §10)
+    if (stored && window.NoemaSrcFiles?.removeActivityFiles) await NoemaSrcFiles.removeActivityFiles(acc, stored).catch(() => { });   // and its H5P activities' files
     await IDB.del('packs', acc + '|' + s.id).catch(() => { });
     for (const l of locs) await IDB.del('packs', trKey(acc, s.id, l)).catch(() => { });
     KV.del(KV.accountKey('packmeta:' + s.id, acc)); KV.del(KV.accountKey('subjoverride:' + s.id, acc));
@@ -907,6 +909,8 @@
       const b = await SF.readBundle(file);
       const s = await importPack(acc, b.pack);
       const r = await SF.attachPackaged(acc, b.pack, b.file);
+      const ra = await SF.attachActivityFiles(acc, b.pack, b.file);   // h5p@1: each activity's .h5p file beside the pack (docs/INTERACTIVE_H5P.md)
+      r.missing.push(...ra.missing);
       const miss = r.missing.length + r.bad.length;
       toastL('📥 ' + (r.attached.length ? tr('loader.import.doneWithFiles', { title: s.title, n: r.attached.length }) : tr('loader.import.done', { title: s.title })) + (miss ? ' · ⚠️ ' + tr('loader.import.filesMissing', { n: miss, files: [...r.missing, ...r.bad].join(', ') }) : ''), miss ? 6000 : 3500);
       return s;
@@ -931,12 +935,17 @@
   async function exportPackage(acc, pack) {
     if (!window.NoemaSrcFiles) { const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(pack)], { type: 'application/json' })), download: pack.subject.id + '.json' }); a.click(); return; }
     toastL('📦 ' + tr('loader.export.preparing'), 1500);
+    const live = pack, lib = (REG.subjects || []).find(x => x.id === pack.subject.id), base = lib?.path && /\/pack\.js$/.test(lib.path) ? lib.path.replace(/pack\.js$/, '') : null;   // h5p@1: the items' .h5p files come from what the app holds, or from beside the library pack
     // the pack as stored (the open subject's object is extended by the engine): IndexedDB copy, or the library file
     let clean = await IDB.get('packs', acc + '|' + pack.subject.id).catch(() => null);
     if (!clean) { const m = (REG.subjects || []).find(x => x.id === pack.subject.id); if (m?.path) clean = await fetch(m.path.replace(/pack\.js$/, 'pack.json')).then(r => r.ok ? r.json() : null).catch(() => null); }
     if (clean) pack = clean;
     pack = await inlineTranslations(acc, (REG.subjects || []).find(x => x.id === pack.subject.id), pack);   // the package stands alone
-    try { const n = await NoemaSrcFiles.downloadBundle(acc, pack); toastL(`⬇️ ${pack.subject.id}.noema.zip` + (n ? ' ' + tr('loader.export.withFiles', { n }) : ''), 3000); }   // i18n-ignore (a file name)
+    try {
+      const { files: n, missing } = await NoemaSrcFiles.downloadBundle(acc, pack, { live, base });
+      toastL(`⬇️ ${pack.subject.id}.noema.zip` + (n ? ' ' + tr('loader.export.withFiles', { n }) : ''), 3000);   // i18n-ignore (a file name)
+      if (missing.length) toastL('⚠️ ' + tr('loader.export.missingActivities', { n: missing.length, items: missing.join(', ') }), 8000);
+    }
     catch (e) { toastL('⚠️ ' + errMsg(e), 4000); }
   }
 
@@ -1032,7 +1041,7 @@
         const withFiles = el('input', { type: 'checkbox', checked: true });
         const filesRow = fx.length ? el('label', { class: 'nx-files' }, withFiles, ' 📎 ' + tr('loader.share.includeFiles', { n: fx.length, size: fmtMB(fx.reduce((a, m) => a + (m.size || 0), 0)) })) : null;
         const prog = el('div', { class: 'tiny' });
-        const files = async () => { if (!fx.length || !withFiles.checked) return []; prog.textContent = '⏳ ' + tr('loader.share.preparingFiles'); const fs = await NoemaSrcFiles.forSharing(acc, s.id); return fs; };
+        const files = async () => { const sources = fx.length > 0 && withFiles.checked, acts = NoemaSrcFiles.h5pItems(pack).length > 0; if (!sources && !acts) return []; prog.textContent = '⏳ ' + tr('loader.share.preparingFiles'); return NoemaSrcFiles.forSharing(acc, s.id, { pack, sources }); };   // h5p@1: an item's .h5p file is the activity itself: it always goes with it
         const onProgress = (k, n, name) => { prog.textContent = '⬆️ ' + tr('loader.share.uploading', { k: Math.min(n, Math.floor(k) + 1), n, name }); };
         const mine = await NoemaCloud.myPublished().catch(() => []);
         const pub = (mine || []).find(r => r.subject_id === s.id);
@@ -1264,6 +1273,7 @@
     const SF = window.NoemaSrcFiles; const sid = j.pack.subject.id; let n = 0, bad = [];
     if (j.bundleFiles && Object.keys(j.bundleFiles).length) {
       const r = await SF.attachPackaged(acc, j.pack, path => j.bundleFiles[path] || null); n += r.attached.length; bad = [...r.missing, ...r.bad];
+      const ra = await SF.attachActivityFiles(acc, j.pack, path => j.bundleFiles[path] || null).catch(() => ({ missing: [] })); bad.push(...ra.missing);   // h5p@1: the .h5p files beside the pack
     }
     if (j.sourceBlobs?.length) {
       const have = SF.index(acc, sid); const pk = new Set(SF.packaged(j.pack).map(x => x.id));
@@ -1776,6 +1786,7 @@
     Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, localizedSubject({ ...pack.subject, contentLocales: Object.keys(pack.translations || {}) }), subjOverride(acc.id, pack.subject.id));
     if (contentLoc) Object.assign(Noema.subject, { language: contentLoc, sourceLanguage: own });   // the content (and the tutor's replies) in the learner's language
     Noema.subjectMeta = meta;   // where it comes from (origin: library, private, shared, public…), for the subject's ⋮
+    try { window.NoemaSrcFiles?.wireActivities(acc.id, meta, pack); } catch (e) { console.warn('[activity files]', e); }   // h5p@1: each item reads its .h5p file from beside the pack (fetched early)
     Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
     window.COURSE = contentLoc ? translatedChapters(pack, contentLoc) : pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
     if (!background) document.title = `${Noema.subject.title} · ${CFG.appName}`;

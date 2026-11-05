@@ -74,6 +74,7 @@
   "loader.import.notPack": "Αυτό το αρχείο δεν είναι πακέτο μαθήματος του noema-lite.",
   "loader.import.jsonNoFiles": "{n, plural, one {το # αρχείο πηγής του δεν είναι} other {τα # αρχεία πηγών του δεν είναι}} σε αυτό το .json — εισήγαγε καλύτερα το πακέτο .noema.zip ή επισύναψέ τα στις 📚 Πηγές",
   "loader.export.preparing": "Ετοιμάζεται το πακέτο…",
+  "loader.export.missingActivities": "{n, plural, one {# διαδραστικό στοιχείο έμεινε} other {# διαδραστικά στοιχεία έμειναν}} έξω από το πακέτο: το αρχείο .h5p δεν είναι σε αυτή τη συσκευή ({items}). Ανοίξτε το μάθημα μία φορά με σύνδεση και εξαγάγετε ξανά.",
   "loader.export.withFiles": "(με {n, plural, one {# αρχείο πηγής} other {# αρχεία πηγών}})",
   "loader.info.chapterCounts": "{sections, plural, one {# ενότητα} other {# ενότητες}} · {exercises, plural, one {# άσκηση} other {# ασκήσεις}}",
   "loader.info.chapters": "Κεφάλαια",

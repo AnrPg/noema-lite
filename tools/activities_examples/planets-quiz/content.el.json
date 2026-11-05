@@ -1,0 +1,89 @@
+{
+ "answers": [
+  {
+   "correct": true,
+   "text": "<div>Δίας</div>\n",
+   "tipsAndFeedback": {
+    "tip": "",
+    "chosenFeedback": "",
+    "notChosenFeedback": ""
+   }
+  },
+  {
+   "correct": false,
+   "text": "<div>Άρης</div>\n",
+   "tipsAndFeedback": {
+    "tip": "",
+    "chosenFeedback": "",
+    "notChosenFeedback": ""
+   }
+  },
+  {
+   "correct": false,
+   "text": "<div>Αφροδίτη</div>\n",
+   "tipsAndFeedback": {
+    "tip": "",
+    "chosenFeedback": "",
+    "notChosenFeedback": ""
+   }
+  }
+ ],
+ "UI": {
+  "showSolutionButton": "Δείξε τη λύση",
+  "tryAgainButton": "Ξανά",
+  "checkAnswerButton": "Έλεγχος",
+  "tipsLabel": "Δείξε υπόδειξη",
+  "scoreBarLabel": "Πήρες :num από :total βαθμούς",
+  "tipAvailable": "Υπάρχει υπόδειξη",
+  "feedbackAvailable": "Υπάρχει σχόλιο",
+  "readFeedback": "Διάβασε το σχόλιο",
+  "wrongAnswer": "Λάθος απάντηση",
+  "correctAnswer": "Σωστή απάντηση",
+  "shouldCheck": "Έπρεπε να επιλεγεί",
+  "shouldNotCheck": "Δεν έπρεπε να επιλεγεί",
+  "noInput": "Απάντησε πρώτα και μετά δες τη λύση",
+  "submitAnswerButton": "Υποβολή",
+  "a11yCheck": "Έλεγξε τις απαντήσεις. Θα σημειωθούν ως σωστές, λάθος ή αναπάντητες.",
+  "a11yShowSolution": "Δείξε τη λύση. Η άσκηση θα σημειωθεί με τη σωστή της λύση.",
+  "a11yRetry": "Ξεκίνα την άσκηση από την αρχή. Όλες οι απαντήσεις σβήνονται."
+ },
+ "question": "<p>Ποιος πλανήτης είναι ο μεγαλύτερος στο Ηλιακό Σύστημα;</p>\n",
+ "behaviour": {
+  "enableRetry": true,
+  "enableSolutionsButton": true,
+  "singlePoint": true,
+  "randomAnswers": false,
+  "showSolutionsRequiresInput": true,
+  "type": "auto",
+  "confirmCheckDialog": false,
+  "confirmRetryDialog": false,
+  "autoCheck": false,
+  "passPercentage": 100,
+  "showScorePoints": true,
+  "enableCheckButton": true
+ },
+ "confirmCheck": {
+  "header": "Τέλος;",
+  "body": "Σίγουρα θέλεις να τελειώσεις;",
+  "cancelLabel": "Άκυρο",
+  "confirmLabel": "Τέλος"
+ },
+ "confirmRetry": {
+  "header": "Ξανά;",
+  "body": "Σίγουρα θέλεις να ξεκινήσεις από την αρχή;",
+  "cancelLabel": "Άκυρο",
+  "confirmLabel": "Ναι"
+ },
+ "overallFeedback": [
+  {
+   "from": 0,
+   "to": 99,
+   "feedback": "Όχι ακόμα."
+  },
+  {
+   "from": 100,
+   "to": 100,
+   "feedback": "Σωστά!"
+  }
+ ]
+}

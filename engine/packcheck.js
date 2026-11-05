@@ -370,12 +370,33 @@
   /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
   const ACT = {
     FORMAT: 'noema.activities/v1', ID_RE: /^[a-z0-9][a-z0-9-]{1,60}$/, KEY_RE: /^[a-z][a-zA-Z0-9_.-]{0,63}$/,
-    RUNTIMES: new Set(['html-app@1', 'sim-spec@1']), LATER: { 'py-module@1': 'P4', 'h5p@1': 'P4b' },
+    RUNTIMES: new Set(['html-app@1', 'sim-spec@1', 'py-module@1', 'h5p@1']), LATER: {},
+    H5P: 'h5p@1', SHA_RE: /^[0-9a-f]{64}$/, H5P_MAX: 100 * 1024 * 1024,   // h5p@1: the .h5p file travels beside the pack (docs/INTERACTIVE_H5P.md)
     CAPS: new Set(['state', 'events', 'resize', 'result', 'hints', 'announce']), GRADE_MODES: new Set(['reported', 'checks']),
-    CHECKS_RUNTIMES: new Set(['sim-spec@1']),   // runtimes whose values the app can see (the checks grader needs them)
+    CHECKS_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),   // runtimes whose values the app can see (the checks grader needs them)
+    SPEC_RUNTIMES: new Set(['sim-spec@1', 'py-module@1']),     // runtimes the app draws from a spec (py-module@1: its outputs come from Python's step())
+    // py-module@1 (docs/INTERACTIVE_PYTHON.md): Python with numpy, scipy and the allow-listed extras (tools/pywheels_allow.json) — the same lists in tools/activities.py
+    PY: 'py-module@1', PY_BASE: ['numpy', 'scipy'], PY_EXTRAS: ['quantiphy'], PY_MAX: 256 * 1024, PY_STEP: [100, 10000], PY_PACKAGES_MAX: 12,
+    PY_BANNED: [
+      [/^\s*(?:import\s+js\b|from\s+js\s+import\b|import\s+pyodide_js\b|from\s+pyodide_js\b)/m, 'the browser (js, pyodide_js): Python has no page and no network here; return values from step()'],
+      [/\bpyodide\.http\b|\bpyfetch\b|\bopen_url\b|^\s*(?:import|from)\s+(?:urllib|requests|http\.client|socket|ssl)\b/m, 'a network call: a Python activity has no network'],
+      [/^\s*(?:import|from)\s+micropip\b/m, 'micropip: list the package in "packages" instead (only the allow-listed ones)'],
+      [/(?:^|[^A-Za-z0-9_.])input\s*\(/m, 'input(): there is no console; the learner uses the controls of the spec'],
+    ],
+    PY_WARN: [
+      [/^\s*while\s+True\s*:/m, 'while True: each step() has a budget (stepMs, 3 s by default) and is stopped after it'],
+      [/\btime\.sleep\s*\(/, 'time.sleep(): a step blocks the learner while it sleeps; return at once'],
+    ],
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
-    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1']),   // P3 adds circuit-mna@1, in both twins
-    SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots']),
+    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1']),   // the same list in tools/activities.py
+    SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
+    // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
+    CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
+    MODEL_KEYS: ['netlist', 'bindings', 'transient', 'noise'], OUT_KEYS: ['id', 'kind', 'node', 'branch', 'time', 'probe', 'at', 'stat'], STATS: ['final', 'min', 'max', 'mean', 'pp', 'rms'],
+    WAVES: { pulse: ['v1', 'v2', 'delay', 'rise', 'fall', 'width', 'period'], sine: ['offset', 'amp', 'freq', 'phase', 'delay'], pwm: ['v', 'freq', 'duty', 'low', 'delay'] },
+    BENCH_KEYS: ['faults', 'points', 'instruments', 'diagnosis', 'budget'], INSTRUMENTS: ['V', 'I', 'R', 'scope', 'logic'],
+    INST_KEYS: ['kind', 'points', 'parts', 'tEnd', 'dt', 'tStart', 'threshold'], BENCH_ID_RE: /^[A-Za-z][A-Za-z0-9_-]{0,31}$/,
+    BENCH_LIM: { faults: 16, apply: 4, points: 24, instruments: 5, parts: 24, options: 12, budget: 100, bindings: 24, steps: 200000 },
     SPEC_LIM: { params: 24, consts: 24, derived: 48, outputs: 24, readouts: 24, plots: 6, series: 6, marks: 8, points: 2000, options: 12, checks: 16, bytes: 64 * 1024, unit: 16, digits: 8 },
     NAME_RE: /^[A-Za-z_][A-Za-z0-9_]{0,31}$/, PARAM_KINDS: ['slider', 'number', 'toggle', 'choice'], NUM_FORMATS: ['auto', 'si', 'fixed'],
     HTML_MAX: 512 * 1024, HTML_WARN: 256 * 1024, FALLBACK_MIN: 40, HINTS_MAX: 6,
@@ -421,6 +442,19 @@
     if (words.length >= 3) W.push(`visible text in the HTML (“${words.slice(0, 6).join(' ')}…”): put every word in the string tables and show it with noema.t(key)`);
     return { errors: E, warnings: W };
   }
+  /** lintPython(source, packages) → { errors, warnings }: what a py-module@1 activity may not contain (the same list as tools/activities.py lint_python) */
+  function lintPython(src, packages) {
+    const E = [], W = [];
+    if (typeof src !== 'string' || !src.trim()) return { errors: ['the Python file is empty'], warnings: W };
+    const n = utf8(src);
+    if (n > ACT.PY_MAX) E.push(`the Python file is ${Math.floor(n / 1024)} KB (at most ${ACT.PY_MAX / 1024} KB)`);
+    if (!/^def\s+step\s*\(/m.test(src)) E.push('the Python file defines no step(inputs, state) at the top level');
+    for (const [re, why] of ACT.PY_BANNED) { const m = src.match(re); if (m) E.push(`${why} — found “${m[0].trim().slice(0, 40)}”`); }
+    for (const [re, why] of ACT.PY_WARN) if (re.test(src)) W.push(why);
+    const decl = new Set(Array.isArray(packages) ? packages : []);
+    for (const name of [...ACT.PY_BASE, ...ACT.PY_EXTRAS]) if (!decl.has(name) && new RegExp('^\\s*(?:import|from)\\s+' + name + '\\b', 'm').test(src)) E.push(`the Python file imports ${name}: list it in "packages"`);
+    return { errors: E, warnings: W };
+  }
   /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through NoemaExpr (engine/src/35_simexpr.js, loaded beside this file) ---------- */
   const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
   const isNum = v => typeof v === 'number' && isFinite(v);
@@ -440,18 +474,204 @@
     const out = isObj(spec.consts) ? Object.keys(spec.consts) : [];
     for (const k of ['params', 'derived']) for (const x of list(spec[k])) if (isObj(x) && typeof x.id === 'string') out.push(x.id);
     for (const x of list(spec.outputs)) if (isObj(x) && typeof x.id === 'string' && x.kind === 'scalar') out.push(x.id);
+    if (isObj(spec.bench)) out.push(...ACT.BENCH_NAMES);   // a bench's values: for the checks of a sim exercise only (never shown)
     return out;
   }
-  /** checkSimSpec(spec, tables?, engines?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
-      (default ACT.ENGINES; the app passes the engines it has registered). The same rules as tools/activities.py check_spec. */
-  function checkSimSpec(spec, tables, engines) {
+  /* ---------- circuit-mna@1: the model, the outputs, the bench — the SAME rules as tools/activities.py check_circuit / check_bench ---------- */
+  const CK = () => root.NoemaCircuit || null;   // engine/src/36_engine_circuit.js, loaded beside this file (its check and checkFaults)
+  const isGnd = s => s === 'gnd' || s === '0';
+  /** → {nl, els: Map id → element, nodes: Set of node and test-point names} of a spec's netlist without errors, or null */
+  function circuitOf(spec) {
+    const nl = isObj(spec?.model) ? spec.model.netlist : null;
+    if (!CK() || !isObj(nl) || CK().check(nl).some(p => p.level === 'error')) return null;
+    return { nl, els: new Map(nl.elements.map(e => [e.id, e])), nodes: new Set(nl.nodes.map(x => typeof x === 'string' ? x : x.name)) };
+  }
+  /** a measuring point: a node, a test-point label, gnd, or a pin "@R1.0" */
+  function endpointOk(c, x) {
+    if (typeof x !== 'string') return false;
+    if (x[0] === '@') { const m = /^@(.*)\.(\d+)$/.exec(x), e = m ? c.els.get(m[1]) : null; return !!e && +m[2] < e.n.length; }
+    return c.nodes.has(x) || isGnd(x);
+  }
+  function probeOk(c, p) {
+    if (!isObj(p)) return false;
+    if (p.kind === 'V' || p.kind === 'R') return endpointOk(c, p.a) && (p.b === undefined || endpointOk(c, p.b));
+    if (p.kind === 'I') { const e = typeof p.element === 'string' ? c.els.get(p.element) : null; return !!e && (p.pin === undefined || (Number.isInteger(p.pin) && p.pin >= 0 && p.pin < e.n.length)); }
+    return false;
+  }
+  /** a number (> 0 when pos) or an expression of names → the number, or null (an expression, or a problem pushed to E) */
+  function numOrExpr(v, names, where, E, pos) {
+    if (typeof v === 'string') { const m = exprProblem(v, names, where); if (m) E.push(m); return null; }
+    if (!(isNum(v) && (!pos || v > 0))) { E.push(`${where} must be a number${pos ? ' > 0' : ''} or an expression`); return null; }
+    return v;
+  }
+  const stepsOver = (tEnd, dt) => isNum(tEnd) && isNum(dt) && Math.ceil(tEnd / dt - 1e-9) > ACT.BENCH_LIM.steps;
+  const unknownKeys = (o, allowed, w, E) => { for (const k of Object.keys(o).filter(k => !allowed.includes(k)).sort()) E.push(`${w}: unknown field ${qv(k)}`); };
+  function checkCircuit(spec, names, E) {
+    const m = spec.model, L = ACT.BENCH_LIM;
+    if (!isObj(m)) { E.push(`spec.model: ${ACT.CIRCUIT} needs a model {netlist, bindings?, transient?, noise?}`); return; }
+    unknownKeys(m, ACT.MODEL_KEYS, 'spec.model', E);
+    if (!CK()) { E.push('spec.model: the circuit checker (NoemaCircuit, engine/src/36_engine_circuit.js) is not loaded here'); return; }
+    if (!isObj(m.netlist)) { E.push('spec.model.netlist must be a netlist {format: "noema.circuit/v1", nodes, elements}'); return; }
+    const probs = CK().check(m.netlist).filter(p => p.level === 'error');
+    for (const p of probs) E.push(`spec.model.netlist${p.path ? '.' + p.path : ''}: ${p.msg}`);
+    if (probs.length) return;
+    const c = circuitOf(spec), bs = m.bindings;
+    if (bs != null && !(Array.isArray(bs) && bs.length <= L.bindings)) E.push(`spec.model.bindings must be a list of at most ${L.bindings} {element, prop?, expr}`);
+    list(bs).slice(0, L.bindings).forEach((b, i) => {
+      const w = `spec.model.bindings[${i}]`;
+      if (!isObj(b)) { E.push(`${w} must be an object {element, prop?, expr}`); return; }
+      unknownKeys(b, ['element', 'prop', 'expr'], w, E);
+      const e = typeof b.element === 'string' ? c.els.get(b.element) : null;
+      if (!e) E.push(`${w}.element is not a part of the netlist`);
+      else {
+        const prop = b.prop === undefined ? 'value' : b.prop, wave = isObj(e.value) ? Object.keys(e.value)[0] : null;
+        const okp = typeof prop === 'string' && (['R', 'C', 'L'].includes(e.type) ? prop === 'value'
+          : e.type === 'SW' ? prop === 'on'
+            : ['V', 'I'].includes(e.type) ? (prop === 'value' ? (wave === null || wave === 'dc') : (Object.prototype.hasOwnProperty.call(ACT.WAVES, wave) && ACT.WAVES[wave].some(f => wave + '.' + f === prop))) : false);
+        if (!okp) E.push(`${w}.prop cannot be set on this part (value of R, C, L and a DC source; on of a switch; pulse.v2, sine.freq, pwm.duty … of a source with that waveform)`);
+      }
+      const mm = exprProblem(b.expr, names, w + '.expr'); if (mm) E.push(mm);
+    });
+    const tr = m.transient;
+    if (tr != null) {
+      if (!isObj(tr)) E.push('spec.model.transient must be an object {tEnd, dt?}');
+      else {
+        unknownKeys(tr, ['tEnd', 'dt'], 'spec.model.transient', E);
+        let te = null; if (tr.tEnd === undefined) E.push('spec.model.transient.tEnd is required'); else te = numOrExpr(tr.tEnd, names, 'spec.model.transient.tEnd', E, true);
+        const dt = tr.dt === undefined ? null : numOrExpr(tr.dt, names, 'spec.model.transient.dt', E, true);
+        if (stepsOver(te, dt)) E.push(`spec.model.transient: tEnd / dt is more than ${L.steps} steps`);
+      }
+    }
+    const nz = m.noise;
+    if (nz != null && !(isObj(nz) && Object.keys(nz).every(k => k === 'rel' || k === 'abs') && ['rel', 'abs'].every(k => nz[k] === undefined || (isNum(nz[k]) && nz[k] >= 0 && nz[k] <= 1)))) E.push("spec.model.noise is {rel?, abs?}: numbers from 0 to 1 (the meter's relative and absolute error)");
+    list(spec.outputs).forEach((o, i) => {
+      const w = `spec.outputs[${i}]`;
+      if (!(isObj(o) && (o.kind === 'scalar' || o.kind === 'series'))) return;   // (reported with the outputs)
+      unknownKeys(o, ACT.OUT_KEYS, w, E);
+      const src = ['node', 'branch', 'time', 'probe'].filter(k => k in o);
+      if (src.length !== 1) { E.push(`${w} must name what it reads: one of node, branch, time, probe`); return; }
+      const s = src[0];
+      if (s === 'time' && !(o.time === true && o.kind === 'series')) E.push(`${w}.time is true on a series output (the time axis of the transient)`);
+      if (s === 'node' && !(typeof o.node === 'string' && (c.nodes.has(o.node) || isGnd(o.node)))) E.push(`${w}.node is not a node of the netlist`);
+      if (s === 'branch' && !(typeof o.branch === 'string' && c.els.has(o.branch))) E.push(`${w}.branch is not a part of the netlist`);
+      if (s === 'probe' && !(o.kind === 'scalar' && probeOk(c, o.probe))) E.push(`${w}.probe must be a reading {kind: V | I | R, a, b? | element, pin?} on a scalar output`);
+      const at = 'at' in o, st = 'stat' in o;
+      if ((at || st) && !(o.kind === 'scalar' && (s === 'node' || s === 'branch'))) E.push(`${w}: at and stat belong to a scalar output of a node or a branch`);
+      if (at && st) E.push(`${w}: at or stat, not both`);
+      if (at) numOrExpr(o.at, names, w + '.at', E, false);
+      if (st && !ACT.STATS.includes(o.stat)) E.push(`${w}.stat is one of ${ACT.STATS.join(', ')}`);
+      if ((o.kind === 'series' || at || st) && !isObj(m.transient)) E.push(`${w} needs model.transient {tEnd, dt?}`);
+    });
+  }
+  function checkBench(spec, names, seen, E, key) {
+    const b = spec.bench, L = ACT.BENCH_LIM, c = circuitOf(spec);
+    if (!isObj(b)) { E.push('spec.bench must be an object {faults, points, instruments, diagnosis, budget?}'); return; }
+    unknownKeys(b, ACT.BENCH_KEYS, 'spec.bench', E);
+    for (const n of ACT.BENCH_NAMES) if (seen.has(n)) E.push(`spec: the name ${n} belongs to the bench (its values: ${ACT.BENCH_NAMES.join(', ')})`);
+    const ids = (arr, w, what) => {
+      const out = [];
+      list(arr).forEach((x, i) => {
+        if (!isObj(x)) return;
+        if (!(typeof x.id === 'string' && ACT.BENCH_ID_RE.test(x.id))) E.push(`${w}[${i}].id must be a name (a letter, then letters, digits, _ or -; at most 32)`);
+        else if (out.includes(x.id)) E.push(`${w}[${i}].id: the ${what} ${x.id} is listed twice`);
+        else out.push(x.id);
+      });
+      return out;
+    };
+    const fs = b.faults;
+    if (!(Array.isArray(fs) && fs.length >= 1 && fs.length <= L.faults)) E.push(`spec.bench.faults must be a list of 1–${L.faults} faults {id, apply}`);
+    const fids = ids(fs, 'spec.bench.faults', 'fault');
+    list(fs).forEach((f, i) => {
+      const w = `spec.bench.faults[${i}]`;
+      if (!isObj(f)) { E.push(`${w} must be an object {id, apply}`); return; }
+      unknownKeys(f, ['id', 'apply'], w, E);
+      if (!(Array.isArray(f.apply) && f.apply.length <= L.apply)) { E.push(`${w}.apply must be a list of at most ${L.apply} changes to the circuit ([] = a healthy device)`); return; }
+      if (c) for (const p of CK().checkFaults(c.nl, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
+    });
+    const ps = b.points;
+    if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.points)) E.push(`spec.bench.points must be a list of 1–${L.points} probe points {id, at, label}`);
+    const pids = ids(ps, 'spec.bench.points', 'point');
+    list(ps).forEach((p, i) => {
+      const w = `spec.bench.points[${i}]`;
+      if (!isObj(p)) { E.push(`${w} must be an object {id, at, label}`); return; }
+      unknownKeys(p, ['id', 'at', 'label'], w, E);
+      if (c && !endpointOk(c, p.at)) E.push(`${w}.at must be a node, a test point, gnd or a pin such as @R1.0 of the netlist`);
+      key(p.label, w + '.label', true);
+    });
+    const is = b.instruments, kinds = [];
+    if (!(Array.isArray(is) && is.length >= 1 && is.length <= L.instruments)) E.push(`spec.bench.instruments must be a list of 1–${L.instruments} instruments {kind, …}`);
+    list(is).forEach((x, i) => {
+      const w = `spec.bench.instruments[${i}]`;
+      if (!(isObj(x) && ACT.INSTRUMENTS.includes(x.kind))) { E.push(`${w}.kind is one of ${ACT.INSTRUMENTS.join(', ')}`); return; }
+      if (kinds.includes(x.kind)) E.push(`${w}: the instrument ${x.kind} is listed twice`);
+      kinds.push(x.kind);
+      unknownKeys(x, ACT.INST_KEYS, w, E);
+      const scope = x.kind === 'scope' || x.kind === 'logic';
+      if (x.kind === 'I') {
+        if ('points' in x) E.push(`${w}: the ammeter reads parts (parts), not points`);
+        const pa = x.parts;
+        if (!(Array.isArray(pa) && pa.length >= 1 && pa.length <= L.parts)) E.push(`${w}.parts must be a list of 1–${L.parts} parts {element, label, pin?}`);
+        else pa.forEach((q, j) => {
+          const wq = `${w}.parts[${j}]`;
+          if (!isObj(q)) { E.push(`${wq} must be an object {element, label, pin?}`); return; }
+          unknownKeys(q, ['element', 'label', 'pin'], wq, E);
+          if (c && !probeOk(c, { kind: 'I', element: q.element, pin: q.pin })) E.push(`${wq}: element must be a part of the netlist (and pin one of its pins)`);
+          key(q.label, wq + '.label', true);
+        });
+      } else {
+        if ('parts' in x) E.push(`${w}: only the ammeter (I) reads parts`);
+        const pts = x.points;
+        if (pts !== undefined && !(Array.isArray(pts) && pts.length >= 1 && pts.every(q => typeof q === 'string' && pids.includes(q)))) E.push(`${w}.points must be ids of spec.bench.points`);
+        if ((x.kind === 'V' || x.kind === 'R') && (Array.isArray(pts) ? pts.length : pids.length) < 2) E.push(`${w}: a meter needs two points to put its leads on`);
+      }
+      for (const k of ['tEnd', 'dt', 'tStart', 'threshold']) if (k in x && !(scope && (k !== 'threshold' || x.kind === 'logic'))) E.push(`${w}.${k} belongs to ${k === 'threshold' ? 'the logic analyser' : 'the oscilloscope and the logic analyser'}`);
+      if (scope) {
+        let te = null; if (x.tEnd === undefined) E.push(`${w}.tEnd is required (how long the trace is, in s)`); else te = numOrExpr(x.tEnd, names, w + '.tEnd', E, true);
+        const dt = x.dt === undefined ? null : numOrExpr(x.dt, names, w + '.dt', E, true);
+        if ('tStart' in x) numOrExpr(x.tStart, names, w + '.tStart', E, false);
+        if ('threshold' in x && x.kind === 'logic') numOrExpr(x.threshold, names, w + '.threshold', E, false);
+        if (stepsOver(te, dt)) E.push(`${w}: tEnd / dt is more than ${L.steps} steps`);
+      }
+    });
+    const d = b.diagnosis;
+    if (!isObj(d)) E.push('spec.bench.diagnosis must be an object {options: [{label, fault?}]}');
+    else {
+      unknownKeys(d, ['label', 'options'], 'spec.bench.diagnosis', E);
+      key(d.label, 'spec.bench.diagnosis.label');
+      const os = d.options, named = [];
+      if (!(Array.isArray(os) && os.length >= 2 && os.length <= L.options)) E.push(`spec.bench.diagnosis.options must be a list of 2–${L.options} options {label, fault?}`);
+      else {
+        os.forEach((o, i) => {
+          const w = `spec.bench.diagnosis.options[${i}]`;
+          if (!isObj(o)) { E.push(`${w} must be an object {label, fault?}`); return; }
+          unknownKeys(o, ['label', 'fault'], w, E);
+          key(o.label, w + '.label', true);
+          if (o.fault !== undefined) {
+            if (!(typeof o.fault === 'string' && fids.includes(o.fault))) E.push(`${w}.fault must be the id of one of spec.bench.faults`);
+            else if (named.includes(o.fault)) E.push(`${w}.fault: two options name the fault ${o.fault}`);
+            else named.push(o.fault);
+          }
+        });
+        for (const f of fids) if (!named.includes(f)) E.push(`spec.bench.diagnosis: no option names the fault ${f} (the learner could not diagnose it)`);
+      }
+    }
+    if (b.budget !== undefined && !(Number.isInteger(b.budget) && b.budget >= 1 && b.budget <= L.budget)) E.push(`spec.bench.budget is a whole number 1–${L.budget} (the measurements allowed)`);
+  }
+  /** checkSimSpec(spec, tables?, engines?, opts?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
+      (default ACT.ENGINES; the app passes the engines it has registered). opts.python: the spec of a py-module@1 activity (its outputs
+      come from Python's step(): no engine, no model, no bench, at least one output). The same rules as tools/activities.py check_spec. */
+  function checkSimSpec(spec, tables, engines, opts) {
+    const py = !!(opts && opts.python);
     const E = [], L = ACT.SPEC_LIM;
     if (!isObj(spec)) return ['spec: a JSON object is required (activities/<id>/spec.json)'];
     if (utf8(JSON.stringify(spec)) > L.bytes) E.push(`spec: at most ${L.bytes / 1024} KB`);
     if (spec.format !== ACT.SPEC_FORMAT) E.push(`spec: format must be "${ACT.SPEC_FORMAT}"`);
     for (const k of Object.keys(spec).filter(k => !ACT.SPEC_KEYS.has(k)).sort()) E.push(`spec: unknown field ${qv(k)}`);
-    const eng = 'engine' in spec ? spec.engine : ACT.DEFAULT_ENGINE, known = engines ? new Set(engines) : ACT.ENGINES;
-    if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
+    const eng = py ? ACT.PY : 'engine' in spec ? spec.engine : ACT.DEFAULT_ENGINE, known = engines ? new Set(engines) : ACT.ENGINES;
+    if (py) {
+      if ('engine' in spec) E.push('spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out');
+      if ('model' in spec) E.push('spec.model: a py-module@1 activity has no engine model (its Python code is the model)');
+    } else if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
     if (eng === ACT.DEFAULT_ENGINE && 'model' in spec) E.push('spec: model configures another engine; formula@1 has none');
     if (spec.model != null && !isObj(spec.model)) E.push('spec: model must be an object');
     const keys = new Set(), seen = new Set();
@@ -509,7 +729,9 @@
       expr(d.expr, [...names], w + '.expr');
       if (name(d.id, w + '.id')) names.push(d.id);
     });
+    const inNames = [...names];   // what an engine's inputs may use: consts, params, derived
     const os = spec.outputs, series = [];
+    if (py && !(Array.isArray(os) && os.length)) E.push('spec.outputs: list what step() returns, at least one {id, kind: scalar | series}');
     if (os != null) {
       if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
       else if (!(Array.isArray(os) && os.length <= L.outputs)) E.push(`spec.outputs must be a list of at most ${L.outputs} {id, kind}`);
@@ -572,6 +794,11 @@
         key(m.label, wm + '.label'); expr(m.expr, names, wm + '.expr');
       });
     });
+    if (eng === ACT.CIRCUIT) checkCircuit(spec, inNames, E);
+    if (spec.bench != null) {
+      if (!ACT.BENCH_ENGINES.has(eng)) E.push(`spec.bench needs an engine that can take measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);
+      else checkBench(spec, inNames, seen, E, key);
+    }
     if (tables && Object.keys(tables).length) for (const k of [...keys].sort()) {
       const miss = Object.keys(tables).filter(l => isObj(tables[l]) && !Object.prototype.hasOwnProperty.call(tables[l], k)).sort();
       if (miss.length) E.push(`spec: the string ${k} is missing in strings.${miss.join(', strings.')}`);
@@ -598,14 +825,14 @@
     const has = Object.prototype.hasOwnProperty.call(items, e.activity);
     if (!has) E.push(`activity ${qv(e.activity)} is not in pack.activities`);
     const a = has && isObj(items[e.activity]) ? items[e.activity] : null, rt = a ? a.runtime : null;
-    const spec = a && rt === 'sim-spec@1' && isObj(a.spec) ? a.spec : null;
+    const spec = a && ACT.SPEC_RUNTIMES.has(rt) && isObj(a.spec) ? a.spec : null;
     const g = e.grade;
     if (!isObj(g) || !ACT.GRADE_MODES.has(g.mode)) E.push('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)');
     else {
       if (g.pass != null && !(isNum(g.pass) && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
       if (g.mode === 'reported' && rt === 'sim-spec@1') E.push('a sim-spec@1 activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}');
       if (g.mode === 'checks') {
-        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1); ${rt} reports its own result: use "reported"`);
+        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1); ${rt} reports its own result: use "reported"`);
         const cs = g.checks;
         if (!(Array.isArray(cs) && cs.length >= 1 && cs.length <= ACT.SPEC_LIM.checks)) E.push(`grade.checks must be a list of 1–${ACT.SPEC_LIM.checks} checks {expr, label?, weight?}`);
         else {
@@ -631,8 +858,11 @@
         if (t.params != null && (typeof t.params !== 'object' || Array.isArray(t.params))) E.push('task.params must be an object');
         else if (spec && t.params) {
           const consts = isObj(spec.consts) ? spec.consts : {};
+          const fids = isObj(spec.bench) ? list(spec.bench.faults).filter(isObj).map(f => f.id) : null;
           for (const [k, v] of Object.entries(t.params)) {
-            if (!Object.prototype.hasOwnProperty.call(consts, k)) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`);
+            if (k === 'fault' && fids) {   // a bench: the fault of this task (one id), or the ones the seed draws from (a list)
+              if (!(typeof v === 'string' ? fids.includes(v) : Array.isArray(v) && v.length >= 1 && v.every(x => typeof x === 'string' && fids.includes(x)))) E.push('task.params.fault must be the id of a fault of the bench, or a list of them (the seed draws one)');
+            } else if (!Object.prototype.hasOwnProperty.call(consts, k)) { if (rt !== ACT.PY) E.push(`task.params.${k}: not a constant of the spec (a sim-spec@1 task sets only the spec's consts)`); }   // py-module@1: Python's init(task, seed) reads the others
             else if (!isNum(v)) E.push(`task.params.${k} must be a number`);
           }
         }
@@ -645,6 +875,64 @@
   /** checkActivities(pack, locales?) → { errors, warnings }: pack.activities, the blocks and sim exercises that use them, pack.requires.
       The sha256 of a bundle is checked here when Node's crypto is at hand (the connector), else by the app when it mounts it. */
   const nodeSha = (() => { try { const c = globalThis.process?.getBuiltinModule?.('crypto'); return c ? s => c.createHash('sha256').update(s, 'utf8').digest('hex') : null; } catch (e) { return null; } })();
+  /** the registry fields of an h5p@1 item (the package itself: checkActivityPackages) — the SAME rules as tools/activities.py check_h5p_item */
+  function checkH5PItem(a, aid, locs, own) {
+    const E = [], entry = a.entry;
+    if (entry != null && !(typeof entry === 'string' && entry.startsWith('activities/') && entry.endsWith('.h5p') && !entry.split('/').includes('..'))) E.push(`entry must be the .h5p file beside the pack (activities/${aid}/item.h5p)`);
+    if (!(typeof a.sha256 === 'string' && ACT.SHA_RE.test(a.sha256))) E.push('sha256 (of the .h5p file) is required');
+    if (!(Number.isInteger(a.bytes) && a.bytes > 0 && a.bytes <= ACT.H5P_MAX)) E.push(`bytes (the size of the .h5p file, at most ${ACT.H5P_MAX / 1048576} MB) is required`);
+    if ('html' in a) E.push('an h5p@1 item has no html (its .h5p file travels beside the pack)');
+    if (a.h5p != null && typeof a.h5p !== 'string') E.push('h5p (inline) must be the .h5p file in base64');
+    const by = a.h5pByLocale;
+    if (by != null) {
+      if (!isObj(by)) E.push('h5pByLocale must be {locale: {content} | {h5p, sha256}}');
+      else for (const [loc, v] of Object.entries(by)) {
+        if (!locs.includes(loc)) { E.push(`h5pByLocale.${loc}: the pack is not read in ${loc} (${locs.join(', ')})`); continue; }
+        if (!isObj(v) || !(isObj(v.content) || (typeof v.h5p === 'string' && typeof v.sha256 === 'string' && ACT.SHA_RE.test(v.sha256)))) E.push(`h5pByLocale.${loc} must be {content} (its content.json) or {h5p, sha256} (another package in base64)`);
+        else if (v.l10n != null && !isObj(v.l10n)) E.push(`h5pByLocale.${loc}.l10n must be an object (H5P's own strings)`);
+      }
+    }
+    for (const loc of locs) if (loc !== own && !(isObj(by) && Object.prototype.hasOwnProperty.call(by, loc))) E.push(`h5pByLocale.${loc} is missing: the item's words in ${loc} (activities/${aid}/content.${loc}.json)`);
+    return E;
+  }
+  /** checkActivityPackages(pack, bytesOf?) → Promise<{ errors, warnings }>: the .h5p files of the pack's h5p@1 items — sha256 and bytes
+      as the registry says, the package rules (NoemaH5P.check, engine/src/38_activity_h5p.js, loaded beside this file), each h5pByLocale
+      translation with the same rules. bytesOf(item) → bytes (Uint8Array) | null, or a promise of them; an inline "h5p" (base64) is used
+      first. The SAME messages as tools/activities.py check_h5p_packages (tests/activities.js). The connector runs it on the files
+      uploaded beside a pack; the app runs NoemaH5P's checks itself when an item mounts. */
+  async function checkActivityPackages(p, bytesOf) {
+    const E = [], W = [], H = root.NoemaH5P;
+    const items = (p?.activities?.items || []).filter(a => isObj(a) && a.runtime === ACT.H5P && typeof a.id === 'string');
+    if (!items.length) return { errors: E, warnings: W };
+    if (!H || !root.crypto?.subtle) return { errors: E, warnings: ['h5p@1: the package checker (NoemaH5P, engine/src/38_activity_h5p.js) is not loaded here'] };
+    const b64 = s => { try { const t = atob(String(s).replace(/^data:[^,]*;base64,/, '').replace(/\s+/g, '')), u = new Uint8Array(t.length); for (let i = 0; i < t.length; i++) u[i] = t.charCodeAt(i); return u; } catch (e) { return new Uint8Array(0); } };
+    const hex = async u => Array.from(new Uint8Array(await root.crypto.subtle.digest('SHA-256', u)), x => x.toString(16).padStart(2, '0')).join('');
+    const unzip = async u => { try { return await H.unzip(u); } catch (e) { return null; } };
+    for (const a of items) {
+      const w = `activity ${a.id}`;
+      let b = typeof a.h5p === 'string' ? b64(a.h5p) : (bytesOf ? await bytesOf(a) : null);
+      if (b == null) { E.push(`${w}: the .h5p file ${a.entry || ''} is missing`); continue; }
+      if (!(b instanceof Uint8Array)) b = new Uint8Array(b);
+      if (a.sha256 !== await hex(b)) E.push(`${w}: sha256 does not match the .h5p file`);
+      if (a.bytes !== b.length) E.push(`${w}: bytes does not match the .h5p file`);
+      const files = await unzip(b);
+      if (!files) { E.push(`${w}: not a .h5p (zip) file`); continue; }
+      const r = H.check(files); E.push(...r.errors.map(m => `${w}: ${m}`)); W.push(...r.warnings.map(m => `${w}: ${m}`));
+      const by = isObj(a.h5pByLocale) ? a.h5pByLocale : {};
+      for (const loc of Object.keys(by).sort()) {
+        const v = by[loc]; if (!isObj(v)) continue;
+        let f2;
+        if (typeof v.h5p === 'string') {
+          const b2 = b64(v.h5p); f2 = await unzip(b2);
+          if (!f2) { E.push(`${w}: h5pByLocale.${loc}: not a .h5p (zip) file`); continue; }
+          if (v.sha256 !== await hex(b2)) E.push(`${w}: h5pByLocale.${loc}: sha256 does not match the .h5p file`);
+        } else if (isObj(v.content)) f2 = { ...files, 'content/content.json': new TextEncoder().encode(JSON.stringify(v.content)) };
+        else continue;
+        E.push(...H.check(f2).errors.map(m => `${w}: h5pByLocale.${loc}: ${m}`));
+      }
+    }
+    return { errors: E, warnings: W };
+  }
   function checkActivities(p, translations) {
     const E = [], W = [], reg = p?.activities, media = p?.media || {}, own = p?.subject?.language || 'en';
     const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
@@ -656,7 +944,7 @@
         if (typeof aid !== 'string' || !ACT.ID_RE.test(aid)) { E.push(`activity ${qv(aid)}: id must be lower-case letters, digits and - (2–61)`); continue; }
         if (Object.prototype.hasOwnProperty.call(items, aid)) { E.push(`activity ${aid}: duplicate id`); continue; }
         items[aid] = a; const w = `activity ${aid}`, rt = a.runtime;
-        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1 or sim-spec@1 for now`);
+        if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1, sim-spec@1, py-module@1 or h5p@1 for now`);
         else if (!ACT.RUNTIMES.has(rt)) E.push(`${w}: unknown runtime ${qv(rt)} (one of ${[...ACT.RUNTIMES].sort().join(', ')})`);
         if (!(Number.isInteger(a.stateVersion) && a.stateVersion >= 1)) E.push(`${w}: stateVersion must be a whole number >= 1`);
         const caps = a.capabilities ?? [];
@@ -675,9 +963,28 @@
         } else if (rt === 'sim-spec@1') {
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
           else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null).map(m => `${w}: ${m}`));
-        }
+        } else if (rt === ACT.PY) {
+          const pk = a.packages == null ? [] : a.packages, allowed = [...ACT.PY_BASE, ...ACT.PY_EXTRAS];
+          if (!(Array.isArray(pk) && pk.length <= ACT.PY_PACKAGES_MAX && pk.every(x => typeof x === 'string'))) E.push(`${w}: packages must be a list of names (${allowed.join(', ')})`);
+          else {
+            for (const x of pk) if (!allowed.includes(x)) E.push(`${w}: package ${qv(x)} is not available (numpy, scipy and the allow-listed extras: ${ACT.PY_EXTRAS.join(', ')})`);
+            if (new Set(pk).size !== pk.length) E.push(`${w}: packages lists a name twice`);
+            if (pk.some(x => ACT.PY_EXTRAS.includes(x)) && a.requiresNetwork !== true) E.push(`${w}: an extra package (${pk.filter(x => ACT.PY_EXTRAS.includes(x)).join(', ')}) is downloaded the first time: set "requiresNetwork": true`);
+          }
+          if (a.requiresNetwork != null && typeof a.requiresNetwork !== 'boolean') E.push(`${w}: requiresNetwork must be true or false`);
+          if (a.stepMs != null && !(Number.isInteger(a.stepMs) && a.stepMs >= ACT.PY_STEP[0] && a.stepMs <= ACT.PY_STEP[1])) E.push(`${w}: stepMs is a whole number ${ACT.PY_STEP[0]}–${ACT.PY_STEP[1]} (the budget of one step(), in ms)`);
+          if (typeof a.python !== 'string') E.push(`${w}: the Python file (activities/${aid}/main.py) is missing`);
+          else {
+            const l = lintPython(a.python, Array.isArray(pk) ? pk : []); E.push(...l.errors.map(m => `${w}: ${m}`)); W.push(...l.warnings.map(m => `${w}: ${m}`));
+            if (a.sha256 != null && (!/^[0-9a-f]{64}$/.test(String(a.sha256)) || (nodeSha && nodeSha(a.python) !== a.sha256))) E.push(`${w}: sha256 does not match the Python file`);
+            if (a.bytes != null && a.bytes !== utf8(a.python)) E.push(`${w}: bytes does not match the Python file`);
+          }
+          if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json: the controls, readouts and plots the app draws) is missing`);
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { python: true }).map(m => `${w}: ${m}`));
+        } else if (rt === ACT.H5P) E.push(...checkH5PItem(a, aid, locs, own).map(m => `${w}: ${m}`));
         const st = a.strings;
-        if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
+        if (rt === ACT.H5P && (st == null || (isObj(st) && !Object.keys(st).length))) { /* an H5P item keeps its words in content.json (h5pByLocale for the other languages) */ }
+        else if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length) E.push(`${w}: strings {locale: {key: text}} are required (an activity shows no words of its own)`);
         else {
           let keys = null;
           for (const [loc, tab] of Object.entries(st)) {
@@ -856,5 +1163,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkSimSpec, specNames, needRequires, lintHtml, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

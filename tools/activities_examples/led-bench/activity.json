@@ -1,0 +1,14 @@
+{
+ "id": "led-bench",
+ "runtime": "sim-spec@1",
+ "entry": "activities/led-bench/spec.json",
+ "stateVersion": 1,
+ "capabilities": ["state", "events"],
+ "fallback": {
+  "media": "led-bench-still",
+  "text": "A 5 V supply, a switch, a 330 Ω resistor and a red LED in series; the LED stays dark. Work from the supply towards the LED with a voltmeter to GND: 5 V at TP1 and TP2 clears the supply and the switch. Then the junction TP3: about 1.7 V but only 1 mA through the resistor (instead of about 10 mA) means it is far too high; 0 V means the resistor is open; 5 V means no current flows through the LED branch: then compare the LED's own legs — a broken track leaves both legs at 0 V, an open LED keeps its anode leg at 5 V, a reversed LED has its cathode leg at 5 V."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

@@ -1,7 +1,7 @@
 # ADR 001 · Interactive activities in packs (mini-apps, minigames, simulations)
 
 * **Status:** accepted (2026-11-04). The owner approved the four plan changes in §2; P1 (core + `html-app@1`) and P2 (`sim-spec@1`, the
-  expression language, the `checks` grader, `registerEngine`) are implemented (§8 "As built"). Where this record and the owner's
+  expression language, the `checks` grader, `registerEngine`) are implemented (§8 "As built"), P3 (`circuit-mna@1`, §9) and P4 (`py-module@1`, behind its flag, §10). Where this record and the owner's
   decisions doc differ, the doc wins (items 6 and 7 are applied below: D7, D8).
 * **Date:** 2026-11-04 · **Requested by:** ANR · **Brief:** the "Handoff: Interactive Activities for noema-lite" message (thread "Add interactive activities to packs").
 * **Scope of this ADR:** the design for all phases P1–P5 and the results of the four P0 spikes. No feature code ships with it; the spike
@@ -179,7 +179,9 @@ same sandboxed frame and CSP as `html-app@1` (never loaded from h5p.org). H5P's 
 `result {score, passed}`; its saved user state maps to `state`. Validators allow-list the content types and refuse outside links and
 scripts outside the libraries; every item keeps a fallback; its own texts need a version per pack language. Because an item with its
 libraries often exceeds 512 KB, `.h5p` files travel beside the pack like the source files (the `noema_finish_upload` list), sha256-checked.
-P4b starts with a spike: the player in the opaque sandbox, offline, in Chromium, Firefox and WebKit.
+P4b starts with a spike: the player in the opaque sandbox, offline, in Chromium, Firefox and WebKit. **Status: implemented** (§10
+"As built — P4b"; docs/INTERACTIVE_H5P.md). Licence (the owner, 2026-11-04): ship it, with the H5P core's readable GPL-3.0 source
+beside the player and its notice; on by default.
 
 **D12 · The brief's §14 extension points are built (the owner, 2026-11-04 17:35; phase P6, after P1–P4b are done and verified).**
 `wasm-module@1` (precompiled WASM in a worker) and `external-embed@1` (allow-listed third-party frames with licence/credit metadata, opt-in,
@@ -208,7 +210,7 @@ step with its check in `tools/pipelines/`), and the toolkit scripts `activity_ne
   * **Anti-corruption layer:** `engine/src/33_activity_protocol.js` is the only code that reads messages from an activity: JSON shape per
     `type` (a small schema checker generated from the JSON Schema files, since the engine has no build step for Ajv), size / rate limits,
     strikes, never `innerHTML`.
-  * **Feature flags:** `NOEMA_CONFIG.activities = { 'html-app@1': true, 'sim-spec@1': true, 'py-module@1': false }` for staged rollout.
+  * **Feature flags:** `NOEMA_CONFIG.activities = { 'html-app@1': true, 'sim-spec@1': true, 'py-module@1': false }` for staged rollout (as built: every runtime on by default, py-module@1 since batch 1, §10).
 * **Runtimes:** `engine/activities/html_app.js` (Tier A), `engine/activities/sim_spec.js` + `engine/activities/sim_worker.js` and engines in
   `engine/activities/engines/` (Tier B; `registerEngine()`), `engine/activities/py_runner.js` (Tier C).
 * **Schemas (schema-first, JSON Schema 2020-12)** in `tools/schemas/`: `noema.activities.v1.schema.json`, `noema.activity-protocol.v1.schema.json`,
@@ -280,3 +282,110 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   `srcdoc` frame nested in another one in the full Chromium on a `file://` page (sandboxed frames get their own process); the app
   test runs the full Chromium with `--disable-features=IsolateSandboxedIframes` (the loop guard, not the process model, is what
   stops runaway code, as in Firefox and WebKit).
+
+## 9. As built — P3 (`circuit-mna@1` and the fault-finding bench, 2026-11-04)
+
+* **The engine in sim-spec.** `engine/src/36_engine_circuit.js` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
+  instruments, seeded noise) is registered by `engine/src/36_engine_circuit_sim.js` as `circuit-mna@1` with `{bench: true, check,
+  prepare, create, workerSource}`. `workerSource` is the engine's own source (`NoemaCircuit.source()`, the module's
+  `Function.toString`) plus the adapter's: one copy of the code, the same in the page and in the worker. `prepare` evaluates the
+  spec's expressions (bindings, transient times, `at`) with the app's NoemaExpr on the main thread, so the worker gets numbers only
+  and needs no expression language. The model is `{netlist, bindings, transient, noise}`; outputs are node/branch series, DC or
+  transient scalars (`at`, `stat`) and probe readings (docs/INTERACTIVE_CIRCUIT.md §1).
+* **A bench is a minimal extension of the spec** (`spec.bench`: faults, points, instruments, budget, diagnosis) rendered by the
+  sim-spec runtime itself (`makeBench` in 35_activity_sim.js), for engines that declare `bench: true`; the engine adds
+  `measure(inputs, probe)` next to `run`. The runner queues runs and measurements: the latest run wins, measurements are first in,
+  first out, and every result still passes the P2 gate (`values()` is null while the latest inputs are not computed). The bench's
+  values `diagnosis`, `measurements`, `correct` join the checks' names only (not readouts or marks, never declarable), and
+  `values()` stays null until a diagnosis is chosen, so Check waits.
+* **The hidden fault.** It is picked in the runtime's closure (`task.params.fault`: an id or a list, else all faults; drawn by the
+  seed) and reaches the engine only as the change to the circuit (`opts.faults`). No label, log entry, event, saved state or value
+  names it before the diagnosis; `R.sim.reveal()` (Check) and "Check my diagnosis" call `port.reveal()`, the only place that words
+  it. The comparison (`correct`) is made in the runtime. The spec in the pack lists the faults — a learner with the developer tools
+  can read them, as they can read any exercise's answer; nothing a learner reads in the UI reveals it (tests/activities_app.js
+  checks the page's HTML and text before the diagnosis, and the saved state).
+* **New fault kind `reverse`** (a part soldered the other way round: two pins swap), needed by the LED bench; `checkFaults` lists
+  what `create` would throw, and `tools/circuit.py` is its Python twin (and of `check` and `num`), so `tools/activities.py` and
+  `engine/packcheck.js` check a circuit spec with the same messages (`tests/activities.js` compares them on 39 circuit specs and on
+  netlist and fault corpora). `NoemaCircuit` is now loaded beside packcheck.js wherever NoemaExpr is (the shell, the site, the
+  one-file bundle, the connector), so a circuit pack is checked before any subject is open.
+* **Reference activities** `rc-transient` (RC charging from a pulse source, the "63 % at 1 ms" exercise) and `led-bench` (5 V, a
+  switch, 330 Ω, a red LED; faults LED reversed / open, resistor open / ×10, an open track); `activity_new.py --from` starts from
+  either; the harness has `measure` / `diagnose` steps and `readings` / `log` expectations.
+* **Found on the way:** the harness's host page replaced `{name}` placeholders with a regex written inside a template literal, which
+  lost its backslashes (no host string with a placeholder was ever filled); with four activities in one section the two live slots
+  are taken by the first ones in view, so the app test presses Start on a parked block (as a learner would).
+
+## 10. As built — P4 (`py-module@1`, Python, 2026-11-04)
+
+* **The binding: a spec drawn by the app, numbers from Python.** A py-module@1 item carries `python` (its `main.py`, inline with
+  `sha256` and `bytes`), `packages` (⊆ numpy, scipy and the allow-listed extras of `tools/pywheels_allow.json`), `requiresNetwork`
+  (required `true` with an extra), `stepMs` (100–10 000) and a `spec` in the sim-spec@1 format without `engine`, `model` or `bench` and
+  with at least one `output`. The app mounts the sim-spec view of 35_activity_sim.js (`ACT.simView`, the P2 runtime turned into a
+  function with an optional host: its engine id, its spec check, its runner, extra state, a decoration) with a runner that calls
+  Python's `step(inputs, state)` one at a time, the latest inputs winning. So the learner gets the app's own controls, readouts and
+  plots (theme, 360 px, keyboard, screen reader) and **the checks grader works on Python's outputs unchanged** (the P2 rev gate keeps
+  Check on the latest results); `reported` through `noema.result` also works. One hidden runner frame per mounted activity (the D8
+  live limit applies). A pack-authored Python UI (an html-app talking to Python) was not built: no case needed it, and it would bring
+  back everything sim-spec@1 makes automatic.
+* **The validators** (`engine/packcheck.js` `lintPython`, `checkSimSpec(..., {python: true})`; `tools/activities.py` the twin, the
+  same messages — tests/activities.js compares them on 33 items): a top-level `def step(` is required, no network, `js`/`pyodide_js`,
+  `micropip` or `input()`, every imported package declared, ≤ 256 KB; `while True` and `time.sleep` warn. `make_pack.py` puts main.py
+  inline and adds `runtime:py-module@1` to `pack.requires`; `unpack.py` writes main.py and spec.json back byte for byte.
+* **The flag (ADR §4 "Feature flags").** `NOEMA_CONFIG.activities['py-module@1']` was false at first for the staged rollout; it is
+  **true by default** since batch 1 (P2–P4b together), once tests/activities_py.js, tests/activities_app.js and the harness passed in
+  Chromium, Firefox and WebKit and the deploy carries the Python files (the owner asked for Python with offline support).
+  `false` in config.js switches it off: the item shows its fallback ("cannot run in this version") and the Settings line is hidden; on,
+  `ACT.enabled()` also needs `NoemaPy.available()` (an http(s) secure origin with Cache Storage, a Worker, WebAssembly, not
+  `window.NOEMA_BUNDLE`), otherwise the fallback says Python works only on the website.
+* **The learner's side.** One quiet line above the controls: the first-use size from the manifest (`NoemaPy.need`), the
+  requiresNetwork note, loading progress, a "Download … and start" button on Save-Data or cellular. Failures map to the core's
+  fallback with a reason (`failText`: offline → "not on this device yet, and there is no connection" + Restart; timeout → slow +
+  Restart). Settings: a section in the backup view (its header has a line icon, `accSection({ line: 'download' }, …)`, no emoji) (`accView('backup')`, so the classic Backup tab and the shell's Me › Data and
+  sync), one line with a pill, the size on the device and the Prepare button with a progress bar; the per-part detail and whether
+  `persist()` was granted are in its ⓘ. All words in the 15 UI catalogs.
+* **Deploy.** `build_site` copies `engine/pyodide-sw.js` and writes the Python headers into the real `_headers`
+  (`Service-Worker-Allowed: /vendor/`, immutable versioned files, a no-cache manifest, `application/wasm`); `netlify.toml` runs
+  `tools/fetch_pyodide.py` after the site build with the downloads in Netlify's build cache, and a failed fetch only prints a warning
+  (the deploy goes out; Python activities show their fallback there). `docs/activities-dev/pyodide.md` and its headers file are folded
+  into `docs/INTERACTIVE_PYTHON.md`, which the connector's 'interactive' guide and the skill's references now include.
+* **Reference activity** `py-filter` (numpy: a moving average of N samples or a first-order filter at 8 kHz; the exercise asks for a
+  filter that removes a 1 kHz tone while 300 Hz loses < 3 dB: N = 8 passes, N = 16 removes the tone but loses 6 dB). The harness runs
+  py-module@1 over a local http server when `NOEMA_PYODIDE_SITE` (or `dist/site`) has the files, and skips them otherwise (exit 2 when
+  nothing else was checked).
+
+## 11. As built — P4b (`h5p@1`, 2026-11-04)
+
+* **The runtime** is the spike's (`engine/src/38_activity_h5p.js`, `window.NoemaH5P`: unzip, check, load, mount; the vendored player
+  `engine/vendor/h5p/3.8.2/`), unchanged in its security model: the item frame is opaque, offline, scripts by hash, inside the
+  navigation-blocking wrapper; xAPI → `result` / `event` / `state` (docs/INTERACTIVE_H5P.md §3). It registers itself whenever it is
+  in the engine (on by default; `NOEMA_CONFIG.activities['h5p@1'] = false` turns it off).
+* **One rule set, two languages.** `tools/activities.py` and `engine/packcheck.js` accept `h5p@1` with the same messages
+  (`tests/activities.js` compares them): `entry` = `activities/<id>/item.h5p`, `sha256` + `bytes` (≤ 100 MB) + `fallback` required,
+  no `html`, `strings` optional, `h5pByLocale` keys checked against the pack's languages and one required per translation. The
+  package rules run on the file through `tools/h5p_check.py` (`check_h5p_packages`) and `NoemaH5P.check` (`checkActivityPackages`,
+  async: the connector and the app load `38_activity_h5p.js` beside packcheck.js; in Node it loads with `window = globalThis`), against
+  one allow-list (`tools/h5p_allow.json`, the engine's copy checked equal). Parity is checked on 16 packages (the fixtures and hostile
+  variants, a wrong sha256 / size, a missing file, translations).
+* **The file travels beside the pack**, never inline in the registry: the `.noema.zip` entry `activities/<id>/item.h5p` (stored, byte
+  for byte; `make_pack.py`, the app's Export and the job bundles), the account path `<uid>/packs/<subject>/<entry>` (the connector's
+  `noema_finish_upload` lists the missing files with curl commands and checks size, sha256 and the package rules before it accepts
+  the pack; the app's upload puts it at the same path), IndexedDB `noema-files` on the device (key `act|<account>|<subject>|<sha256>`),
+  and beside `pack.js` on the website (`build.py site`). When a pack opens, `NoemaSrcFiles.wireActivities` gives each item a
+  non-enumerable loader `act.h5p` (never stored, synced or exported) and reads the file early (device → account → URL), verified by
+  sha256. The host page reads it; the frame never fetches. Import, job results and deleting a subject handle the files too.
+* **Languages** are the item's own `content.json` translated (`activities/<id>/content.<locale>.json`, inline in `h5pByLocale`;
+  optional `l10n.<locale>.json`); another whole package per language stays possible (`{h5p, sha256}`).
+* **The one-file bundle** inlines the player and every h5p@1 file up to `NOEMA_H5P_INLINE_MAX` (2 MB) as base64 (a non-enumerable
+  `h5p`); a bigger one gets `null` and shows its fallback.
+* **Toolkit:** `activity_new.py --runtime h5p@1 [--from FILE.h5p]` (reference activity `planets-quiz`, from the CC0 fixture, in
+  English, Greek and Russian), `activity_lint.py` runs the package rules, `activity_test.py` / `activity_preview.py` play the item
+  through the harness in every language (the player and runtime ship in the skill zip with `h5p_check.py` and `h5p_allow.json`).
+* **Licence:** the H5P core (h5p/h5p-php-library, Joubel / H5P Group) is GPL-3.0. `frame.bundle.js`, the tested build, is kept as
+  the code that runs; its readable source (the unminified core files and jQuery of h5p-standalone v3.8.2, `src/frame.ts` and
+  `webpack.common.js`) is vendored beside it in `engine/vendor/h5p/3.8.2/source/` with the GPL-3.0 text, each file pinned by sha256 in
+  `tools/fetch_h5p.py`; `LICENSE-NOTICE.txt` says who, what, where the source is and that the core runs only in its own sandboxed
+  frame. jQuery and h5p-standalone keep their MIT notices; the content-type libraries come inside each package with their own.
+* **Not done:** a pack shared by link does not carry its `.h5p` files (the receiver sees the fallbacks); the `fetch`/XHR shim for
+  library assets asked for by URL (SingleChoiceSet's sounds); QuestionSet, InteractiveVideo, BranchingScenario and
+  CoursePresentation are allowed but not yet tested.
