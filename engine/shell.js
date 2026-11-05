@@ -930,7 +930,7 @@ window.NoemaShell = (() => {
   function fitRow(...kids) {
     const r = h('div', { class: 'ns-fitrow' }, ...kids); let w = -1;
     const fit = () => { if (!r.isConnected || r.clientWidth === w) return; w = r.clientWidth; r.classList.remove('stack'); if (r.scrollWidth > r.clientWidth + 1) r.classList.add('stack'); };
-    if (window.ResizeObserver) new ResizeObserver(fit).observe(r); requestAnimationFrame(fit);
+    if (window.ResizeObserver) new ResizeObserver(() => requestAnimationFrame(fit)).observe(r); requestAnimationFrame(fit);   // (next frame: a class change inside the callback would loop the observer)
     return r;
   }
   /** A short label, its explanation in a quiet bubble on hover or focus (kept inside the screen) */

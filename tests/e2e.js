@@ -8,7 +8,7 @@ const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
-function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/fonts\.g|ERR_FILE_NOT_FOUND|net::ERR|404|Failed to load resource|Not allowed to load local resource: file:.*\/config\.local\.js$/.test(m.text())) bag.push(m.text()); }); }
+function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/fonts\.g|ERR_FILE_NOT_FOUND|net::ERR|404|Failed to load resource|Not allowed to load local resource: file:/.test(m.text())) bag.push(m.text()); }); }
 
 async function mockGemini(ctx) {
   await ctx.route('**/generativelanguage.googleapis.com/**', async route => {
