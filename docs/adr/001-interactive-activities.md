@@ -516,3 +516,7 @@ request for each subject; Γ: a library of general engines), **Γ is the canonic
 - **Additive only**: no existing spec, message, engine or tool changes; the validators keep every old message word for word.
 - **External code** is allowed for any engine (also the P3–P6 ones) when it is robust and free (MIT, BSD, Apache-2.0, ISC, public
   domain): vendored and pinned under `engine/vendor/`, with its licence, runnable in the Worker, no network.
+- **Engines in mini-apps** (ANR, 2026-11-05): an `html-app@1` item may list engines of the library (`"engines": ["graph@1"]`) and call
+  them with `noema.engine(id).run(spec, inputs)`. The frame's policy is unchanged (no Worker, no network): the HOST checks each
+  request and runs the model in the engine's own Worker (the sim runner, 5 s, ended on unmount), only for declared library engines
+  (never `formula@1` or a plugin with hidden faults), and returns only the named outputs, ≤ 512 KB (`docs/INTERACTIVE.md` §8.1).

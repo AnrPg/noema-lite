@@ -75,6 +75,7 @@ pid-tune, lora-link or sensor-node from the other references of `tools/activitie
     "stateVersion": 1,                       // raise it when the shape of the saved state changes (§6)
     "capabilities": ["state", "events", "resize", "result", "announce"],   // + "hints"
     "height": 360,                           // optional default height in px (a block can set its own)
+    "engines": ["graph@1"],                  // html-app@1 only, optional: the engines of the library the mini-app uses (§8.1)
     "fallback": {                            // REQUIRED: what the learner sees when the activity cannot run
       "media": "alias-lab-still",            //   a still picture of the pack (needs no exercises of its own)
       "text": "A 7 Hz sine sampled 10 times a second: …"   // >= 40 characters: what it shows and teaches
@@ -141,6 +142,8 @@ each translation). Numbers through `noema.fmt.number(n)`. Visible text in the HT
 - The loop guard: every `while`, `do`, `for` and `for … of` gets a time check; one turn of the event loop that runs longer
   than 1.5 s stops the activity (the app offers Restart). Animate with `requestAnimationFrame`, never a busy loop.
 - A watchdog pings every 2 s; three missed answers stop the activity. A frame that never says hello stops after 15 s.
+- Engines of the library (§8.1) run in the HOST's Worker, never in the frame: only those the registry entry lists, ≤ 5 s a run,
+  one run at a time per engine, ≤ 30 requests a second, outputs ≤ 512 KB.
 - Messages: at most 64 KB, each one checked; five bad messages stop the activity. A frame that navigates away is stopped.
 - At most 2 activities run at once (1 on a phone); one that leaves the screen pauses, and the oldest is parked (Start).
 - An activity that cannot run (unknown activity, runtime off or missing, bundle changed, error) shows its fallback picture
@@ -180,7 +183,57 @@ from that frame's window with that nonce and hands over a `MessagePort`; every l
 `{p: 'noema.activity', v: 1, type, payload, id?, re?}` over the port. App → activity: `init`, `theme`, `locale`, `ping`,
 `pause`, `resume`, `destroy`, `hint` (answer to `hint:request`). Activity → app: `ready`, `pong`, `resize {h}`,
 `state {version, data}`, `event {name, data}`, `result {score, passed, detail}`, `hint:request`, `a11y:announce {text}`,
-`error {code, message}`. A message of a newer version stops the activity with "needs a newer version of the app".
+`error {code, message}`, and `engine:check` / `engine:run` (§8.1). A message of a newer version stops the activity with "needs a newer version of the app".
+
+### 8.1 Engines of the library in a mini-app
+
+A mini-app (a game, a puzzle, a custom picture) can compute with the **engines of the library** instead of re-implementing the
+science: Dijkstra on any graph (`graph@1`), a virtual patient (`clinic@1`), a date in every calendar (`timeline@1`), a tuning
+(`music@1`)… It lists them in its registry entry, `"engines": ["graph@1"]` (1–8 ids of the library: `anatomy@1`, `clinic@1`,
+`craft@1`, `genetics@1`, `geom@1`, `graph@1`, `map@1`, `med@1`, `music@1`, `ode@1`, `prob@1`, `seq@1`, `text@1`, `timeline@1`), and
+then, after `noema.ready`:
+
+| member | what it does |
+|---|---|
+| `noema.engines()` | the ids the mini-app may use here (those it lists that this app runs) |
+| `noema.engine(id)` | a handle `{ id, check(spec), run(spec, inputs, {seed}) }` (always returned; its calls reject when the engine is not usable) |
+| `.check(spec)` | a promise of the engine's own problems with the model, `["model.graph.nodes: the graph has no nodes", …]` (empty: fine) |
+| `.run(spec, inputs, {seed})` | a promise of `{ outputs }`: the values the spec's `outputs` name — numbers, arrays (≤ 2000), scenes, sounds |
+
+`spec` is the engine's part of a sim-spec@1 spec: `{ "model": {…}, "outputs": [{"id", "kind", "of", …}] }`, exactly as in the
+engine's chapter (`docs/library/<name>.md`); anything else in it is ignored. Expressions in the model may use the names of
+`inputs` (`{name: number | true/false}`, ≤ 64). `seed` (a whole number) defaults to the activity's seed (`noema.seed`), so the same
+task draws the same randomness.
+
+```js
+const graph = noema.engine('graph@1');
+const r = await graph.run({ model: { graph: { nodes: [{id: 'a'}, {id: 'b'}, {id: 'c'}], edges: [{u: 'a', v: 'b', w: 4}, {u: 'b', v: 'c', w: 1}, {u: 'a', v: 'c', w: 7}] },
+                                     run: { alg: 'dijkstra', source: 'a', target: 'c' } },
+                            outputs: [{ id: 'best', kind: 'scalar', of: 'result' }, { id: 'path', kind: 'series', of: 'path' }] }, {});
+// r.outputs = { best: 5, path: [0, 1, 2] }
+```
+
+A refused or failed call rejects with an `Error` whose `code` says why (and `errors`, a list, for `spec`): `undeclared` (the entry
+does not list the engine), `unavailable` (this app cannot run it here), `spec` (not `{model, outputs}`, not plain data, or the model
+fails the engine's checks), `inputs`, `superseded` (a newer run replaced this one while it waited), `timeout` (over 5 s), `failed`,
+`too-big` (outputs over 512 KB), `rate` (over 30 requests a second). Never a crash: show your own message (from your strings).
+
+**How it runs.** The frame gets no Worker and no network (its policy is unchanged, §7): the app — the HOST — checks every request,
+runs the model in the engine's own Worker (the same runner as sim-spec@1: the same code as on a sim-spec page, the 5 s limit, the
+Worker ended on a runaway) and sends back only the outputs the spec names. One Worker per mini-app and engine, made on the first
+run and reused (a different model goes to the same Worker); one run at a time and one waiting (the latest wins); after three
+timeouts the engine is off until the mini-app restarts; every Worker ends when the mini-app is unmounted. Only the engines of the
+library: they are pure, bounded and deterministic, hold no hidden state of the learner and never see the app's data — never
+`formula@1` (it computes nothing a mini-app cannot) nor a plugin (`circuit-mna@1`, the P6 engines and their benches with hidden faults).
+
+**Declared, checked, required.** The validators (`tools/activities.py`, `engine/packcheck.js`, the same messages) check that
+`engines` is a list of library ids and that every `noema.engine('<id>')` in the bundle is listed; `make_pack.py` adds
+`engine:<id>` to `pack.requires`, so an app without that engine reloads to a newer build, and a mini-app that lists an engine this
+app cannot run shows its fallback. `activity_test.py` runs it with the real engines (a step `{"waitFor": "<selector>"}` waits for
+the engine's answer). The reference is `tools/activities_examples/cheapest-route/` (a route game on `graph@1`).
+
+**Protocol.** Activity → app: `engine:check {engine, spec}` and `engine:run {engine, spec, inputs?, seed?}`, each with an `id`;
+app → activity: `engine:result {ok: true, errors} | {ok: true, outputs} | {ok: false, code, message?, errors?}` with `re`.
 
 ## 9. Accessibility and phones
 

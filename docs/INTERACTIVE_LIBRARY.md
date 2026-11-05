@@ -131,3 +131,24 @@ app's admins (`noema_admins`). RLS: everyone inserts their own; reads their own 
 engine of the library can be **extended** (additively, same id); build per §1; then `noema_engine_request_update` with `status
 available`, `engine_id` and `fixed_in` (the PR). `declined` and `duplicate` always carry an `answer` saying why or which engine.
 The requester sees the status, the engine and the note on `#/engines`.
+
+## 4. Using engines from a mini-app
+
+A mini-app (`html-app@1`: a game, a puzzle, a custom picture) uses the engines of the library as a toolset instead of re-implementing
+the science (decision 2026-11-05, ANR): it lists them in its registry entry, `"engines": ["graph@1"]`, and calls
+`await noema.engine('graph@1').run({model, outputs}, inputs, {seed})` → `{outputs}` (`docs/INTERACTIVE.md` §8.1 has the API, the
+error codes and the protocol). The model and the outputs are written exactly as in a sim-spec@1 spec (the engine's chapter), so
+everything in `docs/library/<name>.md` holds; the outputs come back as data (numbers, arrays, scenes, sounds) for the mini-app to show
+in its own way.
+
+| | where | what |
+|---|---|---|
+| the API | `engine/src/34_activity_html.js` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
+| the host | `34_activity_html.js` `engineBridge` | declared ∩ `NoemaEngineCatalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
+| the Worker | `35_activity_sim.js` `ACT.engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
+| the rules | `tools/activities.py check_app_engines` = `engine/packcheck.js checkAppEngines`; `need_requires` / `needRequires` add `engine:<id>` | |
+| the tests | `tests/activities.js` (rules JS = Python, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |
+| the reference | `tools/activities_examples/cheapest-route/` | a route game on `graph@1`: the learner picks roads, Dijkstra finds the cheapest route; keyboard, 320 px, five languages |
+
+Only library engines: pure, bounded, deterministic, with no hidden state (no fault bench, no learner data); the frame keeps its
+policy (no Worker, no network) — the Worker lives in the app. A new library engine needs nothing more to be usable from mini-apps.

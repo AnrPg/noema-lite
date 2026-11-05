@@ -7,7 +7,7 @@ answers with numbers: a converted date's fields, durations, the probability of e
 Easter, regnal years, tree-ring cross-dating. Every limit of validity is a **code**, never a silently wrong date.
 
 The Python twin is `tools/lib_timeline.py`: it checks and does not compute, and it embeds the same JSON tables. The tests are
-`node tests/lib_timeline.js` (84 assertions: published reference values, comparisons with ICU on thousands of days, the codes, the
+`node tests/lib_timeline.js` (85 assertions: published reference values, comparisons with ICU on thousands of days, the codes, the
 adapter, the Worker, speed) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/timeline.json`, 26
 specs). The reference activity is `tools/activities_examples/calendar-synchronism`. The research behind this chapter is in the
 project's `engine-library/research/arts.md`.
@@ -101,10 +101,10 @@ that cannot be computed: NaN).
 | civil + 13 regions | the reform dates and skipped days | Britain 2→14 Sep 1752 (355-day year), Russia 31 Jan → 14 Feb 1918, Sweden 30 Feb 1712 |
 | Hebrew | molad, the four dehiyyot | R&D ch. 8; ICU on thousands of days; Rosh Hashanah 5785–5787, Passover 5786 |
 | Islamic (arithmetic, I–IV) | 30-year cycle | R&D ch. 7; ICU islamic-civil |
-| Umm al-Qura | month table 1300–1600 AH (ICU 78) | ICU islamic-umalqura |
+| Umm al-Qura | month table 1300–1600 AH (ICU 78) | ICU islamic-umalqura; spot-checked 2026-11 (1 Muḥarram 1446 = 7 Jul 2024, 1 Ramaḍān 1445 / 1446 / 1447 = 11 Mar 2024 / 1 Mar 2025 / 18 Feb 2026, 1 Shawwāl 1447 = 20 Mar 2026) against R. H. van Gent's Umm al-Qura pages (Utrecht) and the Saudi announcements |
 | Solar Hijri (Persian) | Borkowski's algorithm for the astronomical (vernal-equinox) rule | Borkowski 1996; ICU persian; 1404 AP |
 | Coptic, Ethiopic | 13 months; Ethiopic also Amete Alem | R&D ch. 4; ICU |
-| Bahá'í (Badí') | Naw-Rúz from the March equinox at Tehran sunset, table 172–221 BE | Meeus ch. 27; the Bahá'í World Centre dates 2024–2031 |
+| Bahá'í (Badí') | Naw-Rúz from the March equinox at Tehran sunset, table 172–221 BE | the Bahá'í World Centre table *Badí' dates 172 to 221 BE* (2014, HM Nautical Almanac Office data), every year checked 2026-11 (216 BE corrected to 20 March 2059); Meeus ch. 27 |
 | French Republican | the years I–XIV as observed (the autumn equinox at Paris), Romme's rule after | R&D ch. 17 |
 | Indian national (Śaka) | 1 Caitra = 22 (21) March | ICU indian |
 | old Hindu solar (Ārya-siddhānta) | mean sidereal year | R&D ch. 10; flagged `approx` |

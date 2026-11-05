@@ -109,7 +109,7 @@
   function rdToC(ep, rd) { const y = fl((4 * (rd - ep) + 1463) / 1461), m = fl((rd - cToRD(ep, y, 1, 1)) / 30) + 1; return { y, m, d: rd + 1 - cToRD(ep, y, m, 1) }; }
 
   /* ---------- Bahá'í (Badí'): to 171 BE Naw-Rúz on 21 March; 172–221 BE (2015–2064) from the table; R&D ch. 16 ---------- */
-  const BAHAI_T = '10011001100110001000100010001000100010001000100000';  // 1 = Naw-Rúz on 21 March, 0 = on 20 March (172 BE … 221 BE)
+  const BAHAI_T = '10011001100110001000100010001000100010001000000000';  // 1 = Naw-Rúz on 21 March, 0 = on 20 March (172 BE … 221 BE): the Bahá'í World Centre table "Badí' dates 172 to 221 BE" (2014, HM Nautical Almanac Office data), checked 2026-11 — 216 BE is 20 March 2059
   function nawRuz(y) {
     if (y <= 171) return { rd: gToRD(1843 + y, 3, 21), flags: y < 1 ? ['proleptic'] : [] };
     if (y <= 221) return { rd: gToRD(1843 + y, 3, BAHAI_T[y - 172] === '1' ? 21 : 20), flags: [] };
