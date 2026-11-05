@@ -1710,9 +1710,14 @@ const ACT = (() => {
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
       }
     }
+    // a runtime that first shows a card and no frame (external-embed@1 before consent) does not count toward the live activities
+    // until it says so (ctx.onLive): a card holds no slot and parks nothing (docs/INTERACTIVE_EMBED.md)
+    const waits = () => { try { return !!RUNTIMES[a.runtime].waits?.(a); } catch (e) { return false; } };
+    function goLive() { if (sess.destroyed || !sess.port || LIVE.includes(sess)) return; makeRoom(); LIVE.push(sess); }
     function start() {
       if (sess.destroyed) return;
-      teardown(); makeRoom();
+      const waiting = waits();
+      teardown(); if (!waiting) makeRoom();
       box.classList.remove('act-fallback'); box.classList.add('act-running'); note.textContent = tE('engine.act.loading');
       setBar(btn('↻ ' + tE('engine.act.restart'), () => { sess.attemptId = uid(); sess.events = []; sess.result = null; start(); }, 'btn ghost small'),
         document.fullscreenEnabled ? btn('⛶ ' + tE('engine.act.fullscreen'), () => { if (document.fullscreenElement) document.exitFullscreen(); else root.requestFullscreen?.().catch(() => { }); }, 'btn ghost small') : null);
@@ -1735,12 +1740,18 @@ const ACT = (() => {
       sess.misses = 0;
       try {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
+          onLive: () => Promise.resolve().then(goLive),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
           onFail: why => { const own = RUNTIMES[a.runtime].failText?.(why); return own ? stop(own.text, !!own.restart) : why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
-            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
+            : why === 'runaway' ? stop(tE('engine.act.stopped'))
+            // external-embed@1 (docs/INTERACTIVE_EMBED.md): refused or mounted as an exercise → the fallback for good; offline or not loaded → Restart retries
+            : why === 'embed-refused' || why === 'embed-graded' ? stop(tE('engine.act.embed.refused'), false)
+            : why === 'embed-offline' ? stop(tE('engine.act.embed.offline'))
+            : why === 'embed-timeout' ? stop(tE('engine.act.embed.timeout', { provider: (window.NoemaEmbed?.PROVIDERS || []).find(p => p.id === a.provider)?.name || String(a.provider || '') }))
+            : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
-      LIVE.push(sess);
+      if (!waiting) LIVE.push(sess);
       // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, 34_activity_html.js)
       pingT = setInterval(() => {
         if (!root.isConnected) return destroy();
@@ -1764,7 +1775,7 @@ const ACT = (() => {
       fallback(''); setBar(btn('▶ ' + tE('engine.act.start'), () => start(), 'btn primary small'));
       io = new IntersectionObserver(es => {
         for (const e of es) {
-          if (e.isIntersecting && !sess.port && !sess.parked && LIVE.length < liveMax()) start();
+          if (e.isIntersecting && !sess.port && !sess.parked && (LIVE.length < liveMax() || waits())) start();
           else if (sess.port && sess.alive) sess.port.send(e.isIntersecting ? 'resume' : 'pause');
         }
       }, { threshold: 0.15 });
@@ -2414,17 +2425,18 @@ APP.postMessage({t:'hello',nonce:N},'*');
         const dxOut = h('p', { class: 'sim-dx-out', 'aria-live': 'polite' });
         const another = exMode ? null : h('button', { class: 'btn ghost small', type: 'button', 'data-bench': 'another', onclick: () => newDevice() }, '↻ ' + tE('engine.act.bench.another'));
         const cur = () => bn.instruments.find(x => x.kind === inst.s.value) || bn.instruments[0];
+        const whole = k => k === 'log' || k === 'rssi';   // twin@1: the event log and the radio's RSSI read the device, not a point
         function setInstrument() {
           const x = cur(), two = x.kind === 'V' || x.kind === 'R', ids = x.points || bn.points.map(p => p.id);
           const keep = (s, items, fallback) => { const v = s.value; s.replaceChildren(...items.map(o => h('option', { value: o.value }, o.text))); s.value = items.some(o => o.value === v) ? v : fallback; };
           if (x.kind === 'I') keep(part.s, (x.parts || []).map((q, i) => ({ value: String(i), text: tt(q.label) })), '0');
-          else {
+          else if (!whole(x.kind)) {
             const g = ids.find(id => /^(gnd|0)$/.test(String(pt(id).at))) || ids[ids.length - 1];
             keep(A.s, ptItems(ids), ids.find(id => id !== g) || ids[0]);
             if (two) keep(Bk.s, ptItems(ids), g);
           }
           lab.get(A.s).textContent = two ? tE('engine.act.bench.red') : tE('engine.act.bench.probe');
-          A.row.hidden = x.kind === 'I'; Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
+          A.row.hidden = x.kind === 'I' || whole(x.kind); Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
         }
         inst.s.addEventListener('change', setInstrument);
         dxSel.s.addEventListener('change', () => {
@@ -2436,6 +2448,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
         const tval = (v, d) => { const g = typeof v === 'string' ? C(v) : null; return g ? ev(g, base()) : (v === undefined ? d : v); };
         function probeOf(x) {
           if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}) }, ev: { i: 'I', part: +part.s.value } }; }
+          if (whole(x.kind)) return { probe: { kind: x.kind }, ev: { i: x.kind } };
           const a = pt(A.s.value), b = Bk.s.value ? pt(Bk.s.value) : null;
           if (x.kind === 'V' || x.kind === 'R') return { probe: { kind: x.kind, a: a.at, b: b ? b.at : 'gnd' }, ev: { i: x.kind, a: a.id, b: b?.id } };
           const tw = { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
@@ -2454,14 +2467,25 @@ APP.postMessage({t:'hello',nonce:N},'*');
           if (r.kind === 'V') return fm(r.value, 'V');
           if (r.kind === 'I') return fm(r.value, 'A');
           if (r.kind === 'R') return r.value === 'OL' ? 'OL' : fm(r.value, 'Ω');   // i18n-ignore (the meter's own display)
-          if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, 'V'), mean: fm(r.stats.mean, 'V'), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
+          if (r.kind === 'rssi') return fmtNum(r.value, { format: 'fixed', digits: 1, unit: 'dBm' }, locale);
+          if (r.kind === 'log') { const n = logCounts(r); return tE('engine.act.bench.logStats', { resets: n.reset, lost: n.lost, overruns: n.overrun }); }
+          const u = r.unit === 'A' ? 'A' : 'V';   // a scope shows a voltage, or (twin@1) the supply current
+          if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, u), mean: fm(r.stats.mean, u), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
           const st = Object.values(r.traces || {})[0]?.stats || {};
           return tE('engine.act.bench.logicStats', { freq: st.freq > 0 ? fm(st.freq, 'Hz') : '—', duty: fmtNum(100 * (st.duty || 0), { format: 'fixed', digits: 0, unit: '%' }, locale) });
+        }
+        /** the event log of twin@1: how many resets, lost messages and overrun wakes */
+        function logCounts(r) {
+          if (r.counts && typeof r.counts === 'object') return r.counts;
+          const n = { reset: 0, lost: 0, overrun: 0, dead: 0 };
+          for (const e of Array.isArray(r.events) ? r.events : []) if (e && Object.prototype.hasOwnProperty.call(n, e.code)) n[e.code]++;
+          return n;
         }
         /** a reading as it is kept in the saved state: the numbers the log shows, not the traces */
         function slim(r) {
           if (!r || typeof r !== 'object') return r;
-          if (r.kind === 'scope') return { kind: 'scope', stats: r.stats };
+          if (r.kind === 'scope') return { kind: 'scope', stats: r.stats, ...(r.unit ? { unit: r.unit } : {}) };
+          if (r.kind === 'log') return { kind: 'log', counts: logCounts(r) };
           if (r.kind === 'logic') return { kind: 'logic', traces: Object.fromEntries(Object.entries(r.traces || {}).map(([k, v]) => [k, { stats: v.stats }])) };
           return r;
         }
@@ -2476,13 +2500,14 @@ APP.postMessage({t:'hello',nonce:N},'*');
         }
         function showFace(e) {
           const r = e.r; faceEl.replaceChildren();
-          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
+          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R' || r.kind === 'rssi' || r.kind === 'log') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
           const fig = h('figure', { class: 'sim-plot sim-scope' }); faceEl.append(fig);
           const xl = tE('engine.act.bench.time') + ' (s)';
           let p, data, yl;
           if (r.kind === 'scope') {
-            yl = tE('engine.act.bench.voltage') + ' (V)';
-            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: 'V' } };
+            const cur = r.unit === 'A';
+            yl = cur ? tE('engine.act.bench.current') + ' (A)' : tE('engine.act.bench.voltage') + ' (V)';
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: cur ? 'A' : 'V', ...(cur ? { format: 'si' } : {}) } };
             data = { xs: r.t, lines: [{ ys: r.v }], marks: [], xr: [r.t[0], r.t[r.t.length - 1]], yr: [null, null] };
           } else {   // a logic trace: steps from the level at the start and the edges
             const tr = Object.values(r.traces)[0] || { level0: 0, edges: [] }, xs = [r.t0], ys = [tr.level0];
@@ -2504,7 +2529,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
           out('event', { name: 'measure', data: { ...m.ev } });
           runner.measure(prep(base()), m.probe, r => {
             if (closed) return;
-            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
+            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : r.kind === 'log' && !r.error ? { kind: 'log', counts: logCounts(r) } : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
             paintLog(); showFace(e); saveSoon();
           });
         }
@@ -6243,6 +6268,1017 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
   /* i18n-ignore-end */
 })();
 
+/* ---- 39_engine_thermal.js ---- */
+/* ===================== interactive activities — the thermal engine thermal@1 (docs/INTERACTIVE_ENGINES.md §2, docs/adr/001 D12) =====================
+   Lumped thermal networks for tier B (sim-spec@1): nodes with a heat capacity, thermal resistances / conductances, convection h·A,
+   radiation ε·σ·A·(T⁴ − T∞⁴), heat sources (constant, step, PWM, sine), fixed-temperature boundaries, the ambient, and on/off
+   thermostats with hysteresis. Steady state (Newton when radiation is present), transients (trapezoidal, backward Euler on the
+   first step, on source edges and on thermostat switching; or backward Euler throughout), linearised time constants.
+   Pure JS, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
+   Format noema.thermal/v1: tools/schemas/noema.thermal.v1.schema.json. Python twin of check / checkSpec: tools/thermal.py.
+   Registered with one line: ACT.registerEngine(NoemaThermal.engine). Also used by tests/thermal.js (node). */
+(function noemaThermalModule(root) {
+  /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
+  'use strict';
+  const ID = 'thermal@1', FORMAT = 'noema.thermal/v1';
+  const MAX_NODES = 50, MAX_LINKS = 200, MAX_SOURCES = 24, MAX_THERMOSTATS = 8, MAX_STEPS = 200000, MAX_POINTS = 20001, MAX_BINDINGS = 24;
+  const SIGMA = 5.670374419e-8, K0 = 273.15, AMBIENT = 25;
+  const STATS = ['final', 'min', 'max', 'mean', 'pp', 'rms'];
+  const ID_RE = /^[A-Za-z][A-Za-z0-9_\-]{0,31}$/;
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const isNum = v => typeof v === 'number' && Number.isFinite(v);
+  function fail(code, extra) { const e = new Error('thermal: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
+  function okNum(kind, v) {
+    if (!isNum(v)) return false;
+    switch (kind) {
+      case 'pos': return v > 0;
+      case 'nonneg': return v >= 0;
+      case 'unit': return v >= 0 && v <= 1;
+      case 'eps': return v > 0 && v <= 1;
+      case 'temp': return v > -K0;
+      default: return true;
+    }
+  }
+  const MSG = { pos: 'needs a number > 0', nonneg: 'needs a number ≥ 0', fin: 'needs a number', temp: 'needs a temperature (°C) above -273.15', eps: 'needs a number in (0, 1]', unit: 'needs a number from 0 to 1' };
+
+  // ---- the waveforms of the heat sources ----
+  const WAVE_FIELDS = {
+    step: { P: 'fin!', t0: 'nonneg', P0: 'fin' },
+    pwm: { P: 'fin!', freq: 'pos!', duty: 'unit!', low: 'fin', delay: 'nonneg' },
+    sine: { offset: 'fin', amp: 'fin!', freq: 'pos!', phase: 'fin' },
+  };
+  /** a source's power: value(t), F(t) = ∫₀ᵗ P, mean, edges(t) = the number of jumps in [0, t] */
+  function wave(P) {
+    if (!isObj(P)) { const p = P; return { value: () => p, F: t => p * t, mean: p, edges: () => 0 }; }
+    const kind = Object.keys(P)[0], q = P[kind];
+    if (kind === 'step') {
+      const p1 = q.P, t0 = has(q, 't0') ? q.t0 : 0, p0 = has(q, 'P0') ? q.P0 : 0;
+      return { value: t => (t < t0 ? p0 : p1), F: t => p0 * Math.min(t, t0) + p1 * Math.max(0, t - t0), mean: p1, edges: t => (t0 > 0 && p0 !== p1 && t >= t0 ? 1 : 0) };
+    }
+    if (kind === 'pwm') {
+      const p = q.P, per = 1 / q.freq, d = q.duty, low = has(q, 'low') ? q.low : 0, dl = has(q, 'delay') ? q.delay : 0, on = d * per;
+      const flat = d === 0 || d === 1 || p === low;
+      const value = t => { if (t < dl) return low; const r = (t - dl) - Math.floor((t - dl) / per) * per; return r < on ? p : low; };
+      const F = t => {
+        if (t <= dl) return low * t;
+        const tau = t - dl, k = Math.floor(tau / per), r = tau - k * per;
+        return low * dl + k * per * (d * p + (1 - d) * low) + Math.min(r, on) * p + Math.max(0, r - on) * low;
+      };
+      const edges = t => { if (flat || t < dl) return 0; const tau = t - dl, k = Math.floor(tau / per), r = tau - k * per; return 1 + 2 * k + (r >= on ? 1 : 0); };
+      return { value, F, mean: d * p + (1 - d) * low, edges };
+    }
+    const off = has(q, 'offset') ? q.offset : 0, amp = q.amp, w = 2 * Math.PI * q.freq, ph = (has(q, 'phase') ? q.phase : 0) * Math.PI / 180;
+    return { value: t => off + amp * Math.sin(w * t + ph), F: t => off * t - amp / w * (Math.cos(w * t + ph) - Math.cos(ph)), mean: off, edges: () => 0 };
+  }
+
+  // ---- check(network) → [{code, path, msg, level}] (twin: tools/thermal.py check) ----
+  const TOP_KEYS = ['format', 'ambient', 'nodes', 'links', 'sources', 'thermostats', 'meta'];
+  const NODE_KEYS = ['id', 'C', 'T0', 'fixed', 'label', 'note'];
+  const LINK_KEYS = ['id', 'a', 'b', 'R', 'G', 'conv', 'rad', 'label', 'note'];
+  const SRC_KEYS = ['id', 'node', 'P', 'label', 'note'];
+  const TS_KEYS = ['id', 'sensor', 'source', 'low', 'high', 'mode', 'label', 'note'];
+  const LINK_KINDS = ['R', 'G', 'conv', 'rad'];
+  const SUB = { conv: { h: 'pos', A: 'pos' }, rad: { eps: 'eps', A: 'pos' } };
+  const extra = (o, allowed) => Object.keys(o).filter(k => !allowed.includes(k)).sort();
+  function checkFields(q, F, path, E, code) {   // an object of numeric fields {name: 'kind' | 'kind!'}
+    for (const k of extra(q, Object.keys(F))) E(code, `${path}.${k}`, 'unknown field');
+    for (const [k, spec] of Object.entries(F)) {
+      const must = spec.endsWith('!'), kd = must ? spec.slice(0, -1) : spec;
+      if (!has(q, k)) { if (must) E(code, `${path}.${k}`, 'missing'); continue; }
+      if (!okNum(kd, q[k])) E(code, `${path}.${k}`, 'out of range');
+    }
+  }
+  function checkWave(v, path, E) {
+    if (!isObj(v)) { if (!isNum(v)) E('value', path, 'needs a number or a waveform'); return; }
+    const keys = Object.keys(v);
+    if (keys.length !== 1 || !has(WAVE_FIELDS, keys[0])) { E('value', path, 'one of a number, step, pwm, sine'); return; }
+    const kind = keys[0], q = v[kind];
+    if (!isObj(q)) { E('value', `${path}.${kind}`, 'needs an object'); return; }
+    checkFields(q, WAVE_FIELDS[kind], `${path}.${kind}`, E, 'value');
+  }
+  function check(net) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    if (!isObj(net)) { E('format', '', 'network is not an object'); return P; }
+    if (has(net, 'format') && net.format !== FORMAT) E('format', 'format', 'not ' + FORMAT);
+    if (!Array.isArray(net.nodes)) E('format', 'nodes', 'not an array');
+    if (!Array.isArray(net.links)) E('format', 'links', 'not an array');
+    if (has(net, 'sources') && !Array.isArray(net.sources)) E('format', 'sources', 'not an array');
+    if (has(net, 'thermostats') && !Array.isArray(net.thermostats)) E('format', 'thermostats', 'not an array');
+    if (P.length) return P;
+    for (const k of extra(net, TOP_KEYS)) W('unknown-field', k, 'ignored');
+    if (has(net, 'ambient') && !okNum('temp', net.ambient)) E('value', 'ambient', MSG.temp);
+    const sources = net.sources || [], tss = net.thermostats || [];
+    if (net.nodes.length > MAX_NODES) E('size', 'nodes', 'more than ' + MAX_NODES + ' nodes');
+    if (net.links.length > MAX_LINKS) E('size', 'links', 'more than ' + MAX_LINKS + ' links');
+    if (sources.length > MAX_SOURCES) E('size', 'sources', 'more than ' + MAX_SOURCES + ' sources');
+    if (tss.length > MAX_THERMOSTATS) E('size', 'thermostats', 'more than ' + MAX_THERMOSTATS + ' thermostats');
+    const ids = new Set(), node = new Map(), srcIds = new Set();
+    const idOk = (o, at) => {
+      if (typeof o.id !== 'string' || !ID_RE.test(o.id)) { E('id', at + '.id', 'bad id'); return false; }
+      if (o.id === 'ambient') { E('id', at + '.id', 'ambient is reserved'); return false; }
+      if (ids.has(o.id)) { E('dup-id', at + '.id', 'duplicate id ' + o.id); return false; }
+      ids.add(o.id); return true;
+    };
+    net.nodes.forEach((nd, i) => {
+      const at = `nodes[${i}]`;
+      if (!isObj(nd)) { E('format', at, 'node is not an object'); return; }
+      for (const k of extra(nd, NODE_KEYS)) W('unknown-field', `${at}.${k}`, 'ignored');
+      const good = idOk(nd, at);
+      if (has(nd, 'fixed')) {
+        if (!okNum('temp', nd.fixed)) E('value', at + '.fixed', MSG.temp);
+        if (has(nd, 'C') || has(nd, 'T0')) E('value', at, 'a fixed node takes no C or T0');
+      }
+      if (has(nd, 'C') && !okNum('nonneg', nd.C)) E('value', at + '.C', MSG.nonneg);
+      if (has(nd, 'T0') && !okNum('temp', nd.T0)) E('value', at + '.T0', MSG.temp);
+      if (good) node.set(nd.id, { i, fixed: has(nd, 'fixed'), massive: !has(nd, 'fixed') && isNum(nd.C) && nd.C > 0 });
+    });
+    const isBound = id => id === 'ambient' || (node.has(id) && node.get(id).fixed);
+    const linkEnds = [];
+    net.links.forEach((l, i) => {
+      const at = `links[${i}]`;
+      if (!isObj(l)) { E('format', at, 'link is not an object'); return; }
+      for (const k of extra(l, LINK_KEYS)) W('unknown-field', `${at}.${k}`, 'ignored');
+      idOk(l, at);
+      const aOk = typeof l.a === 'string' && node.has(l.a);
+      if (!aOk) E('unknown-node', at + '.a', 'not a node of the network');
+      const b = has(l, 'b') ? l.b : 'ambient', bOk = typeof b === 'string' && (b === 'ambient' || node.has(b));
+      if (!bOk) E('unknown-node', at + '.b', 'not a node of the network');
+      if (aOk && bOk) {
+        if (l.a === b) E('self-loop', at, 'both ends on one node');
+        else if (isBound(l.a) && isBound(b)) W('boundary-link', at, 'both ends are boundaries');
+        linkEnds.push([l.a, b]);
+      }
+      const kinds = LINK_KINDS.filter(k => has(l, k));
+      if (kinds.length !== 1) { E('link', at, 'needs exactly one of R, G, conv, rad'); return; }
+      const k = kinds[0];
+      if (k === 'R' || k === 'G') { if (!okNum('pos', l[k])) E('value', `${at}.${k}`, MSG.pos); return; }
+      if (!isObj(l[k])) { E('value', `${at}.${k}`, k === 'conv' ? 'needs an object {h, A}' : 'needs an object {eps, A}'); return; }
+      const q = l[k], F = SUB[k];
+      for (const x of extra(q, Object.keys(F))) E('value', `${at}.${k}.${x}`, 'unknown field');
+      for (const [f, kd] of Object.entries(F)) {
+        if (!has(q, f)) E('value', `${at}.${k}.${f}`, 'missing');
+        else if (!okNum(kd, q[f])) E('value', `${at}.${k}.${f}`, MSG[kd]);
+      }
+    });
+    sources.forEach((s, i) => {
+      const at = `sources[${i}]`;
+      if (!isObj(s)) { E('format', at, 'source is not an object'); return; }
+      for (const k of extra(s, SRC_KEYS)) W('unknown-field', `${at}.${k}`, 'ignored');
+      if (idOk(s, at)) srcIds.add(s.id);
+      if (!(typeof s.node === 'string' && node.has(s.node))) E('unknown-node', at + '.node', 'not a node of the network');
+      else if (node.get(s.node).fixed) E('fixed-node', at + '.node', 'a source on a fixed node does nothing');
+      if (!has(s, 'P')) E('value', at + '.P', 'missing'); else checkWave(s.P, at + '.P', E);
+    });
+    const gated = new Set();
+    tss.forEach((th, i) => {
+      const at = `thermostats[${i}]`;
+      if (!isObj(th)) { E('format', at, 'thermostat is not an object'); return; }
+      for (const k of extra(th, TS_KEYS)) W('unknown-field', `${at}.${k}`, 'ignored');
+      idOk(th, at);
+      if (!(typeof th.sensor === 'string' && node.has(th.sensor))) E('unknown-node', at + '.sensor', 'not a node of the network');
+      if (!(typeof th.source === 'string' && srcIds.has(th.source))) E('unknown-source', at + '.source', 'not a source of the network');
+      else if (gated.has(th.source)) E('thermostat', at + '.source', 'this source already has a thermostat');
+      else gated.add(th.source);
+      const lo = isNum(th.low), hi = isNum(th.high);
+      if (!lo) E('value', at + '.low', MSG.fin);
+      if (!hi) E('value', at + '.high', MSG.fin);
+      if (lo && hi && !(th.low < th.high)) E('value', at, 'low must be below high');
+      if (has(th, 'mode') && th.mode !== 'heat' && th.mode !== 'cool') E('value', at + '.mode', 'heat or cool');
+    });
+    if (P.some(p => p.level === 'error')) return P;
+    // the graph: every group of nodes needs a path to a boundary (fixed node or ambient) for a steady state
+    const par = new Map(), find = s => { while (par.get(s) !== s) s = par.get(s); return s; };
+    for (const [id, v] of node) if (!v.fixed) par.set(id, id);
+    const anchored = new Set();
+    for (const [a, b] of linkEnds) {
+      const ba = isBound(a), bb = isBound(b);
+      if (ba && bb) continue;
+      if (ba) anchored.add(find(b)); else if (bb) anchored.add(find(a));
+      else { const x = find(a), y = find(b); if (x !== y) { par.set(x, y); if (anchored.has(x)) anchored.add(y); } }
+    }
+    const groups = new Map();
+    for (const [id, v] of node) { if (v.fixed) continue; const r = find(id); if (!groups.has(r)) groups.set(r, { first: id, massive: false, anchored: false }); const g = groups.get(r); if (v.massive) g.massive = true; }
+    for (const r of anchored) { const g = groups.get(find(r)); if (g) g.anchored = true; }
+    for (const g of groups.values()) {
+      if (g.anchored) continue;
+      const i = node.get(g.first).i;
+      if (!g.massive) E('singular', `nodes[${i}]`, 'no heat capacity and no path to a boundary: ' + g.first);
+      else W('floating', `nodes[${i}]`, 'no path to a boundary from ' + g.first + ' (no steady state)');
+    }
+    return P;
+  }
+
+  // ---- checkSpec(spec) → the problems of a sim-spec's model and outputs (paths from the spec: model.…, outputs[i]…) ----
+  const MODEL_KEYS = ['network', 'bindings', 'transient'];
+  const TRAN_KEYS = ['tEnd', 'dt', 'method', 'start', 'points'];
+  const OUT_KEYS = ['id', 'kind', 'node', 'link', 'source', 'thermostat', 'tau', 'time', 'at', 'stat'];
+  const OUT_SRC = ['node', 'link', 'source', 'thermostat', 'tau', 'time'];
+  const isExpr = v => typeof v === 'string' && v.trim() !== '';
+  /** what a binding can set on each id of a valid network: id → [props] (the first one is the default) */
+  function bindable(net) {
+    const m = new Map([['ambient', ['value']]]);
+    for (const nd of net.nodes) m.set(nd.id, has(nd, 'fixed') ? ['fixed'] : ['C', 'T0']);
+    for (const l of net.links) {
+      const k = LINK_KINDS.find(x => has(l, x));
+      m.set(l.id, k === 'R' || k === 'G' ? [k] : Object.keys(SUB[k]).map(f => k + '.' + f));
+    }
+    for (const s of net.sources || []) m.set(s.id, isObj(s.P) ? Object.keys(WAVE_FIELDS[Object.keys(s.P)[0]]).map(f => Object.keys(s.P)[0] + '.' + f) : ['P']);
+    for (const th of net.thermostats || []) m.set(th.id, ['low', 'high']);
+    return m;
+  }
+  function checkSpec(spec) {
+    const P = [], E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const m = isObj(spec) ? spec.model : undefined;
+    if (!isObj(m)) { E('model', 'model', ID + ' needs a model {network, bindings?, transient?}'); return P; }
+    for (const k of extra(m, MODEL_KEYS)) E('unknown-field', 'model.' + k, 'unknown field');
+    if (!isObj(m.network)) { E('model', 'model.network', 'needs a network {format: "' + FORMAT + '", nodes, links, sources?, thermostats?}'); return P; }
+    for (const p of check(m.network)) P.push({ ...p, path: 'model.network' + (p.path ? '.' + p.path : '') });
+    if (P.some(p => p.level === 'error')) return P;
+    const net = m.network, can = bindable(net), kindOf = new Map();
+    for (const nd of net.nodes) kindOf.set(nd.id, 'node');
+    for (const l of net.links) kindOf.set(l.id, 'link');
+    for (const s of net.sources || []) kindOf.set(s.id, 'source');
+    for (const th of net.thermostats || []) kindOf.set(th.id, 'thermostat');
+    const bs = m.bindings;
+    if (has(m, 'bindings') && !(Array.isArray(bs) && bs.length <= MAX_BINDINGS)) E('binding', 'model.bindings', `a list of at most ${MAX_BINDINGS} {element, prop?, expr}`);
+    (Array.isArray(bs) ? bs.slice(0, MAX_BINDINGS) : []).forEach((b, i) => {
+      const w = `model.bindings[${i}]`;
+      if (!isObj(b)) { E('binding', w, 'an object {element, prop?, expr}'); return; }
+      for (const k of extra(b, ['element', 'prop', 'expr'])) E('unknown-field', `${w}.${k}`, 'unknown field');
+      const props = typeof b.element === 'string' ? can.get(b.element) : undefined;
+      if (!props) E('binding', w + '.element', 'not an id of the network (or ambient)');
+      else if (has(b, 'prop') && !props.includes(b.prop)) E('binding', w + '.prop', 'one of ' + props.join(', '));
+      if (!(isExpr(b.expr) || isNum(b.expr))) E('binding', w + '.expr', 'needs an expression');
+    });
+    const tr = m.transient;
+    let te = null, dt = null;
+    if (has(m, 'transient')) {
+      if (!isObj(tr)) E('transient', 'model.transient', 'needs an object {tEnd, dt?, method?, start?, points?}');
+      else {
+        for (const k of extra(tr, TRAN_KEYS)) E('unknown-field', 'model.transient.' + k, 'unknown field');
+        if (!has(tr, 'tEnd')) E('transient', 'model.transient.tEnd', 'missing');
+        else if (isNum(tr.tEnd) && tr.tEnd > 0) te = tr.tEnd; else if (!isExpr(tr.tEnd)) E('transient', 'model.transient.tEnd', 'needs a number > 0 or an expression');
+        if (has(tr, 'dt')) { if (isNum(tr.dt) && tr.dt > 0) dt = tr.dt; else if (!isExpr(tr.dt)) E('transient', 'model.transient.dt', 'needs a number > 0 or an expression'); }
+        if (has(tr, 'method') && tr.method !== 'trap' && tr.method !== 'be') E('transient', 'model.transient.method', 'trap or be');
+        if (has(tr, 'start') && tr.start !== 'T0' && tr.start !== 'steady') E('transient', 'model.transient.start', 'T0 or steady');
+        if (has(tr, 'points') && !(Number.isInteger(tr.points) && tr.points >= 2 && tr.points <= MAX_POINTS)) E('transient', 'model.transient.points', 'needs a whole number from 2 to ' + MAX_POINTS);
+        if (te !== null && dt !== null && Math.ceil(te / dt - 1e-9) > MAX_STEPS) E('budget', 'model.transient', `tEnd / dt is more than ${MAX_STEPS} steps`);
+      }
+    }
+    const massive = net.nodes.filter(nd => !has(nd, 'fixed') && nd.C > 0).length;
+    (isObj(spec) && Array.isArray(spec.outputs) ? spec.outputs : []).forEach((o, i) => {
+      const w = `outputs[${i}]`;
+      if (!(isObj(o) && (o.kind === 'scalar' || o.kind === 'series'))) return;   // (the common checks report it)
+      for (const k of extra(o, OUT_KEYS)) E('unknown-field', `${w}.${k}`, 'unknown field');
+      const src = OUT_SRC.filter(k => has(o, k));
+      if (src.length !== 1) { E('output', w, 'must name what it reads: one of ' + OUT_SRC.join(', ')); return; }
+      const s = src[0], at = has(o, 'at'), st = has(o, 'stat');
+      if (s === 'time') { if (!(o.time === true && o.kind === 'series')) E('output', w + '.time', 'true on a series output (the time axis)'); }
+      else if (s === 'tau') { if (!(o.kind === 'scalar' && Number.isInteger(o.tau) && o.tau >= 1 && o.tau <= massive)) E('output', w + '.tau', 'a whole number from 1 to the number of nodes with a heat capacity, on a scalar output'); }
+      else if (kindOf.get(o[s]) !== s || typeof o[s] !== 'string') E('output', `${w}.${s}`, 'not a ' + s + ' of the network');
+      if ((at || st) && !(o.kind === 'scalar' && ['node', 'link', 'source', 'thermostat'].includes(s))) E('output', w, 'at and stat belong to a scalar output of a node, link, source or thermostat');
+      if (at && st) E('output', w, 'at or stat, not both');
+      if (at && !((isNum(o.at) && o.at >= 0) || isExpr(o.at))) E('output', w + '.at', 'needs a number ≥ 0 or an expression');
+      if (st && !STATS.includes(o.stat)) E('output', w + '.stat', 'one of ' + STATS.join(', '));
+      if (s === 'thermostat' && o.kind === 'scalar' && !at && !st) E('output', w, 'a thermostat has no steady state: give at or stat');
+      if ((o.kind === 'series' || at || st) && !isObj(tr)) E('output', w, 'needs model.transient {tEnd, dt?}');
+    });
+    return P;
+  }
+
+  // ---- linear algebra: dense LU with partial pivoting ----
+  function factor(M, n, perm) {
+    let big = 0; for (let i = 0; i < n * n; i++) big = Math.max(big, Math.abs(M[i]));
+    const tiny = (big || 1) * 1e-13;
+    for (let k = 0; k < n; k++) {
+      let p = k, mx = Math.abs(M[k * n + k]);
+      for (let i = k + 1; i < n; i++) { const v = Math.abs(M[i * n + k]); if (v > mx) { mx = v; p = i; } }
+      if (!(mx > tiny)) return false;
+      perm[k] = p;
+      if (p !== k) for (let j = 0; j < n; j++) { const t = M[k * n + j]; M[k * n + j] = M[p * n + j]; M[p * n + j] = t; }
+      const d = M[k * n + k];
+      for (let i = k + 1; i < n; i++) {
+        const f = (M[i * n + k] /= d); if (f === 0) continue;
+        for (let j = k + 1; j < n; j++) M[i * n + j] -= f * M[k * n + j];
+      }
+    }
+    return true;
+  }
+  function subst(M, n, perm, b) {   // in place: b → x
+    for (let k = 0; k < n; k++) { const p = perm[k]; if (p !== k) { const t = b[k]; b[k] = b[p]; b[p] = t; } }
+    for (let i = 1; i < n; i++) { let s = b[i]; for (let j = 0; j < i; j++) s -= M[i * n + j] * b[j]; b[i] = s; }
+    for (let i = n - 1; i >= 0; i--) { let s = b[i]; for (let j = i + 1; j < n; j++) s -= M[i * n + j] * b[j]; b[i] = s / M[i * n + i]; }
+    return b;
+  }
+  function solveDense(M0, n, b) { const M = Float64Array.from(M0), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); return subst(M, n, perm, Float64Array.from(b)); }
+  /** eigenvalues of a symmetric matrix (cyclic Jacobi) */
+  function eigSym(A0, n) {
+    const A = Float64Array.from(A0);
+    for (let sweep = 0; sweep < 100; sweep++) {
+      let off = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) off += A[i * n + j] * A[i * n + j];
+      if (off < 1e-30) break;
+      for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
+        const apq = A[p * n + q]; if (Math.abs(apq) < 1e-300) continue;
+        const th = (A[q * n + q] - A[p * n + p]) / (2 * apq), t = Math.sign(th || 1) / (Math.abs(th) + Math.sqrt(th * th + 1)), c = 1 / Math.sqrt(t * t + 1), s = t * c;
+        for (let k = 0; k < n; k++) { const akp = A[k * n + p], akq = A[k * n + q]; A[k * n + p] = c * akp - s * akq; A[k * n + q] = s * akp + c * akq; }
+        for (let k = 0; k < n; k++) { const apk = A[p * n + k], aqk = A[q * n + k]; A[p * n + k] = c * apk - s * aqk; A[q * n + k] = s * apk + c * aqk; }
+      }
+    }
+    return Array.from({ length: n }, (_, i) => A[i * n + i]);
+  }
+
+  // ---- compile: unknowns (the non-fixed nodes), the conductance matrix, boundary terms, radiation, sources, thermostats ----
+  function compile(net) {
+    const amb = has(net, 'ambient') ? net.ambient : AMBIENT, idx = new Map(), bT = new Map([['ambient', amb]]), U = [];
+    for (const nd of net.nodes) { if (has(nd, 'fixed')) bT.set(nd.id, nd.fixed); else { idx.set(nd.id, U.length); U.push(nd); } }
+    const n = U.length, C = new Float64Array(n), T0 = new Float64Array(n), G = new Float64Array(n * n), b = new Float64Array(n);
+    U.forEach((nd, i) => { C[i] = has(nd, 'C') ? nd.C : 0; T0[i] = has(nd, 'T0') ? nd.T0 : amb; });
+    const end = id => (idx.has(id) ? { u: idx.get(id), T: 0 } : { u: -1, T: bT.get(id) });
+    const links = net.links.map(l => {
+      const A = end(l.a), B = end(has(l, 'b') ? l.b : 'ambient');
+      let g = 0, k = 0;
+      if (has(l, 'R')) g = 1 / l.R; else if (has(l, 'G')) g = l.G; else if (has(l, 'conv')) g = l.conv.h * l.conv.A; else k = l.rad.eps * SIGMA * l.rad.A;
+      if (g) {
+        if (A.u >= 0) { G[A.u * n + A.u] += g; if (B.u >= 0) G[A.u * n + B.u] -= g; else b[A.u] += g * B.T; }
+        if (B.u >= 0) { G[B.u * n + B.u] += g; if (A.u >= 0) G[B.u * n + A.u] -= g; else b[B.u] += g * A.T; }
+      }
+      return { id: l.id, A, B, g, k };
+    });
+    const rads = links.filter(l => l.k > 0);
+    const sources = (net.sources || []).map(s => ({ id: s.id, u: idx.get(s.node), w: wave(s.P), gate: -1 }));
+    const srcAt = new Map(sources.map((s, i) => [s.id, i]));
+    const thermostats = (net.thermostats || []).map((th, i) => { const si = srcAt.get(th.source); sources[si].gate = i; return { id: th.id, s: end(th.sensor), low: th.low, high: th.high, heat: th.mode !== 'cool', src: si }; });
+    const nodeOut = net.nodes.map(nd => ({ id: nd.id, ...end(nd.id) }));
+    return { n, C, T0, G, b, links, rads, sources, thermostats, nodeOut, amb };
+  }
+
+  function makeSim(ck) {
+    const { n, C, G, b, links, rads, sources, thermostats, nodeOut } = ck;
+    const Tof = (e, x) => (e.u >= 0 ? x[e.u] : e.T);
+    const flow = (l, x) => { const ta = Tof(l.A, x), tb = Tof(l.B, x); return l.g ? l.g * (ta - tb) : l.k * (Math.pow(ta + K0, 4) - Math.pow(tb + K0, 4)); };
+    /** out += rad(x) (heat into each unknown); J −= scale·∂rad/∂x (row-scaled by th) when J is given */
+    function rad(x, out, J, th) {
+      for (const l of rads) {
+        const ta = Tof(l.A, x), tb = Tof(l.B, x), q = l.k * (Math.pow(ta + K0, 4) - Math.pow(tb + K0, 4));
+        const da = 4 * l.k * Math.pow(ta + K0, 3), db = 4 * l.k * Math.pow(tb + K0, 3), a = l.A.u, c = l.B.u;
+        if (a >= 0) { out[a] -= q; if (J) { J[a * n + a] += th[a] * da; if (c >= 0) J[a * n + c] -= th[a] * db; } }
+        if (c >= 0) { out[c] += q; if (J) { J[c * n + c] += th[c] * db; if (a >= 0) J[c * n + a] -= th[c] * da; } }
+      }
+    }
+    const ones = new Float64Array(n).fill(1);
+    /** solve G·x = b + p + rad(x) (Newton with a damped step when radiation is present) */
+    function steadyX(p) {
+      const rhs = new Float64Array(n); for (let i = 0; i < n; i++) rhs[i] = b[i] + p[i];
+      if (!rads.length) return solveDense(G, n, rhs);
+      const G1 = Float64Array.from(G), r1 = Float64Array.from(rhs);   // a start: radiation linearised at the ambient
+      for (const l of rads) {
+        const h = 4 * l.k * Math.pow(ck.amb + K0, 3), a = l.A.u, c = l.B.u;
+        const add = (i, j, v) => { G1[i * n + j] += v; };
+        if (a >= 0) { add(a, a, h); if (c >= 0) add(a, c, -h); else r1[a] += h * l.B.T; }
+        if (c >= 0) { add(c, c, h); if (a >= 0) add(c, a, -h); else r1[c] += h * l.A.T; }
+      }
+      let x = solveDense(G1, n, r1);
+      for (let it = 0; it < 100; it++) {
+        const R = new Float64Array(n), J = Float64Array.from(G);
+        for (let i = 0; i < n; i++) { let s = -rhs[i]; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; R[i] = s; }
+        const rv = new Float64Array(n); rad(x, rv, J, ones); for (let i = 0; i < n; i++) R[i] -= rv[i];
+        const dx = solveDense(J, n, R.map(v => -v));
+        let mx = 0; for (let i = 0; i < n; i++) mx = Math.max(mx, Math.abs(dx[i]));
+        const sc = mx > 50 ? 50 / mx : 1;
+        for (let i = 0; i < n; i++) x[i] = Math.max(-K0 + 1e-6, x[i] + sc * dx[i]);
+        if (mx < 1e-10 * (1 + Math.abs(x[0] || 0))) return x;
+      }
+      throw fail('no-convergence');
+    }
+    function powers(mode) { const p = new Float64Array(n); for (const s of sources) p[s.u] += mode === 't0' ? s.w.value(0) : s.w.mean; return p; }
+    /** the steady state (thermostats ignored: their sources on; mode 'mean': each source's mean, 't0': its value at t = 0) */
+    function steady(o) {
+      const mode = o && o.mode === 't0' ? 't0' : 'mean', x = steadyX(powers(mode)), r = { nodes: {}, links: {}, sources: {} };
+      for (const nd of nodeOut) r.nodes[nd.id] = Tof(nd, x);
+      for (const l of links) r.links[l.id] = flow(l, x);
+      for (const s of sources) r.sources[s.id] = mode === 't0' ? s.w.value(0) : s.w.mean;
+      return r;
+    }
+    /** the time constants (s, slowest first) of the network linearised at its steady state (or at T0 without one) */
+    function taus() {
+      let x; try { x = steadyX(powers('mean')); } catch (e) { x = Float64Array.from(ck.T0); }
+      const K = Float64Array.from(G); rad(x, new Float64Array(n), K, ones);
+      const m = [], z = []; for (let i = 0; i < n; i++) (C[i] > 0 ? m : z).push(i);
+      const nm = m.length, nz = z.length, Gr = new Float64Array(nm * nm);
+      for (let i = 0; i < nm; i++) for (let j = 0; j < nm; j++) Gr[i * nm + j] = K[m[i] * n + m[j]];
+      if (nz) {   // the Schur complement of the massless nodes
+        const Kzz = new Float64Array(nz * nz); for (let i = 0; i < nz; i++) for (let j = 0; j < nz; j++) Kzz[i * nz + j] = K[z[i] * n + z[j]];
+        const perm = new Int32Array(nz); if (!factor(Kzz, nz, perm)) throw fail('singular');
+        for (let j = 0; j < nm; j++) {
+          const col = new Float64Array(nz); for (let i = 0; i < nz; i++) col[i] = K[z[i] * n + m[j]];
+          subst(Kzz, nz, perm, col);
+          for (let i = 0; i < nm; i++) { let s = 0; for (let k = 0; k < nz; k++) s += K[m[i] * n + z[k]] * col[k]; Gr[i * nm + j] -= s; }
+        }
+      }
+      const S = new Float64Array(nm * nm);
+      for (let i = 0; i < nm; i++) for (let j = 0; j < nm; j++) S[i * nm + j] = 0.5 * (Gr[i * nm + j] + Gr[j * nm + i]) / Math.sqrt(C[m[i]] * C[m[j]]);
+      const lam = eigSym(S, nm), big = Math.max(1e-300, ...lam.map(Math.abs));
+      return lam.map(l => (l > big * 1e-12 ? 1 / l : Infinity)).sort((a, c) => c - a);
+    }
+    /** a transient: {tEnd, dt?, method: 'trap' | 'be', start: 'T0' | 'steady', points ≤ 20001, at: [t…], maxSteps} */
+    function transient(o) {
+      o = o || {};
+      const tEnd = o.tEnd, dt0 = o.dt === undefined || o.dt === 0 ? tEnd / 1000 : o.dt, maxSteps = o.maxSteps === undefined ? MAX_STEPS : o.maxSteps;
+      if (!(isNum(tEnd) && tEnd > 0 && isNum(dt0) && dt0 > 0)) throw fail('bad-args');
+      const steps = Math.max(1, Math.ceil(tEnd / dt0 - 1e-9)), h = tEnd / steps;
+      if (!(maxSteps > 0) || steps > Math.min(maxSteps, MAX_STEPS)) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
+      const be = o.method === 'be', points = Math.max(2, Math.min(MAX_POINTS, o.points === undefined ? 2001 : Math.floor(o.points)));
+      const stride = Math.ceil(steps / (points - 1));
+      let x = o.start === 'steady' ? steadyX(powers('t0')) : Float64Array.from(ck.T0);
+      const gate = thermostats.map(th => { const T = Tof(th.s, x); return th.heat ? T < th.high : T > th.low; });
+      // matrices A(θ) = diag(C/h) + Θ·G: θ = ½ (trapezoidal) on nodes with a heat capacity, 1 on massless ones and on backward-Euler steps
+      const thT = new Float64Array(n), thB = new Float64Array(n).fill(1);
+      for (let i = 0; i < n; i++) thT[i] = be || !(C[i] > 0) ? 1 : 0.5;
+      const mk = th => { const A = new Float64Array(n * n); for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i * n + j] = th[i] * G[i * n + j]; A[i * n + i] += C[i] / h; } return A; };
+      const AT = mk(thT), AB = mk(thB), LU = {};
+      if (!rads.length) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
+      // channels: nodes, links, sources (power after the thermostat, mean over the step), thermostats (0 / 1)
+      const nN = nodeOut.length, nL = links.length, nS = sources.length, nT = thermostats.length, nCh = nN + nL + nS + nT;
+      const vals = new Float64Array(nCh), sp = new Float64Array(nS);
+      for (let s = 0; s < nS; s++) sp[s] = (sources[s].gate >= 0 && !gate[sources[s].gate] ? 0 : 1) * sources[s].w.value(0);
+      const fill = () => {
+        let c = 0;
+        for (const nd of nodeOut) vals[c++] = Tof(nd, x);
+        for (const l of links) vals[c++] = flow(l, x);
+        for (let s = 0; s < nS; s++) vals[c++] = sp[s];
+        for (let k = 0; k < nT; k++) vals[c++] = gate[k] ? 1 : 0;
+      };
+      const nRec = Math.floor(steps / stride) + 1 + (steps % stride ? 1 : 0), rec = Array.from({ length: nCh }, () => new Float64Array(nRec)), tRec = new Float64Array(nRec);
+      const mn = new Float64Array(nCh).fill(Infinity), mx = new Float64Array(nCh).fill(-Infinity), sum = new Float64Array(nCh), sq = new Float64Array(nCh);
+      const atT = Array.isArray(o.at) ? o.at.map((t, i) => [t, i]).filter(([t]) => isNum(t)).sort((p, q) => p[0] - q[0]) : [];
+      const atV = Array.isArray(o.at) ? o.at.map(() => new Float64Array(nCh).fill(NaN)) : [];
+      let ai = 0, r = 0;
+      const prev = new Float64Array(nCh);
+      const take = (k, t) => {
+        for (let c = 0; c < nCh; c++) { const v = vals[c]; if (v < mn[c]) mn[c] = v; if (v > mx[c]) mx[c] = v; sum[c] += v; sq[c] += v * v; }
+        if (k % stride === 0 || k === steps) { tRec[r] = t; for (let c = 0; c < nCh; c++) rec[c][r] = vals[c]; r++; }
+        while (ai < atT.length && (atT[ai][0] <= t + 1e-12 * tEnd || k === steps)) {
+          const ta = atT[ai][0], out = atV[atT[ai][1]], f = k === 0 ? 1 : Math.min(1, Math.max(0, (ta - (t - h)) / h));
+          for (let c = 0; c < nCh; c++) out[c] = prev[c] + f * (vals[c] - prev[c]);
+          ai++;
+        }
+        prev.set(vals);
+      };
+      fill(); prev.set(vals); take(0, 0);
+      const P = new Float64Array(n), rhs = new Float64Array(n), Gx = new Float64Array(n), rv = new Float64Array(n);
+      for (let k = 0; k < steps; k++) {
+        const t1 = k * h, t2 = (k + 1) * h;
+        let switched = false;
+        thermostats.forEach((th, i) => {
+          const T = Tof(th.s, x), on = gate[i];
+          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
+          if (nx !== on) { gate[i] = nx; switched = true; }
+        });
+        let edge = false; P.fill(0);
+        for (let s = 0; s < nS; s++) {
+          const src = sources[s], on = src.gate < 0 || gate[src.gate], w = src.w;
+          if (w.edges(t2) !== w.edges(t1)) edge = true;
+          sp[s] = on ? (w.F(t2) - w.F(t1)) / h : 0; P[src.u] += sp[s];
+        }
+        const useB = be || k === 0 || switched || edge, th = useB ? thB : thT;
+        for (let i = 0; i < n; i++) { let s = 0; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; Gx[i] = s; }
+        rv.fill(0); if (rads.length) rad(x, rv, null, null);
+        for (let i = 0; i < n; i++) rhs[i] = C[i] / h * x[i] - (1 - th[i]) * (Gx[i] - rv[i]) + b[i] + P[i];
+        if (!rads.length) { const L = LU[useB ? 'b' : 't']; x = subst(L.M, n, L.perm, Float64Array.from(rhs)); }
+        else {
+          const A = useB ? AB : AT, y = Float64Array.from(x);
+          let conv = false;
+          for (let it = 0; it < 30 && !conv; it++) {
+            const R = new Float64Array(n), J = Float64Array.from(A), rr = new Float64Array(n);
+            rad(y, rr, J, th);
+            for (let i = 0; i < n; i++) { let s = -rhs[i] - th[i] * rr[i]; for (let j = 0; j < n; j++) s += A[i * n + j] * y[j]; R[i] = -s; }
+            const dx = solveDense(J, n, R);
+            let m = 0; for (let i = 0; i < n; i++) { y[i] = Math.max(-K0 + 1e-6, y[i] + dx[i]); m = Math.max(m, Math.abs(dx[i])); }
+            conv = m < 1e-9;
+          }
+          if (!conv) throw fail('no-convergence', { t: t2 });
+          x = y;
+        }
+        fill(); take(k + 1, t2);
+      }
+      const N = steps + 1, out = { t: Array.from(tRec), nodes: {}, links: {}, sources: {}, thermostats: {}, stats: { nodes: {}, links: {}, sources: {}, thermostats: {} }, at: {}, steps, dt: h, stride };
+      const groups = [['nodes', nodeOut], ['links', links], ['sources', sources], ['thermostats', thermostats]];
+      let c = 0;
+      for (const [g, list] of groups) for (const it of list) {
+        out[g][it.id] = Array.from(rec[c]);
+        out.stats[g][it.id] = { final: vals[c], min: mn[c], max: mx[c], mean: sum[c] / N, pp: mx[c] - mn[c], rms: Math.sqrt(sq[c] / N) };
+        if (atV.length) out.at[g + ':' + it.id] = atV.map(v => v[c]);
+        c++;
+      }
+      return out;
+    }
+    return { steady, transient, taus };
+  }
+
+  function create(network, opts) {
+    const problems = check(network);
+    if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
+    const net = JSON.parse(JSON.stringify(network)), inner = makeSim(compile(net));
+    return Object.freeze({ id: ID, steady: o => inner.steady(o), transient: o => inner.transient(o), taus: () => inner.taus() });
+  }
+
+  // ---- the sim-spec@1 adapter: create(spec, {seed}) → { run(inputs) → outputs } (in the worker and inline) ----
+  const MAXP = 2000;
+  const thin = (a, k) => { if (a.length <= k) return Array.from(a); const f = (a.length - 1) / (k - 1), r = []; for (let i = 0; i < k; i++) r.push(a[Math.round(i * f)]); return r; };
+  function setProp(net, id, prop, v) {
+    if (id === 'ambient') { net.ambient = v; return; }
+    const all = [].concat(net.nodes, net.links, net.sources || [], net.thermostats || []), el = all.find(e => e.id === id);
+    if (!el) return;
+    if (prop === undefined) prop = bindable(net).get(id)[0];
+    const [a, f] = String(prop).split('.');
+    if (f === undefined) el[a] = v;
+    else if (isObj(el.P) && isObj(el.P[a])) el.P[a][f] = v;   // a source's waveform: step.P, pwm.duty, …
+    else if (isObj(el[a])) el[a][f] = v;                      // a link's conv.h, rad.eps, …
+  }
+  const adapter = { create(spec, opts) {
+    const model = spec.model || {}, outs = spec.outputs || [], tr = model.transient || {};
+    let key = null, sim = null, cache = null;
+    function simFor(inp) {
+      const k = JSON.stringify(inp.$bind || []);
+      if (k !== key) {
+        const net = JSON.parse(JSON.stringify(model.network));
+        for (const [id, prop, v] of inp.$bind || []) setProp(net, id, prop, v);
+        key = k; cache = {};
+        try { sim = create(net); } catch (e) { sim = null; }
+      }
+      return sim;
+    }
+    return {
+      run(inp) {
+        const s = simFor(inp), r = {}, T = inp.$tran;
+        const ats = (inp.$at && Object.keys(inp.$at).length) ? outs.filter(o => has(o, 'at')) : [];
+        const tk = s && T ? JSON.stringify([T, ats.map(o => inp.$at[o.id])]) : null;
+        const ST = () => cache.st || (cache.st = s.steady());
+        const TR = () => { if (cache.tk !== tk) { cache.tk = tk; cache.tr = s.transient({ tEnd: T.tEnd, dt: T.dt > 0 ? T.dt : undefined, method: tr.method, start: tr.start, points: tr.points, at: ats.map(o => inp.$at[o.id]) }); } return cache.tr; };
+        const TA = () => cache.ta || (cache.ta = s.taus());
+        for (const o of outs) {
+          try {
+            if (!s) throw fail('invalid');
+            const g = o.node !== undefined ? 'nodes' : o.link !== undefined ? 'links' : o.source !== undefined ? 'sources' : o.thermostat !== undefined ? 'thermostats' : null;
+            const id = g && o[g.slice(0, -1)];
+            if (o.kind === 'series') { const R = TR(); r[o.id] = thin(o.time ? R.t : R[g][id] || [], MAXP); continue; }
+            if (o.tau !== undefined) { const v = TA()[o.tau - 1]; r[o.id] = v === undefined ? NaN : v; continue; }
+            if (o.stat !== undefined) { const v = TR().stats[g][id]; r[o.id] = v && STATS.includes(o.stat) ? v[o.stat] : NaN; continue; }
+            if (o.at !== undefined) { const R = TR(), v = R.at[g + ':' + id]; r[o.id] = v ? v[ats.indexOf(o)] : NaN; continue; }
+            r[o.id] = ST()[g][id];
+          } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
+        }
+        return r;
+      },
+    };
+  } };
+  /** on the main thread: the spec's expressions (bindings, transient times, `at`) become numbers, so the worker needs no evaluator */
+  function prepare(spec, compileExpr) {
+    const m = spec.model || {}, f = v => (typeof v === 'string' ? compileExpr(v) : () => v);
+    const binds = (m.bindings || []).map(b => [b.element, b.prop, f(b.expr)]);
+    const tEnd = m.transient ? f(m.transient.tEnd) : null, dt = m.transient && m.transient.dt !== undefined ? f(m.transient.dt) : null;
+    const ats = (spec.outputs || []).filter(o => o.at !== undefined).map(o => [o.id, f(o.at)]);
+    const ev = (g, env) => { try { const v = g(env); return typeof v === 'boolean' ? +v : +v; } catch (e) { return NaN; } };
+    return env => ({ ...env, $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])) });
+  }
+
+  /** the engine's own source, to run it in a Worker */
+  const source = () => '(' + noemaThermalModule.toString() + ')(self);';
+  const engine = Object.freeze({
+    id: ID,
+    check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `spec.${p.path}: ${p.msg}`),
+    prepare,
+    create: (spec, opts) => adapter.create(spec, opts),
+    workerSource: source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;',
+  });
+  root.NoemaThermal = Object.freeze({
+    id: ID, format: FORMAT, SIGMA, STATS: Object.freeze(STATS.slice()),
+    limits: Object.freeze({ nodes: MAX_NODES, links: MAX_LINKS, sources: MAX_SOURCES, thermostats: MAX_THERMOSTATS, steps: MAX_STEPS, points: MAX_POINTS, bindings: MAX_BINDINGS }),
+    check, checkSpec, create, source, adapter: Object.freeze(adapter), engine,
+  });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* ---- 40_engine_pid.js ---- */
+/* ===================== interactive activities — the control-loop engine pid@1 (docs/INTERACTIVE_ENGINES.md §3, docs/adr/001 D12) =====================
+   Control loops for tier B (sim-spec@1): a plant (first order + dead time, second order, integrator, DC motor speed / position,
+   thermal, tank level), a PID controller (P, I, D with a derivative filter, setpoint weighting b / c, anti-windup by clamping or
+   back-calculation, output limits, a sample time), setpoints (step, ramp, sine, steps), load and output disturbances, seeded
+   sensor noise (mulberry32), open and closed loop; outputs r, y, ym, u, e as series and the step-response metrics (rise time,
+   overshoot, settling time, steady-state error, IAE / ISE / ITAE, time in saturation).
+   Fixed-step RK4 with the plant input held over each step; the controller runs every Ts (rounded to whole steps).
+   Pure JS, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
+   Python twin of check / checkSpec: tools/pid.py. Schema: tools/schemas/noema.pid.v1.schema.json.
+   Registered with one line: ACT.registerEngine(NoemaPID.engine). Also used by tests/pid.js (node). */
+(function noemaPIDModule(root) {
+  /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
+  'use strict';
+  const ID = 'pid@1';
+  const MAX_STEPS = 200000, MAX_BINDINGS = 24, MAX_STEPS_SIGNAL = 32, BLOWUP = 1e12;
+  const STATS = ['final', 'min', 'max', 'mean', 'pp', 'rms'];
+  const SIGNALS = ['r', 'y', 'ym', 'u', 'e'];
+  const METRICS = ['rise', 'overshoot', 'peak', 'peakTime', 'settling', 'yFinal', 'ess', 'iae', 'ise', 'itae', 'satTime'];
+  const AW = ['none', 'clamp', 'backcalc'];
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const isNum = v => typeof v === 'number' && Number.isFinite(v);
+  const isExpr = v => typeof v === 'string' && v.trim() !== '';
+  const extra = (o, allowed) => Object.keys(o).filter(k => !allowed.includes(k)).sort();
+  function fail(code, extra_) { const e = new Error('pid: ' + code); e.code = code; if (extra_) Object.assign(e, extra_); return e; }
+  function okNum(kind, v) {
+    if (!isNum(v)) return false;
+    return kind === 'pos' ? v > 0 : kind === 'nonneg' ? v >= 0 : true;
+  }
+
+  // ---- the plants: fields (kind, '!' = required) and defaults ----
+  const PLANTS = {
+    fopdt: { K: 'fin!', tau: 'pos!', theta: 'nonneg', y0: 'fin' },
+    second: { K: 'fin!', wn: 'pos!', zeta: 'nonneg!', theta: 'nonneg', y0: 'fin' },
+    integrator: { K: 'fin!', theta: 'nonneg', y0: 'fin' },
+    motor: { J: 'pos', b: 'nonneg', Kt: 'pos', R: 'pos', L: 'nonneg', output: 'enum', theta: 'nonneg' },
+    thermal: { C: 'pos!', R: 'pos!', Tamb: 'fin', theta: 'nonneg', y0: 'fin' },
+    tank: { A: 'pos!', k: 'pos!', h0: 'nonneg', hMax: 'pos', theta: 'nonneg' },
+  };
+  const MOTOR = { J: 0.01, b: 0.1, Kt: 0.01, R: 1, L: 0.5 };   // the classic DC motor of the control tutorials
+  const CTRL = { Kp: 'fin', Ki: 'fin', Kd: 'fin', N: 'pos', Tf: 'nonneg', b: 'fin', c: 'fin', uMin: 'fin', uMax: 'fin', antiWindup: 'enum', Tt: 'pos', Ts: 'nonneg', u0: 'fin' };
+  const SIG = {
+    step: { from: 'fin', to: 'fin!', at: 'nonneg' },
+    ramp: { from: 'fin', slope: 'fin!', at: 'nonneg', until: 'pos' },
+    sine: { offset: 'fin', amp: 'fin!', freq: 'pos!', phase: 'fin' },
+  };
+  const MODEL_KEYS = ['plant', 'controller', 'mode', 'setpoint', 'load', 'disturbance', 'noise', 'metrics', 'transient', 'bindings'];
+  const BIND_EL = ['plant', 'controller', 'setpoint', 'load', 'disturbance', 'noise'];
+
+  /** Ziegler–Nichols tuning tables (constants; docs/INTERACTIVE_ENGINES.md §3). Parallel gains: Ki = Kp/Ti, Kd = Kp·Td. */
+  const ZN = Object.freeze({
+    ultimate: Object.freeze({ P: Object.freeze({ Kp: 0.5 }), PI: Object.freeze({ Kp: 0.45, Ti: 1 / 1.2 }), PID: Object.freeze({ Kp: 0.6, Ti: 0.5, Td: 0.125 }) }),   // × Ku, × Tu
+    reaction: Object.freeze({ P: Object.freeze({ Kp: 1 }), PI: Object.freeze({ Kp: 0.9, Ti: 1 / 0.3 }), PID: Object.freeze({ Kp: 1.2, Ti: 2, Td: 0.5 }) }),         // Kp × T/(K·L), Ti and Td × L
+  });
+
+  // ---- check(model) → [{code, path, msg, level}] (twin: tools/pid.py check) ----
+  function checkFields(q, F, path, E, code, enums) {
+    for (const k of extra(q, Object.keys(F))) E(code, `${path}.${k}`, 'unknown field');
+    for (const [k, spec] of Object.entries(F)) {
+      const must = spec.endsWith('!'), kd = must ? spec.slice(0, -1) : spec;
+      if (!has(q, k)) { if (must) E(code, `${path}.${k}`, 'missing'); continue; }
+      if (kd === 'enum') { if (!enums[k].includes(q[k])) E(code, `${path}.${k}`, 'one of ' + enums[k].join(', ')); }
+      else if (!okNum(kd, q[k])) E(code, `${path}.${k}`, 'out of range');
+    }
+  }
+  function checkSignal(v, path, E) {
+    if (!isObj(v)) { if (!isNum(v)) E('signal', path, 'a number or one of step, ramp, sine, steps'); return; }
+    const keys = Object.keys(v);
+    if (keys.length !== 1 || !['step', 'ramp', 'sine', 'steps'].includes(keys[0])) { E('signal', path, 'a number or one of step, ramp, sine, steps'); return; }
+    const kind = keys[0], q = v[kind];
+    if (kind === 'steps') {
+      const ok = Array.isArray(q) && q.length >= 1 && q.length <= MAX_STEPS_SIGNAL && q.every((p, i) => Array.isArray(p) && p.length === 2 && okNum('nonneg', p[0]) && isNum(p[1]) && (i === 0 || p[0] >= q[i - 1][0]));
+      if (!ok) E('signal', path + '.steps', `a list of 1 to ${MAX_STEPS_SIGNAL} [t, value] pairs, t ≥ 0 ascending`);
+      return;
+    }
+    if (!isObj(q)) { E('signal', `${path}.${kind}`, 'needs an object'); return; }
+    checkFields(q, SIG[kind], `${path}.${kind}`, E, 'signal', {});
+    if (kind === 'ramp' && isNum(q.until) && q.until <= (isNum(q.at) ? q.at : 0)) E('signal', path + '.ramp.until', 'must be after at');
+  }
+  /** the fastest time constant of a plant (for the step warning), or Infinity */
+  function fastest(p) {
+    if (p.type === 'fopdt') return p.tau;
+    if (p.type === 'second') return p.zeta < 1 ? 1 / p.wn : 1 / (p.wn * (p.zeta + Math.sqrt(p.zeta * p.zeta - 1)));
+    if (p.type === 'thermal') return p.R * p.C;
+    if (p.type === 'motor') { const m = { ...MOTOR, ...p }; const te = m.L > 0 ? m.L / m.R : Infinity, tm = m.J * m.R / (m.Kt * m.Kt + m.b * m.R); return Math.min(te, tm); }
+    return Infinity;
+  }
+  function check(model) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    if (!isObj(model)) { E('model', '', 'model is not an object'); return P; }
+    for (const k of extra(model, MODEL_KEYS)) E('unknown-field', k, 'unknown field');
+    const pl = model.plant;
+    let plantOk = false;
+    if (!isObj(pl)) E('plant', 'plant', 'needs an object {type, …}');
+    else if (!has(PLANTS, pl.type) || typeof pl.type !== 'string') E('plant', 'plant.type', 'one of ' + Object.keys(PLANTS).join(', '));
+    else {
+      const n0 = P.length, F = { type: 'enum', ...PLANTS[pl.type] };
+      checkFields(pl, F, 'plant', E, 'plant', { type: Object.keys(PLANTS), output: ['speed', 'position'] });
+      if (pl.type === 'tank' && isNum(pl.h0) && isNum(pl.hMax) && pl.h0 > pl.hMax) E('plant', 'plant.h0', 'above hMax');
+      plantOk = P.length === n0;
+    }
+    if (has(model, 'mode') && model.mode !== 'closed' && model.mode !== 'open') E('mode', 'mode', 'closed or open');
+    const open = model.mode === 'open', c = model.controller;
+    if (!has(model, 'controller')) { if (!open) E('controller', 'controller', 'a closed loop needs a controller {Kp, Ki?, Kd?, …}'); }
+    else if (!isObj(c)) E('controller', 'controller', 'needs an object {Kp, Ki?, Kd?, …}');
+    else {
+      checkFields(c, CTRL, 'controller', E, 'controller', { antiWindup: AW });
+      if (isNum(c.uMin) && isNum(c.uMax) && !(c.uMin < c.uMax)) E('controller', 'controller', 'uMin must be below uMax');
+      if (open) W('unused', 'controller', 'ignored in an open loop');
+      else if (!['Kp', 'Ki', 'Kd'].some(k => isNum(c[k]) && c[k] !== 0)) W('no-gain', 'controller', 'Kp, Ki and Kd are all 0');
+      if (has(c, 'antiWindup') && c.antiWindup !== 'none' && !has(c, 'uMin') && !has(c, 'uMax')) W('no-limits', 'controller.antiWindup', 'anti-windup needs uMin or uMax');
+    }
+    for (const k of ['setpoint', 'load', 'disturbance']) if (has(model, k)) checkSignal(model[k], k, E);
+    if (has(model, 'noise')) {
+      const nz = model.noise;
+      if (!isObj(nz)) E('noise', 'noise', 'needs an object {std, seed?}');
+      else {
+        for (const k of extra(nz, ['std', 'seed'])) E('noise', 'noise.' + k, 'unknown field');
+        if (!okNum('nonneg', nz.std)) E('noise', 'noise.std', 'needs a number ≥ 0');
+        if (has(nz, 'seed') && !(Number.isInteger(nz.seed) && nz.seed >= 0)) E('noise', 'noise.seed', 'needs a whole number ≥ 0');
+      }
+    }
+    if (has(model, 'metrics')) {
+      const mt = model.metrics;
+      if (!isObj(mt)) E('metrics', 'metrics', 'needs an object {band?}');
+      else {
+        for (const k of extra(mt, ['band'])) E('metrics', 'metrics.' + k, 'unknown field');
+        if (has(mt, 'band') && !(isNum(mt.band) && mt.band > 0 && mt.band <= 0.5)) E('metrics', 'metrics.band', 'needs a number in (0, 0.5]');
+      }
+    }
+    let te = null, dt = null;
+    if (has(model, 'transient')) {
+      const tr = model.transient;
+      if (!isObj(tr)) E('transient', 'transient', 'needs an object {tEnd, dt?}');
+      else {
+        for (const k of extra(tr, ['tEnd', 'dt'])) E('unknown-field', 'transient.' + k, 'unknown field');
+        if (!has(tr, 'tEnd')) E('transient', 'transient.tEnd', 'missing');
+        else if (isNum(tr.tEnd) && tr.tEnd > 0) te = tr.tEnd; else if (!isExpr(tr.tEnd)) E('transient', 'transient.tEnd', 'needs a number > 0 or an expression');
+        if (has(tr, 'dt')) { if (isNum(tr.dt) && tr.dt > 0) dt = tr.dt; else if (!isExpr(tr.dt)) E('transient', 'transient.dt', 'needs a number > 0 or an expression'); }
+        else if (te !== null) dt = te / 1000;
+        if (te !== null && dt !== null && Math.ceil(te / dt - 1e-9) > MAX_STEPS) E('budget', 'transient', `tEnd / dt is more than ${MAX_STEPS} steps`);
+        if (dt !== null && isObj(c) && isNum(c.Ts) && c.Ts > 0 && c.Ts < dt * (1 - 1e-9)) E('controller', 'controller.Ts', 'shorter than the step (transient.dt)');
+        if (dt !== null && plantOk && dt > fastest(pl) / 2) W('stiff', 'transient.dt', "longer than half the plant's fastest time constant (inaccurate or unstable)");
+      }
+    }
+    const bs = model.bindings;
+    if (has(model, 'bindings') && !(Array.isArray(bs) && bs.length <= MAX_BINDINGS)) E('binding', 'bindings', `a list of at most ${MAX_BINDINGS} {element, prop?, expr}`);
+    (Array.isArray(bs) ? bs.slice(0, MAX_BINDINGS) : []).forEach((b, i) => {
+      const w = `bindings[${i}]`;
+      if (!isObj(b)) { E('binding', w, 'an object {element, prop?, expr}'); return; }
+      for (const k of extra(b, ['element', 'prop', 'expr'])) E('unknown-field', `${w}.${k}`, 'unknown field');
+      if (!BIND_EL.includes(b.element)) E('binding', w + '.element', 'one of ' + BIND_EL.join(', '));
+      else if (!has(model, b.element)) E('binding', w + '.element', 'not in the model');
+      else {
+        const props = bindable(model, b.element), prop = has(b, 'prop') ? b.prop : 'value';
+        if (props && !props.includes(prop)) E('binding', w + '.prop', props.length ? 'one of ' + props.join(', ') : 'nothing to set here');
+      }
+      if (!(isExpr(b.expr) || isNum(b.expr) || typeof b.expr === 'boolean')) E('binding', w + '.expr', 'needs an expression');
+    });
+    return P;
+  }
+  /** the props a binding can set on an element of the model (null when the element itself is invalid: reported elsewhere) */
+  function bindable(model, el) {
+    const v = model[el];
+    if (el === 'plant') return isObj(v) && has(PLANTS, v.type) ? Object.keys(PLANTS[v.type]).filter(k => k !== 'output') : null;
+    if (el === 'controller') return isObj(v) ? Object.keys(CTRL) : null;
+    if (el === 'noise') return isObj(v) ? ['std'] : null;
+    if (isNum(v)) return ['value'];
+    if (isObj(v)) { const k = Object.keys(v)[0]; return has(SIG, k) ? Object.keys(SIG[k]).map(f => k + '.' + f) : k === 'steps' ? [] : null; }
+    return null;
+  }
+
+  // ---- checkSpec(spec) → the problems of a sim-spec's model and outputs (paths from the spec: model.…, outputs[i]…) ----
+  const OUT_KEYS = ['id', 'kind', 'signal', 'metric', 'time', 'at', 'stat'];
+  function checkSpec(spec) {
+    const P = [], E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const m = isObj(spec) ? spec.model : undefined;
+    if (!isObj(m)) { E('model', 'model', ID + ' needs a model {plant, controller?, setpoint?, transient, …}'); return P; }
+    for (const p of check(m)) P.push({ ...p, path: 'model' + (p.path ? '.' + p.path : '') });
+    if (!has(m, 'transient')) E('transient', 'model.transient', 'missing: every output of ' + ID + ' comes from a run {tEnd, dt?}');
+    (isObj(spec) && Array.isArray(spec.outputs) ? spec.outputs : []).forEach((o, i) => {
+      const w = `outputs[${i}]`;
+      if (!(isObj(o) && (o.kind === 'scalar' || o.kind === 'series'))) return;   // (the common checks report it)
+      for (const k of extra(o, OUT_KEYS)) E('unknown-field', `${w}.${k}`, 'unknown field');
+      const src = ['signal', 'metric', 'time'].filter(k => has(o, k));
+      if (src.length !== 1) { E('output', w, 'must name what it reads: one of signal, metric, time'); return; }
+      const s = src[0], at = has(o, 'at'), st = has(o, 'stat');
+      if (s === 'time' && !(o.time === true && o.kind === 'series')) E('output', w + '.time', 'true on a series output (the time axis)');
+      if (s === 'signal' && !SIGNALS.includes(o.signal)) E('output', w + '.signal', 'one of ' + SIGNALS.join(', '));
+      if (s === 'metric') { if (o.kind !== 'scalar') E('output', w, 'a metric is a scalar output'); else if (!METRICS.includes(o.metric)) E('output', w + '.metric', 'one of ' + METRICS.join(', ')); }
+      if ((at || st) && !(o.kind === 'scalar' && s === 'signal')) E('output', w, 'at and stat belong to a scalar output of a signal');
+      else if (s === 'signal' && o.kind === 'scalar' && !at && !st) E('output', w, 'a scalar signal needs at or stat');
+      if (at && st) E('output', w, 'at or stat, not both');
+      if (at && !((isNum(o.at) && o.at >= 0) || isExpr(o.at))) E('output', w + '.at', 'needs a number ≥ 0 or an expression');
+      if (st && !STATS.includes(o.stat)) E('output', w + '.stat', 'one of ' + STATS.join(', '));
+    });
+    return P;
+  }
+
+  // ---- signals, noise ----
+  function signal(v) {
+    if (v === undefined) return { at: () => 0, t0: 0 };
+    if (!isObj(v)) return { at: () => v, t0: 0 };
+    const kind = Object.keys(v)[0], q = v[kind];
+    if (kind === 'step') { const a = has(q, 'from') ? q.from : 0, b = q.to, t0 = has(q, 'at') ? q.at : 0; return { at: t => (t < t0 ? a : b), t0 }; }
+    if (kind === 'ramp') {
+      const a = has(q, 'from') ? q.from : 0, s = q.slope, t0 = has(q, 'at') ? q.at : 0, t1 = has(q, 'until') ? q.until : Infinity;
+      return { at: t => a + s * Math.max(0, Math.min(t, t1) - t0), t0 };
+    }
+    if (kind === 'sine') { const o = has(q, 'offset') ? q.offset : 0, w = 2 * Math.PI * q.freq, ph = (has(q, 'phase') ? q.phase : 0) * Math.PI / 180; return { at: t => o + q.amp * Math.sin(w * t + ph), t0: 0 }; }
+    const pts = q;   // steps: [[t, v], …]; 0 before the first
+    const at = t => { let r = 0; for (const [ti, vi] of pts) { if (t >= ti) r = vi; else break; } return r; };
+    const ch = pts.find(([ti, vi], i) => vi !== (i ? pts[i - 1][1] : 0));   // the first change
+    return { at, t0: ch ? ch[0] : 0 };
+  }
+  function mulberry32(a) {
+    return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  function gauss(rnd) { let spare = null; return () => { if (spare !== null) { const s = spare; spare = null; return s; } let u = 0; while (u === 0) u = rnd(); const v = rnd(), r = Math.sqrt(-2 * Math.log(u)); spare = r * Math.sin(2 * Math.PI * v); return r * Math.cos(2 * Math.PI * v); }; }
+
+  // ---- the plants as state equations: {x0, f(x, u, dx), y(x), post?(x)} ----
+  function plantOf(p) {
+    const d = (k, v) => (has(p, k) ? p[k] : v);
+    switch (p.type) {
+      case 'fopdt': return { x0: [d('y0', 0)], f: (x, u, dx) => { dx[0] = (p.K * u - x[0]) / p.tau; }, y: x => x[0] };
+      case 'second': { const w2 = p.wn * p.wn, zw = 2 * p.zeta * p.wn; return { x0: [d('y0', 0), 0], f: (x, u, dx) => { dx[0] = x[1]; dx[1] = w2 * (p.K * u - x[0]) - zw * x[1]; }, y: x => x[0] }; }
+      case 'integrator': return { x0: [d('y0', 0)], f: (x, u, dx) => { dx[0] = p.K * u; }, y: x => x[0] };
+      case 'thermal': { const Ta = d('Tamb', 25); return { x0: [d('y0', Ta)], f: (x, u, dx) => { dx[0] = (u - (x[0] - Ta) / p.R) / p.C; }, y: x => x[0] }; }
+      case 'tank': {
+        const hMax = d('hMax', Infinity);
+        return { x0: [d('h0', 0)], f: (x, u, dx) => { dx[0] = (Math.max(0, u) - p.k * Math.sqrt(Math.max(0, x[0]))) / p.A; }, y: x => x[0], post: x => { x[0] = Math.min(hMax, Math.max(0, x[0])); } };
+      }
+      default: {   // motor: x = [ω, θ, i] (i only when L > 0); u = voltage
+        const J = d('J', MOTOR.J), b = d('b', MOTOR.b), Kt = d('Kt', MOTOR.Kt), R = d('R', MOTOR.R), L = d('L', MOTOR.L), pos = p.output === 'position';
+        const y = pos ? x => x[1] : x => x[0];
+        if (L > 0) return { x0: [0, 0, 0], f: (x, u, dx) => { dx[0] = (Kt * x[2] - b * x[0]) / J; dx[1] = x[0]; dx[2] = (u - R * x[2] - Kt * x[0]) / L; }, y };
+        return { x0: [0, 0], f: (x, u, dx) => { const i = (u - Kt * x[0]) / R; dx[0] = (Kt * i - b * x[0]) / J; dx[1] = x[0]; }, y };
+      }
+    }
+  }
+
+  /** the step-response metrics of a curve: {t0, y0?, yf?, band (0.02)} → {rise, overshoot %, peak, peakTime, settling, yFinal}
+      (rise 10–90 % and settling inside ±band of the change, both from t0; yFinal = the mean of the last 2 % of the samples) */
+  function metrics(t, y, o) {
+    o = o || {};
+    const N = y.length, band = o.band || 0.02, t0 = o.t0 || 0;
+    let i0 = 0; while (i0 < N - 1 && t[i0] < t0) i0++;
+    const tail = Math.max(1, Math.floor(N * 0.02)); let s = 0; for (let i = N - tail; i < N; i++) s += y[i];
+    const yf = o.yf !== undefined ? o.yf : s / tail, y0 = o.y0 !== undefined ? o.y0 : y[i0], D = yf - y0;
+    const r = { rise: NaN, overshoot: NaN, peak: NaN, peakTime: NaN, settling: NaN, yFinal: yf };
+    if (!(Math.abs(D) > 1e-12 * (1 + Math.abs(yf))) || !Number.isFinite(D)) return r;
+    const g = i => (y[i] - y0) / D, cross = lev => { for (let i = i0; i < N; i++) if (g(i) >= lev) { if (i === i0) return t[i]; const a = g(i - 1), b = g(i); return t[i - 1] + (t[i] - t[i - 1]) * (lev - a) / (b - a); } return NaN; };
+    r.rise = cross(0.9) - cross(0.1);
+    let ip = i0; for (let i = i0; i < N; i++) if (g(i) > g(ip)) ip = i;
+    r.peak = y[ip]; r.peakTime = t[ip] - t0; r.overshoot = g(ip) - 1 > 1e-9 ? (g(ip) - 1) * 100 : 0;
+    const out = i => Math.abs(y[i] - yf) > band * Math.abs(D);
+    if (out(N - 1)) return r;
+    let last = -1; for (let i = N - 2; i >= i0; i--) if (out(i)) { last = i; break; }
+    if (last < 0) r.settling = 0;
+    else {   // the time the curve enters the band for good (interpolated)
+      const a = y[last] - yf, b = y[last + 1] - yf, lim = band * Math.abs(D) * Math.sign(a), f = (a - lim) / (a - b || 1);
+      r.settling = t[last] + (t[last + 1] - t[last]) * Math.min(1, Math.max(0, f)) - t0;
+    }
+    return r;
+  }
+
+  // ---- the simulator ----
+  function makeSim(model, opts) {
+    const pl = plantOf(model.plant), open = model.mode === 'open', c = model.controller || {};
+    const d = (k, v) => (has(c, k) ? c[k] : v);
+    const Kp = d('Kp', 0), Ki = d('Ki', 0), Kd = d('Kd', 0), bw = d('b', 1), cw = d('c', 0), u0 = d('u0', 0);
+    const uMin = d('uMin', -Infinity), uMax = d('uMax', Infinity), aw = d('antiWindup', 'none');
+    const Tf = has(c, 'Tf') ? c.Tf : Kp !== 0 ? Math.abs(Kd / Kp) / d('N', 10) : 0;
+    const Ti = Kp !== 0 && Ki !== 0 ? Math.abs(Kp / Ki) : Ki !== 0 ? 1 / Math.abs(Ki) : Infinity, Td = Kp !== 0 ? Math.abs(Kd / Kp) : 0;
+    const Tt = has(c, 'Tt') ? c.Tt : Td > 0 ? Math.sqrt(Ti * Td) : Ti;
+    const sp = signal(has(model, 'setpoint') ? model.setpoint : 1), ld = signal(model.load), od = signal(model.disturbance);
+    const theta = has(model.plant, 'theta') ? model.plant.theta : 0;
+    const nz = model.noise, std = nz ? nz.std : 0;
+    const seed = (nz && has(nz, 'seed') ? nz.seed : opts && opts.seed !== undefined ? opts.seed : 1) >>> 0;
+    const band = model.metrics && model.metrics.band ? model.metrics.band : 0.02;
+    function run(o) {
+      o = o || {};
+      const tEnd = o.tEnd, dt0 = o.dt === undefined || o.dt === 0 ? tEnd / 1000 : o.dt;
+      if (!(isNum(tEnd) && tEnd > 0 && isNum(dt0) && dt0 > 0)) throw fail('bad-args');
+      const steps = Math.max(1, Math.ceil(tEnd / dt0 - 1e-9)), h = tEnd / steps;
+      if (steps > MAX_STEPS) throw fail('budget', { steps, limit: MAX_STEPS });
+      const N = steps + 1, T = new Float64Array(N), R = new Float64Array(N), Y = new Float64Array(N), YM = new Float64Array(N), U = new Float64Array(N), Ev = new Float64Array(N);
+      const uin = new Float64Array(N), noise = std > 0 ? gauss(mulberry32(seed)) : null;
+      const every = Math.max(1, Math.round((has(c, 'Ts') && c.Ts > 0 ? c.Ts : h) / h)), hc = every * h;
+      const nx = pl.x0.length, k1 = new Float64Array(nx), k2 = new Float64Array(nx), k3 = new Float64Array(nx), k4 = new Float64Array(nx), xt = new Float64Array(nx);
+      let x = Float64Array.from(pl.x0), I = 0, D = 0, sPrev = NaN, uHeld = 0, sat = false, satTime = 0, dead = false;
+      const lag = theta / h;
+      for (let k = 0; k <= steps; k++) {
+        const t = k * h; T[k] = t;
+        if (dead) { R[k] = Y[k] = YM[k] = U[k] = Ev[k] = NaN; continue; }
+        const r = sp.at(t), y = pl.y(x) + od.at(t), ym = y + (noise ? std * noise() : 0);
+        if (open) uHeld = r;
+        else if (k % every === 0) {
+          const s = cw * r - ym;
+          D = Number.isNaN(sPrev) ? 0 : (Tf * D + Kd * (s - sPrev)) / (Tf + hc); sPrev = s;
+          const v = u0 + Kp * (bw * r - ym) + I + D, u = Math.min(uMax, Math.max(uMin, v)), e = r - ym;
+          sat = v > uMax || v < uMin;
+          if (aw === 'backcalc') I += hc * (Ki * e + (u - v) / Tt);
+          else if (aw === 'clamp' && ((v > uMax && Ki * e > 0) || (v < uMin && Ki * e < 0))) { /* hold the integral */ }
+          else I += hc * Ki * e;
+          uHeld = u;
+        }
+        R[k] = r; Y[k] = y; YM[k] = ym; U[k] = uHeld; Ev[k] = r - ym;
+        if (k === steps) break;
+        if (sat && !open) satTime += h;
+        uin[k] = uHeld + ld.at(t);
+        let ud = uin[k];
+        if (lag > 0) { const j = k - lag; if (j < 0) ud = 0; else { const lo = Math.floor(j), f = j - lo; ud = f > 0 ? uin[lo] * (1 - f) + uin[lo + 1] * f : uin[lo]; } }
+        pl.f(x, ud, k1);
+        for (let i = 0; i < nx; i++) xt[i] = x[i] + 0.5 * h * k1[i]; pl.f(xt, ud, k2);
+        for (let i = 0; i < nx; i++) xt[i] = x[i] + 0.5 * h * k2[i]; pl.f(xt, ud, k3);
+        for (let i = 0; i < nx; i++) xt[i] = x[i] + h * k3[i]; pl.f(xt, ud, k4);
+        for (let i = 0; i < nx; i++) x[i] += h / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
+        if (pl.post) pl.post(x);
+        for (let i = 0; i < nx; i++) if (!(Math.abs(x[i]) < BLOWUP)) dead = true;   // unstable: the rest of the run is NaN
+      }
+      // the metrics: the step response from the setpoint's step (closed) or the input's (open); the errors on the true y
+      const mt = metrics(T, Y, { t0: sp.t0, band });
+      let iae = 0, ise = 0, itae = 0;
+      for (let k = 1; k < N; k++) { const e0 = R[k - 1] - Y[k - 1], e1 = R[k] - Y[k]; iae += 0.5 * h * (Math.abs(e0) + Math.abs(e1)); ise += 0.5 * h * (e0 * e0 + e1 * e1); itae += 0.5 * h * (T[k - 1] * Math.abs(e0) + T[k] * Math.abs(e1)); }
+      const tail = Math.max(1, Math.floor(N * 0.02)); let es = 0; for (let k = N - tail; k < N; k++) es += R[k] - Y[k];   // (the mean of the last 2 %: a ramp's lag too)
+      const m = { ...mt, ess: open ? NaN : es / tail, iae, ise, itae, satTime, unstable: dead };
+      return { t: T, r: R, y: Y, ym: YM, u: U, e: Ev, metrics: m, steps, dt: h };
+    }
+    return { run };
+  }
+
+  function create(model, opts) {
+    const problems = check(model);
+    if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
+    const inner = makeSim(JSON.parse(JSON.stringify(model)), opts || {});
+    return Object.freeze({ id: ID, run: o => inner.run(o) });
+  }
+
+  // ---- the sim-spec@1 adapter: create(spec, {seed}) → { run(inputs) → outputs } (in the worker and inline) ----
+  const MAXP = 2000;
+  const thin = (a, k) => { if (a.length <= k) return Array.from(a); const f = (a.length - 1) / (k - 1), r = []; for (let i = 0; i < k; i++) r.push(a[Math.round(i * f)]); return r; };
+  function interp(t, v, x) {
+    if (!(x >= t[0])) return v[0]; if (x >= t[t.length - 1]) return v[v.length - 1];
+    const h = t[1] - t[0], i = Math.min(t.length - 2, Math.floor(x / h)), f = (x - t[i]) / h; return v[i] + f * (v[i + 1] - v[i]);
+  }
+  function stat(v, s) {
+    if (s === 'final') return v[v.length - 1];
+    let mn = Infinity, mx = -Infinity, sum = 0, sq = 0; for (const y of v) { if (y < mn) mn = y; if (y > mx) mx = y; sum += y; sq += y * y; }
+    return s === 'min' ? mn : s === 'max' ? mx : s === 'mean' ? sum / v.length : s === 'pp' ? mx - mn : Math.sqrt(sq / v.length);
+  }
+  function setProp(m, el, prop, v) {
+    if (prop === undefined) prop = 'value';
+    if (el === 'plant' || el === 'noise') { if (isObj(m[el])) m[el][prop] = v; return; }
+    if (el === 'controller') { if (!isObj(m.controller)) return; m.controller[prop] = prop === 'antiWindup' ? (typeof v === 'boolean' ? (v ? 'clamp' : 'none') : AW[Math.round(v)] || 'none') : v; return; }
+    if (prop === 'value') { m[el] = v; return; }
+    const [k, f] = String(prop).split('.'); if (isObj(m[el]) && isObj(m[el][k])) m[el][k][f] = v;
+  }
+  const adapter = { create(spec, opts) {
+    const model = spec.model || {}, outs = spec.outputs || [], seed = (opts && opts.seed) >>> 0;
+    let key = null, res = null;
+    return {
+      run(inp) {
+        const k = JSON.stringify([inp.$bind || [], inp.$tran]);
+        if (k !== key) {
+          key = k; res = null;
+          try {
+            const m = JSON.parse(JSON.stringify(model)); delete m.bindings;
+            for (const [el, prop, v] of inp.$bind || []) setProp(m, el, prop, v);
+            const T = inp.$tran || {};
+            res = create(m, { seed }).run({ tEnd: T.tEnd, dt: T.dt > 0 ? T.dt : undefined });
+          } catch (e) { res = null; }
+        }
+        const r = {};
+        for (const o of outs) {
+          try {
+            if (!res) throw fail('run');
+            if (o.kind === 'series') { r[o.id] = thin(o.time ? res.t : res[o.signal] || [], MAXP); continue; }
+            if (o.metric !== undefined) { const v = res.metrics[o.metric]; r[o.id] = typeof v === 'number' ? v : NaN; continue; }
+            const v = res[o.signal];
+            r[o.id] = !v ? NaN : o.stat !== undefined ? (STATS.includes(o.stat) ? stat(v, o.stat) : NaN) : interp(res.t, v, inp.$at ? inp.$at[o.id] : NaN);
+          } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
+        }
+        return r;
+      },
+    };
+  } };
+  /** on the main thread: the spec's expressions (bindings, transient times, `at`) become numbers or booleans */
+  function prepare(spec, compileExpr) {
+    const m = spec.model || {}, f = v => (typeof v === 'string' ? compileExpr(v) : () => v);
+    const binds = (m.bindings || []).map(b => [b.element, b.prop, f(b.expr)]);
+    const tEnd = m.transient ? f(m.transient.tEnd) : null, dt = m.transient && m.transient.dt !== undefined ? f(m.transient.dt) : null;
+    const ats = (spec.outputs || []).filter(o => o.at !== undefined).map(o => [o.id, f(o.at)]);
+    const ev = (g, env) => { try { const v = g(env); return typeof v === 'boolean' ? v : +v; } catch (e) { return NaN; } };
+    return env => ({ ...env, $bind: binds.map(([el, prop, g]) => [el, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])) });
+  }
+
+  /** the engine's own source, to run it in a Worker */
+  const source = () => '(' + noemaPIDModule.toString() + ')(self);';
+  const engine = Object.freeze({
+    id: ID,
+    check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `spec.${p.path}: ${p.msg}`),
+    prepare,
+    create: (spec, opts) => adapter.create(spec, opts),
+    workerSource: source() + '\n;self.noemaEngine = self.NoemaPID.adapter;',
+  });
+  root.NoemaPID = Object.freeze({
+    id: ID, STATS: Object.freeze(STATS.slice()), SIGNALS: Object.freeze(SIGNALS.slice()), METRICS: Object.freeze(METRICS.slice()), ZN, MOTOR: Object.freeze({ ...MOTOR }),
+    limits: Object.freeze({ steps: MAX_STEPS, bindings: MAX_BINDINGS, signalSteps: MAX_STEPS_SIGNAL }),
+    check, checkSpec, create, metrics, source, adapter: Object.freeze(adapter), engine,
+  });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
+
 /* ---- 40_views.js ---- */
 /* ===================== Views ===================== */
 const main = () => $('main');
@@ -6419,11 +7455,37 @@ function subjectMenu() {
     Noema.node ? { label: SL('openMap'), icon: 'map', run: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) } : null,
     window.NoemaCurMap?.attachDialog ? { label: Noema.node ? SL('otherStation') : SL('putOnMap'), sub: SL('putOnMapSub'), icon: 'path', run: async () => NoemaCurMap.attachDialog(ACCOUNT.id, { subject: await subjectMeta(), onDone: () => location.reload() }) } : null,
     { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
+    { label: tE('engine.author.create'), sub: tE('engine.author.createSub'), icon: 'wrench', href: '#/author' },
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
     { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
+    window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
+    window.NoemaXAPI ? { label: tE('engine.xapi.cmi5'), sub: tE('engine.xapi.cmi5Sub'), icon: 'download', run: exportCmi5 } : null,
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
+}
+/** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
+    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. The pack's own subject
+    (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
+function exportXAPI() {
+  let r;
+  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
+  if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
+  saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
+}
+/** ⋮ › Course package for an LMS (cmi5): the subject's chapters as a cmi5 course structure in a .zip (NoemaXAPI.subjectCmi5; JSZip, the
+    app's zip writer); its AUs open the chapters on the site, with the same ids as the xAPI record. */
+async function exportCmi5() {
+  try {
+    const r = NoemaXAPI.subjectCmi5({ pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
+    saveBlob(r.name, await NoemaXAPI.zip(r.files));
+  } catch (e) { toast('⚠️ ' + errText(e), 4000); }
+}
+function saveBlob(name, blob) {
+  const u = URL.createObjectURL(blob), a = h('a', { href: u, download: name });
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 10000);
+  toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
   confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
@@ -7061,8 +8123,31 @@ function drillView(id) {
 
 /* ---------- router ---------- */
 /** The subject's pages. In the shell, #/ is Today and the subject lives at #/subject; any other address is the shell's. */
+/* ---------- ✎ the activity author (#/author): an interactive activity built with a form, the real sim-spec@1 runtime as its preview
+   (docs/INTERACTIVE_AUTHORING.md, docs/activities-dev/authoring_ui.md). Its scripts load on the first visit (the single-file
+   bundle has them inline); the activity is not added to the open subject — the author downloads its folder. ---------- */
+let AUTHOR_LOAD = null;
+function loadAuthor() {
+  if (window.NoemaActivityAuthor) return Promise.resolve();
+  const base = window.NOEMA_ENGINE_BASE || 'engine/';
+  const js = f => new Promise((ok, no) => { const s = document.createElement('script'); s.src = base + f; s.onload = ok; s.onerror = () => no(new Error(f)); document.head.append(s); });
+  return AUTHOR_LOAD || (AUTHOR_LOAD = (async () => {
+    if (!document.querySelector('link[data-author-css]')) document.head.append(h('link', { rel: 'stylesheet', href: base + 'activity_author.css', 'data-author-css': '1' }));
+    for (const f of ['schemaform.js', 'activity_author_schemas.js', 'activity_author.js']) if (!(f === 'schemaform.js' ? window.NoemaSchemaForm : f === 'activity_author.js' ? window.NoemaActivityAuthor : window.NoemaActivitySchemas)) await js(f);
+  })().catch(e => { AUTHOR_LOAD = null; throw e; }));
+}
+async function authorView() {
+  shellChrome({ sub: true, crumbs: [[tE('engine.author.title')]], back: HOME() });
+  const v = view(backBtn('← ' + SUBJ.title, HOME()), h('p', { class: 'muted' }, tE('engine.author.loading')));
+  try { await loadAuthor(); } catch (e) { v.replaceChildren(...[backBtn('← ' + SUBJ.title, HOME()), h('p', {}, tE('engine.author.loadFailed'))].filter(Boolean)); return; }
+  if ((location.hash || '').slice(2).split('/')[0] !== 'author') return;   // the learner went elsewhere while it loaded
+  const m = main(); m.dataset.page = '@engine';
+  NoemaActivityAuthor.view(m);
+  if (!SHL()) m.prepend(backBtn('← ' + SUBJ.title, HOME()));
+}
 function route() {
   const p = (location.hash || '#/').slice(2).split('/');
+  if (p[0] !== 'author' && window.NoemaActivityAuthor?.current) { try { NoemaActivityAuthor.current.destroy(); } catch (e) { } NoemaActivityAuthor.current = null; }   // left the author: its preview and keys stop
   const X = SHL();
   if (X && !X.ENGINE_ROUTES.has(p[0])) return X.route();
   closeTutorIfMobile();
@@ -7082,6 +8167,7 @@ function route() {
   if (p[0] === 'drill') return drillView(p[1]);
   if (p[0] === 'mistakes') return mistakesView();
   if (p[0] === 'new') return whatsNewView();
+  if (p[0] === 'author') return authorView();
   if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
   homeView();
 }
@@ -7114,6 +8200,436 @@ function boot() {
   else route();
   if (S.settings.apiKey && !S.settings.models.length) detectModels().catch(() => { });
 }
+
+/* ---- 41_engine_rf.js ---- */
+/* ===================== interactive activities — the radio engine rf@1 (docs/INTERACTIVE_ENGINES.md §4, docs/adr/001 D12, P6) =====================
+   Radio link budgets and propagation for IoT benches of tier B (sim-spec@1): free-space path loss (Friis), two-ray ground,
+   log-distance with seeded log-normal shadowing, Okumura–Hata (urban / large city / suburban / open, inside its range of
+   validity), ITU-R P.1238 indoor (floors) plus wall losses, Fresnel zone and knife-edge diffraction (ITU-R P.526), antenna gains,
+   cable losses, EIRP, the noise floor (kTB + NF), receiver sensitivity, link margin, the maximum range (bisection), RSSI against
+   distance, bit and packet error rates against SNR (BPSK, QPSK, FSK, BLE, Wi-Fi rough, LoRa SF7–12), LoRa airtime (Semtech) and
+   duty cycle, BLE and Wi-Fi airtime (rough). Pure JS, no DOM, no text for the learner: codes and numbers only.
+   The link (noema.rf/v1) is described in docs/INTERACTIVE_ENGINES.md §4 and tools/schemas/noema.rf.v1.schema.json. Python twin of
+   check() / checkSpec(): tools/rf.py. Registering it is one line: ACT.registerEngine(NoemaRF.engine). Tests: node tests/rf.js. */
+(function noemaRfModule(root) {
+  /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
+  'use strict';
+  const ID = 'rf@1', FORMAT = 'noema.rf/v1';
+  const MAX_POINTS = 2000, MAX_WALLS = 32, MAX_BINDINGS = 24, MAX_ITER = 200;
+  const C0 = 299792458, KB = 1.380649e-23, T0 = 290;
+  const KT_DBM_HZ = 10 * Math.log10(KB * T0 * 1000);   // −173.98 dBm/Hz
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const log10 = Math.log10;
+  function fail(code, extra) { const e = new Error('rf: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
+
+  /** a number, or a string with an SI prefix ("868M", "125k") → number; anything else → NaN (as NoemaCircuit.num) */
+  const SI = { f: 1e-15, p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, m: 1e-3, k: 1e3, K: 1e3, M: 1e6, meg: 1e6, G: 1e9 };
+  function num(v) {
+    if (typeof v === 'number') return Number.isFinite(v) ? v : NaN;
+    if (typeof v !== 'string') return NaN;
+    const m = /^\s*([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)\s*(meg|[fpnuµmkKMG])?\s*$/.exec(v);
+    return m ? parseFloat(m[1]) * (m[2] ? SI[m[2]] : 1) : NaN;
+  }
+
+  // ---- the formulas (SI: m, Hz, dB, dBm, s) ----
+  /** free-space path loss (Friis): 20·log10(4π d f / c) */
+  const fspl = (d, f) => 20 * log10(4 * Math.PI * d * f / C0);
+  /** two-ray ground reflection: free space up to the crossover d_c = 4π·ht·hr/λ, then 40·log10 d − 20·log10(ht·hr) */
+  const crossover = (f, ht, hr) => 4 * Math.PI * ht * hr * f / C0;
+  const twoRay = (d, f, ht, hr) => (d < crossover(f, ht, hr) ? fspl(d, f) : 40 * log10(d) - 20 * log10(ht * hr));
+  /** log-distance: PL(d0) (free space) + 10·n·log10(d/d0); free space below d0 */
+  const logDistance = (d, f, n, d0) => (d <= d0 ? fspl(d, f) : fspl(d0, f) + 10 * n * log10(d / d0));
+  /** Okumura–Hata (Hata 1980; COST 231 final report §4.4.1). f 150–1500 MHz, hb 30–200 m, hm 1–10 m, d 1–20 km; NaN outside */
+  const HATA_ENVS = ['urban', 'urban-large', 'suburban', 'open'];
+  const hataValid = (d, f, hb, hm) => f >= 150e6 && f <= 1500e6 && hb >= 30 && hb <= 200 && hm >= 1 && hm <= 10 && d >= 1000 && d <= 20000;
+  function hata(d, f, hb, hm, env) {
+    if (!hataValid(d, f, hb, hm)) return NaN;
+    const F = f / 1e6, lf = log10(F), dk = d / 1000;
+    const aSmall = (1.1 * lf - 0.7) * hm - (1.56 * lf - 0.8);
+    const a = env !== 'urban-large' ? aSmall : F < 300 ? 8.29 * Math.pow(log10(1.54 * hm), 2) - 1.1 : 3.2 * Math.pow(log10(11.75 * hm), 2) - 4.97;
+    const Lu = 69.55 + 26.16 * lf - 13.82 * log10(hb) - a + (44.9 - 6.55 * log10(hb)) * log10(dk);
+    if (env === 'suburban') return Lu - 2 * Math.pow(log10(F / 28), 2) - 5.4;
+    if (env === 'open') return Lu - 4.78 * lf * lf + 18.33 * lf - 40.94;
+    return Lu;
+  }
+  /** ITU-R P.1238 indoor: 20·log10 f(MHz) + N·log10 d + Lf(floors) − 28. N and Lf from its Tables 2 and 3 (nearest band; a gap in
+      a table takes the nearest band's value of the same environment). f 0.8–6 GHz, d ≥ 1 m; NaN outside */
+  const INDOOR_ENVS = ['residential', 'office', 'commercial'];
+  const P1238 = [   // band GHz: N by environment, Lf(n floors ≥ 1) by environment
+    { g: 0.9, N: { residential: 28, office: 33, commercial: 20 }, Lf: { residential: n => 4 * n, office: n => [9, 19, 24][Math.min(n, 3) - 1] + 4 * Math.max(0, n - 3), commercial: n => 6 + 3 * (n - 1) } },
+    { g: 1.9, N: { residential: 28, office: 30, commercial: 22 }, Lf: { residential: n => 4 * n, office: n => 15 + 4 * (n - 1), commercial: n => 6 + 3 * (n - 1) } },
+    { g: 2.4, N: { residential: 28, office: 30, commercial: 22 }, Lf: { residential: n => 10 + 4 * (n - 1), office: n => 14 + 4 * (n - 1), commercial: n => 6 + 3 * (n - 1) } },
+    { g: 5.2, N: { residential: 28, office: 31, commercial: 22 }, Lf: { residential: n => 13 + 4 * (n - 1), office: n => 16 + 4 * (n - 1), commercial: n => 8 + 3 * (n - 1) } },
+  ];
+  const indoorBand = f => P1238.reduce((b, x) => (Math.abs(Math.log(f / 1e9 / x.g)) < Math.abs(Math.log(f / 1e9 / b.g)) ? x : b));
+  const indoorValid = (d, f) => f >= 0.8e9 && f <= 6e9 && d >= 1;
+  function indoor(d, f, env, floors, N, lf) {
+    if (!indoorValid(d, f)) return NaN;
+    const b = indoorBand(f), e = INDOOR_ENVS.includes(env) ? env : 'office';
+    const n = N !== undefined ? N : b.N[e], Lf = floors > 0 ? (lf !== undefined ? lf : b.Lf[e](floors)) : 0;
+    return 20 * log10(f / 1e6) + n * log10(d) + Lf - 28;
+  }
+  /** walls (rough losses at 2.4 GHz, dB per wall; docs/INTERACTIVE_ENGINES.md §4) */
+  const WALLS = { drywall: 3, wood: 4, glass: 2, brick: 8, concrete: 12, metal: 26 };
+  /** the n-th Fresnel zone radius at d1 from one end and d2 from the other */
+  const fresnelRadius = (d1, d2, f, n) => Math.sqrt((n || 1) * (C0 / f) * d1 * d2 / (d1 + d2));
+  /** single knife-edge (ITU-R P.526-15 eq. 31): h above the line of sight (> 0 blocks) → loss dB */
+  function knifeEdge(h, d1, d2, f) {
+    const v = h * Math.sqrt(2 * (d1 + d2) / ((C0 / f) * d1 * d2));
+    return v > -0.78 ? 6.9 + 20 * log10(Math.sqrt((v - 0.1) * (v - 0.1) + 1) + v - 0.1) : 0;
+  }
+  /** the receiver: noise floor kTB + NF (dBm) */
+  const noiseFloor = (bw, nf) => KT_DBM_HZ + 10 * log10(bw) + (nf || 0);
+  // error functions: erfc (Numerical Recipes erfcc, relative error < 1.2e-7), Q(x) = ½·erfc(x/√2)
+  function erfc(x) {
+    const z = Math.abs(x), t = 1 / (1 + 0.5 * z);
+    const r = t * Math.exp(-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
+    return x >= 0 ? r : 2 - r;
+  }
+  const Q = x => 0.5 * erfc(x / Math.SQRT2);
+  /** LoRa demodulator SNR floors (Semtech SX1276/77/78/79 datasheet rev. 7, table 13), SF7…SF12, dB */
+  const LORA_SNR = { 7: -7.5, 8: -10, 9: -12.5, 10: -15, 11: -17.5, 12: -20 };
+  const WIFI_RATES = [6, 9, 12, 18, 24, 36, 48, 54];
+  const qamM = rate => (rate <= 9 ? 2 : rate <= 18 ? 4 : rate <= 36 ? 16 : 64);
+  function mqamBer(M, ebn0) {   // Gray-coded square M-QAM (M = 2: BPSK), uncoded
+    if (M === 2) return Q(Math.sqrt(2 * ebn0));
+    const k = Math.log2(M);
+    return Math.min(0.5, (4 / k) * (1 - 1 / Math.sqrt(M)) * Q(Math.sqrt(3 * k * ebn0 / (M - 1))));
+  }
+  /** bit error rate. bpsk / qpsk: Q(√(2·Eb/N0)); fsk, ble (non-coherent binary FSK): ½·e^(−Eb/2N0); wifi: uncoded M-QAM of its rate;
+      lora (Elshabrawy & Robert 2018, AWGN): ½·Q(√(2^(SF+1)·SNR) − √(1.386·SF + 1.154)), SNR in the channel bandwidth. Linear inputs. */
+  function ber(mod, x, o) {
+    if (mod === 'bpsk' || mod === 'qpsk') return Q(Math.sqrt(2 * x));
+    if (mod === 'fsk' || mod === 'ble') return 0.5 * Math.exp(-x / 2);
+    if (mod === 'wifi') return mqamBer(qamM((o && o.rate) || 6), x);
+    if (mod === 'lora') { const sf = (o && o.sf) || 7; return 0.5 * Q(Math.sqrt(x * Math.pow(2, sf + 1)) - Math.sqrt(1.386 * sf + 1.154)); }
+    return NaN;
+  }
+  const perOf = (b, bytes) => 1 - Math.pow(1 - Math.min(0.5, Math.max(0, b)), 8 * Math.max(1, bytes));
+  /** LoRa time on air (Semtech SX1276 datasheet §4.1.1.6, AN1200.13): {symbol, preamble, payloadSymbols, airtime} s */
+  function loraAirtime(o) {
+    const sf = o.sf || 7, bw = o.bw || 125e3, cr = o.cr || 1, npre = o.preamble === undefined ? 8 : o.preamble;
+    const ih = o.header === false ? 1 : 0, crc = o.crc === false ? 0 : 1, pl = o.payload === undefined ? 20 : o.payload;
+    const ts = Math.pow(2, sf) / bw, de = o.ldro === undefined ? (ts > 0.016 ? 1 : 0) : (o.ldro ? 1 : 0);
+    const nPay = 8 + Math.max(Math.ceil((8 * pl - 4 * sf + 28 + 16 * crc - 20 * ih) / (4 * (sf - 2 * de))) * (cr + 4), 0);
+    const tPre = (npre + 4.25) * ts;
+    return { symbol: ts, preamble: tPre, payloadSymbols: nPay, airtime: tPre + nPay * ts, ldro: de };
+  }
+  /** BLE (rough): one link-layer packet, preamble + access address + header + payload + CRC, at 1 or 2 Mb/s */
+  const bleAirtime = (payload, phy) => (phy === '2M' ? (2 + 4 + 2 + payload + 3) * 8 / 2e6 : (1 + 4 + 2 + payload + 3) * 8 / 1e6);
+  /** Wi-Fi 802.11a/g OFDM (rough): 20 µs preamble + 4 µs symbols of 16 service + 8·(payload + 36 MAC/LLC bytes) + 6 tail bits */
+  const wifiAirtime = (payload, rate) => 20e-6 + 4e-6 * Math.ceil((16 + 8 * (payload + 36) + 6) / (4 * rate));
+
+  // ---- seeded noise (as NoemaCircuit) ----
+  function mulberry32(a) {
+    return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+
+  // ---- the link format: a table the checker walks (the same table in tools/rf.py) ----
+  const MODELS = ['fspl', 'two-ray', 'log-distance', 'hata', 'indoor'], MODS = ['bpsk', 'qpsk', 'fsk', 'lora', 'ble', 'wifi'];
+  const WALL_T = { type: 'enum:' + Object.keys(WALLS).join('|'), loss: 'nonneg', count: 'int:1:50' };
+  const TABLE = {
+    format: 'const', f: 'pos!', d: 'pos!', fadeMargin: 'fin',
+    tx: { $obj: { power: 'fin', gain: 'fin', cable: 'nonneg' } },
+    rx: { $obj: { gain: 'fin', cable: 'nonneg', nf: 'nonneg', bw: 'pos', snr: 'fin', sensitivity: 'fin' } },
+    path: { $obj: { model: 'enum:' + MODELS.join('|'), ht: 'pos', hr: 'pos', n: 'pos', d0: 'pos', sigma: 'nonneg',
+      env: 'enum:' + HATA_ENVS.concat(INDOOR_ENVS).join('|'), floors: 'int:0:20', N: 'pos', lf: 'nonneg', extra: 'nonneg',
+      walls: { $list: WALL_T, max: MAX_WALLS }, obstacle: { $obj: { d1: 'pos!', h: 'fin!' } } } },
+    radio: { $obj: { mod: 'enum:' + MODS.join('|'), bitrate: 'pos', bw: 'pos', sf: 'int:7:12', cr: 'int:1:4', preamble: 'int:0:65535',
+      header: 'bool', crc: 'bool', ldro: 'bool', payload: 'int:0:255', phy: 'enum:1M|2M', rate: 'pos', interval: 'pos', dutyLimit: 'unit' } },
+    sweep: { $obj: { from: 'pos!', to: 'pos!', points: 'int:2:' + MAX_POINTS, scale: 'enum:log|lin' } },
+    snrSweep: { $obj: { from: 'fin!', to: 'fin!', points: 'int:2:' + MAX_POINTS } },
+  };
+  /** the generic walk of a table: codes format, value, enum, size, unknown-field (a warning); the same messages as tools/rf.py */
+  function checkNum(kind, v) {
+    if (kind === 'bool') return typeof v === 'boolean';
+    if (kind.startsWith('int:')) { const [, a, b] = kind.split(':'); return typeof v === 'number' && Number.isInteger(v) && v >= +a && v <= +b; }
+    if (kind.startsWith('enum:')) return typeof v === 'string' && kind.slice(5).split('|').includes(v);
+    const x = num(v);
+    return kind === 'pos' ? x > 0 : kind === 'nonneg' ? x >= 0 : kind === 'unit' ? x >= 0 && x <= 1 : Number.isFinite(x);
+  }
+  function kindMsg(kind) {
+    if (kind === 'bool') return 'needs true or false';
+    if (kind.startsWith('int:')) { const [, a, b] = kind.split(':'); return `needs an integer from ${a} to ${b}`; }
+    if (kind.startsWith('enum:')) return 'one of ' + kind.slice(5).split('|').join(', ');
+    return { pos: 'needs a number > 0', nonneg: 'needs a number >= 0', unit: 'needs a number from 0 to 1', fin: 'needs a number' }[kind];
+  }
+  const join = (p, k) => (p ? p + '.' + k : k);
+  function walk(o, T, path, E, W, format) {
+    if (!isObj(o)) { E('format', path, 'not an object'); return; }
+    for (const k of Object.keys(o)) if (!has(T, k) && k !== 'meta') W('unknown-field', join(path, k), 'ignored');
+    for (const k of Object.keys(T)) {
+      const kd = T[k], p = join(path, k), v = o[k];
+      if (typeof kd === 'string') {
+        const must = kd.endsWith('!'), kind = must ? kd.slice(0, -1) : kd;
+        if (v === undefined) { if (must) E('value', p, 'missing'); continue; }
+        if (kind === 'const') { if (v !== format) E('format', p, 'not ' + format); continue; }
+        if (!checkNum(kind, v)) E(kind.startsWith('enum:') ? 'enum' : 'value', p, kindMsg(kind));
+      } else if (v === undefined) continue;
+      else if (kd.$obj) walk(v, kd.$obj, p, E, W, format);
+      else if (!Array.isArray(v)) E('format', p, 'not an array');
+      else if (v.length > kd.max) E('size', p, `more than ${kd.max} items`);
+      else v.forEach((x, i) => walk(x, kd.$list, `${p}[${i}]`, E, W, format));
+    }
+  }
+  /** the dotted paths of every numeric field (what a binding may set) */
+  function numericFields(T, path, out) {
+    for (const k of Object.keys(T)) {
+      const kd = T[k];
+      if (typeof kd === 'string') { const kind = kd.replace('!', ''); if (['pos', 'nonneg', 'fin', 'unit'].includes(kind) || kind.startsWith('int:')) out.push(join(path, k)); }
+      else if (kd.$obj) numericFields(kd.$obj, join(path, k), out);
+    }
+    return out;
+  }
+  const NUM_FIELDS = numericFields(TABLE, '', []);
+
+  // ---- defaults ----
+  const g = (o, k, dflt) => (o && o[k] !== undefined ? (typeof o[k] === 'boolean' || (typeof o[k] === 'string' && !Number.isFinite(num(o[k]))) ? o[k] : num(o[k])) : dflt);
+  function norm(link) {
+    const t = link.tx || {}, r = link.rx || {}, p = link.path || {}, q = link.radio || {};
+    const model = g(p, 'model', 'fspl');
+    const mod = g(q, 'mod', 'lora'), sf = g(q, 'sf', 7), cr = g(q, 'cr', 1), phy = q.phy === '2M' ? '2M' : '1M', rate = g(q, 'rate', 6);
+    const bitrate0 = g(q, 'bitrate', 9600);
+    const chanBw = mod === 'lora' ? g(q, 'bw', 125e3) : mod === 'ble' ? (phy === '2M' ? 2e6 : 1e6) : mod === 'wifi' ? 20e6 : g(q, 'bw', mod === 'fsk' ? 2 * bitrate0 : mod === 'qpsk' ? bitrate0 / 2 : bitrate0);
+    const bitrate = mod === 'lora' ? sf * chanBw / Math.pow(2, sf) * 4 / (4 + cr) : mod === 'ble' ? (phy === '2M' ? 2e6 : 1e6) : mod === 'wifi' ? rate * 1e6 : bitrate0;
+    return {
+      f: num(link.f), d: num(link.d), fadeMargin: g(link, 'fadeMargin', 0),
+      tx: { power: g(t, 'power', 14), gain: g(t, 'gain', 0), cable: g(t, 'cable', 0) },
+      rx: { gain: g(r, 'gain', 0), cable: g(r, 'cable', 0), nf: g(r, 'nf', 6), bw: g(r, 'bw', chanBw), snr: g(r, 'snr', undefined), sensitivity: g(r, 'sensitivity', undefined) },
+      path: { model, ht: g(p, 'ht', model === 'hata' ? 30 : 10), hr: g(p, 'hr', 1.5), n: g(p, 'n', 3), d0: g(p, 'd0', 1), sigma: g(p, 'sigma', 0),
+        env: g(p, 'env', model === 'indoor' ? 'office' : 'urban'), floors: g(p, 'floors', 0), N: g(p, 'N', undefined), lf: g(p, 'lf', undefined), extra: g(p, 'extra', 0),
+        walls: Array.isArray(p.walls) ? p.walls : [], obstacle: isObj(p.obstacle) ? { d1: num(p.obstacle.d1), h: num(p.obstacle.h) } : null },
+      radio: { mod, sf, cr, bw: chanBw, bitrate, preamble: g(q, 'preamble', 8), header: g(q, 'header', true), crc: g(q, 'crc', true), ldro: g(q, 'ldro', undefined),
+        payload: g(q, 'payload', 20), phy, rate, interval: g(q, 'interval', undefined), dutyLimit: g(q, 'dutyLimit', 0.01) },
+      sweep: link.sweep ? { from: num(link.sweep.from), to: num(link.sweep.to), points: g(link.sweep, 'points', 200), scale: g(link.sweep, 'scale', 'log') } : null,
+      snrSweep: link.snrSweep ? { from: num(link.snrSweep.from), to: num(link.snrSweep.to), points: g(link.snrSweep, 'points', 81) } : null,
+    };
+  }
+
+  /** check(link) → [{code, path, msg, level}] — what create() would refuse (errors) and fields it ignores (warnings) */
+  function check(link) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    if (!isObj(link)) { E('format', '', 'link is not an object'); return P; }
+    walk(link, TABLE, '', E, W, FORMAT);
+    if (P.some(p => p.level === 'error')) return P;
+    const L = norm(link), p = L.path, model = p.model;
+    if (!(L.f >= 1e6 && L.f <= 1e11)) E('range', 'f', 'outside 1 MHz to 100 GHz');
+    if (model === 'hata') {
+      if (link.path.env !== undefined && !HATA_ENVS.includes(p.env)) E('enum', 'path.env', 'one of ' + HATA_ENVS.join(', '));
+      if (!(L.f >= 150e6 && L.f <= 1500e6)) E('range', 'f', 'outside 150 to 1500 MHz (Okumura-Hata)');
+      if (!(p.ht >= 30 && p.ht <= 200)) E('range', 'path.ht', 'outside 30 to 200 m (Okumura-Hata)');
+      if (!(p.hr >= 1 && p.hr <= 10)) E('range', 'path.hr', 'outside 1 to 10 m (Okumura-Hata)');
+      if (!(L.d >= 1000 && L.d <= 20000)) E('range', 'd', 'outside 1 to 20 km (Okumura-Hata)');
+    }
+    if (model === 'indoor') {
+      if (link.path.env !== undefined && !INDOOR_ENVS.includes(p.env)) E('enum', 'path.env', 'one of ' + INDOOR_ENVS.join(', '));
+      if (!(L.f >= 0.8e9 && L.f <= 6e9)) E('range', 'f', 'outside 0.8 to 6 GHz (ITU-R P.1238)');
+      if (!(L.d >= 1)) E('range', 'd', 'below 1 m (ITU-R P.1238)');
+    }
+    if (p.obstacle && !(p.obstacle.d1 < L.d)) E('value', 'path.obstacle.d1', 'must be less than d');
+    p.walls.forEach((w, i) => { if (w.type === undefined && w.loss === undefined) E('value', `path.walls[${i}]`, 'needs type or loss'); });
+    const q = L.radio;
+    if (q.mod === 'lora' && !(q.bw >= 7800 && q.bw <= 500000)) E('value', 'radio.bw', 'LoRa bandwidth from 7.8 to 500 kHz');
+    if (q.mod === 'wifi' && !WIFI_RATES.includes(q.rate)) E('enum', 'radio.rate', 'one of ' + WIFI_RATES.join(', '));
+    if (L.sweep && !(L.sweep.from < L.sweep.to)) E('value', 'sweep', 'from must be less than to');
+    if (L.snrSweep && !(L.snrSweep.from < L.snrSweep.to)) E('value', 'snrSweep', 'from must be less than to');
+    return P;
+  }
+
+  // ---- the outputs a spec may name (of) ----
+  const SCALARS = ['lambda', 'eirp', 'pl', 'plMedian', 'shadow', 'prx', 'rssi', 'noiseFloor', 'snrReq', 'sensitivity', 'snr', 'ebn0', 'margin', 'range',
+    'fresnel', 'clearance', 'diffraction', 'crossover', 'wallLoss', 'floorLoss', 'ber', 'per', 'bitrate', 'airtime', 'symbolTime', 'dutyCycle', 'minInterval', 'valid'];
+  const SERIES = ['d', 'pl', 'plMedian', 'prx', 'prxMedian', 'margin', 'snrAxis', 'per', 'ber'];
+
+  /** checkSpec(spec) → problems of a sim-spec's model {link, bindings} and outputs [{id, kind, of?}] (paths from the spec) */
+  function checkSpec(spec) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    const m = isObj(spec) ? spec.model : undefined;
+    if (!isObj(m)) { E('format', 'model', 'not an object'); return P; }
+    for (const k of Object.keys(m)) if (!['link', 'bindings'].includes(k)) W('unknown-field', 'model.' + k, 'ignored');
+    for (const p of check(m.link)) P.push({ ...p, path: p.path ? 'model.link.' + p.path : 'model.link' });
+    if (m.bindings !== undefined) {
+      if (!Array.isArray(m.bindings)) E('format', 'model.bindings', 'not an array');
+      else if (m.bindings.length > MAX_BINDINGS) E('size', 'model.bindings', `more than ${MAX_BINDINGS} items`);
+      else m.bindings.forEach((b, i) => {
+        const at = `model.bindings[${i}]`;
+        if (!isObj(b)) { E('binding', at, 'a binding is an object {field, expr}'); return; }
+        if (typeof b.field !== 'string' || !NUM_FIELDS.includes(b.field)) E('binding', at + '.field', 'not a numeric field of the link');
+        if (typeof b.expr !== 'string' || !b.expr.trim()) E('binding', at + '.expr', 'needs an expression');
+      });
+    }
+    const outs = isObj(spec) ? spec.outputs : undefined;
+    if (!Array.isArray(outs)) { E('format', 'outputs', 'not an array'); return P; }
+    outs.forEach((o, i) => {
+      const at = `outputs[${i}]`;
+      if (!isObj(o)) { E('output', at, 'not an object'); return; }
+      const of = o.of !== undefined ? o.of : o.id;
+      if (o.kind === 'scalar') { if (!SCALARS.includes(of)) E('output', at + '.of', 'not a scalar of ' + ID); }
+      else if (o.kind === 'series') { if (!SERIES.includes(of)) E('output', at + '.of', 'not a series of ' + ID); }
+      else E('output', at + '.kind', 'scalar or series');
+    });
+    return P;
+  }
+
+  // ---- the simulator ----
+  function reqEbn0(mod, o) {   // Eb/N0 (linear) where the BER is 1e-3 (bisection on a monotone curve)
+    let lo = 1e-3, hi = 1e4;
+    for (let i = 0; i < 100; i++) { const mid = Math.sqrt(lo * hi); if (ber(mod, mid, o) > 1e-3) lo = mid; else hi = mid; }
+    return Math.sqrt(lo * hi);
+  }
+  function compileLink(link) {
+    const L = norm(link), p = L.path, f = L.f, q = L.radio;
+    const wallLoss = p.walls.reduce((s, w) => s + (w.loss !== undefined ? num(w.loss) : WALLS[w.type]) * (w.count === undefined ? 1 : w.count), 0);
+    const floorLoss = p.model === 'indoor' && p.floors > 0 ? (p.lf !== undefined ? p.lf : indoorBand(f).Lf[INDOOR_ENVS.includes(p.env) ? p.env : 'office'](p.floors)) : 0;
+    function base(d) {
+      if (p.model === 'two-ray') return twoRay(d, f, p.ht, p.hr);
+      if (p.model === 'log-distance') return logDistance(d, f, p.n, p.d0);
+      if (p.model === 'hata') return hata(d, f, p.ht, p.hr, p.env);
+      if (p.model === 'indoor') return indoor(d, f, p.env, p.floors, p.N, p.lf);
+      return fspl(d, f);
+    }
+    const diffAt = d => (p.obstacle && p.obstacle.d1 < d ? knifeEdge(p.obstacle.h, p.obstacle.d1, d - p.obstacle.d1, f) : 0);
+    /** the median path loss at d (no shadowing): the model + walls + knife edge + extra */
+    const plMedian = d => base(d) + wallLoss + diffAt(d) + p.extra;
+    const eirp = L.tx.power - L.tx.cable + L.tx.gain;
+    const prxOf = pl => eirp - pl + L.rx.gain - L.rx.cable;
+    const nfl = noiseFloor(L.rx.bw, L.rx.nf);
+    const brOpts = { sf: q.sf, rate: q.rate };
+    const snrReq = L.rx.snr !== undefined ? L.rx.snr : q.mod === 'lora' ? LORA_SNR[q.sf] : 10 * log10(reqEbn0(q.mod, brOpts)) - 10 * log10(L.rx.bw / q.bitrate);
+    const sens = L.rx.sensitivity !== undefined ? L.rx.sensitivity : nfl + snrReq;
+    const berAt = snr => (q.mod === 'lora' ? ber('lora', Math.pow(10, snr / 10), brOpts) : ber(q.mod, Math.pow(10, (snr + 10 * log10(L.rx.bw / q.bitrate)) / 10), brOpts));
+    let air = NaN, ts = NaN;
+    if (q.mod === 'lora') { const a = loraAirtime(q); air = a.airtime; ts = a.symbol; }
+    else if (q.mod === 'ble') air = bleAirtime(q.payload, q.phy);
+    else if (q.mod === 'wifi') air = wifiAirtime(q.payload, q.rate);
+    else air = 8 * (q.preamble + q.payload) / q.bitrate;
+    return { L, plMedian, prxOf, eirp, nfl, snrReq, sens, berAt, air, ts, wallLoss, floorLoss };
+  }
+  function bounds(L) {
+    if (L.path.model === 'hata') return [1000, 20000];
+    if (L.path.model === 'indoor') return [1, 1e5];
+    return [0.01, 1e7];
+  }
+  /** the largest d where the median margin ≥ fadeMargin (bisection on log d); {range, code?} */
+  function solveRange(k) {
+    const [lo0, hi0] = bounds(k.L), ok = d => k.prxOf(k.plMedian(d)) - k.sens >= k.L.fadeMargin;
+    if (!ok(lo0)) return { range: 0, code: 'range-none' };
+    if (ok(hi0)) return { range: hi0, code: 'range-open' };
+    let lo = Math.log(lo0), hi = Math.log(hi0);
+    for (let i = 0; i < MAX_ITER && hi - lo > 1e-12; i++) { const mid = (lo + hi) / 2; if (ok(Math.exp(mid))) lo = mid; else hi = mid; }
+    return { range: Math.exp(lo) };
+  }
+
+  /** create(link, {seed}) → {run(), at(d), range(), ...}; throws code 'invalid' (with .problems) on errors of check() */
+  function create(link, opts) {
+    opts = opts || {};
+    const problems = check(link);   // (outside a model's range is not refused here: a slider may go there; the results are NaN, code 'range')
+    if (problems.some(p => p.level === 'error' && p.code !== 'range')) throw fail('invalid', { problems });
+    const k = compileLink(JSON.parse(JSON.stringify(link))), L = k.L, seed = (opts.seed === undefined ? 1 : num(opts.seed)) >>> 0;
+    function at(d, shadow) {
+      const plm = k.plMedian(d), pl = plm + (shadow || 0), prx = k.prxOf(pl), snr = prx - k.nfl;
+      const b = k.berAt(snr);
+      return { plMedian: plm, pl, prx, snr, margin: prx - k.sens, ber: b, per: perOf(b, L.radio.payload) };
+    }
+    function run() {
+      const codes = [], d = L.d, p = L.path, q = L.radio;
+      const shadow = p.sigma > 0 ? p.sigma * gauss(mulberry32(hash32('shadow', seed))) : 0;
+      const a = at(d, shadow), rg = solveRange(k);
+      if (rg.code) codes.push(rg.code);
+      if (!Number.isFinite(a.plMedian)) codes.push('range');
+      const o = p.obstacle, d1 = o && o.d1 < d ? o.d1 : d / 2, r1 = fresnelRadius(d1, d - d1, L.f, 1);
+      const s = {
+        lambda: C0 / L.f, eirp: k.eirp, pl: a.pl, plMedian: a.plMedian, shadow, prx: a.prx, rssi: a.prx, noiseFloor: k.nfl, snrReq: k.snrReq,
+        sensitivity: k.sens, snr: a.snr, ebn0: a.snr + 10 * log10(L.rx.bw / q.bitrate), margin: a.margin, range: rg.range,
+        fresnel: r1, clearance: o && o.d1 < d ? -o.h / r1 : NaN, diffraction: o && o.d1 < d ? knifeEdge(o.h, o.d1, d - o.d1, L.f) : 0,
+        crossover: crossover(L.f, p.ht, p.hr), wallLoss: k.wallLoss, floorLoss: k.floorLoss, ber: a.ber, per: a.per, bitrate: q.bitrate,
+        airtime: k.air, symbolTime: k.ts, dutyCycle: q.interval ? k.air / q.interval : NaN, minInterval: k.air / q.dutyLimit,
+        valid: Number.isFinite(a.plMedian) ? 1 : 0,
+      };
+      // the distance sweep (shadowing: one seeded draw per point) and the error-rate curve
+      const sw = L.sweep || (p.model === 'hata' ? { from: 1000, to: 20000, points: 200, scale: 'log' } : { from: Math.max(p.model === 'indoor' ? 1 : 0.1, d / 100), to: d * 10, points: 200, scale: 'log' });
+      const n = sw.points, D = [], r = mulberry32(hash32('sweep', seed));
+      for (let i = 0; i < n; i++) D.push(sw.scale === 'lin' ? sw.from + (sw.to - sw.from) * i / (n - 1) : sw.from * Math.pow(sw.to / sw.from, i / (n - 1)));
+      const ser = { d: D, pl: [], plMedian: [], prx: [], prxMedian: [], margin: [] };
+      for (const x of D) {
+        const sh = p.sigma > 0 ? p.sigma * gauss(r) : 0, y = at(x, sh);
+        ser.pl.push(y.pl); ser.plMedian.push(y.plMedian); ser.prx.push(y.prx); ser.prxMedian.push(k.prxOf(y.plMedian)); ser.margin.push(y.margin);
+      }
+      const ss = L.snrSweep || (q.mod === 'lora' ? { from: k.snrReq - 10, to: k.snrReq + 10, points: 81 } : { from: k.snrReq - 10, to: k.snrReq + 10, points: 81 });
+      ser.snrAxis = []; ser.per = []; ser.ber = [];
+      for (let i = 0; i < ss.points; i++) { const x = ss.from + (ss.to - ss.from) * i / (ss.points - 1), b = k.berAt(x); ser.snrAxis.push(x); ser.ber.push(b); ser.per.push(perOf(b, q.payload)); }
+      return { scalars: s, series: ser, codes };
+    }
+    return Object.freeze({ id: ID, run, at: d => at(num(d), 0), range: () => solveRange(k) });
+  }
+
+  // ---- the sim-spec@1 adapter: model {link, bindings: [{field, expr}]}, outputs [{id, kind: scalar | series, of?}] ----
+  function setPath(o, path, v) {
+    const ks = path.split('.'); let x = o;
+    for (let i = 0; i < ks.length - 1; i++) { if (!isObj(x[ks[i]])) x[ks[i]] = {}; x = x[ks[i]]; }
+    x[ks[ks.length - 1]] = v;
+  }
+  const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]*$/;
+  /** what the worker runs (self.noemaEngine): create(spec, {seed}) → {run(inputs) → {id: number | [numbers]}} */
+  const simEngine = {
+    create(spec, opts) {
+      const model = (spec && spec.model) || {}, outs = (spec && spec.outputs) || [], seed = (opts && opts.seed) >>> 0;
+      let key = null, res = null;
+      return {
+        run(inp) {
+          inp = inp || {};
+          const binds = inp.$bind || (model.bindings || []).map(b => [b.field, NAME_RE.test(b.expr) ? inp[b.expr] : NaN]);
+          const kk = JSON.stringify(binds);
+          if (kk !== key) {
+            key = kk;
+            const link = JSON.parse(JSON.stringify(model.link || {}));
+            for (const [field, v] of binds) if (typeof v === 'number' && Number.isFinite(v)) setPath(link, field, v);
+            try { res = create(link, { seed }).run(); } catch (e) { res = null; }
+          }
+          const r = {};
+          for (const o of outs) {
+            const of = o.of !== undefined ? o.of : o.id;
+            if (o.kind === 'series') r[o.id] = res && res.series[of] ? res.series[of].slice(0, MAX_POINTS) : [];
+            else r[o.id] = res && of in res.scalars ? res.scalars[of] : NaN;
+          }
+          return r;
+        },
+      };
+    },
+  };
+  /** the registration (one line in the app: ACT.registerEngine(NoemaRF.engine)) — the same shape as circuit-mna@1's */
+  const engine = {
+    id: ID,
+    check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `${p.path}: ${p.msg}`),
+    /** on the main thread: the bindings' expressions become numbers (the app's NoemaExpr), so the worker needs no evaluator */
+    prepare(spec, compile) {
+      const bs = ((spec && spec.model && spec.model.bindings) || []).map(b => [b.field, compile(b.expr)]);
+      const ev = (fn, env) => { try { return +fn(env); } catch (e) { return NaN; } };
+      return env => ({ ...env, $bind: bs.map(([fl, fn]) => [fl, ev(fn, env)]) });
+    },
+    create: (spec, opts) => simEngine.create(spec, opts),
+  };
+  /** the engine's own source, to run it in a Worker: it defines self.NoemaRF and self.noemaEngine */
+  const source = () => '(' + noemaRfModule.toString() + ')(self); self.noemaEngine = self.NoemaRF.simEngine;';
+  engine.workerSource = source();
+  root.NoemaRF = Object.freeze({
+    id: ID, format: FORMAT, limits: Object.freeze({ points: MAX_POINTS, walls: MAX_WALLS, bindings: MAX_BINDINGS, iterations: MAX_ITER }),
+    MODELS: Object.freeze(MODELS.slice()), MODS: Object.freeze(MODS.slice()), SCALARS: Object.freeze(SCALARS.slice()), SERIES: Object.freeze(SERIES.slice()),
+    NUM_FIELDS: Object.freeze(NUM_FIELDS.slice()), WALLS: Object.freeze({ ...WALLS }), LORA_SNR: Object.freeze({ ...LORA_SNR }),
+    check, checkSpec, create, num, source, simEngine: Object.freeze(simEngine), engine: Object.freeze(engine),
+    // the formulas, for other engines and tests
+    fspl, twoRay, crossover, logDistance, hata, indoor, fresnelRadius, knifeEdge, noiseFloor, erfc, Q, ber, per: perOf, loraAirtime, bleAirtime, wifiAirtime,
+    KT_DBM_HZ, C0,
+  });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
 
 /* ---- 41_kmap.js ---- */
 /* ===================== The pack's knowledge map ("Info"), traps in the Mistakes gym, reported exercises =====================
@@ -7190,6 +8706,1557 @@ function reportedView() {
         } }, '📋 ' + tE('engine.flags.copy'))));
   });
 }
+
+/* ---- 42_engine_twin.js ---- */
+/* ===================== interactive activities — the IoT device twin twin@1 (docs/INTERACTIVE_ENGINES.md §5, docs/adr/001 D12, P6) =====================
+   A small "digital twin" of a battery-powered microcontroller node for tier B (sim-spec@1): a discrete-event simulator of a
+   duty-cycled firmware (wake every T, sense, transmit every k-th wake, wait for an ack, retry), a battery (capacity, open-circuit
+   voltage curve, internal resistance, self-discharge), power states (sleep / active / sense / radio TX / RX, currents in mA),
+   sensors with seeded noise and drift, a radio link (log-distance path loss with seeded shadowing, LoRa / BLE / FSK error rates
+   and airtime — the minimal formulas of rf@1, duplicated so the worker needs one file), brown-out resets below a voltage, and
+   hidden FAULTS (as the circuit bench): sensor stuck / drifting, an aged battery, a detached antenna, a misconfigured wake period,
+   a brown-out level set too high. Deterministic for a seed; bounded (sim.maxEvents → code 'budget'). Codes and numbers only.
+   The device (noema.twin/v1): docs/INTERACTIVE_ENGINES.md §5, tools/schemas/noema.twin.v1.schema.json. Python twin of check(),
+   checkFaults(), checkSpec(): tools/twin.py. Registering it is one line: ACT.registerEngine(NoemaTwin.engine). Tests: node tests/twin.js. */
+(function noemaTwinModule(root) {
+  /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
+  'use strict';
+  const ID = 'twin@1', FORMAT = 'noema.twin/v1';
+  const MAX_SENSORS = 8, MAX_SAMPLES = 2000, MAX_EVENTS = 5000000, DEF_EVENTS = 1000000, MAX_LOG = 1000, MAX_TRACE = 4000, MAX_POINTS = 2000, MAX_BINDINGS = 24;
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const log10 = Math.log10, ID_RE = /^[A-Za-z][A-Za-z0-9_\-]{0,31}$/;
+  function fail(code, extra) { const e = new Error('twin: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
+  const SI = { f: 1e-15, p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, m: 1e-3, k: 1e3, K: 1e3, M: 1e6, meg: 1e6, G: 1e9 };
+  function num(v) {
+    if (typeof v === 'number') return Number.isFinite(v) ? v : NaN;
+    if (typeof v !== 'string') return NaN;
+    const m = /^\s*([-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)\s*(meg|[fpnuµmkKMG])?\s*$/.exec(v);
+    return m ? parseFloat(m[1]) * (m[2] ? SI[m[2]] : 1) : NaN;
+  }
+
+  // ---- the minimal radio formulas of rf@1 (engine/src/41_engine_rf.js; tests/twin.js checks they agree) ----
+  const C0 = 299792458, KT_DBM_HZ = 10 * Math.log10(1.380649e-23 * 290 * 1000);
+  const fspl = (d, f) => 20 * log10(4 * Math.PI * d * f / C0);
+  const logDistance = (d, f, n, d0) => (d <= d0 ? fspl(d, f) : fspl(d0, f) + 10 * n * log10(d / d0));
+  const noiseFloor = (bw, nf) => KT_DBM_HZ + 10 * log10(bw) + (nf || 0);
+  function erfc(x) {
+    const z = Math.abs(x), t = 1 / (1 + 0.5 * z);
+    const r = t * Math.exp(-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
+    return x >= 0 ? r : 2 - r;
+  }
+  const Q = x => 0.5 * erfc(x / Math.SQRT2);
+  const loraBer = (snrLin, sf) => 0.5 * Q(Math.sqrt(snrLin * Math.pow(2, sf + 1)) - Math.sqrt(1.386 * sf + 1.154));
+  const fskBer = ebn0 => 0.5 * Math.exp(-ebn0 / 2);
+  const perOf = (b, bytes) => 1 - Math.pow(1 - Math.min(0.5, Math.max(0, b)), 8 * Math.max(1, bytes));
+  function loraAirtime(sf, bw, cr, pl) {
+    const ts = Math.pow(2, sf) / bw, de = ts > 0.016 ? 1 : 0;
+    return (8 + 4.25) * ts + (8 + Math.max(Math.ceil((8 * pl - 4 * sf + 28 + 16) / (4 * (sf - 2 * de))) * (cr + 4), 0)) * ts;
+  }
+  const bleAirtime = pl => (1 + 4 + 2 + pl + 3) * 8 / 1e6;
+
+  // ---- seeded noise ----
+  function mulberry32(a) {
+    return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+
+  // ---- batteries: open-circuit voltage per cell against state of charge (typical curves at room temperature, light load) ----
+  const CHEMS = {
+    'li-ion': { curve: [[0, 3.0], [0.05, 3.3], [0.1, 3.5], [0.2, 3.6], [0.4, 3.7], [0.6, 3.8], [0.8, 3.95], [0.9, 4.05], [1, 4.2]], r: 0.15 },
+    lifepo4: { curve: [[0, 2.5], [0.05, 3.0], [0.1, 3.2], [0.2, 3.25], [0.5, 3.3], [0.8, 3.33], [0.95, 3.4], [1, 3.6]], r: 0.05 },
+    alkaline: { curve: [[0, 0.9], [0.1, 1.05], [0.3, 1.15], [0.5, 1.25], [0.7, 1.3], [0.9, 1.4], [1, 1.55]], r: 0.2 },
+    nimh: { curve: [[0, 1.0], [0.05, 1.1], [0.2, 1.2], [0.8, 1.25], [0.95, 1.35], [1, 1.4]], r: 0.05 },
+  };
+  const interp = (c, x) => { if (x <= c[0][0]) return c[0][1]; for (let i = 1; i < c.length; i++) if (x <= c[i][0]) { const [x0, y0] = c[i - 1], [x1, y1] = c[i]; return y0 + (y1 - y0) * (x - x0) / (x1 - x0 || 1); } return c[c.length - 1][1]; };
+
+  // ---- the device format: a table the checker walks (the same table in tools/twin.py) ----
+  const TECHS = ['lora', 'ble', 'fsk'];
+  const TABLE = {
+    format: 'const',
+    battery: { req: true, $obj: { capacity: 'pos!', chem: 'enum:li-ion|lifepo4|alkaline|nimh|custom', cells: 'int:1:6', curve: { $list: { soc: 'unit!', v: 'pos!' }, max: 32 },
+      selfDischarge: 'unit', rInt: 'nonneg', soc0: 'unit', cutoff: 'pos' } },
+    power: { $obj: { sleep: 'nonneg', active: 'nonneg', sense: 'nonneg', tx: 'nonneg', rx: 'nonneg' } },
+    schedule: { req: true, $obj: { period: 'pos!', sense: 'nonneg', txEvery: 'int:1:10000', ack: 'bool', rxWindow: 'nonneg', retries: 'int:0:8', boot: 'nonneg' } },
+    sensors: { $list: { id: 'id!', base: 'fin', amp: 'fin', cycle: 'pos', noise: 'nonneg', drift: 'fin', current: 'nonneg' }, max: MAX_SENSORS },
+    radio: { $obj: { tech: 'enum:' + TECHS.join('|'), f: 'pos', power: 'fin', gain: 'fin', d: 'pos', n: 'pos', d0: 'pos', sigma: 'nonneg', extra: 'nonneg', nf: 'nonneg',
+      sf: 'int:7:12', bw: 'pos', cr: 'int:1:4', payload: 'int:0:255', bitrate: 'pos', txTime: 'pos' } },
+    brownout: { $obj: { v: 'nonneg', reset: 'nonneg' } },
+    sim: { req: true, $obj: { duration: 'pos!', samples: 'int:2:' + MAX_SAMPLES, trace: 'nonneg', maxEvents: 'int:1:' + MAX_EVENTS } },
+  };
+  function checkNum(kind, v) {
+    if (kind === 'bool') return typeof v === 'boolean';
+    if (kind === 'id') return typeof v === 'string' && ID_RE.test(v);
+    if (kind.startsWith('int:')) { const [, a, b] = kind.split(':'); return typeof v === 'number' && Number.isInteger(v) && v >= +a && v <= +b; }
+    if (kind.startsWith('enum:')) return typeof v === 'string' && kind.slice(5).split('|').includes(v);
+    const x = num(v);
+    return kind === 'pos' ? x > 0 : kind === 'nonneg' ? x >= 0 : kind === 'unit' ? x >= 0 && x <= 1 : Number.isFinite(x);
+  }
+  function kindMsg(kind) {
+    if (kind === 'bool') return 'needs true or false';
+    if (kind === 'id') return 'needs a name (a letter, then letters, digits, _ or -)';
+    if (kind.startsWith('int:')) { const [, a, b] = kind.split(':'); return `needs an integer from ${a} to ${b}`; }
+    if (kind.startsWith('enum:')) return 'one of ' + kind.slice(5).split('|').join(', ');
+    return { pos: 'needs a number > 0', nonneg: 'needs a number >= 0', unit: 'needs a number from 0 to 1', fin: 'needs a number' }[kind];
+  }
+  const join = (p, k) => (p ? p + '.' + k : k);
+  function walk(o, T, path, E, W) {
+    if (!isObj(o)) { E('format', path, 'not an object'); return; }
+    for (const k of Object.keys(o)) if (!has(T, k) && k !== 'meta') W('unknown-field', join(path, k), 'ignored');
+    for (const k of Object.keys(T)) {
+      const kd = T[k], p = join(path, k), v = o[k];
+      if (typeof kd === 'string') {
+        const must = kd.endsWith('!'), kind = must ? kd.slice(0, -1) : kd;
+        if (v === undefined) { if (must) E('value', p, 'missing'); continue; }
+        if (kind === 'const') { if (v !== FORMAT) E('format', p, 'not ' + FORMAT); continue; }
+        if (!checkNum(kind, v)) E(kind.startsWith('enum:') ? 'enum' : 'value', p, kindMsg(kind));
+      } else if (v === undefined) { if (kd.req) E('value', p, 'missing'); }
+      else if (kd.$obj) walk(v, kd.$obj, p, E, W);
+      else if (!Array.isArray(v)) E('format', p, 'not an array');
+      else if (v.length > kd.max) E('size', p, `more than ${kd.max} items`);
+      else v.forEach((x, i) => walk(x, kd.$list, `${p}[${i}]`, E, W));
+    }
+  }
+  function numericFields(T, path, out) {
+    for (const k of Object.keys(T)) {
+      const kd = T[k];
+      if (typeof kd === 'string') { const kind = kd.replace('!', ''); if (['pos', 'nonneg', 'fin', 'unit'].includes(kind) || kind.startsWith('int:')) out.push(join(path, k)); }
+      else if (kd.$obj) numericFields(kd.$obj, join(path, k), out);
+    }
+    return out;
+  }
+  const NUM_FIELDS = numericFields(TABLE, '', []);
+
+  // ---- defaults: every number parsed ----
+  const g = (o, k, d) => (o && o[k] !== undefined ? (typeof o[k] === 'boolean' || (typeof o[k] === 'string' && !Number.isFinite(num(o[k]))) ? o[k] : num(o[k])) : d);
+  function norm(dev) {
+    const b = dev.battery || {}, pw = dev.power || {}, s = dev.schedule || {}, r = dev.radio || {}, bo = dev.brownout || {}, sm = dev.sim || {};
+    const chem = g(b, 'chem', 'li-ion'), cells = g(b, 'cells', 1);
+    const curve = chem === 'custom' ? (Array.isArray(b.curve) ? b.curve.map(p => [num(p.soc), num(p.v)]) : []) : CHEMS[chem].curve;
+    const active = g(pw, 'active', 5);
+    return {
+      battery: { capacity: num(b.capacity), chem, cells, curve, selfDischarge: g(b, 'selfDischarge', 0), soc0: g(b, 'soc0', 1),
+        rInt: g(b, 'rInt', (CHEMS[chem] ? CHEMS[chem].r : 0.1) * cells), cutoff: g(b, 'cutoff', (curve.length ? curve[0][1] : 0) * cells) },
+      power: { sleep: g(pw, 'sleep', 0.005), active, sense: g(pw, 'sense', active), tx: g(pw, 'tx', 40), rx: g(pw, 'rx', 12) },
+      schedule: { period: num(s.period), sense: g(s, 'sense', 0.05), txEvery: g(s, 'txEvery', 1), ack: g(s, 'ack', false), rxWindow: g(s, 'rxWindow', 0.2), retries: g(s, 'retries', 0), boot: g(s, 'boot', 0.1) },
+      sensors: (Array.isArray(dev.sensors) ? dev.sensors : []).map(x => ({ id: x.id, base: g(x, 'base', 20), amp: g(x, 'amp', 0), cycle: g(x, 'cycle', 86400), noise: g(x, 'noise', 0), drift: g(x, 'drift', 0), current: g(x, 'current', 0) })),
+      radio: { tech: g(r, 'tech', 'lora'), f: g(r, 'f', 868e6), power: g(r, 'power', 14), gain: g(r, 'gain', 0), d: g(r, 'd', 1000), n: g(r, 'n', 2.7), d0: g(r, 'd0', 1), sigma: g(r, 'sigma', 0),
+        extra: g(r, 'extra', 0), nf: g(r, 'nf', 6), sf: g(r, 'sf', 7), bw: g(r, 'bw', 125e3), cr: g(r, 'cr', 1), payload: g(r, 'payload', 12), bitrate: g(r, 'bitrate', 50000), txTime: g(r, 'txTime', undefined) },
+      brownout: { v: g(bo, 'v', 0), reset: g(bo, 'reset', 0) },
+      sim: { duration: num(sm.duration), samples: g(sm, 'samples', 200), trace: g(sm, 'trace', 0), maxEvents: g(sm, 'maxEvents', DEF_EVENTS) },
+    };
+  }
+
+  /** check(device) → [{code, path, msg, level}] */
+  function check(dev) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    if (!isObj(dev)) { E('format', '', 'device is not an object'); return P; }
+    walk(dev, TABLE, '', E, W);
+    if (P.some(p => p.level === 'error')) return P;
+    const D = norm(dev), ids = new Set();
+    (dev.sensors || []).forEach((x, i) => { if (ids.has(x.id)) E('dup-id', `sensors[${i}].id`, 'duplicate id ' + x.id); else ids.add(x.id); });
+    if (D.battery.chem === 'custom') {
+      const c = D.battery.curve;
+      const okc = c.length >= 2 && c[0][0] === 0 && c[c.length - 1][0] === 1 && c.every((p, i) => !i || (p[0] > c[i - 1][0] && p[1] >= c[i - 1][1]));
+      if (!okc) E('value', 'battery.curve', 'a custom battery needs a curve from soc 0 to 1, rising');
+    } else if (dev.battery.curve !== undefined) W('unknown-field', 'battery.curve', 'ignored (chem is not custom)');
+    if (!(D.schedule.sense < D.schedule.period)) E('value', 'schedule.sense', 'must be shorter than the period');
+    if (D.radio.tech === 'lora' && !(D.radio.bw >= 7800 && D.radio.bw <= 500000)) E('value', 'radio.bw', 'LoRa bandwidth from 7.8 to 500 kHz');
+    const est = Math.ceil(D.sim.duration / D.schedule.period) * (2 + (D.schedule.retries + 1) * (D.schedule.ack ? 2 : 1) / D.schedule.txEvery);
+    if (est > D.sim.maxEvents) E('budget', 'sim.duration', 'more events than sim.maxEvents');
+    return P;
+  }
+
+  /** checkFaults(device, faults) → [{code: 'fault', path, msg, level: 'error'}] (what create() would throw, as a list) */
+  const FAULT_KINDS = ['sensor-stuck', 'sensor-drift', 'battery-ageing', 'antenna-detached', 'wake-period', 'brownout'];
+  const FAULT_KEYS = ['kind', 'sensor', 'value', 'at', 'rate', 'factor', 'rInt', 'loss', 'period', 'v'];
+  const FAULT_NUM = { value: 'fin', at: 'nonneg', rate: 'fin', factor: 'pos', rInt: 'pos', loss: 'nonneg', period: 'pos', v: 'pos' };
+  function checkFaults(dev, faults) {
+    const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
+    if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
+    const sensors = new Set((isObj(dev) && Array.isArray(dev.sensors) ? dev.sensors : []).filter(isObj).map(x => x.id));
+    faults.forEach((f, i) => {
+      const at = `faults[${i}]`;
+      if (!isObj(f)) { E(at, 'a fault is an object {kind, ...}'); return; }
+      for (const k of Object.keys(f)) if (!FAULT_KEYS.includes(k)) E(`${at}.${k}`, 'unknown field');
+      if (!FAULT_KINDS.includes(f.kind)) { E(at + '.kind', 'one of ' + FAULT_KINDS.join(', ')); return; }
+      for (const k of FAULT_KEYS) if (has(FAULT_NUM, k) && f[k] !== undefined && !checkNum(FAULT_NUM[k], f[k])) E(`${at}.${k}`, kindMsg(FAULT_NUM[k]));
+      if (f.kind.startsWith('sensor-') && !(typeof f.sensor === 'string' && sensors.has(f.sensor))) E(at + '.sensor', 'not a sensor of the device');
+      if (f.kind === 'battery-ageing' && f.factor !== undefined && !(num(f.factor) <= 1)) E(at + '.factor', 'needs a number > 0 and <= 1');
+    });
+    return P;
+  }
+
+  // ---- outputs a spec may name ----
+  const SCALARS = ['lifeAnalytic', 'lifeSim', 'iAvg', 'iAvgAnalytic', 'chargeUsed', 'socEnd', 'vEnd', 'vMin', 'wakes', 'sent', 'attempts', 'delivered', 'lost', 'deliveryRatio',
+    'resets', 'dead', 'tDead', 'rssiMean', 'snrMean', 'per', 'airtime', 'activeFraction', 'readingMean', 'readingLast', 'readingErr'];
+  const SERIES = ['t', 'soc', 'v', 'vload', 'current', 'delivered', 'resets', 'rssi', 'rxT', 'reading', 'truth', 'traceT', 'traceI', 'eventT', 'eventCode'];
+  const PER_SENSOR = ['readingMean', 'readingLast', 'readingErr', 'reading', 'truth'];
+  const EVENT_CODES = { reset: 1, lost: 2, dead: 3, overrun: 4 };
+
+  function checkSpec(spec) {
+    const P = [];
+    const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
+    const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
+    const m = isObj(spec) ? spec.model : undefined;
+    if (!isObj(m)) { E('format', 'model', 'not an object'); return P; }
+    for (const k of Object.keys(m)) if (!['device', 'bindings'].includes(k)) W('unknown-field', 'model.' + k, 'ignored');
+    for (const p of check(m.device)) P.push({ ...p, path: p.path ? 'model.device.' + p.path : 'model.device' });
+    if (m.bindings !== undefined) {
+      if (!Array.isArray(m.bindings)) E('format', 'model.bindings', 'not an array');
+      else if (m.bindings.length > MAX_BINDINGS) E('size', 'model.bindings', `more than ${MAX_BINDINGS} items`);
+      else m.bindings.forEach((b, i) => {
+        const at = `model.bindings[${i}]`;
+        if (!isObj(b)) { E('binding', at, 'a binding is an object {field, expr}'); return; }
+        if (typeof b.field !== 'string' || !NUM_FIELDS.includes(b.field)) E('binding', at + '.field', 'not a numeric field of the device');
+        if (typeof b.expr !== 'string' || !b.expr.trim()) E('binding', at + '.expr', 'needs an expression');
+      });
+    }
+    const sensors = isObj(m.device) && Array.isArray(m.device.sensors) ? m.device.sensors.filter(isObj).map(x => x.id) : [];
+    const outs = isObj(spec) ? spec.outputs : undefined;
+    if (!Array.isArray(outs)) { E('format', 'outputs', 'not an array'); return P; }
+    outs.forEach((o, i) => {
+      const at = `outputs[${i}]`;
+      if (!isObj(o)) { E('output', at, 'not an object'); return; }
+      const of = o.of !== undefined ? o.of : o.id;
+      if (o.kind === 'scalar') { if (!SCALARS.includes(of)) { E('output', at + '.of', 'not a scalar of ' + ID); return; } }
+      else if (o.kind === 'series') { if (!SERIES.includes(of)) { E('output', at + '.of', 'not a series of ' + ID); return; } }
+      else { E('output', at + '.kind', 'scalar or series'); return; }
+      if (PER_SENSOR.includes(of) ? !(o.sensor === undefined ? sensors.length : sensors.includes(o.sensor)) : o.sensor !== undefined) E('output', at + '.sensor', 'not a sensor of the device');
+    });
+    return P;
+  }
+
+  // ---- the simulator ----
+  function compile(dev, faults) {
+    const D = norm(dev), B = D.battery, R = D.radio, S = D.schedule;
+    let capF = 1, rF = 1, antenna = 0;
+    const sens = D.sensors.map(x => ({ ...x, stuck: null, fdrift: null }));
+    for (const f of faults) {
+      if (f.kind === 'battery-ageing') { capF *= f.factor !== undefined ? num(f.factor) : 0.5; rF *= f.rInt !== undefined ? num(f.rInt) : 3; }
+      else if (f.kind === 'antenna-detached') antenna += f.loss !== undefined ? num(f.loss) : 20;
+      else if (f.kind === 'wake-period') S.period = f.period !== undefined ? num(f.period) : S.period * (f.factor !== undefined ? num(f.factor) : 0.1);
+      else if (f.kind === 'brownout') D.brownout.v = f.v !== undefined ? num(f.v) : 3.6;
+      else if (f.kind === 'sensor-stuck') { const x = sens.find(s => s.id === f.sensor); x.stuck = { at: f.at !== undefined ? num(f.at) : 0, value: f.value !== undefined ? num(f.value) : undefined }; }
+      else if (f.kind === 'sensor-drift') { const x = sens.find(s => s.id === f.sensor); x.fdrift = { at: f.at !== undefined ? num(f.at) : 0, rate: f.rate !== undefined ? num(f.rate) : 1 }; }
+    }
+    B.capacity *= capF; B.rInt *= rF;
+    const air = R.txTime !== undefined ? R.txTime : R.tech === 'lora' ? loraAirtime(R.sf, R.bw, R.cr, R.payload) : R.tech === 'ble' ? bleAirtime(R.payload) : 8 * (R.payload + 8) / R.bitrate;
+    const bw = R.tech === 'lora' ? R.bw : R.tech === 'ble' ? 1e6 : 2 * R.bitrate, bitrate = R.tech === 'ble' ? 1e6 : R.bitrate;
+    const plMedian = logDistance(R.d, R.f, R.n, R.d0) + R.extra + antenna;
+    const nfl = noiseFloor(bw, R.nf);
+    const perAt = snr => perOf(R.tech === 'lora' ? loraBer(Math.pow(10, snr / 10), R.sf) : fskBer(Math.pow(10, (snr + 10 * log10(bw / bitrate)) / 10)), R.payload);
+    return { D, B, R, S, P: D.power, sens, air, plMedian, nfl, perAt, prxMedian: R.power + R.gain - plMedian };
+  }
+  /** the analytic average current (mA) and battery life (s) of the schedule: capacity / average current, no losses, no resets */
+  function analytic(k) {
+    const { S, P, B, sens } = k, sc = P.sense + sens.reduce((a, s) => a + s.current, 0);
+    const radioT = (k.air + (S.ack ? S.rxWindow : 0)) / S.txEvery, radioQ = (k.air * P.tx + (S.ack ? S.rxWindow * P.rx : 0)) / S.txEvery;
+    const q = S.sense * sc + radioQ + Math.max(0, S.period - S.sense - radioT) * P.sleep;   // mA·s per wake
+    const isd = B.selfDischarge * B.capacity / (30 * 24), iAvg = q / S.period + isd;
+    return { iAvg, life: B.capacity * B.soc0 / iAvg * 3600 };
+  }
+
+  function simulate(k, seed, o) {
+    const { B, P, S, R, sens } = k, T = k.D.sim.duration, maxEv = k.D.sim.maxEvents, bor = k.D.brownout.v;
+    const nb = k.D.sim.samples, W = T / nb, isd = B.selfDischarge * B.capacity / (30 * 24);
+    const trFrom = o && o.traceFrom !== undefined ? o.traceFrom : 0, trTo = o && o.traceTo !== undefined ? o.traceTo : k.D.sim.trace;
+    const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed)));
+    const voc = soc => interp(B.curve, Math.max(0, soc)) * B.cells;
+    let t = 0, q = 0, events = 0, dead = false, tDead = NaN, vMin = Infinity, logCount = 0, overrun = false; const counts = { reset: 0, lost: 0, overrun: 0, dead: 0 };
+    const soc = () => B.soc0 - q / B.capacity;
+    const bins = { q: new Float64Array(nb), vload: new Float64Array(nb).fill(Infinity), soc: new Float64Array(nb), v: new Float64Array(nb), del: new Float64Array(nb), res: new Float64Array(nb), rs: new Float64Array(nb), rn: new Float64Array(nb) };
+    let bi = 0;
+    const log = [], trace = [[], []], rx = { t: [], rssi: [], snr: [], reading: sens.map(() => []), truth: sens.map(() => []) };
+    const cnt = { wakes: 0, sent: 0, attempts: 0, delivered: 0, lost: 0, resets: 0, active: 0 };
+    const ev = (code, extra) => { logCount++; counts[code] = (counts[code] || 0) + 1; if (log.length < MAX_LOG) log.push({ t, code, ...extra }); };
+    const closeBin = () => { bins.soc[bi] = soc(); bins.v[bi] = voc(soc()); bi++; };
+    /** a segment of dur s at I mA; false when the loaded voltage is below the brown-out level (nothing is drawn: the reset follows) */
+    function seg(dur, I, checkBor) {
+      if (dead || t >= T) return true;
+      if (++events > maxEv) throw fail('budget', { events });
+      const vl = voc(soc()) - I * B.rInt / 1000;
+      if (checkBor && bor > 0 && vl < bor) return false;
+      if (vl < vMin) vMin = vl;
+      dur = Math.min(dur, T - t);
+      if (t < trTo && t + dur > trFrom && trace[0].length < MAX_TRACE) { trace[0].push(t, t + dur); trace[1].push(I, I); }
+      let rest = dur;
+      while (rest > 0 && bi < nb) {
+        const edge = (bi + 1) * W, part = Math.min(rest, edge - t);
+        q += (I + isd) * part / 3600; bins.q[bi] += (I + isd) * part / 3600; if (vl < bins.vload[bi]) bins.vload[bi] = vl;
+        t += part; rest -= part;
+        if (t >= edge - 1e-9 * W) closeBin();
+      }
+      if (rest > 0) { q += (I + isd) * rest / 3600; t += rest; }
+      if (I > P.sleep) cnt.active += dur;
+      if (soc() <= 0 || voc(soc()) < B.cutoff) { dead = true; tDead = t; ev('dead', { soc: soc() }); }
+      return true;
+    }
+    function reading(i, tt) {
+      const s = sens[i], truth = s.base + s.amp * Math.sin(2 * Math.PI * tt / s.cycle);
+      let v = truth + s.drift * tt / 86400 + s.noise * gauss(rSens[i]);
+      if (s.fdrift && tt >= s.fdrift.at) v += s.fdrift.rate * (tt - s.fdrift.at) / 86400;
+      if (s.stuck && tt >= s.stuck.at) { if (s.stuck.value === undefined) s.stuck.value = s.base + s.amp * Math.sin(2 * Math.PI * s.stuck.at / s.cycle); v = s.stuck.value; }
+      return [v, truth];
+    }
+    function reset() {
+      cnt.resets++; if (bi < nb) bins.res[bi]++;
+      ev('reset', { v: voc(soc()) });
+      seg(S.boot + k.D.brownout.reset, P.active, false);
+    }
+    const senseI = P.sense + sens.reduce((a, s) => a + s.current, 0);
+    let wakeAt = 0, n = 0;
+    while (!dead && t < T) {
+      if (wakeAt > t) {
+        const vs = voc(soc()) - P.sleep * B.rInt / 1000;
+        if (bor > 0 && vs < bor) { dead = true; tDead = t; ev('dead', { soc: soc(), bor: 1 }); break; }
+        seg(wakeAt - t, P.sleep, false);
+        if (dead || t >= T) break;
+      }
+      const start = t; cnt.wakes++;
+      const rd = sens.map((_, i) => reading(i, t));
+      if (!seg(S.sense, senseI, true)) { reset(); n = 0; wakeAt = t + S.period; continue; }
+      n++;
+      let brown = false;
+      if (n % S.txEvery === 0) {
+        cnt.sent++; let got = false;
+        for (let a = 0; a <= S.retries && !dead && t < T; a++) {
+          cnt.attempts++;
+          if (!seg(k.air, P.tx, true)) { brown = true; break; }
+          const prx = k.prxMedian + (R.sigma > 0 ? R.sigma * gauss(rRadio) : 0), snr = prx - k.nfl, per = k.perAt(snr);
+          const ok = rRadio() >= per;
+          if (S.ack && !seg(S.rxWindow, P.rx, true)) { brown = true; break; }
+          if (ok) {
+            got = true; cnt.delivered++;
+            rx.t.push(t); rx.rssi.push(prx); rx.snr.push(snr); rd.forEach((x, i) => { rx.reading[i].push(x[0]); rx.truth[i].push(x[1]); });
+            if (bi < nb) { bins.del[bi]++; bins.rs[bi] += prx; bins.rn[bi]++; }
+            break;
+          }
+          if (!S.ack) break;
+        }
+        if (!got) { cnt.lost++; if (S.ack && !brown) ev('lost'); }
+      }
+      if (brown) { reset(); n = 0; wakeAt = t + S.period; continue; }
+      wakeAt = start + S.period;
+      if (wakeAt < t) { if (!overrun) ev('overrun'); overrun = true; wakeAt = t; }
+    }
+    while (bi < nb) closeBin();
+    return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W };
+  }
+
+  function results(k, r) {
+    const an = analytic(k), c = r.cnt, nb = r.bins.q.length, T = r.dead ? r.tDead : r.T;
+    const iAvg = r.q / (T / 3600);
+    const s = {
+      lifeAnalytic: an.life, iAvgAnalytic: an.iAvg, iAvg, chargeUsed: r.q,
+      lifeSim: r.dead ? r.tDead : k.B.capacity * k.B.soc0 / iAvg * 3600,
+      socEnd: k.B.soc0 - r.q / k.B.capacity, vEnd: r.bins.v[nb - 1], vMin: r.vMin,
+      wakes: c.wakes, sent: c.sent, attempts: c.attempts, delivered: c.delivered, lost: c.lost, deliveryRatio: c.sent ? c.delivered / c.sent : NaN,
+      resets: c.resets, dead: r.dead ? 1 : 0, tDead: r.tDead,
+      rssiMean: r.rx.rssi.length ? r.rx.rssi.reduce((a, b) => a + b, 0) / r.rx.rssi.length : NaN,
+      snrMean: r.rx.snr.length ? r.rx.snr.reduce((a, b) => a + b, 0) / r.rx.snr.length : NaN,
+      per: k.perAt(k.prxMedian - k.nfl), airtime: k.air, activeFraction: c.active / T,
+    };
+    const perSensor = k.sens.map((_, i) => {
+      const v = r.rx.reading[i], tr = r.rx.truth[i];
+      return { readingMean: v.length ? v.reduce((a, b) => a + b, 0) / v.length : NaN, readingLast: v.length ? v[v.length - 1] : NaN,
+        readingErr: v.length ? v.reduce((a, b, j) => a + Math.abs(b - tr[j]), 0) / v.length : NaN };
+    });
+    let cd = 0, cr = 0;
+    const series = {
+      t: Array.from({ length: nb }, (_, i) => (i + 1) * r.W), soc: Array.from(r.bins.soc), v: Array.from(r.bins.v),
+      vload: Array.from(r.bins.vload, x => (Number.isFinite(x) ? x : NaN)), current: Array.from(r.bins.q, x => x / (r.W / 3600)),
+      delivered: Array.from(r.bins.del, x => (cd += x)), resets: Array.from(r.bins.res, x => (cr += x)),
+      rssi: Array.from(r.bins.rs, (x, i) => (r.bins.rn[i] ? x / r.bins.rn[i] : NaN)),
+      rxT: r.rx.t, traceT: r.trace[0], traceI: r.trace[1], eventT: r.log.map(e => e.t), eventCode: r.log.map(e => EVENT_CODES[e.code]),
+    };
+    return { scalars: s, perSensor, series, readings: r.rx.reading, truth: r.rx.truth, log: r.log, logCount: r.logCount, counts: r.counts, sensors: k.sens.map(x => x.id) };
+  }
+  const thin = (a, n) => { if (a.length <= n) return Array.from(a); const kk = (a.length - 1) / (n - 1), out = []; for (let i = 0; i < n; i++) out.push(a[Math.round(i * kk)]); return out; };
+
+  /** create(device, {seed, faults}) → {run(o?) → {scalars, perSensor, series, readings, truth, log}, measure(probe), analytic()} */
+  function create(dev, opts) {
+    opts = opts || {};
+    const problems = check(dev);
+    if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
+    if (opts.faults !== undefined && checkFaults(dev, opts.faults).length) throw fail('fault', { problems: checkFaults(dev, opts.faults) });
+    const faults = JSON.parse(JSON.stringify(opts.faults || [])), seed = (opts.seed === undefined ? 1 : num(opts.seed)) >>> 0;
+    const devc = JSON.parse(JSON.stringify(dev));
+    let cache = null;
+    const run = o => { if (!o && cache) return cache; const k = compile(JSON.parse(JSON.stringify(devc)), faults), r = results(k, simulate(k, seed, o)); if (!o) cache = r; return r; };
+    function measure(probe) {
+      if (!isObj(probe)) throw fail('probe');
+      if (probe.kind === 'V') {
+        const r = run(), a = probe.a === undefined ? 'vbat' : probe.a;
+        if (a !== 'vbat' && a !== 'vload') throw fail('unknown-node', { ref: a });
+        if (probe.at === undefined) return { kind: 'V', value: a === 'vbat' ? r.scalars.vEnd : r.scalars.vMin };
+        const i = Math.min(r.series.t.length - 1, Math.max(0, Math.ceil(num(probe.at) / (r.series.t[0] || 1)) - 1));
+        return { kind: 'V', value: a === 'vbat' ? r.series.v[i] : r.series.vload[i] };
+      }
+      if (probe.kind === 'I') return { kind: 'I', value: run().scalars.iAvg / 1000 };   // A, as a meter reads
+      if (probe.kind === 'scope') {
+        const node = probe.node === undefined ? 'i' : probe.node;
+        if (node !== 'i') throw fail('unknown-node', { ref: node });
+        const t0 = probe.tStart === undefined ? 0 : num(probe.tStart), t1 = num(probe.tEnd);
+        if (!(t1 > t0)) throw fail('bad-args');
+        const r = run({ traceFrom: t0, traceTo: t1 }), tt = [], vv = [];
+        r.series.traceT.forEach((x, i) => { if (x >= t0 && x <= t1) { tt.push(x); vv.push(r.series.traceI[i] / 1000); } });
+        let mn = Infinity, mx = -Infinity, area = 0;
+        for (let i = 0; i < vv.length; i++) { mn = Math.min(mn, vv[i]); mx = Math.max(mx, vv[i]); if (i % 2) area += vv[i] * (tt[i] - tt[i - 1]); }
+        return { kind: 'scope', unit: 'A', t: thin(tt, MAX_POINTS), v: thin(vv, MAX_POINTS), stats: { pp: mx - mn, mean: tt.length ? area / (t1 - t0) : NaN, min: mn, max: mx, freq: r.scalars.wakes > 1 ? 1 / compile(JSON.parse(JSON.stringify(devc)), faults).S.period : NaN } };
+      }
+      if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount, counts: { ...r.counts } }; }   // counts: the whole run's, per code (events: the first limits.log)
+      if (probe.kind === 'rssi') { const r = run(); return { kind: 'rssi', value: r.scalars.rssiMean, n: r.scalars.delivered }; }
+      throw fail('probe');
+    }
+    return Object.freeze({ id: ID, run, measure, analytic: () => analytic(compile(JSON.parse(JSON.stringify(devc)), faults)) });
+  }
+
+  // ---- the sim-spec@1 adapter: model {device, bindings: [{field, expr}]}, outputs [{id, kind, of?, sensor?}] ----
+  function setPath(o, path, v) {
+    const ks = path.split('.'); let x = o;
+    for (let i = 0; i < ks.length - 1; i++) { if (!isObj(x[ks[i]])) x[ks[i]] = {}; x = x[ks[i]]; }
+    x[ks[ks.length - 1]] = v;
+  }
+  const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]*$/;
+  const simEngine = {
+    create(spec, opts) {
+      const model = (spec && spec.model) || {}, outs = (spec && spec.outputs) || [], seed = (opts && opts.seed) >>> 0, faults = (opts && opts.faults) || [];
+      let key = null, sim = null;
+      function simFor(inp) {
+        const binds = inp.$bind || (model.bindings || []).map(b => [b.field, NAME_RE.test(b.expr) ? inp[b.expr] : NaN]), kk = JSON.stringify(binds);
+        if (kk !== key) {
+          key = kk;
+          const dev = JSON.parse(JSON.stringify(model.device || {}));
+          for (const [field, v] of binds) if (typeof v === 'number' && Number.isFinite(v)) setPath(dev, field, Number.isInteger(v) || !/(cells|txEvery|retries|samples|maxEvents|sf|cr|payload)$/.test(field) ? v : Math.round(v));
+          try { sim = create(dev, { seed, faults }); } catch (e) { sim = null; }
+        }
+        return sim;
+      }
+      return {
+        run(inp) {
+          inp = inp || {};
+          let res = null; const s = simFor(inp);
+          try { res = s ? s.run() : null; } catch (e) { res = null; }
+          const r = {};
+          for (const o of outs) {
+            const of = o.of !== undefined ? o.of : o.id, si = res ? Math.max(0, o.sensor === undefined ? 0 : res.sensors.indexOf(o.sensor)) : 0;
+            if (o.kind === 'series') {
+              const a = !res ? [] : of === 'reading' ? res.readings[si] || [] : of === 'truth' ? res.truth[si] || [] : res.series[of] || [];
+              r[o.id] = thin(a, MAX_POINTS);
+            } else r[o.id] = !res ? NaN : PER_SENSOR.includes(of) ? (res.perSensor[si] ? res.perSensor[si][of] : NaN) : res.scalars[of];
+          }
+          return r;
+        },
+        measure(inp, probe) {
+          try { const s = simFor(inp || {}); if (!s) return { kind: probe && probe.kind, error: 'invalid' }; return s.measure(probe); }
+          catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
+        },
+      };
+    },
+  };
+  const engine = {
+    id: ID, bench: true,
+    check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `${p.path}: ${p.msg}`),
+    prepare(spec, compile_) {
+      const bs = ((spec && spec.model && spec.model.bindings) || []).map(b => [b.field, compile_(b.expr)]);
+      const ev = (fn, env) => { try { return +fn(env); } catch (e) { return NaN; } };
+      return env => ({ ...env, $bind: bs.map(([fl, fn]) => [fl, ev(fn, env)]) });
+    },
+    create: (spec, opts) => simEngine.create(spec, opts),
+  };
+  const source = () => '(' + noemaTwinModule.toString() + ')(self); self.noemaEngine = self.NoemaTwin.simEngine;';
+  engine.workerSource = source();
+  root.NoemaTwin = Object.freeze({
+    id: ID, format: FORMAT, limits: Object.freeze({ sensors: MAX_SENSORS, samples: MAX_SAMPLES, events: MAX_EVENTS, log: MAX_LOG, trace: MAX_TRACE, points: MAX_POINTS, bindings: MAX_BINDINGS }),
+    FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), SCALARS: Object.freeze(SCALARS.slice()), SERIES: Object.freeze(SERIES.slice()), NUM_FIELDS: Object.freeze(NUM_FIELDS.slice()),
+    EVENT_CODES: Object.freeze({ ...EVENT_CODES }), CHEMS: Object.freeze(Object.keys(CHEMS)),
+    check, checkFaults, checkSpec, create, num, source, simEngine: Object.freeze(simEngine), engine: Object.freeze(engine),
+    radio: Object.freeze({ fspl, logDistance, noiseFloor, loraAirtime, bleAirtime, loraBer, fskBer, per: perOf }),
+  });
+  /* i18n-ignore-end */
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* ---- 43_engines_p6.js ---- */
+/* ===================== interactive activities — the P6 engines of sim-spec@1 (docs/INTERACTIVE_ENGINES.md, docs/INTERACTIVE.md §12.6–12.7) =====================
+   Registers the engines of 39_engine_thermal.js (thermal@1: lumped thermal networks), 40_engine_pid.js (pid@1: control loops),
+   41_engine_rf.js (rf@1: radio link budgets) and 42_engine_twin.js (twin@1: the digital twin of a battery-powered IoT node, which
+   also runs fault-finding benches: bench: true) with ACT.registerEngine, exactly like circuit-mna@1 (36_engine_circuit_sim.js):
+   each engine object is {id, check, prepare, create, workerSource} — its runs go to a Worker (the engine's own source, the same code
+   as on the page), its expressions (bindings, transient times, `at`) are evaluated on the main thread with the app's NoemaExpr
+   (prepare), so the worker gets numbers only. The validators check the same specs (engine/packcheck.js checkEngine, tools/activities.py). */
+(() => {
+  /* i18n-ignore-start */   // code: numbers in, numbers out
+  if (typeof ACT === 'undefined') return;
+  for (const g of ['NoemaThermal', 'NoemaPID', 'NoemaRF', 'NoemaTwin']) if (window[g] && window[g].engine) ACT.registerEngine(window[g].engine);
+  /* i18n-ignore-end */
+})();
+
+/* ---- 43_xapi.js ---- */
+/* ===================== xAPI 1.0.3 / cmi5 export of the learner's activity attempts (docs/activities-dev/xapi.md, docs/adr/001 D12) =====================
+   Pure functions: no network, no LRS. The app (later) offers the result as a JSON file to download.
+     NoemaXAPI.statements(input, opts) → [statement]      input: { att: S.att, res?: S.res, pack?: {id, title}, chapters?: [chapter] }
+     NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (tools/schemas/noema.xapi-export.v1.schema.json)
+     NoemaXAPI.cmi5Package(course, opts) → { files: { 'cmi5.xml': xml }, aus: [{id, chapter, exercise?}] }
+     NoemaXAPI.validate(stmt) → [problem]   ·   NoemaXAPI.validateAll(list) → [problem] (also the cmi5 rules across statements)
+     NoemaXAPI.subjectRecord({ att, res, pack, chapters, accountId, site, now }) → { name: '<id>.xapi.json', file } | null (nothing recorded)
+     NoemaXAPI.subjectCmi5({ pack, chapters, site }) → { name: '<id>.cmi5.zip', files: { 'cmi5.xml': xml } }   (what the app's two menus download:
+       the subject's ⋮ in the engine and the shell's "My subjects" ⋮; the same ids and AUs either way)
+   opts: { actor: { name?, account: { homePage, name } } (never an email: mbox / mbox_sha1sum / openid are never written),
+           activityBase: 'https://noema-lite.netlify.app/xapi/<packId>/', registration?: UUID | registrationSeed?: any,
+           locale?: 'en', profile?: 'xapi' | 'cmi5', granularity?: 'chapter' | 'activity' (cmi5: the AU of a statement) }
+   Every id is a UUID v5 of the content (re-export gives the same statements: idempotent at the LRS). */
+/* i18n-ignore-start */   // IRIs, verbs and protocol words, not text for learners
+var NoemaXAPI = (() => {   // var: the shell loads this file on its own (the "My subjects" ⋮) and engine.js has it inside again
+  const VERSION = '1.0.3';
+  const ADL = 'http://adlnet.gov/expapi/verbs/';
+  const VERBS = {
+    attempted: ADL + 'attempted', interacted: 'http://adlnet.gov/expapi/verbs/interacted', answered: ADL + 'answered',
+    passed: ADL + 'passed', failed: ADL + 'failed', completed: ADL + 'completed', initialized: ADL + 'initialized', terminated: ADL + 'terminated',
+  };
+  const CMI5_CAT = 'https://w3id.org/xapi/cmi5/context/categories/cmi5';
+  const MOVEON_CAT = 'https://w3id.org/xapi/cmi5/context/categories/moveon';
+  const CMI5_SESSION = 'https://w3id.org/xapi/cmi5/context/extensions/sessionid';
+  const CMI5_DEFINED = new Set(['launched', 'initialized', 'completed', 'passed', 'failed', 'abandoned', 'waived', 'terminated', 'satisfied']);
+  const ACT_TYPE = { course: 'https://w3id.org/xapi/cmi5/activitytype/course', block: 'https://w3id.org/xapi/cmi5/activitytype/block',
+    sim: 'http://adlnet.gov/expapi/activities/simulation', interaction: 'http://adlnet.gov/expapi/activities/cmi.interaction',
+    chapter: 'http://adlnet.gov/expapi/activities/module', lesson: 'http://adlnet.gov/expapi/activities/lesson' };
+  const INTERACTION = { mcq: 'choice', odd: 'choice', predict: 'choice', inquiry: 'choice', tf: 'true-false', cloze: 'fill-in', match: 'matching',
+    order: 'sequencing', bucket: 'matching', calc: 'numeric', free: 'long-fill-in', write: 'long-fill-in', spotbug: 'choice', img_hotspot: 'choice',
+    img_sequence: 'sequencing', img_drag: 'matching', img_label: 'fill-in', img_select: 'matching' };
+  const EXT_BASE = 'https://noema-lite.netlify.app/xapi/ext/';
+  const NS = '6f1d4a52-7c1e-5b0a-9e43-2a8d1c7b3f60';   // the noema-lite namespace of every UUID v5 here
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const IRI_RE = /^[a-z][a-z0-9+.-]*:\/\/[^\s<>"{}|\\^`]+$/i;
+  const LANG_RE = /^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{1,8})*$/;
+  const DUR_RE = /^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?$/;
+  const TS_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+
+  /* ---------- SHA-1 and UUID v5 (RFC 4122 §4.3), synchronous and dependency-free ---------- */
+  function utf8(s) {
+    if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(s);
+    const out = []; const e = unescape(encodeURIComponent(s)); for (let i = 0; i < e.length; i++) out.push(e.charCodeAt(i)); return Uint8Array.from(out);
+  }
+  function sha1(bytes) {
+    const ml = bytes.length, nb = ((ml + 9 + 63) >> 6) << 6, m = new Uint8Array(nb);
+    m.set(bytes); m[ml] = 0x80;
+    const bits = ml * 8, dv = new DataView(m.buffer);
+    dv.setUint32(nb - 4, bits >>> 0); dv.setUint32(nb - 8, Math.floor(bits / 4294967296));
+    let h0 = 0x67452301, h1 = 0xefcdab89, h2 = 0x98badcfe, h3 = 0x10325476, h4 = 0xc3d2e1f0;
+    const w = new Uint32Array(80), rol = (x, n) => (x << n) | (x >>> (32 - n));
+    for (let o = 0; o < nb; o += 64) {
+      for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+      for (let i = 16; i < 80; i++) w[i] = rol(w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16], 1);
+      let a = h0, b = h1, c = h2, d = h3, e = h4;
+      for (let i = 0; i < 80; i++) {
+        const f = i < 20 ? ((b & c) | (~b & d)) + 0x5a827999 : i < 40 ? (b ^ c ^ d) + 0x6ed9eba1 : i < 60 ? ((b & c) | (b & d) | (c & d)) + 0x8f1bbcdc : (b ^ c ^ d) + 0xca62c1d6;
+        const t = (rol(a, 5) + f + e + w[i]) >>> 0; e = d; d = c; c = rol(b, 30) >>> 0; b = a; a = t;
+      }
+      h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0; h4 = (h4 + e) >>> 0;
+    }
+    const out = new Uint8Array(20), ov = new DataView(out.buffer);
+    [h0, h1, h2, h3, h4].forEach((x, i) => ov.setUint32(i * 4, x));
+    return out;
+  }
+  const hex = b => Array.from(b, x => x.toString(16).padStart(2, '0')).join('');
+  function uuid5(name, ns = NS) {
+    const nsb = Uint8Array.from(ns.replace(/-/g, '').match(/../g).map(x => parseInt(x, 16)));
+    const nb = utf8(String(name)), all = new Uint8Array(16 + nb.length); all.set(nsb); all.set(nb, 16);
+    const h = sha1(all).slice(0, 16); h[6] = (h[6] & 0x0f) | 0x50; h[8] = (h[8] & 0x3f) | 0x80;
+    const x = hex(h); return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
+  }
+
+  /* ---------- small helpers ---------- */
+  /** a stable JSON (sorted keys): the name of a UUID v5 must not depend on the order of the keys */
+  function stable(v) {
+    if (v === undefined) return 'null';
+    if (v === null || typeof v !== 'object') return JSON.stringify(v);
+    if (Array.isArray(v)) return '[' + v.map(stable).join(',') + ']';
+    return '{' + Object.keys(v).sort().filter(k => v[k] !== undefined).map(k => JSON.stringify(k) + ':' + stable(v[k])).join(',') + '}';
+  }
+  const num = v => typeof v === 'number' && isFinite(v);
+  const iso = t => (num(t) && t > 0 && t < 8.64e15) ? new Date(t).toISOString() : null;
+  /** ISO 8601 duration of `ms` milliseconds, to 0.01 s (cmi5 §9.5.4.1): PT1H2M3.45S */
+  function duration(ms) {
+    if (!num(ms) || ms < 0) ms = 0;
+    const cs = Math.round(ms / 10), h = Math.floor(cs / 360000), m = Math.floor((cs % 360000) / 6000), s = (cs % 6000) / 100;
+    let out = 'PT'; if (h) out += h + 'H'; if (m) out += m + 'M';
+    if (s || (!h && !m)) out += (Number.isInteger(s) ? s : s.toFixed(2).replace(/0$/, '')) + 'S';
+    return out;
+  }
+  /** plain text of an exercise prompt for an activity name: the inline format's marks removed, at most 120 characters */
+  function plain(s) {
+    let t = String(s || '').replace(/\$\$?([^$]*)\$\$?/g, '$1').replace(/\[\[([^\]|]*)[^\]]*\]\]/g, '___').replace(/[*`]/g, '').replace(/\s+/g, ' ').trim();
+    return t.length > 120 ? t.slice(0, 119) + '…' : t;
+  }
+  const lang = l => (typeof l === 'string' && LANG_RE.test(l)) ? l : 'en';
+  const langMap = (l, s) => ({ [l]: String(s) });
+  const enc = s => encodeURIComponent(String(s));
+
+  function setup(input, opts) {
+    opts = opts || {};
+    const a = opts.actor || {}, acc = a.account || {};
+    if (!acc || typeof acc.homePage !== 'string' || !IRI_RE.test(acc.homePage) || typeof acc.name !== 'string' || !acc.name)
+      throw new Error('NoemaXAPI: opts.actor.account {homePage (IRI), name} is required (an account, never an email)');
+    const actor = { objectType: 'Agent', account: { homePage: acc.homePage, name: acc.name } };
+    if (typeof a.name === 'string' && a.name && !/@/.test(a.name)) actor.name = a.name;   // a display name; an address is never written
+    const pack = (input && input.pack) || {};
+    let base = opts.activityBase || ('https://noema-lite.netlify.app/xapi/' + enc(pack.id || 'pack') + '/');
+    if (!base.endsWith('/')) base += '/';
+    if (!IRI_RE.test(base)) throw new Error('NoemaXAPI: opts.activityBase must be an absolute IRI');
+    const registration = (typeof opts.registration === 'string' && UUID_RE.test(opts.registration)) ? opts.registration.toLowerCase()
+      : uuid5('registration|' + stable(opts.registrationSeed !== undefined ? opts.registrationSeed : [acc.homePage, acc.name, base]));
+    const ext = opts.extBase || EXT_BASE;
+    const X = k => ext + k;
+    // what the exercises are: id → { ex, chapter }
+    const EXS = {}, CHS = {};
+    for (const c of (input && Array.isArray(input.chapters) ? input.chapters : [])) {
+      if (!c || typeof c.id !== 'string') continue;
+      CHS[c.id] = c;
+      for (const e of Array.isArray(c.exercises) ? c.exercises : []) if (e && typeof e.id === 'string') EXS[e.id] = { ex: e, chapter: c.id };
+    }
+    const chapterOf = id => (EXS[id] && EXS[id].chapter) || ((/^(ch\d+)-/.exec(id) || [])[1]) || null;
+    return { opts, actor, base, registration, X, EXS, CHS, chapterOf, locale: lang(opts.locale || pack.language), pack,
+      profile: opts.profile === 'cmi5' ? 'cmi5' : 'xapi', granularity: opts.granularity === 'activity' ? 'activity' : 'chapter' };
+  }
+
+  const verb = v => ({ id: VERBS[v], display: { 'en-US': v } });
+  function exerciseObject(C, exId, fallbackType) {
+    const info = C.EXS[exId], ex = info ? info.ex : null, type = (ex && ex.type) || fallbackType || null;
+    const def = { type: type === 'sim' ? ACT_TYPE.sim : ACT_TYPE.interaction, name: langMap(C.locale, (ex && plain(ex.q)) || exId) };
+    if (type && type !== 'sim') def.interactionType = INTERACTION[type] || 'other';
+    if (type) def.extensions = { [C.X('exercise-type')]: type };
+    return { objectType: 'Activity', id: C.base + 'exercise/' + enc(exId), definition: def };
+  }
+  const chapterRef = (C, ch) => ({ objectType: 'Activity', id: C.base + 'chapter/' + enc(ch), definition: { type: ACT_TYPE.chapter, name: langMap(C.locale, (C.CHS[ch] && C.CHS[ch].title) || ch) } });
+  const courseRef = C => ({ objectType: 'Activity', id: C.base, definition: { type: ACT_TYPE.course, name: langMap(C.locale, C.pack.title || C.pack.id || 'noema-lite pack') } });
+  const auId = (C, ch, exId) => C.base + 'au/' + enc(C.granularity === 'activity' && exId ? exId : (ch || 'pack'));
+  const auObject = (C, ch, exId) => ({ objectType: 'Activity', id: auId(C, ch, exId), definition: { type: ACT_TYPE.lesson, name: langMap(C.locale, C.granularity === 'activity' && exId ? ((C.EXS[exId] && plain(C.EXS[exId].ex.q)) || exId) : ((C.CHS[ch] && C.CHS[ch].title) || ch || 'pack')) } });
+
+  /** the attempts of S.att: { exId: { id, seed, t, t0?, hints, result: {score, passed, detail, t}, events: [{t, name, data}] } } (or a list with `exercise`) */
+  function attemptsOf(input) {
+    const src = input && (input.att || input.attempts), out = [];
+    if (Array.isArray(src)) { for (const a of src) if (a && typeof a.exercise === 'string') out.push([a.exercise, a]); }
+    else if (src && typeof src === 'object') for (const k of Object.keys(src)) if (src[k] && typeof src[k] === 'object') out.push([k, src[k]]);
+    const t0 = a => { const ev = Array.isArray(a.events) ? a.events.filter(e => e && num(e.t)) : []; return num(a.t0) ? a.t0 : ev.length ? Math.min(...ev.map(e => e.t)) : num(a.result && a.result.t) ? a.result.t : num(a.t) ? a.t : 0; };
+    return out.map(([k, a]) => ({ exId: k, a, t0: t0(a) })).sort((x, y) => (x.t0 - y.t0) || (x.exId < y.exId ? -1 : x.exId > y.exId ? 1 : 0));
+  }
+
+  /** what a result says beyond its score: the detail text and, for the checks grader, every check met or not ({label, ok}) */
+  function resultExt(C, r, ext) {
+    if (typeof r.detail === 'string' && r.detail) ext[C.X('detail')] = r.detail;
+    if (Array.isArray(r.checks)) ext[C.X('checks')] = r.checks.filter(c => c && typeof c === 'object').map(c => ({ label: typeof c.label === 'string' ? c.label : null, ok: !!c.ok }));
+    return ext;
+  }
+  function statements(input, opts) {
+    const C = setup(input, opts), out = [];
+    const cmi5 = C.profile === 'cmi5';
+    const auState = {};   // cmi5: per AU, what it said already (passed / completed once per registration; failed never after passed)
+    function push(v, object, { t, result, ctxExt, parents, category, session, key }) {
+      const ctx = { registration: C.registration, contextActivities: {}, language: C.locale };
+      if (parents && parents.length) ctx.contextActivities.parent = parents;
+      ctx.contextActivities.grouping = [courseRef(C)];
+      if (category && category.length) ctx.contextActivities.category = category.map(id => ({ objectType: 'Activity', id }));
+      const ex = Object.assign({}, ctxExt || {}); if (session) ex[CMI5_SESSION] = session;
+      if (Object.keys(ex).length) ctx.extensions = ex;
+      const st = { id: uuid5('statement|' + C.registration + '|' + v + '|' + object.id + '|' + key), actor: C.actor, verb: verb(v), object, context: ctx };
+      if (result) st.result = result;
+      const ts = iso(t); if (ts) st.timestamp = ts;
+      st.version = VERSION;
+      out.push(st); return st;
+    }
+
+    for (const { exId, a, t0 } of attemptsOf(input)) {
+      const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, 'sim');
+      const att = typeof a.id === 'string' && a.id ? a.id : uuid5('attempt|' + exId + '|' + stable([a.seed, t0]));
+      const events = (Array.isArray(a.events) ? a.events : []).filter(e => e && typeof e.name === 'string');
+      const r = a.result && typeof a.result === 'object' && num(a.result.score) ? a.result : null;
+      const end = r && num(r.t) ? r.t : events.length && num(events[events.length - 1].t) ? events[events.length - 1].t : num(a.t) ? a.t : t0;
+      const hints = Number.isInteger(a.hints) && a.hints >= 0 ? a.hints : 0;
+      const base = { [C.X('attempt-id')]: att }; if (a.seed != null) base[C.X('seed')] = a.seed;
+      const parents = ch ? [chapterRef(C, ch)] : [];
+      const key = k => att + '|' + k;
+      if (!cmi5) {
+        push('attempted', obj, { t: t0, parents, ctxExt: Object.assign({}, base, { [C.X('hints-used')]: hints }), key: key('start') });
+        events.forEach((e, i) => push('interacted', obj, { t: e.t, parents, key: key('ev' + i),
+          ctxExt: Object.assign({}, base, { [C.X('event-name')]: e.name, [C.X('event-index')]: i }, e.data !== undefined ? { [C.X('event-data')]: e.data } : {}) }));
+        if (r) {
+          const score = Math.max(0, Math.min(1, r.score));
+          const res = { score: { scaled: score, raw: score, min: 0, max: 1 }, success: !!r.passed, completion: true, duration: duration(end - t0), extensions: { [C.X('hints-used')]: hints } };
+          resultExt(C, r, res.extensions);
+          push(r.passed ? 'passed' : 'failed', obj, { t: r.t || end, parents, ctxExt: base, result: res, key: key('result') });
+        }
+        continue;
+      }
+      // cmi5: a session per attempt; the defined statements are about the AU, the interactions about the exercise inside it
+      const au = auObject(C, ch, exId), session = uuid5('session|' + C.registration + '|' + att), st = auState[au.id] = auState[au.id] || {};
+      const auParents = C.granularity === 'activity' && ch ? [chapterRef(C, ch)] : [];
+      push('initialized', au, { t: t0, parents: auParents, category: [CMI5_CAT], session, ctxExt: base, key: key('init') });
+      events.forEach((e, i) => push('interacted', obj, { t: e.t, parents: [au], session, key: key('ev' + i),
+        ctxExt: Object.assign({}, base, { [C.X('event-name')]: e.name, [C.X('event-index')]: i }, e.data !== undefined ? { [C.X('event-data')]: e.data } : {}) }));
+      if (r) {
+        const score = Math.max(0, Math.min(1, r.score)), dur = duration(end - t0);
+        const ext = resultExt(C, r, { [C.X('hints-used')]: hints });
+        // the exercise's own outcome, as a cmi5 "allowed" statement (no cmi5 category)
+        push('answered', obj, { t: r.t || end, parents: [au], session, ctxExt: base, key: key('answer'),
+          result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: !!r.passed, completion: true, duration: dur, extensions: ext } });
+        if (r.passed && !st.passed) {
+          st.passed = true;
+          push('passed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('passed'),
+            result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: true, duration: dur } });
+        } else if (!r.passed && !st.passed && !st.failed) {
+          st.failed = true;
+          push('failed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('failed'),
+            result: { score: { scaled: score, raw: score, min: 0, max: 1 }, success: false, duration: dur } });
+        }
+        if (!st.completed) {
+          st.completed = true;
+          push('completed', au, { t: r.t || end, parents: auParents, category: [CMI5_CAT, MOVEON_CAT], session, ctxExt: base, key: key('completed'), result: { completion: true, duration: dur } });
+        }
+      }
+      push('terminated', au, { t: end, parents: auParents, category: [CMI5_CAT], session, ctxExt: base, key: key('end'), result: { duration: duration(end - t0) } });
+    }
+
+    // the ordinary exercises: S.res { exId: { n, ok, last, t, conf } } → one "answered" each (the latest answer)
+    const res = input && (input.res || input.answers);
+    if (res && typeof res === 'object' && !Array.isArray(res)) {
+      for (const exId of Object.keys(res).sort()) {
+        const r = res[exId]; if (!r || typeof r !== 'object' || typeof r.last !== 'boolean') continue;
+        const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, null);
+        const ext = { [C.X('answers-count')]: Number.isInteger(r.n) ? r.n : 1, [C.X('correct-count')]: Number.isInteger(r.ok) ? r.ok : (r.last ? 1 : 0) };
+        if (typeof r.conf === 'string') ext[C.X('confidence')] = r.conf;
+        const result = { success: r.last, completion: true, extensions: ext };
+        const k = 'res|' + exId + '|' + stable([r.n, r.ok, r.last, r.t]);
+        if (cmi5) push('answered', obj, { t: r.t, parents: [auObject(C, ch, exId)], session: uuid5('session|' + C.registration + '|answers|' + (C.granularity === 'activity' ? exId : ch)), result, key: k });
+        else push('answered', obj, { t: r.t, parents: ch ? [chapterRef(C, ch)] : [], result, key: k });
+      }
+    }
+    return out;
+  }
+
+  /** the file the app offers to download (tools/schemas/noema.xapi-export.v1.schema.json) */
+  function exportFile(input, opts) {
+    const C = setup(input, opts), list = statements(input, opts);
+    const f = { format: 'noema.xapi-export/v1', xapiVersion: VERSION, profile: C.profile, pack: { id: String(C.pack.id || ''), activityBase: C.base }, registration: C.registration, statements: list };
+    if (opts && num(opts.now)) f.generated = iso(opts.now);
+    return f;
+  }
+
+  /* ---------- validation: the subset of xAPI 1.0.3 and cmi5 this file writes ---------- */
+  function validate(st) {
+    const P = [], bad = m => P.push(m);
+    if (!st || typeof st !== 'object') return ['not an object'];
+    if (!UUID_RE.test(st.id || '')) bad('id is not a UUID');
+    const a = st.actor;
+    if (!a || typeof a !== 'object') bad('no actor');
+    else {
+      for (const k of ['mbox', 'mbox_sha1sum', 'openid']) if (k in a) bad('actor has ' + k + ' (never an email or another personal identifier: use an account)');
+      if (a.objectType && a.objectType !== 'Agent') bad('actor.objectType must be Agent');
+      if (!a.account || !IRI_RE.test(a.account.homePage || '') || typeof a.account.name !== 'string' || !a.account.name) bad('actor.account needs homePage (IRI) and name');
+      if (a.name != null && (typeof a.name !== 'string' || /@/.test(a.name))) bad('actor.name must be a display name, not an address');
+      if (a.account && Object.keys(a.account).some(k => k !== 'homePage' && k !== 'name')) bad('actor.account: only homePage and name');
+    }
+    const v = st.verb;
+    if (!v || !IRI_RE.test(v.id || '')) bad('verb.id is not an IRI');
+    else if (!v.display || typeof v.display !== 'object' || !Object.keys(v.display).length) bad('verb.display is missing');
+    const o = st.object;
+    if (!o || !IRI_RE.test(o.id || '')) bad('object.id is not an IRI');
+    else if (o.objectType && o.objectType !== 'Activity') bad('object.objectType must be Activity');
+    else if (o.definition) {
+      const d = o.definition;
+      if (d.type != null && !IRI_RE.test(d.type)) bad('object.definition.type is not an IRI');
+      if (d.name && Object.keys(d.name).some(l => !LANG_RE.test(l))) bad('object.definition.name: a key is not a language tag');
+      if (d.interactionType && d.type !== ACT_TYPE.interaction) bad('interactionType needs the cmi.interaction type');
+      for (const k of Object.keys(d.extensions || {})) if (!IRI_RE.test(k)) bad('definition extension key is not an IRI: ' + k);
+    }
+    const r = st.result;
+    if (r != null) {
+      if (typeof r !== 'object') bad('result is not an object');
+      else {
+        const s = r.score;
+        if (s != null) {
+          if (s.scaled != null && !(num(s.scaled) && s.scaled >= -1 && s.scaled <= 1)) bad('result.score.scaled must be in [-1, 1]');
+          if (s.min != null && s.max != null && !(s.min < s.max)) bad('result.score: min must be < max');
+          if (s.raw != null && ((s.min != null && s.raw < s.min) || (s.max != null && s.raw > s.max))) bad('result.score.raw outside [min, max]');
+        }
+        if (r.success != null && typeof r.success !== 'boolean') bad('result.success must be a boolean');
+        if (r.completion != null && typeof r.completion !== 'boolean') bad('result.completion must be a boolean');
+        if (r.duration != null && !DUR_RE.test(r.duration)) bad('result.duration is not an ISO 8601 duration');
+        for (const k of Object.keys(r.extensions || {})) if (!IRI_RE.test(k)) bad('result extension key is not an IRI: ' + k);
+      }
+    }
+    const c = st.context;
+    if (c != null) {
+      if (c.registration != null && !UUID_RE.test(c.registration)) bad('context.registration is not a UUID');
+      if (c.language != null && !LANG_RE.test(c.language)) bad('context.language is not a language tag');
+      for (const k of Object.keys(c.extensions || {})) if (!IRI_RE.test(k)) bad('context extension key is not an IRI: ' + k);
+      for (const [k, list] of Object.entries(c.contextActivities || {})) {
+        if (!['parent', 'grouping', 'category', 'other'].includes(k)) bad('contextActivities.' + k + ' is not allowed');
+        else if (!Array.isArray(list) || !list.every(x => x && IRI_RE.test(x.id || ''))) bad('contextActivities.' + k + ' must be a list of activities');
+      }
+    }
+    if (st.timestamp != null && !TS_RE.test(st.timestamp)) bad('timestamp is not ISO 8601 with a zone');
+    if (st.version != null && !/^1\.0(\.\d+)?$/.test(st.version)) bad('version must be 1.0.x');
+    // cmi5 (cmi5 spec §9): a defined statement carries the cmi5 category, a registration and the session id; the rest do not carry the category
+    const name = v && typeof v.id === 'string' ? v.id.slice(v.id.lastIndexOf('/') + 1) : '';
+    const cats = ((c && c.contextActivities && c.contextActivities.category) || []).map(x => x && x.id);
+    const isCmi5 = cats.includes(CMI5_CAT), sess = c && c.extensions && c.extensions[CMI5_SESSION] != null;
+    if (isCmi5) {
+      if (!(v && v.id.startsWith(ADL) && CMI5_DEFINED.has(name))) bad('the cmi5 category on a verb cmi5 does not define (' + name + ')');
+      if (!c.registration) bad('cmi5: a registration is required');
+      if (!sess) bad('cmi5: the sessionid extension is required');
+      if (name === 'passed' && !(r && r.success === true)) bad('cmi5 passed: result.success must be true');
+      if (name === 'failed' && !(r && r.success === false)) bad('cmi5 failed: result.success must be false');
+      if (name === 'completed' && !(r && r.completion === true)) bad('cmi5 completed: result.completion must be true');
+      if (['passed', 'failed', 'completed', 'terminated'].includes(name) && !(r && r.duration)) bad('cmi5 ' + name + ': result.duration is required');
+      if ((name === 'passed' || name === 'failed') && r && r.completion != null) bad('cmi5 ' + name + ': no result.completion');
+      if (cats.includes(MOVEON_CAT) && !['passed', 'failed', 'completed'].includes(name)) bad('cmi5: the moveOn category only on passed, failed, completed');
+      if (['passed', 'failed', 'completed'].includes(name) && !cats.includes(MOVEON_CAT)) bad('cmi5 ' + name + ': the moveOn category is required');
+    } else if (cats.includes(MOVEON_CAT)) bad('the moveOn category without the cmi5 category');
+    return P;
+  }
+  /** every statement, plus the rules across them: unique ids; cmi5 per AU and registration: passed / completed at most once, no failed after passed */
+  function validateAll(list) {
+    const P = []; if (!Array.isArray(list)) return ['not a list'];
+    const ids = new Set(), seen = {};
+    list.forEach((st, i) => {
+      for (const p of validate(st)) P.push('#' + i + ': ' + p);
+      if (st && st.id) { if (ids.has(st.id)) P.push('#' + i + ': duplicate id ' + st.id); ids.add(st.id); }
+      const cats = ((st && st.context && st.context.contextActivities && st.context.contextActivities.category) || []).map(x => x && x.id);
+      if (!cats.includes(CMI5_CAT)) return;
+      const name = st.verb.id.slice(st.verb.id.lastIndexOf('/') + 1), k = st.context.registration + ' ' + st.object.id, s = seen[k] = seen[k] || {};
+      if ((name === 'passed' || name === 'completed') && s[name]) P.push('#' + i + ': cmi5: a second ' + name + ' for ' + st.object.id);
+      if (name === 'failed' && s.passed) P.push('#' + i + ': cmi5: failed after passed for ' + st.object.id);
+      s[name] = true;
+    });
+    return P;
+  }
+
+  /* ---------- cmi5.xml (cmi5 spec §13, the course structure) ---------- */
+  const xesc = s => String(s == null ? '' : s).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  const ls = (tag, l, s, pad) => `${pad}<${tag}>\n${pad}  <langstring lang="${xesc(l)}">${xesc(s)}</langstring>\n${pad}</${tag}>\n`;
+  /** course: a pack ({ id, subject: {title, description, language}, chapters: [{id, title, subtitle, exercises}] } or a built pack.json);
+      opts: { activityBase, launchBase ('https://noema-lite.netlify.app/'), granularity ('chapter': one AU per chapter; 'activity': one block per chapter,
+      an AU per sim exercise, one AU for the rest of the chapter), moveOn ('CompletedOrPassed'), masteryScore (0–1), locale } */
+  function cmi5Package(course, opts) {
+    opts = opts || {};
+    const subj = (course && course.subject) || {}, id = String((course && course.id) || subj.id || 'pack');
+    const l = lang(opts.locale || subj.language), title = subj.title || (course && course.title) || id, desc = subj.description || title;
+    let base = opts.activityBase || ('https://noema-lite.netlify.app/xapi/' + enc(id) + '/'); if (!base.endsWith('/')) base += '/';
+    const launch = opts.launchBase || 'https://noema-lite.netlify.app/';
+    const MOVEON = ['Passed', 'Completed', 'CompletedAndPassed', 'CompletedOrPassed', 'NotApplicable'];
+    const moveOn = MOVEON.includes(opts.moveOn) ? opts.moveOn : 'CompletedOrPassed';
+    const mastery = num(opts.masteryScore) && opts.masteryScore >= 0 && opts.masteryScore <= 1 ? ` masteryScore="${opts.masteryScore}"` : '';
+    const url = ch => xesc(launch + (launch.includes('?') ? '&' : '?') + 'subject=' + enc(id) + '#/ch/' + enc(ch));
+    const chapters = (course && Array.isArray(course.chapters) ? course.chapters : []).filter(c => c && typeof c.id === 'string');
+    const aus = [];
+    const au = (auid, t, d, ch, pad, ex) => {
+      aus.push({ id: auid, chapter: ch, ...(ex ? { exercise: ex } : {}) });
+      return `${pad}<au id="${xesc(auid)}" moveOn="${moveOn}"${mastery} launchMethod="AnyWindow">\n` + ls('title', l, t, pad + '  ') + ls('description', l, d, pad + '  ') + `${pad}  <url>${url(ch)}</url>\n${pad}</au>\n`;
+    };
+    let body = '';
+    for (const c of chapters) {
+      const ct = c.title || c.id, cd = c.subtitle || c.mantra || ct;
+      if (opts.granularity !== 'activity') { body += au(base + 'au/' + enc(c.id), ct, cd, c.id, '  '); continue; }
+      const sims = (c.exercises || []).filter(e => e && e.type === 'sim' && typeof e.id === 'string'), rest = (c.exercises || []).length - sims.length;
+      let inner = '';
+      for (const e of sims) inner += au(base + 'au/' + enc(e.id), plain(e.q) || e.id, plain(e.q) || e.id, c.id, '    ', e.id);
+      if (rest > 0 || !sims.length) inner += au(base + 'au/' + enc(c.id), ct, cd, c.id, '    ');
+      body += `  <block id="${xesc(base + 'block/' + enc(c.id))}">\n` + ls('title', l, ct, '    ') + ls('description', l, cd, '    ') + inner + '  </block>\n';
+    }
+    const xml = '<?xml version="1.0" encoding="utf-8"?>\n<courseStructure xmlns="https://w3id.org/xapi/profiles/cmi5/v1/CourseStructure.xsd">\n'
+      + `  <course id="${xesc(base)}">\n` + ls('title', l, title, '    ') + ls('description', l, desc, '    ') + '  </course>\n' + body + '</courseStructure>\n';
+    return { files: { 'cmi5.xml': xml }, aus };
+  }
+
+  /** files {path: text} → a zip Blob, with the app's zip writer (JSZip, loaded on demand by NoemaViewer like the package export) */
+  async function zip(files) {
+    const W = typeof window !== 'undefined' ? window : globalThis;
+    if (!W.JSZip && W.NoemaViewer && W.NoemaViewer.jszip) await W.NoemaViewer.jszip();
+    if (!W.JSZip) throw Object.assign(new Error('The package writer is not available.'), { code: 'files.no_writer', params: {} });
+    const z = new W.JSZip(); for (const [p, t] of Object.entries(files || {})) z.file(p, t);
+    return z.generateAsync({ type: 'blob', mimeType: 'application/zip' });
+  }
+  /* ---------- one subject, as the app exports it (the subject's ⋮ and the shell's "My subjects" ⋮) ---------- */
+  const siteOf = s => String(s || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';
+  const baseOf = (site, id) => site + 'xapi/' + encodeURIComponent(id) + '/';
+  /** the learner's record of one subject: S.att (activity attempts) and S.res (answers); the actor is the account id, never an e-mail */
+  function subjectRecord({ att, res, pack, chapters, accountId, site, now } = {}) {
+    att = att || {}; res = res || {};
+    if (!Object.keys(att).length && !Object.keys(res).length) return null;
+    const S = siteOf(site), p = pack || {};
+    const file = exportFile({ att, res, pack: { id: p.id, title: p.title, language: p.language }, chapters: chapters || [] },
+      { actor: { account: { homePage: S, name: String(accountId) } }, activityBase: baseOf(S, p.id), registrationSeed: [String(accountId), p.id], now });
+    return { name: p.id + '.xapi.json', file };
+  }
+  /** the subject as a cmi5 course for an LMS: cmi5.xml (one AU per chapter; the AUs open the chapters on the site), zipped by the caller */
+  function subjectCmi5({ pack, chapters, site } = {}) {
+    const S = siteOf(site), p = pack || {};
+    const course = { id: p.id, subject: { id: p.id, title: p.title, description: p.description, language: p.language }, chapters: chapters || [] };
+    return { name: p.id + '.cmi5.zip', files: cmi5Package(course, { activityBase: baseOf(S, p.id), launchBase: S, locale: p.language }).files };
+  }
+
+  return { VERSION, VERBS, CMI5_CAT, MOVEON_CAT, CMI5_SESSION, EXT_BASE, statements, exportFile, cmi5Package, validate, validateAll, duration, uuid5, sha1: b => hex(sha1(b)),
+    subjectRecord, subjectCmi5, zip };
+})();
+if (typeof window !== 'undefined') window.NoemaXAPI = NoemaXAPI;
+if (typeof module !== 'undefined' && module.exports) module.exports = NoemaXAPI;
+/* i18n-ignore-end */
+
+/* ---- 44_activity_wasm.js ---- */
+/* ===================== interactive activities — runtime wasm-module@1 and the sim-spec engine wasm@1 (docs/activities-dev/wasm.md) =====================
+   A pack may carry a precompiled WebAssembly module (a C / Rust / AssemblyScript simulation core) as an activities item:
+     { id, runtime: 'wasm-module@1', wasm: <base64, at most 2 MiB>, sha256: <hex of the bytes>, bytes?, abi?: { version: 1, step?, init?,
+       maxPages?, budgetMs?, scratch?, initEachStep? }, spec?: <a sim-spec@1 spec whose model is this module>, fallback, strings }
+   The pack ships ONLY the .wasm, never JS. The module may import nothing but the host ABI (module "noema" or "env"):
+     memory (one memory "memory", capped at abi.maxPages) · noema_log(ptr, len) (UTF-8, capped) · noema_now() → f64 ms ·
+     noema_random() → f64 in [0, 1), seeded by the activity's seed. Anything else (WASI, JS glue, a table or global) → refused before
+     instantiation (inspect(): our own reader of the binary, the twin of tools/wasm_check.py; WebAssembly.Module.imports again in the worker).
+   It runs in a dedicated blob: Worker whose network globals are removed before anything else (fetch, XHR, WebSocket, EventSource,
+   WebTransport, importScripts, Worker, BroadcastChannel, IndexedDB, caches); the page reads and sha256-checks the bytes and hands them
+   over — the worker never asks for anything. Every call has a time budget: over it, the worker is terminated (code 'runaway', restartable).
+   Two ways in:
+     · the engine wasm@1 of sim-spec@1 (ACT.registerEngine): spec.engine 'wasm@1', spec.model { module: <item id>, inputs: [expr…],
+       outputs: [{id, n?}…], step?, init? }: step(ptr_in, n_in, ptr_out, n_out) over f64 arrays, mapped to the spec's named outputs, so
+       the sim-spec renderer, its plots and the checks grader work unchanged (the sim runtime's 5 s per run is the budget there);
+     · the runtime wasm-module@1 (ACT.registerRuntime): an item with its own `spec` is shown by the sim-spec renderer with this engine;
+       and window.NoemaWasm.load(item) → a handle { call(fn, inputs, nOut), raw(fn, …ints), restart(), close() } for host code.
+   No user-visible text here: failures are codes (spec, unsupported, runaway, abi, import, memory, step, worker). */
+(() => {
+  /* i18n-ignore-start */   // code, limits and protocol names — no UI text
+  const root = typeof window !== 'undefined' ? window : globalThis;
+  const MAX_BYTES = 2 * 1024 * 1024, PAGES_DEFAULT = 256, PAGES_CAP = 1024;
+  const ABI_MODULES = ['noema', 'env'];
+  const ABI_FUNCS = { noema_log: '(i32,i32)->()', noema_now: '()->(f64)', noema_random: '()->(f64)' };
+  const STEP_SIGS = ['(i32,i32,i32,i32)->()', '(i32,i32,i32,i32)->(i32)'], INIT_SIG = '(i32)->()', ALLOC_SIG = '(i32)->(i32)';
+  const KINDS = ['func', 'table', 'memory', 'global', 'tag'];
+  const VT = { 0x7f: 'i32', 0x7e: 'i64', 0x7d: 'f32', 0x7c: 'f64', 0x7b: 'v128', 0x70: 'funcref', 0x6f: 'externref' };
+  const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]{0,63}$/;
+  const ABI_KEYS = ['version', 'step', 'init', 'maxPages', 'budgetMs', 'scratch', 'initEachStep'], MODEL_KEYS = ['module', 'step', 'init', 'inputs', 'outputs'];
+  const LIM = { inputs: 64, outputs: 24, points: 2000, budgetMin: 50, budgetMax: 5000, budgetDefault: 1000, logLine: 200, logLines: 100 };
+  const NO_ABI = '(module "noema": noema_log, noema_now, noema_random, memory)';
+  const isInt = v => Number.isInteger(v);
+  const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+
+  /* ---------- sha256 (synchronous: the spec check runs before the first frame) ---------- */
+  const SHA = (() => {
+    const primes = []; for (let n = 2; primes.length < 64; n++) if (primes.every(p => n % p)) primes.push(n);
+    const frac = x => Math.floor((x - Math.floor(x)) * 4294967296) >>> 0;
+    return { K: Uint32Array.from(primes, p => frac(Math.cbrt(p))), H: Uint32Array.from(primes.slice(0, 8), p => frac(Math.sqrt(p))) };
+  })();
+  function sha256(bytes) {
+    const l = bytes.length, nb = ((l + 9 + 63) >> 6) << 6, m = new Uint8Array(nb); m.set(bytes); m[l] = 0x80;
+    const dv = new DataView(m.buffer); dv.setUint32(nb - 4, (l * 8) >>> 0); dv.setUint32(nb - 8, Math.floor(l / 536870912));
+    const H = Uint32Array.from(SHA.H), W = new Uint32Array(64), K = SHA.K;
+    for (let o = 0; o < nb; o += 64) {
+      for (let i = 0; i < 16; i++) W[i] = dv.getUint32(o + i * 4);
+      for (let i = 16; i < 64; i++) {
+        const a = W[i - 15], b = W[i - 2];
+        const s0 = ((a >>> 7) | (a << 25)) ^ ((a >>> 18) | (a << 14)) ^ (a >>> 3), s1 = ((b >>> 17) | (b << 15)) ^ ((b >>> 19) | (b << 13)) ^ (b >>> 10);
+        W[i] = (W[i - 16] + s0 + W[i - 7] + s1) >>> 0;
+      }
+      let [a, b, c, d, e, f, g, h] = H;
+      for (let i = 0; i < 64; i++) {
+        const S1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7)), ch = (e & f) ^ (~e & g);
+        const t1 = (h + S1 + ch + K[i] + W[i]) >>> 0;
+        const S0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10)), mj = (a & b) ^ (a & c) ^ (b & c);
+        const t2 = (S0 + mj) >>> 0;
+        h = g; g = f; f = e; e = (d + t1) >>> 0; d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+      }
+      H[0] += a; H[1] += b; H[2] += c; H[3] += d; H[4] += e; H[5] += f; H[6] += g; H[7] += h;
+    }
+    return Array.from(H, x => x.toString(16).padStart(8, '0')).join('');
+  }
+  function fromB64(s) { const bin = atob(s), out = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
+
+  /* ---------- the binary reader (the twin of tools/wasm_check.py parse / inspect: the same rules, the same messages) ---------- */
+  function parse(b) {
+    const bad = w => Object.assign(new Error(w), { bad: w });
+    if (b.length < 8 || b[0] !== 0 || b[1] !== 0x61 || b[2] !== 0x73 || b[3] !== 0x6d || b[4] !== 1 || b[5] || b[6] || b[7]) throw bad('magic');
+    const td = new TextDecoder('utf-8', { fatal: true });
+    const R = (i, end) => ({ i, end,
+      byte() { if (this.i >= this.end) throw bad('truncated'); return b[this.i++]; },
+      u32() { let r = 0, s = 0; for (;;) { const x = this.byte(); r += (x & 0x7f) * Math.pow(2, s); s += 7; if (!(x & 0x80)) return r; if (s > 35) throw bad('leb'); } },
+      name() { const n = this.u32(); if (this.i + n > this.end) throw bad('truncated'); let v; try { v = td.decode(b.subarray(this.i, this.i + n)); } catch (e) { throw bad('utf8'); } this.i += n; return v; },
+      limits() { const f = this.byte(), mn = this.u32(), mx = f & 1 ? this.u32() : null; return [f, mn, mx]; } });
+    const r = R(8, b.length), types = [], imports = [], mems = [], exports = []; let funcs = [], start = false;
+    while (r.i < r.end) {
+      const sid = r.byte(), size = r.u32(), end = r.i + size;
+      if (end > r.end) throw bad('section ' + sid);
+      const s = R(r.i, end);
+      if (sid === 1) for (let n = s.u32(); n--;) { if (s.byte() !== 0x60) throw bad('section 1'); const ps = []; for (let k = s.u32(); k--;) ps.push(VT[s.byte()] || '?'); const rs = []; for (let k = s.u32(); k--;) rs.push(VT[s.byte()] || '?'); types.push([ps, rs]); }
+      else if (sid === 2) for (let n = s.u32(); n--;) {
+        const mod = s.name(), nm = s.name(), k = s.byte();
+        if (k === 0) imports.push({ module: mod, name: nm, kind: 'func', type: s.u32() });
+        else if (k === 1) { s.byte(); s.limits(); imports.push({ module: mod, name: nm, kind: 'table', type: null }); }
+        else if (k === 2) imports.push({ module: mod, name: nm, kind: 'memory', type: null, limits: s.limits() });
+        else if (k === 3) { s.byte(); s.byte(); imports.push({ module: mod, name: nm, kind: 'global', type: null }); }
+        else if (k === 4) { s.byte(); s.u32(); imports.push({ module: mod, name: nm, kind: 'tag', type: null }); }
+        else throw bad('section 2');
+      }
+      else if (sid === 3) { funcs = []; for (let n = s.u32(); n--;) funcs.push(s.u32()); }
+      else if (sid === 5) for (let n = s.u32(); n--;) mems.push(s.limits());
+      else if (sid === 7) for (let n = s.u32(); n--;) { const nm = s.name(), k = s.byte(), ix = s.u32(); if (k > 4) throw bad('section 7'); exports.push({ name: nm, kind: KINDS[k], index: ix }); }
+      else if (sid === 8) start = true;
+      else if (sid > 13) throw bad('section ' + sid);
+      r.i = end;
+    }
+    return { types, imports, funcs, memories: mems, exports, start };
+  }
+  const sig = t => '(' + t[0].join(',') + ')->(' + t[1].join(',') + ')';
+  /** → { ok, errors, bytes, sha256, imports, exports, memory, start } (the same object as tools/wasm_check.py inspect) */
+  function inspect(bytes, maxPages = PAGES_DEFAULT, step = 'step', init = 'init') {
+    const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes), E = [];
+    const rep = { ok: false, errors: E, bytes: b.length, sha256: sha256(b), imports: [], exports: [], memory: null, start: false };
+    const lim = isInt(maxPages) ? Math.max(1, Math.min(maxPages, PAGES_CAP)) : PAGES_DEFAULT;
+    if (b.length > MAX_BYTES) { E.push(`size: the module is ${b.length} bytes (at most ${MAX_BYTES})`); return rep; }
+    let m; try { m = parse(b); } catch (e) { if (!e.bad) throw e; E.push(e.bad === 'magic' ? 'format: not a WebAssembly module (magic or version)' : `format: the module is malformed (${e.bad})`); return rep; }
+    const T = m.types, tsig = i => i >= 0 && i < T.length ? sig(T[i]) : '?';
+    const fsigs = [...m.imports.filter(i => i.kind === 'func').map(i => tsig(i.type)), ...m.funcs.map(tsig)];
+    let mem = null;
+    for (const im of m.imports) {
+      rep.imports.push({ module: im.module, name: im.name, kind: im.kind, type: im.kind === 'func' ? tsig(im.type) : null });
+      const where = `${im.module}.${im.name}`;
+      if (!ABI_MODULES.includes(im.module)) { E.push(`import: ${where} (${im.kind}) is not in the host ABI ${NO_ABI}`); continue; }
+      if (im.kind === 'func' && own(ABI_FUNCS, im.name)) { const got = tsig(im.type); if (got !== ABI_FUNCS[im.name]) E.push(`import: ${where} must be ${ABI_FUNCS[im.name]}, it is ${got}`); }
+      else if (im.kind === 'memory' && im.name === 'memory') { const [f, mn, mx] = im.limits; if (mem) E.push('memory: at most one memory'); mem = { min: mn, max: mx, imported: true, exported: false, flags: f }; }
+      else E.push(`import: ${where} (${im.kind}) is not in the host ABI ${NO_ABI}`);
+    }
+    for (const [f, mn, mx] of m.memories) { if (mem) { E.push('memory: at most one memory'); continue; } mem = { min: mn, max: mx, imported: false, exported: false, flags: f }; }
+    const ex = {};
+    for (const e of m.exports) {
+      const t = e.kind === 'func' ? (e.index < fsigs.length ? fsigs[e.index] : '?') : null;
+      const x = { name: e.name, kind: e.kind, type: t }; rep.exports.push(x); ex[e.name] = x;
+      if (e.kind === 'memory' && mem) mem.exported = mem.exported || e.name === 'memory';
+    }
+    rep.start = m.start;
+    if (!mem) E.push('memory: the module has no memory (define one with a maximum and export it as "memory", or import noema.memory)');
+    else {
+      if (mem.flags & ~1) E.push('memory: a shared or 64-bit memory is not allowed');
+      if (mem.min > lim) E.push(`memory: the initial size is ${mem.min} pages (at most ${lim})`);
+      if (mem.max == null && !mem.imported) E.push(`memory: the memory has no maximum (declare one of at most ${lim} pages)`);
+      else if (mem.max != null && mem.max > lim) E.push(`memory: the declared maximum is ${mem.max} pages (at most ${lim})`);
+      if (!mem.imported && !mem.exported) E.push('export: the memory must be exported as "memory"');
+      rep.memory = { min: mem.min, max: mem.max, imported: mem.imported, exported: mem.exported };
+    }
+    const st = own(ex, step) ? ex[step] : null;
+    if (!st || st.kind !== 'func') E.push(`export: no function "${step}"`);
+    else if (!STEP_SIGS.includes(st.type)) E.push(`export: ${step} must be (i32,i32,i32,i32)->() or ->(i32), it is ${st.type}`);
+    const it = own(ex, init) ? ex[init] : null;
+    if (it && (it.kind !== 'func' || it.type !== INIT_SIG)) E.push(`export: ${init} must be a function ${INIT_SIG}`);
+    const al = own(ex, 'alloc') ? ex.alloc : null;
+    if (al && (al.kind !== 'func' || al.type !== ALLOC_SIG)) E.push(`export: alloc must be a function ${ALLOC_SIG}`);
+    rep.ok = !E.length;
+    return rep;
+  }
+
+  /* ---------- the item and the model (the twins of check_abi / decode / check_item / check_model) ---------- */
+  function checkAbi(abi) {
+    const E = [];
+    if (abi == null) return E;
+    if (!isObj(abi)) return ['abi: must be an object'];
+    for (const k of Object.keys(abi)) if (!ABI_KEYS.includes(k)) E.push(`abi: unknown key ${k}`);
+    if ('version' in abi && abi.version !== 1) E.push('abi.version: must be 1');
+    for (const k of ['step', 'init']) if (k in abi && !(typeof abi[k] === 'string' && NAME_RE.test(abi[k]))) E.push(`abi.${k}: must be the name of an exported function`);
+    if ('maxPages' in abi && !(isInt(abi.maxPages) && abi.maxPages >= 1 && abi.maxPages <= PAGES_CAP)) E.push(`abi.maxPages: a whole number from 1 to ${PAGES_CAP}`);
+    if ('budgetMs' in abi && !(isInt(abi.budgetMs) && abi.budgetMs >= LIM.budgetMin && abi.budgetMs <= LIM.budgetMax)) E.push(`abi.budgetMs: a whole number from ${LIM.budgetMin} to ${LIM.budgetMax}`);
+    if ('scratch' in abi && !(isInt(abi.scratch) && abi.scratch >= 0 && abi.scratch % 8 === 0)) E.push('abi.scratch: a byte offset, a multiple of 8');
+    if ('initEachStep' in abi && typeof abi.initEachStep !== 'boolean') E.push('abi.initEachStep: true or false');
+    return E;
+  }
+  const DECODED = new Map();   // sha256 → bytes (a module is decoded and hashed once per page)
+  function decode(item) {
+    const w = isObj(item) ? item.wasm : null;
+    if (typeof w !== 'string' || !w) return [null, ['wasm: the module (base64) is required']];
+    if (w.length > Math.floor(MAX_BYTES * 4 / 3) + 4) return [null, [`size: the module is more than ${MAX_BYTES} bytes`]];
+    if (typeof item.sha256 === 'string' && DECODED.has(item.sha256 + ':' + w.length)) { const b = DECODED.get(item.sha256 + ':' + w.length); return [b, 'bytes' in item && item.bytes !== b.length ? [`bytes: ${item.bytes}, but the module has ${b.length}`] : []]; }
+    let b; try { if (!/^[A-Za-z0-9+/]*={0,2}$/.test(w) || w.length % 4) throw 0; b = fromB64(w); } catch (e) { return [null, ['wasm: not valid base64']]; }
+    const sh = item.sha256;
+    if (!(typeof sh === 'string' && /^[0-9a-f]{64}$/.test(sh))) return [b, ['sha256: the sha256 of the module (64 hex digits) is required']];
+    if (sha256(b) !== sh) return [b, ['sha256: does not match the module']];
+    if ('bytes' in item && item.bytes !== b.length) return [b, [`bytes: ${item.bytes}, but the module has ${b.length}`]];
+    if (DECODED.size > 16) DECODED.clear();
+    DECODED.set(sh + ':' + w.length, b);
+    return [b, []];
+  }
+  const abiOf = item => {
+    const a = isObj(item?.abi) ? item.abi : {};
+    return { step: typeof a.step === 'string' ? a.step : 'step', init: typeof a.init === 'string' ? a.init : 'init',
+      maxPages: isInt(a.maxPages) && a.maxPages >= 1 && a.maxPages <= PAGES_CAP ? a.maxPages : PAGES_DEFAULT,
+      budgetMs: isInt(a.budgetMs) && a.budgetMs >= LIM.budgetMin && a.budgetMs <= LIM.budgetMax ? a.budgetMs : LIM.budgetDefault,
+      scratch: isInt(a.scratch) && a.scratch >= 0 && a.scratch % 8 === 0 ? a.scratch : null, initEachStep: a.initEachStep !== false };
+  };
+  /** → { problems, report, bytes } of an activities item of runtime wasm-module@1 */
+  function checkItem(item) {
+    if (!isObj(item)) return { problems: ['the item must be an object'], report: null, bytes: null };
+    const E = [];
+    if (item.runtime !== 'wasm-module@1') E.push('runtime: must be wasm-module@1');
+    E.push(...checkAbi(item.abi));
+    const [b, P] = decode(item); E.push(...P);
+    if (!b || P.length) return { problems: E, report: null, bytes: null };
+    const abi = isObj(item.abi) ? item.abi : {}, A = abiOf(item);
+    const rep = inspect(b, A.maxPages, A.step, A.init); E.push(...rep.errors);
+    if (!rep.errors.length && !rep.exports.some(e => e.name === 'alloc' && e.kind === 'func') && !('scratch' in abi))
+      E.push('abi.scratch: the module exports no alloc(bytes); give the byte offset of its input/output area');
+    return { problems: E, report: rep, bytes: E.length ? null : b };
+  }
+  const REG = {};   // items the page registered (NoemaWasm.register), besides ACT.ITEMS of the open pack
+  // the open pack's items: engine.js declares ACT with const (a global binding, not a property of window), the harness with var
+  const packItems = () => { const A = typeof ACT !== 'undefined' ? ACT : root.ACT; return A && isObj(A.ITEMS) ? A.ITEMS : null; };
+  const itemOf = id => { if (typeof id !== 'string') return null; const I = packItems(); return I && own(I, id) ? I[id] : own(REG, id) ? REG[id] : null; };
+  const allItems = () => Object.assign({}, REG, packItems() || {});
+  /** → problems of spec.model for wasm@1; items: {id: item} (default: the open pack's) */
+  function checkModel(spec, items) {
+    const E = [], I = items || allItems();
+    const m = isObj(spec) ? spec.model : null;
+    if (!isObj(m)) return ['spec.model: wasm@1 needs a model {module, inputs, outputs, step?, init?}'];
+    for (const k of Object.keys(m)) if (!MODEL_KEYS.includes(k)) E.push(`spec.model: unknown key ${k}`);
+    const it = typeof m.module === 'string' && own(I, m.module) ? I[m.module] : null;
+    if (!isObj(it) || it.runtime !== 'wasm-module@1') E.push(`spec.model.module: no wasm-module@1 item ${JSON.stringify(m.module === undefined ? null : m.module)} in the pack`);
+    for (const k of ['step', 'init']) if (k in m && !(typeof m[k] === 'string' && NAME_RE.test(m[k]))) E.push(`spec.model.${k}: must be the name of an exported function`);
+    const ins = m.inputs;
+    if (!(Array.isArray(ins) && ins.length >= 1 && ins.length <= LIM.inputs)) E.push(`spec.model.inputs: a list of 1 to ${LIM.inputs} expressions`);
+    else {
+      const names = isObj(spec.consts) ? Object.keys(spec.consts) : [];
+      for (const k of ['params', 'derived']) for (const x of Array.isArray(spec[k]) ? spec[k] : []) if (isObj(x) && typeof x.id === 'string') names.push(x.id);
+      ins.forEach((src, i) => {
+        const w = `spec.model.inputs[${i}]`;
+        if (typeof src !== 'string' || !src.trim()) { E.push(`${w}: an expression (a text such as “2*x + 1”) is required`); return; }
+        if (root.NoemaExpr) { const p = root.NoemaExpr.check(src, { vars: names }); if (p.length) E.push(`${w}: ${p[0].msg} in “${src.slice(0, 60)}”`); }
+      });
+    }
+    const outs = m.outputs, decl = new Map();
+    for (const o of Array.isArray(spec.outputs) ? spec.outputs : []) if (isObj(o)) decl.set(o.id, o.kind);
+    if (!(Array.isArray(outs) && outs.length >= 1 && outs.length <= LIM.outputs)) E.push(`spec.model.outputs: a list of 1 to ${LIM.outputs} {id, n?}`);
+    else {
+      const seen = new Set();
+      outs.forEach((o, i) => {
+        const w = `spec.model.outputs[${i}]`;
+        if (!(isObj(o) && typeof o.id === 'string')) { E.push(`${w}: must be {id, n?}`); return; }
+        for (const k of Object.keys(o)) if (k !== 'id' && k !== 'n') E.push(`${w}: unknown key ${k}`);
+        if (seen.has(o.id)) E.push(`${w}: ${o.id} twice`);
+        seen.add(o.id);
+        const kind = decl.has(o.id) ? decl.get(o.id) : undefined;
+        if (kind == null) { E.push(`${w}: ${o.id} is not in spec.outputs`); return; }
+        const n = 'n' in o ? o.n : 1;
+        if (kind === 'scalar' && n !== 1) E.push(`${w}: a scalar takes one value (no n)`);
+        if (kind === 'series' && !(isInt(n) && n >= 1 && n <= LIM.points)) E.push(`${w}.n: a series needs n, from 1 to ${LIM.points}`);
+      });
+      for (const oid of decl.keys()) if (!seen.has(oid)) E.push(`spec.outputs: ${oid} has no place in spec.model.outputs`);
+    }
+    if (isObj(it) && !E.length) {
+      const abi = isObj(it.abi) ? it.abi : {}, { problems: P, report: rep } = checkItem(it);
+      if (P.length) E.push(`spec.model.module: the module ${m.module} is refused (${P[0]})`);
+      else if (rep) {
+        const fx = {}; for (const e of rep.exports) if (e.kind === 'func') fx[e.name] = e;
+        const st = m.step || abi.step || 'step';
+        if (!own(fx, st) || !STEP_SIGS.includes(fx[st].type)) E.push(`spec.model.step: ${st} is not a step function of the module`);
+        const ini = m.init;
+        if (ini && (!own(fx, ini) || fx[ini].type !== INIT_SIG)) E.push(`spec.model.init: ${ini} is not an init function of the module`);
+      }
+    }
+    return E;
+  }
+
+  /* ---------- the worker: no network, the host ABI, the engine adapter (one source, also run in node by the tests) ---------- */
+  /** removes every way to the network from a worker's global scope (and its prototypes) before any other code runs there */
+  function neutralise(g) {
+    const K = ['fetch', 'XMLHttpRequest', 'WebSocket', 'WebSocketStream', 'EventSource', 'WebTransport', 'importScripts', 'Worker', 'SharedWorker',
+      'BroadcastChannel', 'indexedDB', 'caches', 'Request', 'navigator', 'RTCPeerConnection'];
+    for (const k of K) for (let o = g; o && o !== Object.prototype; o = Object.getPrototypeOf(o)) {
+      if (!Object.prototype.hasOwnProperty.call(o, k)) continue;
+      try { Object.defineProperty(o, k, { value: undefined, writable: false, configurable: false, enumerable: false }); } catch (e) { try { delete o[k]; } catch (e2) { } }
+    }
+  }
+  /** defines g.noemaWasmCore (instantiate + call) and g.noemaEngine (the wasm@1 adapter of sim-spec@1) */
+  function wasmWorker(g) {
+    const ABI = { noema_log: 1, noema_now: 1, noema_random: 1 }, LOG_LINE = 200, LOG_LINES = 100;
+    function rng(seed) { let a = seed >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+    const fail = (code, msg) => Object.assign(new Error(msg || code), { code });
+    /** bytes (or a WebAssembly.Module) + abi → an instance { call(fn, Float64Array, nOut) → Float64Array, raw(fn, args), reseed(), log } */
+    function instantiate(src, abi, seed) {
+      const mod = src instanceof WebAssembly.Module ? src : new WebAssembly.Module(src);
+      for (const im of WebAssembly.Module.imports(mod)) {   // the second line of the import check (the first: inspect on the page)
+        const okm = im.module === 'noema' || im.module === 'env';
+        if (!okm || !((im.kind === 'function' && ABI[im.name]) || (im.kind === 'memory' && im.name === 'memory'))) throw fail('import', im.module + '.' + im.name);
+      }
+      const log = [], t0 = (g.performance || Date).now(); let rand = rng(seed), mem = null, dropped = 0;
+      const env = {
+        noema_log(p, n) {
+          if (log.length >= LOG_LINES) { dropped++; return; }
+          try { const len = Math.max(0, Math.min(n >>> 0, LOG_LINE)), u = new Uint8Array(mem.buffer, p >>> 0, len); log.push(new TextDecoder().decode(u.slice())); } catch (e) { log.push('?'); }
+        },
+        noema_now: () => Math.round(((g.performance || Date).now() - t0) * 10) / 10,
+        noema_random: () => rand(),
+      };
+      const imp = { noema: env, env };
+      const memImp = WebAssembly.Module.imports(mod).find(i => i.kind === 'memory');
+      if (memImp) { const m0 = Math.max(1, abi.memMin || 1); mem = new WebAssembly.Memory({ initial: m0, maximum: Math.max(m0, Math.min(abi.memMax == null ? abi.maxPages : abi.memMax, abi.maxPages)) }); imp[memImp.module] = Object.assign({}, env, { memory: mem }); }
+      const inst = new WebAssembly.Instance(mod, imp), X = inst.exports;
+      if (!mem) { mem = X.memory; if (!(mem instanceof WebAssembly.Memory)) throw fail('memory', 'no exported memory'); }
+      if (typeof X[abi.step] !== 'function') throw fail('abi', 'no step ' + abi.step);
+      let area = null;
+      function io(nIn, nOut) {
+        const need = 8 * (nIn + nOut);
+        if (!area || area.need < need) {
+          let base = abi.scratch;
+          if (typeof X.alloc === 'function') base = X.alloc(need) >>> 0;
+          if (!(base >= 0)) throw fail('abi', 'no input/output area');
+          area = { need, pin: base, pout: base + 8 * nIn };
+        }
+        if (area.pout - area.pin !== 8 * nIn) area = Object.assign({}, area, { pout: area.pin + 8 * nIn });
+        if (area.pin + need > mem.buffer.byteLength) throw fail('abi', 'the input/output area is outside the memory');
+        return area;
+      }
+      function call(fn, input, nOut) {
+        const f = X[fn]; if (typeof f !== 'function') throw fail('abi', 'no function ' + fn);
+        const a = io(input.length, nOut); let dv = new DataView(mem.buffer);
+        for (let i = 0; i < input.length; i++) dv.setFloat64(a.pin + 8 * i, +input[i], true);
+        const r = f(a.pin, input.length, a.pout, nOut);
+        if (typeof r === 'number' && r !== 0) throw fail('step', 'status ' + r);
+        dv = new DataView(mem.buffer);   // (the memory may have grown)
+        if (a.pout + 8 * nOut > mem.buffer.byteLength) throw fail('abi', 'outputs outside the memory');
+        const out = new Float64Array(nOut); for (let i = 0; i < nOut; i++) out[i] = dv.getFloat64(a.pout + 8 * i, true);
+        return out;
+      }
+      const self_ = {
+        call, log, exports: Object.keys(X),
+        init() { if (typeof X[abi.init] === 'function') X[abi.init](seed | 0); },
+        reseed() { rand = rng(seed); },
+        raw(fn, args) { const f = X[fn]; if (typeof f !== 'function') throw fail('abi', 'no function ' + fn); const r = f(...(args || []).map(v => v | 0)); return typeof r === 'number' ? r : null; },
+        pages: () => mem.buffer.byteLength / 65536,
+        takeLog() { const l = log.splice(0); if (dropped) { l.push('… ' + dropped + ' more'); dropped = 0; } return l; },
+      };
+      self_.init();
+      return self_;
+    }
+    g.noemaWasmCore = { instantiate };
+    /** wasm@1 in sim-spec@1: create(spec, {seed}) → { run(inputs) } — inputs come from prepare: { $in: [numbers], $mod: {key, bytes, abi, layout} } */
+    g.noemaEngine = { create(spec, opts) {
+      const seed = (opts && opts.seed) >>> 0; let inst = null, key = null;
+      return { run(inp) {
+        const M = inp && inp.$mod; if (!M) throw fail('abi', 'no module');
+        if (!inst || key !== M.key) { inst = instantiate(M.bytes, M.abi, seed); key = M.key; }
+        else if (M.abi.initEachStep) { inst.reseed(); inst.init(); }
+        const out = inst.call(M.abi.step, inp.$in, M.nOut), r = {};
+        for (const L of M.layout) r[L.id] = L.series ? Array.from(out.subarray(L.off, L.off + L.n)) : out[L.off];
+        const lg = inst.takeLog(); if (lg.length && g.console) g.console.log('[noema] wasm', lg.slice(0, 10).join(' | '));
+        return r;
+      } };
+    } };
+  }
+  /** the direct protocol of NoemaWasm.load (appended after the core in its own worker; the sim runtime appends its own bridge instead) */
+  function directTail(g) {
+    let inst = null;
+    g.onmessage = e => {
+      const m = e.data || {};
+      try {
+        if (m.t === 'w:load') { inst = g.noemaWasmCore.instantiate(m.bytes, m.abi, m.seed >>> 0); g.postMessage({ t: 'w:ready', id: m.id, exports: inst.exports, log: inst.takeLog(), pages: inst.pages() }); return; }
+        if (!inst) throw Object.assign(new Error('not loaded'), { code: 'abi' });
+        const t0 = (g.performance || Date).now();
+        if (m.t === 'w:call') { if (m.reinit) { inst.reseed(); inst.init(); } const out = inst.call(m.fn, m.input, m.nOut); g.postMessage({ t: 'w:out', id: m.id, out, log: inst.takeLog(), ms: (g.performance || Date).now() - t0, pages: inst.pages() }, [out.buffer]); return; }
+        if (m.t === 'w:raw') { const v = inst.raw(m.fn, m.args); g.postMessage({ t: 'w:out', id: m.id, value: v, log: inst.takeLog(), pages: inst.pages() }); return; }
+      } catch (x) { g.postMessage({ t: 'w:err', id: m.id, code: (x && x.code) || (x instanceof WebAssembly.RuntimeError ? 'trap' : x instanceof WebAssembly.LinkError ? 'import' : 'error'), msg: String((x && x.message) || x).slice(0, 300) }); }
+    };
+  }
+  const workerSource = () => '"use strict";(' + neutralise.toString() + ')(self);\n(' + wasmWorker.toString() + ')(self);\n';
+
+  /* ---------- the host side: NoemaWasm.load(item) → a handle in its own worker, each call within the budget ---------- */
+  function load(item, o = {}) {
+    const { problems, report, bytes } = checkItem(item);
+    if (problems.length) return Promise.reject(Object.assign(new Error(problems[0]), { code: /^import/.test(problems[0]) ? 'import' : /^memory/.test(problems[0]) ? 'memory' : 'spec', problems }));
+    if (typeof Worker !== 'function' || typeof Blob !== 'function') return Promise.reject(Object.assign(new Error('no worker here'), { code: 'worker' }));
+    const A = abiOf(item), budget = isInt(o.budgetMs) ? Math.max(LIM.budgetMin, Math.min(o.budgetMs, LIM.budgetMax)) : A.budgetMs;
+    const abi = { step: A.step, init: A.init, maxPages: A.maxPages, scratch: A.scratch, memMin: report.memory ? report.memory.min : 1, memMax: report.memory ? report.memory.max : null };
+    const seed = (isInt(o.seed) ? o.seed : 1) >>> 0;
+    const url = URL.createObjectURL(new Blob([workerSource() + '(' + directTail.toString() + ')(self);'], { type: 'text/javascript' }));
+    let w = null, seq = 0, state = 'stopped';
+    const pending = new Map();
+    const killAll = code => { for (const [, p] of pending) { clearTimeout(p.timer); p.reject(Object.assign(new Error(code), { code })); } pending.clear(); };
+    function stop(code) { try { w?.terminate(); } catch (e) { } w = null; state = 'stopped'; killAll(code); }
+    function send(msg, transfer) {
+      if (!w) return Promise.reject(Object.assign(new Error('stopped'), { code: 'stopped' }));
+      const id = ++seq;
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => { if (!pending.has(id)) return; pending.delete(id); stop('runaway'); reject(Object.assign(new Error('runaway'), { code: 'runaway' })); h.onRunaway?.(); }, msg.t === 'w:load' ? Math.max(1000, budget) : budget);
+        pending.set(id, { resolve, reject, timer });
+        w.postMessage({ ...msg, id }, transfer || []);
+      });
+    }
+    function start() {
+      stop('restart');
+      w = new Worker(url); state = 'loading';
+      w.onmessage = e => {
+        const m = e.data || {}, key = m.id, p = pending.get(key);
+        if (!p) return; pending.delete(key); clearTimeout(p.timer);
+        if (m.t === 'w:err') p.reject(Object.assign(new Error(m.msg), { code: m.code })); else p.resolve(m);
+      };
+      w.onerror = e => { e.preventDefault?.(); stop('error'); };
+      return send({ t: 'w:load', bytes: bytes.slice(), abi, seed }).then(m => { state = 'ready'; h.exports = m.exports; return h; });
+    }
+    const h = {
+      budgetMs: budget, exports: [], report,
+      state: () => state,
+      /** fn(ptr_in, n_in, ptr_out, n_out) over f64: → { out: Float64Array, log, ms, pages } */
+      call(fn, inputs, nOut, opt = {}) { const input = Float64Array.from(inputs || [], v => +v); return send({ t: 'w:call', fn: fn || A.step, input, nOut: Math.max(0, Math.min(nOut | 0, LIM.outputs * LIM.points)), reinit: opt.reinit ?? A.initEachStep }); },
+      /** an exported function with i32 arguments (the tests' grow, a module's own setters) → { value, log, pages } */
+      raw: (fn, ...args) => send({ t: 'w:raw', fn, args }),
+      restart: () => start(),
+      close() { stop('closed'); URL.revokeObjectURL(url); },
+      onRunaway: null,
+    };
+    return start();
+  }
+
+  /* ---------- the engine wasm@1 of sim-spec@1, the runtime wasm-module@1 ---------- */
+  function layoutOf(spec) {
+    const m = spec.model, kinds = new Map((spec.outputs || []).map(o => [o.id, o.kind])); let off = 0;
+    const layout = m.outputs.map(o => { const n = 'n' in o ? o.n : 1, L = { id: o.id, off, n, series: kinds.get(o.id) === 'series' }; off += n; return L; });
+    return { layout, nOut: off };
+  }
+  const api = { MAX_BYTES, PAGES_DEFAULT, PAGES_CAP, ABI_FUNCS, LIM, sha256, inspect, checkAbi, checkItem, checkModel, decode, abiOf, layoutOf, load, workerSource,
+    register(item) { if (isObj(item) && typeof item.id === 'string') REG[item.id] = item; }, _neutralise: neutralise, _wasmWorker: wasmWorker, _directTail: directTail };
+  root.NoemaWasm = api;
+  if (typeof module === 'object' && module && module.exports) module.exports = api;
+
+  const ACTREF = typeof ACT !== 'undefined' ? ACT : root.ACT;
+  if (!ACTREF || typeof ACTREF.registerEngine !== 'function') return;
+  ACTREF.registerEngine({
+    id: 'wasm@1',
+    /** after the common checks: the model, the item, its sha256, its imports and memory — refused here means the fallback, never instantiation */
+    check: spec => checkModel(spec),
+    /** on the main thread: the inputs' expressions become numbers; the checked bytes travel with each run (the worker keeps one instance per module) */
+    prepare(spec, compile) {
+      const m = spec.model, it = itemOf(m.module), A = abiOf(it), { problems, bytes, report } = checkItem(it);
+      if (problems.length || !bytes) throw Object.assign(new Error('wasm module refused'), { code: 'spec' });
+      const ins = m.inputs.map(s => compile(s)), { layout, nOut } = layoutOf(spec);
+      const M = { key: report.sha256, bytes, nOut, layout, abi: { step: m.step || A.step, init: m.init || A.init, maxPages: A.maxPages, scratch: A.scratch, initEachStep: A.initEachStep, memMin: report.memory ? report.memory.min : 1, memMax: report.memory ? report.memory.max : null } };
+      const ev = (f, env) => { try { return +f(env); } catch (e) { return NaN; } };
+      return env => ({ $in: ins.map(f => ev(f, env)), $mod: M });
+    },
+    /** the sim runtime calls create here only when it cannot start a worker: a module never runs on the page's own thread */
+    create() { throw Object.assign(new Error('wasm@1 runs only in a worker'), { code: 'worker' }); },
+    workerSource: workerSource(),
+  });
+  if (typeof ACTREF.registerRuntime === 'function') ACTREF.registerRuntime({
+    id: 'wasm-module@1', version: 1, autoHeight: true,
+    /** an item with its own spec: the sim-spec renderer with this module as the engine; without one there is nothing to show */
+    mount(box, ctx) {
+      const a = ctx.act, sim = ACTREF.runtime?.('sim-spec@1');
+      api.register(a);
+      if (!sim || !isObj(a.spec)) { Promise.resolve().then(() => ctx.onFail(sim ? 'spec' : 'unsupported')); return { send() { }, close() { }, values: () => null }; }
+      const spec = Object.assign({}, a.spec, { engine: 'wasm@1', model: Object.assign({}, a.spec.model, { module: a.id }) });
+      return sim.mount(box, Object.assign({}, ctx, { act: Object.assign({}, a, { spec }) }));
+    },
+  });
+  /* i18n-ignore-end */
+})();
+
+/* ---- 45_activity_embed.js ---- */
+/* ===================== interactive activities — runtime external-embed@1 (a third-party interactive page, opt-in) =====================
+   docs/activities-dev/embed.md, docs/adr/001 D12. An activity that is a page of an allow-listed provider (PhET, GeoGebra, Desmos…)
+   shown in a frame. It is an EXPLORER only (a theory block): no provider offers a documented cross-origin result channel, so it is
+   never a graded sim (checkPack refuses one; the runtime refuses an exercise).
+     • Nothing loads by itself: the learner first sees a quiet card (what opens, that it needs the network and may set cookies, the
+       credit, the licence, a link to the provider's terms) and an Open button. Open is remembered per provider (S.settings.embedOk,
+       an account setting); the card is skipped next time, the credit line stays under the frame (attribution at the point of use).
+     • The URL must match the allow-list exactly (PROVIDERS = tools/embed_allow.json): https, the origin one of the provider's, path,
+       query and hash fully matching its patterns, no user info, no tricks (check / match below; tools/embed_check.py the same rules).
+     • Two frames, as in html-app@1: the app's frame holds a WRAPPER without scripts (CSP script-src 'none') whose policy says
+       frame-src <the provider's origins>, and the provider's page runs in the wrapper's frame. So the page can navigate only within
+       its provider; every other navigation is blocked by the wrapper's policy. Both frames: sandbox with the provider's tokens only
+       (allow-scripts + allow-same-origin — the PROVIDER's own origin, which it needs for its storage; never allow-top-navigation,
+       never allow-popups-to-escape-sandbox, no forms or popups unless the allow-list names them), referrerpolicy no-referrer,
+       devices off (allow: … 'none'), credentialless where the browser has it, loading lazy.
+     • Offline (navigator.onLine false) or a page that never loads → onFail with a code; the core shows the activity's fallback.
+   No words here: the visible texts are tE() keys (engine.act.embed.*) and the pack's own strings (title, why).
+   Off unless the deployment switches it on: NOEMA_CONFIG.activities['external-embed@1'] === true (the site CSP must list the
+   providers in frame-src first). Loads in Node too (module.exports: the checks, for tests/activities_embed.js). */
+var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js in the shell, then in engine.js)
+  /* i18n-ignore-start */   // code: codes, patterns, attribute values
+  const PROVIDERS = /*@providers*/[
+    {"id": "phet", "name": "PhET", "status": "allowed", "origins": ["https://phet.colorado.edu"], "path": "/sims/html/[a-z0-9-]+/(latest|[0-9]+\\.[0-9]+\\.[0-9]+)/[a-z0-9-]+_(all|[a-z]{2}(_[A-Z]{2})?)\\.html", "query": "(locale=[A-Za-z_]{2,6})?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["CC-BY-4.0", "CC-BY-NC-4.0"], "creditMust": "PhET Interactive Simulations, University of Colorado Boulder", "credit": "PhET Interactive Simulations, University of Colorado Boulder · {title} · {license} · https://phet.colorado.edu", "terms": "https://phet.colorado.edu/en/licensing/html", "supportsResult": false, "notes": "HTML sims published before 2026-03-29: CC BY 4.0 (commercial use allowed; the credit, the licence and https://phet.colorado.edu as close to the point of use as possible; translating the credit is allowed). PhET's 2025 impact report announces a shift to CC BY-NC for newer sims, and its FAQ says commercial use needs a licence: read the sim's publication date in its About dialog and pick the licence. Every HTML sim page offers an Embed code. No result channel: PhET-iO (the instrumented API) is licensed separately. Language: ?locale=."},
+    {"id": "geogebra", "name": "GeoGebra", "status": "allowed", "origins": ["https://www.geogebra.org"], "path": "/material/iframe/id/[A-Za-z0-9]{4,16}(/[a-z]{1,8}/[A-Za-z0-9]{1,16})*", "query": null, "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GeoGebra-NC", "CC-BY-NC-SA-3.0", "CC-BY-NC-SA-4.0"], "creditMust": "GeoGebra", "credit": "{author} · {title} · GeoGebra (geogebra.org) · {license}", "terms": "https://www.geogebra.org/license", "supportsResult": false, "notes": "GeoGebra licence: the apps and the materials are free for non-commercial use with attribution (materials CC BY-NC-SA); commercial use (e.g. inside a non-academic e-book or a paid product) needs a licence from GeoGebra. Share > Embed gives the material/iframe URL. Explore only: the ggbApplet API needs deployggb.js running in OUR page (a third-party script in the app's origin: refused) or same-origin access to the frame; the iframe embed has no documented postMessage channel."},
+    {"id": "desmos", "name": "Desmos", "status": "allowed", "origins": ["https://www.desmos.com"], "path": "/(calculator|geometry|3d)/[a-z0-9]{6,24}", "query": "embed", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["Desmos-ToS"], "creditMust": "Desmos", "credit": "{title} · Desmos (desmos.com) · {license}", "terms": "https://www.desmos.com/terms", "supportsResult": false, "notes": "A saved graph's Share > Embed gives https://www.desmos.com/calculator/<id>?embed (no API key; Desmos staff on the API forum: the iframe route needs no API). The JS API (calculator.js) needs an API key and runs in OUR page: refused. The Terms of Service restrict commercial use. Explore only."},
+    {"id": "falstad", "name": "Falstad Circuit Simulator", "status": "pending", "origins": ["https://www.falstad.com", "https://falstad.com"], "path": "/circuit/circuitjs\\.html", "query": "(ctz|cct)=[A-Za-z0-9._~%+$!*'(),;:@/=-]{1,1900}", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GPL-2.0-or-later"], "creditMust": "Paul Falstad", "credit": "Circuit simulator by Paul Falstad (falstad.com/circuit) · {license}", "terms": "https://www.falstad.com/licensing.html", "supportsResult": false, "notes": "Code: CircuitJS1, GPLv2. Site terms: use in a classroom unmodified; non-commercial modification or redistribution with credit and a link; 'for any other uses, contact me'. Framing the hosted page on another site is not addressed: PENDING until Paul Falstad confirms, or self-host the GPL build later (same origin: then its CircuitJS1 JS API could give a result channel). Cross-origin, that API is out of reach."},
+    {"id": "circuitjs", "name": "CircuitJS1 (Lush Projects)", "status": "pending", "origins": ["https://lushprojects.com"], "path": "/circuitjs/circuitjs(\\.html)?", "query": "(ctz|cct)=[A-Za-z0-9._~%+$!*'(),;:@/=-]{1,1900}", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["GPL-2.0-or-later"], "creditMust": "CircuitJS1", "credit": "CircuitJS1 by Paul Falstad and Iain Sharp (lushprojects.com/circuitjs) · {license}", "terms": "https://github.com/sharpie7/circuitjs1", "supportsResult": false, "notes": "Iain Sharp's hosted CircuitJS1 (GPLv2; the README says to embed the full-page version in an iframe, written for self-hosted copies). No terms for framing the hosted service: PENDING. Same API situation as falstad."},
+    {"id": "wokwi", "name": "Wokwi", "status": "pending", "origins": ["https://wokwi.com"], "path": "/projects/[0-9]{6,24}", "query": "(embed=1)?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["Wokwi-ToS"], "creditMust": "Wokwi", "credit": "{title} · simulated on Wokwi (wokwi.com) · {license}", "terms": "https://docs.wokwi.com", "supportsResult": false, "notes": "Arduino / ESP32 / Pi Pico simulator, free to use. No public documentation of iframe embedding or of its terms was found (2026-11): only an 'early prototype, subject to change' partner embed (/_alpha/wembed/) in wokwi-embed-bridge-example. PENDING until Wokwi documents or confirms embedding. A project compiles the learner's code on Wokwi's servers."},
+  ]/*@end*/;
+  const RUNTIME = 'external-embed@1', MAX_URL = 2048, FALLBACK_MIN = 40, LOAD_TIMEOUT = 20000;
+  /** the sandbox tokens a provider may be given; everything else (allow-top-navigation*, allow-popups-to-escape-sandbox, allow-modals,
+      allow-downloads, allow-storage-access-by-user-activation, allow-presentation, allow-orientation-lock) is refused */
+  const SANDBOX_OK = new Set(['allow-scripts', 'allow-same-origin', 'allow-forms', 'allow-pointer-lock', 'allow-popups']);
+  const DEVICES = ['accelerometer', 'autoplay', 'camera', 'display-capture', 'encrypted-media', 'geolocation', 'gyroscope', 'magnetometer', 'microphone', 'midi', 'payment', 'publickey-credentials-get', 'screen-wake-lock', 'serial', 'usb', 'hid', 'bluetooth', 'web-share', 'xr-spatial-tracking'].map(f => f + " 'none'").join('; ');
+  const SAFE = /^[A-Za-z0-9\-._~%!$&'()*+,;=:@\/?#]+$/;
+  const URL_RE = /^https:\/\/([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+)(:[0-9]{1,5})?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/;
+  const BAD_PATH = /\/\/|\/\.\.?(\/|$)|%2e|%2f|%5c|%00/i;
+  const isStr = v => typeof v === 'string' && v.trim().length > 0;
+  const full = (re, s) => { try { return new RegExp('^(?:' + re + ')$').test(s); } catch (e) { return false; } };
+  const provider = (id, list) => (Array.isArray(list) ? list : []).find(p => p && p.id === id) || null;
+
+  /** a URL string → { origin, path, query, hash } (query / hash without ? / #, null when absent) | { code } */
+  function parse(u) {
+    if (typeof u !== 'string' || !u) return { code: 'url-missing' };
+    if (u.length > MAX_URL) return { code: 'url-long' };
+    if (!u.startsWith('https://')) return { code: 'url-scheme' };   // http:, javascript:, data:, //host, HTTPS:… all refused
+    if (!SAFE.test(u)) return { code: 'url-chars' };                 // spaces, controls, backslashes, quotes, <>, non-ASCII
+    if (u.slice(8).split(/[/?#]/)[0].includes('@')) return { code: 'url-userinfo' };
+    const m = URL_RE.exec(u); if (!m) return { code: 'url-host' };
+    const path = m[3] || '/';
+    if (BAD_PATH.test(path)) return { code: 'url-path' };
+    return { origin: 'https://' + m[1] + (m[2] || ''), path, query: m[4] == null ? null : m[4].slice(1), hash: m[5] == null ? null : m[5].slice(1) };
+  }
+  /** does the URL match this provider exactly? → { ok: true, provider, origin } | { code } */
+  function match(url, p) {
+    const u = parse(url); if (u.code) return u;
+    if (!p || !Array.isArray(p.origins) || !p.origins.includes(u.origin)) return { code: 'url-origin' };
+    if (!full(p.path, u.path)) return { code: 'url-path' };
+    if (u.query != null && (p.query == null || !full(p.query, u.query))) return { code: 'url-query' };
+    if (u.query == null && p.query != null && !full(p.query, '')) return { code: 'url-query' };
+    if (u.hash != null && (p.hash == null || !full(p.hash, u.hash))) return { code: 'url-hash' };
+    return { ok: true, provider: p, origin: u.origin };
+  }
+  /** one registry item → { errors: ['code: what'], warnings } — the same rules as tools/embed_check.py check_item */
+  function check(a, opts) {
+    const list = (opts && opts.providers) || PROVIDERS, E = [], W = [];
+    const e = (code, what) => E.push(code + ': ' + what);
+    if (!a || typeof a !== 'object' || Array.isArray(a)) return { errors: ['item: not an object'], warnings: W };
+    if (a.runtime !== RUNTIME) e('runtime', 'runtime must be ' + RUNTIME);
+    const p = typeof a.provider === 'string' ? provider(a.provider, list) : null;
+    if (!p) e('provider-unknown', 'provider must be one of the allow-list (tools/embed_allow.json)');
+    else {
+      if (p.status !== 'allowed') e('provider-pending', 'provider ' + p.id + ' is not allowed yet (its embedding terms are not confirmed)');
+      if (!Array.isArray(p.sandbox) || p.sandbox.some(t => !SANDBOX_OK.has(t)) || !p.sandbox.includes('allow-scripts')) e('provider-sandbox', 'the provider asks for sandbox tokens outside ' + [...SANDBOX_OK].join(' '));
+      const m = match(a.url, p); if (!m.ok) e(m.code, 'url does not match provider ' + p.id + ' exactly');
+      if (!isStr(a.credit)) e('credit-missing', 'credit is required');
+      else if (isStr(p.creditMust) && !a.credit.includes(p.creditMust)) e('credit-provider', 'credit must name "' + p.creditMust + '"');
+      if (!isStr(a.license)) e('license-missing', 'license is required');
+      else if (!Array.isArray(p.licenses) || !p.licenses.includes(a.license)) e('license-provider', 'license must be one of ' + (p.licenses || []).join(', '));
+    }
+    if (p == null && typeof a.url === 'string') { const u = parse(a.url); if (u.code) e(u.code, 'url'); }
+    const fb = a.fallback && typeof a.fallback === 'object' ? a.fallback : {};
+    if (!(isStr(fb.text) && fb.text.trim().length >= FALLBACK_MIN) || !isStr(fb.media)) e('fallback-missing', 'fallback {media, text >= ' + FALLBACK_MIN + ' characters} is required (offline, refused, not chosen)');
+    if (a.capabilities != null && !(Array.isArray(a.capabilities) && a.capabilities.length === 0)) e('capabilities', 'an embed has no capabilities (it does not speak the activity protocol)');
+    if ('html' in a || 'spec' in a || 'entry' in a) e('not-embed', 'an embed carries no bundle, spec or entry');
+    const st = a.strings;
+    if (!st || typeof st !== 'object' || Array.isArray(st) || !Object.keys(st).length || Object.values(st).some(t => !t || typeof t !== 'object' || Array.isArray(t) || !isStr(t.title))) e('strings-title', 'strings.<locale>.title (what opens, in each language) is required');
+    if (a.height != null && !(typeof a.height === 'number' && a.height >= 120 && a.height <= 2000)) e('height', 'height must be 120–2000');
+    if (p && p.status === 'allowed' && /NC/.test(String(a.license || ''))) W.push('license-nc: ' + a.license + ' is non-commercial: fine for a free study app, not for a paid one');
+    return { errors: E, warnings: W };
+  }
+  /** a pack → { errors, warnings } for its embed items, and the sim exercises that would grade one (none can) */
+  function checkPack(pack, opts) {
+    const list = (opts && opts.providers) || PROVIDERS, E = [], W = [], items = {};
+    for (const a of (pack && pack.activities && Array.isArray(pack.activities.items) ? pack.activities.items : [])) {
+      if (!a || a.runtime !== RUNTIME) continue;
+      items[a.id] = a; const r = check(a, { providers: list });
+      E.push(...r.errors.map(m => 'activity ' + a.id + ': ' + m)); W.push(...r.warnings.map(m => 'activity ' + a.id + ': ' + m));
+    }
+    for (const c of (pack && Array.isArray(pack.chapters) ? pack.chapters : []))
+      for (const ex of (Array.isArray(c.exercises) ? c.exercises : []))
+        if (ex && ex.type === 'sim' && Object.prototype.hasOwnProperty.call(items, ex.activity)) {
+          const p = provider(items[ex.activity].provider, list);
+          if (!(p && p.supportsResult === true)) E.push(ex.id + ': sim-embed: activity ' + ex.activity + ' is an outside page (explore only): use it in a theory block');
+        }
+    return { errors: E, warnings: W };
+  }
+
+  /* ---------- the learner's choice, per provider (an account setting: S.settings.embedOk = { <provider>: time }) ---------- */
+  const consent = {
+    has(id) { try { return !!(typeof S !== 'undefined' && S.settings && S.settings.embedOk && Object.prototype.hasOwnProperty.call(S.settings.embedOk, id) && S.settings.embedOk[id]); } catch (e) { return false; } },
+    set(id) { try { if (typeof S === 'undefined' || !S.settings) return; S.settings.embedOk = Object.assign({}, S.settings.embedOk || {}, { [id]: Date.now() }); if (typeof save === 'function') save(); } catch (e) { } },
+    forget(id) { try { if (typeof S === 'undefined' || !S.settings || !S.settings.embedOk) return; const o = Object.assign({}, S.settings.embedOk); delete o[id]; S.settings.embedOk = o; if (typeof save === 'function') save(); } catch (e) { } },
+    list() { try { return typeof S !== 'undefined' && S.settings && S.settings.embedOk ? Object.keys(S.settings.embedOk) : []; } catch (e) { return []; } },
+  };
+
+  /* ---------- the runtime ---------- */
+  const T = (k, v) => (typeof tE === 'function' ? tE(k, v) : k);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; };
+  function creditLine(a, p) {
+    const line = el('p', 'act-embed-credit');
+    line.append(el('span', '', a.credit), document.createTextNode(' · '), el('span', '', a.license), document.createTextNode(' · '));
+    const terms = el('a', '', T('engine.act.embed.terms', { provider: p.name }));
+    terms.href = p.terms; terms.target = '_blank'; terms.rel = 'noopener noreferrer'; terms.referrerPolicy = 'no-referrer';
+    line.append(terms);
+    return line;
+  }
+  /** the wrapper document: no scripts; its policy lets its one frame show only the provider's origins */
+  function wrapperDoc(url, p, tokens, title) {
+    const csp = ["default-src 'none'", "script-src 'none'", "style-src 'unsafe-inline'", 'frame-src ' + p.origins.join(' '), "form-action 'none'", "base-uri 'none'", "object-src 'none'"].join('; ');
+    const w = document.implementation.createHTMLDocument('');
+    const m = w.createElement('meta'); m.setAttribute('http-equiv', 'Content-Security-Policy'); m.setAttribute('content', csp);
+    const s = w.createElement('style'); s.textContent = 'html,body{margin:0;height:100%;overflow:hidden;background:transparent}iframe{display:block;border:0;width:100%;height:100%}';
+    const f = w.createElement('iframe');
+    f.setAttribute('sandbox', tokens); f.setAttribute('allow', DEVICES); f.setAttribute('referrerpolicy', 'no-referrer');
+    f.setAttribute('credentialless', ''); f.setAttribute('title', title); f.setAttribute('src', url);
+    w.head.replaceChildren(m, s); w.body.replaceChildren(f);
+    return '<!doctype html>' + w.documentElement.outerHTML;
+  }
+  function register() {
+    if (typeof ACT !== 'object' || !ACT || typeof ACT.registerRuntime !== 'function' || typeof document === 'undefined') return;
+    if (!(window.NOEMA_CONFIG && window.NOEMA_CONFIG.activities && window.NOEMA_CONFIG.activities[RUNTIME] === true)) return;   // opt-in per deployment
+    ACT.registerRuntime({
+      id: RUNTIME, version: 1,
+      /** before consent the block is only the card (no frame): the core does not count it toward the live activities until onLive */
+      waits(act) { const p = provider(act && act.provider, PROVIDERS); return !!p && !consent.has(p.id); },
+      /** → port { send(type), close() }; the page itself does not speak the activity protocol: this trusted host answers for it */
+      mount(box, { act, init, title, onMessage, onFail, onLive }) {
+        const later = f => Promise.resolve().then(f);   // never call back before the core holds the port
+        let closed = false, timer = null;
+        const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
+        const fail = code => later(() => { if (!closed) onFail(code); });
+        const root = el('div', 'act-embed');
+        const port = { send(type) { if (type === 'ping') later(() => out('pong')); }, close() { closed = true; clearTimeout(timer); root.remove(); } };
+        const r = check(act);
+        const p = provider(act && act.provider, PROVIDERS);
+        if (r.errors.length || !p) { console.warn('[noema] external-embed', act && act.id, r.errors.join(' | ')); fail('embed-refused'); return port; }
+        let href = ''; try { href = new URL(act.url).href; } catch (e) { }
+        if (href !== act.url) { console.warn('[noema] external-embed', act.id, 'url is not in its normal form'); fail('embed-refused'); return port; }
+        if (init && init.exerciseId) { fail('embed-graded'); return port; }   // explore only (docs/activities-dev/embed.md §4)
+        if (typeof navigator !== 'undefined' && navigator.onLine === false) { fail('embed-offline'); return port; }
+        const tokens = p.sandbox.filter(t => SANDBOX_OK.has(t)).join(' ');
+        const words = (init && init.strings) || {};
+        const name = words.title || act.id;
+        box.append(root);
+        later(() => out('ready', { protocols: [1] }));
+        function open() {
+          if (closed) return;
+          if (typeof navigator !== 'undefined' && navigator.onLine === false) return fail('embed-offline');
+          root.replaceChildren();
+          const f = el('iframe', 'act-frame act-embed-frame');
+          f.setAttribute('sandbox', tokens); f.setAttribute('allow', DEVICES); f.setAttribute('referrerpolicy', 'no-referrer');
+          f.setAttribute('credentialless', ''); f.setAttribute('loading', 'lazy'); f.setAttribute('title', T('engine.act.embed.frameTitle', { title: name, provider: p.name }));
+          f.setAttribute('data-provider', p.id);
+          f.addEventListener('load', () => { clearTimeout(timer); out('a11y:announce', { text: String(T('engine.act.embed.opened', { provider: p.name })).slice(0, 300) }); }, { once: true });
+          timer = setTimeout(() => fail('embed-timeout'), LOAD_TIMEOUT);
+          f.srcdoc = wrapperDoc(act.url, p, tokens, name);
+          root.append(f, creditLine(act, p));
+          out('event', { name: 'embed:open', data: { provider: p.id } });
+        }
+        if (consent.has(p.id)) { open(); return port; }
+        // the quiet card: nothing of the provider is requested before Open
+        const card = el('div', 'act-embed-card'); card.setAttribute('role', 'group'); card.setAttribute('aria-label', name);
+        card.append(el('p', 'act-embed-title', name), el('p', 'act-embed-ask', T('engine.act.embed.ask', { provider: p.name })));
+        if (typeof words.why === 'string' && words.why.trim()) card.append(el('p', 'act-embed-why', words.why));
+        card.append(creditLine(act, p));
+        const go = el('button', 'btn primary small act-embed-open', T('engine.act.embed.open', { provider: p.name })); go.type = 'button';
+        go.addEventListener('click', () => { if (closed) return; consent.set(p.id); open(); if (!closed && typeof onLive === 'function') onLive(); });
+        card.append(go);
+        root.append(card);
+        return port;
+      },
+    });
+  }
+  register();
+  /* i18n-ignore-end */
+  return { RUNTIME, PROVIDERS, SANDBOX_OK, parse, match, check, checkPack, consent };
+})();
+if (typeof module === 'object' && module && module.exports) module.exports = NoemaEmbed;
+else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
 
 /* ---- 50_sources.js ---- */
 /* ===================== Sources: registry, filtering, "what's new" ===================== */
@@ -7850,6 +10917,17 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
     h('div', { class: 'accsecbody' }, body));
   return d;
 }
+/** Settings › Data: the outside activities (external-embed@1, docs/INTERACTIVE_EMBED.md) the learner let open without asking — one quiet
+    line with ⓘ and "Ask again" (NoemaEmbed.consent: S.settings.embedOk, an account setting); nothing at all while there is no yes to forget. */
+function embedConsentRow() {
+  const E = window.NoemaEmbed, ids = E?.consent?.list?.() || [];
+  if (!ids.length) return null;
+  const names = ids.map(id => (E.PROVIDERS || []).find(p => p.id === id)?.name || id);
+  const row = h('div', { class: 'subrow embedconsent', 'data-embed-consent': '' },
+    h('span', { class: 'grow tiny' }, tE('engine.act.embed.settings', { names: window.NoemaI18n?.fmt?.list ? NoemaI18n.fmt.list(names) : names.join(', ') }), ' ', tip(tE('engine.act.embed.settingsTip'))),
+    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { for (const id of E.consent.list()) E.consent.forget(id); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
+  return row;
+}
 const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });
 /** A moment / a day / a time of day in the UI language (the same fields the browser's toLocale…String() shows). */
 const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIME = { hour: 'numeric', minute: '2-digit', second: '2-digit' };
@@ -8078,6 +11156,7 @@ const ACC_VIEWS = {
                 h('button', { class: 'btn ghost', onclick: c2 }, tE('engine.core.cancel')))));
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
       accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
+      embedConsentRow(),
       window.pyOfflineSection?.() || '');   // Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
     drawFs(); drawRP();
   },

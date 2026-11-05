@@ -1,0 +1,23 @@
+{
+ "title": "Régler un correcteur PID",
+ "intro": "Un correcteur pilote un procédé peu amorti (il oscille de lui-même) avec un petit retard pur. À 0,5 s, la consigne passe en échelon de 0 à 1. Réglez les trois gains pour que la sortie dépasse de moins de 10 %, entre dans la bande de 2 % autour de la consigne en moins de 2 s et ne garde aucune erreur statique.",
+ "kp": "Gain proportionnel Kp",
+ "ki": "Gain intégral Ki",
+ "kd": "Gain dérivé Kd",
+ "osLabel": "Dépassement",
+ "tsLabel": "Temps de réponse (bande de 2 %)",
+ "essLabel": "Erreur statique",
+ "stepTitle": "Réponse indicielle",
+ "time": "Temps",
+ "output": "Sortie",
+ "rLine": "consigne",
+ "yLine": "sortie y",
+ "osMark": "dépassement de 10 %",
+ "tsMark": "2 s après l’échelon",
+ "uTitle": "Ce que le correcteur demande au procédé",
+ "effort": "Commande u",
+ "uLine": "u",
+ "checkOs": "Le dépassement reste sous 10 %.",
+ "checkTs": "La sortie se stabilise en moins de 2 s.",
+ "checkEss": "Il ne reste pas d’erreur statique (moins de 2 %)."
+}

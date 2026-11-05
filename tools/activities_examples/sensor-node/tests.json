@@ -1,0 +1,96 @@
+{
+ "cases": [
+  {
+   "name": "every 15 minutes: about 600 days, 96 readings a day (passes)",
+   "exercise": "ch01-e907",
+   "steps": [
+    {
+     "set": "period",
+     "value": 900
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "perDay": 96
+    }
+   }
+  },
+  {
+   "name": "every hour is still enough readings (passes)",
+   "exercise": "ch01-e907",
+   "steps": [
+    {
+     "set": "period",
+     "value": 3600
+    }
+   ],
+   "expect": {
+    "passed": true
+   }
+  },
+  {
+   "name": "the start (every 60 s) empties the cell in under 3 months",
+   "exercise": "ch01-e907",
+   "steps": [
+    {
+     "set": "period",
+     "value": 61
+    },
+    {
+     "set": "period",
+     "value": 60
+    }
+   ],
+   "expect": {
+    "passed": false
+   }
+  },
+  {
+   "name": "every 5 minutes is not quite a year",
+   "exercise": "ch01-e907",
+   "steps": [
+    {
+     "set": "period",
+     "value": 300
+    }
+   ],
+   "expect": {
+    "passed": false
+   }
+  },
+  {
+   "name": "every 2 hours lasts but sends too few readings",
+   "exercise": "ch01-e907",
+   "steps": [
+    {
+     "set": "period",
+     "value": 7200
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "perDay": 12
+    }
+   }
+  },
+  {
+   "name": "explorer: the period is saved",
+   "steps": [
+    {
+     "set": "period",
+     "value": 1200
+    }
+   ],
+   "expect": {
+    "state": [
+     "period"
+    ],
+    "values": {
+     "perDay": 72
+    }
+   }
+  }
+ ]
+}

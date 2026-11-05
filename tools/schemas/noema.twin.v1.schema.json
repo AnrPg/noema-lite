@@ -1,0 +1,490 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.twin.v1.schema.json",
+  "title": "noema-lite IoT device twin (noema.twin/v1)",
+  "description": "The device run by the twin engine twin@1 (engine/src/42_engine_twin.js). Units: capacity mAh, currents mA, times s, voltages V, rInt ohm (the whole pack), selfDischarge a fraction of the capacity per month, radio f Hz, d m, power dBm. Human-readable spec: docs/INTERACTIVE_ENGINES.md §5. The engine's check() (twin: tools/twin.py) also tests: duplicate sensor ids, a custom battery curve (soc 0 to 1, rising), sense shorter than the period, LoRa bandwidths and the event budget (code 'budget'). Faults (create's opts.faults, a bench fault's apply) are $defs.fault, checked by checkFaults.",
+  "type": "object",
+  "required": [
+    "battery",
+    "schedule",
+    "sim"
+  ],
+  "properties": {
+    "format": {
+      "const": "noema.twin/v1"
+    },
+    "battery": {
+      "type": "object",
+      "required": [
+        "capacity"
+      ],
+      "properties": {
+        "capacity": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "chem": {
+          "enum": [
+            "li-ion",
+            "lifepo4",
+            "alkaline",
+            "nimh",
+            "custom"
+          ]
+        },
+        "cells": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "curve": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "required": [
+              "soc",
+              "v"
+            ],
+            "properties": {
+              "soc": {
+                "$ref": "#/$defs/quantity",
+                "description": "0 to 1"
+              },
+              "v": {
+                "$ref": "#/$defs/quantity",
+                "description": "> 0"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "selfDischarge": {
+          "$ref": "#/$defs/quantity",
+          "description": "0 to 1"
+        },
+        "rInt": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "soc0": {
+          "$ref": "#/$defs/quantity",
+          "description": "0 to 1"
+        },
+        "cutoff": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        }
+      },
+      "additionalProperties": false
+    },
+    "power": {
+      "type": "object",
+      "properties": {
+        "sleep": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "active": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "sense": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "tx": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "rx": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        }
+      },
+      "additionalProperties": false
+    },
+    "schedule": {
+      "type": "object",
+      "required": [
+        "period"
+      ],
+      "properties": {
+        "period": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "sense": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "txEvery": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "ack": {
+          "type": "boolean"
+        },
+        "rxWindow": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "retries": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "boot": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sensors": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_\\-]{0,31}$"
+          },
+          "base": {
+            "$ref": "#/$defs/quantity",
+            "description": "any finite number"
+          },
+          "amp": {
+            "$ref": "#/$defs/quantity",
+            "description": "any finite number"
+          },
+          "cycle": {
+            "$ref": "#/$defs/quantity",
+            "description": "> 0"
+          },
+          "noise": {
+            "$ref": "#/$defs/quantity",
+            "description": ">= 0"
+          },
+          "drift": {
+            "$ref": "#/$defs/quantity",
+            "description": "any finite number"
+          },
+          "current": {
+            "$ref": "#/$defs/quantity",
+            "description": ">= 0"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "radio": {
+      "type": "object",
+      "properties": {
+        "tech": {
+          "enum": [
+            "lora",
+            "ble",
+            "fsk"
+          ]
+        },
+        "f": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "power": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "gain": {
+          "$ref": "#/$defs/quantity",
+          "description": "any finite number"
+        },
+        "d": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "n": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "d0": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "sigma": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "extra": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "nf": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "sf": {
+          "type": "integer",
+          "minimum": 7,
+          "maximum": 12
+        },
+        "bw": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "cr": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "payload": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "bitrate": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "txTime": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        }
+      },
+      "additionalProperties": false
+    },
+    "brownout": {
+      "type": "object",
+      "properties": {
+        "v": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "reset": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sim": {
+      "type": "object",
+      "required": [
+        "duration"
+      ],
+      "properties": {
+        "duration": {
+          "$ref": "#/$defs/quantity",
+          "description": "> 0"
+        },
+        "samples": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 2000
+        },
+        "trace": {
+          "$ref": "#/$defs/quantity",
+          "description": ">= 0"
+        },
+        "maxEvents": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5000000
+        }
+      },
+      "additionalProperties": false
+    },
+    "meta": {
+      "type": "object",
+      "description": "free notes for authors; ignored"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "quantity": {
+      "description": "a number, or a string with an SI prefix: f p n u µ m k K M meg G (\"868M\", \"125k\")",
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[-+]?(\\d+\\.?\\d*|\\.\\d+)([eE][-+]?\\d+)?\\s*(meg|[fpnuµmkKMG])?\\s*$"
+        }
+      ]
+    },
+    "fault": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "sensor-stuck",
+            "sensor-drift",
+            "battery-ageing",
+            "antenna-detached",
+            "wake-period",
+            "brownout"
+          ]
+        },
+        "sensor": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/quantity"
+        },
+        "at": {
+          "$ref": "#/$defs/quantity"
+        },
+        "rate": {
+          "$ref": "#/$defs/quantity"
+        },
+        "factor": {
+          "$ref": "#/$defs/quantity"
+        },
+        "rInt": {
+          "$ref": "#/$defs/quantity"
+        },
+        "loss": {
+          "$ref": "#/$defs/quantity"
+        },
+        "period": {
+          "$ref": "#/$defs/quantity"
+        },
+        "v": {
+          "$ref": "#/$defs/quantity"
+        }
+      },
+      "additionalProperties": false
+    },
+    "binding": {
+      "type": "object",
+      "required": [
+        "field",
+        "expr"
+      ],
+      "properties": {
+        "field": {
+          "enum": [
+            "battery.capacity",
+            "battery.cells",
+            "battery.selfDischarge",
+            "battery.rInt",
+            "battery.soc0",
+            "battery.cutoff",
+            "power.sleep",
+            "power.active",
+            "power.sense",
+            "power.tx",
+            "power.rx",
+            "schedule.period",
+            "schedule.sense",
+            "schedule.txEvery",
+            "schedule.rxWindow",
+            "schedule.retries",
+            "schedule.boot",
+            "radio.f",
+            "radio.power",
+            "radio.gain",
+            "radio.d",
+            "radio.n",
+            "radio.d0",
+            "radio.sigma",
+            "radio.extra",
+            "radio.nf",
+            "radio.sf",
+            "radio.bw",
+            "radio.cr",
+            "radio.payload",
+            "radio.bitrate",
+            "radio.txTime",
+            "brownout.v",
+            "brownout.reset",
+            "sim.duration",
+            "sim.samples",
+            "sim.trace",
+            "sim.maxEvents"
+          ]
+        },
+        "expr": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "scalar",
+            "series"
+          ]
+        },
+        "of": {
+          "enum": [
+            "activeFraction",
+            "airtime",
+            "attempts",
+            "chargeUsed",
+            "current",
+            "dead",
+            "delivered",
+            "deliveryRatio",
+            "eventCode",
+            "eventT",
+            "iAvg",
+            "iAvgAnalytic",
+            "lifeAnalytic",
+            "lifeSim",
+            "lost",
+            "per",
+            "reading",
+            "readingErr",
+            "readingLast",
+            "readingMean",
+            "resets",
+            "rssi",
+            "rssiMean",
+            "rxT",
+            "sent",
+            "snrMean",
+            "soc",
+            "socEnd",
+            "t",
+            "tDead",
+            "traceI",
+            "traceT",
+            "truth",
+            "v",
+            "vEnd",
+            "vMin",
+            "vload",
+            "wakes"
+          ],
+          "description": "default: the id"
+        },
+        "sensor": {
+          "type": "string",
+          "description": "for readingMean, readingLast, readingErr, reading, truth (default: the first sensor)"
+        }
+      }
+    }
+  }
+}

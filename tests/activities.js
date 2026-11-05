@@ -62,7 +62,10 @@ ok(ACTP.check(M('py:out', { outputs: { a: 1 } }, { re: 'py1' })).ok && ACTP.chec
 // 3. the same rules in JS and Python
 require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));   // the expression checker packcheck uses for sim-spec@1
 require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));   // the netlist and fault checker packcheck uses for circuit-mna@1
+for (const f of ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(ROOT, 'engine', 'src', f));   // the P6 engines' checkSpec packcheck uses
 require(path.join(ROOT, 'engine', 'packcheck.js'));
+require(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'));   // NoemaWasm: packcheck checks wasm-module@1 items and wasm@1 models with it (P6)
+globalThis.NoemaEmbed = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));   // NoemaEmbed: the external-embed@1 rules (P6)
 const P = globalThis.NoemaPackCheck;
 const html = fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'alias-lab', 'app.html'), 'utf8');
 const crypto = require('crypto');
@@ -201,6 +204,148 @@ const ccases = {
   'circuit: a check on the diagnosis index': p => { sx(p).grade.checks[0].expr = 'diagnosis == 6'; },
   'circuit: a check on an unknown name': p => { sx(p).grade.checks[1].expr = 'measures <= 6'; },
 };
+// the P6 engines (docs/INTERACTIVE_ENGINES.md): each reference activity as the second activity, with its sim exercise graded by checks;
+// the validators call each engine's own checkSpec (JS) / check_spec (Python) and check every expression of the model (bindings, times, at)
+const P6X = path.join(ROOT, 'tools', 'activities_examples');
+const p6item = id => { const d = path.join(P6X, id); const it = { ...JSON.parse(fs.readFileSync(path.join(d, 'activity.json'), 'utf8')), spec: JSON.parse(fs.readFileSync(path.join(d, 'spec.json'), 'utf8')),
+  strings: Object.fromEntries(['en', 'el', 'ru', 'fr'].map(l => [l, JSON.parse(fs.readFileSync(path.join(d, `strings.${l}.json`), 'utf8'))])) }; delete it.entry; return it; };
+const P6EX = {
+  heatsink: { id: 'ch01-e904', engine: 'thermal@1', checks: [{ expr: 'tjSS <= TjMax', label: 'checkTj', weight: 2 }, { expr: 'Rsa >= RsaMin', label: 'checkCheap' }] },
+  'pid-tune': { id: 'ch01-e905', engine: 'pid@1', checks: [{ expr: 'os < osMax', label: 'checkOs' }, { expr: 'ts < tsMax', label: 'checkTs' }, { expr: 'abs(ess) < essMax', label: 'checkEss' }] },
+  'lora-link': { id: 'ch01-e906', engine: 'rf@1', checks: [{ expr: 'margin >= marginMin', label: 'checkMargin', weight: 2 }, { expr: 'air <= airMax', label: 'checkAir' }] },
+  'sensor-node': { id: 'ch01-e907', engine: 'twin@1', checks: [{ expr: 'life / 86400 >= daysMin', label: 'checkLife', weight: 2 }, { expr: 'perDay >= perDayMin', label: 'checkRate' }] },
+};
+const p6base = aid => () => { const p = base(), x = P6EX[aid]; p.media[aid + '-still'] = { w: 600, h: 260 }; p.requires.push('runtime:sim-spec@1', 'engine:' + x.engine); p.activities.items.push(p6item(aid));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: aid }); p.chapters[0].exercises.push({ id: x.id, type: 'sim', activity: aid, task: { seed: 'auto', params: {} }, hints: ['h'], grade: { mode: 'checks', checks: JSON.parse(JSON.stringify(x.checks)) } }); return p; };
+// twin@1's fault-finding bench on sensor-node: the battery's voltage, the supply current (meter and scope), the event log, the RSSI
+const TWIN_BENCH = { faults: [{ id: 'antenna', apply: [{ kind: 'antenna-detached' }] }, { id: 'ageing', apply: [{ kind: 'battery-ageing' }] }, { id: 'wake', apply: [{ kind: 'wake-period', factor: 0.1 }] }],
+  points: [{ id: 'VBAT', at: 'vbat', label: 'ptVbat' }, { id: 'VLOAD', at: 'vload', label: 'ptVload' }, { id: 'GND', at: 'gnd', label: 'ptGnd' }, { id: 'ISENSE', at: 'i', label: 'ptI' }],
+  instruments: [{ kind: 'V', points: ['VBAT', 'VLOAD', 'GND'] }, { kind: 'I', parts: [{ element: 'battery', label: 'ptI' }] }, { kind: 'scope', points: ['ISENSE'], tEnd: 1300 }, { kind: 'log' }, { kind: 'rssi' }],
+  budget: 6, diagnosis: { options: [{ label: 'dxAntenna', fault: 'antenna' }, { label: 'dxAgeing', fault: 'ageing' }, { label: 'dxWake', fault: 'wake' }, { label: 'dxNone' }] } };
+const TWIN_BENCH_WORDS = { ptVbat: 'battery (open circuit)', ptVload: 'battery under load (lowest)', ptGnd: 'ground', ptI: 'supply current', dxAntenna: 'the antenna is loose', dxAgeing: 'the battery has aged', dxWake: 'the wake period is set too short', dxNone: 'nothing is wrong' };
+const twinBench = p => { sp(p).bench = JSON.parse(JSON.stringify(TWIN_BENCH)); for (const l of Object.keys(p.activities.items[1].strings)) Object.assign(p.activities.items[1].strings[l], TWIN_BENCH_WORDS);
+  Object.assign(sx(p), { task: { seed: 3, params: { fault: 'antenna' } }, grade: { mode: 'checks', pass: 0.75, checks: [{ expr: 'correct', label: 'checkLife', weight: 3 }, { expr: 'measurements <= 4', label: 'checkRate' }] } }); };
+const tb = p => sp(p).bench;
+const p6cases = {
+  heatsink: {
+    'thermal good': p => p,
+    'thermal: no engine:… in requires': p => { p.requires = p.requires.filter(x => x !== 'engine:thermal@1'); },
+    'thermal: no network': p => { delete md(p).network; },
+    'thermal: a link with R and G': p => { md(p).network.links[0].G = 2; },
+    'thermal: a node id twice': p => { md(p).network.nodes[1].id = 'J'; },
+    'thermal: a binding to no element': p => { md(p).bindings[0].element = 'Rzz'; },
+    'thermal: a binding with a bad expression': p => { md(p).bindings[0].expr = 'Rsa * nope'; },
+    'thermal: a binding that is not the language': p => { md(p).bindings[1].expr = 'Math.max(P, 1)'; },
+    'thermal: a bad transient expression': p => { md(p).transient.tEnd = '300 * Rsa2'; },
+    'thermal: too many steps': p => { md(p).transient = { tEnd: 1e6, dt: 1 }; },
+    'thermal: an output on no node': p => { sp(p).outputs[1].node = 'X'; },
+    'thermal: a time constant beyond the capacities': p => { sp(p).outputs[5].tau = 9; },
+    'thermal: an output at with an unknown name': p => { sp(p).outputs.push({ id: 'tjAt', kind: 'scalar', node: 'J', at: 'tLater' }); },
+    'thermal: a good output at an expression': p => { sp(p).outputs.push({ id: 'tjAt', kind: 'scalar', node: 'J', at: '60 * Rsa' }); sp(p).readouts.push({ label: 'tjLabel', expr: 'tjAt' }); },
+    'thermal: a bench': p => { sp(p).bench = JSON.parse(JSON.stringify(TWIN_BENCH)); },
+  },
+  'pid-tune': {
+    'pid good': p => p,
+    'pid: an unknown plant': p => { md(p).plant.type = 'quantum'; },
+    'pid: no transient': p => { delete md(p).transient; },
+    'pid: a gain that is not a number': p => { md(p).controller.Kp = 'fast'; },
+    'pid: a binding to no element': p => { md(p).bindings[0].element = 'valve'; },
+    'pid: a binding with a bad expression': p => { md(p).bindings[1].expr = 'Ki +'; },
+    'pid: an unknown metric': p => { sp(p).outputs[4].metric = 'wobble'; },
+    'pid: a scalar signal without at or stat': p => { sp(p).outputs.push({ id: 'yy', kind: 'scalar', signal: 'y' }); },
+    'pid: an output at with an unknown name': p => { sp(p).outputs.push({ id: 'yAt', kind: 'scalar', signal: 'y', at: 'later' }); },
+    'pid: a transient dt that is not the language': p => { md(p).transient.dt = 'tEnd / 1000'; },
+    'pid: a good anti-windup toggle': p => { sp(p).params.push({ id: 'aw', kind: 'toggle', label: 'kp', default: true }); md(p).bindings.push({ element: 'controller', prop: 'antiWindup', expr: 'aw' }); },
+  },
+  'lora-link': {
+    'rf good': p => p,
+    'rf: no link': p => { delete md(p).link; },
+    'rf: an unknown path model': p => { md(p).link.path.model = 'magic'; },
+    'rf: a frequency that is not a number': p => { md(p).link.f = 'loud'; },
+    'rf: a binding to no field': p => { md(p).bindings[1].field = 'radio.colour'; },
+    'rf: a binding with a bad expression': p => { md(p).bindings[1].expr = 'sf + nope'; },
+    'rf: an empty binding expression': p => { md(p).bindings[2].expr = ' '; },
+    'rf: an output it cannot compute': p => { sp(p).outputs.push({ id: 'zz', kind: 'scalar' }); },
+    'rf: a series that is not a series': p => { sp(p).outputs.push({ id: 'm2', kind: 'series', of: 'airtime' }); },
+    'rf: a check on an unknown name': p => { sx(p).grade.checks[1].expr = 'airtime <= airMax'; },
+  },
+  'sensor-node': {
+    'twin good': p => p,
+    'twin: no device': p => { delete md(p).device; },
+    'twin: sensing longer than the period': p => { md(p).device.schedule.sense = 100; },
+    'twin: an unknown chemistry': p => { md(p).device.battery.chem = 'coal'; },
+    'twin: a binding to no field': p => { md(p).bindings[0].field = 'schedule.colour'; },
+    'twin: a binding with a bad expression': p => { md(p).bindings[0].expr = 'period * zz'; },
+    'twin: an output on no sensor': p => { sp(p).outputs.push({ id: 'rd', kind: 'series', of: 'reading', sensor: 'hum' }); },
+    'twin bench good': p => { twinBench(p); },
+    'twin bench: a fault of no kind': p => { twinBench(p); tb(p).faults[0].apply[0].kind = 'gremlin'; },
+    'twin bench: a stuck sensor the device does not have': p => { twinBench(p); tb(p).faults[1].apply = [{ kind: 'sensor-stuck', sensor: 'hum' }]; },
+    'twin bench: a point at no probe of the device': p => { twinBench(p); tb(p).points[0].at = 'TP1'; },
+    'twin bench: a voltmeter on the current': p => { twinBench(p); tb(p).instruments[0].points.push('ISENSE'); },
+    'twin bench: a scope on the battery': p => { twinBench(p); tb(p).instruments[2].points = ['VBAT']; },
+    'twin bench: an ammeter on a part': p => { twinBench(p); tb(p).instruments[1].parts[0].element = 'R1'; },
+    'twin bench: the event log on a point': p => { twinBench(p); tb(p).instruments[3].points = ['VBAT']; },
+    'twin bench: a logic analyser': p => { twinBench(p); tb(p).instruments[4] = { kind: 'logic', tEnd: 1 }; },
+    'twin bench: task.fault not a fault': p => { twinBench(p); sx(p).task.params.fault = 'stuck'; },
+    'twin bench: a diagnosis label missing in one table': p => { twinBench(p); delete p.activities.items[1].strings.fr.dxWake; },
+  },
+};
+ccases['circuit: the event log on a circuit bench'] = p => { bn(p).instruments.push({ kind: 'log' }); };
+const P6GOOD = ['thermal good', 'thermal: a good output at an expression', 'pid good', 'pid: a good anti-windup toggle', 'rf good', 'twin good', 'twin bench good'];
+const P6PRE = /^(thermal|pid|rf|twin)\b/;
+// wasm-module@1 (P6): the reference wasm-oscillator (a module with its own spec) as the second activity, with a sim exercise graded by checks
+const WO = path.join(ROOT, 'tools', 'activities_examples', 'wasm-oscillator'), FIXW = path.join(ROOT, 'tests', 'fixtures', 'wasm');
+const wasmOf = b => ({ wasm: b.toString('base64'), sha256: crypto.createHash('sha256').update(b).digest('hex'), bytes: b.length });
+const woItem = { ...JSON.parse(fs.readFileSync(path.join(WO, 'activity.json'), 'utf8')), ...wasmOf(fs.readFileSync(path.join(WO, 'module.wasm'))), spec: JSON.parse(fs.readFileSync(path.join(WO, 'spec.json'), 'utf8')),
+  strings: Object.fromEntries(['en', 'el', 'ru'].map(l => [l, JSON.parse(fs.readFileSync(path.join(WO, `strings.${l}.json`), 'utf8'))])) };
+const WX = { id: 'ch01-e4', type: 'sim', activity: 'wasm-oscillator', task: { seed: 'auto', params: {} }, hints: ['h'],
+  grade: { mode: 'checks', checks: [{ expr: 'E <= share * E0', label: 'checkLeft', weight: 3 }, { expr: 'abs(k - 4) < 0.01', label: 'checkK' }] } };
+const wbase = () => { const p = base(); p.media['wasm-oscillator-still'] = { w: 600, h: 260 }; p.requires.push('runtime:wasm-module@1', 'engine:wasm@1'); p.activities.items.push(JSON.parse(JSON.stringify(woItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'wasm-oscillator' }); p.chapters[0].exercises.push(JSON.parse(JSON.stringify(WX))); return p; };
+const wi = p => p.activities.items[1];
+/** the module alone (no spec) + a sim-spec@1 activity whose engine wasm@1 runs it (the second way in) */
+const viaSpec = p => { const m = wi(p), s = m.spec; delete m.spec; m.id = 'osc-core'; p.chapters[0].sections[0].blocks.pop(); p.chapters[0].exercises.pop();
+  p.activities.items.push({ id: 'osc-sim', runtime: 'sim-spec@1', stateVersion: 1, spec: { ...s, engine: 'wasm@1', model: { ...s.model, module: 'osc-core' } }, strings: m.strings, fallback: m.fallback });
+  p.requires.push('runtime:sim-spec@1'); p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'osc-sim' }); };
+const wcases = {
+  'wasm good': p => p,
+  'wasm: through a sim-spec@1 spec (engine wasm@1)': viaSpec,
+  'wasm: the spec names no module': p => { viaSpec(p); p.activities.items[2].spec.model.module = 'nope'; },
+  'wasm: the module without its own spec in a block': p => { delete wi(p).spec; p.chapters[0].exercises.pop(); },
+  'wasm: sha256 does not match': p => { wi(p).sha256 = '0'.repeat(64); },
+  'wasm: not base64': p => { wi(p).wasm = 'not base64!'; },
+  'wasm: no scratch and no alloc': p => { wi(p).abi = {}; },
+  'wasm: a forbidden import': p => { Object.assign(wi(p), wasmOf(fs.readFileSync(path.join(FIXW, 'forbidden.wasm')))); },
+  'wasm: memory over the limit': p => { Object.assign(wi(p), wasmOf(fs.readFileSync(path.join(FIXW, 'bigmem.wasm')))); },
+  'wasm: the own spec on another engine': p => { wi(p).spec.engine = 'formula@1'; },
+  'wasm: the own spec names another module': p => { wi(p).spec.model.module = 'other'; },
+  'wasm: a model output not declared': p => { wi(p).spec.model.outputs.push({ id: 'v', n: 50 }); },
+  'wasm: a model input with an unknown name': p => { wi(p).spec.model.inputs[0] = 'kk'; },
+  'wasm: no engine:wasm@1 in requires': p => { p.requires = p.requires.filter(x => x !== 'engine:wasm@1'); },
+  'wasm: graded "reported"': p => { p.chapters[0].exercises[1].grade = { mode: 'reported' }; },
+  'wasm: a check with an unknown name': p => { p.chapters[0].exercises[1].grade.checks[0].expr = 'Eend < 1'; },
+};
+// external-embed@1 (P6): an allow-listed outside page (PhET) in a theory block — explore only
+const emItem = { id: 'ohm-phet', runtime: 'external-embed@1', stateVersion: 1, provider: 'phet', url: 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html?locale=en',
+  credit: 'PhET Interactive Simulations, University of Colorado Boulder · Ohm’s Law · CC-BY-4.0 · https://phet.colorado.edu', license: 'CC-BY-4.0', height: 480,
+  fallback: { media: 'ohm-still', text: 'Ohm’s law: the current grows with the voltage and falls with the resistance (I = V / R).' },
+  strings: { en: { title: 'Ohm’s law simulation', why: 'Move V and R and watch I.' } } };
+const ebase = () => { const p = base(); p.media['ohm-still'] = { w: 600, h: 260 }; p.requires.push('runtime:external-embed@1'); p.activities.items.push(JSON.parse(JSON.stringify(emItem)));
+  p.chapters[0].sections[0].blocks.push({ t: 'interactive', activity: 'ohm-phet' }); return p; };
+const ei = p => p.activities.items[1];
+const ecases = {
+  'embed good': p => p,
+  'embed: a pending provider (Wokwi)': p => Object.assign(ei(p), { provider: 'wokwi', url: 'https://wokwi.com/projects/305569599398609473', credit: 'Blink · simulated on Wokwi (wokwi.com)', license: 'Wokwi-ToS' }),
+  'embed: a pending provider (Falstad)': p => Object.assign(ei(p), { provider: 'falstad', url: 'https://www.falstad.com/circuit/circuitjs.html?ctz=abc', credit: 'Circuit simulator by Paul Falstad', license: 'GPL-2.0-or-later' }),
+  'embed: an unknown provider': p => { ei(p).provider = 'flashsims'; },
+  'embed: http': p => { ei(p).url = ei(p).url.replace('https:', 'http:'); },
+  'embed: another origin': p => { ei(p).url = 'https://evil.example/sims/html/ohms-law/latest/ohms-law_all.html'; },
+  'embed: an entry': p => { ei(p).entry = 'activities/ohm-phet/app.html'; },
+  'embed: no credit': p => { delete ei(p).credit; },
+  'embed: no title': p => { delete ei(p).strings.en.title; },
+  'embed: in a sim exercise': p => { p.chapters[0].exercises.push({ id: 'ch01-e5', type: 'sim', activity: 'ohm-phet', grade: { mode: 'reported' } }); },
+  'embed: no runtime in requires': p => { p.requires = p.requires.filter(x => x !== 'runtime:external-embed@1'); },
+};
 // py-module@1: the reference py-filter (main.py + its spec) as the second activity, with a sim exercise graded by checks on Python's outputs
 const PF = path.join(ROOT, 'tools', 'activities_examples', 'py-filter');
 const pySrc = fs.readFileSync(path.join(PF, 'main.py'), 'utf8');
@@ -276,8 +421,11 @@ const hcases = {
   'h5p: checks grading': p => { p.chapters[0].exercises[1].grade = { mode: 'checks', checks: [{ expr: 'score > 0' }] }; },
 };
 const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p); return [k, p]; }), ...Object.entries(scases).map(([k, f]) => { const p = sbase(); f(p); return [k, p]; }), ...Object.entries(ccases).map(([k, f]) => { const p = cbase(); f(p); return [k, p]; }), ...Object.entries(pcases).map(([k, f]) => { const p = pbase(); f(p); return [k, p]; }),
+  ...Object.entries(wcases).map(([k, f]) => { const p = wbase(); f(p); return [k, p]; }), ...Object.entries(ecases).map(([k, f]) => { const p = ebase(); f(p); return [k, p]; }),
+  ...Object.entries(p6cases).flatMap(([aid, cs]) => Object.entries(cs).map(([k, f]) => { const p = p6base(aid)(); f(p); return [k, p]; })),
   ...Object.entries(hcases).map(([k, f]) => { const p = hbase(); f(p); return [k, p]; })];
 const GOOD = new Set(['h5p good', 'h5p good in el and ru', 'good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index',
+  'wasm good', 'wasm: through a sim-spec@1 spec (engine wasm@1)', 'embed good', ...P6GOOD,
   'py good', 'py: graded "reported" (noema.result)', 'py: a task param for Python only', 'py: scipy declared and imported', 'py: an allow-listed extra with requiresNetwork', 'py: while True (a warning)']);
 const tmp = path.join(require('os').tmpdir(), 'noema-act-parity.json'); fs.writeFileSync(tmp, JSON.stringify(packs));
 const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
@@ -289,13 +437,25 @@ for (const [k, p] of packs) {
   const js = P.checkActivities(p, Object.keys(p.translations || {}));
   const norm = l => l.map(m => m.replace(/'/g, '"'));   // (Python's repr quotes with ', the JS twin with ")
   const same = js.errors.length === py[k][0] && js.warnings.length === py[k][1] && (py[k][2] == null || JSON.stringify(norm(js.errors)) === JSON.stringify(norm(py[k][2])));
-  ok(same && (GOOD.has(k) ? js.errors.length === 0 : js.errors.length > 0), `${k}: JS ${js.errors.length} error(s), Python ${py[k][0]}${GOOD.has(k) ? ' (a good pack passes)' : ' — ' + (js.errors[0] || '').slice(0, 110)}${same ? '' : '  JS: ' + js.errors.join(' | ')}`);
+  ok(same && (GOOD.has(k) ? js.errors.length === 0 : js.errors.length > 0), `${k}: ${GOOD.has(k) && js.errors.length ? js.errors[0] + ' ' : ''}JS ${js.errors.length} error(s), Python ${py[k][0]}${GOOD.has(k) ? ' (a good pack passes)' : ' — ' + (js.errors[0] || '').slice(0, 110)}${same ? '' : '  JS: ' + js.errors.join(' | ')}`);
+}
+{ // P6: the same messages (not only the same counts) for wasm-module@1 and external-embed@1 packs
+  const py3 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
+print(json.dumps([A.check_activities(p, list((p.get('translations') or {}).keys())) for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith(('wasm', 'embed'))], ensure_ascii=False))`, tmp], { encoding: 'utf8', maxBuffer: 64 << 20 }));
+  const js3 = packs.filter(([k]) => /^(wasm|embed)/.test(k)).map(([, p]) => P.checkActivities(p, Object.keys(p.translations || {})));
+  const norm = l => l.map(m => m.replace(/'/g, '"'));
+  const diff = js3.map((r, i) => JSON.stringify([norm(r.errors), norm(r.warnings)]) === JSON.stringify([norm(py3[i][0]), norm(py3[i][1])]) ? null : [r, py3[i]]).filter(Boolean);
+  ok(js3.length >= 25 && !diff.length, `wasm-module@1 and external-embed@1: checkActivities (JS) and check_activities (Python) give the same errors and warnings on ${js3.length} packs ${diff.length ? JSON.stringify(diff[0]).slice(0, 700) : ''}`);
+  const msg = k => (P.checkActivities(packs.find(x => x[0] === k)[1]).errors[0] || '');
+  ok(/forbidden|import: env\.fetch_url/.test(msg('wasm: a forbidden import')) && /sim-embed/.test(msg('embed: in a sim exercise')) && /provider-pending/.test(msg('embed: a pending provider (Falstad)')) && /url-scheme/.test(msg('embed: http')),
+    'a forbidden import, a graded outside page, a pending provider (Falstad, CircuitJS1, Wokwi: no framing permission) and http are refused with their codes');
+  ok(P.needRequires([woItem]).join() === 'activities/v1,runtime:wasm-module@1,engine:wasm@1','pack.requires of a wasm-module@1 item with its own spec: runtime:wasm-module@1 and engine:wasm@1');
 }
 ok(P.TYPES.has('sim') && P.BLOCKS.has('interactive'), 'packcheck knows the sim type and the interactive block');
 { // the same messages, not only the same counts, for the spec rules
-  const py2 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A
-print(json.dumps([A.check_spec(p['activities']['items'][1].get('spec'), p['activities']['items'][1].get('strings')) for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith('spec') or k.startswith('circuit')], ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
-  const js2 = packs.filter(([k]) => k.startsWith('spec') || k.startsWith('circuit')).map(([, p]) => P.checkSimSpec(p.activities.items[1].spec, p.activities.items[1].strings));
+  const py2 = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A, re
+print(json.dumps([A.check_spec(p['activities']['items'][1].get('spec'), p['activities']['items'][1].get('strings')) for k, p in json.load(open(sys.argv[1], encoding='utf-8')) if k.startswith('spec') or k.startswith('circuit') or re.match(r'(thermal|pid|rf|twin)\\b', k)], ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
+  const js2 = packs.filter(([k]) => k.startsWith('spec') || k.startsWith('circuit') || P6PRE.test(k)).map(([, p]) => P.checkSimSpec(p.activities.items[1].spec, p.activities.items[1].strings));
   const norm = l => l.map(m => m.replace(/'/g, '"'));   // (Python's repr quotes with ', the JS twin with ")
   const diff = js2.map((e, i) => JSON.stringify(norm(e)) === JSON.stringify(norm(py2[i])) ? null : [e, py2[i]]).filter(Boolean);
   ok(!diff.length, 'checkSimSpec (JS) and check_spec (Python) give the same messages ' + (diff.length ? JSON.stringify(diff[0]).slice(0, 600) : ''));
@@ -403,14 +563,40 @@ print(json.dumps({k: A.check_h5p_packages(p, rd) for k, p in json.load(open(sys.
   })();
 }
 ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify(['activities/v1', 'runtime:html-app@1', 'runtime:sim-spec@1']) && P.needRequires([{ runtime: 'sim-spec@1', spec: { engine: 'circuit-mna@1' } }]).includes('engine:circuit-mna@1'), 'pack.requires: the runtimes, and every engine but the built-in formula@1');
+{ // the P6 engines: the same ENGINES in both validators; registered like circuit-mna@1 (Worker path); pack.requires gets engine:<id>
+  const pyE = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A; print(json.dumps([sorted(A.ENGINES), sorted(A.BENCH_ENGINES)]))`], { encoding: 'utf8' }));
+  const R = P.ACTIVITY_RULES;
+  ok(JSON.stringify([[...R.ENGINES].sort(), [...R.BENCH_ENGINES].sort()]) === JSON.stringify(pyE) && ['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(e => R.ENGINES.has(e)) && R.BENCH_ENGINES.has('twin@1'), `ENGINES and BENCH_ENGINES are the same in packcheck.js and activities.py (${pyE[0].join(', ')}; benches: ${pyE[1].join(', ')})`);
+  const reg = {}, win = { NoemaThermal: globalThis.NoemaThermal, NoemaPID: globalThis.NoemaPID, NoemaRF: globalThis.NoemaRF, NoemaTwin: globalThis.NoemaTwin };
+  vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'engine', 'src', '43_engines_p6.js'), 'utf8'), { ACT: { registerEngine: d => { reg[d.id] = d; } }, window: win });
+  const shape = Object.values(reg).every(d => typeof d.check === 'function' && typeof d.prepare === 'function' && typeof d.create === 'function' && typeof d.workerSource === 'string' && d.workerSource.includes('self.noemaEngine'));
+  ok(Object.keys(reg).sort().join() === 'pid@1,rf@1,thermal@1,twin@1' && shape && reg['twin@1'].bench === true && !reg['thermal@1'].bench, `43_engines_p6.js registers ${Object.keys(reg).sort().join(', ')} with check, prepare, create and workerSource (a Worker, as circuit-mna@1); twin@1 takes measurements`);
+  const reqs = Object.keys(P6EX).map(a => P.needRequires([p6item(a)]));
+  ok(reqs.every((r, i) => r.includes('engine:' + P6EX[Object.keys(P6EX)[i]].engine)), 'pack.requires: engine:thermal@1, engine:pid@1, engine:rf@1, engine:twin@1 for the reference activities');
+  // a worker made of workerSource alone runs the reference activities and gives the same numbers as the engine on the page
+  const sameRun = Object.keys(P6EX).map(a => { const it = p6item(a), E = reg[P6EX[a].engine], env = { ...(it.spec.consts || {}) }; for (const q of it.spec.params) env[q.id] = q.default; for (const d of it.spec.derived || []) env[d.id] = globalThis.NoemaExpr.compile(d.expr)(env);
+    const inp = E.prepare(it.spec, globalThis.NoemaExpr.compile)(env), w = {}; vm.runInNewContext(E.workerSource, { self: w, Math, JSON, Object, Array, Number, String, Float64Array, Uint32Array, Int32Array, Map, Set, Error, isFinite, isNaN, Symbol, Infinity, NaN });
+    const a1 = w.noemaEngine.create(it.spec, { seed: 1 }).run(inp), a2 = E.create(it.spec, { seed: 1 }).run(inp);
+    return it.spec.outputs.filter(o => o.kind === 'scalar').every(o => Object.is(+a1[o.id], +a2[o.id]) || Math.abs(a1[o.id] - a2[o.id]) <= 1e-12 * Math.abs(a2[o.id])); });
+  ok(sameRun.every(Boolean), `each engine's workerSource alone (as in the Worker) computes the same scalars as on the page: ${sameRun.join(', ')}`);
+}
 { // the runtime's own words go through tE() and exist in every UI language (the drafts)
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
-  for (const k of ['V', 'I', 'R', 'scope', 'logic']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
+  for (const k of ['V', 'I', 'R', 'scope', 'logic', 'log', 'rssi']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
   const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'); for (const m of src32.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);
   const srcPy = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js'), 'utf8'); for (const m of srcPy.matchAll(/tE\('(engine\.(?:act\.py|py)\.[a-zA-Z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);   // py-module@1: the notes and Settings
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
   const miss = keys.filter(k => !en[k]).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return keys.filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.length >= 5 && !miss.length, `the sim runtime's ${keys.length} host strings are in en.arb and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
+}
+{ // P6: the words of the outside-page card, the core's embed notes, the Settings line and the xAPI export exist in every UI language
+  const keys = new Set();
+  for (const f of ['45_activity_embed.js', '32_activities.js', '70_account.js', '40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, 'engine', 'src', f), 'utf8').matchAll(/\b(?:T|tE)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
+  const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
+  const miss = [...keys].filter(k => !en[k] || !en['@' + k]?.description).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return [...keys].filter(k => !d[k]).map(k => f + ':' + k); }));
+  ok(keys.size >= 14 && !miss.length, `the ${keys.size} P6 host strings (outside-page card, notes, Settings "Ask again", xAPI export) are in en.arb with descriptions and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
+  const wsrc = fs.readFileSync(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'), 'utf8');
+  ok(!/\btE\(/.test(wsrc) && !/innerHTML|insertAdjacentHTML|document\.write|\beval\s*\(|new\s+Function/.test(wsrc.replace(/\/\*[\s\S]*?\*\//g, '')), 'wasm-module@1 adds no words of its own (failures are the core\'s codes) and never puts HTML or code from the pack in the page');
 }
 { // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
@@ -429,7 +615,7 @@ ok(bad.filter(b => !okFiles.some(f => b.startsWith(f))).length === 0, 'no code g
 ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8')), 'html-app@1 sets sandbox to exactly allow-scripts');
 // h5p@1 in the toolkit, the connector, the site and the bundle (docs/INTERACTIVE_H5P.md)
 const srv = fs.readFileSync(path.join(ROOT, 'cloud', 'mcp', 'server.mjs'), 'utf8'), bld = fs.readFileSync(path.join(ROOT, 'tools', 'build.py'), 'utf8');
-ok(/'h5p_check\.py', 'h5p_allow\.json'/.test(bld) && /'38_activity_h5p\.js', '32_activities\.css'/.test(bld) && /'player\.js', 'LICENSE', 'LICENSE-NOTICE\.txt'\] \+ sorted/.test(bld) && /activity_host\/h5p\/' \+ f/.test(bld) && /'INTERACTIVE_H5P\.md'\) if/.test(bld) && /'engine\/src\/38_activity_h5p\.js'/.test(bld),
+ok(/'h5p_check\.py', 'h5p_allow\.json'/.test(bld) && /'38_activity_h5p\.js', '32_activities\.css'/.test(bld) && /'player\.js', 'LICENSE', 'LICENSE-NOTICE\.txt'\] \+ sorted/.test(bld) && /activity_host\/h5p\/' \+ f/.test(bld) && /'INTERACTIVE_H5P\.md'\)(?: \+ INTERACTIVE_P6)? if/.test(bld) && /'engine\/src\/38_activity_h5p\.js'/.test(bld),
   'h5p@1: the skill zip carries h5p_check.py, h5p_allow.json, the runtime and the player for the harness (with its licences and readable source); the connector runs NoemaH5P; the guide part "interactive" includes INTERACTIVE_H5P.md');
 ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player\.js/.test(bld) && /h5p_entries\(m\)/.test(bld), 'h5p@1: the one-file bundle carries the player and small .h5p files inline; the site copies the library\'s .h5p files');
 { const sf = fs.readFileSync(path.join(ROOT, 'engine', 'srcfiles.js'), 'utf8'), ld = fs.readFileSync(path.join(ROOT, 'engine', 'loader.js'), 'utf8');
@@ -440,10 +626,25 @@ ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player
 ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /interactive: DOCS\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
 ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
-ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'(, 'INTERACTIVE_[A-Z0-9]+\.md')*\) if/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
-ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
+ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
+ok(/^P6_ENGINES = \('39_engine_thermal\.js', '40_engine_pid\.js', '41_engine_rf\.js', '42_engine_twin\.js'\)$/m.test(bld) && /'thermal\.py', 'pid\.py', 'rf\.py', 'twin\.py'/.test(bld) && /'36_engine_circuit_sim\.js', \*P6_ENGINES, '43_engines_p6\.js'/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
+  && /'engine\/src\/36_engine_circuit\.js', \*\('engine\/src\/' \+ f for f in P6_ENGINES\), 'engine\/packcheck\.js'/.test(bld) && /\{p6_scripts\}<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld) && /'36_engine_circuit\.js', \*P6_ENGINES\)\]/.test(bld),
+  'the P6 engines: the skill zip carries thermal.py, pid.py, rf.py, twin.py and the engines for the harness; the connector, the site and the bundle load them beside packcheck; the guide part "interactive" includes INTERACTIVE_ENGINES.md');
+{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), pc = html.indexOf('engine/packcheck.js');
+  ok(['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js'].every(f => { const i = html.indexOf('engine/src/' + f); return i > 0 && i < pc; }), 'the shell loads the four P6 engines before packcheck.js (their checkSpec)'); }
+ok(['wasm_check.py', 'embed_check.py', 'embed_allow.json', 'h5p_import.py'].every(f => new RegExp(`SKILL_TOOLS = \\[[^\\]]*'${f.replace('.', '\\.')}'`).test(bld)) && /'44_activity_wasm\.js'\): z\.write/.test(bld)
+  && /INTERACTIVE_P6 = \('INTERACTIVE_WASM\.md', 'INTERACTIVE_EMBED\.md', 'INTERACTIVE_XAPI\.md'\)/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\) \+ INTERACTIVE_P6 if os\.path\.exists/.test(bld) && ['INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md'].every(f => fs.existsSync(path.join(ROOT, 'docs', f))),
+  'P6: the skill zip carries wasm_check.py, embed_check.py + the allow-list, h5p_import.py and the wasm runtime for the harness; the guide part "interactive" includes the wasm, embed and xAPI pages');
+{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  ok(['44_activity_wasm.js', '45_activity_embed.js'].every(f => html.includes('engine/src/' + f) && new RegExp(`'engine/src/${f.replace('.', '\\.')}'`).test(bld.split('MCP_ENGINE = ')[1].split('\n')[0]) && bld.includes(`rd("engine/src/${f}")`) && new RegExp(`\\('43_xapi\\.js', '44_activity_wasm\\.js', '45_activity_embed\\.js'\\): shutil\\.copy`).test(bld))
+    && /^var NoemaEmbed = /m.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'), 'utf8')),
+    'the shell, the site, the one-file bundle and the connector load NoemaWasm and NoemaEmbed beside packcheck.js (45 declares var: it is loaded twice in the app)'); }
+{ const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
+  ok(/why === 'embed-refused' \|\| why === 'embed-graded' \? stop\(tE\('engine\.act\.embed\.refused'\), false\)/.test(src) && /why === 'embed-offline' \? stop\(tE\('engine\.act\.embed\.offline'\)\)/.test(src) && /why === 'embed-timeout' \? stop\(tE\('engine\.act\.embed\.timeout'/.test(src),
+    'the core: a refused or graded outside page stops without Restart; offline or not loaded stops with Restart (retry)'); }
+ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', (?:\*\('engine\/src\/' \+ f for f in P6_ENGINES\), )?'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js'), c = html.indexOf('engine/src/36_engine_circuit.js');
-  ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'\)\]   # NoemaExpr and NoemaCircuit beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
+  ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'(?:, \*P6_ENGINES)?\)\]   # NoemaExpr, NoemaCircuit (and the P6 engines )?beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n(?:\{p6_scripts\})?<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
     'the shell, the site and the one-file bundle load NoemaExpr and NoemaCircuit before packcheck.js (a sim-spec pack imported before any subject is open is checked, not refused)'); }
 { // activity_new.py --runtime sim-spec@1 starts from rc-lowpass
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
@@ -461,6 +662,20 @@ ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', 'engine
   const t1 = fs.existsSync(path.join(d, 'activities', 'my-bench', 'tests.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'my-bench', 'tests.json'), 'utf8')) : {};
   ok(r1.status === 0 && r2.status === 0 && r3.status !== 0 && reg?.items?.length === 2 && reg.items.every(x => x.runtime === 'sim-spec@1') && sp1.engine === 'circuit-mna@1' && sp1.bench && t1.cases?.[0]?.steps?.[0]?.measure && fs.existsSync(path.join(d, 'activities', 'my-rc', 'strings.ru.json')),
     'activity_new.py --from led-bench / rc-transient copies a circuit reference (a bench with its measure/diagnose tests); a runtime that does not fit is refused');
+}
+{ // activity_new.py --from offers every reference activity: the P6 engines' and wasm-oscillator
+  const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
+  const sc = path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py');
+  const want = { heatsink: 'thermal@1', 'pid-tune': 'pid@1', 'lora-link': 'rf@1', 'sensor-node': 'twin@1', 'wasm-oscillator': 'wasm@1' };
+  const rs = Object.keys(want).map(r => cp.spawnSync('python3', [sc, d, 'my-' + r, '--from', r], { encoding: 'utf8' }));
+  const rj = f => fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {};
+  const reg = rj(path.join(d, 'activities', 'activities.json'));
+  const good = Object.entries(want).every(([r, eng]) => { const a = path.join(d, 'activities', 'my-' + r), sp = rj(path.join(a, 'spec.json')), t = rj(path.join(a, 'tests.json')).cases || [];
+    return ('engine' in sp ? sp.engine : 'wasm@1') === eng && fs.existsSync(path.join(a, 'strings.el.json')) && fs.existsSync(path.join(d, 'media', `my-${r}-still.svg`))
+      && t.length === 2 && t[0].expect?.passed === true && t[1].expect?.passed === false && t.every(c => c.exercise === 'chNN-eNNN' && /^TODO /.test(c.name)); });
+  const usage = cp.spawnSync('python3', [sc], { encoding: 'utf8' }).stdout;
+  ok(rs.every(r => r.status === 0) && reg.items?.length === 5 && good && Object.keys(want).every(r => usage.includes(r)),
+    'activity_new.py --from heatsink / pid-tune / lora-link / sensor-node / wasm-oscillator copies each reference (its engine, strings, fallback, two TODO cases from its own tests); the usage names them');
 }
 { // py-module@1 in the app: the runtime is drawn by the sim-spec view (no pack HTML), the runner stays sandboxed, Python never in the bundle
   const ui = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js'), 'utf8'), rt = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py.js'), 'utf8');

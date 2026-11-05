@@ -1,0 +1,45 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "twin@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "daysMin": 365, "perDayMin": 24 },
+ "params": [
+  { "id": "period", "kind": "slider", "label": "period", "min": 30, "max": 7200, "scale": "log", "default": 60, "unit": "s", "format": "si" }
+ ],
+ "derived": [
+  { "id": "perDay", "expr": "86400 / period" }
+ ],
+ "model": {
+  "device": {
+   "format": "noema.twin/v1",
+   "battery": { "capacity": 600, "chem": "li-ion", "cells": 1, "selfDischarge": 0.02 },
+   "power": { "sleep": 0.005, "active": 5, "tx": 40, "rx": 12 },
+   "schedule": { "period": 60, "sense": 0.05, "txEvery": 1, "ack": true, "rxWindow": 1, "retries": 2 },
+   "sensors": [ { "id": "temp", "base": 21, "amp": 3, "noise": 0.2 } ],
+   "radio": { "tech": "lora", "sf": 9, "f": 868e6, "power": 14, "gain": 2, "d": 2000, "n": 2.7, "sigma": 4, "payload": 12 },
+   "brownout": { "v": 2.9 },
+   "sim": { "duration": 2592000, "samples": 300, "trace": 1300 }
+  },
+  "bindings": [ { "field": "schedule.period", "expr": "period" } ]
+ },
+ "outputs": [
+  { "id": "life", "kind": "scalar", "of": "lifeSim" },
+  { "id": "iAvg", "kind": "scalar" },
+  { "id": "ratio", "kind": "scalar", "of": "deliveryRatio" },
+  { "id": "tt", "kind": "series", "of": "t" },
+  { "id": "soc", "kind": "series" }
+ ],
+ "readouts": [
+  { "label": "perDayLabel", "expr": "perDay", "format": "fixed", "digits": 1 },
+  { "label": "iAvgLabel", "expr": "iAvg / 1000", "unit": "A", "format": "si", "digits": 3 },
+  { "label": "lifeLabel", "expr": "round(life / 86400)", "digits": 4 },
+  { "label": "ratioLabel", "expr": "100 * ratio", "unit": "%", "format": "fixed", "digits": 1 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "tt", "label": "time", "unit": "s", "format": "si" },
+    "y": { "min": 0, "max": 1, "label": "soc" },
+    "series": [ { "y": "soc", "label": "socLine" } ] }
+ ]
+}

@@ -4,7 +4,10 @@ An **activity** is a small interactive program inside a pack: an explorer in the
 or a graded **sim** exercise (reach a goal in the activity; the activity reports whether it was reached, or the app checks it).
 The decisions and the spikes behind this page are in `docs/adr/001-interactive-activities.md`. How to write one well:
 `docs/INTERACTIVE_AUTHORING.md`. The formulas of `sim-spec@1`: `docs/INTERACTIVE_SIMEXPR.md`. The circuit engine and the
-fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`. H5P packages (`h5p@1`): `docs/INTERACTIVE_H5P.md`.
+fault-finding bench: `docs/INTERACTIVE_CIRCUIT.md`. The heat, control-loop, radio and IoT-twin engines:
+`docs/INTERACTIVE_ENGINES.md`. Python (`py-module@1`): `docs/INTERACTIVE_PYTHON.md`. H5P packages (`h5p@1`):
+`docs/INTERACTIVE_H5P.md`. WebAssembly modules: `docs/INTERACTIVE_WASM.md`. Outside pages (PhET, GeoGebra, Desmos):
+`docs/INTERACTIVE_EMBED.md`. The learning record export: `docs/INTERACTIVE_XAPI.md`.
 
 Activities are optional. A chapter without them is complete; a chapter with them still needs every rule of
 `tools/CONTENT_SPEC.md` (Q1–Q8). An activity never replaces the theory: the text explains the idea, the activity lets the
@@ -15,11 +18,19 @@ learner try it.
 | runtime | what it is | status |
 |---|---|---|
 | `html-app@1` (tier A) | one self-contained HTML file (inline scripts and styles, pictures as `data:` URIs) in a sandboxed frame | **available** |
-| `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas) and `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7) |
+| `sim-spec@1` (tier B) | a JSON spec (controls, formulas, readouts, plots) run by the app's own trusted engines — no code in the pack (§12) | **available** — engines `formula@1` (formulas), `circuit-mna@1` (circuits, transients and fault-finding benches: §12.6–12.7), `thermal@1` (lumped thermal networks), `pid@1` (control loops), `rf@1` (radio links) and `twin@1` (the digital twin of a battery-powered IoT node, with benches) — `docs/INTERACTIVE_ENGINES.md` |
 | `py-module@1` (tier C) | Python (`main.py`, Pyodide + numpy, scipy; allow-listed extras through micropip) in a sandboxed worker; the app draws a sim-spec@1 spec with Python's outputs (`docs/INTERACTIVE_PYTHON.md`) | **available** on the website, on by default (`NOEMA_CONFIG.activities['py-module@1'] = false` turns it off); 17 MB (numpy) / 37 MB (scipy) once, offline after the first use, never in the one-file bundle or on `file://` |
 | `h5p@1` (tier B) | an ordinary `.h5p` package (quiz, drag and drop, fill in the blanks, mark the words, dialog cards…) played by the app's own H5P player in the same sandbox, no network (docs/INTERACTIVE_H5P.md) | **available** — on by default; the file travels beside the pack |
+| `wasm-module@1` | a precompiled WebAssembly module (C, Rust, AssemblyScript) run in a worker with no network and no imports but a tiny host ABI; shown through a `sim-spec@1` spec with the engine `wasm@1` (`docs/INTERACTIVE_WASM.md`) | **available** (P6) — engine `wasm@1` |
+| `external-embed@1` | an allow-listed page of an outside provider (PhET, GeoGebra, Desmos) in a double sandboxed frame, after a consent card; **explore only**, needs the network (`docs/INTERACTIVE_EMBED.md`) | **opt-in** (P6): off unless `NOEMA_CONFIG.activities['external-embed@1']` is `true`; Falstad, CircuitJS and Wokwi stay refused (pending) |
 
 `make_pack.py` refuses a runtime that this version of the app does not run yet.
+
+**Licence limits of the outside providers** (`external-embed@1`; details and sources in `docs/INTERACTIVE_EMBED.md` §1):
+PhET simulations are CC BY 4.0 — the newer ones CC BY-NC, so check each sim; GeoGebra is free for **non-commercial** use only;
+the Desmos Terms of Service **limit commercial use**. Every embed carries its credit and licence at the point of use, and the
+validators warn (`license-nc`) on every non-commercial licence: a pack used commercially needs the provider's permission.
+H5P content imported with `h5p_import.py` keeps each package's own licence in `cite` (`docs/INTERACTIVE_AUTHORING.md`).
 
 ## 2. Files in the subject folder
 
@@ -30,6 +41,7 @@ activities/
     ├── app.html                    the bundle (html-app@1): everything inline, at most 512 KB (aim for <= 256 KB)
     ├── spec.json                   or the spec (sim-spec@1): data only, at most 64 KB (§12)
     ├── main.py                     or the Python (py-module@1, at most 256 KB) + its spec.json (docs/INTERACTIVE_PYTHON.md)
+    ├── module.wasm                 or a WebAssembly module (wasm-module@1, at most 2 MiB; + spec.json): docs/INTERACTIVE_WASM.md
     ├── strings.en.json             the activity's words, one table per language: {"key": "text with {vars}"}
     ├── strings.el.json
     ├── strings.ru.json            (every language the pack is read in: its own + each translation)
@@ -46,7 +58,9 @@ and `counts.activities`. An `h5p@1` package is **not** inline: `item.h5p` travel
 each `content.<locale>.json` inline under `h5pByLocale` (docs/INTERACTIVE_H5P.md §1–§2). `unpack.py` gives the folder back. `python3 activity_new.py <subject-dir> <id>` starts one from the
 reference activity alias-lab; `--runtime sim-spec@1` from rc-lowpass (an RC low-pass filter); `--from py-filter` from the Python
 reference (py-module@1: `main.py` inline as `python` with its `sha256` and `bytes`, its spec as `spec`, `runtime:py-module@1` in
-`pack.requires`); `--runtime h5p@1` from planets-quiz, or `--runtime h5p@1 --from FILE.h5p` from your own package.
+`pack.requires`); `--runtime h5p@1` from planets-quiz, or `--runtime h5p@1 --from FILE.h5p` from your own package; `--from wasm-oscillator`
+(`--runtime wasm-module@1`) from a damped oscillator computed by a WebAssembly module; `--from` rc-transient, led-bench, heatsink,
+pid-tune, lora-link or sensor-node from the other references of `tools/activities_examples/`.
 
 ## 3. The registry — `activities/activities.json`
 
@@ -176,9 +190,10 @@ from 320 px wide with no horizontal scroll (docs/UI_MAP.md "Small screens"), tou
 
 ## 10. Offline
 
-`html-app@1` and `sim-spec@1` work offline (everything is inline; the engines are part of the app). `h5p@1` works offline too:
+`html-app@1`, `sim-spec@1` and `wasm-module@1` work offline (everything is inline; the engines are part of the app). `h5p@1` works offline too:
 the H5P player is part of the app, and the `.h5p` file is kept on the device with the pack (checked by its sha256); in the one-file
-bundle an item up to 2 MB is inline and a bigger one shows its fallback. `py-module@1` needs the
+bundle an item up to 2 MB is inline and a bigger one shows its fallback. `external-embed@1` needs the network every time: offline,
+or when the page does not load in 20 s, the block shows its fallback with Restart (= try again). `py-module@1` needs the
 Pyodide files (about 17 MB with numpy, 37 MB with scipy) from the website the first time; a service worker
 (`engine/pyodide-sw.js`) then keeps them on the device (`navigator.storage.persist()` is asked), as are the allow-listed extras.
 Settings › Data and sync (classic: Account › Backup) has "Prepare Python for offline" with progress, the size and what is cached.
@@ -291,7 +306,8 @@ check a `label` that names the condition, never the answer. Only runtimes that e
 ### 12.6 Engines — `ACT.registerEngine`
 
 `formula@1` (built in) has no model: the derived values are the model. Other engines (the circuit engine `circuit-mna@1`,
-`docs/INTERACTIVE_CIRCUIT.md`) are trusted app code, registered with
+`docs/INTERACTIVE_CIRCUIT.md`; `thermal@1`, `pid@1`, `rf@1` and `twin@1`, `docs/INTERACTIVE_ENGINES.md`; `wasm@1`, which runs a pack's `wasm-module@1` item in a worker, `docs/INTERACTIVE_WASM.md` §2) are trusted app code,
+registered with
 
 ```js
 ACT.registerEngine({ id: 'name@1',
@@ -313,14 +329,19 @@ lets an engine evaluate the spec's own expressions (with the app's NoemaExpr, `c
 validators know the same list of engines as the app (`ENGINES` in `tools/activities.py` and `engine/packcheck.js`); `make_pack.py`
 adds `engine:<id>` to `pack.requires`. `circuit-mna@1` validates `model` (the netlist with the engine's own `check()`, bindings to
 real parts and properties, the transient's step budget), the outputs (nodes and parts of the netlist) and the bench.
+`thermal@1`, `pid@1`, `rf@1` and `twin@1` validate `model` and the outputs with their own `checkSpec` (JS, loaded beside
+`packcheck.js`) and `check_spec` (Python, `tools/{thermal,pid,rf,twin}.py`), with the same messages; the validators then check
+every expression of the model (each binding's `expr`; for `thermal@1` and `pid@1` also the transient's `tEnd` / `dt` and every
+output's `at`) as formulas over the spec's names (`docs/INTERACTIVE_ENGINES.md` §1).
 
 ### 12.7 Fault-finding benches — `spec.bench`
 
-An engine with `bench: true` (`circuit-mna@1`) can run a **bench**: a virtual device with one hidden fault. The app renders the
+An engine with `bench: true` (`circuit-mna@1`, `twin@1`) can run a **bench**: a virtual device with one hidden fault. The app renders the
 instruments (multimeter V / I / R, oscilloscope, logic analyser) with their leads on the declared probe points, a Measure button
 (an optional budget), the **measurement log** (each reading also an event `measure`), the instrument's face (the meter's number,
 the scope trace, the logic trace) and the diagnosis — a list of options in the string tables (event `diagnose`). The full format
-is `docs/INTERACTIVE_CIRCUIT.md` §2; in short:
+is `docs/INTERACTIVE_CIRCUIT.md` §2 (the twin's points, its `log` and `rssi` instruments and its faults:
+`docs/INTERACTIVE_ENGINES.md` §5.3); in short:
 
 ```json
 "bench": { "faults": [{"id": "rOpen", "apply": [{"element": "R1", "kind": "open"}]}, …],

@@ -1224,6 +1224,18 @@ body.vx-noscroll{overflow:hidden}
 .nb-other ul{margin:4px 0 0;padding-inline-start:18px}
 .nb-other small{color:var(--ink3)}
 
+/* ---- 45_activity_embed.css ---- */
+/* external-embed@1 (engine/src/45_activity_embed.js): the quiet consent card, the provider's frame and its credit line */
+.act-embed { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.act-embed-card { margin: auto; max-width: 520px; padding: 16px; display: flex; flex-direction: column; gap: 8px; overflow: auto; color: var(--ink2); }
+.act-embed-card p { margin: 0; overflow-wrap: anywhere; }
+.act-embed-title { color: var(--ink); font-weight: 600; }
+.act-embed-open { align-self: flex-start; min-height: 36px; }
+.act-embed-frame { flex: 1 1 auto; min-height: 0; width: 100%; border: 0; display: block; }
+.act-embed-credit { margin: 0; padding: 4px 10px; font-size: 0.8em; color: var(--ink3); border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.act-embed-card .act-embed-credit { padding: 0; border: 0; }
+.act-embed-credit a { color: inherit; }
+
 /* ---- 95_shell.css ---- */
 /* =====================================================================================
    The shell (engine/shell.js) and the calm restyle of every engine screen inside it (body.ns-on).

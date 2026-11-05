@@ -1,0 +1,15 @@
+{
+ "title": "How often should the sensor wake up?",
+ "intro": "A temperature sensor runs on a 600 mAh lithium cell. Each time it wakes up it measures for 50 ms, sends one LoRa packet (40 mA while it transmits) and listens for 1 s for the acknowledgement (12 mA); in between it sleeps at 5 µA, and the cell also loses 2 % of its charge a month by itself. Choose the wake period: the battery must last at least a year, and the server must get at least 24 readings a day.",
+ "period": "Wake period",
+ "perDayLabel": "Readings a day",
+ "iAvgLabel": "Average current",
+ "lifeLabel": "Battery life in days",
+ "ratioLabel": "Packets delivered",
+ "plotTitle": "Battery charge over the first 30 days",
+ "time": "Time",
+ "soc": "State of charge (0–1)",
+ "socLine": "charge",
+ "checkLife": "The battery lasts at least 365 days.",
+ "checkRate": "The server gets at least 24 readings a day."
+}

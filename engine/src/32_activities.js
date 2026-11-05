@@ -210,9 +210,14 @@ const ACT = (() => {
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
       }
     }
+    // a runtime that first shows a card and no frame (external-embed@1 before consent) does not count toward the live activities
+    // until it says so (ctx.onLive): a card holds no slot and parks nothing (docs/INTERACTIVE_EMBED.md)
+    const waits = () => { try { return !!RUNTIMES[a.runtime].waits?.(a); } catch (e) { return false; } };
+    function goLive() { if (sess.destroyed || !sess.port || LIVE.includes(sess)) return; makeRoom(); LIVE.push(sess); }
     function start() {
       if (sess.destroyed) return;
-      teardown(); makeRoom();
+      const waiting = waits();
+      teardown(); if (!waiting) makeRoom();
       box.classList.remove('act-fallback'); box.classList.add('act-running'); note.textContent = tE('engine.act.loading');
       setBar(btn('↻ ' + tE('engine.act.restart'), () => { sess.attemptId = uid(); sess.events = []; sess.result = null; start(); }, 'btn ghost small'),
         document.fullscreenEnabled ? btn('⛶ ' + tE('engine.act.fullscreen'), () => { if (document.fullscreenElement) document.exitFullscreen(); else root.requestFullscreen?.().catch(() => { }); }, 'btn ghost small') : null);
@@ -235,12 +240,18 @@ const ACT = (() => {
       sess.misses = 0;
       try {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
+          onLive: () => Promise.resolve().then(goLive),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
           onFail: why => { const own = RUNTIMES[a.runtime].failText?.(why); return own ? stop(own.text, !!own.restart) : why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
-            : why === 'runaway' ? stop(tE('engine.act.stopped')) : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
+            : why === 'runaway' ? stop(tE('engine.act.stopped'))
+            // external-embed@1 (docs/INTERACTIVE_EMBED.md): refused or mounted as an exercise → the fallback for good; offline or not loaded → Restart retries
+            : why === 'embed-refused' || why === 'embed-graded' ? stop(tE('engine.act.embed.refused'), false)
+            : why === 'embed-offline' ? stop(tE('engine.act.embed.offline'))
+            : why === 'embed-timeout' ? stop(tE('engine.act.embed.timeout', { provider: (window.NoemaEmbed?.PROVIDERS || []).find(p => p.id === a.provider)?.name || String(a.provider || '') }))
+            : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
-      LIVE.push(sess);
+      if (!waiting) LIVE.push(sess);
       // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, 34_activity_html.js)
       pingT = setInterval(() => {
         if (!root.isConnected) return destroy();
@@ -264,7 +275,7 @@ const ACT = (() => {
       fallback(''); setBar(btn('▶ ' + tE('engine.act.start'), () => start(), 'btn primary small'));
       io = new IntersectionObserver(es => {
         for (const e of es) {
-          if (e.isIntersecting && !sess.port && !sess.parked && LIVE.length < liveMax()) start();
+          if (e.isIntersecting && !sess.port && !sess.parked && (LIVE.length < liveMax() || waits())) start();
           else if (sess.port && sess.alive) sess.port.send(e.isIntersecting ? 'resume' : 'pause');
         }
       }, { threshold: 0.15 });

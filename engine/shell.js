@@ -46,6 +46,7 @@ window.NoemaShell = (() => {
   const lang = () => window.NoemaI18n ? NoemaI18n.lang(uiPref()) : 'en';
   function tv(m) { let t = TH()?.tutor(m); if (!t) { const n = window.NoemaI18n ? NoemaI18n.t('sh.tutorDefault', null, uiPref()) : 'Tutor'; t = { n, nom: n, acc: n, to: n }; } return { tutor: t.n, tutorAcc: t.acc, tutorTo: t.to, tutorNom: t.nom, Tutor: t.nom ? t.nom[0].toUpperCase() + t.nom.slice(1) : t.n }; }   // i18n-ignore (English only without the i18n runtime)
   const L = (k, v) => window.NoemaI18n ? NoemaI18n.t('sh.' + k, { ...tv(), ...(v || {}) }, uiPref()) : k;
+  const XL = k => window.NoemaI18n ? NoemaI18n.t('engine.xapi.' + k, null, uiPref()) : k;   // the xAPI / cmi5 export's words (the engine's, shared)
   /** A sentence with some of its values in bold (names and titles stay text, never markup) */
   function rich(k, vals) { const names = Object.keys(vals), marks = Object.fromEntries(names.map((n, i) => [n, `\u0001${i}\u0001`])); return L(k, marks).split('\u0001').map((x, i) => i % 2 ? (vals[names[+x]]?.nodeType ? vals[names[+x]] : h('b', {}, vals[names[+x]])) : x); }   // a value that is an element goes in as it is
   const fmtDate = (t, o = { day: 'numeric', month: 'long' }) => { try { return window.NoemaI18n ? NoemaI18n.fmt.date(t, o) : new Date(t).toLocaleDateString(lang(), o); } catch (e) { return new Date(t).toDateString(); } };
@@ -77,7 +78,7 @@ window.NoemaShell = (() => {
 
   /* ---------- the engine of the open subject (engine/src/40_views.js calls attachEngine) ---------- */
   let ENGINE = null;
-  const ENGINE_ROUTES = new Set(['subject', 'ch', 's', 'practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'new', 'ex']);
+  const ENGINE_ROUTES = new Set(['subject', 'ch', 's', 'practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'new', 'ex', 'author']);   // #/author: the activity author (its preview is the engine's sim-spec@1 runtime)
   const subjectId = () => N()?.subject?.id || null;
   /** Open a subject (loads its pack: the page reloads) or, when it is open already, go to the place. */
   function open(subj, hash = '#/subject') {
@@ -539,7 +540,25 @@ window.NoemaShell = (() => {
       { label: L('editSubject'), sub: L('editSubjectSub'), icon: 'edit', run: () => N().editSubject(s, { onChange: refresh }) },
       own ? { label: L('shareSubject'), sub: L('shareSubjectSub'), icon: 'share', run: () => N().share(s) } : null,
       { label: L('exportPackage'), sub: L('exportPackageSub'), icon: 'download', run: async () => { try { const p = await N().loadSubject(acc(), s.id); await N().exportPackage(acc(), p); } catch (e) { toast(e.message, 4000); } } },
+      window.NoemaXAPI ? { label: XL('export'), sub: XL('exportSub'), icon: 'download', run: () => exportRecord(s, 'xapi') } : null,
+      window.NoemaXAPI ? { label: XL('cmi5'), sub: XL('cmi5Sub'), icon: 'download', run: () => exportRecord(s, 'cmi5') } : null,
       hide ? { label: L(hidden ? 'subjShow' : 'subjHide'), icon: 'eye', run: () => { const l = new Set(settings().hiddenSubjects || []); hidden ? l.delete(s.id) : l.add(s.id); TH().putSettings({ hiddenSubjects: [...l] }); subjCache = null; refresh(); } } : null];
+  }
+  /** a subject's ⋮ › the learning record (xAPI, from the subject's saved state) or the course package for an LMS (cmi5) — the same files
+      as the subject's own ⋮ in the engine (NoemaXAPI.subjectRecord / subjectCmi5, engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) */
+  async function exportRecord(s, kind) {
+    try {
+      const p = await N().loadSubject(acc(), s.id), subj = { ...(p?.subject || {}), id: s.id, title: p?.subject?.title || s.title }, chapters = p?.chapters || [], site = N().config?.siteUrl;
+      let name, blob;
+      if (kind === 'cmi5') { const r = NoemaXAPI.subjectCmi5({ pack: subj, chapters, site }); name = r.name; blob = await NoemaXAPI.zip(r.files); }
+      else {
+        const st = stateOf(s.id) || {}, r = NoemaXAPI.subjectRecord({ att: st.att, res: st.res, pack: subj, chapters, accountId: acc(), site, now: Date.now() });
+        if (!r) { toast(XL('none'), 3500); return; }
+        name = r.name; blob = new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' });
+      }
+      const u = URL.createObjectURL(blob), a = h('a', { href: u, download: name }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 10000);
+      toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
+    } catch (e) { toast('⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(e) : e.message), 4000); }
   }
   const subjectPct = s => { const st = stateOf(s.id); if (!st || !s.counts?.exercises) return 0; return Math.min(1, Object.values(st.res || {}).filter(r => r.ok > 0).length / s.counts.exercises); };
   function importFile() {
@@ -911,7 +930,7 @@ window.NoemaShell = (() => {
   function fitRow(...kids) {
     const r = h('div', { class: 'ns-fitrow' }, ...kids); let w = -1;
     const fit = () => { if (!r.isConnected || r.clientWidth === w) return; w = r.clientWidth; r.classList.remove('stack'); if (r.scrollWidth > r.clientWidth + 1) r.classList.add('stack'); };
-    if (window.ResizeObserver) new ResizeObserver(fit).observe(r); requestAnimationFrame(fit);
+    if (window.ResizeObserver) new ResizeObserver(() => requestAnimationFrame(fit)).observe(r); requestAnimationFrame(fit);   // (next frame: a class change inside the callback would loop the observer)
     return r;
   }
   /** A short label, its explanation in a quiet bubble on hover or focus (kept inside the screen) */

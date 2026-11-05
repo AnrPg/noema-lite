@@ -1,0 +1,15 @@
+{
+ "title": "À quelle fréquence le capteur doit-il se réveiller ?",
+ "intro": "Un capteur de température fonctionne sur une pile au lithium de 600 mAh. À chaque réveil, il mesure pendant 50 ms, envoie un paquet LoRa (40 mA pendant l’émission) et écoute l’accusé de réception pendant 1 s (12 mA) ; entre deux réveils il dort à 5 µA, et la pile perd en plus 2 % de sa charge par mois d’elle-même. Choisissez la période de réveil : la pile doit tenir au moins un an et le serveur doit recevoir au moins 24 mesures par jour.",
+ "period": "Période de réveil",
+ "perDayLabel": "Mesures par jour",
+ "iAvgLabel": "Courant moyen",
+ "lifeLabel": "Autonomie en jours",
+ "ratioLabel": "Paquets reçus",
+ "plotTitle": "La charge de la pile pendant les 30 premiers jours",
+ "time": "Temps",
+ "soc": "État de charge (0–1)",
+ "socLine": "charge",
+ "checkLife": "La pile tient au moins 365 jours.",
+ "checkRate": "Le serveur reçoit au moins 24 mesures par jour."
+}

@@ -388,10 +388,15 @@
       [/\btime\.sleep\s*\(/, 'time.sleep(): a step blocks the learner while it sleeps; return at once'],
     ],
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
-    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1']),   // the same list in tools/activities.py
+    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1', 'thermal@1', 'pid@1', 'rf@1', 'twin@1']),   // the same list in tools/activities.py
     SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
     // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
-    CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
+    CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1', 'twin@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
+    // the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (loaded beside this file; the Python twins in tools/)
+    P6: { 'thermal@1': ['NoemaThermal', '39_engine_thermal.js'], 'pid@1': ['NoemaPID', '40_engine_pid.js'], 'rf@1': ['NoemaRF', '41_engine_rf.js'], 'twin@1': ['NoemaTwin', '42_engine_twin.js'] },
+    P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
+    // twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
+    TWIN: 'twin@1', TWIN_POINTS: ['vbat', 'vload', 'i', 'gnd'], TWIN_INSTRUMENTS: ['V', 'I', 'scope', 'log', 'rssi'],
     MODEL_KEYS: ['netlist', 'bindings', 'transient', 'noise'], OUT_KEYS: ['id', 'kind', 'node', 'branch', 'time', 'probe', 'at', 'stat'], STATS: ['final', 'min', 'max', 'mean', 'pp', 'rms'],
     WAVES: { pulse: ['v1', 'v2', 'delay', 'rise', 'fall', 'width', 'period'], sine: ['offset', 'amp', 'freq', 'phase', 'delay'], pwm: ['v', 'freq', 'duty', 'low', 'delay'] },
     BENCH_KEYS: ['faults', 'points', 'instruments', 'diagnosis', 'budget'], INSTRUMENTS: ['V', 'I', 'R', 'scope', 'logic'],
@@ -424,6 +429,24 @@
       [/new\s+Array\s*\(\s*\d{7,}/i, 'a huge array'],
     ],
   };
+  // P6 (docs/adr/001 D12): a precompiled WebAssembly module (its own spec, or the model of a sim-spec@1 spec) and an allow-listed outside page
+  Object.assign(ACT, { WASM: 'wasm-module@1', WASM_ENGINE: 'wasm@1', EMBED: 'external-embed@1' });
+  ACT.RUNTIMES.add(ACT.WASM); ACT.RUNTIMES.add(ACT.EMBED);
+  ACT.CHECKS_RUNTIMES.add(ACT.WASM);   // a module with its own spec shows its values like sim-spec@1
+  ACT.ENGINES.add(ACT.WASM_ENGINE);
+  const WK = () => root.NoemaWasm || null;    // engine/src/44_activity_wasm.js, loaded beside this file (checkItem, checkModel: the twins of tools/wasm_check.py)
+  const EK = () => root.NoemaEmbed || null;   // engine/src/45_activity_embed.js, loaded beside this file (check, PROVIDERS: the twins of tools/embed_check.py)
+  const specObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
+  /** the spec a wasm-module@1 item shows: its own spec, run by wasm@1 on the item itself (as the runtime completes it) */
+  function ownSpec(a) {
+    const s = a && a.spec; if (!specObj(s)) return s;
+    return { ...s, engine: ACT.WASM_ENGINE, model: { ...(specObj(s.model) ? s.model : {}), module: a.id } };
+  }
+  /** the spec an activity shows (sim-spec@1: its spec; wasm-module@1: its own spec, completed) or null */
+  const specOf = a => !a ? null : ACT.SPEC_RUNTIMES.has(a.runtime) ? (specObj(a.spec) ? a.spec : null) : a.runtime === ACT.WASM ? (specObj(a.spec) ? ownSpec(a) : null) : null;
+  /** a wasm-module@1 item without its own spec: a module for a sim-spec@1 spec, nothing a block or an exercise can show */
+  const showsNothing = a => !!a && a.runtime === ACT.WASM && !specObj(a.spec);
+  const SHOWS_NOTHING = `is a ${ACT.WASM} module without its own spec: show it through a sim-spec@1 spec (engine ${ACT.WASM_ENGINE}, model.module) or give it a spec`;
   const utf8 = t => typeof TextEncoder !== 'undefined' ? new TextEncoder().encode(t).length : unescape(encodeURIComponent(t)).length;
   function visibleText(html) {
     let body = html.includes('<body') ? html.split('<body').slice(1).join('<body') : html;
@@ -563,8 +586,31 @@
       if ((o.kind === 'series' || at || st) && !isObj(m.transient)) E.push(`${w} needs model.transient {tEnd, dt?}`);
     });
   }
-  function checkBench(spec, names, seen, E, key) {
-    const b = spec.bench, L = ACT.BENCH_LIM, c = circuitOf(spec);
+  /* ---------- the P6 engines thermal@1, pid@1, rf@1, twin@1 (docs/INTERACTIVE_ENGINES.md): the engine's own checkSpec, then every expression of
+     its model through NoemaExpr — the SAME rules as tools/activities.py check_engine (the engines' Python twins: tools/thermal.py, pid.py, rf.py, twin.py) ---------- */
+  /** [source, where] of each expression of a P6 model: the bindings; for thermal@1 and pid@1 also the transient's times and the outputs' at */
+  function engineExprs(spec, eng) {
+    const m = isObj(spec.model) ? spec.model : {}, out = [], timed = ACT.P6_TIMED.includes(eng);
+    const add = (v, w) => { if (typeof v === 'string' && v.trim()) out.push([v, w]); };   // (an empty one is the engine's own message)
+    list(m.bindings).forEach((b, i) => { if (isObj(b)) add(b.expr, `spec.model.bindings[${i}].expr`); });
+    if (timed && isObj(m.transient)) for (const k of ['tEnd', 'dt']) add(m.transient[k], `spec.model.transient.${k}`);
+    if (timed) list(spec.outputs).forEach((o, i) => { if (isObj(o)) add(o.at, `spec.outputs[${i}].at`); });
+    return out;
+  }
+  function checkEngine(spec, eng, names, E) {
+    const [g, f] = ACT.P6[eng], M = root[g] || null;
+    if (!M) { E.push(`spec.model: the ${eng} checker (${g}, engine/src/${f}) is not loaded here`); return; }
+    for (const p of M.checkSpec(spec)) if (p.level === 'error') E.push(`spec${p.path ? '.' + p.path : ''}: ${p.msg}`);
+    for (const [src, w] of engineExprs(spec, eng)) { const m = exprProblem(src, names, w); if (m) E.push(m); }
+  }
+  /** twin@1: the device of a spec without errors, or null */
+  function twinOf(spec) {
+    const d = isObj(spec?.model) ? spec.model.device : null, T = root.NoemaTwin;
+    return T && isObj(d) && !T.check(d).some(p => p.level === 'error') ? d : null;
+  }
+  function checkBench(spec, names, seen, E, key, eng) {
+    const b = spec.bench, L = ACT.BENCH_LIM, tw = eng === ACT.TWIN, c = tw ? null : circuitOf(spec), dev = tw ? twinOf(spec) : null;
+    const KINDS = tw ? ACT.TWIN_INSTRUMENTS : ACT.INSTRUMENTS;
     if (!isObj(b)) { E.push('spec.bench must be an object {faults, points, instruments, diagnosis, budget?}'); return; }
     unknownKeys(b, ACT.BENCH_KEYS, 'spec.bench', E);
     for (const n of ACT.BENCH_NAMES) if (seen.has(n)) E.push(`spec: the name ${n} belongs to the bench (its values: ${ACT.BENCH_NAMES.join(', ')})`);
@@ -585,27 +631,34 @@
       const w = `spec.bench.faults[${i}]`;
       if (!isObj(f)) { E.push(`${w} must be an object {id, apply}`); return; }
       unknownKeys(f, ['id', 'apply'], w, E);
-      if (!(Array.isArray(f.apply) && f.apply.length <= L.apply)) { E.push(`${w}.apply must be a list of at most ${L.apply} changes to the circuit ([] = a healthy device)`); return; }
+      if (!(Array.isArray(f.apply) && f.apply.length <= L.apply)) { E.push(`${w}.apply must be a list of at most ${L.apply} changes to the ${tw ? 'device' : 'circuit'} ([] = a healthy device)`); return; }
       if (c) for (const p of CK().checkFaults(c.nl, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
+      if (dev) for (const p of root.NoemaTwin.checkFaults(dev, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
     });
     const ps = b.points;
     if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.points)) E.push(`spec.bench.points must be a list of 1–${L.points} probe points {id, at, label}`);
-    const pids = ids(ps, 'spec.bench.points', 'point');
+    const pids = ids(ps, 'spec.bench.points', 'point'), atOf = new Map();
     list(ps).forEach((p, i) => {
       const w = `spec.bench.points[${i}]`;
       if (!isObj(p)) { E.push(`${w} must be an object {id, at, label}`); return; }
       unknownKeys(p, ['id', 'at', 'label'], w, E);
+      if (typeof p.id === 'string' && !atOf.has(p.id)) atOf.set(p.id, p.at);
       if (c && !endpointOk(c, p.at)) E.push(`${w}.at must be a node, a test point, gnd or a pin such as @R1.0 of the netlist`);
+      if (tw && !ACT.TWIN_POINTS.includes(p.at)) E.push(`${w}.at is one of ${ACT.TWIN_POINTS.join(', ')} (the battery, the battery under load, the supply current, the ground)`);
       key(p.label, w + '.label', true);
     });
     const is = b.instruments, kinds = [];
     if (!(Array.isArray(is) && is.length >= 1 && is.length <= L.instruments)) E.push(`spec.bench.instruments must be a list of 1–${L.instruments} instruments {kind, …}`);
     list(is).forEach((x, i) => {
       const w = `spec.bench.instruments[${i}]`;
-      if (!(isObj(x) && ACT.INSTRUMENTS.includes(x.kind))) { E.push(`${w}.kind is one of ${ACT.INSTRUMENTS.join(', ')}`); return; }
+      if (!(isObj(x) && KINDS.includes(x.kind))) { E.push(`${w}.kind is one of ${KINDS.join(', ')}`); return; }
       if (kinds.includes(x.kind)) E.push(`${w}: the instrument ${x.kind} is listed twice`);
       kinds.push(x.kind);
       unknownKeys(x, ACT.INST_KEYS, w, E);
+      if (x.kind === 'log' || x.kind === 'rssi') {   // twin@1: the event log and the radio's RSSI read the device, not a point
+        if (Object.keys(x).some(k => k !== 'kind' && ACT.INST_KEYS.includes(k))) E.push(`${w}: the ${x.kind === 'log' ? 'event log' : 'RSSI reading'} has only a kind`);
+        return;
+      }
       const scope = x.kind === 'scope' || x.kind === 'logic';
       if (x.kind === 'I') {
         if ('points' in x) E.push(`${w}: the ammeter reads parts (parts), not points`);
@@ -616,6 +669,7 @@
           if (!isObj(q)) { E.push(`${wq} must be an object {element, label, pin?}`); return; }
           unknownKeys(q, ['element', 'label', 'pin'], wq, E);
           if (c && !probeOk(c, { kind: 'I', element: q.element, pin: q.pin })) E.push(`${wq}: element must be a part of the netlist (and pin one of its pins)`);
+          if (tw && !(q.element === 'battery' && q.pin === undefined)) E.push(`${wq}: element must be battery (the twin's ammeter reads the supply current), without pin`);
           key(q.label, wq + '.label', true);
         });
       } else {
@@ -623,6 +677,11 @@
         const pts = x.points;
         if (pts !== undefined && !(Array.isArray(pts) && pts.length >= 1 && pts.every(q => typeof q === 'string' && pids.includes(q)))) E.push(`${w}.points must be ids of spec.bench.points`);
         if ((x.kind === 'V' || x.kind === 'R') && (Array.isArray(pts) ? pts.length : pids.length) < 2) E.push(`${w}: a meter needs two points to put its leads on`);
+        if (tw) {
+          const on = (Array.isArray(pts) ? pts : pids).filter(q => typeof q === 'string' && pids.includes(q)).map(q => atOf.get(q));
+          if (x.kind === 'V' && on.some(a => a === 'i')) E.push(`${w}: the twin's voltmeter reads vbat or vload against gnd (list its points: not the current i)`);
+          if (x.kind === 'scope' && on.some(a => a !== 'i')) E.push(`${w}: the twin's oscilloscope shows the supply current (list its points: only points at i)`);
+        }
       }
       for (const k of ['tEnd', 'dt', 'tStart', 'threshold']) if (k in x && !(scope && (k !== 'threshold' || x.kind === 'logic'))) E.push(`${w}.${k} belongs to ${k === 'threshold' ? 'the logic analyser' : 'the oscilloscope and the logic analyser'}`);
       if (scope) {
@@ -659,9 +718,11 @@
   }
   /** checkSimSpec(spec, tables?, engines?, opts?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
       (default ACT.ENGINES; the app passes the engines it has registered). opts.python: the spec of a py-module@1 activity (its outputs
-      come from Python's step(): no engine, no model, no bench, at least one output). The same rules as tools/activities.py check_spec. */
+      come from Python's step(): no engine, no model, no bench, at least one output). opts.items: {id: item} of the pack (a wasm@1 model
+      names its module there; none = the model is not checked here, the engine's own check does it in the app). The same rules as
+      tools/activities.py check_spec. */
   function checkSimSpec(spec, tables, engines, opts) {
-    const py = !!(opts && opts.python);
+    const py = !!(opts && opts.python), items = opts && isObj(opts.items) ? opts.items : null;
     const E = [], L = ACT.SPEC_LIM;
     if (!isObj(spec)) return ['spec: a JSON object is required (activities/<id>/spec.json)'];
     if (utf8(JSON.stringify(spec)) > L.bytes) E.push(`spec: at most ${L.bytes / 1024} KB`);
@@ -795,9 +856,11 @@
       });
     });
     if (eng === ACT.CIRCUIT) checkCircuit(spec, inNames, E);
+    else if (typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.P6, eng)) checkEngine(spec, eng, inNames, E);
+    if (eng === ACT.WASM_ENGINE && items) { if (!WK()) E.push('spec.model: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here'); else E.push(...WK().checkModel(spec, items)); }
     if (spec.bench != null) {
       if (!ACT.BENCH_ENGINES.has(eng)) E.push(`spec.bench needs an engine that can take measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);
-      else checkBench(spec, inNames, seen, E, key);
+      else checkBench(spec, inNames, seen, E, key, eng);
     }
     if (tables && Object.keys(tables).length) for (const k of [...keys].sort()) {
       const miss = Object.keys(tables).filter(l => isObj(tables[l]) && !Object.prototype.hasOwnProperty.call(tables[l], k)).sort();
@@ -809,12 +872,13 @@
   function needRequires(items) {
     items = items.filter(isObj); if (!items.length) return [];
     const rts = [...new Set(items.map(a => a.runtime).filter(r => typeof r === 'string'))].sort().map(r => 'runtime:' + r);
-    const engs = [...new Set(items.filter(a => a.runtime === 'sim-spec@1' && isObj(a.spec)).map(a => 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE).filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
+    const engs = [...new Set(items.filter(a => (a.runtime === 'sim-spec@1' || a.runtime === ACT.WASM) && isObj(a.spec)).map(a => a.runtime === ACT.WASM ? ACT.WASM_ENGINE : 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE).filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
     return ['activities/v1', ...rts, ...engs];
   }
   function checkBlockAct(b, items) {
     const E = [];
     if (!Object.prototype.hasOwnProperty.call(items, b.activity)) E.push(`interactive: activity ${qv(b.activity)} is not in pack.activities`);
+    else if (showsNothing(items[b.activity])) E.push(`interactive: activity ${b.activity} ${SHOWS_NOTHING}`);
     const hg = b.height; if (hg != null && hg !== 'auto' && !(Number.isInteger(hg) && hg >= 120 && hg <= 2000)) E.push('interactive: height is "auto" or 120–2000 (px)');
     if (b.aspect != null && !(typeof b.aspect === 'string' && /^\d{1,2}:\d{1,2}$/.test(b.aspect))) E.push('interactive: aspect is like "16:9"');
     if (b.caption != null && typeof b.caption !== 'string') E.push('interactive: caption must be a text');
@@ -825,14 +889,19 @@
     const has = Object.prototype.hasOwnProperty.call(items, e.activity);
     if (!has) E.push(`activity ${qv(e.activity)} is not in pack.activities`);
     const a = has && isObj(items[e.activity]) ? items[e.activity] : null, rt = a ? a.runtime : null;
-    const spec = a && ACT.SPEC_RUNTIMES.has(rt) && isObj(a.spec) ? a.spec : null;
+    const spec = specOf(a);
+    if (showsNothing(a)) E.push(`activity ${e.activity} ${SHOWS_NOTHING}`);
+    if (rt === ACT.EMBED) {   // no provider has a result channel (tools/embed_allow.json supportsResult): an outside page is explore only
+      const pv = (EK() ? EK().PROVIDERS : []).find(x => x && x.id === a.provider);
+      if (!(pv && pv.supportsResult === true)) E.push(`sim-embed: activity ${e.activity} is an outside page (explore only): use it in a theory block`);
+    }
     const g = e.grade;
     if (!isObj(g) || !ACT.GRADE_MODES.has(g.mode)) E.push('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)');
     else {
       if (g.pass != null && !(isNum(g.pass) && g.pass > 0 && g.pass <= 1)) E.push('grade.pass must be a number in (0, 1]');
-      if (g.mode === 'reported' && rt === 'sim-spec@1') E.push('a sim-spec@1 activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}');
+      if (g.mode === 'reported' && ACT.CHECKS_RUNTIMES.has(rt) && rt !== ACT.PY) E.push(`a ${rt} activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}`);
       if (g.mode === 'checks') {
-        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1); ${rt} reports its own result: use "reported"`);
+        if (rt != null && !ACT.CHECKS_RUNTIMES.has(rt)) E.push(`grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1, wasm-module@1); ${rt} reports its own result: use "reported"`);
         const cs = g.checks;
         if (!(Array.isArray(cs) && cs.length >= 1 && cs.length <= ACT.SPEC_LIM.checks)) E.push(`grade.checks must be a list of 1–${ACT.SPEC_LIM.checks} checks {expr, label?, weight?}`);
         else {
@@ -936,7 +1005,8 @@
   function checkActivities(p, translations) {
     const E = [], W = [], reg = p?.activities, media = p?.media || {}, own = p?.subject?.language || 'en';
     const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
-    const items = {};
+    const items = {}, every = {};   // (a wasm@1 spec names a module item)
+    for (const x of (reg && Array.isArray(reg.items) ? reg.items : [])) if (x && typeof x === 'object' && typeof x.id === 'string') every[x.id] = x;
     if (reg != null) {
       if (typeof reg !== 'object' || Array.isArray(reg) || reg.format !== ACT.FORMAT) E.push(`activities: format must be "${ACT.FORMAT}"`);
       for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) {
@@ -962,7 +1032,7 @@
           }
         } else if (rt === 'sim-spec@1') {
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
-          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null).map(m => `${w}: ${m}`));
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { items: every }).map(m => `${w}: ${m}`));
         } else if (rt === ACT.PY) {
           const pk = a.packages == null ? [] : a.packages, allowed = [...ACT.PY_BASE, ...ACT.PY_EXTRAS];
           if (!(Array.isArray(pk) && pk.length <= ACT.PY_PACKAGES_MAX && pk.every(x => typeof x === 'string'))) E.push(`${w}: packages must be a list of names (${allowed.join(', ')})`);
@@ -981,6 +1051,18 @@
           }
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json: the controls, readouts and plots the app draws) is missing`);
           else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { python: true }).map(m => `${w}: ${m}`));
+        } else if (rt === ACT.WASM) {   // the module (size, sha256, imports, memory, exports) and its own spec, if it has one
+          if (!WK()) E.push(`${w}: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here`);
+          else E.push(...WK().checkItem(a).problems.map(m => `${w}: ${m}`));
+          const sp = a.spec;
+          if (sp !== undefined && sp !== null) {
+            if (isObj(sp) && ('engine' in sp ? sp.engine : ACT.WASM_ENGINE) !== ACT.WASM_ENGINE) E.push(`${w}: spec.engine: the own spec of a ${ACT.WASM} item runs on ${ACT.WASM_ENGINE} (leave engine out)`);
+            if (isObj(sp) && isObj(sp.model) && (sp.model.module !== undefined ? sp.model.module : aid) !== aid) E.push(`${w}: spec.model.module: the own spec of a ${ACT.WASM} item runs this item (leave module out)`);
+            E.push(...checkSimSpec(ownSpec(a), isObj(a.strings) ? a.strings : null, null, { items: every }).map(m => `${w}: ${m}`));
+          }
+        } else if (rt === ACT.EMBED) {   // an allow-listed outside page: the provider, the exact URL, credit and licence (tools/embed_allow.json)
+          if (!EK()) E.push(`${w}: the outside-page checker (NoemaEmbed, engine/src/45_activity_embed.js) is not loaded here`);
+          else { const r = EK().check(a); E.push(...r.errors.map(m => `${w}: ${m}`)); W.push(...r.warnings.map(m => `${w}: ${m}`)); }
         } else if (rt === ACT.H5P) E.push(...checkH5PItem(a, aid, locs, own).map(m => `${w}: ${m}`));
         const st = a.strings;
         if (rt === ACT.H5P && (st == null || (isObj(st) && !Object.keys(st).length))) { /* an H5P item keeps its words in content.json (h5pByLocale for the other languages) */ }
@@ -1003,6 +1085,10 @@
     for (const c of p?.chapters || []) {
       for (const sec of c.sections || []) (sec.blocks || []).forEach((b, i) => { if (b?.t !== 'interactive') return; used.add(b.activity); E.push(...checkBlockAct(b, items).map(m => `${sec.id} block ${i}: ${m}`)); });
       for (const e of c.exercises || []) { if (e?.type !== 'sim') continue; used.add(e.activity); E.push(...checkSim(e, items).map(m => `${e.id}: ${m}`)); }
+    }
+    for (const a of Object.values(items)) {   // a module item that a wasm@1 spec runs is used by that spec's blocks and exercises
+      const sp = a && a.runtime === 'sim-spec@1' ? a.spec : null;
+      if (isObj(sp) && sp.engine === ACT.WASM_ENGINE && isObj(sp.model) && Object.prototype.hasOwnProperty.call(items, sp.model.module)) used.add(sp.model.module);
     }
     for (const aid of Object.keys(items)) if (!used.has(aid)) W.push(`activity ${aid}: not used by any interactive block or sim exercise`);
     if (Object.keys(items).length) {
@@ -1163,5 +1249,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, ownSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

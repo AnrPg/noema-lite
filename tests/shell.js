@@ -14,7 +14,7 @@ const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { rec
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 15000, step = 200) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
-function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/net::ERR|404|Failed to load resource/.test(m.text())) bag.push(m.text()); }); }
+function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/net::ERR|404|Failed to load resource|Not allowed to load local resource: file:/.test(m.text())) bag.push(m.text()); }); }
 const texts = (page, sel) => page.$$eval(sel, l => l.map(x => x.textContent.trim()));
 // a ⋮ / ▾ menu's items: the title of each, without its icon or its explanation
 const menuItems = async (page, btn) => { await page.click(btn); await wait(250); const t = await page.$$eval('.ns-pop button', l => l.map(x => (x.querySelector('.mt')?.firstChild?.textContent || x.textContent).trim())); await page.keyboard.press('Escape'); await wait(150); return t; };
@@ -318,6 +318,11 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
     ok(inner >= 1 && chs > 0, 'Roadmap › station › the chapters of its subject: ' + inner + ' station(s), ' + chs + ' chapters'); }
   ok(has(await menuItems(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`), ['Study', 'Put it on a Roadmap', 'Edit', 'Export the package', 'Hide from the subject list']), 'a subject’s ⋮: study, Roadmap, edit, export the package, hide');
   ok(!(await page.locator('.ns-view button', { hasText: 'Export “' }).count()), 'no loose “Export …” button any more');
+  // the learning record and the course package (docs/INTERACTIVE_XAPI.md): the same two quiet items as in the subject's own ⋮
+  ok(has(await menuItems(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`), ['Export learning record (xAPI)', 'Course package for an LMS (cmi5)']), 'a subject’s ⋮ also exports the learning record (xAPI) and the cmi5 course package');
+  { const [dl] = await Promise.all([page.waitForEvent('download', { timeout: 10000 }), pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Course package for an LMS (cmi5)')]);
+    const zip = require('fs').readFileSync(await dl.path());
+    ok(dl.suggestedFilename() === (await page.evaluate(() => SUBJ.id)) + '.cmi5.zip' && zip.readUInt32LE(0) === 0x04034b50 && zip.includes('cmi5.xml'), `the cmi5 package is a .zip with cmi5.xml: ${dl.suggestedFilename()}`); }
   await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Hide from the subject list'); await wait(400);
   ok(await page.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).hiddenSubjects.includes(SUBJ.id)) && await page.$(`.ns-sgrp[data-k="c:${cid}/f"][open] .ns-hid`), 'hide: marked, and the open groups stay open');
   await pick(page, `.ns-sgrp[data-k="c:${cid}/f"] .ns-menubtn`, 'Show in the subject list'); await wait(400);

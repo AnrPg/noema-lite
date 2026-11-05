@@ -22,10 +22,13 @@ pictures (ADR D2).
                                                                every expression (simexpr.check), the engine, the string keys
   check_h5p_packages(pack, bytes_of) → (errors, warnings)     the .h5p files of the h5p@1 items (sha256, bytes, tools/h5p_check.py),
                                                                twin of NoemaPackCheck.checkActivityPackages"""
-import glob, hashlib, json, math, os, re, sys
+import base64, glob, hashlib, json, math, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import simexpr as SX   # the expression language of sim-spec@1 (docs/INTERACTIVE_SIMEXPR.md), twin of engine/src/35_simexpr.js
 import circuit as CK   # the netlist checks of circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md), twin of engine/src/36_engine_circuit.js
+import thermal, pid, rf, twin   # the model checks of the P6 engines (docs/INTERACTIVE_ENGINES.md), twins of engine/src/39–42_engine_*.js
+import wasm_check as WK   # wasm-module@1 (docs/INTERACTIVE_WASM.md), twin of engine/src/44_activity_wasm.js
+import embed_check as EK   # external-embed@1 (docs/INTERACTIVE_EMBED.md), twin of engine/src/45_activity_embed.js
 import h5p_check as H5   # the package rules of h5p@1 (tools/h5p_allow.json), twin of NoemaH5P.check (engine/src/38_activity_h5p.js)
 
 FORMAT = "noema.activities/v1"
@@ -62,11 +65,18 @@ PY_WARN = [
 # sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as engine/packcheck.js checkSimSpec
 SPEC_FORMAT = "noema.sim-spec/v1"
 DEFAULT_ENGINE = "formula@1"
-ENGINES = {"formula@1", "circuit-mna@1"}                    # the engines this version knows (the same list in engine/packcheck.js)
+ENGINES = {"formula@1", "circuit-mna@1", "thermal@1", "pid@1", "rf@1", "twin@1"}   # the engines this version knows (the same list in engine/packcheck.js)
 SPEC_KEYS = {"format", "engine", "model", "title", "intro", "consts", "params", "derived", "outputs", "readouts", "plots", "bench"}
 # circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
 CIRCUIT = "circuit-mna@1"
-BENCH_ENGINES = {"circuit-mna@1"}
+BENCH_ENGINES = {"circuit-mna@1", "twin@1"}
+# the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own check_spec (the twin of its JS checkSpec)
+P6 = {"thermal@1": thermal, "pid@1": pid, "rf@1": rf, "twin@1": twin}
+P6_TIMED = ["thermal@1", "pid@1"]   # engines whose model.transient times and outputs' at may be expressions
+# twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
+TWIN = "twin@1"
+TWIN_POINTS = ["vbat", "vload", "i", "gnd"]
+TWIN_INSTRUMENTS = ["V", "I", "scope", "log", "rssi"]
 BENCH_NAMES = ["diagnosis", "measurements", "correct"]
 MODEL_KEYS = ["netlist", "bindings", "transient", "noise"]
 OUT_KEYS = ["id", "kind", "node", "branch", "time", "probe", "at", "stat"]
@@ -85,6 +95,11 @@ NUM_FORMATS = ("auto", "si", "fixed")
 HTML_MAX, HTML_WARN = 512 * 1024, 256 * 1024
 FALLBACK_MIN = 40
 HINTS_MAX = 6
+# P6 (docs/adr/001 D12): a precompiled WebAssembly module (its own spec, or the model of a sim-spec@1 spec) and an allow-listed outside page
+WASM, WASM_ENGINE, EMBED = "wasm-module@1", "wasm@1", "external-embed@1"
+RUNTIMES |= {WASM, EMBED}
+CHECKS_RUNTIMES |= {WASM}   # a module with its own spec shows its values like sim-spec@1
+ENGINES |= {WASM_ENGINE}
 
 # what a mini-app may not contain (it would not work anyway: the frame's CSP and sandbox block it) — the same list as packcheck.js
 HTML_BANNED = [
@@ -189,6 +204,16 @@ def load_activities(sdir):
             else:
                 try: a["spec"] = json.load(open(f, encoding="utf-8"))
                 except Exception as e: probs.append(f"ERROR activity {aid}: {entry}: {e}")
+        elif a.get("runtime") == WASM:   # the module: activities/<id>/module.wasm → base64 + sha256 + bytes; its own spec (optional): spec.json
+            if not _s(entry): entry = a["entry"] = f"activities/{aid}/module.wasm"
+            f = os.path.join(sdir, entry)
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found")
+            else:
+                b = open(f, "rb").read(); a["wasm"] = base64.b64encode(b).decode("ascii"); a["sha256"] = hashlib.sha256(b).hexdigest(); a["bytes"] = len(b)
+            f = os.path.join(sdir, "activities", aid, "spec.json")
+            if os.path.exists(f):
+                try: a["spec"] = json.load(open(f, encoding="utf-8"))
+                except Exception as e: probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json: {e}")
         elif a.get("runtime") == H5P:
             if not _s(entry): entry = a["entry"] = f"activities/{aid}/item.h5p"
             f = os.path.join(sdir, entry)
@@ -214,8 +239,23 @@ def load_activities(sdir):
         items.append(a)
     return {"format": reg.get("format"), "items": items}, probs
 
+def own_spec(a):
+    """the spec a wasm-module@1 item shows: its own spec, run by wasm@1 on the item itself (as the runtime completes it)"""
+    s = a.get("spec") if isinstance(a, dict) else None
+    if not isinstance(s, dict): return s
+    m = s.get("model") if isinstance(s.get("model"), dict) else {}
+    return {**s, "engine": WASM_ENGINE, "model": {**m, "module": a.get("id")}}
+
+def _spec_of(a):
+    """the spec an activity shows (sim-spec@1, py-module@1: its spec; wasm-module@1: its own spec, completed) or None"""
+    if not isinstance(a, dict): return None
+    if a.get("runtime") in SPEC_RUNTIMES: return a.get("spec") if isinstance(a.get("spec"), dict) else None
+    if a.get("runtime") == WASM: return own_spec(a) if isinstance(a.get("spec"), dict) else None
+    return None
+
 def _engine_of(a):
-    """the engine a sim-spec@1 activity names (None for other runtimes, or a spec that names none that is a text)"""
+    """the engine a sim-spec@1 activity (or a wasm-module@1 item with its own spec) names (None for other runtimes, or a spec that names none that is a text)"""
+    if isinstance(a, dict) and a.get("runtime") == WASM: return WASM_ENGINE if isinstance(a.get("spec"), dict) else None
     if not isinstance(a, dict) or a.get("runtime") != "sim-spec@1" or not isinstance(a.get("spec"), dict): return None
     e = a["spec"].get("engine", DEFAULT_ENGINE)
     return e if isinstance(e, str) else None
@@ -238,7 +278,7 @@ def fallback_media(reg):
 
 def hash_part(reg):
     """what of the activities goes into pack.version: each bundle's sha256, its strings and its settings"""
-    return {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "python", "h5p")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
+    return {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "wasm", "python", "h5p")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
 
 def check_activities(pack, translations=None):
     """→ (errors, warnings) of pack.activities, the blocks and sim exercises that use them, and pack.requires.
@@ -248,6 +288,7 @@ def check_activities(pack, translations=None):
     subject = pack.get("subject") or {}; own = subject.get("language") or "en"
     locs = sorted(set([own] + list(translations if translations is not None else (pack.get("translations") or {}).keys())))
     items = {}
+    every = {x.get("id"): x for x in ((reg.get("items") if isinstance(reg, dict) else None) or []) if isinstance(x, dict) and isinstance(x.get("id"), str)}   # (a wasm@1 spec names a module item)
     if reg is not None:
         if not isinstance(reg, dict) or reg.get("format") != FORMAT: E.append(f'activities: format must be "{FORMAT}"')
         for a in (reg.get("items") if isinstance(reg, dict) else None) or []:
@@ -274,7 +315,7 @@ def check_activities(pack, translations=None):
                     if a.get("bytes") is not None and a.get("bytes") != len(html.encode("utf-8")): E.append(f"{w}: bytes does not match the bundle")
             elif rt == "sim-spec@1":
                 if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json) is missing")
-                else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None)]
+                else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, items=every)]
             elif rt == PY:
                 pk = [] if a.get("packages") is None else a.get("packages"); allowed = PY_BASE + PY_EXTRAS
                 if not (isinstance(pk, list) and len(pk) <= PY_PACKAGES_MAX and all(isinstance(x, str) for x in pk)): E.append(f"{w}: packages must be a list of names ({', '.join(allowed)})")
@@ -296,6 +337,15 @@ def check_activities(pack, translations=None):
                 if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json: the controls, readouts and plots the app draws) is missing")
                 else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, python=True)]
             elif rt == H5P: E += [f"{w}: {m}" for m in check_h5p_item(a, aid, locs, own)]
+            elif rt == WASM:   # the module (size, sha256, imports, memory, exports) and its own spec, if it has one
+                E += [f"{w}: {m}" for m in WK.check_item(a)[0]]
+                sp = a.get("spec")
+                if sp is not None:
+                    if isinstance(sp, dict) and sp.get("engine", WASM_ENGINE) != WASM_ENGINE: E.append(f"{w}: spec.engine: the own spec of a {WASM} item runs on {WASM_ENGINE} (leave engine out)")
+                    if isinstance(sp, dict) and isinstance(sp.get("model"), dict) and sp["model"].get("module", aid) != aid: E.append(f"{w}: spec.model.module: the own spec of a {WASM} item runs this item (leave module out)")
+                    E += [f"{w}: {m}" for m in check_spec(own_spec(a), a.get("strings") if isinstance(a.get("strings"), dict) else None, items=every)]
+            elif rt == EMBED:   # an allow-listed outside page: the provider, the exact URL, credit and licence (tools/embed_allow.json)
+                ee, ww = EK.check_item(a); E += [f"{w}: {m}" for m in ee]; W += [f"{w}: {m}" for m in ww]
             st = a.get("strings")
             if rt == H5P and st in (None, {}): pass   # an H5P item keeps its words in content.json (h5pByLocale for the other languages)
             elif not isinstance(st, dict) or not st: E.append(f"{w}: strings {{locale: {{key: text}}}} are required (an activity shows no words of its own)")
@@ -320,6 +370,9 @@ def check_activities(pack, translations=None):
         for e in c.get("exercises") or []:
             if e.get("type") != "sim": continue
             used.add(e.get("activity")); E += [f"{e.get('id')}: {m}" for m in check_sim(e, items)]
+    for a in items.values():   # a module item that a wasm@1 spec runs is used by that spec's blocks and exercises
+        sp = a.get("spec") if isinstance(a, dict) and a.get("runtime") == "sim-spec@1" else None
+        if isinstance(sp, dict) and sp.get("engine") == WASM_ENGINE and isinstance(sp.get("model"), dict) and sp["model"].get("module") in items: used.add(sp["model"]["module"])
     for aid in items:
         if aid not in used: W.append(f"activity {aid}: not used by any interactive block or sim exercise")
     if items:
@@ -328,6 +381,11 @@ def check_activities(pack, translations=None):
         miss = [x for x in need if x not in req]
         if miss: E.append(f"pack.requires must list {', '.join(miss)} (make_pack.py writes it)")
     return E, W
+
+def _shows_nothing(a):
+    """a wasm-module@1 item without its own spec: a module for a sim-spec@1 spec, nothing a block or an exercise can show"""
+    return isinstance(a, dict) and a.get("runtime") == WASM and not isinstance(a.get("spec"), dict)
+SHOWS_NOTHING = f"is a {WASM} module without its own spec: show it through a sim-spec@1 spec (engine {WASM_ENGINE}, model.module) or give it a spec"
 
 def check_h5p_item(a, aid, locs, own):
     """the registry fields of an h5p@1 item (the package itself: check_h5p_packages)"""
@@ -396,6 +454,7 @@ def check_h5p_packages(pack, bytes_of=None):
 def check_block(b, items):
     E = []
     if b.get("activity") not in items: E.append(f"interactive: activity {b.get('activity')!r} is not in pack.activities")
+    elif _shows_nothing(items[b["activity"]]): E.append(f"interactive: activity {b['activity']} {SHOWS_NOTHING}")
     hgt = b.get("height")
     if hgt is not None and hgt != "auto" and not (isinstance(hgt, int) and 120 <= hgt <= 2000): E.append('interactive: height is "auto" or 120–2000 (px)')
     if b.get("aspect") is not None and not (isinstance(b["aspect"], str) and re.fullmatch(r"\d{1,2}:\d{1,2}", b["aspect"])): E.append('interactive: aspect is like "16:9"')
@@ -409,14 +468,18 @@ def check_sim(e, items):
     a = items.get(e.get("activity")) if isinstance(e.get("activity"), str) else None
     a = a if isinstance(a, dict) else None
     rt = a.get("runtime") if a else None
-    spec = a.get("spec") if a and rt in SPEC_RUNTIMES and isinstance(a.get("spec"), dict) else None
+    spec = _spec_of(a)
+    if _shows_nothing(a): E.append(f"activity {e.get('activity')} {SHOWS_NOTHING}")
+    if rt == EMBED:   # no provider has a result channel (tools/embed_allow.json supportsResult): an outside page is explore only
+        p = next((x for x in EK.providers() if x.get("id") == a.get("provider")), None)
+        if not (p and p.get("supportsResult") is True): E.append(f"sim-embed: activity {e.get('activity')} is an outside page (explore only): use it in a theory block")
     g = e.get("grade")
     if not isinstance(g, dict) or g.get("mode") not in GRADE_MODES: E.append('grade must be {"mode": "reported"} (the activity reports its result) or {"mode": "checks", "checks": [{"expr": …}]} (sim-spec@1)')
     else:
         if g.get("pass") is not None and not (_num(g["pass"]) and 0 < g["pass"] <= 1): E.append("grade.pass must be a number in (0, 1]")
-        if g["mode"] == "reported" and rt == "sim-spec@1": E.append('a sim-spec@1 activity reports nothing itself: grade it with {"mode": "checks", "checks": […]}')
+        if g["mode"] == "reported" and rt in CHECKS_RUNTIMES and rt != PY: E.append(f'a {rt} activity reports nothing itself: grade it with {{"mode": "checks", "checks": […]}}')
         if g["mode"] == "checks":
-            if rt is not None and not (isinstance(rt, str) and rt in CHECKS_RUNTIMES): E.append(f'grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1); {rt} reports its own result: use "reported"')
+            if rt is not None and not (isinstance(rt, str) and rt in CHECKS_RUNTIMES): E.append(f'grade.mode "checks" needs an activity whose values the app can see (sim-spec@1, py-module@1, wasm-module@1); {rt} reports its own result: use "reported"')
             cs = g.get("checks")
             if not (isinstance(cs, list) and 1 <= len(cs) <= SPEC_LIM["checks"]): E.append(f"grade.checks must be a list of 1–{SPEC_LIM['checks']} checks {{expr, label?, weight?}}")
             else:
@@ -474,8 +537,9 @@ def spec_names(spec):
     if isinstance(spec.get("bench"), dict): out += BENCH_NAMES   # a bench's values: for the checks of a sim exercise only (never shown)
     return out
 
-def check_spec(spec, tables=None, engines=None, python=False):
-    """→ errors of a sim-spec@1 spec. tables: {locale: {key: text}} (every label key must be in each); engines: the known engine ids.
+def check_spec(spec, tables=None, engines=None, items=None, python=False):
+    """→ errors of a sim-spec@1 spec. tables: {locale: {key: text}} (every label key must be in each); engines: the known engine ids;
+    items: {id: item} of the pack (a wasm@1 model names its module there; None = the model is not checked here).
     python: the spec of a py-module@1 activity (its outputs come from Python's step(): no engine, no model, no bench, at least one output)."""
     E = []
     if not isinstance(spec, dict): return ["spec: a JSON object is required (activities/<id>/spec.json)"]
@@ -609,9 +673,11 @@ def check_spec(spec, tables=None, engines=None, python=False):
             if not (isinstance(m, dict) and m.get("axis") in ("x", "y")): E.append(f"{wm} must be {{axis: x | y, expr, label?}}"); continue
             key(m.get("label"), wm + ".label"); expr(m.get("expr"), names, wm + ".expr")
     if eng == CIRCUIT: check_circuit(spec, in_names, E)
+    elif isinstance(eng, str) and eng in P6: check_engine(spec, eng, in_names, E)
+    if eng == WASM_ENGINE and items is not None: E += WK.check_model(spec, items)
     if spec.get("bench") is not None:
         if eng not in BENCH_ENGINES: E.append(f"spec.bench needs an engine that can take measurements ({', '.join(sorted(BENCH_ENGINES))})")
-        else: check_bench(spec, in_names, seen, E, key)
+        else: check_bench(spec, in_names, seen, E, key, eng)
     if tables:
         for k in sorted(keys):
             miss = sorted(l for l, t in tables.items() if isinstance(t, dict) and k not in t)
@@ -719,8 +785,37 @@ def check_circuit(spec, names, E):
         if st and o["stat"] not in STATS: E.append(f"{w}.stat is one of {', '.join(STATS)}")
         if (o["kind"] == "series" or at or st) and not isinstance(m.get("transient"), dict): E.append(f"{w} needs model.transient {{tEnd, dt?}}")
 
-def check_bench(spec, names, seen, E, key):
-    b = spec.get("bench"); L = BENCH_LIM; c = _circuit_of(spec)
+# ---------------------------------------------------------------- the P6 engines (docs/INTERACTIVE_ENGINES.md): the SAME rules as packcheck.js checkEngine
+def _engine_exprs(spec, eng):
+    """[(source, where)] of each expression of a P6 model: the bindings; for thermal@1 and pid@1 also the transient's times and the outputs' at"""
+    m = spec.get("model") if isinstance(spec.get("model"), dict) else {}; out = []; timed = eng in P6_TIMED
+    def add(v, w):
+        if isinstance(v, str) and v.strip(): out.append((v, w))   # (an empty one is the engine's own message)
+    for i, b in enumerate(_list(m.get("bindings"))):
+        if isinstance(b, dict): add(b.get("expr"), f"spec.model.bindings[{i}].expr")
+    if timed and isinstance(m.get("transient"), dict):
+        for k in ("tEnd", "dt"): add(m["transient"].get(k), f"spec.model.transient.{k}")
+    if timed:
+        for i, o in enumerate(_list(spec.get("outputs"))):
+            if isinstance(o, dict): add(o.get("at"), f"spec.outputs[{i}].at")
+    return out
+
+def check_engine(spec, eng, names, E):
+    for p in P6[eng].check_spec(spec):
+        if p["level"] == "error": E.append(f"spec{'.' + p['path'] if p['path'] else ''}: {p['msg']}")
+    for src, w in _engine_exprs(spec, eng):
+        m = _expr_problem(src, names, w)
+        if m: E.append(m)
+
+def _twin_of(spec):
+    """twin@1: the device of a spec without errors, or None"""
+    m = spec.get("model") if isinstance(spec, dict) else None
+    d = m.get("device") if isinstance(m, dict) else None
+    return d if isinstance(d, dict) and not any(p["level"] == "error" for p in twin.check(d)) else None
+
+def check_bench(spec, names, seen, E, key, eng=CIRCUIT):
+    b = spec.get("bench"); L = BENCH_LIM; tw = eng == TWIN; c = None if tw else _circuit_of(spec); dev = _twin_of(spec) if tw else None
+    KINDS = TWIN_INSTRUMENTS if tw else INSTRUMENTS
     if not isinstance(b, dict): E.append("spec.bench must be an object {faults, points, instruments, diagnosis, budget?}"); return
     _unknown(b, BENCH_KEYS, "spec.bench", E)
     for n in BENCH_NAMES:
@@ -741,26 +836,33 @@ def check_bench(spec, names, seen, E, key):
         w = f"spec.bench.faults[{i}]"
         if not isinstance(f, dict): E.append(f"{w} must be an object {{id, apply}}"); continue
         _unknown(f, ["id", "apply"], w, E)
-        if not (isinstance(f.get("apply"), list) and len(f["apply"]) <= L["apply"]): E.append(f"{w}.apply must be a list of at most {L['apply']} changes to the circuit ([] = a healthy device)"); continue
+        if not (isinstance(f.get("apply"), list) and len(f["apply"]) <= L["apply"]): E.append(f"{w}.apply must be a list of at most {L['apply']} changes to the {'device' if tw else 'circuit'} ([] = a healthy device)"); continue
         if c:
             for p in CK.check_faults(c["nl"], f["apply"]): E.append(f"{w}.{re.sub(r'^faults', 'apply', p['path'])}: {p['msg']}")
+        if dev is not None:
+            for p in twin.check_faults(dev, f["apply"]): E.append(f"{w}.{re.sub(r'^faults', 'apply', p['path'])}: {p['msg']}")
     ps = b.get("points")
     if not (isinstance(ps, list) and 1 <= len(ps) <= L["points"]): E.append(f"spec.bench.points must be a list of 1–{L['points']} probe points {{id, at, label}}")
-    pids = ids(ps, "spec.bench.points", "point")
+    pids = ids(ps, "spec.bench.points", "point"); at_of = {}
     for i, p in enumerate(_list(ps)):
         w = f"spec.bench.points[{i}]"
         if not isinstance(p, dict): E.append(f"{w} must be an object {{id, at, label}}"); continue
         _unknown(p, ["id", "at", "label"], w, E)
+        if isinstance(p.get("id"), str) and p["id"] not in at_of: at_of[p["id"]] = p.get("at")
         if c and not _endpoint_ok(c, p.get("at")): E.append(f"{w}.at must be a node, a test point, gnd or a pin such as @R1.0 of the netlist")
+        if tw and not (isinstance(p.get("at"), str) and p["at"] in TWIN_POINTS): E.append(f"{w}.at is one of {', '.join(TWIN_POINTS)} (the battery, the battery under load, the supply current, the ground)")
         key(p.get("label"), w + ".label", True)
     is_ = b.get("instruments"); kinds = []
     if not (isinstance(is_, list) and 1 <= len(is_) <= L["instruments"]): E.append(f"spec.bench.instruments must be a list of 1–{L['instruments']} instruments {{kind, …}}")
     for i, x in enumerate(_list(is_)):
         w = f"spec.bench.instruments[{i}]"
-        if not (isinstance(x, dict) and x.get("kind") in INSTRUMENTS): E.append(f"{w}.kind is one of {', '.join(INSTRUMENTS)}"); continue
+        if not (isinstance(x, dict) and isinstance(x.get("kind"), str) and x["kind"] in KINDS): E.append(f"{w}.kind is one of {', '.join(KINDS)}"); continue
         if x["kind"] in kinds: E.append(f"{w}: the instrument {x['kind']} is listed twice")
         kinds.append(x["kind"])
         _unknown(x, INST_KEYS, w, E)
+        if x["kind"] in ("log", "rssi"):   # twin@1: the event log and the radio's RSSI read the device, not a point
+            if any(k != "kind" and k in INST_KEYS for k in x): E.append(f"{w}: the {'event log' if x['kind'] == 'log' else 'RSSI reading'} has only a kind")
+            continue
         scope = x["kind"] in ("scope", "logic")
         if x["kind"] == "I":
             if "points" in x: E.append(f"{w}: the ammeter reads parts (parts), not points")
@@ -774,12 +876,17 @@ def check_bench(spec, names, seen, E, key):
                     pq = {"kind": "I", "element": q.get("element")}
                     if "pin" in q: pq["pin"] = q["pin"]
                     if c and not _probe_ok(c, pq): E.append(f"{wq}: element must be a part of the netlist (and pin one of its pins)")
+                    if tw and not (q.get("element") == "battery" and "pin" not in q): E.append(f"{wq}: element must be battery (the twin's ammeter reads the supply current), without pin")
                     key(q.get("label"), wq + ".label", True)
         else:
             if "parts" in x: E.append(f"{w}: only the ammeter (I) reads parts")
             pts = x.get("points") if "points" in x else None
             if "points" in x and not (isinstance(pts, list) and len(pts) >= 1 and all(isinstance(q, str) and q in pids for q in pts)): E.append(f"{w}.points must be ids of spec.bench.points")
             if x["kind"] in ("V", "R") and (len(pts) if isinstance(pts, list) else len(pids)) < 2: E.append(f"{w}: a meter needs two points to put its leads on")
+            if tw:
+                on = [at_of.get(q) for q in (pts if isinstance(pts, list) else pids) if isinstance(q, str) and q in pids]
+                if x["kind"] == "V" and any(a == "i" for a in on): E.append(f"{w}: the twin's voltmeter reads vbat or vload against gnd (list its points: not the current i)")
+                if x["kind"] == "scope" and any(a != "i" for a in on): E.append(f"{w}: the twin's oscilloscope shows the supply current (list its points: only points at i)")
         for k in ("tEnd", "dt", "tStart", "threshold"):
             if k in x and not (scope and (k != "threshold" or x["kind"] == "logic")):
                 E.append(f"{w}.{k} belongs to {'the logic analyser' if k == 'threshold' else 'the oscilloscope and the logic analyser'}")

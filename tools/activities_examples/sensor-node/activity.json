@@ -1,0 +1,17 @@
+{
+ "id": "sensor-node",
+ "runtime": "sim-spec@1",
+ "entry": "activities/sensor-node/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "sensor-node-still",
+  "text": "A sensor on a 600 mAh lithium cell wakes up, measures for 50 ms, sends one LoRa packet and waits 1 s for the acknowledgement, then sleeps at 5 µA. The average current is the charge of one wake-up divided by the period, plus the sleep current and the cell's self-discharge, and the battery life is the capacity divided by that average. Waking every 60 s empties the cell in about 78 days; every 15 minutes it lasts about 600 days (20 months) while still sending 96 readings a day. Any period from about 6½ minutes up to one hour gives at least a year and at least 24 readings a day."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Interactive activities travel inside the pack (html-app@1 alias-lab, sim-spec@1 rc-lowpass, the circuits, py-module@1 py-filter with its main.py, h5p@1 planets-quiz with its .h5p beside the pack) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
+"""Interactive activities travel inside the pack (html-app@1 alias-lab, sim-spec@1 rc-lowpass, the circuits and P6 engine references, py-module@1 py-filter with its main.py, h5p@1 planets-quiz with its .h5p beside the pack, wasm-module@1 wasm-oscillator;
+external-embed@1 in a copy of its own) (docs/INTERACTIVE.md, docs/adr/001 D2): a subject folder with activities/ →
 make_pack.py → pack.activities (bundle inline, sha256, strings per locale) + pack.requires → unpack.py gives the folder back →
 make_pack.py again gives the same pack.version. And what make_pack.py refuses (missing strings, a network link, an unknown
 activity, a runtime this version does not know). Uses the skill zip (dist/noema-pack-builder.zip; built here when missing).
@@ -32,10 +33,20 @@ for f in os.listdir(RC):
     if f.startswith('strings.') or f == 'spec.json': shutil.copy(os.path.join(RC, f), rd_)
 CIRC = {'rc-transient': 'A 5 V square wave and the voltage of the capacitor of an RC circuit: it rises to 63 % of the step after one time constant RC = 1 ms.',
         'led-bench': 'A 5 V supply, a switch SW1, a 330 Ω resistor R1 and a red LED D1 in series, with the test points TP1, TP2, TP3 and GND.'}
-for cid in CIRC:   # circuit-mna@1: a netlist in the spec; led-bench is a fault-finding bench
+CIRC.update({   # the P6 engines (docs/INTERACTIVE_ENGINES.md): thermal@1, pid@1, rf@1, twin@1
+    'heatsink': 'The junction and heatsink temperatures of a 20 W MOSFET warming up after switch-on with a 3.5 K/W heatsink: the junction levels off at 124 °C, under the 125 °C limit.',
+    'pid-tune': 'Step responses of a lightly damped plant: P control alone overshoots by half and stops at 0.5; PID with Kp 2, Ki 3, Kd 0.4 reaches 1 without overshoot in about 1.5 s.',
+    'lora-link': 'The margin of a LoRa link against distance on a log scale: SF7 with a chip antenna falls below 10 dB well before 2 km; SF9 with a 5 dBi antenna keeps 11.9 dB at 2 km.',
+    'sensor-node': 'The charge of a 600 mAh cell over 30 days: waking every 60 s it falls steeply, waking every 15 minutes it hardly moves.'})
+P6 = ['heatsink', 'pid-tune', 'lora-link', 'sensor-node']
+for cid in CIRC:   # circuit-mna@1: a netlist in the spec; led-bench is a fault-finding bench (and the P6 references)
     cs, cd = os.path.join(ROOT, 'tools', 'activities_examples', cid), os.path.join(sd, 'activities', cid); os.makedirs(cd)
     for f in os.listdir(cs):
         if f.startswith('strings.') or f == 'spec.json': shutil.copy(os.path.join(cs, f), cd)
+WO = os.path.join(ROOT, 'tools', 'activities_examples', 'wasm-oscillator')   # wasm-module@1 (P6): a precompiled module + its own spec
+wd_ = os.path.join(sd, 'activities', 'wasm-oscillator'); os.makedirs(wd_)
+for f in os.listdir(WO):
+    if f.startswith('strings.') or f in ('spec.json', 'module.wasm'): shutil.copy(os.path.join(WO, f), wd_)
 PF = os.path.join(ROOT, 'tools', 'activities_examples', 'py-filter')   # py-module@1: Python (main.py) + the spec the app draws
 pd_ = os.path.join(sd, 'activities', 'py-filter'); os.makedirs(pd_)
 for f in os.listdir(PF):
@@ -46,7 +57,7 @@ PQ_FR = rj(os.path.join(PQ, 'content.el.json')); PQ_FR.update(question='<p>Quell
 for x_, t_ in zip(PQ_FR['answers'], ('Jupiter', 'Mars', 'Vénus')): x_['text'] = f'<div>{t_}</div>\n'
 wj(os.path.join(pqd, 'content.fr.json'), PQ_FR)
 wj(os.path.join(sd, 'activities', 'activities.json'), {'format': 'noema.activities/v1', 'items': [rj(os.path.join(EX, 'activity.json')), rj(os.path.join(RC, 'activity.json'))]
-   + [rj(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'activity.json')) for cid in CIRC] + [rj(os.path.join(PF, 'activity.json')), rj(os.path.join(PQ, 'activity.json'))]})
+   + [rj(os.path.join(ROOT, 'tools', 'activities_examples', cid, 'activity.json')) for cid in CIRC] + [rj(os.path.join(WO, 'activity.json'))] + [rj(os.path.join(PF, 'activity.json')), rj(os.path.join(PQ, 'activity.json'))]})
 shutil.copy(os.path.join(PQ, 'fallback.svg'), os.path.join(sd, 'media', 'planets-quiz-still.svg'))
 shutil.copy(os.path.join(EX, 'fallback.svg'), os.path.join(sd, 'media', 'alias-lab-still.svg'))
 shutil.copy(os.path.join(RC, 'fallback.svg'), os.path.join(sd, 'media', 'rc-lowpass-still.svg'))
@@ -55,6 +66,7 @@ mm['items'].append({'id': 'alias-lab-still', 'file': 'alias-lab-still.svg', 'ori
                     'alt': 'A 7 Hz sine (grey) sampled at 10 Hz (blue dots); the dots lie on a 3 Hz sine (red, dashed).'})
 mm['items'].append({'id': 'rc-lowpass-still', 'file': 'rc-lowpass-still.svg', 'origin': 'plot', 'license': 'own', 'credit': 'noema-lite',
                     'alt': 'The gain of an RC low-pass filter against frequency on a log scale: flat at 0 dB, −3 dB at about 1 kHz, then falling.'})
+CIRC['wasm-oscillator'] = 'A damped mass on a spring: the displacement against time, a slowly dying swing (c = 0.2) and a quickly dying one (c = 1.6).'
 shutil.copy(os.path.join(PF, 'fallback.svg'), os.path.join(sd, 'media', 'py-filter-still.svg'))
 mm['items'].append({'id': 'py-filter-still', 'file': 'py-filter-still.svg', 'origin': 'plot', 'license': 'own', 'credit': 'noema-lite',
                     'alt': 'The gain of an 8-sample moving-average filter at 8 kHz against frequency on a log scale: near 0 dB at low frequencies, a deep notch at 1 kHz.'})
@@ -94,20 +106,56 @@ SIM4 = {'id': 'ch01-e903', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 3
         'hints': ['Measure from the supply towards the LED: each voltage to GND clears or blames the part before it.', 'With no current, the voltage on both sides of a healthy part is the same: compare the two legs of the LED.'],
         'reveal': 'The LED is soldered the wrong way round: TP3 is at 5 V and so is the cathode leg, while the anode leg reads 0 V.',
         'explain': 'With no current through the series circuit, every healthy part passes the full 5 V on: the voltage is lost only across the open or blocking part. A reversed LED blocks like an open one, but its legs are swapped, so the 5 V appears on the cathode leg.'}
-BLOCK5 = {'t': 'interactive', 'activity': 'py-filter', 'caption': 'Two digital low-pass filters computed in Python: change the window and the cutoff.'}
-SIM5 = {'id': 'ch01-e904', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'py-filter',
+SIM5 = {'id': 'ch01-e904', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'heatsink',
+        'q': 'A MOSFET dissipates 20 W at 40 °C ambient; junction to case is 0.5 K/W and the thermal pad 0.2 K/W. Choose the heatsink (its resistance to air, Rsa) so that the junction stays at or below 125 °C, without a heatsink bigger than needed (Rsa at least 3 K/W).',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'tjSS <= TjMax', 'label': 'checkTj', 'weight': 2}, {'expr': 'Rsa >= RsaMin', 'label': 'checkCheap'}]},
+        'hints': ['In the steady state the thermal resistances add up like resistors in series: Tj = Tamb + P · (Rjc + Rcs + Rsa).', 'The junction may rise 85 K above the air, so the whole path may have at most 85 K / 20 W = 4.25 K/W.'],
+        'reveal': 'Rsa = 3.5 K/W: Tj = 40 + 20 · (0.5 + 0.2 + 3.5) = 124 °C. Anything from 3 to 3.55 K/W passes both checks.',
+        'explain': 'Heat flows through the junction-to-case, the pad and the heatsink-to-air resistances one after the other, so their sum times the power is the temperature rise above the air. The heat capacities only set how fast the steady state is reached (here a few minutes), not where it ends.'}
+SIM6 = {'id': 'ch01-e905', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 3, 'tags': ['concept'], 'think': 'apply', 'activity': 'pid-tune',
+        'q': 'A lightly damped plant with a short dead time must follow a step of its setpoint. Tune Kp, Ki and Kd so that the overshoot is below 10 %, the output settles within 2 % in less than 2 s and no steady-state error is left.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'os < osMax', 'label': 'checkOs'}, {'expr': 'ts < tsMax', 'label': 'checkTs'}, {'expr': 'abs(ess) < essMax', 'label': 'checkEss'}]},
+        'hints': ['Proportional control alone always leaves an error; the integral term removes it.', 'The derivative term damps the ringing: raise Kd until the overshoot falls, then add integral gain slowly.'],
+        'reveal': 'For example Kp = 2, Ki = 3, Kd = 0.4: no overshoot and settled in about 1.5 s.',
+        'explain': 'Kp sets how hard the controller pushes against the error, Ki keeps pushing until the error is gone (but too much of it causes overshoot), and Kd reacts to how fast the output moves, which damps the oscillation of a lightly damped plant.'}
+SIM7 = {'id': 'ch01-e906', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'lora-link',
+        'q': 'A LoRa sensor 2 km from its gateway sends 20-byte packets at 868 MHz with 14 dBm through suburban clutter. Pick the spreading factor and the sensor antenna so that the link keeps at least 10 dB of margin while one packet is on air for at most 0.5 s.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'margin >= marginMin', 'label': 'checkMargin', 'weight': 2}, {'expr': 'air <= airMax', 'label': 'checkAir'}]},
+        'hints': ['Each step up in SF buys about 2.5 dB of sensitivity but doubles the time on air.', 'Antenna gain adds to the margin without costing airtime.'],
+        'reveal': 'SF9 with the 5 dBi antenna gives 11.9 dB of margin with 185 ms on air; SF10 with the dipole (11.5 dB, 371 ms) works too.',
+        'explain': 'The margin is the received power minus the receiver sensitivity. A higher spreading factor lowers the sensitivity (the receiver can decode below the noise) at the price of a slower, longer packet, so the cheapest decibels come from the antenna.'}
+SIM8 = {'id': 'ch01-e907', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'sensor-node',
+        'q': 'A LoRa temperature sensor on a 600 mAh cell wakes up, measures, sends a packet and waits for its acknowledgement, then sleeps. Choose the wake period so that the battery lasts at least a year and the server still gets at least 24 readings a day.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'life / 86400 >= daysMin', 'label': 'checkLife', 'weight': 2}, {'expr': 'perDay >= perDayMin', 'label': 'checkRate'}]},
+        'hints': ['Most of the charge goes into the wake-ups (sending, waiting for the acknowledgement), so fewer wake-ups means a longer life.', '24 readings a day means a period of at most 3600 s.'],
+        'reveal': 'Any period from about 390 s to 3600 s: every 15 minutes the cell lasts about 600 days with 96 readings a day.',
+        'explain': 'The average current is the charge of one wake-up divided by the period, plus the sleep current and the self-discharge; the life is the capacity divided by it. Lengthening the period helps until the sleep current and the self-discharge dominate.'}
+BLOCK5 = {'t': 'interactive', 'activity': 'wasm-oscillator', 'caption': 'A damped oscillator computed by a WebAssembly module: move k, c and x₀.'}
+SIM9 = {'id': 'ch01-e908', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'wasm-oscillator',
+        'q': 'A 1 kg mass on a spring with k = 4 N/m is pulled 1 m aside and let go. Choose the damping c so that at most 5 % of its starting energy is left after 2.5 s.',
+        'task': {'seed': 'auto', 'params': {}},
+        'grade': {'mode': 'checks', 'checks': [{'expr': 'E <= share * E0', 'label': 'checkLeft', 'weight': 3}, {'expr': 'abs(k - 4) < 0.01', 'label': 'checkK'}]},
+        'hints': ['The damping force −c·v turns the energy into heat; the spring only trades it between motion and stretch.', 'The energy falls roughly like e^(−c·t): you need e^(−2.5·c) ≤ 0.05, so c of about 1.2 or more.'],
+        'reveal': 'c = 1.6 N·s/m leaves about 2 % of the energy after 2.5 s (c = 1 still leaves about 8 %).',
+        'explain': 'For light damping the energy of a damped oscillator falls about like e^(−c·t/m): with m = 1 kg, 5 % after 2.5 s needs c ≥ ln(20)/2.5 ≈ 1.2 N·s/m. The spring constant changes how fast it swings, not how fast the energy goes.'}
+BLOCK_PY = {'t': 'interactive', 'activity': 'py-filter', 'caption': 'Two digital low-pass filters computed in Python: change the window and the cutoff.'}
+SIM_PY = {'id': 'ch01-e911', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 2, 'tags': ['calc'], 'think': 'apply', 'activity': 'py-filter',
         'q': 'A signal is sampled at 8 kHz. Choose a moving-average filter that removes a 1 kHz tone (at least 20 dB down) while 300 Hz loses less than 3 dB.',
         'task': {'seed': 'auto', 'params': {}},
         'grade': {'mode': 'checks', 'checks': [{'expr': 'att1k <= -20', 'label': 'checkTone', 'weight': 2}, {'expr': 'pass300 >= -3', 'label': 'checkPass'}]},
         'hints': ['A moving average of N samples has zeros at every multiple of fs/N.', 'Put the first zero on the tone: fs/N = 1 kHz.'],
         'reveal': 'N = 8: fs/N = 8000/8 = 1 kHz, so the tone falls on the first zero, and 300 Hz loses only about 1.3 dB.',
         'explain': 'The mean of N samples cancels any sine whose period fits N samples a whole number of times: its zeros are at k·fs/N. A longer window removes the tone too (N = 16 also has a zero at 1 kHz) but its gain falls sooner, so 300 Hz loses about 6 dB.'}
-BLOCK6 = {'t': 'interactive', 'activity': 'planets-quiz', 'caption': 'An H5P quiz: the largest planet.'}
-SIM6 = {'id': 'ch01-e910', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 1, 'tags': ['concept'], 'think': 'remember', 'activity': 'planets-quiz',
+BLOCK_H5 = {'t': 'interactive', 'activity': 'planets-quiz', 'caption': 'An H5P quiz: the largest planet.'}
+SIM_H5 = {'id': 'ch01-e910', 'type': 'sim', 'section': 'ch01-s01', 'difficulty': 1, 'tags': ['concept'], 'think': 'remember', 'activity': 'planets-quiz',
         'q': 'Which planet of the Solar System is the largest? Choose it in the quiz and press Check.', 'grade': {'mode': 'reported'},
         'reveal': 'Jupiter: about 11 times as wide as the Earth.', 'explain': 'Mars and Venus are both smaller than the Earth; Jupiter is the largest of all the planets.'}
 def put(ch):
-    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4), dict(BLOCK5), dict(BLOCK6)]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4, SIM5, SIM6)]; wj(ch, c)
+    c = rj(ch); c['sections'][0]['blocks'] += [dict(BLOCK), dict(BLOCK2), dict(BLOCK3), dict(BLOCK4), dict(BLOCK5)] + [{'t': 'interactive', 'activity': a} for a in P6] + [dict(BLOCK_PY), dict(BLOCK_H5)]; c['exercises'] += [json.loads(json.dumps(x)) for x in (SIM, SIM2, SIM3, SIM4, SIM5, SIM6, SIM7, SIM8, SIM9, SIM_PY, SIM_H5)]; wj(ch, c)
 put(os.path.join(sd, 'chapters', 'ch01.json')); put(os.path.join(sd, 'translations', 'fr', 'ch01.json'))
 mk = lambda src, out: run(os.path.join(S, 'make_pack.py'), src, os.path.join(T, out))
 pk = lambda out: zipfile.ZipFile(os.path.join(T, out, 'demo-physics.noema.zip'))
@@ -121,15 +169,21 @@ html = open(os.path.join(EX, 'app.html'), encoding='utf-8').read()
 check(p['activities']['format'] == 'noema.activities/v1' and a.get('html') == html, 'the bundle is inline in the pack, as written')
 check(a.get('sha256') == hashlib.sha256(html.encode()).hexdigest() and a.get('bytes') == len(html.encode()), 'sha256 and bytes name the bundle')
 check(sorted(a.get('strings') or {}) == ['el', 'en', 'fr', 'ru'] and a['strings']['el']['signal'] == 'Σήμα', 'the strings of every locale are in the pack')
-check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'runtime:h5p@1', 'runtime:html-app@1', 'runtime:py-module@1', 'runtime:sim-spec@1'], 'pack.requires names the core, the four runtimes and the circuit engine', str(p.get('requires')))
+check(sorted(p.get('requires') or []) == ['activities/v1', 'engine:circuit-mna@1', 'engine:pid@1', 'engine:rf@1', 'engine:thermal@1', 'engine:twin@1', 'engine:wasm@1', 'runtime:h5p@1', 'runtime:html-app@1', 'runtime:py-module@1', 'runtime:sim-spec@1', 'runtime:wasm-module@1'], 'pack.requires names the core, the six runtimes, the circuit engine, the four P6 engines and wasm@1', str(p.get('requires')))
+check(p['counts'].get('activities') == 11 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
+check(b.get('spec') == rj(os.path.join(RC, 'spec.json')) and 'html' not in b and sorted(b.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'sim-spec@1: the spec is inline in the pack (data, no bundle), with its strings')
+lb = next((x for x in p['activities']['items'] if x.get('id') == 'led-bench'), {})
+check(lb.get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and lb['spec']['bench']['diagnosis']['options'][6]['fault'] == 'ledReversed', 'circuit-mna@1: the bench spec is inline, its faults and diagnosis with it')
+check(all(next((x for x in p['activities']['items'] if x.get('id') == a), {}).get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', a, 'spec.json')) for a in P6), 'thermal@1, pid@1, rf@1, twin@1: the specs of heatsink, pid-tune, lora-link and sensor-node are inline')
+wo = next((x for x in p['activities']['items'] if x.get('id') == 'wasm-oscillator'), {})
+wbytes = open(os.path.join(WO, 'module.wasm'), 'rb').read()
+import base64
+check(base64.b64decode(wo.get('wasm') or '') == wbytes and wo.get('sha256') == hashlib.sha256(wbytes).hexdigest() and wo.get('bytes') == len(wbytes) and wo.get('abi') == {'version': 1, 'scratch': 1024, 'maxPages': 16}
+      and wo.get('spec') == rj(os.path.join(WO, 'spec.json')) and sorted(wo.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'wasm-module@1: the module is inline (base64, sha256, bytes), with its abi, its own spec and its strings')
 pyf = next((x for x in p['activities']['items'] if x.get('id') == 'py-filter'), {})
 pysrc = open(os.path.join(PF, 'main.py'), encoding='utf-8', newline='').read()
 check(pyf.get('python') == pysrc and pyf.get('sha256') == hashlib.sha256(pysrc.encode()).hexdigest() and pyf.get('bytes') == len(pysrc.encode()) and pyf.get('spec') == rj(os.path.join(PF, 'spec.json')) and pyf.get('packages') == ['numpy'] and sorted(pyf.get('strings') or {}) == ['el', 'en', 'fr', 'ru'],
       'py-module@1: main.py is inline in the pack (python, with sha256 and bytes), its spec and packages beside it', str({k: v for k, v in pyf.items() if k != 'python'})[:400])
-check(p['counts'].get('activities') == 6 and 'alias-lab-still' in p['media'] and 'rc-lowpass-still' in p['media'], 'counts.activities; the fallback pictures are pack pictures (and need no exercises)')
-check(b.get('spec') == rj(os.path.join(RC, 'spec.json')) and 'html' not in b and sorted(b.get('strings') or {}) == ['el', 'en', 'fr', 'ru'], 'sim-spec@1: the spec is inline in the pack (data, no bundle), with its strings')
-lb = next((x for x in p['activities']['items'] if x.get('id') == 'led-bench'), {})
-check(lb.get('spec') == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and lb['spec']['bench']['diagnosis']['options'][6]['fault'] == 'ledReversed', 'circuit-mna@1: the bench spec is inline, its faults and diagnosis with it')
 hq = next((x for x in p['activities']['items'] if x.get('id') == 'planets-quiz'), {})
 H5B = open(os.path.join(PQ, 'item.h5p'), 'rb').read()
 check(hq.get('runtime') == 'h5p@1' and 'h5p' not in hq and 'html' not in hq and hq.get('sha256') == hashlib.sha256(H5B).hexdigest() and hq.get('bytes') == len(H5B) and hq.get('entry') == 'activities/planets-quiz/item.h5p',
@@ -145,6 +199,8 @@ if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imp
     sub = os.environ['NOEMA_ACT_PACK'] + '.subject'   # the subject folder itself (run_e2e.sh builds a one-file bundle from it: h5p@1 inline / too big)
     if os.path.exists(sub): shutil.rmtree(sub)
     shutil.copytree(sd, sub, ignore=shutil.ignore_patterns('build'))
+if os.environ.get('NOEMA_ACT_SUBJECT'):   # the subject folder with every reference activity and its sim exercise (for activity_test.py / activity_preview.py)
+    shutil.rmtree(os.environ['NOEMA_ACT_SUBJECT'], ignore_errors=True); shutil.copytree(sd, os.environ['NOEMA_ACT_SUBJECT'])
 
 # py-filter's own numbers (numpy, as Pyodide runs them): f3 is the first −3 dB point, and none when the filter never gets there by fs/2
 try:
@@ -159,7 +215,7 @@ except ImportError as e: print(f'(py-filter numbers not checked here: {e})')
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)
 u = os.path.join(w2, 'demo-physics')
-check(r.returncode == 0 and '6 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
+check(r.returncode == 0 and '11 activities' in r.stdout, 'unpack.py gives the activities back', r.stdout + r.stderr)
 check(open(os.path.join(u, 'activities', 'alias-lab', 'app.html'), encoding='utf-8', newline='').read() == html, 'app.html comes back byte for byte')
 check(rj(os.path.join(u, 'activities', 'alias-lab', 'strings.ru.json')) == rj(os.path.join(EX, 'strings.ru.json')), 'the string tables come back')
 check(rj(os.path.join(u, 'activities', 'rc-lowpass', 'spec.json')) == rj(os.path.join(RC, 'spec.json')), 'spec.json comes back')
@@ -167,6 +223,9 @@ reg = rj(os.path.join(u, 'activities', 'activities.json'))
 check(reg['items'][0].get('entry') == 'activities/alias-lab/app.html' and 'html' not in reg['items'][0], 'activities.json names the entry file (no bundle inside)')
 check(reg['items'][1].get('entry') == 'activities/rc-lowpass/spec.json' and 'spec' not in reg['items'][1], 'activities.json names spec.json (no spec inside)')
 check(rj(os.path.join(u, 'activities', 'led-bench', 'spec.json')) == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'spec.json')) and rj(os.path.join(u, 'activities', 'rc-transient', 'strings.el.json')) == rj(os.path.join(ROOT, 'tools', 'activities_examples', 'rc-transient', 'strings.el.json')), 'the circuit specs and their strings come back')
+wreg = next(x for x in reg['items'] if x['id'] == 'wasm-oscillator')
+check(open(os.path.join(u, 'activities', 'wasm-oscillator', 'module.wasm'), 'rb').read() == wbytes and rj(os.path.join(u, 'activities', 'wasm-oscillator', 'spec.json')) == rj(os.path.join(WO, 'spec.json'))
+      and wreg.get('entry') == 'activities/wasm-oscillator/module.wasm' and not ({'wasm', 'sha256', 'bytes', 'spec'} & set(wreg)) and wreg.get('abi'), 'module.wasm comes back byte for byte, with its spec.json; activities.json names module.wasm and keeps abi (no base64 inside)')
 check(open(os.path.join(u, 'activities', 'py-filter', 'main.py'), encoding='utf-8', newline='').read() == pysrc and rj(os.path.join(u, 'activities', 'py-filter', 'spec.json')) == rj(os.path.join(PF, 'spec.json')), 'main.py comes back byte for byte, with its spec.json')
 pr = next(x for x in reg['items'] if x['id'] == 'py-filter')
 check(pr.get('entry') == 'activities/py-filter/main.py' and 'python' not in pr and 'spec' not in pr and pr.get('packages') == ['numpy'], 'activities.json names main.py as the entry (no source, no spec inside), the packages stay', str(pr))
@@ -237,6 +296,49 @@ refused('a binding to a part not in the netlist', lambda w: bench_of(w, lambda s
 refused('a probe point not in the netlist', lambda w: bench_of(w, lambda s_: s_['bench']['points'][0].update(at='TP9')), 'points[0].at must be a node')
 refused('a diagnosis label missing from a string table', lambda w: os.remove(os.path.join(w, 'activities', 'led-bench', 'strings.ru.json')) or wj(os.path.join(w, 'activities', 'led-bench', 'strings.ru.json'), {k: v for k, v in rj(os.path.join(ROOT, 'tools', 'activities_examples', 'led-bench', 'strings.ru.json')).items() if k != 'dxTrace'}), 'dxTrace')
 refused('a bench name in a readout', lambda w: bench_of(w, lambda s_: s_.setdefault('readouts', []).append({'label': 'checkDx', 'expr': 'diagnosis'})), "'diagnosis'")
+def p6spec(w, a, f):
+    q = os.path.join(w, 'activities', a, 'spec.json'); s_ = rj(q); f(s_); wj(q, s_)
+refused('a thermal binding with an unknown name', lambda w: p6spec(w, 'heatsink', lambda s_: s_['model']['bindings'][0].update(expr='Rsa * k')), "unknown variable 'k'")
+refused('a pid plant the engine does not know', lambda w: p6spec(w, 'pid-tune', lambda s_: s_['model']['plant'].update(type='quantum')), 'spec.model.plant.type: one of fopdt')
+refused('an rf binding to no field of the link', lambda w: p6spec(w, 'lora-link', lambda s_: s_['model']['bindings'][1].update(field='radio.colour')), 'not a numeric field of the link')
+refused('a twin device that senses longer than it sleeps', lambda w: p6spec(w, 'sensor-node', lambda s_: s_['model']['device']['schedule'].update(sense=100)), 'must be shorter than the period')
+def wasm_of(w, fixture):
+    shutil.copy(os.path.join(ROOT, 'tests', 'fixtures', 'wasm', fixture + '.wasm'), os.path.join(w, 'activities', 'wasm-oscillator', 'module.wasm'))
+refused('a module that imports something outside the host ABI', lambda w: wasm_of(w, 'forbidden'), 'import: env.fetch_url (func) is not in the host ABI')
+refused('a module whose memory is over the limit', lambda w: wasm_of(w, 'bigmem'), 'memory: the declared maximum is 65536 pages')
+def nospec(w): os.remove(os.path.join(w, 'activities', 'wasm-oscillator', 'spec.json'))
+refused('a module without its own spec in a block', nospec, 'module without its own spec')
+refused('a wasm exercise graded "reported"', lambda w: ex_of(w, 'ch01-e908', lambda e: e.update(grade={'mode': 'reported'})), 'a wasm-module@1 activity reports nothing itself')
+
+# external-embed@1 (P6): an allow-listed outside page — no file, no entry; explore only
+EMB = {'id': 'ohm-phet', 'runtime': 'external-embed@1', 'stateVersion': 1, 'provider': 'phet', 'url': 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html',
+       'credit': 'PhET Interactive Simulations, University of Colorado Boulder · Ohm’s Law · CC-BY-4.0 · https://phet.colorado.edu', 'license': 'CC-BY-4.0', 'height': 480,
+       'fallback': {'media': 'alias-lab-still', 'text': 'Ohm’s law: the current through a resistor grows with the voltage and falls with the resistance, I = V / R.'}}
+ew = os.path.join(T, 'w-embed', 'demo-physics'); shutil.copytree(sd, ew); shutil.rmtree(os.path.join(ew, 'build'), ignore_errors=True)
+er = rj(os.path.join(ew, 'activities', 'activities.json')); er['items'].append(dict(EMB)); wj(os.path.join(ew, 'activities', 'activities.json'), er)
+for loc, title in (('en', 'Ohm’s law simulation (PhET)'), ('el', 'Προσομοίωση του νόμου του Ohm (PhET)'), ('ru', 'Симуляция закона Ома (PhET)'), ('fr', 'Simulation de la loi d’Ohm (PhET)')):
+    wj(os.path.join(ew, 'activities', 'ohm-phet', f'strings.{loc}.json'), {'title': title})
+for ch in (os.path.join(ew, 'chapters', 'ch01.json'), os.path.join(ew, 'translations', 'fr', 'ch01.json')):
+    c = rj(ch); c['sections'][0]['blocks'].append({'t': 'interactive', 'activity': 'ohm-phet', 'caption': 'PhET: Ohm’s law.'}); wj(ch, c)
+r = mk(ew, 'oe1'); check(r.returncode == 0, 'make_pack.py builds a pack with an outside page (external-embed@1)', r.stdout + r.stderr)
+pe = json.loads(zipfile.ZipFile(os.path.join(T, 'oe1', 'demo-physics.noema.zip')).read('pack.json'))
+ei = next((x for x in pe['activities']['items'] if x.get('id') == 'ohm-phet'), {})
+check(ei.get('url') == EMB['url'] and 'entry' not in ei and 'html' not in ei and sorted(ei.get('strings') or {}) == ['el', 'en', 'fr', 'ru'] and 'runtime:external-embed@1' in pe.get('requires', []),
+      'external-embed@1: the item travels with its url, credit and licence, no entry and no file; pack.requires names the runtime')
+we = os.path.join(T, 'w-embed2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'oe1', 'demo-physics.noema.zip'), we)
+ue = os.path.join(we, 'demo-physics'); ere = next(x for x in rj(os.path.join(ue, 'activities', 'activities.json'))['items'] if x['id'] == 'ohm-phet')
+check(r.returncode == 0 and 'entry' not in ere and ere.get('url') == EMB['url'] and rj(os.path.join(ue, 'activities', 'ohm-phet', 'strings.el.json'))['title'].startswith('Προσομοίωση'), 'unpack.py gives the outside page back without an entry (its strings beside it)', r.stdout + r.stderr)
+r = mk(ue, 'oe2'); check(r.returncode == 0 and json.loads(zipfile.ZipFile(os.path.join(T, 'oe2', 'demo-physics.noema.zip')).read('pack.json'))['version'] == pe['version'], 'the outside page round-trips: same pack.version', r.stdout + r.stderr)
+def refused_e(name, change, want):
+    w = os.path.join(T, 'bad-e-' + name); shutil.copytree(ew, w); change(w)
+    r = mk(w, 'obe-' + name); check(r.returncode == 1 and want in r.stdout, 'refused: ' + name, r.stdout + r.stderr)
+def emb(w, **kw):
+    q = os.path.join(w, 'activities', 'activities.json'); r_ = rj(q); next(x for x in r_['items'] if x['id'] == 'ohm-phet').update(kw); wj(q, r_)
+refused_e('a provider whose terms are pending (Falstad)', lambda w: emb(w, provider='falstad', url='https://www.falstad.com/circuit/circuitjs.html?ctz=abc', credit='Circuit simulator by Paul Falstad', license='GPL-2.0-or-later'), 'provider-pending')
+refused_e('a URL off the allow-list', lambda w: emb(w, url='https://phet.colorado.edu/en/simulations/ohms-law'), 'url-path')
+def emb_sim(w):
+    c = rj(os.path.join(w, 'chapters', 'ch01.json')); c['exercises'].append({**SIM, 'id': 'ch01-e909', 'activity': 'ohm-phet'}); wj(os.path.join(w, 'chapters', 'ch01.json'), c)
+refused_e('an outside page graded as a sim', emb_sim, 'sim-embed')
 def h5p_with(extra):   # the reference .h5p with one more file in it
     def f(w):
         q = os.path.join(w, 'activities', 'planets-quiz', 'item.h5p'); src = zipfile.ZipFile(q); ent = [(i.filename, src.read(i)) for i in src.infolist()]; src.close()

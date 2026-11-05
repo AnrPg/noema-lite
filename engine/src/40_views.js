@@ -173,11 +173,37 @@ function subjectMenu() {
     Noema.node ? { label: SL('openMap'), icon: 'map', run: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) } : null,
     window.NoemaCurMap?.attachDialog ? { label: Noema.node ? SL('otherStation') : SL('putOnMap'), sub: SL('putOnMapSub'), icon: 'path', run: async () => NoemaCurMap.attachDialog(ACCOUNT.id, { subject: await subjectMeta(), onDone: () => location.reload() }) } : null,
     { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
+    { label: tE('engine.author.create'), sub: tE('engine.author.createSub'), icon: 'wrench', href: '#/author' },
     own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
     { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
+    window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
+    window.NoemaXAPI ? { label: tE('engine.xapi.cmi5'), sub: tE('engine.xapi.cmi5Sub'), icon: 'download', run: exportCmi5 } : null,
     { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
+}
+/** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
+    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. The pack's own subject
+    (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
+function exportXAPI() {
+  let r;
+  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
+  if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
+  saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
+}
+/** ⋮ › Course package for an LMS (cmi5): the subject's chapters as a cmi5 course structure in a .zip (NoemaXAPI.subjectCmi5; JSZip, the
+    app's zip writer); its AUs open the chapters on the site, with the same ids as the xAPI record. */
+async function exportCmi5() {
+  try {
+    const r = NoemaXAPI.subjectCmi5({ pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
+    saveBlob(r.name, await NoemaXAPI.zip(r.files));
+  } catch (e) { toast('⚠️ ' + errText(e), 4000); }
+}
+function saveBlob(name, blob) {
+  const u = URL.createObjectURL(blob), a = h('a', { href: u, download: name });
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 10000);
+  toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
   confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
@@ -815,8 +841,31 @@ function drillView(id) {
 
 /* ---------- router ---------- */
 /** The subject's pages. In the shell, #/ is Today and the subject lives at #/subject; any other address is the shell's. */
+/* ---------- ✎ the activity author (#/author): an interactive activity built with a form, the real sim-spec@1 runtime as its preview
+   (docs/INTERACTIVE_AUTHORING.md, docs/activities-dev/authoring_ui.md). Its scripts load on the first visit (the single-file
+   bundle has them inline); the activity is not added to the open subject — the author downloads its folder. ---------- */
+let AUTHOR_LOAD = null;
+function loadAuthor() {
+  if (window.NoemaActivityAuthor) return Promise.resolve();
+  const base = window.NOEMA_ENGINE_BASE || 'engine/';
+  const js = f => new Promise((ok, no) => { const s = document.createElement('script'); s.src = base + f; s.onload = ok; s.onerror = () => no(new Error(f)); document.head.append(s); });
+  return AUTHOR_LOAD || (AUTHOR_LOAD = (async () => {
+    if (!document.querySelector('link[data-author-css]')) document.head.append(h('link', { rel: 'stylesheet', href: base + 'activity_author.css', 'data-author-css': '1' }));
+    for (const f of ['schemaform.js', 'activity_author_schemas.js', 'activity_author.js']) if (!(f === 'schemaform.js' ? window.NoemaSchemaForm : f === 'activity_author.js' ? window.NoemaActivityAuthor : window.NoemaActivitySchemas)) await js(f);
+  })().catch(e => { AUTHOR_LOAD = null; throw e; }));
+}
+async function authorView() {
+  shellChrome({ sub: true, crumbs: [[tE('engine.author.title')]], back: HOME() });
+  const v = view(backBtn('← ' + SUBJ.title, HOME()), h('p', { class: 'muted' }, tE('engine.author.loading')));
+  try { await loadAuthor(); } catch (e) { v.replaceChildren(...[backBtn('← ' + SUBJ.title, HOME()), h('p', {}, tE('engine.author.loadFailed'))].filter(Boolean)); return; }
+  if ((location.hash || '').slice(2).split('/')[0] !== 'author') return;   // the learner went elsewhere while it loaded
+  const m = main(); m.dataset.page = '@engine';
+  NoemaActivityAuthor.view(m);
+  if (!SHL()) m.prepend(backBtn('← ' + SUBJ.title, HOME()));
+}
 function route() {
   const p = (location.hash || '#/').slice(2).split('/');
+  if (p[0] !== 'author' && window.NoemaActivityAuthor?.current) { try { NoemaActivityAuthor.current.destroy(); } catch (e) { } NoemaActivityAuthor.current = null; }   // left the author: its preview and keys stop
   const X = SHL();
   if (X && !X.ENGINE_ROUTES.has(p[0])) return X.route();
   closeTutorIfMobile();
@@ -836,6 +885,7 @@ function route() {
   if (p[0] === 'drill') return drillView(p[1]);
   if (p[0] === 'mistakes') return mistakesView();
   if (p[0] === 'new') return whatsNewView();
+  if (p[0] === 'author') return authorView();
   if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
   homeView();
 }

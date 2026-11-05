@@ -1,0 +1,17 @@
+{
+ "id": "pid-tune",
+ "runtime": "sim-spec@1",
+ "entry": "activities/pid-tune/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "pid-tune-still",
+  "text": "A PID controller drives a lightly damped plant (natural frequency 4 rad/s, damping 0.4, 50 ms dead time) to a step of the setpoint from 0 to 1 at t = 0.5 s. A proportional controller alone (Kp = 1) overshoots by about 50 % and settles at 0.5, far from the setpoint. With Kp = 2, Ki = 3 and Kd = 0.4 the integral removes the steady-state error and the derivative damps the oscillation: no overshoot, settled within 2 % in about 1.5 s."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

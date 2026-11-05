@@ -1,0 +1,6 @@
+{ "cases": [
+ { "name": "c = 1.6 N·s/m: about 2 % of the energy is left after 2.5 s", "exercise": "ch01-e908", "steps": [{ "set": "c", "value": 1.6 }], "expect": { "passed": true, "values": { "E": [0.04, 0.05] } } },
+ { "name": "c = 1 N·s/m is not enough (about 8 % left)", "exercise": "ch01-e908", "steps": [{ "set": "c", "value": 1 }], "expect": { "passed": false, "values": { "E": [0.15, 0.18] } } },
+ { "name": "a stiffer spring is not the task (k = 9 N/m, c = 1.6)", "exercise": "ch01-e908", "steps": [{ "set": "c", "value": 1.6 }, { "set": "k", "value": 9 }], "expect": { "passed": false } },
+ { "name": "explorer: the values are saved", "steps": [{ "set": "c", "value": 0.8 }], "expect": { "state": ["k", "c", "x0"], "values": { "zeta": [0.19, 0.21] } } }
+] }

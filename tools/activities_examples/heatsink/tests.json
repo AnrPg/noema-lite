@@ -1,0 +1,123 @@
+{
+ "cases": [
+  {
+   "name": "Rsa 3.5 K/W: the junction settles at 124 °C (passes)",
+   "exercise": "ch01-e904",
+   "steps": [
+    {
+     "set": "Rsa",
+     "value": 3.5
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "tjSS": [
+      123.5,
+      124.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "Rsa 3 K/W: the smallest heatsink the cost check allows (passes)",
+   "exercise": "ch01-e904",
+   "steps": [
+    {
+     "set": "Rsa",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "tjSS": [
+      113.5,
+      114.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "the start value is far too hot (6.1 K/W: 176 °C)",
+   "exercise": "ch01-e904",
+   "steps": [
+    {
+     "set": "Rsa",
+     "value": 6.1
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "tjSS": [
+      175.5,
+      176.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "just too hot (3.6 K/W: 126 °C)",
+   "exercise": "ch01-e904",
+   "steps": [
+    {
+     "set": "Rsa",
+     "value": 3.6
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "tjSS": [
+      125.5,
+      126.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "a heatsink bigger than needed fails the cost check (1 K/W)",
+   "exercise": "ch01-e904",
+   "steps": [
+    {
+     "set": "Rsa",
+     "value": 1
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "tjSS": [
+      73.5,
+      74.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the value is saved",
+   "steps": [
+    {
+     "set": "Rsa",
+     "value": 2
+    }
+   ],
+   "expect": {
+    "state": [
+     "Rsa"
+    ],
+    "values": {
+     "Rtot": [
+      2.69,
+      2.71
+     ],
+     "tau1": [
+      100,
+      400
+     ]
+    }
+   }
+  }
+ ]
+}

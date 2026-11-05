@@ -297,17 +297,18 @@
         const dxOut = h('p', { class: 'sim-dx-out', 'aria-live': 'polite' });
         const another = exMode ? null : h('button', { class: 'btn ghost small', type: 'button', 'data-bench': 'another', onclick: () => newDevice() }, '↻ ' + tE('engine.act.bench.another'));
         const cur = () => bn.instruments.find(x => x.kind === inst.s.value) || bn.instruments[0];
+        const whole = k => k === 'log' || k === 'rssi';   // twin@1: the event log and the radio's RSSI read the device, not a point
         function setInstrument() {
           const x = cur(), two = x.kind === 'V' || x.kind === 'R', ids = x.points || bn.points.map(p => p.id);
           const keep = (s, items, fallback) => { const v = s.value; s.replaceChildren(...items.map(o => h('option', { value: o.value }, o.text))); s.value = items.some(o => o.value === v) ? v : fallback; };
           if (x.kind === 'I') keep(part.s, (x.parts || []).map((q, i) => ({ value: String(i), text: tt(q.label) })), '0');
-          else {
+          else if (!whole(x.kind)) {
             const g = ids.find(id => /^(gnd|0)$/.test(String(pt(id).at))) || ids[ids.length - 1];
             keep(A.s, ptItems(ids), ids.find(id => id !== g) || ids[0]);
             if (two) keep(Bk.s, ptItems(ids), g);
           }
           lab.get(A.s).textContent = two ? tE('engine.act.bench.red') : tE('engine.act.bench.probe');
-          A.row.hidden = x.kind === 'I'; Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
+          A.row.hidden = x.kind === 'I' || whole(x.kind); Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
         }
         inst.s.addEventListener('change', setInstrument);
         dxSel.s.addEventListener('change', () => {
@@ -319,6 +320,7 @@
         const tval = (v, d) => { const g = typeof v === 'string' ? C(v) : null; return g ? ev(g, base()) : (v === undefined ? d : v); };
         function probeOf(x) {
           if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}) }, ev: { i: 'I', part: +part.s.value } }; }
+          if (whole(x.kind)) return { probe: { kind: x.kind }, ev: { i: x.kind } };
           const a = pt(A.s.value), b = Bk.s.value ? pt(Bk.s.value) : null;
           if (x.kind === 'V' || x.kind === 'R') return { probe: { kind: x.kind, a: a.at, b: b ? b.at : 'gnd' }, ev: { i: x.kind, a: a.id, b: b?.id } };
           const tw = { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
@@ -337,14 +339,25 @@
           if (r.kind === 'V') return fm(r.value, 'V');
           if (r.kind === 'I') return fm(r.value, 'A');
           if (r.kind === 'R') return r.value === 'OL' ? 'OL' : fm(r.value, 'Ω');   // i18n-ignore (the meter's own display)
-          if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, 'V'), mean: fm(r.stats.mean, 'V'), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
+          if (r.kind === 'rssi') return fmtNum(r.value, { format: 'fixed', digits: 1, unit: 'dBm' }, locale);
+          if (r.kind === 'log') { const n = logCounts(r); return tE('engine.act.bench.logStats', { resets: n.reset, lost: n.lost, overruns: n.overrun }); }
+          const u = r.unit === 'A' ? 'A' : 'V';   // a scope shows a voltage, or (twin@1) the supply current
+          if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, u), mean: fm(r.stats.mean, u), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
           const st = Object.values(r.traces || {})[0]?.stats || {};
           return tE('engine.act.bench.logicStats', { freq: st.freq > 0 ? fm(st.freq, 'Hz') : '—', duty: fmtNum(100 * (st.duty || 0), { format: 'fixed', digits: 0, unit: '%' }, locale) });
+        }
+        /** the event log of twin@1: how many resets, lost messages and overrun wakes */
+        function logCounts(r) {
+          if (r.counts && typeof r.counts === 'object') return r.counts;
+          const n = { reset: 0, lost: 0, overrun: 0, dead: 0 };
+          for (const e of Array.isArray(r.events) ? r.events : []) if (e && Object.prototype.hasOwnProperty.call(n, e.code)) n[e.code]++;
+          return n;
         }
         /** a reading as it is kept in the saved state: the numbers the log shows, not the traces */
         function slim(r) {
           if (!r || typeof r !== 'object') return r;
-          if (r.kind === 'scope') return { kind: 'scope', stats: r.stats };
+          if (r.kind === 'scope') return { kind: 'scope', stats: r.stats, ...(r.unit ? { unit: r.unit } : {}) };
+          if (r.kind === 'log') return { kind: 'log', counts: logCounts(r) };
           if (r.kind === 'logic') return { kind: 'logic', traces: Object.fromEntries(Object.entries(r.traces || {}).map(([k, v]) => [k, { stats: v.stats }])) };
           return r;
         }
@@ -359,13 +372,14 @@
         }
         function showFace(e) {
           const r = e.r; faceEl.replaceChildren();
-          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
+          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R' || r.kind === 'rssi' || r.kind === 'log') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
           const fig = h('figure', { class: 'sim-plot sim-scope' }); faceEl.append(fig);
           const xl = tE('engine.act.bench.time') + ' (s)';
           let p, data, yl;
           if (r.kind === 'scope') {
-            yl = tE('engine.act.bench.voltage') + ' (V)';
-            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: 'V' } };
+            const cur = r.unit === 'A';
+            yl = cur ? tE('engine.act.bench.current') + ' (A)' : tE('engine.act.bench.voltage') + ' (V)';
+            p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: cur ? 'A' : 'V', ...(cur ? { format: 'si' } : {}) } };
             data = { xs: r.t, lines: [{ ys: r.v }], marks: [], xr: [r.t[0], r.t[r.t.length - 1]], yr: [null, null] };
           } else {   // a logic trace: steps from the level at the start and the edges
             const tr = Object.values(r.traces)[0] || { level0: 0, edges: [] }, xs = [r.t0], ys = [tr.level0];
@@ -387,7 +401,7 @@
           out('event', { name: 'measure', data: { ...m.ev } });
           runner.measure(prep(base()), m.probe, r => {
             if (closed) return;
-            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
+            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : r.kind === 'log' && !r.error ? { kind: 'log', counts: logCounts(r) } : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
             paintLog(); showFace(e); saveSoon();
           });
         }

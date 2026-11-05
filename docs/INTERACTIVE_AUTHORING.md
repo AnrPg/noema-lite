@@ -4,9 +4,11 @@ The contract is `docs/INTERACTIVE.md`; this page is how to make one that teaches
 `tools/activities_examples/alias-lab/` (html-app@1, sampling and aliasing) and `tools/activities_examples/rc-lowpass/`
 (sim-spec@1, an RC low-pass filter): each an explorer in the theory and a graded sim exercise. For circuits (`circuit-mna@1`,
 `docs/INTERACTIVE_CIRCUIT.md`): `rc-transient` (a capacitor charging from a square wave, R and C on sliders, a scope trace) and
-`led-bench` (a fault-finding bench: an LED that stays dark). For Python (`py-module@1`, `docs/INTERACTIVE_PYTHON.md`): `py-filter`
-(two digital low-pass filters computed with numpy). For an H5P package (`h5p@1`, `docs/INTERACTIVE_H5P.md`):
-`planets-quiz` (an H5P multiple choice, in English, Greek and Russian).
+`led-bench` (a fault-finding bench: an LED that stays dark). For heat, control loops, radio links and IoT nodes
+(`docs/INTERACTIVE_ENGINES.md`): `heatsink` (`thermal@1`), `pid-tune` (`pid@1`), `lora-link` (`rf@1`) and `sensor-node`
+(`twin@1`). For Python (`py-module@1`, `docs/INTERACTIVE_PYTHON.md`): `py-filter` (two digital low-pass filters computed with
+numpy). For an H5P package (`h5p@1`, `docs/INTERACTIVE_H5P.md`): `planets-quiz` (an H5P multiple choice, in English, Greek and
+Russian). For a WebAssembly module (`wasm-module@1`, `docs/INTERACTIVE_WASM.md`): `wasm-oscillator` (a damped oscillator).
 
 ## When an activity earns its place
 
@@ -31,6 +33,12 @@ own rules, a step-by-step animation. A graded html-app reports its own result (`
 | grading of a sim exercise | `checks`: rules the app evaluates on the values | `reported`: the activity calls `noema.result` |
 | the checks before delivery | every expression and key checked by `activity_lint.py` | lint for banned code + the browser test |
 | limits | 24 controls, 6 plots, 2000 points; formulas only | 512 KB; anything the sandbox allows |
+
+Two more, rarely: **wasm-module@1** when the model needs a real program (an emulator, a long iterative solver) — the page is
+still a sim-spec, only the computing is a WebAssembly module (`docs/INTERACTIVE_WASM.md`, start with `activity_new.py --from
+wasm-oscillator`); **external-embed@1** for a well-known outside simulation (PhET, GeoGebra, Desmos) in a theory block — explore
+only, needs the network, off unless the site switches it on, mind the licences (`docs/INTERACTIVE_EMBED.md`). Write the theory
+so that it stands without either.
 
 ## When Python (py-module@1)?
 
@@ -101,7 +109,8 @@ licence in `activity.json`.
    plots, and give every label a key in every string table. A good spec: few controls (2–4), the quantity the learner should
    watch as a readout, one plot that shows the relation, marks on the values that matter (the cutoff, the target).
    `--from rc-transient` starts from a circuit (a netlist, sliders bound to its parts, a scope plot); `--from led-bench` from a
-   fault-finding bench (below). Without `--runtime`, `activity_new.py` copies alias-lab (app.html, strings in en/el/ru, the registry entry, a fallback
+   fault-finding bench (below); `--from heatsink`, `pid-tune`, `lora-link` or `sensor-node` from the heat, control-loop, radio and
+   IoT-twin engines (`docs/INTERACTIVE_ENGINES.md`; tests.json then starts from two of the reference's own cases). Without `--runtime`, `activity_new.py` copies alias-lab (app.html, strings in en/el/ru, the registry entry, a fallback
    picture) under the new id. Change it; keep its structure:
    - every word in `strings.<locale>.json`, shown with `noema.t(key)`;
    - wait for `noema.ready`, then read `noema.task`, `noema.state`, `noema.exercise`;
@@ -123,6 +132,30 @@ licence in `activity.json`.
    chapters; units and symbols stay.
 7. **Check** (docs/INTERACTIVE.md §11): `activity_lint.py`, `activity_test.py` (with solutions and wrong attempts),
    `activity_preview.py`, then `make_pack.py`.
+
+## The authoring page (`#/author`): a sim-spec@1 activity with a form
+
+For a sim-spec@1 activity there is also a page in the app: open any subject, then **⋮ › Create an activity** (a line icon, next
+to Edit; the route is `#/author`, the crumbs end with “Activity author”). It is a form generated from the same JSON Schemas the
+validators enforce (`tools/schemas/noema.sim-spec.v1.schema.json`, `noema.activities.v1.schema.json`; ADR 001 D12), with the
+activity running beside it in the app's own `sim-spec@1` runtime — the preview is exactly what a learner will see.
+
+* **Kind**: a simulation with formulas (`formula@1`) or a circuit simulation (`circuit-mna@1`, with its netlist, bindings and an
+  optional fault-finding bench). Switching keeps the fields both have.
+* **Tabs**: *Activity* (the registry entry: id, fallback picture and text, licence), *Simulation* (controls, constants, computed
+  values, readouts, plots; the model and bench of a circuit), *Words* (every key × every language; add a language). Under every key
+  field its text in each language; every formula is checked as you type, with the names that place may use.
+* **Problems** are the validators' own messages (`checkSimSpec`, `checkActivities`, the words of `activity_lint.py`), at their
+  field, as a count on each tab and in a list with *Show*. While there are problems the preview keeps the last good version.
+* **Files**: *Download .zip* gives `activities/activities.json`, `activities/<id>/spec.json` and `activities/<id>/strings.<loc>.json`
+  — the folder `make_pack.py` takes (add the fallback picture to `media/`); *Import* reads the same back (.zip or JSON files).
+  Nothing leaves the device, and the activity is not added to the subject that is open. Undo / redo: buttons, Ctrl/Cmd+Z,
+  Ctrl/Cmd+Shift+Z.
+* Then go on with step 3 above (the theory block, the sim exercise and its `checks`) and run the checks of step 7 on the folder.
+
+The page's words are ordinary engine strings (`engine.author.*` in `i18n/engine/en.arb`, drafted in every UI locale); a field's
+label is `engine.author.f.<schema title>` (`p.<property>` for the netlist), so a new schema field needs its label key there.
+How it is built: `docs/activities-dev/authoring_ui.md`.
 
 ## activity_test.py cases — `activities/<id>/tests.json`
 
@@ -149,7 +182,7 @@ the saved values:
 ```
 
 For a **py-module@1** activity the cases are the same as for a sim-spec (`set` names a param, `values` are Python's scalar
-outputs): `{"name": "N = 8 removes the tone", "exercise": "ch01-e904", "steps": [{"set": "N", "value": 8}], "expect": {"passed": true,
+outputs): `{"name": "N = 8 removes the tone", "exercise": "ch01-e911", "steps": [{"set": "N", "value": 8}], "expect": {"passed": true,
 "values": {"att1k": [-130, -60]}}}`. They run when the Python files are there (`NOEMA_PYODIDE_SITE=<site with vendor/pyodide/>`);
 otherwise `activity_test.py` skips them.
 
@@ -163,6 +196,28 @@ are, `values` the bench's `diagnosis`, `measurements`, `correct`:
   "steps": [{ "measure": { "instrument": "V", "a": "TP3", "b": "GND" } }, { "diagnose": 2 }],
   "expect": { "passed": true, "log": 1, "readings": [[0, -0.05, 0.05]] } }
 ```
+
+## Which engine for which learning goal
+
+Pick the engine by what the learner should come to understand, not by the topic's name. The engine only has to compute the
+quantities the idea is about; everything else (a picture of the device, the story) belongs in the text.
+
+| the learner should… | engine | a typical activity |
+|---|---|---|
+| see how quantities depend on each other through formulas you can write down (a law, a closed-form answer, a trade-off curve) | `formula@1` (no `model`) | a lens equation, a sampling rate against aliasing, the cost of a design against one parameter |
+| read and design circuits: voltages, currents, an RC or RL transient, a filter's response, a switching stage | `circuit-mna@1` | an RC charging from a square wave; a divider loaded by a sensor |
+| reason from measurements to a fault on a board | `circuit-mna@1` with a `bench` | an LED that stays dark: open resistor, reversed LED or a broken track? |
+| understand heat flow: thermal resistance chains, the steady temperature, time constants, a duty-cycled load, a thermostat's hysteresis | `thermal@1` | size a heatsink so the junction stays under its limit; a heater with a thermostat |
+| tune or compare controllers: what P, I and D each do, overshoot against speed, steady-state error, windup, dead time, noise | `pid@1` | tune a PID to a step-response spec; switch anti-windup on and off on a saturated actuator |
+| plan a radio link: the link budget, path loss against distance, spreading factor against airtime and range, the Fresnel zone | `rf@1` | pick SF and antenna for a margin at a distance within an airtime limit |
+| design a battery-powered node's duty cycle: average current, battery life, what each wake costs, delivery over a marginal link | `twin@1` | choose the wake period for a year of battery and enough readings a day |
+| find a fault in a deployed device from its battery, current, radio and event log | `twin@1` with a `bench` | a node whose battery dies in weeks: an antenna off, an aged cell, a wrong wake period? |
+
+Rules of thumb. If the answer is one formula, use `formula@1`: an engine adds nothing but a run. If the idea is a process over
+time (a transient, a loop settling, a battery draining), use the engine that integrates it and show the series. When two engines
+could do it (a heater as a `thermal@1` network or a `pid@1` `thermal` plant), choose the one whose controls are what the learner
+should change: the network's resistances and capacities, or the controller's gains. Keep one engine per activity; a system that
+spans two (a node whose radio link is the question) uses the engine of the question (`rf@1`) and states the rest as constants.
 
 ## A good fault-finding bench
 
@@ -196,6 +251,47 @@ A bench teaches **reasoning from measurements**: each reading should rule someth
 9. **The explorer**: the same bench as a theory block lets the learner practise; "Check my diagnosis" reveals the fault,
    "Another device" draws a new one. Explain it after the block: what to measure first, how to read a 0 V and a 5 V.
 10. **The fallback text** is the diagnosis method in words (where to measure, what each reading means), with the still schematic.
+
+A `twin@1` bench follows the same rules with a device instead of a board (`docs/INTERACTIVE_ENGINES.md` §5.3): its points are the
+battery (`vbat`, `vload`), the supply current (`i`) and `gnd`; its instruments the voltmeter, the average current, a scope on
+the current, the event log and the RSSI. Give each fault one instrument that shows it (the RSSI for a detached antenna, the
+average current for a wrong wake period, the voltage under load for an aged cell, the log for a brown-out level set too high).
+A faulty sensor (`sensor-stuck`, `sensor-drift`) has no instrument on the bench: keep it out of a bench's faults.
+
+## Importing H5P quizzes — `h5p_import.py`
+
+When the sources include ready-made **H5P packages** (`.h5p` files from H5P.org, Moodle, Lumi, a teacher's course), import them
+into the pack's **own exercise types** instead of retyping them. This is not the `h5p@1` runtime (which plays a package as H5P):
+the importer writes ordinary `mcq`, `tf`, `cloze`, `bucket`, `match`, `order`, `spotbug`, `img_drag`, `img_reveal` exercises and
+flashcards that the app grades, drills and schedules like any other.
+
+```
+python3 h5p_import.py a.h5p b.h5p … --out <subject-dir> --chapter ch07 [--title "…"] [--src <source id>] [--summary-order] [--report report.json]
+python3 validate.py <subject-dir>/chapters/ch07.json
+```
+
+* It writes `chapters/<chapter>.json` (one section per package), the pictures to `media/` and their entries to
+  `media/media.json` (an id already there is kept). It prints ✓ / ✗ per package and notes; exit 2 when nothing was imported.
+* What maps to what: MultiChoice → `mcq` (`img_reveal` with its picture), TrueFalse → `tf`, Blanks → `cloze`, DragText → `cloze`
+  with a bank (or `bucket`), MarkTheWords → `spotbug`, DragQuestion → `img_drag` / `match` / `bucket` / `mcq`, SingleChoiceSet
+  and Summary → `mcq`, QuestionSet and Column → their questions, Dialogcards → flashcards. Anything else is reported as
+  unsupported, never guessed. The package's title, author and licence go to each exercise's `cite` and the section's first line.
+* **Nothing of the package runs:** only `h5p.json`, `content/content.json` and the PNG / JPG / WebP pictures it names are read
+  (no SVG, no URLs, no libraries).
+
+**Every quality rule still applies after the import** (`CONTENT_SPEC.md`, Q1–Q8). The importer gives you a draft, not a chapter:
+
+1. Put the imported exercises into the chapter they belong to (or keep the imported chapter and give it a knowledge map
+   `map/chNN.json`, Q1): they count toward the chapter's quotas like any exercise of the sources (every one kept, Q3).
+2. **Self-contained** (Q2): an H5P question that leaned on a video, audio or an outside picture lost it (see the notes) —
+   rewrite it so that it stands alone; no "the video", "above", "slide 3".
+3. **Explanations:** the importer fills `explain` from the H5P feedback or with the right answer; write the *why* (and each
+   wrong option's `why` for an mcq), as for every exercise.
+4. **Test the idea** (Q5): H5P quizzes are often recall of one lesson's example; rewrite those into questions about the idea,
+   adjust `think`, `difficulty`, `tags`.
+5. Write the theory around them (an import has no `lr` and no theory beyond the section's first line), then the blind solve and
+   review (`review/chNN.json`) as for every chapter. A chapter left as a raw import is checked as `authoring.by: "import"`,
+   which gives quality *warnings* only — never deliver it that way.
 
 ## Pitfalls
 

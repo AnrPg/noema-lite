@@ -1,0 +1,138 @@
+{
+ "cases": [
+  {
+   "name": "SF9 with the 5 dBi antenna: 11.9 dB of margin, 185 ms on air (passes)",
+   "exercise": "ch01-e906",
+   "steps": [
+    {
+     "set": "sf",
+     "value": 9
+    },
+    {
+     "set": "ant",
+     "value": 5
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "margin": [
+      11.5,
+      12.3
+     ],
+     "air": [
+      0.18,
+      0.19
+     ]
+    }
+   }
+  },
+  {
+   "name": "SF10 with the dipole passes too",
+   "exercise": "ch01-e906",
+   "steps": [
+    {
+     "set": "sf",
+     "value": 10
+    },
+    {
+     "set": "ant",
+     "value": 2.15
+    }
+   ],
+   "expect": {
+    "passed": true
+   }
+  },
+  {
+   "name": "the start (SF7, chip antenna) does not close the link",
+   "exercise": "ch01-e906",
+   "steps": [
+    {
+     "set": "sf",
+     "value": 8
+    },
+    {
+     "set": "sf",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "margin": [
+      -1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "SF12 closes the link with the chip antenna but takes 1.3 s on air",
+   "exercise": "ch01-e906",
+   "steps": [
+    {
+     "set": "sf",
+     "value": 12
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "margin": [
+      12,
+      12.7
+     ],
+     "air": [
+      1.3,
+      1.34
+     ]
+    }
+   }
+  },
+  {
+   "name": "SF9 with the dipole falls 1 dB short",
+   "exercise": "ch01-e906",
+   "steps": [
+    {
+     "set": "sf",
+     "value": 9
+    },
+    {
+     "set": "ant",
+     "value": 2.15
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "margin": [
+      8.5,
+      9.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the choices are saved",
+   "steps": [
+    {
+     "set": "ant",
+     "value": 5
+    }
+   ],
+   "expect": {
+    "state": [
+     "sf",
+     "ant"
+    ],
+    "values": {
+     "range": [
+      1500,
+      3000
+     ]
+    }
+   }
+  }
+ ]
+}

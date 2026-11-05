@@ -5,10 +5,14 @@
      node activity_harness.js preview SUBJECT_DIR ID [OUT_DIR]  → screenshots: light, dark, 360 px wide, the fallback
    sim-spec@1 activities run in the app's own sim runtime (35_activity_sim.js, with the spec check of packcheck.js); in their
    tests.json a step {"set": "<param id>", "value": v} sets a control, "values": {name: number | [lo, hi]} checks a computed value,
-   "passed" the exercise's checks grader, "state" the saved values. A bench (circuit-mna@1, docs/INTERACTIVE.md §12.7): a step
+   "passed" the exercise's checks grader, "state" the saved values. A bench (circuit-mna@1 or twin@1, docs/INTERACTIVE.md §12.7): a step
    {"measure": {"instrument": "V", "a": "TP3", "b": "GND"}} (or {"instrument": "I", "part": 0}) takes a measurement, {"diagnose": 6}
    picks the 7th diagnosis; "readings": [[i, lo, hi]] checks the number of the i-th measurement, "log": n how many there are;
    a case's "task" (e.g. {"fault": "rOpen"}) overrides the exercise's task.params.
+   wasm-module@1 (docs/INTERACTIVE_WASM.md): activities/<id>/module.wasm (+ its own spec.json) runs like a sim-spec@1 activity, with
+   the app's wasm runtime (44_activity_wasm.js: the module checked, then run in a worker without network); a sim-spec@1 spec with
+   engine wasm@1 finds its module item in activities.json. external-embed@1 is not run here (it needs the network and the provider's
+   page): check it with embed_check.py.
    py-module@1 (docs/INTERACTIVE_PYTHON.md) runs like sim-spec@1 (the same steps and expectations; "values" are Python's scalar outputs),
    over a small local http server that also serves the pinned Python files: from $NOEMA_PYODIDE_SITE (a folder with vendor/pyodide/manifest.json,
    e.g. dist/site after `python3 tools/fetch_pyodide.py`) or the repository's dist/site. Without them the Python activities are skipped
@@ -39,12 +43,17 @@ const s32 = rd('32_activities.js'), ACTP = s32.slice(s32.indexOf('const ACTP = '
 const rj = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 const regPath = path.join(SDIR, 'activities', 'activities.json');
 if (!fs.existsSync(regPath)) { console.log('✗ no activities/activities.json in ' + SDIR); process.exit(1); }
-const items = (rj(regPath).items || []).filter(a => !onlyId || a.id === onlyId).map(a => {
+const allItems = (rj(regPath).items || []).map(a => {
   const dir = path.join(SDIR, 'activities', a.id), strings = {};
   for (const f of fs.existsSync(dir) ? fs.readdirSync(dir) : []) { const m = f.match(/^strings\.(.+)\.json$/); if (m) strings[m[1]] = rj(path.join(dir, f)); }
   const entry = a.entry ? path.join(SDIR, a.entry) : null;
   const text = entry && fs.existsSync(entry) ? fs.readFileSync(entry, 'utf8') : '';
   if (a.runtime === 'sim-spec@1') { let spec = null; try { spec = JSON.parse(text); } catch (e) { spec = null; } return { ...a, spec, strings, _dir: dir }; }
+  if (a.runtime === 'wasm-module@1') {   // the module as make_pack.py puts it in the pack: base64 + sha256 + bytes; its own spec beside it
+    const b = entry && fs.existsSync(entry) ? fs.readFileSync(entry) : null, sp = path.join(dir, 'spec.json');
+    let spec; try { spec = fs.existsSync(sp) ? JSON.parse(fs.readFileSync(sp, 'utf8')) : undefined; } catch (e) { spec = null; }
+    return { ...a, ...(b ? { wasm: b.toString('base64'), sha256: require('crypto').createHash('sha256').update(b).digest('hex'), bytes: b.length } : {}), ...(spec !== undefined ? { spec } : {}), strings, _dir: dir };
+  }
   if (a.runtime === 'py-module@1') {   // main.py + its spec.json beside it (like make_pack.py)
     let spec = a.spec || null; const sf = path.join(dir, 'spec.json'); if (!spec && fs.existsSync(sf)) try { spec = rj(sf); } catch (e) { spec = null; }
     const entryPy = entry || path.join(dir, 'main.py'), py = fs.existsSync(entryPy) ? fs.readFileSync(entryPy, 'utf8') : '';
@@ -57,6 +66,8 @@ const items = (rj(regPath).items || []).filter(a => !onlyId || a.id === onlyId).
   }
   return { ...a, html: text, strings, sha256: null, _dir: dir };
 });
+const items = allItems.filter(a => !onlyId || a.id === onlyId);
+const MODULES = Object.fromEntries(allItems.filter(a => a.runtime === 'wasm-module@1').map(a => [a.id, a]));   // what a wasm@1 spec names (model.module)
 if (!items.length) { console.log('✗ no activity ' + (onlyId || '') + ' in activities.json'); process.exit(1); }
 const exercises = {};
 for (const d of ['chapters']) { const dd = path.join(SDIR, d); for (const f of fs.existsSync(dd) ? fs.readdirSync(dd) : []) if (f.endsWith('.json')) for (const e of rj(path.join(dd, f)).exercises || []) exercises[e.id] = e; }
@@ -69,6 +80,8 @@ const has = f => fs.existsSync(path.join(srcDir, f));
 const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
 const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
 const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
+const P6 = ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js', '43_engines_p6.js'].filter(has);   // thermal@1, pid@1, rf@1, twin@1 (P6)
+const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
 const PYSW = [PYSITE && path.join(PYSITE, 'engine', 'pyodide-sw.js'), path.join(srcDir, '..', 'pyodide-sw.js'), path.join(srcDir, 'pyodide-sw.js')].find(f => f && fs.existsSync(f));
@@ -86,21 +99,24 @@ const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.
   'engine.act.bench.scopeStats': '{pp} peak to peak, mean {mean}, frequency {freq}', 'engine.act.bench.logicStats': 'frequency {freq}, duty cycle {duty}', 'engine.act.bench.time': 'Time', 'engine.act.bench.voltage': 'Voltage',
   'engine.act.bench.level': 'Logic level (0 or 1)', 'engine.act.bench.diagnosis': 'Your diagnosis', 'engine.act.bench.choose': 'Choose the fault…', 'engine.act.bench.commit': 'Check my diagnosis',
   'engine.act.bench.right': 'Right: {fault}', 'engine.act.bench.wrong': 'Not this one. The fault was: {fault}', 'engine.act.bench.another': 'Another device', 'engine.act.bench.failed': 'this measurement could not be made',
+  'engine.act.bench.inst.log': 'Event log', 'engine.act.bench.inst.rssi': 'Radio: signal strength (RSSI)', 'engine.act.bench.current': 'Current',
+  'engine.act.bench.logStats': 'resets: {resets}, lost messages: {lost}, overrun wake-ups: {overruns}',
   "engine.common.sizeMB": "{size} MB", "engine.common.sizeKB": "{size} KB", "engine.common.sizeB": "{size} B", "engine.act.py.firstUse": "This activity runs Python: it downloads about {size} once, then works offline.", "engine.act.py.network": "The first time it also downloads {packages}, so it needs the internet.", "engine.act.py.download": "Download {size} and start", "engine.act.py.loading": "Getting Python ready… {done} of {total}", "engine.act.py.starting": "Starting Python…", "engine.act.py.stepError": "The activity's Python code stopped with an error ({code}).", "engine.act.py.noHere": "This activity runs Python, which works only on the website, not in a downloaded copy of the app. Here is what it shows.", "engine.act.py.offline": "Python is not on this device yet, and there is no connection. Connect once, or prepare Python ahead in Settings.", "engine.act.py.slow": "Python took too long to start." };
 const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}
 ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
-var RT = {}, EN = {}; var ACT = { registerRuntime: function (d) { RT[d.id] = d; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); } };
+var RT = {}, EN = {}; var ACT = { ITEMS: {}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); } };
 function nf(n) { return String(n); } function fmtBytes(n) { return n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B'; } function tip(t) { return document.createTextNode(''); }
 var WORDS = ${JSON.stringify(HOSTWORDS)};
 function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${P6.map(f => `<script>${rs(f)}</script>`).join('')}${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
-window.run = function (act, init) {
+window.run = function (act, init, modules) {
+  if (modules) ACT.ITEMS = modules;
   var box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];
   if (window.H) try { window.H.close(); } catch (e) {}
   var rt = RT[act.runtime]; if (!rt) { LOG.push({ type: 'fail', why: 'runtime ' + act.runtime + ' is not in this toolkit' }); return; }
@@ -143,11 +159,11 @@ window.run = function (act, init) {
   const start = async (p, a, o = {}) => {
     const init = { activityId: a.id, exerciseId: o.exerciseId || null, attemptId: 'test', seed: o.seed ?? 12345, task: o.task || {}, locale: o.locale, strings: a.strings[o.locale] || {},
       theme: THEMES[o.theme || 'light'], state: o.state || null, stateVersion: a.stateVersion || 1, capabilities: a.capabilities || [], limits: { msgBytes: 65536, stateBytes: 262144, eventsPerSec: 50 } };
-    await p.evaluate(([act, init, th]) => { window.setTheme(th); window.run(act, init); }, [a, init, THEMES[o.theme || 'light']]);
+    await p.evaluate(([act, init, th, mods]) => { window.setTheme(th); window.run(act, init, mods); }, [a, init, THEMES[o.theme || 'light'], MODULES]);
     const t0 = Date.now(); while (Date.now() - t0 < 8000) { const L = await p.evaluate(() => window.LOG); if (L.some(m => m.type === 'ready' || m.type === 'fail')) break; await p.waitForTimeout(100); }
     if (a.runtime === 'py-module@1') await pyValues(p);   // Python loads (first use: the whole runtime) and computes the first outputs
     await p.waitForTimeout(o.settle ?? 400);
-    const frame = a.runtime === 'sim-spec@1' || a.runtime === 'py-module@1' ? p.mainFrame() : p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame());
+    const frame = a.runtime === 'sim-spec@1' || a.runtime === 'py-module@1' || a.runtime === 'wasm-module@1' ? p.mainFrame() : p.frames().find(f => f.parentFrame() && f.parentFrame() !== p.mainFrame());
     return { frame, log: await p.evaluate(() => window.LOG) };
   };
   const visible = f => f.evaluate(() => document.body.innerText);
@@ -159,13 +175,16 @@ window.run = function (act, init) {
 
   for (const a of items) {
     console.log(`\n— ${a.id} (${a.runtime})`);
-    const PY = a.runtime === 'py-module@1', SIM = a.runtime === 'sim-spec@1' || PY;
+    if (a.runtime === 'external-embed@1') { console.log('  (an outside page: not run here — it needs the network; check it with embed_check.py, and look at it in the app)'); continue; }
+    if (a.runtime === 'wasm-module@1' && !a.spec) { console.log('  (a module without its own spec: it runs through the sim-spec@1 activities whose spec names it in model.module)'); continue; }
+    const PY = a.runtime === 'py-module@1', WA = a.runtime === 'wasm-module@1', SIM = a.runtime === 'sim-spec@1' || PY || WA;
     const H5 = a.runtime === 'h5p@1';
     if (PY && !PYOK) { skipped++; console.log(`  (skipped: ${PYSITE ? 'the Python runner (activity_host/37_activity_py*.js) is missing from the toolkit' : 'the Python files are not here — set NOEMA_PYODIDE_SITE to a folder with vendor/pyodide/ (python3 tools/fetch_pyodide.py --site DIR)'})`); continue; }
-    if (!(a.runtime === 'html-app@1' || (SIM && SIMOK) || (H5 && H5POK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ', sim-spec@1, py-module@1' : ''}${H5POK ? ', h5p@1' : ''} only for now`); continue; }
+    if (!(a.runtime === 'html-app@1' || (SIM && !WA && SIMOK) || (WA && WASMOK) || (H5 && H5POK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ', sim-spec@1, py-module@1' : ''}${WASMOK ? ', wasm-module@1' : ''}${H5POK ? ', h5p@1' : ''} only for now`); continue; }
     if (H5 && a._missing) { say(false, `${a.entry || 'item.h5p'}: not found`); continue; }
-    if (SIM && !a.spec) { say(false, `${PY ? 'activities/' + a.id + '/spec.json' : a.entry || 'spec.json'}: not found or not JSON`); continue; }
+    if (SIM && !a.spec) { say(false, `${PY || WA ? 'activities/' + a.id + '/spec.json' : a.entry || 'spec.json'}: not found or not JSON`); continue; }
     if (PY && !a.python) { say(false, `${a.entry || 'activities/' + a.id + '/main.py'}: not found`); continue; }
+    if (WA && !a.wasm) { say(false, `${a.entry || 'module.wasm'}: not found`); continue; }
     const locs = H5 ? [...new Set([OWN, ...Object.keys(a.h5pByLocale || {})])] : Object.keys(a.strings);
     if (mode === 'preview') {
       const out = path.resolve(outArg || path.join(SDIR, 'build', 'preview', a.id)); fs.mkdirSync(out, { recursive: true });
