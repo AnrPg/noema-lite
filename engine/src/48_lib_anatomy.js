@@ -30,6 +30,9 @@
      "C5*" a major root (weight 2), "C5" a root (1), "C7~" a minor/inconstant root (0.5).
      Innervation: "nerve@level:roots" (the branch leaves the nerve at that level; no level = the nerve's last level); several
      separated by ";"; "=w" after the roots weights a nerve in a dual supply.
+     CHECK BEFORE RELEASE (docs/library/anatomy.md §10): the AMA ROM edition (5th vs 6th, the rom table); the FMA licence (no FMA
+     data or id is bundled); the ISNCSCI worksheet revision (2019 here; check the 2026 worksheet); the NIOSH FM table and its
+     interpolation (nioshFM, verify); TA2 / Uberon / FMA xref ids not filled (the extractor is not written); the TA2Viewer repo licence.
      ====================================================================================================================== */
   const SRC = {
     regions: ['head|head', 'neck|neck', 'thorax|thorax', 'abdomen|abdomen', 'pelvis|pelvis and perineum', 'back|back', 'upper-limb|upper limb', 'lower-limb|lower limb', 'heart-region|heart and great vessels'],
