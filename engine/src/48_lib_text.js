@@ -782,6 +782,7 @@
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibTextModule, 'NoemaLibText');
   root.NoemaLibText = Object.freeze({
+    table: { model: TABLE, outputs: OUT },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     tokenize, normalizeText, mattr, mtld, mtldDir, hdd, yuleK, simpsonD, honoreR, zipf, heaps, assoc, readability, sylEn, sylOf, deltaMatrix, units, lineSyllables, scan, enFit, rhymeKey,
   });

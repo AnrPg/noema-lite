@@ -1,6 +1,9 @@
 /* noema-lite — NoemaActivityAuthor: build an interactive activity with a form generated from the JSON Schemas
    (docs/activities-dev/authoring_ui.md; ADR 001 D12 "an authoring UI generated from the same JSON Schemas as the validators").
-   • Types: sim-spec@1 with formula@1 or circuit-mna@1 (registerType() for later runtimes: html-app@1, py-module@1, h5p@1).
+   • Types: sim-spec@1 with formula@1 or circuit-mna@1 (registerType() for later runtimes: html-app@1, py-module@1, h5p@1), and with
+     EVERY engine of the library whose module exports its `table` (docs/INTERACTIVE_LIBRARY.md §1.5): its form comes from that table
+     (NoemaLibSchema.specSchema, engine/src/46_lib_schema.js); the picker groups the engines as #/engines does and offers the engine's
+     reference activity (NoemaActivityRefs, written into activity_author_schemas.js by tools/build.py) or a blank one.
    • The forms: NoemaSchemaForm over tools/schemas/noema.activities.v1 (the registry entry) and noema.sim-spec.v1 (+ noema.circuit.v1);
      the words of each label key in every language right under the key, and a table of all words (en, el, ru, de, fr, + any language).
    • Checks at the field: the schema, then the validators' own rules (NoemaPackCheck.checkSimSpec, checkActivities) — the same
@@ -31,7 +34,7 @@
     return I && I.has && I.has(full) ? I.t(full, vars) : null;
   }
   const TT = (k, vars) => { const r = T(k, vars); return r == null ? k : r; };
-  const label = (title, prop, fallback) => (title && T('f.' + title)) || (prop && T('p.' + prop)) || fallback || prop || title || '';
+  const label = (title, prop, fallback) => (title && T('f.' + title)) || (title && title.startsWith('lib.') ? fallback || title.slice(4) : null) || (prop && T('p.' + prop)) || fallback || prop || title || '';
   const help = (title) => (title && T('h.' + title)) || '';
 
   /* ---------- the document: {item, spec, strings} ---------- */
@@ -57,7 +60,45 @@
       outputs: [{ id: 't', kind: 'series', time: true }, { id: 'vout', kind: 'series', node: 'out' }],
       plots: [{ kind: 'series', x: { series: 't', label: 'time', unit: 's' }, series: [{ y: 'vout', label: 'vout' }] }] }, strings: tables(['vs', 'time', 'vout']) }),
     convert(d) { const s = d.spec; s.engine = 'circuit-mna@1'; if (!isObj(s.model)) s.model = CIRCUIT_MODEL(); return d; } });
+
+  /* ---------- the engine library: a kind for every engine whose module exports its table (docs/INTERACTIVE_LIBRARY.md §1.5) ---------- */
+  const LS = () => root.NoemaLibSchema || null;
+  const GROUPS = [['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1']], ['life', ['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1']],
+    ['arts', ['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1']]];   // = ENGINE_GROUPS of 49_lib_view.js (the #/engines page), used when that file is not loaded
+  /* global ENGINE_GROUPS */
+  const groups = () => (typeof ENGINE_GROUPS !== 'undefined' && Array.isArray(ENGINE_GROUPS) ? ENGINE_GROUPS : GROUPS);
+  /** the library engines here: catalogue entries whose module is loaded with its checker and table (and, in the app, registered) */
+  function libEngines() {
+    const K = root.NoemaEngineCatalog, out = [];
+    if (!K || !LS()) return out;
+    for (const e of K.CATALOG) {
+      const M = e.layer === 'library' && e.global ? root[e.global] : null;
+      if (!M || typeof M.checkSpec !== 'function' || !isObj(M.table)) continue;
+      if (typeof ACT !== 'undefined' && ACT && typeof ACT.engine === 'function' && !ACT.engine(e.id)) continue;   // eslint-disable-line no-undef
+      out.push({ id: e.id, slug: e.slug, M });
+    }
+    return out;
+  }
+  const libOf = id => libEngines().find(e => e.id === id) || null;
+  const engWord = (slug, k) => { const I = root.NoemaI18n, key = 'engine.engines.' + slug + '.' + k; return I && I.has && I.has(key) ? I.t(key) : null; };
+  /** the reference activities this page can start from: {id: {item, spec, strings}} (tools/activities_examples/, shipped by tools/build.py) */
+  const refsFor = id => Object.entries(root.NoemaActivityRefs || {}).filter(([, r]) => isObj(r) && isObj(r.spec) && r.spec.engine === id).map(([k, r]) => Object.assign({ ref: k }, r));
+  function fromRef(r) {
+    const it = clone(r.item); if (!it.entry && it.id) it.entry = `activities/${it.id}/spec.json`;
+    return { item: it, spec: clone(r.spec), strings: clone(r.strings || {}) };
+  }
+  function libBlank(id, reg) {
+    const sch = (reg || REG || registry()).get(LS().schemaId(id));
+    const model = sch ? SF().skeleton(reg || REG, sch.properties.model, sch.$id) : {};
+    return { item: item('my-' + id.replace(/@.*$/, '')), spec: { format: 'noema.sim-spec/v1', engine: id, params: [{ id: 'x', kind: 'slider', label: 'x', min: 0, max: 1, default: 0.5 }], model: isObj(model) ? model : {}, outputs: [] }, strings: tables(['x']) };
+  }
+  function registerLib() {
+    for (const e of libEngines()) registerType({ id: 'lib:' + e.id, engine: e.id, slug: e.slug, lib: true, runtime: 'sim-spec@1', schema: LS().schemaId(e.id),
+      match: d => d.item.runtime === 'sim-spec@1' && d.spec.engine === e.id, blank: () => libBlank(e.id) });
+  }
   const typeOf = d => TYPES.find(t => t.match(d)) || TYPES[0];
+  /** the schema of a spec: its engine's own (a library engine) or sim-spec */
+  const specSchemaId = (spec, reg) => { const t = isObj(spec) && TYPES.find(x => x.lib && x.engine === spec.engine); return t && (reg || REG) && (reg || REG).get(t.schema) ? t.schema : SIM_ID; };
 
   /* ---------- names a formula may use at a path of the spec (the validators' order rules) ---------- */
   function namesAt(spec, path) {
@@ -75,7 +116,10 @@
   let REG = null;
   function registry(schemas) {
     const list = schemas ? (Array.isArray(schemas) ? schemas : Object.values(schemas)) : Object.values(root.NoemaActivitySchemas || {});
-    REG = SF().registry(list); return REG;
+    REG = SF().registry(list);
+    const sim = list.find(x => isObj(x) && x.$id === SIM_ID);
+    if (sim && LS()) { for (const e of libEngines()) REG.add(LS().specSchema(e.id, e.M.table, sim)); registerLib(); }
+    return REG;
   }
   /** the registry entry's schema as the page offers it: the runtimes of the registered types only (the schema itself names every runtime) */
   const itemSchema = reg => { const it = reg.get(REG_ID).$defs.item, rts = [...new Set(TYPES.map(t => t.runtime))];
@@ -93,7 +137,8 @@
       const path = S.parsePath(m, 'spec') || [];
       vs.push({ tab: 'spec', path, msg: m.replace(/^spec(?:\.[\w$-]+|\[\d+\])*:?\s*/, '') || m });
     }
-    for (const e of sch('spec', reg.get(SIM_ID), doc.spec, SIM_ID)) if (!vs.some(v => under(e.path, v.path) && v.path.length)) vs.push(e);
+    const sid = specSchemaId(doc.spec, reg);
+    for (const e of sch('spec', reg.get(sid), doc.spec, sid)) if (!vs.some(v => under(e.path, v.path) && v.path.length)) vs.push(e);
     out.push(...vs);
     // the registry entry
     const it = sch('item', itemSchema(reg), doc.item, REG_ID);
@@ -125,7 +170,8 @@
   /** the keys of the string tables that the spec names (labels, titles), in order */
   function usedKeys(spec, reg = REG || registry()) {
     const out = [];
-    SF().walk(reg, reg.get(SIM_ID), spec, (path, s, v) => { if (s && s['x-noema'] === 'key' && typeof v === 'string' && v && !out.includes(v)) out.push(v); });
+    const sid = specSchemaId(spec, reg);
+    SF().walk(reg, reg.get(sid), spec, (path, s, v) => { if (s && s['x-noema'] === 'key' && typeof v === 'string' && v && !out.includes(v)) out.push(v); });
     return out;
   }
 
@@ -231,28 +277,61 @@
     };
     const PATHS = { undo: 'M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3', redo: 'M15 14l5-5-5-5M20 9H10a6 6 0 0 0 0 12h3', file: 'M14 3H6v18h12V7zM14 3v4h4', down: 'M12 4v12M6 11l6 6 6-6M5 20h14', up: 'M12 20V8M6 13l6-6 6 6M5 4h14', plus: 'M12 5v14M5 12h14', x: 'M6 6l12 12M18 6L6 18', warn: 'M12 9v4M12 17h.01M10.3 3.9L2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z', ok: 'M5 12l5 5 9-10' };
     const icon = k => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('aria-hidden', 'true'); s.setAttribute('class', 'aa-ico'); const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', PATHS[k]); s.append(p); return s; };
-    const btn = (ic, text, onclick, cls = 'btn small ghost', attrs = {}) => h('button', Object.assign({ type: 'button', class: cls + ' aa-btn', onclick }, attrs), ic ? icon(ic) : null, h('span', { class: 'aa-bt' }, text));
+    const btn = (ic, text, onclick, cls = 'btn small ghost', attrs = {}) => h('button', Object.assign({ type: 'button', class: cls + ' aa-btn', onclick, title: attrs.title || text, 'aria-label': ic ? text : null }, attrs), ic ? icon(ic) : null, h('span', { class: 'aa-bt' }, text));
+    const info = (text, attrs = {}) => h('span', Object.assign({ class: 'aa-info', tabindex: '0', role: 'img', title: text, 'aria-label': text }, attrs), 'ⓘ');
     /* i18n-ignore-end */
 
     const rootEl = h('div', { class: 'aa', 'data-author': '1' });
-    const typeSel = h('select', { class: 'sf-in aa-type', id: 'aa-type', 'data-aa': 'type' }, TYPES.map(t => h('option', { value: t.id, text: TT(t.label) })));
+    const typeSel = h('select', { class: 'sf-in aa-type', id: 'aa-type', 'data-aa': 'type' });
+    const typeName = t => (t.lib ? engWord(t.slug, 'name') || t.engine : TT(t.label));
+    const typeWhat = t => (t.lib ? engWord(t.slug, 'what') : null) || (t.id === 'sim-formula' ? engWord('formula', 'what') : t.id === 'sim-circuit' ? engWord('circuit', 'what') : null) || typeName(t);
+    /** the picker: the engines grouped as on #/engines (only those this app has), the circuit bench with the plugins */
+    function paintTypes() {
+      typeSel.innerHTML = '';
+      const opt = t => h('option', { value: t.id, text: typeName(t), title: typeWhat(t) });
+      const byEngine = id => TYPES.find(t => (t.lib ? t.engine : t.id === 'sim-formula' ? 'formula@1' : t.id === 'sim-circuit' ? 'circuit-mna@1' : null) === id);
+      const used = new Set();
+      for (const [g, ids] of groups()) {
+        const ts = ids.map(byEngine).filter(Boolean); if (!ts.length) continue;
+        const og = h('optgroup', { label: engGroup(g) }); for (const t of ts) { og.append(opt(t)); used.add(t.id); } typeSel.append(og);
+      }
+      const rest = TYPES.filter(t => !used.has(t.id));
+      if (rest.length) { const og = h('optgroup', { label: (root.NoemaI18n && root.NoemaI18n.has && root.NoemaI18n.has('engine.engines.plugins') ? root.NoemaI18n.t('engine.engines.plugins') : TT('type')) }); for (const t of rest) og.append(opt(t)); typeSel.append(og); }
+    }
+    const engGroup = g => { const I = root.NoemaI18n, k = 'engine.engines.group.' + g; return I && I.has && I.has(k) ? I.t(k) : g; };
+    paintTypes();
+    const typeInfo = info('', { 'data-aa': 'type-info' });
+    const paintTypeInfo = () => { const t = typeById(typeSel.value), w = typeWhat(t); typeInfo.title = w; typeInfo.setAttribute('aria-label', w); };
     const undoB = btn('undo', TT('undo'), () => undo(), 'btn small ghost', { 'data-aa': 'undo', 'aria-keyshortcuts': 'Control+Z' });
     const redoB = btn('redo', TT('redo'), () => redo(), 'btn small ghost', { 'data-aa': 'redo', 'aria-keyshortcuts': 'Control+Shift+Z' });
     const fileIn = h('input', { type: 'file', multiple: true, accept: '.zip,.json,application/zip,application/json', class: 'aa-file', 'data-aa': 'import-input', tabindex: '-1', 'aria-hidden': 'true' });
     const note = h('p', { class: 'aa-note', role: 'status', 'aria-live': 'polite' });
     const filesBox = h('div', { class: 'aa-files', hidden: true });
     const filesB = btn('file', TT('exportFiles'), () => { filesBox.hidden = !filesBox.hidden; filesB.setAttribute('aria-expanded', String(!filesBox.hidden)); if (!filesBox.hidden) paintFiles(); }, 'btn small ghost', { 'aria-expanded': 'false', 'data-aa': 'files' });
+    // a library engine picked: start from its reference activity, or blank (the document changes only on a click)
+    const startBar = h('div', { class: 'aa-start', hidden: true, role: 'group', 'aria-labelledby': 'aa-startq' });
+    function offerStart(t) {
+      const refs = refsFor(t.engine), r = refs[0];
+      startBar.innerHTML = '';
+      const go = d => { startBar.hidden = true; load(d, true); };
+      startBar.append(h('span', { class: 'aa-startq', id: 'aa-startq' }, TT('startQ', { engine: typeName(t) })),
+        h('span', { class: 'aa-row aa-startb' },
+          r ? btn(null, TT('startRef'), () => go(fromRef(r)), 'btn small primary', { 'data-aa': 'start-ref', title: TT('startRefTip', { id: r.ref }) }) : null,
+          btn(null, TT('startBlank'), () => go(t.blank()), r ? 'btn small ghost' : 'btn small primary', { 'data-aa': 'start-blank', title: TT('startBlankTip') }),
+          btn('x', TT('close'), () => { startBar.hidden = true; typeSel.value = typeOf(doc).id; paintTypeInfo(); }, 'btn small ghost aa-ic', { 'data-aa': 'start-cancel' })));
+      startBar.hidden = false;
+    }
     const top = h('header', { class: 'aa-top' },
-      h('div', { class: 'aa-head' }, h('h1', { class: 'aa-h1' }, TT('title')), h('p', { class: 'aa-intro' }, TT('intro'))),
+      h('div', { class: 'aa-head' }, h('h1', { class: 'aa-h1' }, TT('title')), info(TT('intro'), { 'aria-describedby': 'aa-intro' }), h('p', { class: 'aa-intro aa-vh', id: 'aa-intro' }, TT('intro'))),
       h('div', { class: 'aa-bar' },
-        h('label', { class: 'aa-tl', for: 'aa-type' }, TT('type')), typeSel,
+        h('label', { class: 'aa-tl', for: 'aa-type' }, TT('type')), typeSel, typeInfo,
         h('span', { class: 'aa-sp' }),
         btn('plus', TT('new'), () => { if (confirmNew()) load(typeById(typeSel.value).blank(), true); }, 'btn small ghost', { 'data-aa': 'new' }),
         undoB, redoB,
         btn('up', TT('import'), () => fileIn.click(), 'btn small ghost', { 'data-aa': 'import' }), fileIn,
         btn('down', TT('exportZip'), () => download(doc.item.id + '.zip', new Blob([zip(files(doc))], { type: 'application/zip' })), 'btn small primary', { 'data-aa': 'zip' }),
         filesB),
-      filesBox, note);
+      startBar, filesBox, note);
     const typeById = id => TYPES.find(t => t.id === id) || TYPES[0];
     const confirmNew = () => typeof opts.confirm === 'function' ? opts.confirm(TT('newConfirm')) : (typeof confirm === 'function' ? confirm(TT('newConfirm')) : true);
 
@@ -284,19 +363,31 @@
 
     /* ---------- the forms ---------- */
     const keyList = h('datalist', { id: 'aa-keys' }), elList = h('datalist', { id: 'aa-els' }), serList = h('datalist', { id: 'aa-series' });
-    rootEl.append(keyList, elList, serList);
+    const sceneList = h('datalist', { id: 'aa-scenes' }), soundList = h('datalist', { id: 'aa-sounds' }), idList = h('datalist', { id: 'aa-ids' });
+    rootEl.append(keyList, elList, serList, sceneList, soundList, idList);
     const decorate = (kind, input, wrap, path) => {
       if (kind === 'key') { input.setAttribute('list', 'aa-keys'); input.dataset.x = 'key'; const kt = h('div', { class: 'aa-kt' }); wrap.append(kt); paintKeyTexts(kt, input.value); input.addEventListener('input', () => paintKeyTexts(kt, input.value)); }
       else if (kind === 'expr') { input.dataset.x = 'expr'; input.dataset.xpath = JSON.stringify(path); const fb = h('div', { class: 'aa-xfb' }); wrap.append(fb); input.addEventListener('input', () => exprFeedback(input)); }
       else if (kind === 'element') input.setAttribute('list', 'aa-els');
       else if (kind === 'series') input.setAttribute('list', 'aa-series');
       else if (kind === 'name') input.classList.add('sf-mono');
+      else if (kind === 'of') { const id = 'aa-of-' + (++ofN), dl = h('datalist', { id }); input.setAttribute('list', id); input.classList.add('sf-mono'); input.dataset.x = 'of'; input.dataset.xpath = JSON.stringify(path); wrap.append(dl); paintOf(input, dl); }
+      else if (kind === 'scene' || kind === 'sound') input.setAttribute('list', 'aa-' + kind + 's');
+      else if (kind === 'ref') { input.setAttribute('list', 'aa-ids'); input.classList.add('sf-mono'); }
     };
+    let ofN = 0;
+    /** what an output of the engine may compute: its kind's list for this model (the engine's table, or what the model offers) */
+    function paintOf(input, dl) {
+      const path = JSON.parse(input.dataset.xpath), o = SF().getAt(doc.spec, path.slice(0, -1)), t = typeOf(doc), e = t.lib ? libOf(t.engine) : null;
+      dl.innerHTML = ''; if (!e || !isObj(o)) return;
+      for (const v of LS().ofs(e.M.table, doc.spec.model, o.kind).slice(0, 400)) dl.append(h('option', { value: v }));
+    }
     const sfOpts = { registry: reg, label, help, text: TT, decorate };
     let specForm = null, itemForm = null;
     function buildForms() {
       panels.spec.innerHTML = ''; panels.item.innerHTML = '';
-      specForm = S.form(Object.assign({}, sfOpts, { schema: reg.get(SIM_ID), value: doc.spec, onChange: (v, o) => { doc.spec = v; changed(o.structural); }, onRender: () => refreshAll() }));
+      const sid = specSchemaId(doc.spec, reg);
+      specForm = S.form(Object.assign({}, sfOpts, { schema: reg.get(sid), base: sid, value: doc.spec, onChange: (v, o) => { doc.spec = v; changed(o.structural); }, onRender: () => refreshAll() }));
       itemForm = S.form(Object.assign({}, sfOpts, { schema: itemSchema(reg), base: REG_ID, value: doc.item, onChange: (v, o) => { itemChanged(v); changed(o.structural); } }));
       panels.spec.append(specForm.el); panels.item.append(itemForm.el);
       paintStrings();
@@ -357,7 +448,14 @@
     /* ---------- formulas: live check with the declared names ---------- */
     function exprFeedback(input) {
       const fb = input.closest('.sf-f')?.querySelector('.aa-xfb'); if (!fb) return;
-      const path = JSON.parse(input.dataset.xpath), names = namesAt(doc.spec, path), X = root.NoemaExpr;
+      const path = JSON.parse(input.dataset.xpath), X = root.NoemaExpr;
+      let names = namesAt(doc.spec, path);
+      const t = typeOf(doc), e = t.lib && (path[0] === 'model' || path[0] === 'outputs') ? libOf(t.engine) : null;
+      if (e) {   // an engine's text field is a formula only where its exprs() says so, over the spec's names and its own
+        let x = null; try { x = (e.M.exprs(doc.spec) || []).find(r => r[1] === SF().pathStr(path)); } catch (er) { x = null; }
+        if (!x) { fb.innerHTML = ''; if (!input.closest('.sf-f')?.querySelector(':scope > .sf-err')) input.removeAttribute('aria-invalid'); return; }
+        names = names.concat(x[2] || []);
+      }
       let msg = null;
       if (X && input.value.trim()) { const p = X.check(input.value, { vars: names }); if (p.length) msg = p[0].msg; }
       fb.innerHTML = '';
@@ -370,6 +468,10 @@
       keyList.innerHTML = ''; const ks = new Set([...usedKeys(doc.spec), ...locs().flatMap(l => Object.keys(doc.strings[l] || {}))]); for (const k of ks) keyList.append(h('option', { value: k }));
       elList.innerHTML = ''; for (const e of (doc.spec.model?.netlist?.elements || [])) if (e && e.id) elList.append(h('option', { value: e.id }));
       serList.innerHTML = ''; for (const o of (doc.spec.outputs || [])) if (o && o.kind === 'series' && o.id) serList.append(h('option', { value: o.id }));
+      for (const [k, dl] of [['scene', sceneList], ['sound', soundList]]) { dl.innerHTML = ''; for (const o of (Array.isArray(doc.spec.outputs) ? doc.spec.outputs : [])) if (o && o.kind === k && o.id) dl.append(h('option', { value: o.id })); }
+      idList.innerHTML = ''; const ids = new Set(); (function ws(v, d) { if (d > 8) return; if (Array.isArray(v)) v.forEach(x => ws(x, d + 1)); else if (isObj(v)) { if (typeof v.id === 'string' && v.id) ids.add(v.id); Object.values(v).forEach(x => ws(x, d + 1)); } })(doc.spec.model, 0);
+      for (const i of [...ids].slice(0, 400)) idList.append(h('option', { value: i }));
+      for (const i of rootEl.querySelectorAll('[data-x="of"]')) { const dl = i.list; if (dl) paintOf(i, dl); }
     }
 
     /* ---------- checks at the fields ---------- */
@@ -431,7 +533,7 @@
     function load(d, record) {
       const a = document.activeElement, fp = a && rootEl.contains(a) ? a.getAttribute('data-path') : null;
       doc = clone(d); if (!isObj(doc.strings)) doc.strings = {};
-      typeSel.value = typeOf(doc).id;
+      typeSel.value = typeOf(doc).id; paintTypeInfo(); startBar.hidden = true;
       buildForms(); paintLocales(); refreshAll();
       if (fp) { const b = panels[tab].querySelector(`[data-path="${CSS.escape(fp)}"]`); if (b) b.focus({ preventScroll: true }); }
       if (record) commit();
@@ -439,6 +541,8 @@
     }
     typeSel.addEventListener('change', () => {
       const t = typeById(typeSel.value), d = clone(doc);
+      paintTypeInfo();
+      if (t.lib) { offerStart(t); return; }   // a library engine: its reference activity or a blank one (offerStart)
       load(t.convert ? t.convert(d) : t.blank(), true);
     });
     const onKey = e => {
@@ -487,7 +591,8 @@
       open now is API.current (the browser test drives it) */
   function view(main, opts) { if (API.current) try { API.current.destroy(); } catch (e) { } main.innerHTML = ''; return (API.current = mount(main, Object.assign({ preview: actPreview() }, opts || {}))); }
 
-  const API = { current: null, mount, view, registerType, TYPES, check, usedKeys, namesAt, files, fromFiles, zip, unzip, crc32, registry, actPreview, T, SIM_ID, REG_ID };
+  const API = { current: null, mount, view, registerType, TYPES, check, usedKeys, namesAt, files, fromFiles, zip, unzip, crc32, registry, actPreview, T, SIM_ID, REG_ID,
+    libEngines, refsFor, fromRef, libBlank, specSchemaId, typeOf };
   root.NoemaActivityAuthor = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
 })(typeof window !== 'undefined' ? window : globalThis);

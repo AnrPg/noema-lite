@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>cheapest-route</title>
+<style>
+  body { padding: 12px; font-size: 15px; line-height: 1.4; }
+  h1 { font-size: 17px; margin: 0 0 4px; }
+  p { margin: 6px 0; }
+  .read { color: var(--noema-ink2, #555); }
+  svg { display: block; width: 100%; height: auto; max-height: 300px; border: 1px solid var(--noema-line, #ddd); border-radius: 8px; background: var(--noema-bg2, transparent); }
+  .road { stroke: var(--noema-ink3, #999); stroke-width: 1.2; }
+  .road.mine { stroke: var(--noema-c, #4a6fa5); stroke-width: 3.2; }
+  .road.best { stroke: var(--noema-ok, #2a7); stroke-width: 2.2; stroke-dasharray: 3 2; }
+  .cost { fill: var(--noema-ink2, #555); font-size: 4.2px; text-anchor: middle; dominant-baseline: central; }
+  .costbg { fill: var(--noema-card, #fff); }
+  .town { fill: var(--noema-card, #fff); stroke: var(--noema-ink2, #555); stroke-width: 0.8; }
+  .town.here { fill: var(--noema-c, #4a6fa5); stroke: var(--noema-c, #4a6fa5); }
+  .town.goal { stroke: var(--noema-ok, #2a7); stroke-width: 1.6; }
+  .tname { fill: var(--noema-ink, #222); font-size: 4.4px; font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .town.here + .tname { fill: var(--noema-card, #fff); }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  button { font: inherit; padding: 6px 12px; min-height: 36px; border-radius: 8px; border: 1px solid var(--noema-line, #ccc); background: var(--noema-card, #fff); color: var(--noema-ink, #222); cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--noema-c, #4a6fa5); outline-offset: 2px; }
+  button.go { border-color: var(--noema-c, #4a6fa5); }
+  button.primary { background: var(--noema-c, #4a6fa5); color: var(--noema-card, #fff); border-color: var(--noema-c, #4a6fa5); }
+  button:disabled { opacity: 0.5; cursor: default; }
+  .ok { color: var(--noema-ok, #2a7); font-weight: 600; }
+  .bad { color: var(--noema-bad, #c44); font-weight: 600; }
+  .key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--noema-ink3, #777); }
+  .sw { display: inline-block; width: 16px; height: 0; border-top: 3px solid var(--noema-c, #4a6fa5); vertical-align: middle; margin-right: 4px; }
+  .sw.best { border-top: 2px dashed var(--noema-ok, #2a7); }
+</style>
+</head>
+<body>
+<h1 id="title"></h1>
+<p id="intro" class="read"></p>
+<svg id="map" viewBox="0 0 100 62" role="img"></svg>
+<div class="key"><span><i class="sw"></i><span id="kMine"></span></span><span><i class="sw best"></i><span id="kBest"></span></span></div>
+<p id="where" aria-live="polite"></p>
+<div class="row" id="moves" role="group"></div>
+<div class="row">
+  <button type="button" id="undo"></button>
+  <button type="button" id="restart"></button>
+  <button type="button" id="check" class="primary"></button>
+  <button type="button" id="another"></button>
+</div>
+<p id="out" class="read" aria-live="polite"></p>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var t = function (k, v) { return noema.t(k, v); };
+  var num = function (n) { return noema.fmt.number(n); };
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  // the towns (a fixed layout) and the roads between them; each round draws the costs from the seed
+  var TOWNS = [['A', 6, 31], ['B', 28, 9], ['C', 30, 53], ['D', 51, 31], ['E', 72, 9], ['F', 74, 53], ['G', 94, 31]];
+  var ROADS = [['A', 'B'], ['A', 'C'], ['A', 'D'], ['B', 'D'], ['C', 'D'], ['B', 'E'], ['D', 'E'], ['D', 'F'], ['C', 'F'], ['E', 'G'], ['F', 'G'], ['E', 'F']];
+  var FROM = 'A', TO = 'G';
+  var graph = noema.engine('graph@1');
+  var s = null, best = null, done = false, token = 0;
+  function costs() { return ROADS.map(function () { return 1 + Math.floor(noema.random() * 9); }); }
+  function cost(u, v) { for (var i = 0; i < ROADS.length; i++) { var r = ROADS[i]; if ((r[0] === u && r[1] === v) || (r[0] === v && r[1] === u)) return s.w[i]; } return null; }
+  function routeCost() { var c = 0; for (var i = 1; i < s.route.length; i++) c += cost(s.route[i - 1], s.route[i]); return c; }
+  function here() { return s.route[s.route.length - 1]; }
+  /** the model for graph@1: the same data a sim-spec@1 spec would hold (docs/library/graph.md) */
+  function spec() {
+    return { model: { graph: { directed: false, nodes: TOWNS.map(function (x) { return { id: x[0], x: x[1], y: x[2] }; }),
+      edges: ROADS.map(function (r, i) { return { u: r[0], v: r[1], w: s.w[i] }; }) }, run: { alg: 'dijkstra', source: FROM, target: TO } },
+      outputs: [{ id: 'best', kind: 'scalar', of: 'result' }, { id: 'path', kind: 'series', of: 'path' }] };
+  }
+  function solve() {
+    best = null; var my = ++token; document.body.removeAttribute('data-best');
+    $('out').textContent = t('computing');
+    return graph.run(spec(), {}).then(function (r) {
+      if (my !== token) return;
+      var path = (r.outputs.path || []).map(function (i) { return TOWNS[i] ? TOWNS[i][0] : '?'; });
+      best = { cost: r.outputs.best, path: path };
+      document.body.setAttribute('data-best', String(best.cost));   // (for tests: the engine has answered)
+      $('out').textContent = done ? $('out').textContent : '';
+      render();
+    }, function (e) {
+      if (my !== token) return;
+      $('out').textContent = t('engineError', { code: e.code || 'failed' });
+      noema.error('engine-' + String(e.code || 'failed').slice(0, 30), e.message);
+    });
+  }
+  function el(name, attrs, text) { var e = document.createElementNS(SVGNS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; }
+  function onRoute(list, u, v) { for (var i = 1; i < list.length; i++) if ((list[i - 1] === u && list[i] === v) || (list[i - 1] === v && list[i] === u)) return true; return false; }
+  function at(id) { for (var i = 0; i < TOWNS.length; i++) if (TOWNS[i][0] === id) return TOWNS[i]; return null; }
+  function draw() {
+    var m = $('map'); while (m.firstChild) m.removeChild(m.firstChild);
+    ROADS.forEach(function (r, i) {
+      var a = at(r[0]), b = at(r[1]), cls = 'road' + (onRoute(s.route, r[0], r[1]) ? ' mine' : '');
+      m.appendChild(el('line', { x1: a[1], y1: a[2], x2: b[1], y2: b[2], 'class': cls }));
+      if (done && best && onRoute(best.path, r[0], r[1])) m.appendChild(el('line', { x1: a[1], y1: a[2], x2: b[1], y2: b[2], 'class': 'road best' }));
+      var mx = (a[1] + b[1]) / 2, my = (a[2] + b[2]) / 2;
+      m.appendChild(el('circle', { cx: mx, cy: my, r: 3, 'class': 'costbg' }));
+      m.appendChild(el('text', { x: mx, y: my, 'class': 'cost' }, num(s.w[i])));
+    });
+    TOWNS.forEach(function (x) {
+      var c = el('circle', { cx: x[1], cy: x[2], r: 4.6, 'class': 'town' + (x[0] === here() ? ' here' : '') + (x[0] === TO ? ' goal' : ''), 'data-town': x[0] });
+      c.addEventListener('click', function () { go(x[0]); });   // a pointer may tap a neighbouring town; the keyboard uses the buttons below
+      m.appendChild(c); m.appendChild(el('text', { x: x[1], y: x[2], 'class': 'tname' }, x[0]));
+    });
+    m.setAttribute('aria-label', t('mapLabel', { route: s.route.join(' – '), cost: num(routeCost()) }));
+  }
+  function neighbours(u) { var out = []; ROADS.forEach(function (r, i) { if (r[0] === u) out.push([r[1], s.w[i]]); else if (r[1] === u) out.push([r[0], s.w[i]]); }); return out; }
+  function render() {
+    draw();
+    var u = here(), box = $('moves');
+    while (box.firstChild) box.removeChild(box.firstChild);
+    $('where').textContent = done ? '' : u === TO ? t('arrived', { cost: num(routeCost()) }) : t('at', { town: u, route: s.route.join(' – '), cost: num(routeCost()) });
+    box.setAttribute('aria-label', t('roads'));
+    if (!done && u !== TO) neighbours(u).forEach(function (n) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'go'; b.setAttribute('data-to', n[0]);
+      b.textContent = t('go', { town: n[0], cost: num(n[1]) });
+      b.addEventListener('click', function () { go(n[0]); });
+      box.appendChild(b);
+    });
+    $('undo').disabled = done || s.route.length < 2;
+    $('restart').disabled = done || s.route.length < 2;
+    $('check').disabled = done || u !== TO || !best;
+    $('another').hidden = !done;
+  }
+  function save() { noema.saveState({ w: s.w, route: s.route, done: done }); }
+  function go(v) {
+    if (done || here() === TO || cost(here(), v) == null) return;
+    s.route.push(v); noema.event('move', { to: v }); save(); render();
+    noema.announce($('where').textContent);
+    var first = $('moves').querySelector('button'); (first || $('check')).focus();
+  }
+  function check() {
+    if (done || here() !== TO || !best) return;
+    done = true;
+    var mine = routeCost(), ok = mine === best.cost;
+    var o = $('out'); o.className = ok ? 'ok' : 'bad';
+    o.textContent = ok ? t('right', { cost: num(mine) }) : t('more', { cost: num(mine), best: num(best.cost), path: best.path.join(' – ') });
+    noema.result({ score: Math.max(0, Math.min(1, best.cost / mine)), passed: ok, detail: 'route ' + s.route.join('') + ' cost ' + mine + ' best ' + best.cost });
+    noema.event('check', { cost: mine, best: best.cost });
+    save(); render(); noema.announce(o.textContent); $('another').focus();
+  }
+  function round(w) {
+    s = { w: w || costs(), route: [FROM] }; done = false;
+    $('out').textContent = ''; $('out').className = 'read';
+    save(); render(); return solve();
+  }
+  noema.ready.then(function () {
+    $('title').textContent = t('title'); $('intro').textContent = t('intro', { from: FROM, to: TO });
+    $('kMine').textContent = t('keyMine'); $('kBest').textContent = t('keyBest');
+    $('undo').textContent = t('undo'); $('restart').textContent = t('restart'); $('check').textContent = t('check'); $('another').textContent = t('another');
+    $('undo').addEventListener('click', function () { if (s.route.length > 1 && !done) { s.route.pop(); save(); render(); noema.announce($('where').textContent); } });
+    $('restart').addEventListener('click', function () { if (!done) { s.route = [FROM]; save(); render(); } });
+    $('check').addEventListener('click', check);
+    $('another').addEventListener('click', function () { round(); $('moves').querySelector('button').focus(); });
+    noema.on('locale', function () { render(); });
+    if (noema.engines().indexOf('graph@1') < 0) { $('out').textContent = t('engineError', { code: 'unavailable' }); return; }
+    var st = noema.state;
+    if (st && Array.isArray(st.w) && st.w.length === ROADS.length && Array.isArray(st.route) && st.route[0] === FROM) {
+      s = { w: st.w, route: st.route }; done = false; render(); solve();
+    } else round();
+  });
+})();
+</script>
+</body>
+</html>

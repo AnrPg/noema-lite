@@ -34,6 +34,9 @@ const ACTP = (() => {
     // py-module@1 (37_activity_py.js): the runner's own messages, checked in full by NoemaPy.protocol before they get here; the core only notes them
     'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
     'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
+    // html-app@1: a mini-app asks for an engine of the library (34_activity_html.js engineBridge checks the rest: declared, the spec, the inputs)
+    'engine:check': p => str(p.engine, 40) && isObj(p.spec),
+    'engine:run': p => str(p.engine, 40) && isObj(p.spec) && (p.inputs == null || isObj(p.inputs)) && (p.seed == null || (isInt(p.seed) && p.seed >= 0 && p.seed <= 4294967295)),
   };
   /** → { ok: true, msg } | { ok: false, why, ignore? } — ignore: an unknown type (counted, not a strike) */
   function check(data) {

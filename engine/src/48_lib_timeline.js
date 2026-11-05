@@ -797,6 +797,7 @@
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibTimelineModule, 'NoemaLibTimeline');
   root.NoemaLibTimeline = Object.freeze({
+    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine, TABLES: T,
     gToRD, jToRD, rdToG, rdToJ, fliegel, J0, decYear, rdOfYear, convert, toRD, CALENDARS: Object.keys(CAL), hNewYear, hDays, jalCal, nawRuz, romanOf,
     easterG, easterJ, c14Age, calibrate, crossdate, bpIndex, glk, allen, luniYear, dayCycle,

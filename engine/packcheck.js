@@ -398,6 +398,7 @@
     // lists the expressions (exprs: [src, where, local names]) and string keys (keys: [key, where]) of its model; Python twins tools/lib_<name>.py
     LIB: { 'ode@1': ['NoemaLibODE', '47_lib_ode.js'], 'prob@1': ['NoemaLibProb', '47_lib_prob.js'], 'graph@1': ['NoemaLibGraph', '47_lib_graph.js'], 'geom@1': ['NoemaLibGeom', '47_lib_geom.js'], 'genetics@1': ['NoemaLibGenetics', '48_lib_genetics.js'], 'seq@1': ['NoemaLibSeq', '48_lib_seq.js'], 'med@1': ['NoemaLibMed', '48_lib_med.js'], 'clinic@1': ['NoemaLibClinic', '48_lib_clinic.js'], 'anatomy@1': ['NoemaLibAnatomy', '48_lib_anatomy.js'], 'timeline@1': ['NoemaLibTimeline', '48_lib_timeline.js'], 'music@1': ['NoemaLibMusic', '48_lib_music.js'], 'map@1': ['NoemaLibMap', '48_lib_map.js'], 'text@1': ['NoemaLibText', '48_lib_text.js'], 'craft@1': ['NoemaLibCraft', '48_lib_craft.js'] },
     LIB_KINDS: ['scalar', 'series', 'scene', 'sound'], LINE_STYLES: ['line', 'bars', 'steps', 'points'],
+    APP_ENGINES_MAX: 8,   // html-app@1: the engines of the library a mini-app may use ("engines": [...], docs/INTERACTIVE.md §8.1) — the same rule in tools/activities.py
     P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
     // twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
     TWIN: 'twin@1', TWIN_POINTS: ['vbat', 'vload', 'i', 'gnd'], TWIN_INSTRUMENTS: ['V', 'I', 'scope', 'log', 'rssi', 'T', 'clock'], WHOLE: ['log', 'rssi', 'T', 'clock'],
@@ -957,11 +958,29 @@
     }
     return E;
   }
-  /** what pack.requires must list: the core, each runtime, each engine other than formula@1 */
+  /** the engines of the library an html-app@1 item lists (its "engines"; only known ids) */
+  const appEngines = a => isObj(a) && a.runtime === 'html-app@1' && Array.isArray(a.engines) ? a.engines.filter(e => typeof e === 'string' && Object.prototype.hasOwnProperty.call(ACT.LIB, e)) : [];
+  /** the "engines" of an html-app@1 item: a list of library engine ids, and every engine the bundle names in noema.engine('…') among them —
+      the SAME messages as tools/activities.py check_app_engines */
+  function checkAppEngines(a) {
+    const E = [], es = a.engines, lib = Object.keys(ACT.LIB).sort();
+    if (es != null) {
+      if (!(Array.isArray(es) && es.length >= 1 && es.length <= ACT.APP_ENGINES_MAX && es.every(x => typeof x === 'string'))) E.push(`engines must be a list of 1–${ACT.APP_ENGINES_MAX} engine ids of the library (${lib.join(', ')})`);
+      else {
+        for (const x of es) if (!lib.includes(x)) E.push(`engine ${qv(x)} is not an engine of the library (a mini-app can use ${lib.join(', ')})`);
+        if (new Set(es).size !== es.length) E.push('engines lists an engine twice');
+      }
+    }
+    const have = Array.isArray(es) ? es : [];
+    const used = typeof a.html === 'string' ? [...new Set([...a.html.matchAll(/\bnoema\.engine\(\s*(['"])([^'"\n]{1,40})\1/g)].map(m => m[2]))] : [];
+    for (const x of used) if (!have.includes(x)) E.push(`the bundle uses the engine ${qv(x)}: list it in "engines"`);
+    return E;
+  }
+  /** what pack.requires must list: the core, each runtime, each engine other than formula@1 (and the engines a mini-app lists) */
   function needRequires(items) {
     items = items.filter(isObj); if (!items.length) return [];
     const rts = [...new Set(items.map(a => a.runtime).filter(r => typeof r === 'string'))].sort().map(r => 'runtime:' + r);
-    const engs = [...new Set(items.filter(a => (a.runtime === 'sim-spec@1' || a.runtime === ACT.WASM) && isObj(a.spec)).map(a => a.runtime === ACT.WASM ? ACT.WASM_ENGINE : 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE).filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
+    const engs = [...new Set([...items.filter(a => (a.runtime === 'sim-spec@1' || a.runtime === ACT.WASM) && isObj(a.spec)).map(a => a.runtime === ACT.WASM ? ACT.WASM_ENGINE : 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE), ...items.flatMap(appEngines)].filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
     return ['activities/v1', ...rts, ...engs];
   }
   function checkBlockAct(b, items) {
@@ -1106,6 +1125,7 @@
         if (Object.prototype.hasOwnProperty.call(ACT.LATER, rt)) E.push(`${w}: runtime ${rt} arrives in a later version of the app (${ACT.LATER[rt]}); use html-app@1, sim-spec@1, py-module@1 or h5p@1 for now`);
         else if (!ACT.RUNTIMES.has(rt)) E.push(`${w}: unknown runtime ${qv(rt)} (one of ${[...ACT.RUNTIMES].sort().join(', ')})`);
         if (!(Number.isInteger(a.stateVersion) && a.stateVersion >= 1)) E.push(`${w}: stateVersion must be a whole number >= 1`);
+        if (rt !== 'html-app@1' && a.engines != null) E.push(`${w}: engines: only an html-app@1 item lists engines (a sim-spec@1 spec names its engine in spec.engine)`);
         const caps = a.capabilities ?? [];
         if (!Array.isArray(caps) || caps.some(c => !ACT.CAPS.has(c))) E.push(`${w}: capabilities must be some of ${[...ACT.CAPS].sort().join(', ')}`);
         const fb = a.fallback && typeof a.fallback === 'object' ? a.fallback : {};
@@ -1119,6 +1139,7 @@
             if (a.sha256 != null && (!/^[0-9a-f]{64}$/.test(String(a.sha256)) || (nodeSha && nodeSha(a.html) !== a.sha256))) E.push(`${w}: sha256 does not match the bundle`);
             if (a.bytes != null && a.bytes !== utf8(a.html)) E.push(`${w}: bytes does not match the bundle`);
           }
+          E.push(...checkAppEngines(a).map(m => `${w}: ${m}`));
         } else if (rt === 'sim-spec@1') {
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
           else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { items: every }).map(m => `${w}: ${m}`));

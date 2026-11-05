@@ -1228,6 +1228,7 @@
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
   root.NoemaLibODE = Object.freeze({
+    table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: { var: 'name', stat: 'enum:' + C.STATS.join('|'), t: 'numx', event: 'id', nth: 'int:-2000:2000', index: 'int:0:63', k: 'int:0:12', name: 'expr', code: 'enum:' + CODES.join('|'), x: 'name', y: 'name' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     TEMPLATES: Object.freeze(TEMPLATE_NAMES.slice()), templateMeta, METHODS: Object.freeze(METHODS.slice()), CODES: Object.freeze(CODES.slice()),
     SERIES: Object.freeze(SERIES.slice()), SCALARS: Object.freeze(SCALARS.slice()), SCENES: Object.freeze(SCENES.slice()),

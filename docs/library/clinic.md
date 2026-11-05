@@ -83,7 +83,7 @@ core, med@1 and clinic@1 into the Worker). Without med@1, NEWS2 and the virtual 
 | `truth` | ref | the case's real diagnosis (for the Brier score of the estimates and the grade) |
 
 **Method.** Sequential Bayes over exclusive hypotheses in log space (Sox, Higgins, Owens & Schmidler, *Medical Decision Making* 3e,
-2024, ch. 3–4): log P(H | findings) = log prior + Σ log P(fᵢ = sᵢ | H), normalised. A known finding enters in the order its result
+Wiley 2024, ISBN 978-1-119-62780-7, ch. 3–4): log P(H | findings) = log prior + Σ log P(fᵢ = sᵢ | H), normalised. A known finding enters in the order its result
 arrives (in a vp, its time; otherwise its list order); the result does not depend on the order (tested). **Conditional dependence**:
 within a group of n known findings each log-likelihood is weighted 1/(1 + ρ(n − 1)) — ρ 0 is naive Bayes, ρ 1 counts the group as one
 finding (a tempered-likelihood approximation; the true joint likelihoods are rarely published). Every posterior is also computed with
@@ -152,18 +152,24 @@ monetary benefit NMB = wtp·QALY − cost. Outputs `cea.icer.<s>` (NaN for the c
 `cea.dominated.<s>` (0, 1 strongly, 2 extendedly), `cea.best` (highest NMB, 1-based). A cost or QALY that is not a number →
 `incomplete`. Scene: the cost-effectiveness plane, the frontier, dominated points in `bad`/`warn`, the wtp line.
 
+`wtp` is the author's data, never an engine constant. For a UK course: NICE's range was £20 000–30 000 per QALY (health technology
+evaluations manual, 2022) and is £25 000–35 000 per QALY for appraisals from April 2026 (announced 2 December 2025; *Pharmaceutical
+Journal*, 2025-12-02; checked 2026-11).
+
 ## 8. `triage`
 
 | sub-section | fields | output | method |
 |---|---|---|---|
-| `esi` | `lifesaving`, `highRisk`, `confused`, `pain` (0–10), `resources` (count), `hr`, `rr`, `spo2`, `age` (y) | `triage.esi` 1–5, `triage.dangerZone` | Emergency Severity Index decision points A–D (ENA, *ESI Implementation Handbook* v4 2012 / v5 2023): life-saving intervention → 1; high-risk, confused or pain ≥ 7 → 2; ≥ 2 resources → 3, or 2 with danger-zone vitals (HR > 180 / 160 / 140 / 100 and RR > 50 / 40 / 30 / 20 under 3 months / 3 y / 8 y / older, SpO₂ < 92 %); one resource → 4; none → 5 |
+| `esi` | `lifesaving`, `highRisk`, `confused`, `pain` (0–10), `resources` (count), `hr`, `rr`, `spo2`, `age` (y) | `triage.esi` 1–5, `triage.dangerZone` | Emergency Severity Index decision points A–D (ENA, *Emergency Severity Index Handbook* 5th ed., 2023): life-saving intervention → 1; high-risk, confused or pain ≥ 7 → 2; ≥ 2 resources → 3, or 2 with high-risk vitals (v5 Figure 6-1: HR > 190 / 180 / 140 / 120 / 120 / 100 and RR > 60 / 55 / 40 / 35 / 30 / 20 under 1 month / 1 y / 3 y / 5 y / 12 y / older, SpO₂ < 92 %); one resource → 4; none → 5 |
 | `news2` | `rr spo2 sbp hr temp` (required), `o2`, `cvpu`, `scale2` | `triage.news2`, `triage.news2band` | med@1's NEWS2 (RCP 2017): band 0 score 0, 1 low, 2 a single 3, 3 medium 5–6, 4 high ≥ 7 |
 | `qsofa` | `rr sbp gcs` | `triage.qsofa` 0–3 | Seymour, *JAMA* 2016;315:762 (RR ≥ 22, SBP ≤ 100, GCS < 15) |
 | `sirs` | `temp hr rr paco2 wbc bands` | `triage.sirs` 0–4 | Bone, *Chest* 1992;101:1644 |
 | `shock` | `hr sbp` | `triage.shock` | shock index HR/SBP (Allgöwer 1967; > 1 abnormal); SBP ≤ 0 → `impossible` |
 
-**Check before release**: the ESI danger-zone vitals and the resource rules should be compared once more with the v5 handbook (2023)
-text itself; the version here follows v4 with the v5 wording of decision point D.
+**Checked (2026-11)** against the ESI Handbook 5th edition (ENA 2023; PDF at emscimprovement.center/documents/2177): the
+high-risk vitals now follow v5 Figure 6-1 (v4's bands were < 3 mo 180/50, 3 mo–3 y 160/40, 3–8 y 140/30, > 8 y 100/20); pain ≥ 7
+is "considered for" ESI 2 in v5 (ch. 5), not automatic, and the v5 paediatric fever rules (1–28 days T > 38 °C → at least ESI 2) are
+not modelled — give them as `highRisk`.
 
 ## 9. `vp` — the virtual patient
 
@@ -299,6 +305,8 @@ A graded sim exercise for it (in a pack): `grade: {"mode": "checks", "pass": 0.7
 "checkGrade", "weight": 3}, {"expr": "critical == 0", "label": "checkCritical"}, {"expr": "closure == 0", "label": "checkClosure"},
 {"expr": "err <= 0.15", "label": "checkCalib"}]}`.
 
-**Check before release**: the ESI details (§8); the haemo-lite constants are in-house and only qualitatively calibrated (§9); the
-deadlines in the reference case (antibiotics within 1 h) follow the Surviving Sepsis Campaign 2021 (Evans, *Crit Care Med*
-2021;49:e1063) for probable septic shock and should be re-read against it before the case is published.
+**Check before release**: the haemo-lite constants are in-house and only qualitatively calibrated (§9). The deadline in the
+reference case (antibiotics within 1 h) was checked (2026-11) against the Surviving Sepsis Campaign 2021 (Evans, *Crit Care Med*
+2021;49:e1063; *Intensive Care Med* 2021;47:1181, PMC8486643), recommendation 12: for possible septic shock or a high likelihood of
+sepsis, antimicrobials "immediately, ideally within 1 h of recognition"; for possible sepsis without shock the guideline allows a
+rapid assessment and antimicrobials within 3 h (recommendations 13–14), so a case without shock should use a 180-min deadline.

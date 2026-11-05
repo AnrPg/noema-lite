@@ -1,0 +1,19 @@
+{
+ "title": "Le trajet le moins cher",
+ "intro": "Sept villes sont reliées par des routes, chacune avec son péage. Allez de {from} à {to} au moindre coût : choisissez une route à la fois, puis comparez votre trajet au moins cher, que l’application trouve avec l’algorithme de Dijkstra.",
+ "keyMine": "votre trajet",
+ "keyBest": "le trajet le moins cher",
+ "at": "Vous êtes à {town}. Votre trajet jusqu’ici : {route} (péage {cost}).",
+ "arrived": "Vous êtes arrivé au but. Votre trajet coûte {cost}.",
+ "roads": "Routes au départ d’ici",
+ "go": "Vers {town} (péage {cost})",
+ "undo": "Une route en arrière",
+ "restart": "Recommencer",
+ "check": "Vérifier mon trajet",
+ "another": "Une autre carte",
+ "computing": "Recherche du trajet le moins cher…",
+ "right": "Exact : {cost} est le péage le plus bas possible.",
+ "more": "Votre trajet coûte {cost} ; le moins cher coûte {best} : {path}.",
+ "engineError": "La recherche d’itinéraire n’est pas disponible ici ({code}).",
+ "mapLabel": "Carte de sept villes et de leurs routes. Votre trajet : {route}, péage {cost}."
+}

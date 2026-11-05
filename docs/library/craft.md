@@ -267,8 +267,12 @@ pieces!}`, `dovetail` (n of 1:n).
   piece longer than the stock is `impossible`. 2-D sheet nesting is out of scope.
 - Dovetail angle `atan(1/n)`: 1:6 softwood 9.46°, 1:8 hardwood 7.13°.
 
-**Species** (S_R, S_T, S_V green → oven-dry %; C_R, C_T per % MC; E Mpsi at 12 %). **All (verify) against GTR-282 Tables 4-3/4-4,
-13-5 and 5-3a.** One secondary source gives C_R 0.00180 for northern red oak (the white-oak value). The values used:
+**Species** (S_R, S_T, S_V green → oven-dry %; C_R, C_T per % MC; E Mpsi at 12 %). **Checked (2026-11) against the 2021 chapter
+PDFs** of GTR-282: S from Tables 4-3/4-4 (ch. 4, research.fs.usda.gov/treesearch/62243), C from Table 13-5 (ch. 13, treesearch/62261;
+each C = 1/(30·100/S − 30 + 10), eq. 13-2), E from Tables 5-3b/5-5b (ch. 5, treesearch/62244). Corrected by that check: northern red
+oak C_R 0.00137 and C_T 0.00304 (0.00158/0.00369 are the 2010 edition's), white oak 0.00194/0.00376, ponderosa pine C_R 0.00133, teak
+S_T 5.8. Table 13-5 assumes shrinkage starts at 22 % MC for redwood and western redcedar (footnote b); the S₀ form here uses 30 % for
+every species. The values used:
 
 | species | S_R | S_T | S_V | C_R | C_T | E |
 |---|---|---|---|---|---|---|
@@ -280,18 +284,18 @@ pieces!}`, `dovetail` (n of 1:n).
 | hickory-shagbark | 7.0 | 10.5 | 16.7 | 0.00259 | 0.00411 | 2.16 |
 | maple-sugar | 4.8 | 9.9 | 14.7 | 0.00165 | 0.00353 | 1.83 |
 | maple-red | 4.0 | 8.2 | 12.6 | 0.00137 | 0.00289 | 1.64 |
-| oak-red (northern) | 4.0 | 8.6 | 13.7 | 0.00158 | 0.00369 | 1.82 |
-| oak-white | 5.6 | 10.5 | 16.3 | 0.00180 | 0.00365 | 1.78 |
+| oak-red (northern) | 4.0 | 8.6 | 13.7 | 0.00137 | 0.00304 | 1.82 |
+| oak-white | 5.6 | 10.5 | 16.3 | 0.00194 | 0.00376 | 1.78 |
 | walnut-black | 5.5 | 7.8 | 12.8 | 0.00190 | 0.00274 | 1.68 |
 | yellow-poplar | 4.6 | 8.2 | 12.7 | 0.00158 | 0.00289 | 1.58 |
 | douglas-fir (coast) | 4.8 | 7.6 | 12.4 | 0.00165 | 0.00267 | 1.95 |
 | pine-white (eastern) | 2.1 | 6.1 | 8.2 | 0.00071 | 0.00212 | 1.24 |
-| pine-ponderosa | 3.9 | 6.2 | 9.7 | 0.00129 | 0.00216 | 1.29 |
+| pine-ponderosa | 3.9 | 6.2 | 9.7 | 0.00133 | 0.00216 | 1.29 |
 | redwood (old-growth) | 2.6 | 4.4 | 6.8 | 0.00120 | 0.00205 | 1.34 |
 | cedar-western-red | 2.4 | 5.0 | 6.8 | 0.00111 | 0.00234 | 1.11 |
 | spruce-sitka | 4.3 | 7.5 | 11.5 | 0.00148 | 0.00263 | 1.57 |
 | mahogany (imported) | 3.0 | 4.1 | 7.8 | — | — | 1.50 |
-| teak (imported) | 2.5 | 4.0 | 7.0 | — | — | 1.55 |
+| teak (imported) | 2.5 | 5.8 | 7.0 | — | — | 1.55 |
 
 Mahogany and teak have no coefficients: the C form gives `out-of-table`, while the S₀ form works.
 

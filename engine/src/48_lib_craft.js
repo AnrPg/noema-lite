@@ -845,16 +845,18 @@
   /* wood — USDA Forest Products Laboratory, Wood Handbook, FPL-GTR-282 (2021): shrinkage S_R, S_T green→oven-dry (%), the       */
   /* dimensional change coefficients C_R, C_T (per % MC, valid 6–14 % MC: ΔD = D·C·ΔM), E (Mpsi, 12 % MC); the EMC equation of  */
   /* W. T. Simpson (1973, Hailwood–Horrobin; Handbook eq. 4-5); S_M = S_0(30 − M)/30 below the fibre saturation point (~30 %).   */
-  /* (verify): every species value was transcribed from the Handbook's tables through secondary sources.                        */
+  /* Checked 2026-11 against the 2021 chapter PDFs (research.fs.usda.gov/treesearch/62243, 62244, 62261): S from Tables 4-3 and */
+  /* 4-4, C from Table 13-5 (= eq. 13-2 with FSP 30, M_I 10), E from Tables 5-3b and 5-5b. Corrected then: red oak C 0.00137/  */
+  /* 0.00304, white oak 0.00194/0.00376, ponderosa C_R 0.00133 (the old values were the 2010 edition's), teak S_T 5.8.          */
   /* ===================================================================================================================== */
   const WOOD = {   // [S_R, S_T, S_V, C_R, C_T, E Mpsi]
     'ash-white': [4.9, 7.8, 13.3, 0.00169, 0.00274, 1.74], basswood: [6.6, 9.3, 15.8, 0.00230, 0.00330, 1.46], beech: [5.5, 11.9, 17.2, 0.00190, 0.00431, 1.72],
     'birch-yellow': [7.3, 9.5, 16.8, 0.00256, 0.00338, 2.01], 'cherry-black': [3.7, 7.1, 11.5, 0.00126, 0.00248, 1.49], 'hickory-shagbark': [7.0, 10.5, 16.7, 0.00259, 0.00411, 2.16],
-    'maple-sugar': [4.8, 9.9, 14.7, 0.00165, 0.00353, 1.83], 'maple-red': [4.0, 8.2, 12.6, 0.00137, 0.00289, 1.64], 'oak-red': [4.0, 8.6, 13.7, 0.00158, 0.00369, 1.82],
-    'oak-white': [5.6, 10.5, 16.3, 0.00180, 0.00365, 1.78], 'walnut-black': [5.5, 7.8, 12.8, 0.00190, 0.00274, 1.68], 'yellow-poplar': [4.6, 8.2, 12.7, 0.00158, 0.00289, 1.58],
-    'douglas-fir': [4.8, 7.6, 12.4, 0.00165, 0.00267, 1.95], 'pine-white': [2.1, 6.1, 8.2, 0.00071, 0.00212, 1.24], 'pine-ponderosa': [3.9, 6.2, 9.7, 0.00129, 0.00216, 1.29],
+    'maple-sugar': [4.8, 9.9, 14.7, 0.00165, 0.00353, 1.83], 'maple-red': [4.0, 8.2, 12.6, 0.00137, 0.00289, 1.64], 'oak-red': [4.0, 8.6, 13.7, 0.00137, 0.00304, 1.82],
+    'oak-white': [5.6, 10.5, 16.3, 0.00194, 0.00376, 1.78], 'walnut-black': [5.5, 7.8, 12.8, 0.00190, 0.00274, 1.68], 'yellow-poplar': [4.6, 8.2, 12.7, 0.00158, 0.00289, 1.58],
+    'douglas-fir': [4.8, 7.6, 12.4, 0.00165, 0.00267, 1.95], 'pine-white': [2.1, 6.1, 8.2, 0.00071, 0.00212, 1.24], 'pine-ponderosa': [3.9, 6.2, 9.7, 0.00133, 0.00216, 1.29],
     redwood: [2.6, 4.4, 6.8, 0.00120, 0.00205, 1.34], 'cedar-western-red': [2.4, 5.0, 6.8, 0.00111, 0.00234, 1.11], 'spruce-sitka': [4.3, 7.5, 11.5, 0.00148, 0.00263, 1.57],
-    mahogany: [3.0, 4.1, 7.8, NaN, NaN, 1.50], teak: [2.5, 4.0, 7.0, NaN, NaN, 1.55],
+    mahogany: [3.0, 4.1, 7.8, NaN, NaN, 1.50], teak: [2.5, 5.8, 7.0, NaN, NaN, 1.55],
   };
   const FSP = 30;
   /** EMC (%) of wood at T (°F) and relative humidity h (0–1): Simpson (1973), Wood Handbook eq. 4-5 */
@@ -1253,6 +1255,7 @@
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibCraftModule, 'NoemaLibCraft');
   root.NoemaLibCraft = Object.freeze({
+    table: { model: { $by: 'mode', $cases: DATA.schema }, outputs: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => { const O = DATA.outs[m]; return [m, { scalar: O.scalar.concat((O.issues || []).map(i => 'issue.' + i), ...Object.entries(O.prefix || {}).map(([p, l]) => l.map(x => p + x))), series: O.series || [], scene: O.scene || [] }]; })) } },   // the form of the activity author (46_lib_schema.js)
     id: ID, DATA, checkSpec, exprs, keys, run, compute, engine: Object.freeze(engine), simEngine,
     // the engine's own functions and tables, for the tests
     distribute, shaping, runs, token, orbifoldCost, classifyWallpaper, classifyFrieze, canonVertex, GROUPS, emc, ffd, exactBins,

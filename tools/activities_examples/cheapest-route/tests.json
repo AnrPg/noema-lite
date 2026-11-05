@@ -1,0 +1,7 @@
+{ "cases": [
+ { "name": "the cheapest route A – D – E – G (toll 14) passes", "steps": [{ "waitFor": "body[data-best]" }, { "click": "[data-to=\"D\"]" }, { "click": "[data-to=\"E\"]" }, { "click": "[data-to=\"G\"]" }, { "click": "#check", "wait": 200 }],
+   "expect": { "passed": true, "text": { "#out": "14" } } },
+ { "name": "fewer towns is not cheaper: A – C – F – G (toll 17) does not pass", "steps": [{ "waitFor": "body[data-best]" }, { "click": "[data-to=\"C\"]" }, { "click": "[data-to=\"F\"]" }, { "click": "[data-to=\"G\"]" }, { "click": "#check", "wait": 200 }],
+   "expect": { "passed": false, "text": { "#out": "A – D – E – G" } } },
+ { "name": "explorer: the route and the map are saved", "steps": [{ "waitFor": "body[data-best]" }, { "click": "[data-to=\"D\"]", "wait": 500 }], "expect": { "state": ["w", "route"] } }
+] }

@@ -1,0 +1,1797 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "lesion",
+    "lesions": [
+     {
+      "at": [
+       "radial@spiral-groove"
+      ]
+     },
+     {
+      "at": [
+       "deep-radial@supinator"
+      ]
+     },
+     {
+      "at": [
+       "C8",
+       "T1"
+      ],
+      "avulsion": true
+     }
+    ],
+    "pick": "k",
+    "compare": 1,
+    "findings": [
+     "sign.wrist-drop",
+     "muscle.extensor-carpi-radialis-longus",
+     "sign.horner"
+    ],
+    "labels": [
+     {
+      "id": "radial",
+      "key": "radialName"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "sign.wrist-drop"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "muscle.extensor-digitorum"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "move.wrist.extension"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "reflex.triceps-reflex"
+    },
+    {
+     "id": "o4",
+     "kind": "scalar",
+     "of": "area.dorsum-radial-hand"
+    },
+    {
+     "id": "o5",
+     "kind": "scalar",
+     "of": "dermatome.C8"
+    },
+    {
+     "id": "o6",
+     "kind": "scalar",
+     "of": "nerve.radial"
+    },
+    {
+     "id": "o7",
+     "kind": "scalar",
+     "of": "loss.supinator"
+    },
+    {
+     "id": "o8",
+     "kind": "scalar",
+     "of": "differs.sign.wrist-drop"
+    },
+    {
+     "id": "o9",
+     "kind": "scalar",
+     "of": "bestFinding"
+    },
+    {
+     "id": "o10",
+     "kind": "scalar",
+     "of": "discriminators"
+    },
+    {
+     "id": "o11",
+     "kind": "scalar",
+     "of": "issue.level-ambiguous"
+    },
+    {
+     "id": "o12",
+     "kind": "series",
+     "of": "segLoss"
+    },
+    {
+     "id": "o13",
+     "kind": "scene",
+     "of": "muscles"
+    },
+    {
+     "id": "o14",
+     "kind": "scene",
+     "of": "tree"
+    },
+    {
+     "id": "o15",
+     "kind": "scene",
+     "of": "ladder"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "lesion",
+    "lesions": [
+     {
+      "at": [
+       "ulnar@elbow"
+      ],
+      "completeness": "1 - k/4"
+     },
+     {
+      "at": [
+       "ulnar@wrist"
+      ]
+     }
+    ],
+    "variants": [
+     "martin-gruber"
+    ],
+    "lang": "la"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "muscle.first-dorsal-interosseous"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "ulnarClaw"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "issue.variant-sensitive"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "variantRisk"
+    },
+    {
+     "id": "o4",
+     "kind": "scalar",
+     "of": "fn.taste-anterior"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "lesion",
+    "lesions": [
+     {
+      "at": [
+       "jugular-foramen"
+      ]
+     },
+     {
+      "at": [
+       "cavernous-sinus"
+      ]
+     },
+     {
+      "at": [
+       "facial@stylomastoid"
+      ]
+     },
+     {
+      "at": [
+       "upper-trunk"
+      ]
+     },
+     {
+      "at": [
+       "lateral-cord",
+       "posterior-cord"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "sign.uvula-deviation"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "sign.horner"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "paralysed"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "weak"
+    },
+    {
+     "id": "o4",
+     "kind": "scalar",
+     "of": "signs"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "query",
+    "facts": [
+     {
+      "id": "q1",
+      "rel": "innervates",
+      "from": "axillary",
+      "to": "deltoid"
+     },
+     {
+      "id": "q2",
+      "rel": "root",
+      "from": "C5",
+      "to": "deltoid"
+     },
+     {
+      "id": "q3",
+      "rel": "acts",
+      "from": "biceps-brachii",
+      "to": "radioulnar.supination"
+     },
+     {
+      "id": "q4",
+      "rel": "class",
+      "from": "hip",
+      "to": "ball-and-socket"
+     },
+     {
+      "id": "q5",
+      "rel": "number",
+      "from": "vagus",
+      "to": "X"
+     },
+     {
+      "id": "q6",
+      "rel": "passes",
+      "from": "vagus",
+      "to": "jugular-foramen"
+     },
+     {
+      "id": "q7",
+      "rel": "key-point",
+      "from": "C6",
+      "to": "kp-C6"
+     },
+     {
+      "id": "q8",
+      "rel": "supplies",
+      "from": "profunda-brachii",
+      "to": "triceps-long"
+     }
+    ],
+    "quiz": {
+     "rel": "innervates",
+     "to": "deltoid",
+     "choices": [
+      "axillary",
+      "radial",
+      "musculocutaneous"
+     ],
+     "pick": "k"
+    },
+    "of": "deltoid"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "fact.q1"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "fact.q8"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "correct"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "answerIndex"
+    },
+    {
+     "id": "o4",
+     "kind": "scalar",
+     "of": "rootLo"
+    },
+    {
+     "id": "o5",
+     "kind": "scalar",
+     "of": "root.C5"
+    },
+    {
+     "id": "o6",
+     "kind": "scalar",
+     "of": "issue.uncurated"
+    },
+    {
+     "id": "o7",
+     "kind": "scene",
+     "of": "ladder"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "query",
+    "quiz": {
+     "rel": "key-muscle",
+     "from": "L4",
+     "choices": [
+      "ankle.dorsiflexion",
+      "knee.extension",
+      "hallux.extension"
+     ],
+     "pick": 0
+    }
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "correct"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "answers"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "trace",
+    "from": "left-ventricle",
+    "to": "radial-artery",
+    "side": "R",
+    "via": [
+     "brachial"
+    ],
+    "variants": [
+     "high-radial"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "found"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "length"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "via.brachiocephalic-trunk"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "pos.subclavian"
+    },
+    {
+     "id": "o4",
+     "kind": "scalar",
+     "of": "issue.variant-sensitive"
+    },
+    {
+     "id": "o5",
+     "kind": "scene",
+     "of": "route"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "trace",
+    "system": "fetal",
+    "from": "placenta",
+    "to": "left-atrium"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "via.foramen-ovale-heart"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "steps"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "trace",
+    "system": "lymph",
+    "from": "testis-lymph",
+    "to": "thoracic-duct"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "found"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "via.lumbar-nodes"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "trace",
+    "system": "nerve",
+    "from": "C7",
+    "to": "triceps-long",
+    "avoid": [
+     "upper-trunk"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "via.posterior-cord"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "paths"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "trace",
+    "from": "subclavian",
+    "to": "brachial",
+    "side": "R",
+    "avoid": [
+     "axillary-1"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "collateral"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "issue.collateral"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "rom",
+    "joint": "elbow",
+    "dof": "flexion",
+    "source": "ama",
+    "measured": "100 + 20*k",
+    "beighton": {
+     "pinkyL": 1,
+     "pinkyR": 1,
+     "palms": "k > 1"
+    },
+    "age": 30
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "normMax"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "limited"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "beighton"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "beightonPositive"
+    },
+    {
+     "id": "o4",
+     "kind": "scalar",
+     "of": "issue.limited"
+    },
+    {
+     "id": "o5",
+     "kind": "scene",
+     "of": "goniometer"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "biomech",
+    "lever": {
+     "muscleArm": 0.04,
+     "loads": [
+      {
+       "f": "50 + 10*k",
+       "arm": 0.35
+      },
+      {
+       "f": 15,
+       "arm": 0.15
+      }
+     ]
+    },
+    "hip": {
+     "bw": 700,
+     "caneForce": "20*k",
+     "caneArm": 0.5
+    },
+    "niosh": {
+     "load": 15,
+     "H": 40,
+     "V": 60,
+     "D": 50,
+     "A": 30,
+     "F": 2,
+     "duration": "moderate",
+     "coupling": "fair"
+    },
+    "segment": {
+     "name": "forearm",
+     "bodyMass": 80,
+     "length": 0.27
+    },
+    "arm": {
+     "a": 0.3,
+     "b": 0.04,
+     "angle": "90",
+     "steps": 31
+    }
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "muscleForce"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "jrf"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "hipJrfBw"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "rwl"
+    },
+    {
+     "id": "o4",
+     "kind": "scalar",
+     "of": "li"
+    },
+    {
+     "id": "o5",
+     "kind": "scalar",
+     "of": "comDist"
+    },
+    {
+     "id": "o6",
+     "kind": "scalar",
+     "of": "momentArmAt"
+    },
+    {
+     "id": "o7",
+     "kind": "series",
+     "of": "angle"
+    },
+    {
+     "id": "o8",
+     "kind": "series",
+     "of": "momentArm"
+    },
+    {
+     "id": "o9",
+     "kind": "scene",
+     "of": "lever"
+    },
+    {
+     "id": "o10",
+     "kind": "scene",
+     "of": "arm"
+    },
+    {
+     "id": "o11",
+     "kind": "scalar",
+     "of": "issue.model"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "regions",
+    "image": [
+     400,
+     300
+    ],
+    "regions": [
+     {
+      "structure": "deltoid",
+      "polygon": [
+       10,
+       10,
+       100,
+       10,
+       100,
+       100,
+       10,
+       100
+      ],
+      "z": 1
+     },
+     {
+      "structure": "radial",
+      "polyline": [
+       0,
+       200,
+       300,
+       220
+      ],
+      "width": 6
+     },
+     {
+      "structure": "triceps-long",
+      "circle": [
+       200,
+       100,
+       30
+      ]
+     }
+    ],
+    "x": "100 + 50*k",
+    "y": 100,
+    "target": "triceps-brachii",
+    "accept": "part-of-up",
+    "tol": 5
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "hit"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "correct"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "distance"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "nearMiss"
+    },
+    {
+     "id": "o4",
+     "kind": "scene",
+     "of": "regions"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "visual",
+    "lesions": [
+     "chiasm-central",
+     "optic-tract-L",
+     "occipital-R"
+    ],
+    "pick": "k"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "field.L-TS"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "defect.bitemporal-hemianopia"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "defect.macular-sparing"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "rapd.L"
+    },
+    {
+     "id": "o4",
+     "kind": "scene",
+     "of": "fields"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "cord",
+    "level": "T10",
+    "side": "R",
+    "kind": "hemisection"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "umn.R"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "sttFrom.L"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "level"
+    },
+    {
+     "id": "o3",
+     "kind": "scene",
+     "of": "section"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "cord",
+    "level": "C6",
+    "kind": "central",
+    "extent": "2 + k"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "sttBandTo"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "armsWorse"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": 5,
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "heart"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "found"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "lesion",
+    "lesions": [
+     {
+      "at": [
+       "nerve-x",
+       "deltoid",
+       "radial@wrist",
+       "C5@root",
+       "brachial plexus!",
+       "radial@"
+      ],
+      "avulsion": true,
+      "extra": 1
+     }
+    ],
+    "pick": 3,
+    "compare": 0.5,
+    "findings": [
+     "muscle.nope",
+     "sign.wrist-drop",
+     "nothing"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "muscle.nope"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "move.elbow.nope"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "differs.sign.zz"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "issue.nope"
+    },
+    {
+     "id": "o4",
+     "kind": "series",
+     "of": "gaps"
+    },
+    {
+     "id": "o5",
+     "kind": "scene",
+     "of": "route"
+    },
+    {
+     "id": "o6",
+     "kind": "plot",
+     "of": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "lesion",
+    "lesions": [],
+    "variants": [
+     "martin-gruber",
+     "bovine-arch",
+     "nope",
+     "prefixed-plexus",
+     "postfixed-plexus"
+    ],
+    "labels": [
+     {
+      "id": "nope",
+      "key": "a"
+     },
+     {
+      "id": "radial",
+      "key": "Bad Key"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "paralysed"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "lesion"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "paralysed"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "query",
+    "facts": [
+     {
+      "id": "a",
+      "rel": "innervates",
+      "from": "deltoid",
+      "to": "axillary"
+     },
+     {
+      "id": "a",
+      "rel": "acts",
+      "from": "deltoid",
+      "to": "elbow.nope"
+     },
+     {
+      "id": "b",
+      "rel": "class",
+      "from": "hip",
+      "to": "ball"
+     },
+     {
+      "id": "c",
+      "rel": "supplies",
+      "from": "femoral",
+      "to": "nope"
+     },
+     {
+      "id": "d",
+      "rel": "made-up",
+      "from": "hip",
+      "to": "x"
+     },
+     {
+      "id": "e",
+      "rel": "acts",
+      "from": "deltoid",
+      "to": "shoulder.abduction.x"
+     },
+     {
+      "id": "f",
+      "rel": "part",
+      "from": "fdp-lateral",
+      "to": "Bad Id"
+     }
+    ],
+    "quiz": {
+     "rel": "innervates",
+     "from": "axillary",
+     "to": "deltoid",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "pick": 0
+    },
+    "of": "zzz"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "fact.a"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "fact.zz"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "root.X9"
+    },
+    {
+     "id": "o3",
+     "kind": "scalar",
+     "of": "via.axillary"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "query",
+    "quiz": {
+     "rel": "root",
+     "to": "deltoid",
+     "choices": [
+      "C5",
+      "axillary",
+      "zz",
+      ""
+     ],
+     "pick": 7
+    }
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "correct"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "trace",
+    "from": "left-ventricle",
+    "to": "left-ventricle",
+    "avoid": [
+     "left-ventricle",
+     "zz"
+    ],
+    "via": [
+     "deltoid"
+    ],
+    "system": "blood"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "found"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "via.zz"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "pos.aorta"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "trace",
+    "system": "lymph",
+    "from": "axillary",
+    "to": "radial-artery",
+    "side": "X"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "found"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "rom",
+    "joint": "elbow"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "normMax"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "rom",
+    "joint": "elbow",
+    "dof": "abduction"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "normMax"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "rom",
+    "joint": "thumb-cmc",
+    "dof": "abduction",
+    "source": "ama"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "normMax"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "rom",
+    "joint": "deltoid",
+    "dof": "flexion",
+    "source": "who"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "normMax"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "rom"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "beighton"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "biomech",
+    "lever": {
+     "muscleArm": 0.04
+    },
+    "segment": {
+     "name": "elbow"
+    }
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "muscleForce"
+    },
+    {
+     "id": "o1",
+     "kind": "series",
+     "of": "nope"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "biomech"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "rwl"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "regions",
+    "image": [
+     100,
+     100
+    ],
+    "regions": [
+     {
+      "structure": "deltoid"
+     },
+     {
+      "structure": "deltoid",
+      "polygon": [
+       1,
+       1,
+       2,
+       2
+      ]
+     },
+     {
+      "structure": "deltoid",
+      "polygon": [
+       0,
+       0,
+       50,
+       0,
+       50,
+       150
+      ]
+     },
+     {
+      "structure": "nope",
+      "polygon": [
+       0,
+       0,
+       50,
+       50,
+       50,
+       0,
+       0,
+       50
+      ]
+     },
+     {
+      "structure": "radial",
+      "polyline": [
+       0,
+       0,
+       10,
+       10
+      ]
+     },
+     {
+      "structure": "radial",
+      "circle": [
+       50,
+       50,
+       0
+      ]
+     },
+     {
+      "structure": "radial",
+      "polygon": [
+       0,
+       0,
+       10,
+       0
+      ],
+      "circle": [
+       1,
+       1,
+       1
+      ]
+     }
+    ],
+    "x": 1,
+    "y": 1,
+    "target": "median",
+    "accept": "near"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "hit"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "visual",
+    "lesions": [
+     "chiasm",
+     "optic-nerve-L"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "field.L-XX"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "cord",
+    "level": "Co1",
+    "kind": "partial",
+    "side": "L"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "umn.L"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "anatomy@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 2,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "cord",
+    "level": "T4",
+    "kind": "complete"
+   },
+   "outputs": {
+    "x": 1
+   }
+  }
+ ]
+}

@@ -78,6 +78,7 @@ P6_TIMED = ["thermal@1", "pid@1"]
 # the engine library (docs/INTERACTIVE_LIBRARY.md): general engines; each Python twin tools/lib_<name>.py has check_spec, exprs and keys
 LIB = {"ode@1": "lib_ode", "prob@1": "lib_prob", "graph@1": "lib_graph", "geom@1": "lib_geom", "genetics@1": "lib_genetics", "seq@1": "lib_seq", "med@1": "lib_med", "clinic@1": "lib_clinic", "anatomy@1": "lib_anatomy", "timeline@1": "lib_timeline", "music@1": "lib_music", "map@1": "lib_map", "text@1": "lib_text", "craft@1": "lib_craft"}
 LIB_KINDS = ["scalar", "series", "scene", "sound"]
+APP_ENGINES_MAX = 8   # html-app@1: the engines of the library a mini-app may use ("engines": [...], docs/INTERACTIVE.md §8.1) — the same rule in engine/packcheck.js
 LINE_STYLES = ["line", "bars", "steps", "points"]
 def _lib(eng):
     """the Python twin of a library engine, or None when it is not installed beside this file"""
@@ -274,12 +275,35 @@ def _engine_of(a):
     e = a["spec"].get("engine", DEFAULT_ENGINE)
     return e if isinstance(e, str) else None
 
+def _app_engines(a):
+    """the engines of the library an html-app@1 item lists (its "engines"; only known ids)"""
+    if not isinstance(a, dict) or a.get("runtime") != "html-app@1" or not isinstance(a.get("engines"), list): return []
+    return [e for e in a["engines"] if isinstance(e, str) and e in LIB]
+
+def check_app_engines(a):
+    """the "engines" of an html-app@1 item: a list of library engine ids, and every engine the bundle names in noema.engine('…') among them
+    — the SAME messages as engine/packcheck.js checkAppEngines"""
+    E = []; es = a.get("engines"); lib = sorted(LIB)
+    if es is not None:
+        if not (isinstance(es, list) and 1 <= len(es) <= APP_ENGINES_MAX and all(isinstance(x, str) for x in es)): E.append(f"engines must be a list of 1–{APP_ENGINES_MAX} engine ids of the library ({', '.join(lib)})")
+        else:
+            for x in es:
+                if x not in lib: E.append(f"engine {_qv(x)} is not an engine of the library (a mini-app can use {', '.join(lib)})")
+            if len(set(es)) != len(es): E.append("engines lists an engine twice")
+    have = es if isinstance(es, list) else []
+    html = a.get("html")
+    used = list(dict.fromkeys(m.group(2) for m in re.finditer(r"\bnoema\.engine\(\s*(['\"])([^'\"\n]{1,40})\1", html))) if isinstance(html, str) else []
+    for x in used:
+        if x not in have: E.append(f'the bundle uses the engine {_qv(x)}: list it in "engines"')
+    return E
+
 def need_requires(items):
-    """what pack.requires must list for these activities: the core, each runtime, each engine other than formula@1 (the built-in one)"""
+    """what pack.requires must list for these activities: the core, each runtime, each engine other than formula@1 (the built-in one),
+    and the engines a mini-app (html-app@1) lists"""
     items = [a for a in items if isinstance(a, dict)]
     if not items: return []
     rts = sorted({"runtime:" + a["runtime"] for a in items if isinstance(a.get("runtime"), str)})
-    engs = sorted({"engine:" + e for e in (_engine_of(a) for a in items) if e and e != DEFAULT_ENGINE})
+    engs = sorted({"engine:" + e for e in [_engine_of(a) for a in items] + [x for a in items for x in _app_engines(a)] if e and e != DEFAULT_ENGINE})
     return ["activities/v1"] + rts + engs
 
 def requires(reg):
@@ -314,6 +338,7 @@ def check_activities(pack, translations=None):
             if rt in LATER: E.append(f"{w}: runtime {rt} arrives in a later version of the app ({LATER[rt]}); use html-app@1, sim-spec@1, py-module@1 or h5p@1 for now")
             elif rt not in RUNTIMES: E.append(f"{w}: unknown runtime {rt!r} (one of {', '.join(sorted(RUNTIMES))})")
             if not (isinstance(a.get("stateVersion"), int) and a["stateVersion"] >= 1): E.append(f"{w}: stateVersion must be a whole number >= 1")
+            if rt != "html-app@1" and a.get("engines") is not None: E.append(f"{w}: engines: only an html-app@1 item lists engines (a sim-spec@1 spec names its engine in spec.engine)")
             caps = a.get("capabilities") or []
             if not isinstance(caps, list) or any(c not in CAPS for c in caps): E.append(f"{w}: capabilities must be some of {', '.join(sorted(CAPS))}")
             fb = a.get("fallback") if isinstance(a.get("fallback"), dict) else {}
@@ -327,6 +352,7 @@ def check_activities(pack, translations=None):
                     le, lw = lint_html(html); E += [f"{w}: {m}" for m in le]; W += [f"{w}: {m}" for m in lw]
                     if a.get("sha256") is not None and a.get("sha256") != sha256(html): E.append(f"{w}: sha256 does not match the bundle")
                     if a.get("bytes") is not None and a.get("bytes") != len(html.encode("utf-8")): E.append(f"{w}: bytes does not match the bundle")
+                E += [f"{w}: {m}" for m in check_app_engines(a)]
             elif rt == "sim-spec@1":
                 if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json) is missing")
                 else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, items=every)]

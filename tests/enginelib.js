@@ -11,6 +11,7 @@ globalThis.window = globalThis;
 require(path.join(SRC, '35_simexpr.js'));
 for (const f of ['36_engine_circuit.js', '39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(SRC, f));   // the plugins (their old messages must stay)
 require(path.join(SRC, '46_lib_core.js'));
+for (const f of fs.readdirSync(SRC).filter(f => /^46_lib_[a-z_]+\.js$/.test(f) && f !== '46_lib_core.js').sort()) require(path.join(SRC, f));   // the shared kits (simkit, space) the engines build on
 const LIBFILES = fs.readdirSync(SRC).filter(f => /^4[78]_lib_[a-z_]+\.js$/.test(f)).sort();
 for (const f of LIBFILES) require(path.join(SRC, f));
 require(path.join(SRC, '49_lib_catalog.js'));

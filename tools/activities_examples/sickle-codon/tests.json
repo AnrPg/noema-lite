@@ -1,0 +1,223 @@
+{
+ "cases": [
+  {
+   "name": "c.20A>T: GAG → GTG, p.(Glu7Val), haemoglobin S (passes)",
+   "exercise": "ch01-e930",
+   "steps": [
+    {
+     "set": "pos",
+     "value": 20
+    },
+    {
+     "set": "base",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "effect": [
+      1,
+      1
+     ],
+     "aaPos": [
+      7,
+      7
+     ],
+     "altAa": [
+      17,
+      17
+     ],
+     "blosum": [
+      -2,
+      -2
+     ],
+     "sitesAlt": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "c.19G>A: GAG → AAG, p.(Glu7Lys), haemoglobin C — the right codon, the wrong amino acid (fails)",
+   "exercise": "ch01-e930",
+   "steps": [
+    {
+     "set": "pos",
+     "value": 19
+    },
+    {
+     "set": "base",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "effect": [
+      1,
+      1
+     ],
+     "aaPos": [
+      7,
+      7
+     ],
+     "altAa": [
+      8,
+      8
+     ],
+     "transition": [
+      1,
+      1
+     ],
+     "sitesAlt": [
+      2,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "name": "c.20A>C: GAG → GCG, p.(Glu7Ala) (fails)",
+   "exercise": "ch01-e930",
+   "steps": [
+    {
+     "set": "pos",
+     "value": 20
+    },
+    {
+     "set": "base",
+     "value": 1
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "effect": [
+      1,
+      1
+     ],
+     "altAa": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "name": "c.21G>A: GAG → GAA, still glutamic acid — silent (fails)",
+   "exercise": "ch01-e930",
+   "steps": [
+    {
+     "set": "pos",
+     "value": 21
+    },
+    {
+     "set": "base",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "effect": [
+      0,
+      0
+     ],
+     "aaPos": [
+      7,
+      7
+     ],
+     "sitesAlt": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "c.19G>T: GAG → TAG, a stop at codon 7 (fails)",
+   "exercise": "ch01-e930",
+   "steps": [
+    {
+     "set": "pos",
+     "value": 19
+    },
+    {
+     "set": "base",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "effect": [
+      2,
+      2
+     ],
+     "aaPos": [
+      7,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "name": "c.2T>G: the start codon is lost, p.(Met1?) (fails)",
+   "exercise": "ch01-e930",
+   "steps": [
+    {
+     "set": "pos",
+     "value": 2
+    },
+    {
+     "set": "base",
+     "value": 2
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "effect": [
+      4,
+      4
+     ],
+     "aaPos": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the values are saved",
+   "steps": [
+    {
+     "set": "pos",
+     "value": 17
+    },
+    {
+     "set": "base",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "state": [
+     "pos",
+     "base"
+    ],
+    "values": {
+     "effect": [
+      1,
+      1
+     ],
+     "aaPos": [
+      6,
+      6
+     ]
+    }
+   }
+  }
+ ]
+}

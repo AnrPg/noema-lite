@@ -1,0 +1,19 @@
+{
+ "title": "One base, one disease: the sickle-cell codon",
+ "intro": "This is the coding sequence of the human β-globin gene (HBB), counted from the A of the start codon ATG (c.1). Choose a position and a new base: the engine names the change as a geneticist writes it (HGVS), translates both proteins and says what the change does. Find the single substitution that turns the glutamic acid of codon 7 into a valine.",
+ "posLabel": "Position in the coding sequence (c.)",
+ "baseLabel": "New base",
+ "baseA": "A (adenine)",
+ "baseC": "C (cytosine)",
+ "baseG": "G (guanine)",
+ "baseT": "T (thymine)",
+ "aaPosLabel": "First amino acid changed",
+ "missenseLabel": "Missense (another amino acid)",
+ "silentLabel": "Silent (the same amino acid)",
+ "nonsenseLabel": "Nonsense (a stop codon)",
+ "blosumLabel": "BLOSUM62 score of the exchange",
+ "transitionLabel": "Transition (purine ↔ purine or pyrimidine ↔ pyrimidine)",
+ "sitesLabel": "Bsu36I sites left (2 in the normal gene)",
+ "namesTitle": "The change at the DNA level (c.) and at the protein level (p.)",
+ "protTitle": "The normal protein (top) and the changed one (bottom) around the change"
+}

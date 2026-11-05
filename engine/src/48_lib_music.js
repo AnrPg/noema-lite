@@ -549,6 +549,7 @@
   const { engine, simEngine } = makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibMusicModule, 'NoemaLibMusic');
   root.NoemaLibMusic = Object.freeze({
+    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine, TABLES: T,
     parsePitch, parsePC, fromMidi, interval, parseIvl, transpose, tuner, normalForm, primeForm, iv, forteNumber, invariance, maskOf, pcsOf, analyseChord, roman, nrt, CHORDS,
     melakarta, bjorklund, necklace, evenness, partials, dPair, roughness, voiceLeading, resonator, monzoCents, COMMA, WELL, SCALE, MAQAM,

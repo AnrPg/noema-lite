@@ -8,7 +8,7 @@
      tree       a decision tree rolled back (expected utility), the optimal policy, regret, a one-way sensitivity sweep and its threshold
      markov     a Markov cohort (life expectancy, discounted QALYs and costs, half-cycle correction)
      cea        cost-effectiveness: dominance, extended dominance, ICERs on the frontier, net monetary benefit
-     triage     ESI v4/v5 logic (ENA), NEWS2 (RCP 2017), qSOFA (Seymour 2016), SIRS (Bone 1992), shock index
+     triage     ESI v5 logic (ENA 2023), NEWS2 (RCP 2017), qSOFA (Seymour 2016), SIRS (Bone 1992), shock index
      vp         a virtual patient: timed actions (history, examination, tests with turnaround, treatments with effects) on a small
                 physiological model of the circulation, oxygenation and lactate ("haemo-lite", in-house), the course minute by minute,
                 the outcome, and the GRADE OF THE REASONING PATH (essential actions, deadlines, harm, order, efficiency, calibration,
@@ -447,7 +447,9 @@
     const g = (sec, k, d) => numAt(F, `model.triage.${sec}.${k}`, t[sec][k], env, d), Mx = MED();
     if (isObj(t.esi)) {   // Emergency Severity Index (ENA, ESI Implementation Handbook v4 2012 / v5 2023): decision points A–D
       const age = g('esi', 'age', 30), hr = g('esi', 'hr', NaN), rr = g('esi', 'rr', NaN), spo2 = g('esi', 'spo2', NaN), res = g('esi', 'resources', 0);
-      const lim = age < 0.25 ? [180, 50] : age < 3 ? [160, 40] : age <= 8 ? [140, 30] : [100, 20];   // danger-zone vitals by age (ESI handbook)
+      // high-risk (danger-zone) vitals by age: ESI Handbook 5th ed. (ENA 2023), Figure 6-1 — < 1 mo 190/60, 1–12 mo 180/55, 1–3 y 140/40,
+      // 3–5 y 120/35, 5–12 y 120/30, ≥ 12 y 100/20, SpO2 < 92 % (v4 2012 had < 3 mo 180/50, 3 mo–3 y 160/40, 3–8 y 140/30, > 8 y 100/20)
+      const lim = age < 1 / 12 ? [190, 60] : age < 1 ? [180, 55] : age < 3 ? [140, 40] : age < 5 ? [120, 35] : age < 12 ? [120, 30] : [100, 20];
       const dz = (hr > lim[0]) || (rr > lim[1]) || (spo2 < 92) ? 1 : 0;
       let esi;
       if (g('esi', 'lifesaving', 0) === 1) esi = 1;
@@ -627,6 +629,6 @@
   } });
   /** evaluate(model, inputs) → every computed value (tests, authoring tools) */
   function evaluate(model, inputs, outputs, seed) { const spec = { model, outputs: outputs || [] }; return run(spec, inputs || {}, { seed }); }
-  root.NoemaLibClinic = Object.freeze({ id: ID, CODES, SECTIONS, VARS, GRADE, checkSpec, exprs, keys, offered, run, evaluate, engine: Object.freeze(engine), simEngine, posterior, gainOf });
+  root.NoemaLibClinic = Object.freeze({ id: ID, table: { model: MODEL, outputs: { scalar: [], series: [], scene: [] }, offered }, CODES, SECTIONS, VARS, GRADE, checkSpec, exprs, keys, offered, run, evaluate, engine: Object.freeze(engine), simEngine, posterior, gainOf });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

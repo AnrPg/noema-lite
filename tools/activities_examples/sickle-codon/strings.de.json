@@ -1,0 +1,19 @@
+{
+ "title": "Eine Base, eine Krankheit: das Codon der Sichelzellanämie",
+ "intro": "Das ist die codierende Sequenz des menschlichen β-Globin-Gens (HBB), gezählt ab dem A des Startcodons ATG (c.1). Wählen Sie eine Position und eine neue Base: Die Engine benennt die Veränderung so, wie Genetiker sie schreiben (HGVS), übersetzt beide Proteine und sagt, was die Veränderung bewirkt. Finden Sie die einzige Substitution, die die Glutaminsäure von Codon 7 in ein Valin verwandelt.",
+ "posLabel": "Position in der codierenden Sequenz (c.)",
+ "baseLabel": "Neue Base",
+ "baseA": "A (Adenin)",
+ "baseC": "C (Cytosin)",
+ "baseG": "G (Guanin)",
+ "baseT": "T (Thymin)",
+ "aaPosLabel": "Erste veränderte Aminosäure",
+ "missenseLabel": "Missense (eine andere Aminosäure)",
+ "silentLabel": "Still (dieselbe Aminosäure)",
+ "nonsenseLabel": "Nonsense (ein Stoppcodon)",
+ "blosumLabel": "BLOSUM62-Wert des Austauschs",
+ "transitionLabel": "Transition (Purin ↔ Purin oder Pyrimidin ↔ Pyrimidin)",
+ "sitesLabel": "Verbleibende Bsu36I-Schnittstellen (2 im normalen Gen)",
+ "namesTitle": "Die Veränderung auf DNA-Ebene (c.) und auf Proteinebene (p.)",
+ "protTitle": "Das normale Protein (oben) und das veränderte (unten) um die Veränderung herum"
+}

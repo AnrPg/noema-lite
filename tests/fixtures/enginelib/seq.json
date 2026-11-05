@@ -1,0 +1,1229 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "translate",
+    "seq": ">demo\nATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG",
+    "frame": "k > 30 ? -1 : 1",
+    "table": 11,
+    "cds": false,
+    "window": 10
+   },
+   "outputs": [
+    {
+     "id": "len",
+     "kind": "scalar",
+     "of": "length"
+    },
+    {
+     "id": "gc",
+     "kind": "scalar",
+     "of": "gc"
+    },
+    {
+     "id": "pl",
+     "kind": "scalar",
+     "of": "protLength"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "count",
+     "arg": "G"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "winPos"
+    },
+    {
+     "id": "y",
+     "kind": "series",
+     "of": "gcWin"
+    },
+    {
+     "id": "tr",
+     "kind": "scene",
+     "of": "translation"
+    },
+    {
+     "id": "om",
+     "kind": "scene",
+     "of": "orfMap"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "tr",
+     "title": "tTitle"
+    },
+    {
+     "kind": "series",
+     "x": {
+      "series": "x"
+     },
+     "series": [
+      {
+       "y": "y",
+       "label": "gcLine"
+      }
+     ]
+    }
+   ],
+   "readouts": [
+    {
+     "label": "gcLabel",
+     "expr": "100*gc"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "translate",
+    "seq": "ATGCGTTTGAAATAA",
+    "cds": true,
+    "minLen": "3*k",
+    "start": "alt",
+    "refUsage": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "exons": [
+     {
+      "start": 1,
+      "end": "k"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "rscu",
+     "arg": "CGT"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cai"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "enc"
+    },
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "orfStart",
+     "arg": 0
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "translate",
+    "seq": "ATGXTT"
+   },
+   "outputs": [
+    {
+     "id": "len",
+     "kind": "scalar",
+     "of": "length"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "translate",
+    "seq": "AUGTTT",
+    "table": 7
+   },
+   "outputs": [
+    {
+     "id": "len",
+     "kind": "scalar",
+     "of": "length"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "count",
+     "arg": "Q"
+    },
+    {
+     "id": "q",
+     "kind": "series",
+     "of": "length"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "translate",
+    "seq": "",
+    "gc": "some"
+   },
+   "outputs": [
+    {
+     "id": "len",
+     "kind": "scalar",
+     "of": "nope"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "mutate",
+    "cds": "ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCC",
+    "variants": [
+     {
+      "kind": "sub",
+      "pos": "k",
+      "altIndex": 3
+     }
+    ],
+    "enzymes": [
+     "Bsu36I",
+     "DdeI"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "ef",
+     "kind": "scalar",
+     "of": "effect",
+     "arg": 0
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "protPos",
+     "arg": 0
+    },
+    {
+     "id": "aa",
+     "kind": "scalar",
+     "of": "altAa",
+     "arg": 0
+    },
+    {
+     "id": "sr",
+     "kind": "scalar",
+     "of": "sitesRef",
+     "arg": 0
+    },
+    {
+     "id": "sa",
+     "kind": "scalar",
+     "of": "sitesAlt",
+     "arg": 0
+    },
+    {
+     "id": "h",
+     "kind": "scene",
+     "of": "hgvs"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "h",
+     "title": "hTitle"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "mutate",
+    "cds": "ATGGGTTGGTAA",
+    "variants": [
+     {
+      "kind": "sub",
+      "pos": 5
+     },
+     {
+      "kind": "ins",
+      "pos": 3
+     },
+     {
+      "kind": "wobble",
+      "pos": 1
+     }
+    ],
+    "enzymes": [
+     "Nope1"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "effect",
+     "arg": 1.5
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "divergence",
+    "a": "ATGCTGA--CC",
+    "b": "ATGTTGACGCC",
+    "coding": false
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    },
+    {
+     "id": "jc",
+     "kind": "scalar",
+     "of": "jc"
+    },
+    {
+     "id": "kp",
+     "kind": "scalar",
+     "of": "k2p"
+    },
+    {
+     "id": "al",
+     "kind": "scene",
+     "of": "alignment"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "divergence",
+    "a": "ATGC",
+    "b": "ATG"
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "tm",
+    "seq": "AGCGGATAACAATTTCACACAGGA",
+    "seq2": "GTAAAACGACGGCCAGT",
+    "na": "k",
+    "mg": 1.5,
+    "dntp": 0.6,
+    "c1": 250,
+    "c2": 250,
+    "saltCorr": "owczarzy2008",
+    "template": "TTAGCGGATAACAATTTCACACAGGAAACAGCTATGACCATGATTACGCCAAGCTTGCATGCCTGCAGGTCGACTCTAGAGGATCCCCGGGTACCGAGCTCGAATTCACTGGCCGTCGTTTTACAACG"
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "tmNN"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "tmWallace"
+    },
+    {
+     "id": "ip",
+     "kind": "scalar",
+     "of": "issue",
+     "arg": "clamp"
+    },
+    {
+     "id": "pr",
+     "kind": "scalar",
+     "of": "product"
+    },
+    {
+     "id": "T",
+     "kind": "series",
+     "of": "T"
+    },
+    {
+     "id": "th",
+     "kind": "series",
+     "of": "theta"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "duplex"
+    },
+    {
+     "id": "pc",
+     "kind": "scene",
+     "of": "pcr"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "T"
+     },
+     "series": [
+      {
+       "y": "th"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "tm",
+    "seq": "AC",
+    "saltCorr": "owczarzy2009",
+    "c1": -1
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "issue",
+     "arg": "primer"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "tm",
+    "seq": "ACGTACGTACGT",
+    "template": "ÅCGT"
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "tmNN"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "align",
+    "a": "HEAGAWGHEE",
+    "b": "PAWHEAE",
+    "type": "local",
+    "matrix": "BLOSUM62",
+    "open": -12,
+    "extend": -1,
+    "shuffles": "k"
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "score"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "bits"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "zScore"
+    },
+    {
+     "id": "al",
+     "kind": "scene",
+     "of": "alignment"
+    },
+    {
+     "id": "dp",
+     "kind": "scene",
+     "of": "dp"
+    },
+    {
+     "id": "ss",
+     "kind": "series",
+     "of": "shuffleScores"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "align",
+    "a": "GATTACA",
+    "b": "GCATGCT",
+    "alphabet": "dna",
+    "match": 1,
+    "mismatch": -1,
+    "gap": -1
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "score"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nCoOptimal"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "align",
+    "a": "ACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGT",
+    "b": "ACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGA",
+    "alphabet": "dna"
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "score"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "align",
+    "a": "ACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGT",
+    "b": "ACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGA",
+    "alphabet": "dna",
+    "band": 50,
+    "matrix": "BLOSUM62"
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "score"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "align",
+    "a": "ACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGTACGT",
+    "b": "ACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGAACGA",
+    "alphabet": "dna",
+    "band": "k"
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "score"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cells"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "dotplot",
+    "a": "ACGTTGCAACGTTGCA",
+    "b": "TGCAACGT",
+    "window": "k",
+    "stringency": 3,
+    "revcomp": true
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nHits"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "dots"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "dotplot",
+    "a": "ACGT",
+    "b": "AC#GT",
+    "colour": "red"
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "series",
+     "of": "nHits"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "digest",
+    "seq": "GGAATTCCGAATTCAGGATCCAAGCTTGGAATTCCGAATTCAGGATCCAAGCTTGGAATTCCGAATTCAGGATCCAAGCTT",
+    "enzymes": [
+     "EcoRI",
+     "BamHI",
+     "My1"
+    ],
+    "custom": [
+     {
+      "name": "My1",
+      "site": "AAGCTT",
+      "cut": 1
+     }
+    ],
+    "circular": true,
+    "ladder": "lambda",
+    "agarose": "k/20",
+    "dam": true,
+    "features": [
+     {
+      "start": 1,
+      "end": "k",
+      "key": "oriLabel",
+      "strand": "+"
+     },
+     {
+      "start": 30,
+      "end": 60,
+      "key": "ampLabel",
+      "strand": "-"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nSites"
+    },
+    {
+     "id": "f",
+     "kind": "series",
+     "of": "fragmentsSorted"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "migration",
+     "arg": 0
+    },
+    {
+     "id": "g",
+     "kind": "scene",
+     "of": "gel"
+    },
+    {
+     "id": "mp",
+     "kind": "scene",
+     "of": "map"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "mp",
+     "title": "mapTitle"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "digest",
+    "seq": "GAATTC",
+    "enzymes": [
+     "EcoRI",
+     "EcoRI2",
+     "BsaI"
+    ],
+    "custom": [
+     {
+      "name": "EcoRI",
+      "site": "GA",
+      "cut": 1
+     },
+     {
+      "name": "Z",
+      "cut": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nSites"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "protein",
+    "seq": "MQIFVKTLTGKTITLEVEPSDTIENVKAKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG",
+    "ph": "k/4",
+    "window": 9,
+    "pk": "emboss"
+   },
+   "outputs": [
+    {
+     "id": "mw",
+     "kind": "scalar",
+     "of": "mwAvg"
+    },
+    {
+     "id": "pI0",
+     "kind": "scalar",
+     "of": "pI"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "aaCount",
+     "arg": "K"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "hydroX"
+    },
+    {
+     "id": "h",
+     "kind": "series",
+     "of": "hydropathy"
+    },
+    {
+     "id": "w",
+     "kind": "scene",
+     "of": "wheel"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "x"
+     },
+     "series": [
+      {
+       "y": "h",
+       "style": "line"
+      }
+     ]
+    },
+    {
+     "kind": "scene",
+     "of": "w"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "protein",
+    "seq": "MK*LL",
+    "pk": "x"
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "aaCount",
+     "arg": "*"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "crispr",
+    "seq": "ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCC",
+    "nuclease": "SpCas9",
+    "target": "k",
+    "gcMin": 0.3
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nGuides"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "nearestDist"
+    },
+    {
+     "id": "gc",
+     "kind": "scalar",
+     "of": "guideGc",
+     "arg": 0
+    },
+    {
+     "id": "cu",
+     "kind": "series",
+     "of": "cuts"
+    },
+    {
+     "id": "g",
+     "kind": "scene",
+     "of": "guides"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "crispr",
+    "seq": "ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCC",
+    "nuclease": "Cas9x",
+    "guideLen": "k+"
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nGuides"
+    },
+    {
+     "id": "gc",
+     "kind": "scalar",
+     "of": "guideGc",
+     "arg": "a"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "nope"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "b"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "seq@1",
+   "model": [
+    1
+   ],
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "sound",
+     "of": "x"
+    }
+   ]
+  }
+ ]
+}

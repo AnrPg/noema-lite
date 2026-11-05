@@ -1044,6 +1044,7 @@
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
   engine.workerSource = C.workerSource(noemaLibGeneticsModule, 'NoemaLibGenetics');
   root.NoemaLibGenetics = Object.freeze({
+    table: { model: { $by: 'mode', $cases: TABLES }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(m => [m, Object.keys(OUTS[m]).reduce((a, k) => ((a[OUTS[m][k][0]] = a[OUTS[m][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'numx' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, MODES, TABLES, OUTS, EPI, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
     // the formulas, for tests
     logFact, lgamma, gammaQ, chi2Sf, erfc, Phi, PhiInv, intensity, binomial, poisson, hweExact, kimuraU, haldane, kosambi, rHaldane, rKosambi, tajimaD, aN, ratioOf, chainOf,

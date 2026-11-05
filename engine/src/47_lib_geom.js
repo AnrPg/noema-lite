@@ -1128,6 +1128,7 @@
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibGeomModule, 'NoemaLibGeom');
   root.NoemaLibGeom = Object.freeze({
+    table: { model: Object.assign({ objects: { $req: true, $list: { $obj: Object.assign({ id: 'id!', hide: 'bool', label: 'key', c: 'enum:' + ROLES.join('|') }, ...KIND_NAMES.map(k => ({ [k]: KINDS[k].point ? 'any' : KINDS[k].list ? { $list: 'ref', min: KINDS[k].min, max: KINDS[k].max } : { $obj: KINDS[k].T } }))) }, min: 1, max: MAX_OBJ } }, MODEL_T), outputs: { scalar: SCALAR_OF, series: SERIES_OF, scene: ['drawing'] }, fields: { at: { $list: 'ref' }, unit: 'enum:deg|rad', oriented: 'bool', signed: 'bool', code: 'enum:' + CODES.join('|'), test: 'enum:' + ASSERTS.join('|'), samples: 'int:1:200', labels: 'enum:id|none' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     KINDS: KIND_NAMES, CENTRES, TRICIRCLES, TRANSFORMS, CODES, SCALAR_OF, SERIES_OF, ASSERTS,
     // the geometry itself, for the tests

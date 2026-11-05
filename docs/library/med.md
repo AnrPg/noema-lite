@@ -117,10 +117,10 @@ ECG and hours in PK. The source column is the comment written beside the formula
 | `renal.ckdepi` | `scr!` `age!` `female!` | `egfr` `stage` | — | — |  |
 | `renal.ckdepiCys` | `scr!` `cys!` `age!` `female!` | `egfr` `stage` | — | — | CKD-EPI 2021 creatinine–cystatin C (Inker NEJM 2021) |
 | `renal.cys2012` | `cys!` `age!` `female!` | `egfr` `stage` | — | — | Inker NEJM 2012 |
-| `renal.ekfc` | `scr!` `age!` `female!` | `egfr` `stage` | — | — | EKFC (Pottel Ann Intern Med 2021;174:183): adult Q 0.70 / 0.90 mg/dL |
+| `renal.ekfc` | `scr!` `age!` `female!` | `egfr` `stage` | — | — | EKFC (Pottel Ann Intern Med 2021;174:183): adult Q 0.70 / 0.90 mg/dL (62 / 80 µmol/L); 2–25 y the paper's Q polynomial in age; under 2 y `validity` |
 | `renal.cg` | `age!` `weight!` `scr!` `female!` `height` · opts `weight` | `crcl` `wt` | — | — | Cockcroft & Gault, Nephron 1976;16:31 |
 | `renal.schwartz` | `height!` `scr!` | `egfr` | — | — | bedside Schwartz, JASN 2009;20:629 (1–16 y) |
-| `renal.ckid` | `height!` `scr!` `age!` `female!` | `egfr` | — | — | CKiD U25 (Pierce Kidney Int 2021;99:948) — K constants to verify against the paper (check before release) |
+| `renal.ckid` | `height!` `scr!` `age!` `female!` | `egfr` | — | — | CKiD U25 (Pierce Kidney Int 2021;99:948): eGFR = K·height(m)/Scr; K M 39.0·1.008^(a−12) (< 12), 39.0·1.045^(a−12) (12–18), 50.8; F 36.1·1.008^(a−12), 36.1·1.023^(a−12), 41.4 — checked against Table 2 (PMC9083470) |
 | `renal.mdrd` | `scr!` `age!` `female!` | `egfr` | — | — | Levey 2006 (IDMS), no race coefficient |
 | `renal.fena` | `una!` `pna!` `ucr!` `pcr!` `diuretic` | `fena` `cls` | — | — |  |
 | `renal.feurea` | `uurea!` `purea!` `ucr!` `pcr!` | `feurea` | — | — |  |
@@ -148,7 +148,7 @@ ECG and hours in PK. The source column is the comment written beside the formula
 | `pk.mm` | `rate!` `vmax!` `km!` `v!` `c0` `days` | `css` `cend` | `t` `c` | — | Michaelis–Menten elimination (phenytoin): dC/dt = (R − Vmax C/(Km + C))/V, t in days |
 | `pk.loading` | `ctarget!` `v!` `clear` `f` `tau` | `ld` `md` | — | — |  |
 | `pk.renal` | `dose!` `fe!` `crcl!` `normal` | `adj` `kf` | — | — | Giusti–Hayton / Dettli |
-| `pk.phenytoin` | `c!` `alb!` | `sheiner` `wt` | — | — | Sheiner–Tozer 1978; revised 0.275 coefficient (check before release) |
+| `pk.phenytoin` | `c!` `alb!` | `sheiner` `wt` | — | — | Sheiner–Tozer 1978 (0.2·alb + 0.1); `wt` the revised Winter–Tozer 0.25·alb + 0.1 (Anderson Ann Pharmacother 1997;31:279) |
 | `endo.minimal` | `gb!` `ib!` `sg` `si` `p2` `gdose` `vg` `imax` `ni` `tend` | `gmax` `gmin` `gend` `kg` | `t` `g` `x` `i` | — | Bergman minimal model, Am J Physiol 1979;236:E667 (G mg/dL, I µU/mL, t min) |
 | `endo.homa` | `glucose!` `insulin!` | `ir` `beta` | — | — | Matthews Diabetologia 1985 |
 | `endo.a1c` | `a1c!` | `eag` `ifcc` `cls` | — | — | Nathan Diabetes Care 2008; ADA Standards of Care |
@@ -227,7 +227,8 @@ ECG and hours in PK. The source column is the comment written beside the formula
 - **Pharmacokinetics** — Rowland & Tozer, *Clinical Pharmacokinetics and Pharmacodynamics* 5e (2019): one-compartment IV bolus with
   repeated doses (accumulation R = 1/(1 − e^(−kτ))), infusion, oral Bateman with lag (ka = k by its limit), two-compartment (α, β,
   Vss), Michaelis–Menten (rate ≥ Vmax → no steady state, `unsafe`), loading and maintenance dose, renal dose adjustment (Dettli),
-  phenytoin corrected for albumin (Sheiner–Tozer 1978; the revised 0.275 coefficient: `verify`).
+  phenytoin corrected for albumin (Sheiner–Tozer 1978; the revised Winter–Tozer coefficient 0.25 of Anderson, *Ann Pharmacother*
+  1997;31:279 — the 0.275 found in some sources is Cheng et al., *Can J Hosp Pharm* 2016;69:269, fitted to one hospital's patients).
 - **Endocrine** — Bergman's minimal model (*Am J Physiol* 1979; Bergman, *Diabetes* 1989) with an IVGTT bolus; HOMA1 (Matthews,
   *Diabetologia* 1985;28:412); A1c → eAG (Nathan, *Diabetes Care* 2008;31:1473: 28.7·A1c − 46.7) and IFCC mmol/mol; ADA Standards of
   Care 2025 diagnostic classes (FPG 100/126, OGTT 140/200, A1c 5.7/6.5).
@@ -256,7 +257,7 @@ Each item reports its own codes (`<item>.flag.<code>` 0/1, `<item>.flags` their 
 | `validity` | the formula is used outside the population or conditions it was derived in | CKD-EPI or CURB-65 under 18 y, QTc at HR < 50 or > 120 or QRS ≥ 120 ms, FENa on diuretics, Parkland < 20 % TBSA, A–a on FiO₂ > 0.21, delta ratio with HCO₃ ≥ 24, Poiseuille with Re > 2000, Holliday > 80 kg, corrected calcium (always) |
 | `unsafe` | a plan that would harm a real patient | Na correction > 10 mmol/L in 24 h (hyponatraemia) or > 12 (hypernatraemia), driving pressure > 15 or plateau > 30 cmH₂O, Michaelis–Menten rate ≥ Vmax |
 | `deprecated` | superseded by a newer method | MDRD (→ CKD-EPI 2021) |
-| `verify` | a constant transcribed through secondary sources: **check before release** | EKFC under 25 y (age-dependent Q), CKiD U25 constants, phenytoin 0.275 |
+| `verify` | a constant transcribed through secondary sources: **check before release** | none at present (EKFC under 25 y, the CKiD U25 constants and the phenytoin coefficient were checked in 2026-11) |
 | `incomplete` | a required input is not a number (NaN), or an optional one given but NaN | |
 
 ### 3.1 Bounds (`RANGE`: hard low, hard high, soft low, soft high)
@@ -319,8 +320,8 @@ the number is still computed as given.
 **Check before release** (not implemented, or transcribed through secondary sources): **SOFA-2** (Ranzani, *JAMA* 2025) is not
 implemented — its cut-offs must be transcribed from the paper's table, not paraphrased; the **Phoenix** paediatric sepsis score
 (Schlapbach, *JAMA* 2024) is not implemented (the R package `phoenix` is a reference implementation to test against); the
-thresholds of the AMA/NICE-derived score bands, the EKFC Q values below 25 y, the CKiD U25 constants and the phenytoin 0.275
-coefficient raise `verify` or are flagged here. PREVENT (2024) and SCORE2 (2021) are left out (their coefficient tables, ≈ 2–3 KB each,
+thresholds of the AMA/NICE-derived score bands are flagged here. (The EKFC Q values below 25 y, the CKiD U25 constants and the
+phenytoin coefficient were checked in 2026-11 — the coefficient corrected from 0.275 to Anderson's 0.25 — and no longer raise `verify`.) PREVENT (2024) and SCORE2 (2021) are left out (their coefficient tables, ≈ 2–3 KB each,
 would need transcription and a check against the published calculators).
 
 ## 5. Scenes
@@ -336,8 +337,8 @@ would need transcription and a check against the published calculators).
 ## 6. Edge cases (each one is a test)
 
 Creatinine 88 without a unit → `units`; the same in µmol/L with `units` → the right eGFR. Glucose given as 5.5 → `units`. pH 8.2 →
-`impossible`, NaN. QT longer than the RR interval → `impossible`. HR 40 in QTc → `validity`. CKD-EPI at 16 y → `validity`. EKFC at 20 y
-→ `verify`. MDRD → `deprecated`. Na 110 + 3 % saline at a rate that raises Na > 10 in 24 h → `unsafe`. Driving pressure 18 → `unsafe`.
+`impossible`, NaN. QT longer than the RR interval → `impossible`. HR 40 in QTc → `validity`. CKD-EPI at 16 y → `validity`. EKFC at 1 y
+→ `validity`. MDRD → `deprecated`. Na 110 + 3 % saline at a rate that raises Na > 10 in 24 h → `unsafe`. Driving pressure 18 → `unsafe`.
 Michaelis–Menten rate ≥ Vmax → no steady state (NaN) + `unsafe`. Oral PK with ka = k → the limit formula, no NaN. Delta ratio with
 HCO₃ 26 → `validity`. NNT with ARR 0 → ∞ is NaN + `impossible`; negative ARR → a negative NNT (NNH). Se 1 and Sp 1 → LR+ and DOR are NaN (undefined, not ∞). Kaplan–Meier
 without `opts` → the checker's `value`. A boolean input of 2 → `impossible`. Every one of the 106 functions run with its required inputs

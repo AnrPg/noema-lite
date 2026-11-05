@@ -41,13 +41,14 @@
 
   /** An engine instance behind one async interface: inline, or in a Worker when the engine has workerSource.
       run(inputs, done): the outputs (a newer run waiting replaces an older one: the latest inputs win);
-      measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s. */
+      measure(inputs, probe, done): one reading of a bench's instrument (queued, never dropped). One job at a time, each ≤ 5 s.
+      respec(spec, opts): the same Worker takes another model (queued: the runs after it use it) — the mini-apps' engines (34_activity_html.js). */
   function engineRunner(E, spec, opts, onFail) {
     let worker = null, url = null, inst = null, busy = null, timer = null, dead = false;
     const queue = [];
     if (E.workerSource && typeof Worker === 'function') {
       try {
-        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
+        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=null;self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
         url = URL.createObjectURL(new Blob([E.workerSource + '\n;' + bridge], { type: 'text/javascript' }));
         worker = new Worker(url);
         worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); d(m.t === 'out' ? m.out : null); };
@@ -60,6 +61,11 @@
     function pump() {
       if (dead || busy || !queue.length) return;
       const job = queue.shift();
+      if (job.t === 'create') {   // another model for the same instance (respec): no answer; the runs queued after it use it
+        if (worker) worker.postMessage({ t: 'create', spec: job.spec, opts: job.opts });
+        else { inst = null; try { inst = E.create(job.spec, job.opts); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); } }
+        return pump();
+      }
       if (!worker) {
         const t0 = performance.now(); let out = null;
         try { out = job.t === 'measure' ? inst.measure(job.inputs, job.probe) : (inst.run || inst.step).call(inst, job.inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
@@ -72,13 +78,14 @@
     }
     function run(inputs, done) {
       if (dead) return;
-      const i = queue.findIndex(j => j.t === 'run');   // the latest inputs win
+      const c = queue.map(j => j.t).lastIndexOf('create'), i = queue.findIndex((j, k) => k > c && j.t === 'run');   // the latest inputs win (never ahead of a new model)
       if (i >= 0) queue[i] = { t: 'run', inputs, done }; else queue.push({ t: 'run', inputs, done });
       pump();
     }
+    function respec(s2, o2) { if (dead) return; queue.push({ t: 'create', spec: s2, opts: o2 || opts }); pump(); }
     function measure(inputs, probe, done) { if (dead) return; queue.push({ t: 'measure', inputs, probe, done }); pump(); }
     function close() { dead = true; clearTimeout(timer); queue.length = 0; try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
-    return { run, measure, close, inWorker: () => !!worker };
+    return { run, measure, respec, close, inWorker: () => !!worker };
   }
   /** a seeded pick: the same seed draws the same item (mulberry32) */
   function seededIndex(seed, n) { let a = (seed ^ 0x9E3779B9) >>> 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return Math.floor(((t ^ t >>> 14) >>> 0) / 4294967296 * n); }
@@ -619,5 +626,6 @@
   }
   ACT.registerRuntime({ id: 'sim-spec@1', version: 1, autoHeight: true, mount: (box, ctx) => simView(box, ctx) });
   ACT.simView = simView;   // the same view for runtimes that compute the outputs themselves (py-module@1)
+  ACT.engineRunner = engineRunner;   // the same Worker runner for the engines a mini-app uses (html-app@1, 34_activity_html.js)
   /* i18n-ignore-end */
 })();
