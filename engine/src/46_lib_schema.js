@@ -161,6 +161,9 @@
     s.properties.plots = Object.assign({}, s.properties.plots, { items: ref('libPlot') });
     return s;
   }
+  /** a field named by a symbol (k, x0, tau, Ne, se1 …) is its own label: no word to translate */
+  const GREEK = ['alpha', 'beta', 'gamma', 'delta', 'epsilon', 'eta', 'theta', 'kappa', 'lambda', 'mu', 'nu', 'rho', 'sigma', 'tau', 'phi', 'omega'];
+  const symbolic = n => /^[A-Za-z]{1,2}$/.test(n) || /\d/.test(n) || /^[A-Z]/.test(n) || GREEK.includes(n);
   /** every title of a schema (the labels it needs: engine.author.f.<title>) */
   function titles(s, out) {
     out = out || new Set();
@@ -169,7 +172,7 @@
     return out;
   }
 
-  root.NoemaLibSchema = Object.freeze({ toSchema, specSchema, ofs, outKinds, schemaId, titles, kindSchema, STYLES: Object.freeze(STYLES.slice()) });
+  root.NoemaLibSchema = Object.freeze({ toSchema, specSchema, ofs, outKinds, schemaId, titles, symbolic, kindSchema, STYLES: Object.freeze(STYLES.slice()) });
   if (typeof module !== 'undefined' && module.exports) module.exports = root.NoemaLibSchema;
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
