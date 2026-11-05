@@ -247,13 +247,14 @@ const dist = (d, extra, key) => s1(Object.assign({ mode: 'dist', dist: d }, extr
   const worst = [
     sp({ mode: 'ci', kind: 'prop', k: 700, n: 2000, points: 2000 }, ['wald', 'wilson', 'agresti-coull', 'clopper-pearson', 'jeffreys'].map((m, i) => ({ id: 'c' + i, kind: 'series', of: 'cover.' + m }))),
     sp({ mode: 'mc', draws: { X: { family: 'gamma', shape: 0.3 }, Y: { family: 'beta', a: 0.5, b: 2 } }, expr: 'X * Y > 0.1', n: 200000 }, [{ id: 'e', kind: 'scalar', of: 'estimate' }]),
-    sp({ mode: 'sampling', parent: { family: 'lognormal', sigma: 1.5 }, size: 1000, reps: 10000 }, [{ id: 'e', kind: 'scalar', of: 'statSd' }]),
-    sp({ mode: 'bootstrap', x: Array.from({ length: 2000 }, (_, i) => Math.sin(i) * 3 + i / 500), B: 20000, stat: 'median' }, [{ id: 'e', kind: 'scalar', of: 'bcaLo' }]),
+    sp({ mode: 'sampling', parent: { family: 'lognormal', sigma: 1.5 }, size: 100, reps: 10000 }, [{ id: 'e', kind: 'scalar', of: 'statSd' }]),
+    sp({ mode: 'bootstrap', x: Array.from({ length: 2000 }, (_, i) => Math.sin(i) * 3 + i / 500), B: 2000, stat: 'median' }, [{ id: 'e', kind: 'scalar', of: 'bcaLo' }]),
     sp({ mode: 'walk', kind: 'galton-watson', offspring: [0.1, 0.2, 0.7], reps: 20000, gens: 200 }, [{ id: 'e', kind: 'scalar', of: 'simExtinct' }]),
     sp({ mode: 'markov', states: Array.from({ length: 100 }, (_, i) => 's' + i), P: Array.from({ length: 100 }, (_, i) => Array.from({ length: 100 }, (_, j) => (j === (i + 1) % 100 ? 0.5 : 0.5 / 99))), steps: 1000 }, [{ id: 'e', kind: 'scalar', of: 'mixTime' }])
   ];
-  const times = worst.map(s => { const t = process.hrtime.bigint(); M.engine.create(s).run({}); return Number(process.hrtime.bigint() - t) / 1e6; });
-  ok(times.every(t => t < 2000), `the worst allowed runs (coverage at n = 2000, 2e5 draws, 1e4 samples of 1000, 2e4 bootstrap medians of 2000, a 200-generation branching process, a 100-state chain) each < 2 s (${times.map(t => t.toFixed(0)).join(', ')} ms)`);
+  const outs = [], times = worst.map(s => { const t = process.hrtime.bigint(); outs.push(M.engine.create(s).run({})); return Number(process.hrtime.bigint() - t) / 1e6; });
+  ok(times.every(t => t < 2000) && outs.every(o => Object.values(o).every(v => Array.isArray(v) ? v.length > 0 : Number.isFinite(v))), `the worst allowed runs (coverage at n = 2000, 2e5 draws, 1e4 samples of 100, 2000 bootstrap medians of 2000 with BCa, a 200-generation branching process, a 100-state chain) each < 2 s (${times.map(t => t.toFixed(0)).join(', ')} ms)`);
+  ok(Number.isNaN(M.engine.create(sp({ mode: 'sampling', parent: { family: 'normal' }, size: 1000, reps: 10000 }, [{ id: 'e', kind: 'scalar', of: 'statSd' }])).run({}).e) && iss({ mode: 'sampling', parent: { family: 'normal' }, size: 1000, reps: 10000 }, 'budget', 'statSd') === 1 && iss({ mode: 'bootstrap', x: Array.from({ length: 2000 }, (_, i) => i), B: 20000 }, 'budget', 'se') === 1, 'work over the budget (1e7 draws, 4e7 resampled values) is refused up front with budget, never run for seconds');
   ok(Number.isNaN(M.engine.create(sp({ mode: 'dist', dist: { family: 'normal', sigma: 'q' } }, [{ id: 'm', kind: 'scalar', of: 'mean' }])).run({}).m), 'a number that does not compute gives NaN, never throws');
   const pyData = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_prob as M; print(json.dumps(M.DATA))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
   ok(JSON.stringify(pyData) === JSON.stringify(M.DATA), 'tools/lib_prob.py carries the same DATA (schema, outputs, names) as the JS module');
