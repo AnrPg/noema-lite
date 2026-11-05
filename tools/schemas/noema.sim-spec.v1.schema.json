@@ -122,7 +122,10 @@
         "bindings": { "title": "bindings", "type": "array", "maxItems": 24, "items": { "type": "object", "required": ["element", "expr"], "additionalProperties": false, "properties": {
           "element": { "title": "element", "type": "string", "x-noema": "element" }, "prop": { "title": "prop", "type": "string" }, "expr": { "title": "expr", "$ref": "#/$defs/expr" } } } },
         "transient": { "title": "transient", "type": "object", "required": ["tEnd"], "additionalProperties": false, "properties": { "tEnd": { "title": "tEnd", "$ref": "#/$defs/posOrExpr" }, "dt": { "title": "dt", "$ref": "#/$defs/posOrExpr" } } },
-        "noise": { "title": "noise", "type": "object", "additionalProperties": false, "properties": { "rel": { "title": "rel", "type": "number", "minimum": 0, "maximum": 1 }, "abs": { "title": "abs", "type": "number", "minimum": 0, "maximum": 1 } } }
+        "noise": { "title": "noise", "type": "object", "additionalProperties": false, "properties": { "rel": { "title": "rel", "type": "number", "minimum": 0, "maximum": 1 }, "abs": { "title": "abs", "type": "number", "minimum": 0, "maximum": 1 } } },
+        "ac": { "title": "ac", "type": "object", "required": ["source", "fStart", "fStop"], "additionalProperties": false, "properties": {
+          "source": { "title": "acSource", "type": "string", "x-noema": "element" }, "fStart": { "title": "fStart", "$ref": "#/$defs/posOrExpr" }, "fStop": { "title": "fStop", "$ref": "#/$defs/posOrExpr" },
+          "points": { "title": "acPoints", "type": "integer", "minimum": 2, "maximum": 1000 } } }
       }
     },
     "output": {
@@ -135,7 +138,12 @@
         "node": { "title": "node", "type": "string" },
         "branch": { "title": "branch", "type": "string", "x-noema": "element" },
         "time": { "title": "time", "const": true },
-        "probe": { "title": "probe", "type": "object", "required": ["kind"], "properties": { "kind": { "title": "probeKind", "enum": ["V", "I", "R"] }, "a": { "title": "a", "type": "string" }, "b": { "title": "b", "type": "string" }, "element": { "title": "element", "type": "string", "x-noema": "element" }, "pin": { "title": "pin", "type": "integer", "minimum": 0 } } },
+        "probe": { "title": "probe", "type": "object", "required": ["kind"], "properties": { "kind": { "title": "probeKind", "enum": ["V", "I", "R"] }, "a": { "title": "a", "type": "string" }, "b": { "title": "b", "type": "string" }, "element": { "title": "element", "type": "string", "x-noema": "element" }, "pin": { "title": "pin", "type": "integer", "minimum": 0 },
+          "mode": { "title": "mode", "enum": ["dc", "ac", "rms", "avg"] }, "zin": { "title": "zin", "type": "number", "minimum": 0 }, "tEnd": { "title": "tEnd", "type": "number", "exclusiveMinimum": 0 },
+          "dt": { "title": "dt", "type": "number", "exclusiveMinimum": 0 }, "tStart": { "title": "tStart", "type": "number", "minimum": 0 } } },
+        "power": { "title": "power", "type": "string", "x-noema": "element" },
+        "ac": { "title": "acOut", "enum": ["f", "db", "phase", "mag", "dcDb", "peakDb", "fPeak", "f3db", "fLow3db", "fUnity", "pm"] },
+        "ref": { "title": "ref", "type": "string" },
         "at": { "title": "at", "$ref": "#/$defs/numOrExpr" },
         "stat": { "title": "stat", "enum": ["final", "min", "max", "mean", "pp", "rms"] }
       }
@@ -147,7 +155,7 @@
       "oneOf": [
         { "title": "faultKind.open", "required": ["element"], "properties": { "kind": { "const": "open" }, "element": { "title": "element", "type": "string", "x-noema": "element" }, "pin": { "title": "pin", "type": "integer", "minimum": 0 } } },
         { "title": "faultKind.short", "required": ["element"], "properties": { "kind": { "const": "short" }, "element": { "title": "element", "type": "string", "x-noema": "element" }, "pins": { "title": "pins", "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "integer", "minimum": 0 } } } },
-        { "title": "faultKind.drift", "required": ["element"], "properties": { "kind": { "const": "drift" }, "element": { "title": "element", "type": "string", "x-noema": "element" }, "factor": { "title": "factor", "type": "number", "exclusiveMinimum": 0 }, "param": { "title": "param", "type": "string" } } },
+        { "title": "faultKind.drift", "required": ["element"], "properties": { "kind": { "const": "drift" }, "element": { "title": "element", "type": "string", "x-noema": "element" }, "factor": { "title": "factor", "type": "number", "exclusiveMinimum": 0 }, "add": { "title": "add", "type": "number" }, "param": { "title": "param", "type": "string" } } },
         { "title": "faultKind.open-trace", "required": ["node"], "properties": { "kind": { "const": "open-trace" }, "node": { "title": "node", "type": "string" }, "side": { "title": "side", "type": "array", "items": { "type": "string" } } } },
         { "title": "faultKind.reverse", "required": ["element"], "properties": { "kind": { "const": "reverse" }, "element": { "title": "element", "type": "string", "x-noema": "element" }, "pins": { "title": "pins", "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "integer", "minimum": 0 } } } }
       ]
@@ -157,14 +165,22 @@
       "required": ["kind"],
       "additionalProperties": false,
       "properties": {
-        "kind": { "title": "instKind", "enum": ["V", "I", "R", "scope", "logic"] },
+        "kind": { "title": "instKind", "enum": ["V", "I", "R", "scope", "logic", "bode"] },
         "points": { "title": "instPoints", "type": "array", "minItems": 1, "items": { "type": "string" } },
         "parts": { "title": "parts", "type": "array", "minItems": 1, "maxItems": 24, "items": { "type": "object", "required": ["element", "label"], "additionalProperties": false, "properties": {
           "element": { "title": "element", "type": "string", "x-noema": "element" }, "label": { "title": "label", "$ref": "#/$defs/key" }, "pin": { "title": "pin", "type": "integer", "minimum": 0 } } } },
         "tEnd": { "title": "tEnd", "$ref": "#/$defs/posOrExpr" },
         "dt": { "title": "dt", "$ref": "#/$defs/posOrExpr" },
         "tStart": { "title": "tStart", "$ref": "#/$defs/numOrExpr" },
-        "threshold": { "title": "threshold", "$ref": "#/$defs/numOrExpr" }
+        "threshold": { "title": "threshold", "$ref": "#/$defs/numOrExpr" },
+        "modes": { "title": "modes", "type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": { "title": "mode", "enum": ["dc", "ac", "rms", "avg"] } },
+        "zin": { "title": "zin", "type": "number", "minimum": 0 },
+        "leads": { "title": "leads", "type": "array", "minItems": 1, "maxItems": 4, "items": { "type": "object", "required": ["label", "lead"], "additionalProperties": false, "properties": {
+          "label": { "title": "label", "$ref": "#/$defs/key" }, "lead": { "title": "lead", "type": "number", "minimum": 0 }, "cin": { "title": "cin", "type": "number", "minimum": 0 } } } },
+        "source": { "title": "acSource", "type": "string", "x-noema": "element" },
+        "fStart": { "title": "fStart", "$ref": "#/$defs/posOrExpr" },
+        "fStop": { "title": "fStop", "$ref": "#/$defs/posOrExpr" },
+        "fPoints": { "title": "acPoints", "type": "integer", "minimum": 2, "maximum": 1000 }
       }
     },
     "bench": {
@@ -176,7 +192,7 @@
           "id": { "title": "id", "$ref": "#/$defs/benchId" }, "apply": { "title": "apply", "type": "array", "maxItems": 4, "items": { "$ref": "#/$defs/fault" } } } } },
         "points": { "title": "points.bench", "type": "array", "minItems": 1, "maxItems": 24, "items": { "type": "object", "required": ["id", "at", "label"], "additionalProperties": false, "properties": {
           "id": { "title": "id", "$ref": "#/$defs/benchId" }, "at": { "title": "at.point", "type": "string" }, "label": { "title": "label", "$ref": "#/$defs/key" } } } },
-        "instruments": { "title": "instruments", "type": "array", "minItems": 1, "maxItems": 5, "items": { "$ref": "#/$defs/instrument" } },
+        "instruments": { "title": "instruments", "type": "array", "minItems": 1, "maxItems": 7, "items": { "$ref": "#/$defs/instrument" } },
         "budget": { "title": "budget", "type": "integer", "minimum": 1, "maximum": 100 },
         "diagnosis": { "title": "diagnosis", "type": "object", "required": ["options"], "additionalProperties": false, "properties": {
           "label": { "title": "label", "$ref": "#/$defs/key" },

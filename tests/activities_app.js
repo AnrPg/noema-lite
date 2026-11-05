@@ -533,6 +533,26 @@ async function circuit(p, ctx, E) {
   const good = await p.evaluate(() => { const c = document.getElementById('T'); return { ok: !!c.querySelector('.explain.ok'), dx: c.querySelector('.sim-dx-out')?.className + ': ' + c.querySelector('.sim-dx-out')?.textContent, score: S.att?.['ch01-e903']?.result?.score }; });
   ok(good.ok && /ok: Right: The LED is soldered the wrong way round/.test(good.dx) && good.score === 1, `the right diagnosis with 2 measurements is graded right (score ${good.score}): ${good.dx}`);
 
+  console.log('— circuit-mna@1: the real instruments (docs/INTERACTIVE_CIRCUIT.md §9.5): meter modes, the scope probe ground, the Bode analyser');
+  const ins0 = await p.evaluate(() => { const b = ACT.ITEMS['led-bench'].spec.bench, o = JSON.stringify(b.instruments);
+    b.instruments[0].modes = ['dc', 'ac', 'rms'];
+    b.instruments.push({ kind: 'scope', tEnd: 0.001, leads: [{ label: 'tp3', lead: 1.5e-7 }, { label: 'gnd', lead: 2e-9 }] }, { kind: 'bode', source: 'V1', fStart: 10, fStop: 1e6, fPoints: 60 }); return o; });
+  await card('ch01-e903');
+  const sh2 = await p.evaluate(() => { const r = document.querySelector('#T .sim'), q = s => r.querySelector(`[data-bench="${s}"]`);
+    return { inst: [...q('instrument').options].map(o => o.textContent), modes: [...q('mode').options].map(o => o.textContent), modeShown: !q('mode').closest('.sim-p').hidden,
+      unlabelled: [...r.querySelectorAll('input, select')].filter(i => !(i.getAttribute('aria-label') || (i.id && r.querySelector(`label[for="${i.id}"]`)))).length }; });
+  ok(sh2.inst.length === 5 && /Bode/.test(sh2.inst[4]) && sh2.modes.join('|') === 'DC|AC|true RMS (AC+DC)' && sh2.modeShown && sh2.unlabelled === 0, `the voltmeter offers its modes, the bench a Bode analyser; every control labelled ${JSON.stringify(sh2)}`);
+  await p.selectOption('#T [data-bench="mode"]', 'rms'); await measure({ i: 'V', a: 'TP1', b: 'GND' });
+  await p.selectOption('#T [data-bench="instrument"]', 'scope');
+  const gsel = await p.evaluate(() => { const g = document.querySelector('#T [data-bench="ground"]'); return { shown: !g.closest('.sim-p').hidden, n: g.options.length, mode: document.querySelector('#T [data-bench="mode"]').closest('.sim-p').hidden }; });
+  await p.selectOption('#T [data-bench="ground"]', '1'); await measure({ i: 'scope', a: 'TP3' });
+  await measure({ i: 'bode', a: 'TP3' });
+  const L2 = await logs(), bode = await p.evaluate(() => { const f = document.querySelector('#T .sim-face'); return { svg: !!f.querySelector('svg'), line: (f.querySelector('path.sim-line')?.getAttribute('d') || '').split('L').length, cap: f.querySelector('figcaption')?.textContent || '' }; });
+  const li = await p.evaluate(() => [...document.querySelectorAll('#T .sim-log li')].map(l => l.textContent));
+  ok(gsel.shown && gsel.n === 2 && gsel.mode, `the scope offers its two ground leads (the voltmeter's modes hidden) ${JSON.stringify(gsel)}`);
+  ok(/5[.,]0\d*\s*V true RMS/.test(L2[0]) && /\(gnd|GND\)|\(/.test(li[1]) && /dB/.test(L2[2]) && bode.svg && bode.line >= 50 && /Bode/.test(bode.cap), `the readings: RMS on the meter (${L2[0]}), the scope with its lead (${li[1]}), the Bode plot drawn (${bode.line} points): ${L2[2]}`);
+  await p.evaluate(o => { ACT.ITEMS['led-bench'].spec.bench.instruments = JSON.parse(o); }, ins0);
+
   console.log('— circuit-mna@1: the bench as a theory block (explorer)');
   const LB = 'main .act-blk .act[data-activity="led-bench"]';
   ok(await openSec(LB), 'the bench block renders');

@@ -396,12 +396,14 @@
     P6: { 'thermal@1': ['NoemaThermal', '39_engine_thermal.js'], 'pid@1': ['NoemaPID', '40_engine_pid.js'], 'rf@1': ['NoemaRF', '41_engine_rf.js'], 'twin@1': ['NoemaTwin', '42_engine_twin.js'] },
     P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
     // twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
-    TWIN: 'twin@1', TWIN_POINTS: ['vbat', 'vload', 'i', 'gnd'], TWIN_INSTRUMENTS: ['V', 'I', 'scope', 'log', 'rssi'],
-    MODEL_KEYS: ['netlist', 'bindings', 'transient', 'noise'], OUT_KEYS: ['id', 'kind', 'node', 'branch', 'time', 'probe', 'at', 'stat'], STATS: ['final', 'min', 'max', 'mean', 'pp', 'rms'],
+    TWIN: 'twin@1', TWIN_POINTS: ['vbat', 'vload', 'i', 'gnd'], TWIN_INSTRUMENTS: ['V', 'I', 'scope', 'log', 'rssi', 'T', 'clock'], WHOLE: ['log', 'rssi', 'T', 'clock'],
+    MODEL_KEYS: ['netlist', 'bindings', 'transient', 'noise', 'ac'], OUT_KEYS: ['id', 'kind', 'node', 'branch', 'time', 'probe', 'at', 'stat', 'power', 'ac', 'ref'], STATS: ['final', 'min', 'max', 'mean', 'pp', 'rms'],
+    // the AC analysis (docs/INTERACTIVE_CIRCUIT.md §9.6) and the meters' modes (§9.5)
+    AC_CURVES: ['f', 'db', 'phase', 'mag'], AC_POINT: ['db', 'phase', 'mag'], AC_STATS: ['dcDb', 'peakDb', 'fPeak', 'f3db', 'fLow3db', 'fUnity', 'pm'], MODES: ['dc', 'ac', 'rms', 'avg'],
     WAVES: { pulse: ['v1', 'v2', 'delay', 'rise', 'fall', 'width', 'period'], sine: ['offset', 'amp', 'freq', 'phase', 'delay'], pwm: ['v', 'freq', 'duty', 'low', 'delay'] },
-    BENCH_KEYS: ['faults', 'points', 'instruments', 'diagnosis', 'budget'], INSTRUMENTS: ['V', 'I', 'R', 'scope', 'logic'],
-    INST_KEYS: ['kind', 'points', 'parts', 'tEnd', 'dt', 'tStart', 'threshold'], BENCH_ID_RE: /^[A-Za-z][A-Za-z0-9_-]{0,31}$/,
-    BENCH_LIM: { faults: 16, apply: 4, points: 24, instruments: 5, parts: 24, options: 12, budget: 100, bindings: 24, steps: 200000 },
+    BENCH_KEYS: ['faults', 'points', 'instruments', 'diagnosis', 'budget'], INSTRUMENTS: ['V', 'I', 'R', 'scope', 'logic', 'bode'],
+    INST_KEYS: ['kind', 'points', 'parts', 'tEnd', 'dt', 'tStart', 'threshold', 'modes', 'zin', 'leads', 'source', 'fStart', 'fStop', 'fPoints'], BENCH_ID_RE: /^[A-Za-z][A-Za-z0-9_-]{0,31}$/,
+    BENCH_LIM: { faults: 16, apply: 4, points: 24, instruments: 7, parts: 24, options: 12, budget: 100, bindings: 24, steps: 200000, leads: 4, acPoints: 1000 },
     SPEC_LIM: { params: 24, consts: 24, derived: 48, outputs: 24, readouts: 24, plots: 6, series: 6, marks: 8, points: 2000, options: 12, checks: 16, bytes: 64 * 1024, unit: 16, digits: 8 },
     NAME_RE: /^[A-Za-z_][A-Za-z0-9_]{0,31}$/, PARAM_KINDS: ['slider', 'number', 'toggle', 'choice'], NUM_FORMATS: ['auto', 'si', 'fixed'],
     HTML_MAX: 512 * 1024, HTML_WARN: 256 * 1024, FALLBACK_MIN: 40, HINTS_MAX: 6,
@@ -517,10 +519,17 @@
   }
   function probeOk(c, p) {
     if (!isObj(p)) return false;
+    const meter = p.kind === 'V' || p.kind === 'I';   // a meter's mode, input resistance (V) and averaging window (§9.5)
+    if (p.mode !== undefined && !(meter && ACT.MODES.includes(p.mode))) return false;
+    if (p.zin !== undefined && !(p.kind === 'V' && isNum(p.zin) && p.zin >= 0)) return false;
+    for (const k of ['tEnd', 'dt', 'tStart']) if (p[k] !== undefined && !(meter && isNum(p[k]) && (k === 'tStart' ? p[k] >= 0 : p[k] > 0))) return false;
+    if ((p.dt !== undefined || p.tStart !== undefined) && (p.tEnd === undefined || (p.tStart !== undefined && !(p.tStart < p.tEnd)))) return false;   // a window: tEnd, and tStart below it
     if (p.kind === 'V' || p.kind === 'R') return endpointOk(c, p.a) && (p.b === undefined || endpointOk(c, p.b));
     if (p.kind === 'I') { const e = typeof p.element === 'string' ? c.els.get(p.element) : null; return !!e && (p.pin === undefined || (Number.isInteger(p.pin) && p.pin >= 0 && p.pin < e.n.length)); }
     return false;
   }
+  /** a source the AC analysis can excite: a V or I part */
+  const acSourceOk = (c, id) => typeof id === 'string' && c.els.has(id) && ['V', 'I'].includes(c.els.get(id).type);
   /** a number (> 0 when pos) or an expression of names → the number, or null (an expression, or a problem pushed to E) */
   function numOrExpr(v, names, where, E, pos) {
     if (typeof v === 'string') { const m = exprProblem(v, names, where); if (m) E.push(m); return null; }
@@ -567,19 +576,46 @@
     }
     const nz = m.noise;
     if (nz != null && !(isObj(nz) && Object.keys(nz).every(k => k === 'rel' || k === 'abs') && ['rel', 'abs'].every(k => nz[k] === undefined || (isNum(nz[k]) && nz[k] >= 0 && nz[k] <= 1)))) E.push("spec.model.noise is {rel?, abs?}: numbers from 0 to 1 (the meter's relative and absolute error)");
+    const ac = m.ac;
+    if (ac != null) {
+      if (!isObj(ac)) E.push('spec.model.ac must be an object {source, fStart, fStop, points?}');
+      else {
+        unknownKeys(ac, ['source', 'fStart', 'fStop', 'points'], 'spec.model.ac', E);
+        if (!acSourceOk(c, ac.source)) E.push('spec.model.ac.source must be a V or I part of the netlist (the source the analysis excites)');
+        for (const k of ['fStart', 'fStop']) { if (ac[k] === undefined) E.push(`spec.model.ac.${k} is required (Hz)`); else numOrExpr(ac[k], names, 'spec.model.ac.' + k, E, true); }
+        if (isNum(ac.fStart) && isNum(ac.fStop) && !(ac.fStop > ac.fStart)) E.push('spec.model.ac: fStop must be above fStart');
+        if (ac.points !== undefined && !(Number.isInteger(ac.points) && ac.points >= 2 && ac.points <= L.acPoints)) E.push(`spec.model.ac.points is a whole number 2–${L.acPoints}`);
+      }
+    }
     list(spec.outputs).forEach((o, i) => {
       const w = `spec.outputs[${i}]`;
       if (!(isObj(o) && (o.kind === 'scalar' || o.kind === 'series'))) return;   // (reported with the outputs)
       unknownKeys(o, ACT.OUT_KEYS, w, E);
-      const src = ['node', 'branch', 'time', 'probe'].filter(k => k in o);
-      if (src.length !== 1) { E.push(`${w} must name what it reads: one of node, branch, time, probe`); return; }
+      if ('ac' in o) {   // a point or a curve of the AC analysis
+        if (['branch', 'time', 'probe', 'power', 'stat'].some(k => k in o)) E.push(`${w}: an ac output reads only ac, node, ref and (a gain or phase at one frequency) at`);
+        const curve = o.kind === 'series', okv = curve ? ACT.AC_CURVES.includes(o.ac) : ACT.AC_POINT.includes(o.ac) || ACT.AC_STATS.includes(o.ac);
+        if (!okv) E.push(`${w}.ac is one of ${(curve ? ACT.AC_CURVES : ACT.AC_POINT.concat(ACT.AC_STATS)).join(', ')} on a ${o.kind} output`);
+        const nodeOk = x => typeof x === 'string' && (c.nodes.has(x) || isGnd(x));
+        if (o.ac !== 'f' && !nodeOk(o.node)) E.push(`${w}.node is not a node of the netlist (where the response is read)`);
+        if (o.ac === 'f' && 'node' in o) E.push(`${w}: the frequency axis (ac: f) reads no node`);
+        if ('ref' in o && !nodeOk(o.ref)) E.push(`${w}.ref is not a node of the netlist`);
+        if (!curve && ACT.AC_POINT.includes(o.ac)) { if (!('at' in o)) E.push(`${w}.at is required: the frequency (Hz) of this ${o.ac}`); else numOrExpr(o.at, names, w + '.at', E, true); }
+        else if ('at' in o) E.push(`${w}: at belongs to a gain or phase at one frequency (ac: db, phase, mag on a scalar)`);
+        if (!isObj(m.ac)) E.push(`${w} needs model.ac {source, fStart, fStop, points?}`);
+        return;
+      }
+      if ('ref' in o) E.push(`${w}: ref belongs to an ac output`);
+      const src = ['node', 'branch', 'time', 'probe', 'power'].filter(k => k in o);
+      if (src.length !== 1) { E.push(`${w} must name what it reads: one of node, branch, time, probe, power, ac`); return; }
       const s = src[0];
       if (s === 'time' && !(o.time === true && o.kind === 'series')) E.push(`${w}.time is true on a series output (the time axis of the transient)`);
       if (s === 'node' && !(typeof o.node === 'string' && (c.nodes.has(o.node) || isGnd(o.node)))) E.push(`${w}.node is not a node of the netlist`);
       if (s === 'branch' && !(typeof o.branch === 'string' && c.els.has(o.branch))) E.push(`${w}.branch is not a part of the netlist`);
-      if (s === 'probe' && !(o.kind === 'scalar' && probeOk(c, o.probe))) E.push(`${w}.probe must be a reading {kind: V | I | R, a, b? | element, pin?} on a scalar output`);
+      if (s === 'power' && !(typeof o.power === 'string' && c.els.has(o.power))) E.push(`${w}.power is not a part of the netlist (the part whose power is read)`);
+      if (s === 'probe' && !(o.kind === 'scalar' && probeOk(c, o.probe))) E.push(`${w}.probe must be a reading {kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?} on a scalar output`);
       const at = 'at' in o, st = 'stat' in o;
-      if ((at || st) && !(o.kind === 'scalar' && (s === 'node' || s === 'branch'))) E.push(`${w}: at and stat belong to a scalar output of a node or a branch`);
+      if ((at || st) && !(o.kind === 'scalar' && (s === 'node' || s === 'branch' || s === 'power'))) E.push(`${w}: at and stat belong to a scalar output of a node, a branch or a power`);
+      if (s === 'power' && o.kind === 'scalar' && !at && !st) E.push(`${w}: a power is read over the transient: give at or stat`);
       if (at && st) E.push(`${w}: at or stat, not both`);
       if (at) numOrExpr(o.at, names, w + '.at', E, false);
       if (st && !ACT.STATS.includes(o.stat)) E.push(`${w}.stat is one of ${ACT.STATS.join(', ')}`);
@@ -655,11 +691,11 @@
       if (kinds.includes(x.kind)) E.push(`${w}: the instrument ${x.kind} is listed twice`);
       kinds.push(x.kind);
       unknownKeys(x, ACT.INST_KEYS, w, E);
-      if (x.kind === 'log' || x.kind === 'rssi') {   // twin@1: the event log and the radio's RSSI read the device, not a point
-        if (Object.keys(x).some(k => k !== 'kind' && ACT.INST_KEYS.includes(k))) E.push(`${w}: the ${x.kind === 'log' ? 'event log' : 'RSSI reading'} has only a kind`);
+      if (ACT.WHOLE.includes(x.kind)) {   // twin@1: the event log, the radio's RSSI, the thermometer and the clock check read the device, not a point
+        if (Object.keys(x).some(k => k !== 'kind' && ACT.INST_KEYS.includes(k))) E.push(`${w}: the ${{ log: 'event log', rssi: 'RSSI reading', T: 'thermometer', clock: 'clock check' }[x.kind]} has only a kind`);
         return;
       }
-      const scope = x.kind === 'scope' || x.kind === 'logic';
+      const scope = x.kind === 'scope' || x.kind === 'logic', meter = !tw && (x.kind === 'V' || x.kind === 'I');
       if (x.kind === 'I') {
         if ('points' in x) E.push(`${w}: the ammeter reads parts (parts), not points`);
         const pa = x.parts;
@@ -683,7 +719,35 @@
           if (x.kind === 'scope' && on.some(a => a !== 'i')) E.push(`${w}: the twin's oscilloscope shows the supply current (list its points: only points at i)`);
         }
       }
-      for (const k of ['tEnd', 'dt', 'tStart', 'threshold']) if (k in x && !(scope && (k !== 'threshold' || x.kind === 'logic'))) E.push(`${w}.${k} belongs to ${k === 'threshold' ? 'the logic analyser' : 'the oscilloscope and the logic analyser'}`);
+      for (const k of ['tEnd', 'dt', 'tStart', 'threshold']) if (k in x && !((scope || meter) && (k !== 'threshold' || x.kind === 'logic'))) E.push(`${w}.${k} belongs to ${k === 'threshold' ? 'the logic analyser' : 'the oscilloscope, the logic analyser and (its averaging window) the multimeter'}`);
+      // the circuit's instruments (§9.5): the meter's modes, an input resistance, the scope probe's ground leads, the frequency response analyser
+      if ('modes' in x && !(meter && Array.isArray(x.modes) && x.modes.length >= 1 && x.modes.every((q, j) => ACT.MODES.includes(q) && x.modes.indexOf(q) === j))) E.push(`${w}.modes belongs to the multimeter (V, I): a list of ${ACT.MODES.join(', ')}, each once`);
+      if ('zin' in x && !(!tw && ['V', 'scope', 'logic'].includes(x.kind) && isNum(x.zin) && x.zin >= 0)) E.push(`${w}.zin belongs to the voltmeter, the oscilloscope and the logic analyser: their input resistance in Ω (0 = ideal)`);
+      if ('leads' in x) {
+        if (!(!tw && x.kind === 'scope' && Array.isArray(x.leads) && x.leads.length >= 1 && x.leads.length <= L.leads)) E.push(`${w}.leads belongs to the oscilloscope: a list of 1–${L.leads} ground leads {label, lead, cin?}`);
+        else x.leads.forEach((q, j) => {
+          const wq = `${w}.leads[${j}]`;
+          if (!isObj(q)) { E.push(`${wq} must be an object {label, lead, cin?}`); return; }
+          unknownKeys(q, ['label', 'lead', 'cin'], wq, E);
+          if (!(isNum(q.lead) && q.lead >= 0)) E.push(`${wq}.lead is the ground lead's inductance in H (0 = none; about 1 nH per mm of wire)`);
+          if (q.cin !== undefined && !(isNum(q.cin) && q.cin >= 0)) E.push(`${wq}.cin is the probe's capacitance in F`);
+          key(q.label, wq + '.label', true);
+        });
+      }
+      const bode = x.kind === 'bode';
+      for (const k of ['source', 'fStart', 'fStop', 'fPoints']) if (k in x && !bode) E.push(`${w}.${k} belongs to the frequency response analyser (bode)`);
+      if (bode) {
+        if (c && !acSourceOk(c, x.source)) E.push(`${w}.source must be a V or I part of the netlist (the source the analyser sweeps)`);
+        for (const k of ['fStart', 'fStop']) { if (x[k] === undefined) E.push(`${w}.${k} is required (Hz)`); else numOrExpr(x[k], names, `${w}.${k}`, E, true); }
+        if (x.fPoints !== undefined && !(Number.isInteger(x.fPoints) && x.fPoints >= 2 && x.fPoints <= L.acPoints)) E.push(`${w}.fPoints is a whole number 2–${L.acPoints}`);
+      }
+      if (meter) {
+        const te = x.tEnd === undefined ? null : numOrExpr(x.tEnd, names, w + '.tEnd', E, true), dt = x.dt === undefined ? null : numOrExpr(x.dt, names, w + '.dt', E, true);
+        if ('tStart' in x) numOrExpr(x.tStart, names, w + '.tStart', E, false);
+        if (('dt' in x || 'tStart' in x) && !('tEnd' in x)) E.push(`${w}: the multimeter's averaging window needs tEnd`);
+        if (isNum(x.tStart) && isNum(te) && !(x.tStart < te)) E.push(`${w}: the multimeter's averaging window needs tStart below tEnd`);
+        if (stepsOver(te, dt)) E.push(`${w}: tEnd / dt is more than ${L.steps} steps`);
+      }
       if (scope) {
         let te = null; if (x.tEnd === undefined) E.push(`${w}.tEnd is required (how long the trace is, in s)`); else te = numOrExpr(x.tEnd, names, w + '.tEnd', E, true);
         const dt = x.dt === undefined ? null : numOrExpr(x.dt, names, w + '.dt', E, true);

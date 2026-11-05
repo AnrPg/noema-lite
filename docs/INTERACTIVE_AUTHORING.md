@@ -207,11 +207,14 @@ quantities the idea is about; everything else (a picture of the device, the stor
 | see how quantities depend on each other through formulas you can write down (a law, a closed-form answer, a trade-off curve) | `formula@1` (no `model`) | a lens equation, a sampling rate against aliasing, the cost of a design against one parameter |
 | read and design circuits: voltages, currents, an RC or RL transient, a filter's response, a switching stage | `circuit-mna@1` | an RC charging from a square wave; a divider loaded by a sensor |
 | reason from measurements to a fault on a board | `circuit-mna@1` with a `bench` | an LED that stays dark: open resistor, reversed LED or a broken track? |
+| read a frequency response: corners, resonance, an op-amp's bandwidth and phase margin | `circuit-mna@1` with `model.ac` (a Bode plot) | find the cut-off of an RC filter; see the gain-11 amplifier's bandwidth fall to gbw/11 |
+| see the real-world traps: a floating input, a DMM on PWM, an op-amp's slew and bandwidth, a MOSFET's gate charge, reflections, a long scope ground lead | `circuit-mna@1` (§9 of `docs/INTERACTIVE_CIRCUIT.md`) | a CMOS input that reads random values until a pull-down is fitted; a 15 cm clip lead that "makes" ringing |
 | understand heat flow: thermal resistance chains, the steady temperature, time constants, a duty-cycled load, a thermostat's hysteresis | `thermal@1` | size a heatsink so the junction stays under its limit; a heater with a thermostat |
 | tune or compare controllers: what P, I and D each do, overshoot against speed, steady-state error, windup, dead time, noise | `pid@1` | tune a PID to a step-response spec; switch anti-windup on and off on a saturated actuator |
 | plan a radio link: the link budget, path loss against distance, spreading factor against airtime and range, the Fresnel zone | `rf@1` | pick SF and antenna for a margin at a distance within an airtime limit |
 | design a battery-powered node's duty cycle: average current, battery life, what each wake costs, delivery over a marginal link | `twin@1` | choose the wake period for a year of battery and enough readings a day |
 | find a fault in a deployed device from its battery, current, radio and event log | `twin@1` with a `bench` | a node whose battery dies in weeks: an antenna off, an aged cell, a wrong wake period? |
+| what temperature, a drifting clock and a crowded channel do to a deployed node | `twin@1` with `env`, `clock`, `network` | a node that loses messages every cold night; a fleet that collides after a power cut |
 
 Rules of thumb. If the answer is one formula, use `formula@1`: an engine adds nothing but a run. If the idea is a process over
 time (a transient, a loop settling, a battery draining), use the engine that integrates it and show the series. When two engines
@@ -235,7 +238,10 @@ A bench teaches **reasoning from measurements**: each reading should rule someth
    never for what is wrong there.
 4. **Instruments that fit the question.** A voltmeter is the workhorse; an ammeter on one or two parts; an ohmmeter when "the
    part is open" must be confirmed (it reads unpowered and in circuit); a scope or logic analyser only when the signal changes in
-   time (a PWM, a clock, an RC timer).
+   time (a PWM, a clock, an RC timer). The instruments are real ones (`docs/INTERACTIVE_CIRCUIT.md` §9): a DMM with 10 MΩ input
+   and modes (`modes: ["dc", "ac", "rms", "avg"]`: the average-responding mode misreads PWM, a classic trap), a scope with a choice
+   of ground leads (`leads`), a Bode analyser, and floating nodes that pick up hum — so a fault such as "the pull-down is missing"
+   or "the wrong meter mode" can be on the bench. On `twin@1`, `T` and `clock` read the environment and the crystal.
 5. **Tempting wrong options.** Every fault has its option; add one or two that the symptom suggests but the readings exclude ("the
    supply is dead" when TP1 reads 5 V; "the switch does not make contact"). The option labels describe the fault, never the
    reading that proves it.

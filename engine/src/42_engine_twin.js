@@ -54,10 +54,10 @@
 
   // ---- batteries: open-circuit voltage per cell against state of charge (typical curves at room temperature, light load) ----
   const CHEMS = {
-    'li-ion': { curve: [[0, 3.0], [0.05, 3.3], [0.1, 3.5], [0.2, 3.6], [0.4, 3.7], [0.6, 3.8], [0.8, 3.95], [0.9, 4.05], [1, 4.2]], r: 0.15 },
-    lifepo4: { curve: [[0, 2.5], [0.05, 3.0], [0.1, 3.2], [0.2, 3.25], [0.5, 3.3], [0.8, 3.33], [0.95, 3.4], [1, 3.6]], r: 0.05 },
-    alkaline: { curve: [[0, 0.9], [0.1, 1.05], [0.3, 1.15], [0.5, 1.25], [0.7, 1.3], [0.9, 1.4], [1, 1.55]], r: 0.2 },
-    nimh: { curve: [[0, 1.0], [0.05, 1.1], [0.2, 1.2], [0.8, 1.25], [0.95, 1.35], [1, 1.4]], r: 0.05 },
+    'li-ion': { curve: [[0, 3.0], [0.05, 3.3], [0.1, 3.5], [0.2, 3.6], [0.4, 3.7], [0.6, 3.8], [0.8, 3.95], [0.9, 4.05], [1, 4.2]], r: 0.15, kc: 0.008 },
+    lifepo4: { curve: [[0, 2.5], [0.05, 3.0], [0.1, 3.2], [0.2, 3.25], [0.5, 3.3], [0.8, 3.33], [0.95, 3.4], [1, 3.6]], r: 0.05, kc: 0.01 },
+    alkaline: { curve: [[0, 0.9], [0.1, 1.05], [0.3, 1.15], [0.5, 1.25], [0.7, 1.3], [0.9, 1.4], [1, 1.55]], r: 0.2, kc: 0.015 },
+    nimh: { curve: [[0, 1.0], [0.05, 1.1], [0.2, 1.2], [0.8, 1.25], [0.95, 1.35], [1, 1.4]], r: 0.05, kc: 0.01 },
   };
   const interp = (c, x) => { if (x <= c[0][0]) return c[0][1]; for (let i = 1; i < c.length; i++) if (x <= c[i][0]) { const [x0, y0] = c[i - 1], [x1, y1] = c[i]; return y0 + (y1 - y0) * (x - x0) / (x1 - x0 || 1); } return c[c.length - 1][1]; };
 
@@ -66,13 +66,16 @@
   const TABLE = {
     format: 'const',
     battery: { req: true, $obj: { capacity: 'pos!', chem: 'enum:li-ion|lifepo4|alkaline|nimh|custom', cells: 'int:1:6', curve: { $list: { soc: 'unit!', v: 'pos!' }, max: 32 },
-      selfDischarge: 'unit', rInt: 'nonneg', soc0: 'unit', cutoff: 'pos' } },
+      selfDischarge: 'unit', rInt: 'nonneg', soc0: 'unit', cutoff: 'pos', tempCap: 'unit' } },
     power: { $obj: { sleep: 'nonneg', active: 'nonneg', sense: 'nonneg', tx: 'nonneg', rx: 'nonneg' } },
     schedule: { req: true, $obj: { period: 'pos!', sense: 'nonneg', txEvery: 'int:1:10000', ack: 'bool', rxWindow: 'nonneg', retries: 'int:0:8', boot: 'nonneg' } },
-    sensors: { $list: { id: 'id!', base: 'fin', amp: 'fin', cycle: 'pos', noise: 'nonneg', drift: 'fin', current: 'nonneg' }, max: MAX_SENSORS },
+    sensors: { $list: { id: 'id!', base: 'fin', amp: 'fin', cycle: 'pos', noise: 'nonneg', drift: 'fin', current: 'nonneg', tempco: 'fin' }, max: MAX_SENSORS },
     radio: { $obj: { tech: 'enum:' + TECHS.join('|'), f: 'pos', power: 'fin', gain: 'fin', d: 'pos', n: 'pos', d0: 'pos', sigma: 'nonneg', extra: 'nonneg', nf: 'nonneg',
       sf: 'int:7:12', bw: 'pos', cr: 'int:1:4', payload: 'int:0:255', bitrate: 'pos', txTime: 'pos' } },
     brownout: { $obj: { v: 'nonneg', reset: 'nonneg' } },
+    env: { $obj: { temp: 'fin', swing: 'nonneg', cycle: 'pos' } },                                                  // ambient temperature (°C): temp − swing·cos(2πt/cycle)
+    clock: { $obj: { ppm: 'fin', tempco: 'fin', t0: 'fin', guard: 'nonneg', resync: 'nonneg' } },                   // the crystal: ppm + tempco·(T − t0)²; slots of ±guard s
+    network: { $obj: { nodes: 'int:0:200', period: 'pos', airtime: 'pos', jitter: 'unit', capture: 'nonneg', spread: 'nonneg', offset: 'fin' } },   // other nodes on the channel
     sim: { req: true, $obj: { duration: 'pos!', samples: 'int:2:' + MAX_SAMPLES, trace: 'nonneg', maxEvents: 'int:1:' + MAX_EVENTS } },
   };
   function checkNum(kind, v) {
@@ -127,13 +130,17 @@
     const active = g(pw, 'active', 5);
     return {
       battery: { capacity: num(b.capacity), chem, cells, curve, selfDischarge: g(b, 'selfDischarge', 0), soc0: g(b, 'soc0', 1),
-        rInt: g(b, 'rInt', (CHEMS[chem] ? CHEMS[chem].r : 0.1) * cells), cutoff: g(b, 'cutoff', (curve.length ? curve[0][1] : 0) * cells) },
+        rInt: g(b, 'rInt', (CHEMS[chem] ? CHEMS[chem].r : 0.1) * cells), cutoff: g(b, 'cutoff', (curve.length ? curve[0][1] : 0) * cells), tempCap: g(b, 'tempCap', CHEMS[chem] ? CHEMS[chem].kc : 0.008) },
       power: { sleep: g(pw, 'sleep', 0.005), active, sense: g(pw, 'sense', active), tx: g(pw, 'tx', 40), rx: g(pw, 'rx', 12) },
       schedule: { period: num(s.period), sense: g(s, 'sense', 0.05), txEvery: g(s, 'txEvery', 1), ack: g(s, 'ack', false), rxWindow: g(s, 'rxWindow', 0.2), retries: g(s, 'retries', 0), boot: g(s, 'boot', 0.1) },
-      sensors: (Array.isArray(dev.sensors) ? dev.sensors : []).map(x => ({ id: x.id, base: g(x, 'base', 20), amp: g(x, 'amp', 0), cycle: g(x, 'cycle', 86400), noise: g(x, 'noise', 0), drift: g(x, 'drift', 0), current: g(x, 'current', 0) })),
+      sensors: (Array.isArray(dev.sensors) ? dev.sensors : []).map(x => ({ id: x.id, base: g(x, 'base', 20), amp: g(x, 'amp', 0), cycle: g(x, 'cycle', 86400), noise: g(x, 'noise', 0), drift: g(x, 'drift', 0), current: g(x, 'current', 0), tempco: g(x, 'tempco', 0) })),
       radio: { tech: g(r, 'tech', 'lora'), f: g(r, 'f', 868e6), power: g(r, 'power', 14), gain: g(r, 'gain', 0), d: g(r, 'd', 1000), n: g(r, 'n', 2.7), d0: g(r, 'd0', 1), sigma: g(r, 'sigma', 0),
         extra: g(r, 'extra', 0), nf: g(r, 'nf', 6), sf: g(r, 'sf', 7), bw: g(r, 'bw', 125e3), cr: g(r, 'cr', 1), payload: g(r, 'payload', 12), bitrate: g(r, 'bitrate', 50000), txTime: g(r, 'txTime', undefined) },
       brownout: { v: g(bo, 'v', 0), reset: g(bo, 'reset', 0) },
+      env: { temp: g(dev.env, 'temp', 25), swing: g(dev.env, 'swing', 0), cycle: g(dev.env, 'cycle', 86400), on: isObj(dev.env) },
+      clock: { ppm: g(dev.clock, 'ppm', 0), tempco: g(dev.clock, 'tempco', 0), t0: g(dev.clock, 't0', 25), guard: g(dev.clock, 'guard', 0), resync: g(dev.clock, 'resync', 0) },
+      network: { nodes: g(dev.network, 'nodes', 0), period: g(dev.network, 'period', undefined), airtime: g(dev.network, 'airtime', undefined), jitter: g(dev.network, 'jitter', 1),
+        capture: g(dev.network, 'capture', 6), spread: g(dev.network, 'spread', 6), offset: g(dev.network, 'offset', 0), sync: false },
       sim: { duration: num(sm.duration), samples: g(sm, 'samples', 200), trace: g(sm, 'trace', 0), maxEvents: g(sm, 'maxEvents', DEF_EVENTS) },
     };
   }
@@ -161,9 +168,9 @@
   }
 
   /** checkFaults(device, faults) → [{code: 'fault', path, msg, level: 'error'}] (what create() would throw, as a list) */
-  const FAULT_KINDS = ['sensor-stuck', 'sensor-drift', 'battery-ageing', 'antenna-detached', 'wake-period', 'brownout'];
-  const FAULT_KEYS = ['kind', 'sensor', 'value', 'at', 'rate', 'factor', 'rInt', 'loss', 'period', 'v'];
-  const FAULT_NUM = { value: 'fin', at: 'nonneg', rate: 'fin', factor: 'pos', rInt: 'pos', loss: 'nonneg', period: 'pos', v: 'pos' };
+  const FAULT_KINDS = ['sensor-stuck', 'sensor-drift', 'battery-ageing', 'antenna-detached', 'wake-period', 'brownout', 'clock-drift', 'sync-wake', 'busy-channel', 'sensor-tempco'];
+  const FAULT_KEYS = ['kind', 'sensor', 'value', 'at', 'rate', 'factor', 'rInt', 'loss', 'period', 'v', 'ppm', 'nodes', 'coef'];
+  const FAULT_NUM = { value: 'fin', at: 'nonneg', rate: 'fin', factor: 'pos', rInt: 'pos', loss: 'nonneg', period: 'pos', v: 'pos', ppm: 'fin', nodes: 'int:1:200', coef: 'fin' };
   function checkFaults(dev, faults) {
     const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
     if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
@@ -182,10 +189,11 @@
 
   // ---- outputs a spec may name ----
   const SCALARS = ['lifeAnalytic', 'lifeSim', 'iAvg', 'iAvgAnalytic', 'chargeUsed', 'socEnd', 'vEnd', 'vMin', 'wakes', 'sent', 'attempts', 'delivered', 'lost', 'deliveryRatio',
-    'resets', 'dead', 'tDead', 'rssiMean', 'snrMean', 'per', 'airtime', 'activeFraction', 'readingMean', 'readingLast', 'readingErr'];
-  const SERIES = ['t', 'soc', 'v', 'vload', 'current', 'delivered', 'resets', 'rssi', 'rxT', 'reading', 'truth', 'traceT', 'traceI', 'eventT', 'eventCode'];
+    'resets', 'dead', 'tDead', 'rssiMean', 'snrMean', 'per', 'airtime', 'activeFraction', 'readingMean', 'readingLast', 'readingErr',
+    'tempMin', 'tempMax', 'tempMean', 'collisions', 'slotMisses', 'clockErrMax', 'ppmMean'];
+  const SERIES = ['t', 'soc', 'v', 'vload', 'current', 'delivered', 'resets', 'rssi', 'rxT', 'reading', 'truth', 'traceT', 'traceI', 'eventT', 'eventCode', 'temp', 'clockErr'];
   const PER_SENSOR = ['readingMean', 'readingLast', 'readingErr', 'reading', 'truth'];
-  const EVENT_CODES = { reset: 1, lost: 2, dead: 3, overrun: 4 };
+  const EVENT_CODES = { reset: 1, lost: 2, dead: 3, overrun: 4, collision: 5, 'slot-miss': 6 };
 
   function checkSpec(spec) {
     const P = [];
@@ -232,6 +240,10 @@
       else if (f.kind === 'brownout') D.brownout.v = f.v !== undefined ? num(f.v) : 3.6;
       else if (f.kind === 'sensor-stuck') { const x = sens.find(s => s.id === f.sensor); x.stuck = { at: f.at !== undefined ? num(f.at) : 0, value: f.value !== undefined ? num(f.value) : undefined }; }
       else if (f.kind === 'sensor-drift') { const x = sens.find(s => s.id === f.sensor); x.fdrift = { at: f.at !== undefined ? num(f.at) : 0, rate: f.rate !== undefined ? num(f.rate) : 1 }; }
+      else if (f.kind === 'sensor-tempco') { const x = sens.find(s => s.id === f.sensor); x.tempco += f.coef !== undefined ? num(f.coef) : 0.5; }
+      else if (f.kind === 'clock-drift') D.clock.ppm += f.ppm !== undefined ? num(f.ppm) : 200;
+      else if (f.kind === 'sync-wake') { D.network.sync = true; D.network.jitter = 0; if (!D.network.nodes) D.network.nodes = f.nodes !== undefined ? num(f.nodes) : 5; }
+      else if (f.kind === 'busy-channel') D.network.nodes += f.nodes !== undefined ? num(f.nodes) : 50;
     }
     B.capacity *= capF; B.rInt *= rF;
     const air = R.txTime !== undefined ? R.txTime : R.tech === 'lora' ? loraAirtime(R.sf, R.bw, R.cr, R.payload) : R.tech === 'ble' ? bleAirtime(R.payload) : 8 * (R.payload + 8) / R.bitrate;
@@ -254,21 +266,56 @@
     const { B, P, S, R, sens } = k, T = k.D.sim.duration, maxEv = k.D.sim.maxEvents, bor = k.D.brownout.v;
     const nb = k.D.sim.samples, W = T / nb, isd = B.selfDischarge * B.capacity / (30 * 24);
     const trFrom = o && o.traceFrom !== undefined ? o.traceFrom : 0, trTo = o && o.traceTo !== undefined ? o.traceTo : k.D.sim.trace;
-    const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed)));
+    const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed))), rNet = mulberry32(hash32('network', seed));
     const voc = soc => interp(B.curve, Math.max(0, soc)) * B.cells;
+    // the environment: ambient temperature and what it does to the battery (capacity, internal resistance, self-discharge) and the sleep current
+    const EN = k.D.env, CK = k.D.clock, NW = k.D.network;
+    const tempAt = tt => (EN.swing ? EN.temp - EN.swing * Math.cos(2 * Math.PI * tt / EN.cycle) : EN.temp);
+    let fc = 1, fr = 1, fsd = 1, fsl = 1, Tc = EN.temp, tMin = Infinity, tMax = -Infinity, tSum = 0, tN = 0;
+    const envAt = tt => {
+      if (!EN.on) return;
+      Tc = tempAt(tt);
+      fc = Math.min(1, Math.max(0.2, 1 - B.tempCap * Math.max(0, 25 - Tc))); fr = Math.max(0.5, Math.exp(0.035 * (25 - Tc)));
+      fsd = Math.pow(2, (Tc - 25) / 10); fsl = Math.max(0.5, Math.pow(2, (Tc - 25) / 15));
+    };
+    envAt(0);
     let t = 0, q = 0, events = 0, dead = false, tDead = NaN, vMin = Infinity, logCount = 0, overrun = false; const counts = { reset: 0, lost: 0, overrun: 0, dead: 0 };
-    const soc = () => B.soc0 - q / B.capacity;
-    const bins = { q: new Float64Array(nb), vload: new Float64Array(nb).fill(Infinity), soc: new Float64Array(nb), v: new Float64Array(nb), del: new Float64Array(nb), res: new Float64Array(nb), rs: new Float64Array(nb), rn: new Float64Array(nb) };
+    const soc = () => B.soc0 - q / (fc === 1 ? B.capacity : B.capacity * fc);
+    const bins = { q: new Float64Array(nb), vload: new Float64Array(nb).fill(Infinity), soc: new Float64Array(nb), v: new Float64Array(nb), del: new Float64Array(nb), res: new Float64Array(nb), rs: new Float64Array(nb), rn: new Float64Array(nb),
+      temp: new Float64Array(nb), cerr: new Float64Array(nb) };
+    // the crystal: its error accumulates between synchronisations; slots of ±guard are missed beyond it
+    let cerr = 0, cerrMax = 0, ppmSum = 0, ppmN = 0, lastSync = 0, binErr = 0;
+    const ppmAt = () => CK.ppm + CK.tempco * (Tc - CK.t0) * (Tc - CK.t0);
+    // the other nodes on the channel (ALOHA): random access, or fixed phases (all in step after a power cut: sync-wake)
+    const pO = NW.period !== undefined ? NW.period : S.period * S.txEvery, aO = NW.airtime !== undefined ? NW.airtime : k.air;
+    const phases = NW.nodes > 0 && (NW.sync || NW.jitter < 1) ? Array.from({ length: NW.nodes }, () => (NW.sync ? S.sense : rNet() * pO)) : null;
+    function collided(tt, prx) {
+      if (!(NW.nodes > 0)) return false;
+      const hit = () => k.prxMedian + NW.offset + (NW.spread > 0 ? NW.spread * gauss(rNet) : 0) > prx - NW.capture;
+      if (!phases) {   // random access: Poisson arrivals in the window where another packet would overlap ours
+        const mean = NW.nodes * (k.air + aO) / pO; let L = Math.exp(-mean), p = 1, n = 0;
+        do { n++; p *= rNet(); } while (p > L && n < 1000);
+        for (let i = 0; i < n - 1; i++) if (hit()) return true;
+        return false;
+      }
+      for (const ph of phases) {
+        let d = ((tt - ph) % pO + pO) % pO; if (d > pO / 2) d -= pO;
+        if (NW.jitter > 0) d += NW.jitter * pO * (rNet() - 0.5);
+        if (d > -aO && d < k.air && hit()) return true;
+      }
+      return false;
+    }
     let bi = 0;
     const log = [], trace = [[], []], rx = { t: [], rssi: [], snr: [], reading: sens.map(() => []), truth: sens.map(() => []) };
-    const cnt = { wakes: 0, sent: 0, attempts: 0, delivered: 0, lost: 0, resets: 0, active: 0 };
+    const cnt = { wakes: 0, sent: 0, attempts: 0, delivered: 0, lost: 0, resets: 0, active: 0, collisions: 0, slotMisses: 0 };
     const ev = (code, extra) => { logCount++; counts[code] = (counts[code] || 0) + 1; if (log.length < MAX_LOG) log.push({ t, code, ...extra }); };
-    const closeBin = () => { bins.soc[bi] = soc(); bins.v[bi] = voc(soc()); bi++; };
+    const closeBin = () => { bins.soc[bi] = soc(); bins.v[bi] = voc(soc()); bins.temp[bi] = Tc; bins.cerr[bi] = binErr; binErr = 0; bi++; };
     /** a segment of dur s at I mA; false when the loaded voltage is below the brown-out level (nothing is drawn: the reset follows) */
     function seg(dur, I, checkBor) {
       if (dead || t >= T) return true;
       if (++events > maxEv) throw fail('budget', { events });
-      const vl = voc(soc()) - I * B.rInt / 1000;
+      if (EN.on) { envAt(t); if (I === P.sleep) I *= fsl; }
+      const vl = voc(soc()) - I * (fr === 1 ? B.rInt : B.rInt * fr) / 1000, sdNow = fsd === 1 ? isd : isd * fsd;
       if (checkBor && bor > 0 && vl < bor) return false;
       if (vl < vMin) vMin = vl;
       dur = Math.min(dur, T - t);
@@ -276,11 +323,11 @@
       let rest = dur;
       while (rest > 0 && bi < nb) {
         const edge = (bi + 1) * W, part = Math.min(rest, edge - t);
-        q += (I + isd) * part / 3600; bins.q[bi] += (I + isd) * part / 3600; if (vl < bins.vload[bi]) bins.vload[bi] = vl;
+        q += (I + sdNow) * part / 3600; bins.q[bi] += (I + sdNow) * part / 3600; if (vl < bins.vload[bi]) bins.vload[bi] = vl;
         t += part; rest -= part;
         if (t >= edge - 1e-9 * W) closeBin();
       }
-      if (rest > 0) { q += (I + isd) * rest / 3600; t += rest; }
+      if (rest > 0) { q += (I + sdNow) * rest / 3600; t += rest; }
       if (I > P.sleep) cnt.active += dur;
       if (soc() <= 0 || voc(soc()) < B.cutoff) { dead = true; tDead = t; ev('dead', { soc: soc() }); }
       return true;
@@ -288,6 +335,7 @@
     function reading(i, tt) {
       const s = sens[i], truth = s.base + s.amp * Math.sin(2 * Math.PI * tt / s.cycle);
       let v = truth + s.drift * tt / 86400 + s.noise * gauss(rSens[i]);
+      if (s.tempco) v += s.tempco * (tempAt(tt) - 25);
       if (s.fdrift && tt >= s.fdrift.at) v += s.fdrift.rate * (tt - s.fdrift.at) / 86400;
       if (s.stuck && tt >= s.stuck.at) { if (s.stuck.value === undefined) s.stuck.value = s.base + s.amp * Math.sin(2 * Math.PI * s.stuck.at / s.cycle); v = s.stuck.value; }
       return [v, truth];
@@ -307,6 +355,9 @@
         if (dead || t >= T) break;
       }
       const start = t; cnt.wakes++;
+      if (EN.on) { envAt(t); tMin = Math.min(tMin, Tc); tMax = Math.max(tMax, Tc); tSum += Tc; tN++; }
+      const ppm = ppmAt(); ppmSum += ppm; ppmN++;
+      if (CK.resync > 0 && t - lastSync >= CK.resync) { cerr = 0; lastSync = t; }
       const rd = sens.map((_, i) => reading(i, t));
       if (!seg(S.sense, senseI, true)) { reset(); n = 0; wakeAt = t + S.period; continue; }
       n++;
@@ -317,10 +368,13 @@
           cnt.attempts++;
           if (!seg(k.air, P.tx, true)) { brown = true; break; }
           const prx = k.prxMedian + (R.sigma > 0 ? R.sigma * gauss(rRadio) : 0), snr = prx - k.nfl, per = k.perAt(snr);
-          const ok = rRadio() >= per;
+          let ok = rRadio() >= per;
+          if (CK.guard > 0 && Math.abs(cerr) > CK.guard) { ok = false; cnt.slotMisses++; ev('slot-miss', { err: cerr }); }
+          else if (collided(t - k.air, prx)) { if (ok) { cnt.collisions++; ev('collision'); } ok = false; }
           if (S.ack && !seg(S.rxWindow, P.rx, true)) { brown = true; break; }
           if (ok) {
             got = true; cnt.delivered++;
+            if (S.ack) { cerr = 0; lastSync = t; }   // the ack carries the network's time
             rx.t.push(t); rx.rssi.push(prx); rx.snr.push(snr); rd.forEach((x, i) => { rx.reading[i].push(x[0]); rx.truth[i].push(x[1]); });
             if (bi < nb) { bins.del[bi]++; bins.rs[bi] += prx; bins.rn[bi]++; }
             break;
@@ -330,11 +384,13 @@
         if (!got) { cnt.lost++; if (S.ack && !brown) ev('lost'); }
       }
       if (brown) { reset(); n = 0; wakeAt = t + S.period; continue; }
-      wakeAt = start + S.period;
+      wakeAt = start + (ppm ? S.period * (1 + ppm * 1e-6) : S.period);
+      if (ppm) { cerr += S.period * ppm * 1e-6; const ae = Math.abs(cerr); if (ae > cerrMax) cerrMax = ae; if (ae > binErr) binErr = ae; }
       if (wakeAt < t) { if (!overrun) ev('overrun'); overrun = true; wakeAt = t; }
     }
     while (bi < nb) closeBin();
-    return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W };
+    return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W,
+      env: { min: tN ? tMin : EN.temp, max: tN ? tMax : EN.temp, mean: tN ? tSum / tN : EN.temp }, clock: { errMax: cerrMax, ppmMean: ppmN ? ppmSum / ppmN : CK.ppm } };
   }
 
   function results(k, r) {
@@ -349,6 +405,7 @@
       rssiMean: r.rx.rssi.length ? r.rx.rssi.reduce((a, b) => a + b, 0) / r.rx.rssi.length : NaN,
       snrMean: r.rx.snr.length ? r.rx.snr.reduce((a, b) => a + b, 0) / r.rx.snr.length : NaN,
       per: k.perAt(k.prxMedian - k.nfl), airtime: k.air, activeFraction: c.active / T,
+      tempMin: r.env.min, tempMax: r.env.max, tempMean: r.env.mean, collisions: c.collisions, slotMisses: c.slotMisses, clockErrMax: r.clock.errMax, ppmMean: r.clock.ppmMean,
     };
     const perSensor = k.sens.map((_, i) => {
       const v = r.rx.reading[i], tr = r.rx.truth[i];
@@ -362,6 +419,7 @@
       delivered: Array.from(r.bins.del, x => (cd += x)), resets: Array.from(r.bins.res, x => (cr += x)),
       rssi: Array.from(r.bins.rs, (x, i) => (r.bins.rn[i] ? x / r.bins.rn[i] : NaN)),
       rxT: r.rx.t, traceT: r.trace[0], traceI: r.trace[1], eventT: r.log.map(e => e.t), eventCode: r.log.map(e => EVENT_CODES[e.code]),
+      temp: Array.from(r.bins.temp), clockErr: Array.from(r.bins.cerr),
     };
     return { scalars: s, perSensor, series, readings: r.rx.reading, truth: r.rx.truth, log: r.log, logCount: r.logCount, counts: r.counts, sensors: k.sens.map(x => x.id) };
   }
@@ -400,6 +458,8 @@
       }
       if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount, counts: { ...r.counts } }; }   // counts: the whole run's, per code (events: the first limits.log)
       if (probe.kind === 'rssi') { const r = run(); return { kind: 'rssi', value: r.scalars.rssiMean, n: r.scalars.delivered }; }
+      if (probe.kind === 'T') { const r = run(), s = r.scalars; return { kind: 'T', value: r.series.temp[r.series.temp.length - 1], min: s.tempMin, max: s.tempMax, unit: '°C' }; }   // the device's thermometer
+      if (probe.kind === 'clock') { const r = run(), s = r.scalars; return { kind: 'clock', value: s.ppmMean, err: s.clockErrMax }; }   // the clock against a reference: ppm, worst error
       throw fail('probe');
     }
     return Object.freeze({ id: ID, run, measure, analytic: () => analytic(compile(JSON.parse(JSON.stringify(devc)), faults)) });

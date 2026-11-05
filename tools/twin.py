@@ -17,22 +17,26 @@ TABLE = {
     "format": "const",
     "battery": {"req": True, "$obj": {"capacity": "pos!", "chem": "enum:li-ion|lifepo4|alkaline|nimh|custom", "cells": "int:1:6",
                                       "curve": {"$list": {"soc": "unit!", "v": "pos!"}, "max": 32},
-                                      "selfDischarge": "unit", "rInt": "nonneg", "soc0": "unit", "cutoff": "pos"}},
+                                      "selfDischarge": "unit", "rInt": "nonneg", "soc0": "unit", "cutoff": "pos", "tempCap": "unit"}},
     "power": {"$obj": {"sleep": "nonneg", "active": "nonneg", "sense": "nonneg", "tx": "nonneg", "rx": "nonneg"}},
     "schedule": {"req": True, "$obj": {"period": "pos!", "sense": "nonneg", "txEvery": "int:1:10000", "ack": "bool", "rxWindow": "nonneg", "retries": "int:0:8", "boot": "nonneg"}},
-    "sensors": {"$list": {"id": "id!", "base": "fin", "amp": "fin", "cycle": "pos", "noise": "nonneg", "drift": "fin", "current": "nonneg"}, "max": MAX_SENSORS},
+    "sensors": {"$list": {"id": "id!", "base": "fin", "amp": "fin", "cycle": "pos", "noise": "nonneg", "drift": "fin", "current": "nonneg", "tempco": "fin"}, "max": MAX_SENSORS},
     "radio": {"$obj": {"tech": "enum:" + "|".join(TECHS), "f": "pos", "power": "fin", "gain": "fin", "d": "pos", "n": "pos", "d0": "pos", "sigma": "nonneg", "extra": "nonneg", "nf": "nonneg",
                        "sf": "int:7:12", "bw": "pos", "cr": "int:1:4", "payload": "int:0:255", "bitrate": "pos", "txTime": "pos"}},
     "brownout": {"$obj": {"v": "nonneg", "reset": "nonneg"}},
+    "env": {"$obj": {"temp": "fin", "swing": "nonneg", "cycle": "pos"}},
+    "clock": {"$obj": {"ppm": "fin", "tempco": "fin", "t0": "fin", "guard": "nonneg", "resync": "nonneg"}},
+    "network": {"$obj": {"nodes": "int:0:200", "period": "pos", "airtime": "pos", "jitter": "unit", "capture": "nonneg", "spread": "nonneg", "offset": "fin"}},
     "sim": {"req": True, "$obj": {"duration": "pos!", "samples": f"int:2:{MAX_SAMPLES}", "trace": "nonneg", "maxEvents": f"int:1:{MAX_EVENTS}"}},
 }
 NUM_FIELDS = numeric_fields(TABLE)
-FAULT_KINDS = ["sensor-stuck", "sensor-drift", "battery-ageing", "antenna-detached", "wake-period", "brownout"]
-FAULT_KEYS = ["kind", "sensor", "value", "at", "rate", "factor", "rInt", "loss", "period", "v"]
-FAULT_NUM = {"value": "fin", "at": "nonneg", "rate": "fin", "factor": "pos", "rInt": "pos", "loss": "nonneg", "period": "pos", "v": "pos"}
+FAULT_KINDS = ["sensor-stuck", "sensor-drift", "battery-ageing", "antenna-detached", "wake-period", "brownout", "clock-drift", "sync-wake", "busy-channel", "sensor-tempco"]
+FAULT_KEYS = ["kind", "sensor", "value", "at", "rate", "factor", "rInt", "loss", "period", "v", "ppm", "nodes", "coef"]
+FAULT_NUM = {"value": "fin", "at": "nonneg", "rate": "fin", "factor": "pos", "rInt": "pos", "loss": "nonneg", "period": "pos", "v": "pos", "ppm": "fin", "nodes": "int:1:200", "coef": "fin"}
 SCALARS = ["lifeAnalytic", "lifeSim", "iAvg", "iAvgAnalytic", "chargeUsed", "socEnd", "vEnd", "vMin", "wakes", "sent", "attempts", "delivered", "lost", "deliveryRatio",
-           "resets", "dead", "tDead", "rssiMean", "snrMean", "per", "airtime", "activeFraction", "readingMean", "readingLast", "readingErr"]
-SERIES = ["t", "soc", "v", "vload", "current", "delivered", "resets", "rssi", "rxT", "reading", "truth", "traceT", "traceI", "eventT", "eventCode"]
+           "resets", "dead", "tDead", "rssiMean", "snrMean", "per", "airtime", "activeFraction", "readingMean", "readingLast", "readingErr",
+           "tempMin", "tempMax", "tempMean", "collisions", "slotMisses", "clockErrMax", "ppmMean"]
+SERIES = ["t", "soc", "v", "vload", "current", "delivered", "resets", "rssi", "rxT", "reading", "truth", "traceT", "traceI", "eventT", "eventCode", "temp", "clockErr"]
 PER_SENSOR = ["readingMean", "readingLast", "readingErr", "reading", "truth"]
 
 def check(dev):

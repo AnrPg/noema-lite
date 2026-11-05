@@ -288,6 +288,8 @@
         const A = sel('a', tE('engine.act.bench.red'), []), Bk = sel('b', tE('engine.act.bench.black'), []);
         lab.set(A.s, A.row.querySelector('label'));
         const part = sel('part', tE('engine.act.bench.part'), []);
+        const modeS = sel('mode', tE('engine.act.bench.mode'), []), gndS = sel('ground', tE('engine.act.bench.ground'), []);   // a multimeter's modes, a scope probe's ground leads (§9.5)
+        const modeName = q => tE('engine.act.bench.mode.' + q);
         const btn = h('button', { class: 'btn primary small', type: 'button', 'data-bench': 'measure', onclick: () => measure() }, tE('engine.act.bench.measure'));
         const left = h('span', { class: 'sim-left', 'aria-live': 'polite' });
         const faceEl = h('div', { class: 'sim-face', 'aria-live': 'polite' });
@@ -297,7 +299,7 @@
         const dxOut = h('p', { class: 'sim-dx-out', 'aria-live': 'polite' });
         const another = exMode ? null : h('button', { class: 'btn ghost small', type: 'button', 'data-bench': 'another', onclick: () => newDevice() }, '↻ ' + tE('engine.act.bench.another'));
         const cur = () => bn.instruments.find(x => x.kind === inst.s.value) || bn.instruments[0];
-        const whole = k => k === 'log' || k === 'rssi';   // twin@1: the event log and the radio's RSSI read the device, not a point
+        const whole = k => k === 'log' || k === 'rssi' || k === 'T' || k === 'clock';   // twin@1: the event log, the RSSI, the thermometer and the clock check read the device, not a point
         function setInstrument() {
           const x = cur(), two = x.kind === 'V' || x.kind === 'R', ids = x.points || bn.points.map(p => p.id);
           const keep = (s, items, fallback) => { const v = s.value; s.replaceChildren(...items.map(o => h('option', { value: o.value }, o.text))); s.value = items.some(o => o.value === v) ? v : fallback; };
@@ -307,8 +309,12 @@
             keep(A.s, ptItems(ids), ids.find(id => id !== g) || ids[0]);
             if (two) keep(Bk.s, ptItems(ids), g);
           }
+          const ms = Array.isArray(x.modes) ? x.modes : [], ls = Array.isArray(x.leads) ? x.leads : [];
+          keep(modeS.s, ms.map(q => ({ value: q, text: modeName(q) })), ms[0] || '');
+          keep(gndS.s, ls.map((q, i) => ({ value: String(i), text: tt(q.label) })), '0');
           lab.get(A.s).textContent = two ? tE('engine.act.bench.red') : tE('engine.act.bench.probe');
           A.row.hidden = x.kind === 'I' || whole(x.kind); Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
+          modeS.row.hidden = ms.length < 2; gndS.row.hidden = ls.length < 2;
         }
         inst.s.addEventListener('change', setInstrument);
         dxSel.s.addEventListener('change', () => {
@@ -319,28 +325,41 @@
         });
         const tval = (v, d) => { const g = typeof v === 'string' ? C(v) : null; return g ? ev(g, base()) : (v === undefined ? d : v); };
         function probeOf(x) {
-          if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}) }, ev: { i: 'I', part: +part.s.value } }; }
+          const tw = x.tEnd === undefined ? {} : { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
+          const mode = Array.isArray(x.modes) && x.modes.length ? (x.modes.includes(modeS.s.value) ? modeS.s.value : x.modes[0]) : null;
+          const md = mode ? { mode } : {}, zin = x.zin !== undefined ? { zin: x.zin } : {};
+          if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}), ...md, ...tw }, ev: { i: 'I', part: +part.s.value, ...(mode ? { m: mode } : {}) } }; }
           if (whole(x.kind)) return { probe: { kind: x.kind }, ev: { i: x.kind } };
           const a = pt(A.s.value), b = Bk.s.value ? pt(Bk.s.value) : null;
-          if (x.kind === 'V' || x.kind === 'R') return { probe: { kind: x.kind, a: a.at, b: b ? b.at : 'gnd' }, ev: { i: x.kind, a: a.id, b: b?.id } };
-          const tw = { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
-          if (x.kind === 'scope') return { probe: { kind: 'scope', node: a.at, ref: 'gnd', ...tw }, ev: { i: 'scope', a: a.id } };
-          return { probe: { kind: 'logic', nodes: [a.at], ...(x.threshold !== undefined ? { threshold: tval(x.threshold) } : {}), ...tw }, ev: { i: 'logic', a: a.id }, node: a.at };
+          if (x.kind === 'R') return { probe: { kind: 'R', a: a.at, b: b ? b.at : 'gnd' }, ev: { i: 'R', a: a.id, b: b?.id } };
+          if (x.kind === 'V') return { probe: { kind: 'V', a: a.at, b: b ? b.at : 'gnd', ...zin, ...md, ...tw }, ev: { i: 'V', a: a.id, b: b?.id, ...(mode ? { m: mode } : {}) } };
+          if (x.kind === 'bode') return { probe: { kind: 'bode', node: a.at, ref: 'gnd', source: x.source, fStart: tval(x.fStart), fStop: tval(x.fStop), ...(x.fPoints ? { points: x.fPoints } : {}) }, ev: { i: 'bode', a: a.id } };
+          if (x.kind === 'scope') {
+            const ls = Array.isArray(x.leads) ? x.leads : [], gi = ls.length ? Math.min(ls.length - 1, +gndS.s.value || 0) : -1, l = gi >= 0 ? ls[gi] : null;
+            return { probe: { kind: 'scope', node: a.at, ref: 'gnd', ...zin, ...(l ? { lead: l.lead, ...(l.cin !== undefined ? { cin: l.cin } : {}) } : {}), ...tw }, ev: { i: 'scope', a: a.id, ...(l ? { g: gi } : {}) } };
+          }
+          return { probe: { kind: 'logic', nodes: [a.at], ...zin, ...(x.threshold !== undefined ? { threshold: tval(x.threshold) } : {}), ...tw }, ev: { i: 'logic', a: a.id }, node: a.at };
         }
         function paintLeft() {
           left.textContent = budget ? tE('engine.act.bench.left', { left: Math.max(0, budget - count) }) : '';
           btn.disabled = done || (budget && count >= budget);
-          for (const s of [inst.s, A.s, Bk.s, part.s, dxSel.s]) s.disabled = done;
+          for (const s of [inst.s, A.s, Bk.s, part.s, modeS.s, gndS.s, dxSel.s]) s.disabled = done;
           if (dxBtn) dxBtn.disabled = done;
         }
         const fm = (v, unit) => fmtNum(v, { format: 'si', unit, digits: 3 }, locale);
+        const withMode = (txt, r) => (r.mode && r.mode !== 'dc' ? txt + ' ' + modeName(r.mode) : txt);
         function reading(r) {   // the reading in words and numbers (never the fault)
           if (!r || r.error) return tE('engine.act.bench.failed');
-          if (r.kind === 'V') return fm(r.value, 'V');
-          if (r.kind === 'I') return fm(r.value, 'A');
+          if (r.kind === 'V') return withMode(fm(r.value, 'V'), r);
+          if (r.kind === 'I') return withMode(fm(r.value, 'A'), r);
+          if (r.kind === 'T') { const c = v => fmtNum(v, { format: 'fixed', digits: 1, unit: '°C' }, locale); return tE('engine.act.bench.tempStats', { now: c(r.value), min: c(r.min), max: c(r.max) }); }
+          if (r.kind === 'clock') return tE('engine.act.bench.clockStats', { ppm: fmtNum(r.value, { format: 'fixed', digits: 1, unit: 'ppm' }, locale), err: fm(r.err, 's') });
+          if (r.kind === 'bode') { const st = r.stats || {}, db = v => (isNum(v) ? fmtNum(v, { format: 'fixed', digits: 1, unit: 'dB' }, locale) : '—'), hz = v => (isNum(v) && v > 0 ? fm(v, 'Hz') : '—');
+            return tE('engine.act.bench.bodeStats', { dc: db(st.dcDb), peak: db(st.peakDb), f3db: hz(st.f3db), unity: hz(st.fUnity) }); }
           if (r.kind === 'R') return r.value === 'OL' ? 'OL' : fm(r.value, 'Ω');   // i18n-ignore (the meter's own display)
           if (r.kind === 'rssi') return fmtNum(r.value, { format: 'fixed', digits: 1, unit: 'dBm' }, locale);
-          if (r.kind === 'log') { const n = logCounts(r); return tE('engine.act.bench.logStats', { resets: n.reset, lost: n.lost, overruns: n.overrun }); }
+          if (r.kind === 'log') { const n = logCounts(r), c = n.collision || 0, sm = n['slot-miss'] || 0;
+            return c || sm ? tE('engine.act.bench.logStats2', { resets: n.reset || 0, lost: n.lost || 0, overruns: n.overrun || 0, collisions: c, missed: sm }) : tE('engine.act.bench.logStats', { resets: n.reset, lost: n.lost, overruns: n.overrun }); }
           const u = r.unit === 'A' ? 'A' : 'V';   // a scope shows a voltage, or (twin@1) the supply current
           if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, u), mean: fm(r.stats.mean, u), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
           const st = Object.values(r.traces || {})[0]?.stats || {};
@@ -359,12 +378,13 @@
           if (r.kind === 'scope') return { kind: 'scope', stats: r.stats, ...(r.unit ? { unit: r.unit } : {}) };
           if (r.kind === 'log') return { kind: 'log', counts: logCounts(r) };
           if (r.kind === 'logic') return { kind: 'logic', traces: Object.fromEntries(Object.entries(r.traces || {}).map(([k, v]) => [k, { stats: v.stats }])) };
+          if (r.kind === 'bode') return { kind: 'bode', stats: r.stats };
           return r;
         }
         function where(e) {
           if (e.i === 'I') return tt(bn.instruments.find(x => x.kind === 'I')?.parts?.[e.part]?.label);
-          const a = pt(e.a), b = e.b ? pt(e.b) : null;
-          return a ? tt(a.label) + (b ? ' → ' + tt(b.label) : '') : '';
+          const a = pt(e.a), b = e.b ? pt(e.b) : null, l = e.i === 'scope' && Number.isInteger(e.g) ? bn.instruments.find(x => x.kind === 'scope')?.leads?.[e.g] : null;
+          return a ? tt(a.label) + (b ? ' → ' + tt(b.label) : '') + (l ? ' (' + tt(l.label) + ')' : '') : '';
         }
         function paintLog() {
           logEl.replaceChildren(...log.map(e => h('li', {}, h('span', { class: 'sim-log-i' }, instName(e.i)), ' ' + where(e) + ': ', h('b', {}, e.r === undefined ? '…' : reading(e.r)))));
@@ -372,11 +392,14 @@
         }
         function showFace(e) {
           const r = e.r; faceEl.replaceChildren();
-          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R' || r.kind === 'rssi' || r.kind === 'log') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
+          if (!r || r.error || !(r.kind === 'scope' || r.kind === 'logic' || (r.kind === 'bode' && Array.isArray(r.f)))) { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
           const fig = h('figure', { class: 'sim-plot sim-scope' }); faceEl.append(fig);
-          const xl = tE('engine.act.bench.time') + ' (s)';
-          let p, data, yl;
-          if (r.kind === 'scope') {
+          let xl = tE('engine.act.bench.time') + ' (s)', p, data, yl;
+          if (r.kind === 'bode') {   // the gain over frequency (log axis)
+            xl = tE('engine.act.bench.frequency') + ' (Hz)'; yl = tE('engine.act.bench.gain') + ' (dB)';
+            p = { x: { label: 'x', unit: 'Hz', format: 'si', scale: 'log' }, y: { label: 'y', unit: 'dB', digits: 1 } };
+            data = { xs: r.f, lines: [{ ys: r.db }], marks: [], xr: [r.f[0], r.f[r.f.length - 1]], yr: [null, null] };
+          } else if (r.kind === 'scope') {
             const cur = r.unit === 'A';
             yl = cur ? tE('engine.act.bench.current') + ' (A)' : tE('engine.act.bench.voltage') + ' (V)';
             p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: cur ? 'A' : 'V', ...(cur ? { format: 'si' } : {}) } };
@@ -401,7 +424,10 @@
           out('event', { name: 'measure', data: { ...m.ev } });
           runner.measure(prep(base()), m.probe, r => {
             if (closed) return;
-            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : r.kind === 'log' && !r.error ? { kind: 'log', counts: logCounts(r) } : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
+            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' || r.kind === 'bode' ? r : r.kind === 'log' && !r.error ? { kind: 'log', counts: logCounts(r) }
+              : r.error ? { kind: r.kind, error: r.error }
+              : r.kind === 'T' ? { kind: 'T', value: r.value, min: r.min, max: r.max } : r.kind === 'clock' ? { kind: 'clock', value: r.value, err: r.err }
+              : { kind: r.kind, value: r.value, error: r.error, ...(r.mode ? { mode: r.mode } : {}) }) : { error: 'none' };
             paintLog(); showFace(e); saveSoon();
           });
         }
@@ -426,7 +452,7 @@
         }
         setInstrument(); paintLog(); paintLeft();
         if (savedB && savedB.done && dx != null) reveal();
-        const ctl = h('div', { class: 'sim-bctl' }, inst.row, A.row, Bk.row, part.row, h('div', { class: 'sim-brow' }, btn, left));
+        const ctl = h('div', { class: 'sim-bctl' }, inst.row, A.row, Bk.row, part.row, modeS.row, gndS.row, h('div', { class: 'sim-brow' }, btn, left));
         const el = h('section', { class: 'sim-bench' },
           h('div', { class: 'sim-binst' }, ctl, faceEl),
           h('h5', { class: 'sim-bh' }, tE('engine.act.bench.log')), logEmpty, logEl,

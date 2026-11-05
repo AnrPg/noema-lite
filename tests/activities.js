@@ -285,13 +285,51 @@ const p6cases = {
     'twin bench: a scope on the battery': p => { twinBench(p); tb(p).instruments[2].points = ['VBAT']; },
     'twin bench: an ammeter on a part': p => { twinBench(p); tb(p).instruments[1].parts[0].element = 'R1'; },
     'twin bench: the event log on a point': p => { twinBench(p); tb(p).instruments[3].points = ['VBAT']; },
+    'twin bench: a thermometer and a clock check': p => { twinBench(p); tb(p).instruments.push({ kind: 'T' }, { kind: 'clock' }); },
+    'twin bench: the thermometer on a point': p => { twinBench(p); tb(p).instruments.push({ kind: 'T', points: ['VBAT'] }); },
+    'twin bench: meter modes on the twin': p => { twinBench(p); tb(p).instruments[0].modes = ['dc']; },
     'twin bench: a logic analyser': p => { twinBench(p); tb(p).instruments[4] = { kind: 'logic', tEnd: 1 }; },
     'twin bench: task.fault not a fault': p => { twinBench(p); sx(p).task.params.fault = 'stuck'; },
     'twin bench: a diagnosis label missing in one table': p => { twinBench(p); delete p.activities.items[1].strings.fr.dxWake; },
   },
 };
 ccases['circuit: the event log on a circuit bench'] = p => { bn(p).instruments.push({ kind: 'log' }); };
-const P6GOOD = ['thermal good', 'thermal: a good output at an expression', 'pid good', 'pid: a good anti-windup toggle', 'rf good', 'twin good', 'twin bench good'];
+// the new physics (docs/INTERACTIVE_CIRCUIT.md §9): AC outputs, power, meter modes and windows, scope ground leads, the frequency response analyser
+Object.assign(ccases, {
+  'circuit: good ac, power and instrument extras': p => { md(p).ac = { source: 'V1', fStart: 1, fStop: 1e6, points: 50 }; md(p).transient = { tEnd: 0.01 };
+    sp(p).outputs = [{ id: 'f', kind: 'series', ac: 'f' }, { id: 'g', kind: 'series', ac: 'db', node: 'a' }, { id: 'g1k', kind: 'scalar', ac: 'phase', node: 'a', ref: 's', at: 1000 }, { id: 'fc', kind: 'scalar', ac: 'f3db', node: 'a' },
+      { id: 'pd', kind: 'scalar', power: 'D1', stat: 'mean' }, { id: 'vm', kind: 'scalar', probe: { kind: 'V', a: 'a', mode: 'rms', zin: 1e7, tEnd: 0.01, dt: 1e-5 } }];
+    bn(p).instruments[0].modes = ['dc', 'ac', 'rms']; bn(p).instruments[0].zin = 1e7; bn(p).instruments[1].modes = ['dc', 'avg']; bn(p).instruments[1].tEnd = 0.02;
+    bn(p).instruments.push({ kind: 'scope', tEnd: 0.001, zin: 1e7, leads: [{ label: 'tp3', lead: 150e-9, cin: 12e-12 }, { label: 'tp3', lead: 0 }] }, { kind: 'bode', source: 'V1', fStart: 10, fStop: 1e5, fPoints: 100 }); },
+  'circuit: ac on a resistor': p => { md(p).ac = { source: 'R1', fStart: 1, fStop: 1e6 }; },
+  'circuit: ac without fStop': p => { md(p).ac = { source: 'V1', fStart: 1 }; },
+  'circuit: ac fStop below fStart': p => { md(p).ac = { source: 'V1', fStart: 1e6, fStop: 1 }; },
+  'circuit: ac with too many points': p => { md(p).ac = { source: 'V1', fStart: 1, fStop: 1e6, points: 5000 }; },
+  'circuit: an ac output with no model.ac': p => { sp(p).outputs = [{ id: 'g', kind: 'series', ac: 'db', node: 'a' }]; },
+  'circuit: an ac point with no frequency': p => { md(p).ac = { source: 'V1', fStart: 1, fStop: 1e6 }; sp(p).outputs = [{ id: 'g', kind: 'scalar', ac: 'db', node: 'a' }]; },
+  'circuit: an ac curve of a stat': p => { md(p).ac = { source: 'V1', fStart: 1, fStop: 1e6 }; sp(p).outputs = [{ id: 'g', kind: 'series', ac: 'f3db', node: 'a' }]; },
+  'circuit: an ac output on no node': p => { md(p).ac = { source: 'V1', fStart: 1, fStop: 1e6 }; sp(p).outputs = [{ id: 'g', kind: 'series', ac: 'db', node: 'zz' }]; },
+  'circuit: ref on a node output': p => { sp(p).outputs = [{ id: 'v', kind: 'scalar', node: 'a', ref: 's' }]; },
+  'circuit: power of no part': p => { sp(p).outputs = [{ id: 'pd', kind: 'scalar', power: 'D9', stat: 'mean' }]; },
+  'circuit: power without at or stat': p => { md(p).transient = { tEnd: 0.01 }; sp(p).outputs = [{ id: 'pd', kind: 'scalar', power: 'D1' }]; },
+  'circuit: a probe in a bad mode': p => { sp(p).outputs = [{ id: 'vm', kind: 'scalar', probe: { kind: 'V', a: 'a', mode: 'peak' } }]; },
+  'circuit: an ohmmeter with zin': p => { sp(p).outputs = [{ id: 'r', kind: 'scalar', probe: { kind: 'R', a: 'a', zin: 1e6 } }]; },
+  'circuit: modes on the ohmmeter': p => { bn(p).instruments[2].modes = ['dc']; },
+  'circuit: a mode twice': p => { bn(p).instruments[0].modes = ['dc', 'dc']; },
+  'circuit: zin on the ammeter': p => { bn(p).instruments[1].zin = 0.1; },
+  'circuit: a meter window without tEnd': p => { bn(p).instruments[0].dt = 1e-5; },
+  'circuit: leads on the voltmeter': p => { bn(p).instruments[0].leads = [{ label: 'tp3', lead: 1e-7 }]; },
+  'circuit: a lead with a negative inductance': p => { bn(p).instruments.push({ kind: 'scope', tEnd: 0.001, leads: [{ label: 'tp3', lead: -1 }] }); },
+  'circuit: a lead label missing': p => { bn(p).instruments.push({ kind: 'scope', tEnd: 0.001, leads: [{ label: 'leadNope', lead: 0 }] }); },
+  'circuit: a bode with no source': p => { bn(p).instruments.push({ kind: 'bode', source: 'R1', fStart: 1, fStop: 1e5 }); },
+  'circuit: a bode without fStart': p => { bn(p).instruments.push({ kind: 'bode', source: 'V1', fStop: 1e5 }); },
+  'circuit: a probe window that averages nothing': p => { sp(p).outputs = [{ id: 'vm', kind: 'scalar', probe: { kind: 'V', a: 'a', tEnd: 0.01, tStart: 0.01 } }]; },
+  'circuit: a probe window without tEnd': p => { sp(p).outputs = [{ id: 'vm', kind: 'scalar', probe: { kind: 'V', a: 'a', dt: 1e-5 } }]; },
+  'circuit: a bench meter window that averages nothing': p => { bn(p).instruments[0].tEnd = 0.01; bn(p).instruments[0].tStart = 0.02; },
+  'circuit: fStart on the scope': p => { bn(p).instruments.push({ kind: 'scope', tEnd: 0.001, fStart: 1 }); },
+});
+
+const P6GOOD = ['thermal good', 'thermal: a good output at an expression', 'pid good', 'pid: a good anti-windup toggle', 'rf good', 'twin good', 'twin bench good', 'twin bench: a thermometer and a clock check'];
 const P6PRE = /^(thermal|pid|rf|twin)\b/;
 // wasm-module@1 (P6): the reference wasm-oscillator (a module with its own spec) as the second activity, with a sim exercise graded by checks
 const WO = path.join(ROOT, 'tools', 'activities_examples', 'wasm-oscillator'), FIXW = path.join(ROOT, 'tests', 'fixtures', 'wasm');
@@ -424,7 +462,7 @@ const packs = [...Object.entries(cases).map(([k, f]) => { const p = base(); f(p)
   ...Object.entries(wcases).map(([k, f]) => { const p = wbase(); f(p); return [k, p]; }), ...Object.entries(ecases).map(([k, f]) => { const p = ebase(); f(p); return [k, p]; }),
   ...Object.entries(p6cases).flatMap(([aid, cs]) => Object.entries(cs).map(([k, f]) => { const p = p6base(aid)(); f(p); return [k, p]; })),
   ...Object.entries(hcases).map(([k, f]) => { const p = hbase(); f(p); return [k, p]; })];
-const GOOD = new Set(['h5p good', 'h5p good in el and ru', 'good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index',
+const GOOD = new Set(['h5p good', 'h5p good in el and ru', 'good', 'spec good', 'spec: a good choice and toggle', 'circuit good', 'circuit: rc-transient (no bench)', 'circuit: a good scalar output in a readout', 'circuit: a scope and a logic analyser', 'circuit: task.fault a list', 'circuit: a check on the diagnosis index', 'circuit: good ac, power and instrument extras',
   'wasm good', 'wasm: through a sim-spec@1 spec (engine wasm@1)', 'embed good', ...P6GOOD,
   'py good', 'py: graded "reported" (noema.result)', 'py: a task param for Python only', 'py: scipy declared and imported', 'py: an allow-listed extra with requiresNetwork', 'py: while True (a warning)']);
 const tmp = path.join(require('os').tmpdir(), 'noema-act-parity.json'); fs.writeFileSync(tmp, JSON.stringify(packs));
@@ -468,9 +506,15 @@ print(json.dumps([A.check_spec(p['activities']['items'][1].get('spec'), p['activ
    {nodes:['a','b','c','d'],elements:[{id:'V1',type:'V',n:['a','gnd'],value:5},{id:'V2',type:'V',n:['a','gnd'],value:5},{id:'R1',type:'R',n:['b','b'],value:1},{id:'C1',type:'C',n:['c','gnd'],value:1e-6},{id:'U1',type:'OPAMP',n:['a','b','a']}]},
    {nodes:['a','b'],elements:[{id:'R1',type:'R',n:['a','b'],value:1}]},
    {nodes:Array.from({length:61},(_, i)=>'n'+i),elements:[]},
+   // the second-generation parts and fields (docs/INTERACTIVE_CIRCUIT.md §9)
+   {nodes:['a','b',{name:'c',pickup:'no'},'d','e'],pickup:{hum:-1,zz:1,r:'1meg'},elements:[{id:'T1',type:'TLINE',n:['a','b']},{id:'T2',type:'TLINE',n:['a','gnd','b','gnd'],params:{z0:50,vf:2,len:1}},{id:'S1',type:'VSW',n:['a','b','c','gnd'],params:{Von:'x'}},
+     {id:'U1',type:'OPAMP',n:['a','b','d'],params:{gbw:0,slew:1e6,rout:-1,vos:'1m',ib:1e-9},preset:'lm358'},{id:'M1',type:'NMOS',n:['d','a','gnd'],params:{Cgs:1e-9,body:1}},{id:'D1',type:'D',n:['e','gnd'],params:{Bv:0,Cj:'4p'},preset:'bzx55c3v3'},
+     {id:'V1',type:'V',n:['e','gnd'],value:{noise:{rms:1}}},{id:'V2',type:'V',n:['a','gnd'],value:{noise:{rms:0.1,bw:1e3,colour:1}}},{id:'Q1',type:'NPN',n:['d','e','gnd'],params:{Cbe:-1}}]},
+   {nodes:['a','b',{name:'f',pickup:false}],pickup:false,elements:[{id:'V1',type:'V',n:['a','gnd'],value:1},{id:'V2',type:'V',n:['b','gnd'],value:1},{id:'T1',type:'TLINE',n:['a','b'],params:{td:1e-9}},{id:'C1',type:'C',n:['f','gnd'],value:1e-9}]},
+   {nodes:['a','b'],pickup:'x',elements:[{id:'T1',type:'TLINE',n:['a','a'],params:{td:1e-9}},{id:'R1',type:'R',n:['a','gnd'],value:1},{id:'S1',type:'VSW',n:['b','gnd','a','gnd']}]},
   ];
   const nl={nodes:['vin','a'],elements:[{id:'V1',type:'V',n:['vin','gnd'],value:5},{id:'R1',type:'R',n:['vin','a'],value:220},{id:'D1',type:'D',n:['a','gnd'],preset:'led-red'},{id:'Q1',type:'NPN',n:['a','vin','gnd']}]};
-  const fl=[[{element:'D1',kind:'reverse'},{element:'R9',kind:'open'},{element:'R1',kind:'melt'},{node:'zz',kind:'open-trace'},{element:'R1',kind:'drift',factor:0},{element:'D1',kind:'drift',param:'gain'},{element:'R1',kind:'open',pin:2},{node:'a',kind:'open-trace',side:['V1','R1.1','R1.0',5]},{element:'R1',kind:'open',colour:'red'},{element:'Q1',kind:'reverse'},{element:'Q1',kind:'short',pins:[0,0]},{node:'vin',kind:'open-trace'},{node:'gnd',kind:'open-trace',side:[]},5,{element:'Q1',kind:'drift',param:'betaF',factor:'2k'}], 'x'];
+  const fl=[[{element:'D1',kind:'reverse'},{element:'R9',kind:'open'},{element:'R1',kind:'melt'},{node:'zz',kind:'open-trace'},{element:'R1',kind:'drift',factor:0},{element:'D1',kind:'drift',param:'gain'},{element:'R1',kind:'open',pin:2},{node:'a',kind:'open-trace',side:['V1','R1.1','R1.0',5]},{element:'R1',kind:'open',colour:'red'},{element:'R1',kind:'drift',add:'x'},{element:'R1',kind:'drift',add:0.5,factor:1},{element:'Q1',kind:'drift',param:'Cbe',add:1e-12},{element:'Q1',kind:'reverse'},{element:'Q1',kind:'short',pins:[0,0]},{node:'vin',kind:'open-trace'},{node:'gnd',kind:'open-trace',side:[]},5,{element:'Q1',kind:'drift',param:'betaF',factor:'2k'}], 'x'];
   const ctmp = path.join(require('os').tmpdir(), 'noema-circuit-parity.json'); fs.writeFileSync(ctmp, JSON.stringify({ cases, nl, fl }));
   const cpy = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import circuit as C; d = json.load(open(sys.argv[1], encoding='utf-8'))
 print(json.dumps({'c': [C.check(c) for c in d['cases']], 'f': [C.check_faults(d['nl'], f) for f in d['fl']]}, ensure_ascii=False))`, ctmp], { encoding: 'utf8' }));
@@ -582,7 +626,8 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
 }
 { // the runtime's own words go through tE() and exist in every UI language (the drafts)
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
-  for (const k of ['V', 'I', 'R', 'scope', 'logic', 'log', 'rssi']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
+  for (const k of ['V', 'I', 'R', 'scope', 'logic', 'bode', 'log', 'rssi', 'T', 'clock']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
+  for (const k of ['dc', 'ac', 'rms', 'avg']) keys.push('engine.act.bench.mode.' + k);   // (built: 'engine.act.bench.mode.' + mode)
   const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'); for (const m of src32.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);
   const srcPy = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js'), 'utf8'); for (const m of srcPy.matchAll(/tE\('(engine\.(?:act\.py|py)\.[a-zA-Z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);   // py-module@1: the notes and Settings
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));

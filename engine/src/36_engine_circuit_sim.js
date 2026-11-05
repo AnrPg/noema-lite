@@ -1,8 +1,10 @@
 /* ===================== interactive activities — circuit-mna@1 as an engine of sim-spec@1 (docs/INTERACTIVE_CIRCUIT.md, docs/INTERACTIVE.md §12.6–12.7) =====================
    Registers NoemaCircuit (36_engine_circuit.js) with ACT.registerEngine. A spec names it ("engine": "circuit-mna@1") and gives
-     model: { netlist (noema.circuit/v1), bindings: [{element, prop?, expr}], transient?: {tEnd, dt?}, noise?: {rel, abs} }
-     outputs: [{id, kind: 'scalar', node | branch, at? | stat?} | {id, kind: 'scalar', probe: {kind: V | I | R, …}}
-               | {id, kind: 'series', time: true | node | branch}]
+     model: { netlist (noema.circuit/v1), bindings: [{element, prop?, expr}], transient?: {tEnd, dt?}, noise?: {rel, abs},
+              ac?: {source, fStart, fStop, points?} }
+     outputs: [{id, kind: 'scalar', node | branch | power, at? | stat?} | {id, kind: 'scalar', probe: {kind: V | I | R, mode?, zin?, …}}
+               | {id, kind: 'series', time: true | node | branch | power} | {id, kind: 'series', ac: 'f' | 'db' | 'phase' | 'mag', node?, ref?}
+               | {id, kind: 'scalar', ac: 'db' | 'phase' | 'mag', node, ref?, at: frequency} | {id, kind: 'scalar', ac: 'dcDb' | 'peakDb' | 'fPeak' | 'f3db' | 'fLow3db' | 'fUnity' | 'pm', node, ref?}]
    and, for a fault-finding bench, `bench` (35_activity_sim.js renders it; this engine answers its measurements).
    The engine runs in a Worker (workerSource: the engine's own source + the adapter below); the expressions (bindings, transient
    times, `at`) are the app's NoemaExpr on the main thread (prepare), so the worker gets numbers only. The hidden fault of a bench
@@ -46,16 +48,28 @@
       return {
         run(inp) {
           const s = simFor(inp), r = {}, tr = inp.$tran;
-          let dc = null, tran = null;
+          let dc = null, tran = null, acr = null;
+          const pw = outs.filter(o => o.power !== undefined).map(o => o.power);
           const DC = () => dc || (dc = s.dc());
-          const TR = () => tran || (tran = s.transient({ tEnd: tr.tEnd, dt: tr.dt > 0 ? tr.dt : tr.tEnd / 1000 }));
+          const TR = () => tran || (tran = s.transient({ tEnd: tr.tEnd, dt: tr.dt > 0 ? tr.dt : tr.tEnd / 1000, ...(pw.length ? { power: pw } : {}) }));
+          const AC = () => acr || (acr = s.ac(inp.$ac));
           for (const o of outs) {
             try {
-              if (o.kind === 'series') { const T = TR(); r[o.id] = thin(o.time ? T.t : o.node !== undefined ? T.nodes[o.node] || [] : T.branches[o.branch] || [], MAXP); continue; }
+              if (o.ac !== undefined) {   // the AC analysis: a Bode plot's axes, or one number of it
+                const A = AC();
+                if (o.ac === 'f') { r[o.id] = A.f.slice(); continue; }
+                const gz = nm => nm === 'gnd' || nm === '0', a = gz(o.node) ? { re: A.f.map(() => 0), im: A.f.map(() => 0) } : A.nodes[o.node], b = o.ref !== undefined && !gz(o.ref) ? A.nodes[o.ref] : null;   // either ground name reads 0
+                const st = C.acStats(A.f, a.re.map((v, i) => v - (b ? b.re[i] : 0)), a.im.map((v, i) => v - (b ? b.im[i] : 0)));
+                const curve = o.ac === 'db' ? st.db : o.ac === 'phase' ? st.phase : o.ac === 'mag' ? st.db.map(d => Math.pow(10, d / 20)) : null;
+                if (o.kind === 'series') { r[o.id] = curve ? curve.slice() : []; continue; }
+                if (curve) { const fx = inp.$at ? inp.$at[o.id] : NaN; r[o.id] = fx > 0 ? at(A.f.map(Math.log), curve, Math.log(fx)) : NaN; continue; }
+                r[o.id] = st[o.ac] !== undefined ? st[o.ac] : NaN; continue;
+              }
+              if (o.kind === 'series') { const T = TR(); r[o.id] = thin(o.time ? T.t : o.power !== undefined ? T.power[o.power] || [] : o.node !== undefined ? T.nodes[o.node] || [] : T.branches[o.branch] || [], MAXP); continue; }
               if (o.probe) { const m = s.measure(o.probe); r[o.id] = typeof m.value === 'number' ? m.value : Infinity; continue; }   // (an ohmmeter over its range: ∞)
               const tw = o.at !== undefined || o.stat !== undefined;
               if (!tw) { const d = DC(); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
-              const T = TR(), v = o.node !== undefined ? T.nodes[o.node] : T.branches[o.branch];
+              const T = TR(), v = o.power !== undefined ? T.power[o.power] : o.node !== undefined ? T.nodes[o.node] : T.branches[o.branch];
               r[o.id] = !v ? NaN : o.stat !== undefined ? (STATS.includes(o.stat) ? stat(v, o.stat) : NaN) : at(T.t, v, inp.$at ? inp.$at[o.id] : NaN);
             } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
           }
@@ -66,13 +80,14 @@
           try {
             const m = simFor(inp).measure(probe);
             if (m.kind === 'scope') return { kind: 'scope', t: thin(m.t, MAXP), v: thin(m.v, MAXP), stats: m.stats };
+            if (m.kind === 'bode') return m;
             if (m.kind === 'logic') {   // over MAXP edges: the window ends just before the first edge left out (cut), so the steps drawn stay true; the stats are the whole capture's
               let t1 = m.t[m.t.length - 1], cut = false;
               for (const nm of Object.keys(m.edges)) if (m.edges[nm].length > MAXP && m.edges[nm][MAXP].t < t1) { t1 = m.edges[nm][MAXP].t; cut = true; }
               const out = {}; for (const nm of Object.keys(m.traces)) out[nm] = { level0: m.traces[nm][0], edges: m.edges[nm].filter(z => z.t < t1).slice(0, MAXP), stats: m.stats[nm] };
               return { kind: 'logic', t0: m.t[0], t1, ...(cut ? { cut: true, tEnd: m.t[m.t.length - 1] } : {}), traces: out };
             }
-            return { kind: m.kind, value: m.value };
+            return { kind: m.kind, value: m.value, ...(m.mode ? { mode: m.mode } : {}) };
           } catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
         },
       };
@@ -89,8 +104,10 @@
       const binds = (m.bindings || []).map(b => [b.element, b.prop || 'value', compile(b.expr)]);
       const tEnd = m.transient ? f(m.transient.tEnd) : null, dt = m.transient && m.transient.dt !== undefined ? f(m.transient.dt) : null;
       const ats = (spec.outputs || []).filter(o => o.at !== undefined).map(o => [o.id, f(o.at)]);
+      const acm = m.ac || null, acf = acm ? { fStart: f(acm.fStart), fStop: f(acm.fStop) } : null;
       const ev = (g, env) => { try { const v = g(env); return typeof v === 'boolean' ? v : +v; } catch (e) { return NaN; } };
-      return env => ({ ...env, $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])) });
+      return env => ({ ...env, $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])),
+        $ac: acm ? { source: acm.source, fStart: ev(acf.fStart, env), fStop: ev(acf.fStop, env), ...(acm.points !== undefined ? { points: acm.points } : {}) } : null });
     },
     create: (spec, opts) => local.noemaEngine.create(spec, opts),
     workerSource: NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);',

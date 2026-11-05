@@ -261,9 +261,10 @@ benches (a device with one hidden fault: the learner reads the battery, the curr
 Units: mAh, mA, s, V, Ω, dBm, Hz, m. In a spec: `model: {device, bindings: [{field, expr}]}` (`field` a numeric field such as
 `schedule.period`); outputs `{id, kind, of?, sensor?}`. **Scalars**: `lifeAnalytic lifeSim iAvg iAvgAnalytic chargeUsed socEnd vEnd
 vMin wakes sent attempts delivered lost deliveryRatio resets dead tDead rssiMean snrMean per airtime activeFraction`, per sensor
-`readingMean readingLast readingErr` (times in s, currents in mA). **Series** (`samples` bins): `t soc v vload current delivered
-resets rssi`; per message `rxT reading truth`; the current trace `traceT traceI`; the log `eventT eventCode` (1 reset, 2 lost, 3
-dead, 4 overrun). `lifeSim` is the time of death, else extrapolated from the charge used — simulate a month and read the life.
+`readingMean readingLast readingErr` (times in s, currents in mA), and (§5.5) `tempMin tempMax tempMean collisions slotMisses
+clockErrMax ppmMean`. **Series** (`samples` bins): `t soc v vload current delivered resets rssi temp clockErr`; per message `rxT
+reading truth`; the current trace `traceT traceI`; the log `eventT eventCode` (1 reset, 2 lost, 3 dead, 4 overrun, 5 collision, 6
+slot-miss). `lifeSim` is the time of death, else extrapolated from the charge used — simulate a month and read the life.
 
 ### 5.2 Faults (a bench fault's `apply`; hidden: they reach only the engine)
 
@@ -275,6 +276,10 @@ dead, 4 overrun). `lifeSim` is the time of death, else extrapolated from the cha
 | `antenna-detached` | `loss` (20 dB) | RSSI −20 dB, deliveries fall on a marginal link |
 | `wake-period` | `period` (s) or `factor` (0.1 ×) | 10× wakes, current and life |
 | `brownout` | `v` (3.6 V): the BOR level set too high | resets long before the battery is empty |
+| `clock-drift` | `ppm` (+200 ppm) | missed receive slots (`slot-miss` in the log) when `clock.guard` is set |
+| `sync-wake` | `nodes` (5 if the channel had none) | every node wakes in step (after a power cut): collisions on every message |
+| `busy-channel` | `nodes` (+50) | more collisions, lost messages, retries and current |
+| `sensor-tempco` | `sensor`, `coef` (0.5 per °C) | a reading that follows the temperature (with `env.swing`, a daily wave) |
 
 ### 5.3 The bench — `spec.bench` on `twin@1`
 
@@ -287,8 +292,9 @@ a board. What differs:
 - **instruments**: `V` (red lead on `vbat` or `vload`, black on `gnd`: list its points, never one at `i`), `I` (the average supply
   current: one part `{"element": "battery", "label": …}`), `scope` (the supply current over time: its points only at `i`, `tEnd`
   and `tStart` in s within `sim.trace`; the log keeps peak to peak, mean and the wake frequency, in A and Hz), and two of the
-  twin's own: `log` (the event log: resets, lost messages, overrun wake-ups) and `rssi` (the mean received signal strength, dBm);
-  these two take only `kind`. `R` and `logic` are the circuit's.
+  twin's own: `log` (the event log: resets, lost messages, overrun wake-ups, and collisions and missed slots when there are any),
+  `rssi` (the mean received signal strength, dBm), `T` (the thermometer: the last, lowest and highest temperature, °C) and `clock`
+  (the clock against a reference: the mean drift in ppm and the worst error in s); these four take only `kind`. `R` and `logic` are the circuit's.
 - **faults** `apply` is a list of §5.2 faults (`[]` = a healthy device); `NoemaTwin.checkFaults` / `twin.check_faults` check them.
 
 ```json
@@ -314,7 +320,7 @@ log for a brown-out level set too high) and a tempting wrong option ("nothing is
 NoemaTwin = { id: 'twin@1', format: 'noema.twin/v1', limits, FAULT_KINDS, SCALARS, SERIES, NUM_FIELDS, EVENT_CODES, CHEMS,
               check, checkFaults, checkSpec, create, num, source, engine, simEngine, radio: {…} }
 create(device, {seed, faults}) → { run() → {scalars, perSensor, series, readings, truth, log, logCount, counts}, measure(probe), analytic() }
-measure: {kind: 'V', a: 'vbat' | 'vload', at?} · {kind: 'I'} (A) · {kind: 'scope', node: 'i', tStart, tEnd} (A, unit: 'A') · {kind: 'log'} (→ `events`: the first 1000 entries, `count`, `counts`: per code over the whole run) · {kind: 'rssi'}
+measure: {kind: 'V', a: 'vbat' | 'vload', at?} · {kind: 'I'} (A) · {kind: 'scope', node: 'i', tStart, tEnd} (A, unit: 'A') · {kind: 'log'} (→ `events`: the first 1000 entries, `count`, `counts`: per code over the whole run) · {kind: 'rssi'} · {kind: 'T'} (→ value, min, max, °C) · {kind: 'clock'} (→ value ppm, err s)
 ```
 
 **Codes.** `check`: `format`, `value` (a number out of its kind, a custom curve that is not 0→1 rising, sense ≥ period, …),
@@ -323,7 +329,25 @@ measure: {kind: 'V', a: 'vbat' | 'vload', at?} · {kind: 'I'} (A) · {kind: 'sco
 budget: keep the slider's minimum where the budget holds (sensor-node: 30 s over 30 days).
 
 **Accuracy and limits** (`tests/twin.js`): the simulated life of a 60 s duty cycle equals capacity / average current to < 0.001 %;
-a year at a 10-minute period runs in ~100 ms. Not modelled: temperature, Peukert, regulators, ack loss, collisions, clock drift.
+a year at a 10-minute period runs in ~100 ms. Not modelled: Peukert, regulators, ack loss (§5.5 adds temperature, clock drift and
+collisions).
+
+### 5.5 Temperature, the clock and the channel (optional blocks; without them the twin is as before)
+
+- **`env: {temp = 25, swing = 0, cycle = 86400}`** — the ambient temperature `temp − swing·cos(2πt/cycle)` (°C). Below 25 °C the
+  capacity shrinks by `battery.tempCap` per °C (default per chemistry: li-ion 0.008, lifepo4 0.01, alkaline 0.015, nimh 0.01; at
+  most to 20 %) and rInt grows ×e^(0.035·(25 − T)) (a cold cell sags and browns out under TX); self-discharge doubles every 10 °C
+  and the sleep current every 15 °C above 25 °C. A sensor's `tempco` (per °C away from 25 °C) makes its reading follow the
+  temperature. The thermometer (`T`), the series `temp` and `tempMin tempMax tempMean` show it.
+- **`clock: {ppm = 0, tempco = 0, t0 = 25, guard = 0, resync = 0}`** — the crystal runs `ppm + tempco·(T − t0)²` fast (a 32 kHz
+  tuning-fork crystal: `tempco` −0.034). Its error grows between synchronisations: every `resync` s (a beacon; 0 = none) and every
+  acknowledged delivery. With `guard` > 0 the gateway listens ±guard s around the expected time: beyond it the message is a
+  `slot-miss` (logged, lost). The `clock` instrument, `clockErr`, `clockErrMax`, `ppmMean` show it.
+- **`network: {nodes = 0, period?, airtime?, jitter = 1, capture = 6, spread = 6, offset = 0}`** — `nodes` other devices on the
+  same channel (pure ALOHA), each sending for `airtime` every `period` (default: this device's). `jitter` 1 = random access
+  (Poisson arrivals in the vulnerable window), < 1 = fixed phases (0: all in step, the `sync-wake` fault). A collision destroys our
+  message unless it arrives `capture` dB stronger than the other (their level: our median + `offset` ± `spread` dB, seeded).
+  Collisions are logged (`collision`) and counted (`collisions`); with `ack` they cost retries and current.
 
 ## 6. Reference activities (`tools/activities_examples/`)
 

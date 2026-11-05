@@ -19,6 +19,7 @@ rm -rf "$T/library/subjects/demo-physics" && mv "$T/demo-physics.lib" "$T/librar
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
 node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: JS and Python agree bit for bit (docs/INTERACTIVE_SIMEXPR.md)
 node "$ROOT/tests/circuit.js"           # the circuit engine circuit-mna@1: MNA, transients, faults, instruments (docs/INTERACTIVE_CIRCUIT.md)
+node "$ROOT/tests/circuit2.js"          # the full circuit physics (docs/INTERACTIVE_CIRCUIT.md §9): AC, lines, op-amp GBW/slew, capacitances, pickup, real meters
 for e in thermal pid rf twin; do node "$ROOT/tests/$e.js"; done   # the P6 engines thermal@1, pid@1, rf@1, twin@1: JS = Python, the worker (docs/INTERACTIVE_ENGINES.md)
 node "$ROOT/tests/activities_h5p.js"    # the h5p@1 runtime with a stub host: the sandbox, scores, state, languages, hostile libraries, 0 requests (docs/INTERACTIVE_H5P.md)
 node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules (html-app, sim-spec, checks), never allow-same-origin

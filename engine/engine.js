@@ -2416,6 +2416,8 @@ APP.postMessage({t:'hello',nonce:N},'*');
         const A = sel('a', tE('engine.act.bench.red'), []), Bk = sel('b', tE('engine.act.bench.black'), []);
         lab.set(A.s, A.row.querySelector('label'));
         const part = sel('part', tE('engine.act.bench.part'), []);
+        const modeS = sel('mode', tE('engine.act.bench.mode'), []), gndS = sel('ground', tE('engine.act.bench.ground'), []);   // a multimeter's modes, a scope probe's ground leads (§9.5)
+        const modeName = q => tE('engine.act.bench.mode.' + q);
         const btn = h('button', { class: 'btn primary small', type: 'button', 'data-bench': 'measure', onclick: () => measure() }, tE('engine.act.bench.measure'));
         const left = h('span', { class: 'sim-left', 'aria-live': 'polite' });
         const faceEl = h('div', { class: 'sim-face', 'aria-live': 'polite' });
@@ -2425,7 +2427,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
         const dxOut = h('p', { class: 'sim-dx-out', 'aria-live': 'polite' });
         const another = exMode ? null : h('button', { class: 'btn ghost small', type: 'button', 'data-bench': 'another', onclick: () => newDevice() }, '↻ ' + tE('engine.act.bench.another'));
         const cur = () => bn.instruments.find(x => x.kind === inst.s.value) || bn.instruments[0];
-        const whole = k => k === 'log' || k === 'rssi';   // twin@1: the event log and the radio's RSSI read the device, not a point
+        const whole = k => k === 'log' || k === 'rssi' || k === 'T' || k === 'clock';   // twin@1: the event log, the RSSI, the thermometer and the clock check read the device, not a point
         function setInstrument() {
           const x = cur(), two = x.kind === 'V' || x.kind === 'R', ids = x.points || bn.points.map(p => p.id);
           const keep = (s, items, fallback) => { const v = s.value; s.replaceChildren(...items.map(o => h('option', { value: o.value }, o.text))); s.value = items.some(o => o.value === v) ? v : fallback; };
@@ -2435,8 +2437,12 @@ APP.postMessage({t:'hello',nonce:N},'*');
             keep(A.s, ptItems(ids), ids.find(id => id !== g) || ids[0]);
             if (two) keep(Bk.s, ptItems(ids), g);
           }
+          const ms = Array.isArray(x.modes) ? x.modes : [], ls = Array.isArray(x.leads) ? x.leads : [];
+          keep(modeS.s, ms.map(q => ({ value: q, text: modeName(q) })), ms[0] || '');
+          keep(gndS.s, ls.map((q, i) => ({ value: String(i), text: tt(q.label) })), '0');
           lab.get(A.s).textContent = two ? tE('engine.act.bench.red') : tE('engine.act.bench.probe');
           A.row.hidden = x.kind === 'I' || whole(x.kind); Bk.row.hidden = !two; part.row.hidden = x.kind !== 'I';
+          modeS.row.hidden = ms.length < 2; gndS.row.hidden = ls.length < 2;
         }
         inst.s.addEventListener('change', setInstrument);
         dxSel.s.addEventListener('change', () => {
@@ -2447,28 +2453,41 @@ APP.postMessage({t:'hello',nonce:N},'*');
         });
         const tval = (v, d) => { const g = typeof v === 'string' ? C(v) : null; return g ? ev(g, base()) : (v === undefined ? d : v); };
         function probeOf(x) {
-          if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}) }, ev: { i: 'I', part: +part.s.value } }; }
+          const tw = x.tEnd === undefined ? {} : { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
+          const mode = Array.isArray(x.modes) && x.modes.length ? (x.modes.includes(modeS.s.value) ? modeS.s.value : x.modes[0]) : null;
+          const md = mode ? { mode } : {}, zin = x.zin !== undefined ? { zin: x.zin } : {};
+          if (x.kind === 'I') { const q = x.parts[+part.s.value] || x.parts[0]; return { probe: { kind: 'I', element: q.element, ...(q.pin !== undefined ? { pin: q.pin } : {}), ...md, ...tw }, ev: { i: 'I', part: +part.s.value, ...(mode ? { m: mode } : {}) } }; }
           if (whole(x.kind)) return { probe: { kind: x.kind }, ev: { i: x.kind } };
           const a = pt(A.s.value), b = Bk.s.value ? pt(Bk.s.value) : null;
-          if (x.kind === 'V' || x.kind === 'R') return { probe: { kind: x.kind, a: a.at, b: b ? b.at : 'gnd' }, ev: { i: x.kind, a: a.id, b: b?.id } };
-          const tw = { tEnd: tval(x.tEnd), ...(x.dt !== undefined ? { dt: tval(x.dt) } : {}), ...(x.tStart !== undefined ? { tStart: tval(x.tStart) } : {}) };
-          if (x.kind === 'scope') return { probe: { kind: 'scope', node: a.at, ref: 'gnd', ...tw }, ev: { i: 'scope', a: a.id } };
-          return { probe: { kind: 'logic', nodes: [a.at], ...(x.threshold !== undefined ? { threshold: tval(x.threshold) } : {}), ...tw }, ev: { i: 'logic', a: a.id }, node: a.at };
+          if (x.kind === 'R') return { probe: { kind: 'R', a: a.at, b: b ? b.at : 'gnd' }, ev: { i: 'R', a: a.id, b: b?.id } };
+          if (x.kind === 'V') return { probe: { kind: 'V', a: a.at, b: b ? b.at : 'gnd', ...zin, ...md, ...tw }, ev: { i: 'V', a: a.id, b: b?.id, ...(mode ? { m: mode } : {}) } };
+          if (x.kind === 'bode') return { probe: { kind: 'bode', node: a.at, ref: 'gnd', source: x.source, fStart: tval(x.fStart), fStop: tval(x.fStop), ...(x.fPoints ? { points: x.fPoints } : {}) }, ev: { i: 'bode', a: a.id } };
+          if (x.kind === 'scope') {
+            const ls = Array.isArray(x.leads) ? x.leads : [], gi = ls.length ? Math.min(ls.length - 1, +gndS.s.value || 0) : -1, l = gi >= 0 ? ls[gi] : null;
+            return { probe: { kind: 'scope', node: a.at, ref: 'gnd', ...zin, ...(l ? { lead: l.lead, ...(l.cin !== undefined ? { cin: l.cin } : {}) } : {}), ...tw }, ev: { i: 'scope', a: a.id, ...(l ? { g: gi } : {}) } };
+          }
+          return { probe: { kind: 'logic', nodes: [a.at], ...zin, ...(x.threshold !== undefined ? { threshold: tval(x.threshold) } : {}), ...tw }, ev: { i: 'logic', a: a.id }, node: a.at };
         }
         function paintLeft() {
           left.textContent = budget ? tE('engine.act.bench.left', { left: Math.max(0, budget - count) }) : '';
           btn.disabled = done || (budget && count >= budget);
-          for (const s of [inst.s, A.s, Bk.s, part.s, dxSel.s]) s.disabled = done;
+          for (const s of [inst.s, A.s, Bk.s, part.s, modeS.s, gndS.s, dxSel.s]) s.disabled = done;
           if (dxBtn) dxBtn.disabled = done;
         }
         const fm = (v, unit) => fmtNum(v, { format: 'si', unit, digits: 3 }, locale);
+        const withMode = (txt, r) => (r.mode && r.mode !== 'dc' ? txt + ' ' + modeName(r.mode) : txt);
         function reading(r) {   // the reading in words and numbers (never the fault)
           if (!r || r.error) return tE('engine.act.bench.failed');
-          if (r.kind === 'V') return fm(r.value, 'V');
-          if (r.kind === 'I') return fm(r.value, 'A');
+          if (r.kind === 'V') return withMode(fm(r.value, 'V'), r);
+          if (r.kind === 'I') return withMode(fm(r.value, 'A'), r);
+          if (r.kind === 'T') { const c = v => fmtNum(v, { format: 'fixed', digits: 1, unit: '°C' }, locale); return tE('engine.act.bench.tempStats', { now: c(r.value), min: c(r.min), max: c(r.max) }); }
+          if (r.kind === 'clock') return tE('engine.act.bench.clockStats', { ppm: fmtNum(r.value, { format: 'fixed', digits: 1, unit: 'ppm' }, locale), err: fm(r.err, 's') });
+          if (r.kind === 'bode') { const st = r.stats || {}, db = v => (isNum(v) ? fmtNum(v, { format: 'fixed', digits: 1, unit: 'dB' }, locale) : '—'), hz = v => (isNum(v) && v > 0 ? fm(v, 'Hz') : '—');
+            return tE('engine.act.bench.bodeStats', { dc: db(st.dcDb), peak: db(st.peakDb), f3db: hz(st.f3db), unity: hz(st.fUnity) }); }
           if (r.kind === 'R') return r.value === 'OL' ? 'OL' : fm(r.value, 'Ω');   // i18n-ignore (the meter's own display)
           if (r.kind === 'rssi') return fmtNum(r.value, { format: 'fixed', digits: 1, unit: 'dBm' }, locale);
-          if (r.kind === 'log') { const n = logCounts(r); return tE('engine.act.bench.logStats', { resets: n.reset, lost: n.lost, overruns: n.overrun }); }
+          if (r.kind === 'log') { const n = logCounts(r), c = n.collision || 0, sm = n['slot-miss'] || 0;
+            return c || sm ? tE('engine.act.bench.logStats2', { resets: n.reset || 0, lost: n.lost || 0, overruns: n.overrun || 0, collisions: c, missed: sm }) : tE('engine.act.bench.logStats', { resets: n.reset, lost: n.lost, overruns: n.overrun }); }
           const u = r.unit === 'A' ? 'A' : 'V';   // a scope shows a voltage, or (twin@1) the supply current
           if (r.kind === 'scope') return tE('engine.act.bench.scopeStats', { pp: fm(r.stats.pp, u), mean: fm(r.stats.mean, u), freq: r.stats.freq > 0 ? fm(r.stats.freq, 'Hz') : '—' });
           const st = Object.values(r.traces || {})[0]?.stats || {};
@@ -2487,12 +2506,13 @@ APP.postMessage({t:'hello',nonce:N},'*');
           if (r.kind === 'scope') return { kind: 'scope', stats: r.stats, ...(r.unit ? { unit: r.unit } : {}) };
           if (r.kind === 'log') return { kind: 'log', counts: logCounts(r) };
           if (r.kind === 'logic') return { kind: 'logic', traces: Object.fromEntries(Object.entries(r.traces || {}).map(([k, v]) => [k, { stats: v.stats }])) };
+          if (r.kind === 'bode') return { kind: 'bode', stats: r.stats };
           return r;
         }
         function where(e) {
           if (e.i === 'I') return tt(bn.instruments.find(x => x.kind === 'I')?.parts?.[e.part]?.label);
-          const a = pt(e.a), b = e.b ? pt(e.b) : null;
-          return a ? tt(a.label) + (b ? ' → ' + tt(b.label) : '') : '';
+          const a = pt(e.a), b = e.b ? pt(e.b) : null, l = e.i === 'scope' && Number.isInteger(e.g) ? bn.instruments.find(x => x.kind === 'scope')?.leads?.[e.g] : null;
+          return a ? tt(a.label) + (b ? ' → ' + tt(b.label) : '') + (l ? ' (' + tt(l.label) + ')' : '') : '';
         }
         function paintLog() {
           logEl.replaceChildren(...log.map(e => h('li', {}, h('span', { class: 'sim-log-i' }, instName(e.i)), ' ' + where(e) + ': ', h('b', {}, e.r === undefined ? '…' : reading(e.r)))));
@@ -2500,11 +2520,14 @@ APP.postMessage({t:'hello',nonce:N},'*');
         }
         function showFace(e) {
           const r = e.r; faceEl.replaceChildren();
-          if (!r || r.error || r.kind === 'V' || r.kind === 'I' || r.kind === 'R' || r.kind === 'rssi' || r.kind === 'log') { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
+          if (!r || r.error || !(r.kind === 'scope' || r.kind === 'logic' || (r.kind === 'bode' && Array.isArray(r.f)))) { faceEl.append(h('div', { class: 'sim-meter' }, h('span', { class: 'sim-meter-i' }, instName(e.i)), h('output', { class: 'sim-meter-v' }, reading(r)))); return; }
           const fig = h('figure', { class: 'sim-plot sim-scope' }); faceEl.append(fig);
-          const xl = tE('engine.act.bench.time') + ' (s)';
-          let p, data, yl;
-          if (r.kind === 'scope') {
+          let xl = tE('engine.act.bench.time') + ' (s)', p, data, yl;
+          if (r.kind === 'bode') {   // the gain over frequency (log axis)
+            xl = tE('engine.act.bench.frequency') + ' (Hz)'; yl = tE('engine.act.bench.gain') + ' (dB)';
+            p = { x: { label: 'x', unit: 'Hz', format: 'si', scale: 'log' }, y: { label: 'y', unit: 'dB', digits: 1 } };
+            data = { xs: r.f, lines: [{ ys: r.db }], marks: [], xr: [r.f[0], r.f[r.f.length - 1]], yr: [null, null] };
+          } else if (r.kind === 'scope') {
             const cur = r.unit === 'A';
             yl = cur ? tE('engine.act.bench.current') + ' (A)' : tE('engine.act.bench.voltage') + ' (V)';
             p = { x: { label: 'x', unit: 's', format: 'si' }, y: { label: 'y', unit: cur ? 'A' : 'V', ...(cur ? { format: 'si' } : {}) } };
@@ -2529,7 +2552,10 @@ APP.postMessage({t:'hello',nonce:N},'*');
           out('event', { name: 'measure', data: { ...m.ev } });
           runner.measure(prep(base()), m.probe, r => {
             if (closed) return;
-            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' ? r : r.kind === 'log' && !r.error ? { kind: 'log', counts: logCounts(r) } : { kind: r.kind, value: r.value, error: r.error }) : { error: 'none' };
+            e.r = r && typeof r === 'object' ? (r.kind === 'scope' || r.kind === 'logic' || r.kind === 'bode' ? r : r.kind === 'log' && !r.error ? { kind: 'log', counts: logCounts(r) }
+              : r.error ? { kind: r.kind, error: r.error }
+              : r.kind === 'T' ? { kind: 'T', value: r.value, min: r.min, max: r.max } : r.kind === 'clock' ? { kind: 'clock', value: r.value, err: r.err }
+              : { kind: r.kind, value: r.value, error: r.error, ...(r.mode ? { mode: r.mode } : {}) }) : { error: 'none' };
             paintLog(); showFace(e); saveSoon();
           });
         }
@@ -2554,7 +2580,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
         }
         setInstrument(); paintLog(); paintLeft();
         if (savedB && savedB.done && dx != null) reveal();
-        const ctl = h('div', { class: 'sim-bctl' }, inst.row, A.row, Bk.row, part.row, h('div', { class: 'sim-brow' }, btn, left));
+        const ctl = h('div', { class: 'sim-bctl' }, inst.row, A.row, Bk.row, part.row, modeS.row, gndS.row, h('div', { class: 'sim-brow' }, btn, left));
         const el = h('section', { class: 'sim-bench' },
           h('div', { class: 'sim-binst' }, ctl, faceEl),
           h('h5', { class: 'sim-bh' }, tE('engine.act.bench.log')), logEmpty, logEl,
@@ -4311,6 +4337,9 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
    A small, deterministic circuit simulator for the electronics benches of tier B (sim-spec@1): RC/RLC transients, filters, PWM and
    fault-finding benches (a virtual device with a hidden fault; the learner measures, then diagnoses). Pure JS, no DOM, no text for the
    learner: it gives codes and numbers only, the activity host words them.
+   Also: AC small-signal analysis (Bode), lossless transmission lines, op-amp gain-bandwidth / slew / offset / output resistance, device
+   capacitances, Zener/TVS breakdown, a voltage-controlled switch, mains pickup on floating nodes, meters with input resistance and
+   DC / AC / true-RMS / average-responding modes, scope probes with a ground lead, switching power (§9 of the doc).
    How: Modified Nodal Analysis (node voltages + the currents of voltage-defined branches), a dense LU with partial pivoting (circuits
    are small: at most 60 nodes), Newton–Raphson with junction limiting, gmin stepping and source stepping for the nonlinear parts,
    trapezoidal integration with a backward-Euler step at the start and on every step that holds a source discontinuity.
@@ -4366,7 +4395,49 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
   };
   const SHORT_PINS = { NPN: [0, 2], PNP: [0, 2], NMOS: [0, 2], PMOS: [0, 2], OPAMP: [0, 1] };
   const DRIFT_PARAM = { R: 'value', C: 'value', L: 'value', V: 'value', I: 'value', D: 'Is', SW: 'Ron', NPN: 'betaF', PNP: 'betaF', NMOS: 'k', PMOS: 'k', OPAMP: 'gain' };
-  const NONLINEAR = new Set(['D', 'NPN', 'PNP', 'NMOS', 'PMOS', 'OPAMP']);
+  const NONLINEAR = new Set(['D', 'NPN', 'PNP', 'NMOS', 'PMOS', 'OPAMP', 'VSW']);
+
+  // ---- the second-generation model (docs/INTERACTIVE_CIRCUIT.md §9): line, voltage-controlled switch, device capacitances, breakdown, op-amp dynamics,
+  //      pickup on floating nodes, real instruments, AC analysis. {version: 1} switches it all off (the first model, kept for comparisons in tests/circuit2.js) ----
+  const TYPES2 = Object.assign({}, TYPES, { TLINE: [2, 4], VSW: [4] });
+  const PARAMS2 = Object.assign({}, PARAMS, {
+    D: Object.assign({}, PARAMS.D, { Cj: 'nonneg', Bv: 'pos', Ibv: 'pos' }),
+    NPN: Object.assign({}, PARAMS.NPN, { Cbe: 'nonneg', Cbc: 'nonneg' }), PNP: Object.assign({}, PARAMS.PNP, { Cbe: 'nonneg', Cbc: 'nonneg' }),
+    NMOS: Object.assign({}, PARAMS.NMOS, { Cgs: 'nonneg', Cgd: 'nonneg', Cds: 'nonneg', body: 'bool' }),
+    PMOS: Object.assign({}, PARAMS.PMOS, { Cgs: 'nonneg', Cgd: 'nonneg', Cds: 'nonneg', body: 'bool' }),
+    OPAMP: Object.assign({}, PARAMS.OPAMP, { gbw: 'pos', slew: 'pos', rout: 'nonneg', vos: 'fin', ib: 'fin' }),
+    TLINE: { z0: 'pos', td: 'pos', len: 'pos', vf: 'vf' }, VSW: { Ron: 'pos', Roff: 'pos', Von: 'fin', Voff: 'fin' },
+  });
+  const DEFAULTS2 = Object.assign({}, DEFAULTS, { TLINE: { z0: 50, vf: 0.66 }, VSW: { Ron: 0.01, Roff: 1e9, Von: 2, Voff: 1 } });
+  const PRESETS2 = (() => {
+    const P = {};
+    for (const t of Object.keys(PRESETS)) { P[t] = {}; for (const k of Object.keys(PRESETS[t])) P[t][k] = Object.assign({}, PRESETS[t][k]); }
+    const add = (t, k, v) => { P[t] = P[t] || {}; P[t][k] = Object.assign(P[t][k] || {}, v); };
+    add('D', '1n4148', { Cj: 4e-12, Bv: 100 }); add('D', '1n4001', { Cj: 15e-12, Bv: 50 });
+    for (const k of ['led-red', 'led-orange', 'led-yellow', 'led-green', 'led-blue', 'led-white']) add('D', k, { Cj: 20e-12 });
+    add('D', '1n5819', { Is: 3e-6, n: 1.05, Cj: 110e-12, Bv: 40 });                     // a Schottky: 0.35 V at 1 A
+    add('D', 'bzx55c3v3', { Is: 1e-14, n: 1, Bv: 3.3, Ibv: 5e-3, Cj: 300e-12 });       // Zeners: Bv at Ibv
+    add('D', 'bzx55c5v1', { Is: 1e-14, n: 1, Bv: 5.1, Ibv: 5e-3, Cj: 200e-12 });
+    add('D', 'smbj5.0a', { Is: 1e-12, n: 1, Bv: 6.4, Ibv: 1e-3, Cj: 2e-9 });            // a 5 V TVS
+    add('NPN', '2n3904', { Cbe: 8e-12, Cbc: 3.6e-12 }); add('NPN', '2n2222', { Cbe: 25e-12, Cbc: 8e-12 }); add('NPN', 'bc547', { Cbe: 10e-12, Cbc: 4e-12 });
+    add('PNP', '2n3906', { Cbe: 10e-12, Cbc: 4.5e-12 }); add('PNP', 'bc557', { Cbe: 10e-12, Cbc: 4.5e-12 });
+    add('NMOS', '2n7000', { Cgs: 20e-12, Cgd: 5e-12, Cds: 11e-12 }); add('NMOS', 'bs170', { Cgs: 20e-12, Cgd: 5e-12, Cds: 10e-12 });
+    add('NMOS', 'irlz44n', { Cgs: 1.5e-9, Cgd: 0.25e-9, Cds: 0.4e-9, body: true });
+    add('PMOS', 'bs250', { Cgs: 20e-12, Cgd: 5e-12, Cds: 10e-12 }); add('PMOS', 'irf9540', { Cgs: 1.2e-9, Cgd: 0.2e-9, Cds: 0.5e-9, body: true });
+    P.OPAMP = {
+      lm358: { gain: 1e5, gbw: 1e6, slew: 0.3e6, rout: 50, headroom: 1.2 }, lm741: { gain: 2e5, gbw: 1e6, slew: 0.5e6, rout: 75, headroom: 1.5 },
+      tl072: { gain: 2e5, gbw: 3e6, slew: 13e6, rout: 100, headroom: 1.5 }, ne5532: { gain: 1e5, gbw: 10e6, slew: 9e6, rout: 30, headroom: 1.5 },
+      mcp6002: { gain: 1e5, gbw: 1e6, slew: 0.6e6, rout: 100, headroom: 0.025 },
+    };
+    return P;
+  })();
+  const SHORT_PINS2 = Object.assign({}, SHORT_PINS, { TLINE: [0, 1], VSW: [0, 1] });
+  const DRIFT_PARAM2 = Object.assign({}, DRIFT_PARAM, { TLINE: 'z0', VSW: 'Ron' });
+  const ROP = 1e6, GCL = 10, C0 = 299792458;   // the op-amp's internal pole: a 1 MΩ node, clamped softly near its rails; the speed of light
+  const PICKUP = { hum: 50, amp: 1, noise: 0.3, bw: 500, wander: 0.3, r: 1e8 };     // what a node with no DC path picks up 
+  const MODES = ['dc', 'ac', 'rms', 'avg'];
+  const tbl = ver => (ver === 2 ? { T: TYPES2, P: PARAMS2, D: DEFAULTS2, PR: PRESETS2, SP: SHORT_PINS2, DP: DRIFT_PARAM2 } : { T: TYPES, P: PARAMS, D: DEFAULTS, PR: PRESETS, SP: SHORT_PINS, DP: DRIFT_PARAM });
+  const verOf = o => (o === 1 || (o && o.version === 1) ? 1 : 2);   // 2 = everything (the default); {version: 1} = the first model, kept for comparisons in the tests
 
   // ---- waveforms of the V and I sources ----
   const WAVE_FIELDS = {
@@ -4374,13 +4445,15 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     sine: { offset: 'fin', amp: 'fin!', freq: 'pos!', phase: 'fin', delay: 'nonneg' },
     pwm: { v: 'fin!', freq: 'pos!', duty: 'unit!', low: 'fin', delay: 'nonneg' },
   };
+  const WAVE_FIELDS2 = Object.assign({}, WAVE_FIELDS, { noise: { rms: 'nonneg!', bw: 'pos!', offset: 'fin', seed: 'fin' } });
   /** canonical form: {kind:'dc', dc} | {kind:'pulse', v1, v2, …} | … (numbers parsed, defaults filled) */
   function canonWave(spec) {
     if (!isObj(spec)) return { kind: 'dc', dc: num(spec) };
     if (spec.dc !== undefined) return { kind: 'dc', dc: num(spec.dc) };
-    for (const kind of ['pulse', 'sine', 'pwm']) if (spec[kind] !== undefined) {
+    for (const kind of ['pulse', 'sine', 'pwm', 'noise']) if (spec[kind] !== undefined) {
       const q = spec[kind] || {}, w = { kind };
-      for (const f of Object.keys(WAVE_FIELDS[kind])) w[f] = q[f] === undefined ? undefined : num(q[f]);
+      for (const f of Object.keys(WAVE_FIELDS2[kind])) w[f] = q[f] === undefined ? undefined : num(q[f]);
+      if (kind === 'noise') { w.offset = w.offset || 0; w.seed = w.seed || 0; return w; }
       if (kind === 'pulse') {
         w.delay = w.delay || 0; w.rise = w.rise || 0; w.fall = w.fall || 0; w.period = w.period || 0;
         if (w.width === undefined) w.width = w.period > 0 ? (w.period - w.rise - w.fall) / 2 : Infinity;
@@ -4393,12 +4466,31 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
   }
   function scaleWave(w, f) {
     const s = Object.assign({}, w);
-    for (const k of ['dc', 'v1', 'v2', 'offset', 'amp', 'v', 'low']) if (typeof s[k] === 'number') s[k] *= f;
+    for (const k of ['dc', 'v1', 'v2', 'offset', 'amp', 'v', 'low', 'rms', 'humAmp', 'wander']) if (typeof s[k] === 'number') s[k] *= f;
     return s;
   }
+  function shiftWave(w, d) {   // drift {add}: every level moves by d
+    const s = Object.assign({}, w);
+    for (const k of ['dc', 'v1', 'v2', 'offset', 'v', 'low']) if (typeof s[k] === 'number') s[k] += d;
+    return s;
+  }
+  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
   /** → {at(t), avg, at0m (the value at t = 0⁻), next(t): the first breakpoint after t (Infinity if none)} */
   function wave(w) {
     if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
+    if (w.kind === 'noise') {   // seeded band-limited noise (straight lines between Gaussian samples 1/(2·bw) apart), plus the pickup's hum and slow wander
+      const hold = w.hold || { shift: 0 }, sd = w.seed >>> 0, dn = 1 / (2 * w.bw), dw = 1;
+      const g = (tag, i) => gauss(mulberry32(hash32(tag + i, sd)));
+      const lerp = (tag, u) => { const i = Math.floor(u), f = u - i; return g(tag, i) * (1 - f) + g(tag, i + 1) * f; };
+      const at = t => {
+        const tt = t + hold.shift;
+        let v = w.offset + w.rms * lerp('n', tt / dn);
+        if (w.wander) v += w.wander * lerp('w', tt / dw);
+        if (w.humAmp && w.hum > 0) v += w.humAmp * Math.sin(2 * Math.PI * w.hum * tt);
+        return v;
+      };
+      return { at, avg: w.offset, get at0m() { return at(0); }, next: () => Infinity, noise: true };
+    }
     if (w.kind === 'sine') {
       const ph = w.phase * Math.PI / 180, om = 2 * Math.PI * w.freq;
       const at = t => w.offset + w.amp * Math.sin(t < w.delay ? ph : om * (t - w.delay) + ph);
@@ -4450,18 +4542,19 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       case 'pos': return x > 0;
       case 'nonneg': return x >= 0;
       case 'unit': return x >= 0 && x <= 1;
+      case 'vf': return x > 0 && x <= 1;
       case 'bool': return typeof v === 'boolean';
       case 'rails': return Array.isArray(v) && v.length === 2 && num(v[0]) < num(v[1]);
       default: return Number.isFinite(x);
     }
   }
-  function checkWave(v, path, E) {
+  function checkWave(v, path, E, ver) {
     if (!isObj(v)) { if (!Number.isFinite(num(v))) E('value', path, 'needs a number or a waveform'); return; }
-    const keys = Object.keys(v);
-    if (keys.length !== 1 || !['dc', 'pulse', 'sine', 'pwm'].includes(keys[0])) { E('value', path, 'one of dc, pulse, sine, pwm'); return; }
+    const keys = Object.keys(v), kinds = ver === 2 ? ['dc', 'pulse', 'sine', 'pwm', 'noise'] : ['dc', 'pulse', 'sine', 'pwm'];
+    if (keys.length !== 1 || !kinds.includes(keys[0])) { E('value', path, 'one of ' + kinds.join(', ')); return; }
     const kind = keys[0];
     if (kind === 'dc') { if (!Number.isFinite(num(v.dc))) E('value', path + '.dc', 'needs a number'); return; }
-    const q = v[kind], F = WAVE_FIELDS[kind];
+    const q = v[kind], F = WAVE_FIELDS2[kind];
     if (!isObj(q)) { E('value', path + '.' + kind, 'needs an object'); return; }
     for (const k of Object.keys(q)) if (!Object.prototype.hasOwnProperty.call(F, k)) E('value', `${path}.${kind}.${k}`, 'unknown field');
     for (const [k, spec] of Object.entries(F)) {
@@ -4475,8 +4568,9 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     }
   }
   const EL_KEYS = new Set(['id', 'type', 'n', 'value', 'ic', 'params', 'preset', 'on', 'label', 'note']);
-  function check(nl) {
-    const P = [];
+  const PICKUP_FIELDS = { hum: 'nonneg', amp: 'nonneg', noise: 'nonneg', bw: 'pos', wander: 'nonneg', offset: 'fin', r: 'pos' };
+  function check(nl, opts) {
+    const ver = verOf(opts), TB = tbl(ver), P = [];
     const E = (code, path, msg) => { P.push({ code, path, msg, level: 'error' }); };
     const W = (code, path, msg) => { P.push({ code, path, msg, level: 'warning' }); };
     if (!isObj(nl)) { E('format', '', 'netlist is not an object'); return P; }
@@ -4484,12 +4578,20 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     if (!Array.isArray(nl.nodes)) E('format', 'nodes', 'not an array');
     if (!Array.isArray(nl.elements)) E('format', 'elements', 'not an array');
     if (P.length) return P;
-    for (const k of Object.keys(nl)) if (!['format', 'nodes', 'elements', 'meta'].includes(k)) W('unknown-field', k, 'ignored');
+    for (const k of Object.keys(nl)) if (!['format', 'nodes', 'elements', 'meta'].concat(ver === 2 ? ['pickup'] : []).includes(k)) W('unknown-field', k, 'ignored');
+    if (ver === 2 && nl.pickup !== undefined) {
+      if (nl.pickup !== false && !isObj(nl.pickup)) E('value', 'pickup', 'false, or {hum, amp, noise, bw, wander, offset, r}');
+      else if (isObj(nl.pickup)) for (const [k, v] of Object.entries(nl.pickup)) {
+        if (!Object.prototype.hasOwnProperty.call(PICKUP_FIELDS, k)) E('value', 'pickup.' + k, 'unknown field');
+        else if (!checkNumber(PICKUP_FIELDS[k], v)) E('value', 'pickup.' + k, 'out of range');
+      }
+    }
     const names = new Set(), labels = new Map(), nodeAt = new Map();
     nl.nodes.forEach((x, i) => {
       const nm = typeof x === 'string' ? x : isObj(x) ? x.name : undefined;
       if (typeof nm !== 'string' || !NODE_RE.test(nm)) { E('node-name', `nodes[${i}]`, 'bad node name'); return; }
       if (names.has(nm) || labels.has(nm)) { E('dup-node', `nodes[${i}]`, 'duplicate node ' + nm); return; }
+      if (ver === 2 && isObj(x) && x.pickup !== undefined && typeof x.pickup !== 'boolean') E('value', `nodes[${i}].pickup`, 'needs true or false');
       if (isObj(x) && x.probe !== undefined) {
         if (isGnd(nm)) { E('node-name', `nodes[${i}]`, 'ground cannot be a label'); return; }
         labels.set(nm, { to: x.probe, i });
@@ -4506,8 +4608,8 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       if (typeof el.id !== 'string' || !ID_RE.test(el.id)) E('id', at + '.id', 'bad id');
       else if (ids.has(el.id)) E('dup-id', at + '.id', 'duplicate id ' + el.id); else ids.add(el.id);
       const t = el.type;
-      if (typeof t !== 'string' || !Object.prototype.hasOwnProperty.call(TYPES, t)) { E('type', at + '.type', 'unknown type'); return; }
-      if (!Array.isArray(el.n) || !TYPES[t].includes(el.n.length)) { E('pins', at + '.n', 'wrong number of terminals'); return; }
+      if (typeof t !== 'string' || !Object.prototype.hasOwnProperty.call(TB.T, t)) { E('type', at + '.type', 'unknown type'); return; }
+      if (!Array.isArray(el.n) || !TB.T[t].includes(el.n.length)) { E('pins', at + '.n', 'wrong number of terminals'); return; }
       el.n.forEach((m, k) => {
         if (labels.has(m)) E('probe-only', `${at}.n[${k}]`, 'a probe-only label cannot be a terminal');
         else if (typeof m !== 'string' || !(names.has(m) || isGnd(m))) E('unknown-node', `${at}.n[${k}]`, 'unknown node ' + m);
@@ -4517,15 +4619,16 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         else if (!(num(el.value) > 0)) E('value', at + '.value', 'needs a positive number');
         if (el.ic !== undefined && (t === 'R' || !Number.isFinite(num(el.ic)))) E('value', at + '.ic', 'needs a number');
       } else if (t === 'V' || t === 'I') {
-        if (el.value === undefined) E('value', at + '.value', 'missing value'); else checkWave(el.value, at + '.value', E);
+        if (el.value === undefined) E('value', at + '.value', 'missing value'); else checkWave(el.value, at + '.value', E, ver);
       } else if (el.value !== undefined) E('value', at + '.value', 'this type takes params, not a value');
       if (el.ic !== undefined && t !== 'C' && t !== 'L') E('value', at + '.ic', 'only C and L have ic');
       if (el.on !== undefined && (t !== 'SW' || typeof el.on !== 'boolean')) E('value', at + '.on', 'only SW has on (true/false)');
-      if (el.preset !== undefined && !(PRESETS[t] && typeof el.preset === 'string' && Object.prototype.hasOwnProperty.call(PRESETS[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
+      if (el.preset !== undefined && !(TB.PR[t] && typeof el.preset === 'string' && Object.prototype.hasOwnProperty.call(TB.PR[t], el.preset))) E('preset', at + '.preset', 'unknown preset');
+      if (t === 'TLINE' && !(isObj(el.params) && (el.params.td !== undefined || el.params.len !== undefined))) E('param', at + '.params', 'a line needs td (s) or len (m)');
       if (el.params !== undefined) {
         if (!isObj(el.params)) E('param', at + '.params', 'not an object');
         else for (const [k, v] of Object.entries(el.params)) {
-          const kd = Object.prototype.hasOwnProperty.call(PARAMS[t], k) ? PARAMS[t][k] : null;
+          const kd = Object.prototype.hasOwnProperty.call(TB.P[t], k) ? TB.P[t][k] : null;
           if (!kd) E('param', `${at}.params.${k}`, 'unknown parameter');
           else if (!checkNumber(kd, v)) E('param', `${at}.params.${k}`, 'out of range');
         }
@@ -4541,8 +4644,13 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       const n = el.n;
       if ((el.type === 'V' || el.type === 'L') && !VL.u(n[0], n[1])) E('vloop', `elements[${i}]`, 'loop of voltage sources / inductors');
       if (el.type === 'OPAMP' && !VL.u(n[2], G0)) E('vloop', `elements[${i}]`, 'op-amp output on a voltage-defined node');
-      if (n.length === 2 && el.type !== 'V' && el.type !== 'L' && key(n[0]) === key(n[1])) W('self-loop', `elements[${i}]`, 'both terminals on one node');
-      if (['R', 'L', 'V', 'D', 'SW'].includes(el.type)) DCP.u(n[0], n[1]);
+      if (el.type === 'TLINE') {
+        const q = n.length === 4 ? n : [n[0], G0, n[1], G0];
+        for (const [x, y] of [[q[0], q[2]], [q[1], q[3]]]) if (key(x) !== key(y) && !VL.u(x, y)) E('vloop', `elements[${i}]`, 'loop of voltage sources / inductors / lines');
+        DCP.u(q[0], q[2]); DCP.u(q[1], q[3]);
+      }
+      if (n.length === 2 && el.type !== 'V' && el.type !== 'L' && el.type !== 'TLINE' && key(n[0]) === key(n[1])) W('self-loop', `elements[${i}]`, 'both terminals on one node');
+      if (['R', 'L', 'V', 'D', 'SW', 'VSW'].includes(el.type)) DCP.u(n[0], n[1]);
       else if (el.type === 'NPN' || el.type === 'PNP') { DCP.u(n[0], n[1]); DCP.u(n[1], n[2]); }
       else if (el.type === 'NMOS' || el.type === 'PMOS') DCP.u(n[0], n[2]);
       else if (el.type === 'OPAMP') DCP.u(n[2], G0);
@@ -4560,8 +4668,8 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       the validators run it on a bench's faults before the app ever compiles them). Twin: tools/circuit.py check_faults. */
   const FAULT_KINDS = ['open', 'short', 'drift', 'open-trace', 'reverse'];
   const FAULT_KEYS = new Set(['kind', 'element', 'pin', 'pins', 'factor', 'param', 'node', 'side']);
-  function checkFaults(nl, faults) {
-    const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
+  function checkFaults(nl, faults, opts) {
+    const ver = verOf(opts), TB = tbl(ver), P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
     if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
     const els = isObj(nl) && Array.isArray(nl.elements) ? nl.elements.filter(isObj) : [];
     const byId = new Map(els.map(e => [e.id, e]));
@@ -4571,7 +4679,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     faults.forEach((f, i) => {
       const at = `faults[${i}]`;
       if (!isObj(f)) { E(at, 'a fault is an object {element | node, kind}'); return; }
-      for (const k of Object.keys(f)) if (!FAULT_KEYS.has(k)) E(`${at}.${k}`, 'unknown field');
+      for (const k of Object.keys(f)) if (!FAULT_KEYS.has(k) && !(ver === 2 && k === 'add')) E(`${at}.${k}`, 'unknown field');
       if (!FAULT_KINDS.includes(f.kind)) { E(at + '.kind', 'one of ' + FAULT_KINDS.join(', ')); return; }
       if (f.kind === 'open-trace') {
         if (typeof f.node !== 'string' || !(declared.has(f.node) || isGnd(f.node))) { E(at + '.node', 'not a node of the netlist'); return; }
@@ -4593,8 +4701,9 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         if (f.pins !== undefined ? !pinsOk(f.pins, n) : (f.kind === 'reverse' && n !== 2)) E(at + '.pins', 'two different pins of the part');
       } else {   // drift
         if (f.factor !== undefined && !(num(f.factor) > 0)) E(at + '.factor', 'needs a number > 0');
+        if (ver === 2 && f.add !== undefined && !Number.isFinite(num(f.add))) E(at + '.add', 'needs a number');
         if (f.param !== undefined) {
-          const t = e.type, okp = typeof f.param === 'string' && (['R', 'C', 'L', 'V', 'I'].includes(t) ? f.param === 'value' : Object.prototype.hasOwnProperty.call(PARAMS[t], f.param));
+          const t = e.type, okp = typeof f.param === 'string' && (['R', 'C', 'L', 'V', 'I'].includes(t) ? f.param === 'value' : Object.prototype.hasOwnProperty.call(TB.P[t], f.param) && TB.P[t][f.param] !== 'bool');
           if (!okp) E(at + '.param', 'not a parameter of the part');
         }
       }
@@ -4604,24 +4713,26 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
 
   // ---- compile: faults applied, nodes indexed, element models built ----
   const parsePinRef = s => { const m = /^(.*)\.(\d+)$/.exec(String(s)); return m ? [m[1], +m[2]] : [String(s), undefined]; };
-  function normalize(el) {
-    const t = el.type, d = { id: el.id, type: t, n: el.n.slice(), p: {} };
+  function normalize(el, ver) {
+    const TB = tbl(ver), t = el.type, d = { id: el.id, type: t, n: el.n.slice(), p: {} };
     if (t === 'R' || t === 'C' || t === 'L') { d.p.value = num(el.value); if (el.ic !== undefined) d.p.ic = num(el.ic); }
     else if (t === 'V' || t === 'I') d.p.value = canonWave(el.value);
     else {
-      Object.assign(d.p, DEFAULTS[t], el.preset ? PRESETS[t][el.preset] : null);
-      for (const [k, v] of Object.entries(el.params || {})) d.p[k] = k === 'rails' ? [num(v[0]), num(v[1])] : num(v);
+      Object.assign(d.p, TB.D[t], el.preset ? TB.PR[t][el.preset] : null);
+      for (const [k, v] of Object.entries(el.params || {})) d.p[k] = k === 'rails' ? [num(v[0]), num(v[1])] : typeof v === 'boolean' ? v : num(v);
     }
     if (t === 'SW') d.on = el.on !== false;
     return d;
   }
-  function compile(nl, faults) {
-    const declared = [], labelOf = new Map();
+  function compile(nl, faults, o) {
+    o = o || {};
+    const ver = o.ver === 2 ? 2 : 1, TB = tbl(ver), declared = [], labelOf = new Map(), noPick = new Set();
     for (const x of nl.nodes) {
       const nm = typeof x === 'string' ? x : x.name;
       if (isObj(x) && x.probe !== undefined) labelOf.set(nm, x.probe); else declared.push(nm);
+      if (isObj(x) && x.pickup === false) noPick.add(nm);
     }
-    const els = nl.elements.map(normalize), byId = new Map(els.map(e => [e.id, e])), extra = [];
+    const els = nl.elements.map(e => normalize(e, ver)), byId = new Map(els.map(e => [e.id, e])), extra = [], hold = o.hold || { shift: 0 };
     const same = (m, node) => m === node || (isGnd(m) && isGnd(node));
     const known = s => typeof s === 'string' && (isGnd(s) || declared.includes(s));
     (faults || []).forEach((f, fi) => {   // a part soldered the wrong way round: its legs sit on each other's pads (so before the board)
@@ -4660,19 +4771,22 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         const pins = f.pin !== undefined ? [f.pin] : e.n.map((_, k) => k);
         for (const k of pins) { if (!(Number.isInteger(k) && k >= 0 && k < e.n.length)) throw fail('fault', { index: fi }); e.n[k] = '#open:' + fi + '.' + k; }
       } else if (f.kind === 'short') {
-        const pins = f.pins || SHORT_PINS[e.type] || [0, 1];
+        const pins = f.pins || TB.SP[e.type] || [0, 1];
         if (!Array.isArray(pins) || pins.length !== 2 || !pins.every(k => Number.isInteger(k) && k >= 0 && k < e.n.length) || pins[0] === pins[1]) throw fail('fault', { index: fi });
         if (e.n.length === 2) { e.type = 'R'; e.p = { value: RSHORT }; }
         else extra.push({ id: '#short:' + fi, type: 'R', n: [e.n[pins[0]], e.n[pins[1]]], board: [], p: { value: RSHORT } });
       } else if (f.kind === 'drift') {
-        const factor = f.factor === undefined ? 2 : num(f.factor), param = f.param || DRIFT_PARAM[e.type];
-        if (!(factor > 0)) throw fail('fault', { index: fi });
-        if (param === 'value' && (e.type === 'V' || e.type === 'I')) e.p.value = scaleWave(e.p.value, factor);
-        else if (typeof e.p[param] === 'number') e.p[param] *= factor;
+        const factor = f.factor === undefined ? (ver === 2 && f.add !== undefined ? 1 : 2) : num(f.factor), param = f.param || TB.DP[e.type];
+        const add = ver === 2 && f.add !== undefined ? num(f.add) : 0;
+        if (!(factor > 0) || !Number.isFinite(add)) throw fail('fault', { index: fi });
+        if (param === 'value' && (e.type === 'V' || e.type === 'I')) { e.p.value = scaleWave(e.p.value, factor); if (add) e.p.value = shiftWave(e.p.value, add); }
+        else if (typeof e.p[param] === 'number') { e.p[param] *= factor; if (add) e.p[param] += add; }
+        else if (ver === 2 && e.p[param] === undefined && Object.prototype.hasOwnProperty.call(TB.P[e.type] || {}, param)) { if (add) e.p[param] = add; }   // (an unset vos, ib … that a fault sets)
         else if (param === 'rails' && Array.isArray(e.p.rails)) e.p.rails = e.p.rails.map(v => v * factor);
         else throw fail('fault', { index: fi });
       } else throw fail('fault', { index: fi });
     });
+    if (ver === 2) compile2(els, extra, nl, noPick, labelOf, byId, o, declared);
     const all = els.concat(extra);
     // node indices: declared names first (ground = −1), then the private nodes the faults made
     const index = new Map(); let N = 0;
@@ -4688,19 +4802,81 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       else if (t === 'SW') e.g = 1 / (e.on ? p.Ron : p.Roff);
       else if (t === 'C') { e.C = p.value; e.ic = p.ic === undefined ? null : p.ic; if (e.ic !== null) e.k = nb++; }
       else if (t === 'L') { e.L = p.value; e.ic = p.ic === undefined ? null : p.ic; e.k = nb++; }
-      else if (t === 'V') { e.w = wave(p.value); e.k = nb++; }
-      else if (t === 'I') e.w = wave(p.value);
-      else if (t === 'D') { e.Is = p.Is; e.nvt = p.n * VT; e.vcrit = e.nvt * Math.log(e.nvt / (Math.SQRT2 * e.Is)); e.s = { v: 0 }; }
+      else if (t === 'V' || t === 'I') {
+        const w = p.value.kind === 'noise' ? Object.assign({}, p.value, { hold, seed: hash32(e.id, ((o.seed >>> 0) ^ (p.value.seed >>> 0)) >>> 0) }) : p.value;
+        e.w = wave(w); e.wk = w.kind; if (t === 'V') e.k = nb++;
+        e.per = w.kind === 'pwm' || w.kind === 'sine' ? 1 / w.freq : w.kind === 'pulse' ? (w.period > 0 ? w.period : 0) : w.kind === 'noise' ? (w.hum > 0 && w.humAmp ? 1 / w.hum : 1 / (2 * w.bw)) : 0;
+      }
+      else if (t === 'D') { e.Is = p.Is; e.nvt = p.n * VT; e.vcrit = e.nvt * Math.log(e.nvt / (Math.SQRT2 * e.Is)); e.s = { v: 0 }; e.bv = p.Bv > 0 ? p.Bv : 0; if (e.bv) { e.ibv = p.Ibv > 0 ? p.Ibv : 1e-3; e.vcritb = VT * Math.log(VT / (Math.SQRT2 * e.ibv)); } }
       else if (t === 'NPN' || t === 'PNP') { e.pol = t === 'NPN' ? 1 : -1; e.Is = p.Is; e.bf = p.betaF; e.br = p.betaR; e.vcrit = VT * Math.log(VT / (Math.SQRT2 * e.Is)); e.s = { vbe: 0, vbc: 0 }; }
       else if (t === 'NMOS' || t === 'PMOS') { e.pol = t === 'NMOS' ? 1 : -1; e.vth = Math.abs(p.Vth); e.kp = p.k; e.lam = p.lambda; }
-      else if (t === 'OPAMP') { e.A = p.gain; e.lo = p.rails[0]; e.hi = p.rails[1]; e.head = p.headroom; e.rp = e.pins.length === 5 ? e.pins[3] : null; e.rn = e.pins.length === 5 ? e.pins[4] : null; e.k = nb++; }
+      else if (t === 'OPAMP') {
+        e.A = p.gain; e.lo = p.rails[0]; e.hi = p.rails[1]; e.head = p.headroom; e.rp = e.pins.length === 5 ? e.pins[3] : null; e.rn = e.pins.length === 5 ? e.pins[4] : null; e.k = nb++;
+        e.vos = p.vos || 0; e.ib = p.ib || 0; e.y = e.yName ? idx(e.yName) : -1;
+        if (e.outName) e.d = idx(e.outName);
+        if (e.y >= 0) { e.gm = e.A / ROP; e.imax = p.slew > 0 ? p.slew * e.cp : Infinity; }
+      }
+      else if (t === 'TLINE') { e.z0 = p.z0; e.td = p.td !== undefined ? p.td : p.len / (p.vf * C0); e.tl = e.pins.length === 4 ? e.pins.slice() : [e.pins[0], -1, e.pins[1], -1]; e.k = nb; nb += 2; }
+      else if (t === 'VSW') { e.cn = e.pins[3]; e.lgon = Math.log(1 / p.Ron); e.lgoff = Math.log(1 / p.Roff); e.von = p.Von; e.voff = p.Voff === p.Von ? p.Von - 1e-3 : p.Voff; }
     }
     for (const e of all) if (e.k >= 0) e.k += N;
     const outNames = declared.slice(); if (!outNames.some(isGnd)) outNames.push('gnd');
     for (const l of labelOf.keys()) outNames.push(l);
     const resolveName = nm => (isGnd(nm) ? -1 : labelOf.has(nm) ? idx(labelOf.get(nm)) : index.get(nm));
-    return { N, S: N + nb, els: all, real: all.filter(e => e.id[0] !== '#'), byId, index, outNames, resolveName,
-      linear: !all.some(e => NONLINEAR.has(e.type)), sources: all.filter(e => e.w) };
+    return { N, S: N + nb, els: all, real: all.filter(e => e.id[0] !== '#'), byId, index, outNames, resolveName, ver, hold,
+      linear: !all.some(e => NONLINEAR.has(e.type)), sources: all.filter(e => e.w), varying: all.some(e => e.w && e.wk !== 'dc'), pickup: all.some(e => e.id === '#hum') };
+  }
+
+  /** the parts every real device has (junction and gate capacitances, a MOSFET's body diode, an op-amp's internal pole and output
+      resistance), the pickup of every node without a DC path to ground, then the probe's own parts (o.extras: a meter's input
+      resistance, a scope probe's capacitance and ground lead) — all hidden elements, ids starting with '#' */
+  function compile2(els, extra, nl, noPick, labelOf, byId, o, declared) {
+    const hid = (id, type, n, p) => extra.push({ id, type, n, board: [], p });
+    for (const e of els) {
+      const p = e.p, n = e.n, cap = (tag, a, b, v) => { if (v > 0) hid('#c' + tag + ':' + e.id, 'C', [a, b], { value: v }); };
+      if (e.type === 'D') cap('j', n[0], n[1], p.Cj);
+      else if (e.type === 'NPN' || e.type === 'PNP') { cap('be', n[1], n[2], p.Cbe); cap('bc', n[1], n[0], p.Cbc); }
+      else if (e.type === 'NMOS' || e.type === 'PMOS') {
+        cap('gs', n[1], n[2], p.Cgs); cap('gd', n[1], n[0], p.Cgd); cap('ds', n[0], n[2], p.Cds);
+        if (p.body === true) hid('#body:' + e.id, 'D', e.type === 'NMOS' ? [n[2], n[0]] : [n[0], n[2]], { Is: 1e-12, n: 1.3 });
+      } else if (e.type === 'OPAMP') {
+        if (p.gbw > 0 || p.slew > 0) {   // one pole: gain·ROP/(1 + s·ROP·Cp) = gain at DC, unity at gbw; the slew rate limits the current into Cp
+          const gbw = p.gbw > 0 ? p.gbw : 1e6, Cp = p.gain / (2 * Math.PI * gbw * ROP);
+          e.yName = '#op:' + e.id; e.cp = Cp;
+          hid('#rp:' + e.id, 'R', [e.yName, 'gnd'], { value: ROP }); hid('#cp:' + e.id, 'C', [e.yName, 'gnd'], { value: Cp });
+        }
+        if (p.rout > 0) { e.outName = '#opo:' + e.id; hid('#rout:' + e.id, 'R', [e.outName, n[2]], { value: p.rout }); }
+        if (p.vos) { const v = '#vos:' + e.id; hid('#vsrc:' + e.id, 'V', [v, n[0]], { value: { kind: 'dc', dc: p.vos } }); n[0] = v; p.vos = 0; }   // the offset: a source in series with in+
+      }
+    }
+    const pk = isObj(nl.pickup) ? nl.pickup : {}, pv = k => (pk[k] !== undefined ? num(pk[k]) : PICKUP[k]);
+    if (nl.pickup !== false && !o.noPickup) {   // a node with no DC path to ground picks up mains hum and noise through a high impedance
+      const par = new Map(), f = s => { s = isGnd(s) ? 'gnd' : s; while (par.has(s) && par.get(s) !== s) s = par.get(s); return s; }, u = (a, b) => { const x = f(a), y = f(b); if (x !== y) par.set(x, y); };
+      const names = new Set();
+      for (const e of els.concat(extra)) {
+        const n = e.n; n.forEach(m => { if (!isGnd(m)) names.add(m); });
+        if (['R', 'L', 'V', 'D', 'VSW'].includes(e.type) || (e.type === 'SW' && e.on)) u(n[0], n[1]);   // (an open switch is no path)
+        else if (e.type === 'NPN' || e.type === 'PNP') { u(n[0], n[1]); u(n[1], n[2]); }
+        else if (e.type === 'NMOS' || e.type === 'PMOS') u(n[0], n[2]);
+        else if (e.type === 'OPAMP') { u(n[2], 'gnd'); if (e.outName) u(e.outName, 'gnd'); if (e.yName) u(e.yName, 'gnd'); }
+        else if (e.type === 'TLINE') { const q = n.length === 4 ? n : [n[0], 'gnd', n[1], 'gnd']; u(q[0], q[2]); u(q[1], q[3]); }
+      }
+      const fl = [...names].filter(m => f(m) !== f('gnd') && !noPick.has(m));
+      if (fl.length) {
+        let top = 0; for (const e of els) if (e.type === 'V') { const a = wave(e.p.value).avg; if (a > top) top = a; }
+        hid('#hum', 'V', ['#humn', 'gnd'], { value: { kind: 'noise', offset: pk.offset !== undefined ? num(pk.offset) : top / 2, rms: pv('noise'), bw: pv('bw'), wander: pv('wander'), hum: pv('hum'), humAmp: pv('amp'), seed: 0, pickup: true } });
+        for (const m of fl) hid('#pick:' + m, 'R', [m, '#humn'], { value: pv('r') });
+      }
+    }
+    const at = s => {   // a probe's endpoint → the name of the node it touches
+      if (typeof s !== 'string') throw fail('unknown-node', { ref: s });
+      if (isGnd(s)) return 'gnd';
+      if (labelOf.has(s)) return labelOf.get(s);
+      if (s[0] === '@') { const [eid, pin] = parsePinRef(s.slice(1)), e = byId.get(eid); if (!e || pin === undefined || !(pin < e.board.length)) throw fail('unknown-node', { ref: s }); return e.board[pin]; }
+      if (!declared.includes(s)) throw fail('unknown-node', { ref: s });
+      return s;
+    };
+    (o.extras || []).forEach((x, i) => hid('#probe' + i + ':' + x.type, x.type, x.n.map(m => (m[0] === '#' && m[1] === '#' ? m.slice(1) : at(m))), { value: x.value }));
   }
 
   // ---- dense LU with partial pivoting ----
@@ -4724,6 +4900,52 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     for (let k = 0; k < n; k++) { const p = perm[k]; if (p !== k) { const t = x[k]; x[k] = x[p]; x[p] = t; } }
     for (let i = 1; i < n; i++) { let s = x[i]; for (let j = 0; j < i; j++) s -= M[i * n + j] * x[j]; x[i] = s; }
     for (let i = n - 1; i >= 0; i--) { let s = x[i]; for (let j = i + 1; j < n; j++) s -= M[i * n + j] * x[j]; x[i] = s / M[i * n + i]; }
+  }
+
+  // ---- complex dense LU with partial pivoting (the AC analysis) ----
+  function cfactor(R, I, n, perm) {
+    for (let k = 0; k < n; k++) {
+      let p = k, mx = R[k * n + k] * R[k * n + k] + I[k * n + k] * I[k * n + k];
+      for (let i = k + 1; i < n; i++) { const a = R[i * n + k] * R[i * n + k] + I[i * n + k] * I[i * n + k]; if (a > mx) { mx = a; p = i; } }
+      if (!(mx > 1e-40)) return false;
+      perm[k] = p;
+      if (p !== k) for (let j = 0; j < n; j++) { let t = R[k * n + j]; R[k * n + j] = R[p * n + j]; R[p * n + j] = t; t = I[k * n + j]; I[k * n + j] = I[p * n + j]; I[p * n + j] = t; }
+      const pr = R[k * n + k], pi = I[k * n + k], d = pr * pr + pi * pi;
+      for (let i = k + 1; i < n; i++) {
+        const ar = R[i * n + k], ai = I[i * n + k]; if (ar === 0 && ai === 0) continue;
+        const fr = (ar * pr + ai * pi) / d, fi = (ai * pr - ar * pi) / d; R[i * n + k] = fr; I[i * n + k] = fi;
+        for (let j = k + 1; j < n; j++) { const br = R[k * n + j], bi = I[k * n + j]; R[i * n + j] -= fr * br - fi * bi; I[i * n + j] -= fr * bi + fi * br; }
+      }
+    }
+    return true;
+  }
+  function csubst(R, I, n, perm, br, bi, xr, xi) {
+    xr.set(br); xi.set(bi);
+    for (let k = 0; k < n; k++) { const p = perm[k]; if (p !== k) { let t = xr[k]; xr[k] = xr[p]; xr[p] = t; t = xi[k]; xi[k] = xi[p]; xi[p] = t; } }
+    for (let i = 1; i < n; i++) { let sr = xr[i], si = xi[i]; for (let j = 0; j < i; j++) { const lr = R[i * n + j], li = I[i * n + j]; sr -= lr * xr[j] - li * xi[j]; si -= lr * xi[j] + li * xr[j]; } xr[i] = sr; xi[i] = si; }
+    for (let i = n - 1; i >= 0; i--) {
+      let sr = xr[i], si = xi[i];
+      for (let j = i + 1; j < n; j++) { const ur = R[i * n + j], ui = I[i * n + j]; sr -= ur * xr[j] - ui * xi[j]; si -= ur * xi[j] + ui * xr[j]; }
+      const dr = R[i * n + i], di = I[i * n + i], d = dr * dr + di * di; xr[i] = (sr * dr + si * di) / d; xi[i] = (si * dr - sr * di) / d;
+    }
+  }
+  /** a frequency response in numbers — gain in dB, phase in degrees (unwrapped), and its landmarks */
+  function acStats(f, re, im) {
+    const n = f.length, db = [], ph = []; let off = 0, prev = null;
+    for (let i = 0; i < n; i++) {
+      db.push(20 * Math.log10(Math.hypot(re[i], im[i]) || 1e-300));
+      let p = Math.atan2(im[i], re[i]) * 180 / Math.PI + off;
+      if (prev !== null) { while (p - prev > 180) { p -= 360; off -= 360; } while (p - prev < -180) { p += 360; off += 360; } }
+      ph.push(p); prev = p;
+    }
+    let ip = 0; for (let i = 1; i < n; i++) if (db[i] > db[ip]) ip = i;
+    const lf = i => Math.log(f[i]), cross = (i, j, lvl) => Math.exp(lf(i) + (lf(j) - lf(i)) * (lvl - db[i]) / (db[j] - db[i] || 1));
+    const pk = db[ip], lvl = pk - 3;
+    let f3 = NaN; for (let i = ip + 1; i < n; i++) if (db[i] <= lvl) { f3 = cross(i - 1, i, lvl); break; }
+    let fl = NaN; for (let i = ip - 1; i >= 0; i--) if (db[i] <= lvl) { fl = cross(i + 1, i, lvl); break; }
+    let fu = NaN, pmg = NaN;
+    for (let i = 1; i < n; i++) if (db[i - 1] > 0 && db[i] <= 0) { fu = cross(i - 1, i, 0); const t = (Math.log(fu) - lf(i - 1)) / (lf(i) - lf(i - 1) || 1); pmg = 180 + ph[i - 1] + (ph[i] - ph[i - 1]) * t; break; }
+    return { db, phase: ph, dcDb: db[0], peakDb: pk, fPeak: f[ip], f3db: f3, fLow3db: fl, fUnity: fu, pm: pmg };
   }
 
   // ---- device equations ----
@@ -4795,10 +5017,29 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           case 'V': BR(a, c, k); ROWV(k, a, c); B[k] = srcVal(e, ctx); break;
           case 'I': J(a, c, -srcVal(e, ctx)); break;   // drives the current into n[0]
           case 'D': {
-            const v = vx(x, a) - vx(x, c), vl = pnjlim(v, e.s.v, e.nvt, e.vcrit);
+            const v = vx(x, a) - vx(x, c);
+            let vl = pnjlim(v, e.s.v, e.nvt, e.vcrit);
+            if (e.bv && v < 0 && !ohm) { const u = -v - e.bv, ul = pnjlim(u, -e.s.v - e.bv, VT, e.vcritb); if (ul !== u) vl = -ul - e.bv; }   // reverse breakdown (Zener, TVS)
             if (vl !== v) limited = true; e.s.v = vl;
-            const g0 = e.Is * dex(vl / e.nvt) / e.nvt;
-            G(a, c, g0 + GMIN); J(a, c, e.Is * (ex(vl / e.nvt) - 1) - g0 * vl);
+            let g0 = e.Is * dex(vl / e.nvt) / e.nvt, i0 = e.Is * (ex(vl / e.nvt) - 1);
+            if (e.bv && !ohm) { const w = -(vl + e.bv) / VT;   // (the ohmmeter's open-circuit voltage, ~3 V, never reaches a breakdown)
+              i0 -= e.ibv * ex(w); g0 += e.ibv * dex(w) / VT; }
+            G(a, c, g0 + GMIN); J(a, c, i0 - g0 * vl);
+            break;
+          }
+          case 'VSW': {   // a switch driven by a voltage — log-conductance moves smoothly from Roff (at Voff) to Ron (at Von)
+            const vc = vx(x, e.d) - vx(x, e.cn), span = e.von - e.voff, u0 = (vc - e.voff) / span, u = u0 < 0 ? 0 : u0 > 1 ? 1 : u0;
+            const sm = u * u * (3 - 2 * u), ds = u0 > 0 && u0 < 1 ? 6 * u * (1 - u) / span : 0;
+            const g = Math.exp(e.lgoff + (e.lgon - e.lgoff) * sm), gc = g * (e.lgon - e.lgoff) * ds * (vx(x, a) - vx(x, c));
+            G(a, c, g); VC(a, c, e.d, e.cn, gc); J(a, c, -gc * vc);
+            break;
+          }
+          case 'TLINE': {   // a lossless line, method of characteristics — v_k − Z0·i_k = v_j(t − td) + Z0·i_j(t − td); in DC a pair of wires
+            const [p1, m1, p2, m2] = e.tl, k1 = k, k2 = k + 1, z = e.z0;
+            BR(p1, m1, k1); BR(p2, m2, k2);
+            ROWV(k1, p1, m1); A[k1 * S + k1] -= z; ROWV(k2, p2, m2); A[k2 * S + k2] -= z;
+            if (tran) { B[k1] = e.E1; B[k2] = e.E2; }
+            else { ROWV(k1, m2, p2); A[k1 * S + k2] -= z; ROWV(k2, m1, p1); A[k2 * S + k1] -= z; }
             break;
           }
           case 'NPN': case 'PNP': {
@@ -4823,17 +5064,31 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           case 'OPAMP': {
             const out = e.d; BR(out, -1, k);
             if (ohm) { A[k * S + k] = 1; break; }
+            if (e.ib) { J(a, -1, e.ib * ctx.src); J(c, -1, e.ib * ctx.src); }   // input bias current, into both inputs
             const vp = vx(x, a), vn = vx(x, c), rails = e.rp !== null;
             const hi = rails ? vx(x, e.rp) : e.hi, lo = rails ? vx(x, e.rn) : e.lo;
             let hh = (hi - lo) / 2 - e.head, dh = 1; if (hh < 1e-3) { hh = 1e-3; dh = 0; }
+            const vd = vp - vn, dyn = e.y >= 0;
+            let y, gy;   // what drives the output stage: gain·(vd + vos), or (with gbw / slew) the internal pole's node
+            if (dyn) {
+              const Y = e.y, yv = vx(x, Y), vdo = vd + e.vos * ctx.src;
+              let iy, gd;
+              if (e.imax < Infinity) { const th = Math.tanh(e.gm * vdo / e.imax); iy = e.imax * th; gd = e.gm * (1 - th * th); } else { iy = e.gm * vdo; gd = e.gm; }
+              if (a >= 0) A[Y * S + a] -= gd; if (c >= 0) A[Y * S + c] += gd; B[Y] += iy - gd * vd;
+              const L = hh + 0.3, sm = 0.05, sp = u => (u / sm > 40 ? u : sm * Math.log1p(Math.exp(u / sm))), sg_ = u => 1 / (1 + Math.exp(-u / sm));
+              const icl = GCL * (sp(yv - L) - sp(-yv - L)), dcl = GCL * (sg_(yv - L) + sg_(-yv - L));
+              A[Y * S + Y] += dcl; B[Y] -= icl - dcl * yv;
+              y = yv; gy = 1;
+            } else { y = e.A * (vd + e.vos * ctx.src); gy = e.A; }   // (vos and ib scale with the sources: source stepping can then start from a quiet op-amp)
             // linear (exact gain A) up to a knee m below the rail, then an exponential approach: smooth, C¹, bounded
-            const vd = vp - vn, y = e.A * vd, m = Math.min(0.05, hh / 2), knee = hh - m, ay = Math.abs(y);
-            let f = (hi + lo) / 2, fd = e.A, fh = 0;
+            const m = Math.min(0.05, hh / 2), knee = hh - m, ay = Math.abs(y);
+            let f = (hi + lo) / 2, fd = gy, fh = 0;
             if (ay <= knee) f += y;
-            else { const sg = y < 0 ? -1 : 1, ez = Math.exp(-(ay - knee) / m); f += sg * (hh - m * ez); fd = e.A * ez; fh = dh * sg * (1 - ez); }
+            else { const sg = y < 0 ? -1 : 1, ez = Math.exp(-(ay - knee) / m); f += sg * (hh - m * ez); fd = gy * ez; fh = dh * sg * (1 - ez); }
             if (out >= 0) A[k * S + out] += 1;
-            if (a >= 0) A[k * S + a] -= fd; if (c >= 0) A[k * S + c] += fd;
-            let rhs = f - fd * vd;
+            let rhs;
+            if (dyn) { A[k * S + e.y] -= fd; rhs = f - fd * y; }
+            else { if (a >= 0) A[k * S + a] -= fd; if (c >= 0) A[k * S + c] += fd; rhs = f - fd * vd; }
             if (rails) {
               const dhi = 0.5 + 0.5 * fh, dlo = 0.5 - 0.5 * fh;
               if (e.rp >= 0) A[k * S + e.rp] -= dhi; if (e.rn >= 0) A[k * S + e.rn] -= dlo;
@@ -4893,7 +5148,9 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         case 'C': { const i = ctx.mode === 'tran' ? e.ip : 0; return [i, -i]; }
         case 'L': case 'V': return [x[e.k], -x[e.k]];
         case 'I': { const j = srcVal(e, ctx); return [-j, j]; }
-        case 'D': { const v = va - vc, i = e.Is * (ex(v / e.nvt) - 1) + GMIN * v; return [i, -i]; }
+        case 'D': { const v = va - vc, i = e.Is * (ex(v / e.nvt) - 1) + GMIN * v - (e.bv ? e.ibv * ex(-(v + e.bv) / VT) : 0); return [i, -i]; }
+        case 'VSW': { const vcn = vx(x, e.d) - vx(x, e.cn), u0 = (vcn - e.voff) / (e.von - e.voff), u = u0 < 0 ? 0 : u0 > 1 ? 1 : u0, i = (va - vc) * Math.exp(e.lgoff + (e.lgon - e.lgoff) * u * u * (3 - 2 * u)); return [i, -i, 0, 0]; }
+        case 'TLINE': { const i1 = x[e.k], i2 = x[e.k + 1]; return e.pins.length === 4 ? [i1, -i1, i2, -i2] : [i1, i2]; }
         case 'NPN': case 'PNP': {
           const p = e.pol, vb = vc, vcol = va, ve = vx(x, e.d);
           bjt(e, p * (vb - ve), p * (vb - vcol), q);
@@ -4906,7 +5163,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           const id = (sw ? -1 : 1) * p * q.id + GMIN * (vd - vs);
           return [id, 0, -id];
         }
-        case 'OPAMP': return e.pins.map((_, i) => (i === 2 ? x[e.k] : 0));
+        case 'OPAMP': return e.pins.map((_, i) => (i === 2 ? x[e.k] : i < 2 ? e.ib || 0 : 0));
       }
       return e.pins.map(() => 0);
     }
@@ -4936,21 +5193,28 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
       const steps = Math.ceil(tEnd / dt - 1e-9);
       if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
-      const key = `${dt}|${tEnd}|${!!o.uic}`;
+      const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];
+      const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
       if (tranCache && tranCache.key === key) return tranCache;
-      const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L');
+      const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L'), tls = ck.els.filter(e => e.type === 'TLINE');
+      for (const e of tls) if (e.td < dt * (1 - 1e-9)) throw fail('step', { element: e.id, td: e.td, dt });
       let x;
       if (o.uic) {
         x = new Float64Array(S);
         for (const e of caps) { e.vp = e.ic === null ? 0 : e.ic; e.ip = 0; }
         for (const e of inds) { e.ip = e.ic === null ? 0 : e.ic; e.vp = 0; }
       } else {
-        x = op({ mode: 'op0', t0m: true, t: 0, gsh: 0, src: 1 });
+        x = o.fromAvg ? op({ mode: 'op', avg: true, t: 0, gsh: 0, src: 1 }) : op({ mode: 'op0', t0m: true, t: 0, gsh: 0, src: 1 });   // (fromAvg: a meter starts near the steady state)
         for (const e of caps) { e.vp = vx(x, e.a) - vx(x, e.c); e.ip = 0; }
         for (const e of inds) { e.ip = x[e.k]; e.vp = vx(x, e.a) - vx(x, e.c); }
       }
       const V = []; for (let i = 0; i < N; i++) { V.push(new Float64Array(steps + 1)); V[i][0] = x[i]; }
       const I = ck.real.map(e => { const arr = new Float64Array(steps + 1); arr[0] = mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })); return arr; });
+      const pwEl = pw.map(id => ck.byId.get(id)), PW = pwEl.map(() => new Float64Array(steps + 1));
+      const power = (e, xx, c) => { const pc = pinCurrents(e, xx, c); let q = 0; e.pins.forEach((pi, j) => { q += vx(xx, pi) * pc[j]; }); return q; };
+      pwEl.forEach((e, j) => { PW[j][0] = power(e, x, { mode: 'op', t0m: true, t: 0, src: 1 }); });
+      const tlv = (xx, e) => { const [p1, m1, p2, m2] = e.tl; return [vx(xx, p1) - vx(xx, m1), xx[e.k], vx(xx, p2) - vx(xx, m2), xx[e.k + 1]]; };
+      for (const e of tls) { e.h = [0, 1, 2, 3].map(() => new Float64Array(steps + 1)); tlv(x, e).forEach((v, j) => { e.h[j][0] = v; }); }
       const tol = 1e-6 * dt;
       const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
       let bp = nextBp(-tol);   // a breakpoint at t = 0 makes the first step backward Euler anyway
@@ -4961,6 +5225,12 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         ctx.t = t1; ctx.be = s === 0 || bp <= t1 + tol;
         if (bp <= t1 + tol) bp = nextBp(t1 + tol);
         ctx.gsh = 0;
+        for (const e of tls) {   // the waves that left the other end td ago
+          const tp = t1 - e.td, h = e.h; let w;
+          if (tp <= 0) w = [h[0][0], h[1][0], h[2][0], h[3][0]];
+          else { const u = tp / dt; let i = Math.floor(u + 1e-9); if (i > s) i = s; const f = Math.max(0, u - i), j = Math.min(i + 1, s); w = h.map(a => a[i] * (1 - f) + a[j] * f); }
+          e.E1 = w[2] + e.z0 * w[3]; e.E2 = w[0] + e.z0 * w[1];
+        }
         if (!newton(ctx, xs, 60)) {
           let ok = true, xg = xs;
           for (let i = 3; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 100)) xg = Float64Array.from(X); else ok = false; }
@@ -4975,16 +5245,61 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
         for (let i = 0; i < N; i++) V[i][s + 1] = xs[i];
         ck.real.forEach((e, j) => { I[j][s + 1] = mainCurrent(e, pinCurrents(e, xs, ctx)); });
+        pwEl.forEach((e, j) => { PW[j][s + 1] = power(e, xs, ctx); });
+        for (const e of tls) tlv(xs, e).forEach((v, j) => { e.h[j][s + 1] = v; });
       }
       const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
-      tranCache = { key, T, V, I, steps };
+      tranCache = { key, T, V, I, steps, P: Object.fromEntries(pw.map((id, j) => [id, PW[j]])) };
       return tranCache;
     }
     function transient(o) {
       const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
       for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? zero.slice() : Array.from(r.V[i]); }
       ck.real.forEach((e, j) => { branches[e.id] = Array.from(r.I[j]); });
-      return { t: Array.from(r.T), nodes, branches };
+      const out = { t: Array.from(r.T), nodes, branches };
+      if (o && Array.isArray(o.power)) out.power = Object.fromEntries(Object.entries(r.P).map(([id, a]) => [id, Array.from(a)]));
+      return out;
+    }
+
+    // ---- AC small-signal analysis — the circuit linearised at its DC operating point (sources at their average), one source excited ----
+    let acCache = null;
+    function ac(o) {
+      o = o || {};
+      const src = typeof o.source === 'string' ? ck.byId.get(o.source) : null;
+      const f0 = num(o.fStart), f1 = num(o.fStop), np = o.points === undefined ? 200 : Math.round(num(o.points)), lin = o.scale === 'lin';
+      if (!src || (src.type !== 'V' && src.type !== 'I') || !(f0 > 0) || !(f1 > f0) || !(np >= 2 && np <= 1000)) throw fail('bad-args');
+      const idx = Array.isArray(o.idx) ? o.idx.filter(j => Number.isInteger(j) && j >= 0 && j < S) : [];   // extra unknowns to read (a pin reference's board node)
+      const key = `${o.source}|${f0}|${f1}|${np}|${lin}|${idx.join(',')}`;
+      if (acCache && acCache.key === key) return acCache.r;
+      const { x, ctx } = dcX('avg');
+      stamp(Object.assign({}, ctx, { gsh: 0, src: 1 }), x);
+      const A0 = Float64Array.from(A), Re = new Float64Array(S * S), Im = new Float64Array(S * S), br = new Float64Array(S), bi = new Float64Array(S), xr = new Float64Array(S), xi = new Float64Array(S), pm = new Int32Array(S);
+      const f = [], nodes = {}, at = {}; for (const nm of ck.outNames) nodes[nm] = { re: [], im: [] }; for (const j of idx) at[j] = { re: [], im: [] };
+      const jG = (a, c, b) => { if (a >= 0) { Im[a * S + a] += b; if (c >= 0) { Im[a * S + c] -= b; Im[c * S + a] -= b; } } if (c >= 0) Im[c * S + c] += b; };
+      for (let i = 0; i < np; i++) {
+        const fr = lin ? f0 + (f1 - f0) * i / (np - 1) : f0 * Math.pow(f1 / f0, i / (np - 1)), w = 2 * Math.PI * fr;
+        Re.set(A0); Im.fill(0); br.fill(0); bi.fill(0);
+        for (const e of ck.els) {
+          if (e.type === 'C') jG(e.a, e.c, w * e.C);
+          else if (e.type === 'L') Im[e.k * S + e.k] -= w * e.L;
+          else if (e.type === 'TLINE') {   // v_k − Z0·i_k = e^(−jωtd)·(v_j + Z0·i_j)
+            const [p1, m1, p2, m2] = e.tl, k1 = e.k, k2 = e.k + 1, z = e.z0, cr = Math.cos(w * e.td), ci = -Math.sin(w * e.td);
+            for (const kk of [k1, k2]) for (let j = 0; j < S; j++) { Re[kk * S + j] = 0; Im[kk * S + j] = 0; }
+            const put = (kk, col, r, im) => { if (col >= 0) { Re[kk * S + col] += r; Im[kk * S + col] += im; } };
+            put(k1, p1, 1, 0); put(k1, m1, -1, 0); put(k1, k1, -z, 0); put(k1, p2, -cr, -ci); put(k1, m2, cr, ci); put(k1, k2, -z * cr, -z * ci);
+            put(k2, p2, 1, 0); put(k2, m2, -1, 0); put(k2, k2, -z, 0); put(k2, p1, -cr, -ci); put(k2, m1, cr, ci); put(k2, k1, -z * cr, -z * ci);
+          }
+        }
+        if (src.type === 'V') br[src.k] = 1; else { if (src.a >= 0) br[src.a] += 1; if (src.c >= 0) br[src.c] -= 1; }
+        if (!cfactor(Re, Im, S, pm)) throw fail('singular');
+        csubst(Re, Im, S, pm, br, bi, xr, xi);
+        f.push(fr);
+        for (const nm of ck.outNames) { const j = ck.resolveName(nm); nodes[nm].re.push(j < 0 ? 0 : xr[j]); nodes[nm].im.push(j < 0 ? 0 : xi[j]); }
+        for (const j of idx) { at[j].re.push(xr[j]); at[j].im.push(xi[j]); }
+      }
+      const r = { f, nodes, at };
+      acCache = { key, r };
+      return r;
     }
 
     // ---- instruments ----
@@ -5075,12 +5390,13 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       }
       throw fail('probe');
     }
-    return { dc, transient, measure };
+    return { dc, transient, measure, ac, runTransient, dcX, ck, where, pinCurrents, mainCurrent };
   }
 
   function create(netlist, opts) {
     opts = opts || {};
-    const problems = check(netlist);
+    const ver = verOf(opts);
+    const problems = check(netlist, { version: ver });
     if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
     if (opts.faults !== undefined && !Array.isArray(opts.faults)) throw fail('fault', { index: -1 });
     const faults = JSON.parse(JSON.stringify(opts.faults || []));
@@ -5090,12 +5406,100 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       if (!(rel >= 0) || !(abs >= 0)) throw fail('bad-args');
       noise = { rel, abs, seed: (opts.noise.seed !== undefined ? num(opts.noise.seed) : opts.seed !== undefined ? num(opts.seed) : 1) >>> 0 };
     }
-    let nl = JSON.parse(JSON.stringify(netlist)), inner = makeSim(compile(nl, faults), noise);
+    const seed = (opts.seed !== undefined ? num(opts.seed) : 1) >>> 0;
+    let nl = JSON.parse(JSON.stringify(netlist));
+    const build = o2 => makeSim(compile(nl, faults, Object.assign({ ver, seed }, o2)), noise);
+    let inner = build({}), subs = new Map(), mcount = 0;
+    const sub = (key, o2) => { if (!subs.has(key)) subs.set(key, build(o2)); return subs.get(key); };
+
+    /** v2 instruments: the meter's input resistance and its modes (true averages and RMS of what really flows), a scope probe with its
+        own capacitance and ground lead, a logic analyser's input, the frequency response analyser (bode) */
+    function measure2(probe) {
+      if (!isObj(probe)) throw fail('probe');
+      const count = ++mcount;
+      const rng = noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null;
+      const jit = v => (rng ? v * (1 + noise.rel * (2 * rng() - 1)) + noise.abs * (2 * rng() - 1) : v);
+      const shifted = (s, fn) => {   // every capture of a board with noise or pickup sees another stretch of it (the same sequence of measurements reads the same)
+        const h = s.ck.hold, live = s.ck.sources.some(e => e.wk === 'noise');
+        h.shift = live ? mulberry32(hash32('m' + count, seed))() * 1000 : 0;
+        try { return fn(); } finally { h.shift = 0; }
+      };
+      const nz = (v, d) => (v === undefined ? d : num(v));
+      function windowOf(s) {
+        if (probe.tEnd !== undefined) { const te = num(probe.tEnd), w = { tEnd: te, dt: nz(probe.dt, te / 2000), tStart: nz(probe.tStart, te / 2) }; if (!(w.tStart >= 0 && w.tStart < w.tEnd)) throw fail('probe'); return w; }
+        if (!s.ck.varying) return null;
+        let P = 0; for (const e of s.ck.sources) if (e.per > P) P = e.per;
+        return P > 0 ? { tEnd: 50 * P, dt: P / 200, tStart: 30 * P } : null;
+      }
+      function meter(s, dcVal, series) {   // → the reading in the probe's mode
+        const mode = probe.mode === undefined ? 'dc' : probe.mode;
+        if (!MODES.includes(mode)) throw fail('probe');
+        const w = windowOf(s);
+        if (!w) { const v = dcVal(); return mode === 'dc' ? v : mode === 'rms' ? Math.abs(v) : 0; }
+        return shifted(s, () => {
+          const r = s.runTransient({ tEnd: w.tEnd, dt: w.dt, maxSteps: probe.maxSteps, fromAvg: true }), v = series(r);
+          let s0 = 0; while (s0 < r.steps && r.T[s0] < w.tStart - 1e-9 * w.dt) s0++;
+          const avg = g => { let a = 0; for (let i = s0; i < r.steps; i++) a += (g(v[i]) + g(v[i + 1])) / 2; return a / Math.max(1, r.steps - s0); };   // time averages (trapezoids)
+          const mean = avg(y => y), sq = avg(y => y * y);
+          if (mode === 'dc') return mean;
+          if (mode === 'rms') return Math.sqrt(sq);
+          if (mode === 'ac') return Math.sqrt(Math.max(0, sq - mean * mean));
+          return avg(y => Math.abs(y - mean)) * Math.PI / (2 * Math.SQRT2);   // an average-responding meter, calibrated for sines
+        });
+      }
+      switch (probe.kind) {
+        case 'R': return sub('R', { noPickup: true }).measure(probe);
+        case 'V': {
+          const zin = nz(probe.zin, 1e7), a = probe.a, b = probe.b === undefined ? 'gnd' : probe.b;
+          if (!(zin >= 0)) throw fail('probe');
+          const s = zin > 0 ? sub(JSON.stringify(['V', a, b, zin]), { extras: [{ type: 'R', n: [a, b], value: zin }] }) : inner;
+          const ia = s.where(a), ib = s.where(b), vv = (x, i) => (i < 0 ? 0 : x[i]);
+          const value = meter(s, () => { const { x } = s.dcX('avg'); return vv(x, ia) - vv(x, ib); }, r => { const z = new Float64Array(r.steps + 1), A = ia < 0 ? z : r.V[ia], B = ib < 0 ? z : r.V[ib]; return A.map((y, i) => y - B[i]); });
+          return { kind: 'V', value: jit(value), unit: 'V', ...(probe.mode ? { mode: probe.mode } : {}) };
+        }
+        case 'I': {
+          const s = inner, e = s.ck.byId.get(probe.element); if (!e) throw fail('unknown-element', { ref: probe.element });
+          if (probe.pin !== undefined && !(probe.pin >= 0 && probe.pin < e.pins.length)) throw fail('probe');
+          const j = s.ck.real.indexOf(e), dcI = () => { const { x, ctx } = s.dcX('avg'), pc = s.pinCurrents(e, x, ctx); return probe.pin === undefined ? s.mainCurrent(e, pc) : pc[probe.pin]; };
+          const value = probe.pin !== undefined && probe.pin !== 0 ? dcI() : meter(s, dcI, r => r.I[j]);
+          return { kind: 'I', value: jit(value), unit: 'A', ...(probe.mode ? { mode: probe.mode } : {}) };
+        }
+        case 'scope': {
+          const zin = nz(probe.zin, 1e7), lead = nz(probe.lead, 0), cin = nz(probe.cin, lead > 0 ? 12e-12 : 0), ref = probe.ref === undefined ? 'gnd' : probe.ref;
+          if (!(zin >= 0) || !(lead >= 0) || !(cin >= 0)) throw fail('probe');
+          const tip = lead > 0 ? '##pg' : ref, ex = [];
+          if (zin > 0) ex.push({ type: 'R', n: [probe.node, tip], value: zin });
+          if (cin > 0) ex.push({ type: 'C', n: [probe.node, tip], value: cin });
+          if (lead > 0) ex.push({ type: 'L', n: ['##pg', ref], value: lead });
+          const s = ex.length ? sub(JSON.stringify(['scope', probe.node, ref, zin, cin, lead]), { extras: ex }) : inner;
+          const q = Object.assign({}, probe, { ref: lead > 0 ? '#pg' : ref }); delete q.zin; delete q.lead; delete q.cin;
+          return shifted(s, () => s.measure(q));
+        }
+        case 'logic': {
+          const zin = nz(probe.zin, 0); if (!(zin >= 0)) throw fail('probe');
+          const s = zin > 0 && Array.isArray(probe.nodes) ? sub(JSON.stringify(['logic', probe.nodes, zin]), { extras: probe.nodes.map(m => ({ type: 'R', n: [m, 'gnd'], value: zin })) }) : inner;
+          const q = Object.assign({}, probe); delete q.zin;
+          return shifted(s, () => s.measure(q));
+        }
+        case 'bode': {
+          const na = probe.node, nb = probe.ref === undefined ? 'gnd' : probe.ref;
+          const ia = isGnd(na) ? -1 : inner.where(na), ib = isGnd(nb) ? -1 : inner.where(nb);   // names, test points and pin references (on the faulted board)
+          const r = inner.ac({ source: probe.source, fStart: probe.fStart, fStop: probe.fStop, points: probe.points, idx: [ia, ib].filter(j => j >= 0) });
+          const n = r.f.length, zero = { re: new Array(n).fill(0), im: new Array(n).fill(0) }, pick = j => (j < 0 ? zero : r.at[j]);
+          const A = pick(ia), B = pick(ib), re = A.re.map((v, i) => v - B.re[i]), im = A.im.map((v, i) => v - B.im[i]);
+          const st = acStats(r.f, re, im);
+          return { kind: 'bode', f: r.f.slice(), db: st.db, phase: st.phase, stats: { dcDb: st.dcDb, peakDb: st.peakDb, fPeak: st.fPeak, f3db: st.f3db, fLow3db: st.fLow3db, fUnity: st.fUnity, pm: st.pm } };
+        }
+      }
+      return inner.measure(probe);
+    }
     return Object.freeze({
       id: ID,
       dc: o => inner.dc(o),
       transient: o => inner.transient(o),
-      measure: p => inner.measure(p),
+      measure: p => (ver === 2 ? measure2(p) : inner.measure(p)),
+      /** the AC analysis {source, fStart, fStop, points?, scale?} → {f, nodes: {name: {re, im}}} */
+      ac: o => { if (ver !== 2) throw fail('bad-args'); return inner.ac(o); },
       /** the learner flips a switch or turns a knob: {on} for SW, {value} for R, C, L, V, I */
       set(id, patch) {
         const el = nl.elements.find(e => e.id === id);
@@ -5103,25 +5507,28 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         const next = JSON.parse(JSON.stringify(nl)), ne = next.elements.find(e => e.id === id);
         if (patch.on !== undefined) ne.on = patch.on;
         if (patch.value !== undefined) ne.value = patch.value;
-        const pr = check(next);
+        const pr = check(next, { version: ver });
         if (pr.some(p => p.level === 'error')) throw fail('invalid', { problems: pr });
-        nl = next; inner = makeSim(compile(nl, faults), noise);
+        nl = next; inner = build({}); subs = new Map();
       },
     });
   }
 
   /** the engine's own source, to run it in a Worker (the sim-spec@1 runtime's workerSource: engine/src/36_engine_circuit_sim.js) */
   const source = () => '(' + noemaCircuitModule.toString() + ')(self);';
-  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS }), FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), check, checkFaults, create, num, source });
+  root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS, acPoints: 1000 }),
+    FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), MODES: Object.freeze(MODES.slice()), check, checkFaults, create, num, acStats, source });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
 
 /* ---- 36_engine_circuit_sim.js ---- */
 /* ===================== interactive activities — circuit-mna@1 as an engine of sim-spec@1 (docs/INTERACTIVE_CIRCUIT.md, docs/INTERACTIVE.md §12.6–12.7) =====================
    Registers NoemaCircuit (36_engine_circuit.js) with ACT.registerEngine. A spec names it ("engine": "circuit-mna@1") and gives
-     model: { netlist (noema.circuit/v1), bindings: [{element, prop?, expr}], transient?: {tEnd, dt?}, noise?: {rel, abs} }
-     outputs: [{id, kind: 'scalar', node | branch, at? | stat?} | {id, kind: 'scalar', probe: {kind: V | I | R, …}}
-               | {id, kind: 'series', time: true | node | branch}]
+     model: { netlist (noema.circuit/v1), bindings: [{element, prop?, expr}], transient?: {tEnd, dt?}, noise?: {rel, abs},
+              ac?: {source, fStart, fStop, points?} }
+     outputs: [{id, kind: 'scalar', node | branch | power, at? | stat?} | {id, kind: 'scalar', probe: {kind: V | I | R, mode?, zin?, …}}
+               | {id, kind: 'series', time: true | node | branch | power} | {id, kind: 'series', ac: 'f' | 'db' | 'phase' | 'mag', node?, ref?}
+               | {id, kind: 'scalar', ac: 'db' | 'phase' | 'mag', node, ref?, at: frequency} | {id, kind: 'scalar', ac: 'dcDb' | 'peakDb' | 'fPeak' | 'f3db' | 'fLow3db' | 'fUnity' | 'pm', node, ref?}]
    and, for a fault-finding bench, `bench` (35_activity_sim.js renders it; this engine answers its measurements).
    The engine runs in a Worker (workerSource: the engine's own source + the adapter below); the expressions (bindings, transient
    times, `at`) are the app's NoemaExpr on the main thread (prepare), so the worker gets numbers only. The hidden fault of a bench
@@ -5165,16 +5572,28 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       return {
         run(inp) {
           const s = simFor(inp), r = {}, tr = inp.$tran;
-          let dc = null, tran = null;
+          let dc = null, tran = null, acr = null;
+          const pw = outs.filter(o => o.power !== undefined).map(o => o.power);
           const DC = () => dc || (dc = s.dc());
-          const TR = () => tran || (tran = s.transient({ tEnd: tr.tEnd, dt: tr.dt > 0 ? tr.dt : tr.tEnd / 1000 }));
+          const TR = () => tran || (tran = s.transient({ tEnd: tr.tEnd, dt: tr.dt > 0 ? tr.dt : tr.tEnd / 1000, ...(pw.length ? { power: pw } : {}) }));
+          const AC = () => acr || (acr = s.ac(inp.$ac));
           for (const o of outs) {
             try {
-              if (o.kind === 'series') { const T = TR(); r[o.id] = thin(o.time ? T.t : o.node !== undefined ? T.nodes[o.node] || [] : T.branches[o.branch] || [], MAXP); continue; }
+              if (o.ac !== undefined) {   // the AC analysis: a Bode plot's axes, or one number of it
+                const A = AC();
+                if (o.ac === 'f') { r[o.id] = A.f.slice(); continue; }
+                const gz = nm => nm === 'gnd' || nm === '0', a = gz(o.node) ? { re: A.f.map(() => 0), im: A.f.map(() => 0) } : A.nodes[o.node], b = o.ref !== undefined && !gz(o.ref) ? A.nodes[o.ref] : null;   // either ground name reads 0
+                const st = C.acStats(A.f, a.re.map((v, i) => v - (b ? b.re[i] : 0)), a.im.map((v, i) => v - (b ? b.im[i] : 0)));
+                const curve = o.ac === 'db' ? st.db : o.ac === 'phase' ? st.phase : o.ac === 'mag' ? st.db.map(d => Math.pow(10, d / 20)) : null;
+                if (o.kind === 'series') { r[o.id] = curve ? curve.slice() : []; continue; }
+                if (curve) { const fx = inp.$at ? inp.$at[o.id] : NaN; r[o.id] = fx > 0 ? at(A.f.map(Math.log), curve, Math.log(fx)) : NaN; continue; }
+                r[o.id] = st[o.ac] !== undefined ? st[o.ac] : NaN; continue;
+              }
+              if (o.kind === 'series') { const T = TR(); r[o.id] = thin(o.time ? T.t : o.power !== undefined ? T.power[o.power] || [] : o.node !== undefined ? T.nodes[o.node] || [] : T.branches[o.branch] || [], MAXP); continue; }
               if (o.probe) { const m = s.measure(o.probe); r[o.id] = typeof m.value === 'number' ? m.value : Infinity; continue; }   // (an ohmmeter over its range: ∞)
               const tw = o.at !== undefined || o.stat !== undefined;
               if (!tw) { const d = DC(); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
-              const T = TR(), v = o.node !== undefined ? T.nodes[o.node] : T.branches[o.branch];
+              const T = TR(), v = o.power !== undefined ? T.power[o.power] : o.node !== undefined ? T.nodes[o.node] : T.branches[o.branch];
               r[o.id] = !v ? NaN : o.stat !== undefined ? (STATS.includes(o.stat) ? stat(v, o.stat) : NaN) : at(T.t, v, inp.$at ? inp.$at[o.id] : NaN);
             } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
           }
@@ -5185,13 +5604,14 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           try {
             const m = simFor(inp).measure(probe);
             if (m.kind === 'scope') return { kind: 'scope', t: thin(m.t, MAXP), v: thin(m.v, MAXP), stats: m.stats };
+            if (m.kind === 'bode') return m;
             if (m.kind === 'logic') {   // over MAXP edges: the window ends just before the first edge left out (cut), so the steps drawn stay true; the stats are the whole capture's
               let t1 = m.t[m.t.length - 1], cut = false;
               for (const nm of Object.keys(m.edges)) if (m.edges[nm].length > MAXP && m.edges[nm][MAXP].t < t1) { t1 = m.edges[nm][MAXP].t; cut = true; }
               const out = {}; for (const nm of Object.keys(m.traces)) out[nm] = { level0: m.traces[nm][0], edges: m.edges[nm].filter(z => z.t < t1).slice(0, MAXP), stats: m.stats[nm] };
               return { kind: 'logic', t0: m.t[0], t1, ...(cut ? { cut: true, tEnd: m.t[m.t.length - 1] } : {}), traces: out };
             }
-            return { kind: m.kind, value: m.value };
+            return { kind: m.kind, value: m.value, ...(m.mode ? { mode: m.mode } : {}) };
           } catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
         },
       };
@@ -5208,8 +5628,10 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       const binds = (m.bindings || []).map(b => [b.element, b.prop || 'value', compile(b.expr)]);
       const tEnd = m.transient ? f(m.transient.tEnd) : null, dt = m.transient && m.transient.dt !== undefined ? f(m.transient.dt) : null;
       const ats = (spec.outputs || []).filter(o => o.at !== undefined).map(o => [o.id, f(o.at)]);
+      const acm = m.ac || null, acf = acm ? { fStart: f(acm.fStart), fStop: f(acm.fStop) } : null;
       const ev = (g, env) => { try { const v = g(env); return typeof v === 'boolean' ? v : +v; } catch (e) { return NaN; } };
-      return env => ({ ...env, $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])) });
+      return env => ({ ...env, $bind: binds.map(([id, prop, g]) => [id, prop, ev(g, env)]), $tran: tEnd ? { tEnd: ev(tEnd, env), dt: dt ? ev(dt, env) : 0 } : null, $at: Object.fromEntries(ats.map(([id, g]) => [id, ev(g, env)])),
+        $ac: acm ? { source: acm.source, fStart: ev(acf.fStart, env), fStop: ev(acf.fStop, env), ...(acm.points !== undefined ? { points: acm.points } : {}) } : null });
     },
     create: (spec, opts) => local.noemaEngine.create(spec, opts),
     workerSource: NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);',
@@ -8764,10 +9186,10 @@ function reportedView() {
 
   // ---- batteries: open-circuit voltage per cell against state of charge (typical curves at room temperature, light load) ----
   const CHEMS = {
-    'li-ion': { curve: [[0, 3.0], [0.05, 3.3], [0.1, 3.5], [0.2, 3.6], [0.4, 3.7], [0.6, 3.8], [0.8, 3.95], [0.9, 4.05], [1, 4.2]], r: 0.15 },
-    lifepo4: { curve: [[0, 2.5], [0.05, 3.0], [0.1, 3.2], [0.2, 3.25], [0.5, 3.3], [0.8, 3.33], [0.95, 3.4], [1, 3.6]], r: 0.05 },
-    alkaline: { curve: [[0, 0.9], [0.1, 1.05], [0.3, 1.15], [0.5, 1.25], [0.7, 1.3], [0.9, 1.4], [1, 1.55]], r: 0.2 },
-    nimh: { curve: [[0, 1.0], [0.05, 1.1], [0.2, 1.2], [0.8, 1.25], [0.95, 1.35], [1, 1.4]], r: 0.05 },
+    'li-ion': { curve: [[0, 3.0], [0.05, 3.3], [0.1, 3.5], [0.2, 3.6], [0.4, 3.7], [0.6, 3.8], [0.8, 3.95], [0.9, 4.05], [1, 4.2]], r: 0.15, kc: 0.008 },
+    lifepo4: { curve: [[0, 2.5], [0.05, 3.0], [0.1, 3.2], [0.2, 3.25], [0.5, 3.3], [0.8, 3.33], [0.95, 3.4], [1, 3.6]], r: 0.05, kc: 0.01 },
+    alkaline: { curve: [[0, 0.9], [0.1, 1.05], [0.3, 1.15], [0.5, 1.25], [0.7, 1.3], [0.9, 1.4], [1, 1.55]], r: 0.2, kc: 0.015 },
+    nimh: { curve: [[0, 1.0], [0.05, 1.1], [0.2, 1.2], [0.8, 1.25], [0.95, 1.35], [1, 1.4]], r: 0.05, kc: 0.01 },
   };
   const interp = (c, x) => { if (x <= c[0][0]) return c[0][1]; for (let i = 1; i < c.length; i++) if (x <= c[i][0]) { const [x0, y0] = c[i - 1], [x1, y1] = c[i]; return y0 + (y1 - y0) * (x - x0) / (x1 - x0 || 1); } return c[c.length - 1][1]; };
 
@@ -8776,13 +9198,16 @@ function reportedView() {
   const TABLE = {
     format: 'const',
     battery: { req: true, $obj: { capacity: 'pos!', chem: 'enum:li-ion|lifepo4|alkaline|nimh|custom', cells: 'int:1:6', curve: { $list: { soc: 'unit!', v: 'pos!' }, max: 32 },
-      selfDischarge: 'unit', rInt: 'nonneg', soc0: 'unit', cutoff: 'pos' } },
+      selfDischarge: 'unit', rInt: 'nonneg', soc0: 'unit', cutoff: 'pos', tempCap: 'unit' } },
     power: { $obj: { sleep: 'nonneg', active: 'nonneg', sense: 'nonneg', tx: 'nonneg', rx: 'nonneg' } },
     schedule: { req: true, $obj: { period: 'pos!', sense: 'nonneg', txEvery: 'int:1:10000', ack: 'bool', rxWindow: 'nonneg', retries: 'int:0:8', boot: 'nonneg' } },
-    sensors: { $list: { id: 'id!', base: 'fin', amp: 'fin', cycle: 'pos', noise: 'nonneg', drift: 'fin', current: 'nonneg' }, max: MAX_SENSORS },
+    sensors: { $list: { id: 'id!', base: 'fin', amp: 'fin', cycle: 'pos', noise: 'nonneg', drift: 'fin', current: 'nonneg', tempco: 'fin' }, max: MAX_SENSORS },
     radio: { $obj: { tech: 'enum:' + TECHS.join('|'), f: 'pos', power: 'fin', gain: 'fin', d: 'pos', n: 'pos', d0: 'pos', sigma: 'nonneg', extra: 'nonneg', nf: 'nonneg',
       sf: 'int:7:12', bw: 'pos', cr: 'int:1:4', payload: 'int:0:255', bitrate: 'pos', txTime: 'pos' } },
     brownout: { $obj: { v: 'nonneg', reset: 'nonneg' } },
+    env: { $obj: { temp: 'fin', swing: 'nonneg', cycle: 'pos' } },                                                  // ambient temperature (°C): temp − swing·cos(2πt/cycle)
+    clock: { $obj: { ppm: 'fin', tempco: 'fin', t0: 'fin', guard: 'nonneg', resync: 'nonneg' } },                   // the crystal: ppm + tempco·(T − t0)²; slots of ±guard s
+    network: { $obj: { nodes: 'int:0:200', period: 'pos', airtime: 'pos', jitter: 'unit', capture: 'nonneg', spread: 'nonneg', offset: 'fin' } },   // other nodes on the channel
     sim: { req: true, $obj: { duration: 'pos!', samples: 'int:2:' + MAX_SAMPLES, trace: 'nonneg', maxEvents: 'int:1:' + MAX_EVENTS } },
   };
   function checkNum(kind, v) {
@@ -8837,13 +9262,17 @@ function reportedView() {
     const active = g(pw, 'active', 5);
     return {
       battery: { capacity: num(b.capacity), chem, cells, curve, selfDischarge: g(b, 'selfDischarge', 0), soc0: g(b, 'soc0', 1),
-        rInt: g(b, 'rInt', (CHEMS[chem] ? CHEMS[chem].r : 0.1) * cells), cutoff: g(b, 'cutoff', (curve.length ? curve[0][1] : 0) * cells) },
+        rInt: g(b, 'rInt', (CHEMS[chem] ? CHEMS[chem].r : 0.1) * cells), cutoff: g(b, 'cutoff', (curve.length ? curve[0][1] : 0) * cells), tempCap: g(b, 'tempCap', CHEMS[chem] ? CHEMS[chem].kc : 0.008) },
       power: { sleep: g(pw, 'sleep', 0.005), active, sense: g(pw, 'sense', active), tx: g(pw, 'tx', 40), rx: g(pw, 'rx', 12) },
       schedule: { period: num(s.period), sense: g(s, 'sense', 0.05), txEvery: g(s, 'txEvery', 1), ack: g(s, 'ack', false), rxWindow: g(s, 'rxWindow', 0.2), retries: g(s, 'retries', 0), boot: g(s, 'boot', 0.1) },
-      sensors: (Array.isArray(dev.sensors) ? dev.sensors : []).map(x => ({ id: x.id, base: g(x, 'base', 20), amp: g(x, 'amp', 0), cycle: g(x, 'cycle', 86400), noise: g(x, 'noise', 0), drift: g(x, 'drift', 0), current: g(x, 'current', 0) })),
+      sensors: (Array.isArray(dev.sensors) ? dev.sensors : []).map(x => ({ id: x.id, base: g(x, 'base', 20), amp: g(x, 'amp', 0), cycle: g(x, 'cycle', 86400), noise: g(x, 'noise', 0), drift: g(x, 'drift', 0), current: g(x, 'current', 0), tempco: g(x, 'tempco', 0) })),
       radio: { tech: g(r, 'tech', 'lora'), f: g(r, 'f', 868e6), power: g(r, 'power', 14), gain: g(r, 'gain', 0), d: g(r, 'd', 1000), n: g(r, 'n', 2.7), d0: g(r, 'd0', 1), sigma: g(r, 'sigma', 0),
         extra: g(r, 'extra', 0), nf: g(r, 'nf', 6), sf: g(r, 'sf', 7), bw: g(r, 'bw', 125e3), cr: g(r, 'cr', 1), payload: g(r, 'payload', 12), bitrate: g(r, 'bitrate', 50000), txTime: g(r, 'txTime', undefined) },
       brownout: { v: g(bo, 'v', 0), reset: g(bo, 'reset', 0) },
+      env: { temp: g(dev.env, 'temp', 25), swing: g(dev.env, 'swing', 0), cycle: g(dev.env, 'cycle', 86400), on: isObj(dev.env) },
+      clock: { ppm: g(dev.clock, 'ppm', 0), tempco: g(dev.clock, 'tempco', 0), t0: g(dev.clock, 't0', 25), guard: g(dev.clock, 'guard', 0), resync: g(dev.clock, 'resync', 0) },
+      network: { nodes: g(dev.network, 'nodes', 0), period: g(dev.network, 'period', undefined), airtime: g(dev.network, 'airtime', undefined), jitter: g(dev.network, 'jitter', 1),
+        capture: g(dev.network, 'capture', 6), spread: g(dev.network, 'spread', 6), offset: g(dev.network, 'offset', 0), sync: false },
       sim: { duration: num(sm.duration), samples: g(sm, 'samples', 200), trace: g(sm, 'trace', 0), maxEvents: g(sm, 'maxEvents', DEF_EVENTS) },
     };
   }
@@ -8871,9 +9300,9 @@ function reportedView() {
   }
 
   /** checkFaults(device, faults) → [{code: 'fault', path, msg, level: 'error'}] (what create() would throw, as a list) */
-  const FAULT_KINDS = ['sensor-stuck', 'sensor-drift', 'battery-ageing', 'antenna-detached', 'wake-period', 'brownout'];
-  const FAULT_KEYS = ['kind', 'sensor', 'value', 'at', 'rate', 'factor', 'rInt', 'loss', 'period', 'v'];
-  const FAULT_NUM = { value: 'fin', at: 'nonneg', rate: 'fin', factor: 'pos', rInt: 'pos', loss: 'nonneg', period: 'pos', v: 'pos' };
+  const FAULT_KINDS = ['sensor-stuck', 'sensor-drift', 'battery-ageing', 'antenna-detached', 'wake-period', 'brownout', 'clock-drift', 'sync-wake', 'busy-channel', 'sensor-tempco'];
+  const FAULT_KEYS = ['kind', 'sensor', 'value', 'at', 'rate', 'factor', 'rInt', 'loss', 'period', 'v', 'ppm', 'nodes', 'coef'];
+  const FAULT_NUM = { value: 'fin', at: 'nonneg', rate: 'fin', factor: 'pos', rInt: 'pos', loss: 'nonneg', period: 'pos', v: 'pos', ppm: 'fin', nodes: 'int:1:200', coef: 'fin' };
   function checkFaults(dev, faults) {
     const P = [], E = (path, msg) => { P.push({ code: 'fault', path, msg, level: 'error' }); };
     if (!Array.isArray(faults)) { E('', 'faults must be a list'); return P; }
@@ -8892,10 +9321,11 @@ function reportedView() {
 
   // ---- outputs a spec may name ----
   const SCALARS = ['lifeAnalytic', 'lifeSim', 'iAvg', 'iAvgAnalytic', 'chargeUsed', 'socEnd', 'vEnd', 'vMin', 'wakes', 'sent', 'attempts', 'delivered', 'lost', 'deliveryRatio',
-    'resets', 'dead', 'tDead', 'rssiMean', 'snrMean', 'per', 'airtime', 'activeFraction', 'readingMean', 'readingLast', 'readingErr'];
-  const SERIES = ['t', 'soc', 'v', 'vload', 'current', 'delivered', 'resets', 'rssi', 'rxT', 'reading', 'truth', 'traceT', 'traceI', 'eventT', 'eventCode'];
+    'resets', 'dead', 'tDead', 'rssiMean', 'snrMean', 'per', 'airtime', 'activeFraction', 'readingMean', 'readingLast', 'readingErr',
+    'tempMin', 'tempMax', 'tempMean', 'collisions', 'slotMisses', 'clockErrMax', 'ppmMean'];
+  const SERIES = ['t', 'soc', 'v', 'vload', 'current', 'delivered', 'resets', 'rssi', 'rxT', 'reading', 'truth', 'traceT', 'traceI', 'eventT', 'eventCode', 'temp', 'clockErr'];
   const PER_SENSOR = ['readingMean', 'readingLast', 'readingErr', 'reading', 'truth'];
-  const EVENT_CODES = { reset: 1, lost: 2, dead: 3, overrun: 4 };
+  const EVENT_CODES = { reset: 1, lost: 2, dead: 3, overrun: 4, collision: 5, 'slot-miss': 6 };
 
   function checkSpec(spec) {
     const P = [];
@@ -8942,6 +9372,10 @@ function reportedView() {
       else if (f.kind === 'brownout') D.brownout.v = f.v !== undefined ? num(f.v) : 3.6;
       else if (f.kind === 'sensor-stuck') { const x = sens.find(s => s.id === f.sensor); x.stuck = { at: f.at !== undefined ? num(f.at) : 0, value: f.value !== undefined ? num(f.value) : undefined }; }
       else if (f.kind === 'sensor-drift') { const x = sens.find(s => s.id === f.sensor); x.fdrift = { at: f.at !== undefined ? num(f.at) : 0, rate: f.rate !== undefined ? num(f.rate) : 1 }; }
+      else if (f.kind === 'sensor-tempco') { const x = sens.find(s => s.id === f.sensor); x.tempco += f.coef !== undefined ? num(f.coef) : 0.5; }
+      else if (f.kind === 'clock-drift') D.clock.ppm += f.ppm !== undefined ? num(f.ppm) : 200;
+      else if (f.kind === 'sync-wake') { D.network.sync = true; D.network.jitter = 0; if (!D.network.nodes) D.network.nodes = f.nodes !== undefined ? num(f.nodes) : 5; }
+      else if (f.kind === 'busy-channel') D.network.nodes += f.nodes !== undefined ? num(f.nodes) : 50;
     }
     B.capacity *= capF; B.rInt *= rF;
     const air = R.txTime !== undefined ? R.txTime : R.tech === 'lora' ? loraAirtime(R.sf, R.bw, R.cr, R.payload) : R.tech === 'ble' ? bleAirtime(R.payload) : 8 * (R.payload + 8) / R.bitrate;
@@ -8964,21 +9398,56 @@ function reportedView() {
     const { B, P, S, R, sens } = k, T = k.D.sim.duration, maxEv = k.D.sim.maxEvents, bor = k.D.brownout.v;
     const nb = k.D.sim.samples, W = T / nb, isd = B.selfDischarge * B.capacity / (30 * 24);
     const trFrom = o && o.traceFrom !== undefined ? o.traceFrom : 0, trTo = o && o.traceTo !== undefined ? o.traceTo : k.D.sim.trace;
-    const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed)));
+    const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed))), rNet = mulberry32(hash32('network', seed));
     const voc = soc => interp(B.curve, Math.max(0, soc)) * B.cells;
+    // the environment: ambient temperature and what it does to the battery (capacity, internal resistance, self-discharge) and the sleep current
+    const EN = k.D.env, CK = k.D.clock, NW = k.D.network;
+    const tempAt = tt => (EN.swing ? EN.temp - EN.swing * Math.cos(2 * Math.PI * tt / EN.cycle) : EN.temp);
+    let fc = 1, fr = 1, fsd = 1, fsl = 1, Tc = EN.temp, tMin = Infinity, tMax = -Infinity, tSum = 0, tN = 0;
+    const envAt = tt => {
+      if (!EN.on) return;
+      Tc = tempAt(tt);
+      fc = Math.min(1, Math.max(0.2, 1 - B.tempCap * Math.max(0, 25 - Tc))); fr = Math.max(0.5, Math.exp(0.035 * (25 - Tc)));
+      fsd = Math.pow(2, (Tc - 25) / 10); fsl = Math.max(0.5, Math.pow(2, (Tc - 25) / 15));
+    };
+    envAt(0);
     let t = 0, q = 0, events = 0, dead = false, tDead = NaN, vMin = Infinity, logCount = 0, overrun = false; const counts = { reset: 0, lost: 0, overrun: 0, dead: 0 };
-    const soc = () => B.soc0 - q / B.capacity;
-    const bins = { q: new Float64Array(nb), vload: new Float64Array(nb).fill(Infinity), soc: new Float64Array(nb), v: new Float64Array(nb), del: new Float64Array(nb), res: new Float64Array(nb), rs: new Float64Array(nb), rn: new Float64Array(nb) };
+    const soc = () => B.soc0 - q / (fc === 1 ? B.capacity : B.capacity * fc);
+    const bins = { q: new Float64Array(nb), vload: new Float64Array(nb).fill(Infinity), soc: new Float64Array(nb), v: new Float64Array(nb), del: new Float64Array(nb), res: new Float64Array(nb), rs: new Float64Array(nb), rn: new Float64Array(nb),
+      temp: new Float64Array(nb), cerr: new Float64Array(nb) };
+    // the crystal: its error accumulates between synchronisations; slots of ±guard are missed beyond it
+    let cerr = 0, cerrMax = 0, ppmSum = 0, ppmN = 0, lastSync = 0, binErr = 0;
+    const ppmAt = () => CK.ppm + CK.tempco * (Tc - CK.t0) * (Tc - CK.t0);
+    // the other nodes on the channel (ALOHA): random access, or fixed phases (all in step after a power cut: sync-wake)
+    const pO = NW.period !== undefined ? NW.period : S.period * S.txEvery, aO = NW.airtime !== undefined ? NW.airtime : k.air;
+    const phases = NW.nodes > 0 && (NW.sync || NW.jitter < 1) ? Array.from({ length: NW.nodes }, () => (NW.sync ? S.sense : rNet() * pO)) : null;
+    function collided(tt, prx) {
+      if (!(NW.nodes > 0)) return false;
+      const hit = () => k.prxMedian + NW.offset + (NW.spread > 0 ? NW.spread * gauss(rNet) : 0) > prx - NW.capture;
+      if (!phases) {   // random access: Poisson arrivals in the window where another packet would overlap ours
+        const mean = NW.nodes * (k.air + aO) / pO; let L = Math.exp(-mean), p = 1, n = 0;
+        do { n++; p *= rNet(); } while (p > L && n < 1000);
+        for (let i = 0; i < n - 1; i++) if (hit()) return true;
+        return false;
+      }
+      for (const ph of phases) {
+        let d = ((tt - ph) % pO + pO) % pO; if (d > pO / 2) d -= pO;
+        if (NW.jitter > 0) d += NW.jitter * pO * (rNet() - 0.5);
+        if (d > -aO && d < k.air && hit()) return true;
+      }
+      return false;
+    }
     let bi = 0;
     const log = [], trace = [[], []], rx = { t: [], rssi: [], snr: [], reading: sens.map(() => []), truth: sens.map(() => []) };
-    const cnt = { wakes: 0, sent: 0, attempts: 0, delivered: 0, lost: 0, resets: 0, active: 0 };
+    const cnt = { wakes: 0, sent: 0, attempts: 0, delivered: 0, lost: 0, resets: 0, active: 0, collisions: 0, slotMisses: 0 };
     const ev = (code, extra) => { logCount++; counts[code] = (counts[code] || 0) + 1; if (log.length < MAX_LOG) log.push({ t, code, ...extra }); };
-    const closeBin = () => { bins.soc[bi] = soc(); bins.v[bi] = voc(soc()); bi++; };
+    const closeBin = () => { bins.soc[bi] = soc(); bins.v[bi] = voc(soc()); bins.temp[bi] = Tc; bins.cerr[bi] = binErr; binErr = 0; bi++; };
     /** a segment of dur s at I mA; false when the loaded voltage is below the brown-out level (nothing is drawn: the reset follows) */
     function seg(dur, I, checkBor) {
       if (dead || t >= T) return true;
       if (++events > maxEv) throw fail('budget', { events });
-      const vl = voc(soc()) - I * B.rInt / 1000;
+      if (EN.on) { envAt(t); if (I === P.sleep) I *= fsl; }
+      const vl = voc(soc()) - I * (fr === 1 ? B.rInt : B.rInt * fr) / 1000, sdNow = fsd === 1 ? isd : isd * fsd;
       if (checkBor && bor > 0 && vl < bor) return false;
       if (vl < vMin) vMin = vl;
       dur = Math.min(dur, T - t);
@@ -8986,11 +9455,11 @@ function reportedView() {
       let rest = dur;
       while (rest > 0 && bi < nb) {
         const edge = (bi + 1) * W, part = Math.min(rest, edge - t);
-        q += (I + isd) * part / 3600; bins.q[bi] += (I + isd) * part / 3600; if (vl < bins.vload[bi]) bins.vload[bi] = vl;
+        q += (I + sdNow) * part / 3600; bins.q[bi] += (I + sdNow) * part / 3600; if (vl < bins.vload[bi]) bins.vload[bi] = vl;
         t += part; rest -= part;
         if (t >= edge - 1e-9 * W) closeBin();
       }
-      if (rest > 0) { q += (I + isd) * rest / 3600; t += rest; }
+      if (rest > 0) { q += (I + sdNow) * rest / 3600; t += rest; }
       if (I > P.sleep) cnt.active += dur;
       if (soc() <= 0 || voc(soc()) < B.cutoff) { dead = true; tDead = t; ev('dead', { soc: soc() }); }
       return true;
@@ -8998,6 +9467,7 @@ function reportedView() {
     function reading(i, tt) {
       const s = sens[i], truth = s.base + s.amp * Math.sin(2 * Math.PI * tt / s.cycle);
       let v = truth + s.drift * tt / 86400 + s.noise * gauss(rSens[i]);
+      if (s.tempco) v += s.tempco * (tempAt(tt) - 25);
       if (s.fdrift && tt >= s.fdrift.at) v += s.fdrift.rate * (tt - s.fdrift.at) / 86400;
       if (s.stuck && tt >= s.stuck.at) { if (s.stuck.value === undefined) s.stuck.value = s.base + s.amp * Math.sin(2 * Math.PI * s.stuck.at / s.cycle); v = s.stuck.value; }
       return [v, truth];
@@ -9017,6 +9487,9 @@ function reportedView() {
         if (dead || t >= T) break;
       }
       const start = t; cnt.wakes++;
+      if (EN.on) { envAt(t); tMin = Math.min(tMin, Tc); tMax = Math.max(tMax, Tc); tSum += Tc; tN++; }
+      const ppm = ppmAt(); ppmSum += ppm; ppmN++;
+      if (CK.resync > 0 && t - lastSync >= CK.resync) { cerr = 0; lastSync = t; }
       const rd = sens.map((_, i) => reading(i, t));
       if (!seg(S.sense, senseI, true)) { reset(); n = 0; wakeAt = t + S.period; continue; }
       n++;
@@ -9027,10 +9500,13 @@ function reportedView() {
           cnt.attempts++;
           if (!seg(k.air, P.tx, true)) { brown = true; break; }
           const prx = k.prxMedian + (R.sigma > 0 ? R.sigma * gauss(rRadio) : 0), snr = prx - k.nfl, per = k.perAt(snr);
-          const ok = rRadio() >= per;
+          let ok = rRadio() >= per;
+          if (CK.guard > 0 && Math.abs(cerr) > CK.guard) { ok = false; cnt.slotMisses++; ev('slot-miss', { err: cerr }); }
+          else if (collided(t - k.air, prx)) { if (ok) { cnt.collisions++; ev('collision'); } ok = false; }
           if (S.ack && !seg(S.rxWindow, P.rx, true)) { brown = true; break; }
           if (ok) {
             got = true; cnt.delivered++;
+            if (S.ack) { cerr = 0; lastSync = t; }   // the ack carries the network's time
             rx.t.push(t); rx.rssi.push(prx); rx.snr.push(snr); rd.forEach((x, i) => { rx.reading[i].push(x[0]); rx.truth[i].push(x[1]); });
             if (bi < nb) { bins.del[bi]++; bins.rs[bi] += prx; bins.rn[bi]++; }
             break;
@@ -9040,11 +9516,13 @@ function reportedView() {
         if (!got) { cnt.lost++; if (S.ack && !brown) ev('lost'); }
       }
       if (brown) { reset(); n = 0; wakeAt = t + S.period; continue; }
-      wakeAt = start + S.period;
+      wakeAt = start + (ppm ? S.period * (1 + ppm * 1e-6) : S.period);
+      if (ppm) { cerr += S.period * ppm * 1e-6; const ae = Math.abs(cerr); if (ae > cerrMax) cerrMax = ae; if (ae > binErr) binErr = ae; }
       if (wakeAt < t) { if (!overrun) ev('overrun'); overrun = true; wakeAt = t; }
     }
     while (bi < nb) closeBin();
-    return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W };
+    return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W,
+      env: { min: tN ? tMin : EN.temp, max: tN ? tMax : EN.temp, mean: tN ? tSum / tN : EN.temp }, clock: { errMax: cerrMax, ppmMean: ppmN ? ppmSum / ppmN : CK.ppm } };
   }
 
   function results(k, r) {
@@ -9059,6 +9537,7 @@ function reportedView() {
       rssiMean: r.rx.rssi.length ? r.rx.rssi.reduce((a, b) => a + b, 0) / r.rx.rssi.length : NaN,
       snrMean: r.rx.snr.length ? r.rx.snr.reduce((a, b) => a + b, 0) / r.rx.snr.length : NaN,
       per: k.perAt(k.prxMedian - k.nfl), airtime: k.air, activeFraction: c.active / T,
+      tempMin: r.env.min, tempMax: r.env.max, tempMean: r.env.mean, collisions: c.collisions, slotMisses: c.slotMisses, clockErrMax: r.clock.errMax, ppmMean: r.clock.ppmMean,
     };
     const perSensor = k.sens.map((_, i) => {
       const v = r.rx.reading[i], tr = r.rx.truth[i];
@@ -9072,6 +9551,7 @@ function reportedView() {
       delivered: Array.from(r.bins.del, x => (cd += x)), resets: Array.from(r.bins.res, x => (cr += x)),
       rssi: Array.from(r.bins.rs, (x, i) => (r.bins.rn[i] ? x / r.bins.rn[i] : NaN)),
       rxT: r.rx.t, traceT: r.trace[0], traceI: r.trace[1], eventT: r.log.map(e => e.t), eventCode: r.log.map(e => EVENT_CODES[e.code]),
+      temp: Array.from(r.bins.temp), clockErr: Array.from(r.bins.cerr),
     };
     return { scalars: s, perSensor, series, readings: r.rx.reading, truth: r.rx.truth, log: r.log, logCount: r.logCount, counts: r.counts, sensors: k.sens.map(x => x.id) };
   }
@@ -9110,6 +9590,8 @@ function reportedView() {
       }
       if (probe.kind === 'log') { const r = run(); return { kind: 'log', events: r.log.slice(), count: r.logCount, counts: { ...r.counts } }; }   // counts: the whole run's, per code (events: the first limits.log)
       if (probe.kind === 'rssi') { const r = run(); return { kind: 'rssi', value: r.scalars.rssiMean, n: r.scalars.delivered }; }
+      if (probe.kind === 'T') { const r = run(), s = r.scalars; return { kind: 'T', value: r.series.temp[r.series.temp.length - 1], min: s.tempMin, max: s.tempMax, unit: '°C' }; }   // the device's thermometer
+      if (probe.kind === 'clock') { const r = run(), s = r.scalars; return { kind: 'clock', value: s.ppmMean, err: s.clockErrMax }; }   // the clock against a reference: ppm, worst error
       throw fail('probe');
     }
     return Object.freeze({ id: ID, run, measure, analytic: () => analytic(compile(JSON.parse(JSON.stringify(devc)), faults)) });

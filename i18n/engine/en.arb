@@ -4806,6 +4806,66 @@
   "@engine.act.bench.logStats": {
     "description": "Summary of a device's event log; {resets}, {lost}, {overruns} are counts (resets after a brown-out, messages not delivered, wake-ups that ran into the next one)."
   },
+  "engine.act.bench.mode": "Mode",
+  "@engine.act.bench.mode": {
+    "description": "Label of the select that picks a multimeter's mode (DC, AC, true RMS, average-responding)."
+  },
+  "engine.act.bench.mode.dc": "DC",
+  "@engine.act.bench.mode.dc": {
+    "description": "Multimeter mode: the average (direct-current) value. Short, as printed on a meter's dial."
+  },
+  "engine.act.bench.mode.ac": "AC",
+  "@engine.act.bench.mode.ac": {
+    "description": "Multimeter mode: the RMS of the alternating part only (DC removed). Short, as printed on a meter's dial."
+  },
+  "engine.act.bench.mode.rms": "true RMS (AC+DC)",
+  "@engine.act.bench.mode.rms": {
+    "description": "Multimeter mode: the true RMS of the whole signal, AC and DC together."
+  },
+  "engine.act.bench.mode.avg": "AC, average-responding",
+  "@engine.act.bench.mode.avg": {
+    "description": "Multimeter mode of a cheap meter: it rectifies and averages, calibrated for sine waves, so it reads other wave shapes wrongly."
+  },
+  "engine.act.bench.ground": "Probe ground",
+  "@engine.act.bench.ground": {
+    "description": "Label of the select that picks how an oscilloscope probe's ground is connected (e.g. the long clip lead or the short spring); the options are the activity's own words."
+  },
+  "engine.act.bench.inst.bode": "Frequency response analyser (Bode)",
+  "@engine.act.bench.inst.bode": {
+    "description": "Instrument on a circuit bench: sweeps a sine through the circuit and plots the gain in dB over frequency (a Bode plot)."
+  },
+  "engine.act.bench.inst.T": "Thermometer",
+  "@engine.act.bench.inst.T": {
+    "description": "Instrument on the bench of an IoT device: the device's temperature over the run."
+  },
+  "engine.act.bench.inst.clock": "Clock check (against a reference)",
+  "@engine.act.bench.inst.clock": {
+    "description": "Instrument on the bench of an IoT device: compares the device's clock with an exact reference clock (drift in ppm, worst error in seconds)."
+  },
+  "engine.act.bench.frequency": "Frequency",
+  "@engine.act.bench.frequency": {
+    "description": "Axis label of a Bode plot (the unit Hz is added after it)."
+  },
+  "engine.act.bench.gain": "Gain",
+  "@engine.act.bench.gain": {
+    "description": "Axis label of a Bode plot (the unit dB is added after it)."
+  },
+  "engine.act.bench.bodeStats": "gain at low frequency {dc}, peak {peak}, −3 dB at {f3db}, unity gain at {unity}",
+  "@engine.act.bench.bodeStats": {
+    "description": "Summary of a Bode plot; {dc}, {peak} are gains in dB, {f3db}, {unity} frequencies with unit (or — when the curve never crosses)."
+  },
+  "engine.act.bench.tempStats": "{now} at the end (from {min} to {max})",
+  "@engine.act.bench.tempStats": {
+    "description": "Thermometer reading of an IoT device; {now}, {min}, {max} are temperatures in °C (the last one, the lowest, the highest)."
+  },
+  "engine.act.bench.clockStats": "clock off by {ppm}, worst error {err}",
+  "@engine.act.bench.clockStats": {
+    "description": "Clock check of an IoT device; {ppm} is the mean drift in parts per million, {err} the largest time error in seconds."
+  },
+  "engine.act.bench.logStats2": "resets: {resets}, lost messages: {lost}, overrun wake-ups: {overruns}, collisions: {collisions}, missed slots: {missed}",
+  "@engine.act.bench.logStats2": {
+    "description": "Summary of a device's event log when its radio also had trouble; {resets}, {lost}, {overruns} as in logStats, {collisions} messages that collided with another device's, {missed} receive windows missed because the clock had drifted."
+  },
   "engine.act.embed.ask": "This activity opens {provider}. It needs the network, and {provider} may set cookies.",
   "@engine.act.embed.ask": {
     "description": "The card before an outside activity (a page of another site, e.g. a PhET simulation) loads; {provider} = the site's name (PhET, GeoGebra, Desmos). Nothing loads before the learner presses Open."
@@ -5790,6 +5850,130 @@
   "@engine.author.f.opt.OPAMP": {
     "description": "Label of a form field of the activity author: the option “OPAMP” of a list of choices (what an activity can do, or a kind of circuit part). Short."
   },
+  "engine.author.f.ac": "AC analysis",
+  "@engine.author.f.ac": {
+    "description": "Label of a form field of the activity author (the field “ac” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.acSource": "Source swept",
+  "@engine.author.f.acSource": {
+    "description": "Label of a form field of the activity author (the field “acSource” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.fStart": "From frequency",
+  "@engine.author.f.fStart": {
+    "description": "Label of a form field of the activity author (the field “fStart” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.fStop": "To frequency",
+  "@engine.author.f.fStop": {
+    "description": "Label of a form field of the activity author (the field “fStop” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.acPoints": "Frequency points",
+  "@engine.author.f.acPoints": {
+    "description": "Label of a form field of the activity author (the field “acPoints” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.mode": "Mode",
+  "@engine.author.f.mode": {
+    "description": "Label of a form field of the activity author (the field “mode” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.zin": "Input resistance",
+  "@engine.author.f.zin": {
+    "description": "Label of a form field of the activity author (the field “zin” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.power": "Power of a part",
+  "@engine.author.f.power": {
+    "description": "Label of a form field of the activity author (the field “power” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.acOut": "AC result",
+  "@engine.author.f.acOut": {
+    "description": "Label of a form field of the activity author (the field “acOut” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.ref": "Reference node",
+  "@engine.author.f.ref": {
+    "description": "Label of a form field of the activity author (the field “ref” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.add": "Added",
+  "@engine.author.f.add": {
+    "description": "Label of a form field of the activity author (the field “add” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.modes": "Meter modes",
+  "@engine.author.f.modes": {
+    "description": "Label of a form field of the activity author (the field “modes” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.leads": "Probe ground leads",
+  "@engine.author.f.leads": {
+    "description": "Label of a form field of the activity author (the field “leads” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.lead": "Lead inductance",
+  "@engine.author.f.lead": {
+    "description": "Label of a form field of the activity author (the field “lead” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.cin": "Probe capacitance",
+  "@engine.author.f.cin": {
+    "description": "Label of a form field of the activity author (the field “cin” of a simulation or of an activity’s entry). Short."
+  },
+  "engine.author.f.mode.dc": "DC",
+  "@engine.author.f.mode.dc": {
+    "description": "Label of a form field of the activity author: the option “dc” of the select “Mode”. Short."
+  },
+  "engine.author.f.mode.ac": "AC",
+  "@engine.author.f.mode.ac": {
+    "description": "Label of a form field of the activity author: the option “ac” of the select “Mode”. Short."
+  },
+  "engine.author.f.mode.rms": "True RMS (AC+DC)",
+  "@engine.author.f.mode.rms": {
+    "description": "Label of a form field of the activity author: the option “rms” of the select “Mode”. Short."
+  },
+  "engine.author.f.mode.avg": "AC, average-responding",
+  "@engine.author.f.mode.avg": {
+    "description": "Label of a form field of the activity author: the option “avg” of the select “Mode”. Short."
+  },
+  "engine.author.f.acOut.f": "Frequency axis",
+  "@engine.author.f.acOut.f": {
+    "description": "Label of a form field of the activity author: the option “f” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.db": "Gain (dB)",
+  "@engine.author.f.acOut.db": {
+    "description": "Label of a form field of the activity author: the option “db” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.phase": "Phase (degrees)",
+  "@engine.author.f.acOut.phase": {
+    "description": "Label of a form field of the activity author: the option “phase” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.mag": "Gain (times)",
+  "@engine.author.f.acOut.mag": {
+    "description": "Label of a form field of the activity author: the option “mag” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.dcDb": "Gain at low frequency",
+  "@engine.author.f.acOut.dcDb": {
+    "description": "Label of a form field of the activity author: the option “dcDb” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.peakDb": "Peak gain",
+  "@engine.author.f.acOut.peakDb": {
+    "description": "Label of a form field of the activity author: the option “peakDb” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.fPeak": "Frequency of the peak",
+  "@engine.author.f.acOut.fPeak": {
+    "description": "Label of a form field of the activity author: the option “fPeak” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.f3db": "Upper −3 dB frequency",
+  "@engine.author.f.acOut.f3db": {
+    "description": "Label of a form field of the activity author: the option “f3db” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.fLow3db": "Lower −3 dB frequency",
+  "@engine.author.f.acOut.fLow3db": {
+    "description": "Label of a form field of the activity author: the option “fLow3db” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.fUnity": "Unity-gain frequency",
+  "@engine.author.f.acOut.fUnity": {
+    "description": "Label of a form field of the activity author: the option “fUnity” of the select “AC result”. Short."
+  },
+  "engine.author.f.acOut.pm": "Phase margin",
+  "@engine.author.f.acOut.pm": {
+    "description": "Label of a form field of the activity author: the option “pm” of the select “AC result”. Short."
+  },
+  "engine.author.f.instKind.bode": "Frequency response analyser (Bode)",
+  "@engine.author.f.instKind.bode": {
+    "description": "Label of a form field of the activity author: the option “bode” of the select “instKind”. Short."
+  },
   "engine.author.p.format": "Format",
   "@engine.author.p.format": {
     "description": "Label of a form field of the activity author: the field “format” of a circuit netlist (a part, a waveform or a model parameter). Short."
@@ -5965,6 +6149,118 @@
   "engine.author.p.headroom": "Headroom",
   "@engine.author.p.headroom": {
     "description": "Label of a form field of the activity author: the field “headroom” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.pickup": "Pickup on floating nodes",
+  "@engine.author.p.pickup": {
+    "description": "Label of a form field of the activity author: the field “pickup” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.hum": "Mains hum frequency",
+  "@engine.author.p.hum": {
+    "description": "Label of a form field of the activity author: the field “hum” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.noise": "Noise",
+  "@engine.author.p.noise": {
+    "description": "Label of a form field of the activity author: the field “noise” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.bw": "Bandwidth",
+  "@engine.author.p.bw": {
+    "description": "Label of a form field of the activity author: the field “bw” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.wander": "Slow wander",
+  "@engine.author.p.wander": {
+    "description": "Label of a form field of the activity author: the field “wander” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.r": "Coupling resistance",
+  "@engine.author.p.r": {
+    "description": "Label of a form field of the activity author: the field “r” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.rms": "RMS",
+  "@engine.author.p.rms": {
+    "description": "Label of a form field of the activity author: the field “rms” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.seed": "Seed",
+  "@engine.author.p.seed": {
+    "description": "Label of a form field of the activity author: the field “seed” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Cj": "Junction capacitance",
+  "@engine.author.p.Cj": {
+    "description": "Label of a form field of the activity author: the field “Cj” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Bv": "Breakdown voltage",
+  "@engine.author.p.Bv": {
+    "description": "Label of a form field of the activity author: the field “Bv” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Ibv": "Current at breakdown",
+  "@engine.author.p.Ibv": {
+    "description": "Label of a form field of the activity author: the field “Ibv” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Cbe": "Base–emitter capacitance",
+  "@engine.author.p.Cbe": {
+    "description": "Label of a form field of the activity author: the field “Cbe” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Cbc": "Base–collector capacitance",
+  "@engine.author.p.Cbc": {
+    "description": "Label of a form field of the activity author: the field “Cbc” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Cgs": "Gate–source capacitance",
+  "@engine.author.p.Cgs": {
+    "description": "Label of a form field of the activity author: the field “Cgs” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Cgd": "Gate–drain capacitance",
+  "@engine.author.p.Cgd": {
+    "description": "Label of a form field of the activity author: the field “Cgd” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Cds": "Drain–source capacitance",
+  "@engine.author.p.Cds": {
+    "description": "Label of a form field of the activity author: the field “Cds” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.body": "Body diode",
+  "@engine.author.p.body": {
+    "description": "Label of a form field of the activity author: the field “body” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.gbw": "Gain–bandwidth product",
+  "@engine.author.p.gbw": {
+    "description": "Label of a form field of the activity author: the field “gbw” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.slew": "Slew rate",
+  "@engine.author.p.slew": {
+    "description": "Label of a form field of the activity author: the field “slew” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.rout": "Output resistance",
+  "@engine.author.p.rout": {
+    "description": "Label of a form field of the activity author: the field “rout” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.vos": "Input offset voltage",
+  "@engine.author.p.vos": {
+    "description": "Label of a form field of the activity author: the field “vos” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.ib": "Input bias current",
+  "@engine.author.p.ib": {
+    "description": "Label of a form field of the activity author: the field “ib” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.z0": "Characteristic impedance",
+  "@engine.author.p.z0": {
+    "description": "Label of a form field of the activity author: the field “z0” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.td": "Delay",
+  "@engine.author.p.td": {
+    "description": "Label of a form field of the activity author: the field “td” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.len": "Length",
+  "@engine.author.p.len": {
+    "description": "Label of a form field of the activity author: the field “len” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.vf": "Velocity factor",
+  "@engine.author.p.vf": {
+    "description": "Label of a form field of the activity author: the field “vf” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Von": "Fully on at",
+  "@engine.author.p.Von": {
+    "description": "Label of a form field of the activity author: the field “Von” of a circuit netlist (a part, a waveform or a model parameter). Short."
+  },
+  "engine.author.p.Voff": "Fully off at",
+  "@engine.author.p.Voff": {
+    "description": "Label of a form field of the activity author: the field “Voff” of a circuit netlist (a part, a waveform or a model parameter). Short."
   },
   "engine.author.h.params": "What the learner moves. Each control has a name that formulas use and a label key.",
   "@engine.author.h.params": {
