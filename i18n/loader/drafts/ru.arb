@@ -146,6 +146,8 @@
   "loader.req.accept": "Принять",
   "loader.req.rejected": "Отклонено",
   "loader.req.reject": "Отклонить",
+  "loader.note.dismiss": "Убрать",
+  "loader.note.clearAll": "Убрать все",
   "loader.upd.owner": "Владелец",
   "loader.upd.author": "Автор",
   "loader.upd.curChanged": "{who}: изменения в дорожной карте «{title}»",

@@ -146,6 +146,8 @@
   "loader.req.accept": "Αποδοχή",
   "loader.req.rejected": "Απορρίφθηκε",
   "loader.req.reject": "Απόρριψη",
+  "loader.note.dismiss": "Διαγραφή",
+  "loader.note.clearAll": "Διαγραφή όλων",
   "loader.upd.owner": "Ο κάτοχος",
   "loader.upd.author": "Ο δημιουργός του",
   "loader.upd.curChanged": "{who} άλλαξε τον Οδικό χάρτη «{title}»",

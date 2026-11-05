@@ -422,7 +422,7 @@ async function checkInbox() {
     // the changed state reaches the cloud BEFORE its rows leave the inbox (a failed push keeps them for the next check)
     if (n) await CL.push(ACCOUNT.id);
     for (const k of done) await CL.kvDelete(k).catch(() => { });
-    if (n) { toast('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
+    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
   } catch (e) { console.warn('[inbox]', e); } finally { inboxRun.busy = false; }
   return n;
 }
@@ -7357,7 +7357,7 @@ function bellButton() {
 function openNotes() {
   modal((box, close) => {
     const body = h('div');
-    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? tE('engine.notes.nothing') : tE('engine.notes.needCloud'))); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(tE('engine.share.openNow', { title: s.title }), () => s.kind === 'curriculum' ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } }))); };
+    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? tE('engine.notes.nothing') : tE('engine.notes.needCloud'))); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(tE('engine.share.openNow', { title: s.title }), () => s.kind === 'curriculum' ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } }))); const clr = Noema.noticesClear?.(list); if (clr) body.append(clr); };
     Noema.notes.on(draw);
     box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 ' + t('top.notifications')), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
   });
@@ -7366,7 +7366,7 @@ function shareBanner() {
   const bar = h('div', { class: 'sharebar', role: 'status' });
   let later = new Set();
   const draw = list => {
-    const items = list.filter(x => !later.has(x.id)); bar.innerHTML = '';
+    const items = list.filter(x => !later.has(x.id) && x.kind !== 'notice'); bar.innerHTML = '';   // 🔔 news only waits in the bell
     bar.classList.toggle('on', !!items.length); if (!items.length) return;
     const sh = items[0];
     if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {   // 🔔 an update that waits for me: take it or keep mine

@@ -308,6 +308,7 @@
   const App = { acc: null, timer: null, last: null, error: null, busy: false, listeners: new Set() };
   const emitA = () => App.listeners.forEach(f => { try { f(App); } catch (e) { } });
   const toast = (m, ms) => root.Noema?.toast?.(m, ms);
+  const notice = (m, ms) => root.Noema?.notice ? root.Noema.notice(m, ms) : toast(m, ms);   // 🔔 news: a toast, or the bell when more would stack up
   /** Is any curriculum of this account waiting for the Claude app? */
   App.waiting = acc => C().list(acc).some(c => !work(c).done);
   /** A step the connector saved: get the pack from the cloud (and its pictures) and mark the step ready. */
@@ -317,7 +318,7 @@
     if (n.pack?.status === 'ready' && n.pack.id === e.packId && (!e.version || n.pack.version === e.version)) return false;
     const pack = await root.Noema.getPackById(acc, e.packId);
     await C().Gen.finish(c, e.nid, pack, { stored: true, via: 'claude-app' });
-    toast('🧭 ' + rt('roadmap.jobs.stepReady', { title: n.title }), 4000); return true;
+    notice('🧭 ' + rt('roadmap.jobs.stepReady', { title: n.title }), 4000); return true;
   }
   /** 🛡 Is this tab older than the website (build.json, written by tools/build.py site)? An old tab may not know what the
       connector writes now, and deleting what it does not understand loses it — so it leaves the inbox alone and reloads
@@ -356,7 +357,7 @@
           else if (e.kind === 'assign') {   // 📦 Claude saved a subject for a step the learner named: it teaches that step from now on
             const res = await C().Edit.assign(acc, cid, e.nid, e.packId, { from: e.from || 'claude' });
             if (res.code === 'notInLibrary' && Date.now() - (Date.parse(r.updated_at) || 0) < 864e5) continue;   // its card has not synced yet: next time
-            if (res.ok) { n++; toast('📦 ' + rt('roadmap.jobs.attached', { subject: e.title || e.packId, step: C().get(acc, cid)?.nodes[e.nid]?.title || e.nid, replan: res.replan ? 'yes' : 'no' }), 5000); }
+            if (res.ok) { n++; notice('📦 ' + rt('roadmap.jobs.attached', { subject: e.title || e.packId, step: C().get(acc, cid)?.nodes[e.nid]?.title || e.nid, replan: res.replan ? 'yes' : 'no' }), 5000); }
             else toast('📦 ' + res.error, 5000);
           }
           else if (e.kind === 'i18n') {   // 🌐 Claude translated the Roadmap's own words (titles, learning goals, chapters) with its steps' packs
@@ -366,12 +367,12 @@
           }
           else if (e.kind === 'extend') {   // 🌱 Claude added a new part to the Roadmap, joined to steps already on it
             const errs = extendProblems(c, e);
-            if (!errs.length) { extend(c, e); C().save(acc, c); n++; toast('🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }), 5000); }
+            if (!errs.length) { extend(c, e); C().save(acc, c); n++; notice('🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }), 5000); }
             else if (errs[0] !== 'applied') { console.warn('[curjobs] part refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. this copy has not got a step it links to yet: try again later
           }
           else if (e.kind === 'link') {   // 🔗 Claude linked steps already on the map (a prepared step keeps its subject and progress)
             const errs = linkProblems(c, e);
-            if (!errs.length) { const r = link(c, e); C().save(acc, c); n++; toast('🔗 ' + rt('roadmap.jobs.linksAdded', r), 5000); }
+            if (!errs.length) { const r = link(c, e); C().save(acc, c); n++; notice('🔗 ' + rt('roadmap.jobs.linksAdded', r), 5000); }
             else if (errs[0] !== 'applied') { console.warn('[curjobs] links refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. this copy has not got a step yet: try again later
           }
           else {
