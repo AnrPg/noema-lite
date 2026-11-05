@@ -35,7 +35,7 @@ FROM = {'alias-lab': 'html-app@1', 'rc-lowpass': 'sim-spec@1', 'rc-transient': '
         'py-filter': 'py-module@1', 'planets-quiz': 'h5p@1',
         'cheapest-route': 'html-app@1'}   # a mini-game on an engine of the library (graph@1, "engines" in its entry)
 # the engine library (docs/INTERACTIVE_LIBRARY.md): one reference activity per engine, each a sim-spec@1 spec; --from <name> starts from it
-LIB_REFS = {'satin-move': 'craft@1', 'calendar-synchronism': 'timeline@1', 'roman-itinerary': 'map@1', 'hexameter-scansion': 'text@1', 'predator-prey': 'ode@1', 'meantone-wolf': 'music@1', 'pv-loop': 'med@1', 'sepsis-case': 'clinic@1', 'wf-drift': 'genetics@1', 'dijkstra-steps': 'graph@1', 'euler-line': 'geom@1', 'brachial-lesion': 'anatomy@1', 'sickle-codon': 'seq@1'}
+LIB_REFS = {'satin-move': 'craft@1', 'calendar-synchronism': 'timeline@1', 'roman-itinerary': 'map@1', 'hexameter-scansion': 'text@1', 'predator-prey': 'ode@1', 'meantone-wolf': 'music@1', 'pv-loop': 'med@1', 'sepsis-case': 'clinic@1', 'wf-drift': 'genetics@1', 'dijkstra-steps': 'graph@1', 'euler-line': 'geom@1', 'brachial-lesion': 'anatomy@1', 'sickle-codon': 'seq@1', 'ci-coverage': 'prob@1'}
 FROM.update({k: 'sim-spec@1' for k in LIB_REFS})
 P6_REFS = ('heatsink', 'pid-tune', 'lora-link', 'sensor-node')   # the P6 engines thermal@1, pid@1, rf@1, twin@1 (docs/INTERACTIVE_ENGINES.md)
 ref = None; h5p_file = None

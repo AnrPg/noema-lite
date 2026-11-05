@@ -1,0 +1,14 @@
+{
+ "cases": [
+  { "name": "n = 30, p = 0.1: Wald covers only 80.9 %, Wilson 97.4 % (exact binomial sums)", "steps": [ { "set": "n", "value": 30 }, { "set": "p", "value": 0.1 } ],
+    "expect": { "values": { "waldAt": [0.8085, 0.8086], "wilsonAt": [0.9741, 0.9742], "waldLo": [0, 0], "waldHi": [0.2073, 0.2074], "wilsonLo": [0.0345, 0.0347], "wilsonHi": [0.2562, 0.2563] } } },
+  { "name": "n = 30: averaged over every p, Wald covers 87.9 % and Wilson 95.2 %", "steps": [ { "set": "n", "value": 30 }, { "set": "p", "value": 0.5 } ],
+    "expect": { "values": { "waldMean": [0.879, 0.8793], "wilsonMean": [0.9523, 0.9525], "waldAt": [0.957, 0.9573] } } },
+  { "name": "p = 0.5 is the easy case: both intervals coincide in coverage", "steps": [ { "set": "n", "value": 30 }, { "set": "p", "value": 0.5 } ],
+    "expect": { "values": { "wilsonAt": [0.957, 0.9573] } } },
+  { "name": "n = 5, p = 0.01: k = 0, the Wald interval shrinks to the single point 0 and covers p 4.9 % of the time", "steps": [ { "set": "n", "value": 5 }, { "set": "p", "value": 0.01 } ],
+    "expect": { "values": { "phat": [0, 0], "waldHi": [0, 0], "waldAt": [0.0489, 0.0491], "wilsonAt": [0.9509, 0.9511] } } },
+  { "name": "even n = 200 does not rescue Wald near the edge (p = 0.99: 86.5 %)", "steps": [ { "set": "n", "value": 200 }, { "set": "p", "value": 0.99 } ],
+    "expect": { "state": [ "n", "p" ], "values": { "waldAt": [0.8649, 0.8651], "wilsonAt": [0.9482, 0.9483], "waldMin": [0.636, 0.6362] } } }
+ ]
+}

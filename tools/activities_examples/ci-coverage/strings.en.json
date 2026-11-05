@@ -1,0 +1,22 @@
+{
+ "title": "How often does a 95 % interval hit?",
+ "intro": "Draw n people, count the k who say yes, and build a 95 % interval for the true share p. The Wald interval p̂ ± 1.96·√(p̂(1−p̂)/n) is the one in most textbooks; the Wilson interval inverts the score test instead. Move n and the true p and watch the exact chance that each interval covers p. For a 95 % interval it should stay close to 95 %.",
+ "sampleSize": "Sample size n",
+ "trueP": "True proportion p",
+ "phatLabel": "Typical observed share k/n",
+ "waldCiLabel": "Wald interval, lower end",
+ "waldCiHiLabel": "Wald interval, upper end",
+ "wilsonCiLabel": "Wilson interval, lower end",
+ "wilsonCiHiLabel": "Wilson interval, upper end",
+ "waldAtLabel": "Wald: chance of covering p",
+ "wilsonAtLabel": "Wilson: chance of covering p",
+ "waldMeanLabel": "Wald: average coverage over all p",
+ "wilsonMeanLabel": "Wilson: average coverage over all p",
+ "plotTitle": "Exact coverage of the two intervals for every true p (the jagged lines are real: k can only be a whole number)",
+ "pAxis": "True proportion p",
+ "coverAxis": "Chance the interval covers p",
+ "waldLine": "Wald",
+ "wilsonLine": "Wilson",
+ "nominalMark": "95 % promised",
+ "pMark": "your p"
+}

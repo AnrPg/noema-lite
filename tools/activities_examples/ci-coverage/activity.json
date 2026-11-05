@@ -1,0 +1,17 @@
+{
+ "id": "ci-coverage",
+ "runtime": "sim-spec@1",
+ "entry": "activities/ci-coverage/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "ci-coverage-still",
+  "text": "The exact coverage of two 95 % intervals for a proportion, with n = 30. The textbook Wald interval p̂ ± 1.96·√(p̂(1−p̂)/n) covers the true p only 80.9 % of the time at p = 0.1 and averages 87.9 % over all p, falling to almost nothing near 0 and 1. The Wilson interval, which inverts the score test, covers 97.4 % at p = 0.1 and averages 95.2 %. The curves are jagged because k can only be a whole number (Brown, Cai and DasGupta, 2001)."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}
