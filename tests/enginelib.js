@@ -11,7 +11,7 @@ globalThis.window = globalThis;
 require(path.join(SRC, '35_simexpr.js'));
 for (const f of ['36_engine_circuit.js', '39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(SRC, f));   // the plugins (their old messages must stay)
 require(path.join(SRC, '46_lib_core.js'));
-const LIBFILES = fs.readdirSync(SRC).filter(f => /^4[78]_lib_[a-z]+\.js$/.test(f)).sort();
+const LIBFILES = fs.readdirSync(SRC).filter(f => /^4[78]_lib_[a-z_]+\.js$/.test(f)).sort();
 for (const f of LIBFILES) require(path.join(SRC, f));
 require(path.join(SRC, '49_lib_catalog.js'));
 require(path.join(ROOT, 'engine', 'packcheck.js'));
@@ -94,6 +94,23 @@ print(json.dumps(out))`, JSON.stringify(specs)));
   let same = 0; js.forEach((r, i) => { if (norm(r) === norm(pr[i])) same++; else if (same + 5 > i) console.log(`  ${e.id} spec ${i}\n  JS ${norm(r).slice(0, 600)}\n  PY ${norm(pr[i]).slice(0, 600)}`); });
   ok(specs.length >= 10 && same === specs.length, `${e.id}: JS and Python agree on ${same}/${specs.length} specs (checkSpec, exprs, keys and the whole checkSimSpec)`);
   ok(specs.some(s => !PC.checkSimSpec(s, null).length) && specs.some(s => PC.checkSimSpec(s, null).length), `${e.id}: the fixtures hold good and bad specs`);
+}
+// ---- the reference activity of every library engine (docs/INTERACTIVE_LIBRARY.md §1.1): its spec passes both validators with its
+//      own string tables, it has the five pack languages and tests.json, and the skill's activity_new.py --from knows it ----
+{
+  const EX = path.join(ROOT, 'tools', 'activities_examples'), anew = fs.readFileSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), 'utf8');
+  const refs = fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'spec.json'))).map(d => ({ d, spec: JSON.parse(fs.readFileSync(path.join(EX, d, 'spec.json'), 'utf8')) })).filter(r => Object.prototype.hasOwnProperty.call(PC.ACTIVITY_RULES.LIB, r.spec.engine));
+  for (const e of K.CATALOG.filter(x => x.layer === 'library' && x.global && globalThis[x.global] && globalThis[x.global].checkSpec)) {
+    const mine = refs.filter(r => r.spec.engine === e.id);
+    ok(mine.length > 0, `${e.id}: has a reference activity (${mine.map(r => r.d).join(', ') || 'none'})`);
+    for (const { d, spec } of mine) {
+      const tables = Object.fromEntries(['en', 'el', 'ru', 'de', 'fr'].filter(l => fs.existsSync(path.join(EX, d, `strings.${l}.json`))).map(l => [l, JSON.parse(fs.readFileSync(path.join(EX, d, `strings.${l}.json`), 'utf8'))]));
+      const jsE = PC.checkSimSpec(spec, tables);
+      const pyE = JSON.parse(py(`import json,sys,activities as A\nd=json.loads(sys.stdin.read())\nprint(json.dumps(A.check_spec(d['s'],d['t'])))`, JSON.stringify({ s: spec, t: tables })));
+      ok(!jsE.length && !pyE.length, `${e.id}: ${d} passes checkSimSpec and check_spec with its strings` + (jsE.length || pyE.length ? ': ' + [...jsE, ...pyE].slice(0, 3).join(' | ') : ''));
+      ok(Object.keys(tables).length === 5 && fs.existsSync(path.join(EX, d, 'tests.json')) && new RegExp(`'${d}': '${e.id.replace('@', '@')}'`).test(anew), `${e.id}: ${d} has strings in en, el, ru, de, fr, tests.json, and activity_new.py --from ${d}`);
+    }
+  }
 }
 console.log(`\n${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);
