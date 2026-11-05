@@ -38,6 +38,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | B9–B10 source filter banner | Unchanged, on every page while a filter is on |
 | B11 step banner (🗺️ Map) | The subject page's one header: a small "Station of …" line above the title (opens the map), the bar counts the station's mastery |
 | N1–N7 🔔 contents | Unchanged rows, in a sheet |
+| N8 🔔 news | What arrives (a step ready, a subject attached, a new part, links added, inbox results: `Noema.notice`) is a short toast while at most 2 are on screen; a 3rd moves them all, and the rest of that burst, into 🔔 as rows with ✕ and **Clear all** (kept on this device, `engine/loader.js` Notices; tests/notices.js) |
 
 ## 2. A subject (`#/subject`, was `#/`)
 | Old | New home |

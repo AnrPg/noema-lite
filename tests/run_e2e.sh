@@ -30,6 +30,7 @@ node "$ROOT/tests/xapi.js"            # the xAPI 1.0.3 / cmi5 export (docs/INTER
 python3 "$ROOT/tests/h5p_import.py"   # H5P import into the exercise types (docs/INTERACTIVE_AUTHORING.md §H5P)
 node "$ROOT/tests/shell.js" "$T"
 node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
+node "$ROOT/tests/notices.js" "$T"   # news (a step ready, a new part…): at most 2 toasts at once, the rest in the 🔔 until cleared
 node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)
 node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, the practice round
 node "$ROOT/tests/e2e.js" "$T"
