@@ -144,6 +144,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     ok(await nikos.locator(`.so-invite[data-room="${g.id}"]`).count() === 1, 'Nikos sees the invitation in his chats');
     await nikos.click(`.so-invite[data-room="${g.id}"] .so-joinbtn`); await wait(1000);
     ok(S.members.find(m => m.room === g.id && m.user_id === uidOf('nikos@example.com')).status === 'joined' && new RegExp(g.id).test(nikos.url()), 'he joins: the group chat opens');
+    await nikos.evaluate(() => { NoemaShell.route(); NoemaShell.route(); }); await wait(1200);   // the page drawn twice in a row while it loads (any re-route does it, e.g. the theme's)
     eleni = await person('Ελένη', 'eleni@example.com');
     const T3 = await token('eleni@example.com');
     ok((await (await rest(T3, `/rest/v1/noema_messages?select=*&room=eq.${g.id}`)).json()).length === 0 && (await rest(T3, '/rest/v1/noema_messages', { method: 'POST', body: JSON.stringify([{ room: g.id, author: uidOf('eleni@example.com'), body: 'x' }]) })).status === 403, 'before joining, Eleni can neither read nor write in the group');
@@ -152,6 +153,7 @@ c = canvas.Canvas(sys.argv[1]); c.drawString(72, 720, 'Genetics summary'); c.sho
     await eleni.click('.so-joinnow'); await wait(1000);
     ok(new RegExp('#/chat/' + g.id).test(eleni.url()), 'Eleni joins with the link');
     await eleni.fill('.so-box', 'Hello everyone, I have last year’s exam'); await eleni.click('.so-send'); await wait(500);
+    ok(await until(async () => /last year’s exam/.test(await nikos.locator('.so-msgs').innerText()), 10000), 'her message reaches Nikos’s open group chat by itself (it was drawn twice: the newest drawing keeps polling)');
 
     // a Roadmap shared in the group: private, yet its members may join it, each with their own progress
     const cid = await iro.evaluate(() => {
