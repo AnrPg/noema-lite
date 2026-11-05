@@ -375,13 +375,12 @@ def build_skill(out_zip):
         for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json'))): z.write(f, f'noema-pack-builder/scripts/pipelines/{os.path.basename(f)}')   # docs/PIPELINES.md
         # interactive activities (docs/INTERACTIVE.md): the reference activity, the app's runtime for the harness, the contract
-        # the reference activities travel as ONE inner zip (claude.ai takes a skill zip of at most 200 files);
-        # activity_new.py unpacks it beside itself on first use
-        ex_root, ex_buf = os.path.join(ROOT, 'tools', 'activities_examples'), io.BytesIO()
-        with zipfile.ZipFile(ex_buf, 'w', zipfile.ZIP_DEFLATED) as ez:
-            for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
-                if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
-        z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
+        # the reference activities travel as ONE JSON bundle (path → base64): claude.ai takes a skill zip of at most
+        # 200 files and no zip inside it (an .h5p is one); activity_new.py unpacks it beside itself on first use
+        ex_root, ex = os.path.join(ROOT, 'tools', 'activities_examples'), {}
+        for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
+            if os.path.isfile(f) and '__pycache__' not in f: ex[os.path.relpath(f, ex_root).replace(os.sep, '/')] = base64.b64encode(open(f, 'rb').read()).decode('ascii')
+        z.writestr('noema-pack-builder/scripts/activities_examples.json', json.dumps({'format': 'noema.files/v1', 'files': ex}))
         for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', *P6_ENGINES, '43_engines_p6.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
@@ -407,7 +406,9 @@ def build_skill(out_zip):
             name = 'noema-pack-builder/' + ('LANGUAGE_BUILDER.md' if b == 'SKILL.md' else b)
             if name not in have: z.write(a, name); have.add(name)
         n = len(z.namelist())
+        nested = [i for i in z.namelist() if zipfile.is_zipfile(io.BytesIO(z.read(i)))]
     if n > SKILL_MAX_FILES: sys.exit(f'✗ the skill zip has {n} files; claude.ai accepts at most {SKILL_MAX_FILES}')
+    if nested: sys.exit(f'✗ the skill zip holds zip files ({", ".join(nested)}); claude.ai refuses nested zips')
     print('skill →', os.path.relpath(out_zip, ROOT), f'({n} files)')
 
 def public_config():

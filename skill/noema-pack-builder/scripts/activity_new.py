@@ -45,9 +45,12 @@ if runtime not in REF: sys.exit(f'✗ --runtime is one of {", ".join(REF)}')
 sdir, nid = os.path.abspath(a[0]), a[1]
 if not re.fullmatch(r'[a-z0-9][a-z0-9-]{1,60}', nid): sys.exit('✗ the id is lower-case letters, digits and - (2–61 characters)')
 ref = ref or REF[runtime]
-_ez = os.path.join(HERE, 'activities_examples.zip')   # the skill ships the references as one zip (claude.ai's 200-file limit)
-if not os.path.isdir(os.path.join(HERE, 'activities_examples')) and os.path.isfile(_ez):
-    import zipfile; zipfile.ZipFile(_ez).extractall(os.path.join(HERE, 'activities_examples'))
+_eb = os.path.join(HERE, 'activities_examples.json')   # the skill ships the references as one bundle (claude.ai: ≤ 200 files, no zip inside)
+if not os.path.isdir(os.path.join(HERE, 'activities_examples')) and os.path.isfile(_eb):
+    import base64
+    for _p, _b in json.load(open(_eb, encoding='utf-8'))['files'].items():
+        _t = os.path.join(HERE, 'activities_examples', *_p.split('/')); os.makedirs(os.path.dirname(_t), exist_ok=True)
+        open(_t, 'wb').write(base64.b64decode(_b))
 src = next((d for d in (os.path.join(HERE, 'activities_examples', ref), os.path.join(HERE, '..', '..', '..', 'tools', 'activities_examples', ref)) if os.path.isdir(d)), None)
 if not src: sys.exit(f'✗ the reference activity (activities_examples/{ref}) is missing from the toolkit')
 dst = os.path.join(sdir, 'activities', nid)
