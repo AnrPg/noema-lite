@@ -16,7 +16,7 @@
    software is freely granted, provided that this notice
    is preserved.
    ==================================================== */
-(function (root) {
+(function noemaExprModule(root) {
   /* i18n-ignore-start */   // code and developer-facing diagnostics, not UI text
   'use strict';
   const LIMITS = Object.freeze({ src: 2000, nodes: 2000, depth: 64, args: 16 });
@@ -1150,6 +1150,8 @@
   /** print(tree) → source that parses back to the same tree (only the brackets it needs) */
   const print = ast => pr(validateAst(ast));
 
-  root.NoemaExpr = Object.freeze({ parse, check, compile, evaluate, print, FUNCS, CONSTS, LIMITS });
+  /** source() → this module as a script that defines self.NoemaExpr (the engine library's Workers evaluate their models with it) */
+  const source = () => '(' + noemaExprModule.toString() + ')(self);';
+  root.NoemaExpr = Object.freeze({ parse, check, compile, evaluate, print, source, FUNCS, CONSTS, LIMITS });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

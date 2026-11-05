@@ -82,3 +82,15 @@
 .act-pyrun { position: relative; height: 0; overflow: hidden; }
 .act-pyset .row { gap: 8px; flex-wrap: wrap; align-items: center; }
 .act-pybar { flex: 1 1 140px; max-width: 260px; height: 8px; }
+/* the engine library's drawings (plot kind scene, docs/INTERACTIVE_LIBRARY.md §1.4): roles, never colours, so every theme and dark mode fit */
+.sim-scene { display: block; max-width: 100%; height: auto; }
+.sim-scene .sim-r-base { --r: var(--ink2); } .sim-scene .sim-r-muted { --r: var(--ink3); } .sim-scene .sim-r-hi { --r: var(--c); }
+.sim-scene .sim-r-ok { --r: var(--ok); } .sim-scene .sim-r-bad { --r: var(--bad); } .sim-scene .sim-r-warn { --r: var(--warn); } .sim-scene .sim-r-info { --r: var(--info); }
+.sim-scene .sim-pt { fill: var(--r); stroke: var(--bg, #fff); stroke-width: 1.2; }
+.sim-scene .sim-seg { stroke: var(--r); stroke-linecap: round; }
+.sim-scene .sim-circ, .sim-scene .sim-poly { fill: none; stroke: var(--r); stroke-width: 1.6; }
+.sim-scene .sim-fill { fill: var(--r); fill-opacity: .16; }
+.sim-scene .sim-sl { fill: var(--r); font-size: 12px; paint-order: stroke; stroke: var(--bg, #fff); stroke-width: 3px; stroke-linejoin: round; }
+.sim-scene .sim-arrowhead { fill: var(--ink2); }
+.sim-svg .sim-bar { opacity: .75; } .sim-svg .sim-dot { opacity: .8; }
+.sim-plot-sound .sim-svg { padding: .25rem 0; }

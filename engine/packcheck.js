@@ -388,12 +388,16 @@
       [/\btime\.sleep\s*\(/, 'time.sleep(): a step blocks the learner while it sleeps; return at once'],
     ],
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
-    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1', 'thermal@1', 'pid@1', 'rf@1', 'twin@1']),   // the same list in tools/activities.py
+    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1', 'thermal@1', 'pid@1', 'rf@1', 'twin@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'seq@1', 'med@1', 'anatomy@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1']),   // the same list in tools/activities.py
     SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
     // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
     CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1', 'twin@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
     // the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (loaded beside this file; the Python twins in tools/)
     P6: { 'thermal@1': ['NoemaThermal', '39_engine_thermal.js'], 'pid@1': ['NoemaPID', '40_engine_pid.js'], 'rf@1': ['NoemaRF', '41_engine_rf.js'], 'twin@1': ['NoemaTwin', '42_engine_twin.js'] },
+    // the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core (46_lib_core.js); each checks its model with its own checkSpec and
+    // lists the expressions (exprs: [src, where, local names]) and string keys (keys: [key, where]) of its model; Python twins tools/lib_<name>.py
+    LIB: { 'ode@1': ['NoemaLibODE', '47_lib_ode.js'], 'prob@1': ['NoemaLibProb', '47_lib_prob.js'], 'graph@1': ['NoemaLibGraph', '47_lib_graph.js'], 'geom@1': ['NoemaLibGeom', '47_lib_geom.js'], 'genetics@1': ['NoemaLibGenetics', '48_lib_genetics.js'], 'seq@1': ['NoemaLibSeq', '48_lib_seq.js'], 'med@1': ['NoemaLibMed', '48_lib_med.js'], 'anatomy@1': ['NoemaLibAnatomy', '48_lib_anatomy.js'], 'timeline@1': ['NoemaLibTimeline', '48_lib_timeline.js'], 'music@1': ['NoemaLibMusic', '48_lib_music.js'], 'map@1': ['NoemaLibMap', '48_lib_map.js'], 'text@1': ['NoemaLibText', '48_lib_text.js'], 'craft@1': ['NoemaLibCraft', '48_lib_craft.js'] },
+    LIB_KINDS: ['scalar', 'series', 'scene', 'sound'], LINE_STYLES: ['line', 'bars', 'steps', 'points'],
     P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
     // twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
     TWIN: 'twin@1', TWIN_POINTS: ['vbat', 'vload', 'i', 'gnd'], TWIN_INSTRUMENTS: ['V', 'I', 'scope', 'log', 'rssi', 'T', 'clock'], WHOLE: ['log', 'rssi', 'T', 'clock'],
@@ -639,6 +643,18 @@
     for (const p of M.checkSpec(spec)) if (p.level === 'error') E.push(`spec${p.path ? '.' + p.path : ''}: ${p.msg}`);
     for (const [src, w] of engineExprs(spec, eng)) { const m = exprProblem(src, names, w); if (m) E.push(m); }
   }
+  /* ---------- the engine library (docs/INTERACTIVE_LIBRARY.md): the engine's own checkSpec, then every expression of its model over the spec's names
+     plus the model's own local names (the variables of an ODE, the time t …), then every string key it names — the SAME rules as
+     tools/activities.py check_lib (the engines' Python twins: tools/lib_<name>.py) ---------- */
+  function checkLib(spec, eng, names, E, key) {
+    const [g, f] = ACT.LIB[eng], M = root[g] || null;
+    if (!M) { E.push(`spec.model: the ${eng} checker (${g}, engine/src/${f}) is not loaded here`); return; }
+    const P = M.checkSpec(spec);
+    for (const p of P) if (p.level === 'error') E.push(`spec${p.path ? '.' + p.path : ''}: ${p.msg}`);
+    if (P.some(p => p.level === 'error')) return;   // the expressions and keys of a model that does not stand are not listed
+    for (const [src, w, local] of M.exprs(spec)) { const m = exprProblem(src, names.concat(local || []), 'spec.' + w); if (m) E.push(m); }
+    for (const [k, w] of M.keys(spec)) key(k, 'spec.' + w, true);
+  }
   /** twin@1: the device of a spec without errors, or null */
   function twinOf(spec) {
     const d = isObj(spec?.model) ? spec.model.device : null, T = root.NoemaTwin;
@@ -855,15 +871,16 @@
       if (name(d.id, w + '.id')) names.push(d.id);
     });
     const inNames = [...names];   // what an engine's inputs may use: consts, params, derived
-    const os = spec.outputs, series = [];
+    const os = spec.outputs, series = [], scenes = [], sounds = [], lib = typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.LIB, eng);
     if (py && !(Array.isArray(os) && os.length)) E.push('spec.outputs: list what step() returns, at least one {id, kind: scalar | series}');
     if (os != null) {
       if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
       else if (!(Array.isArray(os) && os.length <= L.outputs)) E.push(`spec.outputs must be a list of at most ${L.outputs} {id, kind}`);
       else os.forEach((o, i) => {
         const w = `spec.outputs[${i}]`;
-        if (!(isObj(o) && (o.kind === 'scalar' || o.kind === 'series'))) { E.push(`${w} must be {id, kind: scalar | series}`); return; }
-        if (name(o.id, w + '.id')) (o.kind === 'scalar' ? names : series).push(o.id);
+        const kinds = lib ? ACT.LIB_KINDS : ['scalar', 'series'];
+        if (!(isObj(o) && kinds.includes(o.kind))) { E.push(`${w} must be {id, kind: ${kinds.join(' | ')}}`); return; }
+        if (name(o.id, w + '.id')) (o.kind === 'scalar' ? names : o.kind === 'series' ? series : o.kind === 'scene' ? scenes : sounds).push(o.id);
       });
     }
     const rs = spec.readouts;
@@ -877,8 +894,14 @@
     if (pl != null && !(Array.isArray(pl) && pl.length <= L.plots)) E.push(`spec.plots must be a list of at most ${L.plots} plots`);
     list(pl).slice(0, L.plots).forEach((p, i) => {
       const w = `spec.plots[${i}]`;
-      if (!isObj(p) || !['function', 'series'].includes(p.kind)) { E.push(`${w} must be a plot {kind: function | series, x, y, series}`); return; }
+      if (!isObj(p) || !(lib ? ['function', 'series', 'scene', 'sound'] : ['function', 'series']).includes(p.kind)) { E.push(lib ? `${w} must be a plot {kind: function | series, x, y, series} or {kind: scene | sound, of}` : `${w} must be a plot {kind: function | series, x, y, series}`); return; }
       key(p.title, w + '.title');
+      if (p.kind === 'scene' || p.kind === 'sound') {   // a drawing or a sound an engine of the library computes (docs/INTERACTIVE_LIBRARY.md §1.4)
+        unknownKeys(p, ['kind', 'title', 'of', 'height'], w, E);
+        if (!(p.kind === 'scene' ? scenes : sounds).includes(p.of)) E.push(`${w}.of must name a ${p.kind} output of the engine`);
+        if (p.height != null && !(Number.isInteger(p.height) && p.height >= 120 && p.height <= 900)) E.push(`${w}.height is a whole number 120–900 (px)`);
+        return;
+      }
       const x = isObj(p.x) ? p.x : null, y = p.y != null ? p.y : {};
       if (!x) { E.push(`${w}.x must be an object`); return; }
       if (!isObj(y)) { E.push(`${w}.y must be an object`); return; }
@@ -908,6 +931,7 @@
         const ws = `${w}.series[${j}]`;
         if (!isObj(s)) { E.push(`${ws} must be an object`); return; }
         key(s.label, ws + '.label');
+        if (s.style != null && !ACT.LINE_STYLES.includes(s.style)) E.push(`${ws}.style is one of ${ACT.LINE_STYLES.join(', ')}`);
         if (p.kind === 'function') expr(s.expr, local, ws + '.expr');
         else if (!series.includes(s.y)) E.push(`${ws}.y must name a series output of the engine`);
       });
@@ -921,6 +945,7 @@
     });
     if (eng === ACT.CIRCUIT) checkCircuit(spec, inNames, E);
     else if (typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.P6, eng)) checkEngine(spec, eng, inNames, E);
+    else if (lib) checkLib(spec, eng, inNames, E, key);
     if (eng === ACT.WASM_ENGINE && items) { if (!WK()) E.push('spec.model: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here'); else E.push(...WK().checkModel(spec, items)); }
     if (spec.bench != null) {
       if (!ACT.BENCH_ENGINES.has(eng)) E.push(`spec.bench needs an engine that can take measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);

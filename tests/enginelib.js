@@ -1,0 +1,99 @@
+/* The engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core (46_lib_core.js and its twin tools/enginelib.py),
+   the catalogue (49_lib_catalog.js), the validators' hook (packcheck.js checkLib, activities.py check_lib), and — for every engine whose
+   module exists — the JS ↔ Python parity of checkSpec / exprs / keys on its fixtures tests/fixtures/enginelib/<name>.json
+   ({"specs": [spec, …]}). Each engine's own science tests are tests/lib_<name>.js.  Run: node tests/enginelib.js */
+'use strict';
+const path = require('path'), fs = require('fs'), { execFileSync } = require('child_process');
+const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
+let fails = 0, n = 0;
+const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
+globalThis.window = globalThis;
+require(path.join(SRC, '35_simexpr.js'));
+for (const f of ['36_engine_circuit.js', '39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(SRC, f));   // the plugins (their old messages must stay)
+require(path.join(SRC, '46_lib_core.js'));
+const LIBFILES = fs.readdirSync(SRC).filter(f => /^4[78]_lib_[a-z]+\.js$/.test(f)).sort();
+for (const f of LIBFILES) require(path.join(SRC, f));
+require(path.join(SRC, '49_lib_catalog.js'));
+require(path.join(ROOT, 'engine', 'packcheck.js'));
+const C = globalThis.NoemaLibCore, K = globalThis.NoemaEngineCatalog, PC = globalThis.NoemaPackCheck;
+const py = (code, input) => execFileSync('python3', ['-c', code], { cwd: path.join(ROOT, 'tools'), input, encoding: 'utf8', maxBuffer: 1 << 26 });
+
+// ---- 1. the core's checker and its Python twin agree ----
+const T = { a: 'pos!', b: 'int:1:5', c: 'enum:x|y', d: 'numx', e: { $obj: { f: 'bool', g: 'key' } }, h: { $list: { id: 'id!', w: 'nonneg' }, max: 3, min: 1 }, m: { $map: 'expr', max: 2 }, r: { $req: true, $list: 'name', max: 4 } };
+const cases = [
+  { a: 1, r: [] }, {}, { a: -1, b: 7, c: 'z', d: '', e: { f: 1, g: 'Bad Key' }, h: [], m: { x: '', t: 'a' }, r: ['t', 'ok', '9x'] },
+  { a: 2, b: 2.5, h: [{ id: 'ok', w: -1 }, { w: 1 }, 3, { id: 'a', z: 1 }], r: 'no', zz: 1 }, { a: 1, h: [{ id: 'x' }], m: { a: 'x', b: 'y', c: 'z' }, r: ['a'], d: 'k*t' }, 5, null,
+];
+const jsRes = cases.map(o => { const { P, E, W } = C.problems(); C.walk(o, T, 'model', E, W); return P; });
+const pyRes = JSON.parse(py(`import json,sys,enginelib as L
+T=json.loads(sys.stdin.readline()); out=[]
+for o in json.loads(sys.stdin.readline()):
+    P,E,W=L.problems(); L.walk(o,T,'model',E,W); out.append(P)
+print(json.dumps(out))`, JSON.stringify(T) + '\n' + JSON.stringify(cases) + '\n'));
+ok(JSON.stringify(jsRes) === JSON.stringify(pyRes), `the model checker: JS and Python give the same codes, paths and messages on ${cases.length} models`);
+if (JSON.stringify(jsRes) !== JSON.stringify(pyRes)) cases.forEach((c, i) => { if (JSON.stringify(jsRes[i]) !== JSON.stringify(pyRes[i])) console.log('  case', i, '\n  JS', JSON.stringify(jsRes[i]), '\n  PY', JSON.stringify(pyRes[i])); });
+ok(jsRes[0].length === 0 && jsRes[1].some(p => p.path === 'model.a' && p.msg === 'missing') && jsRes[1].some(p => p.path === 'model.r'), 'required fields ("!" and $req) are reported as missing');
+
+// ---- 2. numbers ----
+const st = C.stats([1, 3, NaN, 2]);
+ok(st.final === 2 && st.min === 1 && st.max === 3 && st.mean === 2 && st.pp === 2 && Math.abs(st.rms - Math.sqrt(14 / 3)) < 1e-15, 'stats: final, min, max, mean, pp, rms over the finite values');
+ok(C.thin(Array.from({ length: 5000 }, (_, i) => i), 2000).length === 2000 && C.thin([1, 2, 3], 2000).length === 3, 'thin keeps ≤ 2000 values');
+const r1 = C.mulberry32(C.hash32('x', 7)), r2 = C.mulberry32(C.hash32('x', 7));
+ok([1, 2, 3].every(() => r1() === r2()), 'seeded randomness: the same seed draws the same numbers');
+ok(C.cx('2*k + 1')({ k: 3 }) === 7 && C.cx(4)({}) === 4 && Number.isNaN(C.cx('nope(')({})) && Number.isNaN(C.cx('k')({})), 'cx: numbers and NoemaExpr formulas; a broken or unknown one gives NaN, never throws');
+const sc = C.scene([0, 1, 0, 1]); sc.pt(0.5, 0.5, { c: 'hi', key: 'a' }); sc.pt(NaN, 1); sc.seg(0, 0, 1, 1, { arrow: true });
+ok(sc.done().items.length === 2 && sc.done().items[0].k === 'pt', 'scenes keep only finite items');
+
+// ---- 3. the Worker source ----
+ok(typeof NoemaExpr.source === 'function' && /noemaExprModule/.test(NoemaExpr.source()), 'NoemaExpr.source(): the expression language travels to the Worker');
+{ const vm = require('vm'), ctx = { self: {} }; ctx.self.self = ctx.self; vm.createContext(ctx);
+  vm.runInContext('var self = this.self;' + NoemaExpr.source() + '\n;' + C.source(), ctx);
+  ok(!!ctx.self.NoemaExpr && !!ctx.self.NoemaLibCore && ctx.self.NoemaLibCore.cx('3*x')({ x: 2 }) === 6, 'the core and NoemaExpr run in a fresh global (the Worker)'); }
+
+// ---- 4. the catalogue ----
+const ids = K.CATALOG.map(e => e.id);
+ok(new Set(ids).size === ids.length && ['ode@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'seq@1', 'med@1', 'anatomy@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'].every(i => K.LIBRARY.includes(i)), 'the catalogue lists every library engine once');
+const libJS = Object.keys(PC.ACTIVITY_RULES.LIB).sort();
+ok(JSON.stringify(libJS) === JSON.stringify(K.LIBRARY.slice().sort()) && libJS.every(i => PC.ACTIVITY_RULES.ENGINES.has(i)), 'packcheck ACT.LIB = the catalogue\'s library, and every one is in ENGINES');
+const pyLib = JSON.parse(py('import json,activities as A; print(json.dumps([sorted(A.LIB), sorted(A.ENGINES)]))'));
+ok(JSON.stringify(pyLib[0]) === JSON.stringify(libJS) && JSON.stringify(pyLib[1]) === JSON.stringify([...PC.ACTIVITY_RULES.ENGINES].sort()), 'activities.py LIB and ENGINES = packcheck.js');
+for (const [q, want] of [['predator prey population oscillations', 'ode@1'], ['Ύφανση σε αργαλειό', 'craft@1'], ['the brachial plexus: a nerve lesion', 'anatomy@1'], ['Hijri and Hebrew calendar dates of an event', 'timeline@1'], ['sensitivity and specificity of a test', 'med@1'], ['Wahrscheinlichkeit und Verteilung', 'prob@1'], ['кратчайший путь в графе', 'graph@1'], ['intervalle et accord', 'music@1']])
+  ok((K.suggest(q)[0] || {}).id === want, `suggest("${q}") → ${want}`);
+ok(K.suggest('').length === 0 && K.suggest('zz').length === 0, 'suggest of nothing is nothing');
+for (const e of K.CATALOG.filter(e => e.layer === 'library' && e.global)) ok(fs.existsSync(path.join(SRC, e.file)), `${e.id}: its module ${e.file} exists`);
+
+// ---- 5. the validators' hook, scene / sound plots and line styles (the old messages stay for other engines) ----
+const base = { format: 'noema.sim-spec/v1', params: [{ id: 'k', kind: 'slider', label: 'k', min: 0, max: 1, default: 0.5 }] };
+const mk = (o) => ({ ...base, ...o });
+const old = PC.checkSimSpec(mk({ engine: 'rf@1', plots: [{ kind: 'scene', of: 'x' }] }), null);
+ok(old.some(m => m === 'spec.plots[0] must be a plot {kind: function | series, x, y, series}'), 'another engine keeps the old plot message word for word');
+const pyOld = JSON.parse(py('import json,sys,activities as A; print(json.dumps(A.check_spec(json.loads(sys.stdin.read()))))', JSON.stringify(mk({ engine: 'rf@1', plots: [{ kind: 'scene', of: 'x' }] }))));
+ok(JSON.stringify(old) === JSON.stringify(pyOld), 'the same in Python');
+const style = mk({ plots: [{ kind: 'function', x: { var: 'x', min: 0, max: 1 }, series: [{ expr: 'k*x', style: 'bars' }, { expr: 'x', style: 'zig' }] }] });
+const st1 = PC.checkSimSpec(style, null), st2 = JSON.parse(py('import json,sys,activities as A; print(json.dumps(A.check_spec(json.loads(sys.stdin.read()))))', JSON.stringify(style)));
+ok(st1.length === 1 && /series\[1\]\.style is one of line, bars, steps, points/.test(st1[0]) && JSON.stringify(st1) === JSON.stringify(st2), 'line styles: bars, steps, points are known; others refused (JS = Python)');
+
+// ---- 6. every engine that exists: JS ↔ Python parity on its fixtures ----
+const FIX = path.join(ROOT, 'tests', 'fixtures', 'enginelib');
+for (const e of K.CATALOG.filter(e => e.layer === 'library' && e.global)) {
+  const M = globalThis[e.global], name = e.slug, pyFile = path.join(ROOT, 'tools', `lib_${name}.py`), fx = path.join(FIX, name + '.json');
+  if (!M) { console.log(`· ${e.id}: not built yet (no ${e.global})`); continue; }
+  ok(typeof M.checkSpec === 'function' && typeof M.exprs === 'function' && typeof M.keys === 'function' && M.engine && M.engine.id === e.id && typeof M.engine.workerSource === 'string', `${e.id}: the module API (checkSpec, exprs, keys, engine with workerSource)`);
+  ok(fs.existsSync(pyFile), `${e.id}: its Python twin tools/lib_${name}.py`);
+  ok(fs.existsSync(fx), `${e.id}: its fixtures tests/fixtures/enginelib/${name}.json`);
+  if (!fs.existsSync(pyFile) || !fs.existsSync(fx)) continue;
+  const specs = JSON.parse(fs.readFileSync(fx, 'utf8')).specs || [];
+  const js = specs.map(s => ({ p: M.checkSpec(s), x: M.checkSpec(s).some(p => p.level === 'error') ? null : M.exprs(s), k: M.checkSpec(s).some(p => p.level === 'error') ? null : M.keys(s), v: PC.checkSimSpec(s, null) }));
+  const pr = JSON.parse(py(`import json,sys,importlib,activities as A
+M=importlib.import_module('lib_${name}'); out=[]
+for s in json.loads(sys.stdin.read()):
+    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
+    out.append({'p':p,'x':None if bad else [list(t) for t in M.exprs(s)],'k':None if bad else [list(t) for t in M.keys(s)],'v':A.check_spec(s)})
+print(json.dumps(out))`, JSON.stringify(specs)));
+  const norm = v => JSON.stringify(v, (k, x) => Array.isArray(x) ? x : x);
+  let same = 0; js.forEach((r, i) => { if (norm(r) === norm(pr[i])) same++; else if (same + 5 > i) console.log(`  ${e.id} spec ${i}\n  JS ${norm(r).slice(0, 600)}\n  PY ${norm(pr[i]).slice(0, 600)}`); });
+  ok(specs.length >= 10 && same === specs.length, `${e.id}: JS and Python agree on ${same}/${specs.length} specs (checkSpec, exprs, keys and the whole checkSimSpec)`);
+  ok(specs.some(s => !PC.checkSimSpec(s, null).length) && specs.some(s => PC.checkSimSpec(s, null).length), `${e.id}: the fixtures hold good and bad specs`);
+}
+console.log(`\n${n - fails}/${n} passed`);
+process.exit(fails ? 1 : 0);

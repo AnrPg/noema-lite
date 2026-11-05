@@ -26,6 +26,7 @@ import base64, glob, hashlib, json, math, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import simexpr as SX   # the expression language of sim-spec@1 (docs/INTERACTIVE_SIMEXPR.md), twin of engine/src/35_simexpr.js
 import circuit as CK   # the netlist checks of circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md), twin of engine/src/36_engine_circuit.js
+import importlib
 import thermal, pid, rf, twin   # the model checks of the P6 engines (docs/INTERACTIVE_ENGINES.md), twins of engine/src/39–42_engine_*.js
 import wasm_check as WK   # wasm-module@1 (docs/INTERACTIVE_WASM.md), twin of engine/src/44_activity_wasm.js
 import embed_check as EK   # external-embed@1 (docs/INTERACTIVE_EMBED.md), twin of engine/src/45_activity_embed.js
@@ -65,14 +66,22 @@ PY_WARN = [
 # sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as engine/packcheck.js checkSimSpec
 SPEC_FORMAT = "noema.sim-spec/v1"
 DEFAULT_ENGINE = "formula@1"
-ENGINES = {"formula@1", "circuit-mna@1", "thermal@1", "pid@1", "rf@1", "twin@1"}   # the engines this version knows (the same list in engine/packcheck.js)
+ENGINES = {"formula@1", "circuit-mna@1", "thermal@1", "pid@1", "rf@1", "twin@1", "ode@1", "prob@1", "graph@1", "geom@1", "genetics@1", "seq@1", "med@1", "anatomy@1", "timeline@1", "music@1", "map@1", "text@1", "craft@1"}   # the engines this version knows (the same list in engine/packcheck.js)
 SPEC_KEYS = {"format", "engine", "model", "title", "intro", "consts", "params", "derived", "outputs", "readouts", "plots", "bench"}
 # circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
 CIRCUIT = "circuit-mna@1"
 BENCH_ENGINES = {"circuit-mna@1", "twin@1"}
 # the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own check_spec (the twin of its JS checkSpec)
 P6 = {"thermal@1": thermal, "pid@1": pid, "rf@1": rf, "twin@1": twin}
-P6_TIMED = ["thermal@1", "pid@1"]   # engines whose model.transient times and outputs' at may be expressions
+P6_TIMED = ["thermal@1", "pid@1"]
+# the engine library (docs/INTERACTIVE_LIBRARY.md): general engines; each Python twin tools/lib_<name>.py has check_spec, exprs and keys
+LIB = {"ode@1": "lib_ode", "prob@1": "lib_prob", "graph@1": "lib_graph", "geom@1": "lib_geom", "genetics@1": "lib_genetics", "seq@1": "lib_seq", "med@1": "lib_med", "anatomy@1": "lib_anatomy", "timeline@1": "lib_timeline", "music@1": "lib_music", "map@1": "lib_map", "text@1": "lib_text", "craft@1": "lib_craft"}
+LIB_KINDS = ["scalar", "series", "scene", "sound"]
+LINE_STYLES = ["line", "bars", "steps", "points"]
+def _lib(eng):
+    """the Python twin of a library engine, or None when it is not installed beside this file"""
+    try: return importlib.import_module(LIB[eng])
+    except ImportError: return None   # engines whose model.transient times and outputs' at may be expressions
 # twin@1's bench: the probe points of the device and its instruments (the event log and the radio's RSSI besides V, I, scope)
 TWIN = "twin@1"
 TWIN_POINTS = ["vbat", "vload", "i", "gnd"]
@@ -617,7 +626,7 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
         expr(d.get("expr"), list(names), w + ".expr")
         if name(d.get("id"), w + ".id"): names.append(d["id"])
     in_names = list(names)   # what an engine's inputs may use: consts, params, derived
-    os_ = spec.get("outputs"); series = []
+    os_ = spec.get("outputs"); series = []; scenes = []; sounds = []; lib = isinstance(eng, str) and eng in LIB
     if python and not (isinstance(os_, list) and os_): E.append("spec.outputs: list what step() returns, at least one {id, kind: scalar | series}")
     if os_ is not None:
         if eng == DEFAULT_ENGINE: E.append("spec.outputs come from an engine; formula@1 has none (use derived)")
@@ -625,8 +634,9 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
         else:
             for i, o in enumerate(os_):
                 w = f"spec.outputs[{i}]"
-                if not (isinstance(o, dict) and o.get("kind") in ("scalar", "series")): E.append(f"{w} must be {{id, kind: scalar | series}}"); continue
-                if name(o.get("id"), w + ".id"): (names if o["kind"] == "scalar" else series).append(o["id"])
+                kinds = LIB_KINDS if lib else ["scalar", "series"]
+                if not (isinstance(o, dict) and o.get("kind") in kinds): E.append(f"{w} must be {{id, kind: {' | '.join(kinds)}}}"); continue
+                if name(o.get("id"), w + ".id"): {"scalar": names, "series": series, "scene": scenes, "sound": sounds}[o["kind"]].append(o["id"])
     rs = spec.get("readouts")
     if rs is not None and not (isinstance(rs, list) and len(rs) <= SPEC_LIM["readouts"]): E.append(f"spec.readouts must be a list of at most {SPEC_LIM['readouts']} {{label, expr}}")
     for i, r in enumerate(_list(rs)[:SPEC_LIM["readouts"]]):
@@ -637,8 +647,14 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
     if pl is not None and not (isinstance(pl, list) and len(pl) <= SPEC_LIM["plots"]): E.append(f"spec.plots must be a list of at most {SPEC_LIM['plots']} plots")
     for i, p in enumerate(_list(pl)[:SPEC_LIM["plots"]]):
         w = f"spec.plots[{i}]"
-        if not isinstance(p, dict) or p.get("kind") not in ("function", "series"): E.append(f"{w} must be a plot {{kind: function | series, x, y, series}}"); continue
+        if not isinstance(p, dict) or p.get("kind") not in (("function", "series", "scene", "sound") if lib else ("function", "series")): E.append(f"{w} must be a plot {{kind: function | series, x, y, series}} or {{kind: scene | sound, of}}" if lib else f"{w} must be a plot {{kind: function | series, x, y, series}}"); continue
         key(p.get("title"), w + ".title")
+        if p["kind"] in ("scene", "sound"):   # a drawing or a sound an engine of the library computes (docs/INTERACTIVE_LIBRARY.md §1.4)
+            _unknown(p, ["kind", "title", "of", "height"], w, E)
+            if p.get("of") not in (scenes if p["kind"] == "scene" else sounds): E.append(f"{w}.of must name a {p['kind']} output of the engine")
+            h = p.get("height")
+            if h is not None and not (isinstance(h, int) and not isinstance(h, bool) and 120 <= h <= 900): E.append(f"{w}.height is a whole number 120–900 (px)")
+            continue
         x = p.get("x") if isinstance(p.get("x"), dict) else None
         y = p.get("y") if p.get("y") is not None else {}
         if x is None: E.append(f"{w}.x must be an object"); continue
@@ -668,6 +684,7 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
             ws = f"{w}.series[{j}]"
             if not isinstance(s, dict): E.append(f"{ws} must be an object"); continue
             key(s.get("label"), ws + ".label")
+            if s.get("style") is not None and s["style"] not in LINE_STYLES: E.append(f"{ws}.style is one of {', '.join(LINE_STYLES)}")
             if p["kind"] == "function": expr(s.get("expr"), local, ws + ".expr")
             elif s.get("y") not in series: E.append(f"{ws}.y must name a series output of the engine")
         mk = p.get("marks")
@@ -678,6 +695,7 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
             key(m.get("label"), wm + ".label"); expr(m.get("expr"), names, wm + ".expr")
     if eng == CIRCUIT: check_circuit(spec, in_names, E)
     elif isinstance(eng, str) and eng in P6: check_engine(spec, eng, in_names, E)
+    elif lib: check_lib(spec, eng, in_names, E, key)
     if eng == WASM_ENGINE and items is not None: E += WK.check_model(spec, items)
     if spec.get("bench") is not None:
         if eng not in BENCH_ENGINES: E.append(f"spec.bench needs an engine that can take measurements ({', '.join(sorted(BENCH_ENGINES))})")
@@ -849,6 +867,19 @@ def check_engine(spec, eng, names, E):
     for src, w in _engine_exprs(spec, eng):
         m = _expr_problem(src, names, w)
         if m: E.append(m)
+
+# ---------------------------------------------------------------- the engine library (docs/INTERACTIVE_LIBRARY.md): the SAME rules as packcheck.js checkLib
+def check_lib(spec, eng, names, E, key):
+    M = _lib(eng)
+    if M is None: E.append(f"spec.model: the {eng} checker ({LIB[eng]}.py) is not installed here"); return
+    P = M.check_spec(spec)
+    for p in P:
+        if p["level"] == "error": E.append(f"spec{'.' + p['path'] if p['path'] else ''}: {p['msg']}")
+    if any(p["level"] == "error" for p in P): return   # the expressions and keys of a model that does not stand are not listed
+    for src, w, local in M.exprs(spec):
+        m = _expr_problem(src, list(names) + list(local or []), "spec." + w)
+        if m: E.append(m)
+    for k, w in M.keys(spec): key(k, "spec." + w, True)
 
 def _twin_of(spec):
     """twin@1: the device of a spec without errors, or None"""
