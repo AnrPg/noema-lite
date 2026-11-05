@@ -1,0 +1,1671 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "default": 20
+    },
+    {
+     "id": "p",
+     "kind": "slider",
+     "label": "p",
+     "min": 0,
+     "max": 1,
+     "step": 0.01,
+     "default": 0.3
+    },
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "binomial",
+     "n": "n",
+     "p": "p"
+    },
+    "x": "k",
+    "lo": 2,
+    "hi": "k",
+    "points": 200
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mean"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cdf"
+    },
+    {
+     "id": "pr",
+     "kind": "scalar",
+     "of": "prob"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "x"
+    },
+    {
+     "id": "f",
+     "kind": "series",
+     "of": "pdf"
+    },
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "issue.degenerate"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "x"
+     },
+     "series": [
+      {
+       "y": "f"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "a",
+     "kind": "slider",
+     "label": "a",
+     "min": 0.1,
+     "max": 10,
+     "step": 0.1,
+     "default": 2
+    }
+   ],
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "gamma",
+     "shape": "a",
+     "scale": 2
+    },
+    "p": 0.95,
+    "from": 0,
+    "to": 20
+   },
+   "outputs": [
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "quantile"
+    },
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "x"
+    },
+    {
+     "id": "d",
+     "kind": "series",
+     "of": "pdf"
+    },
+    {
+     "id": "F",
+     "kind": "series",
+     "of": "cdf"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "x"
+     },
+     "series": [
+      {
+       "y": "d"
+      },
+      {
+       "y": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "w",
+     "kind": "slider",
+     "label": "w",
+     "min": 0,
+     "max": 5,
+     "step": 0.5,
+     "default": 1
+    }
+   ],
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "categorical",
+     "probs": [
+      "w",
+      1,
+      2
+     ],
+     "values": [
+      1,
+      5,
+      10
+     ]
+    },
+    "x": 5
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "pdf"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "issue.normalized"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "t",
+     "kind": "slider",
+     "label": "t",
+     "min": 2,
+     "max": 12,
+     "step": 1,
+     "default": 7
+    },
+    {
+     "id": "draws",
+     "kind": "slider",
+     "label": "draws",
+     "min": 100,
+     "max": 100000,
+     "step": 100,
+     "default": 1000
+    }
+   ],
+   "model": {
+    "mode": "mc",
+    "draws": {
+     "X": {
+      "family": "dunif",
+      "a": 1,
+      "b": 6
+     },
+     "Y": {
+      "family": "dunif",
+      "a": 1,
+      "b": 6
+     }
+    },
+    "expr": "X + Y > t",
+    "n": "draws",
+    "seed": 7
+   },
+   "outputs": [
+    {
+     "id": "est",
+     "kind": "scalar",
+     "of": "estimate"
+    },
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "ciLo"
+    },
+    {
+     "id": "hi",
+     "kind": "scalar",
+     "of": "ciHi"
+    },
+    {
+     "id": "rn",
+     "kind": "series",
+     "of": "runN"
+    },
+    {
+     "id": "rm",
+     "kind": "series",
+     "of": "runMean"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "rn"
+     },
+     "series": [
+      {
+       "y": "rm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "sampling",
+    "parent": {
+     "family": "exponential",
+     "rate": 1
+    },
+    "size": "n",
+    "reps": 2000,
+    "stat": "mean"
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "statMean"
+    },
+    {
+     "id": "hx",
+     "kind": "series",
+     "of": "histX"
+    },
+    {
+     "id": "hd",
+     "kind": "series",
+     "of": "histDensity"
+    },
+    {
+     "id": "nd",
+     "kind": "series",
+     "of": "normalDensity"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "hx"
+     },
+     "series": [
+      {
+       "y": "hd",
+       "style": "bars"
+      },
+      {
+       "y": "nd"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "d",
+     "kind": "slider",
+     "label": "d",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 4
+    }
+   ],
+   "model": {
+    "mode": "test",
+    "kind": "t-welch",
+    "x": [
+     1,
+     2,
+     3,
+     "d"
+    ],
+    "y": [
+     2,
+     3,
+     4,
+     5
+    ],
+    "alt": "less",
+    "alpha": 0.05
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "stat"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    },
+    {
+     "id": "nx",
+     "kind": "series",
+     "of": "nullX"
+    },
+    {
+     "id": "np",
+     "kind": "series",
+     "of": "nullPdf"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "nx"
+     },
+     "series": [
+      {
+       "y": "np"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "c",
+     "kind": "slider",
+     "label": "c",
+     "min": 0,
+     "max": 30,
+     "step": 1,
+     "default": 9
+    }
+   ],
+   "model": {
+    "mode": "test",
+    "kind": "chi2-indep",
+    "table": [
+     [
+      12,
+      5
+     ],
+     [
+      7,
+      "c"
+     ]
+    ],
+    "correct": true
+   },
+   "outputs": [
+    {
+     "id": "x2",
+     "kind": "scalar",
+     "of": "stat"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    },
+    {
+     "id": "le",
+     "kind": "scalar",
+     "of": "issue.low-expected"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "g",
+     "kind": "slider",
+     "label": "g",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 7
+    }
+   ],
+   "model": {
+    "mode": "test",
+    "kind": "anova",
+    "groups": [
+     [
+      1,
+      2,
+      3
+     ],
+     [
+      2,
+      3,
+      4
+     ],
+     [
+      5,
+      6,
+      "g"
+     ]
+    ]
+   },
+   "outputs": [
+    {
+     "id": "F",
+     "kind": "scalar",
+     "of": "stat"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 5,
+     "max": 200,
+     "step": 1,
+     "default": 30
+    },
+    {
+     "id": "p",
+     "kind": "slider",
+     "label": "p",
+     "min": 0.01,
+     "max": 0.99,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "ci",
+    "kind": "prop",
+    "k": "round(p * n)",
+    "n": "n",
+    "p": "p",
+    "method": "agresti-coull"
+   },
+   "outputs": [
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "lo"
+    },
+    {
+     "id": "cw",
+     "kind": "scalar",
+     "of": "coverAt.wald"
+    },
+    {
+     "id": "cp",
+     "kind": "series",
+     "of": "covP"
+    },
+    {
+     "id": "cv",
+     "kind": "series",
+     "of": "cover.clopper-pearson"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "cp"
+     },
+     "series": [
+      {
+       "y": "cv"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "d",
+     "kind": "slider",
+     "label": "d",
+     "min": 0.1,
+     "max": 2,
+     "step": 0.05,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "mode": "power",
+    "kind": "t-two",
+    "effect": "d",
+    "alpha": 0.05,
+    "target": 0.8,
+    "nMax": 500
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nNeeded"
+    },
+    {
+     "id": "pn",
+     "kind": "series",
+     "of": "powerN"
+    },
+    {
+     "id": "pb",
+     "kind": "series",
+     "of": "powerByN"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "pn"
+     },
+     "series": [
+      {
+       "y": "pb"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "a",
+     "kind": "slider",
+     "label": "a",
+     "min": 0.5,
+     "max": 10,
+     "step": 0.5,
+     "default": 1
+    },
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 0,
+     "max": 20,
+     "step": 1,
+     "default": 7
+    }
+   ],
+   "model": {
+    "mode": "bayes",
+    "kind": "beta-binomial",
+    "prior": {
+     "a": "a",
+     "b": 1
+    },
+    "k": "k",
+    "n": 20,
+    "conf": 0.9
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "postMean"
+    },
+    {
+     "id": "th",
+     "kind": "series",
+     "of": "theta"
+    },
+    {
+     "id": "po",
+     "kind": "series",
+     "of": "post"
+    },
+    {
+     "id": "pr",
+     "kind": "series",
+     "of": "prior"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "th"
+     },
+     "series": [
+      {
+       "y": "po"
+      },
+      {
+       "y": "pr"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "prev",
+     "kind": "slider",
+     "label": "prev",
+     "min": 0.001,
+     "max": 0.5,
+     "step": 0.001,
+     "default": 0.01
+    }
+   ],
+   "model": {
+    "mode": "screen",
+    "prev": "prev",
+    "sens": 0.9,
+    "spec": 0.91,
+    "pop": 1000
+   },
+   "outputs": [
+    {
+     "id": "ppv",
+     "kind": "scalar",
+     "of": "ppv"
+    },
+    {
+     "id": "ic",
+     "kind": "scene",
+     "of": "icons"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "ic"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "m",
+     "kind": "slider",
+     "label": "m",
+     "min": 192,
+     "max": 400,
+     "step": 1,
+     "default": 263
+    }
+   ],
+   "model": {
+    "mode": "simpson",
+    "strata": [
+     {
+      "k1": 81,
+      "n1": 87,
+      "k2": 234,
+      "n2": 270
+     },
+     {
+      "k1": 192,
+      "n1": "m",
+      "k2": 55,
+      "n2": 80
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "par",
+     "kind": "scalar",
+     "of": "paradox"
+    },
+    {
+     "id": "r1",
+     "kind": "scalar",
+     "of": "rate1.1"
+    },
+    {
+     "id": "d0",
+     "kind": "scalar",
+     "of": "diff.0"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "q",
+     "kind": "slider",
+     "label": "q",
+     "min": 0,
+     "max": 1,
+     "step": 0.001,
+     "default": 0.005
+    }
+   ],
+   "model": {
+    "mode": "multi",
+    "p": [
+     0.01,
+     0.04,
+     0.03,
+     "q"
+    ],
+    "method": "bh",
+    "alpha": 0.05
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "rejected"
+    },
+    {
+     "id": "a3",
+     "kind": "scalar",
+     "of": "adj.3"
+    },
+    {
+     "id": "rk",
+     "kind": "series",
+     "of": "rank"
+    },
+    {
+     "id": "sp",
+     "kind": "series",
+     "of": "sortedP"
+    },
+    {
+     "id": "bl",
+     "kind": "series",
+     "of": "bhLine"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "rk"
+     },
+     "series": [
+      {
+       "y": "sp",
+       "style": "points"
+      },
+      {
+       "y": "bl"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "a",
+     "kind": "slider",
+     "label": "a",
+     "min": 0,
+     "max": 1,
+     "step": 0.01,
+     "default": 0.1
+    }
+   ],
+   "model": {
+    "mode": "markov",
+    "states": [
+     "sun",
+     "rain"
+    ],
+    "labels": [
+     "sunny",
+     "rainy"
+    ],
+    "P": [
+     [
+      "1 - a",
+      "a"
+     ],
+     [
+      0.5,
+      0.5
+     ]
+    ],
+    "start": "sun",
+    "steps": 30
+   },
+   "outputs": [
+    {
+     "id": "piSun",
+     "kind": "scalar",
+     "of": "pi.sun"
+    },
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "ret.rain"
+    },
+    {
+     "id": "n",
+     "kind": "series",
+     "of": "n"
+    },
+    {
+     "id": "ds",
+     "kind": "series",
+     "of": "dist.sun"
+    },
+    {
+     "id": "dg",
+     "kind": "scene",
+     "of": "diagram"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "n"
+     },
+     "series": [
+      {
+       "y": "ds"
+      }
+     ]
+    },
+    {
+     "kind": "scene",
+     "of": "dg"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "p",
+     "kind": "slider",
+     "label": "p",
+     "min": 0.05,
+     "max": 0.95,
+     "step": 0.01,
+     "default": 0.4
+    },
+    {
+     "id": "i",
+     "kind": "slider",
+     "label": "i",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "walk",
+    "kind": "ruin",
+    "p": "p",
+    "N": 10,
+    "i": "i",
+    "paths": 5,
+    "reps": 500
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "pWin"
+    },
+    {
+     "id": "ig",
+     "kind": "series",
+     "of": "iGrid"
+    },
+    {
+     "id": "pw",
+     "kind": "series",
+     "of": "pWinByI"
+    },
+    {
+     "id": "ps",
+     "kind": "scene",
+     "of": "paths"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "ig"
+     },
+     "series": [
+      {
+       "y": "pw"
+      }
+     ]
+    },
+    {
+     "kind": "scene",
+     "of": "ps"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "h",
+     "kind": "slider",
+     "label": "h",
+     "min": 0,
+     "max": 1,
+     "step": 0.05,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "mode": "walk",
+    "kind": "galton-watson",
+    "offspring": [
+     0.25,
+     0.25,
+     "h"
+    ],
+    "gens": 30,
+    "reps": 500
+   },
+   "outputs": [
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "extinct"
+    },
+    {
+     "id": "g",
+     "kind": "series",
+     "of": "gen"
+    },
+    {
+     "id": "qg",
+     "kind": "series",
+     "of": "qByGen"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "g"
+     },
+     "series": [
+      {
+       "y": "qg"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "l",
+     "kind": "slider",
+     "label": "l",
+     "min": 0.1,
+     "max": 5,
+     "step": 0.1,
+     "default": 2
+    }
+   ],
+   "model": {
+    "mode": "queue",
+    "lambda": "l",
+    "mu": 3,
+    "c": 1,
+    "nMax": 30
+   },
+   "outputs": [
+    {
+     "id": "L",
+     "kind": "scalar",
+     "of": "l"
+    },
+    {
+     "id": "qn",
+     "kind": "series",
+     "of": "qn"
+    },
+    {
+     "id": "qp",
+     "kind": "series",
+     "of": "qProb"
+    },
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "issue.unstable"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "qn"
+     },
+     "series": [
+      {
+       "y": "qp",
+       "style": "bars"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "z",
+     "kind": "slider",
+     "label": "z",
+     "min": 0,
+     "max": 10,
+     "step": 0.1,
+     "default": 1.4
+    }
+   ],
+   "model": {
+    "mode": "bootstrap",
+    "x": [
+     1.2,
+     2.4,
+     1.3,
+     1.3,
+     0,
+     1.0,
+     1.8,
+     0.8,
+     4.6,
+     "z"
+    ],
+    "stat": "trimmed",
+    "trim": 0.1,
+    "B": 1000,
+    "seed": 3
+   },
+   "outputs": [
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "bcaLo"
+    },
+    {
+     "id": "hx",
+     "kind": "series",
+     "of": "histX"
+    },
+    {
+     "id": "hc",
+     "kind": "series",
+     "of": "histCount"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "hx"
+     },
+     "series": [
+      {
+       "y": "hc",
+       "style": "bars"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "m",
+     "kind": "slider",
+     "label": "m",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "ci",
+    "kind": "mean",
+    "summary": {
+     "mean": "m",
+     "sd": 2,
+     "n": 25
+    },
+    "conf": 0.99,
+    "method": "t"
+   },
+   "outputs": [
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "lo"
+    },
+    {
+     "id": "hi",
+     "kind": "scalar",
+     "of": "hi"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "dice"
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "zipf",
+     "s": 2
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "uniform",
+     "a": 3,
+     "b": 1
+    },
+    "p": 1.2
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "gamma",
+     "shape": 2,
+     "rate": 1,
+     "scale": 3
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "series",
+     "of": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "hypergeometric",
+     "N": 10,
+     "K": 12,
+     "n": 20
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "triangular",
+     "a": 0,
+     "b": 1,
+     "c": 2
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "dist",
+    "dist": {
+     "family": "categorical",
+     "probs": [
+      0.5,
+      0.5
+     ],
+     "values": [
+      1
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 1,
+     "max": 2,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "mode": "mc",
+    "draws": {
+     "n": {
+      "family": "normal"
+     },
+     "X": {
+      "family": "nope"
+     }
+    },
+    "expr": "X +"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "estimate"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "test",
+    "kind": "t-paired",
+    "x": [
+     1,
+     2,
+     3
+    ]
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "test",
+    "kind": "fisher",
+    "table": [
+     [
+      1,
+      2,
+      3
+     ],
+     [
+      4,
+      5,
+      6
+     ]
+    ]
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "test",
+    "kind": "chi2-gof",
+    "observed": [
+     1,
+     2,
+     3
+    ],
+    "probs": [
+     1,
+     1
+    ]
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "test",
+    "kind": "anova",
+    "groups": [
+     [
+      1,
+      2,
+      3
+     ]
+    ]
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "ci",
+    "kind": "prop",
+    "k": 1,
+    "n": 5,
+    "method": "chi2",
+    "conf": 2
+   },
+   "outputs": [
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "lo"
+    },
+    {
+     "id": "c",
+     "kind": "series",
+     "of": "cover.bogus"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "markov",
+    "states": [
+     "A",
+     "A"
+    ],
+    "P": [
+     [
+      1,
+      0
+     ]
+    ],
+    "init": [
+     1
+    ],
+    "start": "B"
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "pi.C"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "simpson",
+    "strata": [
+     {
+      "k1": 5,
+      "n1": 2,
+      "k2": 1,
+      "n2": 2
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "rate1.1"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "walk",
+    "kind": "ruin",
+    "p": 0.4,
+    "N": 5,
+    "i": 9
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "pWin"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "walk",
+    "kind": "galton-watson"
+   },
+   "outputs": [
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "extinct"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "multi",
+    "method": "holm",
+    "sim": {
+     "m": 5,
+     "m0": 9,
+     "effect": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "adj.0"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "bootstrap",
+    "x": [
+     1,
+     2,
+     3
+    ],
+    "stat": "corr",
+    "y": [
+     1,
+     2
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "estimate"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "queue",
+    "lambda": 1,
+    "mu": 2,
+    "c": 0,
+    "zz": 1
+   },
+   "outputs": [
+    {
+     "id": "L",
+     "kind": "scalar",
+     "of": "l"
+    },
+    {
+     "id": "L",
+     "kind": "scalar",
+     "of": "w"
+    }
+   ]
+  }
+ ]
+}

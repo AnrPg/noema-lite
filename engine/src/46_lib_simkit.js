@@ -186,7 +186,7 @@
       substream of the same stream (replication i); the same seed and name give the same numbers everywhere */
   function stream(seed, name, opts) {
     const anti = !!(opts && opts.antithetic), subI = opts && opts.sub > 0 ? floor(opts.sub) : 0;
-    let s = streamState(seed, name == null ? '' : String(name)).slice();
+    let s = opts && Array.isArray(opts.state) && opts.state.length === 6 ? opts.state.slice() : streamState(seed, name == null ? '' : String(name)).slice();
     if (subI) { const J = jumps(); s = matVec(matPowN(J.a1p76, subI, M1), s.slice(0, 3), M1).concat(matVec(matPowN(J.a2p76, subI, M2), s.slice(3), M2)); }
     let s0 = s[0], s1 = s[1], s2 = s[2], s3 = s[3], s4 = s[4], s5 = s[5];
     let draws = 0;
@@ -302,32 +302,22 @@
      Cancellation is lazy (the entry stays in the heap, marked) so it costs O(1).
      ====================================================================================================================== */
   function calendar() {
-    const h = []; let seq = 0, live = 0; const dead = new Set();
+    const h = []; let seq = 0, live = 0; const dead = new Set(), pending = new Set();
     const less = (a, b) => a.t < b.t || (a.t === b.t && (a.prio < b.prio || (a.prio === b.prio && a.seq < b.seq)));
     function up(i) { const x = h[i]; while (i > 0) { const p = (i - 1) >> 1; if (!less(x, h[p])) break; h[i] = h[p]; i = p; } h[i] = x; }
     function down(i) { const n = h.length, x = h[i]; for (;;) { let c = 2 * i + 1; if (c >= n) break; if (c + 1 < n && less(h[c + 1], h[c])) c++; if (!less(h[c], x)) break; h[i] = h[c]; i = c; } h[i] = x; }
     function popRaw() { const top = h[0], last = h.pop(); if (h.length) { h[0] = last; down(0); } return top; }
     function clean() { while (h.length && dead.has(h[0].seq)) { dead.delete(h[0].seq); popRaw(); } }
     return {
-      schedule(t, kind, data, prio) { if (!(typeof t === 'number') || Number.isNaN(t)) return -1; const e = { t, prio: prio || 0, seq: seq++, kind, data }; e.id = e.seq; h.push(e); up(h.length - 1); live++; return e.id; },
-      cancel(id) { if (!(id >= 0) || id >= seq || dead.has(id)) return false; for (const e of h) if (e.seq === id) { dead.add(id); live--; return true; } return false; },
+      schedule(t, kind, data, prio) { if (!(typeof t === 'number') || Number.isNaN(t)) return -1; const e = { t, prio: prio || 0, seq: seq++, kind, data }; e.id = e.seq; h.push(e); up(h.length - 1); live++; pending.add(e.id); return e.id; },
+      cancel(id) { if (!pending.has(id)) return false; pending.delete(id); dead.add(id); live--; return true; },
       peek() { clean(); return h.length ? h[0].t : Infinity; },
       peekEntry() { clean(); return h.length ? h[0] : null; },
-      pop() { clean(); if (!h.length) return null; live--; return popRaw(); },
+      pop() { clean(); if (!h.length) return null; live--; const e = popRaw(); pending.delete(e.seq); return e; },
       get size() { return live; },
-      clear() { h.length = 0; dead.clear(); live = 0; },
+      clear() { h.length = 0; dead.clear(); pending.clear(); live = 0; },
     };
   }
-  /** a faster cancel when the caller keeps the entry ids it may cancel: the executive uses this one */
-  function calendarFast() {
-    const cal = calendar(), pending = new Set();
-    return { ...cal,
-      schedule(t, kind, data, prio) { const id = cal.schedule(t, kind, data, prio); if (id >= 0) pending.add(id); return id; },
-      cancel(id) { if (!pending.has(id)) return false; pending.delete(id); return cal.cancelKnown(id); },
-      pop() { const e = cal.pop(); if (e) pending.delete(e.seq); return e; },
-      get size() { return cal.size; } };
-  }
-
   /* ======================================================================================================================
      The executive: next-event time advance (L §1.3.1, BCNN §3.1) with the three-phase rule of Tocher 1963 / Pidd 2004: at each
      instant the B (bound, scheduled) events run in calendar order, then the C (conditional) events are tried until none fires.
@@ -424,7 +414,7 @@
   function dopri(n, f, o, st) {
     const k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n), k4 = new Float64Array(n), k5 = new Float64Array(n), k6 = new Float64Array(n), k7 = new Float64Array(n);
     const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), ys = new Float64Array(n);
-    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4;
+    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
     const sk = (i, a, b) => atol + rtol * max(abs(a), abs(b));
     function hinit() {
       let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = sk(i, y[i], 0); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
@@ -435,6 +425,7 @@
       const r = min(100 * abs(hh), h1, hmax); return r > 0 ? r : hmax * 1e-3;
     }
     return {
+      get stiff() { return stiff; },
       reset(t0, y0) { t = t0; y.set(y0); f(t, y, k1); st.nfev++; if (!(h > 0)) h = hinit(); facold = 1e-4; },
       step(tT) {
         for (let tries = 0; ; tries++) {
@@ -455,6 +446,9 @@
           const fac11 = pow(err, 0.2 - 0.04 * 0.75);
           if (err <= 1) {
             let fac = fac11 / pow(facold, 0.04); fac = max(0.1, min(5, fac / 0.9)); const hnew = hh / fac; facold = max(err, 1e-4);
+            // the stiffness test of DOPRI5 (HNW §IV.2): h·ρ ≈ h·‖k7 − k6‖/‖y1 − ys‖ > 3.25 on 15 accepted steps
+            let sn = 0, sd = 0; for (let i = 0; i < n; i++) { sn += (k7[i] - k6[i]) ** 2; sd += (y1[i] - ys[i]) ** 2; }
+            if (sd > 0) { if (hh * sqrt(sn / sd) > 3.25) { nonsti = 0; iasti++; if (iasti >= 15) stiff = true; } else { nonsti++; if (nonsti === 6) iasti = 0; } }
             const r1 = Float64Array.from(y), r2 = new Float64Array(n), r3 = new Float64Array(n), r4 = new Float64Array(n), r5 = new Float64Array(n);
             for (let i = 0; i < n; i++) { const dy = y1[i] - y[i], bs = hh * k1[i] - dy; r2[i] = dy; r3[i] = bs; r4[i] = dy - hh * k7[i] - bs; r5[i] = hh * (DP.d1 * k1[i] + DP.d3 * k3[i] + DP.d4 * k4[i] + DP.d5 * k5[i] + DP.d6 * k6[i] + DP.d7 * k7[i]); }
             const ta = t, hs = hh;
@@ -471,6 +465,7 @@
     const y = new Float64Array(n), y1 = new Float64Array(n), f0 = new Float64Array(n), f1 = new Float64Array(n), a = new Float64Array(n), b = new Float64Array(n), c = new Float64Array(n), yt = new Float64Array(n);
     let t = 0; const dt = o.dt;
     return {
+      stiff: false,
       reset(t0, y0) { t = t0; y.set(y0); f(t, y, f0); st.nfev++; },
       step(tT) {
         const span = tT - t; if (!(span > 0)) return { fail: 'time' };
@@ -492,7 +487,88 @@
       },
     };
   }
-  const METHODS = ['dopri5', 'rk4', 'heun', 'euler'];
+
+  // Rosenbrock 2(3) of Shampine & Reichelt 1997 (SIAM J. Sci. Comput. 18:1; MATLAB ode23s): L-stable, W = I − h·d·J, d = 1/(2 + √2),
+  // a forward-difference Jacobian and the ntrp23s dense output (the same method as ode@1's stepperRos)
+  function luFactor(A, n, piv) {
+    for (let k = 0; k < n; k++) { let p = k, mx = abs(A[k * n + k]); for (let i = k + 1; i < n; i++) if (abs(A[i * n + k]) > mx) { mx = abs(A[i * n + k]); p = i; }
+      if (!(mx > 1e-300)) return false; piv[k] = p; if (p !== k) for (let j = 0; j < n; j++) { const tt = A[k * n + j]; A[k * n + j] = A[p * n + j]; A[p * n + j] = tt; }
+      for (let i = k + 1; i < n; i++) { const l = A[i * n + k] /= A[k * n + k]; for (let j = k + 1; j < n; j++) A[i * n + j] -= l * A[k * n + j]; } }
+    return true;
+  }
+  function luSolve(A, n, piv, b) {
+    for (let k = 0; k < n; k++) { const p = piv[k]; if (p !== k) { const tt = b[k]; b[k] = b[p]; b[p] = tt; } }
+    for (let i = 1; i < n; i++) { let s = b[i]; for (let j = 0; j < i; j++) s -= A[i * n + j] * b[j]; b[i] = s; }
+    for (let i = n - 1; i >= 0; i--) { let s = b[i]; for (let j = i + 1; j < n; j++) s -= A[i * n + j] * b[j]; b[i] = s / A[i * n + i]; }
+  }
+  function rosenbrock(n, f, o, st) {
+    const d = 1 / (2 + Math.SQRT2), e32 = 6 + Math.SQRT2;
+    const F0 = new Float64Array(n), F1 = new Float64Array(n), F2 = new Float64Array(n), k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n);
+    const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n);
+    const piv = new Int32Array(n); const { rtol, atol, hmax } = o; let t = 0, h = 0;
+    function jac() {
+      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
+      const dt = 1.4901161193847656e-8 * max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev += n + 1;
+    }
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, F0); st.nfev++;
+        if (!(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = min(hmax, s > 0 ? 0.8 * pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; }
+        jac(); },
+      step(tT) {
+        if (!F0.every(fin)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
+          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+          let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
+          for (let i = 0; i < n * n; i++) W[i] = -hh * d * J[i]; for (let i = 0; i < n; i++) W[i * n + i] += 1;
+          if (!luFactor(W, n, piv)) { st.rejected++; h = hh / 4; continue; }
+          for (let i = 0; i < n; i++) k1[i] = F0[i] + hh * d * Tt[i]; luSolve(W, n, piv, k1);
+          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * k1[i]; f(t + 0.5 * hh, yt, F1);
+          for (let i = 0; i < n; i++) k2[i] = F1[i] - k1[i]; luSolve(W, n, piv, k2); for (let i = 0; i < n; i++) k2[i] += k1[i];
+          const tph = last ? tT : t + hh;
+          for (let i = 0; i < n; i++) y1[i] = y[i] + hh * k2[i]; f(tph, y1, F2); st.nfev += 2;
+          for (let i = 0; i < n; i++) k3[i] = F2[i] - e32 * (k2[i] - F1[i]) - 2 * (k1[i] - F0[i]) + hh * d * Tt[i]; luSolve(W, n, piv, k3);
+          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (atol + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
+          err = sqrt(err / n);
+          if (!fin(err)) { st.rejected++; h = hh / 10; continue; }
+          if (err <= 1) {
+            const hnew = hh * min(5, max(0.2, 0.8 * pow(max(err, 1e-10), -1 / 3)));
+            const r0 = Float64Array.from(y), c1 = Float64Array.from(k1), c2 = Float64Array.from(k2), ta = t, hs = hh, q = 1 - 2 * d;
+            const seg = (tq, out) => { const s2 = (tq - ta) / hs; for (let i = 0; i < n; i++) out[i] = r0[i] + hs * (s2 * (1 - s2) / q * c1[i] + s2 * (s2 - 2 * d) / q * c2[i]); };
+            t = tph; y.set(y1); F0.set(F2); h = last ? max(h, hnew) : hnew; jac();
+            return { t0: ta, t1: tph, y1: y, seg };
+          }
+          st.rejected++; h = hh * max(0.2, 0.8 * pow(err, -1 / 3));
+        }
+      },
+    };
+  }
+  // symplectic steps for a separable Hamiltonian system given as pairs [q index, p index] with q' = ∂H/∂p (a function of p) and
+  // p' = −∂H/∂q (a function of q): Störmer–Verlet kick–drift–kick (Hairer, Lubich & Wanner, Geometric Numerical Integration, 2nd ed.
+  // 2006, §I.1.4) and Yoshida 1990's 4th-order triple jump (Phys. Lett. A 150); cubic Hermite dense output
+  function symplectic(method, n, f, o, st, pairs) {
+    const y = new Float64Array(n), y1 = new Float64Array(n), f0 = new Float64Array(n), f1 = new Float64Array(n), a = new Float64Array(n);
+    let t = 0; const dt = o.dt, qi = pairs.map(p => p[0]), pi = pairs.map(p => p[1]);
+    const kdk = (tt, hh, v) => { f(tt, v, a); for (const j of pi) v[j] += 0.5 * hh * a[j]; f(tt + 0.5 * hh, v, a); for (const j of qi) v[j] += hh * a[j]; f(tt + hh, v, a); for (const j of pi) v[j] += 0.5 * hh * a[j]; st.nfev += 3; };
+    const Y1 = 1 / (2 - Math.cbrt(2)), Y0 = 1 - 2 * Y1;
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, f0); st.nfev++; },
+      step(tT) {
+        const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+        const hh = min(dt, span), tph = hh === span ? tT : t + hh;
+        y1.set(y); if (method === 'verlet') kdk(t, hh, y1); else { kdk(t, Y1 * hh, y1); kdk(t + Y1 * hh, Y0 * hh, y1); kdk(t + (Y1 + Y0) * hh, Y1 * hh, y1); }
+        f(tph, y1, f1); st.nfev++;
+        const r0 = Float64Array.from(y), r1 = Float64Array.from(y1), d0 = Float64Array.from(f0), d1 = Float64Array.from(f1), ta = t, hs = hh;
+        const seg = (tq, out) => { const s = (tq - ta) / hs, s2 = s * s, s3 = s2 * s, h00 = 2 * s3 - 3 * s2 + 1, h10 = s3 - 2 * s2 + s, h01 = -2 * s3 + 3 * s2, h11 = s3 - s2;
+          for (let i = 0; i < n; i++) out[i] = h00 * r0[i] + h10 * hs * d0[i] + h01 * r1[i] + h11 * hs * d1[i]; };
+        t = tph; y.set(y1); f0.set(f1);
+        return { t0: ta, t1: tph, y1: y, seg };
+      },
+    };
+  }
+  const METHODS = ['auto', 'dopri5', 'rosenbrock', 'rk4', 'heun', 'euler', 'verlet', 'yoshida4'];
   function integrate(cfg) {
     const C = codes(['nan', 'blow-up', 'step-underflow', 'budget', 'zeno', 'bad-config']);
     const st = { steps: 0, rejected: 0, nfev: 0 };
