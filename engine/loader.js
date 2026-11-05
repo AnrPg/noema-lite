@@ -1189,7 +1189,7 @@
   };
   /* ---- 🔔 news that arrived (a step's pack, a new part, links…): a short toast while at most 2 are on screen at once;
      a 3rd one moves them all to the bell, where they wait until cleared — toasts never stack up over the page ---- */
-  const NOTICE_MAX = 2, NOTICE_KEEP = 50;
+  const NOTICE_MAX = 2, NOTICE_KEEP = 200;   // keep: a storage bound only (the oldest beyond it go first)
   const Notices = {
     shown: [], burst: 0,   // the notice toasts on screen now: { el, text, at, timer }; till when news goes straight to the bell
     key: acc => 'noema-notices:' + (acc || 'local'),   // this device only (not synced): what arrived here
@@ -1216,6 +1216,8 @@
   const Notes = {
     pending: [], remote: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
+    /** An answered share or invitation leaves the list and the cloud's cached copy (else local() would bring it back). */
+    drop(id) { this.remote = this.remote.filter(x => x.id !== id); this.pending = this.pending.filter(x => x.id !== id); this.emit(); },
     emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
     /** 🔔 = shares and invitations (from the cloud) + updates that wait for the learner (shared curricula, their steps, Explore subjects). */
     local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list, ...Notices.list(this.acc)]; this.emit(); return this.pending; },
@@ -1246,7 +1248,7 @@
     async accept(sh) {
       if (sh.kind === 'curriculum') {   // 👥 join a shared curriculum: my own progress, the steps prepared together
         const c = await NoemaCurShare.join(this.acc, sh.curriculum);
-        this.pending = this.pending.filter(x => x.id !== sh.id); this.emit();
+        this.drop(sh.id);
         return { kind: 'curriculum', curriculum: c.id, title: c.title || c.goal };
       }
       const p = await NoemaCloud.downloadShared(sh.id);
@@ -1254,10 +1256,10 @@
       const added = await importPack(this.acc, p, { sharedBy: sh.from_name || sh.from_email, sharedAt: new Date().toISOString() });
       await attachSharedFiles(this.acc, p, 'noema-shared');
       await NoemaCloud.answerShare(sh.id, true);
-      this.pending = this.pending.filter(x => x.id !== sh.id); this.emit();
+      this.drop(sh.id);
       return added;
     },
-    async reject(sh) { if (sh.kind === 'curriculum') await NoemaCurShare.decline(sh.curriculum); else await NoemaCloud.answerShare(sh.id, false); this.pending = this.pending.filter(x => x.id !== sh.id); this.emit(); },
+    async reject(sh) { if (sh.kind === 'curriculum') await NoemaCurShare.decline(sh.curriculum); else await NoemaCloud.answerShare(sh.id, false); this.drop(sh.id); },
   };
   /** One request as a row: who, what (info), Accept / Reject. */
   function shareRow(sh, { onAccepted } = {}) {
@@ -1727,7 +1729,7 @@
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
     curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo, langTag, bridgeTag: s => window.NoemaBridge?.tag(s) || null, localizedSubject,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
-    wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
+    wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); ls.del(Notices.key(id)); },   // 🔔 its news too (kept outside the synced keys)
     setCurrent(acc, subj) { if (Noema.switching) return; jset(P + 'current', { acc, subj }); },   // while a switch reloads the page, the subject still open must not take its place back
     switchTo(acc, subj, hash) { Noema.switching = true; jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname + (hash || '')); return; } location.hash = hash || ''; location.reload(); },   // a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …)
     async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s?.kind === 'language' && SHELL() && NoemaShell.mounted) return NoemaShell.go('#/lang/' + encodeURIComponent(s.courseId)); if (s && s.id !== Noema.subject?.id) Noema.switchTo(Noema.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },

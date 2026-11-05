@@ -4,7 +4,8 @@
    Driven through the real inbox (NoemaCurJobs.App.poll) with 4 “links added” answers, the cloud calls stubbed.
      A. the new frame (shell.js): 2 toasts, then 0 toasts and 4 in the bell; ✕ one, reload keeps the rest, Clear all
      B. one or two pieces of news: only toasts, nothing in the bell
-     C. the classic screens' bell (engine/src/40_views.js) lists them too
+     C. the classic screens' bell (engine/src/40_views.js) lists them too, ✕ and Clear all there
+     D. deleting a profile deletes its news
    Usage: node tests/notices.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs');
@@ -72,12 +73,21 @@ const badge = (page, sel) => page.$eval(sel, b => b.style.display === 'none' ? 0
   console.log('C. the classic screens\' bell');
   const p2 = await ctx.newPage(); p2.on('pageerror', e => E.push('PAGEERROR ' + e.message));
   await p2.goto(url); await p2.evaluate(() => { localStorage.removeItem('noema-test:newUI'); }); await p2.reload();
-  await until(() => p2.evaluate(() => !!window.Noema?.notice && !!Noema.account));
+  await until(() => p2.$('.noema-chip')); await p2.click('.noema-chip:has-text("Demo Physics")');
+  ok(await until(() => p2.$('#bellbtn')), 'a subject opens in the classic screens, with its 🔔');
   await p2.evaluate(() => { for (let i = 1; i <= 3; i++) Noema.notice('📦 news ' + i, 4000); });
   await wait(200);
-  ok((await toasts(p2)).length === 0 && await p2.evaluate(() => Noema.notes.pending.filter(x => x.kind === 'notice').length) === 3, 'Noema.notice: 3 at once go to the bell (pending list)');
-  if (await p2.$('#bellbtn')) { await p2.click('#bellbtn'); await wait(300); ok(await p2.$$eval('.nx-notice', l => l.length) === 3, 'the classic bell lists them'); }
-  else console.log('  (the classic picker has no bell: checked through Noema.notes)');
+  ok((await toasts(p2)).length === 0 && await badge(p2, '#bellbtn .bellbadge') === 3, '3 at once: no toast left, the classic bell counts 3');
+  ok(!(await p2.$('.sharebar.on')), 'news never shows in the classic share banner');
+  await p2.click('#bellbtn'); await wait(300);
+  ok(await p2.$$eval('.nx-notice', l => l.length) === 3, 'the classic bell lists them');
+  await p2.click('.nx-notice button'); await wait(200);
+  ok(await p2.$$eval('.nx-notice', l => l.length) === 2, '✕ clears one there too');
+  await p2.click('.nx-noticeclear button'); await wait(200);
+  ok(await p2.$$eval('.nx-notice', l => l.length) === 0 && await badge(p2, '#bellbtn .bellbadge') === 0, 'Clear all empties the classic bell');
+
+  console.log('D. deleting a profile deletes its news');
+  ok(await p2.evaluate(() => { const id = Noema.account.id; Noema.notice('a', 10); Noema.notice('b', 10); Noema.notice('c', 10); const before = !!localStorage.getItem('noema-notices:' + id); Noema.wipeAccountData(id); return before && !localStorage.getItem('noema-notices:' + id); }), 'wipeAccountData removes the profile\'s news from this device');
 
   ok(!E.length, 'no page errors' + (E.length ? ': ' + E.join(' | ') : ''));
   await browser.close();
