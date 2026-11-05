@@ -1,0 +1,45 @@
+{
+ "format": "noema-pack",
+ "v": 1,
+ "subject": {
+  "id": "dna-de",
+  "title": "DNA-Replikation",
+  "emoji": "🧬",
+  "group": "biology",
+  "description": "Wie die DNA kopiert wird",
+  "language": "de",
+  "features": {
+   "math": false,
+   "code": false
+  }
+ },
+ "chapters": [
+  {
+   "id": "ch01",
+   "num": 1,
+   "title": "Wie die DNA kopiert wird",
+   "emoji": "🧬",
+   "sections": [
+    {
+     "id": "ch01-s01",
+     "title": "Wie die DNA kopiert wird",
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Die Replikation der DNA beginnt an den Replikationsursprüngen. Die Helikase entwindet die Doppelhelix, und die Polymerase synthetisiert den neuen Strang."
+      },
+      {
+       "t": "p",
+       "text": "Jedes neue Molekül behält einen alten Strang: Die Replikation ist semikonservativ. Der Leitstrang wird kontinuierlich synthetisiert, der Folgestrang in Okazaki-Fragmenten."
+      }
+     ]
+    }
+   ],
+   "exercises": [],
+   "flashcards": [],
+   "pitfalls": [],
+   "debug": [],
+   "objectives": []
+  }
+ ]
+}

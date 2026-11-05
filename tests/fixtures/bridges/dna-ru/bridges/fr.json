@@ -1,0 +1,95 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "fr",
+ "status": "draft",
+ "t": {
+  "репликация#1": {
+   "t": "réplication",
+   "src": "19ui7r94fa"
+  },
+  "начинаться#1": {
+   "t": "commence",
+   "src": "1s9u9e01c3"
+  },
+  "точка начала репликации#1": {
+   "t": "origine de réplication",
+   "src": "rxhchu9t4r"
+  },
+  "хеликаза#1": {
+   "t": "hélicase",
+   "src": "1dfd3h2s15"
+  },
+  "раскручивать#1": {
+   "t": "déroule",
+   "src": "hwce9e2imn"
+  },
+  "двойная спираль#1": {
+   "t": "double hélice",
+   "src": "17543yjqlz"
+  },
+  "полимераза#1": {
+   "t": "polymérase",
+   "src": "loaul51ywu"
+  },
+  "синтезировать#1": {
+   "t": "synthétise",
+   "src": "1kynr5unpy"
+  },
+  "новый#1": {
+   "t": "nouveau",
+   "src": "tfncfu1411"
+  },
+  "цепь#1": {
+   "t": "brin",
+   "src": "1fj0tr4q70"
+  },
+  "каждый#1": {
+   "t": "chaque",
+   "src": "40cvpy132c"
+  },
+  "молекула#1": {
+   "t": "molécule",
+   "src": "spefdc1dqm"
+  },
+  "сохранять#1": {
+   "t": "conserve",
+   "src": "rk10g91iqc"
+  },
+  "старый#1": {
+   "t": "ancien (parental)",
+   "src": "1kwi4515x5"
+  },
+  "полуконсервативный#1": {
+   "t": "semi-conservative",
+   "src": "i2fv47pk3y"
+  },
+  "ведущий#1": {
+   "t": "avancé",
+   "src": "1nqwcjtjia"
+  },
+  "синтезироваться#1": {
+   "t": "est synthétisé",
+   "src": "f7bnsx1lo8"
+  },
+  "непрерывно#1": {
+   "t": "en continu",
+   "src": "bxosdxqlpz"
+  },
+  "отстающий#1": {
+   "t": "retardé",
+   "src": "qf7osi5kj5"
+  },
+  "фрагмент#1": {
+   "t": "fragment",
+   "src": "bxr4q01eqf"
+  },
+  "одна#1": {
+   "t": "un",
+   "src": "1r4q82ayb0"
+  }
+ },
+ "sections": {
+  "ch01-s01": "L'ADN se copie à partir des origines de réplication : l'hélicase déroule la double hélice et la polymérase construit les nouveaux brins, l'un en continu, l'autre en fragments d'Okazaki."
+ }
+}

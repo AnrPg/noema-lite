@@ -10,7 +10,7 @@ Source files of a bridge (next to the subject, or next to a pack.json):
   bridges/from-<locale>/core.json + <native>.json   the same, for a learner who reads the pack's TRANSLATION into <locale>
                           (docs/BRIDGE.md §2.4): its words are the translation's words, "source" is <locale>. Every new pack
                           gets every pair — from its own language and from each translation (pack_rules.json "bridgesFrom"),
-                          made AFTER the translation: e.g. an English pack → en→el/ru/ar, el→en/ru/ar, ru→en/el/ar.
+                          made AFTER the translation: e.g. an English pack → en→el/ru/ar/de/fr, el→en/ru/ar/de/fr, ru→en/el/ar/de/fr, de→en/el/ru/ar/fr, fr→en/el/ru/ar/de: 25 pairs.
 
 Commands (SUBJ = a subject folder, or a pack .json with its bridges/ folder beside it). --from <locale> (every command):
 the bridge of the pack's translation into <locale> — translations/<locale>/chNN.json of a subject folder, or the
@@ -19,7 +19,7 @@ noema-translation file beside a pack .json (<id>.tr.<locale>.json, or --translat
   python3 tools/bridge.py coverage SUBJ [--native el]                      share of the content words covered, per chapter
   python3 tools/bridge.py check SUBJ                                       core + every native: errors, stale or missing translations, orphan anchors
   python3 tools/bridge.py require SUBJ                                     check + EVERY pair a new pack needs (pack_rules.json "languages": from its
-                                                                           own language and from each translation into en, el, ru, ar minus the
+                                                                           own language and from each translation into en, el, ru, ar, de, fr minus the
                                                                            language read), each covering >= 90 % of the content words and >= 80 %
                                                                            of the everyday ones (with --from: that translation's pairs only)
   python3 tools/bridge.py stamp SUBJ --native el                           record the current meaning (src) of every translation (after a review)
@@ -214,9 +214,13 @@ def sections(pack, chapters=None):
     return out
 
 AR = re.compile('^[\u0600-\u06FF]')
+ELISION = re.compile("^(?:l|d|j|m|n|s|t|c|qu|jusqu|lorsqu|puisqu)['’](.{2,})$", re.S)
 def readings(f):
-    """engine/wordlink.js readings(): a folded word, then without the clitics Arabic writes onto it (و ف · ب ل ك · ال, لل)."""
+    """engine/wordlink.js readings(): a folded word, then without the clitics Arabic writes onto it (و ف · ب ل ك · ال, لل)
+    or without a French elision (l' d' qu' …)."""
     if f.endswith("'s") and len(f) > 3: return [f, f[:-2]]   # an English possessive: "today's" is a form of "today"
+    el = ELISION.match(f)   # a French elision: "l'hélicase" → hélicase
+    if el: return [f, el.group(1)]
     if not AR.match(f): return [f]
     out = [f]
     def add(w):

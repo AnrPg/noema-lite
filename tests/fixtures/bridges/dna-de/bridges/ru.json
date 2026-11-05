@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "ru",
+ "status": "draft",
+ "t": {
+  "Replikation#1": {
+   "t": "репликация",
+   "src": "1as8vud12j"
+  },
+  "beginnen#1": {
+   "t": "начинается",
+   "src": "8mw989g7or"
+  },
+  "Replikationsursprung#1": {
+   "t": "точка начала репликации",
+   "src": "f5tx7s1ppj"
+  },
+  "Helikase#1": {
+   "t": "хеликаза",
+   "src": "9syu46dbv6"
+  },
+  "entwinden#1": {
+   "t": "раскручивает",
+   "src": "1onv4zd4u5"
+  },
+  "Doppelhelix#1": {
+   "t": "двойная спираль",
+   "src": "1guken1d48"
+  },
+  "Polymerase#1": {
+   "t": "полимераза",
+   "src": "kxqaea2brk"
+  },
+  "synthetisieren#1": {
+   "t": "синтезирует",
+   "src": "1k1pfm61jh"
+  },
+  "neu#1": {
+   "t": "новый",
+   "src": "1vr5npdui7"
+  },
+  "Strang#1": {
+   "t": "цепь",
+   "src": "1mzmbr144m"
+  },
+  "jeder#1": {
+   "t": "каждый",
+   "src": "1ojbjg01qm"
+  },
+  "Molekül#1": {
+   "t": "молекула",
+   "src": "lzjplcjgrg"
+  },
+  "behalten#1": {
+   "t": "сохраняет",
+   "src": "121qb5e1im"
+  },
+  "alt#1": {
+   "t": "старая (родительская)",
+   "src": "q2mmi313fm"
+  },
+  "semikonservativ#1": {
+   "t": "полуконсервативная",
+   "src": "ascyu21028"
+  },
+  "Leitstrang#1": {
+   "t": "ведущая цепь",
+   "src": "15og1i11hi"
+  },
+  "kontinuierlich#1": {
+   "t": "непрерывно",
+   "src": "7xts7pv8a5"
+  },
+  "Folgestrang#1": {
+   "t": "отстающая цепь",
+   "src": "o874wnb9px"
+  },
+  "Okazaki-Fragment#1": {
+   "t": "фрагмент Оказаки",
+   "src": "gj1sq61ajx"
+  }
+ },
+ "sections": {
+  "ch01-s01": "ДНК копируется от точек начала репликации: хеликаза раскручивает двойную спираль, полимераза строит новые цепи — одну непрерывно, другую фрагментами Оказаки."
+ }
+}

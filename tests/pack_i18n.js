@@ -85,7 +85,7 @@ const EL = 'Φυσική (δοκιμή)', FR = 'Physique (démo)';
   ok(pc.a && !pc.a.length && pc.inl && !pc.inl.length, 'packcheck accepts the fixture pack, its translation file, and the same translation inline (older packs): ' + JSON.stringify(pc.a || pc.err));
   ok(pc.c && ['answer differs', 'exercises missing', 'not a locale code', 'unknown field'].every(w => pc.c.some(x => x.includes(w))), 'packcheck refuses a broken inline translation: ' + JSON.stringify(pc.c));
   ok(pc.ct && pc.ct.some(x => x.includes('answer differs')) && pc.ct.some(x => /locale/.test(x)), 'checkTranslation refuses a broken translation file (changed answer, wrong locale): ' + JSON.stringify(pc.ct));
-  ok(JSON.stringify({ translations: pc.req.translations, bridges: pc.req.bridges }) === JSON.stringify({ translations: ['en', 'ru'], bridges: ['en', 'ru', 'ar'] }) && pc.req.bridgePairs.map(x => x.source + '>' + x.native).join() === 'el>en,el>ru,el>ar,en>el,en>ru,en>ar,ru>en,ru>el,ru>ar', 'a Greek pack needs translations into en, ru and bridges from el, en and ru into the others: ' + JSON.stringify(pc.req));
+  ok(JSON.stringify({ translations: pc.req.translations, bridges: pc.req.bridges }) === JSON.stringify({ translations: ['en', 'ru', 'de', 'fr'], bridges: ['en', 'ru', 'ar', 'de', 'fr'] }) && pc.req.bridgePairs.length === 25 && pc.req.bridgePairs.slice(0, 5).map(x => x.source + '>' + x.native).join() === 'el>en,el>ru,el>ar,el>de,el>fr' && pc.req.bridgePairs.slice(20).map(x => x.source + '>' + x.native).join() === 'fr>en,fr>el,fr>ru,fr>ar,fr>de', 'a Greek pack needs translations into en, ru, de, fr and bridges from el, en, ru, de and fr into the others: ' + JSON.stringify(pc.req));
 
   ok(!E.length, 'no page errors: ' + E.join(' | '));
   await browser.close();

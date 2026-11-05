@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "en",
+ "status": "draft",
+ "t": {
+  "Replikation#1": {
+   "t": "replication",
+   "src": "1as8vud12j"
+  },
+  "beginnen#1": {
+   "t": "begins",
+   "src": "8mw989g7or"
+  },
+  "Replikationsursprung#1": {
+   "t": "origin of replication",
+   "src": "f5tx7s1ppj"
+  },
+  "Helikase#1": {
+   "t": "helicase",
+   "src": "9syu46dbv6"
+  },
+  "entwinden#1": {
+   "t": "unwinds",
+   "src": "1onv4zd4u5"
+  },
+  "Doppelhelix#1": {
+   "t": "double helix",
+   "src": "1guken1d48"
+  },
+  "Polymerase#1": {
+   "t": "polymerase",
+   "src": "kxqaea2brk"
+  },
+  "synthetisieren#1": {
+   "t": "synthesises",
+   "src": "1k1pfm61jh"
+  },
+  "neu#1": {
+   "t": "new",
+   "src": "1vr5npdui7"
+  },
+  "Strang#1": {
+   "t": "strand",
+   "src": "1mzmbr144m"
+  },
+  "jeder#1": {
+   "t": "each",
+   "src": "1ojbjg01qm"
+  },
+  "Molekül#1": {
+   "t": "molecule",
+   "src": "lzjplcjgrg"
+  },
+  "behalten#1": {
+   "t": "keeps",
+   "src": "121qb5e1im"
+  },
+  "alt#1": {
+   "t": "old (parent)",
+   "src": "q2mmi313fm"
+  },
+  "semikonservativ#1": {
+   "t": "semi-conservative",
+   "src": "ascyu21028"
+  },
+  "Leitstrang#1": {
+   "t": "leading strand",
+   "src": "15og1i11hi"
+  },
+  "kontinuierlich#1": {
+   "t": "continuous(ly)",
+   "src": "7xts7pv8a5"
+  },
+  "Folgestrang#1": {
+   "t": "lagging strand",
+   "src": "o874wnb9px"
+  },
+  "Okazaki-Fragment#1": {
+   "t": "Okazaki fragment",
+   "src": "gj1sq61ajx"
+  }
+ },
+ "sections": {
+  "ch01-s01": "DNA copies itself from origins of replication: helicase unwinds the double helix and polymerase builds the new strands, one continuously, the other in Okazaki fragments."
+ }
+}

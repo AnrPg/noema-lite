@@ -1,0 +1,87 @@
+{
+ "format": "noema-bridge-locale",
+ "v": 1,
+ "native": "ar",
+ "status": "draft",
+ "t": {
+  "Replikation#1": {
+   "t": "التضاعف",
+   "src": "1as8vud12j"
+  },
+  "beginnen#1": {
+   "t": "يبدأ",
+   "src": "8mw989g7or"
+  },
+  "Replikationsursprung#1": {
+   "t": "موقع بدء التضاعف",
+   "src": "f5tx7s1ppj"
+  },
+  "Helikase#1": {
+   "t": "إنزيم الهيليكاز",
+   "src": "9syu46dbv6"
+  },
+  "entwinden#1": {
+   "t": "يفك",
+   "src": "1onv4zd4u5"
+  },
+  "Doppelhelix#1": {
+   "t": "اللولب المزدوج",
+   "src": "1guken1d48"
+  },
+  "Polymerase#1": {
+   "t": "إنزيم البوليميراز",
+   "src": "kxqaea2brk"
+  },
+  "synthetisieren#1": {
+   "t": "يبني",
+   "src": "1k1pfm61jh"
+  },
+  "neu#1": {
+   "t": "جديد",
+   "src": "1vr5npdui7"
+  },
+  "Strang#1": {
+   "t": "سلسلة",
+   "src": "1mzmbr144m"
+  },
+  "jeder#1": {
+   "t": "كل",
+   "src": "1ojbjg01qm"
+  },
+  "Molekül#1": {
+   "t": "جزيء",
+   "src": "lzjplcjgrg"
+  },
+  "behalten#1": {
+   "t": "يحتفظ",
+   "src": "121qb5e1im"
+  },
+  "alt#1": {
+   "t": "قديمة (الأصلية)",
+   "src": "q2mmi313fm"
+  },
+  "semikonservativ#1": {
+   "t": "شبه محافظ",
+   "src": "ascyu21028"
+  },
+  "Leitstrang#1": {
+   "t": "السلسلة الرائدة",
+   "src": "15og1i11hi"
+  },
+  "kontinuierlich#1": {
+   "t": "باستمرار",
+   "src": "7xts7pv8a5"
+  },
+  "Folgestrang#1": {
+   "t": "السلسلة المتأخرة",
+   "src": "o874wnb9px"
+  },
+  "Okazaki-Fragment#1": {
+   "t": "قطعة أوكازاكي",
+   "src": "gj1sq61ajx"
+  }
+ },
+ "sections": {
+  "ch01-s01": "يتضاعف الحمض النووي بدءًا من مواقع بدء التضاعف: يفك الهيليكاز اللولب المزدوج ويبني البوليميراز السلاسل الجديدة، إحداها باستمرار والأخرى على شكل قطع أوكازاكي."
+ }
+}
