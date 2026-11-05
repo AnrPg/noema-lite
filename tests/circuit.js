@@ -287,6 +287,18 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   ok(ms2 < 3000, `nonlinear (BJT driven by PWM) transient of 20000 steps in ${ms2.toFixed(1)} ms`);
 }
 
+{ // the sim-spec adapter (36_engine_circuit_sim.js): a logic capture of more than 2000 edges is cut where the edges kept end, never drawn flat to tEnd
+  let def = null; globalThis.window = globalThis; globalThis.ACT = { registerEngine: d => { def = d; } };
+  require(path.join(ROOT, 'engine', 'src', '36_engine_circuit_sim.js')); delete globalThis.ACT;
+  const nl = { nodes: ['p'], elements: [{ id: 'V1', type: 'V', n: ['p', 'gnd'], value: { pwm: { v: 5, freq: 100000, duty: 0.5 } } }, { id: 'R1', type: 'R', n: ['p', 'gnd'], value: 1000 }] };
+  const m = def.create({ model: { netlist: nl } }, { seed: 1, faults: [] }).measure({}, { kind: 'logic', nodes: ['p'], threshold: 2.5, tEnd: 0.03, dt: 1e-6 });
+  const tr = m.traces && m.traces.p, last = tr && tr.edges[tr.edges.length - 1];
+  ok(tr && tr.stats.edges > 2000 && tr.edges.length <= 2000 && m.cut === true && Math.abs(m.tEnd - 0.03) < 1e-9, `logic adapter: ${tr && tr.stats.edges} edges → at most 2000 kept, the reading says cut (window ${m.t1}, capture ${m.tEnd})`);
+  ok(last && m.t1 > last.t && m.t1 - last.t <= 1 / 100000 / 2 + 2e-6, 'logic adapter: the cut window ends within one half-period of the last edge kept (no flat line past it)');
+  const s2 = def.create({ model: { netlist: { ...nl, elements: [{ ...nl.elements[0], value: { pwm: { v: 5, freq: 1000, duty: 0.5 } } }, nl.elements[1]] } } }, { seed: 1, faults: [] }).measure({}, { kind: 'logic', nodes: ['p'], threshold: 2.5, tEnd: 5e-3, dt: 1e-6 });
+  ok(!s2.cut && Math.abs(s2.t1 - 5e-3) < 1e-9 && s2.traces.p.edges.length === s2.traces.p.stats.edges, 'logic adapter: a short capture keeps every edge and its whole window');
+}
+
 console.log(`\naccuracy: RC ${pct(acc.rc)} · RL ${pct(acc.rl)} · RLC f ${pct(acc.rlcF)}, α ${pct(acc.rlcA)} · low-pass ${acc.lp.toFixed(4)} dB · PWM avg ${pct(acc.pwm)} · 20000-step RC ${acc.ms.toFixed(1)} ms`);
 console.log(`${n - fails}/${n} passed`);
 process.exit(fails ? 1 : 0);

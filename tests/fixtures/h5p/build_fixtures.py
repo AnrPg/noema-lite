@@ -19,13 +19,18 @@ SRC = {
 }
 
 
-def get(name):
+def fetch(name):
+    """the upstream file's bytes, read once (H5P_CACHE or the network) and checked against its sha256"""
     url, want = SRC[name]
     cache = os.environ.get('H5P_CACHE')
     p = os.path.join(cache, os.path.basename(url)) if cache else None
     data = open(p, 'rb').read() if p and os.path.exists(p) else urllib.request.urlopen(url, timeout=60).read()
     if hashlib.sha256(data).hexdigest() != want: sys.exit(f'✗ sha256 mismatch: {url}')
-    return zipfile.ZipFile(io.BytesIO(data))
+    return data
+
+
+def get(name):
+    return zipfile.ZipFile(io.BytesIO(fetch(name)))
 
 
 def deps_of(z, lib_dirs):
@@ -82,8 +87,8 @@ def main():
     dqc['behaviour']['enableFullScreen'] = False
     write('drag', dq, ('H5P.DragQuestion', 1, 14), dqc, 'Inner and outer planets', extra=[('H5P.AdvancedText', 1, 1)])
 
-    tf = get('tf')
-    with open(os.path.join(HERE, 'tf.h5p'), 'wb') as f: f.write(open(os.environ['H5P_CACHE'] + '/h5p-test.h5p', 'rb').read() if os.environ.get('H5P_CACHE') and os.path.exists(os.environ['H5P_CACHE'] + '/h5p-test.h5p') else urllib.request.urlopen(SRC['tf'][0], timeout=60).read())
+    tfb = fetch('tf')   # the bytes just checked, written as they are (never read or downloaded a second time)
+    with open(os.path.join(HERE, 'tf.h5p'), 'wb') as f: f.write(tfb)
     print(f"✓ tf.h5p  {os.path.getsize(os.path.join(HERE, 'tf.h5p')) // 1024} KB  (h5p-standalone v3.8.2 test/h5p-test.h5p, unchanged)")
 
 

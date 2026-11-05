@@ -47,11 +47,13 @@ not inline in the registry: **the file travels beside the pack** (D11), identifi
 | this device | IndexedDB `noema-files`, key `act|<account>|<subject>|<sha256>` | the app, offline |
 | the website library | `library/subjects/<id>/<entry>` beside `pack.js` (`build.py site` copies it) | fetched by URL |
 | the one-file bundle (`dist/noema-lite.html`) | inline as base64 when ≤ `NOEMA_H5P_INLINE_MAX` (default 2 MB) | a bigger item shows its fallback there |
+| a share (public, with a person, a Roadmap step) | beside the shared source files, as `sharedFiles["act:<id>"]` (always sent: the file is the activity) | `attachShared` checks it against the item's `sha256` and keeps it as the item's file |
 
 When a pack is opened, `NoemaSrcFiles.wireActivities` gives each h5p@1 item a **loader function** as a non-enumerable `act.h5p`
 (so it is never stored, synced or shared) and starts reading the file early: this device first, then the account, then the URL
 beside the pack. Every copy is checked against `sha256` and kept on the device, so the item works offline exactly when the pack
-does. **The host page reads the file; the frame never fetches anything.**
+does (when the device cannot keep it, storage full, the checked copy still plays). Export takes the file from what the app holds
+(the one-file bundle's inline copy, the loader) or from beside the library pack, and names any item whose file it cannot get. **The host page reads the file; the frame never fetches anything.**
 
 `act.h5p` (what `NoemaH5P.load` accepts) may be a base64 string or `{data}`, an `ArrayBuffer` / `Uint8Array` / `Blob`, a function
 returning one of these (or a promise of one), or `{url, sha256}` (fetched by the host page with `credentials: 'same-origin'`).
@@ -200,5 +202,4 @@ that the fixtures start without a CSP violation and that every attack gets 0 req
   QuestionSet only the top-level `answered`/`completed` counts as the result.
 * Library assets that JavaScript asks for by URL do not load (SingleChoiceSet's sounds: 4 CSP reports, no request; the item plays
   silently). A `fetch`/XHR shim in the frame answering from the library files would fix it.
-* A pack shared publicly (a share link) does not carry its `.h5p` files yet: its h5p@1 items show their fallback to the receiver.
 * Large videos are copied once per mount into the frame (transferred, not shared); fine up to the 64 MB cap.

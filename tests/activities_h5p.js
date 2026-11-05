@@ -282,8 +282,32 @@ async function chromiumIsolated(beacon, hits) {
   await browser.close();
 }
 
+/* the fixtures' builder writes tf.h5p from the bytes it checked (sha256), never from a second read or download: run with a network
+   stub that answers the right file once and another one after, it must still write the right file (mc/drag stubbed, no network) */
+function fixtureBuilder() {
+  const py = String.raw`
+import importlib.util, io, json, os, sys, tempfile, zipfile
+sp = importlib.util.spec_from_file_location('bf', sys.argv[1]); bf = importlib.util.module_from_spec(sp); sp.loader.exec_module(bf)
+good = open(sys.argv[2], 'rb').read(); calls = []
+class R:
+    def __init__(s, b): s.b = b
+    def read(s): return s.b
+def urlopen(url, timeout=None):
+    calls.append(url); return R(good if calls.count(url) == 1 else b'PK not the file that was checked')
+bf.urllib.request.urlopen = urlopen
+z = io.BytesIO(); zipfile.ZipFile(z, 'w').writestr('content/content.json', json.dumps({'behaviour': {}, 'question': {}})); zb = z.getvalue()
+real = bf.get; bf.get = lambda n: zipfile.ZipFile(io.BytesIO(zb)) if n in ('mc', 'drag') else real(n)
+bf.write = lambda *a, **k: None; bf.HERE = tempfile.mkdtemp(); os.environ.pop('H5P_CACHE', None)
+sys.stdout = io.StringIO(); bf.main(); sys.stdout = sys.__stdout__
+print(json.dumps({'same': open(os.path.join(bf.HERE, 'tf.h5p'), 'rb').read() == good, 'downloads': len(calls)}))`;
+  const r = cp.spawnSync('python3', ['-I', '-c', py, path.join(FIX, 'build_fixtures.py'), path.join(FIX, 'tf.h5p')], { encoding: 'utf8' });
+  let o = null; try { o = JSON.parse(r.stdout.trim().split('\n').pop()); } catch (e) { }
+  ok(o && o.same && o.downloads === 1, `build_fixtures.py: tf.h5p is written from the bytes whose sha256 was checked (one download) ${JSON.stringify(o) || r.stderr.slice(-300)}`);
+}
+
 (async () => {
   TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-h5p-'));
+  console.log('— the fixtures (tests/fixtures/h5p/build_fixtures.py)'); fixtureBuilder();
   fs.writeFileSync(path.join(TMP, 'host.html'), HOST);
   const hits = [];
   const srv = http.createServer((q, r) => {

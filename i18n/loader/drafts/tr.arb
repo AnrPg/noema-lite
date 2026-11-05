@@ -1,0 +1,4 @@
+{
+  "@@locale": "tr",
+  "loader.export.missingActivities": "{n, plural, one {# etkileşimli öge} other {# etkileşimli öge}} pakete eklenemedi: .h5p dosyası bu cihazda yok ({items}). Dersi bir kez çevrim içiyken açın, ardından yeniden dışa aktarın."
+}

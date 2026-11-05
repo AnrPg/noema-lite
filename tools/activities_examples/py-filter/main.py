@@ -37,5 +37,5 @@ def step(inputs, state):
         "f": F, "gain": g, "k": np.arange(NSTEP), "y": y,
         "att1k": float(db(gain(kind, n, fc, [1000.0]))[0]),
         "pass300": float(db(gain(kind, n, fc, [300.0]))[0]),
-        "f3": float(F[down[0]]) if down.size else float(F[-1]),
+        "f3": float(F[down[0]]) if down.size else float("nan"),   # no −3 dB point up to fs/2 (N = 1, a fast first-order filter): the readout says so ("—")
     }

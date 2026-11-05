@@ -1,0 +1,4 @@
+{
+  "@@locale": "zh-Hant",
+  "loader.export.missingActivities": "{n, plural, other {# 個互動項目}}未能放入套件中：此裝置上沒有其 .h5p 檔案（{items}）。請連網開啟該科目一次，然後重新匯出。"
+}

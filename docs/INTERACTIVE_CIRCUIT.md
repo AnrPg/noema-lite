@@ -65,7 +65,8 @@ the learner checks the diagnosis on the bench and can take **another device**.
 - **instruments** (1–5, each kind once): `V` and `R` (a meter with a red and a black lead on the `points`, or on the instrument's
   own `points` list), `I` (an ammeter in series with one of its `parts`: `{element, label, pin?}`), `scope` (one channel against
   GND: `tEnd` required, `dt?`, `tStart?`; its face is a trace plot, the log keeps peak to peak, mean and frequency) and `logic`
-  (the same times plus `threshold`; its face is a logic trace, the log keeps frequency and duty cycle). The times may be expressions.
+  (the same times plus `threshold`; its face is a logic trace, the log keeps frequency and duty cycle; over 2000 edges the trace
+  is cut just before the first edge it leaves out, `cut: true`, while the stats stay those of the whole capture). The times may be expressions.
 - **budget** (optional, 1–100): the measurements allowed; Measure is disabled after the last one.
 - **diagnosis**: `label?` (the heading; default "Your diagnosis") and 2–12 `options` `{label, fault?}`. Every fault is named by
   exactly one option; options without a fault are tempting wrong answers ("the supply is dead"). Every label (points, parts,

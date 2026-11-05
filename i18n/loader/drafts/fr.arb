@@ -74,6 +74,7 @@
   "loader.import.notPack": "Ce fichier n’est pas un pack de matière noema-lite.",
   "loader.import.jsonNoFiles": "{n, plural, one {son fichier source n’est pas} many {ses # fichiers sources ne sont pas} other {ses # fichiers sources ne sont pas}} dans ce .json — importe plutôt le paquet .noema.zip, ou joins-les dans 📚 Sources",
   "loader.export.preparing": "Préparation du paquet…",
+  "loader.export.missingActivities": "{n, plural, one {# élément interactif laissé} many {# éléments interactifs laissés} other {# éléments interactifs laissés}} hors du paquet : le fichier .h5p n’est pas sur cet appareil ({items}). Ouvrez la matière une fois en ligne, puis exportez à nouveau.",
   "loader.export.withFiles": "(avec {n, plural, one {# fichier source} many {# fichiers sources} other {# fichiers sources}})",
   "loader.info.chapterCounts": "{sections, plural, one {# section} many {# sections} other {# sections}} · {exercises, plural, one {# exercice} many {# exercices} other {# exercices}}",
   "loader.info.chapters": "Chapitres",

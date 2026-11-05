@@ -418,6 +418,20 @@
   "@loader.export.preparing": {
     "description": "Toast while a subject is saved as a package (.noema.zip) for download."
   },
+  "loader.export.missingActivities": "{n, plural, one {# interactive item} other {# interactive items}} left out of the package: the .h5p file is not on this device ({items}). Open the subject once online, then export again.",
+  "@loader.export.missingActivities": {
+    "description": "A warning after exporting a package: some H5P interactive items could not be put in it because their .h5p file (the item's package) is not stored on this device. “.h5p” is a file type: keep it as it is.",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "1"
+      },
+      "items": {
+        "type": "String",
+        "example": "planets-quiz"
+      }
+    }
+  },
   "loader.export.withFiles": "(with {n, plural, one {# source file(s)} other {# source file(s)}})",
   "@loader.export.withFiles": {
     "description": "Added after the file name of an exported package (e.g. “biology.noema.zip (with 3 source file(s))”). English keeps “(s)”; use the proper plural forms.",

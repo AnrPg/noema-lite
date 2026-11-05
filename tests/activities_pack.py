@@ -202,6 +202,16 @@ if os.environ.get('NOEMA_ACT_PACK'):   # run_e2e.sh: tests/activities_app.js imp
 if os.environ.get('NOEMA_ACT_SUBJECT'):   # the subject folder with every reference activity and its sim exercise (for activity_test.py / activity_preview.py)
     shutil.rmtree(os.environ['NOEMA_ACT_SUBJECT'], ignore_errors=True); shutil.copytree(sd, os.environ['NOEMA_ACT_SUBJECT'])
 
+# py-filter's own numbers (numpy, as Pyodide runs them): f3 is the first −3 dB point, and none when the filter never gets there by fs/2
+try:
+    import importlib.util, math
+    _sp = importlib.util.spec_from_file_location('pyfilter', os.path.join(PF, 'main.py')); _pf = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(_pf)
+    _f3 = lambda **i: _pf.step(i, {})['f3']
+    check(250 <= _f3(kind=0, N=12) <= 350 and not math.isfinite(_f3(kind=0, N=1)) and not math.isfinite(_f3(kind=1, N=4, fc=3000.0)) and 400 <= _f3(kind=1, N=4, fc=500.0) <= 600,
+          'py-filter: f3 is the −3 dB point (N = 12 → ~300 Hz), and not a number when there is none (N = 1; a first-order filter at 3 kHz): the readout shows "—", never 4 kHz',
+          str([_f3(kind=0, N=12), _f3(kind=0, N=1), _f3(kind=1, N=4, fc=3000.0), _f3(kind=1, N=4, fc=500.0)]))
+except ImportError as e: print(f'(py-filter numbers not checked here: {e})')
+
 # the round trip
 w2 = os.path.join(T, 'w2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'o1', 'demo-physics.noema.zip'), w2)
 u = os.path.join(w2, 'demo-physics')
@@ -222,6 +232,13 @@ check(pr.get('entry') == 'activities/py-filter/main.py' and 'python' not in pr a
 check(open(os.path.join(u, 'activities', 'planets-quiz', 'item.h5p'), 'rb').read() == H5B and rj(os.path.join(u, 'activities', 'planets-quiz', 'content.fr.json')) == PQ_FR
       and next(x for x in reg['items'] if x['id'] == 'planets-quiz').get('entry') == 'activities/planets-quiz/item.h5p' and 'h5pByLocale' not in next(x for x in reg['items'] if x['id'] == 'planets-quiz'),
       'h5p@1: item.h5p comes back byte for byte, content.fr.json too; the registry names the entry (no sha256, no inline content)')
+pj = json.loads(pk('o1').read('pack.json')); pq = next(x for x in pj['activities']['items'] if x['id'] == 'planets-quiz'); pq['entry'] = 'activities/planets-quiz/quiz.h5p'
+w3 = os.path.join(T, 'plain'); os.makedirs(os.path.join(w3, 'activities', 'planets-quiz')); wj(os.path.join(w3, 'demo-physics.json'), pj)   # a plain pack.json, its .h5p beside it under its own (not the default) entry
+open(os.path.join(w3, 'activities', 'planets-quiz', 'quiz.h5p'), 'wb').write(H5B)
+r = run(os.path.join(S, 'unpack.py'), os.path.join(w3, 'demo-physics.json'), os.path.join(w3, 'out')); q3 = os.path.join(w3, 'out', 'demo-physics', 'activities', 'planets-quiz', 'item.h5p')
+check(r.returncode == 0 and 'its .h5p file is not here' not in r.stdout and os.path.isfile(q3) and open(q3, 'rb').read() == H5B
+      and next(x for x in rj(os.path.join(w3, 'out', 'demo-physics', 'activities', 'activities.json'))['items'] if x['id'] == 'planets-quiz')['entry'] == 'activities/planets-quiz/item.h5p',
+      'h5p@1: a plain pack.json whose item names another entry (activities/planets-quiz/quiz.h5p): the file is found there, unpacked as item.h5p', r.stdout + r.stderr)
 r = mk(u, 'o2'); check(r.returncode == 0, 'the unpacked folder builds again', r.stdout + r.stderr)
 p2 = json.loads(pk('o2').read('pack.json'))
 check(p2['activities'] == p['activities'] and p2['version'] == p['version'], 'same activities, same pack.version after the round trip')
