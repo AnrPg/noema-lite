@@ -1127,8 +1127,11 @@
 
   /* ===================================================================================================================== */
   /* metal — ring sizes: ISO 8653:2016 (inner circumference in mm); US d = 11.63 + 0.8128·n mm (industry convention);         */
-  /* UK/Ireland/Australia letters (BS 6820:1996, withdrawn) C = 37.5 + 1.25·(i − 1) mm, A = 1 (verify); Japan d = 13 + (n−1)/3 */
-  /* mm (verify); Switzerland C − 40. AWG (ASTM B258): d = 0.127 mm · 92^((36 − n)/39). SWG (BS 3737:1964, withdrawn) table.    */
+  /* UK/Ireland/Australia letters (BS 6820:1987, withdrawn 1993 for BS EN 28653 = ISO 8653; one letter = 1.25 mm, C = 40 mm)  */
+  /* C = 37.5 + 1.25·(i − 1) mm, A = 1 (verify: BS text not seen, only sources citing it); Japan d = 13 + (n−1)/3 mm (verify:  */
+  /* the trade's JCS convention, no standard found); Switzerland C − 40. AWG (ASTM B258): d = 0.127 mm · 92^((36 − n)/39).     */
+  /* SWG (Order in Council 23 Aug 1883; BS 3737:1964, withdrawn): all 57 sizes 7/0–50 checked against NBS Circular 31 (1914), */
+  /* Table X (nvlpubs.nist.gov/nistpubs/Legacy/circ/nbscircular31e3.pdf).                                                      */
   /* Fineness k/24·1000; alloying x = m(F1 − F2)/(F2 − Fa); densities (g/cm³, 20 °C; alloys typical: verify).                  */
   /* ===================================================================================================================== */
   const SWG = [0.500, 0.464, 0.432, 0.400, 0.372, 0.348, 0.324, 0.300, 0.276, 0.252, 0.232, 0.212, 0.192, 0.176, 0.160, 0.144, 0.128, 0.116, 0.104, 0.092, 0.080, 0.072, 0.064, 0.056, 0.048, 0.040, 0.036, 0.032, 0.028, 0.024, 0.022, 0.020, 0.018, 0.0164, 0.0148, 0.0136, 0.0124, 0.0116, 0.0108, 0.0100, 0.0092, 0.0084, 0.0076, 0.0068, 0.0060, 0.0052, 0.0048, 0.0044, 0.0040, 0.0036, 0.0032, 0.0028, 0.0024, 0.0020, 0.0016, 0.0012, 0.0010];   // 7/0 (index −6) … 50, inches

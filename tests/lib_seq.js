@@ -20,6 +20,7 @@ const spec = (model, outs) => ({ format: 'noema.sim-spec/v1', engine: 'seq@1', m
 const sc = (...names) => names.map(x => [x, 'scalar', x]);
 const R = (model, outs, env) => { const s = spec(model, outs), r = Q.run(s, env || {}, { seed: 1 }); return { o: r.out, c: r.codes, P: Q.checkSpec(s).filter(p => p.level === 'error') }; };
 const letters = scene => scene.items.filter(i => typeof i.s === 'string' && i.s.length === 1).map(i => i.s).join('');
+const rows = scene => { const l = letters(scene); let a = '', b = ''; for (let i = 0; i < l.length; i += 2) { a += l[i]; b += l[i + 1]; } return a + '/' + b; };
 const texts = scene => scene.items.filter(i => typeof i.s === 'string').map(i => i.s);
 
 ok(Q.id === 'seq@1' && Object.isFrozen(Q) && Q.engine.id === 'seq@1' && typeof Q.engine.workerSource === 'string' && Q.MODES.length === 9, 'NoemaLibSeq: id, frozen API, 9 modes, engine with workerSource');
@@ -58,8 +59,8 @@ ok(Q.clean('>seq1 a header\nacg t12\n  >another\nTTA 3') === 'ACGTTTA', 'cleanin
   ok(bad.o.cdsValid === 0 && bad.c.includes('cds-internal-stop') && bad.c.includes('cds-no-stop'), 'CDS check: an internal stop and no final stop are both reported');
   const fr = [1, 2, 3, -1, -2, -3].map(f => R({ mode: 'translate', seq: 'ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG', frame: 'k' }, sc('protLength', 'leftover'), { k: f }).o);
   ok(fr[0].leftover === 0 && fr[1].leftover === 2 && fr[2].leftover === 1 && fr[3].leftover === 0 && fr.every(x => x.protLength >= 9), `six frames (−1 starts at the 3′ end of the input, NCBI ORFfinder): leftover bases ${fr.map(x => x.leftover)}`);
-  const sp = R({ mode: 'translate', seq: 'ATGGTAAGTTTTTTTTTTCAGAAATAA', exons: [{ start: 1, end: 4 }, { start: 20, end: 27 }], cds: true }, sc('splicedLength', 'nIntrons', 'canonicalIntrons', 'protLength', 'cdsValid'));
-  ok(sp.o.splicedLength === 12 && sp.o.nIntrons === 1 && sp.o.canonicalIntrons === 1 && sp.o.cdsValid === 1 && sp.o.protLength === 3, 'splicing given exons: a GT…AG intron removed, the spliced CDS ATGG|CAGAAATAA → MAE* is valid');
+  const sp = R({ mode: 'translate', seq: 'ATGGCGTAAGTTTTTTTTCAGAGAATAA', exons: [{ start: 1, end: 5 }, { start: 22, end: 28 }], cds: true }, sc('splicedLength', 'nIntrons', 'canonicalIntrons', 'protLength', 'cdsValid'));
+  ok(sp.o.splicedLength === 12 && sp.o.nIntrons === 1 && sp.o.canonicalIntrons === 1 && sp.o.cdsValid === 1 && sp.o.protLength === 3, 'splicing given exons: a GT…AG intron removed, the spliced CDS ATGGC|AGAATAA → MAE* is valid');
 }
 
 // ---------- 3. ORFs and codon usage ----------
@@ -146,7 +147,7 @@ ok(Q.clean('>seq1 a header\nacg t12\n  >another\nTTA 3') === 'ACGTTTA', 'cleanin
   const sw = R({ mode: 'tm', seq: 'CGTTGTAAAACGACGGCCAGT', seq2: L24, template: tpl }, sc('product'));
   ok(sw.o.product === 126 && sw.c.includes('primers-swapped'), 'primers given the other way round still amplify, with the code primers-swapped');
   const lo = R({ mode: 'tm', seq: 'ACGT', na: 0 }, sc('tmNN'));
-  ok(Number.isNaN(lo.o.tmNN) && lo.c.includes('salt-range') === false && lo.c.length > 0, 'no Na⁺ at all: no NN Tm (NaN), never a wrong number');
+  ok(Number.isNaN(lo.o.tmNN) && lo.c.includes('salt-range'), 'no Na⁺ at all: ln 0 has no value, so no NN Tm (NaN and the code salt-range), never a wrong number');
   const amb = R({ mode: 'tm', seq: 'ACGTNACGTACGTACGT' }, sc('tmNN', 'tmWallace'));
   ok(Number.isNaN(amb.o.tmNN) && Number.isNaN(amb.o.tmWallace) && amb.c.includes('ambiguous'), 'an ambiguous base: Tm refused (NaN, ambiguous)');
   const cc = R({ mode: 'tm', seq: L24, c1: 10, c2: 50 }, sc('tmNN'));
@@ -159,9 +160,9 @@ ok(Q.clean('>seq1 a header\nacg t12\n  >another\nTTA 3') === 'ACGTTTA', 'cleanin
   const s10 = al({ a: 'GATTACA', b: 'GCATGCU', match: 1, mismatch: -1, gap: -1 }).o;
   ok(s10.score === 0 && s10.nCoOptimal === 3, `S10 Needleman–Wunsch GATTACA / GCATGCU, +1/−1/−1: score ${s10.score}, ${s10.nCoOptimal} co-optimal alignments`);
   const s11 = al({ a: 'TGTTACGG', b: 'GGTTGACTA', type: 'local', alphabet: 'dna', match: 3, mismatch: -3, gap: -2 }, [...sc('score', 'startA', 'endA'), ['al', 'scene', 'alignment']]).o;
-  ok(s11.score === 13 && s11.startA === 2 && s11.endA === 6 && letters(s11.al) === 'GTT-ACGTTGAC', `S11 Smith–Waterman TGTTACGG / GGTTGACTA, +3/−3/−2: score 13, GTT-AC / GTTGAC`);
+  ok(s11.score === 13 && s11.startA === 2 && s11.endA === 6 && rows(s11.al) === 'GTT-AC/GTTGAC', `S11 Smith–Waterman TGTTACGG / GGTTGACTA, +3/−3/−2: score 13, GTT-AC / GTTGAC`);
   const g = al({ a: 'HEAGAWGHEE', b: 'PAWHEAE', matrix: 'BLOSUM50', gap: -8 }).o, l = al({ a: 'HEAGAWGHEE', b: 'PAWHEAE', matrix: 'BLOSUM50', gap: -8, type: 'local' }, [...sc('score'), ['al', 'scene', 'alignment']]).o;
-  ok(g.score === 1 && l.score === 28 && letters(l.al) === 'AWGHEAW-HE', `S12 HEAGAWGHEE / PAWHEAE, BLOSUM50, gap −8 (Durbin et al. 1998 figs 2.5–2.6): global ${g.score}, local ${l.score} AWGHE / AW-HE`);
+  ok(g.score === 1 && l.score === 28 && rows(l.al) === 'AWGHE/AW-HE', `S12 HEAGAWGHEE / PAWHEAE, BLOSUM50, gap −8 (Durbin et al. 1998 figs 2.5–2.6): global ${g.score}, local ${l.score} AWGHE / AW-HE`);
   const b = al({ a: 'HEAGAWGHEE', b: 'PAWHEAE', matrix: 'BLOSUM62', open: -12, extend: -1, type: 'local' }, sc('score', 'bits', 'evalue')).o;
   ok(b.score === 17 && near(b.bits, (0.267 * 17 - Math.log(0.041)) / Math.LN2, 1e-12) && near(b.evalue, 0.041 * 70 * Math.exp(-0.267 * 17), 1e-12), `S13 BLOSUM62, BLAST gaps 11/1 (open −12, extend −1), local: ${b.score}; Karlin–Altschul ${b.bits.toFixed(2)} bits, E = ${b.evalue.toPrecision(3)} (λ 0.267, K 0.041)`);
   const t = al({ a: 'AAAGGG', b: 'AAAAGGG', alphabet: 'dna', match: 1, mismatch: -1, open: -3, extend: -1 }).o;
@@ -189,7 +190,8 @@ ok(Q.clean('>seq1 a header\nacg t12\n  >another\nTTA 3') === 'ACGTTTA', 'cleanin
 // ---------- 8. dot plots ----------
 {
   const d = R({ mode: 'dotplot', a: 'ACGTTGCAAC', b: 'ACGTTGCAAC', window: 1, stringency: 1 }, sc('nHits', 'longestDiag')).o;
-  ok(d.longestDiag === 10 && d.nHits === 2 * 2 + 3 * 3 + 3 * 3 + 2 * 2 + 0 + 10 - 10 + d.nHits - 26, 'a self dot plot (w 1): the main diagonal of 10, every identical letter pair a dot');
+  const cnt = [...'ACGT'].reduce((t, x) => { const k = [...'ACGTTGCAAC'].filter(y => y === x).length; return t + k * k; }, 0);
+  ok(d.longestDiag === 10 && d.nHits === cnt, `a self dot plot (w 1): the main diagonal of 10, every identical letter pair a dot (${cnt} = Σ count²)`);
   const r = R({ mode: 'dotplot', a: 'AAAAGGGCCCATTT', b: 'AAAAGGGCCCATTT', window: 4, stringency: 4, revcomp: true }, sc('nHits', 'nHitsRev'));
   ok(r.o.nHits >= 11 && r.o.nHitsRev >= 1, `the reverse-complement strand shows the inverted repeat GGGCCC (${r.o.nHitsRev} reverse dots)`);
   const big = R({ mode: 'dotplot', a: 'A'.repeat(1500), b: 'A'.repeat(1500), window: 1 }, [['n', 'scalar', 'nHits'], ['d', 'scene', 'dots']]);

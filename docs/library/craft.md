@@ -346,11 +346,13 @@ out-of-table extrapolated impossible`.
 `wireLength` (mm), `karat`, `alloy {mass!, from!, to!, add}` (fineness ‰).
 
 - Ring sizes: **ISO 8653:2016** gives the inner circumference in mm. US: `d = 11.63 + 0.8128·n` mm (the industry convention;
-  sources differ by ±0.2 mm). **(verify)** UK/Ireland/Australia (BS 6820:1996, withdrawn): `C = 37.5 + 1.25·(i − 1)` mm with A = 1
-  (N½ = 14.5 ≈ US 7). **(verify)** Japan: `d = 13 + (n − 1)/3` mm. Switzerland: C − 40. Every scale is converted to the others.
+  sources differ by ±0.2 mm). **(verify)** UK/Ireland/Australia (BS 6820:1987, withdrawn 1993 and replaced by BS EN 28653, i.e. ISO 8653 — not 1996): `C = 37.5 +
+  1.25·(i − 1)` mm with A = 1 (N½ = 14.5 ≈ US 7); the 1.25 mm step and C = 40 mm agree with the sources that cite the standard, whose
+  text was not seen. **(verify)** Japan: `d = 13 + (n − 1)/3` mm (the trade's JCS convention, 1 = 13.0 mm; no standard found). Switzerland: C − 40. Every scale is converted to the others.
   Outside a scale's usual range the code is `out-of-table`.
 - Blank length `π(d + t)` (the neutral axis), plus a joint allowance of your own. Band volume `π(d + t)·t·w` and mass.
-- **AWG** (ASTM B258): `d = 0.127·92^((36 − n)/39)` mm, 0000 = −3. **SWG** (BS 3737:1964, withdrawn; table 7/0 = −6 … 50 **(verify)**).
+- **AWG** (ASTM B258): `d = 0.127·92^((36 − n)/39)` mm, 0000 = −3. **SWG** (Order in Council of 23 August 1883; BS 3737:1964, withdrawn; table 7/0 = −6 … 50, all 57 sizes checked
+  against NBS Circular 31, 3rd ed. 1914, Table X).
   A non-integer SWG is `rounded`, outside the table `out-of-table`.
 - Fineness `k/24·1000`. Alloying down `x = m(F₁ − F₂)/(F₂ − F_a)`, up `x = m(F₂ − F₁)/(F_f − F₂)` (impossible combinations give
   `impossible`). Densities (g/cm³): fine gold 19.32, fine silver 10.49, sterling 10.36, copper 8.96, titanium 4.51. Alloys are
