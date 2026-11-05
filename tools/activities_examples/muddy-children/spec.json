@@ -1,0 +1,30 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "logic@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "k", "kind": "slider", "label": "kLabel", "min": 0, "max": 3, "step": 1, "default": 0 }
+ ],
+ "model": {
+  "task": "epistemic",
+  "puzzle": { "kind": "muddy", "n": 3, "muddy": 2 },
+  "formula": "K_c1 m1 | K_c1 ~m1",
+  "step": "k"
+ },
+ "outputs": [
+  { "id": "knows", "kind": "scalar", "of": "value" },
+  { "id": "left", "kind": "scalar", "of": "worlds" },
+  { "id": "frame", "kind": "scalar", "of": "frame" },
+  { "id": "lie", "kind": "scalar", "of": "flag", "code": "empty" },
+  { "id": "pic", "kind": "scene", "of": "drawing" }
+ ],
+ "readouts": [
+  { "label": "frameLabel", "expr": "frame" },
+  { "label": "leftLabel", "expr": "left" },
+  { "label": "knowsLabel", "expr": "knows" }
+ ],
+ "plots": [
+  { "kind": "scene", "title": "sceneTitle", "of": "pic", "height": 320 }
+ ]
+}

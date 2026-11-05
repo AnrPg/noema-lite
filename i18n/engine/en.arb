@@ -4674,6 +4674,14 @@
   "@engine.act.sim.computing": {
     "description": "Short note while a simulation computes new results after a control changed."
   },
+  "engine.act.sim.noConverge": "These values did not settle: the parts of the model kept changing each other, so some results are not shown. Try other settings.",
+  "@engine.act.sim.noConverge": {
+    "description": "Note under an interactive simulation built from several coupled models when their exchange of values did not converge (some results show a dash)."
+  },
+  "engine.act.sim.partFailed": "One part of this simulation could not compute its results for these settings.",
+  "@engine.act.sim.partFailed": {
+    "description": "Note under an interactive simulation built from several models when one of them failed for the current control values (its results show a dash)."
+  },
   "engine.act.sim.results": "Results",
   "@engine.act.sim.results": {
     "description": "Accessible name of the list of computed values (readouts) of a simulation."
@@ -6682,6 +6690,14 @@
   "@engine.engines.prob.what": {
     "description": "One-line description."
   },
+  "engine.engines.logic.name": "Logic",
+  "@engine.engines.logic.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.logic.what": "Propositional, first-order, modal, deontic, epistemic and temporal logic; proofs, SAT, argumentation.",
+  "@engine.engines.logic.what": {
+    "description": "One-line description."
+  },
   "engine.engines.graph.name": "Networks",
   "@engine.engines.graph.name": {
     "description": "Engine name: graphs of nodes and edges."
@@ -6841,5 +6857,2377 @@
   "engine.engines.wasm.what": "Fast simulations compiled to WebAssembly.",
   "@engine.engines.wasm.what": {
     "description": "One-line description."
+  },
+  "engine.author.f.lib.abx": "Antibiotics",
+  "@engine.author.f.lib.abx": {
+    "description": "Label of the field “abx” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.act": "Treatment threshold",
+  "@engine.author.f.lib.act": {
+    "description": "Label of the field “act” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.actions": "Actions",
+  "@engine.author.f.lib.actions": {
+    "description": "Label of the field “actions” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.add": "Add",
+  "@engine.author.f.lib.add": {
+    "description": "Label of the field “add” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.affected": "Affected",
+  "@engine.author.f.lib.affected": {
+    "description": "Label of the field “affected” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.after": "After",
+  "@engine.author.f.lib.after": {
+    "description": "Label of the field “after” of a library engine’s model or outputs in the activity author (engines: clinic,timeline). Short."
+  },
+  "engine.author.f.lib.age": "Age",
+  "@engine.author.f.lib.age": {
+    "description": "Label of the field “age” of a library engine’s model or outputs in the activity author (engines: clinic,timeline). Short."
+  },
+  "engine.author.f.lib.alg": "Algorithm",
+  "@engine.author.f.lib.alg": {
+    "description": "Label of the field “alg” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.alive": "Alive",
+  "@engine.author.f.lib.alive": {
+    "description": "Label of the field “alive” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.alleles": "Alleles",
+  "@engine.author.f.lib.alleles": {
+    "description": "Label of the field “alleles” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.allowCertain": "Allow certainty",
+  "@engine.author.f.lib.allowCertain": {
+    "description": "Label of the field “allowCertain” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.alloy": "Alloy",
+  "@engine.author.f.lib.alloy": {
+    "description": "Label of the field “alloy” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.amps": "Amplitudes",
+  "@engine.author.f.lib.amps": {
+    "description": "Label of the field “amps” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.angle": "Angle",
+  "@engine.author.f.lib.angle": {
+    "description": "Label of the field “angle” of a library engine’s model or outputs in the activity author (engines: geom,map,craft). Short."
+  },
+  "engine.author.f.lib.angleBisector": "Angle bisector",
+  "@engine.author.f.lib.angleBisector": {
+    "description": "Label of the field “angleBisector” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.answer": "Answer",
+  "@engine.author.f.lib.answer": {
+    "description": "Label of the field “answer” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.apollonius": "Apollonius circle",
+  "@engine.author.f.lib.apollonius": {
+    "description": "Label of the field “apollonius” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.arg": "Argument",
+  "@engine.author.f.lib.arg": {
+    "description": "Label of the field “arg” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.atol": "Absolute tolerance",
+  "@engine.author.f.lib.atol": {
+    "description": "Label of the field “atol” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.auc": "Founding of Rome (AUC)",
+  "@engine.author.f.lib.auc": {
+    "description": "Label of the field “auc” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.aux": "Auxiliary variables",
+  "@engine.author.f.lib.aux": {
+    "description": "Label of the field “aux” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.awg": "Wire gauge (AWG)",
+  "@engine.author.f.lib.awg": {
+    "description": "Label of the field “awg” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.axis": "Axis",
+  "@engine.author.f.lib.axis": {
+    "description": "Label of the field “axis” of a library engine’s model or outputs in the activity author (engines: timeline,map). Short."
+  },
+  "engine.author.f.lib.backing": "Backing",
+  "@engine.author.f.lib.backing": {
+    "description": "Label of the field “backing” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.bands": "Band neutrophils",
+  "@engine.author.f.lib.bands": {
+    "description": "Label of the field “bands” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.base": "Base",
+  "@engine.author.f.lib.base": {
+    "description": "Label of the field “base” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.basemap": "Base map",
+  "@engine.author.f.lib.basemap": {
+    "description": "Label of the field “basemap” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.basket": "Basket",
+  "@engine.author.f.lib.basket": {
+    "description": "Label of the field “basket” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.batch": "Batch",
+  "@engine.author.f.lib.batch": {
+    "description": "Label of the field “batch” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.bbox": "Bounding box",
+  "@engine.author.f.lib.bbox": {
+    "description": "Label of the field “bbox” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.bceKey": "Label for BCE",
+  "@engine.author.f.lib.bceKey": {
+    "description": "Label of the field “bceKey” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.beat": "Beat",
+  "@engine.author.f.lib.beat": {
+    "description": "Label of the field “beat” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.before": "Before",
+  "@engine.author.f.lib.before": {
+    "description": "Label of the field “before” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.benefit": "Benefit",
+  "@engine.author.f.lib.benefit": {
+    "description": "Label of the field “benefit” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.between": "Between",
+  "@engine.author.f.lib.between": {
+    "description": "Label of the field “between” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.bezier": "Bézier curve",
+  "@engine.author.f.lib.bezier": {
+    "description": "Label of the field “bezier” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.bias": "Bias strips",
+  "@engine.author.f.lib.bias": {
+    "description": "Label of the field “bias” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.big": "Large",
+  "@engine.author.f.lib.big": {
+    "description": "Label of the field “big” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.binding": "Binding",
+  "@engine.author.f.lib.binding": {
+    "description": "Label of the field “binding” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.bleed": "Bleeding",
+  "@engine.author.f.lib.bleed": {
+    "description": "Label of the field “bleed” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.block": "Block",
+  "@engine.author.f.lib.block": {
+    "description": "Label of the field “block” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.blood": "Blood",
+  "@engine.author.f.lib.blood": {
+    "description": "Label of the field “blood” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.board": "Board",
+  "@engine.author.f.lib.board": {
+    "description": "Label of the field “board” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.body": "Body",
+  "@engine.author.f.lib.body": {
+    "description": "Label of the field “body” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.bodyCoe": "Body expansion coefficient",
+  "@engine.author.f.lib.bodyCoe": {
+    "description": "Label of the field “bodyCoe” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.border": "Border",
+  "@engine.author.f.lib.border": {
+    "description": "Label of the field “border” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.bound": "Bound",
+  "@engine.author.f.lib.bound": {
+    "description": "Label of the field “bound” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.box": "Search box",
+  "@engine.author.f.lib.box": {
+    "description": "Label of the field “box” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.bpm": "Tempo (BPM)",
+  "@engine.author.f.lib.bpm": {
+    "description": "Label of the field “bpm” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.budget": "Budget",
+  "@engine.author.f.lib.budget": {
+    "description": "Label of the field “budget” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.cal": "Calendar",
+  "@engine.author.f.lib.cal": {
+    "description": "Label of the field “cal” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.calBP": "Calibrated BP",
+  "@engine.author.f.lib.calBP": {
+    "description": "Label of the field “calBP” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.calib": "Calibration",
+  "@engine.author.f.lib.calib": {
+    "description": "Label of the field “calib” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.caliper": "Paper thickness",
+  "@engine.author.f.lib.caliper": {
+    "description": "Label of the field “caliper” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.cap": "Capacity",
+  "@engine.author.f.lib.cap": {
+    "description": "Label of the field “cap” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.case": "Letter case",
+  "@engine.author.f.lib.case": {
+    "description": "Label of the field “case” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.castOn": "Cast-on stitches",
+  "@engine.author.f.lib.castOn": {
+    "description": "Label of the field “castOn” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.category": "Category",
+  "@engine.author.f.lib.category": {
+    "description": "Label of the field “category” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.cea": "Cost-effectiveness",
+  "@engine.author.f.lib.cea": {
+    "description": "Label of the field “cea” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.ceKey": "Label for CE",
+  "@engine.author.f.lib.ceKey": {
+    "description": "Label of the field “ceKey” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.cell": "Cell size",
+  "@engine.author.f.lib.cell": {
+    "description": "Label of the field “cell” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.cells": "Cells",
+  "@engine.author.f.lib.cells": {
+    "description": "Label of the field “cells” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.center": "Centre",
+  "@engine.author.f.lib.center": {
+    "description": "Label of the field “center” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.centerOf": "Centre of",
+  "@engine.author.f.lib.centerOf": {
+    "description": "Label of the field “centerOf” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.cents": "Cents",
+  "@engine.author.f.lib.cents": {
+    "description": "Label of the field “cents” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.chainStart": "Start of the chain of fifths",
+  "@engine.author.f.lib.chainStart": {
+    "description": "Label of the field “chainStart” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.change": "Change",
+  "@engine.author.f.lib.change": {
+    "description": "Label of the field “change” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.children": "Children",
+  "@engine.author.f.lib.children": {
+    "description": "Label of the field “children” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.chords": "Chords",
+  "@engine.author.f.lib.chords": {
+    "description": "Label of the field “chords” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.chrom": "Chromosome",
+  "@engine.author.f.lib.chrom": {
+    "description": "Label of the field “chrom” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.circle": "Circle",
+  "@engine.author.f.lib.circle": {
+    "description": "Label of the field “circle” of a library engine’s model or outputs in the activity author (engines: geom,craft). Short."
+  },
+  "engine.author.f.lib.classes": "Classes",
+  "@engine.author.f.lib.classes": {
+    "description": "Label of the field “classes” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.classify": "Classify",
+  "@engine.author.f.lib.classify": {
+    "description": "Label of the field “classify” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.classifyFrieze": "Classify a frieze",
+  "@engine.author.f.lib.classifyFrieze": {
+    "description": "Label of the field “classifyFrieze” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.classLabels": "Class labels",
+  "@engine.author.f.lib.classLabels": {
+    "description": "Label of the field “classLabels” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.clef": "Clef",
+  "@engine.author.f.lib.clef": {
+    "description": "Label of the field “clef” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.clip": "Clip",
+  "@engine.author.f.lib.clip": {
+    "description": "Label of the field “clip” of a library engine’s model or outputs in the activity author (engines: geom,map). Short."
+  },
+  "engine.author.f.lib.code": "Code",
+  "@engine.author.f.lib.code": {
+    "description": "Label of the field “code” of a library engine’s model or outputs in the activity author (engines: ode,graph,geom). Short."
+  },
+  "engine.author.f.lib.codominant": "Codominant pairs",
+  "@engine.author.f.lib.codominant": {
+    "description": "Label of the field “codominant” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.coincidence": "Coincidence",
+  "@engine.author.f.lib.coincidence": {
+    "description": "Label of the field “coincidence” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.colors": "Colours",
+  "@engine.author.f.lib.colors": {
+    "description": "Label of the field “colors” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.cols": "Columns",
+  "@engine.author.f.lib.cols": {
+    "description": "Label of the field “cols” of a library engine’s model or outputs in the activity author (engines: graph,craft). Short."
+  },
+  "engine.author.f.lib.cone": "Cone",
+  "@engine.author.f.lib.cone": {
+    "description": "Label of the field “cone” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.coneIndex": "Cone index",
+  "@engine.author.f.lib.coneIndex": {
+    "description": "Label of the field “coneIndex” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.confused": "Confused",
+  "@engine.author.f.lib.confused": {
+    "description": "Label of the field “confused” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.conic": "Conic",
+  "@engine.author.f.lib.conic": {
+    "description": "Label of the field “conic” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.cost": "Cost",
+  "@engine.author.f.lib.cost": {
+    "description": "Label of the field “cost” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.costs": "Costs",
+  "@engine.author.f.lib.costs": {
+    "description": "Label of the field “costs” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.count": "Count",
+  "@engine.author.f.lib.count": {
+    "description": "Label of the field “count” of a library engine’s model or outputs in the activity author (engines: ode,craft). Short."
+  },
+  "engine.author.f.lib.counts": "Counts",
+  "@engine.author.f.lib.counts": {
+    "description": "Label of the field “counts” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.covSe": "Covariance of sensitivities",
+  "@engine.author.f.lib.covSe": {
+    "description": "Label of the field “covSe” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.covSp": "Covariance of specificities",
+  "@engine.author.f.lib.covSp": {
+    "description": "Label of the field “covSp” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.craft": "Craft",
+  "@engine.author.f.lib.craft": {
+    "description": "Label of the field “craft” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.creep": "Creep",
+  "@engine.author.f.lib.creep": {
+    "description": "Label of the field “creep” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.curve": "Curve",
+  "@engine.author.f.lib.curve": {
+    "description": "Label of the field “curve” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.cut": "Cut",
+  "@engine.author.f.lib.cut": {
+    "description": "Label of the field “cut” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.cutlist": "Cut list",
+  "@engine.author.f.lib.cutlist": {
+    "description": "Label of the field “cutlist” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.cvpu": "Consciousness (CVPU)",
+  "@engine.author.f.lib.cvpu": {
+    "description": "Label of the field “cvpu” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.cycles": "Cycles",
+  "@engine.author.f.lib.cycles": {
+    "description": "Label of the field “cycles” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.cycleYears": "Years per cycle",
+  "@engine.author.f.lib.cycleYears": {
+    "description": "Label of the field “cycleYears” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.date": "Date",
+  "@engine.author.f.lib.date": {
+    "description": "Label of the field “date” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.ddx": "Differential diagnosis",
+  "@engine.author.f.lib.ddx": {
+    "description": "Label of the field “ddx” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.deadline": "Deadline",
+  "@engine.author.f.lib.deadline": {
+    "description": "Label of the field “deadline” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.decay": "Decay",
+  "@engine.author.f.lib.decay": {
+    "description": "Label of the field “decay” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.decl": "Declination",
+  "@engine.author.f.lib.decl": {
+    "description": "Label of the field “decl” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.deg": "In degrees",
+  "@engine.author.f.lib.deg": {
+    "description": "Label of the field “deg” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.delaunay": "Delaunay triangulation",
+  "@engine.author.f.lib.delaunay": {
+    "description": "Label of the field “delaunay” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.delays": "Delays",
+  "@engine.author.f.lib.delays": {
+    "description": "Label of the field “delays” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.dendro": "Tree rings",
+  "@engine.author.f.lib.dendro": {
+    "description": "Label of the field “dendro” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.density": "Density",
+  "@engine.author.f.lib.density": {
+    "description": "Label of the field “density” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.depth": "Depth",
+  "@engine.author.f.lib.depth": {
+    "description": "Label of the field “depth” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.diacritics": "Diacritics",
+  "@engine.author.f.lib.diacritics": {
+    "description": "Label of the field “diacritics” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.diameter": "Diameter",
+  "@engine.author.f.lib.diameter": {
+    "description": "Label of the field “diameter” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.dir": "Direction",
+  "@engine.author.f.lib.dir": {
+    "description": "Label of the field “dir” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.directed": "Directed",
+  "@engine.author.f.lib.directed": {
+    "description": "Label of the field “directed” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.directrix": "Directrix",
+  "@engine.author.f.lib.directrix": {
+    "description": "Label of the field “directrix” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.discount": "Discount rate",
+  "@engine.author.f.lib.discount": {
+    "description": "Label of the field “discount” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.distribute": "Distribute evenly",
+  "@engine.author.f.lib.distribute": {
+    "description": "Label of the field “distribute” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.dominance": "Dominance",
+  "@engine.author.f.lib.dominance": {
+    "description": "Label of the field “dominance” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.dos": "Depth of shade",
+  "@engine.author.f.lib.dos": {
+    "description": "Label of the field “dos” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.dots": "Dots",
+  "@engine.author.f.lib.dots": {
+    "description": "Label of the field “dots” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.dovetail": "Dovetail",
+  "@engine.author.f.lib.dovetail": {
+    "description": "Label of the field “dovetail” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.down": "Down",
+  "@engine.author.f.lib.down": {
+    "description": "Label of the field “down” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.drawIn": "Draw-in",
+  "@engine.author.f.lib.drawIn": {
+    "description": "Label of the field “drawIn” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.drive": "Gene drive",
+  "@engine.author.f.lib.drive": {
+    "description": "Label of the field “drive” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.dry": "Drying shrinkage",
+  "@engine.author.f.lib.dry": {
+    "description": "Label of the field “dry” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.dur": "Duration",
+  "@engine.author.f.lib.dur": {
+    "description": "Label of the field “dur” of a library engine’s model or outputs in the activity author (engines: clinic,music). Short."
+  },
+  "engine.author.f.lib.ease": "Ease",
+  "@engine.author.f.lib.ease": {
+    "description": "Label of the field “ease” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.edges": "Edges",
+  "@engine.author.f.lib.edges": {
+    "description": "Label of the field “edges” of a library engine’s model or outputs in the activity author (engines: graph,map). Short."
+  },
+  "engine.author.f.lib.edo": "Equal divisions of the octave",
+  "@engine.author.f.lib.edo": {
+    "description": "Label of the field “edo” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.effect": "Effect",
+  "@engine.author.f.lib.effect": {
+    "description": "Label of the field “effect” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.efficiency": "Efficiency",
+  "@engine.author.f.lib.efficiency": {
+    "description": "Label of the field “efficiency” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.ellipsoid": "Ellipsoid",
+  "@engine.author.f.lib.ellipsoid": {
+    "description": "Label of the field “ellipsoid” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.emc": "Equilibrium moisture content",
+  "@engine.author.f.lib.emc": {
+    "description": "Label of the field “emc” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.enclitics": "Enclitics",
+  "@engine.author.f.lib.enclitics": {
+    "description": "Label of the field “enclitics” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.end": "End",
+  "@engine.author.f.lib.end": {
+    "description": "Label of the field “end” of a library engine’s model or outputs in the activity author (engines: timeline,map). Short."
+  },
+  "engine.author.f.lib.ends": "Ends",
+  "@engine.author.f.lib.ends": {
+    "description": "Label of the field “ends” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.epi": "Ends per inch",
+  "@engine.author.f.lib.epi": {
+    "description": "Label of the field “epi” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.epistasis": "Epistasis",
+  "@engine.author.f.lib.epistasis": {
+    "description": "Label of the field “epistasis” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.equilibria": "Equilibria",
+  "@engine.author.f.lib.equilibria": {
+    "description": "Label of the field “equilibria” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.era": "Era",
+  "@engine.author.f.lib.era": {
+    "description": "Label of the field “era” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.esi": "Emergency Severity Index",
+  "@engine.author.f.lib.esi": {
+    "description": "Label of the field “esi” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.essential": "Essential",
+  "@engine.author.f.lib.essential": {
+    "description": "Label of the field “essential” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.estimates": "Estimates",
+  "@engine.author.f.lib.estimates": {
+    "description": "Label of the field “estimates” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.eulerLine": "Euler line",
+  "@engine.author.f.lib.eulerLine": {
+    "description": "Label of the field “eulerLine” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.event": "Event",
+  "@engine.author.f.lib.event": {
+    "description": "Label of the field “event” of a library engine’s model or outputs in the activity author (engines: ode,timeline). Short."
+  },
+  "engine.author.f.lib.events": "Events",
+  "@engine.author.f.lib.events": {
+    "description": "Label of the field “events” of a library engine’s model or outputs in the activity author (engines: ode,timeline). Short."
+  },
+  "engine.author.f.lib.every": "Every",
+  "@engine.author.f.lib.every": {
+    "description": "Label of the field “every” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.expansion": "Expansion",
+  "@engine.author.f.lib.expansion": {
+    "description": "Label of the field “expansion” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.expr": "Expression",
+  "@engine.author.f.lib.expr": {
+    "description": "Label of the field “expr” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.external": "External",
+  "@engine.author.f.lib.external": {
+    "description": "Label of the field “external” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.extra": "Extra",
+  "@engine.author.f.lib.extra": {
+    "description": "Label of the field “extra” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.fabricH": "Fabric height",
+  "@engine.author.f.lib.fabricH": {
+    "description": "Label of the field “fabricH” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.fabricW": "Fabric width",
+  "@engine.author.f.lib.fabricW": {
+    "description": "Label of the field “fabricW” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.face": "Face",
+  "@engine.author.f.lib.face": {
+    "description": "Label of the field “face” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.factor": "Factor",
+  "@engine.author.f.lib.factor": {
+    "description": "Label of the field “factor” of a library engine’s model or outputs in the activity author (engines: geom,map). Short."
+  },
+  "engine.author.f.lib.father": "Father",
+  "@engine.author.f.lib.father": {
+    "description": "Label of the field “father” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.field": "Field",
+  "@engine.author.f.lib.field": {
+    "description": "Label of the field “field” of a library engine’s model or outputs in the activity author (engines: ode,timeline,music). Short."
+  },
+  "engine.author.f.lib.findings": "Findings",
+  "@engine.author.f.lib.findings": {
+    "description": "Label of the field “findings” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.finished": "Finished size",
+  "@engine.author.f.lib.finished": {
+    "description": "Label of the field “finished” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.fire": "Firing shrinkage",
+  "@engine.author.f.lib.fire": {
+    "description": "Label of the field “fire” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.fired": "Fired size",
+  "@engine.author.f.lib.fired": {
+    "description": "Label of the field “fired” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.fit": "Fit",
+  "@engine.author.f.lib.fit": {
+    "description": "Label of the field “fit” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.flag": "Flag",
+  "@engine.author.f.lib.flag": {
+    "description": "Label of the field “flag” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.fluid": "Fluids",
+  "@engine.author.f.lib.fluid": {
+    "description": "Label of the field “fluid” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.foci": "Foci",
+  "@engine.author.f.lib.foci": {
+    "description": "Label of the field “foci” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.focus": "Focus",
+  "@engine.author.f.lib.focus": {
+    "description": "Label of the field “focus” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.folds": "Folds",
+  "@engine.author.f.lib.folds": {
+    "description": "Label of the field “folds” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.foldSigma": "Fold final sigma",
+  "@engine.author.f.lib.foldSigma": {
+    "description": "Label of the field “foldSigma” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.foot": "Foot of the perpendicular",
+  "@engine.author.f.lib.foot": {
+    "description": "Label of the field “foot” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.forecasts": "Forecasts",
+  "@engine.author.f.lib.forecasts": {
+    "description": "Label of the field “forecasts” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.form": "Unicode form",
+  "@engine.author.f.lib.form": {
+    "description": "Label of the field “form” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.formula": "Formula",
+  "@engine.author.f.lib.formula": {
+    "description": "Label of the field “formula” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.fraction": "Fraction",
+  "@engine.author.f.lib.fraction": {
+    "description": "Label of the field “fraction” of a library engine’s model or outputs in the activity author (engines: music,craft). Short."
+  },
+  "engine.author.f.lib.freqs": "Allele frequencies",
+  "@engine.author.f.lib.freqs": {
+    "description": "Label of the field “freqs” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.from": "From",
+  "@engine.author.f.lib.from": {
+    "description": "Label of the field “from” of a library engine’s model or outputs in the activity author (engines: geom,timeline,music,map,text,craft). Short."
+  },
+  "engine.author.f.lib.fromSts": "Stitches from",
+  "@engine.author.f.lib.fromSts": {
+    "description": "Label of the field “fromSts” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.gather": "Gathering",
+  "@engine.author.f.lib.gather": {
+    "description": "Label of the field “gather” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.gauge": "Gauge",
+  "@engine.author.f.lib.gauge": {
+    "description": "Label of the field “gauge” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.gcs": "Glasgow Coma Scale",
+  "@engine.author.f.lib.gcs": {
+    "description": "Label of the field “gcs” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.geese": "Flying geese",
+  "@engine.author.f.lib.geese": {
+    "description": "Label of the field “geese” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.generate": "Generate",
+  "@engine.author.f.lib.generate": {
+    "description": "Label of the field “generate” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.genotype": "Genotype",
+  "@engine.author.f.lib.genotype": {
+    "description": "Label of the field “genotype” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.gens": "Generations",
+  "@engine.author.f.lib.gens": {
+    "description": "Label of the field “gens” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.geodesic": "Geodesic",
+  "@engine.author.f.lib.geodesic": {
+    "description": "Label of the field “geodesic” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.glide": "Glide",
+  "@engine.author.f.lib.glide": {
+    "description": "Label of the field “glide” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.gnomon": "Gnomon",
+  "@engine.author.f.lib.gnomon": {
+    "description": "Label of the field “gnomon” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.grade": "Grade",
+  "@engine.author.f.lib.grade": {
+    "description": "Label of the field “grade” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.grain": "Grain",
+  "@engine.author.f.lib.grain": {
+    "description": "Label of the field “grain” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.graph": "Graph",
+  "@engine.author.f.lib.graph": {
+    "description": "Label of the field “graph” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.graticule": "Graticule",
+  "@engine.author.f.lib.graticule": {
+    "description": "Label of the field “graticule” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.grid": "Grid",
+  "@engine.author.f.lib.grid": {
+    "description": "Label of the field “grid” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.group": "Group",
+  "@engine.author.f.lib.group": {
+    "description": "Label of the field “group” of a library engine’s model or outputs in the activity author (engines: clinic,craft). Short."
+  },
+  "engine.author.f.lib.groupIndex": "Group index",
+  "@engine.author.f.lib.groupIndex": {
+    "description": "Label of the field “groupIndex” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.groups": "Groups",
+  "@engine.author.f.lib.groups": {
+    "description": "Label of the field “groups” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.growth": "Growth",
+  "@engine.author.f.lib.growth": {
+    "description": "Label of the field “growth” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.halfCycle": "Half-cycle correction",
+  "@engine.author.f.lib.halfCycle": {
+    "description": "Label of the field “halfCycle” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.harm": "Harm",
+  "@engine.author.f.lib.harm": {
+    "description": "Label of the field “harm” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.heuristic": "Heuristic",
+  "@engine.author.f.lib.heuristic": {
+    "description": "Label of the field “heuristic” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.hide": "Hide",
+  "@engine.author.f.lib.hide": {
+    "description": "Label of the field “hide” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.highRisk": "High risk",
+  "@engine.author.f.lib.highRisk": {
+    "description": "Label of the field “highRisk” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.history": "History",
+  "@engine.author.f.lib.history": {
+    "description": "Label of the field “history” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.hmax": "Largest step",
+  "@engine.author.f.lib.hmax": {
+    "description": "Label of the field “hmax” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.hmirror": "Horizontal mirror",
+  "@engine.author.f.lib.hmirror": {
+    "description": "Label of the field “hmirror” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.horizonYears": "Horizon in years",
+  "@engine.author.f.lib.horizonYears": {
+    "description": "Label of the field “horizonYears” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.hull": "Convex hull",
+  "@engine.author.f.lib.hull": {
+    "description": "Label of the field “hull” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.hweight": "Heuristic weight",
+  "@engine.author.f.lib.hweight": {
+    "description": "Label of the field “hweight” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.hyp": "Hypothesis",
+  "@engine.author.f.lib.hyp": {
+    "description": "Label of the field “hyp” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.hyphens": "Hyphens",
+  "@engine.author.f.lib.hyphens": {
+    "description": "Label of the field “hyphens” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.hypotheses": "Hypotheses",
+  "@engine.author.f.lib.hypotheses": {
+    "description": "Label of the field “hypotheses” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.inclusive": "Inclusive",
+  "@engine.author.f.lib.inclusive": {
+    "description": "Label of the field “inclusive” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.index": "Index",
+  "@engine.author.f.lib.index": {
+    "description": "Label of the field “index” of a library engine’s model or outputs in the activity author (engines: ode,geom). Short."
+  },
+  "engine.author.f.lib.inheritance": "Inheritance",
+  "@engine.author.f.lib.inheritance": {
+    "description": "Label of the field “inheritance” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.init": "Initial value",
+  "@engine.author.f.lib.init": {
+    "description": "Label of the field “init” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.intersect": "Intersection",
+  "@engine.author.f.lib.intersect": {
+    "description": "Label of the field “intersect” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.invariants": "Invariants",
+  "@engine.author.f.lib.invariants": {
+    "description": "Label of the field “invariants” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.islamic": "Islamic calendar",
+  "@engine.author.f.lib.islamic": {
+    "description": "Label of the field “islamic” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.islamicEpoch": "Islamic epoch",
+  "@engine.author.f.lib.islamicEpoch": {
+    "description": "Label of the field “islamicEpoch” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.items": "Items",
+  "@engine.author.f.lib.items": {
+    "description": "Label of the field “items” of a library engine’s model or outputs in the activity author (engines: med). Short."
+  },
+  "engine.author.f.lib.karat": "Karat",
+  "@engine.author.f.lib.karat": {
+    "description": "Label of the field “karat” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.keep": "Keep",
+  "@engine.author.f.lib.keep": {
+    "description": "Label of the field “keep” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.kerf": "Kerf",
+  "@engine.author.f.lib.kerf": {
+    "description": "Label of the field “kerf” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.key": "Key",
+  "@engine.author.f.lib.key": {
+    "description": "Label of the field “key” of a library engine’s model or outputs in the activity author (engines: med,clinic,music). Short."
+  },
+  "engine.author.f.lib.kind": "Kind",
+  "@engine.author.f.lib.kind": {
+    "description": "Label of the field “kind” of a library engine’s model or outputs in the activity author (engines: ode,graph,geom,clinic,music,craft). Short."
+  },
+  "engine.author.f.lib.label": "Label",
+  "@engine.author.f.lib.label": {
+    "description": "Label of the field “label” of a library engine’s model or outputs in the activity author (engines: graph,geom,timeline,map,text). Short."
+  },
+  "engine.author.f.lib.labels": "Labels",
+  "@engine.author.f.lib.labels": {
+    "description": "Label of the field “labels” of a library engine’s model or outputs in the activity author (engines: graph,geom,map). Short."
+  },
+  "engine.author.f.lib.lane": "Lane",
+  "@engine.author.f.lib.lane": {
+    "description": "Label of the field “lane” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.lang": "Language",
+  "@engine.author.f.lib.lang": {
+    "description": "Label of the field “lang” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.lat": "Latitude",
+  "@engine.author.f.lib.lat": {
+    "description": "Label of the field “lat” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.layout": "Layout",
+  "@engine.author.f.lib.layout": {
+    "description": "Label of the field “layout” of a library engine’s model or outputs in the activity author (engines: graph,music). Short."
+  },
+  "engine.author.f.lib.leap": "Leap year",
+  "@engine.author.f.lib.leap": {
+    "description": "Label of the field “leap” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.len": "Length",
+  "@engine.author.f.lib.len": {
+    "description": "Label of the field “len” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.length": "Length",
+  "@engine.author.f.lib.length": {
+    "description": "Label of the field “length” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.lethal": "Lethal genotypes",
+  "@engine.author.f.lib.lethal": {
+    "description": "Label of the field “lethal” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.lexicon": "Lexicon",
+  "@engine.author.f.lib.lexicon": {
+    "description": "Label of the field “lexicon” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.lifesaving": "Life-saving intervention",
+  "@engine.author.f.lib.lifesaving": {
+    "description": "Label of the field “lifesaving” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.liftplan": "Lift plan",
+  "@engine.author.f.lib.liftplan": {
+    "description": "Label of the field “liftplan” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.lik": "Likelihoods",
+  "@engine.author.f.lib.lik": {
+    "description": "Label of the field “lik” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.limb": "Sun’s upper limb",
+  "@engine.author.f.lib.limb": {
+    "description": "Label of the field “limb” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.line": "Line",
+  "@engine.author.f.lib.line": {
+    "description": "Label of the field “line” of a library engine’s model or outputs in the activity author (engines: geom,text). Short."
+  },
+  "engine.author.f.lib.linkage": "Linkage",
+  "@engine.author.f.lib.linkage": {
+    "description": "Label of the field “linkage” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.liquor": "Liquor ratio",
+  "@engine.author.f.lib.liquor": {
+    "description": "Label of the field “liquor” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.load": "Load",
+  "@engine.author.f.lib.load": {
+    "description": "Label of the field “load” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.loci": "Loci",
+  "@engine.author.f.lib.loci": {
+    "description": "Label of the field “loci” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.locus": "Locus",
+  "@engine.author.f.lib.locus": {
+    "description": "Label of the field “locus” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.lon": "Longitude",
+  "@engine.author.f.lib.lon": {
+    "description": "Label of the field “lon” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.lowYield": "Low yield",
+  "@engine.author.f.lib.lowYield": {
+    "description": "Label of the field “lowYield” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.lung": "Lung",
+  "@engine.author.f.lib.lung": {
+    "description": "Label of the field “lung” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.lyapunov": "Lyapunov exponents",
+  "@engine.author.f.lib.lyapunov": {
+    "description": "Label of the field “lyapunov” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.margin": "Margin",
+  "@engine.author.f.lib.margin": {
+    "description": "Label of the field “margin” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.markov": "Markov model",
+  "@engine.author.f.lib.markov": {
+    "description": "Label of the field “markov” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.mass": "Mass",
+  "@engine.author.f.lib.mass": {
+    "description": "Label of the field “mass” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.master": "Master chronology",
+  "@engine.author.f.lib.master": {
+    "description": "Label of the field “master” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.masterStart": "Start of the master chronology",
+  "@engine.author.f.lib.masterStart": {
+    "description": "Label of the field “masterStart” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.mat": "Material",
+  "@engine.author.f.lib.mat": {
+    "description": "Label of the field “mat” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.materials": "Materials",
+  "@engine.author.f.lib.materials": {
+    "description": "Label of the field “materials” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.max": "Maximum",
+  "@engine.author.f.lib.max": {
+    "description": "Label of the field “max” of a library engine’s model or outputs in the activity author (engines: ode,clinic,map,text). Short."
+  },
+  "engine.author.f.lib.maxFloat": "Longest float",
+  "@engine.author.f.lib.maxFloat": {
+    "description": "Label of the field “maxFloat” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.maxFloatCm": "Longest float (cm)",
+  "@engine.author.f.lib.maxFloatCm": {
+    "description": "Label of the field “maxFloatCm” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.maxIter": "Most iterations",
+  "@engine.author.f.lib.maxIter": {
+    "description": "Label of the field “maxIter” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.maxLat": "Largest latitude",
+  "@engine.author.f.lib.maxLat": {
+    "description": "Label of the field “maxLat” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.maxSteps": "Most steps",
+  "@engine.author.f.lib.maxSteps": {
+    "description": "Label of the field “maxSteps” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.maya": "Maya correlation",
+  "@engine.author.f.lib.maya": {
+    "description": "Label of the field “maya” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.mcFrom": "Moisture from",
+  "@engine.author.f.lib.mcFrom": {
+    "description": "Label of the field “mcFrom” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.mcl": "Muta cum liquida",
+  "@engine.author.f.lib.mcl": {
+    "description": "Label of the field “mcl” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.mcTo": "Moisture to",
+  "@engine.author.f.lib.mcTo": {
+    "description": "Label of the field “mcTo” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.measure": "Measure",
+  "@engine.author.f.lib.measure": {
+    "description": "Label of the field “measure” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.mec": "Smallest enclosing circle",
+  "@engine.author.f.lib.mec": {
+    "description": "Label of the field “mec” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.metal": "Metal",
+  "@engine.author.f.lib.metal": {
+    "description": "Label of the field “metal” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.meter": "Meter",
+  "@engine.author.f.lib.meter": {
+    "description": "Label of the field “meter” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.metersPerGram": "Metres per gram",
+  "@engine.author.f.lib.metersPerGram": {
+    "description": "Label of the field “metersPerGram” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.method": "Method",
+  "@engine.author.f.lib.method": {
+    "description": "Label of the field “method” of a library engine’s model or outputs in the activity author (engines: ode,map). Short."
+  },
+  "engine.author.f.lib.metre": "Metre",
+  "@engine.author.f.lib.metre": {
+    "description": "Label of the field “metre” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.mfw": "Most frequent words",
+  "@engine.author.f.lib.mfw": {
+    "description": "Label of the field “mfw” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.midi": "MIDI numbers",
+  "@engine.author.f.lib.midi": {
+    "description": "Label of the field “midi” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.midpoint": "Midpoint",
+  "@engine.author.f.lib.midpoint": {
+    "description": "Label of the field “midpoint” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.min": "Minimum",
+  "@engine.author.f.lib.min": {
+    "description": "Label of the field “min” of a library engine’s model or outputs in the activity author (engines: ode,clinic,map). Short."
+  },
+  "engine.author.f.lib.minOverlap": "Smallest overlap",
+  "@engine.author.f.lib.minOverlap": {
+    "description": "Label of the field “minOverlap” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.minutes": "Minutes",
+  "@engine.author.f.lib.minutes": {
+    "description": "Label of the field “minutes” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.mirrors": "Mirrors",
+  "@engine.author.f.lib.mirrors": {
+    "description": "Label of the field “mirrors” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.mode": "Mode",
+  "@engine.author.f.lib.mode": {
+    "description": "Label of the field “mode” of a library engine’s model or outputs in the activity author (engines: graph,genetics,timeline,music,map,craft). Short."
+  },
+  "engine.author.f.lib.model": "Model",
+  "@engine.author.f.lib.model": {
+    "description": "Label of the field “model” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.monzo": "Monzo",
+  "@engine.author.f.lib.monzo": {
+    "description": "Label of the field “monzo” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.mordant": "Mordant",
+  "@engine.author.f.lib.mordant": {
+    "description": "Label of the field “mordant” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.morley": "Morley triangle",
+  "@engine.author.f.lib.morley": {
+    "description": "Label of the field “morley” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.mother": "Mother",
+  "@engine.author.f.lib.mother": {
+    "description": "Label of the field “mother” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.motif": "Motif",
+  "@engine.author.f.lib.motif": {
+    "description": "Label of the field “motif” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.move": "Move",
+  "@engine.author.f.lib.move": {
+    "description": "Label of the field “move” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.mult": "Multiple",
+  "@engine.author.f.lib.mult": {
+    "description": "Label of the field “mult” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.mustNotMiss": "Must not miss",
+  "@engine.author.f.lib.mustNotMiss": {
+    "description": "Label of the field “mustNotMiss” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.name": "Name",
+  "@engine.author.f.lib.name": {
+    "description": "Label of the field “name” of a library engine’s model or outputs in the activity author (engines: ode,clinic,music). Short."
+  },
+  "engine.author.f.lib.napoleon": "Napoleon triangle",
+  "@engine.author.f.lib.napoleon": {
+    "description": "Label of the field “napoleon” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.neg": "Negative",
+  "@engine.author.f.lib.neg": {
+    "description": "Label of the field “neg” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.network": "Network",
+  "@engine.author.f.lib.network": {
+    "description": "Label of the field “network” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.newYearD": "New Year day",
+  "@engine.author.f.lib.newYearD": {
+    "description": "Label of the field “newYearD” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.newYearM": "New Year month",
+  "@engine.author.f.lib.newYearM": {
+    "description": "Label of the field “newYearM” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.next": "Next value",
+  "@engine.author.f.lib.next": {
+    "description": "Label of the field “next” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.node": "Node",
+  "@engine.author.f.lib.node": {
+    "description": "Label of the field “node” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.nodes": "Nodes",
+  "@engine.author.f.lib.nodes": {
+    "description": "Label of the field “nodes” of a library engine’s model or outputs in the activity author (engines: graph,clinic). Short."
+  },
+  "engine.author.f.lib.noise": "Noise",
+  "@engine.author.f.lib.noise": {
+    "description": "Label of the field “noise” of a library engine’s model or outputs in the activity author (engines: clinic,timeline). Short."
+  },
+  "engine.author.f.lib.normalize": "Normalisation",
+  "@engine.author.f.lib.normalize": {
+    "description": "Label of the field “normalize” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.normalized": "Normalised",
+  "@engine.author.f.lib.normalized": {
+    "description": "Label of the field “normalized” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.note": "Note",
+  "@engine.author.f.lib.note": {
+    "description": "Label of the field “note” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.notes": "Notes",
+  "@engine.author.f.lib.notes": {
+    "description": "Label of the field “notes” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.nth": "Which one",
+  "@engine.author.f.lib.nth": {
+    "description": "Label of the field “nth” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.nullclines": "Nullclines",
+  "@engine.author.f.lib.nullclines": {
+    "description": "Label of the field “nullclines” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.numbers": "Numbers",
+  "@engine.author.f.lib.numbers": {
+    "description": "Label of the field “numbers” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.objects": "Objects",
+  "@engine.author.f.lib.objects": {
+    "description": "Label of the field “objects” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.observed": "Observed",
+  "@engine.author.f.lib.observed": {
+    "description": "Label of the field “observed” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.offset": "Offset",
+  "@engine.author.f.lib.offset": {
+    "description": "Label of the field “offset” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.olympiadMonth": "Olympiad month",
+  "@engine.author.f.lib.olympiadMonth": {
+    "description": "Label of the field “olympiadMonth” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.oneway": "One way",
+  "@engine.author.f.lib.oneway": {
+    "description": "Label of the field “oneway” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.onMirrors": "On the mirrors",
+  "@engine.author.f.lib.onMirrors": {
+    "description": "Label of the field “onMirrors” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.open": "Open",
+  "@engine.author.f.lib.open": {
+    "description": "Label of the field “open” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.ops": "Operations",
+  "@engine.author.f.lib.ops": {
+    "description": "Label of the field “ops” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.options": "Options",
+  "@engine.author.f.lib.options": {
+    "description": "Label of the field “options” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.opts": "Options",
+  "@engine.author.f.lib.opts": {
+    "description": "Label of the field “opts” of a library engine’s model or outputs in the activity author (engines: med). Short."
+  },
+  "engine.author.f.lib.order": "Order",
+  "@engine.author.f.lib.order": {
+    "description": "Label of the field “order” of a library engine’s model or outputs in the activity author (engines: graph,clinic). Short."
+  },
+  "engine.author.f.lib.oriented": "Oriented",
+  "@engine.author.f.lib.oriented": {
+    "description": "Label of the field “oriented” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.other": "Other",
+  "@engine.author.f.lib.other": {
+    "description": "Label of the field “other” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.over": "Over",
+  "@engine.author.f.lib.over": {
+    "description": "Label of the field “over” of a library engine’s model or outputs in the activity author (engines: clinic,craft). Short."
+  },
+  "engine.author.f.lib.overRows": "Over rows",
+  "@engine.author.f.lib.overRows": {
+    "description": "Label of the field “overRows” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.pAB": "Frequency of AB",
+  "@engine.author.f.lib.pAB": {
+    "description": "Label of the field “pAB” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.pAb": "Frequency of Ab",
+  "@engine.author.f.lib.pAb": {
+    "description": "Label of the field “pAb” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.paB": "Frequency of aB",
+  "@engine.author.f.lib.paB": {
+    "description": "Label of the field “paB” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.pab": "Frequency of ab",
+  "@engine.author.f.lib.pab": {
+    "description": "Label of the field “pab” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.pack": "Packing",
+  "@engine.author.f.lib.pack": {
+    "description": "Label of the field “pack” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.pages": "Pages",
+  "@engine.author.f.lib.pages": {
+    "description": "Label of the field “pages” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.pain": "Pain",
+  "@engine.author.f.lib.pain": {
+    "description": "Label of the field “pain” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.pairs": "Pairs",
+  "@engine.author.f.lib.pairs": {
+    "description": "Label of the field “pairs” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.panel": "Panel",
+  "@engine.author.f.lib.panel": {
+    "description": "Label of the field “panel” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.parallel": "Parallel",
+  "@engine.author.f.lib.parallel": {
+    "description": "Label of the field “parallel” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.part": "Part",
+  "@engine.author.f.lib.part": {
+    "description": "Label of the field “part” of a library engine’s model or outputs in the activity author (engines: timeline,music). Short."
+  },
+  "engine.author.f.lib.path": "Path",
+  "@engine.author.f.lib.path": {
+    "description": "Label of the field “path” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.patient": "Patient",
+  "@engine.author.f.lib.patient": {
+    "description": "Label of the field “patient” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.pattern": "Pattern",
+  "@engine.author.f.lib.pattern": {
+    "description": "Label of the field “pattern” of a library engine’s model or outputs in the activity author (engines: music,text). Short."
+  },
+  "engine.author.f.lib.patternSts": "Pattern stitches",
+  "@engine.author.f.lib.patternSts": {
+    "description": "Label of the field “patternSts” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.pcs": "Pitch classes",
+  "@engine.author.f.lib.pcs": {
+    "description": "Label of the field “pcs” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.penetrance": "Penetrance",
+  "@engine.author.f.lib.penetrance": {
+    "description": "Label of the field “penetrance” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.people": "People",
+  "@engine.author.f.lib.people": {
+    "description": "Label of the field “people” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.per": "Per",
+  "@engine.author.f.lib.per": {
+    "description": "Label of the field “per” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.perEvent": "Per event",
+  "@engine.author.f.lib.perEvent": {
+    "description": "Label of the field “perEvent” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.periods": "Periods",
+  "@engine.author.f.lib.periods": {
+    "description": "Label of the field “periods” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.perpBisector": "Perpendicular bisector",
+  "@engine.author.f.lib.perpBisector": {
+    "description": "Label of the field “perpBisector” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.perpendicular": "Perpendicular",
+  "@engine.author.f.lib.perpendicular": {
+    "description": "Label of the field “perpendicular” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.phase": "Phase plane",
+  "@engine.author.f.lib.phase": {
+    "description": "Label of the field “phase” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.phenocopy": "Phenocopy rate",
+  "@engine.author.f.lib.phenocopy": {
+    "description": "Label of the field “phenocopy” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.pick": "Pick",
+  "@engine.author.f.lib.pick": {
+    "description": "Label of the field “pick” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.picks": "Picks",
+  "@engine.author.f.lib.picks": {
+    "description": "Label of the field “picks” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.piece": "Piece",
+  "@engine.author.f.lib.piece": {
+    "description": "Label of the field “piece” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.pieces": "Pieces",
+  "@engine.author.f.lib.pieces": {
+    "description": "Label of the field “pieces” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.pitch": "Pitch",
+  "@engine.author.f.lib.pitch": {
+    "description": "Label of the field “pitch” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.place": "Place",
+  "@engine.author.f.lib.place": {
+    "description": "Label of the field “place” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.places": "Places",
+  "@engine.author.f.lib.places": {
+    "description": "Label of the field “places” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.pleats": "Pleats",
+  "@engine.author.f.lib.pleats": {
+    "description": "Label of the field “pleats” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.plotOf": "Drawn output",
+  "@engine.author.f.lib.plotOf": {
+    "description": "Label of the field “plotOf” of a library engine’s model or outputs in the activity author (engines: ode,graph,geom,genetics,med,clinic,timeline,music,map,text,craft). Short."
+  },
+  "engine.author.f.lib.pluck": "Pluck point",
+  "@engine.author.f.lib.pluck": {
+    "description": "Label of the field “pluck” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.plus": "Plus",
+  "@engine.author.f.lib.plus": {
+    "description": "Label of the field “plus” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.pmYears": "Plus or minus years",
+  "@engine.author.f.lib.pmYears": {
+    "description": "Label of the field “pmYears” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.point": "Point",
+  "@engine.author.f.lib.point": {
+    "description": "Label of the field “point” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.pointOn": "Point on",
+  "@engine.author.f.lib.pointOn": {
+    "description": "Label of the field “pointOn” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.points": "Points",
+  "@engine.author.f.lib.points": {
+    "description": "Label of the field “points” of a library engine’s model or outputs in the activity author (engines: ode,geom,clinic,music). Short."
+  },
+  "engine.author.f.lib.polar": "Polar",
+  "@engine.author.f.lib.polar": {
+    "description": "Label of the field “polar” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.polygon": "Polygon",
+  "@engine.author.f.lib.polygon": {
+    "description": "Label of the field “polygon” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.pos": "Positive",
+  "@engine.author.f.lib.pos": {
+    "description": "Label of the field “pos” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.ppi": "Picks per inch",
+  "@engine.author.f.lib.ppi": {
+    "description": "Label of the field “ppi” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.present": "Present",
+  "@engine.author.f.lib.present": {
+    "description": "Label of the field “present” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.prev": "Prevalence",
+  "@engine.author.f.lib.prev": {
+    "description": "Label of the field “prev” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.prior": "Prior",
+  "@engine.author.f.lib.prior": {
+    "description": "Label of the field “prior” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.process": "Process",
+  "@engine.author.f.lib.process": {
+    "description": "Label of the field “process” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.progression": "Progression",
+  "@engine.author.f.lib.progression": {
+    "description": "Label of the field “progression” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.progressions": "Progressions",
+  "@engine.author.f.lib.progressions": {
+    "description": "Label of the field “progressions” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.projectArea": "Project area",
+  "@engine.author.f.lib.projectArea": {
+    "description": "Label of the field “projectArea” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.projection": "Projection",
+  "@engine.author.f.lib.projection": {
+    "description": "Label of the field “projection” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.pts": "Points",
+  "@engine.author.f.lib.pts": {
+    "description": "Label of the field “pts” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.qaly": "QALY",
+  "@engine.author.f.lib.qaly": {
+    "description": "Label of the field “qaly” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.qsofa": "qSOFA",
+  "@engine.author.f.lib.qsofa": {
+    "description": "Label of the field “qsofa” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.radicalAxis": "Radical axis",
+  "@engine.author.f.lib.radicalAxis": {
+    "description": "Label of the field “radicalAxis” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.radius": "Radius",
+  "@engine.author.f.lib.radius": {
+    "description": "Label of the field “radius” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.rate": "Rate",
+  "@engine.author.f.lib.rate": {
+    "description": "Label of the field “rate” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.ratio": "Ratio",
+  "@engine.author.f.lib.ratio": {
+    "description": "Label of the field “ratio” of a library engine’s model or outputs in the activity author (engines: music,craft). Short."
+  },
+  "engine.author.f.lib.ratios": "Ratios",
+  "@engine.author.f.lib.ratios": {
+    "description": "Label of the field “ratios” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.ray": "Ray",
+  "@engine.author.f.lib.ray": {
+    "description": "Label of the field “ray” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.reading": "Reading",
+  "@engine.author.f.lib.reading": {
+    "description": "Label of the field “reading” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.recipe": "Recipe",
+  "@engine.author.f.lib.recipe": {
+    "description": "Label of the field “recipe” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.rects": "Rectangles",
+  "@engine.author.f.lib.rects": {
+    "description": "Label of the field “rects” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.ref": "Reference",
+  "@engine.author.f.lib.ref": {
+    "description": "Label of the field “ref” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.region": "Region",
+  "@engine.author.f.lib.region": {
+    "description": "Label of the field “region” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.regular": "Regular polygon",
+  "@engine.author.f.lib.regular": {
+    "description": "Label of the field “regular” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.reign": "Reign",
+  "@engine.author.f.lib.reign": {
+    "description": "Label of the field “reign” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.reigns": "Reigns",
+  "@engine.author.f.lib.reigns": {
+    "description": "Label of the field “reigns” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.rel": "Relation",
+  "@engine.author.f.lib.rel": {
+    "description": "Label of the field “rel” of a library engine’s model or outputs in the activity author (engines: genetics,timeline). Short."
+  },
+  "engine.author.f.lib.repeat": "Repeat",
+  "@engine.author.f.lib.repeat": {
+    "description": "Label of the field “repeat” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.reps": "Repetitions",
+  "@engine.author.f.lib.reps": {
+    "description": "Label of the field “reps” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.reservoir": "Reservoir age",
+  "@engine.author.f.lib.reservoir": {
+    "description": "Label of the field “reservoir” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.reservoirSd": "Reservoir age SD",
+  "@engine.author.f.lib.reservoirSd": {
+    "description": "Label of the field “reservoirSd” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.resources": "Resources",
+  "@engine.author.f.lib.resources": {
+    "description": "Label of the field “resources” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.reveals": "Reveals",
+  "@engine.author.f.lib.reveals": {
+    "description": "Label of the field “reveals” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.rhs": "Right-hand sides",
+  "@engine.author.f.lib.rhs": {
+    "description": "Label of the field “rhs” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.rhythm": "Rhythm",
+  "@engine.author.f.lib.rhythm": {
+    "description": "Label of the field “rhythm” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.rhythms": "Rhythms",
+  "@engine.author.f.lib.rhythms": {
+    "description": "Label of the field “rhythms” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.rings": "Rings",
+  "@engine.author.f.lib.rings": {
+    "description": "Label of the field “rings” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.rite": "Rite",
+  "@engine.author.f.lib.rite": {
+    "description": "Label of the field “rite” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.rmax": "Largest rank",
+  "@engine.author.f.lib.rmax": {
+    "description": "Label of the field “rmax” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.rmin": "Smallest rank",
+  "@engine.author.f.lib.rmin": {
+    "description": "Label of the field “rmin” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.root": "Root",
+  "@engine.author.f.lib.root": {
+    "description": "Label of the field “root” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.rot": "Rotation",
+  "@engine.author.f.lib.rot": {
+    "description": "Label of the field “rot” of a library engine’s model or outputs in the activity author (engines: music,craft). Short."
+  },
+  "engine.author.f.lib.round": "Rounding",
+  "@engine.author.f.lib.round": {
+    "description": "Label of the field “round” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.rounds": "Rounds",
+  "@engine.author.f.lib.rounds": {
+    "description": "Label of the field “rounds” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.routes": "Routes",
+  "@engine.author.f.lib.routes": {
+    "description": "Label of the field “routes” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.rows": "Rows",
+  "@engine.author.f.lib.rows": {
+    "description": "Label of the field “rows” of a library engine’s model or outputs in the activity author (engines: graph,craft). Short."
+  },
+  "engine.author.f.lib.rsOnly": "Right side only",
+  "@engine.author.f.lib.rsOnly": {
+    "description": "Label of the field “rsOnly” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.rtol": "Relative tolerance",
+  "@engine.author.f.lib.rtol": {
+    "description": "Label of the field “rtol” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.rule": "Rule",
+  "@engine.author.f.lib.rule": {
+    "description": "Label of the field “rule” of a library engine’s model or outputs in the activity author (engines: music,craft). Short."
+  },
+  "engine.author.f.lib.run": "Run",
+  "@engine.author.f.lib.run": {
+    "description": "Label of the field “run” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.safety": "Safety",
+  "@engine.author.f.lib.safety": {
+    "description": "Label of the field “safety” of a library engine’s model or outputs in the activity author (engines: clinic,craft). Short."
+  },
+  "engine.author.f.lib.sample": "Sample",
+  "@engine.author.f.lib.sample": {
+    "description": "Label of the field “sample” of a library engine’s model or outputs in the activity author (engines: timeline,text). Short."
+  },
+  "engine.author.f.lib.samples": "Samples",
+  "@engine.author.f.lib.samples": {
+    "description": "Label of the field “samples” of a library engine’s model or outputs in the activity author (engines: geom,music). Short."
+  },
+  "engine.author.f.lib.sashing": "Sashing",
+  "@engine.author.f.lib.sashing": {
+    "description": "Label of the field “sashing” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.sbp": "Systolic pressure",
+  "@engine.author.f.lib.sbp": {
+    "description": "Label of the field “sbp” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.scale": "Scale",
+  "@engine.author.f.lib.scale": {
+    "description": "Label of the field “scale” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.scheme": "Rhyme scheme",
+  "@engine.author.f.lib.scheme": {
+    "description": "Label of the field “scheme” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.sct": "Script concordance",
+  "@engine.author.f.lib.sct": {
+    "description": "Label of the field “sct” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.sdYears": "Standard deviation in years",
+  "@engine.author.f.lib.sdYears": {
+    "description": "Label of the field “sdYears” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.seam": "Seam",
+  "@engine.author.f.lib.seam": {
+    "description": "Label of the field “seam” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.seed": "Seed",
+  "@engine.author.f.lib.seed": {
+    "description": "Label of the field “seed” of a library engine’s model or outputs in the activity author (engines: graph,geom). Short."
+  },
+  "engine.author.f.lib.segment": "Segment",
+  "@engine.author.f.lib.segment": {
+    "description": "Label of the field “segment” of a library engine’s model or outputs in the activity author (engines: geom,text). Short."
+  },
+  "engine.author.f.lib.sel": "Selection",
+  "@engine.author.f.lib.sel": {
+    "description": "Label of the field “sel” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.seleucid": "Seleucid era",
+  "@engine.author.f.lib.seleucid": {
+    "description": "Label of the field “seleucid” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.sepsis": "Sepsis",
+  "@engine.author.f.lib.sepsis": {
+    "description": "Label of the field “sepsis” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.set": "Set",
+  "@engine.author.f.lib.set": {
+    "description": "Label of the field “set” of a library engine’s model or outputs in the activity author (engines: ode,music). Short."
+  },
+  "engine.author.f.lib.sets": "Sets",
+  "@engine.author.f.lib.sets": {
+    "description": "Label of the field “sets” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.sex": "Sex",
+  "@engine.author.f.lib.sex": {
+    "description": "Label of the field “sex” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.shadow": "Shadow",
+  "@engine.author.f.lib.shadow": {
+    "description": "Label of the field “shadow” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.shafts": "Shafts",
+  "@engine.author.f.lib.shafts": {
+    "description": "Label of the field “shafts” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.shape": "Shape",
+  "@engine.author.f.lib.shape": {
+    "description": "Label of the field “shape” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.shed": "Shed",
+  "@engine.author.f.lib.shed": {
+    "description": "Label of the field “shed” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.sheet": "Sheet",
+  "@engine.author.f.lib.sheet": {
+    "description": "Label of the field “sheet” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.sheetsPerSig": "Sheets per signature",
+  "@engine.author.f.lib.sheetsPerSig": {
+    "description": "Label of the field “sheetsPerSig” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.shelf": "Shelf",
+  "@engine.author.f.lib.shelf": {
+    "description": "Label of the field “shelf” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.shock": "Shock index",
+  "@engine.author.f.lib.shock": {
+    "description": "Label of the field “shock” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.showRisk": "Show the risk",
+  "@engine.author.f.lib.showRisk": {
+    "description": "Label of the field “showRisk” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.shrink": "Shrinkage",
+  "@engine.author.f.lib.shrink": {
+    "description": "Label of the field “shrink” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.shunt": "Shunt",
+  "@engine.author.f.lib.shunt": {
+    "description": "Label of the field “shunt” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.sigmaP": "Phenotypic SD",
+  "@engine.author.f.lib.sigmaP": {
+    "description": "Label of the field “sigmaP” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.signed": "Signed",
+  "@engine.author.f.lib.signed": {
+    "description": "Label of the field “signed” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.signs": "Signs",
+  "@engine.author.f.lib.signs": {
+    "description": "Label of the field “signs” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.sim": "Simulation",
+  "@engine.author.f.lib.sim": {
+    "description": "Label of the field “sim” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.simson": "Simson line",
+  "@engine.author.f.lib.simson": {
+    "description": "Label of the field “simson” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.sirs": "SIRS",
+  "@engine.author.f.lib.sirs": {
+    "description": "Label of the field “sirs” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.size": "Size",
+  "@engine.author.f.lib.size": {
+    "description": "Label of the field “size” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.skein": "Skein",
+  "@engine.author.f.lib.skein": {
+    "description": "Label of the field “skein” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.skeinMeters": "Metres per skein",
+  "@engine.author.f.lib.skeinMeters": {
+    "description": "Label of the field “skeinMeters” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.skirt": "Skirt",
+  "@engine.author.f.lib.skirt": {
+    "description": "Label of the field “skirt” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.solve": "Solver",
+  "@engine.author.f.lib.solve": {
+    "description": "Label of the field “solve” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.source": "Source",
+  "@engine.author.f.lib.source": {
+    "description": "Label of the field “source” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.south": "Southern hemisphere",
+  "@engine.author.f.lib.south": {
+    "description": "Label of the field “south” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.spacing": "Spacing",
+  "@engine.author.f.lib.spacing": {
+    "description": "Label of the field “spacing” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.span": "Span",
+  "@engine.author.f.lib.span": {
+    "description": "Label of the field “span” of a library engine’s model or outputs in the activity author (engines: text,craft). Short."
+  },
+  "engine.author.f.lib.species": "Species",
+  "@engine.author.f.lib.species": {
+    "description": "Label of the field “species” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.speeds": "Speeds",
+  "@engine.author.f.lib.speeds": {
+    "description": "Label of the field “speeds” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.square": "Square",
+  "@engine.author.f.lib.square": {
+    "description": "Label of the field “square” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.stakes": "Stakes",
+  "@engine.author.f.lib.stakes": {
+    "description": "Label of the field “stakes” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.start": "Start",
+  "@engine.author.f.lib.start": {
+    "description": "Label of the field “start” of a library engine’s model or outputs in the activity author (engines: clinic,timeline,craft). Short."
+  },
+  "engine.author.f.lib.stat": "Statistic",
+  "@engine.author.f.lib.stat": {
+    "description": "Label of the field “stat” of a library engine’s model or outputs in the activity author (engines: ode,timeline). Short."
+  },
+  "engine.author.f.lib.states": "States",
+  "@engine.author.f.lib.states": {
+    "description": "Label of the field “states” of a library engine’s model or outputs in the activity author (engines: ode,clinic). Short."
+  },
+  "engine.author.f.lib.step": "Step",
+  "@engine.author.f.lib.step": {
+    "description": "Label of the field “step” of a library engine’s model or outputs in the activity author (engines: graph,map). Short."
+  },
+  "engine.author.f.lib.steps": "Steps",
+  "@engine.author.f.lib.steps": {
+    "description": "Label of the field “steps” of a library engine’s model or outputs in the activity author (engines: text,craft). Short."
+  },
+  "engine.author.f.lib.stitches": "Stitches",
+  "@engine.author.f.lib.stitches": {
+    "description": "Label of the field “stitches” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.stock": "Stock solution",
+  "@engine.author.f.lib.stock": {
+    "description": "Label of the field “stock” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.stop": "Stop",
+  "@engine.author.f.lib.stop": {
+    "description": "Label of the field “stop” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.stopBleed": "Stop the bleeding",
+  "@engine.author.f.lib.stopBleed": {
+    "description": "Label of the field “stopBleed” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.strands": "Strands",
+  "@engine.author.f.lib.strands": {
+    "description": "Label of the field “strands” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.strategies": "Strategies",
+  "@engine.author.f.lib.strategies": {
+    "description": "Label of the field “strategies” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.stretch": "Stretch",
+  "@engine.author.f.lib.stretch": {
+    "description": "Label of the field “stretch” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.strip": "Strip",
+  "@engine.author.f.lib.strip": {
+    "description": "Label of the field “strip” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.structure": "Structure",
+  "@engine.author.f.lib.structure": {
+    "description": "Label of the field “structure” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.sts": "Stitches",
+  "@engine.author.f.lib.sts": {
+    "description": "Label of the field “sts” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.swatchArea": "Swatch area",
+  "@engine.author.f.lib.swatchArea": {
+    "description": "Label of the field “swatchArea” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.swatchGrams": "Swatch weight",
+  "@engine.author.f.lib.swatchGrams": {
+    "description": "Label of the field “swatchGrams” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.sweep": "Sweep",
+  "@engine.author.f.lib.sweep": {
+    "description": "Label of the field “sweep” of a library engine’s model or outputs in the activity author (engines: ode,geom,clinic). Short."
+  },
+  "engine.author.f.lib.swell": "Swell",
+  "@engine.author.f.lib.swell": {
+    "description": "Label of the field “swell” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.swg": "Wire gauge (SWG)",
+  "@engine.author.f.lib.swg": {
+    "description": "Label of the field “swg” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.synizesis": "Synizesis",
+  "@engine.author.f.lib.synizesis": {
+    "description": "Label of the field “synizesis” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.synthetic": "Synthetic",
+  "@engine.author.f.lib.synthetic": {
+    "description": "Label of the field “synthetic” of a library engine’s model or outputs in the activity author (engines: timeline). Short."
+  },
+  "engine.author.f.lib.system": "System",
+  "@engine.author.f.lib.system": {
+    "description": "Label of the field “system” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.tail": "Tail",
+  "@engine.author.f.lib.tail": {
+    "description": "Label of the field “tail” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.takeUp": "Take-up",
+  "@engine.author.f.lib.takeUp": {
+    "description": "Label of the field “takeUp” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.tangent": "Tangent",
+  "@engine.author.f.lib.tangent": {
+    "description": "Label of the field “tangent” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.target": "Target",
+  "@engine.author.f.lib.target": {
+    "description": "Label of the field “target” of a library engine’s model or outputs in the activity author (engines: graph,clinic,craft). Short."
+  },
+  "engine.author.f.lib.temp": "Temperature",
+  "@engine.author.f.lib.temp": {
+    "description": "Label of the field “temp” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.tempC": "Temperature (°C)",
+  "@engine.author.f.lib.tempC": {
+    "description": "Label of the field “tempC” of a library engine’s model or outputs in the activity author (engines: music,craft). Short."
+  },
+  "engine.author.f.lib.tempF": "Temperature (°F)",
+  "@engine.author.f.lib.tempF": {
+    "description": "Label of the field “tempF” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.template": "Template",
+  "@engine.author.f.lib.template": {
+    "description": "Label of the field “template” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.tEnd": "End time",
+  "@engine.author.f.lib.tEnd": {
+    "description": "Label of the field “tEnd” of a library engine’s model or outputs in the activity author (engines: ode,clinic). Short."
+  },
+  "engine.author.f.lib.tension": "Tension",
+  "@engine.author.f.lib.tension": {
+    "description": "Label of the field “tension” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.territories": "Territories",
+  "@engine.author.f.lib.territories": {
+    "description": "Label of the field “territories” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.territory": "Territory",
+  "@engine.author.f.lib.territory": {
+    "description": "Label of the field “territory” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.test": "Test",
+  "@engine.author.f.lib.test": {
+    "description": "Label of the field “test” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.testRisk": "Test risk",
+  "@engine.author.f.lib.testRisk": {
+    "description": "Label of the field “testRisk” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.tests": "Tests",
+  "@engine.author.f.lib.tests": {
+    "description": "Label of the field “tests” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.text": "Text",
+  "@engine.author.f.lib.text": {
+    "description": "Label of the field “text” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.texts": "Texts",
+  "@engine.author.f.lib.texts": {
+    "description": "Label of the field “texts” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.thickness": "Thickness",
+  "@engine.author.f.lib.thickness": {
+    "description": "Label of the field “thickness” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.threading": "Threading",
+  "@engine.author.f.lib.threading": {
+    "description": "Label of the field “threading” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.threePoint": "Three-point cross",
+  "@engine.author.f.lib.threePoint": {
+    "description": "Label of the field “threePoint” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.threshold": "Threshold",
+  "@engine.author.f.lib.threshold": {
+    "description": "Label of the field “threshold” of a library engine’s model or outputs in the activity author (engines: clinic,text). Short."
+  },
+  "engine.author.f.lib.through": "Through",
+  "@engine.author.f.lib.through": {
+    "description": "Label of the field “through” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.tieup": "Tie-up",
+  "@engine.author.f.lib.tieup": {
+    "description": "Label of the field “tieup” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.timbre": "Timbre",
+  "@engine.author.f.lib.timbre": {
+    "description": "Label of the field “timbre” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.timbres": "Timbres",
+  "@engine.author.f.lib.timbres": {
+    "description": "Label of the field “timbres” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.timely": "Timely",
+  "@engine.author.f.lib.timely": {
+    "description": "Label of the field “timely” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.tissot": "Tissot indicatrix",
+  "@engine.author.f.lib.tissot": {
+    "description": "Label of the field “tissot” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.tol": "Tolerance",
+  "@engine.author.f.lib.tol": {
+    "description": "Label of the field “tol” of a library engine’s model or outputs in the activity author (engines: graph,geom). Short."
+  },
+  "engine.author.f.lib.tonic": "Tonic",
+  "@engine.author.f.lib.tonic": {
+    "description": "Label of the field “tonic” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.top": "Top",
+  "@engine.author.f.lib.top": {
+    "description": "Label of the field “top” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.toSts": "Stitches to",
+  "@engine.author.f.lib.toSts": {
+    "description": "Label of the field “toSts” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.transform": "Transformation",
+  "@engine.author.f.lib.transform": {
+    "description": "Label of the field “transform” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.transient": "Transient",
+  "@engine.author.f.lib.transient": {
+    "description": "Label of the field “transient” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.transpose": "Transpose",
+  "@engine.author.f.lib.transpose": {
+    "description": "Label of the field “transpose” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.treadles": "Treadles",
+  "@engine.author.f.lib.treadles": {
+    "description": "Label of the field “treadles” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.treadling": "Treadling",
+  "@engine.author.f.lib.treadling": {
+    "description": "Label of the field “treadling” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.treatedBy": "Treated by",
+  "@engine.author.f.lib.treatedBy": {
+    "description": "Label of the field “treatedBy” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.tree": "Decision tree",
+  "@engine.author.f.lib.tree": {
+    "description": "Label of the field “tree” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.triage": "Triage",
+  "@engine.author.f.lib.triage": {
+    "description": "Label of the field “triage” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.triCircle": "Circle of a triangle",
+  "@engine.author.f.lib.triCircle": {
+    "description": "Label of the field “triCircle” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.truth": "True diagnosis",
+  "@engine.author.f.lib.truth": {
+    "description": "Label of the field “truth” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.tuning": "Tuning",
+  "@engine.author.f.lib.tuning": {
+    "description": "Label of the field “tuning” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.tuplet": "Tuplet",
+  "@engine.author.f.lib.tuplet": {
+    "description": "Label of the field “tuplet” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.tupletIn": "Tuplet in the time of",
+  "@engine.author.f.lib.tupletIn": {
+    "description": "Label of the field “tupletIn” of a library engine’s model or outputs in the activity author (engines: music). Short."
+  },
+  "engine.author.f.lib.turn": "Turn",
+  "@engine.author.f.lib.turn": {
+    "description": "Label of the field “turn” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.turnaround": "Turnaround time",
+  "@engine.author.f.lib.turnaround": {
+    "description": "Label of the field “turnaround” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.twoDirs": "Two directions",
+  "@engine.author.f.lib.twoDirs": {
+    "description": "Label of the field “twoDirs” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.type": "Type",
+  "@engine.author.f.lib.type": {
+    "description": "Label of the field “type” of a library engine’s model or outputs in the activity author (engines: geom,genetics,clinic,music,map,text,craft). Short."
+  },
+  "engine.author.f.lib.unit": "Unit",
+  "@engine.author.f.lib.unit": {
+    "description": "Label of the field “unit” of a library engine’s model or outputs in the activity author (engines: geom,timeline,map,craft). Short."
+  },
+  "engine.author.f.lib.units": "Units",
+  "@engine.author.f.lib.units": {
+    "description": "Label of the field “units” of a library engine’s model or outputs in the activity author (engines: med,map). Short."
+  },
+  "engine.author.f.lib.uvij": "Normalise u/v and i/j",
+  "@engine.author.f.lib.uvij": {
+    "description": "Label of the field “uvij” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.value": "Value",
+  "@engine.author.f.lib.value": {
+    "description": "Label of the field “value” of a library engine’s model or outputs in the activity author (engines: ode,genetics,med,clinic,music,map,craft). Short."
+  },
+  "engine.author.f.lib.var": "Variable",
+  "@engine.author.f.lib.var": {
+    "description": "Label of the field “var” of a library engine’s model or outputs in the activity author (engines: ode,geom). Short."
+  },
+  "engine.author.f.lib.variant": "Variant",
+  "@engine.author.f.lib.variant": {
+    "description": "Label of the field “variant” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.vaso": "Vasopressors",
+  "@engine.author.f.lib.vaso": {
+    "description": "Label of the field “vaso” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.vertex": "Vertex",
+  "@engine.author.f.lib.vertex": {
+    "description": "Label of the field “vertex” of a library engine’s model or outputs in the activity author (engines: geom,craft). Short."
+  },
+  "engine.author.f.lib.via": "Via",
+  "@engine.author.f.lib.via": {
+    "description": "Label of the field “via” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.viability": "Viability",
+  "@engine.author.f.lib.viability": {
+    "description": "Label of the field “viability” of a library engine’s model or outputs in the activity author (engines: genetics). Short."
+  },
+  "engine.author.f.lib.view": "View",
+  "@engine.author.f.lib.view": {
+    "description": "Label of the field “view” of a library engine’s model or outputs in the activity author (engines: graph,geom,map). Short."
+  },
+  "engine.author.f.lib.vmirror": "Vertical mirror",
+  "@engine.author.f.lib.vmirror": {
+    "description": "Label of the field “vmirror” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.volume": "Volume",
+  "@engine.author.f.lib.volume": {
+    "description": "Label of the field “volume” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.voronoi": "Voronoi diagram",
+  "@engine.author.f.lib.voronoi": {
+    "description": "Label of the field “voronoi” of a library engine’s model or outputs in the activity author (engines: geom). Short."
+  },
+  "engine.author.f.lib.waist": "Waist",
+  "@engine.author.f.lib.waist": {
+    "description": "Label of the field “waist” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.warp": "Warp",
+  "@engine.author.f.lib.warp": {
+    "description": "Label of the field “warp” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.waste": "Waste",
+  "@engine.author.f.lib.waste": {
+    "description": "Label of the field “waste” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.wbc": "White cell count",
+  "@engine.author.f.lib.wbc": {
+    "description": "Label of the field “wbc” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.weft": "Weft",
+  "@engine.author.f.lib.weft": {
+    "description": "Label of the field “weft” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.weight": "Weight",
+  "@engine.author.f.lib.weight": {
+    "description": "Label of the field “weight” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.weighted": "Weighted",
+  "@engine.author.f.lib.weighted": {
+    "description": "Label of the field “weighted” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.weights": "Weights",
+  "@engine.author.f.lib.weights": {
+    "description": "Label of the field “weights” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.what": "What",
+  "@engine.author.f.lib.what": {
+    "description": "Label of the field “what” of a library engine’s model or outputs in the activity author (engines: map,text). Short."
+  },
+  "engine.author.f.lib.when": "When",
+  "@engine.author.f.lib.when": {
+    "description": "Label of the field “when” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.width": "Width",
+  "@engine.author.f.lib.width": {
+    "description": "Label of the field “width” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.window": "Window",
+  "@engine.author.f.lib.window": {
+    "description": "Label of the field “window” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.wireLength": "Wire length",
+  "@engine.author.f.lib.wireLength": {
+    "description": "Label of the field “wireLength” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.wmax": "Largest weight",
+  "@engine.author.f.lib.wmax": {
+    "description": "Label of the field “wmax” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.wmin": "Smallest weight",
+  "@engine.author.f.lib.wmin": {
+    "description": "Label of the field “wmin” of a library engine’s model or outputs in the activity author (engines: graph). Short."
+  },
+  "engine.author.f.lib.wof": "Weight of fibre",
+  "@engine.author.f.lib.wof": {
+    "description": "Label of the field “wof” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.word": "Word",
+  "@engine.author.f.lib.word": {
+    "description": "Label of the field “word” of a library engine’s model or outputs in the activity author (engines: text). Short."
+  },
+  "engine.author.f.lib.work": "Work",
+  "@engine.author.f.lib.work": {
+    "description": "Label of the field “work” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.wpi": "Wraps per inch",
+  "@engine.author.f.lib.wpi": {
+    "description": "Label of the field “wpi” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.wtp": "Willingness to pay",
+  "@engine.author.f.lib.wtp": {
+    "description": "Label of the field “wtp” of a library engine’s model or outputs in the activity author (engines: clinic). Short."
+  },
+  "engine.author.f.lib.xmax": "Largest x",
+  "@engine.author.f.lib.xmax": {
+    "description": "Label of the field “xmax” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.xmin": "Smallest x",
+  "@engine.author.f.lib.xmin": {
+    "description": "Label of the field “xmin” of a library engine’s model or outputs in the activity author (engines: ode,text). Short."
+  },
+  "engine.author.f.lib.yarn": "Yarn",
+  "@engine.author.f.lib.yarn": {
+    "description": "Label of the field “yarn” of a library engine’s model or outputs in the activity author (engines: craft). Short."
+  },
+  "engine.author.f.lib.year": "Year",
+  "@engine.author.f.lib.year": {
+    "description": "Label of the field “year” of a library engine’s model or outputs in the activity author (engines: timeline,map). Short."
+  },
+  "engine.author.f.lib.ymax": "Largest y",
+  "@engine.author.f.lib.ymax": {
+    "description": "Label of the field “ymax” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.ymin": "Smallest y",
+  "@engine.author.f.lib.ymin": {
+    "description": "Label of the field “ymin” of a library engine’s model or outputs in the activity author (engines: ode). Short."
+  },
+  "engine.author.f.lib.zone": "Zone",
+  "@engine.author.f.lib.zone": {
+    "description": "Label of the field “zone” of a library engine’s model or outputs in the activity author (engines: map). Short."
+  },
+  "engine.author.f.lib.of": "Quantity",
+  "@engine.author.f.lib.of": {
+    "description": "Label of the field “of” of an output of a library engine in the activity author: the engine quantity the output reads. Short."
+  },
+  "engine.author.f.lib.fn": "Function",
+  "@engine.author.f.lib.fn": {
+    "description": "Label of the field “fn” (a function) of a library engine’s model in the activity author. Short."
+  },
+  "engine.author.f.lib.hr": "Heart rate",
+  "@engine.author.f.lib.hr": {
+    "description": "Label of the field “hr” (heart rate) of the clinic engine’s model in the activity author. Short."
+  },
+  "engine.author.f.lib.rr": "Respiratory rate",
+  "@engine.author.f.lib.rr": {
+    "description": "Label of the field “rr” (respiratory rate) of the clinic engine’s model in the activity author. Short."
+  },
+  "engine.author.f.outKind.scene": "Drawing",
+  "@engine.author.f.outKind.scene": {
+    "description": "Option of “Kind of output”: the engine draws a picture (a scene). Short."
+  },
+  "engine.author.f.outKind.sound": "Sound",
+  "@engine.author.f.outKind.sound": {
+    "description": "Option of “Kind of output”: the engine plays a sound. Short."
+  },
+  "engine.author.f.plotKind.scene": "Drawing",
+  "@engine.author.f.plotKind.scene": {
+    "description": "Option of “Kind of plot”: shows an engine’s drawing. Short."
+  },
+  "engine.author.f.plotKind.sound": "Sound",
+  "@engine.author.f.plotKind.sound": {
+    "description": "Option of “Kind of plot”: a player for an engine’s sound. Short."
+  },
+  "engine.author.f.lineStyle": "Line style",
+  "@engine.author.f.lineStyle": {
+    "description": "Label of a form field of the activity author: how a plotted line is drawn. Short."
+  },
+  "engine.author.f.lineStyle.line": "Line",
+  "@engine.author.f.lineStyle.line": {
+    "description": "Option of “Line style”: a continuous line. Short."
+  },
+  "engine.author.f.lineStyle.bars": "Bars",
+  "@engine.author.f.lineStyle.bars": {
+    "description": "Option of “Line style”: vertical bars. Short."
+  },
+  "engine.author.f.lineStyle.steps": "Steps",
+  "@engine.author.f.lineStyle.steps": {
+    "description": "Option of “Line style”: a staircase line. Short."
+  },
+  "engine.author.f.lineStyle.points": "Points",
+  "@engine.author.f.lineStyle.points": {
+    "description": "Option of “Line style”: separate dots. Short."
+  },
+  "engine.author.startQ": "{engine}: start from",
+  "@engine.author.startQ": {
+    "description": "Activity author: question shown after choosing an engine; {engine} is the engine’s name, followed by the buttons “The reference activity” and “Blank”."
+  },
+  "engine.author.startRef": "The reference activity",
+  "@engine.author.startRef": {
+    "description": "Activity author: button that starts a new activity from the engine’s reference activity."
+  },
+  "engine.author.startRefTip": "Load the reference activity {id} as a template",
+  "@engine.author.startRefTip": {
+    "description": "Tooltip of the button “The reference activity”; {id} is the reference activity’s id."
+  },
+  "engine.author.startBlank": "Blank",
+  "@engine.author.startBlank": {
+    "description": "Activity author: button that starts a new activity with an empty model."
+  },
+  "engine.author.startBlankTip": "An empty model to fill in",
+  "@engine.author.startBlankTip": {
+    "description": "Tooltip of the button “Blank”."
   }
 }

@@ -1,0 +1,11 @@
+{
+ "title": "Die schmutzigen Kinder",
+ "intro": "Drei Kinder haben im Garten gespielt; zwei von ihnen haben Schlamm auf der Stirn. Jedes Kind sieht die anderen, aber nicht sich selbst. Der Vater verkündet: Mindestens eines von euch ist schmutzig. Dann fragt er immer wieder: Weiß jemand, ob er schmutzig ist? Jede Antwort hören alle. Schiebe den Regler, um die Ankündigungen eine nach der anderen hinzuzufügen, und sieh zu, wie die möglichen Welten verschwinden.",
+ "kLabel": "Gemachte Ankündigungen",
+ "frameLabel": "Ankündigungen bis jetzt",
+ "leftLabel": "Noch mögliche Welten",
+ "knowsLabel": "Kind 1 weiß, ob es schmutzig ist (1 = ja)",
+ "sceneTitle": "Die möglichen Welten und was jedes Kind nicht unterscheiden kann",
+ "checkKnows": "Kind 1 weiß, ob es schmutzig ist.",
+ "checkFirst": "Es ist der erste Moment, in dem es das weiß."
+}

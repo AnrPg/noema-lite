@@ -1,0 +1,13 @@
+{
+ "cases": [
+  { "name": "after the father and one round of 'nobody knows': child 1 knows (passes)", "exercise": "ch01-e931",
+    "steps": [ { "set": "k", "value": 2 } ], "expect": { "passed": true, "values": { "knows": [0.5, 1.5], "left": [3.5, 4.5], "frame": [1.5, 2.5] } } },
+  { "name": "only the father has spoken: child 1 does not know yet (fails)", "exercise": "ch01-e931",
+    "steps": [ { "set": "k", "value": 1 } ], "expect": { "passed": false, "values": { "knows": [-0.5, 0.5], "left": [6.5, 7.5] } } },
+  { "name": "nothing said: all eight worlds (fails)", "exercise": "ch01-e931",
+    "steps": [ { "set": "k", "value": 0 } ], "expect": { "passed": false, "values": { "knows": [-0.5, 0.5], "left": [7.5, 8.5] } } },
+  { "name": "one more 'nobody knows' would be false: no world is left (fails)", "exercise": "ch01-e931",
+    "steps": [ { "set": "k", "value": 3 } ], "expect": { "passed": false, "values": { "lie": [0.5, 1.5] } } },
+  { "name": "explorer: the round is saved", "steps": [ { "set": "k", "value": 1 } ], "expect": { "state": ["k"], "values": { "frame": [0.5, 1.5] } } }
+ ]
+}

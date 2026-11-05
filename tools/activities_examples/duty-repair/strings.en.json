@@ -1,0 +1,13 @@
+{
+ "title": "A broken duty and its repair",
+ "intro": "On day 0 a neighbour asks for your help: you ought to go within two days. A second norm says what you ought to do if you break the first: then you ought at least to call within a day (a contrary-to-duty obligation). A third forbids noise at night. Move the day slider to follow the week and watch each norm become due, kept or broken. Switch the second norm off to see what changes.",
+ "kLabel": "Days shown",
+ "ctdLabel": "The repair norm is in force (1 = yes)",
+ "frameLabel": "Days checked",
+ "vLabel": "Violations so far",
+ "fLabel": "Duties fulfilled so far",
+ "pLabel": "Norms still in force",
+ "sceneTitle": "The norms along the days",
+ "checkBroken": "A duty has been broken.",
+ "checkFirstDay": "This is the first day on which it shows."
+}

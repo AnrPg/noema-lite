@@ -63,6 +63,7 @@ const ACT = (() => {
   /* i18n-ignore-start */
   const reg = Noema.pack?.activities;
   const ITEMS = {}; for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) if (a && typeof a.id === 'string') ITEMS[a.id] = a;
+  const PARTS = reg && reg.parts && typeof reg.parts === 'object' && !Array.isArray(reg.parts) ? reg.parts : {};   // activities/_parts: the parts a spec reuses ({use, with}, docs/INTERACTIVE.md §12.8)
   const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
   // every runtime is on unless config.js switches it off (docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = false;
   // py-module@1 still needs NoemaPy.available() (the website: never file:// or the one-file bundle)
@@ -301,7 +302,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */

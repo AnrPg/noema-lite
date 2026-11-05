@@ -621,7 +621,79 @@
   }
   const prepare = spec => prep(spec);
 
-  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): the virtual patient in a co-simulation ----------
+     The same "haemo-lite" physiology as runVp (the same equations, 0.1 min substeps), stepped from a state; at every macro step the
+     patient's numbers (bleed, sepsis growth, lung, shunt) and the actions (their times and effects: a vasopressor dose another part
+     — a controller, a pharmacokinetic model — computes) are read again from the current inputs. Time: minutes of the co-simulation.
+     Outputs per step: vp.<vital> (series: one sample a step; scalar: now), vp.final.<vital>, vp.min.map, vp.max.lactate, vp.timeHypo,
+     vp.diedAt, vp.outcome. Other sections are recomputed at each step from the current inputs. Noise is off in a co-simulation. */
+  function vpActs(m, F, env) {   // the actions taken (as runVp: at ≥ 0, none after the disposition)
+    const all = arr(m.vp.actions).map((a, i) => {
+      const p = `model.vp.actions[${i}]`, e = isObj(a.effect) ? a.effect : {}, eg = (k, d) => numAt(F, `${p}.effect.${k}`, e[k], env, d);
+      return { kind: a.kind, at: numAt(F, p + '.at', a.at, env, NaN), fluid: eg('fluid', 0), over: Math.max(1, eg('over', 30)), vaso: eg('vaso', NaN), abx: eg('abx', 0), o2: eg('o2', NaN), stop: eg('stopBleed', 0), blood: eg('blood', 0) };
+    });
+    const disp = all.filter(a => a.kind === 'dispose' && fin(a.at) && a.at >= 0).map(a => a.at), tDisp = disp.length ? Math.min(...disp) : Infinity;
+    return all.filter(a => fin(a.at) && a.at >= 0 && (a.kind === 'dispose' || a.at <= tDisp));
+  }
+  const vpStepper = {
+    init(model, env, sc) {
+      if (!isObj(model) || !isObj(model.vp) || !MED()) return isObj(model) && !isObj(model.vp) ? { other: true } : null;
+      const F = sc.prepared || prep(sc.spec), v = model.vp, pat = isObj(v.patient) ? v.patient : {}, pg = (k, d) => numAt(F, 'model.vp.patient.' + k, pat[k], env, d);
+      const W = clamp(pg('weight', 70), 2, 250), hb0 = clamp(pg('hb', 14), 3, 22), vol0 = clamp(pg('volume', 1), 0.3, 1.5), B0 = clamp(pg('sepsis', 0), 0, 1);
+      const Vn = 70 * W;
+      return { t0: sc.t0 || 0, W, Vn, Vu: 0.7 * Vn, SVn: W, HRn: 72, SVRn: 90 / (W * 72 / 1000), Cart: 1.4 * W / 70, crit: 4.5 * W,
+        V: Vn * vol0, RBC: hb0 * Vn * vol0, B: B0, Lac: 1, HR: 72, sv: 1, bleeding: pg('bleed', 0) > 0, crash: 0, died: null, hypo: 0, minMap: null, maxLac: null, last: null, k: 0, kRec: -1 };
+    },
+    step(st, env, t, dt, sc) {
+      if (st.other) { const r = run(sc.spec, env, { seed: sc.seed }); return { state: st, out: r.out, dt }; }
+      const m = sc.spec.model, F = sc.prepared || prep(sc.spec), Mx = MED(), sev = Mx.calc.sev, content = Mx.calc.content;
+      const pat = isObj(m.vp.patient) ? m.vp.patient : {}, pg = (k, d) => numAt(F, 'model.vp.patient.' + k, pat[k], env, d);
+      const shunt0 = clamp(pg('shunt', 0.05), 0, 0.8), lungK = clamp(pg('lung', 0), 0, 0.6), bleed = Math.max(0, pg('bleed', 0)), growth = Math.max(0, pg('growth', 0.6));
+      const acts = vpActs(m, F, env), S = C.copyData(st), h = 0.1, rel = tt => tt - S.t0;
+      const n = Math.max(1, Math.round(dt / h)), hh = dt / n;
+      let rec = S.last;
+      for (let j = 0; j <= n; j++) {
+        const tt = rel(t) + j * hh, on = a => fin(a.at) && a.at <= tt;
+        const fio2 = acts.reduce((f, a) => (fin(a.o2) && on(a) ? Math.max(f, clamp(a.o2, 0.21, 1)) : f), 0.21), vaso = acts.reduce((d, a) => (fin(a.vaso) && on(a) ? a.vaso : d), 0);
+        if (acts.some(a => a.stop && on(a))) S.bleeding = false;
+        const dead = S.died !== null, pf = clamp((S.V - S.Vu) / (S.Vn - S.Vu), 0, 2.5), SV = S.SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (S.HR - 150) / 100));
+        const vfac = (1 - 0.55 * S.B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = S.SVRn * S.sv * vfac, CO = Math.max(0, SV * S.HR / 1000), MAP = dead ? 0 : CO * SVR;
+        const hb = S.RBC / S.V, shunt = clamp(shunt0 + lungK * S.B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
+        let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (content(hb, sev(mid), mid) < ca) lo = mid; else hi = mid; }
+        const pao2 = (lo + hi) / 2, sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * S.B;
+        const RR = clamp(14 + 10 * S.B + 1.2 * Math.max(0, S.Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
+        if (j === n || j === 0) {
+          const pp = dead ? 0 : SV / S.Cart;
+          rec = { hr: dead ? 0 : S.HR, map: MAP, spo2: dead ? 0 : clamp(100 * sat, 0, 100), rr: dead ? 0 : RR, lactate: S.Lac, temp: T, volume: S.V, burden: S.B, pao2, hb };
+          rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
+          rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: MAP < 60 || sat < 0.85 ? 1 : 0, temp: T, scale2: 0 }).score;
+        }
+        if (S.k % 10 === 0 && S.kRec !== S.k && !dead) {   // a minute (as runVp records it)
+          S.kRec = S.k; S.minMap = S.minMap === null ? MAP : Math.min(S.minMap, MAP); S.maxLac = S.maxLac === null ? S.Lac : Math.max(S.maxLac, S.Lac); if (MAP < 65) S.hypo++;
+        }
+        if (j === n || dead) { if (j < n) S.k++; continue; }
+        S.k++;
+        let dV = 0, dR = 0;
+        if (S.bleeding) { dV -= bleed; dR -= bleed * hb; }
+        dV -= 0.004 * S.B * (S.V - S.Vu);
+        for (const a of acts) if (fin(a.at) && tt >= a.at && tt < a.at + a.over) { if (a.fluid) dV += 0.4 * a.fluid / a.over; if (a.blood) { dV += a.blood / a.over; dR += a.blood / a.over * 20; } }
+        const abxOn = acts.some(a => a.abx && fin(a.at) && tt >= a.at + 60), dB = abxOn ? -0.5 * S.B / 60 : growth * S.B * (1 - S.B) / 60;
+        const e = (90 - MAP) / 90, HRt = clamp(S.HRn * (1 + 1.2 * e) + 35 * S.B, 40, 180), svt = clamp(1 + 1.0 * e, 0.6, 1.8);
+        const prod = 0.08 * Math.max(0, 1 - DO2 / (1.4 * S.crit)) + 0.03 * S.B + 0.03 * Math.max(0, (65 - MAP) / 65), dL = prod - 0.012 * (S.Lac - 1);
+        S.V = Math.max(0.3 * S.Vn, S.V + hh * dV); S.RBC = Math.max(0, S.RBC + hh * dR); S.B = clamp(S.B + hh * dB, 0, 1); S.Lac = Math.max(0.3, S.Lac + hh * dL);
+        S.HR += hh * (HRt - S.HR); S.sv += hh * (svt - S.sv) / 2;
+        if (MAP < 45) S.crash += hh; if (S.crash >= 20 || S.Lac >= 15) S.died = tt + hh;
+      }
+      S.last = rec;
+      const all = { 'vp.min.map': S.minMap === null ? NaN : S.minMap, 'vp.max.lactate': S.maxLac === null ? NaN : S.maxLac, 'vp.timeHypo': S.hypo, 'vp.diedAt': S.died === null ? NaN : S.died,
+        'vp.outcome': S.died !== null ? 2 : rec.map >= 65 && rec.lactate < 2 && rec.spo2 >= 92 ? 0 : 1, 'vp.t': rel(t) + dt };
+      for (const k of VARS) { all['vp.' + k] = rec[k]; all['vp.final.' + k] = rec[k]; }
+      const out = {}; for (const o of sc.spec.outputs || []) if (o && typeof o.id === 'string' && Object.prototype.hasOwnProperty.call(all, o.of)) out[o.id] = all[o.of];
+      return { state: S, out, dt };
+    },
+  };
+
+  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper: vpStepper });
   /* the Worker gets med@1 too (its calculators are this engine's physiology): NoemaExpr + the core + med + clinic */
   Object.defineProperty(engine, 'workerSource', { enumerable: true, get() {
     const nx = root.NoemaExpr && typeof root.NoemaExpr.source === 'function' ? root.NoemaExpr.source() : '', medSrc = root.NoemaLibMed && root.NoemaLibMed.moduleSource ? root.NoemaLibMed.moduleSource() : '';

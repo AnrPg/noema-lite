@@ -1,0 +1,17 @@
+{
+ "id": "muddy-children",
+ "runtime": "sim-spec@1",
+ "entry": "activities/muddy-children/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "muddy-children-still",
+  "text": "Three children play outside; children 1 and 2 come back with mud on their foreheads. Each sees the others' foreheads but not their own. The father says: at least one of you is muddy. Then he asks, again and again: do you know whether you are muddy? The first time nobody knows. After everyone has said so once, the two muddy children know. The picture shows the eight possible worlds (who is muddy) and, for each child, the worlds that child cannot tell apart; each public announcement removes the worlds where it is false (Fagin, Halpern, Moses and Vardi, Reasoning About Knowledge, 1995)."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

@@ -408,6 +408,46 @@ async function browser() {
     await p.emulateMedia({ colorScheme: 'dark' }); await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await wait(300);
     const dark = await p.evaluate(() => { const lum = c => { const m = c.match(/\d+(\.\d+)?/g).map(Number); return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; }; const f = document.querySelector('.aa .sf-in'); return { bg: lum(getComputedStyle(f).backgroundColor), ink: lum(getComputedStyle(f).color) }; });
     ok(dark.bg < 0.35 && dark.ink > 0.6, `dark mode: the fields are dark with light text (${dark.bg.toFixed(2)} / ${dark.ink.toFixed(2)})`);
+    // a library engine: graph@1 from its reference activity, the scene in the preview, a checkSpec message at its field, the .zip
+    await p.emulateMedia({ colorScheme: 'light' }); await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+    await p.evaluate(() => { window.__aa = NoemaActivityAuthor.current; });   // (the page may have been mounted again meanwhile)
+    const hasGraph = await p.evaluate(() => !!document.querySelector('[data-aa=type] option[value="lib:graph@1"]'));
+    ok(hasGraph, 'the kind select offers the library engines this app has (graph@1 among them, in its group)');
+    if (hasGraph) {
+      ok(await p.evaluate(() => !!document.querySelector('[data-aa=type] optgroup option[value="lib:graph@1"]')), 'graph@1 sits in an engine group of the select');
+      await p.selectOption('[data-aa=type]', 'lib:graph@1'); await wait(200);
+      const refBtn = await p.locator('[data-aa=start-ref]').count();
+      ok(refBtn === 1 && await p.locator('[data-aa=start-blank]').count() === 1, 'choosing graph@1 asks: the reference activity or blank');
+      if (refBtn) {
+        await p.click('[data-aa=start-ref]');
+        const loaded = await until(() => p.evaluate(() => __aa.get().spec.engine === 'graph@1' && __aa.get().item.id === 'dijkstra-steps'));
+        ok(loaded, 'Start from the reference activity loads dijkstra-steps ' + (loaded ? '' : JSON.stringify(await p.evaluate(() => [__aa.get().spec.engine, __aa.get().item.id]))));
+        ok(await until(() => p.evaluate(() => !!document.querySelector('.aa-pbox svg.sim-scene'))), 'the preview shows the engine’s drawing (a scene plot)');
+        ok(await p.evaluate(() => __aa.check().length === 0), 'the reference has no problems in the author');
+        await p.click('[data-tab=spec]'); panel = 'spec';
+        const src = field(['model', 'run', 'source']);
+        ok(await p.locator(src).count() === 1, 'the model’s fields come from the engine’s table (model.run.source)');
+        await fill(src, 'nowhere'); await wait(600);
+        ok(await until(() => p.locator(`#aa-panel-spec [data-field='["model","run","source"]'] .sf-err`).count().then(n => n >= 1)), 'a node that does not exist: the engine’s checkSpec message at its field');
+        await fill(src, 's'); await wait(600);
+        ok(await until(() => p.evaluate(() => __aa.check().length === 0)), 'set back: no problems');
+        const [dl2] = await Promise.all([p.waitForEvent('download'), p.click('[data-aa=zip]')]);
+        const zp2 = path.join(os.tmpdir(), 'noema-author-graph-' + name + '.zip'); await dl2.saveAs(zp2);
+        const fz2 = await AA.unzip(fs.readFileSync(zp2));
+        const dir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-author-g-'));
+        for (const [f, text] of Object.entries(fz2)) { fs.mkdirSync(path.dirname(path.join(dir2, f)), { recursive: true }); fs.writeFileSync(path.join(dir2, f), text); }
+        const media2 = JSON.parse(fz2['activities/activities.json']).activities?.[0]?.fallback?.media || 'dijkstra-steps-still';
+        fs.mkdirSync(path.join(dir2, 'media'), { recursive: true }); fs.writeFileSync(path.join(dir2, 'media', 'media.json'), JSON.stringify({ items: [{ id: media2, file: 'still.svg' }] }));
+        fs.writeFileSync(path.join(dir2, 'subject.json'), JSON.stringify({ id: 'author-test', language: 'en' }));
+        for (const f of Object.keys(fz2)) { const m = f.match(/strings\.([\w-]+)\.json$/); if (m && m[1] !== 'en') fs.mkdirSync(path.join(dir2, 'translations', m[1]), { recursive: true }); }
+        const lint2 = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_lint.py'), dir2], { encoding: 'utf8' });
+        ok(lint2.status === 0 && !!fz2['activities/dijkstra-steps/spec.json'], 'the graph@1 .zip: activity_lint.py accepts the folder ' + (lint2.status ? lint2.stdout.slice(-300) : ''));
+        await p.setViewportSize({ width: 320, height: 700 }); await wait(400);
+        ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '320 px with a library engine: no horizontal scroll');
+        await p.setViewportSize({ width: 1280, height: 900 });
+      } else console.log('⚠ ' + 'NoemaActivityRefs is not shipped by this build: the reference flow is skipped');
+    }
+
     // leaving the route stops the page (its keys and preview)
     await p.evaluate(() => { location.hash = '#/'; }); await wait(400);
     ok(await p.evaluate(() => NoemaActivityAuthor.current === null && !document.querySelector('.aa')), 'leaving #/author stops the page');

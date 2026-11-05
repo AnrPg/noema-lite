@@ -1,0 +1,11 @@
+{
+ "title": "The muddy children",
+ "intro": "Three children played in the garden; two of them have mud on their foreheads. Each child sees the others but not herself. The father announces: at least one of you is muddy. Then he asks again and again: does anyone know whether she is muddy? Each answer is heard by all. Move the slider to add the announcements one by one and watch the possible worlds disappear.",
+ "kLabel": "Announcements made",
+ "frameLabel": "Announcements so far",
+ "leftLabel": "Worlds still possible",
+ "knowsLabel": "Child 1 knows whether she is muddy (1 = yes)",
+ "sceneTitle": "The possible worlds and what each child cannot tell apart",
+ "checkKnows": "Child 1 knows whether she is muddy.",
+ "checkFirst": "It is the first moment she knows."
+}
