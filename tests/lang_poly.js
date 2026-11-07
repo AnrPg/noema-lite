@@ -2,7 +2,9 @@
    polyglot exercise types, interleaved sessions, today's languages, depth, the ⇄ compare lane and the widgets in a real browser.
    Usage: node tests/lang_poly.js [<prepared-repo-dir>]   (the browser part needs the dir built with tools/build.py; without it only the Node part runs) */
 const fs = require('fs'), path = require('path');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.join(__dirname, '..');
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -162,9 +164,9 @@ const tokC = (c, t) => (t.l ? [t.l] : (t.parts || []).map(p => p.l).filter(Boole
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
-  await ctx.route(/^https?:\/\//, r => /fonts/.test(r.request().url()) ? r.fulfill({ status: 200, body: '' }) : r.abort());   // no network in tests
+  await ctx.route(/^https?:\/\/(?!127\.0\.0\.1[:/])/, r => /fonts/.test(r.request().url()) ? r.fulfill({ status: 200, body: '' }) : r.abort());   // no network in tests
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  const url = 'file://' + DIR + '/index.html', open = async (hash = '#/') => {
+  const url = await appUrl(DIR), open = async (hash = '#/') => {
     await page.goto(url + '?account=anr&subject=lang:' + COURSE + hash);
     await page.waitForFunction(() => window.NoemaLangUI && document.querySelector('.lx-main .lx-view'), null, { timeout: 20000 }); await wait(400);
   };

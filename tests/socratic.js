@@ -1,5 +1,6 @@
 /* Socratic thread protocol test with a scripted Gemini mock. Usage: node tests/socratic.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -22,7 +23,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
     return route.fulfill({ status: 200, headers: { 'content-type': 'text/event-stream' }, body: parts.map(t => 'data: ' + JSON.stringify({ candidates: [{ content: { parts: [{ text: t }] } }] }) + '\n\n').join('') });
   });
   const p = await ctx.newPage(); const E = []; p.on('pageerror', e => E.push(e.message));
-  await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(800);
+  await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(800);
   await p.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   await p.evaluate(() => { S.settings.apiKey = 'K'; flushSave(); openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic'); });
   const send = async t => { await p.evaluate(t => sendTutor(t), t); await wait(700); };

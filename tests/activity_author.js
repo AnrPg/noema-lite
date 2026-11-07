@@ -20,6 +20,7 @@
    (browser: NODE_PATH=$(npm root -g), PLAYWRIGHT_BROWSERS_PATH=…; run under flock on a shared machine) */
 const fs = require('fs'), path = require('path'), os = require('os'), cp = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
+require('./built').ensureBuilt(ROOT, 'engine');   // engine/activity_author_schemas.js and the catalogs are generated (never committed)
 const args = process.argv.slice(2);
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) fails++; console.log((c ? '✓ ' : '✗ ') + m); return c; };
@@ -27,7 +28,7 @@ const rj = f => JSON.parse(fs.readFileSync(f, 'utf8'));
 const SCH = f => rj(path.join(ROOT, 'tools', 'schemas', f));
 const SCHEMA_FILES = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json', 'noema.activities.v1.schema.json'];
 
-/* ---------- the embedded copy of the schemas (the page cannot fetch on file://): tools/build.py writes it ---------- */
+/* ---------- the embedded copy of the schemas (the one-file bundle, opened from disk, cannot fetch them): tools/build.py writes it ---------- */
 const EMBED = path.join(ROOT, 'engine', 'activity_author_schemas.js');
 const embedText = () => cp.execFileSync('python3', [path.join(ROOT, 'tools', 'build.py'), '--author-schemas'], { encoding: 'utf8', cwd: ROOT });
 
@@ -324,9 +325,9 @@ console.log('— documents, files, zip');
 
 /* =========================== browser (written for the batch runs; node tests/activity_author.js --browser) =========================== */
 async function browser() {
-  const pw = require(process.env.PW || 'playwright');
+  const pw = require(process.env.PW || 'playwright'), { appUrl } = require('./serve');
   // the built site of a prepared repo (tests/run_e2e.sh: node tests/activity_author.js --browser "$T"), else this repo's dist/site
-  const SITE = path.resolve(args.find(a => !a.startsWith('--')) || ROOT), SITE_URL = 'file://' + path.join(SITE, 'dist', 'site', 'index.html');
+  const SITE = path.resolve(args.find(a => !a.startsWith('--')) || ROOT), SITE_URL = await appUrl(path.join(SITE, 'dist', 'site'));   // over http, as the website serves it
   if (!fs.existsSync(path.join(SITE, 'dist', 'site', 'index.html'))) throw new Error('no built site: python3 tools/build.py site (in ' + SITE + ')');
   const names = (process.env.BROWSERS || 'chromium').split(',');
   const wait = ms => new Promise(r => setTimeout(r, ms));

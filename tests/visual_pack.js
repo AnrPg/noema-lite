@@ -2,6 +2,7 @@
    and every figure must render. Catches content bugs: overlapping regions, crowded controls, unreachable answers.
    Usage: node tests/visual_pack.js <prepared-repo-dir> [subjectTitle]   (default: Databricks) */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SUBJ = process.argv[3] || 'Databricks';
@@ -11,7 +12,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 async function run(browser, viewport, touch) {
   const ctx = await browser.newContext({ viewport, hasTouch: touch, isMobile: touch });
   const p = await ctx.newPage(); const E = []; p.on('pageerror', e => E.push(e.message));
-  await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
+  await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.click(`.noema-chip:has-text("${SUBJ}")`); await wait(1500);
   const ids = await p.evaluate(() => ALL_EX.filter(isVisual).map(e => e.id));
   const tap = async (x, y) => touch ? p.touchscreen.tap(x, y) : p.mouse.click(x, y);

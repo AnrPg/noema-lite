@@ -3,8 +3,10 @@
    without its lessons (the vegetables open at once), so that lane is tested whatever the state of the lessons' content.
    Usage: node tests/lang_ui.js <prepared-repo-dir>   (built with tools/build.py) */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -67,7 +69,7 @@ async function answer(page, right) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  let url = 'file://' + ROOT + '/index.html';
+  let url = await appUrl(ROOT);
   await page.goto(url); await page.evaluate(() => localStorage.clear());
   await page.goto(url + '?account=anr&subject=' + SUBJ); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(1200);
   ok(await page.evaluate(() => !!window.NoemaLangUI && !window.COURSE), 'the language course opens with its own UI (the subject engine is not loaded)');
@@ -81,7 +83,7 @@ async function answer(page, right) {
   await page.screenshot({ path: SHOTS + '/lx1_home.png' });
 
   // ---------- the vocabulary lane (a copy of the course without its lessons) ----------
-  const ROOT2 = strippedCopy(ROOT); url = 'file://' + ROOT2 + '/index.html';
+  const ROOT2 = strippedCopy(ROOT); url = await appUrl(ROOT2);
   await page.goto(url); await page.evaluate(() => localStorage.clear());
   await page.goto(url + '?account=anr&subject=' + SUBJ); await page.waitForSelector('.lx-main .lx-view', { timeout: 20000 }).catch(() => { }); await wait(1200);
   ok(await page.locator('.lx-node').count() === 5, 'the vocabulary map: 5 vegetable nodes'); if (E.length) console.log(E);

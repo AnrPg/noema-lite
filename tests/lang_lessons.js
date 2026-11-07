@@ -3,6 +3,7 @@
    the grammar page with the same point in the other languages.
    Usage: node tests/lang_lessons.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs'), os = require('os'), { execSync } = require('child_process');
 const SRC = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -58,7 +59,7 @@ async function runThrough(page, wrongIn = []) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   await page.goto(url); await page.evaluate(() => localStorage.clear());
   await page.goto(url + '?account=anr&subject=' + SUBJ); await wait(1200);
   const card = page.locator('.lx-lessonbtn');

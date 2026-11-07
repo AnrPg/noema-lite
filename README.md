@@ -5,23 +5,30 @@ debug/diagnosis drills, spaced-repetition flashcards, lightning rounds and boss 
 The engine knows nothing about the content; each subject is a **pack** generated from your sources.
 
 ## Open it
-* **On this Mac:** double-click `index.html` (Chrome recommended). Works offline except for the AI tutor and fonts.
+* **On your computer:** you need Node.js 22 and Python 3.10 or newer. Once, in this folder: `npm ci`. Then `npm run dev` and open
+  <http://localhost:8080>. It builds everything, serves the app and reloads the page when you change a file. Stop it with Ctrl+C.
 * **Anywhere:** the website built from this repo (see `cloud/README.md`), with a cloud account that syncs your progress.
-* **One file:** `python3 tools/build.py bundle` → `dist/noema-lite.html` (all subjects inlined; e.g. for a phone).
+  You can install it as an app (the browser's "Install" or "Add to Home Screen"); after the first visit it also opens offline,
+  and it tells you when a new version is ready.
+* **One file, offline:** `npm ci` once, then `python3 tools/build.py bundle` → `dist/noema-lite.html`. Everything is inside it
+  (all subjects too), so you can copy it anywhere, for example to a phone, and open it with a double-click.
 
 ## Repository map
 ```
-index.html                 entry point (loads config → registry → loader → one subject pack → engine)
+index.html                 entry point (loads config → the bundles in build/ → registry → loader → one subject pack → engine)
+package.json               the TypeScript toolchain: npm run dev | build | typecheck | lint | format | test:unit | check
+src/                       the TypeScript source (layers checked by eslint.config.js) → build/*.js by tools/esbuild.mjs (GENERATED)
+manifest.webmanifest, icons/   the installable app (the service worker is src/composition/sw.ts → the site's /sw.js)
 config.js                  public settings (Supabase URL + publishable key go here); config.local.js = private, git-ignored
 engine/
   loader.js                profiles, subject picker, pack loading, namespaced storage, backups, restore points
   cloud.js                 Supabase adapter (auth, sync, snapshots, private storage) — dependency-free
-  src/*.js, src/*.css      the study engine source  →  engine.js / engine.css (GENERATED)
+  src/*.js, src/*.css      the study engine source  →  engine.js / engine.css (GENERATED, like engine/i18n/ and langui.*)
   vendor/                  marked, DOMPurify, KaTeX
 library/
   groups.json              groups of the subject picker
   subjects/<id>/           shared subjects (subject.json, sources.json, sources/*.pdf, chapters/, patches/, media/, coverage/)
-  registry.js              GENERATED catalogue
+  registry.js              GENERATED catalogue (and every pack.js / pack.json next to the chapters)
 accounts/<profile>/
   account.json             local profile seed (name, emoji, "about me" for the tutor)
   backups/                 suggested target for the app's automatic folder backups
@@ -35,9 +42,13 @@ tests/                     end-to-end tests (Playwright) incl. a Supabase emulat
 ```
 
 ## Everyday commands
+Generated files (marked GENERATED above, and `build/`) are never committed: the commands below make them. Run `npm ci` once first.
 ```bash
-python3 tools/build.py                  # validate + rebuild engine, packs, registry
-python3 tools/build.py site bundle      # + website folder (dist/site) + single-file app
+npm run dev                             # build, serve on http://localhost:8080 and rebuild + reload on every change
+npm run check                           # typecheck + lint + format check + unit tests of src/
+npm run build                           # only the TypeScript bundles (build/), each within its size budget
+python3 tools/build.py                  # the bundles, then validate + rebuild engine, packs, registry
+python3 tools/build.py site bundle      # + website folder (dist/site) + single-file app (dist/noema-lite.html)
 python3 tools/fetch_pyodide.py --site dist/site   # after `site`: the pinned Python runtime for py-module@1 activities (Netlify does this; a failed fetch never breaks the deploy) — docs/INTERACTIVE_PYTHON.md
 python3 tools/db_sync.py                # refresh the SQLite backup database (versioned copy of every file + all content + profile backups)
 python3 tools/db_restore.py list        # what the database holds; restore files/subjects/packs/backups into a NEW folder
@@ -91,7 +102,7 @@ backup format `noema-lite-backup`, conversation schema `noema.conversation/v1`.
 Data written by the app before it was renamed is copied over automatically on first start (see `LEGACY` in `engine/loader.js`).
 
 ## Γρήγορος οδηγός (Ελληνικά)
-* Άνοιγμα: διπλό κλικ στο `index.html` (Chrome). Διαλέγεις προφίλ και μάθημα από τα chips.
+* Άνοιγμα: μία φορά `npm ci`, μετά `npm run dev` και άνοιξε το <http://localhost:8080> (ή ένα αρχείο για offline: `python3 tools/build.py bundle` → `dist/noema-lite.html`, διπλό κλικ). Διαλέγεις προφίλ και μάθημα από τα chips.
 * Νέο μάθημα: **✨ Create with Claude** — (A) μέσα στην εφαρμογή με δικό σου Claude API key, ή (B) στην εφαρμογή/ιστοσελίδα του Claude με τον connector `https://noema-lite.netlify.app/mcp` (ίδια διεύθυνση για όλους, σε Windows, Mac, Linux, κινητά).
 * Curricula: 🧭 → γράφεις τον στόχο → χάρτης βημάτων (προαπαιτούμενα → στόχος → εφαρμογές)· κάθε βήμα γίνεται μάθημα όταν φτάσεις εκεί.
 * Κοινή χρήση: 🔗 πάνω σε δικό σου μάθημα → δημόσιο (🌍 Explore) ή σε ένα άτομο (🔔 ειδοποίηση, Accept / Reject).

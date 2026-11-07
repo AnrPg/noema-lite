@@ -11,6 +11,7 @@ const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), http = require('http');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SITE = fs.existsSync(path.join(ROOT, 'dist', 'site', 'engine', 'mt.js')) ? path.join(ROOT, 'dist', 'site') : ROOT;
+if (SITE === ROOT) require('./built').ensureBuilt(ROOT, 'engine');   // engine/i18n/en.js is generated (never committed)
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const TYPES = { '.js': 'text/javascript; charset=utf-8', '.html': 'text/html; charset=utf-8', '.css': 'text/css' };
 const PAGE = `<!doctype html><html><head><meta charset="utf-8"></head><body>

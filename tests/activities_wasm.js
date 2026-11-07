@@ -11,9 +11,10 @@
      wasm-module@1 with its own spec, runaway (engine: 5 s; NoemaWasm.load: budget 300 ms) and Restart, a forbidden import refused
      (the page check and the worker's own), the memory limits, 0 requests from the worker (fetch, XHR, WebSocket, EventSource,
      importScripts, Worker, sendBeacon). With --app <built repo dir>: the same oscillator, runaway + Restart and the refused import in
-     the real app (index.html, file://, like tests/activities_app.js).
+     the real app (index.html over http, like tests/activities_app.js).
    Usage: node tests/activities_wasm.js [--node] [--app <repo dir with a built engine.js>]   (BROWSERS=chromium,firefox,webkit; PW_CHANNEL) */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os'), crypto = require('crypto');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(__dirname, '..'), FIX = path.join(__dirname, 'fixtures', 'wasm');
 const args = process.argv.slice(2), NODE_ONLY = args.includes('--node'), APP = args.includes('--app') ? path.resolve(args[args.indexOf('--app') + 1]) : null;
 let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) { fails++; console.log('  ✗ ' + m); } else console.log('  ✓ ' + m); return c; };
@@ -266,7 +267,7 @@ async function appPart(browser, ref) {
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
   const p = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
-  await p.goto('file://' + APP + '/index.html?subject=' + (process.env.APP_SUBJECT || 'demo-physics')); await wait(1500);
+  await p.goto((await appUrl(APP)) + '?subject=' + (process.env.APP_SUBJECT || 'demo-physics')); await wait(1500);
   if (!ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && !!ACT.engine('wasm@1') && !!ACT.runtime('wasm-module@1'))), 'the app has wasm@1 and wasm-module@1 (engine.js built with 44_activity_wasm.js)')) return;
   ok(await p.evaluate(() => ACT.caps().has('runtime:wasm-module@1') && ACT.caps().has('engine:wasm@1')), 'ACT.caps() names runtime:wasm-module@1 and engine:wasm@1 (pack.requires)');
   await p.evaluate(I => { Object.assign(ACT.ITEMS, I); }, ITEMS);

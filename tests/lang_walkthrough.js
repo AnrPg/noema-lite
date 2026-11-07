@@ -5,12 +5,15 @@
    an element with its lang. No network: fonts and every http(s) request are answered locally.
    Usage: node tests/lang_walkthrough.js <prepared-repo-dir>   (built with tools/build.py) */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+require('./built').ensureBuilt(ROOT);   // the generated files it reads (never committed): built first, unless tests/run_e2e.sh did
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0, checks = 0; const ok = (c, m) => { checks++; console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
-const COURSE = 'polyglot-semitic-zh-de', SUBJ = 'lang:' + COURSE, URL0 = 'file://' + path.join(ROOT, 'index.html'), URL1 = URL0 + '?account=anr&subject=' + SUBJ;
+const COURSE = 'polyglot-semitic-zh-de', SUBJ = 'lang:' + COURSE, SUBJ_Q = '?account=anr&subject=' + SUBJ;
+let URL0 = '', URL1 = '';   // the app over http (set before the browser part)
 
 /* ---------- the learners (made through the runtime, stored like the app stores them) ---------- */
 function setupLearner(prof) {
@@ -25,7 +28,7 @@ function setupLearner(prof) {
 }
 async function open(browser, prof, width) {
   const ctx = await browser.newContext({ viewport: { width, height: width < 500 ? 844 : 900 } });
-  await ctx.route(/^https?:\/\//, r => r.fulfill({ status: 200, contentType: 'text/css', body: '' }));   // fonts and anything else online: answered locally
+  await ctx.route(/^https?:\/\/(?!127\.0\.0\.1[:/])/, r => r.fulfill({ status: 200, contentType: 'text/css', body: '' }));   // fonts and anything else online: answered locally
   const page = await ctx.newPage(), E = [], CE = [];
   page.on('pageerror', e => E.push(e.message));
   page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) CE.push(m.text()); });   // config.local.js is optional
@@ -83,6 +86,7 @@ async function runToEnd(page, max = 200) { for (let i = 0; i < max; i++) { const
     ok(new Set(texts.filter(t => t.lang === 'de').map(t => t.title)).size === texts.filter(t => t.lang === 'de').length, 'no two texts of a language share a title');
   }
 
+  URL0 = await appUrl(ROOT); URL1 = URL0 + SUBJ_Q;
   const browser = await chromium.launch();
   console.log('— a brand-new learner (390 px)');
   {

@@ -8,6 +8,7 @@
      C. the frame: the Languages tab asks first, then lists the chosen languages (each opens its course) and the courses with only them
    Usage: node tests/lang_select.js <prepared-repo-dir>   (built with tools/build.py; without playwright only part A runs) */
 const path = require('path'), fs = require('fs');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -51,7 +52,7 @@ console.log('A. the chosen languages in langcore');
 
 (async () => {
   let chromium; try { ({ chromium } = require(process.env.PW || 'playwright')); } catch (e) { console.log('  (playwright not installed — the browser part is skipped)'); return end(); }
-  const b = await chromium.launch(), E = [], url = 'file://' + ROOT + '/index.html';
+  const b = await chromium.launch(), E = [], url = await appUrl(ROOT);
   const ctx = await b.newContext({ viewport: { width: 1100, height: 900 } }); await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message));
   const open = async (hash = '') => { await p.goto('about:blank'); await p.goto(url + '?account=anr&subject=lang:' + COURSE + hash);

@@ -1,0 +1,4 @@
+{
+  "//": "src/ is ES modules (TypeScript, bundled by tools/esbuild.mjs). The rest of the repo keeps CommonJS .js (tools, tests, the skill scripts); ESM tools are .mjs.",
+  "type": "module"
+}

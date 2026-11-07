@@ -1,4 +1,4 @@
-/* py-module@1 (engine/src/37_activity_py.js, engine/pyodide-sw.js, tools/fetch_pyodide.py) in real browsers.
+/* py-module@1 (engine/src/37_activity_py.js, the service worker src/composition/sw.ts → build/sw.js, tools/fetch_pyodide.py) in real browsers.
      node tests/activities_py.js [chromium] [firefox] [webkit]        (default: all three, one after the other)
    Needs Playwright and network to cdn.jsdelivr.net + files.pythonhosted.org the first time (tools/fetch_pyodide.py; the downloads are kept
    in $NOEMA_PYODIDE_CACHE or ~/.cache/noema-pyodide). Firefox/WebKit: PLAYWRIGHT_BROWSERS_PATH=<dir with them>; a browser that is not
@@ -79,7 +79,7 @@ const server = http.createServer((q, r) => {
   const u = decodeURIComponent(q.url.split('?')[0]);
   if (u.startsWith('/beacon')) { BEACONS.push('main ' + q.url); return send(r, 200, 'text/plain', 'x', { 'access-control-allow-origin': '*' }); }
   if (u === '/host.html') return send(r, 200, 'text/html; charset=utf-8', HOST, { 'cache-control': 'no-store' });
-  if (u === '/engine/pyodide-sw.js') return send(r, 200, 'text/javascript', fs.readFileSync(path.join(ROOT, 'engine', 'pyodide-sw.js')), { 'service-worker-allowed': '/vendor/', 'cache-control': 'no-cache' });
+  if (u === '/sw.js') return send(r, 200, 'text/javascript', 'self.NOEMA_SW = {"version":"test","shell":[]};\n' + fs.readFileSync(path.join(ROOT, 'build', 'sw.js'), 'utf8'), { 'cache-control': 'no-cache' });   // the site's one service worker, with no app shell: only the Python files
   if (u.startsWith('/vendor/')) {
     if (BLOCK) { BLOCKED.push(u); return send(r, 503, 'text/plain', 'blocked'); }
     HITS.push(u);

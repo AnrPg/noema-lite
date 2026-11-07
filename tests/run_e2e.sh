@@ -2,13 +2,21 @@
 # Prepares a throw-away copy of the repo with test fixtures, builds it and runs the e2e suite.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; T="${TMPDIR:-/tmp}/noema-e2e"
-rm -rf "$T"; mkdir -p "$T"; (cd "$ROOT" && tar --exclude=.git --exclude=dist --exclude=data -cf - .) | (cd "$T" && tar xf -)
+# the generated files are never committed: build the repo itself first (the suites that read "$ROOT" use them; npm ci once before)
+[ -d "$ROOT/node_modules/esbuild" ] || (cd "$ROOT" && npm ci --no-audit --no-fund)
+(cd "$ROOT" && python3 tools/build.py --no-validate >/dev/null)
+export NOEMA_BUILT=1   # tests/built.js: every suite finds the files built (no suite builds again)
+rm -rf "$T"; mkdir -p "$T"; (cd "$ROOT" && tar --exclude=.git --exclude=dist --exclude=data --exclude=node_modules -cf - .) | (cd "$T" && tar xf -)
+ln -s "$ROOT/node_modules" "$T/node_modules"   # the copy builds with the repo's own tools (esbuild)
 cp -r "$T/tests/fixtures/demo-physics" "$T/library/subjects/demo-physics"
 mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/accounts/anr/packs/secret-notes"
 # (sed -i.bak works with both GNU sed on Linux and BSD sed on macOS)
 sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physics"/"title": "Secret Notes"/' "$T/accounts/anr/packs/secret-notes/subject.json" && rm -f "$T/accounts/anr/packs/secret-notes/subject.json.bak"
 # the older suites test the classic screens (shell: false: the subject picker at start, no first-time questions); tests/shell.js sets noema-test:newUI for the new frame
 echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
+# no app-shell service worker in the suites (page.route must see every request; tests/pwa.js turns it on for itself); py-module@1
+# still registers the same worker for its Python files, as on the website
+echo "Object.assign(window.NOEMA_CONFIG, { pwa: false });" >> "$T/config.js"
 # interactive activities: a pack with the reference activity, built and unpacked with the skill (tests/activities_app.js imports it)
 (cd "$T" && NOEMA_REBUILD_SKILL=1 NOEMA_ACT_PACK="$T/act-pack.json" python3 tests/activities_pack.py)
 # h5p@1 in the one-file bundle: that subject (with its H5P item) as the library's demo-physics, its .h5p inline (<= 2 MB) and over a tiny limit (the fallback)
@@ -106,6 +114,8 @@ run i18n_runtime node "$ROOT/tests/i18n_runtime.js" "$T"   # the runtime audit: 
 run mt node "$ROOT/tests/mt.js" "$T"   # machine translation of shared content: policy, cache, caps, toggle (docs/i18n.md §11; provider mocked)
 run weblate_tools python3 "$ROOT/tests/weblate_tools.py"   # Weblate tools: facade round trip, prune_drafts, draft-import and setup plans (no network)
 run i18n_rtl node "$ROOT/tests/i18n_rtl.js" "$T"   # RTL (ar-XB): dir switching, mirroring, bidi isolation, LTR islands, self-hosted script fonts
+run a11y node "$ROOT/tests/a11y.js" "$T"   # accessibility (axe): start screen, a subject's chapter, settings, at desktop and 320 px — no serious/critical violation
+run pwa node "$ROOT/tests/pwa.js" "$T"   # the installable app: web manifest, one service worker, offline after the first visit, "update ready"
 
 echo
 if [ ${#FAILED[@]} -gt 0 ]; then echo "✖ ${#FAILED[@]} suite(s) failed: ${FAILED[*]}"; exit 1; fi

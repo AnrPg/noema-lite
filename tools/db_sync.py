@@ -7,9 +7,9 @@ What it stores
   • subjects, sources, chapters, sections, blocks, exercises, playbooks, flashcards, pitfalls : queryable content
   • pack_versions          : every built pack version ever seen (JSON)
   • accounts, backups, user_kv, progress, conversations, messages : per-profile state from accounts/<id>/backups/*.json
-Usage:  python3 tools/db_sync.py [--db PATH] [--no-blobs]
+Usage:  python3 tools/db_sync.py [--db PATH] [--no-blobs]   (it runs python3 tools/build.py --no-validate first: the packs are generated)
 """
-import os, sys, glob, json, sqlite3, hashlib, subprocess, time, tempfile, shutil
+import os, sys, glob, json, sqlite3, hashlib, subprocess, time, tempfile, shutil, fnmatch
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
@@ -52,7 +52,13 @@ CREATE INDEX IF NOT EXISTS ix_blocks_text ON blocks(subject_id, type);
 """
 LEGACY_BACKUP_FORMATS = ('learning-quest-backup',)   # files written before the app was renamed noema-lite
 EXCLUDE_DIRS = {'.git', 'dist', 'data', 'node_modules', '__pycache__', '_to_delete'}
-GENERATED = ('pack.js', 'pack.json', 'engine.js', 'engine.css', 'registry.js')
+# the generated files (the "generated" block of .gitignore): rebuilt from the sources by tools/build.py, so never stored as files
+GENERATED = ('build/*', 'engine/engine.js', 'engine/engine.css', 'engine/langui.js', 'engine/langui.css', 'engine/authoring.js',
+             'engine/activity_author_schemas.js', 'engine/i18n/*', 'library/registry.js',
+             'library/subjects/*/pack.js', 'library/subjects/*/pack.json', 'library/subjects/*/tr.*.js', 'library/subjects/*/tr.*.json',
+             'library/subjects/*/bridge.*.js', 'library/languages/*/course.pack.js', 'library/languages/*/course.profiles.js',
+             'library/languages/*/course.expl.*.js', 'accounts/*/packs/*/pack.js', 'accounts/*/packs/*/pack.json',
+             'accounts/*/packs/*/tr.*.js', 'accounts/*/packs/*/tr.*.json', 'accounts/*/packs/*/bridge.*.js')
 
 def sha(b): return hashlib.sha256(b).hexdigest()
 
@@ -60,8 +66,9 @@ def tracked_files():
     for base, dirs, files in os.walk(ROOT):
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
         for f in files:
-            if f in GENERATED or f.endswith('.tmp') or f == 'config.local.js' or f.startswith('.DS_Store'): continue
-            p = os.path.join(base, f); yield os.path.relpath(p, ROOT).replace(os.sep, '/'), p
+            rel = os.path.relpath(os.path.join(base, f), ROOT).replace(os.sep, '/')
+            if any(fnmatch.fnmatchcase(rel, g) for g in GENERATED) or f.endswith('.tmp') or f == 'config.local.js' or f.startswith('.DS_Store'): continue
+            yield rel, os.path.join(base, f)
 
 def block_text(b):
     t = b.get('t')
@@ -77,6 +84,9 @@ def block_text(b):
     return ''
 
 def main():
+    # the packs (pack.json → pack_versions) are generated, never committed: build them first (validation is build.py's own job)
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'build.py'), '--no-validate'], cwd=ROOT)
+    if r.returncode: sys.exit('db_sync: python3 tools/build.py failed (see above), nothing synced')
     os.makedirs(os.path.dirname(DB), exist_ok=True)
     # Work on a local temp copy: SQLite locking is unreliable on synced/network/virtual folders (iCloud, Dropbox, VMs).
     work = os.path.join(tempfile.mkdtemp(prefix='noemadb-'), 'work.db')

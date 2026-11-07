@@ -248,12 +248,12 @@ from 320 px wide with no horizontal scroll (docs/UI_MAP.md "Small screens"), tou
 the H5P player is part of the app, and the `.h5p` file is kept on the device with the pack (checked by its sha256); in the one-file
 bundle an item up to 2 MB is inline and a bigger one shows its fallback. `external-embed@1` needs the network every time: offline,
 or when the page does not load in 20 s, the block shows its fallback with Restart (= try again). `py-module@1` needs the
-Pyodide files (about 17 MB with numpy, 37 MB with scipy) from the website the first time; a service worker
-(`engine/pyodide-sw.js`) then keeps them on the device (`navigator.storage.persist()` is asked), as are the allow-listed extras.
+Pyodide files (about 17 MB with numpy, 37 MB with scipy) from the website the first time; the app's one service worker
+(`src/composition/sw.ts`, the site's `/sw.js`) then keeps them on the device (`navigator.storage.persist()` is asked), as are the allow-listed extras.
 Settings › Data and sync (classic: Account › Backup) has "Prepare Python for offline" with progress, the size and what is cached.
 Offline without the files, and always in the one-file bundle and on `file://`, the activity shows its fallback with the reason.
 Deployment: `python3 tools/fetch_pyodide.py --site dist/site` after `python3 tools/build.py site` (Netlify does it, and a failed
-download never breaks the deploy); `build_site` writes the headers (`Service-Worker-Allowed`, immutable caching, `application/wasm`)
+download never breaks the deploy); `build_site` writes the headers (a no-cache `/sw.js`, immutable caching, `application/wasm`)
 into `_headers` — `docs/INTERACTIVE_PYTHON.md` §7.
 
 ## 11. Before you deliver — checklist

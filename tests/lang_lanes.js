@@ -2,6 +2,7 @@
    one language alone fills the gap beside the others; the view in a browser (classic screens) with a tap on a step.
    Usage: node tests/lang_lanes.js <prepared-repo-dir> */
 const path = require('path'), fs = require('fs');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const N = require(path.join(ROOT, 'engine', 'langcore.js'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -32,7 +33,7 @@ ok(secs[0] === 'foundations' && secs.includes('core') && secs.some(s => s.starts
   const b = await chromium.launch(), E = [];
   for (const [w, hh] of [[1280, 900], [390, 844]]) {
     const ctx = await b.newContext({ viewport: { width: w, height: hh } }); await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
-    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = 'file://' + ROOT + '/index.html';
+    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = await appUrl(ROOT);
     await p.goto(url); await p.evaluate(() => localStorage.clear());
     await p.goto(url + '?account=anr&subject=lang:polyglot-semitic-zh-de'); await p.waitForFunction(() => window.NoemaLangUI?.UI?.C && document.querySelector('.lx-view'), null, { timeout: 60000 }); await wait(400);
     const btn = p.locator('.lx-tolanes:visible'); ok(await btn.count() === 1, `${w}px: ⫴ Parallel lanes next to the map`);
@@ -58,7 +59,7 @@ ok(secs[0] === 'foundations' && secs.includes('core') && secs.some(s => s.starts
   }
   { // Auto: dots when a lane would be narrower than a tile
     const ctx = await b.newContext({ viewport: { width: 320, height: 700 } }); await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
-    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = 'file://' + ROOT + '/index.html';
+    const p = await ctx.newPage(); p.on('pageerror', e => E.push(e.message)); const url = await appUrl(ROOT);
     await p.goto(url); await p.evaluate(() => localStorage.clear());
     await p.goto(url + '?account=anr&subject=lang:polyglot-semitic-zh-de#/lanes'); await p.waitForSelector('.lx-lanes2', { timeout: 60000 }); await wait(300);
     ok(await p.locator('.lx-lanes2.lx-ldots').count() === 1 && await p.evaluate(() => document.documentElement.scrollWidth - innerWidth) <= 1, '320px, Auto: four lanes do not fit as tiles → dots, nothing scrolls sideways');

@@ -345,8 +345,8 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   Restart). Settings: a section in the backup view (its header has a line icon, `accSection({ line: 'download' }, …)`, no emoji) (`accView('backup')`, so the classic Backup tab and the shell's Me › Data and
   sync), one line with a pill, the size on the device and the Prepare button with a progress bar; the per-part detail and whether
   `persist()` was granted are in its ⓘ. All words in the 15 UI catalogs.
-* **Deploy.** `build_site` copies `engine/pyodide-sw.js` and writes the Python headers into the real `_headers`
-  (`Service-Worker-Allowed: /vendor/`, immutable versioned files, a no-cache manifest, `application/wasm`); `netlify.toml` runs
+* **Deploy.** `build_site` writes the app's one service worker `/sw.js` (from `src/composition/sw.ts`; it replaced the separate
+  `engine/pyodide-sw.js` in phase 1 of the redesign) and the Python headers into the real `_headers` (immutable versioned files, a no-cache manifest, `application/wasm`); `netlify.toml` runs
   `tools/fetch_pyodide.py` after the site build with the downloads in Netlify's build cache, and a failed fetch only prints a warning
   (the deploy goes out; Python activities show their fallback there). `docs/activities-dev/pyodide.md` and its headers file are folded
   into `docs/INTERACTIVE_PYTHON.md`, which the connector's 'interactive' guide and the skill's references now include.

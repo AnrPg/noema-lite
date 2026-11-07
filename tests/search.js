@@ -7,6 +7,7 @@
      F. Greek words
    Usage: node tests/search.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -21,7 +22,7 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await ctx.newPage(); const E = []; errs(page, E);
   let answer = null; page.on('dialog', d => d.type() === 'prompt' || d.type() === 'confirm' ? d.accept(answer ?? undefined) : d.dismiss());

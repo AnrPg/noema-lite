@@ -2,6 +2,7 @@
    the "How sure?" chips, ⚑ report, the source chip after the answer and the facades of one learnable in a round.
    Usage: node tests/thinking_types.js <prepared-repo-dir>   (needs the demo-physics fixture, see tests/run_e2e.sh) */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs'), { execFileSync } = require('child_process');
 const REPO = path.join(__dirname, '..');
 const ROOT = path.resolve(process.argv[2] || REPO);
@@ -40,7 +41,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   const ctx = await browser.newContext({ viewport: { width: 1100, height: 900 } });
   const p = await ctx.newPage(); const E = [];
   p.on('pageerror', e => E.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) E.push(m.text()); });
-  await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
+  await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.click('.noema-chip:has-text("Demo Physics")'); await wait(1300);
   await p.evaluate(fx => { for (const e of fx) { e._ch = COURSE[0]; EX[e.id] = e; } }, FIX);
   const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); }, id); await wait(200); };

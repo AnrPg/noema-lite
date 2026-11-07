@@ -122,8 +122,8 @@ Python's `step()`; the runner itself is `engine/src/37_activity_py.js` (`NoemaPy
 * **The runner has no network at all** (`connect-src 'none'`). A service worker never controls an opaque-origin (sandboxed) client, so
   the trusted page reads the pinned files and hands their bytes over the port; in the worker `fetch()` and `importScripts()` are
   replaced by a lookup in those bytes, which is emptied once Python has started.
-* **Service worker** `engine/pyodide-sw.js`, scope `/vendor/pyodide/` (needs `Service-Worker-Allowed: /vendor/`). It controls only a
-  script-less loader page it serves itself; the page calls that frame's `fetch()`, so the requests go through the worker: cache-first
+* **Service worker:** the app's one service worker (`src/composition/sw.ts`, served as `/sw.js`, scope `/`; it also keeps the app shell
+  for offline use) handles the Python files. It serves a script-less loader page itself (`/vendor/pyodide/__loader.html`); the page calls that frame's `fetch()`, so the requests go through the worker: cache-first
   for files the manifest pins (`/vendor/pyodide/0.27.7/…`, `/vendor/pywheels/…`), a network copy is cached only if its sha256 matches
   (else 502 `x-noema-error: integrity`, never cached), unpinned paths are refused (404), the manifest is network-first. Without a
   service worker (refused, unsupported, `NOEMA_CONFIG.py.sw = false`) the page uses the same Cache Storage (`noema-py-v1`) itself, with
@@ -176,11 +176,12 @@ python3 tools/fetch_pyodide.py --site dist/site [--cache DIR]
 
 downloads the pinned files from cdn.jsdelivr.net (Pyodide) and files.pythonhosted.org (the extras), checks each against its sha256,
 and writes `dist/site/vendor/pyodide/0.27.7/…`, `dist/site/vendor/pywheels/…` and `dist/site/vendor/pyodide/manifest.json`.
-`build_site` copies the service worker to `dist/site/engine/pyodide-sw.js` and writes its headers into `dist/site/_headers`:
+`build_site` writes the service worker `dist/site/sw.js` (its precache list and build version, then the bundle `build/sw.js`) and the
+headers into `dist/site/_headers`:
 
 | path | headers |
 |---|---|
-| `/engine/pyodide-sw.js` | `Service-Worker-Allowed: /vendor/`, `Cache-Control: no-cache` |
+| `/sw.js` | `Cache-Control: no-cache` |
 | `/vendor/pyodide/manifest.json` | `Cache-Control: no-cache` |
 | `/vendor/pyodide/*`, `/vendor/pywheels/*` | `Cache-Control: public, max-age=31536000, immutable` (+ ACAO, CORP for a direct load) |
 | `/vendor/pyodide/*.wasm` | `Content-Type: application/wasm` |
@@ -188,7 +189,7 @@ and writes `dist/site/vendor/pyodide/0.27.7/…`, `dist/site/vendor/pywheels/…
 On Netlify (`netlify.toml`) the build runs `fetch_pyodide.py` after `build.py site` with the downloads kept in the build cache. If
 the fetch fails the deploy still goes out (a warning in the log): Python activities then show their fallback (with "Python is not on this
 device yet…") on that deploy, and the Settings line says Python cannot be reached. Updating Pyodide: `python3 tools/fetch_pyodide.py --pin` (maintainers; it rewrites
-`tools/pyodide_manifest.json`), a new version folder, a new cache name in `pyodide-sw.js`.
+`tools/pyodide_manifest.json`), a new version folder, a new cache name (`PY` in `src/composition/sw.ts` and in `engine/src/37_activity_py.js`).
 
 ## 8. Sizes and measurements
 
@@ -217,7 +218,7 @@ shows meanwhile).
 |---|---|
 | `engine/src/37_activity_py.js` | the runner: `window.NoemaPy`, the sandboxed frame, the worker, the Python `noema` module |
 | `engine/src/37_activity_py_ui.js` | the runtime the app mounts: the sim-spec view with Python's `step()`, the quiet line, the Settings section |
-| `engine/pyodide-sw.js` | the service worker |
+| `src/composition/sw.ts` | the app's service worker (the Python files among the rest) |
 | `tools/fetch_pyodide.py` | fetches and checks the files into the site (`--pin` rewrites the pin) |
 | `tools/pyodide_manifest.json` | the pin: the files with sha256 and bytes, the packages with their dependencies |
 | `tools/pywheels_allow.json` | the allow-list of extras (`quantiphy` 2.23, MIT, 43.6 KB) |

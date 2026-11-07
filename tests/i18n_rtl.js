@@ -8,6 +8,7 @@
      D. the CJK subsets cover every Han character of the zh-Hans / zh-Hant / ja catalogs (a warning: re-run tools/fonts_subset.py)
    Usage: node tests/i18n_rtl.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs'), glob = d => fs.readdirSync(d, { recursive: true }).map(f => path.join(d, f));
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -29,7 +30,7 @@ const seedRoadmap = page => page.evaluate(() => {   // a Roadmap whose steps' ti
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const asked = []; await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => { asked.push(r.request().url()); r.fulfill({ status: 200, body: '' }); });
   await ctx.addInitScript(() => {   // the pseudo-locales on, whatever config.js says

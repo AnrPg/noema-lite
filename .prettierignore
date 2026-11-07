@@ -1,0 +1,3 @@
+# Prettier formats the TypeScript of src/ (npm run format, npm run format:check in CI); the older code keeps its layout until phase 3
+src/contracts/generated/
+src/package.json

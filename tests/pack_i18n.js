@@ -6,6 +6,7 @@
      C. the pack itself: schema v2, translations travel with the pack, packcheck accepts it and refuses a broken translation
    Usage: node tests/pack_i18n.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -15,7 +16,7 @@ const EL = 'Φυσική (δοκιμή)', FR = 'Physique (démo)';
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage(); const E = []; page.on('pageerror', e => E.push(e.message));
   const as = async (lang, extra = {}) => {   // leave the page first: an open subject saves its settings when it unloads

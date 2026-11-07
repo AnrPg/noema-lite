@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
-"""noema-lite build tool (stdlib only).
+"""noema-lite build tool (Python stdlib + Node: `npm ci` once).
 
-  python3 tools/build.py                 # validate + build engine, every subject pack and the registry
+Every file it writes is GENERATED and never committed (.gitignore, "generated"): build before you use the repo (npm run dev does).
+
+  python3 tools/build.py                 # the TypeScript bundles (npm run build → build/), validate + build engine, every subject pack and the registry
+  python3 tools/build.py engine          # only the bundles and the engine files (engine.js/.css, langui, UI catalogs, authoring.js, the author's schemas)
   python3 tools/build.py site            # + dist/site/  (what the website serves: no PDFs, no private packs, no backups)
   python3 tools/build.py skill           # + dist/noema-pack-builder.zip  (the Claude skill users add to their own Claude)
                                          #   + dist/noema-language-builder.zip  (a whole language in one prompt, docs/LANGUAGES.md §10.2)
   python3 tools/build.py bundle [--subjects a,b] [--with-local-config]
                                          # + dist/noema-lite.html  (one self-contained file, e.g. for phone/offline)
   python3 tools/build.py --no-validate   # skip validation (faster)
+  python3 tools/build.py --no-esbuild    # keep build/ as it is (npm run dev rebuilds it in watch mode)
 """
-import os, sys, glob, json, subprocess, tempfile, shutil, re, zipfile, base64, io
+import os, sys, glob, json, subprocess, tempfile, shutil, re, zipfile, base64, io, hashlib
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
     except Exception: pass
@@ -21,6 +25,33 @@ import activities as ACTS   # interactive activities (docs/INTERACTIVE.md)
 ENGINE = os.path.join(ROOT, 'engine')
 args = sys.argv[1:]
 VALIDATE = '--no-validate' not in args
+BUILD = os.path.join(ROOT, 'build')   # the TypeScript bundles (tools/esbuild.mjs; src/composition/*.ts)
+BUILD_MANIFEST = {'entries': {}, 'hash': ''}
+
+def run_esbuild():
+    """npm run build: every bundle of src/ into build/ (tools/esbuild.mjs: the entries, their size budgets) → its manifest"""
+    global BUILD_MANIFEST
+    if '--no-esbuild' not in args:
+        if not os.path.isdir(os.path.join(ROOT, 'node_modules', 'esbuild')): sys.exit('✗ the TypeScript build needs its tools: run  npm ci  once (Node 22)')
+        r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'esbuild.mjs')], cwd=ROOT)
+        if r.returncode != 0: sys.exit('✗ npm run build (tools/esbuild.mjs) failed')
+    mp = os.path.join(BUILD, 'manifest.json')
+    if not os.path.exists(mp): sys.exit('✗ build/manifest.json is missing: run  npm run build')
+    BUILD_MANIFEST = rj(mp)
+
+def bundle_file(name):
+    """the built file of one bundle (build/<file>), or None when that entry's source is not in the tree yet"""
+    e = BUILD_MANIFEST['entries'].get(name)
+    return os.path.join(BUILD, e['file']) if e else None
+
+def bundle_text(name):
+    """a bundle's code for an inline <script> (its source-map comment dropped: the one file has no maps beside it)"""
+    return re.sub(r'\n//# sourceMappingURL=\S+\s*$', '\n', open(bundle_file(name), encoding='utf-8').read())
+
+# index.html's <script src="build/<name>.js"> of a bundle that is not built (its source is not in the tree yet) is left out of the site
+BUNDLE_TAG = re.compile(r'[ \t]*<script src="build/([\w.-]+)\.js"[^>]*></script>[^\n]*\n?')
+def drop_missing_bundles(html):
+    return BUNDLE_TAG.sub(lambda m: m.group(0) if m.group(1) in BUILD_MANIFEST['entries'] else '', html)
 
 AUTHOR_SCHEMAS = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json', 'noema.activities.v1.schema.json']
 def author_schemas_js():
@@ -288,7 +319,7 @@ def build_site(metas):
     shutil.copy(os.path.join(ROOT, 'config.js'), out)
     # the website never has a config.local.js → drop its <script> tag (avoids a 404 + MIME error in the console)
     html = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
-    html = '\n'.join(l for l in html.split('\n') if 'config.local.js' not in l)
+    html = drop_missing_bundles('\n'.join(l for l in html.split('\n') if 'config.local.js' not in l))
     stamp = build_stamp()
     html = html.replace('<script src="config.js"></script>', '<script src="config.js"></script>\n' + stamp, 1)   # ⚑ reports say which build they come from
     wt(os.path.join(out, 'index.html'), html)
@@ -308,7 +339,14 @@ def build_site(metas):
     for f in ('day.js', 'engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES, *LIB_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
     for f in ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
-    shutil.copy(os.path.join(ENGINE, 'pyodide-sw.js'), os.path.join(out, 'engine', 'pyodide-sw.js'))   # py-module@1: the service worker that keeps Python offline (its files: tools/fetch_pyodide.py after this)
+    # the TypeScript bundles (build/: npm run build) with their source maps; the connector is a function, not a page file
+    os.makedirs(os.path.join(out, 'build'))
+    for e in BUILD_MANIFEST['entries'].values():
+        if e['kind'] in ('page', 'worker'):
+            for f in (e['file'], e['map']): shutil.copy(os.path.join(BUILD, f), os.path.join(out, 'build', f))
+    # the installable app (PWA): the web manifest and its icons
+    shutil.copy(os.path.join(ROOT, 'manifest.webmanifest'), out)
+    shutil.copytree(os.path.join(ROOT, 'icons'), os.path.join(out, 'icons'))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
     shutil.copytree(os.path.join(ROOT, 'fonts'), os.path.join(out, 'fonts'), ignore=shutil.ignore_patterns('*.md', '*.json'))   # the characters' self-hosted fonts
@@ -332,8 +370,33 @@ def build_site(metas):
     build_lang_skill(os.path.join(out, 'downloads', 'noema-language-builder.zip'))
     build_mcp_function(metas, os.path.join(ROOT, 'dist', 'functions'))
     build_img_function(os.path.join(ROOT, 'dist', 'functions'))
-    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/build.json\n  Cache-Control: no-store\n/fonts/*\n  Cache-Control: public, max-age=604800\n' + PY_HEADERS)
+    wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/build/*\n  Cache-Control: public, max-age=300\n/engine/vendor/pdfjs/*.mjs\n  Content-Type: text/javascript; charset=utf-8\n/engine/vendor/pdfjs/wasm/*.wasm\n  Content-Type: application/wasm\n/library/*\n  Cache-Control: public, max-age=300\n  Access-Control-Allow-Origin: *\n/build.json\n  Cache-Control: no-store\n/fonts/*\n  Cache-Control: public, max-age=604800\n'
+       + '/sw.js\n  Cache-Control: no-cache\n  Content-Type: text/javascript; charset=utf-8\n/manifest.webmanifest\n  Content-Type: application/manifest+json; charset=utf-8\n  Cache-Control: no-cache\n' + PY_HEADERS)
+    write_service_worker(out)
     print('site →', os.path.relpath(out, ROOT))
+
+# the app shell the service worker precaches besides what index.html loads: the study engine (loaded when a subject opens),
+# the UI catalogs (any locale offline; not the test pseudo-locales), the language-course UI, the activity author's files
+# (#/author), the web manifest and its icons. Packs and data are not in it (network first, the last copy offline).
+SHELL_EXTRA = ('engine/engine.js', 'engine/i18n/*.js', 'engine/langcore.js', 'engine/langui.js', 'engine/langui.css', 'engine/schemaform.js', 'engine/activity_author*.js', 'engine/activity_author.css',
+               'build/*.js', 'manifest.webmanifest', 'icons/*.png', 'icons/*.svg', 'fonts/*.css')   # build/*.js: the page bundles and every Worker bundle (offline on first use)
+def write_service_worker(out):
+    """dist/site/sw.js: { version, shell } + the service worker bundle (src/composition/sw.ts). The version is a hash of every
+    precached file, so a deploy that changes any of them installs a new worker (and a new cache); one that changes nothing keeps it."""
+    sw = bundle_file('sw')
+    if not sw: sys.exit('✗ the site needs its service worker: src/composition/sw.ts is not in the tree')
+    html = open(os.path.join(out, 'index.html'), encoding='utf-8').read()
+    refs = {u.split('?')[0].split('#')[0] for u in re.findall(r'(?:src|href)="([^":]+)"', html)}   # local files only (no scheme)
+    refs |= {os.path.relpath(f, out).replace(os.sep, '/') for g in SHELL_EXTRA for f in glob.glob(os.path.join(out, *g.split('/')))}
+    shell = sorted(r for r in refs if not r.startswith(('library/', 'data/', '/')) and not re.search(r'/i18n/(en-XA|ar-XB)\.js$', r) and os.path.isfile(os.path.join(out, *r.split('/'))))
+    missing = sorted(r for r in refs if not r.startswith(('library/', 'data/')) and not os.path.isfile(os.path.join(out, *r.split('/'))))
+    if missing: sys.exit('✗ index.html loads files the site does not have: ' + ', '.join(missing))
+    h = hashlib.sha256()
+    for r in shell: h.update(r.encode()); h.update(open(os.path.join(out, *r.split('/')), 'rb').read())
+    cfg = {'version': h.hexdigest()[:16], 'shell': ['index.html', *shell]}
+    wt(os.path.join(out, 'sw.js'), '/* GENERATED by tools/build.py: the precache list + build/sw.js (src/composition/sw.ts) */\nself.NOEMA_SW = '
+       + json.dumps(cfg, separators=(',', ':')) + ';\n' + open(sw, encoding='utf-8').read().replace('//# sourceMappingURL=sw.js.map', ''))
+    print(f'service worker: {len(cfg["shell"])} files precached · version {cfg["version"]}')
 
 # the P6 engines of sim-spec@1 (docs/INTERACTIVE_ENGINES.md): their check code is loaded beside packcheck.js like NoemaCircuit; registered by 43_engines_p6.js
 P6_ENGINES = ('39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js')
@@ -353,11 +416,10 @@ def check_page_src():
     if miss: sys.exit('index.html must load these engine/src files itself (engine.js leaves them out): ' + ', '.join(miss))
 LIB_DOCS = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'docs', 'library', '*.md')))   # the chapters of the engine library (skill references/library/, the connector's guide part "interactive")
 LIB_TOOLS = ['enginelib.py', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'tools', 'lib_*.py')))]
-# py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the service worker's scope is /vendor/pyodide/ (its script lives in /engine/), the
+# py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the site's one service worker (/sw.js) keeps the Python files; the
 # versioned Pyodide folder and the wheels never change (immutable), the manifest is checked every time; ACAO/CORP only for a direct load
 PY_VERSION = json.load(open(os.path.join(ROOT, 'tools', 'pyodide_manifest.json'), encoding='utf-8'))['version']   # the pinned Pyodide (tools/fetch_pyodide.py)
-PY_HEADERS = ('/engine/pyodide-sw.js\n  Service-Worker-Allowed: /vendor/\n  Cache-Control: no-cache\n  Content-Type: text/javascript; charset=utf-8\n'
-              '/vendor/pyodide/manifest.json\n  Cache-Control: no-cache\n  Access-Control-Allow-Origin: *\n'
+PY_HEADERS = ('/vendor/pyodide/manifest.json\n  Cache-Control: no-cache\n  Access-Control-Allow-Origin: *\n'
               f'/vendor/pyodide/{PY_VERSION}/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n  Cross-Origin-Resource-Policy: cross-origin\n'
               f'/vendor/pyodide/{PY_VERSION}/*.wasm\n  Content-Type: application/wasm\n'
               '/vendor/pywheels/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n  Cross-Origin-Resource-Policy: cross-origin\n')
@@ -521,6 +583,10 @@ def build_bundle(metas):
     css = rd('engine/engine.css') + '\n' + rd('engine/activity_author.css')
     # every UI catalog inline (the single file works offline in any locale; pseudo-locales only for tests)
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
+    # the TypeScript core (build/app.js: window.NoemaCore) before every older script, and each Worker's code as text: the one
+    # file cannot load build/<worker>.js from file://, so the app starts a Worker from a Blob of <script id="noema-worker:<name>">
+    core_scripts = (f'<script>{esc(bundle_text("app"))}</script>\n' if bundle_file('app') else '') + ''.join(
+        f'<script type="text/plain" id="noema-worker:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'worker')
     p6_scripts = ''.join(f'<script>{esc(rd("engine/vendor/" + f))}</script>\n' for f in LIB_VENDOR) + ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (KERNEL, *P6_ENGINES, *(f for f in LIB_ENGINES if f != KERNEL)))   # the kernel first (the plugins 39–42 and the library use it; circuit-mna@1 reaches it only at run time), then the P6 engines' checks beside packcheck, like NoemaCircuit
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -532,6 +598,7 @@ def build_bundle(metas):
 <script>{esc(rd("config.js"))}</script>{local}
 <script>window.NOEMA_BUNDLE = true;</script>
 {build_stamp()}
+{core_scripts}
 <script>{esc(build_registry(reg_metas))}</script>
 {packs}<script>{esc(rd("engine/vendor/marked.umd.js"))}</script>
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
@@ -585,7 +652,9 @@ def build_bundle(metas):
 
 if __name__ == '__main__':
     if '--author-schemas' in args: sys.stdout.write(author_schemas_js()); sys.exit(0)   # (tests/activity_author.js: is the copy current?)
+    run_esbuild()
     build_engine()
+    if 'engine' in args: sys.exit(0)
     metas, failed = build_packs()
     LANG_METAS, lfailed = build_lang_courses(); failed += lfailed
     wt(os.path.join(LIB, 'registry.js'), build_registry(metas))

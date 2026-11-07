@@ -3,7 +3,7 @@
    Its UI is not Python: the app draws the controls and plots from a declarative spec and calls step with py:step {inputs} → py:out {outputs}.
    Where it runs: <iframe sandbox="allow-scripts"> (opaque origin "null") holding only OUR runner script (allowed by its hash), which
    starts a blob: Worker with Pyodide 0.27.7. The runner has NO network at all (connect-src 'none'): the app reads the pinned files
-   (sha256-checked against /vendor/pyodide/manifest.json, cached on the device by engine/pyodide-sw.js) and hands their bytes over the
+   (sha256-checked against /vendor/pyodide/manifest.json, cached on the device by the site's service worker /sw.js, src/composition/sw.ts) and hands their bytes over the
    MessagePort; inside the worker, fetch() and importScripts() are replaced by a lookup in those bytes, so Pyodide, numpy, scipy and the
    allow-listed extra wheels (micropip, our own index only) load without a request — and nothing else can be loaded: the lookup is
    emptied once Python has started, and the policy blocks every real request (fetch, XHR, WebSocket, importScripts, import()).
@@ -13,7 +13,7 @@
    Page API: window.NoemaPy = { available(), prepareOffline({include, onProgress, force}), status(), protocol, config() }. */
 (() => {
   /* i18n-ignore-start */   // code, protocol names and Python source — no UI text
-  const DEFAULTS = { base: '/vendor/pyodide/0.27.7/', manifest: '/vendor/pyodide/manifest.json', sw: '/engine/pyodide-sw.js', swScope: '/vendor/pyodide/',
+  const DEFAULTS = { base: '/vendor/pyodide/0.27.7/', manifest: '/vendor/pyodide/manifest.json', sw: '/sw.js', swScope: '/',
     loader: '/vendor/pyodide/__loader.html', stepMs: 3000, initMs: 20000, startMs: 120000, maxPython: 256 * 1024 };
   const config = () => Object.assign({}, DEFAULTS, (typeof window !== 'undefined' && window.NOEMA_CONFIG && window.NOEMA_CONFIG.py) || {});
   const CACHE = 'noema-py-v1';
@@ -55,14 +55,15 @@
   /* ---------- the files: pinned manifest, service worker, cache ---------- */
   const available = () => { try { return !!(!window.NOEMA_BUNDLE && window.isSecureContext && /^https?:$/.test(location.protocol) && 'caches' in window && window.crypto?.subtle && typeof Worker === 'function' && typeof WebAssembly === 'object'); } catch (e) { return false; } };
   let swP = null, loaderEl = null, loaderP = null, loaderNo = 0, manP = null, via = null;   // via: how the last file was read ('sw' | 'page')
-  /** the registration of engine/pyodide-sw.js with an active worker, or null (unsupported, refused, NOEMA_CONFIG.py.sw === false) */
+  /** the registration of the site's service worker (/sw.js, the same one build/pwa.js registers; it pins the files of
+      /vendor/pyodide/manifest.json) with an active worker, or null (unsupported, refused, NOEMA_CONFIG.py.sw === false) */
   function sw() {
     if (swP) return swP;
     return swP = (async () => {
       const c = config();
       if (c.sw === false || !navigator.serviceWorker) return null;
       try {
-        const reg = await navigator.serviceWorker.register(c.sw + '?manifest=' + encodeURIComponent(c.manifest), { scope: c.swScope });
+        const reg = await navigator.serviceWorker.register(c.sw, { scope: c.swScope });
         if (!reg.active) {
           const w = reg.installing || reg.waiting;
           if (w) await new Promise(res => { const t = setTimeout(res, 10000); w.addEventListener('statechange', () => { if (w.state === 'activated' || w.state === 'redundant') { clearTimeout(t); res(); } }); });

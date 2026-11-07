@@ -2,6 +2,7 @@
    Usage: node tests/e2e.js <prepared-repo-dir>
    The repo dir must contain a build with the demo-physics fixture (see tests/run_e2e.sh). */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const { start } = require('./mock_supabase');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
@@ -28,12 +29,12 @@ async function mockGemini(ctx) {
 
 (async () => {
   const browser = await chromium.launch();
-  /* ======================= A. LOCAL (file://) ======================= */
-  console.log('A. local mode (file://)');
+  /* ======================= A. LOCAL (no cloud account; over http like every page) ======================= */
+  console.log('A. local mode (no cloud account)');
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true });
   await mockGemini(ctx);
   const page = await ctx.newPage(); const E = []; errs(page, E);
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   await page.goto(url);
   // seed legacy single-file-app data, then reload
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem('dbquest_v1', JSON.stringify({ xp: 50, xpDay: { '2026-10-06': 50 }, streak: 3, lastDay: '2026-10-06', read: { 'ch01-s01': true }, res: { 'ch01-e001': { n: 1, ok: 1, last: true }, 'ch01-e002': { n: 1, ok: 0, last: false } }, pb: {}, fc: {}, boss: {}, last: 'ch01-s01', settings: { apiKey: 'LEGACYKEY', theme: 'auto', goal: 120, sound: true, chunk: true, models: [], model: '' } })); localStorage.setItem('dbquest_convos_v1', JSON.stringify([{ id: 'cv_x', created: 1, updated: 2, mode: 'socratic', ctx: null, title: 'Old Chat', msgs: [{ role: 'user', text: 'hi' }, { role: 'model', text: 'hello' }] }])); });

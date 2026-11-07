@@ -9,6 +9,7 @@
    packs in Greek, Russian, Arabic, German and French (tests/fixtures/bridges), each into the other five languages.
    Usage: node tests/bridge.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -94,7 +95,7 @@ function unit() {
 }
 
 /* ---------- 2. in the browser ---------- */
-const URL = 'file://' + path.join(ROOT, 'index.html');
+let URL = '';   // the app over http (set before the browser part)
 async function open(b, { w = 1100, h = 900, settings = {}, sid = 'ch01-s05' } = {}) {
   const page = await (await b.newContext({ viewport: { width: w, height: h } })).newPage();
   page._errors = []; page.on('pageerror', e => page._errors.push(e.message));
@@ -113,6 +114,7 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
 
 (async () => {
   unit();
+  URL = await appUrl(ROOT);
   const b = await chromium.launch();
   try {
     console.log('— the first time: the native language, then the level');

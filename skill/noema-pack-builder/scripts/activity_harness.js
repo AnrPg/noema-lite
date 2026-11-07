@@ -94,7 +94,10 @@ const LIBV = !LIB.length ? [] : ['noema-geodesic.js', 'noema-land-110m.js'].map(
 const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
-const PYSW = [PYSITE && path.join(PYSITE, 'engine', 'pyodide-sw.js'), path.join(srcDir, '..', 'pyodide-sw.js'), path.join(srcDir, 'pyodide-sw.js')].find(f => f && fs.existsSync(f));
+// the site's service worker (it keeps the Python files): the built site's /sw.js or the repository's build/sw.js (npm run build); served
+// with an empty app shell, so here it handles only the Python files
+const PYSW = [PYSITE && path.join(PYSITE, 'sw.js'), path.join(srcDir, '..', '..', 'build', 'sw.js')].find(f => f && fs.existsSync(f));
+const pySw = () => 'self.NOEMA_SW = {"version":"harness","shell":[]};\n' + fs.readFileSync(PYSW, 'utf8').replace(/^self\.NOEMA_SW = .*;$/m, '');
 const PYOK = SIMOK && has('37_activity_py.js') && has('37_activity_py_ui.js') && !!PYSITE && !!PYSW;
 const NEEDHTTP = PYOK && items.some(a => a.runtime === 'py-module@1');
 // h5p@1: the runtime and the app's own H5P player (skill zip: activity_host/h5p/player.js; repository: engine/vendor/h5p/<version>/player.js)
@@ -150,7 +153,7 @@ window.run = function (act, init, modules) {
       const u = decodeURIComponent(new URL(q.url, 'http://x').pathname);
       const send = (code, type, body, extra) => { r.writeHead(code, { 'content-type': type, ...(extra || {}) }); r.end(body); };
       if (u === '/host.html') return send(200, 'text/html; charset=utf-8', HOST);
-      if (u === '/engine/pyodide-sw.js') return send(200, 'text/javascript', fs.readFileSync(PYSW), { 'service-worker-allowed': '/vendor/', 'cache-control': 'no-cache' });
+      if (u === '/sw.js') return send(200, 'text/javascript', pySw(), { 'cache-control': 'no-cache' });
       if (u.startsWith('/vendor/') && !u.includes('..')) { const f = path.join(PYSITE, u); if (fs.existsSync(f) && fs.statSync(f).isFile()) return send(200, TYPES[path.extname(f)] || 'application/octet-stream', fs.readFileSync(f), { 'access-control-allow-origin': '*', 'cross-origin-resource-policy': 'cross-origin' }); }
       send(404, 'text/plain', 'not found');
     });

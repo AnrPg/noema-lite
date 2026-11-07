@@ -14,6 +14,7 @@
    the one-file bundle (act-bundle-inline.html / act-bundle-big.html, built by run_e2e.sh) plays it inline or shows the fallback.
    Usage: node tests/activities_app.js <prepared-repo-dir> <pack.json from tests/activities_pack.py (NOEMA_ACT_PACK)>   (BROWSERS=chromium,firefox,webkit) */
 const pw = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const PACK = JSON.parse(require('fs').readFileSync(process.argv[3], 'utf8')); PACK.subject = { ...PACK.subject, id: 'demo-activities', title: 'Demo Activities' };
@@ -39,14 +40,17 @@ const fs = require('fs');
 const PQ_ZIP = fs.existsSync(process.argv[3] + '.noema.zip') ? fs.readFileSync(process.argv[3] + '.noema.zip') : null;
 const PQ_FILE = PQ_ZIP && zipEntry(PQ_ZIP, 'activities/planets-quiz/item.h5p');
 const PQ_EL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'tools', 'activities_examples', 'planets-quiz', 'content.el.json'), 'utf8'));
+/** this part tests the app without Python (python() below tests py-module@1 with the pinned files): the runtime switched off
+    (NOEMA_CONFIG.activities['py-module@1'] = false), whatever config.js says */
+const p0flags = ctx => ctx.addInitScript(() => { let c; Object.defineProperty(window, 'NOEMA_CONFIG', { configurable: true, get: () => c, set: v => { c = v; if (v && typeof v === 'object') v.activities = Object.assign({}, v.activities, { 'py-module@1': false }); } }); });
 async function run(name) {
   // Chromium: the full browser (docs/adr/001 §2), not the headless shell. Its sandboxed srcdoc frames get their own process, and
-  // Playwright then cannot attach to the mini-app frame nested in the wrapper (on a file:// page); IsolateSandboxedIframes off keeps
+  // Playwright then cannot attach to the mini-app frame nested in the wrapper; IsolateSandboxedIframes off keeps
   // them in reach (the loop guard, not the process model, is what stops a runaway: Firefox and WebKit have no such process either).
   const browser = await pw[name].launch(name === 'chromium' && process.env.PW_CHANNEL !== '' ? { channel: process.env.PW_CHANNEL || 'chromium', args: ['--disable-features=IsolateSandboxedIframes'] } : {});
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(10000);
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await p0flags(ctx); const p = await ctx.newPage(); p.setDefaultTimeout(10000);
   const E = []; p.on('pageerror', e => { if (!/^noema: this activity ran too long/.test(e.message)) E.push(e.message); });   // (the loop guard's own stop, thrown inside the frame on purpose)
-  await p.goto('file://' + ROOT + '/index.html'); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
+  await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.evaluate(async pk => { await Noema.importPack(Noema.account.id, pk); }, PACK);
   if (PQ_FILE) {   // h5p@1: as Import does with a .noema.zip, the .h5p file is kept on this device beside the pack (checked by size and sha256)
     const at = await p.evaluate(async ([pk, b64]) => { const u = Uint8Array.from(atob(b64), c => c.charCodeAt(0)), acc = Noema.account.id;
@@ -88,9 +92,9 @@ async function run(name) {
     ok(r.quota === W, `this device cannot keep the .h5p (storage full): the checked download is still played (${r.quota} of ${W} bytes)`);
     ok(JSON.stringify(r.share) === JSON.stringify([['act:planets-quiz', W, true]]) && r.recv.res.attached === 1 && !r.recv.res.failed.length && r.recv.size === W, `shared: the .h5p goes with the subject and the recipient keeps it ${JSON.stringify({ share: r.share, recv: r.recv })}`);
   }
-  await p.goto('file://' + ROOT + '/index.html?subject=demo-activities'); await wait(1500);
+  await p.goto((await appUrl(ROOT)) + '?subject=demo-activities'); await wait(1500);
   ok(await p.evaluate(() => SUBJ.id === 'demo-activities' && !!ACT.ITEMS['alias-lab']), 'the pack opens with its activity');
-  ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: this app has everything the pack needs but Python (Python never runs on file://)');
+  ok(await p.evaluate(() => JSON.stringify(checkRequires()) === '["runtime:py-module@1"]'), 'pack.requires: with Python switched off, this app has everything the pack needs but Python');
 
   console.log('— the theory block');
   await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
@@ -782,7 +786,7 @@ async function p6engines(p, ctx, E) {
    files (tools/fetch_pyodide.py) and the site's own _headers. The runtime is on by default; the test also forces the flag on, whatever config.js says.
    Checks: the first-use note (sizes from the manifest), the Python sim renders in the sim-spec view, a slider changes Python's outputs,
    the checks grader grades Python's outputs right and wrong, Settings › "Prepare Python for offline" → ready offline (classic and shell),
-   offline after prepare (/vendor aborted) it still runs, the Greek words, the one-file bundle and file:// show the fallback. */
+   offline after prepare (/vendor aborted) it still runs, the Greek words, the one-file bundle (over http and from disk) shows the fallback. */
 async function python(name) {
   const fs = require('fs'), cp = require('child_process');
   const SITE = path.join(ROOT, 'dist', 'site'), BUNDLE = path.join(ROOT, 'dist', 'noema-lite.html');
@@ -813,7 +817,7 @@ async function python(name) {
   await new Promise(r => srv.listen(0, '127.0.0.1', r)); const URL0 = `http://127.0.0.1:${srv.address().port}`;
   const man = JSON.parse(fs.readFileSync(path.join(SITE, 'vendor', 'pyodide', 'manifest.json'), 'utf8'));
   const browser = await pw[name].launch(name === 'chromium' && process.env.PW_CHANNEL !== '' ? { channel: process.env.PW_CHANNEL || 'chromium' } : {});
-  // the runtime switched on (NOEMA_CONFIG.activities['py-module@1'] = true), whatever config.js says — the same for the site, the bundle and file://
+  // the runtime switched on (NOEMA_CONFIG.activities['py-module@1'] = true), whatever config.js says — the same for the site and the bundle
   const flagOn = () => { let c; Object.defineProperty(window, 'NOEMA_CONFIG', { configurable: true, get: () => c, set: v => { c = v; if (v && typeof v === 'object') v.activities = Object.assign({}, v.activities, { 'py-module@1': true }); } }); };
   const E = [];
   const page = async (ctx, url, newUI) => {
@@ -906,7 +910,7 @@ async function python(name) {
     ok(await until(() => p.evaluate(() => window.__pyLines.some(x => /κατεβάζει περίπου \d+\s*MB μία φορά/.test(x))), 15000), 'the first-use note in Greek ' + await p.evaluate(() => window.__pyLines.join(' | ')));
     await ctx3.close(); await ctx.close();
 
-    console.log('— py-module@1: where Python cannot run (the one-file bundle, file://)');
+    console.log('— py-module@1: where Python cannot run (the one-file bundle, over http and from disk)');
     const fbOf = q => q.evaluate(s => { const r = document.querySelector(s); return r ? { sim: !!r.querySelector('.sim'), fb: !!r.querySelector('.act-fallback img'), note: r.querySelector('.act-note')?.textContent || '', text: r.querySelector('.act-fbtext')?.textContent || '' } : null; }, SEL);
     if (fs.existsSync(BUNDLE)) {
       const c4 = await browser.newContext(); await c4.addInitScript(flagOn); const V4 = [];   // this context's own /vendor requests (the server's list may still get late ones of the pages closed before)
@@ -917,11 +921,13 @@ async function python(name) {
       ok(bu.bundle && !bu.py && f && !f.sim && f.fb && /works only on the website/.test(f.note) && !V4.length, `the one-file bundle (even over http): the fallback, "works only on the website", no /vendor request ${JSON.stringify({ ...bu, vendor: V4.slice(0, 4), ...f, text: undefined })}`);
       await c4.close();
     } else console.log('  (no dist/noema-lite.html: python3 tools/build.py bundle)');
-    const c5 = await browser.newContext(); await c5.addInitScript(flagOn);
-    const fp = await page(c5, 'file://' + ROOT + '/index.html'); await openBlock(fp); await wait(800);
-    const f5 = await fbOf(fp);
-    ok(f5 && !f5.sim && f5.fb && /works only on the website/.test(f5.note) && /moving-average|8 kHz|1 kHz/i.test(f5.text + ' ' + (await fp.evaluate(s => document.querySelector(s + ' img')?.alt || '', SEL))), `file://: the fallback picture and text, "works only on the website" ${JSON.stringify(f5)}`);
-    await c5.close();
+    if (fs.existsSync(BUNDLE)) {   // the one file as it is used: opened from disk
+      const c5 = await browser.newContext(); await c5.addInitScript(flagOn);
+      const fp = await page(c5, 'file://' + BUNDLE); await openBlock(fp); await wait(800);
+      const f5 = await fbOf(fp);
+      ok(f5 && !f5.sim && f5.fb && /works only on the website/.test(f5.note) && /moving-average|8 kHz|1 kHz/i.test(f5.text + ' ' + (await fp.evaluate(s => document.querySelector(s + ' img')?.alt || '', SEL))), `the one-file bundle from disk (file://): the fallback picture and text, "works only on the website" ${JSON.stringify(f5)}`);
+      await c5.close();
+    }
     ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   } finally { await browser.close(); srv.close(); }
 }

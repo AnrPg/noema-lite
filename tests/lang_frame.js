@@ -8,6 +8,7 @@
      G. phone 390 px and desktop 1280 px: no horizontal scrolling, the rail; shell: false keeps the full-page course
    Usage: node tests/lang_frame.js <prepared-repo-dir>   (built with tools/build.py) */
 const { chromium } = require(process.env.PW || 'playwright');
+const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
 const path = require('path'), fs = require('fs');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -25,7 +26,7 @@ const noHScroll = page => page.evaluate(() => document.scrollingElement.scrollWi
 
 (async () => {
   const browser = await chromium.launch();
-  const url = 'file://' + ROOT + '/index.html';
+  const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   await ctx.route(/fonts\.(googleapis|gstatic)\.com/, r => r.fulfill({ status: 200, body: '' }));
   const page = await ctx.newPage(); const E = []; errs(page, E);
