@@ -213,13 +213,16 @@ const kvRows = async (token, like) => (await sb(`/rest/v1/noema_kv?select=key,va
 const kvPut = (token, uid, key, value) => sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(value), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 /** Change one KV value only if nobody changed it since we read it (PATCH … updated_at=eq.<what we read>, as engine/cloud.js
  *  pushes), retried on a clash. fn(value) returns the new value, or null/undefined to leave it. → true once written. */
+/** a version stamp never equal to the one it replaces (= engine/cloud.js isoAfter): two writers in the same millisecond
+ *  can never both pass the compare-and-swap */
+const isoAfter = prev => new Date(Math.max(Date.now(), (Date.parse(prev || '') || 0) + 1)).toISOString();
 async function kvUpdate(token, uid, key, fn) {
   for (let i = 0; i < 5; i++) {
     const row = (await sb(`/rest/v1/noema_kv?select=value,updated_at&key=eq.${encodeURIComponent(key)}`, token))?.[0]; if (!row) return false;
     let v; try { v = JSON.parse(row.value); } catch (e) { return false; }
     const nv = fn(v); if (nv == null) return false;
     const got = await sb(`/rest/v1/noema_kv?user_id=eq.${uid}&key=eq.${encodeURIComponent(key)}&updated_at=eq.${encodeURIComponent(row.updated_at)}`, token,
-      { method: 'PATCH', body: { value: JSON.stringify(nv), updated_at: new Date().toISOString() }, headers: { Prefer: 'return=representation' } });
+      { method: 'PATCH', body: { value: JSON.stringify(nv), updated_at: isoAfter(row.updated_at) }, headers: { Prefer: 'return=representation' } });
     if (Array.isArray(got) && got.length) return true;
     await new Promise(r => setTimeout(r, 150 + Math.random() * 350));
   }

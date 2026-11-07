@@ -1775,7 +1775,12 @@
   let storageFullAt = 0;
   addEventListener('noema:storagefull', () => {
     if (Date.now() - storageFullAt < 60e3) return; storageFullAt = Date.now();
-    toastL('⚠️ ' + tr('loader.storage.full'), 12000);
+    const text = tr('loader.storage.full');
+    toastL('⚠️ ' + text, 12000);
+    // screen readers hear it at once: an assertive live region of its own (the toasts are not live regions), with or without a subject open
+    let live = document.getElementById('noema-alert');
+    if (!live) { live = el('div', { id: 'noema-alert', role: 'alert', 'aria-live': 'assertive', style: { position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' } }); document.body.append(live); }
+    live.textContent = ''; setTimeout(() => { live.textContent = text; }, 50);   // emptied first, so the same warning is announced again
   });
 
   /* ---------------- boot ---------------- */

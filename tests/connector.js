@@ -149,6 +149,14 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const parC = await Promise.all(natsC.map(n => tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, native: n }) })));
   const bixC = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}')['tiny-inline'] || {};
   ok(parC.every(r => !r.isError) && natsC.every(n => bixC[n]?.entries === 1) && bixC.ru?.entries === 1 && bixC.el?.status === 'reviewed', 'save_bridge: 5 saves at the same time all keep their entry in a:bridges (compare-and-swap)');
+  { // the same again with the clock standing still: every write in the same millisecond (a version stamp must still change)
+    const RealDate = Date, FIXED = RealDate.now();
+    globalThis.Date = class extends RealDate { constructor(...a) { super(...(a.length ? a : [FIXED])); } static now() { return FIXED; } };
+    const natsF = ['ja', 'hi', 'tr', 'sq'];
+    let parF; try { parF = await Promise.all(natsF.map(n => tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, native: n }) }))); } finally { globalThis.Date = RealDate; }
+    const bixF = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}')['tiny-inline'] || {};
+    ok(parF.every(r => !r.isError) && [...natsF, ...natsC].every(n => bixF[n]?.entries === 1), 'save_bridge: 4 saves in the same millisecond all keep their entry (the version stamp always moves on)');
+  }
   srv.state.kv[uid]['a:bridgeReports'] = { value: JSON.stringify([{ pack: 'tiny-inline', native: 'ru', k: 'energy', sense: '1', form: 'energy', sid: sid0, note: 'better: энергия (физ.)' }]), updated_at: new Date().toISOString() };
   const bg = (await tool('noema_bridge_guide', { subject_id: 'tiny-inline' })).content[0].text;
   ok(/tiny-inline → ru: 1 words/.test(bg) && /энергия \(физ\.\)/.test(bg), 'bridge_guide lists the account\'s bridges and the mistakes learners reported');
