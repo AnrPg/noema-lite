@@ -2286,6 +2286,444 @@
 "election": "f"
 }
 ]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"games": [
+{
+"id": "vs",
+"rows": [
+"T",
+"M",
+"Bo"
+],
+"cols": [
+"l",
+"r"
+],
+"pay": [
+[
+[
+3,
+3
+],
+[
+3,
+2
+]
+],
+[
+[
+2,
+2
+],
+[
+5,
+6
+]
+],
+[
+[
+0,
+3
+],
+[
+6,
+1
+]
+]
+]
+},
+{
+"id": "bos",
+"preset": "bos"
+}
+]
+},
+"outputs": [
+{
+"id": "n",
+"kind": "scalar",
+"of": "equilibria",
+"game": "vs"
+},
+{
+"id": "p",
+"kind": "scalar",
+"of": "eqProb",
+"game": "vs",
+"eq": 2,
+"player": 1,
+"strategy": 2
+},
+{
+"id": "l",
+"kind": "scalar",
+"of": "eqPayoff",
+"game": "vs",
+"solver": "lemke",
+"label": "k * 2",
+"player": 2
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "equilibria",
+"game": "bos"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"elections": [
+{
+"id": "e",
+"candidates": [
+"a",
+"b",
+"c"
+],
+"ballots": [
+{
+"n": 1,
+"rank": [
+"a",
+"b",
+"c"
+]
+},
+{
+"n": 1,
+"rank": [
+"b",
+"c",
+"a"
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "c",
+"kind": "scalar",
+"of": "mixedVoteCount",
+"election": "e",
+"method": "antiplurality",
+"util": "top"
+},
+{
+"id": "w",
+"kind": "scalar",
+"of": "mixedWinProb",
+"election": "e",
+"candidate": "b"
+},
+{
+"id": "v",
+"kind": "scalar",
+"of": "mixedVoteProb",
+"election": "e",
+"group": 1,
+"candidate": "c"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"poisson": [
+{
+"id": "mw",
+"n": 1000,
+"candidates": [
+"A",
+"B",
+"C"
+],
+"types": [
+{
+"id": "t1",
+"r": 0.3,
+"u": [
+1,
+0.9,
+0
+],
+"vote": "A"
+},
+{
+"id": "t2",
+"r": 0.3,
+"u": [
+0.9,
+1,
+0
+],
+"vote": "B"
+},
+{
+"id": "t3",
+"r": "k / 2.25",
+"u": [
+0,
+0,
+1
+],
+"vote": "C"
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "t",
+"kind": "scalar",
+"of": "expectedVotes",
+"poisson": "mw",
+"candidate": "C"
+},
+{
+"id": "q",
+"kind": "scalar",
+"of": "pivotProb",
+"poisson": "mw",
+"a": "A",
+"b": "C"
+},
+{
+"id": "m",
+"kind": "scalar",
+"of": "pivotMagnitude",
+"poisson": "mw",
+"a": "A",
+"b": "B"
+},
+{
+"id": "g",
+"kind": "scalar",
+"of": "voteGain",
+"poisson": "mw",
+"type": "t1",
+"candidate": "A"
+},
+{
+"id": "bv",
+"kind": "scalar",
+"of": "bestVote",
+"poisson": "mw",
+"type": "t2"
+},
+{
+"id": "e",
+"kind": "scalar",
+"of": "poissonEquilibrium",
+"poisson": "mw"
+},
+{
+"id": "pw",
+"kind": "scalar",
+"of": "poissonWinProb",
+"poisson": "mw",
+"candidate": "C"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"poisson": [
+{
+"id": "mw",
+"n": 100,
+"candidates": [
+"A",
+"B",
+"A"
+],
+"types": [
+{
+"id": "t",
+"r": 1,
+"u": [
+1,
+0
+],
+"vote": "D"
+},
+{
+"id": "t",
+"r": 0.5,
+"u": [
+0,
+1,
+0
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "x",
+"kind": "scalar",
+"of": "pivotProb",
+"poisson": "mw",
+"a": "A",
+"b": "Z"
+},
+{
+"id": "y",
+"kind": "scalar",
+"of": "bestVote",
+"poisson": "nope",
+"type": "t"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"games": [
+{
+"id": "vs",
+"rows": [
+"T",
+"M",
+"Bo"
+],
+"cols": [
+"l",
+"r"
+],
+"pay": [
+[
+[
+3,
+3
+],
+[
+3,
+2
+]
+],
+[
+[
+2,
+2
+],
+[
+5,
+6
+]
+],
+[
+[
+0,
+3
+],
+[
+6,
+1
+]
+]
+]
+},
+{
+"id": "bos",
+"preset": "bos"
+}
+]
+},
+"outputs": [
+{
+"id": "x",
+"kind": "scalar",
+"of": "eqProb",
+"game": "vs",
+"solver": "simplex",
+"player": 3
+},
+{
+"id": "y",
+"kind": "scalar",
+"of": "mixedWinProb",
+"election": "e",
+"method": "borda",
+"candidate": "z"
+},
+{
+"id": "z",
+"kind": "scalar",
+"of": "equilibria",
+"game": "zz"
+}
+]
 }
 ]
 }

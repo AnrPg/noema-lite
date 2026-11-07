@@ -1055,7 +1055,10 @@
   const bestOf = gs => { const mx = Math.max(...gs), tol = 1e-9 * Math.max(...gs.map(Math.abs)); return { mx, tol, zero: gs.every(v => v === 0) }; };
   function poissonIsEq(g, votes, flag) {
     const ctx = poissonCtx(poissonTau(g, votes));
-    return g.types.every((t, i) => { const gs = voteGains(ctx, t.u), v = votes[i], b = bestOf(gs); if (b.zero && flag) flag('underflow'); return v >= 0 && gs[v] >= b.mx - b.tol; });
+    let under = false;
+    const ok = g.types.every((t, i) => { const gs = voteGains(ctx, t.u), v = votes[i], b = bestOf(gs); if (b.zero) under = true; return v >= 0 && (b.zero || gs[v] >= b.mx - b.tol); });
+    if (ok && under) { if (flag) flag('underflow'); return NaN; }   // a type whose every pivot is below 10⁻³⁰⁸: not certified
+    return +ok;
   }
 
   function prepare(spec) { const cache = new Map(); for (const [src] of exprs(spec)) if (!cache.has(src)) cache.set(src, C.cx(src)); return { cache }; }
@@ -1332,9 +1335,9 @@
           const g = pgOk(o.poisson); if (!g) return NaN; const t = g.types.find(x => x.id === o.type); if (!t) { flag('missing'); return NaN; }
           const gs = voteGains(ctxOf(g), t.u);
           if (o.of === 'voteGain') { const c = g.ids.indexOf(o.candidate); if (c < 0) { flag('missing'); return NaN; } return gs[c]; }
-          const q = bestOf(gs); if (q.zero) flag('underflow'); const b = gs.findIndex(v => v >= q.mx - q.tol); if (gs.filter(v => v >= q.mx - q.tol).length > 1) flag('tie'); return b;
+          const q = bestOf(gs); if (q.zero) { flag('underflow'); return NaN; } const b = gs.findIndex(v => v >= q.mx - q.tol); if (gs.filter(v => v >= q.mx - q.tol).length > 1) flag('tie'); return b;
         }
-        case 'poissonEquilibrium': { const g = pgOk(o.poisson); if (!g) return NaN; if (g.types.some(t => t.vote < 0)) { flag('missing'); return NaN; } return +poissonIsEq(g, g.types.map(t => t.vote), flag); }
+        case 'poissonEquilibrium': { const g = pgOk(o.poisson); if (!g) return NaN; if (g.types.some(t => t.vote < 0)) { flag('missing'); return NaN; } return poissonIsEq(g, g.types.map(t => t.vote), flag); }
         // ----- infinite ethics -----
         case 'overtaking': case 'catchingUp': { const P = pairOf(o); if (!P || !P.q) return NaN; return o.of === 'overtaking' ? overtake(P.q, flag) : catchUp(P.q, flag); }
         case 'truncCompare': { const a = stOk(o.a), b = stOk(o.b), Tn = Math.floor(X(o.T)); if (!a || !b) return NaN; if (!(Tn >= 1 && Tn <= 1e6)) { flag('range'); return NaN; } let s = 0; for (let t = 0; t < Tn; t++) s += streamAt(a, t) - streamAt(b, t); return Math.sign(s); }

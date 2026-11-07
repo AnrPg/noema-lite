@@ -85,7 +85,42 @@
     return x < (a + 1) / (a + b + 2) ? bt * betacf(a, b, x) / a : 1 - bt * betacf(b, a, 1 - x) / b;
   }
   // the standard normal: Φ by erfc (W. J. Cody 1969 rational approximations via the complementary gamma), Φ⁻¹ by Wichura 1988 AS241
-  function normCdf(z) { if (!fin(z)) return z > 0 ? 1 : z < 0 ? 0 : NaN; const p = 0.5 * (1 - gammaP(0.5, z * z / 2)); return z >= 0 ? 1 - p : p; }
+  function normCdf(z) { if (!fin(z)) return z > 0 ? 1 : z < 0 ? 0 : NaN; const p = 0.5 * gammaQ(0.5, z * z / 2); return z >= 0 ? 1 - p : p; }   // the tail from Q: no cancellation
+  /* ---- upper tails without cancellation ----
+     gammaQ(a, x) = Γ(a, x)/Γ(a): the continued fraction (modified Lentz) for x ≥ a + 1, else 1 − the series of P (then P ≤ ~½, so
+     1 − P loses nothing); the prefactor x^a e^−x / Γ(a) in logarithms (NR 3rd ed. §6.2; DiDonato & Morris 1986, ACM TOMS 12:4 — their
+     split, without the Temme expansion, whose accuracy the series and fraction reach here with enough terms: ≤ 20 000 for a ≤ 10⁸) */
+  function gammaQ(a, x) {
+    if (!(a > 0) || !(x >= 0)) return NaN; if (x === 0) return 1; if (x === Infinity) return 0;
+    const lpre = -x + a * log(x) - lgamma(a), cap = 20000;
+    if (x < a + 1) { let ap = a, sum = 1 / a, del = sum; for (let n = 0; n < cap; n++) { ap++; del *= x / ap; sum += del; if (abs(del) < abs(sum) * 1e-17) break; } return max(0, 1 - min(1, sum * exp(lpre))); }
+    let b = x + 1 - a, c = 1e300, d = 1 / b, h = d;
+    for (let i = 1; i < cap; i++) { const an = -i * (i - a); b += 2; d = an * d + b; if (abs(d) < 1e-300) d = 1e-300; c = b + an / c; if (abs(c) < 1e-300) c = 1e-300; d = 1 / d; const del = d * c; h *= del; if (abs(del - 1) < 1e-16) break; }
+    return min(1, exp(lpre) * h);
+  }
+  /** erfc(x) = Q(½, x²) for x ≥ 0 (accurate to the underflow at x ≈ 26.5), 2 − erfc(−x) below; erf = 1 − erfc near 0 by the series of P */
+  function erfc(x) { if (Number.isNaN(x)) return NaN; return x >= 0 ? gammaQ(0.5, x * x) : 2 - gammaQ(0.5, x * x); }
+  function erf(x) { if (Number.isNaN(x)) return NaN; const p = abs(x) < 1 ? gammaP(0.5, x * x) : 1 - gammaQ(0.5, x * x); return x < 0 ? -p : p; }
+  /** erfcInv(p), 0 < p < 2: x = −Φ⁻¹(p/2)/√2 by AS241 (relative accuracy in the tail), then two Newton steps on erfc */
+  function erfcInv(p) {
+    if (!(p > 0 && p < 2)) return p === 0 ? Infinity : p === 2 ? -Infinity : NaN;
+    let x = -normInv(p / 2) / Math.SQRT2;
+    for (let i = 0; i < 2; i++) { const e = erfc(x) - p, dd = -2 / sqrt(PI) * exp(-x * x); if (!(dd !== 0) || !fin(e)) break; const nx = x - e / dd; if (!fin(nx)) break; x = nx; }
+    return x;
+  }
+  function erfInv(p) { return p > -1 && p < 1 ? erfcInv(1 - p) : p === 1 ? Infinity : p === -1 ? -Infinity : NaN; }   // accurate for |p| not near 1; there use erfcInv
+  /** the complement 1 − I_x(a, b) = I_{1−x}(b, a) from the same continued fraction (no subtraction where the tail is small) */
+  function betaQ(a, b, x) {
+    if (!(a > 0 && b > 0) || !(x >= 0 && x <= 1)) return NaN; if (x === 0) return 1; if (x === 1) return 0;
+    const bt = exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * log(x) + b * log(1 - x));
+    return x < (a + 1) / (a + b + 2) ? 1 - bt * betacf(a, b, x) / a : bt * betacf(b, a, 1 - x) / b;
+  }
+  /** survival functions: normSf(z) = 1 − Φ(z), tSf(x, df), chi2Sf(x, k), fSf(x, d1, d2) — each from the tail itself */
+  function normSf(z) { return normCdf(-z); }
+  function tSf(x, df) { if (!(df > 0) || Number.isNaN(x)) return NaN; if (!fin(x)) return x > 0 ? 0 : 1; const p = 0.5 * betaI(df / 2, 0.5, df / (df + x * x)); return x >= 0 ? p : 1 - p; }
+  function chi2Sf(x, k) { if (!(k > 0)) return NaN; return x <= 0 ? 1 : gammaQ(k / 2, x / 2); }
+  function fSf(x, d1, d2) { if (!(d1 > 0 && d2 > 0) || Number.isNaN(x)) return NaN; if (x <= 0) return 1; if (x === Infinity) return 0; return betaI(d2 / 2, d1 / 2, d2 / (d2 + d1 * x)); }
+  function fCdf(x, d1, d2) { if (!(d1 > 0 && d2 > 0) || Number.isNaN(x)) return NaN; if (x <= 0) return 0; if (x === Infinity) return 1; return betaQ(d2 / 2, d1 / 2, d2 / (d2 + d1 * x)); }
   function normInv(p) {   // Wichura 1988, Applied Statistics 37, algorithm AS 241 (PPND16, about 16 digits)
     if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
     const q = p - 0.5;
@@ -182,6 +217,29 @@
     streamCache.set(key, s); return s;
   }
   const P2_32 = 4294967296;
+  /* ---- a counter-based generator: Philox4x32-10 (Salmon, Moraes, Dror & Shaw 2011, "Parallel random numbers: as easy as 1, 2, 3",
+     SC'11; the Random123 library). The output is a pure function of (counter, key): sample i of a stream at any time costs O(1),
+     with no state to carry — for noise sources sampled at arbitrary instants and for reproducible parallel draws. The known-answer
+     vectors of Random123's kat_vectors are checked by the test ---- */
+  const mulhi32 = (a, b) => { const a0 = a & 0xffff, a1 = a >>> 16, b0 = b & 0xffff, b1 = b >>> 16, lo = a0 * b0, m1 = a1 * b0 + (lo >>> 16), m2 = a0 * b1 + (m1 & 0xffff); return (a1 * b1 + (m1 >>> 16) + (m2 >>> 16)) >>> 0; };
+  /** philox(counter [c0..c3], key [k0, k1]) → [4 uint32] */
+  function philox(ctr, key) {
+    let c0 = ctr[0] >>> 0, c1 = ctr[1] >>> 0, c2 = ctr[2] >>> 0, c3 = ctr[3] >>> 0, k0 = key[0] >>> 0, k1 = key[1] >>> 0;
+    for (let r = 0; r < 10; r++) {
+      if (r) { k0 = (k0 + 0x9E3779B9) >>> 0; k1 = (k1 + 0xBB67AE85) >>> 0; }
+      const hi0 = mulhi32(0xD2511F53, c0), lo0 = Math.imul(0xD2511F53, c0) >>> 0, hi1 = mulhi32(0xCD9E8D57, c2), lo1 = Math.imul(0xCD9E8D57, c2) >>> 0;
+      c0 = (hi1 ^ c1 ^ k0) >>> 0; c1 = lo1; c2 = (hi0 ^ c3 ^ k1) >>> 0; c3 = lo0;
+    }
+    return [c0, c1, c2, c3];
+  }
+  /** counterStream(seed, name, {antithetic}) → {u(i, j = 0) uniform in (0, 1) (53 bits from words 2j, 2j+1 of block i; j ∈ {0, 1}),
+      normal(i, j, μ, σ) by inversion, exp(i, j, rate), block(i) → 4 uint32}: key = (seed, fnv(name)), counter = (i mod 2³², ⌊i/2³²⌋, 0, 0) */
+  function counterStream(seed, name, opts) {
+    const key = [seed >>> 0, fnv(String(name == null ? '' : name))], anti = !!(opts && opts.antithetic);
+    const block = i => philox([i >>> 0, floor(i / 4294967296) >>> 0, 0, 0], key);
+    const u = (i, j) => { const b = block(i), o = (j | 0) === 1 ? 2 : 0, v = ((b[o] >>> 5) * 67108864 + (b[o + 1] >>> 6) + 0.5) / 9007199254740992; return anti ? 1 - v : v; };
+    return { block, u, normal: (i, j, m, sd) => (m || 0) + (sd == null ? 1 : sd) * normInv(u(i, j)), exp: (i, j, rate) => -log(u(i, j)) / (rate > 0 ? rate : 1), key: key.slice() };
+  }
   /** stream(seed, name, {antithetic, sub}) → r: r() a uniform in (0, 1) (never 0 or 1), and the variates below. r.sub(i) → the i-th
       substream of the same stream (replication i); the same seed and name give the same numbers everywhere */
   function stream(seed, name, opts) {
@@ -1563,13 +1621,13 @@
   root.NoemaSimKit = Object.freeze({
     version: 1, MAX_STEPS, MAX_EVENTS, MAX_LOG, DISTS: Object.freeze(DISTS.slice()), METHODS: Object.freeze(METHODS.slice()), TIME_UNITS: Object.freeze(TIME_UNITS.slice()),
     // randomness
-    stream, subseed, dist, jumps, M1, M2,
+    stream, subseed, philox, counterStream, dist, jumps, M1, M2,
     // events
     calendar, sim, codes, budget,
     // continuous time and roots
     integrate, locate, brent,
     // special functions
-    lgamma, gammaP, betaI, normCdf, normInv, tCdf, tq,
+    lgamma, gammaP, gammaQ, betaI, betaQ, normCdf, normSf, normInv, erf, erfc, erfInv, erfcInv, tCdf, tSf, chi2Sf, fCdf, fSf, tq,
     // output analysis
     welford, ksum, timeAvg, ci, acf, batchMeans, mser5, replicate, littleCheck,
     // sweeps and sensitivity

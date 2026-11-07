@@ -481,6 +481,68 @@
     if (K) { const g0 = g(0), g1 = g(pA); if (!(g0 < 0)) return 0; if (!(g1 > 0)) return pA; const r = K.brent(g, 0, pA, 1e-10, g0, g1); if (fin(r)) return r; }
     let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (g(mid) < 0) lo = mid; else hi = mid; } return (lo + hi) / 2;
   }
+  /* ---------- the virtual patient's physiology, one core for run() and the stepper ----------
+     State y = [V, RBC, B, Lac, HR, sv]; the derivatives at (t, y) from the actions in force; a grid of 0.1 min. The kernel
+     (NoemaSimKit.integrate, method euler) steps between breaks at the grid times; at each break the model's projections (V ≥ 0.3·Vn,
+     RBC ≥ 0, 0 ≤ B ≤ 1, Lac ≥ 0.3), the crash clock (MAP < 45 over the step) and death (crash ≥ 20 min or lactate ≥ 15), then the
+     grid time's values (a minute is recorded by the caller). FALLBACK without the kernel: the same explicit Euler here. */
+  function vpPar(pg) {
+    const W = clamp(pg('weight', 70), 2, 250), Vn = 70 * W;
+    return { W, Vn, Vu: 0.7 * Vn, SVn: W, HRn: 72, SVRn: 90 / (W * 72 / 1000), Cart: 1.4 * W / 70, crit: 4.5 * W,
+      shunt0: clamp(pg('shunt', 0.05), 0, 0.8), lungK: clamp(pg('lung', 0), 0, 0.6), bleed: Math.max(0, pg('bleed', 0)), growth: Math.max(0, pg('growth', 0.6)) };
+  }
+  /** the physiology at (tt, y): what is measured and what drives the derivatives */
+  function vpPhys(P, S, acts, tt, y, Mx) {
+    const on = a => fin(a.at) && a.at <= tt;
+    const fio2 = acts.reduce((f, a) => (fin(a.o2) && on(a) ? Math.max(f, clamp(a.o2, 0.21, 1)) : f), 0.21), vaso = acts.reduce((d, a) => (fin(a.vaso) && on(a) ? a.vaso : d), 0);
+    const [V, RBC, B, Lac, HR, sv] = y, dead = S.died !== null, sev = Mx.calc.sev, content = Mx.calc.content;
+    const pf = clamp((V - P.Vu) / (P.Vn - P.Vu), 0, 2.5), SV = P.SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (HR - 150) / 100));
+    const vfac = (1 - 0.55 * B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = P.SVRn * sv * vfac, CO = Math.max(0, SV * HR / 1000), MAP = dead ? 0 : CO * SVR;
+    const hb = RBC / V, shunt = clamp(P.shunt0 + P.lungK * B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
+    const pao2 = pao2Of(content, sev, hb, ca, pA), sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * B;
+    const RR = clamp(14 + 10 * B + 1.2 * Math.max(0, Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
+    return { fio2, vaso, SV, MAP, CO, hb, sat, pao2, DO2, T, RR, dead };
+  }
+  function vpDeriv(P, S, acts, tt, y, ph, dy) {
+    const [V, , B, Lac, HR, sv] = y;
+    let dV = 0, dR = 0;
+    if (S.bleeding) { dV -= P.bleed; dR -= P.bleed * ph.hb; }
+    dV -= 0.004 * B * (V - P.Vu);   // capillary leak in sepsis
+    for (const a of acts) if (fin(a.at) && tt >= a.at && tt < a.at + a.over) { if (a.fluid) dV += 0.4 * a.fluid / a.over; if (a.blood) { dV += a.blood / a.over; dR += a.blood / a.over * 20; } }
+    const abxOn = acts.some(a => a.abx && fin(a.at) && tt >= a.at + 60);
+    const dB = abxOn ? -0.5 * B / 60 : P.growth * B * (1 - B) / 60;
+    const e = (90 - ph.MAP) / 90, HRt = clamp(P.HRn * (1 + 1.2 * e) + 35 * B, 40, 180), svt = clamp(1 + 1.0 * e, 0.6, 1.8);
+    const prod = 0.08 * Math.max(0, 1 - ph.DO2 / (1.4 * P.crit)) + 0.03 * B + 0.03 * Math.max(0, (65 - ph.MAP) / 65), dL = prod - 0.012 * (Lac - 1);   // hypoperfusion, sepsis (aerobic glycolysis), clearance τ ≈ 80 min
+    dy[0] = dV; dy[1] = dR; dy[2] = dB; dy[3] = dL; dy[4] = HRt - HR; dy[5] = (svt - sv) / 2;
+  }
+  /** the grid time t (state S.y): the stop of a bleed, the values now (S.ph, S.mapPrev), the caller's record */
+  function vpAt(P, S, acts, t, Mx, onGrid) {
+    if (acts.some(a => a.stop && fin(a.at) && a.at <= t)) S.bleeding = false;
+    const ph = vpPhys(P, S, acts, t, S.y, Mx); S.mapPrev = ph.MAP;
+    if (onGrid) onGrid(S.k, t, ph);
+  }
+  /** advance S over the grid times ts[1..] (ts[0] = now): the kernel's Euler between breaks, projections and death at each */
+  function vpAdvance(P, S, acts, ts, Mx, onGrid) {
+    const K = C.kit(), n = ts.length - 1, ya = new Array(6);
+    const grid = (i, t, y) => {
+      const hh = ts[i] - ts[i - 1];
+      if (S.died === null) {
+        y[0] = Math.max(0.3 * P.Vn, y[0]); y[1] = Math.max(0, y[1]); y[2] = clamp(y[2], 0, 1); y[3] = Math.max(0.3, y[3]);
+        if (S.mapPrev < 45) S.crash += hh; if (S.crash >= 20 || y[3] >= 15) S.died = ts[i - 1];
+      }
+      S.y = Array.from(y); S.k++; vpAt(P, S, acts, ts[i], Mx, onGrid);
+    };
+    const f = (t, y, dy) => { if (S.died !== null) { dy.fill(0); return; } for (let q = 0; q < 6; q++) ya[q] = y[q]; vpDeriv(P, S, acts, t, ya, vpPhys(P, S, acts, t, ya, Mx), dy); };
+    if (!(n >= 1)) return;
+    if (K) {
+      const breaks = []; for (let i = 1; i <= n; i++) breaks.push({ t: ts[i], apply: (t, y) => grid(i, t, y) });
+      const hmin = (ts[n] - ts[0]) / n;
+      K.integrate({ f, y0: S.y, t0: ts[0], tEnd: ts[n], method: 'euler', dt: hmin * 1.5, breaks, maxSteps: n + 2 });   // dt above the grid step: every step lands on the next break
+      return;
+    }
+    const dy = new Float64Array(6);
+    for (let i = 1; i <= n; i++) { const y = S.y.slice(); f(ts[i - 1], y, dy); const hh = ts[i] - ts[i - 1]; for (let q = 0; q < 6; q++) y[q] += hh * dy[q]; grid(i, ts[i], y); }
+  }
   function runVp(m, F, env, out, codes, seed) {
     const v = m.vp, code = c => codes.vp.add(c), Mx = MED();
     if (!Mx) { code('incomplete'); return null; }
@@ -499,49 +561,24 @@
     });
     const disp = acts.filter(a => a.kind === 'dispose' && fin(a.at) && a.at >= 0 && a.at <= tEnd).map(a => a.at), tDisp = disp.length ? Math.min(...disp) : Infinity;
     for (const a of acts) a.done = fin(a.at) && a.at >= 0 && a.at <= tEnd && (a.kind === 'dispose' || a.at <= tDisp);
-    // the physiology, minute by minute (internal step 0.1 min)
-    const Vn = 70 * W, Vu = 0.7 * Vn, SVn = W, HRn = 72, SVRn = 90 / (SVn * HRn / 1000), Cart = 1.4 * W / 70, crit = 4.5 * W;
-    let V = Vn * vol0, RBC = hb0 * V, B = B0, Lac = 1, HR = HRn, sv = 1, bleeding = bleed > 0, hypo = 0, crash = 0, died = NaN;
+    // the physiology on a grid of 0.1 min (the kernel's Euler between breaks; vpAdvance), a record every minute
+    const P = vpPar(pg), done = acts.filter(a => a.done), Vn = P.Vn;
+    const St = { y: [Vn * vol0, hb0 * Vn * vol0, B0, 1, P.HRn, 1], bleeding: bleed > 0, crash: 0, died: null, k: 0, mapPrev: NaN };
     const rnd = C.rng(seed || 1, 'vp'), noise = v.noise === true;
     const S = {}; for (const k of ['t', ...VARS]) S[k] = [];
-    let minMap = Infinity, maxLac = -Infinity;
-    const dt = 0.1;
-    const state = t => {
-      const fio2 = acts.reduce((f, a) => (a.done && fin(a.o2) && a.at <= t ? Math.max(f, clamp(a.o2, 0.21, 1)) : f), 0.21);
-      const vaso = acts.reduce((d, a) => (a.done && fin(a.vaso) && a.at <= t ? a.vaso : d), 0);
-      return { fio2, vaso };
+    let minMap = Infinity, maxLac = -Infinity, hypo = 0;
+    const onGrid = (k, t, ph) => {
+      if (k % 10 !== 0) return;   // a minute: record (noise only on the shown vitals)
+      const [V, , B, Lac, HR] = St.y, dead = ph.dead, nz = s => (noise ? s * C.normal(rnd) : 0);
+      const rec = { hr: dead ? 0 : HR + nz(2), map: ph.MAP + (dead ? 0 : nz(2)), spo2: dead ? 0 : clamp(100 * ph.sat + nz(1), 0, 100), rr: dead ? 0 : ph.RR + nz(1), lactate: Lac, temp: ph.T, volume: V, burden: B, pao2: ph.pao2, hb: ph.hb };
+      const pp = dead ? 0 : ph.SV / P.Cart; rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
+      rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: ph.fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: ph.MAP < 60 || ph.sat < 0.85 ? 1 : 0, temp: ph.T, scale2: 0 }).score;
+      S.t.push(t); for (const kk of VARS) S[kk].push(rec[kk]);
+      if (!dead) { minMap = Math.min(minMap, ph.MAP); maxLac = Math.max(maxLac, Lac); if (ph.MAP < 65) hypo++; }
     };
-    for (let k = 0; k <= tEnd * 10; k++) {
-      const t = k * dt, { fio2, vaso } = state(t);
-      if (acts.some(a => a.done && a.stop && a.at <= t)) bleeding = false;
-      const pf = clamp((V - Vu) / (Vn - Vu), 0, 2.5), SV = SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (HR - 150) / 100));
-      const vfac = (1 - 0.55 * B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = SVRn * sv * vfac, CO = Math.max(0, SV * HR / 1000), MAP = fin(died) ? 0 : CO * SVR;
-      const hb = RBC / V, shunt = clamp(shunt0 + lungK * B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
-      const pao2 = pao2Of(content, sev, hb, ca, pA);
-      const sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * B;
-      const RR = clamp(14 + 10 * B + 1.2 * Math.max(0, Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
-      if (k % 10 === 0) {   // a minute: record (noise only on the shown vitals)
-        const nz = s => (noise ? s * C.normal(rnd) : 0), dead = fin(died);
-        const rec = { hr: dead ? 0 : HR + nz(2), map: MAP + (dead ? 0 : nz(2)), spo2: dead ? 0 : clamp(100 * sat + nz(1), 0, 100), rr: dead ? 0 : RR + nz(1), lactate: Lac, temp: T, volume: V, burden: B, pao2, hb };
-        const pp = dead ? 0 : SV / Cart; rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
-        rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: MAP < 60 || sat < 0.85 ? 1 : 0, temp: T, scale2: 0 }).score;
-        S.t.push(t); for (const kk of VARS) S[kk].push(rec[kk]);
-        if (!dead) { minMap = Math.min(minMap, MAP); maxLac = Math.max(maxLac, Lac); if (MAP < 65) hypo++; }
-      }
-      if (fin(died)) continue;
-      // derivatives
-      let dV = 0, dR = 0;
-      if (bleeding) { dV -= bleed; dR -= bleed * hb; }
-      dV -= 0.004 * B * (V - Vu);   // capillary leak in sepsis
-      for (const a of acts) if (a.done && t >= a.at && t < a.at + a.over) { if (a.fluid) dV += 0.4 * a.fluid / a.over; if (a.blood) { dV += a.blood / a.over; dR += a.blood / a.over * 20; } }
-      const abxOn = acts.some(a => a.done && a.abx && t >= a.at + 60);
-      const dB = abxOn ? -0.5 * B / 60 : growth * B * (1 - B) / 60;
-      const e = (90 - MAP) / 90, HRt = clamp(HRn * (1 + 1.2 * e) + 35 * B, 40, 180), svt = clamp(1 + 1.0 * e, 0.6, 1.8);
-      const prod = 0.08 * Math.max(0, 1 - DO2 / (1.4 * crit)) + 0.03 * B + 0.03 * Math.max(0, (65 - MAP) / 65), dL = prod - 0.012 * (Lac - 1);   // hypoperfusion, sepsis (aerobic glycolysis), clearance τ ≈ 80 min
-      V = Math.max(0.3 * Vn, V + dt * dV); RBC = Math.max(0, RBC + dt * dR); B = clamp(B + dt * dB, 0, 1); Lac = Math.max(0.3, Lac + dt * dL);
-      HR += dt * (HRt - HR) / 1; sv += dt * (svt - sv) / 2;
-      if (MAP < 45) crash += dt; if (crash >= 20 || Lac >= 15) died = t;
-    }
+    const ts = []; for (let k = 0; k <= tEnd * 10; k++) ts.push(k * 0.1);
+    vpAt(P, St, done, 0, Mx, onGrid); vpAdvance(P, St, done, ts, Mx, onGrid);
+    const died = St.died === null ? NaN : St.died;
     const last = i => S[i][S[i].length - 1];
     out['vp.t'] = S.t; for (const k of VARS) { out['vp.' + k] = S[k]; out['vp.final.' + k] = last(k); }
     out['vp.min.map'] = minMap; out['vp.max.lactate'] = maxLac; out['vp.timeHypo'] = hypo; out['vp.diedAt'] = died;

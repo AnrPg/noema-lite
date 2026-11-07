@@ -206,6 +206,48 @@ ok(Number.isNaN(A('bad', 'valid')) && codes(AR, { of: 'valid', argument: 'bad' }
     'checks: a rule listed twice in a code, an empty cycle, a stream that does not exist');
 }
 
+// ---- 7c. added: mixed equilibria (support enumeration, Lemke–Howson), mixed voting between blocs, Poisson voting games ----
+{
+  // von Stengel 2007 (Algorithmic Game Theory ch. 3, the 3 × 2 example of §3.3 and Fig. 3.3): A = [[3,3],[2,5],[0,6]], B = [[3,2],[2,6],[3,1]]
+  const VS = { games: [{ id: 'vs', rows: ['T', 'M', 'Bo'], cols: ['l', 'r'], pay: [[[3, 3], [3, 2]], [[2, 2], [5, 6]], [[0, 3], [6, 1]]] }, { id: 'bos', preset: 'bos' }, { id: 'mp', preset: 'pennies' }] };
+  const eq = L.supportEnum([[3, 3], [2, 5], [0, 6]], [[3, 2], [2, 6], [3, 1]]);
+  const has3 = (x, y, u, v) => eq.some(e => e.x.every((a, i) => near(a, x[i], 1e-9)) && e.y.every((b, j) => near(b, y[j], 1e-9)) && near(e.u, u, 1e-9) && near(e.v, v, 1e-9));
+  ok(eq.length === 3 && has3([1, 0, 0], [1, 0], 3, 3) && has3([4 / 5, 1 / 5, 0], [2 / 3, 1 / 3], 3, 14 / 5) && has3([0, 1 / 3, 2 / 3], [1 / 3, 2 / 3], 4, 8 / 3) && eq.every(e => !e.deg),
+    'support enumeration: the 3 equilibria of von Stengel\'s 3 × 2 game, payoffs (3, 3), (3, 14/5), (4, 8/3) (von Stengel 2007 §3.3)');
+  const lh = [0, 1, 2, 3, 4].map(k => L.lemkeHowson([[3, 3], [2, 5], [0, 6]], [[3, 2], [2, 6], [3, 1]], k));
+  ok(lh.every(q => q && eq.some(e => e.x.every((a, i) => near(a, q.x[i], 1e-9)) && e.y.every((b, j) => near(b, q.y[j], 1e-9)))) && near(lh[1].x[2], 2 / 3, 1e-9) && lh.every(q => !near(q.x[0], 4 / 5, 1e-6)),
+    'Lemke–Howson: every dropped label ends at an equilibrium; label 2 at ((0, 1/3, 2/3), (1/3, 2/3)); none reaches the index −1 equilibrium (4/5, 1/5, 0) (von Stengel 2007 §3.5, Shapley 1974)');
+  ok(one(VS, { of: 'equilibria', game: 'vs' }) === 3 && near(one(VS, { of: 'eqPayoff', game: 'vs', eq: 1, player: 2 }), 14 / 5, 1e-9) && near(one(VS, { of: 'eqProb', game: 'vs', solver: 'lemke', label: 1, player: 1, strategy: 2 }), 2 / 3, 1e-9) && near(one(VS, { of: 'eqPayoff', game: 'vs', solver: 'lemke', label: 1, player: 1 }), 4, 1e-9),
+    'equilibria / eqPayoff / eqProb on the spec, by both solvers');
+  ok(one(VS, { of: 'equilibria', game: 'bos' }) === 3 && near(one(VS, { of: 'eqProb', game: 'bos', eq: 2, player: 1, strategy: 0 }), 2 / 3, 1e-9) && near(one(VS, { of: 'eqPayoff', game: 'bos', eq: 2, player: 1 }), 2 / 3, 1e-9) && one(VS, { of: 'equilibria', game: 'mp' }) === 1 && near(one(VS, { of: 'eqPayoff', game: 'mp', player: 1 }), 0, 1e-12),
+    'battle of the sexes: 2 pure + 1 mixed (2/3, 1/3) worth 2/3 to each; matching pennies: the one equilibrium (½, ½), value 0 (Osborne & Rubinstein 1994 §3.2)');
+  const DG = { games: [{ id: 'd', rows: ['a', 'b'], cols: ['x', 'y'], pay: [[[1, 1], [1, 1]], [[0, 0], [0, 0]]] }] };
+  ok(codes(DG, { of: 'equilibria', game: 'd' }).includes('degenerate') && codes(VS, { of: 'eqProb', game: 'vs', eq: 5, strategy: 0 }).includes('range') && codes(VS, { of: 'equilibria', game: 'vs', solver: 'lemke', label: 9 }).includes('range'),
+    'a degenerate game (a continuum of equilibria) is flagged degenerate, not listed as complete; a missing equilibrium or label is range');
+  // mixed voting between two blocs
+  const EL = { elections: [{ id: 'e', candidates: ['a', 'b', 'c'], ballots: [{ n: 1, rank: ['a', 'b', 'c'] }, { n: 1, rank: ['b', 'c', 'a'] }] },
+    { id: 'e3', candidates: ['a', 'b', 'c'], ballots: [{ n: 4, rank: ['a', 'b', 'c'] }, { n: 3, rank: ['b', 'c', 'a'] }, { n: 3, rank: ['c', 'a', 'b'] }] }] };
+  const r2 = runAll(EL, [{ of: 'mixedVoteCount', election: 'e' }, { of: 'mixedWinProb', election: 'e', method: 'antiplurality', candidate: 'b' }, { of: 'mixedVoteCount', election: 'e3' }, { of: 'mixedWinProb', election: 'e3', candidate: 'a' }, { of: 'mixedVoteProb', election: 'e3', group: 2, candidate: 'a' }, { of: 'mixedVoteCount', election: 'e', method: 'borda' }]);
+  ok(r2.out.o0 >= 1 && near(r2.out.o1, 1, 1e-9) && r2.codes.some(c => c.code === 'degenerate' && c.of === 'o0'), 'two blocs: the ballot game is solved by support enumeration (ties of outcomes make it degenerate, and that is flagged)');
+  ok(r2.out.o2 === 1 && r2.codes.some(c => c.code === 'approximate' && c.of === 'o3') && near(r2.out.o3 + one(EL, { of: 'mixedWinProb', election: 'e3', candidate: 'b' }) + one(EL, { of: 'mixedWinProb', election: 'e3', candidate: 'c' }), 1, 1e-9) && r2.out.o4 >= 0 && r2.out.o4 <= 1 && r2.codes.some(c => c.code === 'method' && c.of === 'o5'),
+    'three blocs: the replicator dynamics (Taylor & Jonker 1978) gives one rest point, flagged approximate; only plurality and antiplurality ballots');
+  // Poisson voting games
+  const I0 = x => { let s = 0, t = 1; for (let k = 0; k < 300; k++) { if (k > 0) t *= (x / 2) * (x / 2) / (k * k); s += t; } return s; };
+  ok(near(L.poissonTie(L.poissonCtx([10, 6]), 0, 1), Math.exp(-16) * I0(2 * Math.sqrt(60)), 1e-13) && near(L.poissonTie(L.poissonCtx([3, 3]), 0, 1), Math.exp(-6) * I0(6), 1e-13),
+    'an exact two-way tie of independent Poisson counts is Skellam\'s P(X = Y) = e^(−a−b) I₀(2√(ab)) (Skellam 1946): 0.06149 for (10, 6), 0.16666 for (3, 3)');
+  const lg = (n, a, b) => Math.log(L.poissonTie(L.poissonCtx([0.45 * n, 0.35 * n, 0.2 * n]), a, b));
+  ok(near((lg(4000, 0, 1) - lg(2000, 0, 1)) / 2000, -Math.pow(Math.sqrt(0.45) - Math.sqrt(0.35), 2), 4e-4) && near((lg(4000, 0, 2) - lg(2000, 0, 2)) / 2000, 3 * Math.cbrt(0.45 * 0.35 * 0.2) - 1, 1e-3) && near(L.tieMagnitude([0.45, 0.35, 0.2], 0, 2, () => {}), -0.052546, 1e-6),
+    'magnitudes (Myerson 2000 Thm 1–2): the log-probability of a tie grows as n·μ with μ = −(√τa − √τb)², or 3(τaτbτc)^(1/3) − Στ when the third must also be matched');
+  const MW = (r1, r2, v, n) => ({ poisson: [{ id: 'mw', n: n || 1000, candidates: ['A', 'B', 'C'], types: [{ id: 't1', r: r1, u: [1, 0.9, 0], vote: v[0] }, { id: 't2', r: r2, u: [0.9, 1, 0], vote: v[1] }, { id: 't3', r: 1 - r1 - r2, u: [0, 0, 1], vote: v[2] }] }] });
+  const eqOf = (r1, r2, v) => one(MW(r1, r2, v), { of: 'poissonEquilibrium', poisson: 'mw' });
+  ok(eqOf(0.3, 0.3, 'ABC') === 1 && near(one(MW(0.3, 0.3, 'ABC'), { of: 'poissonWinProb', poisson: 'mw', candidate: 'C' }), 0.99985, 1e-5) && eqOf(0.3, 0.3, 'AAC') === 1 && eqOf(0.3, 0.3, 'BBC') === 1,
+    'Myerson & Weber 1993 (30 % A>B>C, 30 % B>A>C, 40 % C): the sincere split is an equilibrium where the Condorcet loser C wins; both Duvergerian coalitions (A, A, C), (B, B, C) are equilibria too');
+  ok(eqOf(0.31, 0.29, 'ABC') === 0 && one(MW(0.31, 0.29, 'ABC'), { of: 'bestVote', poisson: 'mw', type: 't2' }) === 0 && eqOf(0.3, 0.3, 'ACC') === 0 && near(one(MW(0.3, 0.3, 'ABC'), { of: 'expectedVotes', poisson: 'mw', candidate: 'C' }), 400, 1e-9),
+    'Duverger\'s law in the Poisson model: with the two leaders unequal the sincere split breaks (B\'s voters switch to A); expected votes τ_C = n r = 400');
+  ok(codes(MW(0.3, 0.3, 'ABA'), { of: 'poissonEquilibrium', poisson: 'mw' }).includes('underflow') && codes(MW(0.3, 0.3, 'ABC', 2e5), { of: 'pivotProb', poisson: 'mw', a: 'A', b: 'B' }).includes('budget') && codes(MW(0.3, 0.3, 'ABC'), { of: 'pivotProb', poisson: 'mw', a: 'A', b: 'A' }).includes('missing'),
+    'a type whose every pivot is below 10⁻³⁰⁸ is underflow (not certified), n > 10⁵ is budget, a self-tie is missing');
+}
+
 // ---- 8. the checker: codes, and JS ↔ Python parity on the fixtures ----
 ok(hasErr(spec({ cases: [{ id: 'x' }] }, []), 'value', /cases\[0\]$/) && hasErr(spec({ cases: [{ id: 'x', preset: 'switch' }, { id: 'x', preset: 'loop' }] }, []), 'duplicate'), 'a case needs a preset or kAct and kNot; ids are unique');
 ok(hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], ballots: [{ n: 1, rank: ['a', 'z'] }] }] }, []), 'ref') && hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], ballots: [{ n: 1, rank: ['a', 'a'] }] }] }, []), 'duplicate') && hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], axis: ['a'], ballots: [{ n: 1, rank: ['a'] }] }] }, []), 'value', /axis/), 'ballots name known candidates once; an axis has every candidate');

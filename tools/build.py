@@ -33,7 +33,8 @@ def author_schemas_js():
         p = os.path.join(ex, d)
         if not (os.path.isfile(os.path.join(p, 'spec.json')) and os.path.isfile(os.path.join(p, 'activity.json'))): continue
         spec = rj(os.path.join(p, 'spec.json'))
-        if not (isinstance(spec, dict) and spec.get('engine') in ACTS.LIB): continue
+        parts = spec.get('parts') if isinstance(spec, dict) else None   # a spec with parts (docs/INTERACTIVE.md §12.8): the author's kind "Several engines"
+        if not (isinstance(spec, dict) and (spec.get('engine') in ACTS.LIB or (isinstance(parts, list) and parts))): continue
         refs[d] = {'item': rj(os.path.join(p, 'activity.json')), 'spec': spec,
                    'strings': {f.split('.')[1]: rj(os.path.join(p, f)) for f in sorted(os.listdir(p)) if re.fullmatch(r'strings\.[\w-]+\.json', f)}}
     return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from tools/schemas/ by\n'

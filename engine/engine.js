@@ -5806,7 +5806,9 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       const last = a => a[a.length - 1], nodes = {}, branches = {};
       for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? 0 : last(R.V[i]); }
       ck.real.forEach((e, j) => { branches[e.id] = last(R.I[j]); });
-      return { t: R.s * R.dt, nodes, branches, power: Object.fromEntries(R.pw.map((id, j) => [id, last(R.PW[j])])) };
+      // hist(kind, name): every step's value so far (node | branch | power), for stats and `at` over the whole run
+      const hist = (kind, nm) => { if (kind === 'node') { const i = ck.resolveName(nm); return i < 0 ? R.V[0].map(() => 0) : R.V[i]; } if (kind === 'branch') { const j = ck.real.findIndex(e => e.id === nm); return j < 0 ? null : R.I[j]; } const j = R.pw.indexOf(nm); return j < 0 ? null : R.PW[j]; };
+      return { t: R.s * R.dt, dt: R.dt, nodes, branches, power: Object.fromEntries(R.pw.map((id, j) => [id, last(R.PW[j])])), hist };
     }
     function transient(o) {
       const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
@@ -6174,10 +6176,10 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         },
         // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the transient held open, its grid model.transient.dt (else tEnd/1000, else a
         // tenth of the first macro step); outputs at each step: node / branch / power their value now (a series: one sample a step),
-        // time the time, stat over the steps so far, at once passed; DC outputs as in run(). Cannot snapshot (the companion state).
+        // time the time, stat over every internal step so far, at once passed; DC outputs as in run(). Cannot snapshot (the companion state).
         stepInit(inp) {
           try {
-            const tr = inp.$tran || {}; ST = { dt: tr.dt > 0 ? tr.dt : tr.tEnd > 0 ? tr.tEnd / 1000 : 0, s: simFor(inp), hist: {}, t: 0, prev: null, cur: null, bind: JSON.stringify(inp.$bind || []) };
+            const tr = inp.$tran || {}; ST = { dt: tr.dt > 0 ? tr.dt : tr.tEnd > 0 ? tr.tEnd / 1000 : 0, s: simFor(inp), cur: null };
             if (ST.dt > 0) ST.cur = ST.s.tranStep({ dt: ST.dt, power: outs.filter(o => o.power !== undefined).map(o => o.power) }, 0);
             return { out: ST.cur ? stepOuts(inp) : {} };
           } catch (e) { ST = null; return { fail: 'part-failed', out: {} }; }
@@ -6186,7 +6188,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           if (!ST) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
           try {
             if (!ST.cur) { ST.dt = dt / 10; ST.cur = ST.s.tranStep({ dt: ST.dt, power: outs.filter(o => o.power !== undefined).map(o => o.power) }, 0); }
-            ST.prev = ST.cur; ST.cur = ST.s.tranStep(null, t + dt);
+            ST.cur = ST.s.tranStep(null, t + dt);
             return { out: stepOuts(inp), dt, events: [] };
           } catch (e) { ST = null; return { fail: String(e && e.code === 'budget' ? 'budget' : 'part-failed'), out: {}, dt: 0, events: [] }; }
         },
@@ -6194,18 +6196,18 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         restore() { return false; },
       };
       function stepOuts(inp) {
-        const c = ST.cur, p = ST.prev, r = {};
+        const c = ST.cur, r = {};
         const val = (q, o) => (o.power !== undefined ? q.power[o.power] : o.node !== undefined ? q.nodes[o.node] : q.branches[o.branch]);
         for (const o of outs) {
           try {
             if (o.ac !== undefined || o.probe) { r[o.id] = NaN; continue; }
             if (o.kind === 'series') { r[o.id] = o.time ? c.t : val(c, o); continue; }
             if (o.at === undefined && o.stat === undefined) { const d = ST.dc || (ST.dc = ST.s.dc()); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
-            const v = val(c, o), h = ST.hist[o.id] || (ST.hist[o.id] = { n: 0, mn: Infinity, mx: -Infinity, sum: 0, sq: 0 });
-            if (h.t !== c.t) { h.t = c.t; h.n++; h.mn = Math.min(h.mn, v); h.mx = Math.max(h.mx, v); h.sum += v; h.sq += v * v; }
-            if (o.stat !== undefined) { r[o.id] = { final: v, min: h.mn, max: h.mx, mean: h.sum / h.n, pp: h.mx - h.mn, rms: Math.sqrt(h.sq / h.n) }[o.stat]; continue; }
+            const H = c.hist(o.power !== undefined ? 'power' : o.node !== undefined ? 'node' : 'branch', o.power !== undefined ? o.power : o.node !== undefined ? o.node : o.branch);
+            if (!H) { r[o.id] = NaN; continue; }
+            if (o.stat !== undefined) { r[o.id] = STATS.includes(o.stat) ? stat(H, o.stat) : NaN; continue; }
             const ta = inp.$at ? inp.$at[o.id] : NaN;
-            r[o.id] = p && ta >= p.t && ta <= c.t ? val(p, o) + (v - val(p, o)) * (ta - p.t) / (c.t - p.t || 1) : NaN;
+            r[o.id] = ta >= 0 && ta <= c.t ? at(H.map((_, k) => k * c.dt), H, ta) : NaN;
           } catch (e) { r[o.id] = NaN; }
         }
         return r;
@@ -12886,12 +12888,13 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     else AT.fill(cfg.atol > 0 ? cfg.atol : 1e-9);
     const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: AT, hmax: cfg.hmax > 0 ? cfg.hmax : max(abs(tEnd - t0), 1e-12), dt: cfg.dt, radauLinear: cfg.radauLinear };
     const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, maxEvents = fin(cfg.maxEvents) ? min(cfg.maxEvents, MAX_EVENTS) : 1000;
+    const maxInst = fin(cfg.maxInstant) && cfg.maxInstant >= 1 ? min(cfg.maxInstant, MAX_EVENTS) : 100;   // hits at one instant before zeno
     const f = (t, y, dy) => { cfg.f(t, y, dy); };
     const make = m => (m === 'dopri5' || m === 'auto' ? dopri(n, f, o, st) : m === 'tsit5' ? tsit5(n, f, o, st) : m === 'rosenbrock' ? rosenbrock(n, f, o, st) : m === 'ros3p' ? ros3p(n, f, o, st)
       : m === 'radau5' ? radau5(n, f, o, st) : m === 'verlet' || m === 'yoshida4' ? symplectic(m, n, f, o, st, pairs) : fixed(m, n, f, o, st));
     let S = make(method), auto = method === 'auto';
     const evs = (cfg.events || []).filter(e => e && typeof e.g === 'function');
-    const armed = evs.map(() => true), gv = new Float64Array(evs.length), ztol = cfg.gtol > 0 ? cfg.gtol : 1e-10, lastHit = evs.map(() => -Infinity);
+    const armed = evs.map(() => true), gv = new Float64Array(evs.length), ztol = cfg.gtol > 0 ? cfg.gtol : 1e-10, lastHit = evs.map(() => -Infinity), jumped = evs.map(() => false);
     const samples = cfg.samples || []; let si = 0;
     // breaks: times the step must land on exactly (doses, switches, the discontinuities of a delay equation); apply(t, y) may change y
     const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t);
@@ -12929,16 +12932,19 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       st.steps++;
       const g0 = Float64Array.from(gv); evalG(r.t1, r.y1);
       const loc = new Float64Array(evs.length).fill(Infinity), side = new Float64Array(evs.length);
-      let first = Infinity; const obs = [];
+      let first = Infinity, refound = false; const obs = [];
       for (let j = 0; j < evs.length; j++) {
         const a0 = g0[j], b0 = gv[j];
         if (!armed[j]) { if (abs(b0) > (evs[j].hyst || 0)) armed[j] = true; continue; }   // hysteresis: re-armed once |g| > hyst
         const dir = evs[j].dir || 0, up = a0 < 0 && b0 >= 0, down = a0 > 0 && b0 <= 0;
         if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
         const tr = locate(tt => { r.seg(tt, tmp); return evs[j].g(tt, tmp); }, r.t0, r.t1, a0, b0, { tol: 1e-13 });
-        if (tr <= lastHit[j] + 1e-9 * max(1, abs(tr))) continue;   // the crossing just handled, seen again from its other side
+        // a crossing within 1e-9·t of the last hit is that crossing seen again from its other side — unless the hit's handler changed
+        // y: then it is a new crossing at (numerically) the same instant, a Zeno cascade, and it counts towards the zeno guard
+        let again = false;
+        if (tr <= lastHit[j] + 1e-9 * max(1, abs(tr))) { if (!jumped[j] || evs[j].observe) continue; again = true; }
         if (evs[j].observe) { obs.push([tr, j, up ? 1 : -1]); continue; }   // observed: reported, the step goes on
-        loc[j] = tr; side[j] = up ? 1 : -1; if (tr < first) first = tr;
+        loc[j] = tr; side[j] = up ? 1 : -1; if (tr < first) first = tr; if (again) refound = true;
       }
       const tSeg = first < Infinity ? first : r.t1;
       if (onSeg) onSeg(r.seg, r.t0, tSeg);
@@ -12962,11 +12968,13 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         let stop = false; const fired = [];
         for (let j = 0; j < evs.length; j++) if (loc[j] <= first + tolS) {
           fired.push(j); lastHit[j] = first; hits.push({ t: first, j, kind: evs[j].kind, dir: side[j] });
+          tmp.set(ya);
           const act = evs[j].onEvent ? evs[j].onEvent(first, ya, { j, dir: side[j] }) : undefined;
+          jumped[j] = false; for (let i = 0; i < n; i++) if (ya[i] !== tmp[i]) { jumped[j] = true; break; }
           if (act === 'stop' || evs[j].terminal) stop = true;
         }
-        if (first === instT || abs(first - instT) <= tolS) instN += fired.length; else { instT = first; instN = fired.length; }
-        if (hits.length - min(nObs, MAX_EVENTS) > maxEvents || instN > 100) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
+        if (refound || first === instT || abs(first - instT) <= tolS) instN += fired.length; else { instT = first; instN = fired.length; }
+        if (hits.length - min(nObs, MAX_EVENTS) > maxEvents || instN > maxInst) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
         t = first; y.set(ya);
         if (stop) return done(t, y, 'event', hits);
         if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
@@ -23082,239 +23090,28 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
 
   /* ======================================================================================================================
-     Steppers. Each: reset(t, y) after a start or a jump; step(tTarget) → {t0, t1, y1, seg(t, out)} | {fail: code}
+     The driver of a flow, on the simulation kernel (NoemaSimKit.integrate, 46_lib_simkit.js; docs/library/simkit.md §4): its
+     methods (DOPRI5 with the stiffness switch to Rosenbrock, the fixed and symplectic steps), its state events (Illinois on the
+     dense output, simultaneous events, re-arming), its breaks (timed events: doses, the discontinuities of a delay equation, the
+     renormalisations of the Lyapunov exponents) and its dense output of every step (onSegment: a delay equation's history).
      ====================================================================================================================== */
-  // Dormand & Prince 1980 (HNW I Table 5.2) with the dense output of Hairer's DOPRI5 (contd5)
-  const A21 = 1 / 5, A31 = 3 / 40, A32 = 9 / 40, A41 = 44 / 45, A42 = -56 / 15, A43 = 32 / 9,
-    A51 = 19372 / 6561, A52 = -25360 / 2187, A53 = 64448 / 6561, A54 = -212 / 729,
-    A61 = 9017 / 3168, A62 = -355 / 33, A63 = 46732 / 5247, A64 = 49 / 176, A65 = -5103 / 18656,
-    A71 = 35 / 384, A73 = 500 / 1113, A74 = 125 / 192, A75 = -2187 / 6784, A76 = 11 / 84,
-    E1 = 71 / 57600, E3 = -71 / 16695, E4 = 71 / 1920, E5 = -17253 / 339200, E6 = 22 / 525, E7 = -1 / 40,
-    D1 = -12715105075 / 11282082432, D3 = 87487479700 / 32700410799, D4 = -10690763975 / 1880347072,
-    D5 = 701980252875 / 199316789632, D6 = -1453857185 / 822651844, D7 = 69997945 / 29380423;
-  function stepperDopri(n, f, o, ctx) {
-    const k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n), k4 = new Float64Array(n), k5 = new Float64Array(n), k6 = new Float64Array(n), k7 = new Float64Array(n);
-    const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), ysti = new Float64Array(n);
-    const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
-    const sk = i => AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i]));
-    function hinit() {   // HNW I §II.4
-      let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
-      let hh = dnf <= 1e-10 || dny <= 1e-10 ? 1e-6 : sqrt(dny / dnf) * 0.01; hh = Math.min(hh, hmax);
-      for (let i = 0; i < n; i++) yt[i] = y[i] + hh * k1[i];
-      f(t + hh, yt, k2); let der2 = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); der2 += ((k2[i] - k1[i]) / s) ** 2; }
-      der2 = sqrt(der2) / hh; const der12 = Math.max(abs(der2), sqrt(dnf));
-      const h1 = der12 <= 1e-15 ? Math.max(1e-6, abs(hh) * 1e-3) : Math.pow(0.01 / der12, 0.2);
-      const r = Math.min(100 * abs(hh), h1, hmax); return r > 0 ? r : hmax * 1e-3;
-    }
-    return {
-      name: 'dopri5', get stiff() { return stiff; }, get h() { return h; },
-      reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, k1); if (!keepH || !(h > 0)) h = hinit(); facold = 1e-4; },
-      step(tT) {
-        if (!k1.every(Number.isFinite)) return { fail: 'nan' };
-        for (let tries = 0; ; tries++) {
-          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-          let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * A21 * k1[i]; f(t + 0.2 * hh, yt, k2);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A31 * k1[i] + A32 * k2[i]); f(t + 0.3 * hh, yt, k3);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A41 * k1[i] + A42 * k2[i] + A43 * k3[i]); f(t + 0.8 * hh, yt, k4);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A51 * k1[i] + A52 * k2[i] + A53 * k3[i] + A54 * k4[i]); f(t + 8 / 9 * hh, yt, k5);
-          for (let i = 0; i < n; i++) ysti[i] = y[i] + hh * (A61 * k1[i] + A62 * k2[i] + A63 * k3[i] + A64 * k4[i] + A65 * k5[i]);
-          const tph = last ? tT : t + hh; f(tph, ysti, k6);
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh * (A71 * k1[i] + A73 * k3[i] + A74 * k4[i] + A75 * k5[i] + A76 * k6[i]);
-          f(tph, y1, k7);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh * (E1 * k1[i] + E3 * k3[i] + E4 * k4[i] + E5 * k5[i] + E6 * k6[i] + E7 * k7[i]); err += (e / sk(i)) ** 2; }
-          err = sqrt(err / n);
-          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; if (!(h > 10 * EPS * abs(t) && h > 1e-300)) return { fail: 'nan' }; continue; }
-          const fac11 = Math.pow(err, 0.2 - 0.04 * 0.75);   // PI control (HNW I §IV.2: β = 0.04)
-          if (err <= 1) {
-            let fac = fac11 / Math.pow(facold, 0.04); fac = Math.max(0.1, Math.min(5, fac / 0.9)); const hnew = hh / fac; facold = Math.max(err, 1e-4);
-            // stiffness (HNW I §IV.2, the test of DOPRI5): h·ρ ≈ h·‖k7 − k6‖/‖y1 − ysti‖
-            let sn = 0, sd = 0; for (let i = 0; i < n; i++) { sn += (k7[i] - k6[i]) ** 2; sd += (y1[i] - ysti[i]) ** 2; }
-            if (sd > 0) { if (hh * sqrt(sn / sd) > 3.25) { nonsti = 0; iasti++; if (iasti >= 15) stiff = true; } else { nonsti++; if (nonsti === 6) iasti = 0; } }
-            // the dense output (contd5)
-            const r1 = Float64Array.from(y), r2 = new Float64Array(n), r3 = new Float64Array(n), r4 = new Float64Array(n), r5 = new Float64Array(n);
-            for (let i = 0; i < n; i++) { const dy = y1[i] - y[i], bspl = hh * k1[i] - dy; r2[i] = dy; r3[i] = bspl; r4[i] = dy - hh * k7[i] - bspl;
-              r5[i] = hh * (D1 * k1[i] + D3 * k3[i] + D4 * k4[i] + D5 * k5[i] + D6 * k6[i] + D7 * k7[i]); }
-            const ta = t, tb = tph, hs = hh;
-            const seg = (tq, out) => { const th = (tq - ta) / hs, th1 = 1 - th; for (let i = 0; i < n; i++) out[i] = r1[i] + th * (r2[i] + th1 * (r3[i] + th * (r4[i] + th1 * r5[i]))); };
-            t = tph; y.set(y1); k1.set(k7); h = last ? Math.max(h, hnew) : hnew;
-            return { t0: ta, t1: tb, y1: y, seg };
-          }
-          ctx.rejected++; h = hh / Math.min(10, fac11 / 0.9);
-        }
-      },
-    };
-  }
-  // Rosenbrock 2(3) of Shampine & Reichelt 1997 (MATLAB ode23s): L-stable, W = I − h·d·J, d = 1/(2 + √2)
-  function stepperRos(n, f, o, ctx) {
-    const d = 1 / (2 + Math.SQRT2), e32 = 6 + Math.SQRT2;
-    const F0 = new Float64Array(n), F1 = new Float64Array(n), F2 = new Float64Array(n), k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n);
-    const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n);
-    const piv = new Int32Array(n); const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, jacOk = false;
-    function jac() {   // forward differences (the threshold: Shampine & Reichelt 1997 §3.2, simplified)
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * Math.max(abs(yj), AT[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
-      const dt = 1.4901161193847656e-8 * Math.max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt;
-      jacOk = true;
-    }
-    return {
-      name: 'rosenbrock', stiff: false,
-      reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, F0); jacOk = false;
-        if (!keepH || !(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (AT[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = Math.min(hmax, s > 0 ? 0.8 * Math.pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; } },
-      step(tT) {
-        if (!F0.every(Number.isFinite)) return { fail: 'nan' };
-        if (!jacOk) jac();
-        for (let tries = 0; ; tries++) {
-          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-          let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
-          for (let i = 0; i < n * n; i++) W[i] = -hh * d * J[i]; for (let i = 0; i < n; i++) W[i * n + i] += 1;
-          if (!luFactor(W, n, piv)) { ctx.rejected++; h = hh / 4; continue; }
-          for (let i = 0; i < n; i++) k1[i] = F0[i] + hh * d * Tt[i]; luSolve(W, n, piv, k1);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * k1[i]; f(t + 0.5 * hh, yt, F1);
-          for (let i = 0; i < n; i++) k2[i] = F1[i] - k1[i]; luSolve(W, n, piv, k2); for (let i = 0; i < n; i++) k2[i] += k1[i];
-          const tph = last ? tT : t + hh;
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh * k2[i]; f(tph, y1, F2);
-          for (let i = 0; i < n; i++) k3[i] = F2[i] - e32 * (k2[i] - F1[i]) - 2 * (k1[i] - F0[i]) + hh * d * Tt[i]; luSolve(W, n, piv, k3);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i])))) ** 2; }
-          err = sqrt(err / n);
-          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; continue; }
-          if (err <= 1) {
-            const hnew = hh * Math.min(5, Math.max(0.2, 0.8 * Math.pow(Math.max(err, 1e-10), -1 / 3)));
-            const r0 = Float64Array.from(y), c1 = Float64Array.from(k1), c2 = Float64Array.from(k2), ta = t, hs = hh, q = 1 - 2 * d;
-            const seg = (tq, out) => { const s = (tq - ta) / hs; for (let i = 0; i < n; i++) out[i] = r0[i] + hs * (s * (1 - s) / q * c1[i] + s * (s - 2 * d) / q * c2[i]); };   // ntrp23s
-            t = tph; y.set(y1); F0.set(F2); jacOk = false; h = last ? Math.max(h, hnew) : hnew;
-            jac();
-            return { t0: ta, t1: tph, y1: y, seg };
-          }
-          ctx.rejected++; h = hh * Math.max(0.2, 0.8 * Math.pow(err, -1 / 3));
-        }
-      },
-    };
-  }
-  // fixed steps: Euler, Heun, midpoint, RK4; cubic Hermite between the steps
-  function stepperFixed(method, n, f, o, ctx, pairs) {
-    const y = new Float64Array(n), y1 = new Float64Array(n), f0 = new Float64Array(n), f1 = new Float64Array(n), a = new Float64Array(n), b = new Float64Array(n), c = new Float64Array(n), yt = new Float64Array(n);
-    let t = 0; const dt = o.dt;
-    const qi = pairs.map(p => p[0]), pi = pairs.map(p => p[1]);
-    function verlet(tt, hh, out) {   // kick–drift–kick (Störmer–Verlet; HLW 2006 §I.1.4): p' = F(q), q' = G(p)
-      f(tt, out, a); for (const j of pi) out[j] += 0.5 * hh * a[j];
-      f(tt + 0.5 * hh, out, a); for (const j of qi) out[j] += hh * a[j];
-      f(tt + hh, out, a); for (const j of pi) out[j] += 0.5 * hh * a[j];
-    }
-    const Y1 = 1 / (2 - Math.cbrt(2)), Y0 = 1 - 2 * Y1;   // Yoshida 1990, the triple jump
-    return {
-      name: method, stiff: false,
-      reset(t0, y0) { t = t0; y.set(y0); f(t, y, f0); },
-      step(tT) {
-        const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-        const hh = Math.min(dt, span), tph = hh === span ? tT : t + hh;
-        if (method === 'euler') for (let i = 0; i < n; i++) y1[i] = y[i] + hh * f0[i];
-        else if (method === 'heun') { for (let i = 0; i < n; i++) yt[i] = y[i] + hh * f0[i]; f(tph, yt, a); for (let i = 0; i < n; i++) y1[i] = y[i] + 0.5 * hh * (f0[i] + a[i]); }
-        else if (method === 'midpoint') { for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a); for (let i = 0; i < n; i++) y1[i] = y[i] + hh * a[i]; }
-        else if (method === 'rk4') {
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * a[i]; f(t + 0.5 * hh, yt, b);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * b[i]; f(tph, yt, c);
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh / 6 * (f0[i] + 2 * a[i] + 2 * b[i] + c[i]);
-        } else if (method === 'verlet') { y1.set(y); verlet(t, hh, y1); }
-        else { y1.set(y); verlet(t, Y1 * hh, y1); verlet(t + Y1 * hh, Y0 * hh, y1); verlet(t + (Y1 + Y0) * hh, Y1 * hh, y1); }
-        f(tph, y1, f1);
-        const r0 = Float64Array.from(y), r1 = Float64Array.from(y1), d0 = Float64Array.from(f0), d1 = Float64Array.from(f1), ta = t, hs = hh;
-        const seg = (tq, out) => { const s = (tq - ta) / hs, s2 = s * s, s3 = s2 * s, h00 = 2 * s3 - 3 * s2 + 1, h10 = s3 - 2 * s2 + s, h01 = -2 * s3 + 3 * s2, h11 = s3 - s2;
-          for (let i = 0; i < n; i++) out[i] = h00 * r0[i] + h10 * hs * d0[i] + h01 * r1[i] + h11 * hs * d1[i]; };
-        t = tph; y.set(y1); f0.set(f1);
-        return { t0: ta, t1: tph, y1: y, seg };
-      },
-    };
-  }
-
-  /* ======================================================================================================================
-     The driver of a flow: steps to targets (timed events, breakpoints, tEnd), samples, locates crossings, applies jumps
-     ====================================================================================================================== */
-  function makeStepper(method, n, f, o, ctx, pairs) {
-    if (method === 'rosenbrock') return stepperRos(n, f, o, ctx);
-    if (FIXED.includes(method)) return stepperFixed(method, n, f, o, ctx, pairs);
-    return stepperDopri(n, f, o, ctx);
-  }
-  /** flow(cfg): integrates from t0 to tEnd. cfg = {n, f, y0, t0, tEnd, method, rtol, atol, dt, hmax, pairs, samples (sorted times),
-      onSample(t, y), crossings [{g(t, y), dir, apply?(t, y) → y | null, stop, onHit(t, y)}], timed [{t, apply(t, y) (in place)}],
-      onSegment(seg, t0, t1)} → {t, y, stopped} */
+  /** flow(cfg): integrates from t0 to tEnd. cfg = {n, f, y0, t0, tEnd, method, rtol, atol, atolv?, dt, hmax, pairs, samples (sorted
+      times), onSample(t, y), crossings [{g(t, y), dir, apply?(t, y) (in place), stop, onHit(t, y)}], timed [{t, apply(t, y) (in place)}],
+      onSegment(seg, t0, t1)} → {t, y, stopped}. A crossing with apply or stop cuts the step there (an event of the kernel); one
+      without is observed (located and recorded, the step goes on). ctx: the run's counters, budget and codes. */
   function flow(cfg, ctx) {
-    const n = cfg.n, o = { rtol: cfg.rtol, atolv: cfg.atolv || new Float64Array(n).fill(cfg.atol), hmax: cfg.hmax, dt: cfg.dt };
-    let method = cfg.method === 'auto' ? 'dopri5' : cfg.method, auto = cfg.method === 'auto';
-    let st = makeStepper(method, n, cfg.f, o, ctx, cfg.pairs || []);
-    let t = cfg.t0; const y = Float64Array.from(cfg.y0), tmp = new Float64Array(n), ya = new Float64Array(n);
-    const timed = (cfg.timed || []).slice().sort((A, B) => A.t - B.t); let ti = 0;
-    const samples = cfg.samples || []; let si = 0;
-    const cross = cfg.crossings || [];
-    const gv = new Float64Array(cross.length);
-    // a g that is exactly 0 at a start or after a jump (a ball put on the floor) takes the side it leaves towards, so the next
-    // crossing in the event's direction is seen even when the whole flight fits in one step
-    const evalG = (tt, yy, start) => { for (let j = 0; j < cross.length; j++) { const g = cross[j].g(tt, yy); gv[j] = start && g === 0 && cross[j].dir ? (cross[j].dir < 0 ? 1e-300 : -1e-300) : g; } };
-    let stopped = false, jumps = 0;
-    // timed events at t0 come first (a dose at time 0), samples at t0 after them
-    while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; }
-    if (![...y].every(Number.isFinite)) { ctx.code('nan', t); return { t, y, stopped: true }; }
-    st.reset(t, y);
-    evalG(t, y, true);
-    while (si < samples.length && samples[si] <= t) { cfg.onSample(samples[si], y); si++; }
-    const ymax0 = Math.max(1, ...[...y].map(abs));
-    while (t < cfg.tEnd && !stopped) {
-      if (ctx.steps >= ctx.maxSteps) { ctx.code('budget', t); break; }
-      const tT = Math.min(cfg.tEnd, ti < timed.length ? timed[ti].t : Infinity);
-      const r = st.step(tT);
-      if (r.fail) { ctx.code(r.fail === 'time' ? 'step-underflow' : r.fail, t); break; }
-      ctx.steps++;
-      let t1 = r.t1, seg = r.seg; y.set(r.y1);
-      if (![...y].every(Number.isFinite)) { ctx.code('nan', t1); break; }
-      if (Math.max(...[...y].map(abs)) > 1e12 * ymax0) { ctx.code('blow-up', t1); stopped = true; }
-      // crossings: the earliest root of each g on the step (Illinois method on the dense output)
-      let jump = null;
-      if (cross.length) {
-        const g0 = Float64Array.from(gv); evalG(t1, y);
-        let first = Infinity, firstJ = -1;
-        for (let j = 0; j < cross.length; j++) {
-          const a0 = g0[j], b0 = gv[j], dir = cross[j].dir;
-          const up = a0 < 0 && b0 >= 0, down = a0 > 0 && b0 <= 0;
-          if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
-          let ta = t, tb = t1, ga = a0, gb = b0, side = 0, tr = tb;
-          for (let it = 0; it < 80; it++) {
-            tr = (ta * gb - tb * ga) / (gb - ga); if (!(tr > ta && tr < tb)) tr = (ta + tb) / 2;
-            seg(tr, tmp); const gr = cross[j].g(tr, tmp);
-            if (gr === 0 || tb - ta <= 1e-13 * Math.max(1, abs(tr))) break;
-            if ((gr < 0) === (ga < 0)) { ta = tr; ga = gr; if (side === -1) gb /= 2; side = -1; } else { tb = tr; gb = gr; if (side === 1) ga /= 2; side = 1; }
-          }
-          seg(tr, tmp); cross[j].onHit(tr, tmp);
-          if ((cross[j].apply || cross[j].stop) && tr < first) { first = tr; firstJ = j; }
-        }
-        if (firstJ >= 0) { jump = { t: first, j: firstJ }; }
-      }
-      if (jump) {   // the step ends at the event; the state jumps (or the run stops)
-        t1 = jump.t; seg(t1, ya);
-        while (si < samples.length && samples[si] <= t1) { seg(samples[si], tmp); cfg.onSample(samples[si], tmp); si++; }
-        if (cfg.onSegment) cfg.onSegment(seg, t, t1);
-        const ev = cross[jump.j];
-        if (ev.stop) { y.set(ya); t = t1; ctx.code('stopped', t1); stopped = true; break; }
-        if (ev.apply) ev.apply(t1, ya);
-        y.set(ya); t = t1; jumps++;
-        if (jumps > MAX_EVENTS) { ctx.code('zeno', t); break; }
-        st.reset(t, y, true); evalG(t, y, true);
-        continue;
-      }
-      while (si < samples.length && samples[si] <= t1 + 1e-12 * Math.max(1, abs(t1))) { const ts = Math.min(samples[si], t1); seg(ts, tmp); cfg.onSample(samples[si], tmp); si++; }
-      if (cfg.onSegment) cfg.onSegment(seg, t, t1);
-      t = t1;
-      if (stopped) break;
-      // timed events at this time, then a restart
-      let hit = false;
-      while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; hit = true; }
-      if (hit) { if (![...y].every(Number.isFinite)) { ctx.code('nan', t); break; } st.reset(t, y, true); evalG(t, y, true); }
-      if (auto && st.stiff) {   // DOPRI5 found the problem stiff: go on with Rosenbrock (like LSODA's switch, Petzold 1983)
-        ctx.code('stiff-switched', t); auto = false; method = 'rosenbrock'; st = makeStepper(method, n, cfg.f, o, ctx, []); st.reset(t, y); evalG(t, y);
-      } else if (!auto && st.stiff && !ctx.has('stiff')) ctx.code('stiff', t);
-    }
-    return { t, y, stopped };
+    const K = C.kit(), n = cfg.n;
+    const crossings = cfg.crossings || [];
+    const events = crossings.map(c => (c.apply || c.stop
+      ? { g: c.g, dir: c.dir || 0, onEvent: (t, y) => { c.onHit(t, y); if (c.stop) { ctx.code('stopped', t); return 'stop'; } c.apply(t, y); return undefined; } }
+      : { g: c.g, dir: c.dir || 0, observe: true, onEvent: (t, y) => { c.onHit(t, y); } }));
+    const breaks = (cfg.timed || []).map(b => ({ t: Math.min(cfg.tEnd, Math.max(cfg.t0, b.t)), apply: b.apply }));
+    const R = K.integrate({ f: cfg.f, y0: cfg.y0, t0: cfg.t0, tEnd: cfg.tEnd, method: cfg.method, rtol: cfg.rtol, atol: cfg.atolv ? Array.from(cfg.atolv) : cfg.atol,
+      dt: cfg.dt, hmax: cfg.hmax, pairs: cfg.pairs || [], samples: cfg.samples || [], onSample: cfg.onSample, events, breaks, maxEvents: MAX_EVENTS, maxInstant: MAX_EVENTS,
+      maxSteps: Math.max(0, ctx.maxSteps - ctx.steps), onSegment: cfg.onSegment || undefined });
+    ctx.steps += R.steps; ctx.rejected += R.rejected; ctx.nfev += R.nfev;
+    for (const c of R.codes) ctx.code(c.code === 'observe-cap' ? 'event-limit' : c.code === 'bad-config' ? 'time' : c.code, c.t, c.info);
+    return { t: R.t, y: Float64Array.from(R.y), stopped: R.stop === 'event' || R.stop === 'blow-up' || (R.stop === 'nan' && R.steps === 0) };
   }
 
   /* ======================================================================================================================
@@ -35491,14 +35288,14 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   'use strict';
   const C = root.NoemaLibCore;
   const ID = 'philo@1';
-  /*T*/ const T = {"PROB":{"newcomb":{"acts":["one","two"],"states":["full","empty"],"acc":0.99,"big":1000000,"small":1000,"pCause":[0.5,0.5]},"lesion":{"acts":["smoke","abstain"],"states":["cancer","healthy"],"acc":0.8,"big":100,"small":10,"pCause":[0.5,0.5]},"psychopath":{"acts":["push","refrain"],"states":["psychopath","sane"],"acc":0.9,"big":100,"small":10,"pCause":[0.05,0.95]}},"GAMES":{"pd":{"rows":["c","d"],"TRPS":[5,3,1,0]},"stag":{"rows":["stag","hare"],"TRPS":[3,4,3,0]},"chicken":{"rows":["swerve","straight"],"TRPS":[4,3,0,1]},"hawkdove":{"rows":["dove","hawk"],"TRPS":[2,1,-1,0]},"coord":{"rows":["a","b"],"TRPS":[0,1,1,0]},"bos":{"rows":["opera","football"],"pay":[[[2,1],[0,0]],[[0,0],[1,2]]]},"pennies":{"rows":["heads","tails"],"pay":[[[1,-1],[-1,1]],[[-1,1],[1,-1]]]}},"MODEL":{"populations":{"$list":{"$obj":{"id":"id!","groups":{"$list":{"$obj":{"n":"numx!","w":"numx!","rel":"numx","levels":{"$list":"numx","max":8}}},"max":64,"min":1,"$req":true}}},"max":32},"cases":{"$list":{"$obj":{"id":"id!","preset":"enum:switch|driver|footbridge|loop|trapdoor|transplant|lazySusan|transmitter","kAct":"numx","sAct":"numx","kNot":"numx","sNot":"numx","means":"bool","redirect":"bool","personal":"bool","consent":"bool","driver":"bool"}},"max":32},"maxims":{"$list":{"$obj":{"id":"id!","preset":"enum:suicide|falsePromise|talents|beneficence|tennis|toys|deposit","conception":"bool","practical":"bool","natural":"bool","will":"bool"}},"max":16},"profiles":{"$list":{"$obj":{"id":"id!","scheme":"enum:aristotle|confucian|paramita!","traits":{"$req":true,"$map":"numx","max":16},"tol":"numx"}},"max":16},"elections":{"$list":{"$obj":{"id":"id!","candidates":{"$list":"id","max":8,"min":2,"$req":true},"ballots":{"$list":{"$obj":{"n":"numx!","rank":{"$list":"ref","max":8,"min":1,"$req":true},"approve":"numx"}},"max":64,"min":1,"$req":true},"axis":{"$list":"ref","max":8}}},"max":16},"lotteries":{"$list":{"$obj":{"id":"id!","outcomes":{"$list":{"$obj":{"p":"numx!","x":"numx!"}},"max":32,"min":1,"$req":true},"priors":{"$list":{"$list":"numx","max":32},"max":16}}},"max":32},"utility":{"$obj":{"u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"}},"problems":{"$list":{"$obj":{"id":"id!","preset":"enum:newcomb|lesion|psychopath","acts":{"$list":"id","max":6,"min":2},"states":{"$list":"id","max":6,"min":1},"u":{"$list":{"$list":"numx","max":6},"max":6},"pAct":{"$list":{"$list":"numx","max":6},"max":6},"pCause":{"$list":"numx","max":6},"acc":"numx","big":"numx","small":"numx"}},"max":8},"games":{"$list":{"$obj":{"id":"id!","preset":"enum:pd|stag|chicken|hawkdove|bos|pennies|coord","T":"numx","R":"numx","P":"numx","S":"numx","rows":{"$list":"id","max":6,"min":2},"cols":{"$list":"id","max":6,"min":2},"pay":{"$list":{"$list":{"$list":"numx","max":2,"min":2},"max":6},"max":6}}},"max":8},"tournament":{"$obj":{"game":"ref!","strategies":{"$list":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft","max":12,"min":1,"$req":true},"rounds":"numx","noise":"numx","reps":"numx","gens":"numx","self":"bool"}},"beliefs":{"$list":{"$obj":{"id":"id!","h":"numx!","eh":"numx!","enh":"numx!"}},"max":16},"knowledge":{"$list":{"$obj":{"id":"id!","preset":"enum:coins|ford|barns|clock|sheep|mirage|smoke|truetemp|lottery|ordinary","believed":"bool","truth":"bool","justified":"bool","falseLemma":"bool","defeater":"bool","causal":"bool","reliable":"bool","sensitive":"bool","safe":"bool","apt":"bool","intuition":"bool"}},"max":16},"sorites":{"$obj":{"n":"numx","lo":"numx","hi":"numx","shape":"enum:linear|logistic","plo":"numx","phi":"numx","cut":"numx"}},"experiments":{"$list":{"$obj":{"id":"id!","te":"enum:chineseRoom|mary|zombie|brainVat|teleporter|ship|twinEarth|experienceMachine|violinist|veil|gyges|floatingMan|butterfly|chariot|childWell|swampman|invertedSpectrum|personhood|cottonFire","options":{"$list":"id","max":8,"min":2},"positions":{"$map":"ref","max":12}}},"max":16},"thinkers":{"$list":{"$obj":{"id":"id!","label":"key","born":"numx","died":"numx","trad":"enum:greek|indian|buddhist|jain|chinese|islamic|jewish|latin|modern|analytic|continental|african","infl":{"$list":"ref","max":16}}},"max":64},"arguments":{"$list":{"$obj":{"id":"id!","premises":{"$list":"expr","max":12,"min":1,"$req":true},"conclusion":"expr!"}},"max":16},"inferences":{"$list":{"$obj":{"id":"id!","paksa":"bool!","sapaksa":"enum:all|some|none!","vipaksa":"enum:all|some|none!"}},"max":16},"bargains":{"$list":{"$obj":{"id":"id!","pts":{"$list":{"$list":"numx","max":2,"min":2},"max":32,"min":1,"$req":true},"d":{"$list":"numx","max":2,"min":2}}},"max":8},"ruleCodes":{"$list":{"$obj":{"id":"id!","rules":{"$list":{"$obj":{"id":"id!","b":"numx!","c":"numx","k":"numx","x":"numx"}},"max":32,"min":1,"$req":true}}},"max":16},"streams":{"$list":{"$obj":{"id":"id!","head":{"$list":"numx","max":2000},"cycle":{"$list":"numx","max":64,"min":1,"$req":true}}},"max":16},"ubuntu":{"$list":{"$obj":{"id":"id!","options":{"$list":{"$obj":{"id":"id!","effects":{"$list":{"$obj":{"who":"id","identity":"numx","solidarity":"numx","byAgent":"bool"}},"max":64}}},"max":12,"min":1,"$req":true},"wI":"numx","wS":"numx"}},"max":16}},"OUT":{"scalar":{"welfare":{"id":"expr","kind":"expr","of":"expr","population":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"compare":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"best":{"id":"expr","kind":"expr","of":"expr","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"paradox":{"id":"expr","kind":"expr","of":"expr","paradox":"enum:repugnant|mereAddition|sadistic|levellingDown!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"verdict":{"id":"expr","kind":"expr","of":"expr","case":"ref!","principle":"enum:util|dde|means|doingAllowing|redirect|personalForce|threshold|contract|taurek!","T":"numx"},"permits":{"id":"expr","kind":"expr","of":"expr","case":"ref!","T":"numx"},"ful":{"id":"expr","kind":"expr","of":"expr","maxim":"ref!","reading":"enum:logical|practical|teleological"},"trait":{"id":"expr","kind":"expr","of":"expr","profile":"ref!","trait":"expr!"},"virtue":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"winner":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"score":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!","cand":"ref!"},"margin":{"id":"expr","kind":"expr","of":"expr","election":"ref!","a":"ref!","b":"ref!"},"condorcet":{"id":"expr","kind":"expr","of":"expr","election":"ref!","loser":"bool"},"cycle":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"smith":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"criterion":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!","criterion":"enum:condorcet|condorcetLoser|majority|pareto|monotonic|spoiler|participation|iia!","other":"ref"},"manipulable":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"singlePeaked":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"ev":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!"},"eu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"ce":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"premium":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"cpt":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","beta":"numx","lam":"numx","gp":"numx","gm":"numx","ref":"numx"},"meu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"choose":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:ev|eu|cpt|meu|maxmin|maximax|regret|hurwicz|laplace|discount!","alpha":"numx","eps":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"commonCons":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","c":"ref!","d":"ref!"},"stpete":{"id":"expr","kind":"expr","of":"expr","what":"enum:ev|eu|ce!","rounds":"numx","bank":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"dtv":{"id":"expr","kind":"expr","of":"expr","problem":"ref!","theory":"enum:edt|cdt!","act":"ref"},"dominant":{"id":"expr","kind":"expr","of":"expr","problem":"ref!"},"nash":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"isNash":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"mixed":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"dominantStrat":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"paretoCell":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"grimDelta":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"ipd":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","what":"enum:mean|rank|share!"},"confirm":{"id":"expr","kind":"expr","of":"expr","belief":"ref!","measure":"enum:d|r|l|s|k|z|c|post!"},"dutch":{"id":"expr","kind":"expr","of":"expr","cr":{"$list":"numx","max":32,"min":1,"$req":true}},"knows":{"id":"expr","kind":"expr","of":"expr","case":"ref!","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"fits":{"id":"expr","kind":"expr","of":"expr","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"sorites":{"id":"expr","kind":"expr","of":"expr","what":"enum:condMin|bound|superTrue|superFalse|indet|cutoff|value!","k":"numx","i":"numx"},"lottery":{"id":"expr","kind":"expr","of":"expr","n":"numx!","t":"numx!","what":"enum:believed|conj|closure!"},"preface":{"id":"expr","kind":"expr","of":"expr","n":"numx!","r":"numx!","t":"numx!","what":"enum:conj|maxClaims!"},"beauty":{"id":"expr","kind":"expr","of":"expr","theory":"enum:halfer|thirder|double!","wakes":"numx","monday":"bool"},"teAnswer":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","position":"expr!"},"teCount":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","option":"numx!"},"influence":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"overlap":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"valid":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"counter":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"form":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"hetu":{"id":"expr","kind":"expr","of":"expr","inference":"ref!","what":"enum:cell|verdict!"},"koti":{"id":"expr","kind":"expr","of":"expr","t":"numx!","f":"numx!","e":"numx"},"bhanga":{"id":"expr","kind":"expr","of":"expr","asti":"numx!","nasti":"numx!","avak":"numx!"},"bargain":{"id":"expr","kind":"expr","of":"expr","bargain":"ref!","solution":"enum:nash|ks|egal|util!","coord":"int:0:1"},"codeValue":{"id":"expr","kind":"expr","of":"expr","code":"ref!","rate":"numx","reading":"enum:fixed|variable"},"ruleValue":{"id":"expr","kind":"expr","of":"expr","code":"ref!","rule":"id!","rate":"numx"},"idealCode":{"id":"expr","kind":"expr","of":"expr","rate":"numx","reading":"enum:fixed|variable"},"bestRate":{"id":"expr","kind":"expr","of":"expr","code":"ref!"},"idealShift":{"id":"expr","kind":"expr","of":"expr","rate":"numx"},"voteNash":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"voteNashUndominated":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"voteNashWinners":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"sincereNash":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"gsManipulable":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"manipulators":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"gsExists":{"id":"expr","kind":"expr","of":"expr","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!","m":"int:3:4","n":"int:2:4"},"overtaking":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"catchingUp":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"paretoDominates":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"finiteAnonymous":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"infiniteAnonymous":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"infiniteConflict":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"truncCompare":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","T":"numx!"},"discounted":{"id":"expr","kind":"expr","of":"expr","stream":"ref!","delta":"numx!"},"limitAverage":{"id":"expr","kind":"expr","of":"expr","stream":"ref!"},"ubuntuScore":{"id":"expr","kind":"expr","of":"expr","case":"ref!","option":"id!"},"ubuntuPermissible":{"id":"expr","kind":"expr","of":"expr","case":"ref!","option":"id!"},"ubuntuBest":{"id":"expr","kind":"expr","of":"expr","case":"ref!","reading":"enum:promote|honour"}},"series":{"scores":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!"},"match":{"id":"expr","kind":"expr","of":"expr","a":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","b":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","player":"int:1:2"},"shares":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!"},"degree":{"id":"expr","kind":"expr","of":"expr"},"bound":{"id":"expr","kind":"expr","of":"expr"},"sorted":{"id":"expr","kind":"expr","of":"expr","population":"ref!"},"codeCurve":{"id":"expr","kind":"expr","of":"expr","code":"ref!"},"rateAxis":{"id":"expr","kind":"expr","of":"expr"},"partialSums":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","T":"numx!"}},"scene":{"majority":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"parfit":{"id":"expr","kind":"expr","of":"expr","populations":{"$list":"ref","max":8,"min":1,"$req":true}},"virtues":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"map":{"id":"expr","kind":"expr","of":"expr","from":"numx","to":"numx","hi":"ref"},"payoffs":{"id":"expr","kind":"expr","of":"expr","game":"ref!"}}},"REFS":{"welfare":{"population":"populations"},"compare":{"a":"populations","b":"populations"},"verdict":{"case":"cases"},"permits":{"case":"cases"},"ful":{"maxim":"maxims"},"trait":{"profile":"profiles"},"virtue":{"profile":"profiles"},"winner":{"election":"elections"},"score":{"election":"elections","cand":"cand"},"margin":{"election":"elections","a":"cand","b":"cand"},"condorcet":{"election":"elections"},"cycle":{"election":"elections"},"smith":{"election":"elections"},"criterion":{"election":"elections","other":"elections"},"manipulable":{"election":"elections"},"singlePeaked":{"election":"elections"},"ev":{"lottery":"lotteries"},"eu":{"lottery":"lotteries"},"ce":{"lottery":"lotteries"},"premium":{"lottery":"lotteries"},"cpt":{"lottery":"lotteries"},"meu":{"lottery":"lotteries"},"choose":{"a":"lotteries","b":"lotteries"},"commonCons":{"a":"lotteries","b":"lotteries","c":"lotteries","d":"lotteries"},"dtv":{"problem":"problems","act":"act"},"dominant":{"problem":"problems"},"nash":{"game":"games"},"isNash":{"game":"games"},"mixed":{"game":"games"},"dominantStrat":{"game":"games"},"paretoCell":{"game":"games"},"grimDelta":{"game":"games"},"confirm":{"belief":"beliefs"},"knows":{"case":"knowledge"},"teAnswer":{"experiment":"experiments"},"teCount":{"experiment":"experiments"},"influence":{"a":"thinker","b":"thinker"},"overlap":{"a":"thinker","b":"thinker"},"valid":{"argument":"arguments"},"counter":{"argument":"arguments"},"form":{"argument":"arguments"},"hetu":{"inference":"inferences"},"bargain":{"bargain":"bargains"},"scores":{"election":"elections"},"sorted":{"population":"populations"},"majority":{"election":"elections"},"parfit":{"populations":"populations"},"virtues":{"profile":"profiles"},"map":{"hi":"thinker"},"payoffs":{"game":"games"},"codeValue":{"code":"ruleCodes"},"ruleValue":{"code":"ruleCodes"},"bestRate":{"code":"ruleCodes"},"codeCurve":{"code":"ruleCodes"},"voteNash":{"election":"elections"},"voteNashUndominated":{"election":"elections"},"voteNashWinners":{"election":"elections"},"sincereNash":{"election":"elections"},"gsManipulable":{"election":"elections"},"manipulators":{"election":"elections"},"overtaking":{"a":"streams","b":"streams"},"catchingUp":{"a":"streams","b":"streams"},"paretoDominates":{"a":"streams","b":"streams"},"finiteAnonymous":{"a":"streams","b":"streams"},"infiniteAnonymous":{"a":"streams","b":"streams"},"infiniteConflict":{"a":"streams","b":"streams"},"truncCompare":{"a":"streams","b":"streams"},"partialSums":{"a":"streams","b":"streams"},"discounted":{"stream":"streams"},"limitAverage":{"stream":"streams"},"ubuntuScore":{"case":"ubuntu"},"ubuntuPermissible":{"case":"ubuntu"},"ubuntuBest":{"case":"ubuntu"}},"PRINCIPLES":["util","dde","means","doingAllowing","redirect","personalForce","threshold","contract","taurek"],"STRATS":["allc","alld","tft","tf2t","grim","pavlov","random","gtft","alt","joss","stft"],"TRADS":["greek","indian","buddhist","jain","chinese","islamic","jewish","latin","modern","analytic","continental","african"],"CASES":{"switch":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"driver":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":true},"footbridge":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"loop":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":true,"personal":false,"consent":false,"driver":false},"trapdoor":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":false,"consent":false,"driver":false},"transplant":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"lazySusan":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"transmitter":{"kAct":1000000,"sAct":0.0001,"kNot":1,"sNot":0.2,"means":false,"redirect":false,"personal":false,"consent":false,"driver":false}},"MAXIMS":{"suicide":{"conception":false,"practical":false,"natural":true,"will":false},"falsePromise":{"conception":true,"practical":true,"natural":false,"will":false},"talents":{"conception":false,"practical":false,"natural":false,"will":true},"beneficence":{"conception":false,"practical":false,"natural":false,"will":true},"tennis":{"conception":false,"practical":true,"natural":false,"will":false},"toys":{"conception":true,"practical":true,"natural":false,"will":false},"deposit":{"conception":true,"practical":true,"natural":false,"will":false}},"VIRT":{"aristotle":["courage","temperance","liberality","magnificence","magnanimity","ambition","patience","truthfulness","wit","friendliness","modesty","indignation"],"confucian":["ren","yi","li","zhi","xin"],"paramita":["dana","sila","ksanti","virya","dhyana","prajna"]},"KF":["believed","truth","justified","falseLemma","defeater","causal","reliable","sensitive","safe","apt"],"KCASES":{"coins":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ford":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"barns":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":true,"causal":true,"reliable":false,"sensitive":false,"safe":false,"apt":true,"intuition":false},"clock":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"sheep":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"mirage":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"smoke":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"truetemp":{"believed":true,"truth":true,"justified":false,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":false},"lottery":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ordinary":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":true}},"TE":{"chineseRoom":{"o":["yes","no","ifEmbodied"],"p":{"searle":"no","systemsReply":"yes","robotReply":"ifEmbodied","functionalism":"yes","biologicalNaturalism":"no"}},"mary":{"o":["newFact","newAbility","newAcquaintance","oldFactNewMode","nothing"],"p":{"jackson1982":"newFact","abilityHypothesis":"newAbility","acquaintance":"newAcquaintance","phenomenalConcepts":"oldFactNewMode","dennett":"nothing","jackson2003":"oldFactNewMode"}},"zombie":{"o":["possible","conceivableNotPossible","notConceivable"],"p":{"chalmers":"possible","typeB":"conceivableNotPossible","typeA":"notConceivable"}},"brainVat":{"o":["no","yes","ordinaryOnly","contextDependent"],"p":{"skeptic":"no","putnam":"yes","moore":"yes","nozick":"ordinaryOnly","dretske":"ordinaryOnly","contextualism":"contextDependent"}},"teleporter":{"o":["survive","die","doesNotMatter"],"p":{"psychological":"survive","animalism":"die","bodily":"die","parfit":"doesNotMatter","buddhistReductionism":"doesNotMatter"}},"ship":{"o":["repaired","reassembled","both","neither"],"p":{"continuity":"repaired","mereologicalEssentialism":"reassembled","fourDimensionalism":"both","nihilism":"neither"}},"twinEarth":{"o":["same","different","narrowSameWideDifferent"],"p":{"externalism":"different","internalism":"same","twoDimensionalism":"narrowSameWideDifferent"}},"experienceMachine":{"o":["plugIn","refuse"],"p":{"hedonism":"plugIn","nozick":"refuse","objectiveList":"refuse"}},"violinist":{"o":["mustStay","mayUnplug"],"p":{"thomson":"mayUnplug","sanctityOfLife":"mustStay"}},"veil":{"o":["maximin","averageUtility"],"p":{"rawls":"maximin","harsanyi":"averageUtility"}},"gyges":{"o":["staysJust","becomesUnjust"],"p":{"glaucon":"becomesUnjust","thrasymachus":"becomesUnjust","socrates":"staysJust"}},"floatingMan":{"o":["awareOfSelf","notAware"],"p":{"avicenna":"awareOfSelf","descartes":"awareOfSelf","physicalism":"notAware"}},"butterfly":{"o":["zhou","butterfly","transformation","undecidable"],"p":{"guoXiang":"transformation","sceptical":"undecidable","commonSense":"zhou"}},"chariot":{"o":["realSelf","conventionalOnly","inexpressible","none"],"p":{"nagasena":"conventionalOnly","pudgalavada":"inexpressible","nyaya":"realSelf","eliminativism":"none"}},"childWell":{"o":["innateGood","learned","selfInterest"],"p":{"mencius":"innateGood","xunzi":"learned","egoism":"selfInterest"}},"swampman":{"o":["hasThoughts","noThoughts"],"p":{"davidson":"noThoughts","teleosemantics":"noThoughts","functionalism":"hasThoughts","internalism":"hasThoughts"}},"invertedSpectrum":{"o":["possible","impossible"],"p":{"qualiaRealism":"possible","shoemaker":"possible","behaviourism":"impossible","dennett":"impossible"}},"personhood":{"o":["achieved","innate","both"],"p":{"menkiti":"achieved","gyekye":"both","liberalIndividualism":"innate"}},"cottonFire":{"o":["necessary","habit"],"p":{"ghazali":"habit","averroes":"necessary","hume":"habit","malebranche":"habit","aristotelian":"necessary"}}},"THINKERS":{"thales":{"b":-624,"d":-546,"tr":"greek","in":[]},"heraclitus":{"b":-535,"d":-475,"tr":"greek","in":[]},"parmenides":{"b":-515,"d":-450,"tr":"greek","in":[]},"zeno":{"b":-490,"d":-430,"tr":"greek","in":["parmenides"]},"democritus":{"b":-460,"d":-370,"tr":"greek","in":[]},"socrates":{"b":-470,"d":-399,"tr":"greek","in":[]},"plato":{"b":-428,"d":-348,"tr":"greek","in":["socrates","parmenides","heraclitus"]},"aristotle":{"b":-384,"d":-322,"tr":"greek","in":["plato"]},"pyrrho":{"b":-360,"d":-270,"tr":"greek","in":["democritus"]},"epicurus":{"b":-341,"d":-270,"tr":"greek","in":["democritus"]},"zenoCitium":{"b":-334,"d":-262,"tr":"greek","in":["socrates"]},"sextus":{"b":160,"d":210,"tr":"greek","in":["pyrrho"]},"plotinus":{"b":204,"d":270,"tr":"greek","in":["plato","aristotle"]},"mahavira":{"b":-599,"d":-527,"tr":"jain","in":[]},"umasvati":{"b":150,"d":250,"tr":"jain","in":["mahavira"]},"samantabhadra":{"b":450,"d":520,"tr":"jain","in":["umasvati"]},"gautama":{"b":150,"d":250,"tr":"indian","in":[]},"udayana":{"b":975,"d":1050,"tr":"indian","in":["gautama"]},"gangesa":{"b":1300,"d":1360,"tr":"indian","in":["udayana","gautama"]},"shankara":{"b":788,"d":820,"tr":"indian","in":["nagarjuna"]},"ramanuja":{"b":1017,"d":1137,"tr":"indian","in":["shankara"]},"buddha":{"b":-563,"d":-483,"tr":"buddhist","in":[]},"nagarjuna":{"b":150,"d":250,"tr":"buddhist","in":["buddha"]},"vasubandhu":{"b":316,"d":396,"tr":"buddhist","in":["nagarjuna"]},"dignaga":{"b":480,"d":540,"tr":"buddhist","in":["vasubandhu"]},"dharmakirti":{"b":600,"d":660,"tr":"buddhist","in":["dignaga"]},"santideva":{"b":685,"d":763,"tr":"buddhist","in":["nagarjuna"]},"dharmottara":{"b":740,"d":800,"tr":"buddhist","in":["dharmakirti"]},"laozi":{"b":-571,"d":-471,"tr":"chinese","in":[]},"confucius":{"b":-551,"d":-479,"tr":"chinese","in":[]},"mozi":{"b":-470,"d":-391,"tr":"chinese","in":["confucius"]},"mencius":{"b":-372,"d":-289,"tr":"chinese","in":["confucius"]},"zhuangzi":{"b":-369,"d":-286,"tr":"chinese","in":["laozi"]},"gongsunlong":{"b":-325,"d":-250,"tr":"chinese","in":[]},"xunzi":{"b":-310,"d":-235,"tr":"chinese","in":["confucius"]},"hanfei":{"b":-280,"d":-233,"tr":"chinese","in":["xunzi","laozi"]},"zhuxi":{"b":1130,"d":1200,"tr":"chinese","in":["mencius","confucius"]},"wangyangming":{"b":1472,"d":1529,"tr":"chinese","in":["mencius","zhuxi"]},"alkindi":{"b":801,"d":873,"tr":"islamic","in":["aristotle"]},"alfarabi":{"b":872,"d":950,"tr":"islamic","in":["aristotle","plato"]},"avicenna":{"b":980,"d":1037,"tr":"islamic","in":["alfarabi","aristotle"]},"ghazali":{"b":1058,"d":1111,"tr":"islamic","in":["avicenna"]},"averroes":{"b":1126,"d":1198,"tr":"islamic","in":["aristotle","ghazali"]},"suhrawardi":{"b":1154,"d":1191,"tr":"islamic","in":["avicenna","plato"]},"shatibi":{"b":1320,"d":1388,"tr":"islamic","in":["ghazali"]},"ibnKhaldun":{"b":1332,"d":1406,"tr":"islamic","in":["averroes"]},"mullaSadra":{"b":1572,"d":1640,"tr":"islamic","in":["avicenna","suhrawardi"]},"maimonides":{"b":1138,"d":1204,"tr":"jewish","in":["aristotle","alfarabi"]},"augustine":{"b":354,"d":430,"tr":"latin","in":["plotinus","plato"]},"boethius":{"b":477,"d":524,"tr":"latin","in":["aristotle","plato"]},"anselm":{"b":1033,"d":1109,"tr":"latin","in":["augustine"]},"aquinas":{"b":1225,"d":1274,"tr":"latin","in":["aristotle","augustine","avicenna","averroes","maimonides"]},"llull":{"b":1232,"d":1316,"tr":"latin","in":[]},"ockham":{"b":1287,"d":1347,"tr":"latin","in":["aristotle","aquinas"]},"cusanus":{"b":1401,"d":1464,"tr":"latin","in":["llull"]},"hobbes":{"b":1588,"d":1679,"tr":"modern","in":[]},"descartes":{"b":1596,"d":1650,"tr":"modern","in":["augustine"]},"spinoza":{"b":1632,"d":1677,"tr":"modern","in":["descartes","maimonides"]},"locke":{"b":1632,"d":1704,"tr":"modern","in":["descartes","hobbes"]},"leibniz":{"b":1646,"d":1716,"tr":"modern","in":["descartes","spinoza"]},"hume":{"b":1711,"d":1776,"tr":"modern","in":["locke"]},"rousseau":{"b":1712,"d":1778,"tr":"modern","in":["hobbes","locke"]},"kant":{"b":1724,"d":1804,"tr":"modern","in":["hume","rousseau","leibniz"]},"condorcet":{"b":1743,"d":1794,"tr":"modern","in":["rousseau"]},"bentham":{"b":1748,"d":1832,"tr":"modern","in":["hume"]},"wollstonecraft":{"b":1759,"d":1797,"tr":"modern","in":["rousseau"]},"hegel":{"b":1770,"d":1831,"tr":"modern","in":["kant","spinoza"]},"mill":{"b":1806,"d":1873,"tr":"modern","in":["bentham"]},"marx":{"b":1818,"d":1883,"tr":"modern","in":["hegel"]},"sidgwick":{"b":1838,"d":1900,"tr":"modern","in":["mill","kant"]},"schopenhauer":{"b":1788,"d":1860,"tr":"continental","in":["kant","plato","buddha"]},"kierkegaard":{"b":1813,"d":1855,"tr":"continental","in":["hegel"]},"nietzsche":{"b":1844,"d":1900,"tr":"continental","in":["schopenhauer"]},"husserl":{"b":1859,"d":1938,"tr":"continental","in":["descartes"]},"heidegger":{"b":1889,"d":1976,"tr":"continental","in":["husserl","aristotle","kierkegaard"]},"sartre":{"b":1905,"d":1980,"tr":"continental","in":["heidegger","husserl"]},"levinas":{"b":1906,"d":1995,"tr":"continental","in":["husserl","heidegger"]},"beauvoir":{"b":1908,"d":1986,"tr":"continental","in":["sartre","hegel"]},"fanon":{"b":1925,"d":1961,"tr":"continental","in":["sartre","hegel"]},"foucault":{"b":1926,"d":1984,"tr":"continental","in":["nietzsche","heidegger"]},"frege":{"b":1848,"d":1925,"tr":"analytic","in":["kant","leibniz"]},"russell":{"b":1872,"d":1970,"tr":"analytic","in":["frege"]},"moore":{"b":1873,"d":1958,"tr":"analytic","in":["sidgwick"]},"wittgenstein":{"b":1889,"d":1951,"tr":"analytic","in":["frege","russell","schopenhauer"]},"carnap":{"b":1891,"d":1970,"tr":"analytic","in":["frege","wittgenstein"]},"quine":{"b":1908,"d":2000,"tr":"analytic","in":["carnap","russell"]},"anscombe":{"b":1919,"d":2001,"tr":"analytic","in":["wittgenstein","aristotle","aquinas"]},"foot":{"b":1920,"d":2010,"tr":"analytic","in":["aristotle","anscombe"]},"arrow":{"b":1921,"d":2017,"tr":"analytic","in":["condorcet"]},"rawls":{"b":1921,"d":2002,"tr":"analytic","in":["kant","rousseau","locke","sidgwick"]},"gettier":{"b":1927,"d":2021,"tr":"analytic","in":["russell"]},"thomson":{"b":1929,"d":2020,"tr":"analytic","in":["foot"]},"nozick":{"b":1938,"d":2002,"tr":"analytic","in":["locke","rawls"]},"parfit":{"b":1942,"d":2017,"tr":"analytic","in":["sidgwick","buddha"]},"zeraYacob":{"b":1599,"d":1692,"tr":"african","in":[]},"amo":{"b":1703,"d":1759,"tr":"african","in":["leibniz","descartes"]},"wiredu":{"b":1931,"d":2022,"tr":"african","in":["russell"]},"gyekye":{"b":1939,"d":2019,"tr":"african","in":["wiredu","aristotle"]},"menkiti":{"b":1940,"d":2019,"tr":"african","in":[]},"oruka":{"b":1944,"d":1995,"tr":"african","in":["wiredu"]}}}; /*/T*/
+  /*T*/ const T = {"PROB":{"newcomb":{"acts":["one","two"],"states":["full","empty"],"acc":0.99,"big":1000000,"small":1000,"pCause":[0.5,0.5]},"lesion":{"acts":["smoke","abstain"],"states":["cancer","healthy"],"acc":0.8,"big":100,"small":10,"pCause":[0.5,0.5]},"psychopath":{"acts":["push","refrain"],"states":["psychopath","sane"],"acc":0.9,"big":100,"small":10,"pCause":[0.05,0.95]}},"GAMES":{"pd":{"rows":["c","d"],"TRPS":[5,3,1,0]},"stag":{"rows":["stag","hare"],"TRPS":[3,4,3,0]},"chicken":{"rows":["swerve","straight"],"TRPS":[4,3,0,1]},"hawkdove":{"rows":["dove","hawk"],"TRPS":[2,1,-1,0]},"coord":{"rows":["a","b"],"TRPS":[0,1,1,0]},"bos":{"rows":["opera","football"],"pay":[[[2,1],[0,0]],[[0,0],[1,2]]]},"pennies":{"rows":["heads","tails"],"pay":[[[1,-1],[-1,1]],[[-1,1],[1,-1]]]}},"MODEL":{"populations":{"$list":{"$obj":{"id":"id!","groups":{"$list":{"$obj":{"n":"numx!","w":"numx!","rel":"numx","levels":{"$list":"numx","max":8}}},"max":64,"min":1,"$req":true}}},"max":32},"cases":{"$list":{"$obj":{"id":"id!","preset":"enum:switch|driver|footbridge|loop|trapdoor|transplant|lazySusan|transmitter","kAct":"numx","sAct":"numx","kNot":"numx","sNot":"numx","means":"bool","redirect":"bool","personal":"bool","consent":"bool","driver":"bool"}},"max":32},"maxims":{"$list":{"$obj":{"id":"id!","preset":"enum:suicide|falsePromise|talents|beneficence|tennis|toys|deposit","conception":"bool","practical":"bool","natural":"bool","will":"bool"}},"max":16},"profiles":{"$list":{"$obj":{"id":"id!","scheme":"enum:aristotle|confucian|paramita!","traits":{"$req":true,"$map":"numx","max":16},"tol":"numx"}},"max":16},"elections":{"$list":{"$obj":{"id":"id!","candidates":{"$list":"id","max":8,"min":2,"$req":true},"ballots":{"$list":{"$obj":{"n":"numx!","rank":{"$list":"ref","max":8,"min":1,"$req":true},"approve":"numx"}},"max":64,"min":1,"$req":true},"axis":{"$list":"ref","max":8}}},"max":16},"lotteries":{"$list":{"$obj":{"id":"id!","outcomes":{"$list":{"$obj":{"p":"numx!","x":"numx!"}},"max":32,"min":1,"$req":true},"priors":{"$list":{"$list":"numx","max":32},"max":16}}},"max":32},"utility":{"$obj":{"u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"}},"problems":{"$list":{"$obj":{"id":"id!","preset":"enum:newcomb|lesion|psychopath","acts":{"$list":"id","max":6,"min":2},"states":{"$list":"id","max":6,"min":1},"u":{"$list":{"$list":"numx","max":6},"max":6},"pAct":{"$list":{"$list":"numx","max":6},"max":6},"pCause":{"$list":"numx","max":6},"acc":"numx","big":"numx","small":"numx"}},"max":8},"games":{"$list":{"$obj":{"id":"id!","preset":"enum:pd|stag|chicken|hawkdove|bos|pennies|coord","T":"numx","R":"numx","P":"numx","S":"numx","rows":{"$list":"id","max":6,"min":2},"cols":{"$list":"id","max":6,"min":2},"pay":{"$list":{"$list":{"$list":"numx","max":2,"min":2},"max":6},"max":6}}},"max":8},"tournament":{"$obj":{"game":"ref!","strategies":{"$list":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft","max":12,"min":1,"$req":true},"rounds":"numx","noise":"numx","reps":"numx","gens":"numx","self":"bool"}},"beliefs":{"$list":{"$obj":{"id":"id!","h":"numx!","eh":"numx!","enh":"numx!"}},"max":16},"knowledge":{"$list":{"$obj":{"id":"id!","preset":"enum:coins|ford|barns|clock|sheep|mirage|smoke|truetemp|lottery|ordinary","believed":"bool","truth":"bool","justified":"bool","falseLemma":"bool","defeater":"bool","causal":"bool","reliable":"bool","sensitive":"bool","safe":"bool","apt":"bool","intuition":"bool"}},"max":16},"sorites":{"$obj":{"n":"numx","lo":"numx","hi":"numx","shape":"enum:linear|logistic","plo":"numx","phi":"numx","cut":"numx"}},"experiments":{"$list":{"$obj":{"id":"id!","te":"enum:chineseRoom|mary|zombie|brainVat|teleporter|ship|twinEarth|experienceMachine|violinist|veil|gyges|floatingMan|butterfly|chariot|childWell|swampman|invertedSpectrum|personhood|cottonFire","options":{"$list":"id","max":8,"min":2},"positions":{"$map":"ref","max":12}}},"max":16},"thinkers":{"$list":{"$obj":{"id":"id!","label":"key","born":"numx","died":"numx","trad":"enum:greek|indian|buddhist|jain|chinese|islamic|jewish|latin|modern|analytic|continental|african","infl":{"$list":"ref","max":16}}},"max":64},"arguments":{"$list":{"$obj":{"id":"id!","premises":{"$list":"expr","max":12,"min":1,"$req":true},"conclusion":"expr!"}},"max":16},"inferences":{"$list":{"$obj":{"id":"id!","paksa":"bool!","sapaksa":"enum:all|some|none!","vipaksa":"enum:all|some|none!"}},"max":16},"bargains":{"$list":{"$obj":{"id":"id!","pts":{"$list":{"$list":"numx","max":2,"min":2},"max":32,"min":1,"$req":true},"d":{"$list":"numx","max":2,"min":2}}},"max":8},"ruleCodes":{"$list":{"$obj":{"id":"id!","rules":{"$list":{"$obj":{"id":"id!","b":"numx!","c":"numx","k":"numx","x":"numx"}},"max":32,"min":1,"$req":true}}},"max":16},"streams":{"$list":{"$obj":{"id":"id!","head":{"$list":"numx","max":2000},"cycle":{"$list":"numx","max":64,"min":1,"$req":true}}},"max":16},"ubuntu":{"$list":{"$obj":{"id":"id!","options":{"$list":{"$obj":{"id":"id!","effects":{"$list":{"$obj":{"who":"id","identity":"numx","solidarity":"numx","byAgent":"bool"}},"max":64}}},"max":12,"min":1,"$req":true},"wI":"numx","wS":"numx"}},"max":16},"poisson":{"$list":{"$obj":{"id":"id!","n":"numx!","candidates":{"$list":"id","max":6,"min":2,"$req":true},"types":{"$list":{"$obj":{"id":"id!","r":"numx!","u":{"$list":"numx","max":6,"min":2,"$req":true},"vote":"ref"}},"max":16,"min":1,"$req":true}}},"max":8}},"OUT":{"scalar":{"welfare":{"id":"expr","kind":"expr","of":"expr","population":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"compare":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"best":{"id":"expr","kind":"expr","of":"expr","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"paradox":{"id":"expr","kind":"expr","of":"expr","paradox":"enum:repugnant|mereAddition|sadistic|levellingDown!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"verdict":{"id":"expr","kind":"expr","of":"expr","case":"ref!","principle":"enum:util|dde|means|doingAllowing|redirect|personalForce|threshold|contract|taurek!","T":"numx"},"permits":{"id":"expr","kind":"expr","of":"expr","case":"ref!","T":"numx"},"ful":{"id":"expr","kind":"expr","of":"expr","maxim":"ref!","reading":"enum:logical|practical|teleological"},"trait":{"id":"expr","kind":"expr","of":"expr","profile":"ref!","trait":"expr!"},"virtue":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"winner":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"score":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!","cand":"ref!"},"margin":{"id":"expr","kind":"expr","of":"expr","election":"ref!","a":"ref!","b":"ref!"},"condorcet":{"id":"expr","kind":"expr","of":"expr","election":"ref!","loser":"bool"},"cycle":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"smith":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"criterion":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!","criterion":"enum:condorcet|condorcetLoser|majority|pareto|monotonic|spoiler|participation|iia!","other":"ref"},"manipulable":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"singlePeaked":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"ev":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!"},"eu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"ce":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"premium":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"cpt":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","beta":"numx","lam":"numx","gp":"numx","gm":"numx","ref":"numx"},"meu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"choose":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:ev|eu|cpt|meu|maxmin|maximax|regret|hurwicz|laplace|discount!","alpha":"numx","eps":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"commonCons":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","c":"ref!","d":"ref!"},"stpete":{"id":"expr","kind":"expr","of":"expr","what":"enum:ev|eu|ce!","rounds":"numx","bank":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"dtv":{"id":"expr","kind":"expr","of":"expr","problem":"ref!","theory":"enum:edt|cdt!","act":"ref"},"dominant":{"id":"expr","kind":"expr","of":"expr","problem":"ref!"},"nash":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"isNash":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"mixed":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"dominantStrat":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"paretoCell":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"grimDelta":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"ipd":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","what":"enum:mean|rank|share!"},"confirm":{"id":"expr","kind":"expr","of":"expr","belief":"ref!","measure":"enum:d|r|l|s|k|z|c|post!"},"dutch":{"id":"expr","kind":"expr","of":"expr","cr":{"$list":"numx","max":32,"min":1,"$req":true}},"knows":{"id":"expr","kind":"expr","of":"expr","case":"ref!","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"fits":{"id":"expr","kind":"expr","of":"expr","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"sorites":{"id":"expr","kind":"expr","of":"expr","what":"enum:condMin|bound|superTrue|superFalse|indet|cutoff|value!","k":"numx","i":"numx"},"lottery":{"id":"expr","kind":"expr","of":"expr","n":"numx!","t":"numx!","what":"enum:believed|conj|closure!"},"preface":{"id":"expr","kind":"expr","of":"expr","n":"numx!","r":"numx!","t":"numx!","what":"enum:conj|maxClaims!"},"beauty":{"id":"expr","kind":"expr","of":"expr","theory":"enum:halfer|thirder|double!","wakes":"numx","monday":"bool"},"teAnswer":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","position":"expr!"},"teCount":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","option":"numx!"},"influence":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"overlap":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"valid":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"counter":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"form":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"hetu":{"id":"expr","kind":"expr","of":"expr","inference":"ref!","what":"enum:cell|verdict!"},"koti":{"id":"expr","kind":"expr","of":"expr","t":"numx!","f":"numx!","e":"numx"},"bhanga":{"id":"expr","kind":"expr","of":"expr","asti":"numx!","nasti":"numx!","avak":"numx!"},"bargain":{"id":"expr","kind":"expr","of":"expr","bargain":"ref!","solution":"enum:nash|ks|egal|util!","coord":"int:0:1"},"codeValue":{"id":"expr","kind":"expr","of":"expr","code":"ref!","rate":"numx","reading":"enum:fixed|variable"},"ruleValue":{"id":"expr","kind":"expr","of":"expr","code":"ref!","rule":"id!","rate":"numx"},"idealCode":{"id":"expr","kind":"expr","of":"expr","rate":"numx","reading":"enum:fixed|variable"},"bestRate":{"id":"expr","kind":"expr","of":"expr","code":"ref!"},"idealShift":{"id":"expr","kind":"expr","of":"expr","rate":"numx"},"voteNash":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"voteNashUndominated":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"voteNashWinners":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"sincereNash":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"gsManipulable":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"manipulators":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"gsExists":{"id":"expr","kind":"expr","of":"expr","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!","m":"int:3:4","n":"int:2:4"},"overtaking":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"catchingUp":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"paretoDominates":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"finiteAnonymous":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"infiniteAnonymous":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"infiniteConflict":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"truncCompare":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","T":"numx!"},"discounted":{"id":"expr","kind":"expr","of":"expr","stream":"ref!","delta":"numx!"},"limitAverage":{"id":"expr","kind":"expr","of":"expr","stream":"ref!"},"ubuntuScore":{"id":"expr","kind":"expr","of":"expr","case":"ref!","option":"id!"},"ubuntuPermissible":{"id":"expr","kind":"expr","of":"expr","case":"ref!","option":"id!"},"ubuntuBest":{"id":"expr","kind":"expr","of":"expr","case":"ref!","reading":"enum:promote|honour"},"equilibria":{"id":"expr","kind":"expr","of":"expr","game":"ref!","solver":"enum:support|lemke","label":"numx"},"eqProb":{"id":"expr","kind":"expr","of":"expr","game":"ref!","solver":"enum:support|lemke","label":"numx","eq":"numx","player":"int:1:2","strategy":"numx!"},"eqPayoff":{"id":"expr","kind":"expr","of":"expr","game":"ref!","solver":"enum:support|lemke","label":"numx","eq":"numx","player":"int:1:2"},"mixedVoteCount":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality","util":"enum:borda|top","solver":"enum:support|lemke"},"mixedVoteProb":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality","util":"enum:borda|top","solver":"enum:support|lemke","eq":"numx","group":"numx","candidate":"ref!"},"mixedWinProb":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality","util":"enum:borda|top","solver":"enum:support|lemke","eq":"numx","candidate":"ref!"},"expectedVotes":{"id":"expr","kind":"expr","of":"expr","poisson":"ref!","candidate":"ref!"},"poissonWinProb":{"id":"expr","kind":"expr","of":"expr","poisson":"ref!","candidate":"ref!"},"pivotProb":{"id":"expr","kind":"expr","of":"expr","poisson":"ref!","a":"ref!","b":"ref!"},"pivotMagnitude":{"id":"expr","kind":"expr","of":"expr","poisson":"ref!","a":"ref!","b":"ref!"},"voteGain":{"id":"expr","kind":"expr","of":"expr","poisson":"ref!","type":"id!","candidate":"ref!"},"bestVote":{"id":"expr","kind":"expr","of":"expr","poisson":"ref!","type":"id!"},"poissonEquilibrium":{"id":"expr","kind":"expr","of":"expr","poisson":"ref!"}},"series":{"scores":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!"},"match":{"id":"expr","kind":"expr","of":"expr","a":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","b":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","player":"int:1:2"},"shares":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!"},"degree":{"id":"expr","kind":"expr","of":"expr"},"bound":{"id":"expr","kind":"expr","of":"expr"},"sorted":{"id":"expr","kind":"expr","of":"expr","population":"ref!"},"codeCurve":{"id":"expr","kind":"expr","of":"expr","code":"ref!"},"rateAxis":{"id":"expr","kind":"expr","of":"expr"},"partialSums":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","T":"numx!"}},"scene":{"majority":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"parfit":{"id":"expr","kind":"expr","of":"expr","populations":{"$list":"ref","max":8,"min":1,"$req":true}},"virtues":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"map":{"id":"expr","kind":"expr","of":"expr","from":"numx","to":"numx","hi":"ref"},"payoffs":{"id":"expr","kind":"expr","of":"expr","game":"ref!"}}},"REFS":{"welfare":{"population":"populations"},"compare":{"a":"populations","b":"populations"},"verdict":{"case":"cases"},"permits":{"case":"cases"},"ful":{"maxim":"maxims"},"trait":{"profile":"profiles"},"virtue":{"profile":"profiles"},"winner":{"election":"elections"},"score":{"election":"elections","cand":"cand"},"margin":{"election":"elections","a":"cand","b":"cand"},"condorcet":{"election":"elections"},"cycle":{"election":"elections"},"smith":{"election":"elections"},"criterion":{"election":"elections","other":"elections"},"manipulable":{"election":"elections"},"singlePeaked":{"election":"elections"},"ev":{"lottery":"lotteries"},"eu":{"lottery":"lotteries"},"ce":{"lottery":"lotteries"},"premium":{"lottery":"lotteries"},"cpt":{"lottery":"lotteries"},"meu":{"lottery":"lotteries"},"choose":{"a":"lotteries","b":"lotteries"},"commonCons":{"a":"lotteries","b":"lotteries","c":"lotteries","d":"lotteries"},"dtv":{"problem":"problems","act":"act"},"dominant":{"problem":"problems"},"nash":{"game":"games"},"isNash":{"game":"games"},"mixed":{"game":"games"},"dominantStrat":{"game":"games"},"paretoCell":{"game":"games"},"grimDelta":{"game":"games"},"confirm":{"belief":"beliefs"},"knows":{"case":"knowledge"},"teAnswer":{"experiment":"experiments"},"teCount":{"experiment":"experiments"},"influence":{"a":"thinker","b":"thinker"},"overlap":{"a":"thinker","b":"thinker"},"valid":{"argument":"arguments"},"counter":{"argument":"arguments"},"form":{"argument":"arguments"},"hetu":{"inference":"inferences"},"bargain":{"bargain":"bargains"},"scores":{"election":"elections"},"sorted":{"population":"populations"},"majority":{"election":"elections"},"parfit":{"populations":"populations"},"virtues":{"profile":"profiles"},"map":{"hi":"thinker"},"payoffs":{"game":"games"},"codeValue":{"code":"ruleCodes"},"ruleValue":{"code":"ruleCodes"},"bestRate":{"code":"ruleCodes"},"codeCurve":{"code":"ruleCodes"},"voteNash":{"election":"elections"},"voteNashUndominated":{"election":"elections"},"voteNashWinners":{"election":"elections"},"sincereNash":{"election":"elections"},"gsManipulable":{"election":"elections"},"manipulators":{"election":"elections"},"overtaking":{"a":"streams","b":"streams"},"catchingUp":{"a":"streams","b":"streams"},"paretoDominates":{"a":"streams","b":"streams"},"finiteAnonymous":{"a":"streams","b":"streams"},"infiniteAnonymous":{"a":"streams","b":"streams"},"infiniteConflict":{"a":"streams","b":"streams"},"truncCompare":{"a":"streams","b":"streams"},"partialSums":{"a":"streams","b":"streams"},"discounted":{"stream":"streams"},"limitAverage":{"stream":"streams"},"ubuntuScore":{"case":"ubuntu"},"ubuntuPermissible":{"case":"ubuntu"},"ubuntuBest":{"case":"ubuntu"},"equilibria":{"game":"games"},"eqProb":{"game":"games"},"eqPayoff":{"game":"games"},"mixedVoteCount":{"election":"elections"},"mixedVoteProb":{"election":"elections","candidate":"cand"},"mixedWinProb":{"election":"elections","candidate":"cand"},"expectedVotes":{"poisson":"poisson","candidate":"pcand"},"poissonWinProb":{"poisson":"poisson","candidate":"pcand"},"voteGain":{"poisson":"poisson","candidate":"pcand"},"pivotProb":{"poisson":"poisson","a":"pcand","b":"pcand"},"pivotMagnitude":{"poisson":"poisson","a":"pcand","b":"pcand"},"bestVote":{"poisson":"poisson"},"poissonEquilibrium":{"poisson":"poisson"}},"PRINCIPLES":["util","dde","means","doingAllowing","redirect","personalForce","threshold","contract","taurek"],"STRATS":["allc","alld","tft","tf2t","grim","pavlov","random","gtft","alt","joss","stft"],"TRADS":["greek","indian","buddhist","jain","chinese","islamic","jewish","latin","modern","analytic","continental","african"],"CASES":{"switch":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"driver":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":true},"footbridge":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"loop":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":true,"personal":false,"consent":false,"driver":false},"trapdoor":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":false,"consent":false,"driver":false},"transplant":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"lazySusan":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"transmitter":{"kAct":1000000,"sAct":0.0001,"kNot":1,"sNot":0.2,"means":false,"redirect":false,"personal":false,"consent":false,"driver":false}},"MAXIMS":{"suicide":{"conception":false,"practical":false,"natural":true,"will":false},"falsePromise":{"conception":true,"practical":true,"natural":false,"will":false},"talents":{"conception":false,"practical":false,"natural":false,"will":true},"beneficence":{"conception":false,"practical":false,"natural":false,"will":true},"tennis":{"conception":false,"practical":true,"natural":false,"will":false},"toys":{"conception":true,"practical":true,"natural":false,"will":false},"deposit":{"conception":true,"practical":true,"natural":false,"will":false}},"VIRT":{"aristotle":["courage","temperance","liberality","magnificence","magnanimity","ambition","patience","truthfulness","wit","friendliness","modesty","indignation"],"confucian":["ren","yi","li","zhi","xin"],"paramita":["dana","sila","ksanti","virya","dhyana","prajna"]},"KF":["believed","truth","justified","falseLemma","defeater","causal","reliable","sensitive","safe","apt"],"KCASES":{"coins":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ford":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"barns":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":true,"causal":true,"reliable":false,"sensitive":false,"safe":false,"apt":true,"intuition":false},"clock":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"sheep":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"mirage":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"smoke":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"truetemp":{"believed":true,"truth":true,"justified":false,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":false},"lottery":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ordinary":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":true}},"TE":{"chineseRoom":{"o":["yes","no","ifEmbodied"],"p":{"searle":"no","systemsReply":"yes","robotReply":"ifEmbodied","functionalism":"yes","biologicalNaturalism":"no"}},"mary":{"o":["newFact","newAbility","newAcquaintance","oldFactNewMode","nothing"],"p":{"jackson1982":"newFact","abilityHypothesis":"newAbility","acquaintance":"newAcquaintance","phenomenalConcepts":"oldFactNewMode","dennett":"nothing","jackson2003":"oldFactNewMode"}},"zombie":{"o":["possible","conceivableNotPossible","notConceivable"],"p":{"chalmers":"possible","typeB":"conceivableNotPossible","typeA":"notConceivable"}},"brainVat":{"o":["no","yes","ordinaryOnly","contextDependent"],"p":{"skeptic":"no","putnam":"yes","moore":"yes","nozick":"ordinaryOnly","dretske":"ordinaryOnly","contextualism":"contextDependent"}},"teleporter":{"o":["survive","die","doesNotMatter"],"p":{"psychological":"survive","animalism":"die","bodily":"die","parfit":"doesNotMatter","buddhistReductionism":"doesNotMatter"}},"ship":{"o":["repaired","reassembled","both","neither"],"p":{"continuity":"repaired","mereologicalEssentialism":"reassembled","fourDimensionalism":"both","nihilism":"neither"}},"twinEarth":{"o":["same","different","narrowSameWideDifferent"],"p":{"externalism":"different","internalism":"same","twoDimensionalism":"narrowSameWideDifferent"}},"experienceMachine":{"o":["plugIn","refuse"],"p":{"hedonism":"plugIn","nozick":"refuse","objectiveList":"refuse"}},"violinist":{"o":["mustStay","mayUnplug"],"p":{"thomson":"mayUnplug","sanctityOfLife":"mustStay"}},"veil":{"o":["maximin","averageUtility"],"p":{"rawls":"maximin","harsanyi":"averageUtility"}},"gyges":{"o":["staysJust","becomesUnjust"],"p":{"glaucon":"becomesUnjust","thrasymachus":"becomesUnjust","socrates":"staysJust"}},"floatingMan":{"o":["awareOfSelf","notAware"],"p":{"avicenna":"awareOfSelf","descartes":"awareOfSelf","physicalism":"notAware"}},"butterfly":{"o":["zhou","butterfly","transformation","undecidable"],"p":{"guoXiang":"transformation","sceptical":"undecidable","commonSense":"zhou"}},"chariot":{"o":["realSelf","conventionalOnly","inexpressible","none"],"p":{"nagasena":"conventionalOnly","pudgalavada":"inexpressible","nyaya":"realSelf","eliminativism":"none"}},"childWell":{"o":["innateGood","learned","selfInterest"],"p":{"mencius":"innateGood","xunzi":"learned","egoism":"selfInterest"}},"swampman":{"o":["hasThoughts","noThoughts"],"p":{"davidson":"noThoughts","teleosemantics":"noThoughts","functionalism":"hasThoughts","internalism":"hasThoughts"}},"invertedSpectrum":{"o":["possible","impossible"],"p":{"qualiaRealism":"possible","shoemaker":"possible","behaviourism":"impossible","dennett":"impossible"}},"personhood":{"o":["achieved","innate","both"],"p":{"menkiti":"achieved","gyekye":"both","liberalIndividualism":"innate"}},"cottonFire":{"o":["necessary","habit"],"p":{"ghazali":"habit","averroes":"necessary","hume":"habit","malebranche":"habit","aristotelian":"necessary"}}},"THINKERS":{"thales":{"b":-624,"d":-546,"tr":"greek","in":[]},"heraclitus":{"b":-535,"d":-475,"tr":"greek","in":[]},"parmenides":{"b":-515,"d":-450,"tr":"greek","in":[]},"zeno":{"b":-490,"d":-430,"tr":"greek","in":["parmenides"]},"democritus":{"b":-460,"d":-370,"tr":"greek","in":[]},"socrates":{"b":-470,"d":-399,"tr":"greek","in":[]},"plato":{"b":-428,"d":-348,"tr":"greek","in":["socrates","parmenides","heraclitus"]},"aristotle":{"b":-384,"d":-322,"tr":"greek","in":["plato"]},"pyrrho":{"b":-360,"d":-270,"tr":"greek","in":["democritus"]},"epicurus":{"b":-341,"d":-270,"tr":"greek","in":["democritus"]},"zenoCitium":{"b":-334,"d":-262,"tr":"greek","in":["socrates"]},"sextus":{"b":160,"d":210,"tr":"greek","in":["pyrrho"]},"plotinus":{"b":204,"d":270,"tr":"greek","in":["plato","aristotle"]},"mahavira":{"b":-599,"d":-527,"tr":"jain","in":[]},"umasvati":{"b":150,"d":250,"tr":"jain","in":["mahavira"]},"samantabhadra":{"b":450,"d":520,"tr":"jain","in":["umasvati"]},"gautama":{"b":150,"d":250,"tr":"indian","in":[]},"udayana":{"b":975,"d":1050,"tr":"indian","in":["gautama"]},"gangesa":{"b":1300,"d":1360,"tr":"indian","in":["udayana","gautama"]},"shankara":{"b":788,"d":820,"tr":"indian","in":["nagarjuna"]},"ramanuja":{"b":1017,"d":1137,"tr":"indian","in":["shankara"]},"buddha":{"b":-563,"d":-483,"tr":"buddhist","in":[]},"nagarjuna":{"b":150,"d":250,"tr":"buddhist","in":["buddha"]},"vasubandhu":{"b":316,"d":396,"tr":"buddhist","in":["nagarjuna"]},"dignaga":{"b":480,"d":540,"tr":"buddhist","in":["vasubandhu"]},"dharmakirti":{"b":600,"d":660,"tr":"buddhist","in":["dignaga"]},"santideva":{"b":685,"d":763,"tr":"buddhist","in":["nagarjuna"]},"dharmottara":{"b":740,"d":800,"tr":"buddhist","in":["dharmakirti"]},"laozi":{"b":-571,"d":-471,"tr":"chinese","in":[]},"confucius":{"b":-551,"d":-479,"tr":"chinese","in":[]},"mozi":{"b":-470,"d":-391,"tr":"chinese","in":["confucius"]},"mencius":{"b":-372,"d":-289,"tr":"chinese","in":["confucius"]},"zhuangzi":{"b":-369,"d":-286,"tr":"chinese","in":["laozi"]},"gongsunlong":{"b":-325,"d":-250,"tr":"chinese","in":[]},"xunzi":{"b":-310,"d":-235,"tr":"chinese","in":["confucius"]},"hanfei":{"b":-280,"d":-233,"tr":"chinese","in":["xunzi","laozi"]},"zhuxi":{"b":1130,"d":1200,"tr":"chinese","in":["mencius","confucius"]},"wangyangming":{"b":1472,"d":1529,"tr":"chinese","in":["mencius","zhuxi"]},"alkindi":{"b":801,"d":873,"tr":"islamic","in":["aristotle"]},"alfarabi":{"b":872,"d":950,"tr":"islamic","in":["aristotle","plato"]},"avicenna":{"b":980,"d":1037,"tr":"islamic","in":["alfarabi","aristotle"]},"ghazali":{"b":1058,"d":1111,"tr":"islamic","in":["avicenna"]},"averroes":{"b":1126,"d":1198,"tr":"islamic","in":["aristotle","ghazali"]},"suhrawardi":{"b":1154,"d":1191,"tr":"islamic","in":["avicenna","plato"]},"shatibi":{"b":1320,"d":1388,"tr":"islamic","in":["ghazali"]},"ibnKhaldun":{"b":1332,"d":1406,"tr":"islamic","in":["averroes"]},"mullaSadra":{"b":1572,"d":1640,"tr":"islamic","in":["avicenna","suhrawardi"]},"maimonides":{"b":1138,"d":1204,"tr":"jewish","in":["aristotle","alfarabi"]},"augustine":{"b":354,"d":430,"tr":"latin","in":["plotinus","plato"]},"boethius":{"b":477,"d":524,"tr":"latin","in":["aristotle","plato"]},"anselm":{"b":1033,"d":1109,"tr":"latin","in":["augustine"]},"aquinas":{"b":1225,"d":1274,"tr":"latin","in":["aristotle","augustine","avicenna","averroes","maimonides"]},"llull":{"b":1232,"d":1316,"tr":"latin","in":[]},"ockham":{"b":1287,"d":1347,"tr":"latin","in":["aristotle","aquinas"]},"cusanus":{"b":1401,"d":1464,"tr":"latin","in":["llull"]},"hobbes":{"b":1588,"d":1679,"tr":"modern","in":[]},"descartes":{"b":1596,"d":1650,"tr":"modern","in":["augustine"]},"spinoza":{"b":1632,"d":1677,"tr":"modern","in":["descartes","maimonides"]},"locke":{"b":1632,"d":1704,"tr":"modern","in":["descartes","hobbes"]},"leibniz":{"b":1646,"d":1716,"tr":"modern","in":["descartes","spinoza"]},"hume":{"b":1711,"d":1776,"tr":"modern","in":["locke"]},"rousseau":{"b":1712,"d":1778,"tr":"modern","in":["hobbes","locke"]},"kant":{"b":1724,"d":1804,"tr":"modern","in":["hume","rousseau","leibniz"]},"condorcet":{"b":1743,"d":1794,"tr":"modern","in":["rousseau"]},"bentham":{"b":1748,"d":1832,"tr":"modern","in":["hume"]},"wollstonecraft":{"b":1759,"d":1797,"tr":"modern","in":["rousseau"]},"hegel":{"b":1770,"d":1831,"tr":"modern","in":["kant","spinoza"]},"mill":{"b":1806,"d":1873,"tr":"modern","in":["bentham"]},"marx":{"b":1818,"d":1883,"tr":"modern","in":["hegel"]},"sidgwick":{"b":1838,"d":1900,"tr":"modern","in":["mill","kant"]},"schopenhauer":{"b":1788,"d":1860,"tr":"continental","in":["kant","plato","buddha"]},"kierkegaard":{"b":1813,"d":1855,"tr":"continental","in":["hegel"]},"nietzsche":{"b":1844,"d":1900,"tr":"continental","in":["schopenhauer"]},"husserl":{"b":1859,"d":1938,"tr":"continental","in":["descartes"]},"heidegger":{"b":1889,"d":1976,"tr":"continental","in":["husserl","aristotle","kierkegaard"]},"sartre":{"b":1905,"d":1980,"tr":"continental","in":["heidegger","husserl"]},"levinas":{"b":1906,"d":1995,"tr":"continental","in":["husserl","heidegger"]},"beauvoir":{"b":1908,"d":1986,"tr":"continental","in":["sartre","hegel"]},"fanon":{"b":1925,"d":1961,"tr":"continental","in":["sartre","hegel"]},"foucault":{"b":1926,"d":1984,"tr":"continental","in":["nietzsche","heidegger"]},"frege":{"b":1848,"d":1925,"tr":"analytic","in":["kant","leibniz"]},"russell":{"b":1872,"d":1970,"tr":"analytic","in":["frege"]},"moore":{"b":1873,"d":1958,"tr":"analytic","in":["sidgwick"]},"wittgenstein":{"b":1889,"d":1951,"tr":"analytic","in":["frege","russell","schopenhauer"]},"carnap":{"b":1891,"d":1970,"tr":"analytic","in":["frege","wittgenstein"]},"quine":{"b":1908,"d":2000,"tr":"analytic","in":["carnap","russell"]},"anscombe":{"b":1919,"d":2001,"tr":"analytic","in":["wittgenstein","aristotle","aquinas"]},"foot":{"b":1920,"d":2010,"tr":"analytic","in":["aristotle","anscombe"]},"arrow":{"b":1921,"d":2017,"tr":"analytic","in":["condorcet"]},"rawls":{"b":1921,"d":2002,"tr":"analytic","in":["kant","rousseau","locke","sidgwick"]},"gettier":{"b":1927,"d":2021,"tr":"analytic","in":["russell"]},"thomson":{"b":1929,"d":2020,"tr":"analytic","in":["foot"]},"nozick":{"b":1938,"d":2002,"tr":"analytic","in":["locke","rawls"]},"parfit":{"b":1942,"d":2017,"tr":"analytic","in":["sidgwick","buddha"]},"zeraYacob":{"b":1599,"d":1692,"tr":"african","in":[]},"amo":{"b":1703,"d":1759,"tr":"african","in":["leibniz","descartes"]},"wiredu":{"b":1931,"d":2022,"tr":"african","in":["russell"]},"gyekye":{"b":1939,"d":2019,"tr":"african","in":["wiredu","aristotle"]},"menkiti":{"b":1940,"d":2019,"tr":"african","in":[]},"oruka":{"b":1944,"d":1995,"tr":"african","in":["wiredu"]}}}; /*/T*/
   const isObj = C.isObj, has = C.has, fin = Number.isFinite;
   const arrOf = v => (Array.isArray(v) ? v : []);
   const BUDGET = 200000;   // method evaluations (social choice searches), cost-weighted
 
   /* ---------- the checker (the same codes, paths and messages as tools/lib_philo.py) ---------- */
   const COLL = ['populations', 'cases', 'maxims', 'profiles', 'elections', 'lotteries', 'problems', 'games', 'beliefs', 'knowledge', 'experiments', 'thinkers', 'arguments', 'inferences', 'bargains',
-    'ruleCodes', 'streams', 'ubuntu'];
+    'ruleCodes', 'streams', 'ubuntu', 'poisson'];
   function checkSpec(spec) {
     const { P, E, W } = C.problems();
     const m = isObj(spec) ? spec.model : undefined;
@@ -35580,6 +35377,18 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     });
     arr('ruleCodes').forEach((x, i) => { if (!isObj(x)) return; const seen = []; arrOf(x.rules).forEach((r, j) => { if (!isObj(r) || typeof r.id !== 'string') return; if (seen.includes(r.id)) E('duplicate', `model.ruleCodes[${i}].rules[${j}].id`, `the rule ${r.id} is listed twice`); else seen.push(r.id); }); });
     arr('ubuntu').forEach((x, i) => { if (!isObj(x)) return; const seen = []; arrOf(x.options).forEach((r, j) => { if (!isObj(r) || typeof r.id !== 'string') return; if (seen.includes(r.id)) E('duplicate', `model.ubuntu[${i}].options[${j}].id`, `the option ${r.id} is listed twice`); else seen.push(r.id); }); });
+    const pc = {};
+    arr('poisson').forEach((x, i) => {
+      if (!isObj(x)) return; const p = `model.poisson[${i}]`, cs = [], seen = [];
+      arrOf(x.candidates).forEach((c, j) => { if (typeof c !== 'string') return; if (cs.includes(c)) E('duplicate', `${p}.candidates[${j}]`, `the candidate ${c} is listed twice`); else cs.push(c); });
+      if (typeof x.id === 'string') pc[x.id] = cs;
+      arrOf(x.types).forEach((t, j) => {
+        if (!isObj(t)) return;
+        if (typeof t.id === 'string') { if (seen.includes(t.id)) E('duplicate', `${p}.types[${j}].id`, `the type ${t.id} is listed twice`); else seen.push(t.id); }
+        if (typeof t.vote === 'string' && C.ID_RE.test(t.vote) && !cs.includes(t.vote)) E('ref', `${p}.types[${j}].vote`, `no candidate ${t.vote}`);
+        if (Array.isArray(t.u) && t.u.length !== cs.length) E('value', `${p}.types[${j}].u`, 'needs one utility per candidate');
+      });
+    });
     C.checkOutputs(spec, ID, ['scalar', 'series', 'scene'], (o, at) => {
       const tb = has(T.OUT, o.kind) && has(T.OUT[o.kind], o.of) ? T.OUT[o.kind][o.of] : null;
       if (!tb) { E('output', at + '.of', `${o.of} is not a ${o.kind} output of ${ID}`); return; }
@@ -35591,6 +35400,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         for (const [v, pth] of vs) {
           if (!okId(v)) continue;
           if (coll === 'cand') { const cs = cands[o.election]; if (cs && !cs.includes(v)) E('ref', pth, `no candidate ${v}`); }
+          else if (coll === 'pcand') { const cs = typeof o.poisson === 'string' && has(pc, o.poisson) ? pc[o.poisson] : null; if (cs && !cs.includes(v)) E('ref', pth, `no candidate ${v}`); }
           else if (coll === 'thinker') { if (!thinkerIds.includes(v)) E('ref', pth, `no thinker ${v}`); }
           else if (coll === 'act') { const as = acts[o.problem]; if (as && !as.includes(v)) E('ref', pth, `no act ${v}`); }
           else if (!ids[coll].includes(v)) E('ref', pth, `no ${f} ${v}`);
@@ -36269,8 +36079,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const RIDGE = rules => { let s = 0; for (let i = 0; i <= 100; i++) s += codeValue(rules, i / 100) * (i === 0 || i === 100 ? 0.5 : 1); return s / 100; };   // ∫₀¹ V(a) da, trapezoid
   /** the winner of a profile of strict rankings under a method, ties broken by the candidate order (lexicographic, as in
       Myerson & Weber 1993's pure-strategy analyses); ranks: index lists */
-  function lexWinner(m, ids, ranks, name, cost) {
-    const r = method({ m, ids, ballots: ranks.map(rank => ({ n: 1, rank, approve: 1 })) }, name, () => {}, cost);
+  function lexWinner(m, ids, ranks, name, cost, ballots) {
+    const r = method({ m, ids, ballots: ballots || ranks.map(rank => ({ n: 1, rank, approve: 1 })) }, name, () => {}, cost);
     if (r.w >= 0) return r.w;
     const rk = r.rank || []; for (let i = 0; i < m; i++) if (rk[i] === 0) return i;
     return 0;
@@ -36359,6 +36169,167 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       ΔI < 0 or ΔS < 0) is impermissible whatever its total; among the permissible the promote score ranks. */
   function ubuntuScore(op, wI, wS) { let s = 0; for (const e of op.effects) { const i = e.identity, so = e.solidarity; s += wI * (so >= 0 || i < 0 ? i : 0) + wS * so; } return s; }
   const ubuntuOk = op => !op.effects.some(e => e.byAgent && (e.identity < 0 || e.solidarity < 0));
+
+  /* ---------- mixed equilibria of two-player games, and voting blocs (von Stengel 2007, in Nisan et al., Algorithmic Game Theory
+     ch. 3: support enumeration for nondegenerate games, §3.4; the Lemke–Howson algorithm, Lemke & Howson 1964, SIAM J. 12:413) ---------- */
+  function solveLin(M, rhs) {   // Gaussian elimination with partial pivoting; null when singular
+    const n = rhs.length, a = M.map((r, i) => r.concat([rhs[i]]));
+    for (let c = 0; c < n; c++) {
+      let p = c; for (let r = c + 1; r < n; r++) if (Math.abs(a[r][c]) > Math.abs(a[p][c])) p = r;
+      if (Math.abs(a[p][c]) < 1e-12) return null; [a[c], a[p]] = [a[p], a[c]];
+      for (let r = 0; r < n; r++) if (r !== c) { const f = a[r][c] / a[c][c]; for (let k = c; k <= n; k++) a[r][k] -= f * a[c][k]; }
+    }
+    return a.map((r, i) => r[n] / r[i]);
+  }
+  function subsets(n, k) { const out = []; (function go(s, i) { if (s.length === k) { out.push(s.slice()); return; } for (let j = i; j < n; j++) { s.push(j); go(s, j + 1); s.pop(); } })([], 0); return out; }
+  /** the mixed strategy of the other player on support J that makes every row of I indifferent: Σ_j P[i][j] y_j = v (i ∈ I), Σ y = 1 */
+  function indiff(P, I, J) {
+    const k = I.length, M = [], rhs = [];
+    for (const i of I) { M.push(J.map(j => P[i][j]).concat([-1])); rhs.push(0); }
+    M.push(J.map(() => 1).concat([0])); rhs.push(1);
+    if (M.length !== k + 1 || J.length !== k) return null;
+    const s = solveLin(M, rhs); return s ? { y: s.slice(0, k), v: s[k] } : null;
+  }
+  /** supportEnum(A, B) → [{x, y, u, v}]: every equilibrium with equal-size supports (all of them in a nondegenerate game) */
+  function supportEnum(A, B, limit) {
+    const m = A.length, n = A[0].length, out = [], Bt = B[0].map((_, j) => B.map(r => r[j])), E = 1e-9;
+    for (let k = 1; k <= Math.min(m, n); k++) for (const I of subsets(m, k)) for (const J of subsets(n, k)) {
+      if (out.length >= (limit || 64)) return out;
+      const qy = indiff(A, I, J), qx = indiff(Bt, J, I); if (!qy || !qx) continue;
+      if (qy.y.some(v => v < -E) || qx.y.some(v => v < -E)) continue;
+      const y = new Array(n).fill(0), x = new Array(m).fill(0); J.forEach((j, t) => { y[j] = Math.max(0, qy.y[t]); }); I.forEach((i, t) => { x[i] = Math.max(0, qx.y[t]); });
+      const Ay = A.map(r => sum(r.map((a, j) => a * y[j]))), xB = Bt.map(c => sum(c.map((b, i) => b * x[i])));
+      const u = Math.max(...Ay), v = Math.max(...xB);
+      if (I.some(i => Ay[i] < u - 1e-7) || J.some(j => xB[j] < v - 1e-7)) continue;
+      if (out.some(e => e.x.every((a, i) => Math.abs(a - x[i]) < 1e-7) && e.y.every((b, j) => Math.abs(b - y[j]) < 1e-7))) continue;
+      // degenerate (von Stengel 2007 Def. 3.2): more pure best responses than the support — the list may then miss equilibria (a continuum)
+      const deg = Ay.filter(a => a >= u - 1e-7).length > J.length || xB.filter(b => b >= v - 1e-7).length > I.length;
+      out.push({ x, y, u, v, deg });
+    }
+    return out;
+  }
+  /** lemkeHowson(A, B, k0) → {x, y} — the equilibrium reached by dropping label k0 (0 … m+n−1), by complementary pivoting on the
+      polytopes P = {x ≥ 0: Bᵀx ≤ 1}, Q = {y ≥ 0: Ay ≤ 1} after shifting the payoffs positive (von Stengel 2007 §3.5) */
+  function lemkeHowson(A, B, k0) {
+    const m = A.length, n = A[0].length, N = m + n;
+    const lo = Math.min(...A.flat(), ...B.flat()), Ap = A.map(r => r.map(a => a - lo + 1)), Bp = B.map(r => r.map(b => b - lo + 1));
+    // Q: rows i < m: Σ_j A'[i][j] y_j + r_i = 1 (r_i label i, y_j label m + j). P: rows j < n: Σ_i B'[i][j] x_i + s_j = 1 (x_i label i, s_j label m + j)
+    const TQ = Array.from({ length: m }, (_, i) => { const r = new Array(N + 1).fill(0); r[i] = 1; for (let j = 0; j < n; j++) r[m + j] = Ap[i][j]; r[N] = 1; return r; });
+    const TP = Array.from({ length: n }, (_, j) => { const r = new Array(N + 1).fill(0); r[m + j] = 1; for (let i = 0; i < m; i++) r[i] = Bp[i][j]; r[N] = 1; return r; });
+    const bQ = Array.from({ length: m }, (_, i) => i), bP = Array.from({ length: n }, (_, j) => m + j);
+    const pivot = (T, b, e) => {   // the entering variable e; the min-ratio row leaves (ties: the lowest label, a simple anti-cycling rule)
+      let row = -1, best = Infinity;
+      for (let r = 0; r < T.length; r++) if (T[r][e] > 1e-12) { const q = T[r][N] / T[r][e]; if (q < best - 1e-12 || (Math.abs(q - best) <= 1e-12 && b[r] < b[row])) { best = q; row = r; } }
+      if (row < 0) return -1;
+      const pv = T[row][e]; for (let k = 0; k <= N; k++) T[row][k] /= pv;
+      for (let r = 0; r < T.length; r++) if (r !== row && Math.abs(T[r][e]) > 0) { const f = T[r][e]; for (let k = 0; k <= N; k++) T[r][k] -= f * T[row][k]; }
+      const left = b[row]; b[row] = e; return left;
+    };
+    let e = k0, inP = k0 < m;   // label k0 < m: x_k0 enters P; else y enters Q
+    for (let it = 0; it < 1000; it++) {
+      const left = inP ? pivot(TP, bP, e) : pivot(TQ, bQ, e);
+      if (left < 0) return null;
+      if (left === k0) break;
+      e = left; inP = !inP;
+    }
+    const x = new Array(m).fill(0), y = new Array(n).fill(0);
+    bP.forEach((l, r) => { if (l < m) x[l] = TP[r][N]; }); bQ.forEach((l, r) => { if (l >= m) y[l - m] = TQ[r][N]; });
+    const sx = sum(x), sy = sum(y); if (!(sx > 0 && sy > 0)) return null;
+    return { x: x.map(v => v / sx), y: y.map(v => v / sy) };
+  }
+  /** a voting game between ballot groups as blocs (each group's ballot counts n times): a plurality ballot names a candidate, an
+      antiplurality ballot the one voted against; a group's payoff is the Borda score of the winner on its own ranking (m − 1 − place)
+      or, with util 'top', 1 for its first choice; ties broken by the candidate order */
+  function blocGame(E, name, util) {
+    const m = E.m, G = E.ballots.length, strat = Array.from({ length: m }, (_, c) => c);
+    const ballotOf = (g, c) => (name === 'antiplurality' ? E.ballots[g].rank.filter(x => x !== c).concat([c]) : [c].concat(E.ballots[g].rank.filter(x => x !== c)));
+    const pay = (g, w) => { const p = E.ballots[g].rank.indexOf(w); return util === 'top' ? +(p === 0) : p < 0 ? 0 : m - 1 - p; };
+    const cost = { n: 0 }, win = prof => lexWinner(m, E.ids, [], name, cost, prof.map((c, g) => ({ n: E.ballots[g].n, rank: ballotOf(g, c), approve: 1 })));
+    return { m, G, strat, pay, win };
+  }
+  /** mixedVote(E, name, solver, util, flag) → [{p: [[prob per candidate] per group], win: [P(candidate wins)]}] */
+  function mixedVote(E, name, solver, util, flag) {
+    const g = blocGame(E, name, util), m = g.m;
+    if (g.G === 2) {
+      const W = Array.from({ length: m }, (_, a) => Array.from({ length: m }, (_, b) => g.win([a, b])));
+      const A = W.map(r => r.map(w => g.pay(0, w))), B = W.map(r => r.map(w => g.pay(1, w)));
+      const eqs = solver === 'lemke' ? [lemkeHowson(A, B, 0)].filter(Boolean) : supportEnum(A, B);
+      if (solver !== 'lemke' && eqs.some(q => q.deg)) flag('degenerate');
+      return eqs.map(q => ({ p: [q.x, q.y], win: Array.from({ length: m }, (_, c) => { let s = 0; for (let a = 0; a < m; a++) for (let b = 0; b < m; b++) if (W[a][b] === c) s += q.x[a] * q.y[b]; return s; }) }));
+    }
+    // more than two groups: the multi-population replicator dynamics (Taylor & Jonker 1978; Weibull 1995 ch. 5) from the uniform mix — an
+    // approximation: a rest point it reaches need not be an equilibrium, and it finds at most one
+    flag('approximate');
+    if (Math.pow(m, g.G) * g.G * g.G * m > 25000) { flag('budget'); return []; }
+    const profs = [], W = []; for (let p = 0; p < Math.pow(m, g.G); p++) { let q = p; const pr = []; for (let i = 0; i < g.G; i++) { pr.push(q % m); q = Math.floor(q / m); } profs.push(pr); W.push(g.win(pr)); }
+    let X = Array.from({ length: g.G }, () => new Array(m).fill(1 / m));
+    const eu = (X, i, c) => { let s = 0; profs.forEach((pr, k) => { if (pr[i] !== c) return; let pp = 1; for (let j = 0; j < g.G; j++) if (j !== i) pp *= X[j][pr[j]]; s += pp * g.pay(i, W[k]); }); return s; };
+    for (let it = 0; it < 2000; it++) {
+      const X2 = X.map((x, i) => { const us = x.map((_, c) => eu(X, i, c) + 1), avg = sum(x.map((v, c) => v * us[c])); return x.map((v, c) => v * us[c] / avg); });
+      const d = Math.max(...X2.flat().map((v, k) => Math.abs(v - X.flat()[k]))); X = X2; if (d < 1e-10) break;
+    }
+    const win = new Array(m).fill(0); profs.forEach((pr, k) => { let pp = 1; for (let j = 0; j < g.G; j++) pp *= X[j][pr[j]]; win[W[k]] += pp; });
+    return [{ p: X, win }];
+  }
+
+  /* ---------- Poisson voting games (Myerson 1998, IJGT 27:375 — population uncertainty; Myerson 2000, JET 94:7 — large Poisson games,
+     magnitudes; Myerson & Weber 1993, APSR 87:102 — the voting equilibrium; Myerson 2002, JET 103:219). The number of voters is
+     Poisson(n); a voter is of type t with probability r_t and votes for candidate vote_t; so the votes X_k of each candidate are
+     independent Poisson(τ_k), τ_k = n Σ_t r_t [vote_t = k]. Plurality, ties broken with equal chances. Exact probabilities by summing
+     the Poisson laws up to τ + 12√τ + 20 (the remainder < 10⁻¹²); magnitudes (log-probability rates) by Myerson 2000's formulas. ---------- */
+  function poissonPmf(t, K) { const p = new Float64Array(K + 2); if (t <= 0) { p[0] = 1; return p; } let lg = -t; p[0] = Math.exp(lg); for (let x = 1; x <= K + 1; x++) { lg += Math.log(t / x); p[x] = Math.exp(lg); } return p; }
+  function poissonCtx(tau) { const K = Math.ceil(Math.max(...tau) + 12 * Math.sqrt(Math.max(...tau)) + 20), P = tau.map(t => poissonPmf(t, K)); const F = P.map(p => { const f = new Float64Array(K + 2); let s = 0; for (let x = 0; x <= K + 1; x++) { s += p[x]; f[x] = s; } return f; }); return { K, P, F, m: tau.length }; }
+  /** P(winner = c) for each c, with an extra vote for candidate `plus` (−1: none) */
+  function poissonWinProbs(ctx, plus) {
+    const { K, P, F, m } = ctx, pm = (k, x) => (x < 0 ? 0 : k === plus ? (x >= 1 ? P[k][x - 1] : 0) : P[k][x]), cdf = (k, x) => (x < 0 ? 0 : k === plus ? (x >= 1 ? F[k][x - 1] : 0) : F[k][x]);
+    const win = new Array(m).fill(0);
+    for (let x = 0; x <= K + 1; x++) for (let S = 1; S < (1 << m); S++) {
+      let p = 1, sz = 0; for (let k = 0; k < m && p > 0; k++) { if (S >> k & 1) { p *= pm(k, x); sz++; } else p *= cdf(k, x - 1); }
+      if (p > 0) for (let k = 0; k < m; k++) if (S >> k & 1) win[k] += p / sz;
+    }
+    return win;
+  }
+  /** P(a and b tie for first, every other candidate below) */
+  function poissonTie(ctx, a, b) { const { K, P, F, m } = ctx; let s = 0; for (let x = 0; x <= K; x++) { let p = P[a][x] * P[b][x]; for (let k = 0; k < m; k++) if (k !== a && k !== b) p *= x > 0 ? F[k][x - 1] : 0; s += p; } return s; }
+  /** the magnitude of that tie (Myerson 2000 §§ 4–5): −(√τa − √τb)² when every other τ_c ≤ √(τa τb); with three candidates and
+      τ_c above it, 3(τa τb τc)^(1/3) − τa − τb − τc (the constraint binds: a three-way near-tie). In units of log-probability. */
+  function tieMagnitude(tau, a, b, flag) {
+    const g = Math.sqrt(tau[a] * tau[b]), others = tau.map((t, k) => k).filter(k => k !== a && k !== b);
+    if (others.every(k => tau[k] <= g)) return -Math.pow(Math.sqrt(tau[a]) - Math.sqrt(tau[b]), 2);
+    if (others.length === 1) { const c = others[0]; return 3 * Math.cbrt(tau[a] * tau[b] * tau[c]) - tau[a] - tau[b] - tau[c]; }
+    flag('magnitude-m'); return NaN;
+  }
+  function poissonGame(G, X) {
+    const n = X(G.n), m = arrOf(G.candidates).length, types = arrOf(G.types).filter(isObj).map(t => ({ id: t.id, r: X(t.r), u: arrOf(t.u).map(X), vote: arrOf(G.candidates).indexOf(t.vote) }));
+    return { n, m, ids: arrOf(G.candidates), types };
+  }
+  const poissonTau = (g, votes) => { const tau = new Array(g.m).fill(0); g.types.forEach((t, i) => { const v = votes ? votes[i] : t.vote; if (v >= 0) tau[v] += g.n * t.r; }); return tau; };
+  /** the expected gain of one more vote for c to a voter with utilities u, summed over the pivot events directly (Myerson 1998 §5;
+      Myerson & Weber 1993): c tied at the top with a set S then wins outright (u_c − mean u_S); c one vote behind a top set S joins the
+      tie (mean u_{S∪c} − mean u_S). Products of probabilities, no differences, so a gain of 10⁻⁷⁰ keeps its digits. */
+  function voteGains(ctx, u) {
+    const { K, P, F, m } = ctx, U = k => u[k] || 0, gs = new Array(m).fill(0);
+    for (let c = 0; c < m; c++) for (let x = 0; x <= K; x++) for (let S = 1; S < (1 << m); S++) {
+      const inS = S >> c & 1; if (!inS && x === 0) continue;
+      let p = 1, us = 0, sz = 0;
+      for (let k = 0; k < m && p > 0; k++) {
+        if (S >> k & 1) { p *= P[k][x]; us += U(k); sz++; }
+        else if (k === c) p *= P[k][x - 1];
+        else p *= x > 0 ? F[k][x - 1] : 0;
+      }
+      if (p > 0) gs[c] += p * (inS ? U(c) - us / sz : (us + U(c)) / (sz + 1) - us / sz);
+    }
+    return gs;
+  }
+  const bestOf = gs => { const mx = Math.max(...gs), tol = 1e-9 * Math.max(...gs.map(Math.abs)); return { mx, tol, zero: gs.every(v => v === 0) }; };
+  function poissonIsEq(g, votes, flag) {
+    const ctx = poissonCtx(poissonTau(g, votes));
+    let under = false;
+    const ok = g.types.every((t, i) => { const gs = voteGains(ctx, t.u), v = votes[i], b = bestOf(gs); if (b.zero) under = true; return v >= 0 && (b.zero || gs[v] >= b.mx - b.tol); });
+    if (ok && under) { if (flag) flag('underflow'); return NaN; }   // a type whose every pivot is below 10⁻³⁰⁸: not certified
+    return +ok;
+  }
+
   function prepare(spec) { const cache = new Map(); for (const [src] of exprs(spec)) if (!cache.has(src)) cache.set(src, C.cx(src)); return { cache }; }
   function run(spec, env, opts) {
     const M = (spec && spec.model) || {}, codes = [], out = {}, cache = (opts && opts.prepared && opts.prepared.cache) || new Map(), seed = (opts && opts.seed) >>> 0 || 1;
@@ -36412,6 +36383,29 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const pairOf = o => { const a = stOk(o.a), b = stOk(o.b); return a && b ? { a, b, q: streamPair(a, b, flag) } : null; };
     const ubOk = id => { const u = ubu.get(id); if (!u) return null; if (![u.wI, u.wS].every(fin) || u.options.some(op => op.effects.some(e => !fin(e.identity) || !fin(e.solidarity)))) { flag('value'); return null; } if (u.options.some(op => op.effects.some(e => Math.abs(e.identity) > 1 || Math.abs(e.solidarity) > 1))) flag('range'); return u; };
     const gameMethod = o => o.method || 'plurality';
+    const pgames = byId('poisson', x => poissonGame(x, X));
+    const pgOk = id => { const g = pgames.get(id); if (!g) return null; if (!(fin(g.n) && g.n >= 0) || g.types.some(t => !(fin(t.r) && t.r >= 0) || !t.u.every(fin))) { flag('value'); return null; }
+      if (g.n > 1e5) { flag('budget'); return null; } const tau = poissonTau(g), K = Math.max(...tau) + 12 * Math.sqrt(Math.max(...tau)) + 20; if (K * (1 << g.m) * g.m * (g.m + 1) > 4e7) { flag('budget'); return null; } return g; };
+    const pgCtx = new Map(), ctxOf = g => { const k = JSON.stringify(poissonTau(g)); if (!pgCtx.has(k)) pgCtx.set(k, poissonCtx(poissonTau(g))); return pgCtx.get(k); };
+    const eqCache = new Map();
+    const eqsOf = o => {   // the equilibria of a bimatrix game (support enumeration, or the one Lemke–Howson reaches from the label)
+      const G = games.get(o.game); if (!G) return null; const k = o.game + '|' + (o.solver || 'support') + '|' + (o.label || 0);
+      if (eqCache.has(k)) { const c = eqCache.get(k); c.cs.forEach(flag); return c.e; }
+      const cs = [], fl = c => { cs.push(c); flag(c); };
+      const A = G.pay.map(r => r.map(c => c[0])), B = G.pay.map(r => r.map(c => c[1]));
+      if (![...A.flat(), ...B.flat()].every(fin) || G.pay.some(r => r.length !== A[0].length)) { flag('value'); return null; }
+      let e; if (o.solver === 'lemke') { const L = Math.floor(X(o.label === undefined ? 0 : o.label)); if (!(L >= 0 && L < A.length + A[0].length)) { flag('range'); return null; } e = [lemkeHowson(A, B, L)].filter(Boolean); }
+      else { e = supportEnum(A, B); if (e.some(q => q.deg)) fl('degenerate'); }
+      if (!e.length) fl('none'); eqCache.set(k, { e, cs }); return e;
+    };
+    const mvCache = new Map();
+    const mixedOf = o => {
+      const E = elect(o.election); if (!E) return null; const nm = o.method || 'plurality', k = [o.election, nm, o.util || 'borda', o.solver || 'support'].join('|');
+      if (!['plurality', 'antiplurality'].includes(nm)) { flag('method'); return null; }
+      if (!mvCache.has(k)) { const cs = [], res = mixedVote(E, nm, o.solver, o.util, c => cs.push(c)); mvCache.set(k, { res, cs }); }
+      const { res: r, cs } = mvCache.get(k); cs.forEach(flag); if (!r.length) flag('none'); return { E, r };
+    };
+    const pick = (list, o) => { const i = o.eq === undefined ? 0 : Math.floor(X(o.eq)); if (!(i >= 0 && i < list.length)) { flag('range'); return null; } return list[i]; };
     let tour, soritesR;
     const getTour = () => (tour === undefined ? (tour = isObj(M.tournament) ? tournament(spec, games, X, seed, flag) : null) : tour);
     const getSor = () => (soritesR === undefined ? (soritesR = isObj(M.sorites) ? sorites(M.sorites, X) : null) : soritesR);
@@ -36586,6 +36580,33 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
           const k = gsProfile(E.m, E.ids, vs, o.method, { n: 0 }); return o.of === 'gsManipulable' ? +(k > 0) : k;
         }
         case 'gsExists': return gsExists(o.m || 3, o.n || 3, o.method, flag);
+        // ----- mixed equilibria (von Stengel 2007; Lemke & Howson 1964) and mixed voting equilibria between ballot groups -----
+        case 'equilibria': { const e = eqsOf(o); return e ? e.length : NaN; }
+        case 'eqProb': case 'eqPayoff': {
+          const e = eqsOf(o); if (!e) return NaN; const q = pick(e, o); if (!q) return NaN; const pl = o.player === 2 ? 2 : 1;
+          if (o.of === 'eqPayoff') { if (o.solver === 'lemke') { const G = games.get(o.game); let s = 0; q.x.forEach((a, i) => q.y.forEach((b, j) => { s += a * b * G.pay[i][j][pl - 1]; })); return s; } return pl === 1 ? q.u : q.v; }
+          const v = pl === 1 ? q.x : q.y, j = Math.floor(X(o.strategy)); if (!(j >= 0 && j < v.length)) { flag('range'); return NaN; } return v[j];
+        }
+        case 'mixedVoteCount': { const R = mixedOf(o); return R ? R.r.length : NaN; }
+        case 'mixedVoteProb': case 'mixedWinProb': {
+          const R = mixedOf(o); if (!R) return NaN; const q = pick(R.r, o); if (!q) return NaN; const c = R.E.ids.indexOf(o.candidate); if (c < 0) { flag('missing'); return NaN; }
+          if (o.of === 'mixedWinProb') return q.win[c];
+          const g = Math.floor(X(o.group === undefined ? 0 : o.group)); if (!(g >= 0 && g < q.p.length)) { flag('range'); return NaN; } return q.p[g][c];
+        }
+        // ----- Poisson voting games (Myerson 1998, 2000; Myerson & Weber 1993) -----
+        case 'expectedVotes': { const g = pgOk(o.poisson); if (!g) return NaN; const c = g.ids.indexOf(o.candidate); if (c < 0) { flag('missing'); return NaN; } return poissonTau(g)[c]; }
+        case 'pivotProb': case 'pivotMagnitude': {
+          const g = pgOk(o.poisson); if (!g) return NaN; const a = g.ids.indexOf(o.a), b = g.ids.indexOf(o.b); if (a < 0 || b < 0 || a === b) { flag('missing'); return NaN; }
+          return o.of === 'pivotProb' ? poissonTie(ctxOf(g), a, b) : tieMagnitude(poissonTau(g), a, b, flag);
+        }
+        case 'poissonWinProb': { const g = pgOk(o.poisson); if (!g) return NaN; const c = g.ids.indexOf(o.candidate); if (c < 0) { flag('missing'); return NaN; } return poissonWinProbs(ctxOf(g), -1)[c]; }
+        case 'voteGain': case 'bestVote': {
+          const g = pgOk(o.poisson); if (!g) return NaN; const t = g.types.find(x => x.id === o.type); if (!t) { flag('missing'); return NaN; }
+          const gs = voteGains(ctxOf(g), t.u);
+          if (o.of === 'voteGain') { const c = g.ids.indexOf(o.candidate); if (c < 0) { flag('missing'); return NaN; } return gs[c]; }
+          const q = bestOf(gs); if (q.zero) { flag('underflow'); return NaN; } const b = gs.findIndex(v => v >= q.mx - q.tol); if (gs.filter(v => v >= q.mx - q.tol).length > 1) flag('tie'); return b;
+        }
+        case 'poissonEquilibrium': { const g = pgOk(o.poisson); if (!g) return NaN; if (g.types.some(t => t.vote < 0)) { flag('missing'); return NaN; } return poissonIsEq(g, g.types.map(t => t.vote), flag); }
         // ----- infinite ethics -----
         case 'overtaking': case 'catchingUp': { const P = pairOf(o); if (!P || !P.q) return NaN; return o.of === 'overtaking' ? overtake(P.q, flag) : catchUp(P.q, flag); }
         case 'truncCompare': { const a = stOk(o.a), b = stOk(o.b), Tn = Math.floor(X(o.T)); if (!a || !b) return NaN; if (!(Tn >= 1 && Tn <= 1e6)) { flag('range'); return NaN; } let s = 0; for (let t = 0; t < Tn; t++) s += streamAt(a, t) - streamAt(b, t); return Math.sign(s); }
@@ -36723,6 +36744,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     confirm, knows, sorites, hetu, koti, bhanga, formOf, argument, permute,
     // added: rule consequentialism at a rate, voting games and Gibbard–Satterthwaite, infinite streams, ubuntu
     ruleValue, codeValue, voteGame, gsProfile, gsExists, lexWinner, streamPair, overtake, catchUp, sameCounts, ubuntuScore, ubuntuOk,
+    supportEnum, lemkeHowson, mixedVote, poissonCtx, poissonWinProbs, poissonTie, tieMagnitude, voteGains, poissonIsEq,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
