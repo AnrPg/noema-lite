@@ -12,8 +12,16 @@
 .aa :focus-visible{ outline:2px solid var(--aa-c); outline-offset:2px; }
 
 /* the top: title, kind, tools */
-.aa-head{ margin-bottom:8px; }
+.aa-head{ margin-bottom:8px; display:flex; align-items:center; gap:6px; }
 .aa-h1{ font-size:1.25rem; font-weight:700; margin:0 0 2px; }
+.aa-vh{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
+.aa-info{ display:inline-flex; align-items:center; justify-content:center; min-width:24px; min-height:24px; color:var(--aa-ink3); cursor:help; font-size:.95rem; border-radius:999px; }
+.aa-info:hover, .aa-info:focus-visible{ color:var(--aa-c); }
+/* a library engine picked: its reference activity or a blank one; the buttons in one row while they fit, else one above the other */
+.aa-start{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; padding:8px 10px; margin-top:8px; border:1px solid var(--aa-line); border-radius:var(--aa-r); background:var(--aa-bg2); }
+.aa-start[hidden]{ display:none; }
+.aa-startq{ font-size:.88rem; color:var(--aa-ink2); min-width:0; overflow-wrap:anywhere; }
+.aa-startb{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
 .aa-intro{ margin:0; color:var(--aa-ink2); font-size:.9rem; }
 .aa-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; padding:8px 0; border-bottom:1px solid var(--aa-line); }
 .aa-sp{ flex:1 1 0; min-width:0; }
@@ -123,8 +131,14 @@ details[open] > .sf-sum::before{ transform:rotate(45deg); }
 .sf-mrow{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; gap:6px; align-items:end; }
 .sf-mrow > .sf-f > .sf-fh{ display:none; }
 .sf-unknown .sf-l{ font-family:var(--mono,monospace); font-weight:400; }
+@media (max-width:560px){   /* the tools as icons (each says its name on hover and to a screen reader) */
+  .aa-bar .aa-btn:has(.aa-ico) .aa-bt{ display:none; }
+  .aa-bar .aa-btn{ padding-inline:8px; }
+  .aa-type{ flex:1 1 10em; }
+}
 @media (max-width:420px){
   .aa{ padding-inline:12px; }
+  .aa-startb{ flex-direction:column; align-items:stretch; width:100%; }
   .sf-altrow{ grid-template-columns:minmax(0,1fr); }
   .sf-mrow{ grid-template-columns:minmax(0,1fr) auto; }
   .sf-mrow > .sf-f{ grid-column:1 / -1; grid-row:2; }

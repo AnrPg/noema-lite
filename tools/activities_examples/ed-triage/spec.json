@@ -1,0 +1,50 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "des@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "maxLwbs": 0.03, "maxRoutineWait": 15, "busyHour": 8, "maxDoctors": 4 },
+ "params": [
+  { "id": "doctors", "kind": "slider", "label": "doctorsLabel", "min": 1, "max": 6, "step": 1, "default": 2 },
+  { "id": "perHour", "kind": "slider", "label": "perHourLabel", "min": 4, "max": 12, "step": 1, "default": 8 }
+ ],
+ "model": {
+  "tEnd": 720, "unit": "min", "reps": 20,
+  "classes": [ { "id": "urgent", "prio": 0, "key": "clsUrgent" }, { "id": "routine", "prio": 1, "key": "clsRoutine" } ],
+  "sources": [ { "id": "door", "to": "triage", "mix": { "urgent": 0.2, "routine": 0.8 }, "arrival": { "dist": "exp", "mean": "60 / perHour" }, "key": "srcDoor" } ],
+  "stations": [
+   { "id": "triage", "servers": 1, "service": { "dist": "tri", "min": 2, "mode": 4, "max": 7 }, "route": [ { "to": "doctor" } ], "key": "stTriage" },
+   { "id": "doctor", "servers": "doctors", "discipline": "priority", "preempt": "resume",
+     "serviceBy": { "urgent": { "dist": "lognormal", "mean": 30, "sd": 15 }, "routine": { "dist": "exp", "mean": 15 } },
+     "renege": { "dist": "exp", "mean": 120 }, "key": "stDoctor" }
+  ]
+ },
+ "outputs": [
+  { "id": "wqUrgent", "kind": "scalar", "of": "wq", "station": "doctor", "class": "urgent" },
+  { "id": "wqRoutine", "kind": "scalar", "of": "wq", "station": "doctor", "class": "routine" },
+  { "id": "wqRoutineHalf", "kind": "scalar", "of": "wq", "station": "doctor", "class": "routine", "est": "half" },
+  { "id": "lwbs", "kind": "scalar", "of": "pAbandon" },
+  { "id": "left", "kind": "scalar", "of": "reneged" },
+  { "id": "utilDoc", "kind": "scalar", "of": "util", "station": "doctor" },
+  { "id": "bumped", "kind": "scalar", "of": "preempted", "station": "doctor" },
+  { "id": "t", "kind": "series", "of": "t" },
+  { "id": "qDoc", "kind": "series", "of": "qlen", "station": "doctor" },
+  { "id": "net", "kind": "scene", "of": "network" },
+  { "id": "gantt", "kind": "scene", "of": "gantt", "window": 240 }
+ ],
+ "readouts": [
+  { "label": "lwbsLabel", "expr": "100 * lwbs", "digits": 2 },
+  { "label": "leftLabel", "expr": "left", "digits": 1 },
+  { "label": "routineLabel", "expr": "wqRoutine", "digits": 1 },
+  { "label": "routineHalfLabel", "expr": "wqRoutineHalf", "digits": 1 },
+  { "label": "urgentLabel", "expr": "wqUrgent", "digits": 2 },
+  { "label": "utilLabel", "expr": "utilDoc", "digits": 3 },
+  { "label": "bumpedLabel", "expr": "bumped", "digits": 1 }
+ ],
+ "plots": [
+  { "kind": "series", "title": "queueTitle", "x": { "series": "t", "label": "time" }, "y": { "min": 0, "label": "waiting" },
+    "series": [ { "y": "qDoc", "label": "queueLine", "style": "steps" } ] },
+  { "kind": "scene", "title": "netTitle", "of": "net", "height": 220 },
+  { "kind": "scene", "title": "ganttTitle", "of": "gantt", "height": 220 }
+ ]
+}

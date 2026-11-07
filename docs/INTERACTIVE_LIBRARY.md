@@ -26,6 +26,7 @@ the limits and edge cases, the reference values its tests assert).
 |---|---|
 | `engine/src/46_lib_core.js` | `NoemaLibCore`: the model checker (a table walked with fixed codes and messages), `numx` numbers, seeded randomness, statistics, thinning, scenes, the adapter `makeEngine`, the Worker source |
 | `engine/src/47_lib_<name>.js`, `48_lib_<name>.js` | one engine each: `window.NoemaLib<Name>` |
+| `engine/src/46_lib_schema.js` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
 | `engine/src/49_lib_catalog.js` | `NoemaEngineCatalog`: every engine with its layer and search words; `suggest(text)`; registers the loaded library engines (`ACT.registerEngine`) |
 | `tools/enginelib.py` | the Python twin of the core's checker (`walk`, `problems`, `check_outputs`) |
 | `tools/lib_<name>.py` | the Python twin of one engine's checks: `ID`, `check_spec(spec)`, `exprs(spec)`, `keys(spec)` — the same codes, paths and messages |
@@ -50,7 +51,9 @@ catalogue its one-line description (`engine.engines.<slug>.what`, every UI local
   function run(spec, env, { seed, prepared }) { return { out: { t: [...], x: [...], xEnd: 0.1, drawing: { view, items } } }; }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
-  root.NoemaLibODE = Object.freeze({ id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, /* the engine's own functions, for tests */ });
+  root.NoemaLibODE = Object.freeze({ id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
+    table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES } },   // the form of the activity author (§1.5)
+    /* the engine's own functions, for tests */ });
 })(typeof window !== 'undefined' ? window : globalThis);
 ```
 
@@ -98,6 +101,33 @@ check every expression and key with the spec's names: the messages a pack's auth
 - **line styles** on any line of a `function` or `series` plot: `style` `line` (default), `bars`, `steps`, `points`.
 - Only library engines may declare `scene` and `sound` outputs and plots; for every other engine the validators keep their old
   messages word for word.
+
+### 1.5 The form of the activity author: `table`
+
+The activity author (`#/author`, a subject's ⋮ › *Create an activity*) offers every library engine the app has, grouped like the
+catalogue. It builds the engine's form from one more export of the module, `table`, turned into a JSON Schema by
+`engine/src/46_lib_schema.js` (`NoemaLibSchema.specSchema(id, table, simSchema)`); an engine without `table` is simply not offered.
+
+```js
+table: {
+  model:   TABLE,                                      // the very table checkSpec walks (C.walk), or {$by: 'mode', $cases: {<mode>: TABLE}}
+  outputs: { scalar: [...], series: [...], scene: [...], sound: [...] },   // what `of` may name, by output kind (or {$by: 'mode', $cases: {<mode>: {...}}})
+  fields:  { node: 'id', stat: 'enum:mean|sd', … },    // optional: the other fields of an output, with walk kinds
+  offered: model => ({ scalar: [...], … }),            // optional: when what `of` may name depends on the model
+}
+```
+
+- **One line, no new rule.** `table` only exposes what the engine already checks; `checkSpec` stays the judge (the form shows its
+  codes and messages at the field), and the schema is looser than `checkSpec`, never stricter: every spec `checkSpec` accepts must
+  pass the schema (`tests/activity_author.js` checks the reference activity and every good fixture of each engine).
+- **Kinds.** The walk kinds map to schema types (`pos` → number > 0, `int:a:b` → integer, `enum:a|b` → enum, `numx` → number or
+  formula, `expr` → formula, `id`/`ref`/`name`/`key` → the spec's ids, names and string keys, `$list`/`$map`/`$obj`/`$req` as in
+  the walk); an unknown kind becomes a non-empty text and `any` anything, so a new kind never breaks the form.
+- **Labels.** A field's label is `engine.author.f.lib.<field>` (`i18n/engine/en.arb`, a description for translators, drafts in every
+  UI locale); a symbol (one or two letters, a name with a digit or a capital, a Greek letter) is its own label. A new word field
+  needs its key, or `tests/activity_author.js` says which one is missing.
+- **The reference activity.** The author offers *Start from the reference activity* (the engine's `tools/activities_examples/<example>/`,
+  shipped in `engine/activity_author_schemas.js` as `NoemaActivityRefs`) or *Blank*.
 
 ## 2. The catalogue (`NoemaEngineCatalog`)
 

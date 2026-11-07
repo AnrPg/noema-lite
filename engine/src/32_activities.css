@@ -49,6 +49,8 @@
 .sim-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .sim-foot .btn { min-height: 36px; }
 .sim-busy { font-size: 12px; color: var(--ink3); margin-right: auto; }
+.sim-note { font-size: 13px; color: var(--ink2); border-left: 3px solid var(--warn); padding-left: 8px; margin: 0; }
+.sim-note[hidden] { display: none; }
 .sim-bench [hidden] { display: none !important; }
 .sim-bench { display: grid; gap: 10px; min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
 .sim-binst { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px 18px; min-width: 0; }

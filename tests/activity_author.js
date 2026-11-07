@@ -7,10 +7,15 @@
    with a description and drafted in every UI locale with the placeholders of English (tools/i18n/check.js: 0 errors), the page
    reads them through NoemaI18n (no side table), every schema title and netlist field has a label; engine/activity_author_schemas.js
    is the copy of tools/schemas that tools/build.py writes.
+   The engine library (docs/INTERACTIVE_LIBRARY.md §1.5): every library engine whose module exports its `table` gets a schema
+   (NoemaLibSchema.specSchema) that accepts its reference activities and every fixture spec its own checkSpec accepts
+   (tests/fixtures/enginelib/<name>.json), refuses the structural mistakes, and has a label for every field word; check() finds no
+   problem in the references; the references ship in activity_author_schemas.js (NoemaActivityRefs).
    Browser (with --browser; BROWSERS=chromium,firefox,webkit): the page in the built site, through its route #/author (classic router,
    then the new frame: subject ⋮ › Create an activity, the crumbs, 320 px): rc-lowpass built from scratch through the form equals the reference; a bad formula shows its error at its field;
    the preview follows a changed start value; the .zip download passes activity_lint.py; undo / redo; 360 px without horizontal
-   scroll; dark mode.
+   scroll; dark mode; graph@1: picked in the engine picker → started from its reference → the preview draws its scene → a wrong
+   model field shows the engine's own message at the field → the .zip passes activity_lint.py.
    Usage: node tests/activity_author.js [--browser [<prepared-repo>]]   (the browser part opens #/author in <prepared-repo>/dist/site, as tests/run_e2e.sh builds it)
    (browser: NODE_PATH=$(npm root -g), PLAYWRIGHT_BROWSERS_PATH=…; run under flock on a shared machine) */
 const fs = require('fs'), path = require('path'), os = require('os'), cp = require('child_process');
@@ -29,6 +34,11 @@ const embedText = () => cp.execFileSync('python3', [path.join(ROOT, 'tools', 'bu
 /* ---------- the modules, as the app loads them ---------- */
 require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));
 require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));
+// the engine library as the app loads it: the core, the table → schema converter, every engine, the catalogue
+const LIBF = fs.readdirSync(path.join(ROOT, 'engine', 'src')).filter(f => /^4[6-9]_lib_[a-z]+\.js$/.test(f) && f !== '49_lib_view.js').sort();
+for (const f of ['engine/vendor/geographiclib-geodesic@2.2.0/noema-geodesic.js', 'engine/vendor/world-atlas@2.0.2/noema-land-110m.js']) if (fs.existsSync(path.join(ROOT, f))) require(path.join(ROOT, f));
+const libLoadErr = [];
+for (const f of LIBF) { try { require(path.join(ROOT, 'engine', 'src', f)); } catch (e) { libLoadErr.push(f + ': ' + e.message); } }
 require(path.join(ROOT, 'engine', 'packcheck.js'));
 const SF = require(path.join(ROOT, 'engine', 'schemaform.js'));
 require(path.join(ROOT, 'tools', 'i18n', 'node.js')).load();   // the app's i18n runtime (English): the page reads its words through NoemaI18n
@@ -150,6 +160,61 @@ for (const id of REFS) {
   ok(JSON.stringify(SF.parsePath('spec.params[0].min: x', 'spec')) === '["params",0,"min"]' && JSON.stringify(SF.parsePath('spec.model.netlist.elements[2].value must be', 'spec')) === '["model","netlist","elements",2,"value"]', 'validator messages map to field paths');
 }
 
+console.log('— the engine library: a form from each engine’s table');
+const LS = globalThis.NoemaLibSchema, LIBS = AA.libEngines();
+if (libLoadErr.length) console.log('  (not loaded: ' + libLoadErr.join(' | ') + ' — another engine may be mid-edit)');
+const FINISHED = ['ode@1', 'graph@1', 'geom@1', 'genetics@1', 'med@1', 'clinic@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'];
+ok(FINISHED.every(id => LIBS.some(e => e.id === id)), 'every finished library engine exports its table and has a kind in the author: ' + LIBS.map(e => e.id).join(' '));
+const libRefs = id => fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'spec.json')) && rj(path.join(EX, d, 'spec.json')).engine === id);
+for (const e of LIBS) {
+  const R = AA.registry(SCHEMA_FILES.map(SCH)), sid = LS.schemaId(e.id), sch = R.get(sid);
+  if (!ok(!!sch, `${e.id}: a schema from its table (${sid.split('/').pop()})`)) continue;
+  for (const id of libRefs(e.id)) {
+    const d = refDoc(id), er = SF.validate(R, sch, d.spec, sid), pr = AA.check(d);
+    ok(!er.length, `${e.id}: its schema accepts the reference ${id} ${er.length ? JSON.stringify(er.slice(0, 2)) : ''}`);
+    ok(!pr.length, `${e.id}: check() finds no problem in the reference ${id} ${pr.length ? JSON.stringify(pr.slice(0, 2)) : ''}`);
+    const back = AA.fromFiles(AA.files(d));
+    ok(JSON.stringify(back.spec) === JSON.stringify(d.spec) && AA.typeOf(back).engine === e.id, `${e.id}: files → import gives ${id} back, as a ${e.id} activity`);
+  }
+  const fx = path.join(ROOT, 'tests', 'fixtures', 'enginelib', e.id.replace(/@.*$/, '') + '.json');
+  if (fs.existsSync(fx)) {
+    let acc = 0; const bad = [];
+    rj(fx).specs.forEach((sp, i) => { if (!sp || typeof sp !== 'object' || Array.isArray(sp) || e.M.checkSpec(sp).some(q => q.level === 'error')) return; acc++; const er = SF.validate(R, sch, sp, sid); if (er.length) bad.push(i + ' ' + JSON.stringify(er[0])); });
+    ok(acc > 0 && !bad.length, `${e.id}: its schema accepts all ${acc} fixture specs its checkSpec accepts ${bad.slice(0, 2).join(' | ')}`);
+  }
+  const r0 = libRefs(e.id)[0];
+  if (r0) {
+    const base = refDoc(r0).spec, v = f => { const x = JSON.parse(JSON.stringify(base)); f(x); return SF.validate(R, sch, x, sid).length > 0; };
+    ok(v(x => { x.bench = { faults: [] }; }) && v(x => { x.outputs.push({ id: 'zz', kind: 'warp', of: 'x' }); }) && v(x => { x.plots = [{ kind: 'pie', of: 'x' }]; }) && v(x => { x.engine = 'formula@1'; }) && v(x => { delete x.model; }),
+      `${e.id}: its schema refuses a bench, an unknown output kind, an unknown plot kind, another engine, no model`);
+  }
+  const b = AA.libBlank(e.id, R);
+  ok(b.spec.engine === e.id && AA.typeOf(b).engine === e.id && b.spec.model && typeof b.spec.model === 'object', `${e.id}: a blank activity of this engine`);
+}
+{ // scene and sound plots, line styles: only in a library engine's schema (formula@1's sim-spec keeps its shape)
+  const R = AA.registry(SCHEMA_FILES.map(SCH)), g = R.get(LS.schemaId('graph@1')), d = refDoc('dijkstra-steps').spec;
+  const withStyle = JSON.parse(JSON.stringify(d)); withStyle.outputs.push({ id: 'dg', kind: 'series', of: 'degree' }, { id: 'ix', kind: 'series', of: 'nodeIndex' }); withStyle.plots.push({ kind: 'series', x: { series: 'ix' }, series: [{ y: 'dg', style: 'bars' }] });
+  const badStyle = JSON.parse(JSON.stringify(withStyle)); badStyle.plots[1].series[0].style = 'pie';
+  ok(!SF.validate(R, g, withStyle).length && SF.validate(R, g, badStyle).length > 0 && SF.validate(reg, sim, refDoc('rc-lowpass').spec).length === 0, 'a library schema takes scene plots and line styles (bars), and refuses an unknown style');
+  ok(JSON.stringify(LS.ofs(globalThis.NoemaLibGraph.table, d.model, 'scene')) === '["drawing"]' && LS.ofs(globalThis.NoemaLibClinic.table, refDoc('sepsis-case').spec.model, 'scalar').length > 10 && LS.ofs(globalThis.NoemaLibGenetics.table, { mode: 'hw' }, 'scene').join() === 'deFinetti',
+    'what an output may compute: from the table (graph@1 scene: drawing), from the model (clinic@1), by mode (genetics@1 hw: deFinetti)');
+}
+{ // the labels: every field word of every engine's schema in the catalog (f.lib.<field>), every option of the new selects
+  const R = AA.registry(SCHEMA_FILES.map(SCH)), all = new Set();
+  for (const e of LIBS.filter(x => FINISHED.includes(x.id))) LS.titles(R.get(LS.schemaId(e.id))).forEach(t => all.add(t));
+  all.delete('spec');
+  const miss = [...all].filter(t => !(('f.' + t) in EN) && !(t.startsWith('lib.') && LS.symbolic(t.slice(4))));
+  ok(!miss.length, `every field of the finished engines’ schemas (${all.size} titles) has a label (f.<title>; a symbol such as k or x0 is its own) ` + miss.slice(0, 12));
+  const opts = ['outKind.scene', 'outKind.sound', 'plotKind.scene', 'plotKind.sound', ...LS.STYLES.map(x => 'lineStyle.' + x)];
+  ok(opts.every(k => ('f.' + k) in EN), 'the new options have words ' + opts.filter(k => !(('f.' + k) in EN)));
+}
+{ // the references ship with the page (tools/build.py writes them into activity_author_schemas.js)
+  const R = globalThis.NoemaActivityRefs;
+  if (!R) console.log('⚠ NoemaActivityRefs is not in engine/activity_author_schemas.js yet (tools/build.py author_schemas_js: the references) — the page then offers Blank only');
+  else ok(LIBS.filter(e => FINISHED.includes(e.id)).every(e => AA.refsFor(e.id).length >= 1) && AA.refsFor('graph@1')[0].ref === 'dijkstra-steps' && JSON.stringify(AA.refsFor('graph@1')[0].spec) === JSON.stringify(refDoc('dijkstra-steps').spec),
+    'the page has the reference activity of every finished library engine (dijkstra-steps for graph@1, as on disk)');
+}
+
 console.log('— documents, files, zip');
 (async () => {
   for (const id of REFS) {
@@ -170,7 +235,8 @@ console.log('— documents, files, zip');
     ok(pr.some(p => p.tab === 'item' && p.path.join('.') === 'fallback.text'), 'a short fallback text is a problem at its field'); }
   ok(JSON.stringify(AA.namesAt(refDoc('rc-lowpass').spec, ['derived', 1, 'expr'])) === JSON.stringify(['target', 'tol', 'R', 'C', 'tau']) && AA.namesAt(refDoc('rc-lowpass').spec, ['plots', 0, 'series', 0, 'expr']).includes('f'), 'the names a formula may use: the derived values above it; a plot line also gets its x');
   ok(JSON.stringify(AA.usedKeys(refDoc('rc-lowpass').spec)) === JSON.stringify(['title', 'intro', 'resistance', 'capacitance', 'fcLabel', 'tauLabel', 'errLabel', 'bodeTitle', 'frequency', 'gain', 'gainLine', 'fcMark', 'targetMark', 'minus3', 'stepTitle', 'time', 'voltage', 'tauMark']), 'the keys a spec names, in order');
-  for (const t of AA.TYPES) { const b = t.blank(); const pr = AA.check(b).filter(p => !(p.tab === 'item' && p.path.join('.') === 'fallback.text')); ok(!pr.length && t.match(b), `the blank "${t.id}" has no problem but its fallback text ${pr.length ? JSON.stringify(pr.slice(0, 2)) : ''}`); }
+  for (const t of AA.TYPES.filter(x => !x.lib)) {   // (a library engine's blank is its model's skeleton: its own checks then say what to fill in)
+    const b = t.blank(); const pr = AA.check(b).filter(p => !(p.tab === 'item' && p.path.join('.') === 'fallback.text')); ok(!pr.length && t.match(b), `the blank "${t.id}" has no problem but its fallback text ${pr.length ? JSON.stringify(pr.slice(0, 2)) : ''}`); }
 
   console.log('— the exported folder passes activity_lint.py');
   for (const id of ['rc-lowpass', 'led-bench']) {
@@ -342,6 +408,46 @@ async function browser() {
     await p.emulateMedia({ colorScheme: 'dark' }); await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await wait(300);
     const dark = await p.evaluate(() => { const lum = c => { const m = c.match(/\d+(\.\d+)?/g).map(Number); return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; }; const f = document.querySelector('.aa .sf-in'); return { bg: lum(getComputedStyle(f).backgroundColor), ink: lum(getComputedStyle(f).color) }; });
     ok(dark.bg < 0.35 && dark.ink > 0.6, `dark mode: the fields are dark with light text (${dark.bg.toFixed(2)} / ${dark.ink.toFixed(2)})`);
+    // a library engine: graph@1 from its reference activity, the scene in the preview, a checkSpec message at its field, the .zip
+    await p.emulateMedia({ colorScheme: 'light' }); await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+    await p.evaluate(() => { window.__aa = NoemaActivityAuthor.current; });   // (the page may have been mounted again meanwhile)
+    const hasGraph = await p.evaluate(() => !!document.querySelector('[data-aa=type] option[value="lib:graph@1"]'));
+    ok(hasGraph, 'the kind select offers the library engines this app has (graph@1 among them, in its group)');
+    if (hasGraph) {
+      ok(await p.evaluate(() => !!document.querySelector('[data-aa=type] optgroup option[value="lib:graph@1"]')), 'graph@1 sits in an engine group of the select');
+      await p.selectOption('[data-aa=type]', 'lib:graph@1'); await wait(200);
+      const refBtn = await p.locator('[data-aa=start-ref]').count();
+      ok(refBtn === 1 && await p.locator('[data-aa=start-blank]').count() === 1, 'choosing graph@1 asks: the reference activity or blank');
+      if (refBtn) {
+        await p.click('[data-aa=start-ref]');
+        const loaded = await until(() => p.evaluate(() => __aa.get().spec.engine === 'graph@1' && __aa.get().item.id === 'dijkstra-steps'));
+        ok(loaded, 'Start from the reference activity loads dijkstra-steps ' + (loaded ? '' : JSON.stringify(await p.evaluate(() => [__aa.get().spec.engine, __aa.get().item.id]))));
+        ok(await until(() => p.evaluate(() => !!document.querySelector('.aa-pbox svg.sim-scene'))), 'the preview shows the engine’s drawing (a scene plot)');
+        ok(await p.evaluate(() => __aa.check().length === 0), 'the reference has no problems in the author');
+        await p.click('[data-tab=spec]'); panel = 'spec';
+        const src = field(['model', 'run', 'source']);
+        ok(await p.locator(src).count() === 1, 'the model’s fields come from the engine’s table (model.run.source)');
+        await fill(src, 'nowhere'); await wait(600);
+        ok(await until(() => p.locator(`#aa-panel-spec [data-field='["model","run","source"]'] .sf-err`).count().then(n => n >= 1)), 'a node that does not exist: the engine’s checkSpec message at its field');
+        await fill(src, 's'); await wait(600);
+        ok(await until(() => p.evaluate(() => __aa.check().length === 0)), 'set back: no problems');
+        const [dl2] = await Promise.all([p.waitForEvent('download'), p.click('[data-aa=zip]')]);
+        const zp2 = path.join(os.tmpdir(), 'noema-author-graph-' + name + '.zip'); await dl2.saveAs(zp2);
+        const fz2 = await AA.unzip(fs.readFileSync(zp2));
+        const dir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-author-g-'));
+        for (const [f, text] of Object.entries(fz2)) { fs.mkdirSync(path.dirname(path.join(dir2, f)), { recursive: true }); fs.writeFileSync(path.join(dir2, f), text); }
+        const media2 = JSON.parse(fz2['activities/activities.json']).activities?.[0]?.fallback?.media || 'dijkstra-steps-still';
+        fs.mkdirSync(path.join(dir2, 'media'), { recursive: true }); fs.writeFileSync(path.join(dir2, 'media', 'media.json'), JSON.stringify({ items: [{ id: media2, file: 'still.svg' }] }));
+        fs.writeFileSync(path.join(dir2, 'subject.json'), JSON.stringify({ id: 'author-test', language: 'en' }));
+        for (const f of Object.keys(fz2)) { const m = f.match(/strings\.([\w-]+)\.json$/); if (m && m[1] !== 'en') fs.mkdirSync(path.join(dir2, 'translations', m[1]), { recursive: true }); }
+        const lint2 = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_lint.py'), dir2], { encoding: 'utf8' });
+        ok(lint2.status === 0 && !!fz2['activities/dijkstra-steps/spec.json'], 'the graph@1 .zip: activity_lint.py accepts the folder ' + (lint2.status ? lint2.stdout.slice(-300) : ''));
+        await p.setViewportSize({ width: 320, height: 700 }); await wait(400);
+        ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '320 px with a library engine: no horizontal scroll');
+        await p.setViewportSize({ width: 1280, height: 900 });
+      } else console.log('⚠ ' + 'NoemaActivityRefs is not shipped by this build: the reference flow is skipped');
+    }
+
     // leaving the route stops the page (its keys and preview)
     await p.evaluate(() => { location.hash = '#/'; }); await wait(400);
     ok(await p.evaluate(() => NoemaActivityAuthor.current === null && !document.querySelector('.aa')), 'leaving #/author stops the page');
