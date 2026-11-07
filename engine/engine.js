@@ -4999,8 +4999,8 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
   }
   const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
   /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): the meters' seeded jitter draws from its MRG32k3a streams, one per
-      measurement; FALLBACK without the kernel (marked): mulberry32. (The noise sources stay a counter-based hash: their sample i is
-      read at any time of a transient, which a sequential stream cannot give cheaply.) */
+      measurement; the noise sources draw from its counter-based Philox stream (counterStream: sample i of a source is read at any
+      time of a transient in O(1), with no state to carry). FALLBACK without the kernel (marked): mulberry32 and an FNV hash. */
   function kit() {
     if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
     return root.NoemaSimKit || null;
@@ -5011,7 +5011,8 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
     if (w.kind === 'noise') {   // seeded band-limited noise (straight lines between Gaussian samples 1/(2·bw) apart), plus the pickup's hum and slow wander
       const hold = w.hold || { shift: 0 }, sd = w.seed >>> 0, dn = 1 / (2 * w.bw), dw = 1;
-      const g = (tag, i) => gauss(mulberry32(hash32(tag + i, sd)));
+      const K = kit(), cs = K ? { n: K.counterStream(sd, 'circuit:noise:n'), w: K.counterStream(sd, 'circuit:noise:w') } : null;
+      const g = cs ? (tag, i) => cs[tag].normal(i) : (tag, i) => gauss(mulberry32(hash32(tag + i, sd)));   // FALLBACK: a hashed mulberry32 per sample
       const lerp = (tag, u) => { const i = Math.floor(u), f = u - i; return g(tag, i) * (1 - f) + g(tag, i + 1) * f; };
       const at = t => {
         const tt = t + hold.shift;
@@ -5537,13 +5538,13 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           case 'R': case 'SW': G(a, c, e.g); break;
           case 'C':
             if (k >= 0) { if (op0) { BR(a, c, k); ROWV(k, a, c); B[k] = e.ic; } else A[k * S + k] = 1; }
-            if (tran) { const geq = (ctx.be ? 1 : 2) * e.C / ctx.h, ieq = geq * e.vp + (ctx.be ? 0 : e.ip); G(a, c, geq); J(a, c, -ieq); }
+            if (tran && !ctx.dae) { const geq = (ctx.be ? 1 : 2) * e.C / ctx.h, ieq = geq * e.vp + (ctx.be ? 0 : e.ip); G(a, c, geq); J(a, c, -ieq); }   // (dae: C is in the kernel's M)
             break;
           case 'L':
             BR(a, c, k);
             if (op0 && e.ic !== null) { A[k * S + k] = 1; B[k] = e.ic; break; }
             ROWV(k, a, c);
-            if (tran) { const req = (ctx.be ? 1 : 2) * e.L / ctx.h; A[k * S + k] -= req; B[k] = -req * e.ip - (ctx.be ? 0 : e.vp); }
+            if (tran && !ctx.dae) { const req = (ctx.be ? 1 : 2) * e.L / ctx.h; A[k * S + k] -= req; B[k] = -req * e.ip - (ctx.be ? 0 : e.vp); }   // (dae: −L in M)
             break;
           case 'V': BR(a, c, k); ROWV(k, a, c); B[k] = srcVal(e, ctx); break;
           case 'I': J(a, c, -srcVal(e, ctx)); break;   // drives the current into n[0]
@@ -5780,6 +5781,61 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       }
       return R;
     }
+    /** n more steps of dt on the kernel's θ-method DAE solver (NoemaSimKit.daeThetaInit): M·x' = f(t, x) = B(x) − A(x)·x, the MNA
+        system without companion models (stamp with ctx.dae), M full: a capacitor C at (a, a), (c, c), −C at (a, c), (c, a); an
+        inductor −L on its branch row; every other row algebraic. The Jacobian is −A of the same stamp; a linear circuit factors
+        M − hθJ once per (h, θ) (linear: true). Before each step (beforeStep) θ = 1 (backward Euler) on the first step and on a step
+        that holds a source breakpoint, ½ otherwise, and the lines' waves from td ago; the junction limiting (pnjlim) stays in stamp
+        and a limited iterate forces another Newton iteration (limit). A step the kernel cannot solve (also after halving) is taken by
+        the own step with gmin stepping (tranAdvance), then the kernel goes on. */
+    function tranAdvanceK(K, R, n) {
+      const { dt, tol, ctx, caps, inds, tls, pwEl } = R, s0 = R.s, sEnd = R.s + n;
+      if (!(n > 0)) return R;
+      const Mk = []; for (let i = 0; i < S; i++) Mk.push(new Float64Array(S));
+      for (const e of caps) { const a = e.a, c = e.c; if (a >= 0) { Mk[a][a] += e.C; if (c >= 0) { Mk[a][c] -= e.C; Mk[c][a] -= e.C; } } if (c >= 0) Mk[c][c] += e.C; }
+      for (const e of inds) Mk[e.k][e.k] -= e.L;
+      const kc = { mode: 'tran', dae: true, t: 0, h: dt, be: false, gsh: 0, src: 1, avg: false, t0m: false };
+      let g0 = 0, g1 = 0, thS = 1, lastS = -1;
+      const snap = t => (Math.abs(t - g1) <= 1e-9 * dt ? g1 : Math.abs(t - g0) <= 1e-9 * dt ? g0 : t);   // the grid's own times s·dt for the sources
+      const f = (t, y, out) => { kc.t = snap(t); stamp(kc, y); for (let i = 0; i < S; i++) { let q = B[i]; for (let j = 0; j < S; j++) q -= A[i * S + j] * y[j]; out[i] = q; } };
+      const jac = (t, y, Jm) => { for (let i = 0; i < S * S; i++) Jm[i] = -A[i]; };   // A of the stamp f has just made at y
+      const beforeStep = () => {
+        const s = R.s; g0 = s * dt; g1 = (s + 1) * dt;
+        if (s !== lastS) {   // once per grid step (a halved retry keeps the step's θ)
+          lastS = s; thS = s === 0 || R.bp <= g1 + tol ? 1 : 0.5;
+          if (R.bp <= g1 + tol) R.bp = nextBp(g1 + tol);
+          for (const e of tls) {   // the waves that left the other end td ago
+            const tp = g1 - e.td, h = e.h; let w;
+            if (tp <= 0) w = [h[0][0], h[1][0], h[2][0], h[3][0]];
+            else { const u = tp / dt; let i = Math.floor(u + 1e-9); if (i > s) i = s; const fr = Math.max(0, u - i), j = Math.min(i + 1, s); w = h.map(a => a[i] * (1 - fr) + a[j] * fr); }
+            e.E1 = w[2] + e.z0 * w[3]; e.E2 = w[0] + e.z0 * w[1];
+          }
+        }
+        return { theta: thS };
+      };
+      const record = xs => {   // the step s → s + 1 done: the companion currents (for the pins), the history
+        const be = thS === 1;
+        for (const e of caps) { const v = vx(xs, e.a) - vx(xs, e.c), geq = (be ? 1 : 2) * e.C / dt; e.ip = geq * (v - e.vp) - (be ? 0 : e.ip); e.vp = v; }
+        for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
+        R.xs = Float64Array.from(xs); ctx.t = g1; ctx.be = be;
+        for (let i = 0; i < N; i++) R.V[i].push(xs[i]);
+        ck.real.forEach((e, j) => { R.I[j].push(mainCurrent(e, pinCurrents(e, R.xs, ctx))); });
+        pwEl.forEach((e, j) => { R.PW[j].push(power(e, R.xs, ctx)); });
+        for (const e of tls) tlv(R.xs, e).forEach((v, j) => { e.h[j].push(v); });
+        R.s++;
+      };
+      while (R.s < sEnd) {
+        const D = K.daeThetaInit({ M: Mk, f, jac, linear: ck.linear, beforeStep, limit: () => limited, y0: R.xs, t0: R.s * dt, tEnd: sEnd * dt, dt,
+          newtonTol: 1e-9, maxNewton: 60, maxSteps: 64 * (sEnd - R.s) + 64,
+          onStep: (t, y) => { if (Math.abs(t - g1) <= 1e-9 * dt) record(y); } });   // a halved substep is not a grid point
+        const r = D.ok ? D.advance(sEnd * dt) : D.result;
+        if (r.stop === 'end' && R.s >= sEnd) break;
+        if (r.stop === 'budget') throw fail('budget', { steps: sEnd, limit: MAX_STEPS });
+        lastS = -1; tranAdvance(R, 1);   // the own step with gmin stepping (throws no-convergence when that fails too)
+      }
+      void s0;
+      return R;
+    }
     function runTransient(o) {
       o = o || {};
       const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
@@ -5790,7 +5846,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
       if (tranCache && tranCache.key === key) return tranCache;
       stepping = null;   // the elements' companion state is the transient's: a stepper run is invalidated
-      const R = tranAdvance(tranStart(o, dt), steps);
+      const Kt = kit(), R = Kt ? tranAdvanceK(Kt, tranStart(o, dt), steps) : tranAdvance(tranStart(o, dt), steps);   // FALLBACK without the kernel: the own companion models
       const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
       tranCache = { key, T, V: R.V.map(a => Float64Array.from(a)), I: R.I.map(a => Float64Array.from(a)), steps, P: Object.fromEntries(pw.map((id, j) => [id, Float64Array.from(R.PW[j])])) };
       return tranCache;
@@ -5802,7 +5858,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       if (!stepping) throw fail('bad-args');
       const R = stepping, n = Math.max(0, Math.round((tTo - R.s * R.dt) / R.dt));
       if (R.s + n > MAX_STEPS) throw fail('budget', { steps: R.s + n, limit: MAX_STEPS });
-      tranAdvance(R, n);
+      const Kt = kit(); if (Kt) tranAdvanceK(Kt, R, n); else tranAdvance(R, n);
       const last = a => a[a.length - 1], nodes = {}, branches = {};
       for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? 0 : last(R.V[i]); }
       ck.real.forEach((e, j) => { branches[e.id] = last(R.I[j]); });
@@ -5872,7 +5928,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       if (i === undefined) throw fail('unknown-node', { ref });
       return i;
     }
-    const rngFor = probe => (noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null);
+    const rngFor = probe => (noise ? streamOf(JSON.stringify(probe), noise.seed) : null);
     const jit = (v, r) => (r ? v * (1 + noise.rel * (2 * r() - 1)) + noise.abs * (2 * r() - 1) : v);
     function window_(probe) {
       const tEnd = num(probe.tEnd), dt = probe.dt === undefined ? tEnd / 1000 : num(probe.dt), tStart = probe.tStart === undefined ? 0 : num(probe.tStart);
@@ -7308,6 +7364,13 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
   const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isNum = v => typeof v === 'number' && Number.isFinite(v);
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): a transient and the stepper run on its θ-method DAE solver
+      (daeThetaInit: Newton with LU, or one factored solve for a linear network; the massless nodes algebraic rows; θ and the sources'
+      mean power chosen per step); FALLBACK without the kernel (marked): the same θ-step here (stepCore) */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
   function fail(code, extra) { const e = new Error('thermal: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
   function okNum(kind, v) {
     if (!isNum(v)) return false;
@@ -7705,6 +7768,39 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
     }
     /** the thermostats' gates at a state (on below high when heating, above low when cooling) */
     const gateAt = x => thermostats.map(th => { const T = Tof(th.s, x); return th.heat ? T < th.high : T > th.low; });
+    /** m steps of h from tA on the kernel's θ-method DAE solver (NoemaSimKit.daeThetaInit): C·x' = f(t, x) = −G·x + b + P̄ + rad(x),
+        the massless nodes algebraic rows, the analytic Jacobian; a linear network (no radiation) factors C − hθ(−G) once per (h, θ)
+        and takes one solve a step. Before each step (beforeStep) the gates are tested at its start (with their hysteresis), P̄ is
+        each source's exact mean over the step (sp, out) and θ is 1 (backward Euler) on the first step, on a source edge and on a
+        thermostat switch, ½ (trapezoidal) otherwise — what stepCore does. onStep(i, x) after each. */
+    function kernelRun(KS, x0, gate, sp, tA, h, m, be, first0, onStep, times) {   // times(k) → [t1, t2]: the engine's own grid (sources, edges)
+      const P1 = new Float64Array(n), rk = new Float64Array(n), nS = sources.length;
+      const f = (t, y, out) => { for (let i = 0; i < n; i++) { let q = b[i] + P1[i]; for (let j = 0; j < n; j++) q -= G[i * n + j] * y[j]; out[i] = q; } if (rads.length) rad(y, out, null, null); };
+      const jac = (t, y, J) => { for (let i = 0; i < n * n; i++) J[i] = G[i]; if (rads.length) rad(y, rk, J, ones); for (let i = 0; i < n * n; i++) J[i] = -J[i]; };   // ∂f/∂x = −(G + ∂(−rad)/∂x)
+      let k = 0, lastT0 = NaN, lastSw = false;
+      const beforeStep = (ta, tb, y) => {
+        const [t1, t2] = times(k);   // the grid's own times (k·h), not the kernel's sums: an edge on a grid time stays in its step
+        let switched = false;
+        if (t1 === lastT0) switched = lastSw;   // a halved retry of the same step: the gates were tested already
+        else thermostats.forEach((th, i) => {
+          const T = Tof(th.s, y), on = gate[i];
+          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
+          if (nx !== on) { gate[i] = nx; switched = true; }
+        });
+        lastT0 = t1; lastSw = switched;
+        let edge = false; P1.fill(0); const hh = t2 - t1;
+        for (let q = 0; q < nS; q++) {
+          const src = sources[q], on = src.gate < 0 || gate[src.gate], w = src.w;
+          if (w.edges(t2) !== w.edges(t1)) edge = true;
+          sp[q] = on ? (w.F(t2) - w.F(t1)) / hh : 0; P1[src.u] += sp[q];
+        }
+        return { theta: be || (first0 && k === 0) || switched || edge ? 1 : 0.5 };
+      };
+      const D = KS.daeThetaInit({ M: C, f, jac, linear: !rads.length, beforeStep, y0: x0, t0: tA, tEnd: tA + m * h, dt: h, newtonTol: 1e-13, maxSteps: m + 1,
+        onStep: (t, y) => { onStep(k, y); k++; } });
+      const R = D.ok ? D.advance(tA + m * h) : D.result;
+      if (R.stop !== 'end' || k !== m) throw fail(R.stop === 'budget' ? 'budget' : 'no-convergence', { t: R.t });
+    }
     /** one step [t1, t2] of the θ-method on C·x' = −G·x + b + P(t) + rad(x) (massless nodes: algebraic rows): θ = ½ (trapezoidal) on
         nodes with a heat capacity, 1 on massless ones, and backward Euler on the first step, on a source edge and on a thermostat
         switch (the gates are tested at t1, with their hysteresis); the sources' exact mean over the step; Newton with radiation.
@@ -7758,7 +7854,7 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
       const be = o.method === 'be', points = Math.max(2, Math.min(MAX_POINTS, o.points === undefined ? 2001 : Math.floor(o.points)));
       const stride = Math.ceil(steps / (points - 1));
       let x = o.start === 'steady' ? steadyX(powers('t0')) : Float64Array.from(ck.T0);
-      const gate = gateAt(x), core = stepCore(h, be);
+      const gate = gateAt(x), core = kit() ? null : stepCore(h, be);
       // channels: nodes, links, sources (power after the thermostat, mean over the step), thermostats (0 / 1)
       const nN = nodeOut.length, nL = links.length, nS = sources.length, nT = thermostats.length, nCh = nN + nL + nS + nT;
       const vals = new Float64Array(nCh), sp = new Float64Array(nS);
@@ -7787,7 +7883,9 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
         prev.set(vals);
       };
       fill(); prev.set(vals); take(0, 0);
-      for (let k = 0; k < steps; k++) {
+      const KS = kit();
+      if (KS) kernelRun(KS, x, gate, sp, 0, h, steps, be, true, (k, y) => { x = y; fill(); take(k + 1, (k + 1) * h); }, k => [k * h, (k + 1) * h]);
+      else for (let k = 0; k < steps; k++) {   // FALLBACK without the kernel: the own θ-step
         const t1 = k * h, t2 = (k + 1) * h;
         x = core.step(x, gate, sp, t1, t2, k === 0);
         fill(); take(k + 1, t2);
@@ -7820,8 +7918,15 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
     function stepTo(st, tTo, hMax) {
       const span = tTo - st.t; if (!(span > 0)) return st;
       const m = Math.max(1, Math.ceil(span / hMax - 1e-9)), h = span / m, key = h + '|' + st.be;
-      let core = cores.get(key); if (!core) { if (cores.size > 16) cores.clear(); core = stepCore(h, st.be); cores.set(key, core); }
-      let x = Float64Array.from(st.x); const sp = st.sp.slice();
+      let x = Float64Array.from(st.x); const sp = st.sp.slice(), KS = kit();
+      const after = (i, y) => {
+        const t1 = st.t, t2 = i === m - 1 ? tTo : st.t + h; x = y;
+        st.k++; st.t = t2;
+        st.prev = st.ch; st.tPrev = t1; st.ch = channels(x, st.gate, sp);
+        st.ch.forEach((v, c) => { const q = st.stats[c]; if (v < q[0]) q[0] = v; if (v > q[1]) q[1] = v; q[2] += v; q[3] += v * v; }); st.n++;
+      };
+      if (KS) { kernelRun(KS, x, st.gate, sp, st.t, h, m, st.be, st.k === 0, after, i => [st.t, i === m - 1 ? tTo : st.t + h]); st.x = Array.from(x); st.sp = sp; return st; }
+      let core = cores.get(key); if (!core) { if (cores.size > 16) cores.clear(); core = stepCore(h, st.be); cores.set(key, core); }   // FALLBACK: the own θ-step
       for (let i = 0; i < m; i++) {
         const t1 = st.t, t2 = i === m - 1 ? tTo : st.t + h;
         x = core.step(x, st.gate, sp, t1, t2, st.k === 0);
@@ -7942,7 +8047,7 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
     prepare,
     create: (spec, opts) => adapter.create(spec, opts),
     stepper: true,   // a part of a co-simulation (stepInit / stepTo / snapshot / restore on the instance)
-    get workerSource() { const NX = root.NoemaExpr; return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;'; },
+    get workerSource() { const NX = root.NoemaExpr, K = kit(); return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;'; },
   });
   root.NoemaThermal = Object.freeze({
     id: ID, format: FORMAT, SIGMA, STATS: Object.freeze(STATS.slice()),
@@ -9463,8 +9568,10 @@ function boot() {
   }
   /** the receiver: noise floor kTB + NF (dBm) */
   const noiseFloor = (bw, nf) => KT_DBM_HZ + 10 * log10(bw) + (nf || 0);
-  // error functions: erfc (Numerical Recipes erfcc, relative error < 1.2e-7), Q(x) = ½·erfc(x/√2)
+  // error functions: erfc from the kernel (NoemaSimKit.erfc = Q(½, x²), accurate in the far tail), Q(x) = ½·erfc(x/√2);
+  // FALLBACK without the kernel: Numerical Recipes erfcc (relative error < 1.2e-7)
   function erfc(x) {
+    const K = kit(); if (K) return K.erfc(x);
     const z = Math.abs(x), t = 1 / (1 + 0.5 * z);
     const r = t * Math.exp(-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
     return x >= 0 ? r : 2 - r;
@@ -9937,7 +10044,10 @@ function reportedView() {
   const fspl = (d, f) => 20 * log10(4 * Math.PI * d * f / C0);
   const logDistance = (d, f, n, d0) => (d <= d0 ? fspl(d, f) : fspl(d0, f) + 10 * n * log10(d / d0));
   const noiseFloor = (bw, nf) => KT_DBM_HZ + 10 * log10(bw) + (nf || 0);
+  // error functions: erfc from the kernel (NoemaSimKit.erfc = Q(½, x²), accurate in the far tail), Q(x) = ½·erfc(x/√2);
+  // FALLBACK without the kernel: Numerical Recipes erfcc (relative error < 1.2e-7)
   function erfc(x) {
+    const K = kit(); if (K) return K.erfc(x);
     const z = Math.abs(x), t = 1 / (1 + 0.5 * z);
     const r = t * Math.exp(-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
     return x >= 0 ? r : 2 - r;
@@ -12139,6 +12249,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   // the regularized lower incomplete gamma P(a, x): series / Lentz continued fraction (NR 3rd ed. §6.2)
   function gammaP(a, x) {
     if (!(a > 0) || !(x >= 0)) return NaN; if (x === 0) return 0;
+    if (x === Infinity) return 1;
+    if (temmeOK(a, x)) { const { eta, R: r } = temmeR(a, x); return 0.5 * erfc(-eta * sqrt(a / 2)) - r; }
+    if (a >= 10) return x < a + 1 ? (() => { let ap = a, sum = 1 / a, del = sum; for (let n = 0; n < 20000; n++) { ap++; del *= x / ap; sum += del; if (abs(del) < abs(sum) * 1e-17) break; } return min(1, sum * exp(lnPre(a, x))); })() : 1 - gammaQ(a, x);
     const gln = lgamma(a);
     if (x < a + 1) { let ap = a, sum = 1 / a, del = sum; for (let n = 0; n < 1000; n++) { ap++; del *= x / ap; sum += del; if (abs(del) < abs(sum) * 1e-16) break; } return min(1, sum * exp(-x + a * log(x) - gln)); }
     let b = x + 1 - a, c = 1e300, d = 1 / b, h = d;
@@ -12164,13 +12277,46 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
   // the standard normal: Φ by erfc (W. J. Cody 1969 rational approximations via the complementary gamma), Φ⁻¹ by Wichura 1988 AS241
   function normCdf(z) { if (!fin(z)) return z > 0 ? 1 : z < 0 ? 0 : NaN; const p = 0.5 * gammaQ(0.5, z * z / 2); return z >= 0 ? 1 - p : p; }   // the tail from Q: no cancellation
+  /* ---- the incomplete gamma at large a: Temme's uniform asymptotic expansion (Temme 1979, SIAM J. Math. Anal. 10:4; DLMF 8.12.3–
+     8.12.4; DiDonato & Morris 1986 §4, their region a ≥ 20, |x/a − 1| ≤ 0.4; Gil, Segura & Temme 2012, ACM TOMS 38:2):
+       Q(a, x) = ½erfc(η√(a/2)) + R, P(a, x) = ½erfc(−η√(a/2)) − R, R = e^(−aη²/2)/√(2πa) · Σ_k c_k(η) a^(−k),
+     λ = x/a, η = sign(λ − 1)·√(2(λ − 1 − ln λ)). The c_k are their Taylor series in η (k = 0..13): c₀ = 1/(λ − 1) − 1/η and
+     c_k = c′_{k−1}/η + (−1)^k g_k/(λ − 1) with g_k the Stirling coefficients of Γ*(a) — generated exactly in rational arithmetic
+     (series reversion of η(λ)) and checked against DiDonato & Morris's table (d₀ = −1/3, 1/12, −2/135, …; d₁ = −1/540, −1/288, …) */
+  const TEMME = [[-0.3333333333333333, 0.08333333333333333, -0.014814814814814815, 0.0011574074074074073, 0.0003527336860670194, -0.0001787551440329218, 3.919263178522438e-05, -2.185448510679992e-06, -1.85406221071516e-06, 8.296711340953087e-07, -1.7665952736826078e-07, 6.707853543401498e-09, 1.0261809784240309e-08, -4.382036018453353e-09, 9.14769958223679e-10, -2.5514193994946248e-11, -5.830772132550426e-11, 2.4361948020667415e-11, -5.0276692801141755e-12, 1.1004392031956135e-13, 3.371763262400985e-13, -1.392388722418162e-13, 2.8534893807047445e-14, -5.139111834242572e-16, -1.9752288294349442e-15, 8.099521156704561e-16],
+    [-0.001851851851851852, -0.003472222222222222, 0.0026455026455026454, -0.0009902263374485596, 0.00020576131687242798, -4.018775720164609e-07, -1.8098550334489977e-05, 7.64916091608111e-06, -1.6120900894563446e-06, 4.647127802807434e-09, 1.378633446915721e-07, -5.752545603517705e-08, 1.1951628599778148e-08, -1.7543241719747647e-11, -1.0091543710600413e-09, 4.162792991842583e-10, -8.56390702649298e-11, 6.067215101604758e-14, 7.1624989648114856e-12, -2.933186643771437e-12, 5.996696365683689e-13, -2.1671786527323313e-16, -4.978339972369262e-14, 2.0291628823713425e-14],
+    [0.004133597883597883, -0.0026813271604938273, 0.0007716049382716049, 2.0093878600823047e-06, -0.0001073665322636516, 5.2923448829120125e-05, -1.2760635188618728e-05, 3.423578734096138e-08, 1.3721957309062934e-06, -6.298992138380055e-07, 1.4280614206064242e-07, -2.0477098421990866e-10, -1.409252991086752e-08, 6.228974084922022e-09, -1.3670488396617114e-09, 9.428356159014678e-13, 1.2872252400089318e-10, -5.5645956134363323e-11, 1.197593554636698e-11, -4.1689782251838634e-15, -1.0940640427884595e-12, 4.662239946390136e-13],
+    [0.0006494341563786008, 0.00022947209362139917, -0.0004691894943952557, 0.00026772063206283885, -7.561801671883977e-05, -2.396505113867297e-07, 1.1082654115347302e-05, -5.6749528269915965e-06, 1.4230900732435883e-06, -2.7861080291528143e-11, -1.6958404091930278e-07, 8.099464905388083e-08, -1.9111168485973655e-08, 2.3928620439808118e-12, 2.0620131815488797e-09, -9.460496661855133e-10, 2.1541049775774907e-10, -1.388823336813903e-14, -2.1894761681963938e-11, 9.790998951171684e-12],
+    [-0.0008618882909167117, 0.0007840392217200666, -0.0002990724803031902, -1.4638452578843418e-06, 6.641498215465122e-05, -3.968365047179435e-05, 1.1375726970678419e-05, 2.507497226237533e-10, -1.6954149536558305e-06, 8.907507532205309e-07, -2.292934834000805e-07, 2.956794137544049e-11, 2.8865829742708783e-08, -1.4189739437803219e-08, 3.4463580499464896e-09, -2.3024517174528067e-13, -3.9409233028046403e-10, 1.86023389685045e-10],
+    [-0.00033679855336635813, -6.972813758365857e-05, 0.0002772753244959392, -0.00019932570516188847, 6.797780477937208e-05, 1.419062920643967e-07, -1.3594048189768693e-05, 8.018470256334202e-06, -2.291481176508095e-06, -3.252473551298454e-10, 3.4652846491085265e-07, -1.8447187191171344e-07, 4.8240967037894184e-08, -1.7989466721743514e-14, -6.306194500013523e-09, 3.162417628774568e-09],
+    [0.0005313079364639922, -0.0005921664373536939, 0.0002708782096718045, 7.902353232660328e-07, -8.153969367561969e-05, 5.61168275310625e-05, -1.8329116582843375e-05, -3.0796134506033047e-09, 3.465155368803609e-06, -2.0291327396058603e-06, 5.788792863149004e-07, 2.338630673826657e-13, -8.828600746330484e-08, 4.7435958880408125e-08],
+    [0.00034436760689237765, 5.171790908260592e-05, -0.00033493161081142234, 0.0002812695154763237, -0.00010976582244684731, -1.2741009095484485e-07, 2.7744451511563645e-05, -1.8263488805711332e-05, 5.7876949497350525e-06, 4.93875893393627e-10, -1.0595367014026043e-06, 6.166714376110408e-07],
+    [-0.0006526239185953094, 0.0008394987206720873, -0.000438297098541721, -6.969091458420552e-07, 0.00016644846642067547, -0.00012783517679769218, 4.629953263691304e-05, 4.557909867922708e-09, -1.0595271125805195e-05, 6.783342904865167e-06],
+    [-0.0005967612901927463, -7.204895416020011e-05, 0.0006782308837667328, -0.0006401475260262758, 0.00027750107634328704, 1.819700838046515e-07, -8.479507117068503e-05, 6.105192082501531e-05],
+    [0.0013324454494800656, -0.0019144384985654776, 0.0011089369134596636, 9.9324041226423e-07, -0.0005087450129309319, 0.00042735056665392886, -0.00016858853767910798, -8.1301893922785e-09],
+    [0.001579727660730835, 0.00016251626278391583, -0.0020633421035543276, 0.00213896861856891, -0.0010108559391263003, -3.99127055299192e-07, 0.0003623502508476469, -0.00028143901463712157],
+    [-0.004072512119514016, 0.00640336283380807, -0.004041016108167662, -2.1837328028662328e-06, 0.002174044180125464, -0.001970044051841889, 0.0008359546974796246, 1.9445447567109655e-08],
+    [-0.0059475779383993, -0.0005401647678926045, 0.00879104135507679, -0.009857631558785612, 0.005013469503102154, 1.2807521786221875e-06, -0.0020626019342754685, 0.0017109128573523059]];
+  const lpm = t => { if (abs(t) < 0.4) { let s2 = 0, p2 = t * t; for (let n = 2; n < 60; n++) { const d = (n % 2 ? -p2 : p2) / n; s2 += d; if (abs(d) < 1e-18 * abs(s2)) break; p2 *= t; } return s2; } return t - log(1 + t); };   // t − ln(1 + t)
+  /** ln Γ*(a) = ln Γ(a) − (a − ½)ln a + a − ½ln 2π (the Stirling series; a ≥ 10) */
+  const lgStar = a => { const z = 1 / a, z2 = z * z; return z * (1 / 12 + z2 * (-1 / 360 + z2 * (1 / 1260 + z2 * (-1 / 1680 + z2 * (1 / 1188 + z2 * (-691 / 360360 + z2 / 156)))))); };
+  /** ln(x^a e^(−x)/Γ(a)) with the large terms cancelled analytically for a ≥ 10: −a·(t − ln(1 + t)) + ½ln(a/2π) − ln Γ*(a), t = x/a − 1 */
+  const lnPre = (a, x) => (a >= 10 ? -a * lpm(x / a - 1) + 0.5 * log(a / (2 * PI)) - lgStar(a) : -x + a * log(x) - lgamma(a));
+  function temmeR(a, x) {
+    const t = x / a - 1, eta = (t >= 0 ? 1 : -1) * sqrt(2 * lpm(t));
+    let sum = 0, ak = 1;
+    for (let k = 0; k < TEMME.length; k++) { const c = TEMME[k]; let v = 0; for (let i = c.length - 1; i >= 0; i--) v = v * eta + c[i]; sum += v * ak; ak /= a; }
+    return { eta, R: exp(-0.5 * a * eta * eta) / sqrt(2 * PI * a) * sum };
+  }
+  const temmeOK = (a, x) => a >= 20 && abs(x / a - 1) <= 0.4;
   /* ---- upper tails without cancellation ----
      gammaQ(a, x) = Γ(a, x)/Γ(a): the continued fraction (modified Lentz) for x ≥ a + 1, else 1 − the series of P (then P ≤ ~½, so
      1 − P loses nothing); the prefactor x^a e^−x / Γ(a) in logarithms (NR 3rd ed. §6.2; DiDonato & Morris 1986, ACM TOMS 12:4 — their
      split, without the Temme expansion, whose accuracy the series and fraction reach here with enough terms: ≤ 20 000 for a ≤ 10⁸) */
   function gammaQ(a, x) {
     if (!(a > 0) || !(x >= 0)) return NaN; if (x === 0) return 1; if (x === Infinity) return 0;
-    const lpre = -x + a * log(x) - lgamma(a), cap = 20000;
+    if (temmeOK(a, x)) { const { eta, R: r } = temmeR(a, x); return 0.5 * erfc(eta * sqrt(a / 2)) + r; }
+    const lpre = lnPre(a, x), cap = 20000;
     if (x < a + 1) { let ap = a, sum = 1 / a, del = sum; for (let n = 0; n < cap; n++) { ap++; del *= x / ap; sum += del; if (abs(del) < abs(sum) * 1e-17) break; } return max(0, 1 - min(1, sum * exp(lpre))); }
     let b = x + 1 - a, c = 1e300, d = 1 / b, h = d;
     for (let i = 1; i < cap; i++) { const an = -i * (i - a); b += 2; d = an * d + b; if (abs(d) < 1e-300) d = 1e-300; c = b + an / c; if (abs(c) < 1e-300) c = 1e-300; d = 1 / d; const del = d * c; h *= del; if (abs(del - 1) < 1e-16) break; }
@@ -12204,7 +12350,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const q = p - 0.5;
     if (abs(q) <= 0.425) { const r = 0.180625 - q * q;
       return q * (((((((2509.0809287301226727 * r + 33430.575583588128105) * r + 67265.770927008700853) * r + 45921.953931549871457) * r + 13731.693765509461125) * r + 1971.5909503065514427) * r + 133.14166789178437745) * r + 3.387132872796366608)
-        / (((((((5226.495278852545925 * r + 28729.085735721942674) * r + 39307.89580009271061) * r + 21213.794301586595867) * r + 5394.1960214247511077) * r + 687.1870074920579083) * r + 42.313330701600911252) * r + 1); }
+        / (((((((5226.4952788528545610 * r + 28729.085735721942674) * r + 39307.89580009271061) * r + 21213.794301586595867) * r + 5394.1960214247511077) * r + 687.1870074920579083) * r + 42.313330701600911252) * r + 1); }
     let r = q < 0 ? p : 1 - p; r = sqrt(-log(r)); let x;
     if (r <= 5) { r -= 1.6;
       x = (((((((7.7454501427834140764e-4 * r + 0.0227238449892691845833) * r + 0.24178072517745061177) * r + 1.27045825245236838258) * r + 3.64784832476320460504) * r + 5.7694972214606914055) * r + 4.6303378461565452959) * r + 1.42343711074968357734)
@@ -13381,83 +13527,129 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     solveZ(r.t, Float64Array.from(r.y));
     return { ...r, z: Array.from(z) };
   }
-  /** daeTheta({M: [diagonal], f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J),
-      consistent?, newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps}) — M·y′ = f(t, y) with a diagonal M whose zeros are
-      algebraic rows (nodes without capacity: thermal networks, circuit nodes): a semi-explicit index-1 DAE. A row with M_i ≠ 0 takes
-      the θ-method M_i(y₁ − y₀)/h = θ f_i(t₁, y₁) + (1 − θ) f_i(t₀, y₀) (θ = ½ trapezoidal, A-stable, order 2; θ = 1 backward Euler,
-      L-stable, order 1: the two transient methods of SPICE, Nagel 1975 §4); an algebraic row holds at the new time, f_i(t₁, y₁) = 0
-      (so the trapezoidal rule does not ring on it: Brenan, Campbell & Petzold 1996 §3.1). Each step is solved by Newton with the
-      Jacobian of f (cfg.jac, or forward differences), LU with pivoting; a step whose Newton fails is halved (≤ 20 times, then the
-      error 'newton'). Fixed steps dt, landing exactly on breaks [{t, apply?(t, y)}] and on tEnd; consistent: true first solves the
-      algebraic rows at t0 with the differential ones held. Samples are interpolated linearly (second order, as the method).
-      → {t, y, steps, newton (iterations), stop, codes} */
+  /** daeTheta({M, f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J), linear?, beforeStep?,
+      limit?, consistent?, newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps}) — M·y′ = f(t, y), a semi-explicit
+      index-1 DAE whose algebraic rows are the zero rows of M (nodes without capacity: thermal networks, circuit nodes). M is a
+      diagonal (an array of numbers) or a full matrix (an array of rows: a floating capacitor puts C at (a, a), (c, c) and −C at (a, c)).
+      A row with M_i ≠ 0 takes the θ-method (M(y₁ − y₀))_i = h(θ f_i(t₁, y₁) + (1 − θ) f_i(t₀, y₀)) (θ = ½ trapezoidal, A-stable, order 2;
+      θ = 1 backward Euler, L-stable, order 1: the two transient methods of SPICE, Nagel 1975 §4); an algebraic row holds at the new
+      time, f_i(t₁, y₁) = 0 (so the trapezoidal rule does not ring on it: Brenan, Campbell & Petzold 1996 §3.1).
+      Each step is solved by Newton with the Jacobian of f (cfg.jac fills J row-major, or forward differences) and LU with pivoting;
+      cfg.limit(yOld, yNew) → true may limit a Newton update in place (SPICE's pnjlim) and forces one more iteration. A step whose
+      Newton fails is halved (≤ 20 times, then the error 'newton'). linear: true — f affine in y with a constant J (from jac or
+      differences at the start): M − hθJ is factored once per (h, θ) and each step is one solve and one f, no iteration.
+      beforeStep(t0, t1, y) → {theta?} runs before each step (and each halved retry): it may set the step's inputs (a closure) and
+      pick θ for that step only; f(t0, y) is then evaluated again. Fixed steps dt, landing exactly on breaks [{t, apply?(t, y)}] and on
+      tEnd; consistent: true first solves the algebraic rows at t0 with the others held (and again after each break). Samples are
+      interpolated linearly. → {t, y, steps, newton (iterations), nfev, stop, codes} */
   function daeTheta(cfg) {
+    const S2 = daeThetaInit(cfg);
+    return S2.ok ? S2.advance(cfg.tEnd) : S2.result;
+  }
+  /** daeThetaInit(cfg) → {ok, advance(T) → the result at T (call again to go on: the factorisation, F₀ and the work arrays are kept),
+      t, y, result}: the resumable form for a stepper (cfg.tEnd only bounds the breaks; advance takes the horizon) */
+  function daeThetaInit(cfg) {
     const C = codes(['nan', 'newton', 'budget', 'bad-config']);
     const y0 = cfg && cfg.y0 ? Float64Array.from(cfg.y0) : null, n = y0 ? y0.length : 0, t0 = cfg && fin(cfg.t0) ? cfg.t0 : 0, tEnd = cfg && cfg.tEnd;
     const st = { steps: 0, newton: 0, nfev: 0 };
-    const done = (t, y, stop) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, newton: st.newton, nfev: st.nfev, stop, codes: C.list });
-    const Md = cfg && (Array.isArray(cfg.M) || ArrayBuffer.isView(cfg.M)) ? Float64Array.from(cfg.M) : null;
-    if (!cfg || typeof cfg.f !== 'function' || !n || !fin(tEnd) || !(tEnd >= t0) || !(cfg.dt > 0) || (Md && (Md.length !== n || !Md.every(fin)))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
-    const M = Md || new Float64Array(n).fill(1);
-    const th = fin(cfg.theta) && cfg.theta >= 0.5 && cfg.theta <= 1 ? cfg.theta : cfg.method === 'backward-euler' ? 1 : 0.5;
+    const done0 = (t, y, stop) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, newton: st.newton, nfev: st.nfev, stop, codes: C.list });
+    const fail0 = r => ({ ok: false, result: r, advance: () => r, t: r.t, y: r.y });
+    const done = (t, y, stop) => fail0(done0(t, y, stop));
+    if (!cfg || typeof cfg.f !== 'function' || !n || !(cfg.dt > 0) || (cfg.tEnd != null && !(cfg.tEnd >= t0))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    // M: a diagonal or a full n × n matrix (row-major internally); a row of zeros is algebraic
+    const Mf = new Float64Array(n * n), alg = new Uint8Array(n);
+    if (cfg.M == null) for (let i = 0; i < n; i++) Mf[i * n + i] = 1;
+    else if ((Array.isArray(cfg.M) || ArrayBuffer.isView(cfg.M)) && cfg.M.length === n && Array.from(cfg.M).every(v => typeof v === 'number' && fin(v))) for (let i = 0; i < n; i++) Mf[i * n + i] = cfg.M[i];
+    else if (Array.isArray(cfg.M) && cfg.M.length === n && cfg.M.every(r => (Array.isArray(r) || ArrayBuffer.isView(r)) && r.length === n && Array.from(r).every(fin))) { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) Mf[i * n + j] = cfg.M[i][j]; }
+    else { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    let nAlg = 0; for (let i = 0; i < n; i++) { let z = true; for (let j = 0; j < n; j++) if (Mf[i * n + j] !== 0) { z = false; break; } alg[i] = z ? 1 : 0; nAlg += alg[i]; }
+    const th0 = fin(cfg.theta) && cfg.theta >= 0.5 && cfg.theta <= 1 ? cfg.theta : cfg.method === 'backward-euler' ? 1 : 0.5;
     const tolN = cfg.newtonTol > 0 ? cfg.newtonTol : 1e-10, maxN = fin(cfg.maxNewton) ? max(2, min(cfg.maxNewton, 100)) : 25;
-    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS;
-    const J = new Float64Array(n * n), G = new Float64Array(n * n), piv = new Int32Array(n), F0 = new Float64Array(n), F1 = new Float64Array(n), R = new Float64Array(n), fx = new Float64Array(n), dy = new Float64Array(n);
+    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, linear = !!cfg.linear, limit = typeof cfg.limit === 'function' ? cfg.limit : null, before = typeof cfg.beforeStep === 'function' ? cfg.beforeStep : null;
+    const J = new Float64Array(n * n), G = new Float64Array(n * n), piv = new Int32Array(n), F0 = new Float64Array(n), F1 = new Float64Array(n), R = new Float64Array(n), fx = new Float64Array(n), dy = new Float64Array(n), yOld = limit ? new Float64Array(n) : null;
     const f = (t, y, out) => { cfg.f(t, y, out); st.nfev++; };
     const jac = (t, y, Fy) => {
       if (typeof cfg.jac === 'function') { J.fill(0); cfg.jac(t, y, J); return; }
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), 1); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - Fy[i]) / del; }
+      // forward differences; for an affine f any step is exact, and a large one keeps the rounding out
+      for (let j = 0; j < n; j++) { const yj = y[j], del = (linear ? 9.765625e-4 : 1.4901161193847656e-8) * max(abs(yj), 1); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - Fy[i]) / del; }
     };
-    // Newton on R(y) = 0 for the rows given by resid (y changed in place) → true when converged
+    // the step's residual and matrix: rows of M(y₁ − y₀) − h(θF₁ + (1 − θ)F₀), algebraic rows F₁
+    let hS = 0, thS = 0.5; const yb = new Float64Array(n);
+    const residStep = (F, yy) => { for (let i = 0; i < n; i++) { if (alg[i]) { R[i] = F[i]; continue; } let m = 0; for (let j = 0; j < n; j++) m += Mf[i * n + j] * (yy[j] - yb[j]); R[i] = m - hS * (thS * F[i] + (1 - thS) * F0[i]); } };
+    const matStep = () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = alg[i] ? J[i * n + j] : Mf[i * n + j] - hS * thS * J[i * n + j]; };
+    const residCons = F => { for (let i = 0; i < n; i++) R[i] = alg[i] ? F[i] : 0; };
+    const matCons = () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = alg[i] ? J[i * n + j] : (i === j ? 1 : 0); };
+    // Newton on R(y) = 0 (y changed in place) → true when converged; F1 = f(t, y) at the end
     const newton = (t, y, resid, gm) => {
       for (let it = 0; it < maxN; it++) {
-        f(t, y, F1); if (!F1.every(fin)) return false; resid(F1);
+        f(t, y, F1); if (!F1.every(fin)) return false; resid(F1, y);
         jac(t, y, F1); gm(); if (!luFactor(G, n, piv)) return false;
         for (let i = 0; i < n; i++) dy[i] = -R[i]; luSolve(G, n, piv, dy); st.newton++;
+        if (yOld) yOld.set(y);
         let e = 0; for (let i = 0; i < n; i++) { y[i] += dy[i]; e = max(e, abs(dy[i]) / (1 + abs(y[i]))); }
+        const limited = limit ? !!limit(yOld, y) : false;
         if (!y.every(fin)) return false;
-        if (e <= tolN) { f(t, y, F1); return F1.every(fin); }
+        if (e <= tolN && !limited) { f(t, y, F1); return F1.every(fin); }
       }
       return false;
     };
-    let t = t0; const y = Float64Array.from(y0), yn = new Float64Array(n), yprev = new Float64Array(n);
-    const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t); let bi = 0;
-    const applyBreaks = () => { while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b = brk[bi++]; if (typeof b.apply === 'function') b.apply(t, y); } };
-    const consistent = () => {   // the algebraic rows at t with the differential ones held
-      if (!M.some(m => m === 0)) return true;
-      return newton(t, y, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : 0; }, () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? 1 : 0); });
-    };
-    applyBreaks();
+    // linear mode: J once; M − hθJ factored once per (h, θ)
+    let linKey = '', linOK = false; const GL = linear ? new Float64Array(n * n) : null, pivL = linear ? new Int32Array(n) : null;
+    let t = t0; const y = Float64Array.from(y0), yn = new Float64Array(n), yprev = new Float64Array(n), tmp = new Float64Array(n);
+    const brk = Array.isArray(cfg.breaks) && cfg.breaks.length ? cfg.breaks.filter(b => b && fin(b.t) && b.t >= t0 && !(b.t > tEnd)).slice().sort((a2, b2) => a2.t - b2.t) : [];
+    let bi = 0;
+    const applyBreaks = () => { while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b2 = brk[bi++]; if (typeof b2.apply === 'function') b2.apply(t, y); } };
+    const consistent = () => (nAlg ? newton(t, y, residCons, matCons) : true);
+    if (brk.length) applyBreaks();
     if (cfg.consistent && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
     if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
     f(t, y, F0);
+    if (linear) { jac(t, y, F0); if (!J.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); } }
     const samples = cfg.samples || []; let si = 0;
     while (si < samples.length && samples[si] <= t) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
-    const tmp = new Float64Array(n);
+    let dead = null;
+    const advance = T => { if (dead) return dead; const r = run(T); if (r.stop !== 'end') dead = r; return r; };
+    const run = tEnd => {
+    const done = (t2, y2, stop) => done0(t2, y2, stop);
+    if (!fin(tEnd)) { C.code('bad-config'); return done(t, y, 'bad-config'); }
     for (;;) {
       if (t >= tEnd - 1e-14 * max(1, abs(tEnd))) return done(t, y, 'end');
       if (st.steps >= maxSteps) { C.code('budget', t); return done(t, y, 'budget'); }
       const target = bi < brk.length ? min(tEnd, brk[bi].t) : tEnd;
-      let h = min(cfg.dt, target - t), ok2 = false, halv = 0;
+      let h = min(cfg.dt, target - t), ok2 = false;
       if (target - t - h <= 1e-12 * max(1, abs(target))) h = target - t;
-      for (; halv <= 20; halv++) {
-        yn.set(y); const t1 = h === target - t ? target : t + h, hh = h;
-        ok2 = newton(t1, yn, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : M[i] * (yn[i] - y[i]) - hh * (th * F[i] + (1 - th) * F0[i]); },
-          () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? M[i] : 0) - hh * th * J[i * n + j]; });
+      for (let halv = 0; halv <= 20; halv++) {
+        const t1 = h === target - t ? target : t + h;
+        hS = h; thS = th0;
+        if (before) { const o2 = before(t, t1, y); if (o2 && fin(o2.theta) && o2.theta >= 0.5 && o2.theta <= 1) thS = o2.theta; f(t, y, F0); }
+        yb.set(y); yn.set(y);
+        if (linear) {   // one solve: G·Δ = −R(y₀) with G = M − hθJ (algebraic rows J); F₁ = F(y₀ at t₁) + JΔ (exact for affine f)
+          const key = hS + '|' + thS;
+          if (key !== linKey) { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) GL[i * n + j] = alg[i] ? J[i * n + j] : Mf[i * n + j] - hS * thS * J[i * n + j]; linOK = luFactor(GL, n, pivL); linKey = key; }
+          if (linOK) {
+            f(t1, yn, F1);
+            if (F1.every(fin)) { residStep(F1, yn); for (let i = 0; i < n; i++) dy[i] = -R[i]; luSolve(GL, n, pivL, dy);
+              for (let i = 0; i < n; i++) yn[i] += dy[i]; for (let i = 0; i < n; i++) { let v = F1[i]; for (let j = 0; j < n; j++) v += J[i * n + j] * dy[j]; F1[i] = v; }
+              ok2 = yn.every(fin) && F1.every(fin); st.newton++; }
+          }
+        } else ok2 = newton(t1, yn, residStep, matStep);
         if (ok2) { yprev.set(y); const ta = t; t = t1; y.set(yn); F0.set(F1); st.steps++;
           while (si < samples.length && samples[si] <= t) { const s2 = (samples[si] - ta) / (t - ta); for (let i = 0; i < n; i++) tmp[i] = yprev[i] + s2 * (y[i] - yprev[i]); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
           if (cfg.onStep) cfg.onStep(t, y);
           break; }
+        if (linear && linOK) break;   // an affine step cannot be helped by a smaller h (NaN from f)
         h /= 2;
       }
-      if (!ok2) { C.code('newton', t); return done(t, y, 'newton'); }
+      if (!ok2) { C.code(linear ? 'nan' : 'newton', t); return done(t, y, linear ? 'nan' : 'newton'); }
       if (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) {
         applyBreaks();
-        if (cfg.consistent !== false && M.some(m => m === 0) && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
+        if (cfg.consistent !== false && nAlg && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
         if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
         f(t, y, F0);
       }
     }
+    };
+    return { ok: true, advance, get t() { return t; }, get y() { return Array.from(y); }, result: null };
   }
   /** ssa({x0, nu: [[Δ per species] per reaction], propensity(x, a) (fills a), tEnd, r (a stream), maxEvents, onEvent(t, x, j)})
       — Gillespie's direct method (Gillespie 1977, J. Phys. Chem. 81:25): exact trajectories of the chemical master equation
@@ -13887,7 +14079,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     // sweeps and sensitivity
     linspace, oat, grid, morris, sobol, lhs,
     // delay equations, stochastic kinetics, SDEs, schedules
-    dde, dae, daeTheta, ssa, tauLeap, sde, nhpp, piecewise,
+    dde, dae, daeTheta, daeThetaInit, ssa, tauLeap, sde, nhpp, piecewise,
     // distributions and input modelling
     cdfOf, quantileOf, truncated, mixture, fit, ksTest, chiSquare, andersonDarling, digamma, trigamma,
     // variance reduction, precision, calibration
@@ -22748,7 +22940,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
      • fixed steps: Euler, Heun, midpoint, classical RK4; Störmer–Verlet and Yoshida 1990 4th order for separable Hamiltonian pairs;
      • delay equations by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003; Shampine & Thompson 2001), h ≤ τ;
      • events: sign changes located on the dense output by the Illinois method; timed events (doses) hit exactly;
-     • equilibria: damped Newton from a grid; eigenvalues by balancing + Hessenberg + shifted QR (Numerical Recipes 2nd ed. §11.5–11.6);
+     • equilibria: damped Newton from a grid (the kernel's LU, SK.lu); eigenvalues by balancing + Hessenberg + shifted QR (SK.eig; Numerical Recipes §11.5–11.6);
      • Lyapunov exponents: Benettin, Galgani, Giorgilli & Strelcyn 1980 (variational equation, Gram–Schmidt every Δt).
    Pure, deterministic (the transcendental functions are NoemaExpr's fdlibm ports, never Math.*), bounded (≤ 200 000 steps in all).
    No learner text: numbers, codes and the model's own names only. Tests: node tests/lib_ode.js. */
@@ -24227,7 +24419,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const r = 0.180625 - q * q;
       return q * (((((((2509.0809287301226727 * r + 33430.575583588128105) * r + 67265.770927008700853) * r + 45921.953931549871457) * r +
         13731.693765509461125) * r + 1971.5909503065514427) * r + 133.14166789178437745) * r + 3.387132872796366608) /
-        (((((((5226.495278852545461 * r + 28729.085735721942674) * r + 39307.89580009271061) * r + 21213.794301586595867) * r +
+        (((((((5226.4952788528545610 * r + 28729.085735721942674) * r + 39307.89580009271061) * r + 21213.794301586595867) * r +
           5394.1960214247511077) * r + 687.1870074920579083) * r + 42.313330701600911252) * r + 1);
     }
     let r = q < 0 ? p : 1 - p;
@@ -35462,7 +35654,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
    through logic@1 (window.NoemaLibLogic: parse, atomsOf, truthTable, entails — never re-implemented here).
    Added (§8): rule consequentialism at an acceptance rate (Hooker 2000; Ridge 2006), voting games' pure Nash equilibria and
    Gibbard–Satterthwaite manipulability, infinite utility streams (overtaking, catching-up, Pareto vs anonymity), Metz's ubuntu as a
-   relational score (promote / honour).
+   relational score (promote / honour); mixed equilibria of bimatrix games (support enumeration, Lemke–Howson) and of voting blocs
+   (exact for two, replicator-approximate beyond), Poisson voting games (Myerson 1998, 2000: pivots, magnitudes, equilibria).
    Sources: beside each function and in docs/library/philo.md. Pure, bounded, deterministic; numbers, codes and keys only.
    Tests: node tests/lib_philo.js */
 (function noemaLibPhiloModule(root) {
@@ -36567,7 +36760,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const gameMethod = o => o.method || 'plurality';
     const pgames = byId('poisson', x => poissonGame(x, X));
     const pgOk = id => { const g = pgames.get(id); if (!g) return null; if (!(fin(g.n) && g.n >= 0) || g.types.some(t => !(fin(t.r) && t.r >= 0) || !t.u.every(fin))) { flag('value'); return null; }
-      if (g.n > 1e5) { flag('budget'); return null; } const tau = poissonTau(g), K = Math.max(...tau) + 12 * Math.sqrt(Math.max(...tau)) + 20; if (K * (1 << g.m) * g.m * (g.m + 1) > 4e7) { flag('budget'); return null; } return g; };
+      if (g.n > 1e5) { flag('budget'); return null; } const tau = poissonTau(g), K = Math.max(...tau) + 12 * Math.sqrt(Math.max(...tau)) + 20; if (K * (1 << g.m) * g.m * g.m * (g.types.length + 1) > 4e7) { flag('budget'); return null; } return g; };
     const pgCtx = new Map(), ctxOf = g => { const k = JSON.stringify(poissonTau(g)); if (!pgCtx.has(k)) pgCtx.set(k, poissonCtx(poissonTau(g))); return pgCtx.get(k); };
     const eqCache = new Map();
     const eqsOf = o => {   // the equilibria of a bimatrix game (support enumeration, or the one Lemke–Howson reaches from the label)

@@ -357,12 +357,11 @@ per-component atol, `maxInstant`; its snapshot bit for bit); `med@1` (Φ, Φ⁻�
 `rf@1` (streams, Brent), `twin@1` (streams), `circuit-mna@1` (the meters' streams). In the second round: `ode@1`'s equilibria, eigenvalues and sweep grid
 (`lu`, `eig`, `linspace`; bit for bit), `clinic@1`'s physiology (`integrate` euler, projections at breaks, the grid index as the
 kernel's clock: bit for bit), `genetics@1`'s χ² tail and Φ⁻¹ (`chi2Sf`, `normInv`), `prob@1`'s Φ⁻¹ (`normInv`), `rf@1`'s and `twin@1`'s
-erfc (`erfc`, replacing NR erfcc's 1e-7), the circuit's noise sources (`counterStream`, Philox: sample i in O(1)), and `thermal@1`'s
-radiating networks (`daeTheta`, one call per step: Newton with LU, massless nodes algebraic). Kept on purpose: `thermal@1`'s linear
-networks (one solve with a matrix factored once per step size; `daeTheta` iterates Newton and refactors each step — 2.5× over the
-speed test), the circuit transient (a non-diagonal M from floating capacitors, SPICE's junction-voltage limiting between Newton
-iterations, gmin stepping and the transmission lines' history: outside `daeTheta`'s diagonal M), and `prob@1`'s distribution
-functions (more accurate tails and log tails than the kernel's). Load order: `46_lib_simkit.js` right after `35_simexpr.js` in index.html,
+erfc (`erfc`, replacing NR erfcc's 1e-7), the circuit's noise sources (`counterStream`, Philox: sample i in O(1)), the θ-method
+transients of `thermal@1` and `circuit-mna@1` (`daeThetaInit` with `linear`, `beforeStep` for θ and the step's inputs, the circuit's
+full M and `limit` for pnjlim; ≤ 3e-13 and ≤ 3e-9 relative to the own steps). Kept on purpose: `prob@1`'s distribution functions
+(more accurate tails and log tails than the kernel's), the circuit's gmin-stepping retry of a step the kernel cannot solve, and the
+marked FALLBACKs for a context without the kernel. Load order: `46_lib_simkit.js` right after `35_simexpr.js` in index.html,
 first among the P6/library scripts of the bundle (tools/build.py `KERNEL`) and the harness.
 
 ## 9. Co-simulation: `cosim(cfg)`

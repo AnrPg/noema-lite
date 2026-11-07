@@ -96,11 +96,13 @@ constants to 10⁻⁹, thermostat duty to 0.002; 20 000 steps of a 10-node netwo
 `rad` link (view factors are the author's ε·A), thermostats switch at step boundaries (choose dt ≪ the cycle).
 
 **Uses the kernel / parts (2026-11-07).** The transient's θ-method (trapezoidal, backward Euler on the first step, on source edges
-and on thermostat switches; the massless nodes are algebraic rows) is the format's own (`model.transient.method: 'trap' | 'be'`). A
-network with radiation (nonlinear) takes each step from the kernel's θ-method DAE solver (`NoemaSimKit.daeTheta`: C·x′ = −G·x + b + P̄
-+ rad(x), Newton with LU and the analytic Jacobian, the massless nodes algebraic rows, θ chosen per step as above, P̄ each source's
-exact mean over the step); a linear network keeps its one solve with a matrix factored once per step size (the kernel's Newton
-refactors at every step: 2.5× over the speed test). FALLBACK without the kernel: the own Newton. Its step is one function (`stepCore`) that `transient()` and the new
+and on thermostat switches; the massless nodes are algebraic rows) is the format's own (`model.transient.method: 'trap' | 'be'`). The
+transient and the stepper run on the kernel's θ-method DAE solver (`NoemaSimKit.daeThetaInit`): C·x′ = −G·x + b + P̄ + rad(x), the
+massless nodes algebraic rows, the analytic Jacobian; a linear network (no radiation) factors C + hθG once per (h, θ) and takes one
+solve a step (`linear: true`), a radiating one Newton with LU. Before each step (`beforeStep`) the engine tests the gates at its
+start, sets P̄ (each source's exact mean over the step, on the engine's own grid k·h) and picks θ as above. Against the own θ-step:
+≤ 3e-13 relative (heatsink, a PWM chain with a massless node, radiation, a thermostat; both methods). FALLBACK without the kernel
+(marked): the own θ-step (`stepCore`). Its step is one function (`stepCore`) that `transient()` and the new
 **stepper** share: `thermal@1` is a part of a co-simulation (`engine.stepper = true`; the instance's `stepInit` / `stepTo` /
 `snapshot` / `restore`, `docs/INTERACTIVE_LIBRARY.md` §1.6). Each macro step is cut in equal steps ≤ `transient.dt`; the bindings are
 read at every step; a series output gives its value now, `stat` runs over every internal step, `at` once passed, the steady and τ

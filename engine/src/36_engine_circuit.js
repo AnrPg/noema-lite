@@ -680,13 +680,13 @@
           case 'R': case 'SW': G(a, c, e.g); break;
           case 'C':
             if (k >= 0) { if (op0) { BR(a, c, k); ROWV(k, a, c); B[k] = e.ic; } else A[k * S + k] = 1; }
-            if (tran) { const geq = (ctx.be ? 1 : 2) * e.C / ctx.h, ieq = geq * e.vp + (ctx.be ? 0 : e.ip); G(a, c, geq); J(a, c, -ieq); }
+            if (tran && !ctx.dae) { const geq = (ctx.be ? 1 : 2) * e.C / ctx.h, ieq = geq * e.vp + (ctx.be ? 0 : e.ip); G(a, c, geq); J(a, c, -ieq); }   // (dae: C is in the kernel's M)
             break;
           case 'L':
             BR(a, c, k);
             if (op0 && e.ic !== null) { A[k * S + k] = 1; B[k] = e.ic; break; }
             ROWV(k, a, c);
-            if (tran) { const req = (ctx.be ? 1 : 2) * e.L / ctx.h; A[k * S + k] -= req; B[k] = -req * e.ip - (ctx.be ? 0 : e.vp); }
+            if (tran && !ctx.dae) { const req = (ctx.be ? 1 : 2) * e.L / ctx.h; A[k * S + k] -= req; B[k] = -req * e.ip - (ctx.be ? 0 : e.vp); }   // (dae: −L in M)
             break;
           case 'V': BR(a, c, k); ROWV(k, a, c); B[k] = srcVal(e, ctx); break;
           case 'I': J(a, c, -srcVal(e, ctx)); break;   // drives the current into n[0]
@@ -862,7 +862,7 @@
 
     let tranCache = null;
     /* the transient: trapezoidal companion models, backward Euler on the first step and on every step that holds a source breakpoint
-       (SPICE's practice; a circuit is a DAE, so the kernel's ODE integrators do not apply). tranStart / tranAdvance are resumable:
+       (SPICE's practice): the FALLBACK without the kernel, and the gmin-stepping retry of tranAdvanceK below. tranStart / tranAdvance(K) are resumable:
        runTransient() and the stepper (docs/INTERACTIVE_LIBRARY.md §1.6) share them. */
     function tranStart(o, dt) {
       const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];
@@ -923,6 +923,61 @@
       }
       return R;
     }
+    /** n more steps of dt on the kernel's θ-method DAE solver (NoemaSimKit.daeThetaInit): M·x' = f(t, x) = B(x) − A(x)·x, the MNA
+        system without companion models (stamp with ctx.dae), M full: a capacitor C at (a, a), (c, c), −C at (a, c), (c, a); an
+        inductor −L on its branch row; every other row algebraic. The Jacobian is −A of the same stamp; a linear circuit factors
+        M − hθJ once per (h, θ) (linear: true). Before each step (beforeStep) θ = 1 (backward Euler) on the first step and on a step
+        that holds a source breakpoint, ½ otherwise, and the lines' waves from td ago; the junction limiting (pnjlim) stays in stamp
+        and a limited iterate forces another Newton iteration (limit). A step the kernel cannot solve (also after halving) is taken by
+        the own step with gmin stepping (tranAdvance), then the kernel goes on. */
+    function tranAdvanceK(K, R, n) {
+      const { dt, tol, ctx, caps, inds, tls, pwEl } = R, s0 = R.s, sEnd = R.s + n;
+      if (!(n > 0)) return R;
+      const Mk = []; for (let i = 0; i < S; i++) Mk.push(new Float64Array(S));
+      for (const e of caps) { const a = e.a, c = e.c; if (a >= 0) { Mk[a][a] += e.C; if (c >= 0) { Mk[a][c] -= e.C; Mk[c][a] -= e.C; } } if (c >= 0) Mk[c][c] += e.C; }
+      for (const e of inds) Mk[e.k][e.k] -= e.L;
+      const kc = { mode: 'tran', dae: true, t: 0, h: dt, be: false, gsh: 0, src: 1, avg: false, t0m: false };
+      let g0 = 0, g1 = 0, thS = 1, lastS = -1;
+      const snap = t => (Math.abs(t - g1) <= 1e-9 * dt ? g1 : Math.abs(t - g0) <= 1e-9 * dt ? g0 : t);   // the grid's own times s·dt for the sources
+      const f = (t, y, out) => { kc.t = snap(t); stamp(kc, y); for (let i = 0; i < S; i++) { let q = B[i]; for (let j = 0; j < S; j++) q -= A[i * S + j] * y[j]; out[i] = q; } };
+      const jac = (t, y, Jm) => { for (let i = 0; i < S * S; i++) Jm[i] = -A[i]; };   // A of the stamp f has just made at y
+      const beforeStep = () => {
+        const s = R.s; g0 = s * dt; g1 = (s + 1) * dt;
+        if (s !== lastS) {   // once per grid step (a halved retry keeps the step's θ)
+          lastS = s; thS = s === 0 || R.bp <= g1 + tol ? 1 : 0.5;
+          if (R.bp <= g1 + tol) R.bp = nextBp(g1 + tol);
+          for (const e of tls) {   // the waves that left the other end td ago
+            const tp = g1 - e.td, h = e.h; let w;
+            if (tp <= 0) w = [h[0][0], h[1][0], h[2][0], h[3][0]];
+            else { const u = tp / dt; let i = Math.floor(u + 1e-9); if (i > s) i = s; const fr = Math.max(0, u - i), j = Math.min(i + 1, s); w = h.map(a => a[i] * (1 - fr) + a[j] * fr); }
+            e.E1 = w[2] + e.z0 * w[3]; e.E2 = w[0] + e.z0 * w[1];
+          }
+        }
+        return { theta: thS };
+      };
+      const record = xs => {   // the step s → s + 1 done: the companion currents (for the pins), the history
+        const be = thS === 1;
+        for (const e of caps) { const v = vx(xs, e.a) - vx(xs, e.c), geq = (be ? 1 : 2) * e.C / dt; e.ip = geq * (v - e.vp) - (be ? 0 : e.ip); e.vp = v; }
+        for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
+        R.xs = Float64Array.from(xs); ctx.t = g1; ctx.be = be;
+        for (let i = 0; i < N; i++) R.V[i].push(xs[i]);
+        ck.real.forEach((e, j) => { R.I[j].push(mainCurrent(e, pinCurrents(e, R.xs, ctx))); });
+        pwEl.forEach((e, j) => { R.PW[j].push(power(e, R.xs, ctx)); });
+        for (const e of tls) tlv(R.xs, e).forEach((v, j) => { e.h[j].push(v); });
+        R.s++;
+      };
+      while (R.s < sEnd) {
+        const D = K.daeThetaInit({ M: Mk, f, jac, linear: ck.linear, beforeStep, limit: () => limited, y0: R.xs, t0: R.s * dt, tEnd: sEnd * dt, dt,
+          newtonTol: 1e-9, maxNewton: 60, maxSteps: 64 * (sEnd - R.s) + 64,
+          onStep: (t, y) => { if (Math.abs(t - g1) <= 1e-9 * dt) record(y); } });   // a halved substep is not a grid point
+        const r = D.ok ? D.advance(sEnd * dt) : D.result;
+        if (r.stop === 'end' && R.s >= sEnd) break;
+        if (r.stop === 'budget') throw fail('budget', { steps: sEnd, limit: MAX_STEPS });
+        lastS = -1; tranAdvance(R, 1);   // the own step with gmin stepping (throws no-convergence when that fails too)
+      }
+      void s0;
+      return R;
+    }
     function runTransient(o) {
       o = o || {};
       const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
@@ -933,7 +988,7 @@
       const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
       if (tranCache && tranCache.key === key) return tranCache;
       stepping = null;   // the elements' companion state is the transient's: a stepper run is invalidated
-      const R = tranAdvance(tranStart(o, dt), steps);
+      const Kt = kit(), R = Kt ? tranAdvanceK(Kt, tranStart(o, dt), steps) : tranAdvance(tranStart(o, dt), steps);   // FALLBACK without the kernel: the own companion models
       const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
       tranCache = { key, T, V: R.V.map(a => Float64Array.from(a)), I: R.I.map(a => Float64Array.from(a)), steps, P: Object.fromEntries(pw.map((id, j) => [id, Float64Array.from(R.PW[j])])) };
       return tranCache;
@@ -945,7 +1000,7 @@
       if (!stepping) throw fail('bad-args');
       const R = stepping, n = Math.max(0, Math.round((tTo - R.s * R.dt) / R.dt));
       if (R.s + n > MAX_STEPS) throw fail('budget', { steps: R.s + n, limit: MAX_STEPS });
-      tranAdvance(R, n);
+      const Kt = kit(); if (Kt) tranAdvanceK(Kt, R, n); else tranAdvance(R, n);
       const last = a => a[a.length - 1], nodes = {}, branches = {};
       for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? 0 : last(R.V[i]); }
       ck.real.forEach((e, j) => { branches[e.id] = last(R.I[j]); });
