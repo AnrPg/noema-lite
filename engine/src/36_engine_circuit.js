@@ -948,7 +948,9 @@
       const last = a => a[a.length - 1], nodes = {}, branches = {};
       for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? 0 : last(R.V[i]); }
       ck.real.forEach((e, j) => { branches[e.id] = last(R.I[j]); });
-      return { t: R.s * R.dt, nodes, branches, power: Object.fromEntries(R.pw.map((id, j) => [id, last(R.PW[j])])) };
+      // hist(kind, name): every step's value so far (node | branch | power), for stats and `at` over the whole run
+      const hist = (kind, nm) => { if (kind === 'node') { const i = ck.resolveName(nm); return i < 0 ? R.V[0].map(() => 0) : R.V[i]; } if (kind === 'branch') { const j = ck.real.findIndex(e => e.id === nm); return j < 0 ? null : R.I[j]; } const j = R.pw.indexOf(nm); return j < 0 ? null : R.PW[j]; };
+      return { t: R.s * R.dt, dt: R.dt, nodes, branches, power: Object.fromEntries(R.pw.map((id, j) => [id, last(R.PW[j])])), hist };
     }
     function transient(o) {
       const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};

@@ -4998,6 +4998,14 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     return s;
   }
   const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): the meters' seeded jitter draws from its MRG32k3a streams, one per
+      measurement; FALLBACK without the kernel (marked): mulberry32. (The noise sources stay a counter-based hash: their sample i is
+      read at any time of a transient, which a sequential stream cannot give cheaply.) */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  const streamOf = (name, seed) => { const K = kit(); return K ? K.stream(seed >>> 0, 'circuit:' + name) : mulberry32(hash32(name, seed)); };
   /** → {at(t), avg, at0m (the value at t = 0⁻), next(t): the first breakpoint after t (Infinity if none)} */
   function wave(w) {
     if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
@@ -5710,15 +5718,11 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     }
 
     let tranCache = null;
-    function runTransient(o) {
-      o = o || {};
-      const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
-      if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
-      const steps = Math.ceil(tEnd / dt - 1e-9);
-      if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
+    /* the transient: trapezoidal companion models, backward Euler on the first step and on every step that holds a source breakpoint
+       (SPICE's practice; a circuit is a DAE, so the kernel's ODE integrators do not apply). tranStart / tranAdvance are resumable:
+       runTransient() and the stepper (docs/INTERACTIVE_LIBRARY.md §1.6) share them. */
+    function tranStart(o, dt) {
       const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];
-      const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
-      if (tranCache && tranCache.key === key) return tranCache;
       const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L'), tls = ck.els.filter(e => e.type === 'TLINE');
       for (const e of tls) if (e.td < dt * (1 - 1e-9)) throw fail('step', { element: e.id, td: e.td, dt });
       let x;
@@ -5731,22 +5735,24 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         for (const e of caps) { e.vp = vx(x, e.a) - vx(x, e.c); e.ip = 0; }
         for (const e of inds) { e.ip = x[e.k]; e.vp = vx(x, e.a) - vx(x, e.c); }
       }
-      const V = []; for (let i = 0; i < N; i++) { V.push(new Float64Array(steps + 1)); V[i][0] = x[i]; }
-      const I = ck.real.map(e => { const arr = new Float64Array(steps + 1); arr[0] = mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })); return arr; });
-      const pwEl = pw.map(id => ck.byId.get(id)), PW = pwEl.map(() => new Float64Array(steps + 1));
-      const power = (e, xx, c) => { const pc = pinCurrents(e, xx, c); let q = 0; e.pins.forEach((pi, j) => { q += vx(xx, pi) * pc[j]; }); return q; };
-      pwEl.forEach((e, j) => { PW[j][0] = power(e, x, { mode: 'op', t0m: true, t: 0, src: 1 }); });
-      const tlv = (xx, e) => { const [p1, m1, p2, m2] = e.tl; return [vx(xx, p1) - vx(xx, m1), xx[e.k], vx(xx, p2) - vx(xx, m2), xx[e.k + 1]]; };
-      for (const e of tls) { e.h = [0, 1, 2, 3].map(() => new Float64Array(steps + 1)); tlv(x, e).forEach((v, j) => { e.h[j][0] = v; }); }
+      const V = []; for (let i = 0; i < N; i++) V.push([x[i]]);
+      const I = ck.real.map(e => [mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 }))]);
+      const pwEl = pw.map(id => ck.byId.get(id)), PW = pwEl.map(e => [power(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })]);
+      for (const e of tls) { e.h = [[], [], [], []]; tlv(x, e).forEach((v, j) => { e.h[j].push(v); }); }
       const tol = 1e-6 * dt;
-      const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
-      let bp = nextBp(-tol);   // a breakpoint at t = 0 makes the first step backward Euler anyway
-      const ctx = { mode: 'tran', t: 0, h: dt, be: true, gsh: 0, src: 1, avg: false, t0m: false };
-      let xs = x;
-      for (let s = 0; s < steps; s++) {
-        const t1 = (s + 1) * dt;
-        ctx.t = t1; ctx.be = s === 0 || bp <= t1 + tol;
-        if (bp <= t1 + tol) bp = nextBp(t1 + tol);
+      return { dt, tol, s: 0, xs: x, V, I, pw, pwEl, PW, caps, inds, tls, bp: nextBp(-tol),   // a breakpoint at t = 0 makes the first step backward Euler anyway
+        ctx: { mode: 'tran', t: 0, h: dt, be: true, gsh: 0, src: 1, avg: false, t0m: false } };
+    }
+    const power = (e, xx, c) => { const pc = pinCurrents(e, xx, c); let q = 0; e.pins.forEach((pi, j) => { q += vx(xx, pi) * pc[j]; }); return q; };
+    const tlv = (xx, e) => { const [p1, m1, p2, m2] = e.tl; return [vx(xx, p1) - vx(xx, m1), xx[e.k], vx(xx, p2) - vx(xx, m2), xx[e.k + 1]]; };
+    const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
+    /** n more steps of dt */
+    function tranAdvance(R, n) {
+      const { dt, tol, ctx, caps, inds, tls, pwEl } = R;
+      for (let q = 0; q < n; q++) {
+        const s = R.s, t1 = (s + 1) * dt;
+        ctx.t = t1; ctx.be = s === 0 || R.bp <= t1 + tol;
+        if (R.bp <= t1 + tol) R.bp = nextBp(t1 + tol);
         ctx.gsh = 0;
         for (const e of tls) {   // the waves that left the other end td ago
           const tp = t1 - e.td, h = e.h; let w;
@@ -5754,26 +5760,53 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
           else { const u = tp / dt; let i = Math.floor(u + 1e-9); if (i > s) i = s; const f = Math.max(0, u - i), j = Math.min(i + 1, s); w = h.map(a => a[i] * (1 - f) + a[j] * f); }
           e.E1 = w[2] + e.z0 * w[3]; e.E2 = w[0] + e.z0 * w[1];
         }
-        if (!newton(ctx, xs, 60)) {
-          let ok = true, xg = xs;
+        if (!newton(ctx, R.xs, 60)) {
+          let ok = true, xg = R.xs;
           for (let i = 3; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 100)) xg = Float64Array.from(X); else ok = false; }
           ctx.gsh = 0;
           if (!ok || !newton(ctx, xg, 100)) throw fail('no-convergence', { t: t1 });
         }
-        xs = Float64Array.from(X);
+        const xs = R.xs = Float64Array.from(X);
         for (const e of caps) {
           const v = vx(xs, e.a) - vx(xs, e.c), geq = (ctx.be ? 1 : 2) * e.C / dt;
           e.ip = geq * (v - e.vp) - (ctx.be ? 0 : e.ip); e.vp = v;
         }
         for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
-        for (let i = 0; i < N; i++) V[i][s + 1] = xs[i];
-        ck.real.forEach((e, j) => { I[j][s + 1] = mainCurrent(e, pinCurrents(e, xs, ctx)); });
-        pwEl.forEach((e, j) => { PW[j][s + 1] = power(e, xs, ctx); });
-        for (const e of tls) tlv(xs, e).forEach((v, j) => { e.h[j][s + 1] = v; });
+        for (let i = 0; i < N; i++) R.V[i].push(xs[i]);
+        ck.real.forEach((e, j) => { R.I[j].push(mainCurrent(e, pinCurrents(e, xs, ctx))); });
+        pwEl.forEach((e, j) => { R.PW[j].push(power(e, xs, ctx)); });
+        for (const e of tls) tlv(xs, e).forEach((v, j) => { e.h[j].push(v); });
+        R.s++;
       }
+      return R;
+    }
+    function runTransient(o) {
+      o = o || {};
+      const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
+      if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
+      const steps = Math.ceil(tEnd / dt - 1e-9);
+      if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
+      const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];
+      const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
+      if (tranCache && tranCache.key === key) return tranCache;
+      stepping = null;   // the elements' companion state is the transient's: a stepper run is invalidated
+      const R = tranAdvance(tranStart(o, dt), steps);
       const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
-      tranCache = { key, T, V, I, steps, P: Object.fromEntries(pw.map((id, j) => [id, PW[j]])) };
+      tranCache = { key, T, V: R.V.map(a => Float64Array.from(a)), I: R.I.map(a => Float64Array.from(a)), steps, P: Object.fromEntries(pw.map((id, j) => [id, Float64Array.from(R.PW[j])])) };
       return tranCache;
+    }
+    /** the stepper: a transient run held open — start(o) with {dt, uic?, power?}, to(tTo) → {t, nodes, branches, power} now */
+    let stepping = null;
+    function tranStep(o, tTo) {
+      if (o) { tranCache = null; stepping = tranStart(o, num(o.dt)); }
+      if (!stepping) throw fail('bad-args');
+      const R = stepping, n = Math.max(0, Math.round((tTo - R.s * R.dt) / R.dt));
+      if (R.s + n > MAX_STEPS) throw fail('budget', { steps: R.s + n, limit: MAX_STEPS });
+      tranAdvance(R, n);
+      const last = a => a[a.length - 1], nodes = {}, branches = {};
+      for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? 0 : last(R.V[i]); }
+      ck.real.forEach((e, j) => { branches[e.id] = last(R.I[j]); });
+      return { t: R.s * R.dt, nodes, branches, power: Object.fromEntries(R.pw.map((id, j) => [id, last(R.PW[j])])) };
     }
     function transient(o) {
       const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
@@ -5913,7 +5946,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       }
       throw fail('probe');
     }
-    return { dc, transient, measure, ac, runTransient, dcX, ck, where, pinCurrents, mainCurrent };
+    return { dc, transient, measure, ac, runTransient, tranStep, dcX, ck, where, pinCurrents, mainCurrent };
   }
 
   function create(netlist, opts) {
@@ -5940,11 +5973,11 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     function measure2(probe) {
       if (!isObj(probe)) throw fail('probe');
       const count = ++mcount;
-      const rng = noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null;
+      const rng = noise ? streamOf(JSON.stringify(probe), noise.seed) : null;
       const jit = v => (rng ? v * (1 + noise.rel * (2 * rng() - 1)) + noise.abs * (2 * rng() - 1) : v);
       const shifted = (s, fn) => {   // every capture of a board with noise or pickup sees another stretch of it (the same sequence of measurements reads the same)
         const h = s.ck.hold, live = s.ck.sources.some(e => e.wk === 'noise');
-        h.shift = live ? mulberry32(hash32('m' + count, seed))() * 1000 : 0;
+        h.shift = live ? streamOf('m' + count, seed)() * 1000 : 0;
         try { return fn(); } finally { h.shift = 0; }
       };
       const nz = (v, d) => (v === undefined ? d : num(v));
@@ -6020,6 +6053,8 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
       id: ID,
       dc: o => inner.dc(o),
       transient: o => inner.transient(o),
+      /** the stepper's transient held open: tranStep({dt, uic?, power?}, tTo) starts it, tranStep(null, tTo) goes on → the values at tTo */
+      tranStep: (o, tTo) => inner.tranStep(o, tTo),
       measure: p => (ver === 2 ? measure2(p) : inner.measure(p)),
       /** the AC analysis {source, fStart, fStop, points?, scale?} → {f, nodes: {name: {re, im}}} */
       ac: o => { if (ver !== 2) throw fail('bad-args'); return inner.ac(o); },
@@ -6040,7 +6075,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
   /** the engine's own source, to run it in a Worker (the sim-spec@1 runtime's workerSource: engine/src/36_engine_circuit_sim.js) */
   const source = () => '(' + noemaCircuitModule.toString() + ')(self);';
   root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS, acPoints: 1000 }),
-    FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), MODES: Object.freeze(MODES.slice()), check, checkFaults, create, num, acStats, source });
+    FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), MODES: Object.freeze(MODES.slice()), check, checkFaults, create, num, acStats, source, kit });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
 
@@ -6082,7 +6117,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
     }
     root.noemaEngine = { create(spec, opts) {
       const model = spec.model || {}, outs = spec.outputs || [], seed = (opts && opts.seed) >>> 0, faults = (opts && opts.faults) || [];
-      let key = null, sim = null;
+      let key = null, sim = null, ST = null;
       function simFor(inp) {
         const k = JSON.stringify(inp.$bind || []);
         if (k !== key) {
@@ -6137,12 +6172,49 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
             return { kind: m.kind, value: m.value, ...(m.mode ? { mode: m.mode } : {}) };
           } catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
         },
+        // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the transient held open, its grid model.transient.dt (else tEnd/1000, else a
+        // tenth of the first macro step); outputs at each step: node / branch / power their value now (a series: one sample a step),
+        // time the time, stat over the steps so far, at once passed; DC outputs as in run(). Cannot snapshot (the companion state).
+        stepInit(inp) {
+          try {
+            const tr = inp.$tran || {}; ST = { dt: tr.dt > 0 ? tr.dt : tr.tEnd > 0 ? tr.tEnd / 1000 : 0, s: simFor(inp), hist: {}, t: 0, prev: null, cur: null, bind: JSON.stringify(inp.$bind || []) };
+            if (ST.dt > 0) ST.cur = ST.s.tranStep({ dt: ST.dt, power: outs.filter(o => o.power !== undefined).map(o => o.power) }, 0);
+            return { out: ST.cur ? stepOuts(inp) : {} };
+          } catch (e) { ST = null; return { fail: 'part-failed', out: {} }; }
+        },
+        stepTo(inp, t, dt) {
+          if (!ST) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+          try {
+            if (!ST.cur) { ST.dt = dt / 10; ST.cur = ST.s.tranStep({ dt: ST.dt, power: outs.filter(o => o.power !== undefined).map(o => o.power) }, 0); }
+            ST.prev = ST.cur; ST.cur = ST.s.tranStep(null, t + dt);
+            return { out: stepOuts(inp), dt, events: [] };
+          } catch (e) { ST = null; return { fail: String(e && e.code === 'budget' ? 'budget' : 'part-failed'), out: {}, dt: 0, events: [] }; }
+        },
+        snapshot() { return -1; },
+        restore() { return false; },
       };
+      function stepOuts(inp) {
+        const c = ST.cur, p = ST.prev, r = {};
+        const val = (q, o) => (o.power !== undefined ? q.power[o.power] : o.node !== undefined ? q.nodes[o.node] : q.branches[o.branch]);
+        for (const o of outs) {
+          try {
+            if (o.ac !== undefined || o.probe) { r[o.id] = NaN; continue; }
+            if (o.kind === 'series') { r[o.id] = o.time ? c.t : val(c, o); continue; }
+            if (o.at === undefined && o.stat === undefined) { const d = ST.dc || (ST.dc = ST.s.dc()); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
+            const v = val(c, o), h = ST.hist[o.id] || (ST.hist[o.id] = { n: 0, mn: Infinity, mx: -Infinity, sum: 0, sq: 0 });
+            if (h.t !== c.t) { h.t = c.t; h.n++; h.mn = Math.min(h.mn, v); h.mx = Math.max(h.mx, v); h.sum += v; h.sq += v * v; }
+            if (o.stat !== undefined) { r[o.id] = { final: v, min: h.mn, max: h.mx, mean: h.sum / h.n, pp: h.mx - h.mn, rms: Math.sqrt(h.sq / h.n) }[o.stat]; continue; }
+            const ta = inp.$at ? inp.$at[o.id] : NaN;
+            r[o.id] = p && ta >= p.t && ta <= c.t ? val(p, o) + (v - val(p, o)) * (ta - p.t) / (c.t - p.t || 1) : NaN;
+          } catch (e) { r[o.id] = NaN; }
+        }
+        return r;
+      }
     } };
   }
   const local = { NoemaCircuit: window.NoemaCircuit }; circuitSimEngine(local);
   ACT.registerEngine({
-    id: 'circuit-mna@1', bench: true,
+    id: 'circuit-mna@1', bench: true, stepper: true,   // stepper: the transient as a part of a co-simulation (stepInit / stepTo)
     /** after the common checks (NoemaPackCheck.checkSimSpec checks the model, the outputs and the bench): the engine's own netlist check */
     check: spec => NoemaCircuit.check(spec?.model?.netlist).filter(p => p.level === 'error').map(p => `netlist ${p.path}: ${p.msg}`),
     /** on the main thread: the expressions become numbers (bindings, transient times, `at`), so the worker needs no evaluator */
@@ -6157,7 +6229,8 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
         $ac: acm ? { source: acm.source, fStart: ev(acf.fStart, env), fStop: ev(acf.fStop, env), ...(acm.points !== undefined ? { points: acm.points } : {}) } : null });
     },
     create: (spec, opts) => local.noemaEngine.create(spec, opts),
-    workerSource: NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);',
+    /** the Worker: NoemaExpr and the simulation kernel (the meters' streams) when loaded, the engine, then this adapter */
+    get workerSource() { const K = NoemaCircuit.kit(), NX = window.NoemaExpr; return (K && NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);'; },
   });
   /* i18n-ignore-end */
 })();
@@ -7628,6 +7701,51 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
       const lam = eigSym(S, nm), big = Math.max(1e-300, ...lam.map(Math.abs));
       return lam.map(l => (l > big * 1e-12 ? 1 / l : Infinity)).sort((a, c) => c - a);
     }
+    /** the thermostats' gates at a state (on below high when heating, above low when cooling) */
+    const gateAt = x => thermostats.map(th => { const T = Tof(th.s, x); return th.heat ? T < th.high : T > th.low; });
+    /** one step [t1, t2] of the θ-method on C·x' = −G·x + b + P(t) + rad(x) (massless nodes: algebraic rows): θ = ½ (trapezoidal) on
+        nodes with a heat capacity, 1 on massless ones, and backward Euler on the first step, on a source edge and on a thermostat
+        switch (the gates are tested at t1, with their hysteresis); the sources' exact mean over the step; Newton with radiation.
+        sp (out): each source's power over the step. The same step serves transient() and the stepper. */
+    function stepCore(h, be) {
+      const thT = new Float64Array(n), thB = new Float64Array(n).fill(1);
+      for (let i = 0; i < n; i++) thT[i] = be || !(C[i] > 0) ? 1 : 0.5;
+      const mk = th => { const A = new Float64Array(n * n); for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i * n + j] = th[i] * G[i * n + j]; A[i * n + i] += C[i] / h; } return A; };
+      const AT = mk(thT), AB = mk(thB), LU = {};
+      if (!rads.length) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
+      const P = new Float64Array(n), rhs = new Float64Array(n), Gx = new Float64Array(n), rv = new Float64Array(n), nS = sources.length;
+      return { step(x, gate, sp, t1, t2, first) {
+        let switched = false;
+        thermostats.forEach((th, i) => {
+          const T = Tof(th.s, x), on = gate[i];
+          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
+          if (nx !== on) { gate[i] = nx; switched = true; }
+        });
+        let edge = false; P.fill(0); const hh = t2 - t1;
+        for (let s = 0; s < nS; s++) {
+          const src = sources[s], on = src.gate < 0 || gate[src.gate], w = src.w;
+          if (w.edges(t2) !== w.edges(t1)) edge = true;
+          sp[s] = on ? (w.F(t2) - w.F(t1)) / hh : 0; P[src.u] += sp[s];
+        }
+        const useB = be || first || switched || edge, th = useB ? thB : thT;
+        for (let i = 0; i < n; i++) { let s = 0; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; Gx[i] = s; }
+        rv.fill(0); if (rads.length) rad(x, rv, null, null);
+        for (let i = 0; i < n; i++) rhs[i] = C[i] / h * x[i] - (1 - th[i]) * (Gx[i] - rv[i]) + b[i] + P[i];
+        if (!rads.length) { const L = LU[useB ? 'b' : 't']; return subst(L.M, n, L.perm, Float64Array.from(rhs)); }
+        const A = useB ? AB : AT, y = Float64Array.from(x);
+        let conv = false;
+        for (let it = 0; it < 30 && !conv; it++) {
+          const R = new Float64Array(n), J = Float64Array.from(A), rr = new Float64Array(n);
+          rad(y, rr, J, th);
+          for (let i = 0; i < n; i++) { let s = -rhs[i] - th[i] * rr[i]; for (let j = 0; j < n; j++) s += A[i * n + j] * y[j]; R[i] = -s; }
+          const dx = solveDense(J, n, R);
+          let m = 0; for (let i = 0; i < n; i++) { y[i] = Math.max(-K0 + 1e-6, y[i] + dx[i]); m = Math.max(m, Math.abs(dx[i])); }
+          conv = m < 1e-9;
+        }
+        if (!conv) throw fail('no-convergence', { t: t2 });
+        return y;
+      } };
+    }
     /** a transient: {tEnd, dt?, method: 'trap' | 'be', start: 'T0' | 'steady', points ≤ 20001, at: [t…], maxSteps} */
     function transient(o) {
       o = o || {};
@@ -7638,13 +7756,7 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
       const be = o.method === 'be', points = Math.max(2, Math.min(MAX_POINTS, o.points === undefined ? 2001 : Math.floor(o.points)));
       const stride = Math.ceil(steps / (points - 1));
       let x = o.start === 'steady' ? steadyX(powers('t0')) : Float64Array.from(ck.T0);
-      const gate = thermostats.map(th => { const T = Tof(th.s, x); return th.heat ? T < th.high : T > th.low; });
-      // matrices A(θ) = diag(C/h) + Θ·G: θ = ½ (trapezoidal) on nodes with a heat capacity, 1 on massless ones and on backward-Euler steps
-      const thT = new Float64Array(n), thB = new Float64Array(n).fill(1);
-      for (let i = 0; i < n; i++) thT[i] = be || !(C[i] > 0) ? 1 : 0.5;
-      const mk = th => { const A = new Float64Array(n * n); for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i * n + j] = th[i] * G[i * n + j]; A[i * n + i] += C[i] / h; } return A; };
-      const AT = mk(thT), AB = mk(thB), LU = {};
-      if (!rads.length) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
+      const gate = gateAt(x), core = stepCore(h, be);
       // channels: nodes, links, sources (power after the thermostat, mean over the step), thermostats (0 / 1)
       const nN = nodeOut.length, nL = links.length, nS = sources.length, nT = thermostats.length, nCh = nN + nL + nS + nT;
       const vals = new Float64Array(nCh), sp = new Float64Array(nS);
@@ -7673,40 +7785,9 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
         prev.set(vals);
       };
       fill(); prev.set(vals); take(0, 0);
-      const P = new Float64Array(n), rhs = new Float64Array(n), Gx = new Float64Array(n), rv = new Float64Array(n);
       for (let k = 0; k < steps; k++) {
         const t1 = k * h, t2 = (k + 1) * h;
-        let switched = false;
-        thermostats.forEach((th, i) => {
-          const T = Tof(th.s, x), on = gate[i];
-          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
-          if (nx !== on) { gate[i] = nx; switched = true; }
-        });
-        let edge = false; P.fill(0);
-        for (let s = 0; s < nS; s++) {
-          const src = sources[s], on = src.gate < 0 || gate[src.gate], w = src.w;
-          if (w.edges(t2) !== w.edges(t1)) edge = true;
-          sp[s] = on ? (w.F(t2) - w.F(t1)) / h : 0; P[src.u] += sp[s];
-        }
-        const useB = be || k === 0 || switched || edge, th = useB ? thB : thT;
-        for (let i = 0; i < n; i++) { let s = 0; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; Gx[i] = s; }
-        rv.fill(0); if (rads.length) rad(x, rv, null, null);
-        for (let i = 0; i < n; i++) rhs[i] = C[i] / h * x[i] - (1 - th[i]) * (Gx[i] - rv[i]) + b[i] + P[i];
-        if (!rads.length) { const L = LU[useB ? 'b' : 't']; x = subst(L.M, n, L.perm, Float64Array.from(rhs)); }
-        else {
-          const A = useB ? AB : AT, y = Float64Array.from(x);
-          let conv = false;
-          for (let it = 0; it < 30 && !conv; it++) {
-            const R = new Float64Array(n), J = Float64Array.from(A), rr = new Float64Array(n);
-            rad(y, rr, J, th);
-            for (let i = 0; i < n; i++) { let s = -rhs[i] - th[i] * rr[i]; for (let j = 0; j < n; j++) s += A[i * n + j] * y[j]; R[i] = -s; }
-            const dx = solveDense(J, n, R);
-            let m = 0; for (let i = 0; i < n; i++) { y[i] = Math.max(-K0 + 1e-6, y[i] + dx[i]); m = Math.max(m, Math.abs(dx[i])); }
-            conv = m < 1e-9;
-          }
-          if (!conv) throw fail('no-convergence', { t: t2 });
-          x = y;
-        }
+        x = core.step(x, gate, sp, t1, t2, k === 0);
         fill(); take(k + 1, t2);
       }
       const N = steps + 1, out = { t: Array.from(tRec), nodes: {}, links: {}, sources: {}, thermostats: {}, stats: { nodes: {}, links: {}, sources: {}, thermostats: {} }, at: {}, steps, dt: h, stride };
@@ -7720,14 +7801,43 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
       }
       return out;
     }
-    return { steady, transient, taus };
+    /* the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the same θ-step as transient(), its state plain data (a snapshot is a copy):
+       {t, k, x, gate, ch (the channels now: nodes, links, sources, thermostats), stats: [min, max, sum, sumsq] per channel, n} */
+    const chanIds = () => [['nodes', nodeOut], ['links', links], ['sources', sources], ['thermostats', thermostats]].flatMap(([g, l]) => l.map(it => g + ':' + it.id));
+    function channels(x, gate, sp) {
+      const v = []; for (const nd of nodeOut) v.push(Tof(nd, x)); for (const l of links) v.push(flow(l, x)); for (let s = 0; s < sources.length; s++) v.push(sp[s]); for (let k = 0; k < thermostats.length; k++) v.push(gate[k] ? 1 : 0);
+      return v;
+    }
+    function stepStart(o) {
+      const x = o && o.start === 'steady' ? steadyX(powers('t0')) : Float64Array.from(ck.T0), gate = gateAt(x);
+      const sp = sources.map(src => (src.gate >= 0 && !gate[src.gate] ? 0 : 1) * src.w.value(0)), ch = channels(x, gate, sp);
+      return { t: o && Number.isFinite(o.t0) ? o.t0 : 0, k: 0, x: Array.from(x), gate, sp, ch, prev: ch.slice(), tPrev: NaN, stats: ch.map(v => [v, v, v, v * v]), n: 1, be: !!(o && o.method === 'be') };
+    }
+    const cores = new Map();
+    /** advance the state to tTo in steps ≤ hMax (whole steps of equal length) */
+    function stepTo(st, tTo, hMax) {
+      const span = tTo - st.t; if (!(span > 0)) return st;
+      const m = Math.max(1, Math.ceil(span / hMax - 1e-9)), h = span / m, key = h + '|' + st.be;
+      let core = cores.get(key); if (!core) { if (cores.size > 16) cores.clear(); core = stepCore(h, st.be); cores.set(key, core); }
+      let x = Float64Array.from(st.x); const sp = st.sp.slice();
+      for (let i = 0; i < m; i++) {
+        const t1 = st.t, t2 = i === m - 1 ? tTo : st.t + h;
+        x = core.step(x, st.gate, sp, t1, t2, st.k === 0);
+        st.k++; st.t = t2;
+        st.prev = st.ch; st.tPrev = t1; st.ch = channels(x, st.gate, sp);
+        st.ch.forEach((v, c) => { const q = st.stats[c]; if (v < q[0]) q[0] = v; if (v > q[1]) q[1] = v; q[2] += v; q[3] += v * v; }); st.n++;
+      }
+      st.x = Array.from(x); st.sp = sp;
+      return st;
+    }
+    return { steady, transient, taus, stepStart, stepTo, chanIds };
   }
 
   function create(network, opts) {
     const problems = check(network);
     if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
     const net = JSON.parse(JSON.stringify(network)), inner = makeSim(compile(net));
-    return Object.freeze({ id: ID, steady: o => inner.steady(o), transient: o => inner.transient(o), taus: () => inner.taus() });
+    return Object.freeze({ id: ID, steady: o => inner.steady(o), transient: o => inner.transient(o), taus: () => inner.taus(), stepStart: o => inner.stepStart(o), stepTo: (st, t, h) => inner.stepTo(st, t, h), chanIds: () => inner.chanIds() });
   }
 
   // ---- the sim-spec@1 adapter: create(spec, {seed}) → { run(inputs) → outputs } (in the worker and inline) ----
@@ -7745,7 +7855,7 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
   }
   const adapter = { create(spec, opts) {
     const model = spec.model || {}, outs = spec.outputs || [], tr = model.transient || {};
-    let key = null, sim = null, cache = null;
+    let key = null, sim = null, cache = null, S = null, slot = null;
     function simFor(inp) {
       const k = JSON.stringify(inp.$bind || []);
       if (k !== key) {
@@ -7778,7 +7888,39 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
         }
         return r;
       },
+      // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the network's bindings are read at every step; series give their value now
+      stepInit(inp, t0) {
+        try { const sm = simFor(inp); if (!sm) throw fail('invalid'); S = sm.stepStart({ start: tr.start, method: tr.method, t0 }); slot = null; return { out: stepOuts(sm, inp) }; }
+        catch (e) { S = null; return { fail: 'part-failed', out: {} }; }
+      },
+      stepTo(inp, t, dt) {
+        if (!S) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+        try {
+          const sm = simFor(inp); if (!sm) throw fail('invalid');
+          const T = inp.$tran || {}, hMax = T.dt > 0 ? T.dt : T.tEnd > 0 ? T.tEnd / 1000 : dt / 10;
+          if (S.k + Math.ceil(dt / hMax - 1e-9) > MAX_STEPS) return { fail: 'budget', out: {}, dt: 0, events: [] };
+          sm.stepTo(S, t + dt, hMax);
+          return { out: stepOuts(sm, inp), dt, events: [] };
+        } catch (e) { return { fail: 'part-failed', out: {}, dt: 0, events: [] }; }
+      },
+      snapshot() { if (!S) return -1; slot = JSON.stringify(S); return 0; },
+      restore(i) { if (i !== 0 || slot === null) return false; S = JSON.parse(slot); return true; },
     };
+    function stepOuts(sm, inp) {
+      const ids = sm.chanIds(), r = {};
+      for (const o of outs) {
+        try {
+          const g = o.node !== undefined ? 'nodes' : o.link !== undefined ? 'links' : o.source !== undefined ? 'sources' : o.thermostat !== undefined ? 'thermostats' : null;
+          const c = g ? ids.indexOf(g + ':' + o[g.slice(0, -1)]) : -1;
+          if (o.kind === 'series') { r[o.id] = o.time ? S.t : c >= 0 ? S.ch[c] : NaN; continue; }
+          if (o.tau !== undefined) { const v = (cache.ta || (cache.ta = sm.taus()))[o.tau - 1]; r[o.id] = v === undefined ? NaN : v; continue; }
+          if (o.stat !== undefined) { const q = S.stats[c]; r[o.id] = !q ? NaN : { final: S.ch[c], min: q[0], max: q[1], mean: q[2] / S.n, pp: q[1] - q[0], rms: Math.sqrt(q[3] / S.n) }[o.stat]; continue; }
+          if (o.at !== undefined) { const ta = inp.$at ? inp.$at[o.id] : NaN; r[o.id] = c >= 0 && ta <= S.t && ta >= S.tPrev ? S.prev[c] + (S.ch[c] - S.prev[c]) * (ta - S.tPrev) / (S.t - S.tPrev) : c >= 0 && ta === S.t ? S.ch[c] : NaN; continue; }
+          r[o.id] = (cache.st || (cache.st = sm.steady()))[g][o[g.slice(0, -1)]];
+        } catch (e) { r[o.id] = NaN; }
+      }
+      return r;
+    }
   } };
   /** on the main thread: the spec's expressions (bindings, transient times, `at`) become numbers, so the worker needs no evaluator */
   function prepare(spec, compileExpr) {
@@ -7797,7 +7939,8 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
     check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `spec.${p.path}: ${p.msg}`),
     prepare,
     create: (spec, opts) => adapter.create(spec, opts),
-    workerSource: source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;',
+    stepper: true,   // a part of a co-simulation (stepInit / stepTo / snapshot / restore on the instance)
+    get workerSource() { const NX = root.NoemaExpr; return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;'; },
   });
   root.NoemaThermal = Object.freeze({
     id: ID, format: FORMAT, SIGMA, STATS: Object.freeze(STATS.slice()),
@@ -8076,7 +8219,17 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
     return r;
   }
 
+  // ---- the simulation kernel (NoemaSimKit, 46_lib_simkit.js; docs/library/simkit.md): its RK4, breaks and streams ----
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+
   // ---- the simulator ----
+  /* The loop is a sampled-data system: at every grid time t_k = k·h (a break of NoemaSimKit.integrate, where the step lands exactly)
+     the setpoint, the measurement (+ the seeded noise of a kernel stream) and, every Ts, the controller are evaluated and recorded;
+     between two grid times the plant is integrated by the kernel's classical RK4 (one step of h) with its input held (the dead time
+     interpolates the input history at t − θ). The same core serves run() and the stepper (docs/INTERACTIVE_LIBRARY.md §1.6). */
   function makeSim(model, opts) {
     const pl = plantOf(model.plant), open = model.mode === 'open', c = model.controller || {};
     const d = (k, v) => (has(c, k) ? c[k] : v);
@@ -8090,56 +8243,100 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
     const nz = model.noise, std = nz ? nz.std : 0;
     const seed = (nz && has(nz, 'seed') ? nz.seed : opts && opts.seed !== undefined ? opts.seed : 1) >>> 0;
     const band = model.metrics && model.metrics.band ? model.metrics.band : 0.02;
+    const nx = pl.x0.length;
+    /** the loop's state (plain data: a snapshot is a copy): grid step h, controller period hc */
+    function start(h) {
+      const K = kit(), every = Math.max(1, Math.round((has(c, 'Ts') && c.Ts > 0 ? c.Ts : h) / h));
+      return { h, hc: every * h, every, k: 0, t: 0, x: Array.from(pl.x0), I: 0, D: 0, sPrev: null, uHeld: 0, sat: false, satTime: 0, dead: false, ud: 0,
+        rng: std > 0 ? (K ? K.stream(seed, 'pid:noise').state() : seed) : null, spare: null, ut: [], uv: [],
+        H: { t: [], r: [], y: [], ym: [], u: [], e: [] } };
+    }
+    /** a standard normal of the noise stream (the kernel's: inversion by AS241; FALLBACK without the kernel: mulberry32 + Box–Muller) */
+    function noiseDraw(st) {
+      const K = kit();
+      if (K && Array.isArray(st.rng)) { const r = K.stream(0, '', { state: st.rng }), z = r.normal(0, 1); st.rng = r.state(); return z; }
+      if (st.spare !== null) { const z = st.spare; st.spare = null; return z; }
+      let a = st.rng >>> 0; const nxt = () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+      let u = 0; while (u === 0) u = nxt(); const v = nxt(), rr = Math.sqrt(-2 * Math.log(u)); st.rng = a; st.spare = rr * Math.sin(2 * Math.PI * v); return rr * Math.cos(2 * Math.PI * v);
+    }
+    /** the grid time t = st.t: measure, control (every Ts), record; then the plant input for the next interval */
+    function sample(st, last) {
+      const t = st.t, H = st.H;
+      if (st.dead) { for (const k of ['r', 'y', 'ym', 'u', 'e']) H[k].push(NaN); H.t.push(t); return; }
+      const r = sp.at(t), y = pl.y(st.x) + od.at(t), ym = y + (std > 0 ? std * noiseDraw(st) : 0);
+      if (open) st.uHeld = r;
+      else if (st.k % st.every === 0) {
+        const sv = cw * r - ym;
+        st.D = st.sPrev === null ? 0 : (Tf * st.D + Kd * (sv - st.sPrev)) / (Tf + st.hc); st.sPrev = sv;
+        const v = u0 + Kp * (bw * r - ym) + st.I + st.D, u = Math.min(uMax, Math.max(uMin, v)), e = r - ym;
+        st.sat = v > uMax || v < uMin;
+        if (aw === 'backcalc') st.I += st.hc * (Ki * e + (u - v) / Tt);
+        else if (aw === 'clamp' && ((v > uMax && Ki * e > 0) || (v < uMin && Ki * e < 0))) { /* hold the integral */ }
+        else st.I += st.hc * Ki * e;
+        st.uHeld = u;
+      }
+      H.t.push(t); H.r.push(r); H.y.push(y); H.ym.push(ym); H.u.push(st.uHeld); H.e.push(r - ym);
+      if (last) return;
+      const uin = st.uHeld + ld.at(t); st.ut.push(t); st.uv.push(uin);
+      let ud = uin;
+      if (theta > 0) {   // the input θ ago: 0 before the start, linear between the grid times
+        const tq = t - theta;
+        if (tq < 0) ud = 0;
+        else { let lo = 0, hi = st.ut.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (st.ut[m] <= tq) lo = m; else hi = m - 1; }
+          const f = lo + 1 < st.ut.length ? (tq - st.ut[lo]) / (st.ut[lo + 1] - st.ut[lo]) : 0; ud = f > 0 ? st.uv[lo] * (1 - f) + st.uv[lo + 1] * f : st.uv[lo]; }
+      }
+      st.ud = ud;
+    }
+    /** advance from st.t over n grid steps of st.h (the last one ending exactly at tTo): the kernel's RK4 between breaks at the grid
+        times; at each break the plant's clamp (a tank), the blow-up guard, then the sample and the next input. budget: steps left */
+    function advance(st, n, tTo) {
+      if (!(n >= 1)) return;
+      const K = kit(), t0 = st.t, h = st.h, grid = i => (i === n ? tTo : t0 + i * h);
+      const f = (t, x, dx) => { if (st.dead) { for (let i = 0; i < nx; i++) dx[i] = 0; return; } pl.f(x, st.ud, dx); };
+      const onGrid = (i, x) => {
+        if (st.sat && !open) st.satTime += grid(i) - grid(i - 1);
+        if (pl.post) pl.post(x);
+        for (let q = 0; q < nx; q++) if (!(Math.abs(x[q]) < BLOWUP)) st.dead = true;   // unstable: the rest of the run is NaN
+        st.k++; st.t = grid(i); st.x = Array.from(x); sample(st, i === n && st.final);
+      };
+      if (K) {
+        const breaks = []; for (let i = 1; i <= n; i++) breaks.push({ t: grid(i), apply: (t, x) => onGrid(i, x) });
+        const k0 = st.k, R = K.integrate({ f, y0: st.x, t0, tEnd: tTo, method: 'rk4', dt: h * (1 + 1e-9), breaks, maxSteps: n + 2 });   // dt a hair above h: a step always lands on the next break
+        if (st.k - k0 < n) { st.dead = true; for (let i = st.k - k0 + 1; i <= n; i++) { st.k++; st.t = grid(i); sample(st, i === n && st.final); } }   // the kernel stopped (NaN, blow-up): the rest is NaN
+        void R; return;
+      }
+      // FALLBACK without the kernel: the classical RK4 here (the same scheme)
+      const k1 = new Float64Array(nx), k2 = new Float64Array(nx), k3 = new Float64Array(nx), k4 = new Float64Array(nx), xt = new Float64Array(nx);
+      for (let i = 1; i <= n; i++) {
+        const x = Float64Array.from(st.x), hh = grid(i) - grid(i - 1);
+        f(0, x, k1); for (let q = 0; q < nx; q++) xt[q] = x[q] + 0.5 * hh * k1[q]; f(0, xt, k2);
+        for (let q = 0; q < nx; q++) xt[q] = x[q] + 0.5 * hh * k2[q]; f(0, xt, k3);
+        for (let q = 0; q < nx; q++) xt[q] = x[q] + hh * k3[q]; f(0, xt, k4);
+        for (let q = 0; q < nx; q++) x[q] += hh / 6 * (k1[q] + 2 * k2[q] + 2 * k3[q] + k4[q]);
+        onGrid(i, x);
+      }
+    }
+    /** the result of the history so far: series, metrics */
+    function result(st) {
+      const H = st.H, N = H.t.length, T = Float64Array.from(H.t), R = Float64Array.from(H.r), Y = Float64Array.from(H.y);
+      const mt = metrics(T, Y, { t0: sp.t0, band });
+      let iae = 0, ise = 0, itae = 0;
+      for (let k = 1; k < N; k++) { const hk = T[k] - T[k - 1], e0 = R[k - 1] - Y[k - 1], e1 = R[k] - Y[k]; iae += 0.5 * hk * (Math.abs(e0) + Math.abs(e1)); ise += 0.5 * hk * (e0 * e0 + e1 * e1); itae += 0.5 * hk * (T[k - 1] * Math.abs(e0) + T[k] * Math.abs(e1)); }
+      const tail = Math.max(1, Math.floor(N * 0.02)); let es = 0; for (let k = N - tail; k < N; k++) es += R[k] - Y[k];   // (the mean of the last 2 %: a ramp's lag too)
+      const m = { ...mt, ess: open ? NaN : es / tail, iae, ise, itae, satTime: st.satTime, unstable: st.dead };
+      return { t: T, r: R, y: Y, ym: Float64Array.from(H.ym), u: Float64Array.from(H.u), e: Float64Array.from(H.e), metrics: m, steps: N - 1, dt: st.h };
+    }
     function run(o) {
       o = o || {};
       const tEnd = o.tEnd, dt0 = o.dt === undefined || o.dt === 0 ? tEnd / 1000 : o.dt;
       if (!(isNum(tEnd) && tEnd > 0 && isNum(dt0) && dt0 > 0)) throw fail('bad-args');
       const steps = Math.max(1, Math.ceil(tEnd / dt0 - 1e-9)), h = tEnd / steps;
       if (steps > MAX_STEPS) throw fail('budget', { steps, limit: MAX_STEPS });
-      const N = steps + 1, T = new Float64Array(N), R = new Float64Array(N), Y = new Float64Array(N), YM = new Float64Array(N), U = new Float64Array(N), Ev = new Float64Array(N);
-      const uin = new Float64Array(N), noise = std > 0 ? gauss(mulberry32(seed)) : null;
-      const every = Math.max(1, Math.round((has(c, 'Ts') && c.Ts > 0 ? c.Ts : h) / h)), hc = every * h;
-      const nx = pl.x0.length, k1 = new Float64Array(nx), k2 = new Float64Array(nx), k3 = new Float64Array(nx), k4 = new Float64Array(nx), xt = new Float64Array(nx);
-      let x = Float64Array.from(pl.x0), I = 0, D = 0, sPrev = NaN, uHeld = 0, sat = false, satTime = 0, dead = false;
-      const lag = theta / h;
-      for (let k = 0; k <= steps; k++) {
-        const t = k * h; T[k] = t;
-        if (dead) { R[k] = Y[k] = YM[k] = U[k] = Ev[k] = NaN; continue; }
-        const r = sp.at(t), y = pl.y(x) + od.at(t), ym = y + (noise ? std * noise() : 0);
-        if (open) uHeld = r;
-        else if (k % every === 0) {
-          const s = cw * r - ym;
-          D = Number.isNaN(sPrev) ? 0 : (Tf * D + Kd * (s - sPrev)) / (Tf + hc); sPrev = s;
-          const v = u0 + Kp * (bw * r - ym) + I + D, u = Math.min(uMax, Math.max(uMin, v)), e = r - ym;
-          sat = v > uMax || v < uMin;
-          if (aw === 'backcalc') I += hc * (Ki * e + (u - v) / Tt);
-          else if (aw === 'clamp' && ((v > uMax && Ki * e > 0) || (v < uMin && Ki * e < 0))) { /* hold the integral */ }
-          else I += hc * Ki * e;
-          uHeld = u;
-        }
-        R[k] = r; Y[k] = y; YM[k] = ym; U[k] = uHeld; Ev[k] = r - ym;
-        if (k === steps) break;
-        if (sat && !open) satTime += h;
-        uin[k] = uHeld + ld.at(t);
-        let ud = uin[k];
-        if (lag > 0) { const j = k - lag; if (j < 0) ud = 0; else { const lo = Math.floor(j), f = j - lo; ud = f > 0 ? uin[lo] * (1 - f) + uin[lo + 1] * f : uin[lo]; } }
-        pl.f(x, ud, k1);
-        for (let i = 0; i < nx; i++) xt[i] = x[i] + 0.5 * h * k1[i]; pl.f(xt, ud, k2);
-        for (let i = 0; i < nx; i++) xt[i] = x[i] + 0.5 * h * k2[i]; pl.f(xt, ud, k3);
-        for (let i = 0; i < nx; i++) xt[i] = x[i] + h * k3[i]; pl.f(xt, ud, k4);
-        for (let i = 0; i < nx; i++) x[i] += h / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
-        if (pl.post) pl.post(x);
-        for (let i = 0; i < nx; i++) if (!(Math.abs(x[i]) < BLOWUP)) dead = true;   // unstable: the rest of the run is NaN
-      }
-      // the metrics: the step response from the setpoint's step (closed) or the input's (open); the errors on the true y
-      const mt = metrics(T, Y, { t0: sp.t0, band });
-      let iae = 0, ise = 0, itae = 0;
-      for (let k = 1; k < N; k++) { const e0 = R[k - 1] - Y[k - 1], e1 = R[k] - Y[k]; iae += 0.5 * h * (Math.abs(e0) + Math.abs(e1)); ise += 0.5 * h * (e0 * e0 + e1 * e1); itae += 0.5 * h * (T[k - 1] * Math.abs(e0) + T[k] * Math.abs(e1)); }
-      const tail = Math.max(1, Math.floor(N * 0.02)); let es = 0; for (let k = N - tail; k < N; k++) es += R[k] - Y[k];   // (the mean of the last 2 %: a ramp's lag too)
-      const m = { ...mt, ess: open ? NaN : es / tail, iae, ise, itae, satTime, unstable: dead };
-      return { t: T, r: R, y: Y, ym: YM, u: U, e: Ev, metrics: m, steps, dt: h };
+      const st = start(h); st.final = true;
+      sample(st, false); advance(st, steps, tEnd);
+      return result(st);
     }
-    return { run };
+    return { run, start, sample, advance, result };
   }
 
   function create(model, opts) {
@@ -8168,33 +8365,63 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
     if (prop === 'value') { m[el] = v; return; }
     const [k, f] = String(prop).split('.'); if (isObj(m[el]) && isObj(m[el][k])) m[el][k][f] = v;
   }
+  /** the outputs of a result: series thinned (run), or — stepping — each series its value now (one sample a step) */
+  function outputsOf(outs, res, inp, stepping) {
+    const r = {};
+    for (const o of outs) {
+      try {
+        if (!res) throw fail('run');
+        if (o.kind === 'series') { const v = o.time ? res.t : res[o.signal] || []; r[o.id] = stepping ? (v.length ? v[v.length - 1] : NaN) : thin(v, MAXP); continue; }
+        if (o.metric !== undefined) { const v = res.metrics[o.metric]; r[o.id] = typeof v === 'number' ? v : NaN; continue; }
+        const v = res[o.signal];
+        if (!v) { r[o.id] = NaN; continue; }
+        if (o.stat !== undefined) { r[o.id] = STATS.includes(o.stat) ? stat(v, o.stat) : NaN; continue; }
+        const at = inp.$at ? inp.$at[o.id] : NaN;
+        r[o.id] = stepping && !(at <= res.t[res.t.length - 1]) ? (at === undefined || Number.isNaN(at) ? v[v.length - 1] : NaN) : interp(res.t, v, at);
+      } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
+    }
+    return r;
+  }
+  const modelWith = (model, inp) => { const m = JSON.parse(JSON.stringify(model)); delete m.bindings; for (const [el, prop, v] of inp.$bind || []) setProp(m, el, prop, v); return m; };
   const adapter = { create(spec, opts) {
     const model = spec.model || {}, outs = spec.outputs || [], seed = (opts && opts.seed) >>> 0;
     let key = null, res = null;
+    // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the loop's state is plain data; the inputs (bindings) are read at every step
+    let S = null, sim = null, simKey = null, slot = null;
+    const simFor = inp => { const k = JSON.stringify(inp.$bind || []); if (k !== simKey) { simKey = k; const m = modelWith(model, inp); if (check(m).some(p => p.level === 'error')) throw fail('invalid'); sim = makeSim(m, { seed }); } return sim; };
     return {
       run(inp) {
         const k = JSON.stringify([inp.$bind || [], inp.$tran]);
         if (k !== key) {
           key = k; res = null;
           try {
-            const m = JSON.parse(JSON.stringify(model)); delete m.bindings;
-            for (const [el, prop, v] of inp.$bind || []) setProp(m, el, prop, v);
             const T = inp.$tran || {};
-            res = create(m, { seed }).run({ tEnd: T.tEnd, dt: T.dt > 0 ? T.dt : undefined });
+            res = create(modelWith(model, inp), { seed }).run({ tEnd: T.tEnd, dt: T.dt > 0 ? T.dt : undefined });
           } catch (e) { res = null; }
         }
-        const r = {};
-        for (const o of outs) {
-          try {
-            if (!res) throw fail('run');
-            if (o.kind === 'series') { r[o.id] = thin(o.time ? res.t : res[o.signal] || [], MAXP); continue; }
-            if (o.metric !== undefined) { const v = res.metrics[o.metric]; r[o.id] = typeof v === 'number' ? v : NaN; continue; }
-            const v = res[o.signal];
-            r[o.id] = !v ? NaN : o.stat !== undefined ? (STATS.includes(o.stat) ? stat(v, o.stat) : NaN) : interp(res.t, v, inp.$at ? inp.$at[o.id] : NaN);
-          } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
-        }
-        return r;
+        return outputsOf(outs, res, inp, false);
       },
+      stepInit(inp, t0) {
+        try {
+          const T = inp.$tran || {}, h = T.dt > 0 ? T.dt : T.tEnd > 0 ? T.tEnd / 1000 : 0;
+          S = simFor(inp).start(h || 1e-3); S.hAuto = !(h > 0); S.t = Number.isFinite(t0) ? t0 : 0; S.final = false;
+          sim.sample(S, false);
+          return { out: outputsOf(outs, sim.result(S), inp, true) };
+        } catch (e) { S = null; return { fail: 'part-failed', out: {} }; }
+      },
+      stepTo(inp, t, dt) {
+        if (!S) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+        try {
+          const sm = simFor(inp);
+          if (S.hAuto && S.k === 0) S.h = Math.min(S.h, dt / 10);   // no transient dt: ten grid steps in the first macro step at least
+          const n = Math.max(1, Math.ceil(dt / S.h - 1e-9));
+          if (S.k + n > MAX_STEPS) return { fail: 'budget', out: {}, dt: 0, events: [] };
+          sm.advance(S, n, t + dt);
+          return { out: outputsOf(outs, sm.result(S), inp, true), dt, events: [] };
+        } catch (e) { return { fail: 'part-failed', out: {}, dt: 0, events: [] }; }
+      },
+      snapshot() { if (!S) return -1; slot = JSON.stringify(S); return 0; },
+      restore(i) { if (i !== 0 || slot === null) return false; S = JSON.parse(slot); return true; },
     };
   } };
   /** on the main thread: the spec's expressions (bindings, transient times, `at`) become numbers or booleans */
@@ -8209,12 +8436,18 @@ window.H5PIntegration=${JSON.stringify(integ).replace(/</g, '\\u003c')};window.H
 
   /** the engine's own source, to run it in a Worker */
   const source = () => '(' + noemaPIDModule.toString() + ')(self);';
+  /** the Worker: NoemaExpr (its fdlibm functions) and the simulation kernel when loaded, then this engine and its adapter */
+  function workerSource() {
+    const NX = root.NoemaExpr, K = kit();
+    return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaPID.adapter;';
+  }
   const engine = Object.freeze({
     id: ID,
     check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `spec.${p.path}: ${p.msg}`),
     prepare,
     create: (spec, opts) => adapter.create(spec, opts),
-    workerSource: source() + '\n;self.noemaEngine = self.NoemaPID.adapter;',
+    stepper: true,   // a part of a co-simulation (stepInit / stepTo / snapshot / restore on the instance)
+    get workerSource() { return workerSource(); },
   });
   root.NoemaPID = Object.freeze({
     id: ID, STATS: Object.freeze(STATS.slice()), SIGNALS: Object.freeze(SIGNALS.slice()), METRICS: Object.freeze(METRICS.slice()), ZN, MOTOR: Object.freeze({ ...MOTOR }),
@@ -9273,7 +9506,22 @@ function boot() {
     return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   }
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
-  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
+  const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): MRG32k3a streams (one per purpose: the shadowing draw, the sweep), normals
+      by inversion (AS241), roots by Brent 1973. FALLBACK without the kernel (marked): mulberry32 + Box–Muller, bisection */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  const streamOf = (name, seed) => { const K = kit(); return K ? K.stream(seed >>> 0, 'rf:' + name) : mulberry32(hash32(name, seed)); };
+  /** a root of g on [lo, hi] (g(lo) > 0 ≥ g(hi)): the kernel's Brent, else bisection */
+  function rootOf(g, lo, hi, tol) {
+    const K = kit();
+    if (K) { const a = g(lo), b = g(hi); if (a > 0 && b <= 0) { const r = K.brent(g, lo, hi, tol, a, b); if (Number.isFinite(r)) return r; } }
+    for (let i = 0; i < MAX_ITER && hi - lo > tol; i++) { const mid = (lo + hi) / 2; if (g(mid) > 0) lo = mid; else hi = mid; }
+    return (lo + hi) / 2;
+  }
 
   // ---- the link format: a table the checker walks (the same table in tools/rf.py) ----
   const MODELS = ['fspl', 'two-ray', 'log-distance', 'hata', 'indoor'], MODS = ['bpsk', 'qpsk', 'fsk', 'lora', 'ble', 'wifi'];
@@ -9427,9 +9675,8 @@ function boot() {
 
   // ---- the simulator ----
   function reqEbn0(mod, o) {   // Eb/N0 (linear) where the BER is 1e-3 (bisection on a monotone curve)
-    let lo = 1e-3, hi = 1e4;
-    for (let i = 0; i < 100; i++) { const mid = Math.sqrt(lo * hi); if (ber(mod, mid, o) > 1e-3) lo = mid; else hi = mid; }
-    return Math.sqrt(lo * hi);
+    // on log Eb/N0: log BER − log 1e-3 (Brent; the curve falls)
+    return Math.exp(rootOf(u => Math.log(ber(mod, Math.exp(u), o)) - Math.log(1e-3), Math.log(1e-3), Math.log(1e4), 1e-13));
   }
   function compileLink(link) {
     const L = norm(link), p = L.path, f = L.f, q = L.radio;
@@ -9469,9 +9716,9 @@ function boot() {
     const [lo0, hi0] = bounds(k.L), ok = d => k.prxOf(k.plMedian(d)) - k.sens >= k.L.fadeMargin;
     if (!ok(lo0)) return { range: 0, code: 'range-none' };
     if (ok(hi0)) return { range: hi0, code: 'range-open' };
-    let lo = Math.log(lo0), hi = Math.log(hi0);
-    for (let i = 0; i < MAX_ITER && hi - lo > 1e-12; i++) { const mid = (lo + hi) / 2; if (ok(Math.exp(mid))) lo = mid; else hi = mid; }
-    return { range: Math.exp(lo) };
+    // the margin over the fade margin on log d, made > 0 where ok() holds so the root is ok()'s edge (Brent)
+    const g = u => { const d = Math.exp(u), m = k.prxOf(k.plMedian(d)) - k.sens - k.L.fadeMargin; return ok(d) ? Math.max(m, 1e-300) : Math.min(m, 0); };
+    return { range: Math.exp(rootOf(g, Math.log(lo0), Math.log(hi0), 1e-12)) };
   }
 
   /** create(link, {seed}) → {run(), at(d), range(), ...}; throws code 'invalid' (with .problems) on errors of check() */
@@ -9487,7 +9734,7 @@ function boot() {
     }
     function run() {
       const codes = [], d = L.d, p = L.path, q = L.radio;
-      const shadow = p.sigma > 0 ? p.sigma * gauss(mulberry32(hash32('shadow', seed))) : 0;
+      const shadow = p.sigma > 0 ? p.sigma * gauss(streamOf('shadow', seed)) : 0;
       const a = at(d, shadow), rg = solveRange(k);
       if (rg.code) codes.push(rg.code);
       if (!Number.isFinite(a.plMedian)) codes.push('range');
@@ -9502,7 +9749,7 @@ function boot() {
       };
       // the distance sweep (shadowing: one seeded draw per point) and the error-rate curve
       const sw = L.sweep || (p.model === 'hata' ? { from: 1000, to: 20000, points: 200, scale: 'log' } : { from: Math.max(p.model === 'indoor' ? 1 : 0.1, d / 100), to: d * 10, points: 200, scale: 'log' });
-      const n = sw.points, D = [], r = mulberry32(hash32('sweep', seed));
+      const n = sw.points, D = [], r = streamOf('sweep', seed);
       for (let i = 0; i < n; i++) D.push(sw.scale === 'lin' ? sw.from + (sw.to - sw.from) * i / (n - 1) : sw.from * Math.pow(sw.to / sw.from, i / (n - 1)));
       const ser = { d: D, pl: [], plMedian: [], prx: [], prxMedian: [], margin: [] };
       for (const x of D) {
@@ -9565,7 +9812,8 @@ function boot() {
   };
   /** the engine's own source, to run it in a Worker: it defines self.NoemaRF and self.noemaEngine */
   const source = () => '(' + noemaRfModule.toString() + ')(self); self.noemaEngine = self.NoemaRF.simEngine;';
-  engine.workerSource = source();
+  /** the Worker: NoemaExpr and the simulation kernel when loaded, then this engine */
+  Object.defineProperty(engine, 'workerSource', { enumerable: true, get() { const K = kit(), NX = root.NoemaExpr; return (K && NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source(); } });
   root.NoemaRF = Object.freeze({
     id: ID, format: FORMAT, limits: Object.freeze({ points: MAX_POINTS, walls: MAX_WALLS, bindings: MAX_BINDINGS, iterations: MAX_ITER }),
     MODELS: Object.freeze(MODELS.slice()), MODS: Object.freeze(MODS.slice()), SCALARS: Object.freeze(SCALARS.slice()), SERIES: Object.freeze(SERIES.slice()),
@@ -9707,7 +9955,15 @@ function reportedView() {
     return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   }
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
-  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
+  const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): its MRG32k3a streams, one per purpose (radio, each sensor, the network);
+      normals by inversion (AS241), Poisson by inversion. FALLBACK without the kernel (marked): mulberry32 + Box–Muller */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  const streamOf = (name, seed) => { const K = kit(); return K ? K.stream(seed >>> 0, 'twin:' + name) : mulberry32(hash32(name, seed)); };
 
   // ---- batteries: open-circuit voltage per cell against state of charge (typical curves at room temperature, light load) ----
   const CHEMS = {
@@ -9919,11 +10175,14 @@ function reportedView() {
     return { iAvg, life: B.capacity * B.soc0 / iAvg * 3600 };
   }
 
-  function simulate(k, seed, o) {
+  function simulate(k, seed, o) { const g = simGen(k, seed, o, null); let r = g.next(); while (!r.done) r = g.next(); return r.value; }
+  /** the firmware's run as a generator: with a target {t} (the stepper) it pauses whenever the clock reaches target.t (a sleep is
+      split there) and yields the run's state so far; without one it runs to the end */
+  function* simGen(k, seed, o, target) {
     const { B, P, S, R, sens } = k, T = k.D.sim.duration, maxEv = k.D.sim.maxEvents, bor = k.D.brownout.v;
     const nb = k.D.sim.samples, W = T / nb, isd = B.selfDischarge * B.capacity / (30 * 24);
     const trFrom = o && o.traceFrom !== undefined ? o.traceFrom : 0, trTo = o && o.traceTo !== undefined ? o.traceTo : k.D.sim.trace;
-    const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed))), rNet = mulberry32(hash32('network', seed));
+    const rRadio = streamOf('radio', seed), rSens = sens.map(s => streamOf('sensor:' + s.id, seed)), rNet = streamOf('network', seed);
     const voc = soc => interp(B.curve, Math.max(0, soc)) * B.cells;
     // the environment: ambient temperature and what it does to the battery (capacity, internal resistance, self-discharge) and the sleep current
     const EN = k.D.env, CK = k.D.clock, NW = k.D.network;
@@ -9950,9 +10209,10 @@ function reportedView() {
       if (!(NW.nodes > 0)) return false;
       const hit = () => k.prxMedian + NW.offset + (NW.spread > 0 ? NW.spread * gauss(rNet) : 0) > prx - NW.capture;
       if (!phases) {   // random access: Poisson arrivals in the window where another packet would overlap ours
-        const mean = NW.nodes * (k.air + aO) / pO; let L = Math.exp(-mean), p = 1, n = 0;
-        do { n++; p *= rNet(); } while (p > L && n < 1000);
-        for (let i = 0; i < n - 1; i++) if (hit()) return true;
+        const mean = NW.nodes * (k.air + aO) / pO;
+        let others; if (typeof rNet.poisson === 'function') others = Math.min(999, rNet.poisson(mean));
+        else { const L = Math.exp(-mean); let p = 1, n = 0; do { n++; p *= rNet(); } while (p > L && n < 1000); others = n - 1; }
+        for (let i = 0; i < others; i++) if (hit()) return true;
         return false;
       }
       for (const ph of phases) {
@@ -10004,10 +10264,15 @@ function reportedView() {
     }
     const senseI = P.sense + sens.reduce((a, s) => a + s.current, 0);
     let wakeAt = 0, n = 0;
+    const now = () => ({ T: t, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W, vNow: voc(soc()), socNow: soc(), tempNow: Tc,
+      env: { min: tN ? tMin : EN.temp, max: tN ? tMax : EN.temp, mean: tN ? tSum / tN : EN.temp }, clock: { errMax: cerrMax, ppmMean: ppmN ? ppmSum / ppmN : CK.ppm } });
     while (!dead && t < T) {
+      while (target && t >= target.t && !dead && t < T) yield now();   // the stepper: the clock has reached the target
       if (wakeAt > t) {
         const vs = voc(soc()) - P.sleep * B.rInt / 1000;
         if (bor > 0 && vs < bor) { dead = true; tDead = t; ev('dead', { soc: soc(), bor: 1 }); break; }
+        while (target && target.t < wakeAt && !dead && t < T) { if (target.t > t) seg(target.t - t, P.sleep, false); yield now(); }   // the stepper: a pause inside the sleep
+        if (dead || t >= T) break;
         seg(wakeAt - t, P.sleep, false);
         if (dead || t >= T) break;
       }
@@ -10046,6 +10311,7 @@ function reportedView() {
       if (wakeAt < t) { if (!overrun) ev('overrun'); overrun = true; wakeAt = t; }
     }
     while (bi < nb) closeBin();
+    if (target) { for (;;) yield now(); }   // stepped past the end: the state stays
     return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W,
       env: { min: tN ? tMin : EN.temp, max: tN ? tMax : EN.temp, mean: tN ? tSum / tN : EN.temp }, clock: { errMax: cerrMax, ppmMean: ppmN ? ppmSum / ppmN : CK.ppm } };
   }
@@ -10119,7 +10385,9 @@ function reportedView() {
       if (probe.kind === 'clock') { const r = run(), s = r.scalars; return { kind: 'clock', value: s.ppmMean, err: s.clockErrMax }; }   // the clock against a reference: ppm, worst error
       throw fail('probe');
     }
-    return Object.freeze({ id: ID, run, measure, analytic: () => analytic(compile(JSON.parse(JSON.stringify(devc)), faults)) });
+    /** the stepper's run: a paused simulation (a generator: its state cannot be copied) and its clock target */
+    function stepGen() { const k = compile(JSON.parse(JSON.stringify(devc)), faults), target = { t: 0 }; return { k, target, g: simGen(k, seed, { traceTo: 0 }, target) }; }
+    return Object.freeze({ id: ID, run, measure, stepGen, analytic: () => analytic(compile(JSON.parse(JSON.stringify(devc)), faults)) });
   }
 
   // ---- the sim-spec@1 adapter: model {device, bindings: [{field, expr}]}, outputs [{id, kind, of?, sensor?}] ----
@@ -10132,7 +10400,7 @@ function reportedView() {
   const simEngine = {
     create(spec, opts) {
       const model = (spec && spec.model) || {}, outs = (spec && spec.outputs) || [], seed = (opts && opts.seed) >>> 0, faults = (opts && opts.faults) || [];
-      let key = null, sim = null;
+      let key = null, sim = null, ST = null;
       function simFor(inp) {
         const binds = inp.$bind || (model.bindings || []).map(b => [b.field, NAME_RE.test(b.expr) ? inp[b.expr] : NaN]), kk = JSON.stringify(binds);
         if (kk !== key) {
@@ -10162,11 +10430,34 @@ function reportedView() {
           try { const s = simFor(inp || {}); if (!s) return { kind: probe && probe.kind, error: 'invalid' }; return s.measure(probe); }
           catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
         },
+        // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the device as it is at stepInit (later bindings are not read), its clock
+        // the co-simulation's minus t0; outputs: the scalars so far, each series its value now. Cannot snapshot (snapshot −1)
+        stepInit(inp, t0) {
+          try { const s = simFor(inp || {}); if (!s) throw fail('invalid'); ST = s.stepGen(); ST.t0 = Number.isFinite(t0) ? t0 : 0; ST.r = ST.g.next().value; return { out: stepOuts() }; }
+          catch (e) { ST = null; return { fail: 'part-failed', out: {} }; }
+        },
+        stepTo(inp, t, dt) {
+          if (!ST) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+          try { ST.target.t = t + dt - ST.t0; ST.r = ST.g.next().value; return { out: stepOuts(), dt, events: [] }; }
+          catch (e) { ST = null; return { fail: String(e && e.code === 'budget' ? 'budget' : 'part-failed'), out: {}, dt: 0, events: [] }; }
+        },
+        snapshot() { return -1; },
+        restore() { return false; },
       };
+      function stepOuts() {
+        const r = ST.r, res = results(ST.k, r), sc = { ...res.scalars, vEnd: r.vNow, socEnd: r.socNow }, o2 = {}, c = r.cnt;
+        const now = { t: r.t, soc: r.socNow, v: r.vNow, delivered: c.delivered, resets: c.resets, temp: r.tempNow, current: sc.iAvg, rssi: r.rx.rssi.length ? r.rx.rssi[r.rx.rssi.length - 1] : NaN };
+        for (const o of outs) {
+          const of = o.of !== undefined ? o.of : o.id, si = Math.max(0, o.sensor === undefined ? 0 : res.sensors.indexOf(o.sensor));
+          if (o.kind === 'series') { const rd = of === 'reading' ? res.readings[si] : of === 'truth' ? res.truth[si] : null; o2[o.id] = rd ? (rd.length ? rd[rd.length - 1] : NaN) : has(now, of) ? now[of] : NaN; }
+          else o2[o.id] = PER_SENSOR.includes(of) ? (res.perSensor[si] ? res.perSensor[si][of] : NaN) : sc[of];
+        }
+        return o2;
+      }
     },
   };
   const engine = {
-    id: ID, bench: true,
+    id: ID, bench: true, stepper: true,   // stepper: a part of a co-simulation (stepInit / stepTo on the instance)
     check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `${p.path}: ${p.msg}`),
     prepare(spec, compile_) {
       const bs = ((spec && spec.model && spec.model.bindings) || []).map(b => [b.field, compile_(b.expr)]);
@@ -10176,7 +10467,8 @@ function reportedView() {
     create: (spec, opts) => simEngine.create(spec, opts),
   };
   const source = () => '(' + noemaTwinModule.toString() + ')(self); self.noemaEngine = self.NoemaTwin.simEngine;';
-  engine.workerSource = source();
+  /** the Worker: NoemaExpr (the kernel's fdlibm functions) and the simulation kernel (its streams) when loaded, then this engine */
+  Object.defineProperty(engine, 'workerSource', { enumerable: true, get() { const K = kit(), NX = root.NoemaExpr; return (K && NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source(); } });
   root.NoemaTwin = Object.freeze({
     id: ID, format: FORMAT, limits: Object.freeze({ sensors: MAX_SENSORS, samples: MAX_SAMPLES, events: MAX_EVENTS, log: MAX_LOG, trace: MAX_TRACE, points: MAX_POINTS, bindings: MAX_BINDINGS }),
     FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), SCALARS: Object.freeze(SCALARS.slice()), SERIES: Object.freeze(SERIES.slice()), NUM_FIELDS: Object.freeze(NUM_FIELDS.slice()),
@@ -11532,16 +11824,32 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return { engine, simEngine };
   }
   /** the Worker source of a library engine: NoemaExpr, this core, then the engine module; it sets self.noemaEngine */
-  function workerSource(moduleFn, global) {
-    const nx = NX() && typeof NX().source === 'function' ? NX().source() : '';
-    return nx + '\n;(' + noemaLibCoreModule.toString() + ')(self);\n;(' + moduleFn.toString() + ')(self);\nself.noemaEngine = self.' + global + '.simEngine;';
+  /** the simulation kernel NoemaSimKit (46_lib_simkit.js, docs/library/simkit.md): loaded by its script tag (index.html) or the
+      Worker source before the engines; under node (tests) a module that needs it loads it here. null when it cannot be had. */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  /** a seeded stream for one purpose (docs/library/simkit.md §2): the kernel's MRG32k3a stream (seed, name) — with its variates
+      r.normal, r.int, r.binomial… — and only where the kernel cannot be had the core's mulberry32 (FALLBACK, marked: deterministic too) */
+  function rng(seed, name) {
+    const K = kit();
+    if (K) return K.stream(seed >>> 0, String(name));
+    const r = mulberry32(hash32(String(name), seed >>> 0)); r.normal = (mu, sd) => (mu || 0) + (sd == null ? 1 : sd) * gauss(r); r.int = n => Math.min(n - 1, Math.floor(r() * n)); return r;
+  }
+  /** a standard normal from a stream of rng() (inversion: one uniform, CRN-friendly), or Box–Muller on a bare uniform function */
+  const normal = r => (r && typeof r.normal === 'function' ? r.normal(0, 1) : gauss(r));
+  /** opts.kit: the engine uses the kernel — its source goes in after the core */
+  function workerSource(moduleFn, global, opts) {
+    const nx = NX() && typeof NX().source === 'function' ? NX().source() : '', K = opts && opts.kit ? kit() : null;
+    return nx + '\n;(' + noemaLibCoreModule.toString() + ')(self);\n' + (K ? ';' + K.source() + '\n' : '') + ';(' + moduleFn.toString() + ')(self);\nself.noemaEngine = self.' + global + '.simEngine;';
   }
   const source = () => '(' + noemaLibCoreModule.toString() + ')(self);';
 
   root.NoemaLibCore = Object.freeze({
     MAX_POINTS, MAX_SCENE, ID_RE, NAME_RE, KEY_RE, RESERVED: Object.freeze(RESERVED.slice()), STATS: Object.freeze(STATS.slice()), ROLES: Object.freeze(ROLES.slice()),
     isObj, has, isNum, fail, checkKind, kindMsg, walk, problems, hasErrors, checkOutputs,
-    stats, thin, hash32, mulberry32, gauss, cx, scene, fitView, makeEngine, stepInstance, pickStep, copyData, workerSource, source,
+    stats, thin, hash32, mulberry32, gauss, cx, scene, fitView, makeEngine, stepInstance, pickStep, copyData, workerSource, source, kit, rng, normal,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -11694,12 +12002,21 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     s.properties.engine = { title: 'engine', const: id };
     s.properties.model = Object.assign({ title: 'model' }, conv.model);
     s.properties.outputs = { title: 'outputs', type: 'array', maxItems: 24, items: ref('libOutput') };
-    delete s.properties.bench;
+    delete s.properties.bench; delete s.properties.parts; delete s.properties.couple;   // (one engine: no parts)
+    libDefs(s);
+    s.$defs.libOutput = conv.output;
+    libPlots(s);
+    return s;
+  }
+  /** the $defs every library schema shares: ids, names, output ids */
+  function libDefs(s) {
     s.$defs.libId = { type: 'string', pattern: C ? C.ID_RE.source : '^[A-Za-z][A-Za-z0-9_-]{0,31}$', 'x-noema': 'ref' };
     s.$defs.libName = { type: 'string', pattern: C ? C.NAME_RE.source : '^[A-Za-z_][A-Za-z0-9_]{0,31}$', not: { enum: C ? C.RESERVED.slice() : ['t', 'n', 'pi', 'e', 'true', 'false'] }, 'x-noema': 'name' };
     // an output's id: a name (the engine's checkSpec judges it; logic@1 accepts e and n, which an expression cannot use)
     s.$defs.libOutId = { type: 'string', pattern: C ? C.NAME_RE.source : '^[A-Za-z_][A-Za-z0-9_]{0,31}$', 'x-noema': 'name' };
-    s.$defs.libOutput = conv.output;
+  }
+  /** plots of a library schema */
+  function libPlots(s) {
     // plots: the formula and series plots (each line may have a style), a scene, a sound
     const p0 = s.$defs.plot, line = br => { const b = JSON.parse(JSON.stringify(br)); const it = b.properties.series.items; it.properties.style = { title: 'lineStyle', enum: STYLES.slice() }; b.required = ['x', 'series']; return b; };
     s.$defs.libPlot = {
@@ -11710,6 +12027,34 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         { title: 'plotKind.sound', required: ['of'], properties: { kind: { const: 'sound' }, of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'sound' }, height: { title: 'height', type: 'integer', minimum: 120, maximum: 900 } } }],
     };
     s.properties.plots = Object.assign({}, s.properties.plots, { items: ref('libPlot') });
+  }
+  const PARTS_ID = SIM_BASE + 'lib.parts.json';
+  /** partsSchema(engines, sim) → sim-spec@1 with parts (docs/INTERACTIVE.md §12.8) as the activity author builds it: each part is one of
+      the given library engines [{id, table}] (its model and outputs from its table) or a circuit-mna@1 part; no top-level engine,
+      model or outputs; plots with scenes, sounds and line styles. A part read from a pack file (use / with) is the validators' business. */
+  function partsSchema(engines, sim) {
+    const s = JSON.parse(JSON.stringify(sim));
+    s.$id = PARTS_ID; s.title = 'spec';
+    delete s.if; delete s.then; delete s.else;
+    s.required = [...new Set((s.required || []).concat(['parts']))];
+    for (const k of ['engine', 'model', 'outputs', 'bench']) delete s.properties[k];
+    libDefs(s);
+    const part = (id, model, out) => ({ title: 'eng.' + id, type: 'object', required: ['id', 'engine', 'model', 'outputs'], additionalProperties: false,
+      properties: { id: ref('benchId', 'partId'), engine: { title: 'engine', const: id }, model: Object.assign({ title: 'model' }, model),
+        outputs: { title: 'outputs', type: 'array', minItems: 1, maxItems: 24, items: out }, inputs: ref('partInputs') } });
+    const branches = [];
+    for (const e of engines || []) {
+      const conv = toSchema(e.table), k = 'libOutput_' + slug(e.id).replace(/-/g, '_');
+      s.$defs[k] = conv.output;
+      branches.push(part(e.id, conv.model, ref(k)));
+    }
+    if (s.$defs.model && s.$defs.output) branches.push(part('circuit-mna@1', ref('model'), ref('output')));
+    // a part from a file of the pack (activities/_parts/<name>.json), changed by `with` (the validators resolve it)
+    branches.push({ title: 'partUse', type: 'object', required: ['id', 'use'], additionalProperties: false, properties: { id: ref('benchId', 'partId'),
+      use: { title: 'partUse', type: 'string', pattern: '^[a-z0-9][a-z0-9-]{0,60}$' }, with: { title: 'partWith', type: 'object' },
+      engine: { title: 'engine', type: 'string', minLength: 1 }, model: { title: 'model', type: 'object' }, outputs: { title: 'outputs', type: 'array', items: ref('partOutput') }, inputs: ref('partInputs') } });
+    s.properties.parts = Object.assign({}, s.properties.parts, { items: { oneOf: branches } });
+    libPlots(s);
     return s;
   }
   /** a field named by a symbol (k, x0, tau, Ne, se1 …) is its own label: no word to translate */
@@ -11723,7 +12068,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return out;
   }
 
-  root.NoemaLibSchema = Object.freeze({ toSchema, specSchema, ofs, outKinds, schemaId, titles, symbolic, kindSchema, STYLES: Object.freeze(STYLES.slice()) });
+  root.NoemaLibSchema = Object.freeze({ toSchema, specSchema, partsSchema, PARTS_ID, ofs, outKinds, schemaId, titles, symbolic, kindSchema, STYLES: Object.freeze(STYLES.slice()) });
   if (typeof module !== 'undefined' && module.exports) module.exports = root.NoemaLibSchema;
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -12146,8 +12491,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   function dopri(n, f, o, st) {
     const k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n), k4 = new Float64Array(n), k5 = new Float64Array(n), k6 = new Float64Array(n), k7 = new Float64Array(n);
     const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), ys = new Float64Array(n);
-    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
-    const sk = (i, a, b) => atol + rtol * max(abs(a), abs(b));
+    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;   // atol: one per component
+    const sk = (i, a, b) => atol[i] + rtol * max(abs(a), abs(b));
     function hinit() {
       let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = sk(i, y[i], 0); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
       let hh = dnf <= 1e-10 || dny <= 1e-10 ? 1e-6 : sqrt(dny / dnf) * 0.01; hh = min(hh, hmax);
@@ -12160,6 +12505,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       get stiff() { return stiff; },
       reset(t0, y0) { t = t0; y.set(y0); f(t, y, k1); st.nfev++; if (!(h > 0)) h = hinit(); facold = 1e-4; },
       step(tT) {
+        if (!k1.every(fin)) return { fail: 'nan' };   // f is NaN at the start of the step: no step size can help
         for (let tries = 0; ; tries++) {
           const span = tT - t; if (!(span > 0)) return { fail: 'time' };
           let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
@@ -12203,6 +12549,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         const span = tT - t; if (!(span > 0)) return { fail: 'time' };
         const hh = min(dt, span), tph = hh === span ? tT : t + hh;
         if (method === 'euler') for (let i = 0; i < n; i++) y1[i] = y[i] + hh * f0[i];
+        else if (method === 'midpoint') { for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a); st.nfev++; for (let i = 0; i < n; i++) y1[i] = y[i] + hh * a[i]; }   // the explicit midpoint rule (HNW §II.1, order 2)
         else if (method === 'heun') { for (let i = 0; i < n; i++) yt[i] = y[i] + hh * f0[i]; f(tph, yt, a); st.nfev++; for (let i = 0; i < n; i++) y1[i] = y[i] + 0.5 * hh * (f0[i] + a[i]); }
         else {   // the classical RK4 (HNW §II.1)
           for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a);
@@ -12239,13 +12586,13 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n);
     const piv = new Int32Array(n); const { rtol, atol, hmax } = o; let t = 0, h = 0;
     function jac() {
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
-      const dt = 1.4901161193847656e-8 * max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev += n + 1;
+      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
+      const dt = 1.4901161193847656e-8 * max(abs(t), 1); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev += n + 1;
     }
     return {
       stiff: false,
       reset(t0, y0) { t = t0; y.set(y0); f(t, y, F0); st.nfev++;
-        if (!(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = min(hmax, s > 0 ? 0.8 * pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; }
+        if (!(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = min(hmax, s > 0 ? 0.8 * pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; }
         jac(); },
       step(tT) {
         if (!F0.every(fin)) return { fail: 'nan' };
@@ -12261,7 +12608,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
           const tph = last ? tT : t + hh;
           for (let i = 0; i < n; i++) y1[i] = y[i] + hh * k2[i]; f(tph, y1, F2); st.nfev += 2;
           for (let i = 0; i < n; i++) k3[i] = F2[i] - e32 * (k2[i] - F1[i]) - 2 * (k1[i] - F0[i]) + hh * d * Tt[i]; luSolve(W, n, piv, k3);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (atol + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
+          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
           err = sqrt(err / n);
           if (!fin(err)) { st.rejected++; h = hh / 10; continue; }
           if (err <= 1) {
@@ -12272,6 +12619,225 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
             return { t0: ta, t1: tph, y1: y, seg };
           }
           st.rejected++; h = hh * max(0.2, 0.8 * pow(err, -1 / 3));
+        }
+      },
+    };
+  }
+  /* ---- shared by the implicit methods: a forward-difference Jacobian J = ∂f/∂y and ∂f/∂t at (t, y), given F0 = f(t, y) ---- */
+  function fdJac(n, f, t, y, F0, J, Tt, atol, rtol, st, fx) {
+    for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
+    st.nfev += n;
+    if (Tt) { const dt = 1.4901161193847656e-8 * max(abs(t), 1); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev++; }
+  }
+  const hermite = (n, ta, hs, r0, d0, r1, d1) => (tq, out) => { const s = (tq - ta) / hs, s2 = s * s, s3 = s2 * s, h00 = 2 * s3 - 3 * s2 + 1, h10 = s3 - 2 * s2 + s, h01 = -2 * s3 + 3 * s2, h11 = s3 - s2;
+    for (let i = 0; i < n; i++) out[i] = h00 * r0[i] + h10 * hs * d0[i] + h01 * r1[i] + h11 * hs * d1[i]; };
+  const firstH = (n, F0, y, atol, rtol, hmax, p) => { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); const h = min(hmax, s > 0 ? 0.5 * pow(rtol, 1 / p) / s : hmax / 100); return h > 0 ? h : hmax * 1e-3; };
+
+  /* Tsitouras 5(4) (Ch. Tsitouras 2011, Comput. Math. Appl. 62:2, "Runge–Kutta pairs of order 5(4) satisfying only the first
+     column simplifying assumption"): FSAL, 7 stages, error constants smaller than DOPRI5's; the PI controller of dopri; Tsitouras's
+     own continuous extension of order 4, y(t + θh) = y + h Σ b_i(θ) k_i with b_i(θ) quartic in θ (the coefficients of the paper's
+     §3 as in OrdinaryDiffEq.jl's Tsit5; all eight order-4 conditions hold for every θ — the test checks them, and the dense
+     output's local error O(h⁵)) */
+  const TS = { c: [0, 0.161, 0.327, 0.9, 0.9800255409045097, 1, 1],
+    a: [[], [0.161], [-0.008480655492356989, 0.335480655492357], [2.897153057105493, -6.359448489975075, 4.3622954328695815],
+      [5.325864828439257, -11.748883564062828, 7.4955393428898365, -0.09249506636175525],
+      [5.86145544294642, -12.92096931784711, 8.159367898576159, -0.071584973281401, -0.028269050394068383],
+      [0.09646076681806523, 0.01, 0.4798896504144996, 1.379008574103742, -3.290069515436081, 2.324710524099774]],
+    r: [[1, -2.763706197274826, 2.9132554618219126, -1.0530884977290216], [0, 0.13169999999999998, -0.2234, 0.1017], [0, 3.9302962368947516, -5.941033872131505, 2.490627285651253],
+      [0, -12.411077166933676, 30.33818863028232, -16.548102889244902], [0, 37.50931341651104, -88.1789048947664, 47.37952196281928], [0, -27.896526289197286, 65.09189467479366, -34.87065786149661], [0, 1.5, -4, 2.5]],
+    e: [-0.00178001105222577714, -0.0008164344596567469, 0.007880878010261995, -0.1447110071732629, 0.5823571654525552, -0.45808210592918697, 0.015151515151515152] };
+  function tsit5(n, f, o, st) {
+    const K = Array.from({ length: 7 }, () => new Float64Array(n)), y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n);
+    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4;
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, K[0]); st.nfev++; if (!(h > 0)) h = firstH(n, K[0], y, atol, rtol, hmax, 5); facold = 1e-4; },
+      step(tT) {
+        if (!K[0].every(fin)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
+          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+          let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
+          const tph = last ? tT : t + hh;
+          for (let s2 = 1; s2 < 7; s2++) { const a = TS.a[s2]; for (let i = 0; i < n; i++) { let v = 0; for (let j = 0; j < s2; j++) v += a[j] * K[j][i]; yt[i] = y[i] + hh * v; }
+            if (s2 === 6) y1.set(yt); f(s2 >= 5 ? tph : t + TS.c[s2] * hh, yt, K[s2]); }
+          st.nfev += 6;
+          let err = 0; for (let i = 0; i < n; i++) { let e = 0; for (let j = 0; j < 7; j++) e += TS.e[j] * K[j][i]; err += (hh * e / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
+          err = sqrt(err / n);
+          if (!fin(err)) { st.rejected++; h = hh / 10; if (!(h > 1e-300)) return { fail: 'nan' }; continue; }
+          const fac11 = pow(err, 0.2 - 0.04 * 0.75);
+          if (err <= 1) {
+            let fac = fac11 / pow(facold, 0.04); fac = max(0.1, min(5, fac / 0.9)); const hnew = hh / fac; facold = max(err, 1e-4);
+            const ta = t, hs = hh, r0 = Float64Array.from(y), KK = K.map(k => Float64Array.from(k)), bt = new Float64Array(7);
+            const seg = (tq, out) => { const th = (tq - ta) / hs; for (let j = 0; j < 7; j++) { const q = TS.r[j]; bt[j] = th * (q[0] + th * (q[1] + th * (q[2] + th * q[3]))); }
+              for (let i = 0; i < n; i++) { let v = 0; for (let j = 0; j < 7; j++) v += bt[j] * KK[j][i]; out[i] = r0[i] + hs * v; } };
+            t = tph; y.set(y1); K[0].set(K[6]); h = last ? max(h, hnew) : hnew;
+            return { t0: ta, t1: tph, y1: y, seg };
+          }
+          st.rejected++; h = hh / min(10, fac11 / 0.9);
+        }
+      },
+    };
+  }
+
+  /* ROS3P (Lang & Verwer 2001, BIT 41:4): a 3-stage, order-3 A-stable Rosenbrock method with an embedded order-2 solution, written
+     in the form of Sandu et al. 1997 (Atmos. Environ. 31:20; the KPP library): (I/(hγ) − J) U_i = f(t + α_i h, y + Σ a_ij U_j)
+     + Σ c_ij/h U_j + hγ_i ∂f/∂t, y₁ = y + Σ m_i U_i. The coefficients follow from Lang & Verwer's (γ = 1/2 + √3/6, b = (2/3, 0, 1/3),
+     b̂ = (1/3, 1/3, 1/3)); stage 3 reuses stage 2's f. Dense output: the cubic Hermite interpolant of y₀, f(y₀), y₁, f(y₁), a
+     continuous extension of order min(p, 3) = 3 for a method of order p ≥ 3 (Hairer, Nørsett & Wanner I, 2nd ed. 1993, §II.6,
+     (6.7)–(6.8)); a 3-stage Rosenbrock method has no continuous extension of order 3 from its own stages (four order-3 conditions
+     on three weights b_i(θ)), so this is the standard choice (it is also ode23s's for its order-2 method). The test measures the
+     dense output's local error O(h⁴) */
+  const R3 = (() => { const g = 0.5 + Math.sqrt(3) / 6, a21 = 1 / g, c21 = -1.607695154586736, c31 = -3.464101615137755, c32 = -1.732050807568877;
+    const m = [2, 0.5773502691896258, 0.4226497308103742], Gi = [[1 / g, 0, 0], [-c21, 1 / g, 0], [-c31, -c32, 1 / g]];
+    const mh = [0, 1, 2].map(j => (Gi[0][j] + Gi[1][j] + Gi[2][j]) / 3);   // b̂ Γ⁻¹ with b̂ = (1/3, 1/3, 1/3)
+    return { g, a21, c21, c31, c32, m, e: m.map((v, i) => v - mh[i]), gam: [g, g - 1, g - 1 - Math.sqrt(3) / 2] }; })();
+  function ros3p(n, f, o, st) {
+    const F0 = new Float64Array(n), F1 = new Float64Array(n), U1 = new Float64Array(n), U2 = new Float64Array(n), U3 = new Float64Array(n), y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n);
+    const J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n), piv = new Int32Array(n);
+    const { rtol, atol, hmax } = o; let t = 0, h = 0;
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, F0); st.nfev++; if (!(h > 0)) h = firstH(n, F0, y, atol, rtol, hmax, 3); fdJac(n, f, t, y, F0, J, Tt, atol, rtol, st, fx); },
+      step(tT) {
+        if (!F0.every(fin)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
+          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+          let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
+          const gi = 1 / (hh * R3.g); for (let i = 0; i < n * n; i++) W[i] = -J[i]; for (let i = 0; i < n; i++) W[i * n + i] += gi;
+          if (!luFactor(W, n, piv)) { st.rejected++; h = hh / 4; continue; }
+          for (let i = 0; i < n; i++) U1[i] = F0[i] + hh * R3.gam[0] * Tt[i]; luSolve(W, n, piv, U1);
+          for (let i = 0; i < n; i++) yt[i] = y[i] + R3.a21 * U1[i]; f(t + hh, yt, F1); st.nfev++;
+          for (let i = 0; i < n; i++) U2[i] = F1[i] + R3.c21 / hh * U1[i] + hh * R3.gam[1] * Tt[i]; luSolve(W, n, piv, U2);
+          for (let i = 0; i < n; i++) U3[i] = F1[i] + (R3.c31 * U1[i] + R3.c32 * U2[i]) / hh + hh * R3.gam[2] * Tt[i]; luSolve(W, n, piv, U3);
+          let err = 0; for (let i = 0; i < n; i++) { y1[i] = y[i] + R3.m[0] * U1[i] + R3.m[1] * U2[i] + R3.m[2] * U3[i]; const e = R3.e[0] * U1[i] + R3.e[1] * U2[i] + R3.e[2] * U3[i]; err += (e / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
+          err = sqrt(err / n);
+          if (!fin(err)) { st.rejected++; h = hh / 10; continue; }
+          if (err <= 1) {
+            const tph = last ? tT : t + hh, hnew = hh * min(5, max(0.2, 0.9 * pow(max(err, 1e-10), -1 / 3)));
+            const r0 = Float64Array.from(y), d0 = Float64Array.from(F0), ta = t;
+            t = tph; y.set(y1); f(t, y, F0); st.nfev++;
+            const seg = hermite(n, ta, hh, r0, d0, Float64Array.from(y1), Float64Array.from(F0));
+            h = last ? max(h, hnew) : hnew; fdJac(n, f, t, y, F0, J, Tt, atol, rtol, st, fx);
+            return { t0: ta, t1: tph, y1: y, seg };
+          }
+          st.rejected++; h = hh * max(0.2, 0.9 * pow(err, -1 / 3));
+        }
+      },
+    };
+  }
+
+  /* Radau IIA of order 5 (3 stages; Hairer & Wanner, Solving ODEs II, 2nd ed. 1996, §IV.8 — the method of RADAU5): L-stable and
+     stiffly accurate. The stage equations Z = h(A⊗I)F(y + Z) are solved by simplified Newton with the Jacobian of the step's start;
+     with A⁻¹ = T Λ T⁻¹, Λ = diag(γ, [[α, β], [−β, α]]), the 3n × 3n system I − h(A⊗J) splits into one real n × n system
+     (γ/h − J) and one complex n × n system ((α − iβ)/h − J) (Hairer & Wanner §IV.8, (8.15)–(8.16); T and Λ are computed here from
+     A; cfg.radauLinear: 'full' solves the 3n × 3n real system instead — the same iterates, for the test). Newton stops when θ/(1 − θ)·‖ΔZ‖ ≤ κ = max(10u/rtol, min(0.03, √rtol)); it diverges
+     when θ ≥ 0.99 (the step is halved). The error estimate is RADAU5's (§IV.8, (8.19)–(8.20)): err = (γ₀⁻¹/h I − J)⁻¹ (f(y₀) +
+     Σ e_i Z_i/h), refined once by a second solve after a rejection. Dense output: the collocation polynomial through y, y + Z₁..Z₃ */
+  const RD = (() => { const s6 = Math.sqrt(6);
+    return { c: [(4 - s6) / 10, (4 + s6) / 10, 1],
+      A: [[(88 - 7 * s6) / 360, (296 - 169 * s6) / 1800, (-2 + 3 * s6) / 225], [(296 + 169 * s6) / 1800, (88 + 7 * s6) / 360, (-2 - 3 * s6) / 225], [(16 - s6) / 36, (16 + s6) / 36, 1 / 9]],
+      u1: 30 / (6 + Math.cbrt(81) - Math.cbrt(9)), dd: [-(13 + 7 * s6) / 3, (-13 + 7 * s6) / 3, -1 / 3] }; })();
+  /* the transformation of RADAU5: A⁻¹ = T Λ T⁻¹ with T = [v (the real eigenvector), Re w, Im w] (w the eigenvector of α + iβ) */
+  const RDT = (() => {
+    const inv3 = M => { const [a, b, c] = M[0], [d, e, f2] = M[1], [g, h, k] = M[2], A2 = e * k - f2 * h, B = -(d * k - f2 * g), C2 = d * h - e * g, det = a * A2 + b * B + c * C2;
+      return [[A2 / det, -(b * k - c * h) / det, (b * f2 - c * e) / det], [B / det, (a * k - c * g) / det, -(a * f2 - c * d) / det], [C2 / det, -(a * h - b * g) / det, (a * e - b * d) / det]]; };
+    const mul = (X, Y) => X.map((r, i) => Y[0].map((_, j) => r.reduce((s2, _, k) => s2 + X[i][k] * Y[k][j], 0)));
+    const Ai = inv3(RD.A), tr = Ai[0][0] + Ai[1][1] + Ai[2][2];
+    const g = RD.u1, al = (tr - g) / 2, det = Ai[0][0] * (Ai[1][1] * Ai[2][2] - Ai[1][2] * Ai[2][1]) - Ai[0][1] * (Ai[1][0] * Ai[2][2] - Ai[1][2] * Ai[2][0]) + Ai[0][2] * (Ai[1][0] * Ai[2][1] - Ai[1][1] * Ai[2][0]);
+    const be = sqrt(det / g - al * al);
+    // eigenvectors as the cross product of two rows of (A⁻¹ − λI) (complex for λ = α + iβ)
+    const crossC = (ar, ai, br, bi) => { const re = [], im = []; for (const [p, q] of [[1, 2], [2, 0], [0, 1]]) { re.push(ar[p] * br[q] - ai[p] * bi[q] - (ar[q] * br[p] - ai[q] * bi[p])); im.push(ar[p] * bi[q] + ai[p] * br[q] - (ar[q] * bi[p] + ai[q] * br[p])); } return [re, im]; };
+    const rowR = (i, lr) => Ai[i].map((v, j) => v - (i === j ? lr : 0)), rowI = (i, li) => Ai[i].map((_, j) => (i === j ? -li : 0));
+    const [v] = crossC(rowR(0, g), [0, 0, 0], rowR(1, g), [0, 0, 0]);
+    const [u, w] = crossC(rowR(0, al), rowI(0, be), rowR(1, al), rowI(1, be));
+    const T = [0, 1, 2].map(i => [v[i], u[i], w[i]]), Ti = inv3(T), L = mul(mul(Ti, Ai), T);
+    return { T, Ti, TiAi: mul(Ti, Ai), g: L[0][0], al: L[1][1], be: L[1][2], L };
+  })();
+  // complex LU with partial pivoting (separate real and imaginary arrays)
+  function luFactorC(Ar, Ai, n, piv) {
+    for (let k = 0; k < n; k++) {
+      let p = k, mx = -1; for (let i = k; i < n; i++) { const m2 = Ar[i * n + k] ** 2 + Ai[i * n + k] ** 2; if (m2 > mx) { mx = m2; p = i; } }
+      if (!(mx > 1e-300)) return false; piv[k] = p;
+      if (p !== k) for (let j = 0; j < n; j++) { let tt = Ar[k * n + j]; Ar[k * n + j] = Ar[p * n + j]; Ar[p * n + j] = tt; tt = Ai[k * n + j]; Ai[k * n + j] = Ai[p * n + j]; Ai[p * n + j] = tt; }
+      const dr = Ar[k * n + k], di = Ai[k * n + k], dd = dr * dr + di * di;
+      for (let i = k + 1; i < n; i++) {
+        const xr = Ar[i * n + k], xi = Ai[i * n + k], lr = (xr * dr + xi * di) / dd, li = (xi * dr - xr * di) / dd; Ar[i * n + k] = lr; Ai[i * n + k] = li;
+        for (let j = k + 1; j < n; j++) { const yr = Ar[k * n + j], yi = Ai[k * n + j]; Ar[i * n + j] -= lr * yr - li * yi; Ai[i * n + j] -= lr * yi + li * yr; }
+      }
+    }
+    return true;
+  }
+  function luSolveC(Ar, Ai, n, piv, br, bi) {
+    for (let k = 0; k < n; k++) { const p = piv[k]; if (p !== k) { let tt = br[k]; br[k] = br[p]; br[p] = tt; tt = bi[k]; bi[k] = bi[p]; bi[p] = tt; } }
+    for (let i = 1; i < n; i++) { let sr = br[i], si = bi[i]; for (let j = 0; j < i; j++) { const lr = Ar[i * n + j], li = Ai[i * n + j]; sr -= lr * br[j] - li * bi[j]; si -= lr * bi[j] + li * br[j]; } br[i] = sr; bi[i] = si; }
+    for (let i = n - 1; i >= 0; i--) { let sr = br[i], si = bi[i]; for (let j = i + 1; j < n; j++) { const ur = Ar[i * n + j], ui = Ai[i * n + j]; sr -= ur * br[j] - ui * bi[j]; si -= ur * bi[j] + ui * br[j]; }
+      const dr = Ar[i * n + i], di = Ai[i * n + i], dd = dr * dr + di * di; br[i] = (sr * dr + si * di) / dd; bi[i] = (si * dr - sr * di) / dd; }
+  }
+  function radau5(n, f, o, st) {
+    const full = o.radauLinear === 'full', N3 = 3 * n, M = full ? new Float64Array(N3 * N3) : null, pv = new Int32Array(N3), Er = new Float64Array(n * n), Ei = new Float64Array(n * n), pc = new Int32Array(n), sr = new Float64Array(n), sI = new Float64Array(n), s1 = new Float64Array(n), Z = new Float64Array(N3), dZ = new Float64Array(N3), F = new Float64Array(N3);
+    const y = new Float64Array(n), yt = new Float64Array(n), F0 = new Float64Array(n), J = new Float64Array(n * n), E1 = new Float64Array(n * n), p1 = new Int32Array(n), fx = new Float64Array(n);
+    const cont = new Float64Array(n), F2 = new Float64Array(n), fz = new Float64Array(n), y1 = new Float64Array(n);
+    const { rtol, atol, hmax } = o, fnewt = max(10 * EPS / rtol, min(0.03, sqrt(rtol))); let t = 0, h = 0, faccon = 1, rejLast = false, firstStep = true;
+    const scal = i => atol[i] + rtol * abs(y[i]);
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, F0); st.nfev++; if (!(h > 0)) h = firstH(n, F0, y, atol, rtol, hmax, 5); fdJac(n, f, t, y, F0, J, null, atol, rtol, st, fx); firstStep = true; },
+      step(tT) {
+        if (!F0.every(fin)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
+          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+          let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
+          const tph = last ? tT : t + hh;
+          let okLU;
+          if (full) { for (let bi = 0; bi < 3; bi++) for (let i = 0; i < n; i++) { const row = (bi * n + i) * N3; for (let bj = 0; bj < 3; bj++) { const a = hh * RD.A[bi][bj]; for (let j = 0; j < n; j++) M[row + bj * n + j] = (bi === bj && i === j ? 1 : 0) - a * J[i * n + j]; } }
+            okLU = luFactor(M, N3, pv); }
+          else {   // one real (γ/h − J) and one complex ((α − iβ)/h − J) factorisation; the real one also serves the error estimate
+            for (let i = 0; i < n * n; i++) { E1[i] = -J[i]; Er[i] = -J[i]; Ei[i] = 0; } for (let i = 0; i < n; i++) { E1[i * n + i] += RDT.g / hh; Er[i * n + i] += RDT.al / hh; Ei[i * n + i] = -RDT.be / hh; }
+            okLU = luFactor(E1, n, p1) && luFactorC(Er, Ei, n, pc); }
+          if (!okLU) { st.rejected++; h = hh / 4; rejLast = true; continue; }
+          Z.fill(0); let conv = false, dold = 0; faccon = pow(max(faccon, EPS), 0.8);
+          for (let it = 0; it < 7; it++) {
+            for (let k = 0; k < 3; k++) { for (let i = 0; i < n; i++) yt[i] = y[i] + Z[k * n + i]; f(k === 2 ? tph : t + RD.c[k] * hh, yt, fz); F.set(fz, k * n); }
+            st.nfev += 3; if (!F.every(fin)) break;
+            for (let k = 0; k < 3; k++) for (let i = 0; i < n; i++) dZ[k * n + i] = -Z[k * n + i] + hh * (RD.A[k][0] * F[i] + RD.A[k][1] * F[n + i] + RD.A[k][2] * F[2 * n + i]);
+            if (full) luSolve(M, N3, pv, dZ);
+            else {   // ΔZ = (T⊗I) ΔW, with the blocks of (Λ/h ⊗ I − I ⊗ J) ΔW = (T⁻¹A⁻¹ ⊗ I) r / h
+              const P = RDT.TiAi; for (let i = 0; i < n; i++) { const r0 = dZ[i], r1 = dZ[n + i], r2 = dZ[2 * n + i]; s1[i] = (P[0][0] * r0 + P[0][1] * r1 + P[0][2] * r2) / hh; sr[i] = (P[1][0] * r0 + P[1][1] * r1 + P[1][2] * r2) / hh; sI[i] = (P[2][0] * r0 + P[2][1] * r1 + P[2][2] * r2) / hh; }
+              luSolve(E1, n, p1, s1); luSolveC(Er, Ei, n, pc, sr, sI);
+              const T = RDT.T; for (let i = 0; i < n; i++) for (let k = 0; k < 3; k++) dZ[k * n + i] = T[k][0] * s1[i] + T[k][1] * sr[i] + T[k][2] * sI[i];
+            }
+            let dn = 0; for (let k = 0; k < 3; k++) for (let i = 0; i < n; i++) { Z[k * n + i] += dZ[k * n + i]; dn += (dZ[k * n + i] / scal(i)) ** 2; }
+            dn = sqrt(dn / N3);
+            if (it > 0) { const th = dn / dold; if (!(th < 0.99)) break; faccon = th / (1 - th); }
+            if (faccon * dn <= fnewt || dn <= 1e-14) { conv = true; break; }
+            dold = dn;
+          }
+          if (!conv) { st.rejected++; h = hh / 2; rejLast = true; faccon = 1; continue; }
+          // the error estimate
+          if (full) { for (let i = 0; i < n * n; i++) E1[i] = -J[i]; for (let i = 0; i < n; i++) E1[i * n + i] += RD.u1 / hh;
+            if (!luFactor(E1, n, p1)) { st.rejected++; h = hh / 2; rejLast = true; continue; } }
+          for (let i = 0; i < n; i++) { F2[i] = (RD.dd[0] * Z[i] + RD.dd[1] * Z[n + i] + RD.dd[2] * Z[2 * n + i]) / hh; cont[i] = F2[i] + F0[i]; y1[i] = y[i] + Z[2 * n + i]; }
+          luSolve(E1, n, p1, cont);
+          const enorm = () => { let e = 0; for (let i = 0; i < n; i++) e += (cont[i] / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; return max(sqrt(e / n), 1e-10); };
+          let err = enorm();
+          if (err >= 1 && (firstStep || rejLast)) { for (let i = 0; i < n; i++) yt[i] = y[i] + cont[i]; f(t, yt, fz); st.nfev++; for (let i = 0; i < n; i++) cont[i] = F2[i] + fz[i]; luSolve(E1, n, p1, cont); err = enorm(); }
+          if (!fin(err)) { st.rejected++; h = hh / 10; rejLast = true; continue; }
+          const fac = 0.9;   // the safety factor
+          if (err < 1) {
+            const hnew = hh * min(4, max(0.2, fac * pow(err, -0.25)));
+            const Y = [Float64Array.from(y), Float64Array.from(Z.subarray(0, n)), Float64Array.from(Z.subarray(n, 2 * n)), Float64Array.from(Z.subarray(2 * n))], ta = t, hs = hh;
+            for (let k = 1; k < 4; k++) for (let i = 0; i < n; i++) Y[k][i] += Y[0][i];
+            const S0 = [0, RD.c[0], RD.c[1], 1];
+            const seg = (tq, out) => { const s3 = (tq - ta) / hs; const L = S0.map((sk, k) => S0.reduce((p, sm, m) => (m === k ? p : p * (s3 - sm) / (sk - sm)), 1));
+              for (let i = 0; i < n; i++) out[i] = L[0] * Y[0][i] + L[1] * Y[1][i] + L[2] * Y[2][i] + L[3] * Y[3][i]; };
+            t = tph; y.set(y1); f(t, y, F0); st.nfev++; fdJac(n, f, t, y, F0, J, null, atol, rtol, st, fx);
+            h = last ? max(h, hnew) : hnew; rejLast = false; firstStep = false;
+            return { t0: ta, t1: tph, y1: y, seg };
+          }
+          st.rejected++; rejLast = true; h = hh * max(0.2, fac * pow(err, -0.25));
         }
       },
     };
@@ -12300,7 +12866,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       },
     };
   }
-  const METHODS = ['auto', 'dopri5', 'rosenbrock', 'rk4', 'heun', 'euler', 'verlet', 'yoshida4'];
+  const METHODS = ['auto', 'dopri5', 'tsit5', 'rosenbrock', 'ros3p', 'radau5', 'rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
+  const FIXED = ['rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
   function integrate(cfg) {
     const C = codes(['nan', 'blow-up', 'step-underflow', 'budget', 'zeno', 'bad-config']);
     const st = { steps: 0, rejected: 0, nfev: 0 };
@@ -12311,34 +12878,58 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     if (!cfg || typeof cfg.f !== 'function' || !n || !fin(tEnd) || !(tEnd >= t0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
     const pairs = Array.isArray(cfg.pairs) ? cfg.pairs.filter(p => Array.isArray(p) && p[0] >= 0 && p[0] < n && p[1] >= 0 && p[1] < n) : [];
     const sym = method === 'verlet' || method === 'yoshida4';
-    if (['rk4', 'heun', 'euler', 'verlet', 'yoshida4'].includes(method) && !(cfg.dt > 0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    if (FIXED.includes(method) && !(cfg.dt > 0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
     if (sym && pairs.length * 2 !== n) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
-    const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: cfg.atol > 0 ? cfg.atol : 1e-9, hmax: cfg.hmax > 0 ? cfg.hmax : max(abs(tEnd - t0), 1e-12), dt: cfg.dt };
+    // atol: a number, or one per component (all > 0)
+    const AT = new Float64Array(n);
+    if (Array.isArray(cfg.atol) || ArrayBuffer.isView(cfg.atol)) { if (cfg.atol.length !== n || !Array.from(cfg.atol).every(v => v > 0 && fin(v))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); } AT.set(cfg.atol); }
+    else AT.fill(cfg.atol > 0 ? cfg.atol : 1e-9);
+    const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: AT, hmax: cfg.hmax > 0 ? cfg.hmax : max(abs(tEnd - t0), 1e-12), dt: cfg.dt, radauLinear: cfg.radauLinear };
     const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, maxEvents = fin(cfg.maxEvents) ? min(cfg.maxEvents, MAX_EVENTS) : 1000;
     const f = (t, y, dy) => { cfg.f(t, y, dy); };
-    const make = m => (m === 'dopri5' || m === 'auto' ? dopri(n, f, o, st) : m === 'rosenbrock' ? rosenbrock(n, f, o, st) : m === 'verlet' || m === 'yoshida4' ? symplectic(m, n, f, o, st, pairs) : fixed(m, n, f, o, st));
+    const make = m => (m === 'dopri5' || m === 'auto' ? dopri(n, f, o, st) : m === 'tsit5' ? tsit5(n, f, o, st) : m === 'rosenbrock' ? rosenbrock(n, f, o, st) : m === 'ros3p' ? ros3p(n, f, o, st)
+      : m === 'radau5' ? radau5(n, f, o, st) : m === 'verlet' || m === 'yoshida4' ? symplectic(m, n, f, o, st, pairs) : fixed(m, n, f, o, st));
     let S = make(method), auto = method === 'auto';
     const evs = (cfg.events || []).filter(e => e && typeof e.g === 'function');
     const armed = evs.map(() => true), gv = new Float64Array(evs.length), ztol = cfg.gtol > 0 ? cfg.gtol : 1e-10, lastHit = evs.map(() => -Infinity);
     const samples = cfg.samples || []; let si = 0;
-    let t = t0; const y = Float64Array.from(y0), tmp = new Float64Array(n), ya = new Float64Array(n);
+    // breaks: times the step must land on exactly (doses, switches, the discontinuities of a delay equation); apply(t, y) may change y
+    const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t);
+    let bi = 0;
+    const onSeg = typeof cfg.onSegment === 'function' ? cfg.onSegment : null;
+    let t = t0; const y = Float64Array.from(y0), tmp = new Float64Array(n), ya = new Float64Array(n), yo = new Float64Array(n);
     if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
     const evalG = (tt, yy) => { for (let j = 0; j < evs.length; j++) gv[j] = evs[j].g(tt, yy); };
-    S.reset(t, y); evalG(t, y);
-    // a g that is exactly 0 at the start takes the side it must leave towards for its direction (a ball put on the floor)
-    for (let j = 0; j < evs.length; j++) if (gv[j] === 0 && evs[j].dir) gv[j] = evs[j].dir < 0 ? 1e-300 : -1e-300;
-    while (si < samples.length && samples[si] <= t) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
+    // a g that is exactly 0 takes the side it must leave towards for its direction (a ball put on the floor)
+    const zeroSide = () => { for (let j = 0; j < evs.length; j++) if (gv[j] === 0 && evs[j].dir) gv[j] = evs[j].dir < 0 ? 1e-300 : -1e-300; };
+    const sample = (tt, yy) => { cfg.onSample && cfg.onSample(tt, yy); };
+    // the samples up to tt on a step's dense output; a sample at the time of a pending break waits for the break (it sees the state after it)
+    const sampleTo = (tt, seg) => { const bt = bi < brk.length ? brk[bi].t : Infinity; while (si < samples.length && (samples[si] < tt || (samples[si] === tt && tt < bt))) { seg(samples[si], tmp); sample(samples[si], tmp); si++; } };
+    const applyBreaks = () => {   // every break at t (or just before: rounding) is applied in order; the method restarts from the new y, keeping h
+      let any = false; while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b = brk[bi++]; any = true; if (typeof b.apply === 'function') b.apply(t, y); }
+      return any;
+    };
+    applyBreaks();   // breaks at t0 run before the first sample
+    if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
+    S.reset(t, y); evalG(t, y); zeroSide();
+    while (si < samples.length && samples[si] <= t) { sample(samples[si], y); si++; }
     const hits = []; let ymax0 = 1; for (let i = 0; i < n; i++) ymax0 = max(ymax0, abs(y[i]));
-    let instT = NaN, instN = 0;
+    let instT = NaN, instN = 0, nObs = 0;
     for (;;) {
+      if (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) {
+        applyBreaks();
+        if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
+        S.reset(t, y); evalG(t, y); zeroSide();
+        while (si < samples.length && samples[si] <= t) { sample(samples[si], y); si++; }
+      }
       if (t >= tEnd) return done(t, y, 'end', hits);
       if (st.steps >= maxSteps) { C.code('budget', t); return done(t, y, 'budget', hits); }
-      const r = S.step(tEnd);
+      const r = S.step(bi < brk.length ? min(tEnd, brk[bi].t) : tEnd);
       if (r.fail) { C.code(r.fail === 'time' ? 'step-underflow' : r.fail, t); return done(t, y, r.fail, hits); }
       st.steps++;
       const g0 = Float64Array.from(gv); evalG(r.t1, r.y1);
       const loc = new Float64Array(evs.length).fill(Infinity), side = new Float64Array(evs.length);
-      let first = Infinity;
+      let first = Infinity; const obs = [];
       for (let j = 0; j < evs.length; j++) {
         const a0 = g0[j], b0 = gv[j];
         if (!armed[j]) { if (abs(b0) > (evs[j].hyst || 0)) armed[j] = true; continue; }   // hysteresis: re-armed once |g| > hyst
@@ -12346,12 +12937,28 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
         const tr = locate(tt => { r.seg(tt, tmp); return evs[j].g(tt, tmp); }, r.t0, r.t1, a0, b0, { tol: 1e-13 });
         if (tr <= lastHit[j] + 1e-9 * max(1, abs(tr))) continue;   // the crossing just handled, seen again from its other side
+        if (evs[j].observe) { obs.push([tr, j, up ? 1 : -1]); continue; }   // observed: reported, the step goes on
         loc[j] = tr; side[j] = up ? 1 : -1; if (tr < first) first = tr;
+      }
+      const tSeg = first < Infinity ? first : r.t1;
+      if (onSeg) onSeg(r.seg, r.t0, tSeg);
+      // observed events inside the (possibly cut) step, in time order: onEvent sees the dense-output state; they do not count for zeno
+      if (obs.length) {
+        obs.sort((a, b) => a[0] - b[0]);
+        for (const [tr, j, sd] of obs) {
+          if (tr > tSeg) continue;   // after the cut: seen again on the next step
+          lastHit[j] = tr; if (evs[j].hyst > 0) armed[j] = false;
+          if (++nObs > MAX_EVENTS) { if (!C.has('observe-cap')) C.code('observe-cap', tr); continue; }
+          sampleTo(tr, r.seg);
+          r.seg(tr, yo); hits.push({ t: tr, j, kind: evs[j].kind, dir: sd, observe: true });
+          const act = evs[j].onEvent ? evs[j].onEvent(tr, Float64Array.from(yo), { j, dir: sd, observe: true }) : undefined;
+          if (act === 'stop' || evs[j].terminal) { sampleTo(tr, r.seg); t = tr; y.set(yo); return done(t, y, 'event', hits); }
+        }
       }
       if (first < Infinity) {   // the step is cut at the earliest event; simultaneous events (within 1e-12·t) fire together, in order
         const tolS = 1e-12 * max(1, abs(first));
         r.seg(first, ya);
-        while (si < samples.length && samples[si] <= first) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
+        sampleTo(first, r.seg);
         let stop = false; const fired = [];
         for (let j = 0; j < evs.length; j++) if (loc[j] <= first + tolS) {
           fired.push(j); lastHit[j] = first; hits.push({ t: first, j, kind: evs[j].kind, dir: side[j] });
@@ -12359,7 +12966,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
           if (act === 'stop' || evs[j].terminal) stop = true;
         }
         if (first === instT || abs(first - instT) <= tolS) instN += fired.length; else { instT = first; instN = fired.length; }
-        if (hits.length > maxEvents || instN > 100) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
+        if (hits.length - min(nObs, MAX_EVENTS) > maxEvents || instN > 100) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
         t = first; y.set(ya);
         if (stop) return done(t, y, 'event', hits);
         if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
@@ -12370,7 +12977,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         for (const j of fired) { if (abs(gv[j]) <= ztol) { const d0 = evs[j].dir || 0; gv[j] = d0 ? (d0 < 0 ? 1e-300 : -1e-300) : side[j] * 1e-300; } if (evs[j].hyst > 0) armed[j] = false; }
         continue;
       }
-      while (si < samples.length && samples[si] <= r.t1) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
+      sampleTo(r.t1, r.seg);
       t = r.t1; y.set(r.y1);
       if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
       let ym = 0; for (let i = 0; i < n; i++) ym = max(ym, abs(y[i]));
@@ -12383,22 +12990,28 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   /* ======================================================================================================================
      Output analysis (L ch. 9; BCNN ch. 11)
      ====================================================================================================================== */
-  /** Welford 1962: running mean and variance, numerically stable */
+  /** Kahan–Babuška summation in Neumaier's form (Neumaier 1974, ZAMM 54): sum(), add(x); the error of a sum of n terms stays
+      O(u)·Σ|x| instead of O(nu)·Σ|x| (Higham, Accuracy and Stability of Numerical Algorithms, 2nd ed. 2002, §4.3) */
+  function ksum() {
+    let s = 0, c = 0;
+    return { add(x) { const t = s + x; if (abs(s) >= abs(x)) c += (s - t) + x; else c += (x - t) + s; s = t; }, get value() { return s + c; }, reset() { s = 0; c = 0; } };
+  }
+  /** Welford 1962: running mean and variance, numerically stable; the sum is compensated (Neumaier) */
   function welford() {
-    let n = 0, m = 0, s = 0, lo = Infinity, hi = -Infinity, sum = 0;
-    return { add(x) { if (!fin(x)) return; n++; const d = x - m; m += d / n; s += d * (x - m); sum += x; if (x < lo) lo = x; if (x > hi) hi = x; },
+    let n = 0, m = 0, s = 0, lo = Infinity, hi = -Infinity; const sum = ksum();
+    return { add(x) { if (!fin(x)) return; n++; const d = x - m; m += d / n; s += d * (x - m); sum.add(x); if (x < lo) lo = x; if (x > hi) hi = x; },
       get n() { return n; }, get mean() { return n ? m : NaN; }, get var() { return n > 1 ? s / (n - 1) : NaN; }, get sd() { return n > 1 ? sqrt(s / (n - 1)) : NaN; },
-      get min() { return n ? lo : NaN; }, get max() { return n ? hi : NaN; }, get sum() { return sum; } };
+      get min() { return n ? lo : NaN; }, get max() { return n ? hi : NaN; }, get sum() { return sum.value; } };
   }
   /** a time-weighted average of a piecewise-constant quantity (a queue length): update(t, v) at each change (L §1.4.1 "area under
       Q(t)"); reset(t) starts again (end of warm-up) keeping the current value */
-  function timeAvg(t0, v0) {
-    let tl = fin(t0) ? t0 : 0, ts = tl, v = fin(v0) ? v0 : 0, area = 0, mx = v, area2 = 0;
-    return { update(t, nv) { if (t > tl) { area += v * (t - tl); area2 += v * v * (t - tl); tl = t; } v = nv; if (nv > mx) mx = nv; },
+  function timeAvg(t0, v0) {   // the area is a compensated sum (Neumaier): a long run of many small pieces keeps its digits
+    let tl = fin(t0) ? t0 : 0, ts = tl, v = fin(v0) ? v0 : 0, mx = v; const area = ksum();
+    return { update(t, nv) { if (t > tl) { area.add(v * (t - tl)); tl = t; } v = nv; if (nv > mx) mx = nv; },
       add(t, dv) { this.update(t, v + dv); }, get value() { return v; },
-      mean(t) { const tt = fin(t) ? max(t, tl) : tl, a = area + v * (tt - tl); return tt > ts ? a / (tt - ts) : NaN; },
-      area(t) { const tt = fin(t) ? max(t, tl) : tl; return area + v * (tt - tl); },
-      reset(t) { if (t > tl) { tl = t; } ts = tl; area = 0; area2 = 0; mx = v; }, get max() { return mx; }, get start() { return ts; } };
+      mean(t) { const tt = fin(t) ? max(t, tl) : tl, a = area.value + v * (tt - tl); return tt > ts ? a / (tt - ts) : NaN; },
+      area(t) { const tt = fin(t) ? max(t, tl) : tl; return area.value + v * (tt - tl); },
+      reset(t) { if (t > tl) { tl = t; } ts = tl; area.reset(); mx = v; }, get max() { return mx; }, get start() { return ts; } };
   }
   /** ci(values, level) → {n, mean, sd, half, lo, hi}: the Student-t interval of a mean of independent values (L §4.5) */
   function ci(values, level) {
@@ -12553,15 +13166,19 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   /* ======================================================================================================================
      Delay equations, stochastic kinetics and SDEs
      ====================================================================================================================== */
-  /** dde({f(t, y, lag, dy) (lag(i, τ index) → y_i(t − τ)), y0, history(t) → array, lags: [τ…], t0, tEnd, rtol, atol, samples,
-      onSample, maxSteps}) — constant-lag delay equations by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003
-      ch. 3; Shampine & Thompson 2001): h ≤ the smallest lag so every lagged value lies on a finished step (or the history); the
-      steps are kept (≤ maxSteps) → {t, y, steps, stop, codes} */
+  /** dde({f(t, y, lag, dy) (lag(i, k) → y_i(t − τ_k)), y0, history(t) → array, lags: [τ…], …integrate's cfg (t0, tEnd, method —
+      fixed ones with dt ≤ the smallest lag —, rtol, atol, events, breaks, samples, onSample, onSegment, maxSteps)}) — constant-lag
+      delay equations by the method of steps (Bellen & Zennaro 2003 ch. 3; Shampine & Thompson 2001): integrate() with
+      h ≤ the smallest lag, so every lagged value lies on a finished step (kept through onSegment) or in the history; the
+      derivative jumps that the start propagates, at t0 + m·τ (m ≤ 5, the order of DOPRI5), are breaks the steps land on
+      (discontinuity tracking, Bellen & Zennaro §4.1) → integrate's result */
   function dde(cfg) {
-    const C = codes(['nan', 'budget', 'bad-config', 'step-underflow']);
-    const lags = Array.isArray(cfg && cfg.lags) ? cfg.lags.filter(v => v > 0) : [];
+    const lags = Array.isArray(cfg && cfg.lags) ? cfg.lags.filter(v => v > 0 && fin(v)) : [];
     const y0 = cfg && cfg.y0 ? Array.from(cfg.y0) : [], n = y0.length, t0 = fin(cfg && cfg.t0) ? cfg.t0 : 0;
-    if (!cfg || typeof cfg.f !== 'function' || !n || !lags.length || !fin(cfg.tEnd) || !(cfg.tEnd > t0)) { C.code('bad-config'); return { t: t0, y: y0, steps: 0, stop: 'bad-config', codes: C.list }; }
+    const badCfg = () => { const C = codes(['bad-config']); C.code('bad-config'); return { t: t0, y: y0, steps: 0, rejected: 0, nfev: 0, events: [], stop: 'bad-config', method: cfg && cfg.method, codes: C.list }; };
+    if (!cfg || typeof cfg.f !== 'function' || !n || !lags.length || !fin(cfg.tEnd) || !(cfg.tEnd > t0)) return badCfg();
+    const tauMin = min(...lags);
+    if (FIXED.includes(cfg.method) && !(cfg.dt > 0 && cfg.dt <= tauMin)) return badCfg();
     const hist = typeof cfg.history === 'function' ? cfg.history : () => y0;
     const segs = [], tmp = new Float64Array(n);   // finished steps: {t0, t1, seg}
     const lagVal = (tq, i) => {
@@ -12569,23 +13186,11 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       let lo = 0, hi = segs.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (segs[m].t1 < tq) lo = m + 1; else hi = m; }
       const sg = segs[lo]; if (!sg) return NaN; sg.seg(min(tq, sg.t1), tmp); return tmp[i];
     };
-    let tCur = t0;
     const f = (t, y, dy) => cfg.f(t, y, (i, k) => lagVal(t - lags[k || 0], i), dy);
-    const st = { steps: 0, rejected: 0, nfev: 0 };
-    const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: cfg.atol > 0 ? cfg.atol : 1e-9, hmax: min(...lags) };
-    const S = dopri(n, f, o, st); const y = Float64Array.from(y0);
-    S.reset(t0, y); const samples = cfg.samples || []; let si = 0;
-    while (si < samples.length && samples[si] <= t0) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
-    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS;
-    for (;;) {
-      if (tCur >= cfg.tEnd) return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'end', codes: C.list };
-      if (st.steps >= maxSteps) { C.code('budget', tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'budget', codes: C.list }; }
-      const r = S.step(cfg.tEnd); if (r.fail) { C.code(r.fail === 'time' ? 'step-underflow' : r.fail, tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: r.fail, codes: C.list }; }
-      st.steps++; segs.push({ t0: r.t0, t1: r.t1, seg: r.seg });
-      while (si < samples.length && samples[si] <= r.t1) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], Float64Array.from(tmp)); si++; }
-      tCur = r.t1; y.set(r.y1);
-      if (!y.every(fin)) { C.code('nan', tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'nan', codes: C.list }; }
-    }
+    const breaks = (Array.isArray(cfg.breaks) ? cfg.breaks.slice() : []);
+    const seen = new Set(); for (const tau of lags) for (let m = 1; m <= 5; m++) { const tb = t0 + m * tau; if (tb < cfg.tEnd && !seen.has(tb)) { seen.add(tb); breaks.push({ t: tb }); } }
+    const onSegment = (seg, a, b) => { if (segs.length < MAX_STEPS) segs.push({ t0: a, t1: b, seg }); if (typeof cfg.onSegment === 'function') cfg.onSegment(seg, a, b); };
+    return integrate({ ...cfg, f, t0, hmax: min(cfg.hmax > 0 ? cfg.hmax : Infinity, tauMin), method: cfg.method || 'dopri5', breaks, onSegment });
   }
   /** dae({f(t, y, z, dy), g(t, y, z, res), y0, z0, …integrate's cfg}) — a semi-explicit index-1 DAE y' = f(t, y, z), 0 = g(t, y, z)
       in its state-space form (Hairer & Wanner, Solving ODEs II, 2nd ed. 1996, §VI.1): at every evaluation the algebraic z is
@@ -13036,7 +13641,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     // special functions
     lgamma, gammaP, betaI, normCdf, normInv, tCdf, tq,
     // output analysis
-    welford, timeAvg, ci, acf, batchMeans, mser5, replicate, littleCheck,
+    welford, ksum, timeAvg, ci, acf, batchMeans, mser5, replicate, littleCheck,
     // sweeps and sensitivity
     linspace, oat, grid, morris, sobol, lhs,
     // delay equations, stochastic kinetics, SDEs, schedules
@@ -14414,7 +15019,23 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
      Multi-agent protocols
      ====================================================================================================================== */
   const numP = (v, d) => (v == null ? d : typeof v === 'number' ? v : C.cx(v)({}));
-  function contractNet(p, seed, env) {   // Smith 1980: cfp → propose / refuse → accept-proposal / reject-proposal → inform (done)
+  /** the min-cost assignment of n rows to distinct columns among m ≥ n (Kuhn 1955, Munkres 1957; potentials, O(n²m)) → its cost */
+  function hungarian(n, m, cost) {
+    const u = new Float64Array(n + 1), v = new Float64Array(m + 1), p = new Int32Array(m + 1), way = new Int32Array(m + 1);
+    for (let i = 1; i <= n; i++) {
+      p[0] = i; let j0 = 0; const minv = new Float64Array(m + 1).fill(Infinity), used = new Uint8Array(m + 1);
+      do {
+        used[j0] = 1; const i0 = p[j0]; let delta = Infinity, j1 = 0;
+        for (let j = 1; j <= m; j++) if (!used[j]) { const cur = cost(i0 - 1, j - 1) - u[i0] - v[j]; if (cur < minv[j]) { minv[j] = cur; way[j] = j0; } if (minv[j] < delta) { delta = minv[j]; j1 = j; } }
+        for (let j = 0; j <= m; j++) if (used[j]) { u[p[j]] += delta; v[j] -= delta; } else minv[j] -= delta;
+        j0 = j1;
+      } while (p[j0] !== 0);
+      do { const j1 = way[j0]; p[j0] = p[j1]; j0 = j1; } while (j0);
+    }
+    let total = 0; for (let j = 1; j <= m; j++) if (p[j]) total += cost(p[j] - 1, j - 1);
+    return total;
+  }
+  function contractNet(p, seed, env, codes) {   // Smith 1980: cfp → propose / refuse → accept-proposal / reject-proposal → inform (done)
     const r = SK().stream(seed, 'mas.contractnet'), T = p.tasks || (p.costs ? p.costs.length : 10), Cn = p.contractors || (p.costs ? p.costs[0].length : 5);
     const lo = typeof p.costMin === 'string' ? C.cx(p.costMin)(env) : (p.costMin != null ? p.costMin : 1), hi = typeof p.costMax === 'string' ? C.cx(p.costMax)(env) : (p.costMax != null ? p.costMax : 10);
     const lf = typeof p.loadFactor === 'string' ? C.cx(p.loadFactor)(env) : (p.loadFactor || 0), capC = p.capacity || Infinity;
@@ -14429,9 +15050,17 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const [bc, c] = bids[0]; msgs['accept-proposal']++; msgs['reject-proposal'] += bids.length - 1; msgs.inform++;
       load[c]++; total += bc; winner.push(c);
     }
-    // the optimum without load effects: every task to its cheapest contractor (separable costs); with capacities, a min-cost
-    // assignment by successive shortest paths would be needed — reported for the uncapacitated case only
-    const optimal = Number.isFinite(capC) || lf ? NaN : cost.reduce((s, row) => s + Math.min(...row), 0);
+    // the optimum: without capacity or load effects every task goes to its cheapest contractor (separable costs); otherwise the
+    // min-cost assignment of tasks to contractor slots (slot k of contractor c costs cost·(1 + lf·k), increasing, so the slots fill
+    // in order) by the Hungarian algorithm (Kuhn 1955; O(n²m), within a work bound, else NaN and code budget)
+    let optimal;
+    if (!Number.isFinite(capC) && !lf) optimal = cost.reduce((s, row) => s + Math.min(...row), 0);
+    else {
+      const slots = Math.min(Number.isFinite(capC) ? capC : T, T), m = Cn * slots;
+      if (m < T) optimal = NaN;   // not every task can be placed
+      else if (T * T * m > 4e7) { optimal = NaN; if (codes) codes.code('budget'); }
+      else optimal = hungarian(T, m, (t, j) => cost[t][j % Cn] * (1 + lf * Math.floor(j / Cn)));
+    }
     const messages = Object.values(msgs).reduce((a, b) => a + b, 0);
     return { scalar: { totalCost: total, optimalCost: optimal, makespan: Math.max(...load), messages, refusals: msgs.refuse, unassigned }, series: { load, winner }, msgs };
   }
@@ -14669,7 +15298,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const p = M.proto, codes = SK().codes(FATAL), out = {};
     let r = null;
     try {
-      if (p.kind === 'contractnet') r = contractNet(p, seed, env);
+      if (p.kind === 'contractnet') r = contractNet(p, seed, env, codes);
       else if (p.kind === 'auction') r = auction(p, seed, env);
       else if (p.kind === 'negotiation') r = negotiation(p, seed, env, codes);
       else if (p.kind === 'coalition') r = coalition(p, codes);
@@ -17697,7 +18326,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         if (k >= rs.length) { D.add('no-solution', id); return und('no-solution', id); }
         const r = rs[k]; return { t: 'C', x: x0 + x1 * r, y: y0 + y1 * r, r };
       }
-      case 'mec': { const b = bad(refs); if (b) return fail(b); return welzl(refs.map(p => [p.x, p.y]), C.mulberry32(C.hash32('geom:mec:' + id, spec0.model.seed || 1))); }
+      case 'mec': { const b = bad(refs); if (b) return fail(b); return welzl(refs.map(p => [p.x, p.y]), C.rng(spec0.model.seed || 1, 'geom:mec:' + id)); }
       case 'conic': {
         if (v.points) { const ps = v.points.map(get), b = bad(ps); if (b) return fail(b); const K = conic5(ps, S, D, id); if (K.t === 'K' && !analyse(K).type) D.add('conic-degenerate', id); return K; }
         if (v.foci) {
@@ -17973,7 +18602,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
   /** "is it always true?": the assert on seeded random placements of the free points (probabilistic proving; Schwartz 1980, Zippel 1979) */
   function always(spec, prep, env, o, D) {
-    const rnd = C.mulberry32(C.hash32('geom:always:' + o.id, spec.model.seed || 1)), n = o.samples || 20, base = evaluate(spec, prep, env, diagSet(), null, null);
+    const rnd = C.rng(spec.model.seed || 1, 'geom:always:' + o.id), n = o.samples || 20, base = evaluate(spec, prep, env, diagSet(), null, null);
     const frees = prep.objs.filter(ob => ob.kind === 'point').map(ob => ob.id);
     let ok = 0, tried = 0;
     for (let i = 0; i < n; i++) {
@@ -17987,7 +18616,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
 
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibGeomModule, 'NoemaLibGeom');
+  engine.workerSource = C.workerSource(noemaLibGeomModule, 'NoemaLibGeom', { kit: true });
   root.NoemaLibGeom = Object.freeze({
     table: { model: Object.assign({ objects: { $req: true, $list: { $obj: Object.assign({ id: 'id!', hide: 'bool', label: 'key', c: 'enum:' + ROLES.join('|') }, ...KIND_NAMES.map(k => ({ [k]: KINDS[k].point ? 'any' : KINDS[k].list ? { $list: 'ref', min: KINDS[k].min, max: KINDS[k].max } : { $obj: KINDS[k].T } }))) }, min: 1, max: MAX_OBJ } }, MODEL_T), outputs: { scalar: SCALAR_OF, series: SERIES_OF, scene: ['drawing'] }, fields: { at: { $list: 'ref' }, unit: 'enum:deg|rad', oriented: 'bool', signed: 'bool', code: 'enum:' + CODES.join('|'), test: 'enum:' + ASSERTS.join('|'), samples: 'int:1:200', labels: 'enum:id|none' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
@@ -18202,7 +18831,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
 
   /** generate(g, env, seed, D) → {ids, edges, directed, xy?} — seeded generators that follow networkx's definitions */
   function generate(g, env, seed, D) {
-    const rnd = C.mulberry32(C.hash32('graph:' + g.kind, g.seed !== undefined ? g.seed : seed));
+    const rnd = C.rng(g.seed !== undefined ? g.seed : seed, 'graph:' + g.kind);
     const N = Math.min(genCount(g), MAX_N), ids = genIds(g, N), E = [], xy = null;
     const add = (u, v) => { if (E.length < MAX_M) E.push({ u, v }); else D.add('size'); };
     let p = g.p === undefined ? 0 : C.cx(g.p)(env);
@@ -19164,7 +19793,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
   // label propagation (Raghavan, Albert & Kumara 2007, Phys. Rev. E 76:036106): asynchronous, seeded order, ties by the seeded draw
   function algLabelProp(G, T, run, seed) {
-    const n = G.n, rnd = C.mulberry32(C.hash32('graph:lpa', run.seed !== undefined ? run.seed : seed)), lab = Int32Array.from({ length: n }, (_, i) => i);
+    const n = G.n, rnd = C.rng(run.seed !== undefined ? run.seed : seed, 'graph:lpa'), lab = Int32Array.from({ length: n }, (_, i) => i);
     let it = 0;
     for (; it < 100; it++) {
       const ord = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [ord[i], ord[j]] = [ord[j], ord[i]]; }
@@ -19359,7 +19988,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const G = makeGraph(ids, edges, directed);
     if (isObj(m.graph)) m.graph.nodes.forEach((nd, i) => { if (nd.x !== undefined) { G.X[i] = C.cx(nd.x)(env); G.Y[i] = C.cx(nd.y)(env); given = true; } if (nd.label) G.lab[i] = nd.label; });
     G.hasXY = given && m.graph.nodes.every(nd => nd.x !== undefined);
-    layout(G, m.layout || 'auto', spec, C.mulberry32(C.hash32('graph:layout', seed)), g);
+    layout(G, m.layout || 'auto', spec, C.rng(seed, 'graph:layout'), g);
     for (let u = 0; u < G.n; u++) if (!Number.isFinite(G.X[u]) || !Number.isFinite(G.Y[u])) { const a = PI / 2 - 2 * PI * u / Math.max(1, G.n); G.X[u] = cos(a); G.Y[u] = sin(a); }
     if (!G.n) D.add('empty'); else if (G.n === 1) D.add('single-node');
     if (G.E.some(e => e.u === e.v)) D.add('self-loop');
@@ -19479,7 +20108,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
 
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibGraphModule, 'NoemaLibGraph');
+  engine.workerSource = C.workerSource(noemaLibGraphModule, 'NoemaLibGraph', { kit: true });
   root.NoemaLibGraph = Object.freeze({
     table: { model: MODEL_T, outputs: { scalar: SCALARS, series: SERIES, scene: ['drawing'] }, fields: { node: 'ref', code: 'enum:' + CODES.join('|'), labels: 'enum:' + LABELS.join('|') } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
@@ -21914,25 +22543,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
   // complete elliptic integral of the first kind K(k) by the arithmetic–geometric mean (DLMF 19.8.5)
   function ellipK(k) { if (!(abs(k) < 1)) return Infinity; let a = 1, b = sqrt(1 - k * k); for (let i = 0; i < 40 && abs(a - b) > 1e-16 * a; i++) { const an = (a + b) / 2; b = sqrt(a * b); a = an; } return PI / (2 * a); }
-  // a root of g on [a, b] (g(a), g(b) of opposite signs) by Brent's method (Brent 1973, ch. 4)
-  function brent(g, a, b, tol) {
-    let fa = g(a), fb = g(b); if (!(fa * fb <= 0)) return NaN;
-    let c = a, fc = fa, d = b - a, e = d;
-    for (let it = 0; it < 200; it++) {
-      if (fb * fc > 0) { c = a; fc = fa; d = b - a; e = d; }
-      if (abs(fc) < abs(fb)) { a = b; b = c; c = a; fa = fb; fb = fc; fc = fa; }
-      const tl = 2 * EPS * abs(b) + (tol || 1e-15), m = (c - b) / 2;
-      if (abs(m) <= tl || fb === 0) return b;
-      if (abs(e) >= tl && abs(fa) > abs(fb)) {
-        let p, q, r; const s = fb / fa;
-        if (a === c) { p = 2 * m * s; q = 1 - s; } else { q = fa / fc; r = fb / fc; p = s * (2 * m * q * (q - r) - (b - a) * (r - 1)); q = (q - 1) * (r - 1) * (s - 1); }
-        if (p > 0) q = -q; else p = -p;
-        if (2 * p < Math.min(3 * m * q - abs(tl * q), abs(e * q))) { e = d; d = p / q; } else { d = m; e = d; }
-      } else { d = m; e = d; }
-      a = b; fa = fb; b += abs(d) > tl ? d : (m > 0 ? tl : -tl); fb = g(b);
-    }
-    return b;
-  }
+  // a root of g on [a, b] (g(a), g(b) of opposite signs) by Brent's method (Brent 1973, ch. 4): the kernel's (NoemaSimKit.brent)
+  const brent = (g, a, b, tol) => C.kit().brent(g, a, b, tol);
   // SIR final size: s∞ = s0·exp(−R0·(1 − r0 − s∞)) (Kermack & McKendrick 1927; Keeling & Rohani 2008 §2.1.3), fractions of N
   function sirFinal(R0, s0, r0) {
     if (!(R0 > 0 && s0 >= 0)) return NaN;
@@ -23160,7 +23772,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     },
   };
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
-  engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
+  engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE', { kit: true });
   root.NoemaLibODE = Object.freeze({
     table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: { var: 'name', stat: 'enum:' + C.STATS.join('|'), t: 'numx', event: 'id', nth: 'int:-2000:2000', index: 'int:0:63', k: 'int:0:12', name: 'expr', code: 'enum:' + CODES.join('|'), x: 'name', y: 'name' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
@@ -23200,12 +23812,12 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
      rand       randomized algorithms (Motwani–Raghavan; Mitzenmacher–Upfal): amplification, quicksort/quickselect, Karger,
                 Freivalds, Fermat/Miller–Rabin, rounding, balls in bins, Bloom, Count-Min, HyperLogLog, reservoir sampling, cover
                 times, 2-SAT walks, tail bounds vs exact tails, skip lists, treaps, Monte Carlo integration
-   The later modes draw their randomness from NoemaSimKit streams (46_lib_simkit.js, MRG32k3a), the earlier ones from the core's
-   mulberry32 (unchanged, so their seeded results stay as they were).
+   Every mode draws its randomness from NoemaSimKit streams (46_lib_simkit.js, MRG32k3a; one stream per purpose — C.rng(seed, name)),
+   since the kernel migration of 2026-11-07 the earlier modes too (their seeded numbers changed then, not their laws).
    The special functions are written here with their sources beside them (lgamma, Loader's saddle point, the regularised incomplete
    gamma and beta functions, AS 241, AS 243). Pure, bounded, deterministic JS: no DOM, no network, no clock; the transcendental
    functions are NoemaExpr's fdlibm ports (never the platform's Math.* except sqrt, floor and the IEEE-exact operations); seeded
-   randomness only (the core's mulberry32). A value outside a method's validity range is never a silent wrong number: it is NaN or
+   randomness only (the kernel's streams). A value outside a method's validity range is never a silent wrong number: it is NaN or
    Infinity with an issue counted (outputs issue.<code>). */
 (function noemaLibProbModule(root) {
   /* i18n-ignore-start */   // code, not text: only codes, numbers and the model's own state names leave this module
@@ -24409,7 +25021,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const n = g(m, 'n', 10000), conf = g(m, 'conf', 0.95);
     if (Ds.some(d => !d) || !(Number.isInteger(n) && n >= 1 && n <= 200000) || !(conf > 0 && conf < 1)) { I.add('param'); return { o, sr, sc: {} }; }
     const f = (prepared && prepared.fns.get(m.expr)) || C.cx(m.expr), E = Object.assign({}, env);
-    const r = C.mulberry32(C.hash32('prob:mc', seed)), z = qnorm(0.5 + conf / 2);
+    const r = C.rng(seed, 'prob:mc'), z = qnorm(0.5 + conf / 2);
     const vals = new Float64Array(n); let cnt = 0, nan = 0, M = 0, S = 0, ind = true;
     const ck = checkpoints(n), runN = [], runMean = [], runLo = [], runHi = []; let ci = 0;
     for (let i = 1; i <= n; i++) {
@@ -24452,7 +25064,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const D = mkDist(m.parent, R, I), n = g(m, 'size'), reps = g(m, 'reps', 1000), stat = m.stat || 'mean';
     if (!D || !(Number.isInteger(n) && n >= 1 && n <= 10000) || !(Number.isInteger(reps) && reps >= 1 && reps <= 10000)) { I.add('param'); return { o, sr, sc: {} }; }
     if (n * reps > 1e6) { I.add('budget'); return { o, sr, sc: {} }; }
-    const r = C.mulberry32(C.hash32('prob:sampling', seed)), buf = new Float64Array(n), st = new Float64Array(reps);
+    const r = C.rng(seed, 'prob:sampling'), buf = new Float64Array(n), st = new Float64Array(reps);
     const ck = checkpoints(n * reps); let ci = 0, tot = 0, run = 0; const runN = [], runMean = [];
     for (let k = 0; k < reps; k++) {
       for (let i = 0; i < n; i++) {
@@ -25050,7 +25662,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       if (!(Number.isInteger(M) && M >= 1 && M <= 1000 && Number.isInteger(M0) && M0 >= 0 && M0 <= M && fin(ef) && Number.isInteger(reps) && reps >= 1 && reps <= 2000)) I.add('param');
       else if (M * reps > 2e6) I.add('budget');
       else {
-        const r = C.mulberry32(C.hash32('prob:multi', m.sim.seed !== undefined ? m.sim.seed : seed));
+        const r = C.rng(m.sim.seed !== undefined ? m.sim.seed : seed, 'prob:multi');
         let fw = 0, fd = 0, pw = 0, fwr = 0, fdr = 0;
         const p = new Array(M);
         for (let k = 0; k < reps; k++) {
@@ -25205,7 +25817,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   /* ===================================================================================================================== */
   function runWalk(m, R, I, seed) {
     const g = getter(R), o = {}, sr = {}, sc = {}, out = { o, sr, sc };
-    const r = C.mulberry32(C.hash32('prob:walk', seed)), kind = m.kind;
+    const r = C.rng(seed, 'prob:walk'), kind = m.kind;
     const isI = (v, a, b) => Number.isInteger(v) && v >= a && v <= b;
     if (kind === 'galton-watson') {
       let G, dG, mean, pk = null;
@@ -25360,7 +25972,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const corr = (a, b) => { const n = a.length, ma = sum(a) / n, mb = sum(b) / n; let sab = 0, saa = 0, sbb = 0; for (let i = 0; i < n; i++) { sab += (a[i] - ma) * (b[i] - mb); saa += (a[i] - ma) * (a[i] - ma); sbb += (b[i] - mb) * (b[i] - mb); } return sab / sqrt(saa * sbb); };
     const T = (a, b) => (two ? sum(a) / a.length - sum(b) / b.length : pair ? corr(a, b) : S1(a));
     const est = T(X, Y); o.estimate = est; o.B = B;
-    const r = C.mulberry32(C.hash32('prob:bootstrap', seed)), n1 = X.length, n2 = Y ? Y.length : 0;
+    const r = C.rng(seed, 'prob:bootstrap'), n1 = X.length, n2 = Y ? Y.length : 0;
     const bs = new Float64Array(B), xa = new Array(n1), ya = new Array(two ? n2 : pair ? n1 : 0);
     for (let k = 0; k < B; k++) {
       if (pair) { for (let i = 0; i < n1; i++) { const j = floor(r() * n1); xa[i] = X[j]; ya[i] = Y[j]; } }
@@ -25405,7 +26017,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   /** a named NoemaSimKit stream (L'Ecuyer's MRG32k3a, 46_lib_simkit.js) — the randomness of the later modes; null and the code
       no-kit when the kit is not loaded (the result is then NaN, never another generator's numbers) */
   function kitStream(seed, name, I) {
-    const K = root.NoemaSimKit;
+    const K = C.kit();
     if (!K || typeof K.stream !== 'function') { I.add('no-kit'); return null; }
     return K.stream(seed >>> 0, 'prob.' + name);
   }
@@ -26645,7 +27257,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   /** the Worker source: NoemaExpr, the core, NoemaSimKit (when loaded: the streams of the later modes), then this module */
   Object.defineProperty(engine, 'workerSource', { enumerable: true, get() {
     const NX = root.NoemaExpr, nx = NX && typeof NX.source === 'function' ? NX.source() : '';
-    const sk = root.NoemaSimKit && typeof root.NoemaSimKit.source === 'function' ? root.NoemaSimKit.source() : '';
+    const K = C.kit(), sk = K ? K.source() : '';
     return nx + '\n;' + C.source() + '\n;' + sk + '\n;(' + noemaLibProbModule.toString() + ')(self);\nself.noemaEngine = self.NoemaLibProb.simEngine;';
   } });
   const lawOf = (o, env) => { const I = issueBag(); NOTE = I; const D = mkDist(o, resolver(null, env || {}), I); return D; };
@@ -28917,6 +29529,13 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
      stop its growth after an onset delay; fluids/blood add volume (crystalloid 40 % retained); noradrenaline raises SVR; oxygen sets
      FiO2; PaO2 from the shunt equation (med@1's Severinghaus curve); lactate rises when DO2 falls below a critical delivery. */
   const VDEF = { essential: 0.3, timely: 0.25, safety: 0.2, efficiency: 0.1, order: 0.05, calib: 0.1 };
+  /** the arterial PO₂ whose O₂ content is ca (content is monotone in PO₂): Brent's root (NoemaSimKit.brent; Brent 1973 ch. 4) on
+      [0, P_A]; a content outside the bracket gives its nearer end. FALLBACK without the kernel: 40 bisections */
+  function pao2Of(content, sev, hb, ca, pA) {
+    const g = p => content(hb, sev(p), p) - ca, K = C.kit();
+    if (K) { const g0 = g(0), g1 = g(pA); if (!(g0 < 0)) return 0; if (!(g1 > 0)) return pA; const r = K.brent(g, 0, pA, 1e-10, g0, g1); if (fin(r)) return r; }
+    let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (g(mid) < 0) lo = mid; else hi = mid; } return (lo + hi) / 2;
+  }
   function runVp(m, F, env, out, codes, seed) {
     const v = m.vp, code = c => codes.vp.add(c), Mx = MED();
     if (!Mx) { code('incomplete'); return null; }
@@ -28938,7 +29557,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     // the physiology, minute by minute (internal step 0.1 min)
     const Vn = 70 * W, Vu = 0.7 * Vn, SVn = W, HRn = 72, SVRn = 90 / (SVn * HRn / 1000), Cart = 1.4 * W / 70, crit = 4.5 * W;
     let V = Vn * vol0, RBC = hb0 * V, B = B0, Lac = 1, HR = HRn, sv = 1, bleeding = bleed > 0, hypo = 0, crash = 0, died = NaN;
-    const rnd = C.mulberry32(C.hash32('vp', seed || 1)), noise = v.noise === true;
+    const rnd = C.rng(seed || 1, 'vp'), noise = v.noise === true;
     const S = {}; for (const k of ['t', ...VARS]) S[k] = [];
     let minMap = Infinity, maxLac = -Infinity;
     const dt = 0.1;
@@ -28953,11 +29572,11 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const pf = clamp((V - Vu) / (Vn - Vu), 0, 2.5), SV = SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (HR - 150) / 100));
       const vfac = (1 - 0.55 * B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = SVRn * sv * vfac, CO = Math.max(0, SV * HR / 1000), MAP = fin(died) ? 0 : CO * SVR;
       const hb = RBC / V, shunt = clamp(shunt0 + lungK * B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
-      let pao2 = 0; { let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (content(hb, sev(mid), mid) < ca) lo = mid; else hi = mid; } pao2 = (lo + hi) / 2; }
+      const pao2 = pao2Of(content, sev, hb, ca, pA);
       const sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * B;
       const RR = clamp(14 + 10 * B + 1.2 * Math.max(0, Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
       if (k % 10 === 0) {   // a minute: record (noise only on the shown vitals)
-        const nz = s => (noise ? s * C.gauss(rnd) : 0), dead = fin(died);
+        const nz = s => (noise ? s * C.normal(rnd) : 0), dead = fin(died);
         const rec = { hr: dead ? 0 : HR + nz(2), map: MAP + (dead ? 0 : nz(2)), spo2: dead ? 0 : clamp(100 * sat + nz(1), 0, 100), rr: dead ? 0 : RR + nz(1), lactate: Lac, temp: T, volume: V, burden: B, pao2, hb };
         const pp = dead ? 0 : SV / Cart; rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
         rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: MAP < 60 || sat < 0.85 ? 1 : 0, temp: T, scale2: 0 }).score;
@@ -29103,8 +29722,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         const dead = S.died !== null, pf = clamp((S.V - S.Vu) / (S.Vn - S.Vu), 0, 2.5), SV = S.SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (S.HR - 150) / 100));
         const vfac = (1 - 0.55 * S.B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = S.SVRn * S.sv * vfac, CO = Math.max(0, SV * S.HR / 1000), MAP = dead ? 0 : CO * SVR;
         const hb = S.RBC / S.V, shunt = clamp(shunt0 + lungK * S.B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
-        let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (content(hb, sev(mid), mid) < ca) lo = mid; else hi = mid; }
-        const pao2 = (lo + hi) / 2, sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * S.B;
+        const pao2 = pao2Of(content, sev, hb, ca, pA), sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * S.B;
         const RR = clamp(14 + 10 * S.B + 1.2 * Math.max(0, S.Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
         if (j === n || j === 0) {
           const pp = dead ? 0 : SV / S.Cart;
@@ -29149,7 +29767,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   /* the Worker gets med@1 too (its calculators are this engine's physiology): NoemaExpr + the core + med + clinic */
   Object.defineProperty(engine, 'workerSource', { enumerable: true, get() {
     const nx = root.NoemaExpr && typeof root.NoemaExpr.source === 'function' ? root.NoemaExpr.source() : '', medSrc = root.NoemaLibMed && root.NoemaLibMed.moduleSource ? root.NoemaLibMed.moduleSource() : '';
-    return nx + '\n;' + C.source() + '\n' + (medSrc ? ';(' + medSrc + ')(self);\n' : '') + ';(' + noemaLibClinicModule.toString() + ')(self);\nself.noemaEngine = self.NoemaLibClinic.simEngine;';
+    const K = C.kit();
+    return nx + '\n;' + C.source() + '\n' + (K ? ';' + K.source() + '\n' : '') + (medSrc ? ';(' + medSrc + ')(self);\n' : '') + ';(' + noemaLibClinicModule.toString() + ')(self);\nself.noemaEngine = self.NoemaLibClinic.simEngine;';
   } });
   /** evaluate(model, inputs) → every computed value (tests, authoring tools) */
   function evaluate(model, inputs, outputs, seed) { const spec = { model, outputs: outputs || [] }; return run(spec, inputs || {}, { seed }); }
@@ -30561,6 +31180,10 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return k;
   }
   const expo = (rand, rate) => -Math.log(1 - rand()) / rate;
+  /** the variates of a stream: the kernel's (NoemaSimKit stream: binomial and Poisson by inversion, one uniform each — CRN-friendly;
+      exponential by inversion), else this module's samplers on a bare uniform function (FALLBACK) */
+  const sampler = r => (r && typeof r.binomial === 'function' ? { binomial: (n, p) => r.binomial(n, p), poisson: l => (l > 1e5 ? NaN : r.poisson(l)), exp: rate => r.exp(rate) }
+    : { binomial: (n, p) => binomial(r, n, p), poisson: l => poisson(r, l), exp: rate => expo(r, rate) });
 
   /* ---------- the model tables (the same as tools/lib_genetics.py) ---------- */
   const LOCUS = { id: 'name!', alleles: { $req: true, $list: 'id', min: 1, max: 6 }, dominance: 'enum:complete|incomplete|codominant', codominant: { $list: { $list: 'id', min: 2, max: 2 }, max: 6 }, chrom: 'enum:auto|X|Z', lethal: { $list: { $obj: { genotype: { $req: true, $list: 'id', min: 1, max: 2 }, viability: 'numx' } }, max: 8 } };
@@ -31202,7 +31825,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     if (codes.length) return { out: { valid: 0 }, codes, ARG: none };
     const copies = proc === 'moran' ? N : 2 * N, i0 = Math.round(p0 * copies);
     if (Math.abs(i0 / copies - p0) > 1e-9) codes.push('p0-rounded');
-    const rand = C.mulberry32(C.hash32('genetics-drift', seed >>> 0));
+    const rand = C.rng(seed >>> 0, 'genetics-drift'), draw = sampler(rand);
     const meanP = new Array(G + 1).fill(0), meanH = new Array(G + 1).fill(0), keep = Math.min(reps, 20), trace = [];
     let fixed = 0, lost = 0, tfSum = 0;
     const finals = [];
@@ -31213,7 +31836,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         if (proc === 'wf') {   // selection, mutation, then binomial sampling of 2N gene copies
           const p = i / copies, q = 1 - p, wAA = 1 + s, wAa = 1 + h * s, wb = p * p * wAA + 2 * p * q * wAa + q * q;
           let ps = (p * p * wAA + p * q * wAa) / wb; ps = ps * (1 - mu) + (1 - ps) * nu;
-          i = binomial(rand, copies, Math.min(1, Math.max(0, ps)));
+          i = draw.binomial(copies, Math.min(1, Math.max(0, ps)));
         } else {
           for (let k = 0; k < N; k++) {   // one birth (by fitness; the offspring may mutate) and one death (uniform) per step
             if ((i === 0 && nu === 0) || (i === N && mu === 0)) break;
@@ -31319,10 +31942,10 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   }
   function coalTree(rand, n, Ne, mu) {
     // leaves 0..n−1 at time 0; with k lineages the waiting time is Exp(C(k,2)) in units of 2Ne generations (Kingman 1982; Hudson 1983)
-    const nodes = []; for (let i = 0; i < n; i++) nodes.push({ t: 0, kids: [], size: 1 });
+    const nodes = [], draw = sampler(rand); for (let i = 0; i < n; i++) nodes.push({ t: 0, kids: [], size: 1 });
     let live = nodes.map((_, i) => i), t = 0;
     for (let k = n; k > 1; k--) {
-      t += expo(rand, k * (k - 1) / 2) * 2 * Ne;
+      t += draw.exp(k * (k - 1) / 2) * 2 * Ne;
       const a = Math.floor(rand() * live.length); let b = Math.floor(rand() * (live.length - 1)); if (b >= a) b++;
       const na = live[a], nb = live[b];
       nodes.push({ t, kids: [na, nb], size: nodes[na].size + nodes[nb].size });
@@ -31331,7 +31954,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     let total = 0, S2 = 0, pi = 0; const sfs = new Array(n).fill(0);
     for (const nd of nodes) for (const c of nd.kids) {
       const len = nd.t - nodes[c].t; total += len;
-      if (mu > 0) { const k = poisson(rand, mu * len); S2 += k; sfs[nodes[c].size] += k; pi += k * nodes[c].size * (n - nodes[c].size); }
+      if (mu > 0) { const k = draw.poisson(mu * len); S2 += k; sfs[nodes[c].size] += k; pi += k * nodes[c].size * (n - nodes[c].size); }
     }
     return { nodes, tmrca: t, total, S: S2, pi: pi / (n * (n - 1) / 2), sfs };
   }
@@ -31342,7 +31965,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     if (!(Ne > 0) || !(mu >= 0) || !(4 * Ne * mu <= 1000)) codes.push('param-range');
     if (!(reps >= 1) || reps * n > BUDGET) codes.push('budget');
     if (codes.length) return { out: { valid: 0 }, codes };
-    const rand = C.mulberry32(C.hash32('genetics-coalescent', seed >>> 0)), a = aN(n), theta = 4 * Ne * mu;
+    const rand = C.rng(seed >>> 0, 'genetics-coalescent'), a = aN(n), theta = 4 * Ne * mu;
     out.aN = a; out.eTmrca = 4 * Ne * (1 - 1 / n); out.eTotal = 4 * Ne * a; out.eS = theta * a;
     let sT = 0, sL = 0, sS = 0, sD = 0, nD = 0; const sfs = new Array(n).fill(0); let first = null;
     for (let r = 0; r < reps; r++) {
@@ -31426,7 +32049,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       if (!(N >= 4 && N <= 2000 && L >= 1 && L <= 200 && SG >= 1 && fr > 0 && fr <= 1 && hh > 0 && hh <= 1)) codes.push('sim-range');
       else if (N * L * SG > BUDGET) codes.push('budget');
       else {
-        const rand = C.mulberry32(C.hash32('genetics-quant', seed >>> 0));
+        const rand = C.rng(seed >>> 0, 'genetics-quant');
         let gen = []; for (let k = 0; k < N; k++) { const g = new Int8Array(2 * L); for (let j = 0; j < 2 * L; j++) g[j] = rand() < 0.5 ? 1 : 0; gen.push(g); }
         const gv = g => { let s2 = 0; for (let j = 0; j < g.length; j++) s2 += g[j]; return (s2 - L) / 2; };
         const VE = L / 8 * (1 - hh) / hh, sdE = Math.sqrt(VE);   // V_A at p = ½: 2pq·α² per locus = 1/8
@@ -31434,7 +32057,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         const stat = () => { const v = gen.map(gv), mn = v.reduce((x, y) => x + y, 0) / N; means.push(mn); vas.push(v.reduce((x, y) => x + (y - mn) * (y - mn), 0) / N); let c1 = 0; for (const g of gen) for (let j = 0; j < 2 * L; j++) c1 += g[j]; pfs.push(c1 / (2 * L * N)); };
         stat();
         for (let t2 = 0; t2 < SG; t2++) {
-          const ph = gen.map((g, k) => ({ k, z: gv(g) + sdE * C.gauss(rand) })).sort((x, y) => y.z - x.z || x.k - y.k);
+          const ph = gen.map((g, k) => ({ k, z: gv(g) + sdE * C.normal(rand) })).sort((x, y) => y.z - x.z || x.k - y.k);
           const nSel = Math.max(2, Math.round(fr * N)), par = ph.slice(0, nSel).map(x => gen[x.k]), nx = [];
           for (let k = 0; k < N; k++) {
             const a1 = Math.floor(rand() * nSel); let b1 = Math.floor(rand() * (nSel - 1)); if (b1 >= a1) b1++;
@@ -31478,6 +32101,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
      stream lives in the state (a plain number), so a snapshot repeats the same draws. Per step: meanP, meanH, fixed, lost, segregating
      (now), rep (one sample of replicate arg), t (the generation), meanPs / meanHs (one sample each), uTheory and the neutral times at the
      current inputs. Every other mode is recomputed at each step from the current inputs. */
+  /* the stepper's stream is plain data in its state (snapshot = copy): the kernel stream's 6 numbers, or (FALLBACK) a mulberry32 word */
+  function stepRng0(seed) { const K = C.kit(); return K ? K.stream(seed >>> 0, 'genetics-drift-step').state() : C.hash32('genetics-drift-step', seed >>> 0); }
+  function stepRng(ns) { const K = C.kit(); return Array.isArray(ns.rs) && K ? K.stream(0, '', { state: ns.rs }) : null; }
   function dRand(st) { let a = st.rs = (st.rs + 0x6D2B79F5) >>> 0, t = Math.imul(a ^ (a >>> 15), a | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
   const stepper = {
     init(model, inputs, sc) {
@@ -31486,7 +32112,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const proc = m.process || 'wf', N = Math.round(num(m.N, inputs, NaN)), p0 = num(m.p0, inputs, NaN), reps = Math.round(num(m.reps, inputs, 20));
       if (!(N >= 1 && N <= 1e6) || !(p0 >= 0 && p0 <= 1) || !(reps >= 1 && reps <= 10000)) return null;
       const copies = proc === 'moran' ? N : 2 * N, i0 = Math.round(p0 * copies);
-      return { t0: sc.t0 || 0, g: 0, proc, copies, i: new Array(reps).fill(i0), tFix: new Array(reps).fill(-1), H0: 2 * (i0 / copies) * (1 - i0 / copies), dec: 0, rs: C.hash32('genetics-drift-step', sc.seed >>> 0) };
+      return { t0: sc.t0 || 0, g: 0, proc, copies, i: new Array(reps).fill(i0), tFix: new Array(reps).fill(-1), H0: 2 * (i0 / copies) * (1 - i0 / copies), dec: 0, rs: stepRng0(sc.seed) };
     },
     step(st, inputs, t, dt, sc) {
       const m = sc.spec.model, outs = Array.isArray(sc.spec.outputs) ? sc.spec.outputs : [];
@@ -31497,20 +32123,22 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       if (copies !== ns.copies) { ns.i = ns.i.map(i => Math.round(i / ns.copies * copies)); ns.copies = copies; }   // a new size: the same frequencies
       const target = Math.round(t + dt - ns.t0), reps = ns.i.length;
       if ((target - ns.g) * reps * (ns.proc === 'moran' ? N : 1) > BUDGET) return { state: st, out: {}, dt, fail: 'budget' };
+      const R = stepRng(ns), u = R || (() => dRand(ns)), dr = sampler(u);
       for (; ns.g < target; ns.g++) for (let r = 0; r < reps; r++) {
         let i = ns.i[r];
         if (ns.proc === 'wf') {
           const p = i / copies, q = 1 - p, wAA = 1 + s, wAa = 1 + h * s, wb = p * p * wAA + 2 * p * q * wAa + q * q;
           let ps = (p * p * wAA + p * q * wAa) / wb; ps = ps * (1 - mu) + (1 - ps) * nu;
-          i = binomial(() => dRand(ns), copies, Math.min(1, Math.max(0, ps)));
+          i = dr.binomial(copies, Math.min(1, Math.max(0, ps)));
         } else for (let k = 0; k < N; k++) {
           if ((i === 0 && nu === 0) || (i === N && mu === 0)) break;
-          const r1 = dRand(ns), r2 = dRand(ns), r3 = dRand(ns), fA = (1 + s) * i, tot = fA + (N - i);
+          const r1 = u(), r2 = u(), r3 = u(), fA = (1 + s) * i, tot = fA + (N - i);
           let birthA = r1 * tot < fA; if (birthA ? r3 < mu : r3 < nu) birthA = !birthA;
           i += (birthA ? 1 : 0) - (r2 * N < i ? 1 : 0);
         }
         ns.i[r] = i; if (i === copies && ns.tFix[r] < 0) ns.tFix[r] = ns.g + 1;
       }
+      if (R) ns.rs = R.state();
       const ps = ns.i.map(i => i / copies), fixed = ps.filter(p => p === 1).length / reps, lost = ps.filter(p => p === 0).length / reps;
       const meanP = ps.reduce((a, b) => a + b, 0) / reps, meanH = ps.reduce((a, p) => a + 2 * p * (1 - p), 0) / reps;
       const p0 = num(m.p0, inputs, NaN), dec = ns.proc === 'wf' ? 1 - 1 / (2 * N) : Math.pow(1 - 2 / (N * N), N), Ne4 = ns.proc === 'wf' ? 4 * N : N;
@@ -31522,7 +32150,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     },
   };
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true, stepper });
-  engine.workerSource = C.workerSource(noemaLibGeneticsModule, 'NoemaLibGenetics');
+  engine.workerSource = C.workerSource(noemaLibGeneticsModule, 'NoemaLibGenetics', { kit: true });
   root.NoemaLibGenetics = Object.freeze({
     table: { model: { $by: 'mode', $cases: TABLES }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(m => [m, Object.keys(OUTS[m]).reduce((a, k) => ((a[OUTS[m][k][0]] = a[OUTS[m][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'numx' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, MODES, TABLES, OUTS, EPI, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, stepper,
@@ -31603,12 +32231,14 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const SCH_T = { id: 'id!', scheme: 'enum:' + Object.keys(SCHEMES).join('|') + '!', if: lits(16), then: 'expr!', rank: 'fin', cqs: { $list: { $obj: CQ_T }, max: 12 }, on: 'numx', label: 'key' };
   const CARG_T = { id: 'id!', then: 'expr!', if: lits(16), unless: lits(16), weight: 'numx', on: 'numx', label: 'key' };
   const STD_T = { lit: 'expr!', ps: 'enum:' + PS.join('|') + '!' };
-  const POS_T = { kind: 'enum:' + HOH.join('|') + '!', holder: 'id!', other: 'id!', act: 'expr!', on: 'numx' };
+  const POS_T = { kind: 'enum:' + HOH.join('|') + '!', holder: 'id!', other: 'id!', act: 'expr!', passive: 'bool', on: 'numx' };
   const ASK_T = { kind: 'enum:' + HOH.join('|') + '!', holder: 'id!', other: 'id!', act: 'expr!' };
   const ISSUE_T = { id: 'id!', p: 'numx', prior: 'numx', lr: { $list: 'numx', max: 32 }, standard: 'enum:' + STANDARDS.join('|'), threshold: 'numx', burden: 'enum:claimant|defendant', presumed: 'ref', mode: 'enum:thayer|morgan', rebut: 'numx', label: 'key' };
   const COST_T = { fp: 'numx!', fn: 'numx!' };
   const FACTOR_T = { id: 'id!', side: 'enum:p|d!', label: 'key' };
-  const CASE_T = { id: 'id!', factors: { $list: 'ref', max: 64 }, outcome: 'enum:p|d!', reason: { $list: 'ref', max: 64 }, label: 'key' };
+  const VAL_T = { dim: 'ref!', v: 'numx!' };
+  const DIM_T = { id: 'id!', side: 'enum:p|d!', label: 'key' };
+  const CASE_T = { id: 'id!', factors: { $list: 'ref', max: 64 }, values: { $list: { $obj: VAL_T }, max: 32 }, outcome: 'enum:p|d!', reason: { $list: 'ref', max: 64 }, label: 'key' };
   const PERIOD_T = { n: 'numx!', unit: 'enum:days|weeks|months|years|business!' };
   const TOLL_T = { from: 'expr!', to: 'expr!' };
   const EVENT_T = { kind: 'enum:offer|counteroffer|revocation|rejection|acceptance|lapse!', by: 'id', t: 'numx!', arrive: 'numx', terms: { $list: 'id', max: 32 }, on: 'numx' };
@@ -31635,14 +32265,14 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const MODEL_T = {
     task: 'enum:' + TASKS.join('|') + '!', query: 'expr',
     // rules · aspic · carneades
-    rules: { $list: { $obj: RULE_T }, max: MAX_RULES }, sup: { $list: { $obj: SUP_T }, max: 400 }, order: { $list: 'enum:superior|specialis|posterior', max: 3 },
+    rules: { $list: { $obj: RULE_T }, max: MAX_RULES }, variant: 'enum:blocking|propagating', loops: 'enum:undecided|fail', sup: { $list: { $obj: SUP_T }, max: 400 }, order: { $list: 'enum:superior|specialis|posterior', max: 3 },
     facts: lits(200), toggles: { $list: { $obj: TOG_T }, max: 64 },
-    premises: { $list: { $obj: PREM_T }, max: 100 }, schemes: { $list: { $obj: SCH_T }, max: 40 }, link: 'enum:last|weakest', semantics: 'enum:grounded|preferred|stable|complete',
+    premises: { $list: { $obj: PREM_T }, max: 100 }, schemes: { $list: { $obj: SCH_T }, max: 40 }, link: 'enum:last|weakest', closure: 'enum:none|transposition', semantics: 'enum:grounded|preferred|stable|complete',
     args: { $list: { $obj: CARG_T }, max: 100 }, assume: lits(200), standards: { $list: { $obj: STD_T }, max: 100 }, alpha: 'numx', beta: 'numx', gamma: 'numx',
     // hohfeld · proof · cases
-    positions: { $list: { $obj: POS_T }, max: 100 }, ask: { $obj: ASK_T },
+    positions: { $list: { $obj: POS_T }, max: 100 }, ask: { $obj: ASK_T }, lindahl: { $obj: { agent: 'id!', atom: 'id!', other: 'id' } },
     issues: { $list: { $obj: ISSUE_T }, max: 32 }, claim: { $list: 'ref', max: 32 }, costs: { $obj: COST_T }, aggregate: 'enum:element|product',
-    factors: { $list: { $obj: FACTOR_T }, max: 64 }, cases: { $list: { $obj: CASE_T }, max: 100 }, side: 'enum:p|d', focus: 'ref', reasoning: 'enum:result|reason',
+    factors: { $list: { $obj: FACTOR_T }, max: 64 }, dimensions: { $list: { $obj: DIM_T }, max: 32 }, values: { $list: { $obj: VAL_T }, max: 32 }, cases: { $list: { $obj: CASE_T }, max: 100 }, side: 'enum:p|d', focus: 'ref', reasoning: 'enum:result|reason',
     // deadline · obligations
     start: 'expr', period: { $obj: PERIOD_T }, excludeStart: 'bool', roll: 'enum:next|previous|none', monthEnd: 'enum:last|next', weekend: { $list: 'int:0:6', max: 7 },
     holidays: lits(400), tolling: { $list: { $obj: TOLL_T }, max: 32 }, longstop: { $obj: PERIOD_T }, asOf: 'numx',
@@ -31664,13 +32294,13 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     norms: { $list: { $obj: NORM_T }, max: 200 }, trace: { $list: { $obj: STEP_T }, max: MAX_DAYS }, count: 'enum:calendar|business', horizon: 'int:1:2000',
     step: 'numx',
   };
-  const REQ = { rules: ['rules'], aspic: ['premises|rules|schemes'], carneades: ['args'], hohfeld: ['positions'], proof: ['issues'], cases: ['factors', 'cases'], deadline: ['start', 'period'],
+  const REQ = { rules: ['rules'], aspic: ['premises|rules|schemes'], carneades: ['args'], hohfeld: ['positions'], proof: ['issues'], cases: ['factors|dimensions', 'cases'], deadline: ['start', 'period'],
     contract: ['events'], damages: ['items|price'], crime: ['offences'], sentence: ['grid'], proportionality: ['weights'], vote: ['yes|voters'], citation: ['text'], shares: ['heirs', 'estate'], obligations: ['norms', 'trace'] };
   const TASK_OUT = {
-    rules: [['holds', 'definite', 'refuted', 'undecided', 'fired', 'defeated', 'blocked', 'conclusions', 'status'], ['status']],
+    rules: [['holds', 'definite', 'refuted', 'undecided', 'supported', 'fired', 'defeated', 'blocked', 'conclusions', 'status'], ['status']],
     aspic: [['accepted', 'credulous', 'arguments', 'attacks', 'defeats', 'extensions', 'inCount', 'status'], ['labels']],
     carneades: [['acceptable', 'negation', 'applicable', 'arguments', 'status'], ['applicable']],
-    hohfeld: [['holds', 'contradictions', 'conflicts', 'positions', 'derived'], []],
+    hohfeld: [['holds', 'contradictions', 'conflicts', 'positions', 'derived', 'lindahl', 'lindahlOther', 'joint', 'jointCount'], ['joint']],
     proof: [['established', 'claim', 'posterior', 'threshold', 'product', 'winner'], ['posteriors']],
     cases: [['forced', 'permissible', 'consistent', 'onPoint', 'best', 'mostOnPoint', 'shared', 'distinctions', 'binding'], ['shared', 'binding']],
     deadline: [['end', 'endY', 'endM', 'endD', 'weekday', 'days', 'businessDays', 'extended', 'expired', 'remaining', 'tolled', 'longstopEnd'], []],
@@ -31691,7 +32321,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const CODES = ['inconsistent', 'undecided', 'unresolved', 'budget', 'no-stable', 'contradiction', 'conflict', 'conjunction', 'shifted', 'probability',
     'no-precedent', 'month-end', 'rolled', 'tolled', 'longstop', 'expired', 'counteroffer', 'revoked', 'lapsed', 'rejected', 'in-transit', 'late', 'mirror',
     'minor', 'unforeseeable', 'avoidable', 'penalty', 'negative', 'default-mind', 'strict-liability', 'causation', 'defence', 'grid-range', 'clamped',
-    'stalemate', 'scale', 'no-quorum', 'tie', 'casting', 'blocking', 'no-match', 'awl', 'radd', 'escheat', 'no-heirs', 'claims-short', 'parse', 'trace-truncated', 'weight', 'value'];
+    'stalemate', 'scale', 'no-quorum', 'tie', 'casting', 'blocking', 'no-match', 'awl', 'radd', 'escheat', 'no-heirs', 'claims-short', 'parse', 'trace-truncated', 'weight', 'value', 'loop'];
 
   /* =====================================================================================================================
      2. Literals (through logic@1's parser), dates (proleptic Gregorian), citation templates */
@@ -31793,7 +32423,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     for (const [s, p] of litFields(m)) { const r = parseLit(s); if (!r.ok) E(r.code, p, r.msg); }
     // ids and references
     const rules = dupes(m.rules, 'model.rules', E, 'rule'), schemes = dupes(m.schemes, 'model.schemes', E, 'scheme');
-    for (const k of ['args', 'issues', 'factors', 'cases', 'elements', 'parties', 'items', 'offences', 'defences', 'adjust', 'alternatives', 'voters', 'patterns', 'heirs', 'norms']) dupes(m[k], 'model.' + k, E, k === 'args' ? 'argument' : k.replace(/ies$/, 'y').replace(/s$/, ''));
+    for (const k of ['args', 'issues', 'factors', 'dimensions', 'cases', 'elements', 'parties', 'items', 'offences', 'defences', 'adjust', 'alternatives', 'voters', 'patterns', 'heirs', 'norms']) dupes(m[k], 'model.' + k, E, k === 'args' ? 'argument' : k.replace(/ies$/, 'y').replace(/s$/, ''));
     if (Array.isArray(m.rules) && Array.isArray(m.schemes)) m.schemes.forEach((s, i) => { if (rules.has(s.id)) E('duplicate', `model.schemes[${i}].id`, `the id ${s.id} is a rule too`); });
     (m.sup || []).forEach((s, i) => { for (const f of ['win', 'lose']) if (!rules.has(s[f]) && !schemes.has(s[f])) E('ref', `model.sup[${i}].${f}`, 'not a rule of the model'); });
     if (task === 'aspic' || task === 'rules') (m.rules || []).forEach((r, i) => { if (task === 'aspic' && r.kind === 'defeater') E('value', `model.rules[${i}].kind`, 'aspic has strict and defeasible rules (a defeater is an undercutter: a rule that concludes ~<rule id>)'); });
@@ -31816,6 +32446,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       (m.facts || []).forEach((x, j) => { if (!fs.has(x)) E('ref', `model.facts[${j}]`, 'not a factor of the model'); });
       (m.toggles || []).forEach((x, j) => { if (!fs.has(x.lit)) E('ref', `model.toggles[${j}].lit`, 'not a factor of the model'); });
       if (m.focus !== undefined && !cs.has(m.focus)) E('ref', 'model.focus', 'not a case of the model');
+      const ds = idsOf(m.dimensions);
+      (m.cases || []).forEach((c, i) => (c.values || []).forEach((x, j) => { if (!ds.has(x.dim)) E('ref', `model.cases[${i}].values[${j}].dim`, 'not a dimension of the model'); }));
+      (m.values || []).forEach((x, j) => { if (!ds.has(x.dim)) E('ref', `model.values[${j}].dim`, 'not a dimension of the model'); });
     }
     if (task === 'deadline' || task === 'obligations') {
       if (m.start !== undefined && dayOf(m.start) === null) E('date', 'model.start', 'needs a date YYYY-MM-DD that exists (1600–2400)');
@@ -31846,6 +32479,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const people = new Set(); (m.positions || []).forEach(p => { people.add(p.holder); people.add(p.other); });
       (m.positions || []).forEach((p, i) => { if (p.holder === p.other) E('value', `model.positions[${i}].other`, 'a jural relation holds between two different persons'); });
       if (isObj(m.ask) && m.ask.holder === m.ask.other) E('value', 'model.ask.other', 'a jural relation holds between two different persons');
+      (m.positions || []).forEach((p, i) => { if (p.passive === true && typeof p.act === 'string' && (lit(p.act) || '').startsWith('~')) E('value', `model.positions[${i}].act`, 'a passive position names an atom (p, not ~p)'); });
+      if (isObj(m.lindahl) && m.lindahl.other === m.lindahl.agent) E('value', 'model.lindahl.other', 'needs a second agent');
     }
     const [SC, SE] = TASK_OUT[task];
     C.checkOutputs(spec, ID, KINDS, (o, at) => {
@@ -31966,32 +32601,71 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     }
     return { R, facts, sup };
   }
-  function defeasible(th, D) {
-    const { R, facts, sup } = th, U = new Set();
+  /* defeasible(th, D, opts): opts.variant 'blocking' (default: Antoniou et al. 2001) or 'propagating' (ambiguity propagation through the
+     support tags ±Σ: Antoniou, Billington, Governatori, Maher & Rock 2000, "A family of defeasible reasoning logics and its
+     implementation", ECAI; Antoniou et al. 2000 AAAI "A flexible framework"):
+       +Σq: +Δq, or some strict/defeasible r for q has every body literal +Σ and every s for ∼q is discarded (a body literal −∂) or not s > r
+       −Σq: −Δq, and every strict/defeasible r for q has a body literal −Σ or is beaten by an applicable (+∂ body) s for ∼q with s > r
+       +∂ / −∂ as in blocking, but an attacker is discarded only when it is unsupported (a body literal −Σ) and it counts against when it
+       is supported (every body literal +Σ).
+     opts.loops 'undecided' (default: the basic proof theory leaves positive loops undecided) or 'fail' (failure by looping, the
+     well-founded defeasible logics: Maier & Nute 2006, "Ambiguity propagating defeasible logic and the well-founded semantics", JELIA;
+     Billington 2008, "Propositional clausal defeasible logic", JELIA): after each fixpoint the greatest unfounded set of the undecided
+     literals (those with no rule whose body avoids both refuted literals and the set itself) is refuted (−Δ, −∂, −Σ), then the fixpoint
+     runs again, until nothing changes. */
+  function defeasible(th, D, opts) {
+    const { R, facts, sup } = th, U = new Set(), prop = opts && opts.variant === 'propagating', fail = opts && opts.loops === 'fail';
     for (const f of facts) { U.add(f); U.add(neg(f)); }
     for (const r of R) { U.add(r.head); U.add(neg(r.head)); for (const b of r.body) { U.add(b); U.add(neg(b)); } }
-    const pD = new Set(), mD = new Set(), pd = new Set(), md = new Set();
+    const pD = new Set(), mD = new Set(), pd = new Set(), md = new Set(), pS = new Set(), mS = new Set();
     const by = new Map([...U].map(q => [q, R.filter(r => r.head === q)]));
     const gt = (a, b) => sup.has(a.id + '>' + b.id);
-    for (let pass = 0, ch = true; ch && pass < 4 * U.size + 10; pass++) {
-      ch = false;
-      for (const q of U) {
-        const rs = by.get(q), st = rs.filter(r => r.kind === 'strict');
-        if (!pD.has(q) && (facts.has(q) || st.some(r => r.body.every(b => pD.has(b))))) { pD.add(q); ch = true; }
-        if (!mD.has(q) && !facts.has(q) && st.every(r => r.body.some(b => mD.has(b)))) { mD.add(q); ch = true; }
-      }
-      for (const q of U) {
-        const nq = neg(q), sd = by.get(q).filter(r => r.kind !== 'defeater'), att = by.get(nq);
-        const appl = r => r.body.every(b => pd.has(b)), disc = r => r.body.some(b => md.has(b));
-        if (!pd.has(q) && (pD.has(q) || (mD.has(nq) && sd.some(appl) && att.every(s => disc(s) || sd.some(t => appl(t) && gt(t, s)))))) { pd.add(q); ch = true; }
-        if (!md.has(q) && mD.has(q) && (pD.has(nq) || sd.every(disc) || att.some(s => appl(s) && sd.every(t => disc(t) || !gt(t, s))))) { md.add(q); ch = true; }
+    const sdOf = q => by.get(q).filter(r => r.kind !== 'defeater');
+    function fix() {
+      for (let pass = 0, ch = true; ch && pass < 6 * U.size + 10; pass++) {
+        ch = false;
+        for (const q of U) {
+          const st = by.get(q).filter(r => r.kind === 'strict');
+          if (!pD.has(q) && (facts.has(q) || st.some(r => r.body.every(b => pD.has(b))))) { pD.add(q); ch = true; }
+          if (!mD.has(q) && !facts.has(q) && st.every(r => r.body.some(b => mD.has(b)))) { mD.add(q); ch = true; }
+        }
+        for (const q of U) {
+          const nq = neg(q), sd = sdOf(q), att = by.get(nq);
+          const appl = r => r.body.every(b => pd.has(b)), disc = r => r.body.some(b => md.has(b));
+          if (prop) {
+            if (!pS.has(q) && (pD.has(q) || sd.some(r => r.body.every(b => pS.has(b)) && att.every(s => disc(s) || !gt(s, r))))) { pS.add(q); ch = true; }
+            if (!mS.has(q) && mD.has(q) && sd.every(r => r.body.some(b => mS.has(b)) || att.some(s => appl(s) && gt(s, r)))) { mS.add(q); ch = true; }
+            const unsup = s => s.body.some(b => mS.has(b)), sup_ = s => s.body.every(b => pS.has(b));
+            if (!pd.has(q) && (pD.has(q) || (mD.has(nq) && sd.some(appl) && att.every(s => unsup(s) || sd.some(t => appl(t) && gt(t, s)))))) { pd.add(q); ch = true; }
+            if (!md.has(q) && mD.has(q) && (pD.has(nq) || sd.every(disc) || att.some(s => sup_(s) && sd.every(t => disc(t) || !gt(t, s))))) { md.add(q); ch = true; }
+          } else {
+            if (!pd.has(q) && (pD.has(q) || (mD.has(nq) && sd.some(appl) && att.every(s => disc(s) || sd.some(t => appl(t) && gt(t, s)))))) { pd.add(q); ch = true; }
+            if (!md.has(q) && mD.has(q) && (pD.has(nq) || sd.every(disc) || att.some(s => appl(s) && sd.every(t => disc(t) || !gt(t, s))))) { md.add(q); ch = true; }
+          }
+        }
       }
     }
+    /** the greatest unfounded set among the literals that are neither proved nor refuted (founded: a fact, proved, or a rule whose body
+        avoids the refuted literals and the set) */
+    function unfounded(pos, negS, rulesOf, isFact) {
+      const W = new Set([...U].filter(q => !pos.has(q) && !negS.has(q)));
+      for (let ch = true, k = 0; ch && k < U.size + 2; k++) { ch = false; for (const q of [...W]) if (isFact(q) || rulesOf(q).some(r => r.body.every(b => !negS.has(b) && !W.has(b)))) { W.delete(q); ch = true; } }
+      return W;
+    }
+    fix();
+    if (fail) for (let round = 0; round < U.size + 2; round++) {
+      let added = 0;
+      for (const q of unfounded(pD, mD, q => by.get(q).filter(r => r.kind === 'strict'), q => facts.has(q))) { mD.add(q); added++; }
+      for (const q of unfounded(pd, md, sdOf, q => pD.has(q))) { md.add(q); added++; }
+      if (prop) for (const q of unfounded(pS, mS, sdOf, q => pD.has(q))) { mS.add(q); added++; }
+      if (!added) break;
+      D.add('loop'); fix();
+    }
     if ([...pD].some(q => pD.has(neg(q)))) D.add('inconsistent');
-    return { U, pD, mD, pd, md, by, gt };
+    return { U, pD, mD, pd, md, pS, mS, by, gt };
   }
   function runRules(m, env, D, S, SE, Rn) {
-    const th = buildTheory(m, env, D), X = defeasible(th, D), q = typeof m.query === 'string' ? lit(m.query) : null;
+    const th = buildTheory(m, env, D), X = defeasible(th, D, { variant: m.variant, loops: m.loops }), q = typeof m.query === 'string' ? lit(m.query) : null;
     const st = [], user = th.R.filter(r => !r.exc), appl = r => r.body.every(b => X.pd.has(b)), disc = r => r.body.some(b => X.md.has(b));
     let fired = 0, defeated = 0, blocked = 0;
     const status = new Map();
@@ -32010,7 +32684,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     }
     for (const r of user) { const s = status.get(r.id); if (s === 2) fired++; else if (s === 1) defeated++; else if (s === 0) blocked++; st.push(s); }
     if ([...X.U].some(l => !X.pd.has(l) && !X.md.has(l))) D.add('undecided');
-    Object.assign(S, { holds: q ? b01(X.pd.has(q)) : NaN, definite: q ? b01(X.pD.has(q)) : NaN, refuted: q ? b01(X.pd.has(neg(q))) : NaN, undecided: q ? b01(!X.pd.has(q) && !X.md.has(q)) : NaN,
+    Object.assign(S, { holds: q ? b01(X.pd.has(q)) : NaN, definite: q ? b01(X.pD.has(q)) : NaN, refuted: q ? b01(X.pd.has(neg(q))) : NaN, undecided: q ? b01(!X.pd.has(q) && !X.md.has(q)) : NaN, supported: q && m.variant === 'propagating' ? b01(X.pS.has(q)) : NaN,
       fired, defeated, blocked, conclusions: [...X.pd].length });
     S.$status = id => (status.has(id) ? status.get(id) : NaN); S.$statusDefault = q ? NaN : NaN;
     SE.status = st;
@@ -32039,6 +32713,15 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       if (!on(s.on, env)) continue; const h = lit(s.then); if (!h) continue;
       rules.push({ id: s.id, body: (s.if || []).map(lit).filter(Boolean), head: h, strict: false, rank: isNum(s.rank) ? s.rank : 0, scheme: s.scheme });
       for (const q of s.cqs || []) if (on(q.on, env)) { const ql = q.lit !== undefined ? lit(q.lit) : 'cq_' + s.id + '_' + q.cq.replace(/-/g, '_'); if (!ql) continue; prem.push({ lit: ql, kind: 'ordinary', rank: 0 }); rules.push({ id: s.id + '?' + q.cq, body: [ql], head: '~' + s.id, strict: false, rank: 0, exc: true }); }
+    }
+    // closure under transposition (Caminada & Amgoud 2007, AIJ 171:286; Modgil & Prakken 2013 §4): for a strict φ1 … φn → ψ add every
+    // φ1 … ¬ψ … φn → ¬φi, so that the rationality postulates (closure, direct and indirect consistency) hold for well-formed theories
+    if (m.closure === 'transposition') {
+      const seen = new Set(rules.filter(r => r.strict).map(r => [...r.body].sort().join(',') + '>' + r.head));
+      for (const r of rules.slice()) if (r.strict) r.body.forEach((phi, i) => {
+        const body = r.body.slice(); body[i] = neg(r.head); const head = neg(phi), k = [...body].sort().join(',') + '>' + head;
+        if (seen.has(k)) return; seen.add(k); rules.push({ id: r.id + '^' + (i + 1), body, head, strict: true, rank: r.rank, transposed: true });
+      });
     }
     // the arguments: premises, then rules over existing arguments (no conclusion twice on a branch), at most MAX_ARGS
     const A = [], keyset = new Set();
@@ -32164,7 +32847,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   function runHohfeld(m, env, D, S, SE, Rn) {
     const facts = new Map(), stated = new Set();
     const put = (c, src) => { const k = c.slice(0, 4).join('|'); if (!facts.has(k)) facts.set(k, { c, vals: new Set(), src: [] }); const f = facts.get(k); f.vals.add(c[4]); f.src.push(src); };
-    for (const p of m.positions || []) { if (!on(p.on, env)) continue; const a = lit(p.act); if (!a) continue; const c = hohCanon(p.kind, p.holder, p.other, a); put(c, 'stated'); stated.add(c.slice(0, 4).join('|')); }
+    for (const p of m.positions || []) { if (!on(p.on, env)) continue; const a0 = lit(p.act); if (!a0) continue; const a = p.passive === true ? 'pass:' + atomOf(a0) : a0; const c = hohCanon(p.kind, p.holder, p.other, a); put(c, 'stated'); stated.add(c.slice(0, 4).join('|')); }
     // SDL D: a stated duty gives the privilege to do it (no duty to the opposite) when nothing says otherwise
     for (const f of [...facts.values()]) if (f.c[0] === 'D' && f.vals.has(true)) { const k = ['D', f.c[1], f.c[2], neg(f.c[3])].join('|'); if (!facts.has(k)) put(['D', f.c[1], f.c[2], neg(f.c[3]), false], 'sdl'); }
     let contra = 0, conflicts = 0;
@@ -32174,6 +32857,25 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     let holds = NaN;
     if (isObj(m.ask)) { const a = lit(m.ask.act); if (a) { const c = hohCanon(m.ask.kind, m.ask.holder, m.ask.other, a), f = facts.get(c.slice(0, 4).join('|')); holds = !f ? 0.5 : f.vals.size > 1 ? 0.5 : f.vals.has(c[4]) ? 1 : 0; } }
     const n = [...facts.values()].reduce((s, f) => s + f.vals.size, 0);
+    /* Lindahl 1977 (Position and Change), Kanger 1972; Sergot 2013: x's three exhaustive alternatives about p are Do(x, p), Do(x, ¬p) and
+       Pass(x, p) (neither). A duty of x (to anyone) to see to p forbids Do ¬p and Pass; to ¬p forbids Do p and Pass; a duty to stay passive
+       (passive: true) forbids both doings. The one-agent type is the set of permitted alternatives (7 non-empty sets; none = a conflict):
+       T1 {Do p, Do ¬p, Pass} T2 {Do p, Do ¬p} T3 {Do p, Pass} T4 {Do p} T5 {Do ¬p, Pass} T6 {Do ¬p} T7 {Pass}. Two agents: the 7 joint
+       alternatives (Do(x,p) ∧ Do(y,¬p) and its mirror are impossible) permitted when each part is permitted; `joint` is their bit set. */
+    const duty = (x, a) => [...facts.values()].some(f => f.c[0] === 'D' && f.c[1] === x && f.c[3] === a && f.vals.has(true));
+    const typeOf = (x, p) => { const dp = !duty(x, '~' + p) && !duty(x, 'pass:' + p), dn = !duty(x, p) && !duty(x, 'pass:' + p), pa = !duty(x, p) && !duty(x, '~' + p); return { alt: [dp, dn, pa], t: dp ? (dn ? (pa ? 1 : 2) : (pa ? 3 : 4)) : dn ? (pa ? 5 : 6) : pa ? 7 : 0 }; };
+    let lin = NaN, linO = NaN, joint = NaN, jc = NaN, jser = [];
+    if (isObj(m.lindahl)) {
+      const X1 = typeOf(m.lindahl.agent, m.lindahl.atom); lin = X1.t; if (!lin) D.add('conflict');
+      if (m.lindahl.other !== undefined) {
+        const Y1 = typeOf(m.lindahl.other, m.lindahl.atom); linO = Y1.t; if (!linO) D.add('conflict');
+        const J = [[0, 0], [0, 2], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]];   // (x, y): 0 Do p, 1 Do ¬p, 2 Pass
+        jser = J.map(([a, b]) => b01(X1.alt[a] && Y1.alt[b]));
+        joint = jser.reduce((acc, v, i) => acc + v * (1 << i), 0); jc = jser.reduce((a, b) => a + b, 0);
+        if (!jc) D.add('conflict');
+      }
+    }
+    Object.assign(S, { lindahl: lin, lindahlOther: linO, joint, jointCount: jc }); SE.joint = jser;
     Object.assign(S, { holds, contradictions: contra, conflicts, positions: 2 * n, derived: 2 * n - [...facts.values()].filter(f => f.src.includes('stated')).length });
     const fmt = (c, v) => (c[0] === 'D' ? `${c[1]} →${c[2]} ${v ? 'O' : '¬O'} ${c[3].replace('~', '¬')}` : `${c[1]} →${c[2]} ${v ? 'Pw' : '¬Pw'} ${c[3].replace('~', '¬')}`);
     const rows = [];
@@ -32243,32 +32945,39 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const cfs = new Set((m.facts || []).filter(f => side.has(f)));
     for (const t of m.toggles || []) if (side.has(t.lit) && on(t.on, env)) cfs.add(t.lit);
     const other = s => (s === 'p' ? 'd' : 'p');
-    const cases = (m.cases || []).map(c => { const fs = new Set(c.factors || []); return { id: c.id, fs, out: c.outcome, pro: [...fs].filter(f => side.get(f) === c.outcome), con: [...fs].filter(f => side.get(f) !== c.outcome), reason: Array.isArray(c.reason) && c.reason.length ? c.reason : null, label: c.label }; });
+    // dimensions with magnitudes (Ashley 1990; Bench-Capon & Rissland 2001; Horty 2019 "Reasoning with dimensions and magnitudes",
+    // AI & Law 27:309; Prakken 2021): a dimension favours `side` more as its value grows; a value is shared when both cases have one
+    const dimSide = new Map((m.dimensions || []).map(d => [d.id, d.side]));
+    const valsOf = list => { const v = new Map(); for (const x of list || []) if (dimSide.has(x.dim)) { const y = num(x.v, env, NaN); if (Number.isFinite(y)) v.set(x.dim, y); } return v; };
+    const cfsV = valsOf(m.values);
+    const fav = (d, x, y, s) => (dimSide.get(d) === s ? x >= y : x <= y);   // x at least as good for s as y on d
+    const cases = (m.cases || []).map(c => { const fs = new Set(c.factors || []); return { id: c.id, fs, vals: valsOf(c.values), out: c.outcome, pro: [...fs].filter(f => side.get(f) === c.outcome), con: [...fs].filter(f => side.get(f) !== c.outcome), reason: Array.isArray(c.reason) && c.reason.length ? c.reason : null, label: c.label }; });
     const reasonOf = c => (m.reasoning === 'reason' && c.reason ? c.reason : c.pro);
-    const forces = (c, facts) => reasonOf(c).every(f => facts.has(f)) && [...facts].filter(f => side.get(f) === other(c.out)).every(f => c.fs.has(f));
-    const shared = c => [...c.fs].filter(f => cfs.has(f));
+    // a fortiori: the reason's factors are present, no other-side factor is new, and on every dimension both have the situation is at least as good for c's winner
+    const forces = (c, facts, vals) => reasonOf(c).every(f => facts.has(f)) && [...facts].filter(f => side.get(f) === other(c.out)).every(f => c.fs.has(f)) && [...c.vals].every(([d, y]) => !vals.has(d) || fav(d, vals.get(d), y, c.out));
+    const shared = c => [...c.fs].filter(f => cfs.has(f)).concat([...c.vals.keys()].filter(d => cfsV.has(d)).map(d => '@' + d));
     const mySide = m.side || 'p';
     const onp = cases.filter(c => shared(c).length > 0);
     const sup = (a, b) => { const A = new Set(shared(a)), B = shared(b); return A.size > B.length && B.every(f => A.has(f)); };
     const most = onp.filter(c => !onp.some(d => d !== c && sup(d, c)));
     const forMe = onp.filter(c => c.out === mySide), best = forMe.filter(c => !forMe.some(d => d !== c && sup(d, c)));
-    const fP = cases.some(c => c.out === 'p' && forces(c, cfs)), fD = cases.some(c => c.out === 'd' && forces(c, cfs));
+    const fP = cases.some(c => c.out === 'p' && forces(c, cfs, cfsV)), fD = cases.some(c => c.out === 'd' && forces(c, cfs, cfsV));
     if (fP && fD) D.add('inconsistent');
     if (!onp.length) D.add('no-precedent');
     let consistent = true;
-    for (const a of cases) for (const b of cases) if (a.out !== b.out && forces(a, b.fs)) consistent = false;
+    for (const a of cases) for (const b of cases) if (a.out !== b.out && forces(a, b.fs, b.vals)) consistent = false;
     if (!consistent) D.add('inconsistent');
     // permissible: no precedent forces the other side, and the new decision (result model) forces no opposite precedent
-    const nw = { fs: cfs, out: mySide, pro: [...cfs].filter(f => side.get(f) === mySide), reason: null };
-    const permissible = !cases.some(c => c.out !== mySide && forces(c, cfs)) && !cases.some(c => c.out !== mySide && forces(nw, c.fs));
-    const distinctions = c => c.pro.filter(f => !cfs.has(f)).length + [...cfs].filter(f => side.get(f) === other(c.out) && !c.fs.has(f)).length;   // CATO (Aleven 2003 §3)
+    const nw = { fs: cfs, vals: cfsV, out: mySide, pro: [...cfs].filter(f => side.get(f) === mySide), reason: null };
+    const permissible = !cases.some(c => c.out !== mySide && forces(c, cfs, cfsV)) && !cases.some(c => c.out !== mySide && forces(nw, c.fs, c.vals));
+    const distinctions = c => c.pro.filter(f => !cfs.has(f)).length + [...cfs].filter(f => side.get(f) === other(c.out) && !c.fs.has(f)).length + [...c.vals].filter(([d, y]) => cfsV.has(d) && !fav(d, cfsV.get(d), y, c.out)).length;   // CATO (Aleven 2003 §3) + a weaker magnitude
     const focus = m.focus !== undefined ? cases.find(c => c.id === m.focus) : best[0] || most[0] || cases[0];
     Object.assign(S, { forced: fP && !fD ? 1 : fD && !fP ? -1 : 0, permissible: b01(permissible), consistent: b01(consistent), onPoint: onp.length, best: best.length, mostOnPoint: most.length,
-      shared: focus ? shared(focus).length : NaN, distinctions: focus ? distinctions(focus) : NaN, binding: focus ? b01(forces(focus, cfs)) : NaN });
+      shared: focus ? shared(focus).length : NaN, distinctions: focus ? distinctions(focus) : NaN, binding: focus ? b01(forces(focus, cfs, cfsV)) : NaN });
     const at = f => id => { const c = cases.find(x => x.id === id); return c ? f(c) : NaN; };
-    S.$at = { shared: at(c => shared(c).length), distinctions: at(distinctions), binding: at(c => b01(forces(c, cfs))) };
-    SE.shared = cases.map(c => shared(c).length); SE.binding = cases.map(c => b01(forces(c, cfs)));
-    Rn.scene = rowsScene(cases.map(c => ({ s: `${c.id} (${c.out === 'p' ? 'π' : 'δ'}): ${shared(c).join(', ') || '—'}`, c: forces(c, cfs) ? 'hi' : !shared(c).length ? 'muted' : c.out === mySide ? 'ok' : 'bad' })), D);
+    S.$at = { shared: at(c => shared(c).length), distinctions: at(distinctions), binding: at(c => b01(forces(c, cfs, cfsV))) };
+    SE.shared = cases.map(c => shared(c).length); SE.binding = cases.map(c => b01(forces(c, cfs, cfsV)));
+    Rn.scene = rowsScene(cases.map(c => ({ s: `${c.id} (${c.out === 'p' ? 'π' : 'δ'}): ${shared(c).join(', ') || '—'}`, c: forces(c, cfs, cfsV) ? 'hi' : !shared(c).length ? 'muted' : c.out === mySide ? 'ok' : 'bad' })), D);
   }
 
   /* ---------- 4.7 deadline: a period from a start date (EU Reg. 1182/71 Art. 3; FRCP 6(a); BGB §§187–193: the conventions are data) ---------- */
@@ -32505,18 +33214,30 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const tb = bz.reduce((a, b) => a + b, 0);
     return { banzhaf: bz.map(x => (tb ? x / tb : 0)), shapley: ss, swings: bz };
   }
-  /** Banzhaf by generating functions for a weighted game [q; w1 … wn] with integer weights (Brams & Affuso 1976) */
-  function banzhafGF(ws, q) {
-    const n = ws.length, T = ws.reduce((a, b) => a + b, 0), bz = [];
+  /** exact Banzhaf and Shapley–Shubik for a weighted game [q; w1 … wn] (integer weights), optionally with a member-count quota kmin, by
+      generating functions over (coalition size, weight) in BigInt (Brams & Affuso 1976; Bilbao, Fernández, Jiménez Losada & López 2000,
+      "Generating functions for computing power indices efficiently", TOP 8:191): the counts of all voters once, then each voter removed by
+      deconvolution. Cost ≈ 2 n² Σw; above 4·10⁶ it returns null (code budget). */
+  function weightedGF(ws, q, kmin) {
+    const n = ws.length, T = ws.reduce((a, b) => a + b, 0), W = T + 1;
+    if (n * n * W > 4e6) return null;
+    kmin = kmin || 0;
+    const Cn = Array.from({ length: n + 1 }, () => new Array(W).fill(0n)); Cn[0][0] = 1n;
+    for (let j = 0; j < n; j++) for (let k = j; k >= 0; k--) { const a = Cn[k], b = Cn[k + 1], w = ws[j]; for (let s = T - w; s >= 0; s--) if (a[s]) b[s + w] += a[s]; }
+    const fact = [1n]; for (let i = 1; i <= n; i++) fact[i] = fact[i - 1] * BigInt(i);
+    const win = (k, s) => s >= q && k >= kmin;
+    const bz = [], ss = [];
     for (let i = 0; i < n; i++) {
-      const c = new Float64Array(T + 1); c[0] = 1;
-      for (let j = 0; j < n; j++) if (j !== i) for (let s = T - ws[j]; s >= 0; s--) if (c[s]) c[s + ws[j]] += c[s];
-      let sw = 0; for (let s = Math.max(0, q - ws[i]); s <= Math.min(T, q - 1); s++) sw += c[s];
-      bz.push(sw);
+      const w = ws[i], Ci = Array.from({ length: n }, () => new Array(W).fill(0n));
+      for (let k = 0; k < n; k++) for (let s = 0; s < W; s++) Ci[k][s] = Cn[k][s] - (k > 0 && s >= w ? Ci[k - 1][s - w] : 0n);
+      let sw = 0n, num = 0n;
+      for (let k = 0; k < n; k++) { let c = 0n; for (let s = 0; s + w < W; s++) if (Ci[k][s] && win(k + 1, s + w) && !win(k, s)) c += Ci[k][s]; sw += c; num += c * fact[k] * fact[n - k - 1]; }
+      bz.push(sw); ss.push(Number(num * 10n ** 18n / fact[n]) / 1e18);
     }
-    const tb = bz.reduce((a, b) => a + b, 0);
-    return bz.map(x => (tb ? x / tb : 0));
+    const tb = bz.reduce((a, b) => a + b, 0n);
+    return { banzhaf: bz.map(x => (tb ? Number(x * 10n ** 18n / tb) / 1e18 : 0)), shapley: ss, swings: bz.map(Number) };
   }
+  const banzhafGF = (ws, q) => { const r = weightedGF(ws, q, 0); return r ? r.banzhaf : null; };
   function runVote(m, env, D, S, SE, Rn) {
     const rows = [];
     if (Array.isArray(m.voters) && m.voters.length) {
@@ -32538,7 +33259,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       let pw = null;
       if (V.every(v => Number.isFinite(v.w) && v.w >= 0)) {
         pw = powerIndices(V.map(v => v.w), s => { const mem = []; for (let i = 0; i < n; i++) if (s >> i & 1) mem.push(i); return winSet(mem) > 0; }, D);
-        if (!pw && !Number.isFinite(pq) && !Number.isFinite(cq) && V.every(v => Number.isInteger(v.w)) && TW <= 100000) pw = { banzhaf: banzhafGF(V.map(v => v.w), Math.ceil(quota - 1e-9)), shapley: null };
+        if (!pw && !Number.isFinite(pq) && V.every(v => Number.isInteger(v.w))) pw = weightedGF(V.map(v => v.w), Math.ceil(quota - 1e-9), Number.isFinite(cq) ? Math.ceil(cq * n - 1e-9) : 0);
         if (!pw || !pw.shapley) D.add('budget');
       }
       const vi = m.voter !== undefined ? V.findIndex(v => v.id === m.voter) : 0;
@@ -32572,7 +33293,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     neutral: [/^\[([0-9]{4})\]\s+([A-Z][A-Za-z]{1,9})(?:\s+(Civ|Crim|Admin|Ch|QB|KB|Fam|Comm|Pat|TCC|IPEC|Costs))?\s+([0-9]{1,6})(?:\s+\(([A-Za-z]{1,10})\))?$/, ['year', 'court', 'division', 'number', 'list'], ['n', 's', 's', 'n', 's']],
     reporter: [/^([0-9]{1,4})\s+([A-Z][A-Za-z0-9.' ]{0,24}?)\s+([0-9]{1,6})(?:,\s*([0-9]{1,6}))?(?:\s+\(([^()]{0,40}?)\s*([0-9]{4})\))?$/, ['volume', 'reporter', 'page', 'pin', 'court', 'year'], ['n', 's', 'n', 'n', 's', 'n']],
     series: [/^([A-Z][A-Za-zÄÖÜäöü]{1,11})\s+([0-9]{1,4}),\s*([0-9]{1,6})(?:\s*\(([0-9]{1,6})\)|,\s*([0-9]{1,6}))?$/, ['series', 'volume', 'page', 'pin', 'pin2'], ['s', 'n', 'n', 'n', 'n']],
-    provision: [/^(Art\.|Article|Artikel|Arts\.|§§?|Section|Sec\.|s\.|ss\.|r\.)\s*([0-9]{1,5}[a-z]{0,3})((?:\s*\(\s*[0-9a-zA-Z]{1,5}\s*\))*)((?:\s+(?:Abs\.|S\.|Satz|Nr\.|para\.|al\.|lit\.|sub)\s*[0-9a-z]{1,5})*)(?:\s+(.{1,60}))?$/, ['marker', 'number', 'parens', 'parts', 'act'], ['s', 'n', 's', 's', 's']],
+    provision: [/^(Art\.|Article|Artikel|Arts\.|§§?|Section|Sec\.|s\.|ss\.|r\.)\s*([0-9]{1,5}[A-Za-z]{0,3})((?:\s*\(\s*[0-9a-zA-Z]{1,5}\s*\))*)((?:\s+(?:Abs\.|S\.|Satz|Nr\.|para\.|al\.|lit\.|sub)\s*[0-9a-z]{1,5})*)(?:\s+(.{1,60}))?$/, ['marker', 'number', 'parens', 'parts', 'act'], ['s', 'n', 's', 's', 's']],
   };
   function runCitation(m, env, D, S, SE, Rn) {
     const text = String(m.text).trim(), tries = [];
@@ -32581,7 +33302,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     let hit = null, kind = 0;
     for (let i = 0; i < tries.length && !hit; i++) { const r = tries[i].re.exec(text); if (r) { hit = { t: tries[i], r }; kind = i + 1; } }
     const F = {};
-    if (hit) hit.t.names.forEach((nm, i) => { const v = hit.r[i + 1]; if (v !== undefined && v !== '') F[nm] = hit.t.types[i] === 'n' ? +v : v.trim(); });
+    if (hit) hit.t.names.forEach((nm, i) => { const v = hit.r[i + 1]; if (v !== undefined && v !== '') F[nm] = hit.t.types[i] === 'n' ? parseInt(v, 10) : v.trim(); });
     if (hit && hit.t.id === 'provision') F.depth = (String(F.parens || '').match(/\(/g) || []).length + (String(F.parts || '').match(/\S+\s*[0-9a-z]+/g) || []).length;
     if (!hit) D.add('no-match');
     const nv = k => (typeof F[k] === 'number' ? F[k] : NaN);
@@ -32719,7 +33440,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, source,
     TASKS, TASK_OUT, AT_OF, CODES, REQ, MODEL_T, SCHEMES, STD_P, LEVEL, CITE_KINDS,
     // the engine's own functions (for tests and other engines)
-    parseLit, dayOf, civilFromDays, daysFromCivil, weekdayOf, addMonths, template, buildTheory, defeasible, hohCanon, powerIndices, banzhafGF, cea, cel, carneadesCycle,
+    parseLit, dayOf, civilFromDays, daysFromCivil, weekdayOf, addMonths, template, buildTheory, defeasible, hohCanon, powerIndices, banzhafGF, weightedGF, cea, cel, carneadesCycle,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -33510,8 +34231,11 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const lg = Math.log10;
   function erf(x) { const s = Math.sign(x); x = Math.abs(x); const t = 1 / (1 + 0.3275911 * x); const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x); return s * y; }
-  const Phi = x => 0.5 * (1 + erf(x / Math.SQRT2));   // Abramowitz & Stegun 7.1.26 (|error| < 1.5e-7)
-  function PhiInv(p) {   // Acklam's rational approximation (rel. error < 1.15e-9)
+  /* Φ, Φ⁻¹ and roots by the simulation kernel (NoemaSimKit, docs/library/simkit.md): Φ by the incomplete gamma, Φ⁻¹ by Wichura's AS241
+     (about 16 digits), roots by Brent 1973; FALLBACK without the kernel (marked): A&S 7.1.26 (|error| < 1.5e-7), Acklam, bisection */
+  const Phi = x => { const K = C.kit(); return K ? K.normCdf(x) : 0.5 * (1 + erf(x / Math.SQRT2)); };
+  const PhiInv = p => { const K = C.kit(); return K ? K.normInv(p) : PhiInvAcklam(p); };
+  function PhiInvAcklam(p) {   // Acklam's rational approximation (rel. error < 1.15e-9)
     if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
     const a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02, 1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00];
     const b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02, 6.680131188771972e+01, -1.328068155288572e+01];
@@ -33523,7 +34247,12 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const q = p - 0.5, r = q * q;
     return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
   }
-  function bisect(f, a, b, n) { let fa = f(a); for (let i = 0; i < (n || 100); i++) { const m = (a + b) / 2, fm = f(m); if ((fm < 0) === (fa < 0)) { a = m; fa = fm; } else b = m; } return (a + b) / 2; }
+  function bisect(f, a, b, n) {
+    const K = C.kit();
+    if (K) { const fa = f(a), fb = f(b); if (fa * fb <= 0) { const r = K.brent(f, a, b, 1e-13 * Math.max(1, Math.abs(a), Math.abs(b)), fa, fb); if (Number.isFinite(r)) return r; } }
+    return bisectOwn(f, a, b, n);
+  }
+  function bisectOwn(f, a, b, n) { let fa = f(a); for (let i = 0; i < (n || 100); i++) { const m = (a + b) / 2, fm = f(m); if ((fm < 0) === (fa < 0)) { a = m; fa = fm; } else b = m; } return (a + b) / 2; }
   const linspace = (a, b, n) => Array.from({ length: n }, (_, i) => a + (b - a) * i / (n - 1));
   const logspace = (a, b, n) => Array.from({ length: n }, (_, i) => a * Math.pow(b / a, i / (n - 1)));
 
@@ -34094,7 +34823,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
 
   /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): med@1 in a co-simulation ----------
      The PK items become compartment models stepped in time (the same pharmacokinetics as above, Rowland & Tozer 2019; integrated with
-     classical RK4, ≤ 0.05/k per substep, split exactly at each dose): pk.iv (central), pk.oral (gut → central, F, tlag), pk.infusion
+     classical RK4 of NoemaSimKit.integrate, ≤ 0.05/k per substep, split exactly at each dose; the AUC integrated as one more state): pk.iv (central), pk.oral (gut → central, F, tlag), pk.infusion
      (a zero-order rate for dur), pk.twocpt (central ⇄ peripheral, a bolus at the start), pk.mm (Michaelis–Menten elimination). Their
      inputs are read at each step (a clearance another part computes, a dose a controller changes). Fields per step: c (the concentration
      now; a series output collects one sample a step), t, cmax / cmin / auc (so far), the item's other numbers at the current inputs.
@@ -34142,8 +34871,17 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         for (let s = 0; s + 1 < cuts.length; s++) {
           while (di < doses.length && doses[di][0] <= cuts[s] + 1e-12 * Math.max(1, Math.abs(cuts[s]))) { a[doses[di][1]] += doses[di][2]; di++; c = pkConcOf(it.fn, x, a); cmax = Math.max(cmax, c); }
           const span = cuts[s + 1] - cuts[s]; if (!(span > 0)) continue;
-          const m = Math.min(20000, Math.max(1, Math.ceil(span * rate / 0.05))), h = span / m;
-          for (let j = 0; j < m; j++) {
+          const m = Math.min(20000, Math.max(1, Math.ceil(span * rate / 0.05))), h = span / m, K = C.kit();
+          if (K) {   // the kernel's RK4 (NoemaSimKit.integrate, fixed step h); the AUC is one more state, c' = conc: exact for the scheme
+            const na = a.length, yy = new Array(na), grid = []; for (let j = 1; j <= m; j++) grid.push(j === m ? cuts[s + 1] : cuts[s] + j * h);
+            const R = K.integrate({ f: (tt, y, dy) => { for (let q = 0; q < na; q++) yy[q] = y[q]; const d = f(yy, tt); for (let q = 0; q < na; q++) dy[q] = d[q]; dy[na] = pkConcOf(it.fn, x, yy); },
+              y0: [...a, 0], t0: cuts[s], tEnd: cuts[s + 1], method: 'rk4', dt: h, maxSteps: m + 2, samples: grid,
+              onSample: (tt, y) => { const c2 = pkConcOf(it.fn, x, Array.from(y).slice(0, na)); cmax = Math.max(cmax, c2); cmin = Math.min(cmin, c2); } });
+            for (let q = 0; q < na; q++) a[q] = Math.max(0, R.y[q]); auc += R.y[na]; c = pkConcOf(it.fn, x, a);
+            if (R.stop !== 'end') fail = fail || 'nan';
+            continue;
+          }
+          for (let j = 0; j < m; j++) {   // FALLBACK without the kernel: the classical RK4 here
             const tt = cuts[s] + j * h, k1 = f(a, tt), k2 = f(a.map((v, q) => v + h / 2 * k1[q]), tt + h / 2), k3 = f(a.map((v, q) => v + h / 2 * k2[q]), tt + h / 2), k4 = f(a.map((v, q) => v + h * k3[q]), tt + h);
             for (let q = 0; q < a.length; q++) a[q] = Math.max(0, a[q] + h / 6 * (k1[q] + 2 * k2[q] + 2 * k3[q] + k4[q]));
             const c2 = pkConcOf(it.fn, x, a); auc += h * (c + c2) / 2; c = c2; cmax = Math.max(cmax, c); cmin = Math.min(cmin, c);
@@ -34166,7 +34904,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     },
   };
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
-  engine.workerSource = C.workerSource(noemaLibMedModule, 'NoemaLibMed');
+  engine.workerSource = C.workerSource(noemaLibMedModule, 'NoemaLibMed', { kit: true });
   root.NoemaLibMed = Object.freeze({ id: ID, table: { model: { items: { $req: true, $list: { $obj: Object.assign({}, ITEM, { fn: 'enum:' + Object.keys(SIG.fns).join('|') + '!', opts: 'any' }) }, min: 1, max: 48 } }, outputs: { scalar: [], series: [], scene: [] }, offered: m => { const o = { scalar: [], series: [], scene: [] }; for (const it of (isObj(m) && Array.isArray(m.items) ? m.items : [])) { const S = isObj(it) && typeof it.id === 'string' ? SIG.fns[it.fn] : null; if (!S) continue; o.scalar.push(...S.out.split(' ').filter(Boolean).map(f => it.id + '.' + f)); o.series.push(...S.series.split(' ').filter(Boolean).map(f => it.id + '.' + f)); if (S.scene) o.scene.push(it.id); } return o; } }, SIG, RANGE, checkSpec, exprs, keys, run, compute, calc, engine: Object.freeze(engine), simEngine, stepper, prepare, moduleSource: () => noemaLibMedModule.toString() });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -34743,6 +35481,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
    supervaluation, lottery and preface, Sleeping Beauty), Indian and Buddhist forms (Dignāga's wheel of reasons, the catuṣkoṭi, the
    Jain saptabhaṅgī), thought experiments as structured positions, a drawn map of thinkers and influences, and argument validity
    through logic@1 (window.NoemaLibLogic: parse, atomsOf, truthTable, entails — never re-implemented here).
+   Added (§8): rule consequentialism at an acceptance rate (Hooker 2000; Ridge 2006), voting games' pure Nash equilibria and
+   Gibbard–Satterthwaite manipulability, infinite utility streams (overtaking, catching-up, Pareto vs anonymity), Metz's ubuntu as a
+   relational score (promote / honour).
    Sources: beside each function and in docs/library/philo.md. Pure, bounded, deterministic; numbers, codes and keys only.
    Tests: node tests/lib_philo.js */
 (function noemaLibPhiloModule(root) {
@@ -34750,13 +35491,14 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   'use strict';
   const C = root.NoemaLibCore;
   const ID = 'philo@1';
-  /*T*/ const T = {"PROB":{"newcomb":{"acts":["one","two"],"states":["full","empty"],"acc":0.99,"big":1000000,"small":1000,"pCause":[0.5,0.5]},"lesion":{"acts":["smoke","abstain"],"states":["cancer","healthy"],"acc":0.8,"big":100,"small":10,"pCause":[0.5,0.5]},"psychopath":{"acts":["push","refrain"],"states":["psychopath","sane"],"acc":0.9,"big":100,"small":10,"pCause":[0.05,0.95]}},"GAMES":{"pd":{"rows":["c","d"],"TRPS":[5,3,1,0]},"stag":{"rows":["stag","hare"],"TRPS":[3,4,3,0]},"chicken":{"rows":["swerve","straight"],"TRPS":[4,3,0,1]},"hawkdove":{"rows":["dove","hawk"],"TRPS":[2,1,-1,0]},"coord":{"rows":["a","b"],"TRPS":[0,1,1,0]},"bos":{"rows":["opera","football"],"pay":[[[2,1],[0,0]],[[0,0],[1,2]]]},"pennies":{"rows":["heads","tails"],"pay":[[[1,-1],[-1,1]],[[-1,1],[1,-1]]]}},"MODEL":{"populations":{"$list":{"$obj":{"id":"id!","groups":{"$list":{"$obj":{"n":"numx!","w":"numx!","rel":"numx","levels":{"$list":"numx","max":8}}},"max":64,"min":1,"$req":true}}},"max":32},"cases":{"$list":{"$obj":{"id":"id!","preset":"enum:switch|driver|footbridge|loop|trapdoor|transplant|lazySusan|transmitter","kAct":"numx","sAct":"numx","kNot":"numx","sNot":"numx","means":"bool","redirect":"bool","personal":"bool","consent":"bool","driver":"bool"}},"max":32},"maxims":{"$list":{"$obj":{"id":"id!","preset":"enum:suicide|falsePromise|talents|beneficence|tennis|toys|deposit","conception":"bool","practical":"bool","natural":"bool","will":"bool"}},"max":16},"profiles":{"$list":{"$obj":{"id":"id!","scheme":"enum:aristotle|confucian|paramita!","traits":{"$req":true,"$map":"numx","max":16},"tol":"numx"}},"max":16},"elections":{"$list":{"$obj":{"id":"id!","candidates":{"$list":"id","max":8,"min":2,"$req":true},"ballots":{"$list":{"$obj":{"n":"numx!","rank":{"$list":"ref","max":8,"min":1,"$req":true},"approve":"numx"}},"max":64,"min":1,"$req":true},"axis":{"$list":"ref","max":8}}},"max":16},"lotteries":{"$list":{"$obj":{"id":"id!","outcomes":{"$list":{"$obj":{"p":"numx!","x":"numx!"}},"max":32,"min":1,"$req":true},"priors":{"$list":{"$list":"numx","max":32},"max":16}}},"max":32},"utility":{"$obj":{"u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"}},"problems":{"$list":{"$obj":{"id":"id!","preset":"enum:newcomb|lesion|psychopath","acts":{"$list":"id","max":6,"min":2},"states":{"$list":"id","max":6,"min":1},"u":{"$list":{"$list":"numx","max":6},"max":6},"pAct":{"$list":{"$list":"numx","max":6},"max":6},"pCause":{"$list":"numx","max":6},"acc":"numx","big":"numx","small":"numx"}},"max":8},"games":{"$list":{"$obj":{"id":"id!","preset":"enum:pd|stag|chicken|hawkdove|bos|pennies|coord","T":"numx","R":"numx","P":"numx","S":"numx","rows":{"$list":"id","max":6,"min":2},"cols":{"$list":"id","max":6,"min":2},"pay":{"$list":{"$list":{"$list":"numx","max":2,"min":2},"max":6},"max":6}}},"max":8},"tournament":{"$obj":{"game":"ref!","strategies":{"$list":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft","max":12,"min":1,"$req":true},"rounds":"numx","noise":"numx","reps":"numx","gens":"numx","self":"bool"}},"beliefs":{"$list":{"$obj":{"id":"id!","h":"numx!","eh":"numx!","enh":"numx!"}},"max":16},"knowledge":{"$list":{"$obj":{"id":"id!","preset":"enum:coins|ford|barns|clock|sheep|mirage|smoke|truetemp|lottery|ordinary","believed":"bool","truth":"bool","justified":"bool","falseLemma":"bool","defeater":"bool","causal":"bool","reliable":"bool","sensitive":"bool","safe":"bool","apt":"bool","intuition":"bool"}},"max":16},"sorites":{"$obj":{"n":"numx","lo":"numx","hi":"numx","shape":"enum:linear|logistic","plo":"numx","phi":"numx","cut":"numx"}},"experiments":{"$list":{"$obj":{"id":"id!","te":"enum:chineseRoom|mary|zombie|brainVat|teleporter|ship|twinEarth|experienceMachine|violinist|veil|gyges|floatingMan|butterfly|chariot|childWell|swampman|invertedSpectrum|personhood|cottonFire","options":{"$list":"id","max":8,"min":2},"positions":{"$map":"ref","max":12}}},"max":16},"thinkers":{"$list":{"$obj":{"id":"id!","label":"key","born":"numx","died":"numx","trad":"enum:greek|indian|buddhist|jain|chinese|islamic|jewish|latin|modern|analytic|continental|african","infl":{"$list":"ref","max":16}}},"max":64},"arguments":{"$list":{"$obj":{"id":"id!","premises":{"$list":"expr","max":12,"min":1,"$req":true},"conclusion":"expr!"}},"max":16},"inferences":{"$list":{"$obj":{"id":"id!","paksa":"bool!","sapaksa":"enum:all|some|none!","vipaksa":"enum:all|some|none!"}},"max":16},"bargains":{"$list":{"$obj":{"id":"id!","pts":{"$list":{"$list":"numx","max":2,"min":2},"max":32,"min":1,"$req":true},"d":{"$list":"numx","max":2,"min":2}}},"max":8}},"OUT":{"scalar":{"welfare":{"id":"expr","kind":"expr","of":"expr","population":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"compare":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"best":{"id":"expr","kind":"expr","of":"expr","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"paradox":{"id":"expr","kind":"expr","of":"expr","paradox":"enum:repugnant|mereAddition|sadistic|levellingDown!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"verdict":{"id":"expr","kind":"expr","of":"expr","case":"ref!","principle":"enum:util|dde|means|doingAllowing|redirect|personalForce|threshold|contract|taurek!","T":"numx"},"permits":{"id":"expr","kind":"expr","of":"expr","case":"ref!","T":"numx"},"ful":{"id":"expr","kind":"expr","of":"expr","maxim":"ref!","reading":"enum:logical|practical|teleological"},"trait":{"id":"expr","kind":"expr","of":"expr","profile":"ref!","trait":"expr!"},"virtue":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"winner":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"score":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!","cand":"ref!"},"margin":{"id":"expr","kind":"expr","of":"expr","election":"ref!","a":"ref!","b":"ref!"},"condorcet":{"id":"expr","kind":"expr","of":"expr","election":"ref!","loser":"bool"},"cycle":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"smith":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"criterion":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!","criterion":"enum:condorcet|condorcetLoser|majority|pareto|monotonic|spoiler|participation|iia!","other":"ref"},"manipulable":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"singlePeaked":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"ev":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!"},"eu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"ce":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"premium":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"cpt":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","beta":"numx","lam":"numx","gp":"numx","gm":"numx","ref":"numx"},"meu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"choose":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:ev|eu|cpt|meu|maxmin|maximax|regret|hurwicz|laplace|discount!","alpha":"numx","eps":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"commonCons":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","c":"ref!","d":"ref!"},"stpete":{"id":"expr","kind":"expr","of":"expr","what":"enum:ev|eu|ce!","rounds":"numx","bank":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"dtv":{"id":"expr","kind":"expr","of":"expr","problem":"ref!","theory":"enum:edt|cdt!","act":"ref"},"dominant":{"id":"expr","kind":"expr","of":"expr","problem":"ref!"},"nash":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"isNash":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"mixed":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"dominantStrat":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"paretoCell":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"grimDelta":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"ipd":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","what":"enum:mean|rank|share!"},"confirm":{"id":"expr","kind":"expr","of":"expr","belief":"ref!","measure":"enum:d|r|l|s|k|z|c|post!"},"dutch":{"id":"expr","kind":"expr","of":"expr","cr":{"$list":"numx","max":32,"min":1,"$req":true}},"knows":{"id":"expr","kind":"expr","of":"expr","case":"ref!","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"fits":{"id":"expr","kind":"expr","of":"expr","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"sorites":{"id":"expr","kind":"expr","of":"expr","what":"enum:condMin|bound|superTrue|superFalse|indet|cutoff|value!","k":"numx","i":"numx"},"lottery":{"id":"expr","kind":"expr","of":"expr","n":"numx!","t":"numx!","what":"enum:believed|conj|closure!"},"preface":{"id":"expr","kind":"expr","of":"expr","n":"numx!","r":"numx!","t":"numx!","what":"enum:conj|maxClaims!"},"beauty":{"id":"expr","kind":"expr","of":"expr","theory":"enum:halfer|thirder|double!","wakes":"numx","monday":"bool"},"teAnswer":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","position":"expr!"},"teCount":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","option":"numx!"},"influence":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"overlap":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"valid":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"counter":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"form":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"hetu":{"id":"expr","kind":"expr","of":"expr","inference":"ref!","what":"enum:cell|verdict!"},"koti":{"id":"expr","kind":"expr","of":"expr","t":"numx!","f":"numx!","e":"numx"},"bhanga":{"id":"expr","kind":"expr","of":"expr","asti":"numx!","nasti":"numx!","avak":"numx!"},"bargain":{"id":"expr","kind":"expr","of":"expr","bargain":"ref!","solution":"enum:nash|ks|egal|util!","coord":"int:0:1"}},"series":{"scores":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!"},"match":{"id":"expr","kind":"expr","of":"expr","a":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","b":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","player":"int:1:2"},"shares":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!"},"degree":{"id":"expr","kind":"expr","of":"expr"},"bound":{"id":"expr","kind":"expr","of":"expr"},"sorted":{"id":"expr","kind":"expr","of":"expr","population":"ref!"}},"scene":{"majority":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"parfit":{"id":"expr","kind":"expr","of":"expr","populations":{"$list":"ref","max":8,"min":1,"$req":true}},"virtues":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"map":{"id":"expr","kind":"expr","of":"expr","from":"numx","to":"numx","hi":"ref"},"payoffs":{"id":"expr","kind":"expr","of":"expr","game":"ref!"}}},"REFS":{"welfare":{"population":"populations"},"compare":{"a":"populations","b":"populations"},"verdict":{"case":"cases"},"permits":{"case":"cases"},"ful":{"maxim":"maxims"},"trait":{"profile":"profiles"},"virtue":{"profile":"profiles"},"winner":{"election":"elections"},"score":{"election":"elections","cand":"cand"},"margin":{"election":"elections","a":"cand","b":"cand"},"condorcet":{"election":"elections"},"cycle":{"election":"elections"},"smith":{"election":"elections"},"criterion":{"election":"elections","other":"elections"},"manipulable":{"election":"elections"},"singlePeaked":{"election":"elections"},"ev":{"lottery":"lotteries"},"eu":{"lottery":"lotteries"},"ce":{"lottery":"lotteries"},"premium":{"lottery":"lotteries"},"cpt":{"lottery":"lotteries"},"meu":{"lottery":"lotteries"},"choose":{"a":"lotteries","b":"lotteries"},"commonCons":{"a":"lotteries","b":"lotteries","c":"lotteries","d":"lotteries"},"dtv":{"problem":"problems","act":"act"},"dominant":{"problem":"problems"},"nash":{"game":"games"},"isNash":{"game":"games"},"mixed":{"game":"games"},"dominantStrat":{"game":"games"},"paretoCell":{"game":"games"},"grimDelta":{"game":"games"},"confirm":{"belief":"beliefs"},"knows":{"case":"knowledge"},"teAnswer":{"experiment":"experiments"},"teCount":{"experiment":"experiments"},"influence":{"a":"thinker","b":"thinker"},"overlap":{"a":"thinker","b":"thinker"},"valid":{"argument":"arguments"},"counter":{"argument":"arguments"},"form":{"argument":"arguments"},"hetu":{"inference":"inferences"},"bargain":{"bargain":"bargains"},"scores":{"election":"elections"},"sorted":{"population":"populations"},"majority":{"election":"elections"},"parfit":{"populations":"populations"},"virtues":{"profile":"profiles"},"map":{"hi":"thinker"},"payoffs":{"game":"games"}},"PRINCIPLES":["util","dde","means","doingAllowing","redirect","personalForce","threshold","contract","taurek"],"STRATS":["allc","alld","tft","tf2t","grim","pavlov","random","gtft","alt","joss","stft"],"TRADS":["greek","indian","buddhist","jain","chinese","islamic","jewish","latin","modern","analytic","continental","african"],"CASES":{"switch":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"driver":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":true},"footbridge":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"loop":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":true,"personal":false,"consent":false,"driver":false},"trapdoor":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":false,"consent":false,"driver":false},"transplant":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"lazySusan":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"transmitter":{"kAct":1000000,"sAct":0.0001,"kNot":1,"sNot":0.2,"means":false,"redirect":false,"personal":false,"consent":false,"driver":false}},"MAXIMS":{"suicide":{"conception":false,"practical":false,"natural":true,"will":false},"falsePromise":{"conception":true,"practical":true,"natural":false,"will":false},"talents":{"conception":false,"practical":false,"natural":false,"will":true},"beneficence":{"conception":false,"practical":false,"natural":false,"will":true},"tennis":{"conception":false,"practical":true,"natural":false,"will":false},"toys":{"conception":true,"practical":true,"natural":false,"will":false},"deposit":{"conception":true,"practical":true,"natural":false,"will":false}},"VIRT":{"aristotle":["courage","temperance","liberality","magnificence","magnanimity","ambition","patience","truthfulness","wit","friendliness","modesty","indignation"],"confucian":["ren","yi","li","zhi","xin"],"paramita":["dana","sila","ksanti","virya","dhyana","prajna"]},"KF":["believed","truth","justified","falseLemma","defeater","causal","reliable","sensitive","safe","apt"],"KCASES":{"coins":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ford":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"barns":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":true,"causal":true,"reliable":false,"sensitive":false,"safe":false,"apt":true,"intuition":false},"clock":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"sheep":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"mirage":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"smoke":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"truetemp":{"believed":true,"truth":true,"justified":false,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":false},"lottery":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ordinary":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":true}},"TE":{"chineseRoom":{"o":["yes","no","ifEmbodied"],"p":{"searle":"no","systemsReply":"yes","robotReply":"ifEmbodied","functionalism":"yes","biologicalNaturalism":"no"}},"mary":{"o":["newFact","newAbility","newAcquaintance","oldFactNewMode","nothing"],"p":{"jackson1982":"newFact","abilityHypothesis":"newAbility","acquaintance":"newAcquaintance","phenomenalConcepts":"oldFactNewMode","dennett":"nothing","jackson2003":"oldFactNewMode"}},"zombie":{"o":["possible","conceivableNotPossible","notConceivable"],"p":{"chalmers":"possible","typeB":"conceivableNotPossible","typeA":"notConceivable"}},"brainVat":{"o":["no","yes","ordinaryOnly","contextDependent"],"p":{"skeptic":"no","putnam":"yes","moore":"yes","nozick":"ordinaryOnly","dretske":"ordinaryOnly","contextualism":"contextDependent"}},"teleporter":{"o":["survive","die","doesNotMatter"],"p":{"psychological":"survive","animalism":"die","bodily":"die","parfit":"doesNotMatter","buddhistReductionism":"doesNotMatter"}},"ship":{"o":["repaired","reassembled","both","neither"],"p":{"continuity":"repaired","mereologicalEssentialism":"reassembled","fourDimensionalism":"both","nihilism":"neither"}},"twinEarth":{"o":["same","different","narrowSameWideDifferent"],"p":{"externalism":"different","internalism":"same","twoDimensionalism":"narrowSameWideDifferent"}},"experienceMachine":{"o":["plugIn","refuse"],"p":{"hedonism":"plugIn","nozick":"refuse","objectiveList":"refuse"}},"violinist":{"o":["mustStay","mayUnplug"],"p":{"thomson":"mayUnplug","sanctityOfLife":"mustStay"}},"veil":{"o":["maximin","averageUtility"],"p":{"rawls":"maximin","harsanyi":"averageUtility"}},"gyges":{"o":["staysJust","becomesUnjust"],"p":{"glaucon":"becomesUnjust","thrasymachus":"becomesUnjust","socrates":"staysJust"}},"floatingMan":{"o":["awareOfSelf","notAware"],"p":{"avicenna":"awareOfSelf","descartes":"awareOfSelf","physicalism":"notAware"}},"butterfly":{"o":["zhou","butterfly","transformation","undecidable"],"p":{"guoXiang":"transformation","sceptical":"undecidable","commonSense":"zhou"}},"chariot":{"o":["realSelf","conventionalOnly","inexpressible","none"],"p":{"nagasena":"conventionalOnly","pudgalavada":"inexpressible","nyaya":"realSelf","eliminativism":"none"}},"childWell":{"o":["innateGood","learned","selfInterest"],"p":{"mencius":"innateGood","xunzi":"learned","egoism":"selfInterest"}},"swampman":{"o":["hasThoughts","noThoughts"],"p":{"davidson":"noThoughts","teleosemantics":"noThoughts","functionalism":"hasThoughts","internalism":"hasThoughts"}},"invertedSpectrum":{"o":["possible","impossible"],"p":{"qualiaRealism":"possible","shoemaker":"possible","behaviourism":"impossible","dennett":"impossible"}},"personhood":{"o":["achieved","innate","both"],"p":{"menkiti":"achieved","gyekye":"both","liberalIndividualism":"innate"}},"cottonFire":{"o":["necessary","habit"],"p":{"ghazali":"habit","averroes":"necessary","hume":"habit","malebranche":"habit","aristotelian":"necessary"}}},"THINKERS":{"thales":{"b":-624,"d":-546,"tr":"greek","in":[]},"heraclitus":{"b":-535,"d":-475,"tr":"greek","in":[]},"parmenides":{"b":-515,"d":-450,"tr":"greek","in":[]},"zeno":{"b":-490,"d":-430,"tr":"greek","in":["parmenides"]},"democritus":{"b":-460,"d":-370,"tr":"greek","in":[]},"socrates":{"b":-470,"d":-399,"tr":"greek","in":[]},"plato":{"b":-428,"d":-348,"tr":"greek","in":["socrates","parmenides","heraclitus"]},"aristotle":{"b":-384,"d":-322,"tr":"greek","in":["plato"]},"pyrrho":{"b":-360,"d":-270,"tr":"greek","in":["democritus"]},"epicurus":{"b":-341,"d":-270,"tr":"greek","in":["democritus"]},"zenoCitium":{"b":-334,"d":-262,"tr":"greek","in":["socrates"]},"sextus":{"b":160,"d":210,"tr":"greek","in":["pyrrho"]},"plotinus":{"b":204,"d":270,"tr":"greek","in":["plato","aristotle"]},"mahavira":{"b":-599,"d":-527,"tr":"jain","in":[]},"umasvati":{"b":150,"d":250,"tr":"jain","in":["mahavira"]},"samantabhadra":{"b":450,"d":520,"tr":"jain","in":["umasvati"]},"gautama":{"b":150,"d":250,"tr":"indian","in":[]},"udayana":{"b":975,"d":1050,"tr":"indian","in":["gautama"]},"gangesa":{"b":1300,"d":1360,"tr":"indian","in":["udayana","gautama"]},"shankara":{"b":788,"d":820,"tr":"indian","in":["nagarjuna"]},"ramanuja":{"b":1017,"d":1137,"tr":"indian","in":["shankara"]},"buddha":{"b":-563,"d":-483,"tr":"buddhist","in":[]},"nagarjuna":{"b":150,"d":250,"tr":"buddhist","in":["buddha"]},"vasubandhu":{"b":316,"d":396,"tr":"buddhist","in":["nagarjuna"]},"dignaga":{"b":480,"d":540,"tr":"buddhist","in":["vasubandhu"]},"dharmakirti":{"b":600,"d":660,"tr":"buddhist","in":["dignaga"]},"santideva":{"b":685,"d":763,"tr":"buddhist","in":["nagarjuna"]},"dharmottara":{"b":740,"d":800,"tr":"buddhist","in":["dharmakirti"]},"laozi":{"b":-571,"d":-471,"tr":"chinese","in":[]},"confucius":{"b":-551,"d":-479,"tr":"chinese","in":[]},"mozi":{"b":-470,"d":-391,"tr":"chinese","in":["confucius"]},"mencius":{"b":-372,"d":-289,"tr":"chinese","in":["confucius"]},"zhuangzi":{"b":-369,"d":-286,"tr":"chinese","in":["laozi"]},"gongsunlong":{"b":-325,"d":-250,"tr":"chinese","in":[]},"xunzi":{"b":-310,"d":-235,"tr":"chinese","in":["confucius"]},"hanfei":{"b":-280,"d":-233,"tr":"chinese","in":["xunzi","laozi"]},"zhuxi":{"b":1130,"d":1200,"tr":"chinese","in":["mencius","confucius"]},"wangyangming":{"b":1472,"d":1529,"tr":"chinese","in":["mencius","zhuxi"]},"alkindi":{"b":801,"d":873,"tr":"islamic","in":["aristotle"]},"alfarabi":{"b":872,"d":950,"tr":"islamic","in":["aristotle","plato"]},"avicenna":{"b":980,"d":1037,"tr":"islamic","in":["alfarabi","aristotle"]},"ghazali":{"b":1058,"d":1111,"tr":"islamic","in":["avicenna"]},"averroes":{"b":1126,"d":1198,"tr":"islamic","in":["aristotle","ghazali"]},"suhrawardi":{"b":1154,"d":1191,"tr":"islamic","in":["avicenna","plato"]},"shatibi":{"b":1320,"d":1388,"tr":"islamic","in":["ghazali"]},"ibnKhaldun":{"b":1332,"d":1406,"tr":"islamic","in":["averroes"]},"mullaSadra":{"b":1572,"d":1640,"tr":"islamic","in":["avicenna","suhrawardi"]},"maimonides":{"b":1138,"d":1204,"tr":"jewish","in":["aristotle","alfarabi"]},"augustine":{"b":354,"d":430,"tr":"latin","in":["plotinus","plato"]},"boethius":{"b":477,"d":524,"tr":"latin","in":["aristotle","plato"]},"anselm":{"b":1033,"d":1109,"tr":"latin","in":["augustine"]},"aquinas":{"b":1225,"d":1274,"tr":"latin","in":["aristotle","augustine","avicenna","averroes","maimonides"]},"llull":{"b":1232,"d":1316,"tr":"latin","in":[]},"ockham":{"b":1287,"d":1347,"tr":"latin","in":["aristotle","aquinas"]},"cusanus":{"b":1401,"d":1464,"tr":"latin","in":["llull"]},"hobbes":{"b":1588,"d":1679,"tr":"modern","in":[]},"descartes":{"b":1596,"d":1650,"tr":"modern","in":["augustine"]},"spinoza":{"b":1632,"d":1677,"tr":"modern","in":["descartes","maimonides"]},"locke":{"b":1632,"d":1704,"tr":"modern","in":["descartes","hobbes"]},"leibniz":{"b":1646,"d":1716,"tr":"modern","in":["descartes","spinoza"]},"hume":{"b":1711,"d":1776,"tr":"modern","in":["locke"]},"rousseau":{"b":1712,"d":1778,"tr":"modern","in":["hobbes","locke"]},"kant":{"b":1724,"d":1804,"tr":"modern","in":["hume","rousseau","leibniz"]},"condorcet":{"b":1743,"d":1794,"tr":"modern","in":["rousseau"]},"bentham":{"b":1748,"d":1832,"tr":"modern","in":["hume"]},"wollstonecraft":{"b":1759,"d":1797,"tr":"modern","in":["rousseau"]},"hegel":{"b":1770,"d":1831,"tr":"modern","in":["kant","spinoza"]},"mill":{"b":1806,"d":1873,"tr":"modern","in":["bentham"]},"marx":{"b":1818,"d":1883,"tr":"modern","in":["hegel"]},"sidgwick":{"b":1838,"d":1900,"tr":"modern","in":["mill","kant"]},"schopenhauer":{"b":1788,"d":1860,"tr":"continental","in":["kant","plato","buddha"]},"kierkegaard":{"b":1813,"d":1855,"tr":"continental","in":["hegel"]},"nietzsche":{"b":1844,"d":1900,"tr":"continental","in":["schopenhauer"]},"husserl":{"b":1859,"d":1938,"tr":"continental","in":["descartes"]},"heidegger":{"b":1889,"d":1976,"tr":"continental","in":["husserl","aristotle","kierkegaard"]},"sartre":{"b":1905,"d":1980,"tr":"continental","in":["heidegger","husserl"]},"levinas":{"b":1906,"d":1995,"tr":"continental","in":["husserl","heidegger"]},"beauvoir":{"b":1908,"d":1986,"tr":"continental","in":["sartre","hegel"]},"fanon":{"b":1925,"d":1961,"tr":"continental","in":["sartre","hegel"]},"foucault":{"b":1926,"d":1984,"tr":"continental","in":["nietzsche","heidegger"]},"frege":{"b":1848,"d":1925,"tr":"analytic","in":["kant","leibniz"]},"russell":{"b":1872,"d":1970,"tr":"analytic","in":["frege"]},"moore":{"b":1873,"d":1958,"tr":"analytic","in":["sidgwick"]},"wittgenstein":{"b":1889,"d":1951,"tr":"analytic","in":["frege","russell","schopenhauer"]},"carnap":{"b":1891,"d":1970,"tr":"analytic","in":["frege","wittgenstein"]},"quine":{"b":1908,"d":2000,"tr":"analytic","in":["carnap","russell"]},"anscombe":{"b":1919,"d":2001,"tr":"analytic","in":["wittgenstein","aristotle","aquinas"]},"foot":{"b":1920,"d":2010,"tr":"analytic","in":["aristotle","anscombe"]},"arrow":{"b":1921,"d":2017,"tr":"analytic","in":["condorcet"]},"rawls":{"b":1921,"d":2002,"tr":"analytic","in":["kant","rousseau","locke","sidgwick"]},"gettier":{"b":1927,"d":2021,"tr":"analytic","in":["russell"]},"thomson":{"b":1929,"d":2020,"tr":"analytic","in":["foot"]},"nozick":{"b":1938,"d":2002,"tr":"analytic","in":["locke","rawls"]},"parfit":{"b":1942,"d":2017,"tr":"analytic","in":["sidgwick","buddha"]},"zeraYacob":{"b":1599,"d":1692,"tr":"african","in":[]},"amo":{"b":1703,"d":1759,"tr":"african","in":["leibniz","descartes"]},"wiredu":{"b":1931,"d":2022,"tr":"african","in":["russell"]},"gyekye":{"b":1939,"d":2019,"tr":"african","in":["wiredu","aristotle"]},"menkiti":{"b":1940,"d":2019,"tr":"african","in":[]},"oruka":{"b":1944,"d":1995,"tr":"african","in":["wiredu"]}}}; /*/T*/
+  /*T*/ const T = {"PROB":{"newcomb":{"acts":["one","two"],"states":["full","empty"],"acc":0.99,"big":1000000,"small":1000,"pCause":[0.5,0.5]},"lesion":{"acts":["smoke","abstain"],"states":["cancer","healthy"],"acc":0.8,"big":100,"small":10,"pCause":[0.5,0.5]},"psychopath":{"acts":["push","refrain"],"states":["psychopath","sane"],"acc":0.9,"big":100,"small":10,"pCause":[0.05,0.95]}},"GAMES":{"pd":{"rows":["c","d"],"TRPS":[5,3,1,0]},"stag":{"rows":["stag","hare"],"TRPS":[3,4,3,0]},"chicken":{"rows":["swerve","straight"],"TRPS":[4,3,0,1]},"hawkdove":{"rows":["dove","hawk"],"TRPS":[2,1,-1,0]},"coord":{"rows":["a","b"],"TRPS":[0,1,1,0]},"bos":{"rows":["opera","football"],"pay":[[[2,1],[0,0]],[[0,0],[1,2]]]},"pennies":{"rows":["heads","tails"],"pay":[[[1,-1],[-1,1]],[[-1,1],[1,-1]]]}},"MODEL":{"populations":{"$list":{"$obj":{"id":"id!","groups":{"$list":{"$obj":{"n":"numx!","w":"numx!","rel":"numx","levels":{"$list":"numx","max":8}}},"max":64,"min":1,"$req":true}}},"max":32},"cases":{"$list":{"$obj":{"id":"id!","preset":"enum:switch|driver|footbridge|loop|trapdoor|transplant|lazySusan|transmitter","kAct":"numx","sAct":"numx","kNot":"numx","sNot":"numx","means":"bool","redirect":"bool","personal":"bool","consent":"bool","driver":"bool"}},"max":32},"maxims":{"$list":{"$obj":{"id":"id!","preset":"enum:suicide|falsePromise|talents|beneficence|tennis|toys|deposit","conception":"bool","practical":"bool","natural":"bool","will":"bool"}},"max":16},"profiles":{"$list":{"$obj":{"id":"id!","scheme":"enum:aristotle|confucian|paramita!","traits":{"$req":true,"$map":"numx","max":16},"tol":"numx"}},"max":16},"elections":{"$list":{"$obj":{"id":"id!","candidates":{"$list":"id","max":8,"min":2,"$req":true},"ballots":{"$list":{"$obj":{"n":"numx!","rank":{"$list":"ref","max":8,"min":1,"$req":true},"approve":"numx"}},"max":64,"min":1,"$req":true},"axis":{"$list":"ref","max":8}}},"max":16},"lotteries":{"$list":{"$obj":{"id":"id!","outcomes":{"$list":{"$obj":{"p":"numx!","x":"numx!"}},"max":32,"min":1,"$req":true},"priors":{"$list":{"$list":"numx","max":32},"max":16}}},"max":32},"utility":{"$obj":{"u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"}},"problems":{"$list":{"$obj":{"id":"id!","preset":"enum:newcomb|lesion|psychopath","acts":{"$list":"id","max":6,"min":2},"states":{"$list":"id","max":6,"min":1},"u":{"$list":{"$list":"numx","max":6},"max":6},"pAct":{"$list":{"$list":"numx","max":6},"max":6},"pCause":{"$list":"numx","max":6},"acc":"numx","big":"numx","small":"numx"}},"max":8},"games":{"$list":{"$obj":{"id":"id!","preset":"enum:pd|stag|chicken|hawkdove|bos|pennies|coord","T":"numx","R":"numx","P":"numx","S":"numx","rows":{"$list":"id","max":6,"min":2},"cols":{"$list":"id","max":6,"min":2},"pay":{"$list":{"$list":{"$list":"numx","max":2,"min":2},"max":6},"max":6}}},"max":8},"tournament":{"$obj":{"game":"ref!","strategies":{"$list":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft","max":12,"min":1,"$req":true},"rounds":"numx","noise":"numx","reps":"numx","gens":"numx","self":"bool"}},"beliefs":{"$list":{"$obj":{"id":"id!","h":"numx!","eh":"numx!","enh":"numx!"}},"max":16},"knowledge":{"$list":{"$obj":{"id":"id!","preset":"enum:coins|ford|barns|clock|sheep|mirage|smoke|truetemp|lottery|ordinary","believed":"bool","truth":"bool","justified":"bool","falseLemma":"bool","defeater":"bool","causal":"bool","reliable":"bool","sensitive":"bool","safe":"bool","apt":"bool","intuition":"bool"}},"max":16},"sorites":{"$obj":{"n":"numx","lo":"numx","hi":"numx","shape":"enum:linear|logistic","plo":"numx","phi":"numx","cut":"numx"}},"experiments":{"$list":{"$obj":{"id":"id!","te":"enum:chineseRoom|mary|zombie|brainVat|teleporter|ship|twinEarth|experienceMachine|violinist|veil|gyges|floatingMan|butterfly|chariot|childWell|swampman|invertedSpectrum|personhood|cottonFire","options":{"$list":"id","max":8,"min":2},"positions":{"$map":"ref","max":12}}},"max":16},"thinkers":{"$list":{"$obj":{"id":"id!","label":"key","born":"numx","died":"numx","trad":"enum:greek|indian|buddhist|jain|chinese|islamic|jewish|latin|modern|analytic|continental|african","infl":{"$list":"ref","max":16}}},"max":64},"arguments":{"$list":{"$obj":{"id":"id!","premises":{"$list":"expr","max":12,"min":1,"$req":true},"conclusion":"expr!"}},"max":16},"inferences":{"$list":{"$obj":{"id":"id!","paksa":"bool!","sapaksa":"enum:all|some|none!","vipaksa":"enum:all|some|none!"}},"max":16},"bargains":{"$list":{"$obj":{"id":"id!","pts":{"$list":{"$list":"numx","max":2,"min":2},"max":32,"min":1,"$req":true},"d":{"$list":"numx","max":2,"min":2}}},"max":8},"ruleCodes":{"$list":{"$obj":{"id":"id!","rules":{"$list":{"$obj":{"id":"id!","b":"numx!","c":"numx","k":"numx","x":"numx"}},"max":32,"min":1,"$req":true}}},"max":16},"streams":{"$list":{"$obj":{"id":"id!","head":{"$list":"numx","max":2000},"cycle":{"$list":"numx","max":64,"min":1,"$req":true}}},"max":16},"ubuntu":{"$list":{"$obj":{"id":"id!","options":{"$list":{"$obj":{"id":"id!","effects":{"$list":{"$obj":{"who":"id","identity":"numx","solidarity":"numx","byAgent":"bool"}},"max":64}}},"max":12,"min":1,"$req":true},"wI":"numx","wS":"numx"}},"max":16}},"OUT":{"scalar":{"welfare":{"id":"expr","kind":"expr","of":"expr","population":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"compare":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"best":{"id":"expr","kind":"expr","of":"expr","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"paradox":{"id":"expr","kind":"expr","of":"expr","paradox":"enum:repugnant|mereAddition|sadistic|levellingDown!","rule":"enum:total|average|critical|variable|prior|kolm|maximin|leximin|suff|egal|equality|graded|lexical!","gamma":"numx","c":"numx","tau":"numx","delta":"numx","k":"numx"},"verdict":{"id":"expr","kind":"expr","of":"expr","case":"ref!","principle":"enum:util|dde|means|doingAllowing|redirect|personalForce|threshold|contract|taurek!","T":"numx"},"permits":{"id":"expr","kind":"expr","of":"expr","case":"ref!","T":"numx"},"ful":{"id":"expr","kind":"expr","of":"expr","maxim":"ref!","reading":"enum:logical|practical|teleological"},"trait":{"id":"expr","kind":"expr","of":"expr","profile":"ref!","trait":"expr!"},"virtue":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"winner":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"score":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!","cand":"ref!"},"margin":{"id":"expr","kind":"expr","of":"expr","election":"ref!","a":"ref!","b":"ref!"},"condorcet":{"id":"expr","kind":"expr","of":"expr","election":"ref!","loser":"bool"},"cycle":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"smith":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"criterion":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!","criterion":"enum:condorcet|condorcetLoser|majority|pareto|monotonic|spoiler|participation|iia!","other":"ref"},"manipulable":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"singlePeaked":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"ev":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!"},"eu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"ce":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"premium":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"cpt":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","beta":"numx","lam":"numx","gp":"numx","gm":"numx","ref":"numx"},"meu":{"id":"expr","kind":"expr","of":"expr","lottery":"ref!","alpha":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"choose":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","rule":"enum:ev|eu|cpt|meu|maxmin|maximax|regret|hurwicz|laplace|discount!","alpha":"numx","eps":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"commonCons":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","c":"ref!","d":"ref!"},"stpete":{"id":"expr","kind":"expr","of":"expr","what":"enum:ev|eu|ce!","rounds":"numx","bank":"numx","u":"enum:linear|log|sqrt|power|cara|bounded","ua":"numx","w0":"numx"},"dtv":{"id":"expr","kind":"expr","of":"expr","problem":"ref!","theory":"enum:edt|cdt!","act":"ref"},"dominant":{"id":"expr","kind":"expr","of":"expr","problem":"ref!"},"nash":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"isNash":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"mixed":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"dominantStrat":{"id":"expr","kind":"expr","of":"expr","game":"ref!","player":"int:1:2"},"paretoCell":{"id":"expr","kind":"expr","of":"expr","game":"ref!","r":"numx!","c":"numx!"},"grimDelta":{"id":"expr","kind":"expr","of":"expr","game":"ref!"},"ipd":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","what":"enum:mean|rank|share!"},"confirm":{"id":"expr","kind":"expr","of":"expr","belief":"ref!","measure":"enum:d|r|l|s|k|z|c|post!"},"dutch":{"id":"expr","kind":"expr","of":"expr","cr":{"$list":"numx","max":32,"min":1,"$req":true}},"knows":{"id":"expr","kind":"expr","of":"expr","case":"ref!","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"fits":{"id":"expr","kind":"expr","of":"expr","analysis":"enum:jtb|noFalseLemma|defeasibility|causal|reliabilism|sensitivity|safety|virtue|intuition!"},"sorites":{"id":"expr","kind":"expr","of":"expr","what":"enum:condMin|bound|superTrue|superFalse|indet|cutoff|value!","k":"numx","i":"numx"},"lottery":{"id":"expr","kind":"expr","of":"expr","n":"numx!","t":"numx!","what":"enum:believed|conj|closure!"},"preface":{"id":"expr","kind":"expr","of":"expr","n":"numx!","r":"numx!","t":"numx!","what":"enum:conj|maxClaims!"},"beauty":{"id":"expr","kind":"expr","of":"expr","theory":"enum:halfer|thirder|double!","wakes":"numx","monday":"bool"},"teAnswer":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","position":"expr!"},"teCount":{"id":"expr","kind":"expr","of":"expr","experiment":"ref!","option":"numx!"},"influence":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"overlap":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"valid":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"counter":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"form":{"id":"expr","kind":"expr","of":"expr","argument":"ref!"},"hetu":{"id":"expr","kind":"expr","of":"expr","inference":"ref!","what":"enum:cell|verdict!"},"koti":{"id":"expr","kind":"expr","of":"expr","t":"numx!","f":"numx!","e":"numx"},"bhanga":{"id":"expr","kind":"expr","of":"expr","asti":"numx!","nasti":"numx!","avak":"numx!"},"bargain":{"id":"expr","kind":"expr","of":"expr","bargain":"ref!","solution":"enum:nash|ks|egal|util!","coord":"int:0:1"},"codeValue":{"id":"expr","kind":"expr","of":"expr","code":"ref!","rate":"numx","reading":"enum:fixed|variable"},"ruleValue":{"id":"expr","kind":"expr","of":"expr","code":"ref!","rule":"id!","rate":"numx"},"idealCode":{"id":"expr","kind":"expr","of":"expr","rate":"numx","reading":"enum:fixed|variable"},"bestRate":{"id":"expr","kind":"expr","of":"expr","code":"ref!"},"idealShift":{"id":"expr","kind":"expr","of":"expr","rate":"numx"},"voteNash":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"voteNashUndominated":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"voteNashWinners":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"sincereNash":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|irv|runoff|schulze|rankedPairs|kemeny"},"gsManipulable":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"manipulators":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!"},"gsExists":{"id":"expr","kind":"expr","of":"expr","method":"enum:plurality|antiplurality|borda|runoff|irv|coombs|nanson|baldwin|bucklin|copeland|minimax|schulze|rankedPairs|kemeny|approval|black|condorcet!","m":"int:3:4","n":"int:2:4"},"overtaking":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"catchingUp":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"paretoDominates":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"finiteAnonymous":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"infiniteAnonymous":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"infiniteConflict":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!"},"truncCompare":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","T":"numx!"},"discounted":{"id":"expr","kind":"expr","of":"expr","stream":"ref!","delta":"numx!"},"limitAverage":{"id":"expr","kind":"expr","of":"expr","stream":"ref!"},"ubuntuScore":{"id":"expr","kind":"expr","of":"expr","case":"ref!","option":"id!"},"ubuntuPermissible":{"id":"expr","kind":"expr","of":"expr","case":"ref!","option":"id!"},"ubuntuBest":{"id":"expr","kind":"expr","of":"expr","case":"ref!","reading":"enum:promote|honour"}},"series":{"scores":{"id":"expr","kind":"expr","of":"expr","election":"ref!","method":"enum:plurality|antiplurality|borda|copeland|minimax|approval|bucklin!"},"match":{"id":"expr","kind":"expr","of":"expr","a":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","b":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!","player":"int:1:2"},"shares":{"id":"expr","kind":"expr","of":"expr","strategy":"enum:allc|alld|tft|tf2t|grim|pavlov|random|gtft|alt|joss|stft!"},"degree":{"id":"expr","kind":"expr","of":"expr"},"bound":{"id":"expr","kind":"expr","of":"expr"},"sorted":{"id":"expr","kind":"expr","of":"expr","population":"ref!"},"codeCurve":{"id":"expr","kind":"expr","of":"expr","code":"ref!"},"rateAxis":{"id":"expr","kind":"expr","of":"expr"},"partialSums":{"id":"expr","kind":"expr","of":"expr","a":"ref!","b":"ref!","T":"numx!"}},"scene":{"majority":{"id":"expr","kind":"expr","of":"expr","election":"ref!"},"parfit":{"id":"expr","kind":"expr","of":"expr","populations":{"$list":"ref","max":8,"min":1,"$req":true}},"virtues":{"id":"expr","kind":"expr","of":"expr","profile":"ref!"},"map":{"id":"expr","kind":"expr","of":"expr","from":"numx","to":"numx","hi":"ref"},"payoffs":{"id":"expr","kind":"expr","of":"expr","game":"ref!"}}},"REFS":{"welfare":{"population":"populations"},"compare":{"a":"populations","b":"populations"},"verdict":{"case":"cases"},"permits":{"case":"cases"},"ful":{"maxim":"maxims"},"trait":{"profile":"profiles"},"virtue":{"profile":"profiles"},"winner":{"election":"elections"},"score":{"election":"elections","cand":"cand"},"margin":{"election":"elections","a":"cand","b":"cand"},"condorcet":{"election":"elections"},"cycle":{"election":"elections"},"smith":{"election":"elections"},"criterion":{"election":"elections","other":"elections"},"manipulable":{"election":"elections"},"singlePeaked":{"election":"elections"},"ev":{"lottery":"lotteries"},"eu":{"lottery":"lotteries"},"ce":{"lottery":"lotteries"},"premium":{"lottery":"lotteries"},"cpt":{"lottery":"lotteries"},"meu":{"lottery":"lotteries"},"choose":{"a":"lotteries","b":"lotteries"},"commonCons":{"a":"lotteries","b":"lotteries","c":"lotteries","d":"lotteries"},"dtv":{"problem":"problems","act":"act"},"dominant":{"problem":"problems"},"nash":{"game":"games"},"isNash":{"game":"games"},"mixed":{"game":"games"},"dominantStrat":{"game":"games"},"paretoCell":{"game":"games"},"grimDelta":{"game":"games"},"confirm":{"belief":"beliefs"},"knows":{"case":"knowledge"},"teAnswer":{"experiment":"experiments"},"teCount":{"experiment":"experiments"},"influence":{"a":"thinker","b":"thinker"},"overlap":{"a":"thinker","b":"thinker"},"valid":{"argument":"arguments"},"counter":{"argument":"arguments"},"form":{"argument":"arguments"},"hetu":{"inference":"inferences"},"bargain":{"bargain":"bargains"},"scores":{"election":"elections"},"sorted":{"population":"populations"},"majority":{"election":"elections"},"parfit":{"populations":"populations"},"virtues":{"profile":"profiles"},"map":{"hi":"thinker"},"payoffs":{"game":"games"},"codeValue":{"code":"ruleCodes"},"ruleValue":{"code":"ruleCodes"},"bestRate":{"code":"ruleCodes"},"codeCurve":{"code":"ruleCodes"},"voteNash":{"election":"elections"},"voteNashUndominated":{"election":"elections"},"voteNashWinners":{"election":"elections"},"sincereNash":{"election":"elections"},"gsManipulable":{"election":"elections"},"manipulators":{"election":"elections"},"overtaking":{"a":"streams","b":"streams"},"catchingUp":{"a":"streams","b":"streams"},"paretoDominates":{"a":"streams","b":"streams"},"finiteAnonymous":{"a":"streams","b":"streams"},"infiniteAnonymous":{"a":"streams","b":"streams"},"infiniteConflict":{"a":"streams","b":"streams"},"truncCompare":{"a":"streams","b":"streams"},"partialSums":{"a":"streams","b":"streams"},"discounted":{"stream":"streams"},"limitAverage":{"stream":"streams"},"ubuntuScore":{"case":"ubuntu"},"ubuntuPermissible":{"case":"ubuntu"},"ubuntuBest":{"case":"ubuntu"}},"PRINCIPLES":["util","dde","means","doingAllowing","redirect","personalForce","threshold","contract","taurek"],"STRATS":["allc","alld","tft","tf2t","grim","pavlov","random","gtft","alt","joss","stft"],"TRADS":["greek","indian","buddhist","jain","chinese","islamic","jewish","latin","modern","analytic","continental","african"],"CASES":{"switch":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"driver":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":true},"footbridge":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"loop":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":true,"personal":false,"consent":false,"driver":false},"trapdoor":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":false,"consent":false,"driver":false},"transplant":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":true,"redirect":false,"personal":true,"consent":false,"driver":false},"lazySusan":{"kAct":1,"sAct":1,"kNot":5,"sNot":1,"means":false,"redirect":true,"personal":false,"consent":false,"driver":false},"transmitter":{"kAct":1000000,"sAct":0.0001,"kNot":1,"sNot":0.2,"means":false,"redirect":false,"personal":false,"consent":false,"driver":false}},"MAXIMS":{"suicide":{"conception":false,"practical":false,"natural":true,"will":false},"falsePromise":{"conception":true,"practical":true,"natural":false,"will":false},"talents":{"conception":false,"practical":false,"natural":false,"will":true},"beneficence":{"conception":false,"practical":false,"natural":false,"will":true},"tennis":{"conception":false,"practical":true,"natural":false,"will":false},"toys":{"conception":true,"practical":true,"natural":false,"will":false},"deposit":{"conception":true,"practical":true,"natural":false,"will":false}},"VIRT":{"aristotle":["courage","temperance","liberality","magnificence","magnanimity","ambition","patience","truthfulness","wit","friendliness","modesty","indignation"],"confucian":["ren","yi","li","zhi","xin"],"paramita":["dana","sila","ksanti","virya","dhyana","prajna"]},"KF":["believed","truth","justified","falseLemma","defeater","causal","reliable","sensitive","safe","apt"],"KCASES":{"coins":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ford":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"barns":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":true,"causal":true,"reliable":false,"sensitive":false,"safe":false,"apt":true,"intuition":false},"clock":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"sheep":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"mirage":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"smoke":{"believed":true,"truth":true,"justified":true,"falseLemma":true,"defeater":true,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"truetemp":{"believed":true,"truth":true,"justified":false,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":false},"lottery":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":false,"reliable":true,"sensitive":false,"safe":false,"apt":false,"intuition":false},"ordinary":{"believed":true,"truth":true,"justified":true,"falseLemma":false,"defeater":false,"causal":true,"reliable":true,"sensitive":true,"safe":true,"apt":true,"intuition":true}},"TE":{"chineseRoom":{"o":["yes","no","ifEmbodied"],"p":{"searle":"no","systemsReply":"yes","robotReply":"ifEmbodied","functionalism":"yes","biologicalNaturalism":"no"}},"mary":{"o":["newFact","newAbility","newAcquaintance","oldFactNewMode","nothing"],"p":{"jackson1982":"newFact","abilityHypothesis":"newAbility","acquaintance":"newAcquaintance","phenomenalConcepts":"oldFactNewMode","dennett":"nothing","jackson2003":"oldFactNewMode"}},"zombie":{"o":["possible","conceivableNotPossible","notConceivable"],"p":{"chalmers":"possible","typeB":"conceivableNotPossible","typeA":"notConceivable"}},"brainVat":{"o":["no","yes","ordinaryOnly","contextDependent"],"p":{"skeptic":"no","putnam":"yes","moore":"yes","nozick":"ordinaryOnly","dretske":"ordinaryOnly","contextualism":"contextDependent"}},"teleporter":{"o":["survive","die","doesNotMatter"],"p":{"psychological":"survive","animalism":"die","bodily":"die","parfit":"doesNotMatter","buddhistReductionism":"doesNotMatter"}},"ship":{"o":["repaired","reassembled","both","neither"],"p":{"continuity":"repaired","mereologicalEssentialism":"reassembled","fourDimensionalism":"both","nihilism":"neither"}},"twinEarth":{"o":["same","different","narrowSameWideDifferent"],"p":{"externalism":"different","internalism":"same","twoDimensionalism":"narrowSameWideDifferent"}},"experienceMachine":{"o":["plugIn","refuse"],"p":{"hedonism":"plugIn","nozick":"refuse","objectiveList":"refuse"}},"violinist":{"o":["mustStay","mayUnplug"],"p":{"thomson":"mayUnplug","sanctityOfLife":"mustStay"}},"veil":{"o":["maximin","averageUtility"],"p":{"rawls":"maximin","harsanyi":"averageUtility"}},"gyges":{"o":["staysJust","becomesUnjust"],"p":{"glaucon":"becomesUnjust","thrasymachus":"becomesUnjust","socrates":"staysJust"}},"floatingMan":{"o":["awareOfSelf","notAware"],"p":{"avicenna":"awareOfSelf","descartes":"awareOfSelf","physicalism":"notAware"}},"butterfly":{"o":["zhou","butterfly","transformation","undecidable"],"p":{"guoXiang":"transformation","sceptical":"undecidable","commonSense":"zhou"}},"chariot":{"o":["realSelf","conventionalOnly","inexpressible","none"],"p":{"nagasena":"conventionalOnly","pudgalavada":"inexpressible","nyaya":"realSelf","eliminativism":"none"}},"childWell":{"o":["innateGood","learned","selfInterest"],"p":{"mencius":"innateGood","xunzi":"learned","egoism":"selfInterest"}},"swampman":{"o":["hasThoughts","noThoughts"],"p":{"davidson":"noThoughts","teleosemantics":"noThoughts","functionalism":"hasThoughts","internalism":"hasThoughts"}},"invertedSpectrum":{"o":["possible","impossible"],"p":{"qualiaRealism":"possible","shoemaker":"possible","behaviourism":"impossible","dennett":"impossible"}},"personhood":{"o":["achieved","innate","both"],"p":{"menkiti":"achieved","gyekye":"both","liberalIndividualism":"innate"}},"cottonFire":{"o":["necessary","habit"],"p":{"ghazali":"habit","averroes":"necessary","hume":"habit","malebranche":"habit","aristotelian":"necessary"}}},"THINKERS":{"thales":{"b":-624,"d":-546,"tr":"greek","in":[]},"heraclitus":{"b":-535,"d":-475,"tr":"greek","in":[]},"parmenides":{"b":-515,"d":-450,"tr":"greek","in":[]},"zeno":{"b":-490,"d":-430,"tr":"greek","in":["parmenides"]},"democritus":{"b":-460,"d":-370,"tr":"greek","in":[]},"socrates":{"b":-470,"d":-399,"tr":"greek","in":[]},"plato":{"b":-428,"d":-348,"tr":"greek","in":["socrates","parmenides","heraclitus"]},"aristotle":{"b":-384,"d":-322,"tr":"greek","in":["plato"]},"pyrrho":{"b":-360,"d":-270,"tr":"greek","in":["democritus"]},"epicurus":{"b":-341,"d":-270,"tr":"greek","in":["democritus"]},"zenoCitium":{"b":-334,"d":-262,"tr":"greek","in":["socrates"]},"sextus":{"b":160,"d":210,"tr":"greek","in":["pyrrho"]},"plotinus":{"b":204,"d":270,"tr":"greek","in":["plato","aristotle"]},"mahavira":{"b":-599,"d":-527,"tr":"jain","in":[]},"umasvati":{"b":150,"d":250,"tr":"jain","in":["mahavira"]},"samantabhadra":{"b":450,"d":520,"tr":"jain","in":["umasvati"]},"gautama":{"b":150,"d":250,"tr":"indian","in":[]},"udayana":{"b":975,"d":1050,"tr":"indian","in":["gautama"]},"gangesa":{"b":1300,"d":1360,"tr":"indian","in":["udayana","gautama"]},"shankara":{"b":788,"d":820,"tr":"indian","in":["nagarjuna"]},"ramanuja":{"b":1017,"d":1137,"tr":"indian","in":["shankara"]},"buddha":{"b":-563,"d":-483,"tr":"buddhist","in":[]},"nagarjuna":{"b":150,"d":250,"tr":"buddhist","in":["buddha"]},"vasubandhu":{"b":316,"d":396,"tr":"buddhist","in":["nagarjuna"]},"dignaga":{"b":480,"d":540,"tr":"buddhist","in":["vasubandhu"]},"dharmakirti":{"b":600,"d":660,"tr":"buddhist","in":["dignaga"]},"santideva":{"b":685,"d":763,"tr":"buddhist","in":["nagarjuna"]},"dharmottara":{"b":740,"d":800,"tr":"buddhist","in":["dharmakirti"]},"laozi":{"b":-571,"d":-471,"tr":"chinese","in":[]},"confucius":{"b":-551,"d":-479,"tr":"chinese","in":[]},"mozi":{"b":-470,"d":-391,"tr":"chinese","in":["confucius"]},"mencius":{"b":-372,"d":-289,"tr":"chinese","in":["confucius"]},"zhuangzi":{"b":-369,"d":-286,"tr":"chinese","in":["laozi"]},"gongsunlong":{"b":-325,"d":-250,"tr":"chinese","in":[]},"xunzi":{"b":-310,"d":-235,"tr":"chinese","in":["confucius"]},"hanfei":{"b":-280,"d":-233,"tr":"chinese","in":["xunzi","laozi"]},"zhuxi":{"b":1130,"d":1200,"tr":"chinese","in":["mencius","confucius"]},"wangyangming":{"b":1472,"d":1529,"tr":"chinese","in":["mencius","zhuxi"]},"alkindi":{"b":801,"d":873,"tr":"islamic","in":["aristotle"]},"alfarabi":{"b":872,"d":950,"tr":"islamic","in":["aristotle","plato"]},"avicenna":{"b":980,"d":1037,"tr":"islamic","in":["alfarabi","aristotle"]},"ghazali":{"b":1058,"d":1111,"tr":"islamic","in":["avicenna"]},"averroes":{"b":1126,"d":1198,"tr":"islamic","in":["aristotle","ghazali"]},"suhrawardi":{"b":1154,"d":1191,"tr":"islamic","in":["avicenna","plato"]},"shatibi":{"b":1320,"d":1388,"tr":"islamic","in":["ghazali"]},"ibnKhaldun":{"b":1332,"d":1406,"tr":"islamic","in":["averroes"]},"mullaSadra":{"b":1572,"d":1640,"tr":"islamic","in":["avicenna","suhrawardi"]},"maimonides":{"b":1138,"d":1204,"tr":"jewish","in":["aristotle","alfarabi"]},"augustine":{"b":354,"d":430,"tr":"latin","in":["plotinus","plato"]},"boethius":{"b":477,"d":524,"tr":"latin","in":["aristotle","plato"]},"anselm":{"b":1033,"d":1109,"tr":"latin","in":["augustine"]},"aquinas":{"b":1225,"d":1274,"tr":"latin","in":["aristotle","augustine","avicenna","averroes","maimonides"]},"llull":{"b":1232,"d":1316,"tr":"latin","in":[]},"ockham":{"b":1287,"d":1347,"tr":"latin","in":["aristotle","aquinas"]},"cusanus":{"b":1401,"d":1464,"tr":"latin","in":["llull"]},"hobbes":{"b":1588,"d":1679,"tr":"modern","in":[]},"descartes":{"b":1596,"d":1650,"tr":"modern","in":["augustine"]},"spinoza":{"b":1632,"d":1677,"tr":"modern","in":["descartes","maimonides"]},"locke":{"b":1632,"d":1704,"tr":"modern","in":["descartes","hobbes"]},"leibniz":{"b":1646,"d":1716,"tr":"modern","in":["descartes","spinoza"]},"hume":{"b":1711,"d":1776,"tr":"modern","in":["locke"]},"rousseau":{"b":1712,"d":1778,"tr":"modern","in":["hobbes","locke"]},"kant":{"b":1724,"d":1804,"tr":"modern","in":["hume","rousseau","leibniz"]},"condorcet":{"b":1743,"d":1794,"tr":"modern","in":["rousseau"]},"bentham":{"b":1748,"d":1832,"tr":"modern","in":["hume"]},"wollstonecraft":{"b":1759,"d":1797,"tr":"modern","in":["rousseau"]},"hegel":{"b":1770,"d":1831,"tr":"modern","in":["kant","spinoza"]},"mill":{"b":1806,"d":1873,"tr":"modern","in":["bentham"]},"marx":{"b":1818,"d":1883,"tr":"modern","in":["hegel"]},"sidgwick":{"b":1838,"d":1900,"tr":"modern","in":["mill","kant"]},"schopenhauer":{"b":1788,"d":1860,"tr":"continental","in":["kant","plato","buddha"]},"kierkegaard":{"b":1813,"d":1855,"tr":"continental","in":["hegel"]},"nietzsche":{"b":1844,"d":1900,"tr":"continental","in":["schopenhauer"]},"husserl":{"b":1859,"d":1938,"tr":"continental","in":["descartes"]},"heidegger":{"b":1889,"d":1976,"tr":"continental","in":["husserl","aristotle","kierkegaard"]},"sartre":{"b":1905,"d":1980,"tr":"continental","in":["heidegger","husserl"]},"levinas":{"b":1906,"d":1995,"tr":"continental","in":["husserl","heidegger"]},"beauvoir":{"b":1908,"d":1986,"tr":"continental","in":["sartre","hegel"]},"fanon":{"b":1925,"d":1961,"tr":"continental","in":["sartre","hegel"]},"foucault":{"b":1926,"d":1984,"tr":"continental","in":["nietzsche","heidegger"]},"frege":{"b":1848,"d":1925,"tr":"analytic","in":["kant","leibniz"]},"russell":{"b":1872,"d":1970,"tr":"analytic","in":["frege"]},"moore":{"b":1873,"d":1958,"tr":"analytic","in":["sidgwick"]},"wittgenstein":{"b":1889,"d":1951,"tr":"analytic","in":["frege","russell","schopenhauer"]},"carnap":{"b":1891,"d":1970,"tr":"analytic","in":["frege","wittgenstein"]},"quine":{"b":1908,"d":2000,"tr":"analytic","in":["carnap","russell"]},"anscombe":{"b":1919,"d":2001,"tr":"analytic","in":["wittgenstein","aristotle","aquinas"]},"foot":{"b":1920,"d":2010,"tr":"analytic","in":["aristotle","anscombe"]},"arrow":{"b":1921,"d":2017,"tr":"analytic","in":["condorcet"]},"rawls":{"b":1921,"d":2002,"tr":"analytic","in":["kant","rousseau","locke","sidgwick"]},"gettier":{"b":1927,"d":2021,"tr":"analytic","in":["russell"]},"thomson":{"b":1929,"d":2020,"tr":"analytic","in":["foot"]},"nozick":{"b":1938,"d":2002,"tr":"analytic","in":["locke","rawls"]},"parfit":{"b":1942,"d":2017,"tr":"analytic","in":["sidgwick","buddha"]},"zeraYacob":{"b":1599,"d":1692,"tr":"african","in":[]},"amo":{"b":1703,"d":1759,"tr":"african","in":["leibniz","descartes"]},"wiredu":{"b":1931,"d":2022,"tr":"african","in":["russell"]},"gyekye":{"b":1939,"d":2019,"tr":"african","in":["wiredu","aristotle"]},"menkiti":{"b":1940,"d":2019,"tr":"african","in":[]},"oruka":{"b":1944,"d":1995,"tr":"african","in":["wiredu"]}}}; /*/T*/
   const isObj = C.isObj, has = C.has, fin = Number.isFinite;
   const arrOf = v => (Array.isArray(v) ? v : []);
   const BUDGET = 200000;   // method evaluations (social choice searches), cost-weighted
 
   /* ---------- the checker (the same codes, paths and messages as tools/lib_philo.py) ---------- */
-  const COLL = ['populations', 'cases', 'maxims', 'profiles', 'elections', 'lotteries', 'problems', 'games', 'beliefs', 'knowledge', 'experiments', 'thinkers', 'arguments', 'inferences', 'bargains'];
+  const COLL = ['populations', 'cases', 'maxims', 'profiles', 'elections', 'lotteries', 'problems', 'games', 'beliefs', 'knowledge', 'experiments', 'thinkers', 'arguments', 'inferences', 'bargains',
+    'ruleCodes', 'streams', 'ubuntu'];
   function checkSpec(spec) {
     const { P, E, W } = C.problems();
     const m = isObj(spec) ? spec.model : undefined;
@@ -34836,6 +35578,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       if (!has(T.THINKERS, x.id) && (x.born === undefined || x.died === undefined || x.trad === undefined)) E('value', p, 'needs born, died and trad (not a built-in thinker)');
       arrOf(x.infl).forEach((r, j) => { if (typeof r === 'string' && C.ID_RE.test(r) && !thinkerIds.includes(r)) E('ref', `${p}.infl[${j}]`, `no thinker ${r}`); });
     });
+    arr('ruleCodes').forEach((x, i) => { if (!isObj(x)) return; const seen = []; arrOf(x.rules).forEach((r, j) => { if (!isObj(r) || typeof r.id !== 'string') return; if (seen.includes(r.id)) E('duplicate', `model.ruleCodes[${i}].rules[${j}].id`, `the rule ${r.id} is listed twice`); else seen.push(r.id); }); });
+    arr('ubuntu').forEach((x, i) => { if (!isObj(x)) return; const seen = []; arrOf(x.options).forEach((r, j) => { if (!isObj(r) || typeof r.id !== 'string') return; if (seen.includes(r.id)) E('duplicate', `model.ubuntu[${i}].options[${j}].id`, `the option ${r.id} is listed twice`); else seen.push(r.id); }); });
     C.checkOutputs(spec, ID, ['scalar', 'series', 'scene'], (o, at) => {
       const tb = has(T.OUT, o.kind) && has(T.OUT[o.kind], o.of) ? T.OUT[o.kind][o.of] : null;
       if (!tb) { E('output', at + '.of', `${o.of} is not a ${o.kind} output of ${ID}`); return; }
@@ -35511,6 +36255,110 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
 
   /* ---------- the model, resolved for a run ---------- */
   const num = (v, d) => (fin(v) ? v : d);
+
+  /* =====================================================================================================================
+     8. Added: rule utilitarianism at an acceptance rate, strategic voting games, infinite ethics, Metz's ubuntu */
+  /** Rule consequentialism (Hooker 2000, Ideal Code, Real World, §§ 1.5–1.7 and 3.2: the ideal code is the one whose internalisation
+      by the overwhelming majority — 90 % — has the greatest expected value, counting the costs of internalising it; variable-rate
+      readings: Ridge 2006, Phil. Studies 128:242 — the average over all rates). Our explicit acceptance-rate model of one rule
+      at rate a ∈ [0, 1] (per head): V(a) = a·(b·a^k − c) − x·a·(1 − a), b the benefit to an accepter when everyone accepts, k ≥ 0 how much
+      the benefit needs others' acceptance (coordination: k = 0 none), c the internalisation cost (Hooker's "teaching costs"), x the
+      loss of an accepter exploited by the non-accepters. A code's value is the sum over its rules. */
+  function ruleValue(r, a) { const b = r.b, c = r.c || 0, k = r.k || 0, x = r.x || 0; return a * (b * Math.pow(a, k) - c) - x * a * (1 - a); }
+  const codeValue = (rules, a) => sum(rules.map(r => ruleValue(r, a)));
+  const RIDGE = rules => { let s = 0; for (let i = 0; i <= 100; i++) s += codeValue(rules, i / 100) * (i === 0 || i === 100 ? 0.5 : 1); return s / 100; };   // ∫₀¹ V(a) da, trapezoid
+  /** the winner of a profile of strict rankings under a method, ties broken by the candidate order (lexicographic, as in
+      Myerson & Weber 1993's pure-strategy analyses); ranks: index lists */
+  function lexWinner(m, ids, ranks, name, cost) {
+    const r = method({ m, ids, ballots: ranks.map(rank => ({ n: 1, rank, approve: 1 })) }, name, () => {}, cost);
+    if (r.w >= 0) return r.w;
+    const rk = r.rank || []; for (let i = 0; i < m; i++) if (rk[i] === 0) return i;
+    return 0;
+  }
+  function perms(m) { const out = []; permute(m, p => out.push(p.slice())); return out; }
+  /** voters(E) → the sincere ranking of each voter (ballot groups expanded; n must be whole), or null */
+  function voters(E, flag) {
+    const vs = []; for (const b of E.ballots) { if (!Number.isInteger(b.n)) { flag('whole'); return null; } if (b.rank.length !== E.m) { flag('partial'); return null; } for (let i = 0; i < b.n; i++) vs.push(b.rank); }
+    if (vs.length > 8) { flag('too-many'); return null; }
+    return vs;
+  }
+  /** voting games (Farquharson 1969; Myerson & Weber 1993; Dhillon & Lockwood 2004, GEB 46:55): each voter's strategy is a ballot —
+      plurality: the candidate voted for; antiplurality: the one voted against; other methods: any strict ranking. Outcomes by the method,
+      ties by the candidate order. Pure Nash equilibria by exhaustive search (all S^N profiles, ≤ 2·10⁶ evaluations), the sincere
+      profile, and the equilibria in strategies not weakly dominated. */
+  function voteGame(E, name, flag) {
+    const vs = voters(E, flag); if (!vs) return null;
+    const m = E.m, N = vs.length, P = perms(m);
+    const strat = name === 'plurality' ? Array.from({ length: m }, (_, c) => [c].concat(P[0].filter(x => x !== c)))
+      : name === 'antiplurality' ? Array.from({ length: m }, (_, c) => P[0].filter(x => x !== c).concat([c])) : P;
+    const S = strat.length, total = Math.pow(S, N);
+    if (total * (1 + N) * (name === 'kemeny' ? fact(m) : 1) > 2e6) { flag('budget'); return null; }
+    const cost = { n: 0 }, W = new Int8Array(total), prof = new Array(N);
+    for (let p = 0; p < total; p++) { let q = p; for (let i = N - 1; i >= 0; i--) { prof[i] = strat[q % S]; q = Math.floor(q / S); } W[p] = lexWinner(m, E.ids, prof, name, cost); }
+    const pw = Array.from({ length: N }, (_, i) => Math.pow(S, N - 1 - i));
+    const better = (i, x, y) => vs[i].indexOf(x) < vs[i].indexOf(y);
+    const digit = (p, i) => Math.floor(p / pw[i]) % S;
+    const isNE = p => { for (let i = 0; i < N; i++) { const base = p - digit(p, i) * pw[i]; for (let s = 0; s < S; s++) if (better(i, W[base + s * pw[i]], W[p])) return false; } return true; };
+    // weak dominance of strategy s by t for voter i over every profile of the others
+    const dominated = Array.from({ length: N }, () => new Uint8Array(S)), others = total / S, domOk = N * S * S * others <= 3e7;
+    if (domOk) for (let i = 0; i < N; i++) for (let s = 0; s < S; s++) for (let t = 0; t < S && !dominated[i][s]; t++) {
+      if (t === s) continue; let ge = true, gt = false;
+      for (let r = 0; r < others && ge; r++) { const base = Math.floor(r / pw[i]) * pw[i] * S + (r % pw[i]), ws = W[base + s * pw[i]], wt = W[base + t * pw[i]]; if (ws !== wt) { if (better(i, wt, ws)) gt = true; else ge = false; } }
+      if (ge && gt) dominated[i][s] = 1;
+    }
+    if (!domOk) flag('budget');
+    let ne = 0, und = 0; const winners = new Set();
+    for (let p = 0; p < total; p++) if (isNE(p)) { ne++; winners.add(W[p]); let ok = true; for (let i = 0; i < N; i++) if (dominated[i][digit(p, i)]) ok = false; if (ok) und++; }
+    if (!domOk) und = NaN;
+    const sinc = vs.reduce((a, v, i) => a + strat.findIndex(s => (name === 'plurality' ? s[0] === v[0] : name === 'antiplurality' ? s[m - 1] === v[m - 1] : s.every((c, k) => c === v[k]))) * pw[i], 0);
+    return { ne, und, winners: winners.size, sincereNE: isNE(sinc) ? 1 : 0, sincereWinner: W[sinc] };
+  }
+  /** Gibbard 1973 / Satterthwaite 1975: can one voter, misreporting a strict ranking, get a candidate they prefer? (ties by the
+      candidate order). gsProfile: on the model's profile; gsExists: over every profile of n voters on m candidates (a theorem made
+      visible: for m ≥ 3 every non-dictatorial onto method has one) */
+  function gsProfile(m, ids, vs, name, cost) {
+    const P = perms(m), w = lexWinner(m, ids, vs, name, cost); let who = 0;
+    for (let i = 0; i < vs.length; i++) for (const p of P) { const ws = vs.slice(); ws[i] = p; const w2 = lexWinner(m, ids, ws, name, cost); if (vs[i].indexOf(w2) < vs[i].indexOf(w)) { who++; break; } }
+    return who;
+  }
+  function gsExists(m, n, name, flag) {
+    const P = perms(m), S = P.length, total = Math.pow(S, n), ids = Array.from({ length: m }, (_, i) => 'c' + i), cost = { n: 0 };
+    if (total * n * S > 2e6) { flag('budget'); return NaN; }
+    let count = 0;
+    for (let p = 0; p < total; p++) { if (cost.n > 2e6) { flag('budget'); return NaN; } let q = p; const vs = []; for (let i = 0; i < n; i++) { vs.unshift(P[q % S]); q = Math.floor(q / S); } if (gsProfile(m, ids, vs, name, cost) > 0) count++; }
+    return count;
+  }
+  /** infinite utility streams: a head and a cycle repeated forever. Comparisons on the partial sums D_t = Σ_{s≤t} (a_s − b_s):
+      overtaking (Atsumi 1965; von Weizsäcker 1965: a ≻ b iff D_t > 0 from some t on), catching-up (Gale 1967: a ≽ b iff
+      liminf D_t ≥ 0), discounting, the limit average; Pareto, finite anonymity (a finite permutation) and infinite anonymity (the
+      same count — finite or infinite — of every value), whose joint use with Pareto is inconsistent (Van Liedekerke 1995; Lauwers
+      1997; Bostrom 2011; Askell 2018): the demonstration is a pair that Pareto ranks and infinite anonymity equates. Exact for
+      eventually periodic streams (decided on head + one common period, lcm ≤ 4096). */
+  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+  function streamAt(s, t) { return t < s.head.length ? s.head[t] : s.cycle[(t - s.head.length) % s.cycle.length]; }
+  function streamPair(a, b, flag) {
+    const L = a.cycle.length / gcd(a.cycle.length, b.cycle.length) * b.cycle.length;
+    if (L > 4096) { flag('period'); return null; }
+    const H = Math.max(a.head.length, b.head.length), n = H + L, D = new Float64Array(n), d = new Float64Array(n); let s = 0;
+    for (let t = 0; t < n; t++) { d[t] = streamAt(a, t) - streamAt(b, t); s += d[t]; D[t] = s; }
+    let per = 0; for (let t = H; t < n; t++) per += d[t];
+    let mn = Infinity, mx = -Infinity; for (let t = H; t < n; t++) { mn = Math.min(mn, D[t]); mx = Math.max(mx, D[t]); }
+    return { H, L, n, D, d, per, mn, mx };
+  }
+  const EPS = 1e-12;
+  function overtake(q, flag) { if (q.per > EPS) return 1; if (q.per < -EPS) return -1; if (q.mn > EPS) return 1; if (q.mx < -EPS) return -1; if (Math.abs(q.mn) <= EPS && Math.abs(q.mx) <= EPS) return 0; flag('incomparable'); return NaN; }
+  function catchUp(q, flag) { if (q.per > EPS) return 1; if (q.per < -EPS) return -1; const ge = q.mn >= -EPS, le = q.mx <= EPS; if (ge && le) return 0; if (ge) return 1; if (le) return -1; flag('incomparable'); return NaN; }
+  function valueCounts(s) { const c = new Map(); for (const v of s.head) c.set(v, (c.get(v) || 0) + 1); for (const v of s.cycle) c.set(v, Infinity); return c; }
+  function sameCounts(a, b) { const ca = valueCounts(a), cb = valueCounts(b); if (ca.size !== cb.size) return false; for (const [v, k] of ca) if (cb.get(v) !== k) return false; return true; }
+  /** Metz 2007 (J. Political Philosophy 15:321, p. 338): "an action is right just insofar as it promotes shared identity among people
+      grounded on good-will; an act is wrong to the extent that it fails to do so and tends to encourage the opposites of division and
+      ill-will"; Metz 2013 (in Ubuntu: Curating the Archive) and 2022 (A Relational Moral Theory) read it as honouring (prizing)
+      such relationships rather than maximising them. Our computable reading: an option changes relationships by Δidentity and
+      Δsolidarity (each −1…1); "promote": score = Σ wI·ΔI·[ΔS ≥ 0 or ΔI < 0] + wS·ΔS (identity gained with ill-will is not counted —
+      it is not "grounded on good-will"); "honour": an option in which the agent itself acts with division or ill-will (byAgent with
+      ΔI < 0 or ΔS < 0) is impermissible whatever its total; among the permissible the promote score ranks. */
+  function ubuntuScore(op, wI, wS) { let s = 0; for (const e of op.effects) { const i = e.identity, so = e.solidarity; s += wI * (so >= 0 || i < 0 ? i : 0) + wS * so; } return s; }
+  const ubuntuOk = op => !op.effects.some(e => e.byAgent && (e.identity < 0 || e.solidarity < 0));
   function prepare(spec) { const cache = new Map(); for (const [src] of exprs(spec)) if (!cache.has(src)) cache.set(src, C.cx(src)); return { cache }; }
   function run(spec, env, opts) {
     const M = (spec && spec.model) || {}, codes = [], out = {}, cache = (opts && opts.prepared && opts.prepared.cache) || new Map(), seed = (opts && opts.seed) >>> 0 || 1;
@@ -35554,6 +36402,16 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const args = byId('arguments');
     const infs = byId('inferences');
     const bargs = byId('bargains', x => ({ pts: x.pts.map(p => p.map(X)), d: Array.isArray(x.d) ? x.d.map(X) : [0, 0] }));
+    const rcodes = byId('ruleCodes', x => arrOf(x.rules).filter(isObj).map(r => ({ id: r.id, b: X(r.b), c: r.c === undefined ? 0 : X(r.c), k: r.k === undefined ? 0 : X(r.k), x: r.x === undefined ? 0 : X(r.x) })));
+    const streams = byId('streams', x => ({ head: arrOf(x.head).map(X), cycle: arrOf(x.cycle).map(X) }));
+    const ubu = byId('ubuntu', x => ({ wI: x.wI === undefined ? 1 : X(x.wI), wS: x.wS === undefined ? 1 : X(x.wS), options: arrOf(x.options).filter(isObj).map(op => ({ id: op.id, effects: arrOf(op.effects).filter(isObj).map(e => ({ identity: e.identity === undefined ? 0 : X(e.identity), solidarity: e.solidarity === undefined ? 0 : X(e.solidarity), byAgent: !!e.byAgent })) })) }));
+    const rcOk = id => { const r = rcodes.get(id); if (!r) return null; if (r.some(q => ![q.b, q.c, q.k, q.x].every(fin))) { flag('value'); return null; } if (r.some(q => q.k < 0)) { flag('range'); return null; } return r; };
+    const rate = o => { const a = o.rate === undefined ? 0.9 : X(o.rate); if (!(a >= 0 && a <= 1)) { flag('range'); return NaN; } return a; };   // Hooker 2000: 90 %
+    const idealAt = a => { const ids = arrOf(M.ruleCodes).filter(isObj).map(x => x.id); let b = -1, bv = -Infinity, tie = false; ids.forEach((id, i) => { const r = rcOk(id); if (!r) return; const v = codeValue(r, a); if (v > bv + 1e-12) { b = i; bv = v; tie = false; } else if (Math.abs(v - bv) <= 1e-12) tie = true; }); if (tie) flag('tie'); return b; };
+    const stOk = id => { const st = streams.get(id); if (!st) return null; if (![...st.head, ...st.cycle].every(fin)) { flag('value'); return null; } return st; };
+    const pairOf = o => { const a = stOk(o.a), b = stOk(o.b); return a && b ? { a, b, q: streamPair(a, b, flag) } : null; };
+    const ubOk = id => { const u = ubu.get(id); if (!u) return null; if (![u.wI, u.wS].every(fin) || u.options.some(op => op.effects.some(e => !fin(e.identity) || !fin(e.solidarity)))) { flag('value'); return null; } if (u.options.some(op => op.effects.some(e => Math.abs(e.identity) > 1 || Math.abs(e.solidarity) > 1))) flag('range'); return u; };
+    const gameMethod = o => o.method || 'plurality';
     let tour, soritesR;
     const getTour = () => (tour === undefined ? (tour = isObj(M.tournament) ? tournament(spec, games, X, seed, flag) : null) : tour);
     const getSor = () => (soritesR === undefined ? (soritesR = isObj(M.sorites) ? sorites(M.sorites, X) : null) : soritesR);
@@ -35709,6 +36567,53 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
           const b = bargs.get(o.bargain); if (!b || b.pts.some(p => !p.every(fin)) || !b.d.every(fin)) return NaN;
           const r = bargain(b.pts, b.d, o.solution); if (!fin(r[0])) flag('infeasible'); return r[o.coord || 0];
         }
+        // ----- rule consequentialism at an acceptance rate (Hooker 2000; Ridge 2006) -----
+        case 'codeValue': { const r = rcOk(o.code), a = rate(o); if (!r || !fin(a)) return NaN; return o.reading === 'variable' ? RIDGE(r) : codeValue(r, a); }
+        case 'ruleValue': { const r = rcOk(o.code), a = rate(o); if (!r || !fin(a)) return NaN; const q = r.find(x => x.id === o.rule); if (!q) { flag('missing'); return NaN; } return ruleValue(q, a); }
+        case 'idealCode': {
+          if (o.reading === 'variable') { const ids = arrOf(M.ruleCodes).filter(isObj).map(x => x.id); let b = -1, bv = -Infinity; ids.forEach((id, i) => { const r = rcOk(id); if (r && RIDGE(r) > bv + 1e-12) { b = i; bv = RIDGE(r); } }); return b; }
+          const a = rate(o); return fin(a) ? idealAt(a) : NaN;
+        }
+        case 'bestRate': { const r = rcOk(o.code); if (!r) return NaN; let b = 0, bv = -Infinity; for (let i = 0; i <= 100; i++) { const v = codeValue(r, i / 100); if (v > bv + 1e-12) { bv = v; b = i / 100; } } return b; }
+        case 'idealShift': { const a = rate(o); if (!fin(a)) return NaN; const x = idealAt(a), y = idealAt(1); return x < 0 || y < 0 ? NaN : +(x !== y); }
+        // ----- strategic voting (Farquharson 1969; Myerson & Weber 1993; Gibbard 1973; Satterthwaite 1975) -----
+        case 'voteNash': case 'voteNashUndominated': case 'voteNashWinners': case 'sincereNash': {
+          const E = elect(o.election); if (!E) return NaN; const g = voteGame(E, gameMethod(o), flag); if (!g) return NaN;
+          return o.of === 'voteNash' ? g.ne : o.of === 'voteNashUndominated' ? g.und : o.of === 'voteNashWinners' ? g.winners : g.sincereNE;
+        }
+        case 'gsManipulable': case 'manipulators': {
+          const E = elect(o.election); if (!E) return NaN; const vs = voters(E, flag); if (!vs) return NaN; if (E.m > 5) { flag('too-many'); return NaN; }
+          const k = gsProfile(E.m, E.ids, vs, o.method, { n: 0 }); return o.of === 'gsManipulable' ? +(k > 0) : k;
+        }
+        case 'gsExists': return gsExists(o.m || 3, o.n || 3, o.method, flag);
+        // ----- infinite ethics -----
+        case 'overtaking': case 'catchingUp': { const P = pairOf(o); if (!P || !P.q) return NaN; return o.of === 'overtaking' ? overtake(P.q, flag) : catchUp(P.q, flag); }
+        case 'truncCompare': { const a = stOk(o.a), b = stOk(o.b), Tn = Math.floor(X(o.T)); if (!a || !b) return NaN; if (!(Tn >= 1 && Tn <= 1e6)) { flag('range'); return NaN; } let s = 0; for (let t = 0; t < Tn; t++) s += streamAt(a, t) - streamAt(b, t); return Math.sign(s); }
+        case 'discounted': {
+          const st = stOk(o.stream), d = X(o.delta); if (!st) return NaN; if (!(d >= 0 && d < 1)) { flag('range'); return NaN; }
+          let v = 0, f = 1; for (const u of st.head) { v += f * u; f *= d; } let c = 0, g = 1; for (const u of st.cycle) { c += g * u; g *= d; } return v + f * c / (1 - g);
+        }
+        case 'limitAverage': { const st = stOk(o.stream); return st ? sum(st.cycle) / st.cycle.length : NaN; }
+        case 'paretoDominates': { const P = pairOf(o); if (!P || !P.q) return NaN; let ge = true, gt = false; for (let t = 0; t < P.q.n; t++) { if (P.q.d[t] < -EPS) ge = false; if (P.q.d[t] > EPS) gt = true; } return +(ge && gt); }
+        case 'finiteAnonymous': {
+          const P = pairOf(o); if (!P || !P.q) return NaN; if (P.q.mx - P.q.mn > EPS || Math.abs(P.q.per) > EPS || P.q.d.slice(P.q.H).some(x => Math.abs(x) > EPS)) return 0;
+          const A = [], B = []; for (let t = 0; t < P.q.H; t++) { A.push(streamAt(P.a, t)); B.push(streamAt(P.b, t)); } A.sort((x, y) => x - y); B.sort((x, y) => x - y); return +A.every((x, i) => Math.abs(x - B[i]) <= EPS);
+        }
+        case 'infiniteAnonymous': { const a = stOk(o.a), b = stOk(o.b); return a && b ? +sameCounts(a, b) : NaN; }
+        case 'infiniteConflict': {
+          const P = pairOf(o); if (!P || !P.q) return NaN; let ge = true, gt = false; for (let t = 0; t < P.q.n; t++) { if (P.q.d[t] < -EPS) ge = false; if (P.q.d[t] > EPS) gt = true; }
+          const c = +((ge && gt) && sameCounts(P.a, P.b)); if (c) flag('impossibility'); return c;
+        }
+        // ----- Metz's ubuntu -----
+        case 'ubuntuScore': case 'ubuntuPermissible': {
+          const u = ubOk(o.case); if (!u) return NaN; const op = u.options.find(x => x.id === o.option); if (!op) { flag('missing'); return NaN; }
+          return o.of === 'ubuntuPermissible' ? +ubuntuOk(op) : ubuntuScore(op, u.wI, u.wS);
+        }
+        case 'ubuntuBest': {
+          const u = ubOk(o.case); if (!u) return NaN; let b = -1, bv = -Infinity, tie = false;
+          u.options.forEach((op, i) => { if (o.reading === 'honour' && !ubuntuOk(op)) return; const v = ubuntuScore(op, u.wI, u.wS); if (v > bv + 1e-12) { b = i; bv = v; tie = false; } else if (Math.abs(v - bv) <= 1e-12) tie = true; });
+          if (b < 0) flag('none-permissible'); if (tie) flag('tie'); return b;
+        }
         default: return NaN;
       }
     }
@@ -35723,6 +36628,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
         case 'degree': { const S = getSor(); return S ? S.v.slice() : []; }
         case 'bound': { const S = getSor(); return S ? S.bound.slice() : []; }
         case 'sorted': { const g = pops.get(o.population); return g ? g.map(x => x.w).sort((a, b) => a - b) : []; }
+        case 'codeCurve': { const r = rcOk(o.code); return r ? Array.from({ length: 101 }, (_, i) => codeValue(r, i / 100)) : []; }
+        case 'rateAxis': return Array.from({ length: 101 }, (_, i) => i / 100);
+        case 'partialSums': { const a = stOk(o.a), b = stOk(o.b), Tn = Math.min(2000, Math.floor(X(o.T))); if (!a || !b || !(Tn >= 1)) return []; const out = []; let s = 0; for (let t = 0; t < Tn; t++) { s += streamAt(a, t) - streamAt(b, t); out.push(s); } return out; }
         default: return [];
       }
     }
@@ -35813,6 +36721,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     value, compare, paradox, gini, verdict, ful, pairwise, method, condWinner, condLoser, smithSet, criterion, manipulable, singlePeaked,
     utility, evOf, euOf, ceOf, cpt, meu, stPete, nashCells, mixed, dominantStrat, paretoCell, match, tournament, hull, bargain,
     confirm, knows, sorites, hetu, koti, bhanga, formOf, argument, permute,
+    // added: rule consequentialism at a rate, voting games and Gibbard–Satterthwaite, infinite streams, ubuntu
+    ruleValue, codeValue, voteGame, gsProfile, gsExists, lexWinner, streamPair, overtake, catchUp, sameCounts, ubuntuScore, ubuntuOk,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -35832,6 +36742,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
        1968), fillers, sentence lengths, nPVI (Grabe & Low 2002), readability by each language's own formula, figures of repetition
        and parallelism detected over tokens (anaphora, epistrophe, symploce, anadiplosis, climax, epanalepsis, epizeuxis,
        antimetabole, polyptoton, alliteration, tricolon, isocolon, asyndeton, polysyndeton, questions, antithesis);
+       sound figures over phonetic keys per language (rhyme, assonance, consonance, paronomasia), trope CANDIDATES by explicit cues
+       (simile markers, metaphor signals and "A is the B of C", irony markers and scare quotes, each with its cue), Greek synizesis;
+     • bipolar maps (support edges) and ASPIC+ theories, both through logic@1 (bipolar, aspic, afSolve);
      • orders and models: Monroe's motivated sequence (1935), the parts of an oration (Cicero, De Inv. I.19), the canons, stasis
        (Hermagoras via Cicero / Quintilian), the Elaboration Likelihood Model (Petty & Cacioppo 1986) and inoculation (McGuire 1961;
        Banas & Rains 2010) as teaching models, audience fit.
@@ -35917,6 +36830,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const FORMULAS = ['flesch', 'fk', 'fog', 'amstad', 'wstf', 'kandel', 'oborneva', 'lix', 'rix'];
   const FORMULA_LANG = { flesch: ['en'], fk: ['en'], fog: ['en'], amstad: ['de'], wstf: ['de'], kandel: ['fr'], oborneva: ['ru'], lix: null, rix: null };
   const SEMS = 'enum:grounded|preferred|stable';
+  const SOUND_T = 'enum:assonance|consonance|rhyme|paronomasia', TROPE_T = 'enum:simile|metaphor|irony', SUPPORT_T = 'enum:general|deductive|necessary';
+  /** an ASPIC+ literal: an atom or its negation (¬ ~ ! -), checked the same way in tools/lib_rhetoric.py; logic@1 builds the arguments */
+  const LIT_RE = /^\s*(?:[¬~!-]\s*)*[A-Za-z_][A-Za-z0-9_]{0,31}\s*$/;
 
   /* ---------- the model table (the same codes and messages as tools/lib_rhetoric.py) ---------- */
   const L_ = (t, max, min, req) => Object.assign(req ? { $req: true } : {}, { $list: t, max }, min ? { min } : {});
@@ -35947,6 +36863,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     inoculation: O_({ r0: 'numx', tau: 'numx', attack: 'numx', boosters: L_('numx', 10), horizon: 'numx' }),
     audience: O_({ grade: 'numx', formula: `enum:${FORMULAS.join('|')}`, wpmLo: 'numx', wpmHi: 'numx', tol: 'numx' }),
     delivery: O_({ pause: 'numx', window: 'numx' }),
+    synizesis: 'bool',
+    theory: O_({ kb: L_(O_({ f: 'expr!', kind: 'enum:axiom|ordinary', rank: 'int:-1000:1000' }), 64), rules: L_(O_({ id: 'id!', body: L_('expr', 8), head: 'expr!', kind: 'enum:strict|defeasible', rank: 'int:-1000:1000' }), 64),
+      contraries: L_(O_({ u: 'expr!', v: 'expr!' }), 64), link: 'enum:last|weakest', ordering: 'enum:elitist|democratic', transpose: 'bool' }),
   };
   const SP = 'ref', TM = 'ref!', ND = 'ref!', RD = 'int:1:20';
   const OUT = {
@@ -35969,31 +36888,40 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       elaboration: {}, attitude: {}, central: {}, peripheral: {}, route: {},
       resistance: { at: 'numx!' }, attitudeAfter: { at: 'numx!' },
       gradeGap: { speech: SP }, rateGap: { speech: SP }, fit: { speech: SP },
+      sound: { speech: SP, type: SOUND_T + '!' }, soundAt: { speech: SP, type: SOUND_T + '!', sentence: 'numx!' },
+      trope: { speech: SP, type: TROPE_T + '!' }, tropeAt: { speech: SP, type: TROPE_T + '!', sentence: 'numx!' },
+      bipolarLabel: { node: ND, support: SUPPORT_T, semantics: SEMS, ext: 'int:1:64' }, bipolarAccepted: { node: ND, support: SUPPORT_T, semantics: SEMS, mode: 'enum:credulous|sceptical' },
+      complexAttacks: { support: SUPPORT_T }, aspicArgs: {}, aspicDefeats: {}, justified: { concl: 'expr!', semantics: SEMS, mode: 'enum:credulous|sceptical' }, postulates: { semantics: SEMS },
     },
     series: {
       sentenceLengths: { speech: SP }, sentenceAxis: { speech: SP }, figuresBySentence: { speech: SP, type: `enum:${FIGURES.join('|')}!` },
       rateCurve: { speech: SP }, timeAxis: { speech: SP }, pauseLengths: { speech: SP },
       durations: {}, limits: {}, speechAxis: {},
       elmAxis: {}, elmCentral: {}, elmPeripheral: {}, elmTotal: {}, inocT: {}, inocR: {},
+      soundsBySentence: { speech: SP, type: SOUND_T + '!' }, tropesBySentence: { speech: SP, type: TROPE_T + '!' },
     },
     scene: {
       toulmin: { node: ND }, map: { semantics: SEMS }, flow: {}, figures: { speech: SP, type: `enum:${FIGURES.join('|')}` }, timing: { speech: SP },
+      sounds: { speech: SP, type: SOUND_T }, tropes: { speech: SP, type: TROPE_T }, aspic: { semantics: SEMS },
     },
   };
   const NUMX_ORDER = ['sentence', 'tau', 'at'];
   const NEEDS = {   // the model section each output needs
     speeches: ['words', 'sentences', 'clauses', 'syllables', 'duration', 'wpm', 'articulation', 'pauses', 'pauseRate', 'meanPause', 'longestPause', 'fillers', 'fillerRate',
       'meanSentence', 'sdSentence', 'cvSentence', 'npvi', 'questions', 'readability', 'figure', 'figureAt', 'sentenceLengths', 'sentenceAxis', 'figuresBySentence',
-      'rateCurve', 'timeAxis', 'pauseLengths', 'figures', 'timing', 'gradeGap', 'rateGap', 'fit'],
+      'rateCurve', 'timeAxis', 'pauseLengths', 'figures', 'timing', 'gradeGap', 'rateGap', 'fit', 'sound', 'soundAt', 'trope', 'tropeAt', 'soundsBySentence', 'tropesBySentence',
+      'sounds', 'tropes'],
     debate: ['limit', 'overtime', 'poiOffered', 'poiAccepted', 'poiProtected', 'violations', 'rank', 'points', 'speaks', 'winner', 'winnerSide', 'consistent', 'lpw',
       'ballotsFor', 'margin', 'tab', 'swing', 'durations', 'limits', 'speechAxis'],
-    map: ['label', 'accepted', 'extensions', 'inCount', 'netBenefit', 'weighedWinner', 'dropped', 'clash', 'toulmin', 'stockMet', 'primaFacie', 'cqOpen', 'cqFailed', 'slope', 'map', 'flow'],
+    map: ['label', 'accepted', 'extensions', 'inCount', 'netBenefit', 'weighedWinner', 'dropped', 'clash', 'toulmin', 'stockMet', 'primaFacie', 'cqOpen', 'cqFailed', 'slope', 'map', 'flow',
+      'bipolarLabel', 'bipolarAccepted', 'complexAttacks'],
     forms: ['valid', 'counter'],
     outline: ['orderOk', 'kendall', 'misplaced'],
     stasis: ['stasis'],
     elm: ['elaboration', 'attitude', 'central', 'peripheral', 'route', 'elmAxis', 'elmCentral', 'elmPeripheral', 'elmTotal'],
     inoculation: ['resistance', 'attitudeAfter', 'inocT', 'inocR'],
     audience: ['gradeGap', 'rateGap', 'fit'],
+    theory: ['aspicArgs', 'aspicDefeats', 'justified', 'postulates', 'aspic'],
   };
   const rawOk = v => typeof v === 'string' && v.trim() !== '' && v.length <= RAW_MAX;
   const arr = v => (Array.isArray(v) ? v : []);
@@ -36079,12 +37007,20 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       else if (f.length > LIM.fillers) E('size', 'model.delivery.fillers', `more than ${LIM.fillers} items`);
       else f.forEach((x, i) => { if (!(typeof x === 'string' && x.trim() !== '' && x.length <= 32)) E('value', `model.delivery.fillers[${i}]`, 'needs a filler word or phrase (1-32 characters)'); });
     }
+    if (isObj(M.theory)) {
+      const Th = M.theory, lit = (v, p) => { if (typeof v === 'string' && !LIT_RE.test(v)) E('literal', p, 'needs a literal (an atom or ¬atom)'); };
+      arr(Th.kb).forEach((k, i) => { if (isObj(k)) lit(k.f, `model.theory.kb[${i}].f`); });
+      arr(Th.rules).forEach((r, i) => { if (!isObj(r)) return; arr(r.body).forEach((b, j) => lit(b, `model.theory.rules[${i}].body[${j}]`)); lit(r.head, `model.theory.rules[${i}].head`); });
+      arr(Th.contraries).forEach((c, i) => { if (isObj(c)) { lit(c.u, `model.theory.contraries[${i}].u`); lit(c.v, `model.theory.contraries[${i}].v`); } });
+      dups(Th.rules, 'model.theory.rules');
+    }
     C.checkOutputs(spec, ID, ['scalar', 'series', 'scene'], (o, at, E2, W2) => {
       const T = OUT[o.kind][o.of];
       if (!T) { E2('output', at + '.of', `${o.kind} outputs of ${ID} are: ${Object.keys(OUT[o.kind]).join(', ')}`); return; }
       C.walk(o, Object.assign({ id: 'expr', kind: 'expr', of: 'expr' }, T), at, E2, W2);
       for (const [sec, ofs] of Object.entries(NEEDS)) if (ofs.includes(o.of) && !isObj(M[sec]) && !(sec === 'speeches' && Array.isArray(M.speeches) && M.speeches.length) && !(sec === 'forms' && Array.isArray(M.forms) && M.forms.length)) E2('ref', at + '.of', `needs model.${sec}`);
       if (o.of === 'swing' && !(D && D.format === 'oxford')) E2('ref', at + '.of', 'the vote swing is for the oxford format');
+      if (o.of === 'justified' && typeof o.concl === 'string' && !LIT_RE.test(o.concl)) E2('literal', at + '.concl', 'needs a literal (an atom or ¬atom)');
       if (o.of === 'fallacy' && o.node === undefined && o.form === undefined) E2('value', at, 'needs node or form');
       if (o.of === 'speaks' && o.team === undefined && o.speech === undefined) E2('value', at, 'needs team or speech');
       if (['fallacies', 'fallacy'].includes(o.of) && !MP && !(Array.isArray(M.forms) && M.forms.length)) E2('ref', at + '.of', 'needs model.map or model.forms');
@@ -36201,35 +37137,45 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return Math.max(1, n);
   }
   const VOW = { de: /[aeiouyäöü]+/g, fr: /[aeiouyàâäéèêëîïôöùûüÿœæ]+/g, es: /[aeiouyáéíóúü]+/g, it: /[aeiouàèéìíòóùú]+/g, ru: /[аеёиоуыэюя]/g, el: /[αεηιουω]+/g, other: /[aeiouy]+/g };
-  function syllables(w, lang) {
+  function syllables(w, lang, syn) {
     if (lang === 'en') return sylEn(w);
     let x = w.toLowerCase();
     if (lang === 'fr') x = x.length > 3 ? x.replace(/(?:e|es|ent)$/, '') || x : x;   // the mute final e (prose reading)
     if (lang === 'es') x = x.replace(/([aeo])([íú])/g, '$1-$2').replace(/([íú])([aeo])/g, '$1-$2');   // hiatus with an accented í, ú
-    if (lang === 'el') return sylEl(x);
+    if (lang === 'el') return sylEl(x, syn);
     const re = VOW[lang] || VOW.other;
     return Math.max(1, (x.match(re) || []).length);
   }
   /** Greek: one syllable per vowel, except the digraphs αι ει οι υι ου αυ ευ ηυ — unless the second vowel has a diaeresis (προϊόν) or the
-      first carries the accent (ρολόι); synizesis (παιδιά) is not modelled (Triantafyllidis, Νεοελληνική Γραμματική §§ 15–20) */
+      first carries the accent (ρολόι) (Triantafyllidis, Νεοελληνική Γραμματική §§ 15–20). With syn (model.synizesis): synizesis — an
+      unaccented ι, υ (alone, not the second letter of a digraph) or ει / οι before a vowel is a glide and makes no syllable (παιδιά 2,
+      ποιος 1, ήλιος 2, αλήθεια 3; Holton, Mackridge & Philippaki-Warburton 1997 §1.4.2; Triantafyllidis § 20). It is the everyday
+      pronunciation; learned words that keep the hiatus (διάλογος, ιδιαίτερος in careful speech) are then counted one short. */
   const EL_DI = new Set(['αι', 'ει', 'οι', 'υι', 'ου', 'αυ', 'ευ', 'ηυ']);
-  function sylEl(w) {
-    const d = w.normalize('NFD'); let n = 0, prev = null;
+  function sylEl(w, syn) {
+    const d = w.normalize('NFD'); let n = 0, prev = null, glide = false;
     for (let i = 0; i < d.length; i++) {
       const c = d[i];
       if (/\p{M}/u.test(c)) continue;
-      if (!'αεηιουω'.includes(c)) { prev = null; continue; }
+      if (!'αεηιουω'.includes(c)) { prev = null; glide = false; continue; }
       let acc = false, dia = false; for (let k = i + 1; k < d.length && /\p{M}/u.test(d[k]); k++) { if (d[k] === '\u0308') dia = true; else acc = true; }
-      if (prev && EL_DI.has(prev.c + c) && !dia && !prev.acc) { prev = null; continue; }
+      if (prev && EL_DI.has(prev.c + c) && !dia && !prev.acc) {
+        // a digraph ει / οι (sound i) without accent before a vowel: synizesis takes its syllable back
+        if (syn && (prev.c + c === 'ει' || prev.c + c === 'οι') && !acc && nextVowel(d, i)) { n--; glide = true; }
+        prev = null; continue;
+      }
+      if (syn && (c === 'ι' || c === 'υ') && !acc && !dia && nextVowel(d, i)) { prev = null; glide = true; continue; }   // παιδιά, ποιος: a glide
+      if (glide && prev === null) glide = false;
       n++; prev = { c, acc };
     }
     return Math.max(1, n);
   }
+  function nextVowel(d, i) { let k = i + 1; while (k < d.length && /\p{M}/u.test(d[k])) k++; return k < d.length && 'αεηιουω'.includes(d[k]); }
   const letters = s => (s.match(/\p{L}/gu) || []).length;
   /** readability(words, nSent, lang, formula, codes): the formula of its own language; sources in the chapter §4 */
-  function readability(words, nSent, lang, formula, codes) {
+  function readability(words, nSent, lang, formula, codes, syn) {
     const W = words.length; if (!W) { codes.push('empty'); return NaN; }
-    const S = Math.max(1, nSent), syl = words.map(w => syllables(w, lang)), SY = syl.reduce((a, b) => a + b, 0);
+    const S = Math.max(1, nSent), syl = words.map(w => syllables(w, lang, syn)), SY = syl.reduce((a, b) => a + b, 0);
     const asl = W / S, asw = SY / W, poly = syl.filter(x => x >= 3).length, mono = syl.filter(x => x === 1).length, long = words.filter(w => letters(w) > 6).length;
     const L = FORMULA_LANG[formula]; if (L && !L.includes(lang)) codes.push('formula_lang');
     let v = NaN;
@@ -36327,6 +37273,166 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const ni = s.toks.findIndex(i => negS.has(toks[i].f));
       if (ni >= 0) { const ci = s.toks.findIndex((i, k) => k > ni && conS.has(toks[i].f)); if (ci > ni) add('antithesis', [s.toks[ni], s.toks[ci]]); }
     });
+    return hits;
+  }
+
+  /* ---------- sound figures over phonetic keys (rhyme, assonance, consonance, paronomasia) ----------
+     phon(word, lang) → a phonetic key: the spelling turned into a rough phoneme string by each language's main grapheme rules (en: the
+     usual digraphs and the silent final e, Carney 1994 A Survey of English Spelling; el: Holton, Mackridge & Philippaki-Warburton 1997
+     §1.1–1.4, digraphs and synizesis; de: Wiese 1996, final devoicing; fr: Tranel 1987, nasal vowels and mute finals; ru: Timberlake
+     2004 ch. 2, final devoicing, ё; es: seseo and yeísmo as in most speakers, Hualde 2005; it: Krämer 2009). Vowels in a key:
+     a e i o u y ø A E O (A E O: the French nasals). It is a key for comparing words, not a transcription: stress is not marked, so a
+     rhyme is matched from the last vowel. Definitions: Lanham 1991 (assonance, consonance, paronomasia), Brogan in the Princeton
+     Encyclopedia of Poetry and Poetics 2012 (rhyme). Detection rules: docs/library/rhetoric.md §6.2. */
+  const SOUNDS = ['assonance', 'consonance', 'rhyme', 'paronomasia'];
+  const KV = 'aeiouyøAEO';
+  const PHON = {
+    en: [[/ph/g, 'f'], [/gh(?=t|$)/g, ''], [/^wr/, 'r'], [/^kn/, 'n'], [/ck/g, 'k'], [/sh/g, 'S'], [/tch/g, 'C'], [/ch/g, 'C'], [/th/g, 'T'], [/wh/g, 'w'], [/qu/g, 'kw'],
+      [/c(?=[eiy])/g, 's'], [/c/g, 'k'], [/x/g, 'ks'], [/(ee|ea|ie)/g, 'i'], [/oo/g, 'u'], [/(ou|ow)/g, 'au'], [/(ai|ay|ei|ey)/g, 'ei'], [/(oa|oe)/g, 'o'],
+      [/([^aeiou])e$/, '$1'], [/([^aeiou])y$/, '$1i'], [/y(?=[^aeiou]|$)/g, 'i'], [/([a-z])\1/g, '$1']],
+    el: [[/αυ(?=[θκξπσςτφχψ]|$)/g, 'af'], [/ευ(?=[θκξπσςτφχψ]|$)/g, 'ef'], [/ηυ(?=[θκξπσςτφχψ]|$)/g, 'if'], [/αυ/g, 'av'], [/ευ/g, 'ev'], [/ηυ/g, 'iv'], [/ου/g, 'u'], [/(αι)/g, 'e'], [/(ει|οι|υι)/g, 'i'], [/[ηιυ]/g, 'i'], [/ω/g, 'o'], [/ε/g, 'e'], [/α/g, 'a'], [/ο/g, 'o'], [/μπ/g, 'b'], [/ντ/g, 'd'], [/(γκ|γγ)/g, 'g'],
+      [/τσ/g, 'ts'], [/τζ/g, 'dz'], [/ψ/g, 'ps'], [/ξ/g, 'ks'], [/θ/g, 'T'], [/δ/g, 'D'], [/χ/g, 'x'], [/γ/g, 'G'], [/φ/g, 'f'], [/β/g, 'v'], [/[σς]/g, 's'], [/κ/g, 'k'],
+      [/λ/g, 'l'], [/μ/g, 'm'], [/ν/g, 'n'], [/π/g, 'p'], [/ρ/g, 'r'], [/τ/g, 't'], [/ζ/g, 'z'], [/([a-zA-Z])\1/g, '$1']],
+    de: [[/sch/g, 'S'], [/ch/g, 'x'], [/ck/g, 'k'], [/ph/g, 'f'], [/th/g, 't'], [/ie/g, 'i'], [/(ei|ai)/g, 'ai'], [/(eu|äu)/g, 'oi'], [/ä/g, 'e'], [/ö/g, 'ø'], [/ü/g, 'y'],
+      [/ß/g, 's'], [/qu/g, 'kv'], [/v/g, 'f'], [/w/g, 'v'], [/z/g, 'ts'], [/h(?![aeiouäöüy])/g, ''], [/([a-z])\1/g, '$1'], [/b$/, 'p'], [/d$/, 't'], [/g$/, 'k']],
+    fr: [[/eaux?$/, 'o'], [/eau/g, 'o'], [/au/g, 'o'], [/oi/g, 'wa'], [/ou/g, 'U'], [/(ai|ei)/g, 'e'], [/[éèêë]/g, 'e'], [/[àâ]/g, 'a'], [/[îï]/g, 'i'], [/[ôö]/g, 'o'], [/[ùûü]/g, 'y'],
+      [/qu/g, 'k'], [/ph/g, 'f'], [/ch/g, 'S'], [/gn/g, 'N'], [/ç/g, 's'], [/c(?=[ei])/g, 's'], [/c/g, 'k'], [/g(?=[ei])/g, 'Z'], [/j/g, 'Z'], [/h/g, ''],
+      [/(ain|ein|in|im|un)(?![aeiouy])/g, 'E'], [/(an|am|en|em)(?![aeiouy])/g, 'A'], [/(on|om)(?![aeiouy])/g, 'O'], [/(es|ent|e)$/, ''], [/[stdxzp]$/, ''], [/u/g, 'y'], [/U/g, 'u'], [/([a-z])\1/g, '$1']],
+    ru: [[/щ/g, 'S'], [/ш/g, 'S'], [/ж$/, 'S'], [/ж/g, 'Z'], [/ч/g, 'C'], [/ц/g, 'ts'], [/х/g, 'x'], [/[ьъ]/g, ''], [/ё/g, 'o'], [/ю/g, 'u'], [/я/g, 'a'], [/[иы]/g, 'i'], [/[эе]/g, 'e'],
+      [/а/g, 'a'], [/о/g, 'o'], [/у/g, 'u'], [/й/g, 'j'], [/б$/, 'p'], [/в$/, 'f'], [/г$/, 'k'], [/д$/, 't'], [/з$/, 's'], [/б/g, 'b'], [/в/g, 'v'], [/г/g, 'g'], [/д/g, 'd'], [/з/g, 'z'],
+      [/к/g, 'k'], [/л/g, 'l'], [/м/g, 'm'], [/н/g, 'n'], [/п/g, 'p'], [/р/g, 'r'], [/с/g, 's'], [/т/g, 't'], [/ф/g, 'f'], [/([a-zA-Z])\1/g, '$1']],
+    es: [[/ll/g, 'j'], [/y(?=[aeiou])/g, 'j'], [/y$/, 'i'], [/ch/g, 'C'], [/qu/g, 'k'], [/gu(?=[ei])/g, 'g'], [/g(?=[ei])/g, 'x'], [/c(?=[ei])/g, 's'], [/c/g, 'k'], [/z/g, 's'],
+      [/h/g, ''], [/v/g, 'b'], [/j/g, 'x'], [/ñ/g, 'N'], [/[á]/g, 'a'], [/[é]/g, 'e'], [/[í]/g, 'i'], [/[óö]/g, 'o'], [/[úü]/g, 'u'], [/rr/g, 'R'], [/([a-z])\1/g, '$1']],
+    it: [[/ch/g, 'k'], [/gh/g, 'g'], [/sc(?=[ei])/g, 'S'], [/gli/g, 'L'], [/gn/g, 'N'], [/c(?=[ei])/g, 'C'], [/g(?=[ei])/g, 'J'], [/qu/g, 'kw'], [/h/g, ''], [/[àá]/g, 'a'], [/[èé]/g, 'e'],
+      [/[ìí]/g, 'i'], [/[òó]/g, 'o'], [/[ùú]/g, 'u'], [/([a-z])\1/g, '$1']],
+    other: [],
+  };
+  /** phon(word, lang) → the phonetic key (lower case input; Greek: an unaccented ι/υ/ει/οι before a vowel is the glide j — synizesis) */
+  function phon(w, lang) {
+    let x = String(w || '').toLowerCase().normalize('NFC');
+    if (lang === 'el') {
+      const d = x.normalize('NFD');
+      // synizesis: [ι υ ει οι] without accent or diaeresis, before a vowel → j (Holton et al. 1997 §1.4.2); then drop the accents
+      x = d.replace(/(ει|οι|ι|υ)(?![́̈])(?=[αεηιουω])/g, (m, g, off) => (off > 0 && 'αεο'.includes(d[off - 1]) && g.length === 1 ? m : 'J')).replace(/\p{M}/gu, '').replace(/ς/g, 'σ');
+      for (const [re, r] of PHON.el) x = x.replace(re, r);
+      return x.replace(/J/g, 'j');
+    }
+    if (lang !== 'fr' && lang !== 'de' && lang !== 'es' && lang !== 'it') x = x.normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC');
+    if (lang === 'de') x = x.normalize('NFC');
+    for (const [re, r] of PHON[lang] || PHON.other) x = x.replace(re, r);
+    return x.normalize('NFD').replace(/\p{M}/gu, '').replace(/['’ʼ-]/g, '');
+  }
+  const isV = c => KV.includes(c);
+  /** the rime of a key: from its last vowel group to the end ('nation' → 'Sion' … 'ion'); null without a vowel */
+  function rimeOf(k) { let i = k.length - 1; while (i >= 0 && !isV(k[i])) i--; if (i < 0) return null; while (i > 0 && isV(k[i - 1])) i--; return k.slice(i); }
+  const vowelsOf = k => (k.match(new RegExp('[' + KV + ']+', 'g')) || []);
+  const codaOf = k => { const m = k.match(new RegExp('[^' + KV + ']+$')); return m ? m[0] : ''; };
+  function lev(a, b) { if (Math.abs(a.length - b.length) > 2) return 3; const d = Array.from({ length: a.length + 1 }, (_, i) => [i]); for (let j = 1; j <= b.length; j++) d[0][j] = j; for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[a.length][b.length]; }
+  /** soundFigures(A, lang) → hits {type, sent, toks}: rhyme (the last words of two clauses ≤ 2 apart share the rime, words differ);
+      assonance (≥ 3 content words within 6 tokens of a clause share a stressed-or-not vowel sound and not one rime); consonance (≥ 3
+      content words within 6 tokens share a final consonant sound and not their first letter: that is alliteration); paronomasia (two
+      different content words of a sentence, ≥ 4 letters, not one stem, whose keys differ by one edit) */
+  function soundFigures(A, lang) {
+    const { toks, sents } = A, hits = [], stop = STOPSET[lang] || STOPSET.other, key = new Map();
+    const K = i => { if (!key.has(i)) key.set(i, phon(toks[i].s, lang)); return key.get(i); };
+    const content = i => !toks[i].filler && !stop.has(toks[i].f) && /\p{L}/u.test(toks[i].f);
+    const add = (type, ti) => { if (hits.length < 4000) hits.push({ type, sent: toks[ti[0]].sent, toks: ti }); };
+    const clauses = []; sents.forEach(s => s.clauses.forEach(c => { const w = c.filter(i => !toks[i].filler); if (w.length) clauses.push(w); }));
+    const used = new Set();
+    for (let k = 0; k < clauses.length; k++) for (let j = k + 1; j <= k + 2 && j < clauses.length; j++) {
+      const a = clauses[k][clauses[k].length - 1], b = clauses[j][clauses[j].length - 1];
+      if (used.has(b) || toks[a].f === toks[b].f) continue;
+      const ra = rimeOf(K(a)), rb = rimeOf(K(b));
+      if (ra && rb && ra === rb && (ra.length >= 2 || codaOf(ra) === '')) { add('rhyme', [a, b]); used.add(b); break; }
+    }
+    for (const c of clauses) {
+      const cw = c.filter(content);
+      let doneA = false, doneC = false;
+      for (let p = 0; p + 2 < cw.length && !(doneA && doneC); p++) {
+        const win = cw.filter(i => i >= cw[p] && i - cw[p] <= 6);
+        if (win.length < 3) continue;
+        if (!doneA) {
+          const cnt = new Map(); for (const i of win) for (const v of new Set(vowelsOf(K(i)))) cnt.set(v, (cnt.get(v) || []).concat([i]));
+          for (const [, is] of cnt) if (is.length >= 3 && new Set(is.map(i => toks[i].f)).size >= 3 && new Set(is.map(i => rimeOf(K(i)))).size > 1) { add('assonance', is.slice(0, 6)); doneA = true; break; }
+        }
+        if (!doneC) {
+          const cnt = new Map(); for (const i of win) { const co = codaOf(K(i)); if (co) cnt.set(co, (cnt.get(co) || []).concat([i])); }
+          for (const [, is] of cnt) if (is.length >= 3 && new Set(is.map(i => toks[i].f)).size >= 3 && new Set(is.map(i => K(i)[0])).size > 1) { add('consonance', is.slice(0, 6)); doneC = true; break; }
+        }
+      }
+    }
+    sents.forEach(s => {
+      const cw = s.toks.filter(i => content(i) && toks[i].f.length >= 4);
+      outer: for (let p = 0; p < cw.length; p++) for (let q = p + 1; q < cw.length && q < p + 12; q++) {
+        const a = toks[cw[p]].f, b = toks[cw[q]].f;
+        if (a === b || prefix(a, b) >= Math.max(4, Math.ceil(0.6 * Math.max(a.length, b.length)))) continue;
+        const ka = K(cw[p]), kb = K(cw[q]);
+        if (ka !== kb && Math.min(ka.length, kb.length) >= 3 && lev(ka, kb) === 1) { add('paronomasia', [cw[p], cw[q]]); break outer; }
+      }
+    });
+    return hits;
+  }
+
+  /* ---------- trope CANDIDATES by explicit cues (never a judgement of meaning: each hit names its cue, docs/library/rhetoric.md §6.3)
+     simile: a comparison marker between two content words (like, as … as, as if; σαν, όπως, λες και; wie, als ob; comme, tel;
+     как, словно, будто; como, cual; come, quasi) — Lanham 1991; Israel, Harding & Tobin 2004 on simile markers;
+     metaphor: a signalling expression (so to speak, metaphorically, figuratively, literally, as it were, a kind of … — Goatly 1997,
+     The Language of Metaphors ch. 6) or the structure "X copula DET N of" (the genitive metaphor "A is the B of C", Brooke-Rose 1958);
+     irony: an irony marker (so-called, yeah right, oh great …; δήθεν, τάχα; sogenannt, na toll; soi-disant; так называемый, ну конечно;
+     el llamado; cosiddetto — Attardo 2000 on irony markers; Burgers, van Mulken & Schellens 2012) or scare quotes around 1–3 words
+     or "?!" (Kreuz 1996). A candidate is a place to look, never a proof. */
+  const TROPES = ['simile', 'metaphor', 'irony'];
+  const TROPE_CUES = {
+    en: { simile: ['like', 'as if', 'as though', 'as * as'], metaphor: ['so to speak', 'metaphorically', 'figuratively', 'literally', 'as it were', 'a kind of', 'a sort of', 'in a sense', 'in a way'], irony: ['so-called', 'so called', 'yeah right', 'oh great', 'oh wonderful', 'just great', 'what a surprise', 'how convenient', 'thanks a lot'], copula: ['is', 'are', 'was', 'were'], det: ['a', 'an', 'the'], of: ['of'], pron: ['i', 'you', 'we', 'they', "don't", 'would', 'feel', 'looks', 'look'] },
+    el: { simile: ['σαν', 'σα', 'όπως', 'λες και', 'σάμπως', 'καθώς'], metaphor: ['μεταφορικά', 'κατά κάποιον τρόπο', 'ας πούμε', 'κυριολεκτικά', 'ένα είδος', 'που λέμε'], irony: ['δήθεν', 'τάχα', 'τάχατες', 'μπράβο σου', 'τι ωραία', 'πολύ ωραία'], copula: ['είναι', 'ήταν'], det: ['ο', 'η', 'το', 'οι', 'τα', 'ένας', 'μια', 'μία', 'ένα'], of: [], pron: [] },
+    de: { simile: ['wie', 'als ob', 'gleich wie', 'gleichsam'], metaphor: ['sozusagen', 'gewissermaßen', 'bildlich gesprochen', 'im übertragenen sinn', 'buchstäblich', 'eine art'], irony: ['sogenannte', 'sogenannter', 'sogenannten', 'sogenanntes', 'na toll', 'na super', 'wie schön', 'vielen dank auch'], copula: ['ist', 'sind', 'war', 'waren'], det: ['der', 'die', 'das', 'ein', 'eine'], of: [], pron: [] },
+    fr: { simile: ['comme', 'tel', 'telle', 'tels', 'telles', 'pareil à', 'ainsi que', 'semblable à'], metaphor: ['pour ainsi dire', 'au sens figuré', 'métaphoriquement', 'littéralement', 'une sorte de', 'une espèce de'], irony: ['soi-disant', 'prétendu', 'prétendue', 'quelle surprise', 'merci bien', 'bravo'], copula: ['est', 'sont', 'était', 'étaient'], det: ['le', 'la', 'les', 'un', 'une', 'l'], of: ['de', 'du', 'des'], pron: [] },
+    ru: { simile: ['как', 'словно', 'будто', 'точно', 'подобно', 'как будто', 'как бы'], metaphor: ['так сказать', 'в переносном смысле', 'образно говоря', 'буквально', 'своего рода', 'в некотором смысле'], irony: ['так называемый', 'так называемая', 'так называемое', 'так называемые', 'ну конечно', 'ну спасибо', 'да уж'], copula: ['есть', 'это'], det: [], of: [], pron: [] },
+    es: { simile: ['como', 'cual', 'igual que', 'tal como', 'como si'], metaphor: ['por así decirlo', 'en sentido figurado', 'metafóricamente', 'literalmente', 'una especie de', 'una suerte de'], irony: ['el llamado', 'la llamada', 'supuesto', 'supuesta', 'qué bien', 'sí, claro', 'qué sorpresa'], copula: ['es', 'son', 'era', 'eran'], det: ['el', 'la', 'los', 'las', 'un', 'una'], of: ['de', 'del'], pron: [] },
+    it: { simile: ['come', 'quasi', 'simile a', 'pari a', 'come se'], metaphor: ['per così dire', 'in senso figurato', 'metaforicamente', 'letteralmente', 'una specie di', 'una sorta di'], irony: ['cosiddetto', 'cosiddetta', 'cosiddetti', 'cosiddette', 'che bello', 'sì, certo', 'grazie tante'], copula: ['è', 'sono', 'era', 'erano'], det: ['il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una'], of: ['di', 'del', 'della'], pron: [] },
+    other: { simile: [], metaphor: [], irony: [], copula: [], det: [], of: [], pron: [] },
+  };
+  /** tropes(A, lang, text) → candidate hits {type, sent, toks, cue} */
+  function tropes(A, lang, text) {
+    const { toks, sents } = A, hits = [], T = TROPE_CUES[lang] || TROPE_CUES.other, stop = STOPSET[lang] || STOPSET.other;
+    const content = i => i >= 0 && i < toks.length && !toks[i].filler && !stop.has(toks[i].f) && /\p{L}/u.test(toks[i].f);
+    const add = (type, ti, cue) => { if (hits.length < 4000) hits.push({ type, sent: toks[ti[0]].sent, toks: ti, cue }); };
+    const words = s => [...String(s).normalize('NFC').matchAll(TOK)].map(q => fold(q[0]));
+    const F = new Set();
+    const match = (s, phrase) => {   // the token positions where a cue phrase (words, '*' = any one word) starts inside sentence s
+      const ws = words(phrase), out = [];
+      for (let k = 0; k + ws.length <= s.toks.length; k++) if (ws.every((w, j) => w === '*' || toks[s.toks[k + j]].f === w)) out.push(k);
+      return { ws, out };
+    };
+    const cs = new Set((T.copula || []).map(fold)), ds = new Set((T.det || []).map(fold)), ofs = new Set((T.of || []).map(fold)), pr = new Set((T.pron || []).map(fold));
+    sents.forEach(s => {
+      for (const type of TROPES) for (const cue of T[type]) {
+        const { ws, out } = match(s, cue);
+        for (const k of out) {
+          const at = s.toks.slice(k, k + ws.length);
+          if (F.has(type + at[0])) continue;
+          if (type === 'simile') {
+            const before = s.toks.slice(0, k).filter(content), after = s.toks.slice(k + ws.length).filter(content);
+            if (!before.length || !after.length) continue;
+            if (lang === 'en' && cue === 'like' && k > 0 && pr.has(toks[s.toks[k - 1]].f)) continue;   // "I like", "would like", "looks like" are not similes
+          }
+          F.add(type + at[0]); add(type, at, cue); break;
+        }
+      }
+      // the genitive metaphor: copula DET content-word OF
+      for (let k = 0; k + 3 < s.toks.length; k++) {
+        const t = j => toks[s.toks[k + j]].f;
+        if (cs.has(t(0)) && (ds.has(t(1)) || !ds.size) && content(s.toks[k + (ds.size ? 2 : 1)]) && ofs.size && ofs.has(t(ds.size ? 3 : 2)) && !F.has('metaphor' + s.toks[k])) { F.add('metaphor' + s.toks[k]); add('metaphor', s.toks.slice(k, k + 4), 'X is the Y of Z'); }
+      }
+    });
+    // scare quotes around 1–3 words and "?!" (irony markers), found in the raw text and mapped to their tokens
+    const t = String(text || '').normalize('NFC');
+    for (const q of t.matchAll(/["“«„]([^"”»“\n]{1,60})["”»“]/gu)) {
+      const n = [...q[1].matchAll(TOK)].length; if (n < 1 || n > 3) continue;
+      const i0 = toks.findIndex(x => x.i >= q.index); if (i0 < 0) continue;
+      add('irony', [i0], 'scare quotes');
+    }
+    for (const q of t.matchAll(/(\?!|!\?|‽)/gu)) { let i0 = -1; for (let i = 0; i < toks.length; i++) if (toks[i].i < q.index) i0 = i; if (i0 >= 0) add('irony', [i0], q[0]); }
     return hits;
   }
 
@@ -36546,6 +37652,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const thr = () => ev(isObj(m.delivery) ? m.delivery.pause : undefined, 0.25);
     const textOf = s => { let r = prep.text.get(s.id); if (!r) { r = analyse(typeof s.text === 'string' ? s.text : '', s.lang || lang0, extra); prep.text.set(s.id, r); } return r; };
     const figsOf = s => { let r = prep.figs.get(s.id); if (!r) { r = figures(textOf(s), s.lang || lang0); prep.figs.set(s.id, r); } return r; };
+    const soundsOf = s => { let r = prep.figs.get('♪' + s.id); if (!r) { r = soundFigures(textOf(s), s.lang || lang0); prep.figs.set('♪' + s.id, r); } return r; };
+    const tropesOf = s => { let r = prep.figs.get('τ' + s.id); if (!r) { r = tropes(textOf(s), s.lang || lang0, typeof s.text === 'string' ? s.text : ''); prep.figs.set('τ' + s.id, r); } return r; };
+    const syn = m.synizesis === true;
     let R = null; const RD = () => { if (!R) { const cs = []; R = round(spec, ev, cs); } return R; };
     let MI = null; const mapCodes = []; const MAPI = () => { if (!MI) MI = mapInfo(m.map || {}, ev, mapCodes); return MI; };
     const solveMap = id => { const af = MAPI().solve(); for (const c of mapCodes) code(id, c); return af; };
@@ -36576,7 +37685,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
           case 'words': return d.words;
           case 'sentences': return A.sents.length;
           case 'clauses': return A.sents.reduce((a, x) => a + x.clauses.length, 0);
-          case 'syllables': return words.reduce((a, x) => a + syllables(x.s, lang), 0);
+          case 'syllables': return words.reduce((a, x) => a + syllables(x.s, lang, syn), 0);
           case 'duration': if (!isNum(dur)) code(o.id, 'no_duration'); return dur;
           case 'wpm': if (!(dur > 0)) { code(o.id, 'no_duration'); return NaN; } return d.words / (dur / 60);
           case 'articulation': if (!needT()) return NaN; return d.speak > 0 ? d.words / (d.speak / 60) : NaN;
@@ -36591,7 +37700,12 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
           case 'cvSentence': { const [mu, sd] = meanSd(sl); if (!isNum(sd)) code(o.id, 'few_sentences'); return sd / mu; }
           case 'npvi': { const v = nPVI(sl); if (!isNum(v)) code(o.id, 'few_sentences'); return v; }
           case 'questions': return A.sents.filter(x => x.end === '?').length;
-          case 'readability': { const cs = []; const v = readability(words.map(x => x.s), A.sents.length, lang, o.formula, cs); cs.forEach(c => code(o.id, c)); return v; }
+          case 'readability': { const cs = []; const v = readability(words.map(x => x.s), A.sents.length, lang, o.formula, cs, syn); cs.forEach(c => code(o.id, c)); return v; }
+          case 'sound': case 'trope': { const hs = (of === 'sound' ? soundsOf : tropesOf)(s).filter(h => h.type === o.type); if (of === 'trope' && hs.length) code(o.id, 'candidate'); return hs.length; }
+          case 'soundAt': case 'tropeAt': { const n = Math.round(ev(o.sentence, NaN)); if (!(n >= 1 && n <= A.sents.length)) { code(o.id, 'no_sentence'); return NaN; } return (of === 'soundAt' ? soundsOf : tropesOf)(s).some(h => h.type === o.type && h.sent === n - 1) ? 1 : 0; }
+          case 'soundsBySentence': case 'tropesBySentence': { const c = new Array(Math.min(2000, A.sents.length)).fill(0); for (const h of (of === 'soundsBySentence' ? soundsOf : tropesOf)(s)) if (h.type === o.type && h.sent < c.length) c[h.sent]++; return c; }
+          case 'sounds': return figScene(A, soundsOf(s), o.type);
+          case 'tropes': return figScene(A, tropesOf(s), o.type, true);
           case 'figure': return figsOf(s).filter(h => h.type === o.type).length;
           case 'figureAt': { const n = Math.round(ev(o.sentence, NaN)); if (!(n >= 1 && n <= A.sents.length)) { code(o.id, 'no_sentence'); return NaN; } return figsOf(s).some(h => h.type === o.type && h.sent === n - 1) ? 1 : 0; }
           case 'sentenceLengths': return sl.slice(0, 2000);
@@ -36613,7 +37727,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       if (NEEDS.audience.includes(of)) {
         const s = spOf(o.speech), Au = m.audience || {}; if (!s) { code(o.id, 'no_speech'); return NaN; }
         const { A, lang, d, dur } = speechStats(o, s), words = A.toks.filter(x => !x.filler).map(x => x.s);
-        const cs = [], g = readability(words, A.sents.length, lang, Au.formula || 'fk', cs); cs.forEach(c => code(o.id, c));
+        const cs = [], g = readability(words, A.sents.length, lang, Au.formula || 'fk', cs, syn); cs.forEach(c => code(o.id, c));
         const gap = g - ev(Au.grade, NaN), wpm = dur > 0 ? d.words / (dur / 60) : NaN, lo = ev(Au.wpmLo, 140), hi = ev(Au.wpmHi, 170);
         const rg = !isNum(wpm) ? NaN : wpm < lo ? wpm - lo : wpm > hi ? wpm - hi : 0;
         if (!isNum(wpm)) code(o.id, 'no_duration');
@@ -36736,9 +37850,44 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
           }
           case 'map': return mapScene(I, o);
           case 'flow': return flowScene(I, o);
+          case 'bipolarLabel': case 'bipolarAccepted': case 'complexAttacks': {
+            // bipolar argumentation through logic@1 (Cayrol & Lagasquie-Schiex 2005, 2013): support edges with attack + undercut edges
+            const L = LG(), sup = I.edges.filter(e => e.k === 'support').map(e => [e.a, e.b]), B = L.bipolar(I.n, I.att, sup, o.support || 'general');
+            if (of === 'complexAttacks') return B.att.length - Object.values(B.kind).filter(k => k === 'direct').length;
+            if (I.n > 24) code(o.id, 'large_map');
+            const D = new Set(), af = L.afSolve(I.n, B.att, D); for (const c of D) code(o.id, c);
+            if (ni === undefined) return NaN;
+            const sem = o.semantics || 'grounded', Ls = sem === 'grounded' ? [af.grounded] : af[sem] || [];
+            if (!Ls.length) { code(o.id, 'no_extension'); return of === 'bipolarAccepted' ? 0 : NaN; }
+            if (of === 'bipolarLabel') return Ls[Math.min(Ls.length, Math.max(1, o.ext || 1)) - 1][ni];
+            return (o.mode === 'credulous' ? Ls.some(l => l[ni] === 1) : Ls.every(l => l[ni] === 1)) ? 1 : 0;
+          }
         }
       }
       if (of === 'schemeCQs') return SCHEMES[o.scheme] ? SCHEMES[o.scheme].cq : NaN;
+      // ----- ASPIC+ structured argumentation through logic@1 (Modgil & Prakken 2014): the theory's arguments, defeats, justified conclusions -----
+      if (NEEDS.theory.includes(of)) {
+        const L = LG(), Th = m.theory, A = L.aspic({ kb: arr(Th.kb).filter(isObj), rules: arr(Th.rules).filter(isObj), contraries: arr(Th.contraries).filter(isObj).map(c => [c.u, c.v]) }, { link: Th.link, ordering: Th.ordering, transpose: Th.transpose });
+        A.codes.forEach(c => code(o.id, c));
+        if (of === 'aspicArgs') return A.n;
+        if (of === 'aspicDefeats') return A.defeats.length;
+        const D = new Set(), af = L.afSolve(A.n, A.att, D); for (const c of D) code(o.id, c);
+        const sem = o.semantics || 'grounded', Ls = sem === 'grounded' ? [af.grounded] : af[sem] || [];
+        if (!Ls.length) code(o.id, 'no_extension');
+        if (of === 'postulates') { const p = A.postulates(Ls); const okAll = p.subClosed && p.strictClosed && p.directConsistent && p.indirectConsistent; if (!okAll) code(o.id, 'postulate'); return okAll ? 1 : 0; }
+        if (of === 'justified') {
+          const g = L.litOf(String(o.concl)), has = l => A.args.some((a, i) => l[i] === 1 && a.conc === g);
+          if (!Ls.length) return 0;
+          return (o.mode === 'credulous' ? Ls.some(has) : Ls.every(has)) ? 1 : 0;
+        }
+        if (of === 'aspic') {
+          const lab = Ls[0] || A.args.map(() => 0.5), n = A.n, sc = C.scene([-4.5, 4.5, -4.5, 4.5]);
+          const xy = i => [3.5 * Math.cos(Math.PI / 2 - 2 * Math.PI * i / Math.max(1, n)), 3.5 * Math.sin(Math.PI / 2 - 2 * Math.PI * i / Math.max(1, n))];
+          for (const [u, v] of A.att.slice(0, 600)) { const [x1, y1] = xy(u), [x2, y2] = xy(v); sc.seg(x1, y1, x2, y2, { c: 'muted', arrow: true }); }
+          A.args.slice(0, 200).forEach((a, i) => { const [x, y] = xy(i); sc.pt(x, y, { r: 6, c: lab[i] === 1 ? 'ok' : lab[i] === 0 ? 'bad' : 'warn', s: (a.conc[0] === '-' ? '¬' + a.conc.slice(1) : a.conc).slice(0, RAW_MAX) }); });
+          return sc.done();
+        }
+      }
       // ----- forms -----
       if (of === 'valid' || of === 'counter' || of === 'fallacy' || of === 'fallacies') {
         if (of === 'fallacies') { let n = 0; for (const f of arr(m.forms).filter(isObj)) { const cs = []; const r = formOf(f, cs); cs.forEach(c => code(o.id, c)); if (r && r.fal !== 'none') n++; } return n; }
@@ -36846,7 +37995,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     sc.txt(50, -50, { v: T.count });
     return sc.done();
   }
-  function figScene(A, hits, type) {
+  function figScene(A, hits, type, cues) {
     const lines = [], hl = new Set(hits.filter(h => !type || h.type === type).flatMap(h => h.toks));
     for (let si = 0; si < A.sents.length && lines.length < 40; si++) {
       let line = [], len = 0, first = true;
@@ -36862,6 +38011,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const y = -k * 4;
       if (ln.n) sc.txt(-2, y, { v: ln.n, c: 'muted', anchor: 'end' });
       for (const [i, x] of ln.line) sc.txt(x, y, { s: A.toks[i].s.slice(0, RAW_MAX), c: hl.has(i) ? 'hi' : A.toks[i].filler ? 'muted' : 'base', anchor: 'start' });
+      if (cues && ln.n) { const cs = [...new Set(hits.filter(h => (!type || h.type === type) && h.sent === ln.n - 1).map(h => h.type + ': ' + h.cue))].join(' · '); if (cs) sc.txt(RAW_MAX + 1, y, { s: cs.slice(0, RAW_MAX), c: 'warn', anchor: 'start' }); }
     });
     return sc.done();
   }
@@ -36884,6 +38034,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     FORMAT, SCHEMES, FALLACIES, ORDERS, FIGURES, FORMULAS,
     analyse, figures, syllables, sylEn, readability, nPVI, kendall, propForm, sylForm, panel, round,
+    // added: sound figures by phonetic keys, trope candidates by cues, Greek synizesis (syllables(w, 'el', true)); ASPIC+ / bipolar via logic@1
+    SOUNDS, TROPES, TROPE_CUES, phon, rimeOf, soundFigures, tropes, sylEl,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -37929,7 +39081,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     if (nsh > 0) {
       if (nsh > 1000 || out.cells * (1 + nsh) > BUDGET * 10) codes.push('budget');
       else {
-        const rand = C.mulberry32(C.hash32('seq-shuffle', seed >>> 0)), sh = [];
+        const rand = C.rng(seed >>> 0, 'seq-shuffle'), sh = [];
         for (let t = 0; t < nsh; t++) { const x = b.split(''); for (let i = x.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); const tt = x[i]; x[i] = x[j]; x[j] = tt; } sh.push(dp(a, x.join(''), sc0.f, type, o, e, bw).score); }
         const mu = sh.reduce((p, q) => p + q, 0) / nsh, sd = Math.sqrt(sh.reduce((p, q) => p + (q - mu) * (q - mu), 0) / Math.max(1, nsh - 1));
         out.zScore = sd > 0 ? (r.score - mu) / sd : NaN; out.pShuffle = (1 + sh.filter(x => x >= r.score - 1e-9).length) / (1 + nsh); out.shuffleScores = sh;
@@ -38156,9 +39308,11 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     out.mwAvg = mass(MW_AVG, WATER); out.mwMono = mass(MW_MONO, WATER_MONO);
     const nt = s[0], ct = s[L - 1];
     let lo = 0, hi = 14;
-    const pk = m.pk || 'bjellqvist';
-    for (let it = 0; it < 60; it++) { const mid = (lo + hi) / 2; if (chargeAt(cnt, nt, ct, mid, pk) > 0) lo = mid; else hi = mid; }
-    out.pI = (lo + hi) / 2;
+    const pk = m.pk || 'bjellqvist', K = C.kit(), q0 = chargeAt(cnt, nt, ct, lo, pk), q1 = chargeAt(cnt, nt, ct, hi, pk);
+    // the pH of zero net charge: Brent's root (NoemaSimKit.brent; the charge falls with pH); bisection when it is not bracketed or without the kernel
+    const rb = K && q0 > 0 && q1 < 0 ? K.brent(p => chargeAt(cnt, nt, ct, p, pk), lo, hi, 1e-13, q0, q1) : NaN;
+    if (Number.isFinite(rb)) out.pI = rb;
+    else { for (let it = 0; it < 60; it++) { const mid = (lo + hi) / 2; if (chargeAt(cnt, nt, ct, mid, pk) > 0) lo = mid; else hi = mid; } out.pI = (lo + hi) / 2; }
     const ph = num(m.ph, env, 7);
     out.charge = chargeAt(cnt, nt, ct, ph, pk);
     out.gravy = [...s].every(x => KD[x] !== undefined) ? [...s].reduce((t, x) => t + KD[x], 0) / L : NaN;
@@ -38276,7 +39430,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return { out, codes: [...new Set(res.codes || [])] };
   }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibSeqModule, 'NoemaLibSeq');
+  engine.workerSource = C.workerSource(noemaLibSeqModule, 'NoemaLibSeq', { kit: true });
   root.NoemaLibSeq = Object.freeze({
     id: ID, MODES, SPEC, TABLES, OUTS, NCBI, ENZ, MATRIX, NUCLEASES, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
     table: { model: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => { const t = Object.assign({}, TABLES[md], ...SEQS[md].map(x => ({ [x[0]]: 'seq' + (x[4] ? '!' : '') }))), n = NESTED[md]; if (n && t[n[0]] && t[n[0]].$list && t[n[0]].$list.$obj) t[n[0]] = Object.assign({}, t[n[0]], { $list: { $obj: Object.assign({}, t[n[0]].$list.$obj, { [n[1]]: 'seq' }) } }); return [md, t]; })) }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => [md, Object.keys(OUTS[md]).reduce((a, k) => ((a[OUTS[md][k][0]] = a[OUTS[md][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'any' } },   // the form of the activity author (46_lib_schema.js)
@@ -39543,10 +40697,10 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return { lags, ts, best };
   }
   function synthDendro(sy, seed, env, X) {
-    const r = C.mulberry32(C.hash32('timeline.dendro', seed)), n = sy.n, len = sy.len, off = X(sy.offset === undefined ? 0 : sy.offset, env), noise = sy.noise === undefined ? 0.05 : sy.noise;
+    const r = C.rng(seed, 'timeline.dendro'), n = sy.n, len = sy.len, off = X(sy.offset === undefined ? 0 : sy.offset, env), noise = sy.noise === undefined ? 0.05 : sy.noise;
     if (!isInt(off) || off < 0 || off + len > n) return null;
-    const master = []; let z = 0; for (let i = 0; i < n; i++) { z = 0.6 * z + 0.4 * C.gauss(r); master.push(Math.exp(z)); }
-    const sample = master.slice(off, off + len).map(v => v * Math.exp(noise * C.gauss(r)));
+    const master = []; let z = 0; for (let i = 0; i < n; i++) { z = 0.6 * z + 0.4 * C.normal(r); master.push(Math.exp(z)); }
+    const sample = master.slice(off, off + len).map(v => v * Math.exp(noise * C.normal(r)));
     return { master, sample };
   }
 
@@ -39762,7 +40916,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       const ia = EV.has(a) ? EV.get(a) : null, ib = EV.has(b) ? EV.get(b) : null, pa = PE.get(a), pb = PE.get(b);
       if ((EV.has(a) && !ia) || (EV.has(b) && !ib) || (!EV.has(a) && !pa) || (!EV.has(b) && !pb)) return NaN;
       const exact = (!ia || ia.point) && (!ib || ib.point), n = exact ? 1 : N;
-      const r = C.mulberry32(C.hash32('timeline.mc.' + a + '.' + b, seed)), sa = ia ? sampler(ia) : null, sb = ib ? sampler(ib) : null;
+      const r = C.rng(seed, 'timeline.mc.' + a + '.' + b), sa = ia ? sampler(ia) : null, sb = ib ? sampler(ib) : null;
       let k = 0;
       for (let i = 0; i < n; i++) {
         const A = ia ? Math.round(sa(r)) : null, B = ib ? Math.round(sb(r)) : null;
@@ -39848,7 +41002,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   function gridUniform(a, b) { if (b <= a) return { xs: [a], ps: [1], point: true }; const n = Math.min(801, Math.max(2, Math.round(b - a) + 1)), xs = [], ps = []; for (let i = 0; i < n; i++) { xs.push(a + (b - a) * i / (n - 1)); ps.push(1 / n); } return { xs, ps, uniform: [a, b] }; }
   function sampler(D) {
     if (D.point) return () => D.xs[0];
-    if (D.normal) return r => D.normal[0] + D.normal[1] * C.gauss(r);
+    if (D.normal) return r => D.normal[0] + D.normal[1] * C.normal(r);
     if (D.uniform) return r => D.uniform[0] + (D.uniform[1] - D.uniform[0]) * r();
     const cdf = []; let s = 0; for (const p of D.ps) { s += p; cdf.push(s); }
     return r => { const u = r() * s; let lo = 0, hi = cdf.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (cdf[m] < u) lo = m + 1; else hi = m; } return D.xs[lo]; };
@@ -39876,7 +41030,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const convert = (rd, cal, options) => (CAL[cal] && CAL[cal].from ? CAL[cal].from(rd, options || {}) : null);
   const toRD = (fields, options) => (CAL[fields.cal] && CAL[fields.cal].to ? CAL[fields.cal].to(fields, options || {}) : { rd: NaN, flags: ['invalid'] });
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibTimelineModule, 'NoemaLibTimeline');
+  engine.workerSource = C.workerSource(noemaLibTimelineModule, 'NoemaLibTimeline', { kit: true });
   root.NoemaLibTimeline = Object.freeze({
     table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine, TABLES: T,
@@ -39919,6 +41073,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     E('map@1', 'library', 'NoemaLibMap', '48_lib_map.js', 'map', ['map', 'projection', 'geography', 'latitude', 'longitude', 'distance', 'great circle', 'route', 'journey', 'territory', 'border', 'empire', 'navigation', 'bearing', 'atlas', 'χάρτης', 'προβολή', 'γεωγραφία', 'γεωγραφικό πλάτος', 'απόσταση', 'διαδρομή', 'επικράτεια', 'αυτοκρατορία', 'карт', 'проекц', 'географ', 'расстояни', 'Karte', 'Projektion', 'Geographie', 'Entfernung', 'carte', 'projection', 'géographie', 'distance']),
     E('text@1', 'library', 'NoemaLibText', '48_lib_text.js', 'text', ['text', 'word', 'frequency', 'corpus', 'concordance', 'stylometry', 'authorship', 'zipf', 'vocabulary', 'readability', 'verse', 'metre', 'meter', 'scansion', 'hexameter', 'pentameter', 'poetry', 'rhyme', 'syllable', 'literature', 'κείμενο', 'λέξη', 'συχνότητα', 'στίχος', 'μέτρο', 'εξάμετρο', 'ποίηση', 'ομοιοκαταληξία', 'συλλαβή', 'λογοτεχνία', 'текст', 'слово', 'частот', 'стих', 'размер', 'поэзи', 'Text', 'Wort', 'Häufigkeit', 'Vers', 'Metrum', 'Gedicht', 'texte', 'mot', 'fréquence', 'vers', 'mètre', 'poésie']),
     E('craft@1', 'library', 'NoemaLibCraft', '48_lib_craft.js', 'craft', ['craft', 'handcraft', 'knitting', 'crochet', 'gauge', 'stitch', 'weaving', 'loom', 'draft', 'quilt', 'patchwork', 'embroidery', 'cross-stitch', 'sewing', 'pattern', 'woodworking', 'joinery', 'pottery', 'ceramics', 'glaze', 'kiln', 'jewellery', 'tessellation', 'χειροτεχνία', 'πλέξιμο', 'βελονάκι', 'ύφανση', 'αργαλειός', 'κέντημα', 'ραπτική', 'πατρόν', 'ξυλουργική', 'κεραμική', 'αγγειοπλαστική', 'σμάλτο', 'κοσμηματοποιία', 'рукодели', 'вязани', 'ткачеств', 'вышивк', 'керамик', 'Handwerk', 'Stricken', 'Weben', 'Sticken', 'Keramik', 'Glasur', 'artisanat', 'tricot', 'tissage', 'broderie', 'céramique', 'émail']),
+    E('law@1', 'library', 'NoemaLibLaw', '48_lib_law.js', 'law', ['law', 'legal', 'statute', 'rule', 'exception', 'court', 'case law', 'precedent', 'burden of proof', 'evidence', 'contract', 'damages', 'crime', 'mens rea', 'sentencing', 'deadline', 'limitation', 'proportionality', 'quorum', 'citation', 'inheritance', 'hohfeld', 'νόμος', 'δίκαιο', 'νομικ', 'σύμβαση', 'νομολογία', 'προθεσμία', 'κληρονομ', 'право', 'закон', 'договор', 'прецедент', 'срок', 'наследств', 'Recht', 'Gesetz', 'Vertrag', 'Frist', 'Erbrecht', 'Verhältnismäßigkeit', 'droit', 'loi', 'contrat', 'jurisprudence', 'délai', 'succession']),
+    E('agents@1', 'library', 'NoemaLibAgents', '47_lib_agents.js', 'agents', ['agent', 'agent-based', 'multi-agent', 'crowd', 'flocking', 'boids', 'schelling', 'segregation', 'epidemic', 'sir', 'network', 'opinion', 'bdi', 'auction', 'contract net', 'negotiation', 'norm', 'game', 'cooperation', 'πράκτορας', 'πολυπρακτορικ', 'πλήθος', 'επιδημία', 'δημοπρασία', 'διαπραγμάτευση', 'агент', 'мультиагент', 'толпа', 'эпидемия', 'аукцион', 'переговоры', 'Agent', 'Multiagenten', 'Schwarm', 'Epidemie', 'Auktion', 'Verhandlung', 'agent', 'multi-agents', 'foule', 'épidémie', 'enchère', 'négociation']),
+    E('field@1', 'library', 'NoemaLibField', '47_lib_field.js', 'field', ['heat', 'diffusion', 'wave', 'pde', 'partial differential', 'finite difference', 'grid', 'reaction-diffusion', 'turing pattern', 'cellular automaton', 'game of life', 'sandpile', 'laplace', 'poisson', 'advection', 'stability', 'cfl', 'θερμότητα', 'διάχυση', 'κύμα', 'πλέγμα', 'κυψελωτό αυτόματο', 'теплопроводность', 'диффузия', 'волна', 'сетка', 'клеточный автомат', 'Wärmeleitung', 'Diffusion', 'Welle', 'Gitter', 'zellulärer Automat', 'chaleur', 'diffusion', 'onde', 'grille', 'automate cellulaire']),
     E('des@1', 'library', 'NoemaLibDES', '47_lib_des.js', 'des', ['queue', 'queueing', 'waiting line', 'discrete event', 'simulation', 'server', 'service', 'arrival', 'throughput', 'utilization', 'bottleneck', 'emergency department', 'triage', 'call center', 'factory', "little's law", 'm/m/1', 'ουρά', 'αναμονή', 'προσομοίωση', 'εξυπηρέτηση', 'αφίξεις', 'очередь', 'ожидание', 'моделирование', 'обслуживание', 'Warteschlange', 'Wartezeit', 'Simulation', 'Bedienung', "file d'attente", 'attente', 'simulation', 'guichet']),
     E('philo@1', 'library', 'NoemaLibPhilo', '48_lib_philo.js', 'philo', ['philosophy', 'ethics', 'utilitarian', 'trolley', 'kant', 'categorical imperative', 'virtue', 'voting', 'condorcet', 'borda', 'arrow', 'social choice', 'decision theory', 'expected utility', 'newcomb', 'allais', 'prisoner', 'game theory', 'bayesian confirmation', 'gettier', 'sorites', 'thought experiment', 'philosopher', 'φιλοσοφία', 'ηθική', 'ωφελιμισμός', 'ψηφοφορία', 'παράδοξο', 'φιλόσοφ', 'философ', 'этика', 'утилитаризм', 'голосовани', 'парадокс', 'Philosophie', 'Ethik', 'Utilitarismus', 'Wahlverfahren', 'Gedankenexperiment', 'philosophie', 'éthique', 'utilitarisme', 'scrutin', 'paradoxe', 'expérience de pensée']),
     E('rhetoric@1', 'library', 'NoemaLibRhetoric', '48_lib_rhetoric.js', 'rhetoric', ['rhetoric', 'debate', 'debating', 'argument', 'argumentation', 'argument map', 'toulmin', 'fallacy', 'persuasion', 'speech', 'oratory', 'public speaking', 'british parliamentary', 'world schools', 'lincoln-douglas', 'adjudication', 'figures of speech', 'anaphora', 'chiasmus', 'speaking rate', 'ρητορική', 'αντιλογία', 'επιχείρημα', 'πλάνη', 'πειθώ', 'ρητορικός λόγος', 'риторика', 'дебаты', 'аргумент', 'софизм', 'убеждение', 'ораторское', 'Rhetorik', 'Debatte', 'Argumentation', 'Fehlschluss', 'Überzeugung', 'Rede', 'rhétorique', 'débat', 'sophisme', 'discours']),
@@ -39978,10 +41135,10 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
    status and answer; the app's admins see every request and answer it here (status, the engine that now does it, a note, the PR) or
    through the connector (noema_engine_requests, noema_engine_request_update). */
 const ENGINE_GROUPS = [   // the library's engines by field (catalogue ids); i18n-ignore (ids)
-  ['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'logic@1', 'des@1']],
-  ['life', ['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1']],
+  ['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'logic@1', 'des@1', 'field@1']],
+  ['life', ['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1', 'agents@1']],
   ['arts', ['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1']],
-  ['thought', [, 'rhetoric@1', 'philo@1']],
+  ['thought', [, 'rhetoric@1', 'philo@1', 'law@1']],
 ];
 const engName = e => tE('engine.engines.' + e.slug + '.name');
 const engWhat = e => tE('engine.engines.' + e.slug + '.what');

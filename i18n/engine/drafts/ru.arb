@@ -2406,5 +2406,10 @@
   "engine.author.f.lib.solidarity": "Солидарность",
   "engine.author.f.lib.byAgent": "Собственное отношение агента",
   "engine.author.f.lib.stream": "Поток",
-  "engine.author.f.lib.option": "Вариант"
+  "engine.author.f.lib.option": "Вариант",
+  "engine.author.f.lib.loops": "Циклы (не решено или неудача из-за цикла)",
+  "engine.author.f.lib.closure": "Замыкание строгих правил (нет или контрапозиция)",
+  "engine.author.f.lib.passive": "Пассивная (остаётся пассивным в отношении атома)",
+  "engine.author.f.lib.lindahl": "Тип позиции Линдаля",
+  "engine.author.f.lib.dimensions": "Измерения (с величинами)"
 }

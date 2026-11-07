@@ -134,7 +134,7 @@ their declared order, each handler seeing the state the one before it left. A ha
   `observe-cap`. Returning `'stop'` (or `terminal`) ends the run at that time. Use this for Poincaré sections, threshold
   crossings and counters.
 - **Hysteresis.** With `hyst > 0`, an event stays disarmed after a hit until |g| > hyst (a thermostat with a dead band: no chattering).
-- **Zeno.** More than `maxEvents` hits in all (1000 by default) or more than 100 at one instant raises the error `zeno`.
+- **Zeno.** More than `maxEvents` hits in all (1000 by default) or more than `maxInstant` (100) at one instant raises the error `zeno`. A crossing found again within 1e-9·t of a hit whose handler changed y is a new crossing at the same instant (a Zeno cascade such as a bouncing ball with restitution < 1). It is counted, so the run stops with `zeno` at the accumulation time. A crossing whose handler left y alone is that crossing seen again, and is ignored.
 - **Codes** (errors stop the run): `nan`, `blow-up` (|y| > 10¹² times its start), `step-underflow`, `budget` (`maxSteps`, at most
   200 000), `zeno`, `bad-config` (a missing f or y0, no `dt` for a fixed method, pairs that do not cover the states).
   The warnings are `stiff` and `stiff-switched`.
@@ -292,6 +292,18 @@ tolerance or the change is a justified improvement.
 | statistics | `prob@1`, `genetics@1`, `med@1` (trials) | `SK.ci`, `tq`, `welford`, `replicate`, `batchMeans` |
 | events and time | `timeline@1`, `clinic@1` (timed decisions), `music@1` (sequenced notes) | `SK.calendar()` (its tie rule), `SK.event` records for anything another part may consume |
 | sweeps | `ode@1` sweep (orbit diagrams), any parameter study | `SK.grid`, `SK.oat`, `SK.morris`, `SK.sobol` |
+
+### 8.2 The migration, done (2026-11-07)
+
+Every engine now takes these facilities from the kernel (each chapter's "Uses the kernel" says what): the core gives `C.kit()`
+(the kernel, loaded in node when missing), `C.rng(seed, name)` (a kernel stream; a marked mulberry32 FALLBACK only without it),
+`C.normal(r)` and `C.workerSource(fn, global, {kit: true})`. `ode@1`'s flows run on `integrate` (breaks, observed events, `onSegment`,
+per-component atol, `maxInstant`; its snapshot bit for bit); `med@1` (Φ, Φ⁻¹, Brent, the PK stepper's RK4), `clinic@1` (stream, Brent),
+`genetics@1`, `prob@1`, `graph@1`, `geom@1`, `seq@1` (+ Brent), `timeline@1` (streams); the plugins `pid@1` (RK4 with breaks, stream),
+`rf@1` (streams, Brent), `twin@1` (streams), `circuit-mna@1` (the meters' streams). Kept on purpose: the θ-methods of `thermal@1` and
+the circuit transient (DAEs with format-named methods), clinic@1's projected Euler, the special functions of genetics@1 and prob@1
+(more accurate tails), the circuit's counter-based noise. Load order: `46_lib_simkit.js` right after `35_simexpr.js` in index.html,
+first among the P6/library scripts of the bundle (tools/build.py `KERNEL`) and the harness.
 
 ## 9. Co-simulation: `cosim(cfg)`
 

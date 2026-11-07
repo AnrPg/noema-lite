@@ -310,3 +310,7 @@ reference case (antibiotics within 1 h) was checked (2026-11) against the Surviv
 2021;49:e1063; *Intensive Care Med* 2021;47:1181, PMC8486643), recommendation 12: for possible septic shock or a high likelihood of
 sepsis, antimicrobials "immediately, ideally within 1 h of recognition"; for possible sepsis without shock the guideline allows a
 rapid assessment and antimicrobials within 3 h (recommendations 13–14), so a case without shock should use a 180-min deadline.
+
+## Uses the kernel
+
+Since 2026-11-07: the virtual patient's vital-sign noise draws from a kernel stream (`C.rng(seed, 'vp')` = `SK.stream`, normals by inversion) and the arterial PO₂ is Brent's root (`SK.brent`) of the O₂ content; its Worker source carries the kernel. The physiology itself stays a projected explicit Euler at 0.1 min (its clamps — volume, burden — are part of the model; `SK.integrate` cannot project a state between steps), the same in `run()` and the stepper (bit for bit). Snapshot unchanged.

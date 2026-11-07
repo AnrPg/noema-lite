@@ -135,6 +135,10 @@ ok(Object.isFrozen(S) && typeof S.source === 'function' && S.version === 1, 'Noe
   ok(bad.codes.some(c => ['blow-up', 'step-underflow', 'nan'].includes(c.code) && c.level === 'error') && bad.t < 1.01 && bad2.stop === 'bad-config' && bad3.stop === 'bad-config', 'y′ = y² blows up near t = 1 (an error code, no throw); a missing f or dt → bad-config');
   const dd = S.dde({ f: (t, y, lag, dy) => { dy[0] = -lag(0, 0); }, y0: [1], lags: [1], tEnd: 3, rtol: 1e-10, atol: 1e-12 });
   ok(near(dd.y[0], 1 - 3 + 2 ** 2 / 2 - 1 / 6, 1e-8), `delay equation x′ = −x(t − 1), x = 1 for t ≤ 0: x(3) = ${dd.y[0].toFixed(10)} (method of steps, piece by piece: −1/6)`);
+  { // a Zeno cascade: a ball bouncing with restitution 0.8 stops at √(2h/g)(1 + 2e/(1 − e)); the refound crossings after each jump count as one instant
+    const tz = Math.sqrt(2 / 9.81) * (1 + 2 * 0.8 / 0.2);
+    const zs = ['dopri5', 'rk4', 'radau5'].map(m => S.integrate({ f: (t, y, d) => { d[0] = y[1]; d[1] = -9.81; }, y0: [1, 0], tEnd: 20, method: m, dt: 0.01, rtol: 1e-10, atol: 1e-12, events: [{ g: (t, y) => y[0], dir: -1, onEvent: (t, y) => { y[1] = -0.8 * y[1]; y[0] = 0; } }] }));
+    ok(zs.every(r => r.stop === 'zeno' && near(r.t, tz, 1e-6) && r.codes.some(c => c.code === 'zeno')), `Zeno cascade (restitution 0.8): the code zeno at t = ${zs.map(r => r.t.toFixed(9)).join(', ')} (dopri5, rk4, radau5; exact ${tz.toFixed(9)})`); }
   // ---- the options the ode@1 migration needs (A) ----
   { const f = (t, y, d) => { d[0] = -0.04 * y[0] + 1e4 * y[1] * y[2]; d[2] = 3e7 * y[1] * y[1]; d[1] = -d[0] - d[2]; };
     const r1 = S.integrate({ f, y0: [1, 0, 0], tEnd: 40, rtol: 1e-7, atol: [1e-8, 1e-14, 1e-8] }), bad = S.integrate({ f, y0: [1, 0, 0], tEnd: 1, atol: [1e-8, 1e-8] });

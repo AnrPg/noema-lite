@@ -10917,5 +10917,25 @@
   "engine.author.f.lib.option": "Option",
   "@engine.author.f.lib.option": {
     "description": "Label of the field “option” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.loops": "Loops (undecided or failure by looping)",
+  "@engine.author.f.lib.loops": {
+    "description": "Label of the field “loops” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.closure": "Closure of strict rules (none or transposition)",
+  "@engine.author.f.lib.closure": {
+    "description": "Label of the field “closure” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.passive": "Passive (stay passive about the atom)",
+  "@engine.author.f.lib.passive": {
+    "description": "Label of the field “passive” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.lindahl": "Lindahl position type",
+  "@engine.author.f.lib.lindahl": {
+    "description": "Label of the field “lindahl” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.dimensions": "Dimensions (with magnitudes)",
+  "@engine.author.f.lib.dimensions": {
+    "description": "Label of the field “dimensions” of a library engine’s model or outputs in the activity author (engines: law). Short."
   }
 }

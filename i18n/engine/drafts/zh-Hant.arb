@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "團結",
   "engine.author.f.lib.byAgent": "行動者自身的關係",
   "engine.author.f.lib.stream": "流",
-  "engine.author.f.lib.option": "選項"
+  "engine.author.f.lib.option": "選項",
+  "engine.author.f.lib.loops": "循環（未決或因循環而失敗）",
+  "engine.author.f.lib.closure": "嚴格規則的閉包（無或換位）",
+  "engine.author.f.lib.passive": "被動（對該原子保持被動）",
+  "engine.author.f.lib.lindahl": "林達爾地位類型",
+  "engine.author.f.lib.dimensions": "維度（含量級）"
 }

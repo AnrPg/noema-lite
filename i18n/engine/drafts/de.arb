@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "Solidarität",
   "engine.author.f.lib.byAgent": "Die eigene Beziehung des Handelnden",
   "engine.author.f.lib.stream": "Strom",
-  "engine.author.f.lib.option": "Option"
+  "engine.author.f.lib.option": "Option",
+  "engine.author.f.lib.loops": "Schleifen (unentschieden oder Scheitern durch Schleife)",
+  "engine.author.f.lib.closure": "Abschluss der strikten Regeln (keiner oder Transposition)",
+  "engine.author.f.lib.passive": "Passiv (bleibt in Bezug auf das Atom passiv)",
+  "engine.author.f.lib.lindahl": "Lindahl-Positionstyp",
+  "engine.author.f.lib.dimensions": "Dimensionen (mit Ausprägungen)"
 }

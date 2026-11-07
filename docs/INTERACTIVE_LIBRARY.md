@@ -158,7 +158,9 @@ const { engine, simEngine } = C.makeEngine({ id, checkSpec, run, prepare, steppe
   pharmacokinetic compartments, RK4 split at the doses; other items run as before), `clinic@1` (the virtual patient, the same
   physiology as `run()`: stepped to the end it gives `run()`'s scalars bit for bit; the other sections from `run()` on the current
   inputs), `genetics@1` (Wright–Fisher drift with its own seeded stream; other modes recompute), and `des@1`, `field@1`,
-  `agents@1` (their own, through `NoemaSimKit.stepper`). The validators list them (`STEPPERS` in `engine/packcheck.js` and
+  `agents@1` (their own, through `NoemaSimKit.stepper`); and the plugins `thermal@1`, `pid@1`, `twin@1` (no snapshot) and the
+  `circuit-mna@1` transient (no snapshot): their instances answer `stepInit` / `stepTo` / `snapshot` / `restore` themselves
+  (docs/INTERACTIVE_ENGINES.md, docs/INTERACTIVE_CIRCUIT.md). The validators list them (`STEPPERS` in `engine/packcheck.js` and
   `tools/activities.py`): add an engine there when it gains a stepper. Pure, bounded, never throws.
 
 ## 2. The catalogue (`NoemaEngineCatalog`)

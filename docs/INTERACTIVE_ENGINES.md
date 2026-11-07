@@ -95,6 +95,14 @@ constants to 10⁻⁹, thermostat duty to 0.002; 20 000 steps of a 10-node netwo
 **Limits.** No conduction PDE (a trace or a fin is a chain of lumps), no temperature-dependent R or C, radiation only through a
 `rad` link (view factors are the author's ε·A), thermostats switch at step boundaries (choose dt ≪ the cycle).
 
+**Uses the kernel / parts (2026-11-07).** The transient's θ-method (trapezoidal, backward Euler on the first step, on source edges
+and on thermostat switches; the massless nodes are algebraic rows) is the format's own (`model.transient.method: 'trap' | 'be'`) and
+stays: the kernel has no θ-method for a mass-matrix DAE. Its step is one function (`stepCore`) that `transient()` and the new
+**stepper** share: `thermal@1` is a part of a co-simulation (`engine.stepper = true`; the instance's `stepInit` / `stepTo` /
+`snapshot` / `restore`, `docs/INTERACTIVE_LIBRARY.md` §1.6). Each macro step is cut in equal steps ≤ `transient.dt`; the bindings are
+read at every step; a series output gives its value now, `stat` runs over every internal step, `at` once passed, the steady and τ
+outputs as in `run()`. Stepped to tEnd it equals `transient()` (tests/parts.js).
+
 ## 3. `pid@1` — control loops (`engine/src/40_engine_pid.js`, `NoemaPID`)
 
 Tune a PID on a plant, watch windup, compare P and PI, see dead time and noise.
@@ -164,6 +172,14 @@ controller is discrete (backward-Euler derivative filter, forward-Euler integral
 
 **Limits.** Single loop, SISO; no cascade, feed-forward block or rate limit; the tank and the motor are the only nonlinear plants.
 
+**Uses the kernel / parts (2026-11-07).** The plant is integrated by the kernel's classical RK4 (`NoemaSimKit.integrate`, one call
+per run) with a **break** at every grid time t_k = k·h: there the measurement (+ the noise of a kernel stream `pid:noise`, normals by
+inversion instead of mulberry32 + Box–Muller), every Ts the controller, the record and the held input for the next interval; the
+dead time reads the input history at t − θ. The same core serves `run()` and the new **stepper** (`engine.stepper = true`, §1.6 of
+`docs/INTERACTIVE_LIBRARY.md`): its state is plain data (a snapshot is a copy), the bindings are read at every step, a series gives
+its value now, the metrics and stats run over the history so far. Without the kernel: a marked FALLBACK (the same RK4 here).
+The Worker source carries NoemaExpr and the kernel.
+
 ## 4. `rf@1` — radio links and propagation (`engine/src/41_engine_rf.js`, `NoemaRF`)
 
 IoT radio benches: link budgets, path loss, range, error rates, airtime.
@@ -227,6 +243,10 @@ create(link, {seed}) → {run() → {scalars, series, codes}, at(d), range()}
 **Accuracy and limits** (`tests/rf.js`): FSPL 2.4 GHz/100 m 80.052 dB; Hata 900 MHz/10 km 147.390 dB; LoRa airtime equal to the
 Semtech calculator (SF7 10 B 41.216 ms … SF12 51 B 2465.792 ms); BPSK BER within 3 % of the tables. Textbook medians: no multipath
 fading, no interference, no antenna patterns; BLE/Wi-Fi airtime and Wi-Fi/LoRa error rates are approximations (uncoded).
+
+**Uses the kernel (2026-11-07).** The shadowing draw and the sweep's draws come from kernel streams (`rf:shadow`, `rf:sweep`;
+normals by inversion), the maximum range and the required Eb/N0 are Brent's roots (`SK.brent`, on log d and log Eb/N0) instead of
+bisection. FALLBACK without the kernel (marked): mulberry32, bisection. No stepper (a link budget has no time).
 
 ## 5. `twin@1` — the digital twin of an IoT node (`engine/src/42_engine_twin.js`, `NoemaTwin`)
 
@@ -348,6 +368,13 @@ collisions).
   (Poisson arrivals in the vulnerable window), < 1 = fixed phases (0: all in step, the `sync-wake` fault). A collision destroys our
   message unless it arrives `capture` dB stronger than the other (their level: our median + `offset` ± `spread` dB, seeded).
   Collisions are logged (`collision`) and counted (`collisions`); with `ack` they cost retries and current.
+
+**Uses the kernel / parts (2026-11-07).** The radio, each sensor and the network draw from kernel streams (`twin:radio`,
+`twin:sensor:<id>`, `twin:network`; normals by inversion, the other nodes' packets by the kernel's Poisson). The firmware's loop is a
+generator (`simGen`): `run()` drives it to the end; the new **stepper** (`engine.stepper = true`) pauses it at each macro step's end
+(a sleep is split there) and gives the scalars so far and each series' value now. Its state is a running program, so `snapshot()` is
+−1 (a twin part can be chained and co-simulated, not iterated); the device is the one at `stepInit`. FALLBACK without the kernel
+(marked): mulberry32 + Box–Muller.
 
 ## 6. Reference activities (`tools/activities_examples/`)
 

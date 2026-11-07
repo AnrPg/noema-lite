@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "Solidaridad",
   "engine.author.f.lib.byAgent": "La relación propia del agente",
   "engine.author.f.lib.stream": "Flujo",
-  "engine.author.f.lib.option": "Opción"
+  "engine.author.f.lib.option": "Opción",
+  "engine.author.f.lib.loops": "Bucles (indeciso o fallo por bucle)",
+  "engine.author.f.lib.closure": "Clausura de las reglas estrictas (ninguna o transposición)",
+  "engine.author.f.lib.passive": "Pasiva (permanece pasivo respecto al átomo)",
+  "engine.author.f.lib.lindahl": "Tipo de posición de Lindahl",
+  "engine.author.f.lib.dimensions": "Dimensiones (con magnitudes)"
 }

@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "連帯",
   "engine.author.f.lib.byAgent": "行為者自身の関係",
   "engine.author.f.lib.stream": "流れ",
-  "engine.author.f.lib.option": "選択肢"
+  "engine.author.f.lib.option": "選択肢",
+  "engine.author.f.lib.loops": "ループ（未決定またはループによる失敗）",
+  "engine.author.f.lib.closure": "厳格規則の閉包（なしまたは対偶）",
+  "engine.author.f.lib.passive": "受動（その原子について受動のまま）",
+  "engine.author.f.lib.lindahl": "リンダール地位型",
+  "engine.author.f.lib.dimensions": "次元（大きさ付き）"
 }

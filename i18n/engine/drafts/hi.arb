@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "एकजुटता",
   "engine.author.f.lib.byAgent": "कर्ता का अपना संबंध",
   "engine.author.f.lib.stream": "धारा",
-  "engine.author.f.lib.option": "विकल्प"
+  "engine.author.f.lib.option": "विकल्प",
+  "engine.author.f.lib.loops": "लूप (अनिर्णीत या लूप से विफलता)",
+  "engine.author.f.lib.closure": "कठोर नियमों का संवरण (कोई नहीं या स्थानांतरण)",
+  "engine.author.f.lib.passive": "निष्क्रिय (परमाणु के प्रति निष्क्रिय रहे)",
+  "engine.author.f.lib.lindahl": "लिंडाल स्थिति प्रकार",
+  "engine.author.f.lib.dimensions": "आयाम (परिमाण सहित)"
 }

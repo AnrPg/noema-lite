@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "Solidariteti",
   "engine.author.f.lib.byAgent": "Marrëdhënia e vetë veprimtarit",
   "engine.author.f.lib.stream": "Rrjedha",
-  "engine.author.f.lib.option": "Opsioni"
+  "engine.author.f.lib.option": "Opsioni",
+  "engine.author.f.lib.loops": "Ciklet (e pavendosur ose dështim nga cikli)",
+  "engine.author.f.lib.closure": "Mbyllja e rregullave strikte (asnjë ose transpozim)",
+  "engine.author.f.lib.passive": "Pasive (mbetet pasiv ndaj atomit)",
+  "engine.author.f.lib.lindahl": "Lloji i pozitës Lindahl",
+  "engine.author.f.lib.dimensions": "Dimensionet (me madhësi)"
 }

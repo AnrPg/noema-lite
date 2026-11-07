@@ -588,239 +588,28 @@
   }
 
   /* ======================================================================================================================
-     Steppers. Each: reset(t, y) after a start or a jump; step(tTarget) → {t0, t1, y1, seg(t, out)} | {fail: code}
+     The driver of a flow, on the simulation kernel (NoemaSimKit.integrate, 46_lib_simkit.js; docs/library/simkit.md §4): its
+     methods (DOPRI5 with the stiffness switch to Rosenbrock, the fixed and symplectic steps), its state events (Illinois on the
+     dense output, simultaneous events, re-arming), its breaks (timed events: doses, the discontinuities of a delay equation, the
+     renormalisations of the Lyapunov exponents) and its dense output of every step (onSegment: a delay equation's history).
      ====================================================================================================================== */
-  // Dormand & Prince 1980 (HNW I Table 5.2) with the dense output of Hairer's DOPRI5 (contd5)
-  const A21 = 1 / 5, A31 = 3 / 40, A32 = 9 / 40, A41 = 44 / 45, A42 = -56 / 15, A43 = 32 / 9,
-    A51 = 19372 / 6561, A52 = -25360 / 2187, A53 = 64448 / 6561, A54 = -212 / 729,
-    A61 = 9017 / 3168, A62 = -355 / 33, A63 = 46732 / 5247, A64 = 49 / 176, A65 = -5103 / 18656,
-    A71 = 35 / 384, A73 = 500 / 1113, A74 = 125 / 192, A75 = -2187 / 6784, A76 = 11 / 84,
-    E1 = 71 / 57600, E3 = -71 / 16695, E4 = 71 / 1920, E5 = -17253 / 339200, E6 = 22 / 525, E7 = -1 / 40,
-    D1 = -12715105075 / 11282082432, D3 = 87487479700 / 32700410799, D4 = -10690763975 / 1880347072,
-    D5 = 701980252875 / 199316789632, D6 = -1453857185 / 822651844, D7 = 69997945 / 29380423;
-  function stepperDopri(n, f, o, ctx) {
-    const k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n), k4 = new Float64Array(n), k5 = new Float64Array(n), k6 = new Float64Array(n), k7 = new Float64Array(n);
-    const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), ysti = new Float64Array(n);
-    const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
-    const sk = i => AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i]));
-    function hinit() {   // HNW I §II.4
-      let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
-      let hh = dnf <= 1e-10 || dny <= 1e-10 ? 1e-6 : sqrt(dny / dnf) * 0.01; hh = Math.min(hh, hmax);
-      for (let i = 0; i < n; i++) yt[i] = y[i] + hh * k1[i];
-      f(t + hh, yt, k2); let der2 = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); der2 += ((k2[i] - k1[i]) / s) ** 2; }
-      der2 = sqrt(der2) / hh; const der12 = Math.max(abs(der2), sqrt(dnf));
-      const h1 = der12 <= 1e-15 ? Math.max(1e-6, abs(hh) * 1e-3) : Math.pow(0.01 / der12, 0.2);
-      const r = Math.min(100 * abs(hh), h1, hmax); return r > 0 ? r : hmax * 1e-3;
-    }
-    return {
-      name: 'dopri5', get stiff() { return stiff; }, get h() { return h; },
-      reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, k1); if (!keepH || !(h > 0)) h = hinit(); facold = 1e-4; },
-      step(tT) {
-        if (!k1.every(Number.isFinite)) return { fail: 'nan' };
-        for (let tries = 0; ; tries++) {
-          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-          let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * A21 * k1[i]; f(t + 0.2 * hh, yt, k2);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A31 * k1[i] + A32 * k2[i]); f(t + 0.3 * hh, yt, k3);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A41 * k1[i] + A42 * k2[i] + A43 * k3[i]); f(t + 0.8 * hh, yt, k4);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A51 * k1[i] + A52 * k2[i] + A53 * k3[i] + A54 * k4[i]); f(t + 8 / 9 * hh, yt, k5);
-          for (let i = 0; i < n; i++) ysti[i] = y[i] + hh * (A61 * k1[i] + A62 * k2[i] + A63 * k3[i] + A64 * k4[i] + A65 * k5[i]);
-          const tph = last ? tT : t + hh; f(tph, ysti, k6);
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh * (A71 * k1[i] + A73 * k3[i] + A74 * k4[i] + A75 * k5[i] + A76 * k6[i]);
-          f(tph, y1, k7);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh * (E1 * k1[i] + E3 * k3[i] + E4 * k4[i] + E5 * k5[i] + E6 * k6[i] + E7 * k7[i]); err += (e / sk(i)) ** 2; }
-          err = sqrt(err / n);
-          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; if (!(h > 10 * EPS * abs(t) && h > 1e-300)) return { fail: 'nan' }; continue; }
-          const fac11 = Math.pow(err, 0.2 - 0.04 * 0.75);   // PI control (HNW I §IV.2: β = 0.04)
-          if (err <= 1) {
-            let fac = fac11 / Math.pow(facold, 0.04); fac = Math.max(0.1, Math.min(5, fac / 0.9)); const hnew = hh / fac; facold = Math.max(err, 1e-4);
-            // stiffness (HNW I §IV.2, the test of DOPRI5): h·ρ ≈ h·‖k7 − k6‖/‖y1 − ysti‖
-            let sn = 0, sd = 0; for (let i = 0; i < n; i++) { sn += (k7[i] - k6[i]) ** 2; sd += (y1[i] - ysti[i]) ** 2; }
-            if (sd > 0) { if (hh * sqrt(sn / sd) > 3.25) { nonsti = 0; iasti++; if (iasti >= 15) stiff = true; } else { nonsti++; if (nonsti === 6) iasti = 0; } }
-            // the dense output (contd5)
-            const r1 = Float64Array.from(y), r2 = new Float64Array(n), r3 = new Float64Array(n), r4 = new Float64Array(n), r5 = new Float64Array(n);
-            for (let i = 0; i < n; i++) { const dy = y1[i] - y[i], bspl = hh * k1[i] - dy; r2[i] = dy; r3[i] = bspl; r4[i] = dy - hh * k7[i] - bspl;
-              r5[i] = hh * (D1 * k1[i] + D3 * k3[i] + D4 * k4[i] + D5 * k5[i] + D6 * k6[i] + D7 * k7[i]); }
-            const ta = t, tb = tph, hs = hh;
-            const seg = (tq, out) => { const th = (tq - ta) / hs, th1 = 1 - th; for (let i = 0; i < n; i++) out[i] = r1[i] + th * (r2[i] + th1 * (r3[i] + th * (r4[i] + th1 * r5[i]))); };
-            t = tph; y.set(y1); k1.set(k7); h = last ? Math.max(h, hnew) : hnew;
-            return { t0: ta, t1: tb, y1: y, seg };
-          }
-          ctx.rejected++; h = hh / Math.min(10, fac11 / 0.9);
-        }
-      },
-    };
-  }
-  // Rosenbrock 2(3) of Shampine & Reichelt 1997 (MATLAB ode23s): L-stable, W = I − h·d·J, d = 1/(2 + √2)
-  function stepperRos(n, f, o, ctx) {
-    const d = 1 / (2 + Math.SQRT2), e32 = 6 + Math.SQRT2;
-    const F0 = new Float64Array(n), F1 = new Float64Array(n), F2 = new Float64Array(n), k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n);
-    const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n);
-    const piv = new Int32Array(n); const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, jacOk = false;
-    function jac() {   // forward differences (the threshold: Shampine & Reichelt 1997 §3.2, simplified)
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * Math.max(abs(yj), AT[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
-      const dt = 1.4901161193847656e-8 * Math.max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt;
-      jacOk = true;
-    }
-    return {
-      name: 'rosenbrock', stiff: false,
-      reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, F0); jacOk = false;
-        if (!keepH || !(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (AT[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = Math.min(hmax, s > 0 ? 0.8 * Math.pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; } },
-      step(tT) {
-        if (!F0.every(Number.isFinite)) return { fail: 'nan' };
-        if (!jacOk) jac();
-        for (let tries = 0; ; tries++) {
-          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-          let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
-          for (let i = 0; i < n * n; i++) W[i] = -hh * d * J[i]; for (let i = 0; i < n; i++) W[i * n + i] += 1;
-          if (!luFactor(W, n, piv)) { ctx.rejected++; h = hh / 4; continue; }
-          for (let i = 0; i < n; i++) k1[i] = F0[i] + hh * d * Tt[i]; luSolve(W, n, piv, k1);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * k1[i]; f(t + 0.5 * hh, yt, F1);
-          for (let i = 0; i < n; i++) k2[i] = F1[i] - k1[i]; luSolve(W, n, piv, k2); for (let i = 0; i < n; i++) k2[i] += k1[i];
-          const tph = last ? tT : t + hh;
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh * k2[i]; f(tph, y1, F2);
-          for (let i = 0; i < n; i++) k3[i] = F2[i] - e32 * (k2[i] - F1[i]) - 2 * (k1[i] - F0[i]) + hh * d * Tt[i]; luSolve(W, n, piv, k3);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i])))) ** 2; }
-          err = sqrt(err / n);
-          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; continue; }
-          if (err <= 1) {
-            const hnew = hh * Math.min(5, Math.max(0.2, 0.8 * Math.pow(Math.max(err, 1e-10), -1 / 3)));
-            const r0 = Float64Array.from(y), c1 = Float64Array.from(k1), c2 = Float64Array.from(k2), ta = t, hs = hh, q = 1 - 2 * d;
-            const seg = (tq, out) => { const s = (tq - ta) / hs; for (let i = 0; i < n; i++) out[i] = r0[i] + hs * (s * (1 - s) / q * c1[i] + s * (s - 2 * d) / q * c2[i]); };   // ntrp23s
-            t = tph; y.set(y1); F0.set(F2); jacOk = false; h = last ? Math.max(h, hnew) : hnew;
-            jac();
-            return { t0: ta, t1: tph, y1: y, seg };
-          }
-          ctx.rejected++; h = hh * Math.max(0.2, 0.8 * Math.pow(err, -1 / 3));
-        }
-      },
-    };
-  }
-  // fixed steps: Euler, Heun, midpoint, RK4; cubic Hermite between the steps
-  function stepperFixed(method, n, f, o, ctx, pairs) {
-    const y = new Float64Array(n), y1 = new Float64Array(n), f0 = new Float64Array(n), f1 = new Float64Array(n), a = new Float64Array(n), b = new Float64Array(n), c = new Float64Array(n), yt = new Float64Array(n);
-    let t = 0; const dt = o.dt;
-    const qi = pairs.map(p => p[0]), pi = pairs.map(p => p[1]);
-    function verlet(tt, hh, out) {   // kick–drift–kick (Störmer–Verlet; HLW 2006 §I.1.4): p' = F(q), q' = G(p)
-      f(tt, out, a); for (const j of pi) out[j] += 0.5 * hh * a[j];
-      f(tt + 0.5 * hh, out, a); for (const j of qi) out[j] += hh * a[j];
-      f(tt + hh, out, a); for (const j of pi) out[j] += 0.5 * hh * a[j];
-    }
-    const Y1 = 1 / (2 - Math.cbrt(2)), Y0 = 1 - 2 * Y1;   // Yoshida 1990, the triple jump
-    return {
-      name: method, stiff: false,
-      reset(t0, y0) { t = t0; y.set(y0); f(t, y, f0); },
-      step(tT) {
-        const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-        const hh = Math.min(dt, span), tph = hh === span ? tT : t + hh;
-        if (method === 'euler') for (let i = 0; i < n; i++) y1[i] = y[i] + hh * f0[i];
-        else if (method === 'heun') { for (let i = 0; i < n; i++) yt[i] = y[i] + hh * f0[i]; f(tph, yt, a); for (let i = 0; i < n; i++) y1[i] = y[i] + 0.5 * hh * (f0[i] + a[i]); }
-        else if (method === 'midpoint') { for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a); for (let i = 0; i < n; i++) y1[i] = y[i] + hh * a[i]; }
-        else if (method === 'rk4') {
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * a[i]; f(t + 0.5 * hh, yt, b);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * b[i]; f(tph, yt, c);
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh / 6 * (f0[i] + 2 * a[i] + 2 * b[i] + c[i]);
-        } else if (method === 'verlet') { y1.set(y); verlet(t, hh, y1); }
-        else { y1.set(y); verlet(t, Y1 * hh, y1); verlet(t + Y1 * hh, Y0 * hh, y1); verlet(t + (Y1 + Y0) * hh, Y1 * hh, y1); }
-        f(tph, y1, f1);
-        const r0 = Float64Array.from(y), r1 = Float64Array.from(y1), d0 = Float64Array.from(f0), d1 = Float64Array.from(f1), ta = t, hs = hh;
-        const seg = (tq, out) => { const s = (tq - ta) / hs, s2 = s * s, s3 = s2 * s, h00 = 2 * s3 - 3 * s2 + 1, h10 = s3 - 2 * s2 + s, h01 = -2 * s3 + 3 * s2, h11 = s3 - s2;
-          for (let i = 0; i < n; i++) out[i] = h00 * r0[i] + h10 * hs * d0[i] + h01 * r1[i] + h11 * hs * d1[i]; };
-        t = tph; y.set(y1); f0.set(f1);
-        return { t0: ta, t1: tph, y1: y, seg };
-      },
-    };
-  }
-
-  /* ======================================================================================================================
-     The driver of a flow: steps to targets (timed events, breakpoints, tEnd), samples, locates crossings, applies jumps
-     ====================================================================================================================== */
-  function makeStepper(method, n, f, o, ctx, pairs) {
-    if (method === 'rosenbrock') return stepperRos(n, f, o, ctx);
-    if (FIXED.includes(method)) return stepperFixed(method, n, f, o, ctx, pairs);
-    return stepperDopri(n, f, o, ctx);
-  }
-  /** flow(cfg): integrates from t0 to tEnd. cfg = {n, f, y0, t0, tEnd, method, rtol, atol, dt, hmax, pairs, samples (sorted times),
-      onSample(t, y), crossings [{g(t, y), dir, apply?(t, y) → y | null, stop, onHit(t, y)}], timed [{t, apply(t, y) (in place)}],
-      onSegment(seg, t0, t1)} → {t, y, stopped} */
+  /** flow(cfg): integrates from t0 to tEnd. cfg = {n, f, y0, t0, tEnd, method, rtol, atol, atolv?, dt, hmax, pairs, samples (sorted
+      times), onSample(t, y), crossings [{g(t, y), dir, apply?(t, y) (in place), stop, onHit(t, y)}], timed [{t, apply(t, y) (in place)}],
+      onSegment(seg, t0, t1)} → {t, y, stopped}. A crossing with apply or stop cuts the step there (an event of the kernel); one
+      without is observed (located and recorded, the step goes on). ctx: the run's counters, budget and codes. */
   function flow(cfg, ctx) {
-    const n = cfg.n, o = { rtol: cfg.rtol, atolv: cfg.atolv || new Float64Array(n).fill(cfg.atol), hmax: cfg.hmax, dt: cfg.dt };
-    let method = cfg.method === 'auto' ? 'dopri5' : cfg.method, auto = cfg.method === 'auto';
-    let st = makeStepper(method, n, cfg.f, o, ctx, cfg.pairs || []);
-    let t = cfg.t0; const y = Float64Array.from(cfg.y0), tmp = new Float64Array(n), ya = new Float64Array(n);
-    const timed = (cfg.timed || []).slice().sort((A, B) => A.t - B.t); let ti = 0;
-    const samples = cfg.samples || []; let si = 0;
-    const cross = cfg.crossings || [];
-    const gv = new Float64Array(cross.length);
-    // a g that is exactly 0 at a start or after a jump (a ball put on the floor) takes the side it leaves towards, so the next
-    // crossing in the event's direction is seen even when the whole flight fits in one step
-    const evalG = (tt, yy, start) => { for (let j = 0; j < cross.length; j++) { const g = cross[j].g(tt, yy); gv[j] = start && g === 0 && cross[j].dir ? (cross[j].dir < 0 ? 1e-300 : -1e-300) : g; } };
-    let stopped = false, jumps = 0;
-    // timed events at t0 come first (a dose at time 0), samples at t0 after them
-    while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; }
-    if (![...y].every(Number.isFinite)) { ctx.code('nan', t); return { t, y, stopped: true }; }
-    st.reset(t, y);
-    evalG(t, y, true);
-    while (si < samples.length && samples[si] <= t) { cfg.onSample(samples[si], y); si++; }
-    const ymax0 = Math.max(1, ...[...y].map(abs));
-    while (t < cfg.tEnd && !stopped) {
-      if (ctx.steps >= ctx.maxSteps) { ctx.code('budget', t); break; }
-      const tT = Math.min(cfg.tEnd, ti < timed.length ? timed[ti].t : Infinity);
-      const r = st.step(tT);
-      if (r.fail) { ctx.code(r.fail === 'time' ? 'step-underflow' : r.fail, t); break; }
-      ctx.steps++;
-      let t1 = r.t1, seg = r.seg; y.set(r.y1);
-      if (![...y].every(Number.isFinite)) { ctx.code('nan', t1); break; }
-      if (Math.max(...[...y].map(abs)) > 1e12 * ymax0) { ctx.code('blow-up', t1); stopped = true; }
-      // crossings: the earliest root of each g on the step (Illinois method on the dense output)
-      let jump = null;
-      if (cross.length) {
-        const g0 = Float64Array.from(gv); evalG(t1, y);
-        let first = Infinity, firstJ = -1;
-        for (let j = 0; j < cross.length; j++) {
-          const a0 = g0[j], b0 = gv[j], dir = cross[j].dir;
-          const up = a0 < 0 && b0 >= 0, down = a0 > 0 && b0 <= 0;
-          if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
-          let ta = t, tb = t1, ga = a0, gb = b0, side = 0, tr = tb;
-          for (let it = 0; it < 80; it++) {
-            tr = (ta * gb - tb * ga) / (gb - ga); if (!(tr > ta && tr < tb)) tr = (ta + tb) / 2;
-            seg(tr, tmp); const gr = cross[j].g(tr, tmp);
-            if (gr === 0 || tb - ta <= 1e-13 * Math.max(1, abs(tr))) break;
-            if ((gr < 0) === (ga < 0)) { ta = tr; ga = gr; if (side === -1) gb /= 2; side = -1; } else { tb = tr; gb = gr; if (side === 1) ga /= 2; side = 1; }
-          }
-          seg(tr, tmp); cross[j].onHit(tr, tmp);
-          if ((cross[j].apply || cross[j].stop) && tr < first) { first = tr; firstJ = j; }
-        }
-        if (firstJ >= 0) { jump = { t: first, j: firstJ }; }
-      }
-      if (jump) {   // the step ends at the event; the state jumps (or the run stops)
-        t1 = jump.t; seg(t1, ya);
-        while (si < samples.length && samples[si] <= t1) { seg(samples[si], tmp); cfg.onSample(samples[si], tmp); si++; }
-        if (cfg.onSegment) cfg.onSegment(seg, t, t1);
-        const ev = cross[jump.j];
-        if (ev.stop) { y.set(ya); t = t1; ctx.code('stopped', t1); stopped = true; break; }
-        if (ev.apply) ev.apply(t1, ya);
-        y.set(ya); t = t1; jumps++;
-        if (jumps > MAX_EVENTS) { ctx.code('zeno', t); break; }
-        st.reset(t, y, true); evalG(t, y, true);
-        continue;
-      }
-      while (si < samples.length && samples[si] <= t1 + 1e-12 * Math.max(1, abs(t1))) { const ts = Math.min(samples[si], t1); seg(ts, tmp); cfg.onSample(samples[si], tmp); si++; }
-      if (cfg.onSegment) cfg.onSegment(seg, t, t1);
-      t = t1;
-      if (stopped) break;
-      // timed events at this time, then a restart
-      let hit = false;
-      while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; hit = true; }
-      if (hit) { if (![...y].every(Number.isFinite)) { ctx.code('nan', t); break; } st.reset(t, y, true); evalG(t, y, true); }
-      if (auto && st.stiff) {   // DOPRI5 found the problem stiff: go on with Rosenbrock (like LSODA's switch, Petzold 1983)
-        ctx.code('stiff-switched', t); auto = false; method = 'rosenbrock'; st = makeStepper(method, n, cfg.f, o, ctx, []); st.reset(t, y); evalG(t, y);
-      } else if (!auto && st.stiff && !ctx.has('stiff')) ctx.code('stiff', t);
-    }
-    return { t, y, stopped };
+    const K = C.kit(), n = cfg.n;
+    const crossings = cfg.crossings || [];
+    const events = crossings.map(c => (c.apply || c.stop
+      ? { g: c.g, dir: c.dir || 0, onEvent: (t, y) => { c.onHit(t, y); if (c.stop) { ctx.code('stopped', t); return 'stop'; } c.apply(t, y); return undefined; } }
+      : { g: c.g, dir: c.dir || 0, observe: true, onEvent: (t, y) => { c.onHit(t, y); } }));
+    const breaks = (cfg.timed || []).map(b => ({ t: Math.min(cfg.tEnd, Math.max(cfg.t0, b.t)), apply: b.apply }));
+    const R = K.integrate({ f: cfg.f, y0: cfg.y0, t0: cfg.t0, tEnd: cfg.tEnd, method: cfg.method, rtol: cfg.rtol, atol: cfg.atolv ? Array.from(cfg.atolv) : cfg.atol,
+      dt: cfg.dt, hmax: cfg.hmax, pairs: cfg.pairs || [], samples: cfg.samples || [], onSample: cfg.onSample, events, breaks, maxEvents: MAX_EVENTS, maxInstant: MAX_EVENTS,
+      maxSteps: Math.max(0, ctx.maxSteps - ctx.steps), onSegment: cfg.onSegment || undefined });
+    ctx.steps += R.steps; ctx.rejected += R.rejected; ctx.nfev += R.nfev;
+    for (const c of R.codes) ctx.code(c.code === 'observe-cap' ? 'event-limit' : c.code === 'bad-config' ? 'time' : c.code, c.t, c.info);
+    return { t: R.t, y: Float64Array.from(R.y), stopped: R.stop === 'event' || R.stop === 'blow-up' || (R.stop === 'nan' && R.steps === 0) };
   }
 
   /* ======================================================================================================================

@@ -92,10 +92,10 @@
         },
         // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the transient held open, its grid model.transient.dt (else tEnd/1000, else a
         // tenth of the first macro step); outputs at each step: node / branch / power their value now (a series: one sample a step),
-        // time the time, stat over the steps so far, at once passed; DC outputs as in run(). Cannot snapshot (the companion state).
+        // time the time, stat over every internal step so far, at once passed; DC outputs as in run(). Cannot snapshot (the companion state).
         stepInit(inp) {
           try {
-            const tr = inp.$tran || {}; ST = { dt: tr.dt > 0 ? tr.dt : tr.tEnd > 0 ? tr.tEnd / 1000 : 0, s: simFor(inp), hist: {}, t: 0, prev: null, cur: null, bind: JSON.stringify(inp.$bind || []) };
+            const tr = inp.$tran || {}; ST = { dt: tr.dt > 0 ? tr.dt : tr.tEnd > 0 ? tr.tEnd / 1000 : 0, s: simFor(inp), cur: null };
             if (ST.dt > 0) ST.cur = ST.s.tranStep({ dt: ST.dt, power: outs.filter(o => o.power !== undefined).map(o => o.power) }, 0);
             return { out: ST.cur ? stepOuts(inp) : {} };
           } catch (e) { ST = null; return { fail: 'part-failed', out: {} }; }
@@ -104,7 +104,7 @@
           if (!ST) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
           try {
             if (!ST.cur) { ST.dt = dt / 10; ST.cur = ST.s.tranStep({ dt: ST.dt, power: outs.filter(o => o.power !== undefined).map(o => o.power) }, 0); }
-            ST.prev = ST.cur; ST.cur = ST.s.tranStep(null, t + dt);
+            ST.cur = ST.s.tranStep(null, t + dt);
             return { out: stepOuts(inp), dt, events: [] };
           } catch (e) { ST = null; return { fail: String(e && e.code === 'budget' ? 'budget' : 'part-failed'), out: {}, dt: 0, events: [] }; }
         },
@@ -112,18 +112,18 @@
         restore() { return false; },
       };
       function stepOuts(inp) {
-        const c = ST.cur, p = ST.prev, r = {};
+        const c = ST.cur, r = {};
         const val = (q, o) => (o.power !== undefined ? q.power[o.power] : o.node !== undefined ? q.nodes[o.node] : q.branches[o.branch]);
         for (const o of outs) {
           try {
             if (o.ac !== undefined || o.probe) { r[o.id] = NaN; continue; }
             if (o.kind === 'series') { r[o.id] = o.time ? c.t : val(c, o); continue; }
             if (o.at === undefined && o.stat === undefined) { const d = ST.dc || (ST.dc = ST.s.dc()); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
-            const v = val(c, o), h = ST.hist[o.id] || (ST.hist[o.id] = { n: 0, mn: Infinity, mx: -Infinity, sum: 0, sq: 0 });
-            if (h.t !== c.t) { h.t = c.t; h.n++; h.mn = Math.min(h.mn, v); h.mx = Math.max(h.mx, v); h.sum += v; h.sq += v * v; }
-            if (o.stat !== undefined) { r[o.id] = { final: v, min: h.mn, max: h.mx, mean: h.sum / h.n, pp: h.mx - h.mn, rms: Math.sqrt(h.sq / h.n) }[o.stat]; continue; }
+            const H = c.hist(o.power !== undefined ? 'power' : o.node !== undefined ? 'node' : 'branch', o.power !== undefined ? o.power : o.node !== undefined ? o.node : o.branch);
+            if (!H) { r[o.id] = NaN; continue; }
+            if (o.stat !== undefined) { r[o.id] = STATS.includes(o.stat) ? stat(H, o.stat) : NaN; continue; }
             const ta = inp.$at ? inp.$at[o.id] : NaN;
-            r[o.id] = p && ta >= p.t && ta <= c.t ? val(p, o) + (v - val(p, o)) * (ta - p.t) / (c.t - p.t || 1) : NaN;
+            r[o.id] = ta >= 0 && ta <= c.t ? at(H.map((_, k) => k * c.dt), H, ta) : NaN;
           } catch (e) { r[o.id] = NaN; }
         }
         return r;

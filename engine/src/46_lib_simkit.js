@@ -810,12 +810,13 @@
     else AT.fill(cfg.atol > 0 ? cfg.atol : 1e-9);
     const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: AT, hmax: cfg.hmax > 0 ? cfg.hmax : max(abs(tEnd - t0), 1e-12), dt: cfg.dt, radauLinear: cfg.radauLinear };
     const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, maxEvents = fin(cfg.maxEvents) ? min(cfg.maxEvents, MAX_EVENTS) : 1000;
+    const maxInst = fin(cfg.maxInstant) && cfg.maxInstant >= 1 ? min(cfg.maxInstant, MAX_EVENTS) : 100;   // hits at one instant before zeno
     const f = (t, y, dy) => { cfg.f(t, y, dy); };
     const make = m => (m === 'dopri5' || m === 'auto' ? dopri(n, f, o, st) : m === 'tsit5' ? tsit5(n, f, o, st) : m === 'rosenbrock' ? rosenbrock(n, f, o, st) : m === 'ros3p' ? ros3p(n, f, o, st)
       : m === 'radau5' ? radau5(n, f, o, st) : m === 'verlet' || m === 'yoshida4' ? symplectic(m, n, f, o, st, pairs) : fixed(m, n, f, o, st));
     let S = make(method), auto = method === 'auto';
     const evs = (cfg.events || []).filter(e => e && typeof e.g === 'function');
-    const armed = evs.map(() => true), gv = new Float64Array(evs.length), ztol = cfg.gtol > 0 ? cfg.gtol : 1e-10, lastHit = evs.map(() => -Infinity);
+    const armed = evs.map(() => true), gv = new Float64Array(evs.length), ztol = cfg.gtol > 0 ? cfg.gtol : 1e-10, lastHit = evs.map(() => -Infinity), jumped = evs.map(() => false);
     const samples = cfg.samples || []; let si = 0;
     // breaks: times the step must land on exactly (doses, switches, the discontinuities of a delay equation); apply(t, y) may change y
     const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t);
@@ -853,16 +854,19 @@
       st.steps++;
       const g0 = Float64Array.from(gv); evalG(r.t1, r.y1);
       const loc = new Float64Array(evs.length).fill(Infinity), side = new Float64Array(evs.length);
-      let first = Infinity; const obs = [];
+      let first = Infinity, refound = false; const obs = [];
       for (let j = 0; j < evs.length; j++) {
         const a0 = g0[j], b0 = gv[j];
         if (!armed[j]) { if (abs(b0) > (evs[j].hyst || 0)) armed[j] = true; continue; }   // hysteresis: re-armed once |g| > hyst
         const dir = evs[j].dir || 0, up = a0 < 0 && b0 >= 0, down = a0 > 0 && b0 <= 0;
         if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
         const tr = locate(tt => { r.seg(tt, tmp); return evs[j].g(tt, tmp); }, r.t0, r.t1, a0, b0, { tol: 1e-13 });
-        if (tr <= lastHit[j] + 1e-9 * max(1, abs(tr))) continue;   // the crossing just handled, seen again from its other side
+        // a crossing within 1e-9·t of the last hit is that crossing seen again from its other side — unless the hit's handler changed
+        // y: then it is a new crossing at (numerically) the same instant, a Zeno cascade, and it counts towards the zeno guard
+        let again = false;
+        if (tr <= lastHit[j] + 1e-9 * max(1, abs(tr))) { if (!jumped[j] || evs[j].observe) continue; again = true; }
         if (evs[j].observe) { obs.push([tr, j, up ? 1 : -1]); continue; }   // observed: reported, the step goes on
-        loc[j] = tr; side[j] = up ? 1 : -1; if (tr < first) first = tr;
+        loc[j] = tr; side[j] = up ? 1 : -1; if (tr < first) first = tr; if (again) refound = true;
       }
       const tSeg = first < Infinity ? first : r.t1;
       if (onSeg) onSeg(r.seg, r.t0, tSeg);
@@ -886,11 +890,13 @@
         let stop = false; const fired = [];
         for (let j = 0; j < evs.length; j++) if (loc[j] <= first + tolS) {
           fired.push(j); lastHit[j] = first; hits.push({ t: first, j, kind: evs[j].kind, dir: side[j] });
+          tmp.set(ya);
           const act = evs[j].onEvent ? evs[j].onEvent(first, ya, { j, dir: side[j] }) : undefined;
+          jumped[j] = false; for (let i = 0; i < n; i++) if (ya[i] !== tmp[i]) { jumped[j] = true; break; }
           if (act === 'stop' || evs[j].terminal) stop = true;
         }
-        if (first === instT || abs(first - instT) <= tolS) instN += fired.length; else { instT = first; instN = fired.length; }
-        if (hits.length - min(nObs, MAX_EVENTS) > maxEvents || instN > 100) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
+        if (refound || first === instT || abs(first - instT) <= tolS) instN += fired.length; else { instT = first; instN = fired.length; }
+        if (hits.length - min(nObs, MAX_EVENTS) > maxEvents || instN > maxInst) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
         t = first; y.set(ya);
         if (stop) return done(t, y, 'event', hits);
         if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }

@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "التضامن",
   "engine.author.f.lib.byAgent": "علاقة الفاعل نفسه",
   "engine.author.f.lib.stream": "التدفق",
-  "engine.author.f.lib.option": "الخيار"
+  "engine.author.f.lib.option": "الخيار",
+  "engine.author.f.lib.loops": "الحلقات (غير محسوم أو فشل بالدوران)",
+  "engine.author.f.lib.closure": "إغلاق القواعد الصارمة (بلا أو التبديل)",
+  "engine.author.f.lib.passive": "سلبي (يبقى سلبيًا تجاه الذرة)",
+  "engine.author.f.lib.lindahl": "نوع مركز ليندال",
+  "engine.author.f.lib.dimensions": "الأبعاد (مع المقادير)"
 }

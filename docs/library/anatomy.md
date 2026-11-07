@@ -554,3 +554,7 @@ Every item here is also marked in the source with *CHECK BEFORE RELEASE* or *ver
 - Wikidata: CC0.
 
 The curated data in this module is a set of facts, rewritten by hand from the textbooks cited in §7.
+
+## Uses the kernel
+
+No duplicated facility: nothing to move (checked 2026-11-07).

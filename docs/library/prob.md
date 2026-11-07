@@ -472,3 +472,7 @@ false-positive rates, the best k and the bits needed for 1 %; a plot of the rate
   "outputs": [ { "id": "errK", "kind": "scalar", "of": "errK" }, { "id": "kNeed", "kind": "scalar", "of": "kNeeded" },
                { "id": "kg", "kind": "series", "of": "kGrid" }, { "id": "eb", "kind": "series", "of": "errByK" } ] }
 ```
+
+## Uses the kernel
+
+Since 2026-11-07 every mode draws from kernel streams (`C.rng(seed, name)` = `SK.stream`, MRG32k3a): the earlier modes (Monte Carlo, sampling, the multinomial simulation, random walks, the bootstrap) too, not only the later ones; the Worker source carries the kernel. The distribution functions stay prob@1's own (Loader's saddle point, the regularised incomplete gamma and beta with both tails, AS 241/243): more complete than the kernel's. Snapshot re-recorded.

@@ -1578,5 +1578,10 @@
   "engine.author.f.lib.solidarity": "Dayanışma",
   "engine.author.f.lib.byAgent": "Failin kendi ilişkisi",
   "engine.author.f.lib.stream": "Akış",
-  "engine.author.f.lib.option": "Seçenek"
+  "engine.author.f.lib.option": "Seçenek",
+  "engine.author.f.lib.loops": "Döngüler (kararsız veya döngü nedeniyle başarısız)",
+  "engine.author.f.lib.closure": "Katı kuralların kapanışı (yok veya devrik)",
+  "engine.author.f.lib.passive": "Edilgen (atom konusunda edilgen kalır)",
+  "engine.author.f.lib.lindahl": "Lindahl konum türü",
+  "engine.author.f.lib.dimensions": "Boyutlar (büyüklüklerle)"
 }

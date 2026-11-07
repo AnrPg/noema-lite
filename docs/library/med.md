@@ -401,3 +401,7 @@ reflexes in the model: the activity shows the ventricle on its own, which its in
 **Shared change needed to ship it**: `pv-loop` (and `sepsis-case`, `docs/library/clinic.md`) must be added wherever the reference
 activities are registered (the pack builder's example list and `tests/activities.js`, if each engine's example is to be run there), and
 the catalogue (`49_lib_catalog.js`) must list `med@1` and `clinic@1` with their labels in the five languages.
+
+## Uses the kernel
+
+Since 2026-11-07: Φ and Φ⁻¹ by the kernel (`SK.normCdf`, `SK.normInv`: Wichura's AS241, about 16 digits, instead of A&S 7.1.26 and Acklam), roots by `SK.brent` (P50, the PaO₂ inversions) instead of bisection, and the pharmacokinetic stepper's compartments integrated by the kernel's RK4 (`SK.integrate`, the AUC one more state, exact for the scheme instead of the trapezoid). Each keeps a marked FALLBACK for a context without the kernel. Snapshot re-recorded (P50 differs in the last digit).

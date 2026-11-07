@@ -2406,5 +2406,10 @@
   "engine.author.f.lib.solidarity": "Αλληλεγγύη",
   "engine.author.f.lib.byAgent": "Η σχέση του ίδιου του δρώντος",
   "engine.author.f.lib.stream": "Ροή",
-  "engine.author.f.lib.option": "Επιλογή"
+  "engine.author.f.lib.option": "Επιλογή",
+  "engine.author.f.lib.loops": "Βρόχοι (αναποφάσιστο ή αποτυχία λόγω βρόχου)",
+  "engine.author.f.lib.closure": "Κλειστότητα αυστηρών κανόνων (καμία ή αντιθετοαντιστροφή)",
+  "engine.author.f.lib.passive": "Παθητική (παραμένει παθητικός ως προς το άτομο)",
+  "engine.author.f.lib.lindahl": "Τύπος θέσης Lindahl",
+  "engine.author.f.lib.dimensions": "Διαστάσεις (με μεγέθη)"
 }

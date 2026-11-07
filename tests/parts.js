@@ -170,6 +170,39 @@ function runParts(spec, env, o) {
     B.close();
   }
 
+  // ---------- 3b. the old plugins as parts: thermal@1, pid@1, twin@1, circuit-mna@1 (transient) have steppers ----------
+  {
+    require(path.join(SRC, '43_engines_p6.js')); require(path.join(SRC, '36_engine_circuit_sim.js'));
+    const exSpec = id => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', id, 'spec.json'), 'utf8'));
+    const envOf = sp => { const e = { ...(sp.consts || {}) }; for (const q of sp.params || []) e[q.id] = q.default; return e; };
+    /** step a plugin's instance from 0 to tEnd by macro steps dt; → [the last outputs, run()'s outputs] */
+    const stepVsRun = (id, sp, tEnd, dt, seed) => {
+      const E = A.engine(id), prep = E.prepare(sp, NoemaExpr.compile), inp = prep(envOf(sp)), i = E.create(sp, { seed: seed || 1 });
+      let last = i.stepInit(inp, 0).out; for (let t = 0; t < tEnd - 1e-12; t += dt) last = i.stepTo(inp, t, Math.min(dt, tEnd - t), []).out;
+      return { E, i, last, one: E.create(sp, { seed: seed || 1 }).run(inp), inp };
+    };
+    const lastOf = a => a[a.length - 1];
+    { const sp = exSpec('pid-tune'), tEnd = sp.model.transient.tEnd, r = stepVsRun('pid@1', sp, tEnd, tEnd / 20);
+      ok(r.E.stepper === true && near(r.last.y, lastOf(r.one.y), 1e-9) && near(r.last.ess, r.one.ess, 1e-9) && near(r.last.os, r.one.os, 1e-9), `pid@1 stepper: stepped to tEnd in 20 macro steps = run() (y ${r.last.y.toFixed(6)}, overshoot ${r.last.os.toFixed(3)} %)`);
+      const s0 = r.i.snapshot(), a = r.i.stepTo(r.inp, tEnd, 0.5, []).out.y; ok(s0 === 0 && r.i.restore(0) && r.i.stepTo(r.inp, tEnd, 0.5, []).out.y === a, 'pid@1 snapshot / restore: the same step again gives the same value'); }
+    { const sp = exSpec('heatsink'), env = envOf(sp), tEnd = Math.max(600, 300 * env.Rsa), r = stepVsRun('thermal@1', sp, tEnd, tEnd / 30);
+      ok(r.E.stepper === true && near(r.last.tj, lastOf(r.one.tj), 1e-9) && near(r.last.ths, lastOf(r.one.ths), 1e-9) && r.last.tjSS === r.one.tjSS, `thermal@1 stepper: the θ-method stepped to tEnd = transient() (Tj ${r.last.tj.toFixed(4)} °C), the steady scalars as run()`);
+      const s0 = r.i.snapshot(), a = r.i.stepTo(r.inp, tEnd, 10, []).out.tj; ok(s0 === 0 && r.i.restore(0) && r.i.stepTo(r.inp, tEnd, 10, []).out.tj === a, 'thermal@1 snapshot / restore'); }
+    { const sp = exSpec('sensor-node'), T = sp.model.device.sim.duration, r = stepVsRun('twin@1', sp, T, T / 24, 5);
+      ok(r.E.stepper === true && r.last.iAvg > 0 && near(r.last.iAvg, r.one.iAvg, 1e-9) && near(r.last.ratio, r.one.ratio, 1e-12) && r.i.snapshot() === -1, `twin@1 stepper: the firmware paused 24 times gives run()'s average current (${(r.last.iAvg).toFixed(5)} mA) and delivery ratio; no snapshot (a running program)`); }
+    { const sp = exSpec('rc-transient'), tEnd = sp.model.transient.tEnd, r = stepVsRun('circuit-mna@1', sp, tEnd, tEnd / 50);
+      ok(r.E.stepper === true && near(r.last.vc, lastOf(r.one.vc), 1e-9) && near(r.last.vMax, r.one.vMax, 1e-9), `circuit-mna@1 stepper: the transient held open over 50 macro steps = transient() (v_C ${r.last.vc.toFixed(6)} V, max ${r.last.vMax.toFixed(6)} V)`); }
+    // a co-simulation: pid@1's plant output y drives an ODE that integrates it, z' = y (the validators list pid@1 as a stepper)
+    const pidP = { id: 'loop', engine: 'pid@1', model: { plant: { type: 'fopdt', K: 1, tau: 1 }, controller: { Kp: 2, Ki: 1 }, setpoint: { step: { to: 1 } }, transient: { tEnd: 10, dt: 0.01 } },
+      outputs: [{ id: 'yv', kind: 'series', signal: 'y' }, { id: 'ess', kind: 'scalar', metric: 'ess' }] };
+    const intP = { id: 'int', engine: 'ode@1', model: { rhs: { z: 'yin' }, states: [{ id: 'z', init: 0 }], solve: { tEnd: 10 } }, inputs: { yin: 'yv' }, outputs: [{ id: 'zEnd', kind: 'scalar', of: 'final', var: 'z' }] };
+    const cs = base({ parts: [pidP, intP], couple: { cosim: { tEnd: 10, dt: 0.05, parts: ['loop', 'int'], time: 'tt' } } });
+    ok(!errs(cs).length, 'a co-simulation pid@1 + ode@1 passes the validators ' + errs(cs).slice(0, 2).join(' | '));
+    const rc = await runParts(cs), ref = A.engine('pid@1').create({ model: pidP.model, outputs: [{ id: 't', kind: 'series', time: true }, { id: 'y', kind: 'series', signal: 'y' }] }, { seed: 1 }).run({ $tran: { tEnd: 10, dt: 0.01 } });
+    let integ = 0; for (let k = 1; k < ref.y.length; k++) integ += 0.5 * (ref.t[k] - ref.t[k - 1]) * (ref.y[k] + ref.y[k - 1]);
+    ok(rc.outputs && rc.outputs.yv.length === 201 && Math.abs(rc.outputs.zEnd - integ) < 0.02 * integ && !rc.codes.length, `cosim pid@1 → ode@1: ∫y dt over the macro steps ${rc.outputs && rc.outputs.zEnd.toFixed(4)} ≈ ${integ.toFixed(4)} (zero-order hold, first order in dt)`);
+  }
+
   // ---------- 4. the reference activities ----------
   for (const id of ['pk-ode', 'genetics-prob', 'ancient-voyage']) {
     const dir = path.join(ROOT, 'tools', 'activities_examples', id);

@@ -142,6 +142,15 @@ source()                          → the engine's own source, to run it in a Wo
 | `NMOS` `PMOS` | d g s | `params {Vth 1.5, k 0.1 A/V², lambda 0}`; Id(sat) = k/2·(Vgs−Vth)²·(1+λVds); presets `2n7000` `bs170` `irlz44n` / `bs250` `irf9540` | level-1 square law, symmetric (d/s swap); `Vth` is a magnitude for PMOS; no gate capacitance |
 | `OPAMP` | in+ in− out [v+ v−] | `params {gain 1e5, rails [−15, 15], headroom 0}`; with 5 terminals the rails are the supply-pin voltages | ideal inputs, VCVS output to ground with exact gain, clamped smoothly (50 mV knee) to the rails; no GBW or slew |
 
+**Uses the kernel / parts (2026-11-07).** The meters' seeded jitter and a capture's shift draw from kernel streams
+(`circuit:<probe>`); the noise sources stay a counter-based hash (sample i at any time of a transient, which a sequential stream
+cannot give cheaply). The transient (trapezoidal companion models with backward Euler at breakpoints and Newton per step: a circuit
+is a DAE, outside the kernel's ODE integrators) is resumable (`tranStart` / `tranAdvance`): `runTransient()` and the new
+**stepper** of `circuit-mna@1` (`stepper: true`; the instance's `stepInit` / `stepTo`, `docs/INTERACTIVE_LIBRARY.md` §1.6) share it.
+The stepper holds the transient open on the grid `transient.dt`; a node / branch / power series gives its value now, `stat` and `at`
+read every internal step so far, DC outputs as in `run()`, AC and probes NaN. It cannot snapshot (−1). Stepped to tEnd it equals
+`transient()` (tests/parts.js). The Worker source carries NoemaExpr and the kernel.
+
 ## 4. Faults (hidden from the learner: `create(netlist, {faults: [...]})`)
 
 | fault | effect |
