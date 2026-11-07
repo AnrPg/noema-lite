@@ -1186,7 +1186,7 @@ private storage; the app adds the language to the course by itself. D1–D29 app
   `world.phenomena[code]` (trimmed as the build does), the profile in `world.languages` when it is missing, the seeAlso
   additions. `langcore.langPackagePlan(data, code)` lists the batches of the playbook for one course and language (F1–F6,
   V1…, K1… with the node ids of THAT course, draft nodes left out).
-* **Upload** (the connector, `cloud/mcp/server.mjs`): `noema_lang_package_start` (course id — a library course or the
+* **Upload** (the connector, `src/connector`): `noema_lang_package_start` (course id — a library course or the
   learner's own —, language code) → a signed upload URL into the learner's own private storage
   `langs/<course>.lang-<code>.json` and the exact `curl` command, like `noema_start_upload`; `noema_lang_package_finish`
   downloads it, runs `checkLangPackage` against the course (the library course file of the website, or the account
@@ -1335,7 +1335,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
   poll, refill card on the function page, comparison tables, account course storage), hooks in `engine/loader.js` (the
   🌍 overlay lists account courses and offers ✨; account courses open from the device or the cloud), `engine/cloud.js`
   (`a:langin:` / `a:langclaim:` stay in the cloud), connector tools `noema_lang_courses` · `noema_lang_task` ·
-  `noema_lang_submit` (`cloud/mcp/server.mjs`, langcore bundled by `tools/build.py`), `tools/lang_course.py` (course ↔
+  `noema_lang_submit` (`src/connector`, langcore bundled by `tools/connector_bundle.mjs`), `tools/lang_course.py` (course ↔
   folder, answer from a folder), the skill's `LANGUAGES.md` and its toolkit (validate_lang, lang_refcheck, langlib,
   lang_course, the schema, `_typology`, `_phenomena`); `tests/lang_claude.js`.
 

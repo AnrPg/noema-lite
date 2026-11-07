@@ -1,5 +1,5 @@
 /* ⚑ Problem reports (engine/report.js, engine/src/85_locate.js, docs/REPORTS.md) against the Supabase emulator (rules of
-   cloud/supabase.sql §15) and the connector (cloud/mcp/server.mjs: noema_reports, noema_report, noema_report_update).
+   cloud/supabase.sql §15) and the connector (src/connector: noema_reports, noema_report, noema_report_update).
    Without a browser: the brief and the repository paths from a locator.
    In the browser: the button at the foot of the side bar (a line icon, no emoji), the dialog with a screenshot of the
    window as it is (also scrolled), a kind is required, 🎯 pointing at an exercise's question → the report names the
@@ -11,6 +11,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os'), vm = require('vm');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -160,9 +161,7 @@ function unit() {
 
     console.log('— Claude reads the same reports through the connector');
     const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
-    const fn = path.join(os.tmpdir(), `noema-mcp-rep-${process.pid}.mjs`);
-    fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = {};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-    const { default: handler } = await import(fn);
+    const handler = await connectorHandler(ROOT, { config: CFG, docs: {} });
     const tok = async email => (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email, password: 'secret123' }) })).json()).access_token;
     const tool = async (t, name, args) => (await (await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + t }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: args } }) }))).json()).result;
     const AT = await tok('anr@example.com');
@@ -173,7 +172,7 @@ function unit() {
     ok(/translations\/fr\/ch01\.json/.test(one.content[0].text) && one.content.some(c => c.type === 'image' && c.mimeType === 'image/jpeg' && c.data.length > 1000), 'noema_report: the brief (the French translation file to fix) and the screenshot as an image');
     const up = await tool(AT, 'noema_report_update', { id: srv.state.ereps[1].id, status: 'fixing', note: 'on it' });
     ok(/fixing/.test(up.content[0].text) && srv.state.ereps[1].status === 'fixing' && srv.state.ereps[1].admin_note === 'on it', 'noema_report_update answers it');
-    fs.unlinkSync(fn);
+    removeConnector(handler);
     ok(!E.length, 'no page errors' + (E.length ? ': ' + E.slice(0, 3).join(' | ') : ''));
   } catch (e) { console.error(e); fails++; }
   await browser.close(); srv.close();

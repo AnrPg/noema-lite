@@ -5,7 +5,7 @@
    plus per section its key terms and a short preview in that language. The pack itself never changes.
      · where bridges come from: the library (tools/build.py → library/subjects/<id>/bridge.<native>.js, listed in the
        registry as bridgeLocales) or the learner's account (a file imported with 📥, or saved by Claude through the
-       connector: noema-private/<uid>/bridges/<pack>.<pair>.json + the synced index a:bridges) — attached any time
+       connector: noema-private/<uid>/bridges/<pack>.<pair>.json + one row per pack × pair in noema_bridges, cached in a:bridges) — attached any time
        after the pack was made or published
      · direction: from the language the learner READS — the pack's own (subject.language) or the translation shown
        (docs/i18n.md §10) — to the learner's native language (a:settings.native, shared with the language courses, D19),
@@ -113,6 +113,8 @@ window.NoemaBridge = (() => {
   };
   /** The account's own bridges (synced index): { packId: { native: { v, status, coverage, chapters, of, previews, entries, at } } } */
   const index = acc => jget(aKey(accNow(acc), 'bridges'), {}) || {};
+  /** signed in as this account: the entry's row (noema_bridges, cloud/supabase.sql §17) follows the cache (engine/cloud.js sends it) */
+  const rowsOn = acc => !!(window.NoemaCloud?.session?.() && NoemaCloud.rows && acc === 'u_' + NoemaCloud.session().user.id);
   const regEntry = id => (window.NOEMA_REGISTRY?.subjects || []).find(s => s.id === id) || null;
   const summary = b => ({ v: hash36(JSON.stringify(b.entries || []) + JSON.stringify(b.sections || {}) + JSON.stringify(b.anchors || [])), status: b.status, coverage: typeof b.coverage === 'number' ? b.coverage : null, everyday: typeof b.everyday === 'number' ? b.everyday : null,
     chapters: (b.chapters || []).length || null, of: b.of || null, previews: Object.values(b.sections || {}).filter(s => s?.preview).length, entries: (b.entries || []).length, at: Date.now() });
@@ -178,7 +180,9 @@ window.NoemaBridge = (() => {
     const own = pack?.subject?.language || meta.language || 'en', nat = base(b.native), pk = pairKey(b.source, nat, own), key = `${acc}|${b.pack}|${pk}`;
     await DB.put(key, b).catch(() => { });
     if (window.NoemaCloud?.session?.() && acc === 'u_' + NoemaCloud.session().user.id) await NoemaCloud.uploadObject(`bridges/${b.pack}.${pk}.json`, new Blob([JSON.stringify(b)], { type: 'application/json' }), 'application/json').catch(e => console.warn('[bridge] upload', e));   // i18n-ignore (a log)
-    const all = index(acc); all[b.pack] = { ...(all[b.pack] || {}), [pk]: { ...summary(b), source: base(b.source || own) } }; put(aKey(acc, 'bridges'), all);
+    const entry = { ...summary(b), source: base(b.source || own) };
+    const all = index(acc); all[b.pack] = { ...(all[b.pack] || {}), [pk]: entry }; put(aKey(acc, 'bridges'), all);
+    if (rowsOn(acc)) NoemaCloud.rows.put(acc, 'bridges', b.pack, pk, entry);
     mem.delete(key);
     return { pack: b.pack, native: nat, source: base(b.source || own), title: meta.title || b.pack };
   }
@@ -186,6 +190,7 @@ window.NoemaBridge = (() => {
     acc = accNow(acc); const pk = pairKey(src, nat, own);
     await DB.del(`${acc}|${packId}|${pk}`).catch(() => { });
     const all = index(acc); if (all[packId]) { delete all[packId][pk]; if (!Object.keys(all[packId]).length) delete all[packId]; put(aKey(acc, 'bridges'), all); }
+    if (rowsOn(acc)) NoemaCloud.rows.del(acc, 'bridges', packId, pk);
     mem.delete(`${acc}|${packId}|${pk}`);
   }
 

@@ -49,15 +49,32 @@ alter default privileges in schema public grant all on tables to anon, authentic
     psql(seed); psql(seed)
     ok(True, 'cloud/supabase.sql runs, and runs again (idempotent); so does the seed of the vault fields')
     tables = psql("select tablename from pg_tables where schemaname='public' and tablename like 'noema_%' and rowsecurity order by 1")
-    ok(tables == ['noema_admins', 'noema_blocks', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_engine_requests', 'noema_error_reports', 'noema_kv',
+    ok(tables == ['noema_admins', 'noema_blocks', 'noema_bridges', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_engine_requests', 'noema_error_reports', 'noema_kv',
                   'noema_message_reports', 'noema_messages', 'noema_people', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_room_members', 'noema_room_roadmaps',
-                  'noema_rooms', 'noema_shares', 'noema_snapshots', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 27 noema_ tables, all with row-level security: ' + ', '.join(tables))
+                  'noema_rooms', 'noema_sagas', 'noema_shares', 'noema_snapshots', 'noema_source_files', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 30 noema_ tables, all with row-level security: ' + ', '.join(tables))
     A, B, C = (str(uuid.uuid4()) for _ in range(3)); EA, EB, EC = 'anna@example.com', 'bob@example.com', 'carl@example.com'
     psql(f"insert into auth.users values ('{A}','{EA}'),('{B}','{EB}'),('{C}','{EC}')")
     # own data
     psql(f"insert into noema_kv (user_id, key, value) values ('{A}', 's:x:state', '{{}}')", A, EA)
     ok(psql("select count(*) from noema_kv", B, EB) == ['0'] and psql("select count(*) from noema_kv", A, EA) == ['1'], 'key/value rows: only the owner sees them')
     ok(psql(f"insert into noema_kv (user_id, key, value) values ('{A}', 'k', 'v')", B, EB, expect_error=True), 'nobody can write rows for another user')
+    # entry tables (§17): owner only, the server's stamp strictly later, keys fixed; the move of the old kv maps (§17b)
+    psql(f"insert into noema_source_files (user_id, subject_id, source_id, meta) values ('{A}', 'heart', 's1', '{{\"name\":\"a.pdf\",\"size\":3}}')", A, EA)
+    ok(psql("select count(*) from noema_source_files", B, EB) == ['0'] and psql("select count(*) from noema_source_files", A, EA) == ['1'], 'source files: only the owner sees their rows')
+    ok(psql(f"insert into noema_source_files (user_id, subject_id, source_id, meta) values ('{A}', 'heart', 's2', '{{}}')", B, EB, expect_error=True), 'nobody writes source files for another user')
+    t0 = psql("select updated_at from noema_source_files where source_id = 's1'", A, EA)[0]
+    psql(f"update noema_source_files set meta = '{{\"name\":\"b.pdf\"}}', updated_at = '2000-01-01', source_id = 'moved' where source_id = 's1'", A, EA)
+    ok(psql(f"select source_id, updated_at > '{t0}'::timestamptz, meta->>'name' from noema_source_files", A, EA) == ['s1|t|b.pdf'], 'the server stamps every change later than the version it replaces; the key never moves')
+    ok(psql(f"insert into noema_bridges (user_id, pack_id, pair, meta) values ('{A}', 'heart', 'not a pair', '{{}}')", A, EA, expect_error=True), 'a bridge pair is a language code (or source.native)')
+    psql(f"insert into noema_bridges (user_id, pack_id, pair, meta) values ('{A}', 'heart', 'en.ru', '{{\"v\":\"x\"}}')", A, EA)
+    ok(psql("select count(*) from noema_bridges", B, EB) == ['0'] and psql("select pair from noema_bridges", A, EA) == ['en.ru'], 'bridges: one row per pack × pair, only the owner sees them')
+    psql(f"insert into noema_sagas (user_id, key, kind) values ('{A}', 'pack:heart:1', 'pack')", A, EA)
+    ok(psql("select count(*) from noema_sagas", B, EB) == ['0'] and psql("select status from noema_sagas", A, EA) == ['running'], 'sagas: owner only, running when they start')
+    psql(f"insert into noema_kv (user_id, key, value) values ('{B}', 'a:srcfiles:lungs', '{{\"s1\":{{\"name\":\"l.pdf\",\"size\":9}},\"s2\":{{\"name\":\"m.pdf\"}}}}'), ('{B}', 'a:bridges', '{{\"lungs\":{{\"ru\":{{\"v\":\"a\"}},\"en.el\":{{\"v\":\"b\"}}}}}}'), ('{B}', 'a:srcfiles:broken', 'not json')")
+    psql(sql); psql(sql)
+    ok(psql("select subject_id || '/' || source_id || ':' || (meta->>'name') from noema_source_files order by 1", B, EB) == ['lungs/s1:l.pdf', 'lungs/s2:m.pdf']
+       and psql("select pack_id || '/' || pair || ':' || (meta->>'v') from noema_bridges order by 1", B, EB) == ['lungs/en.el:b', 'lungs/ru:a'], 'the old kv maps become rows (the script run twice: moved once)')
+    ok(psql("select key from noema_kv order by 1", B, EB) == ['a:srcfiles:broken'], 'a moved kv map is deleted; one that is not JSON stays (nothing is lost)')
     # conversations: synced_at set by the server
     psql(f"insert into noema_conversations (user_id, id, kind, created_at, updated_at, record) values ('{A}', 'cv_1', 'tutor', '2020-01-01', '2020-01-01', '{{}}')", A, EA)
     sa = psql("select synced_at > now() - interval '1 minute' from noema_conversations where id='cv_1'", A, EA)

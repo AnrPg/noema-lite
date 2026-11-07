@@ -9,7 +9,7 @@ a screenshot and enough data to find **exactly one place to change**, for a pers
 | The dialog, the locator, the admins' page | `engine/report.js` (`window.NoemaReport`), styles `engine/src/96_report.css` |
 | The engine's half of the locator | `engine/src/85_locate.js` (`locateItem`, handed to the shell as `engine.locate`) |
 | The table | `cloud/supabase.sql` §15 `noema_error_reports` |
-| Claude through the connector | `noema_reports`, `noema_report`, `noema_report_update` (`cloud/mcp/server.mjs`) |
+| Claude through the connector | `noema_reports`, `noema_report`, `noema_report_update` (`src/connector/tools/reports.ts`, `report.ts`, `report_update.ts`) |
 | Words | `i18n/report/` |
 | Tests | `tests/reports.js` (browser, connector, unit), `tests/sql_policies.py` (the rules in PostgreSQL) |
 

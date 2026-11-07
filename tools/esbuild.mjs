@@ -10,7 +10,8 @@
      worker.js     src/composition/worker.ts and every <name>.worker.ts — one self-contained IIFE per Worker.
      sw.js         src/composition/sw.ts — the ONE service worker (app shell + Python files). tools/build.py writes the site's
                    /sw.js from it, with the precache list and the build hash in front.
-     connector.mjs src/composition/connector.ts — the Claude connector for Netlify Functions (ESM, Node 22, one file).
+     (the Claude connector, src/composition/connector.ts, is bundled by tools/connector_bundle.mjs: it needs the data
+      tools/build.py collects, so build.py runs it → dist/functions/mcp.mjs)
      *.map         source maps (linked); meta.json (esbuild's metafile); manifest.json (what was built, sizes, the build hash).
 
    Why IIFE and no code splitting for the browser bundles: the app bundle must run synchronously before the older scripts
@@ -20,8 +21,8 @@
    promise of the module, as with splitting), so engine code may already use import() for lazy parts: the day the app
    becomes an ES module (phase 3, no bridge, no file://), turning on `splitting` here makes those imports real chunks
    without a change in src/. Workers are IIFEs for the same reason: the one-file bundle starts them from a Blob of their
-   text (<script type="text/plain" id="noema-worker:<name>">). The connector is one ESM file because Netlify treats every
-   top-level file of the functions directory as a function (chunks would become broken functions).
+   text (<script type="text/plain" id="noema-worker:<name>">).
+   (The connector stays one ESM file: Netlify treats every top-level file of the functions directory as a function.)
 
    Every bundle has a size budget (KB, minified) and the build FAILS when one is exceeded: raise a budget only on purpose.
 
@@ -44,7 +45,6 @@ export const ENTRIES = [
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
-  { name: 'connector', in: 'src/composition/connector.ts', kind: 'node', out: 'connector.mjs', budgetKB: 4000 },
 ];
 const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
 

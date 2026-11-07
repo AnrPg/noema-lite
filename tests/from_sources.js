@@ -11,6 +11,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), http = require('http'), vm = require('vm'), crypto = require('crypto'), { execFileSync } = require('child_process');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const F = require('./fixtures/curriculum_agents');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -237,11 +238,9 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     await p.screenshot({ path: SHOTS + '/src2_app.png', fullPage: true });
 
     console.log('— the connector: the learner’s Claude makes the Roadmap (noema_create_roadmap)');
-    const fn = path.join(require('os').tmpdir(), `noema-mcp-src-${process.pid}.mjs`);
     const MCP = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // = tools/build.py MCP_ENGINE
-    ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'tools/build.py'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
-    fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] })};\nconst DOCS = ${JSON.stringify({ workflow: 'SKILL', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + MCP.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n') + '\n' + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-    const { default: handler } = await import(fn);
+    ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'src/connector/engine/sources.ts'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
+    const handler = await connectorHandler(ROOT, { config: { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] }, docs: { workflow: 'SKILL', content: 'C', visual: 'V' } });
     const T = (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'iro@example.com', password: 'secret123' }) })).json()).access_token;
     let rpc = 0; const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result.content.map(x => x.text || '').join('\n'), err: !!j.result.isError }; };
     const RM = { title: 'Cell biology', summary: 'From membranes to signalling.', files: [{ path: 'lectures/cells.pdf', pages: 80 }, { path: 'notes/signals.md' }],

@@ -1,4 +1,4 @@
-/* noema-lite — pack checks shared by the app (in-browser generators) and the Claude connector (cloud/mcp).
+/* noema-lite — pack checks shared by the app (in-browser generators) and the Claude connector (src/connector).
    checkPack(p, expectId, { strict }) → { errors, warnings, counts }
    strict = also check every exercise's own fields (used for packs generated in the browser, where nothing
    else validated them; the Python validator in the skill is the full check for skill-built packs).

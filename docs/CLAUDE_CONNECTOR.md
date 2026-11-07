@@ -11,7 +11,7 @@ creating the account:
 | The user… | never leaves noema-lite | chats with Claude in Claude's app |
 | Skill | **uploaded automatically** by the app (Skills API, with the user's key) | optional — the connector gives Claude the same toolkit |
 | Result | imported into the picker automatically | saved by the connector → appears in the picker |
-| Code | `engine/claude.js` + `claudeGuide()` in `engine/loader.js` | `cloud/mcp/server.mjs` (+ skill zip) |
+| Code | `engine/claude.js` + `claudeGuide()` in `engine/loader.js` | `src/connector` (+ skill zip) — see **The connector's code** below |
 
 Why not "log in with your Claude subscription" inside noema-lite? Anthropic allows subscription logins
 only in its own apps; third-party apps must use an API key. Way B keeps the subscription inside
@@ -84,8 +84,8 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   `noema_finish_upload` (checks the pack **and its source files**: every file make_pack.py packaged — each part of
   a split PDF — must be in the account's storage with the recorded size; missing ones come back as ready `curl`
   commands with signed URLs (files over 45 MB as `split` + one `curl` per part, since Supabase takes ≤ 50 MB per
-  object — so there is no size limit), and the subject is registered only when all are there, together with the synced file
-  index so every device shows 👁; it also runs the quality rules of docs/PIPELINES.md §4 and refuses a pack built since
+  object — so there is no size limit), and the subject is registered only when all are there, together with a row per file
+  in `noema_source_files` so every device shows 👁; it also runs the quality rules of docs/PIPELINES.md §4 and refuses a pack built since
   2026-10-22 without `subject.authoring.rules` ≥ 2), `noema_save_pack` (small packs inline; same file check),
   `noema_start_source_upload` (one extra file), `noema_save_translation` (one full translation of a pack, `noema-translation`,
   beside it: inline or through an upload URL; its `"subject"` — the name, tagline, hero in that language — is merged into
@@ -102,8 +102,8 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   learners reported) and `noema_save_bridge` (one built `noema-bridge` file, ≤ 1.5 MB — uploaded with the `curl` command it returns for
   `subject_id` + `native` (+ `source` for a bridge from one of the pack's translations, docs/BRIDGE.md §2.4), then saved by
   the same call again; `bridge_json` inline only for small files — checked with the app's own `checkBridge` against the pack
-  (a translation's bridge only once that translation is saved) and stored at `<uid>/bridges/<pack>.<pair>.json` + the
-  synced index `a:bridges`). Prompt
+  (a translation's bridge only once that translation is saved) and stored at `<uid>/bridges/<pack>.<pair>.json` + its row of
+  `noema_bridges`, one per pack × pair). Prompt
   `language_help` (**+ → noema-lite → Language help for a noema-lite subject**). Any pack language into any other.
   Without the connector: the learner imports the built file with 📥.
 
@@ -122,8 +122,8 @@ the learner's own (same SHA-256) instead of asking for them again, and tells the
 **Shared curricula** (docs/CURRICULUM.md §8): a step handed out is also reserved among the curriculum's participants (steps
 others prepared or are preparing are skipped, and asked for by name they are refused), and `noema_finish_upload` publishes it
 for everybody at once; members get signed links to the owner's material files and never get map / plan tasks.
-The connector runs the app's own code for this (`engine/llm.js`, `curriculum.js`, `curjobs.js`, `curshare.js`, `curimport.js`, `sourceplan.js`, bundled by
-`tools/build.py` → `MCP_ENGINE`), so tasks, checks and results are identical to the in-app agents.
+The connector runs the app's own code for this (`engine/llm.js`, `curriculum.js`, `curjobs.js`, `curshare.js`, `curimport.js`, `sourceplan.js`, listed in
+`src/connector/engine/sources.ts`), so tasks, checks and results are identical to the in-app agents.
 In noema-lite: ❓ Help → Set up Claude → **C** (⭐ recommended for curricula — usually the cheapest), and the
 “💬 Claude app” choice when creating or importing a curriculum.
 
@@ -146,15 +146,70 @@ The connector stores no secret and writes only the learner's own storage and key
 sub-agent with the audit turn) needs a sandbox that runs long tasks — Claude Code or the Claude app / Cowork with code
 execution; a plain chat cannot do it. Tested by `tests/lang_package.js`.
 
+## The connector's code
+
+`src/connector` (TypeScript, strict), bundled with esbuild into the Netlify function `dist/functions/mcp.mjs`:
+
+| | |
+|---|---|
+| `tools/<tool>.ts` | one module per tool: its definition (name, description, input schema — what `tools/list` shows) and its handler; `tools/index.ts` lists them in order |
+| `router.ts` | the MCP protocol: Streamable HTTP, stateless JSON-RPC (`initialize`, `tools/*`, `prompts/*`, `ping`, notifications → 202), the OAuth protected-resource metadata, the 401 challenge |
+| `validate.ts` | a tool's arguments checked against its input schema before the handler runs (types — `"12"`, `"false"` converted when lossless —, enums, arrays, nested objects); a missing top-level argument is left to the tool, which answers with its own instructions |
+| `services/` | Supabase as the user (`supabase.ts`), the key/value rows with the one compare-and-swap (`kv.ts`: a row is replaced only if it is still the version read, and its new version is always strictly later), storage, the entry tables (`rows.ts`), sagas (`sagas.ts`), curricula, Roadmaps, packs, language courses, admins |
+| `engine/` | the app's engine files (`sources.ts`, in load order) run by `legacy.ts` in a scope of their own — `window` inside them is that scope, nothing leaks into the function's globals; `api.ts` types what the tools use |
+| `prompts.ts`, `protocol.ts` | the prompts, the server's version, protocols and instructions |
+
+`src/composition/connector.ts` wires it (the engine, the data, the network) and is the bundle's entry:
+`tools/connector_bundle.mjs` gives it `virtual:noema-connector-data` (the public config and the documents `tools/build.py`
+collects) and each `legacy:engine/…` file as text. `tools/build.py site` runs it; the tests bundle it with their own data
+(`tests/connector_fn.js`). Unit tests: `src/connector/**/*.test.ts` (`node --test --experimental-strip-types`).
+
+### Sagas: every multi-step save is safe to repeat
+Each save that writes more than one thing is a saga (`services/sagas.ts`, table `noema_sagas`, cloud/supabase.sql §18) with
+an idempotency key the tool derives from what it saves, so Claude retrying a call (a timeout, the same upload finished twice)
+never writes anything twice:
+
+| Saga | Key | Steps |
+|---|---|---|
+| `pack` — `noema_finish_upload`, `noema_save_pack` | subject + SHA-256 of the pack (+ the step it is attached to) | source-file rows → the subject's card → the Roadmap inbox entry → the step's claim released → published to the shared Roadmap → attached to a step |
+| `translation` — `noema_save_translation` | subject + locale + SHA-256 | the translation file (undone if a later step fails) → the pack names it → the card |
+| `roadmap-i18n` — `noema_save_roadmap_translation` | Roadmap + locale + SHA-256 | written into the Roadmap → the inbox entry |
+| `bridge` — `noema_save_bridge` | pack + pair + SHA-256 | the bridge file (undone if a later step fails) → its row → the upload cleared |
+| `roadmap` — `noema_create_roadmap` | SHA-256 of the plan | the Roadmap record (made once: a retry reuses its id) |
+| `extend` / `links` — `noema_extend_roadmap`, `noema_link_roadmap_steps` | Roadmap + SHA-256 | the inbox entry (its key fixed by the saga) |
+| `answer` — `noema_curriculum_submit` | Roadmap + task + SHA-256 of the answer | the inbox entry |
+| `lang-answer` — `noema_lang_submit` | course + task + SHA-256 | the inbox entry → the task's claim released |
+| `langpack` — `noema_lang_package_finish` | course + language + SHA-256 of the package | the package's record |
+
+* **done** → the first call's answer again, with "(This upload was already saved by an earlier call: nothing was written
+  again.)" — unless what it made is gone (the subject deleted meanwhile): then it runs again from the start.
+* **running** with a live lease (10 min) → "being saved by another call right now — call again".
+* **failed**, or running with its lease run out (the call stopped) → the next call resumes it, skipping the steps recorded as
+  done. A step that fails undoes the steps of the same call that name an undo (the files above), marks the saga failed with
+  the error and answers what is saved and that calling again goes on from there. Every write of the saga row is a
+  compare-and-swap, so a call that lost the saga to another stops at its next step.
+* Claims keep their rules: a step handed out waits 72 h for its upload, a claim that ran out is taken over by a
+  compare-and-swap (never two runs on one step). Finished sagas are dropped after a week.
+
+### Entry tables
+The 👁 source files of a subject and the 文A bridges are rows of their own — `noema_source_files` (one per source file per
+subject) and `noema_bridges` (one per pack × pair), cloud/supabase.sql §17 — instead of one JSON map in `noema_kv`
+(`a:srcfiles:<subject>`, `a:bridges`) that every writer read, changed and wrote back whole. The connector writes rows; the app
+keeps them in local caches (`engine/cloud.js` "entry tables": changes go through an outbox, a pull rebuilds the caches, the
+first pull of an account sends up entries only that device had). §17b moves existing kv maps into the tables (safe to run
+again; a map that does not fit stays where it is).
+
 ## One-time setup (owner)
 
 1. **Supabase → Authentication → OAuth Server**: enable the OAuth 2.1 server, turn on **dynamic client
    registration**, set the **authorization path** to `/oauth/consent`.
    (Site URL under *Authentication → URL Configuration* must be `https://noema-lite.netlify.app`.)
    If the dashboard asks for asymmetric JWT signing keys (*Project Settings → JWT Keys*), switch to them.
-2. Push to GitHub → Netlify builds the website **and** the functions `/mcp` and `/api/img`
+2. Run `cloud/supabase.sql` again (SQL Editor): it adds the tables `noema_source_files`, `noema_bridges` and `noema_sagas`
+   (§17, §18) and moves the old maps `a:srcfiles:*` / `a:bridges` into them (§17b). The connector and the app need them.
+3. Push to GitHub → Netlify builds the website **and** the functions `/mcp` and `/api/img`
    (`netlify.toml` → `[functions]`).
-3. Check: `https://noema-lite.netlify.app/.well-known/oauth-protected-resource/mcp` shows JSON, and
+4. Check: `https://noema-lite.netlify.app/.well-known/oauth-protected-resource/mcp` shows JSON, and
    `https://noema-lite.netlify.app/mcp` answers `405` to a browser GET (it only speaks POST).
 
 ## Tests
@@ -163,7 +218,10 @@ execution; a plain chat cannot do it. Tested by `tests/lang_package.js`.
   after a reload, the pack imported with embedded pictures, the key never in the cloud, the two guides
   (numbered steps, tips, FAQ), phone layout, `/api/img` safety.
 * `tests/connector.js` — way B: 401 + resource metadata, protocol, every tool, toolkit + prompt,
-  upload → check → register, refusal of broken packs, consent page, the subject in the picker.
+  upload → check → register, refusal of broken packs, the sagas (finished twice → nothing written twice; busy; resumed),
+  the rows of the entry tables, consent page, the subject in the picker.
+* `src/connector/**/*.test.ts` — the saga runner, the compare-and-swap, the argument checks, the engine's scope.
+* `tests/sql_policies.py` — the entry tables and sagas: owner only, the server's stamp, the move of the old kv maps.
 * `tests/lang_package.js` — way D: the package round trip (`lang_course.py package` / `unpack --package`), the check that
   refuses a wrong form, a missing facade or a new node, start / finish (signed URL, the record, the problems listed), the
   app with the added language after a reload and on a second device, Remove, phone width.

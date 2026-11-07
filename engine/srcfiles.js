@@ -1,7 +1,8 @@
 /* noema-lite — the original files of a subject's sources (PDFs, slides, documents…), for 👁 preview.
    A file lives in three places:  this device (IndexedDB "noema-files", instant and offline)
                                   the private cloud folder <user>/sources/<subject>/<source>/file.<ext> (every device)
-                                  an index in the synced key a:srcfiles:<subject> {sourceId: {name, type, size, added, cloud}}
+                                  an index: one row per file in the table noema_source_files (cloud/supabase.sql §17),
+                                  cached here in a:srcfiles:<subject> {sourceId: {name, type, size, added, cloud}} (engine/cloud.js keeps it)
    Sources without a file but with a web address (url, or a link in their subtitle) are previewed from the web. */
 window.NoemaSrcFiles = (() => {
   const DB = { db: null,
@@ -23,7 +24,14 @@ window.NoemaSrcFiles = (() => {
   const errText = e => window.NoemaI18n ? NoemaI18n.err(e) : String((e && e.message) || e);
 
   function index(acc, subj) { try { return JSON.parse(localStorage.getItem(idxKey(acc, subj)) || '{}'); } catch (e) { return {}; } }
-  function setIndex(acc, subj, ix) { const v = JSON.stringify(ix); if (kv()) { if (Object.keys(ix).length) kv().set(idxKey(acc, subj), v); else kv().del(idxKey(acc, subj)); } else localStorage.setItem(idxKey(acc, subj), v); }
+  /** Write the index of a subject: this device's cache, and each changed entry to its row (signed in: engine/cloud.js sends it). */
+  function setIndex(acc, subj, ix) {
+    const was = index(acc, subj), v = JSON.stringify(ix);
+    if (kv()) { if (Object.keys(ix).length) kv().set(idxKey(acc, subj), v); else kv().del(idxKey(acc, subj)); } else localStorage.setItem(idxKey(acc, subj), v);
+    if (!cloudOn(acc)) return;
+    for (const [src, m] of Object.entries(ix)) if (JSON.stringify(was[src]) !== JSON.stringify(m)) NoemaCloud.rows.put(acc, 'source_files', subj, src, m);
+    for (const src of Object.keys(was)) if (!(src in ix)) NoemaCloud.rows.del(acc, 'source_files', subj, src);
+  }
 
   /** Attach (or replace) the file of a source. */
   async function put(acc, subj, src, file, { name } = {}) {
@@ -135,7 +143,7 @@ window.NoemaSrcFiles = (() => {
   const SHA = /^[0-9a-f]{64}$/;
   const h5pItems = p => ((p?.activities?.items) || []).filter(a => a && a.runtime === 'h5p@1' && SHA.test(String(a.sha256 || '')) && /^activities\/[^]+\.h5p$/.test(String(a.entry || '')) && !String(a.entry).split('/').includes('..'));
   const actKey = (acc, subj, sha) => `act|${acc}|${subj}|${sha}`;
-  const actCloudPath = (subj, a) => `packs/${subj}/${a.entry}`;   // = cloud/mcp/server.mjs actPath (under the user's folder)
+  const actCloudPath = (subj, a) => `packs/${subj}/${a.entry}`;   // = src/connector/services/packfiles.ts actPath (under the user's folder)
   /** Is this blob the .h5p file the item names (its bytes and sha256)? */
   const isItemFile = async (a, blob) => !!blob && (!a.bytes || blob.size === a.bytes) && (await sha256(blob).catch(() => null)) === a.sha256;
   // the bytes, not the Blob: WebKit refuses a Blob in IndexedDB in some places (a file:// page: the transaction fails with no error)

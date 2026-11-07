@@ -14,7 +14,6 @@ import { fakeDocument } from '../adapters/testing/fake-dom.ts';
 import { Container, token } from './container.ts';
 import { buildBridge } from './bridge.ts';
 import { createToolsContainer } from './tools.ts';
-import { createConnectorContainer } from './connector.ts';
 import { createAppContainer, workerFactory, WORKER_SOURCE_ID } from './browser.ts';
 import { AI, CLOUD, COMPUTE, ERRORS, NOTIFIER, STORAGE } from './tokens.ts';
 import { browserStorage } from '../adapters/browser/storage.ts';
@@ -43,8 +42,6 @@ test('container: lazy singletons, typed tokens, unknown / twice / cycle / frozen
   c.freeze();
   assert.ok(c.frozen);
   assert.equal(codeOf(() => c.value(token('z'), 1)), 'container.frozen');
-  assert.equal(createConnectorContainer().keys().length, 0);
-  assert.ok(createConnectorContainer([k => k.value(A, 3)]).get(A) === 3);
 });
 
 test('bridge: days, clock, storage, notify, compute, errors, extensions', async () => {

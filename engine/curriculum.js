@@ -1096,7 +1096,7 @@ window.NoemaCurriculum.Edit = (() => {
   }
   /** 📦 Can a subject be attached to this step? → null | 'missing' | 'generating' (the reason, as a code). */
   const assignBlock = (c, n) => !n ? 'missing' : n.pack?.status === 'generating' ? 'generating' : null;
-  /** The same in English words, for Claude (the connector, cloud/mcp/server.mjs) → null or why not. A learner reads assignNo(). */
+  /** The same in English words, for Claude (the connector, src/connector) → null or why not. A learner reads assignNo(). */
   function cannotAssign(c, n) {
     /* i18n-ignore-start */
     return { missing: 'Step not found.', generating: 'This step is being prepared right now — wait until it is ready, or stop it first.' }[assignBlock(c, n)] || null;

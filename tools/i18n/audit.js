@@ -8,11 +8,11 @@
    Not text for learners — mark it so the audit skips it:
      // i18n-ignore            on the line (a code word that looks like text, a test hook, a log)
      /* i18n-ignore-start *\/ … /* i18n-ignore-end *\/   a block (e.g. a prompt for the AI, which is approach 6, not the UI)
-   Out of scope (docs/i18n.md §3): cloud/mcp/ (the connector's texts are instructions for Claude), generated files, vendor code. */
+   Out of scope (docs/i18n.md §3): src/connector (the connector's texts are instructions for Claude; not under SCOPE), generated files, vendor code. */
 const fs = require('fs'), path = require('path'), cp = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const SCOPE = ['engine', 'cloud', 'index.html'];
-const SKIP = /(^|\/)(vendor|i18n|node_modules)\/|^cloud\/email\/|^engine\/(engine|langui|authoring)\.js$|^cloud\/mcp\/|^engine\/i18n\.js$|\.min\.js$/;
+const SKIP = /(^|\/)(vendor|i18n|node_modules)\/|^cloud\/email\/|^engine\/(engine|langui|authoring)\.js$|^engine\/i18n\.js$|\.min\.js$/;
 
 /** A small JavaScript tokenizer: every string / template literal with its line, skipping comments and regular expressions. */
 function literals(src) {

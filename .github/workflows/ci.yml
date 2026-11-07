@@ -5,10 +5,10 @@
 name: ci
 on:
   pull_request:
-    paths: ['src/**', 'package*.json', 'tsconfig.json', 'eslint.config.js', '.prettier*', 'manifest.webmanifest', 'icons/**', 'tools/**', 'skill/**', 'engine/**', 'i18n/**', 'tests/**', 'cloud/mcp/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
+    paths: ['src/**', 'package*.json', 'tsconfig.json', 'eslint.config.js', '.prettier*', 'manifest.webmanifest', 'icons/**', 'tools/**', 'skill/**', 'engine/**', 'i18n/**', 'tests/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
   push:
     branches: [main]
-    paths: ['src/**', 'package*.json', 'tsconfig.json', 'eslint.config.js', '.prettier*', 'manifest.webmanifest', 'icons/**', 'tools/**', 'skill/**', 'engine/**', 'i18n/**', 'tests/**', 'cloud/mcp/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
+    paths: ['src/**', 'package*.json', 'tsconfig.json', 'eslint.config.js', '.prettier*', 'manifest.webmanifest', 'icons/**', 'tools/**', 'skill/**', 'engine/**', 'i18n/**', 'tests/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
   workflow_dispatch: {}
 concurrency:   # a newer push to the same pull request cancels the run still going for the older one
   group: ci-${{ github.event.pull_request.number || github.ref }}

@@ -113,7 +113,7 @@ The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOC
 | `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project. It wires `storage.onFull` to the reporter, which raises the learner's alert. |
 | `worker.ts` | `build/worker.js` | the job registry (`jobs.ts`) served over `worker-protocol.ts` |
 | `tools.ts` | (imported by Node scripts) | memory storage, the system clock, the given catalogs, a recording notifier and inline Compute; no network |
-| `connector.ts` | (the MCP server) | empty in phase 1; the connector area fills `CONNECTOR_REGISTRATIONS` |
+| `connector.ts` | the MCP server (Netlify function) | `register()` wires `src/connector` (one module per tool, sagas, the entry tables) with the app engine files it shares, loaded in a scope of their own (`src/connector/engine/legacy.ts`); bundled by `tools/connector_bundle.mjs` |
 
 The Worker script comes from the one-file bundle's `<script type="text/plain" id="noema-worker:worker">` when that
 exists. Otherwise it is the file next to `build/app.js` (`build/worker.js`). A page opened from `file://` gets no Worker, so its jobs run
