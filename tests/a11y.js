@@ -46,7 +46,7 @@ function firstChapter() {
       for (const v of minor) console.log(`     · ${show(v)}`);
       ok(!bad.length, `${pg.name}: no serious or critical violation${bad.length ? '\n       ' + bad.map(show).join('\n       ') : ''} (${res.passes.length} rules pass)`);
     }
-    if (E.length) console.log(`     (page errors, for the suites that own those screens: ${JSON.stringify([...new Set(E)].slice(0, 3))})`);
+    ok(!E.length, `no page errors on these screens${E.length ? ': ' + JSON.stringify([...new Set(E)].slice(0, 3)) : ''}`);
     await ctx.close();
   }
   await browser.close();

@@ -1800,7 +1800,7 @@
   /** Boot the engine on a subject. background: the frame needs the engine's account pages (Me › Profile, AI, Help…) or the
       tutor before any subject was opened: the last subject you studied (else the first) loads quietly, without becoming the
       one you are "in" and without the start-of-day things start() already did. */
-  let engineBoot = null;
+  let engineBoot = null, engineScript = null;   // engineScript: engine.js being loaded or loaded (once per page)
   async function openEngine(acc, subs, meta, { background = false } = {}) {
     KV.subj = meta.id;
     if (!background) Noema.setCurrent(acc.id, meta.id);
@@ -1827,9 +1827,13 @@
     if (background) Noema.backgroundEngine = true;
     if (Noema.subject.features?.math) await ensureMath();
     // start the engine
-    const inline = document.getElementById('noema-engine-src');
-    if (inline) { const s = document.createElement('script'); s.textContent = inline.textContent; document.body.append(s); }
-    else await loadScript((window.NOEMA_ENGINE_BASE || 'engine/') + 'engine.js');
+    // once per page: engine.js declares top-level constants, so a second copy would throw (a route that asks for the engine
+    // while the subject's own engine is still loading waits for that one: Noema.ensureEngine)
+    await (engineScript || (engineScript = (async () => {
+      const inline = document.getElementById('noema-engine-src');
+      if (inline) { const s = document.createElement('script'); s.textContent = inline.textContent; document.body.append(s); }
+      else await loadScript((window.NOEMA_ENGINE_BASE || 'engine/') + 'engine.js');
+    })().catch(e => { engineScript = null; throw e; })));   // a failed load may be tried again
     document.body.classList.remove('noema-booting');
     document.getElementById('noema-splash')?.remove();
     if (background) return;
@@ -1840,6 +1844,7 @@
   /** The frame asks for an engine when none is open (see openEngine). Resolves true once it is there. */
   Noema.ensureEngine = () => {
     if (window.NoemaShell?.engine) return Promise.resolve(true);
+    if (engineScript) return engineScript.then(() => !!window.NoemaShell?.engine, () => false);   // the subject's engine is already on its way
     return engineBoot || (engineBoot = (async () => {
       const acc = Noema.account; if (!acc) return false;
       const subs = await subjectsFor(acc.id); if (!subs.length) return false;
