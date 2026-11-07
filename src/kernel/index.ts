@@ -5,3 +5,5 @@ export * from './ids.ts';
 export * from './day.ts';
 export * from './hlc.ts';
 export * from './invariant.ts';
+export * from './promise.ts';
+export * from './text.ts';

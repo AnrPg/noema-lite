@@ -3,10 +3,16 @@
  * The day is computed in the process's time zone, like the browser clock's.
  */
 import { dayOf, type LocalDay } from '../../kernel/day.ts';
+import { abortReason } from '../../kernel/promise.ts';
 import type { Clock, TimerHandle } from '../../ports/clock.ts';
 import type { Unsubscribe } from '../../ports/common.ts';
 
-interface Timer { id: number; at: number; every: number | null; f: () => void }
+interface Timer {
+  id: number;
+  at: number;
+  every: number | null;
+  f: () => void;
+}
 
 export interface ManualClock extends Clock {
   /** Moves time forward by ms, firing every timer that falls due on the way (in order). */
@@ -26,14 +32,19 @@ export function manualClock(start: number | Date = Date.UTC(2026, 10, 7, 10), ti
 
   const checkDay = (): void => {
     const d = dayOf(now);
-    if (d !== lastDay) { lastDay = d; for (const l of [...dayListeners]) l(d); }
+    if (d !== lastDay) {
+      lastDay = d;
+      for (const l of [...dayListeners]) l(d);
+    }
   };
   const add = (f: () => void, ms: number, every: number | null): TimerHandle => {
     const id = nextId++;
     timers.set(id, { id, at: now + Math.max(0, ms), every, f });
     return id as unknown as TimerHandle;
   };
-  const clear = (h: TimerHandle): void => { timers.delete(h as unknown as number); };
+  const clear = (h: TimerHandle): void => {
+    timers.delete(h as unknown as number);
+  };
 
   const clock: ManualClock = {
     now: () => now,
@@ -45,15 +56,30 @@ export function manualClock(start: number | Date = Date.UTC(2026, 10, 7, 10), ti
     clearInterval: clear,
     sleep(ms, signal) {
       return new Promise((resolve, reject) => {
-        if (signal?.aborted) return reject(signal.reason);
-        const h = add(() => { signal?.removeEventListener('abort', onAbort); resolve(); }, ms, null);
-        const onAbort = (): void => { clear(h); reject(signal?.reason); };
+        if (signal?.aborted) {
+          reject(abortReason(signal));
+          return;
+        }
+        const h = add(
+          () => {
+            signal?.removeEventListener('abort', onAbort);
+            resolve();
+          },
+          ms,
+          null,
+        );
+        const onAbort = (): void => {
+          clear(h);
+          if (signal) reject(abortReason(signal));
+        };
         signal?.addEventListener('abort', onAbort, { once: true });
       });
     },
     onDayChange(listener): Unsubscribe {
       dayListeners.add(listener);
-      return () => { dayListeners.delete(listener); };
+      return () => {
+        dayListeners.delete(listener);
+      };
     },
     advance(ms) {
       const end = now + ms;
@@ -61,7 +87,8 @@ export function manualClock(start: number | Date = Date.UTC(2026, 10, 7, 10), ti
         const due = [...timers.values()].filter(t => t.at <= end).sort((a, b) => a.at - b.at || a.id - b.id)[0];
         if (!due) break;
         now = Math.max(now, due.at);
-        if (due.every === null) timers.delete(due.id); else due.at += due.every;
+        if (due.every === null) timers.delete(due.id);
+        else due.at += due.every;
         checkDay();
         due.f();
       }
@@ -70,7 +97,10 @@ export function manualClock(start: number | Date = Date.UTC(2026, 10, 7, 10), ti
     },
     set(epochMs) {
       if (epochMs > now) clock.advance(epochMs - now);
-      else { now = epochMs; checkDay(); }
+      else {
+        now = epochMs;
+        checkDay();
+      }
     },
     pending: () => timers.size,
   };

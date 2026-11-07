@@ -1,28 +1,44 @@
 /* The engine the connector runs: the app's script files, loaded once per instance in a scope of their own. */
-import type { EngineApi, NoemaCurJobs, NoemaCurriculum, NoemaCurShare, NoemaCurImport, NoemaEngineCatalog, NoemaEngineRequests, NoemaImgLib, NoemaLang, NoemaLLM, NoemaPackCheck, NoemaReport, NoemaSourcePlan } from './api.ts';
+import type {
+  EngineApi,
+  NoemaCurJobs,
+  NoemaCurriculum,
+  NoemaCurShare,
+  NoemaCurImport,
+  NoemaEngineCatalog,
+  NoemaEngineRequests,
+  NoemaImgLib,
+  NoemaLang,
+  NoemaLLM,
+  NoemaPackCheck,
+  NoemaReport,
+  NoemaSourcePlan,
+} from './api.ts';
 import { runLegacy, type LegacyScope, type LegacySource } from './legacy.ts';
 
-function need<T>(scope: LegacyScope, name: string): T {
+/** A module the files must have made (its type is the one api.ts declares for it). */
+function need(scope: LegacyScope, name: string): unknown {
   const v = scope[name];
-  if (v == null) throw new Error(`the connector's engine has no ${name} (a file of engine/ is missing from src/connector/engine/sources.ts)`);
-  return v as T;
+  if (v == null)
+    throw new Error(`the connector's engine has no ${name} (a file of engine/ is missing from src/connector/engine/sources.ts)`);
+  return v;
 }
 
 /** The modules of the files, by the names the app knows them by. */
 export function engineFrom(sources: readonly LegacySource[], provide: LegacyScope = {}): EngineApi {
   const s = runLegacy([...sources], provide);
   return {
-    packCheck: need<NoemaPackCheck>(s, 'NoemaPackCheck'),
-    curJobs: need<NoemaCurJobs>(s, 'NoemaCurJobs'),
-    curriculum: need<NoemaCurriculum>(s, 'NoemaCurriculum'),
+    packCheck: need(s, 'NoemaPackCheck') as NoemaPackCheck,
+    curJobs: need(s, 'NoemaCurJobs') as NoemaCurJobs,
+    curriculum: need(s, 'NoemaCurriculum') as NoemaCurriculum,
     curShare: (s.NoemaCurShare as NoemaCurShare | undefined) ?? null,
-    curImport: need<NoemaCurImport>(s, 'NoemaCurImport'),
-    sourcePlan: need<NoemaSourcePlan>(s, 'NoemaSourcePlan'),
-    llm: need<NoemaLLM>(s, 'NoemaLLM'),
-    imgLib: need<NoemaImgLib>(s, 'NoemaImgLib'),
-    lang: need<NoemaLang>(s, 'NoemaLang'),
-    report: need<NoemaReport>(s, 'NoemaReport'),
-    engineRequests: need<NoemaEngineRequests>(s, 'NoemaEngineRequests'),
+    curImport: need(s, 'NoemaCurImport') as NoemaCurImport,
+    sourcePlan: need(s, 'NoemaSourcePlan') as NoemaSourcePlan,
+    llm: need(s, 'NoemaLLM') as NoemaLLM,
+    imgLib: need(s, 'NoemaImgLib') as NoemaImgLib,
+    lang: need(s, 'NoemaLang') as NoemaLang,
+    report: need(s, 'NoemaReport') as NoemaReport,
+    engineRequests: need(s, 'NoemaEngineRequests') as NoemaEngineRequests,
     engineCatalog: (s.NoemaEngineCatalog as NoemaEngineCatalog | undefined) ?? null,
   };
 }

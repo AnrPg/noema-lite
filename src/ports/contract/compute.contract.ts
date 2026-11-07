@@ -6,22 +6,46 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { NoemaError } from '../../kernel/errors.ts';
+import { abortReason, promised } from '../../kernel/promise.ts';
 import type { Compute, JobHandler, JobRegistry, Progress } from '../compute.ts';
 
 export const TEST_JOBS: { readonly [name: string]: JobHandler } = {
-  'test.add': (x: unknown) => { const { a, b } = x as { a: number; b: number }; return a + b; },
-  'test.mutate': (x: unknown) => { (x as { list: number[] }).list.push(4); return (x as { list: number[] }).list.length; },
-  'test.progress': async (_x, ctx) => { for (let i = 1; i <= 3; i++) ctx.progress({ done: i, total: 3 }); return 'done'; },
-  'test.coded': () => { throw new NoemaError('storage.corrupt', 'bad data inside the job'); },
-  'test.throws': () => { throw new TypeError('a bug in the job'); },
-  'test.forever': (_x, ctx) => new Promise((_resolve, reject) => { ctx.signal.addEventListener('abort', () => reject(ctx.signal.reason)); }),
+  'test.add': (x: unknown) => {
+    const { a, b } = x as { a: number; b: number };
+    return a + b;
+  },
+  'test.mutate': (x: unknown) => {
+    (x as { list: number[] }).list.push(4);
+    return (x as { list: number[] }).list.length;
+  },
+  'test.progress': (_x, ctx) =>
+    promised(() => {
+      for (let i = 1; i <= 3; i++) ctx.progress({ done: i, total: 3 });
+      return 'done';
+    }),
+  'test.coded': () => {
+    throw new NoemaError('storage.corrupt', 'bad data inside the job');
+  },
+  'test.throws': () => {
+    throw new TypeError('a bug in the job');
+  },
+  'test.forever': (_x, ctx) =>
+    new Promise((_resolve, reject) => {
+      ctx.signal.addEventListener('abort', () => {
+        reject(abortReason(ctx.signal));
+      });
+    }),
 };
 
 export type ComputeFactory = (registry: JobRegistry) => Compute;
 
-const run = async <O>(c: Compute, job: string, input: unknown, o = {}) => c.run<unknown, O>(job, input, o);
+const run = async <O>(c: Compute, job: string, input: unknown, o = {}) => c.run<O>(job, input, o);
 
-export function computeContract(name: string, make: ComputeFactory, registryOf: (jobs: { readonly [n: string]: JobHandler }) => JobRegistry): void {
+export function computeContract(
+  name: string,
+  make: ComputeFactory,
+  registryOf: (jobs: { readonly [n: string]: JobHandler }) => JobRegistry,
+): void {
   describe(`Compute contract: ${name}`, () => {
     const fresh = (): Compute => make(registryOf(TEST_JOBS));
 
@@ -34,7 +58,7 @@ export function computeContract(name: string, make: ComputeFactory, registryOf: 
       c.dispose();
     });
 
-    test('the input is a copy: the job cannot change the caller\'s data', async () => {
+    test("the input is a copy: the job cannot change the caller's data", async () => {
       const c = fresh();
       const input = { list: [1, 2, 3] };
       const r = await run<number>(c, 'test.mutate', input);
@@ -48,7 +72,10 @@ export function computeContract(name: string, make: ComputeFactory, registryOf: 
       const seen: Progress[] = [];
       const r = await run<string>(c, 'test.progress', null, { onProgress: (p: Progress) => seen.push(p) });
       assert.ok(r.ok && r.value === 'done');
-      assert.deepEqual(seen.map(p => p.done), [1, 2, 3]);
+      assert.deepEqual(
+        seen.map(p => p.done),
+        [1, 2, 3],
+      );
       c.dispose();
     });
 
@@ -78,7 +105,9 @@ export function computeContract(name: string, make: ComputeFactory, registryOf: 
       const c = fresh();
       const ac = new AbortController();
       const p = run(c, 'test.forever', null, { signal: ac.signal });
-      setTimeout(() => ac.abort(), 20);
+      setTimeout(() => {
+        ac.abort();
+      }, 20);
       const r = await p;
       assert.ok(!r.ok && r.error.code === 'compute.cancelled');
       const pre = new AbortController();
@@ -91,7 +120,10 @@ export function computeContract(name: string, make: ComputeFactory, registryOf: 
     test('jobs run side by side', async () => {
       const c = fresh();
       const rs = await Promise.all([1, 2, 3, 4, 5].map(i => run<number>(c, 'test.add', { a: i, b: 10 })));
-      assert.deepEqual(rs.map(r => (r.ok ? r.value : -1)), [11, 12, 13, 14, 15]);
+      assert.deepEqual(
+        rs.map(r => (r.ok ? r.value : -1)),
+        [11, 12, 13, 14, 15],
+      );
       c.dispose();
     });
 

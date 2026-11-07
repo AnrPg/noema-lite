@@ -78,6 +78,10 @@ module.exports = tseslint.config(
         { selector: 'CatchClause > BlockStatement[body.length=0]', message: 'No empty catch: handle the error, return a Result, or report it (ErrorReporter port).' }],
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
+      // node:test's test() / describe() / it() return promises the runner owns and awaits
+      '@typescript-eslint/no-floating-promises': ['error', {
+        allowForKnownSafeCalls: [{ from: 'package', package: 'node:test', name: ['test', 'describe', 'it', 'suite'] }],
+      }],
     },
   },
   {
@@ -90,5 +94,4 @@ module.exports = tseslint.config(
         { selector: "NewExpression[callee.name='Date'][arguments.length=0]", message: 'The clock is a port (src/ports/clock): no new Date() in a pure layer.' }],
     },
   },
-  { files: ['src/**/*.test.ts'], rules: { '@typescript-eslint/no-floating-promises': 'off' } },   // node:test's test() returns a promise the runner awaits
 );

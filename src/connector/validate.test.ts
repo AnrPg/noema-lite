@@ -3,7 +3,17 @@ import { test } from 'node:test';
 import { TOOLS } from './tools/index.ts';
 import { checkArgs, type JsonSchema } from './validate.ts';
 
-const S: JsonSchema = { type: 'object', properties: { n: { type: 'integer' }, on: { type: 'boolean' }, part: { type: 'string', enum: ['a', 'b'] }, ids: { type: 'array', items: { type: 'string' } }, facts: { type: 'object', properties: { x: { type: 'number' } }, required: ['x'] } }, required: ['part'] };
+const S: JsonSchema = {
+  type: 'object',
+  properties: {
+    n: { type: 'integer' },
+    on: { type: 'boolean' },
+    part: { type: 'string', enum: ['a', 'b'] },
+    ids: { type: 'array', items: { type: 'string' } },
+    facts: { type: 'object', properties: { x: { type: 'number' } }, required: ['x'] },
+  },
+  required: ['part'],
+};
 
 test('scalars sent as strings are converted when that is lossless', () => {
   const r = checkArgs(S, { n: '12', on: 'false', ids: [1, 'b'] });
@@ -13,7 +23,12 @@ test('scalars sent as strings are converted when that is lossless', () => {
 test('what does not fit is refused with every problem', () => {
   const r = checkArgs(S, { n: 1.5, on: 'yes', part: 'c', facts: {} });
   assert.equal(r.ok, false);
-  if (!r.ok) assert.deepEqual(r.problems, ['n: must be an integer (got number)', 'on: must be a boolean (got string)', 'part: must be one of a, b (got "c")', 'facts.x: required']);
+  assert.deepEqual(r.problems, [
+    'n: must be an integer (got number)',
+    'on: must be a boolean (got string)',
+    'part: must be one of a, b (got "c")',
+    'facts.x: required',
+  ]);
   assert.equal(checkArgs(S, 'x').ok, false);
 });
 

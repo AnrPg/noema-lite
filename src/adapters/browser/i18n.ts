@@ -27,14 +27,21 @@ export interface NoemaI18nRuntime {
   };
 }
 
-export function noemaI18n(runtime: () => NoemaI18nRuntime | undefined = () => (globalThis as { NoemaI18n?: NoemaI18nRuntime }).NoemaI18n): I18n {
+export function noemaI18n(
+  runtime: () => NoemaI18nRuntime | undefined = () => (globalThis as { NoemaI18n?: NoemaI18nRuntime }).NoemaI18n,
+): I18n {
   const fallback = catalogI18n({});
   const listeners = new Set<(l: string) => void>();
   let hooked: NoemaI18nRuntime | null = null;
   /** The runtime, hooked once for its locale changes. */
   const rt = (): NoemaI18nRuntime | undefined => {
     const r = runtime();
-    if (r && hooked !== r) { hooked = r; r.onChange(l => { for (const f of [...listeners]) f(l); }); }
+    if (r && hooked !== r) {
+      hooked = r;
+      r.onChange(l => {
+        for (const f of [...listeners]) f(l);
+      });
+    }
     return r;
   };
   const format: I18nFormats = {
@@ -57,7 +64,9 @@ export function noemaI18n(runtime: () => NoemaI18nRuntime | undefined = () => (g
     onChange(listener): Unsubscribe {
       listeners.add(listener);
       rt();
-      return () => { listeners.delete(listener); };
+      return () => {
+        listeners.delete(listener);
+      };
     },
   };
 }

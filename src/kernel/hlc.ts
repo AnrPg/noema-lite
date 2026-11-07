@@ -49,10 +49,19 @@ export function hlcTick(last: HlcTimestamp, physical: number): Result<HlcTimesta
 }
 
 /** A received stamp: the next local stamp, later than both `last` and `remote`. */
-export function hlcReceive(last: HlcTimestamp, remote: HlcTimestamp, physical: number, maxDriftMs = HLC_MAX_DRIFT_MS): Result<HlcTimestamp> {
+export function hlcReceive(
+  last: HlcTimestamp,
+  remote: HlcTimestamp,
+  physical: number,
+  maxDriftMs = HLC_MAX_DRIFT_MS,
+): Result<HlcTimestamp> {
   const now = Math.floor(physical);
   if (remote.wall - now > maxDriftMs)
-    return err(new NoemaError('hlc.drift', `a remote clock is ${remote.wall - now} ms ahead of this device`, { params: { aheadMs: remote.wall - now, node: remote.node } }));
+    return err(
+      new NoemaError('hlc.drift', `a remote clock is ${remote.wall - now} ms ahead of this device`, {
+        params: { aheadMs: remote.wall - now, node: remote.node },
+      }),
+    );
   const wall = Math.max(last.wall, remote.wall, now);
   let count: number;
   if (wall === last.wall && wall === remote.wall) count = Math.max(last.count, remote.count) + 1;

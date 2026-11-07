@@ -25,13 +25,16 @@ test('the day of a moment is the LOCAL date, not the UTC one', () => {
     assert.equal(dayOf(new Date('2026-11-07T23:30:00Z')), '2026-11-08'); // 01:30 in Athens
     assert.equal(dayOf(Date.parse('2026-11-07T21:59:00Z')), '2026-11-07');
   });
-  inZone('America/Los_Angeles', () => assert.equal(dayOf(new Date('2026-11-08T03:00:00Z')), '2026-11-07'));
+  inZone('America/Los_Angeles', () => {
+    assert.equal(dayOf(new Date('2026-11-08T03:00:00Z')), '2026-11-07');
+  });
   assert.throws(() => dayOf(NaN), /not a valid moment/);
 });
 
 test('parse and isLocalDay accept only real calendar days', () => {
   for (const s of ['2026-11-07', '2024-02-29', '0999-01-01']) assert.ok(isLocalDay(s), s);
-  for (const s of ['2026-02-29', '2026-13-01', '2026-00-10', '2026-1-7', '2026-11-07T00:00', '', null, 20261107]) assert.equal(isLocalDay(s), false, String(s));
+  for (const s of ['2026-02-29', '2026-13-01', '2026-00-10', '2026-1-7', '2026-11-07T00:00', '', null, 20261107])
+    assert.equal(isLocalDay(s), false, String(s));
   const r = parseDay('2026-04-31');
   assert.ok(!r.ok && r.error.code === 'day.invalid');
 });
@@ -54,7 +57,8 @@ test('add and between across daylight-saving changes never skip or repeat a day'
         assert.equal(addDays(D(from), n), to, `${tz}: ${from} + ${n}`);
         assert.equal(daysBetween(D(from), D(to)), n, `${tz}: between ${from} and ${to}`);
       }
-      let d = D('2026-01-01'), seen = 0;
+      let d = D('2026-01-01'),
+        seen = 0;
       while (d !== '2027-01-01') {
         const next = addDays(d, 1);
         assert.equal(daysBetween(d, next), 1, `${tz}: ${d}`);

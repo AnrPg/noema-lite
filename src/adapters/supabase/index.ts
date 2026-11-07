@@ -5,7 +5,10 @@ import { supabaseAuth } from './auth.ts';
 import { SupabaseClient, type SupabaseConfig } from './client.ts';
 import { supabaseRemote, type SupabaseRemoteOptions } from './remote.ts';
 
-export function createSupabase(config: SupabaseConfig, options: SupabaseRemoteOptions = {}): { readonly auth: Auth; readonly remote: Remote } {
+export function createSupabase(
+  config: SupabaseConfig,
+  options: SupabaseRemoteOptions = {},
+): { readonly auth: Auth; readonly remote: Remote } {
   const client = new SupabaseClient(config);
   return { auth: supabaseAuth(client), remote: supabaseRemote(client, options) };
 }

@@ -1,4 +1,5 @@
 /* Small pure helpers shared by the connector's services and tools (no I/O). */
+import { textOf } from '../kernel/text.ts';
 
 /** A subject / pack id (= tools/schemas pack.subject.id). */
 export const ID_RE = /^[a-z0-9][a-z0-9-]{1,60}$/;
@@ -12,13 +13,14 @@ export type Json = null | boolean | number | string | Json[] | { [k: string]: Js
 export type JsonObject = { [k: string]: Json };
 
 export const isObject = (x: unknown): x is Record<string, unknown> => x != null && typeof x === 'object' && !Array.isArray(x);
-export const str = (x: unknown): string => (x == null ? '' : String(x));
+/** Any value as text ('' for null and undefined). */
+export const str = (x: unknown): string => (x == null ? '' : textOf(x));
 export const arr = <T = unknown>(x: unknown): T[] => (Array.isArray(x) ? (x as T[]) : []);
 export const rec = (x: unknown): Record<string, unknown> => (isObject(x) ? x : {});
 /** The base language of a locale: 'pt-PT' → 'pt'. */
 export const lang0 = (x: unknown): string => str(x).split('-')[0]?.toLowerCase() ?? '';
 /** The extension of a file name ('bin' when it has none). */
-export const extOf = (name: unknown): string => (/\.([a-z0-9]{1,8})$/.exec(str(name).toLowerCase())?.[1]) ?? 'bin';
+export const extOf = (name: unknown): string => /\.([a-z0-9]{1,8})$/.exec(str(name).toLowerCase())?.[1] ?? 'bin';
 /** A storage-safe path segment (= engine/srcfiles.js cloudPath). */
 export const safeSeg = (x: unknown): string => str(x).replace(/[^a-zA-Z0-9_-]/g, '_');
 export const sleep = (ms: number): Promise<void> => new Promise(r => setTimeout(r, ms));
@@ -28,8 +30,13 @@ export const message = (e: unknown): string => (e instanceof Error ? e.message :
 
 /** = engine/catalog.js hash36: the version stamp of a bridge's content. */
 export function hash36(input: string): string {
-  let h1 = 0x811c9dc5, h2 = 0;
-  for (let i = 0; i < input.length; i++) { const c = input.charCodeAt(i); h1 = Math.imul(h1 ^ c, 16777619) >>> 0; h2 = (h2 * 31 + c) >>> 0; }
+  let h1 = 0x811c9dc5,
+    h2 = 0;
+  for (let i = 0; i < input.length; i++) {
+    const c = input.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 16777619) >>> 0;
+    h2 = (h2 * 31 + c) >>> 0;
+  }
   return (h1.toString(36) + h2.toString(36)).slice(0, 10);
 }
 
@@ -47,7 +54,11 @@ export const isoAfter = (prev: string | null | undefined, now: number = Date.now
 
 /** Parse JSON → the value, or undefined when it is not JSON. */
 export function parseJson(text: string): unknown {
-  try { return JSON.parse(text) as unknown; } catch { return undefined; }
+  try {
+    return JSON.parse(text) as unknown;
+  } catch {
+    return undefined;
+  }
 }
 
 /** Bytes → base64 (the runtime's btoa, in slices: no call-stack limit on big pictures). */

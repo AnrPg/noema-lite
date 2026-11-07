@@ -85,22 +85,35 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   c.register(NOTIFIER, () => browserNotifier());
   c.register(TELEMETRY, r => localTelemetry({ store: r.get(STORAGE).kv }));
   c.register(ERRORS, r => {
-    const errors = createErrorReporter({ notifier: r.get(NOTIFIER), i18n: r.get(I18N), journalStore: r.get(STORAGE).kv, telemetry: r.get(TELEMETRY) });
+    const errors = createErrorReporter({
+      notifier: r.get(NOTIFIER),
+      i18n: r.get(I18N),
+      journalStore: r.get(STORAGE).kv,
+      telemetry: r.get(TELEMETRY),
+    });
     // the learner's "storage is full" warning (loader.storage.full, assertive live region), throttled by the reporter.
     // The diagnostics' own writes (the journal, the counters) are left out: reporting them would report again, forever.
     r.get(STORAGE).onFull(e => {
       if (DIAGNOSTIC_KEYS.has(e.key)) return;
-      errors.report(new NoemaError('storage.quota', 'the browser storage for this site is full', { params: { key: e.key } }), { where: 'storage.' + e.store, severity: 'error', notify: true, context: { key: e.key } });
+      errors.report(new NoemaError('storage.quota', 'the browser storage for this site is full', { params: { key: e.key } }), {
+        where: 'storage.' + e.store,
+        severity: 'error',
+        notify: true,
+        context: { key: e.key },
+      });
     });
     return errors;
   });
   c.register(JOBS, () => buildJobRegistry());
   c.register(COMPUTE, r => {
-    const errors = r.get(ERRORS), jobs = r.get(JOBS);
+    const errors = r.get(ERRORS),
+      jobs = r.get(JOBS);
     return workerCompute({
       createWorker: workerFactory(page, scriptUrl),
       fallback: inlineCompute(jobs),
-      onUnavailable: e => { errors.report(e, { where: 'compute.worker', severity: 'info' }); },
+      onUnavailable: e => {
+        errors.report(e, { where: 'compute.worker', severity: 'info' });
+      },
     });
   });
   c.register(AI, r => {

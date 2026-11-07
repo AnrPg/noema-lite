@@ -1,6 +1,7 @@
 /**
  * Helpers of the HTTP adapters (AI vendors): server-sent events, back-off, an abortable sleep.
  */
+import { abortReason } from '../../kernel/promise.ts';
 
 /** Each `data:` payload of a server-sent-event stream, as it arrives (events end with a blank line; lines may be split). */
 export async function* sseData(body: ReadableStream<Uint8Array>, signal?: AbortSignal): AsyncGenerator<string> {
@@ -13,7 +14,11 @@ export async function* sseData(body: ReadableStream<Uint8Array>, signal?: AbortS
     while ((i = buf.indexOf('\n\n')) >= 0 || (final && buf.trim() && (i = buf.length) >= 0)) {
       const event = buf.slice(0, i);
       buf = buf.slice(i + 2);
-      const data = event.split('\n').filter(l => l.startsWith('data:')).map(l => l.slice(5).replace(/^ /, '')).join('\n');
+      const data = event
+        .split('\n')
+        .filter(l => l.startsWith('data:'))
+        .map(l => l.slice(5).replace(/^ /, ''))
+        .join('\n');
       if (data) yield data;
       if (final && !buf.trim()) break;
     }
@@ -43,9 +48,18 @@ export type Sleep = (ms: number, signal?: AbortSignal) => Promise<void>;
 
 export const realSleep: Sleep = (ms, signal) =>
   new Promise((resolve, reject) => {
-    if (signal?.aborted) return reject(signal.reason);
-    const h = setTimeout(() => { signal?.removeEventListener('abort', onAbort); resolve(); }, ms);
-    const onAbort = (): void => { clearTimeout(h); reject(signal?.reason); };
+    if (signal?.aborted) {
+      reject(abortReason(signal));
+      return;
+    }
+    const h = setTimeout(() => {
+      signal?.removeEventListener('abort', onAbort);
+      resolve();
+    }, ms);
+    const onAbort = (): void => {
+      clearTimeout(h);
+      if (signal) reject(abortReason(signal));
+    };
     signal?.addEventListener('abort', onAbort, { once: true });
   });
 

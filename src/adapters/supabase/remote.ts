@@ -6,6 +6,7 @@
  */
 import { NoemaError } from '../../kernel/errors.ts';
 import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../kernel/result.ts';
+import { textOf } from '../../kernel/text.ts';
 import type { Json } from '../../ports/common.ts';
 import type { ObjectInfo, Remote, RemoteRow, RowListOptions } from '../../ports/remote.ts';
 import { versionAfter, type SupabaseClient } from './client.ts';
@@ -21,7 +22,11 @@ export const TABLES: { readonly [collection: string]: TableMap } = Object.freeze
   kv: { table: 'noema_kv', key: 'key', value: 'value', version: 'updated_at' },
 });
 /** The app's buckets → Supabase Storage buckets. */
-export const BUCKETS: { readonly [bucket: string]: string } = Object.freeze({ private: 'noema-private', public: 'noema-public', shared: 'noema-shared' });
+export const BUCKETS: { readonly [bucket: string]: string } = Object.freeze({
+  private: 'noema-private',
+  public: 'noema-public',
+  shared: 'noema-shared',
+});
 
 const enc = encodeURIComponent;
 const encPath = (p: string): string => p.split('/').map(enc).join('/');
@@ -36,7 +41,8 @@ export interface SupabaseRemoteOptions {
 }
 
 export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions = {}): Remote {
-  const tables = o.tables ?? TABLES, buckets = o.buckets ?? BUCKETS;
+  const tables = o.tables ?? TABLES,
+    buckets = o.buckets ?? BUCKETS;
   const tableOf = (c: string): Result<TableMap> => {
     const t = tables[c];
     return t ? ok(t) : err(new NoemaError('remote.unknown_collection', 'no table for the collection ' + c, { params: { collection: c } }));
@@ -46,8 +52,10 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
     return x ? ok(x) : err(new NoemaError('remote.unknown_collection', 'no bucket ' + b, { params: { collection: b } }));
   };
   /** A table row → the port's row (the ACL's only way in). */
-  const toRow = (t: TableMap, r: Record<string, unknown>): RemoteRow => Object.freeze({ key: String(r[t.key]), value: String(r[t.value] ?? ''), version: String(r[t.version]) });
-  const rowsOf = (t: TableMap, body: unknown): RemoteRow[] => (Array.isArray(body) ? body.map(r => toRow(t, r as Record<string, unknown>)) : []);
+  const toRow = (t: TableMap, r: Record<string, unknown>): RemoteRow =>
+    Object.freeze({ key: String(r[t.key]), value: textOf(r[t.value] ?? ''), version: String(r[t.version]) });
+  const rowsOf = (t: TableMap, body: unknown): RemoteRow[] =>
+    Array.isArray(body) ? body.map(r => toRow(t, r as Record<string, unknown>)) : [];
   const uid = (): string | null => client.session()?.user.id ?? null;
   const select = (t: TableMap): string => `select=${t.key},${t.value},${t.version}`;
 
@@ -72,7 +80,8 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
     async put(collection, key, value, { expected }) {
       const t = tableOf(collection);
       if (!t.ok) return t;
-      const T = t.value, version = versionAfter(expected, client.now());
+      const T = t.value,
+        version = versionAfter(expected, client.now());
       if (expected === null) {
         const user = uid();
         const r = await client.call(`/rest/v1/${T.table}?on_conflict=user_id,${T.key}`, {
@@ -85,11 +94,14 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
         return got ? ok(got) : err(conflict(collection, key));
       }
       const user = uid();
-      const r = await client.call(`/rest/v1/${T.table}?${user ? `user_id=eq.${enc(user)}&` : ''}${T.key}=eq.${enc(key)}&${T.version}=eq.${enc(expected)}`, {
-        method: 'PATCH',
-        body: { [T.value]: value, [T.version]: version },
-        headers: { Prefer: 'return=representation' },
-      });
+      const r = await client.call(
+        `/rest/v1/${T.table}?${user ? `user_id=eq.${enc(user)}&` : ''}${T.key}=eq.${enc(key)}&${T.version}=eq.${enc(expected)}`,
+        {
+          method: 'PATCH',
+          body: { [T.value]: value, [T.version]: version },
+          headers: { Prefer: 'return=representation' },
+        },
+      );
       if (!r.ok) return r;
       const got = rowsOf(T, r.value.body)[0];
       return got ? ok(got) : err(conflict(collection, key));
@@ -97,11 +109,15 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
     async delete(collection, key, d = {}) {
       const t = tableOf(collection);
       if (!t.ok) return t;
-      const T = t.value, user = uid();
-      const r = await client.call(`/rest/v1/${T.table}?${user ? `user_id=eq.${enc(user)}&` : ''}${T.key}=eq.${enc(key)}${d.expected !== undefined ? `&${T.version}=eq.${enc(d.expected)}` : ''}`, {
-        method: 'DELETE',
-        headers: { Prefer: 'return=representation' },
-      });
+      const T = t.value,
+        user = uid();
+      const r = await client.call(
+        `/rest/v1/${T.table}?${user ? `user_id=eq.${enc(user)}&` : ''}${T.key}=eq.${enc(key)}${d.expected !== undefined ? `&${T.version}=eq.${enc(d.expected)}` : ''}`,
+        {
+          method: 'DELETE',
+          headers: { Prefer: 'return=representation' },
+        },
+      );
       if (!r.ok) return r;
       if (d.expected === undefined || rowsOf(T, r.value.body).length) return OK_VOID;
       const still = await rows.get(collection, key); // nothing deleted: gone already (fine) or changed (refused)
@@ -132,14 +148,23 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
       const b = bucketOf(bucket);
       if (!b.ok) return b;
       const folder = prefix.replace(/\/+$/, '');
-      const r = await client.call(`/storage/v1/object/list/${b.value}`, { method: 'POST', body: { prefix: folder, limit: 1000, offset: 0, sortBy: { column: 'name', order: 'asc' } } });
+      const r = await client.call(`/storage/v1/object/list/${b.value}`, {
+        method: 'POST',
+        body: { prefix: folder, limit: 1000, offset: 0, sortBy: { column: 'name', order: 'asc' } },
+      });
       if (!r.ok) return r;
-      const items = Array.isArray(r.value.body) ? (r.value.body as Array<{ name?: unknown; updated_at?: unknown; metadata?: { size?: unknown } | null }>) : [];
-      return ok(items.map(x => Object.freeze({
-        path: (folder ? folder + '/' : '') + String(x.name),
-        size: typeof x.metadata?.size === 'number' ? x.metadata.size : null,
-        updatedAt: typeof x.updated_at === 'string' ? x.updated_at : null,
-      })));
+      const items = Array.isArray(r.value.body)
+        ? (r.value.body as Array<{ name?: unknown; updated_at?: unknown; metadata?: { size?: unknown } | null }>)
+        : [];
+      return ok(
+        items.map(x =>
+          Object.freeze({
+            path: (folder ? folder + '/' : '') + String(x.name),
+            size: typeof x.metadata?.size === 'number' ? x.metadata.size : null,
+            updatedAt: typeof x.updated_at === 'string' ? x.updated_at : null,
+          }),
+        ),
+      );
     },
     async remove(bucket, paths) {
       const b = bucketOf(bucket);

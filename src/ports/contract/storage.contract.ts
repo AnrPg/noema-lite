@@ -46,7 +46,7 @@ export function storageContract(name: string, make: StorageFactory): void {
       assert.ok(!r.ok && r.error.code === 'storage.quota', 'storage.quota');
       assert.equal(seen.length, 1);
       assert.equal(seen[0]?.store, 'kv');
-      assert.equal(seen[0]?.key, 'k');
+      assert.equal(seen[0].key, 'k');
       assert.equal(value(s.kv.get('k')), 'small', 'the value before the failed write is kept');
       off();
       s.kv.set('k2', 'y'.repeat(100));
@@ -61,8 +61,14 @@ export function storageContract(name: string, make: StorageFactory): void {
       const back = value(await docs.get<typeof pack>('packs', 'acc|p1'));
       assert.deepEqual(back, pack);
       assert.notEqual(back, pack, 'a stored document is a copy');
-      pack.chapters[0]!.n = 99;
-      assert.equal(value(await docs.get<typeof pack>('packs', 'acc|p1'))?.chapters[0]?.n, 1, 'changing the original changes nothing stored');
+      const [first] = pack.chapters;
+      assert.ok(first);
+      first.n = 99;
+      assert.equal(
+        value(await docs.get<typeof pack>('packs', 'acc|p1'))?.chapters[0]?.n,
+        1,
+        'changing the original changes nothing stored',
+      );
       assert.equal(value(await docs.get('packs', 'acc|none')), undefined);
       assert.ok((await docs.delete('packs', 'acc|p1')).ok);
       assert.equal(value(await docs.get('packs', 'acc|p1')), undefined);
@@ -73,9 +79,18 @@ export function storageContract(name: string, make: StorageFactory): void {
     test('docs: list in key order, by prefix, with a limit', async () => {
       const { docs } = await make({});
       for (const k of ['b|2', 'a|2', 'a|1', 'c|1', 'a|3']) await docs.put('restore', k, { k });
-      assert.deepEqual(value(await docs.list('restore', { prefix: 'a|' })).map(([k]) => k), ['a|1', 'a|2', 'a|3']);
-      assert.deepEqual(value(await docs.list('restore', { limit: 2 })).map(([k]) => k), ['a|1', 'a|2']);
-      assert.deepEqual(value(await docs.list<{ k: string }>('restore', { prefix: 'c' })).map(([, v]) => v.k), ['c|1']);
+      assert.deepEqual(
+        value(await docs.list('restore', { prefix: 'a|' })).map(([k]) => k),
+        ['a|1', 'a|2', 'a|3'],
+      );
+      assert.deepEqual(
+        value(await docs.list('restore', { limit: 2 })).map(([k]) => k),
+        ['a|1', 'a|2'],
+      );
+      assert.deepEqual(
+        value(await docs.list<{ k: string }>('restore', { prefix: 'c' })).map(([, v]) => v.k),
+        ['c|1'],
+      );
       assert.equal(value(await docs.list('restore')).length, 5);
     });
 
@@ -100,14 +115,16 @@ export function storageContract(name: string, make: StorageFactory): void {
         await tx.put('packs', 'new', { v: 'new' });
         throw new NoemaError('storage.corrupt', 'the work found bad data');
       });
-      assert.ok(!r.ok && r.error.code === 'storage.corrupt', 'the work\'s own error comes back');
+      assert.ok(!r.ok && r.error.code === 'storage.corrupt', "the work's own error comes back");
       assert.deepEqual(value(await docs.get('packs', 'keep')), { v: 'before' });
       assert.equal(value(await docs.get('packs', 'new')), undefined);
     });
 
     test('docs: a readonly transaction cannot write', async () => {
       const { docs } = await make({});
-      const r = await docs.transaction(['packs'], 'readonly', async tx => { await tx.put('packs', 'x', 1); });
+      const r = await docs.transaction(['packs'], 'readonly', async tx => {
+        await tx.put('packs', 'x', 1);
+      });
       assert.ok(!r.ok);
       assert.equal(value(await docs.get('packs', 'x')), undefined);
     });

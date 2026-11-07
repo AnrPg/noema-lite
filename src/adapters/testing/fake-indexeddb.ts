@@ -6,8 +6,9 @@
 
 type Listener = ((ev: { target: unknown }) => void) | null;
 
-class Req<T> {
-  result: T = undefined as T;
+/** A request: what the adapter reads of an IDBRequest (the result is whatever the operation gave). */
+class Req {
+  result: unknown = undefined;
   error: unknown = null;
   onsuccess: Listener = null;
   onerror: Listener = null;
@@ -16,12 +17,22 @@ class Req<T> {
 class KeyRange {
   readonly lower: string;
   readonly upper: string;
-  constructor(lower: string, upper: string) { this.lower = lower; this.upper = upper; }
-  static bound(l: string, u: string): KeyRange { return new KeyRange(l, u); }
-  includes(k: string): boolean { return k >= this.lower && k <= this.upper; }
+  constructor(lower: string, upper: string) {
+    this.lower = lower;
+    this.upper = upper;
+  }
+  static bound(l: string, u: string): KeyRange {
+    return new KeyRange(l, u);
+  }
+  includes(k: string): boolean {
+    return k >= this.lower && k <= this.upper;
+  }
 }
 
-interface Db { version: number; stores: Map<string, Map<string, unknown>> }
+interface Db {
+  version: number;
+  stores: Map<string, Map<string, unknown>>;
+}
 
 export interface FakeIndexedDB {
   readonly factory: IDBFactory;
@@ -37,15 +48,22 @@ export function fakeIndexedDB(): FakeIndexedDB {
   function connection(name: string, db: Db) {
     return {
       name,
-      get version() { return db.version; },
+      get version() {
+        return db.version;
+      },
       objectStoreNames: { contains: (s: string) => db.stores.has(s) },
-      createObjectStore(s: string) { db.stores.set(s, new Map()); return {}; },
+      createObjectStore(s: string) {
+        db.stores.set(s, new Map());
+        return {};
+      },
       onversionchange: null as unknown,
       close() {},
       transaction(names: string[], mode: 'readonly' | 'readwrite' = 'readonly') {
-        for (const n of names) if (!db.stores.has(n)) throw Object.assign(new Error(`No objectStore named ${n}`), { name: 'NotFoundError' });
+        for (const n of names)
+          if (!db.stores.has(n)) throw Object.assign(new Error(`No objectStore named ${n}`), { name: 'NotFoundError' });
         const staged = new Map(names.map(n => [n, new Map(db.stores.get(n))] as const));
-        let pending = 0, finished = false;
+        let pending = 0,
+          finished = false;
         const t = {
           error: null as unknown,
           oncomplete: null as (() => void) | null,
@@ -58,16 +76,18 @@ export function fakeIndexedDB(): FakeIndexedDB {
           },
           objectStore(n: string) {
             const s = staged.get(n);
-            if (!s) throw Object.assign(new Error('not in this transaction: ' + n), { name: 'NotFoundError' });
-            const run = <T>(f: () => T): Req<T> => {
-              const r = new Req<T>();
+            if (!s) throw Object.assign(new Error(`not in this transaction: ${n}`), { name: 'NotFoundError' });
+            const run = (f: () => unknown): Req => {
+              const r = new Req();
               if (finished) throw Object.assign(new Error('The transaction is not active.'), { name: 'TransactionInactiveError' });
               pending++;
               queueMicrotask(() => {
                 pending--;
                 if (finished) return;
-                try { r.result = f(); r.onsuccess?.({ target: r }); }
-                catch (e) {
+                try {
+                  r.result = f();
+                  r.onsuccess?.({ target: r });
+                } catch (e) {
                   r.error = e;
                   t.error = e;
                   r.onerror?.({ target: r });
@@ -80,21 +100,29 @@ export function fakeIndexedDB(): FakeIndexedDB {
               });
               return r;
             };
-            const write = (): void => { if (mode !== 'readwrite') throw Object.assign(new Error('The transaction is read-only.'), { name: 'ReadOnlyError' }); };
+            const write = (): void => {
+              if (mode !== 'readwrite') throw Object.assign(new Error('The transaction is read-only.'), { name: 'ReadOnlyError' });
+            };
             return {
               get: (k: string) => run(() => structuredClone(s.get(k))),
-              put: (v: unknown, k: string) => run(() => {
-                write();
-                let total = 0;
-                for (const [name, m] of db.stores) total += (staged.get(name) ?? m).size;
-                if (!s.has(k) && total + 1 > state.quota) throw Object.assign(new Error('The quota has been exceeded.'), { name: 'QuotaExceededError' });
-                s.set(k, structuredClone(v));
-                return k;
-              }),
-              delete: (k: string) => run(() => { write(); s.delete(k); }),
+              put: (v: unknown, k: string) =>
+                run(() => {
+                  write();
+                  let total = 0;
+                  for (const [name, m] of db.stores) total += (staged.get(name) ?? m).size;
+                  if (!s.has(k) && total + 1 > state.quota)
+                    throw Object.assign(new Error('The quota has been exceeded.'), { name: 'QuotaExceededError' });
+                  s.set(k, structuredClone(v));
+                  return k;
+                }),
+              delete: (k: string) =>
+                run(() => {
+                  write();
+                  s.delete(k);
+                }),
               openCursor(range?: KeyRange) {
                 const keys = [...s.keys()].filter(k => !range || range.includes(k)).sort();
-                const r = new Req<unknown>();
+                const r = new Req();
                 let i = 0;
                 const step = (): void => {
                   pending++;
@@ -130,16 +158,22 @@ export function fakeIndexedDB(): FakeIndexedDB {
 
   const factory = {
     open(name: string, version = 1) {
-      const r = new Req<unknown>() as Req<unknown> & { onupgradeneeded: (() => void) | null; onblocked: (() => void) | null };
+      const r = new Req() as Req & { onupgradeneeded: (() => void) | null; onblocked: (() => void) | null };
       r.onupgradeneeded = null;
       r.onblocked = null;
       setTimeout(() => {
         let db = dbs.get(name);
         const isNew = !db || db.version < version;
-        if (!db) { db = { version, stores: new Map() }; dbs.set(name, db); }
+        if (!db) {
+          db = { version, stores: new Map() };
+          dbs.set(name, db);
+        }
         const c = connection(name, db);
         r.result = c;
-        if (isNew) { db.version = version; r.onupgradeneeded?.(); }
+        if (isNew) {
+          db.version = version;
+          r.onupgradeneeded?.();
+        }
         r.onsuccess?.({ target: r });
       }, 0);
       return r;
@@ -148,7 +182,11 @@ export function fakeIndexedDB(): FakeIndexedDB {
   return {
     factory: factory as unknown as IDBFactory,
     KeyRange,
-    get quota() { return state.quota; },
-    set quota(q: number) { state.quota = q; },
+    get quota() {
+      return state.quota;
+    },
+    set quota(q: number) {
+      state.quota = q;
+    },
   };
 }

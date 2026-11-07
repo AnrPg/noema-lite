@@ -3,6 +3,7 @@
  * runs only while someone listens (every minute, and when the page becomes visible again after sleeping).
  */
 import { dayOf, type LocalDay } from '../../kernel/day.ts';
+import { abortReason } from '../../kernel/promise.ts';
 import type { Clock, TimerHandle } from '../../ports/clock.ts';
 import type { Unsubscribe } from '../../ports/common.ts';
 
@@ -24,7 +25,9 @@ export function systemClock(o: SystemClockOptions = {}): Clock {
     last = d;
   };
   const doc = (T as { document?: Document }).document;
-  const onVisible = (): void => { if (doc?.visibilityState === 'visible') check(); };
+  const onVisible = (): void => {
+    if (doc?.visibilityState === 'visible') check();
+  };
 
   const clock: Clock = {
     now,
@@ -38,14 +41,27 @@ export function systemClock(o: SystemClockOptions = {}): Clock {
       }
     },
     setTimeout: (f, ms) => T.setTimeout(f, ms) as unknown as TimerHandle,
-    clearTimeout: h => T.clearTimeout(h as unknown as ReturnType<typeof T.setTimeout>),
+    clearTimeout: h => {
+      T.clearTimeout(h as unknown as ReturnType<typeof T.setTimeout>);
+    },
     setInterval: (f, ms) => T.setInterval(f, ms) as unknown as TimerHandle,
-    clearInterval: h => T.clearInterval(h as unknown as ReturnType<typeof T.setInterval>),
+    clearInterval: h => {
+      T.clearInterval(h as unknown as ReturnType<typeof T.setInterval>);
+    },
     sleep(ms, signal) {
       return new Promise((resolve, reject) => {
-        if (signal?.aborted) return reject(signal.reason);
-        const h = T.setTimeout(() => { signal?.removeEventListener('abort', onAbort); resolve(); }, ms);
-        const onAbort = (): void => { T.clearTimeout(h); reject(signal?.reason); };
+        if (signal?.aborted) {
+          reject(abortReason(signal));
+          return;
+        }
+        const h = T.setTimeout(() => {
+          signal?.removeEventListener('abort', onAbort);
+          resolve();
+        }, ms);
+        const onAbort = (): void => {
+          T.clearTimeout(h);
+          if (signal) reject(abortReason(signal));
+        };
         signal?.addEventListener('abort', onAbort, { once: true });
       });
     },

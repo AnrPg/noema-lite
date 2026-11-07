@@ -27,7 +27,11 @@ export interface AiHarness {
 }
 export type AiHarnessFactory = (scenario: AiScenario, o: { readonly apiKey: string }) => AiHarness;
 
-const ask = (text: string, extra: Partial<ChatRequest> = {}): ChatRequest => ({ system: 'You are a tutor.', messages: [{ role: 'user', content: [{ type: 'text', text }] }], ...extra });
+const ask = (text: string, extra: Partial<ChatRequest> = {}): ChatRequest => ({
+  system: 'You are a tutor.',
+  messages: [{ role: 'user', content: [{ type: 'text', text }] }],
+  ...extra,
+});
 
 export function aiContract(name: string, make: AiHarnessFactory): void {
   describe(`AI contract: ${name}`, () => {
@@ -46,7 +50,14 @@ export function aiContract(name: string, make: AiHarnessFactory): void {
     test('streaming: the deltas add up to the text', async () => {
       const h = make({ kind: 'text', text: 'One two three four.' }, { apiKey: 'k' });
       let streamed = '';
-      const r = await h.ai.chat(ask('Count', { model: 'm1', onDelta: d => { if (d.type === 'text') streamed += d.text; } }));
+      const r = await h.ai.chat(
+        ask('Count', {
+          model: 'm1',
+          onDelta: d => {
+            if (d.type === 'text') streamed += d.text;
+          },
+        }),
+      );
       assert.ok(r.ok);
       assert.equal(streamed, 'One two three four.');
       assert.equal(r.value.text, streamed);
@@ -54,16 +65,24 @@ export function aiContract(name: string, make: AiHarnessFactory): void {
 
     test('a tool call: its name and parsed input, stop "tool_call"', async () => {
       const h = make({ kind: 'tool', name: 'submit', input: { title: 'Plan', steps: [1, 2] } }, { apiKey: 'k' });
-      const r = await h.ai.chat(ask('Plan it', {
-        model: 'm1',
-        tools: [{ name: 'submit', description: 'Submit the plan', inputSchema: { type: 'object', properties: { title: { type: 'string' } }, required: ['title'], additionalProperties: false } }],
-        toolChoice: { tool: 'submit' },
-      }));
+      const r = await h.ai.chat(
+        ask('Plan it', {
+          model: 'm1',
+          tools: [
+            {
+              name: 'submit',
+              description: 'Submit the plan',
+              inputSchema: { type: 'object', properties: { title: { type: 'string' } }, required: ['title'], additionalProperties: false },
+            },
+          ],
+          toolChoice: { tool: 'submit' },
+        }),
+      );
       assert.ok(r.ok, r.ok ? '' : r.error.message);
       assert.equal(r.value.stop, 'tool_call');
       assert.equal(r.value.toolCalls.length, 1);
       assert.equal(r.value.toolCalls[0]?.name, 'submit');
-      assert.deepEqual(r.value.toolCalls[0]?.input, { title: 'Plan', steps: [1, 2] });
+      assert.deepEqual(r.value.toolCalls[0].input, { title: 'Plan', steps: [1, 2] });
       assert.ok(r.value.content.some(p => p.type === 'tool_call'));
     });
 
@@ -98,7 +117,9 @@ export function aiContract(name: string, make: AiHarnessFactory): void {
       const h = make({ kind: 'hang' }, { apiKey: 'k' });
       const ac = new AbortController();
       const p = h.ai.chat(ask('Hi', { model: 'm1', signal: ac.signal }));
-      setTimeout(() => ac.abort(), 20);
+      setTimeout(() => {
+        ac.abort();
+      }, 20);
       const r = await p;
       assert.ok(!r.ok && r.error.code === 'ai.aborted' && aiErrorKind(r.error) === 'aborted');
     });

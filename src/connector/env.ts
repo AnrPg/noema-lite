@@ -10,7 +10,13 @@ export interface LibrarySubject {
   version?: string | null;
   bridgeLocales?: Record<string, { coverage?: number; status?: string; path?: string }>;
 }
-export interface LibraryLanguage { id: string; title?: string; languages?: string[]; path: string; profiles?: string | null }
+export interface LibraryLanguage {
+  id: string;
+  title?: string;
+  languages?: string[];
+  path: string;
+  profiles?: string | null;
+}
 
 export interface ConnectorConfig {
   siteUrl: string;
@@ -23,18 +29,37 @@ export interface ConnectorConfig {
 }
 
 export interface PipelineStep {
-  title?: string; what?: string; gate?: string; per?: boolean; deferrable?: boolean; doc?: string;
+  title?: string;
+  what?: string;
+  gate?: string;
+  per?: boolean;
+  deferrable?: boolean;
+  doc?: string;
   check?: { local?: unknown; run?: unknown; mcp?: string; manual?: string };
 }
-export interface PipelineFlow { id: string; title: string; when: string; steps: string[] }
+export interface PipelineFlow {
+  id: string;
+  title: string;
+  when: string;
+  steps: string[];
+}
 
 export interface ConnectorDocs {
-  workflow?: string; content?: string; visual?: string; interactive?: string; bridge?: string; pipelines?: string; languages?: string;
+  workflow?: string;
+  content?: string;
+  visual?: string;
+  interactive?: string;
+  bridge?: string;
+  pipelines?: string;
+  languages?: string;
   pipelineSteps?: Record<string, PipelineStep>;
   pipelineFlows?: Record<string, PipelineFlow>;
 }
 
-export interface ConnectorData { config: ConnectorConfig; docs: ConnectorDocs }
+export interface ConnectorData {
+  config: ConnectorConfig;
+  docs: ConnectorDocs;
+}
 
 export interface ConnectorEnv extends ConnectorData {
   engine: EngineApi;

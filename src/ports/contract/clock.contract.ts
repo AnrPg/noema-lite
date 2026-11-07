@@ -34,9 +34,14 @@ export function clockContract(name: string, make: () => ClockHarness): void {
 
     test('setTimeout fires once; clearTimeout stops it', async () => {
       const h = make();
-      let fired = 0, cleared = 0;
-      h.clock.setTimeout(() => { fired++; }, 10);
-      const x = h.clock.setTimeout(() => { cleared++; }, 10);
+      let fired = 0,
+        cleared = 0;
+      h.clock.setTimeout(() => {
+        fired++;
+      }, 10);
+      const x = h.clock.setTimeout(() => {
+        cleared++;
+      }, 10);
       h.clock.clearTimeout(x);
       await h.pass(40);
       assert.equal(fired, 1);
@@ -46,19 +51,23 @@ export function clockContract(name: string, make: () => ClockHarness): void {
     test('setInterval repeats until cleared', async () => {
       const h = make();
       let n = 0;
-      const i = h.clock.setInterval(() => { n++; }, 10);
+      const i = h.clock.setInterval(() => {
+        n++;
+      }, 10);
       await h.pass(55);
       h.clock.clearInterval(i);
       const seen = n;
       await h.pass(40);
-      assert.ok(seen >= 3, 'fired ' + seen);
+      assert.ok(seen >= 3, `fired ${seen}`);
       assert.equal(n, seen, 'nothing after clearInterval');
     });
 
     test('sleep resolves; an aborted sleep rejects with the reason', async () => {
       const h = make();
       let done = false;
-      const p = h.clock.sleep(10).then(() => { done = true; });
+      const p = h.clock.sleep(10).then(() => {
+        done = true;
+      });
       await h.pass(30);
       await p;
       assert.ok(done);
@@ -70,7 +79,10 @@ export function clockContract(name: string, make: () => ClockHarness): void {
 
     test('onDayChange tells the new day; unsubscribing stops it', async t => {
       const h = make();
-      if (!h.dayChange) return t.skip('this clock cannot be moved to the next day');
+      if (!h.dayChange) {
+        t.skip('this clock cannot be moved to the next day');
+        return;
+      }
       const days: string[] = [];
       const off = h.clock.onDayChange(d => days.push(d));
       const before = h.clock.today();
