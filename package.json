@@ -1,0 +1,29 @@
+{
+  "name": "noema-lite",
+  "private": true,
+  "type": "module",
+  "description": "noema-lite: the app, the connector and the tools (docs/ARCHITECTURE.md)",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node tools/esbuild.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write src",
+    "contracts": "node tools/contracts.mjs",
+    "test:unit": "node --test --experimental-strip-types \"src/**/*.test.ts\"",
+    "check": "npm run typecheck && npm run lint && npm run test:unit"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "ajv": "^8.20.0",
+    "esbuild": "0.28.2",
+    "eslint": "^10.14.0",
+    "eslint-plugin-boundaries": "^7.4.2",
+    "json-schema-to-typescript": "^16.0.0",
+    "prettier": "^3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "^8.72.1"
+  }
+}
