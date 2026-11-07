@@ -1,0 +1,46 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "field@1",
+ "title": "title",
+ "intro": "intro",
+ "consts": { "rMin": 0.45 },
+ "params": [
+  { "id": "rr", "kind": "slider", "label": "rLabel", "min": 0.1, "max": 0.7, "step": 0.01, "default": 0.7 }
+ ],
+ "model": {
+  "equation": "heat",
+  "method": "ftcs",
+  "grid": { "nx": 51, "x0": 0, "x1": 1 },
+  "D": 1,
+  "init": "(x > 0.3 && x < 0.7) ? 1 : 0",
+  "bc": { "all": { "type": "dirichlet", "value": 0 } },
+  "tEnd": 0.05,
+  "dt": "rr / 2500",
+  "allowUnstable": true,
+  "points": 101,
+  "frames": 60
+ },
+ "outputs": [
+  { "id": "x", "kind": "series", "of": "x" },
+  { "id": "u", "kind": "series", "of": "profile" },
+  { "id": "u0", "kind": "series", "of": "profile", "t": 0 },
+  { "id": "r", "kind": "scalar", "of": "r" },
+  { "id": "gain", "kind": "scalar", "of": "gain" },
+  { "id": "ok", "kind": "scalar", "of": "ok" },
+  { "id": "peak", "kind": "scalar", "of": "final", "stat": "max" },
+  { "id": "st", "kind": "scene", "of": "spacetime" }
+ ],
+ "readouts": [
+  { "label": "rReadout", "expr": "r", "digits": 3 },
+  { "label": "gainLabel", "expr": "gain", "digits": 3 },
+  { "label": "peakLabel", "expr": "peak", "digits": 3 },
+  { "label": "okLabel", "expr": "ok == 1" }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "x", "label": "position" },
+    "y": { "label": "temperature" },
+    "series": [ { "y": "u0", "label": "startLine" }, { "y": "u", "label": "endLine" } ] },
+  { "kind": "scene", "title": "stTitle", "of": "st", "height": 260 }
+ ]
+}

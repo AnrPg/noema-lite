@@ -1,0 +1,17 @@
+{
+ "title": "Wie groß darf der Zeitschritt des expliziten Wärmeleitungsverfahrens sein?",
+ "intro": "Ein Stab ist anfangs in der Mitte heiß, seine Enden werden auf null gehalten. Das explizite Verfahren schiebt in jedem Schritt jeden Knoten um den Anteil 2r zum Mittel seiner Nachbarn, wobei r = D·Δt/Δx². Ein größeres r bedeutet weniger und billigere Schritte bis zur selben Zeit. Verändern Sie r und suchen Sie den größten Wert, bei dem das Profil noch glatt abkühlt, statt in ein Zickzack zu zerfallen.",
+ "rLabel": "Diffusionszahl r = D·Δt/Δx²",
+ "rReadout": "Tatsächlich verwendetes r",
+ "gainLabel": "Größter Wachstumsfaktor einer Mode je Schritt, max |G|",
+ "peakLabel": "Höchste Temperatur am Ende",
+ "okLabel": "Das Verfahren ist stabil",
+ "plotTitle": "Temperatur entlang des Stabs",
+ "position": "Ort x",
+ "temperature": "Temperatur u",
+ "startLine": "Anfang",
+ "endLine": "t = 0,05",
+ "stTitle": "Raum-Zeit-Diagramm (Zeit nach oben)",
+ "checkStable": "Das Verfahren ist stabil: Keine Mode wächst von Schritt zu Schritt.",
+ "checkEfficient": "Der Schritt ist groß: r ist mindestens 0,45."
+}

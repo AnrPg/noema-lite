@@ -1870,6 +1870,598 @@
      "of": "entails"
     }
    ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "link": "last",
+    "ordering": "elitist",
+    "kb": [
+     {
+      "f": "snores",
+      "rank": 0
+     },
+     {
+      "f": "professor",
+      "rank": 1,
+      "on": "k < 5"
+     }
+    ],
+    "rules": [
+     {
+      "id": "d1",
+      "body": [
+       "snores"
+      ],
+      "head": "misbehaves",
+      "rank": 0
+     },
+     {
+      "id": "d2",
+      "body": [
+       "misbehaves"
+      ],
+      "head": "accessDenied",
+      "rank": 2
+     },
+     {
+      "id": "d3",
+      "body": [
+       "professor"
+      ],
+      "head": "¬accessDenied",
+      "rank": 1,
+      "on": "k > 0"
+     }
+    ],
+    "goal": "accessDenied",
+    "semantics": "preferred",
+    "ext": "k",
+    "step": "k"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "args"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "defeats"
+    },
+    {
+     "id": "j",
+     "kind": "scalar",
+     "of": "skeptical"
+    },
+    {
+     "id": "l",
+     "kind": "series",
+     "of": "labels"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "transpose": true,
+    "kb": [
+     {
+      "f": "wr",
+      "kind": "axiom"
+     },
+     {
+      "f": "go",
+      "kind": "axiom"
+     }
+    ],
+    "rules": [
+     {
+      "id": "d1",
+      "body": [
+       "wr"
+      ],
+      "head": "m"
+     },
+     {
+      "id": "d2",
+      "body": [
+       "go"
+      ],
+      "head": "b"
+     },
+     {
+      "id": "s1",
+      "body": [
+       "m"
+      ],
+      "head": "hw",
+      "kind": "strict"
+     },
+     {
+      "id": "s2",
+      "body": [
+       "b"
+      ],
+      "head": "~hw",
+      "kind": "strict"
+     }
+    ],
+    "contraries": [
+     {
+      "u": "x",
+      "v": "y"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "directConsistent"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "postulate"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "transposed"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "kb": [
+     {
+      "f": "p & q"
+     }
+    ],
+    "rules": [
+     {
+      "id": "r",
+      "head": "x"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "args"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "rules": [
+     {
+      "id": "r",
+      "head": "x"
+     },
+     {
+      "id": "r",
+      "body": [
+       "(x"
+      ],
+      "head": "y"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "args"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "kb": [
+     {
+      "f": "p"
+     }
+    ],
+    "goal": "p -> q",
+    "link": "strongest"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "args"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "args"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "safe"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "kb": [
+     {
+      "f": "p",
+      "kind": "premise"
+     }
+    ],
+    "contraries": [
+     {
+      "u": "p"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "nope"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "bipolar",
+    "support": "deductive",
+    "args": [
+     {
+      "id": "a",
+      "x": "k",
+      "y": 0
+     },
+     {
+      "id": "b"
+     },
+     {
+      "id": "c",
+      "label": "cLabel"
+     }
+    ],
+    "attacks": [
+     {
+      "u": "a",
+      "v": "b"
+     }
+    ],
+    "supports": [
+     {
+      "u": "c",
+      "v": "b",
+      "on": "k > 2"
+     }
+    ],
+    "arg": "c",
+    "semantics": "grounded",
+    "step": "k"
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "mediated"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "safe"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "closed"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "skeptical"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "bipolar",
+    "support": "necessary",
+    "args": [
+     {
+      "id": "a"
+     },
+     {
+      "id": "b"
+     }
+    ],
+    "supports": [
+     {
+      "u": "a",
+      "v": "z"
+     }
+    ],
+    "arg": "q"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "extended"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "bipolar",
+    "support": "strong",
+    "args": [
+     {
+      "id": "a"
+     },
+     {
+      "id": "a"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "defeats"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "tableau",
+    "system": "B",
+    "formula": "p -> []<>p"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "worlds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "tableau",
+    "system": "S5",
+    "goal": "[]<>p",
+    "premises": [
+     "<>p"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "nodes"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "logic@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "tableau",
+    "system": "S6",
+    "formula": "p"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    }
+   ]
   }
  ]
 }

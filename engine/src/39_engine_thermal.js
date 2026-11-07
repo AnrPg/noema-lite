@@ -17,6 +17,13 @@
   const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isNum = v => typeof v === 'number' && Number.isFinite(v);
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): a transient and the stepper run on its θ-method DAE solver
+      (daeThetaInit: Newton with LU, or one factored solve for a linear network; the massless nodes algebraic rows; θ and the sources'
+      mean power chosen per step); FALLBACK without the kernel (marked): the same θ-step here (stepCore) */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
   function fail(code, extra) { const e = new Error('thermal: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
   function okNum(kind, v) {
     if (!isNum(v)) return false;
@@ -412,6 +419,84 @@
       const lam = eigSym(S, nm), big = Math.max(1e-300, ...lam.map(Math.abs));
       return lam.map(l => (l > big * 1e-12 ? 1 / l : Infinity)).sort((a, c) => c - a);
     }
+    /** the thermostats' gates at a state (on below high when heating, above low when cooling) */
+    const gateAt = x => thermostats.map(th => { const T = Tof(th.s, x); return th.heat ? T < th.high : T > th.low; });
+    /** m steps of h from tA on the kernel's θ-method DAE solver (NoemaSimKit.daeThetaInit): C·x' = f(t, x) = −G·x + b + P̄ + rad(x),
+        the massless nodes algebraic rows, the analytic Jacobian; a linear network (no radiation) factors C − hθ(−G) once per (h, θ)
+        and takes one solve a step. Before each step (beforeStep) the gates are tested at its start (with their hysteresis), P̄ is
+        each source's exact mean over the step (sp, out) and θ is 1 (backward Euler) on the first step, on a source edge and on a
+        thermostat switch, ½ (trapezoidal) otherwise — what stepCore does. onStep(i, x) after each. */
+    function kernelRun(KS, x0, gate, sp, tA, h, m, be, first0, onStep, times) {   // times(k) → [t1, t2]: the engine's own grid (sources, edges)
+      const P1 = new Float64Array(n), rk = new Float64Array(n), nS = sources.length;
+      const f = (t, y, out) => { for (let i = 0; i < n; i++) { let q = b[i] + P1[i]; for (let j = 0; j < n; j++) q -= G[i * n + j] * y[j]; out[i] = q; } if (rads.length) rad(y, out, null, null); };
+      const jac = (t, y, J) => { for (let i = 0; i < n * n; i++) J[i] = G[i]; if (rads.length) rad(y, rk, J, ones); for (let i = 0; i < n * n; i++) J[i] = -J[i]; };   // ∂f/∂x = −(G + ∂(−rad)/∂x)
+      let k = 0, lastT0 = NaN, lastSw = false;
+      const beforeStep = (ta, tb, y) => {
+        const [t1, t2] = times(k);   // the grid's own times (k·h), not the kernel's sums: an edge on a grid time stays in its step
+        let switched = false;
+        if (t1 === lastT0) switched = lastSw;   // a halved retry of the same step: the gates were tested already
+        else thermostats.forEach((th, i) => {
+          const T = Tof(th.s, y), on = gate[i];
+          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
+          if (nx !== on) { gate[i] = nx; switched = true; }
+        });
+        lastT0 = t1; lastSw = switched;
+        let edge = false; P1.fill(0); const hh = t2 - t1;
+        for (let q = 0; q < nS; q++) {
+          const src = sources[q], on = src.gate < 0 || gate[src.gate], w = src.w;
+          if (w.edges(t2) !== w.edges(t1)) edge = true;
+          sp[q] = on ? (w.F(t2) - w.F(t1)) / hh : 0; P1[src.u] += sp[q];
+        }
+        return { theta: be || (first0 && k === 0) || switched || edge ? 1 : 0.5 };
+      };
+      const D = KS.daeThetaInit({ M: C, f, jac, linear: !rads.length, beforeStep, y0: x0, t0: tA, tEnd: tA + m * h, dt: h, newtonTol: 1e-13, maxSteps: m + 1,
+        onStep: (t, y) => { onStep(k, y); k++; } });
+      const R = D.ok ? D.advance(tA + m * h) : D.result;
+      if (R.stop !== 'end' || k !== m) throw fail(R.stop === 'budget' ? 'budget' : 'no-convergence', { t: R.t });
+    }
+    /** one step [t1, t2] of the θ-method on C·x' = −G·x + b + P(t) + rad(x) (massless nodes: algebraic rows): θ = ½ (trapezoidal) on
+        nodes with a heat capacity, 1 on massless ones, and backward Euler on the first step, on a source edge and on a thermostat
+        switch (the gates are tested at t1, with their hysteresis); the sources' exact mean over the step; Newton with radiation.
+        sp (out): each source's power over the step. The same step serves transient() and the stepper. */
+    function stepCore(h, be) {
+      const thT = new Float64Array(n), thB = new Float64Array(n).fill(1);
+      for (let i = 0; i < n; i++) thT[i] = be || !(C[i] > 0) ? 1 : 0.5;
+      const mk = th => { const A = new Float64Array(n * n); for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i * n + j] = th[i] * G[i * n + j]; A[i * n + i] += C[i] / h; } return A; };
+      const AT = mk(thT), AB = mk(thB), LU = {};
+      if (!rads.length) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
+      const P = new Float64Array(n), rhs = new Float64Array(n), Gx = new Float64Array(n), rv = new Float64Array(n), nS = sources.length;
+      return { step(x, gate, sp, t1, t2, first) {
+        let switched = false;
+        thermostats.forEach((th, i) => {
+          const T = Tof(th.s, x), on = gate[i];
+          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
+          if (nx !== on) { gate[i] = nx; switched = true; }
+        });
+        let edge = false; P.fill(0); const hh = t2 - t1;
+        for (let s = 0; s < nS; s++) {
+          const src = sources[s], on = src.gate < 0 || gate[src.gate], w = src.w;
+          if (w.edges(t2) !== w.edges(t1)) edge = true;
+          sp[s] = on ? (w.F(t2) - w.F(t1)) / hh : 0; P[src.u] += sp[s];
+        }
+        const useB = be || first || switched || edge, th = useB ? thB : thT;
+        for (let i = 0; i < n; i++) { let s = 0; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; Gx[i] = s; }
+        rv.fill(0); if (rads.length) rad(x, rv, null, null);
+        for (let i = 0; i < n; i++) rhs[i] = C[i] / h * x[i] - (1 - th[i]) * (Gx[i] - rv[i]) + b[i] + P[i];
+        if (!rads.length) { const L = LU[useB ? 'b' : 't']; return subst(L.M, n, L.perm, Float64Array.from(rhs)); }
+        const A = useB ? AB : AT, y = Float64Array.from(x);
+        let conv = false;
+        for (let it = 0; it < 30 && !conv; it++) {
+          const R = new Float64Array(n), J = Float64Array.from(A), rr = new Float64Array(n);
+          rad(y, rr, J, th);
+          for (let i = 0; i < n; i++) { let s = -rhs[i] - th[i] * rr[i]; for (let j = 0; j < n; j++) s += A[i * n + j] * y[j]; R[i] = -s; }
+          const dx = solveDense(J, n, R);
+          let m = 0; for (let i = 0; i < n; i++) { y[i] = Math.max(-K0 + 1e-6, y[i] + dx[i]); m = Math.max(m, Math.abs(dx[i])); }
+          conv = m < 1e-9;
+        }
+        if (!conv) throw fail('no-convergence', { t: t2 });
+        return y;
+      } };
+    }
     /** a transient: {tEnd, dt?, method: 'trap' | 'be', start: 'T0' | 'steady', points ≤ 20001, at: [t…], maxSteps} */
     function transient(o) {
       o = o || {};
@@ -422,13 +507,7 @@
       const be = o.method === 'be', points = Math.max(2, Math.min(MAX_POINTS, o.points === undefined ? 2001 : Math.floor(o.points)));
       const stride = Math.ceil(steps / (points - 1));
       let x = o.start === 'steady' ? steadyX(powers('t0')) : Float64Array.from(ck.T0);
-      const gate = thermostats.map(th => { const T = Tof(th.s, x); return th.heat ? T < th.high : T > th.low; });
-      // matrices A(θ) = diag(C/h) + Θ·G: θ = ½ (trapezoidal) on nodes with a heat capacity, 1 on massless ones and on backward-Euler steps
-      const thT = new Float64Array(n), thB = new Float64Array(n).fill(1);
-      for (let i = 0; i < n; i++) thT[i] = be || !(C[i] > 0) ? 1 : 0.5;
-      const mk = th => { const A = new Float64Array(n * n); for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i * n + j] = th[i] * G[i * n + j]; A[i * n + i] += C[i] / h; } return A; };
-      const AT = mk(thT), AB = mk(thB), LU = {};
-      if (!rads.length) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
+      const gate = gateAt(x), core = kit() ? null : stepCore(h, be);
       // channels: nodes, links, sources (power after the thermostat, mean over the step), thermostats (0 / 1)
       const nN = nodeOut.length, nL = links.length, nS = sources.length, nT = thermostats.length, nCh = nN + nL + nS + nT;
       const vals = new Float64Array(nCh), sp = new Float64Array(nS);
@@ -457,40 +536,11 @@
         prev.set(vals);
       };
       fill(); prev.set(vals); take(0, 0);
-      const P = new Float64Array(n), rhs = new Float64Array(n), Gx = new Float64Array(n), rv = new Float64Array(n);
-      for (let k = 0; k < steps; k++) {
+      const KS = kit();
+      if (KS) kernelRun(KS, x, gate, sp, 0, h, steps, be, true, (k, y) => { x = y; fill(); take(k + 1, (k + 1) * h); }, k => [k * h, (k + 1) * h]);
+      else for (let k = 0; k < steps; k++) {   // FALLBACK without the kernel: the own θ-step
         const t1 = k * h, t2 = (k + 1) * h;
-        let switched = false;
-        thermostats.forEach((th, i) => {
-          const T = Tof(th.s, x), on = gate[i];
-          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
-          if (nx !== on) { gate[i] = nx; switched = true; }
-        });
-        let edge = false; P.fill(0);
-        for (let s = 0; s < nS; s++) {
-          const src = sources[s], on = src.gate < 0 || gate[src.gate], w = src.w;
-          if (w.edges(t2) !== w.edges(t1)) edge = true;
-          sp[s] = on ? (w.F(t2) - w.F(t1)) / h : 0; P[src.u] += sp[s];
-        }
-        const useB = be || k === 0 || switched || edge, th = useB ? thB : thT;
-        for (let i = 0; i < n; i++) { let s = 0; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; Gx[i] = s; }
-        rv.fill(0); if (rads.length) rad(x, rv, null, null);
-        for (let i = 0; i < n; i++) rhs[i] = C[i] / h * x[i] - (1 - th[i]) * (Gx[i] - rv[i]) + b[i] + P[i];
-        if (!rads.length) { const L = LU[useB ? 'b' : 't']; x = subst(L.M, n, L.perm, Float64Array.from(rhs)); }
-        else {
-          const A = useB ? AB : AT, y = Float64Array.from(x);
-          let conv = false;
-          for (let it = 0; it < 30 && !conv; it++) {
-            const R = new Float64Array(n), J = Float64Array.from(A), rr = new Float64Array(n);
-            rad(y, rr, J, th);
-            for (let i = 0; i < n; i++) { let s = -rhs[i] - th[i] * rr[i]; for (let j = 0; j < n; j++) s += A[i * n + j] * y[j]; R[i] = -s; }
-            const dx = solveDense(J, n, R);
-            let m = 0; for (let i = 0; i < n; i++) { y[i] = Math.max(-K0 + 1e-6, y[i] + dx[i]); m = Math.max(m, Math.abs(dx[i])); }
-            conv = m < 1e-9;
-          }
-          if (!conv) throw fail('no-convergence', { t: t2 });
-          x = y;
-        }
+        x = core.step(x, gate, sp, t1, t2, k === 0);
         fill(); take(k + 1, t2);
       }
       const N = steps + 1, out = { t: Array.from(tRec), nodes: {}, links: {}, sources: {}, thermostats: {}, stats: { nodes: {}, links: {}, sources: {}, thermostats: {} }, at: {}, steps, dt: h, stride };
@@ -504,14 +554,50 @@
       }
       return out;
     }
-    return { steady, transient, taus };
+    /* the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the same θ-step as transient(), its state plain data (a snapshot is a copy):
+       {t, k, x, gate, ch (the channels now: nodes, links, sources, thermostats), stats: [min, max, sum, sumsq] per channel, n} */
+    const chanIds = () => [['nodes', nodeOut], ['links', links], ['sources', sources], ['thermostats', thermostats]].flatMap(([g, l]) => l.map(it => g + ':' + it.id));
+    function channels(x, gate, sp) {
+      const v = []; for (const nd of nodeOut) v.push(Tof(nd, x)); for (const l of links) v.push(flow(l, x)); for (let s = 0; s < sources.length; s++) v.push(sp[s]); for (let k = 0; k < thermostats.length; k++) v.push(gate[k] ? 1 : 0);
+      return v;
+    }
+    function stepStart(o) {
+      const x = o && o.start === 'steady' ? steadyX(powers('t0')) : Float64Array.from(ck.T0), gate = gateAt(x);
+      const sp = sources.map(src => (src.gate >= 0 && !gate[src.gate] ? 0 : 1) * src.w.value(0)), ch = channels(x, gate, sp);
+      return { t: o && Number.isFinite(o.t0) ? o.t0 : 0, k: 0, x: Array.from(x), gate, sp, ch, prev: ch.slice(), tPrev: NaN, stats: ch.map(v => [v, v, v, v * v]), n: 1, be: !!(o && o.method === 'be') };
+    }
+    const cores = new Map();
+    /** advance the state to tTo in steps ≤ hMax (whole steps of equal length) */
+    function stepTo(st, tTo, hMax) {
+      const span = tTo - st.t; if (!(span > 0)) return st;
+      const m = Math.max(1, Math.ceil(span / hMax - 1e-9)), h = span / m, key = h + '|' + st.be;
+      let x = Float64Array.from(st.x); const sp = st.sp.slice(), KS = kit();
+      const after = (i, y) => {
+        const t1 = st.t, t2 = i === m - 1 ? tTo : st.t + h; x = y;
+        st.k++; st.t = t2;
+        st.prev = st.ch; st.tPrev = t1; st.ch = channels(x, st.gate, sp);
+        st.ch.forEach((v, c) => { const q = st.stats[c]; if (v < q[0]) q[0] = v; if (v > q[1]) q[1] = v; q[2] += v; q[3] += v * v; }); st.n++;
+      };
+      if (KS) { kernelRun(KS, x, st.gate, sp, st.t, h, m, st.be, st.k === 0, after, i => [st.t, i === m - 1 ? tTo : st.t + h]); st.x = Array.from(x); st.sp = sp; return st; }
+      let core = cores.get(key); if (!core) { if (cores.size > 16) cores.clear(); core = stepCore(h, st.be); cores.set(key, core); }   // FALLBACK: the own θ-step
+      for (let i = 0; i < m; i++) {
+        const t1 = st.t, t2 = i === m - 1 ? tTo : st.t + h;
+        x = core.step(x, st.gate, sp, t1, t2, st.k === 0);
+        st.k++; st.t = t2;
+        st.prev = st.ch; st.tPrev = t1; st.ch = channels(x, st.gate, sp);
+        st.ch.forEach((v, c) => { const q = st.stats[c]; if (v < q[0]) q[0] = v; if (v > q[1]) q[1] = v; q[2] += v; q[3] += v * v; }); st.n++;
+      }
+      st.x = Array.from(x); st.sp = sp;
+      return st;
+    }
+    return { steady, transient, taus, stepStart, stepTo, chanIds };
   }
 
   function create(network, opts) {
     const problems = check(network);
     if (problems.some(p => p.level === 'error')) throw fail('invalid', { problems });
     const net = JSON.parse(JSON.stringify(network)), inner = makeSim(compile(net));
-    return Object.freeze({ id: ID, steady: o => inner.steady(o), transient: o => inner.transient(o), taus: () => inner.taus() });
+    return Object.freeze({ id: ID, steady: o => inner.steady(o), transient: o => inner.transient(o), taus: () => inner.taus(), stepStart: o => inner.stepStart(o), stepTo: (st, t, h) => inner.stepTo(st, t, h), chanIds: () => inner.chanIds() });
   }
 
   // ---- the sim-spec@1 adapter: create(spec, {seed}) → { run(inputs) → outputs } (in the worker and inline) ----
@@ -529,7 +615,7 @@
   }
   const adapter = { create(spec, opts) {
     const model = spec.model || {}, outs = spec.outputs || [], tr = model.transient || {};
-    let key = null, sim = null, cache = null;
+    let key = null, sim = null, cache = null, S = null, slot = null;
     function simFor(inp) {
       const k = JSON.stringify(inp.$bind || []);
       if (k !== key) {
@@ -562,7 +648,39 @@
         }
         return r;
       },
+      // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the network's bindings are read at every step; series give their value now
+      stepInit(inp, t0) {
+        try { const sm = simFor(inp); if (!sm) throw fail('invalid'); S = sm.stepStart({ start: tr.start, method: tr.method, t0 }); slot = null; return { out: stepOuts(sm, inp) }; }
+        catch (e) { S = null; return { fail: 'part-failed', out: {} }; }
+      },
+      stepTo(inp, t, dt) {
+        if (!S) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+        try {
+          const sm = simFor(inp); if (!sm) throw fail('invalid');
+          const T = inp.$tran || {}, hMax = T.dt > 0 ? T.dt : T.tEnd > 0 ? T.tEnd / 1000 : dt / 10;
+          if (S.k + Math.ceil(dt / hMax - 1e-9) > MAX_STEPS) return { fail: 'budget', out: {}, dt: 0, events: [] };
+          sm.stepTo(S, t + dt, hMax);
+          return { out: stepOuts(sm, inp), dt, events: [] };
+        } catch (e) { return { fail: 'part-failed', out: {}, dt: 0, events: [] }; }
+      },
+      snapshot() { if (!S) return -1; slot = JSON.stringify(S); return 0; },
+      restore(i) { if (i !== 0 || slot === null) return false; S = JSON.parse(slot); return true; },
     };
+    function stepOuts(sm, inp) {
+      const ids = sm.chanIds(), r = {};
+      for (const o of outs) {
+        try {
+          const g = o.node !== undefined ? 'nodes' : o.link !== undefined ? 'links' : o.source !== undefined ? 'sources' : o.thermostat !== undefined ? 'thermostats' : null;
+          const c = g ? ids.indexOf(g + ':' + o[g.slice(0, -1)]) : -1;
+          if (o.kind === 'series') { r[o.id] = o.time ? S.t : c >= 0 ? S.ch[c] : NaN; continue; }
+          if (o.tau !== undefined) { const v = (cache.ta || (cache.ta = sm.taus()))[o.tau - 1]; r[o.id] = v === undefined ? NaN : v; continue; }
+          if (o.stat !== undefined) { const q = S.stats[c]; r[o.id] = !q ? NaN : { final: S.ch[c], min: q[0], max: q[1], mean: q[2] / S.n, pp: q[1] - q[0], rms: Math.sqrt(q[3] / S.n) }[o.stat]; continue; }
+          if (o.at !== undefined) { const ta = inp.$at ? inp.$at[o.id] : NaN; r[o.id] = c >= 0 && ta <= S.t && ta >= S.tPrev ? S.prev[c] + (S.ch[c] - S.prev[c]) * (ta - S.tPrev) / (S.t - S.tPrev) : c >= 0 && ta === S.t ? S.ch[c] : NaN; continue; }
+          r[o.id] = (cache.st || (cache.st = sm.steady()))[g][o[g.slice(0, -1)]];
+        } catch (e) { r[o.id] = NaN; }
+      }
+      return r;
+    }
   } };
   /** on the main thread: the spec's expressions (bindings, transient times, `at`) become numbers, so the worker needs no evaluator */
   function prepare(spec, compileExpr) {
@@ -581,7 +699,8 @@
     check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `spec.${p.path}: ${p.msg}`),
     prepare,
     create: (spec, opts) => adapter.create(spec, opts),
-    workerSource: source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;',
+    stepper: true,   // a part of a co-simulation (stepInit / stepTo / snapshot / restore on the instance)
+    get workerSource() { const NX = root.NoemaExpr, K = kit(); return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;'; },
   });
   root.NoemaThermal = Object.freeze({
     id: ID, format: FORMAT, SIGMA, STATS: Object.freeze(STATS.slice()),

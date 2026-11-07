@@ -277,3 +277,7 @@ Also: karate assortativity −0.47561309768461413, Louvain Q = 0.418803418803418
 (5); the critical path of a small DAG (9); the Petersen graph's perfect matching (blossoms); Watts–Strogatz's ring C = 0.5; the
 step trace and its scene; seeded generators; the Worker source in a fresh context, bit for bit; a typical run under 50 ms (about
 5) and the heaviest allowed under 2 s (about 170 ms).
+
+## Uses the kernel
+
+Since 2026-11-07 the random generators, label propagation and the layouts draw from kernel streams (`C.rng(seed, 'graph:…')` = `SK.stream`); the Worker source carries the kernel. Snapshot unchanged (its fixtures use no random graph).

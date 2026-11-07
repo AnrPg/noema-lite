@@ -1666,6 +1666,1610 @@
      "of": "w"
     }
    ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 3,
+     "max": 30,
+     "step": 1,
+     "default": 6
+    }
+   ],
+   "model": {
+    "mode": "combin",
+    "kind": "multinomial",
+    "n": "n",
+    "probs": [
+     0.2,
+     0.3,
+     0.5
+    ],
+    "x": [
+     1,
+     2,
+     "n-3"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "pmf"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "pExact"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "mean.2"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "k"
+    },
+    {
+     "id": "o4",
+     "kind": "series",
+     "of": "marg"
+    },
+    {
+     "id": "o5",
+     "kind": "scalar",
+     "of": "issue.budget"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "o3"
+     },
+     "series": [
+      {
+       "y": "o4"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "c",
+     "kind": "slider",
+     "label": "c",
+     "min": 2,
+     "max": 50,
+     "step": 1,
+     "default": 6
+    },
+    {
+     "id": "m",
+     "kind": "slider",
+     "label": "m",
+     "min": 1,
+     "max": 300,
+     "step": 1,
+     "default": 20
+    }
+   ],
+   "model": {
+    "mode": "combin",
+    "kind": "coupon",
+    "types": "c",
+    "m": "m",
+    "copies": 1
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "eT"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "pDone"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "m"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "pmfT"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "o2"
+     },
+     "series": [
+      {
+       "y": "o3"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "combin",
+    "kind": "coupon",
+    "probs": [
+     0.5,
+     0.3,
+     0.2
+    ],
+    "want": 2,
+    "types": 3
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "eT"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "varT"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 2,
+     "max": 200,
+     "step": 1,
+     "default": 88
+    }
+   ],
+   "model": {
+    "mode": "combin",
+    "kind": "birthday",
+    "people": "n",
+    "k": 3,
+    "days": 365
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "pMatch"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "nFor"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "nGrid"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "pByN"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "z",
+     "kind": "slider",
+     "label": "z",
+     "min": -2,
+     "max": 2,
+     "step": 0.1,
+     "default": 0
+    },
+    {
+     "id": "mu",
+     "kind": "slider",
+     "label": "mu",
+     "min": -1,
+     "max": 1,
+     "step": 0.1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "mode": "gof",
+    "kind": "ks-one",
+    "x": [
+     0.1,
+     0.5,
+     "z",
+     0.9
+    ],
+    "dist": {
+     "family": "normal",
+     "mu": "mu"
+    },
+    "alt": "greater"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "stat"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "p"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "ecdfX"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "cdfY"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "gof",
+    "kind": "ks-two",
+    "x": [
+     1,
+     2,
+     3
+    ],
+    "y": [
+     2.5,
+     4,
+     5,
+     6
+    ],
+    "exact": true
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "p"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "issue.ties"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "gof",
+    "kind": "shapiro-wilk",
+    "x": [
+     148,
+     154,
+     158,
+     160,
+     161,
+     162,
+     166,
+     170,
+     182,
+     195,
+     236
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "w"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "p"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "qqX"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "qqY"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "gof",
+    "kind": "anderson-darling",
+    "x": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     9
+    ],
+    "estimate": true
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "statAdj"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "gof",
+    "kind": "chi2-fit",
+    "x": [
+     0.1,
+     0.2,
+     0.5,
+     0.7
+    ],
+    "dist": {
+     "family": "uniform",
+     "a": 0,
+     "b": 1
+    },
+    "bins": 4,
+    "ddof": 0
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "stat"
+    },
+    {
+     "id": "o1",
+     "kind": "series",
+     "of": "observed"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "expected"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "m",
+     "kind": "slider",
+     "label": "m",
+     "min": -3,
+     "max": 3,
+     "step": 0.1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "mode": "mcmc",
+    "kind": "metropolis",
+    "logdens": "-(a-m)^2/2 - b^2/2",
+    "params": [
+     "a",
+     "b"
+    ],
+    "init": [
+     0,
+     "m"
+    ],
+    "scale": [
+     1,
+     1
+    ],
+    "iters": 2000,
+    "chains": 4,
+    "seed": 3
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "accept"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "rhat.a"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "ess.b"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "trace.a"
+    },
+    {
+     "id": "o4",
+     "kind": "series",
+     "of": "acf.b"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "r",
+     "kind": "slider",
+     "label": "r",
+     "min": 0,
+     "max": 0.99,
+     "step": 0.01,
+     "default": 0.9
+    }
+   ],
+   "model": {
+    "mode": "mcmc",
+    "kind": "gibbs-bivnormal",
+    "rho": "r",
+    "iters": 1000
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "ess.x"
+    },
+    {
+     "id": "o1",
+     "kind": "series",
+     "of": "trace.y"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "histDensity.x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "mcmc",
+    "kind": "gibbs-normal",
+    "x": [
+     1.2,
+     2.4,
+     1.3
+    ],
+    "prior": {
+     "mu0": 0,
+     "sd0": 10,
+     "a": 1,
+     "b": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "mean.mu"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "q95.sigma"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "m",
+     "kind": "slider",
+     "label": "m",
+     "min": -2,
+     "max": 2,
+     "step": 0.1,
+     "default": 0
+    },
+    {
+     "id": "r",
+     "kind": "slider",
+     "label": "r",
+     "min": -0.9,
+     "max": 0.9,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "mode": "multivar",
+    "kind": "mvnormal",
+    "mu": [
+     0,
+     "m"
+    ],
+    "cov": [
+     [
+      1,
+      "r"
+     ],
+     [
+      "r",
+      1
+     ]
+    ],
+    "x": [
+     0.5,
+     0.5
+    ],
+    "n": 200
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "cdf"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "chol.1_0"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "ellX"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "drawY"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "q",
+     "kind": "slider",
+     "label": "q",
+     "min": 0,
+     "max": 10,
+     "step": 1,
+     "default": 5
+    }
+   ],
+   "model": {
+    "mode": "multivar",
+    "kind": "ols",
+    "data": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      7
+     ]
+    ],
+    "y": [
+     1,
+     2,
+     3,
+     4,
+     "q"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "coef.2"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "p.0"
+    },
+    {
+     "id": "o2",
+     "kind": "scalar",
+     "of": "r2"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "resid"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "multivar",
+    "kind": "logistic",
+    "data": [
+     [
+      1
+     ],
+     [
+      2
+     ],
+     [
+      3
+     ],
+     [
+      4
+     ]
+    ],
+    "y": [
+     0,
+     1,
+     0,
+     1
+    ],
+    "intercept": false
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "coef.0"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "deviance"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "multivar",
+    "kind": "pca",
+    "data": [
+     [
+      1,
+      2,
+      3
+     ],
+     [
+      2,
+      1,
+      0
+     ],
+     [
+      3,
+      5,
+      1
+     ]
+    ],
+    "scale": true
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "eig.2"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "load.2_1"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "pc1"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "a",
+     "kind": "slider",
+     "label": "a",
+     "min": 0.5,
+     "max": 5,
+     "step": 0.5,
+     "default": 2
+    }
+   ],
+   "model": {
+    "mode": "multivar",
+    "kind": "dirichlet",
+    "conc": [
+     1,
+     "a",
+     3
+    ],
+    "x": [
+     0.2,
+     0.3,
+     0.5
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "logpdf"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "cov.0_2"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "multivar",
+    "kind": "corr",
+    "data": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "i": 0,
+    "j": 1
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "tau"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "corr.0_1"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "e",
+     "kind": "slider",
+     "label": "e",
+     "min": 0,
+     "max": 0.49,
+     "step": 0.01,
+     "default": 0.25
+    },
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "k",
+     "min": 1,
+     "max": 99,
+     "step": 2,
+     "default": 11
+    }
+   ],
+   "model": {
+    "mode": "rand",
+    "kind": "amplify",
+    "err": "e",
+    "sided": "two",
+    "k": "k",
+    "delta": 1e-06
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "errK"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "kNeeded"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "kGrid"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "errByK"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "m",
+     "kind": "slider",
+     "label": "m",
+     "min": 100,
+     "max": 5000,
+     "step": 100,
+     "default": 1000
+    }
+   ],
+   "model": {
+    "mode": "rand",
+    "kind": "bloom",
+    "m": "m",
+    "n": 100,
+    "target": 0.01
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "fpExact"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "kOptInt"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "fpByK"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "a",
+     "kind": "slider",
+     "label": "a",
+     "min": 50,
+     "max": 100,
+     "step": 1,
+     "default": 75
+    }
+   ],
+   "model": {
+    "mode": "rand",
+    "kind": "bounds",
+    "dist": {
+     "family": "binomial",
+     "n": 100,
+     "p": 0.5
+    },
+    "a": "a"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "exact"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "tightest"
+    },
+    {
+     "id": "o2",
+     "kind": "series",
+     "of": "aGrid"
+    },
+    {
+     "id": "o3",
+     "kind": "series",
+     "of": "chernoffBy"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "karger",
+    "n": 4,
+    "edges": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      0
+     ]
+    ],
+    "reps": 100
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "minCut"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "simSuccess"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "mcpi",
+    "n": 1000,
+    "expr": "sin(x)",
+    "a": 0,
+    "b": "pi"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "estimate"
+    },
+    {
+     "id": "o1",
+     "kind": "series",
+     "of": "runEst"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "cover",
+    "graph": "cycle",
+    "n": 6
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "coverExact"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "issue.disconnected"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "freivalds",
+    "A": [
+     [
+      1,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ],
+    "B": [
+     [
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "Cm": [
+     [
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ]
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "equal"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "combin",
+    "kind": "multinomial",
+    "n": 6,
+    "probs": [
+     0.2,
+     0.8
+    ],
+    "x": [
+     1,
+     2,
+     3
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "pmf"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "combin",
+    "kind": "coupon",
+    "types": 3,
+    "probs": [
+     0.5,
+     0.5
+    ],
+    "want": 4
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "eT"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "combin",
+    "kind": "birthday",
+    "days": 3,
+    "probs": [
+     1,
+     -1
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "pMatch"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "mean.0"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "combin",
+    "kind": "lottery"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "pmf"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "combin",
+    "kind": "multinomial"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "pmf"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "mean.5"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "gof",
+    "kind": "ks-one",
+    "x": [
+     1,
+     2
+    ],
+    "estimate": true
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "gof",
+    "kind": "anderson-darling",
+    "x": [
+     1,
+     2
+    ],
+    "estimate": true,
+    "dist": {
+     "family": "normal"
+    }
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "gof",
+    "kind": "ks-two",
+    "x": [
+     1,
+     2
+    ],
+    "alpha": 2,
+    "dist": {
+     "family": "zipf"
+    }
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "w"
+    },
+    {
+     "id": "o1",
+     "kind": "series",
+     "of": "p"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "n",
+     "kind": "slider",
+     "label": "n",
+     "min": 1,
+     "max": 2,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "mode": "mcmc",
+    "kind": "metropolis",
+    "logdens": "-a^2",
+    "params": [
+     "a",
+     "a",
+     "n"
+    ],
+    "init": [
+     0
+    ],
+    "scale": [
+     1,
+     1
+    ],
+    "burn": 500,
+    "iters": 100
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "rhat.a"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "rhat.zz"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "mcmc",
+    "kind": "gibbs-normal",
+    "chains": 9
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "series",
+     "of": "trace.mu"
+    },
+    {
+     "id": "o1",
+     "kind": "series",
+     "of": "trace.a"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "multivar",
+    "kind": "mvnormal",
+    "mu": [
+     0,
+     0
+    ],
+    "cov": [
+     [
+      1,
+      0
+     ]
+    ],
+    "x": [
+     1
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "chol.0_2"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "mean.1"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "multivar",
+    "kind": "ols",
+    "data": [
+     [
+      1,
+      2
+     ],
+     [
+      3
+     ]
+    ],
+    "y": [
+     1
+    ],
+    "w": [
+     1,
+     2,
+     3
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "coef.3"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "multivar",
+    "kind": "dirichlet",
+    "conc": [
+     1
+    ],
+    "x": [
+     1,
+     2
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "mean.0"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "quickselect",
+    "n": 5,
+    "r": 9
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "eComp"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "freivalds",
+    "A": [
+     [
+      1,
+      2
+     ]
+    ],
+    "B": [
+     [
+      1
+     ]
+    ],
+    "Cm": [
+     [
+      1
+     ]
+    ]
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "equal"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "params": [
+    {
+     "id": "x",
+     "kind": "slider",
+     "label": "x",
+     "min": 0,
+     "max": 1,
+     "step": 0.1,
+     "default": 0.5
+    }
+   ],
+   "model": {
+    "mode": "rand",
+    "kind": "mcpi",
+    "n": 10,
+    "expr": "x"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "estimate"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "reservoir",
+    "n": 3,
+    "k": 5,
+    "reps": -1
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "inclusion"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "twosat",
+    "n": 3,
+    "i": 5,
+    "graph": "tree"
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "eSteps"
+    },
+    {
+     "id": "o1",
+     "kind": "scalar",
+     "of": "issue.nope"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "bounds",
+    "a": 1
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "exact"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "prob@1",
+   "model": {
+    "mode": "rand",
+    "kind": "bounds",
+    "dist": {
+     "family": "binomial",
+     "n": -1,
+     "p": 2
+    },
+    "a": 1
+   },
+   "outputs": [
+    {
+     "id": "o0",
+     "kind": "scalar",
+     "of": "exact"
+    }
+   ]
   }
  ]
 }

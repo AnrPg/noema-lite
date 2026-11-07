@@ -35,7 +35,7 @@
     }
     root.noemaEngine = { create(spec, opts) {
       const model = spec.model || {}, outs = spec.outputs || [], seed = (opts && opts.seed) >>> 0, faults = (opts && opts.faults) || [];
-      let key = null, sim = null;
+      let key = null, sim = null, ST = null;
       function simFor(inp) {
         const k = JSON.stringify(inp.$bind || []);
         if (k !== key) {
@@ -90,12 +90,68 @@
             return { kind: m.kind, value: m.value, ...(m.mode ? { mode: m.mode } : {}) };
           } catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
         },
+        // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the transient held open on its own grid, started at the part's t0 (the
+        // circuit's time τ = t − t0). The grid is model.transient.dt (else tEnd/1000, else a tenth of the first macro step), made a
+        // divisor of the first macro step (0.06 with steps of 0.1 → 0.05), so the steps land on the macro times; a step that does
+        // not (the last one, or one cut short by another part's event) runs to the next grid point and reports its values at the
+        // asked time, interpolated (the circuit is then ahead by less than one grid step, and the next step goes on from there).
+        // A binding that changes (another part drives a source, a resistor, a switch) goes into the running transient with its
+        // capacitor and inductor state (tranAdopt), the step after it backward Euler. Outputs at each step: node / branch / power
+        // their value at the asked time (a series: one sample a step), time the time, stat over every internal step so far, at
+        // once passed; DC outputs as in run(). Cannot snapshot (the companion state).
+        stepInit(inp, t0) {
+          try {
+            const tr = inp.$tran || {}, g = tr.dt > 0 ? tr.dt : tr.tEnd > 0 ? tr.tEnd / 1000 : 0;
+            ST = { g, t0: Number.isFinite(t0) ? t0 : 0, tau: 0, s: simFor(inp), key: bindKey(inp), cur: null, grid: false };
+            if (g > 0) start(g);
+            return { out: ST.cur ? stepOuts(inp) : {} };
+          } catch (e) { ST = null; return { fail: 'part-failed', out: {} }; }
+        },
+        stepTo(inp, t, dt) {
+          if (!ST) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+          try {
+            if (!ST.grid) {   // the first step: the grid a divisor of the macro step (no internal step taken yet: a free restart)
+              const g = ST.g > 0 ? dt / Math.ceil(dt / ST.g - 1e-9) : dt / 10;
+              if (!ST.cur || Math.abs(g - ST.cur.dt) > 1e-12 * g) start(g);
+              ST.grid = true;
+            }
+            const k = bindKey(inp);
+            if (k !== ST.key) { const prev = ST.s, st = prev.tranState(); ST.s = simFor(inp); ST.s.tranAdopt(st); ST.key = k; ST.dc = null; }
+            const tau = t + dt - ST.t0, h = ST.cur.dt, n = Math.ceil((tau - ST.cur.t) / h - 1e-9);
+            if (n > 0) ST.cur = ST.s.tranStep(null, ST.cur.t + n * h);
+            ST.tau = tau;
+            return { out: stepOuts(inp), dt, events: [] };
+          } catch (e) { ST = null; return { fail: String(e && e.code === 'budget' ? 'budget' : 'part-failed'), out: {}, dt: 0, events: [] }; }
+        },
+        snapshot() { return -1; },
+        restore() { return false; },
       };
+      function start(g) { ST.cur = ST.s.tranStep({ dt: g, power: outs.filter(o => o.power !== undefined).map(o => o.power) }, 0); }
+      function bindKey(inp) { return JSON.stringify(inp.$bind || []); }
+      function stepOuts(inp) {
+        const c = ST.cur, r = {}, x = ST.tau / c.dt;
+        const kindOf = o => (o.power !== undefined ? 'power' : o.node !== undefined ? 'node' : 'branch'), nameOf = o => (o.power !== undefined ? o.power : o.node !== undefined ? o.node : o.branch);
+        const now = H => { const L = H.length - 1; if (!(x < L)) return H[L]; const i = Math.max(0, Math.floor(x)), f = Math.max(0, x - i); return H[i] + (H[i + 1] - H[i]) * f; };   // the value at τ (between the last two grid points)
+        for (const o of outs) {
+          try {
+            if (o.ac !== undefined || o.probe) { r[o.id] = NaN; continue; }
+            if (o.kind === 'series' && o.time) { r[o.id] = ST.t0 + ST.tau; continue; }
+            if (o.kind !== 'series' && o.at === undefined && o.stat === undefined) { const d = ST.dc || (ST.dc = ST.s.dc()); r[o.id] = o.node !== undefined ? d.nodes[o.node] : d.branches[o.branch]; continue; }
+            const H = c.hist(kindOf(o), nameOf(o));
+            if (!H) { r[o.id] = NaN; continue; }
+            if (o.kind === 'series') { r[o.id] = now(H); continue; }
+            if (o.stat !== undefined) { r[o.id] = STATS.includes(o.stat) ? stat(H, o.stat) : NaN; continue; }
+            const ta = inp.$at ? inp.$at[o.id] : NaN;
+            r[o.id] = ta >= 0 && ta <= ST.tau + 1e-9 * c.dt ? at(H.map((_, k) => k * c.dt), H, ta) : NaN;
+          } catch (e) { r[o.id] = NaN; }
+        }
+        return r;
+      }
     } };
   }
   const local = { NoemaCircuit: window.NoemaCircuit }; circuitSimEngine(local);
   ACT.registerEngine({
-    id: 'circuit-mna@1', bench: true,
+    id: 'circuit-mna@1', bench: true, stepper: true,   // stepper: the transient as a part of a co-simulation (stepInit / stepTo)
     /** after the common checks (NoemaPackCheck.checkSimSpec checks the model, the outputs and the bench): the engine's own netlist check */
     check: spec => NoemaCircuit.check(spec?.model?.netlist).filter(p => p.level === 'error').map(p => `netlist ${p.path}: ${p.msg}`),
     /** on the main thread: the expressions become numbers (bindings, transient times, `at`), so the worker needs no evaluator */
@@ -110,7 +166,8 @@
         $ac: acm ? { source: acm.source, fStart: ev(acf.fStart, env), fStop: ev(acf.fStop, env), ...(acm.points !== undefined ? { points: acm.points } : {}) } : null });
     },
     create: (spec, opts) => local.noemaEngine.create(spec, opts),
-    workerSource: NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);',
+    /** the Worker: NoemaExpr and the simulation kernel (the meters' streams) when loaded, the engine, then this adapter */
+    get workerSource() { const K = NoemaCircuit.kit(), NX = window.NoemaExpr; return (K && NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + NoemaCircuit.source() + '\n;(' + circuitSimEngine.toString() + ')(self);'; },
   });
   /* i18n-ignore-end */
 })();

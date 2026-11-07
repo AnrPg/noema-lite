@@ -1038,7 +1038,7 @@
     if (nsh > 0) {
       if (nsh > 1000 || out.cells * (1 + nsh) > BUDGET * 10) codes.push('budget');
       else {
-        const rand = C.mulberry32(C.hash32('seq-shuffle', seed >>> 0)), sh = [];
+        const rand = C.rng(seed >>> 0, 'seq-shuffle'), sh = [];
         for (let t = 0; t < nsh; t++) { const x = b.split(''); for (let i = x.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); const tt = x[i]; x[i] = x[j]; x[j] = tt; } sh.push(dp(a, x.join(''), sc0.f, type, o, e, bw).score); }
         const mu = sh.reduce((p, q) => p + q, 0) / nsh, sd = Math.sqrt(sh.reduce((p, q) => p + (q - mu) * (q - mu), 0) / Math.max(1, nsh - 1));
         out.zScore = sd > 0 ? (r.score - mu) / sd : NaN; out.pShuffle = (1 + sh.filter(x => x >= r.score - 1e-9).length) / (1 + nsh); out.shuffleScores = sh;
@@ -1265,9 +1265,11 @@
     out.mwAvg = mass(MW_AVG, WATER); out.mwMono = mass(MW_MONO, WATER_MONO);
     const nt = s[0], ct = s[L - 1];
     let lo = 0, hi = 14;
-    const pk = m.pk || 'bjellqvist';
-    for (let it = 0; it < 60; it++) { const mid = (lo + hi) / 2; if (chargeAt(cnt, nt, ct, mid, pk) > 0) lo = mid; else hi = mid; }
-    out.pI = (lo + hi) / 2;
+    const pk = m.pk || 'bjellqvist', K = C.kit(), q0 = chargeAt(cnt, nt, ct, lo, pk), q1 = chargeAt(cnt, nt, ct, hi, pk);
+    // the pH of zero net charge: Brent's root (NoemaSimKit.brent; the charge falls with pH); bisection when it is not bracketed or without the kernel
+    const rb = K && q0 > 0 && q1 < 0 ? K.brent(p => chargeAt(cnt, nt, ct, p, pk), lo, hi, 1e-13, q0, q1) : NaN;
+    if (Number.isFinite(rb)) out.pI = rb;
+    else { for (let it = 0; it < 60; it++) { const mid = (lo + hi) / 2; if (chargeAt(cnt, nt, ct, mid, pk) > 0) lo = mid; else hi = mid; } out.pI = (lo + hi) / 2; }
     const ph = num(m.ph, env, 7);
     out.charge = chargeAt(cnt, nt, ct, ph, pk);
     out.gravy = [...s].every(x => KD[x] !== undefined) ? [...s].reduce((t, x) => t + KD[x], 0) / L : NaN;
@@ -1385,9 +1387,10 @@
     return { out, codes: [...new Set(res.codes || [])] };
   }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibSeqModule, 'NoemaLibSeq');
+  engine.workerSource = C.workerSource(noemaLibSeqModule, 'NoemaLibSeq', { kit: true });
   root.NoemaLibSeq = Object.freeze({
     id: ID, MODES, SPEC, TABLES, OUTS, NCBI, ENZ, MATRIX, NUCLEASES, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
+    table: { model: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => { const t = Object.assign({}, TABLES[md], ...SEQS[md].map(x => ({ [x[0]]: 'seq' + (x[4] ? '!' : '') }))), n = NESTED[md]; if (n && t[n[0]] && t[n[0]].$list && t[n[0]].$list.$obj) t[n[0]] = Object.assign({}, t[n[0]], { $list: { $obj: Object.assign({}, t[n[0]].$list.$obj, { [n[1]]: 'seq' }) } }); return [md, t]; })) }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => [md, Object.keys(OUTS[md]).reduce((a, k) => ((a[OUTS[md][k][0]] = a[OUTS[md][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'any' } },   // the form of the activity author (46_lib_schema.js)
     // the pieces, for tests
     clean, revcomp, translate, aaOf, gcFrac, tmNN, saltCorr, dp, encOf, rscuOf, synSites, synDiffs, compBest, hairpinBest, bindSites, nnDG, chargeAt, findSites, agaroseRange, migrate, bandOf, traceback,
   });

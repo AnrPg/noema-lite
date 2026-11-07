@@ -250,3 +250,7 @@ force), empty Delaunay circumcircles, Thales over a 50-sample sweep, Euclid I.37
 point, the cross-ratio; the Worker source in a fresh context, bit for bit; a typical run under 50 ms (about 1) and the heaviest
 allowed (200 moving points, their minimum enclosing circle traced over 960 samples, with Delaunay and Voronoi) under 2 s (about
 650 ms).
+
+## Uses the kernel
+
+Since 2026-11-07 Welzl's smallest enclosing circle and the "always" checks draw their random order from kernel streams (`C.rng` = `SK.stream`); the Worker source carries the kernel. Snapshot unchanged.

@@ -1,0 +1,17 @@
+{
+ "title": "Combien de fois un filtre de Bloom se trompe-t-il ?",
+ "intro": "Un filtre de Bloom range un ensemble dans m bits. Chaque élément allume k bits choisis par k fonctions de hachage ; une recherche répond « peut-être présent » quand ses k bits sont tous allumés. Il ne manque jamais un élément rangé, mais il dit parfois oui à un élément qui n’a jamais été rangé. Changez le nombre de bits, d’éléments et de fonctions de hachage, et regardez le taux de faux positifs.",
+ "bits": "Bits du filtre m",
+ "items": "Éléments rangés n",
+ "hashes": "Fonctions de hachage k",
+ "fpLabel": "Taux de faux positifs (exact)",
+ "fpFormulaLabel": "La formule des manuels (1 − e^(−kn/m))^k",
+ "kOptLabel": "Meilleur k en théorie, (m/n)·ln 2",
+ "kBestLabel": "Meilleur nombre entier de fonctions",
+ "mForLabel": "Bits nécessaires pour 1 % avec ce n",
+ "plotTitle": "Taux de faux positifs pour chaque nombre de fonctions de hachage",
+ "kAxis": "Fonctions de hachage k",
+ "fpAxis": "Taux de faux positifs",
+ "fpLine": "faux positifs",
+ "kMark": "votre k"
+}

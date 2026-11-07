@@ -12,7 +12,8 @@
    Engines (docs/INTERACTIVE.md §8.1): a mini-app whose registry entry lists engines of the library ("engines": ["graph@1"]) asks for
    them with noema.engine(id).check(spec) / .run(spec, inputs, {seed}). The frame never gets a Worker (its policy stays as it is): the
    HOST checks every request (engineBridge below), runs the model in the library engine's own Worker (ACT.engineRunner, the runner of
-   sim-spec@1, with its 5 s limit and termination) and sends back only the outputs the spec names, as data. */
+   sim-spec@1, with its 5 s limit and termination) and sends back only the outputs the spec names, as data. noema.sim(spec).run(inputs)
+   runs several of them as the parts of one spec (docs/INTERACTIVE.md §12.8) through the sim runtime's orchestrator (ACT.partsRunner). */
 (() => {
   /* i18n-ignore-start */   // code
   const CSP = hashes => ["default-src 'none'", 'script-src ' + hashes.map(x => `'sha256-${x}'`).join(' '), "style-src 'unsafe-inline'", 'img-src data: blob:', 'font-src data:', 'media-src data: blob:',
@@ -51,6 +52,7 @@ function ereq(type,payload){return started.then(function(){return new Promise(fu
 function engine(id){id=String(id).slice(0,40);return Object.freeze({id:id,
  check:function(spec){return ereq('engine:check',{engine:id,spec:spec}).then(function(p){return Array.isArray(p.errors)?p.errors:[];});},
  run:function(spec,inputs,o){var pl={engine:id,spec:spec,inputs:inputs||{}};if(o&&o.seed!=null)pl.seed=Math.floor(Math.abs(+o.seed))>>>0;return ereq('engine:run',pl).then(function(p){return{outputs:p.outputs||{}};});}});}
+function sim(spec){return Object.freeze({run:function(inputs,o){var pl={spec:spec,inputs:inputs||{}};if(o&&o.seed!=null)pl.seed=Math.floor(Math.abs(+o.seed))>>>0;return ereq('sim:run',pl).then(function(p){return{outputs:p.outputs||{},values:p.values||{},codes:Array.isArray(p.codes)?p.codes:[]};});}});}
 function fill(s,vars){return String(s).replace(/\\{(\\w+)\\}/g,function(_,k){return vars&&vars[k]!=null?String(vars[k]):'{'+k+'}';});}
 var lastH=0;function measure(){var h=Math.ceil(Math.max(document.documentElement.scrollHeight,document.body?document.body.scrollHeight:0));if(Math.abs(h-lastH)>2){lastH=h;send('resize',{h:h});}}
 var api={
@@ -69,7 +71,8 @@ var api={
  error:function(code,message){send('error',{code:String(code).slice(0,40),message:message==null?undefined:String(message).slice(0,500)});},
  resize:function(){measure();},
  engines:function(){return init&&Array.isArray(init.engines)?init.engines.slice():[];},
- engine:engine
+ engine:engine,
+ sim:sim
 };
 Object.freeze(api.fmt);Object.freeze(api);
 Object.defineProperty(window,'noema',{value:api,writable:false,configurable:false});
@@ -193,6 +196,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
       const p = m.payload, rid = m.id, id = p.engine, now = Date.now();
       win = win.filter(t => now - t < 1000); win.push(now);
       if (win.length > ENG.perSec) return no(rid, 'rate', 'more than ' + ENG.perSec + ' engine requests a second');
+      if (m.type === 'sim:run') return simJob(m);
       if (!declared.has(id)) return no(rid, 'undeclared', 'the activity\'s registry entry does not list ' + id + ' in "engines"');
       if (!allowed.has(id)) return no(rid, 'unavailable', id + ' does not run here');
       const cs = cleanSpec(id, p.spec);
@@ -207,7 +211,48 @@ APP.postMessage({t:'hello',nonce:N},'*');
       if (s.next) no(s.next.rid, 'superseded', 'a newer run replaced this one');
       s.next = job;
     }
-    function close() { closed = true; for (const s of Object.values(slots)) { try { s.runner?.close(); } catch (e) { } s.runner = null; s.busy = s.next = null; } }
+    /* noema.sim(spec).run(inputs): a spec with parts {consts?, derived?, parts, couple?} whose engines are all declared and allowed;
+       the inputs override its consts; the same checks as a sim-spec@1 spec (packcheck), run by the sim runtime's parts orchestrator
+       (ACT.partsRunner: each part in its engine's Worker, ≤ 5 s in all). One run at a time per mini-app and one waiting ("superseded"). */
+    const sims = { runner: null, key: null, busy: null, next: null };
+    function simJob(m) {
+      const p = m.payload, rid = m.id, sp = p.spec, PC = window.NoemaPackCheck;
+      if (!Array.isArray(sp.parts) || typeof ACT.partsRunner !== 'function' || !PC?.checkSimSpec) return no(rid, Array.isArray(sp.parts) ? 'unavailable' : 'spec', 'the spec is {consts?, derived?, parts, couple?}', Array.isArray(sp.parts) ? undefined : ['spec.parts: a list of parts is required']);
+      const engs = [...new Set(sp.parts.map(q => (q && typeof q === 'object' ? q.engine : null)))];
+      const bad = engs.find(e => typeof e !== 'string' || !declared.has(e)); if (bad !== undefined) return no(rid, 'undeclared', 'the activity\'s registry entry does not list ' + String(bad).slice(0, 40) + ' in "engines"');
+      const off = engs.find(e => !allowed.has(e)); if (off) return no(rid, 'unavailable', off + ' does not run here');
+      const inputs = inputsOf(p.inputs); if (!inputs) return no(rid, 'inputs', 'inputs are at most ' + ENG.inputs + ' names (letters, digits, _) with numbers or true/false');
+      const consts = { ...(isObj(sp.consts) ? sp.consts : {}), ...inputs }, full = { format: 'noema.sim-spec/v1', consts, params: [], parts: sp.parts, ...(sp.derived !== undefined ? { derived: sp.derived } : {}), ...(sp.couple !== undefined ? { couple: sp.couple } : {}) };
+      let key; try { key = JSON.stringify([full.parts, full.derived, full.couple, Object.keys(consts).sort()]); } catch (e) { return no(rid, 'spec', 'the spec must be plain data'); }
+      let errs; try { errs = PC.checkSimSpec(full, null, ACT.engines ? ACT.engines() : null).filter(x => !/^spec\.params /.test(x)).map(x => String(x).slice(0, 300))   /* a mini-app has no controls: its inputs are the consts */.slice(0, ENG.errors); } catch (e) { errs = ['the spec cannot be checked']; }
+      if (errs.length) return no(rid, 'spec', errs[0], errs);
+      const job = { rid, full, key, consts, seed: p.seed == null ? (seed0 >>> 0) || 1 : p.seed >>> 0 };
+      if (!sims.busy) return simStart(job);
+      if (sims.next) no(sims.next.rid, 'superseded', 'a newer run replaced this one');
+      sims.next = job;
+    }
+    function simStart(job) {
+      if (!sims.runner || sims.key !== job.key + ':' + job.seed) {
+        try { sims.runner?.close(); } catch (e) { }
+        sims.key = job.key + ':' + job.seed;
+        sims.runner = ACT.partsRunner(job.full, { seed: job.seed, task: { ...job.consts } }, why => {
+          const b = sims.busy; sims.runner = null; sims.key = null; sims.busy = null;
+          if (b) no(b.rid, why === 'runaway' ? 'timeout' : 'failed', why === 'runaway' ? 'the parts took longer than 5 s' : null);
+          const n = sims.next; sims.next = null; if (n) simStart(n);
+        });
+      }
+      sims.busy = job;
+      sims.runner.run({ ...job.consts }, r => {
+        if (closed || sims.busy !== job) return;
+        sims.busy = null;
+        if (!r || !r.outputs) no(job.rid, 'failed', 'the parts could not compute this model');
+        else { const vals = {}; for (const [k, v] of Object.entries(r.env || {})) if (!(k in job.consts) && (typeof v === 'number' || typeof v === 'boolean')) vals[k] = v;
+          const pl = { ok: true, outputs: r.outputs, values: vals, codes: (r.codes || []).slice(0, 20) };
+          if (ACTP.size(pl) > ENG.outBytes) no(job.rid, 'too-big', 'the outputs are larger than 512 KB'); else reply('engine:result', pl, { re: job.rid }); }
+        const n = sims.next; sims.next = null; if (n) simStart(n);
+      });
+    }
+    function close() { closed = true; for (const s of Object.values(slots)) { try { s.runner?.close(); } catch (e) { } s.runner = null; s.busy = s.next = null; } try { sims.runner?.close(); } catch (e) { } sims.runner = null; sims.busy = sims.next = null; }
     return { handle, close, engines: [...allowed] };
   }
 
@@ -244,7 +289,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
         ch.port1.onmessage = m => {
           if (closed) return;
           const d = m.data;   // an engine request goes to the bridge once ACTP has checked it; everything else (and every bad message: a strike) to the core
-          if (d && typeof d.type === 'string' && (d.type === 'engine:run' || d.type === 'engine:check')) { const r = ACTP.check(d); if (r.ok && typeof r.msg.id === 'string') return bridge.handle(r.msg); }
+          if (d && typeof d.type === 'string' && (d.type === 'engine:run' || d.type === 'engine:check' || d.type === 'sim:run')) { const r = ACTP.check(d); if (r.ok && typeof r.msg.id === 'string') return bridge.handle(r.msg); }
           onMessage(d);
         };
         app.postMessage({ t: 'welcome', nonce }, '*', [ch.port2]);

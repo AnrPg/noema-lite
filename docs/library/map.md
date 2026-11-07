@@ -315,3 +315,7 @@ Inverse projections (the engine draws and measures; it does not pick points from
 ellipsoids (Helmert transformations: out of scope for teaching); a full ORBIS with seasonal winds per direction (the `open`/`speeds`
 expressions let an author model a season); higher-resolution coastlines (1:50m is 750 kB, too big to vendor for a teaching map);
 ancient coastlines (the 110m outline is modern: the Nile delta, Ostia, Ephesus are where they are today).
+
+## Uses the kernel
+
+No duplicated facility (geodesy and projections; no randomness, no time loop): nothing to move (checked 2026-11-07).

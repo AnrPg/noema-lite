@@ -1769,6 +1769,7 @@
   engine.workerSource = C.workerSource(noemaLibAnatomyModule, 'NoemaLibAnatomy');
   root.NoemaLibAnatomy = Object.freeze({
     id: ID, checkSpec, exprs, keys, run, compute, engine: Object.freeze(engine), simEngine,
+    table: { model: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => [md, Object.assign({}, SCHEMA.common, SCHEMA[md])])) }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => [md, { scalar: OUTS[md].scalar.concat((ISSUES[md] || []).map(i => 'issue.' + i)), series: OUTS[md].series, scene: OUTS[md].scene }])) } },   // the form of the activity author (46_lib_schema.js)
     // the engine's own functions and tables, for the tests
     index, graph, dataProblems, counts, evaluate, relation, trace, routeTable, nioshFM, WINTER, VARIANTS, SIGNS, segNo,
   });

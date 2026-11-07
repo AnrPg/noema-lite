@@ -26,9 +26,21 @@ AUTHOR_SCHEMAS = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json
 def author_schemas_js():
     # the activity author's copy of the JSON Schemas (a file:// page cannot fetch them): engine/activity_author_schemas.js
     sch = {f: rj(os.path.join(ROOT, 'tools', 'schemas', f)) for f in AUTHOR_SCHEMAS}
+    # and the reference activity of every engine of the library (tools/activities_examples/<ref>/: its entry, spec and words): the author's
+    # "Start from the reference activity" (docs/activities-dev/authoring_ui.md)
+    refs, ex = {}, os.path.join(ROOT, 'tools', 'activities_examples')
+    for d in sorted(os.listdir(ex)):
+        p = os.path.join(ex, d)
+        if not (os.path.isfile(os.path.join(p, 'spec.json')) and os.path.isfile(os.path.join(p, 'activity.json'))): continue
+        spec = rj(os.path.join(p, 'spec.json'))
+        parts = spec.get('parts') if isinstance(spec, dict) else None   # a spec with parts (docs/INTERACTIVE.md §12.8): the author's kind "Several engines"
+        if not (isinstance(spec, dict) and (spec.get('engine') in ACTS.LIB or (isinstance(parts, list) and parts))): continue
+        refs[d] = {'item': rj(os.path.join(p, 'activity.json')), 'spec': spec,
+                   'strings': {f.split('.')[1]: rj(os.path.join(p, f)) for f in sorted(os.listdir(p)) if re.fullmatch(r'strings\.[\w-]+\.json', f)}}
     return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from tools/schemas/ by\n'
             '   tools/build.py (tests/activity_author.js checks that it is up to date). Do not edit. Schema data, not words a learner reads: */\n/* i18n-ignore-start */\n'
-            '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
+            '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + ';\n'
+            '  root.NoemaActivityRefs = ' + json.dumps(refs, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
 
 def build_engine():
     wt(os.path.join(ENGINE, 'activity_author_schemas.js'), author_schemas_js())
@@ -323,6 +335,7 @@ def build_site(metas):
 
 # the P6 engines of sim-spec@1 (docs/INTERACTIVE_ENGINES.md): their check code is loaded beside packcheck.js like NoemaCircuit; registered by 43_engines_p6.js
 P6_ENGINES = ('39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js')
+KERNEL = '46_lib_simkit.js'   # the simulation kernel (docs/library/simkit.md): loaded after NoemaExpr, before the plugins 39–42 and the library, which use it
 # the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core, every general engine (47–48_lib_*.js) and the catalogue
 # (which also registers them); loaded beside packcheck.js like the P6 engines; their Python twins tools/enginelib.py + tools/lib_<name>.py
 LIB_ENGINES = ('46_lib_core.js', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '46_lib_*.js')) if not f.endswith('46_lib_core.js')), *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '4[78]_lib_*.js'))), '49_lib_catalog.js')
@@ -497,7 +510,7 @@ def build_bundle(metas):
     css = rd('engine/engine.css') + '\n' + rd('engine/activity_author.css')
     # every UI catalog inline (the single file works offline in any locale; pseudo-locales only for tests)
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
-    p6_scripts = ''.join(f'<script>{esc(rd("engine/vendor/" + f))}</script>\n' for f in LIB_VENDOR) + ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (*P6_ENGINES, *LIB_ENGINES))   # the P6 engines' checks beside packcheck, like NoemaCircuit
+    p6_scripts = ''.join(f'<script>{esc(rd("engine/vendor/" + f))}</script>\n' for f in LIB_VENDOR) + ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (KERNEL, *P6_ENGINES, *(f for f in LIB_ENGINES if f != KERNEL)))   # the kernel first (the plugins 39–42 and the library use it; circuit-mna@1 reaches it only at run time), then the P6 engines' checks beside packcheck, like NoemaCircuit
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>

@@ -67,7 +67,7 @@ PY_WARN = [
 # sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as engine/packcheck.js checkSimSpec
 SPEC_FORMAT = "noema.sim-spec/v1"
 DEFAULT_ENGINE = "formula@1"
-ENGINES = {"formula@1", "circuit-mna@1", "thermal@1", "pid@1", "rf@1", "twin@1", "ode@1", "prob@1", "graph@1", "geom@1", "genetics@1", "seq@1", "med@1", "clinic@1", "anatomy@1", "timeline@1", "music@1", "map@1", "text@1", "craft@1", "logic@1"}   # the engines this version knows (the same list in engine/packcheck.js)
+ENGINES = {"formula@1", "circuit-mna@1", "thermal@1", "pid@1", "rf@1", "twin@1", "ode@1", "prob@1", "graph@1", "geom@1", "genetics@1", "seq@1", "med@1", "clinic@1", "anatomy@1", "timeline@1", "music@1", "map@1", "text@1", "craft@1", "logic@1", "rhetoric@1", "philo@1", "des@1", "field@1", "agents@1", "law@1"}   # the engines this version knows (the same list in engine/packcheck.js)
 SPEC_KEYS = {"format", "engine", "model", "title", "intro", "consts", "params", "derived", "outputs", "readouts", "plots", "bench"}
 # circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
 CIRCUIT = "circuit-mna@1"
@@ -76,7 +76,7 @@ BENCH_ENGINES = {"circuit-mna@1", "twin@1"}
 P6 = {"thermal@1": thermal, "pid@1": pid, "rf@1": rf, "twin@1": twin}
 P6_TIMED = ["thermal@1", "pid@1"]
 # the engine library (docs/INTERACTIVE_LIBRARY.md): general engines; each Python twin tools/lib_<name>.py has check_spec, exprs and keys
-LIB = {"ode@1": "lib_ode", "prob@1": "lib_prob", "graph@1": "lib_graph", "geom@1": "lib_geom", "genetics@1": "lib_genetics", "seq@1": "lib_seq", "med@1": "lib_med", "clinic@1": "lib_clinic", "anatomy@1": "lib_anatomy", "timeline@1": "lib_timeline", "music@1": "lib_music", "map@1": "lib_map", "text@1": "lib_text", "craft@1": "lib_craft", "logic@1": "lib_logic"}
+LIB = {"ode@1": "lib_ode", "prob@1": "lib_prob", "graph@1": "lib_graph", "geom@1": "lib_geom", "genetics@1": "lib_genetics", "seq@1": "lib_seq", "med@1": "lib_med", "clinic@1": "lib_clinic", "anatomy@1": "lib_anatomy", "timeline@1": "lib_timeline", "music@1": "lib_music", "map@1": "lib_map", "text@1": "lib_text", "craft@1": "lib_craft", "logic@1": "lib_logic", "rhetoric@1": "lib_rhetoric", "philo@1": "lib_philo", "des@1": "lib_des", "field@1": "lib_field", "agents@1": "lib_agents", "law@1": "lib_law"}
 LIB_KINDS = ["scalar", "series", "scene", "sound"]
 APP_ENGINES_MAX = 8   # html-app@1: the engines of the library a mini-app may use ("engines": [...], docs/INTERACTIVE.md §8.1) — the same rule in engine/packcheck.js
 LINE_STYLES = ["line", "bars", "steps", "points"]
@@ -252,7 +252,11 @@ def load_activities(sdir):
             except Exception as e: probs.append(f"ERROR activity {aid}: {os.path.relpath(f, sdir)}: {e}")
         a["strings"] = tables
         items.append(a)
-    return {"format": reg.get("format"), "items": items}, probs
+    parts = {}   # activities/_parts/<name>.json: part definitions a spec reuses with "use" (docs/INTERACTIVE.md §12.8)
+    for f in sorted(glob.glob(os.path.join(sdir, "activities", "_parts", "*.json"))):
+        try: parts[os.path.basename(f)[:-5]] = json.load(open(f, encoding="utf-8"))
+        except Exception as e: probs.append(f"ERROR activities/_parts/{os.path.basename(f)}: {e}")
+    return {"format": reg.get("format"), "items": items, **({"parts": parts} if parts else {})}, probs
 
 def own_spec(a):
     """the spec a wasm-module@1 item shows: its own spec, run by wasm@1 on the item itself (as the runtime completes it)"""
@@ -297,18 +301,29 @@ def check_app_engines(a):
         if x not in have: E.append(f'the bundle uses the engine {_qv(x)}: list it in "engines"')
     return E
 
-def need_requires(items):
+def _part_engines(a, lib=None):
+    """the engines of the parts of a sim-spec@1 item (a part from activities/_parts: its engine there)"""
+    if not isinstance(a, dict) or a.get("runtime") != "sim-spec@1" or not isinstance(a.get("spec"), dict) or not isinstance(a["spec"].get("parts"), list): return []
+    out = []
+    for p in a["spec"]["parts"]:
+        if not isinstance(p, dict): continue
+        if "engine" in p: out.append(p["engine"])
+        elif isinstance(p.get("use"), str) and isinstance(lib, dict) and isinstance(lib.get(p["use"]), dict): out.append(p["with"]["engine"] if isinstance(p.get("with"), dict) and "engine" in p["with"] else lib[p["use"]].get("engine"))
+        else: out.append(None)
+    return out
+
+def need_requires(items, lib=None):
     """what pack.requires must list for these activities: the core, each runtime, each engine other than formula@1 (the built-in one),
     and the engines a mini-app (html-app@1) lists"""
     items = [a for a in items if isinstance(a, dict)]
     if not items: return []
     rts = sorted({"runtime:" + a["runtime"] for a in items if isinstance(a.get("runtime"), str)})
-    engs = sorted({"engine:" + e for e in [_engine_of(a) for a in items] + [x for a in items for x in _app_engines(a)] if e and e != DEFAULT_ENGINE})
+    engs = sorted({"engine:" + e for e in [_engine_of(a) for a in items] + [x for a in items for x in _app_engines(a)] + [x for a in items for x in _part_engines(a, lib)] if isinstance(e, str) and e and e != DEFAULT_ENGINE})
     return ["activities/v1"] + rts + engs
 
 def requires(reg):
     """pack.requires for a registry: the core + each runtime and engine it uses (the app reloads to a newer build, or falls back, when it lacks one)"""
-    return need_requires((reg or {}).get("items") or []) if reg and reg.get("items") else []
+    return need_requires((reg or {}).get("items") or [], (reg or {}).get("parts")) if reg and reg.get("items") else []
 
 def fallback_media(reg):
     """the pictures the activities show when they cannot run (they need no exercises of their own)"""
@@ -316,7 +331,9 @@ def fallback_media(reg):
 
 def hash_part(reg):
     """what of the activities goes into pack.version: each bundle's sha256, its strings and its settings"""
-    return {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "wasm", "python", "h5p")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
+    h = {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "wasm", "python", "h5p")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
+    if isinstance(reg, dict) and reg.get("parts"): h["_parts"] = reg["parts"]   # activities/_parts (§12.8): a changed part is a new version
+    return h
 
 def check_activities(pack, translations=None):
     """→ (errors, warnings) of pack.activities, the blocks and sim exercises that use them, and pack.requires.
@@ -327,8 +344,16 @@ def check_activities(pack, translations=None):
     locs = sorted(set([own] + list(translations if translations is not None else (pack.get("translations") or {}).keys())))
     items = {}
     every = {x.get("id"): x for x in ((reg.get("items") if isinstance(reg, dict) else None) or []) if isinstance(x, dict) and isinstance(x.get("id"), str)}   # (a wasm@1 spec names a module item)
+    part_lib = reg["parts"] if isinstance(reg, dict) and isinstance(reg.get("parts"), dict) else None   # activities/_parts/<name>.json (§12.8)
     if reg is not None:
         if not isinstance(reg, dict) or reg.get("format") != FORMAT: E.append(f'activities: format must be "{FORMAT}"')
+        if isinstance(reg, dict) and "parts" in reg:
+            if not isinstance(reg["parts"], dict): E.append("activities.parts must be an object {name: part} (the files activities/_parts/<name>.json)")
+            else:
+                for k, d in reg["parts"].items():
+                    if not USE_RE.match(k): E.append(f"activities/_parts/{k}.json: the name is lower-case letters, digits and - (at most 61)")
+                    elif not isinstance(d, dict): E.append(f"activities/_parts/{k}.json must be a part {{engine, model, outputs, inputs?}}")
+                    else: _unknown(d, [x for x in PART_KEYS if x not in ("id", "use", "with")], f"activities/_parts/{k}.json", E)
         for a in (reg.get("items") if isinstance(reg, dict) else None) or []:
             aid = a.get("id") if isinstance(a, dict) else None
             if not isinstance(aid, str) or not ID_RE.match(aid): E.append(f"activity {aid!r}: id must be lower-case letters, digits and - (2–61)"); continue
@@ -355,7 +380,7 @@ def check_activities(pack, translations=None):
                 E += [f"{w}: {m}" for m in check_app_engines(a)]
             elif rt == "sim-spec@1":
                 if "spec" not in a: E.append(f"{w}: the spec (activities/{aid}/spec.json) is missing")
-                else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, items=every)]
+                else: E += [f"{w}: {m}" for m in check_spec(a["spec"], a.get("strings") if isinstance(a.get("strings"), dict) else None, items=every, parts=part_lib)]
             elif rt == PY:
                 pk = [] if a.get("packages") is None else a.get("packages"); allowed = PY_BASE + PY_EXTRAS
                 if not (isinstance(pk, list) and len(pk) <= PY_PACKAGES_MAX and all(isinstance(x, str) for x in pk)): E.append(f"{w}: packages must be a list of names ({', '.join(allowed)})")
@@ -417,7 +442,7 @@ def check_activities(pack, translations=None):
         if aid not in used: W.append(f"activity {aid}: not used by any interactive block or sim exercise")
     if items:
         req = pack.get("requires") or []
-        need = need_requires(list(items.values()))
+        need = need_requires(list(items.values()), part_lib)
         miss = [x for x in need if x not in req]
         if miss: E.append(f"pack.requires must list {', '.join(miss)} (make_pack.py writes it)")
     return E, W
@@ -574,13 +599,332 @@ def spec_names(spec):
     out = [k for k in spec["consts"]] if isinstance(spec.get("consts"), dict) else []
     for k in ("params", "derived"): out += [x["id"] for x in _list(spec.get(k)) if isinstance(x, dict) and isinstance(x.get("id"), str)]
     out += [x["id"] for x in _list(spec.get("outputs")) if isinstance(x, dict) and isinstance(x.get("id"), str) and x.get("kind") == "scalar"]
+    out += [x["id"] for p in _list(spec.get("parts")) if isinstance(p, dict) for x in _list(p.get("outputs")) if isinstance(x, dict) and isinstance(x.get("id"), str) and x.get("kind") == "scalar"]   # parts (§12.8)
     if isinstance(spec.get("bench"), dict): out += BENCH_NAMES   # a bench's values: for the checks of a sim exercise only (never shown)
     return out
 
-def check_spec(spec, tables=None, engines=None, items=None, python=False):
+# ---------------------------------------------------------------- parts: several engines in one spec (docs/INTERACTIVE.md §12.8) — the SAME rules and messages as packcheck.js checkParts
+# spec.parts: [{id, engine, model, outputs, inputs?: {name: expression | {series, points?, stat?}}} | {id, use, with?}] (≤ 8); the output ids join the
+# spec's names; spec.couple: "chain" (default) | {loops: [{parts, tol, maxIter?, relax?, init?}], cosim: {tEnd, dt, parts, order?, t0?, time?, init?, iterate?}}.
+# A part's model sees the consts, the params and its own inputs.
+PARTS_LIM = {"parts": 8, "inputs": 24, "outputs": 48, "loops": 4, "iter": 50, "macro": 5000, "points": 2000}
+PART_KEYS = ["id", "engine", "model", "outputs", "inputs", "use", "with"]
+USE_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,60}$")
+STEPPERS = {"ode@1", "med@1", "clinic@1", "genetics@1", "des@1", "field@1", "agents@1", "thermal@1", "pid@1", "twin@1", "circuit-mna@1"}   # the engines that can be stepped in time (the same list in engine/packcheck.js)
+SPEC_KEYS |= {"parts", "couple"}
+
+def free_vars(src):
+    """the names an expression uses (its free variables), in order of appearance; [] when it does not parse"""
+    if not isinstance(src, str): return []
+    try: ast = SX.parse(src)
+    except Exception: return []
+    out = []
+    def walk(n):
+        if not isinstance(n, dict): return
+        if n.get("t") == "var":
+            if n["name"] not in out: out.append(n["name"])
+            return
+        for k in ("a", "b", "c"):
+            if n.get(k): walk(n[k])
+        for a in n.get("args") or []: walk(a)
+    walk(ast)
+    return out
+
+def _copy(v): return json.loads(json.dumps(v))
+
+def merge_deep(a, b):
+    """deep merge of plain objects (b wins; arrays and other values are replaced)"""
+    if not isinstance(a, dict) or not isinstance(b, dict): return a if b is None else _copy(b)
+    o = _copy(a)
+    for k, v in b.items(): o[k] = merge_deep(o[k], v) if isinstance(v, dict) and isinstance(o.get(k), dict) else _copy(v)
+    return o
+
+def resolve_parts(spec, lib, E):
+    """the parts of a spec with every `use` resolved against the pack's activities/_parts (lib: {name: part}) → [(i, w, part)] or None"""
+    ps = spec.get("parts"); L = PARTS_LIM; out = []
+    if not (isinstance(ps, list) and 1 <= len(ps) <= L["parts"]):
+        E.append(f"spec.parts must be a list of 1–{L['parts']} parts {{id, engine, model, outputs, inputs?}}")
+        if not isinstance(ps, list): return None
+    for i, p in enumerate(ps[:L["parts"]]):
+        w = f"spec.parts[{i}]"
+        if not isinstance(p, dict): E.append(f"{w} must be an object {{id, engine, model, outputs, inputs?}} or {{id, use, with?}}"); continue
+        _unknown(p, PART_KEYS, w, E)
+        q = p
+        if "use" in p:
+            if not (isinstance(p["use"], str) and USE_RE.match(p["use"])): E.append(f"{w}.use must be the name of a file activities/_parts/<name>.json (lower-case letters, digits and -)"); continue
+            d = lib.get(p["use"], None) if isinstance(lib, dict) and p["use"] in lib else KeyError
+            if d is KeyError: E.append(f"{w}.use: activities/_parts/{p['use']}.json is not in the pack"); continue
+            if not isinstance(d, dict): E.append(f"{w}.use: activities/_parts/{p['use']}.json must be a part {{engine, model, outputs, inputs?}}"); continue
+            if "with" in p and not isinstance(p["with"], dict): E.append(f"{w}.with must be an object (the fields of the part to change)"); continue
+            base = {k: d[k] for k in d if k in PART_KEYS and k not in ("id", "use", "with")}
+            q = merge_deep(base, p.get("with") or {})
+            for k in ("engine", "model", "outputs", "inputs"):
+                if k in p: q[k] = _copy(p[k])
+            q["id"] = p.get("id")
+        elif "with" in p: E.append(f"{w}.with needs use (the part of activities/_parts it changes)")
+        out.append((i, w, q))
+    return out
+
+def part_spec(spec, p):
+    """the spec one part shows its engine: its model and outputs, the spec's consts and params, and its inputs as names"""
+    consts = dict(spec["consts"]) if isinstance(spec.get("consts"), dict) else {}
+    for k in (p["inputs"].keys() if isinstance(p.get("inputs"), dict) else []):
+        if k not in consts: consts[k] = 0
+    s = {"format": SPEC_FORMAT, "engine": p.get("engine"), "consts": consts, "params": _list(spec.get("params"))}
+    if "model" in p: s["model"] = p["model"]
+    if "outputs" in p: s["outputs"] = p["outputs"]
+    return s
+
+def _part_msg(m, w): return re.sub(r"^spec(?=[.:\[])", lambda _: w, m)
+
+def parts_graph(spec, parts):
+    """the dependency graph of derived values and parts: nodes "d:<id>" and "p:<id>" in the spec's order, each with the nodes it needs; its
+    strongly connected components (Tarjan 1972)"""
+    nodes, deps, owner, label = [], {}, {}, {}
+    for d in _list(spec.get("derived")):
+        if isinstance(d, dict) and isinstance(d.get("id"), str) and "d:" + d["id"] not in label:
+            nodes.append("d:" + d["id"]); label["d:" + d["id"]] = d["id"]; owner.setdefault(d["id"], "d:" + d["id"])
+    for p in parts:
+        if isinstance(p.get("id"), str) and "p:" + p["id"] not in label:
+            nodes.append("p:" + p["id"]); label["p:" + p["id"]] = p["id"]
+            for o in _list(p.get("outputs")):
+                if isinstance(o, dict) and isinstance(o.get("id"), str): owner.setdefault(o["id"], "p:" + p["id"])
+    for n in nodes: deps[n] = []
+    def need(n, names):
+        a = deps[n]
+        for x in names:
+            o = owner.get(x)
+            if o and o not in a: a.append(o)
+    for d in _list(spec.get("derived")):
+        if isinstance(d, dict) and isinstance(d.get("id"), str) and "d:" + d["id"] in deps: need("d:" + d["id"], free_vars(d.get("expr")))
+    for p in parts:
+        if isinstance(p.get("id"), str) and "p:" + p["id"] in deps and isinstance(p.get("inputs"), dict):
+            for v in p["inputs"].values(): need("p:" + p["id"], free_vars(v) if isinstance(v, str) else [v["series"]] if isinstance(v, dict) and isinstance(v.get("series"), str) else [])
+    idx = [0]; st = []; on = set(); ix = {}; low = {}; sccs = []
+    def visit(v):
+        ix[v] = idx[0]; low[v] = idx[0]; idx[0] += 1; st.append(v); on.add(v)
+        for w in deps[v]:
+            if w not in ix: visit(w); low[v] = min(low[v], low[w])
+            elif w in on: low[v] = min(low[v], ix[w])
+        if low[v] == ix[v]:
+            c = []
+            while True:
+                w = st.pop(); on.discard(w); c.append(w)
+                if w == v: break
+            sccs.append(sorted(c, key=nodes.index))
+    for v in nodes:
+        if v not in ix: visit(v)
+    return {"nodes": nodes, "deps": deps, "sccs": sccs, "label": label}
+
+def _cycle_path(G, c):
+    s = c[0]; prev = {s: None}; q = [s]
+    while q:
+        v = q.pop(0)
+        for w in G["deps"][v]:
+            if w not in c: continue
+            if w == s:
+                path = []; x = v
+                while x is not None: path.insert(0, G["label"][x]); x = prev[x]
+                return path + [G["label"][s]]
+            if w not in prev: prev[w] = v; q.append(w)
+    return [G["label"][s], G["label"][s]]
+
+def _coupling_groups(spec, ids):
+    c = spec.get("couple"); out = []
+    if not isinstance(c, dict): return out
+    for i, l in enumerate(_list(c.get("loops"))):
+        if isinstance(l, dict) and isinstance(l.get("parts"), list): out.append({"k": "loop", "i": i, "parts": [x for x in l["parts"] if x in ids], "def": l})
+    s = c.get("cosim")
+    if isinstance(s, dict) and isinstance(s.get("parts"), list):
+        ps = [x for x in s["parts"] if x in ids]; ordr = [x for x in s["order"] if x in ps] if isinstance(s.get("order"), list) else []
+        out.append({"k": "cosim", "parts": ordr + [x for x in ps if x not in ordr], "def": s})
+    return out
+
+def parts_order(spec, parts):
+    """the order of evaluation (units, each after what it needs; ties in the spec's order) and the undeclared cycles [[names]]"""
+    G = parts_graph(spec, parts); ids = [p.get("id") for p in parts]; groups = _coupling_groups(spec, ids); unit_of = {}; units = []; cycles = []
+    def g_of(pid): return next((j for j, g in enumerate(groups) if pid in g["parts"]), -1)
+    for j, g in enumerate(groups):
+        u = {**({"k": "loop", "i": g["i"]} if g["k"] == "loop" else {"k": "cosim"}), "parts": list(g["parts"]), "derived": [], "key": f"g{j}"}
+        units.append(u)
+        for p in g["parts"]: unit_of["p:" + p] = u
+    for c in G["sccs"]:
+        if not (len(c) > 1 or c[0] in G["deps"][c[0]]): continue
+        ps = [n[2:] for n in c if n.startswith("p:")]; gs = list(dict.fromkeys(g_of(p) for p in ps))
+        if ps and len(gs) == 1 and gs[0] >= 0:
+            u = unit_of["p:" + ps[0]]
+            for n in c:
+                if n.startswith("d:") and n not in unit_of: u["derived"].append(n[2:]); unit_of[n] = u
+        else: cycles.append(_cycle_path(G, c))
+    for n in G["nodes"]:
+        if n not in unit_of:
+            u = {"k": "derived", "id": n[2:], "key": n} if n.startswith("d:") else {"k": "part", "id": n[2:], "key": n}
+            units.append(u); unit_of[n] = u
+    for u in units:
+        if "derived" in u: u["derived"].sort(key=lambda a: G["nodes"].index("d:" + a))
+    def rank(u): return min([G["nodes"].index(n) for n in G["nodes"] if unit_of[n] is u] + [10 ** 9])
+    udeps = {id(u): [] for u in units}
+    for n in G["nodes"]:
+        for m in G["deps"][n]:
+            a, b = unit_of[n], unit_of[m]
+            if a is not b and b not in udeps[id(a)]: udeps[id(a)].append(b)
+    done = []; order = []
+    if not cycles:
+        while len(order) < len(units):
+            ready = sorted([u for u in units if not any(u is x for x in done) and all(any(b is x for x in done) for b in udeps[id(u)])], key=rank)
+            if not ready: break
+            done.append(ready[0]); order.append(ready[0])
+    return [{k: v for k, v in u.items() if k != "key"} for u in order], cycles
+
+def parts_plan(spec, lib=None):
+    """→ {parts, order, errors, cycles}: what the runtime (35_activity_sim.js) runs (the twin of packcheck.js partsPlan)"""
+    E = []; R = (resolve_parts(spec, lib, E) or []) if isinstance(spec, dict) else []
+    parts = [p for _, _, p in R]
+    order, cycles = parts_order(spec, parts)
+    return {"parts": parts, "order": order, "errors": E, "cycles": cycles}
+
+def check_parts(spec, E, name, key, items, lib, cp, known):
+    """check the parts (the first half: before the derived values) — registers every output id as a name of the spec"""
+    L = PARTS_LIM
+    R = resolve_parts(spec, lib, E) or []
+    info = {"R": R, "cp": cp, "parts": [], "scalars": [], "series": [], "scenes": [], "sounds": [], "anyLib": False, "outOf": {}, "kindOf": {}, "ids": []}
+    n_out = 0
+    for i, w, p in R:
+        pid = p.get("id")
+        if not (isinstance(pid, str) and BENCH_ID_RE.match(pid)): E.append(f"{w}.id must be an id (a letter, then letters, digits, _ or -; at most 32)")
+        elif pid in info["ids"]: E.append(f"{w}.id: the part {pid} is listed twice")
+        else: info["ids"].append(pid)
+        eng = p.get("engine"); lib1 = isinstance(eng, str) and eng in LIB
+        if eng == DEFAULT_ENGINE: E.append(f"{w}.engine: {DEFAULT_ENGINE} computes nothing a part could add (use derived)")
+        elif not isinstance(eng, str) or eng not in known: E.append(f"{w}.engine: unknown engine {_qv(eng)} (this version knows {', '.join(sorted(e for e in known if e != DEFAULT_ENGINE))})")
+        if lib1: info["anyLib"] = True
+        if "model" in p and not isinstance(p["model"], dict): E.append(f"{w}.model must be an object")
+        ins = p.get("inputs"); in_names = []
+        if "inputs" in p:
+            if not (isinstance(ins, dict) and len(ins) <= L["inputs"]): E.append(f"{w}.inputs must be an object of at most {L['inputs']} inputs {{name: number | expression | {{series: \"<output id>\"}}}}")
+            else:
+                for k in ins:
+                    if _bad_name(k): E.append(f"{w}.inputs: {_qv(k)} is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)")
+                    else: in_names.append(k)
+        os_ = p.get("outputs"); mine = {"id": pid, "eng": eng, "lib": lib1, "w": w, "i": i, "p": p, "scalars": [], "series": [], "scenes": [], "sounds": [], "inNames": in_names}
+        if not (isinstance(os_, list) and 1 <= len(os_) <= SPEC_LIM["outputs"]): E.append(f"{w}.outputs must be a list of 1–{SPEC_LIM['outputs']} {{id, kind}}")
+        else:
+            for j, o in enumerate(os_):
+                wo = f"{w}.outputs[{j}]"; kinds = LIB_KINDS if lib1 else ["scalar", "series"]
+                if not (isinstance(o, dict) and o.get("kind") in kinds): E.append(f"{wo} must be {{id, kind: {' | '.join(kinds)}}}"); continue
+                n_out += 1
+                if name(o.get("id"), wo + ".id"):
+                    k = {"scalar": "scalars", "series": "series", "scene": "scenes", "sound": "sounds"}[o["kind"]]
+                    mine[k].append(o["id"]); info[k].append(o["id"]); info["outOf"][o["id"]] = pid; info["kindOf"][o["id"]] = o["kind"]
+        sub = part_spec(spec, p); names = list(cp) + [n for n in in_names if n not in cp]; E2 = []
+        if isinstance(eng, str) and eng in known:
+            if eng == CIRCUIT: check_circuit(sub, names, E2)
+            elif eng in P6: check_engine(sub, eng, names, E2)
+            elif lib1: check_lib(sub, eng, names, E2, lambda k, wk, need=False: key(k, _part_msg(wk, w), need))
+            if eng == WASM_ENGINE and items is not None: E2 += WK.check_model(sub, items)
+        E += [_part_msg(m, w) for m in E2]
+        info["parts"].append(mine)
+    if n_out > L["outputs"]: E.append(f"spec.parts: at most {L['outputs']} outputs in all")
+    return info
+
+def check_part_links(spec, info, E, names, cp, seen, key, name):
+    """check the parts (the second half: inputs, coupling, the order, the bench), once every name of the spec is known"""
+    L = PARTS_LIM; ids = info["ids"]; c = spec.get("couple"); in_group = {}
+    def tol(v, w, has):
+        if not has: E.append(f"{w}.tol is required: a number > 0 (the largest relative change that counts as settled)")
+        elif not (_num(v) and v > 0): E.append(f"{w}.tol must be a number > 0")
+    def max_iter(o, w):
+        if "maxIter" in o and not (_int(o["maxIter"]) and 1 <= o["maxIter"] <= L["iter"]): E.append(f"{w}.maxIter is a whole number 1–{L['iter']}")
+    def group_parts(ps, w, what):
+        if not (isinstance(ps, list) and 1 <= len(ps) <= L["parts"] and all(isinstance(x, str) for x in ps)): E.append(f"{w}.parts must be a list of 1–{L['parts']} ids of spec.parts"); return []
+        ok = []
+        for x in ps:
+            if x not in ids: E.append(f"{w}.parts: {_qv(x)} is not a part of spec.parts")
+            elif x in ok: E.append(f"{w}.parts lists the part {x} twice")
+            elif x in in_group: E.append(f"{w}.parts: the part {x} is already in {in_group[x]}")
+            else: ok.append(x); in_group[x] = what
+        return ok
+    def init_of(o, has, w, ps):
+        if not has: return
+        if not isinstance(o, dict): E.append(f"{w}.init must be an object {{output id: number}} (the first guesses)"); return
+        for k, v in o.items():
+            if not (k in info["outOf"] and info["outOf"][k] in ps and info["kindOf"].get(k) == "scalar"): E.append(f"{w}.init.{k} must name a scalar output of a part of the {'co-simulation' if w.endswith('cosim') else 'loop'}")
+            elif not _num(v): E.append(f"{w}.init.{k} must be a number")
+    cosim_parts = []
+    if "couple" in spec and c != "chain":
+        if not isinstance(c, dict): E.append('spec.couple is "chain" or {loops?: […], cosim?: {…}}')
+        else:
+            _unknown(c, ["loops", "cosim"], "spec.couple", E)
+            if "loops" in c:
+                ls = c["loops"]
+                if not (isinstance(ls, list) and 1 <= len(ls) <= L["loops"]): E.append(f"spec.couple.loops must be a list of 1–{L['loops']} loops {{parts, tol, maxIter?, relax?, init?}}")
+                else:
+                    for i, l in enumerate(ls):
+                        w = f"spec.couple.loops[{i}]"
+                        if not isinstance(l, dict): E.append(f"{w} must be an object {{parts, tol, maxIter?, relax?, init?}}"); continue
+                        _unknown(l, ["parts", "tol", "maxIter", "relax", "init"], w, E)
+                        ps = group_parts(l.get("parts"), w, f"the loop {i}")
+                        tol(l.get("tol"), w, "tol" in l); max_iter(l, w)
+                        if "relax" in l and not (_num(l["relax"]) and 0 < l["relax"] <= 1): E.append(f"{w}.relax is a number in (0, 1] (1 = no relaxation)")
+                        init_of(l.get("init"), "init" in l, w, ps)
+            if "cosim" in c:
+                w = "spec.couple.cosim"; s = c["cosim"]
+                if not isinstance(s, dict): E.append(f"{w} must be an object {{tEnd, dt, parts, order?, t0?, time?, init?, iterate?}}")
+                else:
+                    _unknown(s, ["tEnd", "dt", "parts", "order", "t0", "time", "init", "iterate"], w, E)
+                    cosim_parts = group_parts(s.get("parts"), w, "the co-simulation")
+                    for pid in cosim_parts:
+                        q = next((x for x in info["parts"] if x["id"] == pid), None)
+                        if q and isinstance(q["eng"], str) and q["eng"] not in STEPPERS: E.append(f"{w}.parts: the engine {q['eng']} of the part {pid} cannot be stepped in time (a co-simulation needs {', '.join(sorted(STEPPERS))}); couple it in a chain or a loop")
+                    te = dt = None
+                    if "tEnd" not in s: E.append(f"{w}.tEnd is required (when the co-simulation ends)")
+                    else: te = _num_or_expr(s["tEnd"], cp, f"{w}.tEnd", E, True)
+                    if "dt" not in s: E.append(f"{w}.dt is required (the macro step: how often the parts exchange their values)")
+                    else: dt = _num_or_expr(s["dt"], cp, f"{w}.dt", E, True)
+                    t0 = 0 if "t0" not in s else _num_or_expr(s["t0"], cp, f"{w}.t0", E, False)
+                    if _num(te) and _num(dt) and _num(t0) and math.ceil((te - t0) / dt - 1e-9) > L["macro"]: E.append(f"{w}: (tEnd − t0) / dt is more than {L['macro']} macro steps")
+                    if _num(te) and _num(t0) and not te > t0: E.append(f"{w}: tEnd must be after t0")
+                    if "order" in s and not (isinstance(s["order"], list) and len(s["order"]) == len(cosim_parts) and all(x in s["order"] for x in cosim_parts)): E.append(f"{w}.order must list each part of the co-simulation once (the order they exchange in)")
+                    if "time" in s and name(s["time"], f"{w}.time"): info["series"].append(s["time"])
+                    init_of(s.get("init"), "init" in s, w, cosim_parts)
+                    if "iterate" in s:
+                        it = s["iterate"]
+                        if not isinstance(it, dict): E.append(f"{w}.iterate must be an object {{tol, maxIter?}}")
+                        else: _unknown(it, ["tol", "maxIter"], f"{w}.iterate", E); tol(it.get("tol"), f"{w}.iterate", "tol" in it); max_iter(it, f"{w}.iterate")
+    for q in info["parts"]:
+        ins = q["p"]["inputs"] if isinstance(q["p"].get("inputs"), dict) else {}; co = q["id"] in cosim_parts
+        nm = names + [o for o in info["outOf"] if info["outOf"][o] in cosim_parts and o not in names] if co else names
+        for k in q["inNames"]:
+            v = ins[k]; wi = f"{q['w']}.inputs.{k}"
+            if isinstance(v, str):
+                m = _expr_problem(v, nm, wi)
+                if m: E.append(m)
+            elif _num(v): pass   # a number
+            elif isinstance(v, dict):
+                _unknown(v, ["series", "points", "stat"], wi, E)
+                if not (isinstance(v.get("series"), str) and info["kindOf"].get(v["series"]) == "series" and info["outOf"].get(v["series"]) != q["id"]): E.append(f"{wi}.series must name a series output of another part")
+                elif co and info["outOf"].get(v["series"]) in cosim_parts: E.append(f"{wi}: the parts of a co-simulation exchange numbers at each step, not series (use the output's id in a formula)")
+                if "points" in v and not (_int(v["points"]) and 2 <= v["points"] <= L["points"]): E.append(f"{wi}.points is a whole number 2–{L['points']} (a series input is at most {L['points']} points)")
+                if "stat" in v and v["stat"] not in STATS: E.append(f"{wi}.stat is one of {', '.join(STATS)}")
+                if "stat" in v and "points" in v: E.append(f"{wi}: stat makes a number of the series, points resamples it: one or the other")
+            else: E.append(f'{wi} must be a number, an expression or {{series: "<output id>"}}')
+    good = [{**q["p"], "outputs": [o for o in _list(q["p"].get("outputs")) if isinstance(o, dict) and isinstance(o.get("id"), str) and info["outOf"].get(o["id"]) == q["id"]]}
+            for k, q in enumerate(info["parts"]) if q["id"] in info["ids"] and next(j for j, x in enumerate(info["parts"]) if x["id"] == q["id"]) == k]
+    for cy in parts_order(spec, good)[1]: E.append(f"spec.parts: {' → '.join(cy)} depend on each other in a cycle: declare it in spec.couple.loops (a fixed point) or spec.couple.cosim (in time)")
+    if spec.get("bench") is not None:
+        b = spec["bench"]; q = next((x for x in info["parts"] if x["id"] == b.get("part")), None) if isinstance(b, dict) else None
+        if not isinstance(b, dict) or not q or q["eng"] not in BENCH_ENGINES: E.append(f"spec.bench.part must be the id of a part whose engine takes measurements ({', '.join(sorted(BENCH_ENGINES))})")
+        else:
+            sub = part_spec(spec, q["p"]); sub["bench"] = {k: v for k, v in b.items() if k != "part"}
+            check_bench(sub, list(cp) + [n for n in q["inNames"] if n not in cp], seen, E, key, q["eng"])
+
+def _bad_name(n): return not (isinstance(n, str) and NAME_RE.match(n)) or n in SX.CONSTS or n in ("true", "false") or bool(SX.check(n))
+
+def check_spec(spec, tables=None, engines=None, items=None, python=False, parts=None):
     """→ errors of a sim-spec@1 spec. tables: {locale: {key: text}} (every label key must be in each); engines: the known engine ids;
     items: {id: item} of the pack (a wasm@1 model names its module there; None = the model is not checked here).
-    python: the spec of a py-module@1 activity (its outputs come from Python's step(): no engine, no model, no bench, at least one output)."""
+    python: the spec of a py-module@1 activity (its outputs come from Python's step(): no engine, no model, no bench, at least one output).
+    parts: {name: part} of activities/_parts (what spec.parts[i].use names)."""
     E = []
     if not isinstance(spec, dict): return ["spec: a JSON object is required (activities/<id>/spec.json)"]
     if len(json.dumps(spec, ensure_ascii=False, separators=(",", ":")).encode("utf-8")) > SPEC_LIM["bytes"]: E.append(f"spec: at most {SPEC_LIM['bytes'] // 1024} KB")
@@ -591,6 +935,10 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
         if "engine" in spec: E.append("spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out")
         if "model" in spec: E.append("spec.model: a py-module@1 activity has no engine model (its Python code is the model)")
     elif not isinstance(eng, str) or eng not in known: E.append(f"spec: unknown engine {eng!r} (this version knows {', '.join(sorted(known))})")
+    PT = not python and "parts" in spec   # several engines in one spec (§12.8)
+    if python and "parts" in spec: E.append("spec.parts: a py-module@1 activity has no parts (its Python code is the model)")
+    if PT and isinstance(eng, str) and eng != DEFAULT_ENGINE: E.append(f'spec.engine: a spec with parts names the engine of each part (leave spec.engine out, or "{DEFAULT_ENGINE}")')
+    if not PT and "couple" in spec: E.append("spec.couple: coupling needs parts (spec.parts)")
     if eng == DEFAULT_ENGINE and "model" in spec: E.append("spec: model configures another engine; formula@1 has none")
     if spec.get("model") is not None and not isinstance(spec["model"], dict): E.append("spec: model must be an object")
     keys = set(); seen = set()
@@ -645,18 +993,23 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
             if len(set(vals)) != len(vals): E.append(f"{w}.options: two options have the same value")
             if p.get("default") is not None and p["default"] not in vals: E.append(f"{w}.default must be the value of one of the options")
     names = sorted(seen)   # consts and params (the order does not matter to a check)
+    PI = check_parts(spec, E, name, key, items, parts if isinstance(parts, dict) else None, list(names), known) if PT else None
     ds = spec.get("derived")
     if ds is not None and not (isinstance(ds, list) and len(ds) <= SPEC_LIM["derived"]): E.append(f"spec.derived must be a list of at most {SPEC_LIM['derived']} {{id, expr}}")
     for i, d in enumerate(_list(ds)[:SPEC_LIM["derived"]]):
         w = f"spec.derived[{i}]"
         if not isinstance(d, dict): E.append(f"{w} must be an object {{id, expr}}"); continue
-        expr(d.get("expr"), list(names), w + ".expr")
+        expr(d.get("expr"), names + PI["scalars"] if PI else list(names), w + ".expr")
         if name(d.get("id"), w + ".id"): names.append(d["id"])
     in_names = list(names)   # what an engine's inputs may use: consts, params, derived
-    os_ = spec.get("outputs"); series = []; scenes = []; sounds = []; lib = isinstance(eng, str) and eng in LIB
+    os_ = spec.get("outputs"); series = []; scenes = []; sounds = []; lib = PI["anyLib"] if PI else isinstance(eng, str) and eng in LIB
+    if PI:
+        names += PI["scalars"]; check_part_links(spec, PI, E, names, PI["cp"], seen, key, name)
+        series += PI["series"]; scenes += PI["scenes"]; sounds += PI["sounds"]
     if python and not (isinstance(os_, list) and os_): E.append("spec.outputs: list what step() returns, at least one {id, kind: scalar | series}")
     if os_ is not None:
-        if eng == DEFAULT_ENGINE: E.append("spec.outputs come from an engine; formula@1 has none (use derived)")
+        if PT: E.append("spec.outputs: a spec with parts lists the outputs of each part (spec.parts[i].outputs)")
+        elif eng == DEFAULT_ENGINE: E.append("spec.outputs come from an engine; formula@1 has none (use derived)")
         elif not (isinstance(os_, list) and len(os_) <= SPEC_LIM["outputs"]): E.append(f"spec.outputs must be a list of at most {SPEC_LIM['outputs']} {{id, kind}}")
         else:
             for i, o in enumerate(os_):
@@ -722,9 +1075,9 @@ def check_spec(spec, tables=None, engines=None, items=None, python=False):
             key(m.get("label"), wm + ".label"); expr(m.get("expr"), names, wm + ".expr")
     if eng == CIRCUIT: check_circuit(spec, in_names, E)
     elif isinstance(eng, str) and eng in P6: check_engine(spec, eng, in_names, E)
-    elif lib: check_lib(spec, eng, in_names, E, key)
+    elif lib and not PT: check_lib(spec, eng, in_names, E, key)
     if eng == WASM_ENGINE and items is not None: E += WK.check_model(spec, items)
-    if spec.get("bench") is not None:
+    if spec.get("bench") is not None and not PT:
         if eng not in BENCH_ENGINES: E.append(f"spec.bench needs an engine that can take measurements ({', '.join(sorted(BENCH_ENGINES))})")
         else: check_bench(spec, in_names, seen, E, key, eng)
     if tables:

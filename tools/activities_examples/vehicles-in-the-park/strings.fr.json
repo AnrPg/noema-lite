@@ -1,0 +1,23 @@
+{
+ "title": "Interdit aux véhicules dans le parc",
+ "intro": "Un arrêté de 1958 dit : les véhicules sont interdits dans le parc. Une règle plus récente laisse entrer un véhicule en intervention d'urgence, et un monument aux morts (un vieux char sur un socle) n'a jamais été visé. Activez ce qui se présente à l'entrée et regardez quelles règles s'appliquent, lesquelles cèdent et pourquoi. C'est l'exemple célèbre de H. L. A. Hart (1958) : une règle a un noyau clair et une zone de pénombre, et ses exceptions sont d'autres règles qui l'emportent sur elle.",
+ "carLabel": "Une voiture particulière",
+ "ambulanceLabel": "Une ambulance",
+ "emergencyLabel": "Elle est en intervention d'urgence",
+ "memorialLabel": "Un char installé comme monument aux morts",
+ "bicycleLabel": "Un vélo",
+ "ruleCar": "Une voiture est un véhicule.",
+ "ruleAmbulance": "Une ambulance est un véhicule.",
+ "ruleTank": "Un char est un véhicule.",
+ "ruleBicycleWord": "Dans la langue courante, un vélo est un véhicule.",
+ "ruleBicycleDef": "L'arrêté ne vise que les véhicules à moteur, et un vélo n'en est pas un.",
+ "ruleNoVehicles": "Véhicules interdits dans le parc (sauf s'il s'agit d'un monument).",
+ "ruleEmergency": "Un véhicule en intervention d'urgence peut entrer.",
+ "forbLabel": "L'entrée est interdite (1 = oui)",
+ "r1Label": "L'interdiction des véhicules : 2 s'applique, 1 cède, 0 ne concerne pas le cas",
+ "firedLabel": "Règles qui s'appliquent",
+ "defeatedLabel": "Règles qui cèdent",
+ "sceneTitle": "Les règles et laquelle l'emporte",
+ "checkDefeated": "L'interdiction des véhicules s'applique mais cède.",
+ "checkAllowed": "L'entrée n'est pas interdite."
+}

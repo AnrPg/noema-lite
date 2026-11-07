@@ -1,14 +1,14 @@
 # `logic@1` — logic from truth tables to norms (`engine/src/47_lib_logic.js`, `NoemaLibLogic`)
 
 `logic@1` is a general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). It has **one formula language**, written in ASCII or
-Unicode. Its parser gives precise error codes and positions. Over that language it runs **22 tasks**:
+Unicode. Its parser gives precise error codes and positions. Over that language it runs **24 tasks**:
 
 - **Propositional logic.** Truth tables, equivalence, entailment, NNF/CNF/DNF/Tseitin, SAT by DPLL or CDCL with a trace, resolution
   refutation, Fitch natural deduction checked line by line, Horn clauses with forward and backward chaining.
 - **Many-valued logics.** K3, LP, Ł3, Łukasiewicz, Gödel and product logic.
 - **First-order logic.** Finite models, unification, prenex and Skolem forms, clausal form, resolution, and the categorical
   syllogisms.
-- **Modal logic.** Kripke models, frame correspondence for T, D, 4, 5 and B, and tableaux for K, D, T, K4 and S4.
+- **Modal logic.** Kripke models, frame correspondence for T, D, 4, 5 and B, and tableaux for K, D, T, K4, S4, B and S5.
 - **Epistemic logic.** Multi-agent S5, public announcements, common and distributed knowledge, and three puzzles: the muddy
   children, Cheryl's birthday and the consecutive numbers.
 - **Temporal logic.** LTL on lasso and finite traces, and CTL by fixpoints, including the mutual-exclusion protocol.
@@ -16,6 +16,9 @@ Unicode. Its parser gives precise error codes and positions. Over that language 
   norms with deadlines over agent traces. Norms can conflict; the conflicts are resolved by lex superior, specialis and posterior.
 - **Abstract argumentation.** Dung frameworks with the grounded, complete, preferred and stable semantics; semi-stable and ideal
   are in the API.
+- **Structured and bipolar argumentation.** ASPIC+ (strict and defeasible rules, axioms and ordinary premises, undercut / rebut /
+  undermine, last-link and weakest-link with elitist or democratic comparison, the rationality postulates checked) producing a
+  Dung framework; bipolar frameworks with supported, secondary, mediated and extended attacks (general, deductive, necessary support).
 
 Each task gives scalars, series, a scene and a trace. A slider bound to `model.step` walks through the trace: the SAT decisions,
 the resolvents, the tableau's worlds, the announcements, the grounded iterations, or the days of a norm trace.
@@ -24,9 +27,9 @@ The Python twin is `tools/lib_logic.py`. It has the same tables and the same par
 It gives the same problems as the JS `checkSpec`, and it does not compute the tasks.
 
 The tests:
-- `node tests/lib_logic.js` has 132 assertions: published values, every code, the API, the adapter, the Worker, speed and the
+- `node tests/lib_logic.js` has 148 assertions: published values, every code, the API, the adapter, the Worker, speed and the
   reference activities.
-- `tests/fixtures/enginelib/logic.json` has 47 specs (22 good, 25 bad). `node tests/enginelib.js` runs the JS ↔ Python parity on
+- `tests/fixtures/enginelib/logic.json` has 60 specs (28 good, 32 bad). `node tests/enginelib.js` runs the JS ↔ Python parity on
   it once the catalogue lists `logic@1`; until then `tests/lib_logic.js` runs that parity itself.
 
 The reference activities are `tools/activities_examples/muddy-children` (epistemic) and `tools/activities_examples/duty-repair`
@@ -70,7 +73,7 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 
 | field | kind | for | meaning |
 |---|---|---|---|
-| `task` | enum, required | all | one of the 22 tasks of §3 |
+| `task` | enum, required | all | one of the 24 tasks of §3 (22 + `aspic`, `bipolar`) |
 | `formula` / `formulas` / `premises` / `goal` | formula / list ≤ 64 | most | the formulas of the task; `pick` (numx) chooses one of `formulas` |
 | `assign` | list ≤ 12 of `{atom, value: numx}` | truth-table, many-valued | the valuation of the readout `value` (0/1, or a degree 0–1) |
 | `atoms` | list ≤ 12 | truth-table, many-valued | the order of the columns (others follow in order of appearance) |
@@ -87,7 +90,7 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 | `edges` | `{u, v, ag?, on?}` | same | the accessibility relation; `ag` names an agent's relation (epistemic: required) |
 | `agents` (≤ 8), `s5` (default true) | | epistemic | each agent's relation is closed to an equivalence unless `s5` is false |
 | `world` / `initial` / `at` | ref / ref / numx | model tasks | the world a scalar `value` is read at (`at`: an index, wins) |
-| `system` | `K D T K4 S4` (default K) | tableau | |
+| `system` | `K D T K4 S4 B S5` (default K) | tableau | |
 | `announce` (≤ 64), `puzzle` | | epistemic | public announcements in order (after a puzzle's own); `puzzle: {kind: muddy | cheryl | consecutive, n, muddy, a, b}` |
 | `trace` (≤ 2000) | `{holds?, facts?, acts?, t?}` | ltl, norms | the states (ltl: `holds`, `facts` and `acts` all count) |
 | `loop`, `pos` | int / numx | ltl | the lasso's loop position (none: a finite trace); the position read |
@@ -96,6 +99,12 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 | `input` (≤ 64), `op`, `throughput` | | io | the input set A, `out1`–`out4`, out⁺ |
 | `order` | list of `superior specialis posterior` | norms | the order in which conflicts are resolved (default all three in that order) |
 | `args` (≤ 24) `{id, label?, x?, y?}`, `attacks` `{u, v, on?}`, `semantics`, `arg`, `ext` | | af | `arg`: the argument asked about; `ext` (numx): which extension the scene shows |
+| `kb` (≤ 64) `{f, kind: axiom | ordinary (default), rank?, on?}` | | aspic | the knowledge base: axioms cannot be attacked; `rank` (−1000…1000, default 0, higher = preferred) orders the ordinary premises |
+| `rules` (≤ 64) `{id, body: [literal] ≤ 8, head, kind: strict | defeasible (default), rank?, on?}` | | aspic | the rules; a defeasible rule's `id` is its name n(r): a conclusion ¬id undercuts it |
+| `contraries` (≤ 64) `{u, v}` | | aspic | u is a contrary of v (u attacks v one way); ¬ is the contradictory both ways |
+| `link` `last` (default) · `weakest`; `ordering` `elitist` (default) · `democratic`; `transpose` | | aspic | the argument ordering (§3.11); `transpose: true` closes the strict rules under transposition first |
+| `goal` | literal | aspic | the conclusion asked about (credulous, skeptical, accepted) |
+| `supports` `{u, v, on?}`, `support` `general` (default) · `deductive` · `necessary` | | bipolar | the support relation and how it is read (§3.12); `args`, `attacks`, `semantics`, `arg`, `ext` as for af |
 | `step` | numx | traces | how far the trace is shown (default: all); for epistemic, the number of announcements applied; for norms, the number of trace steps checked |
 | `view` | 4 numbers | scenes | the scene's view |
 
@@ -111,7 +120,8 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 | `horn` | a rule that is not a Horn clause, a goal that is not an atom |
 | `ref` | an edge, `world`, `initial`, an attack or `arg` names nothing; a tuple, constant or function value outside the domain; a predicate the structure lacks |
 | `arity` | tuples of different lengths; a predicate used with another number of arguments |
-| `duplicate` | a world, argument or norm listed twice |
+| `duplicate` | a world, argument, norm or ASPIC+ rule listed twice |
+| `literal` | aspic: a premise, rule body or head, contrary or goal that is not a literal (an atom or ¬atom; ¬¬p is p) |
 | `agent` | an epistemic edge without a declared agent; a formula naming an agent not in `agents` |
 | `output` | an `of` the task does not compute (the message lists those it does) |
 
@@ -244,8 +254,15 @@ goal (else `nd-goal`). Formulas are compared structurally, after parsing.
 | task | method and source | outputs |
 |---|---|---|
 | `kripke` | model checking by subformulas (Blackburn, de Rijke & Venema 2001 §1.3). The plain relation serves □ ◇ and SDL's O P F (von Wright 1951; O = □, P = ◇, F = □¬); `[a]` `<a>` use agent a's edges. Frame properties, and the axioms T □p→p, D □p→◇p, 4 □p→□□p, 5 ◇p→□◇p, B p→□◇p checked on the frame by every valuation of p (≤ 14 worlds; beyond that by the correspondence, code `correspondence`: Sahlqvist 1975, BdRV Thm 3.54) | `value count worlds reflexive serial transitive symmetric euclidean axT axD ax4 ax5 axB`; series `truth`; scene; code `not-serial` when deontic operators are read on a frame that is not serial |
-| `tableau` | labelled tableaux for K, D, T, K4, S4 (Fitting 1983; Goré 1999). NNF; the α rule (∧), β (∨ by backtracking), T (□φ ⇒ φ), π (each ◇ψ opens a world with ψ and every φ of □φ; K4 and S4 carry □φ too), D (a successor even without ◇), ancestor-subset blocking for K4 and S4. `formula`: valid = ¬φ has no model, satisfiable = φ has one. `premises` + `goal`: local consequence | `valid satisfiable nodes worlds steps frame`; trace: worlds, branches, clashes, blocks |
+| `tableau` | labelled tableaux for K, D, T, K4, S4 (Fitting 1983; Goré 1999); B and S5 in a global form (below). NNF; the α rule (∧), β (∨ by backtracking), T (□φ ⇒ φ), π (each ◇ψ opens a world with ψ and every φ of □φ; K4 and S4 carry □φ too), D (a successor even without ◇), ancestor-subset blocking for K4 and S4. `formula`: valid = ¬φ has no model, satisfiable = φ has one. `premises` + `goal`: local consequence | `valid satisfiable nodes worlds steps frame`; trace: worlds, branches, clashes, blocks |
 | `dyadic` | preference models (Hansson 1969; Åqvist 1987, system E): O(b / a) holds when every best a-world (the lowest `rank`) is a b-world. It holds at every world or at none. P(b / a) = ¬O(¬b / a); F(b / a) = O(¬b / a); O b = O(b / ⊤); □ and ◇ are universal. An a no world satisfies makes O(b / a) vacuously true (code `vacuous`) | `value count worlds`; series `truth`; scene: the worlds by rank |
+
+**B and S5** (Fitting 1983 ch. 3; Hughes & Cresswell 1996 ch. 6) are expanded globally: all the worlds at once, a β choice
+copies every world. In **B** the worlds form a tree whose edges count both ways, and each world sees itself: □φ at w puts φ at w,
+at its children and at its parent; ◇ψ at w is met by ψ at w or at a neighbour, otherwise a child is opened. The tree is no deeper
+than the modal depth, so no blocking is needed. In **S5** all worlds see each other: □φ anywhere puts φ and □φ everywhere; ◇ψ is
+met when any world holds ψ, otherwise one world is opened (at most one per ◇-subformula). An open state is a model (the Hintikka
+conditions hold by construction); a satisfiable set always has an open state (choose β and witnesses as the model does).
 
 **The paradoxes of SDL** are tableau tasks (system D). The engine gives:
 
@@ -366,6 +383,53 @@ Outputs: `extensions`, `credulous` and `skeptical` (for `arg`), `accepted` (`arg
 `frame`; series `labels` (1 in, 0 out, ½ undec); scene: the graph, in ok, out bad, undec warn. Semi-stable and ideal semantics are
 in the API (§9).
 
+### 3.11 Structured argumentation: ASPIC+ (`aspic`)
+
+Modgil & Prakken 2014 (the tutorial, Argument & Computation 5:31; definitions numbered as there), Modgil & Prakken 2013
+(AIJ 195:361), Prakken 2010. Literals only: an atom p or ¬p.
+
+- **Arguments** (Def. 3.6), built bottom-up: each premise of `kb` is an argument; a rule whose body literals are all conclusions of
+  arguments A1…An gives A1…An → / ⇒ head. Every combination of sub-arguments is built (≤ 200 arguments, code `budget`). A rule is
+  not applied when its head is already a conclusion inside the sub-arguments (no circular arguments).
+- **Attacks** (Def. 3.10): A *undercuts* B on B′ when B′ ∈ Sub(B) has a defeasible top rule r and Conc(A) ∈ ¬n(r) (n(r) = the
+  rule's `id`); A *rebuts* B on B′ when B′ has a defeasible top rule and Conc(A) ∈ ¬Conc(B′) (restricted rebut: a strict top rule
+  cannot be rebutted); A *undermines* B on an ordinary premise φ of B when Conc(A) ∈ ¬φ. Axioms cannot be undermined.
+- **Defeats** (Def. 3.12): an undercut always succeeds; a rebut or undermine succeeds when it is by a contrary (one-way) or
+  A ⊀ B′.
+- **The ordering** (Defs. 3.19–3.21). Ranks order the defeasible rules and the ordinary premises (higher = preferred). The set
+  comparison Γ ◁ Γ′: Γ = ∅ is never below; a non-empty Γ is below ∅; *elitist*: some X ∈ Γ is below every Y ∈ Γ′; *democratic*: every
+  X ∈ Γ is below some Y ∈ Γ′. *Last-link*: A ≺ B iff LastDefRules(A) ◁ LastDefRules(B), or both are empty and Prem_p(A) ◁ Prem_p(B).
+  *Weakest-link*: both strict → Prem_p ◁; both firm → DefRules ◁; otherwise both. (So under last-link a premise argument with no
+  defeasible rule is never below an argument that has one: undermining it fails unless by a contrary.)
+- The defeats form a Dung AF solved by `afSolve` (§3.10) with `semantics`.
+- **Rationality postulates** (Caminada & Amgoud 2007, AIJ 171:286), checked on every extension of the semantics: `subClosed`
+  (closed under sub-arguments), `strictClosed` (the conclusions are closed under the strict rules), `directConsistent`,
+  `indirectConsistent` (the strict closure is consistent). A failure raises code `postulate`. The conditions that guarantee them
+  (Modgil & Prakken 2013 Thms 6.10–6.14) are reported too: `transposed` (strict rules closed under transposition, Caminada & Amgoud
+  2007 Def. 21; code `not-transposed`; `transpose: true` adds the transposed rules, id `r'i`), `axiomsConsistent` (code
+  `axioms-inconsistent`), `wellFormed` (no contrary-only target is an axiom or the head of a strict rule; code `not-well-formed`).
+
+Outputs: `args attacks defeats extensions credulous skeptical accepted inCount subClosed strictClosed directConsistent
+indirectConsistent transposed wellFormed axiomsConsistent steps frame`; series `labels` (per argument, in build order: premises
+first); scene: the defeat graph (A1, A2 … with the conclusion under each; ≤ 60 arguments, else the trace as text); trace: each
+argument's structure, then each attack with its kind and ✓ when it is a defeat.
+
+### 3.12 Bipolar argumentation (`bipolar`)
+
+Cayrol & Lagasquie-Schiex 2005 (ECSQARU, LNAI 3571:378), 2013 (IJAR 54:876); necessary support: Nouioua & Risch 2010. Attacks →
+and supports ⇒ between arguments (⇒+ is a support path). The complex attacks are added until nothing changes:
+
+| `support` | adds | rule |
+|---|---|---|
+| `general` (2005) | supported, secondary (indirect) | a ⇒+ x → b gives a → b; a → x ⇒+ b gives a → b |
+| `deductive` (2013 §3) | supported, mediated | a ⇒+ x → b gives a → b; a → b with x ⇒+ b gives a → x |
+| `necessary` (2013 §4) | secondary, extended | a → x ⇒+ b gives a → b; x ⇒+ a with x → b gives a → b |
+
+Dung's semantics then run on the result. Outputs: as af, plus `attacks` (all after closure) and the counts `direct supported
+secondary mediated extended` (each added attack counted under the first rule that found it), `safe` (the shown extension attacks
+none of its members nor anything it supports; 2005 Def. 7) and `closed` (it holds whatever a member supports). Scene: direct
+attacks bad, complex ones warn, supports ok.
+
 ## 4. Outputs
 
 | task | scalars (`flag` everywhere) | series |
@@ -390,6 +454,8 @@ in the API (§9).
 | io | entails triggered | — |
 | norms | violations fulfilments pending conflicts steps frame | violationsPerStep activePerStep |
 | af | extensions credulous skeptical accepted inCount steps frame | labels |
+| aspic | args attacks defeats extensions credulous skeptical accepted inCount subClosed strictClosed directConsistent indirectConsistent transposed wellFormed axiomsConsistent steps frame | labels |
+| bipolar | extensions credulous skeptical accepted inCount attacks direct supported secondary mediated extended safe closed steps frame | labels |
 
 Every task has the scene `drawing`. A task with a trace and no picture of its own shows the trace as text lines (y = −i, `anchor:
 start`), up to `frame`. The roles are: `hi` for a decision or the selected world, `ok` for true, fulfilled or in, `bad` for false,
@@ -419,6 +485,8 @@ violated, a clash or out, `warn` for undecided or pending, and `muted` for the r
 | `finite` | LTL read as a finite trace |
 | `empty` | an announcement removed the actual world |
 | `parse`, `norm` | (API) a norm with a broken formula or shape was skipped |
+| `not-transposed`, `axioms-inconsistent`, `not-well-formed` | aspic: a condition of the rationality postulates does not hold (§3.11) |
+| `postulate` | aspic: a postulate fails on an extension |
 
 ## 6. Validity and limits
 
@@ -432,6 +500,8 @@ violated, a clash or out, `warn` for undecided or pending, and `muted` for the r
 | worlds / CTL states | 32 / 256 | `size` (check) |
 | domain | 8; the API's countermodel search ≤ 3 elements, 2¹⁶ predicate bits | `bounded`, `budget` |
 | argumentation | 24 arguments, 600 attacks, 4096 labellings, 2·10⁵ search nodes | `budget` |
+| ASPIC+ | 64 premises, 64 rules (256 with transposition), 200 arguments, 2·10⁵ combinations | `budget` |
+| tableau B / S5 | 20 000 nodes, 256 worlds, 2·10⁶ rule applications | `budget` |
 | norms / trace | 200 norms, 2000 steps (the API: 20 000 steps, 1000 agents) | `size`, `trace-truncated` |
 | proof | 200 lines | `size` (check) |
 
@@ -467,6 +537,11 @@ randomness.
 | mutual exclusion: safety ✓, liveness ✗, non-blocking ✓, no strict sequencing ✓ | Huth & Ryan 2004 §3.3.4 |
 | out1/out2/out3/out4 and throughput on the standard examples | Makinson & van der Torre 2000 |
 | Nixon diamond, odd cycle, reinstatement; ideal ∅ with d skeptically preferred | Dung 1995; Dung, Mancarella & Toni 2007 |
+| B: p → □◇p, ◇□p → p, ◇(p ∧ □q) ⊨ q; not 4. S5: 5, ◇□p → □p; □(p ∨ q) → □p ∨ □q fails | Hughes & Cresswell 1996 |
+| snores / professor: 5 arguments, 2 rebuts, 1 defeat; last-link justifies AccessDenied, weakest-link ¬AccessDenied | Modgil & Prakken 2014 Ex. 3.23 |
+| ring / party animal: without transposition direct consistency fails; with it all four postulates hold (8 arguments) | Caminada & Amgoud 2007 Ex. 4 |
+| undercut always defeats; an axiom is never undermined; a contrary-rebut ignores preferences; elitist ≠ democratic | Modgil & Prakken 2013 Defs. 3.10–3.19 |
+| supported, secondary, mediated and extended attacks on 3–4 arguments; support chains | Cayrol & Lagasquie-Schiex 2005, 2013 |
 
 ## 9. API for other engines (philo@1, rhetoric@1, law@1, agents@1)
 
@@ -483,7 +558,7 @@ that holds NoemaExpr, the core and this module. ASTs are plain objects `{t, …}
 | `evalProp(ast, valuation)` | boolean (missing atoms are false) |
 | `evalMV(ast, valuation, logic)` | a degree 0–1 |
 | `rowsOf(atoms)`, `truthTable(asts, atoms?)` | the rows TT…T first; `{atoms, rows, cols}` |
-| `entails(premises, conclusion, opts)` | `{valid, counter, codes}`. `opts.logic`: `prop` (the first countermodel in row order, ≤ 20 atoms); `k3 lp l3 lukasiewicz godel product`; `K D T K4 S4` (tableau, no counter); `fol` (a countermodel among the structures of ≤ `maxSize` ≤ 3 elements, else valid with code `bounded`) |
+| `entails(premises, conclusion, opts)` | `{valid, counter, codes}`. `opts.logic`: `prop` (the first countermodel in row order, ≤ 20 atoms); `k3 lp l3 lukasiewicz godel product`; `K D T K4 S4 B S5` (tableau, no counter); `fol` (a countermodel among the structures of ≤ `maxSize` ≤ 3 elements, else valid with code `bounded`) |
 | `nnf`, `cnfClauses(ast, limit, dual)`, `tseitin`, `sat(clauses, solver, D)`, `resolution`, `hornRule`, `forwardChain`, `backwardChain`, `checkProof(lines, goal)` | the propositional machinery (`D = diagSet()`) |
 | `structure(m)`, `evalFol(ast, S, env, {ops: 0})`, `freeVars`, `unify(pairs, isVar, ev)`, `prenex`, `skolem`, `folClauses`, `folResolution`, `syllogism(mood, figure, existential)` | first-order |
 | `kmodel(worlds, edges, opts)`, `satK(ast, M, ctx)`, `restrict(M, keep)`, `equivClose`, `frameProps`, `axiomValid`, `tableau(asts, system, D)`, `puzzle(pz)` | modal, deontic, epistemic, dyadic (ctx `{ops: 0, D, dyadic?}`) |
@@ -492,6 +567,10 @@ that holds NoemaExpr, the core and this module. ASTs are plain objects `{t, …}
 | `evalNorms(norms, trace, opts)` | `{violations, fulfilments, pending, conflicts, codes, counts, perStep, activePerStep}` |
 | `normMonitor(norms, opts)` | `{step(st) → {violations, fulfilments}, result()}` |
 | `afSolve(n, attacks, D)` | `{grounded, iters, complete, preferred, stable, atk}` |
+| `aspic(theory, opts)` | theory `{kb: [{f, kind, rank}], rules: [{id, body, head, kind, rank}], contraries: [[u, v]]}` (literals as text `p` `¬p` `~p` or `-p`), opts `{link, ordering, transpose}` → `{args: [{conc, rule, kb, subs, sub, prem, defRules, lastDefRules, strict, firm}], rules, kb, attacks: [[a, b, kind]], defeats, n, att, less(i, j), postulates(labellings), transposed, axiomsConsistent, wellFormed, codes}`; `afSolve(r.n, r.att, D)` gives the extensions |
+| `bipolar(n, attacks, supports, mode)` | `{att, kind: {'a,b': direct | supported | secondary | mediated | extended}, reach, safe(l), closed(l), mode}`; `SUPPORTS` lists the modes |
+| `litOf(text | ast)` | `'p'`, `'-p'` or null |
+| `tableauGlobal(asts, 'B' | 'S5', D)` | the B / S5 tableau (`tableau` and `entails` call it for those systems) |
 | `AF.grounded / complete / preferred / stable / semiStable / ideal (n, attacks)` | labellings (1 in, 0 out, ½ undec) |
 | `AF.accept(n, attacks, semantics, arg)` | `{credulous, skeptical}` |
 
@@ -504,11 +583,13 @@ that holds NoemaExpr, the core and this module. ASTs are plain objects `{t, …}
   `{norm, agent?, step, t, since}`, pending `{norm, agent?, since}`, conflict `{step, t, a, b, agent?, winner | null, by}`.
 - `evalNorms(norms, trace)` is exactly a monitor fed every step, then `result()`.
 
-ASPIC+ structured arguments are not built yet: an engine that needs them builds its arguments and attacks and calls `afSolve`.
+ASPIC+ arguments are built by `aspic` (§3.11): an engine passes its theory and solves `r.att` with `afSolve`.
 
 ## 10. Sources
 
-Alchourrón & Makinson 1981 (hierarchies of regulations) · Åqvist 1987 (*Introduction to Deontic Logic and the Theory of Normative
+Caminada & Amgoud 2007 (AIJ 171:286, rationality postulates) · Cayrol & Lagasquie-Schiex 2005 (ECSQARU LNAI 3571:378), 2013
+(IJAR 54:876) · Modgil & Prakken 2013 (AIJ 195:361), 2014 (Argument & Computation 5:31) · Nouioua & Risch 2010 (SUM, LNCS 6379) ·
+Prakken 2010 (Argument & Computation 1:93) · Alchourrón & Makinson 1981 (hierarchies of regulations) · Åqvist 1987 (*Introduction to Deontic Logic and the Theory of Normative
 Systems*) · Barwise & Etchemendy 1999 (*Language, Proof and Logic*) · Blackburn, de Rijke & Venema 2001 (*Modal Logic*) · Caminada
 2006 (labellings, semi-stable) · Chisholm 1963 (Analysis 24:33) · Clarke, Emerson & Sistla 1986 (ACM TOPLAS 8:244) · Davis &
 Putnam 1960; Davis, Logemann & Loveland 1962 · De Giacomo & Vardi 2013 (IJCAI, LTLf) · Dignum, Broersen, Dignum & Meyer 2004

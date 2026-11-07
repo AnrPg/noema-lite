@@ -1,0 +1,2981 @@
+{
+ "about": "parity cases of spec.parts / spec.couple for packcheck.js checkSimSpec and activities.py check_spec (tests/parts.js); names starting with \"parts good\" must pass",
+ "lib": {
+  "oral-pk": {
+   "engine": "med@1",
+   "model": {
+    "items": [
+     {
+      "id": "o",
+      "fn": "pk.oral",
+      "in": {
+       "dose": "dose",
+       "v": 40,
+       "clear": 5,
+       "ka": 1
+      }
+     }
+    ]
+   },
+   "inputs": {
+    "dose": "D * 100"
+   },
+   "outputs": [
+    {
+     "id": "cmax",
+     "kind": "scalar",
+     "of": "o.cmax"
+    },
+    {
+     "id": "tc",
+     "kind": "series",
+     "of": "o.t"
+    },
+    {
+     "id": "c",
+     "kind": "series",
+     "of": "o.c"
+    }
+   ]
+  }
+ },
+ "cases": {
+  "parts good: chain": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "readouts": [
+    {
+     "label": "dLabel",
+     "expr": "eEnd"
+    }
+   ]
+  },
+  "parts good: derived between parts": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "derived": [
+    {
+     "id": "c2",
+     "expr": "cmax * 2"
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "c2",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts good: explicit chain": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": "chain"
+  },
+  "parts good: loop": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cm2",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    },
+    {
+     "id": "pk2",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "eEnd + 1"
+     },
+     "outputs": [
+      {
+       "id": "cm2",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "loops": [
+     {
+      "parts": [
+       "eff",
+       "pk2"
+      ],
+      "tol": 0.000001,
+      "maxIter": 30,
+      "relax": 0.8,
+      "init": {
+       "eEnd": 0
+      }
+     }
+    ]
+   }
+  },
+  "parts good: cosim": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "cosim": {
+     "tEnd": 24,
+     "dt": 0.25,
+     "parts": [
+      "pk",
+      "eff"
+     ],
+     "time": "tt"
+    }
+   },
+   "plots": [
+    {
+     "kind": "series",
+     "x": {
+      "series": "tt"
+     },
+     "series": [
+      {
+       "y": "c"
+      }
+     ]
+    }
+   ]
+  },
+  "parts good: series input with stat": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": {
+       "series": "c",
+       "stat": "max"
+      },
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts good: use with": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "use": "oral-pk",
+     "with": {
+      "model": {
+       "items": [
+        {
+         "id": "o",
+         "fn": "pk.oral",
+         "in": {
+          "dose": "dose",
+          "v": 50,
+          "clear": 5,
+          "ka": 1
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: not a list": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": {
+    "a": 1
+   }
+  },
+  "parts: empty": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": []
+  },
+  "parts: too many": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "p0",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o0",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p1",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o1",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p2",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o2",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p3",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o3",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p4",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o4",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p5",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o5",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p6",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o6",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p7",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o7",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    },
+    {
+     "id": "p8",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "o8",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: duplicate part ids": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "pk",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: duplicate output ids": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: output id = a param": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "D",
+       "kind": "scalar",
+       "of": "o.cmax"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: unknown part name in an input": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "nope * 2",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: series used as a number": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "c",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: undeclared cycle": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "eEnd + 1"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: self cycle": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "cmax + 1"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: loop without tol": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "eEnd + 1"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "loops": [
+     {
+      "parts": [
+       "pk",
+       "eff"
+      ]
+     }
+    ]
+   }
+  },
+  "parts: loop with bad relax and maxIter": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "eEnd + 1"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "loops": [
+     {
+      "parts": [
+       "pk",
+       "eff"
+      ],
+      "tol": 0.000001,
+      "relax": 1.5,
+      "maxIter": 80,
+      "init": {
+       "c": 1,
+       "eEnd": "x"
+      }
+     }
+    ]
+   }
+  },
+  "parts: loop names an unknown part": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "loops": [
+     {
+      "parts": [
+       "pk",
+       "zz"
+      ],
+      "tol": 0.01
+     }
+    ]
+   }
+  },
+  "parts: cosim with a non-stepper": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "g",
+     "engine": "graph@1",
+     "model": {},
+     "outputs": [
+      {
+       "id": "gg",
+       "kind": "scalar",
+       "of": "result"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "cosim": {
+     "tEnd": 1,
+     "dt": 0.1,
+     "parts": [
+      "pk",
+      "g"
+     ]
+    }
+   }
+  },
+  "parts: cosim too many macro steps": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "cosim": {
+     "tEnd": 1000,
+     "dt": 0.01,
+     "parts": [
+      "pk",
+      "eff"
+     ]
+    }
+   }
+  },
+  "parts: cosim missing dt, bad order": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "cosim": {
+     "tEnd": 10,
+     "parts": [
+      "pk",
+      "eff"
+     ],
+     "order": [
+      "pk"
+     ]
+    }
+   }
+  },
+  "parts: part in a loop and the cosim": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "loops": [
+     {
+      "parts": [
+       "pk"
+      ],
+      "tol": 0.1
+     }
+    ],
+    "cosim": {
+     "tEnd": 10,
+     "dt": 1,
+     "parts": [
+      "pk",
+      "eff"
+     ]
+    }
+   }
+  },
+  "parts: series input too big": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": {
+       "series": "c",
+       "points": 5000
+      },
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: series input of its own part": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D",
+      "s": {
+       "series": "c"
+      }
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: series of a cosim partner": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": {
+       "series": "c"
+      },
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ],
+   "couple": {
+    "cosim": {
+     "tEnd": 10,
+     "dt": 1,
+     "parts": [
+      "pk",
+      "eff"
+     ]
+    }
+   }
+  },
+  "parts: use of a missing _parts file": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "use": "no-such-part"
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: bad use name, with without use": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "use": "Bad Name"
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ],
+     "with": {
+      "model": {}
+     }
+    }
+   ]
+  },
+  "parts: top-level engine and outputs": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "engine": "med@1",
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar"
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: couple without parts": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "couple": "chain"
+  },
+  "parts: bad couple": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    }
+   ],
+   "couple": "together"
+  },
+  "parts: unknown engine and formula part": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "warp@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "formula@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: a model error in a part": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ]
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: model uses a derived (not an input)": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "derived": [
+    {
+     "id": "k3",
+     "expr": "D * 3"
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "k3",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {},
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    }
+   ]
+  },
+  "parts: bench on a part that cannot": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D * 100"
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ]
+    }
+   ],
+   "bench": {
+    "part": "pk",
+    "faults": []
+   }
+  },
+  "parts: unknown field in a part and inputs": {
+   "format": "noema.sim-spec/v1",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "dLabel",
+     "min": 1,
+     "max": 10,
+     "default": 5
+    }
+   ],
+   "parts": [
+    {
+     "id": "pk",
+     "engine": "med@1",
+     "model": {
+      "items": [
+       {
+        "id": "o",
+        "fn": "pk.oral",
+        "in": {
+         "dose": "dose",
+         "v": 40,
+         "clear": 5,
+         "ka": 1
+        }
+       }
+      ]
+     },
+     "inputs": {
+      "dose": "D",
+      "w": {
+       "series": "c",
+       "at": 3
+      }
+     },
+     "outputs": [
+      {
+       "id": "cmax",
+       "kind": "scalar",
+       "of": "o.cmax"
+      },
+      {
+       "id": "tc",
+       "kind": "series",
+       "of": "o.t"
+      },
+      {
+       "id": "c",
+       "kind": "series",
+       "of": "o.c"
+      }
+     ],
+     "colour": "red"
+    },
+    {
+     "id": "eff",
+     "engine": "ode@1",
+     "model": {
+      "rhs": {
+       "E1": "ke * (cin - E1)"
+      },
+      "states": [
+       {
+        "id": "E1",
+        "init": 0
+       }
+      ],
+      "solve": {
+       "tEnd": 24
+      }
+     },
+     "inputs": {
+      "cin": "cmax",
+      "ke": 0.5
+     },
+     "outputs": [
+      {
+       "id": "eEnd",
+       "kind": "scalar",
+       "of": "final",
+       "var": "E1"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

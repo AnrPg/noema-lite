@@ -275,3 +275,7 @@ Codes: `h2-range`, `prob-range`, `Kr-not-above-K` (no familial excess: h² ≤ 0
 Statistical checks (seeded, ±3 SE): the binomial sampler against the exact pmf (χ² fit), WF mean H and mean p, the neutral fixation
 probability p₀, the coalescent's mean T_MRCA and S. Speed: a dihybrid cross runs in about 1 ms; the worst allowed runs (200 000 WF
 generations, a pedigree of 3¹¹ genotypes, a six-locus cross) together in about 0.25 s.
+
+## Uses the kernel
+
+Since 2026-11-07 the seeded modes draw from kernel streams (`SK.stream`: `genetics-drift`, `genetics-coalescent`, `genetics-quant`): Wright–Fisher binomial sampling, Poisson mutations and exponential coalescence times by the kernel's inversion variates (one uniform each: common random numbers work), the quantitative normals by AS241; the drift stepper keeps its stream's six numbers in its state (`r.state()`, so a snapshot is a copy). Since the second round the χ² tail is `SK.chi2Sf` (the kernel's upper tail from Q, no cancellation) and Φ⁻¹ is `SK.normInv` (AS 241, instead of Acklam + one Halley step); the own lgamma, Q and erfc remain only as the marked FALLBACK. Snapshot re-recorded (other seeded numbers, the same laws; the selection threshold moved by ≤ 1e-15 relative; `tests/lib_genetics.js` passes).

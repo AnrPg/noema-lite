@@ -1,0 +1,17 @@
+{
+ "title": "How large a time step can the explicit heat scheme take?",
+ "intro": "A rod starts hot in the middle, and its ends are held at zero. The explicit scheme moves every node towards the average of its neighbours by the fraction 2r each step, where r = D·Δt/Δx². A larger r means fewer, cheaper steps to reach the same time. Raise and lower r and look for the largest value at which the profile still cools smoothly instead of breaking into a zigzag.",
+ "rLabel": "Diffusion number r = D·Δt/Δx²",
+ "rReadout": "r actually used",
+ "gainLabel": "Largest growth factor of a mode per step, max |G|",
+ "peakLabel": "Highest temperature at the end",
+ "okLabel": "The scheme is stable",
+ "plotTitle": "Temperature along the rod",
+ "position": "Position x",
+ "temperature": "Temperature u",
+ "startLine": "start",
+ "endLine": "t = 0.05",
+ "stTitle": "Space–time diagram (time upwards)",
+ "checkStable": "The scheme is stable: no mode grows from step to step.",
+ "checkEfficient": "The step is large: r is at least 0.45."
+}

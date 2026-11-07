@@ -1,0 +1,15 @@
+{
+ "title": "Plasma et site d’action : pourquoi l’effet est en retard",
+ "intro": "Un médicament pris par voie orale passe dans le sang (modèle à un compartiment avec absorption du premier ordre), puis du sang il atteint lentement le tissu où il agit, le site d’action. Deux modèles avancent ensemble dans le temps : le modèle pharmacocinétique donne la concentration plasmatique à chaque pas, et une équation différentielle, dCe/dt = ke0 (Cp − Ce), la transmet au site d’action. Changez la dose et la constante ke0 et voyez de combien le pic au site d’action arrive plus tard et plus bas que le pic plasmatique.",
+ "doseLabel": "Dose orale",
+ "ke0Label": "Constante d’équilibration ke0",
+ "ec50Label": "CE50 (concentration donnant la moitié de l’effet maximal)",
+ "cmaxLabel": "Pic de concentration plasmatique",
+ "ceMaxLabel": "Pic de concentration au site d’action",
+ "effLabel": "Effet maximal atteint (modèle Emax)",
+ "plotTitle": "Concentration dans le plasma et au site d’action",
+ "time": "Temps",
+ "conc": "Concentration",
+ "plasmaLine": "plasma",
+ "siteLine": "site d’action"
+}

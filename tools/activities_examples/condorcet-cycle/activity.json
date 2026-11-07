@@ -1,0 +1,17 @@
+{
+ "id": "condorcet-cycle",
+ "runtime": "sim-spec@1",
+ "entry": "activities/condorcet-cycle/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "condorcet-cycle-still",
+  "text": "Three groups of voters rank three candidates: 8 voters A > B > C, 6 voters B > C > A and 5 voters C > A > B. Compared in pairs, a majority prefers A to B (13 to 6), a majority prefers B to C (14 to 5), and a majority prefers C to A (11 to 8): the majorities go round in a circle, so no candidate beats both others and there is no Condorcet winner (Condorcet 1785). Each method still names a winner. Plurality picks A with 8 first choices. Instant runoff drops C and also picks A. The Borda count gives A 21, B 20 and C 16 points. The picture shows the three candidates with an arrow from each majority winner to the loser; all three arrows are marked as a cycle."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

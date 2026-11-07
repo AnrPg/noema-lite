@@ -520,3 +520,23 @@ request for each subject; Γ: a library of general engines), **Γ is the canonic
   them with `noema.engine(id).run(spec, inputs)`. The frame's policy is unchanged (no Worker, no network): the HOST checks each
   request and runs the model in the engine's own Worker (the sim runner, 5 s, ended on unmount), only for declared library engines
   (never `formula@1` or a plugin with hidden faults), and returns only the named outputs, ≤ 512 KB (`docs/INTERACTIVE.md` §8.1).
+
+## 16. Addendum — parts: several engines in one spec (2026-11-07)
+
+Decision (the owner, 2026-11-07): a `sim-spec@1` spec may combine engines as **parts** (`docs/INTERACTIVE.md` §12.8), additive only:
+a spec without `parts` is checked, run and graded exactly as before, and every old message stays word for word.
+
+- **Data, not code.** Parts, their inputs and the coupling (`couple`: a chain, fixed-point loops, a co-simulation) are data checked
+  by both validators with the same messages; every formula is NoemaExpr's. Undeclared cycles are refused, with the cycle named.
+- **The stepper contract** (`docs/INTERACTIVE_LIBRARY.md` §1.6) is an optional `stepper` of `makeEngine`: `init`, `step`, optional
+  `snapshot` / `restore` / `output` / `onEvent`, the signature of `NoemaSimKit.stepper`. Only engines with one may be co-simulated
+  (`STEPPERS`, the same list in both validators).
+- **Runtime.** `ACT.partsRunner` (35_activity_sim.js) runs the plan: one engine instance and Worker per part (each job ≤ 5 s), the
+  whole graph ≤ 5 s, the latest inputs win. A loop that does not settle or a part that fails gives NaN and a visible note
+  (`engine.act.sim.noConverge`, `engine.act.sim.partFailed`), never a crash or a stale value.
+- **Reuse.** `activities/_parts/<name>.json`, referenced with `use` / `with`, travels as `pack.activities.parts` (hashed with the
+  pack); every part's engine goes into `pack.requires`.
+- **Mini-apps.** `noema.sim(spec).run(inputs)` (message `sim:run`) runs a spec with parts through the same orchestrator, only with
+  engines the item declares, under the same host checks as `noema.engine` (§15).
+- **Tests.** `tests/parts.js` (the plan, both validators on `tests/fixtures/parts_cases.json`, the steppers, the orchestrator, the
+  mini-app bridge, the three references), `tests/activities_pack.py` (the `_parts` round trip) and the activity harness in Chromium.

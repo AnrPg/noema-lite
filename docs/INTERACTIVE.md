@@ -415,3 +415,63 @@ is `docs/INTERACTIVE_CIRCUIT.md` §2 (the twin's points, its `log` and `rssi` in
 - The validators check that every fault applies to the netlist (`checkFaults`), every point and part is in it, every instrument
   is known and complete, every fault is named by exactly one option, every label is in every string table, and `task.params.fault`
   names faults of the bench.
+
+### 12.8 Parts — several engines in one spec (`spec.parts`, `spec.couple`)
+
+A spec may combine engines: instead of `engine`, `model` and `outputs` it lists **parts**, each an engine with its own model and
+outputs, and says how they are coupled. A spec without `parts` behaves exactly as before.
+
+```json
+"parts": [
+  { "id": "pk",   "engine": "med@1", "model": { "items": [{ "id": "o", "fn": "pk.oral", "in": { "dose": "dose", "v": "v", "clear": "cl", "ka": "ka" } }] },
+    "outputs": [{ "id": "cp", "kind": "series", "of": "o.c" }, { "id": "cmax", "kind": "scalar", "of": "o.cmax" }] },
+  { "id": "site", "engine": "ode@1", "inputs": { "c": "cp" },
+    "model": { "rhs": { "ce": "ke0 * (c - ce)" }, "states": [{ "id": "ce", "init": 0 }], "solve": { "tEnd": 24 } },
+    "outputs": [{ "id": "ceS", "kind": "series", "of": "state", "var": "ce" }, { "id": "ceMax", "kind": "scalar", "of": "stat", "var": "ce", "stat": "max" }] }
+],
+"couple": { "cosim": { "tEnd": 24, "dt": 0.1, "parts": ["pk", "site"], "time": "tt" } }
+```
+
+- **A part** is `{id, engine, model, outputs, inputs?}` (at most 8 parts, 24 inputs a part, 48 outputs in all) or `{id, use, with?}`
+  (below). Its model sees the spec's consts and params and **its own inputs**, nothing else: a derived value or another part's
+  output reaches it only through `inputs`. An input is a number, a formula over the spec's names (consts, params, derived values,
+  the scalar outputs of the parts before it), or `{"series": "<output id of another part>", "points"?: 2–2000 (resampled) | "stat"?:
+  "final|min|max|mean|pp|rms" (a number)}`. The engine's own checks see the part as a spec of its own (its consts include the input
+  names), and their messages name `spec.parts[i]`.
+- **Output ids are names of the whole spec**: scalars join readouts, marks, checks, derived values (a derived value may use a
+  part's scalar) and other parts' inputs; series feed plots; scenes and sounds feed `scene` / `sound` plots, whichever part drew them.
+  Top-level `outputs` and `engine` are refused in a spec with parts.
+- **The order** comes from the dependencies (a part after every name its inputs use; Kahn's order, ties in the spec's order), so
+  `parts` may be listed in any order. A **cycle** that is not declared is an error naming it (`pk → eff → pk depend on each other
+  in a cycle: declare it in spec.couple.loops (a fixed point) or spec.couple.cosim (in time)`).
+- **`couple`** is `"chain"` (the default: each part runs once, in order) or `{loops?, cosim?}`:
+  - `loops: [{parts, tol, maxIter? ≤ 50 (20), relax? (0, 1], init?: {output id: first guess}}]` (≤ 4): a **fixed point**. The parts
+    run in their order, again and again (Gauss–Seidel; `relax` < 1 under-relaxes), until no scalar output of the loop changes by
+    more than `tol` (relative: |Δ| / max(1, |x|)). Derived values inside the cycle are computed with it. If it does not settle in
+    `maxIter` passes, its scalars become NaN (readouts show "—") and the view says so (`engine.act.sim.noConverge`).
+  - `cosim: {tEnd, dt, parts, order?, t0?, time?, init?, iterate?: {tol, maxIter?}}` (≤ 5000 macro steps): the parts **evolve
+    together in time**. Each must be an engine that can be stepped (`ode@1`, `med@1`, `clinic@1`, `genetics@1`, `des@1`, `field@1`,
+    `agents@1`: the stepper of `docs/INTERACTIVE_LIBRARY.md` §1.6). Every macro step each part advances by `dt` with its inputs held,
+    in `order` (a later part sees the values the earlier ones reached in the same step). An input of a co-simulated part may name
+    any output of its partners: a series output gives its value at the step (one sample a step: that is how `cp` above becomes the
+    ODE's input `c`). A part may stop early at a state event (the others meet it there); the events it reports go to the other
+    parts. `iterate` repeats each macro step from the parts' snapshots until the exchanged scalars settle (strong coupling).
+    `time` names a series of the macro step times (its x axis).
+- **`use` / `with`**: a part may reuse a file of the pack, `activities/_parts/<name>.json` (`{engine, model, outputs, inputs?}`):
+  `{"id": "pk", "use": "oral-pk", "with": {"model": {…}}}` (`with` is merged into it, objects deeply, lists replaced; any of
+  `engine`, `model`, `outputs`, `inputs` given beside `use` replaces the file's). `make_pack.py` carries the files as
+  `pack.activities.parts` (hashed with the pack), `unpack.py` writes them back, the validators resolve them, and every part's
+  engine goes into `pack.requires`.
+- **The bench** of a spec with parts is `spec.bench.part`: the id of a `circuit-mna@1` or `twin@1` part; its measurements use that
+  part's latest inputs.
+- **Runtime** (`ACT.partsRunner`, 35_activity_sim.js): every part has its own engine instance and Worker; the latest inputs win (a
+  run under way stops at its next step); the whole graph has 5 s (else the activity stops: Restart). The checks grader reads the
+  values once the latest inputs are computed, as for one engine.
+- **Mini-apps**: `noema.sim(spec).run(inputs, {seed}?)` → `{outputs, values, codes}` runs `{consts?, derived?, parts, couple?}` with
+  engines its registry entry lists (§8.1); `inputs` override the consts. Message `sim:run {spec, inputs?, seed?}`, answered by
+  `engine:result`.
+
+The validators (`checkSimSpec` in `engine/packcheck.js`, `check_spec` in `tools/activities.py`) give the same messages;
+`tests/parts.js` checks them on `tests/fixtures/parts_cases.json`, the steppers, the orchestrator and the three references:
+`pk-ode` (`med@1` + `ode@1` in time), `genetics-prob` (`genetics@1` → `prob@1`, a chain) and `ancient-voyage` (`map@1` →
+`timeline@1`), each available as `activity_new.py --from <name>`.

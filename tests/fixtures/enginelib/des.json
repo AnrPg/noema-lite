@@ -1,0 +1,1556 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [
+    {
+     "id": "lam",
+     "kind": "slider",
+     "label": "lamLabel",
+     "min": 0.1,
+     "max": 0.95,
+     "step": 0.05,
+     "default": 0.8
+    }
+   ],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "wq",
+     "kind": "scalar",
+     "of": "wq",
+     "station": "q"
+    },
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "wq",
+     "station": "q",
+     "est": "half"
+    },
+    {
+     "id": "th",
+     "kind": "scalar",
+     "of": "theory",
+     "measure": "wq",
+     "station": "q"
+    },
+    {
+     "id": "cv",
+     "kind": "scalar",
+     "of": "covers",
+     "measure": "wq",
+     "station": "q"
+    },
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "ql",
+     "kind": "series",
+     "of": "qlen",
+     "station": "q"
+    },
+    {
+     "id": "net",
+     "kind": "scene",
+     "of": "network"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 480,
+    "unit": "min",
+    "reps": 20,
+    "classes": [
+     {
+      "id": "urgent",
+      "prio": 0,
+      "key": "clsUrgent"
+     },
+     {
+      "id": "minor",
+      "prio": 1,
+      "key": "clsMinor"
+     }
+    ],
+    "sources": [
+     {
+      "id": "door",
+      "to": "triage",
+      "mix": {
+       "urgent": 0.3,
+       "minor": 0.7
+      },
+      "rates": [
+       [
+        0,
+        6
+       ],
+       [
+        120,
+        12
+       ],
+       [
+        360,
+        8
+       ]
+      ],
+      "period": 480,
+      "key": "srcDoor"
+     }
+    ],
+    "stations": [
+     {
+      "id": "triage",
+      "servers": 2,
+      "service": {
+       "dist": "tri",
+       "min": 2,
+       "mode": 4,
+       "max": 8
+      },
+      "route": [
+       {
+        "to": "doc",
+        "when": "urgent"
+       },
+       {
+        "to": "doc"
+       }
+      ],
+      "key": "stTriage"
+     },
+     {
+      "id": "doc",
+      "servers": 3,
+      "discipline": "priority",
+      "preempt": "resume",
+      "serviceBy": {
+       "urgent": {
+        "dist": "lognormal",
+        "mean": 30,
+        "sd": 12
+       },
+       "minor": {
+        "dist": "exp",
+        "mean": 15
+       }
+      },
+      "renege": {
+       "dist": "exp",
+       "mean": 120
+      },
+      "shifts": {
+       "period": 480,
+       "plan": [
+        {
+         "from": 0,
+         "to": 240,
+         "servers": 2
+        }
+       ]
+      },
+      "key": "stDoc"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "wu",
+     "kind": "scalar",
+     "of": "wq",
+     "station": "doc",
+     "class": "urgent"
+    },
+    {
+     "id": "rn",
+     "kind": "scalar",
+     "of": "reneged"
+    },
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "util",
+     "station": "doc"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "w",
+     "class": "minor"
+    },
+    {
+     "id": "g",
+     "kind": "scene",
+     "of": "gantt",
+     "window": "240"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 600,
+    "reps": 5,
+    "sources": [
+     {
+      "id": "door",
+      "shortest": [
+       "t1",
+       "t2"
+      ],
+      "arrival": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "t1",
+      "service": {
+       "dist": "exp",
+       "mean": 1.8
+      },
+      "jockey": true,
+      "balk": {
+       "length": 6,
+       "p": 0.5
+      }
+     },
+     {
+      "id": "t2",
+      "service": {
+       "dist": "exp",
+       "mean": 1.8
+      },
+      "jockey": true
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "j",
+     "kind": "scalar",
+     "of": "jockeyed",
+     "station": "t1"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "balked"
+    },
+    {
+     "id": "lg",
+     "kind": "scene",
+     "of": "log"
+    },
+    {
+     "id": "lk",
+     "kind": "series",
+     "of": "logKind"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 20000,
+    "reps": 1,
+    "analysis": {
+     "method": "batch",
+     "batches": 20,
+     "warmup": "mser5",
+     "level": 0.9
+    },
+    "sources": [
+     {
+      "id": "a",
+      "to": "m",
+      "arrival": {
+       "dist": "exp",
+       "mean": 1.25
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "m",
+      "service": {
+       "dist": "gamma",
+       "mean": 1,
+       "cv": 0.5
+      },
+      "breakdowns": {
+       "ttf": {
+        "dist": "exp",
+        "mean": 200
+       },
+       "ttr": {
+        "dist": "uniform",
+        "min": 5,
+        "max": 15
+       },
+       "policy": "resume"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "wq",
+     "kind": "scalar",
+     "of": "wq",
+     "station": "m"
+    },
+    {
+     "id": "wt",
+     "kind": "scalar",
+     "of": "warmupT"
+    },
+    {
+     "id": "dn",
+     "kind": "scalar",
+     "of": "down",
+     "station": "m"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "batch-correlated"
+    },
+    {
+     "id": "ok",
+     "kind": "scalar",
+     "of": "ok"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 100,
+    "sources": [
+     {
+      "id": "a",
+      "to": "d",
+      "schedule": [
+       0,
+       5,
+       "t1",
+       20
+      ],
+      "batch": {
+       "dist": "discrete",
+       "values": [
+        1,
+        2,
+        3
+       ],
+       "probs": [
+        0.5,
+        0.3,
+        0.2
+       ]
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "d",
+      "kind": "delay",
+      "service": {
+       "dist": "weibull",
+       "shape": 2,
+       "scale": 3
+      },
+      "route": [
+       {
+        "to": "s",
+        "p": "pp"
+       },
+       {
+        "to": "exit",
+        "p": 0.5
+       }
+      ]
+     },
+     {
+      "id": "s",
+      "servers": 2,
+      "capacity": 3,
+      "discipline": "spt",
+      "service": {
+       "dist": "empirical",
+       "values": [
+        1,
+        2,
+        4
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "lost",
+     "station": "s"
+    },
+    {
+     "id": "rv",
+     "kind": "series",
+     "of": "repValues",
+     "measure": "w"
+    }
+   ],
+   "consts": {
+    "t1": 9,
+    "pp": 0.5
+   }
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 50,
+    "seed": 7,
+    "maxEvents": 5000,
+    "points": 100,
+    "logCap": 50,
+    "sources": [
+     {
+      "id": "a",
+      "to": "q",
+      "arrival": {
+       "dist": "erlang",
+       "k": 2,
+       "mean": 1
+      },
+      "start": 2,
+      "stop": 40,
+      "limit": 30
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "discipline": "lifo",
+      "service": {
+       "dist": "beta",
+       "a": 2,
+       "b": 3,
+       "min": 0,
+       "max": 2
+      },
+      "route": [
+       {
+        "to": "exit",
+        "when": "visits > 2"
+       },
+       {
+        "to": "q"
+       }
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "ev",
+     "kind": "scalar",
+     "of": "events"
+    },
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "reps"
+    },
+    {
+     "id": "w",
+     "kind": "series",
+     "of": "waits"
+    },
+    {
+     "id": "b",
+     "kind": "series",
+     "of": "busySeries",
+     "station": "q"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 10,
+    "sources": [
+     {
+      "id": "a",
+      "to": "q",
+      "arrival": {
+       "dist": "const",
+       "value": 1
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "normal",
+       "mean": 0.9,
+       "sd": 0.1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "maxq",
+     "station": "q"
+    },
+    {
+     "id": "li",
+     "kind": "scalar",
+     "of": "littleErr",
+     "station": "q"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "pwait",
+     "est": "lo"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     },
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "exit",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "exit",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ],
+    "classes": [
+     {
+      "id": "a"
+     },
+     {
+      "id": "a"
+     },
+     {
+      "id": "prio"
+     },
+     {
+      "id": "lam"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ],
+   "consts": {
+    "lam": 1
+   }
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      },
+      "schedule": [
+       1
+      ],
+      "period": 3,
+      "shortest": [
+       "q",
+       "zz"
+      ]
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "nope",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      },
+      "class": "c",
+      "mix": {
+       "d": 1
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "gamma",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "mean": -1
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "tri",
+       "min": 3,
+       "mode": 1,
+       "max": 2
+      },
+      "renege": {
+       "dist": "uniform",
+       "min": 2,
+       "max": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "empirical",
+       "values": [
+        1,
+        2
+       ],
+       "probs": [
+        1
+       ]
+      }
+     },
+     {
+      "id": "z",
+      "kind": "delay",
+      "servers": 2,
+      "discipline": "fifo",
+      "service": {
+       "dist": "const"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "serviceBy": {
+       "u": {
+        "dist": "exp",
+        "mean": 1
+       },
+       "w": {
+        "dist": "exp",
+        "mean": 1
+       }
+      },
+      "preempt": "resume"
+     }
+    ],
+    "classes": [
+     {
+      "id": "u"
+     },
+     {
+      "id": "v"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      },
+      "serviceBy": {
+       "u": {
+        "dist": "exp",
+        "mean": 1
+       }
+      },
+      "discipline": "priority",
+      "balk": {
+       "length": 3,
+       "p": 2
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      },
+      "shifts": {
+       "period": 10,
+       "plan": [
+        {
+         "from": 5,
+         "to": 3,
+         "servers": 1
+        },
+        {
+         "from": 0,
+         "to": 12,
+         "servers": 1
+        },
+        {
+         "from": 1,
+         "to": 4,
+         "servers": 2
+        },
+        {
+         "from": 2,
+         "to": 6,
+         "servers": 0
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      },
+      "route": [
+       {
+        "to": "x1"
+       },
+       {
+        "shortest": [
+         "q",
+         "y"
+        ],
+        "p": 0.5
+       },
+       {},
+       {
+        "to": "q",
+        "p": 0.2,
+        "when": "prio"
+       }
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      },
+      "route": [
+       {
+        "to": "q",
+        "p": 0.7
+       },
+       {
+        "to": "exit",
+        "p": 0.6
+       }
+      ],
+      "jockey": true
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      },
+      "route": [
+       {
+        "to": "q",
+        "p": -0.1
+       },
+       {
+        "to": "exit"
+       }
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 2000,
+    "reps": 5,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ],
+    "analysis": {
+     "method": "batch",
+     "warmup": "mser5"
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": -5,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     },
+     {
+      "id": "lonely",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "util"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "wq",
+     "station": "zz",
+     "class": "c"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "theory",
+     "measure": "nope"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "util",
+     "station": "q",
+     "class": "x"
+    },
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "wq",
+     "est": "best"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "nope"
+    },
+    {
+     "id": "g",
+     "kind": "series",
+     "of": "qlen"
+    },
+    {
+     "id": "h",
+     "kind": "series",
+     "of": "repValues",
+     "measure": "zz"
+    },
+    {
+     "id": "i",
+     "kind": "scene",
+     "of": "phase"
+    },
+    {
+     "id": "j",
+     "kind": "scalar",
+     "of": "network"
+    },
+    {
+     "id": "k",
+     "kind": "scene",
+     "of": "gantt",
+     "window": ""
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 0,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      },
+      "breakdowns": {
+       "ttf": {
+        "dist": "exp",
+        "mean": 1
+       }
+      }
+     }
+    ],
+    "unit": "fortnight",
+    "seed": -1,
+    "zzz": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": null,
+      "serviceBy": {
+       "u": {
+        "dist": "weibull",
+        "shape": 1
+       }
+      }
+     }
+    ],
+    "classes": [
+     {
+      "id": "u"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "params": [],
+   "model": "not a model",
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "wq"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "des@1",
+   "model": {
+    "tEnd": 1000,
+    "warmup": 100,
+    "reps": 10,
+    "sources": [
+     {
+      "id": "in",
+      "to": "q",
+      "arrival": {
+       "dist": "exp",
+       "rate": "lam"
+      }
+     }
+    ],
+    "stations": [
+     {
+      "id": "q",
+      "service": {
+       "dist": "exp",
+       "mean": 1
+      }
+     }
+    ]
+   },
+   "outputs": "no"
+  }
+ ]
+}

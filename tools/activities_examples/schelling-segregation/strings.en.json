@@ -1,0 +1,16 @@
+{
+ "title": "Mild preferences, segregated towns",
+ "intro": "Two groups of households start mixed at random. A household is content when at least a share 'want' of its neighbours belong to its own group; otherwise it moves to a random empty place. Find the mildest preference that still sorts the town into neighbourhoods of one group.",
+ "wantLabel": "Share of like neighbours a household wants, want",
+ "similarLabel": "Average share of like neighbours at the end",
+ "unhappyLabel": "Share of households still unhappy",
+ "roundsLabel": "Rounds until nobody wants to move",
+ "plotTitle": "Like neighbours and unhappy households",
+ "round": "Round",
+ "share": "Share",
+ "similarLine": "like neighbours",
+ "unhappyLine": "unhappy",
+ "gridTitle": "The town at the end (the two colours are the two groups)",
+ "checkMild": "The preference is mild: want is at most 0.35.",
+ "checkSegregated": "The town is segregated: on average at least 70 % of neighbours are alike."
+}

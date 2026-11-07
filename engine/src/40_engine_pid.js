@@ -266,7 +266,17 @@
     return r;
   }
 
+  // ---- the simulation kernel (NoemaSimKit, 46_lib_simkit.js; docs/library/simkit.md): its RK4, breaks and streams ----
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+
   // ---- the simulator ----
+  /* The loop is a sampled-data system: at every grid time t_k = k·h (a break of NoemaSimKit.integrate, where the step lands exactly)
+     the setpoint, the measurement (+ the seeded noise of a kernel stream) and, every Ts, the controller are evaluated and recorded;
+     between two grid times the plant is integrated by the kernel's classical RK4 (one step of h) with its input held (the dead time
+     interpolates the input history at t − θ). The same core serves run() and the stepper (docs/INTERACTIVE_LIBRARY.md §1.6). */
   function makeSim(model, opts) {
     const pl = plantOf(model.plant), open = model.mode === 'open', c = model.controller || {};
     const d = (k, v) => (has(c, k) ? c[k] : v);
@@ -280,56 +290,100 @@
     const nz = model.noise, std = nz ? nz.std : 0;
     const seed = (nz && has(nz, 'seed') ? nz.seed : opts && opts.seed !== undefined ? opts.seed : 1) >>> 0;
     const band = model.metrics && model.metrics.band ? model.metrics.band : 0.02;
+    const nx = pl.x0.length;
+    /** the loop's state (plain data: a snapshot is a copy): grid step h, controller period hc */
+    function start(h) {
+      const K = kit(), every = Math.max(1, Math.round((has(c, 'Ts') && c.Ts > 0 ? c.Ts : h) / h));
+      return { h, hc: every * h, every, k: 0, t: 0, x: Array.from(pl.x0), I: 0, D: 0, sPrev: null, uHeld: 0, sat: false, satTime: 0, dead: false, ud: 0,
+        rng: std > 0 ? (K ? K.stream(seed, 'pid:noise').state() : seed) : null, spare: null, ut: [], uv: [],
+        H: { t: [], r: [], y: [], ym: [], u: [], e: [] } };
+    }
+    /** a standard normal of the noise stream (the kernel's: inversion by AS241; FALLBACK without the kernel: mulberry32 + Box–Muller) */
+    function noiseDraw(st) {
+      const K = kit();
+      if (K && Array.isArray(st.rng)) { const r = K.stream(0, '', { state: st.rng }), z = r.normal(0, 1); st.rng = r.state(); return z; }
+      if (st.spare !== null) { const z = st.spare; st.spare = null; return z; }
+      let a = st.rng >>> 0; const nxt = () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+      let u = 0; while (u === 0) u = nxt(); const v = nxt(), rr = Math.sqrt(-2 * Math.log(u)); st.rng = a; st.spare = rr * Math.sin(2 * Math.PI * v); return rr * Math.cos(2 * Math.PI * v);
+    }
+    /** the grid time t = st.t: measure, control (every Ts), record; then the plant input for the next interval */
+    function sample(st, last) {
+      const t = st.t, H = st.H;
+      if (st.dead) { for (const k of ['r', 'y', 'ym', 'u', 'e']) H[k].push(NaN); H.t.push(t); return; }
+      const r = sp.at(t), y = pl.y(st.x) + od.at(t), ym = y + (std > 0 ? std * noiseDraw(st) : 0);
+      if (open) st.uHeld = r;
+      else if (st.k % st.every === 0) {
+        const sv = cw * r - ym;
+        st.D = st.sPrev === null ? 0 : (Tf * st.D + Kd * (sv - st.sPrev)) / (Tf + st.hc); st.sPrev = sv;
+        const v = u0 + Kp * (bw * r - ym) + st.I + st.D, u = Math.min(uMax, Math.max(uMin, v)), e = r - ym;
+        st.sat = v > uMax || v < uMin;
+        if (aw === 'backcalc') st.I += st.hc * (Ki * e + (u - v) / Tt);
+        else if (aw === 'clamp' && ((v > uMax && Ki * e > 0) || (v < uMin && Ki * e < 0))) { /* hold the integral */ }
+        else st.I += st.hc * Ki * e;
+        st.uHeld = u;
+      }
+      H.t.push(t); H.r.push(r); H.y.push(y); H.ym.push(ym); H.u.push(st.uHeld); H.e.push(r - ym);
+      if (last) return;
+      const uin = st.uHeld + ld.at(t); st.ut.push(t); st.uv.push(uin);
+      let ud = uin;
+      if (theta > 0) {   // the input θ ago: 0 before the start, linear between the grid times
+        const tq = t - theta;
+        if (tq < 0) ud = 0;
+        else { let lo = 0, hi = st.ut.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (st.ut[m] <= tq) lo = m; else hi = m - 1; }
+          const f = lo + 1 < st.ut.length ? (tq - st.ut[lo]) / (st.ut[lo + 1] - st.ut[lo]) : 0; ud = f > 0 ? st.uv[lo] * (1 - f) + st.uv[lo + 1] * f : st.uv[lo]; }
+      }
+      st.ud = ud;
+    }
+    /** advance from st.t over n grid steps of st.h (the last one ending exactly at tTo): the kernel's RK4 between breaks at the grid
+        times; at each break the plant's clamp (a tank), the blow-up guard, then the sample and the next input. budget: steps left */
+    function advance(st, n, tTo) {
+      if (!(n >= 1)) return;
+      const K = kit(), t0 = st.t, h = st.h, grid = i => (i === n ? tTo : t0 + i * h);
+      const f = (t, x, dx) => { if (st.dead) { for (let i = 0; i < nx; i++) dx[i] = 0; return; } pl.f(x, st.ud, dx); };
+      const onGrid = (i, x) => {
+        if (st.sat && !open) st.satTime += grid(i) - grid(i - 1);
+        if (pl.post) pl.post(x);
+        for (let q = 0; q < nx; q++) if (!(Math.abs(x[q]) < BLOWUP)) st.dead = true;   // unstable: the rest of the run is NaN
+        st.k++; st.t = grid(i); st.x = Array.from(x); sample(st, i === n && st.final);
+      };
+      if (K) {
+        const breaks = []; for (let i = 1; i <= n; i++) breaks.push({ t: grid(i), apply: (t, x) => onGrid(i, x) });
+        const k0 = st.k, R = K.integrate({ f, y0: st.x, t0, tEnd: tTo, method: 'rk4', dt: h * (1 + 1e-9), breaks, maxSteps: n + 2 });   // dt a hair above h: a step always lands on the next break
+        if (st.k - k0 < n) { st.dead = true; for (let i = st.k - k0 + 1; i <= n; i++) { st.k++; st.t = grid(i); sample(st, i === n && st.final); } }   // the kernel stopped (NaN, blow-up): the rest is NaN
+        void R; return;
+      }
+      // FALLBACK without the kernel: the classical RK4 here (the same scheme)
+      const k1 = new Float64Array(nx), k2 = new Float64Array(nx), k3 = new Float64Array(nx), k4 = new Float64Array(nx), xt = new Float64Array(nx);
+      for (let i = 1; i <= n; i++) {
+        const x = Float64Array.from(st.x), hh = grid(i) - grid(i - 1);
+        f(0, x, k1); for (let q = 0; q < nx; q++) xt[q] = x[q] + 0.5 * hh * k1[q]; f(0, xt, k2);
+        for (let q = 0; q < nx; q++) xt[q] = x[q] + 0.5 * hh * k2[q]; f(0, xt, k3);
+        for (let q = 0; q < nx; q++) xt[q] = x[q] + hh * k3[q]; f(0, xt, k4);
+        for (let q = 0; q < nx; q++) x[q] += hh / 6 * (k1[q] + 2 * k2[q] + 2 * k3[q] + k4[q]);
+        onGrid(i, x);
+      }
+    }
+    /** the result of the history so far: series, metrics */
+    function result(st) {
+      const H = st.H, N = H.t.length, T = Float64Array.from(H.t), R = Float64Array.from(H.r), Y = Float64Array.from(H.y);
+      const mt = metrics(T, Y, { t0: sp.t0, band });
+      let iae = 0, ise = 0, itae = 0;
+      for (let k = 1; k < N; k++) { const hk = T[k] - T[k - 1], e0 = R[k - 1] - Y[k - 1], e1 = R[k] - Y[k]; iae += 0.5 * hk * (Math.abs(e0) + Math.abs(e1)); ise += 0.5 * hk * (e0 * e0 + e1 * e1); itae += 0.5 * hk * (T[k - 1] * Math.abs(e0) + T[k] * Math.abs(e1)); }
+      const tail = Math.max(1, Math.floor(N * 0.02)); let es = 0; for (let k = N - tail; k < N; k++) es += R[k] - Y[k];   // (the mean of the last 2 %: a ramp's lag too)
+      const m = { ...mt, ess: open ? NaN : es / tail, iae, ise, itae, satTime: st.satTime, unstable: st.dead };
+      return { t: T, r: R, y: Y, ym: Float64Array.from(H.ym), u: Float64Array.from(H.u), e: Float64Array.from(H.e), metrics: m, steps: N - 1, dt: st.h };
+    }
     function run(o) {
       o = o || {};
       const tEnd = o.tEnd, dt0 = o.dt === undefined || o.dt === 0 ? tEnd / 1000 : o.dt;
       if (!(isNum(tEnd) && tEnd > 0 && isNum(dt0) && dt0 > 0)) throw fail('bad-args');
       const steps = Math.max(1, Math.ceil(tEnd / dt0 - 1e-9)), h = tEnd / steps;
       if (steps > MAX_STEPS) throw fail('budget', { steps, limit: MAX_STEPS });
-      const N = steps + 1, T = new Float64Array(N), R = new Float64Array(N), Y = new Float64Array(N), YM = new Float64Array(N), U = new Float64Array(N), Ev = new Float64Array(N);
-      const uin = new Float64Array(N), noise = std > 0 ? gauss(mulberry32(seed)) : null;
-      const every = Math.max(1, Math.round((has(c, 'Ts') && c.Ts > 0 ? c.Ts : h) / h)), hc = every * h;
-      const nx = pl.x0.length, k1 = new Float64Array(nx), k2 = new Float64Array(nx), k3 = new Float64Array(nx), k4 = new Float64Array(nx), xt = new Float64Array(nx);
-      let x = Float64Array.from(pl.x0), I = 0, D = 0, sPrev = NaN, uHeld = 0, sat = false, satTime = 0, dead = false;
-      const lag = theta / h;
-      for (let k = 0; k <= steps; k++) {
-        const t = k * h; T[k] = t;
-        if (dead) { R[k] = Y[k] = YM[k] = U[k] = Ev[k] = NaN; continue; }
-        const r = sp.at(t), y = pl.y(x) + od.at(t), ym = y + (noise ? std * noise() : 0);
-        if (open) uHeld = r;
-        else if (k % every === 0) {
-          const s = cw * r - ym;
-          D = Number.isNaN(sPrev) ? 0 : (Tf * D + Kd * (s - sPrev)) / (Tf + hc); sPrev = s;
-          const v = u0 + Kp * (bw * r - ym) + I + D, u = Math.min(uMax, Math.max(uMin, v)), e = r - ym;
-          sat = v > uMax || v < uMin;
-          if (aw === 'backcalc') I += hc * (Ki * e + (u - v) / Tt);
-          else if (aw === 'clamp' && ((v > uMax && Ki * e > 0) || (v < uMin && Ki * e < 0))) { /* hold the integral */ }
-          else I += hc * Ki * e;
-          uHeld = u;
-        }
-        R[k] = r; Y[k] = y; YM[k] = ym; U[k] = uHeld; Ev[k] = r - ym;
-        if (k === steps) break;
-        if (sat && !open) satTime += h;
-        uin[k] = uHeld + ld.at(t);
-        let ud = uin[k];
-        if (lag > 0) { const j = k - lag; if (j < 0) ud = 0; else { const lo = Math.floor(j), f = j - lo; ud = f > 0 ? uin[lo] * (1 - f) + uin[lo + 1] * f : uin[lo]; } }
-        pl.f(x, ud, k1);
-        for (let i = 0; i < nx; i++) xt[i] = x[i] + 0.5 * h * k1[i]; pl.f(xt, ud, k2);
-        for (let i = 0; i < nx; i++) xt[i] = x[i] + 0.5 * h * k2[i]; pl.f(xt, ud, k3);
-        for (let i = 0; i < nx; i++) xt[i] = x[i] + h * k3[i]; pl.f(xt, ud, k4);
-        for (let i = 0; i < nx; i++) x[i] += h / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
-        if (pl.post) pl.post(x);
-        for (let i = 0; i < nx; i++) if (!(Math.abs(x[i]) < BLOWUP)) dead = true;   // unstable: the rest of the run is NaN
-      }
-      // the metrics: the step response from the setpoint's step (closed) or the input's (open); the errors on the true y
-      const mt = metrics(T, Y, { t0: sp.t0, band });
-      let iae = 0, ise = 0, itae = 0;
-      for (let k = 1; k < N; k++) { const e0 = R[k - 1] - Y[k - 1], e1 = R[k] - Y[k]; iae += 0.5 * h * (Math.abs(e0) + Math.abs(e1)); ise += 0.5 * h * (e0 * e0 + e1 * e1); itae += 0.5 * h * (T[k - 1] * Math.abs(e0) + T[k] * Math.abs(e1)); }
-      const tail = Math.max(1, Math.floor(N * 0.02)); let es = 0; for (let k = N - tail; k < N; k++) es += R[k] - Y[k];   // (the mean of the last 2 %: a ramp's lag too)
-      const m = { ...mt, ess: open ? NaN : es / tail, iae, ise, itae, satTime, unstable: dead };
-      return { t: T, r: R, y: Y, ym: YM, u: U, e: Ev, metrics: m, steps, dt: h };
+      const st = start(h); st.final = true;
+      sample(st, false); advance(st, steps, tEnd);
+      return result(st);
     }
-    return { run };
+    return { run, start, sample, advance, result };
   }
 
   function create(model, opts) {
@@ -358,33 +412,63 @@
     if (prop === 'value') { m[el] = v; return; }
     const [k, f] = String(prop).split('.'); if (isObj(m[el]) && isObj(m[el][k])) m[el][k][f] = v;
   }
+  /** the outputs of a result: series thinned (run), or — stepping — each series its value now (one sample a step) */
+  function outputsOf(outs, res, inp, stepping) {
+    const r = {};
+    for (const o of outs) {
+      try {
+        if (!res) throw fail('run');
+        if (o.kind === 'series') { const v = o.time ? res.t : res[o.signal] || []; r[o.id] = stepping ? (v.length ? v[v.length - 1] : NaN) : thin(v, MAXP); continue; }
+        if (o.metric !== undefined) { const v = res.metrics[o.metric]; r[o.id] = typeof v === 'number' ? v : NaN; continue; }
+        const v = res[o.signal];
+        if (!v) { r[o.id] = NaN; continue; }
+        if (o.stat !== undefined) { r[o.id] = STATS.includes(o.stat) ? stat(v, o.stat) : NaN; continue; }
+        const at = inp.$at ? inp.$at[o.id] : NaN;
+        r[o.id] = stepping && !(at <= res.t[res.t.length - 1]) ? (at === undefined || Number.isNaN(at) ? v[v.length - 1] : NaN) : interp(res.t, v, at);
+      } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
+    }
+    return r;
+  }
+  const modelWith = (model, inp) => { const m = JSON.parse(JSON.stringify(model)); delete m.bindings; for (const [el, prop, v] of inp.$bind || []) setProp(m, el, prop, v); return m; };
   const adapter = { create(spec, opts) {
     const model = spec.model || {}, outs = spec.outputs || [], seed = (opts && opts.seed) >>> 0;
     let key = null, res = null;
+    // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the loop's state is plain data; the inputs (bindings) are read at every step
+    let S = null, sim = null, simKey = null, slot = null;
+    const simFor = inp => { const k = JSON.stringify(inp.$bind || []); if (k !== simKey) { simKey = k; const m = modelWith(model, inp); if (check(m).some(p => p.level === 'error')) throw fail('invalid'); sim = makeSim(m, { seed }); } return sim; };
     return {
       run(inp) {
         const k = JSON.stringify([inp.$bind || [], inp.$tran]);
         if (k !== key) {
           key = k; res = null;
           try {
-            const m = JSON.parse(JSON.stringify(model)); delete m.bindings;
-            for (const [el, prop, v] of inp.$bind || []) setProp(m, el, prop, v);
             const T = inp.$tran || {};
-            res = create(m, { seed }).run({ tEnd: T.tEnd, dt: T.dt > 0 ? T.dt : undefined });
+            res = create(modelWith(model, inp), { seed }).run({ tEnd: T.tEnd, dt: T.dt > 0 ? T.dt : undefined });
           } catch (e) { res = null; }
         }
-        const r = {};
-        for (const o of outs) {
-          try {
-            if (!res) throw fail('run');
-            if (o.kind === 'series') { r[o.id] = thin(o.time ? res.t : res[o.signal] || [], MAXP); continue; }
-            if (o.metric !== undefined) { const v = res.metrics[o.metric]; r[o.id] = typeof v === 'number' ? v : NaN; continue; }
-            const v = res[o.signal];
-            r[o.id] = !v ? NaN : o.stat !== undefined ? (STATS.includes(o.stat) ? stat(v, o.stat) : NaN) : interp(res.t, v, inp.$at ? inp.$at[o.id] : NaN);
-          } catch (e) { r[o.id] = o.kind === 'series' ? [] : NaN; }
-        }
-        return r;
+        return outputsOf(outs, res, inp, false);
       },
+      stepInit(inp, t0) {
+        try {
+          const T = inp.$tran || {}, h = T.dt > 0 ? T.dt : T.tEnd > 0 ? T.tEnd / 1000 : 0;
+          S = simFor(inp).start(h || 1e-3); S.hAuto = !(h > 0); S.t = Number.isFinite(t0) ? t0 : 0; S.final = false;
+          sim.sample(S, false);
+          return { out: outputsOf(outs, sim.result(S), inp, true) };
+        } catch (e) { S = null; return { fail: 'part-failed', out: {} }; }
+      },
+      stepTo(inp, t, dt) {
+        if (!S) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+        try {
+          const sm = simFor(inp);
+          if (S.hAuto && S.k === 0) S.h = Math.min(S.h, dt / 10);   // no transient dt: ten grid steps in the first macro step at least
+          const n = Math.max(1, Math.ceil(dt / S.h - 1e-9));
+          if (S.k + n > MAX_STEPS) return { fail: 'budget', out: {}, dt: 0, events: [] };
+          sm.advance(S, n, t + dt);
+          return { out: outputsOf(outs, sm.result(S), inp, true), dt, events: [] };
+        } catch (e) { return { fail: 'part-failed', out: {}, dt: 0, events: [] }; }
+      },
+      snapshot() { if (!S) return -1; slot = JSON.stringify(S); return 0; },
+      restore(i) { if (i !== 0 || slot === null) return false; S = JSON.parse(slot); return true; },
     };
   } };
   /** on the main thread: the spec's expressions (bindings, transient times, `at`) become numbers or booleans */
@@ -399,12 +483,18 @@
 
   /** the engine's own source, to run it in a Worker */
   const source = () => '(' + noemaPIDModule.toString() + ')(self);';
+  /** the Worker: NoemaExpr (its fdlibm functions) and the simulation kernel when loaded, then this engine and its adapter */
+  function workerSource() {
+    const NX = root.NoemaExpr, K = kit();
+    return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaPID.adapter;';
+  }
   const engine = Object.freeze({
     id: ID,
     check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `spec.${p.path}: ${p.msg}`),
     prepare,
     create: (spec, opts) => adapter.create(spec, opts),
-    workerSource: source() + '\n;self.noemaEngine = self.NoemaPID.adapter;',
+    stepper: true,   // a part of a co-simulation (stepInit / stepTo / snapshot / restore on the instance)
+    get workerSource() { return workerSource(); },
   });
   root.NoemaPID = Object.freeze({
     id: ID, STATS: Object.freeze(STATS.slice()), SIGNALS: Object.freeze(SIGNALS.slice()), METRICS: Object.freeze(METRICS.slice()), ZN, MOTOR: Object.freeze({ ...MOTOR }),
