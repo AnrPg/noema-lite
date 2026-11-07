@@ -848,6 +848,104 @@
       },
     };
   }
+  /* ---- small dense linear algebra (arrays of rows): LU with partial pivoting, solve, det, inverse; eigenvalues of a general matrix
+     by balancing, Hessenberg reduction and the Francis double-shift QR (Parlett & Reinsch 1969; EISPACK balanc/elmhes/hqr as in
+     Numerical Recipes 3rd ed. §11.6–11.7); symmetric eigenvalues and vectors by cyclic Jacobi (Golub & Van Loan 4th ed. §8.5) ---- */
+  const flat = A => { const n = A.length, a = new Float64Array(n * n); for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) a[i * n + j] = +A[i][j]; return a; };
+  const square = A => Array.isArray(A) && A.length > 0 && A.every(r => (Array.isArray(r) || ArrayBuffer.isView(r)) && r.length === A.length);
+  /** lu(A) → {ok, n, det, solve(b) → x} */
+  function lu(A) {
+    if (!square(A)) return { ok: false, n: 0, det: NaN, solve: () => [] };
+    const n = A.length, a = flat(A), piv = new Int32Array(n), ok = luFactor(a, n, piv);
+    let det = ok ? 1 : 0; if (ok) for (let k = 0; k < n; k++) { det *= a[k * n + k]; if (piv[k] !== k) det = -det; }
+    return { ok, n, det, solve: b => { if (!ok || !b || b.length !== n) return new Array(n).fill(NaN); const x = Float64Array.from(b); luSolve(a, n, piv, x); return Array.from(x); } };
+  }
+  const solve = (A, b) => lu(A).solve(b);
+  function inv(A) { const L = lu(A); if (!L.ok) return null; const n = L.n, cols = []; for (let j = 0; j < n; j++) { const e = new Array(n).fill(0); e[j] = 1; cols.push(L.solve(e)); } return cols[0].map((_, i) => cols.map(c => c[i])); }
+  /** eig(A) → {re, im, ok}: all eigenvalues of a general real matrix (sorted by real part, then imaginary) */
+  function eig(A) {
+    if (!square(A)) return { re: [], im: [], ok: false };
+    const n = A.length, a = Array.from({ length: n + 1 }, (_, i) => new Float64Array(n + 1)); for (let i = 1; i <= n; i++) for (let j = 1; j <= n; j++) a[i][j] = +A[i - 1][j - 1];
+    if (!a.every(r => r.every(fin))) return { re: [], im: [], ok: false };
+    // balance
+    for (let last = 0; !last;) { last = 1;
+      for (let i = 1; i <= n; i++) { let r = 0, c = 0; for (let j = 1; j <= n; j++) if (j !== i) { c += abs(a[j][i]); r += abs(a[i][j]); }
+        if (c && r) { let g = r / 2, f2 = 1; const s0 = c + r; while (c < g) { f2 *= 2; c *= 4; } g = r * 2; while (c > g) { f2 /= 2; c /= 4; }
+          if ((c + r) / f2 < 0.95 * s0) { last = 0; g = 1 / f2; for (let j = 1; j <= n; j++) a[i][j] *= g; for (let j = 1; j <= n; j++) a[j][i] *= f2; } } } }
+    // Hessenberg by stabilised elimination
+    for (let m = 2; m < n; m++) { let x = 0, i = m; for (let j = m; j <= n; j++) if (abs(a[j][m - 1]) > abs(x)) { x = a[j][m - 1]; i = j; }
+      if (i !== m) { for (let j = m - 1; j <= n; j++) { const tt = a[i][j]; a[i][j] = a[m][j]; a[m][j] = tt; } for (let j = 1; j <= n; j++) { const tt = a[j][i]; a[j][i] = a[j][m]; a[j][m] = tt; } }
+      if (x) for (let i2 = m + 1; i2 <= n; i2++) { let y = a[i2][m - 1]; if (y !== 0) { y /= x; a[i2][m - 1] = y; for (let j = m; j <= n; j++) a[i2][j] -= y * a[m][j]; for (let j = 1; j <= n; j++) a[j][m] += y * a[j][i2]; } } }
+    for (let i = 3; i <= n; i++) for (let j = 1; j < i - 1; j++) a[i][j] = 0;
+    // the shifted QR (hqr)
+    const wr = new Float64Array(n + 1), wi = new Float64Array(n + 1); let anorm = 0;
+    for (let i = 1; i <= n; i++) for (let j = max(i - 1, 1); j <= n; j++) anorm += abs(a[i][j]);
+    let nn = n, t = 0, okAll = true;
+    const SIGN = (x, y) => (y >= 0 ? abs(x) : -abs(x));
+    outer: while (nn >= 1) {
+      let its = 0, l;
+      do {
+        for (l = nn; l >= 2; l--) { let s2 = abs(a[l - 1][l - 1]) + abs(a[l][l]); if (s2 === 0) s2 = anorm; if (abs(a[l][l - 1]) + s2 === s2) { a[l][l - 1] = 0; break; } }
+        let x = a[nn][nn];
+        if (l === nn) { wr[nn] = x + t; wi[nn--] = 0; }
+        else {
+          let y = a[nn - 1][nn - 1], w = a[nn][nn - 1] * a[nn - 1][nn];
+          if (l === nn - 1) {
+            const p = 0.5 * (y - x), q = p * p + w; let z = sqrt(abs(q)); x += t;
+            if (q >= 0) { z = p + SIGN(z, p); wr[nn - 1] = wr[nn] = x + z; if (z) wr[nn] = x - w / z; wi[nn - 1] = wi[nn] = 0; }
+            else { wr[nn - 1] = wr[nn] = x + p; wi[nn - 1] = -(wi[nn] = z); }
+            nn -= 2;
+          } else {
+            if (its === 60) { okAll = false; break outer; }
+            if (its === 10 || its === 20) { t += x; for (let i = 1; i <= nn; i++) a[i][i] -= x; const s2 = abs(a[nn][nn - 1]) + abs(a[nn - 1][nn - 2]); y = x = 0.75 * s2; w = -0.4375 * s2 * s2; }
+            ++its;
+            let m, p = 0, q = 0, r = 0, z = 0;
+            for (m = nn - 2; m >= l; m--) {
+              z = a[m][m]; r = x - z; let s2 = y - z;
+              p = (r * s2 - w) / a[m + 1][m] + a[m][m + 1]; q = a[m + 1][m + 1] - z - r - s2; r = a[m + 2][m + 1];
+              s2 = abs(p) + abs(q) + abs(r); p /= s2; q /= s2; r /= s2;
+              if (m === l) break;
+              const u = abs(a[m][m - 1]) * (abs(q) + abs(r)), v = abs(p) * (abs(a[m - 1][m - 1]) + abs(z) + abs(a[m + 1][m + 1]));
+              if (u + v === v) break;
+            }
+            for (let i = m + 2; i <= nn; i++) { a[i][i - 2] = 0; if (i !== m + 2) a[i][i - 3] = 0; }
+            for (let k = m; k <= nn - 1; k++) {
+              if (k !== m) { p = a[k][k - 1]; q = a[k + 1][k - 1]; r = 0; if (k !== nn - 1) r = a[k + 2][k - 1]; if ((x = abs(p) + abs(q) + abs(r)) !== 0) { p /= x; q /= x; r /= x; } }
+              const s2 = SIGN(sqrt(p * p + q * q + r * r), p);
+              if (s2 !== 0) {
+                if (k === m) { if (l !== m) a[k][k - 1] = -a[k][k - 1]; } else a[k][k - 1] = -s2 * x;
+                p += s2; x = p / s2; y = q / s2; z = r / s2; q /= p; r /= p;
+                for (let j = k; j <= nn; j++) { p = a[k][j] + q * a[k + 1][j]; if (k !== nn - 1) { p += r * a[k + 2][j]; a[k + 2][j] -= p * z; } a[k + 1][j] -= p * y; a[k][j] -= p * x; }
+                const mmin = nn < k + 3 ? nn : k + 3;
+                for (let i = l; i <= mmin; i++) { p = x * a[i][k] + y * a[i][k + 1]; if (k !== nn - 1) { p += z * a[i][k + 2]; a[i][k + 2] -= p * r; } a[i][k + 1] -= p * q; a[i][k] -= p; }
+              }
+            }
+          }
+        }
+      } while (l < nn - 1);
+    }
+    const idx = Array.from({ length: n }, (_, i) => i + 1).sort((i, j) => wr[i] - wr[j] || wi[i] - wi[j]);
+    return { re: idx.map(i => wr[i]), im: idx.map(i => wi[i]), ok: okAll };
+  }
+  /** eigSym(A) → {values (ascending), vectors (columns, unit length), sweeps, ok}: cyclic Jacobi on a symmetric matrix */
+  function eigSym(A) {
+    if (!square(A)) return { values: [], vectors: [], sweeps: 0, ok: false };
+    const n = A.length, a = A.map(r => Array.from(r, Number)), V = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i === j ? 1 : 0)));
+    let sweeps = 0, nrm = 0; for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) nrm += a[i][j] * a[i][j];
+    for (; sweeps < 60; sweeps++) {
+      let off = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) off += a[i][j] * a[i][j];
+      if (off <= 1e-32 * nrm || off === 0) break;
+      for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
+        if (a[p][q] === 0) continue;
+        const th2 = (a[q][q] - a[p][p]) / (2 * a[p][q]), tt = (th2 >= 0 ? 1 : -1) / (abs(th2) + sqrt(th2 * th2 + 1)), c = 1 / sqrt(tt * tt + 1), s2 = tt * c;
+        for (let k = 0; k < n; k++) { const akp = a[k][p], akq = a[k][q]; a[k][p] = c * akp - s2 * akq; a[k][q] = s2 * akp + c * akq; }
+        for (let k = 0; k < n; k++) { const apk = a[p][k], aqk = a[q][k]; a[p][k] = c * apk - s2 * aqk; a[q][k] = s2 * apk + c * aqk; }
+        for (let k = 0; k < n; k++) { const vkp = V[k][p], vkq = V[k][q]; V[k][p] = c * vkp - s2 * vkq; V[k][q] = s2 * vkp + c * vkq; }
+      }
+    }
+    const idx = Array.from({ length: n }, (_, i) => i).sort((i, j) => a[i][i] - a[j][j]);
+    return { values: idx.map(i => a[i][i]), vectors: V.map(r => idx.map(i => r[i])), sweeps, ok: sweeps < 60 };
+  }
   const METHODS = ['auto', 'dopri5', 'tsit5', 'rosenbrock', 'ros3p', 'radau5', 'rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
   const FIXED = ['rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
   function integrate(cfg) {
@@ -1204,6 +1302,84 @@
     if (newtonFail) r.codes.push({ code: 'dae-newton', level: 'error' });
     solveZ(r.t, Float64Array.from(r.y));
     return { ...r, z: Array.from(z) };
+  }
+  /** daeTheta({M: [diagonal], f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J),
+      consistent?, newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps}) — M·y′ = f(t, y) with a diagonal M whose zeros are
+      algebraic rows (nodes without capacity: thermal networks, circuit nodes): a semi-explicit index-1 DAE. A row with M_i ≠ 0 takes
+      the θ-method M_i(y₁ − y₀)/h = θ f_i(t₁, y₁) + (1 − θ) f_i(t₀, y₀) (θ = ½ trapezoidal, A-stable, order 2; θ = 1 backward Euler,
+      L-stable, order 1: the two transient methods of SPICE, Nagel 1975 §4); an algebraic row holds at the new time, f_i(t₁, y₁) = 0
+      (so the trapezoidal rule does not ring on it: Brenan, Campbell & Petzold 1996 §3.1). Each step is solved by Newton with the
+      Jacobian of f (cfg.jac, or forward differences), LU with pivoting; a step whose Newton fails is halved (≤ 20 times, then the
+      error 'newton'). Fixed steps dt, landing exactly on breaks [{t, apply?(t, y)}] and on tEnd; consistent: true first solves the
+      algebraic rows at t0 with the differential ones held. Samples are interpolated linearly (second order, as the method).
+      → {t, y, steps, newton (iterations), stop, codes} */
+  function daeTheta(cfg) {
+    const C = codes(['nan', 'newton', 'budget', 'bad-config']);
+    const y0 = cfg && cfg.y0 ? Float64Array.from(cfg.y0) : null, n = y0 ? y0.length : 0, t0 = cfg && fin(cfg.t0) ? cfg.t0 : 0, tEnd = cfg && cfg.tEnd;
+    const st = { steps: 0, newton: 0, nfev: 0 };
+    const done = (t, y, stop) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, newton: st.newton, nfev: st.nfev, stop, codes: C.list });
+    const Md = cfg && (Array.isArray(cfg.M) || ArrayBuffer.isView(cfg.M)) ? Float64Array.from(cfg.M) : null;
+    if (!cfg || typeof cfg.f !== 'function' || !n || !fin(tEnd) || !(tEnd >= t0) || !(cfg.dt > 0) || (Md && (Md.length !== n || !Md.every(fin)))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    const M = Md || new Float64Array(n).fill(1);
+    const th = fin(cfg.theta) && cfg.theta >= 0.5 && cfg.theta <= 1 ? cfg.theta : cfg.method === 'backward-euler' ? 1 : 0.5;
+    const tolN = cfg.newtonTol > 0 ? cfg.newtonTol : 1e-10, maxN = fin(cfg.maxNewton) ? max(2, min(cfg.maxNewton, 100)) : 25;
+    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS;
+    const J = new Float64Array(n * n), G = new Float64Array(n * n), piv = new Int32Array(n), F0 = new Float64Array(n), F1 = new Float64Array(n), R = new Float64Array(n), fx = new Float64Array(n), dy = new Float64Array(n);
+    const f = (t, y, out) => { cfg.f(t, y, out); st.nfev++; };
+    const jac = (t, y, Fy) => {
+      if (typeof cfg.jac === 'function') { J.fill(0); cfg.jac(t, y, J); return; }
+      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), 1); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - Fy[i]) / del; }
+    };
+    // Newton on R(y) = 0 for the rows given by resid (y changed in place) → true when converged
+    const newton = (t, y, resid, gm) => {
+      for (let it = 0; it < maxN; it++) {
+        f(t, y, F1); if (!F1.every(fin)) return false; resid(F1);
+        jac(t, y, F1); gm(); if (!luFactor(G, n, piv)) return false;
+        for (let i = 0; i < n; i++) dy[i] = -R[i]; luSolve(G, n, piv, dy); st.newton++;
+        let e = 0; for (let i = 0; i < n; i++) { y[i] += dy[i]; e = max(e, abs(dy[i]) / (1 + abs(y[i]))); }
+        if (!y.every(fin)) return false;
+        if (e <= tolN) { f(t, y, F1); return F1.every(fin); }
+      }
+      return false;
+    };
+    let t = t0; const y = Float64Array.from(y0), yn = new Float64Array(n), yprev = new Float64Array(n);
+    const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t); let bi = 0;
+    const applyBreaks = () => { while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b = brk[bi++]; if (typeof b.apply === 'function') b.apply(t, y); } };
+    const consistent = () => {   // the algebraic rows at t with the differential ones held
+      if (!M.some(m => m === 0)) return true;
+      return newton(t, y, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : 0; }, () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? 1 : 0); });
+    };
+    applyBreaks();
+    if (cfg.consistent && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
+    if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
+    f(t, y, F0);
+    const samples = cfg.samples || []; let si = 0;
+    while (si < samples.length && samples[si] <= t) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
+    const tmp = new Float64Array(n);
+    for (;;) {
+      if (t >= tEnd - 1e-14 * max(1, abs(tEnd))) return done(t, y, 'end');
+      if (st.steps >= maxSteps) { C.code('budget', t); return done(t, y, 'budget'); }
+      const target = bi < brk.length ? min(tEnd, brk[bi].t) : tEnd;
+      let h = min(cfg.dt, target - t), ok2 = false, halv = 0;
+      if (target - t - h <= 1e-12 * max(1, abs(target))) h = target - t;
+      for (; halv <= 20; halv++) {
+        yn.set(y); const t1 = h === target - t ? target : t + h, hh = h;
+        ok2 = newton(t1, yn, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : M[i] * (yn[i] - y[i]) - hh * (th * F[i] + (1 - th) * F0[i]); },
+          () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? M[i] : 0) - hh * th * J[i * n + j]; });
+        if (ok2) { yprev.set(y); const ta = t; t = t1; y.set(yn); F0.set(F1); st.steps++;
+          while (si < samples.length && samples[si] <= t) { const s2 = (samples[si] - ta) / (t - ta); for (let i = 0; i < n; i++) tmp[i] = yprev[i] + s2 * (y[i] - yprev[i]); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
+          if (cfg.onStep) cfg.onStep(t, y);
+          break; }
+        h /= 2;
+      }
+      if (!ok2) { C.code('newton', t); return done(t, y, 'newton'); }
+      if (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) {
+        applyBreaks();
+        if (cfg.consistent !== false && M.some(m => m === 0) && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
+        if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
+        f(t, y, F0);
+      }
+    }
   }
   /** ssa({x0, nu: [[Δ per species] per reaction], propensity(x, a) (fills a), tEnd, r (a stream), maxEvents, onEvent(t, x, j)})
       — Gillespie's direct method (Gillespie 1977, J. Phys. Chem. 81:25): exact trajectories of the chemical master equation
@@ -1625,7 +1801,7 @@
     // events
     calendar, sim, codes, budget,
     // continuous time and roots
-    integrate, locate, brent,
+    integrate, locate, brent, lu, solve, inv, eig, eigSym,
     // special functions
     lgamma, gammaP, gammaQ, betaI, betaQ, normCdf, normSf, normInv, erf, erfc, erfInv, erfcInv, tCdf, tSf, chi2Sf, fCdf, fSf, tq,
     // output analysis
@@ -1633,7 +1809,7 @@
     // sweeps and sensitivity
     linspace, oat, grid, morris, sobol, lhs,
     // delay equations, stochastic kinetics, SDEs, schedules
-    dde, dae, ssa, tauLeap, sde, nhpp, piecewise,
+    dde, dae, daeTheta, ssa, tauLeap, sde, nhpp, piecewise,
     // distributions and input modelling
     cdfOf, quantileOf, truncated, mixture, fit, ksTest, chiSquare, andersonDarling, digamma, trigamma,
     // variance reduction, precision, calibration

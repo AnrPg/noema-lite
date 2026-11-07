@@ -219,6 +219,62 @@ ok(Object.isFrozen(S) && typeof S.source === 'function' && S.version === 1, 'Noe
       ok(r[0].steps === r[1].steps && r[0].rejected === r[1].rejected && r[0].nfev === r[1].nfev && d < 1e-11, `Radau IIA, ${name}: the transformed Newton system (real + complex n × n) = the full 3n × 3n one: ${r[0].steps} steps both, largest relative difference ${d.toExponential(1)} (${tm[0]} ms against ${tm[1]} ms)`);
     }
   }
+  // ---- θ-method DAE M·y′ = f with a singular diagonal M (trapezoidal / backward Euler, as SPICE and the thermal networks) ----
+  { const Rr = 1e3, Cc = 1e-6, R1 = 1e3, R2 = 2e3, a = 1 / (Rr * Cc), b = (1 / Rr + 1 / (R1 + R2)) / Cc, vinf = a / b;
+    const f = (t, y, r) => { r[0] = (1 - y[0]) / Rr - (y[0] - y[1]) / R1; r[1] = (y[0] - y[1]) / R1 - y[1] / R2; };   // a charging RC with a divider node w of no capacity
+    for (const m of ['trapezoidal', 'backward-euler']) {
+      const h = 1e-4, N = 50, r = S.daeTheta({ M: [Cc, 0], f, y0: [0, 0.3], tEnd: N * h, dt: h, method: m, consistent: true });
+      const amp = m === 'trapezoidal' ? (1 - b * h / 2) / (1 + b * h / 2) : 1 / (1 + b * h), ex = vinf * (1 - amp ** N);
+      ok(rel(r.y[0], ex, 1e-12) && Math.abs(r.y[1] - r.y[0] * R2 / (R1 + R2)) < 1e-12 && r.steps === N, `daeTheta ${m}: RC + divider node, v after 50 steps = v∞(1 − R(hλ)⁵⁰) with R = ${m === 'trapezoidal' ? '(1 − hλ/2)/(1 + hλ/2)' : '1/(1 + hλ)'} exactly (${r.y[0].toFixed(12)}); the node without capacity stays on its constraint (inconsistent w₀ = 0.3 corrected)`);
+    }
+    const ordr = (m, hs) => { const T = 5e-3, ex = vinf * (1 - Math.exp(-b * T)); return S.richardson(hs, hs.map(h => S.daeTheta({ M: [Cc, 0], f, y0: [0, 0], tEnd: T, dt: h, method: m }).y[0]), ex).p; };
+    const pT = ordr('trapezoidal', [2e-4, 1e-4, 5e-5]), pB = ordr('backward-euler', [2e-5, 1e-5, 5e-6]);
+    ok(near(pT, 2, 0.05) && near(pB, 1, 0.05), `daeTheta orders: trapezoidal ${pT.toFixed(3)} (2), backward Euler ${pB.toFixed(3)} (1)`);
+    const fR = (t, y, r) => { r[0] = -0.04 * y[0] + 1e4 * y[1] * y[2]; r[1] = 0.04 * y[0] - 1e4 * y[1] * y[2] - 3e7 * y[1] * y[1]; r[2] = y[0] + y[1] + y[2] - 1; };
+    const rd = S.daeTheta({ M: [1, 1, 0], f: fR, y0: [1, 0, 0], tEnd: 40, dt: 1e-3, method: 'trapezoidal' });
+    ok(rel(rd.y[0], 0.7158270687, 1e-9) && rel(rd.y[1], 0.9185534764e-5, 1e-7) && rel(rd.y[2], 0.2841637457, 1e-8), `daeTheta: Robertson as an index-1 DAE (y₃ = 1 − y₁ − y₂), trapezoidal dt 1e-3, t = 40: ${rd.y.map(v => v.toPrecision(10)).join(', ')} (HNW II §IV.10)`);
+    let on = 0, hitStep = false; const sw = S.daeTheta({ M: [Cc, 0], f: (t, y, r) => { r[0] = (on - y[0]) / Rr - (y[0] - y[1]) / R1; r[1] = (y[0] - y[1]) / R1 - y[1] / R2; }, y0: [0, 0], tEnd: 3e-3, dt: 7e-4, method: 'backward-euler',
+      breaks: [{ t: 1e-3, apply: () => { on = 1; } }], onStep: t => { if (t === 1e-3) hitStep = true; } });
+    const bad = S.daeTheta({ M: [1], f: (t, y, r) => { r[0] = NaN; }, y0: [1], tEnd: 1, dt: 0.1 });
+    ok(hitStep && sw.y[0] > 0 && bad.stop === 'newton' && S.daeTheta({ M: [1, 0], f, y0: [0], tEnd: 1, dt: 0.1 }).stop === 'bad-config', 'daeTheta: steps land on a switch (break) exactly; a step Newton cannot solve gives the code newton; a wrong-sized y0 is bad-config');
+  }
+  // ---- upper tails without cancellation, erfc and its inverse ----
+  { ok(rel(S.erfc(5), 1.5374597944280349e-12, 1e-13) && rel(S.erfc(10), 2.088487583762545e-45, 1e-13) && rel(S.erfc(20), 5.395865611607901e-176, 1e-12) && S.erfc(-3) === 2 - S.erfc(3),
+      `erfc in the tail (Abramowitz & Stegun / DLMF 7.2): erfc 5 = ${S.erfc(5).toExponential(14)}, erfc 10 = ${S.erfc(10).toExponential(14)}, erfc 20 = ${S.erfc(20).toExponential(13)}`);
+    ok(rel(S.normSf(10), 7.619853024160527e-24, 1e-13) && rel(S.normSf(37.5), 4.605353009584e-308, 1e-11) && S.normCdf(-10) === S.normSf(10), `normal upper tail 1 − Φ(10) = ${S.normSf(10).toExponential(14)} (7.619853024160527e-24), 1 − Φ(37.5) = ${S.normSf(37.5).toExponential(10)}`);
+    const q5 = Math.exp(-50) * (1 + 50 + 1250 + 125000 / 6 + 6250000 / 24);
+    ok(rel(S.gammaQ(5, 50), q5, 1e-13) && rel(S.chi2Sf(100, 10), q5, 1e-13) && rel(S.gammaQ(1, 700), Math.exp(-700), 1e-12) && near(S.gammaQ(3, 2) + S.gammaP(3, 2), 1, 1e-15),
+      `Q(a, x) by the continued fraction: Q(5, 50) = P(χ²₁₀ > 100) = ${S.gammaQ(5, 50).toExponential(14)} = e⁻⁵⁰Σ50ᵏ/k! (exact); Q(1, 700) = e⁻⁷⁰⁰; P + Q = 1`);
+    ok(rel(S.tSf(1e6, 1), Math.atan(1e-6) / Math.PI, 1e-13) && rel(S.tSf(1e8, 2), 1 / (Math.sqrt(2 + 1e16) * (Math.sqrt(2 + 1e16) + 1e8)), 1e-13) && rel(S.fSf(1e5, 2, 4), Math.pow(1 + 2e5 / 4, -2), 1e-12) && near(S.fCdf(3, 5, 7) + S.fSf(3, 5, 7), 1, 1e-15)
+      && rel(S.betaQ(2, 3, 0.999), 0.001 ** 3 * (4 - 3 * 0.001), 1e-10),
+      `upper tails in closed form: t₁ (Cauchy) at 10⁶, t₂ at 10⁸ (${S.tSf(1e8, 2).toExponential(6)}), F(2, 4) at 10⁵, the beta complement 1 − I₀.₉₉₉(2, 3) = ${S.betaQ(2, 3, 0.999).toExponential(6)}`);
+    ok(rel(S.erfcInv(1e-100), 15.065574702592645, 1e-13) && rel(S.erfc(S.erfcInv(1e-300)), 1e-300, 1e-12) && near(S.erfInv(S.erf(0.5)), 0.5, 1e-15) && near(S.erf(0.5), 0.5204998778130465, 3e-16),
+      `erfcInv(10⁻¹⁰⁰) = ${S.erfcInv(1e-100)} and erfc(erfcInv(10⁻³⁰⁰)) = 10⁻³⁰⁰ to 1e-12; erf ½ = 0.5204998778130465 and back`); }
+  // ---- Philox4x32-10: Random123's known-answer vectors; O(1) access to sample i ----
+  { const hx = a => a.map(x => x.toString(16).padStart(8, '0')).join(' ');
+    const kat = [[[0, 0, 0, 0], [0, 0], '6627e8d5 e169c58d bc57ac4c 9b00dbd8'], [[0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff], [0xffffffff, 0xffffffff], '408f276d 41c83b0e a20bc7c6 6d5451fd'],
+      [[0x243f6a88, 0x85a308d3, 0x13198a2e, 0x03707344], [0xa4093822, 0x299f31d0], 'd16cfe09 94fdcceb 5001e420 24126ea1']];
+    ok(kat.every(([c, k, w]) => hx(S.philox(c, k)) === w), 'Philox4x32-10 = the known-answer vectors of Random123 (Salmon et al. 2011): zeros, all ones, the digits of π');
+    const cs = S.counterStream(7, 'noise:R1'), N = 100000; let m = 0, v = 0; for (let i = 0; i < N; i++) { const z = cs.normal(i); m += z; v += z * z; } m /= N; v = v / N - m * m;
+    const big = cs.u(123456789012), again = S.counterStream(7, 'noise:R1').u(123456789012), other = S.counterStream(7, 'noise:R2').u(123456789012), an = S.counterStream(7, 'noise:R1', { antithetic: true }).u(5);
+    ok(Math.abs(m) < 0.02 && Math.abs(v - 1) < 0.02 && big === again && big !== other && big > 0 && big < 1 && near(an + cs.u(5), 1, 1e-15), `counterStream: sample 123 456 789 012 directly (${big.toFixed(12)}), the same from a new stream, another for another name; 10⁵ normals mean ${m.toFixed(4)}, var ${v.toFixed(4)}; antithetic 1 − u`); }
+  // ---- dense linear algebra ----
+  { const H = n => Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => 1 / (i + j + 1)));
+    const hil = [9.670230402258689e-05, 0.006738273605760748, 0.1691412202214500, 1.500214280059243];
+    const es = S.eigSym(H(4)), eg = S.eig(H(4));
+    ok(es.values.every((v, i) => rel(v, hil[i], 1e-11)) && eg.re.every((v, i) => rel(v, hil[i], 1e-11)) && eg.im.every(x => x === 0) && rel(1 / S.lu(H(4)).det, 6048000, 1e-11),
+      `the Hilbert matrix H₄: eigenvalues ${hil.map(x => x.toPrecision(6)).join(', ')} by Jacobi and by Hessenberg-QR; det = 1/6 048 000`);
+    const v0 = es.vectors.map(r => r[0]), res = H(4).map((r, i) => r.reduce((s2, a, j) => s2 + a * v0[j], 0) - es.values[0] * v0[i]);
+    ok(Math.max(...res.map(Math.abs)) < 1e-15 && near(v0.reduce((s2, x) => s2 + x * x, 0), 1, 1e-14), 'eigSym: the vectors are unit eigenvectors (residual < 1e-15)');
+    const T = Array.from({ length: 10 }, (_, i) => Array.from({ length: 10 }, (_, j) => (i === j ? 2 : Math.abs(i - j) === 1 ? -1 : 0))), et = S.eigSym(T);
+    ok(et.values.every((v, k) => near(v, 2 - 2 * Math.cos((k + 1) * Math.PI / 11), 1e-14)), 'the 10 × 10 second-difference matrix: eigenvalues 2 − 2cos(kπ/11)');
+    let c = [1]; for (const r of [[1, -1], [1, -2], [1, -3], [1, 0, 1]]) { const o2 = new Array(c.length + r.length - 1).fill(0); c.forEach((a, i) => r.forEach((b, j) => { o2[i + j] += a * b; })); c = o2; }
+    const n2 = c.length - 1, Cm = Array.from({ length: n2 }, (_, i) => Array.from({ length: n2 }, (_, j) => (i === 0 ? -c[j + 1] : i === j + 1 ? 1 : 0))), ec = S.eig(Cm);
+    const want = [[0, -1], [0, 1], [1, 0], [2, 0], [3, 0]];
+    ok(ec.ok && want.every(([re, im], i) => near(ec.re[i], re, 1e-12) && near(ec.im[i], im, 1e-12)) && JSON.stringify(S.eig([[1, 2], [-2, 1]]).im) === '[-2,2]', 'eig: the companion matrix of (x − 1)(x − 2)(x − 3)(x² + 1) gives 1, 2, 3, ±i; [[1, 2], [−2, 1]] gives 1 ± 2i');
+    const x6 = S.solve(H(6), H(6).map(r => r.reduce((a, b) => a + b))), Ai = S.inv([[4, 7], [2, 6]]);
+    ok(x6.every(v => near(v, 1, 1e-8)) && near(Ai[0][0], 0.6, 1e-15) && near(Ai[0][1], -0.7, 1e-15) && near(Ai[1][0], -0.2, 1e-15) && near(Ai[1][1], 0.4, 1e-15) && !S.lu([[1, 2], [2, 4]]).ok,
+      'lu / solve / inv: H₆x = H₆·1 gives 1 to 1e-8 (cond ≈ 1.5e7); the inverse of [[4, 7], [2, 6]]; a singular matrix is not ok'); }
   // ---- compensated summation (Neumaier) ----
   { const w = S.welford(); for (const x of [1, 1e100, 1, -1e100]) w.add(x); const k = S.ksum(); for (let i = 0; i < 1e6; i++) k.add(0.1); let plain = 0; for (let i = 0; i < 1e6; i++) plain += 0.1;
     const ta = S.timeAvg(0, 0.1); for (let i = 1; i <= 1e6; i++) ta.update(i * 1e-3, 0.1);

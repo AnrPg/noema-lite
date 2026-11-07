@@ -10,15 +10,15 @@ It is a plain module, `window.NoemaSimKit` (frozen). It loads after `46_lib_core
 fdlibm ports for `exp`, `log`, `sin`, `cos` and `pow`, so the numbers are the same on every device. It has no DOM, no network and no
 clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker:
 `NoemaExpr.source() + NoemaLibCore.source() + NoemaSimKit.source() + <engine module>` (`source()` returns `'(…)(self);'`, like the
-core's). Tests: `node tests/lib_simkit.js` (119 assertions against published values and exact solutions).
+core's). Tests: `node tests/lib_simkit.js` (137 assertions against published values and exact solutions).
 
 | § | what | functions |
 |---|---|---|
 | 1 | codes and budgets | `codes(fatal)`, `budget(max)` |
-| 2 | randomness | `stream(seed, name, opts)`, `subseed(seed, i)`, `dist(d)`, `DISTS` |
+| 2 | randomness | `stream(seed, name, opts)`, `subseed(seed, i)`, `philox`, `counterStream`, `dist(d)`, `DISTS` |
 | 3 | the event calendar and the executive | `calendar()`, `sim(opts)` (`at`, `after`, `cancel`, `when`, `activity`, `run`, `stop`, `log`, `eventLog`) |
 | 4 | continuous time and roots | `integrate(cfg)`, `locate`, `brent`, `METHODS` |
-| 4.1 | delay equations and DAEs | `dde(cfg)`, `dae(cfg)` |
+| 4.1 | delay equations and DAEs | `dde(cfg)`, `dae(cfg)`, `daeTheta(cfg)` |
 | 4.2 | stochastic dynamics | `ssa(cfg)`, `tauLeap(cfg)`, `sde(cfg)` |
 | 4.3 | schedules and time-varying arrivals | `nhpp`, `piecewise` |
 | 5 | output analysis | `welford`, `ksum`, `timeAvg`, `ci`, `tq`, `batchMeans`, `mser5`, `acf`, `replicate`, `littleCheck`, `untilPrecision` |
@@ -28,7 +28,8 @@ core's). Tests: `node tests/lib_simkit.js` (119 assertions against published val
 | 7 | verification | `richardson`, `conservation`, `deterministic`, `dim`, `sameDim`, `convert` |
 | 8 | for engine authors | `event`, `clone`, `stepper`, `odeStepper`, `wrapRun` |
 | 9 | co-simulation | `cosim(cfg)` |
-| — | special functions | `lgamma`, `gammaP`, `betaI`, `normCdf`, `normInv`, `tCdf`, `tq`, `digamma`, `trigamma` |
+| 4.4 | dense linear algebra | `lu`, `solve`, `inv`, `eig`, `eigSym` |
+| — | special functions and tails | `lgamma`, `gammaP`, `gammaQ`, `betaI`, `betaQ`, `normCdf`, `normSf`, `normInv`, `erf`, `erfc`, `erfInv`, `erfcInv`, `tCdf`, `tSf`, `chi2Sf`, `fCdf`, `fSf`, `tq`, `digamma`, `trigamma` |
 
 ## 1. Codes and budgets
 
@@ -60,6 +61,12 @@ which is 0.127011122046577.
   (Marsaglia & Tsang 2000; k < 1 by the u^(1/k) trick) and `beta(a, b)` (two gammas). `erlang(k, mean)` takes a product of k
   uniforms. Also `shuffle(a)` (Fisher–Yates), `pick(a)` and `u53()` (53 bits from two draws).
 - `subseed(seed, i)` returns a 32-bit seed (a splitmix32 finaliser).
+- **Counter-based generator.** `philox(counter[4], key[2]) → [4 uint32]` is Philox4x32-10 (Salmon, Moraes, Dror & Shaw 2011, SC'11;
+  the Random123 library). The test checks Random123's known-answer vectors. Its output is a pure function of (counter, key), so
+  sample i costs O(1) at any time, with no state. `counterStream(seed, name, {antithetic})` gives `u(i, j = 0)` (a 53-bit uniform
+  from block i, half j ∈ {0, 1}), `normal(i, j, μ, σ)` (by inversion), `exp(i, j, rate)` and `block(i)`. The key is
+  (seed, fnv(name)) and the counter is (i mod 2³², ⌊i/2³²⌋, 0, 0). Use it for noise sources sampled at arbitrary instants: the
+  circuit transient's resistor noise at step k is `counterStream(seed, 'noise:R1').normal(k)`.
 - `dist({dist, …})` returns `{ok, draw(r), mean, var, scv}`, the distribution objects of the engines, with the moments the queueing
   formulas need. The kinds are `const {value}`, `exp {mean | rate}`, `uniform {min, max}`, `tri {min, mode, max}`,
   `normal {mean, sd}` (unclipped: a duration takes `truncated(d, 0)`, or the engine clips it and raises its own code), `lognormal {mean, sd}` (its own moments: σ² = ln(1 + sd²/m²)), `gamma {shape, scale | mean, cv}`,
@@ -154,6 +161,24 @@ is Brent 1973 ch. 4.
   form (Hairer & Wanner 1996 §VI.1). z is solved from g = 0 by Newton at every evaluation (≤ 30 iterations, code `dae-newton`), and
   y is integrated by `integrate` (`auto` switches to Rosenbrock when the reduced system is stiff). The result adds `z`.
 
+- `daeTheta({M, f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J), consistent?,
+  newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps})` solves M·y′ = f(t, y) with a **diagonal M whose zeros are
+  algebraic rows**: nodes without capacity in a thermal network or a circuit. The result is `{t, y, steps, newton, nfev, stop, codes}`.
+  - Each row with M_i ≠ 0 takes the θ-method M_i(y₁ − y₀)/h = θf_i(t₁, y₁) + (1 − θ)f_i(t₀, y₀). θ = ½ is `trapezoidal`
+    (A-stable, order 2); θ = 1 is `backward-euler` (L-stable, order 1). These are SPICE's two transient methods (Nagel 1975), and the
+    names match `transient.method`.
+  - An algebraic row holds at the new time, f_i(t₁, y₁) = 0, so the trapezoidal rule cannot ring on it (Brenan, Campbell & Petzold
+    1996 §3.1).
+  - Each step is solved by Newton with LU and partial pivoting. The Jacobian is `jac`, or forward differences when it is not given.
+  - A step whose Newton iteration fails is halved, up to 20 times; after that the run stops with the error `newton`.
+  - Steps are fixed at `dt` and land exactly on `breaks` (switch times) and on tEnd. After a break the algebraic rows are made
+    consistent again.
+  - `consistent: true` first solves the algebraic rows at t0 with the differential rows held.
+  - Samples are interpolated linearly.
+  - Tests: on an RC circuit with a divider node, both methods reproduce their exact amplification factor (1 − hλ/2)/(1 + hλ/2) and
+    1/(1 + hλ) to 1e-12, and the measured orders are 2 and 1. Robertson written as an index-1 DAE gives HNW II's values at t = 40 to
+    1e-9 (trapezoidal, dt 1e-3).
+
 ### 4.2 Stochastic dynamics
 
 - `ssa({x0, nu, propensity(x, a), tEnd, r, maxEvents, onEvent})`: Gillespie's direct method (Gillespie 1977), exact trajectories of
@@ -170,6 +195,20 @@ is Brent 1973 ch. 4.
   1979; Law §8.6.2).
 - `piecewise([[t, v]…], {period, step})` → v(t): a schedule (a day's arrival rates, a staffing plan), steps by default or linear,
   repeated every `period`.
+
+### 4.4 Dense linear algebra
+
+Matrices are arrays of rows.
+- `lu(A)` → `{ok, n, det, solve(b)}`: Gaussian elimination with partial pivoting. `solve(A, b)` and `inv(A)` (null when A is
+  singular) build on it.
+- `eig(A)` → `{re, im, ok}`: every eigenvalue of a general real matrix, sorted by real part. The method is balancing, then
+  stabilised elimination to Hessenberg form, then the Francis double-shift QR (Parlett & Reinsch 1969; EISPACK balanc/elmhes/hqr;
+  Numerical Recipes 3rd ed. §11.6–11.7).
+- `eigSym(A)` → `{values (ascending), vectors (columns, unit), sweeps, ok}`: cyclic Jacobi (Golub & Van Loan 4th ed. §8.5).
+- Tests: the Hilbert matrix H₄ (published eigenvalues and det = 1/6 048 000), the second-difference matrix (2 − 2cos(kπ/11)), and
+  companion matrices with known real and complex roots.
+- An equilibrium's stability (the eigenvalues of a Jacobian, as in ode@1) is `eig(J)`. Parameter sweeps use `grid`, `oat`,
+  `morris`, `sobol` and `lhs` (§6).
 
 ## 5. Output analysis (Law ch. 9; Banks ch. 11)
 
@@ -328,3 +367,18 @@ first among the P6/library scripts of the bundle (tools/build.py `KERNEL`) and t
 
 (DEVS view: each part is an atomic model whose time advance is the macro step; Zeigler, Muzy & Kofman 2018 ch. 6 and ch. 18. For
 master algorithms see Gomes et al. 2018, *ACM Comput. Surv.* 51:3, the FMI 2.0 co-simulation survey.)
+
+## 10. Special functions and upper tails
+
+These hold their accuracy in the tails, so `prob@1` and `genetics@1` can drop their own versions.
+- `gammaQ(a, x)` is Γ(a, x)/Γ(a). For x ≥ a + 1 it uses the continued fraction (modified Lentz); below that it is 1 − the series of P,
+  where P ≤ about ½, so nothing cancels. This is the split of DiDonato & Morris 1986 (*ACM TOMS* 12:4), with up to 20 000 terms
+  for large a. `gammaP(a, x)` is the lower function.
+- `erfc(x)` is Q(½, x²), accurate down to its underflow near x ≈ 26.5. `erf` is computed from P near 0.
+- `erfcInv(p)` and `erfInv(p)` start from AS241 and take two Newton steps on erfc.
+- `betaQ(a, b, x) = 1 − I_x(a, b)` comes from the same continued fraction as `betaI`, without subtracting.
+- Survival functions: `normSf(z)`, `tSf(x, df)`, `chi2Sf(x, k)`, `fSf(x, d1, d2)`, plus `fCdf`. `normCdf` now takes its tail from
+  `gammaQ`, so Φ(−10) = 7.619853024160527e-24 holds to 1e-13.
+- Tests: erfc 5, 10 and 20 (DLMF 7.2), the exact Q(n, x) = e⁻ˣΣxᵏ/k!, and the closed-form tails of t₁, t₂, F(2, 4) and Beta(2, 3)
+  far out.
+

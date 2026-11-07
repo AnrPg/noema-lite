@@ -441,95 +441,13 @@
   function keys() { return []; }
 
   /* ======================================================================================================================
-     Linear algebra for n ≤ 12 (+ the tangent vectors of a Lyapunov run): LU with partial pivoting, eigenvalues
+     Linear algebra for n ≤ 12: the kernel's (NoemaSimKit.lu: LU with partial pivoting; NoemaSimKit.eig: balancing, Hessenberg
+     reduction and the Francis double-shift QR — Numerical Recipes balanc / elmhes / hqr, the algorithm this engine had)
      ====================================================================================================================== */
-  function luFactor(A, n, piv) {   // A: Float64Array n×n row-major, in place; false when singular
-    for (let k = 0; k < n; k++) {
-      let p = k, mx = abs(A[k * n + k]);
-      for (let i = k + 1; i < n; i++) { const v = abs(A[i * n + k]); if (v > mx) { mx = v; p = i; } }
-      if (!(mx > 0) || !Number.isFinite(mx)) return false;
-      piv[k] = p;
-      if (p !== k) for (let j = 0; j < n; j++) { const t = A[k * n + j]; A[k * n + j] = A[p * n + j]; A[p * n + j] = t; }
-      const d = A[k * n + k];
-      for (let i = k + 1; i < n; i++) { const f = (A[i * n + k] /= d); if (f !== 0) for (let j = k + 1; j < n; j++) A[i * n + j] -= f * A[k * n + j]; }
-    }
-    return true;
-  }
-  function luSolve(A, n, piv, b) {   // b in place
-    for (let k = 0; k < n; k++) { const p = piv[k]; if (p !== k) { const t = b[k]; b[k] = b[p]; b[p] = t; } for (let i = k + 1; i < n; i++) b[i] -= A[i * n + k] * b[k]; }
-    for (let i = n - 1; i >= 0; i--) { let s = b[i]; for (let j = i + 1; j < n; j++) s -= A[i * n + j] * b[j]; b[i] = s / A[i * n + i]; }
-  }
-  /** eigenvalues of a real n×n matrix (rows): balance, reduce to Hessenberg form by elimination, shifted QR (Numerical Recipes in C,
-      2nd ed. 1992, balanc / elmhes / hqr; Wilkinson & Reinsch 1971). → [{re, im}] sorted by decreasing real part, or null */
+  /** eigenvalues of a real n×n matrix (rows) → [{re, im}] sorted by decreasing real part, or null (no convergence, non-finite) */
   function eigenvalues(M) {
-    const n = M.length; if (n === 1) return [{ re: M[0][0], im: 0 }];
-    const a = []; for (let i = 0; i <= n; i++) a.push(new Float64Array(n + 1));
-    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) a[i + 1][j + 1] = M[i][j];
-    for (let i = 1; i <= n; i++) for (let j = 1; j <= n; j++) if (!Number.isFinite(a[i][j])) return null;
-    // balanc
-    const RADIX = 2, sqrdx = 4; let last = 0;
-    for (let guard = 0; !last && guard < 100; guard++) {
-      last = 1;
-      for (let i = 1; i <= n; i++) {
-        let r = 0, c = 0; for (let j = 1; j <= n; j++) if (j !== i) { c += abs(a[j][i]); r += abs(a[i][j]); }
-        if (c && r) { let g = r / RADIX, f = 1; const s = c + r; while (c < g) { f *= RADIX; c *= sqrdx; } g = r * RADIX; while (c > g) { f /= RADIX; c /= sqrdx; }
-          if ((c + r) / f < 0.95 * s) { last = 0; g = 1 / f; for (let j = 1; j <= n; j++) a[i][j] *= g; for (let j = 1; j <= n; j++) a[j][i] *= f; } }
-      }
-    }
-    // elmhes
-    for (let m = 2; m < n; m++) {
-      let x = 0, i = m;
-      for (let j = m; j <= n; j++) if (abs(a[j][m - 1]) > abs(x)) { x = a[j][m - 1]; i = j; }
-      if (i !== m) { for (let j = m - 1; j <= n; j++) { const t = a[i][j]; a[i][j] = a[m][j]; a[m][j] = t; } for (let j = 1; j <= n; j++) { const t = a[j][i]; a[j][i] = a[j][m]; a[j][m] = t; } }
-      if (x) for (i = m + 1; i <= n; i++) { let y = a[i][m - 1]; if (y) { y /= x; a[i][m - 1] = y; for (let j = m; j <= n; j++) a[i][j] -= y * a[m][j]; for (let j = 1; j <= n; j++) a[j][m] += y * a[j][i]; } }
-    }
-    for (let i = 3; i <= n; i++) for (let j = 1; j <= i - 2; j++) a[i][j] = 0;
-    // hqr
-    const wr = new Float64Array(n + 1), wi = new Float64Array(n + 1);
-    let anorm = 0; for (let i = 1; i <= n; i++) for (let j = Math.max(i - 1, 1); j <= n; j++) anorm += abs(a[i][j]);
-    let nn = n, t = 0, z = 0, y = 0, x = 0, w = 0, v = 0, u = 0, s = 0, r = 0, q = 0, p = 0, l = 0, m = 0;
-    const SIGN = (aa, bb) => (bb >= 0 ? abs(aa) : -abs(aa));
-    while (nn >= 1) {
-      let its = 0;
-      do {
-        for (l = nn; l >= 2; l--) { s = abs(a[l - 1][l - 1]) + abs(a[l][l]); if (s === 0) s = anorm; if (abs(a[l][l - 1]) + s === s) { a[l][l - 1] = 0; break; } }
-        x = a[nn][nn];
-        if (l === nn) { wr[nn] = x + t; wi[nn--] = 0; }
-        else {
-          y = a[nn - 1][nn - 1]; w = a[nn][nn - 1] * a[nn - 1][nn];
-          if (l === nn - 1) {
-            p = 0.5 * (y - x); q = p * p + w; z = sqrt(abs(q)); x += t;
-            if (q >= 0) { z = p + SIGN(z, p); wr[nn - 1] = wr[nn] = x + z; if (z) wr[nn] = x - w / z; wi[nn - 1] = wi[nn] = 0; }
-            else { wr[nn - 1] = wr[nn] = x + p; wi[nn - 1] = -(wi[nn] = z); }
-            nn -= 2;
-          } else {
-            if (its === 60) return null;
-            if (its === 10 || its === 20) { t += x; for (let i = 1; i <= nn; i++) a[i][i] -= x; s = abs(a[nn][nn - 1]) + abs(a[nn - 1][nn - 2]); y = x = 0.75 * s; w = -0.4375 * s * s; }
-            ++its;
-            for (m = nn - 2; m >= l; m--) {
-              z = a[m][m]; r = x - z; s = y - z;
-              p = (r * s - w) / a[m + 1][m] + a[m][m + 1]; q = a[m + 1][m + 1] - z - r - s; r = a[m + 2][m + 1];
-              s = abs(p) + abs(q) + abs(r); p /= s; q /= s; r /= s;
-              if (m === l) break;
-              u = abs(a[m][m - 1]) * (abs(q) + abs(r)); v = abs(p) * (abs(a[m - 1][m - 1]) + abs(z) + abs(a[m + 1][m + 1]));
-              if (u + v === v) break;
-            }
-            for (let i = m + 2; i <= nn; i++) { a[i][i - 2] = 0; if (i !== m + 2) a[i][i - 3] = 0; }
-            for (let k = m; k <= nn - 1; k++) {
-              if (k !== m) { p = a[k][k - 1]; q = a[k + 1][k - 1]; r = 0; if (k !== nn - 1) r = a[k + 2][k - 1]; if ((x = abs(p) + abs(q) + abs(r)) !== 0) { p /= x; q /= x; r /= x; } }
-              if ((s = SIGN(sqrt(p * p + q * q + r * r), p)) !== 0) {
-                if (k === m) { if (l !== m) a[k][k - 1] = -a[k][k - 1]; } else a[k][k - 1] = -s * x;
-                p += s; x = p / s; y = q / s; z = r / s; q /= p; r /= p;
-                for (let j = k; j <= nn; j++) { p = a[k][j] + q * a[k + 1][j]; if (k !== nn - 1) { p += r * a[k + 2][j]; a[k + 2][j] -= p * z; } a[k + 1][j] -= p * y; a[k][j] -= p * x; }
-                const mmin = nn < k + 3 ? nn : k + 3;
-                for (let i = l; i <= mmin; i++) { p = x * a[i][k] + y * a[i][k + 1]; if (k !== nn - 1) { p += z * a[i][k + 2]; a[i][k + 2] -= p * r; } a[i][k + 1] -= p * q; a[i][k] -= p; }
-              }
-            }
-          }
-        }
-      } while (l < nn - 1);
-    }
-    const ev = []; for (let i = 1; i <= n; i++) ev.push({ re: wr[i], im: wi[i] });
+    const E = C.kit().eig(M); if (!E.ok || E.re.length !== M.length) return null;
+    const ev = E.re.map((re, i) => ({ re, im: E.im[i] }));
     ev.sort((A, B) => (B.re - A.re) || (B.im - A.im));
     return ev;
   }
@@ -708,15 +626,16 @@
     const box = M.eq.box.map(([i, a, b]) => [i, a(env), b(env)]).filter(([i, a, b]) => i >= 0 && fin(a) && fin(b));
     const g = M.eq.grid, dims = box.length, total = Math.pow(g, dims);
     for (let k = 0; k < total && dims; k++) { const s = Float64Array.from(y0); let r = k; for (const [i, a, b] of box) { const j = r % g; r = (r - j) / g; s[i] = g === 1 ? (a + b) / 2 : a + (b - a) * j / (g - 1); } starts.push(s); }
-    const found = [], Fv = new Float64Array(n), Ft = new Float64Array(n), Jm = new Float64Array(n * n), piv = new Int32Array(n), yt = new Float64Array(n);
+    const found = [], Fv = new Float64Array(n), Ft = new Float64Array(n), Jm = [], yt = new Float64Array(n), K = C.kit();
+    for (let i = 0; i < n; i++) Jm.push(new Float64Array(n));
     for (const s of starts) {
       const y = Float64Array.from(s); let ok = false;
       for (let it = 0; it < 60; it++) {
         F(y, Fv); const fn = nrm(Fv); if (!fin(fn)) break;
         if (fn <= 1e-13 * Math.max(1, nrm(y))) { ok = true; break; }
-        for (let j = 0; j < n; j++) { const yj = y[j], del = 1e-7 * Math.max(1, abs(yj)); y[j] = yj + del; F(y, Ft); y[j] = yj; for (let i = 0; i < n; i++) Jm[i * n + j] = (Ft[i] - Fv[i]) / del; }
-        if (!luFactor(Jm, n, piv)) break;
-        const dx = Float64Array.from(Fv, v => -v); luSolve(Jm, n, piv, dx);
+        for (let j = 0; j < n; j++) { const yj = y[j], del = 1e-7 * Math.max(1, abs(yj)); y[j] = yj + del; F(y, Ft); y[j] = yj; for (let i = 0; i < n; i++) Jm[i][j] = (Ft[i] - Fv[i]) / del; }
+        const L = K.lu(Jm); if (!L.ok) break;   // the kernel's LU with partial pivoting
+        const dx = Float64Array.from(L.solve(Array.from(Fv, v => -v)));
         let lam = 1, moved = false;
         for (let b = 0; b < 30; b++) { for (let i = 0; i < n; i++) yt[i] = y[i] + lam * dx[i]; F(yt, Ft); if (nrm(Ft) < (1 - 1e-4 * lam) * fn || !(nrm(Ft) >= 0)) { if (fin(nrm(Ft))) { y.set(yt); moved = true; } break; } lam /= 2; }
         if (!moved) break;
@@ -807,9 +726,9 @@
   function sweep(M, env, ctx) {
     const S = M.sweep, out = { p: [], v: [] };
     const a = S.min(env), b = S.max(env); if (!(fin(a) && fin(b))) { ctx.code('time'); return out; }
-    const keep = Math.max(1, Math.min(S.keep, Math.floor(2000 / S.points)));
+    const keep = Math.max(1, Math.min(S.keep, Math.floor(2000 / S.points))), ps = C.kit().linspace(a, b, S.points);   // the kernel's grid of the parameter
     for (let q = 0; q < S.points; q++) {
-      const p = S.points === 1 ? a : a + (b - a) * q / (S.points - 1); env[S.v] = p;
+      const p = ps[q]; env[S.v] = p;
       if (ctx.steps >= ctx.maxSteps) { ctx.code('budget'); break; }
       if (M.kind === 'map') {
         const n = M.n; const { f } = makeRhs(M, ctx, null); for (const k of M.names) env[k] = NaN;
