@@ -1,0 +1,23 @@
+{
+ "title": "No vehicles in the park",
+ "intro": "A by-law of 1958 says: no vehicles in the park. A later emergency rule lets a vehicle on an emergency call in, and a war memorial (an old tank on a plinth) was never meant to be caught. Switch on what arrives at the gate and watch which rules fire, which are defeated and why. This is H. L. A. Hart's famous example (1958): a rule has a clear core and a penumbra, and its exceptions are other rules that beat it.",
+ "carLabel": "A private car",
+ "ambulanceLabel": "An ambulance",
+ "emergencyLabel": "It is on an emergency call",
+ "memorialLabel": "A tank placed as a war memorial",
+ "bicycleLabel": "A bicycle",
+ "ruleCar": "A car is a vehicle.",
+ "ruleAmbulance": "An ambulance is a vehicle.",
+ "ruleTank": "A tank is a vehicle.",
+ "ruleBicycleWord": "In everyday speech a bicycle is a vehicle.",
+ "ruleBicycleDef": "The by-law means motor vehicles only: a bicycle is not one.",
+ "ruleNoVehicles": "No vehicles in the park (unless it is a memorial).",
+ "ruleEmergency": "A vehicle on an emergency call may enter.",
+ "forbLabel": "Entry is forbidden (1 = yes)",
+ "r1Label": "The no-vehicles rule: 2 fires, 1 is defeated, 0 does not apply",
+ "firedLabel": "Rules that fire",
+ "defeatedLabel": "Rules that are defeated",
+ "sceneTitle": "The rules and which beats which",
+ "checkDefeated": "The no-vehicles rule applies but is defeated.",
+ "checkAllowed": "Entry is not forbidden."
+}

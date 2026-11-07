@@ -239,8 +239,32 @@ quantities the idea is about; everything else (a picture of the device, the stor
 Rules of thumb. If the answer is one formula, use `formula@1`: an engine adds nothing but a run. If the idea is a process over
 time (a transient, a loop settling, a battery draining), use the engine that integrates it and show the series. When two engines
 could do it (a heater as a `thermal@1` network or a `pid@1` `thermal` plant), choose the one whose controls are what the learner
-should change: the network's resistances and capacities, or the controller's gains. Keep one engine per activity; a system that
+should change: the network's resistances and capacities, or the controller's gains. Keep one engine per activity when you can; a system that
 spans two (a node whose radio link is the question) uses the engine of the question (`rf@1`) and states the rest as constants.
+When the idea itself is the **coupling** of two models, use parts (next section).
+
+## Several engines in one activity — parts (`docs/INTERACTIVE.md` §12.8)
+
+Use parts only when the learner should see one model feed another: a drug's concentration driving an effect, a simulated count
+judged by a test, a route's length turned into a date. Otherwise one engine (and constants for the rest) is clearer.
+
+1. **Name the hand-over.** Write down which number (or series) goes from which part to which: that is each part's `inputs`.
+   A part sees the consts, the params and its own inputs only, so a missing input is an error, not a silent zero.
+2. **Choose the coupling.**
+   - *A chain* (the default) when the information flows one way: genetics → test, map → calendar. The parts may be listed in any
+     order; the validators find the order and name any cycle.
+   - *A loop* when two parts need each other's answer at a steady state (an equilibrium, a matching): give `tol`, and `relax` < 1
+     and an `init` guess when it oscillates. Test a setting where it does **not** settle: the readouts show "—" and the note says so.
+   - *A co-simulation* when they evolve **together in time** (pharmacokinetics feeding an ODE, a patient and a controller): only
+     engines with a stepper; `dt` small against the fastest time constant you want to see (and ≤ 5000 macro steps); `time` names
+     the series for the x axis. Use `iterate` only for strong two-way coupling.
+3. **Reuse.** A part used by several activities of the pack goes into `activities/_parts/<name>.json` and each spec says
+   `{"id": "pk", "use": "<name>", "with": {…the changes…}}`.
+4. **Test the coupling, not only the parts.** In `tests.json`, one case per regime the learner should notice (fast and slow
+   equilibration; sea open and closed), each checking a value that only the coupled model gets right (the effect-site peak, the
+   arrival date). Values of seeded parts (drift, Monte Carlo) get ranges, never exact numbers.
+5. Start from a reference: `activity_new.py SUBJECT ID --from pk-ode` (co-simulation), `--from genetics-prob` (a chain with a
+   derived value between parts), `--from ancient-voyage` (two library engines and a scene from each).
 
 ## A good fault-finding bench
 

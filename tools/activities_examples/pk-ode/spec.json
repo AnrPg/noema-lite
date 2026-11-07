@@ -1,0 +1,187 @@
+{
+ "format": "noema.sim-spec/v1",
+ "title": "title",
+ "intro": "intro",
+ "consts": {
+  "v": 40,
+  "cl": 5,
+  "ka": 1.2,
+  "emax": 100
+ },
+ "params": [
+  {
+   "id": "dose",
+   "kind": "slider",
+   "label": "doseLabel",
+   "min": 100,
+   "max": 1000,
+   "step": 50,
+   "default": 500,
+   "unit": "mg"
+  },
+  {
+   "id": "ke0",
+   "kind": "slider",
+   "label": "ke0Label",
+   "min": 0.05,
+   "max": 3,
+   "step": 0.05,
+   "default": 0.3,
+   "unit": "1/h"
+  },
+  {
+   "id": "ec50",
+   "kind": "slider",
+   "label": "ec50Label",
+   "min": 1,
+   "max": 20,
+   "step": 0.5,
+   "default": 5,
+   "unit": "mg/L"
+  }
+ ],
+ "parts": [
+  {
+   "id": "pk",
+   "engine": "med@1",
+   "model": {
+    "items": [
+     {
+      "id": "o",
+      "fn": "pk.oral",
+      "in": {
+       "dose": "dose",
+       "v": "v",
+       "clear": "cl",
+       "ka": "ka"
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "cp",
+     "kind": "series",
+     "of": "o.c"
+    },
+    {
+     "id": "cmax",
+     "kind": "scalar",
+     "of": "o.cmax"
+    }
+   ]
+  },
+  {
+   "id": "site",
+   "engine": "ode@1",
+   "inputs": {
+    "c": "cp"
+   },
+   "model": {
+    "rhs": {
+     "ce": "ke0 * (c - ce)"
+    },
+    "states": [
+     {
+      "id": "ce",
+      "init": 0
+     }
+    ],
+    "solve": {
+     "tEnd": 24
+    }
+   },
+   "outputs": [
+    {
+     "id": "ceS",
+     "kind": "series",
+     "of": "state",
+     "var": "ce"
+    },
+    {
+     "id": "ceMax",
+     "kind": "scalar",
+     "of": "stat",
+     "var": "ce",
+     "stat": "max"
+    },
+    {
+     "id": "ceEnd",
+     "kind": "scalar",
+     "of": "final",
+     "var": "ce"
+    }
+   ]
+  }
+ ],
+ "couple": {
+  "cosim": {
+   "tEnd": 24,
+   "dt": 0.1,
+   "parts": [
+    "pk",
+    "site"
+   ],
+   "time": "tt"
+  }
+ },
+ "derived": [
+  {
+   "id": "effMax",
+   "expr": "emax * ceMax / (ec50 + ceMax)"
+  },
+  {
+   "id": "lag",
+   "expr": "cmax - ceMax"
+  }
+ ],
+ "readouts": [
+  {
+   "label": "cmaxLabel",
+   "expr": "cmax",
+   "unit": "mg/L",
+   "format": "fixed",
+   "digits": 2
+  },
+  {
+   "label": "ceMaxLabel",
+   "expr": "ceMax",
+   "unit": "mg/L",
+   "format": "fixed",
+   "digits": 2
+  },
+  {
+   "label": "effLabel",
+   "expr": "effMax",
+   "unit": "%",
+   "format": "fixed",
+   "digits": 1
+  }
+ ],
+ "plots": [
+  {
+   "kind": "series",
+   "title": "plotTitle",
+   "x": {
+    "series": "tt",
+    "label": "time",
+    "unit": "h"
+   },
+   "y": {
+    "min": 0,
+    "label": "conc",
+    "unit": "mg/L"
+   },
+   "series": [
+    {
+     "y": "cp",
+     "label": "plasmaLine"
+    },
+    {
+     "y": "ceS",
+     "label": "siteLine"
+    }
+   ]
+  }
+ ]
+}

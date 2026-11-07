@@ -388,7 +388,7 @@
       [/\btime\.sleep\s*\(/, 'time.sleep(): a step blocks the learner while it sleeps; return at once'],
     ],
     // sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as tools/activities.py check_spec
-    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1', 'thermal@1', 'pid@1', 'rf@1', 'twin@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1', 'logic@1']),   // the same list in tools/activities.py
+    SPEC_FORMAT: 'noema.sim-spec/v1', DEFAULT_ENGINE: 'formula@1', ENGINES: new Set(['formula@1', 'circuit-mna@1', 'thermal@1', 'pid@1', 'rf@1', 'twin@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1', 'logic@1', 'rhetoric@1', 'philo@1', 'des@1', 'field@1', 'agents@1', 'law@1']),   // the same list in tools/activities.py
     SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
     // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
     CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1', 'twin@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
@@ -396,7 +396,7 @@
     P6: { 'thermal@1': ['NoemaThermal', '39_engine_thermal.js'], 'pid@1': ['NoemaPID', '40_engine_pid.js'], 'rf@1': ['NoemaRF', '41_engine_rf.js'], 'twin@1': ['NoemaTwin', '42_engine_twin.js'] },
     // the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core (46_lib_core.js); each checks its model with its own checkSpec and
     // lists the expressions (exprs: [src, where, local names]) and string keys (keys: [key, where]) of its model; Python twins tools/lib_<name>.py
-    LIB: { 'ode@1': ['NoemaLibODE', '47_lib_ode.js'], 'prob@1': ['NoemaLibProb', '47_lib_prob.js'], 'graph@1': ['NoemaLibGraph', '47_lib_graph.js'], 'geom@1': ['NoemaLibGeom', '47_lib_geom.js'], 'genetics@1': ['NoemaLibGenetics', '48_lib_genetics.js'], 'seq@1': ['NoemaLibSeq', '48_lib_seq.js'], 'med@1': ['NoemaLibMed', '48_lib_med.js'], 'clinic@1': ['NoemaLibClinic', '48_lib_clinic.js'], 'anatomy@1': ['NoemaLibAnatomy', '48_lib_anatomy.js'], 'timeline@1': ['NoemaLibTimeline', '48_lib_timeline.js'], 'music@1': ['NoemaLibMusic', '48_lib_music.js'], 'map@1': ['NoemaLibMap', '48_lib_map.js'], 'text@1': ['NoemaLibText', '48_lib_text.js'], 'craft@1': ['NoemaLibCraft', '48_lib_craft.js'], 'logic@1': ['NoemaLibLogic', '47_lib_logic.js'] },
+    LIB: { 'ode@1': ['NoemaLibODE', '47_lib_ode.js'], 'prob@1': ['NoemaLibProb', '47_lib_prob.js'], 'graph@1': ['NoemaLibGraph', '47_lib_graph.js'], 'geom@1': ['NoemaLibGeom', '47_lib_geom.js'], 'genetics@1': ['NoemaLibGenetics', '48_lib_genetics.js'], 'seq@1': ['NoemaLibSeq', '48_lib_seq.js'], 'med@1': ['NoemaLibMed', '48_lib_med.js'], 'clinic@1': ['NoemaLibClinic', '48_lib_clinic.js'], 'anatomy@1': ['NoemaLibAnatomy', '48_lib_anatomy.js'], 'timeline@1': ['NoemaLibTimeline', '48_lib_timeline.js'], 'music@1': ['NoemaLibMusic', '48_lib_music.js'], 'map@1': ['NoemaLibMap', '48_lib_map.js'], 'text@1': ['NoemaLibText', '48_lib_text.js'], 'craft@1': ['NoemaLibCraft', '48_lib_craft.js'], 'logic@1': ['NoemaLibLogic', '47_lib_logic.js'], 'rhetoric@1': ['NoemaLibRhetoric', '48_lib_rhetoric.js'], 'philo@1': ['NoemaLibPhilo', '48_lib_philo.js'], 'des@1': ['NoemaLibDES', '47_lib_des.js'], 'field@1': ['NoemaLibField', '47_lib_field.js'], 'agents@1': ['NoemaLibAgents', '47_lib_agents.js'], 'law@1': ['NoemaLibLaw', '48_lib_law.js'] },
     LIB_KINDS: ['scalar', 'series', 'scene', 'sound'], LINE_STYLES: ['line', 'bars', 'steps', 'points'],
     APP_ENGINES_MAX: 8,   // html-app@1: the engines of the library a mini-app may use ("engines": [...], docs/INTERACTIVE.md §8.1) — the same rule in tools/activities.py
     P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
@@ -504,6 +504,7 @@
     const out = isObj(spec.consts) ? Object.keys(spec.consts) : [];
     for (const k of ['params', 'derived']) for (const x of list(spec[k])) if (isObj(x) && typeof x.id === 'string') out.push(x.id);
     for (const x of list(spec.outputs)) if (isObj(x) && typeof x.id === 'string' && x.kind === 'scalar') out.push(x.id);
+    for (const p of list(spec.parts)) for (const x of isObj(p) ? list(p.outputs) : []) if (isObj(x) && typeof x.id === 'string' && x.kind === 'scalar') out.push(x.id);   // parts (§12.8; a part from activities/_parts names its outputs there)
     if (isObj(spec.bench)) out.push(...ACT.BENCH_NAMES);   // a bench's values: for the checks of a sim exercise only (never shown)
     return out;
   }
@@ -797,6 +798,292 @@
     }
     if (b.budget !== undefined && !(Number.isInteger(b.budget) && b.budget >= 1 && b.budget <= L.budget)) E.push(`spec.bench.budget is a whole number 1–${L.budget} (the measurements allowed)`);
   }
+  /* ---------- parts: several engines in one spec (docs/INTERACTIVE.md §12.8) — the SAME rules and messages as tools/activities.py check_parts ----------
+     spec.parts: [{id, engine, model, outputs, inputs?: {name: expression | {series, points?, stat?}}} | {id, use, with?}] (≤ 8); the output ids
+     join the spec's names; spec.couple: "chain" (default) | {loops: [{parts, tol, maxIter?, relax?, init?}], cosim: {tEnd, dt, parts, order?,
+     t0?, time?, init?, iterate?}}. A part's model sees the consts, the params and its own inputs. */
+  Object.assign(ACT, {
+    PARTS_LIM: { parts: 8, inputs: 24, outputs: 48, loops: 4, iter: 50, macro: 5000, points: 2000 },
+    PART_KEYS: ['id', 'engine', 'model', 'outputs', 'inputs', 'use', 'with'], USE_RE: /^[a-z0-9][a-z0-9-]{0,60}$/,
+    // the engines that can be stepped in time (a stepper: docs/INTERACTIVE_LIBRARY.md §1.6) — the same list in tools/activities.py
+    STEPPERS: new Set(['ode@1', 'med@1', 'clinic@1', 'genetics@1', 'des@1', 'field@1', 'agents@1', 'thermal@1', 'pid@1', 'twin@1', 'circuit-mna@1']),
+  });
+  ACT.SPEC_KEYS.add('parts'); ACT.SPEC_KEYS.add('couple');
+  /** the names an expression uses (its free variables), in order of appearance; [] when it does not parse */
+  function freeVars(src) {
+    if (typeof src !== 'string' || !NX()) return [];
+    let ast; try { ast = NX().parse(src); } catch (e) { return []; }
+    const out = [];
+    (function walk(n) {
+      if (!n || typeof n !== 'object') return;
+      if (n.t === 'var') { if (!out.includes(n.name)) out.push(n.name); return; }
+      for (const k of ['a', 'b', 'c']) if (n[k]) walk(n[k]);
+      if (Array.isArray(n.args)) n.args.forEach(walk);
+    })(ast);
+    return out;
+  }
+  /** deep merge of plain objects (b wins; arrays and other values are replaced) */
+  function mergeDeep(a, b) {
+    if (!isObj(a) || !isObj(b)) return b === undefined ? a : JSON.parse(JSON.stringify(b));
+    const o = JSON.parse(JSON.stringify(a));
+    for (const [k, v] of Object.entries(b)) o[k] = isObj(v) && isObj(o[k]) ? mergeDeep(o[k], v) : JSON.parse(JSON.stringify(v));
+    return o;
+  }
+  /** the parts of a spec with every `use` resolved against the pack's activities/_parts (lib: {name: part}); E gets the problems.
+      → [{i, w, p (the resolved part)}] or null when spec.parts is not a list */
+  function resolveParts(spec, lib, E) {
+    const ps = spec.parts, L = ACT.PARTS_LIM, out = [];
+    if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.parts)) { E.push(`spec.parts must be a list of 1–${L.parts} parts {id, engine, model, outputs, inputs?}`); if (!Array.isArray(ps)) return null; }
+    ps.slice(0, L.parts).forEach((p, i) => {
+      const w = `spec.parts[${i}]`;
+      if (!isObj(p)) { E.push(`${w} must be an object {id, engine, model, outputs, inputs?} or {id, use, with?}`); return; }
+      unknownKeys(p, ACT.PART_KEYS, w, E);
+      let q = p;
+      if (p.use !== undefined) {
+        if (!(typeof p.use === 'string' && ACT.USE_RE.test(p.use))) { E.push(`${w}.use must be the name of a file activities/_parts/<name>.json (lower-case letters, digits and -)`); return; }
+        const d = isObj(lib) && Object.prototype.hasOwnProperty.call(lib, p.use) ? lib[p.use] : undefined;
+        if (d === undefined) { E.push(`${w}.use: activities/_parts/${p.use}.json is not in the pack`); return; }
+        if (!isObj(d)) { E.push(`${w}.use: activities/_parts/${p.use}.json must be a part {engine, model, outputs, inputs?}`); return; }
+        if (p.with !== undefined && !isObj(p.with)) { E.push(`${w}.with must be an object (the fields of the part to change)`); return; }
+        const base = {}; for (const k of Object.keys(d)) if (ACT.PART_KEYS.includes(k) && k !== 'id' && k !== 'use' && k !== 'with') base[k] = d[k];
+        q = mergeDeep(base, p.with || {});
+        for (const k of ['engine', 'model', 'outputs', 'inputs']) if (p[k] !== undefined) q[k] = JSON.parse(JSON.stringify(p[k]));
+        q.id = p.id;
+      } else if (p.with !== undefined) E.push(`${w}.with needs use (the part of activities/_parts it changes)`);
+      out.push({ i, w, p: q });
+    });
+    return out;
+  }
+  /** the spec one part shows its engine: its model and outputs, the spec's consts and params, and its inputs as names (the engine's own checks see them) */
+  function partSpec(spec, p) {
+    const consts = Object.assign({}, isObj(spec.consts) ? spec.consts : {});
+    for (const k of isObj(p.inputs) ? Object.keys(p.inputs) : []) if (!Object.prototype.hasOwnProperty.call(consts, k)) consts[k] = 0;
+    const s = { format: ACT.SPEC_FORMAT, engine: p.engine, consts, params: list(spec.params) };
+    if (p.model !== undefined) s.model = p.model;
+    if (p.outputs !== undefined) s.outputs = p.outputs;
+    return s;
+  }
+  /** an engine's messages about spec.X → about spec.parts[i].X */
+  const partMsg = (m, w) => m.replace(/^spec(?=[.:\[])/, w);
+  /** the dependency graph of derived values and parts (docs/INTERACTIVE.md §12.8): nodes "d:<id>" and "p:<id>" in the spec's order, each with
+      the nodes it needs; its strongly connected components (Tarjan 1972) */
+  function partsGraph(spec, parts) {
+    const nodes = [], deps = new Map(), owner = new Map(), label = new Map();
+    for (const d of list(spec.derived)) if (isObj(d) && typeof d.id === 'string' && !label.has('d:' + d.id)) { nodes.push('d:' + d.id); label.set('d:' + d.id, d.id); if (!owner.has(d.id)) owner.set(d.id, 'd:' + d.id); }
+    for (const p of parts) if (typeof p.id === 'string' && !label.has('p:' + p.id)) { nodes.push('p:' + p.id); label.set('p:' + p.id, p.id); for (const o of list(p.outputs)) if (isObj(o) && typeof o.id === 'string' && !owner.has(o.id)) owner.set(o.id, 'p:' + p.id); }
+    const need = (n, names) => { const a = deps.get(n); for (const x of names) { const o = owner.get(x); if (o && !a.includes(o)) a.push(o); } };
+    for (const n of nodes) deps.set(n, []);
+    for (const d of list(spec.derived)) if (isObj(d) && typeof d.id === 'string' && deps.has('d:' + d.id)) need('d:' + d.id, freeVars(d.expr));
+    for (const p of parts) if (typeof p.id === 'string' && deps.has('p:' + p.id) && isObj(p.inputs)) for (const v of Object.values(p.inputs)) need('p:' + p.id, typeof v === 'string' ? freeVars(v) : isObj(v) && typeof v.series === 'string' ? [v.series] : []);
+    // Tarjan's strongly connected components
+    let idx = 0; const st = [], on = new Set(), ix = new Map(), low = new Map(), sccs = [];
+    const visit = v => {
+      ix.set(v, idx); low.set(v, idx); idx++; st.push(v); on.add(v);
+      for (const w of deps.get(v)) { if (!ix.has(w)) { visit(w); low.set(v, Math.min(low.get(v), low.get(w))); } else if (on.has(w)) low.set(v, Math.min(low.get(v), ix.get(w))); }
+      if (low.get(v) === ix.get(v)) { const c = []; let w; do { w = st.pop(); on.delete(w); c.push(w); } while (w !== v); sccs.push(c.sort((a, b) => nodes.indexOf(a) - nodes.indexOf(b))); }
+    };
+    for (const v of nodes) if (!ix.has(v)) visit(v);
+    return { nodes, deps, sccs, label };
+  }
+  /** a cycle through the component c, as names: the shortest way from its first node back to it */
+  function cyclePath(G, c) {
+    const s = c[0], prev = new Map([[s, null]]), q = [s];
+    while (q.length) {
+      const v = q.shift();
+      for (const w of G.deps.get(v)) {
+        if (!c.includes(w)) continue;
+        if (w === s) { const path = []; for (let x = v; x !== null; x = prev.get(x)) path.unshift(G.label.get(x)); return path.concat(G.label.get(s)); }
+        if (!prev.has(w)) { prev.set(w, v); q.push(w); }
+      }
+    }
+    return [G.label.get(s), G.label.get(s)];
+  }
+  /** the coupling groups of a spec: [{k: 'loop', i, parts, def} | {k: 'cosim', parts, def}] (only well-formed lists of part ids) */
+  function couplingGroups(spec, ids) {
+    const c = spec.couple, out = [];
+    if (!isObj(c)) return out;
+    list(c.loops).forEach((l, i) => { if (isObj(l) && Array.isArray(l.parts)) out.push({ k: 'loop', i, parts: l.parts.filter(x => ids.includes(x)), def: l }); });
+    if (isObj(c.cosim) && Array.isArray(c.cosim.parts)) {
+      const ps = c.cosim.parts.filter(x => ids.includes(x)), ord = Array.isArray(c.cosim.order) ? c.cosim.order.filter(x => ps.includes(x)) : [];
+      out.push({ k: 'cosim', parts: ord.concat(ps.filter(x => !ord.includes(x))), def: c.cosim });
+    }
+    return out;
+  }
+  /** the order of evaluation: units {k: 'derived', id} | {k: 'part', id} | {k: 'loop', i, parts, derived} | {k: 'cosim', parts, derived}, each after
+      what it needs (Kahn 1962, ties in the spec's order), and the undeclared cycles [[names]] */
+  function partsOrder(spec, parts) {
+    const G = partsGraph(spec, parts), ids = parts.map(p => p.id), groups = couplingGroups(spec, ids), unitOf = new Map(), units = [], cycles = [];
+    const gOf = pid => groups.findIndex(g => g.parts.includes(pid));
+    groups.forEach((g, j) => { const u = { ...(g.k === 'loop' ? { k: 'loop', i: g.i } : { k: 'cosim' }), parts: g.parts.slice(), derived: [], key: 'g' + j }; units.push(u); for (const p of g.parts) unitOf.set('p:' + p, u); });
+    for (const c of G.sccs) {
+      const cyc = c.length > 1 || G.deps.get(c[0]).includes(c[0]);
+      if (!cyc) continue;
+      const ps = c.filter(n => n.startsWith('p:')).map(n => n.slice(2)), gs = [...new Set(ps.map(gOf))];
+      if (ps.length && gs.length === 1 && gs[0] >= 0) { const u = unitOf.get('p:' + ps[0]); for (const n of c) if (n.startsWith('d:') && !unitOf.has(n)) { u.derived.push(n.slice(2)); unitOf.set(n, u); } }
+      else cycles.push(cyclePath(G, c));
+    }
+    for (const n of G.nodes) if (!unitOf.has(n)) { const u = n.startsWith('d:') ? { k: 'derived', id: n.slice(2), key: n } : { k: 'part', id: n.slice(2), key: n }; units.push(u); unitOf.set(n, u); }
+    for (const u of units) if (u.derived) u.derived.sort((a, b) => G.nodes.indexOf('d:' + a) - G.nodes.indexOf('d:' + b));
+    const rank = u => Math.min(...G.nodes.filter(n => unitOf.get(n) === u).map(n => G.nodes.indexOf(n)), 1e9);
+    const udeps = new Map(units.map(u => [u, new Set()]));
+    for (const n of G.nodes) for (const m of G.deps.get(n)) { const a = unitOf.get(n), b = unitOf.get(m); if (a !== b) udeps.get(a).add(b); }
+    const done = new Set(), order = [];
+    if (!cycles.length) while (order.length < units.length) {
+      const ready = units.filter(u => !done.has(u) && [...udeps.get(u)].every(b => done.has(b))).sort((a, b) => rank(a) - rank(b));
+      if (!ready.length) break;
+      done.add(ready[0]); order.push(ready[0]);
+    }
+    return { order: order.map(u => { const o = { ...u }; delete o.key; return o; }), cycles };
+  }
+  /** partsPlan(spec, lib) → {parts: [resolved part], order: [unit], errors} — what the runtime (35_activity_sim.js) runs */
+  function partsPlan(spec, lib) {
+    const E = [], R = isObj(spec) ? resolveParts(spec, lib, E) || [] : [];
+    const parts = R.map(r => r.p);
+    const { order, cycles } = partsOrder(spec, parts);
+    return { parts, order, errors: E, cycles };
+  }
+  /** check the parts (the first half: before the derived values are checked) — registers every output id as a name of the spec */
+  function checkParts(spec, X) {
+    const { E, name, key, items, lib, cp } = X, L = ACT.PARTS_LIM, known = X.known;
+    const R = resolveParts(spec, lib, E) || [], info = { R, cp, parts: [], scalars: [], series: [], scenes: [], sounds: [], anyLib: false, outOf: new Map(), kindOf: new Map(), ids: [] };
+    let nOut = 0;
+    for (const { i, w, p } of R) {
+      if (!(typeof p.id === 'string' && ACT.BENCH_ID_RE.test(p.id))) E.push(`${w}.id must be an id (a letter, then letters, digits, _ or -; at most 32)`);
+      else if (info.ids.includes(p.id)) E.push(`${w}.id: the part ${p.id} is listed twice`);
+      else info.ids.push(p.id);
+      const eng = p.engine, lib1 = typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.LIB, eng);
+      if (eng === ACT.DEFAULT_ENGINE) E.push(`${w}.engine: ${ACT.DEFAULT_ENGINE} computes nothing a part could add (use derived)`);
+      else if (typeof eng !== 'string' || !known.has(eng)) E.push(`${w}.engine: unknown engine ${qv(eng)} (this version knows ${[...known].filter(e => e !== ACT.DEFAULT_ENGINE).sort().join(', ')})`);
+      if (lib1) info.anyLib = true;
+      if (p.model !== undefined && !isObj(p.model)) E.push(`${w}.model must be an object`);
+      const ins = p.inputs, inNames = [];
+      if (ins !== undefined) {
+        if (!(isObj(ins) && Object.keys(ins).length <= L.inputs)) E.push(`${w}.inputs must be an object of at most ${L.inputs} inputs {name: number | expression | {series: "<output id>"}}`);
+        else for (const k of Object.keys(ins)) { if (badName(k)) E.push(`${w}.inputs: ${qv(k)} is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)`); else inNames.push(k); }
+      }
+      const os = p.outputs, mine = { id: p.id, eng, lib: lib1, w, i, p, scalars: [], series: [], scenes: [], sounds: [], inNames };
+      if (!(Array.isArray(os) && os.length >= 1 && os.length <= ACT.SPEC_LIM.outputs)) E.push(`${w}.outputs must be a list of 1–${ACT.SPEC_LIM.outputs} {id, kind}`);
+      else os.forEach((o, j) => {
+        const wo = `${w}.outputs[${j}]`, kinds = lib1 ? ACT.LIB_KINDS : ['scalar', 'series'];
+        if (!(isObj(o) && kinds.includes(o.kind))) { E.push(`${wo} must be {id, kind: ${kinds.join(' | ')}}`); return; }
+        nOut++;
+        if (name(o.id, wo + '.id')) {
+          const k = o.kind === 'scalar' ? 'scalars' : o.kind === 'series' ? 'series' : o.kind === 'scene' ? 'scenes' : 'sounds';
+          mine[k].push(o.id); info[k].push(o.id); info.outOf.set(o.id, p.id); info.kindOf.set(o.id, o.kind);
+        }
+      });
+      // the engine's own checks of the model and outputs, over the consts, the params and the part's inputs
+      const sub = partSpec(spec, p), names = cp.concat(inNames.filter(n => !cp.includes(n))), E2 = [];
+      if (typeof eng === 'string' && known.has(eng)) {
+        if (eng === ACT.CIRCUIT) checkCircuit(sub, names, E2);
+        else if (Object.prototype.hasOwnProperty.call(ACT.P6, eng)) checkEngine(sub, eng, names, E2);
+        else if (lib1) checkLib(sub, eng, names, E2, (k, wk, need) => key(k, partMsg(wk, w), need));
+        if (eng === ACT.WASM_ENGINE && items) { if (!WK()) E2.push('spec.model: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here'); else E2.push(...WK().checkModel(sub, items)); }
+      }
+      E.push(...E2.map(m => partMsg(m, w)));
+      info.parts.push(mine);
+    }
+    if (nOut > L.outputs) E.push(`spec.parts: at most ${L.outputs} outputs in all`);
+    return info;
+  }
+  /** check the parts (the second half: inputs, coupling, the order, the bench), once every name of the spec is known */
+  function checkPartLinks(spec, info, X) {
+    const { E, names, cp, seen, key, name } = X, L = ACT.PARTS_LIM, ids = info.ids;
+    const c = spec.couple, inGroup = new Map();
+    const tol = (v, w) => { if (v === undefined) E.push(`${w}.tol is required: a number > 0 (the largest relative change that counts as settled)`); else if (!(isNum(v) && v > 0)) E.push(`${w}.tol must be a number > 0`); };
+    const maxIter = (v, w) => { if (v !== undefined && !(Number.isInteger(v) && v >= 1 && v <= L.iter)) E.push(`${w}.maxIter is a whole number 1–${L.iter}`); };
+    const groupParts = (ps, w, what) => {
+      if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.parts && ps.every(x => typeof x === 'string'))) { E.push(`${w}.parts must be a list of 1–${L.parts} ids of spec.parts`); return []; }
+      const ok = [];
+      for (const x of ps) {
+        if (!ids.includes(x)) E.push(`${w}.parts: ${qv(x)} is not a part of spec.parts`);
+        else if (ok.includes(x)) E.push(`${w}.parts lists the part ${x} twice`);
+        else if (inGroup.has(x)) E.push(`${w}.parts: the part ${x} is already in ${inGroup.get(x)}`);
+        else { ok.push(x); inGroup.set(x, what); }
+      }
+      return ok;
+    };
+    const initOf = (o, w, ps) => {
+      if (o === undefined) return;
+      if (!isObj(o)) { E.push(`${w}.init must be an object {output id: number} (the first guesses)`); return; }
+      for (const [k, v] of Object.entries(o)) {
+        if (!(info.outOf.has(k) && ps.includes(info.outOf.get(k)) && info.kindOf.get(k) === 'scalar')) E.push(`${w}.init.${k} must name a scalar output of a part of the ${w.endsWith('cosim') ? 'co-simulation' : 'loop'}`);
+        else if (!isNum(v)) E.push(`${w}.init.${k} must be a number`);
+      }
+    };
+    let cosimParts = [];
+    if (c !== undefined && c !== 'chain') {
+      if (!isObj(c)) E.push('spec.couple is "chain" or {loops?: […], cosim?: {…}}');
+      else {
+        unknownKeys(c, ['loops', 'cosim'], 'spec.couple', E);
+        if (c.loops !== undefined) {
+          if (!(Array.isArray(c.loops) && c.loops.length >= 1 && c.loops.length <= L.loops)) E.push(`spec.couple.loops must be a list of 1–${L.loops} loops {parts, tol, maxIter?, relax?, init?}`);
+          else c.loops.forEach((l, i) => {
+            const w = `spec.couple.loops[${i}]`;
+            if (!isObj(l)) { E.push(`${w} must be an object {parts, tol, maxIter?, relax?, init?}`); return; }
+            unknownKeys(l, ['parts', 'tol', 'maxIter', 'relax', 'init'], w, E);
+            const ps = groupParts(l.parts, w, `the loop ${i}`);
+            tol(l.tol, w); maxIter(l.maxIter, w);
+            if (l.relax !== undefined && !(isNum(l.relax) && l.relax > 0 && l.relax <= 1)) E.push(`${w}.relax is a number in (0, 1] (1 = no relaxation)`);
+            initOf(l.init, w, ps);
+          });
+        }
+        if (c.cosim !== undefined) {
+          const w = 'spec.couple.cosim', s = c.cosim;
+          if (!isObj(s)) E.push(`${w} must be an object {tEnd, dt, parts, order?, t0?, time?, init?, iterate?}`);
+          else {
+            unknownKeys(s, ['tEnd', 'dt', 'parts', 'order', 't0', 'time', 'init', 'iterate'], w, E);
+            cosimParts = groupParts(s.parts, w, 'the co-simulation');
+            for (const pid of cosimParts) { const q = info.parts.find(x => x.id === pid); if (q && typeof q.eng === 'string' && !ACT.STEPPERS.has(q.eng)) E.push(`${w}.parts: the engine ${q.eng} of the part ${pid} cannot be stepped in time (a co-simulation needs ${[...ACT.STEPPERS].sort().join(', ')}); couple it in a chain or a loop`); }
+            let te = null, dt = null;
+            if (s.tEnd === undefined) E.push(`${w}.tEnd is required (when the co-simulation ends)`); else te = numOrExpr(s.tEnd, cp, `${w}.tEnd`, E, true);
+            if (s.dt === undefined) E.push(`${w}.dt is required (the macro step: how often the parts exchange their values)`); else dt = numOrExpr(s.dt, cp, `${w}.dt`, E, true);
+            const t0 = s.t0 === undefined ? 0 : numOrExpr(s.t0, cp, `${w}.t0`, E, false);
+            if (isNum(te) && isNum(dt) && isNum(t0) && Math.ceil((te - t0) / dt - 1e-9) > L.macro) E.push(`${w}: (tEnd − t0) / dt is more than ${L.macro} macro steps`);
+            if (isNum(te) && isNum(t0) && !(te > t0)) E.push(`${w}: tEnd must be after t0`);
+            if (s.order !== undefined && !(Array.isArray(s.order) && s.order.length === cosimParts.length && cosimParts.every(x => s.order.includes(x)))) E.push(`${w}.order must list each part of the co-simulation once (the order they exchange in)`);
+            if (s.time !== undefined && name(s.time, `${w}.time`)) info.series.push(s.time);
+            initOf(s.init, w, cosimParts);
+            if (s.iterate !== undefined) {
+              if (!isObj(s.iterate)) E.push(`${w}.iterate must be an object {tol, maxIter?}`);
+              else { unknownKeys(s.iterate, ['tol', 'maxIter'], `${w}.iterate`, E); tol(s.iterate.tol, `${w}.iterate`); maxIter(s.iterate.maxIter, `${w}.iterate`); }
+            }
+          }
+        }
+      }
+    }
+    // the inputs: formulas over the spec's names (in a co-simulation also the step values of its parts' outputs), or a series of another part
+    for (const q of info.parts) {
+      const ins = isObj(q.p.inputs) ? q.p.inputs : {}, co = cosimParts.includes(q.id);
+      const nm = co ? names.concat([...info.outOf.keys()].filter(o => cosimParts.includes(info.outOf.get(o)) && !names.includes(o))) : names;
+      for (const k of q.inNames) {
+        const v = ins[k], wi = `${q.w}.inputs.${k}`;
+        if (typeof v === 'string') { const m = exprProblem(v, nm, wi); if (m) E.push(m); }
+        else if (isNum(v)) { /* a number */ }
+        else if (isObj(v)) {
+          unknownKeys(v, ['series', 'points', 'stat'], wi, E);
+          if (!(typeof v.series === 'string' && info.kindOf.get(v.series) === 'series' && info.outOf.get(v.series) !== q.id)) E.push(`${wi}.series must name a series output of another part`);
+          else if (co && cosimParts.includes(info.outOf.get(v.series))) E.push(`${wi}: the parts of a co-simulation exchange numbers at each step, not series (use the output's id in a formula)`);
+          if (v.points !== undefined && !(Number.isInteger(v.points) && v.points >= 2 && v.points <= L.points)) E.push(`${wi}.points is a whole number 2–${L.points} (a series input is at most ${L.points} points)`);
+          if (v.stat !== undefined && !ACT.STATS.includes(v.stat)) E.push(`${wi}.stat is one of ${ACT.STATS.join(', ')}`);
+          if (v.stat !== undefined && v.points !== undefined) E.push(`${wi}: stat makes a number of the series, points resamples it: one or the other`);
+        } else E.push(`${wi} must be a number, an expression or {series: "<output id>"}`);
+      }
+    }
+    // the order: every cycle must be declared
+    const good = info.parts.filter((q, k) => info.ids.includes(q.id) && info.parts.findIndex(x => x.id === q.id) === k).map(q => ({ ...q.p, outputs: list(q.p.outputs).filter(o => isObj(o) && info.outOf.get(o.id) === q.id) }));
+    for (const cy of partsOrder(spec, good).cycles) E.push(`spec.parts: ${cy.join(' → ')} depend on each other in a cycle: declare it in spec.couple.loops (a fixed point) or spec.couple.cosim (in time)`);
+    // the bench: at most one, on a part whose engine takes measurements
+    if (spec.bench != null) {
+      const b = spec.bench, q = isObj(b) ? info.parts.find(x => x.id === b.part) : null;
+      if (!isObj(b) || !q || !ACT.BENCH_ENGINES.has(q.eng)) E.push(`spec.bench.part must be the id of a part whose engine takes measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);
+      else {
+        const sub = partSpec(spec, q.p), bb = {}; for (const k of Object.keys(b)) if (k !== 'part') bb[k] = b[k];
+        sub.bench = bb;
+        checkBench(sub, cp.concat(q.inNames.filter(n => !cp.includes(n))), seen, E, key, q.eng);
+      }
+    }
+  }
   /** checkSimSpec(spec, tables?, engines?, opts?) → errors of a sim-spec@1 spec. tables: {locale: {key: text}}; engines: the known engine ids
       (default ACT.ENGINES; the app passes the engines it has registered). opts.python: the spec of a py-module@1 activity (its outputs
       come from Python's step(): no engine, no model, no bench, at least one output). opts.items: {id: item} of the pack (a wasm@1 model
@@ -814,6 +1101,10 @@
       if ('engine' in spec) E.push('spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out');
       if ('model' in spec) E.push('spec.model: a py-module@1 activity has no engine model (its Python code is the model)');
     } else if (typeof eng !== 'string' || !known.has(eng)) E.push(`spec: unknown engine ${qv(eng)} (this version knows ${[...known].sort().join(', ')})`);
+    const PT = !py && 'parts' in spec;   // several engines in one spec (§12.8)
+    if (py && 'parts' in spec) E.push('spec.parts: a py-module@1 activity has no parts (its Python code is the model)');
+    if (PT && typeof eng === 'string' && eng !== ACT.DEFAULT_ENGINE) E.push(`spec.engine: a spec with parts names the engine of each part (leave spec.engine out, or "${ACT.DEFAULT_ENGINE}")`);
+    if (!PT && 'couple' in spec) E.push('spec.couple: coupling needs parts (spec.parts)');
     if (eng === ACT.DEFAULT_ENGINE && 'model' in spec) E.push('spec: model configures another engine; formula@1 has none');
     if (spec.model != null && !isObj(spec.model)) E.push('spec: model must be an object');
     const keys = new Set(), seen = new Set();
@@ -863,19 +1154,22 @@
       }
     });
     const names = [...seen];   // consts and params (the order does not matter to a check)
+    const PI = PT ? checkParts(spec, { E, name, key, items, lib: opts && isObj(opts.parts) ? opts.parts : null, cp: [...names], known }) : null;
     const ds = spec.derived;
     if (ds != null && !(Array.isArray(ds) && ds.length <= L.derived)) E.push(`spec.derived must be a list of at most ${L.derived} {id, expr}`);
     list(ds).slice(0, L.derived).forEach((d, i) => {
       const w = `spec.derived[${i}]`;
       if (!isObj(d)) { E.push(`${w} must be an object {id, expr}`); return; }
-      expr(d.expr, [...names], w + '.expr');
+      expr(d.expr, PI ? names.concat(PI.scalars) : [...names], w + '.expr');
       if (name(d.id, w + '.id')) names.push(d.id);
     });
     const inNames = [...names];   // what an engine's inputs may use: consts, params, derived
-    const os = spec.outputs, series = [], scenes = [], sounds = [], lib = typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.LIB, eng);
+    const os = spec.outputs, series = [], scenes = [], sounds = [], lib = PI ? PI.anyLib : typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.LIB, eng);
+    if (PI) { names.push(...PI.scalars); checkPartLinks(spec, PI, { E, names, cp: PI.cp, seen, key, name }); series.push(...PI.series); scenes.push(...PI.scenes); sounds.push(...PI.sounds); }
     if (py && !(Array.isArray(os) && os.length)) E.push('spec.outputs: list what step() returns, at least one {id, kind: scalar | series}');
     if (os != null) {
-      if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
+      if (PT) E.push('spec.outputs: a spec with parts lists the outputs of each part (spec.parts[i].outputs)');
+      else if (eng === ACT.DEFAULT_ENGINE) E.push('spec.outputs come from an engine; formula@1 has none (use derived)');
       else if (!(Array.isArray(os) && os.length <= L.outputs)) E.push(`spec.outputs must be a list of at most ${L.outputs} {id, kind}`);
       else os.forEach((o, i) => {
         const w = `spec.outputs[${i}]`;
@@ -946,9 +1240,9 @@
     });
     if (eng === ACT.CIRCUIT) checkCircuit(spec, inNames, E);
     else if (typeof eng === 'string' && Object.prototype.hasOwnProperty.call(ACT.P6, eng)) checkEngine(spec, eng, inNames, E);
-    else if (lib) checkLib(spec, eng, inNames, E, key);
+    else if (lib && !PT) checkLib(spec, eng, inNames, E, key);
     if (eng === ACT.WASM_ENGINE && items) { if (!WK()) E.push('spec.model: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here'); else E.push(...WK().checkModel(spec, items)); }
-    if (spec.bench != null) {
+    if (spec.bench != null && !PT) {
       if (!ACT.BENCH_ENGINES.has(eng)) E.push(`spec.bench needs an engine that can take measurements (${[...ACT.BENCH_ENGINES].sort().join(', ')})`);
       else checkBench(spec, inNames, seen, E, key, eng);
     }
@@ -977,10 +1271,12 @@
     return E;
   }
   /** what pack.requires must list: the core, each runtime, each engine other than formula@1 (and the engines a mini-app lists) */
-  function needRequires(items) {
+  /** the engines of the parts of a sim-spec@1 item (a part from activities/_parts: its engine there) */
+  const partEngines = (a, lib) => isObj(a) && a.runtime === 'sim-spec@1' && isObj(a.spec) && Array.isArray(a.spec.parts) ? a.spec.parts.filter(isObj).map(p => p.engine !== undefined ? p.engine : typeof p.use === 'string' && isObj(lib) && isObj(lib[p.use]) ? (isObj(p.with) && p.with.engine !== undefined ? p.with.engine : lib[p.use].engine) : null) : [];
+  function needRequires(items, lib) {
     items = items.filter(isObj); if (!items.length) return [];
     const rts = [...new Set(items.map(a => a.runtime).filter(r => typeof r === 'string'))].sort().map(r => 'runtime:' + r);
-    const engs = [...new Set([...items.filter(a => (a.runtime === 'sim-spec@1' || a.runtime === ACT.WASM) && isObj(a.spec)).map(a => a.runtime === ACT.WASM ? ACT.WASM_ENGINE : 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE), ...items.flatMap(appEngines)].filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
+    const engs = [...new Set([...items.filter(a => (a.runtime === 'sim-spec@1' || a.runtime === ACT.WASM) && isObj(a.spec)).map(a => a.runtime === ACT.WASM ? ACT.WASM_ENGINE : 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE), ...items.flatMap(appEngines), ...items.flatMap(a => partEngines(a, lib))].filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
     return ['activities/v1', ...rts, ...engs];
   }
   function checkBlockAct(b, items) {
@@ -1115,8 +1411,17 @@
     const locs = [...new Set([own, ...(translations || Object.keys(p?.translations || {}))])].sort();
     const items = {}, every = {};   // (a wasm@1 spec names a module item)
     for (const x of (reg && Array.isArray(reg.items) ? reg.items : [])) if (x && typeof x === 'object' && typeof x.id === 'string') every[x.id] = x;
+    const partLib = isObj(reg) && isObj(reg.parts) ? reg.parts : null;   // activities/_parts/<name>.json (§12.8)
     if (reg != null) {
       if (typeof reg !== 'object' || Array.isArray(reg) || reg.format !== ACT.FORMAT) E.push(`activities: format must be "${ACT.FORMAT}"`);
+      if (isObj(reg) && reg.parts !== undefined) {
+        if (!isObj(reg.parts)) E.push('activities.parts must be an object {name: part} (the files activities/_parts/<name>.json)');
+        else for (const [k, d] of Object.entries(reg.parts)) {
+          if (!ACT.USE_RE.test(k)) E.push(`activities/_parts/${k}.json: the name is lower-case letters, digits and - (at most 61)`);
+          else if (!isObj(d)) E.push(`activities/_parts/${k}.json must be a part {engine, model, outputs, inputs?}`);
+          else unknownKeys(d, ACT.PART_KEYS.filter(x => x !== 'id' && x !== 'use' && x !== 'with'), `activities/_parts/${k}.json`, E);
+        }
+      }
       for (const a of (reg && Array.isArray(reg.items) ? reg.items : [])) {
         const aid = a && typeof a === 'object' ? a.id : null;
         if (typeof aid !== 'string' || !ACT.ID_RE.test(aid)) { E.push(`activity ${qv(aid)}: id must be lower-case letters, digits and - (2–61)`); continue; }
@@ -1142,7 +1447,7 @@
           E.push(...checkAppEngines(a).map(m => `${w}: ${m}`));
         } else if (rt === 'sim-spec@1') {
           if (!('spec' in a)) E.push(`${w}: the spec (activities/${aid}/spec.json) is missing`);
-          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { items: every }).map(m => `${w}: ${m}`));
+          else E.push(...checkSimSpec(a.spec, isObj(a.strings) ? a.strings : null, null, { items: every, parts: partLib }).map(m => `${w}: ${m}`));
         } else if (rt === ACT.PY) {
           const pk = a.packages == null ? [] : a.packages, allowed = [...ACT.PY_BASE, ...ACT.PY_EXTRAS];
           if (!(Array.isArray(pk) && pk.length <= ACT.PY_PACKAGES_MAX && pk.every(x => typeof x === 'string'))) E.push(`${w}: packages must be a list of names (${allowed.join(', ')})`);
@@ -1203,7 +1508,7 @@
     for (const aid of Object.keys(items)) if (!used.has(aid)) W.push(`activity ${aid}: not used by any interactive block or sim exercise`);
     if (Object.keys(items).length) {
       const req = Array.isArray(p.requires) ? p.requires : [];
-      const need = needRequires(Object.values(items));
+      const need = needRequires(Object.values(items), partLib);
       const miss = need.filter(x => !req.includes(x)); if (miss.length) E.push(`pack.requires must list ${miss.join(', ')} (make_pack.py writes it)`);
     }
     return { errors: E, warnings: W };
@@ -1359,5 +1664,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, ownSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, partsPlan, resolveParts, partSpec, partMsg, freeVars, ownSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -1,0 +1,17 @@
+{
+ "id": "schelling-segregation",
+ "runtime": "sim-spec@1",
+ "entry": "activities/schelling-segregation/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "schelling-segregation-still",
+  "text": "Two groups of households, equally many, live mixed at random on a 20 × 20 grid (a torus) with one cell in ten empty. Each round, a household moves to a random empty cell when fewer than a share 'want' of its occupied neighbouring cells (the eight around it) hold its own group (Schelling 1971). At the start about half of everyone's neighbours are alike. With want = 0.25 a few moves settle everyone and the mix stays near one half; with want = 0.3, a preference that would accept being a two-to-one minority, the moves cascade and the town ends with about three quarters of every household's neighbours alike: mild individual preferences produce strong collective segregation. The picture shows the grid at the end of a run with want = 0.3."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

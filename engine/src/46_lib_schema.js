@@ -112,7 +112,7 @@
     const tb = table || {};
     const model = isObj(tb.model) && tb.model.$by ? by(tb.model) : obj(tb.model || {});
     const output = { type: 'object', required: ['id', 'kind', 'of'], properties: Object.assign({
-      id: ref('name', 'id'), kind: { title: 'outKind', enum: outKinds(tb) }, of: { title: T('of'), type: 'string', minLength: 1, 'x-noema': 'of' },
+      id: ref('libOutId', 'id'), kind: { title: 'outKind', enum: outKinds(tb) }, of: { title: T('of'), type: 'string', minLength: 1, 'x-noema': 'of' },
     }, outFields(tb)) };
     return { model, output };
   }
@@ -145,10 +145,21 @@
     s.properties.engine = { title: 'engine', const: id };
     s.properties.model = Object.assign({ title: 'model' }, conv.model);
     s.properties.outputs = { title: 'outputs', type: 'array', maxItems: 24, items: ref('libOutput') };
-    delete s.properties.bench;
+    delete s.properties.bench; delete s.properties.parts; delete s.properties.couple;   // (one engine: no parts)
+    libDefs(s);
+    s.$defs.libOutput = conv.output;
+    libPlots(s);
+    return s;
+  }
+  /** the $defs every library schema shares: ids, names, output ids */
+  function libDefs(s) {
     s.$defs.libId = { type: 'string', pattern: C ? C.ID_RE.source : '^[A-Za-z][A-Za-z0-9_-]{0,31}$', 'x-noema': 'ref' };
     s.$defs.libName = { type: 'string', pattern: C ? C.NAME_RE.source : '^[A-Za-z_][A-Za-z0-9_]{0,31}$', not: { enum: C ? C.RESERVED.slice() : ['t', 'n', 'pi', 'e', 'true', 'false'] }, 'x-noema': 'name' };
-    s.$defs.libOutput = conv.output;
+    // an output's id: a name (the engine's checkSpec judges it; logic@1 accepts e and n, which an expression cannot use)
+    s.$defs.libOutId = { type: 'string', pattern: C ? C.NAME_RE.source : '^[A-Za-z_][A-Za-z0-9_]{0,31}$', 'x-noema': 'name' };
+  }
+  /** plots of a library schema */
+  function libPlots(s) {
     // plots: the formula and series plots (each line may have a style), a scene, a sound
     const p0 = s.$defs.plot, line = br => { const b = JSON.parse(JSON.stringify(br)); const it = b.properties.series.items; it.properties.style = { title: 'lineStyle', enum: STYLES.slice() }; b.required = ['x', 'series']; return b; };
     s.$defs.libPlot = {
@@ -159,6 +170,34 @@
         { title: 'plotKind.sound', required: ['of'], properties: { kind: { const: 'sound' }, of: { title: T('plotOf'), type: 'string', minLength: 1, 'x-noema': 'sound' }, height: { title: 'height', type: 'integer', minimum: 120, maximum: 900 } } }],
     };
     s.properties.plots = Object.assign({}, s.properties.plots, { items: ref('libPlot') });
+  }
+  const PARTS_ID = SIM_BASE + 'lib.parts.json';
+  /** partsSchema(engines, sim) → sim-spec@1 with parts (docs/INTERACTIVE.md §12.8) as the activity author builds it: each part is one of
+      the given library engines [{id, table}] (its model and outputs from its table) or a circuit-mna@1 part; no top-level engine,
+      model or outputs; plots with scenes, sounds and line styles. A part read from a pack file (use / with) is the validators' business. */
+  function partsSchema(engines, sim) {
+    const s = JSON.parse(JSON.stringify(sim));
+    s.$id = PARTS_ID; s.title = 'spec';
+    delete s.if; delete s.then; delete s.else;
+    s.required = [...new Set((s.required || []).concat(['parts']))];
+    for (const k of ['engine', 'model', 'outputs']) delete s.properties[k];   // (the bench stays: bench.part names a circuit-mna@1 or twin@1 part)
+    libDefs(s);
+    const part = (id, model, out) => ({ title: 'eng.' + id, type: 'object', required: ['id', 'engine', 'model', 'outputs'], additionalProperties: false,
+      properties: { id: ref('benchId', 'partId'), engine: { title: 'engine', const: id }, model: Object.assign({ title: 'model' }, model),
+        outputs: { title: 'outputs', type: 'array', minItems: 1, maxItems: 24, items: out }, inputs: ref('partInputs') } });
+    const branches = [];
+    for (const e of engines || []) {
+      const conv = toSchema(e.table), k = 'libOutput_' + slug(e.id).replace(/-/g, '_');
+      s.$defs[k] = conv.output;
+      branches.push(part(e.id, conv.model, ref(k)));
+    }
+    if (s.$defs.model && s.$defs.output) branches.push(part('circuit-mna@1', ref('model'), ref('output')));
+    // a part from a file of the pack (activities/_parts/<name>.json), changed by `with` (the validators resolve it)
+    branches.push({ title: 'partUse', type: 'object', required: ['id', 'use'], additionalProperties: false, properties: { id: ref('benchId', 'partId'),
+      use: { title: 'partUse', type: 'string', pattern: '^[a-z0-9][a-z0-9-]{0,60}$' }, with: { title: 'partWith', type: 'object' },
+      engine: { title: 'engine', type: 'string', minLength: 1 }, model: { title: 'model', type: 'object' }, outputs: { title: 'outputs', type: 'array', items: ref('partOutput') }, inputs: ref('partInputs') } });
+    s.properties.parts = Object.assign({}, s.properties.parts, { items: { oneOf: branches } });
+    libPlots(s);
     return s;
   }
   /** a field named by a symbol (k, x0, tau, Ne, se1 …) is its own label: no word to translate */
@@ -172,7 +211,7 @@
     return out;
   }
 
-  root.NoemaLibSchema = Object.freeze({ toSchema, specSchema, ofs, outKinds, schemaId, titles, symbolic, kindSchema, STYLES: Object.freeze(STYLES.slice()) });
+  root.NoemaLibSchema = Object.freeze({ toSchema, specSchema, partsSchema, PARTS_ID, ofs, outKinds, schemaId, titles, symbolic, kindSchema, STYLES: Object.freeze(STYLES.slice()) });
   if (typeof module !== 'undefined' && module.exports) module.exports = root.NoemaLibSchema;
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

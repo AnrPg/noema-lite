@@ -310,3 +310,7 @@ reference case (antibiotics within 1 h) was checked (2026-11) against the Surviv
 2021;49:e1063; *Intensive Care Med* 2021;47:1181, PMC8486643), recommendation 12: for possible septic shock or a high likelihood of
 sepsis, antimicrobials "immediately, ideally within 1 h of recognition"; for possible sepsis without shock the guideline allows a
 rapid assessment and antimicrobials within 3 h (recommendations 13–14), so a case without shock should use a 180-min deadline.
+
+## Uses the kernel
+
+Since 2026-11-07: the virtual patient's vital-sign noise draws from a kernel stream (`C.rng(seed, 'vp')` = `SK.stream`, normals by inversion) and the arterial PO₂ is Brent's root (`SK.brent`) of the O₂ content; its Worker source carries the kernel. Since the second round the physiology runs on `SK.integrate` too: one core (`vpPhys`, `vpDeriv`, `vpAdvance`) for `run()` and the stepper, the kernel's explicit Euler between breaks at every grid time of 0.1 min; each break applies the model's projections (volume ≥ 0.3·normal, red cells ≥ 0, 0 ≤ burden ≤ 1, lactate ≥ 0.3), the crash clock and death, and records the minute. The kernel's clock is the grid index (a step of exactly 1, the derivatives times 0.1), so y + 1·(0.1·f) is the model's own y + 0.1·f: the snapshot holds bit for bit, and the stepper = `run()` bit for bit. (The stepper's time of death is now the start of the fatal step, as in `run()`.) FALLBACK without the kernel: the same Euler in the core.

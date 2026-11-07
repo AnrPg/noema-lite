@@ -1,0 +1,17 @@
+{
+ "id": "pk-ode",
+ "runtime": "sim-spec@1",
+ "entry": "activities/pk-ode/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "pk-ode-still",
+  "text": "A 500 mg oral dose gives a plasma peak of about 9.6 mg/L after a few hours; the concentration at the effect site, which follows the plasma with the rate ke0 = 0.3 per hour, peaks later and lower, at about 6.6 mg/L, so the peak effect is about 57% of the maximum. With a fast ke0 (3 per hour) the effect site keeps up with the plasma and peaks at 9.5 mg/L; with a slow one (0.05 per hour) it reaches only 2.7 mg/L. The lag between concentration and effect (hysteresis) comes from this equilibration, not from the dose."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

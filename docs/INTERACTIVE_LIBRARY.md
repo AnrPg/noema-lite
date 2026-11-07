@@ -26,6 +26,7 @@ the limits and edge cases, the reference values its tests assert).
 |---|---|
 | `engine/src/46_lib_core.js` | `NoemaLibCore`: the model checker (a table walked with fixed codes and messages), `numx` numbers, seeded randomness, statistics, thinning, scenes, the adapter `makeEngine`, the Worker source |
 | `engine/src/47_lib_<name>.js`, `48_lib_<name>.js` | one engine each: `window.NoemaLib<Name>` |
+| `engine/src/46_lib_schema.js` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
 | `engine/src/49_lib_catalog.js` | `NoemaEngineCatalog`: every engine with its layer and search words; `suggest(text)`; registers the loaded library engines (`ACT.registerEngine`) |
 | `tools/enginelib.py` | the Python twin of the core's checker (`walk`, `problems`, `check_outputs`) |
 | `tools/lib_<name>.py` | the Python twin of one engine's checks: `ID`, `check_spec(spec)`, `exprs(spec)`, `keys(spec)` — the same codes, paths and messages |
@@ -50,7 +51,9 @@ catalogue its one-line description (`engine.engines.<slug>.what`, every UI local
   function run(spec, env, { seed, prepared }) { return { out: { t: [...], x: [...], xEnd: 0.1, drawing: { view, items } } }; }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
-  root.NoemaLibODE = Object.freeze({ id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, /* the engine's own functions, for tests */ });
+  root.NoemaLibODE = Object.freeze({ id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
+    table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES } },   // the form of the activity author (§1.5)
+    /* the engine's own functions, for tests */ });
 })(typeof window !== 'undefined' ? window : globalThis);
 ```
 
@@ -98,6 +101,69 @@ check every expression and key with the spec's names: the messages a pack's auth
 - **line styles** on any line of a `function` or `series` plot: `style` `line` (default), `bars`, `steps`, `points`.
 - Only library engines may declare `scene` and `sound` outputs and plots; for every other engine the validators keep their old
   messages word for word.
+
+### 1.5 The form of the activity author: `table`
+
+The activity author (`#/author`, a subject's ⋮ › *Create an activity*) offers every library engine the app has, grouped like the
+catalogue. It builds the engine's form from one more export of the module, `table`, turned into a JSON Schema by
+`engine/src/46_lib_schema.js` (`NoemaLibSchema.specSchema(id, table, simSchema)`); an engine without `table` is simply not offered.
+
+```js
+table: {
+  model:   TABLE,                                      // the very table checkSpec walks (C.walk), or {$by: 'mode', $cases: {<mode>: TABLE}}
+  outputs: { scalar: [...], series: [...], scene: [...], sound: [...] },   // what `of` may name, by output kind (or {$by: 'mode', $cases: {<mode>: {...}}})
+  fields:  { node: 'id', stat: 'enum:mean|sd', … },    // optional: the other fields of an output, with walk kinds
+  offered: model => ({ scalar: [...], … }),            // optional: when what `of` may name depends on the model
+}
+```
+
+- **One line, no new rule.** `table` only exposes what the engine already checks; `checkSpec` stays the judge (the form shows its
+  codes and messages at the field), and the schema is looser than `checkSpec`, never stricter: every spec `checkSpec` accepts must
+  pass the schema (`tests/activity_author.js` checks the reference activity and every good fixture of each engine).
+- **Kinds.** The walk kinds map to schema types (`pos` → number > 0, `int:a:b` → integer, `enum:a|b` → enum, `numx` → number or
+  formula, `expr` → formula, `id`/`ref`/`name`/`key` → the spec's ids, names and string keys, `$list`/`$map`/`$obj`/`$req` as in
+  the walk); an unknown kind becomes a non-empty text and `any` anything, so a new kind never breaks the form.
+- **Labels.** A field's label is `engine.author.f.lib.<field>` (`i18n/engine/en.arb`, a description for translators, drafts in every
+  UI locale); a symbol (one or two letters, a name with a digit or a capital, a Greek letter) is its own label. A new word field
+  needs its key, or `tests/activity_author.js` says which one is missing.
+- **Parts.** The same tables give the forms of the parts of a spec with several engines (`NoemaLibSchema.partsSchema`, the
+  author's kind *Several engines*): nothing more to export.
+- **The reference activity.** The author offers *Start from the reference activity* (the engine's `tools/activities_examples/<example>/`,
+  shipped in `engine/activity_author_schemas.js` as `NoemaActivityRefs`) or *Blank*.
+
+### 1.6 The stepper: an engine in time (parts, `docs/INTERACTIVE.md` §12.8)
+
+An engine whose model evolves in time can be **co-simulated** with others: it gives `makeEngine` an optional `stepper`
+(46_lib_core.js), the same signature as `NoemaSimKit.stepper` / `cosim` (46_lib_simkit.js):
+
+```js
+const stepper = {
+  init(model, inputs, ctx) { return state; },                    // null: this model cannot be stepped
+  step(state, inputs, t, dt, ctx) { return { state, out: { outputId: value }, dt /* taken ≤ dt: an early stop */, events: [{ t, kind, data, to? }], fail: 'code'? }; },
+  snapshot(state) { return copy; }, restore(copy) { return state; },   // optional: default a deep copy of plain data; null = cannot be iterated
+  output(state, ctx) { return out; },                            // optional: the outputs at the start
+  onEvent(state, ev, t) { return state; },                       // optional: an event of another part
+};
+const { engine, simEngine } = C.makeEngine({ id, checkSpec, run, prepare, stepper });   // engine.stepper = true; simEngine.stepper = the def
+```
+
+- `ctx = {spec, seed, prepared, id, t0, rand}` (`rand`: a seeded stream of this part). `inputs` are the part's numbers (consts,
+  params, its inputs), held over the step. `out` maps the spec's output ids to a number (a scalar now; a **series** output collects
+  one sample per step), an array (kept whole), a scene or a sound; only declared outputs pass (`pickStep`).
+- The instance gets `stepInit(inputs, t0) → {out}`, `stepTo(inputs, t, dt, inbox) → {out, dt, events, fail?}` (the inbox's events
+  go to `onEvent` first), `snapshot() → slot` (−1: cannot; one slot, a new snapshot replaces it) and `restore(slot) → true/false`.
+  The Worker answers the messages `sinit`, `step`, `snap` and `restore` (35_activity_sim.js `engineRunner(...).step(kind, …)`).
+  Without `stepper` nothing changes: `run` is as before (a part's series inputs arrive as `opts.series`).
+- Steppers now: `ode@1` (a flow or a map: events and crossings inside the step, `final` / `stat` running), `med@1` (the
+  pharmacokinetic compartments, RK4 split at the doses; other items run as before), `clinic@1` (the virtual patient, the same
+  physiology as `run()`: stepped to the end it gives `run()`'s scalars bit for bit; the other sections from `run()` on the current
+  inputs), `genetics@1` (Wright–Fisher drift with its own seeded stream; other modes recompute), and `des@1`, `field@1`,
+  `agents@1` (their own, through `NoemaSimKit.stepper`); and the plugins `thermal@1`, `pid@1`, `twin@1` (no snapshot) and the
+  `circuit-mna@1` transient (no snapshot; its own grid a divisor of the first macro step, a step off the grid reported at the
+  asked time by interpolation, a changed binding taken into the running transient with its capacitor and inductor state, its
+  time counted from the part's t0): their instances answer `stepInit` / `stepTo` / `snapshot` / `restore` themselves
+  (docs/INTERACTIVE_ENGINES.md, docs/INTERACTIVE_CIRCUIT.md). The validators list them (`STEPPERS` in `engine/packcheck.js` and
+  `tools/activities.py`): add an engine there when it gains a stepper. Pure, bounded, never throws.
 
 ## 2. The catalogue (`NoemaEngineCatalog`)
 

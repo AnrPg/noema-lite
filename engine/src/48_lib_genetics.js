@@ -40,6 +40,7 @@
     if (k < 1024) return LF[Math.round(k)];
     const x = k + 1; return (x - 0.5) * Math.log(x) - x + 0.5 * Math.log(2 * Math.PI) + 1 / (12 * x) - 1 / (360 * x * x * x) + 1 / (1260 * Math.pow(x, 5));
   }
+  /* FALLBACK special functions, for a context without the kernel (NoemaSimKit has the same Lanczos ln Γ and NR Q(a, x)) */
   /** ln Γ(x) (Lanczos, g = 7, n = 9; ~1e-15) */
   const LZ = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
   function lgamma(x) {
@@ -66,7 +67,7 @@
     return Math.min(1, Math.exp(-x + a * Math.log(x) - gln) * h);
   }
   /** the χ² upper tail P(X ≥ x | df) */
-  const chi2Sf = (x, df) => (df >= 1 && x >= 0 ? gammaQ(df / 2, x / 2) : NaN);
+  const chi2Sf = (x, df) => (df >= 1 && x >= 0 ? (C.kit() ? C.kit().chi2Sf(x, df) : gammaQ(df / 2, x / 2)) : NaN);   // the kernel's tail; FALLBACK: the own Q below
   /** erfc: Taylor series of erf below 2, Lentz continued fraction above (relative error ~1e-15) */
   function erfc(x) {
     if (x < 0) return 2 - erfc(-x);
@@ -78,7 +79,8 @@
   const Phi = z => 0.5 * erfc(-z / Math.SQRT2);
   const phi = z => Math.exp(-0.5 * z * z) / Math.sqrt(2 * Math.PI);
   /** Φ⁻¹(p): Acklam's rational approximation (2003) refined by one Halley step */
-  function PhiInv(p) {
+  const PhiInv = p => (C.kit() ? C.kit().normInv(p) : PhiInvOwn(p));   // the kernel's AS 241; FALLBACK: Acklam + Halley below
+  function PhiInvOwn(p) {
     if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
     const a = [-3.969683028665376e1, 2.209460984245205e2, -2.759285104469687e2, 1.383577518672690e2, -3.066479806614716e1, 2.506628277459239];
     const b = [-5.447609879822406e1, 1.615858368580409e2, -1.556989798598866e2, 6.680131188771972e1, -1.328068155288572e1];
@@ -131,6 +133,10 @@
     return k;
   }
   const expo = (rand, rate) => -Math.log(1 - rand()) / rate;
+  /** the variates of a stream: the kernel's (NoemaSimKit stream: binomial and Poisson by inversion, one uniform each — CRN-friendly;
+      exponential by inversion), else this module's samplers on a bare uniform function (FALLBACK) */
+  const sampler = r => (r && typeof r.binomial === 'function' ? { binomial: (n, p) => r.binomial(n, p), poisson: l => (l > 1e5 ? NaN : r.poisson(l)), exp: rate => r.exp(rate) }
+    : { binomial: (n, p) => binomial(r, n, p), poisson: l => poisson(r, l), exp: rate => expo(r, rate) });
 
   /* ---------- the model tables (the same as tools/lib_genetics.py) ---------- */
   const LOCUS = { id: 'name!', alleles: { $req: true, $list: 'id', min: 1, max: 6 }, dominance: 'enum:complete|incomplete|codominant', codominant: { $list: { $list: 'id', min: 2, max: 2 }, max: 6 }, chrom: 'enum:auto|X|Z', lethal: { $list: { $obj: { genotype: { $req: true, $list: 'id', min: 1, max: 2 }, viability: 'numx' } }, max: 8 } };
@@ -772,7 +778,7 @@
     if (codes.length) return { out: { valid: 0 }, codes, ARG: none };
     const copies = proc === 'moran' ? N : 2 * N, i0 = Math.round(p0 * copies);
     if (Math.abs(i0 / copies - p0) > 1e-9) codes.push('p0-rounded');
-    const rand = C.mulberry32(C.hash32('genetics-drift', seed >>> 0));
+    const rand = C.rng(seed >>> 0, 'genetics-drift'), draw = sampler(rand);
     const meanP = new Array(G + 1).fill(0), meanH = new Array(G + 1).fill(0), keep = Math.min(reps, 20), trace = [];
     let fixed = 0, lost = 0, tfSum = 0;
     const finals = [];
@@ -783,7 +789,7 @@
         if (proc === 'wf') {   // selection, mutation, then binomial sampling of 2N gene copies
           const p = i / copies, q = 1 - p, wAA = 1 + s, wAa = 1 + h * s, wb = p * p * wAA + 2 * p * q * wAa + q * q;
           let ps = (p * p * wAA + p * q * wAa) / wb; ps = ps * (1 - mu) + (1 - ps) * nu;
-          i = binomial(rand, copies, Math.min(1, Math.max(0, ps)));
+          i = draw.binomial(copies, Math.min(1, Math.max(0, ps)));
         } else {
           for (let k = 0; k < N; k++) {   // one birth (by fitness; the offspring may mutate) and one death (uniform) per step
             if ((i === 0 && nu === 0) || (i === N && mu === 0)) break;
@@ -889,10 +895,10 @@
   }
   function coalTree(rand, n, Ne, mu) {
     // leaves 0..n−1 at time 0; with k lineages the waiting time is Exp(C(k,2)) in units of 2Ne generations (Kingman 1982; Hudson 1983)
-    const nodes = []; for (let i = 0; i < n; i++) nodes.push({ t: 0, kids: [], size: 1 });
+    const nodes = [], draw = sampler(rand); for (let i = 0; i < n; i++) nodes.push({ t: 0, kids: [], size: 1 });
     let live = nodes.map((_, i) => i), t = 0;
     for (let k = n; k > 1; k--) {
-      t += expo(rand, k * (k - 1) / 2) * 2 * Ne;
+      t += draw.exp(k * (k - 1) / 2) * 2 * Ne;
       const a = Math.floor(rand() * live.length); let b = Math.floor(rand() * (live.length - 1)); if (b >= a) b++;
       const na = live[a], nb = live[b];
       nodes.push({ t, kids: [na, nb], size: nodes[na].size + nodes[nb].size });
@@ -901,7 +907,7 @@
     let total = 0, S2 = 0, pi = 0; const sfs = new Array(n).fill(0);
     for (const nd of nodes) for (const c of nd.kids) {
       const len = nd.t - nodes[c].t; total += len;
-      if (mu > 0) { const k = poisson(rand, mu * len); S2 += k; sfs[nodes[c].size] += k; pi += k * nodes[c].size * (n - nodes[c].size); }
+      if (mu > 0) { const k = draw.poisson(mu * len); S2 += k; sfs[nodes[c].size] += k; pi += k * nodes[c].size * (n - nodes[c].size); }
     }
     return { nodes, tmrca: t, total, S: S2, pi: pi / (n * (n - 1) / 2), sfs };
   }
@@ -912,7 +918,7 @@
     if (!(Ne > 0) || !(mu >= 0) || !(4 * Ne * mu <= 1000)) codes.push('param-range');
     if (!(reps >= 1) || reps * n > BUDGET) codes.push('budget');
     if (codes.length) return { out: { valid: 0 }, codes };
-    const rand = C.mulberry32(C.hash32('genetics-coalescent', seed >>> 0)), a = aN(n), theta = 4 * Ne * mu;
+    const rand = C.rng(seed >>> 0, 'genetics-coalescent'), a = aN(n), theta = 4 * Ne * mu;
     out.aN = a; out.eTmrca = 4 * Ne * (1 - 1 / n); out.eTotal = 4 * Ne * a; out.eS = theta * a;
     let sT = 0, sL = 0, sS = 0, sD = 0, nD = 0; const sfs = new Array(n).fill(0); let first = null;
     for (let r = 0; r < reps; r++) {
@@ -996,7 +1002,7 @@
       if (!(N >= 4 && N <= 2000 && L >= 1 && L <= 200 && SG >= 1 && fr > 0 && fr <= 1 && hh > 0 && hh <= 1)) codes.push('sim-range');
       else if (N * L * SG > BUDGET) codes.push('budget');
       else {
-        const rand = C.mulberry32(C.hash32('genetics-quant', seed >>> 0));
+        const rand = C.rng(seed >>> 0, 'genetics-quant');
         let gen = []; for (let k = 0; k < N; k++) { const g = new Int8Array(2 * L); for (let j = 0; j < 2 * L; j++) g[j] = rand() < 0.5 ? 1 : 0; gen.push(g); }
         const gv = g => { let s2 = 0; for (let j = 0; j < g.length; j++) s2 += g[j]; return (s2 - L) / 2; };
         const VE = L / 8 * (1 - hh) / hh, sdE = Math.sqrt(VE);   // V_A at p = ½: 2pq·α² per locus = 1/8
@@ -1004,7 +1010,7 @@
         const stat = () => { const v = gen.map(gv), mn = v.reduce((x, y) => x + y, 0) / N; means.push(mn); vas.push(v.reduce((x, y) => x + (y - mn) * (y - mn), 0) / N); let c1 = 0; for (const g of gen) for (let j = 0; j < 2 * L; j++) c1 += g[j]; pfs.push(c1 / (2 * L * N)); };
         stat();
         for (let t2 = 0; t2 < SG; t2++) {
-          const ph = gen.map((g, k) => ({ k, z: gv(g) + sdE * C.gauss(rand) })).sort((x, y) => y.z - x.z || x.k - y.k);
+          const ph = gen.map((g, k) => ({ k, z: gv(g) + sdE * C.normal(rand) })).sort((x, y) => y.z - x.z || x.k - y.k);
           const nSel = Math.max(2, Math.round(fr * N)), par = ph.slice(0, nSel).map(x => gen[x.k]), nx = [];
           for (let k = 0; k < N; k++) {
             const a1 = Math.floor(rand() * nSel); let b1 = Math.floor(rand() * (nSel - 1)); if (b1 >= a1) b1++;
@@ -1041,11 +1047,66 @@
     }
     return { out, codes: res.codes || [] };
   }
-  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibGeneticsModule, 'NoemaLibGenetics');
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): genetic drift in a co-simulation ----------
+     mode drift: the replicate populations are the state; each macro step runs the generations up to round(t + dt − t0) with the same
+     Wright–Fisher / Moran sampling as runDrift, and with the inputs of that step (a population size N an ecological part computes:
+     a bottleneck keeps the allele frequency, the copies are rescaled; a selection s that changes with the environment). Its seeded
+     stream lives in the state (a plain number), so a snapshot repeats the same draws. Per step: meanP, meanH, fixed, lost, segregating
+     (now), rep (one sample of replicate arg), t (the generation), meanPs / meanHs (one sample each), uTheory and the neutral times at the
+     current inputs. Every other mode is recomputed at each step from the current inputs. */
+  /* the stepper's stream is plain data in its state (snapshot = copy): the kernel stream's 6 numbers, or (FALLBACK) a mulberry32 word */
+  function stepRng0(seed) { const K = C.kit(); return K ? K.stream(seed >>> 0, 'genetics-drift-step').state() : C.hash32('genetics-drift-step', seed >>> 0); }
+  function stepRng(ns) { const K = C.kit(); return Array.isArray(ns.rs) && K ? K.stream(0, '', { state: ns.rs }) : null; }
+  function dRand(st) { let a = st.rs = (st.rs + 0x6D2B79F5) >>> 0, t = Math.imul(a ^ (a >>> 15), a | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
+  const stepper = {
+    init(model, inputs, sc) {
+      const m = isObj(model) ? model : {};
+      if (m.mode !== 'drift') return { t: sc.t0 || 0, other: true };
+      const proc = m.process || 'wf', N = Math.round(num(m.N, inputs, NaN)), p0 = num(m.p0, inputs, NaN), reps = Math.round(num(m.reps, inputs, 20));
+      if (!(N >= 1 && N <= 1e6) || !(p0 >= 0 && p0 <= 1) || !(reps >= 1 && reps <= 10000)) return null;
+      const copies = proc === 'moran' ? N : 2 * N, i0 = Math.round(p0 * copies);
+      return { t0: sc.t0 || 0, g: 0, proc, copies, i: new Array(reps).fill(i0), tFix: new Array(reps).fill(-1), H0: 2 * (i0 / copies) * (1 - i0 / copies), dec: 0, rs: stepRng0(sc.seed) };
+    },
+    step(st, inputs, t, dt, sc) {
+      const m = sc.spec.model, outs = Array.isArray(sc.spec.outputs) ? sc.spec.outputs : [];
+      if (st.other) { const r = run(sc.spec, inputs, { seed: sc.seed }); return { state: { ...st, t: t + dt }, out: r.out, dt }; }
+      const ns = C.copyData(st), N = Math.round(num(m.N, inputs, NaN)), s = num(m.s, inputs, 0), h = num(m.h, inputs, 0.5), mu = num(m.mu, inputs, 0), nu = num(m.nu, inputs, 0);
+      if (!(N >= 1 && N <= 1e6) || !(s > -1) || !(mu >= 0 && mu <= 1) || !(nu >= 0 && nu <= 1)) return { state: st, out: {}, dt, fail: 'range' };
+      const copies = ns.proc === 'moran' ? N : 2 * N;
+      if (copies !== ns.copies) { ns.i = ns.i.map(i => Math.round(i / ns.copies * copies)); ns.copies = copies; }   // a new size: the same frequencies
+      const target = Math.round(t + dt - ns.t0), reps = ns.i.length;
+      if ((target - ns.g) * reps * (ns.proc === 'moran' ? N : 1) > BUDGET) return { state: st, out: {}, dt, fail: 'budget' };
+      const R = stepRng(ns), u = R || (() => dRand(ns)), dr = sampler(u);
+      for (; ns.g < target; ns.g++) for (let r = 0; r < reps; r++) {
+        let i = ns.i[r];
+        if (ns.proc === 'wf') {
+          const p = i / copies, q = 1 - p, wAA = 1 + s, wAa = 1 + h * s, wb = p * p * wAA + 2 * p * q * wAa + q * q;
+          let ps = (p * p * wAA + p * q * wAa) / wb; ps = ps * (1 - mu) + (1 - ps) * nu;
+          i = dr.binomial(copies, Math.min(1, Math.max(0, ps)));
+        } else for (let k = 0; k < N; k++) {
+          if ((i === 0 && nu === 0) || (i === N && mu === 0)) break;
+          const r1 = u(), r2 = u(), r3 = u(), fA = (1 + s) * i, tot = fA + (N - i);
+          let birthA = r1 * tot < fA; if (birthA ? r3 < mu : r3 < nu) birthA = !birthA;
+          i += (birthA ? 1 : 0) - (r2 * N < i ? 1 : 0);
+        }
+        ns.i[r] = i; if (i === copies && ns.tFix[r] < 0) ns.tFix[r] = ns.g + 1;
+      }
+      if (R) ns.rs = R.state();
+      const ps = ns.i.map(i => i / copies), fixed = ps.filter(p => p === 1).length / reps, lost = ps.filter(p => p === 0).length / reps;
+      const meanP = ps.reduce((a, b) => a + b, 0) / reps, meanH = ps.reduce((a, p) => a + 2 * p * (1 - p), 0) / reps;
+      const p0 = num(m.p0, inputs, NaN), dec = ns.proc === 'wf' ? 1 - 1 / (2 * N) : Math.pow(1 - 2 / (N * N), N), Ne4 = ns.proc === 'wf' ? 4 * N : N;
+      const fx = ns.tFix.filter(x => x >= 0), v = { t: ns.g, meanP, meanH, meanPs: meanP, meanHs: meanH, fixed, lost, segregating: 1 - fixed - lost, hTheory: ns.H0 * Math.pow(dec, ns.g), hTheoryS: ns.H0 * Math.pow(dec, ns.g),
+        uNeutral: p0, uTheory: ns.proc === 'wf' ? kimuraU(N, s, h, p0) : NaN, tFix: p0 > 0 && p0 < 1 ? -Ne4 * (1 - p0) * Math.log(1 - p0) / p0 : NaN, meanTfix: fx.length ? fx.reduce((a, b) => a + b, 0) / fx.length : NaN, valid: 1 };
+      const out = {};
+      for (const o of outs) { if (!o || typeof o.id !== 'string') continue; out[o.id] = o.of === 'rep' ? (ps[Math.round(num(o.arg, inputs, 0))] ?? NaN) : has(v, o.of) ? v[o.of] : NaN; }
+      return { state: ns, out, dt };
+    },
+  };
+  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true, stepper });
+  engine.workerSource = C.workerSource(noemaLibGeneticsModule, 'NoemaLibGenetics', { kit: true });
   root.NoemaLibGenetics = Object.freeze({
     table: { model: { $by: 'mode', $cases: TABLES }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(m => [m, Object.keys(OUTS[m]).reduce((a, k) => ((a[OUTS[m][k][0]] = a[OUTS[m][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'numx' } },   // the form of the activity author (46_lib_schema.js)
-    id: ID, MODES, TABLES, OUTS, EPI, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
+    id: ID, MODES, TABLES, OUTS, EPI, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, stepper,
     // the formulas, for tests
     logFact, lgamma, gammaQ, chi2Sf, erfc, Phi, PhiInv, intensity, binomial, poisson, hweExact, kimuraU, haldane, kosambi, rHaldane, rKosambi, tajimaD, aN, ratioOf, chainOf,
   });

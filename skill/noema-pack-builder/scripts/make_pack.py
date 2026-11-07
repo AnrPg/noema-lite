@@ -101,7 +101,7 @@ counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in
 meta = dict(meta); meta['owner'] = None
 pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts,
         'builtAt': datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat(), 'builtWith': 'noema-pack-builder skill'}
-if acts and acts['items']: pack['activities'] = {'format': ACTS.FORMAT, 'items': acts['items']}; pack['requires'] = requires   # inline, like the pictures (docs/adr/001 D2)
+if acts and acts['items']: pack['activities'] = {'format': ACTS.FORMAT, 'items': acts['items'], **({'parts': acts['parts']} if acts.get('parts') else {})}; pack['requires'] = requires   # inline, like the pictures (docs/adr/001 D2); activities/_parts with them (§12.8)
 tr = pack_i18n(pack, translations, external=True)   # pack schema v2; each translation in its own file (docs/i18n.md §10)
 pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, **({'t': tr} if tr else {}), **({'a': ACTS.hash_part(acts)} if acts and acts['items'] else {})})
 counts['sourceFiles'] = len(files)

@@ -1,0 +1,242 @@
+{
+ "cases": [
+  {
+   "name": "8 / 6 / 5: a majority cycle A > B > C > A (margins 7, 9, 3); plurality, IRV and Borda all pick A",
+   "steps": [
+    {
+     "set": "n1",
+     "value": 8
+    },
+    {
+     "set": "n2",
+     "value": 6
+    },
+    {
+     "set": "n3",
+     "value": 5
+    }
+   ],
+   "expect": {
+    "values": {
+     "ab": [
+      6.99,
+      7.01
+     ],
+     "bc": [
+      8.99,
+      9.01
+     ],
+     "ca": [
+      2.99,
+      3.01
+     ],
+     "cyc": [
+      0.99,
+      1.01
+     ],
+     "cw": [
+      -1.01,
+      -0.99
+     ],
+     "pl": [
+      -0.01,
+      0.01
+     ],
+     "irv": [
+      -0.01,
+      0.01
+     ],
+     "borda": [
+      -0.01,
+      0.01
+     ]
+    }
+   }
+  },
+  {
+   "name": "8 / 4 / 3: the cycle breaks, A beats C 8 to 7 and is the Condorcet winner",
+   "steps": [
+    {
+     "set": "n1",
+     "value": 8
+    },
+    {
+     "set": "n2",
+     "value": 4
+    },
+    {
+     "set": "n3",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "values": {
+     "ab": [
+      6.99,
+      7.01
+     ],
+     "bc": [
+      8.99,
+      9.01
+     ],
+     "ca": [
+      -1.01,
+      -0.99
+     ],
+     "cyc": [
+      -0.01,
+      0.01
+     ],
+     "cw": [
+      -0.01,
+      0.01
+     ],
+     "pl": [
+      -0.01,
+      0.01
+     ]
+    }
+   }
+  },
+  {
+   "name": "2 / 9 / 4: B is the Condorcet winner and wins plurality, IRV and Borda",
+   "steps": [
+    {
+     "set": "n1",
+     "value": 2
+    },
+    {
+     "set": "n2",
+     "value": 9
+    },
+    {
+     "set": "n3",
+     "value": 4
+    }
+   ],
+   "expect": {
+    "values": {
+     "ab": [
+      -3.01,
+      -2.99
+     ],
+     "bc": [
+      6.99,
+      7.01
+     ],
+     "ca": [
+      10.99,
+      11.01
+     ],
+     "cyc": [
+      -0.01,
+      0.01
+     ],
+     "cw": [
+      0.99,
+      1.01
+     ],
+     "pl": [
+      0.99,
+      1.01
+     ],
+     "irv": [
+      0.99,
+      1.01
+     ],
+     "borda": [
+      0.99,
+      1.01
+     ]
+    }
+   }
+  },
+  {
+   "name": "5 / 5 / 5: a perfect cycle, every method ties",
+   "steps": [
+    {
+     "set": "n1",
+     "value": 5
+    },
+    {
+     "set": "n2",
+     "value": 5
+    },
+    {
+     "set": "n3",
+     "value": 5
+    }
+   ],
+   "expect": {
+    "values": {
+     "ab": [
+      4.99,
+      5.01
+     ],
+     "bc": [
+      4.99,
+      5.01
+     ],
+     "ca": [
+      4.99,
+      5.01
+     ],
+     "cyc": [
+      0.99,
+      1.01
+     ],
+     "cw": [
+      -1.01,
+      -0.99
+     ],
+     "pl": [
+      -1.01,
+      -0.99
+     ],
+     "borda": [
+      -1.01,
+      -0.99
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the group sizes are saved",
+   "steps": [
+    {
+     "set": "n1",
+     "value": 3
+    },
+    {
+     "set": "n2",
+     "value": 7
+    },
+    {
+     "set": "n3",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "values": {
+     "cyc": [
+      0.99,
+      1.01
+     ],
+     "pl": [
+      -1.01,
+      -0.99
+     ],
+     "ca": [
+      10.99,
+      11.01
+     ]
+    },
+    "state": [
+     "n1",
+     "n2",
+     "n3"
+    ]
+   }
+  }
+ ]
+}

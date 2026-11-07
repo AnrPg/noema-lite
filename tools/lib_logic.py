@@ -285,12 +285,14 @@ def preds_of(f, out=None):
 # ---------- the model format (the same table as the JS) ----------
 ND_RULES = ["premise", "assume", "reit", "andI", "andE", "orI", "orE", "impI", "impE", "iffI", "iffE", "notI", "notE", "botE", "dne", "ip", "lem", "topI", "mt"]
 MV = ["k3", "lp", "l3", "lukasiewicz", "godel", "product"]
-SYSTEMS = ["K", "D", "T", "K4", "S4"]
+SYSTEMS = ["K", "D", "T", "K4", "S4", "B", "S5"]
+SUPPORTS = ["general", "deductive", "necessary"]
 SEMANTICS = ["grounded", "complete", "preferred", "stable"]
 IO_OPS = ["out1", "out2", "out3", "out4"]
 LEX = ["superior", "specialis", "posterior"]
 TASKS = ["truth-table", "equivalent", "entails", "normal-form", "sat", "resolution", "proof", "horn", "many-valued", "fol-eval", "unify",
-         "fol-resolution", "syllogism", "kripke", "tableau", "epistemic", "ltl", "ctl", "dyadic", "io", "norms", "af"]
+         "fol-resolution", "syllogism", "kripke", "tableau", "epistemic", "ltl", "ctl", "dyadic", "io", "norms", "af",
+         "aspic", "bipolar"]
 FORMS = ["nnf", "cnf", "dnf", "tseitin", "prenex", "skolem", "clausal"]
 FOL_FORMS = ["prenex", "skolem", "clausal"]
 ATOMV_T = {"atom": "id!", "value": "numx!"}
@@ -305,6 +307,9 @@ ARG_T = {"id": "id!", "label": "key", "x": "numx", "y": "numx"}
 ATT_T = {"u": "ref!", "v": "ref!", "on": "numx"}
 NORM_T = {"id": "id!", "kind": "enum:O|F|P", "cond": "expr", "act": "expr", "mode": "enum:achieve|maintain", "deadline": "expr", "within": "int:0:2000", "by": "fin",
           "until": "expr", "agent": "id", "scope": "enum:one|each", "rank": "int:-1000:1000", "issued": "fin", "on": "numx"}
+KB_T = {"f": "expr!", "kind": "enum:axiom|ordinary", "rank": "int:-1000:1000", "on": "numx"}
+RULE_T = {"id": "id!", "body": {"$list": "expr", "max": 8}, "head": "expr!", "kind": "enum:strict|defeasible", "rank": "int:-1000:1000", "on": "numx"}
+CONTR_T = {"u": "expr!", "v": "expr!"}
 PUZ_T = {"kind": "enum:muddy|cheryl|consecutive!", "n": "int:1:15", "muddy": "int:0:5", "a": "int:0:15", "b": "int:0:15"}
 MODEL_T = {
     "task": "enum:" + "|".join(TASKS) + "!", "logic": "enum:" + "|".join(MV), "system": "enum:" + "|".join(SYSTEMS), "form": "enum:" + "|".join(FORMS),
@@ -320,12 +325,14 @@ MODEL_T = {
     "args": {"$list": {"$obj": ARG_T}, "max": MAX_ARGS}, "attacks": {"$list": {"$obj": ATT_T}, "max": 600}, "arg": "ref", "ext": "numx",
     "norms": {"$list": {"$obj": NORM_T}, "max": MAX_NORMS}, "input": {"$list": "expr", "max": MAX_FORMULAS}, "order": {"$list": "enum:" + "|".join(LEX), "max": 3},
     "view": {"$list": "fin", "min": 4, "max": 4},
+    "kb": {"$list": {"$obj": KB_T}, "max": 64}, "rules": {"$list": {"$obj": RULE_T}, "max": 64}, "contraries": {"$list": {"$obj": CONTR_T}, "max": 64},
+    "link": "enum:last|weakest", "ordering": "enum:elitist|democratic", "transpose": "bool", "supports": {"$list": {"$obj": ATT_T}, "max": 600}, "support": "enum:" + "|".join(SUPPORTS),
 }
 REQ = {"truth-table": ["formula|formulas"], "equivalent": ["formulas"], "entails": ["goal"], "normal-form": ["formula", "form"], "sat": ["formula|formulas"],
        "resolution": ["premises|goal"], "proof": ["proof"], "horn": ["formulas", "goal"], "many-valued": ["formula", "logic"], "fol-eval": ["formula", "domain|size"],
        "unify": ["terms"], "fol-resolution": ["premises|goal"], "syllogism": ["mood", "figure"], "kripke": ["worlds"], "tableau": ["formula|goal"],
        "epistemic": ["worlds|puzzle", "formula"], "ltl": ["trace", "formula"], "ctl": ["worlds|preset", "formula"], "dyadic": ["worlds", "formula"], "io": ["norms", "goal", "op"],
-       "norms": ["norms", "trace"], "af": ["args"]}
+       "norms": ["norms", "trace"], "af": ["args"], "aspic": ["kb|rules"], "bipolar": ["args"]}
 LANG_OF = {"fol-eval": "fol", "unify": "fol", "fol-resolution": "fol", "kripke": "deontic", "tableau": "deontic", "epistemic": "epistemic", "ltl": "ltl", "ctl": "ctl", "dyadic": "dyadic"}
 ATOM_TASKS = ["truth-table", "equivalent", "entails", "many-valued", "io"]
 MODEL_TASKS = ["kripke", "epistemic", "ctl", "dyadic"]
@@ -353,10 +360,14 @@ TASK_OUT = {
     "io": [["entails", "triggered"], []],
     "norms": [["violations", "fulfilments", "pending", "conflicts", "steps", "frame"], ["violationsPerStep", "activePerStep"]],
     "af": [["extensions", "credulous", "skeptical", "accepted", "inCount", "steps", "frame"], ["labels"]],
+    "aspic": [["args", "attacks", "defeats", "extensions", "credulous", "skeptical", "accepted", "inCount", "subClosed", "strictClosed", "directConsistent",
+               "indirectConsistent", "transposed", "wellFormed", "axiomsConsistent", "steps", "frame"], ["labels"]],
+    "bipolar": [["extensions", "credulous", "skeptical", "accepted", "inCount", "attacks", "direct", "supported", "secondary", "mediated", "extended", "safe", "closed",
+                 "steps", "frame"], ["labels"]],
 }
 CODES = ["budget", "bound", "trace-truncated", "size", "vacuous", "correspondence", "deadlock", "not-serial", "not-equivalence", "inconsistent-input",
          "conflict", "unresolved", "no-stable", "occurs", "clash", "grid-only", "scene-truncated", "series-truncated", "contradiction", "nd-error", "nd-open",
-         "nd-goal", "boundary", "finite", "empty", "parse", "norm"]
+         "nd-goal", "boundary", "finite", "empty", "parse", "norm", "not-transposed", "axioms-inconsistent", "not-well-formed", "postulate"]
 KINDS3 = ["scalar", "series", "scene"]
 
 
@@ -381,7 +392,28 @@ def formula_fields(m):
     if isinstance(m.get("proof"), list):
         for i, ln in enumerate(m["proof"]):
             if isinstance(ln, dict) and isinstance(ln.get("f"), str): out.append([ln["f"], f"model.proof[{i}].f"])
+    if isinstance(m.get("kb"), list):
+        for i, k in enumerate(m["kb"]):
+            if isinstance(k, dict) and isinstance(k.get("f"), str): out.append([k["f"], f"model.kb[{i}].f"])
+    if isinstance(m.get("rules"), list):
+        for i, r in enumerate(m["rules"]):
+            if not isinstance(r, dict): continue
+            if isinstance(r.get("body"), list):
+                for j, b in enumerate(r["body"]):
+                    if isinstance(b, str): out.append([b, f"model.rules[{i}].body[{j}]"])
+            if isinstance(r.get("head"), str): out.append([r["head"], f"model.rules[{i}].head"])
+    if isinstance(m.get("contraries"), list):
+        for i, c in enumerate(m["contraries"]):
+            for f in ("u", "v"):
+                if isinstance(c, dict) and isinstance(c.get(f), str): out.append([c[f], f"model.contraries[{i}].{f}"])
     return out
+
+
+def lit_of(f):
+    """the literal of an AST: 'p' | '-p' | None (the same as the JS litOf)"""
+    neg = False
+    while isinstance(f, dict) and f.get("t") == "not": neg = not neg; f = f.get("a")
+    return ("-" if neg else "") + f["n"] if isinstance(f, dict) and f.get("t") == "atom" else None
 
 
 def puz_agents(pz):
@@ -472,7 +504,7 @@ def check_spec(spec):
             for a in agents_of(f):
                 if a not in ags: E("agent", p, f"the agent {a} is not in model.agents"); break
     if task == "ltl" and "loop" in m and isinstance(m.get("trace"), list) and m["loop"] >= len(m["trace"]): E("value", "model.loop", "needs a position of the trace")
-    if task == "af" and isinstance(m.get("args"), list):
+    if task in ("af", "bipolar") and isinstance(m.get("args"), list):
         aids = set()
         for i, a in enumerate(m["args"]):
             if a["id"] in aids: E("duplicate", f"model.args[{i}].id", f"the argument {a['id']} is listed twice")
@@ -480,7 +512,18 @@ def check_spec(spec):
         for i, e in enumerate(m.get("attacks") or []):
             for f in ("u", "v"):
                 if e[f] not in aids: E("ref", f"model.attacks[{i}].{f}", "not an argument of the framework")
+        if task == "bipolar":
+            for i, e in enumerate(m.get("supports") or []):
+                for f in ("u", "v"):
+                    if e[f] not in aids: E("ref", f"model.supports[{i}].{f}", "not an argument of the framework")
         if "arg" in m and m["arg"] not in aids: E("ref", "model.arg", "not an argument of the framework")
+    if task == "aspic":
+        for f, p in parsed:
+            if (p == "model.goal" or re.match(r"model\.(kb|rules|contraries)\[", p)) and not lit_of(f): E("literal", p, "needs a literal (an atom or ¬atom)")
+        rids = set()
+        for i, r in enumerate(m.get("rules") or []):
+            if r["id"] in rids: E("duplicate", f"model.rules[{i}].id", f"the rule {r['id']} is listed twice")
+            rids.add(r["id"])
     if task in ("norms", "io") and isinstance(m.get("norms"), list):
         nids = set()
         for i, nm in enumerate(m["norms"]):
@@ -515,6 +558,7 @@ def exprs(spec):
                 if L.is_obj(x):
                     for f in fs: sx(x.get(f), f"model.{k}[{i}].{f}")
     lst("assign", ["value"]); lst("worlds", ["x", "y"]); lst("edges", ["on"]); lst("args", ["x", "y"]); lst("attacks", ["on"]); lst("norms", ["on"])
+    lst("kb", ["on"]); lst("rules", ["on"]); lst("supports", ["on"])
     return out
 
 

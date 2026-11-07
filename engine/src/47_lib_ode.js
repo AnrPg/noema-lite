@@ -12,7 +12,7 @@
      • fixed steps: Euler, Heun, midpoint, classical RK4; Störmer–Verlet and Yoshida 1990 4th order for separable Hamiltonian pairs;
      • delay equations by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003; Shampine & Thompson 2001), h ≤ τ;
      • events: sign changes located on the dense output by the Illinois method; timed events (doses) hit exactly;
-     • equilibria: damped Newton from a grid; eigenvalues by balancing + Hessenberg + shifted QR (Numerical Recipes 2nd ed. §11.5–11.6);
+     • equilibria: damped Newton from a grid (the kernel's LU, SK.lu); eigenvalues by balancing + Hessenberg + shifted QR (SK.eig; Numerical Recipes §11.5–11.6);
      • Lyapunov exponents: Benettin, Galgani, Giorgilli & Strelcyn 1980 (variational equation, Gram–Schmidt every Δt).
    Pure, deterministic (the transcendental functions are NoemaExpr's fdlibm ports, never Math.*), bounded (≤ 200 000 steps in all).
    No learner text: numbers, codes and the model's own names only. Tests: node tests/lib_ode.js. */
@@ -49,25 +49,8 @@
   }
   // complete elliptic integral of the first kind K(k) by the arithmetic–geometric mean (DLMF 19.8.5)
   function ellipK(k) { if (!(abs(k) < 1)) return Infinity; let a = 1, b = sqrt(1 - k * k); for (let i = 0; i < 40 && abs(a - b) > 1e-16 * a; i++) { const an = (a + b) / 2; b = sqrt(a * b); a = an; } return PI / (2 * a); }
-  // a root of g on [a, b] (g(a), g(b) of opposite signs) by Brent's method (Brent 1973, ch. 4)
-  function brent(g, a, b, tol) {
-    let fa = g(a), fb = g(b); if (!(fa * fb <= 0)) return NaN;
-    let c = a, fc = fa, d = b - a, e = d;
-    for (let it = 0; it < 200; it++) {
-      if (fb * fc > 0) { c = a; fc = fa; d = b - a; e = d; }
-      if (abs(fc) < abs(fb)) { a = b; b = c; c = a; fa = fb; fb = fc; fc = fa; }
-      const tl = 2 * EPS * abs(b) + (tol || 1e-15), m = (c - b) / 2;
-      if (abs(m) <= tl || fb === 0) return b;
-      if (abs(e) >= tl && abs(fa) > abs(fb)) {
-        let p, q, r; const s = fb / fa;
-        if (a === c) { p = 2 * m * s; q = 1 - s; } else { q = fa / fc; r = fb / fc; p = s * (2 * m * q * (q - r) - (b - a) * (r - 1)); q = (q - 1) * (r - 1) * (s - 1); }
-        if (p > 0) q = -q; else p = -p;
-        if (2 * p < Math.min(3 * m * q - abs(tl * q), abs(e * q))) { e = d; d = p / q; } else { d = m; e = d; }
-      } else { d = m; e = d; }
-      a = b; fa = fb; b += abs(d) > tl ? d : (m > 0 ? tl : -tl); fb = g(b);
-    }
-    return b;
-  }
+  // a root of g on [a, b] (g(a), g(b) of opposite signs) by Brent's method (Brent 1973, ch. 4): the kernel's (NoemaSimKit.brent)
+  const brent = (g, a, b, tol) => C.kit().brent(g, a, b, tol);
   // SIR final size: s∞ = s0·exp(−R0·(1 − r0 − s∞)) (Kermack & McKendrick 1927; Keeling & Rohani 2008 §2.1.3), fractions of N
   function sirFinal(R0, s0, r0) {
     if (!(R0 > 0 && s0 >= 0)) return NaN;
@@ -458,95 +441,13 @@
   function keys() { return []; }
 
   /* ======================================================================================================================
-     Linear algebra for n ≤ 12 (+ the tangent vectors of a Lyapunov run): LU with partial pivoting, eigenvalues
+     Linear algebra for n ≤ 12: the kernel's (NoemaSimKit.lu: LU with partial pivoting; NoemaSimKit.eig: balancing, Hessenberg
+     reduction and the Francis double-shift QR — Numerical Recipes balanc / elmhes / hqr, the algorithm this engine had)
      ====================================================================================================================== */
-  function luFactor(A, n, piv) {   // A: Float64Array n×n row-major, in place; false when singular
-    for (let k = 0; k < n; k++) {
-      let p = k, mx = abs(A[k * n + k]);
-      for (let i = k + 1; i < n; i++) { const v = abs(A[i * n + k]); if (v > mx) { mx = v; p = i; } }
-      if (!(mx > 0) || !Number.isFinite(mx)) return false;
-      piv[k] = p;
-      if (p !== k) for (let j = 0; j < n; j++) { const t = A[k * n + j]; A[k * n + j] = A[p * n + j]; A[p * n + j] = t; }
-      const d = A[k * n + k];
-      for (let i = k + 1; i < n; i++) { const f = (A[i * n + k] /= d); if (f !== 0) for (let j = k + 1; j < n; j++) A[i * n + j] -= f * A[k * n + j]; }
-    }
-    return true;
-  }
-  function luSolve(A, n, piv, b) {   // b in place
-    for (let k = 0; k < n; k++) { const p = piv[k]; if (p !== k) { const t = b[k]; b[k] = b[p]; b[p] = t; } for (let i = k + 1; i < n; i++) b[i] -= A[i * n + k] * b[k]; }
-    for (let i = n - 1; i >= 0; i--) { let s = b[i]; for (let j = i + 1; j < n; j++) s -= A[i * n + j] * b[j]; b[i] = s / A[i * n + i]; }
-  }
-  /** eigenvalues of a real n×n matrix (rows): balance, reduce to Hessenberg form by elimination, shifted QR (Numerical Recipes in C,
-      2nd ed. 1992, balanc / elmhes / hqr; Wilkinson & Reinsch 1971). → [{re, im}] sorted by decreasing real part, or null */
+  /** eigenvalues of a real n×n matrix (rows) → [{re, im}] sorted by decreasing real part, or null (no convergence, non-finite) */
   function eigenvalues(M) {
-    const n = M.length; if (n === 1) return [{ re: M[0][0], im: 0 }];
-    const a = []; for (let i = 0; i <= n; i++) a.push(new Float64Array(n + 1));
-    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) a[i + 1][j + 1] = M[i][j];
-    for (let i = 1; i <= n; i++) for (let j = 1; j <= n; j++) if (!Number.isFinite(a[i][j])) return null;
-    // balanc
-    const RADIX = 2, sqrdx = 4; let last = 0;
-    for (let guard = 0; !last && guard < 100; guard++) {
-      last = 1;
-      for (let i = 1; i <= n; i++) {
-        let r = 0, c = 0; for (let j = 1; j <= n; j++) if (j !== i) { c += abs(a[j][i]); r += abs(a[i][j]); }
-        if (c && r) { let g = r / RADIX, f = 1; const s = c + r; while (c < g) { f *= RADIX; c *= sqrdx; } g = r * RADIX; while (c > g) { f /= RADIX; c /= sqrdx; }
-          if ((c + r) / f < 0.95 * s) { last = 0; g = 1 / f; for (let j = 1; j <= n; j++) a[i][j] *= g; for (let j = 1; j <= n; j++) a[j][i] *= f; } }
-      }
-    }
-    // elmhes
-    for (let m = 2; m < n; m++) {
-      let x = 0, i = m;
-      for (let j = m; j <= n; j++) if (abs(a[j][m - 1]) > abs(x)) { x = a[j][m - 1]; i = j; }
-      if (i !== m) { for (let j = m - 1; j <= n; j++) { const t = a[i][j]; a[i][j] = a[m][j]; a[m][j] = t; } for (let j = 1; j <= n; j++) { const t = a[j][i]; a[j][i] = a[j][m]; a[j][m] = t; } }
-      if (x) for (i = m + 1; i <= n; i++) { let y = a[i][m - 1]; if (y) { y /= x; a[i][m - 1] = y; for (let j = m; j <= n; j++) a[i][j] -= y * a[m][j]; for (let j = 1; j <= n; j++) a[j][m] += y * a[j][i]; } }
-    }
-    for (let i = 3; i <= n; i++) for (let j = 1; j <= i - 2; j++) a[i][j] = 0;
-    // hqr
-    const wr = new Float64Array(n + 1), wi = new Float64Array(n + 1);
-    let anorm = 0; for (let i = 1; i <= n; i++) for (let j = Math.max(i - 1, 1); j <= n; j++) anorm += abs(a[i][j]);
-    let nn = n, t = 0, z = 0, y = 0, x = 0, w = 0, v = 0, u = 0, s = 0, r = 0, q = 0, p = 0, l = 0, m = 0;
-    const SIGN = (aa, bb) => (bb >= 0 ? abs(aa) : -abs(aa));
-    while (nn >= 1) {
-      let its = 0;
-      do {
-        for (l = nn; l >= 2; l--) { s = abs(a[l - 1][l - 1]) + abs(a[l][l]); if (s === 0) s = anorm; if (abs(a[l][l - 1]) + s === s) { a[l][l - 1] = 0; break; } }
-        x = a[nn][nn];
-        if (l === nn) { wr[nn] = x + t; wi[nn--] = 0; }
-        else {
-          y = a[nn - 1][nn - 1]; w = a[nn][nn - 1] * a[nn - 1][nn];
-          if (l === nn - 1) {
-            p = 0.5 * (y - x); q = p * p + w; z = sqrt(abs(q)); x += t;
-            if (q >= 0) { z = p + SIGN(z, p); wr[nn - 1] = wr[nn] = x + z; if (z) wr[nn] = x - w / z; wi[nn - 1] = wi[nn] = 0; }
-            else { wr[nn - 1] = wr[nn] = x + p; wi[nn - 1] = -(wi[nn] = z); }
-            nn -= 2;
-          } else {
-            if (its === 60) return null;
-            if (its === 10 || its === 20) { t += x; for (let i = 1; i <= nn; i++) a[i][i] -= x; s = abs(a[nn][nn - 1]) + abs(a[nn - 1][nn - 2]); y = x = 0.75 * s; w = -0.4375 * s * s; }
-            ++its;
-            for (m = nn - 2; m >= l; m--) {
-              z = a[m][m]; r = x - z; s = y - z;
-              p = (r * s - w) / a[m + 1][m] + a[m][m + 1]; q = a[m + 1][m + 1] - z - r - s; r = a[m + 2][m + 1];
-              s = abs(p) + abs(q) + abs(r); p /= s; q /= s; r /= s;
-              if (m === l) break;
-              u = abs(a[m][m - 1]) * (abs(q) + abs(r)); v = abs(p) * (abs(a[m - 1][m - 1]) + abs(z) + abs(a[m + 1][m + 1]));
-              if (u + v === v) break;
-            }
-            for (let i = m + 2; i <= nn; i++) { a[i][i - 2] = 0; if (i !== m + 2) a[i][i - 3] = 0; }
-            for (let k = m; k <= nn - 1; k++) {
-              if (k !== m) { p = a[k][k - 1]; q = a[k + 1][k - 1]; r = 0; if (k !== nn - 1) r = a[k + 2][k - 1]; if ((x = abs(p) + abs(q) + abs(r)) !== 0) { p /= x; q /= x; r /= x; } }
-              if ((s = SIGN(sqrt(p * p + q * q + r * r), p)) !== 0) {
-                if (k === m) { if (l !== m) a[k][k - 1] = -a[k][k - 1]; } else a[k][k - 1] = -s * x;
-                p += s; x = p / s; y = q / s; z = r / s; q /= p; r /= p;
-                for (let j = k; j <= nn; j++) { p = a[k][j] + q * a[k + 1][j]; if (k !== nn - 1) { p += r * a[k + 2][j]; a[k + 2][j] -= p * z; } a[k + 1][j] -= p * y; a[k][j] -= p * x; }
-                const mmin = nn < k + 3 ? nn : k + 3;
-                for (let i = l; i <= mmin; i++) { p = x * a[i][k] + y * a[i][k + 1]; if (k !== nn - 1) { p += z * a[i][k + 2]; a[i][k + 2] -= p * r; } a[i][k + 1] -= p * q; a[i][k] -= p; }
-              }
-            }
-          }
-        }
-      } while (l < nn - 1);
-    }
-    const ev = []; for (let i = 1; i <= n; i++) ev.push({ re: wr[i], im: wi[i] });
+    const E = C.kit().eig(M); if (!E.ok || E.re.length !== M.length) return null;
+    const ev = E.re.map((re, i) => ({ re, im: E.im[i] }));
     ev.sort((A, B) => (B.re - A.re) || (B.im - A.im));
     return ev;
   }
@@ -605,239 +506,28 @@
   }
 
   /* ======================================================================================================================
-     Steppers. Each: reset(t, y) after a start or a jump; step(tTarget) → {t0, t1, y1, seg(t, out)} | {fail: code}
+     The driver of a flow, on the simulation kernel (NoemaSimKit.integrate, 46_lib_simkit.js; docs/library/simkit.md §4): its
+     methods (DOPRI5 with the stiffness switch to Rosenbrock, the fixed and symplectic steps), its state events (Illinois on the
+     dense output, simultaneous events, re-arming), its breaks (timed events: doses, the discontinuities of a delay equation, the
+     renormalisations of the Lyapunov exponents) and its dense output of every step (onSegment: a delay equation's history).
      ====================================================================================================================== */
-  // Dormand & Prince 1980 (HNW I Table 5.2) with the dense output of Hairer's DOPRI5 (contd5)
-  const A21 = 1 / 5, A31 = 3 / 40, A32 = 9 / 40, A41 = 44 / 45, A42 = -56 / 15, A43 = 32 / 9,
-    A51 = 19372 / 6561, A52 = -25360 / 2187, A53 = 64448 / 6561, A54 = -212 / 729,
-    A61 = 9017 / 3168, A62 = -355 / 33, A63 = 46732 / 5247, A64 = 49 / 176, A65 = -5103 / 18656,
-    A71 = 35 / 384, A73 = 500 / 1113, A74 = 125 / 192, A75 = -2187 / 6784, A76 = 11 / 84,
-    E1 = 71 / 57600, E3 = -71 / 16695, E4 = 71 / 1920, E5 = -17253 / 339200, E6 = 22 / 525, E7 = -1 / 40,
-    D1 = -12715105075 / 11282082432, D3 = 87487479700 / 32700410799, D4 = -10690763975 / 1880347072,
-    D5 = 701980252875 / 199316789632, D6 = -1453857185 / 822651844, D7 = 69997945 / 29380423;
-  function stepperDopri(n, f, o, ctx) {
-    const k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n), k4 = new Float64Array(n), k5 = new Float64Array(n), k6 = new Float64Array(n), k7 = new Float64Array(n);
-    const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), ysti = new Float64Array(n);
-    const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
-    const sk = i => AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i]));
-    function hinit() {   // HNW I §II.4
-      let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
-      let hh = dnf <= 1e-10 || dny <= 1e-10 ? 1e-6 : sqrt(dny / dnf) * 0.01; hh = Math.min(hh, hmax);
-      for (let i = 0; i < n; i++) yt[i] = y[i] + hh * k1[i];
-      f(t + hh, yt, k2); let der2 = 0; for (let i = 0; i < n; i++) { const s = AT[i] + rtol * abs(y[i]); der2 += ((k2[i] - k1[i]) / s) ** 2; }
-      der2 = sqrt(der2) / hh; const der12 = Math.max(abs(der2), sqrt(dnf));
-      const h1 = der12 <= 1e-15 ? Math.max(1e-6, abs(hh) * 1e-3) : Math.pow(0.01 / der12, 0.2);
-      const r = Math.min(100 * abs(hh), h1, hmax); return r > 0 ? r : hmax * 1e-3;
-    }
-    return {
-      name: 'dopri5', get stiff() { return stiff; }, get h() { return h; },
-      reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, k1); if (!keepH || !(h > 0)) h = hinit(); facold = 1e-4; },
-      step(tT) {
-        if (!k1.every(Number.isFinite)) return { fail: 'nan' };
-        for (let tries = 0; ; tries++) {
-          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-          let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * A21 * k1[i]; f(t + 0.2 * hh, yt, k2);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A31 * k1[i] + A32 * k2[i]); f(t + 0.3 * hh, yt, k3);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A41 * k1[i] + A42 * k2[i] + A43 * k3[i]); f(t + 0.8 * hh, yt, k4);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * (A51 * k1[i] + A52 * k2[i] + A53 * k3[i] + A54 * k4[i]); f(t + 8 / 9 * hh, yt, k5);
-          for (let i = 0; i < n; i++) ysti[i] = y[i] + hh * (A61 * k1[i] + A62 * k2[i] + A63 * k3[i] + A64 * k4[i] + A65 * k5[i]);
-          const tph = last ? tT : t + hh; f(tph, ysti, k6);
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh * (A71 * k1[i] + A73 * k3[i] + A74 * k4[i] + A75 * k5[i] + A76 * k6[i]);
-          f(tph, y1, k7);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh * (E1 * k1[i] + E3 * k3[i] + E4 * k4[i] + E5 * k5[i] + E6 * k6[i] + E7 * k7[i]); err += (e / sk(i)) ** 2; }
-          err = sqrt(err / n);
-          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; if (!(h > 10 * EPS * abs(t) && h > 1e-300)) return { fail: 'nan' }; continue; }
-          const fac11 = Math.pow(err, 0.2 - 0.04 * 0.75);   // PI control (HNW I §IV.2: β = 0.04)
-          if (err <= 1) {
-            let fac = fac11 / Math.pow(facold, 0.04); fac = Math.max(0.1, Math.min(5, fac / 0.9)); const hnew = hh / fac; facold = Math.max(err, 1e-4);
-            // stiffness (HNW I §IV.2, the test of DOPRI5): h·ρ ≈ h·‖k7 − k6‖/‖y1 − ysti‖
-            let sn = 0, sd = 0; for (let i = 0; i < n; i++) { sn += (k7[i] - k6[i]) ** 2; sd += (y1[i] - ysti[i]) ** 2; }
-            if (sd > 0) { if (hh * sqrt(sn / sd) > 3.25) { nonsti = 0; iasti++; if (iasti >= 15) stiff = true; } else { nonsti++; if (nonsti === 6) iasti = 0; } }
-            // the dense output (contd5)
-            const r1 = Float64Array.from(y), r2 = new Float64Array(n), r3 = new Float64Array(n), r4 = new Float64Array(n), r5 = new Float64Array(n);
-            for (let i = 0; i < n; i++) { const dy = y1[i] - y[i], bspl = hh * k1[i] - dy; r2[i] = dy; r3[i] = bspl; r4[i] = dy - hh * k7[i] - bspl;
-              r5[i] = hh * (D1 * k1[i] + D3 * k3[i] + D4 * k4[i] + D5 * k5[i] + D6 * k6[i] + D7 * k7[i]); }
-            const ta = t, tb = tph, hs = hh;
-            const seg = (tq, out) => { const th = (tq - ta) / hs, th1 = 1 - th; for (let i = 0; i < n; i++) out[i] = r1[i] + th * (r2[i] + th1 * (r3[i] + th * (r4[i] + th1 * r5[i]))); };
-            t = tph; y.set(y1); k1.set(k7); h = last ? Math.max(h, hnew) : hnew;
-            return { t0: ta, t1: tb, y1: y, seg };
-          }
-          ctx.rejected++; h = hh / Math.min(10, fac11 / 0.9);
-        }
-      },
-    };
-  }
-  // Rosenbrock 2(3) of Shampine & Reichelt 1997 (MATLAB ode23s): L-stable, W = I − h·d·J, d = 1/(2 + √2)
-  function stepperRos(n, f, o, ctx) {
-    const d = 1 / (2 + Math.SQRT2), e32 = 6 + Math.SQRT2;
-    const F0 = new Float64Array(n), F1 = new Float64Array(n), F2 = new Float64Array(n), k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n);
-    const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n);
-    const piv = new Int32Array(n); const { rtol, hmax } = o, AT = o.atolv; let t = 0, h = 0, jacOk = false;
-    function jac() {   // forward differences (the threshold: Shampine & Reichelt 1997 §3.2, simplified)
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * Math.max(abs(yj), AT[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
-      const dt = 1.4901161193847656e-8 * Math.max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt;
-      jacOk = true;
-    }
-    return {
-      name: 'rosenbrock', stiff: false,
-      reset(t0, y0, keepH) { t = t0; y.set(y0); f(t, y, F0); jacOk = false;
-        if (!keepH || !(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (AT[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = Math.min(hmax, s > 0 ? 0.8 * Math.pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; } },
-      step(tT) {
-        if (!F0.every(Number.isFinite)) return { fail: 'nan' };
-        if (!jacOk) jac();
-        for (let tries = 0; ; tries++) {
-          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-          let hh = Math.min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
-          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
-          for (let i = 0; i < n * n; i++) W[i] = -hh * d * J[i]; for (let i = 0; i < n; i++) W[i * n + i] += 1;
-          if (!luFactor(W, n, piv)) { ctx.rejected++; h = hh / 4; continue; }
-          for (let i = 0; i < n; i++) k1[i] = F0[i] + hh * d * Tt[i]; luSolve(W, n, piv, k1);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * k1[i]; f(t + 0.5 * hh, yt, F1);
-          for (let i = 0; i < n; i++) k2[i] = F1[i] - k1[i]; luSolve(W, n, piv, k2); for (let i = 0; i < n; i++) k2[i] += k1[i];
-          const tph = last ? tT : t + hh;
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh * k2[i]; f(tph, y1, F2);
-          for (let i = 0; i < n; i++) k3[i] = F2[i] - e32 * (k2[i] - F1[i]) - 2 * (k1[i] - F0[i]) + hh * d * Tt[i]; luSolve(W, n, piv, k3);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (AT[i] + rtol * Math.max(abs(y[i]), abs(y1[i])))) ** 2; }
-          err = sqrt(err / n);
-          if (!Number.isFinite(err)) { ctx.rejected++; h = hh / 10; continue; }
-          if (err <= 1) {
-            const hnew = hh * Math.min(5, Math.max(0.2, 0.8 * Math.pow(Math.max(err, 1e-10), -1 / 3)));
-            const r0 = Float64Array.from(y), c1 = Float64Array.from(k1), c2 = Float64Array.from(k2), ta = t, hs = hh, q = 1 - 2 * d;
-            const seg = (tq, out) => { const s = (tq - ta) / hs; for (let i = 0; i < n; i++) out[i] = r0[i] + hs * (s * (1 - s) / q * c1[i] + s * (s - 2 * d) / q * c2[i]); };   // ntrp23s
-            t = tph; y.set(y1); F0.set(F2); jacOk = false; h = last ? Math.max(h, hnew) : hnew;
-            jac();
-            return { t0: ta, t1: tph, y1: y, seg };
-          }
-          ctx.rejected++; h = hh * Math.max(0.2, 0.8 * Math.pow(err, -1 / 3));
-        }
-      },
-    };
-  }
-  // fixed steps: Euler, Heun, midpoint, RK4; cubic Hermite between the steps
-  function stepperFixed(method, n, f, o, ctx, pairs) {
-    const y = new Float64Array(n), y1 = new Float64Array(n), f0 = new Float64Array(n), f1 = new Float64Array(n), a = new Float64Array(n), b = new Float64Array(n), c = new Float64Array(n), yt = new Float64Array(n);
-    let t = 0; const dt = o.dt;
-    const qi = pairs.map(p => p[0]), pi = pairs.map(p => p[1]);
-    function verlet(tt, hh, out) {   // kick–drift–kick (Störmer–Verlet; HLW 2006 §I.1.4): p' = F(q), q' = G(p)
-      f(tt, out, a); for (const j of pi) out[j] += 0.5 * hh * a[j];
-      f(tt + 0.5 * hh, out, a); for (const j of qi) out[j] += hh * a[j];
-      f(tt + hh, out, a); for (const j of pi) out[j] += 0.5 * hh * a[j];
-    }
-    const Y1 = 1 / (2 - Math.cbrt(2)), Y0 = 1 - 2 * Y1;   // Yoshida 1990, the triple jump
-    return {
-      name: method, stiff: false,
-      reset(t0, y0) { t = t0; y.set(y0); f(t, y, f0); },
-      step(tT) {
-        const span = tT - t; if (!(span > 0)) return { fail: 'time' };
-        const hh = Math.min(dt, span), tph = hh === span ? tT : t + hh;
-        if (method === 'euler') for (let i = 0; i < n; i++) y1[i] = y[i] + hh * f0[i];
-        else if (method === 'heun') { for (let i = 0; i < n; i++) yt[i] = y[i] + hh * f0[i]; f(tph, yt, a); for (let i = 0; i < n; i++) y1[i] = y[i] + 0.5 * hh * (f0[i] + a[i]); }
-        else if (method === 'midpoint') { for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a); for (let i = 0; i < n; i++) y1[i] = y[i] + hh * a[i]; }
-        else if (method === 'rk4') {
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * a[i]; f(t + 0.5 * hh, yt, b);
-          for (let i = 0; i < n; i++) yt[i] = y[i] + hh * b[i]; f(tph, yt, c);
-          for (let i = 0; i < n; i++) y1[i] = y[i] + hh / 6 * (f0[i] + 2 * a[i] + 2 * b[i] + c[i]);
-        } else if (method === 'verlet') { y1.set(y); verlet(t, hh, y1); }
-        else { y1.set(y); verlet(t, Y1 * hh, y1); verlet(t + Y1 * hh, Y0 * hh, y1); verlet(t + (Y1 + Y0) * hh, Y1 * hh, y1); }
-        f(tph, y1, f1);
-        const r0 = Float64Array.from(y), r1 = Float64Array.from(y1), d0 = Float64Array.from(f0), d1 = Float64Array.from(f1), ta = t, hs = hh;
-        const seg = (tq, out) => { const s = (tq - ta) / hs, s2 = s * s, s3 = s2 * s, h00 = 2 * s3 - 3 * s2 + 1, h10 = s3 - 2 * s2 + s, h01 = -2 * s3 + 3 * s2, h11 = s3 - s2;
-          for (let i = 0; i < n; i++) out[i] = h00 * r0[i] + h10 * hs * d0[i] + h01 * r1[i] + h11 * hs * d1[i]; };
-        t = tph; y.set(y1); f0.set(f1);
-        return { t0: ta, t1: tph, y1: y, seg };
-      },
-    };
-  }
-
-  /* ======================================================================================================================
-     The driver of a flow: steps to targets (timed events, breakpoints, tEnd), samples, locates crossings, applies jumps
-     ====================================================================================================================== */
-  function makeStepper(method, n, f, o, ctx, pairs) {
-    if (method === 'rosenbrock') return stepperRos(n, f, o, ctx);
-    if (FIXED.includes(method)) return stepperFixed(method, n, f, o, ctx, pairs);
-    return stepperDopri(n, f, o, ctx);
-  }
-  /** flow(cfg): integrates from t0 to tEnd. cfg = {n, f, y0, t0, tEnd, method, rtol, atol, dt, hmax, pairs, samples (sorted times),
-      onSample(t, y), crossings [{g(t, y), dir, apply?(t, y) → y | null, stop, onHit(t, y)}], timed [{t, apply(t, y) (in place)}],
-      onSegment(seg, t0, t1)} → {t, y, stopped} */
+  /** flow(cfg): integrates from t0 to tEnd. cfg = {n, f, y0, t0, tEnd, method, rtol, atol, atolv?, dt, hmax, pairs, samples (sorted
+      times), onSample(t, y), crossings [{g(t, y), dir, apply?(t, y) (in place), stop, onHit(t, y)}], timed [{t, apply(t, y) (in place)}],
+      onSegment(seg, t0, t1)} → {t, y, stopped}. A crossing with apply or stop cuts the step there (an event of the kernel); one
+      without is observed (located and recorded, the step goes on). ctx: the run's counters, budget and codes. */
   function flow(cfg, ctx) {
-    const n = cfg.n, o = { rtol: cfg.rtol, atolv: cfg.atolv || new Float64Array(n).fill(cfg.atol), hmax: cfg.hmax, dt: cfg.dt };
-    let method = cfg.method === 'auto' ? 'dopri5' : cfg.method, auto = cfg.method === 'auto';
-    let st = makeStepper(method, n, cfg.f, o, ctx, cfg.pairs || []);
-    let t = cfg.t0; const y = Float64Array.from(cfg.y0), tmp = new Float64Array(n), ya = new Float64Array(n);
-    const timed = (cfg.timed || []).slice().sort((A, B) => A.t - B.t); let ti = 0;
-    const samples = cfg.samples || []; let si = 0;
-    const cross = cfg.crossings || [];
-    const gv = new Float64Array(cross.length);
-    // a g that is exactly 0 at a start or after a jump (a ball put on the floor) takes the side it leaves towards, so the next
-    // crossing in the event's direction is seen even when the whole flight fits in one step
-    const evalG = (tt, yy, start) => { for (let j = 0; j < cross.length; j++) { const g = cross[j].g(tt, yy); gv[j] = start && g === 0 && cross[j].dir ? (cross[j].dir < 0 ? 1e-300 : -1e-300) : g; } };
-    let stopped = false, jumps = 0;
-    // timed events at t0 come first (a dose at time 0), samples at t0 after them
-    while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; }
-    if (![...y].every(Number.isFinite)) { ctx.code('nan', t); return { t, y, stopped: true }; }
-    st.reset(t, y);
-    evalG(t, y, true);
-    while (si < samples.length && samples[si] <= t) { cfg.onSample(samples[si], y); si++; }
-    const ymax0 = Math.max(1, ...[...y].map(abs));
-    while (t < cfg.tEnd && !stopped) {
-      if (ctx.steps >= ctx.maxSteps) { ctx.code('budget', t); break; }
-      const tT = Math.min(cfg.tEnd, ti < timed.length ? timed[ti].t : Infinity);
-      const r = st.step(tT);
-      if (r.fail) { ctx.code(r.fail === 'time' ? 'step-underflow' : r.fail, t); break; }
-      ctx.steps++;
-      let t1 = r.t1, seg = r.seg; y.set(r.y1);
-      if (![...y].every(Number.isFinite)) { ctx.code('nan', t1); break; }
-      if (Math.max(...[...y].map(abs)) > 1e12 * ymax0) { ctx.code('blow-up', t1); stopped = true; }
-      // crossings: the earliest root of each g on the step (Illinois method on the dense output)
-      let jump = null;
-      if (cross.length) {
-        const g0 = Float64Array.from(gv); evalG(t1, y);
-        let first = Infinity, firstJ = -1;
-        for (let j = 0; j < cross.length; j++) {
-          const a0 = g0[j], b0 = gv[j], dir = cross[j].dir;
-          const up = a0 < 0 && b0 >= 0, down = a0 > 0 && b0 <= 0;
-          if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
-          let ta = t, tb = t1, ga = a0, gb = b0, side = 0, tr = tb;
-          for (let it = 0; it < 80; it++) {
-            tr = (ta * gb - tb * ga) / (gb - ga); if (!(tr > ta && tr < tb)) tr = (ta + tb) / 2;
-            seg(tr, tmp); const gr = cross[j].g(tr, tmp);
-            if (gr === 0 || tb - ta <= 1e-13 * Math.max(1, abs(tr))) break;
-            if ((gr < 0) === (ga < 0)) { ta = tr; ga = gr; if (side === -1) gb /= 2; side = -1; } else { tb = tr; gb = gr; if (side === 1) ga /= 2; side = 1; }
-          }
-          seg(tr, tmp); cross[j].onHit(tr, tmp);
-          if ((cross[j].apply || cross[j].stop) && tr < first) { first = tr; firstJ = j; }
-        }
-        if (firstJ >= 0) { jump = { t: first, j: firstJ }; }
-      }
-      if (jump) {   // the step ends at the event; the state jumps (or the run stops)
-        t1 = jump.t; seg(t1, ya);
-        while (si < samples.length && samples[si] <= t1) { seg(samples[si], tmp); cfg.onSample(samples[si], tmp); si++; }
-        if (cfg.onSegment) cfg.onSegment(seg, t, t1);
-        const ev = cross[jump.j];
-        if (ev.stop) { y.set(ya); t = t1; ctx.code('stopped', t1); stopped = true; break; }
-        if (ev.apply) ev.apply(t1, ya);
-        y.set(ya); t = t1; jumps++;
-        if (jumps > MAX_EVENTS) { ctx.code('zeno', t); break; }
-        st.reset(t, y, true); evalG(t, y, true);
-        continue;
-      }
-      while (si < samples.length && samples[si] <= t1 + 1e-12 * Math.max(1, abs(t1))) { const ts = Math.min(samples[si], t1); seg(ts, tmp); cfg.onSample(samples[si], tmp); si++; }
-      if (cfg.onSegment) cfg.onSegment(seg, t, t1);
-      t = t1;
-      if (stopped) break;
-      // timed events at this time, then a restart
-      let hit = false;
-      while (ti < timed.length && timed[ti].t <= t + 1e-12 * Math.max(1, abs(t))) { timed[ti].apply(t, y); ti++; hit = true; }
-      if (hit) { if (![...y].every(Number.isFinite)) { ctx.code('nan', t); break; } st.reset(t, y, true); evalG(t, y, true); }
-      if (auto && st.stiff) {   // DOPRI5 found the problem stiff: go on with Rosenbrock (like LSODA's switch, Petzold 1983)
-        ctx.code('stiff-switched', t); auto = false; method = 'rosenbrock'; st = makeStepper(method, n, cfg.f, o, ctx, []); st.reset(t, y); evalG(t, y);
-      } else if (!auto && st.stiff && !ctx.has('stiff')) ctx.code('stiff', t);
-    }
-    return { t, y, stopped };
+    const K = C.kit(), n = cfg.n;
+    const crossings = cfg.crossings || [];
+    const events = crossings.map(c => (c.apply || c.stop
+      ? { g: c.g, dir: c.dir || 0, onEvent: (t, y) => { c.onHit(t, y); if (c.stop) { ctx.code('stopped', t); return 'stop'; } c.apply(t, y); return undefined; } }
+      : { g: c.g, dir: c.dir || 0, observe: true, onEvent: (t, y) => { c.onHit(t, y); } }));
+    const breaks = (cfg.timed || []).map(b => ({ t: Math.min(cfg.tEnd, Math.max(cfg.t0, b.t)), apply: b.apply }));
+    const R = K.integrate({ f: cfg.f, y0: cfg.y0, t0: cfg.t0, tEnd: cfg.tEnd, method: cfg.method, rtol: cfg.rtol, atol: cfg.atolv ? Array.from(cfg.atolv) : cfg.atol,
+      dt: cfg.dt, hmax: cfg.hmax, pairs: cfg.pairs || [], samples: cfg.samples || [], onSample: cfg.onSample, events, breaks, maxEvents: MAX_EVENTS, maxInstant: MAX_EVENTS,
+      maxSteps: Math.max(0, ctx.maxSteps - ctx.steps), onSegment: cfg.onSegment || undefined });
+    ctx.steps += R.steps; ctx.rejected += R.rejected; ctx.nfev += R.nfev;
+    for (const c of R.codes) ctx.code(c.code === 'observe-cap' ? 'event-limit' : c.code === 'bad-config' ? 'time' : c.code, c.t, c.info);
+    return { t: R.t, y: Float64Array.from(R.y), stopped: R.stop === 'event' || R.stop === 'blow-up' || (R.stop === 'nan' && R.steps === 0) };
   }
 
   /* ======================================================================================================================
@@ -936,15 +626,16 @@
     const box = M.eq.box.map(([i, a, b]) => [i, a(env), b(env)]).filter(([i, a, b]) => i >= 0 && fin(a) && fin(b));
     const g = M.eq.grid, dims = box.length, total = Math.pow(g, dims);
     for (let k = 0; k < total && dims; k++) { const s = Float64Array.from(y0); let r = k; for (const [i, a, b] of box) { const j = r % g; r = (r - j) / g; s[i] = g === 1 ? (a + b) / 2 : a + (b - a) * j / (g - 1); } starts.push(s); }
-    const found = [], Fv = new Float64Array(n), Ft = new Float64Array(n), Jm = new Float64Array(n * n), piv = new Int32Array(n), yt = new Float64Array(n);
+    const found = [], Fv = new Float64Array(n), Ft = new Float64Array(n), Jm = [], yt = new Float64Array(n), K = C.kit();
+    for (let i = 0; i < n; i++) Jm.push(new Float64Array(n));
     for (const s of starts) {
       const y = Float64Array.from(s); let ok = false;
       for (let it = 0; it < 60; it++) {
         F(y, Fv); const fn = nrm(Fv); if (!fin(fn)) break;
         if (fn <= 1e-13 * Math.max(1, nrm(y))) { ok = true; break; }
-        for (let j = 0; j < n; j++) { const yj = y[j], del = 1e-7 * Math.max(1, abs(yj)); y[j] = yj + del; F(y, Ft); y[j] = yj; for (let i = 0; i < n; i++) Jm[i * n + j] = (Ft[i] - Fv[i]) / del; }
-        if (!luFactor(Jm, n, piv)) break;
-        const dx = Float64Array.from(Fv, v => -v); luSolve(Jm, n, piv, dx);
+        for (let j = 0; j < n; j++) { const yj = y[j], del = 1e-7 * Math.max(1, abs(yj)); y[j] = yj + del; F(y, Ft); y[j] = yj; for (let i = 0; i < n; i++) Jm[i][j] = (Ft[i] - Fv[i]) / del; }
+        const L = K.lu(Jm); if (!L.ok) break;   // the kernel's LU with partial pivoting
+        const dx = Float64Array.from(L.solve(Array.from(Fv, v => -v)));
         let lam = 1, moved = false;
         for (let b = 0; b < 30; b++) { for (let i = 0; i < n; i++) yt[i] = y[i] + lam * dx[i]; F(yt, Ft); if (nrm(Ft) < (1 - 1e-4 * lam) * fn || !(nrm(Ft) >= 0)) { if (fin(nrm(Ft))) { y.set(yt); moved = true; } break; } lam /= 2; }
         if (!moved) break;
@@ -1035,9 +726,9 @@
   function sweep(M, env, ctx) {
     const S = M.sweep, out = { p: [], v: [] };
     const a = S.min(env), b = S.max(env); if (!(fin(a) && fin(b))) { ctx.code('time'); return out; }
-    const keep = Math.max(1, Math.min(S.keep, Math.floor(2000 / S.points)));
+    const keep = Math.max(1, Math.min(S.keep, Math.floor(2000 / S.points))), ps = C.kit().linspace(a, b, S.points);   // the kernel's grid of the parameter
     for (let q = 0; q < S.points; q++) {
-      const p = S.points === 1 ? a : a + (b - a) * q / (S.points - 1); env[S.v] = p;
+      const p = ps[q]; env[S.v] = p;
       if (ctx.steps >= ctx.maxSteps) { ctx.code('budget'); break; }
       if (M.kind === 'map') {
         const n = M.n; const { f } = makeRhs(M, ctx, null); for (const k of M.names) env[k] = NaN;
@@ -1225,8 +916,77 @@
     return { out, codes: ctx.codes, steps: ctx.steps, nfev: ctx.nfev };
   }
 
-  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): a flow or a map stepped by the parts orchestrator (co-simulation) ----------
+     The time is the co-simulation's (solve.t0/tEnd are not used); each macro step integrates from the state with the same methods, events and
+     budget as run(); the inputs are held over the step (zero-order hold). Outputs per step: state / t (series: one sample a step), final,
+     stat (over the step ends so far), ok, steps. A delay equation cannot be stepped (its history is not a state): fail 'no-stepper'. */
+  function stepEnv(M, inputs) { const env = Object.assign(Object.create(null), inputs || {}); evalParams(M, env); return env; }
+  const stepper = {
+    init(model, inputs, sc) {
+      const M = sc.prepared || prepare(sc.spec);
+      if (!M || M.kind === 'dde') return null;
+      const env = stepEnv(M, inputs);
+      for (const k of M.names) env[k] = NaN;
+      const y = M.init.map(f => f(env));
+      if (!y.every(fin)) return null;
+      return { t: sc.t0 || 0, y, steps: 0, acc: {}, fatal: false };
+    },
+    output(st, sc) {   // the outputs at the start: the initial states (the partners' first inputs)
+      const M = sc && (sc.prepared || prepare(sc.spec)), out = {}; if (!M) return out;
+      for (const o of objs(sc.spec.outputs)) { const i = M.names.indexOf(o.var); out[o.id] = o.of === 't' ? st.t : (o.of === 'state' || o.of === 'final') && i >= 0 ? st.y[i] : NaN; }
+      return out;
+    },
+    step(st, inputs, t, dt, sc) {
+      const M = sc.prepared || prepare(sc.spec), outs = objs(sc.spec.outputs);
+      if (!M) return { fail: 'part-failed' };
+      const env = stepEnv(M, inputs), ctx = makeCtx(M, env, Math.max(1000, MAX_STEPS - st.steps));
+      let y = Float64Array.from(st.y), t1 = t + dt, stop = false;
+      if (st.fatal) return { state: st, out: {}, dt };
+      if (M.kind === 'map') {
+        const { f } = makeRhs(M, ctx, null), y1 = new Float64Array(M.n);
+        const k0 = Math.round(t), k1 = Math.round(t + dt);
+        for (let k = k0; k < k1; k++) { ctx.steps++; f(k, y, y1); if (!y1.every(fin) || y1.some(v => abs(v) > 1e100)) { ctx.code('map-escape', k + 1); break; } y.set(y1); }
+      } else {
+        const { f, setEnv } = makeRhs(M, ctx, null), crossings = [], timed = [];
+        M.events.forEach(e => {
+          const apply = e.set.length ? (tt, yy) => { setEnv(tt, yy); const v = e.set.map(([i, fn]) => [i, fn(env)]); for (const [i, x] of v) yy[i] = x; } : null;
+          if (e.when) crossings.push({ g: (tt, yy) => { setEnv(tt, yy); return e.when(env); }, dir: e.dir, apply, stop: e.stop, onHit: () => {} });
+          else {
+            const a0 = e.at(env), ev = e.every ? e.every(env) : 0, cnt = e.count ? Math.round(e.count(env)) : (e.every ? MAX_EVENTS : 1);
+            if (!fin(a0)) return;
+            const k0 = ev > 0 ? Math.max(0, Math.ceil((t - a0) / ev - 1e-9)) : 0;
+            for (let k = k0; k < Math.min(cnt, k0 + MAX_EVENTS); k++) { const tk = a0 + k * (ev > 0 ? ev : 0); if (tk >= t + dt - 1e-12 * Math.max(1, abs(t)) || (k > 0 && !(ev > 0))) break; if (tk >= t - 1e-12 * Math.max(1, abs(t))) timed.push({ t: Math.max(tk, t), apply: (tt, yy) => { if (apply) apply(tt, yy); } }); }
+          }
+        });
+        const sv = M.solve, fdt = sv.dt ? sv.dt(env) : null;
+        let hmax = sv.hmax ? sv.hmax(env) : dt; if (!(hmax > 0) || hmax > dt) hmax = dt;
+        if (FIXED.includes(sv.method) && !(fdt > 0)) return { fail: 'time', state: st, out: {}, dt: 0 };
+        const r = flow({ n: M.n, f, y0: y, t0: t, tEnd: t + dt, method: sv.method, rtol: sv.rtol, atol: sv.atol, dt: fdt ? Math.min(fdt, dt) : null, hmax, pairs: M.pairs, samples: [], onSample: () => {}, crossings, timed }, ctx);
+        y = Float64Array.from(r.y); t1 = r.t; stop = r.stopped && t1 < t + dt;
+      }
+      const fatal = ctx.fatal();
+      const ns = { t: t1, y: Array.from(y), steps: st.steps + ctx.steps, acc: Object.assign({}, st.acc), fatal };
+      const { setEnv } = makeRhs(M, ctx, null);
+      const val = name => { const i = M.names.indexOf(name); if (i >= 0) return y[i]; setEnv(t1, y); return env[name]; };
+      const out = {};
+      for (const o of outs) {
+        let v = NaN;
+        if (o.kind === 'series') v = o.of === 't' ? t1 : o.of === 'state' && !fatal ? val(o.var) : NaN;
+        else if (o.kind === 'scalar') {
+          if (o.of === 'final') v = fatal ? NaN : val(o.var);
+          else if (o.of === 'stat' && !fatal) { const a = ns.acc[o.id] || { n: 0, s: 0, s2: 0, lo: Infinity, hi: -Infinity }, x = val(o.var); if (fin(x)) { a.n++; a.s += x; a.s2 += x * x; a.lo = Math.min(a.lo, x); a.hi = Math.max(a.hi, x); a.last = x; } ns.acc[o.id] = a;
+            v = !a.n ? NaN : o.stat === 'final' ? a.last : o.stat === 'min' ? a.lo : o.stat === 'max' ? a.hi : o.stat === 'mean' ? a.s / a.n : o.stat === 'pp' ? a.hi - a.lo : sqrt(a.s2 / a.n); }
+          else if (o.of === 'ok') v = fatal ? 0 : 1;
+          else if (o.of === 'steps') v = ns.steps;
+        }
+        out[o.id] = v;
+      }
+      const fc = ctx.codes.find(c => c.level === 'error');
+      return { state: ns, out, dt: stop ? Math.max(t1 - t, 0) : dt, ...(fc ? { fail: fc.code } : {}) };
+    },
+  };
+  const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
+  engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE', { kit: true });
   root.NoemaLibODE = Object.freeze({
     table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: { var: 'name', stat: 'enum:' + C.STATS.join('|'), t: 'numx', event: 'id', nth: 'int:-2000:2000', index: 'int:0:63', k: 'int:0:12', name: 'expr', code: 'enum:' + CODES.join('|'), x: 'name', y: 'name' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,

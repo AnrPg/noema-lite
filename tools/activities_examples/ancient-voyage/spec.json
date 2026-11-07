@@ -1,0 +1,441 @@
+{
+ "format": "noema.sim-spec/v1",
+ "title": "title",
+ "intro": "intro",
+ "consts": {
+  "yr": 50,
+  "openFrom": 4,
+  "openTo": 10
+ },
+ "params": [
+  {
+   "id": "mo",
+   "kind": "slider",
+   "label": "monthLabel",
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "default": 3
+  },
+  {
+   "id": "dy",
+   "kind": "slider",
+   "label": "dayLabel",
+   "min": 1,
+   "max": 28,
+   "step": 1,
+   "default": 10
+  },
+  {
+   "id": "seaSpeed",
+   "kind": "slider",
+   "label": "speedLabel",
+   "min": 50,
+   "max": 200,
+   "step": 5,
+   "default": 130,
+   "unit": "km/d"
+  }
+ ],
+ "parts": [
+  {
+   "id": "route",
+   "engine": "map@1",
+   "inputs": {
+    "seaOpen": "mo >= openFrom && mo <= openTo"
+   },
+   "model": {
+    "ellipsoid": "WGS84",
+    "projection": {
+     "type": "lcc",
+     "lat1": 33,
+     "lat2": 43,
+     "lat0": 37,
+     "lon0": 22
+    },
+    "view": {
+     "bbox": [
+      8,
+      29,
+      37,
+      45
+     ],
+     "graticule": 5
+    },
+    "places": [
+     {
+      "id": "roma",
+      "lat": 41.8933,
+      "lon": 12.4828,
+      "label": "roma",
+      "c": "hi"
+     },
+     {
+      "id": "ostia",
+      "lat": 41.7556,
+      "lon": 12.2914,
+      "label": "ostia"
+     },
+     {
+      "id": "capua",
+      "lat": 41.0833,
+      "lon": 14.25,
+      "label": "capua"
+     },
+     {
+      "id": "puteoli",
+      "lat": 40.8222,
+      "lon": 14.1222,
+      "label": "puteoli"
+     },
+     {
+      "id": "brundisium",
+      "lat": 40.6327,
+      "lon": 17.9418,
+      "label": "brundisium"
+     },
+     {
+      "id": "rhegium",
+      "lat": 38.11,
+      "lon": 15.6475,
+      "label": "rhegium"
+     },
+     {
+      "id": "corinthus",
+      "lat": 37.9058,
+      "lon": 22.88,
+      "label": "corinthus"
+     },
+     {
+      "id": "rhodus",
+      "lat": 36.4412,
+      "lon": 28.2225,
+      "label": "rhodus"
+     },
+     {
+      "id": "caesarea",
+      "lat": 32.5,
+      "lon": 34.8917,
+      "label": "caesarea"
+     },
+     {
+      "id": "alexandria",
+      "lat": 31.1975,
+      "lon": 29.8925,
+      "label": "alexandria",
+      "c": "hi"
+     }
+    ],
+    "network": {
+     "edges": [
+      {
+       "a": "roma",
+       "b": "ostia",
+       "mode": "road",
+       "km": 30
+      },
+      {
+       "a": "roma",
+       "b": "capua",
+       "mode": "road",
+       "km": 195
+      },
+      {
+       "a": "capua",
+       "b": "puteoli",
+       "mode": "road",
+       "km": 30
+      },
+      {
+       "a": "capua",
+       "b": "brundisium",
+       "mode": "road",
+       "km": 337
+      },
+      {
+       "a": "capua",
+       "b": "rhegium",
+       "mode": "road",
+       "km": 475
+      },
+      {
+       "a": "ostia",
+       "b": "alexandria",
+       "mode": "sea",
+       "open": "seaOpen"
+      },
+      {
+       "a": "puteoli",
+       "b": "alexandria",
+       "mode": "sea",
+       "open": "seaOpen"
+      },
+      {
+       "a": "rhegium",
+       "b": "alexandria",
+       "mode": "sea",
+       "open": "seaOpen"
+      },
+      {
+       "a": "brundisium",
+       "b": "corinthus",
+       "mode": "coast"
+      },
+      {
+       "a": "corinthus",
+       "b": "alexandria",
+       "mode": "sea",
+       "open": "seaOpen"
+      },
+      {
+       "a": "rhegium",
+       "b": "corinthus",
+       "mode": "coast"
+      },
+      {
+       "a": "corinthus",
+       "b": "rhodus",
+       "mode": "coast"
+      },
+      {
+       "a": "rhodus",
+       "b": "caesarea",
+       "mode": "coast"
+      },
+      {
+       "a": "caesarea",
+       "b": "alexandria",
+       "mode": "coast"
+      }
+     ],
+     "speeds": {
+      "sea": "seaSpeed",
+      "coast": "seaSpeed * 0.7"
+     },
+     "factor": 1.1
+    }
+   },
+   "outputs": [
+    {
+     "id": "days",
+     "kind": "scalar",
+     "of": "route",
+     "from": "roma",
+     "to": "alexandria",
+     "by": "days"
+    },
+    {
+     "id": "km",
+     "kind": "scalar",
+     "of": "route",
+     "from": "roma",
+     "to": "alexandria",
+     "by": "days",
+     "what": "km"
+    },
+    {
+     "id": "map",
+     "kind": "scene",
+     "of": "map",
+     "path": {
+      "from": "roma",
+      "to": "alexandria",
+      "by": "days"
+     }
+    }
+   ]
+  },
+  {
+   "id": "leave",
+   "engine": "timeline@1",
+   "model": {
+    "events": [
+     {
+      "id": "dep",
+      "date": {
+       "cal": "julian",
+       "y": "yr",
+       "m": "mo",
+       "d": "dy"
+      },
+      "label": "evDep",
+      "lane": 0
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "jDep",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "dep",
+     "to": "jdn",
+     "field": "j"
+    }
+   ]
+  },
+  {
+   "id": "arrive",
+   "engine": "timeline@1",
+   "inputs": {
+    "jArr": "jDep + ceil(days)"
+   },
+   "model": {
+    "events": [
+     {
+      "id": "dep",
+      "date": {
+       "cal": "julian",
+       "y": "yr",
+       "m": "mo",
+       "d": "dy"
+      },
+      "label": "evDep",
+      "lane": 0
+     },
+     {
+      "id": "arr",
+      "date": {
+       "cal": "jdn",
+       "j": "jArr"
+      },
+      "label": "evArr",
+      "lane": 1
+     }
+    ],
+    "axis": {
+     "era": "julian",
+     "from": {
+      "cal": "julian",
+      "y": 50,
+      "m": 1,
+      "d": 1
+     },
+     "to": {
+      "cal": "julian",
+      "y": 51,
+      "m": 3,
+      "d": 1
+     }
+    }
+   },
+   "outputs": [
+    {
+     "id": "arrM",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "arr",
+     "to": "julian",
+     "field": "m"
+    },
+    {
+     "id": "arrD",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "arr",
+     "to": "julian",
+     "field": "d"
+    },
+    {
+     "id": "arrY",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "arr",
+     "to": "julian",
+     "field": "y"
+    },
+    {
+     "id": "aucY",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "arr",
+     "to": "auc",
+     "field": "y"
+    },
+    {
+     "id": "romRef",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "arr",
+     "to": "roman",
+     "field": "ref"
+    },
+    {
+     "id": "romCount",
+     "kind": "scalar",
+     "of": "convert",
+     "event": "arr",
+     "to": "roman",
+     "field": "count"
+    },
+    {
+     "id": "span",
+     "kind": "scalar",
+     "of": "duration",
+     "a": "dep",
+     "b": "arr",
+     "unit": "days"
+    },
+    {
+     "id": "chart",
+     "kind": "scene",
+     "of": "timeline"
+    }
+   ]
+  }
+ ],
+ "readouts": [
+  {
+   "label": "daysLabel",
+   "expr": "days",
+   "unit": "d",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "kmLabel",
+   "expr": "km",
+   "unit": "km",
+   "format": "auto",
+   "digits": 4
+  },
+  {
+   "label": "arrMLabel",
+   "expr": "arrM",
+   "format": "auto",
+   "digits": 2
+  },
+  {
+   "label": "arrDLabel",
+   "expr": "arrD",
+   "format": "auto",
+   "digits": 2
+  },
+  {
+   "label": "aucLabel",
+   "expr": "aucY",
+   "format": "auto",
+   "digits": 4
+  },
+  {
+   "label": "romCountLabel",
+   "expr": "romCount",
+   "format": "auto",
+   "digits": 2
+  }
+ ],
+ "plots": [
+  {
+   "kind": "scene",
+   "of": "map",
+   "title": "mapTitle",
+   "height": 360
+  },
+  {
+   "kind": "scene",
+   "of": "chart",
+   "title": "chartTitle",
+   "height": 220
+  }
+ ]
+}

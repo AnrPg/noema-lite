@@ -200,7 +200,7 @@
 
   /** generate(g, env, seed, D) → {ids, edges, directed, xy?} — seeded generators that follow networkx's definitions */
   function generate(g, env, seed, D) {
-    const rnd = C.mulberry32(C.hash32('graph:' + g.kind, g.seed !== undefined ? g.seed : seed));
+    const rnd = C.rng(g.seed !== undefined ? g.seed : seed, 'graph:' + g.kind);
     const N = Math.min(genCount(g), MAX_N), ids = genIds(g, N), E = [], xy = null;
     const add = (u, v) => { if (E.length < MAX_M) E.push({ u, v }); else D.add('size'); };
     let p = g.p === undefined ? 0 : C.cx(g.p)(env);
@@ -1162,7 +1162,7 @@
   }
   // label propagation (Raghavan, Albert & Kumara 2007, Phys. Rev. E 76:036106): asynchronous, seeded order, ties by the seeded draw
   function algLabelProp(G, T, run, seed) {
-    const n = G.n, rnd = C.mulberry32(C.hash32('graph:lpa', run.seed !== undefined ? run.seed : seed)), lab = Int32Array.from({ length: n }, (_, i) => i);
+    const n = G.n, rnd = C.rng(run.seed !== undefined ? run.seed : seed, 'graph:lpa'), lab = Int32Array.from({ length: n }, (_, i) => i);
     let it = 0;
     for (; it < 100; it++) {
       const ord = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [ord[i], ord[j]] = [ord[j], ord[i]]; }
@@ -1357,7 +1357,7 @@
     const G = makeGraph(ids, edges, directed);
     if (isObj(m.graph)) m.graph.nodes.forEach((nd, i) => { if (nd.x !== undefined) { G.X[i] = C.cx(nd.x)(env); G.Y[i] = C.cx(nd.y)(env); given = true; } if (nd.label) G.lab[i] = nd.label; });
     G.hasXY = given && m.graph.nodes.every(nd => nd.x !== undefined);
-    layout(G, m.layout || 'auto', spec, C.mulberry32(C.hash32('graph:layout', seed)), g);
+    layout(G, m.layout || 'auto', spec, C.rng(seed, 'graph:layout'), g);
     for (let u = 0; u < G.n; u++) if (!Number.isFinite(G.X[u]) || !Number.isFinite(G.Y[u])) { const a = PI / 2 - 2 * PI * u / Math.max(1, G.n); G.X[u] = cos(a); G.Y[u] = sin(a); }
     if (!G.n) D.add('empty'); else if (G.n === 1) D.add('single-node');
     if (G.E.some(e => e.u === e.v)) D.add('self-loop');
@@ -1477,7 +1477,7 @@
   }
 
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibGraphModule, 'NoemaLibGraph');
+  engine.workerSource = C.workerSource(noemaLibGraphModule, 'NoemaLibGraph', { kit: true });
   root.NoemaLibGraph = Object.freeze({
     table: { model: MODEL_T, outputs: { scalar: SCALARS, series: SERIES, scene: ['drawing'] }, fields: { node: 'ref', code: 'enum:' + CODES.join('|'), labels: 'enum:' + LABELS.join('|') } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,

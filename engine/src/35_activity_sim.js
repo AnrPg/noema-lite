@@ -48,7 +48,7 @@
     const queue = [];
     if (E.workerSource && typeof Worker === 'function') {
       try {
-        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=null;self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
+        const bridge = "self.onmessage=function(e){var m=e.data;try{if(m.t==='create'){self.__i=null;self.__i=self.noemaEngine.create(m.spec,m.opts);return;}var i=self.__i,r=m.t==='measure'?i.measure(m.inputs,m.probe):m.t==='sinit'?i.stepInit(m.inputs,m.a):m.t==='step'?i.stepTo(m.inputs,m.a,m.b,m.c):m.t==='snap'?i.snapshot():m.t==='restore'?i.restore(m.a):(i.run||i.step).call(i,m.inputs);postMessage({t:'out',id:m.id,out:r});}catch(x){postMessage({t:'err',id:m.id,msg:String(x&&x.message||x)});}};";
         url = URL.createObjectURL(new Blob([E.workerSource + '\n;' + bridge], { type: 'text/javascript' }));
         worker = new Worker(url);
         worker.onmessage = e => { const m = e.data; if (!busy || !m || m.id !== busy.id) return; const d = busy.done; finish(); if (m.t === 'err') console.warn('[noema] sim-spec engine', E.id, m.msg); d(m.t === 'out' ? m.out : null); };
@@ -68,13 +68,13 @@
       }
       if (!worker) {
         const t0 = performance.now(); let out = null;
-        try { out = job.t === 'measure' ? inst.measure(job.inputs, job.probe) : (inst.run || inst.step).call(inst, job.inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
+        try { out = job.t === 'measure' ? inst.measure(job.inputs, job.probe) : job.t === 'sinit' ? inst.stepInit(job.inputs, job.a) : job.t === 'step' ? inst.stepTo(job.inputs, job.a, job.b, job.c) : job.t === 'snap' ? inst.snapshot() : job.t === 'restore' ? inst.restore(job.a) : (inst.run || inst.step).call(inst, job.inputs); } catch (e) { console.warn('[noema] sim-spec engine', E.id, e); }
         const ms = performance.now() - t0; if (ms > 50) console.warn(`[noema] sim-spec: engine ${E.id} took ${Math.round(ms)} ms inline; give it a workerSource`);
         job.done(out); return pump();
       }
       busy = { id: ++seq, done: job.done };
       timer = setTimeout(() => { if (!busy) return; dead = true; close(); onFail('runaway'); }, RUN_TIMEOUT);
-      worker.postMessage({ t: job.t, id: busy.id, inputs: job.inputs, probe: job.probe });
+      worker.postMessage({ t: job.t, id: busy.id, inputs: job.inputs, probe: job.probe, ...(job.t === 'sinit' || job.t === 'step' || job.t === 'restore' ? { a: job.a, b: job.b, c: job.c } : {}) });
     }
     function run(inputs, done) {
       if (dead) return;
@@ -84,8 +84,249 @@
     }
     function respec(s2, o2) { if (dead) return; queue.push({ t: 'create', spec: s2, opts: o2 || opts }); pump(); }
     function measure(inputs, probe, done) { if (dead) return; queue.push({ t: 'measure', inputs, probe, done }); pump(); }
+    /** the stepper of a part (docs/INTERACTIVE_LIBRARY.md §1.6), queued like a measurement (never dropped): kind 'sinit' (inputs, t0) →
+        {out} | 'step' (inputs, t, dt, inbox) → {out, dt, events} | 'snap' → slot (−1: cannot) | 'restore' (slot) → true/false */
+    function step(kind, inputs, a, b, c, done) { if (dead) return; queue.push({ t: kind, inputs, a, b, c, done }); pump(); }
     function close() { dead = true; clearTimeout(timer); queue.length = 0; try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
-    return { run, measure, respec, close, inWorker: () => !!worker };
+    return { run, measure, respec, step, close, inWorker: () => !!worker };
+  }
+  /* ---------- parts: several engines in one spec (docs/INTERACTIVE.md §12.8) ----------
+     partsRunner(spec, opts, onFail, deps?) → the same interface as engineRunner { run(env, done), measure, close }, over the plan of
+     NoemaPackCheck.partsPlan: each part is an engine instance of its own (its Worker, its prepare, its ≤ 5 s per job) on the part's spec
+     (its model and outputs, the spec's consts and params, its inputs as names). One run of the graph, in the plan's order:
+       derived   — a formula over everything computed before it;
+       part      — a chain step: its inputs (numbers, formulas, or {series, points? | stat?} of an earlier part) → run() once;
+       loop      — a fixed point (Gauss–Seidel over the loop's parts in their order, relax, the first guesses `init`, default 0) until no
+                   scalar output of the loop changes by more than tol (relative: |Δ| / max(1, |x|)); else its scalars become NaN and
+                   the code 'no-converge' (the plan stays visible: the view says so);
+       cosim     — in time: each part a stepper (stepInit, then stepTo by macro steps dt ≤ tEnd); in a round every part behind steps in
+                   the declared order (Gauss–Seidel), an early stop (a state event) ends the round there for the parts after it;
+                   events go to the other parts' inbox (or to `to`); iterate {tol, maxIter}: a macro step repeated from the parts'
+                   snapshots until the exchanged scalars settle (else 'no-converge'; a part that cannot snapshot: 'no-snapshot').
+                   Each numeric output a part gives at a step becomes one sample of its series (the time series: cosim.time).
+     The latest inputs win (a run waiting replaces an older one; a run under way stops at its next step); the whole run ≤ 5 s
+     (else onFail('runaway')). done({outputs, env, codes}): every part's outputs by id, the derived values and the scalars, and the codes
+     [{code, part? | loop?, …}]. deps (tests): {engine(id), runner(E, spec, opts, onFail), lib, plan, partSpec, compile, now}. */
+  function partsRunner(spec, opts, onFail, deps) {
+    deps = deps || {};
+    const PC = window.NoemaPackCheck || {}, C = deps.compile || NoemaExpr.compile, now = deps.now || (() => performance.now());
+    const lib = deps.lib !== undefined ? deps.lib : (ACT.PARTS || window.Noema?.pack?.activities?.parts || null);
+    const plan = (deps.plan || PC.partsPlan)(spec, lib), mkSpec = deps.partSpec || PC.partSpec, engineOf = deps.engine || (id => ACT.engine(id));
+    const mkRunner = deps.runner || engineRunner, seed = ((opts && opts.seed) >>> 0) || 1, cons = Object.assign({}, (opts && opts.task) || spec.consts || {});
+    const ev = (f, env) => { try { const v = f(env); return typeof v === 'boolean' ? +v : v; } catch (e) { return NaN; } };
+    const L = (PC.ACTIVITY_RULES && PC.ACTIVITY_RULES.PARTS_LIM) || { iter: 50, macro: 5000, points: 2000 };
+    let dead = false, job = 0, busy = false, pending = null, timer = null, started = 0;
+    const fail = why => { if (dead) return; close(); onFail(why); };
+    const P = plan.parts.map((p, k) => {
+      const E = engineOf(p.engine), sub = mkSpec(spec, p);
+      if (!E) return null;
+      const prep = typeof E.prepare === 'function' ? E.prepare(sub, C) : (x => x);
+      const pseed = k === 0 ? seed : ((seed + Math.imul(k, 0x9E3779B1)) >>> 0) || 1;   // the first part keeps the activity's seed
+      const bench = !!(spec.bench && spec.bench.part === p.id);
+      const runner = mkRunner(E, sub, { seed: pseed, task: { ...cons }, ...(bench && opts && opts.faults ? { faults: opts.faults } : {}) }, why => fail(why));
+      const ins = Object.entries(p.inputs && typeof p.inputs === 'object' ? p.inputs : {}).map(([name, v]) => ({ name, v, f: typeof v === 'string' ? C(v) : null }));
+      return { id: p.id, p, E, sub, prep, runner, ins, outs: (p.outputs || []).filter(o => o && typeof o.id === 'string'), last: null };
+    });
+    if (P.some(q => !q)) { Promise.resolve().then(() => fail('unsupported')); return { run() { }, measure() { }, close() { }, inWorker: () => false }; }
+    const byId = new Map(P.map(q => [q.id, q]));
+    const derived = new Map((spec.derived || []).map(d => [d.id, C(d.expr)]));
+    const cosim = spec.couple && typeof spec.couple === 'object' ? spec.couple.cosim : null;
+    const loops = spec.couple && typeof spec.couple === 'object' && Array.isArray(spec.couple.loops) ? spec.couple.loops : [];
+    const lim = v => (typeof v === 'string' ? C(v) : (() => v));
+    const CS = cosim ? { tEnd: lim(cosim.tEnd), dt: lim(cosim.dt), t0: lim(cosim.t0 === undefined ? 0 : cosim.t0) } : null;
+    const call = (q, kind, inputs, a, b, c) => new Promise(res => q.runner.step(kind, inputs, a, b, c, res));
+    const runOnce = (q, inputs) => new Promise(res => q.runner.run(inputs, res));
+    const isN = v => typeof v === 'number' && isFinite(v);
+    const statOf = (a, st) => {
+      const xs = a.filter(isN); if (!xs.length) return NaN;
+      if (st === 'final') return xs[xs.length - 1];
+      let lo = Infinity, hi = -Infinity, s = 0, s2 = 0; for (const x of xs) { if (x < lo) lo = x; if (x > hi) hi = x; s += x; s2 += x * x; }
+      return st === 'min' ? lo : st === 'max' ? hi : st === 'mean' ? s / xs.length : st === 'pp' ? hi - lo : st === 'rms' ? Math.sqrt(s2 / xs.length) : NaN;
+    };
+    const resample = (a, n) => { if (a.length < 2 || a.length === n) return a.slice(); const r = []; for (let i = 0; i < n; i++) { const x = i * (a.length - 1) / (n - 1), j = Math.min(a.length - 2, Math.floor(x)), f = x - j; r.push(a[j] + f * (a[j + 1] - a[j])); } return r; };
+
+    /** the numbers (and series) a part's engine gets: the consts and the params, then its own inputs */
+    function inputsOf(q, env, outs) {
+      const r = {};
+      for (const k of Object.keys(cons)) r[k] = env[k];
+      for (const p of spec.params || []) r[p.id] = env[p.id];
+      for (const x of q.ins) {
+        if (typeof x.v === 'number') r[x.name] = x.v;
+        else if (x.f) r[x.name] = ev(x.f, env);
+        else if (x.v && typeof x.v === 'object') {
+          const a = Array.isArray(outs[x.v.series]) ? outs[x.v.series] : [];
+          r[x.name] = x.v.stat ? statOf(a, x.v.stat) : x.v.points ? resample(a, x.v.points) : a.slice(0, MAX_POINTS);
+        } else r[x.name] = NaN;
+      }
+      return r;
+    }
+    /** a part's answer into the outputs and (scalars) the names */
+    function take(q, o, env, outs) {
+      for (const d of q.outs) {
+        const v = o && typeof o === 'object' ? o[d.id] : undefined;
+        if (d.kind === 'scalar') { const x = isN(v) || typeof v === 'boolean' ? +v : NaN; outs[d.id] = typeof v === 'boolean' ? v : x; env[d.id] = x; }
+        else outs[d.id] = v === undefined ? (d.kind === 'series' ? [] : undefined) : v;
+      }
+    }
+    const scalarsOf = qs => qs.flatMap(q => q.outs.filter(d => d.kind === 'scalar').map(d => d.id));
+    const change = (ids, a, b) => { let m = 0; for (const k of ids) { const x = a[k], y = b[k]; if (!isN(x) || !isN(y)) { if (x !== y && !(x !== x && y !== y)) return Infinity; continue; } m = Math.max(m, Math.abs(x - y) / Math.max(1, Math.abs(x))); } return m; };
+
+    async function graph(env, my) {
+      const outs = {}, codes = [];
+      const alive = () => { if (dead || my !== job) return false; if (now() - started > RUN_TIMEOUT) { fail('runaway'); return false; } return true; };
+      const chainPart = async q => {
+        const inp = inputsOf(q, env, outs); q.last = inp;
+        const o = await runOnce(q, q.prep(inp));
+        if (!alive()) return false;
+        if (o == null) codes.push({ code: 'part-failed', part: q.id });
+        take(q, o, env, outs); return true;
+      };
+      const evalD = ids => { for (const id of ids) { let v; try { v = derived.get(id)(env); } catch (e) { v = NaN; } env[id] = v; } };   // (a true/false stays one: the readouts show ✓ / ✗)
+      for (const u of plan.order) {
+        if (u.k === 'derived') { evalD([u.id]); continue; }
+        if (u.k === 'part') { if (!(await chainPart(byId.get(u.id)))) return null; continue; }
+        const qs = u.parts.map(id => byId.get(id)), def = u.k === 'loop' ? loops[u.i] || {} : cosim || {}, ids = scalarsOf(qs);
+        for (const k of ids) env[k] = def.init && isN(def.init[k]) ? def.init[k] : 0;
+        if (u.k === 'loop') {
+          const tol = def.tol, relax = isN(def.relax) ? def.relax : 1, maxIter = Math.min(L.iter, def.maxIter || 20);
+          let ok = false, it = 0;
+          while (it < maxIter && !ok) {
+            it++;
+            const before = {}; for (const k of ids) before[k] = env[k];
+            for (const q of qs) {
+              evalD(u.derived);
+              const old = {}; for (const k of scalarsOf([q])) old[k] = env[k];
+              if (!(await chainPart(q))) return null;
+              if (relax !== 1) for (const k of Object.keys(old)) if (isN(old[k]) && isN(env[k])) { env[k] = relax * env[k] + (1 - relax) * old[k]; outs[k] = env[k]; }
+            }
+            evalD(u.derived);
+            ok = change(ids, env, before) <= tol;
+          }
+          if (!ok) { for (const k of ids) { env[k] = NaN; outs[k] = NaN; } codes.push({ code: 'no-converge', loop: u.i, iterations: it }); }
+          continue;
+        }
+        // a co-simulation in time
+        const t0 = ev(CS.t0, env), tEnd = ev(CS.tEnd, env), dt = ev(CS.dt, env);
+        if (!(isN(t0) && isN(tEnd) && isN(dt) && dt > 0 && tEnd > t0)) { codes.push({ code: 'bad-config' }); for (const q of qs) take(q, null, env, outs); continue; }
+        const eps = 1e-9 * Math.max(1, Math.abs(tEnd)), tp = new Map(qs.map(q => [q.id, t0])), inbox = new Map(qs.map(q => [q.id, []]));
+        const rec = new Map(), times = [t0];
+        const series = q => q.outs.filter(d => d.kind === 'series');
+        const sample = (q, o, first) => {
+          for (const d of q.outs) {
+            const v = o && typeof o === 'object' ? o[d.id] : undefined;
+            if (d.kind === 'series') { if (Array.isArray(v)) rec.set(d.id, { whole: v }); else { const r = rec.get(d.id) || { s: [] }; if (r.s) { if (first) r.s = [isN(v) ? v : NaN]; else r.pend = isN(v) ? v : NaN; } rec.set(d.id, r); if (isN(v)) env[d.id] = v; } }   // the step's value: what the other parts' formulas read
+            else if (d.kind === 'scalar') { if (isN(v) || typeof v === 'boolean') { env[d.id] = +v; outs[d.id] = v; } }
+            else if (v !== undefined) outs[d.id] = v;
+          }
+        };
+        let failed = false;
+        for (const q of qs) {
+          evalD(u.derived);
+          const inp = inputsOf(q, env, outs); q.last = inp;
+          const r = await call(q, 'sinit', q.prep(inp), t0);
+          if (!alive()) return null;
+          if (!r || r.fail) { codes.push({ code: 'part-failed', part: q.id }); failed = true; break; }
+          for (const d of series(q)) rec.set(d.id, { s: [] });
+          sample(q, r.out, true);
+        }
+        if (failed) { for (const q of qs) take(q, null, env, outs); continue; }
+        const it = def.iterate && typeof def.iterate === 'object' ? { tol: def.iterate.tol, max: Math.min(L.iter, def.iterate.maxIter || 10) } : null;
+        let canIter = !!it, rounds = 0, noConv = 0, stuck = 0;
+        const roundsMax = 4 * L.macro;
+        const tg = () => Math.min(...tp.values());
+        while (tg() < tEnd - eps) {
+          if (++rounds > roundsMax) { codes.push({ code: 'budget' }); break; }
+          const t = tg(), aligned = [...tp.values()].every(x => Math.abs(x - t) <= eps);
+          let snapped = false;
+          if (canIter && aligned) {
+            const slots = []; for (const q of qs) slots.push(await call(q, 'snap', null));
+            if (!alive()) return null;
+            if (slots.some(s => !(s >= 0))) { canIter = false; codes.push({ code: 'no-snapshot' }); } else snapped = true;
+          }
+          let k = 0, prevX = null, settled = !snapped;
+          const saveEnv = snapped ? Object.assign({}, env) : null, saveIn = snapped ? new Map([...inbox].map(([a, b]) => [a, b.slice()])) : null;
+          do {
+            if (k > 0) {   // back to the start of the macro step
+              for (const q of qs) await call(q, 'restore', null, 0);
+              if (!alive()) return null;
+              Object.assign(env, saveEnv); for (const q of qs) tp.set(q.id, t); for (const [a, b] of saveIn) inbox.set(a, b.slice());
+            }
+            let target = Math.min(t + dt, tEnd);
+            const xs = {};
+            for (const q of qs) {
+              const tq = tp.get(q.id);
+              if (tq > t + eps) continue;   // ahead after an early stop of another part: it waits
+              evalD(u.derived);
+              const h = target - tq; if (!(h > 0)) continue;
+              const inp = inputsOf(q, env, outs); q.last = inp;
+              const box = inbox.get(q.id); inbox.set(q.id, []);
+              const r = await call(q, 'step', q.prep(inp), tq, h, box);
+              if (!alive()) return null;
+              if (!r || r.fail) { codes.push({ code: 'part-failed', part: q.id, t: tq }); failed = true; break; }
+              const taken = isN(r.dt) ? Math.max(0, Math.min(h, r.dt)) : h;
+              tp.set(q.id, tq + taken);
+              if (taken < h - eps) target = tq + taken;   // a state event: the parts after it meet it at its time
+              sample(q, r.out, false);
+              for (const e of Array.isArray(r.events) ? r.events : []) for (const o of qs) if (o !== q && (!e.to || e.to.includes(o.id))) inbox.get(o.id).push({ ...e, source: q.id });
+            }
+            if (failed) break;
+            for (const id of ids) xs[id] = env[id];
+            settled = !snapped || (prevX && change(ids, xs, prevX) <= it.tol);
+            prevX = xs; k++;
+          } while (!settled && k < it.max);
+          if (failed) break;
+          if (!settled) noConv++;
+          const tn = tg();
+          if (tn <= t + eps) { if (++stuck > 3) { codes.push({ code: 'no-progress', t }); break; } } else stuck = 0;
+          if (tn > t + eps) { times.push(tn); for (const r of rec.values()) if (r.s) { r.s.push(r.pend === undefined ? (r.s.length ? r.s[r.s.length - 1] : NaN) : r.pend); r.pend = undefined; } }
+          if (times.length > L.macro * 4) { codes.push({ code: 'budget', t: tn }); break; }   // never a silent cut: the run says it stopped early
+        }
+        if (failed) { for (const q of qs) take(q, null, env, outs); continue; }
+        if (noConv) codes.push({ code: 'no-converge', cosim: true, steps: noConv });
+        const thin = a => { if (a.length <= MAX_POINTS) return a; const f = (a.length - 1) / (MAX_POINTS - 1), r = []; for (let i = 0; i < MAX_POINTS; i++) r.push(a[Math.round(i * f)]); return r; };
+        for (const [id, r] of rec) outs[id] = thin(r.whole ? Array.from(r.whole) : r.s);
+        if (typeof def.time === 'string') outs[def.time] = thin(times);
+      }
+      return { outputs: outs, env, codes };
+    }
+    function pump() {
+      if (dead || busy || !pending) return;
+      const { env, done } = pending; pending = null; busy = true;
+      const my = ++job; started = now();
+      clearTimeout(timer); timer = setTimeout(() => { if (busy && my === job) fail('runaway'); }, RUN_TIMEOUT + 50);
+      graph(Object.assign({}, env), my).then(r => { busy = false; clearTimeout(timer); if (r && !dead && !pending) done(r); pump(); },
+        e => { busy = false; clearTimeout(timer); console.warn('[noema] sim-spec parts', e); if (!dead && !pending) done(null); pump(); });
+    }
+    /** run(env, done): env = the consts and params (and the derived values that need no part; they are computed again in order) */
+    function run(env, done) { if (dead) return; pending = { env, done }; if (busy) job++; pump(); }   // a run under way stops at its next step
+    /** a measurement of the bench: on the bench part, with the inputs of its last run */
+    function measure(env, probe, done) {
+      const q = spec.bench && byId.get(spec.bench.part);
+      if (dead || !q || !q.runner.measure) return done(null);
+      q.runner.measure(q.prep(q.last || inputsOf(q, env, {})), probe, done);
+    }
+    function close() { if (dead) return; dead = true; clearTimeout(timer); pending = null; for (const q of P) try { q.runner.close(); } catch (e) { } }
+    return { run, measure, close, plan, inWorker: () => P.some(q => q.runner.inWorker && q.runner.inWorker()) };
+  }
+  /** a spec whose parts reuse activities/_parts ({use, with}): the same spec with each part written out (the checks then see whole parts);
+      any other spec is returned as it is */
+  function withParts(spec) {
+    const PC = window.NoemaPackCheck;
+    if (!PC || !PC.resolveParts || !spec || typeof spec !== 'object' || !Array.isArray(spec.parts) || !spec.parts.some(p => p && typeof p === 'object' && p.use !== undefined)) return spec;
+    const E = [], R = PC.resolveParts(spec, ACT.PARTS || window.Noema?.pack?.activities?.parts || null, E);
+    return E.length || !R ? spec : { ...spec, parts: R.map(r => r.p) };
+  }
+  /** the engine a spec with parts shows simView: the checks of every part's engine on its part's spec, the bench of the bench part */
+  function partsEngine(spec) {
+    const PC = window.NoemaPackCheck, lib = ACT.PARTS || window.Noema?.pack?.activities?.parts || null;
+    if (!PC || !PC.partsPlan) return null;
+    const plan = PC.partsPlan(spec, lib), Es = plan.parts.map(p => (typeof p.engine === 'string' ? ACT.engine(p.engine) : null));
+    if (!plan.parts.length || Es.some(e => !e)) return null;
+    const bi = spec.bench ? plan.parts.findIndex(p => p.id === spec.bench.part) : -1;
+    return {
+      id: 'parts', plan, lib, ...(bi >= 0 && Es[bi].bench ? { bench: true } : {}),
+      check: sp => plan.parts.flatMap((p, i) => { if (!Es[i].check) return []; try { return (Es[i].check(PC.partSpec(sp, p)) || []).map(m => PC.partMsg(String(m), `spec.parts[${i}]`)); } catch (e) { return [`spec.parts[${i}]: ` + String(e.message || e)]; } }),
+    };
   }
   /** a seeded pick: the same seed draws the same item (mulberry32) */
   function seededIndex(seed, n) { let a = (seed ^ 0x9E3779B9) >>> 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return Math.floor(((t ^ t >>> 14) >>> 0) / 4294967296 * n); }
@@ -233,9 +474,10 @@
       const out = (type, payload) => { if (!closed) onMessage(ACTP.out(type, payload)); };
       let closed = false;
       const port = { send() { }, close() { closed = true; }, values: () => null };
-      const spec = act.spec, tables = act.strings && typeof act.strings === 'object' ? act.strings : null;
-      const engId = host ? host.engine.id : spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
-      const E = host ? host.engine : typeof engId === 'string' ? ACT.engine(engId) : null;
+      const spec = host ? act.spec : withParts(act.spec), tables = act.strings && typeof act.strings === 'object' ? act.strings : null;
+      const PT = !host && !!spec && typeof spec === 'object' && 'parts' in spec;   // several engines in one spec (§12.8)
+      const engId = host ? host.engine.id : PT ? 'parts' : spec && typeof spec === 'object' && 'engine' in spec ? spec.engine : 'formula@1';
+      const E = host ? host.engine : PT ? partsEngine(spec) : typeof engId === 'string' ? ACT.engine(engId) : null;
       if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
       if (spec && spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
       const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, host ? null : ACT.engines(), host ? host.check : undefined) : ['the spec checker is not loaded'];
@@ -340,6 +582,8 @@
       const reset = h('button', { class: 'btn ghost small', type: 'button', onclick: () => { for (const p of params) { vals[p.id] = def(p); paint(p); } out('event', { name: 'reset' }); recompute(); saveSoon(); } }, '↺ ' + tE('engine.act.sim.reset'));
       const B = spec.bench ? makeBench() : null;   // a fault-finding bench (§12.7): instruments, the measurement log, the diagnosis
       if (B) root.append(B.el);
+      const partsNote = PT ? h('p', { class: 'sim-note', 'aria-live': 'polite', hidden: true }) : null;   // a loop that did not settle, a part that failed
+      if (partsNote) root.append(partsNote);
       root.append(h('div', { class: 'sim-foot' }, busyNote, reset));
       host?.decorate?.(root);
       box.append(root);
@@ -347,9 +591,10 @@
       /* ---------- computing ---------- */
       let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
       const prep = typeof E.prepare === 'function' ? E.prepare(spec, C) : (x => x);   // the engine's expressions → numbers, on this thread
-      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
+      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : PT ? ((_, s, o, f) => partsRunner(s, o, f)) : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
       let runner = newRunner();
-      const declared = spec.outputs || [];
+      const cosimTime = PT && spec.couple && typeof spec.couple === 'object' && spec.couple.cosim && typeof spec.couple.cosim.time === 'string' ? [{ id: spec.couple.cosim.time, kind: 'series' }] : [];   // the co-simulation's time series
+      const declared = PT ? E.plan.parts.flatMap(p => (p.outputs || []).filter(o => o && typeof o.id === 'string')).concat(cosimTime) : spec.outputs || [];
 
       /* ---------- the bench: the hidden fault lives only in this closure and in the engine (never in the page, the state or a label) ---------- */
       function makeBench() {
@@ -576,7 +821,17 @@
         const e = base(), my = ++rev;   // values() is null until the latest inputs are computed (Check never grades older results)
         if (!runner) { env = e; doneRev = my; render(); return; }
         busyNote.textContent = tE('engine.act.sim.computing');
-        runner.run(prep(e), o => { if (closed) return; outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render(); });
+        runner.run(prep(e), o => {
+          if (closed) return;
+          if (PT) {   // {outputs, env, codes}: the derived values computed in the plan's order
+            const r = o && typeof o === 'object' ? o : {}, codes = Array.isArray(r.codes) ? r.codes : [];
+            for (const d of derived) if (r.env && d.id in r.env) e[d.id] = r.env[d.id];
+            o = r.outputs;
+            const msg = [codes.some(c => c.code === 'no-converge') ? tE('engine.act.sim.noConverge') : '', codes.some(c => c.code === 'part-failed') || !r.outputs ? tE('engine.act.sim.partFailed') : ''].filter(Boolean).join(' ');
+            partsNote.textContent = msg; partsNote.hidden = !msg;
+          }
+          outputs = cleanOutputs(o); for (const d of declared) if (d.kind === 'scalar') e[d.id] = outputs[d.id]; env = e; if (my === rev) { doneRev = my; busyNote.textContent = ''; } render();
+        });
       }
       function render() {
         readouts.forEach((r, i) => { roEls[i].textContent = fmtNum(ev(r.f, env), r, locale); });
@@ -626,6 +881,7 @@
   }
   ACT.registerRuntime({ id: 'sim-spec@1', version: 1, autoHeight: true, mount: (box, ctx) => simView(box, ctx) });
   ACT.simView = simView;   // the same view for runtimes that compute the outputs themselves (py-module@1)
+  ACT.partsRunner = partsRunner;   // several engines in one spec (§12.8): the sim view, and the mini-apps' noema.sim (34_activity_html.js)
   ACT.engineRunner = engineRunner;   // the same Worker runner for the engines a mini-app uses (html-app@1, 34_activity_html.js)
   /* i18n-ignore-end */
 })();

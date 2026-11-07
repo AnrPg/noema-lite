@@ -259,6 +259,63 @@ ok(L.id === 'logic@1' && Object.isFrozen(L) && L.engine.id === 'logic@1' && L.en
   ok(st.s >= 2 && st.i === 1, 'the grounded extension computed step by step: after one iteration only a is in');
 }
 
+// ---------- 9b. tableaux for B and S5, ASPIC+ structured argumentation, bipolar argumentation ----------
+{
+  const tv = (f, sys) => V({ task: 'tableau', system: sys, formula: f }, 'valid');
+  ok(tv('p -> []<>p', 'B') === 1 && tv('p -> []<>p', 'S4') === 0 && tv('[]p -> [][]p', 'B') === 0 && tv('[]p -> [][]p', 'S5') === 1,
+    'tableau B (Hughes & Cresswell 1996 ch. 3): the Brouwer axiom p → □◇p holds in B, not in S4; 4 (□p → □□p) fails in B, holds in S5');
+  ok(tv('<>p -> []<>p', 'S5') === 1 && tv('<>p -> []<>p', 'B') === 0 && tv('<>[]p -> []p', 'S5') === 1 && tv('<>[]p -> p', 'B') === 1 && tv('[](p | q) -> []p | []q', 'S5') === 0 && tv('[]p -> p', 'B') === 1,
+    'tableau S5: axiom 5 (◇p → □◇p) holds in S5 not in B; ◇□p → □p in S5; ◇□p → p in B; □ does not distribute over ∨; T holds in B');
+  const ent = L.entails([ast('<>(p & []q)', 'modal')], ast('q', 'modal'), { logic: 'B' });
+  ok(ent.valid === true && L.entails([ast('<>p', 'modal')], ast('[]<>p', 'modal'), { logic: 'S5' }).valid === true && L.SYSTEMS.join() === 'K,D,T,K4,S4,B,S5', 'entails (the API) with logic B and S5');
+  // ASPIC+: Modgil & Prakken 2014 (Argument & Computation 5:31) Example 3.23/3.24 "snores / professor": last-link accepts AccessDenied, weakest-link rejects it
+  const snore = link => ({ task: 'aspic', link, kb: [{ f: 'snores', rank: 0 }, { f: 'professor', rank: 1 }], rules: [{ id: 'd1', body: ['snores'], head: 'misbehaves', rank: 0 },
+    { id: 'd2', body: ['misbehaves'], head: 'accessDenied', rank: 2 }, { id: 'd3', body: ['professor'], head: '¬accessDenied', rank: 1 }], goal: 'accessDenied' });
+  const sl = R(snore('last'), [O('a', 'args'), O('t', 'attacks'), O('d', 'defeats'), O('j', 'skeptical'), SC]).out, sw = R(snore('weakest'), [O('j', 'skeptical'), O('c', 'credulous')]).out;
+  ok(sl.a === 5 && sl.t === 2 && sl.d === 1 && sl.j === 1 && sw.j === 0 && sw.c === 0 && sl.pic.items.length > 0,
+    'ASPIC+ (Modgil & Prakken 2014 Ex. 3.23): 5 arguments, 2 rebuts, 1 defeat; last-link: AccessDenied justified; weakest-link: not');
+  const swd = R(Object.assign(snore('weakest'), { goal: '~accessDenied' }), [O('j', 'skeptical')]).out;
+  ok(swd.j === 1, 'ASPIC+: weakest-link: ¬AccessDenied justified instead');
+  // Caminada & Amgoud 2007 (AIJ 171:286) Example 4 (ring / party animal): without transposition the grounded extension is inconsistent
+  const mar = t => ({ task: 'aspic', transpose: t, kb: [{ f: 'wr', kind: 'axiom' }, { f: 'go', kind: 'axiom' }], rules: [{ id: 'd1', body: ['wr'], head: 'm' }, { id: 'd2', body: ['go'], head: 'b' },
+    { id: 's1', body: ['m'], head: 'hw', kind: 'strict' }, { id: 's2', body: ['b'], head: '¬hw', kind: 'strict' }] });
+  const outsM = ['args', 'attacks', 'directConsistent', 'indirectConsistent', 'transposed'].map(x => O(x, x)).concat([O('fp', 'flag', { code: 'postulate' }), O('ft', 'flag', { code: 'not-transposed' })]);
+  const m0 = R(mar(false), outsM).out, m1 = R(mar(true), outsM).out;
+  ok(m0.args === 6 && m0.attacks === 0 && m0.directConsistent === 0 && m0.fp === 1 && m0.ft === 1 && m1.args === 8 && m1.directConsistent === 1 && m1.indirectConsistent === 1 && m1.fp === 0 && m1.transposed === 1,
+    'ASPIC+ (Caminada & Amgoud 2007 Ex. 4): without transposition direct consistency fails (code postulate, not-transposed); closed under transposition all postulates hold');
+  const uc = R({ task: 'aspic', kb: [{ f: 'p' }, { f: '~d1' }], rules: [{ id: 'd1', body: ['p'], head: 'q' }], goal: 'q' }, [O('c', 'credulous'), O('d', 'defeats')]).out;
+  const um = R({ task: 'aspic', kb: [{ f: 'p', rank: 0 }, { f: 'r', rank: 5 }], rules: [{ id: 's1', body: ['r'], head: '¬p', kind: 'strict' }], goal: 'p' }, [O('c', 'credulous'), O('d', 'defeats')]).out;
+  const um2 = R({ task: 'aspic', kb: [{ f: 'p', kind: 'axiom' }, { f: 'r' }], rules: [{ id: 'd1', body: ['r'], head: '¬p' }], goal: 'p' }, [O('c', 'skeptical'), O('a', 'attacks')]).out;
+  ok(uc.c === 0 && uc.d === 1 && um.c === 0 && um.d === 1 && um2.c === 1 && um2.a === 1, 'ASPIC+: an undercut (¬d1) always defeats; undermining an ordinary premise (rank 5 over rank 0, by a strict rule); an axiom cannot be undermined (Def. 3.10)');
+  const ct = R({ task: 'aspic', kb: [{ f: 'a', rank: 0 }, { f: 'b', rank: 9 }], rules: [{ id: 'd1', body: ['a'], head: 'x', rank: 0 }, { id: 'd2', body: ['b'], head: 'y', rank: 9 }], contraries: [{ u: 'x', v: 'y' }], goal: 'x' }, [O('d', 'defeats'), O('j', 'skeptical'), O('w', 'wellFormed')]).out;
+  ok(ct.d === 1 && ct.j === 1 && ct.w === 1, 'ASPIC+: a contrary-rebut succeeds whatever the preference (Def. 3.12), and is one-way');
+  const dm = (o) => L.aspic({ kb: [{ f: 'p', rank: 1 }, { f: 'q', rank: 3 }, { f: 's', rank: 2 }], rules: [{ id: 'd1', body: ['p', 'q'], head: 'x', rank: 0 }, { id: 'd2', body: ['s'], head: '¬x', rank: 1 }] }, { link: 'weakest', ordering: o });
+  const de = dm('elitist'), dd = dm('democratic'), xi = A => A.args.findIndex(a => a.conc === 'x'), ni = A => A.args.findIndex(a => a.conc === '-x');
+  ok(de.less(xi(de), ni(de)) === true && dd.less(xi(dd), ni(dd)) === false && dd.less(ni(dd), xi(dd)) === false,
+    'ASPIC+ set comparison (Modgil & Prakken 2013 Def. 3.19): weakest-link with d1 < d2: premises {p:1, q:3} ◁Eli {s:2} (some element below all) but not ◁Dem (q is above s)');
+  ok(R({ task: 'aspic', kb: [{ f: 'p', kind: 'axiom' }, { f: '¬q', kind: 'axiom' }], rules: [{ id: 's', body: ['p'], head: 'q', kind: 'strict' }] }, [O('f', 'flag', { code: 'axioms-inconsistent' })]).out.f === 1
+    && R({ task: 'aspic', kb: [{ f: 'y', kind: 'axiom' }, { f: 'a' }], rules: [{ id: 'd', body: ['a'], head: 'x' }], contraries: [{ u: 'x', v: 'y' }] }, [O('w', 'wellFormed'), O('f', 'flag', { code: 'not-well-formed' })]).out.f === 1,
+    'ASPIC+: inconsistent axioms (axioms-inconsistent) and a contrary of an axiom (not-well-formed) are reported');
+  // bipolar: Cayrol & Lagasquie-Schiex 2005 / 2013
+  const bp = (mode, att, sup, extra) => R(Object.assign({ task: 'bipolar', support: mode, args: ['a', 'b', 'c', 'd'].map(id => ({ id })), attacks: att.map(([u, v]) => ({ u, v })), supports: sup.map(([u, v]) => ({ u, v })) }, extra || {}),
+    ['attacks', 'direct', 'supported', 'secondary', 'mediated', 'extended', 'safe', 'closed', 'inCount', 'skeptical'].map(x => O(x, x))).out;
+  const g1 = bp('general', [['b', 'c']], [['a', 'b']], { arg: 'c' }), g2 = bp('general', [['a', 'b']], [['b', 'c']], { arg: 'c' });
+  ok(g1.supported === 1 && g1.attacks === 2 && g1.skeptical === 0 && g2.secondary === 1 && g2.skeptical === 0, 'bipolar (Cayrol & Lagasquie-Schiex 2005): a supported attack (a ⇒ b → c gives a → c) and a secondary attack (a → b ⇒ c gives a → c)');
+  const d1 = bp('deductive', [['a', 'b']], [['c', 'b']], { arg: 'c' }), n1 = bp('necessary', [['b', 'c']], [['b', 'a']], { arg: 'c' });
+  ok(d1.mediated === 1 && d1.skeptical === 0 && n1.extended === 1 && n1.attacks === 2, 'bipolar (Cayrol & Lagasquie-Schiex 2013 IJAR 54:876): deductive support gives mediated attacks (a → b, c ⇒ b: a → c); necessary support extended ones (b ⇒n a, b → c: a → c)');
+  const ch = bp('general', [['c', 'd']], [['a', 'b'], ['b', 'c']]);
+  ok(ch.supported === 2 && ch.attacks === 3 && ch.closed === 1 && ch.safe === 1, 'bipolar: support chains (a ⇒ b ⇒ c → d gives a → d and b → d); the grounded extension is safe and closed under support');
+  const bb = L.bipolar(3, [[0, 1]], [[1, 2]], 'necessary');
+  ok(bb.att.length === 2 && bb.kind['0,2'] === 'secondary' && L.SUPPORTS.join() === 'general,deductive,necessary', 'bipolar(n, att, sup, mode) is exported (the API)');
+  const C2 = s => L.checkSpec(s).filter(p => p.level === 'error').map(p => p.code).join();
+  ok(C2(spec({ task: 'aspic', kb: [{ f: 'p & q' }] }, [])) === 'literal' && C2(spec({ task: 'aspic', rules: [{ id: 'r', head: 'x' }, { id: 'r', head: 'y' }] }, [])) === 'duplicate'
+    && C2(spec({ task: 'bipolar', args: [{ id: 'a' }], supports: [{ u: 'a', v: 'z' }] }, [])) === 'ref' && C2(spec({ task: 'aspic' }, [])) === 'value' && C2(spec({ task: 'aspic', kb: [{ f: 'p' }], goal: 'p -> q' }, [])) === 'literal',
+    'check codes: aspic needs literals (literal), unique rule ids (duplicate), kb or rules (value); bipolar supports name arguments (ref)');
+  const t0 = Date.now();
+  R({ task: 'aspic', transpose: true, kb: Array.from({ length: 8 }, (_, i) => ({ f: 'p' + i, rank: i })), rules: Array.from({ length: 12 }, (_, i) => ({ id: 'd' + i, body: ['p' + (i % 8)], head: (i % 2 ? '¬' : '') + 'q' + (i % 4), rank: i })), semantics: 'preferred' }, [O('a', 'args'), SC]);
+  ok(Date.now() - t0 < 2000, `speed: an ASPIC+ theory with 8 premises, 12 rules, preferred semantics ${Date.now() - t0} ms < 2 s`);
+}
+
 // ---------- 10. the API for other engines ----------
 {
   const E = (p, c, o) => L.entails(p.map(s => ast(s, (o && o.lang) || 'prop')), ast(c, (o && o.lang) || 'prop'), o);

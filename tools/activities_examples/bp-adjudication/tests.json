@@ -1,0 +1,98 @@
+{
+ "cases": [
+  {
+   "name": "the panel ranks CG 1st, OG 2nd, CO 3rd, OO 4th (pairwise majority of three judges)",
+   "steps": [
+    {
+     "set": "gOG",
+     "value": 2
+    },
+    {
+     "set": "gOO",
+     "value": 4
+    },
+    {
+     "set": "gCG",
+     "value": 1
+    },
+    {
+     "set": "gCO",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "values": {
+     "rOG": [
+      2,
+      2
+     ],
+     "rOO": [
+      4,
+      4
+     ],
+     "rCG": [
+      1,
+      1
+     ],
+     "rCO": [
+      3,
+      3
+     ],
+     "pCG": [
+      3,
+      3
+     ],
+     "pOG": [
+      2,
+      2
+     ],
+     "pCO": [
+      1,
+      1
+     ],
+     "pOO": [
+      0,
+      0
+     ],
+     "cons": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "the round: DLO 32 s over 7 minutes (17 s beyond the 15 s grace), a POI in the PM's protected first minute, 2 violations; the points of the DPM and of the Whip are never answered by the Opposition (2 dropped)",
+   "steps": [
+    {
+     "set": "gOG",
+     "value": 1
+    }
+   ],
+   "expect": {
+    "values": {
+     "viol": [
+      2,
+      2
+     ],
+     "otDLO": [
+      32,
+      32
+     ],
+     "prot": [
+      1,
+      1
+     ],
+     "drop": [
+      2,
+      2
+     ],
+     "clash": [
+      4,
+      4
+     ]
+    }
+   }
+  }
+ ]
+}

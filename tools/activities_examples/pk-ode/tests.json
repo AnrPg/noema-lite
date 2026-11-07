@@ -1,0 +1,104 @@
+{
+ "cases": [
+  {
+   "name": "default: 500 mg, ke0 0.3 /h: the effect-site peak is lower than the plasma peak",
+   "steps": [
+    {
+     "set": "dose",
+     "value": 500
+    },
+    {
+     "set": "ke0",
+     "value": 0.3
+    },
+    {
+     "set": "ec50",
+     "value": 5
+    }
+   ],
+   "expect": {
+    "values": {
+     "cmax": [
+      9.417114,
+      9.801486
+     ],
+     "ceMax": [
+      6.44742,
+      6.71058
+     ],
+     "effMax": [
+      55.6836,
+      57.9564
+     ]
+    }
+   }
+  },
+  {
+   "name": "a fast ke0 (3 /h): the effect site keeps up with the plasma",
+   "steps": [
+    {
+     "set": "ke0",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "values": {
+     "ceMax": [
+      9.310392,
+      9.690408
+     ],
+     "lag": [
+      0,
+      0.3
+     ]
+    }
+   }
+  },
+  {
+   "name": "a slow ke0 (0.05 /h): the effect site lags far behind",
+   "steps": [
+    {
+     "set": "ke0",
+     "value": 0.05
+    }
+   ],
+   "expect": {
+    "values": {
+     "ceMax": [
+      2.653448,
+      2.761752
+     ],
+     "effMax": [
+      34.4274,
+      35.8326
+     ]
+    }
+   }
+  },
+  {
+   "name": "twice the dose: twice both peaks (linear kinetics), the effect less than twice",
+   "steps": [
+    {
+     "set": "dose",
+     "value": 1000
+    }
+   ],
+   "expect": {
+    "values": {
+     "cmax": [
+      18.834228,
+      19.602972
+     ],
+     "ceMax": [
+      12.89484,
+      13.42116
+     ],
+     "effMax": [
+      71.0108,
+      73.9092
+     ]
+    }
+   }
+  }
+ ]
+}

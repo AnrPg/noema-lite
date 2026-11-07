@@ -1,0 +1,16 @@
+{
+ "title": "Condorcet's paradox: majorities in a circle",
+ "intro": "Three groups of voters rank the candidates A, B and C. Group 1 ranks A > B > C, group 2 ranks B > C > A and group 3 ranks C > A > B. Set the size of each group. Compare the candidates two at a time: a positive margin means a majority prefers the first candidate. When every candidate loses to another one, the majorities form a cycle and there is no Condorcet winner, yet plurality, instant runoff and the Borda count still name a winner. In the graph, an arrow points from the winner of each pair to the loser, and arrows that are part of a cycle are marked. Winners are numbered 1 = A, 2 = B, 3 = C; 0 means a tie or no winner.",
+ "n1Label": "Group 1: A > B > C (voters)",
+ "n2Label": "Group 2: B > C > A (voters)",
+ "n3Label": "Group 3: C > A > B (voters)",
+ "abLabel": "Margin of A over B",
+ "bcLabel": "Margin of B over C",
+ "caLabel": "Margin of C over A",
+ "cycleLabel": "The majorities form a cycle",
+ "cwLabel": "Condorcet winner",
+ "plLabel": "Plurality winner",
+ "irvLabel": "Instant-runoff winner",
+ "bordaLabel": "Borda-count winner",
+ "graphTitle": "Majority graph: an arrow from the winner of each pair to the loser"
+}

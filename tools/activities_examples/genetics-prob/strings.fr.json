@@ -1,0 +1,19 @@
+{
+ "title": "La dérive, puis un test : la simulation s’accorde-t-elle avec Kimura ?",
+ "intro": "Deux moteurs en chaîne. D’abord 200 populations de N individus diploïdes dérivent pendant 20·N générations (Wright–Fisher), assez pour que presque chaque population fixe ou perde A, car la probabilité de Kimura est celle de la fixation à terme, et l’on compte dans combien d’entre elles l’allèle A est fixé. Ensuite les probabilités jugent ce nombre : un test binomial exact demande s’il s’accorde avec la probabilité de fixation de Kimura, et un intervalle de Wilson à 95 % montre quelles probabilités de fixation ce nombre admet. Changez N, la fréquence de départ et le coefficient de sélection.",
+ "sizeLabel": "Taille de la population N (diploïdes)",
+ "p0Label": "Fréquence de départ de l’allèle A",
+ "sLabel": "Coefficient de sélection s (AA 1 + s, Aa 1 + s/2)",
+ "kLabel": "Populations où A est fixé (sur 200)",
+ "uLabel": "Probabilité de fixation (Kimura)",
+ "ciLoLabel": "Intervalle à 95 % de la probabilité de fixation : de",
+ "ciHiLabel": "Intervalle à 95 % de la probabilité de fixation : à",
+ "pLabel": "Valeur p du test binomial exact",
+ "insideLabel": "La valeur de Kimura est dans l’intervalle",
+ "pathsTitle": "Fréquence de A dans trois des populations",
+ "gen": "génération",
+ "freq": "fréquence de A",
+ "path1": "population 1",
+ "path2": "population 2",
+ "path3": "population 3"
+}

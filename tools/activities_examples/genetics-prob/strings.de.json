@@ -1,0 +1,19 @@
+{
+ "title": "Drift, dann ein Test: passt die Simulation zu Kimura?",
+ "intro": "Zwei Engines in einer Kette. Zuerst driften 200 Populationen aus N diploiden Individuen 20·N Generationen lang (Wright–Fisher), lange genug, dass fast jede Population A fixiert oder verliert, denn Kimuras Wahrscheinlichkeit ist die der Fixierung auf Dauer, und wir zählen, in wie vielen das Allel A fixiert ist. Dann beurteilt die Wahrscheinlichkeitsrechnung diese Zahl: ein exakter Binomialtest fragt, ob sie zu Kimuras Fixierungswahrscheinlichkeit passt, und ein 95-%-Wilson-Intervall zeigt, welche Fixierungswahrscheinlichkeiten die Zahl zulässt. Ändern Sie N, die Anfangshäufigkeit und den Selektionskoeffizienten.",
+ "sizeLabel": "Populationsgröße N (diploid)",
+ "p0Label": "Anfangshäufigkeit des Allels A",
+ "sLabel": "Selektionskoeffizient s (AA 1 + s, Aa 1 + s/2)",
+ "kLabel": "Populationen, in denen A fixiert ist (von 200)",
+ "uLabel": "Fixierungswahrscheinlichkeit (Kimura)",
+ "ciLoLabel": "95-%-Intervall der Fixierungswahrscheinlichkeit: von",
+ "ciHiLabel": "95-%-Intervall der Fixierungswahrscheinlichkeit: bis",
+ "pLabel": "p-Wert des exakten Binomialtests",
+ "insideLabel": "Kimuras Wert liegt im Intervall",
+ "pathsTitle": "Häufigkeit von A in drei der Populationen",
+ "gen": "Generation",
+ "freq": "Häufigkeit von A",
+ "path1": "Population 1",
+ "path2": "Population 2",
+ "path3": "Population 3"
+}

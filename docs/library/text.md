@@ -294,3 +294,7 @@ Lemmatisation and part-of-speech tagging (need language models far beyond a vend
 phonetic rhyme and stress dictionaries (CMUdict is 3.6 MB); Arabic ʿarūḍ and Sanskrit metres (the same machinery with other rules — a
 later version); syllabification of Greek and Latin prose for readability (vowel groups are used); topic models and embeddings (not
 deterministic within the budget).
+
+## Uses the kernel
+
+No duplicated facility (no randomness, no root finding, no statistics the kernel has): nothing to move (checked 2026-11-07).

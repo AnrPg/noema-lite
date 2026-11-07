@@ -1,0 +1,154 @@
+{
+ "cases": [
+  {
+   "name": "m = 1000, n = 100, one hash function: 9.5 % false positives",
+   "steps": [
+    {
+     "set": "m",
+     "value": 1000
+    },
+    {
+     "set": "n",
+     "value": 100
+    },
+    {
+     "set": "k",
+     "value": 1
+    }
+   ],
+   "expect": {
+    "values": {
+     "fp": [
+      0.0952,
+      0.0953
+     ],
+     "kBest": [
+      7,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "name": "three hash functions: 1.75 % exact, 1.74 % by the textbook formula",
+   "steps": [
+    {
+     "set": "m",
+     "value": 1000
+    },
+    {
+     "set": "n",
+     "value": 100
+    },
+    {
+     "set": "k",
+     "value": 3
+    }
+   ],
+   "expect": {
+    "values": {
+     "fp": [
+      0.01745,
+      0.01746
+     ],
+     "fpFormula": [
+      0.01741,
+      0.01742
+     ]
+    }
+   }
+  },
+  {
+   "name": "the best k = 7 ((m/n)·ln 2 = 6.93): 0.83 %, and 959 bits would give 1 %",
+   "steps": [
+    {
+     "set": "m",
+     "value": 1000
+    },
+    {
+     "set": "n",
+     "value": 100
+    },
+    {
+     "set": "k",
+     "value": 7
+    }
+   ],
+   "expect": {
+    "values": {
+     "fp": [
+      0.00826,
+      0.00827
+     ],
+     "kOpt": [
+      6.931,
+      6.932
+     ],
+     "mFor": [
+      959,
+      959
+     ]
+    }
+   }
+  },
+  {
+   "name": "too many hash functions fill the filter: k = 20 gives 5.6 %",
+   "steps": [
+    {
+     "set": "m",
+     "value": 1000
+    },
+    {
+     "set": "n",
+     "value": 100
+    },
+    {
+     "set": "k",
+     "value": 20
+    }
+   ],
+   "expect": {
+    "values": {
+     "fp": [
+      0.0558,
+      0.0559
+     ]
+    }
+   }
+  },
+  {
+   "name": "20 bits per item and k = 14: below one in ten thousand",
+   "steps": [
+    {
+     "set": "m",
+     "value": 2000
+    },
+    {
+     "set": "n",
+     "value": 100
+    },
+    {
+     "set": "k",
+     "value": 14
+    }
+   ],
+   "expect": {
+    "state": [
+     "m",
+     "n",
+     "k"
+    ],
+    "values": {
+     "fp": [
+      6.8e-05,
+      6.83e-05
+     ],
+     "kBest": [
+      14,
+      14
+     ]
+    }
+   }
+  }
+ ]
+}

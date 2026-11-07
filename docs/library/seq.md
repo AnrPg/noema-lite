@@ -319,3 +319,7 @@ the HGVS names and the two proteins around the change. The graded exercise (a `s
 substitution that turns Glu7 into Val. Its `grade.checks` are `effect == 1` (label: a missense change), `aaPos == 7` (codon 7) and
 `altAa == 17` (valine). Only c.20A>T passes. The near misses in `tests.json` are c.19G>A (Glu7Lys, haemoglobin C), c.20A>C (Glu7Ala),
 c.21G>A (silent), c.19G>T (a stop) and c.2T>G (start lost).
+
+## Uses the kernel
+
+Since 2026-11-07 the shuffle null draws from a kernel stream (`C.rng(seed, 'seq-shuffle')` = `SK.stream`) and the isoelectric point is Brent's root (`SK.brent`) of the net charge (bisection only as a fallback); the Worker source carries the kernel. Snapshot re-recorded for the shuffle.

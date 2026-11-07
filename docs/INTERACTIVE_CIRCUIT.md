@@ -142,6 +142,22 @@ source()                          → the engine's own source, to run it in a Wo
 | `NMOS` `PMOS` | d g s | `params {Vth 1.5, k 0.1 A/V², lambda 0}`; Id(sat) = k/2·(Vgs−Vth)²·(1+λVds); presets `2n7000` `bs170` `irlz44n` / `bs250` `irf9540` | level-1 square law, symmetric (d/s swap); `Vth` is a magnitude for PMOS; no gate capacitance |
 | `OPAMP` | in+ in− out [v+ v−] | `params {gain 1e5, rails [−15, 15], headroom 0}`; with 5 terminals the rails are the supply-pin voltages | ideal inputs, VCVS output to ground with exact gain, clamped smoothly (50 mV knee) to the rails; no GBW or slew |
 
+**Uses the kernel / parts (2026-11-07).** The meters' seeded jitter and a capture's shift draw from kernel streams
+(`circuit:<probe>`); the noise sources draw from the kernel's counter-based Philox stream (`SK.counterStream(seed,
+'circuit:noise:n' | ':w').normal(i)`: sample i at any time of a transient in O(1), no state). The transient runs on the kernel's θ-method
+DAE solver (`NoemaSimKit.daeThetaInit`): M·x′ = B(x) − A(x)·x, the MNA system stamped without companion models, M full (a capacitor
+C at (a, a), (c, c) and −C at (a, c), (c, a); an inductor −L on its branch row; the other rows algebraic), the Jacobian −A of the
+same stamp, a linear circuit factored once per (h, θ). Before each step the engine picks θ — backward Euler on the first step and on
+a step that holds a source breakpoint, trapezoidal otherwise — and sets the lines' waves from td ago; the junction limiting (pnjlim)
+stays in the stamp and a limited iterate forces another Newton iteration (`limit`). A step the kernel cannot solve, even halved, is
+taken by the own step with gmin stepping, then the kernel goes on. Against the own companion models: ≤ 3e-9 relative over the
+transients of tests/circuit.js and circuit2.js. FALLBACK without the kernel (marked): the own companion-model transient. It is
+resumable (`tranStart` / `tranAdvance` / `tranAdvanceK`): `runTransient()` and the new
+**stepper** of `circuit-mna@1` (`stepper: true`; the instance's `stepInit` / `stepTo`, `docs/INTERACTIVE_LIBRARY.md` §1.6) share it.
+The stepper holds the transient open on the grid `transient.dt`; a node / branch / power series gives its value now, `stat` and `at`
+read every internal step so far, DC outputs as in `run()`, AC and probes NaN. It cannot snapshot (−1). Stepped to tEnd it equals
+`transient()` (tests/parts.js). The Worker source carries NoemaExpr and the kernel.
+
 ## 4. Faults (hidden from the learner: `create(netlist, {faults: [...]})`)
 
 | fault | effect |

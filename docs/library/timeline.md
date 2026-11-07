@@ -147,3 +147,7 @@ that cannot be computed: NaN).
 - Observational calendars (the sighted Islamic month, the modern Hindu lunisolar pañcāṅga, the Chinese calendar outside 1900–2100)
   are not computed: they depend on local sighting or astronomical software; the table ranges are `out-of-range`.
 - Egyptian regnal chronology and the Sothic cycle are left to the author's events and reigns: there is no agreed absolute table.
+
+## Uses the kernel
+
+Since 2026-11-07 the dendrochronology series and the Monte Carlo orderings draw from kernel streams (`C.rng` = `SK.stream`, normals by inversion); the Worker source carries the kernel. Snapshot re-recorded.

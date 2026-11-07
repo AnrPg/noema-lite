@@ -1,0 +1,16 @@
+{
+ "title": "Milde Vorlieben, getrennte Städte",
+ "intro": "Zwei Gruppen von Haushalten wohnen anfangs zufällig gemischt. Ein Haushalt ist zufrieden, wenn mindestens ein Anteil „want“ seiner Nachbarn zur eigenen Gruppe gehört; sonst zieht er auf einen zufälligen freien Platz. Suchen Sie die mildeste Vorliebe, die die Stadt trotzdem in Viertel einer einzigen Gruppe ordnet.",
+ "wantLabel": "Gewünschter Anteil gleicher Nachbarn, want",
+ "similarLabel": "Mittlerer Anteil gleicher Nachbarn am Ende",
+ "unhappyLabel": "Anteil der Haushalte, die unzufrieden bleiben",
+ "roundsLabel": "Runden, bis niemand mehr umziehen will",
+ "plotTitle": "Gleiche Nachbarn und unzufriedene Haushalte",
+ "round": "Runde",
+ "share": "Anteil",
+ "similarLine": "gleiche Nachbarn",
+ "unhappyLine": "unzufrieden",
+ "gridTitle": "Die Stadt am Ende (die zwei Farben sind die zwei Gruppen)",
+ "checkMild": "Die Vorliebe ist mild: want ist höchstens 0,35.",
+ "checkSegregated": "Die Stadt ist getrennt: Im Mittel sind mindestens 70 % der Nachbarn gleich."
+}

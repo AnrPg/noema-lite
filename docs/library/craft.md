@@ -404,3 +404,7 @@ sheet goods, sewing block drafting with curves, colour mixing (Kubelkaâ€“Munk, Î
 symmetry groups, chart-from-image and WIF import are each a separate engine or a v2 (see the research note). They need large
 licensed data, optimisers without a time bound, or curve geometry. No external dependency is bundled: Clipper (polygon offsets)
 was not approved (Boost licence), so concave seam allowances are reported as approximate.
+
+## Uses the kernel
+
+No duplicated facility: nothing to move (checked 2026-11-07).

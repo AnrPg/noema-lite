@@ -2,7 +2,7 @@
    A general engine of the library: one formula language (ASCII and Unicode) parsed with precise error codes and positions, and
    ~22 tasks over it — propositional (truth tables, equivalence, entailment, NNF/CNF/DNF/Tseitin, DPLL/CDCL with a trace, resolution,
    Fitch natural deduction checked line by line, Horn chaining), many-valued (K3, LP, Ł3, Łukasiewicz, Gödel, product), first-order
-   (finite models, unification, resolution, prenex/Skolem, syllogisms), modal (Kripke models, frame correspondence, tableaux K/D/T/K4/S4),
+   (finite models, unification, resolution, prenex/Skolem, syllogisms), modal (Kripke models, frame correspondence, tableaux K/D/T/K4/S4/B/S5),
    epistemic (multi-agent S5, public announcements, common and distributed knowledge, muddy children, Cheryl's birthday, consecutive
    numbers), temporal (LTL on finite and lasso traces, CTL by fixpoints, mutual exclusion), deontic (SDL = KD and its paradoxes, dyadic
    deontic logic on preference models, input/output logic out1–out4, norms with deadlines over agent traces: evalNorms / normMonitor,
@@ -1012,8 +1012,9 @@
      Tableau Methods ch. 6): formulas in NNF; α (∧), β (∨, by backtracking), T (□φ ⇒ φ, reflexive systems), π (each ◇ψ opens a world
      with ψ and every φ of □φ; K4/S4 also carry □φ itself), D (a world with □s and no ◇ still gets a successor), and for K4/S4
      ancestor blocking (a new world whose set is included in an ancestor's is not expanded). Budget: 20 000 nodes. ---------- */
-  const SYSTEMS = ['K', 'D', 'T', 'K4', 'S4'];
+  const SYSTEMS = ['K', 'D', 'T', 'K4', 'S4', 'B', 'S5'];
   function tableau(fs, system, D) {
+    if (system === 'B' || system === 'S5') return tableauGlobal(fs, system, D);
     const refl = system === 'T' || system === 'S4', trans = system === 'K4' || system === 'S4', serial = system === 'D' || refl;
     const ev = []; let nodes = 0, worlds = 0, over = false;
     const E = e => { if (ev.length < MAX_EVENTS) ev.push(e); else D.add('trace-truncated'); };
@@ -1060,6 +1061,63 @@
     const ok = satSet(fs.map(f => nnf(f)), [], 0);
     if (over) D.add('budget');
     return { sat: over ? null : ok, nodes, worlds, ev };
+  }
+
+  /* ---------- tableaux for B (KTB) and S5 (KT5), global form (Fitting 1983 ch. 3 §§ 7–8 "S5 and B"; Hughes & Cresswell 1996, A New
+     Introduction to Modal Logic ch. 6): the whole model is expanded at once — worlds with their formula sets, β by backtracking over a
+     copy of every world. B: the worlds form a tree whose edges count both ways (symmetric) and every world sees itself (reflexive):
+     □φ at w puts φ at w, at its children AND at its parent; ◇ψ at w is met by ψ at w or at a neighbour, otherwise a child is opened
+     (depth ≤ the modal depth: no blocking needed). S5: every world sees every world (one cluster): □φ anywhere puts φ and □φ at every
+     world; ◇ψ is met when some world holds ψ, otherwise a world is opened (at most one per ◇-subformula). Budget: 20 000 nodes. ---------- */
+  function tableauGlobal(fs, system, D) {
+    const s5 = system === 'S5', ev = [], K = f => key(f);
+    let nodes = 0, created = 0, ops = 0, over = false;
+    const E = e => { if (ev.length < MAX_EVENTS) ev.push(e); else D.add('trace-truncated'); };
+    const add = (w, f) => { const k = K(f); if (w.f.has(k)) return false; w.f.set(k, f); return true; };
+    const nbrs = (W, i) => (s5 ? W.map((_, j) => j) : [i].concat(W[i].p >= 0 ? [W[i].p] : [], W.map((w, j) => (w.p === i ? j : -1)).filter(j => j >= 0)));
+    function sat(W) {
+      if (++nodes > 20000) { over = true; return false; }
+      for (;;) {
+        for (let ch = true; ch;) {
+          ch = false;
+          for (let i = 0; i < W.length; i++) for (const f of [...W[i].f.values()]) {
+            if (++ops > 2000000) { over = true; return false; }
+            if (f.t === 'and') { ch = add(W[i], f.a) || ch; ch = add(W[i], f.b) || ch; }
+            else if (f.t === 'box') for (const j of nbrs(W, i)) { ch = add(W[j], f.a) || ch; if (s5) ch = add(W[j], f) || ch; }
+          }
+        }
+        for (let i = 0; i < W.length; i++) for (const f of W[i].f.values()) {
+          if (f.t === 'bot' || (f.t === 'not' && f.a.t === 'top')) { E({ k: 'clash', w: i, s: '⊥' }); return false; }
+          if (f.t === 'not' && W[i].f.has(K(f.a))) { E({ k: 'clash', w: i, s: show(f.a) }); return false; }
+        }
+        for (let i = 0; i < W.length; i++) {
+          const open = [...W[i].f.values()].find(f => f.t === 'or' && !W[i].f.has(K(f.a)) && !W[i].f.has(K(f.b)));
+          if (!open) continue;
+          for (const side of [open.a, open.b]) {
+            E({ k: 'branch', w: i, s: show(side) });
+            const W2 = W.map(w => ({ f: new Map(w.f), p: w.p }));
+            add(W2[i], side);
+            if (sat(W2)) return true;
+            if (over) return false;
+          }
+          return false;
+        }
+        let made = false;
+        for (let i = 0; i < W.length && !made; i++) for (const f of W[i].f.values()) {
+          if (f.t !== 'dia') continue;
+          const k = K(f.a);
+          if (nbrs(W, i).some(j => W[j].f.has(k))) continue;
+          if (W.length >= 256) { over = true; return false; }
+          const w = { f: new Map(), p: i }; add(w, f.a); W.push(w); created++;
+          E({ k: 'world', w: W.length - 1, from: i, s: show(f.a) }); made = true; break;
+        }
+        if (!made) return true;
+      }
+    }
+    const w0 = { f: new Map(), p: -1 }; for (const f of fs) add(w0, nnf(f));
+    const ok = sat([w0]);
+    if (over) D.add('budget');
+    return { sat: over ? null : ok, nodes, worlds: created, ev };
   }
 
   /* =====================================================================================================================
@@ -1352,10 +1410,180 @@
     return { grounded, iters, complete, preferred, stable, atk };
   }
 
+  /* ---------- structured argumentation: ASPIC+ (Prakken 2010, Argument & Computation 1:93; Modgil & Prakken 2013, AIJ 195:361;
+     Modgil & Prakken 2014, "The ASPIC+ framework for structured argumentation: a tutorial", Argument & Computation 5:31). A theory:
+     literals (an atom p or its negation ¬p; ¬ is contradictory both ways), a knowledge base (axioms, which cannot be attacked, and
+     ordinary premises), strict and defeasible rules (a defeasible rule's id is its name n(r): a conclusion ¬r undercuts it), and
+     optional contraries (u is a contrary of v: u attacks v, not the other way round). Arguments are built bottom-up (Def. 3.6 of the
+     2014 tutorial; no circular argument: a rule is not applied when its head is already the conclusion of a sub-argument). Attacks
+     (Def. 3.10): A undercuts B on B′ (B′ ∈ Sub(B) with a defeasible top rule r, Conc(A) ∈ ¬n(r)), A rebuts B on B′ (B′ with a
+     defeasible top rule, Conc(A) ∈ ¬Conc(B′): restricted rebut), A undermines B on φ (φ an ordinary premise of B). Defeats
+     (Def. 3.12): an undercut always succeeds; a rebut / undermine succeeds when it is by a contrary or A ⊀ B′. The argument ordering
+     (Defs. 3.19–3.21): last-link (LastDefRules, then the ordinary premises) or weakest-link (all defeasible rules and premises), each
+     with the elitist or democratic set comparison over the ranks (a higher rank is preferred; Γ = ∅ is never below, a non-empty Γ is
+     below ∅). The defeats form a Dung AF solved by afSolve. Rationality postulates (Caminada & Amgoud 2007, AIJ 171:286) are checked
+     on every extension: closure under sub-arguments, closure under strict rules, direct and indirect consistency; with the conditions
+     that guarantee them (Modgil & Prakken 2013 Thm 6.10–6.14): strict rules closed under transposition, axioms consistent,
+     well-formed contraries. Budget: 200 arguments. ---------- */
+  const MAX_ASPIC = 200;
+  const negLit = l => (l[0] === '-' ? l.slice(1) : '-' + l);
+  const showLit = l => (l[0] === '-' ? '¬' + l.slice(1) : l);
+  /** litOf(text | ast) → 'p' | '-p' | null (a literal: an atom or a negated atom; ¬¬p is p) */
+  function litOf(x) {
+    let f = typeof x === 'string' ? (parse(x, 'prop').ok ? parse(x, 'prop').ast : null) : x, neg = false;
+    while (f && f.t === 'not') { neg = !neg; f = f.a; }
+    return f && f.t === 'atom' ? (neg ? '-' : '') + f.n : null;
+  }
+  /** aspic(theory, opts) → {args, attacks, defeats, n, att, rules, codes, …}
+      theory: {kb: [{f, kind: 'axiom' | 'ordinary', rank}], rules: [{id, body: [lit], head: lit, kind: 'strict' | 'defeasible', rank}],
+      contraries: [[u, v]]}; literals as text ('p', '¬p', '~p') or 'p' / '-p'; opts: {link: 'last' | 'weakest', ordering: 'elitist' |
+      'democratic', transpose: bool}. att: the defeats as [[a, b]] (indices into args) for afSolve. */
+  function aspic(th, opts) {
+    opts = opts || {}; th = th || {};
+    const codes = new Set(), link = opts.link === 'weakest' ? 'weakest' : 'last', eli = opts.ordering !== 'democratic';
+    const L = x => (typeof x === 'string' && /^-?[A-Za-z_][A-Za-z0-9_]*$/.test(x) ? x : litOf(x));
+    const kb = (th.kb || []).map(k => ({ f: L(k.f), kind: k.kind === 'axiom' ? 'axiom' : 'ordinary', rank: isNum(k.rank) ? k.rank : 0 })).filter(k => k.f);
+    let rules = (th.rules || []).map((r, i) => ({ id: r.id || 'r' + (i + 1), body: (r.body || []).map(L), head: L(r.head), kind: r.kind === 'strict' ? 'strict' : 'defeasible', rank: isNum(r.rank) ? r.rank : 0 }))
+      .filter(r => r.head && r.body.every(Boolean));
+    const cset = new Set((th.contraries || []).map(([u, v]) => L(u) + '|' + L(v)));
+    const contra = (a, b) => a === negLit(b) || cset.has(a + '|' + b);           // a ∈ ¬b (contrary or contradictory)
+    const contraryOnly = (a, b) => cset.has(a + '|' + b) && a !== negLit(b) && !cset.has(b + '|' + a);
+    // transposition (Caminada & Amgoud 2007 Def. 21): φ1 … φn → ψ gives φ1 … φi-1, ¬ψ, φi+1 … φn → ¬φi
+    const sk = r => r.body.slice().sort().join(',') + '>' + r.head;
+    const strictKeys = () => new Set(rules.filter(r => r.kind === 'strict').map(sk));
+    const transposes = r => r.body.map((b, i) => ({ id: r.id + "'" + (i + 1), body: r.body.map((x, j) => (j === i ? negLit(r.head) : x)), head: negLit(b), kind: 'strict', rank: r.rank }));
+    let closedT = true;
+    { const ks = strictKeys(); for (const r of rules) if (r.kind === 'strict' && transposes(r).some(t => !ks.has(sk(t)))) closedT = false; }
+    if (!closedT && opts.transpose) {
+      for (let it = 0, ks = strictKeys(); it < 8; it++) {
+        let added = false;
+        for (const r of rules.slice()) if (r.kind === 'strict') for (const t of transposes(r)) if (!ks.has(sk(t)) && rules.length < 256) { ks.add(sk(t)); rules.push(t); added = true; }
+        if (!added) break;
+      }
+      closedT = true;
+    }
+    if (!closedT) codes.add('not-transposed');
+    const strict = rules.filter(r => r.kind === 'strict');
+    const closeStrict = set => { const s = new Set(set); for (let ch = true; ch;) { ch = false; for (const r of strict) if (!s.has(r.head) && r.body.every(b => s.has(b))) { s.add(r.head); ch = true; } } return s; };
+    const consistent = set => ![...set].some(a => [...set].some(b => contra(a, b)));
+    const axCl = closeStrict(kb.filter(k => k.kind === 'axiom').map(k => k.f));
+    const axiomsOk = consistent(axCl); if (!axiomsOk) codes.add('axioms-inconsistent');
+    // well-formed (Modgil & Prakken 2013 Def. 6.3): a contrary-only target is no axiom and no head of a strict rule
+    let wellFormed = true;
+    for (const c of cset) { const [u, v] = c.split('|'); if (contraryOnly(u, v) && (kb.some(k => k.kind === 'axiom' && k.f === v) || strict.some(r => r.head === v))) wellFormed = false; }
+    if (!wellFormed) codes.add('not-well-formed');
+    // arguments, bottom-up
+    const args = [], seen = new Map();
+    const mk = a => { if (seen.has(a.key) || args.length >= MAX_ASPIC) { if (!seen.has(a.key)) codes.add('budget'); return false; } a.i = args.length; seen.set(a.key, a.i); args.push(a); return true; };
+    kb.forEach((k, ki) => mk({ key: 'k' + ki, conc: k.f, rule: -1, kbi: ki, subs: [], sub: null, concs: new Set([k.f]), prem: new Set([ki]), def: new Set(), last: new Set() }));
+    for (const a of args) a.sub = new Set([a.i]);
+    let budget = BUDGET;
+    for (let ch = true; ch && !codes.has('budget');) {
+      ch = false;
+      rules.forEach((r, ri) => {
+        const pools = r.body.map(b => args.filter(a => a.conc === b));
+        if (pools.some(p => !p.length)) return;
+        const idx = pools.map(() => 0);
+        for (;;) {
+          if (--budget < 0) { codes.add('budget'); return; }
+          const subs = idx.map((k, j) => pools[j][k]);
+          const concs = new Set(); subs.forEach(s => s.concs.forEach(c => concs.add(c)));
+          const key = 'r' + ri + '(' + subs.map(s => s.key).join(',') + ')';
+          if (!concs.has(r.head) && !seen.has(key)) {
+            const prem = new Set(), def = new Set(), sub = new Set(); subs.forEach(s => { s.prem.forEach(x => prem.add(x)); s.def.forEach(x => def.add(x)); s.sub.forEach(x => sub.add(x)); });
+            if (r.kind === 'defeasible') def.add(ri);
+            const last = r.kind === 'defeasible' ? new Set([ri]) : new Set(); if (r.kind !== 'defeasible') subs.forEach(s => s.last.forEach(x => last.add(x)));
+            concs.add(r.head);
+            const a = { key, conc: r.head, rule: ri, kbi: -1, subs: subs.map(s => s.i), sub, concs, prem, def, last };
+            if (mk(a)) { a.sub.add(a.i); ch = true; } else if (codes.has('budget')) return;
+          }
+          let j = idx.length - 1; while (j >= 0 && ++idx[j] >= pools[j].length) { idx[j] = 0; j--; }
+          if (j < 0) break;
+        }
+      });
+    }
+    const premOrd = a => [...a.prem].filter(k => kb[k].kind === 'ordinary').map(k => kb[k].rank);
+    const rk = s => [...s].map(ri => rules[ri].rank);
+    const setLess = (G, H) => (!G.length ? false : !H.length ? true : eli ? G.some(x => H.every(y => x < y)) : G.every(x => H.some(y => x < y)));
+    const less = (A, B) => {
+      if (link === 'last') { const la = rk(A.last), lb = rk(B.last); return setLess(la, lb) || (!la.length && !lb.length && setLess(premOrd(A), premOrd(B))); }
+      const sA = !A.def.size, sB = !B.def.size, pa = premOrd(A), pb = premOrd(B);
+      if (sA && sB) return setLess(pa, pb);
+      if (!pa.length && !pb.length) return setLess(rk(A.def), rk(B.def));
+      return setLess(pa, pb) && setLess(rk(A.def), rk(B.def));
+    };
+    const attacks = [], defeats = [];
+    for (const A of args) for (const B of args) {
+      let at = null, df = false;
+      for (const bi of B.sub) {
+        const Bp = args[bi], r = Bp.rule >= 0 ? rules[Bp.rule] : null;
+        if (r && r.kind === 'defeasible' && contra(A.conc, r.id)) { at = at || 'undercut'; df = true; }
+        else if (r && r.kind === 'defeasible' && contra(A.conc, Bp.conc)) { at = at || 'rebut'; if (contraryOnly(A.conc, Bp.conc) || !less(A, Bp)) df = true; }
+        else if (!r && kb[Bp.kbi].kind === 'ordinary' && contra(A.conc, Bp.conc)) { at = at || 'undermine'; if (contraryOnly(A.conc, Bp.conc) || !less(A, Bp)) df = true; }
+      }
+      if (at) attacks.push([A.i, B.i, at]);
+      if (df) defeats.push([A.i, B.i]);
+    }
+    const postulates = labs => {
+      const res = { subClosed: 1, strictClosed: 1, directConsistent: 1, indirectConsistent: 1 };
+      for (const l of labs) {
+        const E = args.filter((a, i) => l[i] === 1), cs = new Set(E.map(a => a.conc));
+        if (E.some(a => [...a.sub].some(s => l[s] !== 1))) res.subClosed = 0;
+        const cl = closeStrict(cs);
+        if (cl.size !== cs.size) res.strictClosed = 0;
+        if (!consistent(cs)) res.directConsistent = 0;
+        if (!consistent(cl)) res.indirectConsistent = 0;
+      }
+      return res;
+    };
+    return {
+      args: args.map(a => ({ conc: a.conc, rule: a.rule, kb: a.kbi, subs: a.subs, sub: [...a.sub].sort((x, y) => x - y), prem: [...a.prem], defRules: [...a.def], lastDefRules: [...a.last],
+        strict: !a.def.size, firm: [...a.prem].every(k => kb[k].kind === 'axiom') })),
+      rules, kb, attacks, defeats, n: args.length, att: defeats.map(([a, b]) => [a, b]), less: (i, j) => less(args[i], args[j]), postulates,
+      transposed: closedT, axiomsConsistent: axiomsOk, wellFormed, codes: [...codes].sort(), showLit,
+    };
+  }
+
+  /* ---------- bipolar argumentation (Cayrol & Lagasquie-Schiex 2005, ECSQARU LNAI 3571:378; 2013, "Bipolarity in argumentation graphs:
+     towards a better understanding", IJAR 54:876; necessary support: Nouioua & Risch 2010, SUM LNCS 6379:205). Attacks and supports
+     between arguments; the complex attacks are added until nothing changes, then the Dung semantics run on the result:
+     general support (2005): supported (a ⇒+ x, x → b gives a → b) and secondary / indirect (a → x, x ⇒+ b gives a → b);
+     deductive (2013 §3): supported and mediated (a → b, x ⇒+ b gives a → x); necessary (2013 §4, Nouioua & Risch): secondary and
+     extended (x ⇒+ a, x → b gives a → b). safe (2005 Def. 7): S attacks no member nor anything S supports; closed: S holds whatever a
+     member supports. ---------- */
+  const SUPPORTS = ['general', 'deductive', 'necessary'];
+  /** bipolar(n, att, sup, mode) → {att: [[a, b]], kind: {'a,b': 'direct' | 'supported' | 'secondary' | 'mediated' | 'extended'}, reach} */
+  function bipolar(n, att, sup, mode) {
+    mode = SUPPORTS.includes(mode) ? mode : 'general';
+    const R = Array.from({ length: n }, () => new Uint8Array(n));          // R[a][b]: a ⇒+ b (a support path of length ≥ 1)
+    for (const [a, b] of sup) R[a][b] = 1;
+    for (let k = 0; k < n; k++) for (let i = 0; i < n; i++) if (R[i][k]) for (let j = 0; j < n; j++) if (R[k][j]) R[i][j] = 1;
+    const kind = new Map(), A = Array.from({ length: n }, () => new Uint8Array(n));
+    for (const [a, b] of att) if (!A[a][b]) { A[a][b] = 1; kind.set(a + ',' + b, 'direct'); }
+    const put = (a, b, k) => { if (A[a][b]) return false; A[a][b] = 1; kind.set(a + ',' + b, k); return true; };
+    for (let ch = true, it = 0; ch && it < n * n + 2; it++) {
+      ch = false;
+      for (let x = 0; x < n; x++) for (let b = 0; b < n; b++) {
+        if (!A[x][b]) continue;
+        for (let a = 0; a < n; a++) {
+          if ((mode === 'general' || mode === 'deductive') && R[a][x]) ch = put(a, b, 'supported') || ch;      // a ⇒+ x → b
+          if ((mode === 'general' || mode === 'necessary') && R[b][a]) ch = put(x, a, 'secondary') || ch;      // x → b ⇒+ a
+          if (mode === 'deductive' && R[a][b]) ch = put(x, a, 'mediated') || ch;                                // x → b, a ⇒+ b
+          if (mode === 'necessary' && R[x][a]) ch = put(a, b, 'extended') || ch;                                // x ⇒+ a, x → b
+        }
+      }
+    }
+    const out = []; for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) if (A[a][b]) out.push([a, b]);
+    const safe = l => { for (let b = 0; b < n; b++) { if (!out.some(([a, c]) => c === b && l[a] === 1)) continue; if (l[b] === 1 || l.some((v, a) => v === 1 && R[a][b])) return false; } return true; };
+    const closed = l => sup.every(([a, b]) => l[a] !== 1 || l[b] === 1);
+    return { att: out, kind: Object.fromEntries(kind), reach: R, safe, closed, mode };
+  }
+
   /* =====================================================================================================================
      8. The spec: the model format (the same table in tools/lib_logic.py), the checks, the expressions and keys */
   const TASKS = ['truth-table', 'equivalent', 'entails', 'normal-form', 'sat', 'resolution', 'proof', 'horn', 'many-valued', 'fol-eval', 'unify',
-    'fol-resolution', 'syllogism', 'kripke', 'tableau', 'epistemic', 'ltl', 'ctl', 'dyadic', 'io', 'norms', 'af'];
+    'fol-resolution', 'syllogism', 'kripke', 'tableau', 'epistemic', 'ltl', 'ctl', 'dyadic', 'io', 'norms', 'af',
+    'aspic', 'bipolar'];
   const FORMS = ['nnf', 'cnf', 'dnf', 'tseitin', 'prenex', 'skolem', 'clausal'];
   const FOL_FORMS = ['prenex', 'skolem', 'clausal'];
   const ATOMV_T = { atom: 'id!', value: 'numx!' };
@@ -1370,6 +1598,9 @@
   const ATT_T = { u: 'ref!', v: 'ref!', on: 'numx' };
   const NORM_T = { id: 'id!', kind: 'enum:O|F|P', cond: 'expr', act: 'expr', mode: 'enum:achieve|maintain', deadline: 'expr', within: 'int:0:2000', by: 'fin', until: 'expr',
     agent: 'id', scope: 'enum:one|each', rank: 'int:-1000:1000', issued: 'fin', on: 'numx' };
+  const KB_T = { f: 'expr!', kind: 'enum:axiom|ordinary', rank: 'int:-1000:1000', on: 'numx' };
+  const RULE_T = { id: 'id!', body: { $list: 'expr', max: 8 }, head: 'expr!', kind: 'enum:strict|defeasible', rank: 'int:-1000:1000', on: 'numx' };
+  const CONTR_T = { u: 'expr!', v: 'expr!' };
   const PUZ_T = { kind: 'enum:muddy|cheryl|consecutive!', n: 'int:1:15', muddy: 'int:0:5', a: 'int:0:15', b: 'int:0:15' };
   const MODEL_T = {
     task: 'enum:' + TASKS.join('|') + '!', logic: 'enum:' + MV.join('|'), system: 'enum:' + SYSTEMS.join('|'), form: 'enum:' + FORMS.join('|'),
@@ -1385,12 +1616,14 @@
     args: { $list: { $obj: ARG_T }, max: MAX_ARGS }, attacks: { $list: { $obj: ATT_T }, max: 600 }, arg: 'ref', ext: 'numx',
     norms: { $list: { $obj: NORM_T }, max: MAX_NORMS }, input: { $list: 'expr', max: MAX_FORMULAS }, order: { $list: 'enum:' + LEX.join('|'), max: 3 },
     view: { $list: 'fin', min: 4, max: 4 },
+    kb: { $list: { $obj: KB_T }, max: 64 }, rules: { $list: { $obj: RULE_T }, max: 64 }, contraries: { $list: { $obj: CONTR_T }, max: 64 },
+    link: 'enum:last|weakest', ordering: 'enum:elitist|democratic', transpose: 'bool', supports: { $list: { $obj: ATT_T }, max: 600 }, support: 'enum:' + SUPPORTS.join('|'),
   };
   const REQ = { 'truth-table': ['formula|formulas'], equivalent: ['formulas'], entails: ['goal'], 'normal-form': ['formula', 'form'], sat: ['formula|formulas'],
     resolution: ['premises|goal'], proof: ['proof'], horn: ['formulas', 'goal'], 'many-valued': ['formula', 'logic'], 'fol-eval': ['formula', 'domain|size'],
     unify: ['terms'], 'fol-resolution': ['premises|goal'], syllogism: ['mood', 'figure'], kripke: ['worlds'], tableau: ['formula|goal'],
     epistemic: ['worlds|puzzle', 'formula'], ltl: ['trace', 'formula'], ctl: ['worlds|preset', 'formula'], dyadic: ['worlds', 'formula'], io: ['norms', 'goal', 'op'],
-    norms: ['norms', 'trace'], af: ['args'] };
+    norms: ['norms', 'trace'], af: ['args'], aspic: ['kb|rules'], bipolar: ['args'] };
   const LANG_OF = { 'fol-eval': 'fol', unify: 'fol', 'fol-resolution': 'fol', kripke: 'deontic', tableau: 'deontic', epistemic: 'epistemic', ltl: 'ltl', ctl: 'ctl', dyadic: 'dyadic' };
   const langOf = m => (m.task === 'normal-form' && FOL_FORMS.includes(m.form) ? 'fol' : LANG_OF[m.task] || 'prop');
   const ATOM_TASKS = ['truth-table', 'equivalent', 'entails', 'many-valued', 'io'];
@@ -1419,10 +1652,14 @@
     io: [['entails', 'triggered'], []],
     norms: [['violations', 'fulfilments', 'pending', 'conflicts', 'steps', 'frame'], ['violationsPerStep', 'activePerStep']],
     af: [['extensions', 'credulous', 'skeptical', 'accepted', 'inCount', 'steps', 'frame'], ['labels']],
+    aspic: [['args', 'attacks', 'defeats', 'extensions', 'credulous', 'skeptical', 'accepted', 'inCount', 'subClosed', 'strictClosed', 'directConsistent',
+      'indirectConsistent', 'transposed', 'wellFormed', 'axiomsConsistent', 'steps', 'frame'], ['labels']],
+    bipolar: [['extensions', 'credulous', 'skeptical', 'accepted', 'inCount', 'attacks', 'direct', 'supported', 'secondary', 'mediated', 'extended', 'safe', 'closed',
+      'steps', 'frame'], ['labels']],
   };
   const CODES = ['budget', 'bound', 'trace-truncated', 'size', 'vacuous', 'correspondence', 'deadlock', 'not-serial', 'not-equivalence', 'inconsistent-input',
     'conflict', 'unresolved', 'no-stable', 'occurs', 'clash', 'grid-only', 'scene-truncated', 'series-truncated', 'contradiction', 'nd-error', 'nd-open',
-    'nd-goal', 'boundary', 'finite', 'empty', 'parse', 'norm'];
+    'nd-goal', 'boundary', 'finite', 'empty', 'parse', 'norm', 'not-transposed', 'axioms-inconsistent', 'not-well-formed', 'postulate'];
   /** every formula field of a model, in a fixed order: [text, path] */
   function formulaFields(m) {
     const out = [], L = (k) => { if (Array.isArray(m[k])) m[k].forEach((s, i) => { if (typeof s === 'string') out.push([s, `model.${k}[${i}]`]); }); };
@@ -1432,6 +1669,13 @@
     L('announce'); L('input');
     if (Array.isArray(m.norms)) m.norms.forEach((nm, i) => { for (const f of ['cond', 'act', 'deadline', 'until']) if (isObj(nm) && typeof nm[f] === 'string') out.push([nm[f], `model.norms[${i}].${f}`]); });
     if (Array.isArray(m.proof)) m.proof.forEach((ln, i) => { if (isObj(ln) && typeof ln.f === 'string') out.push([ln.f, `model.proof[${i}].f`]); });
+    if (Array.isArray(m.kb)) m.kb.forEach((k, i) => { if (isObj(k) && typeof k.f === 'string') out.push([k.f, `model.kb[${i}].f`]); });
+    if (Array.isArray(m.rules)) m.rules.forEach((r, i) => {
+      if (!isObj(r)) return;
+      if (Array.isArray(r.body)) r.body.forEach((b, j) => { if (typeof b === 'string') out.push([b, `model.rules[${i}].body[${j}]`]); });
+      if (typeof r.head === 'string') out.push([r.head, `model.rules[${i}].head`]);
+    });
+    if (Array.isArray(m.contraries)) m.contraries.forEach((c, i) => { for (const f of ['u', 'v']) if (isObj(c) && typeof c[f] === 'string') out.push([c[f], `model.contraries[${i}].${f}`]); });
     return out;
   }
   /** the agents a formula names (K_a, B_a, groups, [a] / <a>) */
@@ -1520,11 +1764,17 @@
       for (const [f, p] of parsed) for (const a of agentsOf(f)) if (!ags.includes(a)) { E('agent', p, `the agent ${a} is not in model.agents`); break; }
     }
     if (task === 'ltl' && m.loop !== undefined && Array.isArray(m.trace) && m.loop >= m.trace.length) E('value', 'model.loop', 'needs a position of the trace');
-    if (task === 'af' && Array.isArray(m.args)) {
+    if ((task === 'af' || task === 'bipolar') && Array.isArray(m.args)) {
       const aids = new Set();
       m.args.forEach((a, i) => { if (aids.has(a.id)) E('duplicate', `model.args[${i}].id`, `the argument ${a.id} is listed twice`); aids.add(a.id); });
       (m.attacks || []).forEach((e, i) => { for (const f of ['u', 'v']) if (!aids.has(e[f])) E('ref', `model.attacks[${i}].${f}`, 'not an argument of the framework'); });
+      if (task === 'bipolar') (m.supports || []).forEach((e, i) => { for (const f of ['u', 'v']) if (!aids.has(e[f])) E('ref', `model.supports[${i}].${f}`, 'not an argument of the framework'); });
       if (m.arg !== undefined && !aids.has(m.arg)) E('ref', 'model.arg', 'not an argument of the framework');
+    }
+    if (task === 'aspic') {
+      for (const [f, p] of parsed) if ((p === 'model.goal' || /^model\.(kb|rules|contraries)\[/.test(p)) && !litOf(f)) E('literal', p, 'needs a literal (an atom or ¬atom)');
+      const rids = new Set();
+      (m.rules || []).forEach((r, i) => { if (rids.has(r.id)) E('duplicate', `model.rules[${i}].id`, `the rule ${r.id} is listed twice`); rids.add(r.id); });
     }
     if ((task === 'norms' || task === 'io') && Array.isArray(m.norms)) {
       const nids = new Set();
@@ -1552,6 +1802,7 @@
     for (const f of ['pick', 'at', 'pos', 'step', 'ext']) sx(m[f], 'model.' + f);
     const L = (k, fs) => { if (Array.isArray(m[k])) m[k].forEach((x, i) => { if (isObj(x)) for (const f of fs) sx(x[f], `model.${k}[${i}].${f}`); }); };
     L('assign', ['value']); L('worlds', ['x', 'y']); L('edges', ['on']); L('args', ['x', 'y']); L('attacks', ['on']); L('norms', ['on']);
+    L('kb', ['on']); L('rules', ['on']); L('supports', ['on']);
     return out;
   }
   /** keys(spec) → [[key, path]]: the labels of worlds and arguments */
@@ -1941,6 +2192,55 @@
       const nodes = args.map((a, i) => ({ s: a.id, key: a.label, x: isNum(num(a.x, env, NaN)) ? num(a.x, env, NaN) : undefined, y: isNum(num(a.y, env, NaN)) ? num(a.y, env, NaN) : undefined, c: lab[i] === 1 ? 'ok' : lab[i] === 0 ? 'bad' : 'warn' }));
       R.scene = graphScene(nodes, att.map(([u, v]) => ({ u, v, c: 'muted', both: att.some(([a, b]) => a === v && b === u) })), m.view);
     },
+    aspic({ m, env, D, S, SE, R, goal, setTrace }) {
+      const th = { kb: (m.kb || []).filter(k => on(k.on, env)), rules: (m.rules || []).filter(r => on(r.on, env)), contraries: (m.contraries || []).map(c => [c.u, c.v]) };
+      const A = aspic(th, { link: m.link, ordering: m.ordering, transpose: m.transpose });
+      A.codes.forEach(c => D.add(c));
+      const r = afSolve(A.n, A.att, D), sem = m.semantics || 'grounded', exts = sem === 'grounded' ? [r.grounded] : r[sem];
+      if (sem === 'stable' && !exts.length) D.add('no-stable');
+      S.args = A.n; S.attacks = A.attacks.length; S.defeats = A.defeats.length; S.extensions = exts.length;
+      S.transposed = A.transposed; S.wellFormed = A.wellFormed; S.axiomsConsistent = A.axiomsConsistent;
+      const pz = A.postulates(exts); Object.assign(S, pz);
+      if (!pz.subClosed || !pz.strictClosed || !pz.directConsistent || !pz.indirectConsistent) D.add('postulate');
+      const g = goal ? litOf(goal) : null, has = l => A.args.some((a, i) => l[i] === 1 && a.conc === g);
+      if (g) { S.credulous = exts.some(has); S.skeptical = exts.length > 0 && exts.every(has); }
+      const shownIdx = Math.max(0, Math.min(exts.length - 1, Math.floor(num(m.ext, env, 0))));
+      let lab = exts.length ? exts[shownIdx] : A.args.map(() => 0.5);
+      const total = r.iters.length;
+      if (sem === 'grounded' && m.step !== undefined) { const kk = frameOf(m, env, total); lab = kk === 0 ? A.args.map(() => 0.5) : r.iters[kk - 1]; }
+      S.steps = sem === 'grounded' ? total : 0; S.frame = sem === 'grounded' ? frameOf(m, env, total) : 0;
+      if (g) S.accepted = has(lab);
+      S.inCount = lab.filter(v => v === 1).length; SE.labels = lab.slice();
+      const nm = i => 'A' + (i + 1);
+      const lines = A.args.map((a, i) => ({ s: nm(i) + ': ' + (a.rule < 0 ? showLit(a.conc) + (A.kb[a.kb].kind === 'axiom' ? ' (axiom)' : '') : a.subs.map(nm).join(', ') + (A.rules[a.rule].kind === 'strict' ? ' → ' : ' ⇒ ') + showLit(a.conc)),
+        c: lab[i] === 1 ? 'ok' : lab[i] === 0 ? 'bad' : 'warn' }))
+        .concat(A.attacks.map(([u, v, k]) => ({ s: nm(u) + ' ' + k + ' ' + nm(v) + (A.defeats.some(([x, y]) => x === u && y === v) ? ' ✓' : ' ✗'), c: 'muted' })));
+      setTraceFixed(setTrace, lines, S);
+      const nodes = A.args.map((a, i) => ({ s: nm(i), sub: showLit(a.conc), c: lab[i] === 1 ? 'ok' : lab[i] === 0 ? 'bad' : 'warn' }));
+      if (nodes.length <= 60) R.scene = graphScene(nodes, A.att.map(([u, v]) => ({ u, v, c: 'muted', both: A.att.some(([a, b]) => a === v && b === u) })), m.view);
+    },
+    bipolar({ m, env, D, S, SE, R }) {
+      const args = m.args || [], ix = new Map(args.map((a, i) => [a.id, i]));
+      const pairs = l => (l || []).filter(e => on(e.on, env)).map(e => [ix.get(e.u), ix.get(e.v)]).filter(([a, b]) => a !== undefined && b !== undefined);
+      const att = pairs(m.attacks), sup = pairs(m.supports), B = bipolar(args.length, att, sup, m.support);
+      const r = afSolve(args.length, B.att, D), sem = m.semantics || 'grounded', exts = sem === 'grounded' ? [r.grounded] : r[sem];
+      if (sem === 'stable' && !exts.length) D.add('no-stable');
+      S.extensions = exts.length; S.attacks = B.att.length;
+      for (const k of ['direct', 'supported', 'secondary', 'mediated', 'extended']) S[k] = Object.values(B.kind).filter(x => x === k).length;
+      const q = m.arg !== undefined ? ix.get(m.arg) : undefined;
+      if (q !== undefined) { S.credulous = exts.some(e => e[q] === 1); S.skeptical = exts.every(e => e[q] === 1); }
+      const shownIdx = Math.max(0, Math.min(exts.length - 1, Math.floor(num(m.ext, env, 0))));
+      let lab = exts.length ? exts[shownIdx] : args.map(() => 0.5);
+      const total = r.iters.length;
+      if (sem === 'grounded' && m.step !== undefined) { const kk = frameOf(m, env, total); lab = kk === 0 ? args.map(() => 0.5) : r.iters[kk - 1]; }
+      S.steps = sem === 'grounded' ? total : 0; S.frame = sem === 'grounded' ? frameOf(m, env, total) : 0;
+      if (q !== undefined) S.accepted = lab[q] === 1;
+      S.inCount = lab.filter(v => v === 1).length; SE.labels = lab.slice(); S.safe = B.safe(lab); S.closed = B.closed(lab);
+      const nodes = args.map((a, i) => ({ s: a.id, key: a.label, x: isNum(num(a.x, env, NaN)) ? num(a.x, env, NaN) : undefined, y: isNum(num(a.y, env, NaN)) ? num(a.y, env, NaN) : undefined, c: lab[i] === 1 ? 'ok' : lab[i] === 0 ? 'bad' : 'warn' }));
+      const edges = B.att.map(([u, v]) => ({ u, v, c: B.kind[u + ',' + v] === 'direct' ? 'bad' : 'warn', both: B.att.some(([a, b]) => a === v && b === u) }))
+        .concat(sup.map(([u, v]) => ({ u, v, c: 'ok' })));
+      R.scene = graphScene(nodes, edges, m.view);
+    },
   };
   function hasDeon(g) { if (!g || typeof g !== 'object') return false; if (['O', 'P', 'F'].includes(g.t)) return true; return ['a', 'b', 'c'].some(k => hasDeon(g[k])); }
   function atomsCount(g) { let n = 0; (function go(h) { if (!h || typeof h !== 'object') return; if (h.t === 'atom' || h.t === 'pred') n++; for (const k of ['a', 'b']) if (h[k]) go(h[k]); })(g); return n; }
@@ -1970,7 +2270,7 @@
      10. The API for other engines (philo@1, rhetoric@1, law@1, agents@1): stable names, documented in docs/library/logic.md §9 */
   /** entails(premises, conclusion, opts) → {valid, counter, codes}: opts.logic 'prop' (default; truth tables, the first countermodel in
       row order TT…T first), a many-valued logic (k3, lp, l3, lukasiewicz, godel, product: designation preserved on the level grid),
-      a modal system K, D, T, K4, S4 (tableaux; local consequence), or 'fol' (no countermodel among the structures with at most
+      a modal system K, D, T, K4, S4, B, S5 (tableaux; local consequence), or 'fol' (no countermodel among the structures with at most
       opts.maxSize ≤ 3 elements: code bounded; valid is then true only up to that size) */
   function entails(prem, concl, opts) {
     opts = opts || {}; const logic = opts.logic || 'prop', codes = [];
@@ -2062,6 +2362,8 @@
     checkProof, structure, evalFol, freeVars, unify, prenex, skolem, folClauses, folResolution, syllogism,
     kmodel, satK, restrict, equivClose, frameProps, axiomValid, tableau, puzzle, ctlSat, ltlVals, MUTEX,
     ioLogic, evalNorms, normMonitor, afSolve, AF, diagSet,
+    // added: ASPIC+ structured argumentation, bipolar argumentation, tableaux for B and S5 (through tableau / entails)
+    aspic, bipolar, litOf, tableauGlobal, SUPPORTS,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

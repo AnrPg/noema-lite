@@ -1,0 +1,16 @@
+{
+ "title": "Das Condorcet-Paradoxon: Mehrheiten im Kreis",
+ "intro": "Drei Wählergruppen ordnen die Kandidaten A, B und C. Gruppe 1 wählt A > B > C, Gruppe 2 B > C > A und Gruppe 3 C > A > B. Stellen Sie die Größe jeder Gruppe ein. Vergleichen Sie die Kandidaten paarweise: Ein positiver Vorsprung bedeutet, dass eine Mehrheit den ersten vorzieht. Verliert jeder Kandidat gegen einen anderen, bilden die Mehrheiten einen Zyklus und es gibt keinen Condorcet-Sieger – trotzdem nennen relative Mehrheitswahl, Instant-Runoff und Borda-Wahl einen Sieger. Im Graphen zeigt ein Pfeil vom Sieger jedes Paares zum Verlierer; Pfeile, die zu einem Zyklus gehören, sind markiert. Die Sieger sind nummeriert: 1 = A, 2 = B, 3 = C; 0 bedeutet Gleichstand oder kein Sieger.",
+ "n1Label": "Gruppe 1: A > B > C (Wähler)",
+ "n2Label": "Gruppe 2: B > C > A (Wähler)",
+ "n3Label": "Gruppe 3: C > A > B (Wähler)",
+ "abLabel": "Vorsprung von A vor B",
+ "bcLabel": "Vorsprung von B vor C",
+ "caLabel": "Vorsprung von C vor A",
+ "cycleLabel": "Die Mehrheiten bilden einen Zyklus",
+ "cwLabel": "Condorcet-Sieger",
+ "plLabel": "Sieger der relativen Mehrheitswahl",
+ "irvLabel": "Sieger des Instant-Runoff",
+ "bordaLabel": "Sieger der Borda-Wahl",
+ "graphTitle": "Mehrheitsgraph: ein Pfeil vom Sieger jedes Paares zum Verlierer"
+}

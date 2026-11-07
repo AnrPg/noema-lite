@@ -131,3 +131,7 @@ engine only writes the notes: the page plays them on the main thread, after a ta
   say. Śruti tunings (22 divisions) are possible through `cents` or `edo`.
 - Roman numeral analysis reads one chord at a time in a given key; it does not find keys or modulations.
 - IntCal-like large data are not needed; the only embedded table is Forte's list of 208 set classes (music21, BSD-3-Clause).
+
+## Uses the kernel
+
+No duplicated facility (no time loop of its own beyond the score, no randomness, no root finding): nothing to move (checked 2026-11-07).

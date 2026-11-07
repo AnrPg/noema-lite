@@ -1,0 +1,17 @@
+{
+ "id": "vehicles-in-the-park",
+ "runtime": "sim-spec@1",
+ "entry": "activities/vehicles-in-the-park/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "vehicles-in-the-park-still",
+  "text": "A by-law of 1958 forbids vehicles in the park. A car, an ambulance and a tank on a plinth are all vehicles, and in everyday speech so is a bicycle, but the by-law means motor vehicles only, and that narrower reading wins. A later, more specific rule lets a vehicle on an emergency call enter, so it beats the ban. A war memorial is an exception written into the ban itself, so the ban gives way. The picture shows each rule as a dot: green where it fires, red where it applies but is defeated, grey where it does not apply. Arrows run from a stronger rule to the weaker one it beats. This is H. L. A. Hart's example (1958), worked as defeasible logic."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

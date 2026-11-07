@@ -1,0 +1,1655 @@
+{
+ "names": [
+  "good: Schelling segregation with a slider on the wanted share",
+  "good: Boids order parameter",
+  "good: well-mixed SIR with replications",
+  "good: Ising at a temperature from a slider, an interrupt changes it",
+  "good: sugarscape wealth histogram",
+  "good: wolves and sheep",
+  "good: a custom grid model with patches and a gradient walk",
+  "good: a network voter model with an edge list",
+  "good: DeGroot averaging on a generated small world",
+  "good: FIPA messages and an inbox aggregate",
+  "good: BDI agents, open-minded, with a goal they can drop",
+  "good: a prohibition with a sanction",
+  "good: Contract Net",
+  "good: a second-price auction, truthful bidding",
+  "good: Rubinstein bargaining",
+  "good: the glove game by a table",
+  "good: Axelrod tournament",
+  "good: a weighted voting game by an expression",
+  "bad: nothing but outputs",
+  "bad: template with foreign parts and parameters",
+  "bad: set without a template, a protocol with breeds",
+  "bad: names reused and built-in",
+  "bad: actions missing their fields",
+  "bad: space parts in the wrong space",
+  "bad: a network without edges, patches on a network",
+  "bad: BDI with a goal without a plan and a plan with a foreign goal",
+  "bad: aggregates and reporters missing expressions",
+  "bad: interrupts and norms that do not match",
+  "bad: protocol tables of the wrong size",
+  "bad: an auction with values for the wrong number of bidders, bne in a second-price auction",
+  "bad: a coalition with both v and table, weights wrong",
+  "bad: kinds wrong"
+ ],
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "want",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 0.8,
+     "default": 0.3,
+     "step": 0.05
+    }
+   ],
+   "model": {
+    "template": "schelling",
+    "set": {
+     "want": "want"
+    },
+    "steps": 60
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "sim",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "similar"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "final",
+     "reporter": "similar"
+    },
+    {
+     "id": "sp",
+     "kind": "scene",
+     "of": "space",
+     "colorBy": "group"
+    },
+    {
+     "id": "st",
+     "kind": "scalar",
+     "of": "steps"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "template": "boids",
+    "set": {
+     "N": 100
+    },
+    "steps": 100
+   },
+   "outputs": [
+    {
+     "id": "o",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "order"
+    },
+    {
+     "id": "mx",
+     "kind": "scalar",
+     "of": "stat",
+     "reporter": "order",
+     "stat": "max"
+    },
+    {
+     "id": "sp",
+     "kind": "scene",
+     "of": "space",
+     "arrows": true
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.1,
+     "max": 0.5,
+     "default": 0.25,
+     "step": 0.01
+    }
+   ],
+   "model": {
+    "template": "sirwell",
+    "set": {
+     "N": 1000,
+     "beta": "beta"
+    },
+    "replications": {
+     "n": 5,
+     "level": 0.95
+    }
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "replMean",
+     "reporter": "R"
+    },
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "replLo",
+     "reporter": "R"
+    },
+    {
+     "id": "hi",
+     "kind": "scalar",
+     "of": "replHi",
+     "reporter": "R"
+    },
+    {
+     "id": "v",
+     "kind": "series",
+     "of": "replValues",
+     "reporter": "R"
+    },
+    {
+     "id": "fl",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "repl-cut"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "T",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 1,
+     "max": 4,
+     "default": 1.5,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "template": "ising",
+    "set": {
+     "size": 20,
+     "T": "T"
+    },
+    "steps": 200,
+    "interrupts": [
+     {
+      "at": 100,
+      "set": {
+       "T": 4
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "m"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "count",
+     "breed": "spin"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "template": "sugarscape",
+    "steps": 100
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "series",
+     "of": "hist",
+     "hist": "wealth"
+    },
+    {
+     "id": "e",
+     "kind": "series",
+     "of": "histEdges",
+     "hist": "wealth"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "final",
+     "reporter": "gini"
+    },
+    {
+     "id": "w",
+     "kind": "series",
+     "of": "agentVar",
+     "var": "wealth"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "template": "wolfsheep",
+    "steps": 300
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "nSheep"
+    },
+    {
+     "id": "w",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "nWolves"
+    },
+    {
+     "id": "cs",
+     "kind": "scalar",
+     "of": "count",
+     "breed": "sheep"
+    },
+    {
+     "id": "ex",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "extinct"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "grid",
+     "nx": 30,
+     "ny": 30,
+     "torus": false,
+     "neighbourhood": "moore",
+     "capacity": 5
+    },
+    "globals": {
+     "rate": 0.1
+    },
+    "patches": {
+     "vars": {
+      "food": "px/30"
+     },
+     "rules": [
+      {
+       "var": "food",
+       "expr": "min(1, food + rate)"
+      }
+     ],
+     "diffuse": [
+      {
+       "var": "food",
+       "rate": "0.1"
+      }
+     ]
+    },
+    "breeds": [
+     {
+      "id": "ant",
+      "count": 50,
+      "vars": {
+       "en": {
+        "init": "5"
+       }
+      },
+      "rules": [
+       {
+        "do": "move",
+        "how": "gradient",
+        "patch": "food",
+        "vision": "2"
+       },
+       {
+        "do": "eat",
+        "patch": "food",
+        "amount": "0.5",
+        "into": "en"
+       },
+       {
+        "do": "set",
+        "var": "en",
+        "expr": "en - 0.3"
+       },
+       {
+        "do": "die",
+        "when": "en < 0"
+       },
+       {
+        "do": "reproduce",
+        "when": "en > 10",
+        "share": {
+         "en": 0.5
+        }
+       }
+      ]
+     }
+    ],
+    "reporters": [
+     {
+      "id": "ants",
+      "fn": "count"
+     },
+     {
+      "id": "meanE",
+      "fn": "mean",
+      "expr": "en"
+     },
+     {
+      "id": "totalFood",
+      "of": "patches",
+      "fn": "sum",
+      "expr": "food"
+     }
+    ],
+    "steps": 100,
+    "schedule": "random",
+    "stop": "ants == 0"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "ants"
+    },
+    {
+     "id": "sp",
+     "kind": "scene",
+     "of": "space",
+     "patch": "food"
+    },
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "ops"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "network",
+     "edges": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       0,
+       2
+      ]
+     ]
+    },
+    "breeds": [
+     {
+      "id": "v",
+      "count": 4,
+      "place": "node",
+      "vars": {
+       "op": {
+        "init": "id < 2 ? 1 : 0",
+        "type": "bool"
+       }
+      },
+      "rules": [
+       {
+        "do": "adopt",
+        "var": "op"
+       }
+      ]
+     }
+    ],
+    "reporters": [
+     {
+      "id": "mean",
+      "fn": "mean",
+      "expr": "op"
+     }
+    ],
+    "steps": 50
+   },
+   "outputs": [
+    {
+     "id": "m",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "mean"
+    },
+    {
+     "id": "sp",
+     "kind": "scene",
+     "of": "space",
+     "edges": true,
+     "colorBy": "op"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "template": "degroot",
+    "set": {
+     "N": 30
+    }
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "spread"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "final",
+     "reporter": "mean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "network",
+     "generate": {
+      "kind": "ring",
+      "n": 10,
+      "k": 1
+     }
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 10,
+      "place": "node",
+      "vars": {
+       "v": {
+        "init": "id"
+       }
+      },
+      "rules": [
+       {
+        "do": "send",
+        "perf": "inform",
+        "to": "neighbours",
+        "content": "v"
+       },
+       {
+        "do": "set",
+        "var": "v",
+        "expr": "heard > 0 ? sumc/heard : v"
+       }
+      ]
+     }
+    ],
+    "aggregates": [
+     {
+      "id": "heard",
+      "of": "inbox",
+      "fn": "count",
+      "perf": "inform"
+     },
+     {
+      "id": "sumc",
+      "of": "inbox",
+      "fn": "sum",
+      "expr": "content"
+     }
+    ],
+    "reporters": [
+     {
+      "id": "spread",
+      "fn": "var",
+      "expr": "v"
+     }
+    ],
+    "steps": 30,
+    "schedule": "sync"
+   },
+   "outputs": [
+    {
+     "id": "mc",
+     "kind": "series",
+     "of": "messageCount",
+     "perf": "inform"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "messages"
+    },
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "spread"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "grid",
+     "nx": 20,
+     "ny": 20
+    },
+    "globals": {
+     "goal": 10
+    },
+    "breeds": [
+     {
+      "id": "r",
+      "count": 3,
+      "vars": {
+       "pos": {
+        "init": "0"
+       },
+       "fuel": {
+        "init": "5"
+       }
+      },
+      "bdi": {
+       "commitment": "open",
+       "goals": [
+        {
+         "id": "reach",
+         "when": "pos < goal",
+         "achieved": "pos >= goal",
+         "impossible": "fuel <= 0",
+         "priority": "1"
+        }
+       ],
+       "plans": [
+        {
+         "id": "step",
+         "goal": "reach",
+         "context": "fuel > 0",
+         "body": [
+          {
+           "do": "set",
+           "var": "pos",
+           "expr": "pos + 1"
+          },
+          {
+           "do": "set",
+           "var": "fuel",
+           "expr": "fuel - 1"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ],
+    "reporters": [
+     {
+      "id": "mp",
+      "fn": "mean",
+      "expr": "pos"
+     }
+    ],
+    "steps": 20
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "bdi",
+     "name": "achieved"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "bdi",
+     "name": "dropped"
+    },
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "reporter",
+     "reporter": "mp"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "none"
+    },
+    "breeds": [
+     {
+      "id": "car",
+      "count": 50,
+      "vars": {
+       "speed": {
+        "init": "rnd*2"
+       },
+       "fine": {
+        "init": "0"
+       }
+      },
+      "rules": [
+       {
+        "do": "set",
+        "var": "speed",
+        "expr": "fine > 0 ? rnd : rnd*2"
+       },
+       {
+        "do": "set",
+        "var": "fine",
+        "expr": "fine",
+        "when": "speed > 1",
+        "act": "speeding"
+       }
+      ]
+     }
+    ],
+    "norms": [
+     {
+      "id": "limit",
+      "kind": "F",
+      "act": "speeding",
+      "breed": "car",
+      "sanction": {
+       "var": "fine",
+       "add": "1"
+      }
+     }
+    ],
+    "reporters": [
+     {
+      "id": "mean",
+      "fn": "mean",
+      "expr": "speed"
+     }
+    ],
+    "steps": 20
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "series",
+     "of": "violations",
+     "norm": "limit"
+    },
+    {
+     "id": "tv",
+     "kind": "scalar",
+     "of": "violations"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "fulfilments"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "contractnet",
+     "tasks": 20,
+     "contractors": 5,
+     "costMin": 1,
+     "costMax": 10
+    }
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "totalCost"
+    },
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "optimalCost"
+    },
+    {
+     "id": "l",
+     "kind": "series",
+     "of": "protocolSeries",
+     "name": "load"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "auction",
+     "format": "second",
+     "bidders": 4,
+     "rounds": 500,
+     "strategy": "truthful"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "revenue"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "dominance"
+    },
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "expectedRevenue"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "negotiation",
+     "method": "rubinstein",
+     "d1": 0.9,
+     "d2": 0.8
+    }
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "share1"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "closedForm"
+    },
+    {
+     "id": "o",
+     "kind": "series",
+     "of": "protocolSeries",
+     "name": "offers"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "coalition",
+     "players": 3,
+     "table": [
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "sh",
+     "kind": "series",
+     "of": "protocolSeries",
+     "name": "shapley"
+    },
+    {
+     "id": "ce",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "coreEmpty"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "ipd",
+     "strategies": [
+      "tft",
+      "alld",
+      "allc",
+      "grim",
+      "random"
+     ],
+     "rounds": 200,
+     "generations": 100
+    }
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "winner"
+    },
+    {
+     "id": "sc",
+     "kind": "series",
+     "of": "protocolSeries",
+     "name": "scores"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "coalition",
+     "players": 4,
+     "v": "w >= 51 ? 1 : 0",
+     "weights": [
+      40,
+      30,
+      20,
+      10
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "sh",
+     "kind": "series",
+     "of": "protocolSeries",
+     "name": "shapley"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {},
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "reporter": "r"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "template": "schelling",
+    "set": {
+     "size": 20,
+     "beta": 1
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 1
+     }
+    ],
+    "space": {
+     "kind": "none"
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "reporter": "nope"
+    },
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "count",
+     "breed": "wolf"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "set": {
+     "a": 1
+    },
+    "protocol": {
+     "kind": "coalition",
+     "players": 3,
+     "table": [
+      1,
+      2
+     ]
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 1
+     }
+    ],
+    "replications": {
+     "n": 3
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "nope"
+    },
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "space"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "beta",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0,
+     "max": 1,
+     "default": 0.5,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "space": {
+     "kind": "grid",
+     "nx": 10,
+     "ny": 10
+    },
+    "globals": {
+     "x": 1,
+     "beta": 2,
+     "g": 1
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 5,
+      "vars": {
+       "g": {
+        "init": "0"
+       },
+       "my_v": {
+        "init": "1"
+       }
+      }
+     },
+     {
+      "id": "a",
+      "count": 5
+     }
+    ],
+    "aggregates": [
+     {
+      "id": "p_z",
+      "of": "all",
+      "fn": "count"
+     }
+    ],
+    "steps": 10
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "count"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "none"
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 5,
+      "vars": {
+       "v": {
+        "init": "0",
+        "type": "cat"
+       }
+      },
+      "rules": [
+       {
+        "do": "set"
+       },
+       {
+        "do": "move"
+       },
+       {
+        "do": "eat"
+       },
+       {
+        "do": "hunt"
+       },
+       {
+        "do": "contact"
+       },
+       {
+        "do": "adopt",
+        "var": "zz"
+       },
+       {
+        "do": "send"
+       },
+       {
+        "do": "flock"
+       },
+       {
+        "do": "move",
+        "how": "towards",
+        "target": "b"
+       },
+       {
+        "do": "reproduce",
+        "share": {
+         "q": 0.5
+        }
+       },
+       {
+        "do": "send",
+        "perf": "cfp",
+        "to": "breed",
+        "breed": "q"
+       }
+      ]
+     }
+    ],
+    "steps": 5
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "count"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "continuous",
+     "w": 10,
+     "h": 10,
+     "nx": 5,
+     "edges": [
+      [
+       0,
+       1
+      ]
+     ],
+     "neighbourhood": "hex",
+     "capacity": 3
+    },
+    "patches": {
+     "vars": {
+      "food": "1"
+     },
+     "rules": [
+      {
+       "var": "zz",
+       "expr": "1"
+      }
+     ],
+     "diffuse": [
+      {
+       "var": "yy",
+       "rate": "1"
+      }
+     ]
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 5,
+      "place": "node"
+     },
+     {
+      "id": "b",
+      "count": 2,
+      "place": "empty",
+      "rules": [
+       {
+        "do": "move",
+        "how": "empty"
+       }
+      ]
+     }
+    ],
+    "steps": 5
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "count"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "network"
+    },
+    "patches": {
+     "vars": {
+      "f": "1"
+     }
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 5
+     }
+    ],
+    "steps": 5
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "count"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "none"
+    },
+    "breeds": [
+     {
+      "id": "r",
+      "count": 2,
+      "vars": {
+       "p": {
+        "init": "0"
+       }
+      },
+      "bdi": {
+       "goals": [
+        {
+         "id": "g1",
+         "when": "1",
+         "achieved": "p>3"
+        },
+        {
+         "id": "g2",
+         "when": "1",
+         "achieved": "0"
+        }
+       ],
+       "plans": [
+        {
+         "id": "p1",
+         "goal": "g1",
+         "body": [
+          {
+           "do": "set",
+           "var": "p",
+           "expr": "p+1"
+          },
+          {
+           "do": "die"
+          }
+         ]
+        },
+        {
+         "id": "p2",
+         "goal": "g9",
+         "body": [
+          {
+           "do": "reproduce"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ],
+    "steps": 5
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "bdi",
+     "name": "zz"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "violations"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "grid",
+     "nx": 5,
+     "ny": 5
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 5
+     }
+    ],
+    "aggregates": [
+     {
+      "id": "s",
+      "of": "neighbours",
+      "fn": "sum"
+     },
+     {
+      "id": "f",
+      "of": "all",
+      "fn": "frac",
+      "perf": "inform"
+     }
+    ],
+    "reporters": [
+     {
+      "id": "o",
+      "fn": "order"
+     },
+     {
+      "id": "pp",
+      "of": "patches",
+      "fn": "count"
+     },
+     {
+      "id": "b",
+      "fn": "count",
+      "breed": "q"
+     }
+    ],
+    "hist": [
+     {
+      "id": "h",
+      "breed": "q",
+      "expr": "x",
+      "min": 0,
+      "max": 1
+     }
+    ],
+    "steps": 5
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "series",
+     "of": "hist",
+     "hist": "zz"
+    },
+    {
+     "id": "v",
+     "kind": "series",
+     "of": "agentVar",
+     "var": "qq"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "replMean",
+     "reporter": "o"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "none"
+    },
+    "globals": {
+     "g": 1
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": 5,
+      "vars": {
+       "v": {
+        "init": "0"
+       }
+      }
+     }
+    ],
+    "norms": [
+     {
+      "id": "n1",
+      "kind": "P",
+      "act": "x",
+      "sanction": {
+       "var": "v",
+       "add": "1"
+      }
+     },
+     {
+      "id": "n2",
+      "kind": "O",
+      "act": "y",
+      "breed": "zz",
+      "sanction": {
+       "var": "nope",
+       "add": "1"
+      }
+     }
+    ],
+    "interrupts": [
+     {
+      "at": 3,
+      "when": "t>1",
+      "set": {
+       "g": 2
+      }
+     },
+     {
+      "set": {
+       "q": 1
+      }
+     }
+    ],
+    "steps": 5
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "violations",
+     "norm": "n9"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "zz"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "stat",
+     "reporter": "r",
+     "stat": "zz"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "contractnet",
+     "tasks": 3,
+     "contractors": 2,
+     "costs": [
+      [
+       1,
+       2
+      ],
+      [
+       3
+      ]
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "totalCost"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "auction",
+     "format": "second",
+     "bidders": 3,
+     "values": [
+      1,
+      2
+     ],
+     "strategy": "bne"
+    }
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "protocol",
+     "name": "revenue"
+    },
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "protocolSeries",
+     "name": "revenue"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "protocol": {
+     "kind": "coalition",
+     "players": 2,
+     "v": "s",
+     "table": [
+      1,
+      1,
+      2
+     ],
+     "weights": [
+      1,
+      2,
+      3
+     ],
+     "kinds": [
+      0
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "sh",
+     "kind": "series",
+     "of": "protocolSeries",
+     "name": "shapley"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "agents@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "space": {
+     "kind": "grid",
+     "nx": 500,
+     "ny": 5
+    },
+    "breeds": [
+     {
+      "id": "a",
+      "count": "many +"
+     }
+    ],
+    "steps": 0,
+    "schedule": "chaos"
+   },
+   "outputs": [
+    {
+     "id": "z",
+     "kind": "series",
+     "of": "bogus"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "ok"
+    }
+   ]
+  }
+ ]
+}

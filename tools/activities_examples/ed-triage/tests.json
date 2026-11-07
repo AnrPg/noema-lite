@@ -1,0 +1,24 @@
+{
+ "cases": [
+  { "name": "4 doctors at 8 an hour: under 1 % leave, routine wait about 2 min (passes)", "exercise": "ch01-e920",
+    "steps": [ { "set": "doctors", "value": 4 }, { "set": "perHour", "value": 8 } ],
+    "expect": { "passed": true, "values": { "lwbs": [0.005, 0.015], "wqRoutine": [1, 3.5], "utilDoc": [0.5, 0.6] } } },
+  { "name": "3 doctors at 8 an hour: the wait is short but about 5 % leave unseen (fails)", "exercise": "ch01-e920",
+    "steps": [ { "set": "doctors", "value": 3 }, { "set": "perHour", "value": 8 } ],
+    "expect": { "passed": false, "values": { "lwbs": [0.04, 0.06], "wqRoutine": [6, 11] } } },
+  { "name": "the start: 2 doctors, the queue grows and one in five leaves (fails)", "exercise": "ch01-e920",
+    "steps": [ { "set": "doctors", "value": 2 }, { "set": "perHour", "value": 8 } ],
+    "expect": { "passed": false, "values": { "lwbs": [0.15, 0.23], "wqRoutine": [28, 45], "wqUrgent": [0, 4] } } },
+  { "name": "5 doctors: comfortable but over the staffing limit (fails)", "exercise": "ch01-e920",
+    "steps": [ { "set": "doctors", "value": 5 }, { "set": "perHour", "value": 8 } ],
+    "expect": { "passed": false, "values": { "lwbs": [0, 0.005] } } },
+  { "name": "3 doctors on a quiet day (6 an hour): good figures, but not the busy hour (fails)", "exercise": "ch01-e920",
+    "steps": [ { "set": "doctors", "value": 3 }, { "set": "perHour", "value": 6 } ],
+    "expect": { "passed": false, "values": { "lwbs": [0.01, 0.03], "wqRoutine": [2, 6] } } },
+  { "name": "4 doctors even at 10 an hour (passes)", "exercise": "ch01-e920",
+    "steps": [ { "set": "doctors", "value": 4 }, { "set": "perHour", "value": 10 } ],
+    "expect": { "passed": true, "values": { "lwbs": [0.015, 0.03], "wqRoutine": [3, 7] } } },
+  { "name": "explorer: the values are saved", "steps": [ { "set": "doctors", "value": 3 }, { "set": "perHour", "value": 5 } ],
+    "expect": { "state": [ "doctors", "perHour" ], "values": { "wqUrgent": [0, 1] } } }
+ ]
+}
