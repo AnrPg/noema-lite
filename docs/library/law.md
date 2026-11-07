@@ -34,7 +34,7 @@ There are 16 tasks (`model.task`):
 tasks.
 
 **Tests.**
-- `node tests/lib_law.js` has 157 assertions:
+- `node tests/lib_law.js` has 182 assertions:
   - the published values and every edge code;
   - the check codes;
   - the parity on `tests/fixtures/enginelib/law.json` (46 specs: 21 good, 25 bad);
@@ -94,6 +94,8 @@ Each table lists only that task's fields. Every field belongs to one table, `MOD
 | `order` | the criteria for the derived priorities: `superior` (`rank`, higher wins), `specialis` (a strictly larger body wins), `posterior` (a later `issued` wins). The default is all three in that order. |
 | `facts` / `toggles[] {lit, on}` | strict facts; a toggled fact holds while `on` > 0.5 |
 | `query` | the literal asked about |
+| `variant` | `blocking` (default) or `propagating` (ambiguity propagation, §2.1) |
+| `loops` | `undecided` (default) or `fail` (failure by looping, §2.1) |
 
 **aspic** — one of `premises`, `rules` or `schemes` is required.
 
@@ -104,6 +106,7 @@ Each table lists only that task's fields. Every field belongs to one table, `MOD
 | `rules[]` | `strict` or `defeasible`. A rule that concludes `~<rule id>` undercuts that rule. An `unless e` adds the undercutter `e ⇒ ~<id>`. |
 | `schemes[]` | `{id, scheme, if, then, rank, cqs: [{cq, lit?, on}], on, label}`: an instance of a scheme is a defeasible rule. A raised critical question is an ordinary premise (`lit`, default `cq_<id>_<cq>`) with an undercutter of the instance. |
 | `link` | `last` (default) or `weakest` |
+| `closure` | `none` (default) or `transposition`: the strict rules are closed under transposition (§2.2) |
 | `semantics` | `grounded` (default), `preferred`, `stable` or `complete` |
 
 **carneades** — `args` (≤ 100) is required.
@@ -119,8 +122,9 @@ Each table lists only that task's fields. Every field belongs to one table, `MOD
 
 | field | meaning |
 |---|---|
-| `positions[]` | `{kind: right \| duty \| privilege \| noright \| power \| liability \| immunity \| disability, holder, other, act: lit, on}` |
+| `positions[]` | `{kind: right \| duty \| privilege \| noright \| power \| liability \| immunity \| disability, holder, other, act: lit, passive, on}`; `passive: true` makes the act "stay passive about the atom" (Pass, §2.4), and then `act` must be an atom |
 | `ask` | the same shape without `on`: the position asked about |
+| `lindahl` | `{agent, atom, other?}`: compute Lindahl's one-agent type of `agent` about `atom`, and with `other` the joint alternatives (§2.4) |
 
 **proof** — `issues` (≤ 32) is required.
 

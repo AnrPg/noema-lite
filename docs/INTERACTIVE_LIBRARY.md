@@ -126,6 +126,8 @@ table: {
 - **Labels.** A field's label is `engine.author.f.lib.<field>` (`i18n/engine/en.arb`, a description for translators, drafts in every
   UI locale); a symbol (one or two letters, a name with a digit or a capital, a Greek letter) is its own label. A new word field
   needs its key, or `tests/activity_author.js` says which one is missing.
+- **Parts.** The same tables give the forms of the parts of a spec with several engines (`NoemaLibSchema.partsSchema`, the
+  author's kind *Several engines*): nothing more to export.
 - **The reference activity.** The author offers *Start from the reference activity* (the engine's `tools/activities_examples/<example>/`,
   shipped in `engine/activity_author_schemas.js` as `NoemaActivityRefs`) or *Blank*.
 

@@ -15,8 +15,8 @@ gives which verdict, which method elects whom, and which analysis counts a case 
 
 The Python twin is `tools/lib_philo.py`. It checks the spec and does not compute, and it embeds the same JSON tables (one source,
 written into both files). The tests are:
-- `node tests/lib_philo.js`: 98 assertions covering the reference values below, the edge cases and their codes, the checker, the
-  JS ↔ Python parity on `tests/fixtures/enginelib/philo.json` (25 specs), the adapter, the Worker and speed.
+- `node tests/lib_philo.js`: 111 assertions covering the reference values below, the edge cases and their codes, the checker, the
+  JS ↔ Python parity on `tests/fixtures/enginelib/philo.json` (33 specs), the adapter, the Worker and speed.
 - `node tests/enginelib.js`: the same parity once philo@1 is in the catalogue.
 
 The reference activity is `tools/activities_examples/condorcet-cycle`. The research is in the project's
@@ -67,6 +67,9 @@ act is returned as its **index** in the model's list (0 first), and **−1** mea
 | `arguments` (≤ 16) | `id`, `premises` (1–12 formulas), `conclusion` | propositional formulas in logic@1's language |
 | `inferences` (≤ 16) | `id`, `paksa` (bool), `sapaksa`, `vipaksa` (`all some none`) | an inference for Dignāga's wheel |
 | `bargains` (≤ 8) | `id`, `pts` (1–32 points [x, y]), `d` ([0, 0]) | the feasible set is the convex hull of the points; d is the disagreement point |
+| `ruleCodes` (≤ 16) | `id`, `rules` (1–32) `{id, b, c?, k?, x?}` | a moral code for rule consequentialism (§2.9): b benefit, c internalisation cost, k coordination exponent, x exploitation loss |
+| `streams` (≤ 16) | `id`, `head` (≤ 2000 numbers), `cycle` (1–64 numbers, repeated forever) | an infinite utility stream, eventually periodic (§2.11) |
+| `ubuntu` (≤ 16) | `id`, `options` (1–12) `{id, effects (≤ 64) {who, identity, solidarity, byAgent}}`, `wI`, `wS` (1) | a choice in Metz's relational terms (§2.12): Δidentity and Δsolidarity −1…1 per relationship |
 
 Built-in content (`TABLES`, the same in Python):
 - The trolley presets (§2.2), Kant's maxims, the trait lists, and the Gettier presets with the received intuition.
@@ -80,7 +83,7 @@ Built-in content (`TABLES`, the same in Python):
 | code | when |
 |---|---|
 | `format`, `value`, `enum`, `size`, `unknown-field` | the core's table walk |
-| `duplicate` | an id used twice in a part; a candidate listed or ranked twice; a strategy listed twice |
+| `duplicate` | an id used twice in a part; a candidate listed or ranked twice; a strategy listed twice; a rule twice in a code; an option twice in an ubuntu case |
 | `value` | a case without a preset or kAct and kNot; a trait outside its scheme; an axis that is not every candidate once; probabilities outside 0–1 or not summing to 1; a problem or game without a preset or its tables; an experiment without te or options and positions; a new thinker without born, died and trad; `iia` without `other`; a tournament, sorites or map output without its model part |
 | `size` | a problem's or game's tables that do not fit its acts, states, rows and columns; a prior of the wrong length |
 | `ref` | an unknown part, candidate, act, option, position, thinker or tournament strategy |
@@ -111,6 +114,12 @@ Built-in content (`TABLES`, the same in Python):
 | `too-many-atoms` | an argument has more than 12 atoms |
 | `states` | minimax regret on lotteries of different lengths |
 | `infeasible` | no bargaining solution exists |
+| `whole` · `partial` | a voting game or Gibbard–Satterthwaite check on a fractional ballot group, or on a partial ranking |
+| `incomparable` | overtaking or catching-up cannot rank the two streams |
+| `period` | the common period of two streams is over 4096 |
+| `impossibility` | `infiniteConflict` found a pair that Pareto ranks and infinite anonymity equates |
+| `missing` | a rule or ubuntu option that does not exist |
+| `none-permissible` | the honouring reading of ubuntu forbids every option |
 | `error` | an unexpected failure. The output is NaN, and the run does not throw |
 
 ## 2. Outputs and methods
@@ -392,6 +401,87 @@ The tournament:
   - `form`: 1 modus ponens, 2 modus tollens, 3 hypothetical syllogism, 4 disjunctive syllogism, 5 constructive dilemma; −1 affirming
     the consequent, −2 denying the antecedent; 0 other (Copi, Cohen & McMahon 2014).
 
+### 2.9 Rule consequentialism at an acceptance rate (`codeValue`, `ruleValue`, `idealCode`, `bestRate`, `idealShift`; series `codeCurve`, `rateAxis`)
+
+Hooker 2000 (*Ideal Code, Real World* §§ 1.5–1.7, 3.2): the right act is the one the ideal code requires, and the ideal code is the
+one whose internalisation by the overwhelming majority (Hooker: 90 %) has the greatest expected value, counting the cost of
+getting it internalised. A rate is needed because the best code at full acceptance can be poor at partial acceptance (the
+"collapse" and "partial compliance" objections; Mulgan 2001). Ridge 2006 (*Phil. Studies* 128:242) instead averages over every rate.
+
+The engine's explicit model of one rule, per head, at acceptance a ∈ [0, 1]:
+
+  V(a) = a · (b · a^k − c) − x · a · (1 − a)
+
+- b: the benefit to each accepter when everyone accepts; k ≥ 0: how much the benefit needs others to accept (a coordination rule
+  has k = 1; k = 0 none); c: the internalisation cost per accepter (Hooker's teaching cost: a longer, subtler code costs more); x:
+  the loss of an accepter exploited by non-accepters (a rule of trust).
+- A code's value is the sum of its rules' values. `codeValue` (`code`, `rate` = 0.9, `reading` `fixed` | `variable` — Ridge's
+  mean over a = 0, 0.01, …, 1 by the trapezoid rule), `ruleValue` (`code`, `rule`, `rate`), `idealCode` (`rate`, `reading`: the
+  index of the best code in `ruleCodes`, `tie`), `bestRate` (`code`: the rate in 0.01 steps where its value is highest),
+  `idealShift` (`rate`: 1 when the ideal code at that rate differs from the one at full acceptance), series `codeCurve` (`code`:
+  V at 101 rates) and `rateAxis`.
+
+The functional form is ours (a transparent teaching model of Hooker's criterion, not a formula of his); every term is set by the
+author.
+
+### 2.10 Strategic voting (`voteNash`, `voteNashUndominated`, `voteNashWinners`, `sincereNash`, `gsManipulable`, `manipulators`, `gsExists`)
+
+- **Voting games** (Farquharson 1969; Myerson & Weber 1993; Dhillon & Lockwood 2004, *GEB* 46:55). The election's ballot groups
+  are expanded into single voters (whole `n`, full rankings, ≤ 8 voters; codes `whole`, `partial`, `too-many`). A voter's
+  strategy is a ballot: plurality — the candidate voted for; antiplurality — the one voted against; the other methods (`borda
+  copeland minimax irv runoff schulze rankedPairs kemeny`) — any strict ranking. The outcome is the method's winner with ties
+  broken by the candidates' order. All Sᴺ profiles are searched (≤ 2·10⁶ evaluations, else `budget`). `voteNash`: the number of
+  pure Nash equilibria (no voter gets a candidate they prefer by changing their own ballot); `voteNashUndominated`: those in which
+  no voter uses a weakly dominated ballot (NaN with `budget` when the dominance search would pass 3·10⁷ comparisons);
+  `voteNashWinners`: how many different candidates win in some equilibrium; `sincereNash`: 1 if sincere voting is an equilibrium.
+  With unanimous voters every candidate wins in some equilibrium (all vote for it) — the classic reason for refinements.
+- **Gibbard 1973 / Satterthwaite 1975.** `gsManipulable` (`election`, `method`): 1 if one voter can get a preferred winner by
+  reporting another strict ranking (≤ 5 candidates); `manipulators`: how many voters can. `gsExists` (`method`, `m` 3–4, `n` 2–4):
+  over every profile of n voters on m candidates, the number of profiles where some voter can manipulate — the theorem made
+  visible (non-zero for every non-dictatorial method onto ≥ 3 candidates). The older `manipulable` (§2.3) searches the misreports of
+  one ballot group and stays as it was.
+
+### 2.11 Infinite ethics (`overtaking`, `catchingUp`, `truncCompare`, `discounted`, `limitAverage`, `paretoDominates`, `finiteAnonymous`, `infiniteAnonymous`, `infiniteConflict`; series `partialSums`)
+
+A stream is `head` followed by `cycle` forever; two streams are compared on D_t = Σ_{s ≤ t} (a_s − b_s), exactly, on the heads
+and one common period (lcm ≤ 4096, else `period`).
+
+| output | rule | source |
+|---|---|---|
+| `overtaking` | 1 if D_t > 0 from some t on, −1 if < 0, 0 if D_t = 0 from some t on, else NaN + `incomparable` | Atsumi 1965; von Weizsäcker 1965 |
+| `catchingUp` | a ≽ b iff liminf D_t ≥ 0; 1 / −1 / 0 / NaN + `incomparable` | Gale 1967 |
+| `truncCompare` | the sign of D_T (a finite truncation) | — |
+| `discounted` | Σ δᵗ u_t (closed form for the cycle), 0 ≤ δ < 1 | Ramsey 1928; Koopmans 1960 |
+| `limitAverage` | the mean of the cycle | — |
+| `paretoDominates` | a ≥ b everywhere and > somewhere | — |
+| `finiteAnonymous` | a is a finite permutation of b (equal from some point, the same multiset before) | — |
+| `infiniteAnonymous` | every value occurs equally often in a and b (finitely or infinitely), so a permutation of ℕ maps one onto the other | — |
+| `infiniteConflict` | 1 (and `impossibility`) when Pareto ranks the pair and infinite anonymity equates it | Van Liedekerke 1995; Lauwers 1997; Bostrom 2011; Askell 2018 |
+
+The demonstration: y = (1, 1, 0, 1, 0, …) Pareto-dominates x = (0, 1, 0, 1, …), and both have infinitely many 0s and 1s, so no
+ordering can have Pareto and full anonymity; overtaking keeps Pareto and finite anonymity and gives up completeness:
+(1, −1, 1, −1, …) against 0 has partial sums 1, 0, 1, 0 — incomparable by overtaking, better by catching-up. The existence of a
+complete ordering with Pareto and finite anonymity needs non-constructive choice (Zame 2007; Lauwers 2010), so no engine can show
+one: that limit is reported in the chapter, not computed.
+
+### 2.12 Metz's ubuntu as a relational scoring model (`ubuntuScore`, `ubuntuPermissible`, `ubuntuBest`)
+
+Metz 2007 (*J. Political Philosophy* 15:321, p. 338): "an action is right just insofar as it promotes shared identity among
+people grounded on good-will; an act is wrong to the extent that it fails to do so and tends to encourage the opposites of division
+and ill-will". Identity: thinking of oneself as part of a "we" and coordinating; solidarity (good-will): caring for the other's good
+and acting for it. Metz 2013 and 2022 (*A Relational Moral Theory*) read the principle as honouring (prizing) such relationships,
+not maximising them.
+
+Computable where it is: an option lists its effects on relationships as Δidentity and Δsolidarity (−1…1, `range` outside), with
+`byAgent` when it is the agent's own relationship.
+- `promote` (default): score = Σ wI · ΔI + wS · ΔS, where a gain in identity that comes with ill-will (ΔS < 0) is not counted —
+  identity not "grounded on good-will" (a cult, a mob); `ubuntuScore` (`case`, `option`).
+- `honour`: an option in which the agent's own relationship loses identity or solidarity is impermissible whatever the total
+  (`ubuntuPermissible`); among the permissible the promote score ranks. `ubuntuBest` (`case`, `reading`): the index of the best option
+  (`tie`, `none-permissible`).
+The weights and the numeric scale are the author's; the engine makes the structure of the two readings exact, not the size of a
+relationship.
+
 ## 3. Limits and speed
 
 - Every loop is bounded: ≤ 8 candidates, Kemeny ≤ 40 320 orders, manipulation ≤ 6 candidates, ≤ 2000 rounds × 20 reps, ≤ 2000
@@ -403,9 +493,11 @@ The tournament:
 ## 4. What is left out, and why
 
 - No free-text argument mapping, textual interpretation or phenomenology: they have no exact model to compute.
-- Metz's ubuntu principle (2007) and other theories that are not calculi appear only as positions and on the map.
-- Modal, deontic and epistemic logics and abstract argumentation belong to logic@1. Mini-apps call it directly.
-- Infinite ethics (Bostrom 2011) is out.
-- Strategic equilibria of voting games are out. Only the misreports of one group are searched.
-- Rule utilitarianism needs a theory of acceptance rates, so it is not modelled. The act calculus and the universalisation tests are.
+- Metz's ubuntu principle is modelled as a relational score in two readings (§2.12); other theories that are not calculi appear
+  only as positions and on the map.
+- Modal, deontic and epistemic logics and abstract and structured argumentation (ASPIC+, bipolar) belong to logic@1. Mini-apps call it directly.
+- Infinite ethics covers eventually periodic streams (§2.11); a complete ordering with Pareto and anonymity cannot be computed
+  (it needs non-constructive choice), so it is stated, not shown.
+- Voting games search pure equilibria of ≤ 8 voters (§2.10); mixed and Bayesian (Poisson) voting equilibria are out.
+- Rule consequentialism uses an explicit acceptance-rate model (§2.9) whose terms the author sets.
 - The thinkers' dates for ancient India and China are the conventional ones. The engine does not settle dating debates.

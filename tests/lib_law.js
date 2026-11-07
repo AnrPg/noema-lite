@@ -43,6 +43,17 @@ const flag = c => sc('f_' + c, 'flag', { code: c });
   ok(run({ bicycle: true }).r1s === 0, 'Hart: a bicycle is not a vehicle under the by-law (the ranked definition beats ordinary speech): the ban does not apply');
   ok(run({ car: true, bicycle: true }).defeated === 1, 'a car and a bicycle: vehicle is strict (+Δ), so the definition rule r5 is defeated'); }
 
+{ // Antoniou, Billington, Governatori & Maher 2000 ("A flexible framework for defeasible logics", AAAI): ambiguity blocking vs propagating
+  const th = { task: 'rules', query: 'antimilitary', facts: ['quaker', 'republican'], rules: [{ id: 'r1', if: ['quaker'], then: 'pacifist' }, { id: 'r2', if: ['republican'], then: '~pacifist' }, { id: 'r3', if: ['republican'], then: 'footballfan' }, { id: 'r4', if: ['pacifist'], then: 'antimilitary' }, { id: 'r5', if: ['footballfan'], then: '~antimilitary' }] };
+  const O = [sc('h', 'holds'), sc('r', 'refuted'), sc('s', 'supported')];
+  let r = R(th, O); ok(r.out.h === 0 && r.out.r === 1 && !Number.isFinite(r.out.s), 'ambiguity blocking: pacifist is ambiguous, r4 never applies, so ¬antimilitary is proved (+∂); supported is NaN');
+  r = R({ ...th, variant: 'propagating' }, O); ok(r.out.h === 0 && r.out.r === 0 && r.out.s === 1, 'ambiguity propagating: pacifist is supported (+Σ), r4 opposes r5, neither antimilitary nor its negation is proved');
+  ok(R({ ...th, variant: 'propagating', query: '~antimilitary' }, O).out.s === 1, '… and ¬antimilitary is supported too (the ambiguity has spread)');
+  const lp = { task: 'rules', query: 'p', rules: [{ id: 'a', if: ['q'], then: 'p' }, { id: 'b', if: ['p'], then: 'q' }] };
+  r = R({ ...lp, loops: 'fail' }, [sc('u', 'undecided'), sc('h', 'holds'), flag('loop'), flag('undecided')]);
+  ok(r.out.u === 0 && r.out.h === 0 && r.out.f_loop === 1 && r.out.f_undecided === 0, 'failure by looping (Maier & Nute 2006; Billington 2008): the loop p ⇐ q ⇐ p is an unfounded set, so −∂p, code loop');
+  ok(R({ ...lp, loops: 'fail', rules: lp.rules.concat([{ id: 'c', then: '~p', unless: ['p'] }]) }, [sc('r', 'refuted')]).out.r === 1, '… so a rule with exception p applies: ¬p is proved (in the basic theory it would stay undecided)');
+  ok(R({ ...lp, rules: lp.rules.concat([{ id: 'c', then: '~p', unless: ['p'] }]) }, [sc('r', 'refuted')]).out.r === 0, '… without failure by looping it is not'); }
 // ---- 2. ASPIC+ and schemes (Modgil & Prakken 2013; Walton et al. 2008) ----
 { const nix = { task: 'aspic', query: 'pacifist', premises: [{ lit: 'quaker', kind: 'axiom' }, { lit: 'republican', kind: 'axiom' }], rules: [{ id: 'q', if: ['quaker'], then: 'pacifist' }, { id: 'rp', if: ['republican'], then: '~pacifist' }] };
   let r = R(nix, [sc('a', 'accepted'), sc('c', 'credulous'), sc('n', 'arguments'), sc('d', 'defeats')]);
@@ -60,6 +71,12 @@ const flag = c => sc('f_' + c, 'flag', { code: c });
   const big = { task: 'aspic', premises: Array.from({ length: 30 }, (_, i) => ({ lit: 'p' + i })), rules: Array.from({ length: 30 }, (_, i) => ({ id: 'r' + i, if: ['p' + i], then: 'q' })).concat(Array.from({ length: 30 }, (_, i) => ({ id: 'z' + i, if: ['q', 'p' + i], then: 'w' + i }))) };
   const t0 = Date.now(); r = R(big, [sc('n', 'arguments')]); ok(r.out.n === 400 && has(r, 'budget') && Date.now() - t0 < 2000, `ASPIC+ stops at 400 arguments with code budget (${Date.now() - t0} ms)`); }
 
+{ // Caminada & Amgoud 2007 ("On the evaluation of argumentation formalisms", AIJ 171:286): without closure under transposition the
+  // married / bachelor example violates consistency — m, b, hs and ¬hs are all justified; with the transposed strict rules none is
+  const ca = { task: 'aspic', premises: [{ lit: 'wr' }, { lit: 'go' }], rules: [{ id: 'd1', if: ['wr'], then: 'm' }, { id: 'd2', if: ['go'], then: 'b' }, { id: 's1', if: ['m'], then: 'hs', kind: 'strict' }, { id: 's2', if: ['b'], then: '~hs', kind: 'strict' }] };
+  const acc = (q, c) => R({ ...ca, query: q, closure: c || 'none' }, [sc('a', 'accepted'), sc('n', 'arguments')]).out;
+  ok(['m', 'b', 'hs', '~hs'].every(q => acc(q).a === 1) && acc('m').n === 6, 'no closure: m, b, hs and ¬hs all accepted (6 arguments) — the rationality postulate fails');
+  ok(['m', 'b', 'hs', '~hs'].every(q => acc(q, 'transposition').a === 0) && acc('m', 'transposition').n === 8, 'closure under transposition (m, ¬hs → ¬m … ): none of them accepted (8 arguments), consistency restored'); }
 // ---- 3. Carneades (Gordon, Prakken & Walton 2007; CarneadesDSL, van Gijzel & Nilsson 2014) ----
 { const mur = { task: 'carneades', query: 'murder', args: [{ id: 'arg1', if: ['kill', 'intent'], then: 'murder', weight: 0.8 }, { id: 'arg2', if: ['witness'], unless: ['unreliable'], then: 'intent', weight: 'w' }, { id: 'arg3', if: ['witness2'], unless: ['unreliable2'], then: '~intent', weight: 0.8 }], assume: ['kill', 'witness', 'witness2', 'unreliable2'], standards: [{ lit: 'intent', ps: 'brd' }] };
   let r = R(mur, [sc('a', 'acceptable'), sc('n', 'negation'), sc('s2', 'status', { at: 'arg2' }), sc('s3', 'status', { at: 'arg3' }), sc('s1', 'status', { at: 'arg1' })], { w: 0.3 });
@@ -86,6 +103,16 @@ const flag = c => sc('f_' + c, 'flag', { code: c });
   ok(r.out.h === 0, 'a power of A over B excludes B\'s immunity against A');
   ok(R({ task: 'hohfeld', positions: [{ kind: 'power', holder: 'A', other: 'B', act: 'assign' }], ask: { kind: 'right', holder: 'B', other: 'A', act: 'x' } }, [sc('h', 'holds')]).out.h === 0.5, 'nothing said: 0.5 (undetermined)'); }
 
+{ // Lindahl 1977 one-agent types: the permitted ones of Do(x,p), Do(x,¬p), Pass(x,p)
+  const L = pos => R({ task: 'hohfeld', positions: pos, lindahl: { agent: 'x', atom: 'p', other: 'y' } }, [sc('l', 'lindahl'), sc('o', 'lindahlOther'), sc('j', 'joint'), sc('c', 'jointCount'), { id: 'js', kind: 'series', of: 'joint' }, flag('conflict')]);
+  const d = (h, a, ps) => ({ kind: 'duty', holder: h, other: 'z', act: a, passive: !!ps });
+  ok(L([]).out.l === 1 && L([]).out.j === 127 && L([]).out.c === 7, 'no duties: type T1 (all three permitted), all 7 joint alternatives permitted');
+  ok(L([d('x', 'p')]).out.l === 4 && L([d('x', '~p')]).out.l === 6 && L([d('x', 'p', 1)]).out.l === 7, 'a duty to p → T4 {Do p}; to ¬p → T6 {Do ¬p}; to stay passive → T7 {Pass}');
+  ok(L([{ kind: 'right', holder: 'z', other: 'x', act: '~p' }]).out.l === 6, "z's right against x that ¬p is x's duty: T6 (correlatives first)");
+  const c = L([d('x', 'p'), d('x', '~p')]); ok(c.out.l === 0 && c.out.c === 0 && c.out.f_conflict === 1, 'duties to p and to ¬p: no alternative is left, type 0, code conflict');
+  const j = L([d('x', 'p'), d('y', 'p')]); ok(j.out.l === 4 && j.out.o === 4 && j.out.c === 1 && j.out.js.join('') === '1000000', 'both must see to p: the one joint alternative Do(x,p) ∧ Do(y,p)');
+  const k = L([d('x', 'p', 1)]); ok(k.out.c === 3 && k.out.js.join('') === '0000111', 'x must stay passive: the three where x passes');
+  ok(X.checkSpec({ model: { task: 'hohfeld', positions: [{ kind: 'duty', holder: 'x', other: 'y', act: '~p', passive: true }] }, outputs: [sc('h', 'holds')] }).some(p => p.code === 'value' && p.path === 'model.positions[0].act'), 'check: a passive position names an atom'); }
 // ---- 5. burdens and standards of proof ----
 { let r = R({ task: 'proof', issues: [{ id: 'g', p: 0.9, standard: 'decision' }], costs: { fp: 10, fn: 1 } }, [sc('t', 'threshold'), sc('e', 'established')]);
   near(r.out.t, 10 / 11, 1e-12, 'Kaplan 1968 with Blackstone\'s 10:1: convict iff p > 10/11'); ok(r.out.e === 0, '… so p = 0.9 is not enough');
@@ -117,6 +144,14 @@ const flag = c => sc('f_' + c, 'flag', { code: c });
   ok(pm.out.p === 1 && pm2.out.p === 0, 'a decision for π is permissible, for δ it is not (the precedent forces π)');
   ok(has(R({ ...base, facts: ['F21'] }, [sc('o', 'onPoint')]), 'no-precedent'), 'no on-point case: code no-precedent'); }
 
+{ // dimensions with magnitudes (Horty 2019; Prakken 2021): a precedent binds a fortiori only if the new case is at least as strong on every shared dimension
+  const D = (cv, fv, side) => R({ task: 'cases', dimensions: [{ id: 'sec', side: 'p' }], factors: [{ id: 'F1', side: 'p' }, { id: 'F2', side: 'd' }], cases: [{ id: 'A', factors: ['F1'], values: [{ dim: 'sec', v: cv }], outcome: 'p' }], facts: ['F1'], values: [{ dim: 'sec', v: fv }], side: side || 'p' }, [sc('f', 'forced'), sc('d', 'distinctions', { at: 'A' }), sc('s', 'shared', { at: 'A' }), sc('p', 'permissible')]).out;
+  ok(D(3, 5).f === 1 && D(3, 5).d === 0 && D(3, 5).s === 2, 'secrecy 5 against a precedent won at 3 (dimension favours p): forced for p a fortiori, shared = 1 factor + 1 dimension');
+  ok(D(3, 2).f === 0 && D(3, 2).d === 1, 'secrecy 2 < 3: not forced; the weaker magnitude is a distinction');
+  ok(D(3, 3).f === 1, 'equal magnitude still binds');
+  ok(D(3, 5, 'd').p === 0 && D(3, 2, 'd').p === 1, 'deciding for d is impermissible at 5, permissible at 2');
+  const cr = X.checkSpec({ model: { task: 'cases', dimensions: [{ id: 'a', side: 'p' }, { id: 'a', side: 'd' }], cases: [{ id: 'A', values: [{ dim: 'z', v: 1 }], outcome: 'p' }] }, outputs: [sc('f', 'forced')] });
+  ok(cr.some(p => p.code === 'duplicate' && p.path === 'model.dimensions[1].id') && cr.some(p => p.code === 'ref' && p.path === 'model.cases[0].values[0].dim'), 'checks: duplicate dimension, unknown dimension'); }
 // ---- 7. time (EU Reg. 1182/71; FRCP 6(a); BGB §§187–193) ----
 { const D = (m, o) => R(Object.assign({ task: 'deadline' }, m), o || [sc('y', 'endY'), sc('m', 'endM'), sc('d', 'endD'), sc('w', 'weekday')]);
   let r = D({ start: '2023-01-31', period: { n: 1, unit: 'months' }, roll: 'none' }); ok(r.out.y === 2023 && r.out.m === 2 && r.out.d === 28 && has(r, 'month-end'), '31 Jan 2023 + 1 month = 28 Feb 2023 (the month\'s last day, EU 1182/71 Art. 3(2)(c)), code month-end');
@@ -194,8 +229,16 @@ const flag = c => sc('f_' + c, 'flag', { code: c });
   ok(r.out.s.every((x, i) => Math.abs(x - [14, 14, 14, 9, 9, 0][i] / 60) < 1e-12), 'EEC 1958 Council [12; 4,4,4,2,2,1]: Shapley–Shubik 14/60 and 9/60, Luxembourg 0 (Felsenthal & Machover 1998)');
   ok(r.out.b.every((x, i) => Math.abs(x - [5, 5, 5, 3, 3, 0][i] / 21) < 1e-12) && r.out.l === 0, '… normalised Banzhaf 5/21 and 3/21, Luxembourg a dummy');
   ok(X.banzhafGF([4, 4, 4, 2, 2, 1], 12).every((x, i) => Math.abs(x - r.out.b[i]) < 1e-12), 'generating functions (Brams & Affuso 1976) give the same Banzhaf indices');
+  const ws = Array.from({ length: 20 }, (_, i) => (i % 5) + 1), en = X.powerIndices(ws, m => { let t = 0; for (let i = 0; i < 20; i++) if (m >> i & 1) t += ws[i]; return t >= 31; }, new Set()), gf = X.weightedGF(ws, 31, 0);
+  ok(gf.shapley.every((x, i) => Math.abs(x - en.shapley[i]) < 1e-11) && gf.banzhaf.every((x, i) => Math.abs(x - en.banzhaf[i]) < 1e-12), '20 voters: the BigInt generating functions (Bilbao et al. 2000) equal enumeration of 2^20 coalitions, Shapley–Shubik and Banzhaf');
   const big = { task: 'vote', voters: Array.from({ length: 30 }, (_, i) => ({ id: 'v' + i, weight: (i % 5) + 1 })), quota: 46 };
-  const rb = R(big, [{ id: 'b', kind: 'series', of: 'banzhaf' }]); ok(rb.out.b.length === 30 && Math.abs(rb.out.b.reduce((a, x) => a + x, 0) - 1) < 1e-9 && has(rb, 'budget'), '30 voters: Banzhaf by generating functions; Shapley–Shubik over budget (code)');
+  const rb = R(big, [{ id: 'b', kind: 'series', of: 'banzhaf' }, { id: 's', kind: 'series', of: 'shapley' }]);
+  ok(rb.out.b.length === 30 && Math.abs(rb.out.b.reduce((a, x) => a + x, 0) - 1) < 1e-9 && Math.abs(rb.out.s.reduce((a, x) => a + x, 0) - 1) < 1e-9 && !has(rb, 'budget'), '30 voters: exact Banzhaf and Shapley–Shubik by generating functions, each summing to 1');
+  ok(rb.out.s[4] > rb.out.s[3] && rb.out.s[3] > rb.out.s[0], '… a heavier voter has more power');
+  ok(Math.abs(R({ task: 'vote', voters: Array.from({ length: 50 }, (_, i) => ({ id: 'v' + i, weight: 1 })), quota: 26 }, [sc('s', 'shapley')]).out.s - 1 / 50) < 1e-15, '50 equal voters: Shapley–Shubik 1/50 exactly');
+  const w6 = [3, 2, 2, 1, 1, 1], cq = R({ task: 'vote', voters: w6.map((w, i) => ({ id: 'v' + i, weight: w })), quota: 5, countQuota: 0.5 }, [{ id: 's', kind: 'series', of: 'shapley' }]);
+  ok(X.weightedGF(w6, 5, 3).shapley.every((x, i) => Math.abs(x - cq.out.s[i]) < 1e-12), 'a member-count quota is carried by the coalition size of the generating function (same as enumeration)');
+  ok(has(R({ task: 'vote', voters: Array.from({ length: 200 }, (_, i) => ({ id: 'v' + i, weight: 100 })), quota: 10001 }, [sc('s', 'shapley')]), 'budget'), '200 voters of weight 100: over the budget, code budget');
   const s = (o, e) => R(Object.assign({ task: 'vote' }, o), [sc('p', 'passes'), sc('q', 'quorate'), sc('n', 'needed')], e);
   ok(s({ members: 100, present: 60, yes: 31, no: 29 }).out.p === 1 && s({ members: 100, present: 60, yes: 30, no: 30 }).out.p === 0, 'simple majority of the votes cast: 31–29 passes, 30–30 fails (a tie)');
   ok(s({ members: 100, present: 60, yes: 30, no: 30, tie: 'chair', chair: 'yes' }).out.p === 1, 'a casting vote breaks the tie');

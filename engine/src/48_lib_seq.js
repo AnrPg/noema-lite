@@ -1265,9 +1265,11 @@
     out.mwAvg = mass(MW_AVG, WATER); out.mwMono = mass(MW_MONO, WATER_MONO);
     const nt = s[0], ct = s[L - 1];
     let lo = 0, hi = 14;
-    const pk = m.pk || 'bjellqvist';
-    for (let it = 0; it < 60; it++) { const mid = (lo + hi) / 2; if (chargeAt(cnt, nt, ct, mid, pk) > 0) lo = mid; else hi = mid; }
-    out.pI = (lo + hi) / 2;
+    const pk = m.pk || 'bjellqvist', K = C.kit(), q0 = chargeAt(cnt, nt, ct, lo, pk), q1 = chargeAt(cnt, nt, ct, hi, pk);
+    // the pH of zero net charge: Brent's root (NoemaSimKit.brent; the charge falls with pH); bisection when it is not bracketed or without the kernel
+    const rb = K && q0 > 0 && q1 < 0 ? K.brent(p => chargeAt(cnt, nt, ct, p, pk), lo, hi, 1e-13, q0, q1) : NaN;
+    if (Number.isFinite(rb)) out.pI = rb;
+    else { for (let it = 0; it < 60; it++) { const mid = (lo + hi) / 2; if (chargeAt(cnt, nt, ct, mid, pk) > 0) lo = mid; else hi = mid; } out.pI = (lo + hi) / 2; }
     const ph = num(m.ph, env, 7);
     out.charge = chargeAt(cnt, nt, ct, ph, pk);
     out.gravy = [...s].every(x => KD[x] !== undefined) ? [...s].reduce((t, x) => t + KD[x], 0) / L : NaN;

@@ -169,6 +169,43 @@ const A = (a, w) => one(AR, { of: w, argument: a });
 ok(A('mp', 'valid') === 1 && A('mp', 'form') === 1 && A('ac', 'valid') === 0 && A('ac', 'counter') === 1 && A('ac', 'form') === -1 && A('ds', 'form') === 4 && A('cd', 'form') === 5 && A('cd', 'valid') === 1 && A('da', 'form') === -2, 'arguments through logic@1: modus ponens valid; affirming the consequent invalid with one countermodel; disjunctive syllogism, constructive dilemma, denying the antecedent recognised');
 ok(Number.isNaN(A('bad', 'valid')) && codes(AR, { of: 'valid', argument: 'bad' }).includes('parse'), 'a premise logic@1 cannot parse: NaN + parse');
 
+// ---- 7b. added: rule consequentialism at a rate, strategic voting, infinite ethics, Metz's ubuntu ----
+{
+  const RC = { ruleCodes: [{ id: 'simple', rules: [{ id: 'keep', b: 5, c: 1 }] }, { id: 'coord', rules: [{ id: 'drive', b: 10, c: 1, k: 1 }] }, { id: 'naive', rules: [{ id: 'trust', b: 6, c: 0, x: 8 }] }] };
+  ok(near(one(RC, { of: 'codeValue', code: 'coord' }), 0.9 * (10 * 0.9 - 1), 1e-12) && near(one(RC, { of: 'codeValue', code: 'simple', rate: 0.5 }), 0.5 * 4, 1e-12) && near(one(RC, { of: 'ruleValue', code: 'naive', rule: 'trust', rate: 0.5 }), 0.5 * 6 - 8 * 0.25, 1e-12),
+    'rule consequentialism (Hooker 2000, 90 % acceptance): V(a) = a(b·a^k − c) − x·a(1 − a): coord at 0.9 = 7.2, simple at 0.5 = 2, naive at 0.5 = 1');
+  ok(one(RC, { of: 'idealCode' }) === 1 && one(RC, { of: 'idealCode', rate: 0.3 }) === 0 && one(RC, { of: 'idealShift', rate: 0.3 }) === 1 && one(RC, { of: 'idealShift' }) === 0,
+    'the ideal code depends on the acceptance rate: coordination wins at 90 %, the simple rule at 30 % (the reason Hooker fixes a rate)');
+  ok(one(RC, { of: 'bestRate', code: 'naive' }) === 1 && near(one(RC, { of: 'codeValue', code: 'simple', reading: 'variable' }), 2, 1e-12) && one(RC, { of: 'idealCode', reading: 'variable' }) === 1 && codes(RC, { of: 'codeValue', code: 'simple', rate: 1.5 }).includes('range'),
+    'the variable-rate reading (Ridge 2006): the mean over all rates (simple: 2); a rate outside 0–1 is code range');
+  const el = (rank, n) => ({ id: 'e', candidates: ['a', 'b', 'c'], ballots: rank.map((r, i) => ({ n: (n || [])[i] || 1, rank: r })) });
+  const U = { elections: [el([['a', 'b', 'c']], [3])] };
+  ok(one(U, { of: 'voteNashWinners', election: 'e' }) === 3 && one(U, { of: 'sincereNash', election: 'e' }) === 1 && one(U, { of: 'voteNash', election: 'e' }) > one(U, { of: 'voteNashUndominated', election: 'e' }),
+    'plurality voting games (Myerson & Weber 1993): with three unanimous voters every candidate wins in some pure Nash equilibrium (all vote for it); the sincere profile is one; dominance removes some (Dhillon & Lockwood 2004)');
+  const B = { elections: [el([['a', 'b', 'c'], ['a', 'b', 'c'], ['b', 'a', 'c'], ['b', 'a', 'c']], [1, 1, 1, 1])] };
+  B.elections[0].ballots[3] = { n: 1, rank: ['c', 'b', 'a'] };
+  ok(one(B, { of: 'gsManipulable', election: 'e', method: 'borda' }) === 1 && one(B, { of: 'manipulators', election: 'e', method: 'borda' }) >= 1,
+    'Gibbard–Satterthwaite on a profile: Borda is manipulable by burying (a voter b > a > c ranks a last)');
+  ok(one({}, { of: 'gsExists', method: 'plurality', m: 3, n: 3 }) > 0 && one({}, { of: 'gsExists', method: 'borda', m: 3, n: 3 }) > 0 && one({}, { of: 'gsExists', method: 'condorcet', m: 3, n: 2 }) >= 0,
+    'Gibbard 1973 / Satterthwaite 1975 made visible: among all 216 profiles of 3 voters on 3 candidates, plurality and Borda have manipulable ones');
+  ok(codes({ elections: [el([['a', 'b', 'c']], [9])] }, { of: 'voteNash', election: 'e' }).includes('too-many') && codes({ elections: [el([['a', 'b', 'c']], [1.5])] }, { of: 'voteNash', election: 'e' }).includes('whole'),
+    'voting games: more than 8 voters (too-many), a fractional group (whole)');
+  const ST = { streams: [{ id: 'x', cycle: [0, 1] }, { id: 'y', head: [1], cycle: [1, 0] }, { id: 'alt', cycle: [1, -1] }, { id: 'zero', cycle: [0] }, { id: 'p', head: [1, 0], cycle: [5] }, { id: 'q', head: [0, 1], cycle: [5] }, { id: 'one', head: [3], cycle: [1] }] };
+  ok(one(ST, { of: 'paretoDominates', a: 'y', b: 'x' }) === 1 && one(ST, { of: 'infiniteAnonymous', a: 'y', b: 'x' }) === 1 && one(ST, { of: 'infiniteConflict', a: 'y', b: 'x' }) === 1 && codes(ST, { of: 'infiniteConflict', a: 'y', b: 'x' }).includes('impossibility'),
+    'infinite ethics (Van Liedekerke 1995; Bostrom 2011; Askell 2018): y = (1,1,0,1,0,…) Pareto-dominates x = (0,1,0,1,…), yet a permutation of ℕ maps one onto the other: Pareto + infinite anonymity conflict');
+  ok(one(ST, { of: 'overtaking', a: 'y', b: 'x' }) === 1 && one(ST, { of: 'finiteAnonymous', a: 'y', b: 'x' }) === 0 && one(ST, { of: 'finiteAnonymous', a: 'p', b: 'q' }) === 1 && one(ST, { of: 'overtaking', a: 'p', b: 'q' }) === 0,
+    'overtaking (Atsumi 1965; von Weizsäcker 1965) keeps Pareto (y ≻ x) and finite anonymity (p ~ q), the pair x, y is no finite permutation');
+  ok(Number.isNaN(one(ST, { of: 'overtaking', a: 'alt', b: 'zero' })) && codes(ST, { of: 'overtaking', a: 'alt', b: 'zero' }).includes('incomparable') && one(ST, { of: 'catchingUp', a: 'alt', b: 'zero' }) === 1,
+    'overtaking vs catching-up (Gale 1967; Asheim 2010): (1, −1, 1, −1, …) vs 0 — partial sums 1, 0, 1, 0: incomparable by overtaking, better by catching-up');
+  ok(near(one(ST, { of: 'discounted', stream: 'one', delta: 0.5 }), 4, 1e-12) && one(ST, { of: 'limitAverage', stream: 'x' }) === 0.5 && one(ST, { of: 'truncCompare', a: 'alt', b: 'zero', T: 2 }) === 0
+    && runAll(ST, [{ of: 'partialSums', kind: 'series', a: 'alt', b: 'zero', T: 4 }]).out.o0.join() === '1,0,1,0', 'discounting 3 + ½·2 = 4; the limit average ½; truncations and partial sums');
+  const UB = { ubuntu: [{ id: 'lie', options: [{ id: 'lie', effects: [{ who: 'friend', identity: -0.2, solidarity: -0.3, byAgent: true }, { who: 'village', identity: 0.6, solidarity: 0.4 }] }, { id: 'truth', effects: [{ who: 'friend', identity: 0.3, solidarity: 0.2, byAgent: true }, { who: 'village', identity: -0.1, solidarity: 0 }] }, { id: 'cult', effects: [{ who: 'group', identity: 0.9, solidarity: -0.5 }] }] }] };
+  ok(near(one(UB, { of: 'ubuntuScore', case: 'lie', option: 'lie' }), 0.5, 1e-12) && one(UB, { of: 'ubuntuBest', case: 'lie' }) === 0 && one(UB, { of: 'ubuntuBest', case: 'lie', reading: 'honour' }) === 1 && one(UB, { of: 'ubuntuPermissible', case: 'lie', option: 'lie' }) === 0 && near(one(UB, { of: 'ubuntuScore', case: 'lie', option: 'cult' }), -0.5, 1e-12),
+    "Metz 2007's ubuntu, promote reading: lying for the village's harmony scores 0.5 and is best; honouring reading (Metz 2013): the agent's own ill-will makes it impermissible, truth is best; identity with ill-will (a cult) does not count");
+  ok(hasErr(spec({ ruleCodes: [{ id: 'c', rules: [{ id: 'r', b: 1 }, { id: 'r', b: 2 }] }] }, []), 'duplicate', /rules\[1\]/) && hasErr(spec({ streams: [{ id: 's', cycle: [] }] }, []), 'size') && hasErr(spec({}, [{ id: 'o', kind: 'scalar', of: 'overtaking', a: 'x', b: 'y' }]), 'ref'),
+    'checks: a rule listed twice in a code, an empty cycle, a stream that does not exist');
+}
+
 // ---- 8. the checker: codes, and JS ↔ Python parity on the fixtures ----
 ok(hasErr(spec({ cases: [{ id: 'x' }] }, []), 'value', /cases\[0\]$/) && hasErr(spec({ cases: [{ id: 'x', preset: 'switch' }, { id: 'x', preset: 'loop' }] }, []), 'duplicate'), 'a case needs a preset or kAct and kNot; ids are unique');
 ok(hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], ballots: [{ n: 1, rank: ['a', 'z'] }] }] }, []), 'ref') && hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], ballots: [{ n: 1, rank: ['a', 'a'] }] }] }, []), 'duplicate') && hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], axis: ['a'], ballots: [{ n: 1, rank: ['a'] }] }] }, []), 'value', /axis/), 'ballots name known candidates once; an axis has every candidate');

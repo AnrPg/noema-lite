@@ -1285,6 +1285,430 @@
     }
    ],
    "model": {
+    "task": "rules",
+    "rules": [
+     {
+      "id": "r1",
+      "if": [
+       "q"
+      ],
+      "then": "p"
+     },
+     {
+      "id": "r2",
+      "if": [
+       "p"
+      ],
+      "then": "q"
+     },
+     {
+      "id": "r3",
+      "then": "z",
+      "unless": [
+       "p"
+      ]
+     }
+    ],
+    "variant": "propagating",
+    "loops": "fail",
+    "query": "z"
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "supported"
+    },
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "loop"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "premises": [
+     {
+      "lit": "m"
+     },
+     {
+      "lit": "b"
+     }
+    ],
+    "rules": [
+     {
+      "id": "r1",
+      "if": [
+       "m"
+      ],
+      "then": "hs",
+      "kind": "strict"
+     },
+     {
+      "id": "r2",
+      "if": [
+       "b"
+      ],
+      "then": "~hs",
+      "kind": "strict"
+     }
+    ],
+    "link": "last",
+    "closure": "transposition",
+    "query": "hs"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "accepted"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "hohfeld",
+    "positions": [
+     {
+      "kind": "duty",
+      "holder": "x",
+      "other": "y",
+      "act": "p",
+      "on": "k"
+     },
+     {
+      "kind": "duty",
+      "holder": "z",
+      "other": "y",
+      "act": "p",
+      "passive": true
+     }
+    ],
+    "lindahl": {
+     "agent": "x",
+     "atom": "p",
+     "other": "z"
+    }
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "lindahl"
+    },
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "lindahlOther"
+    },
+    {
+     "id": "j",
+     "kind": "scalar",
+     "of": "joint"
+    },
+    {
+     "id": "js",
+     "kind": "series",
+     "of": "joint"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "cases",
+    "dimensions": [
+     {
+      "id": "secrecy",
+      "side": "p",
+      "label": "dimSecrecy"
+     }
+    ],
+    "factors": [
+     {
+      "id": "F1",
+      "side": "d"
+     }
+    ],
+    "cases": [
+     {
+      "id": "A",
+      "factors": [],
+      "values": [
+       {
+        "dim": "secrecy",
+        "v": 3
+       }
+      ],
+      "outcome": "p"
+     }
+    ],
+    "values": [
+     {
+      "dim": "secrecy",
+      "v": "k * 5"
+     }
+    ],
+    "side": "p"
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "forced"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "binding"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "vote",
+    "voters": [
+     {
+      "id": "v0",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v1",
+      "weight": 2,
+      "yes": 1
+     },
+     {
+      "id": "v2",
+      "weight": 3,
+      "yes": 1
+     },
+     {
+      "id": "v3",
+      "weight": 4,
+      "yes": 1
+     },
+     {
+      "id": "v4",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v5",
+      "weight": 2,
+      "yes": 1
+     },
+     {
+      "id": "v6",
+      "weight": 3,
+      "yes": 1
+     },
+     {
+      "id": "v7",
+      "weight": 4,
+      "yes": 1
+     },
+     {
+      "id": "v8",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v9",
+      "weight": 2,
+      "yes": 1
+     },
+     {
+      "id": "v10",
+      "weight": 3,
+      "yes": 1
+     },
+     {
+      "id": "v11",
+      "weight": 4,
+      "yes": 1
+     },
+     {
+      "id": "v12",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v13",
+      "weight": 2,
+      "yes": 1
+     },
+     {
+      "id": "v14",
+      "weight": 3,
+      "yes": 1
+     },
+     {
+      "id": "v15",
+      "weight": 4,
+      "yes": 1
+     },
+     {
+      "id": "v16",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v17",
+      "weight": 2,
+      "yes": 1
+     },
+     {
+      "id": "v18",
+      "weight": 3,
+      "yes": 1
+     },
+     {
+      "id": "v19",
+      "weight": 4,
+      "yes": 1
+     },
+     {
+      "id": "v20",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v21",
+      "weight": 2,
+      "yes": 1
+     },
+     {
+      "id": "v22",
+      "weight": 3,
+      "yes": 1
+     },
+     {
+      "id": "v23",
+      "weight": 4,
+      "yes": 1
+     },
+     {
+      "id": "v24",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v25",
+      "weight": 2,
+      "yes": 1
+     },
+     {
+      "id": "v26",
+      "weight": 3,
+      "yes": 1
+     },
+     {
+      "id": "v27",
+      "weight": 4,
+      "yes": 1
+     },
+     {
+      "id": "v28",
+      "weight": 1,
+      "yes": 1
+     },
+     {
+      "id": "v29",
+      "weight": 2,
+      "yes": 1
+     }
+    ],
+    "quota": 40,
+    "voter": "v3"
+   },
+   "outputs": [
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "banzhaf"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "shapley"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
     "task": "citation",
     "text": "Smith v Jones, 12 Law Rep 345",
     "patterns": [
@@ -2588,6 +3012,98 @@
     }
    },
    "outputs": "nope"
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "hohfeld",
+    "positions": [
+     {
+      "kind": "duty",
+      "holder": "x",
+      "other": "y",
+      "act": "~p",
+      "passive": true
+     }
+    ],
+    "lindahl": {
+     "agent": "x",
+     "atom": "p",
+     "other": "x"
+    }
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "lindahl"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "cases",
+    "dimensions": [
+     {
+      "id": "d1",
+      "side": "p"
+     },
+     {
+      "id": "d1",
+      "side": "d"
+     }
+    ],
+    "cases": [
+     {
+      "id": "A",
+      "values": [
+       {
+        "dim": "zz",
+        "v": 1
+       }
+      ],
+      "outcome": "p"
+     }
+    ],
+    "values": [
+     {
+      "dim": "qq",
+      "v": 2
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "forced"
+    }
+   ]
   }
  ]
 }

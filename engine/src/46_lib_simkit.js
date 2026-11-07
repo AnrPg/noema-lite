@@ -511,7 +511,7 @@
     const piv = new Int32Array(n); const { rtol, atol, hmax } = o; let t = 0, h = 0;
     function jac() {
       for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
-      const dt = 1.4901161193847656e-8 * max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev += n + 1;
+      const dt = 1.4901161193847656e-8 * max(abs(t), 1); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev += n + 1;
     }
     return {
       stiff: false,
@@ -551,20 +551,24 @@
   function fdJac(n, f, t, y, F0, J, Tt, atol, rtol, st, fx) {
     for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
     st.nfev += n;
-    if (Tt) { const dt = 1.4901161193847656e-8 * max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev++; }
+    if (Tt) { const dt = 1.4901161193847656e-8 * max(abs(t), 1); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev++; }
   }
   const hermite = (n, ta, hs, r0, d0, r1, d1) => (tq, out) => { const s = (tq - ta) / hs, s2 = s * s, s3 = s2 * s, h00 = 2 * s3 - 3 * s2 + 1, h10 = s3 - 2 * s2 + s, h01 = -2 * s3 + 3 * s2, h11 = s3 - s2;
     for (let i = 0; i < n; i++) out[i] = h00 * r0[i] + h10 * hs * d0[i] + h01 * r1[i] + h11 * hs * d1[i]; };
   const firstH = (n, F0, y, atol, rtol, hmax, p) => { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); const h = min(hmax, s > 0 ? 0.5 * pow(rtol, 1 / p) / s : hmax / 100); return h > 0 ? h : hmax * 1e-3; };
 
   /* Tsitouras 5(4) (Ch. Tsitouras 2011, Comput. Math. Appl. 62:2, "Runge–Kutta pairs of order 5(4) satisfying only the first
-     column simplifying assumption"): FSAL, 7 stages, error constants smaller than DOPRI5's; the PI controller of dopri; cubic Hermite
-     dense output (order 3, enough for event location and samples) */
+     column simplifying assumption"): FSAL, 7 stages, error constants smaller than DOPRI5's; the PI controller of dopri; Tsitouras's
+     own continuous extension of order 4, y(t + θh) = y + h Σ b_i(θ) k_i with b_i(θ) quartic in θ (the coefficients of the paper's
+     §3 as in OrdinaryDiffEq.jl's Tsit5; all eight order-4 conditions hold for every θ — the test checks them, and the dense
+     output's local error O(h⁵)) */
   const TS = { c: [0, 0.161, 0.327, 0.9, 0.9800255409045097, 1, 1],
     a: [[], [0.161], [-0.008480655492356989, 0.335480655492357], [2.897153057105493, -6.359448489975075, 4.3622954328695815],
       [5.325864828439257, -11.748883564062828, 7.4955393428898365, -0.09249506636175525],
       [5.86145544294642, -12.92096931784711, 8.159367898576159, -0.071584973281401, -0.028269050394068383],
       [0.09646076681806523, 0.01, 0.4798896504144996, 1.379008574103742, -3.290069515436081, 2.324710524099774]],
+    r: [[1, -2.763706197274826, 2.9132554618219126, -1.0530884977290216], [0, 0.13169999999999998, -0.2234, 0.1017], [0, 3.9302962368947516, -5.941033872131505, 2.490627285651253],
+      [0, -12.411077166933676, 30.33818863028232, -16.548102889244902], [0, 37.50931341651104, -88.1789048947664, 47.37952196281928], [0, -27.896526289197286, 65.09189467479366, -34.87065786149661], [0, 1.5, -4, 2.5]],
     e: [-0.00178001105222577714, -0.0008164344596567469, 0.007880878010261995, -0.1447110071732629, 0.5823571654525552, -0.45808210592918697, 0.015151515151515152] };
   function tsit5(n, f, o, st) {
     const K = Array.from({ length: 7 }, () => new Float64Array(n)), y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n);
@@ -588,7 +592,9 @@
           const fac11 = pow(err, 0.2 - 0.04 * 0.75);
           if (err <= 1) {
             let fac = fac11 / pow(facold, 0.04); fac = max(0.1, min(5, fac / 0.9)); const hnew = hh / fac; facold = max(err, 1e-4);
-            const seg = hermite(n, t, hh, Float64Array.from(y), Float64Array.from(K[0]), Float64Array.from(y1), Float64Array.from(K[6])), ta = t;
+            const ta = t, hs = hh, r0 = Float64Array.from(y), KK = K.map(k => Float64Array.from(k)), bt = new Float64Array(7);
+            const seg = (tq, out) => { const th = (tq - ta) / hs; for (let j = 0; j < 7; j++) { const q = TS.r[j]; bt[j] = th * (q[0] + th * (q[1] + th * (q[2] + th * q[3]))); }
+              for (let i = 0; i < n; i++) { let v = 0; for (let j = 0; j < 7; j++) v += bt[j] * KK[j][i]; out[i] = r0[i] + hs * v; } };
             t = tph; y.set(y1); K[0].set(K[6]); h = last ? max(h, hnew) : hnew;
             return { t0: ta, t1: tph, y1: y, seg };
           }
@@ -601,11 +607,15 @@
   /* ROS3P (Lang & Verwer 2001, BIT 41:4): a 3-stage, order-3 A-stable Rosenbrock method with an embedded order-2 solution, written
      in the form of Sandu et al. 1997 (Atmos. Environ. 31:20; the KPP library): (I/(hγ) − J) U_i = f(t + α_i h, y + Σ a_ij U_j)
      + Σ c_ij/h U_j + hγ_i ∂f/∂t, y₁ = y + Σ m_i U_i. The coefficients follow from Lang & Verwer's (γ = 1/2 + √3/6, b = (2/3, 0, 1/3),
-     b̂ = (1/3, 1/3, 1/3)); stage 3 reuses stage 2's f. Cubic Hermite dense output */
+     b̂ = (1/3, 1/3, 1/3)); stage 3 reuses stage 2's f. Dense output: the cubic Hermite interpolant of y₀, f(y₀), y₁, f(y₁), a
+     continuous extension of order min(p, 3) = 3 for a method of order p ≥ 3 (Hairer, Nørsett & Wanner I, 2nd ed. 1993, §II.6,
+     (6.7)–(6.8)); a 3-stage Rosenbrock method has no continuous extension of order 3 from its own stages (four order-3 conditions
+     on three weights b_i(θ)), so this is the standard choice (it is also ode23s's for its order-2 method). The test measures the
+     dense output's local error O(h⁴) */
   const R3 = (() => { const g = 0.5 + Math.sqrt(3) / 6, a21 = 1 / g, c21 = -1.607695154586736, c31 = -3.464101615137755, c32 = -1.732050807568877;
     const m = [2, 0.5773502691896258, 0.4226497308103742], Gi = [[1 / g, 0, 0], [-c21, 1 / g, 0], [-c31, -c32, 1 / g]];
     const mh = [0, 1, 2].map(j => (Gi[0][j] + Gi[1][j] + Gi[2][j]) / 3);   // b̂ Γ⁻¹ with b̂ = (1/3, 1/3, 1/3)
-    return { g, a21, c21, c31, c32, m, e: m.map((v, i) => v - mh[i]), gam: [g, g - 1, g - 1 - Math.sqrt(3) / 2 + 0] }; })();
+    return { g, a21, c21, c31, c32, m, e: m.map((v, i) => v - mh[i]), gam: [g, g - 1, g - 1 - Math.sqrt(3) / 2] }; })();
   function ros3p(n, f, o, st) {
     const F0 = new Float64Array(n), F1 = new Float64Array(n), U1 = new Float64Array(n), U2 = new Float64Array(n), U3 = new Float64Array(n), y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n);
     const J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n), piv = new Int32Array(n);
@@ -644,16 +654,53 @@
 
   /* Radau IIA of order 5 (3 stages; Hairer & Wanner, Solving ODEs II, 2nd ed. 1996, §IV.8 — the method of RADAU5): L-stable and
      stiffly accurate. The stage equations Z = h(A⊗I)F(y + Z) are solved by simplified Newton with the Jacobian of the step's start;
-     the 3n × 3n iteration matrix I − h(A⊗J) is factored as a real system (n ≤ the library's small models, so the complex
-     transformation of RADAU5 is not needed). Newton stops when θ/(1 − θ)·‖ΔZ‖ ≤ κ = max(10u/rtol, min(0.03, √rtol)); it diverges
+     with A⁻¹ = T Λ T⁻¹, Λ = diag(γ, [[α, β], [−β, α]]), the 3n × 3n system I − h(A⊗J) splits into one real n × n system
+     (γ/h − J) and one complex n × n system ((α − iβ)/h − J) (Hairer & Wanner §IV.8, (8.15)–(8.16); T and Λ are computed here from
+     A; cfg.radauLinear: 'full' solves the 3n × 3n real system instead — the same iterates, for the test). Newton stops when θ/(1 − θ)·‖ΔZ‖ ≤ κ = max(10u/rtol, min(0.03, √rtol)); it diverges
      when θ ≥ 0.99 (the step is halved). The error estimate is RADAU5's (§IV.8, (8.19)–(8.20)): err = (γ₀⁻¹/h I − J)⁻¹ (f(y₀) +
      Σ e_i Z_i/h), refined once by a second solve after a rejection. Dense output: the collocation polynomial through y, y + Z₁..Z₃ */
   const RD = (() => { const s6 = Math.sqrt(6);
     return { c: [(4 - s6) / 10, (4 + s6) / 10, 1],
       A: [[(88 - 7 * s6) / 360, (296 - 169 * s6) / 1800, (-2 + 3 * s6) / 225], [(296 + 169 * s6) / 1800, (88 + 7 * s6) / 360, (-2 - 3 * s6) / 225], [(16 - s6) / 36, (16 + s6) / 36, 1 / 9]],
       u1: 30 / (6 + Math.cbrt(81) - Math.cbrt(9)), dd: [-(13 + 7 * s6) / 3, (-13 + 7 * s6) / 3, -1 / 3] }; })();
+  /* the transformation of RADAU5: A⁻¹ = T Λ T⁻¹ with T = [v (the real eigenvector), Re w, Im w] (w the eigenvector of α + iβ) */
+  const RDT = (() => {
+    const inv3 = M => { const [a, b, c] = M[0], [d, e, f2] = M[1], [g, h, k] = M[2], A2 = e * k - f2 * h, B = -(d * k - f2 * g), C2 = d * h - e * g, det = a * A2 + b * B + c * C2;
+      return [[A2 / det, -(b * k - c * h) / det, (b * f2 - c * e) / det], [B / det, (a * k - c * g) / det, -(a * f2 - c * d) / det], [C2 / det, -(a * h - b * g) / det, (a * e - b * d) / det]]; };
+    const mul = (X, Y) => X.map((r, i) => Y[0].map((_, j) => r.reduce((s2, _, k) => s2 + X[i][k] * Y[k][j], 0)));
+    const Ai = inv3(RD.A), tr = Ai[0][0] + Ai[1][1] + Ai[2][2];
+    const g = RD.u1, al = (tr - g) / 2, det = Ai[0][0] * (Ai[1][1] * Ai[2][2] - Ai[1][2] * Ai[2][1]) - Ai[0][1] * (Ai[1][0] * Ai[2][2] - Ai[1][2] * Ai[2][0]) + Ai[0][2] * (Ai[1][0] * Ai[2][1] - Ai[1][1] * Ai[2][0]);
+    const be = sqrt(det / g - al * al);
+    // eigenvectors as the cross product of two rows of (A⁻¹ − λI) (complex for λ = α + iβ)
+    const crossC = (ar, ai, br, bi) => { const re = [], im = []; for (const [p, q] of [[1, 2], [2, 0], [0, 1]]) { re.push(ar[p] * br[q] - ai[p] * bi[q] - (ar[q] * br[p] - ai[q] * bi[p])); im.push(ar[p] * bi[q] + ai[p] * br[q] - (ar[q] * bi[p] + ai[q] * br[p])); } return [re, im]; };
+    const rowR = (i, lr) => Ai[i].map((v, j) => v - (i === j ? lr : 0)), rowI = (i, li) => Ai[i].map((_, j) => (i === j ? -li : 0));
+    const [v] = crossC(rowR(0, g), [0, 0, 0], rowR(1, g), [0, 0, 0]);
+    const [u, w] = crossC(rowR(0, al), rowI(0, be), rowR(1, al), rowI(1, be));
+    const T = [0, 1, 2].map(i => [v[i], u[i], w[i]]), Ti = inv3(T), L = mul(mul(Ti, Ai), T);
+    return { T, Ti, TiAi: mul(Ti, Ai), g: L[0][0], al: L[1][1], be: L[1][2], L };
+  })();
+  // complex LU with partial pivoting (separate real and imaginary arrays)
+  function luFactorC(Ar, Ai, n, piv) {
+    for (let k = 0; k < n; k++) {
+      let p = k, mx = -1; for (let i = k; i < n; i++) { const m2 = Ar[i * n + k] ** 2 + Ai[i * n + k] ** 2; if (m2 > mx) { mx = m2; p = i; } }
+      if (!(mx > 1e-300)) return false; piv[k] = p;
+      if (p !== k) for (let j = 0; j < n; j++) { let tt = Ar[k * n + j]; Ar[k * n + j] = Ar[p * n + j]; Ar[p * n + j] = tt; tt = Ai[k * n + j]; Ai[k * n + j] = Ai[p * n + j]; Ai[p * n + j] = tt; }
+      const dr = Ar[k * n + k], di = Ai[k * n + k], dd = dr * dr + di * di;
+      for (let i = k + 1; i < n; i++) {
+        const xr = Ar[i * n + k], xi = Ai[i * n + k], lr = (xr * dr + xi * di) / dd, li = (xi * dr - xr * di) / dd; Ar[i * n + k] = lr; Ai[i * n + k] = li;
+        for (let j = k + 1; j < n; j++) { const yr = Ar[k * n + j], yi = Ai[k * n + j]; Ar[i * n + j] -= lr * yr - li * yi; Ai[i * n + j] -= lr * yi + li * yr; }
+      }
+    }
+    return true;
+  }
+  function luSolveC(Ar, Ai, n, piv, br, bi) {
+    for (let k = 0; k < n; k++) { const p = piv[k]; if (p !== k) { let tt = br[k]; br[k] = br[p]; br[p] = tt; tt = bi[k]; bi[k] = bi[p]; bi[p] = tt; } }
+    for (let i = 1; i < n; i++) { let sr = br[i], si = bi[i]; for (let j = 0; j < i; j++) { const lr = Ar[i * n + j], li = Ai[i * n + j]; sr -= lr * br[j] - li * bi[j]; si -= lr * bi[j] + li * br[j]; } br[i] = sr; bi[i] = si; }
+    for (let i = n - 1; i >= 0; i--) { let sr = br[i], si = bi[i]; for (let j = i + 1; j < n; j++) { const ur = Ar[i * n + j], ui = Ai[i * n + j]; sr -= ur * br[j] - ui * bi[j]; si -= ur * bi[j] + ui * br[j]; }
+      const dr = Ar[i * n + i], di = Ai[i * n + i], dd = dr * dr + di * di; br[i] = (sr * dr + si * di) / dd; bi[i] = (si * dr - sr * di) / dd; }
+  }
   function radau5(n, f, o, st) {
-    const N3 = 3 * n, M = new Float64Array(N3 * N3), pv = new Int32Array(N3), Z = new Float64Array(N3), dZ = new Float64Array(N3), F = new Float64Array(N3);
+    const full = o.radauLinear === 'full', N3 = 3 * n, M = full ? new Float64Array(N3 * N3) : null, pv = new Int32Array(N3), Er = new Float64Array(n * n), Ei = new Float64Array(n * n), pc = new Int32Array(n), sr = new Float64Array(n), sI = new Float64Array(n), s1 = new Float64Array(n), Z = new Float64Array(N3), dZ = new Float64Array(N3), F = new Float64Array(N3);
     const y = new Float64Array(n), yt = new Float64Array(n), F0 = new Float64Array(n), J = new Float64Array(n * n), E1 = new Float64Array(n * n), p1 = new Int32Array(n), fx = new Float64Array(n);
     const cont = new Float64Array(n), F2 = new Float64Array(n), fz = new Float64Array(n), y1 = new Float64Array(n);
     const { rtol, atol, hmax } = o, fnewt = max(10 * EPS / rtol, min(0.03, sqrt(rtol))); let t = 0, h = 0, faccon = 1, rejLast = false, firstStep = true;
@@ -668,14 +715,24 @@
           let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
           if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
           const tph = last ? tT : t + hh;
-          for (let bi = 0; bi < 3; bi++) for (let i = 0; i < n; i++) { const row = (bi * n + i) * N3; for (let bj = 0; bj < 3; bj++) { const a = hh * RD.A[bi][bj]; for (let j = 0; j < n; j++) M[row + bj * n + j] = (bi === bj && i === j ? 1 : 0) - a * J[i * n + j]; } }
-          if (!luFactor(M, N3, pv)) { st.rejected++; h = hh / 4; rejLast = true; continue; }
+          let okLU;
+          if (full) { for (let bi = 0; bi < 3; bi++) for (let i = 0; i < n; i++) { const row = (bi * n + i) * N3; for (let bj = 0; bj < 3; bj++) { const a = hh * RD.A[bi][bj]; for (let j = 0; j < n; j++) M[row + bj * n + j] = (bi === bj && i === j ? 1 : 0) - a * J[i * n + j]; } }
+            okLU = luFactor(M, N3, pv); }
+          else {   // one real (γ/h − J) and one complex ((α − iβ)/h − J) factorisation; the real one also serves the error estimate
+            for (let i = 0; i < n * n; i++) { E1[i] = -J[i]; Er[i] = -J[i]; Ei[i] = 0; } for (let i = 0; i < n; i++) { E1[i * n + i] += RDT.g / hh; Er[i * n + i] += RDT.al / hh; Ei[i * n + i] = -RDT.be / hh; }
+            okLU = luFactor(E1, n, p1) && luFactorC(Er, Ei, n, pc); }
+          if (!okLU) { st.rejected++; h = hh / 4; rejLast = true; continue; }
           Z.fill(0); let conv = false, dold = 0; faccon = pow(max(faccon, EPS), 0.8);
           for (let it = 0; it < 7; it++) {
             for (let k = 0; k < 3; k++) { for (let i = 0; i < n; i++) yt[i] = y[i] + Z[k * n + i]; f(k === 2 ? tph : t + RD.c[k] * hh, yt, fz); F.set(fz, k * n); }
             st.nfev += 3; if (!F.every(fin)) break;
             for (let k = 0; k < 3; k++) for (let i = 0; i < n; i++) dZ[k * n + i] = -Z[k * n + i] + hh * (RD.A[k][0] * F[i] + RD.A[k][1] * F[n + i] + RD.A[k][2] * F[2 * n + i]);
-            luSolve(M, N3, pv, dZ);
+            if (full) luSolve(M, N3, pv, dZ);
+            else {   // ΔZ = (T⊗I) ΔW, with the blocks of (Λ/h ⊗ I − I ⊗ J) ΔW = (T⁻¹A⁻¹ ⊗ I) r / h
+              const P = RDT.TiAi; for (let i = 0; i < n; i++) { const r0 = dZ[i], r1 = dZ[n + i], r2 = dZ[2 * n + i]; s1[i] = (P[0][0] * r0 + P[0][1] * r1 + P[0][2] * r2) / hh; sr[i] = (P[1][0] * r0 + P[1][1] * r1 + P[1][2] * r2) / hh; sI[i] = (P[2][0] * r0 + P[2][1] * r1 + P[2][2] * r2) / hh; }
+              luSolve(E1, n, p1, s1); luSolveC(Er, Ei, n, pc, sr, sI);
+              const T = RDT.T; for (let i = 0; i < n; i++) for (let k = 0; k < 3; k++) dZ[k * n + i] = T[k][0] * s1[i] + T[k][1] * sr[i] + T[k][2] * sI[i];
+            }
             let dn = 0; for (let k = 0; k < 3; k++) for (let i = 0; i < n; i++) { Z[k * n + i] += dZ[k * n + i]; dn += (dZ[k * n + i] / scal(i)) ** 2; }
             dn = sqrt(dn / N3);
             if (it > 0) { const th = dn / dold; if (!(th < 0.99)) break; faccon = th / (1 - th); }
@@ -684,15 +741,15 @@
           }
           if (!conv) { st.rejected++; h = hh / 2; rejLast = true; faccon = 1; continue; }
           // the error estimate
-          for (let i = 0; i < n * n; i++) E1[i] = -J[i]; for (let i = 0; i < n; i++) E1[i * n + i] += RD.u1 / hh;
-          if (!luFactor(E1, n, p1)) { st.rejected++; h = hh / 2; rejLast = true; continue; }
+          if (full) { for (let i = 0; i < n * n; i++) E1[i] = -J[i]; for (let i = 0; i < n; i++) E1[i * n + i] += RD.u1 / hh;
+            if (!luFactor(E1, n, p1)) { st.rejected++; h = hh / 2; rejLast = true; continue; } }
           for (let i = 0; i < n; i++) { F2[i] = (RD.dd[0] * Z[i] + RD.dd[1] * Z[n + i] + RD.dd[2] * Z[2 * n + i]) / hh; cont[i] = F2[i] + F0[i]; y1[i] = y[i] + Z[2 * n + i]; }
           luSolve(E1, n, p1, cont);
           const enorm = () => { let e = 0; for (let i = 0; i < n; i++) e += (cont[i] / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; return max(sqrt(e / n), 1e-10); };
           let err = enorm();
           if (err >= 1 && (firstStep || rejLast)) { for (let i = 0; i < n; i++) yt[i] = y[i] + cont[i]; f(t, yt, fz); st.nfev++; for (let i = 0; i < n; i++) cont[i] = F2[i] + fz[i]; luSolve(E1, n, p1, cont); err = enorm(); }
           if (!fin(err)) { st.rejected++; h = hh / 10; rejLast = true; continue; }
-          const fac = min(0.9, 0.9 * (2 * 7 + 1) / (2 * 7 + 1));   // the safety factor of RADAU5 (no Newton count in it here)
+          const fac = 0.9;   // the safety factor
           if (err < 1) {
             const hnew = hh * min(4, max(0.2, fac * pow(err, -0.25)));
             const Y = [Float64Array.from(y), Float64Array.from(Z.subarray(0, n)), Float64Array.from(Z.subarray(n, 2 * n)), Float64Array.from(Z.subarray(2 * n))], ta = t, hs = hh;
@@ -745,34 +802,58 @@
     if (!cfg || typeof cfg.f !== 'function' || !n || !fin(tEnd) || !(tEnd >= t0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
     const pairs = Array.isArray(cfg.pairs) ? cfg.pairs.filter(p => Array.isArray(p) && p[0] >= 0 && p[0] < n && p[1] >= 0 && p[1] < n) : [];
     const sym = method === 'verlet' || method === 'yoshida4';
-    if (['rk4', 'heun', 'euler', 'verlet', 'yoshida4'].includes(method) && !(cfg.dt > 0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    if (FIXED.includes(method) && !(cfg.dt > 0)) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
     if (sym && pairs.length * 2 !== n) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
-    const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: cfg.atol > 0 ? cfg.atol : 1e-9, hmax: cfg.hmax > 0 ? cfg.hmax : max(abs(tEnd - t0), 1e-12), dt: cfg.dt };
+    // atol: a number, or one per component (all > 0)
+    const AT = new Float64Array(n);
+    if (Array.isArray(cfg.atol) || ArrayBuffer.isView(cfg.atol)) { if (cfg.atol.length !== n || !Array.from(cfg.atol).every(v => v > 0 && fin(v))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); } AT.set(cfg.atol); }
+    else AT.fill(cfg.atol > 0 ? cfg.atol : 1e-9);
+    const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: AT, hmax: cfg.hmax > 0 ? cfg.hmax : max(abs(tEnd - t0), 1e-12), dt: cfg.dt, radauLinear: cfg.radauLinear };
     const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, maxEvents = fin(cfg.maxEvents) ? min(cfg.maxEvents, MAX_EVENTS) : 1000;
     const f = (t, y, dy) => { cfg.f(t, y, dy); };
-    const make = m => (m === 'dopri5' || m === 'auto' ? dopri(n, f, o, st) : m === 'rosenbrock' ? rosenbrock(n, f, o, st) : m === 'verlet' || m === 'yoshida4' ? symplectic(m, n, f, o, st, pairs) : fixed(m, n, f, o, st));
+    const make = m => (m === 'dopri5' || m === 'auto' ? dopri(n, f, o, st) : m === 'tsit5' ? tsit5(n, f, o, st) : m === 'rosenbrock' ? rosenbrock(n, f, o, st) : m === 'ros3p' ? ros3p(n, f, o, st)
+      : m === 'radau5' ? radau5(n, f, o, st) : m === 'verlet' || m === 'yoshida4' ? symplectic(m, n, f, o, st, pairs) : fixed(m, n, f, o, st));
     let S = make(method), auto = method === 'auto';
     const evs = (cfg.events || []).filter(e => e && typeof e.g === 'function');
     const armed = evs.map(() => true), gv = new Float64Array(evs.length), ztol = cfg.gtol > 0 ? cfg.gtol : 1e-10, lastHit = evs.map(() => -Infinity);
     const samples = cfg.samples || []; let si = 0;
-    let t = t0; const y = Float64Array.from(y0), tmp = new Float64Array(n), ya = new Float64Array(n);
+    // breaks: times the step must land on exactly (doses, switches, the discontinuities of a delay equation); apply(t, y) may change y
+    const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t);
+    let bi = 0;
+    const onSeg = typeof cfg.onSegment === 'function' ? cfg.onSegment : null;
+    let t = t0; const y = Float64Array.from(y0), tmp = new Float64Array(n), ya = new Float64Array(n), yo = new Float64Array(n);
     if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
     const evalG = (tt, yy) => { for (let j = 0; j < evs.length; j++) gv[j] = evs[j].g(tt, yy); };
-    S.reset(t, y); evalG(t, y);
-    // a g that is exactly 0 at the start takes the side it must leave towards for its direction (a ball put on the floor)
-    for (let j = 0; j < evs.length; j++) if (gv[j] === 0 && evs[j].dir) gv[j] = evs[j].dir < 0 ? 1e-300 : -1e-300;
-    while (si < samples.length && samples[si] <= t) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
+    // a g that is exactly 0 takes the side it must leave towards for its direction (a ball put on the floor)
+    const zeroSide = () => { for (let j = 0; j < evs.length; j++) if (gv[j] === 0 && evs[j].dir) gv[j] = evs[j].dir < 0 ? 1e-300 : -1e-300; };
+    const sample = (tt, yy) => { cfg.onSample && cfg.onSample(tt, yy); };
+    // the samples up to tt on a step's dense output; a sample at the time of a pending break waits for the break (it sees the state after it)
+    const sampleTo = (tt, seg) => { const bt = bi < brk.length ? brk[bi].t : Infinity; while (si < samples.length && (samples[si] < tt || (samples[si] === tt && tt < bt))) { seg(samples[si], tmp); sample(samples[si], tmp); si++; } };
+    const applyBreaks = () => {   // every break at t (or just before: rounding) is applied in order; the method restarts from the new y, keeping h
+      let any = false; while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b = brk[bi++]; any = true; if (typeof b.apply === 'function') b.apply(t, y); }
+      return any;
+    };
+    applyBreaks();   // breaks at t0 run before the first sample
+    if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
+    S.reset(t, y); evalG(t, y); zeroSide();
+    while (si < samples.length && samples[si] <= t) { sample(samples[si], y); si++; }
     const hits = []; let ymax0 = 1; for (let i = 0; i < n; i++) ymax0 = max(ymax0, abs(y[i]));
-    let instT = NaN, instN = 0;
+    let instT = NaN, instN = 0, nObs = 0;
     for (;;) {
+      if (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) {
+        applyBreaks();
+        if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
+        S.reset(t, y); evalG(t, y); zeroSide();
+        while (si < samples.length && samples[si] <= t) { sample(samples[si], y); si++; }
+      }
       if (t >= tEnd) return done(t, y, 'end', hits);
       if (st.steps >= maxSteps) { C.code('budget', t); return done(t, y, 'budget', hits); }
-      const r = S.step(tEnd);
+      const r = S.step(bi < brk.length ? min(tEnd, brk[bi].t) : tEnd);
       if (r.fail) { C.code(r.fail === 'time' ? 'step-underflow' : r.fail, t); return done(t, y, r.fail, hits); }
       st.steps++;
       const g0 = Float64Array.from(gv); evalG(r.t1, r.y1);
       const loc = new Float64Array(evs.length).fill(Infinity), side = new Float64Array(evs.length);
-      let first = Infinity;
+      let first = Infinity; const obs = [];
       for (let j = 0; j < evs.length; j++) {
         const a0 = g0[j], b0 = gv[j];
         if (!armed[j]) { if (abs(b0) > (evs[j].hyst || 0)) armed[j] = true; continue; }   // hysteresis: re-armed once |g| > hyst
@@ -780,12 +861,28 @@
         if (!((dir >= 0 && up) || (dir <= 0 && down))) continue;
         const tr = locate(tt => { r.seg(tt, tmp); return evs[j].g(tt, tmp); }, r.t0, r.t1, a0, b0, { tol: 1e-13 });
         if (tr <= lastHit[j] + 1e-9 * max(1, abs(tr))) continue;   // the crossing just handled, seen again from its other side
+        if (evs[j].observe) { obs.push([tr, j, up ? 1 : -1]); continue; }   // observed: reported, the step goes on
         loc[j] = tr; side[j] = up ? 1 : -1; if (tr < first) first = tr;
+      }
+      const tSeg = first < Infinity ? first : r.t1;
+      if (onSeg) onSeg(r.seg, r.t0, tSeg);
+      // observed events inside the (possibly cut) step, in time order: onEvent sees the dense-output state; they do not count for zeno
+      if (obs.length) {
+        obs.sort((a, b) => a[0] - b[0]);
+        for (const [tr, j, sd] of obs) {
+          if (tr > tSeg) continue;   // after the cut: seen again on the next step
+          lastHit[j] = tr; if (evs[j].hyst > 0) armed[j] = false;
+          if (++nObs > MAX_EVENTS) { if (!C.has('observe-cap')) C.code('observe-cap', tr); continue; }
+          sampleTo(tr, r.seg);
+          r.seg(tr, yo); hits.push({ t: tr, j, kind: evs[j].kind, dir: sd, observe: true });
+          const act = evs[j].onEvent ? evs[j].onEvent(tr, Float64Array.from(yo), { j, dir: sd, observe: true }) : undefined;
+          if (act === 'stop' || evs[j].terminal) { sampleTo(tr, r.seg); t = tr; y.set(yo); return done(t, y, 'event', hits); }
+        }
       }
       if (first < Infinity) {   // the step is cut at the earliest event; simultaneous events (within 1e-12·t) fire together, in order
         const tolS = 1e-12 * max(1, abs(first));
         r.seg(first, ya);
-        while (si < samples.length && samples[si] <= first) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
+        sampleTo(first, r.seg);
         let stop = false; const fired = [];
         for (let j = 0; j < evs.length; j++) if (loc[j] <= first + tolS) {
           fired.push(j); lastHit[j] = first; hits.push({ t: first, j, kind: evs[j].kind, dir: side[j] });
@@ -793,7 +890,7 @@
           if (act === 'stop' || evs[j].terminal) stop = true;
         }
         if (first === instT || abs(first - instT) <= tolS) instN += fired.length; else { instT = first; instN = fired.length; }
-        if (hits.length > maxEvents || instN > 100) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
+        if (hits.length - min(nObs, MAX_EVENTS) > maxEvents || instN > 100) { C.code('zeno', first); return done(first, ya, 'zeno', hits); }
         t = first; y.set(ya);
         if (stop) return done(t, y, 'event', hits);
         if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
@@ -804,7 +901,7 @@
         for (const j of fired) { if (abs(gv[j]) <= ztol) { const d0 = evs[j].dir || 0; gv[j] = d0 ? (d0 < 0 ? 1e-300 : -1e-300) : side[j] * 1e-300; } if (evs[j].hyst > 0) armed[j] = false; }
         continue;
       }
-      while (si < samples.length && samples[si] <= r.t1) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
+      sampleTo(r.t1, r.seg);
       t = r.t1; y.set(r.y1);
       if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan', hits); }
       let ym = 0; for (let i = 0; i < n; i++) ym = max(ym, abs(y[i]));
@@ -817,22 +914,28 @@
   /* ======================================================================================================================
      Output analysis (L ch. 9; BCNN ch. 11)
      ====================================================================================================================== */
-  /** Welford 1962: running mean and variance, numerically stable */
+  /** Kahan–Babuška summation in Neumaier's form (Neumaier 1974, ZAMM 54): sum(), add(x); the error of a sum of n terms stays
+      O(u)·Σ|x| instead of O(nu)·Σ|x| (Higham, Accuracy and Stability of Numerical Algorithms, 2nd ed. 2002, §4.3) */
+  function ksum() {
+    let s = 0, c = 0;
+    return { add(x) { const t = s + x; if (abs(s) >= abs(x)) c += (s - t) + x; else c += (x - t) + s; s = t; }, get value() { return s + c; }, reset() { s = 0; c = 0; } };
+  }
+  /** Welford 1962: running mean and variance, numerically stable; the sum is compensated (Neumaier) */
   function welford() {
-    let n = 0, m = 0, s = 0, lo = Infinity, hi = -Infinity, sum = 0;
-    return { add(x) { if (!fin(x)) return; n++; const d = x - m; m += d / n; s += d * (x - m); sum += x; if (x < lo) lo = x; if (x > hi) hi = x; },
+    let n = 0, m = 0, s = 0, lo = Infinity, hi = -Infinity; const sum = ksum();
+    return { add(x) { if (!fin(x)) return; n++; const d = x - m; m += d / n; s += d * (x - m); sum.add(x); if (x < lo) lo = x; if (x > hi) hi = x; },
       get n() { return n; }, get mean() { return n ? m : NaN; }, get var() { return n > 1 ? s / (n - 1) : NaN; }, get sd() { return n > 1 ? sqrt(s / (n - 1)) : NaN; },
-      get min() { return n ? lo : NaN; }, get max() { return n ? hi : NaN; }, get sum() { return sum; } };
+      get min() { return n ? lo : NaN; }, get max() { return n ? hi : NaN; }, get sum() { return sum.value; } };
   }
   /** a time-weighted average of a piecewise-constant quantity (a queue length): update(t, v) at each change (L §1.4.1 "area under
       Q(t)"); reset(t) starts again (end of warm-up) keeping the current value */
-  function timeAvg(t0, v0) {
-    let tl = fin(t0) ? t0 : 0, ts = tl, v = fin(v0) ? v0 : 0, area = 0, mx = v, area2 = 0;
-    return { update(t, nv) { if (t > tl) { area += v * (t - tl); area2 += v * v * (t - tl); tl = t; } v = nv; if (nv > mx) mx = nv; },
+  function timeAvg(t0, v0) {   // the area is a compensated sum (Neumaier): a long run of many small pieces keeps its digits
+    let tl = fin(t0) ? t0 : 0, ts = tl, v = fin(v0) ? v0 : 0, mx = v; const area = ksum();
+    return { update(t, nv) { if (t > tl) { area.add(v * (t - tl)); tl = t; } v = nv; if (nv > mx) mx = nv; },
       add(t, dv) { this.update(t, v + dv); }, get value() { return v; },
-      mean(t) { const tt = fin(t) ? max(t, tl) : tl, a = area + v * (tt - tl); return tt > ts ? a / (tt - ts) : NaN; },
-      area(t) { const tt = fin(t) ? max(t, tl) : tl; return area + v * (tt - tl); },
-      reset(t) { if (t > tl) { tl = t; } ts = tl; area = 0; area2 = 0; mx = v; }, get max() { return mx; }, get start() { return ts; } };
+      mean(t) { const tt = fin(t) ? max(t, tl) : tl, a = area.value + v * (tt - tl); return tt > ts ? a / (tt - ts) : NaN; },
+      area(t) { const tt = fin(t) ? max(t, tl) : tl; return area.value + v * (tt - tl); },
+      reset(t) { if (t > tl) { tl = t; } ts = tl; area.reset(); mx = v; }, get max() { return mx; }, get start() { return ts; } };
   }
   /** ci(values, level) → {n, mean, sd, half, lo, hi}: the Student-t interval of a mean of independent values (L §4.5) */
   function ci(values, level) {
@@ -987,15 +1090,19 @@
   /* ======================================================================================================================
      Delay equations, stochastic kinetics and SDEs
      ====================================================================================================================== */
-  /** dde({f(t, y, lag, dy) (lag(i, τ index) → y_i(t − τ)), y0, history(t) → array, lags: [τ…], t0, tEnd, rtol, atol, samples,
-      onSample, maxSteps}) — constant-lag delay equations by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003
-      ch. 3; Shampine & Thompson 2001): h ≤ the smallest lag so every lagged value lies on a finished step (or the history); the
-      steps are kept (≤ maxSteps) → {t, y, steps, stop, codes} */
+  /** dde({f(t, y, lag, dy) (lag(i, k) → y_i(t − τ_k)), y0, history(t) → array, lags: [τ…], …integrate's cfg (t0, tEnd, method —
+      fixed ones with dt ≤ the smallest lag —, rtol, atol, events, breaks, samples, onSample, onSegment, maxSteps)}) — constant-lag
+      delay equations by the method of steps (Bellen & Zennaro 2003 ch. 3; Shampine & Thompson 2001): integrate() with
+      h ≤ the smallest lag, so every lagged value lies on a finished step (kept through onSegment) or in the history; the
+      derivative jumps that the start propagates, at t0 + m·τ (m ≤ 5, the order of DOPRI5), are breaks the steps land on
+      (discontinuity tracking, Bellen & Zennaro §4.1) → integrate's result */
   function dde(cfg) {
-    const C = codes(['nan', 'budget', 'bad-config', 'step-underflow']);
-    const lags = Array.isArray(cfg && cfg.lags) ? cfg.lags.filter(v => v > 0) : [];
+    const lags = Array.isArray(cfg && cfg.lags) ? cfg.lags.filter(v => v > 0 && fin(v)) : [];
     const y0 = cfg && cfg.y0 ? Array.from(cfg.y0) : [], n = y0.length, t0 = fin(cfg && cfg.t0) ? cfg.t0 : 0;
-    if (!cfg || typeof cfg.f !== 'function' || !n || !lags.length || !fin(cfg.tEnd) || !(cfg.tEnd > t0)) { C.code('bad-config'); return { t: t0, y: y0, steps: 0, stop: 'bad-config', codes: C.list }; }
+    const badCfg = () => { const C = codes(['bad-config']); C.code('bad-config'); return { t: t0, y: y0, steps: 0, rejected: 0, nfev: 0, events: [], stop: 'bad-config', method: cfg && cfg.method, codes: C.list }; };
+    if (!cfg || typeof cfg.f !== 'function' || !n || !lags.length || !fin(cfg.tEnd) || !(cfg.tEnd > t0)) return badCfg();
+    const tauMin = min(...lags);
+    if (FIXED.includes(cfg.method) && !(cfg.dt > 0 && cfg.dt <= tauMin)) return badCfg();
     const hist = typeof cfg.history === 'function' ? cfg.history : () => y0;
     const segs = [], tmp = new Float64Array(n);   // finished steps: {t0, t1, seg}
     const lagVal = (tq, i) => {
@@ -1003,23 +1110,11 @@
       let lo = 0, hi = segs.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (segs[m].t1 < tq) lo = m + 1; else hi = m; }
       const sg = segs[lo]; if (!sg) return NaN; sg.seg(min(tq, sg.t1), tmp); return tmp[i];
     };
-    let tCur = t0;
     const f = (t, y, dy) => cfg.f(t, y, (i, k) => lagVal(t - lags[k || 0], i), dy);
-    const st = { steps: 0, rejected: 0, nfev: 0 };
-    const o = { rtol: cfg.rtol > 0 ? cfg.rtol : 1e-6, atol: cfg.atol > 0 ? cfg.atol : 1e-9, hmax: min(...lags) };
-    const S = dopri(n, f, o, st); const y = Float64Array.from(y0);
-    S.reset(t0, y); const samples = cfg.samples || []; let si = 0;
-    while (si < samples.length && samples[si] <= t0) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
-    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS;
-    for (;;) {
-      if (tCur >= cfg.tEnd) return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'end', codes: C.list };
-      if (st.steps >= maxSteps) { C.code('budget', tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'budget', codes: C.list }; }
-      const r = S.step(cfg.tEnd); if (r.fail) { C.code(r.fail === 'time' ? 'step-underflow' : r.fail, tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: r.fail, codes: C.list }; }
-      st.steps++; segs.push({ t0: r.t0, t1: r.t1, seg: r.seg });
-      while (si < samples.length && samples[si] <= r.t1) { r.seg(samples[si], tmp); cfg.onSample && cfg.onSample(samples[si], Float64Array.from(tmp)); si++; }
-      tCur = r.t1; y.set(r.y1);
-      if (!y.every(fin)) { C.code('nan', tCur); return { t: tCur, y: Array.from(y), steps: st.steps, stop: 'nan', codes: C.list }; }
-    }
+    const breaks = (Array.isArray(cfg.breaks) ? cfg.breaks.slice() : []);
+    const seen = new Set(); for (const tau of lags) for (let m = 1; m <= 5; m++) { const tb = t0 + m * tau; if (tb < cfg.tEnd && !seen.has(tb)) { seen.add(tb); breaks.push({ t: tb }); } }
+    const onSegment = (seg, a, b) => { if (segs.length < MAX_STEPS) segs.push({ t0: a, t1: b, seg }); if (typeof cfg.onSegment === 'function') cfg.onSegment(seg, a, b); };
+    return integrate({ ...cfg, f, t0, hmax: min(cfg.hmax > 0 ? cfg.hmax : Infinity, tauMin), method: cfg.method || 'dopri5', breaks, onSegment });
   }
   /** dae({f(t, y, z, dy), g(t, y, z, res), y0, z0, …integrate's cfg}) — a semi-explicit index-1 DAE y' = f(t, y, z), 0 = g(t, y, z)
       in its state-space form (Hairer & Wanner, Solving ODEs II, 2nd ed. 1996, §VI.1): at every evaluation the algebraic z is
@@ -1470,7 +1565,7 @@
     // special functions
     lgamma, gammaP, betaI, normCdf, normInv, tCdf, tq,
     // output analysis
-    welford, timeAvg, ci, acf, batchMeans, mser5, replicate, littleCheck,
+    welford, ksum, timeAvg, ci, acf, batchMeans, mser5, replicate, littleCheck,
     // sweeps and sensitivity
     linspace, oat, grid, morris, sobol, lhs,
     // delay equations, stochastic kinetics, SDEs, schedules

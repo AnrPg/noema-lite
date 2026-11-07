@@ -140,6 +140,14 @@
     return s;
   }
   const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): the meters' seeded jitter draws from its MRG32k3a streams, one per
+      measurement; FALLBACK without the kernel (marked): mulberry32. (The noise sources stay a counter-based hash: their sample i is
+      read at any time of a transient, which a sequential stream cannot give cheaply.) */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  const streamOf = (name, seed) => { const K = kit(); return K ? K.stream(seed >>> 0, 'circuit:' + name) : mulberry32(hash32(name, seed)); };
   /** → {at(t), avg, at0m (the value at t = 0⁻), next(t): the first breakpoint after t (Infinity if none)} */
   function wave(w) {
     if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
@@ -852,15 +860,11 @@
     }
 
     let tranCache = null;
-    function runTransient(o) {
-      o = o || {};
-      const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
-      if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
-      const steps = Math.ceil(tEnd / dt - 1e-9);
-      if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
+    /* the transient: trapezoidal companion models, backward Euler on the first step and on every step that holds a source breakpoint
+       (SPICE's practice; a circuit is a DAE, so the kernel's ODE integrators do not apply). tranStart / tranAdvance are resumable:
+       runTransient() and the stepper (docs/INTERACTIVE_LIBRARY.md §1.6) share them. */
+    function tranStart(o, dt) {
       const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];
-      const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
-      if (tranCache && tranCache.key === key) return tranCache;
       const caps = ck.els.filter(e => e.type === 'C'), inds = ck.els.filter(e => e.type === 'L'), tls = ck.els.filter(e => e.type === 'TLINE');
       for (const e of tls) if (e.td < dt * (1 - 1e-9)) throw fail('step', { element: e.id, td: e.td, dt });
       let x;
@@ -873,22 +877,24 @@
         for (const e of caps) { e.vp = vx(x, e.a) - vx(x, e.c); e.ip = 0; }
         for (const e of inds) { e.ip = x[e.k]; e.vp = vx(x, e.a) - vx(x, e.c); }
       }
-      const V = []; for (let i = 0; i < N; i++) { V.push(new Float64Array(steps + 1)); V[i][0] = x[i]; }
-      const I = ck.real.map(e => { const arr = new Float64Array(steps + 1); arr[0] = mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })); return arr; });
-      const pwEl = pw.map(id => ck.byId.get(id)), PW = pwEl.map(() => new Float64Array(steps + 1));
-      const power = (e, xx, c) => { const pc = pinCurrents(e, xx, c); let q = 0; e.pins.forEach((pi, j) => { q += vx(xx, pi) * pc[j]; }); return q; };
-      pwEl.forEach((e, j) => { PW[j][0] = power(e, x, { mode: 'op', t0m: true, t: 0, src: 1 }); });
-      const tlv = (xx, e) => { const [p1, m1, p2, m2] = e.tl; return [vx(xx, p1) - vx(xx, m1), xx[e.k], vx(xx, p2) - vx(xx, m2), xx[e.k + 1]]; };
-      for (const e of tls) { e.h = [0, 1, 2, 3].map(() => new Float64Array(steps + 1)); tlv(x, e).forEach((v, j) => { e.h[j][0] = v; }); }
+      const V = []; for (let i = 0; i < N; i++) V.push([x[i]]);
+      const I = ck.real.map(e => [mainCurrent(e, pinCurrents(e, x, { mode: 'op', t0m: true, t: 0, src: 1 }))]);
+      const pwEl = pw.map(id => ck.byId.get(id)), PW = pwEl.map(e => [power(e, x, { mode: 'op', t0m: true, t: 0, src: 1 })]);
+      for (const e of tls) { e.h = [[], [], [], []]; tlv(x, e).forEach((v, j) => { e.h[j].push(v); }); }
       const tol = 1e-6 * dt;
-      const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
-      let bp = nextBp(-tol);   // a breakpoint at t = 0 makes the first step backward Euler anyway
-      const ctx = { mode: 'tran', t: 0, h: dt, be: true, gsh: 0, src: 1, avg: false, t0m: false };
-      let xs = x;
-      for (let s = 0; s < steps; s++) {
-        const t1 = (s + 1) * dt;
-        ctx.t = t1; ctx.be = s === 0 || bp <= t1 + tol;
-        if (bp <= t1 + tol) bp = nextBp(t1 + tol);
+      return { dt, tol, s: 0, xs: x, V, I, pw, pwEl, PW, caps, inds, tls, bp: nextBp(-tol),   // a breakpoint at t = 0 makes the first step backward Euler anyway
+        ctx: { mode: 'tran', t: 0, h: dt, be: true, gsh: 0, src: 1, avg: false, t0m: false } };
+    }
+    const power = (e, xx, c) => { const pc = pinCurrents(e, xx, c); let q = 0; e.pins.forEach((pi, j) => { q += vx(xx, pi) * pc[j]; }); return q; };
+    const tlv = (xx, e) => { const [p1, m1, p2, m2] = e.tl; return [vx(xx, p1) - vx(xx, m1), xx[e.k], vx(xx, p2) - vx(xx, m2), xx[e.k + 1]]; };
+    const nextBp = t => { let m = Infinity; for (const e of ck.sources) { const b = e.w.next(t); if (b < m) m = b; } return m; };
+    /** n more steps of dt */
+    function tranAdvance(R, n) {
+      const { dt, tol, ctx, caps, inds, tls, pwEl } = R;
+      for (let q = 0; q < n; q++) {
+        const s = R.s, t1 = (s + 1) * dt;
+        ctx.t = t1; ctx.be = s === 0 || R.bp <= t1 + tol;
+        if (R.bp <= t1 + tol) R.bp = nextBp(t1 + tol);
         ctx.gsh = 0;
         for (const e of tls) {   // the waves that left the other end td ago
           const tp = t1 - e.td, h = e.h; let w;
@@ -896,26 +902,53 @@
           else { const u = tp / dt; let i = Math.floor(u + 1e-9); if (i > s) i = s; const f = Math.max(0, u - i), j = Math.min(i + 1, s); w = h.map(a => a[i] * (1 - f) + a[j] * f); }
           e.E1 = w[2] + e.z0 * w[3]; e.E2 = w[0] + e.z0 * w[1];
         }
-        if (!newton(ctx, xs, 60)) {
-          let ok = true, xg = xs;
+        if (!newton(ctx, R.xs, 60)) {
+          let ok = true, xg = R.xs;
           for (let i = 3; i <= 12 && ok; i++) { ctx.gsh = Math.pow(10, -i); if (newton(ctx, xg, 100)) xg = Float64Array.from(X); else ok = false; }
           ctx.gsh = 0;
           if (!ok || !newton(ctx, xg, 100)) throw fail('no-convergence', { t: t1 });
         }
-        xs = Float64Array.from(X);
+        const xs = R.xs = Float64Array.from(X);
         for (const e of caps) {
           const v = vx(xs, e.a) - vx(xs, e.c), geq = (ctx.be ? 1 : 2) * e.C / dt;
           e.ip = geq * (v - e.vp) - (ctx.be ? 0 : e.ip); e.vp = v;
         }
         for (const e of inds) { e.ip = xs[e.k]; e.vp = vx(xs, e.a) - vx(xs, e.c); }
-        for (let i = 0; i < N; i++) V[i][s + 1] = xs[i];
-        ck.real.forEach((e, j) => { I[j][s + 1] = mainCurrent(e, pinCurrents(e, xs, ctx)); });
-        pwEl.forEach((e, j) => { PW[j][s + 1] = power(e, xs, ctx); });
-        for (const e of tls) tlv(xs, e).forEach((v, j) => { e.h[j][s + 1] = v; });
+        for (let i = 0; i < N; i++) R.V[i].push(xs[i]);
+        ck.real.forEach((e, j) => { R.I[j].push(mainCurrent(e, pinCurrents(e, xs, ctx))); });
+        pwEl.forEach((e, j) => { R.PW[j].push(power(e, xs, ctx)); });
+        for (const e of tls) tlv(xs, e).forEach((v, j) => { e.h[j].push(v); });
+        R.s++;
       }
+      return R;
+    }
+    function runTransient(o) {
+      o = o || {};
+      const dt = num(o.dt), tEnd = num(o.tEnd), maxSteps = o.maxSteps === undefined ? MAX_STEPS : num(o.maxSteps);
+      if (!(dt > 0) || !(tEnd > 0)) throw fail('bad-args');
+      const steps = Math.ceil(tEnd / dt - 1e-9);
+      if (!(maxSteps > 0) || maxSteps > MAX_STEPS || steps > maxSteps) throw fail('budget', { steps, limit: Math.min(maxSteps, MAX_STEPS) || MAX_STEPS });
+      const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];
+      const key = `${dt}|${tEnd}|${!!o.uic}|${!!o.fromAvg}|${ck.hold.shift}|${pw.join(',')}`;
+      if (tranCache && tranCache.key === key) return tranCache;
+      stepping = null;   // the elements' companion state is the transient's: a stepper run is invalidated
+      const R = tranAdvance(tranStart(o, dt), steps);
       const T = new Float64Array(steps + 1); for (let s = 0; s <= steps; s++) T[s] = s * dt;
-      tranCache = { key, T, V, I, steps, P: Object.fromEntries(pw.map((id, j) => [id, PW[j]])) };
+      tranCache = { key, T, V: R.V.map(a => Float64Array.from(a)), I: R.I.map(a => Float64Array.from(a)), steps, P: Object.fromEntries(pw.map((id, j) => [id, Float64Array.from(R.PW[j])])) };
       return tranCache;
+    }
+    /** the stepper: a transient run held open — start(o) with {dt, uic?, power?}, to(tTo) → {t, nodes, branches, power} now */
+    let stepping = null;
+    function tranStep(o, tTo) {
+      if (o) { tranCache = null; stepping = tranStart(o, num(o.dt)); }
+      if (!stepping) throw fail('bad-args');
+      const R = stepping, n = Math.max(0, Math.round((tTo - R.s * R.dt) / R.dt));
+      if (R.s + n > MAX_STEPS) throw fail('budget', { steps: R.s + n, limit: MAX_STEPS });
+      tranAdvance(R, n);
+      const last = a => a[a.length - 1], nodes = {}, branches = {};
+      for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? 0 : last(R.V[i]); }
+      ck.real.forEach((e, j) => { branches[e.id] = last(R.I[j]); });
+      return { t: R.s * R.dt, nodes, branches, power: Object.fromEntries(R.pw.map((id, j) => [id, last(R.PW[j])])) };
     }
     function transient(o) {
       const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
@@ -1055,7 +1088,7 @@
       }
       throw fail('probe');
     }
-    return { dc, transient, measure, ac, runTransient, dcX, ck, where, pinCurrents, mainCurrent };
+    return { dc, transient, measure, ac, runTransient, tranStep, dcX, ck, where, pinCurrents, mainCurrent };
   }
 
   function create(netlist, opts) {
@@ -1082,11 +1115,11 @@
     function measure2(probe) {
       if (!isObj(probe)) throw fail('probe');
       const count = ++mcount;
-      const rng = noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null;
+      const rng = noise ? streamOf(JSON.stringify(probe), noise.seed) : null;
       const jit = v => (rng ? v * (1 + noise.rel * (2 * rng() - 1)) + noise.abs * (2 * rng() - 1) : v);
       const shifted = (s, fn) => {   // every capture of a board with noise or pickup sees another stretch of it (the same sequence of measurements reads the same)
         const h = s.ck.hold, live = s.ck.sources.some(e => e.wk === 'noise');
-        h.shift = live ? mulberry32(hash32('m' + count, seed))() * 1000 : 0;
+        h.shift = live ? streamOf('m' + count, seed)() * 1000 : 0;
         try { return fn(); } finally { h.shift = 0; }
       };
       const nz = (v, d) => (v === undefined ? d : num(v));
@@ -1162,6 +1195,8 @@
       id: ID,
       dc: o => inner.dc(o),
       transient: o => inner.transient(o),
+      /** the stepper's transient held open: tranStep({dt, uic?, power?}, tTo) starts it, tranStep(null, tTo) goes on → the values at tTo */
+      tranStep: (o, tTo) => inner.tranStep(o, tTo),
       measure: p => (ver === 2 ? measure2(p) : inner.measure(p)),
       /** the AC analysis {source, fStart, fStop, points?, scale?} → {f, nodes: {name: {re, im}}} */
       ac: o => { if (ver !== 2) throw fail('bad-args'); return inner.ac(o); },
@@ -1182,6 +1217,6 @@
   /** the engine's own source, to run it in a Worker (the sim-spec@1 runtime's workerSource: engine/src/36_engine_circuit_sim.js) */
   const source = () => '(' + noemaCircuitModule.toString() + ')(self);';
   root.NoemaCircuit = Object.freeze({ id: ID, format: FORMAT, limits: Object.freeze({ nodes: MAX_NODES, elements: MAX_ELEMENTS, steps: MAX_STEPS, acPoints: 1000 }),
-    FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), MODES: Object.freeze(MODES.slice()), check, checkFaults, create, num, acStats, source });
+    FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), MODES: Object.freeze(MODES.slice()), check, checkFaults, create, num, acStats, source, kit });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

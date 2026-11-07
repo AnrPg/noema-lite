@@ -134,7 +134,91 @@ ok(Object.isFrozen(S) && typeof S.source === 'function' && S.version === 1, 'Noe
   const bad = S.integrate({ f: (t, y, d) => { d[0] = y[0] * y[0]; }, y0: [1], tEnd: 2 }), bad2 = S.integrate({ y0: [1], tEnd: 1 }), bad3 = S.integrate({ f: () => {}, y0: [1], tEnd: 1, method: 'rk4' });
   ok(bad.codes.some(c => ['blow-up', 'step-underflow', 'nan'].includes(c.code) && c.level === 'error') && bad.t < 1.01 && bad2.stop === 'bad-config' && bad3.stop === 'bad-config', 'y′ = y² blows up near t = 1 (an error code, no throw); a missing f or dt → bad-config');
   const dd = S.dde({ f: (t, y, lag, dy) => { dy[0] = -lag(0, 0); }, y0: [1], lags: [1], tEnd: 3, rtol: 1e-10, atol: 1e-12 });
-  ok(near(dd.y[0], 1 - 3 + 2 ** 2 / 2 - 1 / 6, 1e-8), `delay equation x′ = −x(t − 1), x = 1 for t ≤ 0: x(3) = ${dd.y[0].toFixed(10)} (method of steps: 1 − t + (t−1)²/2 − (t−2)³/6 = −2/3)`);
+  ok(near(dd.y[0], 1 - 3 + 2 ** 2 / 2 - 1 / 6, 1e-8), `delay equation x′ = −x(t − 1), x = 1 for t ≤ 0: x(3) = ${dd.y[0].toFixed(10)} (method of steps, piece by piece: −1/6)`);
+  // ---- the options the ode@1 migration needs (A) ----
+  { const f = (t, y, d) => { d[0] = -0.04 * y[0] + 1e4 * y[1] * y[2]; d[2] = 3e7 * y[1] * y[1]; d[1] = -d[0] - d[2]; };
+    const r1 = S.integrate({ f, y0: [1, 0, 0], tEnd: 40, rtol: 1e-7, atol: [1e-8, 1e-14, 1e-8] }), bad = S.integrate({ f, y0: [1, 0, 0], tEnd: 1, atol: [1e-8, 1e-8] });
+    ok(rel(r1.y[1], 0.9185534764e-5, 2e-4) && bad.stop === 'bad-config', `atol per component ([1e-8, 1e-14, 1e-8], Robertson y₂ ${r1.y[1].toExponential(9)}); an atol of the wrong length: bad-config`); }
+  { const hs = [0.1, 0.05, 0.025], v = hs.map(dt => S.integrate({ f: (t, y, d) => { d[0] = -y[0]; }, y0: [1], tEnd: 1, method: 'midpoint', dt }).y[0]), p = S.richardson(hs, v, Math.exp(-1)).p;
+    ok(near(p, 2, 0.1), `the explicit midpoint rule: order ${p.toFixed(3)} (2)`); }
+  { // breaks: doses of 1 at t = 0 (before the first sample), 1 and 2.5 into x′ = −x; the steps land on them exactly; a sample at a break sees the dose
+    const segEnds = [], smp = {}, exact = t => [0, 1, 2.5].filter(b => b <= t).reduce((a, b) => a + Math.exp(-(t - b)), 0);
+    for (const m of ['dopri5', 'rk4', 'radau5']) {
+      const r = S.integrate({ f: (t, y, d) => { d[0] = -y[0]; }, y0: [0], tEnd: 4, method: m, dt: 0.05, rtol: 1e-10, atol: 1e-12, samples: [0, 1, 2.5, 3],
+        breaks: [{ t: 2.5, apply: (t, y) => { y[0] += 1; } }, { t: 0, apply: (t, y) => { y[0] += 1; } }, { t: 1, apply: (t, y) => { y[0] += 1; } }],
+        onSample: (t, y) => { (smp[m] || (smp[m] = [])).push([t, y[0]]); }, onSegment: (seg, a, b) => { if (m === 'dopri5') segEnds.push(b); } });
+      ok(near(r.y[0], exact(4), m === 'rk4' ? 1e-5 : 1e-8) && smp[m].every(([t, v]) => near(v, exact(t), m === 'rk4' ? 1e-5 : 1e-8)) && smp[m].length === 4,
+        `breaks (${m}): doses at 0, 1, 2.5 into x′ = −x: x(4) = ${r.y[0].toFixed(9)} (${exact(4).toFixed(9)}); samples at the dose times see the dose (x(1) ${smp[m][1][1].toFixed(6)})`);
+    }
+    ok(segEnds.includes(1) && segEnds.includes(2.5), 'the steps land exactly on the break times (onSegment ends at 1 and 2.5)');
+    const nb = S.integrate({ f: (t, y, d) => { d[0] = 1; }, y0: [0], tEnd: 2, breaks: [{ t: 1, apply: (t, y) => { y[0] = NaN; } }] });
+    ok(nb.stop === 'nan' && nb.t === 1 && nb.codes.some(c => c.code === 'nan'), 'a break that leaves NaN stops the run with the code nan at its time');
+  }
+  { // observed events: the zeros of x on x″ = −x are reported (at π/2 + kπ, with the dense-output state), the steps are not cut
+    const f = (t, y, d) => { d[0] = y[1]; d[1] = -y[0]; }, seen = [];
+    const plain = S.integrate({ f, y0: [1, 0], tEnd: 10, rtol: 1e-10, atol: 1e-12 });
+    const ob = S.integrate({ f, y0: [1, 0], tEnd: 10, rtol: 1e-10, atol: 1e-12, maxEvents: 1, events: [{ g: (t, y) => y[0], observe: true, kind: 'zero', onEvent: (t, y, info) => { seen.push([t, y[1], info.dir]); y[1] = 99; } }] });
+    const want = [0.5, 1.5, 2.5].map(k => k * Math.PI);
+    ok(seen.length === 3 && seen.every(([t, v], i) => near(t, want[i], 1e-8) && near(Math.abs(v), 1, 1e-8)) && seen.map(x => x[2]).join() === '-1,1,-1',
+      `observed events: x = 0 at ${seen.map(x => x[0].toFixed(9)).join(', ')} (π/2 + kπ), |v| = 1 there, directions −, +, −`);
+    ok(ob.steps === plain.steps && ob.y[0] === plain.y[0] && ob.stop === 'end' && ob.events.length === 3 && ob.events.every(e => e.observe),
+      `observing cuts no step (${ob.steps} steps, the same end state as without events), y changes in onEvent are ignored, and 3 observations under maxEvents 1 are no zeno`);
+    const st2 = S.integrate({ f, y0: [1, 0], tEnd: 10, events: [{ g: (t, y) => y[0], observe: true, onEvent: () => 'stop' }] });
+    ok(st2.stop === 'event' && near(st2.t, Math.PI / 2, 1e-6), 'an observer that returns stop ends the run at its time');
+  }
+  { // onSegment: the accepted steps tile [t0, tEnd]; their dense output reproduces the solution
+    const segs = []; S.integrate({ f: (t, y, d) => { d[0] = -y[0]; }, y0: [1], tEnd: 3, rtol: 1e-9, atol: 1e-12, onSegment: (seg, a, b) => segs.push([seg, a, b]) });
+    const out = [0]; const tile = segs.every((s2, i) => i === 0 ? s2[1] === 0 : s2[1] === segs[i - 1][2]) && segs[segs.length - 1][2] === 3;
+    const mid = segs.every(([seg, a, b]) => { seg((a + b) / 2, out); return near(out[0], Math.exp(-(a + b) / 2), 1e-8); });
+    ok(tile && mid, `onSegment(seg, t0, t1): ${segs.length} segments tile [0, 3], each one's dense output exact to 1e-8 at its midpoint`); }
+  { // dde through integrate: a fixed method, an event and a break on a delay equation
+    const ex = -1 / 6, r4 = S.dde({ f: (t, y, lag, dy) => { dy[0] = -lag(0, 0); }, y0: [1], lags: [1], tEnd: 3, method: 'rk4', dt: 0.05 });
+    const bd = S.dde({ f: (t, y, lag, dy) => { dy[0] = -lag(0, 0); }, y0: [1], lags: [1], tEnd: 3, method: 'rk4', dt: 2 });
+    let hit = NaN; const ev = S.dde({ f: (t, y, lag, dy) => { dy[0] = -lag(0, 0); }, y0: [1], lags: [1], tEnd: 3, rtol: 1e-10, atol: 1e-12, events: [{ g: (t, y) => y[0], dir: -1, onEvent: t => { hit = t; } }] });
+    ok(near(r4.y[0], ex, 1e-6) && bd.stop === 'bad-config' && near(hit, 1, 1e-8) && near(ev.y[0], ex, 1e-8),
+      `dde = integrate: RK4 dt 0.05 gives x(3) = ${r4.y[0].toFixed(8)} (−1/6); a dt above the lag is bad-config; the zero of x at t = ${hit.toFixed(10)} (1)`); }
+  { const r = S.integrate({ f: (t, y, d) => { d[0] = t < 0.5 ? -y[0] : NaN; }, y0: [1], t0: 0.5, tEnd: 2, method: 'dopri5' });
+    ok(r.stop === 'nan' && r.steps === 0 && r.codes.some(c => c.code === 'nan'), 'DOPRI5: f NaN at the start of a step stops at once with nan (no step-size search)'); }
+  // ---- stiff and high-order methods (B): Radau IIA 5, ROS3P, Tsitouras 5(4) ----
+  { const fR = (t, y, d) => { d[0] = -0.04 * y[0] + 1e4 * y[1] * y[2]; d[2] = 3e7 * y[1] * y[1]; d[1] = -d[0] - d[2]; };
+    for (const [m, n0] of [['radau5', 400], ['ros3p', 3000]]) {
+      const r = S.integrate({ f: fR, y0: [1, 0, 0], tEnd: 40, rtol: 1e-7, atol: 1e-11, method: m });
+      ok(rel(r.y[0], 0.7158270687, 2e-6) && rel(r.y[1], 0.9185534764e-5, 2e-5) && rel(r.y[2], 0.2841637457, 5e-6) && r.steps < n0, `${m}: Robertson at t = 40 = HNW II §IV.10 (${r.y.map(v => v.toPrecision(10)).join(', ')}) in ${r.steps} steps`);
+    }
+    // Van der Pol, μ = 1000, y(0) = (2, 0), t = 2000 (the IVP test set of Mazzia & Magherini, problem VDPOL: y₁ = 1.706167732170469, y₂ = −8.928097010248125e-4)
+    const fV = (t, y, d) => { d[0] = y[1]; d[1] = 1000 * (1 - y[0] * y[0]) * y[1] - y[0]; };
+    for (const [m, tol, e1] of [['radau5', 1e-8, 1e-8], ['ros3p', 1e-8, 5e-8], ['rosenbrock', 1e-8, 5e-6]]) {
+      const t1 = Date.now(), r = S.integrate({ f: fV, y0: [2, 0], tEnd: 2000, rtol: tol, atol: tol, method: m }), ms = Date.now() - t1;
+      ok(rel(r.y[0], 1.706167732170469, e1) && rel(r.y[1], -8.928097010248125e-4, 1e3 * e1), `${m}: stiff Van der Pol μ = 1000 at t = 2000: y = (${r.y[0].toPrecision(12)}, ${r.y[1].toExponential(9)}) against the test set's reference, ${r.steps} steps, ${ms} ms`);
+    }
+    // orders on y′ = −y + sin t with the step held at h (tolerances out of the way): Tsitouras 5, ROS3P 3, Radau IIA ≥ 5
+    const ordH = (m, hs = [0.1, 0.05, 0.025]) => { const ex = 1.5 * Math.exp(-1) + 0.5 * (Math.sin(1) - Math.cos(1)); return S.richardson(hs, hs.map(h => S.integrate({ f: (t, y, d) => { d[0] = -y[0] + Math.sin(t); }, y0: [1], tEnd: 1, method: m, hmax: h, rtol: 1, atol: 1 }).y[0]), ex).p; };
+    const pT = ordH('tsit5'), p3 = ordH('ros3p'), pR = ordH('radau5', [0.2, 0.1, 0.05]);   // Radau's errors reach the Newton tolerance below h = 0.05
+    ok(near(pT, 5, 0.3) && near(p3, 3, 0.15) && pR > 4.7, `observed orders: Tsitouras 5(4) ${pT.toFixed(2)}, ROS3P ${p3.toFixed(2)}, Radau IIA ${pR.toFixed(2)}`);
+    const ar = S.integrate({ f: (t, y, d) => { d[0] = y[1]; d[1] = -y[0]; }, y0: [1, 0], tEnd: 20, rtol: 1e-10, atol: 1e-12, method: 'tsit5' }), ad = S.integrate({ f: (t, y, d) => { d[0] = y[1]; d[1] = -y[0]; }, y0: [1, 0], tEnd: 20, rtol: 1e-10, atol: 1e-12, method: 'dopri5' });
+    ok(near(ar.y[0], Math.cos(20), 1e-8) && near(ar.y[1], -Math.sin(20), 1e-8), `Tsitouras 5(4) on the oscillator to t = 20: error ${Math.abs(ar.y[0] - Math.cos(20)).toExponential(2)} in ${ar.steps} steps (DOPRI5 ${ad.steps})`);
+    const bb = S.integrate({ f: (t, y, d) => { d[0] = y[1]; d[1] = -9.81; }, y0: [1, 0], tEnd: 3, rtol: 1e-10, atol: 1e-12, method: 'radau5', events: [{ g: (t, y) => y[0], dir: -1, onEvent: (t, y) => { y[1] = -0.9 * y[1]; } }] });
+    const t1 = Math.sqrt(2 / 9.81); ok(bb.events.length >= 3 && near(bb.events[0].t, t1, 1e-8) && near(bb.events[1].t, t1 + 2 * 0.9 * t1, 1e-7), `events on Radau's collocation dense output: the bouncing ball's impacts at ${bb.events.slice(0, 2).map(e => e.t.toFixed(9)).join(', ')}`);
+  }
+  // ---- dense output: the local error of the interpolant at θ = 0.37 of one step of h (y′ = −y + sin t): O(h^(q+1)) for order q ----
+  { const ex = t => 1.5 * Math.exp(-t) + 0.5 * (Math.sin(t) - Math.cos(t));
+    const dens = (m, h) => { let e = NaN; S.integrate({ f: (t, y, d) => { d[0] = -y[0] + Math.sin(t); }, y0: [1], tEnd: h, method: m, hmax: h, rtol: 1, atol: 1, onSegment: (seg, a) => { if (a === 0) { const o2 = [0]; seg(0.37 * h, o2); e = Math.abs(o2[0] - ex(0.37 * h)); } } }); return e; };
+    const q = m => Math.log2(dens(m, 0.1) / dens(m, 0.05)), qT = q('tsit5'), q3 = q('ros3p'), qD = q('dopri5'), qR = q('radau5');
+    ok(near(qT, 5, 0.3) && near(q3, 4, 0.3) && qD > 4.7 && near(qR, 4, 0.3), `dense output: local error orders Tsitouras ${qT.toFixed(2)} (its own quartic interpolant: 5), ROS3P ${q3.toFixed(2)} (Hermite: 4), DOPRI5 ${qD.toFixed(2)}, Radau collocation ${qR.toFixed(2)} (degree 3: 4)`); }
+  // ---- Radau IIA: RADAU5's transformation (one real + one complex n × n system) gives the same iterates as the full 3n × 3n system ----
+  { const fR = (t, y, d) => { d[0] = -0.04 * y[0] + 1e4 * y[1] * y[2]; d[2] = 3e7 * y[1] * y[1]; d[1] = -d[0] - d[2]; }, fV = (t, y, d) => { d[0] = y[1]; d[1] = 1000 * (1 - y[0] * y[0]) * y[1] - y[0]; };
+    const N = 40, fH = (t, y, d) => { const k = (N + 1) ** 2; for (let i = 0; i < N; i++) d[i] = k * ((i ? y[i - 1] : 0) - 2 * y[i] + (i < N - 1 ? y[i + 1] : 0)) + Math.sin(Math.PI * (i + 1) / (N + 1)) * Math.cos(t); };
+    const cases = [['Robertson', fR, [1, 0, 0], 40, 1e-11], ['Van der Pol', fV, [2, 0], 2000, 1e-8], [`heat equation, ${N} cells`, fH, new Array(N).fill(0), 2, 1e-8]];
+    for (const [name, f, y0, T, at] of cases) {
+      const tm = [], r = ['complex', 'full'].map(L => { const t1 = Date.now(), x = S.integrate({ f, y0, tEnd: T, rtol: 1e-8, atol: at, method: 'radau5', radauLinear: L }); tm.push(Date.now() - t1); return x; });
+      const d = Math.max(...r[0].y.map((v, i) => Math.abs(v - r[1].y[i]) / Math.max(Math.abs(r[1].y[i]), 1e-300)));
+      ok(r[0].steps === r[1].steps && r[0].rejected === r[1].rejected && r[0].nfev === r[1].nfev && d < 1e-11, `Radau IIA, ${name}: the transformed Newton system (real + complex n × n) = the full 3n × 3n one: ${r[0].steps} steps both, largest relative difference ${d.toExponential(1)} (${tm[0]} ms against ${tm[1]} ms)`);
+    }
+  }
+  // ---- compensated summation (Neumaier) ----
+  { const w = S.welford(); for (const x of [1, 1e100, 1, -1e100]) w.add(x); const k = S.ksum(); for (let i = 0; i < 1e6; i++) k.add(0.1); let plain = 0; for (let i = 0; i < 1e6; i++) plain += 0.1;
+    const ta = S.timeAvg(0, 0.1); for (let i = 1; i <= 1e6; i++) ta.update(i * 1e-3, 0.1);
+    ok(w.sum === 2 && Math.abs(k.value - 1e5) < 1e-9 && Math.abs(plain - 1e5) > 1e-7 && Math.abs(ta.area(1000) - 100) < 1e-11, `compensated sums: welford [1, 1e100, 1, −1e100] → ${w.sum}; 10⁶ × 0.1 → error ${Math.abs(k.value - 1e5).toExponential(1)} (plain ${Math.abs(plain - 1e5).toExponential(1)}); timeAvg area error ${Math.abs(ta.area(1000) - 100).toExponential(1)}`); }
   const da = S.dae({ f: (t, y, z, d) => { d[0] = -z[0]; }, g: (t, y, z, r2) => { r2[0] = z[0] ** 3 + z[0] - y[0] ** 3 - y[0]; }, y0: [1], z0: [0.3], tEnd: 1, rtol: 1e-10, atol: 1e-12 });
   ok(rel(da.y[0], exact, 1e-8) && rel(da.z[0], exact, 1e-8), 'index-1 DAE y′ = −z, 0 = z³ + z − y³ − y (so z = y): y(1) = z(1) = e⁻¹');
   // stochastic kinetics: A → ∅ at rate k: E[A(t)] = A0 e^(−kt), Var = A0 e^(−kt)(1 − e^(−kt))

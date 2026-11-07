@@ -68,12 +68,14 @@
   const SCH_T = { id: 'id!', scheme: 'enum:' + Object.keys(SCHEMES).join('|') + '!', if: lits(16), then: 'expr!', rank: 'fin', cqs: { $list: { $obj: CQ_T }, max: 12 }, on: 'numx', label: 'key' };
   const CARG_T = { id: 'id!', then: 'expr!', if: lits(16), unless: lits(16), weight: 'numx', on: 'numx', label: 'key' };
   const STD_T = { lit: 'expr!', ps: 'enum:' + PS.join('|') + '!' };
-  const POS_T = { kind: 'enum:' + HOH.join('|') + '!', holder: 'id!', other: 'id!', act: 'expr!', on: 'numx' };
+  const POS_T = { kind: 'enum:' + HOH.join('|') + '!', holder: 'id!', other: 'id!', act: 'expr!', passive: 'bool', on: 'numx' };
   const ASK_T = { kind: 'enum:' + HOH.join('|') + '!', holder: 'id!', other: 'id!', act: 'expr!' };
   const ISSUE_T = { id: 'id!', p: 'numx', prior: 'numx', lr: { $list: 'numx', max: 32 }, standard: 'enum:' + STANDARDS.join('|'), threshold: 'numx', burden: 'enum:claimant|defendant', presumed: 'ref', mode: 'enum:thayer|morgan', rebut: 'numx', label: 'key' };
   const COST_T = { fp: 'numx!', fn: 'numx!' };
   const FACTOR_T = { id: 'id!', side: 'enum:p|d!', label: 'key' };
-  const CASE_T = { id: 'id!', factors: { $list: 'ref', max: 64 }, outcome: 'enum:p|d!', reason: { $list: 'ref', max: 64 }, label: 'key' };
+  const VAL_T = { dim: 'ref!', v: 'numx!' };
+  const DIM_T = { id: 'id!', side: 'enum:p|d!', label: 'key' };
+  const CASE_T = { id: 'id!', factors: { $list: 'ref', max: 64 }, values: { $list: { $obj: VAL_T }, max: 32 }, outcome: 'enum:p|d!', reason: { $list: 'ref', max: 64 }, label: 'key' };
   const PERIOD_T = { n: 'numx!', unit: 'enum:days|weeks|months|years|business!' };
   const TOLL_T = { from: 'expr!', to: 'expr!' };
   const EVENT_T = { kind: 'enum:offer|counteroffer|revocation|rejection|acceptance|lapse!', by: 'id', t: 'numx!', arrive: 'numx', terms: { $list: 'id', max: 32 }, on: 'numx' };
@@ -100,14 +102,14 @@
   const MODEL_T = {
     task: 'enum:' + TASKS.join('|') + '!', query: 'expr',
     // rules · aspic · carneades
-    rules: { $list: { $obj: RULE_T }, max: MAX_RULES }, sup: { $list: { $obj: SUP_T }, max: 400 }, order: { $list: 'enum:superior|specialis|posterior', max: 3 },
+    rules: { $list: { $obj: RULE_T }, max: MAX_RULES }, variant: 'enum:blocking|propagating', loops: 'enum:undecided|fail', sup: { $list: { $obj: SUP_T }, max: 400 }, order: { $list: 'enum:superior|specialis|posterior', max: 3 },
     facts: lits(200), toggles: { $list: { $obj: TOG_T }, max: 64 },
-    premises: { $list: { $obj: PREM_T }, max: 100 }, schemes: { $list: { $obj: SCH_T }, max: 40 }, link: 'enum:last|weakest', semantics: 'enum:grounded|preferred|stable|complete',
+    premises: { $list: { $obj: PREM_T }, max: 100 }, schemes: { $list: { $obj: SCH_T }, max: 40 }, link: 'enum:last|weakest', closure: 'enum:none|transposition', semantics: 'enum:grounded|preferred|stable|complete',
     args: { $list: { $obj: CARG_T }, max: 100 }, assume: lits(200), standards: { $list: { $obj: STD_T }, max: 100 }, alpha: 'numx', beta: 'numx', gamma: 'numx',
     // hohfeld · proof · cases
-    positions: { $list: { $obj: POS_T }, max: 100 }, ask: { $obj: ASK_T },
+    positions: { $list: { $obj: POS_T }, max: 100 }, ask: { $obj: ASK_T }, lindahl: { $obj: { agent: 'id!', atom: 'id!', other: 'id' } },
     issues: { $list: { $obj: ISSUE_T }, max: 32 }, claim: { $list: 'ref', max: 32 }, costs: { $obj: COST_T }, aggregate: 'enum:element|product',
-    factors: { $list: { $obj: FACTOR_T }, max: 64 }, cases: { $list: { $obj: CASE_T }, max: 100 }, side: 'enum:p|d', focus: 'ref', reasoning: 'enum:result|reason',
+    factors: { $list: { $obj: FACTOR_T }, max: 64 }, dimensions: { $list: { $obj: DIM_T }, max: 32 }, values: { $list: { $obj: VAL_T }, max: 32 }, cases: { $list: { $obj: CASE_T }, max: 100 }, side: 'enum:p|d', focus: 'ref', reasoning: 'enum:result|reason',
     // deadline · obligations
     start: 'expr', period: { $obj: PERIOD_T }, excludeStart: 'bool', roll: 'enum:next|previous|none', monthEnd: 'enum:last|next', weekend: { $list: 'int:0:6', max: 7 },
     holidays: lits(400), tolling: { $list: { $obj: TOLL_T }, max: 32 }, longstop: { $obj: PERIOD_T }, asOf: 'numx',
@@ -129,13 +131,13 @@
     norms: { $list: { $obj: NORM_T }, max: 200 }, trace: { $list: { $obj: STEP_T }, max: MAX_DAYS }, count: 'enum:calendar|business', horizon: 'int:1:2000',
     step: 'numx',
   };
-  const REQ = { rules: ['rules'], aspic: ['premises|rules|schemes'], carneades: ['args'], hohfeld: ['positions'], proof: ['issues'], cases: ['factors', 'cases'], deadline: ['start', 'period'],
+  const REQ = { rules: ['rules'], aspic: ['premises|rules|schemes'], carneades: ['args'], hohfeld: ['positions'], proof: ['issues'], cases: ['factors|dimensions', 'cases'], deadline: ['start', 'period'],
     contract: ['events'], damages: ['items|price'], crime: ['offences'], sentence: ['grid'], proportionality: ['weights'], vote: ['yes|voters'], citation: ['text'], shares: ['heirs', 'estate'], obligations: ['norms', 'trace'] };
   const TASK_OUT = {
-    rules: [['holds', 'definite', 'refuted', 'undecided', 'fired', 'defeated', 'blocked', 'conclusions', 'status'], ['status']],
+    rules: [['holds', 'definite', 'refuted', 'undecided', 'supported', 'fired', 'defeated', 'blocked', 'conclusions', 'status'], ['status']],
     aspic: [['accepted', 'credulous', 'arguments', 'attacks', 'defeats', 'extensions', 'inCount', 'status'], ['labels']],
     carneades: [['acceptable', 'negation', 'applicable', 'arguments', 'status'], ['applicable']],
-    hohfeld: [['holds', 'contradictions', 'conflicts', 'positions', 'derived'], []],
+    hohfeld: [['holds', 'contradictions', 'conflicts', 'positions', 'derived', 'lindahl', 'lindahlOther', 'joint', 'jointCount'], ['joint']],
     proof: [['established', 'claim', 'posterior', 'threshold', 'product', 'winner'], ['posteriors']],
     cases: [['forced', 'permissible', 'consistent', 'onPoint', 'best', 'mostOnPoint', 'shared', 'distinctions', 'binding'], ['shared', 'binding']],
     deadline: [['end', 'endY', 'endM', 'endD', 'weekday', 'days', 'businessDays', 'extended', 'expired', 'remaining', 'tolled', 'longstopEnd'], []],
@@ -156,7 +158,7 @@
   const CODES = ['inconsistent', 'undecided', 'unresolved', 'budget', 'no-stable', 'contradiction', 'conflict', 'conjunction', 'shifted', 'probability',
     'no-precedent', 'month-end', 'rolled', 'tolled', 'longstop', 'expired', 'counteroffer', 'revoked', 'lapsed', 'rejected', 'in-transit', 'late', 'mirror',
     'minor', 'unforeseeable', 'avoidable', 'penalty', 'negative', 'default-mind', 'strict-liability', 'causation', 'defence', 'grid-range', 'clamped',
-    'stalemate', 'scale', 'no-quorum', 'tie', 'casting', 'blocking', 'no-match', 'awl', 'radd', 'escheat', 'no-heirs', 'claims-short', 'parse', 'trace-truncated', 'weight', 'value'];
+    'stalemate', 'scale', 'no-quorum', 'tie', 'casting', 'blocking', 'no-match', 'awl', 'radd', 'escheat', 'no-heirs', 'claims-short', 'parse', 'trace-truncated', 'weight', 'value', 'loop'];
 
   /* =====================================================================================================================
      2. Literals (through logic@1's parser), dates (proleptic Gregorian), citation templates */
@@ -258,7 +260,7 @@
     for (const [s, p] of litFields(m)) { const r = parseLit(s); if (!r.ok) E(r.code, p, r.msg); }
     // ids and references
     const rules = dupes(m.rules, 'model.rules', E, 'rule'), schemes = dupes(m.schemes, 'model.schemes', E, 'scheme');
-    for (const k of ['args', 'issues', 'factors', 'cases', 'elements', 'parties', 'items', 'offences', 'defences', 'adjust', 'alternatives', 'voters', 'patterns', 'heirs', 'norms']) dupes(m[k], 'model.' + k, E, k === 'args' ? 'argument' : k.replace(/ies$/, 'y').replace(/s$/, ''));
+    for (const k of ['args', 'issues', 'factors', 'dimensions', 'cases', 'elements', 'parties', 'items', 'offences', 'defences', 'adjust', 'alternatives', 'voters', 'patterns', 'heirs', 'norms']) dupes(m[k], 'model.' + k, E, k === 'args' ? 'argument' : k.replace(/ies$/, 'y').replace(/s$/, ''));
     if (Array.isArray(m.rules) && Array.isArray(m.schemes)) m.schemes.forEach((s, i) => { if (rules.has(s.id)) E('duplicate', `model.schemes[${i}].id`, `the id ${s.id} is a rule too`); });
     (m.sup || []).forEach((s, i) => { for (const f of ['win', 'lose']) if (!rules.has(s[f]) && !schemes.has(s[f])) E('ref', `model.sup[${i}].${f}`, 'not a rule of the model'); });
     if (task === 'aspic' || task === 'rules') (m.rules || []).forEach((r, i) => { if (task === 'aspic' && r.kind === 'defeater') E('value', `model.rules[${i}].kind`, 'aspic has strict and defeasible rules (a defeater is an undercutter: a rule that concludes ~<rule id>)'); });
@@ -281,6 +283,9 @@
       (m.facts || []).forEach((x, j) => { if (!fs.has(x)) E('ref', `model.facts[${j}]`, 'not a factor of the model'); });
       (m.toggles || []).forEach((x, j) => { if (!fs.has(x.lit)) E('ref', `model.toggles[${j}].lit`, 'not a factor of the model'); });
       if (m.focus !== undefined && !cs.has(m.focus)) E('ref', 'model.focus', 'not a case of the model');
+      const ds = idsOf(m.dimensions);
+      (m.cases || []).forEach((c, i) => (c.values || []).forEach((x, j) => { if (!ds.has(x.dim)) E('ref', `model.cases[${i}].values[${j}].dim`, 'not a dimension of the model'); }));
+      (m.values || []).forEach((x, j) => { if (!ds.has(x.dim)) E('ref', `model.values[${j}].dim`, 'not a dimension of the model'); });
     }
     if (task === 'deadline' || task === 'obligations') {
       if (m.start !== undefined && dayOf(m.start) === null) E('date', 'model.start', 'needs a date YYYY-MM-DD that exists (1600–2400)');
@@ -311,6 +316,8 @@
       const people = new Set(); (m.positions || []).forEach(p => { people.add(p.holder); people.add(p.other); });
       (m.positions || []).forEach((p, i) => { if (p.holder === p.other) E('value', `model.positions[${i}].other`, 'a jural relation holds between two different persons'); });
       if (isObj(m.ask) && m.ask.holder === m.ask.other) E('value', 'model.ask.other', 'a jural relation holds between two different persons');
+      (m.positions || []).forEach((p, i) => { if (p.passive === true && typeof p.act === 'string' && (lit(p.act) || '').startsWith('~')) E('value', `model.positions[${i}].act`, 'a passive position names an atom (p, not ~p)'); });
+      if (isObj(m.lindahl) && m.lindahl.other === m.lindahl.agent) E('value', 'model.lindahl.other', 'needs a second agent');
     }
     const [SC, SE] = TASK_OUT[task];
     C.checkOutputs(spec, ID, KINDS, (o, at) => {
@@ -431,32 +438,71 @@
     }
     return { R, facts, sup };
   }
-  function defeasible(th, D) {
-    const { R, facts, sup } = th, U = new Set();
+  /* defeasible(th, D, opts): opts.variant 'blocking' (default: Antoniou et al. 2001) or 'propagating' (ambiguity propagation through the
+     support tags ±Σ: Antoniou, Billington, Governatori, Maher & Rock 2000, "A family of defeasible reasoning logics and its
+     implementation", ECAI; Antoniou et al. 2000 AAAI "A flexible framework"):
+       +Σq: +Δq, or some strict/defeasible r for q has every body literal +Σ and every s for ∼q is discarded (a body literal −∂) or not s > r
+       −Σq: −Δq, and every strict/defeasible r for q has a body literal −Σ or is beaten by an applicable (+∂ body) s for ∼q with s > r
+       +∂ / −∂ as in blocking, but an attacker is discarded only when it is unsupported (a body literal −Σ) and it counts against when it
+       is supported (every body literal +Σ).
+     opts.loops 'undecided' (default: the basic proof theory leaves positive loops undecided) or 'fail' (failure by looping, the
+     well-founded defeasible logics: Maier & Nute 2006, "Ambiguity propagating defeasible logic and the well-founded semantics", JELIA;
+     Billington 2008, "Propositional clausal defeasible logic", JELIA): after each fixpoint the greatest unfounded set of the undecided
+     literals (those with no rule whose body avoids both refuted literals and the set itself) is refuted (−Δ, −∂, −Σ), then the fixpoint
+     runs again, until nothing changes. */
+  function defeasible(th, D, opts) {
+    const { R, facts, sup } = th, U = new Set(), prop = opts && opts.variant === 'propagating', fail = opts && opts.loops === 'fail';
     for (const f of facts) { U.add(f); U.add(neg(f)); }
     for (const r of R) { U.add(r.head); U.add(neg(r.head)); for (const b of r.body) { U.add(b); U.add(neg(b)); } }
-    const pD = new Set(), mD = new Set(), pd = new Set(), md = new Set();
+    const pD = new Set(), mD = new Set(), pd = new Set(), md = new Set(), pS = new Set(), mS = new Set();
     const by = new Map([...U].map(q => [q, R.filter(r => r.head === q)]));
     const gt = (a, b) => sup.has(a.id + '>' + b.id);
-    for (let pass = 0, ch = true; ch && pass < 4 * U.size + 10; pass++) {
-      ch = false;
-      for (const q of U) {
-        const rs = by.get(q), st = rs.filter(r => r.kind === 'strict');
-        if (!pD.has(q) && (facts.has(q) || st.some(r => r.body.every(b => pD.has(b))))) { pD.add(q); ch = true; }
-        if (!mD.has(q) && !facts.has(q) && st.every(r => r.body.some(b => mD.has(b)))) { mD.add(q); ch = true; }
-      }
-      for (const q of U) {
-        const nq = neg(q), sd = by.get(q).filter(r => r.kind !== 'defeater'), att = by.get(nq);
-        const appl = r => r.body.every(b => pd.has(b)), disc = r => r.body.some(b => md.has(b));
-        if (!pd.has(q) && (pD.has(q) || (mD.has(nq) && sd.some(appl) && att.every(s => disc(s) || sd.some(t => appl(t) && gt(t, s)))))) { pd.add(q); ch = true; }
-        if (!md.has(q) && mD.has(q) && (pD.has(nq) || sd.every(disc) || att.some(s => appl(s) && sd.every(t => disc(t) || !gt(t, s))))) { md.add(q); ch = true; }
+    const sdOf = q => by.get(q).filter(r => r.kind !== 'defeater');
+    function fix() {
+      for (let pass = 0, ch = true; ch && pass < 6 * U.size + 10; pass++) {
+        ch = false;
+        for (const q of U) {
+          const st = by.get(q).filter(r => r.kind === 'strict');
+          if (!pD.has(q) && (facts.has(q) || st.some(r => r.body.every(b => pD.has(b))))) { pD.add(q); ch = true; }
+          if (!mD.has(q) && !facts.has(q) && st.every(r => r.body.some(b => mD.has(b)))) { mD.add(q); ch = true; }
+        }
+        for (const q of U) {
+          const nq = neg(q), sd = sdOf(q), att = by.get(nq);
+          const appl = r => r.body.every(b => pd.has(b)), disc = r => r.body.some(b => md.has(b));
+          if (prop) {
+            if (!pS.has(q) && (pD.has(q) || sd.some(r => r.body.every(b => pS.has(b)) && att.every(s => disc(s) || !gt(s, r))))) { pS.add(q); ch = true; }
+            if (!mS.has(q) && mD.has(q) && sd.every(r => r.body.some(b => mS.has(b)) || att.some(s => appl(s) && gt(s, r)))) { mS.add(q); ch = true; }
+            const unsup = s => s.body.some(b => mS.has(b)), sup_ = s => s.body.every(b => pS.has(b));
+            if (!pd.has(q) && (pD.has(q) || (mD.has(nq) && sd.some(appl) && att.every(s => unsup(s) || sd.some(t => appl(t) && gt(t, s)))))) { pd.add(q); ch = true; }
+            if (!md.has(q) && mD.has(q) && (pD.has(nq) || sd.every(disc) || att.some(s => sup_(s) && sd.every(t => disc(t) || !gt(t, s))))) { md.add(q); ch = true; }
+          } else {
+            if (!pd.has(q) && (pD.has(q) || (mD.has(nq) && sd.some(appl) && att.every(s => disc(s) || sd.some(t => appl(t) && gt(t, s)))))) { pd.add(q); ch = true; }
+            if (!md.has(q) && mD.has(q) && (pD.has(nq) || sd.every(disc) || att.some(s => appl(s) && sd.every(t => disc(t) || !gt(t, s))))) { md.add(q); ch = true; }
+          }
+        }
       }
     }
+    /** the greatest unfounded set among the literals that are neither proved nor refuted (founded: a fact, proved, or a rule whose body
+        avoids the refuted literals and the set) */
+    function unfounded(pos, negS, rulesOf, isFact) {
+      const W = new Set([...U].filter(q => !pos.has(q) && !negS.has(q)));
+      for (let ch = true, k = 0; ch && k < U.size + 2; k++) { ch = false; for (const q of [...W]) if (isFact(q) || rulesOf(q).some(r => r.body.every(b => !negS.has(b) && !W.has(b)))) { W.delete(q); ch = true; } }
+      return W;
+    }
+    fix();
+    if (fail) for (let round = 0; round < U.size + 2; round++) {
+      let added = 0;
+      for (const q of unfounded(pD, mD, q => by.get(q).filter(r => r.kind === 'strict'), q => facts.has(q))) { mD.add(q); added++; }
+      for (const q of unfounded(pd, md, sdOf, q => pD.has(q))) { md.add(q); added++; }
+      if (prop) for (const q of unfounded(pS, mS, sdOf, q => pD.has(q))) { mS.add(q); added++; }
+      if (!added) break;
+      D.add('loop'); fix();
+    }
     if ([...pD].some(q => pD.has(neg(q)))) D.add('inconsistent');
-    return { U, pD, mD, pd, md, by, gt };
+    return { U, pD, mD, pd, md, pS, mS, by, gt };
   }
   function runRules(m, env, D, S, SE, Rn) {
-    const th = buildTheory(m, env, D), X = defeasible(th, D), q = typeof m.query === 'string' ? lit(m.query) : null;
+    const th = buildTheory(m, env, D), X = defeasible(th, D, { variant: m.variant, loops: m.loops }), q = typeof m.query === 'string' ? lit(m.query) : null;
     const st = [], user = th.R.filter(r => !r.exc), appl = r => r.body.every(b => X.pd.has(b)), disc = r => r.body.some(b => X.md.has(b));
     let fired = 0, defeated = 0, blocked = 0;
     const status = new Map();
@@ -475,7 +521,7 @@
     }
     for (const r of user) { const s = status.get(r.id); if (s === 2) fired++; else if (s === 1) defeated++; else if (s === 0) blocked++; st.push(s); }
     if ([...X.U].some(l => !X.pd.has(l) && !X.md.has(l))) D.add('undecided');
-    Object.assign(S, { holds: q ? b01(X.pd.has(q)) : NaN, definite: q ? b01(X.pD.has(q)) : NaN, refuted: q ? b01(X.pd.has(neg(q))) : NaN, undecided: q ? b01(!X.pd.has(q) && !X.md.has(q)) : NaN,
+    Object.assign(S, { holds: q ? b01(X.pd.has(q)) : NaN, definite: q ? b01(X.pD.has(q)) : NaN, refuted: q ? b01(X.pd.has(neg(q))) : NaN, undecided: q ? b01(!X.pd.has(q) && !X.md.has(q)) : NaN, supported: q && m.variant === 'propagating' ? b01(X.pS.has(q)) : NaN,
       fired, defeated, blocked, conclusions: [...X.pd].length });
     S.$status = id => (status.has(id) ? status.get(id) : NaN); S.$statusDefault = q ? NaN : NaN;
     SE.status = st;
@@ -504,6 +550,15 @@
       if (!on(s.on, env)) continue; const h = lit(s.then); if (!h) continue;
       rules.push({ id: s.id, body: (s.if || []).map(lit).filter(Boolean), head: h, strict: false, rank: isNum(s.rank) ? s.rank : 0, scheme: s.scheme });
       for (const q of s.cqs || []) if (on(q.on, env)) { const ql = q.lit !== undefined ? lit(q.lit) : 'cq_' + s.id + '_' + q.cq.replace(/-/g, '_'); if (!ql) continue; prem.push({ lit: ql, kind: 'ordinary', rank: 0 }); rules.push({ id: s.id + '?' + q.cq, body: [ql], head: '~' + s.id, strict: false, rank: 0, exc: true }); }
+    }
+    // closure under transposition (Caminada & Amgoud 2007, AIJ 171:286; Modgil & Prakken 2013 §4): for a strict φ1 … φn → ψ add every
+    // φ1 … ¬ψ … φn → ¬φi, so that the rationality postulates (closure, direct and indirect consistency) hold for well-formed theories
+    if (m.closure === 'transposition') {
+      const seen = new Set(rules.filter(r => r.strict).map(r => [...r.body].sort().join(',') + '>' + r.head));
+      for (const r of rules.slice()) if (r.strict) r.body.forEach((phi, i) => {
+        const body = r.body.slice(); body[i] = neg(r.head); const head = neg(phi), k = [...body].sort().join(',') + '>' + head;
+        if (seen.has(k)) return; seen.add(k); rules.push({ id: r.id + '^' + (i + 1), body, head, strict: true, rank: r.rank, transposed: true });
+      });
     }
     // the arguments: premises, then rules over existing arguments (no conclusion twice on a branch), at most MAX_ARGS
     const A = [], keyset = new Set();
@@ -629,7 +684,7 @@
   function runHohfeld(m, env, D, S, SE, Rn) {
     const facts = new Map(), stated = new Set();
     const put = (c, src) => { const k = c.slice(0, 4).join('|'); if (!facts.has(k)) facts.set(k, { c, vals: new Set(), src: [] }); const f = facts.get(k); f.vals.add(c[4]); f.src.push(src); };
-    for (const p of m.positions || []) { if (!on(p.on, env)) continue; const a = lit(p.act); if (!a) continue; const c = hohCanon(p.kind, p.holder, p.other, a); put(c, 'stated'); stated.add(c.slice(0, 4).join('|')); }
+    for (const p of m.positions || []) { if (!on(p.on, env)) continue; const a0 = lit(p.act); if (!a0) continue; const a = p.passive === true ? 'pass:' + atomOf(a0) : a0; const c = hohCanon(p.kind, p.holder, p.other, a); put(c, 'stated'); stated.add(c.slice(0, 4).join('|')); }
     // SDL D: a stated duty gives the privilege to do it (no duty to the opposite) when nothing says otherwise
     for (const f of [...facts.values()]) if (f.c[0] === 'D' && f.vals.has(true)) { const k = ['D', f.c[1], f.c[2], neg(f.c[3])].join('|'); if (!facts.has(k)) put(['D', f.c[1], f.c[2], neg(f.c[3]), false], 'sdl'); }
     let contra = 0, conflicts = 0;
@@ -639,6 +694,25 @@
     let holds = NaN;
     if (isObj(m.ask)) { const a = lit(m.ask.act); if (a) { const c = hohCanon(m.ask.kind, m.ask.holder, m.ask.other, a), f = facts.get(c.slice(0, 4).join('|')); holds = !f ? 0.5 : f.vals.size > 1 ? 0.5 : f.vals.has(c[4]) ? 1 : 0; } }
     const n = [...facts.values()].reduce((s, f) => s + f.vals.size, 0);
+    /* Lindahl 1977 (Position and Change), Kanger 1972; Sergot 2013: x's three exhaustive alternatives about p are Do(x, p), Do(x, ¬p) and
+       Pass(x, p) (neither). A duty of x (to anyone) to see to p forbids Do ¬p and Pass; to ¬p forbids Do p and Pass; a duty to stay passive
+       (passive: true) forbids both doings. The one-agent type is the set of permitted alternatives (7 non-empty sets; none = a conflict):
+       T1 {Do p, Do ¬p, Pass} T2 {Do p, Do ¬p} T3 {Do p, Pass} T4 {Do p} T5 {Do ¬p, Pass} T6 {Do ¬p} T7 {Pass}. Two agents: the 7 joint
+       alternatives (Do(x,p) ∧ Do(y,¬p) and its mirror are impossible) permitted when each part is permitted; `joint` is their bit set. */
+    const duty = (x, a) => [...facts.values()].some(f => f.c[0] === 'D' && f.c[1] === x && f.c[3] === a && f.vals.has(true));
+    const typeOf = (x, p) => { const dp = !duty(x, '~' + p) && !duty(x, 'pass:' + p), dn = !duty(x, p) && !duty(x, 'pass:' + p), pa = !duty(x, p) && !duty(x, '~' + p); return { alt: [dp, dn, pa], t: dp ? (dn ? (pa ? 1 : 2) : (pa ? 3 : 4)) : dn ? (pa ? 5 : 6) : pa ? 7 : 0 }; };
+    let lin = NaN, linO = NaN, joint = NaN, jc = NaN, jser = [];
+    if (isObj(m.lindahl)) {
+      const X1 = typeOf(m.lindahl.agent, m.lindahl.atom); lin = X1.t; if (!lin) D.add('conflict');
+      if (m.lindahl.other !== undefined) {
+        const Y1 = typeOf(m.lindahl.other, m.lindahl.atom); linO = Y1.t; if (!linO) D.add('conflict');
+        const J = [[0, 0], [0, 2], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]];   // (x, y): 0 Do p, 1 Do ¬p, 2 Pass
+        jser = J.map(([a, b]) => b01(X1.alt[a] && Y1.alt[b]));
+        joint = jser.reduce((acc, v, i) => acc + v * (1 << i), 0); jc = jser.reduce((a, b) => a + b, 0);
+        if (!jc) D.add('conflict');
+      }
+    }
+    Object.assign(S, { lindahl: lin, lindahlOther: linO, joint, jointCount: jc }); SE.joint = jser;
     Object.assign(S, { holds, contradictions: contra, conflicts, positions: 2 * n, derived: 2 * n - [...facts.values()].filter(f => f.src.includes('stated')).length });
     const fmt = (c, v) => (c[0] === 'D' ? `${c[1]} →${c[2]} ${v ? 'O' : '¬O'} ${c[3].replace('~', '¬')}` : `${c[1]} →${c[2]} ${v ? 'Pw' : '¬Pw'} ${c[3].replace('~', '¬')}`);
     const rows = [];
@@ -708,32 +782,39 @@
     const cfs = new Set((m.facts || []).filter(f => side.has(f)));
     for (const t of m.toggles || []) if (side.has(t.lit) && on(t.on, env)) cfs.add(t.lit);
     const other = s => (s === 'p' ? 'd' : 'p');
-    const cases = (m.cases || []).map(c => { const fs = new Set(c.factors || []); return { id: c.id, fs, out: c.outcome, pro: [...fs].filter(f => side.get(f) === c.outcome), con: [...fs].filter(f => side.get(f) !== c.outcome), reason: Array.isArray(c.reason) && c.reason.length ? c.reason : null, label: c.label }; });
+    // dimensions with magnitudes (Ashley 1990; Bench-Capon & Rissland 2001; Horty 2019 "Reasoning with dimensions and magnitudes",
+    // AI & Law 27:309; Prakken 2021): a dimension favours `side` more as its value grows; a value is shared when both cases have one
+    const dimSide = new Map((m.dimensions || []).map(d => [d.id, d.side]));
+    const valsOf = list => { const v = new Map(); for (const x of list || []) if (dimSide.has(x.dim)) { const y = num(x.v, env, NaN); if (Number.isFinite(y)) v.set(x.dim, y); } return v; };
+    const cfsV = valsOf(m.values);
+    const fav = (d, x, y, s) => (dimSide.get(d) === s ? x >= y : x <= y);   // x at least as good for s as y on d
+    const cases = (m.cases || []).map(c => { const fs = new Set(c.factors || []); return { id: c.id, fs, vals: valsOf(c.values), out: c.outcome, pro: [...fs].filter(f => side.get(f) === c.outcome), con: [...fs].filter(f => side.get(f) !== c.outcome), reason: Array.isArray(c.reason) && c.reason.length ? c.reason : null, label: c.label }; });
     const reasonOf = c => (m.reasoning === 'reason' && c.reason ? c.reason : c.pro);
-    const forces = (c, facts) => reasonOf(c).every(f => facts.has(f)) && [...facts].filter(f => side.get(f) === other(c.out)).every(f => c.fs.has(f));
-    const shared = c => [...c.fs].filter(f => cfs.has(f));
+    // a fortiori: the reason's factors are present, no other-side factor is new, and on every dimension both have the situation is at least as good for c's winner
+    const forces = (c, facts, vals) => reasonOf(c).every(f => facts.has(f)) && [...facts].filter(f => side.get(f) === other(c.out)).every(f => c.fs.has(f)) && [...c.vals].every(([d, y]) => !vals.has(d) || fav(d, vals.get(d), y, c.out));
+    const shared = c => [...c.fs].filter(f => cfs.has(f)).concat([...c.vals.keys()].filter(d => cfsV.has(d)).map(d => '@' + d));
     const mySide = m.side || 'p';
     const onp = cases.filter(c => shared(c).length > 0);
     const sup = (a, b) => { const A = new Set(shared(a)), B = shared(b); return A.size > B.length && B.every(f => A.has(f)); };
     const most = onp.filter(c => !onp.some(d => d !== c && sup(d, c)));
     const forMe = onp.filter(c => c.out === mySide), best = forMe.filter(c => !forMe.some(d => d !== c && sup(d, c)));
-    const fP = cases.some(c => c.out === 'p' && forces(c, cfs)), fD = cases.some(c => c.out === 'd' && forces(c, cfs));
+    const fP = cases.some(c => c.out === 'p' && forces(c, cfs, cfsV)), fD = cases.some(c => c.out === 'd' && forces(c, cfs, cfsV));
     if (fP && fD) D.add('inconsistent');
     if (!onp.length) D.add('no-precedent');
     let consistent = true;
-    for (const a of cases) for (const b of cases) if (a.out !== b.out && forces(a, b.fs)) consistent = false;
+    for (const a of cases) for (const b of cases) if (a.out !== b.out && forces(a, b.fs, b.vals)) consistent = false;
     if (!consistent) D.add('inconsistent');
     // permissible: no precedent forces the other side, and the new decision (result model) forces no opposite precedent
-    const nw = { fs: cfs, out: mySide, pro: [...cfs].filter(f => side.get(f) === mySide), reason: null };
-    const permissible = !cases.some(c => c.out !== mySide && forces(c, cfs)) && !cases.some(c => c.out !== mySide && forces(nw, c.fs));
-    const distinctions = c => c.pro.filter(f => !cfs.has(f)).length + [...cfs].filter(f => side.get(f) === other(c.out) && !c.fs.has(f)).length;   // CATO (Aleven 2003 §3)
+    const nw = { fs: cfs, vals: cfsV, out: mySide, pro: [...cfs].filter(f => side.get(f) === mySide), reason: null };
+    const permissible = !cases.some(c => c.out !== mySide && forces(c, cfs, cfsV)) && !cases.some(c => c.out !== mySide && forces(nw, c.fs, c.vals));
+    const distinctions = c => c.pro.filter(f => !cfs.has(f)).length + [...cfs].filter(f => side.get(f) === other(c.out) && !c.fs.has(f)).length + [...c.vals].filter(([d, y]) => cfsV.has(d) && !fav(d, cfsV.get(d), y, c.out)).length;   // CATO (Aleven 2003 §3) + a weaker magnitude
     const focus = m.focus !== undefined ? cases.find(c => c.id === m.focus) : best[0] || most[0] || cases[0];
     Object.assign(S, { forced: fP && !fD ? 1 : fD && !fP ? -1 : 0, permissible: b01(permissible), consistent: b01(consistent), onPoint: onp.length, best: best.length, mostOnPoint: most.length,
-      shared: focus ? shared(focus).length : NaN, distinctions: focus ? distinctions(focus) : NaN, binding: focus ? b01(forces(focus, cfs)) : NaN });
+      shared: focus ? shared(focus).length : NaN, distinctions: focus ? distinctions(focus) : NaN, binding: focus ? b01(forces(focus, cfs, cfsV)) : NaN });
     const at = f => id => { const c = cases.find(x => x.id === id); return c ? f(c) : NaN; };
-    S.$at = { shared: at(c => shared(c).length), distinctions: at(distinctions), binding: at(c => b01(forces(c, cfs))) };
-    SE.shared = cases.map(c => shared(c).length); SE.binding = cases.map(c => b01(forces(c, cfs)));
-    Rn.scene = rowsScene(cases.map(c => ({ s: `${c.id} (${c.out === 'p' ? 'π' : 'δ'}): ${shared(c).join(', ') || '—'}`, c: forces(c, cfs) ? 'hi' : !shared(c).length ? 'muted' : c.out === mySide ? 'ok' : 'bad' })), D);
+    S.$at = { shared: at(c => shared(c).length), distinctions: at(distinctions), binding: at(c => b01(forces(c, cfs, cfsV))) };
+    SE.shared = cases.map(c => shared(c).length); SE.binding = cases.map(c => b01(forces(c, cfs, cfsV)));
+    Rn.scene = rowsScene(cases.map(c => ({ s: `${c.id} (${c.out === 'p' ? 'π' : 'δ'}): ${shared(c).join(', ') || '—'}`, c: forces(c, cfs, cfsV) ? 'hi' : !shared(c).length ? 'muted' : c.out === mySide ? 'ok' : 'bad' })), D);
   }
 
   /* ---------- 4.7 deadline: a period from a start date (EU Reg. 1182/71 Art. 3; FRCP 6(a); BGB §§187–193: the conventions are data) ---------- */
@@ -970,18 +1051,30 @@
     const tb = bz.reduce((a, b) => a + b, 0);
     return { banzhaf: bz.map(x => (tb ? x / tb : 0)), shapley: ss, swings: bz };
   }
-  /** Banzhaf by generating functions for a weighted game [q; w1 … wn] with integer weights (Brams & Affuso 1976) */
-  function banzhafGF(ws, q) {
-    const n = ws.length, T = ws.reduce((a, b) => a + b, 0), bz = [];
+  /** exact Banzhaf and Shapley–Shubik for a weighted game [q; w1 … wn] (integer weights), optionally with a member-count quota kmin, by
+      generating functions over (coalition size, weight) in BigInt (Brams & Affuso 1976; Bilbao, Fernández, Jiménez Losada & López 2000,
+      "Generating functions for computing power indices efficiently", TOP 8:191): the counts of all voters once, then each voter removed by
+      deconvolution. Cost ≈ 2 n² Σw; above 4·10⁶ it returns null (code budget). */
+  function weightedGF(ws, q, kmin) {
+    const n = ws.length, T = ws.reduce((a, b) => a + b, 0), W = T + 1;
+    if (n * n * W > 4e6) return null;
+    kmin = kmin || 0;
+    const Cn = Array.from({ length: n + 1 }, () => new Array(W).fill(0n)); Cn[0][0] = 1n;
+    for (let j = 0; j < n; j++) for (let k = j; k >= 0; k--) { const a = Cn[k], b = Cn[k + 1], w = ws[j]; for (let s = T - w; s >= 0; s--) if (a[s]) b[s + w] += a[s]; }
+    const fact = [1n]; for (let i = 1; i <= n; i++) fact[i] = fact[i - 1] * BigInt(i);
+    const win = (k, s) => s >= q && k >= kmin;
+    const bz = [], ss = [];
     for (let i = 0; i < n; i++) {
-      const c = new Float64Array(T + 1); c[0] = 1;
-      for (let j = 0; j < n; j++) if (j !== i) for (let s = T - ws[j]; s >= 0; s--) if (c[s]) c[s + ws[j]] += c[s];
-      let sw = 0; for (let s = Math.max(0, q - ws[i]); s <= Math.min(T, q - 1); s++) sw += c[s];
-      bz.push(sw);
+      const w = ws[i], Ci = Array.from({ length: n }, () => new Array(W).fill(0n));
+      for (let k = 0; k < n; k++) for (let s = 0; s < W; s++) Ci[k][s] = Cn[k][s] - (k > 0 && s >= w ? Ci[k - 1][s - w] : 0n);
+      let sw = 0n, num = 0n;
+      for (let k = 0; k < n; k++) { let c = 0n; for (let s = 0; s + w < W; s++) if (Ci[k][s] && win(k + 1, s + w) && !win(k, s)) c += Ci[k][s]; sw += c; num += c * fact[k] * fact[n - k - 1]; }
+      bz.push(sw); ss.push(Number(num * 10n ** 18n / fact[n]) / 1e18);
     }
-    const tb = bz.reduce((a, b) => a + b, 0);
-    return bz.map(x => (tb ? x / tb : 0));
+    const tb = bz.reduce((a, b) => a + b, 0n);
+    return { banzhaf: bz.map(x => (tb ? Number(x * 10n ** 18n / tb) / 1e18 : 0)), shapley: ss, swings: bz.map(Number) };
   }
+  const banzhafGF = (ws, q) => { const r = weightedGF(ws, q, 0); return r ? r.banzhaf : null; };
   function runVote(m, env, D, S, SE, Rn) {
     const rows = [];
     if (Array.isArray(m.voters) && m.voters.length) {
@@ -1003,7 +1096,7 @@
       let pw = null;
       if (V.every(v => Number.isFinite(v.w) && v.w >= 0)) {
         pw = powerIndices(V.map(v => v.w), s => { const mem = []; for (let i = 0; i < n; i++) if (s >> i & 1) mem.push(i); return winSet(mem) > 0; }, D);
-        if (!pw && !Number.isFinite(pq) && !Number.isFinite(cq) && V.every(v => Number.isInteger(v.w)) && TW <= 100000) pw = { banzhaf: banzhafGF(V.map(v => v.w), Math.ceil(quota - 1e-9)), shapley: null };
+        if (!pw && !Number.isFinite(pq) && V.every(v => Number.isInteger(v.w))) pw = weightedGF(V.map(v => v.w), Math.ceil(quota - 1e-9), Number.isFinite(cq) ? Math.ceil(cq * n - 1e-9) : 0);
         if (!pw || !pw.shapley) D.add('budget');
       }
       const vi = m.voter !== undefined ? V.findIndex(v => v.id === m.voter) : 0;
@@ -1184,7 +1277,7 @@
     id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, source,
     TASKS, TASK_OUT, AT_OF, CODES, REQ, MODEL_T, SCHEMES, STD_P, LEVEL, CITE_KINDS,
     // the engine's own functions (for tests and other engines)
-    parseLit, dayOf, civilFromDays, daysFromCivil, weekdayOf, addMonths, template, buildTheory, defeasible, hohCanon, powerIndices, banzhafGF, cea, cel, carneadesCycle,
+    parseLit, dayOf, civilFromDays, daysFromCivil, weekdayOf, addMonths, template, buildTheory, defeasible, hohCanon, powerIndices, banzhafGF, weightedGF, cea, cel, carneadesCycle,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

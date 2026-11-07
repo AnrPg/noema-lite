@@ -1723,6 +1723,569 @@
 "expr": "w + nope"
 }
 ]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"ruleCodes": [
+{
+"id": "simple",
+"rules": [
+{
+"id": "keep",
+"b": 5,
+"c": 1
+}
+]
+},
+{
+"id": "coord",
+"rules": [
+{
+"id": "drive",
+"b": "10",
+"c": 1,
+"k": "k + 0.1"
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "v",
+"kind": "scalar",
+"of": "codeValue",
+"code": "coord",
+"rate": "k"
+},
+{
+"id": "i",
+"kind": "scalar",
+"of": "idealCode",
+"rate": "k"
+},
+{
+"id": "r",
+"kind": "scalar",
+"of": "ruleValue",
+"code": "simple",
+"rule": "keep"
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "bestRate",
+"code": "coord"
+},
+{
+"id": "s",
+"kind": "scalar",
+"of": "idealShift",
+"rate": 0.3
+},
+{
+"id": "w",
+"kind": "scalar",
+"of": "codeValue",
+"code": "simple",
+"reading": "variable"
+},
+{
+"id": "c",
+"kind": "series",
+"of": "codeCurve",
+"code": "coord"
+},
+{
+"id": "ax",
+"kind": "series",
+"of": "rateAxis"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"elections": [
+{
+"id": "e",
+"candidates": [
+"a",
+"b",
+"c"
+],
+"ballots": [
+{
+"n": 2,
+"rank": [
+"a",
+"b",
+"c"
+]
+},
+{
+"n": 1,
+"rank": [
+"b",
+"c",
+"a"
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "n",
+"kind": "scalar",
+"of": "voteNash",
+"election": "e"
+},
+{
+"id": "u",
+"kind": "scalar",
+"of": "voteNashUndominated",
+"election": "e",
+"method": "borda"
+},
+{
+"id": "w",
+"kind": "scalar",
+"of": "voteNashWinners",
+"election": "e"
+},
+{
+"id": "s",
+"kind": "scalar",
+"of": "sincereNash",
+"election": "e",
+"method": "antiplurality"
+},
+{
+"id": "g",
+"kind": "scalar",
+"of": "gsManipulable",
+"election": "e",
+"method": "borda"
+},
+{
+"id": "m",
+"kind": "scalar",
+"of": "manipulators",
+"election": "e",
+"method": "irv"
+},
+{
+"id": "x",
+"kind": "scalar",
+"of": "gsExists",
+"method": "plurality",
+"m": 3,
+"n": 2
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"streams": [
+{
+"id": "x",
+"cycle": [
+0,
+1
+]
+},
+{
+"id": "y",
+"head": [
+1
+],
+"cycle": [
+1,
+0
+]
+}
+]
+},
+"outputs": [
+{
+"id": "o",
+"kind": "scalar",
+"of": "overtaking",
+"a": "y",
+"b": "x"
+},
+{
+"id": "c",
+"kind": "scalar",
+"of": "catchingUp",
+"a": "x",
+"b": "y"
+},
+{
+"id": "t",
+"kind": "scalar",
+"of": "truncCompare",
+"a": "y",
+"b": "x",
+"T": "k * 10"
+},
+{
+"id": "d",
+"kind": "scalar",
+"of": "discounted",
+"stream": "x",
+"delta": "k"
+},
+{
+"id": "l",
+"kind": "scalar",
+"of": "limitAverage",
+"stream": "y"
+},
+{
+"id": "p",
+"kind": "scalar",
+"of": "paretoDominates",
+"a": "y",
+"b": "x"
+},
+{
+"id": "f",
+"kind": "scalar",
+"of": "finiteAnonymous",
+"a": "y",
+"b": "x"
+},
+{
+"id": "i",
+"kind": "scalar",
+"of": "infiniteAnonymous",
+"a": "y",
+"b": "x"
+},
+{
+"id": "z",
+"kind": "scalar",
+"of": "infiniteConflict",
+"a": "y",
+"b": "x"
+},
+{
+"id": "ps",
+"kind": "series",
+"of": "partialSums",
+"a": "y",
+"b": "x",
+"T": 20
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"ubuntu": [
+{
+"id": "u",
+"wI": 1,
+"wS": "2 * k",
+"options": [
+{
+"id": "o1",
+"effects": [
+{
+"who": "f",
+"identity": -0.2,
+"solidarity": 0.1,
+"byAgent": true
+}
+]
+},
+{
+"id": "o2",
+"effects": [
+{
+"who": "v",
+"identity": "k",
+"solidarity": 0
+}
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "s",
+"kind": "scalar",
+"of": "ubuntuScore",
+"case": "u",
+"option": "o1"
+},
+{
+"id": "p",
+"kind": "scalar",
+"of": "ubuntuPermissible",
+"case": "u",
+"option": "o2"
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "ubuntuBest",
+"case": "u",
+"reading": "honour"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"ruleCodes": [
+{
+"id": "c",
+"rules": [
+{
+"id": "r",
+"b": 1
+},
+{
+"id": "r"
+}
+]
+},
+{
+"id": "c",
+"rules": []
+}
+]
+},
+"outputs": [
+{
+"id": "v",
+"kind": "scalar",
+"of": "codeValue",
+"code": "zz",
+"reading": "fixedish"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"streams": [
+{
+"id": "s",
+"cycle": []
+},
+{
+"id": "t",
+"head": "x"
+}
+]
+},
+"outputs": [
+{
+"id": "o",
+"kind": "scalar",
+"of": "overtaking",
+"a": "s"
+},
+{
+"id": "d",
+"kind": "scalar",
+"of": "discounted",
+"stream": "s"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"ubuntu": [
+{
+"id": "u",
+"options": [
+{
+"id": "a"
+},
+{
+"id": "a",
+"effects": [
+{
+"identity": "q +"
+}
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "b",
+"kind": "scalar",
+"of": "ubuntuBest",
+"case": "nope",
+"reading": "maximise"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.9
+}
+],
+"model": {
+"elections": [
+{
+"id": "e",
+"candidates": [
+"a",
+"b",
+"c"
+],
+"ballots": [
+{
+"n": 2,
+"rank": [
+"a",
+"b",
+"c"
+]
+},
+{
+"n": 1,
+"rank": [
+"b",
+"c",
+"a"
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "n",
+"kind": "scalar",
+"of": "voteNash",
+"election": "e",
+"method": "approval"
+},
+{
+"id": "g",
+"kind": "scalar",
+"of": "gsExists",
+"method": "borda",
+"m": 6,
+"n": 1
+},
+{
+"id": "q",
+"kind": "scalar",
+"of": "gsManipulable",
+"election": "f"
+}
+]
 }
 ]
 }

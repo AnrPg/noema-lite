@@ -51,6 +51,12 @@ validator messages land at their field (`setErrors([{path, msg}])`, with `aria-i
   outputs of kind `scalar`, `series`, `scene`, `sound`, their `of` with suggestions from the table (`ofs`), plots `function`,
   `series` (lines with `style`), `scene` and `sound`; the engine's `checkSpec` messages land at their fields, formulas are
   checked live only where `exprs(spec)` lists them, with the engine's local names.
+- **Several engines (parts)**: the kind `sim-parts` builds a spec with `parts` and `couple` (docs/INTERACTIVE.md §12.8). Its schema
+  is `NoemaLibSchema.partsSchema(engines, sim)`: each part is one of the library engines the app has (an engine select, then that
+  engine's model and outputs form from its table), a `circuit-mna@1` part, or a part file (`use` / `with`); its `inputs` are numbers,
+  formulas or `{series, points | stat}`; `couple` is `chain` or loops / a co-simulation. The static `sim-spec` schema takes `parts`
+  and `couple` too (a looser shape); a part's formulas are checked live with the names its model sees (the consts, the params, its
+  inputs) where its engine's `exprs` lists them; the validators' messages (`checkParts`) land at the part's fields.
 - **Layout**: details in tooltips (ⓘ); the bar's buttons in one row when they fit, icons only under 560 px, stacked under 420 px;
   no horizontal scroll at 320 px.
 - **Kinds**: `sim-formula` (sim-spec@1 + formula@1), `sim-circuit` (+ circuit-mna@1); `registerType({id, label, runtime, schema,

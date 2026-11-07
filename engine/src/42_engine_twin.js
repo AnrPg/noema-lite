@@ -50,7 +50,15 @@
     return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   }
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
-  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
+  const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): its MRG32k3a streams, one per purpose (radio, each sensor, the network);
+      normals by inversion (AS241), Poisson by inversion. FALLBACK without the kernel (marked): mulberry32 + Box–Muller */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  const streamOf = (name, seed) => { const K = kit(); return K ? K.stream(seed >>> 0, 'twin:' + name) : mulberry32(hash32(name, seed)); };
 
   // ---- batteries: open-circuit voltage per cell against state of charge (typical curves at room temperature, light load) ----
   const CHEMS = {
@@ -262,11 +270,14 @@
     return { iAvg, life: B.capacity * B.soc0 / iAvg * 3600 };
   }
 
-  function simulate(k, seed, o) {
+  function simulate(k, seed, o) { const g = simGen(k, seed, o, null); let r = g.next(); while (!r.done) r = g.next(); return r.value; }
+  /** the firmware's run as a generator: with a target {t} (the stepper) it pauses whenever the clock reaches target.t (a sleep is
+      split there) and yields the run's state so far; without one it runs to the end */
+  function* simGen(k, seed, o, target) {
     const { B, P, S, R, sens } = k, T = k.D.sim.duration, maxEv = k.D.sim.maxEvents, bor = k.D.brownout.v;
     const nb = k.D.sim.samples, W = T / nb, isd = B.selfDischarge * B.capacity / (30 * 24);
     const trFrom = o && o.traceFrom !== undefined ? o.traceFrom : 0, trTo = o && o.traceTo !== undefined ? o.traceTo : k.D.sim.trace;
-    const rRadio = mulberry32(hash32('radio', seed)), rSens = sens.map(s => mulberry32(hash32('sensor:' + s.id, seed))), rNet = mulberry32(hash32('network', seed));
+    const rRadio = streamOf('radio', seed), rSens = sens.map(s => streamOf('sensor:' + s.id, seed)), rNet = streamOf('network', seed);
     const voc = soc => interp(B.curve, Math.max(0, soc)) * B.cells;
     // the environment: ambient temperature and what it does to the battery (capacity, internal resistance, self-discharge) and the sleep current
     const EN = k.D.env, CK = k.D.clock, NW = k.D.network;
@@ -293,9 +304,10 @@
       if (!(NW.nodes > 0)) return false;
       const hit = () => k.prxMedian + NW.offset + (NW.spread > 0 ? NW.spread * gauss(rNet) : 0) > prx - NW.capture;
       if (!phases) {   // random access: Poisson arrivals in the window where another packet would overlap ours
-        const mean = NW.nodes * (k.air + aO) / pO; let L = Math.exp(-mean), p = 1, n = 0;
-        do { n++; p *= rNet(); } while (p > L && n < 1000);
-        for (let i = 0; i < n - 1; i++) if (hit()) return true;
+        const mean = NW.nodes * (k.air + aO) / pO;
+        let others; if (typeof rNet.poisson === 'function') others = Math.min(999, rNet.poisson(mean));
+        else { const L = Math.exp(-mean); let p = 1, n = 0; do { n++; p *= rNet(); } while (p > L && n < 1000); others = n - 1; }
+        for (let i = 0; i < others; i++) if (hit()) return true;
         return false;
       }
       for (const ph of phases) {
@@ -347,10 +359,15 @@
     }
     const senseI = P.sense + sens.reduce((a, s) => a + s.current, 0);
     let wakeAt = 0, n = 0;
+    const now = () => ({ T: t, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W, vNow: voc(soc()), socNow: soc(), tempNow: Tc,
+      env: { min: tN ? tMin : EN.temp, max: tN ? tMax : EN.temp, mean: tN ? tSum / tN : EN.temp }, clock: { errMax: cerrMax, ppmMean: ppmN ? ppmSum / ppmN : CK.ppm } });
     while (!dead && t < T) {
+      while (target && t >= target.t && !dead && t < T) yield now();   // the stepper: the clock has reached the target
       if (wakeAt > t) {
         const vs = voc(soc()) - P.sleep * B.rInt / 1000;
         if (bor > 0 && vs < bor) { dead = true; tDead = t; ev('dead', { soc: soc(), bor: 1 }); break; }
+        while (target && target.t < wakeAt && !dead && t < T) { if (target.t > t) seg(target.t - t, P.sleep, false); yield now(); }   // the stepper: a pause inside the sleep
+        if (dead || t >= T) break;
         seg(wakeAt - t, P.sleep, false);
         if (dead || t >= T) break;
       }
@@ -389,6 +406,7 @@
       if (wakeAt < t) { if (!overrun) ev('overrun'); overrun = true; wakeAt = t; }
     }
     while (bi < nb) closeBin();
+    if (target) { for (;;) yield now(); }   // stepped past the end: the state stays
     return { T, t, q, dead, tDead, vMin, log, logCount, counts, trace, rx, cnt, bins, W,
       env: { min: tN ? tMin : EN.temp, max: tN ? tMax : EN.temp, mean: tN ? tSum / tN : EN.temp }, clock: { errMax: cerrMax, ppmMean: ppmN ? ppmSum / ppmN : CK.ppm } };
   }
@@ -462,7 +480,9 @@
       if (probe.kind === 'clock') { const r = run(), s = r.scalars; return { kind: 'clock', value: s.ppmMean, err: s.clockErrMax }; }   // the clock against a reference: ppm, worst error
       throw fail('probe');
     }
-    return Object.freeze({ id: ID, run, measure, analytic: () => analytic(compile(JSON.parse(JSON.stringify(devc)), faults)) });
+    /** the stepper's run: a paused simulation (a generator: its state cannot be copied) and its clock target */
+    function stepGen() { const k = compile(JSON.parse(JSON.stringify(devc)), faults), target = { t: 0 }; return { k, target, g: simGen(k, seed, { traceTo: 0 }, target) }; }
+    return Object.freeze({ id: ID, run, measure, stepGen, analytic: () => analytic(compile(JSON.parse(JSON.stringify(devc)), faults)) });
   }
 
   // ---- the sim-spec@1 adapter: model {device, bindings: [{field, expr}]}, outputs [{id, kind, of?, sensor?}] ----
@@ -475,7 +495,7 @@
   const simEngine = {
     create(spec, opts) {
       const model = (spec && spec.model) || {}, outs = (spec && spec.outputs) || [], seed = (opts && opts.seed) >>> 0, faults = (opts && opts.faults) || [];
-      let key = null, sim = null;
+      let key = null, sim = null, ST = null;
       function simFor(inp) {
         const binds = inp.$bind || (model.bindings || []).map(b => [b.field, NAME_RE.test(b.expr) ? inp[b.expr] : NaN]), kk = JSON.stringify(binds);
         if (kk !== key) {
@@ -505,11 +525,34 @@
           try { const s = simFor(inp || {}); if (!s) return { kind: probe && probe.kind, error: 'invalid' }; return s.measure(probe); }
           catch (e) { return { kind: probe && probe.kind, error: String(e && e.code || 'error') }; }
         },
+        // the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the device as it is at stepInit (later bindings are not read), its clock
+        // the co-simulation's minus t0; outputs: the scalars so far, each series its value now. Cannot snapshot (snapshot −1)
+        stepInit(inp, t0) {
+          try { const s = simFor(inp || {}); if (!s) throw fail('invalid'); ST = s.stepGen(); ST.t0 = Number.isFinite(t0) ? t0 : 0; ST.r = ST.g.next().value; return { out: stepOuts() }; }
+          catch (e) { ST = null; return { fail: 'part-failed', out: {} }; }
+        },
+        stepTo(inp, t, dt) {
+          if (!ST) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
+          try { ST.target.t = t + dt - ST.t0; ST.r = ST.g.next().value; return { out: stepOuts(), dt, events: [] }; }
+          catch (e) { ST = null; return { fail: String(e && e.code === 'budget' ? 'budget' : 'part-failed'), out: {}, dt: 0, events: [] }; }
+        },
+        snapshot() { return -1; },
+        restore() { return false; },
       };
+      function stepOuts() {
+        const r = ST.r, res = results(ST.k, r), sc = { ...res.scalars, vEnd: r.vNow, socEnd: r.socNow }, o2 = {}, c = r.cnt;
+        const now = { t: r.t, soc: r.socNow, v: r.vNow, delivered: c.delivered, resets: c.resets, temp: r.tempNow, current: sc.iAvg, rssi: r.rx.rssi.length ? r.rx.rssi[r.rx.rssi.length - 1] : NaN };
+        for (const o of outs) {
+          const of = o.of !== undefined ? o.of : o.id, si = Math.max(0, o.sensor === undefined ? 0 : res.sensors.indexOf(o.sensor));
+          if (o.kind === 'series') { const rd = of === 'reading' ? res.readings[si] : of === 'truth' ? res.truth[si] : null; o2[o.id] = rd ? (rd.length ? rd[rd.length - 1] : NaN) : has(now, of) ? now[of] : NaN; }
+          else o2[o.id] = PER_SENSOR.includes(of) ? (res.perSensor[si] ? res.perSensor[si][of] : NaN) : sc[of];
+        }
+        return o2;
+      }
     },
   };
   const engine = {
-    id: ID, bench: true,
+    id: ID, bench: true, stepper: true,   // stepper: a part of a co-simulation (stepInit / stepTo on the instance)
     check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `${p.path}: ${p.msg}`),
     prepare(spec, compile_) {
       const bs = ((spec && spec.model && spec.model.bindings) || []).map(b => [b.field, compile_(b.expr)]);
@@ -519,7 +562,8 @@
     create: (spec, opts) => simEngine.create(spec, opts),
   };
   const source = () => '(' + noemaTwinModule.toString() + ')(self); self.noemaEngine = self.NoemaTwin.simEngine;';
-  engine.workerSource = source();
+  /** the Worker: NoemaExpr (the kernel's fdlibm functions) and the simulation kernel (its streams) when loaded, then this engine */
+  Object.defineProperty(engine, 'workerSource', { enumerable: true, get() { const K = kit(), NX = root.NoemaExpr; return (K && NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source(); } });
   root.NoemaTwin = Object.freeze({
     id: ID, format: FORMAT, limits: Object.freeze({ sensors: MAX_SENSORS, samples: MAX_SAMPLES, events: MAX_EVENTS, log: MAX_LOG, trace: MAX_TRACE, points: MAX_POINTS, bindings: MAX_BINDINGS }),
     FAULT_KINDS: Object.freeze(FAULT_KINDS.slice()), SCALARS: Object.freeze(SCALARS.slice()), SERIES: Object.freeze(SERIES.slice()), NUM_FIELDS: Object.freeze(NUM_FIELDS.slice()),

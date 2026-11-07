@@ -480,6 +480,27 @@ async function browser() {
       } else console.log('⚠ ' + 'NoemaActivityRefs is not shipped by this build: the reference flow is skipped');
     }
 
+    // several engines in one spec: the kind "parts", each part with its engine's form; the reference pk-ode (when shipped) runs in the preview
+    if (await p.evaluate(() => !!document.querySelector('[data-aa=type] option[value="sim-parts"]'))) {
+      await p.evaluate(() => { window.__aa = NoemaActivityAuthor.current; });
+      await p.selectOption('[data-aa=type]', 'sim-parts'); await wait(200);
+      const hasRef = await p.locator('[data-aa=start-ref]').count();
+      await p.click(hasRef ? '[data-aa=start-ref]' : '[data-aa=start-blank]');
+      ok(await until(() => p.evaluate(() => Array.isArray(__aa.get().spec.parts) && !__aa.get().spec.engine)), 'the kind “Several engines”: a spec with parts ' + (hasRef ? '(from a reference)' : '(blank)'));
+      await p.click('[data-tab=spec]'); panel = 'spec';
+      const engSel = `#aa-panel-spec select[data-path='${JSON.stringify(['parts', 0, '$alt'])}'], #aa-panel-spec select[data-path='${JSON.stringify(['parts', 0, 'engine'])}']`;
+      ok(await until(() => p.locator(engSel).count().then(n => n >= 1)) && (await p.locator(engSel).first().locator('option').allInnerTexts()).some(t => /\(graph@1\)/.test(t)), 'each part has an engine select (the engines by their catalogue names) and the form of that engine');
+      const eng0 = await p.evaluate(() => __aa.get().spec.parts[0].engine);
+      ok(await p.locator(`#aa-panel-spec [data-field^='${JSON.stringify(['parts', 0, 'model']).slice(0, -1)}']`).count() >= 1, `the model of part 1 (${eng0}) is a form from its engine’s table`);
+      if (hasRef) {
+        ok(await until(() => p.evaluate(() => __aa.check().filter(q => q.tab === 'spec').length === 0)), 'the parts reference has no problem in the author');
+        ok(await until(() => p.evaluate(() => !!document.querySelector('.aa-pbox .sim')), 12000), 'the preview runs the parts (the real runtime)');
+      }
+      await p.setViewportSize({ width: 320, height: 700 }); await wait(400);
+      ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '320 px with parts: no horizontal scroll');
+      await p.setViewportSize({ width: 1280, height: 900 });
+    } else ok(false, 'the kind select offers “Several engines” (sim-parts)');
+
     // leaving the route stops the page (its keys and preview)
     await p.evaluate(() => { location.hash = '#/'; }); await wait(400);
     ok(await p.evaluate(() => NoemaActivityAuthor.current === null && !document.querySelector('.aa')), 'leaving #/author stops the page');

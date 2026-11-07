@@ -10,7 +10,7 @@ It is a plain module, `window.NoemaSimKit` (frozen). It loads after `46_lib_core
 fdlibm ports for `exp`, `log`, `sin`, `cos` and `pow`, so the numbers are the same on every device. It has no DOM, no network and no
 clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker:
 `NoemaExpr.source() + NoemaLibCore.source() + NoemaSimKit.source() + <engine module>` (`source()` returns `'(…)(self);'`, like the
-core's). Tests: `node tests/lib_simkit.js` (93 assertions against published values and exact solutions).
+core's). Tests: `node tests/lib_simkit.js` (115 assertions against published values and exact solutions).
 
 | § | what | functions |
 |---|---|---|
@@ -21,7 +21,7 @@ core's). Tests: `node tests/lib_simkit.js` (93 assertions against published valu
 | 4.1 | delay equations and DAEs | `dde(cfg)`, `dae(cfg)` |
 | 4.2 | stochastic dynamics | `ssa(cfg)`, `tauLeap(cfg)`, `sde(cfg)` |
 | 4.3 | schedules and time-varying arrivals | `nhpp`, `piecewise` |
-| 5 | output analysis | `welford`, `timeAvg`, `ci`, `tq`, `batchMeans`, `mser5`, `acf`, `replicate`, `littleCheck`, `untilPrecision` |
+| 5 | output analysis | `welford`, `ksum`, `timeAvg`, `ci`, `tq`, `batchMeans`, `mser5`, `acf`, `replicate`, `littleCheck`, `untilPrecision` |
 | 5.1 | variance reduction | `controlVariate` (CRN and antithetics: §2) |
 | 6 | sweeps, sensitivity, calibration and optimisation | `linspace`, `oat`, `grid`, `morris`, `sobol`, `lhs`, `minimize`, `calibrate` |
 | 6.1 | input modelling | `cdfOf`, `quantileOf`, `truncated`, `mixture`, `fit`, `ksTest`, `chiSquare`, `andersonDarling` |
@@ -90,16 +90,33 @@ conditional (C) events are tried until none fires.
 
 ## 4. Continuous time: `integrate(cfg)`
 
-`cfg = {f(t, y, dy), y0, t0, tEnd, method, rtol, atol, dt, hmax, pairs, maxSteps, samples, onSample(t, y), events, maxEvents, gtol}`
+`cfg = {f(t, y, dy), y0, t0, tEnd, method, rtol, atol (a number or one per component), dt, hmax, pairs, maxSteps, samples,
+onSample(t, y), events, maxEvents, gtol, breaks, onSegment(seg, t0, t1)}`
 → `{t, y, steps, rejected, nfev, events: [{t, j, kind, dir}], stop: 'end' | 'event' | <code>, method, codes}`.
 
 | method | what (source) |
 |---|---|
 | `auto` (default) | DOPRI5, switching to Rosenbrock when the stiffness test fires 15 times (HNW I §IV.2; like LSODA's switch, Petzold 1983): code `stiff-switched` |
 | `dopri5` | Dormand & Prince 1980 5(4), Hairer's dense output (contd5), PI step control β = 0.04 (Hairer, Nørsett & Wanner 1993 §II.4–II.6, §IV.2); code `stiff` when the test fires |
+| `tsit5` | Tsitouras 2011 5(4) (*Comput. Math. Appl.* 62:2), FSAL, smaller error constants than DOPRI5, the same PI control; cubic Hermite dense output. The test measures order 5. |
 | `rosenbrock` | the L-stable Rosenbrock 2(3) of Shampine & Reichelt 1997 (MATLAB ode23s), a finite-difference Jacobian, the ntrp23s dense output |
-| `rk4`, `heun`, `euler` | fixed steps `dt`, with cubic Hermite dense output |
+| `ros3p` | ROS3P (Lang & Verwer 2001, *BIT* 41:4): Rosenbrock of order 3, A-stable, embedded order 2, in the form of Sandu et al. 1997 (KPP); the test measures order 3 |
+| `radau5` | Radau IIA of order 5 (Hairer & Wanner 1996 §IV.8, the method of RADAU5): L-stable, stiffly accurate, simplified Newton on the 3n × 3n stage system, RADAU5's error estimate, the collocation polynomial as dense output |
+| `rk4`, `midpoint`, `heun`, `euler` | fixed steps `dt`, with cubic Hermite dense output |
 | `verlet`, `yoshida4` | symplectic, for a separable Hamiltonian given by `pairs: [[q, p], …]` (every state in one pair): Störmer–Verlet kick–drift–kick (Hairer, Lubich & Wanner 2006 §I.1.4) and Yoshida 1990's 4th-order triple jump |
+
+Stiff checks: Robertson at t = 40 (HNW II §IV.10) for `auto`, `radau5` and `ros3p`, and the stiff Van der Pol oscillator μ = 1000,
+y(0) = (2, 0) at t = 2000 against the reference of the IVP test set (Mazzia & Magherini, problem VDPOL: y₁ = 1.706167732170469,
+y₂ = −8.928097010248125e-4). Radau IIA meets it to 2e-9 at tolerance 1e-8 in about 1700 steps. All methods fail with `nan` at once
+when f is NaN at the start of a step.
+
+**Breaks** `breaks: [{t, apply?(t, y)}]` are times the steps land on exactly: doses, switches, a delay equation's
+discontinuities. Each step aims at min(tEnd, the next break). At a break, `apply` may change y in place. The method then restarts
+from the new y and keeps its step size. Breaks at t0 run before the first sample, and a sample at a break's time sees the state
+after it. NaN after `apply` stops the run with `nan`. A jump made by `apply` is not reported as an event crossing.
+
+**`onSegment(seg, t0, t1)`** is called after every accepted step, cut at an event's time when one fires. `seg(t, out)` is the
+step's dense output and stays valid after the step, so a caller can keep the history (this is how `dde` reads its lagged values).
 
 **State events** have the form `events: [{g(t, y), dir (−1 | 0 | +1), hyst, terminal, kind, onEvent(t, y, {j, dir}) → 'stop' | undefined}]`.
 After each step the sign of every g is compared with its sign at the start. A change in the event's direction is bracketed and
@@ -111,6 +128,11 @@ their declared order, each handler seeing the state the one before it left. A ha
 - **Re-arming.** After a hit, a g left at about 0 (|g| ≤ `gtol`, 1e-10) takes the side its direction must leave towards, so the next
   crossing is seen even when it fits in one step: a bouncing ball. A crossing located again within 1e-9·t of the last one is the
   same crossing and is ignored.
+- **Observed events.** With `observe: true` an event is located and reported but changes nothing: `onEvent(t, yAt, {j, dir,
+  observe: true})` gets a copy of the dense-output state, and the hit carries `observe: true`. The step is not cut and the method
+  not reset. Observations are not counted towards `maxEvents` or zeno; past 200 000 they are dropped, with the warning
+  `observe-cap`. Returning `'stop'` (or `terminal`) ends the run at that time. Use this for Poincaré sections, threshold
+  crossings and counters.
 - **Hysteresis.** With `hyst > 0`, an event stays disarmed after a hit until |g| > hyst (a thermostat with a dead band: no chattering).
 - **Zeno.** More than `maxEvents` hits in all (1000 by default) or more than 100 at one instant raises the error `zeno`.
 - **Codes** (errors stop the run): `nan`, `blow-up` (|y| > 10¹² times its start), `step-underflow`, `budget` (`maxSteps`, at most
@@ -122,10 +144,12 @@ is Brent 1973 ch. 4.
 
 ### 4.1 Delay equations and DAEs
 
-- `dde({f(t, y, lag, dy), y0, history(t), lags, t0, tEnd, rtol, atol, samples, onSample, maxSteps})`: constant-lag delay equations
-  by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003 ch. 3; Shampine & Thompson 2001). `lag(i, k)` is
-  y_i(t − τ_k). The step is at most the smallest lag, so every lagged value lies on a finished step or in the history. The test
-  checks x′ = −x(t − 1), x = 1 before 0: x(3) = −2/3 exactly (the polynomial pieces).
+- `dde({f(t, y, lag, dy), y0, history(t), lags, …integrate's cfg})`: constant-lag delay equations by the method of steps
+  (Bellen & Zennaro 2003 ch. 3; Shampine & Thompson 2001). It is `integrate` with h ≤ the smallest lag, the finished steps kept
+  through `onSegment`, and breaks at t0 + m·τ (m ≤ 5) where the start's derivative jump propagates (discontinuity tracking). Any
+  method works (a fixed one needs dt ≤ the smallest lag, else `bad-config`), and so do events, breaks and samples. `lag(i, k)`
+  is y_i(t − τ_k). The test checks x′ = −x(t − 1), x = 1 before 0: x(3) = −1/6 exactly (the polynomial pieces), with DOPRI5
+  and RK4.
 - `dae({f(t, y, z, dy), g(t, y, z, res), y0, z0, …integrate's cfg})`: a semi-explicit index-1 DAE y′ = f, 0 = g, in its state-space
   form (Hairer & Wanner 1996 §VI.1). z is solved from g = 0 by Newton at every evaluation (≤ 30 iterations, code `dae-newton`), and
   y is integrated by `integrate` (`auto` switches to Rosenbrock when the reduced system is stiff). The result adds `z`.
@@ -151,7 +175,8 @@ is Brent 1973 ch. 4.
 
 | function | what |
 |---|---|
-| `welford()` | `{add(x), n, mean, var, sd, min, max, sum}` (Welford 1962) |
+| `welford()` | `{add(x), n, mean, var, sd, min, max, sum}` (Welford 1962; the sum compensated) |
+| `ksum()` | `{add(x), value, reset()}`: Kahan–Babuška summation in Neumaier's form (Neumaier 1974; Higham 2002 §4.3). The error is O(u)·Σ\|x\| whatever the number of terms. `welford`'s sum and `timeAvg`'s area use it. |
 | `timeAvg(t0, v0)` | a time-weighted average of a piecewise-constant quantity: `update(t, v)`, `add(t, dv)`, `mean(t)`, `area(t)`, `reset(t)` (the end of a warm-up), `max` (Law §1.4.1, "the area under Q(t)") |
 | `ci(values, level = 0.95)` | `{n, mean, sd, half, lo, hi, level}`, the Student-t interval (half NaN when n < 2) |
 | `tq(p, df)`, `tCdf(x, df)` | Student t by the incomplete beta, with the quantile by bisection + Newton (`tq(0.975, 9)` = 2.262157) |
@@ -260,7 +285,7 @@ tolerance or the change is a justified improvement.
 
 | family | engines | what moves to the kernel |
 |---|---|---|
-| integrators | `ode@1`, `med@1` (pk), `clinic@1` (virtual patient), plugins `thermal@1`, `pid@1`, `twin@1`, circuit transient | `ode@1`'s `stepperDopri`, `stepperRos`, `stepperFixed`, `flow` (crossings by Illinois, jumps, the stiff switch) → `integrate`; its DDEs → `SK.dde`; `brent` → `SK.brent`. Wrap as a part with `odeStepper`. |
+| integrators | `ode@1`, `med@1` (pk), `clinic@1` (virtual patient), plugins `thermal@1`, `pid@1`, `twin@1`, circuit transient | `ode@1`'s `stepperDopri`, `stepperRos`, `stepperFixed`, `flow` (crossings by Illinois, jumps, the stiff switch) → `integrate` (per-component `atol`, `midpoint`, `breaks` for doses, `observe` events for sections, `onSegment`); its DDEs → `SK.dde`; `brent` → `SK.brent`. Wrap as a part with `odeStepper`. |
 | stochastic | `genetics@1` (drift), `ode@1` templates with noise, any chemical kinetics | `SK.ssa`, `SK.tauLeap`, `SK.sde` |
 | input and calibration | any engine that fits data or tunes parameters | `SK.fit`, `ksTest`, `chiSquare`, `andersonDarling`, `SK.minimize`, `SK.calibrate`, `SK.lhs` |
 | randomness | `genetics@1` (drift, Wright–Fisher), `prob@1`, any engine that calls `C.mulberry32(C.hash32(name, seed))` | `SK.stream(seed, name)`: one stream per purpose; replications via `r.sub(i)`; `binomial` and `poisson` by inversion (CRN-friendly) |

@@ -10497,5 +10497,373 @@
   "engine.author.f.iterate": "Iterate each step",
   "@engine.author.f.iterate": {
     "description": "Label of a form field of the activity author: repeat each step of a co-simulation until the exchanged values settle. Short."
+  },
+  "engine.author.f.lib.query": "Question",
+  "@engine.author.f.lib.query": {
+    "description": "Label of the field “query” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.then": "Conclusion",
+  "@engine.author.f.lib.then": {
+    "description": "Label of the field “then” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.unless": "Unless (exceptions)",
+  "@engine.author.f.lib.unless": {
+    "description": "Label of the field “unless” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.sup": "Priorities",
+  "@engine.author.f.lib.sup": {
+    "description": "Label of the field “sup” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.win": "Stronger rule",
+  "@engine.author.f.lib.win": {
+    "description": "Label of the field “win” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.lose": "Weaker rule",
+  "@engine.author.f.lib.lose": {
+    "description": "Label of the field “lose” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.toggles": "Switchable facts",
+  "@engine.author.f.lib.toggles": {
+    "description": "Label of the field “toggles” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.lit": "Literal",
+  "@engine.author.f.lib.lit": {
+    "description": "Label of the field “lit” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.schemes": "Argument schemes",
+  "@engine.author.f.lib.schemes": {
+    "description": "Label of the field “schemes” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.cqs": "Critical questions",
+  "@engine.author.f.lib.cqs": {
+    "description": "Label of the field “cqs” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.assume": "Assumptions",
+  "@engine.author.f.lib.assume": {
+    "description": "Label of the field “assume” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.standards": "Proof standards",
+  "@engine.author.f.lib.standards": {
+    "description": "Label of the field “standards” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.positions": "Jural positions",
+  "@engine.author.f.lib.positions": {
+    "description": "Label of the field “positions” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.holder": "Holder",
+  "@engine.author.f.lib.holder": {
+    "description": "Label of the field “holder” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.ask": "Position asked about",
+  "@engine.author.f.lib.ask": {
+    "description": "Label of the field “ask” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.issues": "Issues",
+  "@engine.author.f.lib.issues": {
+    "description": "Label of the field “issues” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.standard": "Standard of proof",
+  "@engine.author.f.lib.standard": {
+    "description": "Label of the field “standard” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.burden": "Burden of proof",
+  "@engine.author.f.lib.burden": {
+    "description": "Label of the field “burden” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.presumed": "Presumed from",
+  "@engine.author.f.lib.presumed": {
+    "description": "Label of the field “presumed” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.rebut": "Rebutting evidence",
+  "@engine.author.f.lib.rebut": {
+    "description": "Label of the field “rebut” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.claim": "Claim (issues)",
+  "@engine.author.f.lib.claim": {
+    "description": "Label of the field “claim” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.aggregate": "Combine the elements",
+  "@engine.author.f.lib.aggregate": {
+    "description": "Label of the field “aggregate” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.factors": "Factors",
+  "@engine.author.f.lib.factors": {
+    "description": "Label of the field “factors” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.cases": "Cases",
+  "@engine.author.f.lib.cases": {
+    "description": "Label of the field “cases” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.outcome": "Outcome",
+  "@engine.author.f.lib.outcome": {
+    "description": "Label of the field “outcome” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.reason": "Reason (factors)",
+  "@engine.author.f.lib.reason": {
+    "description": "Label of the field “reason” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.reasoning": "Precedent model",
+  "@engine.author.f.lib.reasoning": {
+    "description": "Label of the field “reasoning” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.period": "Period",
+  "@engine.author.f.lib.period": {
+    "description": "Label of the field “period” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.excludeStart": "Exclude the start day",
+  "@engine.author.f.lib.excludeStart": {
+    "description": "Label of the field “excludeStart” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.roll": "If the last day is not a working day",
+  "@engine.author.f.lib.roll": {
+    "description": "Label of the field “roll” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.monthEnd": "Month-end rule",
+  "@engine.author.f.lib.monthEnd": {
+    "description": "Label of the field “monthEnd” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.weekend": "Weekend days",
+  "@engine.author.f.lib.weekend": {
+    "description": "Label of the field “weekend” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.holidays": "Holidays",
+  "@engine.author.f.lib.holidays": {
+    "description": "Label of the field “holidays” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.tolling": "Suspensions (tolling)",
+  "@engine.author.f.lib.tolling": {
+    "description": "Label of the field “tolling” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.longstop": "Long-stop",
+  "@engine.author.f.lib.longstop": {
+    "description": "Label of the field “longstop” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.asOf": "Day of the claim (after the start)",
+  "@engine.author.f.lib.asOf": {
+    "description": "Label of the field “asOf” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.arrive": "Received at",
+  "@engine.author.f.lib.arrive": {
+    "description": "Label of the field “arrive” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.acceptRule": "Acceptance takes effect on",
+  "@engine.author.f.lib.acceptRule": {
+    "description": "Label of the field “acceptRule” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.revokeRule": "Revocation takes effect on",
+  "@engine.author.f.lib.revokeRule": {
+    "description": "Label of the field “revokeRule” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.mirror": "Mirror-image rule",
+  "@engine.author.f.lib.mirror": {
+    "description": "Label of the field “mirror” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.material": "Material terms",
+  "@engine.author.f.lib.material": {
+    "description": "Label of the field “material” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.firm": "Firm offer",
+  "@engine.author.f.lib.firm": {
+    "description": "Label of the field “firm” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.elements": "Elements",
+  "@engine.author.f.lib.elements": {
+    "description": "Label of the field “elements” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.parties": "Parties",
+  "@engine.author.f.lib.parties": {
+    "description": "Label of the field “parties” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.minAge": "Age of capacity",
+  "@engine.author.f.lib.minAge": {
+    "description": "Label of the field “minAge” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.capable": "Has capacity",
+  "@engine.author.f.lib.capable": {
+    "description": "Label of the field “capable” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.foreseeable": "Foreseeable",
+  "@engine.author.f.lib.foreseeable": {
+    "description": "Label of the field “foreseeable” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.avoidable": "Avoidable part",
+  "@engine.author.f.lib.avoidable": {
+    "description": "Label of the field “avoidable” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.price": "Contract price",
+  "@engine.author.f.lib.price": {
+    "description": "Label of the field “price” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.market": "Market price",
+  "@engine.author.f.lib.market": {
+    "description": "Label of the field “market” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.liquidated": "Liquidated damages",
+  "@engine.author.f.lib.liquidated": {
+    "description": "Label of the field “liquidated” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.anticipated": "Anticipated loss",
+  "@engine.author.f.lib.anticipated": {
+    "description": "Label of the field “anticipated” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.interest": "Interest",
+  "@engine.author.f.lib.interest": {
+    "description": "Label of the field “interest” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.years": "Years",
+  "@engine.author.f.lib.years": {
+    "description": "Label of the field “years” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.principal": "Principal",
+  "@engine.author.f.lib.principal": {
+    "description": "Label of the field “principal” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.offences": "Offences",
+  "@engine.author.f.lib.offences": {
+    "description": "Label of the field “offences” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.mind": "Culpability",
+  "@engine.author.f.lib.mind": {
+    "description": "Label of the field “mind” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.proven": "Proven",
+  "@engine.author.f.lib.proven": {
+    "description": "Label of the field “proven” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.element": "Element",
+  "@engine.author.f.lib.element": {
+    "description": "Label of the field “element” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.defences": "Defences",
+  "@engine.author.f.lib.defences": {
+    "description": "Label of the field “defences” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.causation": "Causation",
+  "@engine.author.f.lib.causation": {
+    "description": "Label of the field “causation” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.butFor": "But-for cause",
+  "@engine.author.f.lib.butFor": {
+    "description": "Label of the field “butFor” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.proximate": "Proximate cause",
+  "@engine.author.f.lib.proximate": {
+    "description": "Label of the field “proximate” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.first": "First level",
+  "@engine.author.f.lib.first": {
+    "description": "Label of the field “first” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.cats": "Categories (lowest points)",
+  "@engine.author.f.lib.cats": {
+    "description": "Label of the field “cats” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.adjust": "Adjustments",
+  "@engine.author.f.lib.adjust": {
+    "description": "Label of the field “adjust” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.aim": "Legitimate aim",
+  "@engine.author.f.lib.aim": {
+    "description": "Label of the field “aim” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.suitable": "Suitable",
+  "@engine.author.f.lib.suitable": {
+    "description": "Label of the field “suitable” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.alternatives": "Alternatives",
+  "@engine.author.f.lib.alternatives": {
+    "description": "Label of the field “alternatives” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.members": "Members",
+  "@engine.author.f.lib.members": {
+    "description": "Label of the field “members” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.yes": "Votes for",
+  "@engine.author.f.lib.yes": {
+    "description": "Label of the field “yes” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.abstain": "Abstentions",
+  "@engine.author.f.lib.abstain": {
+    "description": "Label of the field “abstain” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.abstentions": "Abstentions count as",
+  "@engine.author.f.lib.abstentions": {
+    "description": "Label of the field “abstentions” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.quorum": "Quorum",
+  "@engine.author.f.lib.quorum": {
+    "description": "Label of the field “quorum” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.majority": "Majority (fraction)",
+  "@engine.author.f.lib.majority": {
+    "description": "Label of the field “majority” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.strict": "More than (not at least)",
+  "@engine.author.f.lib.strict": {
+    "description": "Label of the field “strict” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.tie": "On a tie",
+  "@engine.author.f.lib.tie": {
+    "description": "Label of the field “tie” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.chair": "Chair's casting vote",
+  "@engine.author.f.lib.chair": {
+    "description": "Label of the field “chair” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.voters": "Voters",
+  "@engine.author.f.lib.voters": {
+    "description": "Label of the field “voters” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.quota": "Quota",
+  "@engine.author.f.lib.quota": {
+    "description": "Label of the field “quota” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.popQuota": "Population quota",
+  "@engine.author.f.lib.popQuota": {
+    "description": "Label of the field “popQuota” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.countQuota": "Member quota",
+  "@engine.author.f.lib.countQuota": {
+    "description": "Label of the field “countQuota” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.blocking": "Blocking minority (members)",
+  "@engine.author.f.lib.blocking": {
+    "description": "Label of the field “blocking” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.voter": "Voter",
+  "@engine.author.f.lib.voter": {
+    "description": "Label of the field “voter” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.patterns": "Citation templates",
+  "@engine.author.f.lib.patterns": {
+    "description": "Label of the field “patterns” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.heirs": "Heirs",
+  "@engine.author.f.lib.heirs": {
+    "description": "Label of the field “heirs” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.radd": "Takes the remainder (radd)",
+  "@engine.author.f.lib.radd": {
+    "description": "Label of the field “radd” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.estate": "Estate",
+  "@engine.author.f.lib.estate": {
+    "description": "Label of the field “estate” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.deficit": "Remainder with no residuary",
+  "@engine.author.f.lib.deficit": {
+    "description": "Label of the field “deficit” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.division": "Division rule",
+  "@engine.author.f.lib.division": {
+    "description": "Label of the field “division” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.penalty": "Penalty",
+  "@engine.author.f.lib.penalty": {
+    "description": "Label of the field “penalty” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.day": "Day",
+  "@engine.author.f.lib.day": {
+    "description": "Label of the field “day” of a library engine’s model or outputs in the activity author (engines: law). Short."
   }
 }
