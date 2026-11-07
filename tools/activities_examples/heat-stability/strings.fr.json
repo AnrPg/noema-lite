@@ -1,0 +1,17 @@
+{
+ "title": "Quel pas de temps le schéma explicite de la chaleur supporte-t-il ?",
+ "intro": "Une barre est d’abord chaude en son milieu, et ses extrémités sont maintenues à zéro. À chaque pas, le schéma explicite rapproche chaque nœud de la moyenne de ses voisins d’une fraction r = D·Δt/Δx². Un r plus grand signifie des pas moins nombreux, donc moins coûteux, pour atteindre le même instant. Faites varier r et cherchez la plus grande valeur pour laquelle le profil refroidit encore régulièrement au lieu de se briser en zigzag.",
+ "rLabel": "Nombre de diffusion r = D·Δt/Δx²",
+ "rReadout": "r effectivement utilisé",
+ "gainLabel": "Plus grand facteur d’amplification d’un mode par pas, max |G|",
+ "peakLabel": "Température maximale à la fin",
+ "okLabel": "Le schéma est stable",
+ "plotTitle": "Température le long de la barre",
+ "position": "Position x",
+ "temperature": "Température u",
+ "startLine": "départ",
+ "endLine": "t = 0,05",
+ "stTitle": "Diagramme espace–temps (le temps vers le haut)",
+ "checkStable": "Le schéma est stable : aucun mode ne croît d’un pas à l’autre.",
+ "checkEfficient": "Le pas est grand : r vaut au moins 0,45."
+}

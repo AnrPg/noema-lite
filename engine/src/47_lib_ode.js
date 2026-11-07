@@ -1225,7 +1225,7 @@
     return { out, codes: ctx.codes, steps: ctx.steps, nfev: ctx.nfev };
   }
 
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): a flow or a map stepped by the parts orchestrator (co-simulation) ----------
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): a flow or a map stepped by the parts orchestrator (co-simulation) ----------
      The time is the co-simulation's (solve.t0/tEnd are not used); each macro step integrates from the state with the same methods, events and
      budget as run(); the inputs are held over the step (zero-order hold). Outputs per step: state / t (series: one sample a step), final,
      stat (over the step ends so far), ok, steps. A delay equation cannot be stepped (its history is not a state): fail 'no-stepper'. */

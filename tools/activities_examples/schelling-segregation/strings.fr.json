@@ -1,0 +1,16 @@
+{
+ "title": "Préférences modérées, villes séparées",
+ "intro": "Deux groupes de ménages vivent d’abord mélangés au hasard. Un ménage est satisfait quand au moins une part « want » de ses voisins appartient à son groupe ; sinon il déménage vers une place libre au hasard. Cherchez la préférence la plus modérée qui sépare encore la ville en quartiers d’un seul groupe.",
+ "wantLabel": "Part de voisins semblables souhaitée par un ménage, want",
+ "similarLabel": "Part moyenne de voisins semblables à la fin",
+ "unhappyLabel": "Part des ménages restés insatisfaits",
+ "roundsLabel": "Tours jusqu’à ce que personne ne veuille déménager",
+ "plotTitle": "Voisins semblables et ménages insatisfaits",
+ "round": "Tour",
+ "share": "Part",
+ "similarLine": "voisins semblables",
+ "unhappyLine": "insatisfaits",
+ "gridTitle": "La ville à la fin (les deux couleurs sont les deux groupes)",
+ "checkMild": "La préférence est modérée : want vaut au plus 0,35.",
+ "checkSegregated": "La ville est séparée : en moyenne au moins 70 % des voisins sont semblables."
+}

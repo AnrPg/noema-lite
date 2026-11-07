@@ -1,0 +1,17 @@
+{
+ "id": "bloom-filter",
+ "runtime": "sim-spec@1",
+ "entry": "activities/bloom-filter/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "bloom-filter-still",
+  "text": "A Bloom filter of m = 1000 bits holding n = 100 items. With k hash functions a lookup of an item that was never stored still says yes when all k of its bits are set, which happens with probability about (1 − e^(−kn/m))^k. One hash gives 9.5 %, three give 1.7 %, and the best number, k = (m/n)·ln 2 ≈ 6.9, rounded to 7, gives 0.82 %. More hashes than that fill the filter faster than they help. The exact rate, from the law of the number of set bits, is 0.83 % (Christensen, Roginsky and Jimeno, 2010)."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

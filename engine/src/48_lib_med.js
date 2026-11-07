@@ -692,7 +692,7 @@
     return runItem({ id: 'x', fn, opts, units }, {}, cin);
   }
 
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): med@1 in a co-simulation ----------
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): med@1 in a co-simulation ----------
      The PK items become compartment models stepped in time (the same pharmacokinetics as above, Rowland & Tozer 2019; integrated with
      classical RK4, ≤ 0.05/k per substep, split exactly at each dose): pk.iv (central), pk.oral (gut → central, F, tlag), pk.infusion
      (a zero-order rate for dur), pk.twocpt (central ⇄ peripheral, a bolus at the start), pk.mm (Michaelis–Menten elimination). Their

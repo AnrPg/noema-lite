@@ -1,0 +1,21 @@
+{
+ "cases": [
+  { "name": "r = 0.5: the largest stable step, the profile smooths out (passes)", "exercise": "ch01-e920",
+    "steps": [ { "set": "rr", "value": 0.5 } ],
+    "expect": { "passed": true, "values": { "ok": [1, 1], "gain": [0.999, 1.0001], "peak": [0.44, 0.48] } } },
+  { "name": "r = 0.46: stable and efficient enough (passes)", "exercise": "ch01-e920",
+    "steps": [ { "set": "rr", "value": 0.46 } ],
+    "expect": { "passed": true, "values": { "ok": [1, 1], "gain": [0.999, 1.0001], "peak": [0.43, 0.45] } } },
+  { "name": "r = 0.52: just past ½, the zigzag mode grows (fails)", "exercise": "ch01-e920",
+    "steps": [ { "set": "rr", "value": 0.52 } ],
+    "expect": { "passed": false, "values": { "ok": [0, 0], "gain": [1.07, 1.08], "peak": [1000, 1e300] } } },
+  { "name": "the start value r = 0.7: the solution is swamped (fails)", "exercise": "ch01-e920",
+    "steps": [ { "set": "rr", "value": 0.7 } ],
+    "expect": { "passed": false, "values": { "ok": [0, 0], "gain": [1.79, 1.80], "peak": [1000, 1e300] } } },
+  { "name": "r = 0.2: stable, but four times more steps than needed (fails)", "exercise": "ch01-e920",
+    "steps": [ { "set": "rr", "value": 0.2 } ],
+    "expect": { "passed": false, "values": { "ok": [1, 1], "peak": [0.43, 0.45] } } },
+  { "name": "explorer: the value is saved", "steps": [ { "set": "rr", "value": 0.3 } ],
+    "expect": { "state": [ "rr" ], "values": { "r": [0.29, 0.31], "ok": [1, 1] } } }
+ ]
+}

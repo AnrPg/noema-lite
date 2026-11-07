@@ -245,7 +245,7 @@ def check_spec(spec):
             return cond
         if of == "y": need(dim == 2, "of", "y is for a 2-D grid")
         if of == "profile" and dim == 2: need((o.get("y") is None) != (o.get("x") is None), "y", "a 2-D profile needs y (a row) or x (a column), one of them")
-        if of in ("profile", "heatmap"):
+        if of in ("profile", "heatmap", "at", "final", "error", "probe"):
             if o.get("t") is not None: need(not isP and not isCA, "t", "a time is for an equation in time")
         if of == "probe": need(o.get("probe") in probes, "probe", "a probe of model.probes")
         if (of == "stat" and kd == "series") or of == "final": need(o.get("stat") in STATS, "stat", "one of " + ", ".join(STATS))

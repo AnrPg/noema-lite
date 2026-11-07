@@ -1,0 +1,2593 @@
+{
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "rules",
+    "query": "forbidden",
+    "rules": [
+     {
+      "id": "car",
+      "if": [
+       "car"
+      ],
+      "then": "vehicle",
+      "kind": "strict"
+     },
+     {
+      "id": "amb",
+      "if": [
+       "ambulance"
+      ],
+      "then": "vehicle",
+      "kind": "strict"
+     },
+     {
+      "id": "r1",
+      "if": [
+       "vehicle"
+      ],
+      "then": "forbidden",
+      "unless": [
+       "memorial"
+      ],
+      "issued": 1958,
+      "label": "ruleNoVehicles"
+     },
+     {
+      "id": "r2",
+      "if": [
+       "vehicle",
+       "emergency"
+      ],
+      "then": "~forbidden"
+     }
+    ],
+    "toggles": [
+     {
+      "lit": "car",
+      "on": "k"
+     },
+     {
+      "lit": "ambulance",
+      "on": "1 - k"
+     }
+    ],
+    "facts": [
+     "emergency"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "holds"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "status",
+     "at": "r1"
+    },
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "undecided"
+    },
+    {
+     "id": "st",
+     "kind": "series",
+     "of": "status"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ],
+   "plots": [
+    {
+     "kind": "scene",
+     "of": "pic",
+     "title": "sceneTitle"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "rules",
+    "query": "p",
+    "rules": [
+     {
+      "id": "a",
+      "if": [
+       "q"
+      ],
+      "then": "p",
+      "rank": 1
+     },
+     {
+      "id": "b",
+      "if": [
+       "q"
+      ],
+      "then": "~p",
+      "rank": 2
+     }
+    ],
+    "sup": [
+     {
+      "win": "a",
+      "lose": "b"
+     }
+    ],
+    "order": [
+     "posterior",
+     "specialis"
+    ],
+    "facts": [
+     "q"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    },
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "refuted"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "query": "pacifist",
+    "premises": [
+     {
+      "lit": "quaker",
+      "kind": "axiom"
+     },
+     {
+      "lit": "republican",
+      "kind": "ordinary",
+      "rank": 1,
+      "on": "k"
+     }
+    ],
+    "rules": [
+     {
+      "id": "q",
+      "if": [
+       "quaker"
+      ],
+      "then": "pacifist",
+      "rank": 1
+     },
+     {
+      "id": "rp",
+      "if": [
+       "republican"
+      ],
+      "then": "~pacifist",
+      "rank": 2
+     }
+    ],
+    "semantics": "preferred",
+    "link": "weakest"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "accepted"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "credulous"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "status",
+     "at": "rp"
+    },
+    {
+     "id": "l",
+     "kind": "series",
+     "of": "labels"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "query": "claim",
+    "premises": [
+     {
+      "lit": "said"
+     }
+    ],
+    "schemes": [
+     {
+      "id": "ex",
+      "scheme": "expert",
+      "if": [
+       "said"
+      ],
+      "then": "claim",
+      "label": "expertArg",
+      "cqs": [
+       {
+        "cq": "trustworthy",
+        "on": "k"
+       },
+       {
+        "cq": "consistent",
+        "lit": "others_disagree"
+       }
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "accepted"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "status",
+     "at": "ex"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "carneades",
+    "query": "murder",
+    "args": [
+     {
+      "id": "arg1",
+      "if": [
+       "kill",
+       "intent"
+      ],
+      "then": "murder",
+      "weight": 0.8
+     },
+     {
+      "id": "arg2",
+      "if": [
+       "witness"
+      ],
+      "unless": [
+       "unreliable"
+      ],
+      "then": "intent",
+      "weight": "k * 0.3 + 0.3"
+     },
+     {
+      "id": "arg3",
+      "if": [
+       "witness2"
+      ],
+      "unless": [
+       "unreliable2"
+      ],
+      "then": "~intent",
+      "weight": 0.8,
+      "label": "argAlibi"
+     }
+    ],
+    "assume": [
+     "kill",
+     "witness",
+     "witness2",
+     "unreliable2"
+    ],
+    "standards": [
+     {
+      "lit": "intent",
+      "ps": "brd"
+     }
+    ],
+    "alpha": 0.4,
+    "beta": 0.3,
+    "gamma": 0.2
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "acceptable"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "negation"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "status",
+     "at": "arg2"
+    },
+    {
+     "id": "ap",
+     "kind": "series",
+     "of": "applicable"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "hohfeld",
+    "positions": [
+     {
+      "kind": "right",
+      "holder": "A",
+      "other": "B",
+      "act": "pay"
+     },
+     {
+      "kind": "power",
+      "holder": "A",
+      "other": "B",
+      "act": "assign",
+      "on": "k"
+     },
+     {
+      "kind": "immunity",
+      "holder": "B",
+      "other": "A",
+      "act": "assign"
+     }
+    ],
+    "ask": {
+     "kind": "duty",
+     "holder": "B",
+     "other": "A",
+     "act": "pay"
+    }
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "contradictions"
+    },
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "contradiction"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "proof",
+    "issues": [
+     {
+      "id": "base",
+      "p": 0.8,
+      "label": "issueBase"
+     },
+     {
+      "id": "pres",
+      "presumed": "base",
+      "mode": "thayer",
+      "rebut": "k"
+     },
+     {
+      "id": "id",
+      "prior": 0.01,
+      "lr": [
+       100,
+       "k * 10 + 1"
+      ],
+      "standard": "brd",
+      "burden": "claimant"
+     },
+     {
+      "id": "g",
+      "p": 0.95,
+      "standard": "decision"
+     },
+     {
+      "id": "c",
+      "p": 0.7,
+      "standard": "custom",
+      "threshold": 0.65
+     }
+    ],
+    "costs": {
+     "fp": 10,
+     "fn": 1
+    },
+    "claim": [
+     "base",
+     "pres"
+    ],
+    "aggregate": "element",
+    "query": "id"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "established"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "posterior",
+     "at": "id"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "threshold",
+     "at": "g"
+    },
+    {
+     "id": "cl",
+     "kind": "scalar",
+     "of": "claim"
+    },
+    {
+     "id": "ps",
+     "kind": "series",
+     "of": "posteriors"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "cases",
+    "factors": [
+     {
+      "id": "F6",
+      "side": "p",
+      "label": "fSecurity"
+     },
+     {
+      "id": "F15",
+      "side": "p"
+     },
+     {
+      "id": "F16",
+      "side": "d"
+     },
+     {
+      "id": "F1",
+      "side": "d"
+     }
+    ],
+    "cases": [
+     {
+      "id": "A",
+      "factors": [
+       "F6",
+       "F16"
+      ],
+      "outcome": "p",
+      "reason": [
+       "F6"
+      ]
+     },
+     {
+      "id": "B",
+      "factors": [
+       "F15",
+       "F1",
+       "F16"
+      ],
+      "outcome": "d",
+      "label": "caseB"
+     }
+    ],
+    "facts": [
+     "F6",
+     "F16"
+    ],
+    "toggles": [
+     {
+      "lit": "F15",
+      "on": "k"
+     }
+    ],
+    "side": "p",
+    "focus": "A",
+    "reasoning": "reason"
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "forced"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "distinctions",
+     "at": "B"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "binding"
+    },
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "shared"
+    },
+    {
+     "id": "pic",
+     "kind": "scene",
+     "of": "drawing"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "deadline",
+    "start": "2023-01-31",
+    "period": {
+     "n": "k + 1",
+     "unit": "months"
+    },
+    "monthEnd": "last",
+    "roll": "next",
+    "weekend": [
+     0,
+     6
+    ],
+    "holidays": [
+     "2023-02-28"
+    ],
+    "tolling": [
+     {
+      "from": "2023-02-10",
+      "to": "2023-02-12"
+     }
+    ],
+    "longstop": {
+     "n": 1,
+     "unit": "years"
+    },
+    "asOf": "k * 30",
+    "excludeStart": true
+   },
+   "outputs": [
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "endY"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "endM"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "endD"
+    },
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "expired"
+    },
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "rolled"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "contract",
+    "events": [
+     {
+      "kind": "offer",
+      "by": "A",
+      "t": 0,
+      "arrive": 1,
+      "terms": [
+       "price",
+       "qty"
+      ]
+     },
+     {
+      "kind": "revocation",
+      "by": "A",
+      "t": 2,
+      "arrive": 5
+     },
+     {
+      "kind": "acceptance",
+      "by": "B",
+      "t": "k + 2.5",
+      "arrive": 6,
+      "terms": [
+       "price",
+       "qty",
+       "arbitration"
+      ]
+     }
+    ],
+    "acceptRule": "dispatch",
+    "revokeRule": "receipt",
+    "mirror": "material",
+    "material": [
+     "price",
+     "qty",
+     "delivery"
+    ],
+    "firm": false,
+    "elements": [
+     {
+      "id": "consideration",
+      "holds": 1,
+      "label": "elConsideration"
+     }
+    ],
+    "parties": [
+     {
+      "id": "A",
+      "age": 30
+     },
+     {
+      "id": "B",
+      "age": "k * 20",
+      "minAge": 18
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "formed"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "binding"
+    },
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "voidable"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "damages",
+    "items": [
+     {
+      "id": "lv",
+      "kind": "loss",
+      "amount": 1000,
+      "avoidable": "k * 200"
+     },
+     {
+      "id": "lp",
+      "kind": "consequential",
+      "amount": 5000,
+      "foreseeable": 0,
+      "label": "lostProfit"
+     },
+     {
+      "id": "ca",
+      "kind": "cost-avoided",
+      "amount": 100
+     },
+     {
+      "id": "rl",
+      "kind": "reliance",
+      "amount": 300
+     }
+    ],
+    "price": 100,
+    "market": 150,
+    "measure": "expectation",
+    "liquidated": {
+     "amount": 900,
+     "ratio": 1.5
+    },
+    "interest": {
+     "rate": 0.05,
+     "years": 2,
+     "kind": "compound",
+     "per": 12
+    }
+   },
+   "outputs": [
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "damages"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "total"
+    },
+    {
+     "id": "bal",
+     "kind": "series",
+     "of": "balance"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "crime",
+    "offences": [
+     {
+      "id": "murder",
+      "mind": "knowledge",
+      "rank": 3,
+      "grade": "felony",
+      "elements": [
+       {
+        "id": "kill",
+        "kind": "result"
+       },
+       {
+        "id": "person",
+        "kind": "circumstance",
+        "mind": "negligence"
+       }
+      ]
+     },
+     {
+      "id": "manslaughter",
+      "rank": 2,
+      "elements": [
+       {
+        "id": "kill",
+        "kind": "result",
+        "mind": "recklessness"
+       }
+      ]
+     },
+     {
+      "id": "parking",
+      "grade": "violation",
+      "elements": [
+       {
+        "id": "parked",
+        "mind": "strict",
+        "label": "elParked"
+       }
+      ]
+     }
+    ],
+    "proven": [
+     {
+      "element": "kill",
+      "holds": 1,
+      "mind": "k * 3"
+     },
+     {
+      "element": "person",
+      "holds": 1,
+      "mind": 4
+     }
+    ],
+    "defences": [
+     {
+      "id": "self",
+      "kind": "justification",
+      "holds": 0,
+      "offences": [
+       "murder"
+      ]
+     }
+    ],
+    "causation": {
+     "butFor": 1,
+     "proximate": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "offence"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "met",
+     "at": "murder"
+    },
+    {
+     "id": "me",
+     "kind": "series",
+     "of": "met"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "sentence",
+    "grid": {
+     "first": 19,
+     "cats": [
+      0,
+      2,
+      4,
+      7,
+      10,
+      13
+     ],
+     "rows": [
+      [
+       30,
+       37,
+       33,
+       41,
+       37,
+       46,
+       46,
+       57,
+       57,
+       71,
+       63,
+       78
+      ],
+      [
+       33,
+       41,
+       37,
+       46,
+       41,
+       51,
+       51,
+       63,
+       63,
+       78,
+       70,
+       87
+      ]
+     ]
+    },
+    "level": 19,
+    "points": "k * 3",
+    "adjust": [
+     {
+      "id": "role",
+      "delta": 1,
+      "on": "k"
+     }
+    ],
+    "min": 36,
+    "max": 60
+   },
+   "outputs": [
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "lo"
+    },
+    {
+     "id": "hi",
+     "kind": "scalar",
+     "of": "hi"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "category"
+    },
+    {
+     "id": "cl",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "clamped"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "proportionality",
+    "aim": 1,
+    "effect": 0.8,
+    "burden": 0.6,
+    "alternatives": [
+     {
+      "id": "softer",
+      "effect": 0.7,
+      "burden": 0.3,
+      "on": "k"
+     }
+    ],
+    "weights": {
+     "Ii": 4,
+     "Wi": 2,
+     "Ri": 1,
+     "Ij": "k * 2 + 2",
+     "Wj": 2,
+     "Rj": 0.5
+    },
+    "scale": "triadic",
+    "extra": [
+     {
+      "side": "j",
+      "I": 1,
+      "W": 1,
+      "R": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "weight"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "proportionate"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "stage"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "vote",
+    "members": 100,
+    "present": 60,
+    "yes": "k * 10 + 25",
+    "no": 30,
+    "abstain": 5,
+    "abstentions": "excluded",
+    "quorum": 0.5,
+    "base": "cast",
+    "majority": 0.5,
+    "strict": true,
+    "tie": "chair",
+    "chair": "yes"
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "passes"
+    },
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "needed"
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "quorate"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "vote",
+    "voters": [
+     {
+      "id": "F",
+      "weight": 4,
+      "pop": 50,
+      "yes": 1
+     },
+     {
+      "id": "G",
+      "weight": 4,
+      "pop": 55,
+      "yes": "k"
+     },
+     {
+      "id": "I",
+      "weight": 4,
+      "pop": 50,
+      "yes": 1
+     },
+     {
+      "id": "B",
+      "weight": 2,
+      "pop": 9
+     },
+     {
+      "id": "N",
+      "weight": 2,
+      "pop": 11
+     },
+     {
+      "id": "L",
+      "weight": 1,
+      "pop": 0.3,
+      "label": "lux"
+     }
+    ],
+    "quota": 12,
+    "popQuota": 0.65,
+    "countQuota": 0.55,
+    "blocking": 4,
+    "voter": "L"
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "passes"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "banzhaf"
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "shapley",
+     "at": "B"
+    },
+    {
+     "id": "bz",
+     "kind": "series",
+     "of": "banzhaf"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "citation",
+    "text": "Smith v Jones, 12 Law Rep 345",
+    "patterns": [
+     {
+      "id": "own",
+      "template": "{party:word} v {other:word}, {volume:int} Law Rep {page:int}"
+     }
+    ],
+    "kinds": [
+     "ecli",
+     "reporter"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "valid"
+    },
+    {
+     "id": "vol",
+     "kind": "scalar",
+     "of": "volume"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "field",
+     "name": "page"
+    },
+    {
+     "id": "k",
+     "kind": "scalar",
+     "of": "kind"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "shares",
+    "estate": "k * 1000 + 24000",
+    "heirs": [
+     {
+      "id": "wife",
+      "share": "1/8",
+      "radd": false,
+      "label": "heirWife"
+     },
+     {
+      "id": "daughters",
+      "share": "2/3"
+     },
+     {
+      "id": "father",
+      "share": "1/6"
+     },
+     {
+      "id": "mother",
+      "share": "1/6"
+     }
+    ],
+    "deficit": "radd"
+   },
+   "outputs": [
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "share",
+     "at": "wife"
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "awl"
+    },
+    {
+     "id": "am",
+     "kind": "series",
+     "of": "amounts"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "shares",
+    "estate": 200,
+    "division": "talmud",
+    "heirs": [
+     {
+      "id": "w1",
+      "claim": 100
+     },
+     {
+      "id": "w2",
+      "claim": 200
+     },
+     {
+      "id": "w3",
+      "claim": 300
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "amount",
+     "at": "w3"
+    },
+    {
+     "id": "t",
+     "kind": "scalar",
+     "of": "total"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "obligations",
+    "start": "2024-03-01",
+    "count": "business",
+    "holidays": [
+     "2024-03-05"
+    ],
+    "norms": [
+     {
+      "id": "deliver",
+      "kind": "O",
+      "cond": "order",
+      "act": "delivered",
+      "within": 3,
+      "penalty": 500
+     },
+     {
+      "id": "refund",
+      "kind": "O",
+      "cond": "viol_deliver",
+      "act": "refunded",
+      "within": 2,
+      "penalty": "k * 100",
+      "on": "k"
+     }
+    ],
+    "trace": [
+     {
+      "date": "2024-03-01",
+      "facts": [
+       "order"
+      ]
+     },
+     {
+      "date": "2024-03-08",
+      "acts": [
+       "delivered"
+      ]
+     },
+     {
+      "date": "2024-03-12",
+      "acts": [
+       "refunded"
+      ]
+     }
+    ],
+    "horizon": 12,
+    "step": "k * 12",
+    "order": [
+     "superior"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "violations"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "penalties"
+    },
+    {
+     "id": "fr",
+     "kind": "scalar",
+     "of": "frame"
+    },
+    {
+     "id": "vs",
+     "kind": "series",
+     "of": "violationsPerStep"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "rules",
+    "rules": [
+     {
+      "id": "a",
+      "then": "p"
+     }
+    ],
+    "meta": {
+     "note": "x"
+    },
+    "extraField": 1
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "conclusions",
+     "foo": 1
+    },
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "status",
+     "at": "a"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "query": "p"
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "treaty"
+   },
+   "outputs": []
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "rules",
+    "query": "p"
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "rules",
+    "query": "p & q",
+    "rules": [
+     {
+      "id": "a",
+      "if": [
+       "q | r"
+      ],
+      "then": "p"
+     },
+     {
+      "id": "a",
+      "then": "~~p"
+     },
+     {
+      "id": "b",
+      "then": "p q"
+     }
+    ],
+    "sup": [
+     {
+      "win": "a",
+      "lose": "zz"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "aspic",
+    "rules": [
+     {
+      "id": "d",
+      "kind": "defeater",
+      "if": [
+       "a"
+      ],
+      "then": "b"
+     }
+    ],
+    "schemes": [
+     {
+      "id": "d",
+      "scheme": "expert",
+      "then": "c",
+      "cqs": [
+       {
+        "cq": "nosuch"
+       }
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "accepted"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "carneades",
+    "args": [
+     {
+      "id": "x",
+      "if": [
+       "b"
+      ],
+      "then": "a"
+     },
+     {
+      "id": "y",
+      "unless": [
+       "a"
+      ],
+      "then": "~b"
+     }
+    ],
+    "standards": [
+     {
+      "lit": "a",
+      "ps": "strong"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "acceptable"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "carneades",
+    "args": [
+     {
+      "id": "x",
+      "if": [
+       "b"
+      ],
+      "then": "a"
+     },
+     {
+      "id": "y",
+      "if": [
+       "a"
+      ],
+      "then": "b"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "acceptable"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "proof",
+    "issues": [
+     {
+      "id": "a",
+      "presumed": "zz"
+     },
+     {
+      "id": "b",
+      "presumed": "b",
+      "standard": "custom"
+     },
+     {
+      "id": "c",
+      "standard": "decision"
+     },
+     {
+      "id": "a"
+     }
+    ],
+    "claim": [
+     "q"
+    ],
+    "query": "nope"
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "established"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "cases",
+    "factors": [
+     {
+      "id": "F1",
+      "side": "p"
+     }
+    ],
+    "cases": [
+     {
+      "id": "A",
+      "factors": [
+       "F1",
+       "F9"
+      ],
+      "outcome": "d",
+      "reason": [
+       "F7"
+      ]
+     }
+    ],
+    "facts": [
+     "F2"
+    ],
+    "toggles": [
+     {
+      "lit": "F3"
+     }
+    ],
+    "focus": "Z"
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "forced"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "deadline",
+    "start": "2023-02-29",
+    "period": {
+     "n": 1,
+     "unit": "days"
+    },
+    "holidays": [
+     "2023-13-01",
+     "tomorrow"
+    ],
+    "tolling": [
+     {
+      "from": "2023-03-10",
+      "to": "2023-03-01"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "end"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "deadline",
+    "period": {
+     "n": 1,
+     "unit": "fortnights"
+    }
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "end"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "obligations",
+    "norms": [
+     {
+      "id": "n",
+      "kind": "O",
+      "act": "a &",
+      "cond": "(b"
+     }
+    ],
+    "trace": [
+     {
+      "date": "2024-01-01",
+      "day": 1
+     },
+     {
+      "date": "2024-02-30"
+     }
+    ],
+    "count": "business"
+   },
+   "outputs": [
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "violations"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "crime",
+    "offences": [
+     {
+      "id": "o",
+      "elements": [
+       {
+        "id": "e"
+       },
+       {
+        "id": "e"
+       }
+      ]
+     },
+     {
+      "id": "p",
+      "elements": []
+     }
+    ],
+    "proven": [
+     {
+      "element": "x",
+      "holds": 1
+     }
+    ],
+    "defences": [
+     {
+      "id": "d",
+      "holds": 1,
+      "offences": [
+       "zz"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "liable"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "sentence",
+    "grid": {
+     "cats": [
+      0,
+      3,
+      2
+     ],
+     "rows": [
+      [
+       1,
+       2,
+       3,
+       4
+      ],
+      [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "lo"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "sentence",
+    "grid": {
+     "first": 1
+    }
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "lo"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "vote",
+    "voters": [
+     {
+      "id": "a",
+      "weight": 1
+     },
+     {
+      "id": "a",
+      "weight": 2
+     }
+    ],
+    "voter": "b"
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "passes"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "banzhaf",
+     "at": "zz"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "citation",
+    "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "patterns": [
+     {
+      "id": "p1",
+      "template": "{a:float}"
+     },
+     {
+      "id": "p2",
+      "template": "no fields"
+     },
+     {
+      "id": "p3",
+      "template": "x } y"
+     },
+     {
+      "id": "p4",
+      "template": "{a:int} {a:int}"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "field"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "field",
+     "name": "9bad"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "hohfeld",
+    "positions": [
+     {
+      "kind": "right",
+      "holder": "A",
+      "other": "A",
+      "act": "p & q"
+     },
+     {
+      "kind": "claim",
+      "holder": "A",
+      "other": "B",
+      "act": "p"
+     }
+    ],
+    "ask": {
+     "kind": "duty",
+     "holder": "B",
+     "other": "B",
+     "act": "p"
+    }
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "shares",
+    "heirs": [
+     {
+      "id": "h",
+      "share": 0.5
+     },
+     {
+      "id": "h"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "share",
+     "at": "h"
+    },
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "nope"
+    },
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "flag"
+    },
+    {
+     "id": "z",
+     "kind": "scalar",
+     "of": "weight"
+    },
+    {
+     "id": "q",
+     "kind": "series",
+     "of": "amounts",
+     "at": "h"
+    },
+    {
+     "id": "r",
+     "kind": "sound",
+     "of": "x"
+    },
+    {
+     "id": "s",
+     "kind": "scalar"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "rules",
+    "rules": [
+     {
+      "id": "a",
+      "then": "p",
+      "on": "k",
+      "rank": "high"
+     }
+    ],
+    "facts": "p",
+    "order": [
+     "newest"
+    ]
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds",
+     "code": "x"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": null,
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "hohfeld",
+    "positions": [
+     {
+      "kind": "right",
+      "holder": "A",
+      "other": "A",
+      "act": "p & q"
+     }
+    ],
+    "ask": {
+     "kind": "duty",
+     "holder": "B",
+     "other": "B",
+     "act": "p"
+    }
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "holds"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "crime",
+    "offences": [
+     {
+      "id": "o",
+      "elements": [
+       {
+        "id": "e"
+       },
+       {
+        "id": "e"
+       }
+      ]
+     }
+    ],
+    "proven": [
+     {
+      "element": "x",
+      "holds": 1
+     }
+    ],
+    "defences": [
+     {
+      "id": "d",
+      "holds": 1,
+      "offences": [
+       "zz"
+      ]
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "liable"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "met",
+     "at": "q"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "carneades",
+    "args": [
+     {
+      "id": "a",
+      "then": "p"
+     }
+    ],
+    "standards": [
+     {
+      "lit": "p | q",
+      "ps": "dv"
+     }
+    ],
+    "assume": [
+     "r s"
+    ],
+    "query": "p"
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "acceptable"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "law@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 0,
+     "max": 1,
+     "step": 1,
+     "default": 0
+    }
+   ],
+   "model": {
+    "task": "damages",
+    "items": [
+     {
+      "id": "i",
+      "kind": "gain",
+      "amount": 1
+     }
+    ],
+    "interest": {
+     "rate": 0.1
+    }
+   },
+   "outputs": "nope"
+  }
+ ]
+}

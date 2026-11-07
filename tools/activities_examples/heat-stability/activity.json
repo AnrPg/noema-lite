@@ -1,0 +1,17 @@
+{
+ "id": "heat-stability",
+ "runtime": "sim-spec@1",
+ "entry": "activities/heat-stability/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "heat-stability-still",
+  "text": "A rod whose middle starts hot and whose ends are held at zero cools by diffusion, u_t = D u_xx. The explicit (FTCS) scheme updates each node from its neighbours, u_i ← u_i + r (u_{i−1} − 2u_i + u_{i+1}), with r = D Δt / Δx². A Fourier mode of the error is multiplied each step by G(θ) = 1 − 4r sin²(θ/2) (von Neumann's analysis); its size stays at most 1 for every mode exactly when r ≤ 1/2. With r = 0.5 the profile smooths out as it should; with r = 0.55 the shortest mode (a zigzag from node to node) grows by |1 − 4r| = 1.2 every step and swamps the solution after a few hundred steps. The picture shows the run with r = 0.5 at t = 0.05 and the run with r = 0.55 already at t = 0.005, when the zigzag has begun to grow."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

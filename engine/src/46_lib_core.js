@@ -179,7 +179,7 @@
     }
     return r;
   }
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): an engine that evolves in time can be stepped by the parts orchestrator ----------
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): an engine that evolves in time can be stepped by the parts orchestrator ----------
      def.stepper = { init(model, inputs, ctx) → state,
                      step(state, inputs, t, dt, ctx) → { state, out: {outputId: value}, dt? (taken ≤ dt: an early stop), events?: [{t, kind, data, to?}], fail?: code },
                      snapshot?(state) → copy, restore?(copy) → state (default: a deep copy of plain data; null = cannot be iterated),
@@ -243,7 +243,7 @@
         const inst = {
           run(inp) {
             const env = {}, series = {};
-            for (const [k, v] of Object.entries(inp || {})) if (typeof v === 'number' || typeof v === 'boolean') env[k] = v; else if (Array.isArray(v)) series[k] = v.slice(0, MAX_POINTS);   // a series input of a part (§1.5)
+            for (const [k, v] of Object.entries(inp || {})) if (typeof v === 'number' || typeof v === 'boolean') env[k] = v; else if (Array.isArray(v)) series[k] = v.slice(0, MAX_POINTS);   // a series input of a part (docs/INTERACTIVE.md §12.8)
             const hasS = Object.keys(series).length > 0, kk = hasS ? JSON.stringify([env, series]) : JSON.stringify(env);
             if (kk !== key) { key = kk; try { res = def.run(spec, env, hasS ? { seed, prepared, series } : { seed, prepared }); } catch (e) { res = null; } }
             return pick(spec, res);

@@ -621,7 +621,7 @@
   }
   const prepare = spec => prep(spec);
 
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): the virtual patient in a co-simulation ----------
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): the virtual patient in a co-simulation ----------
      The same "haemo-lite" physiology as runVp (the same equations, 0.1 min substeps), stepped from a state; at every macro step the
      patient's numbers (bleed, sepsis growth, lung, shunt) and the actions (their times and effects: a vasopressor dose another part
      — a controller, a pharmacokinetic model — computes) are read again from the current inputs. Time: minutes of the co-simulation.

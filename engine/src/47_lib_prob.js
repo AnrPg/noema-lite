@@ -1,5 +1,5 @@
 /* ===================== prob@1 — probability and statistics: the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md, chapter docs/library/prob.md) =====================
-   One general engine with 14 modes (model.mode):
+   One general engine with 19 modes (model.mode):
      dist       25 families (pmf/pdf, cdf, sf, logs, quantiles, moments, P(a ≤ X ≤ b), normal and Poisson approximations, plots)
      mc         Monte Carlo of an expression over seeded draws (Welford, Wilson for events, running mean with its band, histogram)
      sampling   sampling distributions: CLT and LLN for any parent (and its failure for heavy tails)
@@ -16,6 +16,18 @@
      walk       random walks (exact law of S_n, reflection, returns, Pólya), gambler's ruin, Galton–Watson extinction
      queue      M/M/c queues (Erlang B and C, Little's law)
      bootstrap  the bootstrap (percentile, basic, normal, BCa) and permutation tests
+     combin     the multinomial law (moments, pmf, its exact test), the coupon collector (unequal probabilities, several copies,
+                partial collections) and the birthday problem (k-coincidences, unequal days), exactly
+     gof        goodness of fit: Kolmogorov–Smirnov one and two samples (exact laws, Durbin/MTW, Hodges, ties), Shapiro–Wilk
+                (Royston 1995), Anderson–Darling (Marsaglia 2004; D'Agostino & Stephens with estimates), χ² of binned data
+     mcmc       Metropolis–Hastings on any log density, Gibbs samplers; split rank-normalised R̂, bulk/tail ESS (Vehtari et al. 2021)
+     multivar   the multivariate normal (Cholesky, rectangle cdf in 2-D), correlations, OLS with inference (QR), logistic
+                regression (IRLS), PCA (Jacobi), the Dirichlet law
+     rand       randomized algorithms (Motwani–Raghavan; Mitzenmacher–Upfal): amplification, quicksort/quickselect, Karger,
+                Freivalds, Fermat/Miller–Rabin, rounding, balls in bins, Bloom, Count-Min, HyperLogLog, reservoir sampling, cover
+                times, 2-SAT walks, tail bounds vs exact tails, skip lists, treaps, Monte Carlo integration
+   The later modes draw their randomness from NoemaSimKit streams (46_lib_simkit.js, MRG32k3a), the earlier ones from the core's
+   mulberry32 (unchanged, so their seeded results stay as they were).
    The special functions are written here with their sources beside them (lgamma, Loader's saddle point, the regularised incomplete
    gamma and beta functions, AS 241, AS 243). Pure, bounded, deterministic JS: no DOM, no network, no clock; the transcendental
    functions are NoemaExpr's fdlibm ports (never the platform's Math.* except sqrt, floor and the IEEE-exact operations); seeded
@@ -3193,11 +3205,22 @@
         let kb = max(1, floor(kOpt)); if (cl(kb + 1) < cl(kb)) kb++; o.kOptInt = n === 0 ? 1 : kb;
         const k = g(m, 'k', o.kOptInt); if (!(Number.isInteger(k) && k >= 1)) return bad();
         o.fpClassic = cl(k); o.fpApprox = ap(k); o.mFor = tgt > 0 && tgt < 1 ? Math.ceil(-n * log(tgt) / (LN2 * LN2)) : NaN;
-        const T = k * n;   // the occupancy law of the set bits after kn uniform throws; FP = Σ P(X = i)(i/m)^k
-        if (budget(T * min(mb, T + 1))) {
-          const top = min(mb, T); let v = new Float64Array(top + 1); v[0] = 1;
-          for (let s = 0; s < T; s++) { for (let i = min(top, s + 1); i >= 1; i--) v[i] = v[i] * i / mb + v[i - 1] * (mb - i + 1) / mb; v[0] = 0; }
-          let fp = 0; for (let i = 1; i <= top; i++) fp += v[i] * pow(i / mb, k); o.fpExact = n === 0 ? 0 : fp;
+        /* the occupancy law of the set bits after kn uniform throws (a chain i → i + 1 with probability (m − i)/m), kept on the band
+           where it is above 1e-40 (≈ ±13 sd, the mass dropped < 1e-36); FP = Σ P(X = i)(i/m)^k */
+        const T = k * n, top = min(mb, T);
+        if (n === 0) o.fpExact = 0;
+        else {
+          const v = new Float64Array(top + 2); let lo = 0, hi = 0, work = 0; v[0] = 1;
+          for (let s = 0; s < T && work <= 4e7; s++) {
+            const nh = min(top, hi + 1);
+            for (let i = nh; i >= max(1, lo); i--) v[i] = v[i] * i / mb + v[i - 1] * (mb - i + 1) / mb;
+            if (lo === 0) { v[0] = 0; lo = 1; }
+            hi = nh; work += hi - lo + 1;
+            while (v[lo] < 1e-40 && lo < hi) { v[lo] = 0; lo++; }
+            while (v[hi] < 1e-40 && hi > lo) { v[hi] = 0; hi--; }
+          }
+          if (work > 4e7) I.add('budget');
+          else { let fp = 0; for (let i = lo; i <= hi; i++) fp += v[i] * pow(i / mb, k); o.fpExact = fp; }
         }
         const kMax = m.kMax || 20, kg = [], fb = []; for (let kk = 1; kk <= kMax; kk++) { kg.push(kk); fb.push(cl(kk)); } sr.kGrid = kg; sr.fpByK = fb;
         if (reps > 0 && budget(reps * (T + k + mb / 32))) {

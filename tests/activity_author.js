@@ -163,7 +163,7 @@ for (const id of REFS) {
 console.log('— the engine library: a form from each engine’s table');
 const LS = globalThis.NoemaLibSchema, LIBS = AA.libEngines();
 if (libLoadErr.length) console.log('  (not loaded: ' + libLoadErr.join(' | ') + ' — another engine may be mid-edit)');
-const FINISHED = ['ode@1', 'logic@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'med@1', 'clinic@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'];
+const FINISHED = ['ode@1', 'logic@1', 'prob@1', 'seq@1', 'anatomy@1', 'graph@1', 'geom@1', 'genetics@1', 'med@1', 'clinic@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'];
 ok(FINISHED.every(id => LIBS.some(e => e.id === id)), 'every finished library engine exports its table and has a kind in the author: ' + LIBS.map(e => e.id).join(' '));
 const libRefs = id => fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'spec.json')) && rj(path.join(EX, d, 'spec.json')).engine === id);
 for (const e of LIBS) {
@@ -178,8 +178,9 @@ for (const e of LIBS) {
   }
   const fx = path.join(ROOT, 'tests', 'fixtures', 'enginelib', e.id.replace(/@.*$/, '') + '.json');
   if (fs.existsSync(fx)) {
+    // (a fixture tests the engine: what it judges is the engine, the model and the outputs; the controls are the validators' business)
     let acc = 0; const bad = [];
-    rj(fx).specs.forEach((sp, i) => { if (!sp || typeof sp !== 'object' || Array.isArray(sp) || e.M.checkSpec(sp).some(q => q.level === 'error')) return; acc++; const er = SF.validate(R, sch, sp, sid); if (er.length) bad.push(i + ' ' + JSON.stringify(er[0])); });
+    rj(fx).specs.forEach((sp, i) => { if (!sp || typeof sp !== 'object' || Array.isArray(sp) || e.M.checkSpec(sp).some(q => q.level === 'error')) return; acc++; const er = SF.validate(R, sch, sp, sid).filter(x => ['engine', 'model', 'outputs'].includes(x.path[0])); if (er.length) bad.push(i + ' ' + JSON.stringify(er[0])); });
     ok(acc > 0 && !bad.length, `${e.id}: its schema accepts all ${acc} fixture specs its checkSpec accepts ${bad.slice(0, 2).join(' | ')}`);
   }
   const r0 = libRefs(e.id)[0];

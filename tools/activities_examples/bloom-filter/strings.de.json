@@ -1,0 +1,17 @@
+{
+ "title": "Wie oft lügt ein Bloom-Filter?",
+ "intro": "Ein Bloom-Filter speichert eine Menge in m Bits. Jedes Element setzt k Bits, die k Hashfunktionen auswählen; eine Abfrage meldet „vielleicht enthalten“, wenn alle k Bits gesetzt sind. Ein gespeichertes Element übersieht er nie, doch manchmal sagt er ja zu einem Element, das nie gespeichert wurde. Ändern Sie die Zahl der Bits, der Elemente und der Hashfunktionen und beobachten Sie die Falsch-positiv-Rate.",
+ "bits": "Bits im Filter m",
+ "items": "Gespeicherte Elemente n",
+ "hashes": "Hashfunktionen k",
+ "fpLabel": "Falsch-positiv-Rate (exakt)",
+ "fpFormulaLabel": "Die Lehrbuchformel (1 − e^(−kn/m))^k",
+ "kOptLabel": "Bestes k in der Theorie, (m/n)·ln 2",
+ "kBestLabel": "Beste ganze Zahl von Hashfunktionen",
+ "mForLabel": "Nötige Bits für 1 % bei diesem n",
+ "plotTitle": "Falsch-positiv-Rate für jede Zahl von Hashfunktionen",
+ "kAxis": "Hashfunktionen k",
+ "fpAxis": "Falsch-positiv-Rate",
+ "fpLine": "falsch positiv",
+ "kMark": "Ihr k"
+}

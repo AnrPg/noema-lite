@@ -573,7 +573,10 @@
     // sync: the states at the start of the step
     const sync = schedule === 'sync';
     const stateOf = o => (sync && o.pv ? o.pv : o.v);
-    const setOther = (o, a, rnd) => { const v = stateOf(o); for (const k in v) O[k] = v[k]; O.x = o.x; O.y = o.y; O.heading = o.heading; O.age = o.age; O.id = o.id; O.deg = o.node >= 0 && net ? net.off[o.node + 1] - net.off[o.node] : 0; if (a) { const av = stateOf(a); for (const k in av) O['my_' + k] = av[k]; O.my_x = a.x; O.my_y = a.y; O.my_id = a.id; } if (rnd) O.rnd = rng(); O.t = E.t; };
+    const MYK = Object.create(null), myKey = k => MYK[k] || (MYK[k] = 'my_' + k);
+    const setMine = a => { const av = stateOf(a); for (const k in av) O[myKey(k)] = av[k]; O.my_x = a.x; O.my_y = a.y; O.my_id = a.id; O.t = E.t; };
+    const setOnly = (o, rnd) => { const v = stateOf(o); for (const k in v) O[k] = v[k]; O.x = o.x; O.y = o.y; O.heading = o.heading; O.age = o.age; O.id = o.id; O.deg = o.node >= 0 && net ? net.off[o.node + 1] - net.off[o.node] : 0; if (rnd) O.rnd = rng(); };
+    const setOther = (o, a, rnd) => { setOnly(o, rnd); if (a) setMine(a); O.t = E.t; };
     const evO = c => { ops++; return c.num ? c.val : c.f(O); };
     function aggregate(A, a, cache) {
       if (A.of === 'all' && cache.all.has(A.id)) return cache.all.get(A.id);
@@ -581,11 +584,16 @@
       const vals = []; let cnt = 0, tot = 0;
       if (A.of === 'inbox') {
         for (const msg of a.inbox) { if (A.perf && msg.perf !== A.perf) continue; tot++; setOther(a, a, A.ornd); O.content = msg.content; O.from = msg.from; if (A.whereC && !evO(A.whereC)) continue; cnt++; if (A.exprC) vals.push(evO(A.exprC)); }
-      } else for (const o of pool) {
-        if (!o.alive || (A.breed != null && o.B.id !== A.breed)) continue;
-        tot++; setOther(o, a, A.ornd);
-        if (A.whereC && !evO(A.whereC)) continue;
-        cnt++; if (A.exprC) vals.push(evO(A.exprC));
+      } else {
+        const env = !!(A.whereC || A.exprC);   // a bare count needs no environment
+        if (env) setMine(a);
+        for (const o of pool) {
+          if (!o.alive || (A.breed != null && o.B.id !== A.breed)) continue;
+          tot++; if (!env) { cnt++; continue; }
+          setOnly(o, A.ornd);
+          if (A.whereC && !evO(A.whereC)) continue;
+          cnt++; if (A.exprC) vals.push(evO(A.exprC));
+        }
       }
       const r = reduce(A.fn, vals, cnt, tot, pool);
       if (A.of === 'all') cache.all.set(A.id, r);
@@ -1134,7 +1142,7 @@
   const stepDef = {
     id: ID,
     init(model, inputs, sctx) {
-      const spec = isObj(model) && isObj(model.model) ? model : { format: 'noema.sim-spec/v1', engine: ID, model, outputs: [] };
+      const spec = isObj(model) && isObj(model.model) ? model : sctx && isObj(sctx.spec) && sctx.spec.model === model ? sctx.spec : { format: 'noema.sim-spec/v1', engine: ID, model, outputs: [] };   // makeEngine passes the model and the whole spec in ctx
       const M = prepare(spec); if (!M || M.proto || !SK()) return { bad: true };
       return { spec, M, inputs: Object.assign({}, inputs || {}), seed: ((sctx && sctx.seed) >>> 0) || 1, done: 0 };
     },

@@ -26,9 +26,20 @@ AUTHOR_SCHEMAS = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json
 def author_schemas_js():
     # the activity author's copy of the JSON Schemas (a file:// page cannot fetch them): engine/activity_author_schemas.js
     sch = {f: rj(os.path.join(ROOT, 'tools', 'schemas', f)) for f in AUTHOR_SCHEMAS}
+    # and the reference activity of every engine of the library (tools/activities_examples/<ref>/: its entry, spec and words): the author's
+    # "Start from the reference activity" (docs/activities-dev/authoring_ui.md)
+    refs, ex = {}, os.path.join(ROOT, 'tools', 'activities_examples')
+    for d in sorted(os.listdir(ex)):
+        p = os.path.join(ex, d)
+        if not (os.path.isfile(os.path.join(p, 'spec.json')) and os.path.isfile(os.path.join(p, 'activity.json'))): continue
+        spec = rj(os.path.join(p, 'spec.json'))
+        if not (isinstance(spec, dict) and spec.get('engine') in ACTS.LIB): continue
+        refs[d] = {'item': rj(os.path.join(p, 'activity.json')), 'spec': spec,
+                   'strings': {f.split('.')[1]: rj(os.path.join(p, f)) for f in sorted(os.listdir(p)) if re.fullmatch(r'strings\.[\w-]+\.json', f)}}
     return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from tools/schemas/ by\n'
             '   tools/build.py (tests/activity_author.js checks that it is up to date). Do not edit. Schema data, not words a learner reads: */\n/* i18n-ignore-start */\n'
-            '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
+            '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + ';\n'
+            '  root.NoemaActivityRefs = ' + json.dumps(refs, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
 
 def build_engine():
     wt(os.path.join(ENGINE, 'activity_author_schemas.js'), author_schemas_js())

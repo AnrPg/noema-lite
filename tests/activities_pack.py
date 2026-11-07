@@ -252,6 +252,26 @@ check(r.returncode == 0 and p3['version'] != p['version'], 'a changed bundle cha
 open(os.path.join(u, 'activities', 'py-filter', 'main.py'), 'a', encoding='utf-8').write('\n# v2\n')
 r = mk(u, 'o3b'); check(r.returncode == 0 and json.loads(pk('o3b').read('pack.json'))['version'] != p3['version'], 'a changed main.py changes pack.version', r.stdout + r.stderr)
 
+# activities/_parts (docs/INTERACTIVE.md §12.8): a spec with parts reuses a part of the pack ({use, with}); make_pack.py carries the
+# file as pack.activities.parts, unpack.py writes it back, the version is the same after the round trip
+wp = os.path.join(T, 'w-parts'); shutil.copytree(sd, wp); shutil.rmtree(os.path.join(wp, 'build'), ignore_errors=True)
+PKO = os.path.join(ROOT, 'tools', 'activities_examples', 'pk-ode'); pkd = os.path.join(wp, 'activities', 'pk-ode'); os.makedirs(pkd)
+for f in os.listdir(PKO):
+    if f.startswith('strings.'): shutil.copy(os.path.join(PKO, f), pkd)
+psp = rj(os.path.join(PKO, 'spec.json')); part0 = {k: v for k, v in psp['parts'][0].items() if k != 'id'}
+psp['parts'][0] = {'id': 'pk', 'use': 'oral-pk', 'with': {'model': {'items': [{'id': 'o', 'fn': 'pk.oral', 'in': {'dose': 'dose', 'v': 'v', 'clear': 'cl', 'ka': 1}}]}}}
+wj(os.path.join(pkd, 'spec.json'), psp); wj(os.path.join(wp, 'activities', '_parts', 'oral-pk.json'), part0)
+preg = rj(os.path.join(wp, 'activities', 'activities.json')); pit = rj(os.path.join(PKO, 'activity.json')); pit['fallback']['media'] = rj(os.path.join(RC, 'activity.json'))['fallback']['media']; preg['items'].append(pit); wj(os.path.join(wp, 'activities', 'activities.json'), preg)
+r = mk(wp, 'op1'); pp = json.loads(pk('op1').read('pack.json')) if r.returncode == 0 else {}
+check(r.returncode == 0 and pp['activities'].get('parts') == {'oral-pk': part0} and 'engine:med@1' in pp.get('requires', []) and 'engine:ode@1' in pp.get('requires', []),
+      'a spec with parts: make_pack.py carries activities/_parts as pack.activities.parts and requires every part\'s engine', r.stdout + r.stderr)
+wp2 = os.path.join(T, 'w-parts2'); r = run(os.path.join(S, 'unpack.py'), os.path.join(T, 'op1', 'demo-physics.noema.zip'), wp2)
+up = os.path.join(wp2, 'demo-physics')
+check(r.returncode == 0 and rj(os.path.join(up, 'activities', '_parts', 'oral-pk.json')) == part0 and rj(os.path.join(up, 'activities', 'pk-ode', 'spec.json')) == psp, 'unpack.py writes activities/_parts/oral-pk.json back', r.stdout + r.stderr)
+r = mk(up, 'op2'); check(r.returncode == 0 and json.loads(pk('op2').read('pack.json'))['version'] == pp['version'], 'the same pack.version after the round trip (the _parts are hashed)', r.stdout + r.stderr)
+bad = os.path.join(T, 'w-parts3'); shutil.copytree(wp, bad); shutil.rmtree(os.path.join(bad, 'build'), ignore_errors=True); os.remove(os.path.join(bad, 'activities', '_parts', 'oral-pk.json'))
+r = mk(bad, 'op3'); check(r.returncode == 1 and 'activities/_parts/oral-pk.json is not in the pack' in r.stdout, 'refused: a part that uses a missing activities/_parts file', r.stdout + r.stderr)
+
 # what is refused
 def refused(name, change, want):
     w = os.path.join(T, 'bad-' + name); shutil.copytree(sd, w); shutil.rmtree(os.path.join(w, 'build'), ignore_errors=True); change(w)

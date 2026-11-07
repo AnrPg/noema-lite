@@ -1041,7 +1041,7 @@
     }
     return { out, codes: res.codes || [] };
   }
-  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.5): genetic drift in a co-simulation ----------
+  /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): genetic drift in a co-simulation ----------
      mode drift: the replicate populations are the state; each macro step runs the generations up to round(t + dt − t0) with the same
      Wright–Fisher / Moran sampling as runDrift, and with the inputs of that step (a population size N an ecological part computes:
      a bottleneck keeps the allele frequency, the copies are rescaled; a selection s that changes with the environment). Its seeded

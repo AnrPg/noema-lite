@@ -1,0 +1,49 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "law@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "car", "kind": "toggle", "label": "carLabel", "default": false },
+  { "id": "ambulance", "kind": "toggle", "label": "ambulanceLabel", "default": false },
+  { "id": "emergency", "kind": "toggle", "label": "emergencyLabel", "default": false },
+  { "id": "memorial", "kind": "toggle", "label": "memorialLabel", "default": false },
+  { "id": "bicycle", "kind": "toggle", "label": "bicycleLabel", "default": false }
+ ],
+ "model": {
+  "task": "rules",
+  "query": "forbidden",
+  "rules": [
+   { "id": "s1", "if": ["car"], "then": "vehicle", "kind": "strict", "label": "ruleCar" },
+   { "id": "s2", "if": ["ambulance"], "then": "vehicle", "kind": "strict", "label": "ruleAmbulance" },
+   { "id": "s3", "if": ["memorial"], "then": "vehicle", "kind": "strict", "label": "ruleTank" },
+   { "id": "r4", "if": ["bicycle"], "then": "vehicle", "label": "ruleBicycleWord" },
+   { "id": "r5", "if": ["bicycle"], "then": "~vehicle", "rank": 1, "label": "ruleBicycleDef" },
+   { "id": "r1", "if": ["vehicle"], "then": "forbidden", "unless": ["memorial"], "issued": 1958, "label": "ruleNoVehicles" },
+   { "id": "r2", "if": ["vehicle", "emergency"], "then": "~forbidden", "issued": 1990, "label": "ruleEmergency" }
+  ],
+  "toggles": [
+   { "lit": "car", "on": "car" },
+   { "lit": "ambulance", "on": "ambulance" },
+   { "lit": "emergency", "on": "emergency" },
+   { "lit": "memorial", "on": "memorial" },
+   { "lit": "bicycle", "on": "bicycle" }
+  ]
+ },
+ "outputs": [
+  { "id": "forb", "kind": "scalar", "of": "holds" },
+  { "id": "r1s", "kind": "scalar", "of": "status", "at": "r1" },
+  { "id": "fired", "kind": "scalar", "of": "fired" },
+  { "id": "defeated", "kind": "scalar", "of": "defeated" },
+  { "id": "pic", "kind": "scene", "of": "drawing" }
+ ],
+ "readouts": [
+  { "label": "forbLabel", "expr": "forb" },
+  { "label": "r1Label", "expr": "r1s" },
+  { "label": "firedLabel", "expr": "fired" },
+  { "label": "defeatedLabel", "expr": "defeated" }
+ ],
+ "plots": [
+  { "kind": "scene", "title": "sceneTitle", "of": "pic", "height": 320 }
+ ]
+}

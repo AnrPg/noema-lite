@@ -1,4 +1,4 @@
-/* Parts: several engines in one sim-spec@1 activity (docs/INTERACTIVE.md §12.8, docs/INTERACTIVE_LIBRARY.md §1.5).
+/* Parts: several engines in one sim-spec@1 activity (docs/INTERACTIVE.md §12.8, docs/INTERACTIVE_LIBRARY.md §1.6).
    1. the plan (NoemaPackCheck.partsPlan): the order of derived values and parts, loops and the co-simulation as units;
    2. the steppers of the library engines (makeEngine's optional `stepper`): ode@1 against exp decay, med@1 against the closed form,
       clinic@1 bit for bit against run(), snapshot / restore;

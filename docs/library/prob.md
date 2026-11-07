@@ -3,17 +3,24 @@
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for probability and statistics. It runs from the basics (a
 distribution's pmf, a die, a coin) through the classic tests and intervals to the things a modern course has: exact coverage of
 binomial intervals, power by the noncentral t, conjugate Bayes with HPD intervals, false discovery rates, Markov chains, branching
-processes, queues and the bootstrap with BCa. There is one engine with 14 **modes** (`model.mode`). They share a checker, the
+processes, queues and the bootstrap with BCa, and on to the multinomial and the classic occupancy problems, exact goodness-of-fit
+laws, MCMC with modern diagnostics, multivariate models and a toolbox for randomized algorithms. There is one engine with 19
+**modes** (`model.mode`). They share a checker, the
 distribution library (25 families), the special functions and a seeded random stream. The Python twin is `tools/lib_prob.py`. It
 checks and does not compute, and it embeds **the same JSON** (`DATA`: the families, every mode's schema, its outputs and the name
-lists; the test checks that the two copies are identical). The tests are `node tests/lib_prob.js` (141 assertions) and `node
-tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/prob.json`, 40 specs). The reference activity is
-`tools/activities_examples/ci-coverage` (the coverage of Wald and Wilson intervals). The plan and the reference values P1–P29 are in
+lists; the test checks that the two copies are identical). The tests are `node tests/lib_prob.js` (208 assertions) and `node
+tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/prob.json`, 85 specs). The reference activities are
+`tools/activities_examples/ci-coverage` (the coverage of Wald and Wilson intervals) and `tools/activities_examples/bloom-filter`
+(the false-positive rate of a Bloom filter against the number of hash functions, mode `rand`). The plan and the reference values P1–P29 are in
 the project's `engine-library/research/math.md` §2.
 
 The engine is pure and deterministic. Every elementary function comes from NoemaExpr's fdlibm ports (`exp`, `log`, `pow`, `sin`,
 `cos`, `tan`, `atan`, …), so a result is the same bit for bit in every browser and in the Worker. `Math` is used only for the
-correctly rounded operations (`sqrt`, `floor`, `abs`). The random numbers are `mulberry32`, seeded by `hash32('prob:<mode>', seed)`.
+correctly rounded operations (`sqrt`, `floor`, `abs`). The random numbers of the first 14 modes are `mulberry32`, seeded by
+`hash32('prob:<mode>', seed)`. The five later modes (`combin`, `gof`, `mcmc`, `multivar`, `rand`) take theirs from NoemaSimKit
+(`engine/src/46_lib_simkit.js`): L'Ecuyer's MRG32k3a, one named stream per purpose (`prob.mcmc.chain<c>`, `prob.rand.<kind>`, …).
+The Worker source then carries NoemaSimKit too. Without the kit these modes give NaN and the code `no-kit`, never another
+generator's numbers.
 
 ## 1. The spec
 
@@ -83,6 +90,11 @@ both`; `needs k1 <= n1`; `needs i <= N`; `needs m0 <= m`; a draw named like a sp
 | `walk` | simple random walks, gambler's ruin, Galton–Watson branching |
 | `queue` | M/M/c: utilisation, Erlang B and C, L, Lq, W, Wq, the queue-length law |
 | `bootstrap` | the nonparametric bootstrap: SE, bias, percentile, basic, normal and BCa intervals, a permutation test |
+| `combin` | the multinomial law and its exact test, the coupon collector, the birthday problem (§20) |
+| `gof` | Kolmogorov–Smirnov (one and two samples, exact), Shapiro–Wilk, Anderson–Darling, χ² of binned data (§21) |
+| `mcmc` | Metropolis–Hastings and Gibbs with R̂, bulk and tail ESS, MCSE (§22) |
+| `multivar` | multivariate normal, correlations, OLS, logistic regression, PCA, Dirichlet (§23) |
+| `rand` | randomized algorithms: 18 kinds of exact values, bounds and seeded simulations (§24) |
 
 ## 3. Distributions (shared by `dist`, `mc`, `sampling`)
 
@@ -305,14 +317,17 @@ on one side, so z₀ is infinite: the BCa ends are NaN).
 | erf, erfc | P(½, x²) | erfc(5) to 1e-14 |
 | Φ⁻¹ | AS241 (Wichura 1988) | 1e-15 |
 | I_x(a, b) | Lentz continued fraction (NR §6.4) on the convergent side, Loader prefactor for a, b ≥ 10, the gamma limit for a ≥ 10⁷, b ≤ 1 | 1e-11 at a = b = 10⁵ |
-| t cdf | I_x(ν/2, ½); the normal above ν = 10¹⁴; log tail kept | 1e-14 to ν = 10⁶; 2.5e-12 at t = 10, ν = 10⁶ |
+| t cdf | I_x(ν/2, ½) to ν = 2·10⁴; above, the tail as the integral of the density, ∫_t^∞ f = f(t)·∫₀^∞ e^{ln f(t+σw) − ln f(t)} σ dw (σ = the tail's scale 1/\|d ln f/dt\|), by the exp-sinh rule (Takahasi & Mori 1974); the normal above ν = 10¹⁴; log tail kept | ≤ 3e-15 relative from ν = 10⁵ to 10¹² (it was 2.5e-12 at t = 10, ν = 10⁶: the continued fraction near its turning point) |
+| F upper tail, d₂ > 10⁵ | the same density integral above the mode | ≤ 1e-14 (it was 4.6e-12 at F(3, 10⁷)); scipy itself is off by 1.8e-11 at F(10, 10⁶) |
+| exp-sinh quadrature | w = exp(π/2·sinh τ), trapezoid in τ ∈ [−4.5, 4.5], the step halved until two levels agree to 1e-15 (≤ 4609 points; Mori & Sugihara 2001) | used for the tails above, the coupon moments, the bivariate normal cdf |
+| Q(a, x) for x > 10¹⁰·max(1, a) | x^{a−1}e^{−x}/Γ(a)·(1 + (a−1)/x + (a−1)(a−2)/x²) (the continued fraction otherwise met an infinite recursion through Temme's fallback) | the rest < (a/x)³ |
 | noncentral t | AS243 (Lenth 1989); the normal approximation for ν > 4·10⁵ (`approx`) | 5e-12 |
 | quantiles | Newton in the tail that holds the probability, bracketed, bisection fallback | 1e-10 to 1e-14 |
 | sums | Neumaier compensation | |
 
 ## 18. Reference values the tests assert (`tests/lib_prob.js`)
 
-P1–P29 of `math.md` §2 (except P25's coupon and birthday parts and P26, see §19) and more: Φ(1.96), Φ⁻¹(0.975), Φ⁻¹(1e-10), Q(10),
+P1–P29 of `math.md` §2 (all of them, P25's coupon and birthday parts and P26 included) and more: Φ(1.96), Φ⁻¹(0.975), Φ⁻¹(1e-10), Q(10),
 ln Φ(−40) = −804.6084420137538; t, χ² and F quantiles; lgamma at 0.5, 100, 1e-8, 171.5, 1e-300, 1e10, −0.5; P(3, 2), P(100, 100),
 Q(½, 1e-3), P at a = 10⁵ and 10⁷; I₀.₄(2, 3) = 0.5248; I at a = b = 10⁵; erfc(5), erfcinv(1e-20); the noncentral t (scipy `nct`);
 Binomial(10, ½), Binomial(100, ½), Binomial(10⁶, ½), Binomial(10⁹, 10⁻⁸) (mpmath); Poisson(10), Poisson(1000), Poisson(10⁶); 2 aces
@@ -326,15 +341,134 @@ seeds and checks the hit rate is within 3 binomial SE of the interval's exact co
 Where scipy itself is off (binomial log pmf at n = 10⁹, the hypergeometric at N = 10⁶, `gammaln` just above 1) the tests use
 mpmath at 40 digits.
 
-## 19. Left out, and why
 
-- **Multinomial, coupon collector, birthday problem** (P25 parts, P26): they need a vector-valued law or a combinatorial mode that
-  the univariate distribution interface does not have. The birthday and coupon answers can be shown with `mc` (`expr` over a fixed
-  number of draws) or as a formula in the spec's derived values. A `combinatorics` mode is the natural next step.
-- **Multivariate normal, regression with several predictors, GLMs, mixed models**: beyond one engine's bounded run; they belong
-  in a future `stats@2`.
-- **Kolmogorov–Smirnov and Shapiro–Wilk tests**: `sampling` reports the KS distance, but the exact Kolmogorov distribution and the
-  Royston (1995) Shapiro–Wilk coefficients were left for a later version.
-- **MCMC**: conjugate Bayes covers the teaching cases exactly; a sampler would make results seed-dependent with no gain for these.
-- **The t and F tails at ν > 10⁵ far out** are accurate to ~1e-12 relative, not 1e-15; beyond 1e-308 they underflow to 0 with the
-  log kept (`logsf`), and `underflow` is counted.
+The later modes add (each with its source in the test message): the t tails at ν = 10⁵ … 10¹² and the F tail at d₂ = 10⁶, 10⁷
+(mpmath); Multinomial(6; .2, .3, .5) pmf(1, 2, 3) = 0.135 and the exact test of (0, 1, 5) = 0.348625; the coupon collector 14.7 and
+38.99, unequal (½, 0.3, 0.2) E = 559/84, the double dixie cup 24.1338691975 (exact rationals); birthday 23 → 0.507297, 88 → 0.511065
+(k = 3), 187 → 0.502685 (k = 4); KS one- and two-sample against scipy exact, the Kolmogorov law to n = 1000 against mpmath, KS with
+ties against the permutation count; Shapiro–Wilk W = 0.78881, p = 0.006704 (scipy); Anderson–Darling A² = 0.94677 (scipy); ESS
+and R̂ against a port of posterior's algorithm; the Longley regression (NIST StRD certified values); logistic regression on Spector
+& Mazzeo (statsmodels, Greene's table); PCA eigenvalues (LAPACK); Dirichlet (scipy); Pearson, Spearman, Kendall (scipy); the
+quicksort mean and variance, quickselect, Bloom's exact rate, the max load of 100 balls, 2-SAT failure, skip-list height, Chernoff
+and Hoeffding against the exact binomial tail (exact rationals or mpmath); the 10 strong liars of 561 (Monier 1980).
+
+## 19. Formerly left out — now covered
+
+Everything that the first version left out is now in the engine; nothing of `math.md` §2 stays outside it.
+
+| left out before | now |
+|---|---|
+| the multinomial, the coupon collector, the birthday problem (P25, P26) | mode `combin` (§20): vector-valued pmf, moments and covariances, the exact multinomial test; coupons with unequal probabilities, r copies, c of n types; birthdays with k-coincidences and unequal days |
+| Kolmogorov–Smirnov, Shapiro–Wilk | mode `gof` (§21): exact one-sample (Durbin/MTW + Smirnov, the split of Simard & L'Ecuyer 2011) and two-sample (Hodges, with ties) laws, their asymptotics, Royston's AS R94, Anderson–Darling, χ² of binned data |
+| MCMC | mode `mcmc` (§22): random-walk Metropolis on any log density, two Gibbs samplers, the diagnostics of Vehtari et al. 2021. The seed fixes the chain, so a result is reproducible |
+| multivariate normal, regression with several predictors, GLMs | mode `multivar` (§23): MVN with Cholesky, OLS with full inference, logistic regression by IRLS, PCA, Dirichlet, correlations |
+| the far t and F tails at ν > 10⁵ (~1e-12) | full double precision by the density's integral (§17) |
+
+What remains bounded is size, not scope: data ≤ 2000 rows and 10 columns; mixed models and other GLM families (Poisson, gamma
+regression) are not modes of their own (a Poisson rate is `ci`/`bayes`, a link other than the logit is not offered); the MVN cdf is
+exact in 1 and 2 dimensions only (`dim` above); the Kolmogorov law beyond n·d² ≥ 7 uses the one-sided bound (relative error
+< 1e-13 there). Each such limit is a code, never a silent number.
+
+## 20. `combin` — the multinomial, coupons, birthdays
+
+Model: `kind` (`multinomial coupon birthday`).
+
+| kind | fields | outputs |
+|---|---|---|
+| `multinomial` | `n`, `probs` (≤ 64, normalised: `normalized`), `x` (the counts), `i`, `j` (a pair) | `pmf logpmf` (a chain of Loader binomials: no factorial overflow), `mean.<i> var.<i>`, `cov corr` of (i, j) (−np_ip_j), `chi2 pChi2` (Pearson), `pExact` (the exact multinomial test: the sum over every outcome no more likely than x, R's 1e-7 rule, ≤ 2·10⁶ outcomes else `budget`), `outcomes` = C(n+K−1, K−1); series `k marg` (the binomial marginal of component i) |
+| `coupon` | `types` (n) or `probs` (unequal), `copies` (r, 1), `want` (c of n, all), `m`, `mMax` | `eT varT sdT` — equal probabilities, one copy: Σ n/(n−i), Σ ni/(n−i)² (Feller 1968); otherwise the Poissonisation integrals E T = ∫₀^∞ P(fewer than c types complete at t) dt, E T² = 2∫ t(…) dt − E T (Flajolet, Gardy & Thimonier 1992; Holst 1986) by exp-sinh; `pDone` = P(T ≤ m), `median`; series `m pmfT cdfT` by the exact positive recursion of the exponential generating function Π(e^{p_i z} − S_r(p_i z)) in its normalised form; `eTApprox` (Newman & Shepp 1960: n ln n + (r−1) n ln ln n + n(γ − ln (r−1)!)) |
+| `birthday` | `days` (365) or `probs` (unequal days), `people` (n), `k` (2: a k-fold coincidence), `target` (½), `nMax` | `pMatch pNone` (k = 2 with equal days: 1 − Π(1 − i/d) in logs; otherwise the generating function Π_j Σ_{i<k}(p_j z)^i/i!, built day by day by binomial splits — every term positive), `nFor` (the smallest n reaching `target`), `pApprox` (Poisson 1 − e^{−λ}, λ = C(n, k)Σp_j^k), `expPairs`; series `nGrid pByN approxByN`. Pigeonhole: n > (k−1)·d gives 1 |
+
+Issues: `param`, `budget` (n·M² work above 4·10⁷), `normalized`, `underflow`. Sources: Feller, *An Introduction to Probability
+Theory* I (1968) §II.11, §IX.3; Diaconis & Mosteller (1989, JASA 84:853) for 23, 88, 187; Mase (1992) for unequal days.
+
+## 21. `gof` — goodness of fit
+
+Model: `kind`, `x`, `y` (two samples), `dist` (a distribution of §3), `estimate` (Anderson–Darling with μ, σ estimated), `alt`,
+`exact` (false: the asymptotic law), `bins`, `ddof`, `alpha`. Scalars: `stat p pAsym n n2 df reject dPlus dMinus w statAdj
+minExpected`. Series: `ecdfX ecdfY cdfY` (the empirical against the fitted cdf), `qqX qqY` (the normal Q–Q plot, Blom positions),
+`binLo observed expected`.
+
+| kind | method (source) |
+|---|---|
+| `ks-one` | D, D⁺, D⁻; two-sided p exact by Durbin's matrix (Durbin 1973) as Marsaglia, Tsang & Wang (2003, J. Stat. Softw. 8:18) build it, run as n products H·v (each scaled by i/n) where n d² < 7, and 2·P(D⁺ ≥ d) beyond and below a tail of 1e-4 (exact for d ≥ ½; the split of Simard & L'Ecuyer 2011); one-sided exactly by Birnbaum & Tingey (1951). `pAsym`: Kolmogorov's limit. A discrete law: `discrete` (p conservative); ties: `ties` |
+| `ks-two` | D as the integer max \|i·n₂ − j·n₁\|; exact p by the lattice-path recursion (Hodges 1957) of the share of paths that cross, every term positive; with ties the exact law conditional on the tie pattern (checkpoints only at the ends of tied blocks; Schröer & Trenkler 1995, as R ≥ 4.3 `psmirnov`) |
+| `shapiro-wilk` | Royston's AS R94 (Appl. Stat. 44:547, 1995), as R's swilk.c and scipy: 3 ≤ n ≤ 2000 (the data limit; Royston's range is 5000); n = 3 exact; `zero-range`, `few-data` |
+| `anderson-darling` | A² with log cdf and log sf (no clipping); a given law: p = 1 − AD(n, A²) of Marsaglia & Marsaglia (2004, J. Stat. Softw. 9:2; error < 2e-6), `pAsym` its limit; `estimate: true` (normal, case 3): A*² = A²(1 + 0.75/n + 2.25/n²) and D'Agostino & Stephens (1986) Table 4.9 (as R nortest `ad.test`; `approx`, `few-data` below n = 8) |
+| `chi2-fit` | binned data against a law: equiprobable cells (default ⌈2n^{2/5}⌉, Moore 1986), or the integers of a discrete law between its 0.05 % and 99.95 % quantiles with tail cells; df = cells − 1 − `ddof`; `low-expected` counted per cell with E < 5 |
+
+## 22. `mcmc` — Markov chain Monte Carlo
+
+Model: `kind` (`metropolis gibbs-bivnormal gibbs-normal`), `logdens` (an expression over `params`, ≤ 6 names, and the spec's
+names), `init`, `scale` (proposal sd per parameter), `iters` (2000), `burn` (iters/2), `thin`, `chains` (4, ≤ 8), `spread` (the other
+chains start at init ± spread·scale·N(0, 1)), `seed`, `rho` (Gibbs on N₂(0, [[1, ρ], [ρ, 1]])), `x` and `prior {mu0, sd0, a, b}`
+(Gibbs on the normal model: μ | τ normal, τ | μ gamma, BDA3 §11), `lags`, `bins`.
+
+Scalars: `accept draws rhatMax essMin` and per parameter `mean. sd. q05. q50. q95. rhat. ess. essTail. mcse.<p>`. Series: `iter lag`,
+`trace.<p>` (chain 1), `trace2.<p>` (chain 2), `acf.<p>` (averaged over chains), `histX.<p> histDensity.<p>`.
+
+Diagnostics (Vehtari, Gelman, Simpson, Carpenter & Bürkner 2021, *Rank-normalization, folding, and localization: an improved R̂*,
+Bayesian Analysis 16:667): chains split in halves; ranks normalised by Φ⁻¹((r − 3/8)/(S + 1/4)); R̂ = max of the bulk R̂ and the
+R̂ of the folded draws |x − median|; bulk ESS on the rank-normalised split chains, tail ESS = min of the ESS of I(x ≤ q₀₅) and
+I(x ≤ q₉₅); ESS by Geyer's (1992) initial positive and monotone sequences over the biased autocovariances (Stan's reference
+algorithm, posterior's `ess_basic`); MCSE of the mean = sd/√ESS of the raw split chains. Issues: `not-converged` (R̂ > 1.01),
+`low-ess` (< 100 per chain), `accept-extreme` (Metropolis acceptance outside 0.1–0.9; the optimum near 0.234 in high dimension,
+0.44 in one, Gelman, Roberts & Gilks 1996), `nan-density` (a log density that does not compute counts as −∞), `budget`
+(iterations × chains > 2·10⁵ density evaluations, 10⁶ Gibbs steps), `no-kit`, `param`.
+
+## 23. `multivar` — multivariate models
+
+| kind | fields | outputs |
+|---|---|---|
+| `mvnormal` | `mu` (≤ 10), `cov`, `x`, `n` (draws), `conf`, `seed` | Cholesky `chol.<i>_<j>`, `logdet maha logpdf pdf pEllipse` (χ²_K of d²), `cdf` (K = 1; K = 2 by ∫φ(x)Φ((b − ρx)/√(1−ρ²))dx with exp-sinh, Owen 1956; K > 2: `dim`), `mean. var. sd.`, `cov. corr.`; series `drawX drawY`, `ellX ellY` (the conf ellipse of the first two). `not-pd` |
+| `corr` | `data` (rows), `i`, `j` | column means, variances, `cov.<i>_<j> corr.<i>_<j>`; for (i, j): `r pR` (t test), `rho pRho` (Spearman, the t approximation as R `exact = FALSE`), `tau pTau` (Kendall τ_b, tie-corrected variance of S, Kendall 1970); `ties` |
+| `ols` | `data`, `y`, `intercept` (true), `conf` | Householder QR (Golub & Van Loan 2013 §5.3): `coef. se. stat. p. ciLo. ciHi.<j>` (j = 0 the intercept), `r2 adjR2 sigma fStat fP df dfModel logLik aic bic` (R's convention: σ counted, k = p + 1); series `fitted resid lev` (hat diagonal) `cook` (Cook 1977). `singular` for dependent columns |
+| `logistic` | `data`, `y` (0/1 or successes), `w` (trials), `intercept`, `maxIter` (50) | IRLS / Fisher scoring (Nelder & Wedderburn 1972; McCullagh & Nelder 1989), R glm's start, converged at a relative deviance change 1e-12: `coef. se. stat. p. ciLo. ciHi.` (Wald, z), `deviance nullDeviance logLik aic bic iter`; `separation` (fitted 0/1 with diverging coefficients: the MLE does not exist), `no-convergence`, `singular` |
+| `pca` | `data`, `scale` (correlation instead of covariance) | cyclic Jacobi (Golub & Van Loan §8.5): `eig. prop. cumProp.<j>`, `load.<i>_<j>` (variable i on component j; each component's largest loading made positive), `totalVar`; series `scree pc1 pc2` |
+| `dirichlet` | `conc` (α, 2–10), `x`, `n`, `seed` | `mean. var. sd.`, `cov. corr.`, `logpdf pdf` at a point of the simplex (else `param`), `entropy` (ln B(α) + (α₀ − K)ψ(α₀) − Σ(αᵢ − 1)ψ(αᵢ)); series `drawX drawY` (by normalised gammas) |
+
+## 24. `rand` — randomized algorithms
+
+A tool box, not a set of exercises: every kind gives the exact value beside its bounds and, with `reps` > 0, a seeded simulation
+(stream `prob.rand.<kind>`). Sources: Motwani & Raghavan, *Randomized Algorithms* (1995) = MR; Mitzenmacher & Upfal, *Probability
+and Computing*, 2nd ed. (2017) = MU. Common fields: `reps`, `seed`, `delta` (a target error, 1e-6).
+
+| kind | fields | outputs (method, source) |
+|---|---|---|
+| `amplify` | `err` ε, `sided` (`one`/`two`), `k`, `delta`, `p` (a Las Vegas success probability), `kMax` | one-sided `errK` = ε^k, `kNeeded` = ⌈ln δ/ln ε⌉; two-sided (majority of k, a tie an error): `errK` = P(B(k, ε) ≥ k/2) exactly, `kNeeded` (the smallest odd k), `kHoeffding` (⌈ln(1/δ)/(2(½ − ε)²)⌉); `lvExpected` 1/p, `lvTail` (1 − p)^k; series `kGrid errByK` (MR §1.2, MU §1.2) |
+| `quicksort` | `n` | `eComp` 2(n+1)H_n − 4n, `varComp` 7n² − 4(n+1)²H⁽²⁾_n − 2(n+1)H_n + 13n (Knuth TAOCP 3 §5.2.2), `approxComp` 2n ln n; simulation by the subproblem sizes (`simMean simSd`, histogram) |
+| `quickselect` | `n`, `r` (rank) | `eComp` = 2(n + (n+1)H_n − (n+3−r)H_{n+1−r} − (r+2)H_r + 3) (Knuth 1971), `approxComp` 2n(1 + H(r/n)); simulation |
+| `karger` | `n` or `edges` (≤ 400), `k`, `delta` | `pSuccess` ≥ 1/C(n, 2) (Karger 1993), `kRuns` for δ, `pFailK` = (1 − p)^k, `pKS` (Karger–Stein recursion P ← P − P²/4); with edges: the exact `minCut` (n ≤ 20, all bipartitions), `simSuccess` (contraction as Kruskal on a random edge order); `disconnected` |
+| `freivalds` | `A B Cm` (≤ 16 × 16), `k`, `delta` | `errBound` 2^{−k}, `kNeeded`; `equal`, the exact `pDetect` over all r ∈ {0,1}ⁿ (≥ ½ when AB ≠ C; Freivalds 1977), `errExact` (1 − pDetect)^k |
+| `primality` | `N` (≤ 2⁵³), `a`, `k`, `delta` | `isPrime` (Miller–Rabin with the 12 first primes, deterministic below 3.3·10²⁴), `witness` (is a a witness), `errBound` 4^{−k} (Rabin 1980), `kNeeded`; for N ≤ 10⁵ the exact `fermatLiars mrLiars fracFermat fracMR errExact`; `carmichael` by Korselt (N ≤ 10¹²); `big-number` beyond |
+| `rounding` | `x` (LP values), `delta`, `t` | `mu`, the exact `pAbove pBelow` (Poisson-binomial), `chernoffUpper` (e^δ/(1+δ)^{1+δ})^μ, `chernoffLower` e^{−μδ²/2} (MU Thm 4.4–4.5; Raghavan & Thompson 1987), `uncovered` Π(1 − xᵢ)^t vs `uncoveredBound` e^{−tΣx} |
+| `balls` | `n`, `m` (= n), `d` (choices), `L` | `eMax` and the law `loadGrid pMax`, `pMaxLe` (d = 1, exact by the generating function of §20), `approxMax` (ln n/ln ln n; ln ln n/ln d for d ≥ 2, Azar, Broder, Karlin & Upfal 1999), `eCollisions pCollisionBound` (2-universal hashing, Carter & Wegman 1979), `pCollision`; `simMax` with d choices |
+| `bloom` | `m`, `n`, `k` (the best), `target`, `kMax` | `fpExact` (the occupancy law of the set bits, Christensen, Roginsky & Jimeno 2010), `fpClassic` (1 − (1 − 1/m)^{kn})^k, `fpApprox` (1 − e^{−kn/m})^k, `kOpt` (m/n) ln 2, `kOptInt`, `mFor` = ⌈−n ln p/(ln 2)²⌉; series `kGrid fpByK`; `simFp` (Bloom 1970; MU §5.5.3) |
+| `countmin` | `w`, `d`, `n`, `N`, `s` (Zipf), `eps`, `delta` | `eps` e/w, `delta` e^{−d}, `errBound` εN, `wFor dFor`; simulation `simMaxErr simMeanErr simFracOver` (Cormode & Muthukrishnan 2005) |
+| `hll` | `bits` (4–16), `n` | `stdErr` 1.04/√m; simulated `simRelSd simRelBias` with the small- and large-range corrections (Flajolet, Fusy, Gandouet & Meunier 2007) |
+| `reservoir` | `n`, `k` | `inclusion` k/n; the simulated frequencies `pos freq` and their χ² (covariance-corrected, n − 1 df) `chi2 pChi2` (Algorithm R, Vitter 1985) |
+| `cover` | `graph` (`path cycle complete star lollipop hypercube`) and `n`, or `edges`; `start` | `coverExact` (n ≤ 12: the expected time over visited sets, solved per set), `hitMax` (n ≤ 50), `matthews` H_{n−1}·hitMax (Matthews 1988), `aleliunas` 2\|E\|(n − 1) (Aleliunas et al. 1979), `simCover`; `disconnected` |
+| `twosat` | `n`, `i` (distance, n), `T` (2n²), `delta` | `eSteps` i(2n − i), `worstSteps` n², the exact `pFailT` (the reflecting walk), `markovT` n²/T, `rounds` ⌈log₂(1/δ)⌉; series `tGrid pFailByT` (Papadimitriou 1991; MU §7.1) |
+| `bounds` | `dist` (§3), `a` | `exact` P(X ≥ a), `markov chebyshev cantelli chernoff` (the optimised MGF bound for binomial, Bernoulli, Poisson, normal, exponential, gamma) `hoeffding` (binomial), `tightest` (1–5 in that order); series `aGrid exactBy …By`; `not-applicable` where a bound needs what the law lacks (Markov: X ≥ 0 and a mean) |
+| `skiplist` | `n`, `p` (½) | `eHeight` Σ_h 1 − (1 − p^h)^n, `approxHeight` log_{1/p} n, `searchCost` (Pugh 1990), `pointers` n/(1 − p); simulation |
+| `treap` | `n`, `r` | `eDepth` H_r + H_{n−r+1} − 2, `eDepthAvg` 2(1 + 1/n)H_n − 4 (Seidel & Aragon 1996), `heightApprox` 4.311 ln n − 1.953 ln ln n (Reed 2003, asymptotic); simulated height |
+| `mcpi` | `n`, `expr` over `x` (default: π from the quarter disc), `a`, `b`, `exact` | `estimate se err errRootN` (err·√n stays O(σ): the 1/√n law, MU §11.1), `seExact` for π; series `runN runEst runLo runHi` |
+
+Issues: `param`, `budget` (> 2·10⁷ elementary steps), `no-kit`, `not-applicable`, `approx`, `big-number`, `disconnected`.
+
+### 24.1 The reference activity `bloom-filter`
+
+`tools/activities_examples/bloom-filter`: sliders m (bits), n (items), k (hash functions); readouts of the exact and the textbook
+false-positive rates, the best k and the bits needed for 1 %; a plot of the rate against k with the learner's k marked. Its
+`tests.json` checks m = 1000, n = 100: 9.52 % at k = 1, 1.745 % at k = 3, 0.827 % at the best k = 7 (6.93), 5.59 % at k = 20, and
+6.8e-5 at m = 2000, k = 14.
+
+### 24.2 A spec example (rand)
+
+```json
+{ "format": "noema.sim-spec/v1", "engine": "prob@1",
+  "params": [ { "id": "e", "kind": "slider", "label": "err", "min": 0, "max": 0.49, "step": 0.01, "default": 0.25 } ],
+  "model": { "mode": "rand", "kind": "amplify", "err": "e", "sided": "two", "k": 11, "delta": 1e-6 },
+  "outputs": [ { "id": "errK", "kind": "scalar", "of": "errK" }, { "id": "kNeed", "kind": "scalar", "of": "kNeeded" },
+               { "id": "kg", "kind": "series", "of": "kGrid" }, { "id": "eb", "kind": "series", "of": "errByK" } ] }
+```

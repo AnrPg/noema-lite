@@ -129,6 +129,36 @@ table: {
 - **The reference activity.** The author offers *Start from the reference activity* (the engine's `tools/activities_examples/<example>/`,
   shipped in `engine/activity_author_schemas.js` as `NoemaActivityRefs`) or *Blank*.
 
+### 1.6 The stepper: an engine in time (parts, `docs/INTERACTIVE.md` §12.8)
+
+An engine whose model evolves in time can be **co-simulated** with others: it gives `makeEngine` an optional `stepper`
+(46_lib_core.js), the same signature as `NoemaSimKit.stepper` / `cosim` (46_lib_simkit.js):
+
+```js
+const stepper = {
+  init(model, inputs, ctx) { return state; },                    // null: this model cannot be stepped
+  step(state, inputs, t, dt, ctx) { return { state, out: { outputId: value }, dt /* taken ≤ dt: an early stop */, events: [{ t, kind, data, to? }], fail: 'code'? }; },
+  snapshot(state) { return copy; }, restore(copy) { return state; },   // optional: default a deep copy of plain data; null = cannot be iterated
+  output(state, ctx) { return out; },                            // optional: the outputs at the start
+  onEvent(state, ev, t) { return state; },                       // optional: an event of another part
+};
+const { engine, simEngine } = C.makeEngine({ id, checkSpec, run, prepare, stepper });   // engine.stepper = true; simEngine.stepper = the def
+```
+
+- `ctx = {spec, seed, prepared, id, t0, rand}` (`rand`: a seeded stream of this part). `inputs` are the part's numbers (consts,
+  params, its inputs), held over the step. `out` maps the spec's output ids to a number (a scalar now; a **series** output collects
+  one sample per step), an array (kept whole), a scene or a sound; only declared outputs pass (`pickStep`).
+- The instance gets `stepInit(inputs, t0) → {out}`, `stepTo(inputs, t, dt, inbox) → {out, dt, events, fail?}` (the inbox's events
+  go to `onEvent` first), `snapshot() → slot` (−1: cannot; one slot, a new snapshot replaces it) and `restore(slot) → true/false`.
+  The Worker answers the messages `sinit`, `step`, `snap` and `restore` (35_activity_sim.js `engineRunner(...).step(kind, …)`).
+  Without `stepper` nothing changes: `run` is as before (a part's series inputs arrive as `opts.series`).
+- Steppers now: `ode@1` (a flow or a map: events and crossings inside the step, `final` / `stat` running), `med@1` (the
+  pharmacokinetic compartments, RK4 split at the doses; other items run as before), `clinic@1` (the virtual patient, the same
+  physiology as `run()`: stepped to the end it gives `run()`'s scalars bit for bit; the other sections from `run()` on the current
+  inputs), `genetics@1` (Wright–Fisher drift with its own seeded stream; other modes recompute), and `des@1`, `field@1`,
+  `agents@1` (their own, through `NoemaSimKit.stepper`). The validators list them (`STEPPERS` in `engine/packcheck.js` and
+  `tools/activities.py`): add an engine there when it gains a stepper. Pure, bounded, never throws.
+
 ## 2. The catalogue (`NoemaEngineCatalog`)
 
 `CATALOG` lists every engine and runtime with its `layer` (`library`, `free`, `plugin`), its window global and file, the slug of its

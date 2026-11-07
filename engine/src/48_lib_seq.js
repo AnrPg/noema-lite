@@ -1388,6 +1388,7 @@
   engine.workerSource = C.workerSource(noemaLibSeqModule, 'NoemaLibSeq');
   root.NoemaLibSeq = Object.freeze({
     id: ID, MODES, SPEC, TABLES, OUTS, NCBI, ENZ, MATRIX, NUCLEASES, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
+    table: { model: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => { const t = Object.assign({}, TABLES[md], ...SEQS[md].map(x => ({ [x[0]]: 'seq' + (x[4] ? '!' : '') }))), n = NESTED[md]; if (n && t[n[0]] && t[n[0]].$list && t[n[0]].$list.$obj) t[n[0]] = Object.assign({}, t[n[0]], { $list: { $obj: Object.assign({}, t[n[0]].$list.$obj, { [n[1]]: 'seq' }) } }); return [md, t]; })) }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(md => [md, Object.keys(OUTS[md]).reduce((a, k) => ((a[OUTS[md][k][0]] = a[OUTS[md][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'any' } },   // the form of the activity author (46_lib_schema.js)
     // the pieces, for tests
     clean, revcomp, translate, aaOf, gcFrac, tmNN, saltCorr, dp, encOf, rscuOf, synSites, synDiffs, compBest, hairpinBest, bindSites, nnDG, chargeAt, findSites, agaroseRange, migrate, bandOf, traceback,
   });

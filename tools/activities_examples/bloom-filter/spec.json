@@ -1,0 +1,43 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "prob@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "m", "kind": "slider", "label": "bits", "min": 100, "max": 5000, "step": 100, "default": 1000 },
+  { "id": "n", "kind": "slider", "label": "items", "min": 10, "max": 1000, "step": 10, "default": 100 },
+  { "id": "k", "kind": "slider", "label": "hashes", "min": 1, "max": 20, "step": 1, "default": 3 }
+ ],
+ "model": {
+  "mode": "rand",
+  "kind": "bloom",
+  "m": "m",
+  "n": "n",
+  "k": "k",
+  "target": 0.01,
+  "kMax": 20
+ },
+ "outputs": [
+  { "id": "fp", "kind": "scalar", "of": "fpExact" },
+  { "id": "fpFormula", "kind": "scalar", "of": "fpApprox" },
+  { "id": "kOpt", "kind": "scalar", "of": "kOpt" },
+  { "id": "kBest", "kind": "scalar", "of": "kOptInt" },
+  { "id": "mFor", "kind": "scalar", "of": "mFor" },
+  { "id": "ks", "kind": "series", "of": "kGrid" },
+  { "id": "fpByK", "kind": "series", "of": "fpByK" }
+ ],
+ "readouts": [
+  { "label": "fpLabel", "expr": "100 * fp", "unit": "%", "format": "fixed", "digits": 3 },
+  { "label": "fpFormulaLabel", "expr": "100 * fpFormula", "unit": "%", "format": "fixed", "digits": 3 },
+  { "label": "kOptLabel", "expr": "kOpt", "format": "fixed", "digits": 2 },
+  { "label": "kBestLabel", "expr": "kBest", "format": "auto" },
+  { "label": "mForLabel", "expr": "mFor", "format": "auto" }
+ ],
+ "plots": [
+  { "kind": "series", "title": "plotTitle",
+    "x": { "series": "ks", "label": "kAxis", "min": 1, "max": 20 },
+    "y": { "label": "fpAxis", "min": 0 },
+    "series": [ { "y": "fpByK", "label": "fpLine" } ],
+    "marks": [ { "axis": "x", "expr": "k", "label": "kMark" } ] }
+ ]
+}

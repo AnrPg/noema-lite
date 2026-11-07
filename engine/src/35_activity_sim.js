@@ -84,7 +84,7 @@
     }
     function respec(s2, o2) { if (dead) return; queue.push({ t: 'create', spec: s2, opts: o2 || opts }); pump(); }
     function measure(inputs, probe, done) { if (dead) return; queue.push({ t: 'measure', inputs, probe, done }); pump(); }
-    /** the stepper of a part (docs/INTERACTIVE_LIBRARY.md §1.5), queued like a measurement (never dropped): kind 'sinit' (inputs, t0) →
+    /** the stepper of a part (docs/INTERACTIVE_LIBRARY.md §1.6), queued like a measurement (never dropped): kind 'sinit' (inputs, t0) →
         {out} | 'step' (inputs, t, dt, inbox) → {out, dt, events} | 'snap' → slot (−1: cannot) | 'restore' (slot) → true/false */
     function step(kind, inputs, a, b, c, done) { if (dead) return; queue.push({ t: kind, inputs, a, b, c, done }); pump(); }
     function close() { dead = true; clearTimeout(timer); queue.length = 0; try { worker?.terminate(); } catch (e) { } if (url) URL.revokeObjectURL(url); worker = null; }
@@ -181,7 +181,7 @@
         if (o == null) codes.push({ code: 'part-failed', part: q.id });
         take(q, o, env, outs); return true;
       };
-      const evalD = ids => { for (const id of ids) env[id] = ev(derived.get(id), env); };
+      const evalD = ids => { for (const id of ids) { let v; try { v = derived.get(id)(env); } catch (e) { v = NaN; } env[id] = v; } };   // (a true/false stays one: the readouts show ✓ / ✗)
       for (const u of plan.order) {
         if (u.k === 'derived') { evalD([u.id]); continue; }
         if (u.k === 'part') { if (!(await chainPart(byId.get(u.id)))) return null; continue; }
@@ -591,9 +591,10 @@
       /* ---------- computing ---------- */
       let env = {}, outputs = {}, paused = false, dirty = false, saveT = null, raf = 0, rev = 0, doneRev = 0;
       const prep = typeof E.prepare === 'function' ? E.prepare(spec, C) : (x => x);   // the engine's expressions → numbers, on this thread
-      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : PT ? partsRunner : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
+      const newRunner = () => E.id === 'formula@1' ? null : (host ? host.runner : PT ? ((_, s, o, f) => partsRunner(s, o, f)) : engineRunner)(E, spec, { seed: init.seed >>> 0, task: { ...consts }, faults: B ? B.applied() : undefined }, why => onFail(why));
       let runner = newRunner();
-      const declared = PT ? E.plan.parts.flatMap(p => (p.outputs || []).filter(o => o && typeof o.id === 'string')) : spec.outputs || [];
+      const cosimTime = PT && spec.couple && typeof spec.couple === 'object' && spec.couple.cosim && typeof spec.couple.cosim.time === 'string' ? [{ id: spec.couple.cosim.time, kind: 'series' }] : [];   // the co-simulation's time series
+      const declared = PT ? E.plan.parts.flatMap(p => (p.outputs || []).filter(o => o && typeof o.id === 'string')).concat(cosimTime) : spec.outputs || [];
 
       /* ---------- the bench: the hidden fault lives only in this closure and in the engine (never in the page, the state or a label) ---------- */
       function makeBench() {

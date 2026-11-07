@@ -85,6 +85,8 @@
   }
   const varNames = m => (isObj(m.vars) ? Object.keys(m.vars).filter(okName) : []);
   const kpNames = m => { const k = typeof m.kinetics === 'string' && PRESETS[m.kinetics] ? m.kinetics : null; const a = k ? Object.keys(PRESETS[k]) : []; if (isObj(m.kp)) for (const n of Object.keys(m.kp)) if (okName(n) && !a.includes(n)) a.push(n); return a; };
+  /** an output read at a time t of the run (a snapshot): a profile, a heat map, a value at a point, a final statistic, an error, a probe */
+  const atTime = o => !!o.tc && (o.of === 'profile' || o.of === 'heatmap' || (o.kind === 'scalar' && ['at', 'final', 'error', 'probe'].includes(o.of)));
   const twoFields = m => m.equation === 'rd' && (m.kinetics === 'custom' ? has(m.reaction, 'v') : m.kinetics !== 'fisher' && typeof m.kinetics === 'string');
 
   function checkShape(o, w, dim, E, allowAll) {
@@ -205,7 +207,7 @@
       const isCA = eq === 'ca', isP = eq === 'poisson';
       if (of === 'y') need(dim === 2, at, 'of', 'y is for a 2-D grid');
       if (of === 'profile' && dim === 2) need((o.y == null) !== (o.x == null), at, 'y', 'a 2-D profile needs y (a row) or x (a column), one of them');
-      if (of === 'profile' || of === 'heatmap') { if (o.t != null) need(!isP && !isCA, at, 't', 'a time is for an equation in time'); }
+      if (['profile', 'heatmap', 'at', 'final', 'error', 'probe'].includes(of)) { if (o.t != null) need(!isP && !isCA, at, 't', 'a time is for an equation in time'); }
       if (of === 'probe') need(probes.includes(o.probe), at, 'probe', 'a probe of model.probes');
       if ((of === 'stat' && kd === 'series') || of === 'final') need(STATS.includes(o.stat), at, 'stat', 'one of ' + STATS.join(', '));
       if (of === 'stat' || of === 'final' || of === 'at' || of === 'profile' || of === 'probe' || of === 'front' || of === 'frontSpeed' || of === 'error' || of === 'wavelength') need(!isCA, at, 'of', 'not for a cellular automaton (population, density, avalanche…)');
@@ -670,9 +672,10 @@
     for (let q = 0; q < Math.min(P, N + 1); q++) recAt.add(Math.round(q * N / (Math.min(P, N + 1) - 1 || 1)));
     for (let q = 0; q < Math.min(F, N + 1); q++) frameAt.add(Math.round(q * N / (Math.min(F, N + 1) - 1 || 1)));
     const snapSteps = new Map();   // output index → step
-    M.outs.forEach((o, q) => { if ((o.of === 'profile' || o.of === 'heatmap') && o.tc) { const ts = val(o.tc, env); snapSteps.set(q, Math.max(0, Math.min(N, Math.round(ts / h)))); } });
+    M.outs.forEach((o, q) => { if (atTime(o)) { const ts = val(o.tc, env); snapSteps.set(q, Math.max(0, Math.min(N, Math.round(ts / h)))); } });
     const needSnap = new Set(snapSteps.values());
     const statKeys = new Set();
+    if (eq === 'wave') statKeys.add('u:energy');   // its drift (the leapfrog energy is conserved exactly)
     for (const o of M.outs) if (o.of === 'stat' && o.kind === 'series') statKeys.add((o.field || 'u') + ':' + o.stat);
     for (const e of M.events) if (['max', 'min', 'mean', 'total'].includes(e.of)) statKeys.add(e.field + ':' + e.of);
     for (const k of statKeys) res.rec[k] = [];
@@ -1094,11 +1097,12 @@
         else if (of === 'turingK') v = tur ? tur.k : NaN;
         else if (of === 'turingWavelength') v = tur ? tur.wavelength : NaN;
         else if (of === 'iterations') v = res ? res.iterations : NaN;
-        else if (of === 'residual') v = o.kind === 'series' ? (res && res.hist ? C.thin(res.hist, 2000) : []) : (res ? res.residual : NaN);
+        else if (of === 'residual') v = o.kind === 'series' ? (res && res.hist ? C.thin(res.hist.map(x => x / Math.max(res.hist[0], 1e-300)), 2000) : []) : (res ? res.residual : NaN);   // relative to the first residual, as the stopping test
         else if (of === 'steps') v = res ? (res.iterations != null ? res.iterations : res.stepsDone) : NaN;
         else if (!usable && !(M.m.allowUnstable && res && res.u)) v = undefined;
         else if (of === 't') v = res.rec.t.slice();
         else if (of === 'stat' && o.kind === 'series') v = (res.rec[f + ':' + o.stat] || []).slice();
+        else if (of === 'probe' && atTime(o) && res.snaps && res.snaps.get(Math.max(0, Math.min(res.N, Math.round(val(o.tc, env) / res.dt))))) { const sn = res.snaps.get(Math.max(0, Math.min(res.N, Math.round(val(o.tc, env) / res.dt)))), pr = M.probes.find(p => p.id === o.probe); v = pr ? probeValue(res.R, pr.field === 'v' ? sn.v : sn.u, pr, res.sol) : NaN; }
         else if (of === 'probe') { const s = res.rec['p:' + o.probe] || []; v = o.kind === 'series' ? s.slice() : (res.iterations != null ? probeValue(res.R, res.u, M.probes.find(p => p.id === o.probe), res.sol) : s[s.length - 1]); }
         else if (of === 'front') v = (res.rec.front || []).slice();
         else if (of === 'frontSpeed') {   // least squares over the second half of the run
@@ -1110,13 +1114,14 @@
         else if (of === 'drift') v = res.drift;
         else {
           let arr = fieldArr(f);
-          if ((of === 'profile' || of === 'heatmap') && o.tc && res.snaps) { const step = Math.max(0, Math.min(res.N, Math.round(val(o.tc, env) / res.dt))); const sn = res.snaps.get(step); if (sn) arr = f === 'v' ? sn.v : sn.u; }
+          let tAt = null;
+          if (atTime(o) && res.snaps) { const step = Math.max(0, Math.min(res.N, Math.round(val(o.tc, env) / res.dt))); const sn = res.snaps.get(step); if (sn) { arr = f === 'v' ? sn.v : sn.u; tAt = step * res.dt; } }
           if (!arr) v = undefined;
           else if (of === 'final') v = o.stat === 'energy' && res.energyNow ? res.energyNow() : fieldStat(res.R, arr, o.stat, res.sol);
           else if (of === 'at') v = S.sample(res.R.G, arr, val(o.xc, env), res.R.G.dim === 2 ? val(o.yc, env) : 0);
           else if (of === 'profile') v = profileOf(res.R, arr, o, env);
           else if (of === 'error') {
-            const { G, IDX, W } = res.R; let s2 = 0, sw = 0, mx = 0; env.t = res.tStop != null ? res.tStop : 0; let q = 0;
+            const { G, IDX, W } = res.R; let s2 = 0, sw = 0, mx = 0; env.t = tAt != null ? tAt : res.tStop != null ? res.tStop : 0; let q = 0;
             for (let j = 0; j < G.ny; j++) for (let i = 0; i < G.nx; i++, q++) { const k = IDX[q]; if (res.sol && res.sol[k]) continue; env.x = G.xs[i]; env.y = G.ys[j]; const e = arr[k] - o.ec.f(env); s2 += W[q] * e * e; sw += W[q]; mx = Math.max(mx, Math.abs(e)); if (e !== e) mx = NaN; }
             v = o.norm === 'max' ? mx : Math.sqrt(s2 / sw);
           }
@@ -1159,7 +1164,7 @@
   const stepDef = {
     id: ID,
     init(model, inputs, sctx) {
-      const spec = asSpec(model), M = prepare(spec); if (!M) return { bad: true, spec };
+      const spec = sctx && isObj(sctx.spec) && sctx.spec.model === model ? sctx.spec : asSpec(model), M = prepare(spec); if (!M) return { bad: true, spec };   // makeEngine passes the model and the whole spec in ctx
       const env = Object.assign(Object.create(null), inputs || {}), ctx = makeCtx(), seed = ((sctx && sctx.seed) >>> 0) || 1;
       if (M.eq === 'ca' || M.eq === 'poisson') return { spec, M, env, ctx, seed, once: true, evSeen: {} };
       const sim = runTime(M, env, ctx, seed, 'stepper');

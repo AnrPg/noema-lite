@@ -805,7 +805,7 @@
   Object.assign(ACT, {
     PARTS_LIM: { parts: 8, inputs: 24, outputs: 48, loops: 4, iter: 50, macro: 5000, points: 2000 },
     PART_KEYS: ['id', 'engine', 'model', 'outputs', 'inputs', 'use', 'with'], USE_RE: /^[a-z0-9][a-z0-9-]{0,60}$/,
-    // the engines that can be stepped in time (a stepper: docs/INTERACTIVE_LIBRARY.md §1.5) — the same list in tools/activities.py
+    // the engines that can be stepped in time (a stepper: docs/INTERACTIVE_LIBRARY.md §1.6) — the same list in tools/activities.py
     STEPPERS: new Set(['ode@1', 'med@1', 'clinic@1', 'genetics@1', 'des@1', 'field@1', 'agents@1']),
   });
   ACT.SPEC_KEYS.add('parts'); ACT.SPEC_KEYS.add('couple');

@@ -1,0 +1,17 @@
+{
+ "title": "How often does a Bloom filter lie?",
+ "intro": "A Bloom filter stores a set in m bits. Each item sets k bits chosen by k hash functions; a lookup says \"maybe present\" when all k of its bits are set. It never misses a stored item, but it sometimes says yes to an item that was never stored. Change the number of bits, the number of items and the number of hash functions, and watch the false-positive rate.",
+ "bits": "Bits in the filter m",
+ "items": "Items stored n",
+ "hashes": "Hash functions k",
+ "fpLabel": "False-positive rate (exact)",
+ "fpFormulaLabel": "The textbook formula (1 − e^(−kn/m))^k",
+ "kOptLabel": "Best k in theory, (m/n)·ln 2",
+ "kBestLabel": "Best whole number of hash functions",
+ "mForLabel": "Bits needed for a 1 % rate with this n",
+ "plotTitle": "False-positive rate for every number of hash functions",
+ "kAxis": "Hash functions k",
+ "fpAxis": "False-positive rate",
+ "fpLine": "false positives",
+ "kMark": "your k"
+}
