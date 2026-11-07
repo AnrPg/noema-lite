@@ -1,6 +1,6 @@
 {
  "title": "Drift, then a test: is the simulation consistent with Kimura?",
- "intro": "Two engines in a chain. First 200 populations of N diploid individuals drift for 400 generations (Wright–Fisher), and we count in how many of them allele A is fixed. Then probability theory judges the count: an exact binomial test asks whether it fits Kimura’s fixation probability, and a 95% Wilson interval shows which fixation probabilities the count allows. Change N, the starting frequency and the selection coefficient.",
+ "intro": "Two engines in a chain. First 200 populations of N diploid individuals drift for 20·N generations (Wright–Fisher), long enough for nearly every population to fix or lose A, since Kimura’s probability is that of fixation in the end, and we count in how many of them allele A is fixed. Then probability theory judges the count: an exact binomial test asks whether it fits Kimura’s fixation probability, and a 95% Wilson interval shows which fixation probabilities the count allows. Change N, the starting frequency and the selection coefficient.",
  "sizeLabel": "Population size N (diploid)",
  "p0Label": "Starting frequency of allele A",
  "sLabel": "Selection coefficient s (AA 1 + s, Aa 1 + s/2)",

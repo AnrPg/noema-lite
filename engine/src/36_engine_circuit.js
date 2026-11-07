@@ -1008,6 +1008,20 @@
       const hist = (kind, nm) => { if (kind === 'node') { const i = ck.resolveName(nm); return i < 0 ? R.V[0].map(() => 0) : R.V[i]; } if (kind === 'branch') { const j = ck.real.findIndex(e => e.id === nm); return j < 0 ? null : R.I[j]; } const j = R.pw.indexOf(nm); return j < 0 ? null : R.PW[j]; };
       return { t: R.s * R.dt, dt: R.dt, nodes, branches, power: Object.fromEntries(R.pw.map((id, j) => [id, last(R.PW[j])])), hist };
     }
+    /** the held-open transient handed over to a sim of the same circuit with other values (a binding changed while stepping): the
+        step count, the unknowns, the histories and each element's own state (companion v/i, line waves, junction limiting) by
+        position — the same netlist with other values has the same elements in the same order; the next step is backward Euler (a
+        breakpoint now), as after any source discontinuity */
+    const STATE_KEYS = ['vp', 'ip', 'h', 'E1', 'E2', 's'];
+    function tranState() { return stepping ? { R: stepping, S, N, ids: ck.els.map(e => e.id), els: ck.els } : null; }
+    function tranAdopt(st) {
+      if (!st || st.S !== S || st.N !== N || st.ids.length !== ck.els.length || st.ids.some((id, i) => ck.els[i].id !== id)) throw fail('bad-args');
+      tranCache = null;
+      st.els.forEach((e, i) => { const d = ck.els[i]; for (const k of STATE_KEYS) if (e[k] !== undefined) d[k] = e[k]; });
+      const R0 = st.R, pwEl = R0.pw.map(id => ck.byId.get(id));
+      stepping = Object.assign({}, R0, { caps: ck.els.filter(e => e.type === 'C'), inds: ck.els.filter(e => e.type === 'L'), tls: ck.els.filter(e => e.type === 'TLINE'), pwEl,
+        bp: R0.s * R0.dt, ctx: Object.assign({}, R0.ctx) });
+    }
     function transient(o) {
       const r = runTransient(o), zero = Array.from(new Float64Array(r.steps + 1)), nodes = {}, branches = {};
       for (const nm of ck.outNames) { const i = ck.resolveName(nm); nodes[nm] = i < 0 ? zero.slice() : Array.from(r.V[i]); }
@@ -1146,7 +1160,7 @@
       }
       throw fail('probe');
     }
-    return { dc, transient, measure, ac, runTransient, tranStep, dcX, ck, where, pinCurrents, mainCurrent };
+    return { dc, transient, measure, ac, runTransient, tranStep, tranState, tranAdopt, dcX, ck, where, pinCurrents, mainCurrent };
   }
 
   function create(netlist, opts) {
@@ -1255,6 +1269,9 @@
       transient: o => inner.transient(o),
       /** the stepper's transient held open: tranStep({dt, uic?, power?}, tTo) starts it, tranStep(null, tTo) goes on → the values at tTo */
       tranStep: (o, tTo) => inner.tranStep(o, tTo),
+      /** tranState() → the held-open transient; tranAdopt(state) goes on with it here (this circuit with other values: same elements) */
+      tranState: () => inner.tranState(),
+      tranAdopt: st => inner.tranAdopt(st),
       measure: p => (ver === 2 ? measure2(p) : inner.measure(p)),
       /** the AC analysis {source, fStart, fStop, points?, scale?} → {f, nodes: {name: {re, im}}} */
       ac: o => { if (ver !== 2) throw fail('bad-args'); return inner.ac(o); },

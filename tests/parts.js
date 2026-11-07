@@ -192,6 +192,29 @@ function runParts(spec, env, o) {
       ok(r.E.stepper === true && r.last.iAvg > 0 && near(r.last.iAvg, r.one.iAvg, 1e-9) && near(r.last.ratio, r.one.ratio, 1e-12) && r.i.snapshot() === -1, `twin@1 stepper: the firmware paused 24 times gives run()'s average current (${(r.last.iAvg).toFixed(5)} mA) and delivery ratio; no snapshot (a running program)`); }
     { const sp = exSpec('rc-transient'), tEnd = sp.model.transient.tEnd, r = stepVsRun('circuit-mna@1', sp, tEnd, tEnd / 50);
       ok(r.E.stepper === true && near(r.last.vc, lastOf(r.one.vc), 1e-9) && near(r.last.vMax, r.one.vMax, 1e-9), `circuit-mna@1 stepper: the transient held open over 50 macro steps = transient() (v_C ${r.last.vc.toFixed(6)} V, max ${r.last.vMax.toFixed(6)} V)`); }
+    { // the grid made a divisor of the macro step (Copilot #65: dt 0.6 of a macro step would land at 1.2 macro steps), a start t0 ≠ 0
+      const sp = exSpec('rc-transient'), tEnd = sp.model.transient.tEnd, H = tEnd / 50; sp.model.transient.dt = 0.6 * H;
+      const E = A.engine('circuit-mna@1'), inp = E.prepare(sp, NoemaExpr.compile)(envOf(sp)), i = E.create(sp, { seed: 1 }), t0 = 2;
+      i.stepInit(inp, t0); let last = null; for (let k = 0; k < 50; k++) last = i.stepTo(inp, t0 + k * H, H, []);
+      const ref = E.create(sp, { seed: 1 }).run({ ...inp, $tran: { tEnd, dt: H / 2 } });
+      ok(last.dt === H && near(last.out.t, t0 + tEnd, 1e-12) && near(last.out.vc, lastOf(ref.vc), 1e-9), `circuit-mna@1 stepper: grid ${(0.6 * H).toExponential(1)} → ${(H / 2).toExponential(1)} (a divisor of the macro step), started at t0 = ${t0}: time ${last.out.t} = t0 + tEnd, v_C = transient() on that grid`);
+      // a last step off the grid: its values at the asked time, interpolated; the step reported as asked
+      const j = E.create(sp, { seed: 1 }); j.stepInit(inp, 0); j.stepTo(inp, 0, H, []); const r2 = j.stepTo(inp, H, 0.25 * H, []);
+      const g = ref.t.findIndex(x => x > 1.25 * H - 1e-15), w = (1.25 * H - ref.t[g - 1]) / (ref.t[g] - ref.t[g - 1]), want = ref.vc[g - 1] + w * (ref.vc[g] - ref.vc[g - 1]);
+      ok(r2.dt === 0.25 * H && near(r2.out.t, 1.25 * H, 1e-12) && near(r2.out.vc, want, 1e-9), `circuit-mna@1 stepper: a step of ¼ macro step off the grid reports t = ${r2.out.t.toExponential(3)} and v_C interpolated there`);
+    }
+    { // a binding that changes while stepping (Copilot #65): a DC source bound to Vs, 1 V then 5 V, the capacitor's charge kept
+      const sp = { format: 'noema.sim-spec/v1', engine: 'circuit-mna@1', consts: {}, params: [{ id: 'Vs', kind: 'slider', min: 0, max: 10, default: 1 }],
+        model: { netlist: { format: 'noema.circuit/v1', nodes: ['in', 'out'], elements: [{ id: 'V1', type: 'V', n: ['in', 'gnd'], value: 1 }, { id: 'R1', type: 'R', n: ['in', 'out'], value: 1000 }, { id: 'C1', type: 'C', n: ['out', 'gnd'], value: 1e-6, ic: 0 }] },
+          bindings: [{ element: 'V1', expr: 'Vs' }], transient: { tEnd: 0.01, dt: 1e-6 } },
+        outputs: [{ id: 'vc', kind: 'series', node: 'out' }] };
+      const E = A.engine('circuit-mna@1'), prep = E.prepare(sp, NoemaExpr.compile), i = E.create(sp, { seed: 1 }), tau = 1e-3, H = 1e-4;
+      const in1 = prep({ Vs: 1 }), in5 = prep({ Vs: 5 }); let last = i.stepInit(in1, 0).out;
+      const v0 = last.vc; for (let k = 0; k < 10; k++) last = i.stepTo(in1, k * H, H, []).out;
+      const v1 = last.vc; for (let k = 10; k < 30; k++) last = i.stepTo(in5, k * H, H, []).out;
+      const want1 = 1 - Math.exp(-1e-3 / tau), want = 5 - (5 - want1) * Math.exp(-2e-3 / tau);
+      ok(Math.abs(v0) < 1e-12 && near(v1, want1, 1e-4) && near(last.vc, want, 1e-4), `circuit-mna@1 stepper: V1 bound 1 V → 5 V at 1 ms goes into the running transient (v_C ${v1.toFixed(5)} → ${last.vc.toFixed(5)} V, exact ${want.toFixed(5)})`);
+    }
     // a co-simulation: pid@1's plant output y drives an ODE that integrates it, z' = y (the validators list pid@1 as a stepper)
     const pidP = { id: 'loop', engine: 'pid@1', model: { plant: { type: 'fopdt', K: 1, tau: 1 }, controller: { Kp: 2, Ki: 1 }, setpoint: { step: { to: 1 } }, transient: { tEnd: 10, dt: 0.01 } },
       outputs: [{ id: 'yv', kind: 'series', signal: 'y' }, { id: 'ess', kind: 'scalar', metric: 'ess' }] };

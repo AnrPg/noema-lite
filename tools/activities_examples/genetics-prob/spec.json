@@ -3,8 +3,7 @@
  "title": "title",
  "intro": "intro",
  "consts": {
-  "reps": 200,
-  "gens": 400
+  "reps": 200
  },
  "params": [
   {
@@ -12,7 +11,7 @@
    "kind": "slider",
    "label": "sizeLabel",
    "min": 10,
-   "max": 200,
+   "max": 50,
    "step": 10,
    "default": 20
   },
@@ -47,7 +46,7 @@
     "s": "s",
     "h": 0.5,
     "reps": "reps",
-    "gens": "gens"
+    "gens": "20 * N"
    },
    "outputs": [
     {

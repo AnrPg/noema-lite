@@ -38,11 +38,11 @@
    }
   },
   {
-   "name": "N 100, p0 0.1, s 0.02: Kimura 0.34; the count agrees within sampling error",
+   "name": "N 50, p0 0.1, s 0.04: Kimura 0.34; the count agrees within sampling error",
    "steps": [
     {
      "set": "N",
-     "value": 100
+     "value": 50
     },
     {
      "set": "p0",
@@ -50,7 +50,7 @@
     },
     {
      "set": "s",
-     "value": 0.02
+     "value": 0.04
     }
    ],
    "expect": {
