@@ -19,7 +19,8 @@ export interface LocalTelemetryOptions {
 
 export function localTelemetry(o: LocalTelemetryOptions = {}): Telemetry {
   const now = o.now ?? Date.now, max = o.maxEvents ?? 100, key = o.key ?? TELEMETRY_KEY;
-  const st = o.setTimeout ?? ((f: () => void, ms: number) => globalThis.setTimeout(f, ms));
+  // no timers (a bare vm): the write happens at once instead of being gathered
+  const st = o.setTimeout ?? ((f: () => void, ms: number): unknown => (typeof globalThis.setTimeout === 'function' ? globalThis.setTimeout(f, ms) : f()));
   let counters: Record<string, number> = {};
   let events: TelemetryEvent[] = [];
   let pending = false;
