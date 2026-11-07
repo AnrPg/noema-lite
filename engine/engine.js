@@ -2580,7 +2580,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
           const tn = tg();
           if (tn <= t + eps) { if (++stuck > 3) { codes.push({ code: 'no-progress', t }); break; } } else stuck = 0;
           if (tn > t + eps) { times.push(tn); for (const r of rec.values()) if (r.s) { r.s.push(r.pend === undefined ? (r.s.length ? r.s[r.s.length - 1] : NaN) : r.pend); r.pend = undefined; } }
-          if (times.length > L.macro * 4) break;
+          if (times.length > L.macro * 4) { codes.push({ code: 'budget', t: tn }); break; }   // never a silent cut: the run says it stopped early
         }
         if (failed) { for (const q of qs) take(q, null, env, outs); continue; }
         if (noConv) codes.push({ code: 'no-converge', cosim: true, steps: noConv });
