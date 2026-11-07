@@ -2,7 +2,7 @@
    The catalogue in the order an author should consider it: the library (general engines, grouped by field), the free way (a mini-app,
    Python), the field plugins. Only engines this app has are listed. "Request a new engine" opens a short form: what should be
    simulated (required), the field, what the learner changes and sees, what is measured, the accuracy wanted, sources and examples (folded).
-   While the learner writes, the catalogue suggests what may already do it (NoemaEngineCatalog.suggest). Sending stores the request
+   While the learner writes, the catalogue suggests what may already do it (NoemaCore.engines.catalog.suggest). Sending stores the request
    (NoemaEngineRequests: the cloud table noema_engine_requests, or this device for a local profile). "Your requests" shows each with its
    status and answer; the app's admins see every request and answer it here (status, the engine that now does it, a note, the PR) or
    through the connector (noema_engine_requests, noema_engine_request_update). */
@@ -14,18 +14,18 @@ const ENGINE_GROUPS = [   // the library's engines by field (catalogue ids); i18
 ];
 const engName = e => tE('engine.engines.' + e.slug + '.name');
 const engWhat = e => tE('engine.engines.' + e.slug + '.what');
-/** an engine (or runtime) this app can run */
+/** an engine (or runtime) this app can run (an engine of the library counts before it is loaded: it loads when an activity needs it) */
 function engineHere(e) {
   if (typeof ACT === 'undefined') return false;
   if (e.runtime) return !!(ACT.runtime(typeof e.runtime === 'string' ? e.runtime : e.id) || ACT.runtime(e.id));
-  return !!ACT.engine(e.id);
+  return ACT.engines().includes(e.id);
 }
 function engineRow(e) {
   return h('li', { class: 'eng-row', 'data-engine': e.id, title: engWhat(e) }, h('b', {}, engName(e)), h('code', { class: 'eng-id' }, e.id), h('span', { class: 'eng-what' }, engWhat(e)));
 }
 async function enginesView(sub) {
   shellChrome({ sub: true, crumbs: [[tE('engine.engines.title')]], back: HOME() });
-  const K = window.NoemaEngineCatalog, R = window.NoemaEngineRequests;
+  const K = window.NoemaCore?.engines?.catalog, R = window.NoemaEngineRequests;
   const v = view(SHL() ? null : backBtn('← ' + SUBJ.title, HOME()));
   if (!K || !R) { v.append(h('p', {}, tE('engine.engines.unavailable'))); return; }
   const store = R.store(ACCOUNT);
@@ -79,7 +79,7 @@ function requestRow(r, store, admin, again) {
 }
 /** the request form: one required field first, the rest folded; the catalogue's suggestions as the learner writes */
 function requestEngineDialog(store, onSent) {
-  const R = NoemaEngineRequests, K = NoemaEngineCatalog;
+  const R = NoemaEngineRequests, K = NoemaCore.engines.catalog;
   modal((box, close) => {
     const F = {};
     const field = (k, multi, rows) => {

@@ -6,8 +6,9 @@
    Usage: node tests/circuit2.js */
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));
-const C = globalThis.NoemaCircuit;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaCircuit = ENGINES.kernel('circuit');
+const C = NoemaCircuit;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const V2 = {};   // (the engine's full model; { version: 1 } is the first one, kept for comparisons)

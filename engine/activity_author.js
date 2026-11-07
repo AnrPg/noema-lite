@@ -2,12 +2,12 @@
    (docs/activities-dev/authoring_ui.md; ADR 001 D12 "an authoring UI generated from the same JSON Schemas as the validators").
    • Types: sim-spec@1 with formula@1 or circuit-mna@1 (registerType() for later runtimes: html-app@1, py-module@1, h5p@1), and with
      EVERY engine of the library whose module exports its `table` (docs/INTERACTIVE_LIBRARY.md §1.5): its form comes from that table
-     (NoemaLibSchema.specSchema, engine/src/46_lib_schema.js); the picker groups the engines as #/engines does and offers the engine's
+     (NoemaCore.engines.schema().specSchema, src/engines/kernel/schema.js; the page loads the library's engines and that kernel before the author: loadAuthor in engine/src/40_views.js); the picker groups the engines as #/engines does and offers the engine's
      reference activity (NoemaActivityRefs, written into activity_author_schemas.js by tools/build.py) or a blank one.
    • The forms: NoemaSchemaForm over tools/schemas/noema.activities.v1 (the registry entry) and noema.sim-spec.v1 (+ noema.circuit.v1);
      the words of each label key in every language right under the key, and a table of all words (en, el, ru, de, fr, + any language).
    • Checks at the field: the schema, then the validators' own rules (NoemaPackCheck.checkSimSpec, checkActivities) — the same
-     messages as activity_lint.py / make_pack.py / the connector; every formula through NoemaExpr.check with the declared names.
+     messages as activity_lint.py / make_pack.py / the connector; every formula through the expression language (NoemaCore.engines.expr.check) with the declared names.
    • The preview: the app's real sim-spec@1 runtime (ACT.mount), debounced, beside the form (stacked below 960 px).
    • Files: the activity folder (activities/activities.json, activities/<id>/spec.json, strings.<locale>.json) as a .zip or one by
      one; import of the same (a .zip or the JSON files). No server. Undo / redo (buttons, Ctrl+Z, Ctrl+Shift+Z / Ctrl+Y).
@@ -20,6 +20,7 @@
   const REG_ID = 'https://noema-lite.netlify.app/schemas/noema.activities.v1.schema.json';
   const SF = () => root.NoemaSchemaForm || (typeof require === 'function' ? require('./schemaform.js') : null);
   const PC = () => root.NoemaPackCheck || null;
+  const ENG = () => root.NoemaCore?.engines || null;   // the engine library (src/engines): the catalogue, the loaded engines, the schema kernel
   const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
   const clone = v => JSON.parse(JSON.stringify(v));
   const KEY_RE = /^[a-z][a-zA-Z0-9_.-]{0,63}$/, LOC_RE = /^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$/;
@@ -62,17 +63,17 @@
     convert(d) { const s = d.spec; s.engine = 'circuit-mna@1'; if (!isObj(s.model)) s.model = CIRCUIT_MODEL(); return d; } });
 
   /* ---------- the engine library: a kind for every engine whose module exports its table (docs/INTERACTIVE_LIBRARY.md §1.5) ---------- */
-  const LS = () => root.NoemaLibSchema || null;
+  const LS = () => ENG()?.schema() || null;
   const GROUPS = [['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1']], ['life', ['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1']],
     ['arts', ['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1']]];   // = ENGINE_GROUPS of 49_lib_view.js (the #/engines page), used when that file is not loaded
   /* global ENGINE_GROUPS */
   const groups = () => (typeof ENGINE_GROUPS !== 'undefined' && Array.isArray(ENGINE_GROUPS) ? ENGINE_GROUPS : GROUPS);
-  /** the library engines here: catalogue entries whose module is loaded with its checker and table (and, in the app, registered) */
+  /** the library engines here: catalogue entries whose module is loaded with its checker and table (and, in the app, runnable) */
   function libEngines() {
-    const K = root.NoemaEngineCatalog, out = [];
-    if (!K || !LS()) return out;
-    for (const e of K.CATALOG) {
-      const M = e.layer === 'library' && e.global ? root[e.global] : null;
+    const L = ENG(), out = [];
+    if (!L || !LS()) return out;
+    for (const e of L.catalog.CATALOG) {
+      const M = e.layer === 'library' && e.plugin ? L.loaded(e.id) : null;
       if (!M || typeof M.checkSpec !== 'function' || !isObj(M.table)) continue;
       if (typeof ACT !== 'undefined' && ACT && typeof ACT.engine === 'function' && !ACT.engine(e.id)) continue;   // eslint-disable-line no-undef
       out.push({ id: e.id, slug: e.slug, M });
@@ -83,7 +84,7 @@
   const engWord = (slug, k) => { const I = root.NoemaI18n, key = 'engine.engines.' + slug + '.' + k; return I && I.has && I.has(key) ? I.t(key) : null; };
   /** a part's engine in a select: its catalogue name and id */
   function engLabel(id) {
-    const K = root.NoemaEngineCatalog, e = K && Array.isArray(K.CATALOG) ? K.CATALOG.find(x => x.id === id) : null;
+    const K = ENG()?.catalog, e = K ? K.byId(id) : null;
     const n = e && e.slug ? engWord(e.slug, 'name') : id === 'circuit-mna@1' ? engWord('circuit', 'name') : null;
     return n ? `${n} (${id})` : id;
   }
@@ -490,7 +491,7 @@
     /* ---------- formulas: live check with the declared names ---------- */
     function exprFeedback(input) {
       const fb = input.closest('.sf-f')?.querySelector('.aa-xfb'); if (!fb) return;
-      const path = JSON.parse(input.dataset.xpath), X = root.NoemaExpr;
+      const path = JSON.parse(input.dataset.xpath), X = ENG()?.expr;
       let names = namesAt(doc.spec, path);
       const t = typeOf(doc), pt = partOf(doc.spec, path), inPart = pt && (path[2] === 'model' || path[2] === 'outputs');
       const e = inPart ? libOf(pt.engine) : t.lib && (path[0] === 'model' || path[0] === 'outputs') ? libOf(t.engine) : null;

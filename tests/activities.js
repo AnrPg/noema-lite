@@ -60,9 +60,8 @@ ok(!ACTP.check(null).ok && !ACTP.check('hello').ok, 'not an object → refused')
 ok(ACTP.check(M('py:out', { outputs: { a: 1 } }, { re: 'py1' })).ok && ACTP.check(M('py:status', { phase: 'ready' })).ok && !ACTP.check(M('py:out', { error: { code: 'BAD CODE' } })).ignore, 'py:out and py:status are known (no strike for the Python runtime\'s own traffic; a bad one is still refused)');
 
 // 3. the same rules in JS and Python
-require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));   // the expression checker packcheck uses for sim-spec@1
-require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));   // the netlist and fault checker packcheck uses for circuit-mna@1
-for (const f of ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(ROOT, 'engine', 'src', f));   // the P6 engines' checkSpec packcheck uses
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaCircuit = ENGINES.kernel('circuit'), NoemaEngineCatalog = ENGINES.lib.catalog, NoemaThermal = ENGINES.mod('thermal@1'), NoemaPID = ENGINES.mod('pid@1'), NoemaRF = ENGINES.mod('rf@1'), NoemaTwin = ENGINES.mod('twin@1');
 require(path.join(ROOT, 'engine', 'packcheck.js'));
 require(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'));   // NoemaWasm: packcheck checks wasm-module@1 items and wasm@1 models with it (P6)
 globalThis.NoemaEmbed = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));   // NoemaEmbed: the external-embed@1 rules (P6)
@@ -499,7 +498,7 @@ print(json.dumps([A.check_spec(p['activities']['items'][1].get('spec'), p['activ
   ok(!diff.length, 'checkSimSpec (JS) and check_spec (Python) give the same messages ' + (diff.length ? JSON.stringify(diff[0]).slice(0, 600) : ''));
 }
 { // the circuit checker: NoemaCircuit.check / checkFaults (JS) and tools/circuit.py check / check_faults give the same findings
-  const C = globalThis.NoemaCircuit;
+  const C = NoemaCircuit;
   const cases=[
    null, 5, {nodes:'a'}, {format:'x',nodes:[],elements:[]},
    {nodes:['a',{name:'TP',probe:'a'},{name:'T2',probe:'zz'},'a','b c',{name:'gnd',probe:'a'}],elements:[{id:'R1',type:'R',n:['a','gnd'],value:'4.7k',x:1},{id:'R1',type:'R',n:['TP','q'],value:-1},{id:'1x',type:'Q',n:[]},{id:'C1',type:'C',n:['a','gnd'],value:'1u',ic:'x'},{id:'V1',type:'V',n:['a','gnd'],value:{pulse:{v1:0,v2:5,width:1,period:0.5,zz:1}}},{id:'V2',type:'V',n:['a','gnd'],value:{sine:{amp:1}}},{id:'V3',type:'V',n:['a','gnd'],value:{dc:'x'}},{id:'V4',type:'V',n:['a','gnd'],value:{dc:1,pwm:{}}},{id:'V5',type:'V',n:['a','gnd'],value:{pwm:{v:5,freq:1e3,duty:2}}},{id:'D1',type:'D',n:['a','gnd'],preset:'nope',value:1,on:true},{id:'S1',type:'SW',n:['a','gnd'],on:'yes',params:{Ron:0,Zz:1}},{id:'U1',type:'OPAMP',n:['a','gnd','a'],params:{rails:[5,1]}},{id:'R9',type:'R',n:['a',5],value:null},{id:'Q1',type:['NPN'],n:['a','a','gnd']}]},
@@ -611,15 +610,14 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
   const pyE = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import activities as A; print(json.dumps([sorted(A.ENGINES), sorted(A.BENCH_ENGINES)]))`], { encoding: 'utf8' }));
   const R = P.ACTIVITY_RULES;
   ok(JSON.stringify([[...R.ENGINES].sort(), [...R.BENCH_ENGINES].sort()]) === JSON.stringify(pyE) && ['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(e => R.ENGINES.has(e)) && R.BENCH_ENGINES.has('twin@1'), `ENGINES and BENCH_ENGINES are the same in packcheck.js and activities.py (${pyE[0].join(', ')}; benches: ${pyE[1].join(', ')})`);
-  const reg = {}, win = { NoemaThermal: globalThis.NoemaThermal, NoemaPID: globalThis.NoemaPID, NoemaRF: globalThis.NoemaRF, NoemaTwin: globalThis.NoemaTwin };
-  vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'engine', 'src', '43_engines_p6.js'), 'utf8'), { ACT: { registerEngine: d => { reg[d.id] = d; } }, window: win });
-  const shape = Object.values(reg).every(d => typeof d.check === 'function' && typeof d.prepare === 'function' && typeof d.create === 'function' && typeof d.workerSource === 'string' && d.workerSource.includes('self.noemaEngine'));
-  ok(Object.keys(reg).sort().join() === 'pid@1,rf@1,thermal@1,twin@1' && shape && reg['twin@1'].bench === true && !reg['thermal@1'].bench, `43_engines_p6.js registers ${Object.keys(reg).sort().join(', ')} with check, prepare, create and workerSource (a Worker, as circuit-mna@1); twin@1 takes measurements`);
+  const reg = Object.fromEntries(['thermal@1', 'pid@1', 'rf@1', 'twin@1'].map(id => [id, NoemaCore.engines.engine(id)]));
+  const shape = Object.values(reg).every(d => d && typeof d.check === 'function' && typeof d.prepare === 'function' && typeof d.create === 'function' && typeof d.workerSource === 'string' && d.workerSource.includes('self.noemaEngine'));
+  ok(Object.keys(reg).sort().join() === 'pid@1,rf@1,thermal@1,twin@1' && shape && reg['twin@1'].bench === true && !reg['thermal@1'].bench, `the engine library has ${Object.keys(reg).sort().join(', ')} with check, prepare, create and workerSource (a Worker, as circuit-mna@1); twin@1 takes measurements`);
   const reqs = Object.keys(P6EX).map(a => P.needRequires([p6item(a)]));
   ok(reqs.every((r, i) => r.includes('engine:' + P6EX[Object.keys(P6EX)[i]].engine)), 'pack.requires: engine:thermal@1, engine:pid@1, engine:rf@1, engine:twin@1 for the reference activities');
   // a worker made of workerSource alone runs the reference activities and gives the same numbers as the engine on the page
-  const sameRun = Object.keys(P6EX).map(a => { const it = p6item(a), E = reg[P6EX[a].engine], env = { ...(it.spec.consts || {}) }; for (const q of it.spec.params) env[q.id] = q.default; for (const d of it.spec.derived || []) env[d.id] = globalThis.NoemaExpr.compile(d.expr)(env);
-    const inp = E.prepare(it.spec, globalThis.NoemaExpr.compile)(env), w = {}; vm.runInNewContext(E.workerSource, { self: w, Math, JSON, Object, Array, Number, String, Float64Array, Uint32Array, Int32Array, Map, Set, Error, isFinite, isNaN, Symbol, Infinity, NaN });
+  const sameRun = Object.keys(P6EX).map(a => { const it = p6item(a), E = reg[P6EX[a].engine], env = { ...(it.spec.consts || {}) }; for (const q of it.spec.params) env[q.id] = q.default; for (const d of it.spec.derived || []) env[d.id] = NoemaExpr.compile(d.expr)(env);
+    const inp = E.prepare(it.spec, NoemaExpr.compile)(env), w = {}; vm.runInNewContext(E.workerSource, { self: w, Math, JSON, Object, Array, Number, String, Float64Array, Uint32Array, Int32Array, Map, Set, Error, isFinite, isNaN, Symbol, Infinity, NaN });
     const a1 = w.noemaEngine.create(it.spec, { seed: 1 }).run(inp), a2 = E.create(it.spec, { seed: 1 }).run(inp);
     return it.spec.outputs.filter(o => o.kind === 'scalar').every(o => Object.is(+a1[o.id], +a2[o.id]) || Math.abs(a1[o.id] - a2[o.id]) <= 1e-12 * Math.abs(a2[o.id])); });
   ok(sameRun.every(Boolean), `each engine's workerSource alone (as in the Worker) computes the same scalars as on the page: ${sameRun.join(', ')}`);
@@ -645,7 +643,7 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
 }
 { // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
-  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, host \? null : ACT\.engines\(\), host \? host\.check : undefined\)/.test(src) && /NoemaExpr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through NoemaExpr');
+  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaPackCheck\.checkSimSpec\(spec, tables, host \? null : ACT\.engines\(\), host \? host\.check : undefined\)/.test(src) && /NoemaCore\.engines\.expr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through the expression language (NoemaCore.engines.expr)');
 }
 
 { // html-app@1 + the engine library (docs/INTERACTIVE.md §8.1): the "engines" a mini-app lists — JS = Python word for word, pack.requires,
@@ -699,7 +697,7 @@ print(json.dumps({'packs': [A.check_activities(p, list((p.get('translations') or
     && !ACTP.check(M('engine:check', { engine: 7, spec: {} })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: { big: 'x'.repeat(70 * 1024) } })).ok, 'a spec that is not an object, a bad seed, inputs that are a list, an engine that is not a text and a request over 64 KB are refused (strikes)');
   // the host bridge: the frame's policy is unchanged (no Worker in the frame); only library engines, only declared ones, only in a Worker, with limits
   const h34 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8'), s35 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
-  ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /NoemaEngineCatalog\?\.LIBRARY/.test(h34) && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
+  ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /NoemaCore\?\.engines\?\.catalog\.LIBRARY/.test(h34) && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
     && /outBytes: 512 \* 1024, perSec: 30, timeouts: 3/.test(h34) && /bridge\.close\(\)/.test(h34) && /'superseded'/.test(h34),
     'html-app@1: the frame still has no Worker and no network; the host runs only declared library engines, only in their Worker, ≤ 512 KB out, ≤ 30 requests/s, 3 timeouts and the engine is off, every Worker ended on unmount');
   ok(/ACT\.engineRunner = engineRunner/.test(s35) && /function respec\(s2, o2\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
@@ -708,7 +706,7 @@ print(json.dumps({'packs': [A.check_activities(p, list((p.get('translations') or
   vmctx.window = vmctx; vmctx.Worker = function () { };
   let runs = [], closed = 0, inW = true;
   const graphE = { id: 'graph@1', workerSource: 'x', check: sp => (sp.model.bad ? ['model.bad: no'] : []), create() { } };
-  vmctx.NoemaEngineCatalog = { LIBRARY: ['graph@1', 'timeline@1'] };
+  vmctx.NoemaCore = { engines: { catalog: { LIBRARY: ['graph@1', 'timeline@1'] } } };
   vmctx.ACTP = ACTP;
   vmctx.ACT = { registerRuntime() { }, engine: id => (id === 'graph@1' ? graphE : null), engineRunner(E, spec, opts, onFail) { const r = { spec, opts, onFail, run(inp, done) { runs.push({ inp, done, r }); }, respec(sp, o) { r.spec = sp; r.opts = o; }, close() { closed++; }, inWorker: () => inW }; return r; } };
   vm.createContext(vmctx);
@@ -762,27 +760,27 @@ ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player
 
 ok(/enum: \['workflow', 'content', 'visual', 'interactive'/.test(srv) && /interactive: DOCS\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
-ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '35_simexpr\.js'/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec) and the reference activities');
-ok(/'circuit\.py'/.test(bld) && /'36_engine_circuit\.js', '36_engine_circuit_sim\.js'/.test(bld) && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness; the guide part "interactive" includes the circuit engine');
-ok(/^P6_ENGINES = \('39_engine_thermal\.js', '40_engine_pid\.js', '41_engine_rf\.js', '42_engine_twin\.js'\)$/m.test(bld) && /'thermal\.py', 'pid\.py', 'rf\.py', 'twin\.py'/.test(bld) && /'36_engine_circuit_sim\.js', \*P6_ENGINES, '43_engines_p6\.js'/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
-  && /'engine\/src\/36_engine_circuit\.js', \*\('engine\/src\/' \+ f for f in P6_ENGINES\), (?:\*\('engine\/src\/' \+ f for f in LIB_ENGINES\), )?'engine\/packcheck\.js'/.test(bld) && /\{p6_scripts\}<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld) && /'36_engine_circuit\.js', \*P6_ENGINES(?:, \*LIB_ENGINES)?\)\]/.test(bld),
-  'the P6 engines: the skill zip carries thermal.py, pid.py, rf.py, twin.py and the engines for the harness; the connector, the site and the bundle load them beside packcheck; the guide part "interactive" includes INTERACTIVE_ENGINES.md');
+ok(/'activities\.py'/.test(bld) && /'simexpr\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '37_activity_py\.js'/.test(bld) && /activity_host\/noema-engines\.js', engines_bundle\('--harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries activities.py, simexpr.py, the runtimes for the harness (html-app, sim-spec), the engine library (noema-engines.js) and the reference activities');
+ok(/'circuit\.py'/.test(bld) && NoemaCore.engines.has('circuit-mna@1') && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the skill zip carries circuit.py and the circuit engine for the harness (in noema-engines.js); the guide part "interactive" includes the circuit engine');
+ok(['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(id => NoemaCore.engines.has(id)) && /'thermal\.py', 'pid\.py', 'rf\.py', 'twin\.py'/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
+  && /ENGINES_SERVER, 'engine\/packcheck\.js'/.test(bld) && /<script>\{esc\(rd\("engine\/engines\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld) && /'engine\.css', 'engines\.js'/.test(bld) && /wt\(os\.path\.join\(ENGINE, 'engines\.js'\), engines_bundle\('--harness'\)\)/.test(bld),
+  'the P6 engines: the skill zip carries thermal.py, pid.py, rf.py, twin.py and the engines for the harness; the connector (every engine in hand), the site and the bundle (engine/engines.js) load them before packcheck; the guide part "interactive" includes INTERACTIVE_ENGINES.md');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), pc = html.indexOf('engine/packcheck.js');
-  ok(['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js'].every(f => { const i = html.indexOf('engine/src/' + f); return i > 0 && i < pc; }), 'the shell loads the four P6 engines before packcheck.js (their checkSpec)'); }
+  ok(html.indexOf('<script src="engine/engines.js">') > 0 && html.indexOf('<script src="engine/engines.js">') < pc, 'the shell loads the engine library (engine/engines.js) before packcheck.js (the engines\' checkSpec)'); }
 ok(['wasm_check.py', 'embed_check.py', 'embed_allow.json', 'h5p_import.py'].every(f => new RegExp(`SKILL_TOOLS = \\[[^\\]]*'${f.replace('.', '\\.')}'`).test(bld)) && /'44_activity_wasm\.js'\): z\.write/.test(bld)
   && /INTERACTIVE_P6 = \('INTERACTIVE_WASM\.md', 'INTERACTIVE_EMBED\.md', 'INTERACTIVE_XAPI\.md'\)/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\) \+ INTERACTIVE_P6 if os\.path\.exists/.test(bld) && ['INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md'].every(f => fs.existsSync(path.join(ROOT, 'docs', f))),
   'P6: the skill zip carries wasm_check.py, embed_check.py + the allow-list, h5p_import.py and the wasm runtime for the harness; the guide part "interactive" includes the wasm, embed and xAPI pages');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  ok(['44_activity_wasm.js', '45_activity_embed.js'].every(f => html.includes('engine/src/' + f) && new RegExp(`'engine/src/${f.replace('.', '\\.')}'`).test(bld.split('MCP_ENGINE = ')[1].split('\n')[0]) && bld.includes(`rd("engine/src/${f}")`) && new RegExp(`\\('43_xapi\\.js', '44_activity_wasm\\.js', '45_activity_embed\\.js'\\): shutil\\.copy`).test(bld))
+  ok(['44_activity_wasm.js', '45_activity_embed.js'].every(f => html.includes('engine/src/' + f) && new RegExp(`'engine/src/${f.replace('.', '\\.')}'`).test(bld.split('MCP_ENGINE = ')[1].split('\n')[0]) && bld.includes(`rd("engine/src/${f}")`) && /^PAGE_SRC = \('43_xapi\.js', '44_activity_wasm\.js', '45_activity_embed\.js'\)$/m.test(bld) && /for f in PAGE_SRC: shutil\.copy/.test(bld))
     && /^var NoemaEmbed = /m.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'), 'utf8')),
     'the shell, the site, the one-file bundle and the connector load NoemaWasm and NoemaEmbed beside packcheck.js (45 declares var: it is loaded twice in the app)'); }
 { const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
   ok(/why === 'embed-refused' \|\| why === 'embed-graded' \? stop\(tE\('engine\.act\.embed\.refused'\), false\)/.test(src) && /why === 'embed-offline' \? stop\(tE\('engine\.act\.embed\.offline'\)\)/.test(src) && /why === 'embed-timeout' \? stop\(tE\('engine\.act\.embed\.timeout'/.test(src),
     'the core: a refused or graded outside page stops without Restart; offline or not loaded stops with Restart (retry)'); }
-ok(/'engine\/src\/35_simexpr\.js', 'engine\/src\/36_engine_circuit\.js', (?:\*\('engine\/src\/' \+ f for f in P6_ENGINES\), )?(?:\*\('engine\/src\/' \+ f for f in LIB_ENGINES\), )?'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs NoemaExpr beside packcheck (sim-spec checks) and serves the expression language in the guide');
-{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('engine/src/35_simexpr.js'), b = html.indexOf('engine/packcheck.js'), c = html.indexOf('engine/src/36_engine_circuit.js');
-  ok(a > 0 && a < b && c > 0 && c < b && /\('35_simexpr\.js', '36_engine_circuit\.js'(?:, \*P6_ENGINES)?(?:, \*LIB_ENGINES)?\)\]   # NoemaExpr, NoemaCircuit (and the P6 engines )?beside packcheck/.test(bld) && /rd\("engine\/src\/35_simexpr\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/src\/36_engine_circuit\.js"\)\)\}<\/script>\n(?:\{p6_scripts\})?<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
-    'the shell, the site and the one-file bundle load NoemaExpr and NoemaCircuit before packcheck.js (a sim-spec pack imported before any subject is open is checked, not refused)'); }
+ok(/ENGINES_SERVER, 'engine\/packcheck\.js'/.test(bld) && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs the engine library (the expression language, every engine) before packcheck (sim-spec checks) and serves the expression language in the guide');
+{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('<script src="engine/engines.js">'), b = html.indexOf('engine/packcheck.js');
+  ok(a > 0 && a < b && /'engine\.css', 'engines\.js'/.test(bld) && /rd\("engine\/engines\.js"\)\)\}<\/script>\n<script>\{esc\(rd\("engine\/packcheck\.js"/.test(bld),
+    'the shell, the site and the one-file bundle load the engine library (the expression language, the circuit engine …) before packcheck.js (a sim-spec pack imported before any subject is open is checked, not refused)'); }
 { // activity_new.py --runtime sim-spec@1 starts from rc-lowpass
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
   const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-filter', '--runtime', 'sim-spec@1'], { encoding: 'utf8' });

@@ -1078,7 +1078,7 @@ async function callTool(name, args, ctx) {
       return text(`✅ Report ${id}: ${done[0].status}${done[0].fixed_in ? ' · fixed in ' + done[0].fixed_in : ''}.`);
     }
     case 'noema_request_engine': case 'noema_engine_requests': case 'noema_engine_request_update': {
-      const Q = globalThis.NoemaEngineRequests, K = globalThis.NoemaEngineCatalog, UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const Q = globalThis.NoemaEngineRequests, K = globalThis.NoemaCore?.engines?.catalog, UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
       const sugText = ids => ids.length ? ids.map(i => { const e = K?.byId(i); return `- ${i} (${e ? e.layer : '?'})`; }).join('\n') : '- nothing in the catalogue matched';
       if (name === 'noema_request_engine') {
         const { row, problems } = Q.normalize({ ...(args || {}), via: 'claude' });

@@ -7,8 +7,9 @@
    Usage: node tests/thermal.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '39_engine_thermal.js'));
-const T = globalThis.NoemaThermal;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaThermal = ENGINES.mod('thermal@1');
+const T = NoemaThermal;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const rel = (a, b) => Math.abs(a - b) / Math.abs(b);

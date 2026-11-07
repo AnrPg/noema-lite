@@ -853,6 +853,8 @@ function loadAuthor() {
   return AUTHOR_LOAD || (AUTHOR_LOAD = (async () => {
     if (!document.querySelector('link[data-author-css]')) document.head.append(h('link', { rel: 'stylesheet', href: base + 'activity_author.css', 'data-author-css': '1' }));
     for (const f of ['schemaform.js', 'activity_author_schemas.js', 'activity_author.js']) if (!(f === 'schemaform.js' ? window.NoemaSchemaForm : f === 'activity_author.js' ? window.NoemaActivityAuthor : window.NoemaActivitySchemas)) await js(f);
+    const L = window.NoemaCore.engines;   // the author offers every engine of the library: each one's table and checks, and the schema kernel its forms come from
+    await Promise.all([L.load(L.ids()), L.loadSchema()]);
   })().catch(e => { AUTHOR_LOAD = null; throw e; }));
 }
 async function authorView() {

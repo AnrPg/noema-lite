@@ -32,13 +32,8 @@ const EMBED = path.join(ROOT, 'engine', 'activity_author_schemas.js');
 const embedText = () => cp.execFileSync('python3', [path.join(ROOT, 'tools', 'build.py'), '--author-schemas'], { encoding: 'utf8', cwd: ROOT });
 
 /* ---------- the modules, as the app loads them ---------- */
-require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));
-require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));
-// the engine library as the app loads it: the core, the table → schema converter, every engine, the catalogue
-const LIBF = fs.readdirSync(path.join(ROOT, 'engine', 'src')).filter(f => /^4[6-9]_lib_[a-z]+\.js$/.test(f) && f !== '49_lib_view.js').sort();
-for (const f of ['engine/vendor/geographiclib-geodesic@2.2.0/noema-geodesic.js', 'engine/vendor/world-atlas@2.0.2/noema-land-110m.js']) if (fs.existsSync(path.join(ROOT, f))) require(path.join(ROOT, f));
-const libLoadErr = [];
-for (const f of LIBF) { try { require(path.join(ROOT, 'engine', 'src', f)); } catch (e) { libLoadErr.push(f + ': ' + e.message); } }
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibSchema = ENGINES.kernel('schema'), NoemaLibGraph = ENGINES.mod('graph@1'), NoemaLibGenetics = ENGINES.mod('genetics@1'), NoemaLibClinic = ENGINES.mod('clinic@1');
 require(path.join(ROOT, 'engine', 'packcheck.js'));
 const SF = require(path.join(ROOT, 'engine', 'schemaform.js'));
 require(path.join(ROOT, 'tools', 'i18n', 'node.js')).load();   // the app's i18n runtime (English): the page reads its words through NoemaI18n
@@ -161,8 +156,7 @@ for (const id of REFS) {
 }
 
 console.log('— the engine library: a form from each engine’s table');
-const LS = globalThis.NoemaLibSchema, LIBS = AA.libEngines();
-if (libLoadErr.length) console.log('  (not loaded: ' + libLoadErr.join(' | ') + ' — another engine may be mid-edit)');
+const LS = NoemaLibSchema, LIBS = AA.libEngines();
 const FINISHED = ['ode@1', 'logic@1', 'prob@1', 'seq@1', 'anatomy@1', 'rhetoric@1', 'philo@1', 'des@1', 'law@1', 'field@1', 'agents@1', 'graph@1', 'geom@1', 'genetics@1', 'med@1', 'clinic@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'];
 ok(FINISHED.every(id => LIBS.some(e => e.id === id)), 'every finished library engine exports its table and has a kind in the author: ' + LIBS.map(e => e.id).join(' '));
 const libRefs = id => fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'spec.json')) && rj(path.join(EX, d, 'spec.json')).engine === id);
@@ -197,7 +191,7 @@ for (const e of LIBS) {
   const withStyle = JSON.parse(JSON.stringify(d)); withStyle.outputs.push({ id: 'dg', kind: 'series', of: 'degree' }, { id: 'ix', kind: 'series', of: 'nodeIndex' }); withStyle.plots.push({ kind: 'series', x: { series: 'ix' }, series: [{ y: 'dg', style: 'bars' }] });
   const badStyle = JSON.parse(JSON.stringify(withStyle)); badStyle.plots[1].series[0].style = 'pie';
   ok(!SF.validate(R, g, withStyle).length && SF.validate(R, g, badStyle).length > 0 && SF.validate(reg, sim, refDoc('rc-lowpass').spec).length === 0, 'a library schema takes scene plots and line styles (bars), and refuses an unknown style');
-  ok(JSON.stringify(LS.ofs(globalThis.NoemaLibGraph.table, d.model, 'scene')) === '["drawing"]' && LS.ofs(globalThis.NoemaLibClinic.table, refDoc('sepsis-case').spec.model, 'scalar').length > 10 && LS.ofs(globalThis.NoemaLibGenetics.table, { mode: 'hw' }, 'scene').join() === 'deFinetti',
+  ok(JSON.stringify(LS.ofs(NoemaLibGraph.table, d.model, 'scene')) === '["drawing"]' && LS.ofs(NoemaLibClinic.table, refDoc('sepsis-case').spec.model, 'scalar').length > 10 && LS.ofs(NoemaLibGenetics.table, { mode: 'hw' }, 'scene').join() === 'deFinetti',
     'what an output may compute: from the table (graph@1 scene: drawing), from the model (clinic@1), by mode (genetics@1 hw: deFinetti)');
 }
 { // the labels: every field word of every engine's schema in the catalog (f.lib.<field>), every option of the new selects

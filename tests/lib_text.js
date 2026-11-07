@@ -9,10 +9,9 @@ let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol, m) => ok(Number.isFinite(a) && Math.abs(a - b) <= tol, `${m}: ${a} ≈ ${b} (± ${tol})`);
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '48_lib_text.js'));
-const X = globalThis.NoemaLibText;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibText = ENGINES.mod('text@1');
+const X = NoemaLibText;
 const run = (texts, outputs, extra, env) => X.run({ model: Object.assign({ texts }, extra || {}), outputs }, env || {}, {});
 const sc = (id, of, f) => Object.assign({ id, kind: 'scalar', of }, f || {});
 const hasCode = (r, c) => r.codes.some(x => x.code === c);

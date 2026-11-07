@@ -8,9 +8,9 @@
    Usage: node tests/twin.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '41_engine_rf.js'));
-require(path.join(ROOT, 'engine', 'src', '42_engine_twin.js'));
-const T = globalThis.NoemaTwin, RF = globalThis.NoemaRF;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaRF = ENGINES.mod('rf@1'), NoemaTwin = ENGINES.mod('twin@1');
+const T = NoemaTwin, RF = NoemaRF;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const codes = (x, level) => T.check(x).filter(p => !level || p.level === level).map(p => p.code);

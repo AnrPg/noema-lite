@@ -1,12 +1,12 @@
 /* ===================== interactive activities — runtime sim-spec@1 (Tier B: a declarative simulation, docs/INTERACTIVE.md §12) =====================
-   The pack carries only DATA (item.spec): controls, formulas in the expression language (NoemaExpr, 35_simexpr.js), readouts and
+   The pack carries only DATA (item.spec): controls, formulas in the expression language (NoemaCore.engines.expr, src/engines/kernel/simexpr.js), readouts and
    plots. No code of the pack runs, so there is no frame: the app's own trusted code renders the controls and the plots with its own
    DOM and styles (theme tokens, dark mode, keyboard, labels, 320 px) — docs/adr/001 "as built". The spec is checked with the same
    rules as the validators (NoemaPackCheck.checkSimSpec) before anything is shown; a spec that fails shows the activity's fallback.
-   Engines (ACT.registerEngine): formula@1 is built in (the derived values are the model). Another engine computes outputs from the
+   Engines (ACT.registerEngine, or the engine library NoemaCore.engines, loaded by ACT when an activity needs one): formula@1 is built in (the derived values are the model). Another engine computes outputs from the
    inputs (scalars and time series): { id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs },
    workerSource? }. An engine with workerSource runs in a Worker (runs that can take longer than ~50 ms: P3's circuit engine);
-   one without runs inline. Every evaluation is NoemaExpr's: no loops, ≤ 2000 nodes per expression, ≤ 2000 points per plot.
+   one without runs inline. Every evaluation is the expression language's: no loops, ≤ 2000 nodes per expression, ≤ 2000 points per plot.
    The protocol with the core is the one of every runtime (ACTP messages): ready, pong, state, event; pause/resume/destroy. */
 (() => {
   /* i18n-ignore-start */   // code; the words come from the pack's string tables and from tE() below
@@ -109,7 +109,7 @@
      [{code, part? | loop?, …}]. deps (tests): {engine(id), runner(E, spec, opts, onFail), lib, plan, partSpec, compile, now}. */
   function partsRunner(spec, opts, onFail, deps) {
     deps = deps || {};
-    const PC = window.NoemaPackCheck || {}, C = deps.compile || NoemaExpr.compile, now = deps.now || (() => performance.now());
+    const PC = window.NoemaPackCheck || {}, C = deps.compile || NoemaCore.engines.expr.compile, now = deps.now || (() => performance.now());
     const lib = deps.lib !== undefined ? deps.lib : (ACT.PARTS || window.Noema?.pack?.activities?.parts || null);
     const plan = (deps.plan || PC.partsPlan)(spec, lib), mkSpec = deps.partSpec || PC.partSpec, engineOf = deps.engine || (id => ACT.engine(id));
     const mkRunner = deps.runner || engineRunner, seed = ((opts && opts.seed) >>> 0) || 1, cons = Object.assign({}, (opts && opts.task) || spec.consts || {});
@@ -486,7 +486,7 @@
 
       const T = init.strings || {}, locale = init.locale || 'en';
       const tt = k => (k && Object.prototype.hasOwnProperty.call(T, k)) ? T[k] : '';
-      const C = NoemaExpr.compile;
+      const C = NoemaCore.engines.expr.compile;
       const consts = Object.assign({}, spec.consts || {});
       for (const [k, v] of Object.entries(init.task || {})) if (Object.prototype.hasOwnProperty.call(consts, k) && isNum(v)) consts[k] = v;
       const params = spec.params, derived = (spec.derived || []).map(d => ({ id: d.id, f: C(d.expr) }));

@@ -9,8 +9,9 @@
 const path = require('path'), vm = require('vm');
 const SRC = path.join(__dirname, '..', 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '48_lib_genetics.js'));
-const G = globalThis.NoemaLibGenetics, C = globalThis.NoemaLibCore;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibCore = ENGINES.kernel('core'), NoemaLibGenetics = ENGINES.mod('genetics@1');
+const G = NoemaLibGenetics, C = NoemaLibCore;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Math.abs(a - b) <= tol;

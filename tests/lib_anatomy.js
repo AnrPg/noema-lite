@@ -9,10 +9,9 @@ let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '48_lib_anatomy.js'));
-const M = globalThis.NoemaLibAnatomy;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibAnatomy = ENGINES.mod('anatomy@1');
+const M = NoemaLibAnatomy;
 const ev = (at, o, vs) => M.evaluate(Object.assign({ at }, o || {}), vs || [], o && o.completeness !== undefined ? o.completeness : 1);
 const spec = (model, outs) => ({ format: 'noema.sim-spec/v1', engine: 'anatomy@1', model, outputs: outs.map((of, i) => ({ id: 'o' + i, kind: 'scalar', of })) });
 const R = (model, outs, env) => { const s = spec(model, outs), r = M.engine.create(s).run(env || {}); return outs.map((_, i) => r['o' + i]); };

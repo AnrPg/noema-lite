@@ -8,10 +8,9 @@ let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '48_lib_craft.js'));
-const M = globalThis.NoemaLibCraft;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibCraft = ENGINES.mod('craft@1');
+const M = NoemaLibCraft;
 const X = (model, env) => M.compute(model, env || {}, null);   // → {scalars, series, scenes, issues}
 const S = (model, env) => X(model, env).scalars;
 const iss = (model, code) => X(model).issues[code] || 0;

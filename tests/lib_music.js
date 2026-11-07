@@ -9,8 +9,9 @@ const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; cons
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 const allNear = (a, b, tol) => a.length === b.length && a.every((v, i) => near(v, b[i], tol));
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '48_lib_music.js'));
-const L = globalThis.NoemaLibMusic, P = L.parsePitch;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibMusic = ENGINES.mod('music@1');
+const L = NoemaLibMusic, P = L.parsePitch;
 const spec = (model, outputs, params) => ({ format: 'noema.sim-spec/v1', engine: 'music@1', params: params || [], model: model || {}, outputs: outputs || [] });
 const run1 = (model, o) => { const r = L.run(spec(model, [Object.assign({ id: 'x' }, o)]), {}, {}); return r.out.x; };
 const codesOf = (model, o) => L.run(spec(model, [Object.assign({ id: 'x' }, o)]), {}, {}).codes.map(c => c.code);

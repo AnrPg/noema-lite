@@ -20,7 +20,8 @@ const WHAT = 'Chemical equilibrium of a reversible reaction: the learner changes
 async function unit() {
   console.log('— the domain, without a browser');
   const ls = new Map(); const ctx = { console, localStorage: { getItem: k => ls.has(k) ? ls.get(k) : null, setItem: (k, v) => ls.set(k, String(v)) } }; ctx.window = ctx; vm.createContext(ctx);
-  for (const f of ['engine/enginereq.js', 'engine/src/49_lib_catalog.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
+  ctx.NoemaCore = { engines: require('./engines.cjs').lib };   // the engine library: its catalogue suggests
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine/enginereq.js'), 'utf8'), ctx);
   const R = ctx.NoemaEngineRequests;
   ok(R && typeof R.normalize === 'function' && typeof R.store === 'function', 'engine/enginereq.js loads without a page (as in the connector)');
   let n = R.normalize({});
@@ -113,8 +114,9 @@ async function unit() {
 
     console.log('— Claude through the connector');
     const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
-    const fn = path.join(os.tmpdir(), `noema-mcp-ereq-${process.pid}.mjs`);
-    fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = {};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/enginereq.js', 'engine/src/49_lib_catalog.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
+    const fn = path.join(os.tmpdir(), `noema-mcp-ereq-${process.pid}.mjs`), ENGINES_SERVER = path.join(os.tmpdir(), `noema-engines-server-${process.pid}.js`);   // the engine library, every engine in hand (tools/build.py engines_bundle('--server'))
+    require('child_process').execFileSync(process.execPath, [path.join(ROOT, 'tools', 'esbuild_engines.mjs'), '--server', ENGINES_SERVER], { cwd: ROOT, stdio: 'inherit' });
+    fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = {};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/enginereq.js', ENGINES_SERVER, 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(f === ENGINES_SERVER ? f : path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
     const { default: handler } = await import(fn);
     const tok = async email => (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email, password: 'secret123' }) })).json()).access_token;
     const tool = async (t, name, args) => (await (await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + t }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: args } }) }))).json()).result;

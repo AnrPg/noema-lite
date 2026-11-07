@@ -120,7 +120,7 @@ APP.postMessage({t:'hello',nonce:N},'*');
   }
 
   /* ---------- the engines of a mini-app (docs/INTERACTIVE.md §8.1, docs/INTERACTIVE_LIBRARY.md §4) ----------
-     Only the engines of the library (NoemaEngineCatalog.LIBRARY: pure, bounded, no hidden state; never formula@1, which computes
+     Only the engines of the library (NoemaCore.engines.catalog.LIBRARY: pure, bounded, no hidden state; never formula@1, which computes
      nothing, nor a plugin with a fault bench), only those the registry entry lists, only in their Worker. Per mini-app and engine: one
      Worker, made on the first run and reused (another model goes to the same Worker), ended when the mini-app is unmounted; one run
      at a time and one waiting (a newer run replaces the waiting one: "superseded"); each run ≤ 5 s (the sim runner's limit: the
@@ -130,9 +130,9 @@ APP.postMessage({t:'hello',nonce:N},'*');
   const IN_NAME = /^[A-Za-z_][A-Za-z0-9_]{0,31}$/;
   const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const declaredOf = act => Array.isArray(act?.engines) ? [...new Set(act.engines.filter(x => typeof x === 'string'))].slice(0, ENG.max) : [];
-  /** the declared engines this app can run for a mini-app: of the library, registered, with a Worker source, Workers here */
+  /** the declared engines this app can run for a mini-app: of the library, loaded (ACT loads them before the mount), with a Worker source, Workers here */
   function enginesFor(act) {
-    const lib = new Set(window.NoemaEngineCatalog?.LIBRARY || []);
+    const lib = new Set(window.NoemaCore?.engines?.catalog.LIBRARY || []);
     return declaredOf(act).filter(id => lib.has(id) && !!ACT.engine?.(id)?.workerSource && typeof Worker === 'function' && typeof ACT.engineRunner === 'function');
   }
   function engineBridge(act, seed0, reply) {

@@ -21,8 +21,9 @@
 const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '47_lib_logic.js'));
-const L = globalThis.NoemaLibLogic;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibCore = ENGINES.kernel('core'), NoemaLibLogic = ENGINES.mod('logic@1');
+const L = NoemaLibLogic;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const spec = (model, outputs) => ({ format: 'noema.sim-spec/v1', engine: 'logic@1', params: [{ id: 'k', kind: 'slider', label: 'k', min: 0, max: 10, default: 0 }], model, outputs: outputs || [] });
@@ -326,10 +327,8 @@ ok(L.id === 'logic@1' && Object.isFrozen(L) && L.engine.id === 'logic@1' && L.en
   const f = E(['forall x exists y R(x,y)'], 'exists y forall x R(x,y)', { logic: 'fol', lang: 'fol', maxSize: 2 }), g = E(['forall x P(x)'], 'exists x P(x)', { logic: 'fol', lang: 'fol' });
   ok(f.valid === false && f.counter.domain.length === 2 && g.valid === true && g.codes.includes('bounded'), 'entails in first-order logic: a 2-element countermodel to ∀∃ ⊢ ∃∀; ∀x P ⊢ ∃x P with no countermodel up to the bound');
   ok(L.truthTable([ast('p & q')]).cols[0].join('') === '1000' && L.rowsOf(['p', 'q']).length === 4 && L.syllogism('AAA', 1, false).valid && L.afSolve(2, [[0, 1]], L.diagSet()).grounded.join() === '1,0', 'truthTable, rowsOf, syllogism, afSolve are exported');
-  const ctx = { self: {} }; ctx.self.self = ctx.self; vm.createContext(ctx);
-  vm.runInContext('var self = this.self;' + NoemaLibCore.source() + '\n;' + L.source(), ctx);
-  const W = ctx.self.NoemaLibLogic;
-  ok(W && W.evalNorms(norms0(), trace0()).counts.violations === 1 && W.parse('p ∧', 'prop').code === 'parse-eof', 'source(): logic@1 runs in a fresh global after NoemaLibCore.source() (no NoemaExpr needed for parse and evalNorms)');
+  const W = ENGINES.worker('logic@1').__noemaShared['logic/logic.js'];
+  ok(W && W.evalNorms(norms0(), trace0()).counts.violations === 1 && W.parse('p ∧', 'prop').code === 'parse-eof', 'the Worker bundle: logic@1 runs in a fresh global (parse and evalNorms)');
 }
 function norms0() { return [{ id: 'pay', kind: 'O', cond: 'order', act: 'paid', within: 1 }]; }
 function trace0() { return [{ facts: ['order'] }, {}]; }

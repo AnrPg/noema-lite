@@ -392,11 +392,11 @@
     SPEC_KEYS: new Set(['format', 'engine', 'model', 'title', 'intro', 'consts', 'params', 'derived', 'outputs', 'readouts', 'plots', 'bench']),
     // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
     CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1', 'twin@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
-    // the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (loaded beside this file; the Python twins in tools/)
-    P6: { 'thermal@1': ['NoemaThermal', '39_engine_thermal.js'], 'pid@1': ['NoemaPID', '40_engine_pid.js'], 'rf@1': ['NoemaRF', '41_engine_rf.js'], 'twin@1': ['NoemaTwin', '42_engine_twin.js'] },
-    // the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core (46_lib_core.js); each checks its model with its own checkSpec and
+    // the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (the module under src/engines, loaded through NoemaCore.engines; the Python twins in tools/)
+    P6: { 'thermal@1': 'thermal/thermal.js', 'pid@1': 'pid/pid.js', 'rf@1': 'rf/rf.js', 'twin@1': 'twin/twin.js' },
+    // the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core (src/engines/kernel/core.js); each checks its model with its own checkSpec and
     // lists the expressions (exprs: [src, where, local names]) and string keys (keys: [key, where]) of its model; Python twins tools/lib_<name>.py
-    LIB: { 'ode@1': ['NoemaLibODE', '47_lib_ode.js'], 'prob@1': ['NoemaLibProb', '47_lib_prob.js'], 'graph@1': ['NoemaLibGraph', '47_lib_graph.js'], 'geom@1': ['NoemaLibGeom', '47_lib_geom.js'], 'genetics@1': ['NoemaLibGenetics', '48_lib_genetics.js'], 'seq@1': ['NoemaLibSeq', '48_lib_seq.js'], 'med@1': ['NoemaLibMed', '48_lib_med.js'], 'clinic@1': ['NoemaLibClinic', '48_lib_clinic.js'], 'anatomy@1': ['NoemaLibAnatomy', '48_lib_anatomy.js'], 'timeline@1': ['NoemaLibTimeline', '48_lib_timeline.js'], 'music@1': ['NoemaLibMusic', '48_lib_music.js'], 'map@1': ['NoemaLibMap', '48_lib_map.js'], 'text@1': ['NoemaLibText', '48_lib_text.js'], 'craft@1': ['NoemaLibCraft', '48_lib_craft.js'], 'logic@1': ['NoemaLibLogic', '47_lib_logic.js'], 'rhetoric@1': ['NoemaLibRhetoric', '48_lib_rhetoric.js'], 'philo@1': ['NoemaLibPhilo', '48_lib_philo.js'], 'des@1': ['NoemaLibDES', '47_lib_des.js'], 'field@1': ['NoemaLibField', '47_lib_field.js'], 'agents@1': ['NoemaLibAgents', '47_lib_agents.js'], 'law@1': ['NoemaLibLaw', '48_lib_law.js'] },
+    LIB: { 'ode@1': 'ode/ode.js', 'prob@1': 'prob/prob.js', 'graph@1': 'graph/graph.js', 'geom@1': 'geom/geom.js', 'genetics@1': 'genetics/genetics.js', 'seq@1': 'seq/seq.js', 'med@1': 'med/med.js', 'clinic@1': 'clinic/clinic.js', 'anatomy@1': 'anatomy/anatomy.js', 'timeline@1': 'timeline/timeline.js', 'music@1': 'music/music.js', 'map@1': 'map/map.js', 'text@1': 'text/text.js', 'craft@1': 'craft/craft.js', 'logic@1': 'logic/logic.js', 'rhetoric@1': 'rhetoric/rhetoric.js', 'philo@1': 'philo/philo.js', 'des@1': 'des/des.js', 'field@1': 'field/field.js', 'agents@1': 'agents/agents.js', 'law@1': 'law/law.js' },
     LIB_KINDS: ['scalar', 'series', 'scene', 'sound'], LINE_STYLES: ['line', 'bars', 'steps', 'points'],
     APP_ENGINES_MAX: 8,   // html-app@1: the engines of the library a mini-app may use ("engines": [...], docs/INTERACTIVE.md §8.1) — the same rule in tools/activities.py
     P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
@@ -485,15 +485,19 @@
     for (const name of [...ACT.PY_BASE, ...ACT.PY_EXTRAS]) if (!decl.has(name) && new RegExp('^\\s*(?:import|from)\\s+' + name + '\\b', 'm').test(src)) E.push(`the Python file imports ${name}: list it in "packages"`);
     return { errors: E, warnings: W };
   }
-  /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through NoemaExpr (engine/src/35_simexpr.js, loaded beside this file) ---------- */
+  /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through the expression language (NoemaCore.engines.expr, src/engines/kernel/simexpr.js) ---------- */
   const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
   const isNum = v => typeof v === 'number' && isFinite(v);
   const list = v => Array.isArray(v) ? v : [];
-  const NX = () => root.NoemaExpr || null;
+  /** the engine library (src/engines, NoemaCore.engines): the expression language always; an engine's module only once it is loaded —
+      a caller loads the engines a pack names (enginesNamed) before it checks the pack */
+  const LIBR = () => root.NoemaCore?.engines || null;
+  const NX = () => LIBR()?.expr || null;
+  const MOD = id => LIBR()?.loaded(id) || null;
   /** null, or the first problem of an expression (names null = not checked) */
   function exprProblem(src, names, where) {
     if (typeof src !== 'string' || !src.trim()) return `${where}: an expression (a text such as “2*x + 1”) is required`;
-    if (!NX()) return `${where}: the expression checker (NoemaExpr, engine/src/35_simexpr.js) is not loaded here`;
+    if (!NX()) return `${where}: the expression checker (NoemaCore.engines.expr) is not loaded here`;
     const p = NX().check(src, names ? { vars: names } : {});
     return p.length ? `${where}: ${p[0].msg} in “${src.slice(0, 60)}”` : null;
   }
@@ -509,7 +513,7 @@
     return out;
   }
   /* ---------- circuit-mna@1: the model, the outputs, the bench — the SAME rules as tools/activities.py check_circuit / check_bench ---------- */
-  const CK = () => root.NoemaCircuit || null;   // engine/src/36_engine_circuit.js, loaded beside this file (its check and checkFaults)
+  const CK = () => MOD(ACT.CIRCUIT);   // src/engines/circuit (its check and checkFaults), once loaded
   const isGnd = s => s === 'gnd' || s === '0';
   /** → {nl, els: Map id → element, nodes: Set of node and test-point names} of a spec's netlist without errors, or null */
   function circuitOf(spec) {
@@ -548,7 +552,7 @@
     const m = spec.model, L = ACT.BENCH_LIM;
     if (!isObj(m)) { E.push(`spec.model: ${ACT.CIRCUIT} needs a model {netlist, bindings?, transient?, noise?}`); return; }
     unknownKeys(m, ACT.MODEL_KEYS, 'spec.model', E);
-    if (!CK()) { E.push('spec.model: the circuit checker (NoemaCircuit, engine/src/36_engine_circuit.js) is not loaded here'); return; }
+    if (!CK()) { E.push(`spec.model: the ${ACT.CIRCUIT} checker (src/engines/circuit/sim.js) is not loaded here`); return; }
     if (!isObj(m.netlist)) { E.push('spec.model.netlist must be a netlist {format: "noema.circuit/v1", nodes, elements}'); return; }
     const probs = CK().check(m.netlist).filter(p => p.level === 'error');
     for (const p of probs) E.push(`spec.model.netlist${p.path ? '.' + p.path : ''}: ${p.msg}`);
@@ -640,8 +644,8 @@
     return out;
   }
   function checkEngine(spec, eng, names, E) {
-    const [g, f] = ACT.P6[eng], M = root[g] || null;
-    if (!M) { E.push(`spec.model: the ${eng} checker (${g}, engine/src/${f}) is not loaded here`); return; }
+    const M = MOD(eng);
+    if (!M) { E.push(`spec.model: the ${eng} checker (src/engines/${ACT.P6[eng]}) is not loaded here`); return; }
     for (const p of M.checkSpec(spec)) if (p.level === 'error') E.push(`spec${p.path ? '.' + p.path : ''}: ${p.msg}`);
     for (const [src, w] of engineExprs(spec, eng)) { const m = exprProblem(src, names, w); if (m) E.push(m); }
   }
@@ -649,8 +653,8 @@
      plus the model's own local names (the variables of an ODE, the time t …), then every string key it names — the SAME rules as
      tools/activities.py check_lib (the engines' Python twins: tools/lib_<name>.py) ---------- */
   function checkLib(spec, eng, names, E, key) {
-    const [g, f] = ACT.LIB[eng], M = root[g] || null;
-    if (!M) { E.push(`spec.model: the ${eng} checker (${g}, engine/src/${f}) is not loaded here`); return; }
+    const M = MOD(eng);
+    if (!M) { E.push(`spec.model: the ${eng} checker (src/engines/${ACT.LIB[eng]}) is not loaded here`); return; }
     const P = M.checkSpec(spec);
     for (const p of P) if (p.level === 'error') E.push(`spec${p.path ? '.' + p.path : ''}: ${p.msg}`);
     if (P.some(p => p.level === 'error')) return;   // the expressions and keys of a model that does not stand are not listed
@@ -659,7 +663,7 @@
   }
   /** twin@1: the device of a spec without errors, or null */
   function twinOf(spec) {
-    const d = isObj(spec?.model) ? spec.model.device : null, T = root.NoemaTwin;
+    const d = isObj(spec?.model) ? spec.model.device : null, T = MOD(ACT.TWIN);
     return T && isObj(d) && !T.check(d).some(p => p.level === 'error') ? d : null;
   }
   function checkBench(spec, names, seen, E, key, eng) {
@@ -687,7 +691,7 @@
       unknownKeys(f, ['id', 'apply'], w, E);
       if (!(Array.isArray(f.apply) && f.apply.length <= L.apply)) { E.push(`${w}.apply must be a list of at most ${L.apply} changes to the ${tw ? 'device' : 'circuit'} ([] = a healthy device)`); return; }
       if (c) for (const p of CK().checkFaults(c.nl, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
-      if (dev) for (const p of root.NoemaTwin.checkFaults(dev, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
+      if (dev) for (const p of MOD(ACT.TWIN).checkFaults(dev, f.apply)) E.push(`${w}.${p.path.replace(/^faults/, 'apply')}: ${p.msg}`);
     });
     const ps = b.points;
     if (!(Array.isArray(ps) && ps.length >= 1 && ps.length <= L.points)) E.push(`spec.bench.points must be a list of 1–${L.points} probe points {id, at, label}`);
@@ -1279,6 +1283,15 @@
     const engs = [...new Set([...items.filter(a => (a.runtime === 'sim-spec@1' || a.runtime === ACT.WASM) && isObj(a.spec)).map(a => a.runtime === ACT.WASM ? ACT.WASM_ENGINE : 'engine' in a.spec ? a.spec.engine : ACT.DEFAULT_ENGINE), ...items.flatMap(appEngines), ...items.flatMap(a => partEngines(a, lib))].filter(e => typeof e === 'string' && e !== ACT.DEFAULT_ENGINE))].sort().map(e => 'engine:' + e);
     return ['activities/v1', ...rts, ...engs];
   }
+  /** enginesNamed(pack) → the ids of the engines of the library a pack names (its activities and their parts, pack.requires): what a
+      caller loads (NoemaCore.engines.load) before checkPack, so that each engine's own checks run — and only those engines are loaded */
+  function enginesNamed(p) {
+    const reg = isObj(p) ? p.activities : null, items = isObj(reg) && Array.isArray(reg.items) ? reg.items.filter(isObj) : [], parts = isObj(reg) && isObj(reg.parts) ? reg.parts : null;
+    const ids = new Set();
+    for (const r of [...needRequires(items, parts), ...(Array.isArray(p?.requires) ? p.requires : [])]) if (typeof r === 'string' && r.startsWith('engine:')) ids.add(r.slice(7));
+    if (parts) for (const d of Object.values(parts)) if (isObj(d) && typeof d.engine === 'string') ids.add(d.engine);
+    return [...ids].filter(id => ACT.ENGINES.has(id) && id !== ACT.DEFAULT_ENGINE).sort();
+  }
   function checkBlockAct(b, items) {
     const E = [];
     if (!Object.prototype.hasOwnProperty.call(items, b.activity)) E.push(`interactive: activity ${qv(b.activity)} is not in pack.activities`);
@@ -1664,5 +1677,5 @@
     return { errors: E, warnings: W, counts: { entries: entries.length, senses, stale, sections: Object.keys(secs).length, previews, anchors: anchors.length } };
   }
   /* i18n-ignore-end */
-  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, partsPlan, resolveParts, partSpec, partMsg, freeVars, ownSpec, specNames, needRequires, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
+  root.NoemaPackCheck = { checkPack, checkActivities, checkActivityPackages, checkSimSpec, partsPlan, resolveParts, partSpec, partMsg, freeVars, ownSpec, specNames, needRequires, enginesNamed, lintHtml, lintPython, ACTIVITY_RULES: ACT, checkExercise, checkBalance, checkQuality, checkBridge, checkTranslation, requiredLocales, RULES, QUALITY, LANGS, TYPES, BLOCKS, ID_RE };
 })(typeof window !== 'undefined' ? window : globalThis);

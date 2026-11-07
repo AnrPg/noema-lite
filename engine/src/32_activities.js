@@ -73,7 +73,7 @@ const ACT = (() => {
   /** a runtime that is registered, switched on and can run here (available(): py-module@1 only on the website, never file:// or the one-file bundle) */
   const enabled = id => !!(Object.prototype.hasOwnProperty.call(RUNTIMES, id) && flags()[id] !== false && (typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
-  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(enabled).map(id => 'runtime:' + id), ...Object.keys(ENGINES).map(id => 'engine:' + id)]);
+  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(enabled).map(id => 'runtime:' + id), ...engines().map(id => 'engine:' + id)]);
   const canRun = a => !!(a && enabled(a.runtime));
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
@@ -101,8 +101,17 @@ const ACT = (() => {
   /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
       (workerSource: the engine's code as text, defining self.noemaEngine = { create }; it then runs in a Worker — docs/INTERACTIVE.md §12.6) */
   function registerEngine(def) { if (def && typeof def.id === 'string' && /^[a-z][a-z0-9-]*@\d+$/.test(def.id) && typeof def.create === 'function') ENGINES[def.id] = def; }
-  const engine = id => Object.prototype.hasOwnProperty.call(ENGINES, id) ? ENGINES[id] : null;
-  const engines = () => Object.keys(ENGINES);
+  /** the engine library (src/engines, NoemaCore.engines): its engines are known at once and loaded when an activity needs one */
+  const LIBR = () => window.NoemaCore?.engines || null;
+  /** an engine ready to run: one registered here, or one of the library once it is loaded (null before) */
+  const engine = id => Object.prototype.hasOwnProperty.call(ENGINES, id) ? ENGINES[id] : LIBR()?.engine(id) || null;
+  /** every engine this app has: the registered ones and the library's, loaded or not */
+  const engines = () => [...new Set([...Object.keys(ENGINES), ...(LIBR()?.ids() || [])])];
+  /** the library engines an activity needs (its spec's engine, its parts', a mini-app's) and not loaded yet */
+  function unloaded(a) {
+    const L = LIBR(), need = window.NoemaPackCheck?.needRequires ? NoemaPackCheck.needRequires([a], PARTS) : [];
+    return L ? need.filter(r => r.startsWith('engine:')).map(r => r.slice(7)).filter(id => !Object.prototype.hasOwnProperty.call(ENGINES, id) && L.has(id) && !L.loaded(id)) : [];
+  }
 
   /* ---------- persistence: S.act (explorer state per activity and place) and S.att (the last attempt of each sim exercise) ---------- */
   const STATE_MAX = ACTP.LIM.state, KEEP_EVENTS = 200;
@@ -124,12 +133,12 @@ const ACT = (() => {
       × 0.85 per hint used (never below × 0.5); passed = share >= pass (default 1). Nothing done yet (no event) → null: Check waits. */
   const truthy = v => typeof v === 'boolean' ? v : (typeof v === 'number' && v !== 0 && v === v);
   registerGrader({ id: 'checks', grade(sess, ex) {
-    const vals = sess.values?.(); if (!vals || !sess.events.length || !window.NoemaExpr) return null;
+    const X = LIBR()?.expr, vals = sess.values?.(); if (!vals || !sess.events.length || !X) return null;
     const cs = Array.isArray(ex?.grade?.checks) ? ex.grade.checks : [];
     let tot = 0, got = 0; const per = [];
     for (const c of cs) {
       const w = typeof c?.weight === 'number' && c.weight > 0 ? c.weight : 1; let met = false;
-      try { met = truthy(NoemaExpr.evaluate(String(c.expr), vals)); } catch (e) { met = false; }
+      try { met = truthy(X.evaluate(String(c.expr), vals)); } catch (e) { met = false; }
       tot += w; if (met) got += w; per.push({ label: c?.label || null, ok: met });
     }
     const share = tot ? got / tot : 0, pass = typeof ex.grade.pass === 'number' ? ex.grade.pass : 1, factor = Math.max(0.5, Math.pow(0.85, sess.hintsUsed || 0));
@@ -220,7 +229,18 @@ const ACT = (() => {
     // until it says so (ctx.onLive): a card holds no slot and parks nothing (docs/INTERACTIVE_EMBED.md)
     const waits = () => { try { return !!RUNTIMES[a.runtime].waits?.(a); } catch (e) { return false; } };
     function goLive() { if (sess.destroyed || !sess.port || LIVE.includes(sess)) return; makeRoom(); LIVE.push(sess); }
+    /** start: first the library engines the activity needs (each loaded once, on demand), then the runtime. A failed load shows as
+        the runtime's own failure (its engine is missing) */
     function start() {
+      if (sess.destroyed) return;
+      const want = unloaded(a);
+      if (!want.length) return begin();
+      teardown(); box.classList.remove('act-fallback'); note.textContent = tE('engine.act.loading');
+      const tok = sess.loading = {};
+      LIBR().load(want).then(() => { if (sess.loading === tok && !sess.destroyed) begin(); });
+    }
+    function begin() {
+      sess.loading = null;
       if (sess.destroyed) return;
       const waiting = waits();
       teardown(); if (!waiting) makeRoom();

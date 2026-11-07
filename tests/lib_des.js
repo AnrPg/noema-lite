@@ -12,8 +12,9 @@
 const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-for (const f of ['35_simexpr.js', '46_lib_core.js', '46_lib_simkit.js', '47_lib_des.js']) require(path.join(SRC, f));
-const D = globalThis.NoemaLibDES, C = globalThis.NoemaLibCore;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibCore = ENGINES.kernel('core'), NoemaLibDES = ENGINES.mod('des@1');
+const D = NoemaLibDES, C = NoemaLibCore;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const f3 = v => (Number.isFinite(v) ? +v.toFixed(3) : v);

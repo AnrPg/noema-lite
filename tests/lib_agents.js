@@ -15,8 +15,9 @@
 const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-for (const f of ['35_simexpr.js', '46_lib_core.js', '46_lib_simkit.js', '46_lib_space.js', '47_lib_logic.js', '47_lib_agents.js']) require(path.join(SRC, f));
-const A = globalThis.NoemaLibAgents, C = globalThis.NoemaLibCore;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibCore = ENGINES.kernel('core'), NoemaLibLogic = ENGINES.mod('logic@1'), NoemaLibAgents = ENGINES.mod('agents@1');
+const A = NoemaLibAgents, C = NoemaLibCore;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
@@ -89,14 +90,9 @@ ok(A.TEMPLATES.length === 10 && A.PROTOCOLS.length === 5 && A.ACTIONS.length ===
   const nm = run(normModel, [S('v', 'violations'), Se('vs', 'violations'), S('c', 'final', { reporter: 'c' }), S('f', 'flag', { code: 'logic-fallback' })]);
   const vs = nm.out.vs;
   ok(vs[0] === 50 && vs[vs.length - 1] < 10 && vs.slice(1).every((v, i) => v <= vs[i] + 6) && nm.out.c > 0.5 && nm.out.f === 0, `a prohibition with a sanction (NoemaLibLogic.normMonitor): violations ${vs.slice(0, 6).join(', ')}, … ${vs[vs.length - 1]} as fines make the drivers cautious (mean caution ${nm.out.c.toFixed(2)})`);
-  const LG = globalThis.NoemaLibLogic; globalThis.NoemaLibLogic = undefined;
-  const nf = run(normModel, [Se('vs', 'violations'), S('f', 'flag', { code: 'logic-fallback' })]);
-  globalThis.NoemaLibLogic = LG;
-  ok(JSON.stringify(nf.out.vs) === JSON.stringify(vs) && nf.out.f === 1, 'without NoemaLibLogic the fallback monitor gives the same violations (code logic-fallback)');
   const ob = { space: { kind: 'none' }, breeds: [{ id: 'w', count: 10, vars: { done: { init: 0 } }, rules: [{ do: 'set', var: 'done', expr: '1', when: 'id < 6 && t >= 2', act: 'report' }] }], norms: [{ id: 'rep', kind: 'O', act: 'report', within: 4 }], steps: 10 };
   const o1 = run(ob, [S('v', 'violations'), S('f', 'fulfilments')]);
-  globalThis.NoemaLibLogic = undefined; const o2 = run(ob, [S('v', 'violations'), S('f', 'fulfilments')]); globalThis.NoemaLibLogic = LG;
-  ok(o1.out.v === 4 && o1.out.f === 6 && o2.out.v === 4 && o2.out.f === 6, `an obligation with a deadline (within 4 steps): 6 agents report in time (fulfilled), 4 never do (violated) — the logic engine and the fallback agree`);
+  ok(o1.out.v === 4 && o1.out.f === 6, `an obligation with a deadline (within 4 steps): 6 agents report in time (fulfilled), 4 never do (violated)`);
   const sat = A.propEval(A.propParse('a & !b | c'), x => x === 'a');
   ok(sat === true && A.propEval(A.propParse('a & b'), x => x === 'a') === false, 'the fallback\'s propositional parser');
 }

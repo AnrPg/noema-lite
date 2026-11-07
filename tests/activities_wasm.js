@@ -21,8 +21,8 @@ const canon = v => JSON.stringify(v, (k, x) => x && typeof x === 'object' && !Ar
 const py = (code, input) => JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import wasm_check as W\n` + code], { input: JSON.stringify(input), maxBuffer: 64 << 20 }).toString());
 
 /* the app's pieces in node: NoemaExpr, packcheck, a stub ACT that captures what 44_activity_wasm.js registers */
-require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));
-require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr');
 require(path.join(ROOT, 'engine', 'packcheck.js'));
 const REGD = { engines: {}, runtimes: {} };
 globalThis.ACT = { ITEMS: {}, registerEngine: d => { REGD.engines[d.id] = d; }, registerRuntime: d => { REGD.runtimes[d.id] = d; }, runtime: id => REGD.runtimes[id] || null };
@@ -114,7 +114,7 @@ function nodePart() {
   globalThis.ACT.ITEMS = ITEMS;
   ok(canon(E.check(S)) === '[]' && /refused/.test(E.check(oscSpec('bad-core'))[0] || ''), 'the engine check: the oscillator passes, the forbidden import is refused');
   const g = { performance, console: { log: () => { } } }; W._wasmWorker(g);
-  const prep = E.prepare(S, globalThis.NoemaExpr.compile), inst = g.noemaEngine.create(S, { seed: 7 });
+  const prep = E.prepare(S, NoemaExpr.compile), inst = g.noemaEngine.create(S, { seed: 7 });
   const env = { dt: 0.05, k: 4, c: 0.2, x0: 1 }, inp = prep(env);
   ok(canon(inp.$in) === canon([4, 0.2, 1, 0, 0.05]) && inp.$mod.nOut === 2 * N + 1 && inp.$mod.bytes.length === wasm('osc').length, 'prepare: the inputs in order, the layout (2n+1 values), the checked bytes');
   const r = inst.run(inp), ref = osc(4, 0.2, 1, 0, 0.05, N);
@@ -153,7 +153,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 ${hline}
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(path.join(ROOT, 'engine', 'packcheck.js'), 'utf8')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
+</script><script>${fs.readFileSync(path.join(ROOT, 'engine', 'engines.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${fs.readFileSync(path.join(ROOT, 'engine', 'packcheck.js'), 'utf8')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
 window.LOG = []; window.H = null;
 window.run = function (id, task) {
   var act = ACT.ITEMS[id], box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];

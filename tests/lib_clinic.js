@@ -5,8 +5,9 @@
 const path = require('path'), vm = require('vm');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-for (const f of ['35_simexpr.js', '46_lib_core.js', '48_lib_clinic.js', '48_lib_med.js']) require(path.join(SRC, f));
-const K = globalThis.NoemaLibClinic;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibClinic = ENGINES.mod('clinic@1');
+const K = NoemaLibClinic;
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
@@ -99,7 +100,7 @@ const s3 = K.engine.create(FX[3]).run({ pre: 0.3 }); ok(s3.ch === 1 && near(s3.t
 { const ctx = { self: {} }; ctx.self.self = ctx.self; vm.createContext(ctx);
   vm.runInContext('var self = this.self;' + K.engine.workerSource, ctx);
   const w = ctx.self.noemaEngine.create(FX[7]).run(good), mm = K.engine.create(FX[7]).run(good);
-  ok(!!ctx.self.NoemaLibMed && JSON.stringify(w) === JSON.stringify(mm), 'the Worker source (NoemaExpr + core + med@1 + clinic@1) in a fresh global gives the same outputs'); }
+  ok(!!(ctx.self.__noemaShared || {})['med/med.js'] && JSON.stringify(w) === JSON.stringify(mm), 'the Worker source (NoemaExpr + core + med@1 + clinic@1) in a fresh global gives the same outputs'); }
 { let t0 = Date.now(); for (let i = 0; i < 20; i++) K.engine.create(FX[0]).run({ pre: 0.1 + i / 100, dd: true }); const tA = (Date.now() - t0) / 20;
   t0 = Date.now(); K.engine.create(FX[7]).run(good); const tB = Date.now() - t0;
   const big = JSON.parse(JSON.stringify(FX[7])); big.model.vp.tEnd = 1440; t0 = Date.now(); K.engine.create(big).run(good); const tC = Date.now() - t0;

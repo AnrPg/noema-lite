@@ -7,7 +7,7 @@
        account keeps its requests on this device, localStorage noema1:<profile>:enginereq, and can download one as JSON);
      • the UI: engine/src/49_lib_view.js (#/engines) and the connector's noema_request_engine / noema_engine_requests /
        noema_engine_request_update.
-   A request is suggested against the catalogue first (NoemaEngineCatalog.suggest): what the library may already do is shown before
+   A request is suggested against the catalogue first (NoemaCore.engines.catalog.suggest): what the library may already do is shown before
    anything is sent, and stored with the request (suggested). */
 (function (root) {
   'use strict';
@@ -43,7 +43,7 @@
     row.subject = typeof o.subject === 'string' && SUBJ_RE.test(o.subject) ? o.subject : null;
     row.via = VIA.includes(o.via) ? o.via : 'app';
     row.locale = typeof o.locale === 'string' && /^[a-z]{2,3}(-[A-Za-z0-9]{2,4})?$/.test(o.locale) ? o.locale : null;
-    const cat = (opts && opts.catalog) || root.NoemaEngineCatalog;
+    const cat = (opts && opts.catalog) || root.NoemaCore?.engines?.catalog;
     row.suggested = cat && typeof cat.suggest === 'function' ? cat.suggest([row.title, row.field, row.what, row.learner, row.measure].filter(Boolean).join(' ')).map(s => s.id) : [];
     return { row, problems: P };
   }
@@ -64,7 +64,7 @@
       `- the library may already cover it: ${(r.suggested || []).length ? r.suggested.join(', ') + ' (check these first: extend an engine of the library before adding one)' : 'nothing matched'}`, ''];
     for (const [k, h] of [['what', 'What should be simulated'], ['learner', 'What the learner changes and sees'], ['measure', 'What is measured, graded or found'], ['sources', 'Sources it should follow'], ['examples', 'Exercises it should make possible']])
       if (r[k]) L.push(`## ${h}`, '', String(r[k]), '');
-    L.push('## How to build it', '', 'Follow docs/INTERACTIVE_LIBRARY.md §1 (AnrPg/noema-lite): first decide whether an engine of the library can be EXTENDED (additive, the same id) — a new engine only when the model is a new family. A new engine is `engine/src/48_lib_<name>.js` on NoemaLibCore with its Python twin `tools/lib_<name>.py`, its chapter `docs/library/<name>.md` (every model with its source), tests with published reference values and edge cases, fixtures for the JS ↔ Python parity, a reference activity, its words in every UI locale, and its entry in the catalogue. Then answer the request with noema_engine_request_update (status available, engine_id, fixed_in).');
+    L.push('## How to build it', '', 'Follow docs/INTERACTIVE_LIBRARY.md §1 (AnrPg/noema-lite): first decide whether an engine of the library can be EXTENDED (additive, the same id) — a new engine only when the model is a new family. A new engine is the module `src/engines/<name>/<name>.js` on the core (src/engines/kernel/core.js), a plugin of src/engines/plugins.ts, with its Python twin `tools/lib_<name>.py`, its chapter `docs/library/<name>.md` (every model with its source), tests with published reference values and edge cases, fixtures for the JS ↔ Python parity, a reference activity, its words in every UI locale, and its entry in the catalogue. Then answer the request with noema_engine_request_update (status available, engine_id, fixed_in).');
     return L.join('\n');
   }
   /* i18n-ignore-end */

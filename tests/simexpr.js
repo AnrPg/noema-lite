@@ -12,8 +12,9 @@ let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const quiet = (c, m) => { n++; if (!c) { fails++; if (fails < 60) console.log('✗ ' + m); } return c; };   // one of many: only failures are printed
 
-require(path.join(ROOT, 'engine', 'src', '35_simexpr.js'));
-const X = globalThis.NoemaExpr;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr');
+const X = NoemaExpr;
 const PY = path.join(ROOT, 'tools', 'simexpr.py');
 
 // ---- values across JSON: NaN, ±Infinity and -0 as strings
@@ -232,7 +233,7 @@ else {
   ok(worst <= 1, 'the fdlibm ports are within 1 ulp of this platform\'s Math (' + exact + '/' + total + ' identical, worst ' + worst.toFixed(2) + ' ulp)');
 }
 {
-  const js = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_simexpr.js'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+  const js = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'kernel', 'simexpr.js'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
   const pysrc = fs.readFileSync(PY, 'utf8');
   ok(!/\beval\s*\(|\bnew\s+Function\b|\bFunction\s*\(|\bsetTimeout\s*\(|\bimport\s*\(|\brequire\s*\(/.test(js), 'the JS twin has no eval, no new Function, no dynamic import');
   ok(!/\b(eval|exec)\s*\(|__import__|\bimportlib\b|\bbuiltins\b/.test(pysrc.replace(/'''[\s\S]*?'''|"""[\s\S]*?"""/g, '')), 'the Python twin has no eval / exec / __import__');
