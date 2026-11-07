@@ -1,5 +1,5 @@
 /* ⚙ Requests for new engines of interactive activities (engine/enginereq.js, engine/src/49_lib_view.js, docs/INTERACTIVE_LIBRARY.md §3)
-   against the Supabase emulator (rules of cloud/supabase.sql §16) and the connector (cloud/mcp/server.mjs: noema_request_engine,
+   against the Supabase emulator (rules of cloud/supabase.sql §16) and the connector (src/connector: noema_request_engine,
    noema_engine_requests, noema_engine_request_update).
    Without a browser: normalize (required fields, limits, accuracy, the catalogue's suggestions), cleanPatch, the brief, the local store.
    In the browser: the subject's ⋮ › Engines of activities opens #/engines (only engines this app has, grouped; nothing scrolls sideways
@@ -9,6 +9,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os'), vm = require('vm');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -113,9 +114,7 @@ async function unit() {
 
     console.log('— Claude through the connector');
     const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
-    const fn = path.join(os.tmpdir(), `noema-mcp-ereq-${process.pid}.mjs`);
-    fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = {};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/enginereq.js', 'engine/src/49_lib_catalog.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-    const { default: handler } = await import(fn);
+    const handler = await connectorHandler(ROOT, { config: CFG, docs: {} });
     const tok = async email => (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email, password: 'secret123' }) })).json()).access_token;
     const tool = async (t, name, args) => (await (await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + t }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: args } }) }))).json()).result;
     const AT = await tok('anr@example.com');
@@ -137,7 +136,7 @@ async function unit() {
     ok((await tool(AT, 'noema_engine_request_update', { id: srv.state.ereqs[1].id, engine_id: 'Chem!' })).isError, 'a wrong engine id is refused');
     r = await tool(AT, 'noema_engine_request_update', { id: srv.state.ereqs[1].id, status: 'planned', answer: 'Planned as chem@1.' });
     ok(/planned/.test(r.content[0].text) && srv.state.ereqs[1].status === 'planned' && srv.state.ereqs[1].what === WHAT, 'the admin answers it; what was asked never changes');
-    fs.unlinkSync(fn);
+    removeConnector(handler);
     ok(!E.length, 'no page errors' + (E.length ? ': ' + E.slice(0, 3).join(' | ') : ''));
   } catch (e) { console.error(e); fails++; }
   await browser.close(); srv.close();

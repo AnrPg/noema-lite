@@ -1,7 +1,7 @@
 /* noema-lite — finding and fetching pictures from the web (docs/VISUAL.md §6). One file, used everywhere:
      • the browser app (engine/claude.js: Claude's picture tools in "Create with Claude"),
      • the picture proxy /api/img + the image search /api/imgsearch (cloud/img/proxy.mjs),
-     • the Claude connector (cloud/mcp/server.mjs: noema_image_search, noema_image_fetch).
+     • the Claude connector (src/connector/tools/image_search.ts, image_fetch.ts).
    Pictures are for the learner's personal study; any licence is accepted and the source is always recorded.
 
    resolvePictureUrl(url)  Wikimedia file pages (commons / any wikipedia, any language, “#/media/File:…”, small

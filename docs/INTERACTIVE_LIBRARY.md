@@ -182,7 +182,7 @@ When neither the library nor the free way fits, anyone asks for a new engine fro
 | port | `store = {kind, submit(row), mine(), all(status), update(id, patch), isAdmin()}` | |
 | adapters | `cloudStore` (Supabase REST, table `noema_engine_requests`, `cloud/supabase.sql` §16) · `localStore` (a profile without a cloud account: `localStorage noema1:<profile>:enginereq`, at most 100, downloadable as JSON) | `store(ACCOUNT)` picks one |
 | UI | `engine/src/49_lib_view.js` + `49_lib_view.css`, the route `#/engines` (`#/engines/new` opens the form), the subject's ⋮ › *Engines of activities* | the catalogue (only the engines this app has), *Request a new engine*, *Your requests*; admins see every request and answer it in place |
-| connector | `cloud/mcp/server.mjs` | `noema_request_engine` (with `check_only` it only ranks the catalogue), `noema_engine_requests` (own; admins all, with a status filter; `id` → the brief), `noema_engine_request_update` (admins) |
+| connector | `src/connector/tools/request_engine.ts`, `engine_requests.ts`, `engine_request_update.ts` | `noema_request_engine` (with `check_only` it only ranks the catalogue), `noema_engine_requests` (own; admins all, with a status filter; `id` → the brief), `noema_engine_request_update` (admins) |
 
 The form asks for one thing first, **what should be simulated** (40–4000 characters) and a name (4–120); the field, what the learner
 changes and sees, what is measured, the accuracy, sources and example exercises are folded under *More details*. While the person

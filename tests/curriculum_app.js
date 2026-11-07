@@ -1,4 +1,4 @@
-/* 💬 Curricula with the learner's Claude app (their Claude plan) — engine/curjobs.js + the connector (cloud/mcp/server.mjs).
+/* 💬 Curricula with the learner's Claude app (their Claude plan) — engine/curjobs.js + the connector (src/connector).
    In the browser against the Supabase emulator, with the connector function run in-process as the learner's Claude:
      A. a new curriculum “with the Claude app”: nothing runs in the app; Claude asks for the tasks (agents 1 · 1b · 2, then
         chapter plans in batches), a wrong answer comes back with its problems, accepted answers reach the app by themselves
@@ -12,6 +12,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os'), crypto = require('crypto'), { execFileSync } = require('child_process');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const F = require('./fixtures/curriculum_agents');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -25,12 +26,10 @@ const JSZip = require(path.join(ROOT, 'engine/vendor/viewer/jszip.min.js'));
 (async () => {
   const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
-  // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
+  // the connector exactly as tools/build.py bundles it (tests/connector_fn.js), pointed at the emulator
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
   const DOCS = { workflow: 'SKILL', content: 'CONTENT', visual: 'VISUAL' };
-  const fn = path.join(os.tmpdir(), `noema-mcp-app-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-  const { default: handler } = await import(fn);
+  const handler = await connectorHandler(ROOT, { config: CFG, docs: DOCS });
   let T = null, rpc = 0;
   const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
   const kvOf = uid => srv.state.kv[uid] || {};
@@ -384,6 +383,6 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.cm-apppanel, .cm-appbar')].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), 'phone: the Claude-app panel fits');
   await ph.screenshot({ path: SHOTS + '/ca2_phone.png' });
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
-  await browser.close(); srv.close(); fs.rmSync(fn, { force: true });
+  await browser.close(); srv.close(); removeConnector(handler);
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

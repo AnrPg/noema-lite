@@ -1,5 +1,5 @@
 /* noema-lite — curriculum work done OUTSIDE this app, by the learner's own Claude with their Claude plan (docs/CURRICULUM.md §7):
-     • through the noema-lite connector in the Claude app / website (cloud/mcp/server.mjs): Claude asks for the next task,
+     • through the noema-lite connector in the Claude app / website (src/connector): Claude asks for the next task,
        answers it, and the answer reaches the app by itself;
      • by hand, without the connector: copy a task into any Claude chat, paste the answer back (map, plans), or give Claude
        a step's bundle and import the .noema.zip it makes (steps).

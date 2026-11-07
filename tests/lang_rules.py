@@ -20,6 +20,6 @@ for p in ('CLAUDE.md', 'AGENTS.md', 'README.md', 'skill/noema-pack-builder/SKILL
     ok('LANGUAGE_RULES.md' in rd(p), f'{p} points to docs/LANGUAGE_RULES.md')
 b = rd('tools/build.py')
 ok("'noema-pack-builder/references/LANGUAGE_RULES.md'" in b and "docs['languages']" in b, 'the skill zip and the connector carry the rules')
-ok("'languages'" in rd('cloud/mcp/server.mjs'), 'the connector serves them (noema_authoring_guide part "languages")')
+ok("part === 'languages'" in rd('src/connector/tools/authoring_guide.ts'), 'the connector serves them (noema_authoring_guide part "languages")')
 ok("'references/LANGUAGE_RULES.md'" in b and 'def build_lang_skill' in b, 'the skill noema-language-builder carries them (references/LANGUAGE_RULES.md, docs/LANGUAGES.md §10.2)')
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

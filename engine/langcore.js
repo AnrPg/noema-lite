@@ -3809,7 +3809,7 @@
   API.GEN = GEN;
   Object.assign(API, { typedAnswer, sameWords, checkText, translateItems, rewriteItems, composeTask, composeCheck, readerTexts, readerQuestions, numberWords, numberWord, numberItems, countingItems, heAnd, digitsIn, clockOf, dateOf, clockItems, dateItems, registerItems, dialogueItems, turnsOf, aiTask, readerTask, readerProblems, tutorContext, tutorTask, TUTOR_INTENTS, TUTOR_RULE, MONTHS, WEEKDAYS, frameFamily });
   /* ---------- P8 — Through Claude (course creation and generation): account courses, task queue, checks and merges (§7.4, §10.1) ---------- */
-  /* The same code runs in the app (engine/lang/95_claude.js) and in the connector (cloud/mcp/server.mjs, bundled by tools/build.py):
+  /* The same code runs in the app (engine/lang/95_claude.js) and in the connector (src/connector, bundled by tools/connector_bundle.mjs):
      a task, the check of its answer and the way the answer changes the course are identical everywhere. Pure: no DOM, no storage. */
   /* i18n-ignore-start — P8 speaks to Claude and to course authors (tasks, checks, the guide): English. The learner-facing words of
      this part (a new course's errors, the log lines) use lcU and the catalog. */

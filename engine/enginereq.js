@@ -1,6 +1,6 @@
 /* noema-lite — NoemaEngineRequests: asking for a NEW engine of interactive activities (docs/INTERACTIVE_LIBRARY.md §3).
    The hexagon of this feature:
-     • the domain (no DOM, no network; also run by the connector, cloud/mcp/server.mjs): FIELDS and their limits, normalize(input) →
+     • the domain (no DOM, no network; also run by the connector, src/connector): FIELDS and their limits, normalize(input) →
        {row, problems}, the statuses and their order, brief(row) — the markdown a developer (or Claude) builds the engine from;
      • the port: store = { submit(row), mine(), all(status), update(id, patch), isAdmin() };
      • the adapters: cloud (Supabase REST, table noema_engine_requests, cloud/supabase.sql §16) and local (a profile without a cloud

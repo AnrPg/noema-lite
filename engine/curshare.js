@@ -19,7 +19,7 @@
              c.shared = { id, role: 'owner'|'member', owner, ownerName, public, version, at, hash, files }
              c.remote = { <step>: { status: 'ready'|'preparing', author, by, mine, version, at, until, path, meta } }
 
-   The core (no browser needed) is bundled into the Claude connector (cloud/mcp/server.mjs) too, so a step prepared in
+   The core (no browser needed) is bundled into the Claude connector (src/connector) too, so a step prepared in
    someone's Claude app is reserved and published by exactly the same rules. */
 (function (root) {
   'use strict';

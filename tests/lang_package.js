@@ -4,7 +4,7 @@
         checkLangPackage refuses a wrong form, a missing facade, a new node, a language the course has, a missing profile;
         langApplyPackage adds the language (lanes, phenomena, the profile, seeAlso) without changing the course it was given;
         the plan of batches, the guide text, mkbrief.py --sandbox, the skill zip
-     B. the connector (cloud/mcp/server.mjs, in-process): the guide, start (signed URL + curl) / finish (checked; the record
+     B. the connector (src/connector, in-process): the guide, start (signed URL + curl) / finish (checked; the record
         a:langpack:<course>:<code>; every problem listed when refused) for a library course and for an account course
      C. the app (the frame) against the Supabase emulator: the added language after a reload (a row on the course home,
         ⫴ lanes, the Languages tab), on a second device (phone 390 px), ⋮ › German › Remove this language (record + file
@@ -123,6 +123,7 @@ const readDir = root => N.readCourse(rel => { const p = path.join(root, rel); re
   /* ======================= B + C. the connector and the app ======================= */
   const { chromium } = require(process.env.PW || 'playwright');
   const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
   const TF = path.join(ROOT, 'dist/site/testfiles/lang-mini'); fs.mkdirSync(TF, { recursive: true });
   fs.writeFileSync(path.join(TF, 'course.pack.js'), `(window.NOEMA_LANGPACKS = window.NOEMA_LANGPACKS || {})["lang-mini"] = ${JSON.stringify(base).replace(/<\//g, '<\\/')};\n`);
   const libMeta = { id: 'lang-mini', title: base.course.title, emoji: '🌍', languages: base.course.languages, explainLang: 'en', path: 'testfiles/lang-mini/course.pack.js', words: {} };
@@ -131,9 +132,7 @@ const readDir = root => N.readCourse(rel => { const p = path.join(root, rel); re
   const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', onboarding: false, autoBackupMinutes: 0 };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [], languages: [{ id: 'lang-mini', title: libMeta.title, languages: libMeta.languages, path: libMeta.path }] };
-  const fn = path.join(os.tmpdir(), `noema-mcp-lp-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify({ workflow: 'SKILL', content: 'C', visual: 'V', languages: 'RULES' })};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-  const { default: handler } = await import(fn);
+  const handler = await connectorHandler(ROOT, { config: CFG, docs: { workflow: 'SKILL', content: 'C', visual: 'V', languages: 'RULES' } });
   let T = null, rpc = 0;
   const call = async (method, params) => (await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method, params }) }))).json();
   const tool = async (name, args = {}) => { const j = await call('tools/call', { name, arguments: args }); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
@@ -236,6 +235,6 @@ const readDir = root => N.readCourse(rel => { const p = path.join(root, rel); re
     // device 1 after a reload: gone there too
     ok(await open(D1.p) && (await rows(D1.p)).join() === 'ar,he,zh', 'device 1 after a reload: German is gone there too');
     ok(!D1.E.length && !D2.E.length, 'no page errors ' + JSON.stringify([...D1.E, ...D2.E].slice(0, 3)));
-  } finally { await browser.close(); srv.close(); fs.unlinkSync(fn); fs.rmSync(TF, { recursive: true, force: true }); fs.rmSync(W, { recursive: true, force: true }); }
+  } finally { await browser.close(); srv.close(); removeConnector(handler); fs.rmSync(TF, { recursive: true, force: true }); fs.rmSync(W, { recursive: true, force: true }); }
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

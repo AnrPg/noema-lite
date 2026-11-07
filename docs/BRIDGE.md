@@ -143,7 +143,7 @@ A translation's bridge is made from **the translation's words** (its own entries
 | tool | `bridge.py … SUBJ` | `bridge.py … SUBJ --from <loc>` (the translation's chapters: `translations/<loc>/` of a subject folder, or `<id>.tr.<loc>.json` beside a pack `.json`, or `--translation FILE`) |
 | pair key | `<native>` (as before) | `<loc>.<native>` (`engine/bridge.js` `pairKey`, the connector's `brKey`) |
 | account | `bridges/<pack>.<native>.json` | `bridges/<pack>.<loc>.<native>.json` |
-| index `a:bridges[pack]` | `<native>: summary` | `<loc>.<native>: { …summary, source: "<loc>" }` |
+| index (a row of `noema_bridges` per pack × pair; cached in `a:bridges[pack]`) | `<native>: summary` | `<loc>.<native>: { …summary, source: "<loc>" }` |
 | library | `bridge.<native>.js`, `NOEMA_BRIDGES["<pack>\|<native>"]` | `bridge.<loc>.<native>.js`, `NOEMA_BRIDGES["<pack>\|<loc>.<native>"]`, `bridgeLocales["<loc>.<native>"]` |
 | connector | `noema_get_pack_url(subject_id)`, `noema_save_bridge(subject_id, native)` | `noema_get_pack_url(subject_id, locale: "<loc>")` (the translation file, beside the pack), `noema_save_bridge(subject_id, native, source: "<loc>")` |
 
@@ -157,7 +157,7 @@ translation's.
 | bridge | stored | how it gets there |
 |---|---|---|
 | library pack | `library/subjects/<id>/bridges/` → `bridge.<native>.js` | a PR; `tools/build.py` |
-| the learner's own | the device (IndexedDB `noema-bridges`) + the account (`noema-private/<uid>/bridges/<pack>.<pair>.json`, §2.4), index `a:bridges` (synced) | 📥 Import a `noema-bridge` file, or Claude with `noema_save_bridge` |
+| the learner's own | the device (IndexedDB `noema-bridges`) + the account (`noema-private/<uid>/bridges/<pack>.<pair>.json`, §2.4), index: one row per pack × pair in `noema_bridges` (cloud/supabase.sql §17), cached on the device in `a:bridges` | 📥 Import a `noema-bridge` file, or Claude with `noema_save_bridge` |
 
 The account's own bridge wins over the library's for the same language. Per learner (synced like the rest of `a:`):
 `a:settings.bridge` {on, level, cefr, asked}, `a:settings.native`, `a:bridgeWords:<source language>` {word: {known,

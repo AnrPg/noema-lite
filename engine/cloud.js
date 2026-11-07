@@ -5,6 +5,7 @@
    Data model: noema_kv mirrors the local namespaced key/value store of a cloud account
    (key = suffix after "noema1:u_<uid>:"). Writes are compare-and-swap on each row's updated_at, copies changed on two
    devices are combined, and one device at a time is "in use" (see "key/value sync" and "one device at a time" below).
+   The indexes of the 👁 source files and the 文A bridges are tables of one row per entry instead ("entry tables" below).
    ===================================================================================== */
 (function () {
   'use strict';
@@ -14,7 +15,7 @@
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
   const emit = () => st.listeners.forEach(f => { try { f(status()); } catch (e) { } });
-  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, errorInfo: st.errorInfo || null, pending: (session() ? Object.keys(jget('noema1:' + (st.autoAcc || 'u_' + session().user.id) + ':meta:unsynced', {})).length : 0) + st.convoPending.size });
+  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, errorInfo: st.errorInfo || null, pending: (session() ? ['unsynced', 'rowbox'].reduce((n, m) => n + Object.keys(jget('noema1:' + (st.autoAcc || 'u_' + session().user.id) + ':meta:' + m, {})).length, 0) : 0) + st.convoPending.size });
   function session() { return jget(SKEY, null); }
   function setSession(s) { if (s) { s.expires_at = s.expires_at || Math.floor(Date.now() / 1000) + (s.expires_in || 3600); jset(SKEY, { access_token: s.access_token, refresh_token: s.refresh_token, expires_at: s.expires_at, user: { id: s.user.id, email: s.user.email, user_metadata: s.user.user_metadata || {} } }); } else localStorage.removeItem(SKEY); }
   function errMsg(j, r) { return (j && (j.msg || j.message || j.error_description || j.error)) || `HTTP ${r.status}`; }   // i18n-ignore (the server's own English; codeOf names it)
@@ -246,6 +247,9 @@
      shows "in use on …" (engine/loader.js) and nothing is saved there until the learner chooses "Use here". */
   const LEASE = 'a:inuse', FRESH = 2 * 60e3, BEAT = 30e3;
   const remoteOnly = k => inboxKey(k) || k === LEASE;
+  /** the local caches of the entry tables (below): kept from the tables' rows, never mirrored into noema_kv */
+  const tabled = k => k.startsWith('a:srcfiles:') || k === 'a:bridges';
+  const kvSkip = k => remoteOnly(k) || tabled(k);
   const L = { state: 'unknown', holder: null, acc: null, lastInput: Date.now(), lastBeat: 0, at: null, busy: null };
   /** This device → { name: English words (older apps show them), os: a code, br: the browser's name } — the "in use" row carries all
       three; the other device shows os + br in its own language (engine/loader.js, loader.inuse.device), else the name. */
@@ -321,6 +325,65 @@
     } catch (e) { console.warn('[cloud] the UI language was not saved in the account', e.message); return false; }   // i18n-ignore
   }
 
+  /* ---------- entry tables (cloud/supabase.sql §17): one row per entry ----------
+     The files of a subject's sources (noema_source_files: subject × source → its meta, engine/srcfiles.js) and the 文A
+     bridges (noema_bridges: pack × pair → its summary, engine/bridge.js). Each entry is its own row, so this device, the
+     others and the Claude connector writing at the same time never drop each other's entry. This device keeps them in
+     local caches (a:srcfiles:<subject>, a:bridges — the modules read those), which are not mirrored into noema_kv: a change
+     goes into the outbox meta:rowbox and is sent with the next push; a pull rebuilds the caches from the rows plus what the
+     outbox still holds. The first pull of an account sends up every entry this device has and the tables lack. */
+  const ROWS = {
+    source_files: { path: 'noema_source_files', a: 'subject_id', b: 'source_id', key: a => 'a:srcfiles:' + a, mine: k => k.startsWith('a:srcfiles:'),
+      set: (v, a, b, m) => { v[b] = m; }, del: (v, a, b) => { delete v[b]; }, entries: (k, v) => Object.entries(v || {}).map(([b, m]) => [k.slice('a:srcfiles:'.length), b, m]) },
+    bridges: { path: 'noema_bridges', a: 'pack_id', b: 'pair', key: () => 'a:bridges', mine: k => k === 'a:bridges',
+      set: (v, a, b, m) => { (v[a] = v[a] || {})[b] = m; }, del: (v, a, b) => { if (v[a]) { delete v[a][b]; if (!Object.keys(v[a]).length) delete v[a]; } },
+      entries: (k, v) => Object.entries(v || {}).flatMap(([a, o]) => Object.entries(o || {}).map(([b, m]) => [a, b, m])) },
+  };
+  const boxId = (t, a, b) => JSON.stringify([t, a, b]);
+  /** Queue a change of one entry for the next push (put: its meta; del). */
+  function rowOp(acc, t, a, b, op) {
+    if (!ROWS[t]) throw new Error('no entry table ' + t);   // i18n-ignore (a programming error)
+    metaSet(acc, 'rowbox', m => { m[boxId(t, a, b)] = { t, a, b, ...op, mark: Date.now() * 1000 + (++st.seq % 1000) }; }); emit();
+    if (st.autoAcc === acc && st.schedule) st.schedule();
+  }
+  async function pushRows(acc, keepalive) {
+    const box = meta(acc, 'rowbox'); let n = 0;
+    for (const [id, op] of Object.entries(box)) {
+      const d = ROWS[op.t];
+      if (d && op.op === 'put') await call(`/rest/v1/${d.path}?on_conflict=user_id,${d.a},${d.b}`, { method: 'POST', body: [{ user_id: uid(), [d.a]: op.a, [d.b]: op.b, meta: op.meta }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive });
+      else if (d && op.op === 'del') await call(`/rest/v1/${d.path}?${d.a}=eq.${enc(op.a)}&${d.b}=eq.${enc(op.b)}`, { method: 'DELETE', keepalive });
+      metaSet(acc, 'rowbox', m => { if (m[id] && m[id].mark === op.mark) delete m[id]; }); n++;   // only if not changed again meanwhile
+    }
+    if (n) emit();
+    return n;
+  }
+  /** The tables → this device's caches. Returns the full keys that changed here. */
+  async function pullRows(acc) {
+    const pre = 'noema1:' + acc + ':', changed = [], first = !meta(acc, 'rowsync').at;
+    const localKeys = () => { const out = []; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(pre) && tabled(k.slice(pre.length))) out.push(k.slice(pre.length)); } return out; };
+    for (const [t, d] of Object.entries(ROWS)) {
+      const rows = (await call(`/rest/v1/${d.path}?select=${d.a},${d.b},meta&order=${d.a},${d.b}`)) || [];
+      const have = {}, there = new Set();
+      for (const r of rows) { const k = d.key(r[d.a]); d.set(have[k] = have[k] || {}, r[d.a], r[d.b], r.meta); there.add(boxId(t, r[d.a], r[d.b])); }
+      const mine = localKeys().filter(d.mine);
+      if (first) for (const k of mine) for (const [a, b, m] of d.entries(k, jget(pre + k, {}))) {   // never lose an entry made before the tables
+        if (!there.has(boxId(t, a, b)) && !(boxId(t, a, b) in meta(acc, 'rowbox')) && isObj(m)) rowOp(acc, t, a, b, { op: 'put', meta: m });
+      }
+      for (const op of Object.values(meta(acc, 'rowbox'))) if (op.t === t) {   // what this device changed and has not sent yet
+        const k = d.key(op.a); have[k] = have[k] || {};
+        if (op.op === 'put') d.set(have[k], op.a, op.b, op.meta); else d.del(have[k], op.a, op.b);
+      }
+      for (const k of new Set([...Object.keys(have), ...mine])) {
+        const v = have[k] && Object.keys(have[k]).length ? JSON.stringify(have[k]) : null, cur = localStorage.getItem(pre + k);
+        if (v === cur) continue;
+        if (v == null) localStorage.removeItem(pre + k); else if (!put(pre + k, v)) continue;
+        changed.push(pre + k);
+      }
+    }
+    if (first) metaSave(acc, 'rowsync', { at: new Date().toISOString() });
+    return changed;
+  }
+
   const NoemaCloud = window.NoemaCloud = {
     session, status, onStatus(f) { st.listeners.push(f); },
     /** A raw Supabase call as the signed-in user (row-level security applies) — e.g. engine/curshare.js. */
@@ -361,13 +424,15 @@
         // where nothing changed no longer downloads every curriculum and subject state again (megabytes each time)
         const heads = await call('/rest/v1/noema_kv?select=key,updated_at&order=key');
         const pre = 'noema1:' + acc + ':', base = meta(acc, 'base'), dirty = meta(acc, 'unsynced'), seen = new Set(), keys = [], conflicts = [];
-        const want = (heads || []).filter(r => !remoteOnly(r.key) && base[r.key] !== r.updated_at).map(r => r.key), got = new Map();
+        for (const k of Object.keys(base)) if (tabled(k)) delete base[k];   // entry tables: their rows are pulled below
+        for (const k of Object.keys(dirty)) if (tabled(k)) clean(acc, k);
+        const want = (heads || []).filter(r => !kvSkip(r.key) && base[r.key] !== r.updated_at).map(r => r.key), got = new Map();
         for (let i = 0; i < want.length; i += 40) {   // short enough addresses
           const list = want.slice(i, i + 40).map(k => '"' + k.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"').join(',');
           for (const r of (await call('/rest/v1/noema_kv?select=key,value,updated_at&key=in.' + enc('(' + list + ')'))) || []) got.set(r.key, r);
         }
         for (const h of heads || []) {
-          if (remoteOnly(h.key)) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js), its runs' claims, other apps' results (engine/src/15_inbox.js), the "in use" row: never stored here
+          if (kvSkip(h.key)) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js), its runs' claims, other apps' results (engine/src/15_inbox.js), the "in use" row: never stored here
           seen.add(h.key);
           if (base[h.key] === h.updated_at) continue;   // the cloud still has the version this copy comes from
           const r = got.get(h.key); if (!r) continue;   // deleted between the two requests: the next pull sees it
@@ -386,8 +451,9 @@
         }
         metaSave(acc, 'base', base);
         // data that never reached the cloud (made offline before this version, or the row was refused) → upload
-        Object.keys(window.Noema?.kv?.accountData?.(acc) || {}).forEach(k => { if (!seen.has(k) && !(k in base) && !remoteOnly(k)) markDirty(acc, k); });
+        Object.keys(window.Noema?.kv?.accountData?.(acc) || {}).forEach(k => { if (!seen.has(k) && !(k in base) && !kvSkip(k)) markDirty(acc, k); });
         for (const r of conflicts) { const k = await resolve(acc, r.key, r); if (k) keys.push(k); }
+        keys.push(...await pullRows(acc));
         const full = st.full ? FULL() : null; st.lastSync = Date.now(); st.error = full ? errText(full) : null; st.errorInfo = errInfo(full); st.full = false;
         if (keys.length) notify(acc, keys);
         try { dispatchEvent(new CustomEvent('noema:pulled', { detail: { acc, changed: keys.length, keys } })); } catch (e) { }   // e.g. the open subject reads its results inbox
@@ -395,18 +461,19 @@
       } catch (e) { st.error = errText(e); st.errorInfo = errInfo(e); throw e; } finally { st.syncing = false; emit(); }
     },
     async push(acc = accId(), { keepalive = false } = {}) {
-      if (!session() || !Object.keys(meta(acc, 'unsynced')).length) return 0;
+      if (!session() || !(Object.keys(meta(acc, 'unsynced')).length + Object.keys(meta(acc, 'rowbox')).length)) return 0;
       if (keepalive) return this._push(acc, true);   // the page is going away: send now, don't wait for a pull in progress
       return serial(() => this._push(acc, false));
     },
     async _push(acc, keepalive) {
-      const dirty = meta(acc, 'unsynced'), keys = Object.keys(dirty); if (!keys.length || !session()) return 0;
+      const dirty = meta(acc, 'unsynced'), keys = Object.keys(dirty); if (!(keys.length + Object.keys(meta(acc, 'rowbox')).length) || !session()) return 0;
       st.syncing = true; emit();
       try {
         // the page is being hidden: every request leaves at once (keepalive), a slower loop could be cut off
         if (keepalive) await Promise.all(keys.map(k => pushKey(acc, k, dirty[k], true)));
         else for (const k of keys) await pushKey(acc, k, dirty[k], false);
-        st.lastSync = Date.now(); st.error = null; st.errorInfo = null; return keys.length;
+        const rows = await pushRows(acc, keepalive);
+        st.lastSync = Date.now(); st.error = null; st.errorInfo = null; return keys.length + rows;
       } catch (e) { st.error = errText(e); st.errorInfo = errInfo(e); throw e; } finally { st.syncing = false; emit(); }
     },
     /** Combine two copies of a key (this device's and the cloud's) → { value, lost } — `lost`: something of `local` may be dropped. */
@@ -414,6 +481,11 @@
     /** Rows whose key starts with `prefix` (e.g. the Claude app's answers, a:curin:) — read directly, not mirrored locally. */
     async kvRows(prefix) { return (await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.' + enc(prefix + '*'))) || []; },
     async kvDelete(key) { await call('/rest/v1/noema_kv?key=eq.' + enc(key), { method: 'DELETE' }); },
+    /** Entry tables (above): engine/srcfiles.js and engine/bridge.js queue their changes here (the signed-in account only). */
+    rows: {
+      put(acc, table, a, b, m) { rowOp(acc, table, a, b, { op: 'put', meta: m }); },
+      del(acc, table, a, b) { rowOp(acc, table, a, b, { op: 'del' }); },
+    },
     /** One device at a time (see "in use" above): state 'mine' | 'other' | 'unknown', holder = { name, os, br, sameDevice, at } when 'other'. */
     lease: {
       get state() { return L.state; }, get holder() { return L.holder; }, device: ME,
@@ -428,7 +500,8 @@
     startAutoSync(acc) {
       if (!window.Noema || st.autoAcc === acc) return; st.autoAcc = acc; L.acc = acc;   // once per page
       // debounce 3 s, but never longer than 10 s after the first unsynced change (steady writes must not starve the sync)
-      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; const k = key.slice(('noema1:' + acc + ':').length); if (remoteOnly(k)) return; markDirty(acc, k); st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(() => { }); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); });
+      st.schedule = () => { st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(() => { }); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); };
+      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; const k = key.slice(('noema1:' + acc + ':').length); if (kvSkip(k)) return; markDirty(acc, k); st.schedule(); });
       const sync = () => this.lease.check().finally(() => this.pull(acc).then(() => this.push(acc)).catch(() => { }));
       // leaving: save what the open page holds first (engine/src/10_core.js flushSave), then send it, then let the "in use" row go
       const leave = () => { try { window.flushSave?.(); } catch (e) { } this.push(acc, { keepalive: true }).catch(() => { }); leaseRelease(); };

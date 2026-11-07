@@ -12,6 +12,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os'), http = require('http');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const F = require('./fixtures/curriculum_agents');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
@@ -67,10 +68,8 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = claude(); await new Promise(r => api.listen(APORT, r));
-  // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
-  const fn = path.join(os.tmpdir(), `noema-mcp-shelf-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [{ id: 'databricks', title: 'Databricks' }, { id: 'lib-free', title: 'A library subject on no step' }] })};\nconst DOCS = ${JSON.stringify({ workflow: 'S', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-  const { default: handler } = await import(fn);
+  // the connector exactly as tools/build.py bundles it (tests/connector_fn.js), pointed at the emulator
+  const handler = await connectorHandler(ROOT, { config: { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [{ id: 'databricks', title: 'Databricks' }, { id: 'lib-free', title: 'A library subject on no step' }] }, docs: { workflow: 'S', content: 'C', visual: 'V' } });
   let T = null, rpc = 0;
   const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
 
@@ -238,6 +237,6 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'phone: the attach dialog fits');
   await ph.screenshot({ path: SHOTS + '/sh5_phone.png' });
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
-  await browser.close(); srv.close(); api.close(); fs.rmSync(fn, { force: true });
+  await browser.close(); srv.close(); api.close(); removeConnector(handler);
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

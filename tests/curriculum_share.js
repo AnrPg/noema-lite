@@ -1,5 +1,5 @@
 /* 👥 Shared curricula (engine/curshare.js, docs/CURRICULUM.md §8) — three people against the Supabase emulator, plus the
-   connector (cloud/mcp/server.mjs) run in-process as one of them:
+   connector (src/connector) run in-process as one of them:
      A. Anna shares her curriculum with people (the step she prepared goes with it, and her material file) and invites Bob
      B. Bob gets the invitation (🔔 banner), joins, sees Anna's step ⚡👤 and studies it — his own progress
      C. Bob's Claude app prepares an empty step: reserved for him (nobody else may take it), saved → shared with everybody
@@ -13,6 +13,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os');
 const { start } = require('./mock_supabase');
+const { connectorHandler, removeConnector } = require('./connector_fn');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -36,11 +37,9 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false, storageChunkBytes: 200000 };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg, maxObject: 300000 });
   const S = srv.state, stepOf = (cid, nid) => S.steps.find(r => r.curriculum === cid && r.node_id === nid);
-  // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
+  // the connector exactly as tools/build.py bundles it (tests/connector_fn.js), pointed at the emulator
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
-  const fn = path.join(os.tmpdir(), `noema-mcp-share-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify({ workflow: 'W', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
-  const { default: handler } = await import(fn);
+  const handler = await connectorHandler(ROOT, { config: CFG, docs: { workflow: 'W', content: 'C', visual: 'V' } });
   const tokenOf = async email => (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email, password: 'secret123' }) })).json()).access_token;
   let rpc = 0;
   const tool = async (T, name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })).then(r => r.json()); return { text: r.result?.content?.map(c => c.text).join('\n') || JSON.stringify(r.error), error: !!r.result?.isError }; };
@@ -313,6 +312,6 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(cc && cc.shared?.ended && cc.nodes.energy.pack?.status === 'ready', 'Carl keeps his copy of the map and his steps (“no longer shared with you”)');
   ok((await cur(A, cid)).shared == null && (await cur(A, cid)).nodes.atoms.pack?.status === 'ready', 'Anna’s curriculum is hers as before');
   for (const [n, x] of [['Anna', A], ['Bob', B], ['Carl', Cc], ['Dora', P]]) ok(!x.E.length, `${n}: no page errors ${JSON.stringify(x.E.slice(0, 2))}`);
-  await browser.close(); srv.close(); fs.unlinkSync(fn);
+  await browser.close(); srv.close(); removeConnector(handler);
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });
