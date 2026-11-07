@@ -83,7 +83,8 @@ const THEMES = {
 };
 const has = f => fs.existsSync(path.join(srcDir, f));
 const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
-const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath;
+const ctPath = pcPath && path.join(path.dirname(pcPath), 'contracts.js');   // the data contracts packcheck.js checks shapes with (NoemaCore.contracts)
+const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath && fs.existsSync(ctPath);
 const KERNEL = has('46_lib_simkit.js');   // the simulation kernel (NoemaSimKit): before the plugins and the library, which use it
 const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
 const P6 = ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js', '43_engines_p6.js'].filter(has);   // thermal@1, pid@1, rf@1, twin@1 (P6)
@@ -122,7 +123,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script>${KERNEL ? `<script>${rs('46_lib_simkit.js')}</script>` : ''}<script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${LIBV.map(f => `<script>${inl(fs.readFileSync(f, 'utf8'))}</script>`).join('')}${[...P6, ...LIB.filter(f => f !== '46_lib_simkit.js')].map(f => `<script>${rs(f)}</script>`).join('')}${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script>${KERNEL ? `<script>${rs('46_lib_simkit.js')}</script>` : ''}<script>${inl(fs.readFileSync(ctPath, 'utf8'))}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${LIBV.map(f => `<script>${inl(fs.readFileSync(f, 'utf8'))}</script>`).join('')}${[...P6, ...LIB.filter(f => f !== '46_lib_simkit.js')].map(f => `<script>${rs(f)}</script>`).join('')}${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 window.run = function (act, init, modules) {

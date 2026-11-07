@@ -36,7 +36,7 @@ ok(not v.errors, 'the mini course is valid' + (f': {v.errors[:5]}' if v.errors e
 try:
     import jsonschema, glob
     if not hasattr(jsonschema, 'Draft202012Validator'): raise ImportError('jsonschema too old for draft 2020-12')
-    sch = json.load(open(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json'), encoding='utf-8'))
+    sch = json.load(open(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.lang.v1.schema.json'), encoding='utf-8'))
     kinds = [('course.json', 'course'), ('core/fields/*.json', 'field'), ('core/nodes.json', 'nodes'), ('core/functions/*.json', 'function'), ('core/frames.json', 'frames'), ('core/typology.json', 'typology'),
              ('lang/*/language.json', 'language'), ('lang/*/lexicon/*.json', 'lexicon'), ('lang/*/grammar/*.json', 'grammar'), ('lang/*/bank/*.json', 'bank')]
     probs, n = [], 0
@@ -221,7 +221,7 @@ ok(not [e for e in errs if 'lang/ar/grammar/fn.definite.json' in e and 'contrast
 expect('a note for an unknown branch', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'branch:Klingonic', 'rel': 'new', 'text': '…'})), 'unknown branch “Klingonic”')
 expect('a word profile note without a valid `for`', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0]['profile'].update(notes=[{'for': 'xx', 'rel': 'trap', 'text': '…'}])), '“xx” has no profile')
 expect('a comparison in a word profile (--d19-strict: the lint of every learner text)', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0]['profile'].update(funFacts=['Cognate with English carrot.'])), 'x:de:Karotte/profile/funFacts/0: names a language outside the course (English)', d19_strict=True)
-expect('an unregistered text field (--d19-strict)', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(newText='hello')), 'not in tools/schemas/noema.langfacade.fields.json', d19_strict=True)
+expect('an unregistered text field (--d19-strict)', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(newText='hello')), 'not in src/contracts/schemas/noema.langfacade.fields.json', d19_strict=True)
 expect('a comparison in the general text', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(summary=o['summary'] + ' As in English.')), 'names other languages in its general text (English)')
 expect('a note for a language without a profile', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'xx', 'rel': 'new', 'text': '…'})), '“xx” has no profile')
 expect('a note with an unknown relation', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'][0].update(rel='odd')), 'rel must be one of')

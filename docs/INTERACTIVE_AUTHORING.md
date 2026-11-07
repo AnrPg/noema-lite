@@ -157,7 +157,7 @@ licence in `activity.json`.
 
 For a sim-spec@1 activity there is also a page in the app: open any subject, then **⋮ › Create an activity** (a line icon, next
 to Edit; the route is `#/author`, the crumbs end with “Activity author”). It is a form generated from the same JSON Schemas the
-validators enforce (`tools/schemas/noema.sim-spec.v1.schema.json`, `noema.activities.v1.schema.json`; ADR 001 D12), with the
+validators enforce (`src/contracts/schemas/noema.sim-spec.v1.schema.json`, `noema.activities.v1.schema.json`; ADR 001 D12), with the
 activity running beside it in the app's own `sim-spec@1` runtime — the preview is exactly what a learner will see.
 
 * **Kind**: a simulation with formulas (`formula@1`) or a circuit simulation (`circuit-mna@1`, with its netlist, bindings and an

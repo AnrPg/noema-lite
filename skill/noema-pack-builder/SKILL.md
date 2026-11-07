@@ -371,7 +371,7 @@ brackets too), its name and tagline, and in a Roadmap everything its step's pane
   SAME ids, sections, blocks, exercises, cards, playbooks, pitfalls and answers — only the words change. Translate
   naturally for learners of that language, keep `$…$` math and code unchanged. A chapter you do not translate stays in
   the original language. Updating a translated pack: add the new items to every translation too.
-- `make_pack.py` validates both (same ids/structure/answers/code) and builds the pack with `"v": 2`; each translation is
+- `make_pack.py` validates both (same ids/structure/answers/code) and builds the pack with `"v": 3`; each translation is
   its own file, `build/<id>.tr.<locale>.json` (and `translations/<locale>.json` in the package). `noema_finish_upload`
   asks for each one with ready `curl` commands; `noema_save_translation` adds one later. `unpack.py` gives the
   translations back in `translations/`. Contract: `references/CONTENT_SPEC.md` → "Packs in several languages".

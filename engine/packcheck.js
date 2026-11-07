@@ -14,6 +14,15 @@
   const strs = (a, min = 1) => Array.isArray(a) && a.length >= min && a.every(isStr);
   const intIn = (v, n) => Number.isInteger(v) && v >= 0 && v < n;
 
+  /* The SHAPE of every format (which fields, of which type, which values) is its data contract: the JSON Schemas of
+     src/contracts/schemas, compiled into engine/contracts.js (NoemaCore.contracts, loaded before this file; in Node it is
+     required from beside this file). This file keeps what a schema cannot say: an answer that must be one of its
+     options, ids that must exist and be unique, the pack's own language, a bridge of the right pack … */
+  if (!(root.NoemaCore && root.NoemaCore.contracts) && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, 'contracts.js')); } catch (e) { } }
+  const contracts = () => { const c = root.NoemaCore && root.NoemaCore.contracts; if (!c) throw new Error('engine/contracts.js is not loaded (npm run contracts builds it)'); return c; };
+  /** The contract's issues as messages: "<where>: <field>: <what>" (where = '' → "<field>: <what>"). */
+  const shapeOf = (id, x, where) => contracts().check(id, x).issues.map(i => (where ? `${where}: ` : '') + i.text);
+
   /** The quantity rules every new pack meets, per chapter — the SAME list as tools/pack_rules.json (validate.py / make_pack.py read
       that file; tests/pack_rules.js checks the two agree). Add a rule there and here. */
   const RULES = [{id: 'balance.type', what: 'every exercise type', field: 'type', min: 3, always: ['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'scenario', 'free'], features: {'code': ['spotbug', 'write'], 'math': ['calc'], 'pictures': ['img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']}}, {id: 'balance.difficulty', what: 'every difficulty', field: 'difficulty', min: 3, always: [1, 2, 3], features: {}}, {id: 'balance.tag', what: 'every focus tag', field: 'tags', min: 3, always: ['concept', 'pitfall', 'debug', 'exam', 'interview', 'compare'], features: {'code': ['syntax'], 'math': ['calc']}}];
@@ -190,59 +199,45 @@
     return out;
   }
 
-  /** The fields one exercise needs so the engine can show and grade it. */
+  /** The fields one exercise needs so the engine can show and grade it: its contract (noema.chapter.v1#exercise), then
+      what the contract cannot say (exerciseRefs). */
   function checkExercise(e, media) {
+    const E = shapeOf('noema.chapter.v1#exercise', e, e && e.id);
+    return E.length ? E : exerciseRefs(e, media);
+  }
+  /** What an exercise's contract cannot say: its answer is one of its own options, lines, buckets, nodes or regions,
+      its lists line up, its picture is in the pack. Only for an exercise that meets its contract. */
+  function exerciseRefs(e, media) {
     const E = []; const t = e.type; const bad = m => E.push(`${e.id}: ${m}`);
-    if (!isStr(e.q) && t !== 'cloze' && t !== 'scenario') bad('missing "q"');
+    const perOption = (why, n, what) => { if (why && why.length !== n) bad(`"why" needs one text per ${what}`); };
     switch (t) {
       case 'mcq': case 'odd': {
-        if (!strs(e.options, t === 'odd' ? 4 : 2)) { bad('"options" must be a list of texts'); break; }
-        const ans = Array.isArray(e.answer) ? e.answer : [e.answer];
-        if (!ans.length || !ans.every(a => intIn(a, e.options.length))) bad('"answer" must be the index of an option');
-        if (Array.isArray(e.answer) && !e.multi) bad('a list "answer" needs "multi": true');
-        if (e.why && (!Array.isArray(e.why) || e.why.length !== e.options.length)) bad('"why" needs one text per option');
+        if (![].concat(e.answer).every(a => a < e.options.length)) bad('"answer" must be the index of an option');
+        perOption(e.why, e.options.length, 'option');
         break;
       }
-      case 'tf': if (typeof e.answer !== 'boolean') bad('"answer" must be true or false'); break;
-      case 'order': if (!strs(e.items, 3)) bad('"items" needs ≥ 3 texts in the correct order'); break;
-      case 'match': if (!Array.isArray(e.pairs) || e.pairs.length < 3 || !e.pairs.every(p => Array.isArray(p) && p.length === 2 && isStr(p[0]) && isStr(p[1]))) bad('"pairs" needs ≥ 3 [left, right] pairs');
-        else if (new Set(e.pairs.map(p => p[1])).size !== e.pairs.length) bad('the right sides of "pairs" must be distinct');
+      case 'match': if (new Set(e.pairs.map(p => p[1])).size !== e.pairs.length) bad('the right sides of "pairs" must be distinct'); break;
+      case 'bucket': if (!e.items.every(i => i.bucket < e.buckets.length)) bad('every item\'s "bucket" must be the index of a bucket'); break;
+      case 'spotbug': if (!e.bugs.every(b => b < e.lines.length)) bad('"bugs" must be line indexes'); break;
+      case 'flaw': if (!e.flaws.every(b => b < e.lines.length)) bad('"flaws" must be line indexes');
+        if (e.reason >= e.reasons.length) bad('"reason" must be the index of one of "reasons"');
         break;
-      case 'bucket': if (!strs(e.buckets, 2) || !Array.isArray(e.items) || e.items.length < 3 || !e.items.every(i => isStr(i?.text) && intIn(i.bucket, e.buckets.length))) bad('"buckets" (≥ 2) and "items" [{text, bucket: index}] (≥ 3) needed'); break;
-      case 'cloze': if (!isStr(e.text) || !/\[\[[^\]]+\]\]/.test(e.text)) bad('"text" needs at least one [[blank|alternative]]'); break;
-      case 'spotbug': if (!strs(e.lines, 2) || !Array.isArray(e.bugs) || !e.bugs.length || !e.bugs.every(b => intIn(b, e.lines.length))) bad('"lines" and "bugs" (line indexes) needed'); break;
-      case 'calc': if (typeof e.answer !== 'number' || !isFinite(e.answer)) bad('"answer" must be a number'); break;
-      case 'scenario': if (!Array.isArray(e.steps) || !e.steps.length || !e.steps.every(s => isStr(s.prompt) && Array.isArray(s.options) && s.options.length >= 2 && s.options.filter(o => o.ok === true).length === 1 && s.options.every(o => isStr(o.text) && isStr(o.fb)))) bad('"steps": each with a prompt and options [{text, ok, fb}], exactly one ok'); break;
-      case 'free': if (!isStr(e.model)) bad('"model" (model answer) needed'); break;
-      case 'write': if (!isStr(e.solution) || !strs(e.keywords, 1)) bad('"solution" and "keywords" needed'); break;
-      case 'flaw': if (!strs(e.lines, 3) || !Array.isArray(e.flaws) || !e.flaws.length || !e.flaws.every(b => intIn(b, e.lines.length))) bad('"lines" (≥ 3) and "flaws" (line indexes) needed');
-        if (!strs(e.reasons, 2) || !intIn(e.reason, (e.reasons || []).length)) bad('"reasons" (≥ 2 texts) and "reason" (the index of the right one) needed');
-        break;
-      case 'case': if (!Array.isArray(e.parts) || e.parts.length < 2 || e.parts.length > 4) { bad('"parts": 2–4 questions [{q, type: mcq|tf|calc, …}]'); break; }
-        e.parts.forEach((p, i) => { if (!p || !['mcq', 'tf', 'calc'].includes(p.type)) bad(`part ${i + 1}: "type" must be mcq, tf or calc`); else checkExercise({ ...p, id: `${e.id} part ${i + 1}` }, media).forEach(m => E.push(m)); });
-        break;
-      case 'predict': if (!isStr(e.outcome)) bad('"outcome" (what actually happens) needed');
-        if (Array.isArray(e.options)) { if (!strs(e.options, 2) || !intIn(e.answer, e.options.length)) bad('"options" and "answer" (an option index) needed'); }
-        else if (typeof e.answer !== 'number' || !isFinite(e.answer)) bad('"options" + "answer", or a numeric "answer" (with "tolerance", "unit")');
-        break;
+      case 'case': e.parts.forEach((p, i) => E.push(...exerciseRefs({ ...p, id: `${e.id} part ${i + 1}` }, media))); break;
+      case 'predict': if (Array.isArray(e.options) && e.answer >= e.options.length) bad('"answer" must be the index of an option'); break;
       case 'tree': {
-        const N = e.nodes && typeof e.nodes === 'object' ? e.nodes : null; if (!N || !Object.keys(N).length) { bad('"nodes" {id: {q, options}} and "start" needed'); break; }
+        const N = e.nodes;
         if (!(e.start in N)) bad('"start" must name a node');
-        for (const [id, n] of Object.entries(N)) {
-          if (!isStr(n?.q) || !Array.isArray(n.options) || n.options.length < 2 || n.options.filter(o => o.ok === true).length !== 1 || !n.options.every(o => isStr(o.text) && (o.ok || isStr(o.fb)))) bad(`node "${id}": q and options [{text, ok, fb}], exactly one ok, every wrong one with fb`);
-          for (const o of n?.options || []) if (o.to != null && !(o.to in N)) bad(`node "${id}": "to" names no node (${o.to})`);
-        }
+        for (const [id, n] of Object.entries(N)) for (const o of n.options) if (o.to != null && !(o.to in N)) bad(`node "${id}": "to" names no node (${o.to})`);
         const seen = new Set(); let at = e.start;   // the right path ends without a loop
-        while (at in N && !seen.has(at)) { seen.add(at); at = (N[at].options || []).find(o => o.ok)?.to; }
+        while (at in N && !seen.has(at)) { seen.add(at); at = N[at].options.find(o => o.ok)?.to; }
         if (at != null) bad('the right path of the tree loops or leads nowhere');
         break;
       }
-      case 'inquiry': if (!strs(e.options, 3) || !Array.isArray(e.scores) || e.scores.length !== e.options.length || !e.scores.every(v => intIn(v, 4))) bad('"options" (≥ 3) and "scores" (0–3, one per option) needed');
+      case 'inquiry': if (e.scores.length !== e.options.length) bad('"scores": one per option');
         else if (e.scores.filter(v => v === Math.max(...e.scores)).length !== 1) bad('exactly one option has the highest score');
-        if (!Array.isArray(e.why) || e.why.length !== (e.options || []).length) bad('"why": one text per option');
+        perOption(e.why, e.options.length, 'option');
         break;
-      case 'sim': break;   // its own fields need the pack's activities: checkActivities
-      case 'debate': if (!Array.isArray(e.sides) || e.sides.length < 2 || e.sides.length > 3 || !e.sides.every(sd => isStr(sd?.position) && strs(sd.counters, 2) && intIn(sd.best, sd.counters.length) && (!sd.why || (Array.isArray(sd.why) && sd.why.length === sd.counters.length)))) bad('"sides": 2–3 of {position, counters (≥ 2), best (index), why (one per counter)}'); break;
+      case 'debate': e.sides.forEach((sd, i) => { if (sd.best >= sd.counters.length) bad(`side ${i + 1}: "best" must be the index of a counter`); if (sd.why && sd.why.length !== sd.counters.length) bad(`side ${i + 1}: "why" needs one text per counter`); }); break;
       default:
         if (String(t).startsWith('img_')) {
           const m = media[e.media]; if (!m) { bad(`media "${e.media}" not in pack.media`); break; }
@@ -251,7 +246,7 @@
           const targets = e.targets || [...R.keys()];
           if ((t === 'img_hotspot' || t === 'img_sequence') && (!Array.isArray(e.answer) || !e.answer.length)) bad('"answer" must list region ids');
           if (['img_drag', 'img_label', 'img_select', 'img_occlusion'].includes(t)) for (const id of targets) if (R.has(id) && !isStr(R.get(id).label)) bad(`region "${id}" needs a label`);
-          if (t === 'img_reveal') { if (!strs(e.options, 2)) bad('"options" needed'); else { const ans = Array.isArray(e.answer) ? e.answer : [e.answer]; if (!ans.every(a => intIn(a, e.options.length))) bad('"answer" must be an option index'); } }
+          if (t === 'img_reveal') { if (!strs(e.options, 2)) bad('"options" needed'); else if (![].concat(e.answer).every(a => intIn(a, e.options.length))) bad('"answer" must be an option index'); }
           for (const r of regs) {
             const inside = r.shape === 'circle' ? r.cx >= 0 && r.cy >= 0 && r.cx <= m.w && r.cy <= m.h : r.shape === 'poly' ? Array.isArray(r.points) && r.points.length >= 3 : r.x >= 0 && r.y >= 0 && r.x + r.w <= m.w + 1 && r.y + r.h <= m.h + 1;
             if (!inside) { bad(`region "${r.id}" lies outside the picture`); break; }
@@ -261,9 +256,9 @@
     return E;
   }
 
-  /* ---- a pack in several languages (pack schema v2, tools/CONTENT_SPEC.md "Packs in several languages"): optional, additive ---- */
+  /* ---- a pack in several languages (tools/CONTENT_SPEC.md "Packs in several languages"; the shape: noema.subject.v1
+     i18n, noema.pack.v3 translations, noema.translation.v1): optional ---- */
   const LOCALE_RE = /^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$/;
-  const I18N_TEXT = ['title', 'appTitle', 'description', 'searchExamples'], I18N_OBJ = ['hero', 'tutor'];
   /** What a translated exercise must keep (only the words may change): the type, section, picture and everything that decides the answer. */
   const shape = e => JSON.stringify([e.type, e.section, e.media || null, e.answer ?? null, e.targets || null, e.bugs || null, e.grid || null,
     ...['options', 'items', 'pairs', 'buckets', 'lines', 'steps'].map(k => Array.isArray(e[k]) ? e[k].length : null),
@@ -275,30 +270,18 @@
     e.type === 'inquiry' ? e.scores ?? null : null, e.type === 'debate' ? (e.sides || []).map(x => x && [x.best ?? null, (x.counters || []).length]) : null,
     e.type === 'sim' ? [e.activity ?? null, JSON.stringify(e.task ?? null), JSON.stringify(e.grade ?? null), (e.hints || []).length] : null,
     e.tolerance ?? null]);
+  /** The languages of a pack beyond their shape: never the pack's own language, a translation has the subject's name in
+      its language (a warning), an inline translation keeps the pack's structure and answers (checkTrChapters). */
   function checkI18n(p, chapters, E, W) {
     const s = p.subject || {}, own = s.language || 'en';
-    const locOK = (where, loc) => { if (!LOCALE_RE.test(loc)) { E.push(`${where}: "${loc}" is not a locale code (e.g. el, fr, pt-PT, zh-Hant)`); return false; } if (loc === own) { E.push(`${where}: "${loc}" is the pack's own language`); return false; } return true; };
-    if (s.i18n != null) {
-      if (typeof s.i18n !== 'object' || Array.isArray(s.i18n)) E.push('subject.i18n must be an object {locale: {title, description, …}}');
-      else for (const [loc, m] of Object.entries(s.i18n)) {
-        const where = `subject.i18n.${loc}`; if (!locOK(where, loc)) continue;
-        if (!m || typeof m !== 'object') { E.push(`${where} must be an object`); continue; }
-        for (const [k, v] of Object.entries(m)) {
-          if (I18N_TEXT.includes(k)) { if (!isStr(v)) E.push(`${where}.${k} must be a non-empty string`); }
-          else if (I18N_OBJ.includes(k)) { if (!v || typeof v !== 'object' || Object.values(v).some(x => typeof x !== 'string')) E.push(`${where}.${k} must be an object of strings like subject.${k}`); }
-          else E.push(`${where}.${k}: unknown field (allowed: ${[...I18N_TEXT, ...I18N_OBJ].join(', ')})`);
-        }
-      }
-    }
-    if (p.translations == null) return;
-    if (typeof p.translations !== 'object' || Array.isArray(p.translations)) { E.push('translations must be an object {locale: {chapters: [...]}}'); return; }
+    const notOwn = (where, loc) => { if (loc !== own) return true; E.push(`${where}: "${loc}" is the pack's own language`); return false; };
+    if (isObj(s.i18n)) for (const loc of Object.keys(s.i18n)) notOwn(`subject.i18n.${loc}`, loc);
+    if (!isObj(p.translations)) return;
     const byId = new Map(chapters.map(c => [c.id, c]));
     for (const [loc, t] of Object.entries(p.translations)) {
-      const where = `translations.${loc}`; if (!locOK(where, loc)) continue;
+      const where = `translations.${loc}`; if (!LOCALE_RE.test(loc) || !notOwn(where, loc)) continue;
       if (!(s.i18n && s.i18n[loc])) W.push(`${where}: add subject.i18n.${loc} (title, description) so the picker shows the translated name`);
-      if (t && t.file === true) { if (!Number.isInteger(t.chapters) || t.chapters < 1) E.push(`${where}: a translation in its own file says {"file": true, "chapters": <how many chapters it translates>}`); continue; }
-      if (!t || !Array.isArray(t.chapters)) { E.push(`${where}.chapters must be a list of chapters (or {"file": true, …} for a translation in its own file)`); continue; }
-      checkTrChapters(where, t.chapters, byId, E);
+      if (isObj(t) && t.file !== true && Array.isArray(t.chapters)) checkTrChapters(where, t.chapters.filter(isObj), byId, E);
     }
   }
   /** The chapters of a translation against the pack's: same sections, exercises, cards, playbooks and answers. */
@@ -328,44 +311,30 @@
     const bridgePairs = from.flatMap(src => LANGS.bridges.filter(n => lang0(n) !== src).map(n => ({ source: src, native: lang0(n) })));
     return { translations, bridges: LANGS.bridges.filter(l => lang0(l) !== o), bridgePairs };
   }
-  /** checkTranslation(t, pack) → { errors, warnings, counts }: one noema-translation file (docs/i18n.md §10) against its pack. */
+  /** checkTranslation(t, pack) → { errors, warnings, counts }: one noema-translation file (docs/i18n.md §10; its shape:
+      noema.translation.v1) against its pack. */
   function checkTranslation(t, pack) {
-    const E = [], W = [];
-    if (!t || typeof t !== 'object' || Array.isArray(t)) return { errors: ['not a JSON object'], warnings: W, counts: {} };
-    if (t.format !== 'noema-translation') E.push('format must be "noema-translation"');
-    if (t.v !== 1) E.push('v must be 1');
-    if (!ID_RE.test(String(t.pack || ''))) E.push('pack: the subject id the translation belongs to (pack.subject.id)');
-    if (!LOCALE_RE.test(String(t.locale || ''))) E.push('locale: the language of the translation (e.g. el, ru, pt-PT)');
-    if (!Array.isArray(t.chapters) || !t.chapters.length) E.push('chapters must be a non-empty list of translated chapters');
+    const W = [];
+    if (!isObj(t)) return { errors: ['not a JSON object'], warnings: W, counts: {} };
+    const E = shapeOf('noema.translation.v1', t);
+    const chapters = Array.isArray(t.chapters) ? t.chapters.filter(isObj) : [];
     if (pack) {
       const own = pack.subject?.language || 'en';
       if (pack.subject?.id && t.pack && pack.subject.id !== t.pack) E.push(`pack: "${t.pack}" — this translation belongs to another subject (this one is "${pack.subject.id}")`);
       if (t.locale && lang0(t.locale) === lang0(own)) E.push(`locale: "${t.locale}" is the pack's own language`);
-      if (Array.isArray(t.chapters)) {
-        checkTrChapters(`translation ${t.locale}`, t.chapters, new Map((pack.chapters || []).map(c => [c.id, c])), E);
-        const have = new Set(t.chapters.map(c => c && c.id)), miss = (pack.chapters || []).filter(c => !have.has(c.id)).map(c => c.id);
-        if (miss.length) W.push(`chapters not translated yet: ${miss.join(', ')}`);
-      }
+      checkTrChapters(`translation ${t.locale}`, chapters, new Map((pack.chapters || []).map(c => [c.id, c])), E);
+      const have = new Set(chapters.map(c => c.id)), miss = (pack.chapters || []).filter(c => !have.has(c.id)).map(c => c.id);
+      if (miss.length) W.push(`chapters not translated yet: ${miss.join(', ')}`);
       if (t.version && pack.version && t.version !== pack.version) W.push(`made for pack version ${t.version}; the pack is now ${pack.version} — check the chapters that changed`);
     }
     // the subject's name in this language (subject.i18n.<locale>): optional in the file, merged into the pack when it is saved
-    if (t.subject != null) {
-      const m = t.subject, src = pack?.subject || null;
-      if (!m || typeof m !== 'object' || Array.isArray(m)) E.push('subject must be an object {title, appTitle, description, searchExamples, hero, tutor} in the translation\'s language');
-      else for (const [k, v] of Object.entries(m)) {
-        if (I18N_TEXT.includes(k)) { if (!isStr(v)) E.push(`subject.${k} must be a non-empty string`); }
-        else if (I18N_OBJ.includes(k)) { if (!v || typeof v !== 'object' || Object.values(v).some(x => typeof x !== 'string')) E.push(`subject.${k} must be an object of strings like the pack's subject.${k}`); else if (src && src[k]) for (const f of Object.keys(v)) if (!(f in src[k])) E.push(`subject.${k}.${f}: the pack's subject.${k} has no "${f}"`); }
-        else E.push(`subject.${k}: unknown field (allowed: ${[...I18N_TEXT, ...I18N_OBJ].join(', ')})`);
-      }
-    } else if (pack && !(pack.subject?.i18n?.[t.locale]?.title)) W.push(`no subject name in ${t.locale}: add "subject": {"title", "description", "hero", …} in ${t.locale} so the picker, the subject's home and the Roadmap show it translated`);
-    for (const c of Array.isArray(t.chapters) ? t.chapters : []) { let j = ''; try { j = JSON.stringify(c); } catch (e) { } if (/<script|javascript:/i.test(j)) E.push(`translation ${t.locale}/${c && c.id}: no script or javascript: links`); }
+    if (isObj(t.subject)) {
+      const src = pack?.subject || null;
+      for (const k of ['hero', 'tutor']) if (isObj(t.subject[k]) && src && isObj(src[k])) for (const f of Object.keys(t.subject[k])) if (!(f in src[k])) E.push(`subject.${k}.${f}: the pack's subject.${k} has no "${f}"`);
+    } else if (t.subject == null && pack && !(pack.subject?.i18n?.[t.locale]?.title)) W.push(`no subject name in ${t.locale}: add "subject": {"title", "description", "hero", …} in ${t.locale} so the picker, the subject's home and the Roadmap show it translated`);
+    for (const c of chapters) { let j = ''; try { j = JSON.stringify(c); } catch (e) { } if (/<script|javascript:/i.test(j)) E.push(`translation ${t.locale}/${c.id}: no script or javascript: links`); }
     return { errors: E, warnings: W, counts: { chapters: Array.isArray(t.chapters) ? t.chapters.length : 0 } };
   }
-
-  /** balance: the minimum of RULES per chapter. Default: the pack's own subject.authoring.minPerKind (Gemini generator);
-      a pack that does not say gets the issues as warnings; 0 = off. A number → errors.
-      quality (QUALITY, packs with subject.authoring.rules >= 2): errors when subject.authoring.by is claude or gemini, else warnings.
-      requireQuality (the connector): a pack built since QUALITY.since (or with no builtAt) must have authoring.rules >= 2. */
 
   /* ---------- interactive activities (docs/INTERACTIVE.md): the SAME rules as tools/activities.py (tests/activities.js) ---------- */
   const ACT = {
@@ -1514,67 +1483,54 @@
     return { errors: E, warnings: W };
   }
 
+  /** checkPack(p, expectId, { strict, balance, requireQuality }) → { errors, warnings, counts }. The pack's shape is its
+      contract (noema.pack.v3; strict: every chapter's too, noema.chapter.v1#chapter, and every exercise's); then what a
+      schema cannot say: unique ids, sections and pictures that exist, the quantity and quality rules, the languages,
+      the activities.
+      balance: the minimum of RULES per chapter. Default: the pack's own subject.authoring.minPerKind (Gemini generator);
+      a pack that does not say gets the issues as warnings; 0 = off. A number → errors.
+      quality (QUALITY, packs with subject.authoring.rules >= 2): errors when subject.authoring.by is claude or gemini, else warnings.
+      requireQuality (the connector): a pack built since QUALITY.since (or with no builtAt) must have authoring.rules >= 2. */
   function checkPack(p, expectId, { strict = false, balance, requireQuality = false } = {}) {
-    const E = [], W = [];
-    if (!p || p.format !== 'noema-pack') E.push('format must be "noema-pack"');
-    const s = p?.subject || {};
-    if (!ID_RE.test(s.id || '')) E.push('subject.id must be lowercase letters/digits/hyphens');
+    const W = [];
+    if (!isObj(p)) return { errors: ['not a JSON object'], warnings: W, counts: {} };
+    const E = shapeOf('noema.pack.v3', p);
+    const s = isObj(p.subject) ? p.subject : {};
     if (expectId && s.id !== expectId) E.push(`subject.id is "${s.id}" but you uploaded it as "${expectId}"`);
-    if (!s.title) E.push('subject.title missing');
-    const media = p?.media || {};
-    for (const [mid, m] of Object.entries(media)) {
-      if (m.fetch === 'app' && !m.data) { if (!/^https?:\/\//.test(m.url || '')) E.push(`media ${mid}: a "fetch": "app" picture needs its image url`); }
-      else if (!/^data:image\//.test(m.data || '')) E.push(`media ${mid}: data must be a data:image/… URI`);
-      if (!(m.w > 0 && m.h > 0)) E.push(`media ${mid}: w/h missing`);
-      if (!m.alt) W.push(`media ${mid}: no alt text`);
-      if (m.origin === 'web' && !m.url) E.push(`media ${mid}: web picture needs its source url`);
-    }
+    const media = isObj(p.media) ? p.media : {};
+    for (const [mid, m] of Object.entries(media)) if (isObj(m) && !m.alt) W.push(`media ${mid}: no alt text`);
     const srcIds = new Set();
-    for (const x of (p?.sources?.sources || [])) {   // sources whose original file travels in the package (make_pack.py)
-      if (!x || !x.id) { E.push('a source without id'); continue; }
+    for (const x of (Array.isArray(p.sources?.sources) ? p.sources.sources : []).filter(isObj)) {   // sources whose original file travels in the package (make_pack.py)
       if (srcIds.has(x.id)) E.push(`duplicate source ${x.id}`); srcIds.add(x.id);
-      if (x.sha256 != null) {
-        if (!/^sources\/[^/].*/.test(String(x.file || '')) || String(x.file).split('/').includes('..')) E.push(`source ${x.id}: a packaged file must be "sources/<name>"`);
-        if (!/^[0-9a-f]{64}$/.test(String(x.sha256))) E.push(`source ${x.id}: sha256 is not a SHA-256 hex digest`);
-        if (!(x.size > 0)) E.push(`source ${x.id}: size must be a positive number of bytes`);
-      }
-      if (x.firstPage != null && !Number.isInteger(x.firstPage)) E.push(`source ${x.id}: firstPage must be a whole number`);
     }
-    const chapters = Array.isArray(p?.chapters) ? p.chapters : [];
-    if (!chapters.length) E.push('no chapters');
+    const chapters = Array.isArray(p.chapters) ? p.chapters.filter(isObj) : [];
     for (const c of chapters) for (const r of (Array.isArray(c.sources) ? c.sources : [])) if (r && r.id && srcIds.size && !srcIds.has(r.id)) W.push(`${c.id}: cites unknown source "${r.id}"`);
     const exIds = new Set(), secIds = new Set(); let ex = 0, vis = 0, secN = 0;
     const used = {};
     for (const c of chapters) {
-      if (!/^ch\d\d$/.test(c.id || '')) E.push(`chapter id "${c.id}" must be chNN`);
-      if (strict && !isStr(c.title)) E.push(`${c.id}: title missing`);
+      // strict: the chapter's own contract (its exercises are checked one by one below, with what their contract cannot say)
+      if (strict) E.push(...shapeOf('noema.chapter.v1#chapter', { ...c, exercises: [] }, c.id));
       const mySecs = new Set();
-      for (const sec of c.sections || []) {
+      for (const sec of (Array.isArray(c.sections) ? c.sections : []).filter(isObj)) {
         secN++; if (secIds.has(sec.id)) E.push(`duplicate section ${sec.id}`); secIds.add(sec.id); mySecs.add(sec.id);
-        if (strict && (!isStr(sec.title) || !Array.isArray(sec.blocks) || !sec.blocks.length)) E.push(`${sec.id}: needs a title and blocks`);
-        for (const b of sec.blocks || []) {
-          if (b.t === 'figure' && !media[b.media]) E.push(`${sec.id}: figure media "${b.media}" not in pack.media`);
-          if (strict && !BLOCKS.has(b.t)) E.push(`${sec.id}: unknown block type "${b.t}"`);
-        }
+        for (const b of (Array.isArray(sec.blocks) ? sec.blocks : []).filter(isObj)) if (b.t === 'figure' && !media[b.media]) E.push(`${sec.id}: figure media "${b.media}" not in pack.media`);
       }
-      if (strict && !(c.sections || []).length) E.push(`${c.id}: no sections`);
-      for (const e of c.exercises || []) {
+      for (const e of (Array.isArray(c.exercises) ? c.exercises : []).filter(isObj)) {
         ex++;
         if (exIds.has(e.id)) E.push(`duplicate exercise ${e.id}`); exIds.add(e.id);
-        if (!TYPES.has(e.type)) { E.push(`${e.id}: unknown type ${e.type}`); continue; }
+        if (!TYPES.has(e.type)) continue;   // the contract says so
         if (!secIds.has(e.section) || (strict && !mySecs.has(e.section))) E.push(`${e.id}: section ${e.section} not found in its chapter`);
         if (String(e.type).startsWith('img_')) {
           vis++; used[e.media] = (used[e.media] || 0) + 1;
           const m = media[e.media]; if (!m) { E.push(`${e.id}: media "${e.media}" not in pack.media`); continue; }
-          const regs = Array.isArray(e.regions) ? e.regions : (m.regions || []); const R = new Set(regs.map(r => r.id));
+          const regs = Array.isArray(e.regions) ? e.regions : (m.regions || []); const R = new Set(regs.map(r => r && r.id));
           for (const a of [].concat(e.type === 'img_hotspot' || e.type === 'img_sequence' ? e.answer || [] : [], e.targets || [])) if (!R.has(a)) E.push(`${e.id}: region "${a}" not found`);
         }
         if (strict) E.push(...checkExercise(e, media));
       }
-      if (strict) for (const f of c.flashcards || []) if (!isStr(f.q) || !isStr(f.a)) { E.push(`${c.id}: a flashcard needs "q" and "a"`); break; }
-          }
+    }
     const auth = s.authoring || {}, qual = Number(auth.rules) >= QUALITY.version;
-    if (requireQuality && !qual && (!p?.builtAt || p.builtAt >= QUALITY.since)) E.push(`subject.authoring.rules must be ${QUALITY.version} (and authoring.by "claude"): new packs meet the quality rules of tools/pack_rules.json — start the subject with start_subject.py and rebuild with make_pack.py`);
+    if (requireQuality && !qual && (!p.builtAt || p.builtAt >= QUALITY.since)) E.push(`subject.authoring.rules must be ${QUALITY.version} (and authoring.by "claude"): new packs meet the quality rules of tools/pack_rules.json — start the subject with start_subject.py and rebuild with make_pack.py`);
     if (qual) {
       const hard = ['claude', 'gemini'].includes(auth.by);
       for (const c of chapters) for (const i of checkQuality(c, s)) (i.level === 'error' && hard ? E : W).push(i.msg);
@@ -1591,66 +1547,45 @@
   /* ---------- language bridges (docs/BRIDGE.md): a sidecar dictionary for one pack and one native language ---------- */
   const POS = new Set(['NOUN', 'PROPN', 'VERB', 'ADJ', 'ADV', 'NUM', 'X', 'SYM', 'INTJ', 'PHRASE']);
   const FUNCTION_POS = new Set(['DET', 'ADP', 'CCONJ', 'SCONJ', 'PRON', 'AUX', 'PART']);
-  const LOC_RE = /^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/;
-  const MARKUP = /<\s*[a-z!\/]|javascript:|data:text\/html/i;   // translations are plain text: never markup or script
   const BRIDGE_MAX = 3 * 1024 * 1024;
-  /** checkBridge(b, pack?) → { errors, warnings, counts }. With the pack: the bridge belongs to it and its sections exist. */
+  /** checkBridge(b, pack?) → { errors, warnings, counts }. Its shape is its contract (noema.bridge.v1: the fields, plain
+      text, the lengths); then its size, its words (no function words, each once), what its sections and anchors name
+      and, with the pack, that it belongs to it and reads one of its languages. */
   function checkBridge(b, pack) {
-    const E = [], W = [];
-    if (!b || typeof b !== 'object' || Array.isArray(b)) return { errors: ['not a JSON object'], warnings: W, counts: {} };
+    const W = [];
+    if (!isObj(b)) return { errors: ['not a JSON object'], warnings: W, counts: {} };
+    const E = shapeOf('noema.bridge.v1', b);
     let size = 0; try { size = JSON.stringify(b).length; } catch (e) { E.push('not serialisable'); }
     if (size > BRIDGE_MAX) E.push(`too big (${Math.round(size / 1024)} KB, at most ${BRIDGE_MAX / 1024} KB)`);
-    if (b.format !== 'noema-bridge') E.push('format must be "noema-bridge"');
-    if (b.v !== 1) E.push('v must be 1');
-    if (!ID_RE.test(String(b.pack || ''))) E.push('pack: the subject id the bridge belongs to (pack.subject.id)');
-    if (!LOC_RE.test(String(b.source || ''))) E.push('source: the language of the pack\'s content (BCP 47, e.g. "el")');
-    if (!LOC_RE.test(String(b.native || ''))) E.push('native: the learner\'s language the words are translated into (BCP 47, e.g. "ru")');
     if (b.source && b.native && String(b.source).split('-')[0] === String(b.native).split('-')[0]) E.push('native must differ from source');
-    if (!['draft', 'reviewed'].includes(b.status)) E.push('status must be "draft" or "reviewed"');
-    const plainOk = (v, max, where) => { if (v == null) return; if (typeof v !== 'string') return E.push(`${where}: must be text`); if (v.length > max) E.push(`${where}: longer than ${max} characters`); if (MARKUP.test(v)) E.push(`${where}: plain text only (no HTML or links)`); };
-    const entries = Array.isArray(b.entries) ? b.entries : (E.push('entries must be a list'), []);
-    if (entries.length > 20000) E.push(`entries: ${entries.length} (at most 20000)`);
+    const entries = (Array.isArray(b.entries) ? b.entries : []).filter(isObj);
     const keys = new Map(); let senses = 0, stale = 0;
     entries.forEach((e, n) => {
-      const at = `entries[${n}]${e && isStr(e.k) ? ' "' + e.k + '"' : ''}`;
-      if (!e || typeof e !== 'object') return E.push(`${at}: not an object`);
-      if (!isStr(e.k) || e.k.length > 80) return E.push(`${at}: k (the word or phrase as the pack writes it) is required, at most 80 characters`);
+      if (!isStr(e.k)) return;
+      const at = `entries[${n}] "${e.k}"`;
       if (keys.has(e.k)) E.push(`${at}: k appears twice`);
-      if (e.forms != null && (!Array.isArray(e.forms) || e.forms.length > 40 || !e.forms.every(f => isStr(f) && f.length <= 80))) E.push(`${at}: forms must be a list of at most 40 texts`);
       if (e.pos != null && FUNCTION_POS.has(e.pos)) E.push(`${at}: ${e.pos} — function words (articles, prepositions, conjunctions, pronouns, auxiliaries, particles) are not part of a bridge`);
       else if (e.pos != null && !POS.has(e.pos)) W.push(`${at}: unknown pos "${e.pos}" (Universal Dependencies: NOUN, PROPN, VERB, ADJ, ADV, NUM, X, SYM, INTJ, or PHRASE)`);
-      if (e.band != null && ![1, 2, 3].includes(e.band)) E.push(`${at}: band must be 1 (everyday), 2 (academic) or 3 (rare or technical)`);
-      const ss = Array.isArray(e.senses) ? e.senses : [];
-      if (!ss.length) E.push(`${at}: at least one sense (the meaning in this pack)`);
       const ids = new Set();
-      ss.forEach((x, q) => {
-        const w = `${at} sense ${q + 1}`;
-        if (!x || typeof x !== 'object') return E.push(`${w}: not an object`);
-        if (!isStr(String(x.id ?? ''))) E.push(`${w}: id is required`); else if (ids.has(String(x.id))) E.push(`${w}: id "${x.id}" twice`); else ids.add(String(x.id));
-        if (!isStr(x.t)) E.push(`${w}: t (the translation) is required`);
-        plainOk(x.t, 200, w + ' t'); plainOk(x.note, 400, w + ' note'); plainOk(x.gloss, 300, w + ' gloss');
-        if (x.st != null && !['draft', 'reviewed', 'stale'].includes(x.st)) E.push(`${w}: st must be draft, reviewed or stale`);
+      (Array.isArray(e.senses) ? e.senses : []).filter(isObj).forEach((x, q) => {
+        if (ids.has(String(x.id))) E.push(`${at} sense ${q + 1}: id "${x.id}" twice`); else ids.add(String(x.id));
         if (x.st === 'stale') stale++; senses++;
       });
       keys.set(e.k, ids);
     });
     const secIds = pack ? new Set((pack.chapters || []).flatMap(c => (c.sections || []).map(s => s.id))) : null;
-    const secs = b.sections == null ? {} : (typeof b.sections === 'object' && !Array.isArray(b.sections) ? b.sections : (E.push('sections must be an object { sectionId: { terms, preview } }'), {}));
+    const secs = isObj(b.sections) ? b.sections : {};
     let previews = 0;
     for (const [sid, v] of Object.entries(secs)) {
       if (secIds && !secIds.has(sid)) W.push(`sections.${sid}: no such section in the pack`);
-      if (!v || typeof v !== 'object') { E.push(`sections.${sid}: not an object`); continue; }
-      if (v.terms != null && (!Array.isArray(v.terms) || v.terms.length > 30)) E.push(`sections.${sid}.terms: a list of at most 30 entry keys`);
-      for (const k of v.terms || []) if (!keys.has(k)) E.push(`sections.${sid}.terms: "${k}" is not an entry`);
-      plainOk(v.preview, 1500, `sections.${sid}.preview`); if (isStr(v.preview)) previews++;
+      if (!isObj(v)) continue;
+      for (const k of Array.isArray(v.terms) ? v.terms : []) if (!keys.has(k)) E.push(`sections.${sid}.terms: "${k}" is not an entry`);
+      if (isStr(v.preview)) previews++;
     }
-    const anchors = b.anchors == null ? [] : (Array.isArray(b.anchors) ? b.anchors : (E.push('anchors must be a list'), []));
+    const anchors = (Array.isArray(b.anchors) ? b.anchors : []).filter(isObj);
     anchors.forEach((a, n) => {
       const at = `anchors[${n}]`;
-      if (!a || typeof a !== 'object') return E.push(`${at}: not an object`);
-      if (!/^[a-z0-9][a-z0-9-]*\/[A-Za-z0-9_-]+$/.test(String(a.at || ''))) E.push(`${at}: at must be "<section id>/<block id>" (the search address, docs/SEARCH.md)`);
-      else if (secIds && !secIds.has(a.at.split('/')[0])) W.push(`${at}: section ${a.at.split('/')[0]} is not in the pack`);
-      if (!isStr(a.quote)) E.push(`${at}: quote (the words exactly as the text writes them) is required`);
+      if (secIds && typeof a.at === 'string' && a.at.includes('/') && !secIds.has(a.at.split('/')[0])) W.push(`${at}: section ${a.at.split('/')[0]} is not in the pack`);
       if (!keys.has(a.k)) E.push(`${at}: k "${a.k}" is not an entry`);
       else if (!keys.get(a.k).has(String(a.sense))) E.push(`${at}: entry "${a.k}" has no sense "${a.sense}"`);
     });

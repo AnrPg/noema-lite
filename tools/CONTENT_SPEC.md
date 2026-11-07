@@ -409,7 +409,51 @@ the section id and exercise ids that cover it. Use it to self-audit before finis
 ## Validation
 `python3 tools/validate.py FILE.json` (single chapter) — `python3 tools/build.py` (everything, merged with patches).
 
-## Packs in several languages (pack schema v2 — required for every new pack)
+### The data contracts (the shape of every file)
+Every format has ONE JSON Schema in `src/contracts/schemas/` (draft 2020-12, a stable versioned id
+`https://noema-lite.netlify.app/schemas/noema.<name>.v<N>.schema.json`; a change that old files would fail is a new `vN`
+with a migration). The app (`engine/packcheck.js`), the connector, `tools/validate.py` and the skill check the SHAPE of a
+file with the same compiled validators and the same words; their own code checks only what a schema cannot say (ids
+that match and exist, an answer that is one of its own options, a region inside its picture, the quality rules).
+
+| file | contract |
+| --- | --- |
+| `subject.json` · `sources.json` | `noema.subject.v1` · `noema.sources.v1` |
+| `chapters/chNN.json`, `translations/<locale>/chNN.json` | `noema.chapter.v1` (as authored); in a pack `noema.chapter.v1#chapter` |
+| `patches/*.json` · `map/chNN.json` · `review/chNN.json` | `noema.chapter.v1#patchFile` · `#map` · `#review` |
+| `media/media.json` · a picture exercise | `noema.visual.v1#mediaRegistry` · `#visualExercise` |
+| the built pack (`pack.json`) · a translation file (`tr.<locale>.json`) | `noema.pack.v3` · `noema.translation.v1` |
+| 文A bridges: built · `bridges/core.json` · `bridges/<native>.json` | `noema.bridge.v1` · `#core` · `#locale` |
+| a Roadmap · its inbox entries · a step's claim · the agents' answers | `noema.curriculum.v1` · `#inboxEntry` · `#claim` · `noema.curriculum-agents.v1` |
+| account: `a:settings` · `a:packmeta:*` · `a:srcfiles` · `account.json` · `library/groups.json` | `noema.account.v1#settings` · `noema.subject.v1#packmeta` · `noema.account.v1#srcfiles` · `#profile` · `#groups` |
+| a language course's files · its facades · a language package | `noema.lang.v1#<kind>` · `noema.langfacade.v1` · `noema.langpack.v1` |
+| interactive activities · sim-spec@1 and its engines · the xAPI export | `noema.activities.v1` · `noema.sim-spec.v1`, `noema.circuit.v1` … · `noema.xapi-export.v1` |
+| the input of every connector tool | `noema.mcp-tools.v1#<tool name>` |
+
+`npm ci && npm run contracts` (`tools/contracts.mjs`; `tools/build.py` runs it first) generates the types
+(`src/contracts/generated/`), the validators (`src/contracts/validate.ts`, ajv standalone code: no `eval`) and
+`engine/contracts.js` (`NoemaCore.contracts`, for the classic scripts, the connector and `tools/contracts.py`). They are
+never committed. A schema that changes the shape of files already written gets a migration (`src/contracts/migrations`,
+`npm run migrate`): it upgrades every file of the repository, keeps every chapter, section, exercise, card, source,
+translation and word (the counts before and after are compared for every file) and leaves a file already migrated as it is.
+
+## Levels (optional: only when the author or the sources give them — never invented)
+A level says for whom a piece of content is: a school grade, a semester, a year of study or a step of difficulty.
+* **A ladder**: `levels: [{"id": "g7", "kind": "grade", "order": 7, "names": {"en": "Grade 7", "el": "Β΄ Γυμνασίου"}}]`
+  (`kind`: `grade`, `semester`, `year`, `difficulty` or `custom`; `order` places it on the ladder; `names` per locale,
+  `description` optional). One ladder has one kind, and its ids and orders are unique. A Roadmap has one
+  (`curriculum.levels`, docs/CURRICULUM.md §11); a pack may have its own (`subject.levels` as level objects, usually
+  `difficulty`).
+* **A pack** names the levels it teaches: `subject.levels: ["g7"]` (ids of its Roadmap's ladder) or its own ladder.
+* **A chapter, section, exercise, flashcard or playbook** may name its own `"level": "g7"` (a level of the pack); without
+  one it is its parent's: an exercise or card → its section → its chapter → the pack's, when the pack names one level.
+* **The rules** (`src/contracts/rules/levels.ts`): the difficulty mix (`tools/pack_rules.json` "mix.difficulty",
+  20 / 25 / 55 % ± 5) holds within each level of a pack, not only over the whole pack; every level named is one of
+  the pack's.
+* Not to be confused with a knowledge-map point's `level` (foundation / core / advanced: how deep the point goes) or a
+  Roadmap step's `levels` (the kinds of thinking its goals ask for).
+
+## Packs in several languages (required for every new pack)
 A pack is written in ONE language (`subject.language`). It also offers its metadata and its chapters in other languages;
 the learner sees them when the pack has their **interface language** (or its language: `es-ES` → `es`). The interface
 language never changes content by itself: without a translation for it the learner sees the pack's own texts, with a
@@ -446,8 +490,8 @@ pack: without it the card, the title and the tagline stay in the pack's language
 
 Code blocks stay exactly as the source's (translate the words around them, not the code); formulas and numbers too.
 
-**Built pack** (`tools/build.py`, `make_pack.py`): `"v": 2` when the pack has `subject.i18n` or translations (older apps
-ignore both and show the source). **Each translation is its own file** (`noema-translation`: `{"format":
+**Built pack** (`tools/build.py`, `make_pack.py`): `"v": 3`, the format version (src/contracts/schemas/noema.pack.v3.schema.json; packs
+of v 1 and 2 are still read). A pack without `subject.i18n` or translations shows the source. **Each translation is its own file** (`noema-translation`: `{"format":
 "noema-translation", "v": 1, "pack", "locale", "source", "version", "subject": { the subject.i18n.<locale> fields }, "chapters": [ … ]}`),
 so a learner downloads only the
 language they read: `make_pack.py` writes `build/<id>.tr.<locale>.json` and puts it in the package as

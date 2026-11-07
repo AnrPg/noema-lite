@@ -122,13 +122,12 @@ def load_translations(sdir, chapters):
     return out
 
 def pack_i18n(pack, translations, external=False):
-    """Pack schema v2 (additive): a pack that offers other languages (subject.i18n or translations) says "v": 2 and
-    carries "translations": {locale: {"chapters": [...]}}; old apps read it as before (they ignore the new fields).
+    """The translations of a pack (src/contracts/schemas/noema.pack.v3.schema.json; every pack the tools write is "v": 3):
+    "translations": {locale: {"chapters": [...]}}.
     external=True: each translation goes in its own file (translation_file) and the pack only names it,
     {locale: {"file": true, "chapters": n}} — a learner downloads only the language they read (docs/i18n.md §10).
     Returns what the content hash adds for the translations (None when there are none, so older hashes stay the same)."""
     if translations: pack['translations'] = {loc: ({'file': True, 'chapters': len(chs)} if external else {'chapters': chs}) for loc, chs in translations.items()}
-    if translations or (pack.get('subject') or {}).get('i18n'): pack['v'] = 2
     return translations or None
 
 SUBJECT_I18N = ('title', 'appTitle', 'description', 'searchExamples', 'hero', 'tutor')

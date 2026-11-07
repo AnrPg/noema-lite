@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.common.v1.schema.json",
+  "title": "noema-lite shared definitions (noema.common/v1)",
+  "description": "The building blocks every other noema-lite schema refers to: ids, locales, plain texts and the levels model (tools/CONTENT_SPEC.md \"Levels\", docs/CURRICULUM.md §11). Not a file format of its own.",
+  "$defs": {
+    "text": {
+      "description": "A text that is not empty or only blanks.",
+      "type": "string",
+      "pattern": "\\S",
+      "x-message": "must be a non-empty string"
+    },
+    "texts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "subjectId": {
+      "description": "A subject (pack) id: lower-case letters, digits and hyphens, 2–61 characters.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,60}$",
+      "x-message": "must be lower-case letters, digits and hyphens (2–61 characters)"
+    },
+    "locale": {
+      "description": "A UI-style locale code (BCP 47): el, fr, pt-PT, zh-Hant, ar-EG.",
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|[0-9]{3}))?$",
+      "x-message": "is not a locale code (e.g. el, fr, pt-PT, zh-Hant)"
+    },
+    "language": {
+      "description": "A language tag (BCP 47, loose): en, el, pt-BR, zh-Hans.",
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+      "x-message": "is not a language code (BCP 47, e.g. en, el, pt-BR)"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "x-message": "is not a SHA-256 hex digest"
+    },
+    "isoTime": {
+      "description": "An ISO 8601 date or date-time (annotation: not checked beyond being a text).",
+      "type": "string"
+    },
+    "localized": {
+      "description": "One text per locale.",
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/locale" },
+      "additionalProperties": { "$ref": "#/$defs/text" }
+    },
+    "levelId": {
+      "description": "The id of a level of a ladder (a grade, a semester, a year, a difficulty…): lower-case letters, digits, . _ -.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,40}$",
+      "x-message": "is not a level id (lower-case letters, digits, . _ -; at most 41 characters)"
+    },
+    "levelKind": {
+      "description": "What a ladder of levels counts: school grades, semesters, years of study, difficulty, or anything else.",
+      "enum": ["grade", "semester", "year", "difficulty", "custom"]
+    },
+    "level": {
+      "description": "One rung of a ladder. order: its place (0 = the lowest); two levels of one ladder never share an order. names: the level's name in each locale (at least one).",
+      "type": "object",
+      "required": ["id", "kind", "order", "names"],
+      "properties": {
+        "id": { "$ref": "#/$defs/levelId" },
+        "kind": { "$ref": "#/$defs/levelKind" },
+        "order": { "type": "integer", "minimum": 0 },
+        "names": { "allOf": [{ "$ref": "#/$defs/localized" }], "minProperties": 1 },
+        "description": { "$ref": "#/$defs/localized" }
+      },
+      "additionalProperties": false
+    },
+    "levels": {
+      "description": "A ladder of levels, lowest first is customary but order decides.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/level" },
+      "minItems": 1
+    },
+    "levelRange": {
+      "description": "From one level to another of the same ladder (both included).",
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "$ref": "#/$defs/levelId" },
+        "to": { "$ref": "#/$defs/levelId" }
+      },
+      "additionalProperties": false
+    },
+    "levelRef": {
+      "description": "One level, or a range of levels.",
+      "oneOf": [{ "$ref": "#/$defs/levelId" }, { "$ref": "#/$defs/levelRange" }]
+    },
+    "packLevels": {
+      "description": "The levels a pack teaches: one or more level ids of its Roadmap's ladder, or — for a pack without a Roadmap — its own ladder (usually kind difficulty).",
+      "oneOf": [
+        { "type": "array", "items": { "$ref": "#/$defs/levelId" }, "minItems": 1, "uniqueItems": true },
+        { "$ref": "#/$defs/levels" }
+      ]
+    }
+  }
+}

@@ -25,7 +25,7 @@ Which engine for which learning goal: `docs/INTERACTIVE_AUTHORING.md`.
 - **`pack.requires`** gets `engine:thermal@1`, `engine:pid@1`, `engine:rf@1` or `engine:twin@1` (`make_pack.py` writes it).
 - Engines' codes and messages are for authors (the validators, `activity_lint.py`); a learner never sees them. A run that fails
   at runtime (a slider reaches an invalid value) gives NaN scalars and empty series; nothing throws into the page.
-- Schemas: `tools/schemas/noema.{thermal,pid,rf,twin}.v1.schema.json`. Tests: `node tests/{thermal,pid,rf,twin}.js`.
+- Schemas: `src/contracts/schemas/noema.{thermal,pid,rf,twin}.v1.schema.json`. Tests: `node tests/{thermal,pid,rf,twin}.js`.
 
 ## 2. `thermal@1` — lumped thermal networks (`engine/src/39_engine_thermal.js`, `NoemaThermal`)
 

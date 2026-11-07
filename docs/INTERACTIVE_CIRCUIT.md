@@ -95,7 +95,7 @@ the learner checks the diagnosis on the bench and can take **another device**.
 `engine/src/36_engine_circuit.js` → `window.NoemaCircuit` (also `globalThis` in node); `engine/src/36_engine_circuit_sim.js`
 registers it with `ACT.registerEngine` (`bench: true`, a `prepare` that evaluates the expressions on the main thread, and a
 `workerSource` made of the engine's own source and the adapter). Pure JS, deterministic, no DOM, no learner text: results are
-numbers and codes; the activity words them. Schema: `tools/schemas/noema.circuit.v1.schema.json`. Tests: `node tests/circuit.js`;
+numbers and codes; the activity words them. Schema: `src/contracts/schemas/noema.circuit.v1.schema.json`. Tests: `node tests/circuit.js`;
 JS and Python (`tools/circuit.py`, the validators' twin) give the same findings for `check` / `checkFaults` (`tests/activities.js`).
 
 ```js

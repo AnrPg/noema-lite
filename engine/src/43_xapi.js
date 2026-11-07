@@ -1,7 +1,7 @@
 /* ===================== xAPI 1.0.3 / cmi5 export of the learner's activity attempts (docs/activities-dev/xapi.md, docs/adr/001 D12) =====================
    Pure functions: no network, no LRS. The app (later) offers the result as a JSON file to download.
      NoemaXAPI.statements(input, opts) → [statement]      input: { att: S.att, res?: S.res, pack?: {id, title}, chapters?: [chapter] }
-     NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (tools/schemas/noema.xapi-export.v1.schema.json)
+     NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (src/contracts/schemas/noema.xapi-export.v1.schema.json)
      NoemaXAPI.cmi5Package(course, opts) → { files: { 'cmi5.xml': xml }, aus: [{id, chapter, exercise?}] }
      NoemaXAPI.validate(stmt) → [problem]   ·   NoemaXAPI.validateAll(list) → [problem] (also the cmi5 rules across statements)
      NoemaXAPI.subjectRecord({ att, res, pack, chapters, accountId, site, now }) → { name: '<id>.xapi.json', file } | null (nothing recorded)
@@ -239,7 +239,7 @@ var NoemaXAPI = (() => {   // var: the shell loads this file on its own (the "My
     return out;
   }
 
-  /** the file the app offers to download (tools/schemas/noema.xapi-export.v1.schema.json) */
+  /** the file the app offers to download (src/contracts/schemas/noema.xapi-export.v1.schema.json) */
   function exportFile(input, opts) {
     const C = setup(input, opts), list = statements(input, opts);
     const f = { format: 'noema.xapi-export/v1', xapiVersion: VERSION, profile: C.profile, pack: { id: String(C.pack.id || ''), activityBase: C.base }, registration: C.registration, statements: list };

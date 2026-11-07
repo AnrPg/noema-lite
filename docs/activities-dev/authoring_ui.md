@@ -7,8 +7,8 @@ a form, sees the activity run beside it and downloads the folder that `make_pack
 
 | file | what |
 |---|---|
-| `tools/schemas/noema.sim-spec.v1.schema.json` | the shape of a `sim-spec@1` spec (formula@1, circuit-mna@1, the bench); `$ref`s `noema.circuit.v1` for the netlist |
-| `tools/schemas/noema.activities.v1.schema.json` | the registry `activities/activities.json` and its entry (`$defs/item`) |
+| `src/contracts/schemas/noema.sim-spec.v1.schema.json` | the shape of a `sim-spec@1` spec (formula@1, circuit-mna@1, the bench); `$ref`s `noema.circuit.v1` for the netlist |
+| `src/contracts/schemas/noema.activities.v1.schema.json` | the registry `activities/activities.json` and its entry (`$defs/item`) |
 | `engine/src/46_lib_schema.js` | `NoemaLibSchema`: a library engine's `table` → the schema of its activities (`specSchema`), what an output may compute (`ofs`), the line styles (docs/INTERACTIVE_LIBRARY.md §1.5) |
 | `engine/schemaform.js` | `NoemaSchemaForm`: registry + `$ref`, `validate`, `skeleton`, branches, `walk` (no DOM, runs in Node) and `form()` |
 | `engine/activity_author.js` | `NoemaActivityAuthor`: the page (`mount`, `view`), types, `check`, files, zip / unzip, import, the preview adapter |

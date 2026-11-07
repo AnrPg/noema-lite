@@ -4,7 +4,7 @@
      EVERY engine of the library whose module exports its `table` (docs/INTERACTIVE_LIBRARY.md §1.5): its form comes from that table
      (NoemaLibSchema.specSchema, engine/src/46_lib_schema.js); the picker groups the engines as #/engines does and offers the engine's
      reference activity (NoemaActivityRefs, written into activity_author_schemas.js by tools/build.py) or a blank one.
-   • The forms: NoemaSchemaForm over tools/schemas/noema.activities.v1 (the registry entry) and noema.sim-spec.v1 (+ noema.circuit.v1);
+   • The forms: NoemaSchemaForm over src/contracts/schemas/noema.activities.v1 (the registry entry) and noema.sim-spec.v1 (+ noema.circuit.v1);
      the words of each label key in every language right under the key, and a table of all words (en, el, ru, de, fr, + any language).
    • Checks at the field: the schema, then the validators' own rules (NoemaPackCheck.checkSimSpec, checkActivities) — the same
      messages as activity_lint.py / make_pack.py / the connector; every formula through NoemaExpr.check with the declared names.

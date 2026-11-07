@@ -7,7 +7,7 @@ The app turns the result into a JSON file the learner downloads (the wiring is n
 | call | gives |
 |---|---|
 | `statements(input, opts)` | `[statement]`, xAPI 1.0.3 |
-| `exportFile(input, opts)` | `{format: 'noema.xapi-export/v1', xapiVersion, profile, pack: {id, activityBase}, registration, statements}` — schema `tools/schemas/noema.xapi-export.v1.schema.json` |
+| `exportFile(input, opts)` | `{format: 'noema.xapi-export/v1', xapiVersion, profile, pack: {id, activityBase}, registration, statements}` — schema `src/contracts/schemas/noema.xapi-export.v1.schema.json` |
 | `cmi5Package(course, opts)` | `{files: {'cmi5.xml': xml}, aus: [{id, chapter, exercise?}]}` |
 | `validate(stmt)` / `validateAll(list)` | `[problem]` — the xAPI subset + the cmi5 rules (also across statements) |
 | `duration(ms)`, `uuid5(name, ns?)` | ISO 8601 duration to 0.01 s; RFC 4122 UUID v5 (SHA-1) |

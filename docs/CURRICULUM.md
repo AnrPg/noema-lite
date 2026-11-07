@@ -351,6 +351,26 @@ coverage item of the planned chapter, in order. **Everything the step's panel sh
 * **Edits.** Renaming a step or changing its summary, goals or chapters (✏️ `Edit.update`) and a new chapter plan
   (`applyPlans`) drop that step's translations of those fields (`dropI18n`); they are made again with the next translation.
 
+## 11. 🪜 Levels (grade, semester, year, difficulty)
+A Roadmap may say for whom each step is — only when its material says so (a school syllabus by grade, a university
+course by semester); levels are never invented.
+* **The ladder**: `c.levels = [{ id, kind, order, names, description? }]` — `kind` is `grade`, `semester`, `year`,
+  `difficulty` or `custom` (one kind per ladder), `order` places a level on it (unique, like the ids), `names` per
+  locale (`{"en": "Semester 3", "el": "3ο εξάμηνο"}`; the app shows the one of the UI locale, like a step's title).
+* **A step's level**: `nodes[id].level` — one level id (`"s3"`) or a range `{ "from": "s3", "to": "s4" }`. Not to be
+  confused with `nodes[id].levels`, the processing levels (Marzano & Kendall, §1) its goals ask for.
+* **A step's pack** names its level(s) in `subject.levels` (the Roadmap's ids), and its chapters, sections, exercises
+  and cards may name their own (tools/CONTENT_SPEC.md "Levels").
+* **The rules** (`src/contracts/rules/levels.ts`, `roadmapLevels`): the ladder is well formed, every step's level is on
+  it, and **a prerequisite never sits above the step that needs it** — for every link `from → to`, the first level of
+  `from` is at most the first level of `to` (a step of semester 2 never needs one of semester 3). Steps without a level
+  are not compared.
+* **The format stays `noema.curriculum/v1`** (`src/contracts/schemas/noema.curriculum.v1.schema.json`): `levels` and
+  `level` are optional fields that a Roadmap without levels never has, and every reader (the app, the connector, the
+  shared copies of the other participants, §8) finds Roadmaps by that format string — a new version would hide every
+  Roadmap from the readers that do not know it yet. The inbox entries of every kind (§7) and a step's claim are
+  `noema.curriculum.v1#inboxEntry` and `#claim`; the agents' answers (§1) `noema.curriculum-agents.v1`.
+
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
 repaired graph, 25-node map in three parts, locked/open, chapter details, background preparation of the

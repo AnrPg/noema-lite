@@ -7,7 +7,7 @@ The decision is the ADR's D12 (P6), as built in its §13.
 
 Code: `engine/src/43_xapi.js` → `window.NoemaXAPI` (and `module.exports` for node): pure functions, no network, no
 `Date.now()`, no randomness. The menu item: `exportXAPI` in `engine/src/40_views.js`. The file's schema:
-`tools/schemas/noema.xapi-export.v1.schema.json`. Tests: `node tests/xapi.js`; the app: `tests/activities_app.js`.
+`src/contracts/schemas/noema.xapi-export.v1.schema.json`. Tests: `node tests/xapi.js`; the app: `tests/activities_app.js`.
 
 ## In the app
 
@@ -30,7 +30,7 @@ Code: `engine/src/43_xapi.js` → `window.NoemaXAPI` (and `module.exports` for n
 | call | gives |
 |---|---|
 | `statements(input, opts)` | `[statement]`, xAPI 1.0.3 |
-| `exportFile(input, opts)` | `{format: 'noema.xapi-export/v1', xapiVersion, profile, pack: {id, activityBase}, registration, statements}` — schema `tools/schemas/noema.xapi-export.v1.schema.json` |
+| `exportFile(input, opts)` | `{format: 'noema.xapi-export/v1', xapiVersion, profile, pack: {id, activityBase}, registration, statements}` — schema `src/contracts/schemas/noema.xapi-export.v1.schema.json` |
 | `cmi5Package(course, opts)` | `{files: {'cmi5.xml': xml}, aus: [{id, chapter, exercise?}]}` |
 | `subjectRecord({att, res, pack, chapters, accountId, site, now})` | `{name: '<id>.xapi.json', file}` (the app's export), or `null` when nothing is recorded |
 | `subjectCmi5({pack, chapters, site})` / `zip(files)` | `{name: '<id>.cmi5.zip', files}` · a zip Blob of `files` (browser: JSZip through `NoemaViewer`) |

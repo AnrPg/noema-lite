@@ -434,7 +434,7 @@
 
   /* ---------- explanation facades (§3): translated texts overlaid at their addresses, the master everywhere else ---------- */
   /** The roots of the addresses: prefix → (data, id) → the object the JSON-pointer tail starts from (the registry of the fields:
-   *  tools/schemas/noema.langfacade.fields.json). */
+   *  src/contracts/schemas/noema.langfacade.fields.json). */
   const FACADE_ROOTS = {
     k: d => d.course || null,
     fd: (d, id) => (d.fields || []).find(f => f.field === id) || null,
@@ -3933,7 +3933,7 @@
         else for (const [loc, es] of Object.entries(pkg.facades)) {
           if (!/^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/.test(loc) || !isObj(es)) { E.push(`facades.${loc}: a locale → {address: {t, src}}`); continue; }
           const bad = Object.entries(es).find(([a, e]) => !/^[a-z]{1,4}:[^/]+\/.+$/.test(a) || !isObj(e) || !str(e.t) || !/^[0-9a-f]{12}$/.test(e.src || ''));
-          if (bad) E.push(`facades.${loc}: “${bad[0]}” — every entry is {t, src} at an address of tools/schemas/noema.langfacade.fields.json`);
+          if (bad) E.push(`facades.${loc}: “${bad[0]}” — every entry is {t, src} at an address of src/contracts/schemas/noema.langfacade.fields.json`);
         }
       }
       if (E.length) return E;

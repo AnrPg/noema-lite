@@ -20,7 +20,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
     pipelineSteps: JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines/steps.json'), 'utf8')).steps,
     pipelineFlows: Object.fromEntries(fs.readdirSync(path.join(ROOT, 'tools/pipelines')).map(f => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/pipelines', f), 'utf8'))).filter(f => f.format === 'noema.pipeline/v1').map(f => [f.id, f])) };
   const fn = path.join(os.tmpdir(), `noema-mcp-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/report.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', 'engine/src/39_engine_thermal.js', 'engine/src/40_engine_pid.js', 'engine/src/41_engine_rf.js', 'engine/src/42_engine_twin.js', 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
+  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/contracts.js', 'engine/report.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', 'engine/src/39_engine_thermal.js', 'engine/src/40_engine_pid.js', 'engine/src/41_engine_rf.js', 'engine/src/42_engine_twin.js', 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
   const { default: handler } = await import(fn);
   const call = async (body, token, method = 'POST', url = BASE + '/mcp') => {
     const r = await handler(new Request(url, { method, headers: Object.assign({ 'content-type': 'application/json' }, token ? { authorization: 'Bearer ' + token } : {}), body: method === 'POST' ? JSON.stringify(body) : undefined }));
@@ -153,7 +153,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const sm = await tool('noema_save_pack', { pack_json: JSON.stringify(multi) }), so = await tool('noema_save_pack', { pack_json: JSON.stringify(mono) });
   const metaOf = id => JSON.parse(srv.state.kv[uid]['a:packmeta:' + id]?.value || '{}');
   ok(!sm.isError && !so.isError && JSON.stringify(metaOf('tiny-multi').contentLocales) === JSON.stringify(Object.keys(multi.translations)) && !('contentLocales' in metaOf('tiny-mono')),
-     'packmeta lists the content translations as contentLocales (pack schema v2, docs/i18n.md §10); none without translations');
+     'packmeta lists the content translations as contentLocales (docs/i18n.md §10); none without translations');
 
   console.log('— a pack with its source files packaged (make_pack.py): every file must arrive');
   const crypto = require('crypto');

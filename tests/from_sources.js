@@ -238,7 +238,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
     console.log('— the connector: the learner’s Claude makes the Roadmap (noema_create_roadmap)');
     const fn = path.join(require('os').tmpdir(), `noema-mcp-src-${process.pid}.mjs`);
-    const MCP = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // = tools/build.py MCP_ENGINE
+    const MCP = ['engine/contracts.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // = tools/build.py MCP_ENGINE
     ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'tools/build.py'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
     fs.writeFileSync(fn, `const CFG = ${JSON.stringify({ siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] })};\nconst DOCS = ${JSON.stringify({ workflow: 'SKILL', content: 'C', visual: 'V' })};\nglobalThis.window = globalThis;\n` + MCP.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n') + '\n' + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
     const { default: handler } = await import(fn);

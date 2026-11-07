@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.translation.v1.schema.json",
+  "title": "noema-lite pack translation (noema-translation v1)",
+  "description": "One translation of a pack in its own file (<id>.tr.<locale>.json, translations/<locale>.json in the package, noema_save_translation): the chapters in one language with the pack's ids, structure and answers, and the subject's name in it. docs/i18n.md §10. That the chapters match the pack's is checked by engine/packcheck.js checkTranslation.",
+  "type": "object",
+  "required": ["format", "v", "pack", "locale", "chapters"],
+  "properties": {
+    "format": { "const": "noema-translation", "x-message": "must be \"noema-translation\"" },
+    "v": { "const": 1, "x-message": "must be 1" },
+    "pack": { "allOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/subjectId" }], "x-message": "the subject id the translation belongs to (pack.subject.id)" },
+    "locale": { "allOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/locale" }], "x-message": "the language of the translation (e.g. el, ru, pt-PT)" },
+    "source": { "$ref": "noema.common.v1.schema.json#/$defs/language" },
+    "version": { "type": ["string", "null"] },
+    "subject": {
+      "allOf": [{ "$ref": "noema.subject.v1.schema.json#/$defs/i18nEntry" }],
+      "x-message": "an object {title, appTitle, description, searchExamples, hero, tutor} in the translation's language"
+    },
+    "chapters": { "type": "array", "minItems": 1, "items": { "$ref": "noema.pack.v3.schema.json#/$defs/chapter" }, "x-message": "must be a non-empty list of translated chapters" }
+  }
+}

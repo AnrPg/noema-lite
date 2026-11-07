@@ -776,7 +776,7 @@ async function callTool(name, args, ctx) {
       // the pack they read and drop the other's entry — so re-read right before writing, check after, and write again while ours is missing.
       // Every read is fresh (past the CDN), and every language entry and name any read showed is kept: a write never drops one.
       const seenT = {}, seenS = {}, see = cur => { Object.assign(seenT, cur?.translations || {}); for (const [l, v] of Object.entries(cur?.subject?.i18n || {})) seenS[l] = { ...(seenS[l] || {}), ...v }; return cur; };
-      const withOurs = cur => ({ ...cur, v: 2, translations: { ...seenT, ...(cur.translations || {}), [loc]: { file: true, chapters: f.chapters.length } },
+      const withOurs = cur => ({ ...cur, v: 3, translations: { ...seenT, ...(cur.translations || {}), [loc]: { file: true, chapters: f.chapters.length } },
         subject: { ...cur.subject, i18n: { ...seenS, ...(cur.subject?.i18n || {}), ...(f.subject ? { [loc]: { ...(cur.subject?.i18n?.[loc] || {}), ...f.subject } } : {}) } } });
       const ours = got => got?.translations?.[loc]?.chapters === f.chapters.length && (!f.subject?.title || got.subject?.i18n?.[loc]?.title === f.subject.title) &&
         Object.keys(seenT).every(l => got.translations?.[l]) && Object.keys(seenS).every(l => got.subject?.i18n?.[l]);

@@ -3,7 +3,7 @@
      A. classic picker: en → the English title, no language tag; el → the Greek title + an “EN” tag (the content stays English);
         fr → the French title and the French chapter (same ids, the tutor answers in French); ru → English title + tag
      B. the new frame in el: the Shelf, Explore and the subject's home show the Greek title with the tag
-     C. the pack itself: schema v2, translations travel with the pack, packcheck accepts it and refuses a broken translation
+     C. the pack itself: format v3, translations travel with the pack, packcheck accepts it and refuses a broken translation
    Usage: node tests/pack_i18n.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs');
@@ -68,10 +68,10 @@ const EL = 'Φυσική (δοκιμή)', FR = 'Physique (démo)';
   await page.click('[data-subject="demo-physics"]'); await until(() => page.$('.herohead'));
   ok(await until(() => page.evaluate(n => (document.querySelector('.herohead')?.textContent || '').startsWith(n) && !!document.querySelector('.herohead .noema-langtag'), EL)), 'the subject’s home in the frame: the Greek title with the tag');
 
-  console.log('C. the pack: schema v2, packcheck');
+  console.log('C. the pack: format v3, packcheck');
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
   const tr = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.json'), 'utf8'));
-  ok(pack.v === 2 && pack.subject.i18n?.el?.title === EL && pack.translations?.fr?.file === true && pack.translations.fr.chapters === 1 && !pack.translations.fr.chapters?.length, 'pack.json: v 2, subject.i18n, translations.fr only a stub (the chapters live in their own file)');
+  ok(pack.v === 3 && pack.subject.i18n?.el?.title === EL && pack.translations?.fr?.file === true && pack.translations.fr.chapters === 1 && !pack.translations.fr.chapters?.length, 'pack.json: v 3, subject.i18n, translations.fr only a stub (the chapters live in their own file)');
   ok(tr.format === 'noema-translation' && tr.pack === 'demo-physics' && tr.locale === 'fr' && tr.chapters?.[0]?.title === 'Énergie' && tr.chapters[0].src === 's1' && fs.existsSync(path.join(ROOT, 'library/subjects/demo-physics/tr.fr.js')), 'tr.fr.json (and tr.fr.js): the French chapters with the source mapping, downloaded only by French learners');
   const reg = fs.readFileSync(path.join(ROOT, 'library/registry.js'), 'utf8');
   ok(reg.includes('"contentLocales"') && reg.includes(EL) && reg.includes('"trLocales"'), 'the registry carries the metadata translations, the content languages and where each translation file is');

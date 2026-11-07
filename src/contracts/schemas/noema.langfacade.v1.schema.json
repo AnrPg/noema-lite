@@ -1,8 +1,8 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "noema.langfacade.v1",
+ "$id": "https://noema-lite.netlify.app/schemas/noema.langfacade.v1.schema.json",
  "title": "noema-lite explanation facade of a language course, one locale (D19, docs/language-packs.md §3)",
- "description": "The master explanation texts of a course (written in English, inline in the course files) translated and adapted to one locale, keyed by address (tools/schemas/noema.langfacade.fields.json). Files: facades/<locale>/facade.json (this manifest, $defs.manifest), facades/<locale>/core.json and facades/<locale>/<L>.json (entries, $defs.entries), library/languages/_phenomena/facades/<locale>/<L>.json and library/languages/_typology/facades/<locale>.json (entries of the shared texts). Made by tools/lang_facade.py extract (the master as a facade) and by translation tasks (lang_facade.py task); checked by lang_facade.py parity / lint; built by tools/build.py into course.expl.<locale>.js and overlaid by langcore.applyFacade (a missing address falls back to the master). Not to be confused with the WORD facade of D14 (features / wordFeatures).",
+ "description": "The master explanation texts of a course (written in English, inline in the course files) translated and adapted to one locale, keyed by address (src/contracts/schemas/noema.langfacade.fields.json). Files: facades/<locale>/facade.json (this manifest, $defs.manifest), facades/<locale>/core.json and facades/<locale>/<L>.json (entries, $defs.entries), library/languages/_phenomena/facades/<locale>/<L>.json and library/languages/_typology/facades/<locale>.json (entries of the shared texts). Made by tools/lang_facade.py extract (the master as a facade) and by translation tasks (lang_facade.py task); checked by lang_facade.py parity / lint; built by tools/build.py into course.expl.<locale>.js and overlaid by langcore.applyFacade (a missing address falls back to the master). Not to be confused with the WORD facade of D14 (features / wordFeatures).",
  "oneOf": [ { "$ref": "#/$defs/manifest" }, { "$ref": "#/$defs/entries" } ],
  "$defs": {
   "manifest": {
@@ -24,7 +24,8 @@
     },
     "built": { "type": "string", "description": "ISO time of the last extract / parity run" },
     "files": { "type": "array", "items": { "type": "string" }, "description": "the entry files of this facade (core.json, <L>.json …)" },
-    "notes": { "type": "array", "items": { "type": "string" }, "description": "the `for` values whose notes this facade carries: its own language, every type: / branch: / family:" }
+    "notes": { "type": "array", "items": { "type": "string" }, "description": "the `for` values whose notes this facade carries: its own language, every type: / branch: / family:" },
+    "note": { "type": "string", "description": "a remark for people, never shown to a learner (e.g. what a test fixture is for)" }
    },
    "additionalProperties": false
   },
