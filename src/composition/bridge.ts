@@ -129,7 +129,7 @@ export function buildBridge(r: Resolver, extensions: readonly BridgeExtension[] 
     storage: Object.freeze({
       kv: Object.freeze({
         get(key: string) { const x = storage.kv.get(key); if (x.ok) return x.value; failed(x.error, 'storage.kv.get'); return null; },
-        set(key: string, value: string) { const x = storage.kv.set(key, value); if (!x.ok) failed(x.error, 'storage.kv.set'); return x.ok; },
+        set(key: string, value: string) { const x = storage.kv.set(key, String(value)); if (!x.ok) failed(x.error, 'storage.kv.set'); return x.ok; },
         delete(key: string) { const x = storage.kv.delete(key); if (!x.ok) failed(x.error, 'storage.kv.delete'); },
         keys(prefix = '') { const x = storage.kv.keys(prefix); if (x.ok) return x.value; failed(x.error, 'storage.kv.keys'); return []; },
       }),

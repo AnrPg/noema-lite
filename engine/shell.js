@@ -50,12 +50,13 @@ window.NoemaShell = (() => {
   /** A sentence with some of its values in bold (names and titles stay text, never markup) */
   function rich(k, vals) { const names = Object.keys(vals), marks = Object.fromEntries(names.map((n, i) => [n, `\u0001${i}\u0001`])); return L(k, marks).split('\u0001').map((x, i) => i % 2 ? (vals[names[+x]]?.nodeType ? vals[names[+x]] : h('b', {}, vals[names[+x]])) : x); }   // a value that is an element goes in as it is
   const fmtDate = (t, o = { day: 'numeric', month: 'long' }) => { try { return window.NoemaI18n ? NoemaI18n.fmt.date(t, o) : new Date(t).toLocaleDateString(lang(), o); } catch (e) { return new Date(t).toDateString(); } };
-  const today = () => NoemaDay.key();   // the learner's local day (engine/day.js)
+  const caught = (where, severity = 'warning') => NoemaCore.errors.catcher(where, { severity });   // a background step that failed: into the error journal (src/ports/error-reporter.ts)
+  const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
   const toast = (m, ms) => (N()?.toast || (x => console.log(x)))(m, ms);
 
   /* ---------- the learner's state across subjects (read from storage; the engine owns the open subject) ---------- */
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
-  const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { if (e?.name === 'QuotaExceededError' || e?.code === 22 || e?.code === 1014) dispatchEvent(new CustomEvent('noema:storagefull', { detail: { key: k } })); } };   // the loader tells the learner
+  const jset = (k, v) => NoemaCore.storage.kv.set(k, JSON.stringify(v));   // a full storage: the core warns the learner   // the loader tells the learner
   const stateOf = sid => jget(`noema1:${acc()}:s:${sid}:state`, null);
   const recentKey = () => `noema1:${acc()}:meta:recent`;
   /** The places the learner was reading, newest first (written by the engine: noteRecent). Device-local. */
@@ -189,7 +190,7 @@ window.NoemaShell = (() => {
      remembers the way. With no trail (a shared link, a bookmark, a new tab) ← goes to the screen's parent. */
   const TRAIL = 'noema-trail', here0 = () => location.hash || '#/';
   const trailGet = () => { try { const t = JSON.parse(sessionStorage.getItem(TRAIL)); return Array.isArray(t) ? t : []; } catch (e) { return []; } };
-  const trailPut = t => { try { sessionStorage.setItem(TRAIL, JSON.stringify(t.slice(-60))); } catch (e) { } };
+  const trailPut = t => { try { sessionStorage.setItem(TRAIL, JSON.stringify(t.slice(-60))); } catch (e) { /* no sessionStorage here (blocked site data): the trail of this tab is only kept in memory */ } };
   let backTo = null;   // the address ← (or the browser's back) is returning to: its scroll position comes back too
   function noteTrail() {
     const t = trailGet(), now = here0();
@@ -475,7 +476,7 @@ window.NoemaShell = (() => {
     const shelfLbl = h('span', {}, L('shelf')), shelfBtn = h('button', { class: 'ns-shelflink', onclick: () => go('#/shelf') }, svg('shelf'), ' ', shelfLbl);
     const nCol = window.NoemaSearch?.collections?.().length || 0;   // saved searches: a quiet link, only when there are some
     v.append(h('div', { class: 'ns-shelf' }, shelfBtn, nCol ? h('button', { class: 'ns-shelflink ns-collink', onclick: () => go('#/search') }, svg('search'), ' ', L('sr_collectionsN', { n: nCol })) : null));
-    N().shelf?.(acc()).then(l => { shelfLbl.textContent = L('shelfN', { n: l.length }); }).catch(() => { });
+    N().shelf?.(acc()).then(l => { shelfLbl.textContent = L('shelfN', { n: l.length }); }).catch(caught('shell.shelf.count', 'info'));
     const off = CU()?.onChange?.(() => { if (v.isConnected && F.main.dataset.page === 'learn') { clearTimeout(PAGES.learn.t); PAGES.learn.t = setTimeout(() => { if (v.isConnected) PAGES.learn(); }, 300); } else off?.(); });
   };
   function learnMenu() {
@@ -660,7 +661,7 @@ window.NoemaShell = (() => {
     v.append(h('section', { class: 'ns-panel ns-level' }, h('div', { class: 'ns-ringwrap' }, ring(lv.into / lv.need, 132, 11), h('div', { class: 'ringc' }, h('span', { class: 'tiny' }, L('level')), h('b', {}, lv.lv))),
       h('div', { class: 'grow' }, h('span', { class: 'ns-label' }, tx.place || ''), h('h2', {}, L('xpToLevel', { n: lv.need - lv.into, lv: lv.lv + 1 })), h('p', { class: 'ns-muted' }, L('xpTotal', { xp: st.xp || 0 })))));
     // the week as stepping stones; the 7th holds a small chest
-    const days = [...Array(7)].map((_, i) => { const k = NoemaDay.add(today(), i - 6), [y, m, dd] = k.split('-').map(Number); return { k, l: fmtDate(new Date(y, m - 1, dd, 12), { weekday: 'narrow' }) }; });
+    const days = [...Array(7)].map((_, i) => { const k = NoemaCore.day.add(today(), i - 6), [y, m, dd] = k.split('-').map(Number); return { k, l: fmtDate(new Date(y, m - 1, dd, 12), { weekday: 'narrow' }) }; });
     const stones = [[40, 90], [110, 70], [180, 84], [250, 62], [320, 78], [390, 58], [460, 72]];
     const did = days.map(d => (st.xpDay || {})[d.k] > 0);
     const trail = `<svg class="ns-trail" viewBox="0 0 500 130" role="img" aria-label="${L('trailAria', { n: did.filter(Boolean).length }).replace(/[&<>"]/g, c => '&#' + c.charCodeAt(0) + ';')}"><path d="M40 90 Q75 60 110 70 T180 84 T250 62 T320 78 T390 58 T460 72" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>`
@@ -701,7 +702,7 @@ window.NoemaShell = (() => {
     if (!chs.length) return Object.keys(x.boss || {}).filter(c => x.boss[c]).length;
     return chs.filter(c => { const id = c.id || 'ch' + String(c.num).padStart(2, '0'), n = typeof c.sections === 'number' ? c.sections : (c.sections || []).length; return n > 0 && (read[id] || 0) >= n; }).length;
   }
-  const weekKey = () => NoemaDay.add(today(), -((new Date().getDay() + 6) % 7));   // the local Monday of this week
+  const weekKey = () => NoemaCore.day.weekStart(today());   // the local Monday of this week
   function rememberMedals(n) { const k = `noema1:${acc()}:meta:medals`, was = jget(k, null); jset(k, n); if (was != null && n > was) window.NoemaReact?.big('medal'); }
 
   /* ---------- ⚑ problem reports (engine/report.js): the words, and whether this account reviews them (an admin) ---------- */
@@ -709,7 +710,7 @@ window.NoemaShell = (() => {
   const reports = { admin: false, fresh: 0 };
   function wireReports() {
     const R = window.NoemaReport; if (!R?.isAdmin) return;
-    const check = () => R.isAdmin().then(ok => { reports.admin = ok; return ok ? R.newCount() : 0; }).then(n => { reports.fresh = n || 0; F.railReport.classList.toggle('has-dot', reports.fresh > 0); }).catch(() => { });
+    const check = () => R.isAdmin().then(ok => { reports.admin = ok; return ok ? R.newCount() : 0; }).then(n => { reports.fresh = n || 0; F.railReport.classList.toggle('has-dot', reports.fresh > 0); }).catch(caught('shell.reports.count', 'info'));
     check(); addEventListener('hashchange', () => { if (/^#\/admin/.test(location.hash) || reports.admin) check(); });
   }
   /* ---------- 🛠️ admin pages (#/admin/reports[/<id>]): engine/report.js draws them ---------- */
@@ -740,7 +741,7 @@ window.NoemaShell = (() => {
   /** Log out: a cloud account sends what is waiting and signs out; then the list of profiles opens (even when there is only one) */
   async function logOut() {
     const a = N()?.account || {}, C = window.NoemaCloud;
-    if (a.kind === 'cloud') { if (!confirm(L('logOutQ', { name: a.name || a.email || '' }))) return; await C?.push(a.id).catch(() => { }); await C?.signOut().catch(() => { }); }
+    if (a.kind === 'cloud') { if (!confirm(L('logOutQ', { name: a.name || a.email || '' }))) return; await C?.push(a.id).catch(caught('shell.logout.push')); await C?.signOut().catch(caught('shell.logout.signout', 'info')); }
     jset('noema1:current', { loggedOut: true });
     history.replaceState(null, '', location.pathname); location.reload();
   }
@@ -866,7 +867,7 @@ window.NoemaShell = (() => {
         uid && p.published ? tipped(h('button', { class: 'btn small', 'data-act': 'link', onclick: () => { const url = location.href.split('#')[0].split('?')[0] + '#/u/' + uid; (navigator.clipboard?.writeText(url) || Promise.reject()).then(() => toast(L('pfLinkCopied'), 2500), () => prompt(L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLinkTip')) : null);
       const card = await myCard(p.show);
       v.replaceChildren(...pageView({ display_name: a.name, emoji: a.emoji, bio: p.bio, avatar: p.avatar, show: p.show, card }, { owner: uid, mine: true }), h('div', { class: 'ns-pffoot' }, status, uid ? null : h('p', { class: 'tiny ns-muted' }, L('pfNeedCloud')), acts));
-      if (uid && p.published) saveMyPage(p).catch(() => { });   // a published page follows your progress
+      if (uid && p.published) saveMyPage(p).catch(caught('shell.mypage.publish'));   // a published page follows your progress
     };
     function editPage() {
       sheet(L('pfEdit'), (body, close) => {
@@ -987,7 +988,7 @@ window.NoemaShell = (() => {
   }
   /** Save account settings (a:settings, synced) and keep the open subject's copy (S.settings) in step. */
   function putS(patch) {
-    if (window.S?.settings) { Object.assign(window.S.settings, patch); try { window.flushSave?.(); } catch (e) { } }
+    if (window.S?.settings) { Object.assign(window.S.settings, patch); try { window.flushSave?.(); } catch (e) { NoemaCore.errors.report(e, { where: 'shell.settings.save', severity: 'error' }); } }
     TH()?.putSettings(patch);
   }
 
@@ -1122,7 +1123,7 @@ window.NoemaShell = (() => {
   }
   /** Continue a conversation in the tutor's window: in this subject at once, else after opening its subject (engine/src/60_convos.js resumeConvo). */
   function goConvo(r) {
-    try { sessionStorage.setItem('noema-device:openConvo', JSON.stringify({ acc: acc(), sid: r.subject.id, id: r.id })); } catch (e) { }
+    try { sessionStorage.setItem('noema-device:openConvo', JSON.stringify({ acc: acc(), sid: r.subject.id, id: r.id })); } catch (e) { /* no sessionStorage here (blocked site data): the conversation simply does not reopen by itself */ }
     if (ENGINE && r.subject.id === subjectId()) { ENGINE.resumeConvo?.(); return; }
     N().switchTo(acc(), r.subject.id, '#/subject');
   }

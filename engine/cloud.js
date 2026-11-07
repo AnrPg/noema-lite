@@ -12,8 +12,9 @@
   let CFG = null, BASE = '', KEY = '';   // KEY = the project's publishable key (sb_publishable_…) or legacy anon JWT
   const st = { syncing: false, lastSync: null, error: null, listeners: [], convoPending: new Set(), timer: null, ctimer: null, seq: 0, chain: null };
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
-  const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
-  const emit = () => st.listeners.forEach(f => { try { f(status()); } catch (e) { } });
+  const caught = (where, severity = 'warning') => NoemaCore.errors.catcher(where, { severity });   // a background step that failed: into the error journal (src/ports/error-reporter.ts)
+  const jset = (k, v) => NoemaCore.storage.kv.set(k, JSON.stringify(v));   // a full storage: the core warns the learner
+  const emit = () => st.listeners.forEach(f => { try { f(status()); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.status.listener', severity: 'error' }); } });
   const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, errorInfo: st.errorInfo || null, pending: (session() ? Object.keys(jget('noema1:' + (st.autoAcc || 'u_' + session().user.id) + ':meta:unsynced', {})).length : 0) + st.convoPending.size });
   function session() { return jget(SKEY, null); }
   function setSession(s) { if (s) { s.expires_at = s.expires_at || Math.floor(Date.now() / 1000) + (s.expires_in || 3600); jset(SKEY, { access_token: s.access_token, refresh_token: s.refresh_token, expires_at: s.expires_at, user: { id: s.user.id, email: s.user.email, user_metadata: s.user.user_metadata || {} } }); } else localStorage.removeItem(SKEY); }
@@ -75,7 +76,7 @@
     let r;
     try { r = await fetch(BASE + path, { method, headers: h, body: payload, keepalive }); }
     catch (e) { throw coded('Network error — are you offline? (' + e.message + ')', /^\/auth\//.test(path) ? 'auth.network' : 'cloud.network', { detail: e.message }, { network: true }); }   // i18n-ignore (English .message of err.*.network)
-    if (raw) { if (!r.ok) { let j = null; try { j = await r.clone().json(); } catch (e) { } throw Object.assign(failed(path, j, r), { message: `HTTP ${r.status}` }); } return r; }
+    if (raw) { if (!r.ok) { let j = null; try { j = await r.clone().json(); } catch (e) { /* an error answer that is not JSON: classified by its status alone */ } throw Object.assign(failed(path, j, r), { message: `HTTP ${r.status}` }); } return r; }
     const txt = await r.text(); let j = null; try { j = txt ? JSON.parse(txt) : null; } catch (e) { j = txt; }
     if (!r.ok) throw failed(path, j, r);
     return j;
@@ -90,7 +91,7 @@
   const accId = () => 'u_' + uid();
   const enc = s => encodeURIComponent(s);
   // safety net: the Gemini key stays on the device (loader.js GeminiKey), so a:settings is never pushed with it
-  const noSecrets = (k, v) => { if (k !== 'a:settings' || v == null) return v; try { const o = JSON.parse(v); if (o && typeof o === 'object' && 'apiKey' in o) { delete o.apiKey; return JSON.stringify(o); } } catch (e) { } return v; };
+  const noSecrets = (k, v) => { if (k !== 'a:settings' || v == null) return v; try { const o = JSON.parse(v); if (o && typeof o === 'object' && 'apiKey' in o) { delete o.apiKey; return JSON.stringify(o); } } catch (e) { /* a value that is not JSON holds no key to strip */ } return v; };
   // rows other writers append for the app to read and delete; never mirrored into localStorage
   const inboxKey = k => k.startsWith('a:curin:') || k.startsWith('a:curclaim:') || k.startsWith('a:inbox:') || k.startsWith('a:langin:') || k.startsWith('a:langclaim:');   // + language courses through Claude (docs/LANGUAGES.md §10.1)
 
@@ -106,17 +107,17 @@
   const metaSet = (acc, name, f) => { const m = meta(acc, name); f(m); metaSave(acc, name, m); };
   const markDirty = (acc, k) => { metaSet(acc, 'unsynced', m => { m[k] = Date.now() * 1000 + (++st.seq % 1000); }); emit(); };
   const clean = (acc, k, mark) => { metaSet(acc, 'unsynced', m => { if (mark === undefined || m[k] === mark) delete m[k]; }); emit(); };   // only if not changed again meanwhile
-  const put = (full, v) => { try { localStorage.setItem(full, v); return true; } catch (e) { st.full = true; dispatchEvent(new CustomEvent('noema:storagefull', { detail: { key: full } })); return false; } };   // the loader tells the learner
+  const put = (full, v) => { if (NoemaCore.storage.kv.set(full, v)) return true; st.full = true; return false; };   // a full storage: the core warns the learner (storage-full signal)
   const FULL = () => coded('This device’s storage is full: some changes from your other devices could not be saved here.', 'cloud.storage_full');   // i18n-ignore (English .message of err.cloud.storage_full)
   /** keys (full localStorage keys) another device changed → the open subject folds them into what it holds in memory (engine/src/10_core.js) */
-  const notify = (acc, keys) => { try { dispatchEvent(new CustomEvent('noema:remote', { detail: { acc, keys } })); } catch (e) { } };
-  const serial = fn => (st.chain = (st.chain || Promise.resolve()).catch(() => { }).then(fn));   // one pull or push at a time
+  const notify = (acc, keys) => { try { dispatchEvent(new CustomEvent('noema:remote', { detail: { acc, keys } })); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.event.remote', severity: 'debug' }); } };
+  const serial = fn => (st.chain = (st.chain || Promise.resolve()).catch(() => { /* the step before failed for its own caller, which got the error; the next one runs anyway */ }).then(fn));   // one pull or push at a time
   const isoAfter = prev => new Date(Math.max(Date.now(), (Date.parse(prev || '') || 0) + 1)).toISOString();   // a version stamp never equal to the one it replaces
   const isObj = x => x != null && typeof x === 'object' && !Array.isArray(x);
   const pj = s => { try { return JSON.parse(s); } catch (e) { return undefined; } };
   async function restorePoint(acc) {   // before combining drops anything: at most one every 10 minutes
     if (Date.now() - (st.rpAt || 0) < 10 * 60e3) return; st.rpAt = Date.now();
-    try { await window.Noema?.backup?.restorePoint(acc, 'Before combining changes from another device', { k: 'engine.bk.pointCombine' }); } catch (e) { }   // i18n-ignore (the stored label for older apps; k: shown in the UI language, engine/src/70_account.js)
+    try { await window.Noema?.backup?.restorePoint(acc, 'Before combining changes from another device', { k: 'engine.bk.pointCombine' }); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.restorepoint', severity: 'warning' }); }   // i18n-ignore (the stored label for older apps; k: shown in the UI language, engine/src/70_account.js)
   }
 
   /* ---------- combining two copies of a key (progress only grows) ---------- */
@@ -271,7 +272,7 @@
   function setLease(state, holder) {
     const was = L.state; L.state = state; L.holder = holder ? { ...holder, sameDevice: holder.dev === ME.dev } : null;
     if (window.Noema?.kv) Noema.kv.frozen = state === 'other' ? L.acc : null;   // paused: this device saves nothing
-    if (was !== state || state === 'other') try { dispatchEvent(new CustomEvent('noema:inuse', { detail: { state, holder: L.holder, unsynced: Object.keys(meta(L.acc, 'unsynced')).length } })); } catch (e) { }
+    if (was !== state || state === 'other') try { dispatchEvent(new CustomEvent('noema:inuse', { detail: { state, holder: L.holder, unsynced: Object.keys(meta(L.acc, 'unsynced')).length } })); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.event.inuse', severity: 'debug' }); }
   }
   async function leaseWrite(prevAt, v, keepalive = false) {
     const value = JSON.stringify(v), at = isoAfter(prevAt);
@@ -294,7 +295,7 @@
       break;
     }
     if (before === 'other' && L.state !== 'other' || L.tookOver) {   // bring in what the other tab or device did, also when another tab of this browser already stored it
-      L.tookOver = false; await NoemaCloud.pull(L.acc).catch(() => { });
+      L.tookOver = false; await NoemaCloud.pull(L.acc).catch(caught('cloud.lease.pull', 'info'));
       notify(L.acc, Object.keys(window.Noema?.kv?.accountData?.(L.acc) || {}).map(k => 'noema1:' + L.acc + ':' + k));
     }
     return L.state;
@@ -302,7 +303,7 @@
   function leaseRelease() {
     if (L.state !== 'mine' || !L.at || !session()) return;
     const at = L.at; L.at = null; L.state = 'unknown';
-    leaseWrite(at, { sid: ME.sid, dev: ME.dev, name: ME.name, os: ME.os, br: ME.br, at: Date.now(), released: true }, true).catch(() => { });
+    leaseWrite(at, { sid: ME.sid, dev: ME.dev, name: ME.name, os: ME.os, br: ME.br, at: Date.now(), released: true }, true).catch(caught('cloud.lease.release', 'info'));
   }
 
   /* ---------- the UI language in the account (user_metadata.locale): Supabase's e-mails are written in it (cloud/email/, docs/i18n.md §6) ----------
@@ -341,7 +342,7 @@
     },
     async signIn(email, password) { const j = await call('/auth/v1/token?grant_type=password', { method: 'POST', auth: false, body: { email, password } }); setSession(j); syncLocale(); return true; },
     async recover(email) { await call('/auth/v1/recover', { method: 'POST', auth: false, body: { email } }); },
-    async signOut() { try { await call('/auth/v1/logout', { method: 'POST' }); } catch (e) { } setSession(null); emit(); },
+    async signOut() { try { await call('/auth/v1/logout', { method: 'POST' }); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.signout', severity: 'info' }); } setSession(null); emit(); },
     async saveProfile(p) {
       const row = { user_id: uid(), display_name: p.name || null, emoji: p.emoji || null, learner: p.learner || null, updated_at: new Date().toISOString() };
       await call('/rest/v1/noema_profiles?on_conflict=user_id', { method: 'POST', body: [row], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
@@ -390,7 +391,7 @@
         for (const r of conflicts) { const k = await resolve(acc, r.key, r); if (k) keys.push(k); }
         const full = st.full ? FULL() : null; st.lastSync = Date.now(); st.error = full ? errText(full) : null; st.errorInfo = errInfo(full); st.full = false;
         if (keys.length) notify(acc, keys);
-        try { dispatchEvent(new CustomEvent('noema:pulled', { detail: { acc, changed: keys.length, keys } })); } catch (e) { }   // e.g. the open subject reads its results inbox
+        try { dispatchEvent(new CustomEvent('noema:pulled', { detail: { acc, changed: keys.length, keys } })); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.event.pulled', severity: 'debug' }); }   // e.g. the open subject reads its results inbox
         return keys.length;
       } catch (e) { st.error = errText(e); st.errorInfo = errInfo(e); throw e; } finally { st.syncing = false; emit(); }
     },
@@ -420,7 +421,7 @@
       /** Look at the "in use" row and take it if nobody else is using Noema right now; take = true: take it anyway ("Use here"). */
       async check({ take = false } = {}) {
         if (!session() || !L.acc) return L.state;
-        while (L.busy) await L.busy.catch(() => { });
+        while (L.busy) await L.busy.catch(() => { /* only waiting for the other run to end: its error is its caller's */ });
         L.busy = leaseCheck(take); try { return await L.busy; } catch (e) { return L.state; } finally { L.busy = null; }   // offline: keep going, the changes are combined later
       },
       release: leaseRelease,
@@ -428,22 +429,22 @@
     startAutoSync(acc) {
       if (!window.Noema || st.autoAcc === acc) return; st.autoAcc = acc; L.acc = acc;   // once per page
       // debounce 3 s, but never longer than 10 s after the first unsynced change (steady writes must not starve the sync)
-      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; const k = key.slice(('noema1:' + acc + ':').length); if (remoteOnly(k)) return; markDirty(acc, k); st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(() => { }); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); });
-      const sync = () => this.lease.check().finally(() => this.pull(acc).then(() => this.push(acc)).catch(() => { }));
+      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; const k = key.slice(('noema1:' + acc + ':').length); if (remoteOnly(k)) return; markDirty(acc, k); st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(caught('cloud.sync.push', 'info')); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); });
+      const sync = () => this.lease.check().finally(() => this.pull(acc).then(() => this.push(acc)).catch(caught('cloud.sync', 'info')));
       // leaving: save what the open page holds first (engine/src/10_core.js flushSave), then send it, then let the "in use" row go
-      const leave = () => { try { window.flushSave?.(); } catch (e) { } this.push(acc, { keepalive: true }).catch(() => { }); leaseRelease(); };
+      const leave = () => { try { window.flushSave?.(); } catch (e) { NoemaCore.errors.report(e, { where: 'cloud.leave.save', severity: 'error' }); } this.push(acc, { keepalive: true }).catch(caught('cloud.leave.push', 'info')); leaseRelease(); };
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') leave(); else { L.lastInput = Date.now(); sync(); } });
       addEventListener('pagehide', leave);
-      addEventListener('online', () => { sync(); this.pushConvos(acc).catch(() => { }); });
+      addEventListener('online', () => { sync(); this.pushConvos(acc).catch(caught('cloud.sync.convos', 'info')); });
       // the learner touches this tab: renew (or take) the "in use" row at most every 30 s
       const touched = () => { L.lastInput = Date.now(); if (L.state !== 'other' && Date.now() - L.lastBeat > BEAT) this.lease.check(); };
       ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(ev => addEventListener(ev, touched, { capture: true, passive: true }));
       // while paused, notice when the other device is put away; while in use, keep the row fresh
       setInterval(() => { if (document.visibilityState === 'visible' && Date.now() - L.lastBeat > BEAT && (L.state === 'other' || activeHere())) this.lease.check(); }, 10e3);
-      if (window.NoemaConvos) NoemaConvos.onChange((a, r) => { if (a !== acc) return; st.convoPending.add(r.id); clearTimeout(st.ctimer); st.ctimer = setTimeout(() => this.pushConvos(acc).catch(() => { }), 2500); emit(); });
-      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.pushConvos(acc, { keepalive: true }).catch(() => { }); });
-      this.lease.check().finally(() => this.push(acc).catch(() => { }));
-      this.autoSnapshot().catch(() => { });
+      if (window.NoemaConvos) NoemaConvos.onChange((a, r) => { if (a !== acc) return; st.convoPending.add(r.id); clearTimeout(st.ctimer); st.ctimer = setTimeout(() => this.pushConvos(acc).catch(caught('cloud.sync.convos', 'info')), 2500); emit(); });
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.pushConvos(acc, { keepalive: true }).catch(caught('cloud.sync.convos', 'info')); });
+      this.lease.check().finally(() => this.push(acc).catch(caught('cloud.sync.push', 'info')));
+      this.autoSnapshot().catch(caught('cloud.snapshot.auto'));
     },
 
     /* ---------- conversations (canonical noema.conversation/v1 records, one row each) ---------- */
@@ -487,7 +488,7 @@
       await this.snapshot('Daily auto-snapshot');   // i18n-ignore
       const list = await this.listSnapshots();
       const autos = (list || []).filter(s => s.label === 'Daily auto-snapshot');   // i18n-ignore
-      for (const s of autos.slice(30)) await this.deleteSnapshot(s.id).catch(() => { });
+      for (const s of autos.slice(30)) await this.deleteSnapshot(s.id).catch(caught('cloud.snapshot.prune'));
     },
 
     /* ---------- private storage: imported subject packs + database backups ---------- */
@@ -534,7 +535,7 @@
       if (files.length) { const up = await this.uploadShareFiles('noema-public', f => `${uid()}/${id}/sources/${f.safe}/file.${f.ext}`, files, onProgress); pack = { ...pack, sharedFiles: up.map }; meta = { ...meta, filePaths: up.paths, sourceFiles: files.filter(f => !f.act).length, sourceBytes: files.reduce((a, f) => a + f.blob.size, 0) }; }
       else meta = { ...meta, filePaths: [], sourceFiles: 0 };
       const old = ((await this.myPublished().catch(() => [])) || []).find(r => r.subject_id === id);
-      const stale = (old?.meta?.filePaths || []).filter(x => !(meta.filePaths || []).includes(x)); if (stale.length) await this.deleteObjects('noema-public', stale).catch(() => { });
+      const stale = (old?.meta?.filePaths || []).filter(x => !(meta.filePaths || []).includes(x)); if (stale.length) await this.deleteObjects('noema-public', stale).catch(caught('cloud.page.cleanup'));
       await call(`/storage/v1/object/noema-public/${uid()}/${id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } });
       const row = { owner: uid(), subject_id: id, owner_name: meta.ownerName || null, title: pack.subject.title, emoji: pack.subject.emoji || null, description: pack.subject.description || null, language: pack.subject.language || null, meta, updated_at: new Date().toISOString() };
       await call('/rest/v1/noema_public_packs?on_conflict=owner,subject_id', { method: 'POST', body: [row], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
@@ -542,7 +543,7 @@
     async unpublish(id) {
       const old = ((await this.myPublished().catch(() => [])) || []).find(r => r.subject_id === id);
       await call(`/rest/v1/noema_public_packs?owner=eq.${uid()}&subject_id=eq.${enc(id)}`, { method: 'DELETE' });
-      await this.deleteObjects('noema-public', [`${uid()}/${id}.json`, ...(old?.meta?.filePaths || [])]).catch(() => { });
+      await this.deleteObjects('noema-public', [`${uid()}/${id}.json`, ...(old?.meta?.filePaths || [])]).catch(caught('cloud.page.cleanup'));
     },
     async myPublished() { return call(`/rest/v1/noema_public_packs?select=subject_id,title,updated_at,meta&owner=eq.${uid()}`); },
     /* ---------- the page others see (Me › Me, docs/PROFILE.md): one row per person, readable by everybody once published ---------- */
@@ -579,14 +580,14 @@
         }
         await call(`/storage/v1/object/noema-shared/${row.id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } });
       }
-      catch (e) { await call(`/rest/v1/noema_shares?id=eq.${row.id}`, { method: 'DELETE' }).catch(() => { }); throw e; }
+      catch (e) { await call(`/rest/v1/noema_shares?id=eq.${row.id}`, { method: 'DELETE' }).catch(caught('cloud.share.rollback')); throw e; }
       return row;
     },
     async incomingShares() { const me = (session()?.user?.email || '').toLowerCase(); if (!me) return []; return call(`/rest/v1/noema_shares?select=*&to_email=eq.${enc(me)}&status=eq.pending&order=created_at.desc`); },
     async outgoingShares() { return call(`/rest/v1/noema_shares?select=id,to_email,subject_id,title,status,created_at,responded_at,meta&from_user=eq.${uid()}&order=created_at.desc&limit=200`); },
     async downloadShared(id) { const r = await call(`/storage/v1/object/authenticated/noema-shared/${id}.json`, { raw: true }); return r.json(); },
     async answerShare(id, accept) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: accept ? 'accepted' : 'rejected', responded_at: new Date().toISOString() }, headers: { Prefer: 'return=minimal' } }); },
-    async revokeShare(id, filePaths = []) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: 'revoked' }, headers: { Prefer: 'return=minimal' } }); await this.deleteObjects('noema-shared', [`${id}.json`, ...filePaths]).catch(() => { }); },
+    async revokeShare(id, filePaths = []) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: 'revoked' }, headers: { Prefer: 'return=minimal' } }); await this.deleteObjects('noema-shared', [`${id}.json`, ...filePaths]).catch(caught('cloud.share.cleanup')); },
 
     /* ---------- 🩺 self-test against the REAL project with the signed-in account (cleans up after itself) ---------- */
     async selfTest(onStep = () => { }) {

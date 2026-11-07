@@ -13,6 +13,7 @@ const ctx = { console, fetch, Blob, URL, setTimeout, clearTimeout, Date, JSON, P
 ctx.window = ctx; vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(path.join(ROOT, 'config.js'), 'utf8'), ctx);
 const CFG = Object.assign({}, ctx.NOEMA_CONFIG, arg('--url') ? { supabaseUrl: arg('--url') } : {}, arg('--key') ? { supabaseKey: arg('--key') } : {});
+vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine', 'core.js'), 'utf8'), ctx);   // NoemaCore: cloud.js keeps its keys through it
 vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine', 'cloud.js'), 'utf8'), ctx);
 const C = ctx.NoemaCloud;
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };

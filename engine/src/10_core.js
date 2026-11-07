@@ -58,7 +58,7 @@ const F = s => h('span', { html: fmt(s) });
 const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
-const today = () => NoemaDay.key();   // the learner's local day (engine/day.js)
+const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------- syntax highlight ---------- */
@@ -105,7 +105,7 @@ function codeBlock(code, lang) {
 }
 /* chat markdown */
 function md(s) {                 // full markdown (marked + DOMPurify when available), lite fallback
-  if (window.marked && window.DOMPurify) { try { return mdRich(s); } catch (e) { } }
+  if (window.marked && window.DOMPurify) { try { return mdRich(s); } catch (e) { NoemaCore.errors.report(e, { where: 'engine.markdown', severity: 'warning' }); } }
   return mdLite(s);
 }
 function mdLite(s) {
@@ -181,7 +181,7 @@ function flushSave() {
   const { settings, ...rest } = S; const { srcOn, apiKey, mt: _mt, ...glob } = settings;   // a:settings.mt is engine/mt.js's own (written there): never written back from this copy
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
   Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
-  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}') || {}; } catch (e) { }
+  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}') || {}; } catch (e) { NoemaCore.errors.report(e, { where: 'engine.settings.read', severity: 'warning' }); }
   delete cur.apiKey;
   for (const k of Object.keys(glob)) if (!(k in cur) || JSON.stringify(glob[k]) !== settingsSeen[k]) cur[k] = glob[k];
   Noema.kv.set(SETTINGS_KEY, JSON.stringify(cur));
@@ -197,14 +197,14 @@ addEventListener('noema:remote', e => {
     for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
     Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null });
   } else if (keys.includes(STATE_KEY)) {
-    let st = {}; try { st = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (x) { }
+    let st = {}; try { st = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.state', severity: 'warning' }); }
     const { settings, ...mine } = S; const merged = NoemaCloud.mergeState(mine, st); delete merged.settings;
     for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
     Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
     if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;
   }
-  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); seeSettings(); } catch (x) { } }
-  if (keys.includes(STATE_KEY) || keys.includes(SETTINGS_KEY)) { if (Noema.kv.get(STATE_KEY) != null) flushSave(); try { renderTopStats(); route(); } catch (x) { } }
+  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); seeSettings(); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.settings', severity: 'warning' }); } }
+  if (keys.includes(STATE_KEY) || keys.includes(SETTINGS_KEY)) { if (Noema.kv.get(STATE_KEY) != null) flushSave(); try { renderTopStats(); route(); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.render', severity: 'error' }); } }
 });
 if (CARD_KEYS_MOVED) save();
 addEventListener('pagehide', flushSave);
@@ -244,7 +244,7 @@ function beep(kind) {
       g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.08, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
       o.connect(g).connect(AC.destination); o.start(t); o.stop(t + 0.2);
     });
-  } catch (e) { }
+  } catch (e) { NoemaCore.errors.report(e, { where: 'engine.sound', severity: 'debug' }); }
 }
 
 /* ---------- confetti ---------- */
@@ -263,8 +263,7 @@ function confetti(n = 120) {
   })();
 }
 function toast(msg, ms = 2200) {
-  let t = $('.toasts'); if (!t) { t = h('div', { class: 'toasts' }); document.body.append(t); }
-  const el = h('div', { class: 'toast' }, window.Noema?.plain ? Noema.plain.text(msg) : msg); t.append(el); setTimeout(() => el.remove(), ms);
+  NoemaCore.notify.toast(window.Noema?.plain ? Noema.plain.text(msg) : msg, { ms });
 }
 function modal(build) {
   const m = h('div', { class: 'modal', onclick: e => { if (e.target === m) close(); } });

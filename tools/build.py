@@ -305,7 +305,7 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('day.js', 'engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
+    for f in ('core.js', 'core-worker.js', 'engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES, *LIB_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
     for f in ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
     shutil.copy(os.path.join(ENGINE, 'pyodide-sw.js'), os.path.join(out, 'engine', 'pyodide-sw.js'))   # py-module@1: the service worker that keeps Python offline (its files: tools/fetch_pyodide.py after this)
@@ -536,7 +536,8 @@ def build_bundle(metas):
 {packs}<script>{esc(rd("engine/vendor/marked.umd.js"))}</script>
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
 <script>{esc(rd("engine/vendor/intl-messageformat.iife.js"))}</script>
-<script>{esc(rd("engine/day.js"))}</script>
+<script type="text/plain" id="noema-core-worker-src">{esc(rd("engine/core-worker.js"))}</script>
+<script>{esc(rd("engine/core.js"))}</script>
 {i18n_cats}<script>{esc(rd("engine/i18n.js"))}</script>
 <script>{esc(rd("engine/themes.js"))}</script>
 <script>{esc(rd("engine/art.js"))}</script>
