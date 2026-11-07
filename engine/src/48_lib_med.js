@@ -110,8 +110,11 @@
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const lg = Math.log10;
   function erf(x) { const s = Math.sign(x); x = Math.abs(x); const t = 1 / (1 + 0.3275911 * x); const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x); return s * y; }
-  const Phi = x => 0.5 * (1 + erf(x / Math.SQRT2));   // Abramowitz & Stegun 7.1.26 (|error| < 1.5e-7)
-  function PhiInv(p) {   // Acklam's rational approximation (rel. error < 1.15e-9)
+  /* Φ, Φ⁻¹ and roots by the simulation kernel (NoemaSimKit, docs/library/simkit.md): Φ by the incomplete gamma, Φ⁻¹ by Wichura's AS241
+     (about 16 digits), roots by Brent 1973; FALLBACK without the kernel (marked): A&S 7.1.26 (|error| < 1.5e-7), Acklam, bisection */
+  const Phi = x => { const K = C.kit(); return K ? K.normCdf(x) : 0.5 * (1 + erf(x / Math.SQRT2)); };
+  const PhiInv = p => { const K = C.kit(); return K ? K.normInv(p) : PhiInvAcklam(p); };
+  function PhiInvAcklam(p) {   // Acklam's rational approximation (rel. error < 1.15e-9)
     if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
     const a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02, 1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00];
     const b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02, 6.680131188771972e+01, -1.328068155288572e+01];
@@ -123,7 +126,12 @@
     const q = p - 0.5, r = q * q;
     return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
   }
-  function bisect(f, a, b, n) { let fa = f(a); for (let i = 0; i < (n || 100); i++) { const m = (a + b) / 2, fm = f(m); if ((fm < 0) === (fa < 0)) { a = m; fa = fm; } else b = m; } return (a + b) / 2; }
+  function bisect(f, a, b, n) {
+    const K = C.kit();
+    if (K) { const fa = f(a), fb = f(b); if (fa * fb <= 0) { const r = K.brent(f, a, b, 1e-13 * Math.max(1, Math.abs(a), Math.abs(b)), fa, fb); if (Number.isFinite(r)) return r; } }
+    return bisectOwn(f, a, b, n);
+  }
+  function bisectOwn(f, a, b, n) { let fa = f(a); for (let i = 0; i < (n || 100); i++) { const m = (a + b) / 2, fm = f(m); if ((fm < 0) === (fa < 0)) { a = m; fa = fm; } else b = m; } return (a + b) / 2; }
   const linspace = (a, b, n) => Array.from({ length: n }, (_, i) => a + (b - a) * i / (n - 1));
   const logspace = (a, b, n) => Array.from({ length: n }, (_, i) => a * Math.pow(b / a, i / (n - 1)));
 
@@ -694,7 +702,7 @@
 
   /* ---------- the stepper (docs/INTERACTIVE_LIBRARY.md §1.6): med@1 in a co-simulation ----------
      The PK items become compartment models stepped in time (the same pharmacokinetics as above, Rowland & Tozer 2019; integrated with
-     classical RK4, ≤ 0.05/k per substep, split exactly at each dose): pk.iv (central), pk.oral (gut → central, F, tlag), pk.infusion
+     classical RK4 of NoemaSimKit.integrate, ≤ 0.05/k per substep, split exactly at each dose; the AUC integrated as one more state): pk.iv (central), pk.oral (gut → central, F, tlag), pk.infusion
      (a zero-order rate for dur), pk.twocpt (central ⇄ peripheral, a bolus at the start), pk.mm (Michaelis–Menten elimination). Their
      inputs are read at each step (a clearance another part computes, a dose a controller changes). Fields per step: c (the concentration
      now; a series output collects one sample a step), t, cmax / cmin / auc (so far), the item's other numbers at the current inputs.
@@ -742,8 +750,17 @@
         for (let s = 0; s + 1 < cuts.length; s++) {
           while (di < doses.length && doses[di][0] <= cuts[s] + 1e-12 * Math.max(1, Math.abs(cuts[s]))) { a[doses[di][1]] += doses[di][2]; di++; c = pkConcOf(it.fn, x, a); cmax = Math.max(cmax, c); }
           const span = cuts[s + 1] - cuts[s]; if (!(span > 0)) continue;
-          const m = Math.min(20000, Math.max(1, Math.ceil(span * rate / 0.05))), h = span / m;
-          for (let j = 0; j < m; j++) {
+          const m = Math.min(20000, Math.max(1, Math.ceil(span * rate / 0.05))), h = span / m, K = C.kit();
+          if (K) {   // the kernel's RK4 (NoemaSimKit.integrate, fixed step h); the AUC is one more state, c' = conc: exact for the scheme
+            const na = a.length, yy = new Array(na), grid = []; for (let j = 1; j <= m; j++) grid.push(j === m ? cuts[s + 1] : cuts[s] + j * h);
+            const R = K.integrate({ f: (tt, y, dy) => { for (let q = 0; q < na; q++) yy[q] = y[q]; const d = f(yy, tt); for (let q = 0; q < na; q++) dy[q] = d[q]; dy[na] = pkConcOf(it.fn, x, yy); },
+              y0: [...a, 0], t0: cuts[s], tEnd: cuts[s + 1], method: 'rk4', dt: h, maxSteps: m + 2, samples: grid,
+              onSample: (tt, y) => { const c2 = pkConcOf(it.fn, x, Array.from(y).slice(0, na)); cmax = Math.max(cmax, c2); cmin = Math.min(cmin, c2); } });
+            for (let q = 0; q < na; q++) a[q] = Math.max(0, R.y[q]); auc += R.y[na]; c = pkConcOf(it.fn, x, a);
+            if (R.stop !== 'end') fail = fail || 'nan';
+            continue;
+          }
+          for (let j = 0; j < m; j++) {   // FALLBACK without the kernel: the classical RK4 here
             const tt = cuts[s] + j * h, k1 = f(a, tt), k2 = f(a.map((v, q) => v + h / 2 * k1[q]), tt + h / 2), k3 = f(a.map((v, q) => v + h / 2 * k2[q]), tt + h / 2), k4 = f(a.map((v, q) => v + h * k3[q]), tt + h);
             for (let q = 0; q < a.length; q++) a[q] = Math.max(0, a[q] + h / 6 * (k1[q] + 2 * k2[q] + 2 * k3[q] + k4[q]));
             const c2 = pkConcOf(it.fn, x, a); auc += h * (c + c2) / 2; c = c2; cmax = Math.max(cmax, c); cmin = Math.min(cmin, c);
@@ -766,7 +783,7 @@
     },
   };
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
-  engine.workerSource = C.workerSource(noemaLibMedModule, 'NoemaLibMed');
+  engine.workerSource = C.workerSource(noemaLibMedModule, 'NoemaLibMed', { kit: true });
   root.NoemaLibMed = Object.freeze({ id: ID, table: { model: { items: { $req: true, $list: { $obj: Object.assign({}, ITEM, { fn: 'enum:' + Object.keys(SIG.fns).join('|') + '!', opts: 'any' }) }, min: 1, max: 48 } }, outputs: { scalar: [], series: [], scene: [] }, offered: m => { const o = { scalar: [], series: [], scene: [] }; for (const it of (isObj(m) && Array.isArray(m.items) ? m.items : [])) { const S = isObj(it) && typeof it.id === 'string' ? SIG.fns[it.fn] : null; if (!S) continue; o.scalar.push(...S.out.split(' ').filter(Boolean).map(f => it.id + '.' + f)); o.series.push(...S.series.split(' ').filter(Boolean).map(f => it.id + '.' + f)); if (S.scene) o.scene.push(it.id); } return o; } }, SIG, RANGE, checkSpec, exprs, keys, run, compute, calc, engine: Object.freeze(engine), simEngine, stepper, prepare, moduleSource: () => noemaLibMedModule.toString() });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

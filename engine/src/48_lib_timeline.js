@@ -795,7 +795,7 @@
   const convert = (rd, cal, options) => (CAL[cal] && CAL[cal].from ? CAL[cal].from(rd, options || {}) : null);
   const toRD = (fields, options) => (CAL[fields.cal] && CAL[fields.cal].to ? CAL[fields.cal].to(fields, options || {}) : { rd: NaN, flags: ['invalid'] });
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibTimelineModule, 'NoemaLibTimeline');
+  engine.workerSource = C.workerSource(noemaLibTimelineModule, 'NoemaLibTimeline', { kit: true });
   root.NoemaLibTimeline = Object.freeze({
     table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine, TABLES: T,

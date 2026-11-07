@@ -10,7 +10,7 @@ const ENGINE_GROUPS = [   // the library's engines by field (catalogue ids); i18
   ['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'logic@1', 'des@1', 'field@1']],
   ['life', ['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1', 'agents@1']],
   ['arts', ['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1']],
-  ['thought', [, 'rhetoric@1', 'philo@1']],
+  ['thought', [, 'rhetoric@1', 'philo@1', 'law@1']],
 ];
 const engName = e => tE('engine.engines.' + e.slug + '.name');
 const engWhat = e => tE('engine.engines.' + e.slug + '.what');

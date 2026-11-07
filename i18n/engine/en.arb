@@ -6690,6 +6690,14 @@
   "@engine.engines.prob.what": {
     "description": "One-line description."
   },
+  "engine.engines.law.name": "Law",
+  "@engine.engines.law.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.law.what": "Statutes as rules with exceptions, arguments and proof standards, precedents, deadlines, contracts and damages, crimes and sentences, proportionality, voting, citations, inheritance.",
+  "@engine.engines.law.what": {
+    "description": "One-line description."
+  },
   "engine.engines.field.name": "Fields in space",
   "@engine.engines.field.name": {
     "description": "Engine name: fields over space (heat, waves, diffusion, cellular automata)."
@@ -10065,5 +10073,429 @@
   "engine.author.f.lib.wheel": "Helical wheel",
   "@engine.author.f.lib.wheel": {
     "description": "Label of the field “wheel” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.equation": "Equation",
+  "@engine.author.f.lib.equation": {
+    "description": "Label of the field “equation” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.damping": "Damping",
+  "@engine.author.f.lib.damping": {
+    "description": "Label of the field “damping” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.kinetics": "Reaction kinetics",
+  "@engine.author.f.lib.kinetics": {
+    "description": "Label of the field “kinetics” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.reaction": "Reaction terms",
+  "@engine.author.f.lib.reaction": {
+    "description": "Label of the field “reaction” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.amp": "Amplitude",
+  "@engine.author.f.lib.amp": {
+    "description": "Label of the field “amp” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.sources": "Sources",
+  "@engine.author.f.lib.sources": {
+    "description": "Label of the field “sources” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.obstacles": "Obstacles",
+  "@engine.author.f.lib.obstacles": {
+    "description": "Label of the field “obstacles” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.all": "All sides",
+  "@engine.author.f.lib.all": {
+    "description": "Label of the field “all” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.left": "Left side",
+  "@engine.author.f.lib.left": {
+    "description": "Label of the field “left” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.right": "Right side",
+  "@engine.author.f.lib.right": {
+    "description": "Label of the field “right” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.bottom": "Bottom side",
+  "@engine.author.f.lib.bottom": {
+    "description": "Label of the field “bottom” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.frames": "Frames recorded",
+  "@engine.author.f.lib.frames": {
+    "description": "Label of the field “frames” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.nine": "Nine-point Laplacian",
+  "@engine.author.f.lib.nine": {
+    "description": "Label of the field “nine” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.probes": "Probes",
+  "@engine.author.f.lib.probes": {
+    "description": "Label of the field “probes” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.front": "Front",
+  "@engine.author.f.lib.front": {
+    "description": "Label of the field “front” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.probe": "Probe",
+  "@engine.author.f.lib.probe": {
+    "description": "Label of the field “probe” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.interrupts": "Interrupts",
+  "@engine.author.f.lib.interrupts": {
+    "description": "Label of the field “interrupts” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.omega": "Relaxation factor ω",
+  "@engine.author.f.lib.omega": {
+    "description": "Label of the field “omega” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.neighbourhood": "Neighbourhood",
+  "@engine.author.f.lib.neighbourhood": {
+    "description": "Label of the field “neighbourhood” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.wrap": "Wrap around",
+  "@engine.author.f.lib.wrap": {
+    "description": "Label of the field “wrap” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.update": "Update order",
+  "@engine.author.f.lib.update": {
+    "description": "Label of the field “update” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.drop": "Where grains fall",
+  "@engine.author.f.lib.drop": {
+    "description": "Label of the field “drop” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.pile": "Grains in one pile",
+  "@engine.author.f.lib.pile": {
+    "description": "Label of the field “pile” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.norm": "Error norm",
+  "@engine.author.f.lib.norm": {
+    "description": "Label of the field “norm” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.contours": "Contour lines",
+  "@engine.author.f.lib.contours": {
+    "description": "Label of the field “contours” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.space": "Space",
+  "@engine.author.f.lib.space": {
+    "description": "Label of the field “space” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.torus": "Wrap around (torus)",
+  "@engine.author.f.lib.torus": {
+    "description": "Label of the field “torus” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.capacity": "Capacity",
+  "@engine.author.f.lib.capacity": {
+    "description": "Label of the field “capacity” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.globals": "Global variables",
+  "@engine.author.f.lib.globals": {
+    "description": "Label of the field “globals” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.patches": "Patches",
+  "@engine.author.f.lib.patches": {
+    "description": "Label of the field “patches” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.diffuse": "Diffusion",
+  "@engine.author.f.lib.diffuse": {
+    "description": "Label of the field “diffuse” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.breeds": "Breeds",
+  "@engine.author.f.lib.breeds": {
+    "description": "Label of the field “breeds” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.prob": "Probability",
+  "@engine.author.f.lib.prob": {
+    "description": "Label of the field “prob” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.how": "How",
+  "@engine.author.f.lib.how": {
+    "description": "Label of the field “how” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.speed": "Speed",
+  "@engine.author.f.lib.speed": {
+    "description": "Label of the field “speed” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.patch": "Patch variable",
+  "@engine.author.f.lib.patch": {
+    "description": "Label of the field “patch” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.amount": "Amount",
+  "@engine.author.f.lib.amount": {
+    "description": "Label of the field “amount” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.into": "Into variable",
+  "@engine.author.f.lib.into": {
+    "description": "Label of the field “into” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.gain": "Gain",
+  "@engine.author.f.lib.gain": {
+    "description": "Label of the field “gain” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.breed": "Breed",
+  "@engine.author.f.lib.breed": {
+    "description": "Label of the field “breed” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.where": "Condition",
+  "@engine.author.f.lib.where": {
+    "description": "Label of the field “where” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.self": "Self weight",
+  "@engine.author.f.lib.self": {
+    "description": "Label of the field “self” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.perf": "Performative",
+  "@engine.author.f.lib.perf": {
+    "description": "Label of the field “perf” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.content": "Message content",
+  "@engine.author.f.lib.content": {
+    "description": "Label of the field “content” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.contacts": "Contacts per step",
+  "@engine.author.f.lib.contacts": {
+    "description": "Label of the field “contacts” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.share": "Share passed on",
+  "@engine.author.f.lib.share": {
+    "description": "Label of the field “share” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.sep": "Separation",
+  "@engine.author.f.lib.sep": {
+    "description": "Label of the field “sep” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.ali": "Alignment",
+  "@engine.author.f.lib.ali": {
+    "description": "Label of the field “ali” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.coh": "Cohesion",
+  "@engine.author.f.lib.coh": {
+    "description": "Label of the field “coh” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.vision": "Vision",
+  "@engine.author.f.lib.vision": {
+    "description": "Label of the field “vision” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.bdi": "BDI deliberation",
+  "@engine.author.f.lib.bdi": {
+    "description": "Label of the field “bdi” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.commitment": "Commitment",
+  "@engine.author.f.lib.commitment": {
+    "description": "Label of the field “commitment” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.goals": "Goals",
+  "@engine.author.f.lib.goals": {
+    "description": "Label of the field “goals” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.achieved": "Achieved when",
+  "@engine.author.f.lib.achieved": {
+    "description": "Label of the field “achieved” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.impossible": "Impossible when",
+  "@engine.author.f.lib.impossible": {
+    "description": "Label of the field “impossible” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.priority": "Priority",
+  "@engine.author.f.lib.priority": {
+    "description": "Label of the field “priority” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.plans": "Plans",
+  "@engine.author.f.lib.plans": {
+    "description": "Label of the field “plans” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.context": "Context condition",
+  "@engine.author.f.lib.context": {
+    "description": "Label of the field “context” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.aggregates": "Aggregates",
+  "@engine.author.f.lib.aggregates": {
+    "description": "Label of the field “aggregates” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.schedule": "Schedule",
+  "@engine.author.f.lib.schedule": {
+    "description": "Label of the field “schedule” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.reporters": "Reporters",
+  "@engine.author.f.lib.reporters": {
+    "description": "Label of the field “reporters” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.hist": "Histograms",
+  "@engine.author.f.lib.hist": {
+    "description": "Label of the field “hist” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.replications": "Replications",
+  "@engine.author.f.lib.replications": {
+    "description": "Label of the field “replications” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.once": "Only once",
+  "@engine.author.f.lib.once": {
+    "description": "Label of the field “once” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.sanction": "Sanction",
+  "@engine.author.f.lib.sanction": {
+    "description": "Label of the field “sanction” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.protocol": "Protocol",
+  "@engine.author.f.lib.protocol": {
+    "description": "Label of the field “protocol” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.tasks": "Tasks",
+  "@engine.author.f.lib.tasks": {
+    "description": "Label of the field “tasks” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.contractors": "Contractors",
+  "@engine.author.f.lib.contractors": {
+    "description": "Label of the field “contractors” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.format": "Auction format",
+  "@engine.author.f.lib.format": {
+    "description": "Label of the field “format” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.bidders": "Bidders",
+  "@engine.author.f.lib.bidders": {
+    "description": "Label of the field “bidders” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.strategy": "Strategy",
+  "@engine.author.f.lib.strategy": {
+    "description": "Label of the field “strategy” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.shade": "Shading",
+  "@engine.author.f.lib.shade": {
+    "description": "Label of the field “shade” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.inc": "Increment",
+  "@engine.author.f.lib.inc": {
+    "description": "Label of the field “inc” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.reserve": "Reserve price",
+  "@engine.author.f.lib.reserve": {
+    "description": "Label of the field “reserve” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.values": "Values",
+  "@engine.author.f.lib.values": {
+    "description": "Label of the field “values” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.horizon": "Horizon",
+  "@engine.author.f.lib.horizon": {
+    "description": "Label of the field “horizon” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.players": "Players",
+  "@engine.author.f.lib.players": {
+    "description": "Label of the field “players” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.kinds": "Player kinds",
+  "@engine.author.f.lib.kinds": {
+    "description": "Label of the field “kinds” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.generations": "Generations",
+  "@engine.author.f.lib.generations": {
+    "description": "Label of the field “generations” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.generosity": "Generosity",
+  "@engine.author.f.lib.generosity": {
+    "description": "Label of the field “generosity” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.reporter": "Reporter",
+  "@engine.author.f.lib.reporter": {
+    "description": "Label of the field “reporter” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.arrows": "Arrows",
+  "@engine.author.f.lib.arrows": {
+    "description": "Label of the field “arrows” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.type.parts": "Several engines (parts)",
+  "@engine.author.type.parts": {
+    "description": "Activity author: the kind of activity that combines several engines in one simulation (parts). Short, in the kind select."
+  },
+  "engine.author.type.partsWhat": "One simulation from several engines: each part has its own model, and they pass values to each other.",
+  "@engine.author.type.partsWhat": {
+    "description": "Activity author: tooltip of the kind “Several engines (parts)”."
+  },
+  "engine.author.typeGroupParts": "Combined",
+  "@engine.author.typeGroupParts": {
+    "description": "Activity author: heading of the group of the kind select that holds “Several engines (parts)”. Short."
+  },
+  "engine.author.f.partId": "Part id",
+  "@engine.author.f.partId": {
+    "description": "Label of a form field of the activity author: the id of a part of a simulation with several engines. Short."
+  },
+  "engine.author.f.partUse": "Reuse the part file",
+  "@engine.author.f.partUse": {
+    "description": "Label of a form field of the activity author: the file of the pack (activities/_parts/) a part reuses. Short."
+  },
+  "engine.author.f.partWith": "Changes to the file",
+  "@engine.author.f.partWith": {
+    "description": "Label of a form field of the activity author: the changes made to a reused part file. Short."
+  },
+  "engine.author.f.partInputs": "Inputs",
+  "@engine.author.f.partInputs": {
+    "description": "Label of a form field of the activity author: the inputs of a part (names its model may use, given as numbers, formulas or another part's series). Short."
+  },
+  "engine.author.f.partInput.series": "Series of another part",
+  "@engine.author.f.partInput.series": {
+    "description": "Option of an input of a part in the activity author: the input is a series computed by another part. Short."
+  },
+  "engine.author.f.partSeries": "Series",
+  "@engine.author.f.partSeries": {
+    "description": "Label of a form field of the activity author: the series output (of another part) an input reads. Short."
+  },
+  "engine.author.f.couple": "Coupling",
+  "@engine.author.f.couple": {
+    "description": "Label of a form field of the activity author: how the parts of a simulation are coupled. Short."
+  },
+  "engine.author.f.coupleKind.chain": "Chain (each part once)",
+  "@engine.author.f.coupleKind.chain": {
+    "description": "Option of “Coupling”: each part runs once, in the order of what it needs. Short."
+  },
+  "engine.author.f.coupleKind.custom": "Loops or co-simulation",
+  "@engine.author.f.coupleKind.custom": {
+    "description": "Option of “Coupling”: loops (a fixed point) or a co-simulation in time. Short."
+  },
+  "engine.author.f.loops": "Loops (fixed point)",
+  "@engine.author.f.loops": {
+    "description": "Label of a form field of the activity author: fixed-point loops of parts that depend on each other. Short."
+  },
+  "engine.author.f.loopParts": "Parts of the loop",
+  "@engine.author.f.loopParts": {
+    "description": "Label of a form field of the activity author: the parts of one fixed-point loop. Short."
+  },
+  "engine.author.f.tol": "Tolerance",
+  "@engine.author.f.tol": {
+    "description": "Label of a form field of the activity author: the tolerance (the largest relative change that counts as settled). Short."
+  },
+  "engine.author.f.maxIter": "Most iterations",
+  "@engine.author.f.maxIter": {
+    "description": "Label of a form field of the activity author: the most passes of a loop. Short."
+  },
+  "engine.author.f.relax": "Relaxation",
+  "@engine.author.f.relax": {
+    "description": "Label of a form field of the activity author: the relaxation factor of a loop (1 = none). Short."
+  },
+  "engine.author.f.init": "First guesses",
+  "@engine.author.f.init": {
+    "description": "Label of a form field of the activity author: the first guesses of the outputs of a loop or co-simulation. Short."
+  },
+  "engine.author.f.cosim": "Co-simulation in time",
+  "@engine.author.f.cosim": {
+    "description": "Label of a form field of the activity author: the parts that evolve together in time (co-simulation). Short."
+  },
+  "engine.author.f.cosimParts": "Parts that evolve together",
+  "@engine.author.f.cosimParts": {
+    "description": "Label of a form field of the activity author: the parts of the co-simulation. Short."
+  },
+  "engine.author.f.cosimOrder": "Exchange order",
+  "@engine.author.f.cosimOrder": {
+    "description": "Label of a form field of the activity author: the order in which the parts of a co-simulation exchange values. Short."
+  },
+  "engine.author.f.t0": "Start time",
+  "@engine.author.f.t0": {
+    "description": "Label of a form field of the activity author: the time a co-simulation starts. Short."
+  },
+  "engine.author.f.cosimTime": "Time series name",
+  "@engine.author.f.cosimTime": {
+    "description": "Label of a form field of the activity author: the name of a series of the times of the co-simulation's steps. Short."
+  },
+  "engine.author.f.iterate": "Iterate each step",
+  "@engine.author.f.iterate": {
+    "description": "Label of a form field of the activity author: repeat each step of a co-simulation until the exchanged values settle. Short."
   }
 }

@@ -12,6 +12,9 @@
        1968), fillers, sentence lengths, nPVI (Grabe & Low 2002), readability by each language's own formula, figures of repetition
        and parallelism detected over tokens (anaphora, epistrophe, symploce, anadiplosis, climax, epanalepsis, epizeuxis,
        antimetabole, polyptoton, alliteration, tricolon, isocolon, asyndeton, polysyndeton, questions, antithesis);
+       sound figures over phonetic keys per language (rhyme, assonance, consonance, paronomasia), trope CANDIDATES by explicit cues
+       (simile markers, metaphor signals and "A is the B of C", irony markers and scare quotes, each with its cue), Greek synizesis;
+     • bipolar maps (support edges) and ASPIC+ theories, both through logic@1 (bipolar, aspic, afSolve);
      • orders and models: Monroe's motivated sequence (1935), the parts of an oration (Cicero, De Inv. I.19), the canons, stasis
        (Hermagoras via Cicero / Quintilian), the Elaboration Likelihood Model (Petty & Cacioppo 1986) and inoculation (McGuire 1961;
        Banas & Rains 2010) as teaching models, audience fit.

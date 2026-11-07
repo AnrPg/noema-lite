@@ -474,6 +474,13 @@
      stop its growth after an onset delay; fluids/blood add volume (crystalloid 40 % retained); noradrenaline raises SVR; oxygen sets
      FiO2; PaO2 from the shunt equation (med@1's Severinghaus curve); lactate rises when DO2 falls below a critical delivery. */
   const VDEF = { essential: 0.3, timely: 0.25, safety: 0.2, efficiency: 0.1, order: 0.05, calib: 0.1 };
+  /** the arterial PO₂ whose O₂ content is ca (content is monotone in PO₂): Brent's root (NoemaSimKit.brent; Brent 1973 ch. 4) on
+      [0, P_A]; a content outside the bracket gives its nearer end. FALLBACK without the kernel: 40 bisections */
+  function pao2Of(content, sev, hb, ca, pA) {
+    const g = p => content(hb, sev(p), p) - ca, K = C.kit();
+    if (K) { const g0 = g(0), g1 = g(pA); if (!(g0 < 0)) return 0; if (!(g1 > 0)) return pA; const r = K.brent(g, 0, pA, 1e-10, g0, g1); if (fin(r)) return r; }
+    let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (g(mid) < 0) lo = mid; else hi = mid; } return (lo + hi) / 2;
+  }
   function runVp(m, F, env, out, codes, seed) {
     const v = m.vp, code = c => codes.vp.add(c), Mx = MED();
     if (!Mx) { code('incomplete'); return null; }
@@ -495,7 +502,7 @@
     // the physiology, minute by minute (internal step 0.1 min)
     const Vn = 70 * W, Vu = 0.7 * Vn, SVn = W, HRn = 72, SVRn = 90 / (SVn * HRn / 1000), Cart = 1.4 * W / 70, crit = 4.5 * W;
     let V = Vn * vol0, RBC = hb0 * V, B = B0, Lac = 1, HR = HRn, sv = 1, bleeding = bleed > 0, hypo = 0, crash = 0, died = NaN;
-    const rnd = C.mulberry32(C.hash32('vp', seed || 1)), noise = v.noise === true;
+    const rnd = C.rng(seed || 1, 'vp'), noise = v.noise === true;
     const S = {}; for (const k of ['t', ...VARS]) S[k] = [];
     let minMap = Infinity, maxLac = -Infinity;
     const dt = 0.1;
@@ -510,11 +517,11 @@
       const pf = clamp((V - Vu) / (Vn - Vu), 0, 2.5), SV = SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (HR - 150) / 100));
       const vfac = (1 - 0.55 * B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = SVRn * sv * vfac, CO = Math.max(0, SV * HR / 1000), MAP = fin(died) ? 0 : CO * SVR;
       const hb = RBC / V, shunt = clamp(shunt0 + lungK * B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
-      let pao2 = 0; { let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (content(hb, sev(mid), mid) < ca) lo = mid; else hi = mid; } pao2 = (lo + hi) / 2; }
+      const pao2 = pao2Of(content, sev, hb, ca, pA);
       const sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * B;
       const RR = clamp(14 + 10 * B + 1.2 * Math.max(0, Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
       if (k % 10 === 0) {   // a minute: record (noise only on the shown vitals)
-        const nz = s => (noise ? s * C.gauss(rnd) : 0), dead = fin(died);
+        const nz = s => (noise ? s * C.normal(rnd) : 0), dead = fin(died);
         const rec = { hr: dead ? 0 : HR + nz(2), map: MAP + (dead ? 0 : nz(2)), spo2: dead ? 0 : clamp(100 * sat + nz(1), 0, 100), rr: dead ? 0 : RR + nz(1), lactate: Lac, temp: T, volume: V, burden: B, pao2, hb };
         const pp = dead ? 0 : SV / Cart; rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
         rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: MAP < 60 || sat < 0.85 ? 1 : 0, temp: T, scale2: 0 }).score;
@@ -660,8 +667,7 @@
         const dead = S.died !== null, pf = clamp((S.V - S.Vu) / (S.Vn - S.Vu), 0, 2.5), SV = S.SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (S.HR - 150) / 100));
         const vfac = (1 - 0.55 * S.B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = S.SVRn * S.sv * vfac, CO = Math.max(0, SV * S.HR / 1000), MAP = dead ? 0 : CO * SVR;
         const hb = S.RBC / S.V, shunt = clamp(shunt0 + lungK * S.B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
-        let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (content(hb, sev(mid), mid) < ca) lo = mid; else hi = mid; }
-        const pao2 = (lo + hi) / 2, sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * S.B;
+        const pao2 = pao2Of(content, sev, hb, ca, pA), sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * S.B;
         const RR = clamp(14 + 10 * S.B + 1.2 * Math.max(0, S.Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
         if (j === n || j === 0) {
           const pp = dead ? 0 : SV / S.Cart;
@@ -706,7 +712,8 @@
   /* the Worker gets med@1 too (its calculators are this engine's physiology): NoemaExpr + the core + med + clinic */
   Object.defineProperty(engine, 'workerSource', { enumerable: true, get() {
     const nx = root.NoemaExpr && typeof root.NoemaExpr.source === 'function' ? root.NoemaExpr.source() : '', medSrc = root.NoemaLibMed && root.NoemaLibMed.moduleSource ? root.NoemaLibMed.moduleSource() : '';
-    return nx + '\n;' + C.source() + '\n' + (medSrc ? ';(' + medSrc + ')(self);\n' : '') + ';(' + noemaLibClinicModule.toString() + ')(self);\nself.noemaEngine = self.NoemaLibClinic.simEngine;';
+    const K = C.kit();
+    return nx + '\n;' + C.source() + '\n' + (K ? ';' + K.source() + '\n' : '') + (medSrc ? ';(' + medSrc + ')(self);\n' : '') + ';(' + noemaLibClinicModule.toString() + ')(self);\nself.noemaEngine = self.NoemaLibClinic.simEngine;';
   } });
   /** evaluate(model, inputs) → every computed value (tests, authoring tools) */
   function evaluate(model, inputs, outputs, seed) { const spec = { model, outputs: outputs || [] }; return run(spec, inputs || {}, { seed }); }

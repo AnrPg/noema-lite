@@ -209,6 +209,37 @@ for (const e of LIBS) {
   const opts = ['outKind.scene', 'outKind.sound', 'plotKind.scene', 'plotKind.sound', ...LS.STYLES.map(x => 'lineStyle.' + x)];
   ok(opts.every(k => ('f.' + k) in EN), 'the new options have words ' + opts.filter(k => !(('f.' + k) in EN)));
 }
+{ // parts: several engines in one spec (docs/INTERACTIVE.md §12.8), each part with the form of its engine
+  console.log('— parts: several engines in one spec');
+  const R = AA.registry(SCHEMA_FILES.map(SCH)), PID = LS.PARTS_ID, ps = R.get(PID), sim = SCH('noema.sim-spec.v1.schema.json');
+  ok(!!ps && ps.properties.parts.items.oneOf.length >= LIBS.length && AA.TYPES.some(t => t.parts), `a schema of specs with parts (${PID.split('/').pop()}): a branch per library engine (${LIBS.length}), circuit-mna@1 and a part file (use)`);
+  const C = rj(path.join(ROOT, 'tests', 'fixtures', 'parts_cases.json')).cases, good = Object.entries(C).filter(([k]) => /^parts good/.test(k));
+  const bad1 = [], bad2 = [];
+  for (const [k, c] of good) { const sp = c.spec || c; if (SF.validate(R, sim, sp, sim.$id).length) bad1.push(k); if (SF.validate(R, ps, sp, PID).length) bad2.push(k); }
+  ok(good.length > 0 && !bad1.length && !bad2.length, `sim-spec and the parts schema accept every good case of tests/fixtures/parts_cases.json (${good.length}) ${bad1.concat(bad2).slice(0, 3)}`);
+  const refs = fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'spec.json')) && Array.isArray(rj(path.join(EX, d, 'spec.json')).parts));
+  for (const id of refs) {
+    const d = AA.fromFiles(Object.fromEntries(fs.readdirSync(path.join(EX, id)).filter(f => /\.json$/.test(f)).map(f => [f, fs.readFileSync(path.join(EX, id, f), 'utf8')])));
+    const er = SF.validate(R, ps, d.spec, PID), pr = AA.check(d, R).filter(p => p.tab === 'spec');
+    ok(AA.typeOf(d).parts && AA.specSchemaId(d.spec, R) === PID && !er.length && !pr.length, `${id}: a parts activity, its schema accepts it and check() finds no problem in its spec ${JSON.stringify(er.concat(pr).slice(0, 2))}`);
+  }
+  ok(refs.length >= 1, 'the parts references found: ' + refs.join(', '));
+  const sp0 = good[0][1].spec || good[0][1];
+  const wrong = JSON.parse(JSON.stringify(sp0)); wrong.parts[0].engine = 'nope@1';
+  const noOut = JSON.parse(JSON.stringify(sp0)); delete noOut.parts[0].outputs;
+  ok(SF.validate(R, ps, wrong, PID).length > 0 && SF.validate(R, ps, noOut, PID).length > 0 && SF.validate(R, ps, Object.assign({}, sp0, { couple: { loops: [{ parts: ['a'] }] } }), PID).length > 0,
+    'the parts schema refuses an unknown engine, a part with no outputs, a loop with no tolerance');
+  const b = AA.TYPES.find(t => t.parts).blank();
+  ok(Array.isArray(b.spec.parts) && b.spec.parts.length === 1 && AA.typeOf(b).parts && !b.spec.engine, 'a blank parts activity: one part of a library engine, no top-level engine');
+  const labs = [...LS.titles(ps)].filter(t => t.startsWith('eng.'));
+  ok(labs.length > 0 && labs.every(t => AA.engLabel(t.slice(4)) !== ''), 'a part’s engine is named by the catalogue (eng.<id> titles) ' + labs.length);
+  const sub = AA.partSub(sp0, sp0.parts[0]);
+  ok(sub.engine === sp0.parts[0].engine && Object.keys(sp0.parts[0].inputs || {}).every(k => k in sub.consts), 'a part’s own spec for its engine’s checks: its model and outputs, its inputs as names');
+  const titles = [...LS.titles(ps)].filter(t => !t.startsWith('eng.') && !t.startsWith('lib.') && t !== 'spec');
+  const miss = titles.filter(t => !(('f.' + t) in EN));
+  ok(!miss.length, `every field of the parts schema has a label ${miss.slice(0, 10)}`);
+  ok(['type.parts', 'type.partsWhat', 'typeGroupParts'].every(k => k in EN), 'the parts kind has its words');
+}
 { // the references ship with the page (tools/build.py writes them into activity_author_schemas.js)
   const R = globalThis.NoemaActivityRefs;
   if (!R) console.log('⚠ NoemaActivityRefs is not in engine/activity_author_schemas.js yet (tools/build.py author_schemas_js: the references) — the page then offers Blank only');

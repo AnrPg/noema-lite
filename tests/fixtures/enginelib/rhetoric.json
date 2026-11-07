@@ -1660,6 +1660,429 @@
    ],
    "model": "nope",
    "outputs": "nope"
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "lang": "en",
+    "speeches": [
+     {
+      "id": "t",
+      "text": "Twinkle, twinkle, little star, how I wonder what you are."
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "sound",
+     "speech": "t",
+     "type": "rhyme"
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "soundAt",
+     "speech": "t",
+     "type": "assonance",
+     "sentence": "k"
+    },
+    {
+     "id": "b",
+     "kind": "series",
+     "of": "soundsBySentence",
+     "speech": "t",
+     "type": "rhyme"
+    },
+    {
+     "id": "g",
+     "kind": "scene",
+     "of": "sounds",
+     "speech": "t"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "lang": "en",
+    "speeches": [
+     {
+      "id": "t",
+      "text": "My love is like a red, red rose."
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "trope",
+     "speech": "t",
+     "type": "simile"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "tropeAt",
+     "speech": "t",
+     "type": "metaphor",
+     "sentence": 1
+    },
+    {
+     "id": "b",
+     "kind": "series",
+     "of": "tropesBySentence",
+     "speech": "t",
+     "type": "irony"
+    },
+    {
+     "id": "g",
+     "kind": "scene",
+     "of": "tropes",
+     "speech": "t",
+     "type": "simile"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "lang": "el",
+    "synizesis": true,
+    "speeches": [
+     {
+      "id": "t",
+      "text": "Τα παιδιά παίζουν."
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "syllables",
+     "speech": "t"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "map": {
+     "nodes": [
+      {
+       "id": "a"
+      },
+      {
+       "id": "b"
+      },
+      {
+       "id": "c"
+      }
+     ],
+     "edges": [
+      {
+       "from": "a",
+       "to": "b",
+       "kind": "support"
+      },
+      {
+       "from": "b",
+       "to": "c",
+       "kind": "attack"
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "k",
+     "kind": "scalar",
+     "of": "complexAttacks",
+     "support": "deductive"
+    },
+    {
+     "id": "l",
+     "kind": "scalar",
+     "of": "bipolarLabel",
+     "node": "c",
+     "semantics": "preferred",
+     "ext": 1
+    },
+    {
+     "id": "q",
+     "kind": "scalar",
+     "of": "bipolarAccepted",
+     "node": "a",
+     "mode": "credulous"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "theory": {
+     "kb": [
+      {
+       "f": "snores",
+       "rank": 0
+      },
+      {
+       "f": "professor",
+       "rank": 1
+      }
+     ],
+     "rules": [
+      {
+       "id": "d1",
+       "body": [
+        "snores"
+       ],
+       "head": "misbehaves"
+      },
+      {
+       "id": "d2",
+       "body": [
+        "misbehaves"
+       ],
+       "head": "accessDenied",
+       "rank": 2
+      },
+      {
+       "id": "d3",
+       "body": [
+        "professor"
+       ],
+       "head": "¬accessDenied",
+       "rank": 1
+      }
+     ],
+     "link": "weakest",
+     "ordering": "democratic",
+     "transpose": true
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "aspicArgs"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "aspicDefeats"
+    },
+    {
+     "id": "j",
+     "kind": "scalar",
+     "of": "justified",
+     "concl": "~accessDenied",
+     "semantics": "grounded"
+    },
+    {
+     "id": "p",
+     "kind": "scalar",
+     "of": "postulates"
+    },
+    {
+     "id": "g",
+     "kind": "scene",
+     "of": "aspic"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "theory": {
+     "kb": [
+      {
+       "f": "p & q"
+      }
+     ],
+     "rules": [
+      {
+       "id": "r",
+       "head": "x"
+      },
+      {
+       "id": "r",
+       "body": [
+        "y | z"
+       ],
+       "head": "w"
+      }
+     ],
+     "contraries": [
+      {
+       "u": "a",
+       "v": "b -> c"
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "aspicArgs"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "lang": "en",
+    "speeches": [
+     {
+      "id": "t",
+      "text": "x"
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scalar",
+     "of": "trope",
+     "speech": "t",
+     "type": "hyperbole"
+    },
+    {
+     "id": "j",
+     "kind": "scalar",
+     "of": "justified",
+     "concl": "p -> q"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "bipolarLabel",
+     "node": "zz"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "rhetoric@1",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "kLabel",
+     "min": 1,
+     "max": 4,
+     "step": 1,
+     "default": 1
+    }
+   ],
+   "model": {
+    "synizesis": "yes",
+    "theory": {
+     "link": "strongest",
+     "kb": [
+      {
+       "f": "p",
+       "kind": "fact"
+      }
+     ]
+    }
+   },
+   "outputs": [
+    {
+     "id": "n",
+     "kind": "scalar",
+     "of": "sound",
+     "speech": "t"
+    }
+   ]
   }
  ]
 }

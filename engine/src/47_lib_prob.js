@@ -26,12 +26,12 @@
      rand       randomized algorithms (Motwani–Raghavan; Mitzenmacher–Upfal): amplification, quicksort/quickselect, Karger,
                 Freivalds, Fermat/Miller–Rabin, rounding, balls in bins, Bloom, Count-Min, HyperLogLog, reservoir sampling, cover
                 times, 2-SAT walks, tail bounds vs exact tails, skip lists, treaps, Monte Carlo integration
-   The later modes draw their randomness from NoemaSimKit streams (46_lib_simkit.js, MRG32k3a), the earlier ones from the core's
-   mulberry32 (unchanged, so their seeded results stay as they were).
+   Every mode draws its randomness from NoemaSimKit streams (46_lib_simkit.js, MRG32k3a; one stream per purpose — C.rng(seed, name)),
+   since the kernel migration of 2026-11-07 the earlier modes too (their seeded numbers changed then, not their laws).
    The special functions are written here with their sources beside them (lgamma, Loader's saddle point, the regularised incomplete
    gamma and beta functions, AS 241, AS 243). Pure, bounded, deterministic JS: no DOM, no network, no clock; the transcendental
    functions are NoemaExpr's fdlibm ports (never the platform's Math.* except sqrt, floor and the IEEE-exact operations); seeded
-   randomness only (the core's mulberry32). A value outside a method's validity range is never a silent wrong number: it is NaN or
+   randomness only (the kernel's streams). A value outside a method's validity range is never a silent wrong number: it is NaN or
    Infinity with an issue counted (outputs issue.<code>). */
 (function noemaLibProbModule(root) {
   /* i18n-ignore-start */   // code, not text: only codes, numbers and the model's own state names leave this module
@@ -1235,7 +1235,7 @@
     const n = g(m, 'n', 10000), conf = g(m, 'conf', 0.95);
     if (Ds.some(d => !d) || !(Number.isInteger(n) && n >= 1 && n <= 200000) || !(conf > 0 && conf < 1)) { I.add('param'); return { o, sr, sc: {} }; }
     const f = (prepared && prepared.fns.get(m.expr)) || C.cx(m.expr), E = Object.assign({}, env);
-    const r = C.mulberry32(C.hash32('prob:mc', seed)), z = qnorm(0.5 + conf / 2);
+    const r = C.rng(seed, 'prob:mc'), z = qnorm(0.5 + conf / 2);
     const vals = new Float64Array(n); let cnt = 0, nan = 0, M = 0, S = 0, ind = true;
     const ck = checkpoints(n), runN = [], runMean = [], runLo = [], runHi = []; let ci = 0;
     for (let i = 1; i <= n; i++) {
@@ -1278,7 +1278,7 @@
     const D = mkDist(m.parent, R, I), n = g(m, 'size'), reps = g(m, 'reps', 1000), stat = m.stat || 'mean';
     if (!D || !(Number.isInteger(n) && n >= 1 && n <= 10000) || !(Number.isInteger(reps) && reps >= 1 && reps <= 10000)) { I.add('param'); return { o, sr, sc: {} }; }
     if (n * reps > 1e6) { I.add('budget'); return { o, sr, sc: {} }; }
-    const r = C.mulberry32(C.hash32('prob:sampling', seed)), buf = new Float64Array(n), st = new Float64Array(reps);
+    const r = C.rng(seed, 'prob:sampling'), buf = new Float64Array(n), st = new Float64Array(reps);
     const ck = checkpoints(n * reps); let ci = 0, tot = 0, run = 0; const runN = [], runMean = [];
     for (let k = 0; k < reps; k++) {
       for (let i = 0; i < n; i++) {
@@ -1876,7 +1876,7 @@
       if (!(Number.isInteger(M) && M >= 1 && M <= 1000 && Number.isInteger(M0) && M0 >= 0 && M0 <= M && fin(ef) && Number.isInteger(reps) && reps >= 1 && reps <= 2000)) I.add('param');
       else if (M * reps > 2e6) I.add('budget');
       else {
-        const r = C.mulberry32(C.hash32('prob:multi', m.sim.seed !== undefined ? m.sim.seed : seed));
+        const r = C.rng(m.sim.seed !== undefined ? m.sim.seed : seed, 'prob:multi');
         let fw = 0, fd = 0, pw = 0, fwr = 0, fdr = 0;
         const p = new Array(M);
         for (let k = 0; k < reps; k++) {
@@ -2031,7 +2031,7 @@
   /* ===================================================================================================================== */
   function runWalk(m, R, I, seed) {
     const g = getter(R), o = {}, sr = {}, sc = {}, out = { o, sr, sc };
-    const r = C.mulberry32(C.hash32('prob:walk', seed)), kind = m.kind;
+    const r = C.rng(seed, 'prob:walk'), kind = m.kind;
     const isI = (v, a, b) => Number.isInteger(v) && v >= a && v <= b;
     if (kind === 'galton-watson') {
       let G, dG, mean, pk = null;
@@ -2186,7 +2186,7 @@
     const corr = (a, b) => { const n = a.length, ma = sum(a) / n, mb = sum(b) / n; let sab = 0, saa = 0, sbb = 0; for (let i = 0; i < n; i++) { sab += (a[i] - ma) * (b[i] - mb); saa += (a[i] - ma) * (a[i] - ma); sbb += (b[i] - mb) * (b[i] - mb); } return sab / sqrt(saa * sbb); };
     const T = (a, b) => (two ? sum(a) / a.length - sum(b) / b.length : pair ? corr(a, b) : S1(a));
     const est = T(X, Y); o.estimate = est; o.B = B;
-    const r = C.mulberry32(C.hash32('prob:bootstrap', seed)), n1 = X.length, n2 = Y ? Y.length : 0;
+    const r = C.rng(seed, 'prob:bootstrap'), n1 = X.length, n2 = Y ? Y.length : 0;
     const bs = new Float64Array(B), xa = new Array(n1), ya = new Array(two ? n2 : pair ? n1 : 0);
     for (let k = 0; k < B; k++) {
       if (pair) { for (let i = 0; i < n1; i++) { const j = floor(r() * n1); xa[i] = X[j]; ya[i] = Y[j]; } }
@@ -2231,7 +2231,7 @@
   /** a named NoemaSimKit stream (L'Ecuyer's MRG32k3a, 46_lib_simkit.js) — the randomness of the later modes; null and the code
       no-kit when the kit is not loaded (the result is then NaN, never another generator's numbers) */
   function kitStream(seed, name, I) {
-    const K = root.NoemaSimKit;
+    const K = C.kit();
     if (!K || typeof K.stream !== 'function') { I.add('no-kit'); return null; }
     return K.stream(seed >>> 0, 'prob.' + name);
   }
@@ -3471,7 +3471,7 @@
   /** the Worker source: NoemaExpr, the core, NoemaSimKit (when loaded: the streams of the later modes), then this module */
   Object.defineProperty(engine, 'workerSource', { enumerable: true, get() {
     const NX = root.NoemaExpr, nx = NX && typeof NX.source === 'function' ? NX.source() : '';
-    const sk = root.NoemaSimKit && typeof root.NoemaSimKit.source === 'function' ? root.NoemaSimKit.source() : '';
+    const K = C.kit(), sk = K ? K.source() : '';
     return nx + '\n;' + C.source() + '\n;' + sk + '\n;(' + noemaLibProbModule.toString() + ')(self);\nself.noemaEngine = self.NoemaLibProb.simEngine;';
   } });
   const lawOf = (o, env) => { const I = issueBag(); NOTE = I; const D = mkDist(o, resolver(null, env || {}), I); return D; };

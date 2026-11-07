@@ -415,8 +415,8 @@
   function dopri(n, f, o, st) {
     const k1 = new Float64Array(n), k2 = new Float64Array(n), k3 = new Float64Array(n), k4 = new Float64Array(n), k5 = new Float64Array(n), k6 = new Float64Array(n), k7 = new Float64Array(n);
     const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), ys = new Float64Array(n);
-    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;
-    const sk = (i, a, b) => atol + rtol * max(abs(a), abs(b));
+    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4, iasti = 0, nonsti = 0, stiff = false;   // atol: one per component
+    const sk = (i, a, b) => atol[i] + rtol * max(abs(a), abs(b));
     function hinit() {
       let dnf = 0, dny = 0; for (let i = 0; i < n; i++) { const s = sk(i, y[i], 0); dnf += (k1[i] / s) ** 2; dny += (y[i] / s) ** 2; }
       let hh = dnf <= 1e-10 || dny <= 1e-10 ? 1e-6 : sqrt(dny / dnf) * 0.01; hh = min(hh, hmax);
@@ -429,6 +429,7 @@
       get stiff() { return stiff; },
       reset(t0, y0) { t = t0; y.set(y0); f(t, y, k1); st.nfev++; if (!(h > 0)) h = hinit(); facold = 1e-4; },
       step(tT) {
+        if (!k1.every(fin)) return { fail: 'nan' };   // f is NaN at the start of the step: no step size can help
         for (let tries = 0; ; tries++) {
           const span = tT - t; if (!(span > 0)) return { fail: 'time' };
           let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
@@ -472,6 +473,7 @@
         const span = tT - t; if (!(span > 0)) return { fail: 'time' };
         const hh = min(dt, span), tph = hh === span ? tT : t + hh;
         if (method === 'euler') for (let i = 0; i < n; i++) y1[i] = y[i] + hh * f0[i];
+        else if (method === 'midpoint') { for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a); st.nfev++; for (let i = 0; i < n; i++) y1[i] = y[i] + hh * a[i]; }   // the explicit midpoint rule (HNW §II.1, order 2)
         else if (method === 'heun') { for (let i = 0; i < n; i++) yt[i] = y[i] + hh * f0[i]; f(tph, yt, a); st.nfev++; for (let i = 0; i < n; i++) y1[i] = y[i] + 0.5 * hh * (f0[i] + a[i]); }
         else {   // the classical RK4 (HNW §II.1)
           for (let i = 0; i < n; i++) yt[i] = y[i] + 0.5 * hh * f0[i]; f(t + 0.5 * hh, yt, a);
@@ -508,13 +510,13 @@
     const y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n), J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n);
     const piv = new Int32Array(n); const { rtol, atol, hmax } = o; let t = 0, h = 0;
     function jac() {
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
+      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
       const dt = 1.4901161193847656e-8 * max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev += n + 1;
     }
     return {
       stiff: false,
       reset(t0, y0) { t = t0; y.set(y0); f(t, y, F0); st.nfev++;
-        if (!(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = min(hmax, s > 0 ? 0.8 * pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; }
+        if (!(h > 0)) { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); h = min(hmax, s > 0 ? 0.8 * pow(rtol, 1 / 3) / s : hmax / 100); if (!(h > 0)) h = hmax * 1e-3; }
         jac(); },
       step(tT) {
         if (!F0.every(fin)) return { fail: 'nan' };
@@ -530,7 +532,7 @@
           const tph = last ? tT : t + hh;
           for (let i = 0; i < n; i++) y1[i] = y[i] + hh * k2[i]; f(tph, y1, F2); st.nfev += 2;
           for (let i = 0; i < n; i++) k3[i] = F2[i] - e32 * (k2[i] - F1[i]) - 2 * (k1[i] - F0[i]) + hh * d * Tt[i]; luSolve(W, n, piv, k3);
-          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (atol + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
+          let err = 0; for (let i = 0; i < n; i++) { const e = hh / 6 * (k1[i] - 2 * k2[i] + k3[i]); err += (e / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
           err = sqrt(err / n);
           if (!fin(err)) { st.rejected++; h = hh / 10; continue; }
           if (err <= 1) {
@@ -541,6 +543,168 @@
             return { t0: ta, t1: tph, y1: y, seg };
           }
           st.rejected++; h = hh * max(0.2, 0.8 * pow(err, -1 / 3));
+        }
+      },
+    };
+  }
+  /* ---- shared by the implicit methods: a forward-difference Jacobian J = ∂f/∂y and ∂f/∂t at (t, y), given F0 = f(t, y) ---- */
+  function fdJac(n, f, t, y, F0, J, Tt, atol, rtol, st, fx) {
+    for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), atol[j] / rtol * 1e-3, 1e-12); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - F0[i]) / del; }
+    st.nfev += n;
+    if (Tt) { const dt = 1.4901161193847656e-8 * max(abs(t), 1e-6); f(t + dt, y, fx); for (let i = 0; i < n; i++) Tt[i] = (fx[i] - F0[i]) / dt; st.nfev++; }
+  }
+  const hermite = (n, ta, hs, r0, d0, r1, d1) => (tq, out) => { const s = (tq - ta) / hs, s2 = s * s, s3 = s2 * s, h00 = 2 * s3 - 3 * s2 + 1, h10 = s3 - 2 * s2 + s, h01 = -2 * s3 + 3 * s2, h11 = s3 - s2;
+    for (let i = 0; i < n; i++) out[i] = h00 * r0[i] + h10 * hs * d0[i] + h01 * r1[i] + h11 * hs * d1[i]; };
+  const firstH = (n, F0, y, atol, rtol, hmax, p) => { let s = 0; for (let i = 0; i < n; i++) s += (F0[i] / (atol[i] + rtol * abs(y[i]))) ** 2; s = sqrt(s / n); const h = min(hmax, s > 0 ? 0.5 * pow(rtol, 1 / p) / s : hmax / 100); return h > 0 ? h : hmax * 1e-3; };
+
+  /* Tsitouras 5(4) (Ch. Tsitouras 2011, Comput. Math. Appl. 62:2, "Runge–Kutta pairs of order 5(4) satisfying only the first
+     column simplifying assumption"): FSAL, 7 stages, error constants smaller than DOPRI5's; the PI controller of dopri; cubic Hermite
+     dense output (order 3, enough for event location and samples) */
+  const TS = { c: [0, 0.161, 0.327, 0.9, 0.9800255409045097, 1, 1],
+    a: [[], [0.161], [-0.008480655492356989, 0.335480655492357], [2.897153057105493, -6.359448489975075, 4.3622954328695815],
+      [5.325864828439257, -11.748883564062828, 7.4955393428898365, -0.09249506636175525],
+      [5.86145544294642, -12.92096931784711, 8.159367898576159, -0.071584973281401, -0.028269050394068383],
+      [0.09646076681806523, 0.01, 0.4798896504144996, 1.379008574103742, -3.290069515436081, 2.324710524099774]],
+    e: [-0.00178001105222577714, -0.0008164344596567469, 0.007880878010261995, -0.1447110071732629, 0.5823571654525552, -0.45808210592918697, 0.015151515151515152] };
+  function tsit5(n, f, o, st) {
+    const K = Array.from({ length: 7 }, () => new Float64Array(n)), y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n);
+    const { rtol, atol, hmax } = o; let t = 0, h = 0, facold = 1e-4;
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, K[0]); st.nfev++; if (!(h > 0)) h = firstH(n, K[0], y, atol, rtol, hmax, 5); facold = 1e-4; },
+      step(tT) {
+        if (!K[0].every(fin)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
+          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+          let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
+          const tph = last ? tT : t + hh;
+          for (let s2 = 1; s2 < 7; s2++) { const a = TS.a[s2]; for (let i = 0; i < n; i++) { let v = 0; for (let j = 0; j < s2; j++) v += a[j] * K[j][i]; yt[i] = y[i] + hh * v; }
+            if (s2 === 6) y1.set(yt); f(s2 >= 5 ? tph : t + TS.c[s2] * hh, yt, K[s2]); }
+          st.nfev += 6;
+          let err = 0; for (let i = 0; i < n; i++) { let e = 0; for (let j = 0; j < 7; j++) e += TS.e[j] * K[j][i]; err += (hh * e / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
+          err = sqrt(err / n);
+          if (!fin(err)) { st.rejected++; h = hh / 10; if (!(h > 1e-300)) return { fail: 'nan' }; continue; }
+          const fac11 = pow(err, 0.2 - 0.04 * 0.75);
+          if (err <= 1) {
+            let fac = fac11 / pow(facold, 0.04); fac = max(0.1, min(5, fac / 0.9)); const hnew = hh / fac; facold = max(err, 1e-4);
+            const seg = hermite(n, t, hh, Float64Array.from(y), Float64Array.from(K[0]), Float64Array.from(y1), Float64Array.from(K[6])), ta = t;
+            t = tph; y.set(y1); K[0].set(K[6]); h = last ? max(h, hnew) : hnew;
+            return { t0: ta, t1: tph, y1: y, seg };
+          }
+          st.rejected++; h = hh / min(10, fac11 / 0.9);
+        }
+      },
+    };
+  }
+
+  /* ROS3P (Lang & Verwer 2001, BIT 41:4): a 3-stage, order-3 A-stable Rosenbrock method with an embedded order-2 solution, written
+     in the form of Sandu et al. 1997 (Atmos. Environ. 31:20; the KPP library): (I/(hγ) − J) U_i = f(t + α_i h, y + Σ a_ij U_j)
+     + Σ c_ij/h U_j + hγ_i ∂f/∂t, y₁ = y + Σ m_i U_i. The coefficients follow from Lang & Verwer's (γ = 1/2 + √3/6, b = (2/3, 0, 1/3),
+     b̂ = (1/3, 1/3, 1/3)); stage 3 reuses stage 2's f. Cubic Hermite dense output */
+  const R3 = (() => { const g = 0.5 + Math.sqrt(3) / 6, a21 = 1 / g, c21 = -1.607695154586736, c31 = -3.464101615137755, c32 = -1.732050807568877;
+    const m = [2, 0.5773502691896258, 0.4226497308103742], Gi = [[1 / g, 0, 0], [-c21, 1 / g, 0], [-c31, -c32, 1 / g]];
+    const mh = [0, 1, 2].map(j => (Gi[0][j] + Gi[1][j] + Gi[2][j]) / 3);   // b̂ Γ⁻¹ with b̂ = (1/3, 1/3, 1/3)
+    return { g, a21, c21, c31, c32, m, e: m.map((v, i) => v - mh[i]), gam: [g, g - 1, g - 1 - Math.sqrt(3) / 2 + 0] }; })();
+  function ros3p(n, f, o, st) {
+    const F0 = new Float64Array(n), F1 = new Float64Array(n), U1 = new Float64Array(n), U2 = new Float64Array(n), U3 = new Float64Array(n), y = new Float64Array(n), y1 = new Float64Array(n), yt = new Float64Array(n);
+    const J = new Float64Array(n * n), W = new Float64Array(n * n), Tt = new Float64Array(n), fx = new Float64Array(n), piv = new Int32Array(n);
+    const { rtol, atol, hmax } = o; let t = 0, h = 0;
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, F0); st.nfev++; if (!(h > 0)) h = firstH(n, F0, y, atol, rtol, hmax, 3); fdJac(n, f, t, y, F0, J, Tt, atol, rtol, st, fx); },
+      step(tT) {
+        if (!F0.every(fin)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
+          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+          let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
+          const gi = 1 / (hh * R3.g); for (let i = 0; i < n * n; i++) W[i] = -J[i]; for (let i = 0; i < n; i++) W[i * n + i] += gi;
+          if (!luFactor(W, n, piv)) { st.rejected++; h = hh / 4; continue; }
+          for (let i = 0; i < n; i++) U1[i] = F0[i] + hh * R3.gam[0] * Tt[i]; luSolve(W, n, piv, U1);
+          for (let i = 0; i < n; i++) yt[i] = y[i] + R3.a21 * U1[i]; f(t + hh, yt, F1); st.nfev++;
+          for (let i = 0; i < n; i++) U2[i] = F1[i] + R3.c21 / hh * U1[i] + hh * R3.gam[1] * Tt[i]; luSolve(W, n, piv, U2);
+          for (let i = 0; i < n; i++) U3[i] = F1[i] + (R3.c31 * U1[i] + R3.c32 * U2[i]) / hh + hh * R3.gam[2] * Tt[i]; luSolve(W, n, piv, U3);
+          let err = 0; for (let i = 0; i < n; i++) { y1[i] = y[i] + R3.m[0] * U1[i] + R3.m[1] * U2[i] + R3.m[2] * U3[i]; const e = R3.e[0] * U1[i] + R3.e[1] * U2[i] + R3.e[2] * U3[i]; err += (e / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; }
+          err = sqrt(err / n);
+          if (!fin(err)) { st.rejected++; h = hh / 10; continue; }
+          if (err <= 1) {
+            const tph = last ? tT : t + hh, hnew = hh * min(5, max(0.2, 0.9 * pow(max(err, 1e-10), -1 / 3)));
+            const r0 = Float64Array.from(y), d0 = Float64Array.from(F0), ta = t;
+            t = tph; y.set(y1); f(t, y, F0); st.nfev++;
+            const seg = hermite(n, ta, hh, r0, d0, Float64Array.from(y1), Float64Array.from(F0));
+            h = last ? max(h, hnew) : hnew; fdJac(n, f, t, y, F0, J, Tt, atol, rtol, st, fx);
+            return { t0: ta, t1: tph, y1: y, seg };
+          }
+          st.rejected++; h = hh * max(0.2, 0.9 * pow(err, -1 / 3));
+        }
+      },
+    };
+  }
+
+  /* Radau IIA of order 5 (3 stages; Hairer & Wanner, Solving ODEs II, 2nd ed. 1996, §IV.8 — the method of RADAU5): L-stable and
+     stiffly accurate. The stage equations Z = h(A⊗I)F(y + Z) are solved by simplified Newton with the Jacobian of the step's start;
+     the 3n × 3n iteration matrix I − h(A⊗J) is factored as a real system (n ≤ the library's small models, so the complex
+     transformation of RADAU5 is not needed). Newton stops when θ/(1 − θ)·‖ΔZ‖ ≤ κ = max(10u/rtol, min(0.03, √rtol)); it diverges
+     when θ ≥ 0.99 (the step is halved). The error estimate is RADAU5's (§IV.8, (8.19)–(8.20)): err = (γ₀⁻¹/h I − J)⁻¹ (f(y₀) +
+     Σ e_i Z_i/h), refined once by a second solve after a rejection. Dense output: the collocation polynomial through y, y + Z₁..Z₃ */
+  const RD = (() => { const s6 = Math.sqrt(6);
+    return { c: [(4 - s6) / 10, (4 + s6) / 10, 1],
+      A: [[(88 - 7 * s6) / 360, (296 - 169 * s6) / 1800, (-2 + 3 * s6) / 225], [(296 + 169 * s6) / 1800, (88 + 7 * s6) / 360, (-2 - 3 * s6) / 225], [(16 - s6) / 36, (16 + s6) / 36, 1 / 9]],
+      u1: 30 / (6 + Math.cbrt(81) - Math.cbrt(9)), dd: [-(13 + 7 * s6) / 3, (-13 + 7 * s6) / 3, -1 / 3] }; })();
+  function radau5(n, f, o, st) {
+    const N3 = 3 * n, M = new Float64Array(N3 * N3), pv = new Int32Array(N3), Z = new Float64Array(N3), dZ = new Float64Array(N3), F = new Float64Array(N3);
+    const y = new Float64Array(n), yt = new Float64Array(n), F0 = new Float64Array(n), J = new Float64Array(n * n), E1 = new Float64Array(n * n), p1 = new Int32Array(n), fx = new Float64Array(n);
+    const cont = new Float64Array(n), F2 = new Float64Array(n), fz = new Float64Array(n), y1 = new Float64Array(n);
+    const { rtol, atol, hmax } = o, fnewt = max(10 * EPS / rtol, min(0.03, sqrt(rtol))); let t = 0, h = 0, faccon = 1, rejLast = false, firstStep = true;
+    const scal = i => atol[i] + rtol * abs(y[i]);
+    return {
+      stiff: false,
+      reset(t0, y0) { t = t0; y.set(y0); f(t, y, F0); st.nfev++; if (!(h > 0)) h = firstH(n, F0, y, atol, rtol, hmax, 5); fdJac(n, f, t, y, F0, J, null, atol, rtol, st, fx); firstStep = true; },
+      step(tT) {
+        if (!F0.every(fin)) return { fail: 'nan' };
+        for (let tries = 0; ; tries++) {
+          const span = tT - t; if (!(span > 0)) return { fail: 'time' };
+          let hh = min(h, hmax), last = false; if (hh >= span * (1 - 1e-12)) { hh = span; last = true; }
+          if (!(hh > 10 * EPS * abs(t) && hh > 1e-300) || tries > 200) return { fail: 'step-underflow' };
+          const tph = last ? tT : t + hh;
+          for (let bi = 0; bi < 3; bi++) for (let i = 0; i < n; i++) { const row = (bi * n + i) * N3; for (let bj = 0; bj < 3; bj++) { const a = hh * RD.A[bi][bj]; for (let j = 0; j < n; j++) M[row + bj * n + j] = (bi === bj && i === j ? 1 : 0) - a * J[i * n + j]; } }
+          if (!luFactor(M, N3, pv)) { st.rejected++; h = hh / 4; rejLast = true; continue; }
+          Z.fill(0); let conv = false, dold = 0; faccon = pow(max(faccon, EPS), 0.8);
+          for (let it = 0; it < 7; it++) {
+            for (let k = 0; k < 3; k++) { for (let i = 0; i < n; i++) yt[i] = y[i] + Z[k * n + i]; f(k === 2 ? tph : t + RD.c[k] * hh, yt, fz); F.set(fz, k * n); }
+            st.nfev += 3; if (!F.every(fin)) break;
+            for (let k = 0; k < 3; k++) for (let i = 0; i < n; i++) dZ[k * n + i] = -Z[k * n + i] + hh * (RD.A[k][0] * F[i] + RD.A[k][1] * F[n + i] + RD.A[k][2] * F[2 * n + i]);
+            luSolve(M, N3, pv, dZ);
+            let dn = 0; for (let k = 0; k < 3; k++) for (let i = 0; i < n; i++) { Z[k * n + i] += dZ[k * n + i]; dn += (dZ[k * n + i] / scal(i)) ** 2; }
+            dn = sqrt(dn / N3);
+            if (it > 0) { const th = dn / dold; if (!(th < 0.99)) break; faccon = th / (1 - th); }
+            if (faccon * dn <= fnewt || dn <= 1e-14) { conv = true; break; }
+            dold = dn;
+          }
+          if (!conv) { st.rejected++; h = hh / 2; rejLast = true; faccon = 1; continue; }
+          // the error estimate
+          for (let i = 0; i < n * n; i++) E1[i] = -J[i]; for (let i = 0; i < n; i++) E1[i * n + i] += RD.u1 / hh;
+          if (!luFactor(E1, n, p1)) { st.rejected++; h = hh / 2; rejLast = true; continue; }
+          for (let i = 0; i < n; i++) { F2[i] = (RD.dd[0] * Z[i] + RD.dd[1] * Z[n + i] + RD.dd[2] * Z[2 * n + i]) / hh; cont[i] = F2[i] + F0[i]; y1[i] = y[i] + Z[2 * n + i]; }
+          luSolve(E1, n, p1, cont);
+          const enorm = () => { let e = 0; for (let i = 0; i < n; i++) e += (cont[i] / (atol[i] + rtol * max(abs(y[i]), abs(y1[i])))) ** 2; return max(sqrt(e / n), 1e-10); };
+          let err = enorm();
+          if (err >= 1 && (firstStep || rejLast)) { for (let i = 0; i < n; i++) yt[i] = y[i] + cont[i]; f(t, yt, fz); st.nfev++; for (let i = 0; i < n; i++) cont[i] = F2[i] + fz[i]; luSolve(E1, n, p1, cont); err = enorm(); }
+          if (!fin(err)) { st.rejected++; h = hh / 10; rejLast = true; continue; }
+          const fac = min(0.9, 0.9 * (2 * 7 + 1) / (2 * 7 + 1));   // the safety factor of RADAU5 (no Newton count in it here)
+          if (err < 1) {
+            const hnew = hh * min(4, max(0.2, fac * pow(err, -0.25)));
+            const Y = [Float64Array.from(y), Float64Array.from(Z.subarray(0, n)), Float64Array.from(Z.subarray(n, 2 * n)), Float64Array.from(Z.subarray(2 * n))], ta = t, hs = hh;
+            for (let k = 1; k < 4; k++) for (let i = 0; i < n; i++) Y[k][i] += Y[0][i];
+            const S0 = [0, RD.c[0], RD.c[1], 1];
+            const seg = (tq, out) => { const s3 = (tq - ta) / hs; const L = S0.map((sk, k) => S0.reduce((p, sm, m) => (m === k ? p : p * (s3 - sm) / (sk - sm)), 1));
+              for (let i = 0; i < n; i++) out[i] = L[0] * Y[0][i] + L[1] * Y[1][i] + L[2] * Y[2][i] + L[3] * Y[3][i]; };
+            t = tph; y.set(y1); f(t, y, F0); st.nfev++; fdJac(n, f, t, y, F0, J, null, atol, rtol, st, fx);
+            h = last ? max(h, hnew) : hnew; rejLast = false; firstStep = false;
+            return { t0: ta, t1: tph, y1: y, seg };
+          }
+          st.rejected++; rejLast = true; h = hh * max(0.2, fac * pow(err, -0.25));
         }
       },
     };
@@ -569,7 +733,8 @@
       },
     };
   }
-  const METHODS = ['auto', 'dopri5', 'rosenbrock', 'rk4', 'heun', 'euler', 'verlet', 'yoshida4'];
+  const METHODS = ['auto', 'dopri5', 'tsit5', 'rosenbrock', 'ros3p', 'radau5', 'rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
+  const FIXED = ['rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
   function integrate(cfg) {
     const C = codes(['nan', 'blow-up', 'step-underflow', 'budget', 'zeno', 'bad-config']);
     const st = { steps: 0, rejected: 0, nfev: 0 };

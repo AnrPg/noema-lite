@@ -67,7 +67,7 @@ PY_WARN = [
 # sim-spec@1 (docs/INTERACTIVE.md §12): the SAME rules as engine/packcheck.js checkSimSpec
 SPEC_FORMAT = "noema.sim-spec/v1"
 DEFAULT_ENGINE = "formula@1"
-ENGINES = {"formula@1", "circuit-mna@1", "thermal@1", "pid@1", "rf@1", "twin@1", "ode@1", "prob@1", "graph@1", "geom@1", "genetics@1", "seq@1", "med@1", "clinic@1", "anatomy@1", "timeline@1", "music@1", "map@1", "text@1", "craft@1", "logic@1", "rhetoric@1", "philo@1", "des@1", "field@1", "agents@1"}   # the engines this version knows (the same list in engine/packcheck.js)
+ENGINES = {"formula@1", "circuit-mna@1", "thermal@1", "pid@1", "rf@1", "twin@1", "ode@1", "prob@1", "graph@1", "geom@1", "genetics@1", "seq@1", "med@1", "clinic@1", "anatomy@1", "timeline@1", "music@1", "map@1", "text@1", "craft@1", "logic@1", "rhetoric@1", "philo@1", "des@1", "field@1", "agents@1", "law@1"}   # the engines this version knows (the same list in engine/packcheck.js)
 SPEC_KEYS = {"format", "engine", "model", "title", "intro", "consts", "params", "derived", "outputs", "readouts", "plots", "bench"}
 # circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
 CIRCUIT = "circuit-mna@1"
@@ -76,7 +76,7 @@ BENCH_ENGINES = {"circuit-mna@1", "twin@1"}
 P6 = {"thermal@1": thermal, "pid@1": pid, "rf@1": rf, "twin@1": twin}
 P6_TIMED = ["thermal@1", "pid@1"]
 # the engine library (docs/INTERACTIVE_LIBRARY.md): general engines; each Python twin tools/lib_<name>.py has check_spec, exprs and keys
-LIB = {"ode@1": "lib_ode", "prob@1": "lib_prob", "graph@1": "lib_graph", "geom@1": "lib_geom", "genetics@1": "lib_genetics", "seq@1": "lib_seq", "med@1": "lib_med", "clinic@1": "lib_clinic", "anatomy@1": "lib_anatomy", "timeline@1": "lib_timeline", "music@1": "lib_music", "map@1": "lib_map", "text@1": "lib_text", "craft@1": "lib_craft", "logic@1": "lib_logic", "rhetoric@1": "lib_rhetoric", "philo@1": "lib_philo", "des@1": "lib_des", "field@1": "lib_field", "agents@1": "lib_agents"}
+LIB = {"ode@1": "lib_ode", "prob@1": "lib_prob", "graph@1": "lib_graph", "geom@1": "lib_geom", "genetics@1": "lib_genetics", "seq@1": "lib_seq", "med@1": "lib_med", "clinic@1": "lib_clinic", "anatomy@1": "lib_anatomy", "timeline@1": "lib_timeline", "music@1": "lib_music", "map@1": "lib_map", "text@1": "lib_text", "craft@1": "lib_craft", "logic@1": "lib_logic", "rhetoric@1": "lib_rhetoric", "philo@1": "lib_philo", "des@1": "lib_des", "field@1": "lib_field", "agents@1": "lib_agents", "law@1": "lib_law"}
 LIB_KINDS = ["scalar", "series", "scene", "sound"]
 APP_ENGINES_MAX = 8   # html-app@1: the engines of the library a mini-app may use ("engines": [...], docs/INTERACTIVE.md §8.1) — the same rule in engine/packcheck.js
 LINE_STYLES = ["line", "bars", "steps", "points"]

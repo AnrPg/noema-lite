@@ -217,6 +217,7 @@ const flag = c => sc('f_' + c, 'flag', { code: c });
   o = c('BVerfGE 86, 1'); ok(o.k === 4 && o.vol === 86 && o.p === 1, 'BVerfGE 86, 1: a series citation');
   o = c('Art. 6(1)(b) GDPR'); ok(o.k === 5 && o.n === 6 && o.d === 2, 'Art. 6(1)(b) GDPR: article 6, two levels below');
   o = c('§ 823 Abs. 1 BGB'); ok(o.k === 5 && o.n === 823 && o.d === 1, '§ 823 Abs. 1 BGB');
+  o = c('s. 14B Limitation Act 1980'); ok(o.k === 5 && o.n === 14, 's. 14B Limitation Act 1980');
   o = c('Smith v Jones, 12 Law Rep 345', { patterns: [{ id: 'own', template: '{a:word} v {b:word}, {volume:int} Law Rep {page:int}' }] }); ok(o.k === 1 && o.vol === 12 && o.p === 345, 'an author template is tried first');
   ok(!c('see the judgment of last week').v && has(R({ task: 'citation', text: 'xx' }, []), 'no-match'), 'a text that is no citation: code no-match');
   ok(!X.template('{a:float}').ok && !X.template('plain').ok && X.template('{y:year}/{n:int}').ok, 'templates: placeholders checked'); }

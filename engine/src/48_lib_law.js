@@ -1037,7 +1037,7 @@
     neutral: [/^\[([0-9]{4})\]\s+([A-Z][A-Za-z]{1,9})(?:\s+(Civ|Crim|Admin|Ch|QB|KB|Fam|Comm|Pat|TCC|IPEC|Costs))?\s+([0-9]{1,6})(?:\s+\(([A-Za-z]{1,10})\))?$/, ['year', 'court', 'division', 'number', 'list'], ['n', 's', 's', 'n', 's']],
     reporter: [/^([0-9]{1,4})\s+([A-Z][A-Za-z0-9.' ]{0,24}?)\s+([0-9]{1,6})(?:,\s*([0-9]{1,6}))?(?:\s+\(([^()]{0,40}?)\s*([0-9]{4})\))?$/, ['volume', 'reporter', 'page', 'pin', 'court', 'year'], ['n', 's', 'n', 'n', 's', 'n']],
     series: [/^([A-Z][A-Za-zÄÖÜäöü]{1,11})\s+([0-9]{1,4}),\s*([0-9]{1,6})(?:\s*\(([0-9]{1,6})\)|,\s*([0-9]{1,6}))?$/, ['series', 'volume', 'page', 'pin', 'pin2'], ['s', 'n', 'n', 'n', 'n']],
-    provision: [/^(Art\.|Article|Artikel|Arts\.|§§?|Section|Sec\.|s\.|ss\.|r\.)\s*([0-9]{1,5}[a-z]{0,3})((?:\s*\(\s*[0-9a-zA-Z]{1,5}\s*\))*)((?:\s+(?:Abs\.|S\.|Satz|Nr\.|para\.|al\.|lit\.|sub)\s*[0-9a-z]{1,5})*)(?:\s+(.{1,60}))?$/, ['marker', 'number', 'parens', 'parts', 'act'], ['s', 'n', 's', 's', 's']],
+    provision: [/^(Art\.|Article|Artikel|Arts\.|§§?|Section|Sec\.|s\.|ss\.|r\.)\s*([0-9]{1,5}[A-Za-z]{0,3})((?:\s*\(\s*[0-9a-zA-Z]{1,5}\s*\))*)((?:\s+(?:Abs\.|S\.|Satz|Nr\.|para\.|al\.|lit\.|sub)\s*[0-9a-z]{1,5})*)(?:\s+(.{1,60}))?$/, ['marker', 'number', 'parens', 'parts', 'act'], ['s', 'n', 's', 's', 's']],
   };
   function runCitation(m, env, D, S, SE, Rn) {
     const text = String(m.text).trim(), tries = [];
@@ -1046,7 +1046,7 @@
     let hit = null, kind = 0;
     for (let i = 0; i < tries.length && !hit; i++) { const r = tries[i].re.exec(text); if (r) { hit = { t: tries[i], r }; kind = i + 1; } }
     const F = {};
-    if (hit) hit.t.names.forEach((nm, i) => { const v = hit.r[i + 1]; if (v !== undefined && v !== '') F[nm] = hit.t.types[i] === 'n' ? +v : v.trim(); });
+    if (hit) hit.t.names.forEach((nm, i) => { const v = hit.r[i + 1]; if (v !== undefined && v !== '') F[nm] = hit.t.types[i] === 'n' ? parseInt(v, 10) : v.trim(); });
     if (hit && hit.t.id === 'provision') F.depth = (String(F.parens || '').match(/\(/g) || []).length + (String(F.parts || '').match(/\S+\s*[0-9a-z]+/g) || []).length;
     if (!hit) D.add('no-match');
     const nv = k => (typeof F[k] === 'number' ? F[k] : NaN);

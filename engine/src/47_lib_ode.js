@@ -49,25 +49,8 @@
   }
   // complete elliptic integral of the first kind K(k) by the arithmetic–geometric mean (DLMF 19.8.5)
   function ellipK(k) { if (!(abs(k) < 1)) return Infinity; let a = 1, b = sqrt(1 - k * k); for (let i = 0; i < 40 && abs(a - b) > 1e-16 * a; i++) { const an = (a + b) / 2; b = sqrt(a * b); a = an; } return PI / (2 * a); }
-  // a root of g on [a, b] (g(a), g(b) of opposite signs) by Brent's method (Brent 1973, ch. 4)
-  function brent(g, a, b, tol) {
-    let fa = g(a), fb = g(b); if (!(fa * fb <= 0)) return NaN;
-    let c = a, fc = fa, d = b - a, e = d;
-    for (let it = 0; it < 200; it++) {
-      if (fb * fc > 0) { c = a; fc = fa; d = b - a; e = d; }
-      if (abs(fc) < abs(fb)) { a = b; b = c; c = a; fa = fb; fb = fc; fc = fa; }
-      const tl = 2 * EPS * abs(b) + (tol || 1e-15), m = (c - b) / 2;
-      if (abs(m) <= tl || fb === 0) return b;
-      if (abs(e) >= tl && abs(fa) > abs(fb)) {
-        let p, q, r; const s = fb / fa;
-        if (a === c) { p = 2 * m * s; q = 1 - s; } else { q = fa / fc; r = fb / fc; p = s * (2 * m * q * (q - r) - (b - a) * (r - 1)); q = (q - 1) * (r - 1) * (s - 1); }
-        if (p > 0) q = -q; else p = -p;
-        if (2 * p < Math.min(3 * m * q - abs(tl * q), abs(e * q))) { e = d; d = p / q; } else { d = m; e = d; }
-      } else { d = m; e = d; }
-      a = b; fa = fb; b += abs(d) > tl ? d : (m > 0 ? tl : -tl); fb = g(b);
-    }
-    return b;
-  }
+  // a root of g on [a, b] (g(a), g(b) of opposite signs) by Brent's method (Brent 1973, ch. 4): the kernel's (NoemaSimKit.brent)
+  const brent = (g, a, b, tol) => C.kit().brent(g, a, b, tol);
   // SIR final size: s∞ = s0·exp(−R0·(1 − r0 − s∞)) (Kermack & McKendrick 1927; Keeling & Rohani 2008 §2.1.3), fractions of N
   function sirFinal(R0, s0, r0) {
     if (!(R0 > 0 && s0 >= 0)) return NaN;
@@ -1295,7 +1278,7 @@
     },
   };
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
-  engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE');
+  engine.workerSource = C.workerSource(noemaLibOdeModule, 'NoemaLibODE', { kit: true });
   root.NoemaLibODE = Object.freeze({
     table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: { var: 'name', stat: 'enum:' + C.STATS.join('|'), t: 'numx', event: 'id', nth: 'int:-2000:2000', index: 'int:0:63', k: 'int:0:12', name: 'expr', code: 'enum:' + CODES.join('|'), x: 'name', y: 'name' } },   // the form of the activity author (46_lib_schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,

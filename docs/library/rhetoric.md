@@ -5,8 +5,8 @@ built as a **computation engine over structured inputs**: a debate round (speech
 argument map, logical forms, a speech text with optional word timings, an outline, and small persuasion models. The outputs are
 numbers (for readouts and the checks grader), series and scenes (a Toulmin diagram, an argument map, a flow sheet, the text with its
 figures, a timing bar). The Python twin is `tools/lib_rhetoric.py` (`ID`, `check_spec`, `exprs`, `keys`): it checks and does not
-compute, with the same problems (code, path, message, level) as the JS `checkSpec`. Tests: `node tests/lib_rhetoric.js` (160
-assertions, including JS ↔ Python parity on the fixtures) and `node tests/enginelib.js` (`tests/fixtures/enginelib/rhetoric.json`, 27
+compute, with the same problems (code, path, message, level) as the JS `checkSpec`. Tests: `node tests/lib_rhetoric.js` (172
+assertions, including JS ↔ Python parity on the fixtures) and `node tests/enginelib.js` (`tests/fixtures/enginelib/rhetoric.json`, 35
 specs) once the engine is registered. The reference activity is `tools/activities_examples/bp-adjudication` (a British Parliamentary
 round with a three-judge panel: the learner predicts the panel's ranking). The research behind this chapter is the project's
 `engine-library/research/rhetoric.md`.
@@ -63,13 +63,16 @@ labels in its own string tables.
 | `inoculation` | `{r0, tau (days), attack, boosters [days], horizon}` | §8 |
 | `audience` | `{grade, formula, wpmLo, wpmHi, tol}` | §7 |
 | `delivery` | `{pause (s, default 0.25), window (s, default 30), fillers [extra words or phrases]}` | §7 |
+| `synizesis` | bool (default false) | Greek syllables with synizesis (§7) |
+| `theory` | `{kb ≤ 64 [{f!, kind axiom·ordinary, rank}], rules ≤ 64 [{id!, body [≤ 8], head!, kind strict·defeasible, rank}], contraries ≤ 64 [{u!, v!}], link last·weakest, ordering elitist·democratic, transpose}` | an ASPIC+ theory (§3.1); literals `p`, `¬p` (also `~p`, `!p`, `-p`) |
 
 ### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_rhetoric.py`)
 
 | code | when |
 |---|---|
 | `format` / `value` / `size` / `enum` / `unknown-field` (warning) | the shared walker: shapes, required fields, lengths, enumerations |
-| `dup` | two speeches, teams, ballots, nodes, forms or outline parts with the same id |
+| `dup` | two speeches, teams, ballots, nodes, forms, outline parts or theory rules with the same id |
+| `literal` | a theory premise, rule body or head, contrary, or the `concl` of `justified`, that is not a literal |
 | `value` | a text that is not a string; a timing pair not `[start, end]` with 0 ≤ start ≤ end, or timings without a text; a form with neither (or both) premises + conclusion and mood + figure; a mood not of A, E, I, O; a custom format without `slots`; an Oxford vote with only one of pre/post; a node `s` not 1–64 characters; a filler not 1–32; `fallacy` without node or form; `speaks` without team or speech |
 | `size` | a text over 20 000 characters, all texts over 40 000, timings over 8000; more CQ answers than the scheme has |
 | `ref` | a team, role, speech, node, form or ballot that does not exist (a role not of the format, with the format's list); an outline part not of its scheme; an output whose model section is missing (`needs model.debate`); `swing` outside the oxford format |
@@ -129,7 +132,7 @@ a team on the wrong side of its slot (`side_mismatch`). A speech without a slot 
   `rebuttal`), which is **not** a Dung attack: an exception does not defeat the claim until it is shown to hold. `toulmin` (scalar,
   `node!`) counts the parts present (1–6); the scene `toulmin` draws D → C with W, B below, Q on the arrow and R beside the claim.
 - **Attacks and survival**: `attack` (rebut/undermine) and `undercut` (Pollock 1987; drawn dashed, treated as an attack on the node it
-  targets) form a Dung framework; `support` edges do not (bipolar argumentation is not modelled). logic@1 `afSolve` gives the grounded
+  targets) form a Dung framework; `support` edges do not (they enter the bipolar outputs below). logic@1 `afSolve` gives the grounded
   labelling (in 1, out 0, undecided ½), the preferred and the stable extensions (Dung 1995, AI 77:321; Caminada 2006 labellings).
 
 | output | fields | value |
@@ -142,6 +145,19 @@ a team on the wrong side of its slot (`side_mismatch`). A speech without a slot 
 | `netBenefit` · `weighedWinner` | `tau` | Σ over IN arguments with an `impact` of side sign × impact × prob × e^(−time/τ) (impact calculus: magnitude, probability, timeframe; Edwards 2008 *Competitive Debate*) · its sign; a tie gives −1 with `presumption` (the negative holds presumption in policy debate) |
 | `stockMet` · `primaFacie` | — | stock issues (harms, inherency, solvency, topicality) with an IN affirmative node · 1 if all four (the affirmative's burden of a prima facie case) |
 | scenes `map` (`semantics`), `flow` | — | the layered map coloured by label (ok in, bad out, warn undecided); the flow sheet: one column per speech, arguments in rows, attack arrows, dropped arguments in `warn` |
+
+### 3.1 Bipolar maps and ASPIC+ theories (through logic@1)
+
+- **Bipolar** (Cayrol & Lagasquie-Schiex 2005, 2013; logic@1 `bipolar`, `docs/library/logic.md` §3.12): the map's `support` edges
+  with its attacks and undercuts; `support` (output field) `general` (supported + secondary attacks, default), `deductive` (supported +
+  mediated), `necessary` (secondary + extended). Outputs: `complexAttacks` (the attacks added), `bipolarLabel` (`node!`, `semantics`,
+  `ext`: 1 / 0 / ½ in the framework with the complex attacks), `bipolarAccepted` (`node!`, `semantics`, `mode`).
+- **ASPIC+** (Modgil & Prakken 2014; logic@1 `aspic`, `docs/library/logic.md` §3.11): `model.theory` gives premises, strict and
+  defeasible rules, contraries and the ordering. Outputs: `aspicArgs`, `aspicDefeats`, `justified` (`concl!` a literal, `semantics`,
+  `mode`: credulous or sceptical (default) — 1 when an argument for it is in every / some extension), `postulates` (1 when the four
+  rationality postulates of Caminada & Amgoud 2007 hold on every extension, else 0 and code `postulate`), scene `aspic` (the
+  arguments on a circle with their conclusions, defeats as arrows, in ok · out bad · undecided warn). logic@1's codes
+  (`not-transposed`, `axioms-inconsistent`, `not-well-formed`, `budget`) pass through.
 
 ## 4. Argumentation schemes and informal fallacies
 
@@ -236,6 +252,41 @@ Function words, conjunctions and fillers are built in for en, el, de, fr, ru, es
 | series `figuresBySentence` | `type!` | occurrences per sentence |
 | scene `figures` | `type` | the text in lines of ≤ 64 characters, sentence numbers, the words of the figure in role `hi`, fillers `muted` |
 
+### 6.2 Sound figures (by phonetic keys)
+
+A word's **phonetic key** (`phon(word, lang)`) is its spelling turned into a rough phoneme string by the language's main grapheme
+rules: en the usual digraphs (ph, sh, ch, th, ck, gh before t or at the end, wr-, kn-), c/s, ee/ea/ie → i, oo → u, ou/ow → au, the
+silent final e (Carney 1994, *A Survey of English Spelling*); el the digraphs (ου, αι, ει/οι/υι), αυ/ευ/ηυ as av/af by the next sound,
+μπ ντ γκ, synizesis (an unaccented ι, υ, ει, οι before a vowel is the glide j; Holton, Mackridge & Philippaki-Warburton 1997 §1.1–1.4);
+de sch, ch, ie, ei, eu/äu, umlauts, v/w/z, final devoicing (Wiese 1996); fr eau/au, oi, ou, the nasal vowels, mute final e and
+consonants (Tranel 1987); ru transliteration with final devoicing (Timberlake 2004); es seseo, yeísmo, silent h (Hualde 2005); it
+ch/gh, c/g before e/i, gn, gli, sc, geminates (Krämer 2009). It is a key for comparing words, not a transcription; stress is not
+marked, so a rhyme is matched from the last vowel group.
+
+| type | rule (definitions: Lanham 1991; rhyme: Brogan 2012, *Princeton Encyclopedia of Poetry and Poetics*) |
+|---|---|
+| rhyme | the last words of two clauses at most two apart have the same rime (the key from its last vowel group on, ≥ 2 sounds or open), and are different words |
+| assonance | ≥ 3 different content words within 6 tokens of a clause share a vowel sound, and not all one rime |
+| consonance | ≥ 3 different content words within 6 tokens of a clause end in the same consonant sound and do not all start with the same sound (that is alliteration) |
+| paronomasia | two different content words of a sentence (≥ 4 letters, not one stem: that is polyptoton) whose keys differ by exactly one edit |
+
+Outputs: `sound` (`type!`, `speech`: occurrences), `soundAt` (`type!`, `sentence!`), series `soundsBySentence` (`type!`), scene
+`sounds` (`type`: the text with the words highlighted). The orthographic `alliteration` of §6 stays as it was.
+
+### 6.3 Trope candidates (by explicit cues)
+
+The engine does not read meaning. It reports **candidates** — places where a cue says a trope may be — with the cue; every
+non-zero `trope` carries the code `candidate`, and the scene `tropes` writes `type: cue` beside each sentence.
+
+| type | cues (per language) | source |
+|---|---|---|
+| simile | a comparison marker between two content words: en like (not after I, you, we, they, would, feel, look), as if, as though, as … as · el σαν, σα, όπως, λες και, σάμπως, καθώς · de wie, als ob, gleichsam · fr comme, tel(le)(s), pareil à, ainsi que, semblable à · ru как, словно, будто, точно, подобно, как будто · es como, cual, igual que, tal como · it come, quasi, simile a, come se | Lanham 1991; Israel, Harding & Tobin 2004 |
+| metaphor | a signalling expression: en so to speak, metaphorically, figuratively, literally, as it were, a kind of, a sort of, in a sense · el μεταφορικά, κατά κάποιον τρόπο, ας πούμε, κυριολεκτικά, ένα είδος · de sozusagen, gewissermaßen, bildlich gesprochen, buchstäblich, eine Art · fr pour ainsi dire, au sens figuré, littéralement, une sorte de · ru так сказать, образно говоря, буквально, своего рода · es por así decirlo, literalmente, una especie de · it per così dire, letteralmente, una specie di; or the genitive metaphor "copula DET N of" (en, fr, es, it: *Life is the art of …*) | Goatly 1997 ch. 6; Brooke-Rose 1958 |
+| irony | a marker: en so-called, yeah right, oh great, just great, what a surprise, how convenient, thanks a lot · el δήθεν, τάχα, μπράβο σου, τι ωραία · de sogenannt-, na toll, na super, wie schön · fr soi-disant, prétendu(e), quelle surprise, merci bien · ru так называемый, ну конечно, ну спасибо, да уж · es el llamado, supuesto, qué bien, sí, claro · it cosiddetto, che bello, grazie tante; scare quotes around 1–3 words; ?! or ‽ | Attardo 2000; Burgers, van Mulken & Schellens 2012; Kreuz 1996 |
+
+Outputs: `trope` (`type!`), `tropeAt` (`type!`, `sentence!`), series `tropesBySentence`, scene `tropes`. A sentence such as "I like
+tea" is not a simile; "as if" in an irony ("as if he cared") is counted as a simile cue — that is why these are candidates.
+
 ## 7. Delivery and readability
 
 | output | value | source / norm |
@@ -253,8 +304,10 @@ Function words, conjunctions and fillers are built in for en, el, de, fr, ru, es
 
 **Readability** (`readability`, `formula!`; ASL words per sentence, ASW syllables per word; syllables by vowel groups of the alphabet:
 English with silent e, -es, -ed, -le rules and exceptions; French mute final e; Spanish hiatus with í ú; Russian one per vowel letter;
-Greek one per vowel except the digraphs αι ει οι υι ου αυ ευ ηυ, split by a diaeresis or an accent on the first vowel — synizesis
-(παιδιά) is not modelled). A formula on another language gives its value with `formula_lang`; a Flesch-type value outside 0–100 or a
+Greek one per vowel except the digraphs αι ει οι υι ου αυ ευ ηυ, split by a diaeresis or an accent on the first vowel; with
+`model.synizesis: true` an unaccented ι, υ, ει or οι before a vowel is a glide and makes no syllable — παιδιά 2, ποιος 1, ήλιος 2,
+αλήθεια 3, νοιάζομαι 3, while Μαρία, προϊόν keep 3 (Holton, Mackridge & Philippaki-Warburton 1997 §1.4.2; Triantafyllidis § 20); learned
+words that keep the hiatus in careful speech (διάλογος) are then counted one short. Off by default, so earlier outputs are unchanged. A formula on another language gives its value with `formula_lang`; a Flesch-type value outside 0–100 or a
 Wiener Sachtextformel outside 4–15 is returned as computed with `off_scale`; a text without sentence punctuation counts as one sentence
 (`no_sentences`).
 
@@ -317,6 +370,8 @@ test (20 000 characters with every figure, readability and timings, a 24-argumen
 | `no_scheme` · `no_steps` | §4 |
 | `parse` (+ logic@1's own parse code) · `too_many_atoms` · `valid` · `no_atom` | §5 |
 | `no_position` · `tie` | an outline position that is not a number · two parts in one place |
+| `candidate` | a trope count above 0: candidates by cues, not judgements (§6.3) |
+| `postulate` · `not-transposed` · `axioms-inconsistent` · `not-well-formed` | ASPIC+ (§3.1, from logic@1) |
 | `output` · `error` | an output the engine does not know · an internal failure (NaN) |
 
 ## 11. Reference values asserted by `tests/lib_rhetoric.js`
@@ -347,6 +402,12 @@ test (20 000 characters with every figure, readability and timings, a 24-argumen
 | Monroe reversed / one swap | τ = −1 / 0.8 | Kendall 1938 |
 | ELM 0.9, 0.9, 0.8, −0.5 | E 0.81, attitude 0.5530 | the teaching form |
 | inoculation r0 0.6, τ 14 | r(14) = 0.6/e; a booster at day 20 restores 0.6 | the teaching form |
+| phonetic keys | light / night rhyme, knight = night; παιδιά peDja, αύριο avrjo, ευχή efxi; chanson SAsO; хлеб xlep; Tag tak | Carney 1994; Holton et al. 1997; Tranel 1987; Timberlake 2004; Wiese 1996 |
+| sound figures | Twinkle … star / are: rhyme; the rain in Spain …: assonance; traduttore, traditore: paronomasia; take, bike, cake, lake: consonance | Taylor 1806; Lerner & Loewe 1956 |
+| trope candidates | "My love is like a red, red rose" simile (not "I like tea"); "Life is the art of …", "so to speak" metaphor cues; scare quotes, "oh great", ?! irony cues; σαν / δήθεν; wie / sogenannte | Burns 1794; Goatly 1997; Attardo 2000 |
+| Greek synizesis | παιδιά 2, ποιος 1, ήλιος 2, αλήθεια 3; Μαρία, προϊόν 3; off: παιδιά 3 | Holton et al. 1997 §1.4.2 |
+| bipolar map a ⇒ b → c | one supported attack a → c; c out | Cayrol & Lagasquie-Schiex 2005 |
+| ASPIC+ snores / professor | 5 arguments, 1 defeat; last-link justifies accessDenied, weakest-link not; postulates hold | Modgil & Prakken 2014 Ex. 3.23 |
 
 Also asserted: every runtime code of §10 that a model can reach, the checker codes, the JS = Python parity on the 27 fixture specs,
 the adapter, the Worker source (with logic@1) giving identical outputs in a fresh `vm` context, a typical run < 50 ms and the heaviest
@@ -354,9 +415,10 @@ the adapter, the Worker source (with logic@1) giving identical outputs in a fres
 
 ## 12. Not covered (and why)
 
-Free-text argument mining and fallacy detection (needs language models; the engine works on the map the author gives); tropes
-(metaphor, irony, hyperbole) and sound-based figures (assonance, true alliteration need phonetics); prosody from audio (pitch, loudness:
-the engine reads a transcript and its timings, not sound); bipolar and weighted argumentation frameworks, ASPIC+ (logic@1's Dung
-semantics only); judge adaptation paradigms beyond net benefits and stock issues (kritiks, theory); prep-time accounting; Greek
-synizesis and stress-based syllables; validated readability for Greek (none exists to our knowledge); the ELM and inoculation forms
-are qualitative models made numeric, not predictions.
+Free-text argument mining and fallacy detection (needs language models; the engine works on the map the author gives); tropes are
+**candidates by explicit cues** only (§6.3) — a metaphor or an irony without a cue, and hyperbole, need meaning; sound figures use
+phonetic keys from spelling (§6.2), not a pronouncing dictionary, so stress-based rhyme and English spelling exceptions beyond the
+rules are approximate; prosody from audio (pitch, loudness: the engine reads a transcript and its timings, not sound); weighted
+argumentation frameworks; judge adaptation paradigms beyond net benefits and stock issues (kritiks, theory); prep-time accounting;
+stress-based syllables; validated readability for Greek (none exists to our knowledge); the ELM and inoculation forms are qualitative
+models made numeric, not predictions.
