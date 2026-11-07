@@ -141,8 +141,8 @@
   }
   const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
   /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): the meters' seeded jitter draws from its MRG32k3a streams, one per
-      measurement; FALLBACK without the kernel (marked): mulberry32. (The noise sources stay a counter-based hash: their sample i is
-      read at any time of a transient, which a sequential stream cannot give cheaply.) */
+      measurement; the noise sources draw from its counter-based Philox stream (counterStream: sample i of a source is read at any
+      time of a transient in O(1), with no state to carry). FALLBACK without the kernel (marked): mulberry32 and an FNV hash. */
   function kit() {
     if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
     return root.NoemaSimKit || null;
@@ -153,7 +153,8 @@
     if (w.kind === 'dc') return { at: () => w.dc, avg: w.dc, at0m: w.dc, next: () => Infinity };
     if (w.kind === 'noise') {   // seeded band-limited noise (straight lines between Gaussian samples 1/(2·bw) apart), plus the pickup's hum and slow wander
       const hold = w.hold || { shift: 0 }, sd = w.seed >>> 0, dn = 1 / (2 * w.bw), dw = 1;
-      const g = (tag, i) => gauss(mulberry32(hash32(tag + i, sd)));
+      const K = kit(), cs = K ? { n: K.counterStream(sd, 'circuit:noise:n'), w: K.counterStream(sd, 'circuit:noise:w') } : null;
+      const g = cs ? (tag, i) => cs[tag].normal(i) : (tag, i) => gauss(mulberry32(hash32(tag + i, sd)));   // FALLBACK: a hashed mulberry32 per sample
       const lerp = (tag, u) => { const i = Math.floor(u), f = u - i; return g(tag, i) * (1 - f) + g(tag, i + 1) * f; };
       const at = t => {
         const tt = t + hold.shift;
@@ -1014,7 +1015,7 @@
       if (i === undefined) throw fail('unknown-node', { ref });
       return i;
     }
-    const rngFor = probe => (noise ? mulberry32(hash32(JSON.stringify(probe), noise.seed)) : null);
+    const rngFor = probe => (noise ? streamOf(JSON.stringify(probe), noise.seed) : null);
     const jit = (v, r) => (r ? v * (1 + noise.rel * (2 * r() - 1)) + noise.abs * (2 * r() - 1) : v);
     function window_(probe) {
       const tEnd = num(probe.tEnd), dt = probe.dt === undefined ? tEnd / 1000 : num(probe.dt), tStart = probe.tStart === undefined ? 0 : num(probe.tStart);

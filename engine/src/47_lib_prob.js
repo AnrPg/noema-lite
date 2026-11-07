@@ -479,8 +479,10 @@
   function ncdf(z) { if (Number.isNaN(z)) return NaN; const r = gammaPQ(0.5, z * z / 2); return z < 0 ? 0.5 * r[1] : 0.5 + 0.5 * r[0]; }
   function lncdf(z) { if (Number.isNaN(z)) return NaN; const r = gammaPQ(0.5, z * z / 2); return z < 0 ? r[3] - LN2 : log1p(-0.5 * r[1]); }
   const npdf = z => exp(-0.5 * z * z) / 2.5066282746310002;
-  /** Φ⁻¹(p): Wichura's AS 241 PPND16 (Appl. Stat. 37:477, 1988; relative accuracy ~1e-16), three rational approximations */
-  function qnorm(p) {
+  /** Φ⁻¹(p): Wichura's AS 241 PPND16 (Appl. Stat. 37:477, 1988; relative accuracy ~1e-16) — the kernel's (NoemaSimKit.normInv);
+      FALLBACK without the kernel: the same three rational approximations here */
+  function qnorm(p) { const K = C.kit(); if (K) return Number.isNaN(p) || p < 0 || p > 1 ? NaN : K.normInv(p); return qnormOwn(p); }
+  function qnormOwn(p) {
     if (Number.isNaN(p) || p < 0 || p > 1) return NaN;
     if (p === 0) return -Infinity;
     if (p === 1) return Infinity;

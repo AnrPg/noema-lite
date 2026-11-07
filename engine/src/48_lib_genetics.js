@@ -40,6 +40,7 @@
     if (k < 1024) return LF[Math.round(k)];
     const x = k + 1; return (x - 0.5) * Math.log(x) - x + 0.5 * Math.log(2 * Math.PI) + 1 / (12 * x) - 1 / (360 * x * x * x) + 1 / (1260 * Math.pow(x, 5));
   }
+  /* FALLBACK special functions, for a context without the kernel (NoemaSimKit has the same Lanczos ln Γ and NR Q(a, x)) */
   /** ln Γ(x) (Lanczos, g = 7, n = 9; ~1e-15) */
   const LZ = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
   function lgamma(x) {
@@ -66,7 +67,7 @@
     return Math.min(1, Math.exp(-x + a * Math.log(x) - gln) * h);
   }
   /** the χ² upper tail P(X ≥ x | df) */
-  const chi2Sf = (x, df) => (df >= 1 && x >= 0 ? gammaQ(df / 2, x / 2) : NaN);
+  const chi2Sf = (x, df) => (df >= 1 && x >= 0 ? (C.kit() ? C.kit().chi2Sf(x, df) : gammaQ(df / 2, x / 2)) : NaN);   // the kernel's tail; FALLBACK: the own Q below
   /** erfc: Taylor series of erf below 2, Lentz continued fraction above (relative error ~1e-15) */
   function erfc(x) {
     if (x < 0) return 2 - erfc(-x);
@@ -78,7 +79,8 @@
   const Phi = z => 0.5 * erfc(-z / Math.SQRT2);
   const phi = z => Math.exp(-0.5 * z * z) / Math.sqrt(2 * Math.PI);
   /** Φ⁻¹(p): Acklam's rational approximation (2003) refined by one Halley step */
-  function PhiInv(p) {
+  const PhiInv = p => (C.kit() ? C.kit().normInv(p) : PhiInvOwn(p));   // the kernel's AS 241; FALLBACK: Acklam + Halley below
+  function PhiInvOwn(p) {
     if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
     const a = [-3.969683028665376e1, 2.209460984245205e2, -2.759285104469687e2, 1.383577518672690e2, -3.066479806614716e1, 2.506628277459239];
     const b = [-5.447609879822406e1, 1.615858368580409e2, -1.556989798598866e2, 6.680131188771972e1, -1.328068155288572e1];

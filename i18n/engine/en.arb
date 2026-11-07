@@ -10937,5 +10937,753 @@
   "engine.author.f.lib.dimensions": "Dimensions (with magnitudes)",
   "@engine.author.f.lib.dimensions": {
     "description": "Label of the field “dimensions” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.ability": "Ability",
+  "@engine.author.f.lib.ability": {
+    "description": "Label of the field “ability” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.acc": "Predictor accuracy",
+  "@engine.author.f.lib.acc": {
+    "description": "Label of the field “acc” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.accepted": "Accepted",
+  "@engine.author.f.lib.accepted": {
+    "description": "Label of the field “accepted” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.against": "Against",
+  "@engine.author.f.lib.against": {
+    "description": "Label of the field “against” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.allowUnstable": "Allow unstable steps",
+  "@engine.author.f.lib.allowUnstable": {
+    "description": "Label of the field “allowUnstable” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.analysis": "Output analysis",
+  "@engine.author.f.lib.analysis": {
+    "description": "Label of the field “analysis” of a library engine’s model or outputs in the activity author (engines: des, philo). Short."
+  },
+  "engine.author.f.lib.antithetic": "Antithetic variates",
+  "@engine.author.f.lib.antithetic": {
+    "description": "Label of the field “antithetic” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.appeal": "Appeal",
+  "@engine.author.f.lib.appeal": {
+    "description": "Label of the field “appeal” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.approve": "Approval",
+  "@engine.author.f.lib.approve": {
+    "description": "Label of the field “approve” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.apt": "Apt (success from ability)",
+  "@engine.author.f.lib.apt": {
+    "description": "Label of the field “apt” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.argument": "Argument",
+  "@engine.author.f.lib.argument": {
+    "description": "Label of the field “argument” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.arguments": "Arguments",
+  "@engine.author.f.lib.arguments": {
+    "description": "Label of the field “arguments” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.arrival": "Arrivals",
+  "@engine.author.f.lib.arrival": {
+    "description": "Label of the field “arrival” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.asti": "Is (asti)",
+  "@engine.author.f.lib.asti": {
+    "description": "Label of the field “asti” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.attack": "Attack",
+  "@engine.author.f.lib.attack": {
+    "description": "Label of the field “attack” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.audience": "Audience",
+  "@engine.author.f.lib.audience": {
+    "description": "Label of the field “audience” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.avak": "Inexpressible (avaktavya)",
+  "@engine.author.f.lib.avak": {
+    "description": "Label of the field “avak” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.balk": "Balking",
+  "@engine.author.f.lib.balk": {
+    "description": "Label of the field “balk” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.ballot": "Ballot",
+  "@engine.author.f.lib.ballot": {
+    "description": "Label of the field “ballot” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.ballots": "Ballots",
+  "@engine.author.f.lib.ballots": {
+    "description": "Label of the field “ballots” of a library engine’s model or outputs in the activity author (engines: philo, rhetoric). Short."
+  },
+  "engine.author.f.lib.bank": "Bank case",
+  "@engine.author.f.lib.bank": {
+    "description": "Label of the field “bank” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.bargain": "Bargain",
+  "@engine.author.f.lib.bargain": {
+    "description": "Label of the field “bargain” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.bargains": "Bargains",
+  "@engine.author.f.lib.bargains": {
+    "description": "Label of the field “bargains” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.batches": "Batches",
+  "@engine.author.f.lib.batches": {
+    "description": "Label of the field “batches” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.bcV": "Boundary value",
+  "@engine.author.f.lib.bcV": {
+    "description": "Label of the field “bcV” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.belief": "Belief",
+  "@engine.author.f.lib.belief": {
+    "description": "Label of the field “belief” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.beliefs": "Beliefs",
+  "@engine.author.f.lib.beliefs": {
+    "description": "Label of the field “beliefs” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.believed": "Believed",
+  "@engine.author.f.lib.believed": {
+    "description": "Label of the field “believed” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.boosters": "Boosters",
+  "@engine.author.f.lib.boosters": {
+    "description": "Label of the field “boosters” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.born": "Born",
+  "@engine.author.f.lib.born": {
+    "description": "Label of the field “born” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.breakdowns": "Breakdowns",
+  "@engine.author.f.lib.breakdowns": {
+    "description": "Label of the field “breakdowns” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.cand": "Candidate",
+  "@engine.author.f.lib.cand": {
+    "description": "Label of the field “cand” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.candidate": "Candidate",
+  "@engine.author.f.lib.candidate": {
+    "description": "Label of the field “candidate” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.candidates": "Candidates",
+  "@engine.author.f.lib.candidates": {
+    "description": "Label of the field “candidates” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.causal": "Causal link",
+  "@engine.author.f.lib.causal": {
+    "description": "Label of the field “causal” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.class": "Customer class",
+  "@engine.author.f.lib.class": {
+    "description": "Label of the field “class” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.colorBy": "Colour by",
+  "@engine.author.f.lib.colorBy": {
+    "description": "Label of the field “colorBy” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.conception": "Contradiction in conception",
+  "@engine.author.f.lib.conception": {
+    "description": "Label of the field “conception” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.conclusion": "Conclusion",
+  "@engine.author.f.lib.conclusion": {
+    "description": "Label of the field “conclusion” of a library engine’s model or outputs in the activity author (engines: philo, rhetoric). Short."
+  },
+  "engine.author.f.lib.conjecture": "Conjecture (fact)",
+  "@engine.author.f.lib.conjecture": {
+    "description": "Label of the field “conjecture” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.consent": "Consent",
+  "@engine.author.f.lib.consent": {
+    "description": "Label of the field “consent” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.coord": "Coordination game",
+  "@engine.author.f.lib.coord": {
+    "description": "Label of the field “coord” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.costMax": "Highest cost",
+  "@engine.author.f.lib.costMax": {
+    "description": "Label of the field “costMax” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.costMin": "Lowest cost",
+  "@engine.author.f.lib.costMin": {
+    "description": "Label of the field “costMin” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.criterion": "Criterion",
+  "@engine.author.f.lib.criterion": {
+    "description": "Label of the field “criterion” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.cue": "Cue",
+  "@engine.author.f.lib.cue": {
+    "description": "Label of the field “cue” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.debate": "Debate",
+  "@engine.author.f.lib.debate": {
+    "description": "Label of the field “debate” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.defeater": "Defeater",
+  "@engine.author.f.lib.defeater": {
+    "description": "Label of the field “defeater” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.definition": "Definition",
+  "@engine.author.f.lib.definition": {
+    "description": "Label of the field “definition” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.delivery": "Delivery",
+  "@engine.author.f.lib.delivery": {
+    "description": "Label of the field “delivery” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.died": "Died",
+  "@engine.author.f.lib.died": {
+    "description": "Label of the field “died” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.discipline": "Queue discipline",
+  "@engine.author.f.lib.discipline": {
+    "description": "Label of the field “discipline” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.driver": "Is the driver",
+  "@engine.author.f.lib.driver": {
+    "description": "Label of the field “driver” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.election": "Election",
+  "@engine.author.f.lib.election": {
+    "description": "Label of the field “election” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.elections": "Elections",
+  "@engine.author.f.lib.elections": {
+    "description": "Label of the field “elections” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.elm": "Elaboration likelihood",
+  "@engine.author.f.lib.elm": {
+    "description": "Label of the field “elm” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.enh": "Enhancement",
+  "@engine.author.f.lib.enh": {
+    "description": "Label of the field “enh” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.est": "Estimator",
+  "@engine.author.f.lib.est": {
+    "description": "Label of the field “est” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.experiment": "Thought experiment",
+  "@engine.author.f.lib.experiment": {
+    "description": "Label of the field “experiment” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.experiments": "Thought experiments",
+  "@engine.author.f.lib.experiments": {
+    "description": "Label of the field “experiments” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.falseLemma": "False lemma",
+  "@engine.author.f.lib.falseLemma": {
+    "description": "Label of the field “falseLemma” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.for": "For",
+  "@engine.author.f.lib.for": {
+    "description": "Label of the field “for” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.forms": "Forms",
+  "@engine.author.f.lib.forms": {
+    "description": "Label of the field “forms” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.game": "Game",
+  "@engine.author.f.lib.game": {
+    "description": "Label of the field “game” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.games": "Games",
+  "@engine.author.f.lib.games": {
+    "description": "Label of the field “games” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.grace": "Grace period",
+  "@engine.author.f.lib.grace": {
+    "description": "Label of the field “grace” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.impact": "Impact",
+  "@engine.author.f.lib.impact": {
+    "description": "Label of the field “impact” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.inference": "Inference",
+  "@engine.author.f.lib.inference": {
+    "description": "Label of the field “inference” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.inferences": "Inferences",
+  "@engine.author.f.lib.inferences": {
+    "description": "Label of the field “inferences” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.infl": "Influences",
+  "@engine.author.f.lib.infl": {
+    "description": "Label of the field “infl” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.initV": "Initial value",
+  "@engine.author.f.lib.initV": {
+    "description": "Label of the field “initV” of a library engine’s model or outputs in the activity author (engines: field). Short."
+  },
+  "engine.author.f.lib.inoculation": "Inoculation",
+  "@engine.author.f.lib.inoculation": {
+    "description": "Label of the field “inoculation” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.intuition": "Intuition",
+  "@engine.author.f.lib.intuition": {
+    "description": "Label of the field “intuition” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.jockey": "Jockeying",
+  "@engine.author.f.lib.jockey": {
+    "description": "Label of the field “jockey” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.judge": "Judge",
+  "@engine.author.f.lib.judge": {
+    "description": "Label of the field “judge” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.justified": "Justified",
+  "@engine.author.f.lib.justified": {
+    "description": "Label of the field “justified” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.kAct": "Count if acting",
+  "@engine.author.f.lib.kAct": {
+    "description": "Label of the field “kAct” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.kNot": "Count if not acting",
+  "@engine.author.f.lib.kNot": {
+    "description": "Label of the field “kNot” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.knowledge": "Knowledge",
+  "@engine.author.f.lib.knowledge": {
+    "description": "Label of the field “knowledge” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.lam": "Weight λ",
+  "@engine.author.f.lib.lam": {
+    "description": "Label of the field “lam” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.limit": "Limit",
+  "@engine.author.f.lib.limit": {
+    "description": "Label of the field “limit” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.loadFactor": "Load factor",
+  "@engine.author.f.lib.loadFactor": {
+    "description": "Label of the field “loadFactor” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.logCap": "Event log size",
+  "@engine.author.f.lib.logCap": {
+    "description": "Label of the field “logCap” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.loser": "Condorcet loser",
+  "@engine.author.f.lib.loser": {
+    "description": "Label of the field “loser” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.lotteries": "Lotteries",
+  "@engine.author.f.lib.lotteries": {
+    "description": "Label of the field “lotteries” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.lottery": "Lottery",
+  "@engine.author.f.lib.lottery": {
+    "description": "Label of the field “lottery” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.maxEvents": "Most events",
+  "@engine.author.f.lib.maxEvents": {
+    "description": "Label of the field “maxEvents” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.maxOps": "Most operations",
+  "@engine.author.f.lib.maxOps": {
+    "description": "Label of the field “maxOps” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.maxim": "Maxim",
+  "@engine.author.f.lib.maxim": {
+    "description": "Label of the field “maxim” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.maxims": "Maxims",
+  "@engine.author.f.lib.maxims": {
+    "description": "Label of the field “maxims” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.means": "As a means",
+  "@engine.author.f.lib.means": {
+    "description": "Label of the field “means” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.misrepresents": "Misrepresents",
+  "@engine.author.f.lib.misrepresents": {
+    "description": "Label of the field “misrepresents” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.mix": "Class mix",
+  "@engine.author.f.lib.mix": {
+    "description": "Label of the field “mix” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.monday": "Monday",
+  "@engine.author.f.lib.monday": {
+    "description": "Label of the field “monday” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.motivation": "Motivation",
+  "@engine.author.f.lib.motivation": {
+    "description": "Label of the field “motivation” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.nasti": "Is not (nāsti)",
+  "@engine.author.f.lib.nasti": {
+    "description": "Label of the field “nasti” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.natural": "Contradiction in a natural law",
+  "@engine.author.f.lib.natural": {
+    "description": "Label of the field “natural” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.offTopic": "Off topic",
+  "@engine.author.f.lib.offTopic": {
+    "description": "Label of the field “offTopic” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.outcomes": "Outcomes",
+  "@engine.author.f.lib.outcomes": {
+    "description": "Label of the field “outcomes” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.outline": "Outline",
+  "@engine.author.f.lib.outline": {
+    "description": "Label of the field “outline” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.pAct": "Probabilities given the act",
+  "@engine.author.f.lib.pAct": {
+    "description": "Label of the field “pAct” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.pCause": "Causal probabilities",
+  "@engine.author.f.lib.pCause": {
+    "description": "Label of the field “pCause” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.paksa": "Subject (pakṣa)",
+  "@engine.author.f.lib.paksa": {
+    "description": "Label of the field “paksa” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.paradox": "Paradox",
+  "@engine.author.f.lib.paradox": {
+    "description": "Label of the field “paradox” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.parts": "Parts of the speech",
+  "@engine.author.f.lib.parts": {
+    "description": "Label of the field “parts” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.pause": "Pause",
+  "@engine.author.f.lib.pause": {
+    "description": "Label of the field “pause” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.pay": "Payoffs",
+  "@engine.author.f.lib.pay": {
+    "description": "Label of the field “pay” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.personal": "Personal force",
+  "@engine.author.f.lib.personal": {
+    "description": "Label of the field “personal” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.plan": "Plan",
+  "@engine.author.f.lib.plan": {
+    "description": "Label of the field “plan” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.player": "Player",
+  "@engine.author.f.lib.player": {
+    "description": "Label of the field “player” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.plo": "Start of the borderline zone",
+  "@engine.author.f.lib.plo": {
+    "description": "Label of the field “plo” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.poi": "Point of information",
+  "@engine.author.f.lib.poi": {
+    "description": "Label of the field “poi” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.pois": "Points of information",
+  "@engine.author.f.lib.pois": {
+    "description": "Label of the field “pois” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.poisson": "Poisson source",
+  "@engine.author.f.lib.poisson": {
+    "description": "Label of the field “poisson” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.policy": "Policy",
+  "@engine.author.f.lib.policy": {
+    "description": "Label of the field “policy” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.population": "Population",
+  "@engine.author.f.lib.population": {
+    "description": "Label of the field “population” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.populations": "Populations",
+  "@engine.author.f.lib.populations": {
+    "description": "Label of the field “populations” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.position": "Position",
+  "@engine.author.f.lib.position": {
+    "description": "Label of the field “position” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.post": "After",
+  "@engine.author.f.lib.post": {
+    "description": "Label of the field “post” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.practical": "Practical contradiction",
+  "@engine.author.f.lib.practical": {
+    "description": "Label of the field “practical” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.pre": "Before",
+  "@engine.author.f.lib.pre": {
+    "description": "Label of the field “pre” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.preempt": "Pre-emption",
+  "@engine.author.f.lib.preempt": {
+    "description": "Label of the field “preempt” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.principle": "Principle",
+  "@engine.author.f.lib.principle": {
+    "description": "Label of the field “principle” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.prio": "Priority",
+  "@engine.author.f.lib.prio": {
+    "description": "Label of the field “prio” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.priors": "Prior probabilities",
+  "@engine.author.f.lib.priors": {
+    "description": "Label of the field “priors” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.problem": "Problem",
+  "@engine.author.f.lib.problem": {
+    "description": "Label of the field “problem” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.problems": "Problems",
+  "@engine.author.f.lib.problems": {
+    "description": "Label of the field “problems” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.profile": "Profile",
+  "@engine.author.f.lib.profile": {
+    "description": "Label of the field “profile” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.profiles": "Profiles",
+  "@engine.author.f.lib.profiles": {
+    "description": "Label of the field “profiles” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.protect": "Protected time",
+  "@engine.author.f.lib.protect": {
+    "description": "Label of the field “protect” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.quality": "Quality",
+  "@engine.author.f.lib.quality": {
+    "description": "Label of the field “quality” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.ranks": "Ranks",
+  "@engine.author.f.lib.ranks": {
+    "description": "Label of the field “ranks” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.rates": "Rates",
+  "@engine.author.f.lib.rates": {
+    "description": "Label of the field “rates” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.redirect": "Redirects a threat",
+  "@engine.author.f.lib.redirect": {
+    "description": "Label of the field “redirect” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.reliable": "Reliable",
+  "@engine.author.f.lib.reliable": {
+    "description": "Label of the field “reliable” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.renege": "Reneging",
+  "@engine.author.f.lib.renege": {
+    "description": "Label of the field “renege” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.reply": "Reply",
+  "@engine.author.f.lib.reply": {
+    "description": "Label of the field “reply” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.role": "Role",
+  "@engine.author.f.lib.role": {
+    "description": "Label of the field “role” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.route": "Route",
+  "@engine.author.f.lib.route": {
+    "description": "Label of the field “route” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.sAct": "Weight if acting",
+  "@engine.author.f.lib.sAct": {
+    "description": "Label of the field “sAct” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.sNot": "Weight if not acting",
+  "@engine.author.f.lib.sNot": {
+    "description": "Label of the field “sNot” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.safe": "Safe",
+  "@engine.author.f.lib.safe": {
+    "description": "Label of the field “safe” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.sapaksa": "Similar cases (sapakṣa)",
+  "@engine.author.f.lib.sapaksa": {
+    "description": "Label of the field “sapaksa” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.score": "Score",
+  "@engine.author.f.lib.score": {
+    "description": "Label of the field “score” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.scores": "Scores",
+  "@engine.author.f.lib.scores": {
+    "description": "Label of the field “scores” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.sensitive": "Sensitive",
+  "@engine.author.f.lib.sensitive": {
+    "description": "Label of the field “sensitive” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.sentence": "Sentence",
+  "@engine.author.f.lib.sentence": {
+    "description": "Label of the field “sentence” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.sepRadius": "Separation radius",
+  "@engine.author.f.lib.sepRadius": {
+    "description": "Label of the field “sepRadius” of a library engine’s model or outputs in the activity author (engines: agents). Short."
+  },
+  "engine.author.f.lib.servers": "Servers",
+  "@engine.author.f.lib.servers": {
+    "description": "Label of the field “servers” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.service": "Service time",
+  "@engine.author.f.lib.service": {
+    "description": "Label of the field “service” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.serviceBy": "Service time by class",
+  "@engine.author.f.lib.serviceBy": {
+    "description": "Label of the field “serviceBy” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.shifts": "Shifts",
+  "@engine.author.f.lib.shifts": {
+    "description": "Label of the field “shifts” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.shortest": "Shortest queue",
+  "@engine.author.f.lib.shortest": {
+    "description": "Label of the field “shortest” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.slots": "Speaking slots",
+  "@engine.author.f.lib.slots": {
+    "description": "Label of the field “slots” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.small": "Small payoff",
+  "@engine.author.f.lib.small": {
+    "description": "Label of the field “small” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.solution": "Solution",
+  "@engine.author.f.lib.solution": {
+    "description": "Label of the field “solution” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.sorites": "Sorites series",
+  "@engine.author.f.lib.sorites": {
+    "description": "Label of the field “sorites” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.speaker": "Speaker",
+  "@engine.author.f.lib.speaker": {
+    "description": "Label of the field “speaker” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.speech": "Speech",
+  "@engine.author.f.lib.speech": {
+    "description": "Label of the field “speech” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.speeches": "Speeches",
+  "@engine.author.f.lib.speeches": {
+    "description": "Label of the field “speeches” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.stasis": "Stasis",
+  "@engine.author.f.lib.stasis": {
+    "description": "Label of the field “stasis” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.station": "Station",
+  "@engine.author.f.lib.station": {
+    "description": "Label of the field “station” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.stations": "Stations",
+  "@engine.author.f.lib.stations": {
+    "description": "Label of the field “stations” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.team": "Team",
+  "@engine.author.f.lib.team": {
+    "description": "Label of the field “team” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.teams": "Teams",
+  "@engine.author.f.lib.teams": {
+    "description": "Label of the field “teams” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.thinkers": "Thinkers",
+  "@engine.author.f.lib.thinkers": {
+    "description": "Label of the field “thinkers” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.time": "Time",
+  "@engine.author.f.lib.time": {
+    "description": "Label of the field “time” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.topos": "Topos (line of argument)",
+  "@engine.author.f.lib.topos": {
+    "description": "Label of the field “topos” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.tournament": "Tournament",
+  "@engine.author.f.lib.tournament": {
+    "description": "Label of the field “tournament” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.trad": "Tradition",
+  "@engine.author.f.lib.trad": {
+    "description": "Label of the field “trad” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.trait": "Trait",
+  "@engine.author.f.lib.trait": {
+    "description": "Label of the field “trait” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.traits": "Traits",
+  "@engine.author.f.lib.traits": {
+    "description": "Label of the field “traits” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.translation": "Translation (jurisdiction)",
+  "@engine.author.f.lib.translation": {
+    "description": "Label of the field “translation” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.ttf": "Time to failure",
+  "@engine.author.f.lib.ttf": {
+    "description": "Label of the field “ttf” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.ttr": "Time to repair",
+  "@engine.author.f.lib.ttr": {
+    "description": "Label of the field “ttr” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.undecided": "Undecided",
+  "@engine.author.f.lib.undecided": {
+    "description": "Label of the field “undecided” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.util": "Utility from ranks",
+  "@engine.author.f.lib.util": {
+    "description": "Label of the field “util” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.utility": "Utility",
+  "@engine.author.f.lib.utility": {
+    "description": "Label of the field “utility” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.vipaksa": "Dissimilar cases (vipakṣa)",
+  "@engine.author.f.lib.vipaksa": {
+    "description": "Label of the field “vipaksa” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.vote": "Vote",
+  "@engine.author.f.lib.vote": {
+    "description": "Label of the field “vote” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.wakes": "Awakenings",
+  "@engine.author.f.lib.wakes": {
+    "description": "Label of the field “wakes” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.warmup": "Warm-up",
+  "@engine.author.f.lib.warmup": {
+    "description": "Label of the field “warmup” of a library engine’s model or outputs in the activity author (engines: des). Short."
+  },
+  "engine.author.f.lib.will": "Contradiction in the will",
+  "@engine.author.f.lib.will": {
+    "description": "Label of the field “will” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.winner": "Winner",
+  "@engine.author.f.lib.winner": {
+    "description": "Label of the field “winner” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.wpmHi": "Fastest words per minute",
+  "@engine.author.f.lib.wpmHi": {
+    "description": "Label of the field “wpmHi” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.lib.wpmLo": "Slowest words per minute",
+  "@engine.author.f.lib.wpmLo": {
+    "description": "Label of the field “wpmLo” of a library engine’s model or outputs in the activity author (engines: rhetoric). Short."
+  },
+  "engine.author.f.benchPart": "Part measured",
+  "@engine.author.f.benchPart": {
+    "description": "Label of a form field of the activity author: in a simulation with several engines, the part (a circuit or a device twin) the bench measures. Short."
   }
 }

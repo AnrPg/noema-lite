@@ -24,7 +24,7 @@
   },
   "if": { "required": ["engine"], "properties": { "engine": { "const": "circuit-mna@1" } } },
   "then": { "required": ["model"] },
-  "else": { "not": { "anyOf": [{ "required": ["model"] }, { "required": ["outputs"] }, { "required": ["bench"] }] } },
+  "else": { "not": { "anyOf": [{ "required": ["model"] }, { "required": ["outputs"] }, { "required": ["bench"], "not": { "required": ["parts"] } }] } },
   "$defs": {
     "part": { "type": "object", "required": ["id"], "additionalProperties": false, "properties": { "id": { "title": "partId", "$ref": "#/$defs/benchId" }, "engine": { "title": "engine", "type": "string", "minLength": 1}, "model": { "title": "model", "type": "object" }, "outputs": { "title": "outputs", "type": "array", "minItems": 1, "maxItems": 24, "items": { "$ref": "#/$defs/partOutput" } }, "inputs": { "$ref": "#/$defs/partInputs" }, "use": { "title": "partUse", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,60}$" }, "with": { "title": "partWith", "type": "object" } }, "anyOf": [{ "required": ["engine"] }, { "required": ["use"] }] },
     "partOutput": { "type": "object", "required": ["id", "kind"], "properties": { "id": { "title": "id", "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,31}$", "x-noema": "name" }, "kind": { "title": "outKind", "enum": ["scalar", "series", "scene", "sound"] } } },
@@ -197,6 +197,7 @@
       "required": ["faults", "points", "instruments", "diagnosis"],
       "additionalProperties": false,
       "properties": {
+        "part": { "title": "benchPart", "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$", "x-noema": "part", "description": "a spec with parts: the circuit-mna@1 or twin@1 part the bench measures (docs/INTERACTIVE.md §12.8)" },
         "faults": { "title": "faults", "type": "array", "minItems": 1, "maxItems": 16, "items": { "type": "object", "required": ["id", "apply"], "additionalProperties": false, "properties": {
           "id": { "title": "id", "$ref": "#/$defs/benchId" }, "apply": { "title": "apply", "type": "array", "maxItems": 4, "items": { "$ref": "#/$defs/fault" } } } } },
         "points": { "title": "points.bench", "type": "array", "minItems": 1, "maxItems": 24, "items": { "type": "object", "required": ["id", "at", "label"], "additionalProperties": false, "properties": {

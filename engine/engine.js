@@ -12039,7 +12039,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     s.$id = PARTS_ID; s.title = 'spec';
     delete s.if; delete s.then; delete s.else;
     s.required = [...new Set((s.required || []).concat(['parts']))];
-    for (const k of ['engine', 'model', 'outputs', 'bench']) delete s.properties[k];
+    for (const k of ['engine', 'model', 'outputs']) delete s.properties[k];   // (the bench stays: bench.part names a circuit-mna@1 or twin@1 part)
     libDefs(s);
     const part = (id, model, out) => ({ title: 'eng.' + id, type: 'object', required: ['id', 'engine', 'model', 'outputs'], additionalProperties: false,
       properties: { id: ref('benchId', 'partId'), engine: { title: 'engine', const: id }, model: Object.assign({ title: 'model' }, model),
@@ -12163,7 +12163,42 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return x < (a + 1) / (a + b + 2) ? bt * betacf(a, b, x) / a : 1 - bt * betacf(b, a, 1 - x) / b;
   }
   // the standard normal: Φ by erfc (W. J. Cody 1969 rational approximations via the complementary gamma), Φ⁻¹ by Wichura 1988 AS241
-  function normCdf(z) { if (!fin(z)) return z > 0 ? 1 : z < 0 ? 0 : NaN; const p = 0.5 * (1 - gammaP(0.5, z * z / 2)); return z >= 0 ? 1 - p : p; }
+  function normCdf(z) { if (!fin(z)) return z > 0 ? 1 : z < 0 ? 0 : NaN; const p = 0.5 * gammaQ(0.5, z * z / 2); return z >= 0 ? 1 - p : p; }   // the tail from Q: no cancellation
+  /* ---- upper tails without cancellation ----
+     gammaQ(a, x) = Γ(a, x)/Γ(a): the continued fraction (modified Lentz) for x ≥ a + 1, else 1 − the series of P (then P ≤ ~½, so
+     1 − P loses nothing); the prefactor x^a e^−x / Γ(a) in logarithms (NR 3rd ed. §6.2; DiDonato & Morris 1986, ACM TOMS 12:4 — their
+     split, without the Temme expansion, whose accuracy the series and fraction reach here with enough terms: ≤ 20 000 for a ≤ 10⁸) */
+  function gammaQ(a, x) {
+    if (!(a > 0) || !(x >= 0)) return NaN; if (x === 0) return 1; if (x === Infinity) return 0;
+    const lpre = -x + a * log(x) - lgamma(a), cap = 20000;
+    if (x < a + 1) { let ap = a, sum = 1 / a, del = sum; for (let n = 0; n < cap; n++) { ap++; del *= x / ap; sum += del; if (abs(del) < abs(sum) * 1e-17) break; } return max(0, 1 - min(1, sum * exp(lpre))); }
+    let b = x + 1 - a, c = 1e300, d = 1 / b, h = d;
+    for (let i = 1; i < cap; i++) { const an = -i * (i - a); b += 2; d = an * d + b; if (abs(d) < 1e-300) d = 1e-300; c = b + an / c; if (abs(c) < 1e-300) c = 1e-300; d = 1 / d; const del = d * c; h *= del; if (abs(del - 1) < 1e-16) break; }
+    return min(1, exp(lpre) * h);
+  }
+  /** erfc(x) = Q(½, x²) for x ≥ 0 (accurate to the underflow at x ≈ 26.5), 2 − erfc(−x) below; erf = 1 − erfc near 0 by the series of P */
+  function erfc(x) { if (Number.isNaN(x)) return NaN; return x >= 0 ? gammaQ(0.5, x * x) : 2 - gammaQ(0.5, x * x); }
+  function erf(x) { if (Number.isNaN(x)) return NaN; const p = abs(x) < 1 ? gammaP(0.5, x * x) : 1 - gammaQ(0.5, x * x); return x < 0 ? -p : p; }
+  /** erfcInv(p), 0 < p < 2: x = −Φ⁻¹(p/2)/√2 by AS241 (relative accuracy in the tail), then two Newton steps on erfc */
+  function erfcInv(p) {
+    if (!(p > 0 && p < 2)) return p === 0 ? Infinity : p === 2 ? -Infinity : NaN;
+    let x = -normInv(p / 2) / Math.SQRT2;
+    for (let i = 0; i < 2; i++) { const e = erfc(x) - p, dd = -2 / sqrt(PI) * exp(-x * x); if (!(dd !== 0) || !fin(e)) break; const nx = x - e / dd; if (!fin(nx)) break; x = nx; }
+    return x;
+  }
+  function erfInv(p) { return p > -1 && p < 1 ? erfcInv(1 - p) : p === 1 ? Infinity : p === -1 ? -Infinity : NaN; }   // accurate for |p| not near 1; there use erfcInv
+  /** the complement 1 − I_x(a, b) = I_{1−x}(b, a) from the same continued fraction (no subtraction where the tail is small) */
+  function betaQ(a, b, x) {
+    if (!(a > 0 && b > 0) || !(x >= 0 && x <= 1)) return NaN; if (x === 0) return 1; if (x === 1) return 0;
+    const bt = exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * log(x) + b * log(1 - x));
+    return x < (a + 1) / (a + b + 2) ? 1 - bt * betacf(a, b, x) / a : bt * betacf(b, a, 1 - x) / b;
+  }
+  /** survival functions: normSf(z) = 1 − Φ(z), tSf(x, df), chi2Sf(x, k), fSf(x, d1, d2) — each from the tail itself */
+  function normSf(z) { return normCdf(-z); }
+  function tSf(x, df) { if (!(df > 0) || Number.isNaN(x)) return NaN; if (!fin(x)) return x > 0 ? 0 : 1; const p = 0.5 * betaI(df / 2, 0.5, df / (df + x * x)); return x >= 0 ? p : 1 - p; }
+  function chi2Sf(x, k) { if (!(k > 0)) return NaN; return x <= 0 ? 1 : gammaQ(k / 2, x / 2); }
+  function fSf(x, d1, d2) { if (!(d1 > 0 && d2 > 0) || Number.isNaN(x)) return NaN; if (x <= 0) return 1; if (x === Infinity) return 0; return betaI(d2 / 2, d1 / 2, d2 / (d2 + d1 * x)); }
+  function fCdf(x, d1, d2) { if (!(d1 > 0 && d2 > 0) || Number.isNaN(x)) return NaN; if (x <= 0) return 0; if (x === Infinity) return 1; return betaQ(d2 / 2, d1 / 2, d2 / (d2 + d1 * x)); }
   function normInv(p) {   // Wichura 1988, Applied Statistics 37, algorithm AS 241 (PPND16, about 16 digits)
     if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
     const q = p - 0.5;
@@ -12260,6 +12295,29 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     streamCache.set(key, s); return s;
   }
   const P2_32 = 4294967296;
+  /* ---- a counter-based generator: Philox4x32-10 (Salmon, Moraes, Dror & Shaw 2011, "Parallel random numbers: as easy as 1, 2, 3",
+     SC'11; the Random123 library). The output is a pure function of (counter, key): sample i of a stream at any time costs O(1),
+     with no state to carry — for noise sources sampled at arbitrary instants and for reproducible parallel draws. The known-answer
+     vectors of Random123's kat_vectors are checked by the test ---- */
+  const mulhi32 = (a, b) => { const a0 = a & 0xffff, a1 = a >>> 16, b0 = b & 0xffff, b1 = b >>> 16, lo = a0 * b0, m1 = a1 * b0 + (lo >>> 16), m2 = a0 * b1 + (m1 & 0xffff); return (a1 * b1 + (m1 >>> 16) + (m2 >>> 16)) >>> 0; };
+  /** philox(counter [c0..c3], key [k0, k1]) → [4 uint32] */
+  function philox(ctr, key) {
+    let c0 = ctr[0] >>> 0, c1 = ctr[1] >>> 0, c2 = ctr[2] >>> 0, c3 = ctr[3] >>> 0, k0 = key[0] >>> 0, k1 = key[1] >>> 0;
+    for (let r = 0; r < 10; r++) {
+      if (r) { k0 = (k0 + 0x9E3779B9) >>> 0; k1 = (k1 + 0xBB67AE85) >>> 0; }
+      const hi0 = mulhi32(0xD2511F53, c0), lo0 = Math.imul(0xD2511F53, c0) >>> 0, hi1 = mulhi32(0xCD9E8D57, c2), lo1 = Math.imul(0xCD9E8D57, c2) >>> 0;
+      c0 = (hi1 ^ c1 ^ k0) >>> 0; c1 = lo1; c2 = (hi0 ^ c3 ^ k1) >>> 0; c3 = lo0;
+    }
+    return [c0, c1, c2, c3];
+  }
+  /** counterStream(seed, name, {antithetic}) → {u(i, j = 0) uniform in (0, 1) (53 bits from words 2j, 2j+1 of block i; j ∈ {0, 1}),
+      normal(i, j, μ, σ) by inversion, exp(i, j, rate), block(i) → 4 uint32}: key = (seed, fnv(name)), counter = (i mod 2³², ⌊i/2³²⌋, 0, 0) */
+  function counterStream(seed, name, opts) {
+    const key = [seed >>> 0, fnv(String(name == null ? '' : name))], anti = !!(opts && opts.antithetic);
+    const block = i => philox([i >>> 0, floor(i / 4294967296) >>> 0, 0, 0], key);
+    const u = (i, j) => { const b = block(i), o = (j | 0) === 1 ? 2 : 0, v = ((b[o] >>> 5) * 67108864 + (b[o + 1] >>> 6) + 0.5) / 9007199254740992; return anti ? 1 - v : v; };
+    return { block, u, normal: (i, j, m, sd) => (m || 0) + (sd == null ? 1 : sd) * normInv(u(i, j)), exp: (i, j, rate) => -log(u(i, j)) / (rate > 0 ? rate : 1), key: key.slice() };
+  }
   /** stream(seed, name, {antithetic, sub}) → r: r() a uniform in (0, 1) (never 0 or 1), and the variates below. r.sub(i) → the i-th
       substream of the same stream (replication i); the same seed and name give the same numbers everywhere */
   function stream(seed, name, opts) {
@@ -12868,6 +12926,104 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
       },
     };
   }
+  /* ---- small dense linear algebra (arrays of rows): LU with partial pivoting, solve, det, inverse; eigenvalues of a general matrix
+     by balancing, Hessenberg reduction and the Francis double-shift QR (Parlett & Reinsch 1969; EISPACK balanc/elmhes/hqr as in
+     Numerical Recipes 3rd ed. §11.6–11.7); symmetric eigenvalues and vectors by cyclic Jacobi (Golub & Van Loan 4th ed. §8.5) ---- */
+  const flat = A => { const n = A.length, a = new Float64Array(n * n); for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) a[i * n + j] = +A[i][j]; return a; };
+  const square = A => Array.isArray(A) && A.length > 0 && A.every(r => (Array.isArray(r) || ArrayBuffer.isView(r)) && r.length === A.length);
+  /** lu(A) → {ok, n, det, solve(b) → x} */
+  function lu(A) {
+    if (!square(A)) return { ok: false, n: 0, det: NaN, solve: () => [] };
+    const n = A.length, a = flat(A), piv = new Int32Array(n), ok = luFactor(a, n, piv);
+    let det = ok ? 1 : 0; if (ok) for (let k = 0; k < n; k++) { det *= a[k * n + k]; if (piv[k] !== k) det = -det; }
+    return { ok, n, det, solve: b => { if (!ok || !b || b.length !== n) return new Array(n).fill(NaN); const x = Float64Array.from(b); luSolve(a, n, piv, x); return Array.from(x); } };
+  }
+  const solve = (A, b) => lu(A).solve(b);
+  function inv(A) { const L = lu(A); if (!L.ok) return null; const n = L.n, cols = []; for (let j = 0; j < n; j++) { const e = new Array(n).fill(0); e[j] = 1; cols.push(L.solve(e)); } return cols[0].map((_, i) => cols.map(c => c[i])); }
+  /** eig(A) → {re, im, ok}: all eigenvalues of a general real matrix (sorted by real part, then imaginary) */
+  function eig(A) {
+    if (!square(A)) return { re: [], im: [], ok: false };
+    const n = A.length, a = Array.from({ length: n + 1 }, (_, i) => new Float64Array(n + 1)); for (let i = 1; i <= n; i++) for (let j = 1; j <= n; j++) a[i][j] = +A[i - 1][j - 1];
+    if (!a.every(r => r.every(fin))) return { re: [], im: [], ok: false };
+    // balance
+    for (let last = 0; !last;) { last = 1;
+      for (let i = 1; i <= n; i++) { let r = 0, c = 0; for (let j = 1; j <= n; j++) if (j !== i) { c += abs(a[j][i]); r += abs(a[i][j]); }
+        if (c && r) { let g = r / 2, f2 = 1; const s0 = c + r; while (c < g) { f2 *= 2; c *= 4; } g = r * 2; while (c > g) { f2 /= 2; c /= 4; }
+          if ((c + r) / f2 < 0.95 * s0) { last = 0; g = 1 / f2; for (let j = 1; j <= n; j++) a[i][j] *= g; for (let j = 1; j <= n; j++) a[j][i] *= f2; } } } }
+    // Hessenberg by stabilised elimination
+    for (let m = 2; m < n; m++) { let x = 0, i = m; for (let j = m; j <= n; j++) if (abs(a[j][m - 1]) > abs(x)) { x = a[j][m - 1]; i = j; }
+      if (i !== m) { for (let j = m - 1; j <= n; j++) { const tt = a[i][j]; a[i][j] = a[m][j]; a[m][j] = tt; } for (let j = 1; j <= n; j++) { const tt = a[j][i]; a[j][i] = a[j][m]; a[j][m] = tt; } }
+      if (x) for (let i2 = m + 1; i2 <= n; i2++) { let y = a[i2][m - 1]; if (y !== 0) { y /= x; a[i2][m - 1] = y; for (let j = m; j <= n; j++) a[i2][j] -= y * a[m][j]; for (let j = 1; j <= n; j++) a[j][m] += y * a[j][i2]; } } }
+    for (let i = 3; i <= n; i++) for (let j = 1; j < i - 1; j++) a[i][j] = 0;
+    // the shifted QR (hqr)
+    const wr = new Float64Array(n + 1), wi = new Float64Array(n + 1); let anorm = 0;
+    for (let i = 1; i <= n; i++) for (let j = max(i - 1, 1); j <= n; j++) anorm += abs(a[i][j]);
+    let nn = n, t = 0, okAll = true;
+    const SIGN = (x, y) => (y >= 0 ? abs(x) : -abs(x));
+    outer: while (nn >= 1) {
+      let its = 0, l;
+      do {
+        for (l = nn; l >= 2; l--) { let s2 = abs(a[l - 1][l - 1]) + abs(a[l][l]); if (s2 === 0) s2 = anorm; if (abs(a[l][l - 1]) + s2 === s2) { a[l][l - 1] = 0; break; } }
+        let x = a[nn][nn];
+        if (l === nn) { wr[nn] = x + t; wi[nn--] = 0; }
+        else {
+          let y = a[nn - 1][nn - 1], w = a[nn][nn - 1] * a[nn - 1][nn];
+          if (l === nn - 1) {
+            const p = 0.5 * (y - x), q = p * p + w; let z = sqrt(abs(q)); x += t;
+            if (q >= 0) { z = p + SIGN(z, p); wr[nn - 1] = wr[nn] = x + z; if (z) wr[nn] = x - w / z; wi[nn - 1] = wi[nn] = 0; }
+            else { wr[nn - 1] = wr[nn] = x + p; wi[nn - 1] = -(wi[nn] = z); }
+            nn -= 2;
+          } else {
+            if (its === 60) { okAll = false; break outer; }
+            if (its === 10 || its === 20) { t += x; for (let i = 1; i <= nn; i++) a[i][i] -= x; const s2 = abs(a[nn][nn - 1]) + abs(a[nn - 1][nn - 2]); y = x = 0.75 * s2; w = -0.4375 * s2 * s2; }
+            ++its;
+            let m, p = 0, q = 0, r = 0, z = 0;
+            for (m = nn - 2; m >= l; m--) {
+              z = a[m][m]; r = x - z; let s2 = y - z;
+              p = (r * s2 - w) / a[m + 1][m] + a[m][m + 1]; q = a[m + 1][m + 1] - z - r - s2; r = a[m + 2][m + 1];
+              s2 = abs(p) + abs(q) + abs(r); p /= s2; q /= s2; r /= s2;
+              if (m === l) break;
+              const u = abs(a[m][m - 1]) * (abs(q) + abs(r)), v = abs(p) * (abs(a[m - 1][m - 1]) + abs(z) + abs(a[m + 1][m + 1]));
+              if (u + v === v) break;
+            }
+            for (let i = m + 2; i <= nn; i++) { a[i][i - 2] = 0; if (i !== m + 2) a[i][i - 3] = 0; }
+            for (let k = m; k <= nn - 1; k++) {
+              if (k !== m) { p = a[k][k - 1]; q = a[k + 1][k - 1]; r = 0; if (k !== nn - 1) r = a[k + 2][k - 1]; if ((x = abs(p) + abs(q) + abs(r)) !== 0) { p /= x; q /= x; r /= x; } }
+              const s2 = SIGN(sqrt(p * p + q * q + r * r), p);
+              if (s2 !== 0) {
+                if (k === m) { if (l !== m) a[k][k - 1] = -a[k][k - 1]; } else a[k][k - 1] = -s2 * x;
+                p += s2; x = p / s2; y = q / s2; z = r / s2; q /= p; r /= p;
+                for (let j = k; j <= nn; j++) { p = a[k][j] + q * a[k + 1][j]; if (k !== nn - 1) { p += r * a[k + 2][j]; a[k + 2][j] -= p * z; } a[k + 1][j] -= p * y; a[k][j] -= p * x; }
+                const mmin = nn < k + 3 ? nn : k + 3;
+                for (let i = l; i <= mmin; i++) { p = x * a[i][k] + y * a[i][k + 1]; if (k !== nn - 1) { p += z * a[i][k + 2]; a[i][k + 2] -= p * r; } a[i][k + 1] -= p * q; a[i][k] -= p; }
+              }
+            }
+          }
+        }
+      } while (l < nn - 1);
+    }
+    const idx = Array.from({ length: n }, (_, i) => i + 1).sort((i, j) => wr[i] - wr[j] || wi[i] - wi[j]);
+    return { re: idx.map(i => wr[i]), im: idx.map(i => wi[i]), ok: okAll };
+  }
+  /** eigSym(A) → {values (ascending), vectors (columns, unit length), sweeps, ok}: cyclic Jacobi on a symmetric matrix */
+  function eigSym(A) {
+    if (!square(A)) return { values: [], vectors: [], sweeps: 0, ok: false };
+    const n = A.length, a = A.map(r => Array.from(r, Number)), V = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i === j ? 1 : 0)));
+    let sweeps = 0, nrm = 0; for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) nrm += a[i][j] * a[i][j];
+    for (; sweeps < 60; sweeps++) {
+      let off = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) off += a[i][j] * a[i][j];
+      if (off <= 1e-32 * nrm || off === 0) break;
+      for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
+        if (a[p][q] === 0) continue;
+        const th2 = (a[q][q] - a[p][p]) / (2 * a[p][q]), tt = (th2 >= 0 ? 1 : -1) / (abs(th2) + sqrt(th2 * th2 + 1)), c = 1 / sqrt(tt * tt + 1), s2 = tt * c;
+        for (let k = 0; k < n; k++) { const akp = a[k][p], akq = a[k][q]; a[k][p] = c * akp - s2 * akq; a[k][q] = s2 * akp + c * akq; }
+        for (let k = 0; k < n; k++) { const apk = a[p][k], aqk = a[q][k]; a[p][k] = c * apk - s2 * aqk; a[q][k] = s2 * apk + c * aqk; }
+        for (let k = 0; k < n; k++) { const vkp = V[k][p], vkq = V[k][q]; V[k][p] = c * vkp - s2 * vkq; V[k][q] = s2 * vkp + c * vkq; }
+      }
+    }
+    const idx = Array.from({ length: n }, (_, i) => i).sort((i, j) => a[i][i] - a[j][j]);
+    return { values: idx.map(i => a[i][i]), vectors: V.map(r => idx.map(i => r[i])), sweeps, ok: sweeps < 60 };
+  }
   const METHODS = ['auto', 'dopri5', 'tsit5', 'rosenbrock', 'ros3p', 'radau5', 'rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
   const FIXED = ['rk4', 'midpoint', 'heun', 'euler', 'verlet', 'yoshida4'];
   function integrate(cfg) {
@@ -13224,6 +13380,84 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     if (newtonFail) r.codes.push({ code: 'dae-newton', level: 'error' });
     solveZ(r.t, Float64Array.from(r.y));
     return { ...r, z: Array.from(z) };
+  }
+  /** daeTheta({M: [diagonal], f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J),
+      consistent?, newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps}) — M·y′ = f(t, y) with a diagonal M whose zeros are
+      algebraic rows (nodes without capacity: thermal networks, circuit nodes): a semi-explicit index-1 DAE. A row with M_i ≠ 0 takes
+      the θ-method M_i(y₁ − y₀)/h = θ f_i(t₁, y₁) + (1 − θ) f_i(t₀, y₀) (θ = ½ trapezoidal, A-stable, order 2; θ = 1 backward Euler,
+      L-stable, order 1: the two transient methods of SPICE, Nagel 1975 §4); an algebraic row holds at the new time, f_i(t₁, y₁) = 0
+      (so the trapezoidal rule does not ring on it: Brenan, Campbell & Petzold 1996 §3.1). Each step is solved by Newton with the
+      Jacobian of f (cfg.jac, or forward differences), LU with pivoting; a step whose Newton fails is halved (≤ 20 times, then the
+      error 'newton'). Fixed steps dt, landing exactly on breaks [{t, apply?(t, y)}] and on tEnd; consistent: true first solves the
+      algebraic rows at t0 with the differential ones held. Samples are interpolated linearly (second order, as the method).
+      → {t, y, steps, newton (iterations), stop, codes} */
+  function daeTheta(cfg) {
+    const C = codes(['nan', 'newton', 'budget', 'bad-config']);
+    const y0 = cfg && cfg.y0 ? Float64Array.from(cfg.y0) : null, n = y0 ? y0.length : 0, t0 = cfg && fin(cfg.t0) ? cfg.t0 : 0, tEnd = cfg && cfg.tEnd;
+    const st = { steps: 0, newton: 0, nfev: 0 };
+    const done = (t, y, stop) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, newton: st.newton, nfev: st.nfev, stop, codes: C.list });
+    const Md = cfg && (Array.isArray(cfg.M) || ArrayBuffer.isView(cfg.M)) ? Float64Array.from(cfg.M) : null;
+    if (!cfg || typeof cfg.f !== 'function' || !n || !fin(tEnd) || !(tEnd >= t0) || !(cfg.dt > 0) || (Md && (Md.length !== n || !Md.every(fin)))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    const M = Md || new Float64Array(n).fill(1);
+    const th = fin(cfg.theta) && cfg.theta >= 0.5 && cfg.theta <= 1 ? cfg.theta : cfg.method === 'backward-euler' ? 1 : 0.5;
+    const tolN = cfg.newtonTol > 0 ? cfg.newtonTol : 1e-10, maxN = fin(cfg.maxNewton) ? max(2, min(cfg.maxNewton, 100)) : 25;
+    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS;
+    const J = new Float64Array(n * n), G = new Float64Array(n * n), piv = new Int32Array(n), F0 = new Float64Array(n), F1 = new Float64Array(n), R = new Float64Array(n), fx = new Float64Array(n), dy = new Float64Array(n);
+    const f = (t, y, out) => { cfg.f(t, y, out); st.nfev++; };
+    const jac = (t, y, Fy) => {
+      if (typeof cfg.jac === 'function') { J.fill(0); cfg.jac(t, y, J); return; }
+      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), 1); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - Fy[i]) / del; }
+    };
+    // Newton on R(y) = 0 for the rows given by resid (y changed in place) → true when converged
+    const newton = (t, y, resid, gm) => {
+      for (let it = 0; it < maxN; it++) {
+        f(t, y, F1); if (!F1.every(fin)) return false; resid(F1);
+        jac(t, y, F1); gm(); if (!luFactor(G, n, piv)) return false;
+        for (let i = 0; i < n; i++) dy[i] = -R[i]; luSolve(G, n, piv, dy); st.newton++;
+        let e = 0; for (let i = 0; i < n; i++) { y[i] += dy[i]; e = max(e, abs(dy[i]) / (1 + abs(y[i]))); }
+        if (!y.every(fin)) return false;
+        if (e <= tolN) { f(t, y, F1); return F1.every(fin); }
+      }
+      return false;
+    };
+    let t = t0; const y = Float64Array.from(y0), yn = new Float64Array(n), yprev = new Float64Array(n);
+    const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t); let bi = 0;
+    const applyBreaks = () => { while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b = brk[bi++]; if (typeof b.apply === 'function') b.apply(t, y); } };
+    const consistent = () => {   // the algebraic rows at t with the differential ones held
+      if (!M.some(m => m === 0)) return true;
+      return newton(t, y, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : 0; }, () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? 1 : 0); });
+    };
+    applyBreaks();
+    if (cfg.consistent && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
+    if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
+    f(t, y, F0);
+    const samples = cfg.samples || []; let si = 0;
+    while (si < samples.length && samples[si] <= t) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
+    const tmp = new Float64Array(n);
+    for (;;) {
+      if (t >= tEnd - 1e-14 * max(1, abs(tEnd))) return done(t, y, 'end');
+      if (st.steps >= maxSteps) { C.code('budget', t); return done(t, y, 'budget'); }
+      const target = bi < brk.length ? min(tEnd, brk[bi].t) : tEnd;
+      let h = min(cfg.dt, target - t), ok2 = false, halv = 0;
+      if (target - t - h <= 1e-12 * max(1, abs(target))) h = target - t;
+      for (; halv <= 20; halv++) {
+        yn.set(y); const t1 = h === target - t ? target : t + h, hh = h;
+        ok2 = newton(t1, yn, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : M[i] * (yn[i] - y[i]) - hh * (th * F[i] + (1 - th) * F0[i]); },
+          () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? M[i] : 0) - hh * th * J[i * n + j]; });
+        if (ok2) { yprev.set(y); const ta = t; t = t1; y.set(yn); F0.set(F1); st.steps++;
+          while (si < samples.length && samples[si] <= t) { const s2 = (samples[si] - ta) / (t - ta); for (let i = 0; i < n; i++) tmp[i] = yprev[i] + s2 * (y[i] - yprev[i]); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
+          if (cfg.onStep) cfg.onStep(t, y);
+          break; }
+        h /= 2;
+      }
+      if (!ok2) { C.code('newton', t); return done(t, y, 'newton'); }
+      if (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) {
+        applyBreaks();
+        if (cfg.consistent !== false && M.some(m => m === 0) && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
+        if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
+        f(t, y, F0);
+      }
+    }
   }
   /** ssa({x0, nu: [[Δ per species] per reaction], propensity(x, a) (fills a), tEnd, r (a stream), maxEvents, onEvent(t, x, j)})
       — Gillespie's direct method (Gillespie 1977, J. Phys. Chem. 81:25): exact trajectories of the chemical master equation
@@ -13641,19 +13875,19 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   root.NoemaSimKit = Object.freeze({
     version: 1, MAX_STEPS, MAX_EVENTS, MAX_LOG, DISTS: Object.freeze(DISTS.slice()), METHODS: Object.freeze(METHODS.slice()), TIME_UNITS: Object.freeze(TIME_UNITS.slice()),
     // randomness
-    stream, subseed, dist, jumps, M1, M2,
+    stream, subseed, philox, counterStream, dist, jumps, M1, M2,
     // events
     calendar, sim, codes, budget,
     // continuous time and roots
-    integrate, locate, brent,
+    integrate, locate, brent, lu, solve, inv, eig, eigSym,
     // special functions
-    lgamma, gammaP, betaI, normCdf, normInv, tCdf, tq,
+    lgamma, gammaP, gammaQ, betaI, betaQ, normCdf, normSf, normInv, erf, erfc, erfInv, erfcInv, tCdf, tSf, chi2Sf, fCdf, fSf, tq,
     // output analysis
     welford, ksum, timeAvg, ci, acf, batchMeans, mser5, replicate, littleCheck,
     // sweeps and sensitivity
     linspace, oat, grid, morris, sobol, lhs,
     // delay equations, stochastic kinetics, SDEs, schedules
-    dde, dae, ssa, tauLeap, sde, nhpp, piecewise,
+    dde, dae, daeTheta, ssa, tauLeap, sde, nhpp, piecewise,
     // distributions and input modelling
     cdfOf, quantileOf, truncated, mixture, fit, ksTest, chiSquare, andersonDarling, digamma, trigamma,
     // variance reduction, precision, calibration
@@ -22943,95 +23177,13 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   function keys() { return []; }
 
   /* ======================================================================================================================
-     Linear algebra for n ≤ 12 (+ the tangent vectors of a Lyapunov run): LU with partial pivoting, eigenvalues
+     Linear algebra for n ≤ 12: the kernel's (NoemaSimKit.lu: LU with partial pivoting; NoemaSimKit.eig: balancing, Hessenberg
+     reduction and the Francis double-shift QR — Numerical Recipes balanc / elmhes / hqr, the algorithm this engine had)
      ====================================================================================================================== */
-  function luFactor(A, n, piv) {   // A: Float64Array n×n row-major, in place; false when singular
-    for (let k = 0; k < n; k++) {
-      let p = k, mx = abs(A[k * n + k]);
-      for (let i = k + 1; i < n; i++) { const v = abs(A[i * n + k]); if (v > mx) { mx = v; p = i; } }
-      if (!(mx > 0) || !Number.isFinite(mx)) return false;
-      piv[k] = p;
-      if (p !== k) for (let j = 0; j < n; j++) { const t = A[k * n + j]; A[k * n + j] = A[p * n + j]; A[p * n + j] = t; }
-      const d = A[k * n + k];
-      for (let i = k + 1; i < n; i++) { const f = (A[i * n + k] /= d); if (f !== 0) for (let j = k + 1; j < n; j++) A[i * n + j] -= f * A[k * n + j]; }
-    }
-    return true;
-  }
-  function luSolve(A, n, piv, b) {   // b in place
-    for (let k = 0; k < n; k++) { const p = piv[k]; if (p !== k) { const t = b[k]; b[k] = b[p]; b[p] = t; } for (let i = k + 1; i < n; i++) b[i] -= A[i * n + k] * b[k]; }
-    for (let i = n - 1; i >= 0; i--) { let s = b[i]; for (let j = i + 1; j < n; j++) s -= A[i * n + j] * b[j]; b[i] = s / A[i * n + i]; }
-  }
-  /** eigenvalues of a real n×n matrix (rows): balance, reduce to Hessenberg form by elimination, shifted QR (Numerical Recipes in C,
-      2nd ed. 1992, balanc / elmhes / hqr; Wilkinson & Reinsch 1971). → [{re, im}] sorted by decreasing real part, or null */
+  /** eigenvalues of a real n×n matrix (rows) → [{re, im}] sorted by decreasing real part, or null (no convergence, non-finite) */
   function eigenvalues(M) {
-    const n = M.length; if (n === 1) return [{ re: M[0][0], im: 0 }];
-    const a = []; for (let i = 0; i <= n; i++) a.push(new Float64Array(n + 1));
-    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) a[i + 1][j + 1] = M[i][j];
-    for (let i = 1; i <= n; i++) for (let j = 1; j <= n; j++) if (!Number.isFinite(a[i][j])) return null;
-    // balanc
-    const RADIX = 2, sqrdx = 4; let last = 0;
-    for (let guard = 0; !last && guard < 100; guard++) {
-      last = 1;
-      for (let i = 1; i <= n; i++) {
-        let r = 0, c = 0; for (let j = 1; j <= n; j++) if (j !== i) { c += abs(a[j][i]); r += abs(a[i][j]); }
-        if (c && r) { let g = r / RADIX, f = 1; const s = c + r; while (c < g) { f *= RADIX; c *= sqrdx; } g = r * RADIX; while (c > g) { f /= RADIX; c /= sqrdx; }
-          if ((c + r) / f < 0.95 * s) { last = 0; g = 1 / f; for (let j = 1; j <= n; j++) a[i][j] *= g; for (let j = 1; j <= n; j++) a[j][i] *= f; } }
-      }
-    }
-    // elmhes
-    for (let m = 2; m < n; m++) {
-      let x = 0, i = m;
-      for (let j = m; j <= n; j++) if (abs(a[j][m - 1]) > abs(x)) { x = a[j][m - 1]; i = j; }
-      if (i !== m) { for (let j = m - 1; j <= n; j++) { const t = a[i][j]; a[i][j] = a[m][j]; a[m][j] = t; } for (let j = 1; j <= n; j++) { const t = a[j][i]; a[j][i] = a[j][m]; a[j][m] = t; } }
-      if (x) for (i = m + 1; i <= n; i++) { let y = a[i][m - 1]; if (y) { y /= x; a[i][m - 1] = y; for (let j = m; j <= n; j++) a[i][j] -= y * a[m][j]; for (let j = 1; j <= n; j++) a[j][m] += y * a[j][i]; } }
-    }
-    for (let i = 3; i <= n; i++) for (let j = 1; j <= i - 2; j++) a[i][j] = 0;
-    // hqr
-    const wr = new Float64Array(n + 1), wi = new Float64Array(n + 1);
-    let anorm = 0; for (let i = 1; i <= n; i++) for (let j = Math.max(i - 1, 1); j <= n; j++) anorm += abs(a[i][j]);
-    let nn = n, t = 0, z = 0, y = 0, x = 0, w = 0, v = 0, u = 0, s = 0, r = 0, q = 0, p = 0, l = 0, m = 0;
-    const SIGN = (aa, bb) => (bb >= 0 ? abs(aa) : -abs(aa));
-    while (nn >= 1) {
-      let its = 0;
-      do {
-        for (l = nn; l >= 2; l--) { s = abs(a[l - 1][l - 1]) + abs(a[l][l]); if (s === 0) s = anorm; if (abs(a[l][l - 1]) + s === s) { a[l][l - 1] = 0; break; } }
-        x = a[nn][nn];
-        if (l === nn) { wr[nn] = x + t; wi[nn--] = 0; }
-        else {
-          y = a[nn - 1][nn - 1]; w = a[nn][nn - 1] * a[nn - 1][nn];
-          if (l === nn - 1) {
-            p = 0.5 * (y - x); q = p * p + w; z = sqrt(abs(q)); x += t;
-            if (q >= 0) { z = p + SIGN(z, p); wr[nn - 1] = wr[nn] = x + z; if (z) wr[nn] = x - w / z; wi[nn - 1] = wi[nn] = 0; }
-            else { wr[nn - 1] = wr[nn] = x + p; wi[nn - 1] = -(wi[nn] = z); }
-            nn -= 2;
-          } else {
-            if (its === 60) return null;
-            if (its === 10 || its === 20) { t += x; for (let i = 1; i <= nn; i++) a[i][i] -= x; s = abs(a[nn][nn - 1]) + abs(a[nn - 1][nn - 2]); y = x = 0.75 * s; w = -0.4375 * s * s; }
-            ++its;
-            for (m = nn - 2; m >= l; m--) {
-              z = a[m][m]; r = x - z; s = y - z;
-              p = (r * s - w) / a[m + 1][m] + a[m][m + 1]; q = a[m + 1][m + 1] - z - r - s; r = a[m + 2][m + 1];
-              s = abs(p) + abs(q) + abs(r); p /= s; q /= s; r /= s;
-              if (m === l) break;
-              u = abs(a[m][m - 1]) * (abs(q) + abs(r)); v = abs(p) * (abs(a[m - 1][m - 1]) + abs(z) + abs(a[m + 1][m + 1]));
-              if (u + v === v) break;
-            }
-            for (let i = m + 2; i <= nn; i++) { a[i][i - 2] = 0; if (i !== m + 2) a[i][i - 3] = 0; }
-            for (let k = m; k <= nn - 1; k++) {
-              if (k !== m) { p = a[k][k - 1]; q = a[k + 1][k - 1]; r = 0; if (k !== nn - 1) r = a[k + 2][k - 1]; if ((x = abs(p) + abs(q) + abs(r)) !== 0) { p /= x; q /= x; r /= x; } }
-              if ((s = SIGN(sqrt(p * p + q * q + r * r), p)) !== 0) {
-                if (k === m) { if (l !== m) a[k][k - 1] = -a[k][k - 1]; } else a[k][k - 1] = -s * x;
-                p += s; x = p / s; y = q / s; z = r / s; q /= p; r /= p;
-                for (let j = k; j <= nn; j++) { p = a[k][j] + q * a[k + 1][j]; if (k !== nn - 1) { p += r * a[k + 2][j]; a[k + 2][j] -= p * z; } a[k + 1][j] -= p * y; a[k][j] -= p * x; }
-                const mmin = nn < k + 3 ? nn : k + 3;
-                for (let i = l; i <= mmin; i++) { p = x * a[i][k] + y * a[i][k + 1]; if (k !== nn - 1) { p += z * a[i][k + 2]; a[i][k + 2] -= p * r; } a[i][k + 1] -= p * q; a[i][k] -= p; }
-              }
-            }
-          }
-        }
-      } while (l < nn - 1);
-    }
-    const ev = []; for (let i = 1; i <= n; i++) ev.push({ re: wr[i], im: wi[i] });
+    const E = C.kit().eig(M); if (!E.ok || E.re.length !== M.length) return null;
+    const ev = E.re.map((re, i) => ({ re, im: E.im[i] }));
     ev.sort((A, B) => (B.re - A.re) || (B.im - A.im));
     return ev;
   }
@@ -23210,15 +23362,16 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     const box = M.eq.box.map(([i, a, b]) => [i, a(env), b(env)]).filter(([i, a, b]) => i >= 0 && fin(a) && fin(b));
     const g = M.eq.grid, dims = box.length, total = Math.pow(g, dims);
     for (let k = 0; k < total && dims; k++) { const s = Float64Array.from(y0); let r = k; for (const [i, a, b] of box) { const j = r % g; r = (r - j) / g; s[i] = g === 1 ? (a + b) / 2 : a + (b - a) * j / (g - 1); } starts.push(s); }
-    const found = [], Fv = new Float64Array(n), Ft = new Float64Array(n), Jm = new Float64Array(n * n), piv = new Int32Array(n), yt = new Float64Array(n);
+    const found = [], Fv = new Float64Array(n), Ft = new Float64Array(n), Jm = [], yt = new Float64Array(n), K = C.kit();
+    for (let i = 0; i < n; i++) Jm.push(new Float64Array(n));
     for (const s of starts) {
       const y = Float64Array.from(s); let ok = false;
       for (let it = 0; it < 60; it++) {
         F(y, Fv); const fn = nrm(Fv); if (!fin(fn)) break;
         if (fn <= 1e-13 * Math.max(1, nrm(y))) { ok = true; break; }
-        for (let j = 0; j < n; j++) { const yj = y[j], del = 1e-7 * Math.max(1, abs(yj)); y[j] = yj + del; F(y, Ft); y[j] = yj; for (let i = 0; i < n; i++) Jm[i * n + j] = (Ft[i] - Fv[i]) / del; }
-        if (!luFactor(Jm, n, piv)) break;
-        const dx = Float64Array.from(Fv, v => -v); luSolve(Jm, n, piv, dx);
+        for (let j = 0; j < n; j++) { const yj = y[j], del = 1e-7 * Math.max(1, abs(yj)); y[j] = yj + del; F(y, Ft); y[j] = yj; for (let i = 0; i < n; i++) Jm[i][j] = (Ft[i] - Fv[i]) / del; }
+        const L = K.lu(Jm); if (!L.ok) break;   // the kernel's LU with partial pivoting
+        const dx = Float64Array.from(L.solve(Array.from(Fv, v => -v)));
         let lam = 1, moved = false;
         for (let b = 0; b < 30; b++) { for (let i = 0; i < n; i++) yt[i] = y[i] + lam * dx[i]; F(yt, Ft); if (nrm(Ft) < (1 - 1e-4 * lam) * fn || !(nrm(Ft) >= 0)) { if (fin(nrm(Ft))) { y.set(yt); moved = true; } break; } lam /= 2; }
         if (!moved) break;
@@ -23309,9 +23462,9 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   function sweep(M, env, ctx) {
     const S = M.sweep, out = { p: [], v: [] };
     const a = S.min(env), b = S.max(env); if (!(fin(a) && fin(b))) { ctx.code('time'); return out; }
-    const keep = Math.max(1, Math.min(S.keep, Math.floor(2000 / S.points)));
+    const keep = Math.max(1, Math.min(S.keep, Math.floor(2000 / S.points))), ps = C.kit().linspace(a, b, S.points);   // the kernel's grid of the parameter
     for (let q = 0; q < S.points; q++) {
-      const p = S.points === 1 ? a : a + (b - a) * q / (S.points - 1); env[S.v] = p;
+      const p = ps[q]; env[S.v] = p;
       if (ctx.steps >= ctx.maxSteps) { ctx.code('budget'); break; }
       if (M.kind === 'map') {
         const n = M.n; const { f } = makeRhs(M, ctx, null); for (const k of M.names) env[k] = NaN;
@@ -24062,8 +24215,10 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   function ncdf(z) { if (Number.isNaN(z)) return NaN; const r = gammaPQ(0.5, z * z / 2); return z < 0 ? 0.5 * r[1] : 0.5 + 0.5 * r[0]; }
   function lncdf(z) { if (Number.isNaN(z)) return NaN; const r = gammaPQ(0.5, z * z / 2); return z < 0 ? r[3] - LN2 : log1p(-0.5 * r[1]); }
   const npdf = z => exp(-0.5 * z * z) / 2.5066282746310002;
-  /** Φ⁻¹(p): Wichura's AS 241 PPND16 (Appl. Stat. 37:477, 1988; relative accuracy ~1e-16), three rational approximations */
-  function qnorm(p) {
+  /** Φ⁻¹(p): Wichura's AS 241 PPND16 (Appl. Stat. 37:477, 1988; relative accuracy ~1e-16) — the kernel's (NoemaSimKit.normInv);
+      FALLBACK without the kernel: the same three rational approximations here */
+  function qnorm(p) { const K = C.kit(); if (K) return Number.isNaN(p) || p < 0 || p > 1 ? NaN : K.normInv(p); return qnormOwn(p); }
+  function qnormOwn(p) {
     if (Number.isNaN(p) || p < 0 || p > 1) return NaN;
     if (p === 0) return -Infinity;
     if (p === 1) return Infinity;
@@ -29333,6 +29488,73 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     if (K) { const g0 = g(0), g1 = g(pA); if (!(g0 < 0)) return 0; if (!(g1 > 0)) return pA; const r = K.brent(g, 0, pA, 1e-10, g0, g1); if (fin(r)) return r; }
     let lo = 0, hi = pA; for (let it = 0; it < 40; it++) { const mid = (lo + hi) / 2; if (g(mid) < 0) lo = mid; else hi = mid; } return (lo + hi) / 2;
   }
+  /* ---------- the virtual patient's physiology, one core for run() and the stepper ----------
+     State y = [V, RBC, B, Lac, HR, sv]; the derivatives at (t, y) from the actions in force; a grid of 0.1 min. The kernel
+     (NoemaSimKit.integrate, method euler) steps between breaks at the grid times; at each break the model's projections (V ≥ 0.3·Vn,
+     RBC ≥ 0, 0 ≤ B ≤ 1, Lac ≥ 0.3), the crash clock (MAP < 45 over the step) and death (crash ≥ 20 min or lactate ≥ 15), then the
+     grid time's values (a minute is recorded by the caller). FALLBACK without the kernel: the same explicit Euler here. */
+  function vpPar(pg) {
+    const W = clamp(pg('weight', 70), 2, 250), Vn = 70 * W;
+    return { W, Vn, Vu: 0.7 * Vn, SVn: W, HRn: 72, SVRn: 90 / (W * 72 / 1000), Cart: 1.4 * W / 70, crit: 4.5 * W,
+      shunt0: clamp(pg('shunt', 0.05), 0, 0.8), lungK: clamp(pg('lung', 0), 0, 0.6), bleed: Math.max(0, pg('bleed', 0)), growth: Math.max(0, pg('growth', 0.6)) };
+  }
+  /** the physiology at (tt, y): what is measured and what drives the derivatives */
+  function vpPhys(P, S, acts, tt, y, Mx) {
+    const on = a => fin(a.at) && a.at <= tt;
+    const fio2 = acts.reduce((f, a) => (fin(a.o2) && on(a) ? Math.max(f, clamp(a.o2, 0.21, 1)) : f), 0.21), vaso = acts.reduce((d, a) => (fin(a.vaso) && on(a) ? a.vaso : d), 0);
+    const [V, RBC, B, Lac, HR, sv] = y, dead = S.died !== null, sev = Mx.calc.sev, content = Mx.calc.content;
+    const pf = clamp((V - P.Vu) / (P.Vn - P.Vu), 0, 2.5), SV = P.SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (HR - 150) / 100));
+    const vfac = (1 - 0.55 * B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = P.SVRn * sv * vfac, CO = Math.max(0, SV * HR / 1000), MAP = dead ? 0 : CO * SVR;
+    const hb = RBC / V, shunt = clamp(P.shunt0 + P.lungK * B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
+    const pao2 = pao2Of(content, sev, hb, ca, pA), sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * B;
+    const RR = clamp(14 + 10 * B + 1.2 * Math.max(0, Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
+    return { fio2, vaso, SV, MAP, CO, hb, sat, pao2, DO2, T, RR, dead };
+  }
+  function vpDeriv(P, S, acts, tt, y, ph, dy) {
+    const [V, , B, Lac, HR, sv] = y;
+    let dV = 0, dR = 0;
+    if (S.bleeding) { dV -= P.bleed; dR -= P.bleed * ph.hb; }
+    dV -= 0.004 * B * (V - P.Vu);   // capillary leak in sepsis
+    for (const a of acts) if (fin(a.at) && tt >= a.at && tt < a.at + a.over) { if (a.fluid) dV += 0.4 * a.fluid / a.over; if (a.blood) { dV += a.blood / a.over; dR += a.blood / a.over * 20; } }
+    const abxOn = acts.some(a => a.abx && fin(a.at) && tt >= a.at + 60);
+    const dB = abxOn ? -0.5 * B / 60 : P.growth * B * (1 - B) / 60;
+    const e = (90 - ph.MAP) / 90, HRt = clamp(P.HRn * (1 + 1.2 * e) + 35 * B, 40, 180), svt = clamp(1 + 1.0 * e, 0.6, 1.8);
+    const prod = 0.08 * Math.max(0, 1 - ph.DO2 / (1.4 * P.crit)) + 0.03 * B + 0.03 * Math.max(0, (65 - ph.MAP) / 65), dL = prod - 0.012 * (Lac - 1);   // hypoperfusion, sepsis (aerobic glycolysis), clearance τ ≈ 80 min
+    dy[0] = dV; dy[1] = dR; dy[2] = dB; dy[3] = dL; dy[4] = HRt - HR; dy[5] = (svt - sv) / 2;
+  }
+  /** the grid time t (state S.y): the stop of a bleed, the values now (S.ph, S.mapPrev), the caller's record */
+  function vpAt(P, S, acts, t, Mx, onGrid) {
+    if (acts.some(a => a.stop && fin(a.at) && a.at <= t)) S.bleeding = false;
+    const ph = vpPhys(P, S, acts, t, S.y, Mx); S.mapPrev = ph.MAP;
+    if (onGrid) onGrid(S.k, t, ph);
+  }
+  /** advance S over the grid times ts[1..] (ts[0] = now), a step of hs each: the kernel's Euler between breaks, projections and death at
+      each. The kernel's clock is the grid index (a step of exactly 1, the derivatives times hs), so y + 1·(hs·f) is the model's own
+      y + hs·f, bit for bit. */
+  function vpAdvance(P, S, acts, ts, hs, Mx, onGrid) {
+    const K = C.kit(), n = ts.length - 1, ya = new Array(6);
+    const grid = (i, y) => {
+      if (S.died === null) {
+        y[0] = Math.max(0.3 * P.Vn, y[0]); y[1] = Math.max(0, y[1]); y[2] = clamp(y[2], 0, 1); y[3] = Math.max(0.3, y[3]);
+        if (S.mapPrev < 45) S.crash += hs; if (S.crash >= 20 || y[3] >= 15) S.died = ts[i - 1];
+      }
+      S.y = Array.from(y); S.k++; vpAt(P, S, acts, ts[i], Mx, onGrid);
+    };
+    const f = (j, y, dy) => {
+      if (S.died !== null) { dy.fill(0); return; }
+      const tt = ts[Math.min(n, Math.round(j))];
+      for (let q = 0; q < 6; q++) ya[q] = y[q];
+      vpDeriv(P, S, acts, tt, ya, vpPhys(P, S, acts, tt, ya, Mx), dy); for (let q = 0; q < 6; q++) dy[q] *= hs;
+    };
+    if (!(n >= 1)) return;
+    if (K) {
+      const breaks = []; for (let i = 1; i <= n; i++) breaks.push({ t: i, apply: (t, y) => grid(i, y) });
+      K.integrate({ f, y0: S.y, t0: 0, tEnd: n, method: 'euler', dt: 1.5, breaks, maxSteps: n + 2 });   // dt above 1: every step lands on the next break
+      return;
+    }
+    const dy = new Float64Array(6);   // FALLBACK without the kernel: the same explicit Euler
+    for (let i = 1; i <= n; i++) { const y = S.y.slice(); f(i - 1, y, dy); for (let q = 0; q < 6; q++) y[q] += dy[q]; grid(i, y); }
+  }
   function runVp(m, F, env, out, codes, seed) {
     const v = m.vp, code = c => codes.vp.add(c), Mx = MED();
     if (!Mx) { code('incomplete'); return null; }
@@ -29351,49 +29573,24 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     });
     const disp = acts.filter(a => a.kind === 'dispose' && fin(a.at) && a.at >= 0 && a.at <= tEnd).map(a => a.at), tDisp = disp.length ? Math.min(...disp) : Infinity;
     for (const a of acts) a.done = fin(a.at) && a.at >= 0 && a.at <= tEnd && (a.kind === 'dispose' || a.at <= tDisp);
-    // the physiology, minute by minute (internal step 0.1 min)
-    const Vn = 70 * W, Vu = 0.7 * Vn, SVn = W, HRn = 72, SVRn = 90 / (SVn * HRn / 1000), Cart = 1.4 * W / 70, crit = 4.5 * W;
-    let V = Vn * vol0, RBC = hb0 * V, B = B0, Lac = 1, HR = HRn, sv = 1, bleeding = bleed > 0, hypo = 0, crash = 0, died = NaN;
+    // the physiology on a grid of 0.1 min (the kernel's Euler between breaks; vpAdvance), a record every minute
+    const P = vpPar(pg), done = acts.filter(a => a.done), Vn = P.Vn;
+    const St = { y: [Vn * vol0, hb0 * (Vn * vol0), B0, 1, P.HRn, 1], bleeding: bleed > 0, crash: 0, died: null, k: 0, mapPrev: NaN };
     const rnd = C.rng(seed || 1, 'vp'), noise = v.noise === true;
     const S = {}; for (const k of ['t', ...VARS]) S[k] = [];
-    let minMap = Infinity, maxLac = -Infinity;
-    const dt = 0.1;
-    const state = t => {
-      const fio2 = acts.reduce((f, a) => (a.done && fin(a.o2) && a.at <= t ? Math.max(f, clamp(a.o2, 0.21, 1)) : f), 0.21);
-      const vaso = acts.reduce((d, a) => (a.done && fin(a.vaso) && a.at <= t ? a.vaso : d), 0);
-      return { fio2, vaso };
+    let minMap = Infinity, maxLac = -Infinity, hypo = 0;
+    const onGrid = (k, t, ph) => {
+      if (k % 10 !== 0) return;   // a minute: record (noise only on the shown vitals)
+      const [V, , B, Lac, HR] = St.y, dead = ph.dead, nz = s => (noise ? s * C.normal(rnd) : 0);
+      const rec = { hr: dead ? 0 : HR + nz(2), map: ph.MAP + (dead ? 0 : nz(2)), spo2: dead ? 0 : clamp(100 * ph.sat + nz(1), 0, 100), rr: dead ? 0 : ph.RR + nz(1), lactate: Lac, temp: ph.T, volume: V, burden: B, pao2: ph.pao2, hb: ph.hb };
+      const pp = dead ? 0 : ph.SV / P.Cart; rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
+      rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: ph.fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: ph.MAP < 60 || ph.sat < 0.85 ? 1 : 0, temp: ph.T, scale2: 0 }).score;
+      S.t.push(t); for (const kk of VARS) S[kk].push(rec[kk]);
+      if (!dead) { minMap = Math.min(minMap, ph.MAP); maxLac = Math.max(maxLac, Lac); if (ph.MAP < 65) hypo++; }
     };
-    for (let k = 0; k <= tEnd * 10; k++) {
-      const t = k * dt, { fio2, vaso } = state(t);
-      if (acts.some(a => a.done && a.stop && a.at <= t)) bleeding = false;
-      const pf = clamp((V - Vu) / (Vn - Vu), 0, 2.5), SV = SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (HR - 150) / 100));
-      const vfac = (1 - 0.55 * B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = SVRn * sv * vfac, CO = Math.max(0, SV * HR / 1000), MAP = fin(died) ? 0 : CO * SVR;
-      const hb = RBC / V, shunt = clamp(shunt0 + lungK * B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
-      const pao2 = pao2Of(content, sev, hb, ca, pA);
-      const sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * B;
-      const RR = clamp(14 + 10 * B + 1.2 * Math.max(0, Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
-      if (k % 10 === 0) {   // a minute: record (noise only on the shown vitals)
-        const nz = s => (noise ? s * C.normal(rnd) : 0), dead = fin(died);
-        const rec = { hr: dead ? 0 : HR + nz(2), map: MAP + (dead ? 0 : nz(2)), spo2: dead ? 0 : clamp(100 * sat + nz(1), 0, 100), rr: dead ? 0 : RR + nz(1), lactate: Lac, temp: T, volume: V, burden: B, pao2, hb };
-        const pp = dead ? 0 : SV / Cart; rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
-        rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: MAP < 60 || sat < 0.85 ? 1 : 0, temp: T, scale2: 0 }).score;
-        S.t.push(t); for (const kk of VARS) S[kk].push(rec[kk]);
-        if (!dead) { minMap = Math.min(minMap, MAP); maxLac = Math.max(maxLac, Lac); if (MAP < 65) hypo++; }
-      }
-      if (fin(died)) continue;
-      // derivatives
-      let dV = 0, dR = 0;
-      if (bleeding) { dV -= bleed; dR -= bleed * hb; }
-      dV -= 0.004 * B * (V - Vu);   // capillary leak in sepsis
-      for (const a of acts) if (a.done && t >= a.at && t < a.at + a.over) { if (a.fluid) dV += 0.4 * a.fluid / a.over; if (a.blood) { dV += a.blood / a.over; dR += a.blood / a.over * 20; } }
-      const abxOn = acts.some(a => a.done && a.abx && t >= a.at + 60);
-      const dB = abxOn ? -0.5 * B / 60 : growth * B * (1 - B) / 60;
-      const e = (90 - MAP) / 90, HRt = clamp(HRn * (1 + 1.2 * e) + 35 * B, 40, 180), svt = clamp(1 + 1.0 * e, 0.6, 1.8);
-      const prod = 0.08 * Math.max(0, 1 - DO2 / (1.4 * crit)) + 0.03 * B + 0.03 * Math.max(0, (65 - MAP) / 65), dL = prod - 0.012 * (Lac - 1);   // hypoperfusion, sepsis (aerobic glycolysis), clearance τ ≈ 80 min
-      V = Math.max(0.3 * Vn, V + dt * dV); RBC = Math.max(0, RBC + dt * dR); B = clamp(B + dt * dB, 0, 1); Lac = Math.max(0.3, Lac + dt * dL);
-      HR += dt * (HRt - HR) / 1; sv += dt * (svt - sv) / 2;
-      if (MAP < 45) crash += dt; if (crash >= 20 || Lac >= 15) died = t;
-    }
+    const ts = []; for (let k = 0; k <= tEnd * 10; k++) ts.push(k * 0.1);
+    vpAt(P, St, done, 0, Mx, onGrid); vpAdvance(P, St, done, ts, 0.1, Mx, onGrid);
+    const died = St.died === null ? NaN : St.died;
     const last = i => S[i][S[i].length - 1];
     out['vp.t'] = S.t; for (const k of VARS) { out['vp.' + k] = S[k]; out['vp.final.' + k] = last(k); }
     out['vp.min.map'] = minMap; out['vp.max.lactate'] = maxLac; out['vp.timeHypo'] = hypo; out['vp.diedAt'] = died;
@@ -29499,50 +29696,33 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     init(model, env, sc) {
       if (!isObj(model) || !isObj(model.vp) || !MED()) return isObj(model) && !isObj(model.vp) ? { other: true } : null;
       const F = sc.prepared || prep(sc.spec), v = model.vp, pat = isObj(v.patient) ? v.patient : {}, pg = (k, d) => numAt(F, 'model.vp.patient.' + k, pat[k], env, d);
-      const W = clamp(pg('weight', 70), 2, 250), hb0 = clamp(pg('hb', 14), 3, 22), vol0 = clamp(pg('volume', 1), 0.3, 1.5), B0 = clamp(pg('sepsis', 0), 0, 1);
-      const Vn = 70 * W;
-      return { t0: sc.t0 || 0, W, Vn, Vu: 0.7 * Vn, SVn: W, HRn: 72, SVRn: 90 / (W * 72 / 1000), Cart: 1.4 * W / 70, crit: 4.5 * W,
-        V: Vn * vol0, RBC: hb0 * Vn * vol0, B: B0, Lac: 1, HR: 72, sv: 1, bleeding: pg('bleed', 0) > 0, crash: 0, died: null, hypo: 0, minMap: null, maxLac: null, last: null, k: 0, kRec: -1 };
+      const hb0 = clamp(pg('hb', 14), 3, 22), vol0 = clamp(pg('volume', 1), 0.3, 1.5), B0 = clamp(pg('sepsis', 0), 0, 1), P = vpPar(pg), Vn = P.Vn;
+      const par = { W: P.W, Vn, Vu: P.Vu, SVn: P.SVn, HRn: P.HRn, SVRn: P.SVRn, Cart: P.Cart, crit: P.crit };   // the patient's size: fixed at the start
+      return { t0: sc.t0 || 0, par, y: [Vn * vol0, hb0 * (Vn * vol0), B0, 1, P.HRn, 1], bleeding: P.bleed > 0, crash: 0, died: null, mapPrev: NaN, hypo: 0, minMap: null, maxLac: null, last: null, k: 0, kRec: -1 };
     },
     step(st, env, t, dt, sc) {
       if (st.other) { const r = run(sc.spec, env, { seed: sc.seed }); return { state: st, out: r.out, dt }; }
-      const m = sc.spec.model, F = sc.prepared || prep(sc.spec), Mx = MED(), sev = Mx.calc.sev, content = Mx.calc.content;
+      const m = sc.spec.model, F = sc.prepared || prep(sc.spec), Mx = MED();
       const pat = isObj(m.vp.patient) ? m.vp.patient : {}, pg = (k, d) => numAt(F, 'model.vp.patient.' + k, pat[k], env, d);
-      const shunt0 = clamp(pg('shunt', 0.05), 0, 0.8), lungK = clamp(pg('lung', 0), 0, 0.6), bleed = Math.max(0, pg('bleed', 0)), growth = Math.max(0, pg('growth', 0.6));
-      const acts = vpActs(m, F, env), S = C.copyData(st), h = 0.1, rel = tt => tt - S.t0;
-      const n = Math.max(1, Math.round(dt / h)), hh = dt / n;
+      const acts = vpActs(m, F, env), S = C.copyData(st), h = 0.1, rel = tt => tt - S.t0, P = Object.assign(vpPar(pg), S.par);
+      const n = Math.max(1, Math.round(dt / h)), hh = dt / n, t1 = rel(t);
+      // the grid: run()'s own times k·0.1 when the steps are whole tenths (bit for bit with run()), else t + j·dt/n
+      const onRun = Math.abs(hh - h) < 1e-12 && Math.abs(t1 - S.k * h) < 1e-9, ts = [];
+      for (let j = 0; j <= n; j++) ts.push(onRun ? (S.k + j) * h : t1 + j * hh);
       let rec = S.last;
-      for (let j = 0; j <= n; j++) {
-        const tt = rel(t) + j * hh, on = a => fin(a.at) && a.at <= tt;
-        const fio2 = acts.reduce((f, a) => (fin(a.o2) && on(a) ? Math.max(f, clamp(a.o2, 0.21, 1)) : f), 0.21), vaso = acts.reduce((d, a) => (fin(a.vaso) && on(a) ? a.vaso : d), 0);
-        if (acts.some(a => a.stop && on(a))) S.bleeding = false;
-        const dead = S.died !== null, pf = clamp((S.V - S.Vu) / (S.Vn - S.Vu), 0, 2.5), SV = S.SVn * (2 * pf / (1 + pf)) * (1 - Math.max(0, (S.HR - 150) / 100));
-        const vfac = (1 - 0.55 * S.B) * (1 + 1.2 * vaso / (vaso + 0.15)), SVR = S.SVRn * S.sv * vfac, CO = Math.max(0, SV * S.HR / 1000), MAP = dead ? 0 : CO * SVR;
-        const hb = S.RBC / S.V, shunt = clamp(shunt0 + lungK * S.B, 0, 0.95), pA = fio2 * 713 - 40 / 0.8, cc = content(hb, sev(pA), pA), ca = cc - 5 * shunt / (1 - shunt);
-        const pao2 = pao2Of(content, sev, hb, ca, pA), sat = sev(pao2), DO2 = CO * content(hb, sat, pao2) * 10, T = 37 + 2.2 * S.B;
-        const RR = clamp(14 + 10 * S.B + 1.2 * Math.max(0, S.Lac - 2) + 25 * Math.max(0, 0.92 - sat), 6, 50);
-        if (j === n || j === 0) {
-          const pp = dead ? 0 : SV / S.Cart;
-          rec = { hr: dead ? 0 : S.HR, map: MAP, spo2: dead ? 0 : clamp(100 * sat, 0, 100), rr: dead ? 0 : RR, lactate: S.Lac, temp: T, volume: S.V, burden: S.B, pao2, hb };
+      const onGrid = (k, tt, ph) => {
+        const dead = ph.dead, [V, , B, Lac, HR] = S.y;
+        if (k === S.k0 + n || rec === null) {
+          const pp = dead ? 0 : ph.SV / P.Cart;
+          rec = { hr: dead ? 0 : HR, map: ph.MAP, spo2: dead ? 0 : clamp(100 * ph.sat, 0, 100), rr: dead ? 0 : ph.RR, lactate: Lac, temp: ph.T, volume: V, burden: B, pao2: ph.pao2, hb: ph.hb };
           rec.sbp = rec.map + 2 * pp / 3; rec.dbp = rec.map - pp / 3;
-          rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: MAP < 60 || sat < 0.85 ? 1 : 0, temp: T, scale2: 0 }).score;
+          rec.news2 = dead ? NaN : Mx.calc.news2({ rr: rec.rr, spo2: rec.spo2, o2: ph.fio2 > 0.21 ? 1 : 0, sbp: rec.sbp, hr: rec.hr, cvpu: ph.MAP < 60 || ph.sat < 0.85 ? 1 : 0, temp: ph.T, scale2: 0 }).score;
         }
-        if (S.k % 10 === 0 && S.kRec !== S.k && !dead) {   // a minute (as runVp records it)
-          S.kRec = S.k; S.minMap = S.minMap === null ? MAP : Math.min(S.minMap, MAP); S.maxLac = S.maxLac === null ? S.Lac : Math.max(S.maxLac, S.Lac); if (MAP < 65) S.hypo++;
+        if (k % 10 === 0 && S.kRec !== k && !dead) {   // a minute (as runVp records it)
+          S.kRec = k; S.minMap = S.minMap === null ? ph.MAP : Math.min(S.minMap, ph.MAP); S.maxLac = S.maxLac === null ? Lac : Math.max(S.maxLac, Lac); if (ph.MAP < 65) S.hypo++;
         }
-        if (j === n || dead) { if (j < n) S.k++; continue; }
-        S.k++;
-        let dV = 0, dR = 0;
-        if (S.bleeding) { dV -= bleed; dR -= bleed * hb; }
-        dV -= 0.004 * S.B * (S.V - S.Vu);
-        for (const a of acts) if (fin(a.at) && tt >= a.at && tt < a.at + a.over) { if (a.fluid) dV += 0.4 * a.fluid / a.over; if (a.blood) { dV += a.blood / a.over; dR += a.blood / a.over * 20; } }
-        const abxOn = acts.some(a => a.abx && fin(a.at) && tt >= a.at + 60), dB = abxOn ? -0.5 * S.B / 60 : growth * S.B * (1 - S.B) / 60;
-        const e = (90 - MAP) / 90, HRt = clamp(S.HRn * (1 + 1.2 * e) + 35 * S.B, 40, 180), svt = clamp(1 + 1.0 * e, 0.6, 1.8);
-        const prod = 0.08 * Math.max(0, 1 - DO2 / (1.4 * S.crit)) + 0.03 * S.B + 0.03 * Math.max(0, (65 - MAP) / 65), dL = prod - 0.012 * (S.Lac - 1);
-        S.V = Math.max(0.3 * S.Vn, S.V + hh * dV); S.RBC = Math.max(0, S.RBC + hh * dR); S.B = clamp(S.B + hh * dB, 0, 1); S.Lac = Math.max(0.3, S.Lac + hh * dL);
-        S.HR += hh * (HRt - S.HR); S.sv += hh * (svt - S.sv) / 2;
-        if (MAP < 45) S.crash += hh; if (S.crash >= 20 || S.Lac >= 15) S.died = tt + hh;
-      }
+      };
+      S.k0 = S.k; vpAt(P, S, acts, ts[0], Mx, onGrid); vpAdvance(P, S, acts, ts, onRun ? h : hh, Mx, onGrid); delete S.k0;
       S.last = rec;
       const all = { 'vp.min.map': S.minMap === null ? NaN : S.minMap, 'vp.max.lactate': S.maxLac === null ? NaN : S.maxLac, 'vp.timeHypo': S.hypo, 'vp.diedAt': S.died === null ? NaN : S.died,
         'vp.outcome': S.died !== null ? 2 : rec.map >= 65 && rec.lactate < 2 && rec.spo2 >= 92 ? 0 : 1, 'vp.t': rel(t) + dt };
@@ -30886,6 +31066,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     if (k < 1024) return LF[Math.round(k)];
     const x = k + 1; return (x - 0.5) * Math.log(x) - x + 0.5 * Math.log(2 * Math.PI) + 1 / (12 * x) - 1 / (360 * x * x * x) + 1 / (1260 * Math.pow(x, 5));
   }
+  /* FALLBACK special functions, for a context without the kernel (NoemaSimKit has the same Lanczos ln Γ and NR Q(a, x)) */
   /** ln Γ(x) (Lanczos, g = 7, n = 9; ~1e-15) */
   const LZ = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
   function lgamma(x) {
@@ -30912,7 +31093,7 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
     return Math.min(1, Math.exp(-x + a * Math.log(x) - gln) * h);
   }
   /** the χ² upper tail P(X ≥ x | df) */
-  const chi2Sf = (x, df) => (df >= 1 && x >= 0 ? gammaQ(df / 2, x / 2) : NaN);
+  const chi2Sf = (x, df) => (df >= 1 && x >= 0 ? (C.kit() ? C.kit().chi2Sf(x, df) : gammaQ(df / 2, x / 2)) : NaN);   // the kernel's tail; FALLBACK: the own Q below
   /** erfc: Taylor series of erf below 2, Lentz continued fraction above (relative error ~1e-15) */
   function erfc(x) {
     if (x < 0) return 2 - erfc(-x);
@@ -30924,7 +31105,8 @@ else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;
   const Phi = z => 0.5 * erfc(-z / Math.SQRT2);
   const phi = z => Math.exp(-0.5 * z * z) / Math.sqrt(2 * Math.PI);
   /** Φ⁻¹(p): Acklam's rational approximation (2003) refined by one Halley step */
-  function PhiInv(p) {
+  const PhiInv = p => (C.kit() ? C.kit().normInv(p) : PhiInvOwn(p));   // the kernel's AS 241; FALLBACK: Acklam + Halley below
+  function PhiInvOwn(p) {
     if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
     const a = [-3.969683028665376e1, 2.209460984245205e2, -2.759285104469687e2, 1.383577518672690e2, -3.066479806614716e1, 2.506628277459239];
     const b = [-5.447609879822406e1, 1.615858368580409e2, -1.556989798598866e2, 6.680131188771972e1, -1.328068155288572e1];

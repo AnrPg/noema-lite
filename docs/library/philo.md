@@ -70,6 +70,7 @@ act is returned as its **index** in the model's list (0 first), and **−1** mea
 | `ruleCodes` (≤ 16) | `id`, `rules` (1–32) `{id, b, c?, k?, x?}` | a moral code for rule consequentialism (§2.9): b benefit, c internalisation cost, k coordination exponent, x exploitation loss |
 | `streams` (≤ 16) | `id`, `head` (≤ 2000 numbers), `cycle` (1–64 numbers, repeated forever) | an infinite utility stream, eventually periodic (§2.11) |
 | `ubuntu` (≤ 16) | `id`, `options` (1–12) `{id, effects (≤ 64) {who, identity, solidarity, byAgent}}`, `wI`, `wS` (1) | a choice in Metz's relational terms (§2.12): Δidentity and Δsolidarity −1…1 per relationship |
+| `poisson` (≤ 8) | `id`, `n` (expected electorate), `candidates` (2–6), `types` (1–16) `{id, r, u (one per candidate), vote?}` | a Poisson voting game (§2.14): a voter is of type t with probability r, values the candidates at u and votes for `vote` |
 
 Built-in content (`TABLES`, the same in Python):
 - The trolley presets (§2.2), Kant's maxims, the trait lists, and the Gettier presets with the received intuition.
@@ -83,10 +84,10 @@ Built-in content (`TABLES`, the same in Python):
 | code | when |
 |---|---|
 | `format`, `value`, `enum`, `size`, `unknown-field` | the core's table walk |
-| `duplicate` | an id used twice in a part; a candidate listed or ranked twice; a strategy listed twice; a rule twice in a code; an option twice in an ubuntu case |
+| `duplicate` | an id used twice in a part; a candidate listed or ranked twice; a strategy listed twice; a rule twice in a code; an option twice in an ubuntu case; a Poisson candidate or type twice |
 | `value` | a case without a preset or kAct and kNot; a trait outside its scheme; an axis that is not every candidate once; probabilities outside 0–1 or not summing to 1; a problem or game without a preset or its tables; an experiment without te or options and positions; a new thinker without born, died and trad; `iia` without `other`; a tournament, sorites or map output without its model part |
 | `size` | a problem's or game's tables that do not fit its acts, states, rows and columns; a prior of the wrong length |
-| `ref` | an unknown part, candidate, act, option, position, thinker or tournament strategy |
+| `ref` | an unknown part, candidate (also a Poisson type's `vote`), act, option, position, thinker or tournament strategy |
 | `output` | an `of` that philo@1 does not compute for that kind |
 
 **Runtime codes** (`run(...).codes`):
@@ -109,7 +110,7 @@ Built-in content (`TABLES`, the same in Python):
 | `range` | a number outside its range |
 | `iia-candidates` | the two profiles of IIA have different candidates |
 | `too-many` | manipulation with more than 6 candidates |
-| `budget` | a social-choice search passed 200 000 method runs |
+| `budget` | a social-choice search passed 200 000 method runs; a replicator over m^G profiles × G² × m > 25 000; a Poisson game with n > 10⁵ or (τ + 12√τ + 20) · 2^m · m² · (types + 1) > 4 · 10⁷ |
 | `parse` | logic@1 cannot parse a formula |
 | `too-many-atoms` | an argument has more than 12 atoms |
 | `states` | minimax regret on lotteries of different lengths |
@@ -120,6 +121,12 @@ Built-in content (`TABLES`, the same in Python):
 | `impossibility` | `infiniteConflict` found a pair that Pareto ranks and infinite anonymity equates |
 | `missing` | a rule or ubuntu option that does not exist |
 | `none-permissible` | the honouring reading of ubuntu forbids every option |
+| `degenerate` (games) | support enumeration found an equilibrium with more pure best responses than its support: the game is degenerate, may have a continuum of equilibria, and the list is not complete (§2.13) |
+| `none` | no equilibrium found (Lemke–Howson stopped on a ray, or a degenerate game) |
+| `approximate` | a mixed voting equilibrium of more than two blocs: a rest point of the replicator dynamics, not a certified equilibrium (§2.13) |
+| `method` | a mixed voting game on a rule other than plurality or antiplurality |
+| `underflow` | a Poisson voter whose every pivot probability is below 10⁻³⁰⁸: its best vote is not certified, and the output is NaN (§2.14) |
+| `magnitude-m` | a three-way-constrained magnitude with more than three candidates (not computed) |
 | `error` | an unexpected failure. The output is NaN, and the run does not throw |
 
 ## 2. Outputs and methods
@@ -482,9 +489,55 @@ Computable where it is: an option lists its effects on relationships as Δidenti
 The weights and the numeric scale are the author's; the engine makes the structure of the two readings exact, not the size of a
 relationship.
 
+### 2.13 Mixed equilibria and mixed voting between blocs (`equilibria`, `eqProb`, `eqPayoff`; `mixedVoteCount`, `mixedVoteProb`, `mixedWinProb`)
+
+For a game of `games` (up to 6 × 6), with `solver`:
+- `support` (default) — support enumeration (von Stengel 2007, *Algorithmic Game Theory* ch. 3 §3.3): for every pair of supports of
+  equal size, solve the indifference equations, keep the solutions that are probabilities and best responses. In a nondegenerate game
+  this lists every equilibrium. An equilibrium with more pure best responses than its support marks the game degenerate (Def. 3.2):
+  the list may then miss a continuum, and the run says `degenerate`.
+- `lemke` — the Lemke–Howson algorithm (Lemke & Howson 1964, *SIAM J.* 12:413; von Stengel 2007 §3.5): complementary pivoting from
+  the artificial equilibrium, dropping `label` (0 … m + n − 1, rows first). It returns one equilibrium; equilibria of index −1 are
+  never reached from the artificial one (Shapley 1974).
+`equilibria` is the count; `eqProb` (`eq`, `player`, `strategy`) a probability; `eqPayoff` (`eq`, `player`) the expected payoff.
+Reference values (tests): von Stengel's 3 × 2 game A = [[3,3],[2,5],[0,6]], B = [[3,2],[2,6],[3,1]] has the three equilibria
+((1,0,0),(1,0)), ((4/5,1/5,0),(2/3,1/3)), ((0,1/3,2/3),(1/3,2/3)) with payoffs (3,3), (3,14/5), (4,8/3); Lemke–Howson with label 2
+ends at the third; battle of the sexes has (2/3, 1/3) worth 2/3; matching pennies (½, ½) worth 0.
+
+Mixed voting: the ballot groups of an election play as blocs (a group's ballot counts n times; ties by the candidates' order). A
+plurality ballot names a candidate, an antiplurality ballot the one voted against (`method`). A bloc's payoff is the Borda score of
+the winner on its own ranking (`util: "borda"`, m − 1 − place) or 1 for its first choice (`util: "top"`). With **two** groups the
+game is a bimatrix game and is solved exactly as above (bloc games are often degenerate: outcome ties, flagged). With **more** groups
+the engine runs the multi-population replicator dynamics (Taylor & Jonker 1978; Weibull 1995 ch. 5) from the uniform mix and
+returns its rest point flagged `approximate`: a rest point need not be an equilibrium, and only one is found. `mixedVoteProb`
+(`eq`, `group`, `candidate`): the probability of that ballot; `mixedWinProb` (`eq`, `candidate`): the probability that it wins.
+
+### 2.14 Poisson voting games (`expectedVotes`, `pivotProb`, `pivotMagnitude`, `poissonWinProb`, `voteGain`, `bestVote`, `poissonEquilibrium`)
+
+Myerson 1998 (*Int. J. Game Theory* 27:375) and 2000 (*J. Economic Theory* 94:7): the number of voters is Poisson(n), so the votes
+of each candidate are independent Poisson counts with means τ_k = n · Σ_t r_t [vote_t = k] (`expectedVotes`). Plurality, ties broken
+with equal chances.
+- `pivotProb` (`a`, `b`): the exact probability that a and b tie for first with every other candidate below, by summing the Poisson
+  laws up to τ + 12√τ + 20 (the remainder is below 10⁻¹²). For two candidates it is Skellam's P(X = Y) = e^(−a−b) I₀(2√(ab))
+  (Skellam 1946; a test).
+- `pivotMagnitude` (`a`, `b`): Myerson's magnitude, lim (1/n) log P — here in units of log-probability: −(√τa − √τb)² when every other
+  τ_c ≤ √(τa τb); with three candidates and τ_c above it, 3(τa τb τc)^(1/3) − τa − τb − τc (the third must be matched: a three-way
+  near-tie). The test checks the slope of the exact log-probability against both formulas.
+- `poissonWinProb` (`candidate`); `voteGain` (`type`, `candidate`): the expected utility gain of one more vote for the candidate, summed
+  over the pivot events directly (tied at the top: wins outright; one behind: joins the tie), so tiny pivots keep their digits;
+  `bestVote` (`type`): the index of the best vote (`tie`; `underflow` → NaN); `poissonEquilibrium`: 1 when every type's `vote` is a best
+  response to the τ it generates, 0 when one is not.
+
+The standard 3-candidate example (Myerson & Weber 1993, *APSR* 87:102; Myerson 2002, *JET* 103:219): 30 % A > B > C (u = 1, 0.9, 0),
+30 % B > A > C, 40 % C. With n = 1000 the sincere split (A, B, C) is an equilibrium in which the Condorcet loser C wins (P ≈ 0.99985),
+and both Duvergerian coalitions (A, A, C) and (B, B, C) are equilibria too; with 31 % / 29 % the sincere split is no longer one (B's
+voters switch to A) — Duverger's law. These equilibrium verdicts are computed by the engine at n = 1000, with the published
+utilities' structure; the papers' own statements are the qualitative ones (the papers prove limits as n → ∞ and give no table of
+probabilities at a finite n).
+
 ## 3. Limits and speed
 
-- Every loop is bounded: ≤ 8 candidates, Kemeny ≤ 40 320 orders, manipulation ≤ 6 candidates, ≤ 2000 rounds × 20 reps, ≤ 2000
+- Every loop is bounded: games ≤ 6 × 6 (≤ 923 support pairs), Poisson n ≤ 10⁵ and ≤ 6 candidates, ≤ 8 candidates, Kemeny ≤ 40 320 orders, manipulation ≤ 6 candidates, ≤ 2000 rounds × 20 reps, ≤ 2000
   generations, sorites ≤ 2000 items, arguments ≤ 12 atoms.
 - A series has at most 2000 points, and a scene stays far below 2000 items.
 - A typical run takes 0.07 ms. The worst allowed takes about 0.2 s: 6 candidates × 64 ballot groups with IRV manipulation, Kemeny and
@@ -498,6 +551,8 @@ relationship.
 - Modal, deontic and epistemic logics and abstract and structured argumentation (ASPIC+, bipolar) belong to logic@1. Mini-apps call it directly.
 - Infinite ethics covers eventually periodic streams (§2.11); a complete ordering with Pareto and anonymity cannot be computed
   (it needs non-constructive choice), so it is stated, not shown.
-- Voting games search pure equilibria of ≤ 8 voters (§2.10); mixed and Bayesian (Poisson) voting equilibria are out.
+- Voting games search pure equilibria of ≤ 8 voters (§2.10); mixed equilibria are exact for two blocs and games up to 6 × 6
+  (degenerate games are flagged, not completed), approximate (replicator) for more blocs (§2.13); Poisson games use plurality only, and
+  three-way-constrained magnitudes only with three candidates (§2.14).
 - Rule consequentialism uses an explicit acceptance-rate model (§2.9) whose terms the author sets.
 - The thinkers' dates for ancient India and China are the conventional ones. The engine does not settle dating debates.

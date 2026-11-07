@@ -11,7 +11,8 @@
    through logic@1 (window.NoemaLibLogic: parse, atomsOf, truthTable, entails — never re-implemented here).
    Added (§8): rule consequentialism at an acceptance rate (Hooker 2000; Ridge 2006), voting games' pure Nash equilibria and
    Gibbard–Satterthwaite manipulability, infinite utility streams (overtaking, catching-up, Pareto vs anonymity), Metz's ubuntu as a
-   relational score (promote / honour).
+   relational score (promote / honour); mixed equilibria of bimatrix games (support enumeration, Lemke–Howson) and of voting blocs
+   (exact for two, replicator-approximate beyond), Poisson voting games (Myerson 1998, 2000: pivots, magnitudes, equilibria).
    Sources: beside each function and in docs/library/philo.md. Pure, bounded, deterministic; numbers, codes and keys only.
    Tests: node tests/lib_philo.js */
 (function noemaLibPhiloModule(root) {
@@ -1116,7 +1117,7 @@
     const gameMethod = o => o.method || 'plurality';
     const pgames = byId('poisson', x => poissonGame(x, X));
     const pgOk = id => { const g = pgames.get(id); if (!g) return null; if (!(fin(g.n) && g.n >= 0) || g.types.some(t => !(fin(t.r) && t.r >= 0) || !t.u.every(fin))) { flag('value'); return null; }
-      if (g.n > 1e5) { flag('budget'); return null; } const tau = poissonTau(g), K = Math.max(...tau) + 12 * Math.sqrt(Math.max(...tau)) + 20; if (K * (1 << g.m) * g.m * (g.m + 1) > 4e7) { flag('budget'); return null; } return g; };
+      if (g.n > 1e5) { flag('budget'); return null; } const tau = poissonTau(g), K = Math.max(...tau) + 12 * Math.sqrt(Math.max(...tau)) + 20; if (K * (1 << g.m) * g.m * g.m * (g.types.length + 1) > 4e7) { flag('budget'); return null; } return g; };
     const pgCtx = new Map(), ctxOf = g => { const k = JSON.stringify(poissonTau(g)); if (!pgCtx.has(k)) pgCtx.set(k, poissonCtx(poissonTau(g))); return pgCtx.get(k); };
     const eqCache = new Map();
     const eqsOf = o => {   // the equilibria of a bimatrix game (support enumeration, or the one Lemke–Howson reaches from the label)

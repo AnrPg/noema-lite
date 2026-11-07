@@ -17,6 +17,12 @@
   const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isNum = v => typeof v === 'number' && Number.isFinite(v);
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): each step of a transient is its θ-method DAE step (daeTheta: Newton with
+      LU, the massless nodes algebraic rows); FALLBACK without the kernel (marked): the same θ-step here, by a factored matrix */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
   function fail(code, extra) { const e = new Error('thermal: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
   function okNum(kind, v) {
     if (!isNum(v)) return false;
@@ -423,8 +429,11 @@
       for (let i = 0; i < n; i++) thT[i] = be || !(C[i] > 0) ? 1 : 0.5;
       const mk = th => { const A = new Float64Array(n * n); for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i * n + j] = th[i] * G[i * n + j]; A[i * n + i] += C[i] / h; } return A; };
       const AT = mk(thT), AB = mk(thB), LU = {};
-      if (!rads.length) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
+      if (!rads.length && !kit()) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
       const P = new Float64Array(n), rhs = new Float64Array(n), Gx = new Float64Array(n), rv = new Float64Array(n), nS = sources.length;
+      const KS = kit(), P1 = new Float64Array(n), rk = new Float64Array(n);
+      const fK = (t, y, out) => { for (let i = 0; i < n; i++) { let s = b[i] + P1[i]; for (let j = 0; j < n; j++) s -= G[i * n + j] * y[j]; out[i] = s; } if (rads.length) rad(y, out, null, null); };
+      const jK = (t, y, J) => { for (let i = 0; i < n * n; i++) J[i] = G[i]; if (rads.length) rad(y, rk, J, ones); for (let i = 0; i < n * n; i++) J[i] = -J[i]; };   // ∂f/∂x = −(G + ∂(−rad)/∂x)
       return { step(x, gate, sp, t1, t2, first) {
         let switched = false;
         thermostats.forEach((th, i) => {
@@ -439,6 +448,12 @@
           sp[s] = on ? (w.F(t2) - w.F(t1)) / hh : 0; P[src.u] += sp[s];
         }
         const useB = be || first || switched || edge, th = useB ? thB : thT;
+        if (KS) {   // the kernel's θ-step: C·x' = f(t, x) = −G·x + b + P̄ + rad(x), P̄ the sources' mean over the step; massless rows algebraic
+          P1.set(P);
+          const R = KS.daeTheta({ M: C, f: fK, jac: jK, y0: x, t0: t1, tEnd: t2, dt: 2 * hh, method: useB ? 'backward-euler' : 'trapezoidal', newtonTol: 1e-13, maxSteps: 64 });
+          if (R.stop !== 'end') throw fail(R.stop === 'newton' || R.stop === 'nan' ? 'no-convergence' : 'budget', { t: t2 });
+          return Float64Array.from(R.y);
+        }
         for (let i = 0; i < n; i++) { let s = 0; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; Gx[i] = s; }
         rv.fill(0); if (rads.length) rad(x, rv, null, null);
         for (let i = 0; i < n; i++) rhs[i] = C[i] / h * x[i] - (1 - th[i]) * (Gx[i] - rv[i]) + b[i] + P[i];
@@ -651,7 +666,7 @@
     prepare,
     create: (spec, opts) => adapter.create(spec, opts),
     stepper: true,   // a part of a co-simulation (stepInit / stepTo / snapshot / restore on the instance)
-    get workerSource() { const NX = root.NoemaExpr; return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;'; },
+    get workerSource() { const NX = root.NoemaExpr, K = kit(); return (NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source() + '\n;self.noemaEngine = self.NoemaThermal.adapter;'; },
   });
   root.NoemaThermal = Object.freeze({
     id: ID, format: FORMAT, SIGMA, STATS: Object.freeze(STATS.slice()),

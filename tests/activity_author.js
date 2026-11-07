@@ -229,6 +229,15 @@ for (const e of LIBS) {
   const noOut = JSON.parse(JSON.stringify(sp0)); delete noOut.parts[0].outputs;
   ok(SF.validate(R, ps, wrong, PID).length > 0 && SF.validate(R, ps, noOut, PID).length > 0 && SF.validate(R, ps, Object.assign({}, sp0, { couple: { loops: [{ parts: ['a'] }] } }), PID).length > 0,
     'the parts schema refuses an unknown engine, a part with no outputs, a loop with no tolerance');
+  { // a bench on a circuit part (spec.bench.part): the validators take it, so do both schemas
+    const led = rj(path.join(EX, 'led-bench', 'spec.json')), sp = JSON.parse(JSON.stringify(led));
+    sp.parts = [{ id: 'c', engine: 'circuit-mna@1', model: sp.model, outputs: sp.outputs }]; sp.bench = Object.assign({ part: 'c' }, sp.bench);
+    delete sp.engine; delete sp.model; delete sp.outputs;
+    const tabs = Object.fromEntries(fs.readdirSync(path.join(EX, 'led-bench')).map(f => /^strings\.([\w-]+)\.json$/.exec(f)).filter(Boolean).map(m => [m[1], rj(path.join(EX, 'led-bench', m[0]))]));
+    const ve = P.checkSimSpec(sp, tabs);
+    const e1 = SF.validate(R, sim, sp, sim.$id), e2 = SF.validate(R, ps, sp, PID);
+    ok(!ve.length && !e1.length && !e2.length, `a parts spec with bench.part (led-bench's circuit as a part): the validators, sim-spec and the parts schema accept it ${JSON.stringify(ve.concat(e1, e2).slice(0, 2))}`);
+  }
   const b = AA.TYPES.find(t => t.parts).blank();
   ok(Array.isArray(b.spec.parts) && b.spec.parts.length === 1 && AA.typeOf(b).parts && !b.spec.engine, 'a blank parts activity: one part of a library engine, no top-level engine');
   const labs = [...LS.titles(ps)].filter(t => t.startsWith('eng.'));

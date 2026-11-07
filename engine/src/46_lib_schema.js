@@ -180,7 +180,7 @@
     s.$id = PARTS_ID; s.title = 'spec';
     delete s.if; delete s.then; delete s.else;
     s.required = [...new Set((s.required || []).concat(['parts']))];
-    for (const k of ['engine', 'model', 'outputs', 'bench']) delete s.properties[k];
+    for (const k of ['engine', 'model', 'outputs']) delete s.properties[k];   // (the bench stays: bench.part names a circuit-mna@1 or twin@1 part)
     libDefs(s);
     const part = (id, model, out) => ({ title: 'eng.' + id, type: 'object', required: ['id', 'engine', 'model', 'outputs'], additionalProperties: false,
       properties: { id: ref('benchId', 'partId'), engine: { title: 'engine', const: id }, model: Object.assign({ title: 'model' }, model),
