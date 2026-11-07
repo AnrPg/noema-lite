@@ -89,11 +89,11 @@ async function uploadCommands(token, uid, sid, srcs) {
 /** Register the files in the learner's synced index (a:srcfiles:<subject>) so every device shows 👁 for them. */
 async function indexSourceFiles(token, uid, sid, srcs, known = new Map()) {
   if (!srcs.length) return;
-  const key = 'a:srcfiles:' + sid; const cur = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []);
-  let ix = {}; try { ix = JSON.parse(cur?.[0]?.value || '{}'); } catch (e) { }
   const now = new Date().toISOString();
-  for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); const ref = known.get(x.sha256); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude', ...(ref ? { ref } : chunksOf(x) ? { chunks: chunksOf(x) } : {}) }; }
-  await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: now }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+  await kvMerge(token, uid, 'a:srcfiles:' + sid, ix => {
+    for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); const ref = known.get(x.sha256); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude', ...(ref ? { ref } : chunksOf(x) ? { chunks: chunksOf(x) } : {}) }; }
+    return ix;
+  });
 }
 /* ---------- translations in their own files (docs/i18n.md §10): packs/<id>.tr.<locale>.json beside the pack ---------- */
 const PC = () => globalThis.NoemaPackCheck;
@@ -224,6 +224,19 @@ async function kvUpdate(token, uid, key, fn) {
     await new Promise(r => setTimeout(r, 150 + Math.random() * 350));
   }
   return false;
+}
+/** kvUpdate for an index value (an object) that may not exist yet: the first writer creates it ({} then fn) with an insert
+ *  that never overwrites a row another writer created at the same moment, then every change is compare-and-swap.
+ *  Throws when the value could not be written (five clashes in a row, or no access), so the caller reports it. */
+async function kvMerge(token, uid, key, fn) {
+  const obj = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : {});
+  for (let i = 0; i < 2; i++) {
+    if (await kvUpdate(token, uid, key, v => fn(obj(v)))) return true;
+    const row = (await sb(`/rest/v1/noema_kv?select=key&key=eq.${encodeURIComponent(key)}`, token))?.[0];
+    if (row) continue;   // it exists: the clashes were real, try once more
+    await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: '{}', updated_at: new Date(0).toISOString() }], headers: { Prefer: 'resolution=ignore-duplicates,return=minimal' } });
+  }
+  throw new Error(`could not save ${key} (changed by others too often — try again)`);
 }
 async function curricula(token) {
   const out = [];
@@ -632,14 +645,10 @@ const lang0 = x => String(x || '').split('-')[0].toLowerCase();
     (as before), a translation → key "<source>.<native>"; the file is bridges/<pack>.<key>.json (= engine/bridge.js pairKey). */
 const brKey = (src, nat, own) => !src || lang0(src) === lang0(own) ? lang0(nat) : `${lang0(src)}.${lang0(nat)}`;
 const brUpPath = (uid, pack, key) => `${uid}/bridges/incoming/${pack}.${key}.json`;   // uploaded here, live only once checked
-/** Put one bridge's summary in a:bridges. The index is one value for every pack, so saves running at the same time
- *  (several agents) could overwrite each other's entry: re-read right before writing, and write again while ours is missing. */
+/** Put one bridge's summary in a:bridges. The index is one value for every pack and several agents save at the same
+ *  time, so it is changed with compare-and-swap (kvMerge): an entry another save wrote meanwhile is never lost. */
 async function indexBridge(token, uid, pack, nat, sum) {
-  for (let i = 0; i < 4; i++) {
-    const ix = await kvGet(token, 'a:bridges', {}); ix[pack] = { ...(ix[pack] || {}), [nat]: sum }; await kvPut(token, uid, 'a:bridges', ix);
-    await new Promise(r => setTimeout(r, 150 + Math.random() * 350));
-    const got = (await kvGet(token, 'a:bridges', {}))[pack]?.[nat]; if (got?.v === sum.v && got.status === sum.status) return;
-  }
+  await kvMerge(token, uid, 'a:bridges', ix => ({ ...ix, [pack]: { ...(ix[pack] || {}), [nat]: sum } }));
 }
 async function packFor(token, uid, id) {
   if ((CFG.library || []).some(s => s.id === id)) { const r = await fetch(siteFile(`library/subjects/${id}/pack.json`)).catch(() => null); return r?.ok ? r.json().catch(() => null) : null; }
@@ -705,10 +714,7 @@ async function callTool(name, args, ctx) {
       const r = await sb(`/storage/v1/object/upload/sign/noema-private/${path}`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
       const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
       // register it in the learner's synced index (a:srcfiles:<subject>) so every device shows 👁 for this source
-      const key = 'a:srcfiles:' + sid; const cur = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []);
-      let ix = {}; try { ix = JSON.parse(cur?.[0]?.value || '{}'); } catch (e) { }
-      ix[src] = { name: fname, type: '', size: 0, added: new Date().toISOString(), cloud: true, via: 'claude' };
-      await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+      await kvMerge(token, uid, 'a:srcfiles:' + sid, ix => ({ ...ix, [src]: { name: fname, type: '', size: 0, added: new Date().toISOString(), cloud: true, via: 'claude' } }));
       return text(`Upload URL for source "${src}" (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @"/path/to/${fname}" "${u}"`);
     }
     case 'noema_finish_upload': {

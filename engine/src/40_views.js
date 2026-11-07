@@ -720,7 +720,7 @@ function playLightning(chid) {
 /* ---------- flashcards (Leitner) ---------- */
 const BOX_DAYS = [0, 1, 3, 7, 16, 35];
 /* one Leitner step for a card: 0 = again (back to box 1), 1 = good (+1 box), 2 = easy (+2); due counted from `from` */
-function rateCardKey(key, q, from = new Date()) { const r = S.fc[key] || { box: 0 }; r.box = q === 0 ? 1 : Math.min(5, (r.box || 0) + (q === 2 ? 2 : 1)); const d = new Date(from); d.setDate(d.getDate() + BOX_DAYS[q === 0 ? 0 : r.box]); r.due = d.toISOString().slice(0, 10); S.fc[key] = r; save(); return r; }
+function rateCardKey(key, q, from = new Date()) { const r = S.fc[key] || { box: 0 }; r.box = q === 0 ? 1 : Math.min(5, (r.box || 0) + (q === 2 ? 2 : 1)); r.due = NoemaDay.add(NoemaDay.key(from), BOX_DAYS[q === 0 ? 0 : r.box]); S.fc[key] = r; save(); return r; }
 function cardDue(key) { const r = S.fc[key]; return !r || !r.due || r.due <= today(); }
 function countDueCards() { return COURSE.reduce((a, c) => a + c.flashcards.filter((f, i) => { const k = f._key || c.id + '#' + i; return S.fc[k] && cardDue(k); }).length, 0); }
 function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c }))); }
@@ -828,7 +828,7 @@ function drillView(id) {
         const r = S.pb[d.id] || { box: 0 };
         const ticked = checks.filter(x => x.checked).length / checks.length;
         r.box = q === 0 ? 1 : Math.min(5, r.box + (q === 2 && ticked >= .7 ? 2 : 1));
-        const dt = new Date(); dt.setDate(dt.getDate() + BOX_DAYS[q === 0 ? 0 : r.box]); r.due = dt.toISOString().slice(0, 10);
+        r.due = NoemaDay.add(today(), BOX_DAYS[q === 0 ? 0 : r.box]);
         S.pb[d.id] = r; save(); addXP(3 + Math.round(ticked * 7), stage);
         if (q === 2) confetti(70);
         const all = Object.values(PB).filter(x => x.id !== d.id && (!S.pb[x.id] || S.pb[x.id].due <= today()));

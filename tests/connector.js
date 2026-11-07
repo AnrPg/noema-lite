@@ -144,6 +144,11 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const bu2 = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' });
   const bix2 = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}');
   ok(buWrong.isError && /not tiny-inline → el/.test(buWrong.content[0].text) && !bu2.isError && /\(reviewed\)/.test(bu2.content[0].text) && srv.state.files[`${uid}/bridges/tiny-inline.el.json`] && !srv.state.files[`${uid}/bridges/incoming/tiny-inline.el.json`] && bix2['tiny-inline']?.el?.status === 'reviewed' && bix2['tiny-inline']?.ru?.entries === 1, 'save_bridge from an upload: refuses the wrong file, saves the right one, clears the upload, keeps the other natives in a:bridges');
+  // several agents saving bridges at the same moment: compare-and-swap keeps every entry (no lost update)
+  const natsC = ['de', 'fr', 'ar', 'es', 'it'];
+  const parC = await Promise.all(natsC.map(n => tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, native: n }) })));
+  const bixC = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}')['tiny-inline'] || {};
+  ok(parC.every(r => !r.isError) && natsC.every(n => bixC[n]?.entries === 1) && bixC.ru?.entries === 1 && bixC.el?.status === 'reviewed', 'save_bridge: 5 saves at the same time all keep their entry in a:bridges (compare-and-swap)');
   srv.state.kv[uid]['a:bridgeReports'] = { value: JSON.stringify([{ pack: 'tiny-inline', native: 'ru', k: 'energy', sense: '1', form: 'energy', sid: sid0, note: 'better: энергия (физ.)' }]), updated_at: new Date().toISOString() };
   const bg = (await tool('noema_bridge_guide', { subject_id: 'tiny-inline' })).content[0].text;
   ok(/tiny-inline → ru: 1 words/.test(bg) && /энергия \(физ\.\)/.test(bg), 'bridge_guide lists the account\'s bridges and the mistakes learners reported');

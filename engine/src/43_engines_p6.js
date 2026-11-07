@@ -9,5 +9,9 @@
   /* i18n-ignore-start */   // code: numbers in, numbers out
   if (typeof ACT === 'undefined') return;
   for (const g of ['NoemaThermal', 'NoemaPID', 'NoemaRF', 'NoemaTwin']) if (window[g] && window[g].engine) ACT.registerEngine(window[g].engine);
+  // the files the page loaded before engine.js (tools/build.py PAGE_SRC) join the activity core that exists only now
+  window.NoemaEngineCatalog?.registerWith(ACT);   // the library engines (46–49_lib_*.js)
+  window.NoemaWasm?.registerWith(ACT);            // wasm@1 and wasm-module@1
+  window.NoemaEmbed?.register(ACT);               // external-embed@1
   /* i18n-ignore-end */
 })();

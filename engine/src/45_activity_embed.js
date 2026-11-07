@@ -17,7 +17,7 @@
    No words here: the visible texts are tE() keys (engine.act.embed.*) and the pack's own strings (title, why).
    Off unless the deployment switches it on: NOEMA_CONFIG.activities['external-embed@1'] === true (the site CSP must list the
    providers in frame-src first). Loads in Node too (module.exports: the checks, for tests/activities_embed.js). */
-var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js in the shell, then in engine.js)
+var NoemaEmbed = (() => {   // the page loads this file on its own, beside packcheck.js; engine.js leaves it out (tools/build.py PAGE_SRC)
   /* i18n-ignore-start */   // code: codes, patterns, attribute values
   const PROVIDERS = /*@providers*/[
     {"id": "phet", "name": "PhET", "status": "allowed", "origins": ["https://phet.colorado.edu"], "path": "/sims/html/[a-z0-9-]+/(latest|[0-9]+\\.[0-9]+\\.[0-9]+)/[a-z0-9-]+_(all|[a-z]{2}(_[A-Z]{2})?)\\.html", "query": "(locale=[A-Za-z_]{2,6})?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["CC-BY-4.0", "CC-BY-NC-4.0"], "creditMust": "PhET Interactive Simulations, University of Colorado Boulder", "credit": "PhET Interactive Simulations, University of Colorado Boulder · {title} · {license} · https://phet.colorado.edu", "terms": "https://phet.colorado.edu/en/licensing/html", "supportsResult": false, "notes": "HTML sims published before 2026-03-29: CC BY 4.0 (commercial use allowed; the credit, the licence and https://phet.colorado.edu as close to the point of use as possible; translating the credit is allowed). PhET's 2025 impact report announces a shift to CC BY-NC for newer sims, and its FAQ says commercial use needs a licence: read the sim's publication date in its About dialog and pick the licence. Every HTML sim page offers an Embed code. No result channel: PhET-iO (the instrumented API) is licensed separately. Language: ?locale=."},
@@ -137,7 +137,8 @@ var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js
     w.head.replaceChildren(m, s); w.body.replaceChildren(f);
     return '<!doctype html>' + w.documentElement.outerHTML;
   }
-  function register() {
+  /** join the app's activity core: at load when it is there already (the activity harness), else engine.js calls it (43_engines_p6.js) */
+  function register(ACT = typeof globalThis.ACT === 'object' ? globalThis.ACT : (typeof window !== 'undefined' ? window.ACT : null)) {
     if (typeof ACT !== 'object' || !ACT || typeof ACT.registerRuntime !== 'function' || typeof document === 'undefined') return;
     if (!(window.NOEMA_CONFIG && window.NOEMA_CONFIG.activities && window.NOEMA_CONFIG.activities[RUNTIME] === true)) return;   // opt-in per deployment
     ACT.registerRuntime({
@@ -192,9 +193,9 @@ var NoemaEmbed = (() => {   // var: loaded twice in the app (beside packcheck.js
       },
     });
   }
-  register();
+  try { if (typeof ACT !== 'undefined') register(ACT); } catch (e) { console.warn('[noema] external-embed: not registered', e); }
   /* i18n-ignore-end */
-  return { RUNTIME, PROVIDERS, SANDBOX_OK, parse, match, check, checkPack, consent };
+  return { RUNTIME, PROVIDERS, SANDBOX_OK, parse, match, check, checkPack, consent, register };
 })();
 if (typeof module === 'object' && module && module.exports) module.exports = NoemaEmbed;
 else if (typeof window !== 'undefined') window.NoemaEmbed = NoemaEmbed;

@@ -106,7 +106,7 @@
   const metaSet = (acc, name, f) => { const m = meta(acc, name); f(m); metaSave(acc, name, m); };
   const markDirty = (acc, k) => { metaSet(acc, 'unsynced', m => { m[k] = Date.now() * 1000 + (++st.seq % 1000); }); emit(); };
   const clean = (acc, k, mark) => { metaSet(acc, 'unsynced', m => { if (mark === undefined || m[k] === mark) delete m[k]; }); emit(); };   // only if not changed again meanwhile
-  const put = (full, v) => { try { localStorage.setItem(full, v); return true; } catch (e) { st.full = true; return false; } };
+  const put = (full, v) => { try { localStorage.setItem(full, v); return true; } catch (e) { st.full = true; dispatchEvent(new CustomEvent('noema:storagefull', { detail: { key: full } })); return false; } };   // the loader tells the learner
   const FULL = () => coded('This device’s storage is full: some changes from your other devices could not be saved here.', 'cloud.storage_full');   // i18n-ignore (English .message of err.cloud.storage_full)
   /** keys (full localStorage keys) another device changed → the open subject folds them into what it holds in memory (engine/src/10_core.js) */
   const notify = (acc, keys) => { try { dispatchEvent(new CustomEvent('noema:remote', { detail: { acc, keys } })); } catch (e) { } };

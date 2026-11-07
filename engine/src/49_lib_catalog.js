@@ -74,10 +74,13 @@
     return out.slice(0, (opts && opts.limit) || 4);
   }
 
-  root.NoemaEngineCatalog = Object.freeze({ CATALOG, LIBRARY: Object.freeze(LIBRARY), byId, suggest, fold });
-  // the library engines join the app's registry (the same shape as circuit-mna@1's and the P6 engines')
-  const A = typeof ACT !== 'undefined' ? ACT : root.ACT;   // the app's activity core (32_activities.js; absent in the shell, the connector, the tests)
-  if (A && typeof A.registerEngine === 'function')
-    for (const e of CATALOG) if (e.layer === 'library' && e.global && root[e.global] && root[e.global].engine) A.registerEngine(root[e.global].engine);
+  /** the library engines join the app's registry (the same shape as circuit-mna@1's and the P6 engines'): at load when the
+      activity core is there already (the activity harness), else engine.js calls it once the core exists (43_engines_p6.js) */
+  function registerWith(A) {
+    if (A && typeof A.registerEngine === 'function')
+      for (const e of CATALOG) if (e.layer === 'library' && e.global && root[e.global] && root[e.global].engine) A.registerEngine(root[e.global].engine);
+  }
+  root.NoemaEngineCatalog = Object.freeze({ CATALOG, LIBRARY: Object.freeze(LIBRARY), byId, suggest, fold, registerWith });
+  registerWith(typeof ACT !== 'undefined' ? ACT : root.ACT);   // the app's activity core (32_activities.js; absent in the shell, the connector, the tests)
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

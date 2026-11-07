@@ -50,12 +50,12 @@ window.NoemaShell = (() => {
   /** A sentence with some of its values in bold (names and titles stay text, never markup) */
   function rich(k, vals) { const names = Object.keys(vals), marks = Object.fromEntries(names.map((n, i) => [n, `\u0001${i}\u0001`])); return L(k, marks).split('\u0001').map((x, i) => i % 2 ? (vals[names[+x]]?.nodeType ? vals[names[+x]] : h('b', {}, vals[names[+x]])) : x); }   // a value that is an element goes in as it is
   const fmtDate = (t, o = { day: 'numeric', month: 'long' }) => { try { return window.NoemaI18n ? NoemaI18n.fmt.date(t, o) : new Date(t).toLocaleDateString(lang(), o); } catch (e) { return new Date(t).toDateString(); } };
-  const today = () => new Date().toISOString().slice(0, 10);
+  const today = () => NoemaDay.key();   // the learner's local day (engine/day.js)
   const toast = (m, ms) => (N()?.toast || (x => console.log(x)))(m, ms);
 
   /* ---------- the learner's state across subjects (read from storage; the engine owns the open subject) ---------- */
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
-  const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
+  const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { if (e?.name === 'QuotaExceededError' || e?.code === 22 || e?.code === 1014) dispatchEvent(new CustomEvent('noema:storagefull', { detail: { key: k } })); } };   // the loader tells the learner
   const stateOf = sid => jget(`noema1:${acc()}:s:${sid}:state`, null);
   const recentKey = () => `noema1:${acc()}:meta:recent`;
   /** The places the learner was reading, newest first (written by the engine: noteRecent). Device-local. */
@@ -660,7 +660,7 @@ window.NoemaShell = (() => {
     v.append(h('section', { class: 'ns-panel ns-level' }, h('div', { class: 'ns-ringwrap' }, ring(lv.into / lv.need, 132, 11), h('div', { class: 'ringc' }, h('span', { class: 'tiny' }, L('level')), h('b', {}, lv.lv))),
       h('div', { class: 'grow' }, h('span', { class: 'ns-label' }, tx.place || ''), h('h2', {}, L('xpToLevel', { n: lv.need - lv.into, lv: lv.lv + 1 })), h('p', { class: 'ns-muted' }, L('xpTotal', { xp: st.xp || 0 })))));
     // the week as stepping stones; the 7th holds a small chest
-    const days = [...Array(7)].map((_, i) => { const d = new Date(Date.now() - (6 - i) * DAY); return { k: d.toISOString().slice(0, 10), l: fmtDate(d, { weekday: 'narrow' }) }; });
+    const days = [...Array(7)].map((_, i) => { const k = NoemaDay.add(today(), i - 6), [y, m, dd] = k.split('-').map(Number); return { k, l: fmtDate(new Date(y, m - 1, dd, 12), { weekday: 'narrow' }) }; });
     const stones = [[40, 90], [110, 70], [180, 84], [250, 62], [320, 78], [390, 58], [460, 72]];
     const did = days.map(d => (st.xpDay || {})[d.k] > 0);
     const trail = `<svg class="ns-trail" viewBox="0 0 500 130" role="img" aria-label="${L('trailAria', { n: did.filter(Boolean).length }).replace(/[&<>"]/g, c => '&#' + c.charCodeAt(0) + ';')}"><path d="M40 90 Q75 60 110 70 T180 84 T250 62 T320 78 T390 58 T460 72" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>`
@@ -701,7 +701,7 @@ window.NoemaShell = (() => {
     if (!chs.length) return Object.keys(x.boss || {}).filter(c => x.boss[c]).length;
     return chs.filter(c => { const id = c.id || 'ch' + String(c.num).padStart(2, '0'), n = typeof c.sections === 'number' ? c.sections : (c.sections || []).length; return n > 0 && (read[id] || 0) >= n; }).length;
   }
-  const weekKey = () => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d.toISOString().slice(0, 10); };
+  const weekKey = () => NoemaDay.add(today(), -((new Date().getDay() + 6) % 7));   // the local Monday of this week
   function rememberMedals(n) { const k = `noema1:${acc()}:meta:medals`, was = jget(k, null); jset(k, n); if (was != null && n > was) window.NoemaReact?.big('medal'); }
 
   /* ---------- ⚑ problem reports (engine/report.js): the words, and whether this account reviews them (an admin) ---------- */

@@ -12,7 +12,7 @@
            locale?: 'en', profile?: 'xapi' | 'cmi5', granularity?: 'chapter' | 'activity' (cmi5: the AU of a statement) }
    Every id is a UUID v5 of the content (re-export gives the same statements: idempotent at the LRS). */
 /* i18n-ignore-start */   // IRIs, verbs and protocol words, not text for learners
-var NoemaXAPI = (() => {   // var: the shell loads this file on its own (the "My subjects" ⋮) and engine.js has it inside again
+var NoemaXAPI = (() => {   // the page loads this file on its own (the shell's "My subjects" ⋮); engine.js leaves it out (tools/build.py PAGE_SRC)
   const VERSION = '1.0.3';
   const ADL = 'http://adlnet.gov/expapi/verbs/';
   const VERBS = {

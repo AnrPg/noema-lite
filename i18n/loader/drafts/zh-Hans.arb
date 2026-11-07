@@ -1,4 +1,5 @@
 {
   "@@locale": "zh-Hans",
-  "loader.export.missingActivities": "{n, plural, other {# 个互动项目}}未能放入包中：此设备上没有其 .h5p 文件（{items}）。请联网打开该科目一次，然后重新导出。"
+  "loader.export.missingActivities": "{n, plural, other {# 个互动项目}}未能放入包中：此设备上没有其 .h5p 文件（{items}）。请联网打开该科目一次，然后重新导出。",
+  "loader.storage.full": "此设备的存储空间已满，你最新的进度没有保存在这里。请先备份（我 › 数据与同步），然后删除不再需要的科目。"
 }

@@ -610,7 +610,8 @@ async function circuit(p, ctx, E) {
   const L2 = await logs(), bode = await p.evaluate(() => { const f = document.querySelector('#T .sim-face'); return { svg: !!f.querySelector('svg'), line: (f.querySelector('path.sim-line')?.getAttribute('d') || '').split('L').length, cap: f.querySelector('figcaption')?.textContent || '' }; });
   const li = await p.evaluate(() => [...document.querySelectorAll('#T .sim-log li')].map(l => l.textContent));
   ok(gsel.shown && gsel.n === 2 && gsel.mode, `the scope offers its two ground leads (the voltmeter's modes hidden) ${JSON.stringify(gsel)}`);
-  ok(/5[.,]0\d*\s*V true RMS/.test(L2[0]) && /\(gnd|GND\)|\(/.test(li[1]) && /dB/.test(L2[2]) && bode.svg && bode.line >= 50 && /Bode/.test(bode.cap), `the readings: RMS on the meter (${L2[0]}), the scope with its lead (${li[1]}), the Bode plot drawn (${bode.line} points): ${L2[2]}`);
+  const rms = parseFloat((String(L2[0]).match(/(\d+[.,]\d+)\s*V true RMS/) || [])[1]?.replace(',', '.'));   // 5 V within the bench's noise (model.noise.rel = 0.5 %)
+  ok(Math.abs(rms - 5) <= 5 * 0.005 + 0.005 && /\(gnd|GND\)|\(/.test(li[1]) && /dB/.test(L2[2]) && bode.svg && bode.line >= 50 && /Bode/.test(bode.cap), `the readings: RMS on the meter (${L2[0]}), the scope with its lead (${li[1]}), the Bode plot drawn (${bode.line} points): ${L2[2]}`);
   await p.evaluate(o => { ACT.ITEMS['led-bench'].spec.bench.instruments = JSON.parse(o); }, ins0);
 
   console.log('— circuit-mna@1: the bench as a theory block (explorer)');

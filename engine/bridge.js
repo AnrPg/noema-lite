@@ -261,7 +261,7 @@ window.NoemaBridge = (() => {
     WL().decorate(body, b._idx, { pick: picker(acc, b, sid, st.level), skip: '.nb-prep, .nb-ask, .newtag, .xbtn' });   // i18n-ignore (selectors)
     body.classList.toggle('nb-glossed', !!body.querySelector('.nw-g'));   // room under the lines for the glosses
     // a word whose gloss was shown in this section counts once per section and day (help that fades)
-    const day = new Date().toISOString().slice(0, 10);
+    const day = NoemaDay.key();
     for (const k of cur.glossedIn) { const once = `${sid}|${k}|${day}`; if (cur.seenOnce.has(once)) continue; cur.seenOnce.add(once); touchWord(acc, b.source, k, { seen: n => (n || 0) + 1 }); }
   }
   function clear(body) { if (!body) return; WL()?.undecorate(body); body.classList.remove('nb-root', 'nb-glossed'); body.querySelector(':scope > .nb-prep')?.remove(); }

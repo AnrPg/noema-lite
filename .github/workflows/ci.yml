@@ -1,11 +1,16 @@
-# Proves the tools work on Windows, macOS and Linux, and runs the browser tests on Linux.
-# Runs only when code changes (not for content-only pushes), to keep GitHub Actions minutes low.
+# Proves the tools work on Windows, macOS and Linux, and runs the browser tests on Linux — on every pull request (so a red
+# check is seen before the merge) and on main. Runs only when code changes (not for content-only changes), to keep minutes low.
 name: ci
 on:
+  pull_request:
+    paths: ['tools/**', 'skill/**', 'engine/**', 'i18n/**', 'tests/**', 'cloud/mcp/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
   push:
     branches: [main]
-    paths: ['tools/**', 'skill/**', 'engine/**', 'tests/**', 'cloud/mcp/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
+    paths: ['tools/**', 'skill/**', 'engine/**', 'i18n/**', 'tests/**', 'cloud/mcp/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
   workflow_dispatch: {}
+concurrency:   # a newer push to the same pull request cancels the run still going for the older one
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   tools:
     name: tools · ${{ matrix.os }} · py${{ matrix.py }}
@@ -22,6 +27,9 @@ jobs:
       - run: python -m pip install pillow pymupdf pypdf pypdfium2
       - name: build (validate everything, website, skill zip, connector)
         run: python tools/build.py site skill
+      - name: the generated files in the repository are up to date (engine.js, engine.css, the UI catalogs… = what the build makes)
+        if: runner.os == 'Linux'
+        run: git diff --exit-code --stat -- engine/ || { echo "::error::Generated files are stale: run python3 tools/build.py and commit the result."; exit 1; }
       - name: validator & licence tests
         run: python tests/validate_visual.py
       - name: skill round trip (unpack the Databricks pack → rebuild → same version)

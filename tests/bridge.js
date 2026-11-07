@@ -47,7 +47,7 @@ function unit() {
     ok(!C({ ...x, native: 'en' }, tp).errors.length, 'el → en: a translation\'s bridge into the pack\'s own language is fine'); }
   // the app: one bridge per pair, keyed "<native>" from the pack's language and "<source>.<native>" from a translation
   { const store = {}, bx = { console, Intl, localStorage: { getItem: k => store[k] ?? null, setItem: (k, v) => { store[k] = String(v); } } }; bx.window = bx; vm.createContext(bx);
-    vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine/bridge.js'), 'utf8'), bx);
+    for (const f of ['engine/day.js', 'engine/bridge.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), bx);
     const B = bx.NoemaBridge; store['noema1:u1:a:bridges'] = JSON.stringify({ p1: { ru: { v: 'a', status: 'draft' }, ar: { v: 'b', status: 'draft' }, 'el.ru': { v: 'c', status: 'draft', source: 'el' }, 'el.en': { v: 'd', status: 'reviewed', source: 'el' } } });
     const subj = { id: 'p1', language: 'en' };
     ok(B.pairKey('en', 'ru', 'en') === 'ru' && B.pairKey('el', 'ru', 'en') === 'el.ru' && B.pairKey(null, 'ar', 'en') === 'ar', 'pairKey: "<native>" from the own language, "<source>.<native>" from a translation');

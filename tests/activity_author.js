@@ -11,7 +11,7 @@
    (NoemaLibSchema.specSchema) that accepts its reference activities and every fixture spec its own checkSpec accepts
    (tests/fixtures/enginelib/<name>.json), refuses the structural mistakes, and has a label for every field word; check() finds no
    problem in the references; the references ship in activity_author_schemas.js (NoemaActivityRefs).
-   Browser (with --browser; BROWSERS=chromium,firefox,webkit): the page in the built site, through its route #/author (classic router,
+   Browser (with --browser; BROWSERS=chromium (default),firefox,webkit): the page in the built site, through its route #/author (classic router,
    then the new frame: subject ⋮ › Create an activity, the crumbs, 320 px): rc-lowpass built from scratch through the form equals the reference; a bad formula shows its error at its field;
    the preview follows a changed start value; the .zip download passes activity_lint.py; undo / redo; 360 px without horizontal
    scroll; dark mode; graph@1: picked in the engine picker → started from its reference → the preview draws its scene → a wrong
@@ -328,7 +328,7 @@ async function browser() {
   // the built site of a prepared repo (tests/run_e2e.sh: node tests/activity_author.js --browser "$T"), else this repo's dist/site
   const SITE = path.resolve(args.find(a => !a.startsWith('--')) || ROOT), SITE_URL = 'file://' + path.join(SITE, 'dist', 'site', 'index.html');
   if (!fs.existsSync(path.join(SITE, 'dist', 'site', 'index.html'))) throw new Error('no built site: python3 tools/build.py site (in ' + SITE + ')');
-  const names = (process.env.BROWSERS || 'chromium,firefox,webkit').split(',');
+  const names = (process.env.BROWSERS || 'chromium').split(',');
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const until = async (fn, ms = 8000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(120); } return false; };
   const ref = refDoc('rc-lowpass');

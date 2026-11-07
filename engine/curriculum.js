@@ -12,7 +12,6 @@
 window.NoemaCurriculum = (() => {
   const L = () => window.NoemaLLM;
   const N = () => window.Noema;
-  const today = () => new Date().toISOString().slice(0, 10);
   const uid = () => Date.now().toString(36).slice(-5) + Math.random().toString(36).slice(2, 5);
   /** The learner's words for a key of i18n/roadmaps (docs/i18n.md). Without the i18n runtime — this file also runs in the
       Claude connector (tools/build.py) and in Node tests — the English catalog when it is loaded, else the key; nothing a

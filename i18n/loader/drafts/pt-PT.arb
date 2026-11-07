@@ -1,4 +1,5 @@
 {
   "@@locale": "pt-PT",
-  "loader.export.missingActivities": "{n, plural, one {# elemento interativo ficou} many {# elementos interativos ficaram} other {# elementos interativos ficaram}} de fora do pacote: o ficheiro .h5p não está neste dispositivo ({items}). Abra a disciplina uma vez com ligação à Internet e volte a exportar."
+  "loader.export.missingActivities": "{n, plural, one {# elemento interativo ficou} many {# elementos interativos ficaram} other {# elementos interativos ficaram}} de fora do pacote: o ficheiro .h5p não está neste dispositivo ({items}). Abra a disciplina uma vez com ligação à Internet e volte a exportar.",
+  "loader.storage.full": "O armazenamento deste dispositivo está cheio, por isso o teu progresso mais recente não foi guardado aqui. Faz uma cópia de segurança (Eu › Dados e sincronização) e depois remove as disciplinas de que já não precisas."
 }

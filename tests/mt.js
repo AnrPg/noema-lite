@@ -15,7 +15,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
 const TYPES = { '.js': 'text/javascript; charset=utf-8', '.html': 'text/html; charset=utf-8', '.css': 'text/css' };
 const PAGE = `<!doctype html><html><head><meta charset="utf-8"></head><body>
 <script>window.NOEMA_CONFIG = { mtPerMinute: 100 }; localStorage.setItem('noema1:current', JSON.stringify({ acc: 'tester' }));</script>
-<script src="engine/vendor/intl-messageformat.iife.js"></script><script src="engine/i18n/en.js"></script><script src="engine/i18n.js"></script>
+<script src="engine/day.js"></script><script src="engine/vendor/intl-messageformat.iife.js"></script><script src="engine/i18n/en.js"></script><script src="engine/i18n.js"></script>
 <script src="engine/mt.js"></script></body></html>`;
 
 (async () => {

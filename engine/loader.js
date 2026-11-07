@@ -21,9 +21,12 @@
   }
 
   /* ---------------- tiny utils ---------------- */
+  /** The browser's storage for this site is full (every engine's name for it). Writers that hit it fire 'noema:storagefull'
+      (here, engine/shell.js, engine/cloud.js); the loader tells the learner once a minute at most (storageFullWarning). */
+  const isQuota = e => !!e && (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED' || e.code === 22 || e.code === 1014);
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { console.warn('[Noema] storage write failed', k, e); return false; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { console.warn('[Noema] storage write failed', k, e); if (isQuota(e)) dispatchEvent(new CustomEvent('noema:storagefull', { detail: { key: k } })); return false; } },
     del(k) { try { localStorage.removeItem(k); } catch (e) { } },
     keys(prefix) { const out = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(prefix)) out.push(k); } } catch (e) { } return out; },
   };
@@ -171,13 +174,13 @@
   }
 
   /* ---------------- account-level stats (XP / streak across all subjects) ---------------- */
-  const today = () => new Date().toISOString().slice(0, 10);
+  const today = () => NoemaDay.key();   // the learner's local day (engine/day.js)
   const Stats = {
     get() { return Object.assign({ xp: 0, xpDay: {}, streak: 0, lastDay: null, bySubject: {} }, jget(KV.accountKey('stats'), {})); },
     put(s) { KV.set(KV.accountKey('stats'), JSON.stringify(s)); },
-    touchStreak() { const s = this.get(), d = today(); if (s.lastDay === d) return s; const diff = s.lastDay ? Math.round((new Date(d) - new Date(s.lastDay)) / 864e5) : 99; s.streak = diff === 1 ? s.streak + 1 : 1; s.lastDay = d; this.put(s); return s; },
+    touchStreak() { const s = this.get(), d = today(); if (s.lastDay === d) return s; const diff = s.lastDay ? NoemaDay.between(s.lastDay, d) : 99; s.streak = diff === 1 ? s.streak + 1 : 1; s.lastDay = d; this.put(s); return s; },
     add(n) { const s = this.touchStreak(); s.xp += n; s.xpDay[today()] = (s.xpDay[today()] || 0) + n; s.bySubject[KV.subj] = (s.bySubject[KV.subj] || 0) + n; const keys = Object.keys(s.xpDay).sort(); while (keys.length > 400) delete s.xpDay[keys.shift()]; this.put(s); return s; },
-    streakNow() { const s = this.get(); return s.lastDay && Math.round((new Date(today()) - new Date(s.lastDay)) / 864e5) <= 1 ? s.streak : 0; },
+    streakNow() { const s = this.get(); return s.lastDay && NoemaDay.between(s.lastDay, today()) <= 1 ? s.streak : 0; },
     todayXP() { return this.get().xpDay[today()] || 0; },
   };
 
@@ -1696,7 +1699,7 @@
       // canonical folder layout:  <chosen>/backups/noema-lite-backup_<acc>_<day>.json (+ _latest)   <chosen>/conversations/<subject>/<YYYY-MM>/<id>.json|.md
       const bdir = await h.getDirectoryHandle('backups', { create: true });
       const obj = await Backup.collect(acc);
-      const day = new Date().toISOString().slice(0, 10);
+      const day = NoemaDay.key();
       for (const name of [`noema-lite-backup_${acc}_${day}.json`, `noema-lite-backup_${acc}_latest.json`]) {
         const fh = await bdir.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(JSON.stringify(obj, null, 1)); await w.close();
       }
@@ -1766,6 +1769,13 @@
   addEventListener('noema:inuse', e => {
     if (e.detail?.state === 'other') return showInUse(e.detail);
     if (inUse) { const o = inUse; inUse = null; document.querySelectorAll('[data-inuse-inert]').forEach(x => { x.inert = false; delete x.dataset.inuseInert; }); o.classList.add('out'); setTimeout(() => o.remove(), 250); }
+  });
+
+  /* the browser's storage is full: what was just saved (progress, settings) is NOT on this device — say so, once a minute at most */
+  let storageFullAt = 0;
+  addEventListener('noema:storagefull', () => {
+    if (Date.now() - storageFullAt < 60e3) return; storageFullAt = Date.now();
+    toastL('⚠️ ' + tr('loader.storage.full'), 12000);
   });
 
   /* ---------------- boot ---------------- */

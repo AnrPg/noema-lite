@@ -58,8 +58,7 @@ const F = s => h('span', { html: fmt(s) });
 const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
-const today = () => new Date().toISOString().slice(0, 10);
-const daysBetween = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5);
+const today = () => NoemaDay.key();   // the learner's local day (engine/day.js)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------- syntax highlight ---------- */

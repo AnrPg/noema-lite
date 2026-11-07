@@ -414,7 +414,8 @@
   root.NoemaWasm = api;
   if (typeof module === 'object' && module && module.exports) module.exports = api;
 
-  const ACTREF = typeof ACT !== 'undefined' ? ACT : root.ACT;
+  /** join the app's activity core: at load when it is there already (the activity harness), else engine.js calls it (43_engines_p6.js) */
+  api.registerWith = function registerWith(ACTREF) {
   if (!ACTREF || typeof ACTREF.registerEngine !== 'function') return;
   ACTREF.registerEngine({
     id: 'wasm@1',
@@ -444,5 +445,7 @@
       return sim.mount(box, Object.assign({}, ctx, { act: Object.assign({}, a, { spec }) }));
     },
   });
+  };
+  api.registerWith(typeof ACT !== 'undefined' ? ACT : root.ACT);
   /* i18n-ignore-end */
 })();

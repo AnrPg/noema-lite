@@ -17,7 +17,7 @@ Code: `engine/src/43_xapi.js` → `window.NoemaXAPI` (and `module.exports` for n
   same activity base as the record, each AU launching `<site>?subject=<id>#/ch/<chId>`.
 * The shell's **My subjects** ⋮ has the same two items for every subject: the record is made from the subject's saved state
   (`S.att`, `S.res` in `noema1:<account>:s:<subject>:state`) and its pack, so it needs no open subject; the shell loads
-  `engine/src/43_xapi.js` on its own (it declares `var NoemaXAPI`: `engine.js` has it inside again). Both menus call
+  `engine/src/43_xapi.js` on its own (once: `engine.js` leaves it out, see `PAGE_SRC` in `tools/build.py`). Both menus call
   `NoemaXAPI.subjectRecord` / `subjectCmi5` / `zip`, so the files are the same.
 * **The actor is the account, never an e-mail:** `{account: {homePage: <site>/, name: <account id>}}`. `mbox`,
   `mbox_sha1sum` and `openid` are never written, a `name` with `@` is dropped, an actor without an account throws.

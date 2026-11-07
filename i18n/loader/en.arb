@@ -2681,5 +2681,9 @@
         "example": "sections must be the source's"
       }
     }
+  },
+  "loader.storage.full": "This device's storage is full, so your latest progress was not saved here. Make a backup (Me › Data and sync), then remove subjects you no longer need.",
+  "@loader.storage.full": {
+    "description": "Warning toast when the browser's storage for the app is full and a save failed: the latest progress is not on this device. Names the Me page entry “Data and sync” (sh.data) where backups are made."
   }
 }
