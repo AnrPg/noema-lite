@@ -5,7 +5,7 @@
    first step, on source edges and on thermostat switching; or backward Euler throughout), linearised time constants.
    Pure JS, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
    Format noema.thermal/v1: tools/schemas/noema.thermal.v1.schema.json. Python twin of check / checkSpec: tools/thermal.py.
-   Registered with one line: ACT.registerEngine(NoemaThermal.engine). Also used by tests/thermal.js (node). */
+   A plugin of the engine library (one line of src/engines/plugins.ts). Also used by tests/thermal.js (node). */
 import NoemaSimKit from '../kernel/simkit.js';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'thermal@1', FORMAT = 'noema.thermal/v1';
@@ -16,7 +16,7 @@ import NoemaSimKit from '../kernel/simkit.js';
   const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isNum = v => typeof v === 'number' && Number.isFinite(v);
-  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): a transient and the stepper run on its θ-method DAE solver
+  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js): a transient and the stepper run on its θ-method DAE solver
       (daeThetaInit: Newton with LU, or one factored solve for a linear network; the massless nodes algebraic rows; θ and the sources'
       mean power chosen per step); FALLBACK without the kernel (marked): the same θ-step here (stepCore) */
   function kit() {

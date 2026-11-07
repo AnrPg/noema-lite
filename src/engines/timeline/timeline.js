@@ -795,7 +795,7 @@ import NoemaLibCore from '../kernel/core.js';
   const toRD = (fields, options) => (CAL[fields.cal] && CAL[fields.cal].to ? CAL[fields.cal].to(fields, options || {}) : { rd: NaN, flags: ['invalid'] });
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   const API = Object.freeze({
-    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (46_lib_schema.js)
+    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (src/engines/kernel/schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine, TABLES: T,
     gToRD, jToRD, rdToG, rdToJ, fliegel, J0, decYear, rdOfYear, convert, toRD, CALENDARS: Object.keys(CAL), hNewYear, hDays, jalCal, nawRuz, romanOf,
     easterG, easterJ, c14Age, calibrate, crossdate, bpIndex, glk, allen, luniYear, dayCycle,

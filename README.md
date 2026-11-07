@@ -17,6 +17,8 @@ engine/
   loader.js                profiles, subject picker, pack loading, namespaced storage, backups, restore points
   cloud.js                 Supabase adapter (auth, sync, snapshots, private storage) — dependency-free
   src/*.js, src/*.css      the study engine source  →  engine.js / engine.css (GENERATED)
+  engines.js               the engine library of the activities, NoemaCore.engines (GENERATED from ../src/engines by tools/esbuild_engines.mjs)
+  tokens.css               the design tokens: the base set and every character's (GENERATED from ../src/ui/tokens by tools/tokens.mjs)
   vendor/                  marked, DOMPurify, KaTeX
 library/
   groups.json              groups of the subject picker

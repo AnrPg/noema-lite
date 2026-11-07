@@ -139,7 +139,7 @@ import NoemaSimKit from '../kernel/simkit.js';
     return s;
   }
   const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): the meters' seeded jitter draws from its MRG32k3a streams, one per
+  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js): the meters' seeded jitter draws from its MRG32k3a streams, one per
       measurement; the noise sources draw from its counter-based Philox stream (counterStream: sample i of a source is read at any
       time of a transient in O(1), with no state to carry). FALLBACK without the kernel (marked): mulberry32 and an FNV hash. */
   function kit() {

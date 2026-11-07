@@ -1,4 +1,4 @@
-"""seq@1 — DNA, RNA and protein sequences (docs/library/seq.md): the Python twin of the checks of engine/src/48_lib_seq.js. It does not
+"""seq@1 — DNA, RNA and protein sequences (docs/library/seq.md): the Python twin of the checks of src/engines/seq/seq.js. It does not
 compute; check_spec(spec) gives the same problems (code, path, msg, level) as the JS checkSpec, exprs(spec) and keys(spec) the same
 lists (tests/enginelib.js runs both on tests/fixtures/enginelib/seq.json). SPEC is the same JSON as the JS module's SPEC
 (tests/lib_seq.js checks that the two copies are identical)."""

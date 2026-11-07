@@ -10,7 +10,7 @@
    contact (infection, influence), adopt (voter model), average (DeGroot 1974), ising (Glauber 1963 heat bath), flock (Reynolds
    1987), send (FIPA-ACL messages, FIPA 2002 SC00037J), and BDI deliberation (Rao & Georgeff 1995; Bratman 1987: goals, a plan
    library with context conditions, commitment blind / single-minded / open-minded). Norms (obligations, prohibitions,
-   permissions with deadlines, violations and sanctions) are monitored by NoemaLibLogic.normMonitor (47_lib_logic.js) when it is
+   permissions with deadlines, violations and sanctions) are monitored by NoemaLibLogic.normMonitor (src/engines/logic/logic.js) when it is
    loaded, otherwise by a documented fallback (code logic-fallback).
    Multi-agent protocols (model.protocol): Contract Net (Smith 1980), auctions English / Dutch / first- and second-price sealed
    (Vickrey 1961; revenue equivalence, Myerson 1981), bilateral negotiation (Rubinstein 1982 alternating offers; Zeuthen 1930
@@ -427,7 +427,7 @@ import NoemaLibLogic from '../logic/logic.js';
   }
 
   /* ======================================================================================================================
-     The fallback norm monitor (when NoemaLibLogic is not loaded): the same input and records as NoemaLibLogic.normMonitor
+     The fallback norm monitor (logic@1 is imported, so it runs only without its normMonitor; code logic-fallback stays valid in specs): the same input and records as NoemaLibLogic.normMonitor
      (achieve with deadline / within, maintain, prohibitions, permissions ignored, viol_/fulf_ atoms), without conflict resolution
      ====================================================================================================================== */
   function propParse(src) {

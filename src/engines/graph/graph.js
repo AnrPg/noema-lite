@@ -1478,7 +1478,7 @@ import NoemaExpr from '../kernel/simexpr.js';
 
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true });
   const API = Object.freeze({
-    table: { model: MODEL_T, outputs: { scalar: SCALARS, series: SERIES, scene: ['drawing'] }, fields: { node: 'ref', code: 'enum:' + CODES.join('|'), labels: 'enum:' + LABELS.join('|') } },   // the form of the activity author (46_lib_schema.js)
+    table: { model: MODEL_T, outputs: { scalar: SCALARS, series: SERIES, scene: ['drawing'] }, fields: { node: 'ref', code: 'enum:' + CODES.join('|'), labels: 'enum:' + LABELS.join('|') } },   // the form of the activity author (src/engines/kernel/schema.js)
     id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
     ALGS, GENS, SCALARS, SERIES, CODES, PROPS,
     // the algorithms themselves, for the tests

@@ -6,7 +6,7 @@
    distance, bit and packet error rates against SNR (BPSK, QPSK, FSK, BLE, Wi-Fi rough, LoRa SF7–12), LoRa airtime (Semtech) and
    duty cycle, BLE and Wi-Fi airtime (rough). Pure JS, no DOM, no text for the learner: codes and numbers only.
    The link (noema.rf/v1) is described in docs/INTERACTIVE_ENGINES.md §4 and tools/schemas/noema.rf.v1.schema.json. Python twin of
-   check() / checkSpec(): tools/rf.py. Registering it is one line: ACT.registerEngine(NoemaRF.engine). Tests: node tests/rf.js. */
+   check() / checkSpec(): tools/rf.py. It is a plugin of the engine library: one line of src/engines/plugins.ts. Tests: node tests/rf.js. */
 import NoemaSimKit from '../kernel/simkit.js';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'rf@1', FORMAT = 'noema.rf/v1';
@@ -18,7 +18,7 @@ import NoemaSimKit from '../kernel/simkit.js';
   const log10 = Math.log10;
   function fail(code, extra) { const e = new Error('rf: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
 
-  /** a number, or a string with an SI prefix ("868M", "125k") → number; anything else → NaN (as NoemaCircuit.num) */
+  /** a number, or a string with an SI prefix ("868M", "125k") → number; anything else → NaN (as circuit.num, src/engines/circuit/circuit.js) */
   const SI = { f: 1e-15, p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, m: 1e-3, k: 1e3, K: 1e3, M: 1e6, meg: 1e6, G: 1e9 };
   function num(v) {
     if (typeof v === 'number') return Number.isFinite(v) ? v : NaN;
@@ -118,14 +118,14 @@ import NoemaSimKit from '../kernel/simkit.js';
   /** Wi-Fi 802.11a/g OFDM (rough): 20 µs preamble + 4 µs symbols of 16 service + 8·(payload + 36 MAC/LLC bytes) + 6 tail bits */
   const wifiAirtime = (payload, rate) => 20e-6 + 4e-6 * Math.ceil((16 + 8 * (payload + 36) + 6) / (4 * rate));
 
-  // ---- seeded noise (as NoemaCircuit) ----
+  // ---- seeded noise (as circuit-mna@1) ----
   function mulberry32(a) {
     return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   }
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
   const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
   const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): MRG32k3a streams (one per purpose: the shadowing draw, the sweep), normals
+  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js): MRG32k3a streams (one per purpose: the shadowing draw, the sweep), normals
       by inversion (AS241), roots by Brent 1973. FALLBACK without the kernel (marked): mulberry32 + Box–Muller, bisection */
   function kit() {
     return NoemaSimKit;
@@ -414,7 +414,7 @@ import NoemaSimKit from '../kernel/simkit.js';
       };
     },
   };
-  /** the registration (one line in the app: ACT.registerEngine(NoemaRF.engine)) — the same shape as circuit-mna@1's */
+  /** the registration (a plugin of the engine library: src/engines/plugins.ts) — the same shape as circuit-mna@1's */
   const engine = {
     id: ID,
     check: spec => checkSpec(spec).filter(p => p.level === 'error').map(p => `${p.path}: ${p.msg}`),

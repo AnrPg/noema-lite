@@ -1,4 +1,4 @@
-"""genetics@1 — the Python twin of engine/src/48_lib_genetics.js (docs/library/genetics.md): check_spec(spec), exprs(spec) and
+"""genetics@1 — the Python twin of src/engines/genetics/genetics.js (docs/library/genetics.md): check_spec(spec), exprs(spec) and
 keys(spec) give the same problems (code, path, msg, level) and the same lists as the JS checkSpec / exprs / keys. It does not
 simulate. Parity: node tests/enginelib.js (tests/fixtures/enginelib/genetics.json)."""
 import re

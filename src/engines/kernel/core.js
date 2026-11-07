@@ -1,5 +1,5 @@
 /* ===================== interactive activities — the shared core of the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md §1) =====================
-   The library engines (ode@1, prob@1, graph@1, geom@1: 47–48_lib_*.js) are GENERAL engines: each covers a whole family of subjects
+   The library engines (ode@1, prob@1, graph@1, geom@1 …: src/engines/<name>/) are GENERAL engines: each covers a whole family of subjects
    (any system of equations, any distribution, any graph, any construction) instead of one domain. They share this core — the
    hexagon's inner ring:
      • the model checker: a declarative table walked with the same codes and messages as its Python twin (tools/enginelib.py walk),
@@ -7,8 +7,8 @@
      • seeded randomness (mulberry32), statistics of a series (final, min, max, mean, pp, rms), thinning to the plot limit,
      • scenes: the drawings an engine returns (points, segments, circles, polygons, labels) for a plot of kind `scene`,
      • the adapter port: makeEngine(def) turns {id, checkSpec, run} into the {id, check, create, workerSource} that ACT.registerEngine
-       takes (the same shape as circuit-mna@1 and the P6 engines); every run goes to a Worker whose source is NoemaExpr + this core +
-       the engine module (Function.toString: the same code as on the page).
+       takes (the same shape as circuit-mna@1 and the P6 engines); every run goes to a Worker that runs the engine's Worker bundle
+       (esbuild: NoemaExpr, this core and the engine module, the same code as on the page; src/engines/plugins.ts).
    Pure JS, no DOM, no learner text: codes and numbers only. Tests: node tests/enginelib.js. */
 import NoemaExpr from './simexpr.js';
 import NoemaSimKit from './simkit.js';
@@ -186,7 +186,7 @@ import NoemaSimKit from './simkit.js';
                      output?(state, ctx) → out (the outputs at the start), onEvent?(state, ev, t) → state (an event of another part) }
      ctx = { spec, seed, prepared, id, t0, rand (a seeded stream of this part) }. inputs: the part's numbers (consts, params, its inputs), held
      over the step. out: the spec's output ids → a number (a scalar now; a series output collects one sample per step), an array (kept
-     whole), a scene or a sound. The same signature as NoemaSimKit.stepper / cosim (46_lib_simkit.js). Pure, bounded, never throws. */
+     whole), a scene or a sound. The same signature as NoemaSimKit.stepper / cosim (src/engines/kernel/simkit.js). Pure, bounded, never throws. */
   const copyData = v => { if (v === null || typeof v !== 'object') return v; if (ArrayBuffer.isView(v)) return v.slice(); if (Array.isArray(v)) return v.map(copyData); const o = {}; for (const k of Object.keys(v)) o[k] = copyData(v[k]); return o; };
   /** only the declared outputs of a step (arrays thinned to the plot limit) */
   function pickStep(spec, out) {
@@ -263,7 +263,7 @@ import NoemaSimKit from './simkit.js';
     };
     return { engine, simEngine };
   }
-  /** the simulation kernel NoemaSimKit (46_lib_simkit.js, docs/library/simkit.md): loaded by its script tag (index.html) or the
+  /** the simulation kernel NoemaSimKit (src/engines/kernel/simkit.js, docs/library/simkit.md): loaded by its script tag (index.html) or the
       Worker source before the engines; under node (tests) a module that needs it loads it here. null when it cannot be had. */
   function kit() {
     return NoemaSimKit;

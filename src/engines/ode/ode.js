@@ -506,7 +506,7 @@ import NoemaExpr from '../kernel/simexpr.js';
   }
 
   /* ======================================================================================================================
-     The driver of a flow, on the simulation kernel (NoemaSimKit.integrate, 46_lib_simkit.js; docs/library/simkit.md §4): its
+     The driver of a flow, on the simulation kernel (NoemaSimKit.integrate, src/engines/kernel/simkit.js; docs/library/simkit.md §4): its
      methods (DOPRI5 with the stiffness switch to Rosenbrock, the fixed and symplectic steps), its state events (Illinois on the
      dense output, simultaneous events, re-arming), its breaks (timed events: doses, the discontinuities of a delay equation, the
      renormalisations of the Lyapunov exponents) and its dense output of every step (onSegment: a delay equation's history).
@@ -987,7 +987,7 @@ import NoemaExpr from '../kernel/simexpr.js';
   };
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
   const API = Object.freeze({
-    table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: { var: 'name', stat: 'enum:' + C.STATS.join('|'), t: 'numx', event: 'id', nth: 'int:-2000:2000', index: 'int:0:63', k: 'int:0:12', name: 'expr', code: 'enum:' + CODES.join('|'), x: 'name', y: 'name' } },   // the form of the activity author (46_lib_schema.js)
+    table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: { var: 'name', stat: 'enum:' + C.STATS.join('|'), t: 'numx', event: 'id', nth: 'int:-2000:2000', index: 'int:0:63', k: 'int:0:12', name: 'expr', code: 'enum:' + CODES.join('|'), x: 'name', y: 'name' } },   // the form of the activity author (src/engines/kernel/schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     TEMPLATES: Object.freeze(TEMPLATE_NAMES.slice()), templateMeta, METHODS: Object.freeze(METHODS.slice()), CODES: Object.freeze(CODES.slice()),
     SERIES: Object.freeze(SERIES.slice()), SCALARS: Object.freeze(SCALARS.slice()), SCENES: Object.freeze(SCENES.slice()),

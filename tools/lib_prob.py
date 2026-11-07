@@ -1,4 +1,4 @@
-"""prob@1 — probability and statistics (docs/library/prob.md): the Python twin of the checks of engine/src/47_lib_prob.js. It does not
+"""prob@1 — probability and statistics (docs/library/prob.md): the Python twin of the checks of src/engines/prob/prob.js. It does not
 compute; check_spec(spec) gives the same problems (code, path, msg, level) as the JS checkSpec, exprs(spec) and keys(spec) the same
 lists (tests/enginelib.js runs both on tests/fixtures/enginelib/prob.json). DATA is the same JSON as the JS module's
 (tests/lib_prob.js checks that the two copies are identical)."""

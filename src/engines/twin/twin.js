@@ -7,7 +7,7 @@
    hidden FAULTS (as the circuit bench): sensor stuck / drifting, an aged battery, a detached antenna, a misconfigured wake period,
    a brown-out level set too high. Deterministic for a seed; bounded (sim.maxEvents → code 'budget'). Codes and numbers only.
    The device (noema.twin/v1): docs/INTERACTIVE_ENGINES.md §5, tools/schemas/noema.twin.v1.schema.json. Python twin of check(),
-   checkFaults(), checkSpec(): tools/twin.py. Registering it is one line: ACT.registerEngine(NoemaTwin.engine). Tests: node tests/twin.js. */
+   checkFaults(), checkSpec(): tools/twin.py. It is a plugin of the engine library: one line of src/engines/plugins.ts. Tests: node tests/twin.js. */
 import NoemaSimKit from '../kernel/simkit.js';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'twin@1', FORMAT = 'noema.twin/v1';
@@ -24,7 +24,7 @@ import NoemaSimKit from '../kernel/simkit.js';
     return m ? parseFloat(m[1]) * (m[2] ? SI[m[2]] : 1) : NaN;
   }
 
-  // ---- the minimal radio formulas of rf@1 (engine/src/41_engine_rf.js; tests/twin.js checks they agree) ----
+  // ---- the minimal radio formulas of rf@1 (src/engines/rf/rf.js; tests/twin.js checks they agree) ----
   const C0 = 299792458, KT_DBM_HZ = 10 * Math.log10(1.380649e-23 * 290 * 1000);
   const fspl = (d, f) => 20 * log10(4 * Math.PI * d * f / C0);
   const logDistance = (d, f, n, d0) => (d <= d0 ? fspl(d, f) : fspl(d0, f) + 10 * n * log10(d / d0));
@@ -54,7 +54,7 @@ import NoemaSimKit from '../kernel/simkit.js';
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
   const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
   const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): its MRG32k3a streams, one per purpose (radio, each sensor, the network);
+  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js): its MRG32k3a streams, one per purpose (radio, each sensor, the network);
       normals by inversion (AS241), Poisson by inversion. FALLBACK without the kernel (marked): mulberry32 + Box–Muller */
   function kit() {
     return NoemaSimKit;

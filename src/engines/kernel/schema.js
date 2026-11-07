@@ -1,7 +1,7 @@
 /* ===================== interactive activities — the engine library's model tables as JSON Schemas (docs/INTERACTIVE_LIBRARY.md §1.5) =====================
    One source of truth: the table an engine's checkSpec walks (NoemaLibCore.walk) also gives the activity author its form. A library
    engine exports `table` (its module's frozen object):
-     table = { model:   T                                   the model's table (the kinds and shapes of 46_lib_core.js walk), or
+     table = { model:   T                                   the model's table (the kinds and shapes of src/engines/kernel/core.js walk), or
                         { $by: 'mode', $cases: { <mode>: T } }   a model whose fields depend on one field (genetics@1, craft@1, …),
                outputs: { <kind>: [<of>, …] | { <of>: T } }  the output kinds and what each may name (T: that output's own fields),
                         or { $by: 'mode', $cases: { <mode>: { <kind>: … } } },

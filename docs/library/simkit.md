@@ -1,16 +1,15 @@
-# `NoemaSimKit` — the simulation kernel of the engine library (`engine/src/46_lib_simkit.js`)
+# `NoemaSimKit` — the simulation kernel of the engine library (`src/engines/kernel/simkit.js`)
 
 The kernel holds what every engine that advances a model in time needs: random streams, an event calendar and its executive,
 integrators with state events, output analysis, sweeps and sensitivity, verification helpers, the shared event record and the
 stepper interface, and a co-simulation master for the "parts" orchestrator. Engines that build on it: `des@1` (discrete events,
-`docs/library/des.md`), `field@1` and `agents@1` (with the spatial kit `46_lib_space.js`). The finished engines (ode, genetics, med,
+`docs/library/des.md`), `field@1` and `agents@1` (with the spatial kit `src/engines/kernel/space.js`). The finished engines (ode, genetics, med,
 clinic, …) can join through the stepper adapters of §8 without rewriting their tested code.
 
-It is a plain module, `window.NoemaSimKit` (frozen). It loads after `46_lib_core.js` (the name sorts after it) and uses NoemaExpr's
+It is a plain ES module (`src/engines/kernel/simkit.js`, its default export frozen), imported by the core and the engines that use it; it uses NoemaExpr's
 fdlibm ports for `exp`, `log`, `sin`, `cos` and `pow`, so the numbers are the same on every device. It has no DOM, no network and no
-clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker:
-`NoemaExpr.source() + NoemaLibCore.source() + NoemaSimKit.source() + <engine module>` (`source()` returns `'(…)(self);'`, like the
-core's). Tests: `node tests/lib_simkit.js` (145 assertions against published values and exact solutions).
+clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker it is part of the
+engine's Worker bundle (esbuild, `noema-worker:` in `tools/esbuild_engines.mjs`), shared once as `self.__noemaShared['kernel/simkit.js']`. Tests: `node tests/lib_simkit.js` (145 assertions against published values and exact solutions).
 
 | § | what | functions |
 |---|---|---|
@@ -361,7 +360,7 @@ erfc (`erfc`, replacing NR erfcc's 1e-7), the circuit's noise sources (`counterS
 transients of `thermal@1` and `circuit-mna@1` (`daeThetaInit` with `linear`, `beforeStep` for θ and the step's inputs, the circuit's
 full M and `limit` for pnjlim; ≤ 3e-13 and ≤ 3e-9 relative to the own steps). Kept on purpose: `prob@1`'s distribution functions
 (they return ln P and ln Q with P and Q, which its log-densities and ln Φ need; where both exist they agree with the kernel's to 1e-13), the circuit's gmin-stepping retry of a step the kernel cannot solve, and the
-marked FALLBACKs for a context without the kernel. Load order: `46_lib_simkit.js` right after `35_simexpr.js` in index.html,
+marked FALLBACKs for a context without the kernel. Load order: `src/engines/kernel/simkit.js` right after `src/engines/kernel/simexpr.js` in index.html,
 first among the P6/library scripts of the bundle (tools/build.py `KERNEL`) and the harness.
 
 ## 9. Co-simulation: `cosim(cfg)`

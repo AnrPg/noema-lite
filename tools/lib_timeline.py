@@ -1,4 +1,4 @@
-"""timeline@1 — the Python twin of engine/src/48_lib_timeline.js (docs/library/timeline.md): the same check_spec (codes, paths,
+"""timeline@1 — the Python twin of src/engines/timeline/timeline.js (docs/library/timeline.md): the same check_spec (codes, paths,
 messages), exprs and keys. It does not compute dates (the engine does, in the app). The tables are the engine's own, as JSON."""
 import json
 import enginelib as L

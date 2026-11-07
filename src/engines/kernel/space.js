@@ -1,8 +1,8 @@
 /* ===================== NoemaSpaceKit — the spatial part of the simulation kernel of the engine library (docs/library/space.md) =====================
    Shared by field@1 (fields on grids, cellular automata) and agents@1 (agent-based models); the time / event / randomness / output
-   analysis part is NoemaSimKit (46_lib_simkit.js). Pure JS, no DOM, no clock, no randomness of its own (generators take an rng
-   function), every loop bounded by its arguments; it never throws on numbers (NaN goes through). Worker-safe: source() gives the
-   text that defines self.NoemaSpaceKit in a Worker (the same code, Function.toString).
+   analysis part is NoemaSimKit (src/engines/kernel/simkit.js). Pure JS, no DOM, no clock, no randomness of its own (generators take an rng
+   function), every loop bounded by its arguments; it never throws on numbers (NaN goes through). Worker-safe: the engines' Worker
+   bundles carry it (esbuild, src/engines/plugins.ts).
      • grids: uniform 1-D / 2-D node grids with a ghost layer of width 2 (padded Float64Array), periodic or bounded per axis;
      • boundary conditions by ghost nodes: Dirichlet, Neumann (outward normal derivative), Robin (a·u + b·∂u/∂n = g), periodic
        (LeVeque 2007 §2.12, §9.1; Morton & Mayers 2005 §2.10, §3.4); insulated or fixed-value obstacles;

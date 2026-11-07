@@ -7,7 +7,7 @@
    Fixed-step RK4 with the plant input held over each step; the controller runs every Ts (rounded to whole steps).
    Pure JS, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
    Python twin of check / checkSpec: tools/pid.py. Schema: tools/schemas/noema.pid.v1.schema.json.
-   Registered with one line: ACT.registerEngine(NoemaPID.engine). Also used by tests/pid.js (node). */
+   A plugin of the engine library (one line of src/engines/plugins.ts). Also used by tests/pid.js (node). */
 import NoemaSimKit from '../kernel/simkit.js';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'pid@1';
@@ -265,7 +265,7 @@ import NoemaSimKit from '../kernel/simkit.js';
     return r;
   }
 
-  // ---- the simulation kernel (NoemaSimKit, 46_lib_simkit.js; docs/library/simkit.md): its RK4, breaks and streams ----
+  // ---- the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js; docs/library/simkit.md): its RK4, breaks and streams ----
   function kit() {
     return NoemaSimKit;
   }

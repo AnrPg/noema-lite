@@ -1,4 +1,4 @@
-"""philo@1 — the Python twin of engine/src/48_lib_philo.js (docs/library/philo.md): the same check_spec (codes, paths, messages),
+"""philo@1 — the Python twin of src/engines/philo/philo.js (docs/library/philo.md): the same check_spec (codes, paths, messages),
 exprs and keys. It does not compute verdicts, winners or utilities (the engine does, in the app). The tables are the engine's own,
 as JSON (written into both files from one source)."""
 import json

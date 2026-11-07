@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.thermal.v1.schema.json",
   "title": "noema-lite thermal network (noema.thermal/v1)",
-  "description": "The lumped thermal network run by the thermal engine thermal@1 (engine/src/39_engine_thermal.js; docs/INTERACTIVE_ENGINES.md §2). Temperatures in °C, R in K/W, G in W/K, C in J/K, P in W, h in W/(m²·K), A in m². The engine's own check() (twin: tools/thermal.py) also tests what a schema cannot: ids unique across nodes, links, sources and thermostats; links to known nodes; no source on a fixed node; one thermostat per source; low < high; a group of massless nodes without a path to a boundary ('singular'); an insulated group ('floating', a warning); the limits (50 nodes, 200 links, 24 sources, 8 thermostats).",
+  "description": "The lumped thermal network run by the thermal engine thermal@1 (src/engines/thermal/thermal.js; docs/INTERACTIVE_ENGINES.md §2). Temperatures in °C, R in K/W, G in W/K, C in J/K, P in W, h in W/(m²·K), A in m². The engine's own check() (twin: tools/thermal.py) also tests what a schema cannot: ids unique across nodes, links, sources and thermostats; links to known nodes; no source on a fixed node; one thermostat per source; low < high; a group of massless nodes without a path to a boundary ('singular'); an insulated group ('floating', a warning); the limits (50 nodes, 200 links, 24 sources, 8 thermostats).",
   "type": "object",
   "required": [
     "nodes",

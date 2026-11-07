@@ -660,7 +660,7 @@ import LAND110 from './vendor/land-110m.json' with { type: 'json' };
 
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   const API = Object.freeze({
-    table: { model: TABLE, outputs: OUT },   // the form of the activity author (46_lib_schema.js)
+    table: { model: TABLE, outputs: OUT },   // the form of the activity author (src/engines/kernel/schema.js)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     UNITS, SPEEDS, COSTS, PROJS, ELLIPSOIDS, R_MEAN_KM,
     wrap180, havArc, sphArc, sphBearing, sphDest, rhumb, meridian, ellipsoid, makeProjection, tissot, sphExcess, ringArea, inRing, obliquity, gnomonLat, land,

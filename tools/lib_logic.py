@@ -1,4 +1,4 @@
-"""logic@1 — the Python twin of engine/src/47_lib_logic.js (docs/library/logic.md): check_spec(spec), exprs(spec), keys(spec) give the
+"""logic@1 — the Python twin of src/engines/logic/logic.js (docs/library/logic.md): check_spec(spec), exprs(spec), keys(spec) give the
 same problems (code, path, msg, level) and lists as the JS checkSpec / exprs / keys (tests/enginelib.js and tests/lib_logic.js compare
 them on tests/fixtures/enginelib/logic.json). It carries the same formula parser (parse(text, lang): the same codes, positions and
 messages), and does not compute the tasks."""

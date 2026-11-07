@@ -1,4 +1,4 @@
-# `logic@1` — logic from truth tables to norms (`engine/src/47_lib_logic.js`, `NoemaLibLogic`)
+# `logic@1` — logic from truth tables to norms (`src/engines/logic/logic.js`, `NoemaLibLogic`)
 
 `logic@1` is a general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). It has **one formula language**, written in ASCII or
 Unicode. Its parser gives precise error codes and positions. Over that language it runs **24 tasks**:
@@ -112,7 +112,7 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 
 | code | when |
 |---|---|
-| `format`, `value`, `enum`, `size`, `unknown-field` (warning) | the core's table walk (`46_lib_core.js`) |
+| `format`, `value`, `enum`, `size`, `unknown-field` (warning) | the core's table walk (`src/engines/kernel/core.js`) |
 | `value` | a part the task needs is missing (`missing (kripke needs worlds)`), two formulas for `equivalent`, two terms for `unify`, a mood that is not three of A E I O, `domain` and `size` together, `worlds` with `puzzle` or `preset`, a `loop` outside the trace, a world's atom that is not an atom name, a norm without `act` (and, for `norms`, without `kind`), `puzzle.muddy` > n |
 | `parse-empty` `parse-long` `parse-char` `parse-token` `parse-eof` `parse-paren` `parse-op` `parse-agent` `parse-ctl` `parse-deep` | a formula does not parse (§2.2); the message gives the place |
 | `term` | a unification term is a formula, not a term |
@@ -545,9 +545,8 @@ randomness.
 
 ## 9. API for other engines (philo@1, rhetoric@1, law@1, agents@1)
 
-These names on `window.NoemaLibLogic` are stable. `source()` returns `'(' + module + ')(self);'`. The module needs
-`NoemaLibCore` first (`NoemaLibCore.source()`); NoemaExpr is needed only for numx expressions. `engine.workerSource` is a string
-that holds NoemaExpr, the core and this module. ASTs are plain objects `{t, …}`: `atom n`, `top`, `bot`, `not a`, `and/or/xor/imp/iff a b`,
+These names of the module's default export (`import NoemaLibLogic from '../logic/logic.js'`) are stable. It imports the core;
+NoemaExpr is needed only for numx expressions. `engine.workerSource` is its Worker bundle: NoemaExpr, the core and this module. ASTs are plain objects `{t, …}`: `atom n`, `top`, `bot`, `not a`, `and/or/xor/imp/iff a b`,
 `all/ex v a`, `pred n args`, `eq l r`, `box/dia a ag?`, `O/P/F a c?`, `K/B ag a`, `EK/CK/DK g a`, `ann/annd f a`, `X/Fe/G a`,
 `U/R/W a b`, `A/E p`; terms `{t: 'fn', n, args}`.
 

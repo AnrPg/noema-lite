@@ -1,4 +1,4 @@
-"""craft@1 — handcrafts (docs/library/craft.md): the Python twin of the checks of engine/src/48_lib_craft.js. It does not compute;
+"""craft@1 — handcrafts (docs/library/craft.md): the Python twin of the checks of src/engines/craft/craft.js. It does not compute;
 check_spec(spec) gives the same problems (code, path, msg, level) as the JS checkSpec, exprs(spec) and keys(spec) the same lists
 (tests/enginelib.js runs both on tests/fixtures/enginelib/craft.json). DATA is the same JSON as the JS module's (tests/lib_craft.js
 checks that the two copies are identical)."""

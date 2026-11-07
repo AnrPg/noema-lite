@@ -1,4 +1,4 @@
-"""anatomy@1 — computable anatomy (docs/library/anatomy.md): the Python twin of engine/src/48_lib_anatomy.js.
+"""anatomy@1 — computable anatomy (docs/library/anatomy.md): the Python twin of src/engines/anatomy/anatomy.js.
 
 It checks and does not compute: check_spec(spec) gives the same problems (code, path, message, level) as the JS checkSpec, and
 exprs(spec) / keys(spec) the same lists. The data it needs (every structure id and its type, the levels of every nerve, the

@@ -1,4 +1,4 @@
-"""text@1 in Python (docs/library/text.md): the twin of the checks of engine/src/48_lib_text.js — check_spec(spec), exprs(spec), keys(spec)
+"""text@1 in Python (docs/library/text.md): the twin of the checks of src/engines/text/text.js — check_spec(spec), exprs(spec), keys(spec)
 give the same problems (code, path, msg, level) and the same lists as the JS module; tests/enginelib.js compares both on
 tests/fixtures/enginelib/text.json. It does not analyse texts."""
 import re

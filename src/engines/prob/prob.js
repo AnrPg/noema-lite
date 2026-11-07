@@ -26,7 +26,7 @@
      rand       randomized algorithms (Motwani–Raghavan; Mitzenmacher–Upfal): amplification, quicksort/quickselect, Karger,
                 Freivalds, Fermat/Miller–Rabin, rounding, balls in bins, Bloom, Count-Min, HyperLogLog, reservoir sampling, cover
                 times, 2-SAT walks, tail bounds vs exact tails, skip lists, treaps, Monte Carlo integration
-   Every mode draws its randomness from NoemaSimKit streams (46_lib_simkit.js, MRG32k3a; one stream per purpose — C.rng(seed, name)),
+   Every mode draws its randomness from NoemaSimKit streams (src/engines/kernel/simkit.js, MRG32k3a; one stream per purpose — C.rng(seed, name)),
    since the kernel migration of 2026-11-07 the earlier modes too (their seeded numbers changed then, not their laws).
    The special functions are written here with their sources beside them (lgamma, Loader's saddle point, the regularised incomplete
    gamma and beta functions, AS 241, AS 243). Pure, bounded, deterministic JS: no DOM, no network, no clock; the transcendental
@@ -2230,7 +2230,7 @@ import NoemaExpr from '../kernel/simexpr.js';
   /* ===================================================================================================================== */
   /* shared tools of the later modes (combin, gof, mcmc, multivar, rand)                                                    */
   /* ===================================================================================================================== */
-  /** a named NoemaSimKit stream (L'Ecuyer's MRG32k3a, 46_lib_simkit.js) — the randomness of the later modes; null and the code
+  /** a named NoemaSimKit stream (L'Ecuyer's MRG32k3a, src/engines/kernel/simkit.js) — the randomness of the later modes; null and the code
       no-kit when the kit is not loaded (the result is then NaN, never another generator's numbers) */
   function kitStream(seed, name, I) {
     const K = C.kit();
@@ -3473,7 +3473,7 @@ import NoemaExpr from '../kernel/simexpr.js';
   const lawOf = (o, env) => { const I = issueBag(); NOTE = I; const D = mkDist(o, resolver(null, env || {}), I); return D; };
   const API = Object.freeze({
     id: ID, DATA, checkSpec, exprs, keys, run, compute, engine: Object.freeze(engine), simEngine,
-    table: { model: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => [m, Object.assign({}, DATA.schema[m], ...(DATA.custom[m] || []).map(f => ({ [f]: 'any' })))])) }, outputs: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => { const O = DATA.outs[m], pre = x => Object.entries(x || {}).flatMap(([p, l]) => Array.isArray(l) ? l.map(v => p + v) : []); return [m, { scalar: O.scalar.concat(O.issues.map(i => 'issue.' + i), pre(O.prefix)), series: O.series.concat(pre(O.sprefix)), scene: O.scene }]; })) } },   // the form of the activity author (46_lib_schema.js)
+    table: { model: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => [m, Object.assign({}, DATA.schema[m], ...(DATA.custom[m] || []).map(f => ({ [f]: 'any' })))])) }, outputs: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => { const O = DATA.outs[m], pre = x => Object.entries(x || {}).flatMap(([p, l]) => Array.isArray(l) ? l.map(v => p + v) : []); return [m, { scalar: O.scalar.concat(O.issues.map(i => 'issue.' + i), pre(O.prefix)), series: O.series.concat(pre(O.sprefix)), scene: O.scene }]; })) } },   // the form of the activity author (src/engines/kernel/schema.js)
     // the special functions and the engine's own methods, for the tests
     lgamma, log1p, expm1, stirlerr, bd0, lbeta, ldbinom, ldpois, gammaPQ, ibeta, erf, erfc, erfcinv, ncdf, lncdf, qnorm, tcdf, tsf, qt, pnt,
     lawOf, propCI, coverage, binomP, clopper, adjust, gth, hpd, exactU, exactW, powerFn,

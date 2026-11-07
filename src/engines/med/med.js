@@ -6,7 +6,7 @@
    verify, incomplete). EDUCATIONAL ONLY: an input outside physiological bounds, a formula used outside the population it was derived in,
    or a rate that would harm a real patient is reported as a code — never a silent number.
    Every formula names its source beside it (paper/guideline + year); the chapter lists them all. Pure, deterministic, bounded.
-   clinic@1 (48_lib_clinic.js) reuses these calculators through NoemaLibMed.calc. */
+   clinic@1 (src/engines/clinic/clinic.js) reuses these calculators through NoemaLibMed.calc. */
 import NoemaLibCore from '../kernel/core.js';
   /* i18n-ignore-start */
   const C = NoemaLibCore;

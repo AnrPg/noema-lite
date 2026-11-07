@@ -1,4 +1,4 @@
-# `graph@1` — graphs and their algorithms, step by step (`engine/src/47_lib_graph.js`, `NoemaLibGraph`)
+# `graph@1` — graphs and their algorithms, step by step (`src/engines/graph/graph.js`, `NoemaLibGraph`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). It takes any graph, written out node by node or generated with a
 seed (17 generators, from G(n, p) to Zachary's karate club and the bridges of Königsberg). It runs any of 40 classic algorithms on
