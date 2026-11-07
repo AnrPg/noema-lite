@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "获胜者",
   "engine.author.f.lib.wpmHi": "每分钟最多词数",
   "engine.author.f.lib.wpmLo": "每分钟最少词数",
-  "engine.author.f.benchPart": "被测部件"
+  "engine.author.f.benchPart": "被测部件",
+  "engine.author.f.lib.eq": "均衡（编号）"
 }

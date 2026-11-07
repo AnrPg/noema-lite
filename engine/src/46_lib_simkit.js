@@ -162,7 +162,7 @@
     const q = p - 0.5;
     if (abs(q) <= 0.425) { const r = 0.180625 - q * q;
       return q * (((((((2509.0809287301226727 * r + 33430.575583588128105) * r + 67265.770927008700853) * r + 45921.953931549871457) * r + 13731.693765509461125) * r + 1971.5909503065514427) * r + 133.14166789178437745) * r + 3.387132872796366608)
-        / (((((((5226.495278852545925 * r + 28729.085735721942674) * r + 39307.89580009271061) * r + 21213.794301586595867) * r + 5394.1960214247511077) * r + 687.1870074920579083) * r + 42.313330701600911252) * r + 1); }
+        / (((((((5226.4952788528545610 * r + 28729.085735721942674) * r + 39307.89580009271061) * r + 21213.794301586595867) * r + 5394.1960214247511077) * r + 687.1870074920579083) * r + 42.313330701600911252) * r + 1); }
     let r = q < 0 ? p : 1 - p; r = sqrt(-log(r)); let x;
     if (r <= 5) { r -= 1.6;
       x = (((((((7.7454501427834140764e-4 * r + 0.0227238449892691845833) * r + 0.24178072517745061177) * r + 1.27045825245236838258) * r + 3.64784832476320460504) * r + 5.7694972214606914055) * r + 4.6303378461565452959) * r + 1.42343711074968357734)
@@ -1339,83 +1339,129 @@
     solveZ(r.t, Float64Array.from(r.y));
     return { ...r, z: Array.from(z) };
   }
-  /** daeTheta({M: [diagonal], f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J),
-      consistent?, newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps}) — M·y′ = f(t, y) with a diagonal M whose zeros are
-      algebraic rows (nodes without capacity: thermal networks, circuit nodes): a semi-explicit index-1 DAE. A row with M_i ≠ 0 takes
-      the θ-method M_i(y₁ − y₀)/h = θ f_i(t₁, y₁) + (1 − θ) f_i(t₀, y₀) (θ = ½ trapezoidal, A-stable, order 2; θ = 1 backward Euler,
-      L-stable, order 1: the two transient methods of SPICE, Nagel 1975 §4); an algebraic row holds at the new time, f_i(t₁, y₁) = 0
-      (so the trapezoidal rule does not ring on it: Brenan, Campbell & Petzold 1996 §3.1). Each step is solved by Newton with the
-      Jacobian of f (cfg.jac, or forward differences), LU with pivoting; a step whose Newton fails is halved (≤ 20 times, then the
-      error 'newton'). Fixed steps dt, landing exactly on breaks [{t, apply?(t, y)}] and on tEnd; consistent: true first solves the
-      algebraic rows at t0 with the differential ones held. Samples are interpolated linearly (second order, as the method).
-      → {t, y, steps, newton (iterations), stop, codes} */
+  /** daeTheta({M, f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J), linear?, beforeStep?,
+      limit?, consistent?, newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps}) — M·y′ = f(t, y), a semi-explicit
+      index-1 DAE whose algebraic rows are the zero rows of M (nodes without capacity: thermal networks, circuit nodes). M is a
+      diagonal (an array of numbers) or a full matrix (an array of rows: a floating capacitor puts C at (a, a), (c, c) and −C at (a, c)).
+      A row with M_i ≠ 0 takes the θ-method (M(y₁ − y₀))_i = h(θ f_i(t₁, y₁) + (1 − θ) f_i(t₀, y₀)) (θ = ½ trapezoidal, A-stable, order 2;
+      θ = 1 backward Euler, L-stable, order 1: the two transient methods of SPICE, Nagel 1975 §4); an algebraic row holds at the new
+      time, f_i(t₁, y₁) = 0 (so the trapezoidal rule does not ring on it: Brenan, Campbell & Petzold 1996 §3.1).
+      Each step is solved by Newton with the Jacobian of f (cfg.jac fills J row-major, or forward differences) and LU with pivoting;
+      cfg.limit(yOld, yNew) → true may limit a Newton update in place (SPICE's pnjlim) and forces one more iteration. A step whose
+      Newton fails is halved (≤ 20 times, then the error 'newton'). linear: true — f affine in y with a constant J (from jac or
+      differences at the start): M − hθJ is factored once per (h, θ) and each step is one solve and one f, no iteration.
+      beforeStep(t0, t1, y) → {theta?} runs before each step (and each halved retry): it may set the step's inputs (a closure) and
+      pick θ for that step only; f(t0, y) is then evaluated again. Fixed steps dt, landing exactly on breaks [{t, apply?(t, y)}] and on
+      tEnd; consistent: true first solves the algebraic rows at t0 with the others held (and again after each break). Samples are
+      interpolated linearly. → {t, y, steps, newton (iterations), nfev, stop, codes} */
   function daeTheta(cfg) {
+    const S2 = daeThetaInit(cfg);
+    return S2.ok ? S2.advance(cfg.tEnd) : S2.result;
+  }
+  /** daeThetaInit(cfg) → {ok, advance(T) → the result at T (call again to go on: the factorisation, F₀ and the work arrays are kept),
+      t, y, result}: the resumable form for a stepper (cfg.tEnd only bounds the breaks; advance takes the horizon) */
+  function daeThetaInit(cfg) {
     const C = codes(['nan', 'newton', 'budget', 'bad-config']);
     const y0 = cfg && cfg.y0 ? Float64Array.from(cfg.y0) : null, n = y0 ? y0.length : 0, t0 = cfg && fin(cfg.t0) ? cfg.t0 : 0, tEnd = cfg && cfg.tEnd;
     const st = { steps: 0, newton: 0, nfev: 0 };
-    const done = (t, y, stop) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, newton: st.newton, nfev: st.nfev, stop, codes: C.list });
-    const Md = cfg && (Array.isArray(cfg.M) || ArrayBuffer.isView(cfg.M)) ? Float64Array.from(cfg.M) : null;
-    if (!cfg || typeof cfg.f !== 'function' || !n || !fin(tEnd) || !(tEnd >= t0) || !(cfg.dt > 0) || (Md && (Md.length !== n || !Md.every(fin)))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
-    const M = Md || new Float64Array(n).fill(1);
-    const th = fin(cfg.theta) && cfg.theta >= 0.5 && cfg.theta <= 1 ? cfg.theta : cfg.method === 'backward-euler' ? 1 : 0.5;
+    const done0 = (t, y, stop) => ({ t, y: y ? Array.from(y) : [], steps: st.steps, newton: st.newton, nfev: st.nfev, stop, codes: C.list });
+    const fail0 = r => ({ ok: false, result: r, advance: () => r, t: r.t, y: r.y });
+    const done = (t, y, stop) => fail0(done0(t, y, stop));
+    if (!cfg || typeof cfg.f !== 'function' || !n || !(cfg.dt > 0) || (cfg.tEnd != null && !(cfg.tEnd >= t0))) { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    // M: a diagonal or a full n × n matrix (row-major internally); a row of zeros is algebraic
+    const Mf = new Float64Array(n * n), alg = new Uint8Array(n);
+    if (cfg.M == null) for (let i = 0; i < n; i++) Mf[i * n + i] = 1;
+    else if ((Array.isArray(cfg.M) || ArrayBuffer.isView(cfg.M)) && cfg.M.length === n && Array.from(cfg.M).every(v => typeof v === 'number' && fin(v))) for (let i = 0; i < n; i++) Mf[i * n + i] = cfg.M[i];
+    else if (Array.isArray(cfg.M) && cfg.M.length === n && cfg.M.every(r => (Array.isArray(r) || ArrayBuffer.isView(r)) && r.length === n && Array.from(r).every(fin))) { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) Mf[i * n + j] = cfg.M[i][j]; }
+    else { C.code('bad-config'); return done(t0, y0, 'bad-config'); }
+    let nAlg = 0; for (let i = 0; i < n; i++) { let z = true; for (let j = 0; j < n; j++) if (Mf[i * n + j] !== 0) { z = false; break; } alg[i] = z ? 1 : 0; nAlg += alg[i]; }
+    const th0 = fin(cfg.theta) && cfg.theta >= 0.5 && cfg.theta <= 1 ? cfg.theta : cfg.method === 'backward-euler' ? 1 : 0.5;
     const tolN = cfg.newtonTol > 0 ? cfg.newtonTol : 1e-10, maxN = fin(cfg.maxNewton) ? max(2, min(cfg.maxNewton, 100)) : 25;
-    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS;
-    const J = new Float64Array(n * n), G = new Float64Array(n * n), piv = new Int32Array(n), F0 = new Float64Array(n), F1 = new Float64Array(n), R = new Float64Array(n), fx = new Float64Array(n), dy = new Float64Array(n);
+    const maxSteps = fin(cfg.maxSteps) ? min(cfg.maxSteps, MAX_STEPS) : MAX_STEPS, linear = !!cfg.linear, limit = typeof cfg.limit === 'function' ? cfg.limit : null, before = typeof cfg.beforeStep === 'function' ? cfg.beforeStep : null;
+    const J = new Float64Array(n * n), G = new Float64Array(n * n), piv = new Int32Array(n), F0 = new Float64Array(n), F1 = new Float64Array(n), R = new Float64Array(n), fx = new Float64Array(n), dy = new Float64Array(n), yOld = limit ? new Float64Array(n) : null;
     const f = (t, y, out) => { cfg.f(t, y, out); st.nfev++; };
     const jac = (t, y, Fy) => {
       if (typeof cfg.jac === 'function') { J.fill(0); cfg.jac(t, y, J); return; }
-      for (let j = 0; j < n; j++) { const yj = y[j], del = 1.4901161193847656e-8 * max(abs(yj), 1); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - Fy[i]) / del; }
+      // forward differences; for an affine f any step is exact, and a large one keeps the rounding out
+      for (let j = 0; j < n; j++) { const yj = y[j], del = (linear ? 9.765625e-4 : 1.4901161193847656e-8) * max(abs(yj), 1); y[j] = yj + del; f(t, y, fx); y[j] = yj; for (let i = 0; i < n; i++) J[i * n + j] = (fx[i] - Fy[i]) / del; }
     };
-    // Newton on R(y) = 0 for the rows given by resid (y changed in place) → true when converged
+    // the step's residual and matrix: rows of M(y₁ − y₀) − h(θF₁ + (1 − θ)F₀), algebraic rows F₁
+    let hS = 0, thS = 0.5; const yb = new Float64Array(n);
+    const residStep = (F, yy) => { for (let i = 0; i < n; i++) { if (alg[i]) { R[i] = F[i]; continue; } let m = 0; for (let j = 0; j < n; j++) m += Mf[i * n + j] * (yy[j] - yb[j]); R[i] = m - hS * (thS * F[i] + (1 - thS) * F0[i]); } };
+    const matStep = () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = alg[i] ? J[i * n + j] : Mf[i * n + j] - hS * thS * J[i * n + j]; };
+    const residCons = F => { for (let i = 0; i < n; i++) R[i] = alg[i] ? F[i] : 0; };
+    const matCons = () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = alg[i] ? J[i * n + j] : (i === j ? 1 : 0); };
+    // Newton on R(y) = 0 (y changed in place) → true when converged; F1 = f(t, y) at the end
     const newton = (t, y, resid, gm) => {
       for (let it = 0; it < maxN; it++) {
-        f(t, y, F1); if (!F1.every(fin)) return false; resid(F1);
+        f(t, y, F1); if (!F1.every(fin)) return false; resid(F1, y);
         jac(t, y, F1); gm(); if (!luFactor(G, n, piv)) return false;
         for (let i = 0; i < n; i++) dy[i] = -R[i]; luSolve(G, n, piv, dy); st.newton++;
+        if (yOld) yOld.set(y);
         let e = 0; for (let i = 0; i < n; i++) { y[i] += dy[i]; e = max(e, abs(dy[i]) / (1 + abs(y[i]))); }
+        const limited = limit ? !!limit(yOld, y) : false;
         if (!y.every(fin)) return false;
-        if (e <= tolN) { f(t, y, F1); return F1.every(fin); }
+        if (e <= tolN && !limited) { f(t, y, F1); return F1.every(fin); }
       }
       return false;
     };
-    let t = t0; const y = Float64Array.from(y0), yn = new Float64Array(n), yprev = new Float64Array(n);
-    const brk = (Array.isArray(cfg.breaks) ? cfg.breaks : []).filter(b => b && fin(b.t) && b.t >= t0 && b.t <= tEnd).slice().sort((a, b) => a.t - b.t); let bi = 0;
-    const applyBreaks = () => { while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b = brk[bi++]; if (typeof b.apply === 'function') b.apply(t, y); } };
-    const consistent = () => {   // the algebraic rows at t with the differential ones held
-      if (!M.some(m => m === 0)) return true;
-      return newton(t, y, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : 0; }, () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? 1 : 0); });
-    };
-    applyBreaks();
+    // linear mode: J once; M − hθJ factored once per (h, θ)
+    let linKey = '', linOK = false; const GL = linear ? new Float64Array(n * n) : null, pivL = linear ? new Int32Array(n) : null;
+    let t = t0; const y = Float64Array.from(y0), yn = new Float64Array(n), yprev = new Float64Array(n), tmp = new Float64Array(n);
+    const brk = Array.isArray(cfg.breaks) && cfg.breaks.length ? cfg.breaks.filter(b => b && fin(b.t) && b.t >= t0 && !(b.t > tEnd)).slice().sort((a2, b2) => a2.t - b2.t) : [];
+    let bi = 0;
+    const applyBreaks = () => { while (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) { const b2 = brk[bi++]; if (typeof b2.apply === 'function') b2.apply(t, y); } };
+    const consistent = () => (nAlg ? newton(t, y, residCons, matCons) : true);
+    if (brk.length) applyBreaks();
     if (cfg.consistent && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
     if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
     f(t, y, F0);
+    if (linear) { jac(t, y, F0); if (!J.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); } }
     const samples = cfg.samples || []; let si = 0;
     while (si < samples.length && samples[si] <= t) { cfg.onSample && cfg.onSample(samples[si], y); si++; }
-    const tmp = new Float64Array(n);
+    let dead = null;
+    const advance = T => { if (dead) return dead; const r = run(T); if (r.stop !== 'end') dead = r; return r; };
+    const run = tEnd => {
+    const done = (t2, y2, stop) => done0(t2, y2, stop);
+    if (!fin(tEnd)) { C.code('bad-config'); return done(t, y, 'bad-config'); }
     for (;;) {
       if (t >= tEnd - 1e-14 * max(1, abs(tEnd))) return done(t, y, 'end');
       if (st.steps >= maxSteps) { C.code('budget', t); return done(t, y, 'budget'); }
       const target = bi < brk.length ? min(tEnd, brk[bi].t) : tEnd;
-      let h = min(cfg.dt, target - t), ok2 = false, halv = 0;
+      let h = min(cfg.dt, target - t), ok2 = false;
       if (target - t - h <= 1e-12 * max(1, abs(target))) h = target - t;
-      for (; halv <= 20; halv++) {
-        yn.set(y); const t1 = h === target - t ? target : t + h, hh = h;
-        ok2 = newton(t1, yn, F => { for (let i = 0; i < n; i++) R[i] = M[i] === 0 ? F[i] : M[i] * (yn[i] - y[i]) - hh * (th * F[i] + (1 - th) * F0[i]); },
-          () => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) G[i * n + j] = M[i] === 0 ? J[i * n + j] : (i === j ? M[i] : 0) - hh * th * J[i * n + j]; });
+      for (let halv = 0; halv <= 20; halv++) {
+        const t1 = h === target - t ? target : t + h;
+        hS = h; thS = th0;
+        if (before) { const o2 = before(t, t1, y); if (o2 && fin(o2.theta) && o2.theta >= 0.5 && o2.theta <= 1) thS = o2.theta; f(t, y, F0); }
+        yb.set(y); yn.set(y);
+        if (linear) {   // one solve: G·Δ = −R(y₀) with G = M − hθJ (algebraic rows J); F₁ = F(y₀ at t₁) + JΔ (exact for affine f)
+          const key = hS + '|' + thS;
+          if (key !== linKey) { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) GL[i * n + j] = alg[i] ? J[i * n + j] : Mf[i * n + j] - hS * thS * J[i * n + j]; linOK = luFactor(GL, n, pivL); linKey = key; }
+          if (linOK) {
+            f(t1, yn, F1);
+            if (F1.every(fin)) { residStep(F1, yn); for (let i = 0; i < n; i++) dy[i] = -R[i]; luSolve(GL, n, pivL, dy);
+              for (let i = 0; i < n; i++) yn[i] += dy[i]; for (let i = 0; i < n; i++) { let v = F1[i]; for (let j = 0; j < n; j++) v += J[i * n + j] * dy[j]; F1[i] = v; }
+              ok2 = yn.every(fin) && F1.every(fin); st.newton++; }
+          }
+        } else ok2 = newton(t1, yn, residStep, matStep);
         if (ok2) { yprev.set(y); const ta = t; t = t1; y.set(yn); F0.set(F1); st.steps++;
           while (si < samples.length && samples[si] <= t) { const s2 = (samples[si] - ta) / (t - ta); for (let i = 0; i < n; i++) tmp[i] = yprev[i] + s2 * (y[i] - yprev[i]); cfg.onSample && cfg.onSample(samples[si], tmp); si++; }
           if (cfg.onStep) cfg.onStep(t, y);
           break; }
+        if (linear && linOK) break;   // an affine step cannot be helped by a smaller h (NaN from f)
         h /= 2;
       }
-      if (!ok2) { C.code('newton', t); return done(t, y, 'newton'); }
+      if (!ok2) { C.code(linear ? 'nan' : 'newton', t); return done(t, y, linear ? 'nan' : 'newton'); }
       if (bi < brk.length && brk[bi].t <= t + 1e-14 * max(1, abs(t))) {
         applyBreaks();
-        if (cfg.consistent !== false && M.some(m => m === 0) && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
+        if (cfg.consistent !== false && nAlg && !consistent()) { C.code('newton', t); return done(t, y, 'newton'); }
         if (!y.every(fin)) { C.code('nan', t); return done(t, y, 'nan'); }
         f(t, y, F0);
       }
     }
+    };
+    return { ok: true, advance, get t() { return t; }, get y() { return Array.from(y); }, result: null };
   }
   /** ssa({x0, nu: [[Δ per species] per reaction], propensity(x, a) (fills a), tEnd, r (a stream), maxEvents, onEvent(t, x, j)})
       — Gillespie's direct method (Gillespie 1977, J. Phys. Chem. 81:25): exact trajectories of the chemical master equation
@@ -1845,7 +1891,7 @@
     // sweeps and sensitivity
     linspace, oat, grid, morris, sobol, lhs,
     // delay equations, stochastic kinetics, SDEs, schedules
-    dde, dae, daeTheta, ssa, tauLeap, sde, nhpp, piecewise,
+    dde, dae, daeTheta, daeThetaInit, ssa, tauLeap, sde, nhpp, piecewise,
     // distributions and input modelling
     cdfOf, quantileOf, truncated, mixture, fit, ksTest, chiSquare, andersonDarling, digamma, trigamma,
     // variance reduction, precision, calibration

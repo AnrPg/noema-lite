@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "勝者",
   "engine.author.f.lib.wpmHi": "最大語数/分",
   "engine.author.f.lib.wpmLo": "最小語数/分",
-  "engine.author.f.benchPart": "測定するパーツ"
+  "engine.author.f.benchPart": "測定するパーツ",
+  "engine.author.f.lib.eq": "均衡（番号）"
 }

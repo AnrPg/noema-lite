@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "Kazanan",
   "engine.author.f.lib.wpmHi": "Dakikada en çok sözcük",
   "engine.author.f.lib.wpmLo": "Dakikada en az sözcük",
-  "engine.author.f.benchPart": "Ölçülen parça"
+  "engine.author.f.benchPart": "Ölçülen parça",
+  "engine.author.f.lib.eq": "Denge (sıra)"
 }

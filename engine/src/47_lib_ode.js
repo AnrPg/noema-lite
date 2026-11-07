@@ -12,7 +12,7 @@
      • fixed steps: Euler, Heun, midpoint, classical RK4; Störmer–Verlet and Yoshida 1990 4th order for separable Hamiltonian pairs;
      • delay equations by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003; Shampine & Thompson 2001), h ≤ τ;
      • events: sign changes located on the dense output by the Illinois method; timed events (doses) hit exactly;
-     • equilibria: damped Newton from a grid; eigenvalues by balancing + Hessenberg + shifted QR (Numerical Recipes 2nd ed. §11.5–11.6);
+     • equilibria: damped Newton from a grid (the kernel's LU, SK.lu); eigenvalues by balancing + Hessenberg + shifted QR (SK.eig; Numerical Recipes §11.5–11.6);
      • Lyapunov exponents: Benettin, Galgani, Giorgilli & Strelcyn 1980 (variational equation, Gram–Schmidt every Δt).
    Pure, deterministic (the transcendental functions are NoemaExpr's fdlibm ports, never Math.*), bounded (≤ 200 000 steps in all).
    No learner text: numbers, codes and the model's own names only. Tests: node tests/lib_ode.js. */

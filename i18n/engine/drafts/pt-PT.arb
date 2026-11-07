@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "Vencedor",
   "engine.author.f.lib.wpmHi": "Palavras por minuto máximas",
   "engine.author.f.lib.wpmLo": "Palavras por minuto mínimas",
-  "engine.author.f.benchPart": "Parte medida"
+  "engine.author.f.benchPart": "Parte medida",
+  "engine.author.f.lib.eq": "Equilíbrio (índice)"
 }

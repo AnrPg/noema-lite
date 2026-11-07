@@ -96,8 +96,11 @@ constants to 10⁻⁹, thermostat duty to 0.002; 20 000 steps of a 10-node netwo
 `rad` link (view factors are the author's ε·A), thermostats switch at step boundaries (choose dt ≪ the cycle).
 
 **Uses the kernel / parts (2026-11-07).** The transient's θ-method (trapezoidal, backward Euler on the first step, on source edges
-and on thermostat switches; the massless nodes are algebraic rows) is the format's own (`model.transient.method: 'trap' | 'be'`) and
-stays: the kernel has no θ-method for a mass-matrix DAE. Its step is one function (`stepCore`) that `transient()` and the new
+and on thermostat switches; the massless nodes are algebraic rows) is the format's own (`model.transient.method: 'trap' | 'be'`). A
+network with radiation (nonlinear) takes each step from the kernel's θ-method DAE solver (`NoemaSimKit.daeTheta`: C·x′ = −G·x + b + P̄
++ rad(x), Newton with LU and the analytic Jacobian, the massless nodes algebraic rows, θ chosen per step as above, P̄ each source's
+exact mean over the step); a linear network keeps its one solve with a matrix factored once per step size (the kernel's Newton
+refactors at every step: 2.5× over the speed test). FALLBACK without the kernel: the own Newton. Its step is one function (`stepCore`) that `transient()` and the new
 **stepper** share: `thermal@1` is a part of a co-simulation (`engine.stepper = true`; the instance's `stepInit` / `stepTo` /
 `snapshot` / `restore`, `docs/INTERACTIVE_LIBRARY.md` §1.6). Each macro step is cut in equal steps ≤ `transient.dt`; the bindings are
 read at every step; a series output gives its value now, `stat` runs over every internal step, `at` once passed, the steady and τ
@@ -246,7 +249,8 @@ fading, no interference, no antenna patterns; BLE/Wi-Fi airtime and Wi-Fi/LoRa e
 
 **Uses the kernel (2026-11-07).** The shadowing draw and the sweep's draws come from kernel streams (`rf:shadow`, `rf:sweep`;
 normals by inversion), the maximum range and the required Eb/N0 are Brent's roots (`SK.brent`, on log d and log Eb/N0) instead of
-bisection. FALLBACK without the kernel (marked): mulberry32, bisection. No stepper (a link budget has no time).
+bisection; erfc (the BER curves' Q) is the kernel's `SK.erfc` (Q(½, x²), accurate in the far tail) instead of NR erfcc (1.2e-7).
+FALLBACK without the kernel (marked): mulberry32, bisection, erfcc. No stepper (a link budget has no time).
 
 ## 5. `twin@1` — the digital twin of an IoT node (`engine/src/42_engine_twin.js`, `NoemaTwin`)
 
@@ -374,7 +378,7 @@ collisions).
 generator (`simGen`): `run()` drives it to the end; the new **stepper** (`engine.stepper = true`) pauses it at each macro step's end
 (a sleep is split there) and gives the scalars so far and each series' value now. Its state is a running program, so `snapshot()` is
 −1 (a twin part can be chained and co-simulated, not iterated); the device is the one at `stepInit`. FALLBACK without the kernel
-(marked): mulberry32 + Box–Muller.
+(marked): mulberry32 + Box–Muller. erfc (LoRa's BER) is the kernel's `SK.erfc` (FALLBACK: NR erfcc).
 
 ## 6. Reference activities (`tools/activities_examples/`)
 

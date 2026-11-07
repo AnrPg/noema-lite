@@ -239,6 +239,33 @@ ok(Object.isFrozen(S) && typeof S.source === 'function' && S.version === 1, 'Noe
     const bad = S.daeTheta({ M: [1], f: (t, y, r) => { r[0] = NaN; }, y0: [1], tEnd: 1, dt: 0.1 });
     ok(hitStep && sw.y[0] > 0 && bad.stop === 'newton' && S.daeTheta({ M: [1, 0], f, y0: [0], tEnd: 1, dt: 0.1 }).stop === 'bad-config', 'daeTheta: steps land on a switch (break) exactly; a step Newton cannot solve gives the code newton; a wrong-sized y0 is bad-config');
   }
+  // ---- daeTheta for thermal@1 and the circuit transient: linear mode, beforeStep, a full M, Newton limiting, speed ----
+  { const Rr = 1e3, Cc = 1e-6, R1 = 1e3, R2 = 2e3, b = (1 / Rr + 1 / (R1 + R2)) / Cc, vinf = (1 / (Rr * Cc)) / b;
+    const f = (t, y, r) => { r[0] = (1 - y[0]) / Rr - (y[0] - y[1]) / R1; r[1] = (y[0] - y[1]) / R1 - y[1] / R2; };
+    const h = 1e-4, N = 50, aT = (1 - b * h / 2) / (1 + b * h / 2), aB = 1 / (1 + b * h);
+    const lin = S.daeTheta({ M: [Cc, 0], f, y0: [0, 0], tEnd: N * h, dt: h, linear: true }), nl = S.daeTheta({ M: [Cc, 0], f, y0: [0, 0], tEnd: N * h, dt: h });
+    ok(rel(lin.y[0], vinf * (1 - aT ** N), 1e-12) && rel(lin.y[0], nl.y[0], 1e-12) && lin.nfev === N + 1 + 2 && lin.newton === N, `daeTheta linear: one factorisation, one solve and one f per step (${lin.nfev} f calls for ${N} steps against ${nl.nfev} with Newton), the same v (${lin.y[0].toFixed(12)})`);
+    const thetas = []; const bs = S.daeTheta({ M: [Cc, 0], f, y0: [0, 0], tEnd: N * h, dt: h, linear: true, beforeStep: (ta, tb) => { const th = ta === 0 ? 1 : 0.5; thetas.push(th); return { theta: th }; } });
+    ok(rel(bs.y[0], vinf * (1 - aB * aT ** (N - 1)), 1e-12) && thetas.length === N && thetas[0] === 1 && thetas[1] === 0.5, `beforeStep picks θ per step: backward Euler first, then trapezoidal — v = v∞(1 − R_BE·R_TR⁴⁹) exactly (${bs.y[0].toFixed(12)})`);
+    let src = 0; const ins = S.daeTheta({ M: [Cc, 0], f: (t, y, r) => { r[0] = (src - y[0]) / Rr - (y[0] - y[1]) / R1; r[1] = (y[0] - y[1]) / R1 - y[1] / R2; }, y0: [0, 0], tEnd: 2 * N * h, dt: h, linear: true, method: 'backward-euler',
+      beforeStep: ta => { src = ta >= N * h - 1e-15 ? 1 : 0; } });
+    ok(rel(ins.y[0], vinf * (1 - aB ** N), 1e-12), `beforeStep sets the step's inputs: a source switched on at step ${N} gives v = v∞(1 − R_BE^${N}) after ${N} more steps`);
+    // a floating capacitor (full M: C at (a, a), (c, c), −C at (a, c)): source 1 V –R1– a –C– c –R2– ground; u = va − vc = 1 − e^(−t/((R1 + R2)C))
+    const fl = m => S.daeTheta({ M: [[Cc, -Cc], [-Cc, Cc]], f: (t, y, r) => { r[0] = (1 - y[0]) / R1; r[1] = -y[1] / R2; }, y0: [R2 / (R1 + R2), R2 / (R1 + R2)], tEnd: 3e-3, dt: 1e-5, method: m });
+    const uEx = 1 - Math.exp(-3e-3 / ((R1 + R2) * Cc)), fT = fl('trapezoidal'), fB = fl('backward-euler');
+    ok(near(fT.y[0] - fT.y[1], uEx, 1e-6) && near(fB.y[0] - fB.y[1], uEx, 2e-3) && near((1 - fT.y[0]) / R1, fT.y[1] / R2, 1e-12), `a full M (a floating capacitor): u(3 ms) = ${(fT.y[0] - fT.y[1]).toFixed(8)} trapezoidal, ${(fB.y[0] - fB.y[1]).toFixed(6)} backward Euler (exact ${uEx.toFixed(8)}); the hidden constraint (1 − va)/R1 = vc/R2 holds`);
+    // Newton limiting (SPICE's pnjlim role): exp(y) = 1000 from y = 0 overflows plain Newton; a step limit of 1 per iteration converges
+    const e1 = S.daeTheta({ M: [0], f: (t, y, r) => { r[0] = Math.exp(y[0]) - 1000; }, y0: [0], tEnd: 0.1, dt: 0.1, consistent: true, maxNewton: 50, limit: (yo, yv) => { const d = yv[0] - yo[0]; if (Math.abs(d) > 1) { yv[0] = yo[0] + Math.sign(d); return true; } return false; } });
+    const e0 = S.daeTheta({ M: [0], f: (t, y, r) => { r[0] = Math.exp(y[0]) - 1000; }, y0: [0], tEnd: 0.1, dt: 0.1, consistent: true, maxNewton: 50 });
+    ok(near(e1.y[0], Math.log(1000), 1e-12) && e1.stop === 'end' && e0.stop === 'newton', `limit(yOld, yNew): the limited Newton finds ln 1000 = ${e1.y[0].toFixed(12)}; without it the first update overflows (newton)`);
+    // speed: 10 thermal nodes (a chain of capacities with one node of none), 20 000 steps, linear
+    const nN = 10, Mth = Array.from({ length: nN }, (_, i) => (i === 5 ? 0 : 1 + i)), fth = (t, y, r) => { for (let i = 0; i < nN; i++) r[i] = ((i ? y[i - 1] : 25) - y[i]) / 0.5 + ((i < nN - 1 ? y[i + 1] : y[i]) - y[i]) / 0.7 + (i === 0 ? 10 : 0); };
+    S.daeTheta({ M: Mth, f: fth, y0: new Array(nN).fill(25), tEnd: 1, dt: 1e-2, linear: true });
+    let t1 = Date.now(); const big = S.daeTheta({ M: Mth, f: fth, y0: new Array(nN).fill(25), tEnd: 200, dt: 0.01, linear: true, consistent: true }); const ms = Date.now() - t1;
+    t1 = Date.now(); const rs = S.daeThetaInit({ M: Mth, f: fth, y0: new Array(nN).fill(25), dt: 0.01, linear: true, consistent: true }); let last = null; for (let k = 1; k <= 20000; k++) last = rs.advance(k * 0.01); const ms1 = Date.now() - t1;
+    const dmax = Math.max(...last.y.map((v, i) => Math.abs(v - big.y[i])));
+    ok(big.steps === 20000 && ms < 200 && ms1 < 200 && big.y.every(Number.isFinite) && dmax < 1e-9 && last.steps === 20000, `speed: 10 nodes × 20 000 linear steps in ${ms} ms as one call, ${ms1} ms as 20 000 advance() calls of daeThetaInit (a stepper's macro steps; the same end state to ${dmax.toExponential(1)})`);
+  }
   // ---- upper tails without cancellation, erfc and its inverse ----
   { ok(rel(S.erfc(5), 1.5374597944280349e-12, 1e-13) && rel(S.erfc(10), 2.088487583762545e-45, 1e-13) && rel(S.erfc(20), 5.395865611607901e-176, 1e-12) && S.erfc(-3) === 2 - S.erfc(3),
       `erfc in the tail (Abramowitz & Stegun / DLMF 7.2): erfc 5 = ${S.erfc(5).toExponential(14)}, erfc 10 = ${S.erfc(10).toExponential(14)}, erfc 20 = ${S.erfc(20).toExponential(13)}`);

@@ -10,7 +10,7 @@ It is a plain module, `window.NoemaSimKit` (frozen). It loads after `46_lib_core
 fdlibm ports for `exp`, `log`, `sin`, `cos` and `pow`, so the numbers are the same on every device. It has no DOM, no network and no
 clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker:
 `NoemaExpr.source() + NoemaLibCore.source() + NoemaSimKit.source() + <engine module>` (`source()` returns `'(…)(self);'`, like the
-core's). Tests: `node tests/lib_simkit.js` (137 assertions against published values and exact solutions).
+core's). Tests: `node tests/lib_simkit.js` (145 assertions against published values and exact solutions).
 
 | § | what | functions |
 |---|---|---|
@@ -161,23 +161,38 @@ is Brent 1973 ch. 4.
   form (Hairer & Wanner 1996 §VI.1). z is solved from g = 0 by Newton at every evaluation (≤ 30 iterations, code `dae-newton`), and
   y is integrated by `integrate` (`auto` switches to Rosenbrock when the reduced system is stiff). The result adds `z`.
 
-- `daeTheta({M, f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J), consistent?,
-  newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps})` solves M·y′ = f(t, y) with a **diagonal M whose zeros are
-  algebraic rows**: nodes without capacity in a thermal network or a circuit. The result is `{t, y, steps, newton, nfev, stop, codes}`.
-  - Each row with M_i ≠ 0 takes the θ-method M_i(y₁ − y₀)/h = θf_i(t₁, y₁) + (1 − θ)f_i(t₀, y₀). θ = ½ is `trapezoidal`
-    (A-stable, order 2); θ = 1 is `backward-euler` (L-stable, order 1). These are SPICE's two transient methods (Nagel 1975), and the
-    names match `transient.method`.
-  - An algebraic row holds at the new time, f_i(t₁, y₁) = 0, so the trapezoidal rule cannot ring on it (Brenan, Campbell & Petzold
-    1996 §3.1).
-  - Each step is solved by Newton with LU and partial pivoting. The Jacobian is `jac`, or forward differences when it is not given.
-  - A step whose Newton iteration fails is halved, up to 20 times; after that the run stops with the error `newton`.
-  - Steps are fixed at `dt` and land exactly on `breaks` (switch times) and on tEnd. After a break the algebraic rows are made
-    consistent again.
-  - `consistent: true` first solves the algebraic rows at t0 with the differential rows held.
-  - Samples are interpolated linearly.
-  - Tests: on an RC circuit with a divider node, both methods reproduce their exact amplification factor (1 − hλ/2)/(1 + hλ/2) and
-    1/(1 + hλ) to 1e-12, and the measured orders are 2 and 1. Robertson written as an index-1 DAE gives HNW II's values at t = 40 to
-    1e-9 (trapezoidal, dt 1e-3).
+- `daeTheta({M, f(t, y, r), y0, t0, tEnd, dt, method: 'trapezoidal' | 'backward-euler', theta?, jac?(t, y, J), linear?,
+  beforeStep?(t0, t1, y), limit?(yOld, yNew), consistent?, newtonTol, maxNewton, breaks, samples, onSample, onStep, maxSteps})`
+  solves M·y′ = f(t, y), a semi-explicit index-1 DAE, and returns `{t, y, steps, newton, nfev, stop, codes}`.
+  - **M:** a diagonal (an array of numbers) or a full matrix (an array of rows). A floating capacitor puts C at (a, a) and (c, c) and
+    −C at (a, c). Zero rows of M are **algebraic**: nodes without capacity in a thermal network or a circuit.
+  - **The method:** a row with M ≠ 0 takes the θ-method (M(y₁ − y₀))_i = h(θf_i(t₁, y₁) + (1 − θ)f_i(t₀, y₀)). θ = ½ is
+    `trapezoidal` (A-stable, order 2); θ = 1 is `backward-euler` (L-stable, order 1). These are SPICE's two transient methods
+    (Nagel 1975), and the names match `transient.method`.
+  - **Algebraic rows** hold at the new time, f_i(t₁, y₁) = 0, so the trapezoidal rule cannot ring on them (Brenan, Campbell &
+    Petzold 1996 §3.1). With a full, singular M whose rows are not zero (the floating capacitor), the hidden constraint is
+    integrated, not imposed. SPICE practice is to take the first step and each step after a switch with backward Euler, which
+    `beforeStep` can do.
+  - **Newton:** each step is solved by Newton with LU and partial pivoting. The Jacobian is `jac` (filled row-major), or forward
+    differences when it is not given. `limit(yOld, yNew) → true` may limit an update in place, the role of SPICE's pnjlim, and
+    forces one more iteration. A step whose Newton fails is halved, up to 20 times; after that the run stops with the error
+    `newton`.
+  - **`linear: true`:** f is affine in y with a constant J, taken from `jac` or from differences at the start. M − hθJ is factored
+    once per (h, θ), and each step is one solve and one f, with no iteration. On 10 thermal nodes, 20 000 steps take about 40 ms.
+  - **`beforeStep(t0, t1, y) → {theta?}`** runs before each step, and before each halved retry. It may set the step's inputs (a
+    source's mean power over [t0, t1]) and pick θ for that step only. f(t0, y) is then evaluated again.
+  - **Breaks and consistency:** steps are fixed at `dt` and land exactly on `breaks` and on tEnd. `consistent: true` first solves
+    the algebraic rows with the other rows held, and this is done again after each break.
+  - **Samples** are interpolated linearly.
+  - **`daeThetaInit(cfg)` → `{ok, advance(T), t, y}`** is the resumable form for a stepper. It keeps the factorisation, F₀ and the
+    work arrays between calls; 20 000 `advance` calls of one step each take about 60 ms.
+  - **Tests:**
+    - An RC circuit with a divider node reproduces each method's exact amplification factor, (1 − hλ/2)/(1 + hλ/2) and 1/(1 + hλ),
+      to 1e-12. The measured orders are 2 and 1.
+    - Robertson as an index-1 DAE gives HNW II's values at t = 40 to 1e-9.
+    - The floating capacitor matches its exact solution.
+    - A limited Newton solves exp(y) = 1000 from y = 0, where plain Newton overflows.
+    - A backward-Euler first step followed by trapezoidal steps gives R_BE·R_TR⁴⁹ exactly.
 
 ### 4.2 Stochastic dynamics
 
@@ -339,9 +354,15 @@ Every engine now takes these facilities from the kernel (each chapter's "Uses th
 `C.normal(r)` and `C.workerSource(fn, global, {kit: true})`. `ode@1`'s flows run on `integrate` (breaks, observed events, `onSegment`,
 per-component atol, `maxInstant`; its snapshot bit for bit); `med@1` (Φ, Φ⁻¹, Brent, the PK stepper's RK4), `clinic@1` (stream, Brent),
 `genetics@1`, `prob@1`, `graph@1`, `geom@1`, `seq@1` (+ Brent), `timeline@1` (streams); the plugins `pid@1` (RK4 with breaks, stream),
-`rf@1` (streams, Brent), `twin@1` (streams), `circuit-mna@1` (the meters' streams). Kept on purpose: the θ-methods of `thermal@1` and
-the circuit transient (DAEs with format-named methods), clinic@1's projected Euler, the special functions of genetics@1 and prob@1
-(more accurate tails), the circuit's counter-based noise. Load order: `46_lib_simkit.js` right after `35_simexpr.js` in index.html,
+`rf@1` (streams, Brent), `twin@1` (streams), `circuit-mna@1` (the meters' streams). In the second round: `ode@1`'s equilibria, eigenvalues and sweep grid
+(`lu`, `eig`, `linspace`; bit for bit), `clinic@1`'s physiology (`integrate` euler, projections at breaks, the grid index as the
+kernel's clock: bit for bit), `genetics@1`'s χ² tail and Φ⁻¹ (`chi2Sf`, `normInv`), `prob@1`'s Φ⁻¹ (`normInv`), `rf@1`'s and `twin@1`'s
+erfc (`erfc`, replacing NR erfcc's 1e-7), the circuit's noise sources (`counterStream`, Philox: sample i in O(1)), and `thermal@1`'s
+radiating networks (`daeTheta`, one call per step: Newton with LU, massless nodes algebraic). Kept on purpose: `thermal@1`'s linear
+networks (one solve with a matrix factored once per step size; `daeTheta` iterates Newton and refactors each step — 2.5× over the
+speed test), the circuit transient (a non-diagonal M from floating capacitors, SPICE's junction-voltage limiting between Newton
+iterations, gmin stepping and the transmission lines' history: outside `daeTheta`'s diagonal M), and `prob@1`'s distribution
+functions (more accurate tails and log tails than the kernel's). Load order: `46_lib_simkit.js` right after `35_simexpr.js` in index.html,
 first among the P6/library scripts of the bundle (tools/build.py `KERNEL`) and the harness.
 
 ## 9. Co-simulation: `cosim(cfg)`
@@ -371,9 +392,19 @@ master algorithms see Gomes et al. 2018, *ACM Comput. Surv.* 51:3, the FMI 2.0 c
 ## 10. Special functions and upper tails
 
 These hold their accuracy in the tails, so `prob@1` and `genetics@1` can drop their own versions.
-- `gammaQ(a, x)` is Γ(a, x)/Γ(a). For x ≥ a + 1 it uses the continued fraction (modified Lentz); below that it is 1 − the series of P,
-  where P ≤ about ½, so nothing cancels. This is the split of DiDonato & Morris 1986 (*ACM TOMS* 12:4), with up to 20 000 terms
-  for large a. `gammaP(a, x)` is the lower function.
+- `gammaQ(a, x)` is Γ(a, x)/Γ(a), and `gammaP(a, x)` is the lower function. Two regions:
+  - **Large a near x ≈ a** (a ≥ 20 and |x/a − 1| ≤ 0.4, the region of DiDonato & Morris 1986, *ACM TOMS* 12:4): Temme's uniform
+    asymptotic expansion (Temme 1979; DLMF 8.12.3–8.12.4; Gil, Segura & Temme 2012), with η = sign(λ − 1)√(2(λ − 1 − ln λ)) and
+    λ = x/a:
+    Q = ½erfc(η√(a/2)) + R and P = ½erfc(−η√(a/2)) − R, where R = e^(−aη²/2)/√(2πa)·Σ_{k ≤ 13} c_k(η)a^(−k).
+    The c_k are Taylor series in η, generated in exact rational arithmetic: c₀ comes from the series reversion of η(λ), and
+    c_k = c′_{k−1}/η + (−1)^k g_k/(λ − 1), with g_k the Stirling coefficients. Their leading coefficients equal DiDonato &
+    Morris's table (−1/3, 1/12, −2/135, …; −1/540, −1/288, …).
+  - **Elsewhere:** the continued fraction for x ≥ a + 1, else the series of P. For a ≥ 10 the prefactor x^a e^(−x)/Γ(a) is computed
+    as −a(t − ln(1 + t)) + ½ln(a/2π) − ln Γ*(a), with t = x/a − 1, so the large terms cancel analytically and do not lose digits.
+  - **Accuracy:** on 36 points with a = 20, 100, 1000 and 10⁵ and x from 0.5a to 1.5a, both functions agree with mpmath's 60-digit
+    values to 6e-14 relative. The test lists every reference value: mpmath 1.4.1, P = x^a e^(−x)/Γ(a + 1)·₁F₁(1; a + 1; x), and
+    for x > a, Q independently from `gammainc(…, regularized=True)`.
 - `erfc(x)` is Q(½, x²), accurate down to its underflow near x ≈ 26.5. `erf` is computed from P near 0.
 - `erfcInv(p)` and `erfInv(p)` start from AS241 and take two Newton steps on erfc.
 - `betaQ(a, b, x) = 1 − I_x(a, b)` comes from the same continued fraction as `betaI`, without subtracting.

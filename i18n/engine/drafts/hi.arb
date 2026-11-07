@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "विजेता",
   "engine.author.f.lib.wpmHi": "अधिकतम शब्द प्रति मिनट",
   "engine.author.f.lib.wpmLo": "न्यूनतम शब्द प्रति मिनट",
-  "engine.author.f.benchPart": "मापा गया भाग"
+  "engine.author.f.benchPart": "मापा गया भाग",
+  "engine.author.f.lib.eq": "संतुलन (सूचकांक)"
 }

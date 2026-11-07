@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "Sieger",
   "engine.author.f.lib.wpmHi": "Höchste Wörter pro Minute",
   "engine.author.f.lib.wpmLo": "Niedrigste Wörter pro Minute",
-  "engine.author.f.benchPart": "Gemessener Teil"
+  "engine.author.f.benchPart": "Gemessener Teil",
+  "engine.author.f.lib.eq": "Gleichgewicht (Index)"
 }

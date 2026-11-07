@@ -17,8 +17,9 @@
   const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isNum = v => typeof v === 'number' && Number.isFinite(v);
-  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): each step of a transient is its θ-method DAE step (daeTheta: Newton with
-      LU, the massless nodes algebraic rows); FALLBACK without the kernel (marked): the same θ-step here, by a factored matrix */
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): a transient and the stepper run on its θ-method DAE solver
+      (daeThetaInit: Newton with LU, or one factored solve for a linear network; the massless nodes algebraic rows; θ and the sources'
+      mean power chosen per step); FALLBACK without the kernel (marked): the same θ-step here (stepCore) */
   function kit() {
     if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
     return root.NoemaSimKit || null;
@@ -420,6 +421,39 @@
     }
     /** the thermostats' gates at a state (on below high when heating, above low when cooling) */
     const gateAt = x => thermostats.map(th => { const T = Tof(th.s, x); return th.heat ? T < th.high : T > th.low; });
+    /** m steps of h from tA on the kernel's θ-method DAE solver (NoemaSimKit.daeThetaInit): C·x' = f(t, x) = −G·x + b + P̄ + rad(x),
+        the massless nodes algebraic rows, the analytic Jacobian; a linear network (no radiation) factors C − hθ(−G) once per (h, θ)
+        and takes one solve a step. Before each step (beforeStep) the gates are tested at its start (with their hysteresis), P̄ is
+        each source's exact mean over the step (sp, out) and θ is 1 (backward Euler) on the first step, on a source edge and on a
+        thermostat switch, ½ (trapezoidal) otherwise — what stepCore does. onStep(i, x) after each. */
+    function kernelRun(KS, x0, gate, sp, tA, h, m, be, first0, onStep, times) {   // times(k) → [t1, t2]: the engine's own grid (sources, edges)
+      const P1 = new Float64Array(n), rk = new Float64Array(n), nS = sources.length;
+      const f = (t, y, out) => { for (let i = 0; i < n; i++) { let q = b[i] + P1[i]; for (let j = 0; j < n; j++) q -= G[i * n + j] * y[j]; out[i] = q; } if (rads.length) rad(y, out, null, null); };
+      const jac = (t, y, J) => { for (let i = 0; i < n * n; i++) J[i] = G[i]; if (rads.length) rad(y, rk, J, ones); for (let i = 0; i < n * n; i++) J[i] = -J[i]; };   // ∂f/∂x = −(G + ∂(−rad)/∂x)
+      let k = 0, lastT0 = NaN, lastSw = false;
+      const beforeStep = (ta, tb, y) => {
+        const [t1, t2] = times(k);   // the grid's own times (k·h), not the kernel's sums: an edge on a grid time stays in its step
+        let switched = false;
+        if (t1 === lastT0) switched = lastSw;   // a halved retry of the same step: the gates were tested already
+        else thermostats.forEach((th, i) => {
+          const T = Tof(th.s, y), on = gate[i];
+          const nx = th.heat ? (on ? !(T >= th.high) : T <= th.low) : (on ? !(T <= th.low) : T >= th.high);
+          if (nx !== on) { gate[i] = nx; switched = true; }
+        });
+        lastT0 = t1; lastSw = switched;
+        let edge = false; P1.fill(0); const hh = t2 - t1;
+        for (let q = 0; q < nS; q++) {
+          const src = sources[q], on = src.gate < 0 || gate[src.gate], w = src.w;
+          if (w.edges(t2) !== w.edges(t1)) edge = true;
+          sp[q] = on ? (w.F(t2) - w.F(t1)) / hh : 0; P1[src.u] += sp[q];
+        }
+        return { theta: be || (first0 && k === 0) || switched || edge ? 1 : 0.5 };
+      };
+      const D = KS.daeThetaInit({ M: C, f, jac, linear: !rads.length, beforeStep, y0: x0, t0: tA, tEnd: tA + m * h, dt: h, newtonTol: 1e-13, maxSteps: m + 1,
+        onStep: (t, y) => { onStep(k, y); k++; } });
+      const R = D.ok ? D.advance(tA + m * h) : D.result;
+      if (R.stop !== 'end' || k !== m) throw fail(R.stop === 'budget' ? 'budget' : 'no-convergence', { t: R.t });
+    }
     /** one step [t1, t2] of the θ-method on C·x' = −G·x + b + P(t) + rad(x) (massless nodes: algebraic rows): θ = ½ (trapezoidal) on
         nodes with a heat capacity, 1 on massless ones, and backward Euler on the first step, on a source edge and on a thermostat
         switch (the gates are tested at t1, with their hysteresis); the sources' exact mean over the step; Newton with radiation.
@@ -429,11 +463,8 @@
       for (let i = 0; i < n; i++) thT[i] = be || !(C[i] > 0) ? 1 : 0.5;
       const mk = th => { const A = new Float64Array(n * n); for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i * n + j] = th[i] * G[i * n + j]; A[i * n + i] += C[i] / h; } return A; };
       const AT = mk(thT), AB = mk(thB), LU = {};
-      if (!rads.length && !kit()) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
+      if (!rads.length) for (const [key, A] of [['t', AT], ['b', AB]]) { const M = Float64Array.from(A), perm = new Int32Array(n); if (!factor(M, n, perm)) throw fail('singular'); LU[key] = { M, perm }; }
       const P = new Float64Array(n), rhs = new Float64Array(n), Gx = new Float64Array(n), rv = new Float64Array(n), nS = sources.length;
-      const KS = kit(), P1 = new Float64Array(n), rk = new Float64Array(n);
-      const fK = (t, y, out) => { for (let i = 0; i < n; i++) { let s = b[i] + P1[i]; for (let j = 0; j < n; j++) s -= G[i * n + j] * y[j]; out[i] = s; } if (rads.length) rad(y, out, null, null); };
-      const jK = (t, y, J) => { for (let i = 0; i < n * n; i++) J[i] = G[i]; if (rads.length) rad(y, rk, J, ones); for (let i = 0; i < n * n; i++) J[i] = -J[i]; };   // ∂f/∂x = −(G + ∂(−rad)/∂x)
       return { step(x, gate, sp, t1, t2, first) {
         let switched = false;
         thermostats.forEach((th, i) => {
@@ -448,12 +479,6 @@
           sp[s] = on ? (w.F(t2) - w.F(t1)) / hh : 0; P[src.u] += sp[s];
         }
         const useB = be || first || switched || edge, th = useB ? thB : thT;
-        if (KS) {   // the kernel's θ-step: C·x' = f(t, x) = −G·x + b + P̄ + rad(x), P̄ the sources' mean over the step; massless rows algebraic
-          P1.set(P);
-          const R = KS.daeTheta({ M: C, f: fK, jac: jK, y0: x, t0: t1, tEnd: t2, dt: 2 * hh, method: useB ? 'backward-euler' : 'trapezoidal', newtonTol: 1e-13, maxSteps: 64 });
-          if (R.stop !== 'end') throw fail(R.stop === 'newton' || R.stop === 'nan' ? 'no-convergence' : 'budget', { t: t2 });
-          return Float64Array.from(R.y);
-        }
         for (let i = 0; i < n; i++) { let s = 0; for (let j = 0; j < n; j++) s += G[i * n + j] * x[j]; Gx[i] = s; }
         rv.fill(0); if (rads.length) rad(x, rv, null, null);
         for (let i = 0; i < n; i++) rhs[i] = C[i] / h * x[i] - (1 - th[i]) * (Gx[i] - rv[i]) + b[i] + P[i];
@@ -482,7 +507,7 @@
       const be = o.method === 'be', points = Math.max(2, Math.min(MAX_POINTS, o.points === undefined ? 2001 : Math.floor(o.points)));
       const stride = Math.ceil(steps / (points - 1));
       let x = o.start === 'steady' ? steadyX(powers('t0')) : Float64Array.from(ck.T0);
-      const gate = gateAt(x), core = stepCore(h, be);
+      const gate = gateAt(x), core = kit() ? null : stepCore(h, be);
       // channels: nodes, links, sources (power after the thermostat, mean over the step), thermostats (0 / 1)
       const nN = nodeOut.length, nL = links.length, nS = sources.length, nT = thermostats.length, nCh = nN + nL + nS + nT;
       const vals = new Float64Array(nCh), sp = new Float64Array(nS);
@@ -511,7 +536,9 @@
         prev.set(vals);
       };
       fill(); prev.set(vals); take(0, 0);
-      for (let k = 0; k < steps; k++) {
+      const KS = kit();
+      if (KS) kernelRun(KS, x, gate, sp, 0, h, steps, be, true, (k, y) => { x = y; fill(); take(k + 1, (k + 1) * h); }, k => [k * h, (k + 1) * h]);
+      else for (let k = 0; k < steps; k++) {   // FALLBACK without the kernel: the own θ-step
         const t1 = k * h, t2 = (k + 1) * h;
         x = core.step(x, gate, sp, t1, t2, k === 0);
         fill(); take(k + 1, t2);
@@ -544,8 +571,15 @@
     function stepTo(st, tTo, hMax) {
       const span = tTo - st.t; if (!(span > 0)) return st;
       const m = Math.max(1, Math.ceil(span / hMax - 1e-9)), h = span / m, key = h + '|' + st.be;
-      let core = cores.get(key); if (!core) { if (cores.size > 16) cores.clear(); core = stepCore(h, st.be); cores.set(key, core); }
-      let x = Float64Array.from(st.x); const sp = st.sp.slice();
+      let x = Float64Array.from(st.x); const sp = st.sp.slice(), KS = kit();
+      const after = (i, y) => {
+        const t1 = st.t, t2 = i === m - 1 ? tTo : st.t + h; x = y;
+        st.k++; st.t = t2;
+        st.prev = st.ch; st.tPrev = t1; st.ch = channels(x, st.gate, sp);
+        st.ch.forEach((v, c) => { const q = st.stats[c]; if (v < q[0]) q[0] = v; if (v > q[1]) q[1] = v; q[2] += v; q[3] += v * v; }); st.n++;
+      };
+      if (KS) { kernelRun(KS, x, st.gate, sp, st.t, h, m, st.be, st.k === 0, after, i => [st.t, i === m - 1 ? tTo : st.t + h]); st.x = Array.from(x); st.sp = sp; return st; }
+      let core = cores.get(key); if (!core) { if (cores.size > 16) cores.clear(); core = stepCore(h, st.be); cores.set(key, core); }   // FALLBACK: the own θ-step
       for (let i = 0; i < m; i++) {
         const t1 = st.t, t2 = i === m - 1 ? tTo : st.t + h;
         x = core.step(x, st.gate, sp, t1, t2, st.k === 0);

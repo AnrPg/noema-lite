@@ -77,8 +77,10 @@
   }
   /** the receiver: noise floor kTB + NF (dBm) */
   const noiseFloor = (bw, nf) => KT_DBM_HZ + 10 * log10(bw) + (nf || 0);
-  // error functions: erfc (Numerical Recipes erfcc, relative error < 1.2e-7), Q(x) = ½·erfc(x/√2)
+  // error functions: erfc from the kernel (NoemaSimKit.erfc = Q(½, x²), accurate in the far tail), Q(x) = ½·erfc(x/√2);
+  // FALLBACK without the kernel: Numerical Recipes erfcc (relative error < 1.2e-7)
   function erfc(x) {
+    const K = kit(); if (K) return K.erfc(x);
     const z = Math.abs(x), t = 1 / (1 + 0.5 * z);
     const r = t * Math.exp(-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
     return x >= 0 ? r : 2 - r;

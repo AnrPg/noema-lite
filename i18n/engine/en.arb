@@ -11685,5 +11685,9 @@
   "engine.author.f.benchPart": "Part measured",
   "@engine.author.f.benchPart": {
     "description": "Label of a form field of the activity author: in a simulation with several engines, the part (a circuit or a device twin) the bench measures. Short."
+  },
+  "engine.author.f.lib.eq": "Equilibrium (index)",
+  "@engine.author.f.lib.eq": {
+    "description": "Label of the field “eq” of a library engine’s model or outputs in the activity author (engines: philo): the index of an equilibrium. Short."
   }
 }

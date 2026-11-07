@@ -231,7 +231,7 @@ for (const e of LIBS) {
     'the parts schema refuses an unknown engine, a part with no outputs, a loop with no tolerance');
   { // a bench on a circuit part (spec.bench.part): the validators take it, so do both schemas
     const led = rj(path.join(EX, 'led-bench', 'spec.json')), sp = JSON.parse(JSON.stringify(led));
-    sp.parts = [{ id: 'c', engine: 'circuit-mna@1', model: sp.model, outputs: sp.outputs }]; sp.bench = Object.assign({ part: 'c' }, sp.bench);
+    sp.parts = [{ id: 'c', engine: 'circuit-mna@1', model: sp.model, outputs: sp.outputs || [{ id: 'va', kind: 'scalar', node: 'a' }] }]; sp.bench = Object.assign({ part: 'c' }, sp.bench);
     delete sp.engine; delete sp.model; delete sp.outputs;
     const tabs = Object.fromEntries(fs.readdirSync(path.join(EX, 'led-bench')).map(f => /^strings\.([\w-]+)\.json$/.exec(f)).filter(Boolean).map(m => [m[1], rj(path.join(EX, 'led-bench', m[0]))]));
     const ve = P.checkSimSpec(sp, tabs);

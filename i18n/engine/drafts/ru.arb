@@ -2598,5 +2598,6 @@
   "engine.author.f.lib.winner": "Победитель",
   "engine.author.f.lib.wpmHi": "Наибольший темп (слов в минуту)",
   "engine.author.f.lib.wpmLo": "Наименьший темп (слов в минуту)",
-  "engine.author.f.benchPart": "Измеряемая часть"
+  "engine.author.f.benchPart": "Измеряемая часть",
+  "engine.author.f.lib.eq": "Равновесие (номер)"
 }

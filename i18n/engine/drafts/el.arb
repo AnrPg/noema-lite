@@ -2598,5 +2598,6 @@
   "engine.author.f.lib.winner": "Νικητής",
   "engine.author.f.lib.wpmHi": "Μέγιστες λέξεις ανά λεπτό",
   "engine.author.f.lib.wpmLo": "Ελάχιστες λέξεις ανά λεπτό",
-  "engine.author.f.benchPart": "Μέρος που μετράται"
+  "engine.author.f.benchPart": "Μέρος που μετράται",
+  "engine.author.f.lib.eq": "Ισορροπία (δείκτης)"
 }

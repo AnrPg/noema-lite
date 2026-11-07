@@ -2598,5 +2598,6 @@
   "engine.author.f.lib.winner": "Gagnant",
   "engine.author.f.lib.wpmHi": "Débit maximal (mots par minute)",
   "engine.author.f.lib.wpmLo": "Débit minimal (mots par minute)",
-  "engine.author.f.benchPart": "Partie mesurée"
+  "engine.author.f.benchPart": "Partie mesurée",
+  "engine.author.f.lib.eq": "Équilibre (indice)"
 }

@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "Fituesi",
   "engine.author.f.lib.wpmHi": "Fjalë për minutë më së shumti",
   "engine.author.f.lib.wpmLo": "Fjalë për minutë më së paku",
-  "engine.author.f.benchPart": "Pjesa që matet"
+  "engine.author.f.benchPart": "Pjesa që matet",
+  "engine.author.f.lib.eq": "Ekuilibri (indeksi)"
 }

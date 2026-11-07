@@ -1770,5 +1770,6 @@
   "engine.author.f.lib.winner": "الفائز",
   "engine.author.f.lib.wpmHi": "أعلى عدد كلمات في الدقيقة",
   "engine.author.f.lib.wpmLo": "أدنى عدد كلمات في الدقيقة",
-  "engine.author.f.benchPart": "الجزء المقيس"
+  "engine.author.f.benchPart": "الجزء المقيس",
+  "engine.author.f.lib.eq": "التوازن (الرقم)"
 }

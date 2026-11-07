@@ -143,9 +143,11 @@ source()                          → the engine's own source, to run it in a Wo
 | `OPAMP` | in+ in− out [v+ v−] | `params {gain 1e5, rails [−15, 15], headroom 0}`; with 5 terminals the rails are the supply-pin voltages | ideal inputs, VCVS output to ground with exact gain, clamped smoothly (50 mV knee) to the rails; no GBW or slew |
 
 **Uses the kernel / parts (2026-11-07).** The meters' seeded jitter and a capture's shift draw from kernel streams
-(`circuit:<probe>`); the noise sources stay a counter-based hash (sample i at any time of a transient, which a sequential stream
-cannot give cheaply). The transient (trapezoidal companion models with backward Euler at breakpoints and Newton per step: a circuit
-is a DAE, outside the kernel's ODE integrators) is resumable (`tranStart` / `tranAdvance`): `runTransient()` and the new
+(`circuit:<probe>`); the noise sources draw from the kernel's counter-based Philox stream (`SK.counterStream(seed,
+'circuit:noise:n' | ':w').normal(i)`: sample i at any time of a transient in O(1), no state). The transient (trapezoidal companion
+models with backward Euler at breakpoints and Newton per step) stays the engine's own: its mass matrix is not diagonal (a floating
+capacitor), its Newton limits junction voltages between iterations (SPICE's pnjlim) and falls back to gmin stepping, and a
+transmission line reads its delayed history — none of which the kernel's `daeTheta` (diagonal M, plain Newton) carries. It is resumable (`tranStart` / `tranAdvance`): `runTransient()` and the new
 **stepper** of `circuit-mna@1` (`stepper: true`; the instance's `stepInit` / `stepTo`, `docs/INTERACTIVE_LIBRARY.md` §1.6) share it.
 The stepper holds the transient open on the grid `transient.dt`; a node / branch / power series gives its value now, `stat` and `at`
 read every internal step so far, DC outputs as in `run()`, AC and probes NaN. It cannot snapshot (−1). Stepped to tEnd it equals
