@@ -214,7 +214,7 @@ step with its check in `tools/pipelines/`), and the toolkit scripts `activity_ne
   * **Feature flags:** `NOEMA_CONFIG.activities = { 'html-app@1': true, 'sim-spec@1': true, 'py-module@1': false }` for staged rollout (as built: every runtime on by default, py-module@1 since batch 1, §10).
 * **Runtimes:** `engine/activities/html_app.js` (Tier A), `engine/activities/sim_spec.js` + `engine/activities/sim_worker.js` and engines in
   `engine/activities/engines/` (Tier B; `registerEngine()`), `engine/activities/py_runner.js` (Tier C).
-* **Schemas (schema-first, JSON Schema 2020-12)** in `tools/schemas/`: `noema.activities.v1.schema.json`, `noema.activity-protocol.v1.schema.json`,
+* **Schemas (schema-first, JSON Schema 2020-12)** in `src/contracts/schemas/`: `noema.activities.v1.schema.json`, `noema.activity-protocol.v1.schema.json`,
   `sim-spec.v1.schema.json`, `noema.events.v1.schema.json`. Python validates with `jsonschema` when it is installed and otherwise with the
   same hand-written checks as `packcheck.js` (the repo's existing pattern: `validate.py` and `packcheck.js` keep the same rules).
 * **Protocol** `noema.activity/v1`: exactly the brief's §8 (envelope, message table, limits). Handshake as tested in spike (c):

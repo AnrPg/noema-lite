@@ -1,5 +1,5 @@
 /* noema-lite — NoemaSchemaForm: forms generated from JSON Schemas (docs/activities-dev/authoring_ui.md).
-   A subset of JSON Schema 2020-12 that the app's schemas use (tools/schemas/*.schema.json):
+   A subset of JSON Schema 2020-12 that the app's schemas use (src/contracts/schemas/*.schema.json):
      $ref (local "#/$defs/…" and other schemas of the registry by $id, relative or absolute), allOf, oneOf / anyOf (alternatives, or
      objects told apart by a discriminator: a property that is a const or a one-value enum in every branch), not, if / then / else,
      type (one or a list), const, enum, properties, required, additionalProperties, propertyNames, maxProperties, items, minItems,

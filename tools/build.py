@@ -56,7 +56,7 @@ def drop_missing_bundles(html):
 AUTHOR_SCHEMAS = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json', 'noema.activities.v1.schema.json']
 def author_schemas_js():
     # the activity author's copy of the JSON Schemas (a file:// page cannot fetch them): engine/activity_author_schemas.js
-    sch = {f: rj(os.path.join(ROOT, 'tools', 'schemas', f)) for f in AUTHOR_SCHEMAS}
+    sch = {f: rj(os.path.join(ROOT, 'src', 'contracts', 'schemas', f)) for f in AUTHOR_SCHEMAS}
     # and the reference activity of every engine of the library (tools/activities_examples/<ref>/: its entry, spec and words): the author's
     # "Start from the reference activity" (docs/activities-dev/authoring_ui.md)
     refs, ex = {}, os.path.join(ROOT, 'tools', 'activities_examples')
@@ -68,12 +68,19 @@ def author_schemas_js():
         if not (isinstance(spec, dict) and (spec.get('engine') in ACTS.LIB or (isinstance(parts, list) and parts))): continue
         refs[d] = {'item': rj(os.path.join(p, 'activity.json')), 'spec': spec,
                    'strings': {f.split('.')[1]: rj(os.path.join(p, f)) for f in sorted(os.listdir(p)) if re.fullmatch(r'strings\.[\w-]+\.json', f)}}
-    return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from tools/schemas/ by\n'
+    return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from src/contracts/schemas/ by\n'
             '   tools/build.py (tests/activity_author.js checks that it is up to date). Do not edit. Schema data, not words a learner reads: */\n/* i18n-ignore-start */\n'
             '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + ';\n'
             '  root.NoemaActivityRefs = ' + json.dumps(refs, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
 
+def build_contracts():
+    """The data contracts (src/contracts/schemas → engine/contracts.js, src/contracts/validate.ts and the types): generated,
+    never committed (npm run contracts; it needs the packages of package.json: npm ci). Everything below checks with them."""
+    if not os.path.isdir(os.path.join(ROOT, 'node_modules', 'ajv')): sys.exit('build: the data contracts need the node packages first: npm ci')
+    subprocess.run(['node', os.path.join(ROOT, 'tools', 'contracts.mjs')], check=True)
+
 def build_engine():
+    build_contracts()
     wt(os.path.join(ENGINE, 'activity_author_schemas.js'), author_schemas_js())
     # the UI catalogs: i18n/<component>/<locale>.arb → engine/i18n/<locale>.js (docs/i18n.md)
     subprocess.run(['node', os.path.join(ROOT, 'tools', 'i18n', 'build.js')], check=True)
@@ -149,7 +156,7 @@ def build_packs():
         counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in chapters), 'exercises': sum(len(c['exercises']) for c in chapters),
                   'playbooks': sum(len(c['debug']) for c in chapters), 'flashcards': sum(len(c['flashcards']) for c in chapters)}
         counts['visual'] = sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')); counts['media'] = len(media)
-        pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
+        pack = {'format': 'noema-pack', 'v': 3, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
         if acts and acts['items']: pack['activities'] = {'format': ACTS.FORMAT, 'items': acts['items']}; pack['requires'] = ACTS.requires(acts); counts['activities'] = len(acts['items'])
         ae, aw = ACTS.check_activities(pack, list(translations))
         for w in aw: print(f'  WARN {meta["id"]}: activities: {w}')
@@ -424,7 +431,7 @@ PY_HEADERS = ('/vendor/pyodide/manifest.json\n  Cache-Control: no-cache\n  Acces
               f'/vendor/pyodide/{PY_VERSION}/*.wasm\n  Content-Type: application/wasm\n'
               '/vendor/pywheels/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n  Cross-Origin-Resource-Policy: cross-origin\n')
 
-SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'simexpr.py', 'circuit.py', 'thermal.py', 'pid.py', 'rf.py', 'twin.py', 'wasm_check.py', 'embed_check.py', 'embed_allow.json', 'h5p_import.py', 'h5p_check.py', 'h5p_allow.json', 'bridge.py', 'validate.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'activities.py', 'simexpr.py', 'circuit.py', 'thermal.py', 'pid.py', 'rf.py', 'twin.py', 'wasm_check.py', 'embed_check.py', 'embed_allow.json', 'h5p_import.py', 'h5p_check.py', 'h5p_allow.json', 'bridge.py', 'validate.py', 'contracts.py', 'pack_rules.json', 'pack_quality.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 # P6 runtimes and exports (docs/adr/001 D12): in the skill's references and the connector's guide part "interactive"
 INTERACTIVE_P6 = ('INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md')
@@ -443,9 +450,9 @@ def lang_builder_files():
             (os.path.join(ROOT, 'docs', 'NEW_LANGUAGE_PLAYBOOK.md'), 'references/NEW_LANGUAGE_PLAYBOOK.md'), (os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'references/CONTENT_SPEC.md'),
             (os.path.join(ROOT, 'tools', 'lang_sources', 'AGENT_BRIEF.md'), 'references/AGENT_BRIEF.md')]
     out += [(f, 'references/briefs/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'lang_sources', 'briefs', '*.txt')))]
-    out += [(f, 'schemas/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang*.schema.json')))]
+    out += [(f, 'schemas/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.lang*.schema.json')))]
     # D19: the field registry and the CLDR language names the facade lint (lang_facade.py, run by validate_lang.py) reads
-    out += [(os.path.join(ROOT, 'tools', 'schemas', 'noema.langfacade.fields.json'), 'schemas/noema.langfacade.fields.json'), (os.path.join(ROOT, 'docs', 'language-packs.md'), 'references/language-packs.md')]
+    out += [(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.langfacade.fields.json'), 'schemas/noema.langfacade.fields.json'), (os.path.join(ROOT, 'docs', 'language-packs.md'), 'references/language-packs.md')]
     out += [(f, 'scripts/i18n/langnames/' + os.path.basename(f)) for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'i18n', 'langnames', '*.json')))]
     for d in ('_typology', '_phenomena'): out += [(f, f'library/languages/{d}/{os.path.basename(f)}') for f in sorted(glob.glob(os.path.join(LANGS, d, '*.json')))]
     return [(a, b) for a, b in out if os.path.exists(a)]
@@ -465,6 +472,7 @@ def build_skill(out_zip):
         for f in sorted(glob.glob(os.path.join(src, '**', '*'), recursive=True)):
             if os.path.isfile(f) and '__pycache__' not in f: z.write(f, os.path.join('noema-pack-builder', os.path.relpath(f, src)))
         for t in SKILL_TOOLS + LIB_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
+        z.write(os.path.join(ENGINE, 'contracts.js'), 'noema-pack-builder/scripts/contracts.js')   # the data contracts validate.py checks shapes with (contracts.py)
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json'))): z.write(f, f'noema-pack-builder/scripts/pipelines/{os.path.basename(f)}')   # docs/PIPELINES.md
         # interactive activities (docs/INTERACTIVE.md): the reference activity, the app's runtime for the harness, the contract
         # the reference activities travel as ONE inner zip (claude.ai takes a skill zip of at most 200 files);
@@ -480,6 +488,7 @@ def build_skill(out_zip):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
         for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', f), 'noema-pack-builder/scripts/activity_host/vendor/' + os.path.basename(f))   # the library engines' vendored code (map@1), with its licences
         for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', os.path.dirname(f), next(l for l in os.listdir(os.path.join(ENGINE, 'vendor', os.path.dirname(f))) if l.startswith('LICENSE'))), 'noema-pack-builder/scripts/activity_host/vendor/LICENSE-' + os.path.dirname(f))
+        z.write(os.path.join(ENGINE, 'contracts.js'), 'noema-pack-builder/scripts/activity_host/contracts.js')   # the data contracts packcheck.js checks shapes with
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
         for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
@@ -493,7 +502,7 @@ def build_skill(out_zip):
         # language courses (docs/LANGUAGES.md §10.1): the checks Claude runs in its sandbox, with the shared typology and catalogues they read
         for t in LANG_SKILL_TOOLS:
             if os.path.exists(os.path.join(ROOT, 'tools', t)): z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
-        if os.path.exists(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json')): z.write(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json'), 'noema-pack-builder/schemas/noema.lang.v1.schema.json')
+        if os.path.exists(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.lang.v1.schema.json')): z.write(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.lang.v1.schema.json'), 'noema-pack-builder/schemas/noema.lang.v1.schema.json')
         for d in ('_typology', '_phenomena'):
             for f in sorted(glob.glob(os.path.join(LANGS, d, '*.json'))): z.write(f, f'noema-pack-builder/library/languages/{d}/{os.path.basename(f)}')
         # a whole language in one prompt (docs/LANGUAGES.md §10.2): the skill noema-language-builder as LANGUAGE_BUILDER.md + its files
@@ -513,7 +522,7 @@ def public_config():
 # the app's own code the connector runs, in load order (pack checks with the engines they check activities with; curriculum
 # tasks, checks and how answers change a curriculum; pictures; language courses): src/connector/engine/sources.ts lists them
 # and tools/connector_bundle.mjs bundles each as its text. Every engine of the library must be there.
-CONNECTOR_ENGINE = ('engine/report.js', 'engine/enginereq.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), *('engine/src/' + f for f in LIB_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
+CONNECTOR_ENGINE = ('engine/contracts.js', 'engine/report.js', 'engine/enginereq.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), *('engine/src/' + f for f in LIB_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
 
 def connector_engine_files():
     """The engine files src/connector/engine/sources.ts loads (LEGACY_SOURCES, in order)."""

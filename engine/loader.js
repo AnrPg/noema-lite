@@ -185,7 +185,7 @@
     todayXP() { return this.get().xpDay[today()] || 0; },
   };
 
-  /* ---------------- subject packs in several languages (docs/i18n.md §10, pack schema v2) ----------------
+  /* ---------------- subject packs in several languages (docs/i18n.md §10, pack format v3) ----------------
      The UI language never changes a pack's content by itself; a pack MAY offer its metadata (subject.i18n) and its chapters
      (pack.translations) in other languages, and the learner sees them when the pack has their UI locale (or its language:
      es-ES → es; never English for someone else). Otherwise: the pack's own texts, with a small tag naming their language. */

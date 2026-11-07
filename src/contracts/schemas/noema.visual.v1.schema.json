@@ -230,6 +230,9 @@
       "allOf": [
         {
           "if": {
+            "required": [
+              "origin"
+            ],
             "properties": {
               "origin": {
                 "const": "web"
@@ -339,10 +342,21 @@
           "type": "boolean"
         },
         "why": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "img_hotspot: {regionId: why this tempting place is wrong}; img_reveal: one text per option",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
         },
         "options": {
           "type": "array",

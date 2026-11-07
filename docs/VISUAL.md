@@ -7,7 +7,7 @@ diagrams), and so on.
 
 This file is the **contract**. Content authors (Claude, when ingesting sources) follow it,
 `tools/validate.py` enforces it, `tools/build.py` packs it and the engine renders it.
-The machine-readable version is `tools/schemas/noema.visual.v1.schema.json`.
+The machine-readable version is `src/contracts/schemas/noema.visual.v1.schema.json`.
 
 ---
 

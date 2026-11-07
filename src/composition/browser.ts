@@ -23,6 +23,7 @@ import { inlineCompute } from '../adapters/local/jobs.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
+import * as contracts from '../contracts/index.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
@@ -33,7 +34,11 @@ import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ERRORS, I18N, JOBS, NOTIFIER, STORAG
 /** Helpers append their registrations here (each registers its own tokens; a token already taken is an error). */
 export const APP_REGISTRATIONS: readonly Registration[] = [];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
-export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [];
+export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
+  // the compiled data contracts (src/contracts): the shape checks of engine/packcheck.js and every other reader. Node,
+  // the connector and the skill get the same module as engine/contracts.js (tools/contracts.mjs builds both from it).
+  { name: 'contracts', build: () => contracts },
+];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */
 export const WORKER_SOURCE_ID = 'noema-worker:worker';

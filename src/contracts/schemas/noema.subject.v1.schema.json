@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.subject.v1.schema.json",
+  "title": "noema-lite subject (subject.json, pack.subject, a:packmeta)",
+  "description": "A subject's identity and settings: library/subjects/<id>/subject.json, the subject of a built pack, and the account's index of its subjects (KV a:packmeta:<id>). tools/CONTENT_SPEC.md \"subject.json\", \"Packs in several languages\" and \"Levels\".",
+  "$ref": "#/$defs/subject",
+  "$defs": {
+    "subject": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "$ref": "noema.common.v1.schema.json#/$defs/subjectId" },
+        "title": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
+        "appTitle": { "type": "string" },
+        "emoji": { "type": "string" },
+        "group": { "type": "string" },
+        "description": { "type": "string" },
+        "language": { "$ref": "noema.common.v1.schema.json#/$defs/language" },
+        "owner": { "type": ["string", "null"] },
+        "features": { "type": "object", "additionalProperties": { "type": "boolean" } },
+        "hero": { "$ref": "#/$defs/hero" },
+        "searchExamples": { "type": "string" },
+        "tutor": { "$ref": "#/$defs/tutor" },
+        "authoring": { "$ref": "#/$defs/authoring" },
+        "i18n": { "$ref": "#/$defs/i18n" },
+        "levels": { "$ref": "noema.common.v1.schema.json#/$defs/packLevels" }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "properties": { "headline": { "type": "string" }, "mantra": { "type": "string" } },
+      "additionalProperties": { "type": "string" }
+    },
+    "tutor": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "authoring": {
+      "type": "object",
+      "properties": {
+        "minVisualPerChapter": { "type": "integer", "minimum": 0 },
+        "minExercisesPerPicture": { "type": "integer", "minimum": 0 },
+        "minPerKind": { "type": "integer", "minimum": 0 },
+        "rules": { "type": "integer", "minimum": 0 },
+        "by": { "type": "string" }
+      }
+    },
+    "i18nEntry": {
+      "description": "The subject's own words in one other locale: only fields the subject itself has.",
+      "type": "object",
+      "properties": {
+        "title": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
+        "appTitle": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
+        "description": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
+        "searchExamples": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
+        "hero": { "type": "object", "additionalProperties": { "type": "string" }, "x-message": "must be an object of strings like the subject's hero" },
+        "tutor": { "type": "object", "additionalProperties": { "type": "string" }, "x-message": "must be an object of strings like the subject's tutor" }
+      },
+      "additionalProperties": false,
+      "x-message": "(allowed: title, appTitle, description, searchExamples, hero, tutor)"
+    },
+    "i18n": {
+      "type": "object",
+      "propertyNames": { "$ref": "noema.common.v1.schema.json#/$defs/locale" },
+      "additionalProperties": { "$ref": "#/$defs/i18nEntry" }
+    },
+    "packmeta": {
+      "description": "KV a:packmeta:<id>: the subject's fields plus what the account keeps about the pack (counts, version, the locales its content is in, the Roadmap step it teaches).",
+      "allOf": [{ "$ref": "#/$defs/subject" }],
+      "properties": {
+        "counts": { "type": "object", "additionalProperties": { "type": "number" } },
+        "version": { "type": ["string", "null"] },
+        "contentLocales": { "type": "array", "items": { "$ref": "noema.common.v1.schema.json#/$defs/locale" } },
+        "curriculum": { "type": "string" },
+        "node": { "type": "string" },
+        "origin": { "type": "string" },
+        "updatedAt": { "$ref": "noema.common.v1.schema.json#/$defs/isoTime" },
+        "publicSkip": {}
+      }
+    }
+  }
+}

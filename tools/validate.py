@@ -14,7 +14,12 @@ Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N] [--quali
   --source        the file is a TRANSLATION (translations/<locale>/chNN.json) of this chapter (as built: base + patches):
                   same ids, same structure, same answers — only the words differ (CONTENT_SPEC.md "Packs in several languages")
   --subject       check subject.json: the content language and the optional per-locale metadata (subject.i18n)
-  --translations  (with --subject) the locales the subject has translations/<locale>/ folders for"""
+  --translations  (with --subject) the locales the subject has translations/<locale>/ folders for
+
+The SHAPE of the file (its fields, their types and values) is its data contract — src/contracts/schemas,
+noema.chapter.v1 / noema.subject.v1 — checked with the same compiled validators as the app (tools/contracts.py).
+This file checks what a schema cannot say: ids that match the chapter and are unique, answers that are one of their
+own options, regions inside their picture, the media and activities of the pack, the quantities and the quality."""
 import json, os, re, sys
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')
@@ -22,16 +27,12 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
 from collections import Counter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import activities as A   # interactive activities: the registry, interactive blocks, sim exercises (docs/INTERACTIVE.md)
+import contracts as C    # the data contracts (engine/contracts.js, run in node)
 
 errors, warns = [], []
 def E(m): errors.append(m)
 def W(m): warns.append(m)
 
-BLOCKS = {"p":["text"],"list":["items"],"code":["code"],"diagram":["text"],"table":["head","rows"],
-          "callout":["kind","text"],"compare":["items"],"flow":["items"],"reveal":["label","text"],
-          "ask":["questions"],"terms":["items"],"figure":["media"],"interactive":["activity"]}
-KINDS = {"key","pitfall","tip","exam","warn","analogy","debug","interview"}
-TAGS = {"concept","syntax","pitfall","debug","exam","interview","calc","compare"}
 VTYPES = {"img_hotspot","img_sequence","img_reveal","img_drag","img_label","img_select","img_occlusion"}
 TTYPES = {"flaw","case","predict","tree","inquiry","debate"}   # critical-thinking types (CONTENT_SPEC.md)
 TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","scenario","free","write","sim"} | TTYPES | VTYPES
@@ -44,45 +45,40 @@ QUALITY = ARGS[ARGS.index("--quality")+1] if "--quality" in ARGS else None
 BALANCE = int(ARGS[ARGS.index("--balance")+1]) if "--balance" in ARGS else 0
 BALANCE_WARN = int(ARGS[ARGS.index("--balance-warn")+1]) if "--balance-warn" in ARGS else 0
 FEATURES = {x for x in (ARGS[ARGS.index("--features")+1] if "--features" in ARGS else "").split(",") if x}
-RID = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
+num = lambda v: isinstance(v, (int, float)) and not isinstance(v, bool)
+idx = lambda v, n: isinstance(v, int) and not isinstance(v, bool) and 0 <= v < n
+
+def region_points(r):
+    """The corners / points of a region (its shape: noema.visual.v1#region), or None when its shape is not complete."""
+    sh = r.get("shape")
+    if sh == "rect" and all(num(r.get(k)) for k in "xywh"): return [(r["x"], r["y"]), (r["x"]+r["w"], r["y"]+r["h"])]
+    if sh == "circle" and all(num(r.get(k)) for k in ("cx", "cy", "r")): return [(r["cx"]-r["r"], r["cy"]-r["r"]), (r["cx"]+r["r"], r["cy"]+r["r"])]
+    if sh == "poly" and isinstance(r.get("points"), list) and all(isinstance(q, list) and len(q) == 2 and all(num(c) for c in q) for q in r["points"]): return [tuple(q) for q in r["points"]]
+    return None
 
 def check_regions(where, regions, IW=None, IH=None):
-    """Structural + bounds checks; returns {id: region}."""
+    """The regions of a picture beyond their shape: unique ids, inside the picture; returns {id: region}."""
     out = {}
-    if not isinstance(regions, list): E(f"{where}: regions must be a list"); return out
+    if not isinstance(regions, list): return out
     for r in regions:
-        rid = r.get("id")
-        if not isinstance(rid, str) or not RID.match(rid): E(f"{where}: bad region id {rid!r}"); continue
+        if not isinstance(r, dict) or not isinstance(r.get("id"), str): continue
+        rid = r["id"]
         if rid in out: E(f"{where}: duplicate region id {rid}")
         out[rid] = r
-        sh = r.get("shape"); pts = []
-        if sh == "rect":
-            if not all(isinstance(r.get(k),(int,float)) for k in "xywh") or r["w"] <= 0 or r["h"] <= 0: E(f"{where}/{rid}: rect needs x,y,w>0,h>0"); continue
-            pts = [(r["x"], r["y"]), (r["x"]+r["w"], r["y"]+r["h"])]
-        elif sh == "circle":
-            if not all(isinstance(r.get(k),(int,float)) for k in ("cx","cy","r")) or r["r"] <= 0: E(f"{where}/{rid}: circle needs cx,cy,r>0"); continue
-            pts = [(r["cx"]-r["r"], r["cy"]-r["r"]), (r["cx"]+r["r"], r["cy"]+r["r"])]
-        elif sh == "poly":
-            P = r.get("points")
-            if not isinstance(P, list) or len(P) < 3 or not all(isinstance(q, list) and len(q) == 2 for q in P): E(f"{where}/{rid}: poly needs >=3 [x,y] points"); continue
-            pts = [tuple(q) for q in P]
-        else: E(f"{where}/{rid}: shape must be rect|circle|poly"); continue
-        if r.get("anchor") is not None: pts.append(tuple(r["anchor"]))
+        pts = region_points(r)
+        if pts is None: continue
+        if isinstance(r.get("anchor"), list) and len(r["anchor"]) == 2: pts.append(tuple(r["anchor"]))
         if IW and IH and any(x < -0.5 or y < -0.5 or x > IW+0.5 or y > IH+0.5 for x, y in pts): E(f"{where}/{rid}: region outside the {IW:g}x{IH:g} picture")
-        if "options" in r and (not isinstance(r["options"], list) or len(r["options"]) < 2): E(f"{where}/{rid}: options needs >=2 entries")
     return out
 
 def check_visual(eid, e):
     t = e["type"]; mid = e.get("media")
-    if not s(mid): E(f"{eid}: visual exercise needs media"); return
+    if not s(mid): return   # the contract says so
     m = (MEDIA or {}).get(mid)
     if MEDIA is not None and not m: E(f"{eid}: media '{mid}' not in media/media.json"); return
     IW, IH = (m or {}).get("w"), (m or {}).get("h")
     regions = e.get("regions", (m or {}).get("regions") if m else None)
-    if t == "img_reveal" and e.get("grid"):
-        g = e["grid"]
-        if not (isinstance(g, list) and len(g) == 2 and all(isinstance(x, int) and 1 <= x <= 8 for x in g)): E(f"{eid}: grid must be [cols, rows] (1-8)")
-        regions = regions or []
+    if t == "img_reveal" and e.get("grid"): regions = regions or []
     if regions is None:
         if MEDIA is None: return          # cannot check without the registry
         E(f"{eid}: no regions (neither in the exercise nor in media '{mid}')"); return
@@ -142,36 +138,32 @@ UI_LOCALES = {"en", "el", "ru", "fr", "ar-EG", "ar", "de", "hi", "zh-Hans", "zh-
 I18N_TEXT = ("title", "appTitle", "description", "searchExamples")   # plain strings
 I18N_OBJ = ("hero", "tutor")                                         # objects: a subset of the source's own keys
 
-def check_locale(where, loc, lang):
-    if not isinstance(loc, str) or not LOCALE_RE.match(loc): E(f"{where}: '{loc}' is not a locale code (BCP 47, e.g. el, fr, pt-PT, zh-Hant)"); return False
-    lang = lang or "en"
+def check_locale(where, loc, lang, shaped=False):
+    """shaped: the contract has checked the code already (subject.i18n); a translations/<locale>/ folder has none."""
+    if not isinstance(loc, str) or not LOCALE_RE.match(loc):
+        if not shaped: E(f"{where}: '{loc}' is not a locale code (BCP 47, e.g. el, fr, pt-PT, zh-Hant)")
+        return False
+    lang = lang if isinstance(lang, str) else "en"
     if loc == lang or (loc.split("-")[0] == lang.split("-")[0] and ("-" not in loc or "-" not in lang) and not loc.startswith("zh")): E(f"{where}: '{loc}' is the pack's own language ({lang}) — the source texts are already in it"); return False
     if loc not in UI_LOCALES: W(f"{where}: '{loc}' is not a UI language of noema-lite (nor the language of one) — no learner would see it")
     return True
 
 def check_subject(path, translated):
     subj = json.load(open(path, encoding="utf-8"))
+    for m in C.problems("noema.subject.v1", subj): E(m)
     lang = subj.get("language", "en")
-    if not isinstance(lang, str) or not LOCALE_RE.match(lang): E(f"language '{lang}' is not a language code (BCP 47, e.g. en, el, de)")
-    tr = subj.get("i18n")
-    if tr is not None:
-        if not isinstance(tr, dict): E("i18n must be an object {locale: {title, description, …}}"); tr = {}
-        for loc, m in tr.items():
-            where = f"i18n.{loc}"
-            if not check_locale(where, loc, lang): continue
-            if not isinstance(m, dict) or not m: E(f"{where}: must be a non-empty object"); continue
-            for k, v in m.items():
-                if k in I18N_TEXT:
-                    if not s(v): E(f"{where}.{k}: must be a non-empty string")
-                    elif not s(subj.get(k)): E(f"{where}.{k}: the subject has no '{k}' to translate")
-                elif k in I18N_OBJ:
-                    src = subj.get(k) if isinstance(subj.get(k), dict) else {}
-                    if not isinstance(v, dict): E(f"{where}.{k}: must be an object like the subject's '{k}'"); continue
-                    for kk, vv in v.items():
-                        if kk not in src: E(f"{where}.{k}.{kk}: the subject's '{k}' has no '{kk}'")
-                        elif not isinstance(vv, str) or (s(src[kk]) and not s(vv)): E(f"{where}.{k}.{kk}: must be a non-empty string")
-                else: E(f"{where}.{k}: unknown field (allowed: {', '.join(I18N_TEXT + I18N_OBJ)})")
-            if "title" not in m: W(f"{where}: no title — the picker shows the source title")
+    tr = subj.get("i18n") if isinstance(subj.get("i18n"), dict) else None
+    for loc, m in (tr or {}).items():
+        where = f"i18n.{loc}"
+        if not check_locale(where, loc, lang, shaped=True) or not isinstance(m, dict): continue
+        for k, v in m.items():
+            if k in I18N_TEXT and s(v) and not s(subj.get(k)): E(f"{where}.{k}: the subject has no '{k}' to translate")
+            elif k in I18N_OBJ and isinstance(v, dict):
+                src = subj.get(k) if isinstance(subj.get(k), dict) else {}
+                for kk, vv in v.items():
+                    if kk not in src: E(f"{where}.{k}.{kk}: the subject's '{k}' has no '{kk}'")
+                    elif s(src[kk]) and not s(vv): E(f"{where}.{k}.{kk}: must be a non-empty string")
+        if "title" not in m: W(f"{where}: no title — the picker shows the source title")
     for loc in translated:
         if check_locale(f"translations/{loc}", loc, lang) and loc not in (tr or {}): W(f"translations/{loc}: add subject.i18n.{loc} (title, description) so the picker shows the translated name")
     print(f"== {path}: language {lang}, metadata in {', '.join(sorted(tr or {})) or '—'}, content in {', '.join(sorted(translated)) or '—'}")
@@ -180,56 +172,80 @@ def check_subject(path, translated):
     print("OK" if not errors else f"{len(errors)} ERRORS")
     sys.exit(1 if errors else 0)
 
+L_ = lambda v: v if isinstance(v, list) else []
+D_ = lambda v: v if isinstance(v, dict) else {}
+
+def exercise_refs(eid, e):
+    """What an exercise's contract (noema.chapter.v1#exercise) cannot say: its answer is one of its own options, lines,
+    buckets, nodes or regions, its lists line up, its texts agree; engine/packcheck.js exerciseRefs checks the same."""
+    t = e.get("type")
+    if t in ("mcq", "odd"):
+        o, a = L_(e.get("options")), e.get("answer")
+        if not all(idx(x, len(o)) for x in (a if isinstance(a, list) else [a])): E(f"{eid}: bad answer index")
+        if isinstance(e.get("why"), list) and len(e["why"]) != len(o): E(f"{eid}: why length != options")
+        if t == "odd" and len(o) != 4: W(f"{eid}: odd should have 4 options")
+    elif t == "match":
+        p = [x for x in L_(e.get("pairs")) if isinstance(x, list) and len(x) == 2]
+        if len({x[1] for x in p if isinstance(x[1], str)}) != len(p) or len({x[0] for x in p if isinstance(x[0], str)}) != len(p): E(f"{eid}: match sides must be distinct")
+    elif t == "bucket":
+        b, it = L_(e.get("buckets")), L_(e.get("items"))
+        if not all(idx(D_(x).get("bucket"), len(b)) for x in it): E(f"{eid}: bad bucket items")
+        if len(it) < 4: W(f"{eid}: few bucket items")
+    elif t == "cloze":
+        if any(not x.split("|")[0].strip() for x in re.findall(r"\[\[(.+?)\]\]", e.get("text") if isinstance(e.get("text"), str) else "")): E(f"{eid}: empty blank")
+    elif t == "spotbug":
+        L = L_(e.get("lines"))
+        if len(L) < 3: E(f"{eid}: spotbug needs >=3 lines")   # the authoring rule (the engine shows 2)
+        if not all(idx(x, len(L)) for x in L_(e.get("bugs"))): E(f"{eid}: bad bug indexes")
+    elif t == "scenario":
+        if not s(e.get("q")): W(f"{eid}: scenario should have q (setup)")
+    elif t == "write":
+        sol = e.get("solution") if isinstance(e.get("solution"), str) else ""
+        for k in L_(e.get("keywords")):
+            if isinstance(k, str) and k.lower() not in sol.lower(): E(f"{eid}: keyword '{k}' not in solution")
+    elif t in VTYPES: check_visual(eid, e)
+    elif t in TTYPES: check_thinking(eid, e)
+
 def check_thinking(eid, e):
-    """flaw · case · predict · tree · inquiry · debate (CONTENT_SPEC.md, "Types"); engine/packcheck.js checks the same."""
-    t = e["type"]; isint = lambda v, n: isinstance(v, int) and not isinstance(v, bool) and 0 <= v < n
-    strs = lambda a, m=1: isinstance(a, list) and len(a) >= m and all(s(x) for x in a)
+    """flaw · case · predict · tree · inquiry · debate (CONTENT_SPEC.md, "Types") beyond their contract."""
+    t = e.get("type")
     if t == "flaw":
-        L = e.get("lines", [])
-        if not strs(L, 3) or not e.get("flaws") or not all(isint(x, len(L)) for x in e["flaws"]): E(f"{eid}: flaw needs lines (>=3) and flaws (line indexes)")
-        if not strs(e.get("reasons"), 2) or not isint(e.get("reason"), len(e.get("reasons") or [])): E(f"{eid}: flaw needs reasons (>=2) and reason (index)")
+        L, R = L_(e.get("lines")), L_(e.get("reasons"))
+        if not all(idx(x, len(L)) for x in L_(e.get("flaws"))): E(f"{eid}: flaw needs lines (>=3) and flaws (line indexes)")
+        if "reason" in e and not idx(e.get("reason"), len(R)): E(f"{eid}: flaw needs reasons (>=2) and reason (index)")
     elif t == "case":
-        P = e.get("parts")
-        if not isinstance(P, list) or not 2 <= len(P) <= 4: E(f"{eid}: case needs 2-4 parts"); return
-        for i, p in enumerate(P):
-            pid = f"{eid} part {i+1}"
-            if not isinstance(p, dict) or p.get("type") not in ("mcq", "tf", "calc"): E(f"{pid}: type must be mcq, tf or calc"); continue
-            if not s(p.get("q")): E(f"{pid}: missing q")
-            if p["type"] == "mcq":
-                a = p.get("answer"); aa = a if isinstance(a, list) else [a]
-                if not strs(p.get("options"), 2) or not all(isint(x, len(p["options"])) for x in aa): E(f"{pid}: needs options and answer index")
-            if p["type"] == "tf" and not isinstance(p.get("answer"), bool): E(f"{pid}: tf answer must be bool")
-            if p["type"] == "calc" and not isinstance(p.get("answer"), (int, float)): E(f"{pid}: calc answer must be number")
+        for i, p in enumerate(L_(e.get("parts"))):
+            p = D_(p)
+            if p.get("type") == "mcq":
+                a = p.get("answer")
+                if not all(idx(x, len(L_(p.get("options")))) for x in (a if isinstance(a, list) else [a])): E(f"{eid} part {i+1}: needs options and answer index")
     elif t == "predict":
-        if not s(e.get("outcome")): E(f"{eid}: predict needs outcome (what actually happens)")
-        if isinstance(e.get("options"), list):
-            if not strs(e["options"], 2) or not isint(e.get("answer"), len(e["options"])): E(f"{eid}: predict needs options and answer index")
-        elif not isinstance(e.get("answer"), (int, float)) or isinstance(e.get("answer"), bool): E(f"{eid}: predict needs options+answer or a numeric answer")
+        if isinstance(e.get("options"), list) and isinstance(e.get("answer"), int) and not idx(e["answer"], len(e["options"])): E(f"{eid}: predict needs options and answer index")
     elif t == "tree":
-        N = e.get("nodes")
-        if not isinstance(N, dict) or not N: E(f"{eid}: tree needs nodes"); return
+        N = D_(e.get("nodes"))
+        if not N: return
         if e.get("start") not in N: E(f"{eid}: tree start must name a node")
         for k, n in N.items():
-            op = n.get("options", []) if isinstance(n, dict) else []
-            if not s(n.get("q") if isinstance(n, dict) else None) or len(op) < 2 or sum(1 for o in op if o.get("ok") is True) != 1: E(f"{eid} node {k}: q and options with exactly one ok")
-            if not all(s(o.get("text")) and (o.get("ok") or s(o.get("fb"))) for o in op): E(f"{eid} node {k}: every option needs text, every wrong one fb")
-            for o in op:
-                if o.get("to") is not None and o["to"] not in N: E(f"{eid} node {k}: to {o['to']!r} names no node")
+            for o in L_(D_(n).get("options")):
+                if isinstance(o, dict) and o.get("to") is not None and o["to"] not in N: E(f"{eid} node {k}: to {o['to']!r} names no node")
         seen, at = set(), e.get("start")
-        while at in N and at not in seen: seen.add(at); at = next((o.get("to") for o in N[at].get("options", []) if o.get("ok")), None)
+        while isinstance(at, str) and at in N and at not in seen: seen.add(at); at = next((D_(o).get("to") for o in L_(D_(N[at]).get("options")) if D_(o).get("ok")), None)
         if at is not None: E(f"{eid}: the right path of the tree loops or leads nowhere")
     elif t == "inquiry":
-        o, sc = e.get("options", []), e.get("scores", [])
-        if not strs(o, 3) or not isinstance(sc, list) or len(sc) != len(o) or not all(isint(x, 4) for x in sc): E(f"{eid}: inquiry needs options (>=3) and scores 0-3, one per option")
-        elif sc.count(max(sc)) != 1: E(f"{eid}: exactly one option has the highest score")
-        if not isinstance(e.get("why"), list) or len(e["why"]) != len(o): E(f"{eid}: inquiry needs why, one per option")
+        o, sc = L_(e.get("options")), L_(e.get("scores"))
+        if len(sc) != len(o): E(f"{eid}: inquiry needs options (>=3) and scores 0-3, one per option")
+        elif sc and all(num(x) for x in sc) and sc.count(max(sc)) != 1: E(f"{eid}: exactly one option has the highest score")
+        if isinstance(e.get("why"), list) and len(e["why"]) != len(o): E(f"{eid}: inquiry needs why, one per option")
     elif t == "debate":
-        S = e.get("sides")
-        if not isinstance(S, list) or not 2 <= len(S) <= 3: E(f"{eid}: debate needs 2-3 sides"); return
-        for i, sd in enumerate(S):
-            c = sd.get("counters") if isinstance(sd, dict) else None
-            if not s(sd.get("position") if isinstance(sd, dict) else None) or not strs(c, 2) or not isint(sd.get("best"), len(c or [])): E(f"{eid} side {i+1}: position, counters (>=2) and best (index)")
-            elif "why" in sd and (not isinstance(sd["why"], list) or len(sd["why"]) != len(c)): E(f"{eid} side {i+1}: why needs one text per counter")
+        for i, sd in enumerate(L_(e.get("sides"))):
+            sd = D_(sd); c = L_(sd.get("counters"))
+            if "best" in sd and not idx(sd.get("best"), len(c)): E(f"{eid} side {i+1}: position, counters (>=2) and best (index)")
+            elif isinstance(sd.get("why"), list) and len(sd["why"]) != len(c): E(f"{eid} side {i+1}: why needs one text per counter")
+
+def check_exercise(eid, e):
+    """One exercise on its own: its contract, then exercise_refs (tests/thinking_types.js compares it with packcheck.js)."""
+    for m in C.problems("noema.chapter.v1#exercise", e, eid): E(m)
+    exercise_refs(eid, e)
 
 def shape(e):
     """What a translation must keep of an exercise: everything that decides the answer (only the words may change)."""
@@ -280,135 +296,79 @@ def check_same(tr, src):
     if len(tr.get("pitfalls", [])) != len(src.get("pitfalls", [])): E(f"translation: {len(tr.get('pitfalls', []))} pitfalls, the source has {len(src.get('pitfalls', []))}")
     if len(tr.get("objectives", [])) != len(src.get("objectives", [])): W(f"translation: {len(tr.get('objectives', []))} objectives, the source has {len(src.get('objectives', []))}")
 
+def shape_problems(ch):
+    """The chapter's contract (noema.chapter.v1: the authored chapter) and each exercise's (#exercise, #exerciseSource),
+    in one node run. Exercise problems name the exercise ("ch01-e004: q: missing")."""
+    L = ch.get("exercises") if isinstance(ch.get("exercises"), list) else []
+    jobs = [("noema.chapter.v1", {**ch, "exercises": []} if isinstance(ch, dict) and "exercises" in ch else ch)]
+    jobs += [(c, e) for e in L for c in ("noema.chapter.v1#exercise", "noema.chapter.v1#exerciseSource")]
+    res, out = C.check_many(jobs), []
+    out += [i["text"] for i in res[0]]
+    for n, e in enumerate(L):
+        eid = e.get("id") if isinstance(e, dict) and isinstance(e.get("id"), str) else f"exercises[{n}]"
+        for i in res[1 + 2 * n] + res[2 + 2 * n]:
+            m = f"{eid}: {i['text']}"
+            if m not in out: out.append(m)
+    return out
+
 def main(path):
     try:
         ch = json.load(open(path, encoding="utf-8"))
     except Exception as e:
         print("ERROR: invalid JSON:", e); sys.exit(1)
-    for k in ["id","num","title","subtitle","emoji","sourcePages","mantra","objectives","sections","debug","pitfalls","flashcards","exercises"]:
-        if k not in ch: E(f"chapter missing '{k}'")
-    cid = ch.get("id","")
-    if not re.fullmatch(r"ch\d\d", cid): E("chapter id must be chNN")
-    secs = ch.get("sections",[])
+    if not isinstance(ch, dict): print("ERROR: a chapter is a JSON object"); sys.exit(1)
+    for m in shape_problems(ch): E(m)
+    cid = ch.get("id") if isinstance(ch.get("id"), str) else ""
+    secs = [x for x in L_(ch.get("sections")) if isinstance(x, dict)]
     sids = [x.get("id") for x in secs]
     if len(set(sids))!=len(sids): E("duplicate section ids")
     for sec in secs:
         sid = sec.get("id","?")
-        if not re.fullmatch(cid+r"-s\d\d", str(sid)): E(f"bad section id {sid}")
-        if not s(sec.get("title")): E(f"{sid}: missing title")
-        bl = sec.get("blocks",[])
+        if isinstance(sid, str) and re.fullmatch(r"ch\d\d-s\d\d", sid) and not sid.startswith(cid + "-"): E(f"bad section id {sid} (not of {cid})")
+        bl = [b for b in L_(sec.get("blocks")) if isinstance(b, dict)]
         if len(bl) < 3: W(f"{sid}: only {len(bl)} blocks")
         for i,b in enumerate(bl):
             t = b.get("t")
-            if t not in BLOCKS: E(f"{sid} block {i}: unknown type {t}"); continue
-            for f in BLOCKS[t]:
-                if f not in b: E(f"{sid} block {i} ({t}): missing {f}")
-            if t=="callout" and b.get("kind") not in KINDS: E(f"{sid} block {i}: bad callout kind {b.get('kind')}")
             if t=="table":
-                n=len(b.get("head",[]))
-                for r in b.get("rows",[]):
-                    if len(r)!=n: E(f"{sid} block {i}: table row width {len(r)} != head {n}")
-            if t=="diagram":
-                for ln in b.get("text","").split("\n"):
+                n=len(L_(b.get("head")))
+                for r in L_(b.get("rows")):
+                    if isinstance(r, list) and len(r)!=n: E(f"{sid} block {i}: table row width {len(r)} != head {n}")
+            if t=="diagram" and isinstance(b.get("text"), str):
+                for ln in b["text"].split("\n"):
                     if len(ln)>78: W(f"{sid} block {i}: diagram line >78 chars"); break
             if t=="figure":
                 if MEDIA is not None and b.get("media") not in MEDIA: E(f"{sid} block {i}: figure media '{b.get('media')}' not in media/media.json")
                 elif "regions" in b: check_regions(f"{sid} block {i}", b["regions"], *(((MEDIA or {}).get(b.get("media")) or {}).get(k) for k in ("w", "h")))
             if t=="interactive" and ACTIVITIES is not None:
                 for m in A.check_block(b, ACTIVITIES): E(f"{sid} block {i}: {m}")
-            if t=="terms":
-                for it in b["items"]:
-                    if not (s(it.get("term")) and s(it.get("def"))): E(f"{sid} block {i}: term needs term+def")
-            if t=="compare":
-                for it in b["items"]:
-                    if not s(it.get("title")) or not isinstance(it.get("points"),list): E(f"{sid} block {i}: compare item needs title+points")
-    exs = ch.get("exercises",[])
+    exs = [e for e in L_(ch.get("exercises")) if isinstance(e, dict)]
     ids = [e.get("id") for e in exs]
     for k,v in Counter(ids).items():
         if v>1: E(f"duplicate exercise id {k}")
     tc = Counter(); tagc=Counter(); per_sec=Counter(); quick=Counter()
     for e in exs:
         eid = e.get("id","?")
-        if not re.fullmatch(cid+r"-e\d{3}", str(eid)): E(f"bad exercise id {eid}")
+        if isinstance(eid, str) and re.fullmatch(r"ch\d\d-e\d{3}", eid) and not eid.startswith(cid + "-"): E(f"bad exercise id {eid} (not of {cid})")
         t = e.get("type")
-        if t not in TYPES: E(f"{eid}: unknown type {t}"); continue
+        if t not in TYPES: continue   # the contract says so
         tc[t]+=1
         if e.get("section") not in sids: E(f"{eid}: section {e.get('section')} not found")
         else: per_sec[e["section"]]+=1
         if e.get("quick"): quick[e.get("section")]+=1
-        if e.get("difficulty") not in (1,2,3): E(f"{eid}: difficulty must be 1-3")
-        tg = e.get("tags",[])
-        if not tg or not set(tg)<=TAGS: E(f"{eid}: bad tags {tg}")
-        for x in tg: tagc[x]+=1
-        if not s(e.get("q")) and t!="scenario": E(f"{eid}: missing q")
-        if t!="scenario" and not s(e.get("explain")): E(f"{eid}: missing explain")
-        if t=="sim":
-            if ACTIVITIES is not None:
-                for m in A.check_sim(e, ACTIVITIES): E(f"{eid}: {m}")
-        if t in ("mcq","odd"):
-            o=e.get("options",[]); a=e.get("answer")
-            if len(o)<2: E(f"{eid}: needs options")
-            aa = a if isinstance(a,list) else [a]
-            if not all(isinstance(x,int) and 0<=x<len(o) for x in aa): E(f"{eid}: bad answer index")
-            if isinstance(a,list) and len(a)>1 and not e.get("multi"): E(f"{eid}: multiple answers need multi:true")
-            if "why" in e and len(e["why"])!=len(o): E(f"{eid}: why length != options")
-            if len(set(o))!=len(o): E(f"{eid}: duplicate options")
-            if t=="odd" and len(o)!=4: W(f"{eid}: odd should have 4 options")
-        if t in VTYPES: check_visual(eid, e)
-        if t=="tf" and not isinstance(e.get("answer"),bool): E(f"{eid}: tf answer must be bool")
-        if t=="order":
-            it=e.get("items",[])
-            if not (3<=len(it)<=9): E(f"{eid}: order needs 3-9 items")
-            if len(set(it))!=len(it): E(f"{eid}: duplicate order items")
-        if t=="match":
-            p=e.get("pairs",[])
-            if not (3<=len(p)<=7) or any(len(x)!=2 for x in p): E(f"{eid}: match needs 3-7 pairs of 2")
-            if len(set(x[1] for x in p))!=len(p) or len(set(x[0] for x in p))!=len(p): E(f"{eid}: match sides must be distinct")
-        if t=="bucket":
-            b=e.get("buckets",[]); it=e.get("items",[])
-            if not (2<=len(b)<=4): E(f"{eid}: 2-4 buckets")
-            if not all(isinstance(x.get("bucket"),int) and 0<=x["bucket"]<len(b) and s(x.get("text")) for x in it): E(f"{eid}: bad bucket items")
-            if len(it)<4: W(f"{eid}: few bucket items")
-        if t=="cloze":
-            bl=re.findall(r"\[\[(.+?)\]\]", e.get("text",""))
-            if not bl: E(f"{eid}: cloze has no [[blanks]]")
-            if any(not x.split("|")[0].strip() for x in bl): E(f"{eid}: empty blank")
-        if t=="spotbug":
-            L=e.get("lines",[]); B=e.get("bugs",[])
-            if len(L)<3: E(f"{eid}: spotbug needs >=3 lines")
-            if not B or not all(isinstance(x,int) and 0<=x<len(L) for x in B): E(f"{eid}: bad bug indexes")
-            if not s(e.get("fix")): E(f"{eid}: missing fix")
-        if t=="calc":
-            if not isinstance(e.get("answer"),(int,float)): E(f"{eid}: calc answer must be number")
-        if t=="scenario":
-            st=e.get("steps",[])
-            if not st: E(f"{eid}: scenario needs steps")
-            if not s(e.get("q")): W(f"{eid}: scenario should have q (setup)")
-            for j,x in enumerate(st):
-                op=x.get("options",[])
-                if sum(1 for o in op if o.get("ok"))!=1: E(f"{eid} step {j}: exactly one ok option")
-                if not all(s(o.get("text")) and s(o.get("fb")) for o in op): E(f"{eid} step {j}: every option needs text+fb")
-        if t=="free":
-            if not s(e.get("model")) or not e.get("rubric"): E(f"{eid}: free needs model+rubric")
-        if t in TTYPES: check_thinking(eid, e)
-        if t=="write":
-            if not s(e.get("solution")) or not e.get("keywords"): E(f"{eid}: write needs solution+keywords")
-            else:
-                sol=e["solution"].lower()
-                for k in e["keywords"]:
-                    if k.lower() not in sol: E(f"{eid}: keyword '{k}' not in solution")
-    for d in ch.get("debug",[]):
+        for x in L_(e.get("tags")): tagc[x]+=1
+        if t=="sim" and ACTIVITIES is not None:
+            for m in A.check_sim(e, ACTIVITIES): E(f"{eid}: {m}")
+        exercise_refs(eid, e)
+    for d in [x for x in L_(ch.get("debug")) if isinstance(x, dict)]:
         did=d.get("id","?")
-        for k in ["title","symptom","askYourself","steps","rootCauses","fix"]:
-            if k not in d: E(f"debug {did}: missing {k}")
         if d.get("section") and d["section"] not in sids: E(f"debug {did}: bad section")
-        if len(d.get("askYourself",[]))<3: W(f"debug {did}: <3 askYourself")
-    fids = Counter(f.get("id") for f in ch.get("flashcards",[]))
-    for f in ch.get("flashcards",[]):
+        if len(L_(d.get("askYourself")))<3: W(f"debug {did}: <3 askYourself")
+    cards = [x for x in L_(ch.get("flashcards")) if isinstance(x, dict)]
+    fids = Counter(f.get("id") for f in cards)
+    for f in cards:
         fid = f.get("id")
-        if not re.fullmatch(cid+r"-f\d{3}", str(fid)): E(f"flashcard needs an id like {cid}-f001 (got {fid!r}); progress is keyed by it")
+        if not re.fullmatch(re.escape(cid)+r"-f\d{3}", str(fid)): E(f"flashcard needs an id like {cid}-f001 (got {fid!r}); progress is keyed by it")
         elif fids[fid] > 1: E(f"duplicate flashcard id {fid}")
-        if not (s(f.get("q")) and s(f.get("a"))): E("flashcard needs q+a")
         if f.get("section") and f["section"] not in sids: E(f"flashcard bad section {f.get('section')}")
     # warnings on quantity
     for sid in sids:
@@ -418,7 +378,7 @@ def main(path):
         for t in TYPES - VTYPES:
             if tc[t]<2: W(f"type '{t}' used {tc[t]}x (<2)")
     nvis = sum(tc[t] for t in VTYPES); vkinds = sum(1 for t in VTYPES if tc[t])
-    nfig = sum(1 for sec in secs for b in sec.get("blocks", []) if b.get("t") == "figure")
+    nfig = sum(1 for sec in secs for b in L_(sec.get("blocks")) if isinstance(b, dict) and b.get("t") == "figure")
     if MIN_VISUAL and (nvis or nfig):   # pictures only where they teach (docs/VISUAL.md §5): a chapter with none is fine
         if nvis < MIN_VISUAL: E(f"only {nvis} visual exercises (subject requires >= {MIN_VISUAL} per chapter, docs/VISUAL.md)")
         if vkinds < 2: E(f"visual exercises use {vkinds} type(s); need >= 2 different visual types")
@@ -429,7 +389,7 @@ def main(path):
         for level, _rule, msg in check_quality(ch, FEATURES): (E if level == "error" and QUALITY == "error" else W)(msg.split(": ", 1)[1] if msg.startswith(cid + ": ") else msg)
     elif BALANCE or BALANCE_WARN: check_balance(exs, BALANCE or BALANCE_WARN, FEATURES | ({"pictures"} if nvis or nfig else set()), E if BALANCE else W)
     if "--source" in ARGS: check_same(ch, json.load(open(ARGS[ARGS.index("--source")+1], encoding="utf-8")))
-    risky = sum(1 for e in exs if set(e.get("tags",[]))&{"pitfall","debug","exam"})
+    risky = sum(1 for e in exs if set(L_(e.get("tags")))&{"pitfall","debug","exam"})
     if exs and risky/len(exs)<0.3: W(f"only {risky}/{len(exs)} exercises tagged pitfall/debug/exam")
     print(f"== {path}: {len(secs)} sections, {len(exs)} exercises ({nvis} visual, {nfig} figures), {len(ch.get('debug',[]))} playbooks, {len(ch.get('flashcards',[]))} flashcards, {len(ch.get('pitfalls',[]))} pitfalls")
     print("   types:", dict(tc)); print("   tags:", dict(tagc))

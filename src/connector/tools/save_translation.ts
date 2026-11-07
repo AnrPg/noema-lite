@@ -76,7 +76,7 @@ export const tool: Tool = {
         const named = await s.step('pack', async () => {
           const seenT: NonNullable<Pack['translations']> = {}, seenS: Record<string, Record<string, unknown>> = {};
           const see = (cur: Pack | null): Pack | null => { Object.assign(seenT, cur?.translations ?? {}); for (const [l, v] of Object.entries(cur?.subject?.i18n ?? {})) seenS[l] = { ...(seenS[l] ?? {}), ...v }; return cur; };
-          const withOurs = (cur: Pack): Pack => ({ ...cur, v: 2, translations: { ...seenT, ...(cur.translations ?? {}), [loc]: { file: true, chapters: tr.chapters.length } },
+          const withOurs = (cur: Pack): Pack => ({ ...cur, v: 3, translations: { ...seenT, ...(cur.translations ?? {}), [loc]: { file: true, chapters: tr.chapters.length } },
             subject: { ...cur.subject, i18n: { ...seenS, ...(cur.subject?.i18n ?? {}), ...(tr.subject ? { [loc]: { ...(cur.subject?.i18n?.[loc] ?? {}), ...tr.subject } } : {}) } } });
           const ours = (got: Pack | null): boolean => !!got && got.translations?.[loc]?.chapters === tr.chapters.length && (!tr.subject?.title || got.subject?.i18n?.[loc]?.title === tr.subject.title) &&
             Object.keys(seenT).every(l => got.translations?.[l]) && Object.keys(seenS).every(l => got.subject?.i18n?.[l]);

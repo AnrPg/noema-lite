@@ -1,12 +1,12 @@
 /* The activity author (engine/activity_author.js, engine/schemaform.js, docs/activities-dev/authoring_ui.md).
-   Node (always): the sim-spec schema (tools/schemas/noema.sim-spec.v1.schema.json) accepts the reference specs and never refuses what
+   Node (always): the sim-spec schema (src/contracts/schemas/noema.sim-spec.v1.schema.json) accepts the reference specs and never refuses what
    the validators accept (the parity cases of tests/activities.js), and refuses the structural ones; the registry schema accepts the
    reference entries; the form generator reaches every value of the reference specs with a typed schema (no raw-data fallback);
    the documents round-trip losslessly through files, zip and import; check() finds no problem in the references and puts a bad
    formula at its field; the exported folder passes activity_lint.py; the words: every engine.author.* key is in i18n/engine/en.arb
    with a description and drafted in every UI locale with the placeholders of English (tools/i18n/check.js: 0 errors), the page
    reads them through NoemaI18n (no side table), every schema title and netlist field has a label; engine/activity_author_schemas.js
-   is the copy of tools/schemas that tools/build.py writes.
+   is the copy of src/contracts/schemas that tools/build.py writes.
    The engine library (docs/INTERACTIVE_LIBRARY.md §1.5): every library engine whose module exports its `table` gets a schema
    (NoemaLibSchema.specSchema) that accepts its reference activities and every fixture spec its own checkSpec accepts
    (tests/fixtures/enginelib/<name>.json), refuses the structural mistakes, and has a label for every field word; check() finds no
@@ -25,7 +25,7 @@ const args = process.argv.slice(2);
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) fails++; console.log((c ? '✓ ' : '✗ ') + m); return c; };
 const rj = f => JSON.parse(fs.readFileSync(f, 'utf8'));
-const SCH = f => rj(path.join(ROOT, 'tools', 'schemas', f));
+const SCH = f => rj(path.join(ROOT, 'src', 'contracts', 'schemas', f));
 const SCHEMA_FILES = ['noema.sim-spec.v1.schema.json', 'noema.circuit.v1.schema.json', 'noema.activities.v1.schema.json'];
 
 /* ---------- the embedded copy of the schemas (the one-file bundle, opened from disk, cannot fetch them): tools/build.py writes it ---------- */
@@ -61,8 +61,8 @@ const AP = 'engine.author.', arb = f => rj(path.join(ROOT, 'i18n', 'engine', f))
 const EN = Object.fromEntries(Object.entries(arb('en.arb')).filter(([k]) => k.startsWith(AP)).map(([k, v]) => [k.slice(AP.length), v]));
 
 console.log('— the schemas');
-ok(fs.readFileSync(EMBED, 'utf8') === embedText(), 'engine/activity_author_schemas.js is the current copy of tools/schemas (python3 tools/build.py writes it)');
-ok(SCHEMA_FILES.every(f => JSON.stringify(globalThis.NoemaActivitySchemas?.[f]) === JSON.stringify(SCH(f))), 'the embedded schemas equal tools/schemas/*.json');
+ok(fs.readFileSync(EMBED, 'utf8') === embedText(), 'engine/activity_author_schemas.js is the current copy of src/contracts/schemas (python3 tools/build.py writes it)');
+ok(SCHEMA_FILES.every(f => JSON.stringify(globalThis.NoemaActivitySchemas?.[f]) === JSON.stringify(SCH(f))), 'the embedded schemas equal src/contracts/schemas/*.json');
 for (const id of REFS) { const e = SF.validate(reg, sim, refDoc(id).spec); ok(!e.length, `sim-spec schema accepts the reference ${id} ${e.length ? JSON.stringify(e.slice(0, 2)) : ''}`); }
 for (const id of fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'activity.json')))) { const it = rj(path.join(EX, id, 'activity.json')); const e = SF.validate(reg, regSchema, { format: 'noema.activities/v1', items: [it] }); ok(!e.length, `registry schema accepts the entry of ${id} ${e.length ? JSON.stringify(e.slice(0, 2)) : ''}`); }
 

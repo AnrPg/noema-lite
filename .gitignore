@@ -46,3 +46,7 @@ library/languages/*/facades/*/tasks/
 # local note: what was left to check (not shared)
 PENDING_CHECKS.md
 tools/vault_fields/.cache/
+# generated from src/contracts/schemas by npm run contracts (tools/contracts.mjs)
+src/contracts/generated/
+src/contracts/validate.ts
+engine/contracts.js

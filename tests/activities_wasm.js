@@ -154,7 +154,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 ${hline}
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(path.join(ROOT, 'engine', 'packcheck.js'), 'utf8')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
+</script><script>${rd('35_simexpr.js')}</script><script>${fs.readFileSync(path.join(ROOT, 'engine', 'contracts.js'), 'utf8')}</script><script>${fs.readFileSync(path.join(ROOT, 'engine', 'packcheck.js'), 'utf8')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
 window.LOG = []; window.H = null;
 window.run = function (id, task) {
   var act = ACT.ITEMS[id], box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];

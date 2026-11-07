@@ -182,7 +182,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const sm = await tool('noema_save_pack', { pack_json: JSON.stringify(multi) }), so = await tool('noema_save_pack', { pack_json: JSON.stringify(mono) });
   const metaOf = id => JSON.parse(srv.state.kv[uid]['a:packmeta:' + id]?.value || '{}');
   ok(!sm.isError && !so.isError && JSON.stringify(metaOf('tiny-multi').contentLocales) === JSON.stringify(Object.keys(multi.translations)) && !('contentLocales' in metaOf('tiny-mono')),
-     'packmeta lists the content translations as contentLocales (pack schema v2, docs/i18n.md §10); none without translations');
+     'packmeta lists the content translations as contentLocales (docs/i18n.md §10); none without translations');
 
   console.log('— a pack with its source files packaged (make_pack.py): every file must arrive');
   const crypto = require('crypto');

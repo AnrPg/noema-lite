@@ -41,7 +41,7 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
 /** @typedef {{ name: string, in: string, kind: 'page' | 'worker' | 'sw' | 'node', out: string, budgetKB: number }} Entry */
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
-  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 900 },
+  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 2048 },
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },

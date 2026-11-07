@@ -1,5 +1,5 @@
 /* xAPI 1.0.3 / cmi5 export (engine/src/43_xapi.js, docs/activities-dev/xapi.md):
-   statements of sample attempts validate against tools/schemas/noema.xapi-export.v1.schema.json (a small validator here, and
+   statements of sample attempts validate against src/contracts/schemas/noema.xapi-export.v1.schema.json (a small validator here, and
    Python's jsonschema too when it is installed), are deterministic, never carry an email, have the right durations; the cmi5
    profile keeps the cmi5 rules; cmi5.xml is well-formed with the course structure the spec asks for.
    Usage: node tests/xapi.js */
@@ -7,7 +7,7 @@ const path = require('path'), fs = require('fs'), cp = require('child_process'),
 const ROOT = path.resolve(__dirname, '..');
 let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const X = require(path.join(ROOT, 'engine', 'src', '43_xapi.js'));
-const SCHEMA = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'schemas', 'noema.xapi-export.v1.schema.json'), 'utf8'));
+const SCHEMA = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.xapi-export.v1.schema.json'), 'utf8'));
 
 /* ---- a small JSON Schema (2020-12) validator: the keywords the schema uses ---- */
 function check(schema, v, at = '$', root = schema, out = []) {
@@ -167,7 +167,7 @@ except ImportError:
     print('skip'); sys.exit(0)
 s = json.load(open(sys.argv[1])); docs = json.load(open(sys.argv[2]))
 v = jsonschema.Draft202012Validator(s); jsonschema.Draft202012Validator.check_schema(s)
-print(sum(1 for d in docs for e in v.iter_errors(d)))`, path.join(ROOT, 'tools', 'schemas', 'noema.xapi-export.v1.schema.json'), tf], { encoding: 'utf8' }).trim();
+print(sum(1 for d in docs for e in v.iter_errors(d)))`, path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.xapi-export.v1.schema.json'), tf], { encoding: 'utf8' }).trim();
   fs.rmSync(tf, { force: true });
   if (out === 'skip') console.log('  ⏭  jsonschema not installed: Python cross-check skipped');
   else ok(out === '0', 'Python jsonschema (draft 2020-12) accepts the schema and both exports (' + out + ' errors)');

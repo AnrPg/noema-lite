@@ -1,6 +1,7 @@
 /* The app's script files the connector runs, in load order (= the order index.html loads them): the pack checks with the
    engines they check sim-spec@1 activities with, the curriculum code, the picture library, the language courses' core.
    tools/connector_bundle.mjs bundles each "legacy:<path>" import as its text (one copy: the app's own file). */
+import contracts from 'legacy:engine/contracts.js';
 import report from 'legacy:engine/report.js';
 import enginereq from 'legacy:engine/enginereq.js';
 import h5p from 'legacy:engine/src/38_activity_h5p.js';
@@ -52,7 +53,7 @@ import type { LegacySource } from './legacy.ts';
 const S = (path: string, text: string): LegacySource => ({ path, text });
 
 export const LEGACY_SOURCES: readonly LegacySource[] = [
-  S('engine/report.js', report), S('engine/enginereq.js', enginereq), S('engine/src/38_activity_h5p.js', h5p),
+  S('engine/contracts.js', contracts), S('engine/report.js', report), S('engine/enginereq.js', enginereq), S('engine/src/38_activity_h5p.js', h5p),
   S('engine/src/35_simexpr.js', simexpr), S('engine/src/36_engine_circuit.js', circuit),
   S('engine/src/39_engine_thermal.js', thermal), S('engine/src/40_engine_pid.js', pid), S('engine/src/41_engine_rf.js', rf), S('engine/src/42_engine_twin.js', twin),
   S('engine/src/46_lib_core.js', libCore), S('engine/src/46_lib_schema.js', libSchema), S('engine/src/46_lib_simkit.js', libSimkit), S('engine/src/46_lib_space.js', libSpace),

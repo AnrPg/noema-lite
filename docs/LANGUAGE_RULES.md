@@ -96,7 +96,7 @@ package `tools/lang_course.py package` and `langcore.checkLangPackage`, which th
   language), comparisons with it only (else with its type / branch / family); no English or other outside language as a
   reference point. Neutral core + neutral English master + contrast notes for every supported native and type (required
   on every grammar page; `profile.notes`; phenomenon `notes`) + locale facades (`facades/<locale>/`, addresses in
-  `tools/schemas/noema.langfacade.fields.json`, made with `tools/lang_facade.py task`, checked with `parity` / `lint`).
+  `src/contracts/schemas/noema.langfacade.fields.json`, made with `tools/lang_facade.py task`, checked with `parity` / `lint`).
 - **D20** **Vocabulary is its own track; every other aspect uses any vocabulary.** Sentences prefer the learner's known
   words but may contain unknown ones — at most ⌈30 %⌉ of the words, in production too — shown with 🆕, the word card on
   hover / tap and a list at the end of the lesson. Every word used anywhere has its full facade. Every field brings

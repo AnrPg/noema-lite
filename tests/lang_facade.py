@@ -59,7 +59,7 @@ try:
        f'extract en: {len(ts)} texts in {len(files)} files, manifest with coverage')
     try:
         import jsonschema
-        sch = json.load(open(os.path.join(ROOT, 'tools', 'schemas', 'noema.langfacade.v1.schema.json'), encoding='utf-8'))
+        sch = json.load(open(os.path.join(ROOT, 'src', 'contracts', 'schemas', 'noema.langfacade.v1.schema.json'), encoding='utf-8'))
         errs = list(jsonschema.Draft202012Validator({**sch, '$ref': '#/$defs/manifest'}).iter_errors(man))
         for p in files: errs += list(jsonschema.Draft202012Validator({**sch, '$ref': '#/$defs/entries'}).iter_errors(json.load(open(p, encoding='utf-8'))))
         ok(not errs, 'the facade files follow noema.langfacade.v1' + (f': {errs[0].message}' if errs else ''))

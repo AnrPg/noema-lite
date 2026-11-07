@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "noema.lang.v1",
+ "$id": "https://noema-lite.netlify.app/schemas/noema.lang.v1.schema.json",
  "title": "noema-lite language course (docs/LANGUAGES.md §4)",
  "description": "Structure of the files of a language course. tools/validate_lang.py checks this AND the rules between files (forms of the sentences = paradigm cells, DAG, coverage of every concept in every language, pinyin, vowel marks, NFC…). Pick the definition by file: course.json → #/$defs/course, core/fields/*.json → field, core/nodes.json → nodes, core/functions/*.json → function, core/frames.json → frames, lang/<code>/language.json → language, lang/<code>/lexicon/<node>.json → lexicon, lang/<code>/grammar/<function>.json → grammar, lang/<code>/bank/*.json → bank.",
  "$defs": {
@@ -892,27 +892,50 @@
      }
     },
     "typology": {
-     "type": "object",
-     "required": [
-      "type",
-      "why"
-     ],
-     "properties": {
-      "type": {
-       "enum": [
-        "isolating",
-        "agglutinating",
-        "fusional",
-        "polysynthetic"
-       ]
+     "description": "fn.overview: the language's morphological type and why (D10); every other function: the typological feature values it is about (D16, the vocabulary of _typology/features.json)",
+     "oneOf": [
+      {
+       "type": "object",
+       "required": [
+        "type",
+        "why"
+       ],
+       "properties": {
+        "type": {
+         "enum": [
+          "isolating",
+          "agglutinating",
+          "fusional",
+          "polysynthetic"
+         ]
+        },
+        "why": {
+         "type": "string"
+        },
+        "alsoShows": {
+         "type": "string"
+        }
+       }
       },
-      "why": {
-       "type": "string"
-      },
-      "alsoShows": {
-       "type": "string"
+      {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "required": [
+         "feature",
+         "value"
+        ],
+        "properties": {
+         "feature": {
+          "type": "string"
+         },
+         "value": {
+          "type": "string"
+         }
+        }
+       }
       }
-     }
+     ]
     },
     "facts": {
      "type": "array",

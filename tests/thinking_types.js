@@ -25,7 +25,7 @@ const broken = [
 ];
 const PYCHECK = `import json,sys; sys.argv=['validate.py']; sys.path.insert(0, ${JSON.stringify(path.join(REPO, 'tools'))}); import validate as V
 for e in json.load(sys.stdin):
-    V.errors.clear(); V.check_thinking(e['id'], e); print(len(V.errors))`;
+    V.errors.clear(); V.check_exercise(e['id'], e); print(len(V.errors))`;
 const cases = [...FIX, ...broken.map(([t, f]) => { const e = JSON.parse(JSON.stringify(byType[t])); f(e); return e; })];
 const py = execFileSync('python3', ['-c', PYCHECK], { input: JSON.stringify(cases), encoding: 'utf8' }).trim().split('\n').map(Number);
 FIX.forEach((e, i) => ok(py[i] === 0, `${e.type}: valid for tools/validate.py`));

@@ -238,7 +238,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     await p.screenshot({ path: SHOTS + '/src2_app.png', fullPage: true });
 
     console.log('— the connector: the learner’s Claude makes the Roadmap (noema_create_roadmap)');
-    const MCP = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // = tools/build.py MCP_ENGINE
+    const MCP = ['engine/contracts.js', 'engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // = tools/build.py MCP_ENGINE
     ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'src/connector/engine/sources.ts'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
     const handler = await connectorHandler(ROOT, { config: { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] }, docs: { workflow: 'SKILL', content: 'C', visual: 'V' } });
     const T = (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'iro@example.com', password: 'secret123' }) })).json()).access_token;

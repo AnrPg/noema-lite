@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "node tools/dev.mjs",
+    "prebuild": "npm run contracts",
     "build": "node tools/esbuild.mjs",
     "site": "python3 tools/build.py site",
     "bundle": "python3 tools/build.py bundle",
@@ -15,9 +16,10 @@
     "format": "prettier --write src",
     "format:check": "prettier --check src",
     "contracts": "node tools/contracts.mjs",
-    "test:unit": "node --test --experimental-strip-types \"src/**/*.test.ts\"",
+    "migrate": "node --experimental-strip-types --no-warnings tools/migrate/run.mjs",
+    "test:unit": "node --test --experimental-strip-types --no-warnings \"src/**/*.test.ts\"",
     "test:a11y": "node tests/a11y.js",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test:unit"
+    "check": "npm run contracts && npm run typecheck && npm run lint && npm run format:check && npm run test:unit && npm run migrate -- --check"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
