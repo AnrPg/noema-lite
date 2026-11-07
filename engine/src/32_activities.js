@@ -37,6 +37,8 @@ const ACTP = (() => {
     // html-app@1: a mini-app asks for an engine of the library (34_activity_html.js engineBridge checks the rest: declared, the spec, the inputs)
     'engine:check': p => str(p.engine, 40) && isObj(p.spec),
     'engine:run': p => str(p.engine, 40) && isObj(p.spec) && (p.inputs == null || isObj(p.inputs)) && (p.seed == null || (isInt(p.seed) && p.seed >= 0 && p.seed <= 4294967295)),
+    // html-app@1: several engines of the library in one spec (docs/INTERACTIVE.md §12.8: {consts?, derived?, parts, couple?}), noema.sim(spec).run(inputs)
+    'sim:run': p => isObj(p.spec) && (p.inputs == null || isObj(p.inputs)) && (p.seed == null || (isInt(p.seed) && p.seed >= 0 && p.seed <= 4294967295)),
   };
   /** → { ok: true, msg } | { ok: false, why, ignore? } — ignore: an unknown type (counted, not a strike) */
   function check(data) {

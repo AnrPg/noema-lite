@@ -1,0 +1,1430 @@
+{
+ "names": [
+  "good: heat rod, Crank–Nicolson against the exact sine mode",
+  "good: heat FTCS with the auto time step, a probe and an event",
+  "good: 2-D heat plate, ADI, heat map with contours",
+  "good: robin cooling and a source with a rate",
+  "good: advection of a square wave, van Leer, periodic",
+  "good: advection–diffusion in 2-D, upwind",
+  "good: a plucked string, leapfrog and energy",
+  "good: Fisher–KPP front and its speed",
+  "good: Gray–Scott spots on a 2-D grid",
+  "good: Schnakenberg Turing analysis on a line",
+  "good: custom kinetics with two fields",
+  "good: Laplace in a square by SOR",
+  "good: rule 30 elementary automaton",
+  "good: Game of Life glider",
+  "good: sandpile avalanches",
+  "good: forest fire",
+  "bad: no equation, no grid",
+  "bad: a 2-D grid of 300 nodes and a 2-D method on a line",
+  "bad: method of another equation, missing D and tEnd",
+  "bad: periodic on one side, robin without b, periodic with a value",
+  "bad: preset with a foreign parameter, reaction on a preset, a field w",
+  "bad: life on a line, bad B/S, cells of the wrong length, drop on life",
+  "bad: elementary without code; too much work",
+  "bad: probes, events and interrupts that do not match",
+  "bad: outputs of the wrong equation",
+  "bad: poisson in time, solver on heat",
+  "bad: shapes missing coordinates",
+  "bad: a name of the spec reused as a variable, kinds wrong",
+  "bad: rd options on heat, initV and nine on a line",
+  "bad: sandpile output on life, cell without x"
+ ],
+ "specs": [
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.1,
+     "max": 2,
+     "default": 1,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "equation": "heat",
+    "grid": {
+     "nx": 101,
+     "x0": 0,
+     "x1": 1
+    },
+    "D": "D",
+    "init": "sin(pi*x)",
+    "bc": {
+     "all": {
+      "type": "dirichlet",
+      "value": 0
+     }
+    },
+    "tEnd": 0.1,
+    "method": "cn",
+    "dt": 0.001
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "series",
+     "of": "x"
+    },
+    {
+     "id": "u",
+     "kind": "series",
+     "of": "profile"
+    },
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "error",
+     "expr": "exp(-pi^2*D*t)*sin(pi*x)",
+     "norm": "max"
+    },
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "r"
+    },
+    {
+     "id": "st",
+     "kind": "scene",
+     "of": "spacetime"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "heat",
+    "grid": {
+     "nx": 51
+    },
+    "D": 1,
+    "init": "0",
+    "bc": {
+     "left": {
+      "type": "dirichlet",
+      "value": 1
+     },
+     "right": {
+      "type": "neumann",
+      "value": 0
+     }
+    },
+    "tEnd": 0.5,
+    "probes": [
+     {
+      "id": "mid",
+      "at": "point",
+      "x": 0.5
+     }
+    ],
+    "events": [
+     {
+      "id": "warm",
+      "of": "probe",
+      "probe": "mid",
+      "level": 0.5,
+      "dir": 1,
+      "stop": true
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "pm",
+     "kind": "series",
+     "of": "probe",
+     "probe": "mid"
+    },
+    {
+     "id": "tw",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "warm",
+     "nth": 1
+    },
+    {
+     "id": "dt",
+     "kind": "scalar",
+     "of": "dt"
+    },
+    {
+     "id": "dm",
+     "kind": "scalar",
+     "of": "dtMax"
+    },
+    {
+     "id": "fl",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "dt-auto"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "heat",
+    "method": "adi",
+    "grid": {
+     "nx": 41,
+     "ny": 41,
+     "x0": -1,
+     "x1": 1,
+     "y0": -1,
+     "y1": 1
+    },
+    "D": 0.1,
+    "init": "exp(-(x^2+y^2)/0.02)",
+    "bc": {
+     "all": {
+      "type": "neumann",
+      "value": 0
+     }
+    },
+    "tEnd": 0.1,
+    "dt": 0.002,
+    "obstacles": [
+     {
+      "shape": "circle",
+      "x": 0.5,
+      "y": 0.5,
+      "r": 0.1,
+      "value": 0
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scene",
+     "of": "heatmap",
+     "contours": 3,
+     "levels": 5
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "drift"
+    },
+    {
+     "id": "pr",
+     "kind": "series",
+     "of": "profile",
+     "y": 0
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "k",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.1,
+     "max": 1,
+     "default": 0.5,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "equation": "heat",
+    "grid": {
+     "nx": 81
+    },
+    "D": "k",
+    "vars": {
+     "h": 2
+    },
+    "bc": {
+     "left": {
+      "type": "robin",
+      "a": "h",
+      "b": 1,
+      "value": 0
+     },
+     "right": {
+      "type": "dirichlet",
+      "value": 0
+     }
+    },
+    "sources": [
+     {
+      "shape": "rect",
+      "x0": 0.4,
+      "x1": 0.6,
+      "rate": "5"
+     }
+    ],
+    "tEnd": 1,
+    "method": "btcs",
+    "dt": 0.01,
+    "interrupts": [
+     {
+      "at": 0.5,
+      "set": {
+       "h": 10
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "mean"
+    },
+    {
+     "id": "s",
+     "kind": "series",
+     "of": "stat",
+     "stat": "max"
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "at",
+     "x": 0.5,
+     "t": 0.5
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "v",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.5,
+     "max": 1,
+     "default": 1,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "equation": "advection",
+    "method": "vanleer",
+    "grid": {
+     "nx": 200
+    },
+    "bc": {
+     "all": {
+      "type": "periodic"
+     }
+    },
+    "vx": "v",
+    "init": "(x>0.2 && x<0.4)?1:0",
+    "tEnd": 1,
+    "dt": 0.004
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cfl"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "gain"
+    },
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "error",
+     "expr": "(x>0.2 && x<0.4)?1:0",
+     "norm": "l2"
+    },
+    {
+     "id": "o",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "overshoot"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "advdiff",
+    "method": "upwind",
+    "grid": {
+     "nx": 60,
+     "ny": 60
+    },
+    "D": 0.001,
+    "vx": "0.5",
+    "vy": "0.2",
+    "init": "exp(-((x-0.3)^2+(y-0.3)^2)/0.005)",
+    "tEnd": 0.5
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scene",
+     "of": "heatmap"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cfl"
+    },
+    {
+     "id": "r",
+     "kind": "scalar",
+     "of": "r"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "wave",
+    "grid": {
+     "nx": 201
+    },
+    "c": 1,
+    "init": "x<0.5?x:1-x",
+    "initV": "0",
+    "damping": 0,
+    "bc": {
+     "all": {
+      "type": "dirichlet",
+      "value": 0
+     }
+    },
+    "tEnd": 2
+   },
+   "outputs": [
+    {
+     "id": "e",
+     "kind": "series",
+     "of": "stat",
+     "stat": "energy"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "drift"
+    },
+    {
+     "id": "st",
+     "kind": "scene",
+     "of": "spacetime"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cfl"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "r",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.5,
+     "max": 2,
+     "default": 1,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "equation": "rd",
+    "kinetics": "fisher",
+    "kp": {
+     "r": "r"
+    },
+    "grid": {
+     "nx": 1000,
+     "x0": 0,
+     "x1": 200
+    },
+    "D": 1,
+    "init": "x<5?1:0",
+    "bc": {
+     "all": {
+      "type": "neumann",
+      "value": 0
+     }
+    },
+    "tEnd": 60,
+    "front": {
+     "level": 0.5
+    }
+   },
+   "outputs": [
+    {
+     "id": "fr",
+     "kind": "series",
+     "of": "front"
+    },
+    {
+     "id": "v",
+     "kind": "scalar",
+     "of": "frontSpeed"
+    },
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "F",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.02,
+     "max": 0.06,
+     "default": 0.04,
+     "step": 0.002
+    }
+   ],
+   "model": {
+    "dim": 2,
+    "equation": "rd",
+    "kinetics": "grayscott",
+    "kp": {
+     "F": "F",
+     "k": 0.06
+    },
+    "grid": {
+     "nx": 101,
+     "ny": 101,
+     "x0": 0,
+     "x1": 100,
+     "y0": 0,
+     "y1": 100
+    },
+    "D": 0.16,
+    "Dv": 0.08,
+    "init": "(abs(x-50)<5 && abs(y-50)<5)?0.5:1",
+    "initV": "(abs(x-50)<5 && abs(y-50)<5)?0.25:0",
+    "noise": {
+     "amp": 0.01,
+     "field": "v"
+    },
+    "bc": {
+     "all": {
+      "type": "periodic"
+     }
+    },
+    "tEnd": 2000,
+    "dt": 1
+   },
+   "outputs": [
+    {
+     "id": "h",
+     "kind": "scene",
+     "of": "heatmap",
+     "field": "v"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "mean",
+     "field": "v"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "rd",
+    "kinetics": "schnakenberg",
+    "grid": {
+     "nx": 200,
+     "x0": 0,
+     "x1": 100
+    },
+    "D": 1,
+    "Dv": 40,
+    "init": "1",
+    "initV": "0.9",
+    "noise": {
+     "amp": 0.01
+    },
+    "tEnd": 50
+   },
+   "outputs": [
+    {
+     "id": "tu",
+     "kind": "scalar",
+     "of": "turing"
+    },
+    {
+     "id": "tk",
+     "kind": "scalar",
+     "of": "turingK"
+    },
+    {
+     "id": "tw",
+     "kind": "scalar",
+     "of": "turingWavelength"
+    },
+    {
+     "id": "w",
+     "kind": "scalar",
+     "of": "wavelength"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "rd",
+    "kinetics": "custom",
+    "kp": {
+     "a": 1
+    },
+    "reaction": {
+     "u": "a*u-u^3-v",
+     "v": "0.1*(u-v)"
+    },
+    "grid": {
+     "nx": 100,
+     "x0": 0,
+     "x1": 50
+    },
+    "D": 1,
+    "Dv": 2,
+    "init": "0.1*sin(x)",
+    "initV": "0",
+    "tEnd": 10
+   },
+   "outputs": [
+    {
+     "id": "u",
+     "kind": "series",
+     "of": "profile"
+    },
+    {
+     "id": "v",
+     "kind": "series",
+     "of": "profile",
+     "field": "v"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "poisson",
+    "method": "sor",
+    "grid": {
+     "nx": 41,
+     "ny": 41
+    },
+    "bc": {
+     "all": {
+      "type": "dirichlet",
+      "value": 0
+     },
+     "top": {
+      "type": "dirichlet",
+      "value": 1
+     }
+    },
+    "solver": {
+     "tol": 1e-8,
+     "maxIter": 20000,
+     "omega": 1.85
+    }
+   },
+   "outputs": [
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "at",
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "id": "it",
+     "kind": "scalar",
+     "of": "iterations"
+    },
+    {
+     "id": "res",
+     "kind": "series",
+     "of": "residual"
+    },
+    {
+     "id": "h",
+     "kind": "scene",
+     "of": "heatmap",
+     "contours": 4
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "ca",
+    "grid": {
+     "nx": 201
+    },
+    "ca": {
+     "rule": "elementary",
+     "code": 30,
+     "init": "single",
+     "steps": 100
+    }
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "population"
+    },
+    {
+     "id": "st",
+     "kind": "scene",
+     "of": "spacetime"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "density"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "ca",
+    "grid": {
+     "nx": 20,
+     "ny": 20
+    },
+    "ca": {
+     "rule": "life",
+     "bs": "B3/S23",
+     "init": "cells",
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       2
+      ]
+     ],
+     "wrap": true,
+     "steps": 40
+    }
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "population"
+    },
+    {
+     "id": "h",
+     "kind": "scene",
+     "of": "heatmap"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cell",
+     "x": 1,
+     "y": 1
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "ca",
+    "grid": {
+     "nx": 40,
+     "ny": 40
+    },
+    "ca": {
+     "rule": "sandpile",
+     "drop": "random",
+     "steps": 3000
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "series",
+     "of": "avalanche"
+    },
+    {
+     "id": "m",
+     "kind": "scalar",
+     "of": "avalancheMean"
+    },
+    {
+     "id": "tau",
+     "kind": "scalar",
+     "of": "avalancheTau"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "ca",
+    "grid": {
+     "nx": 60,
+     "ny": 60
+    },
+    "ca": {
+     "rule": "forestfire",
+     "p": 0.05,
+     "f": 0.0005,
+     "density": 0.5,
+     "steps": 300
+    }
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "population"
+    },
+    {
+     "id": "d",
+     "kind": "scalar",
+     "of": "density"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "D": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "max"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "heat",
+    "method": "adi",
+    "grid": {
+     "nx": 300,
+     "ny": 10
+    },
+    "D": 1,
+    "tEnd": 1,
+    "vy": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "max"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "heat",
+    "method": "upwind",
+    "grid": {
+     "nx": 20
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "r"
+    },
+    {
+     "id": "y",
+     "kind": "scalar",
+     "of": "cfl"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "heat",
+    "grid": {
+     "nx": 20
+    },
+    "D": 1,
+    "tEnd": 1,
+    "bc": {
+     "left": {
+      "type": "periodic",
+      "value": 1
+     },
+     "right": {
+      "type": "robin",
+      "a": 1
+     }
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "max"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "rd",
+    "kinetics": "grayscott",
+    "kp": {
+     "Q": 1
+    },
+    "reaction": {
+     "u": "1",
+     "w": "2"
+    },
+    "grid": {
+     "nx": 20
+    },
+    "D": 1,
+    "tEnd": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "max",
+     "field": "v"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "ca",
+    "grid": {
+     "nx": 20
+    },
+    "ca": {
+     "rule": "life",
+     "bs": "B9/S",
+     "init": "cells",
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "drop": "centre"
+    },
+    "tEnd": 3
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "population"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "max"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "ca",
+    "grid": {
+     "nx": 2000
+    },
+    "ca": {
+     "rule": "elementary",
+     "steps": 5000,
+     "init": "single"
+    }
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "population"
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "avalancheMean"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "heat",
+    "grid": {
+     "nx": 20
+    },
+    "D": 1,
+    "tEnd": 1,
+    "vars": {
+     "x": 1,
+     "k": 2
+    },
+    "probes": [
+     {
+      "id": "p",
+      "at": "point"
+     },
+     {
+      "id": "p",
+      "at": "line",
+      "x0": 0
+     }
+    ],
+    "events": [
+     {
+      "id": "e",
+      "of": "probe",
+      "probe": "q",
+      "level": 1
+     },
+     {
+      "id": "f",
+      "of": "front",
+      "level": 1,
+      "probe": "p"
+     }
+    ],
+    "interrupts": [
+     {
+      "at": 1,
+      "on": "e",
+      "set": {
+       "k": 1,
+       "z": 2
+      }
+     },
+     {
+      "set": {
+       "k": 1
+      }
+     },
+     {
+      "on": "nope",
+      "set": {
+       "k": 2
+      }
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "e"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "eventCount",
+     "event": "zz"
+    },
+    {
+     "id": "c",
+     "kind": "series",
+     "of": "probe",
+     "probe": "nope"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "wave",
+    "grid": {
+     "nx": 20
+    },
+    "c": 1,
+    "tEnd": 1,
+    "damping": 0.1
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "r"
+    },
+    {
+     "id": "b",
+     "kind": "scalar",
+     "of": "iterations"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "turing"
+    },
+    {
+     "id": "d",
+     "kind": "scene",
+     "of": "heatmap"
+    },
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "error"
+    },
+    {
+     "id": "f",
+     "kind": "scalar",
+     "of": "flag",
+     "code": "nope"
+    },
+    {
+     "id": "g",
+     "kind": "scalar",
+     "of": "population"
+    },
+    {
+     "id": "h",
+     "kind": "scalar",
+     "of": "at"
+    },
+    {
+     "id": "q",
+     "kind": "series",
+     "of": "y"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "poisson",
+    "grid": {
+     "nx": 20
+    },
+    "tEnd": 3,
+    "dt": 0.1,
+    "events": [
+     {
+      "id": "e",
+      "of": "max",
+      "level": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "s",
+     "kind": "scene",
+     "of": "spacetime"
+    },
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "profile",
+     "t": 1
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "heat",
+    "grid": {
+     "nx": 20,
+     "ny": 20
+    },
+    "D": 1,
+    "tEnd": 1,
+    "sources": [
+     {
+      "shape": "point",
+      "rate": 1
+     },
+     {
+      "shape": "rect",
+      "x0": 0,
+      "rate": 2
+     },
+     {
+      "shape": "circle",
+      "x": 1,
+      "rate": 1
+     }
+    ],
+    "obstacles": [
+     {
+      "shape": "all"
+     },
+     {
+      "shape": "circle",
+      "x": 1,
+      "y": 1
+     }
+    ],
+    "probes": [
+     {
+      "id": "a",
+      "at": "area",
+      "x0": 0,
+      "x1": 1
+     }
+    ]
+   },
+   "outputs": [
+    {
+     "id": "p",
+     "kind": "series",
+     "of": "profile"
+    },
+    {
+     "id": "a",
+     "kind": "scalar",
+     "of": "at",
+     "x": 1
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [
+    {
+     "id": "D",
+     "kind": "slider",
+     "label": "lbl",
+     "min": 0.1,
+     "max": 2,
+     "default": 1,
+     "step": 0.1
+    }
+   ],
+   "model": {
+    "equation": "heat",
+    "grid": {
+     "nx": "many"
+    },
+    "D": 1,
+    "tEnd": 1,
+    "vars": {
+     "D": 1,
+     "u": 2
+    },
+    "safety": 2,
+    "frames": 1
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "nope"
+    },
+    {
+     "id": "z",
+     "kind": "series",
+     "of": "bogus"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "equation": "heat",
+    "grid": {
+     "nx": 20
+    },
+    "D": 1,
+    "tEnd": 1,
+    "Dv": 2,
+    "kinetics": "fisher",
+    "initV": "0",
+    "nine": true,
+    "ca": {
+     "rule": "life"
+    }
+   },
+   "outputs": [
+    {
+     "id": "x",
+     "kind": "scalar",
+     "of": "final",
+     "stat": "max"
+    }
+   ]
+  },
+  {
+   "format": "noema.sim-spec/v1",
+   "engine": "field@1",
+   "title": "title",
+   "params": [],
+   "model": {
+    "dim": 2,
+    "equation": "ca",
+    "grid": {
+     "nx": 20,
+     "ny": 20
+    },
+    "ca": {
+     "rule": "life",
+     "bs": "B3/S23"
+    }
+   },
+   "outputs": [
+    {
+     "id": "a",
+     "kind": "series",
+     "of": "avalanche"
+    },
+    {
+     "id": "c",
+     "kind": "scalar",
+     "of": "cell"
+    },
+    {
+     "id": "e",
+     "kind": "scalar",
+     "of": "eventTime",
+     "event": "x",
+     "nth": 0
+    }
+   ]
+  }
+ ]
+}

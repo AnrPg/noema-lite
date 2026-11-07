@@ -1,0 +1,99 @@
+{
+ "cases": [
+  {
+   "name": "N 20, p0 ½, neutral: about half fix A, and the test finds nothing against Kimura",
+   "steps": [
+    {
+     "set": "N",
+     "value": 20
+    },
+    {
+     "set": "p0",
+     "value": 0.5
+    },
+    {
+     "set": "s",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "values": {
+     "u": [
+      0.5,
+      0.5
+     ],
+     "kFix": [
+      80,
+      120
+     ],
+     "pval": [
+      0.05,
+      1
+     ],
+     "inside": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "name": "N 100, p0 0.1, s 0.02: Kimura 0.34; the count agrees within sampling error",
+   "steps": [
+    {
+     "set": "N",
+     "value": 100
+    },
+    {
+     "set": "p0",
+     "value": 0.1
+    },
+    {
+     "set": "s",
+     "value": 0.02
+    }
+   ],
+   "expect": {
+    "values": {
+     "u": [
+      0.335495,
+      0.336167
+     ],
+     "kFix": [
+      45,
+      85
+     ]
+    }
+   }
+  },
+  {
+   "name": "N 50, p0 0.2, neutral: the fixation probability is the starting frequency",
+   "steps": [
+    {
+     "set": "N",
+     "value": 50
+    },
+    {
+     "set": "p0",
+     "value": 0.2
+    },
+    {
+     "set": "s",
+     "value": 0
+    }
+   ],
+   "expect": {
+    "values": {
+     "u": [
+      0.2,
+      0.2
+     ],
+     "kFix": [
+      25,
+      55
+     ]
+    }
+   }
+  }
+ ]
+}

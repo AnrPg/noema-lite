@@ -10,20 +10,25 @@ It is a plain module, `window.NoemaSimKit` (frozen). It loads after `46_lib_core
 fdlibm ports for `exp`, `log`, `sin`, `cos` and `pow`, so the numbers are the same on every device. It has no DOM, no network and no
 clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker:
 `NoemaExpr.source() + NoemaLibCore.source() + NoemaSimKit.source() + <engine module>` (`source()` returns `'(…)(self);'`, like the
-core's). Tests: `node tests/lib_simkit.js`.
+core's). Tests: `node tests/lib_simkit.js` (93 assertions against published values and exact solutions).
 
 | § | what | functions |
 |---|---|---|
 | 1 | codes and budgets | `codes(fatal)`, `budget(max)` |
 | 2 | randomness | `stream(seed, name, opts)`, `subseed(seed, i)`, `dist(d)`, `DISTS` |
-| 3 | the event calendar and the executive | `calendar()`, `sim(opts)` (`at`, `after`, `cancel`, `when`, `activity`, `run`, `stop`, `log`) |
+| 3 | the event calendar and the executive | `calendar()`, `sim(opts)` (`at`, `after`, `cancel`, `when`, `activity`, `run`, `stop`, `log`, `eventLog`) |
 | 4 | continuous time and roots | `integrate(cfg)`, `locate`, `brent`, `METHODS` |
-| 5 | output analysis | `welford`, `timeAvg`, `ci`, `tq`, `batchMeans`, `mser5`, `acf`, `replicate`, `littleCheck` |
-| 6 | sweeps and sensitivity | `linspace`, `oat`, `grid`, `morris`, `sobol` |
+| 4.1 | delay equations and DAEs | `dde(cfg)`, `dae(cfg)` |
+| 4.2 | stochastic dynamics | `ssa(cfg)`, `tauLeap(cfg)`, `sde(cfg)` |
+| 4.3 | schedules and time-varying arrivals | `nhpp`, `piecewise` |
+| 5 | output analysis | `welford`, `timeAvg`, `ci`, `tq`, `batchMeans`, `mser5`, `acf`, `replicate`, `littleCheck`, `untilPrecision` |
+| 5.1 | variance reduction | `controlVariate` (CRN and antithetics: §2) |
+| 6 | sweeps, sensitivity, calibration and optimisation | `linspace`, `oat`, `grid`, `morris`, `sobol`, `lhs`, `minimize`, `calibrate` |
+| 6.1 | input modelling | `cdfOf`, `quantileOf`, `truncated`, `mixture`, `fit`, `ksTest`, `chiSquare`, `andersonDarling` |
 | 7 | verification | `richardson`, `conservation`, `deterministic`, `dim`, `sameDim`, `convert` |
 | 8 | for engine authors | `event`, `clone`, `stepper`, `odeStepper`, `wrapRun` |
 | 9 | co-simulation | `cosim(cfg)` |
-| — | special functions | `lgamma`, `gammaP`, `betaI`, `normCdf`, `normInv`, `tCdf`, `tq` |
+| — | special functions | `lgamma`, `gammaP`, `betaI`, `normCdf`, `normInv`, `tCdf`, `tq`, `digamma`, `trigamma` |
 
 ## 1. Codes and budgets
 
@@ -57,7 +62,7 @@ which is 0.127011122046577.
 - `subseed(seed, i)` returns a 32-bit seed (a splitmix32 finaliser).
 - `dist({dist, …})` returns `{ok, draw(r), mean, var, scv}`, the distribution objects of the engines, with the moments the queueing
   formulas need. The kinds are `const {value}`, `exp {mean | rate}`, `uniform {min, max}`, `tri {min, mode, max}`,
-  `normal {mean, sd}` (clipped at 0), `lognormal {mean, sd}` (its own moments: σ² = ln(1 + sd²/m²)), `gamma {shape, scale | mean, cv}`,
+  `normal {mean, sd}` (unclipped: a duration takes `truncated(d, 0)`, or the engine clips it and raises its own code), `lognormal {mean, sd}` (its own moments: σ² = ln(1 + sd²/m²)), `gamma {shape, scale | mean, cv}`,
   `erlang {k, mean}`, `weibull {shape, scale}`, `beta {a, b, min?, max?}`, `empirical {values, probs?}` and `discrete {values, probs?}`.
   `ok` is false (and the draws NaN) when a parameter is out of range.
 
@@ -80,7 +85,7 @@ conditional (C) events are tried until none fires.
 | `when(cond(t), fn(t), {prio, once}) → id`, `unwhen(id)` | a conditional event (C phase), tried in priority order |
 | `activity(dur, onDone, opts) → A` | an interruptible activity: `A.interrupt() → remaining`, `A.resume(policy, newDur?)` with policy `resume` (the remaining time), `restart` (the first duration again: "repeat identical") or `resample` (`newDur`: "repeat different"), `A.cancel()`, `A.remaining()`, `A.interrupts` (pre-emption: Law §2.7, Banks ch. 6) |
 | `run(until?) → {t, events, stop}` | advance to min(until, tEnd); `stop` is `horizon`, `empty`, `stopped` (by `stop()`), `budget` or `zeno`. It can be called again to go on, which makes it a resumable stepper. |
-| `stop(code)`, `log(kind, data)`, `log` | stop after the current event; the event log the learner sees (≤ `logCap`, at most 2000) |
+| `stop(code)`, `log(kind, data)`, `eventLog` | stop after the current event; `log` writes an entry of the event log the learner sees, and `eventLog` is that array (≤ `logCap`, at most 2000) |
 | `codes` | `budget` (more than `maxEvents`, at most 200 000 by default), `zeno` (more than `zeno` events at one instant, 10 000 by default), `past`, `nan-time` |
 
 ## 4. Continuous time: `integrate(cfg)`
@@ -115,6 +120,33 @@ their declared order, each handler seeing the state the one before it left. A ha
 `locate(g, ta, tb, ga, gb, {tol, polish})` is the Illinois root finder; with `polish` it finishes with `brent`. `brent(g, a, b, tol)`
 is Brent 1973 ch. 4.
 
+### 4.1 Delay equations and DAEs
+
+- `dde({f(t, y, lag, dy), y0, history(t), lags, t0, tEnd, rtol, atol, samples, onSample, maxSteps})`: constant-lag delay equations
+  by the method of steps on DOPRI5's dense output (Bellen & Zennaro 2003 ch. 3; Shampine & Thompson 2001). `lag(i, k)` is
+  y_i(t − τ_k). The step is at most the smallest lag, so every lagged value lies on a finished step or in the history. The test
+  checks x′ = −x(t − 1), x = 1 before 0: x(3) = −2/3 exactly (the polynomial pieces).
+- `dae({f(t, y, z, dy), g(t, y, z, res), y0, z0, …integrate's cfg})`: a semi-explicit index-1 DAE y′ = f, 0 = g, in its state-space
+  form (Hairer & Wanner 1996 §VI.1). z is solved from g = 0 by Newton at every evaluation (≤ 30 iterations, code `dae-newton`), and
+  y is integrated by `integrate` (`auto` switches to Rosenbrock when the reduced system is stiff). The result adds `z`.
+
+### 4.2 Stochastic dynamics
+
+- `ssa({x0, nu, propensity(x, a), tEnd, r, maxEvents, onEvent})`: Gillespie's direct method (Gillespie 1977), exact trajectories of
+  the chemical master equation; `nu[j]` is reaction j's change of every species.
+- `tauLeap({…ssa, tau})`: explicit τ-leaping (Gillespie 2001). Each reaction fires Poisson(a_j τ) times; a leap that would make a
+  count negative is halved and retried, and when a₀τ < 10 the exact SSA step is taken (Cao, Gillespie & Petzold 2006).
+- `sde({drift, diffusion, dsig?, x0, t0, tEnd, dt, method: 'em' | 'milstein', r, samples, onSample})`: Itô SDEs with diagonal
+  noise by Euler–Maruyama (strong order ½) and Milstein (strong order 1; `dsig` = ∂σ_i/∂x_i) (Kloeden & Platen 1992 §10.2–10.3;
+  Higham 2001). The test measures both orders on geometric Brownian motion against its exact solution on the same Wiener path.
+
+### 4.3 Schedules and time-varying arrivals
+
+- `nhpp(rate(t), rateMax, t0, tEnd, r, cap)` → arrival times of a nonhomogeneous Poisson process, by thinning (Lewis & Shedler
+  1979; Law §8.6.2).
+- `piecewise([[t, v]…], {period, step})` → v(t): a schedule (a day's arrival rates, a staffing plan), steps by default or linear,
+  repeated every `period`.
+
 ## 5. Output analysis (Law ch. 9; Banks ch. 11)
 
 | function | what |
@@ -128,12 +160,19 @@ is Brent 1973 ch. 4.
 | `acf(x, k)` | the lag-k autocorrelation |
 | `replicate(n, seed, fn(seedI, i) → {name: number}, level)` | independent replications (Law §9.4.1), `{name: ci}` |
 | `littleCheck(L, λ, W)` | \|L − λW\| / max(L, λW), Little's law (Little 1961); a finite run has end effects of order 1/T |
+| `untilPrecision(fn(i), {gamma = 0.05, n0 = 10, nMax = 1000, level})` | the sequential procedure of Law §9.4.1: replications are added until half/\|mean\| ≤ γ/(1 + γ) → `ci` + `{reached, values}` |
+
+### 5.1 Variance reduction (Law ch. 11)
+
+Common random numbers and antithetic variates come from the streams (§2). `controlVariate(y, x, μX, level)` adjusts Y by a control
+X with a known mean: Y − b(X − μX), b = cov(X, Y)/var(X), and returns the `ci` with `b` and the variance ratio `vr` (< 1 is a gain;
+Lavenberg & Welch 1981; Law §11.4). The half-width uses n − 2 degrees of freedom, since b is estimated.
 
 **Terminating or steady state** (Law §9.3–9.5). A terminating simulation (a clinic's day) uses replications of the whole horizon.
 A steady-state measure deletes a warm-up (fixed, or MSER-5) and then uses replications or batch means of one long run. `des@1`
 offers both (`docs/library/des.md` §3).
 
-## 6. Sweeps and sensitivity (Saltelli et al. 2008)
+## 6. Sweeps, sensitivity, calibration and optimisation (Saltelli et al. 2008)
 
 `axes = [{lo, hi, points}]`; `fn(x)` gets x in the model's units and returns a number (NaN when it fails). Every method has a
 budget (`maxEval`), and over budget it returns `over: true` without evaluating.
@@ -146,6 +185,25 @@ budget (`maxEval`), and over budget it returns `over: true` without evaluating.
   order is S_i = mean(f(B)(f(A_B^i) − f(A)))/V (Saltelli et al. 2010, *CPC* 181, Table 2 (b)), and the total is
   S_Ti = mean((f(A) − f(A_B^i))²)/(2V) (Jansen 1999). It costs N(k + 2) evaluations. The tests check the Ishigami function
   (a = 7, b = 0.1: S₁ = 0.3139, S₂ = 0.4424, S₃ = 0, S_T3 = 0.2437).
+- `lhs(n, k, r)`: n points of a Latin hypercube in [0, 1)^k, one point in each of n strata per axis (McKay, Beckman & Conover 1979).
+- `minimize(fn, x0, {step, lo, hi, maxEval ≤ 20 000, tol})` → `{x, f, evals, converged}`: Nelder & Mead 1965 with the standard
+  coefficients (Lagarias et al. 1998); bounds by clamping; NaN counts as +∞. The test finds Rosenbrock's minimum (1, 1).
+- `calibrate(model(params) → predictions, data, p0, opts)` → `{x, sse, rmse, evals, converged}`: weighted least squares
+  Σ(w(pred − obs))² by `minimize`.
+
+### 6.1 Input modelling (Law ch. 6)
+
+- `cdfOf(d)`, `quantileOf(d)`: closed forms for exp, uniform, tri, normal, lognormal, weibull (and the gamma/Erlang cdf by `gammaP`).
+- `truncated(d, lo, hi)` → `{ok, draw, exact}`: by inversion on [F(lo), F(hi)] where the quantile is known (one uniform,
+  CRN-friendly; Law §8.2.1), else by rejection (≤ 1000 tries, then the nearer bound and the code `truncation`). The test checks
+  the half-normal mean √(2/π).
+- `mixture([{d, w}…])` → `{ok, draw, mean, var}`: a finite mixture by composition (Law §8.2.3).
+- `fit(data, kind)` → a distribution `{dist, …}`: maximum likelihood for exp, normal, lognormal, gamma (Newton on
+  ψ(k) − ln k = mean(ln x) − ln x̄, Choi & Wette 1969) and weibull (Newton on the profile equation, Law §6.5); moments for uniform,
+  tri, erlang and beta. null when it cannot be fitted.
+- Goodness of fit: `ksTest(data, d)` → `{D, p}` (Kolmogorov–Smirnov with Stephens' 1970 correction; conservative with fitted
+  parameters, Law §6.6.2), `chiSquare(O, E, fitted)` → `{X2, df, p}` (Pearson, df = k − 1 − fitted), `andersonDarling(data, d)`
+  → `{A2}` (Anderson & Darling 1954, tail-sensitive).
 
 ## 7. Verification (Sargent 2013, *J. Simulation* 7:1)
 
@@ -190,8 +248,9 @@ two adapters:
 - `wrapRun(id, run(inputs, t) → out)` is for an engine with no time of its own (a formula, a chain part).
 
 A **discrete-event engine** keeps its executive in the state: `sim().run(t + dt)` advances it and can be called again. `des@1`
-exports such a stepper (`NoemaLibDES.stepper`; `docs/library/des.md` §6). Its state holds closures, so `snapshot` is null: a DES
-part can be chained and co-simulated but not iterated.
+exports such a stepper (`NoemaLibDES.stepper`, and passes it to `C.makeEngine({…, stepper})`, so `simEngine.create(spec).stepInit`
+/ `stepTo` work in the Worker; `docs/library/des.md` §6). Its state holds closures, so `snapshot` is null: a DES part can be chained
+and co-simulated but not iterated.
 
 ### 8.1 Migrating a finished engine (guide for the migration agent)
 
@@ -201,7 +260,9 @@ tolerance or the change is a justified improvement.
 
 | family | engines | what moves to the kernel |
 |---|---|---|
-| integrators | `ode@1`, `med@1` (pk), `clinic@1` (virtual patient), plugins `thermal@1`, `pid@1`, `twin@1`, circuit transient | `ode@1`'s `stepperDopri`, `stepperRos`, `stepperFixed`, `flow` (crossings by Illinois, jumps, the stiff switch) → `integrate`, the same algorithms, which the kernel took from `ode@1`; `brent` → `SK.brent`. Wrap as a part with `odeStepper`. Keep DDEs (the method of steps) in ode@1 on `integrate`'s dense output, or add them to the kernel later. |
+| integrators | `ode@1`, `med@1` (pk), `clinic@1` (virtual patient), plugins `thermal@1`, `pid@1`, `twin@1`, circuit transient | `ode@1`'s `stepperDopri`, `stepperRos`, `stepperFixed`, `flow` (crossings by Illinois, jumps, the stiff switch) → `integrate`; its DDEs → `SK.dde`; `brent` → `SK.brent`. Wrap as a part with `odeStepper`. |
+| stochastic | `genetics@1` (drift), `ode@1` templates with noise, any chemical kinetics | `SK.ssa`, `SK.tauLeap`, `SK.sde` |
+| input and calibration | any engine that fits data or tunes parameters | `SK.fit`, `ksTest`, `chiSquare`, `andersonDarling`, `SK.minimize`, `SK.calibrate`, `SK.lhs` |
 | randomness | `genetics@1` (drift, Wright–Fisher), `prob@1`, any engine that calls `C.mulberry32(C.hash32(name, seed))` | `SK.stream(seed, name)`: one stream per purpose; replications via `r.sub(i)`; `binomial` and `poisson` by inversion (CRN-friendly) |
 | statistics | `prob@1`, `genetics@1`, `med@1` (trials) | `SK.ci`, `tq`, `welford`, `replicate`, `batchMeans` |
 | events and time | `timeline@1`, `clinic@1` (timed decisions), `music@1` (sequenced notes) | `SK.calendar()` (its tie rule), `SK.event` records for anything another part may consume |

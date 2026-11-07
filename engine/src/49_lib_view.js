@@ -7,9 +7,10 @@
    status and answer; the app's admins see every request and answer it here (status, the engine that now does it, a note, the PR) or
    through the connector (noema_engine_requests, noema_engine_request_update). */
 const ENGINE_GROUPS = [   // the library's engines by field (catalogue ids); i18n-ignore (ids)
-  ['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'logic@1']],
+  ['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'logic@1', 'des@1']],
   ['life', ['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1']],
   ['arts', ['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1']],
+  ['thought', [, 'rhetoric@1', 'philo@1']],
 ];
 const engName = e => tE('engine.engines.' + e.slug + '.name');
 const engWhat = e => tE('engine.engines.' + e.slug + '.what');

@@ -6690,6 +6690,34 @@
   "@engine.engines.prob.what": {
     "description": "One-line description."
   },
+  "engine.engines.philo.name": "Philosophy",
+  "@engine.engines.philo.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.philo.what": "Ethics calculi, voting and social choice, decisions and games, knowledge and vagueness, thought experiments and a map of thinkers.",
+  "@engine.engines.philo.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.des.name": "Queues and processes",
+  "@engine.engines.des.name": {
+    "description": "Engine name: discrete-event simulation."
+  },
+  "engine.engines.des.what": "Discrete-event simulation: arrivals, servers, routing, breakdowns and shifts, with confidence intervals.",
+  "@engine.engines.des.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.group.thought": "Thought and society",
+  "@engine.engines.group.thought": {
+    "description": "Heading of a group of engines on #/engines: logic, debate, philosophy, law."
+  },
+  "engine.engines.rhetoric.name": "Debate and rhetoric",
+  "@engine.engines.rhetoric.name": {
+    "description": "Engine name."
+  },
+  "engine.engines.rhetoric.what": "Debate rounds and judging, argument maps and fallacies, figures of speech and the delivery of a speech.",
+  "@engine.engines.rhetoric.what": {
+    "description": "One-line description."
+  },
   "engine.engines.logic.name": "Logic",
   "@engine.engines.logic.name": {
     "description": "Engine name."
@@ -9229,5 +9257,409 @@
   "engine.author.startBlankTip": "An empty model to fill in",
   "@engine.author.startBlankTip": {
     "description": "Tooltip of the button “Blank”."
+  },
+  "engine.author.f.lib.acts": "Acts",
+  "@engine.author.f.lib.acts": {
+    "description": "Label of the field “acts” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.agent": "Agent",
+  "@engine.author.f.lib.agent": {
+    "description": "Label of the field “agent” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.agents": "Agents",
+  "@engine.author.f.lib.agents": {
+    "description": "Label of the field “agents” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.alt": "Alternative hypothesis",
+  "@engine.author.f.lib.alt": {
+    "description": "Label of the field “alt” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.announce": "Announcements",
+  "@engine.author.f.lib.announce": {
+    "description": "Label of the field “announce” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.args": "Arguments",
+  "@engine.author.f.lib.args": {
+    "description": "Label of the field “args” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.assign": "Assignment",
+  "@engine.author.f.lib.assign": {
+    "description": "Label of the field “assign” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.atom": "Atom",
+  "@engine.author.f.lib.atom": {
+    "description": "Label of the field “atom” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.atoms": "Atoms",
+  "@engine.author.f.lib.atoms": {
+    "description": "Label of the field “atoms” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.attacks": "Attacks",
+  "@engine.author.f.lib.attacks": {
+    "description": "Label of the field “attacks” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.bins": "Bins",
+  "@engine.author.f.lib.bins": {
+    "description": "Label of the field “bins” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.bits": "Bits",
+  "@engine.author.f.lib.bits": {
+    "description": "Label of the field “bits” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.boxes": "Boxes",
+  "@engine.author.f.lib.boxes": {
+    "description": "Label of the field “boxes” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.burn": "Burn-in",
+  "@engine.author.f.lib.burn": {
+    "description": "Label of the field “burn” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.chains": "Chains",
+  "@engine.author.f.lib.chains": {
+    "description": "Label of the field “chains” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.conc": "Concentrations",
+  "@engine.author.f.lib.conc": {
+    "description": "Label of the field “conc” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.cond": "Condition",
+  "@engine.author.f.lib.cond": {
+    "description": "Label of the field “cond” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.conf": "Confidence level",
+  "@engine.author.f.lib.conf": {
+    "description": "Label of the field “conf” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.consts": "Constants",
+  "@engine.author.f.lib.consts": {
+    "description": "Label of the field “consts” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.copies": "Copies",
+  "@engine.author.f.lib.copies": {
+    "description": "Label of the field “copies” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.correct": "Continuity correction",
+  "@engine.author.f.lib.correct": {
+    "description": "Label of the field “correct” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.cov": "Covariance matrix",
+  "@engine.author.f.lib.cov": {
+    "description": "Label of the field “cov” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.dMax": "Largest effect",
+  "@engine.author.f.lib.dMax": {
+    "description": "Label of the field “dMax” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.data": "Data",
+  "@engine.author.f.lib.data": {
+    "description": "Label of the field “data” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.days": "Days",
+  "@engine.author.f.lib.days": {
+    "description": "Label of the field “days” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.ddof": "Degrees of freedom lost",
+  "@engine.author.f.lib.ddof": {
+    "description": "Label of the field “ddof” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.designated": "Designated value",
+  "@engine.author.f.lib.designated": {
+    "description": "Label of the field “designated” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.dim": "Dimension",
+  "@engine.author.f.lib.dim": {
+    "description": "Label of the field “dim” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.dist": "Distribution",
+  "@engine.author.f.lib.dist": {
+    "description": "Label of the field “dist” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.domain": "Domain",
+  "@engine.author.f.lib.domain": {
+    "description": "Label of the field “domain” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.draws": "Random draws",
+  "@engine.author.f.lib.draws": {
+    "description": "Label of the field “draws” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.eps": "Accuracy ε",
+  "@engine.author.f.lib.eps": {
+    "description": "Label of the field “eps” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.err": "Error probability",
+  "@engine.author.f.lib.err": {
+    "description": "Label of the field “err” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.estimate": "Estimate parameters",
+  "@engine.author.f.lib.estimate": {
+    "description": "Label of the field “estimate” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.exact": "Exact",
+  "@engine.author.f.lib.exact": {
+    "description": "Label of the field “exact” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.existential": "Existential",
+  "@engine.author.f.lib.existential": {
+    "description": "Label of the field “existential” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.ext": "Extension",
+  "@engine.author.f.lib.ext": {
+    "description": "Label of the field “ext” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.facts": "Facts",
+  "@engine.author.f.lib.facts": {
+    "description": "Label of the field “facts” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.figure": "Figure",
+  "@engine.author.f.lib.figure": {
+    "description": "Label of the field “figure” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.formulas": "Formulas",
+  "@engine.author.f.lib.formulas": {
+    "description": "Label of the field “formulas” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.funcs": "Functions",
+  "@engine.author.f.lib.funcs": {
+    "description": "Label of the field “funcs” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.goal": "Goal",
+  "@engine.author.f.lib.goal": {
+    "description": "Label of the field “goal” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.holds": "Holds",
+  "@engine.author.f.lib.holds": {
+    "description": "Label of the field “holds” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.initial": "Initial",
+  "@engine.author.f.lib.initial": {
+    "description": "Label of the field “initial” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.input": "Input",
+  "@engine.author.f.lib.input": {
+    "description": "Label of the field “input” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.intercept": "Intercept",
+  "@engine.author.f.lib.intercept": {
+    "description": "Label of the field “intercept” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.issued": "Issued",
+  "@engine.author.f.lib.issued": {
+    "description": "Label of the field “issued” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.iters": "Iterations",
+  "@engine.author.f.lib.iters": {
+    "description": "Label of the field “iters” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.kMax": "Largest k",
+  "@engine.author.f.lib.kMax": {
+    "description": "Label of the field “kMax” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.lags": "Lags",
+  "@engine.author.f.lib.lags": {
+    "description": "Label of the field “lags” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.levels": "Levels",
+  "@engine.author.f.lib.levels": {
+    "description": "Label of the field “levels” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.logdens": "Log density",
+  "@engine.author.f.lib.logdens": {
+    "description": "Label of the field “logdens” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.logic": "Logic",
+  "@engine.author.f.lib.logic": {
+    "description": "Label of the field “logic” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.loop": "Loop",
+  "@engine.author.f.lib.loop": {
+    "description": "Label of the field “loop” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.mMax": "Largest m",
+  "@engine.author.f.lib.mMax": {
+    "description": "Label of the field “mMax” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.map": "Mapping",
+  "@engine.author.f.lib.map": {
+    "description": "Label of the field “map” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.mean": "Mean",
+  "@engine.author.f.lib.mean": {
+    "description": "Label of the field “mean” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.mood": "Mood",
+  "@engine.author.f.lib.mood": {
+    "description": "Label of the field “mood” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.muddy": "Muddy children",
+  "@engine.author.f.lib.muddy": {
+    "description": "Label of the field “muddy” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.nMax": "Largest n",
+  "@engine.author.f.lib.nMax": {
+    "description": "Label of the field “nMax” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.norms": "Norms",
+  "@engine.author.f.lib.norms": {
+    "description": "Label of the field “norms” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.offspring": "Offspring distribution",
+  "@engine.author.f.lib.offspring": {
+    "description": "Label of the field “offspring” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.params": "Parameters",
+  "@engine.author.f.lib.params": {
+    "description": "Label of the field “params” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.parent": "Parent distribution",
+  "@engine.author.f.lib.parent": {
+    "description": "Label of the field “parent” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.paths": "Paths",
+  "@engine.author.f.lib.paths": {
+    "description": "Label of the field “paths” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.perm": "Permutation test",
+  "@engine.author.f.lib.perm": {
+    "description": "Label of the field “perm” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.pop": "Population",
+  "@engine.author.f.lib.pop": {
+    "description": "Label of the field “pop” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.preds": "Predicates",
+  "@engine.author.f.lib.preds": {
+    "description": "Label of the field “preds” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.premises": "Premises",
+  "@engine.author.f.lib.premises": {
+    "description": "Label of the field “premises” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.preset": "Preset",
+  "@engine.author.f.lib.preset": {
+    "description": "Label of the field “preset” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.probs": "Probabilities",
+  "@engine.author.f.lib.probs": {
+    "description": "Label of the field “probs” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.proof": "Proof",
+  "@engine.author.f.lib.proof": {
+    "description": "Label of the field “proof” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.puzzle": "Puzzle",
+  "@engine.author.f.lib.puzzle": {
+    "description": "Label of the field “puzzle” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.rank": "Rank",
+  "@engine.author.f.lib.rank": {
+    "description": "Label of the field “rank” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.refs": "References",
+  "@engine.author.f.lib.refs": {
+    "description": "Label of the field “refs” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.scope": "Scope",
+  "@engine.author.f.lib.scope": {
+    "description": "Label of the field “scope” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.semantics": "Semantics",
+  "@engine.author.f.lib.semantics": {
+    "description": "Label of the field “semantics” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.sens": "Sensitivity",
+  "@engine.author.f.lib.sens": {
+    "description": "Label of the field “sens” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.sided": "Sides",
+  "@engine.author.f.lib.sided": {
+    "description": "Label of the field “sided” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.solver": "Solver",
+  "@engine.author.f.lib.solver": {
+    "description": "Label of the field “solver” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.spec": "Specification",
+  "@engine.author.f.lib.spec": {
+    "description": "Label of the field “spec” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.spread": "Spread of starts",
+  "@engine.author.f.lib.spread": {
+    "description": "Label of the field “spread” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.strata": "Strata",
+  "@engine.author.f.lib.strata": {
+    "description": "Label of the field “strata” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.sum": "Sum",
+  "@engine.author.f.lib.sum": {
+    "description": "Label of the field “sum” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.summary": "Summary statistics",
+  "@engine.author.f.lib.summary": {
+    "description": "Label of the field “summary” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.table": "Table",
+  "@engine.author.f.lib.table": {
+    "description": "Label of the field “table” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.task": "Task",
+  "@engine.author.f.lib.task": {
+    "description": "Label of the field “task” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.terms": "Terms",
+  "@engine.author.f.lib.terms": {
+    "description": "Label of the field “terms” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.thin": "Thinning",
+  "@engine.author.f.lib.thin": {
+    "description": "Label of the field “thin” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.throughput": "Throughput",
+  "@engine.author.f.lib.throughput": {
+    "description": "Label of the field “throughput” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.trace": "Trace",
+  "@engine.author.f.lib.trace": {
+    "description": "Label of the field “trace” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.trim": "Trimming",
+  "@engine.author.f.lib.trim": {
+    "description": "Label of the field “trim” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.tuples": "Tuples",
+  "@engine.author.f.lib.tuples": {
+    "description": "Label of the field “tuples” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.types": "Types",
+  "@engine.author.f.lib.types": {
+    "description": "Label of the field “types” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.until": "Until",
+  "@engine.author.f.lib.until": {
+    "description": "Label of the field “until” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.vars": "Variables",
+  "@engine.author.f.lib.vars": {
+    "description": "Label of the field “vars” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.want": "Wanted",
+  "@engine.author.f.lib.want": {
+    "description": "Label of the field “want” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.within": "Within",
+  "@engine.author.f.lib.within": {
+    "description": "Label of the field “within” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.world": "World",
+  "@engine.author.f.lib.world": {
+    "description": "Label of the field “world” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.worlds": "Worlds",
+  "@engine.author.f.lib.worlds": {
+    "description": "Label of the field “worlds” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.xbar": "Sample mean",
+  "@engine.author.f.lib.xbar": {
+    "description": "Label of the field “xbar” of a library engine’s model or outputs in the activity author (engines: prob). Short."
   }
 }

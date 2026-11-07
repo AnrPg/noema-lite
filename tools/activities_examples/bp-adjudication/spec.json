@@ -1,0 +1,572 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "rhetoric@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  {
+   "id": "gOG",
+   "kind": "slider",
+   "label": "gOGLabel",
+   "min": 1,
+   "max": 4,
+   "step": 1,
+   "default": 1
+  },
+  {
+   "id": "gOO",
+   "kind": "slider",
+   "label": "gOOLabel",
+   "min": 1,
+   "max": 4,
+   "step": 1,
+   "default": 1
+  },
+  {
+   "id": "gCG",
+   "kind": "slider",
+   "label": "gCGLabel",
+   "min": 1,
+   "max": 4,
+   "step": 1,
+   "default": 1
+  },
+  {
+   "id": "gCO",
+   "kind": "slider",
+   "label": "gCOLabel",
+   "min": 1,
+   "max": 4,
+   "step": 1,
+   "default": 1
+  }
+ ],
+ "model": {
+  "speeches": [
+   {
+    "id": "pm",
+    "role": "PM",
+    "team": "OG",
+    "dur": 418,
+    "label": "spPM",
+    "pois": [
+     {
+      "at": 45,
+      "by": "OO"
+     },
+     {
+      "at": 150,
+      "by": "CO",
+      "accepted": true
+     }
+    ]
+   },
+   {
+    "id": "lo",
+    "role": "LO",
+    "team": "OO",
+    "dur": 425,
+    "label": "spLO",
+    "pois": [
+     {
+      "at": 300,
+      "by": "CG",
+      "accepted": true
+     }
+    ]
+   },
+   {
+    "id": "dpm",
+    "role": "DPM",
+    "team": "OG",
+    "dur": 431,
+    "label": "spDPM"
+   },
+   {
+    "id": "dlo",
+    "role": "DLO",
+    "team": "OO",
+    "dur": 452,
+    "label": "spDLO"
+   },
+   {
+    "id": "mg",
+    "role": "MG",
+    "team": "CG",
+    "dur": 420,
+    "label": "spMG",
+    "pois": [
+     {
+      "at": 200,
+      "by": "OO",
+      "accepted": true
+     }
+    ]
+   },
+   {
+    "id": "mo",
+    "role": "MO",
+    "team": "CO",
+    "dur": 409,
+    "label": "spMO"
+   },
+   {
+    "id": "gw",
+    "role": "GW",
+    "team": "CG",
+    "dur": 433,
+    "label": "spGW"
+   },
+   {
+    "id": "ow",
+    "role": "OW",
+    "team": "CO",
+    "dur": 428,
+    "label": "spOW"
+   }
+  ],
+  "debate": {
+   "format": "bp",
+   "grace": 15,
+   "panel": "majority",
+   "teams": [
+    {
+     "id": "OG",
+     "side": "gov",
+     "label": "teamOG"
+    },
+    {
+     "id": "OO",
+     "side": "opp",
+     "label": "teamOO"
+    },
+    {
+     "id": "CG",
+     "side": "gov",
+     "label": "teamCG"
+    },
+    {
+     "id": "CO",
+     "side": "opp",
+     "label": "teamCO"
+    }
+   ],
+   "ballots": [
+    {
+     "id": "j1",
+     "chair": true,
+     "ranks": [
+      {
+       "team": "OG",
+       "rank": 2
+      },
+      {
+       "team": "OO",
+       "rank": 4
+      },
+      {
+       "team": "CG",
+       "rank": 1
+      },
+      {
+       "team": "CO",
+       "rank": 3
+      }
+     ],
+     "scores": [
+      {
+       "speech": "pm",
+       "pts": 77
+      },
+      {
+       "speech": "lo",
+       "pts": 73
+      },
+      {
+       "speech": "dpm",
+       "pts": 76
+      },
+      {
+       "speech": "dlo",
+       "pts": 72
+      },
+      {
+       "speech": "mg",
+       "pts": 80
+      },
+      {
+       "speech": "mo",
+       "pts": 75
+      },
+      {
+       "speech": "gw",
+       "pts": 78
+      },
+      {
+       "speech": "ow",
+       "pts": 74
+      }
+     ]
+    },
+    {
+     "id": "j2",
+     "chair": false,
+     "ranks": [
+      {
+       "team": "OG",
+       "rank": 2
+      },
+      {
+       "team": "OO",
+       "rank": 4
+      },
+      {
+       "team": "CG",
+       "rank": 1
+      },
+      {
+       "team": "CO",
+       "rank": 3
+      }
+     ],
+     "scores": [
+      {
+       "speech": "pm",
+       "pts": 76
+      },
+      {
+       "speech": "lo",
+       "pts": 72
+      },
+      {
+       "speech": "dpm",
+       "pts": 76
+      },
+      {
+       "speech": "dlo",
+       "pts": 73
+      },
+      {
+       "speech": "mg",
+       "pts": 79
+      },
+      {
+       "speech": "mo",
+       "pts": 74
+      },
+      {
+       "speech": "gw",
+       "pts": 79
+      },
+      {
+       "speech": "ow",
+       "pts": 74
+      }
+     ]
+    },
+    {
+     "id": "j3",
+     "chair": false,
+     "ranks": [
+      {
+       "team": "OG",
+       "rank": 1
+      },
+      {
+       "team": "OO",
+       "rank": 3
+      },
+      {
+       "team": "CG",
+       "rank": 2
+      },
+      {
+       "team": "CO",
+       "rank": 4
+      }
+     ],
+     "scores": [
+      {
+       "speech": "pm",
+       "pts": 79
+      },
+      {
+       "speech": "lo",
+       "pts": 74
+      },
+      {
+       "speech": "dpm",
+       "pts": 78
+      },
+      {
+       "speech": "dlo",
+       "pts": 73
+      },
+      {
+       "speech": "mg",
+       "pts": 78
+      },
+      {
+       "speech": "mo",
+       "pts": 72
+      },
+      {
+       "speech": "gw",
+       "pts": 77
+      },
+      {
+       "speech": "ow",
+       "pts": 73
+      }
+     ]
+    }
+   ]
+  },
+  "map": {
+   "nodes": [
+    {
+     "id": "a1",
+     "kind": "claim",
+     "side": "gov",
+     "speech": "pm",
+     "label": "argA1"
+    },
+    {
+     "id": "a2",
+     "kind": "objection",
+     "side": "opp",
+     "speech": "lo",
+     "label": "argA2"
+    },
+    {
+     "id": "a3",
+     "kind": "claim",
+     "side": "gov",
+     "speech": "dpm",
+     "label": "argA3"
+    },
+    {
+     "id": "a4",
+     "kind": "claim",
+     "side": "gov",
+     "speech": "mg",
+     "label": "argA4"
+    },
+    {
+     "id": "a5",
+     "kind": "objection",
+     "side": "opp",
+     "speech": "mo",
+     "label": "argA5"
+    },
+    {
+     "id": "a6",
+     "kind": "objection",
+     "side": "gov",
+     "speech": "gw",
+     "label": "argA6"
+    }
+   ],
+   "edges": [
+    {
+     "from": "a2",
+     "to": "a1",
+     "kind": "attack"
+    },
+    {
+     "from": "a3",
+     "to": "a2",
+     "kind": "attack"
+    },
+    {
+     "from": "a5",
+     "to": "a4",
+     "kind": "attack"
+    },
+    {
+     "from": "a6",
+     "to": "a5",
+     "kind": "attack"
+    }
+   ]
+  }
+ },
+ "outputs": [
+  {
+   "id": "rOG",
+   "kind": "scalar",
+   "of": "rank",
+   "team": "OG"
+  },
+  {
+   "id": "rOO",
+   "kind": "scalar",
+   "of": "rank",
+   "team": "OO"
+  },
+  {
+   "id": "rCG",
+   "kind": "scalar",
+   "of": "rank",
+   "team": "CG"
+  },
+  {
+   "id": "rCO",
+   "kind": "scalar",
+   "of": "rank",
+   "team": "CO"
+  },
+  {
+   "id": "pOG",
+   "kind": "scalar",
+   "of": "points",
+   "team": "OG"
+  },
+  {
+   "id": "pOO",
+   "kind": "scalar",
+   "of": "points",
+   "team": "OO"
+  },
+  {
+   "id": "pCG",
+   "kind": "scalar",
+   "of": "points",
+   "team": "CG"
+  },
+  {
+   "id": "pCO",
+   "kind": "scalar",
+   "of": "points",
+   "team": "CO"
+  },
+  {
+   "id": "cons",
+   "kind": "scalar",
+   "of": "consistent"
+  },
+  {
+   "id": "viol",
+   "kind": "scalar",
+   "of": "violations"
+  },
+  {
+   "id": "otDLO",
+   "kind": "scalar",
+   "of": "overtime",
+   "speech": "dlo"
+  },
+  {
+   "id": "prot",
+   "kind": "scalar",
+   "of": "poiProtected"
+  },
+  {
+   "id": "drop",
+   "kind": "scalar",
+   "of": "dropped"
+  },
+  {
+   "id": "clash",
+   "kind": "scalar",
+   "of": "clash"
+  },
+  {
+   "id": "dur",
+   "kind": "series",
+   "of": "durations"
+  },
+  {
+   "id": "lim",
+   "kind": "series",
+   "of": "limits"
+  },
+  {
+   "id": "ax",
+   "kind": "series",
+   "of": "speechAxis"
+  },
+  {
+   "id": "flow",
+   "kind": "scene",
+   "of": "flow"
+  }
+ ],
+ "readouts": [
+  {
+   "label": "rightLabel",
+   "expr": "(gOG == rOG) + (gOO == rOO) + (gCG == rCG) + (gCO == rCO)",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "pointsLabel",
+   "expr": "pCG",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "consLabel",
+   "expr": "cons"
+  },
+  {
+   "label": "violLabel",
+   "expr": "viol",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "otLabel",
+   "expr": "otDLO",
+   "unit": "s",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "protLabel",
+   "expr": "prot",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "dropLabel",
+   "expr": "drop",
+   "format": "fixed",
+   "digits": 1
+  }
+ ],
+ "plots": [
+  {
+   "kind": "series",
+   "title": "timeTitle",
+   "x": {
+    "series": "ax",
+    "label": "speechAxisLabel"
+   },
+   "y": {
+    "min": 0,
+    "max": 480,
+    "label": "secondsLabel",
+    "unit": "s"
+   },
+   "series": [
+    {
+     "y": "dur",
+     "style": "bars",
+     "label": "durLine"
+    },
+    {
+     "y": "lim",
+     "style": "steps",
+     "label": "limLine"
+    }
+   ]
+  },
+  {
+   "kind": "scene",
+   "of": "flow",
+   "title": "flowTitle",
+   "height": 260
+  }
+ ]
+}

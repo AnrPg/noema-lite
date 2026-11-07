@@ -1,0 +1,132 @@
+{
+ "cases": [
+  {
+   "name": "10 March: the sea is closed, the coastal route takes 45 days; arrival 25 April",
+   "steps": [
+    {
+     "set": "mo",
+     "value": 3
+    },
+    {
+     "set": "dy",
+     "value": 10
+    },
+    {
+     "set": "seaSpeed",
+     "value": 130
+    }
+   ],
+   "expect": {
+    "values": {
+     "days": [
+      44.92425,
+      45.37575
+     ],
+     "arrM": [
+      4,
+      4
+     ],
+     "arrD": [
+      25,
+      25
+     ],
+     "aucY": [
+      803,
+      803
+     ],
+     "romCount": [
+      7,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "name": "10 May: across the open sea in 17.6 days; arrival 28 May",
+   "steps": [
+    {
+     "set": "mo",
+     "value": 5
+    }
+   ],
+   "expect": {
+    "values": {
+     "days": [
+      17.4722,
+      17.6478
+     ],
+     "arrM": [
+      5,
+      5
+     ],
+     "arrD": [
+      28,
+      28
+     ]
+    }
+   }
+  },
+  {
+   "name": "1 July with fast ships (200 km/d): arrival 13 July, 3 days before the Ides",
+   "steps": [
+    {
+     "set": "mo",
+     "value": 7
+    },
+    {
+     "set": "dy",
+     "value": 1
+    },
+    {
+     "set": "seaSpeed",
+     "value": 200
+    }
+   ],
+   "expect": {
+    "values": {
+     "days": [
+      11.704185,
+      11.821815
+     ],
+     "arrM": [
+      7,
+      7
+     ],
+     "arrD": [
+      13,
+      13
+     ],
+     "romCount": [
+      3,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "name": "10 November: the sea is closed again; 45 days, arrival 26 December",
+   "steps": [
+    {
+     "set": "mo",
+     "value": 11
+    }
+   ],
+   "expect": {
+    "values": {
+     "days": [
+      44.92425,
+      45.37575
+     ],
+     "arrM": [
+      12,
+      12
+     ],
+     "arrD": [
+      26,
+      26
+     ]
+    }
+   }
+  }
+ ]
+}

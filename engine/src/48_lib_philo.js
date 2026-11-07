@@ -845,7 +845,7 @@
         case 'ful': { const mx = maxims.get(o.maxim); return mx ? ful(mx, o.reading) : NaN; }
         case 'trait': { const p = profiles.get(o.profile); if (!p) return NaN; const t = p.traits.find(x => x[0] === o.trait); if (!t) { flag('missing'); return NaN; } const x = t[1]; if (!(x >= -1 && x <= 1)) { flag('range'); return NaN; } return Math.abs(x) <= p.tol ? 0 : x < 0 ? -1 : 1; }   // NE II.6–7
         case 'virtue': { const p = profiles.get(o.profile); if (!p || !p.traits.length) return NaN; const xs = p.traits.map(t => t[1]); if (xs.some(x => !(x >= -1 && x <= 1))) { flag('range'); return NaN; } return sum(xs.map(x => 1 - Math.abs(x))) / xs.length; }
-        case 'winner': { const E = elect(o.election); return E ? method(E, o.method, flag, cost).w : NaN; }
+        case 'winner': { const E = elect(o.election); if (!E) return NaN; const w = method(E, o.method, flag, cost).w; if (w < 0) flag('tie'); return w; }
         case 'score': { const E = elect(o.election); if (!E) return NaN; const r = method(E, o.method, flag, cost); return r.s ? r.s[E.ids.indexOf(o.cand)] : NaN; }
         case 'margin': { const E = elect(o.election); if (!E) return NaN; const P = pairwise(E), a = E.ids.indexOf(o.a), b = E.ids.indexOf(o.b); return P[a][b] - P[b][a]; }
         case 'condorcet': { const E = elect(o.election); if (!E) return NaN; const P = pairwise(E); return o.loser ? condLoser(P, E.m) : condWinner(P, E.m); }

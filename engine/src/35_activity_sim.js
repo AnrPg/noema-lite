@@ -214,7 +214,7 @@
         const sample = (q, o, first) => {
           for (const d of q.outs) {
             const v = o && typeof o === 'object' ? o[d.id] : undefined;
-            if (d.kind === 'series') { if (Array.isArray(v)) rec.set(d.id, { whole: v }); else { const r = rec.get(d.id) || { s: [] }; if (r.s) { if (first) r.s = [isN(v) ? v : NaN]; else r.pend = isN(v) ? v : NaN; } rec.set(d.id, r); } }
+            if (d.kind === 'series') { if (Array.isArray(v)) rec.set(d.id, { whole: v }); else { const r = rec.get(d.id) || { s: [] }; if (r.s) { if (first) r.s = [isN(v) ? v : NaN]; else r.pend = isN(v) ? v : NaN; } rec.set(d.id, r); if (isN(v)) env[d.id] = v; } }   // the step's value: what the other parts' formulas read
             else if (d.kind === 'scalar') { if (isN(v) || typeof v === 'boolean') { env[d.id] = +v; outs[d.id] = v; } }
             else if (v !== undefined) outs[d.id] = v;
           }

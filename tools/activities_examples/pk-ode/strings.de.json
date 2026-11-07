@@ -1,0 +1,15 @@
+{
+ "title": "Plasma und Wirkort: warum die Wirkung nachhinkt",
+ "intro": "Ein geschlucktes Arzneimittel wird ins Blut aufgenommen (Ein-Kompartiment-Modell mit Resorption erster Ordnung) und gelangt aus dem Blut langsam in das Gewebe, in dem es wirkt, den Wirkort. Zwei Modelle laufen gemeinsam in der Zeit: das pharmakokinetische Modell liefert bei jedem Schritt die Plasmakonzentration, und eine Differentialgleichung, dCe/dt = ke0 (Cp − Ce), überträgt sie zum Wirkort. Ändern Sie die Dosis und die Konstante ke0 und sehen Sie, wie viel später und niedriger der Gipfel am Wirkort kommt als der Gipfel im Plasma.",
+ "doseLabel": "Orale Dosis",
+ "ke0Label": "Gleichgewichtskonstante ke0",
+ "ec50Label": "EC50 (Konzentration für die halbe Maximalwirkung)",
+ "cmaxLabel": "Höchste Plasmakonzentration",
+ "ceMaxLabel": "Höchste Konzentration am Wirkort",
+ "effLabel": "Höchste Wirkung (Emax-Modell)",
+ "plotTitle": "Konzentration im Plasma und am Wirkort",
+ "time": "Zeit",
+ "conc": "Konzentration",
+ "plasmaLine": "Plasma",
+ "siteLine": "Wirkort"
+}

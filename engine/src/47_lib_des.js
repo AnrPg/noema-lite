@@ -742,7 +742,10 @@
       else { const st0 = iEnd - nb * size; for (let b = 0; b < nb; b++) { const a = st0 + b * size, c = a + size; pushAll(measures(M, run.snaps[a], run.snaps[c], grid[c] - grid[a], mqOver(run, a, c))); } }
     } else for (const run of good) { const a = G ? gW : grid[0] > 0 ? 0 : 0, b = G ? iEnd : 1; const tA = G ? grid[a] : (P.warmup > 0 ? P.warmup : 0); pushAll(measures(M, run.snaps[G ? a : 0], run.snaps[G ? b : 1], T - tA, mqOver(run, G ? a : 0, G ? b : 1))); }
     const est = {};
-    for (const [k, v] of Object.entries(values)) est[k] = SK.ci(v, M.level);
+    // antithetic pairs (rep 2i, 2i+1) are dependent: the CI is over the pair means, n = the number of whole pairs (Law §11.3)
+    const pairs = v => { const o = []; for (let i = 0; i + 1 < v.length; i += 2) o.push((v[i] + v[i + 1]) / 2); return o; };
+    for (const [k, v] of Object.entries(values)) est[k] = SK.ci(M.anti && M.method !== 'batch' && v.length >= 4 ? pairs(v) : v, M.level);
+    { const ar = values['arrived|-1|-1']; if (good.length && (!ar || ar.every(v => !(v > 0)))) codes.code('no-arrivals'); }
     if (M.method === 'batch') { const w = values['w|-1|-1']; if (w && w.length > 2 && abs(SK.acf(w, 1)) > 0.2) codes.code('batch-correlated'); }
     else if (good.length < 2) codes.code('few-reps');
     // Little's law L = λW over the measured span: end effects are of order W/T, so it is only judged on spans ≥ 50 W (Little 1961; Law §1.4.1)

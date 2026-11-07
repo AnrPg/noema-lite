@@ -36,7 +36,7 @@ const hasFig = (fs0, type, words) => fs0.some(h => h.type === type && (!words ||
 { const cs = []; const w = ['Мы', 'будем', 'сражаться']; ok(w.map(x => X.syllables(x, 'ru')).join() === '1,2,3', 'Russian: one syllable per vowel letter');
   near(X.readability(w, 1, 'ru', 'oborneva', cs), 206.835 - 1.3 * 3 - 60.1 * 2, 1e-9, 'Oborneva 2006 (Russian): 206.835 − 1.3 ASL − 60.1 ASW'); }
 { const cs = []; X.readability(['Καλημέρα', 'σας'], 1, 'el', 'flesch', cs); ok(cs.includes('formula_lang'), 'an English formula on Greek: code formula_lang (Greek has no validated Flesch; LIX/RIX are language-independent)');
-  ok(X.syllables('Καλημέρα', 'el') === 4 && X.syllables('ρολόι', 'el') === 2 && X.syllables('προϊόν', 'el') === 3, 'Greek syllables: accents stripped, a diaeresis splits the diphthong (προ-ϊ-όν)'); }
+  ok(X.syllables('Καλημέρα', 'el') === 4 && X.syllables('ρολόι', 'el') === 3 && X.syllables('ουρανός', 'el') === 3 && X.syllables('προϊόν', 'el') === 3, 'Greek syllables: accents stripped, digraphs as one vowel (ου-ρα-νός), split by a diaeresis (προ-ϊ-όν) or an accent on the first (ρο-λό-ι)'); }
 for (const [w, s] of [['table', 2], ['wanted', 2], ['jumped', 1], ['boxes', 2], ['every', 2], ['people', 2], ['the', 1], ['dedicated', 4], ['nation', 2], ['surrender', 3]]) ok(X.sylEn(w) === s, `English syllables: ${w} = ${s}`);
 
 // ---- 2. figures over tokens: classic texts in five languages ----
@@ -72,10 +72,10 @@ const CHURCHILL = 'We shall fight on the beaches, we shall fight on the landing 
   ok(r.out.w === 150 && r.out.n === 150 && r.out.ms === 10 && r.out.sd === 0 && r.out.pv === 0, '150 words in 60 s = 150 wpm (Tauroza & Allison 1990: lecture ~140, radio ~160); 15 sentences of 10 words, sd 0, nPVI 0'); }
 { near(X.nPVI([2, 4]), 100 * 2 / 3, 1e-12, 'nPVI (Grabe & Low 2002) of [2, 4] = 100·|2−4|/3'); near(X.nPVI([10, 20, 10]), 100 * (10 / 15 + 10 / 15) / 2, 1e-12, 'nPVI of [10, 20, 10]'); }
 { const text = 'So um we begin, uh, now. Also you know it works.', A = X.analyse(text, 'en');
-  const T = A.toks.map((_, i) => [i * 0.5, i * 0.5 + 0.3]); T[5] = [2.9, 3.1];   // a long pause before token 5
+  const T = A.toks.map((_, i) => [i * 0.5, i * 0.5 + 0.3]); T[5] = [2.9, 2.95];   // a long pause before token 5
   const r = run({ speeches: [{ id: 's', text, timing: T }], delivery: { fillers: ['you know'] } }, [sc('f', 'fillers'), sc('fr', 'fillerRate'), sc('p', 'pauses'), sc('lp', 'longestPause'), sc('ar', 'articulation'), sc('w', 'wpm'), sc('d', 'duration'), { id: 'tl', kind: 'scene', of: 'timing' }, { id: 'rc', kind: 'series', of: 'rateCurve' }, { id: 'pl', kind: 'series', of: 'pauseLengths' }]);
-  ok(r.out.f === 4 && Math.abs(r.out.fr - 100 * 4 / 8) < 1e-9, 'fillers: um, uh and the author\'s "you know" (4 of 12 tokens; 4 per 8 words = 50 per 100)');
-  ok(r.out.p === A.toks.length - 1 && Math.abs(r.out.lp - (2.9 - 2.3)) < 1e-9, 'pauses ≥ 0.25 s between word end and next word start; the longest');
+  ok(r.out.f === 4 && Math.abs(r.out.fr - 100 * 4 / 7) < 1e-9, 'fillers: um, uh and the author\'s "you know" (4 of 11 tokens; 4 per 7 words = 57 per 100 words)');
+  ok(r.out.p === 1 && Math.abs(r.out.lp - (2.9 - 2.3)) < 1e-9, 'pauses ≥ 0.25 s between word end and next word start (gaps of 0.2 s are not pauses); the longest 0.6 s');
   ok(r.out.ar > r.out.w && Math.abs(r.out.d - (T[T.length - 1][1] - T[0][0])) < 1e-9, 'articulation rate (pauses excluded) > speaking rate; duration from the timings');
   ok(r.out.tl.items.length > 0 && r.out.rc.length >= 2 && r.out.pl.length === r.out.p, 'the timing scene, the rate curve and the pause series'); }
 { const r = run({ speeches: [{ id: 's', text: 'one two three', timing: [[0, 1], [1, 2]] }, { id: 't', text: 'a b', timing: [[0, 1], [0.5, 2]] }, { id: 'u', text: '' }, { id: 'v', text: 'no end mark here' }] },
@@ -105,7 +105,7 @@ const ballot = (id, ranks, pts, chair, round) => ({ id, chair: !!chair, round: r
   ok(r.out.w === 3 && r.out.ws === 1 && r.out.bf === 3 && r.out.rj3 === 3, 'the winner is team 3 (CG, a government team); all 3 judges ranked it first; judge 3 alone put OG 3rd');
   ok(r.out.c1 === 1 && r.out.c === 1, 'every ballot is consistent: higher rank, strictly higher speaker total (no low-point wins in BP)');
   ok(r.out.ot === 31 && r.out.lim === 420 && r.out.pp === 1 && r.out.po === 3 && r.out.pa === 1, 'DPM 451 s is 31 s over 7 min; one POI in protected time (at 30 s), 3 POIs offered, 1 accepted by the PM');
-  ok(r.out.v === 3 && has(r, 'v', 'overtime') && has(r, 'v', 'poi_protected') && has(r, 'v', 'poi_own_side'), 'violations: DPM over time beyond the 15 s grace, a POI in protected time, a POI by one\'s own bench (OG on the LO is fine; here OG → LO? no: OO → PM fine, OG → LO fine, own-bench case below)'); }
+  ok(r.out.v === 3 && has(r, 'v', 'overtime') && has(r, 'v', 'poi_protected') && !has(r, 'v', 'poi_own_side'), 'violations: the DPM (451 s) and the GW (436 s) beyond 7 min + 15 s grace, and a POI in protected time (POIs across the benches are fine)'); }
 { const r = run({ speeches: bpSpeeches(null, [[{ at: 120, by: 'CG' }]]), debate: { format: 'bp', teams: bpTeams, ballots: [ballot('a', [1, 2, 3, 4], [80, 70, 80, 70, 70, 75, 70, 70]), ballot('b', [1, 1, 3, 4]), ballot('c', [1, 2, 3, 4], [70, 70, 70, 70, 70, 70, 70, 70])] } },
     [sc('v', 'violations', { speech: 's0' }), sc('ca', 'consistent', { ballot: 'a' }), sc('cb', 'consistent', { ballot: 'b' }), sc('cc', 'consistent', { ballot: 'c' }), sc('la', 'lpw', { ballot: 'a' }), sc('sp', 'speaks', { team: 'OG', ballot: 'a' }), sc('ss', 'speaks', { speech: 's0', ballot: 'a' })]);
   ok(r.out.v === 1 && has(r, 'v', 'poi_own_side'), 'a POI to the PM from CG (the same bench): code poi_own_side');
@@ -162,7 +162,7 @@ ok(!!(L && L.afSolve && L.parse && L.rowsOf && L.evalProp && L.syllogism && L.so
     edges: [{ from: 'D', to: 'C' }, { from: 'W', to: 'C' }, { from: 'B', to: 'W' }, { from: 'Q', to: 'C' }, { from: 'R', to: 'C', kind: 'except' }] };
   const r = run({ map }, [sc('t', 'toulmin', { node: 'C' }), sc('td', 'toulmin', { node: 'D' }), sc('g', 'label', { node: 'C' }), { id: 'ts', kind: 'scene', of: 'toulmin', node: 'C' }, { id: 'ms', kind: 'scene', of: 'map' }]);
   ok(r.out.t === 6 && r.out.td === 1 && r.out.g === 1, 'Toulmin 1958 (Harry, born in Bermuda): all six parts; the exception ("unless …") is not a Dung attack, so the claim stays in');
-  ok(r.out.ts.items.some(i => i.s === 'presumably') && r.out.ts.items.some(i => i.s === 'The British Nationality Acts') && r.out.ms.items.length >= 6 * 2, 'the Toulmin diagram and the map scene carry the parts'' own words'); }
+  ok(r.out.ts.items.some(i => i.s === 'presumably') && r.out.ts.items.some(i => i.s === 'The British Nationality Acts') && r.out.ms.items.length >= 6 * 2, 'the Toulmin diagram and the map scene carry the parts’ own words'); }
 { // schemes and fallacies (Walton, Reed & Macagno 2008; Walton 1995)
   const map = { nodes: [
     { id: 'exp', scheme: 'expert', cq: [1, 0, 1] }, { id: 'pop', scheme: 'popular', cq: [0] }, { id: 'cor', scheme: 'correlation', cq: [1, 1, 0] }, { id: 'ok', scheme: 'expert', cq: [1, 1, 1, 1, 1, 1] },
@@ -173,7 +173,7 @@ ok(!!(L && L.afSolve && L.parse && L.rowsOf && L.evalProp && L.syllogism && L.so
   const want = { exp: 'ad_verecundiam', pop: 'ad_populum', cor: 'post_hoc', ok: 'none', slp: 'slippery_slope', slq: 'none', ex: 'hasty_generalisation', ah: 'ad_hominem', tq: 'tu_quoque', c1: 'begging_question', sm: 'straw_man', rh: 'red_herring', fd: 'false_dilemma', ign: 'ad_ignorantiam', an: 'false_analogy', cons: 'appeal_consequences', sg: 'none' };
   const r = run({ map }, Object.keys(want).map(k => sc(k, 'fallacy', { node: k })).concat([sc('o', 'cqOpen', { node: 'exp' }), sc('fl', 'cqFailed', { node: 'exp' }), sc('sl', 'slope', { node: 'slp' }), sc('cq', 'schemeCQs', { scheme: 'expert' }), sc('n', 'fallacies'), sc('ns', 'cqOpen', { node: 'p' })]));
   for (const [k, f] of Object.entries(want)) ok(r.out[k] === X.FALLACIES.indexOf(f), `fallacy of ${k}: ${f} (index ${X.FALLACIES.indexOf(f)})`);
-  ok(r.out.o === 4 && r.out.fl === 1 && r.out.cq === 6, 'appeal to expert opinion: 6 critical questions (Walton et al. 2008), 1 failed (field), 4 not asked');
+  ok(r.out.o === 3 && r.out.fl === 1 && r.out.cq === 6, 'appeal to expert opinion: 6 critical questions (Walton et al. 2008), 1 failed (field), 3 not asked');
   near(r.out.sl, 0.8 ** 5, 1e-12, 'a slippery slope of five 0.8 steps holds with 0.33 (Hahn & Oaksford 2007): below 0.5, a fallacy');
   ok(r.out.n === 15 && Number.isNaN(r.out.ns) && has(r, 'ns', 'no_scheme'), '15 fallacious moves in the map (c1 and c2 both beg the question); critical questions of a node without a scheme: no_scheme'); }
 { // weighing and stock issues (policy debate): magnitude × probability, discounted by e^(−t/τ), over the surviving arguments
@@ -191,19 +191,19 @@ ok(!!(L && L.afSolve && L.parse && L.rowsOf && L.evalProp && L.syllogism && L.so
   const map = { nodes: [{ id: 'x', side: 'aff', speech: 'a1', s: 'Plan saves lives' }, { id: 'y', side: 'aff', speech: 'a1', s: 'Costs are low' }, { id: 'z', side: 'neg', speech: 'n1', s: 'Lives not saved' }, { id: 'u', side: 'neg', speech: 'n1', s: 'Rights violation' }, { id: 'v', side: 'aff', speech: 'a2', s: 'No rights issue' }],
     edges: [{ from: 'z', to: 'x', kind: 'attack' }, { from: 'v', to: 'u', kind: 'attack' }] };
   const r = run({ speeches, map }, [sc('d', 'dropped'), sc('da', 'dropped', { side: 'aff' }), { id: 'f', kind: 'scene', of: 'flow' }]);
-  ok(r.out.d === 1 && r.out.da === 1 && r.out.f.items.some(i => i.s === 'Costs are low' && i.c === 'warn'), 'the flow sheet: "Costs are low" was never answered by the negative — dropped (warn in the flow)'); }
+  ok(r.out.d === 2 && r.out.da === 1 && r.out.f.items.some(i => i.s === 'Costs are low' && i.c === 'warn'), 'the flow sheet: "Costs are low" (never answered by the negative) and "Lives not saved" (never answered by the second affirmative) are dropped (warn)'); }
 
 // ---- 6. formal fallacies: truth tables and Venn regions of logic@1 ----
 { const forms = [{ id: 'mp', premises: ['p -> q', 'p'], conclusion: 'q' }, { id: 'mt', premises: ['p -> q', '~q'], conclusion: '~p' }, { id: 'ac', premises: ['p -> q', 'q'], conclusion: 'p' }, { id: 'da', premises: ['p -> q', '~p'], conclusion: '~q' },
     { id: 'ds', premises: ['p | q', '~p'], conclusion: 'q' }, { id: 'xx', premises: ['p | q'], conclusion: 'p & q' }, { id: 'bad', premises: ['p ->'], conclusion: 'q' },
     { id: 'barbara', mood: 'AAA', figure: 1 }, { id: 'celarent', mood: 'EAE', figure: 1 }, { id: 'darapti', mood: 'AAI', figure: 3 }, { id: 'darapti2', mood: 'AAI', figure: 3, existential: true },
-    { id: 'um', mood: 'AAA', figure: 2 }, { id: 'imaj', mood: 'AEE', figure: 1 }, { id: 'imin', mood: 'AAA', figure: 3 }, { id: 'ex2', mood: 'EEE', figure: 1 }, { id: 'neg', mood: 'AAE', figure: 1 }];
+    { id: 'um', mood: 'AAA', figure: 2 }, { id: 'imaj', mood: 'AEE', figure: 1 }, { id: 'imin', mood: 'AAA', figure: 3 }, { id: 'ex2', mood: 'EEE', figure: 1 }, { id: 'neg', mood: 'EAA', figure: 1 }];
   const want = { mp: 'none', mt: 'none', ac: 'affirming_consequent', da: 'denying_antecedent', ds: 'none', xx: 'invalid_form', barbara: 'none', celarent: 'none', darapti: 'existential_fallacy', darapti2: 'none', um: 'undistributed_middle', imaj: 'illicit_major', imin: 'illicit_minor', ex2: 'exclusive_premises', neg: 'negative_mismatch' };
   const r = run({ forms }, Object.keys(want).map(k => sc(k, 'fallacy', { form: k })).concat([sc('vb', 'valid', { form: 'bad' }), sc('cp', 'counter', { form: 'ac', atom: 'p' }), sc('cq', 'counter', { form: 'ac', atom: 'q' }), sc('cm', 'counter', { form: 'mp', atom: 'p' }), sc('cz', 'counter', { form: 'ac', atom: 'z' }), sc('n', 'fallacies')]));
   for (const [k, f] of Object.entries(want)) ok(r.out[k] === X.FALLACIES.indexOf(f), `form ${k}: ${f}`);
   ok(Number.isNaN(r.out.vb) && has(r, 'vb', 'parse'), 'a form that does not parse: NaN, code parse (with logic@1\'s own code)');
   ok(r.out.cp === 0 && r.out.cq === 1 && Number.isNaN(r.out.cm) && has(r, 'cm', 'valid') && has(r, 'cz', 'no_atom'), 'affirming the consequent: the counterexample row p false, q true; a valid form has none (code valid)');
-  ok(r.out.n === 8, '8 invalid forms of 16 (the broken one counts as none)'); }
+  ok(r.out.n === 9, '9 invalid forms of 16 (the broken one counts as none)'); }
 { const big = { id: 'b', premises: ['a1 & a2 & a3 & a4 & a5 & a6 & a7'], conclusion: 'a8 & a9 & a10 & a11 & a12 & a13' }; const r = run({ forms: [big] }, [sc('v', 'valid', { form: 'b' })]);
   ok(Number.isNaN(r.out.v) && has(r, 'v', 'too_many_atoms'), '13 atoms: beyond the truth-table bound, code too_many_atoms'); }
 

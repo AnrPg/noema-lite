@@ -1,0 +1,15 @@
+{
+ "title": "Plasma and effect site: why the effect lags",
+ "intro": "A drug taken by mouth is absorbed into the blood (a one-compartment model with first-order absorption), and from the blood it slowly reaches the tissue where it acts, the effect site. Two models run side by side in time: the pharmacokinetic model gives the plasma concentration at each step, and a differential equation, dCe/dt = ke0 (Cp − Ce), carries it to the effect site. Change the dose and the rate ke0 and watch how far the effect-site peak falls behind and below the plasma peak.",
+ "doseLabel": "Oral dose",
+ "ke0Label": "Equilibration rate ke0",
+ "ec50Label": "EC50 (concentration for half the maximal effect)",
+ "cmaxLabel": "Peak plasma concentration",
+ "ceMaxLabel": "Peak effect-site concentration",
+ "effLabel": "Peak effect (Emax model)",
+ "plotTitle": "Concentration in plasma and at the effect site",
+ "time": "Time",
+ "conc": "Concentration",
+ "plasmaLine": "plasma",
+ "siteLine": "effect site"
+}

@@ -1,0 +1,17 @@
+{
+ "id": "ancient-voyage",
+ "runtime": "sim-spec@1",
+ "entry": "activities/ancient-voyage/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "ancient-voyage-still",
+  "text": "A letter leaves Rome on 10 March AD 50, when the open sea is still closed: it goes by road to Brundisium and then along the coasts by Corinth, Rhodes and Caesarea, about 3 030 km and 45 days, and arrives on 25 April (the 7th day before the Kalends of May, year 803 from the founding of Rome). Leaving on 10 May it crosses the open sea from Ostia, about 2 180 km in 17.6 days, and arrives on 28 May. The arrival date is the departure’s Julian day number plus the days of the journey, converted back into the Julian and the Roman calendar."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

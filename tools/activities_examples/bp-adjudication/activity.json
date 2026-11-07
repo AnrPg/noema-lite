@@ -1,0 +1,17 @@
+{
+ "id": "bp-adjudication",
+ "runtime": "sim-spec@1",
+ "entry": "activities/bp-adjudication/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "bp-adjudication-still",
+  "text": "A British Parliamentary round (WUDC rules): four teams, eight 7-minute speeches. Three judges rank the teams: the chair and the second judge put Closing Government 1st, Opening Government 2nd, Closing Opposition 3rd and Opening Opposition 4th; the third judge puts Opening Government above Closing Government and Opening Opposition above Closing Opposition. By the majority on each pair the panel ranks CG 1st (3 points), OG 2nd (2), CO 3rd (1), OO 4th (0); every ballot is consistent with its speaker points. The Deputy Leader of the Opposition spoke 7:32, 17 s beyond the 15 s grace, and a point of information was offered to the Prime Minister in the protected first minute."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity; an illustrative round (not a real tournament), rules after the WUDC Debating and Judging Manual",
+ "license": "own"
+}

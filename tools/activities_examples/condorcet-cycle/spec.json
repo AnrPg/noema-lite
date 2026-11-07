@@ -1,0 +1,43 @@
+{
+ "format": "noema.sim-spec/v1",
+ "engine": "philo@1",
+ "title": "title",
+ "intro": "intro",
+ "params": [
+  { "id": "n1", "kind": "slider", "label": "n1Label", "min": 0, "max": 20, "step": 1, "default": 8 },
+  { "id": "n2", "kind": "slider", "label": "n2Label", "min": 0, "max": 20, "step": 1, "default": 6 },
+  { "id": "n3", "kind": "slider", "label": "n3Label", "min": 0, "max": 20, "step": 1, "default": 5 }
+ ],
+ "model": {
+  "elections": [
+   { "id": "vote", "candidates": ["A", "B", "C"], "ballots": [
+     { "n": "n1", "rank": ["A", "B", "C"] },
+     { "n": "n2", "rank": ["B", "C", "A"] },
+     { "n": "n3", "rank": ["C", "A", "B"] } ] }
+  ]
+ },
+ "outputs": [
+  { "id": "pl", "kind": "scalar", "of": "winner", "election": "vote", "method": "plurality" },
+  { "id": "irv", "kind": "scalar", "of": "winner", "election": "vote", "method": "irv" },
+  { "id": "borda", "kind": "scalar", "of": "winner", "election": "vote", "method": "borda" },
+  { "id": "cw", "kind": "scalar", "of": "condorcet", "election": "vote" },
+  { "id": "cyc", "kind": "scalar", "of": "cycle", "election": "vote" },
+  { "id": "ab", "kind": "scalar", "of": "margin", "election": "vote", "a": "A", "b": "B" },
+  { "id": "bc", "kind": "scalar", "of": "margin", "election": "vote", "a": "B", "b": "C" },
+  { "id": "ca", "kind": "scalar", "of": "margin", "election": "vote", "a": "C", "b": "A" },
+  { "id": "graph", "kind": "scene", "of": "majority", "election": "vote" }
+ ],
+ "readouts": [
+  { "label": "abLabel", "expr": "ab" },
+  { "label": "bcLabel", "expr": "bc" },
+  { "label": "caLabel", "expr": "ca" },
+  { "label": "cycleLabel", "expr": "cyc == 1" },
+  { "label": "cwLabel", "expr": "cw + 1" },
+  { "label": "plLabel", "expr": "pl + 1" },
+  { "label": "irvLabel", "expr": "irv + 1" },
+  { "label": "bordaLabel", "expr": "borda + 1" }
+ ],
+ "plots": [
+  { "kind": "scene", "of": "graph", "title": "graphTitle", "height": 300 }
+ ]
+}

@@ -70,6 +70,8 @@ const allItems = (rj(regPath).items || []).map(a => {
   return { ...a, html: text, strings, sha256: null, _dir: dir };
 });
 const items = allItems.filter(a => !onlyId || a.id === onlyId);
+// activities/_parts/<name>.json: the parts a spec reuses ({use, with}, docs/INTERACTIVE.md §12.8), as make_pack.py carries them
+const PARTSLIB = (() => { const d = path.join(SDIR, 'activities', '_parts'), r = {}; for (const f of fs.existsSync(d) ? fs.readdirSync(d) : []) if (/^[a-z0-9][a-z0-9-]{0,60}\.json$/.test(f)) try { r[f.slice(0, -5)] = rj(path.join(d, f)); } catch (e) { } return r; })();
 const MODULES = Object.fromEntries(allItems.filter(a => a.runtime === 'wasm-module@1').map(a => [a.id, a]));   // what a wasm@1 spec names (model.module)
 if (!items.length) { console.log('✗ no activity ' + (onlyId || '') + ' in activities.json'); process.exit(1); }
 const exercises = {};
@@ -99,7 +101,7 @@ const playerPath = [path.join(srcDir, 'h5p', 'player.js'), path.join(srcDir, '..
 const H5POK = has('38_activity_h5p.js') && !!playerPath;
 const OWN = (() => { try { return rj(path.join(SDIR, 'subject.json')).language || 'en'; } catch (e) { return 'en'; } })();
 // the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
-const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
+const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.noConverge': 'These values did not settle: the parts of the model kept changing each other, so some results are not shown. Try other settings.', 'engine.act.sim.partFailed': 'One part of this simulation could not compute its results for these settings.', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
   'engine.act.bench.instrument': 'Instrument', 'engine.act.bench.inst.V': 'Multimeter: voltage', 'engine.act.bench.inst.I': 'Multimeter: current', 'engine.act.bench.inst.R': 'Multimeter: resistance',
   'engine.act.bench.inst.scope': 'Oscilloscope', 'engine.act.bench.inst.logic': 'Logic analyser', 'engine.act.bench.red': 'Red lead (+)', 'engine.act.bench.black': 'Black lead (−)', 'engine.act.bench.probe': 'Probe on',
   'engine.act.bench.part': 'Current through', 'engine.act.bench.measure': 'Measure', 'engine.act.bench.left': '{left} measurements left', 'engine.act.bench.log': 'Measurements', 'engine.act.bench.logEmpty': 'No measurements yet.',
@@ -112,7 +114,7 @@ const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.
 const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}
 ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
-var RT = {}, EN = {}; var ACT = { ITEMS: {}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); } };
+var RT = {}, EN = {}; var ACT = { ITEMS: {}, PARTS: ${inl(JSON.stringify(PARTSLIB))}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); } };
 function nf(n) { return String(n); } function fmtBytes(n) { return n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B'; } function tip(t) { return document.createTextNode(''); }
 var WORDS = ${JSON.stringify(HOSTWORDS)};
 function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }

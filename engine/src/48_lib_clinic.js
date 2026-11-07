@@ -635,6 +635,7 @@
     const disp = all.filter(a => a.kind === 'dispose' && fin(a.at) && a.at >= 0).map(a => a.at), tDisp = disp.length ? Math.min(...disp) : Infinity;
     return all.filter(a => fin(a.at) && a.at >= 0 && (a.kind === 'dispose' || a.at <= tDisp));
   }
+  const restCache = new WeakMap();   // the step context → the outputs of the other sections for the latest inputs
   const vpStepper = {
     init(model, env, sc) {
       if (!isObj(model) || !isObj(model.vp) || !MED()) return isObj(model) && !isObj(model.vp) ? { other: true } : null;
@@ -688,7 +689,15 @@
       const all = { 'vp.min.map': S.minMap === null ? NaN : S.minMap, 'vp.max.lactate': S.maxLac === null ? NaN : S.maxLac, 'vp.timeHypo': S.hypo, 'vp.diedAt': S.died === null ? NaN : S.died,
         'vp.outcome': S.died !== null ? 2 : rec.map >= 65 && rec.lactate < 2 && rec.spo2 >= 92 ? 0 : 1, 'vp.t': rel(t) + dt };
       for (const k of VARS) { all['vp.' + k] = rec[k]; all['vp.final.' + k] = rec[k]; }
-      const out = {}; for (const o of sc.spec.outputs || []) if (o && typeof o.id === 'string' && Object.prototype.hasOwnProperty.call(all, o.of)) out[o.id] = all[o.of];
+      const out = {}; let rest = null;
+      for (const o of sc.spec.outputs || []) {
+        if (!o || typeof o.id !== 'string' || o.kind === 'scene') continue;
+        if (Object.prototype.hasOwnProperty.call(all, o.of)) out[o.id] = all[o.of];
+        else {   // the other sections (ddx, grade, cost…): run() on the current inputs, once per inputs
+          if (!rest) { const key = JSON.stringify(env), c = restCache.get(sc); if (c && c.key === key) rest = c.out; else { try { rest = run(sc.spec, env, { seed: sc.seed, prepared: F }).out; } catch (e) { rest = {}; } restCache.set(sc, { key, out: rest }); } }
+          if (Object.prototype.hasOwnProperty.call(rest, o.id)) out[o.id] = rest[o.id];
+        }
+      }
       return { state: S, out, dt };
     },
   };

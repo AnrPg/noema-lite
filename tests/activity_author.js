@@ -163,7 +163,7 @@ for (const id of REFS) {
 console.log('— the engine library: a form from each engine’s table');
 const LS = globalThis.NoemaLibSchema, LIBS = AA.libEngines();
 if (libLoadErr.length) console.log('  (not loaded: ' + libLoadErr.join(' | ') + ' — another engine may be mid-edit)');
-const FINISHED = ['ode@1', 'graph@1', 'geom@1', 'genetics@1', 'med@1', 'clinic@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'];
+const FINISHED = ['ode@1', 'logic@1', 'prob@1', 'graph@1', 'geom@1', 'genetics@1', 'med@1', 'clinic@1', 'timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'];
 ok(FINISHED.every(id => LIBS.some(e => e.id === id)), 'every finished library engine exports its table and has a kind in the author: ' + LIBS.map(e => e.id).join(' '));
 const libRefs = id => fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'spec.json')) && rj(path.join(EX, d, 'spec.json')).engine === id);
 for (const e of LIBS) {

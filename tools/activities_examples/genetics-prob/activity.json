@@ -1,0 +1,17 @@
+{
+ "id": "genetics-prob",
+ "runtime": "sim-spec@1",
+ "entry": "activities/genetics-prob/spec.json",
+ "stateVersion": 1,
+ "capabilities": [
+  "state",
+  "events"
+ ],
+ "fallback": {
+  "media": "genetics-prob-still",
+  "text": "Two hundred populations of 20 diploid individuals start with allele A at frequency 0.5 and drift for 400 generations: A is fixed in about 100 of them, as Kimura’s fixation probability 0.5 predicts. An exact binomial test of that count against 0.5 gives a large p-value (no evidence against Kimura), and the 95% Wilson interval for the fixation probability, about 0.43 to 0.57, contains 0.5. With selection (N = 100, s = 0.02, starting frequency 0.1) Kimura predicts 0.34, and the simulated count falls within the sampling error of that value."
+ },
+ "origin": "own",
+ "credit": "noema-lite reference activity",
+ "license": "own"
+}

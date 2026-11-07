@@ -426,6 +426,10 @@
     if (!(a > 0) || !(x >= 0)) return [NaN, NaN, NaN, NaN];
     if (x === 0) return [0, 1, -Infinity, 0];
     if (x === Infinity) return [1, 0, 0, -Infinity];
+    if (x > 1e10 * max(1, a)) {   // far beyond the mode: Q = x^{a−1}e^{−x}/Γ(a)·(1 + (a−1)/x + (a−1)(a−2)/x² + …), the rest < (a/x)³
+      const lQ = (a - 1) * log(x) - x - lgamma(a) + log1p((a - 1) / x + (a - 1) * (a - 2) / (x * x)), Q = exp(lQ);
+      return [-expm1(lQ), Q, log1p(-Q), lQ];
+    }
     const lD = a >= 1 ? -stirlerr(a) - bd0(a, x) - 0.5 * (LN_2PI + log(a)) : a * log(x) - x - lgamma(a + 1);
     if (x < a + 1) {
       let sum = 1, term = 1, ap = a, i = 0;
@@ -2208,6 +2212,1183 @@
     return out;
   }
 
+
+  /* ===================================================================================================================== */
+  /* shared tools of the later modes (combin, gof, mcmc, multivar, rand)                                                    */
+  /* ===================================================================================================================== */
+  /** a named NoemaSimKit stream (L'Ecuyer's MRG32k3a, 46_lib_simkit.js) — the randomness of the later modes; null and the code
+      no-kit when the kit is not loaded (the result is then NaN, never another generator's numbers) */
+  function kitStream(seed, name, I) {
+    const K = root.NoemaSimKit;
+    if (!K || typeof K.stream !== 'function') { I.add('no-kit'); return null; }
+    return K.stream(seed >>> 0, 'prob.' + name);
+  }
+  /** H_n = Σ 1/i (summed to 1e4, else the asymptotic series ln n + γ + 1/2n − 1/12n² + 1/120n⁴ − 1/252n⁶, error < 1e-25) */
+  function harm(n) {
+    if (!(n >= 0)) return NaN;
+    if (n <= 1e4) { let s = 0; for (let i = floor(n); i >= 1; i--) s += 1 / i; return s; }
+    const r = 1 / n, r2 = r * r; return log(n) + EULER + 0.5 * r - r2 / 12 + r2 * r2 / 120 - r2 * r2 * r2 / 252;
+  }
+  /** H⁽²⁾_n = Σ 1/i² (to 1e4, else π²/6 − 1/n + 1/2n² − 1/6n³ + 1/30n⁵) */
+  function harm2(n) {
+    if (n <= 1e4) { let s = 0; for (let i = floor(n); i >= 1; i--) s += 1 / (i * i); return s; }
+    const r = 1 / n; return PI * PI / 6 - r + r * r / 2 - r * r * r / 6 + r * r * r * r * r / 30;
+  }
+  /** ψ(x): recurrence to x ≥ 6 and the asymptotic series (Abramowitz & Stegun 6.3.18) */
+  function digamma(x) {
+    if (!(x > 0)) return NaN;
+    let r = 0; while (x < 15) { r -= 1 / x; x += 1; }
+    const f = 1 / (x * x);
+    return r + log(x) - 0.5 / x - f * (1 / 12 - f * (1 / 120 - f * (1 / 252 - f * (1 / 240 - f / 132))));
+  }
+  /** the binomial probabilities B(k, i; w), i = 0 … k, from the mode outward by their ratios (no underflow of (1 − w)^k) */
+  function binomRow(k, w, out) {
+    for (let i = 0; i <= k; i++) out[i] = 0;
+    if (w <= 0) { out[0] = 1; return out; }
+    if (w >= 1) { out[k] = 1; return out; }
+    const mo = min(k, floor((k + 1) * w)), rr = w / (1 - w);
+    out[mo] = exp(ldbinom(mo, k, w, 1 - w));
+    for (let i = mo; i > 0 && out[i] > 0; i--) out[i - 1] = out[i] * i / ((k - i + 1) * rr);
+    for (let i = mo; i < k && out[i] > 0; i++) out[i + 1] = out[i] * (k - i) / (i + 1) * rr;
+    return out;
+  }
+  /** the law of a sum of independent Bernoulli(q_i) (the Poisson-binomial), by the exact convolution; capped at index cap */
+  function poisBinom(q, cap) {
+    const K = cap === undefined ? q.length : min(cap, q.length), d = new Float64Array(K + 1); d[0] = 1;
+    for (const p of q) { for (let j = K; j >= 1; j--) d[j] = j === K ? d[j] + d[j - 1] * p : d[j] * (1 - p) + d[j - 1] * p; d[0] *= 1 - p; }
+    return d;   // with a cap, d[K] holds P(≥ K)
+  }
+  /** normalised weights (the code normalized when they do not sum to 1 within 1e-12; null when they cannot be) */
+  function normW(raw, I) {
+    if (!raw.every(v => fin(v) && v >= 0)) return null;
+    const s = sum(raw); if (!(s > 0)) return null;
+    if (abs(s - 1) > 1e-12) I.add('normalized');
+    return raw.map(v => v / s);
+  }
+  const lchoose = (n, k) => lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1);
+  /** the Kolmogorov limit Q_K(x) = P(sup|B| > x) = 2 Σ (−1)^{k−1} e^{−2k²x²}; for x < 1 from the theta form of the cdf
+      √(2π)/x Σ e^{−(2k−1)²π²/8x²} (Kolmogorov 1933; both series converge in a few terms) */
+  function kolmQ(x) {
+    if (!(x > 0)) return 1;
+    if (x < 1) { let s = 0; for (let k = 1; k <= 20; k++) s += exp(-(2 * k - 1) * (2 * k - 1) * PI * PI / (8 * x * x)); return 1 - sqrt(2 * PI) / x * s; }
+    let s = 0; for (let k = 1; k <= 100; k++) { const t = exp(-2 * k * k * x * x); s += (k % 2 ? 1 : -1) * t; if (t < 1e-300) break; }
+    return min(1, 2 * s);
+  }
+  /** P(D⁺_n ≥ d), the one-sided Smirnov statistic exactly (Birnbaum & Tingey 1951): d Σ_{j ≤ n(1−d)} C(n, j)(1 − d − j/n)^{n−j}
+      (d + j/n)^{j−1}, every term positive, summed in logs */
+  function smirnovSf(n, d) {
+    if (!(d > 0)) return 1;
+    if (d >= 1) return 0;
+    const J = floor(n * (1 - d) + 1e-12); let mx = -Infinity; const L = [];
+    for (let j = 0; j <= J; j++) {
+      const a = 1 - d - j / n; if (a <= 0 && n - j > 0) continue;
+      const v = lchoose(n, j) + (n - j > 0 ? (n - j) * log(a) : 0) + (j - 1) * log(d + j / n);
+      L.push(v); if (v > mx) mx = v;
+    }
+    let s = 0; for (const v of L) s += exp(v - mx);
+    return min(1, d * exp(mx) * s);
+  }
+  /** P(D_n < d) exactly: Durbin's matrix (Durbin 1973) as Marsaglia, Tsang & Wang (2003, J. Stat. Softw. 8:18) build it,
+      k = ⌊nd⌋ + 1, m = 2k − 1, h = k − nd; n!/n^n·(H^n)_{kk} by n products H·v (each step scaled by i/n, the n!/n^n factor;
+      a lower Hessenberg H, ~m²/2 work per step) */
+  function kolmCdfExact(n, d) {
+    const k = floor(n * d) + 1, m = 2 * k - 1, h = k - n * d;
+    const H = new Float64Array(m * m), fct = [1]; for (let i = 1; i <= m + 1; i++) fct.push(fct[i - 1] * i);
+    for (let i = 0; i < m; i++) for (let j = 0; j < m; j++) if (i - j + 1 >= 0) H[i * m + j] = 1 / fct[i - j + 1];
+    for (let i = 0; i < m; i++) { H[i * m] -= pow(h, i + 1) / fct[i + 1]; H[(m - 1) * m + i] -= pow(h, m - i) / fct[m - i]; }
+    H[(m - 1) * m] += (2 * h - 1 > 0 ? pow(2 * h - 1, m) : 0) / fct[m];
+    let v = new Float64Array(m), w = new Float64Array(m), e10 = 0; v[k - 1] = 1;
+    for (let step = 1; step <= n; step++) {
+      const f = step / n;
+      for (let i = 0; i < m; i++) { let s = 0; const jm = min(m - 1, i + 1); for (let j = 0; j <= jm; j++) s += H[i * m + j] * v[j]; w[i] = s * f; }
+      const t = v; v = w; w = t;
+      const big = abs(v[k - 1]) > 1e140 || v.some(x => abs(x) > 1e140);
+      if (big) { for (let i = 0; i < m; i++) v[i] *= 1e-140; e10 += 140; }
+    }
+    return v[k - 1] * pow(10, e10);
+  }
+  /** P(D_n ≥ d), two-sided: exact (Durbin–MTW) where n d² < 7, with the one-sided bound 2·P(D⁺ ≥ d) in the far tail (exact for
+      d ≥ ½; below a tail of 1e-4 its error P(D⁺ ≥ d, D⁻ ≥ d) is < 1e-13 relative) — the split of Simard & L'Ecuyer (2011, J.
+      Stat. Softw. 39:11) */
+  function kolmSf(n, d) {
+    if (!(d > 0)) return 1;
+    if (d >= 1) return 0;
+    if (d <= 0.5 / n) return 1;
+    if (d >= 0.5 || n * d * d >= 7) return min(1, 2 * smirnovSf(n, d));
+    const s = 1 - kolmCdfExact(n, d);
+    return s < 1e-4 ? min(1, 2 * smirnovSf(n, d)) : min(1, max(0, s));
+  }
+  /* ---------- matrices (row arrays) ---------- */
+  /** Cholesky A = L Lᵀ (null when A is not positive definite) */
+  function chol(A) {
+    const K = A.length, L = A.map(() => new Array(K).fill(0));
+    for (let j = 0; j < K; j++) {
+      let s = A[j][j]; for (let k = 0; k < j; k++) s -= L[j][k] * L[j][k];
+      if (!(s > 1e-14 * abs(A[j][j])) || !(s > 0)) return null;
+      L[j][j] = sqrt(s);
+      for (let i = j + 1; i < K; i++) { let t = A[i][j]; for (let k = 0; k < j; k++) t -= L[i][k] * L[j][k]; L[i][j] = t / L[j][j]; }
+    }
+    return L;
+  }
+  /** least squares by Householder QR (Golub & Van Loan, Matrix Computations 4th ed. 2013, §5.3): X (N rows of p), y →
+      {beta, R⁻¹, fitted, lev (the diagonal of the hat matrix), rank}; rank < p when a column is (numerically) dependent */
+  function qrLS(X, y) {
+    const N = X.length, p = X[0].length, Acol = [];
+    for (let j = 0; j < p; j++) { const c = new Float64Array(N); for (let i = 0; i < N; i++) c[i] = X[i][j]; Acol.push(c); }
+    const b = Float64Array.from(y), V = [], beta_ = [], diag = [];
+    let scale = 0; for (const c of Acol) for (const v of c) scale = max(scale, abs(v));
+    for (let j = 0; j < p; j++) {
+      const c = Acol[j]; let nr = 0; for (let i = j; i < N; i++) nr += c[i] * c[i]; nr = sqrt(nr);
+      if (!(nr > 1e-11 * max(scale, 1e-300) * sqrt(N))) return { rank: j };
+      const alpha = c[j] > 0 ? -nr : nr, v = new Float64Array(N);
+      for (let i = j; i < N; i++) v[i] = c[i]; v[j] -= alpha;
+      let vv = 0; for (let i = j; i < N; i++) vv += v[i] * v[i];
+      const ap = Q => { let s = 0; for (let i = j; i < N; i++) s += v[i] * Q[i]; s = 2 * s / vv; for (let i = j; i < N; i++) Q[i] -= s * v[i]; };
+      for (let k = j; k < p; k++) ap(Acol[k]);
+      ap(b); V.push({ v, vv, j }); diag.push(Acol[j][j]);
+    }
+    const R = []; for (let i = 0; i < p; i++) { R.push(new Array(p).fill(0)); for (let j = i; j < p; j++) R[i][j] = Acol[j][i]; }
+    const beta = new Array(p).fill(0);
+    for (let i = p - 1; i >= 0; i--) { let s = b[i]; for (let j = i + 1; j < p; j++) s -= R[i][j] * beta[j]; beta[i] = s / R[i][i]; }
+    const Ri = []; for (let i = 0; i < p; i++) Ri.push(new Array(p).fill(0));
+    for (let c = 0; c < p; c++) for (let i = c; i >= 0; i--) { let s = i === c ? 1 : 0; for (let j = i + 1; j <= c; j++) s -= R[i][j] * Ri[j][c]; Ri[i][c] = s / R[i][i]; }
+    const lev = new Float64Array(N);   // h_ii = Σ_j Q_ij² for the thin Q = H_1 ⋯ H_p [I; 0]
+    for (let c = 0; c < p; c++) {
+      const q = new Float64Array(N); q[c] = 1;
+      for (let t = V.length - 1; t >= 0; t--) { const { v, vv, j } = V[t]; let s = 0; for (let i = j; i < N; i++) s += v[i] * q[i]; s = 2 * s / vv; for (let i = j; i < N; i++) q[i] -= s * v[i]; }
+      for (let i = 0; i < N; i++) lev[i] += q[i] * q[i];
+    }
+    const fitted = X.map(r => { let s = 0; for (let j = 0; j < p; j++) s += r[j] * beta[j]; return s; });
+    return { beta, Ri, fitted, lev, rank: p };
+  }
+  /** the eigen decomposition of a symmetric matrix by cyclic Jacobi rotations (Jacobi 1846; Golub & Van Loan §8.5; NR §11.1),
+      sorted by decreasing eigenvalue; each eigenvector's largest component made positive */
+  function symEig(S) {
+    const K = S.length, A = S.map(r => r.slice()), Vm = S.map((r, i) => r.map((_, j) => (i === j ? 1 : 0)));
+    for (let sweep = 0; sweep < 100; sweep++) {
+      let off = 0, tot = 0; for (let i = 0; i < K; i++) for (let j = 0; j < K; j++) { tot += A[i][j] * A[i][j]; if (i !== j) off += A[i][j] * A[i][j]; }
+      if (off <= 1e-32 * tot || off === 0) break;
+      for (let p = 0; p < K - 1; p++) for (let q = p + 1; q < K; q++) {
+        if (A[p][q] === 0) continue;
+        const th = (A[q][q] - A[p][p]) / (2 * A[p][q]), t = (th >= 0 ? 1 : -1) / (abs(th) + sqrt(th * th + 1)), c = 1 / sqrt(t * t + 1), s = t * c;
+        for (let k = 0; k < K; k++) { const akp = A[k][p], akq = A[k][q]; A[k][p] = c * akp - s * akq; A[k][q] = s * akp + c * akq; }
+        for (let k = 0; k < K; k++) { const apk = A[p][k], aqk = A[q][k]; A[p][k] = c * apk - s * aqk; A[q][k] = s * apk + c * aqk; }
+        for (let k = 0; k < K; k++) { const vkp = Vm[k][p], vkq = Vm[k][q]; Vm[k][p] = c * vkp - s * vkq; Vm[k][q] = s * vkp + c * vkq; }
+      }
+    }
+    const idx = Array.from({ length: K }, (_, i) => i).sort((a, b) => A[b][b] - A[a][a]);
+    const vals = idx.map(i => A[i][i]), vecs = idx.map(i => { const v = Vm.map(r => r[i]); let bi = 0; for (let k = 1; k < K; k++) if (abs(v[k]) > abs(v[bi]) + 1e-12) bi = k; return v[bi] < 0 ? v.map(x => -x) : v; });
+    return { vals, vecs };   // vecs[j] = the j-th eigenvector (component k = variable k)
+  }
+
+  /* ===================================================================================================================== */
+  /* combin — the multinomial law (its exact test), the coupon collector, the birthday problem (exact and generalised)       */
+  /* ===================================================================================================================== */
+  /** h[m] = P(m balls thrown with the weights w leave no cell with ≥ k balls), m = 0 … M: the exponential generating function
+      Π_j Σ_{i<k} (w_j z)^i/i! built cell by cell in its normalised form (each step a binomial split of the balls between the
+      cells so far and the new one; every term positive, so no cancellation) — the method of the generalised birthday problem
+      (Diaconis & Mosteller 1989; Mase 1992 for unequal probabilities) and of the maximum load of balls in bins */
+  function noCoincide(w, M, k) {
+    const ws = w.filter(v => v > 0), h = new Float64Array(M + 1);
+    if (!ws.length) return h;
+    for (let m = 0; m <= M; m++) h[m] = m < k ? 1 : 0;
+    let s = ws[0];
+    for (let j = 1; j < ws.length; j++) {
+      const s2 = s + ws[j], u = ws[j] / s2, lq = log1p(-u), rr = u / (1 - u);
+      for (let m = M; m >= 1; m--) {
+        let b = exp(m * lq), acc = b * h[m];
+        for (let i = 1; i < k && i <= m; i++) { b *= (m - i + 1) / i * rr; acc += b * h[m - i]; }
+        h[m] = acc;
+      }
+      s = s2;
+    }
+    return h;
+  }
+  /** the coupon collector's P(T ≤ m), m = 0 … M: T = the draws until `want` of the types have each been drawn `copies` times;
+      the types added one by one with a binomial split of the draws (Flajolet, Gardy & Thimonier 1992, the exponential
+      generating function Π_i (e^{p_i z} − S_r(p_i z)), here in its positive normalised form); equal probabilities with one copy:
+      the chain of the number collected (Feller 1968 §II.11) */
+  function couponCdf(p, M, r, c) {
+    const n = p.length, eq = p.every(v => abs(v - p[0]) < 1e-15);
+    const out = new Float64Array(M + 1);
+    if (eq && r === 1) {
+      let v = new Float64Array(c + 1); v[0] = 1; out[0] = c === 0 ? 1 : 0;
+      for (let k = 1; k <= M; k++) { for (let j = c; j >= 1; j--) v[j] = (j === c ? v[j] : v[j] * j / n) + v[j - 1] * (n - j + 1) / n; v[0] = 0; out[k] = v[c]; }
+      return out;
+    }
+    const ps = p.filter(v => v > 0).sort((a, b) => b - a), full = c === n, J = full ? 1 : c + 1, row = new Float64Array(M + 1);
+    let G = []; for (let j = 0; j < J; j++) G.push(new Float64Array(M + 1));
+    for (let k = 0; k <= M; k++) { if (full) G[0][k] = k >= r ? 1 : 0; else G[min(c, k >= r ? 1 : 0)][k] = 1; }
+    let s = ps[0];
+    for (let t = 1; t < ps.length; t++) {
+      const s2 = s + ps[t], u = ps[t] / s2, N = []; for (let j = 0; j < J; j++) N.push(new Float64Array(M + 1));
+      for (let k = 0; k <= M; k++) {
+        binomRow(k, u, row);
+        for (let i = 0; i <= k; i++) {
+          const b = row[i]; if (b === 0) continue;
+          if (full) { if (i >= r) N[0][k] += b * G[0][k - i]; }
+          else { const add = i >= r ? 1 : 0; for (let j = 0; j < J; j++) { const g = G[j][k - i]; if (g) N[min(c, j + add)][k] += b * g; } }
+        }
+      }
+      G = N; s = s2;
+    }
+    for (let k = 0; k <= M; k++) out[k] = full ? (ps.length === n ? G[0][k] : 0) : G[c][k];
+    return out;
+  }
+  function runCombin(m, R, I) {
+    const g = getter(R), o = {}, sr = {}, out = { o, sr, sc: {} }, kind = m.kind, A = Array.isArray;
+    if (kind === 'multinomial') {
+      const n = g(m, 'n'), P = normW(m.probs.map(R), I);
+      if (!(Number.isInteger(n) && n >= 0) || !P) { I.add('param'); return out; }
+      const K = P.length, iI = g(m, 'i', 0), jI = g(m, 'j', 1);
+      P.forEach((p, i) => { o['mean.' + i] = n * p; o['var.' + i] = n * p * (1 - p); });
+      if (iI < K && jI < K) { o.cov = iI === jI ? n * P[iI] * (1 - P[iI]) : -n * P[iI] * P[jI]; o.corr = iI === jI ? 1 : -sqrt(P[iI] * P[jI] / ((1 - P[iI]) * (1 - P[jI]))); }
+      o.outcomes = exp(lchoose(n + K - 1, K - 1));
+      /* ln P(x) as a chain of binomials (Loader's saddle point in each: no factorial overflow): x_1 ~ B(n, p_1), x_2 | x_1 ~
+         B(n − x_1, p_2/(1 − p_1)), … */
+      const lp = x => { let rem = n, remP = 1, l = 0; for (let i = 0; i < K - 1; i++) { const q = remP > 0 ? min(1, P[i] / remP) : 0; l += ldbinom(x[i], rem, q, 1 - q); rem -= x[i]; remP -= P[i]; } return rem === x[K - 1] ? l : -Infinity; };
+      const ii = (iI < K ? iI : 0), M2 = min(n, 2000), kk = [], mg = [];
+      for (let x = 0; x <= M2; x++) { kk.push(x); mg.push(exp(ldbinom(x, n, P[ii], 1 - P[ii]))); }
+      sr.k = kk; sr.marg = mg;
+      if (A(m.x)) {
+        const x = m.x.map(R);
+        if (!x.every(v => Number.isInteger(v) && v >= 0) || sum(x) !== n) { I.add('param'); return out; }
+        const L = lp(x); o.logpmf = L; o.pmf = exp(L); if (o.pmf === 0 && L > -Infinity) I.add('underflow');
+        let X2 = 0, df = -1; P.forEach((p, i) => { if (p > 0) { X2 += (x[i] - n * p) * (x[i] - n * p) / (n * p); df++; } });
+        o.chi2 = X2; o.pChi2 = df > 0 ? gammaPQ(df / 2, X2 / 2)[1] : NaN;
+        /* the exact multinomial test: Σ P(y) over the outcomes no more likely than x (R's rule: within 1e-7 relative), by
+           enumeration of every composition of n (≤ 2·10⁶ of them) */
+        if (o.outcomes > 2e6) I.add('budget');
+        else {
+          const lim = L + log1p(1e-7), y = new Array(K); let tot = 0, c = 0;
+          const rec = (i, rem, remP, l) => {
+            if (i === K - 1) { if (remP <= 1e-15 && rem > 0) return; const ll = l; if (ll <= lim) tot += exp(ll); c++; return; }
+            const q = remP > 0 ? min(1, P[i] / remP) : 0;
+            for (let v = 0; v <= rem; v++) { y[i] = v; const t = ldbinom(v, rem, q, 1 - q); if (t === -Infinity) continue; rec(i + 1, rem - v, remP - P[i], l + t); }
+          };
+          rec(0, n, 1, 0); o.pExact = min(1, tot);
+        }
+      }
+      return out;
+    }
+    if (kind === 'coupon') {
+      const raw = A(m.probs) ? m.probs.map(R) : null, n = raw ? raw.length : g(m, 'types');
+      const P = raw ? normW(raw, I) : (Number.isInteger(n) && n >= 1 ? new Array(n).fill(1 / n) : null);
+      const r = g(m, 'copies', 1), c = g(m, 'want', n);
+      if (!P || !(Number.isInteger(r) && r >= 1) || !(Number.isInteger(c) && c >= 1 && c <= n)) { I.add('param'); return out; }
+      const pos = P.filter(v => v > 0).length, eq = P.every(v => abs(v - P[0]) < 1e-15);
+      if (c > pos) { I.add('param'); Object.assign(o, { eT: Infinity, varT: Infinity, sdT: Infinity }); return out; }
+      if (eq && r === 1) {   // Σ_{i<c} n/(n − i) and Σ_{i<c} n·i/(n − i)² (the geometric waiting times; Feller 1968 §IX.3)
+        let e = 0, v = 0; for (let i = 0; i < c; i++) { e += n / (n - i); v += n * i / ((n - i) * (n - i)); }
+        o.eT = e; o.varT = v;
+      } else {
+        /* Poissonisation (Flajolet, Gardy & Thimonier 1992, Thm 2.1; Holst 1986): E T = ∫₀^∞ P(fewer than c types complete at
+           time t) dt, each type complete with P(r, p_i t) independently; E T² = 2∫ t·(…) dt − E T; exp-sinh quadrature */
+        if (P.length * (c + 1) * 4609 > 4e7) { I.add('budget'); return out; }
+        const S = t => {
+          if (c === n) { let l = 0; for (const p of P) { const q = gammaPQ(r, p * t); l += q[2]; } return -expm1(l); }
+          const d = poisBinom(P.map(p => gammaPQ(r, p * t)[0]), c); let s = 0; for (let j = 0; j < c; j++) s += d[j]; return s;
+        };
+        const sc = (log(n) + r) / min(...P.filter(v => v > 0));
+        const e = expsinh(w => S(sc * w) * sc), e2 = 2 * expsinh(w => sc * w * S(sc * w) * sc) - e;
+        o.eT = e; o.varT = max(0, e2 - e * e);
+      }
+      o.sdT = sqrt(o.varT);
+      o.eTApprox = c === n ? n * (log(n) + (r - 1) * (n > 1 ? log(log(n)) : 0) + EULER - lgamma(r)) : r === 1 ? n * log(n / (n - c + 0.5)) : NaN;   // Newman & Shepp 1960
+      const mq = g(m, 'm', NaN), Mser = m.mMax !== undefined ? m.mMax : min(2000, max(c * r, Math.ceil(o.eT + 6 * o.sdT)));
+      const M = max(Mser, fin(mq) ? mq : 0), eqFast = eq && r === 1;
+      const cost = eqFast ? M * c : P.length * (c === n ? 1 : c + 1) * M * M / 2;
+      if (cost > 4e7) { I.add('budget'); return out; }
+      const F = couponCdf(P, M, r, c);
+      if (fin(mq)) o.pDone = F[mq];
+      const mm = [], pm = [], cm = []; for (let k = 0; k <= Mser; k++) { mm.push(k); cm.push(F[k]); pm.push(k ? max(0, F[k] - F[k - 1]) : F[0]); }
+      sr.m = mm; sr.pmfT = pm; sr.cdfT = cm;
+      let med = NaN; for (let k = 0; k <= M; k++) if (F[k] >= 0.5) { med = k; break; }
+      o.median = med;
+      return out;
+    }
+    // birthday: P(some day is shared by ≥ k of n people), equal or unequal day weights (Diaconis & Mosteller 1989; Mase 1992)
+    const raw = A(m.probs) ? m.probs.map(R) : null, d = raw ? raw.length : g(m, 'days', 365);
+    const P = raw ? normW(raw, I) : (Number.isInteger(d) && d >= 1 ? null : undefined);
+    const k = g(m, 'k', 2), n = g(m, 'people', NaN), tgt = g(m, 'target', 0.5);
+    if (P === undefined || (raw && !P) || !(Number.isInteger(k) && k >= 2) || !(tgt > 0 && tgt <= 1) || (m.people !== undefined && !(Number.isInteger(n) && n >= 0))) { I.add('param'); return out; }
+    const W = P || new Array(d).fill(1 / d), dPos = W.filter(v => v > 0).length, cap = (k - 1) * dPos + 1;   // pigeonhole: cap people always share
+    const lam = nn => exp(lchoose(nn, k)) * sum(W.map(v => pow(v, k)));   // the expected number of k-sets on one day
+    o.expPairs = fin(n) ? n * (n - 1) / 2 * sum(W.map(v => v * v)) : NaN;
+    if (fin(n)) o.pApprox = -expm1(-lam(n));   // the Poisson approximation 1 − e^{−λ}
+    const closed = !P && k === 2;   // 1 − Π (1 − i/d): exact in logs
+    const noneClosed = nn => (nn > d ? 0 : exp(Array.from({ length: nn }, (_, i) => log1p(-i / d)).reduce((a, b) => a + b, 0)));
+    const matchClosed = nn => (nn > d ? 1 : -expm1(Array.from({ length: nn }, (_, i) => log1p(-i / d)).reduce((a, b) => a + b, 0)));
+    let M = max(fin(n) ? n : 0, m.nMax || 0, 64), H = null;
+    for (let it = 0; it < 30; it++) {
+      M = min(M, cap);
+      if (!closed) { if (dPos * M * k > 4e7) { I.add('budget'); break; } H = noCoincide(W, M, k); }
+      const pm = nn => (closed ? matchClosed(nn) : 1 - H[nn]);
+      if (pm(M) >= tgt || M >= cap) { let f = NaN; for (let x = 0; x <= M; x++) if (pm(x) >= tgt) { f = x; break; } o.nFor = f; break; }
+      M *= 2;
+    }
+    const Pm = nn => (nn >= cap ? 1 : closed ? matchClosed(nn) : H && nn < H.length ? 1 - H[nn] : NaN);
+    if (fin(n)) { o.pMatch = Pm(n); o.pNone = n >= cap ? 0 : closed ? noneClosed(n) : H && n < H.length ? H[n] : NaN; }
+    const nMax = m.nMax || min(2000, max(fin(n) ? n : 0, fin(o.nFor) ? 3 * o.nFor : 100)), ng = [], pb = [], ab = [];
+    if (!closed && (!H || H.length <= min(nMax, cap - 1))) { if (dPos * nMax * k <= 4e7) H = noCoincide(W, min(nMax, cap), k); }
+    for (let x = 0; x <= nMax; x++) { ng.push(x); pb.push(Pm(x)); ab.push(-expm1(-lam(x))); }
+    sr.nGrid = ng; sr.pByN = pb; sr.approxByN = ab;
+    return out;
+  }
+
+  /* ===================================================================================================================== */
+  /* gof — goodness of fit: Kolmogorov–Smirnov (one and two samples, exact), Shapiro–Wilk (Royston 1995), Anderson–Darling   */
+  /* (Marsaglia & Marsaglia 2004; D'Agostino & Stephens 1986 with estimated parameters), χ² of binned data                    */
+  /* ===================================================================================================================== */
+  const polyv = (c, x) => { let r = 0; for (let i = c.length - 1; i >= 0; i--) r = r * x + c[i]; return r; };
+  /** Shapiro–Wilk W and its p value: Royston's AS R94 (Appl. Stat. 44:547, 1995; R swilk.c): the coefficients from the normal
+      scores m_i = Φ⁻¹((i − 3/8)/(n + 1/4)) with Royston's polynomial corrections of the two extreme ones, W as the squared
+      correlation (1 − W kept for W near 1), p by the normalising transformations (n = 3 exact; 4 ≤ n ≤ 11; n ≥ 12) */
+  function shapiroWilk(xs) {
+    const x = Array.from(xs).sort((a, b) => a - b), n = x.length, nn2 = floor(n / 2), a = new Array(nn2 + 1).fill(0);
+    if (n < 3) return { w: NaN, p: NaN, code: 'few-data' };
+    const small = 1e-19, c1 = [0, 0.221157, -0.147981, -2.07119, 4.434685, -2.706056], c2 = [0, 0.042981, -0.293762, -1.752461, 5.682633, -3.582633];
+    if (n === 3) a[1] = Math.SQRT1_2;
+    else {
+      const an25 = n + 0.25, mm = [0]; let summ2 = 0;
+      for (let i = 1; i <= nn2; i++) { const v = qnorm((i - 0.375) / an25); mm.push(v); summ2 += v * v; }
+      summ2 *= 2; const ssumm2 = sqrt(summ2), rsn = 1 / sqrt(n), a1 = polyv(c1, rsn) - mm[1] / ssumm2;
+      let i1, fac;
+      if (n > 5) { i1 = 3; const a2 = -mm[2] / ssumm2 + polyv(c2, rsn); fac = sqrt((summ2 - 2 * mm[1] * mm[1] - 2 * mm[2] * mm[2]) / (1 - 2 * a1 * a1 - 2 * a2 * a2)); a[2] = a2; }
+      else { i1 = 2; fac = sqrt((summ2 - 2 * mm[1] * mm[1]) / (1 - 2 * a1 * a1)); }
+      a[1] = a1; for (let i = i1; i <= nn2; i++) a[i] = -mm[i] / fac;
+    }
+    const range = x[n - 1] - x[0];
+    if (range < small) return { w: NaN, p: NaN, code: 'zero-range' };
+    let sx = x[0] / range, sa = -a[1];
+    for (let i = 1, j = n - 1; i < n; j--) { const xi = x[i] / range; sx += xi; i++; if (i !== j) sa += Math.sign(i - j) * a[min(i, j)]; }
+    sa /= n; sx /= n;
+    let ssa = 0, ssx = 0, sax = 0;
+    for (let i = 0, j = n - 1; i < n; i++, j--) {
+      const asa = i !== j ? Math.sign(i - j) * a[1 + min(i, j)] - sa : -sa, xsx = x[i] / range - sx;
+      ssa += asa * asa; ssx += xsx * xsx; sax += asa * xsx;
+    }
+    const ssassx = sqrt(ssa * ssx), w1 = (ssassx - sax) * (ssassx + sax) / (ssa * ssx), w = 1 - w1;
+    if (n === 3) { const p = 1.90985931710274 * (asin(sqrt(w)) - 1.0471975511966); return { w, p: max(0, p) }; }
+    const y0 = log(w1), xx = log(n);
+    let y = y0, mu, s;
+    if (n <= 11) { const gm = polyv([-2.273, 0.459], n); if (y >= gm) return { w, p: 1e-99 }; y = -log(gm - y); mu = polyv([0.544, -0.39978, 0.025054, -6.714e-4], n); s = exp(polyv([1.3822, -0.77857, 0.062767, -0.0020322], n)); }
+    else { mu = polyv([-1.5861, -0.31082, -0.083751, 0.0038915], xx); s = exp(polyv([-0.4803, -0.082676, 0.0030302], xx)); }
+    return { w, p: ncdf(-(y - mu) / s) };
+  }
+  /** the limiting Anderson–Darling cdf and its finite-n correction (Marsaglia & Marsaglia 2004, J. Stat. Softw. 9:2, ADinf and
+      errfix; |error| < 2e-6 for every n ≥ 1 by their check) */
+  function adInf(z) {
+    if (!(z > 0)) return 0;
+    if (z < 2) return exp(-1.2337141 / z) / sqrt(z) * (2.00012 + (0.247105 - (0.0649821 - (0.0347962 - (0.011672 - 0.00168691 * z) * z) * z) * z) * z);
+    return exp(-exp(1.0776 - (2.30695 - (0.43424 - (0.082433 - (0.008056 - 0.0003146 * z) * z) * z) * z) * z));
+  }
+  function adCdf(n, z) {
+    const x = adInf(z);
+    let e;
+    if (x > 0.8) e = (-130.2137 + (745.2337 - (1705.091 - (1950.646 - (1116.36 - 255.7844 * x) * x) * x) * x) * x) / n;
+    else {
+      const c = 0.01265 + 0.1757 / n;
+      if (x < c) { let t = x / c; t = sqrt(t) * (1 - t) * (49 * t - 102); e = t * (0.0037 / (n * n) + 0.00078 / n + 0.00006) / n; }
+      else { let t = (x - c) / (0.8 - c); t = -0.00022633 + (6.54034 - (14.6538 - (14.458 - (8.259 - 1.91864 * t) * t) * t) * t) * t; e = t * (0.04213 / n + 0.01365 / (n * n)); }
+    }
+    return min(1, max(0, x + e));
+  }
+  function runGof(m, R, I) {
+    const g = getter(R), o = {}, sr = {}, out = { o, sr, sc: {} }, kind = m.kind, alpha = g(m, 'alpha', 0.05);
+    const X = Array.isArray(m.x) ? m.x.map(R) : [], Y = Array.isArray(m.y) ? m.y.map(R) : null;
+    if (!X.length || !X.every(fin) || (Y && !Y.every(fin)) || !(alpha > 0 && alpha < 1)) { I.add('param'); return out; }
+    const xs = Array.from(X).sort((a, b) => a - b), n = xs.length; o.n = n;
+    const hasTies = a => { for (let i = 1; i < a.length; i++) if (a[i] === a[i - 1]) return true; return false; };
+    const done = () => { if (fin(o.p)) o.reject = o.p < alpha ? 1 : 0; return out; };
+    const ecdf = (F) => { const ex = [], ey = [], cy = []; for (let i = 0; i < n; i++) { ex.push(xs[i]); ey.push((i + 1) / n); if (F) cy.push(F(xs[i])); } sr.ecdfX = ex; sr.ecdfY = ey; if (F) sr.cdfY = cy; };
+    const qq = () => { const a = [], b = []; for (let i = 0; i < n; i++) { a.push(qnorm((i + 1 - 0.375) / (n + 0.25))); b.push(xs[i]); } sr.qqX = a; sr.qqY = b; };
+    if (kind === 'ks-one') {
+      const D = mkDist(m.dist, R, I); if (!D) { I.add('param'); return out; }
+      if (D.disc) I.add('discrete');
+      if (hasTies(xs)) I.add('ties');
+      let dp = 0, dm = 0; for (let i = 0; i < n; i++) { const F = D.cdf(xs[i]); dp = max(dp, (i + 1) / n - F); dm = max(dm, F - i / n); }
+      const alt = m.alt || 'two-sided', Dn = alt === 'greater' ? dp : alt === 'less' ? dm : max(dp, dm);
+      o.dPlus = dp; o.dMinus = dm; o.stat = Dn;
+      o.pAsym = alt === 'two-sided' ? kolmQ(sqrt(n) * Dn) : exp(-2 * n * Dn * Dn);
+      o.p = m.exact === false ? o.pAsym : alt === 'two-sided' ? kolmSf(n, Dn) : smirnovSf(n, Dn);
+      if (m.exact === false) I.add('approx');
+      ecdf(x => D.cdf(x)); qq();
+      return done();
+    }
+    if (kind === 'ks-two') {
+      const ys = Array.from(Y).sort((a, b) => a - b), n2 = ys.length; o.n2 = n2;
+      if (n < 1 || n2 < 1) { I.add('few-data'); return out; }
+      /* the checkpoints: the ends of the blocks of equal values in the pooled sample (ties: the exact law conditional on the
+         tie pattern, Schröer & Trenkler 1995 — what R ≥ 4.3 psmirnov does); D as an integer max |i·n2 − j·n1| */
+      const all = xs.concat(ys).sort((a, b) => a - b), ends = new Set(); let ties = false;
+      for (let t = 0; t < all.length; t++) { if (t + 1 < all.length && all[t + 1] === all[t]) { ties = true; continue; } ends.add(t + 1); }
+      if (ties) I.add('ties');
+      let i = 0, j = 0, qmax = 0, qp = 0, qm = 0;
+      for (const e of Array.from(ends).sort((a, b) => a - b)) {
+        const v = all[e - 1]; while (i < n && xs[i] <= v) i++; while (j < n2 && ys[j] <= v) j++;
+        const df = i * n2 - j * n; qmax = max(qmax, abs(df)); qp = max(qp, df); qm = max(qm, -df);
+      }
+      const alt = m.alt || 'two-sided', q = alt === 'greater' ? qp : alt === 'less' ? qm : qmax, Dn = q / (n * n2);
+      o.dPlus = qp / (n * n2); o.dMinus = qm / (n * n2); o.stat = Dn;
+      const en = n * n2 / (n + n2);
+      o.pAsym = alt === 'two-sided' ? kolmQ(sqrt(en) * Dn) : exp(-2 * en * Dn * Dn);
+      if (m.exact === false) { I.add('approx'); o.p = o.pAsym; }
+      else {
+        /* the lattice-path recursion (Hodges 1957): X(i, j) = the share of the paths to (i, j) that already reached |i·n2 − j·n1| ≥ q at
+           a checkpoint; X(i, j) = i/(i+j)·X(i−1, j) + j/(i+j)·X(i, j−1), every term positive (a tiny p keeps its digits) */
+        const hit = (a, b) => { const df = a * n2 - b * n; return alt === 'greater' ? df >= q : alt === 'less' ? -df >= q : abs(df) >= q; };
+        let prev = new Float64Array(n2 + 1), cur = new Float64Array(n2 + 1);
+        for (let a = 0; a <= n; a++) {
+          for (let b = 0; b <= n2; b++) {
+            let v;
+            if (a === 0 && b === 0) v = 0;
+            else v = (a > 0 ? a / (a + b) * prev[b] : 0) + (b > 0 ? b / (a + b) * cur[b - 1] : 0);
+            if ((a + b) > 0 && ends.has(a + b) && hit(a, b)) v = 1;
+            cur[b] = v;
+          }
+          const t = prev; prev = cur; cur = t;
+        }
+        o.p = min(1, prev[n2]);
+        if (q === 0) o.p = 1;
+      }
+      return done();
+    }
+    if (kind === 'shapiro-wilk') {
+      const r = shapiroWilk(xs); if (r.code) I.add(r.code);
+      o.w = r.w; o.stat = r.w; o.p = r.p; qq(); return done();
+    }
+    if (kind === 'anderson-darling') {
+      let F, lF, lS;
+      if (m.estimate === true) {
+        if (n < 8) I.add('few-data');
+        const mv = meanVar(xs), mu = mv.mean, sd = sqrt(mv.var);
+        if (!(sd > 0)) { I.add('zero-range'); return out; }
+        F = x => ncdf((x - mu) / sd); lF = x => lncdf((x - mu) / sd); lS = x => lncdf(-(x - mu) / sd);
+      } else {
+        const D = mkDist(m.dist, R, I); if (!D) { I.add('param'); return out; }
+        if (D.disc) I.add('discrete');
+        F = x => D.cdf(x); lF = x => D.lcdf(x); lS = x => D.lsf(x);
+      }
+      let s = 0; for (let i = 0; i < n; i++) s += (2 * i + 1) * (lF(xs[i]) + lS(xs[n - 1 - i]));
+      const A2 = -n - s / n; o.stat = A2;
+      if (m.estimate === true) {   // case 3 (μ, σ estimated): A*² = A²(1 + 0.75/n + 2.25/n²), p by D'Agostino & Stephens 1986 Table 4.9
+        const a = A2 * (1 + 0.75 / n + 2.25 / (n * n)); o.statAdj = a;
+        o.p = a < 0.2 ? 1 - exp(-13.436 + 101.14 * a - 223.73 * a * a) : a < 0.34 ? 1 - exp(-8.318 + 42.796 * a - 59.938 * a * a)
+          : a < 0.6 ? exp(0.9177 - 4.279 * a - 1.38 * a * a) : a < 10 ? exp(1.2937 - 5.709 * a + 0.0186 * a * a) : 3.7e-24;
+        I.add('approx');
+      } else { o.p = 1 - adCdf(n, A2); o.pAsym = 1 - adInf(A2); }
+      ecdf(F); qq();
+      return done();
+    }
+    // chi2-fit: equiprobable cells of the law (Mann & Wald 1942; default k = ⌈2 n^{2/5}⌉, Moore 1986), or the integers of a discrete law
+    const D = mkDist(m.dist, R, I); if (!D) { I.add('param'); return out; }
+    const ddof = m.ddof || 0, lo = [], E = [], O = [];
+    if (D.disc) {
+      const a = D.q(0.0005), b = D.q(0.9995);
+      if (!(fin(a) && fin(b)) || b - a > 2000) { I.add('param'); return out; }
+      for (let v = a; v <= b; v++) { lo.push(v); E.push(n * (v === a ? D.cdf(v) : v === b ? D.sf(v - 1) : D.pdf(v))); }
+      for (let t = 0; t < lo.length; t++) O.push(0);
+      for (const v of xs) { const t = v <= a ? 0 : v >= b ? lo.length - 1 : Math.round(v) - a; O[t]++; }
+    } else {
+      const k = m.bins || max(2, Math.ceil(2 * pow(n, 0.4))), edges = [-Infinity];
+      for (let t = 1; t < k; t++) edges.push(D.q(t / k)); edges.push(Infinity);
+      for (let t = 0; t < k; t++) { lo.push(edges[t]); E.push(n / k); O.push(0); }
+      for (const v of xs) { let t = 0; while (t < k - 1 && v > edges[t + 1]) t++; O[t]++; }
+    }
+    let X2 = 0, mn = Infinity, low = 0; for (let t = 0; t < E.length; t++) { if (E[t] > 0) X2 += (O[t] - E[t]) * (O[t] - E[t]) / E[t]; mn = min(mn, E[t]); if (E[t] < 5) low++; }
+    if (low) I.add('low-expected', low);
+    const df = E.length - 1 - ddof; o.stat = X2; o.df = df; o.minExpected = mn;
+    if (df < 1) { I.add('param'); return out; }
+    o.p = gammaPQ(df / 2, X2 / 2)[1];
+    sr.binLo = lo; sr.observed = O; sr.expected = E;
+    return done();
+  }
+
+  /* ===================================================================================================================== */
+  /* mcmc — Metropolis–Hastings (random walk) on any log density, Gibbs on a bivariate normal and on the normal model with  */
+  /* semi-conjugate priors; diagnostics of Vehtari, Gelman, Simpson, Carpenter & Bürkner (2021, Bayesian Analysis 16:667):  */
+  /* rank-normalised split R̂ (bulk and folded), bulk and tail ESS by Geyer's initial monotone sequence, the MCSE of the mean */
+  /* ===================================================================================================================== */
+  /** the effective sample size of chains (arrays of equal length): posterior's ess_basic — the biased autocovariances of each chain,
+      ρ̂_t = 1 − (W − mean acov_t)/var⁺, Geyer's (1992) initial positive then monotone sequence, τ = −1 + 2Σρ̂ + ρ̂_last,
+      τ ≥ 1/log10(S) (Vehtari et al. 2021 eq. 10–11; Stan's reference) */
+  function essBasic(ch) {
+    const M = ch.length, N = ch[0].length; if (N < 4) return NaN;
+    const means = ch.map(c => sum(c) / N), acov = t => { let s = 0; for (let c = 0; c < M; c++) { const x = ch[c], mu = means[c]; let a = 0; for (let i = 0; i + t < N; i++) a += (x[i] - mu) * (x[i + t] - mu); s += a / N; } return s / M; };
+    const a0 = acov(0); if (!(a0 > 0)) return NaN;
+    const meanVar = a0 * N / (N - 1);
+    let varPlus = meanVar * (N - 1) / N;
+    if (M > 1) { const mm = sum(means) / M; let b = 0; for (const v of means) b += (v - mm) * (v - mm); varPlus += b / (M - 1); }
+    const rho = new Float64Array(N); rho[0] = 1;
+    let t = 0, re = 1, ro = 1 - (meanVar - acov(1)) / varPlus; rho[1] = ro;
+    while (t < N - 5 && re + ro > 0) {
+      t += 2; re = 1 - (meanVar - acov(t)) / varPlus; ro = 1 - (meanVar - acov(t + 1)) / varPlus;
+      if (re + ro >= 0) { rho[t] = re; rho[t + 1] = ro; }
+    }
+    const maxT = t; if (re > 0) rho[maxT] = re;
+    for (t = 0; t <= maxT - 4;) { t += 2; if (rho[t] + rho[t + 1] > rho[t - 2] + rho[t - 1]) { rho[t] = (rho[t - 2] + rho[t - 1]) / 2; rho[t + 1] = rho[t]; } }
+    let s = 0; for (let i = 0; i < maxT; i++) s += rho[i];
+    const S = M * N; let tau = -1 + 2 * s + rho[maxT]; tau = max(tau, 1 / (log(S) / Math.LN10));
+    return S / tau;
+  }
+  /** R̂ of chains: sqrt(((N−1)/N·W + B/N)/W) (Gelman & Rubin 1992; BDA3 §11.4) */
+  function rhatBasic(ch) {
+    const M = ch.length, N = ch[0].length; if (N < 2 || M < 1) return NaN;
+    const mv = ch.map(c => meanVar(c)), W = sum(mv.map(x => x.var)) / M, mm = sum(mv.map(x => x.mean)) / M;
+    let B = 0; if (M > 1) { for (const x of mv) B += (x.mean - mm) * (x.mean - mm); B = B * N / (M - 1); }
+    if (!(W > 0)) return NaN;
+    return sqrt(((N - 1) / N * W + B / N) / W);
+  }
+  /** split each chain in two halves (the middle draw dropped when odd) */
+  const splitCh = ch => { const N = ch[0].length, h = floor(N / 2), out = []; for (const c of ch) { out.push(c.slice(0, h)); out.push(c.slice(N - h)); } return out; };
+  /** rank normalisation z = Φ⁻¹((r − 3/8)/(S + 1/4)) over the pooled draws (average ranks for ties; Blom 1958) */
+  function rankNorm(ch) {
+    const all = [].concat(...ch.map(c => Array.from(c))), rk = ranks(all).r, S = all.length, out = []; let k = 0;
+    for (const c of ch) { const z = new Float64Array(c.length); for (let i = 0; i < c.length; i++) z[i] = qnorm((rk[k++] - 0.375) / (S + 0.25)); out.push(z); }
+    return out;
+  }
+  function diagnose(ch) {
+    const all = [].concat(...ch.map(c => Array.from(c))), s = sorted(all), med = quant(s, 0.5), sp = splitCh(ch);
+    const rb = rhatBasic(rankNorm(sp)), rf = rhatBasic(rankNorm(sp.map(c => c.map(v => abs(v - med)))));
+    const q05 = quant(s, 0.05), q95 = quant(s, 0.95), ind = q => sp.map(c => c.map(v => (v <= q ? 1 : 0)));
+    const mv = meanVar(all), essM = essBasic(sp);
+    return { mean: mv.mean, sd: sqrt(mv.var), q05, q50: med, q95, rhat: max(rb, rf), ess: essBasic(rankNorm(sp)), essTail: min(essBasic(ind(q05)), essBasic(ind(q95))), mcse: sqrt(mv.var / essM) };
+  }
+  function runMcmc(m, R, I, env, prepared, seed) {
+    const g = getter(R), o = {}, sr = {}, out = { o, sr, sc: {} }, kind = m.kind, names = paramNames(m), K = names.length;
+    const iters = g(m, 'iters', 2000), burn = g(m, 'burn', floor(iters / 2)), thin = g(m, 'thin', 1), C = m.chains || 4, spread = g(m, 'spread', 2);
+    if (!(Number.isInteger(iters) && iters >= 10 && Number.isInteger(burn) && burn >= 0 && burn < iters && Number.isInteger(thin) && thin >= 1 && spread >= 0)) { I.add('param'); return out; }
+    if (iters * C * (kind === 'metropolis' ? 1 : 0.2) > 2e5) { I.add('budget'); return out; }
+    const r0 = kitStream(seed, 'mcmc.init', I); if (!r0) return out;
+    const draws = names.map(() => []), tr = []; let acc = 0, prop = 0;
+    if (kind === 'metropolis') {
+      const init = m.init.map(R), scale = Array.isArray(m.scale) ? m.scale.map(R) : new Array(K).fill(1);
+      if (!init.every(fin) || !scale.every(v => v > 0)) { I.add('param'); return out; }
+      const src = m.logdens, f = (prepared && prepared.fns.get(src)) || C_cx(src), e = Object.assign({}, env);
+      let nanC = 0;
+      const ld = x => { for (let i = 0; i < K; i++) e[names[i]] = x[i]; const v = f(e); if (Number.isNaN(v) || typeof v !== 'number') { nanC++; return -Infinity; } return v; };
+      for (let c = 0; c < C; c++) {
+        const r = kitStream(seed, 'mcmc.chain' + c, I);
+        let x = init.map((v, i) => v + (c ? spread * scale[i] * r0.normal(0, 1) : 0)), lx = ld(x);
+        const ch = names.map(() => new Float64Array(floor((iters - burn) / thin))); let kept = 0;
+        for (let t = 0; t < iters; t++) {
+          const y = x.map((v, i) => v + scale[i] * r.normal(0, 1)), ly = ld(y), lu = log(r());
+          if (t >= burn) prop++;
+          if (lu < ly - lx || (lx === -Infinity && ly > -Infinity)) { x = y; lx = ly; if (t >= burn) acc++; }
+          if (t >= burn && (t - burn) % thin === 0 && kept < ch[0].length) { for (let i = 0; i < K; i++) ch[i][kept] = x[i]; kept++; }
+        }
+        for (let i = 0; i < K; i++) draws[i].push(ch[i]);
+      }
+      if (nanC) I.add('nan-density', nanC);
+      o.accept = prop ? acc / prop : NaN;
+      if (o.accept < 0.1 || o.accept > 0.9) I.add('accept-extreme');
+    } else if (kind === 'gibbs-bivnormal') {   // x | y ~ N(ρy, 1 − ρ²), y | x ~ N(ρx, 1 − ρ²) (Geman & Geman 1984; Gelfand & Smith 1990)
+      const rho = g(m, 'rho', 0.9), init = Array.isArray(m.init) ? m.init.map(R) : [0, 0];
+      if (!(rho > -1 && rho < 1) || init.length !== 2 || !init.every(fin)) { I.add('param'); return out; }
+      const sd = sqrt(1 - rho * rho);
+      for (let c = 0; c < C; c++) {
+        const r = kitStream(seed, 'mcmc.chain' + c, I); let x = init[0] + (c ? spread * r0.normal(0, 1) : 0), y = init[1] + (c ? spread * r0.normal(0, 1) : 0);
+        const L = floor((iters - burn) / thin), cx = new Float64Array(L), cy = new Float64Array(L); let kept = 0;
+        for (let t = 0; t < iters; t++) { x = r.normal(rho * y, sd); y = r.normal(rho * x, sd); if (t >= burn && (t - burn) % thin === 0 && kept < L) { cx[kept] = x; cy[kept] = y; kept++; } }
+        draws[0].push(cx); draws[1].push(cy);
+      }
+      o.accept = 1;
+    } else {   // gibbs-normal: μ | τ normal, τ | μ gamma (the semi-conjugate normal model, BDA3 §11.6 / Gelfand & Smith 1990)
+      const x = m.x.map(R), n = x.length, pr = isObj(m.prior) ? m.prior : {};
+      const mu0 = g(pr, 'mu0', 0), sd0 = g(pr, 'sd0', 100), a = g(pr, 'a', 0.001), b = g(pr, 'b', 0.001);
+      if (n < 2 || !x.every(fin) || !(sd0 > 0 && a > 0 && b > 0) || !fin(mu0)) { I.add('param'); return out; }
+      const sx = sum(x), p0 = 1 / (sd0 * sd0), xm = sx / n, s2 = meanVar(x).var;
+      for (let c = 0; c < C; c++) {
+        const r = kitStream(seed, 'mcmc.chain' + c, I); let mu = xm + (c ? spread * sqrt(s2 / n) * r0.normal(0, 1) : 0), tau = 1 / s2;
+        const L = floor((iters - burn) / thin), cm = new Float64Array(L), cs = new Float64Array(L); let kept = 0;
+        for (let t = 0; t < iters; t++) {
+          const pp = p0 + n * tau; mu = r.normal((p0 * mu0 + tau * sx) / pp, 1 / sqrt(pp));
+          let ss = 0; for (const v of x) ss += (v - mu) * (v - mu);
+          tau = r.gamma(a + n / 2, 1 / (b + ss / 2));
+          if (t >= burn && (t - burn) % thin === 0 && kept < L) { cm[kept] = mu; cs[kept] = 1 / sqrt(tau); kept++; }
+        }
+        draws[0].push(cm); draws[1].push(cs);
+      }
+      o.accept = 1;
+    }
+    const L = draws[0][0].length; o.draws = L * C;
+    if (L < 8) { I.add('param'); return out; }
+    let rmx = -Infinity, emn = Infinity;
+    names.forEach((nm, i) => {
+      const d = diagnose(draws[i]);
+      for (const k of ['mean', 'sd', 'q05', 'q50', 'q95', 'rhat', 'ess', 'essTail', 'mcse']) o[k + '.' + nm] = d[k];
+      rmx = max(rmx, d.rhat); emn = min(emn, d.ess, d.essTail);
+      sr['trace.' + nm] = Array.from(draws[i][0]); if (C > 1) sr['trace2.' + nm] = Array.from(draws[i][1]);
+      const lags = m.lags || 40, ac = [];
+      for (let t = 0; t <= lags; t++) { let s = 0; for (const c of draws[i]) s += acfOf(c, t); ac.push(s / C); }
+      sr['acf.' + nm] = ac;
+      const h = autoHist([].concat(...draws[i].map(c => Array.from(c))), m.bins || 40, false); sr['histX.' + nm] = h.x; sr['histDensity.' + nm] = h.dens;
+    });
+    o.rhatMax = rmx; o.essMin = emn;
+    if (rmx > 1.01) I.add('not-converged');
+    if (emn < 100 * C) I.add('low-ess');
+    sr.iter = Array.from({ length: L }, (_, t) => burn + t * thin); sr.lag = Array.from({ length: (m.lags || 40) + 1 }, (_, t) => t);
+    return out;
+  }
+  const C_cx = src => C.cx(src);
+  function acfOf(x, t) { const n = x.length; if (t >= n) return NaN; let mu = 0; for (const v of x) mu += v; mu /= n; let c0 = 0, ct = 0; for (let i = 0; i < n; i++) c0 += (x[i] - mu) * (x[i] - mu); for (let i = 0; i + t < n; i++) ct += (x[i] - mu) * (x[i + t] - mu); return c0 > 0 ? ct / c0 : NaN; }
+
+  /* ===================================================================================================================== */
+  /* multivar — the multivariate normal (Cholesky), correlation (Pearson, Spearman, Kendall τ_b), linear regression with its */
+  /* inference (Householder QR), logistic regression (IRLS), principal components (Jacobi), the Dirichlet law               */
+  /* ===================================================================================================================== */
+  /** P(X ≤ a, Y ≤ b) of a standard bivariate normal with correlation ρ: ∫_{−∞}^{a} φ(x) Φ((b − ρx)/√(1−ρ²)) dx (Owen 1956 form),
+      by the exp-sinh rule after x = a − w */
+  function bvn(a, b, rho) {
+    if (rho >= 1 - 1e-15) return ncdf(min(a, b));
+    if (rho <= -1 + 1e-15) return max(0, ncdf(a) - ncdf(-b));
+    const s = sqrt(1 - rho * rho);
+    if (a === Infinity) return ncdf(b);
+    if (b === Infinity) return ncdf(a);
+    return expsinh(w => { const x = a - w; return npdf(x) * ncdf((b - rho * x) / s); });
+  }
+  function runMultivar(m, R, I, seed) {
+    const g = getter(R), o = {}, sr = {}, out = { o, sr, sc: {} }, kind = m.kind, conf = g(m, 'conf', 0.95);
+    const mat = M => M.map(r => r.map(R)), A = Array.isArray;
+    const pairs = (K, f, pre) => { for (let i = 0; i < K; i++) for (let j = 0; j < K; j++) o[pre + i + '_' + j] = f(i, j); };
+    if (kind === 'mvnormal') {
+      const mu = m.mu.map(R), K = mu.length, S = A(m.cov) ? mat(m.cov) : null;
+      if (!S || !mu.every(fin) || !S.every(r => r.every(fin))) { I.add('param'); return out; }
+      for (let i = 0; i < K; i++) for (let j = 0; j < i; j++) if (abs(S[i][j] - S[j][i]) > 1e-12 * max(abs(S[i][j]), 1e-300)) { I.add('param'); return out; }
+      o.dim = K; mu.forEach((v, i) => { o['mean.' + i] = v; o['var.' + i] = S[i][i]; o['sd.' + i] = sqrt(S[i][i]); });
+      pairs(K, (i, j) => S[i][j], 'cov.'); pairs(K, (i, j) => S[i][j] / sqrt(S[i][i] * S[j][j]), 'corr.');
+      const L = chol(S); if (!L) { I.add('not-pd'); return out; }
+      pairs(K, (i, j) => L[i][j], 'chol.');
+      let ld = 0; for (let i = 0; i < K; i++) ld += 2 * log(L[i][i]); o.logdet = ld;
+      if (A(m.x)) {
+        const x = m.x.map(R), z = new Array(K);
+        for (let i = 0; i < K; i++) { let s = x[i] - mu[i]; for (let k = 0; k < i; k++) s -= L[i][k] * z[k]; z[i] = s / L[i][i]; }
+        const q = z.reduce((a, v) => a + v * v, 0); o.maha = q; o.logpdf = -0.5 * (K * LN_2PI + ld + q); o.pdf = exp(o.logpdf);
+        o.pEllipse = gammaPQ(K / 2, q / 2)[0];
+        if (K === 1) o.cdf = ncdf((x[0] - mu[0]) / L[0][0]);
+        else if (K === 2) o.cdf = bvn((x[0] - mu[0]) / sqrt(S[0][0]), (x[1] - mu[1]) / sqrt(S[1][1]), S[0][1] / sqrt(S[0][0] * S[1][1]));
+        else { I.add('dim'); o.cdf = NaN; }
+      }
+      const nd = g(m, 'n', 0);
+      if (nd > 0) {
+        const r = kitStream(seed, 'multivar.mvn', I);
+        if (r) { const dx = [], dy = []; for (let t = 0; t < nd; t++) { const z = mu.map(() => r.normal(0, 1)), v = mu.map((u, i) => { let s = u; for (let k = 0; k <= i; k++) s += L[i][k] * z[k]; return s; }); dx.push(v[0]); dy.push(K > 1 ? v[1] : 0); } sr.drawX = dx; sr.drawY = dy; }
+      }
+      if (K >= 2) {   // the conf ellipse of the first two coordinates: μ + √χ²₂(conf)·L₂(cos θ, sin θ)
+        const L2 = chol([[S[0][0], S[0][1]], [S[1][0], S[1][1]]]), c = sqrt(-2 * log1p(-conf)), ex = [], ey = [];
+        if (L2) for (let t = 0; t <= 200; t++) { const th = 2 * PI * t / 200, u = c * cos(th), v = c * sin(th); ex.push(mu[0] + L2[0][0] * u); ey.push(mu[1] + L2[1][0] * u + L2[1][1] * v); }
+        sr.ellX = ex; sr.ellY = ey;
+      }
+      return out;
+    }
+    if (kind === 'dirichlet') {   // Dirichlet(α): moments, density, entropy (Kotz, Balakrishnan & Johnson 2000 ch. 49)
+      const al = m.conc.map(R), K = al.length, a0 = sum(al);
+      if (!al.every(v => v > 0 && fin(v))) { I.add('param'); return out; }
+      o.dim = K;
+      al.forEach((a, i) => { o['mean.' + i] = a / a0; o['var.' + i] = a * (a0 - a) / (a0 * a0 * (a0 + 1)); o['sd.' + i] = sqrt(o['var.' + i]); });
+      pairs(K, (i, j) => (i === j ? o['var.' + i] : -al[i] * al[j] / (a0 * a0 * (a0 + 1))), 'cov.');
+      pairs(K, (i, j) => o['cov.' + i + '_' + j] / sqrt(o['var.' + i] * o['var.' + j]), 'corr.');
+      const lB = sum(al.map(lgamma)) - lgamma(a0);
+      o.entropy = lB + (a0 - K) * digamma(a0) - sum(al.map(a => (a - 1) * digamma(a)));
+      if (A(m.x)) {
+        const x = m.x.map(R);
+        if (!x.every(v => v >= 0 && v <= 1) || abs(sum(x) - 1) > 1e-9) { I.add('param'); o.logpdf = -Infinity; o.pdf = 0; }
+        else { o.logpdf = -lB + sum(al.map((a, i) => (a === 1 ? 0 : (a - 1) * log(x[i])))); o.pdf = exp(o.logpdf); }
+      }
+      const nd = g(m, 'n', 0);
+      if (nd > 0) { const r = kitStream(seed, 'multivar.dir', I); if (r) { const dx = [], dy = []; for (let t = 0; t < nd; t++) { const gs = al.map(a => r.gamma(a, 1)), s = sum(gs); dx.push(gs[0] / s); dy.push(gs[1] / s); } sr.drawX = dx; sr.drawY = dy; } }
+      return out;
+    }
+    const X = mat(m.data), N = X.length, K = X[0].length;
+    if (!X.every(r => r.every(fin))) { I.add('param'); return out; }
+    o.n = N; o.dim = K;
+    const colMV = j => meanVar(X.map(r => r[j]));
+    if (kind === 'corr' || kind === 'pca') {
+      if (N < 3) { I.add('few-data'); return out; }
+      const mv = []; for (let j = 0; j < K; j++) mv.push(colMV(j));
+      mv.forEach((v, j) => { o['mean.' + j] = v.mean; o['var.' + j] = v.var; o['sd.' + j] = sqrt(v.var); });
+      const cov = (i, j) => { let s = 0; for (const r of X) s += (r[i] - mv[i].mean) * (r[j] - mv[j].mean); return s / (N - 1); };
+      const S = []; for (let i = 0; i < K; i++) { S.push([]); for (let j = 0; j < K; j++) S[i].push(i === j ? mv[i].var : cov(i, j)); }
+      pairs(K, (i, j) => S[i][j], 'cov.'); pairs(K, (i, j) => S[i][j] / sqrt(S[i][i] * S[j][j]), 'corr.');
+      if (kind === 'corr') {
+        const i = m.i || 0, j = m.j !== undefined ? m.j : min(1, K - 1); if (i >= K || j >= K) { I.add('param'); return out; }
+        const xi = X.map(r => r[i]), xj = X.map(r => r[j]);
+        const pear = (a, b) => { const ma = sum(a) / a.length, mb = sum(b) / b.length; let sab = 0, saa = 0, sbb = 0; for (let t = 0; t < a.length; t++) { sab += (a[t] - ma) * (b[t] - mb); saa += (a[t] - ma) ** 2; sbb += (b[t] - mb) ** 2; } return sab / sqrt(saa * sbb); };
+        const tp = rr => { const t = rr * sqrt((N - 2) / (1 - rr * rr)); return 2 * tsf(abs(t), N - 2); };
+        o.r = pear(xi, xj); o.pR = tp(o.r);
+        const ri = ranks(xi).r, rj = ranks(xj).r; o.rho = pear(ri, rj); o.pRho = tp(o.rho);   // Spearman: Pearson on ranks, t approximation (R exact = FALSE)
+        // Kendall τ_b with the tie-corrected variance of S (Kendall 1970 §4; R cor.test exact = FALSE, no continuity correction)
+        let S2 = 0, n1 = 0, n2 = 0;
+        for (let a = 0; a < N; a++) for (let b = a + 1; b < N; b++) { const dx = Math.sign(xi[a] - xi[b]), dy = Math.sign(xj[a] - xj[b]); S2 += dx * dy; if (dx === 0) n1++; if (dy === 0) n2++; }
+        const n0 = N * (N - 1) / 2; o.tau = S2 / sqrt((n0 - n1) * (n0 - n2));
+        const tg = a => { const s = sorted(a), t = []; let c = 1; for (let u = 1; u <= s.length; u++) { if (u < s.length && s[u] === s[u - 1]) c++; else { if (c > 1) t.push(c); c = 1; } } return t; };
+        const ti = tg(xi), tj = tg(xj); if (ti.length || tj.length) I.add('ties');
+        const v0 = N * (N - 1) * (2 * N + 5), vt = sum(ti.map(t => t * (t - 1) * (2 * t + 5))), vu = sum(tj.map(t => t * (t - 1) * (2 * t + 5)));
+        const v1 = sum(ti.map(t => t * (t - 1))) * sum(tj.map(t => t * (t - 1))) / (2 * N * (N - 1)), v2 = sum(ti.map(t => t * (t - 1) * (t - 2))) * sum(tj.map(t => t * (t - 1) * (t - 2))) / (9 * N * (N - 1) * (N - 2));
+        const vS = (v0 - vt - vu) / 18 + v1 + v2; o.pTau = 2 * ncdf(-abs(S2) / sqrt(vS));
+        return out;
+      }
+      // pca: the eigen decomposition of the covariance (or, scale: true, the correlation) matrix — prcomp's conventions
+      const M2 = m.scale ? S.map((r, i) => r.map((v, j) => v / sqrt(S[i][i] * S[j][j]))) : S, E = symEig(M2), tot = sum(E.vals);
+      o.totalVar = tot; let cp = 0;
+      E.vals.forEach((v, j) => { o['eig.' + j] = v; o['prop.' + j] = v / tot; cp += v / tot; o['cumProp.' + j] = cp; });
+      pairs(K, (i, j) => E.vecs[j][i], 'load.');
+      sr.scree = E.vals.slice();
+      const z = r => r.map((v, j) => (v - mv[j].mean) / (m.scale ? sqrt(mv[j].var) : 1));
+      sr.pc1 = X.map(r => { const u = z(r); return u.reduce((a, v, k) => a + v * E.vecs[0][k], 0); });
+      sr.pc2 = K > 1 ? X.map(r => { const u = z(r); return u.reduce((a, v, k) => a + v * E.vecs[1][k], 0); }) : [];
+      return out;
+    }
+    const y = m.y.map(R), ic = m.intercept !== false, D = X.map(r => (ic ? [1].concat(r) : r.slice())), p = D[0].length;
+    if (!y.every(fin)) { I.add('param'); return out; }
+    if (N <= p) { I.add('few-data'); return out; }
+    const tq = -qt((1 - conf) / 2, N - p), zq = -qnorm((1 - conf) / 2);
+    if (kind === 'ols') {   // ordinary least squares (Gauss 1809), its exact normal-theory inference (Seber & Lee 2003)
+      const f = qrLS(D, y); if (f.rank < p) { I.add('singular'); return out; }
+      const res = y.map((v, i) => v - f.fitted[i]), rss = sum(res.map(v => v * v)), df = N - p, s2 = rss / df;
+      const ym = sum(y) / N, tss = ic ? sum(y.map(v => (v - ym) * (v - ym))) : sum(y.map(v => v * v));
+      o.df = df; o.dfModel = p - (ic ? 1 : 0); o.sigma = sqrt(s2); o.r2 = 1 - rss / tss; o.adjR2 = 1 - (1 - o.r2) * (N - (ic ? 1 : 0)) / df;
+      o.fStat = ((tss - rss) / o.dfModel) / s2; o.fP = o.dfModel > 0 ? fD(o.dfModel, df).sf(o.fStat) : NaN;
+      o.logLik = -N / 2 * (LN_2PI + log(rss / N) + 1); o.aic = -2 * o.logLik + 2 * (p + 1); o.bic = -2 * o.logLik + log(N) * (p + 1);
+      f.beta.forEach((b, j) => {
+        let v = 0; for (let k = 0; k < p; k++) v += f.Ri[j][k] * f.Ri[j][k];
+        const se = sqrt(s2 * v); o['coef.' + j] = b; o['se.' + j] = se; o['stat.' + j] = b / se; o['p.' + j] = 2 * tsf(abs(b / se), df);
+        o['ciLo.' + j] = b - tq * se; o['ciHi.' + j] = b + tq * se;
+      });
+      sr.fitted = f.fitted; sr.resid = res; sr.lev = Array.from(f.lev);
+      sr.cook = res.map((e, i) => e * e * f.lev[i] / (p * s2 * (1 - f.lev[i]) * (1 - f.lev[i])));   // Cook 1977
+      return out;
+    }
+    // logistic: Fisher scoring = IRLS (Nelder & Wedderburn 1972; McCullagh & Nelder 1989 §4.4), R glm's start μ = (y + ½)/(w + 1)
+    const w = A(m.w) ? m.w.map(R) : new Array(N).fill(1);
+    if (!w.every(v => v > 0 && fin(v)) || y.some((v, i) => v < 0 || v > w[i])) { I.add('param'); return out; }
+    const prop = y.map((v, i) => v / w[i]), maxIt = m.maxIter || 50;
+    let mu = y.map((v, i) => (v + 0.5) / (w[i] + 1)), eta = mu.map(v => log(v / (1 - v))), beta = null, dev = Infinity, it = 0, conv = false, fit = null;
+    const devOf = mm => 2 * sum(y.map((v, i) => (v > 0 ? v * log(v / (w[i] * mm[i])) : 0) + (w[i] - v > 0 ? (w[i] - v) * log((w[i] - v) / (w[i] * (1 - mm[i]))) : 0)));
+    for (it = 1; it <= maxIt; it++) {
+      const W = mu.map((u, i) => w[i] * u * (1 - u)), z = eta.map((e, i) => e + (prop[i] - mu[i]) / (mu[i] * (1 - mu[i])));
+      const sw = W.map(sqrt); fit = qrLS(D.map((r, i) => r.map(v => v * sw[i])), z.map((v, i) => v * sw[i]));
+      if (fit.rank < p) { I.add('singular'); return out; }
+      beta = fit.beta; eta = D.map(r => r.reduce((a, v, k) => a + v * beta[k], 0)); mu = eta.map(e => 1 / (1 + exp(-e)));
+      mu = mu.map(u => min(1 - 1e-15, max(1e-15, u)));
+      const d2 = devOf(mu);
+      if (abs(d2 - dev) / (abs(d2) + 0.1) < 1e-12) { dev = d2; conv = true; break; }
+      dev = d2;
+    }
+    if (!conv) I.add('no-convergence');
+    if (mu.some(u => u < 1e-10 || u > 1 - 1e-10) && beta.some(b => abs(b) > 15)) I.add('separation');   // as R: fitted probabilities 0 or 1
+    o.iter = min(it, maxIt); o.deviance = dev; o.df = N - p; o.dfModel = p - (ic ? 1 : 0);
+    const pbar = sum(y) / sum(w); o.nullDeviance = devOf(y.map(() => (ic ? pbar : 0.5)));
+    o.logLik = sum(y.map((v, i) => ldbinom(v, w[i], mu[i], 1 - mu[i]))); o.aic = -2 * o.logLik + 2 * p; o.bic = -2 * o.logLik + log(N) * p;
+    const sw2 = mu.map((u, i) => sqrt(w[i] * u * (1 - u))), f2 = qrLS(D.map((r, i) => r.map(v => v * sw2[i])), D.map(() => 0));
+    if (f2.rank < p) { I.add('singular'); return out; }
+    beta.forEach((b, j) => {   // Wald inference from the inverse Fisher information (X'WX)⁻¹ = R⁻¹R⁻ᵀ at the fit
+      let v = 0; for (let k = 0; k < p; k++) v += f2.Ri[j][k] * f2.Ri[j][k];
+      const se = sqrt(v); o['coef.' + j] = b; o['se.' + j] = se; o['stat.' + j] = b / se; o['p.' + j] = 2 * ncdf(-abs(b / se));
+      o['ciLo.' + j] = b - zq * se; o['ciHi.' + j] = b + zq * se;
+    });
+    sr.fitted = mu; sr.resid = y.map((v, i) => prop[i] - mu[i]);
+    return out;
+  }
+
+  /* ===================================================================================================================== */
+  /* rand — randomized algorithms (Motwani & Raghavan, Randomized Algorithms, 1995 = MR; Mitzenmacher & Upfal, Probability  */
+  /* and Computing, 2nd ed. 2017 = MU): general, parameterised computations — exact values beside their bounds and seeded   */
+  /* simulations (NoemaSimKit streams 'prob.rand.<kind>')                                                                   */
+  /* ===================================================================================================================== */
+  /** the binomial upper tail P(X ≥ j), X ~ B(n, p) = I_p(j, n − j + 1) */
+  const binomGe = (j, n, p) => (j <= 0 ? 1 : j > n ? 0 : ibeta(p, j, n - j + 1, 1 - p)[0]);
+  function modpowB(a, e, n) { let r = 1n, b = a % n; while (e > 0n) { if (e & 1n) r = r * b % n; b = b * b % n; e >>= 1n; } return r; }
+  /** is a a Miller–Rabin witness of the compositeness of the odd n > 2 (Miller 1976; Rabin 1980)? (BigInt: exact for n < 2^53) */
+  function mrWitness(a, n) {
+    const N = BigInt(n), A = BigInt(a) % N; if (A === 0n) return false;
+    let d = N - 1n, s = 0; while ((d & 1n) === 0n) { d >>= 1n; s++; }
+    let x = modpowB(A, d, N); if (x === 1n || x === N - 1n) return false;
+    for (let i = 1; i < s; i++) { x = x * x % N; if (x === N - 1n) return false; }
+    return true;
+  }
+  /** deterministic for n < 3.3·10²⁴ with the first 12 primes as bases (Sorenson & Webster 2017) */
+  function isPrimeN(n) {
+    if (n < 2) return false;
+    for (const p of [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]) { if (n === p) return true; if (n % p === 0) return false; }
+    for (const p of [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]) if (mrWitness(p, n)) return false;
+    return true;
+  }
+  /** the graph of a cover/hitting-time model: adjacency lists of n vertices */
+  function graphOf(m, R, I) {
+    const g = getter(R); let n = g(m, 'n'), E = [];
+    if (Array.isArray(m.edges)) { E = m.edges.map(e => e.map(R)); if (!fin(n)) n = 1 + max(-1, ...E.map(e => max(e[0], e[1]))); }
+    else {
+      const G = m.graph;
+      if (G === 'hypercube') { if (!(Number.isInteger(n) && n >= 2 && (n & (n - 1)) === 0)) return null; for (let u = 0; u < n; u++) for (let b = 1; b < n; b <<= 1) if (u < (u ^ b)) E.push([u, u ^ b]); }
+      else {
+        if (!(Number.isInteger(n) && n >= 2)) return null;
+        if (G === 'path') for (let u = 0; u + 1 < n; u++) E.push([u, u + 1]);
+        if (G === 'cycle') for (let u = 0; u < n; u++) E.push([u, (u + 1) % n]);
+        if (G === 'complete') for (let u = 0; u < n; u++) for (let v = u + 1; v < n; v++) E.push([u, v]);
+        if (G === 'star') for (let u = 1; u < n; u++) E.push([0, u]);
+        if (G === 'lollipop') { const k = Math.ceil(n / 2); for (let u = 0; u < k; u++) for (let v = u + 1; v < k; v++) E.push([u, v]); for (let u = k - 1; u + 1 < n; u++) E.push([u, u + 1]); }
+      }
+    }
+    if (!(Number.isInteger(n) && n >= 1) || !E.every(e => Number.isInteger(e[0]) && Number.isInteger(e[1]) && e[0] >= 0 && e[1] >= 0 && e[0] < n && e[1] < n && e[0] !== e[1])) return null;
+    const adj = Array.from({ length: n }, () => []); for (const [u, v] of E) { adj[u].push(v); adj[v].push(u); }
+    return { n, E, adj };
+  }
+  const connected = (G) => { const seen = new Uint8Array(G.n), st = [0]; seen[0] = 1; let c = 1; while (st.length) { const u = st.pop(); for (const v of G.adj[u]) if (!seen[v]) { seen[v] = 1; c++; st.push(v); } } return c === G.n; };
+  function runRand(m, R, I, seed, env, prepared) {
+    const g = getter(R), o = {}, sr = {}, out = { o, sr, sc: {} }, kind = m.kind, reps = g(m, 'reps', 0), delta = g(m, 'delta', 1e-6);
+    const bad = () => { I.add('param'); return out; };
+    const rng = () => kitStream(seed, 'rand.' + kind, I);
+    const simStats = (v, intBins) => { const mv = meanVar(v); o.simMean = mv.mean; o.simSd = sqrt(mv.var); const h = autoHist(v, intBins ? 0 : 40, false); sr.histX = h.x; sr.histDensity = h.dens; };
+    const budget = w => { if (w > 2e7) { I.add('budget'); return false; } return true; };
+    switch (kind) {
+      case 'amplify': {   // Las Vegas vs Monte Carlo; amplification by independent repetition (MR §1.2, MU §1.2–1.3)
+        const k = g(m, 'k', 10), kMax = m.kMax || 50, sided = m.sided || 'one';
+        if (m.p !== undefined) { const p = g(m, 'p'); if (!(p > 0 && p <= 1)) return bad(); o.lvExpected = 1 / p; o.lvTail = pow(1 - p, k); }
+        if (m.err === undefined) return out;
+        const e = g(m, 'err'); if (!(e >= 0 && e <= 1) || !(delta > 0 && delta < 1)) return bad();
+        let err;
+        if (sided === 'one') {   // one-sided error: wrong only if every run errs — ε^k
+          err = kk => pow(e, kk);
+          o.kNeeded = e === 0 ? 1 : e === 1 ? Infinity : Math.ceil(log(delta) / log(e) - 1e-12);
+          if (e === 1) I.add('not-applicable');
+        } else {   // two-sided: the majority of k runs (a tie counts as an error) — P(B(k, ε) ≥ k/2) exactly
+          if (!(e < 0.5)) { I.add('not-applicable'); o.errK = NaN; o.kNeeded = Infinity; return out; }
+          err = kk => binomGe(Math.ceil(kk / 2), kk, e);
+          o.kHoeffding = Math.ceil(log(1 / delta) / (2 * (0.5 - e) * (0.5 - e)));   // Hoeffding: e^{−2k(½−ε)²} ≤ δ
+          let lo = 0, hi = 1; while (err(2 * hi + 1) > delta && hi < 1e7) hi *= 2;   // the smallest odd k = 2j + 1
+          while (hi - lo > 1) { const mid = floor((lo + hi) / 2); if (err(2 * mid + 1) <= delta) hi = mid; else lo = mid; }
+          o.kNeeded = err(1) <= delta ? 1 : 2 * hi + 1;
+        }
+        o.errK = err(k);
+        const kg = [], eb = []; for (let kk = 1; kk <= kMax; kk++) { kg.push(kk); eb.push(err(kk)); } sr.kGrid = kg; sr.errByK = eb;
+        return out;
+      }
+      case 'quicksort': {   // randomized quicksort: E C_n = 2(n+1)H_n − 4n; Var C_n = 7n² − 4(n+1)²H⁽²⁾_n − 2(n+1)H_n + 13n (Knuth, TAOCP 3 §5.2.2, ex. 5.2.2–8; MR §1.1)
+        const n = g(m, 'n'); if (!(Number.isInteger(n) && n >= 0)) return bad();
+        const H = harm(n);
+        o.eComp = 2 * (n + 1) * H - 4 * n; o.varComp = max(0, 7 * n * n - 4 * (n + 1) * (n + 1) * harm2(n) - 2 * (n + 1) * H + 13 * n); o.approxComp = n > 0 ? 2 * n * log(n) : 0;
+        if (reps > 0 && budget(reps * n * 2)) {   // the comparisons only depend on the subproblem sizes: C = n − 1 + C(U − 1) + C(n − U)
+          const r = rng(); if (!r) return out; const v = [];
+          for (let t = 0; t < reps; t++) { const st = [n]; let c = 0; while (st.length) { const s = st.pop(); if (s < 2) continue; c += s - 1; const u = 1 + r.int(s); st.push(u - 1, s - u); } v.push(c); }
+          simStats(v);
+        }
+        return out;
+      }
+      case 'quickselect': {   // Hoare's FIND with random pivots: E C_{n,r} = 2(n + (n+1)H_n − (n+3−r)H_{n+1−r} − (r+2)H_r + 3) (Knuth 1971; MU ex. 3.23)
+        const n = g(m, 'n'), rk = g(m, 'r'); if (!(Number.isInteger(n) && n >= 1 && Number.isInteger(rk) && rk >= 1 && rk <= n)) return bad();
+        o.eComp = 2 * (n + (n + 1) * harm(n) - (n + 3 - rk) * harm(n + 1 - rk) - (rk + 2) * harm(rk) + 3);
+        const a = rk / n; o.approxComp = 2 * n * (1 - (a > 0 ? a * log(a) : 0) - (a < 1 ? (1 - a) * log(1 - a) : 0));   // 2n(1 + H(α)), H the entropy in nats
+        if (reps > 0 && budget(reps * n * 2)) {
+          const r = rng(); if (!r) return out; const v = [];
+          for (let t = 0; t < reps; t++) { let s = n, q = rk, c = 0; while (s > 1) { c += s - 1; const u = 1 + r.int(s); if (u === q) break; if (q < u) s = u - 1; else { q -= u; s -= u; } } v.push(c); }
+          simStats(v);
+        }
+        return out;
+      }
+      case 'karger': {   // Karger's contraction: a fixed min cut survives with probability ≥ 1/C(n,2) (Karger 1993; MR §1.1, MU §1.5)
+        let n = g(m, 'n'), Gr = null;
+        if (Array.isArray(m.edges)) { Gr = graphOf(m, R, I); if (!Gr) return bad(); n = Gr.n; }
+        if (!(Number.isInteger(n) && n >= 2)) return bad();
+        const p = 2 / (n * (n - 1)), k = g(m, 'k', Math.ceil(n * (n - 1) / 2 * log(n)));
+        o.pSuccess = p; o.kRuns = p >= 1 ? 1 : Math.ceil(log(delta) / log1p(-p) - 1e-12); o.pFailK = exp(k * log1p(-p));
+        let q = 1; const depth = Math.ceil(2 * log(n) / LN2); for (let t = 0; t < depth; t++) q = q - q * q / 4; o.pKS = q;   // Karger & Stein 1996: P(t+1) = P(t) − P(t)²/4 ≥ 1/(t+1)
+        if (Gr) {
+          if (!connected(Gr)) { I.add('disconnected'); o.minCut = 0; }
+          else if (n <= 20 && budget((1 << (n - 1)) * Gr.E.length)) {   // the exact min cut over the 2^(n−1) bipartitions
+            let best = Infinity; for (let s = 1; s < (1 << (n - 1)); s++) { let c = 0; for (const [u, v] of Gr.E) if (((s >> u) & 1) !== ((s >> v) & 1)) c++; if (c < best) best = c; } o.minCut = best;
+          }
+          if (reps > 0 && budget(reps * Gr.E.length * 4)) {   // contraction = Kruskal on a uniformly random edge order (MR §1.1)
+            const r = rng(); if (!r) return out; let ok = 0; const E = Gr.E.slice(), cuts = [];
+            for (let t = 0; t < reps; t++) {
+              for (let i = E.length - 1; i > 0; i--) { const j = r.int(i + 1); const tt = E[i]; E[i] = E[j]; E[j] = tt; }
+              const par = Array.from({ length: n }, (_, i) => i), f = x => { while (par[x] !== x) { par[x] = par[par[x]]; x = par[x]; } return x; };
+              let comp = n; for (const [u, v] of E) { if (comp <= 2) break; const a = f(u), b = f(v); if (a !== b) { par[a] = b; comp--; } }
+              let c = 0; for (const [u, v] of E) if (f(u) !== f(v)) c++;
+              cuts.push(c); if (c === o.minCut) ok++;
+            }
+            o.simSuccess = ok / reps; simStats(cuts, true);
+          }
+        }
+        return out;
+      }
+      case 'freivalds': {   // Freivalds 1977: AB ≠ C is detected by a random r ∈ {0,1}^n with probability ≥ ½ (MR §7.1, MU §1.3)
+        const k = g(m, 'k', 10); o.errBound = pow(2, -k); o.kNeeded = Math.ceil(log(1 / delta) / LN2 - 1e-12);
+        if (!Array.isArray(m.A)) return out;
+        const Am = m.A.map(r => r.map(R)), Bm = m.B.map(r => r.map(R)), Cm = m.Cm.map(r => r.map(R)), n = Am.length;
+        if (![Am, Bm, Cm].every(M => M.every(r => r.every(fin)))) return bad();
+        const D = Am.map((r, i) => Bm[0].map((_, j) => { let s = 0; for (let k2 = 0; k2 < n; k2++) s += r[k2] * Bm[k2][j]; return s - Cm[i][j]; }));
+        const tol = 1e-9 * max(1, ...Cm.map(r => max(...r.map(abs))));
+        o.equal = D.every(r => r.every(v => abs(v) <= tol)) ? 1 : 0;
+        if (o.equal) { o.pDetect = 0; o.errExact = 0; return out; }
+        if (!budget((1 << n) * n * n)) return out;
+        let det = 0; for (let s = 0; s < (1 << n); s++) { let hit = false; for (let i = 0; i < n && !hit; i++) { let v = 0; for (let j = 0; j < n; j++) if ((s >> j) & 1) v += D[i][j]; if (abs(v) > tol) hit = true; } if (hit) det++; }
+        o.pDetect = det / (1 << n); o.errExact = pow(1 - o.pDetect, k);
+        return out;
+      }
+      case 'primality': {   // Fermat and Miller–Rabin; the strong liars of a composite are ≤ ¼ of the bases (Monier 1980; Rabin 1980; MR §14.6, MU §… )
+        const N = g(m, 'N'), a = g(m, 'a', 2), k = g(m, 'k', 10);
+        if (!(Number.isInteger(N) && N >= 2 && N <= 9007199254740991)) return bad();
+        const pr = isPrimeN(N); o.isPrime = pr ? 1 : 0; o.errBound = pow(4, -k); o.kNeeded = Math.ceil(log(1 / delta) / log(4) - 1e-12);
+        o.witness = N > 2 && N % 2 === 1 && Number.isInteger(a) && a >= 1 && a < N ? (mrWitness(a, N) ? 1 : 0) : N % 2 === 0 && N > 2 ? 1 : 0;
+        if (N <= 1e5) {
+          let fl = 0, ml = 0; const odd = N % 2 === 1;
+          const pw = (b, e) => { let r2 = 1, x = b % N; while (e > 0) { if (e & 1) r2 = r2 * x % N; x = x * x % N; e = floor(e / 2); } return r2; };
+          for (let b = 1; b < N; b++) { if (pw(b, N - 1) === 1) fl++; if (odd && N > 2 && !mrWitness(b, N)) ml++; }
+          if (N === 2) ml = 1;
+          o.fermatLiars = fl; o.mrLiars = ml; o.fracFermat = fl / (N - 1); o.fracMR = ml / (N - 1); o.errExact = pr ? 0 : pow(o.fracMR, k);
+        } else I.add('big-number');
+        if (N <= 1e12) {   // Korselt's criterion: composite, squarefree, p − 1 | N − 1 for every prime p | N
+          let x = N, sqf = true, ok = !pr && N > 2; const fs = [];
+          for (let p = 2; p * p <= x; p++) { if (x % p) continue; let e = 0; while (x % p === 0) { x /= p; e++; } if (e > 1) sqf = false; fs.push(p); }
+          if (x > 1) fs.push(x);
+          o.carmichael = ok && sqf && fs.length >= 2 && fs.every(p => (N - 1) % (p - 1) === 0) ? 1 : 0;
+        } else I.add('big-number');
+        return out;
+      }
+      case 'rounding': {   // randomized rounding (Raghavan & Thompson 1987; MR §4.3, MU §4.2): Chernoff vs the exact Poisson-binomial tail
+        const x = m.x.map(R), dl = g(m, 'delta', 0.5), t = g(m, 't', 1);
+        if (!x.every(v => v >= 0 && v <= 1) || !(dl > 0)) return bad();
+        const mu = sum(x), d = poisBinom(x); o.mu = mu;
+        const up = (1 + dl) * mu, lo = (1 - dl) * mu; let pa = 0, pb = 0;
+        for (let j = 0; j < d.length; j++) { if (j >= up - 1e-9) pa += d[j]; if (j <= lo + 1e-9) pb += d[j]; }
+        o.pAbove = min(1, pa); o.pBelow = min(1, pb);
+        o.chernoffUpper = min(1, exp(mu * (dl - (1 + dl) * log1p(dl))));   // (e^δ/(1+δ)^{1+δ})^μ (MU Thm 4.4)
+        o.chernoffLower = dl < 1 ? min(1, exp(-mu * dl * dl / 2)) : NaN;   // e^{−μδ²/2} (MU Thm 4.5)
+        o.uncovered = exp(t * sum(x.map(v => log1p(-min(v, 1 - 1e-300) ))));
+        if (x.some(v => v === 1)) o.uncovered = 0;
+        o.uncoveredBound = exp(-t * mu);
+        return out;
+      }
+      case 'balls': {   // n balls in m bins: max load Θ(ln n/ln ln n); d choices: ln ln n/ln d + O(1) (Azar, Broder, Karlin & Upfal 1999; MU §5.2, §17.1)
+        const n = g(m, 'n'), mb = g(m, 'm', n), d = g(m, 'd', 1), Lq = g(m, 'L', NaN);
+        if (!(Number.isInteger(n) && n >= 1 && Number.isInteger(mb) && mb >= 1 && Number.isInteger(d) && d >= 1)) return bad();
+        o.eCollisions = n * (n - 1) / 2 / mb; o.pCollisionBound = min(1, o.eCollisions);   // a 2-universal family (Carter & Wegman 1979)
+        let lc = 0; for (let i = 0; i < n && i < mb; i++) lc += log1p(-i / mb); o.pCollision = n > mb ? 1 : -expm1(lc);
+        o.approxMax = d === 1 ? (n > 2 ? log(n) / log(log(n)) : 1) : (n > 2 ? log(log(n)) / log(d) : 1);
+        if (d === 1 && mb * n <= 2e7) {   // the exact law of the max load: P(max ≤ L) = noCoincide(uniform, n, L + 1)[n]
+          const W = new Array(mb).fill(1 / mb), lg = [], pm = []; let e = 0, prevF = 0;
+          for (let L = 0; L <= n; L++) {
+            if (!budget(mb * n * (L + 1))) break;
+            const F = L >= n ? 1 : noCoincide(W, n, L + 1)[n]; lg.push(L); pm.push(max(0, F - prevF)); e += 1 - F; prevF = F;
+            if (L === Lq) o.pMaxLe = F;
+            if (1 - F < 1e-17 && (!fin(Lq) || L >= Lq)) break;
+          }
+          o.eMax = e; sr.loadGrid = lg; sr.pMax = pm;
+          if (fin(Lq) && o.pMaxLe === undefined) o.pMaxLe = Lq >= lg[lg.length - 1] ? 1 : NaN;
+        }
+        if (reps > 0 && budget(reps * (n * d + mb))) {
+          const r = rng(); if (!r) return out; const load = new Int32Array(mb), v = [];
+          for (let t = 0; t < reps; t++) { load.fill(0); let mx = 0; for (let b = 0; b < n; b++) { let best = r.int(mb); for (let c = 1; c < d; c++) { const j = r.int(mb); if (load[j] < load[best]) best = j; } load[best]++; if (load[best] > mx) mx = load[best]; } v.push(mx); }
+          o.simMax = sum(v) / reps; const h = autoHist(v, 0, false); sr.histX = h.x; sr.histDensity = h.dens;
+        }
+        return out;
+      }
+      case 'bloom': {   // Bloom 1970; the exact false-positive rate (Bose et al. 2008, corrected by Christensen, Roginsky & Jimeno 2010; MU §5.5.3)
+        const mb = g(m, 'm'), n = g(m, 'n'), kOpt = mb / n * LN2, tgt = g(m, 'target', 0.01);
+        if (!(Number.isInteger(mb) && mb >= 1 && Number.isInteger(n) && n >= 0)) return bad();
+        const cl = k => (n === 0 ? 0 : pow(-expm1(k * n * log1p(-1 / mb)), k)), ap = k => pow(-expm1(-k * n / mb), k);
+        o.kOpt = kOpt;
+        let kb = max(1, floor(kOpt)); if (cl(kb + 1) < cl(kb)) kb++; o.kOptInt = n === 0 ? 1 : kb;
+        const k = g(m, 'k', o.kOptInt); if (!(Number.isInteger(k) && k >= 1)) return bad();
+        o.fpClassic = cl(k); o.fpApprox = ap(k); o.mFor = tgt > 0 && tgt < 1 ? Math.ceil(-n * log(tgt) / (LN2 * LN2)) : NaN;
+        const T = k * n;   // the occupancy law of the set bits after kn uniform throws; FP = Σ P(X = i)(i/m)^k
+        if (budget(T * min(mb, T + 1))) {
+          const top = min(mb, T); let v = new Float64Array(top + 1); v[0] = 1;
+          for (let s = 0; s < T; s++) { for (let i = min(top, s + 1); i >= 1; i--) v[i] = v[i] * i / mb + v[i - 1] * (mb - i + 1) / mb; v[0] = 0; }
+          let fp = 0; for (let i = 1; i <= top; i++) fp += v[i] * pow(i / mb, k); o.fpExact = n === 0 ? 0 : fp;
+        }
+        const kMax = m.kMax || 20, kg = [], fb = []; for (let kk = 1; kk <= kMax; kk++) { kg.push(kk); fb.push(cl(kk)); } sr.kGrid = kg; sr.fpByK = fb;
+        if (reps > 0 && budget(reps * (T + k + mb / 32))) {
+          const r = rng(); if (!r) return out; const bits = new Uint8Array(mb); let fpC = 0;
+          for (let t = 0; t < reps; t++) { bits.fill(0); for (let s = 0; s < T; s++) bits[r.int(mb)] = 1; let all = true; for (let j = 0; j < k; j++) if (!bits[r.int(mb)]) all = false; if (all) fpC++; }
+          o.simFp = fpC / reps;
+        }
+        return out;
+      }
+      case 'countmin': {   // Count-Min sketch (Cormode & Muthukrishnan 2005): estimate ≤ f + εN with probability ≥ 1 − δ, ε = e/w, δ = e^{−d}
+        const w = g(m, 'w'), d = g(m, 'd'), n = g(m, 'n', 1000), Nt = g(m, 'N', 100000), s = g(m, 's', 1);
+        if (!(Number.isInteger(w) && w >= 1 && Number.isInteger(d) && d >= 1 && Number.isInteger(n) && n >= 1 && Nt >= 0 && s >= 0)) return bad();
+        o.eps = Math.E / w; o.delta = exp(-d); o.errBound = o.eps * Nt;
+        if (m.eps !== undefined) { const e = g(m, 'eps'); o.wFor = e > 0 ? Math.ceil(Math.E / e) : NaN; }
+        if (m.delta !== undefined) { const dd = g(m, 'delta'); o.dFor = dd > 0 && dd < 1 ? Math.ceil(log(1 / dd)) : NaN; }
+        if (reps > 0 && budget(reps * n * d)) {   // Zipf(s) frequencies over n items, ideal hashing
+          const Hs = sum(Array.from({ length: n }, (_, i) => pow(i + 1, -s))), f = Array.from({ length: n }, (_, i) => Math.round(Nt * pow(i + 1, -s) / Hs)), Ntot = sum(f);
+          const r = rng(); if (!r) return out; let mxS = 0, meS = 0, over = 0; const tab = new Float64Array(w * d), h = new Int32Array(n * d);
+          for (let t = 0; t < reps; t++) {
+            tab.fill(0); for (let i = 0; i < n; i++) for (let j = 0; j < d; j++) { const c = r.int(w); h[i * d + j] = c; tab[j * w + c] += f[i]; }
+            let mx = 0, me = 0; for (let i = 0; i < n; i++) { let est = Infinity; for (let j = 0; j < d; j++) est = min(est, tab[j * w + h[i * d + j]]); const er = est - f[i]; mx = max(mx, er); me += er; if (er > o.eps * Ntot) over++; }
+            mxS += mx; meS += me / n;
+          }
+          o.simMaxErr = mxS / reps; o.simMeanErr = meS / reps; o.simFracOver = over / (reps * n);
+        }
+        return out;
+      }
+      case 'hll': {   // HyperLogLog (Flajolet, Fusy, Gandouet & Meunier 2007): standard error 1.04/√m, with the small- and large-range corrections
+        const b = g(m, 'bits'), n = g(m, 'n', 10000); if (!(Number.isInteger(b) && b >= 4 && b <= 16 && Number.isInteger(n) && n >= 0)) return bad();
+        const M = 1 << b; o.stdErr = 1.04 / sqrt(M);
+        if (reps > 0 && budget(reps * (n + M))) {
+          const am = M === 16 ? 0.673 : M === 32 ? 0.697 : M === 64 ? 0.709 : 0.7213 / (1 + 1.079 / M), reg = new Uint8Array(M), r = rng(); if (!r) return out; const est = [];
+          for (let t = 0; t < reps; t++) {
+            reg.fill(0);
+            for (let i = 0; i < n; i++) { const hv = floor(r() * 4294967296) >>> 0, j = hv >>> (32 - b), rest = (hv << b) >>> 0; const rho = rest === 0 ? 32 - b + 1 : Math.clz32(rest) + 1; if (rho > reg[j]) reg[j] = rho; }
+            let Z = 0, V = 0; for (let j = 0; j < M; j++) { Z += pow(2, -reg[j]); if (!reg[j]) V++; }
+            let E = am * M * M / Z;
+            if (E <= 2.5 * M && V > 0) E = M * log(M / V); else if (E > 4294967296 / 30) E = -4294967296 * log1p(-E / 4294967296);
+            est.push(E);
+          }
+          const mv = meanVar(est); o.simMean = mv.mean; o.simRelSd = n > 0 ? sqrt(mv.var) / n : NaN; o.simRelBias = n > 0 ? mv.mean / n - 1 : NaN;
+          const h = autoHist(est, 40, false); sr.histX = h.x; sr.histDensity = h.dens;
+        }
+        return out;
+      }
+      case 'reservoir': {   // Algorithm R (Vitter 1985): every item ends in the reservoir with probability k/n
+        const n = g(m, 'n'), k = g(m, 'k'); if (!(Number.isInteger(n) && n >= 1 && Number.isInteger(k) && k >= 1 && k <= n)) return bad();
+        const pi = k / n; o.inclusion = pi;
+        if (reps > 0 && budget(reps * n)) {
+          const r = rng(); if (!r) return out; const cnt = new Float64Array(n), res = new Int32Array(k);
+          for (let t = 0; t < reps; t++) { for (let i = 0; i < k; i++) res[i] = i; for (let i = k; i < n; i++) { const j = r.int(i + 1); if (j < k) res[j] = i; } for (let i = 0; i < k; i++) cnt[res[i]]++; }
+          // the counts have covariance reps·π(1−π)·n/(n−1)·(I − J/n): Σ(c − e)²/(that scale) ~ χ²_{n−1} under uniformity
+          if (n > 1 && pi < 1) { const e = reps * pi, sc = reps * pi * (1 - pi) * n / (n - 1); let X2 = 0; for (const c of cnt) X2 += (c - e) * (c - e) / sc; o.chi2 = X2; o.pChi2 = gammaPQ((n - 1) / 2, X2 / 2)[1]; }
+          sr.pos = Array.from({ length: n }, (_, i) => i + 1); sr.freq = Array.from(cnt, c => c / reps);
+        }
+        return out;
+      }
+      case 'cover': {   // random walks on graphs: hitting and cover times (Aleliunas et al. 1979; Matthews 1988; MU ch. 7, MR ch. 6)
+        const G = graphOf(m, R, I); if (!G) return bad();
+        const n = G.n, st = g(m, 'start', 0); if (!(Number.isInteger(st) && st >= 0 && st < n)) return bad();
+        o.aleliunas = 2 * G.E.length * (n - 1);
+        if (!connected(G)) { I.add('disconnected'); o.coverExact = Infinity; return out; }
+        if (n <= 50 && budget(n * n * n * n)) {   // H(u, v) for every target v: (I − P without v) h = 1 by Gaussian elimination
+          let hm = 0;
+          for (let v = 0; v < n; v++) {
+            const idx = []; for (let u = 0; u < n; u++) if (u !== v) idx.push(u);
+            const pos = new Map(idx.map((u, i) => [u, i])), A2 = idx.map(u => { const r = new Array(idx.length).fill(0); r[pos.get(u)] = 1; for (const w of G.adj[u]) if (w !== v) r[pos.get(w)] -= 1 / G.adj[u].length; return r; });
+            const h = solve(A2, new Array(idx.length).fill(1)); if (h) for (const x of h) hm = max(hm, x);
+          }
+          o.hitMax = hm; o.matthews = harm(n - 1) * hm;
+        }
+        if (n <= 12) {   // the exact expected cover time: E(S, v) over visited sets S ∋ v, solved within each S (largest first)
+          const full = (1 << n) - 1, E = new Map();
+          E.set(full, new Float64Array(n));
+          const sizes = []; for (let S = 1; S <= full; S++) sizes.push(S);
+          sizes.sort((a, b) => popc(b) - popc(a));
+          for (const S of sizes) {
+            if (S === full) continue;
+            const mem = []; for (let u = 0; u < n; u++) if ((S >> u) & 1) mem.push(u);
+            const pos = new Map(mem.map((u, i) => [u, i])), A2 = [], b = [];
+            for (const u of mem) {
+              const r = new Array(mem.length).fill(0); r[pos.get(u)] = 1; let rhs = 1; const dg = G.adj[u].length;
+              for (const w of G.adj[u]) { if ((S >> w) & 1) r[pos.get(w)] -= 1 / dg; else { const nx = E.get(S | (1 << w)); rhs += (nx ? nx[w] : NaN) / dg; } }
+              A2.push(r); b.push(rhs);
+            }
+            const sol = solve(A2, b), arr = new Float64Array(n); if (sol) mem.forEach((u, i) => { arr[u] = sol[i]; });
+            E.set(S, arr);
+          }
+          o.coverExact = E.get(1 << st)[st];
+        }
+        if (reps > 0) {
+          const r = rng(); if (!r) return out; const v = []; let steps = 0;
+          for (let t = 0; t < reps && steps < 2e7; t++) { const seen = new Uint8Array(n); seen[st] = 1; let c = 1, u = st, k = 0; while (c < n && steps < 2e7) { const a2 = G.adj[u]; u = a2[r.int(a2.length)]; k++; steps++; if (!seen[u]) { seen[u] = 1; c++; } } if (c === n) v.push(k); }
+          if (steps >= 2e7) I.add('budget');
+          if (v.length) { o.simCover = sum(v) / v.length; simStats(v); }
+        }
+        return out;
+      }
+      case 'twosat': {   // the random-walk 2-SAT algorithm (Papadimitriou 1991; MU §7.1.1): the worst case is the walk on 0 … n
+        const n = g(m, 'n'), i = g(m, 'i', n), T = g(m, 'T', 2 * n * n);
+        if (!(Number.isInteger(n) && n >= 1 && Number.isInteger(i) && i >= 0 && i <= n && Number.isInteger(T) && T >= 0)) return bad();
+        o.eSteps = i * (2 * n - i); o.worstSteps = n * n; o.markovT = T > 0 ? min(1, n * n / T) : 1;
+        o.rounds = Math.ceil(log(1 / delta) / LN2 - 1e-12);   // each run of 2n² steps fails with probability ≤ ½ (Markov)
+        if (budget(n * T)) {
+          let v = new Float64Array(n + 1), w = new Float64Array(n + 1); v[i] = 1; const tg = [], pf = [], every = max(1, Math.ceil(T / 1999));
+          const alive = () => { let s = 0; for (let j = 1; j <= n; j++) s += v[j]; return s; };
+          for (let t = 0; t <= T; t++) {
+            if (t % every === 0 || t === T) { tg.push(t); pf.push(alive()); }
+            if (t === T) break;
+            w.fill(0); w[0] = v[0];
+            for (let j = 1; j <= n; j++) { if (!v[j]) continue; if (j === n) w[n - 1] += v[j]; else { w[j - 1] += 0.5 * v[j]; w[j + 1] += 0.5 * v[j]; } }
+            const tt = v; v = w; w = tt;
+          }
+          o.pFailT = alive(); sr.tGrid = tg; sr.pFailByT = pf;
+        }
+        return out;
+      }
+      case 'bounds': {   // Markov, Chebyshev, Cantelli, Chernoff (the optimised MGF bound), Hoeffding vs the exact upper tail P(X ≥ a) (MU ch. 3–4)
+        const D = mkDist(m.dist, R, I); if (!D) return bad();
+        const a0 = g(m, 'a'), fam = m.dist.family, P = k => g(m.dist, k), mu = D.mean, va = D.var;
+        if (!fin(a0)) return bad();
+        const exact = a => (D.disc ? (a <= D.lo ? 1 : D.sf(Math.ceil(a - 1e-12) - 1)) : D.sf(a));
+        const mk = a => (D.lo >= 0 && fin(mu) && a > 0 ? min(1, mu / a) : NaN);
+        const cb = a => (fin(va) ? (a > mu ? min(1, va / ((a - mu) * (a - mu))) : 1) : NaN);
+        const ct = a => (fin(va) ? (a > mu ? va / (va + (a - mu) * (a - mu)) : 1) : NaN);
+        const kl = (q, p) => (q > 0 ? q * log(q / p) : 0) + (q < 1 ? (1 - q) * log((1 - q) / (1 - p)) : 0);
+        const chern = a => {
+          if (!(a > mu)) return 1;
+          if (fam === 'binomial' || fam === 'bernoulli') { const nn = fam === 'binomial' ? P('n') : 1, p = P('p'); return a > nn ? 0 : exp(-nn * kl(a / nn, p)); }
+          if (fam === 'poisson') { const l = P('lambda'); return exp(-l + a - a * log(a / l)); }
+          if (fam === 'normal') { const s = m.dist.sigma !== undefined ? P('sigma') : 1; return exp(-(a - mu) * (a - mu) / (2 * s * s)); }
+          if (fam === 'exponential') { const l = m.dist.rate !== undefined ? P('rate') : 1; return a * l * exp(1 - a * l); }
+          if (fam === 'gamma') { const k = P('shape'), th = m.dist.scale !== undefined ? P('scale') : 1 / (m.dist.rate !== undefined ? P('rate') : 1); return pow(a / (k * th), k) * exp(k - a / th); }
+          return NaN;
+        };
+        const hoef = a => {
+          if (fam !== 'binomial' && fam !== 'bernoulli') return NaN;
+          const nn = fam === 'binomial' ? P('n') : 1; return a > mu ? exp(-2 * (a - mu) * (a - mu) / nn) : 1;
+        };
+        o.exact = exact(a0); o.markov = mk(a0); o.chebyshev = cb(a0); o.cantelli = ct(a0); o.chernoff = chern(a0); o.hoeffding = hoef(a0);
+        const L = [o.markov, o.chebyshev, o.cantelli, o.chernoff, o.hoeffding];
+        if (L.some(v => !fin(v))) I.add('not-applicable');
+        let best = NaN, bv = Infinity; L.forEach((v, i) => { if (fin(v) && v < bv - 1e-15) { bv = v; best = i + 1; } }); o.tightest = best;
+        const sd = sqrt(va), hiA = fin(sd) ? mu + 6 * sd : D.q(0.999999), loA = fin(mu) ? mu : D.q(0.5), np = m.points || 101, ag = grid(loA, min(hiA, D.hi), np);
+        sr.aGrid = ag; sr.exactBy = ag.map(exact); sr.markovBy = ag.map(mk); sr.chebyshevBy = ag.map(cb); sr.cantelliBy = ag.map(ct); sr.chernoffBy = ag.map(chern); sr.hoeffdingBy = ag.map(hoef);
+        return out;
+      }
+      case 'skiplist': {   // skip lists (Pugh 1990; MR §8.3, MU ex.): E H = Σ_{h≥0} 1 − (1 − p^h)^n
+        const n = g(m, 'n'), p = g(m, 'p', 0.5); if (!(Number.isInteger(n) && n >= 1 && p > 0 && p < 1)) return bad();
+        let e = 0; for (let h = 0; h < 5000; h++) { const t = -expm1(n * log1p(-pow(p, h))); e += t; if (t < 1e-17) break; }
+        o.eHeight = e; o.approxHeight = log(n) / log(1 / p); o.searchCost = o.approxHeight / p + 1 / (1 - p); o.pointers = n / (1 - p);
+        if (reps > 0 && budget(reps * n * 2)) { const r = rng(); if (!r) return out; const v = []; for (let t = 0; t < reps; t++) { let mx = 0; for (let i = 0; i < n; i++) { let h = 1; while (r() < p && h < 64) h++; if (h > mx) mx = h; } v.push(mx); } simStats(v, true); }
+        return out;
+      }
+      case 'treap': {   // treaps = random BSTs (Seidel & Aragon 1996; MR §8.2): E depth(k) = H_k + H_{n−k+1} − 2; height ≈ 4.311 ln n − 1.953 ln ln n (Reed 2003)
+        const n = g(m, 'n'), rk = g(m, 'r', 1); if (!(Number.isInteger(n) && n >= 1 && Number.isInteger(rk) && rk >= 1 && rk <= n)) return bad();
+        o.eDepth = harm(rk) + harm(n - rk + 1) - 2; o.eDepthAvg = 2 * (1 + 1 / n) * harm(n) - 4; o.heightApprox = n > 2 ? 4.311 * log(n) - 1.953 * log(log(n)) : NaN;
+        if (reps > 0 && budget(reps * n * 30)) {   // the height of the BST of a random insertion order
+          const r = rng(); if (!r) return out; const v = [], L = new Int32Array(n), Rr = new Int32Array(n), perm = new Int32Array(n);
+          for (let t = 0; t < reps; t++) {
+            for (let i = 0; i < n; i++) perm[i] = i; for (let i = n - 1; i > 0; i--) { const j = r.int(i + 1); const x = perm[i]; perm[i] = perm[j]; perm[j] = x; }
+            L.fill(-1); Rr.fill(-1); const root = perm[0]; let hmax = 0;
+            for (let i = 1; i < n; i++) { const key = perm[i]; let u = root, dpt = 1; for (;;) { if (key < u) { if (L[u] < 0) { L[u] = key; break; } u = L[u]; } else { if (Rr[u] < 0) { Rr[u] = key; break; } u = Rr[u]; } dpt++; } if (dpt > hmax) hmax = dpt; }
+            v.push(hmax);
+          }
+          simStats(v, true);
+        }
+        return out;
+      }
+      case 'mcpi': {   // Monte Carlo integration: error ~ σ/√n (MU §11.1): π from the quarter disc, or ∫_a^b f(x) dx of an expression over x
+        const n = g(m, 'n'), a = g(m, 'a', 0), b = g(m, 'b', 1);
+        if (!(Number.isInteger(n) && n >= 1 && fin(a) && fin(b) && b > a)) return bad();
+        const useExpr = typeof m.expr === 'string';
+        if (n > (useExpr ? 2e5 : 2e6)) { I.add('budget'); return out; }
+        const r = rng(); if (!r) return out;
+        let f;
+        if (useExpr) { const fn = (prepared && prepared.fns.get(m.expr)) || C.cx(m.expr), e = Object.assign({}, env); f = () => { e.x = a + (b - a) * r(); return (b - a) * fn(e); }; }
+        else f = () => { const u = r(), v = r(); return u * u + v * v <= 1 ? 4 : 0; };
+        const ex = m.exact !== undefined ? g(m, 'exact') : useExpr ? NaN : PI;
+        const cps = checkpoints(n, 400), rn = [], re = [], rl = [], rh = []; let mean = 0, M2 = 0, ci = 0;
+        for (let t = 1; t <= n; t++) { const y = f(); const d1 = y - mean; mean += d1 / t; M2 += d1 * (y - mean); if (t === cps[ci]) { const se = t > 1 ? sqrt(M2 / (t - 1) / t) : NaN; rn.push(t); re.push(mean); rl.push(mean - 1.96 * se); rh.push(mean + 1.96 * se); ci++; } }
+        o.estimate = mean; o.se = sqrt(M2 / (n - 1) / n); o.err = fin(ex) ? abs(mean - ex) : NaN; o.errRootN = o.err * sqrt(n);
+        if (!useExpr) o.seExact = 4 * sqrt(PI / 4 * (1 - PI / 4) / n);
+        sr.runN = rn; sr.runEst = re; sr.runLo = rl; sr.runHi = rh;
+        return out;
+      }
+    }
+    return out;
+  }
+  const popc = x => { let c = 0; while (x) { x &= x - 1; c++; } return c; };
+
   /* ===================================================================================================================== */
   /* the run                                                                                                                */
   /* ===================================================================================================================== */
@@ -2233,6 +3414,11 @@
         case 'walk': res = runWalk(model, R, I, seed); break;
         case 'queue': res = runQueue(model, R, I); break;
         case 'bootstrap': res = runBoot(model, R, I, seed); break;
+        case 'combin': res = runCombin(model, R, I); break;
+        case 'gof': res = runGof(model, R, I); break;
+        case 'mcmc': res = runMcmc(model, R, I, env || {}, prepared, seed); break;
+        case 'multivar': res = runMultivar(model, R, I, seed); break;
+        case 'rand': res = runRand(model, R, I, seed, env || {}, prepared); break;
       }
     } finally { /* NOTE stays for the lazy values; reset by the next compute */ }
     const cache = {}, lz = res.lazy || {};
@@ -2259,13 +3445,21 @@
     return { out };
   }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
-  engine.workerSource = C.workerSource(noemaLibProbModule, 'NoemaLibProb');
+  /** the Worker source: NoemaExpr, the core, NoemaSimKit (when loaded: the streams of the later modes), then this module */
+  Object.defineProperty(engine, 'workerSource', { enumerable: true, get() {
+    const NX = root.NoemaExpr, nx = NX && typeof NX.source === 'function' ? NX.source() : '';
+    const sk = root.NoemaSimKit && typeof root.NoemaSimKit.source === 'function' ? root.NoemaSimKit.source() : '';
+    return nx + '\n;' + C.source() + '\n;' + sk + '\n;(' + noemaLibProbModule.toString() + ')(self);\nself.noemaEngine = self.NoemaLibProb.simEngine;';
+  } });
   const lawOf = (o, env) => { const I = issueBag(); NOTE = I; const D = mkDist(o, resolver(null, env || {}), I); return D; };
   root.NoemaLibProb = Object.freeze({
     id: ID, DATA, checkSpec, exprs, keys, run, compute, engine: Object.freeze(engine), simEngine,
+    table: { model: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => [m, Object.assign({}, DATA.schema[m], ...(DATA.custom[m] || []).map(f => ({ [f]: 'any' })))])) }, outputs: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => { const O = DATA.outs[m], pre = x => Object.entries(x || {}).flatMap(([p, l]) => Array.isArray(l) ? l.map(v => p + v) : []); return [m, { scalar: O.scalar.concat(O.issues.map(i => 'issue.' + i), pre(O.prefix)), series: O.series.concat(pre(O.sprefix)), scene: O.scene }]; })) } },   // the form of the activity author (46_lib_schema.js)
     // the special functions and the engine's own methods, for the tests
     lgamma, log1p, expm1, stirlerr, bd0, lbeta, ldbinom, ldpois, gammaPQ, ibeta, erf, erfc, erfcinv, ncdf, lncdf, qnorm, tcdf, tsf, qt, pnt,
     lawOf, propCI, coverage, binomP, clopper, adjust, gth, hpd, exactU, exactW, powerFn,
+    expsinh, kolmQ, kolmSf, kolmCdfExact, smirnovSf, shapiroWilk, adInf, adCdf, chol, qrLS, symEig, bvn, essBasic, rhatBasic, digamma, harm, harm2,
+    noCoincide, couponCdf, isPrimeN, mrWitness, diagnose,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

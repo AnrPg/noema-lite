@@ -1,0 +1,16 @@
+{
+ "title": "Le paradoxe de Condorcet : des majorités en cercle",
+ "intro": "Trois groupes d’électeurs classent les candidats A, B et C. Le groupe 1 classe A > B > C, le groupe 2 B > C > A et le groupe 3 C > A > B. Réglez la taille de chaque groupe. Comparez les candidats deux à deux : une marge positive signifie qu’une majorité préfère le premier. Quand chaque candidat est battu par un autre, les majorités forment un cycle et il n’y a pas de vainqueur de Condorcet ; pourtant le scrutin majoritaire à un tour, le vote alternatif et la méthode de Borda désignent quand même un vainqueur. Dans le graphe, une flèche va du vainqueur de chaque duel au perdant, et les flèches qui font partie d’un cycle sont signalées. Les vainqueurs sont numérotés 1 = A, 2 = B, 3 = C ; 0 signifie une égalité ou aucun vainqueur.",
+ "n1Label": "Groupe 1 : A > B > C (électeurs)",
+ "n2Label": "Groupe 2 : B > C > A (électeurs)",
+ "n3Label": "Groupe 3 : C > A > B (électeurs)",
+ "abLabel": "Marge de A sur B",
+ "bcLabel": "Marge de B sur C",
+ "caLabel": "Marge de C sur A",
+ "cycleLabel": "Les majorités forment un cycle",
+ "cwLabel": "Vainqueur de Condorcet",
+ "plLabel": "Vainqueur du scrutin majoritaire à un tour",
+ "irvLabel": "Vainqueur du vote alternatif",
+ "bordaLabel": "Vainqueur selon Borda",
+ "graphTitle": "Graphe des majorités : une flèche du vainqueur de chaque duel au perdant"
+}

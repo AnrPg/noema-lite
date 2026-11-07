@@ -16,7 +16,7 @@
        (Hermagoras via Cicero / Quintilian), the Elaboration Likelihood Model (Petty & Cacioppo 1986) and inoculation (McGuire 1961;
        Banas & Rains 2010) as teaching models, audience fit.
    Logic (Dung semantics, validity, syllogisms) is NOT re-implemented here: it is called from window.NoemaLibLogic (47_lib_logic.js);
-   when that is missing the outputs that need it are NaN with the code no_logic. Pure JS, deterministic, bounded; numbers, codes, keys
+   (47_lib_logic.js loads first; its source travels to the Worker in front of this module). Pure JS, deterministic, bounded; numbers, codes, keys
    and the model's own short texts (`s`, ≤ 64 characters) only. Python twin of the checks: tools/lib_rhetoric.py. */
 (function noemaLibRhetoricModule(root) {
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own words leave this module
@@ -372,7 +372,7 @@
     if (w.length <= 3) return 1;
     let x = w;
     if (/[^aeiouy]le$/.test(x)) x = x.slice(0, -2) + 'el';                   // table, people: -le stays a syllable
-    else if (/(?:[sxz]|ch|sh|ge|ce)es$/.test(x)) x = x.slice(0, -2);          // boxes, places: -es is a syllable
+    else if (/(?:[sxz]|ch|sh|ge|ce)es$/.test(x)) x = x;                       // boxes, places: -es is a syllable
     else if (/[td]ed$/.test(x)) x = x;                                       // wanted: -ed is a syllable
     else x = x.replace(/(?:[^aeiouy]es|[^aeiouy]ed|[^aeiouy]e)$/, m => m[0]); // silent final e, -es, -ed
     x = x.replace(/^y/, '');
@@ -386,9 +386,24 @@
     let x = w.toLowerCase();
     if (lang === 'fr') x = x.length > 3 ? x.replace(/(?:e|es|ent)$/, '') || x : x;   // the mute final e (prose reading)
     if (lang === 'es') x = x.replace(/([aeo])([íú])/g, '$1-$2').replace(/([íú])([aeo])/g, '$1-$2');   // hiatus with an accented í, ú
-    if (lang === 'el') x = x.normalize('NFC').replace(/[ϊΐ]/g, '-ι').replace(/[ϋΰ]/g, '-υ').normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC');   // a diaeresis splits a diphthong
+    if (lang === 'el') return sylEl(x);
     const re = VOW[lang] || VOW.other;
     return Math.max(1, (x.match(re) || []).length);
+  }
+  /** Greek: one syllable per vowel, except the digraphs αι ει οι υι ου αυ ευ ηυ — unless the second vowel has a diaeresis (προϊόν) or the
+      first carries the accent (ρολόι); synizesis (παιδιά) is not modelled (Triantafyllidis, Νεοελληνική Γραμματική §§ 15–20) */
+  const EL_DI = new Set(['αι', 'ει', 'οι', 'υι', 'ου', 'αυ', 'ευ', 'ηυ']);
+  function sylEl(w) {
+    const d = w.normalize('NFD'); let n = 0, prev = null;
+    for (let i = 0; i < d.length; i++) {
+      const c = d[i];
+      if (/\p{M}/u.test(c)) continue;
+      if (!'αεηιουω'.includes(c)) { prev = null; continue; }
+      let acc = false, dia = false; for (let k = i + 1; k < d.length && /\p{M}/u.test(d[k]); k++) { if (d[k] === '\u0308') dia = true; else acc = true; }
+      if (prev && EL_DI.has(prev.c + c) && !dia && !prev.acc) { prev = null; continue; }
+      n++; prev = { c, acc };
+    }
+    return Math.max(1, n);
   }
   const letters = s => (s.match(/\p{L}/gu) || []).length;
   /** readability(words, nSent, lang, formula, codes): the formula of its own language; sources in the chapter §4 */
@@ -522,12 +537,12 @@
 
   /* =====================================================================================================================
      3. Logic, from logic@1 (never re-implemented here) */
-  const LG = () => { const L = root.NoemaLibLogic; return L && typeof L.afSolve === 'function' && typeof L.parse === 'function' ? L : null; };
+  const LG = () => root.NoemaLibLogic;   // logic@1: afSolve, parse, atomsOf, evalProp, rowsOf, syllogism, source (docs/library/logic.md §9)
   const strip = a => JSON.stringify(a, (k, v) => (k === 'pos' ? undefined : v));
   /** a propositional form: valid by truth table (logic@1 parse / atomsOf / rowsOf / evalProp); the first counterexample row; the named
       formal fallacy when the form is affirming the consequent or denying the antecedent (a premise p→q with q, resp. ¬p, ⊢ p, resp. ¬q) */
   function propForm(f, codes) {
-    const L = LG(); if (!L) { codes.push('no_logic'); return null; }
+    const L = LG();
     const ps = [], all = [...f.premises, f.conclusion];
     for (const x of all) { const r = L.parse(String(x), 'prop'); if (!r || !r.ok) { codes.push('parse'); if (r && r.code) codes.push(r.code); return null; } ps.push(r.ast); }
     const atoms = ps.reduce((o, a) => L.atomsOf(a, o), []);
@@ -551,7 +566,7 @@
   const FIG = { 1: [['M', 'P'], ['S', 'M']], 2: [['P', 'M'], ['S', 'M']], 3: [['M', 'P'], ['M', 'S']], 4: [['P', 'M'], ['M', 'S']] };
   const DIST = { A: [1, 0], E: [1, 1], I: [0, 0], O: [0, 1] };
   function sylForm(f, codes) {
-    const L = LG(); if (!L || typeof L.syllogism !== 'function') { codes.push('no_logic'); return null; }
+    const L = LG();
     const m = f.mood.split(''), ex = !!f.existential, r = L.syllogism(f.mood, f.figure, ex), pr = FIG[f.figure];
     if (r.valid) return { valid: 1, fal: 'none' };
     const dist = (k, term) => { const [x, y] = k === 2 ? ['S', 'P'] : pr[k]; return (x === term && DIST[m[k]][0]) || (y === term && DIST[m[k]][1]) ? 1 : 0; };
@@ -575,7 +590,7 @@
     let af = null;
     const solve = () => {
       if (af) return af;
-      const L = LG(); if (!L) { codes.push('no_logic'); return null; }
+      const L = LG();
       if (n > 24) codes.push('large_map');
       const D = new Set(); af = L.afSolve(n, att, D); for (const c of D) codes.push(c); return af;
     };
@@ -959,7 +974,7 @@
       const rows = new Map(); lvl.forEach((l, i) => { if (!rows.has(l)) rows.set(l, []); rows.get(l).push(i); });
       const X = new Array(n), Y = new Array(n), wMax = Math.max(...[...rows.values()].map(r => r.length));
       for (const [l, r] of rows) r.forEach((i, k) => { X[i] = (k - (r.length - 1) / 2) * 22; Y[i] = -l * 14; });
-      const af = LG() ? solveMap(o.id) : null;
+      const af = solveMap(o.id);
       const lab = af ? (o.semantics && o.semantics !== 'grounded' ? ((af[o.semantics] || [])[0] || null) : af.grounded) : null;
       const sc = C.scene([-wMax * 11 - 12, wMax * 11 + 12, -Math.max(...lvl) * 14 - 8, 8]);
       for (const e of I.edges) sc.seg(X[e.a], Y[e.a] + 3, X[e.b], Y[e.b] - 3, { arrow: true, c: e.k === 'support' ? 'ok' : e.k === 'except' ? 'muted' : 'bad', dash: e.k === 'undercut' || e.k === 'except' ? true : undefined });

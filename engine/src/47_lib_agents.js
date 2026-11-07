@@ -46,15 +46,15 @@
   const FATAL = ['kernel', 'nan'];
   const TEMPLATES = {
     schelling: { size: 30, density: 0.9, want: 0.3, fracA: 0.5 },
-    boids: { n: 150, w: 100, speed: 1, radius: 10, sep: 0.05, ali: 0.1, coh: 0.01, sepRadius: 2 },
+    boids: { N: 150, w: 100, speed: 1, radius: 10, sep: 0.05, ali: 0.1, coh: 0.01, sepRadius: 2 },
     sir: { size: 50, beta: 0.25, gamma: 0.1, i0: 0.01 },
-    sirnet: { n: 1000, k: 4, p: 0.1, beta: 0.1, gamma: 0.1, i0: 0.01 },
-    sirwell: { n: 2000, contacts: 1, beta: 0.25, gamma: 0.1, i0: 0.005 },
-    sugarscape: { n: 250, size: 50, regrow: 1 },
+    sirnet: { N: 1000, k: 4, p: 0.1, beta: 0.1, gamma: 0.1, i0: 0.01 },
+    sirwell: { N: 2000, contacts: 1, beta: 0.25, gamma: 0.1, i0: 0.005 },
+    sugarscape: { N: 250, size: 50, regrow: 1 },
     wolfsheep: { size: 40, sheep: 200, wolves: 30, sheepGain: 4, wolfGain: 20, sheepRepro: 0.04, wolfRepro: 0.05, regrowTime: 30 },
     voter: { size: 30, p0: 0.5 },
     ising: { size: 32, T: 1.5, J: 1, h: 0, m0: 1 },
-    degroot: { n: 20, k: 2, p: 0.2, selfw: 1 },
+    degroot: { N: 20, k: 2, p: 0.2, selfw: 1 },
   };
 
   /* ---------- the model checker (the same table and messages as tools/lib_agents.py) ---------- */
@@ -310,7 +310,7 @@
         steps: 100, stop: 'unhappy == 0' };
       case 'boids': return {   // Reynolds 1987; the order parameter of Vicsek et al. 1995
         space: { kind: 'continuous', w: 'w', h: 'w', torus: true },
-        breeds: [{ id: 'boid', count: 'n', vars: {}, rules: [{ do: 'flock', radius: 'radius', sep: 'sep', ali: 'ali', coh: 'coh', sepRadius: 'sepRadius', speed: 'speed' }] }],
+        breeds: [{ id: 'boid', count: 'N', vars: {}, rules: [{ do: 'flock', radius: 'radius', sep: 'sep', ali: 'ali', coh: 'coh', sepRadius: 'sepRadius', speed: 'speed' }] }],
         reporters: [{ id: 'order', fn: 'order' }, { id: 'agents', fn: 'count' }], steps: 300 };
       case 'sir': return {   // a grid epidemic, one person a cell, Moore contacts
         space: { kind: 'grid', nx: 'size', ny: 'size', torus: true, neighbourhood: 'moore', capacity: 1 },
@@ -319,14 +319,14 @@
         reporters: [{ id: 'S', fn: 'frac', where: 'state == 0' }, { id: 'I', fn: 'frac', where: 'state == 1' }, { id: 'R', fn: 'frac', where: 'state == 2' }],
         schedule: 'sync', steps: 300, stop: 'I == 0' };
       case 'sirnet': return {
-        space: { kind: 'network', generate: { kind: 'ws', n: 'n', k: 'k', p: 'p' } },
-        breeds: [{ id: 'person', count: 'n', place: 'node', vars: { state: { init: 'rnd < i0 ? 1 : 0', type: 'cat', n: 3 } },
+        space: { kind: 'network', generate: { kind: 'ws', n: 'N', k: 'k', p: 'p' } },
+        breeds: [{ id: 'person', count: 'N', place: 'node', vars: { state: { init: 'rnd < i0 ? 1 : 0', type: 'cat', n: 3 } },
           rules: [{ do: 'contact', when: 'state == 1', where: 'state == 0', prob: 'beta', set: { state: 1 } }, { do: 'set', var: 'state', expr: '2', when: 'state == 1', prob: 'gamma' }] }],
         reporters: [{ id: 'S', fn: 'frac', where: 'state == 0' }, { id: 'I', fn: 'frac', where: 'state == 1' }, { id: 'R', fn: 'frac', where: 'state == 2' }],
         schedule: 'sync', steps: 500, stop: 'I == 0' };
       case 'sirwell': return {   // well mixed: `contacts` random contacts a step → the ODE with β' = contacts·β (Kermack & McKendrick 1927)
         space: { kind: 'none' },
-        breeds: [{ id: 'person', count: 'n', vars: { state: { init: 'id < max(1, round(i0*n)) ? 1 : 0', type: 'cat', n: 3 } },
+        breeds: [{ id: 'person', count: 'N', vars: { state: { init: 'id < max(1, round(i0*N)) ? 1 : 0', type: 'cat', n: 3 } },
           rules: [{ do: 'contact', when: 'state == 1', where: 'state == 0', prob: 'beta', contacts: 'contacts', set: { state: 1 } }, { do: 'set', var: 'state', expr: '2', when: 'state == 1', prob: 'gamma' }] }],
         reporters: [{ id: 'S', fn: 'frac', where: 'state == 0' }, { id: 'I', fn: 'frac', where: 'state == 1' }, { id: 'R', fn: 'frac', where: 'state == 2' }],
         schedule: 'sync', steps: 2000, stop: 'I == 0' };
@@ -334,7 +334,7 @@
         space: { kind: 'grid', nx: 'size', ny: 'size', torus: true, neighbourhood: 'vonneumann', capacity: 1 },
         patches: { vars: { cap: 'min(4, round(4*exp(-((px-0.3*size)^2+(py-0.3*size)^2)/(0.06*size*size)) + 4*exp(-((px-0.7*size)^2+(py-0.7*size)^2)/(0.06*size*size))))', sugar: 'min(4, round(4*exp(-((px-0.3*size)^2+(py-0.3*size)^2)/(0.06*size*size)) + 4*exp(-((px-0.7*size)^2+(py-0.7*size)^2)/(0.06*size*size))))' },
           rules: [{ var: 'sugar', expr: 'min(cap, sugar + regrow)' }] },
-        breeds: [{ id: 'ant', count: 'n', place: 'empty', vars: { vision: { init: '1 + floor(rnd*6)', type: 'int' }, metab: { init: '1 + floor(rnd*4)', type: 'int' }, wealth: { init: '5 + floor(rnd*21)' } },
+        breeds: [{ id: 'ant', count: 'N', place: 'empty', vars: { vision: { init: '1 + floor(rnd*6)', type: 'int' }, metab: { init: '1 + floor(rnd*4)', type: 'int' }, wealth: { init: '5 + floor(rnd*21)' } },
           rules: [{ do: 'move', how: 'gradient', patch: 'sugar', vision: 'vision' }, { do: 'eat', patch: 'sugar', amount: '1e9', into: 'wealth' }, { do: 'set', var: 'wealth', expr: 'wealth - metab' }, { do: 'die', when: 'wealth < 0' }] }],
         reporters: [{ id: 'agents', fn: 'count' }, { id: 'meanWealth', fn: 'mean', expr: 'wealth' }, { id: 'gini', fn: 'gini', expr: 'wealth' }, { id: 'meanVision', fn: 'mean', expr: 'vision' }],
         hist: [{ id: 'wealth', expr: 'wealth', bins: 20, min: 0, max: 200 }], steps: 200 };
@@ -358,8 +358,8 @@
         breeds: [{ id: 'spin', count: 'size*size', place: 'empty', vars: { s: { init: 'rnd < (1 + m0)/2 ? 1 : -1', type: 'int', min: -1, max: 1 } }, rules: [{ do: 'ising', var: 's', J: 'J', h: 'h', T: 'T' }] }],
         reporters: [{ id: 'm', fn: 'mean', expr: 's' }, { id: 'absm', fn: 'mean', expr: 's' }], steps: 300 };
       case 'degroot': return {   // DeGroot 1974: x ← W x with W row-stochastic (self weight + equal weights on the neighbours)
-        space: { kind: 'network', generate: { kind: 'ws', n: 'n', k: 'k', p: 'p' } },
-        breeds: [{ id: 'node', count: 'n', place: 'node', vars: { x: { init: 'rnd' } }, rules: [{ do: 'average', var: 'x', self: 'selfw' }] }],
+        space: { kind: 'network', generate: { kind: 'ws', n: 'N', k: 'k', p: 'p' } },
+        breeds: [{ id: 'node', count: 'N', place: 'node', vars: { x: { init: 'rnd' } }, rules: [{ do: 'average', var: 'x', self: 'selfw' }] }],
         reporters: [{ id: 'mean', fn: 'mean', expr: 'x' }, { id: 'spread', fn: 'var', expr: 'x' }, { id: 'weighted', fn: 'sum', expr: 'x*(deg + selfw)' }, { id: 'wsum', fn: 'sum', expr: 'deg + selfw' }],
         schedule: 'sync', steps: 200 };
       default: return null;

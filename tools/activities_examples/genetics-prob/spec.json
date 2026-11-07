@@ -1,0 +1,222 @@
+{
+ "format": "noema.sim-spec/v1",
+ "title": "title",
+ "intro": "intro",
+ "consts": {
+  "reps": 200,
+  "gens": 400
+ },
+ "params": [
+  {
+   "id": "N",
+   "kind": "slider",
+   "label": "sizeLabel",
+   "min": 10,
+   "max": 200,
+   "step": 10,
+   "default": 20
+  },
+  {
+   "id": "p0",
+   "kind": "slider",
+   "label": "p0Label",
+   "min": 0.05,
+   "max": 0.95,
+   "step": 0.05,
+   "default": 0.5
+  },
+  {
+   "id": "s",
+   "kind": "slider",
+   "label": "sLabel",
+   "min": -0.05,
+   "max": 0.1,
+   "step": 0.005,
+   "default": 0
+  }
+ ],
+ "parts": [
+  {
+   "id": "drift",
+   "engine": "genetics@1",
+   "model": {
+    "mode": "drift",
+    "process": "wf",
+    "N": "N",
+    "p0": "p0",
+    "s": "s",
+    "h": 0.5,
+    "reps": "reps",
+    "gens": "gens"
+   },
+   "outputs": [
+    {
+     "id": "fixed",
+     "kind": "scalar",
+     "of": "fixed"
+    },
+    {
+     "id": "u",
+     "kind": "scalar",
+     "of": "uTheory"
+    },
+    {
+     "id": "t",
+     "kind": "series",
+     "of": "t"
+    },
+    {
+     "id": "r1",
+     "kind": "series",
+     "of": "rep",
+     "arg": 0
+    },
+    {
+     "id": "r2",
+     "kind": "series",
+     "of": "rep",
+     "arg": 1
+    },
+    {
+     "id": "r3",
+     "kind": "series",
+     "of": "rep",
+     "arg": 2
+    }
+   ]
+  },
+  {
+   "id": "test",
+   "engine": "prob@1",
+   "inputs": {
+    "k": "kFix",
+    "pK": "min(0.999999, max(0.000001, u))"
+   },
+   "model": {
+    "mode": "test",
+    "kind": "binom-exact",
+    "k": "k",
+    "n": "reps",
+    "p0": "pK",
+    "alpha": 0.05
+   },
+   "outputs": [
+    {
+     "id": "pval",
+     "kind": "scalar",
+     "of": "p"
+    },
+    {
+     "id": "reject",
+     "kind": "scalar",
+     "of": "reject"
+    }
+   ]
+  },
+  {
+   "id": "ci",
+   "engine": "prob@1",
+   "inputs": {
+    "k": "kFix"
+   },
+   "model": {
+    "mode": "ci",
+    "kind": "prop",
+    "k": "k",
+    "n": "reps",
+    "conf": 0.95,
+    "method": "wilson"
+   },
+   "outputs": [
+    {
+     "id": "lo",
+     "kind": "scalar",
+     "of": "lo"
+    },
+    {
+     "id": "hi",
+     "kind": "scalar",
+     "of": "hi"
+    }
+   ]
+  }
+ ],
+ "derived": [
+  {
+   "id": "kFix",
+   "expr": "round(fixed * reps)"
+  },
+  {
+   "id": "inside",
+   "expr": "u >= lo && u <= hi"
+  }
+ ],
+ "readouts": [
+  {
+   "label": "kLabel",
+   "expr": "kFix",
+   "format": "auto",
+   "digits": 4
+  },
+  {
+   "label": "uLabel",
+   "expr": "100 * u",
+   "unit": "%",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "ciLoLabel",
+   "expr": "100 * lo",
+   "unit": "%",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "ciHiLabel",
+   "expr": "100 * hi",
+   "unit": "%",
+   "format": "fixed",
+   "digits": 1
+  },
+  {
+   "label": "pLabel",
+   "expr": "pval",
+   "format": "fixed",
+   "digits": 3
+  },
+  {
+   "label": "insideLabel",
+   "expr": "inside"
+  }
+ ],
+ "plots": [
+  {
+   "kind": "series",
+   "title": "pathsTitle",
+   "x": {
+    "series": "t",
+    "label": "gen"
+   },
+   "y": {
+    "min": 0,
+    "max": 1,
+    "label": "freq"
+   },
+   "series": [
+    {
+     "y": "r1",
+     "label": "path1"
+    },
+    {
+     "y": "r2",
+     "label": "path2"
+    },
+    {
+     "y": "r3",
+     "label": "path3"
+    }
+   ]
+  }
+ ]
+}

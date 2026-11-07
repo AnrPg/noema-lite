@@ -112,7 +112,7 @@
     const tb = table || {};
     const model = isObj(tb.model) && tb.model.$by ? by(tb.model) : obj(tb.model || {});
     const output = { type: 'object', required: ['id', 'kind', 'of'], properties: Object.assign({
-      id: ref('name', 'id'), kind: { title: 'outKind', enum: outKinds(tb) }, of: { title: T('of'), type: 'string', minLength: 1, 'x-noema': 'of' },
+      id: ref('libOutId', 'id'), kind: { title: 'outKind', enum: outKinds(tb) }, of: { title: T('of'), type: 'string', minLength: 1, 'x-noema': 'of' },
     }, outFields(tb)) };
     return { model, output };
   }
@@ -148,6 +148,8 @@
     delete s.properties.bench;
     s.$defs.libId = { type: 'string', pattern: C ? C.ID_RE.source : '^[A-Za-z][A-Za-z0-9_-]{0,31}$', 'x-noema': 'ref' };
     s.$defs.libName = { type: 'string', pattern: C ? C.NAME_RE.source : '^[A-Za-z_][A-Za-z0-9_]{0,31}$', not: { enum: C ? C.RESERVED.slice() : ['t', 'n', 'pi', 'e', 'true', 'false'] }, 'x-noema': 'name' };
+    // an output's id: a name (the engine's checkSpec judges it; logic@1 accepts e and n, which an expression cannot use)
+    s.$defs.libOutId = { type: 'string', pattern: C ? C.NAME_RE.source : '^[A-Za-z_][A-Za-z0-9_]{0,31}$', 'x-noema': 'name' };
     s.$defs.libOutput = conv.output;
     // plots: the formula and series plots (each line may have a style), a scene, a sound
     const p0 = s.$defs.plot, line = br => { const b = JSON.parse(JSON.stringify(br)); const it = b.properties.series.items; it.properties.style = { title: 'lineStyle', enum: STYLES.slice() }; b.required = ['x', 'series']; return b; };

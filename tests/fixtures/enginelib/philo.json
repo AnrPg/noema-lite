@@ -1,0 +1,1728 @@
+{
+"specs": [
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"populations": [
+{
+"id": "A",
+"groups": [
+{
+"n": 1000,
+"w": 100
+}
+]
+},
+{
+"id": "Z",
+"groups": [
+{
+"n": "1e7*k",
+"w": 0.1
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "c",
+"kind": "scalar",
+"of": "compare",
+"a": "A",
+"b": "Z",
+"rule": "total"
+},
+{
+"id": "v",
+"kind": "scalar",
+"of": "welfare",
+"population": "Z",
+"rule": "prior",
+"gamma": 0.5
+},
+{
+"id": "rc",
+"kind": "scalar",
+"of": "paradox",
+"paradox": "repugnant",
+"rule": "average"
+},
+{
+"id": "pic",
+"kind": "scene",
+"of": "parfit",
+"populations": [
+"A",
+"Z"
+]
+}
+],
+"readouts": [
+{
+"label": "cLabel",
+"expr": "c"
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "pic",
+"title": "picTitle"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"cases": [
+{
+"id": "fb",
+"preset": "footbridge"
+},
+{
+"id": "own",
+"kAct": 1,
+"kNot": "k",
+"means": true
+}
+]
+},
+"outputs": [
+{
+"id": "u",
+"kind": "scalar",
+"of": "verdict",
+"case": "fb",
+"principle": "util"
+},
+{
+"id": "d",
+"kind": "scalar",
+"of": "verdict",
+"case": "own",
+"principle": "threshold",
+"T": "k*2"
+},
+{
+"id": "n",
+"kind": "scalar",
+"of": "permits",
+"case": "own"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"maxims": [
+{
+"id": "fp",
+"preset": "falsePromise"
+},
+{
+"id": "mine",
+"practical": true
+}
+]
+},
+"outputs": [
+{
+"id": "f",
+"kind": "scalar",
+"of": "ful",
+"maxim": "fp",
+"reading": "logical"
+},
+{
+"id": "g",
+"kind": "scalar",
+"of": "ful",
+"maxim": "mine"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"profiles": [
+{
+"id": "p",
+"scheme": "confucian",
+"traits": {
+"ren": "k/10",
+"li": -0.5
+},
+"tol": 0.2
+}
+]
+},
+"outputs": [
+{
+"id": "t",
+"kind": "scalar",
+"of": "trait",
+"profile": "p",
+"trait": "ren"
+},
+{
+"id": "v",
+"kind": "scalar",
+"of": "virtue",
+"profile": "p"
+},
+{
+"id": "s",
+"kind": "scene",
+"of": "virtues",
+"profile": "p"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"elections": [
+{
+"id": "tn",
+"candidates": [
+"M",
+"N",
+"C",
+"K"
+],
+"axis": [
+"M",
+"N",
+"C",
+"K"
+],
+"ballots": [
+{
+"n": "42*k",
+"rank": [
+"M",
+"N",
+"C",
+"K"
+]
+},
+{
+"n": 26,
+"rank": [
+"N",
+"C",
+"K",
+"M"
+]
+},
+{
+"n": 15,
+"rank": [
+"C",
+"K",
+"N",
+"M"
+]
+},
+{
+"n": 17,
+"rank": [
+"K",
+"C",
+"N",
+"M"
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "w",
+"kind": "scalar",
+"of": "winner",
+"election": "tn",
+"method": "irv"
+},
+{
+"id": "cw",
+"kind": "scalar",
+"of": "condorcet",
+"election": "tn"
+},
+{
+"id": "m",
+"kind": "scalar",
+"of": "margin",
+"election": "tn",
+"a": "N",
+"b": "M"
+},
+{
+"id": "cr",
+"kind": "scalar",
+"of": "criterion",
+"election": "tn",
+"method": "plurality",
+"criterion": "condorcetLoser"
+},
+{
+"id": "sc",
+"kind": "series",
+"of": "scores",
+"election": "tn",
+"method": "borda"
+},
+{
+"id": "g",
+"kind": "scene",
+"of": "majority",
+"election": "tn"
+},
+{
+"id": "sp",
+"kind": "scalar",
+"of": "singlePeaked",
+"election": "tn"
+}
+],
+"plots": [
+{
+"kind": "scene",
+"of": "g",
+"title": "gTitle"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"lotteries": [
+{
+"id": "a",
+"outcomes": [
+{
+"p": 1,
+"x": 1000000
+}
+]
+},
+{
+"id": "b",
+"outcomes": [
+{
+"p": 0.1,
+"x": 5000000
+},
+{
+"p": 0.89,
+"x": 1000000
+},
+{
+"p": 0.01,
+"x": 0
+}
+]
+}
+],
+"utility": {
+"u": "power",
+"ua": "k/10"
+}
+},
+"outputs": [
+{
+"id": "e",
+"kind": "scalar",
+"of": "eu",
+"lottery": "b"
+},
+{
+"id": "ce",
+"kind": "scalar",
+"of": "ce",
+"lottery": "b",
+"u": "log",
+"w0": 1
+},
+{
+"id": "ch",
+"kind": "scalar",
+"of": "choose",
+"a": "a",
+"b": "b",
+"rule": "cpt"
+},
+{
+"id": "cc",
+"kind": "scalar",
+"of": "commonCons",
+"a": "a",
+"b": "b",
+"c": "a",
+"d": "b"
+},
+{
+"id": "st",
+"kind": "scalar",
+"of": "stpete",
+"what": "ce",
+"u": "log",
+"bank": "2^k"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"problems": [
+{
+"id": "nc",
+"preset": "newcomb",
+"acc": "0.5 + k/20"
+},
+{
+"id": "own",
+"acts": [
+"x",
+"y"
+],
+"states": [
+"s",
+"t"
+],
+"u": [
+[
+1,
+0
+],
+[
+0,
+"k"
+]
+],
+"pAct": [
+[
+0.5,
+0.5
+],
+[
+0.5,
+0.5
+]
+],
+"pCause": [
+0.5,
+0.5
+]
+}
+]
+},
+"outputs": [
+{
+"id": "e",
+"kind": "scalar",
+"of": "dtv",
+"problem": "nc",
+"theory": "edt"
+},
+{
+"id": "v",
+"kind": "scalar",
+"of": "dtv",
+"problem": "nc",
+"theory": "cdt",
+"act": "two"
+},
+{
+"id": "d",
+"kind": "scalar",
+"of": "dominant",
+"problem": "own"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"games": [
+{
+"id": "pd",
+"preset": "pd",
+"T": "4 + k/10"
+},
+{
+"id": "g2",
+"rows": [
+"u",
+"d"
+],
+"cols": [
+"l",
+"r"
+],
+"pay": [
+[
+[
+1,
+1
+],
+[
+0,
+0
+]
+],
+[
+[
+0,
+0
+],
+[
+2,
+2
+]
+]
+]
+}
+],
+"tournament": {
+"game": "pd",
+"strategies": [
+"tft",
+"alld",
+"pavlov"
+],
+"rounds": 50,
+"noise": "k/100"
+}
+},
+"outputs": [
+{
+"id": "n",
+"kind": "scalar",
+"of": "nash",
+"game": "g2"
+},
+{
+"id": "mx",
+"kind": "scalar",
+"of": "mixed",
+"game": "g2",
+"player": 2
+},
+{
+"id": "gd",
+"kind": "scalar",
+"of": "grimDelta",
+"game": "pd"
+},
+{
+"id": "sh",
+"kind": "scalar",
+"of": "ipd",
+"strategy": "tft",
+"what": "share"
+},
+{
+"id": "m",
+"kind": "series",
+"of": "match",
+"a": "tft",
+"b": "alld"
+},
+{
+"id": "s2",
+"kind": "series",
+"of": "shares",
+"strategy": "pavlov"
+},
+{
+"id": "pay",
+"kind": "scene",
+"of": "payoffs",
+"game": "g2"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"beliefs": [
+{
+"id": "b",
+"h": "k/20",
+"eh": 0.8,
+"enh": 0.3
+}
+],
+"knowledge": [
+{
+"id": "g",
+"preset": "coins"
+},
+{
+"id": "own",
+"believed": true,
+"truth": true,
+"justified": true,
+"safe": true,
+"intuition": true
+}
+]
+},
+"outputs": [
+{
+"id": "l",
+"kind": "scalar",
+"of": "confirm",
+"belief": "b",
+"measure": "l"
+},
+{
+"id": "kn",
+"kind": "scalar",
+"of": "knows",
+"case": "g",
+"analysis": "safety"
+},
+{
+"id": "f",
+"kind": "scalar",
+"of": "fits",
+"analysis": "jtb"
+},
+{
+"id": "db",
+"kind": "scalar",
+"of": "dutch",
+"cr": [
+0.5,
+"k/10"
+]
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"sorites": {
+"n": "10*k + 10",
+"shape": "logistic"
+}
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scalar",
+"of": "sorites",
+"what": "condMin"
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "sorites",
+"what": "bound",
+"k": 5
+},
+{
+"id": "dg",
+"kind": "series",
+"of": "degree"
+},
+{
+"id": "bd",
+"kind": "series",
+"of": "bound"
+},
+{
+"id": "lo",
+"kind": "scalar",
+"of": "lottery",
+"n": 100,
+"t": 0.95,
+"what": "closure"
+},
+{
+"id": "pr",
+"kind": "scalar",
+"of": "preface",
+"n": "k",
+"r": 0.98,
+"t": 0.9,
+"what": "conj"
+},
+{
+"id": "sb",
+"kind": "scalar",
+"of": "beauty",
+"theory": "thirder",
+"wakes": "k + 1"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"experiments": [
+{
+"id": "m",
+"te": "mary",
+"positions": {
+"mine": "nothing"
+}
+},
+{
+"id": "own",
+"options": [
+"a",
+"b"
+],
+"positions": {
+"p1": "a"
+}
+}
+],
+"thinkers": [
+{
+"id": "kant",
+"label": "th.kant"
+},
+{
+"id": "zeraYacob",
+"label": "th.zera"
+},
+{
+"id": "newOne",
+"label": "th.new",
+"born": 1950,
+"died": 2020,
+"trad": "african",
+"infl": [
+"wiredu",
+"kant"
+]
+}
+]
+},
+"outputs": [
+{
+"id": "a",
+"kind": "scalar",
+"of": "teAnswer",
+"experiment": "m",
+"position": "mine"
+},
+{
+"id": "c",
+"kind": "scalar",
+"of": "teCount",
+"experiment": "own",
+"option": 0
+},
+{
+"id": "i",
+"kind": "scalar",
+"of": "influence",
+"a": "hume",
+"b": "newOne"
+},
+{
+"id": "ov",
+"kind": "scalar",
+"of": "overlap",
+"a": "kant",
+"b": "newOne"
+},
+{
+"id": "mp",
+"kind": "scene",
+"of": "map",
+"hi": "newOne",
+"from": 1500,
+"to": 2030
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"arguments": [
+{
+"id": "a",
+"premises": [
+"p -> q",
+"~q"
+],
+"conclusion": "~p"
+}
+],
+"inferences": [
+{
+"id": "s",
+"paksa": true,
+"sapaksa": "some",
+"vipaksa": "none"
+}
+],
+"bargains": [
+{
+"id": "b",
+"pts": [
+[
+0,
+0
+],
+[
+"k",
+0
+],
+[
+0,
+1
+]
+],
+"d": [
+0,
+0
+]
+}
+]
+},
+"outputs": [
+{
+"id": "v",
+"kind": "scalar",
+"of": "valid",
+"argument": "a"
+},
+{
+"id": "f",
+"kind": "scalar",
+"of": "form",
+"argument": "a"
+},
+{
+"id": "c",
+"kind": "scalar",
+"of": "counter",
+"argument": "a"
+},
+{
+"id": "h",
+"kind": "scalar",
+"of": "hetu",
+"inference": "s",
+"what": "cell"
+},
+{
+"id": "kt",
+"kind": "scalar",
+"of": "koti",
+"t": "k",
+"f": 0
+},
+{
+"id": "bh",
+"kind": "scalar",
+"of": "bhanga",
+"asti": 1,
+"nasti": 0,
+"avak": "k"
+},
+{
+"id": "ns",
+"kind": "scalar",
+"of": "bargain",
+"bargain": "b",
+"solution": "nash",
+"coord": 1
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"elections": [
+{
+"id": "tn",
+"candidates": [
+"M",
+"N",
+"C",
+"K"
+],
+"axis": [
+"M",
+"N",
+"C",
+"K"
+],
+"ballots": [
+{
+"n": "42*k",
+"rank": [
+"M",
+"N",
+"C",
+"K"
+]
+},
+{
+"n": 26,
+"rank": [
+"N",
+"C",
+"K",
+"M"
+]
+},
+{
+"n": 15,
+"rank": [
+"C",
+"K",
+"N",
+"M"
+]
+},
+{
+"n": 17,
+"rank": [
+"K",
+"C",
+"N",
+"M"
+]
+}
+]
+},
+{
+"id": "t2",
+"candidates": [
+"M",
+"N",
+"C",
+"K"
+],
+"ballots": [
+{
+"n": 1,
+"rank": [
+"N"
+]
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "ia",
+"kind": "scalar",
+"of": "criterion",
+"election": "tn",
+"method": "borda",
+"criterion": "iia",
+"other": "t2"
+},
+{
+"id": "mn",
+"kind": "scalar",
+"of": "manipulable",
+"election": "tn",
+"method": "borda"
+},
+{
+"id": "cy",
+"kind": "scalar",
+"of": "cycle",
+"election": "tn"
+},
+{
+"id": "sm",
+"kind": "scalar",
+"of": "smith",
+"election": "tn"
+},
+{
+"id": "s",
+"kind": "scalar",
+"of": "score",
+"election": "tn",
+"method": "copeland",
+"cand": "K"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"cases": [
+{
+"id": "x"
+},
+{
+"id": "x",
+"preset": "nope"
+}
+],
+"maxims": [
+{
+"id": "m",
+"will": 1
+}
+]
+},
+"outputs": [
+{
+"id": "v",
+"kind": "scalar",
+"of": "verdict",
+"case": "y",
+"principle": "util"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"elections": [
+{
+"id": "e",
+"candidates": [
+"a",
+"a",
+"b"
+],
+"ballots": [
+{
+"n": 1,
+"rank": [
+"a",
+"a",
+"z"
+]
+}
+],
+"axis": [
+"a"
+]
+}
+]
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scalar",
+"of": "margin",
+"election": "e",
+"a": "a",
+"b": "q"
+},
+{
+"id": "c",
+"kind": "scalar",
+"of": "criterion",
+"election": "e",
+"method": "borda",
+"criterion": "iia"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"lotteries": [
+{
+"id": "l",
+"outcomes": [
+{
+"p": 0.5,
+"x": 1
+},
+{
+"p": 0.6,
+"x": 2
+}
+],
+"priors": [
+[
+1
+]
+]
+},
+{
+"id": "m",
+"outcomes": [
+{
+"p": 1.5,
+"x": 1
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "e",
+"kind": "scalar",
+"of": "eu",
+"lottery": "l",
+"u": "cubic"
+},
+{
+"id": "c",
+"kind": "scalar",
+"of": "choose",
+"a": "l",
+"b": "zz",
+"rule": "ev"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"problems": [
+{
+"id": "p",
+"acts": [
+"a",
+"b"
+],
+"states": [
+"s"
+],
+"u": [
+[
+1
+]
+],
+"pAct": [
+[
+1,
+2
+],
+[
+1
+]
+],
+"pCause": [
+1,
+1
+]
+},
+{
+"id": "q"
+}
+]
+},
+"outputs": [
+{
+"id": "d",
+"kind": "scalar",
+"of": "dtv",
+"problem": "p",
+"theory": "edt",
+"act": "zz"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"games": [
+{
+"id": "g",
+"rows": [
+"a",
+"b"
+],
+"cols": [
+"l"
+],
+"pay": [
+[
+[
+1,
+1
+]
+]
+]
+},
+{
+"id": "h"
+}
+],
+"tournament": {
+"game": "nogame",
+"strategies": [
+"tft",
+"tft",
+"foo"
+]
+}
+},
+"outputs": [
+{
+"id": "s",
+"kind": "scalar",
+"of": "ipd",
+"strategy": "alld",
+"what": "mean"
+},
+{
+"id": "n",
+"kind": "scalar",
+"of": "isNash",
+"game": "g",
+"r": 0
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"profiles": [
+{
+"id": "p",
+"scheme": "aristotle",
+"traits": {
+"ren": 0
+}
+}
+],
+"experiments": [
+{
+"id": "e",
+"te": "mary",
+"positions": {
+"x": "maybe"
+}
+},
+{
+"id": "f"
+}
+]
+},
+"outputs": [
+{
+"id": "t",
+"kind": "scalar",
+"of": "trait",
+"profile": "p",
+"trait": "ren"
+},
+{
+"id": "a",
+"kind": "scalar",
+"of": "teAnswer",
+"experiment": "e",
+"position": "kant"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"thinkers": [
+{
+"id": "nobody"
+},
+{
+"id": "kant",
+"infl": [
+"ghost"
+],
+"label": "Bad Key"
+}
+]
+},
+"outputs": [
+{
+"id": "m",
+"kind": "scene",
+"of": "map"
+},
+{
+"id": "i",
+"kind": "scalar",
+"of": "influence",
+"a": "kant",
+"b": "ghost"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {},
+"outputs": [
+{
+"id": "a",
+"kind": "scalar",
+"of": "ipd",
+"strategy": "tft",
+"what": "mean"
+},
+{
+"id": "s",
+"kind": "scalar",
+"of": "sorites",
+"what": "bound"
+},
+{
+"id": "m",
+"kind": "scene",
+"of": "map"
+},
+{
+"id": "x",
+"kind": "sound",
+"of": "play"
+},
+{
+"id": "y",
+"kind": "scalar",
+"of": "nothing"
+},
+{
+"id": "z",
+"kind": "scene",
+"of": "welfare"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"arguments": [
+{
+"id": "a",
+"premises": [],
+"conclusion": ""
+}
+],
+"inferences": [
+{
+"id": "i",
+"paksa": "yes",
+"sapaksa": "many"
+}
+],
+"bargains": [
+{
+"id": "b",
+"pts": [
+[
+1,
+2,
+3
+]
+]
+}
+],
+"extra": 1
+},
+"outputs": [
+{
+"id": "h",
+"kind": "scalar",
+"of": "hetu",
+"inference": "i",
+"what": "all"
+},
+{
+"id": "k",
+"kind": "scalar",
+"of": "koti",
+"t": 1
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"populations": [
+{
+"id": "A",
+"groups": []
+},
+{
+"id": "B",
+"groups": [
+{
+"n": 1
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "w",
+"kind": "scalar",
+"of": "welfare",
+"population": "A",
+"rule": "happy"
+},
+{
+"id": "p",
+"kind": "scalar",
+"of": "paradox",
+"paradox": "repugnant"
+},
+{
+"id": "s",
+"kind": "series",
+"of": "sorted",
+"population": "C"
+}
+]
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": "not a model",
+"outputs": "not outputs"
+},
+{
+"format": "noema.sim-spec/v1",
+"engine": "philo@1",
+"title": "title",
+"params": [
+{
+"id": "k",
+"kind": "slider",
+"label": "kLabel",
+"min": 0,
+"max": 10,
+"default": 1
+}
+],
+"model": {
+"populations": [
+{
+"id": "A",
+"groups": [
+{
+"n": 1,
+"w": 1
+}
+]
+}
+]
+},
+"outputs": [
+{
+"id": "w",
+"kind": "scalar",
+"of": "welfare",
+"population": "A",
+"rule": "total",
+"extra": 3
+},
+{
+"id": "b",
+"kind": "scalar",
+"of": "best",
+"rule": "leximin"
+}
+],
+"readouts": [
+{
+"label": "wLabel",
+"expr": "w + nope"
+}
+]
+}
+]
+}
