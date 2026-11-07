@@ -29,7 +29,8 @@ jobs:
         run: python tools/build.py site skill
       - name: the generated files in the repository are up to date (engine.js, engine.css, the UI catalogs… = what the build makes)
         if: runner.os == 'Linux'
-        run: git diff --exit-code --stat -- engine/ || { echo "::error::Generated files are stale: run python3 tools/build.py and commit the result."; exit 1; }
+        run: |
+          git diff --exit-code --stat -- engine/ || { echo "::error::Generated files are stale: run python3 tools/build.py and commit the result."; exit 1; }
       - name: validator & licence tests
         run: python tests/validate_visual.py
       - name: skill round trip (unpack the Databricks pack → rebuild → same version)
