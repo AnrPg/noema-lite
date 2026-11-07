@@ -6690,6 +6690,22 @@
   "@engine.engines.prob.what": {
     "description": "One-line description."
   },
+  "engine.engines.field.name": "Fields in space",
+  "@engine.engines.field.name": {
+    "description": "Engine name: fields over space (heat, waves, diffusion, cellular automata)."
+  },
+  "engine.engines.field.what": "Heat, diffusion, waves, reaction–diffusion and cellular automata on 1-D and 2-D grids, with stability checks.",
+  "@engine.engines.field.what": {
+    "description": "One-line description."
+  },
+  "engine.engines.agents.name": "Agents and societies",
+  "@engine.engines.agents.name": {
+    "description": "Engine name: agent-based models and multi-agent systems."
+  },
+  "engine.engines.agents.what": "Crowds and agent-based models, networks and epidemics, and multi-agent systems: BDI agents, messages, auctions, contracts, norms.",
+  "@engine.engines.agents.what": {
+    "description": "One-line description."
+  },
   "engine.engines.philo.name": "Philosophy",
   "@engine.engines.philo.name": {
     "description": "Engine name."
@@ -9661,5 +9677,393 @@
   "engine.author.f.lib.xbar": "Sample mean",
   "@engine.author.f.lib.xbar": {
     "description": "Label of the field “xbar” of a library engine’s model or outputs in the activity author (engines: prob). Short."
+  },
+  "engine.author.f.lib.abAngle": "Abductor angle",
+  "@engine.author.f.lib.abAngle": {
+    "description": "Label of the field “abAngle” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.abArm": "Abductor moment arm",
+  "@engine.author.f.lib.abArm": {
+    "description": "Label of the field “abArm” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.accept": "Accept",
+  "@engine.author.f.lib.accept": {
+    "description": "Label of the field “accept” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.agarose": "Agarose (%)",
+  "@engine.author.f.lib.agarose": {
+    "description": "Label of the field “agarose” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.alphabet": "Alphabet",
+  "@engine.author.f.lib.alphabet": {
+    "description": "Label of the field “alphabet” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.altIndex": "Alternative allele index",
+  "@engine.author.f.lib.altIndex": {
+    "description": "Label of the field “altIndex” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.arm": "Arm",
+  "@engine.author.f.lib.arm": {
+    "description": "Label of the field “arm” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.avoid": "Avoid",
+  "@engine.author.f.lib.avoid": {
+    "description": "Label of the field “avoid” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.avulsion": "Avulsion",
+  "@engine.author.f.lib.avulsion": {
+    "description": "Label of the field “avulsion” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.band": "Band",
+  "@engine.author.f.lib.band": {
+    "description": "Label of the field “band” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.beighton": "Beighton score",
+  "@engine.author.f.lib.beighton": {
+    "description": "Label of the field “beighton” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.bodyMass": "Body mass",
+  "@engine.author.f.lib.bodyMass": {
+    "description": "Label of the field “bodyMass” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.caneArm": "Cane moment arm",
+  "@engine.author.f.lib.caneArm": {
+    "description": "Label of the field “caneArm” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.caneForce": "Cane force",
+  "@engine.author.f.lib.caneForce": {
+    "description": "Label of the field “caneForce” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.cds": "Coding sequence",
+  "@engine.author.f.lib.cds": {
+    "description": "Label of the field “cds” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.choices": "Choices",
+  "@engine.author.f.lib.choices": {
+    "description": "Label of the field “choices” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.circular": "Circular",
+  "@engine.author.f.lib.circular": {
+    "description": "Label of the field “circular” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.coding": "Coding strand",
+  "@engine.author.f.lib.coding": {
+    "description": "Label of the field “coding” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.combine": "Combine",
+  "@engine.author.f.lib.combine": {
+    "description": "Label of the field “combine” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.compare": "Compare",
+  "@engine.author.f.lib.compare": {
+    "description": "Label of the field “compare” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.completeness": "Completeness",
+  "@engine.author.f.lib.completeness": {
+    "description": "Label of the field “completeness” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.contraries": "Contraries",
+  "@engine.author.f.lib.contraries": {
+    "description": "Label of the field “contraries” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.coupling": "Coupling",
+  "@engine.author.f.lib.coupling": {
+    "description": "Label of the field “coupling” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.custom": "Custom enzymes",
+  "@engine.author.f.lib.custom": {
+    "description": "Label of the field “custom” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.dam": "Dam methylation",
+  "@engine.author.f.lib.dam": {
+    "description": "Label of the field “dam” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.dcm": "Dcm methylation",
+  "@engine.author.f.lib.dcm": {
+    "description": "Label of the field “dcm” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.dntp": "dNTP concentration",
+  "@engine.author.f.lib.dntp": {
+    "description": "Label of the field “dntp” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.dof": "Movement",
+  "@engine.author.f.lib.dof": {
+    "description": "Label of the field “dof” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.duration": "Duration",
+  "@engine.author.f.lib.duration": {
+    "description": "Label of the field “duration” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.elbowL": "Left elbow",
+  "@engine.author.f.lib.elbowL": {
+    "description": "Label of the field “elbowL” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.elbowR": "Right elbow",
+  "@engine.author.f.lib.elbowR": {
+    "description": "Label of the field “elbowR” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.enzymes": "Enzymes",
+  "@engine.author.f.lib.enzymes": {
+    "description": "Label of the field “enzymes” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.exons": "Exons",
+  "@engine.author.f.lib.exons": {
+    "description": "Label of the field “exons” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.extend": "Gap extension",
+  "@engine.author.f.lib.extend": {
+    "description": "Label of the field “extend” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.extent": "Extent",
+  "@engine.author.f.lib.extent": {
+    "description": "Label of the field “extent” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.features": "Features",
+  "@engine.author.f.lib.features": {
+    "description": "Label of the field “features” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.frame": "Reading frame",
+  "@engine.author.f.lib.frame": {
+    "description": "Label of the field “frame” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.gap": "Gap penalty",
+  "@engine.author.f.lib.gap": {
+    "description": "Label of the field “gap” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.gcMax": "Highest GC",
+  "@engine.author.f.lib.gcMax": {
+    "description": "Label of the field “gcMax” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.gcMin": "Lowest GC",
+  "@engine.author.f.lib.gcMin": {
+    "description": "Label of the field “gcMin” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.guideLen": "Guide length",
+  "@engine.author.f.lib.guideLen": {
+    "description": "Label of the field “guideLen” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.head": "Head",
+  "@engine.author.f.lib.head": {
+    "description": "Label of the field “head” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.hip": "Hip",
+  "@engine.author.f.lib.hip": {
+    "description": "Label of the field “hip” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.image": "Image size",
+  "@engine.author.f.lib.image": {
+    "description": "Label of the field “image” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.joint": "Joint",
+  "@engine.author.f.lib.joint": {
+    "description": "Label of the field “joint” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.kneeL": "Left knee",
+  "@engine.author.f.lib.kneeL": {
+    "description": "Label of the field “kneeL” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.kneeR": "Right knee",
+  "@engine.author.f.lib.kneeR": {
+    "description": "Label of the field “kneeR” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.ladder": "Ladder",
+  "@engine.author.f.lib.ladder": {
+    "description": "Label of the field “ladder” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.lesions": "Lesions",
+  "@engine.author.f.lib.lesions": {
+    "description": "Label of the field “lesions” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.level": "Level",
+  "@engine.author.f.lib.level": {
+    "description": "Label of the field “level” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.lever": "Lever",
+  "@engine.author.f.lib.lever": {
+    "description": "Label of the field “lever” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.limbFrac": "Limb mass fraction",
+  "@engine.author.f.lib.limbFrac": {
+    "description": "Label of the field “limbFrac” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.link": "Link principle",
+  "@engine.author.f.lib.link": {
+    "description": "Label of the field “link” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.loads": "Loads",
+  "@engine.author.f.lib.loads": {
+    "description": "Label of the field “loads” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.match": "Match score",
+  "@engine.author.f.lib.match": {
+    "description": "Label of the field “match” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.matrix": "Scoring matrix",
+  "@engine.author.f.lib.matrix": {
+    "description": "Label of the field “matrix” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.measured": "Measured value",
+  "@engine.author.f.lib.measured": {
+    "description": "Label of the field “measured” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.minLen": "Shortest length",
+  "@engine.author.f.lib.minLen": {
+    "description": "Label of the field “minLen” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.mismatch": "Mismatch score",
+  "@engine.author.f.lib.mismatch": {
+    "description": "Label of the field “mismatch” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.mismatches": "Mismatches",
+  "@engine.author.f.lib.mismatches": {
+    "description": "Label of the field “mismatches” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.muscleAngle": "Muscle angle",
+  "@engine.author.f.lib.muscleAngle": {
+    "description": "Label of the field “muscleAngle” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.muscleArm": "Muscle moment arm",
+  "@engine.author.f.lib.muscleArm": {
+    "description": "Label of the field “muscleArm” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.nested": "Nested",
+  "@engine.author.f.lib.nested": {
+    "description": "Label of the field “nested” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.niosh": "NIOSH lifting equation",
+  "@engine.author.f.lib.niosh": {
+    "description": "Label of the field “niosh” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.nuclease": "Nuclease",
+  "@engine.author.f.lib.nuclease": {
+    "description": "Label of the field “nuclease” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.ordering": "Set ordering",
+  "@engine.author.f.lib.ordering": {
+    "description": "Label of the field “ordering” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.palms": "Palms flat on the floor",
+  "@engine.author.f.lib.palms": {
+    "description": "Label of the field “palms” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.partial": "Partial digest",
+  "@engine.author.f.lib.partial": {
+    "description": "Label of the field “partial” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.pinkyL": "Left little finger",
+  "@engine.author.f.lib.pinkyL": {
+    "description": "Label of the field “pinkyL” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.pinkyR": "Right little finger",
+  "@engine.author.f.lib.pinkyR": {
+    "description": "Label of the field “pinkyR” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.polyline": "Polyline",
+  "@engine.author.f.lib.polyline": {
+    "description": "Label of the field “polyline” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.prepubertal": "Prepubertal",
+  "@engine.author.f.lib.prepubertal": {
+    "description": "Label of the field “prepubertal” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.quiz": "Quiz",
+  "@engine.author.f.lib.quiz": {
+    "description": "Label of the field “quiz” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.refUsage": "Reference codon usage",
+  "@engine.author.f.lib.refUsage": {
+    "description": "Label of the field “refUsage” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.regions": "Regions",
+  "@engine.author.f.lib.regions": {
+    "description": "Label of the field “regions” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.revcomp": "Reverse complement",
+  "@engine.author.f.lib.revcomp": {
+    "description": "Label of the field “revcomp” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.rules": "Rules",
+  "@engine.author.f.lib.rules": {
+    "description": "Label of the field “rules” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.saltCorr": "Salt correction",
+  "@engine.author.f.lib.saltCorr": {
+    "description": "Label of the field “saltCorr” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.seedLen": "Seed length",
+  "@engine.author.f.lib.seedLen": {
+    "description": "Label of the field “seedLen” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.selfComp": "Self-complementary",
+  "@engine.author.f.lib.selfComp": {
+    "description": "Label of the field “selfComp” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.seq": "Sequence",
+  "@engine.author.f.lib.seq": {
+    "description": "Label of the field “seq” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.shuffles": "Shuffles",
+  "@engine.author.f.lib.shuffles": {
+    "description": "Label of the field “shuffles” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.side": "Side",
+  "@engine.author.f.lib.side": {
+    "description": "Label of the field “side” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.site": "Site",
+  "@engine.author.f.lib.site": {
+    "description": "Label of the field “site” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.strand": "Strand",
+  "@engine.author.f.lib.strand": {
+    "description": "Label of the field “strand” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.stringency": "Stringency",
+  "@engine.author.f.lib.stringency": {
+    "description": "Label of the field “stringency” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.support": "Kind of support",
+  "@engine.author.f.lib.support": {
+    "description": "Label of the field “support” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.supports": "Supports",
+  "@engine.author.f.lib.supports": {
+    "description": "Label of the field “supports” of a library engine’s model or outputs in the activity author (engines: logic). Short."
+  },
+  "engine.author.f.lib.tMax": "Highest Tm",
+  "@engine.author.f.lib.tMax": {
+    "description": "Label of the field “tMax” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.tMin": "Lowest Tm",
+  "@engine.author.f.lib.tMin": {
+    "description": "Label of the field “tMin” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.thumbL": "Left thumb",
+  "@engine.author.f.lib.thumbL": {
+    "description": "Label of the field “thumbL” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.thumbR": "Right thumb",
+  "@engine.author.f.lib.thumbR": {
+    "description": "Label of the field “thumbR” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.toStop": "Up to the stop codon",
+  "@engine.author.f.lib.toStop": {
+    "description": "Label of the field “toStop” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.tris": "Tris concentration",
+  "@engine.author.f.lib.tris": {
+    "description": "Label of the field “tris” of a library engine’s model or outputs in the activity author (engines: seq). Short."
+  },
+  "engine.author.f.lib.variants": "Variants",
+  "@engine.author.f.lib.variants": {
+    "description": "Label of the field “variants” of a library engine’s model or outputs in the activity author (engines: seq,anatomy). Short."
+  },
+  "engine.author.f.lib.wArm": "Body weight moment arm",
+  "@engine.author.f.lib.wArm": {
+    "description": "Label of the field “wArm” of a library engine’s model or outputs in the activity author (engines: anatomy). Short."
+  },
+  "engine.author.f.lib.wheel": "Helical wheel",
+  "@engine.author.f.lib.wheel": {
+    "description": "Label of the field “wheel” of a library engine’s model or outputs in the activity author (engines: seq). Short."
   }
 }

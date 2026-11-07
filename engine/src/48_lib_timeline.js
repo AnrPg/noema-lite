@@ -462,10 +462,10 @@
     return { lags, ts, best };
   }
   function synthDendro(sy, seed, env, X) {
-    const r = C.mulberry32(C.hash32('timeline.dendro', seed)), n = sy.n, len = sy.len, off = X(sy.offset === undefined ? 0 : sy.offset, env), noise = sy.noise === undefined ? 0.05 : sy.noise;
+    const r = C.rng(seed, 'timeline.dendro'), n = sy.n, len = sy.len, off = X(sy.offset === undefined ? 0 : sy.offset, env), noise = sy.noise === undefined ? 0.05 : sy.noise;
     if (!isInt(off) || off < 0 || off + len > n) return null;
-    const master = []; let z = 0; for (let i = 0; i < n; i++) { z = 0.6 * z + 0.4 * C.gauss(r); master.push(Math.exp(z)); }
-    const sample = master.slice(off, off + len).map(v => v * Math.exp(noise * C.gauss(r)));
+    const master = []; let z = 0; for (let i = 0; i < n; i++) { z = 0.6 * z + 0.4 * C.normal(r); master.push(Math.exp(z)); }
+    const sample = master.slice(off, off + len).map(v => v * Math.exp(noise * C.normal(r)));
     return { master, sample };
   }
 
@@ -681,7 +681,7 @@
       const ia = EV.has(a) ? EV.get(a) : null, ib = EV.has(b) ? EV.get(b) : null, pa = PE.get(a), pb = PE.get(b);
       if ((EV.has(a) && !ia) || (EV.has(b) && !ib) || (!EV.has(a) && !pa) || (!EV.has(b) && !pb)) return NaN;
       const exact = (!ia || ia.point) && (!ib || ib.point), n = exact ? 1 : N;
-      const r = C.mulberry32(C.hash32('timeline.mc.' + a + '.' + b, seed)), sa = ia ? sampler(ia) : null, sb = ib ? sampler(ib) : null;
+      const r = C.rng(seed, 'timeline.mc.' + a + '.' + b), sa = ia ? sampler(ia) : null, sb = ib ? sampler(ib) : null;
       let k = 0;
       for (let i = 0; i < n; i++) {
         const A = ia ? Math.round(sa(r)) : null, B = ib ? Math.round(sb(r)) : null;
@@ -767,7 +767,7 @@
   function gridUniform(a, b) { if (b <= a) return { xs: [a], ps: [1], point: true }; const n = Math.min(801, Math.max(2, Math.round(b - a) + 1)), xs = [], ps = []; for (let i = 0; i < n; i++) { xs.push(a + (b - a) * i / (n - 1)); ps.push(1 / n); } return { xs, ps, uniform: [a, b] }; }
   function sampler(D) {
     if (D.point) return () => D.xs[0];
-    if (D.normal) return r => D.normal[0] + D.normal[1] * C.gauss(r);
+    if (D.normal) return r => D.normal[0] + D.normal[1] * C.normal(r);
     if (D.uniform) return r => D.uniform[0] + (D.uniform[1] - D.uniform[0]) * r();
     const cdf = []; let s = 0; for (const p of D.ps) { s += p; cdf.push(s); }
     return r => { const u = r() * s; let lo = 0, hi = cdf.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (cdf[m] < u) lo = m + 1; else hi = m; } return D.xs[lo]; };

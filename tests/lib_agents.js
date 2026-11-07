@@ -39,7 +39,7 @@ ok(A.TEMPLATES.length === 10 && A.PROTOCOLS.length === 5 && A.ACTIONS.length ===
   ok(sc.out.sp.items.length > 100 && sc.out.sp.items.length <= 2000 && sc.out.sp.items.every(it => C.ROLES.includes(it.c || 'base')) && new Set(sc.out.sp.items.map(it => it.c)).size >= 2, `the space scene: ${sc.out.sp.items.length} items, coloured by group in roles only`);
   const lo = run({ template: 'schelling', set: { want: 0.1 } }, [S('s', 'final', { reporter: 'similar' })]);
   ok(lo.out.s < 0.6, `with 10 % wanted the mix stays (similar ${lo.out.s.toFixed(3)})`);
-  const bo = run({ template: 'boids', set: { N: 100 }, steps: 300 }, [Se('o', 'reporter', { reporter: 'order' })]);
+  const bo = run({ template: 'boids', steps: 300 }, [Se('o', 'reporter', { reporter: 'order' })]);
   ok(bo.out.o[0] < 0.3 && bo.out.o[bo.out.o.length - 1] > 0.9, `Boids: the order parameter |Σ v|/(n v) (Vicsek et al. 1995) rises from ${bo.out.o[0].toFixed(2)} (random headings) to ${bo.out.o[bo.out.o.length - 1].toFixed(3)} (a flock)`);
   // the Kermack–McKendrick final size: z = 1 − e^(−R0 z), R0 = contacts·β/γ = 2.5
   let z = 0.5; for (let i = 0; i < 200; i++) z = 1 - Math.exp(-2.5 * z);
@@ -84,7 +84,7 @@ ok(A.TEMPLATES.length === 10 && A.PROTOCOLS.length === 5 && A.ACTIONS.length ===
   const imb = run({ space: { kind: 'none' }, globals: { want: 1, blocked: 0 }, breeds: [{ id: 'r', count: 1, vars: { pos: { init: 0 } }, bdi: { commitment: 'blind', goals: [{ id: 'reach', when: 'want == 1', achieved: 'pos >= 10', impossible: 'blocked == 1' }], plans: [{ id: 'walk', goal: 'reach', body: [{ do: 'set', var: 'pos', expr: 'pos + 1' }] }] } }], reporters: [{ id: 'where', fn: 'mean', expr: 'pos' }], interrupts: [{ at: 5, set: { blocked: 1 } }], steps: 20 }, [S('p', 'final', { reporter: 'where' })]).out;
   ok(imp.p === 5 && imp.d === 1 && imb.p === 10, `single-minded: the intention is kept until achieved or impossible (stops at ${imp.p} when blocked); blind ignores impossibility (${imb.p})`);
   const pl = run({ space: { kind: 'none' }, breeds: [{ id: 'r', count: 1, vars: { pos: { init: 0 }, fuel: { init: 3 } }, bdi: { commitment: 'single', goals: [{ id: 'reach', when: '1', achieved: 'pos >= 5' }], plans: [{ id: 'drive', goal: 'reach', context: 'fuel > 0', body: [{ do: 'set', var: 'pos', expr: 'pos + 1' }, { do: 'set', var: 'fuel', expr: 'fuel - 1' }] }, { id: 'walk', goal: 'reach', context: 'fuel <= 0', body: [{ do: 'set', var: 'pos', expr: 'pos + 0.5' }] }] } }], reporters: [{ id: 'where', fn: 'mean', expr: 'pos' }], steps: 20 }, [S('p', 'final', { reporter: 'where' }), S('n', 'bdi', { name: 'actions' })]).out;
-  ok(pl.p === 5 && pl.n === 7, `the plan library: context conditions choose the plan (drive while there is fuel, then walk): pos ${pl.p} after ${pl.n} plan steps (3 + 4)`);
+  ok(pl.p === 5 && pl.n === 10, `the plan library: context conditions choose the plan (drive while there is fuel, then walk): pos ${pl.p} = 3 + 4 × ½ after ${pl.n} actions (3 × 2 + 4)`);
   const normModel = { space: { kind: 'none' }, breeds: [{ id: 'd', count: 50, vars: { caution: { init: 0 }, fines: { init: 0 } }, rules: [{ do: 'set', var: 'fines', expr: 'fines', when: 'rnd > caution', act: 'speed' }] }], norms: [{ id: 'limit', kind: 'F', act: 'speed', sanction: { var: 'caution', add: '0.2' } }], reporters: [{ id: 'c', fn: 'mean', expr: 'caution' }], steps: 30 };
   const nm = run(normModel, [S('v', 'violations'), Se('vs', 'violations'), S('c', 'final', { reporter: 'c' }), S('f', 'flag', { code: 'logic-fallback' })]);
   const vs = nm.out.vs;
@@ -106,13 +106,18 @@ ok(A.TEMPLATES.length === 10 && A.PROTOCOLS.length === 5 && A.ACTIONS.length ===
   const cn = run({ protocol: { kind: 'contractnet', tasks: 20, contractors: 5 } }, [P('c', 'totalCost'), P('o', 'optimalCost'), P('m', 'messages'), Se('l', 'protocolSeries', { name: 'load' })]);
   ok(near(cn.out.c, cn.out.o, 1e-9) && cn.out.m === 20 * (3 * 5 + 1) && cn.out.l.reduce((s, v) => s + v, 0) === 20, `Contract Net without capacity limits: the cheapest bids give the optimal assignment (${cn.out.c.toFixed(2)}); ${cn.out.m} messages = tasks × (cfp + bid + answer to each of 5 contractors + inform)`);
   const cc = run({ protocol: { kind: 'contractnet', tasks: 20, contractors: 5, capacity: 4 } }, [P('c', 'totalCost'), P('o', 'optimalCost'), Se('l', 'protocolSeries', { name: 'load' }), P('u', 'unassigned')]);
-  ok(cc.out.c >= cc.out.o - 1e-9 && cc.out.l.every(v => v <= 4) && cc.out.u === 0, `with capacity 4 each the greedy protocol (${cc.out.c.toFixed(2)}) can only be worse than the optimal assignment by LP (${cc.out.o.toFixed(2)}); no contractor over capacity`);
+  ok(cc.out.c >= cc.out.o - 1e-9 && cc.out.o > cn.out.o && cc.out.l.every(v => v <= 4) && cc.out.u === 0, `with capacity 4 each the greedy protocol (${cc.out.c.toFixed(2)}) is no better than the optimal assignment (Hungarian algorithm, ${cc.out.o.toFixed(2)}); no contractor over capacity`);
+  // a hand-checked case: costs [[1, 2], [1, 3]], capacity 1: greedy gives task 0 to contractor 0 (1) and task 1 to contractor 1 (3) = 4; the optimum is 2 + 1 = 3
+  const hc = run({ protocol: { kind: 'contractnet', tasks: 2, contractors: 2, capacity: 1, costs: [[1, 2], [1, 3]] } }, [P('c', 'totalCost'), P('o', 'optimalCost')]);
+  ok(hc.out.c === 4 && hc.out.o === 3, `the price of the greedy, myopic protocol: costs [[1, 2], [1, 3]] with capacity 1 — Contract Net ${hc.out.c}, optimum ${hc.out.o}`);
+  const lf = run({ protocol: { kind: 'contractnet', tasks: 3, contractors: 1, loadFactor: 0.5, costs: [[2], [2], [2]] } }, [P('c', 'totalCost'), P('o', 'optimalCost')]);
+  ok(lf.out.c === 2 + 3 + 4 && lf.out.o === 9, 'a load factor raises each further task\'s cost (2, 3, 4): both give 9');
   const auc = (format, strategy) => run({ protocol: { kind: 'auction', format, bidders: 4, rounds: 2000, strategy } }, [P('r', 'revenue'), P('e', 'expectedRevenue'), P('d', 'dominance'), P('f', 'efficiency'), P('h', 'revenueHalf')]).out;
   const re = { english: auc('english', 'truthful'), second: auc('second', 'truthful'), first: auc('first', 'bne'), dutch: auc('dutch', 'bne') };
   ok(Object.values(re).every(r => near(r.r, 0.6, 0.02) && near(r.e, 0.6, 1e-12)), `revenue equivalence (Myerson 1981; 4 bidders, values U(0, 1)): English ${re.english.r.toFixed(3)}, second-price ${re.second.r.toFixed(3)}, first-price ${re.first.r.toFixed(3)}, Dutch ${re.dutch.r.toFixed(3)} — all (n−1)/(n+1) = 0.6`);
   ok(re.second.d === 1 && auc('first', 'truthful').d < 1 && Object.values(re).every(r => r.f === 1), 'Vickrey 1961: in the second-price auction no deviation from bidding one\'s value ever pays (dominance 1); in the first-price auction bidding the value is beaten (< 1); every format allocates efficiently');
-  const sh = auc('first', 'shade');
-  ok(sh.r < 0.6, `bidders who shade too much lose revenue for the seller (${sh.r.toFixed(3)})`);
+  const sh = run({ protocol: { kind: 'auction', format: 'first', bidders: 4, rounds: 2000, strategy: 'shade', shade: 0.5 } }, [P('r', 'revenue')]).out;
+  ok(near(sh.r, 0.5 * 0.8, 0.02), `first-price bidders who all bid half their value: revenue ${sh.r.toFixed(3)} = ½ E[max of 4] = 0.4 (below the equilibrium 0.6)`);
   const rb = run({ protocol: { kind: 'negotiation', method: 'rubinstein', d1: 0.9, d2: 0.8, horizon: 500 } }, [P('s', 'share1'), P('c', 'closedForm'), P('r', 'rounds'), Se('o', 'protocolSeries', { name: 'offers' })]);
   ok(near(rb.out.s, (1 - 0.8) / (1 - 0.9 * 0.8), 1e-6) && near(rb.out.c, 0.2 / 0.28, 1e-12) && rb.out.r === 1, `Rubinstein 1982 (δ₁ 0.9, δ₂ 0.8): backward induction over 500 rounds gives the proposer ${rb.out.s.toFixed(6)} = (1 − δ₂)/(1 − δ₁δ₂), agreed at once`);
   const sym = run({ protocol: { kind: 'negotiation', method: 'rubinstein', d1: 0.99, d2: 0.99, horizon: 2000 } }, [P('s', 'share1')]);
@@ -130,7 +135,7 @@ ok(A.TEMPLATES.length === 10 && A.PROTOCOLS.length === 5 && A.ACTIONS.length ===
   const pd = run({ protocol: { kind: 'ipd', strategies: ['tft', 'alld'], rounds: 200 } }, [Se('s', 'protocolSeries', { name: 'scores' })]);
   ok(JSON.stringify(pd.out.s) === JSON.stringify([799, 404]), `the iterated prisoner's dilemma (T 5, R 3, P 1, S 0; 200 rounds, a round robin with self-play): TFT ${pd.out.s[0]} = 600 + 199, ALLD ${pd.out.s[1]} = 200 + 204 — TFT never wins a match yet wins the tournament (Axelrod 1984)`);
   const ax = run({ protocol: { kind: 'ipd', strategies: ['allc', 'alld', 'tft', 'grim', 'tf2t', 'pavlov', 'random'], rounds: 200, generations: 200 } }, [Se('s', 'protocolSeries', { name: 'scores' }), Se('x', 'protocolSeries', { name: 'shares' }), P('w', 'winner')]);
-  ok(ax.out.s[2] > ax.out.s[1] && ax.out.x[1] < 0.01 && ax.out.x[6] < 0.01 && ax.out.x[2] + ax.out.x[3] + ax.out.x[4] + ax.out.x[5] > 0.9, `Axelrod's ecological tournament: ALLD (${ax.out.x[1].toExponential(1)}) and RANDOM die out; the nice, retaliating strategies take over (TFT ${ax.out.x[2].toFixed(3)})`);
+  ok(ax.out.s[2] > ax.out.s[1] && ax.out.x[1] < 0.01 && ax.out.x[6] < 0.01 && ax.out.x[0] + ax.out.x[2] + ax.out.x[3] + ax.out.x[4] + ax.out.x[5] > 0.99, `Axelrod's ecological tournament: ALLD (${ax.out.x[1].toExponential(1)}) and RANDOM die out; the nice, retaliating strategies take over (TFT ${ax.out.x[2].toFixed(3)})`);
 }
 
 // ---------- 5. codes ----------

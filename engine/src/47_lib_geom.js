@@ -836,7 +836,7 @@
         if (k >= rs.length) { D.add('no-solution', id); return und('no-solution', id); }
         const r = rs[k]; return { t: 'C', x: x0 + x1 * r, y: y0 + y1 * r, r };
       }
-      case 'mec': { const b = bad(refs); if (b) return fail(b); return welzl(refs.map(p => [p.x, p.y]), C.mulberry32(C.hash32('geom:mec:' + id, spec0.model.seed || 1))); }
+      case 'mec': { const b = bad(refs); if (b) return fail(b); return welzl(refs.map(p => [p.x, p.y]), C.rng(spec0.model.seed || 1, 'geom:mec:' + id)); }
       case 'conic': {
         if (v.points) { const ps = v.points.map(get), b = bad(ps); if (b) return fail(b); const K = conic5(ps, S, D, id); if (K.t === 'K' && !analyse(K).type) D.add('conic-degenerate', id); return K; }
         if (v.foci) {
@@ -1112,7 +1112,7 @@
   }
   /** "is it always true?": the assert on seeded random placements of the free points (probabilistic proving; Schwartz 1980, Zippel 1979) */
   function always(spec, prep, env, o, D) {
-    const rnd = C.mulberry32(C.hash32('geom:always:' + o.id, spec.model.seed || 1)), n = o.samples || 20, base = evaluate(spec, prep, env, diagSet(), null, null);
+    const rnd = C.rng(spec.model.seed || 1, 'geom:always:' + o.id), n = o.samples || 20, base = evaluate(spec, prep, env, diagSet(), null, null);
     const frees = prep.objs.filter(ob => ob.kind === 'point').map(ob => ob.id);
     let ok = 0, tried = 0;
     for (let i = 0; i < n; i++) {

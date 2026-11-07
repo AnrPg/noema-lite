@@ -34,7 +34,7 @@
     return I && I.has && I.has(full) ? I.t(full, vars) : null;
   }
   const TT = (k, vars) => { const r = T(k, vars); return r == null ? k : r; };
-  const label = (title, prop, fallback) => (title && T('f.' + title)) || (title && title.startsWith('lib.') ? fallback || title.slice(4) : null) || (prop && T('p.' + prop)) || fallback || prop || title || '';
+  const label = (title, prop, fallback) => (title && title.startsWith('eng.') ? engLabel(title.slice(4)) : null) || (title && T('f.' + title)) || (title && title.startsWith('lib.') ? fallback || title.slice(4) : null) || (prop && T('p.' + prop)) || fallback || prop || title || '';
   const help = (title) => (title && T('h.' + title)) || '';
 
   /* ---------- the document: {item, spec, strings} ---------- */
@@ -47,7 +47,7 @@
   /** a kind of activity: { id, label (a key), runtime, schema ($id of the spec's schema), match(doc), blank() → doc, convert?(doc) → doc } */
   function registerType(def) { const i = TYPES.findIndex(t => t.id === def.id); if (i >= 0) TYPES[i] = def; else TYPES.push(def); }
   registerType({ id: 'sim-formula', label: 'type.formula', runtime: 'sim-spec@1', schema: SIM_ID,
-    match: d => d.item.runtime === 'sim-spec@1' && (d.spec.engine || 'formula@1') === 'formula@1',
+    match: d => d.item.runtime === 'sim-spec@1' && (d.spec.engine || 'formula@1') === 'formula@1' && !('parts' in d.spec),
     blank: () => ({ item: item('my-activity'), spec: { format: 'noema.sim-spec/v1', engine: 'formula@1', params: [{ id: 'x', kind: 'slider', label: 'x', min: 0, max: 1, default: 0.5 }] }, strings: tables(['x']) }),
     convert(d) { const s = d.spec; s.engine = 'formula@1'; delete s.model; delete s.outputs; delete s.bench; if (Array.isArray(s.plots)) s.plots = s.plots.filter(p => p.kind !== 'series'); if (s.plots && !s.plots.length) delete s.plots; return d; } });
   const CIRCUIT_MODEL = () => ({ netlist: { format: 'noema.circuit/v1', nodes: ['in', 'out'], elements: [
@@ -81,7 +81,14 @@
   }
   const libOf = id => libEngines().find(e => e.id === id) || null;
   const engWord = (slug, k) => { const I = root.NoemaI18n, key = 'engine.engines.' + slug + '.' + k; return I && I.has && I.has(key) ? I.t(key) : null; };
+  /** a part's engine in a select: its catalogue name and id */
+  function engLabel(id) {
+    const K = root.NoemaEngineCatalog, e = K && Array.isArray(K.CATALOG) ? K.CATALOG.find(x => x.id === id) : null;
+    const n = e && e.slug ? engWord(e.slug, 'name') : id === 'circuit-mna@1' ? engWord('circuit', 'name') : null;
+    return n ? `${n} (${id})` : id;
+  }
   /** the reference activities this page can start from: {id: {item, spec, strings}} (tools/activities_examples/, shipped by tools/build.py) */
+  const partsRefs = () => Object.entries(root.NoemaActivityRefs || {}).filter(([, r]) => isObj(r) && isObj(r.spec) && Array.isArray(r.spec.parts)).map(([k, r]) => Object.assign({ ref: k }, r));
   const refsFor = id => Object.entries(root.NoemaActivityRefs || {}).filter(([, r]) => isObj(r) && isObj(r.spec) && r.spec.engine === id).map(([k, r]) => Object.assign({ ref: k }, r));
   function fromRef(r) {
     const it = clone(r.item); if (!it.entry && it.id) it.entry = `activities/${it.id}/spec.json`;
@@ -92,19 +99,46 @@
     const model = sch ? SF().skeleton(reg || REG, sch.properties.model, sch.$id) : {};
     return { item: item('my-' + id.replace(/@.*$/, '')), spec: { format: 'noema.sim-spec/v1', engine: id, params: [{ id: 'x', kind: 'slider', label: 'x', min: 0, max: 1, default: 0.5 }], model: isObj(model) ? model : {}, outputs: [] }, strings: tables(['x']) };
   }
+  /* ---------- parts: several engines in one spec (docs/INTERACTIVE.md §12.8), each with the form of its engine ---------- */
+  const PARTS_ID = () => (LS() && LS().PARTS_ID) || '';
+  const hasParts = d => isObj(d) && isObj(d.spec) && Array.isArray(d.spec.parts);
+  const partOf = (spec, path) => (path[0] === 'parts' && typeof path[1] === 'number' && Array.isArray(spec.parts) && isObj(spec.parts[path[1]]) ? spec.parts[path[1]] : null);
+  /** the spec one part shows its engine (packcheck partSpec): its model and outputs, the consts and params, its inputs as names */
+  function partSub(spec, p) {
+    const consts = Object.assign({}, isObj(spec.consts) ? spec.consts : {});
+    for (const k of Object.keys(isObj(p.inputs) ? p.inputs : {})) if (!(k in consts)) consts[k] = 1;
+    return { format: spec.format, engine: p.engine, consts, params: Array.isArray(spec.params) ? spec.params : [], model: p.model, outputs: Array.isArray(p.outputs) ? p.outputs : [] };
+  }
+  /** every output of the spec: its own and its parts' */
+  const allOutputs = spec => (Array.isArray(spec.outputs) ? spec.outputs : []).concat(...(Array.isArray(spec.parts) ? spec.parts : []).map(p => (isObj(p) && Array.isArray(p.outputs) ? p.outputs : []))).filter(isObj);
+  function partsBlank() {
+    const e = libEngines()[0], sch = e && REG ? REG.get(LS().schemaId(e.id)) : null;
+    const model = sch ? SF().skeleton(REG, sch.properties.model, sch.$id) : {};
+    return { item: item('my-parts'), spec: { format: 'noema.sim-spec/v1', params: [{ id: 'x', kind: 'slider', label: 'x', min: 0, max: 1, default: 0.5 }],
+      parts: [{ id: 'a', engine: e ? e.id : 'ode@1', model: isObj(model) ? model : {}, outputs: [] }] }, strings: tables(['x']) };
+  }
+  function registerParts() {
+    registerType({ id: 'sim-parts', label: 'type.parts', parts: true, runtime: 'sim-spec@1', schema: PARTS_ID(), match: d => d.item.runtime === 'sim-spec@1' && hasParts(d), blank: partsBlank });
+  }
   function registerLib() {
     for (const e of libEngines()) registerType({ id: 'lib:' + e.id, engine: e.id, slug: e.slug, lib: true, runtime: 'sim-spec@1', schema: LS().schemaId(e.id),
       match: d => d.item.runtime === 'sim-spec@1' && d.spec.engine === e.id, blank: () => libBlank(e.id) });
   }
   const typeOf = d => TYPES.find(t => t.match(d)) || TYPES[0];
   /** the schema of a spec: its engine's own (a library engine) or sim-spec */
-  const specSchemaId = (spec, reg) => { const t = isObj(spec) && TYPES.find(x => x.lib && x.engine === spec.engine); return t && (reg || REG) && (reg || REG).get(t.schema) ? t.schema : SIM_ID; };
+  const specSchemaId = (spec, reg) => {
+    if (isObj(spec) && Array.isArray(spec.parts) && PARTS_ID() && (reg || REG) && (reg || REG).get(PARTS_ID())) return PARTS_ID();
+    const t = isObj(spec) && TYPES.find(x => x.lib && x.engine === spec.engine); return t && (reg || REG) && (reg || REG).get(t.schema) ? t.schema : SIM_ID;
+  };
 
   /* ---------- names a formula may use at a path of the spec (the validators' order rules) ---------- */
   function namesAt(spec, path) {
     const ids = k => (Array.isArray(spec[k]) ? spec[k] : []).filter(x => isObj(x) && typeof x.id === 'string' && x.id).map(x => x.id);
     const base = [...(isObj(spec.consts) ? Object.keys(spec.consts) : []), ...ids('params')];
-    const der = ids('derived'), scal = (Array.isArray(spec.outputs) ? spec.outputs : []).filter(o => isObj(o) && o.kind === 'scalar' && typeof o.id === 'string').map(o => o.id);
+    const der = ids('derived'), scal = allOutputs(spec).filter(o => o.kind === 'scalar' && typeof o.id === 'string').map(o => o.id);
+    const pt = partOf(spec, path);
+    if (pt && path[2] === 'model') return base.concat(Object.keys(isObj(pt.inputs) ? pt.inputs : {}));
+    if (pt && path[2] === 'inputs') return base.concat(der, scal.filter(o => !(Array.isArray(pt.outputs) && pt.outputs.some(x => isObj(x) && x.id === o))));
     if (path[0] === 'derived') return base.concat(der.slice(0, typeof path[1] === 'number' ? path[1] : der.length));
     if (path[0] === 'model' || path[0] === 'bench') return base.concat(der);
     const all = base.concat(der, scal);
@@ -118,7 +152,11 @@
     const list = schemas ? (Array.isArray(schemas) ? schemas : Object.values(schemas)) : Object.values(root.NoemaActivitySchemas || {});
     REG = SF().registry(list);
     const sim = list.find(x => isObj(x) && x.$id === SIM_ID);
-    if (sim && LS()) { for (const e of libEngines()) REG.add(LS().specSchema(e.id, e.M.table, sim)); registerLib(); }
+    if (sim && LS()) {
+      for (const e of libEngines()) REG.add(LS().specSchema(e.id, e.M.table, sim));
+      registerLib();
+      if (LS().partsSchema) { REG.add(LS().partsSchema(libEngines().map(e => ({ id: e.id, table: e.M.table })), sim)); registerParts(); }
+    }
     return REG;
   }
   /** the registry entry's schema as the page offers it: the runtimes of the registered types only (the schema itself names every runtime) */
@@ -284,7 +322,7 @@
     const rootEl = h('div', { class: 'aa', 'data-author': '1' });
     const typeSel = h('select', { class: 'sf-in aa-type', id: 'aa-type', 'data-aa': 'type' });
     const typeName = t => (t.lib ? engWord(t.slug, 'name') || t.engine : TT(t.label));
-    const typeWhat = t => (t.lib ? engWord(t.slug, 'what') : null) || (t.id === 'sim-formula' ? engWord('formula', 'what') : t.id === 'sim-circuit' ? engWord('circuit', 'what') : null) || typeName(t);
+    const typeWhat = t => (t.lib ? engWord(t.slug, 'what') : t.parts ? TT('type.partsWhat') : null) || (t.id === 'sim-formula' ? engWord('formula', 'what') : t.id === 'sim-circuit' ? engWord('circuit', 'what') : null) || typeName(t);
     /** the picker: the engines grouped as on #/engines (only those this app has), the circuit bench with the plugins */
     function paintTypes() {
       typeSel.innerHTML = '';
@@ -295,6 +333,7 @@
         const ts = ids.map(byEngine).filter(Boolean); if (!ts.length) continue;
         const og = h('optgroup', { label: engGroup(g) }); for (const t of ts) { og.append(opt(t)); used.add(t.id); } typeSel.append(og);
       }
+      const pt = TYPES.find(t => t.parts); if (pt) { const og = h('optgroup', { label: TT('typeGroupParts') }); og.append(opt(pt)); typeSel.append(og); used.add(pt.id); }   // several engines in one spec
       const rest = TYPES.filter(t => !used.has(t.id));
       if (rest.length) { const og = h('optgroup', { label: (root.NoemaI18n && root.NoemaI18n.has && root.NoemaI18n.has('engine.engines.plugins') ? root.NoemaI18n.t('engine.engines.plugins') : TT('type')) }); for (const t of rest) og.append(opt(t)); typeSel.append(og); }
     }
@@ -311,7 +350,7 @@
     // a library engine picked: start from its reference activity, or blank (the document changes only on a click)
     const startBar = h('div', { class: 'aa-start', hidden: true, role: 'group', 'aria-labelledby': 'aa-startq' });
     function offerStart(t) {
-      const refs = refsFor(t.engine), r = refs[0];
+      const refs = t.parts ? partsRefs() : refsFor(t.engine), r = refs[0];
       startBar.innerHTML = '';
       const go = d => { startBar.hidden = true; load(d, true); };
       startBar.append(h('span', { class: 'aa-startq', id: 'aa-startq' }, TT('startQ', { engine: typeName(t) })),
@@ -364,7 +403,8 @@
     /* ---------- the forms ---------- */
     const keyList = h('datalist', { id: 'aa-keys' }), elList = h('datalist', { id: 'aa-els' }), serList = h('datalist', { id: 'aa-series' });
     const sceneList = h('datalist', { id: 'aa-scenes' }), soundList = h('datalist', { id: 'aa-sounds' }), idList = h('datalist', { id: 'aa-ids' });
-    rootEl.append(keyList, elList, serList, sceneList, soundList, idList);
+    const partList = h('datalist', { id: 'aa-parts' });
+    rootEl.append(keyList, elList, serList, sceneList, soundList, idList, partList);
     const decorate = (kind, input, wrap, path) => {
       if (kind === 'key') { input.setAttribute('list', 'aa-keys'); input.dataset.x = 'key'; const kt = h('div', { class: 'aa-kt' }); wrap.append(kt); paintKeyTexts(kt, input.value); input.addEventListener('input', () => paintKeyTexts(kt, input.value)); }
       else if (kind === 'expr') { input.dataset.x = 'expr'; input.dataset.xpath = JSON.stringify(path); const fb = h('div', { class: 'aa-xfb' }); wrap.append(fb); input.addEventListener('input', () => exprFeedback(input)); }
@@ -374,13 +414,15 @@
       else if (kind === 'of') { const id = 'aa-of-' + (++ofN), dl = h('datalist', { id }); input.setAttribute('list', id); input.classList.add('sf-mono'); input.dataset.x = 'of'; input.dataset.xpath = JSON.stringify(path); wrap.append(dl); paintOf(input, dl); }
       else if (kind === 'scene' || kind === 'sound') input.setAttribute('list', 'aa-' + kind + 's');
       else if (kind === 'ref') { input.setAttribute('list', 'aa-ids'); input.classList.add('sf-mono'); }
+      else if (kind === 'part') { input.setAttribute('list', 'aa-parts'); input.classList.add('sf-mono'); }
     };
     let ofN = 0;
     /** what an output of the engine may compute: its kind's list for this model (the engine's table, or what the model offers) */
     function paintOf(input, dl) {
-      const path = JSON.parse(input.dataset.xpath), o = SF().getAt(doc.spec, path.slice(0, -1)), t = typeOf(doc), e = t.lib ? libOf(t.engine) : null;
+      const path = JSON.parse(input.dataset.xpath), o = SF().getAt(doc.spec, path.slice(0, -1)), t = typeOf(doc), pt = partOf(doc.spec, path);
+      const e = pt ? libOf(pt.engine) : t.lib ? libOf(t.engine) : null;
       dl.innerHTML = ''; if (!e || !isObj(o)) return;
-      for (const v of LS().ofs(e.M.table, doc.spec.model, o.kind).slice(0, 400)) dl.append(h('option', { value: v }));
+      for (const v of LS().ofs(e.M.table, pt ? pt.model : doc.spec.model, o.kind).slice(0, 400)) dl.append(h('option', { value: v }));
     }
     const sfOpts = { registry: reg, label, help, text: TT, decorate };
     let specForm = null, itemForm = null;
@@ -450,9 +492,12 @@
       const fb = input.closest('.sf-f')?.querySelector('.aa-xfb'); if (!fb) return;
       const path = JSON.parse(input.dataset.xpath), X = root.NoemaExpr;
       let names = namesAt(doc.spec, path);
-      const t = typeOf(doc), e = t.lib && (path[0] === 'model' || path[0] === 'outputs') ? libOf(t.engine) : null;
+      const t = typeOf(doc), pt = partOf(doc.spec, path), inPart = pt && (path[2] === 'model' || path[2] === 'outputs');
+      const e = inPart ? libOf(pt.engine) : t.lib && (path[0] === 'model' || path[0] === 'outputs') ? libOf(t.engine) : null;
+      if (inPart && !e) { fb.innerHTML = ''; return; }   // (a circuit part: the validators check it)
       if (e) {   // an engine's text field is a formula only where its exprs() says so, over the spec's names and its own
-        let x = null; try { x = (e.M.exprs(doc.spec) || []).find(r => r[1] === SF().pathStr(path)); } catch (er) { x = null; }
+        const sub = inPart ? partSub(doc.spec, pt) : doc.spec, at = SF().pathStr(inPart ? path.slice(2) : path);
+        let x = null; try { x = (e.M.exprs(sub) || []).find(r => r[1] === at); } catch (er) { x = null; }
         if (!x) { fb.innerHTML = ''; if (!input.closest('.sf-f')?.querySelector(':scope > .sf-err')) input.removeAttribute('aria-invalid'); return; }
         names = names.concat(x[2] || []);
       }
@@ -467,9 +512,10 @@
       for (const i of rootEl.querySelectorAll('[data-x="expr"]')) exprFeedback(i);
       keyList.innerHTML = ''; const ks = new Set([...usedKeys(doc.spec), ...locs().flatMap(l => Object.keys(doc.strings[l] || {}))]); for (const k of ks) keyList.append(h('option', { value: k }));
       elList.innerHTML = ''; for (const e of (doc.spec.model?.netlist?.elements || [])) if (e && e.id) elList.append(h('option', { value: e.id }));
-      serList.innerHTML = ''; for (const o of (doc.spec.outputs || [])) if (o && o.kind === 'series' && o.id) serList.append(h('option', { value: o.id }));
-      for (const [k, dl] of [['scene', sceneList], ['sound', soundList]]) { dl.innerHTML = ''; for (const o of (Array.isArray(doc.spec.outputs) ? doc.spec.outputs : [])) if (o && o.kind === k && o.id) dl.append(h('option', { value: o.id })); }
-      idList.innerHTML = ''; const ids = new Set(); (function ws(v, d) { if (d > 8) return; if (Array.isArray(v)) v.forEach(x => ws(x, d + 1)); else if (isObj(v)) { if (typeof v.id === 'string' && v.id) ids.add(v.id); Object.values(v).forEach(x => ws(x, d + 1)); } })(doc.spec.model, 0);
+      serList.innerHTML = ''; for (const o of allOutputs(doc.spec)) if (o.kind === 'series' && o.id) serList.append(h('option', { value: o.id }));
+      for (const [k, dl] of [['scene', sceneList], ['sound', soundList]]) { dl.innerHTML = ''; for (const o of allOutputs(doc.spec)) if (o.kind === k && o.id) dl.append(h('option', { value: o.id })); }
+      partList.innerHTML = ''; for (const p of (Array.isArray(doc.spec.parts) ? doc.spec.parts : [])) if (isObj(p) && typeof p.id === 'string' && p.id) partList.append(h('option', { value: p.id }));
+      idList.innerHTML = ''; const ids = new Set(); (function ws(v, d) { if (d > 8) return; if (Array.isArray(v)) v.forEach(x => ws(x, d + 1)); else if (isObj(v)) { if (typeof v.id === 'string' && v.id) ids.add(v.id); Object.values(v).forEach(x => ws(x, d + 1)); } })(Array.isArray(doc.spec.parts) ? doc.spec.parts.map(p => isObj(p) ? p.model : null) : doc.spec.model, 0);
       for (const i of [...ids].slice(0, 400)) idList.append(h('option', { value: i }));
       for (const i of rootEl.querySelectorAll('[data-x="of"]')) { const dl = i.list; if (dl) paintOf(i, dl); }
     }
@@ -542,7 +588,7 @@
     typeSel.addEventListener('change', () => {
       const t = typeById(typeSel.value), d = clone(doc);
       paintTypeInfo();
-      if (t.lib) { offerStart(t); return; }   // a library engine: its reference activity or a blank one (offerStart)
+      if (t.lib || t.parts) { offerStart(t); return; }   // a library engine, or parts: a reference activity or a blank one (offerStart)
       load(t.convert ? t.convert(d) : t.blank(), true);
     });
     const onKey = e => {
@@ -592,7 +638,7 @@
   function view(main, opts) { if (API.current) try { API.current.destroy(); } catch (e) { } main.innerHTML = ''; return (API.current = mount(main, Object.assign({ preview: actPreview() }, opts || {}))); }
 
   const API = { current: null, mount, view, registerType, TYPES, check, usedKeys, namesAt, files, fromFiles, zip, unzip, crc32, registry, actPreview, T, SIM_ID, REG_ID,
-    libEngines, refsFor, fromRef, libBlank, specSchemaId, typeOf };
+    libEngines, refsFor, fromRef, libBlank, specSchemaId, typeOf, partsRefs, partsBlank, partSub, engLabel };
   root.NoemaActivityAuthor = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
 })(typeof window !== 'undefined' ? window : globalThis);

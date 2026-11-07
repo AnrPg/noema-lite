@@ -1038,7 +1038,7 @@
     if (nsh > 0) {
       if (nsh > 1000 || out.cells * (1 + nsh) > BUDGET * 10) codes.push('budget');
       else {
-        const rand = C.mulberry32(C.hash32('seq-shuffle', seed >>> 0)), sh = [];
+        const rand = C.rng(seed >>> 0, 'seq-shuffle'), sh = [];
         for (let t = 0; t < nsh; t++) { const x = b.split(''); for (let i = x.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); const tt = x[i]; x[i] = x[j]; x[j] = tt; } sh.push(dp(a, x.join(''), sc0.f, type, o, e, bw).score); }
         const mu = sh.reduce((p, q) => p + q, 0) / nsh, sd = Math.sqrt(sh.reduce((p, q) => p + (q - mu) * (q - mu), 0) / Math.max(1, nsh - 1));
         out.zScore = sd > 0 ? (r.score - mu) / sd : NaN; out.pShuffle = (1 + sh.filter(x => x >= r.score - 1e-9).length) / (1 + nsh); out.shuffleScores = sh;

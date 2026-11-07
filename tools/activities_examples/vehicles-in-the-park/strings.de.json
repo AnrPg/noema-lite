@@ -1,0 +1,23 @@
+{
+ "title": "Fahrzeuge im Park verboten",
+ "intro": "Eine Satzung von 1958 sagt: Fahrzeuge sind im Park verboten. Eine spätere Regel lässt ein Fahrzeug im Notfalleinsatz hinein, und ein Kriegsdenkmal (ein alter Panzer auf einem Sockel) war nie gemeint. Schalte ein, was am Tor ankommt, und sieh, welche Regeln greifen, welche zurücktreten und warum. Das ist das berühmte Beispiel von H. L. A. Hart (1958): Eine Regel hat einen klaren Kern und einen unscharfen Randbereich, und ihre Ausnahmen sind andere Regeln, die sie verdrängen.",
+ "carLabel": "Ein Privatauto",
+ "ambulanceLabel": "Ein Krankenwagen",
+ "emergencyLabel": "Er ist im Notfalleinsatz",
+ "memorialLabel": "Ein Panzer als Kriegsdenkmal",
+ "bicycleLabel": "Ein Fahrrad",
+ "ruleCar": "Ein Auto ist ein Fahrzeug.",
+ "ruleAmbulance": "Ein Krankenwagen ist ein Fahrzeug.",
+ "ruleTank": "Ein Panzer ist ein Fahrzeug.",
+ "ruleBicycleWord": "Im Alltag ist ein Fahrrad ein Fahrzeug.",
+ "ruleBicycleDef": "Die Satzung meint nur Kraftfahrzeuge, und ein Fahrrad ist keines.",
+ "ruleNoVehicles": "Fahrzeuge im Park verboten (außer einem Denkmal).",
+ "ruleEmergency": "Ein Fahrzeug im Notfalleinsatz darf hinein.",
+ "forbLabel": "Die Einfahrt ist verboten (1 = ja)",
+ "r1Label": "Das Fahrzeugverbot: 2 greift, 1 tritt zurück, 0 trifft nicht zu",
+ "firedLabel": "Regeln, die greifen",
+ "defeatedLabel": "Regeln, die zurücktreten",
+ "sceneTitle": "Die Regeln und welche welche verdrängt",
+ "checkDefeated": "Das Fahrzeugverbot trifft zu, tritt aber zurück.",
+ "checkAllowed": "Die Einfahrt ist nicht verboten."
+}

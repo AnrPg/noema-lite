@@ -97,6 +97,9 @@
   const FORMULAS = ['flesch', 'fk', 'fog', 'amstad', 'wstf', 'kandel', 'oborneva', 'lix', 'rix'];
   const FORMULA_LANG = { flesch: ['en'], fk: ['en'], fog: ['en'], amstad: ['de'], wstf: ['de'], kandel: ['fr'], oborneva: ['ru'], lix: null, rix: null };
   const SEMS = 'enum:grounded|preferred|stable';
+  const SOUND_T = 'enum:assonance|consonance|rhyme|paronomasia', TROPE_T = 'enum:simile|metaphor|irony', SUPPORT_T = 'enum:general|deductive|necessary';
+  /** an ASPIC+ literal: an atom or its negation (¬ ~ ! -), checked the same way in tools/lib_rhetoric.py; logic@1 builds the arguments */
+  const LIT_RE = /^\s*(?:[¬~!-]\s*)*[A-Za-z_][A-Za-z0-9_]{0,31}\s*$/;
 
   /* ---------- the model table (the same codes and messages as tools/lib_rhetoric.py) ---------- */
   const L_ = (t, max, min, req) => Object.assign(req ? { $req: true } : {}, { $list: t, max }, min ? { min } : {});
@@ -127,6 +130,9 @@
     inoculation: O_({ r0: 'numx', tau: 'numx', attack: 'numx', boosters: L_('numx', 10), horizon: 'numx' }),
     audience: O_({ grade: 'numx', formula: `enum:${FORMULAS.join('|')}`, wpmLo: 'numx', wpmHi: 'numx', tol: 'numx' }),
     delivery: O_({ pause: 'numx', window: 'numx' }),
+    synizesis: 'bool',
+    theory: O_({ kb: L_(O_({ f: 'expr!', kind: 'enum:axiom|ordinary', rank: 'int:-1000:1000' }), 64), rules: L_(O_({ id: 'id!', body: L_('expr', 8), head: 'expr!', kind: 'enum:strict|defeasible', rank: 'int:-1000:1000' }), 64),
+      contraries: L_(O_({ u: 'expr!', v: 'expr!' }), 64), link: 'enum:last|weakest', ordering: 'enum:elitist|democratic', transpose: 'bool' }),
   };
   const SP = 'ref', TM = 'ref!', ND = 'ref!', RD = 'int:1:20';
   const OUT = {
@@ -149,31 +155,40 @@
       elaboration: {}, attitude: {}, central: {}, peripheral: {}, route: {},
       resistance: { at: 'numx!' }, attitudeAfter: { at: 'numx!' },
       gradeGap: { speech: SP }, rateGap: { speech: SP }, fit: { speech: SP },
+      sound: { speech: SP, type: SOUND_T + '!' }, soundAt: { speech: SP, type: SOUND_T + '!', sentence: 'numx!' },
+      trope: { speech: SP, type: TROPE_T + '!' }, tropeAt: { speech: SP, type: TROPE_T + '!', sentence: 'numx!' },
+      bipolarLabel: { node: ND, support: SUPPORT_T, semantics: SEMS, ext: 'int:1:64' }, bipolarAccepted: { node: ND, support: SUPPORT_T, semantics: SEMS, mode: 'enum:credulous|sceptical' },
+      complexAttacks: { support: SUPPORT_T }, aspicArgs: {}, aspicDefeats: {}, justified: { concl: 'expr!', semantics: SEMS, mode: 'enum:credulous|sceptical' }, postulates: { semantics: SEMS },
     },
     series: {
       sentenceLengths: { speech: SP }, sentenceAxis: { speech: SP }, figuresBySentence: { speech: SP, type: `enum:${FIGURES.join('|')}!` },
       rateCurve: { speech: SP }, timeAxis: { speech: SP }, pauseLengths: { speech: SP },
       durations: {}, limits: {}, speechAxis: {},
       elmAxis: {}, elmCentral: {}, elmPeripheral: {}, elmTotal: {}, inocT: {}, inocR: {},
+      soundsBySentence: { speech: SP, type: SOUND_T + '!' }, tropesBySentence: { speech: SP, type: TROPE_T + '!' },
     },
     scene: {
       toulmin: { node: ND }, map: { semantics: SEMS }, flow: {}, figures: { speech: SP, type: `enum:${FIGURES.join('|')}` }, timing: { speech: SP },
+      sounds: { speech: SP, type: SOUND_T }, tropes: { speech: SP, type: TROPE_T }, aspic: { semantics: SEMS },
     },
   };
   const NUMX_ORDER = ['sentence', 'tau', 'at'];
   const NEEDS = {   // the model section each output needs
     speeches: ['words', 'sentences', 'clauses', 'syllables', 'duration', 'wpm', 'articulation', 'pauses', 'pauseRate', 'meanPause', 'longestPause', 'fillers', 'fillerRate',
       'meanSentence', 'sdSentence', 'cvSentence', 'npvi', 'questions', 'readability', 'figure', 'figureAt', 'sentenceLengths', 'sentenceAxis', 'figuresBySentence',
-      'rateCurve', 'timeAxis', 'pauseLengths', 'figures', 'timing', 'gradeGap', 'rateGap', 'fit'],
+      'rateCurve', 'timeAxis', 'pauseLengths', 'figures', 'timing', 'gradeGap', 'rateGap', 'fit', 'sound', 'soundAt', 'trope', 'tropeAt', 'soundsBySentence', 'tropesBySentence',
+      'sounds', 'tropes'],
     debate: ['limit', 'overtime', 'poiOffered', 'poiAccepted', 'poiProtected', 'violations', 'rank', 'points', 'speaks', 'winner', 'winnerSide', 'consistent', 'lpw',
       'ballotsFor', 'margin', 'tab', 'swing', 'durations', 'limits', 'speechAxis'],
-    map: ['label', 'accepted', 'extensions', 'inCount', 'netBenefit', 'weighedWinner', 'dropped', 'clash', 'toulmin', 'stockMet', 'primaFacie', 'cqOpen', 'cqFailed', 'slope', 'map', 'flow'],
+    map: ['label', 'accepted', 'extensions', 'inCount', 'netBenefit', 'weighedWinner', 'dropped', 'clash', 'toulmin', 'stockMet', 'primaFacie', 'cqOpen', 'cqFailed', 'slope', 'map', 'flow',
+      'bipolarLabel', 'bipolarAccepted', 'complexAttacks'],
     forms: ['valid', 'counter'],
     outline: ['orderOk', 'kendall', 'misplaced'],
     stasis: ['stasis'],
     elm: ['elaboration', 'attitude', 'central', 'peripheral', 'route', 'elmAxis', 'elmCentral', 'elmPeripheral', 'elmTotal'],
     inoculation: ['resistance', 'attitudeAfter', 'inocT', 'inocR'],
     audience: ['gradeGap', 'rateGap', 'fit'],
+    theory: ['aspicArgs', 'aspicDefeats', 'justified', 'postulates', 'aspic'],
   };
   const rawOk = v => typeof v === 'string' && v.trim() !== '' && v.length <= RAW_MAX;
   const arr = v => (Array.isArray(v) ? v : []);
@@ -259,12 +274,20 @@
       else if (f.length > LIM.fillers) E('size', 'model.delivery.fillers', `more than ${LIM.fillers} items`);
       else f.forEach((x, i) => { if (!(typeof x === 'string' && x.trim() !== '' && x.length <= 32)) E('value', `model.delivery.fillers[${i}]`, 'needs a filler word or phrase (1-32 characters)'); });
     }
+    if (isObj(M.theory)) {
+      const Th = M.theory, lit = (v, p) => { if (typeof v === 'string' && !LIT_RE.test(v)) E('literal', p, 'needs a literal (an atom or ¬atom)'); };
+      arr(Th.kb).forEach((k, i) => { if (isObj(k)) lit(k.f, `model.theory.kb[${i}].f`); });
+      arr(Th.rules).forEach((r, i) => { if (!isObj(r)) return; arr(r.body).forEach((b, j) => lit(b, `model.theory.rules[${i}].body[${j}]`)); lit(r.head, `model.theory.rules[${i}].head`); });
+      arr(Th.contraries).forEach((c, i) => { if (isObj(c)) { lit(c.u, `model.theory.contraries[${i}].u`); lit(c.v, `model.theory.contraries[${i}].v`); } });
+      dups(Th.rules, 'model.theory.rules');
+    }
     C.checkOutputs(spec, ID, ['scalar', 'series', 'scene'], (o, at, E2, W2) => {
       const T = OUT[o.kind][o.of];
       if (!T) { E2('output', at + '.of', `${o.kind} outputs of ${ID} are: ${Object.keys(OUT[o.kind]).join(', ')}`); return; }
       C.walk(o, Object.assign({ id: 'expr', kind: 'expr', of: 'expr' }, T), at, E2, W2);
       for (const [sec, ofs] of Object.entries(NEEDS)) if (ofs.includes(o.of) && !isObj(M[sec]) && !(sec === 'speeches' && Array.isArray(M.speeches) && M.speeches.length) && !(sec === 'forms' && Array.isArray(M.forms) && M.forms.length)) E2('ref', at + '.of', `needs model.${sec}`);
       if (o.of === 'swing' && !(D && D.format === 'oxford')) E2('ref', at + '.of', 'the vote swing is for the oxford format');
+      if (o.of === 'justified' && typeof o.concl === 'string' && !LIT_RE.test(o.concl)) E2('literal', at + '.concl', 'needs a literal (an atom or ¬atom)');
       if (o.of === 'fallacy' && o.node === undefined && o.form === undefined) E2('value', at, 'needs node or form');
       if (o.of === 'speaks' && o.team === undefined && o.speech === undefined) E2('value', at, 'needs team or speech');
       if (['fallacies', 'fallacy'].includes(o.of) && !MP && !(Array.isArray(M.forms) && M.forms.length)) E2('ref', at + '.of', 'needs model.map or model.forms');
@@ -381,35 +404,45 @@
     return Math.max(1, n);
   }
   const VOW = { de: /[aeiouyäöü]+/g, fr: /[aeiouyàâäéèêëîïôöùûüÿœæ]+/g, es: /[aeiouyáéíóúü]+/g, it: /[aeiouàèéìíòóùú]+/g, ru: /[аеёиоуыэюя]/g, el: /[αεηιουω]+/g, other: /[aeiouy]+/g };
-  function syllables(w, lang) {
+  function syllables(w, lang, syn) {
     if (lang === 'en') return sylEn(w);
     let x = w.toLowerCase();
     if (lang === 'fr') x = x.length > 3 ? x.replace(/(?:e|es|ent)$/, '') || x : x;   // the mute final e (prose reading)
     if (lang === 'es') x = x.replace(/([aeo])([íú])/g, '$1-$2').replace(/([íú])([aeo])/g, '$1-$2');   // hiatus with an accented í, ú
-    if (lang === 'el') return sylEl(x);
+    if (lang === 'el') return sylEl(x, syn);
     const re = VOW[lang] || VOW.other;
     return Math.max(1, (x.match(re) || []).length);
   }
   /** Greek: one syllable per vowel, except the digraphs αι ει οι υι ου αυ ευ ηυ — unless the second vowel has a diaeresis (προϊόν) or the
-      first carries the accent (ρολόι); synizesis (παιδιά) is not modelled (Triantafyllidis, Νεοελληνική Γραμματική §§ 15–20) */
+      first carries the accent (ρολόι) (Triantafyllidis, Νεοελληνική Γραμματική §§ 15–20). With syn (model.synizesis): synizesis — an
+      unaccented ι, υ (alone, not the second letter of a digraph) or ει / οι before a vowel is a glide and makes no syllable (παιδιά 2,
+      ποιος 1, ήλιος 2, αλήθεια 3; Holton, Mackridge & Philippaki-Warburton 1997 §1.4.2; Triantafyllidis § 20). It is the everyday
+      pronunciation; learned words that keep the hiatus (διάλογος, ιδιαίτερος in careful speech) are then counted one short. */
   const EL_DI = new Set(['αι', 'ει', 'οι', 'υι', 'ου', 'αυ', 'ευ', 'ηυ']);
-  function sylEl(w) {
-    const d = w.normalize('NFD'); let n = 0, prev = null;
+  function sylEl(w, syn) {
+    const d = w.normalize('NFD'); let n = 0, prev = null, glide = false;
     for (let i = 0; i < d.length; i++) {
       const c = d[i];
       if (/\p{M}/u.test(c)) continue;
-      if (!'αεηιουω'.includes(c)) { prev = null; continue; }
+      if (!'αεηιουω'.includes(c)) { prev = null; glide = false; continue; }
       let acc = false, dia = false; for (let k = i + 1; k < d.length && /\p{M}/u.test(d[k]); k++) { if (d[k] === '\u0308') dia = true; else acc = true; }
-      if (prev && EL_DI.has(prev.c + c) && !dia && !prev.acc) { prev = null; continue; }
+      if (prev && EL_DI.has(prev.c + c) && !dia && !prev.acc) {
+        // a digraph ει / οι (sound i) without accent before a vowel: synizesis takes its syllable back
+        if (syn && (prev.c + c === 'ει' || prev.c + c === 'οι') && !acc && nextVowel(d, i)) { n--; glide = true; }
+        prev = null; continue;
+      }
+      if (syn && (c === 'ι' || c === 'υ') && !acc && !dia && nextVowel(d, i)) { prev = null; glide = true; continue; }   // παιδιά, ποιος: a glide
+      if (glide && prev === null) glide = false;
       n++; prev = { c, acc };
     }
     return Math.max(1, n);
   }
+  function nextVowel(d, i) { let k = i + 1; while (k < d.length && /\p{M}/u.test(d[k])) k++; return k < d.length && 'αεηιουω'.includes(d[k]); }
   const letters = s => (s.match(/\p{L}/gu) || []).length;
   /** readability(words, nSent, lang, formula, codes): the formula of its own language; sources in the chapter §4 */
-  function readability(words, nSent, lang, formula, codes) {
+  function readability(words, nSent, lang, formula, codes, syn) {
     const W = words.length; if (!W) { codes.push('empty'); return NaN; }
-    const S = Math.max(1, nSent), syl = words.map(w => syllables(w, lang)), SY = syl.reduce((a, b) => a + b, 0);
+    const S = Math.max(1, nSent), syl = words.map(w => syllables(w, lang, syn)), SY = syl.reduce((a, b) => a + b, 0);
     const asl = W / S, asw = SY / W, poly = syl.filter(x => x >= 3).length, mono = syl.filter(x => x === 1).length, long = words.filter(w => letters(w) > 6).length;
     const L = FORMULA_LANG[formula]; if (L && !L.includes(lang)) codes.push('formula_lang');
     let v = NaN;
@@ -507,6 +540,166 @@
       const ni = s.toks.findIndex(i => negS.has(toks[i].f));
       if (ni >= 0) { const ci = s.toks.findIndex((i, k) => k > ni && conS.has(toks[i].f)); if (ci > ni) add('antithesis', [s.toks[ni], s.toks[ci]]); }
     });
+    return hits;
+  }
+
+  /* ---------- sound figures over phonetic keys (rhyme, assonance, consonance, paronomasia) ----------
+     phon(word, lang) → a phonetic key: the spelling turned into a rough phoneme string by each language's main grapheme rules (en: the
+     usual digraphs and the silent final e, Carney 1994 A Survey of English Spelling; el: Holton, Mackridge & Philippaki-Warburton 1997
+     §1.1–1.4, digraphs and synizesis; de: Wiese 1996, final devoicing; fr: Tranel 1987, nasal vowels and mute finals; ru: Timberlake
+     2004 ch. 2, final devoicing, ё; es: seseo and yeísmo as in most speakers, Hualde 2005; it: Krämer 2009). Vowels in a key:
+     a e i o u y ø A E O (A E O: the French nasals). It is a key for comparing words, not a transcription: stress is not marked, so a
+     rhyme is matched from the last vowel. Definitions: Lanham 1991 (assonance, consonance, paronomasia), Brogan in the Princeton
+     Encyclopedia of Poetry and Poetics 2012 (rhyme). Detection rules: docs/library/rhetoric.md §6.2. */
+  const SOUNDS = ['assonance', 'consonance', 'rhyme', 'paronomasia'];
+  const KV = 'aeiouyøAEO';
+  const PHON = {
+    en: [[/ph/g, 'f'], [/gh(?=t|$)/g, ''], [/^wr/, 'r'], [/^kn/, 'n'], [/ck/g, 'k'], [/sh/g, 'S'], [/tch/g, 'C'], [/ch/g, 'C'], [/th/g, 'T'], [/wh/g, 'w'], [/qu/g, 'kw'],
+      [/c(?=[eiy])/g, 's'], [/c/g, 'k'], [/x/g, 'ks'], [/(ee|ea|ie)/g, 'i'], [/oo/g, 'u'], [/(ou|ow)/g, 'au'], [/(ai|ay|ei|ey)/g, 'ei'], [/(oa|oe)/g, 'o'],
+      [/([^aeiou])e$/, '$1'], [/([^aeiou])y$/, '$1i'], [/y(?=[^aeiou]|$)/g, 'i'], [/([a-z])\1/g, '$1']],
+    el: [[/αυ(?=[θκξπσςτφχψ]|$)/g, 'af'], [/ευ(?=[θκξπσςτφχψ]|$)/g, 'ef'], [/ηυ(?=[θκξπσςτφχψ]|$)/g, 'if'], [/αυ/g, 'av'], [/ευ/g, 'ev'], [/ηυ/g, 'iv'], [/ου/g, 'u'], [/(αι)/g, 'e'], [/(ει|οι|υι)/g, 'i'], [/[ηιυ]/g, 'i'], [/ω/g, 'o'], [/ε/g, 'e'], [/α/g, 'a'], [/ο/g, 'o'], [/μπ/g, 'b'], [/ντ/g, 'd'], [/(γκ|γγ)/g, 'g'],
+      [/τσ/g, 'ts'], [/τζ/g, 'dz'], [/ψ/g, 'ps'], [/ξ/g, 'ks'], [/θ/g, 'T'], [/δ/g, 'D'], [/χ/g, 'x'], [/γ/g, 'G'], [/φ/g, 'f'], [/β/g, 'v'], [/[σς]/g, 's'], [/κ/g, 'k'],
+      [/λ/g, 'l'], [/μ/g, 'm'], [/ν/g, 'n'], [/π/g, 'p'], [/ρ/g, 'r'], [/τ/g, 't'], [/ζ/g, 'z'], [/([a-zA-Z])\1/g, '$1']],
+    de: [[/sch/g, 'S'], [/ch/g, 'x'], [/ck/g, 'k'], [/ph/g, 'f'], [/th/g, 't'], [/ie/g, 'i'], [/(ei|ai)/g, 'ai'], [/(eu|äu)/g, 'oi'], [/ä/g, 'e'], [/ö/g, 'ø'], [/ü/g, 'y'],
+      [/ß/g, 's'], [/qu/g, 'kv'], [/v/g, 'f'], [/w/g, 'v'], [/z/g, 'ts'], [/h(?![aeiouäöüy])/g, ''], [/([a-z])\1/g, '$1'], [/b$/, 'p'], [/d$/, 't'], [/g$/, 'k']],
+    fr: [[/eaux?$/, 'o'], [/eau/g, 'o'], [/au/g, 'o'], [/oi/g, 'wa'], [/ou/g, 'U'], [/(ai|ei)/g, 'e'], [/[éèêë]/g, 'e'], [/[àâ]/g, 'a'], [/[îï]/g, 'i'], [/[ôö]/g, 'o'], [/[ùûü]/g, 'y'],
+      [/qu/g, 'k'], [/ph/g, 'f'], [/ch/g, 'S'], [/gn/g, 'N'], [/ç/g, 's'], [/c(?=[ei])/g, 's'], [/c/g, 'k'], [/g(?=[ei])/g, 'Z'], [/j/g, 'Z'], [/h/g, ''],
+      [/(ain|ein|in|im|un)(?![aeiouy])/g, 'E'], [/(an|am|en|em)(?![aeiouy])/g, 'A'], [/(on|om)(?![aeiouy])/g, 'O'], [/(es|ent|e)$/, ''], [/[stdxzp]$/, ''], [/u/g, 'y'], [/U/g, 'u'], [/([a-z])\1/g, '$1']],
+    ru: [[/щ/g, 'S'], [/ш/g, 'S'], [/ж$/, 'S'], [/ж/g, 'Z'], [/ч/g, 'C'], [/ц/g, 'ts'], [/х/g, 'x'], [/[ьъ]/g, ''], [/ё/g, 'o'], [/ю/g, 'u'], [/я/g, 'a'], [/[иы]/g, 'i'], [/[эе]/g, 'e'],
+      [/а/g, 'a'], [/о/g, 'o'], [/у/g, 'u'], [/й/g, 'j'], [/б$/, 'p'], [/в$/, 'f'], [/г$/, 'k'], [/д$/, 't'], [/з$/, 's'], [/б/g, 'b'], [/в/g, 'v'], [/г/g, 'g'], [/д/g, 'd'], [/з/g, 'z'],
+      [/к/g, 'k'], [/л/g, 'l'], [/м/g, 'm'], [/н/g, 'n'], [/п/g, 'p'], [/р/g, 'r'], [/с/g, 's'], [/т/g, 't'], [/ф/g, 'f'], [/([a-zA-Z])\1/g, '$1']],
+    es: [[/ll/g, 'j'], [/y(?=[aeiou])/g, 'j'], [/y$/, 'i'], [/ch/g, 'C'], [/qu/g, 'k'], [/gu(?=[ei])/g, 'g'], [/g(?=[ei])/g, 'x'], [/c(?=[ei])/g, 's'], [/c/g, 'k'], [/z/g, 's'],
+      [/h/g, ''], [/v/g, 'b'], [/j/g, 'x'], [/ñ/g, 'N'], [/[á]/g, 'a'], [/[é]/g, 'e'], [/[í]/g, 'i'], [/[óö]/g, 'o'], [/[úü]/g, 'u'], [/rr/g, 'R'], [/([a-z])\1/g, '$1']],
+    it: [[/ch/g, 'k'], [/gh/g, 'g'], [/sc(?=[ei])/g, 'S'], [/gli/g, 'L'], [/gn/g, 'N'], [/c(?=[ei])/g, 'C'], [/g(?=[ei])/g, 'J'], [/qu/g, 'kw'], [/h/g, ''], [/[àá]/g, 'a'], [/[èé]/g, 'e'],
+      [/[ìí]/g, 'i'], [/[òó]/g, 'o'], [/[ùú]/g, 'u'], [/([a-z])\1/g, '$1']],
+    other: [],
+  };
+  /** phon(word, lang) → the phonetic key (lower case input; Greek: an unaccented ι/υ/ει/οι before a vowel is the glide j — synizesis) */
+  function phon(w, lang) {
+    let x = String(w || '').toLowerCase().normalize('NFC');
+    if (lang === 'el') {
+      const d = x.normalize('NFD');
+      // synizesis: [ι υ ει οι] without accent or diaeresis, before a vowel → j (Holton et al. 1997 §1.4.2); then drop the accents
+      x = d.replace(/(ει|οι|ι|υ)(?![́̈])(?=[αεηιουω])/g, (m, g, off) => (off > 0 && 'αεο'.includes(d[off - 1]) && g.length === 1 ? m : 'J')).replace(/\p{M}/gu, '').replace(/ς/g, 'σ');
+      for (const [re, r] of PHON.el) x = x.replace(re, r);
+      return x.replace(/J/g, 'j');
+    }
+    if (lang !== 'fr' && lang !== 'de' && lang !== 'es' && lang !== 'it') x = x.normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC');
+    if (lang === 'de') x = x.normalize('NFC');
+    for (const [re, r] of PHON[lang] || PHON.other) x = x.replace(re, r);
+    return x.normalize('NFD').replace(/\p{M}/gu, '').replace(/['’ʼ-]/g, '');
+  }
+  const isV = c => KV.includes(c);
+  /** the rime of a key: from its last vowel group to the end ('nation' → 'Sion' … 'ion'); null without a vowel */
+  function rimeOf(k) { let i = k.length - 1; while (i >= 0 && !isV(k[i])) i--; if (i < 0) return null; while (i > 0 && isV(k[i - 1])) i--; return k.slice(i); }
+  const vowelsOf = k => (k.match(new RegExp('[' + KV + ']+', 'g')) || []);
+  const codaOf = k => { const m = k.match(new RegExp('[^' + KV + ']+$')); return m ? m[0] : ''; };
+  function lev(a, b) { if (Math.abs(a.length - b.length) > 2) return 3; const d = Array.from({ length: a.length + 1 }, (_, i) => [i]); for (let j = 1; j <= b.length; j++) d[0][j] = j; for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[a.length][b.length]; }
+  /** soundFigures(A, lang) → hits {type, sent, toks}: rhyme (the last words of two clauses ≤ 2 apart share the rime, words differ);
+      assonance (≥ 3 content words within 6 tokens of a clause share a stressed-or-not vowel sound and not one rime); consonance (≥ 3
+      content words within 6 tokens share a final consonant sound and not their first letter: that is alliteration); paronomasia (two
+      different content words of a sentence, ≥ 4 letters, not one stem, whose keys differ by one edit) */
+  function soundFigures(A, lang) {
+    const { toks, sents } = A, hits = [], stop = STOPSET[lang] || STOPSET.other, key = new Map();
+    const K = i => { if (!key.has(i)) key.set(i, phon(toks[i].s, lang)); return key.get(i); };
+    const content = i => !toks[i].filler && !stop.has(toks[i].f) && /\p{L}/u.test(toks[i].f);
+    const add = (type, ti) => { if (hits.length < 4000) hits.push({ type, sent: toks[ti[0]].sent, toks: ti }); };
+    const clauses = []; sents.forEach(s => s.clauses.forEach(c => { const w = c.filter(i => !toks[i].filler); if (w.length) clauses.push(w); }));
+    const used = new Set();
+    for (let k = 0; k < clauses.length; k++) for (let j = k + 1; j <= k + 2 && j < clauses.length; j++) {
+      const a = clauses[k][clauses[k].length - 1], b = clauses[j][clauses[j].length - 1];
+      if (used.has(b) || toks[a].f === toks[b].f) continue;
+      const ra = rimeOf(K(a)), rb = rimeOf(K(b));
+      if (ra && rb && ra === rb && (ra.length >= 2 || codaOf(ra) === '')) { add('rhyme', [a, b]); used.add(b); break; }
+    }
+    for (const c of clauses) {
+      const cw = c.filter(content);
+      let doneA = false, doneC = false;
+      for (let p = 0; p + 2 < cw.length && !(doneA && doneC); p++) {
+        const win = cw.filter(i => i >= cw[p] && i - cw[p] <= 6);
+        if (win.length < 3) continue;
+        if (!doneA) {
+          const cnt = new Map(); for (const i of win) for (const v of new Set(vowelsOf(K(i)))) cnt.set(v, (cnt.get(v) || []).concat([i]));
+          for (const [, is] of cnt) if (is.length >= 3 && new Set(is.map(i => toks[i].f)).size >= 3 && new Set(is.map(i => rimeOf(K(i)))).size > 1) { add('assonance', is.slice(0, 6)); doneA = true; break; }
+        }
+        if (!doneC) {
+          const cnt = new Map(); for (const i of win) { const co = codaOf(K(i)); if (co) cnt.set(co, (cnt.get(co) || []).concat([i])); }
+          for (const [, is] of cnt) if (is.length >= 3 && new Set(is.map(i => toks[i].f)).size >= 3 && new Set(is.map(i => K(i)[0])).size > 1) { add('consonance', is.slice(0, 6)); doneC = true; break; }
+        }
+      }
+    }
+    sents.forEach(s => {
+      const cw = s.toks.filter(i => content(i) && toks[i].f.length >= 4);
+      outer: for (let p = 0; p < cw.length; p++) for (let q = p + 1; q < cw.length && q < p + 12; q++) {
+        const a = toks[cw[p]].f, b = toks[cw[q]].f;
+        if (a === b || prefix(a, b) >= Math.max(4, Math.ceil(0.6 * Math.max(a.length, b.length)))) continue;
+        const ka = K(cw[p]), kb = K(cw[q]);
+        if (ka !== kb && Math.min(ka.length, kb.length) >= 3 && lev(ka, kb) === 1) { add('paronomasia', [cw[p], cw[q]]); break outer; }
+      }
+    });
+    return hits;
+  }
+
+  /* ---------- trope CANDIDATES by explicit cues (never a judgement of meaning: each hit names its cue, docs/library/rhetoric.md §6.3)
+     simile: a comparison marker between two content words (like, as … as, as if; σαν, όπως, λες και; wie, als ob; comme, tel;
+     как, словно, будто; como, cual; come, quasi) — Lanham 1991; Israel, Harding & Tobin 2004 on simile markers;
+     metaphor: a signalling expression (so to speak, metaphorically, figuratively, literally, as it were, a kind of … — Goatly 1997,
+     The Language of Metaphors ch. 6) or the structure "X copula DET N of" (the genitive metaphor "A is the B of C", Brooke-Rose 1958);
+     irony: an irony marker (so-called, yeah right, oh great …; δήθεν, τάχα; sogenannt, na toll; soi-disant; так называемый, ну конечно;
+     el llamado; cosiddetto — Attardo 2000 on irony markers; Burgers, van Mulken & Schellens 2012) or scare quotes around 1–3 words
+     or "?!" (Kreuz 1996). A candidate is a place to look, never a proof. */
+  const TROPES = ['simile', 'metaphor', 'irony'];
+  const TROPE_CUES = {
+    en: { simile: ['like', 'as if', 'as though', 'as * as'], metaphor: ['so to speak', 'metaphorically', 'figuratively', 'literally', 'as it were', 'a kind of', 'a sort of', 'in a sense', 'in a way'], irony: ['so-called', 'so called', 'yeah right', 'oh great', 'oh wonderful', 'just great', 'what a surprise', 'how convenient', 'thanks a lot'], copula: ['is', 'are', 'was', 'were'], det: ['a', 'an', 'the'], of: ['of'], pron: ['i', 'you', 'we', 'they', "don't", 'would', 'feel', 'looks', 'look'] },
+    el: { simile: ['σαν', 'σα', 'όπως', 'λες και', 'σάμπως', 'καθώς'], metaphor: ['μεταφορικά', 'κατά κάποιον τρόπο', 'ας πούμε', 'κυριολεκτικά', 'ένα είδος', 'που λέμε'], irony: ['δήθεν', 'τάχα', 'τάχατες', 'μπράβο σου', 'τι ωραία', 'πολύ ωραία'], copula: ['είναι', 'ήταν'], det: ['ο', 'η', 'το', 'οι', 'τα', 'ένας', 'μια', 'μία', 'ένα'], of: [], pron: [] },
+    de: { simile: ['wie', 'als ob', 'gleich wie', 'gleichsam'], metaphor: ['sozusagen', 'gewissermaßen', 'bildlich gesprochen', 'im übertragenen sinn', 'buchstäblich', 'eine art'], irony: ['sogenannte', 'sogenannter', 'sogenannten', 'sogenanntes', 'na toll', 'na super', 'wie schön', 'vielen dank auch'], copula: ['ist', 'sind', 'war', 'waren'], det: ['der', 'die', 'das', 'ein', 'eine'], of: [], pron: [] },
+    fr: { simile: ['comme', 'tel', 'telle', 'tels', 'telles', 'pareil à', 'ainsi que', 'semblable à'], metaphor: ['pour ainsi dire', 'au sens figuré', 'métaphoriquement', 'littéralement', 'une sorte de', 'une espèce de'], irony: ['soi-disant', 'prétendu', 'prétendue', 'quelle surprise', 'merci bien', 'bravo'], copula: ['est', 'sont', 'était', 'étaient'], det: ['le', 'la', 'les', 'un', 'une', 'l'], of: ['de', 'du', 'des'], pron: [] },
+    ru: { simile: ['как', 'словно', 'будто', 'точно', 'подобно', 'как будто', 'как бы'], metaphor: ['так сказать', 'в переносном смысле', 'образно говоря', 'буквально', 'своего рода', 'в некотором смысле'], irony: ['так называемый', 'так называемая', 'так называемое', 'так называемые', 'ну конечно', 'ну спасибо', 'да уж'], copula: ['есть', 'это'], det: [], of: [], pron: [] },
+    es: { simile: ['como', 'cual', 'igual que', 'tal como', 'como si'], metaphor: ['por así decirlo', 'en sentido figurado', 'metafóricamente', 'literalmente', 'una especie de', 'una suerte de'], irony: ['el llamado', 'la llamada', 'supuesto', 'supuesta', 'qué bien', 'sí, claro', 'qué sorpresa'], copula: ['es', 'son', 'era', 'eran'], det: ['el', 'la', 'los', 'las', 'un', 'una'], of: ['de', 'del'], pron: [] },
+    it: { simile: ['come', 'quasi', 'simile a', 'pari a', 'come se'], metaphor: ['per così dire', 'in senso figurato', 'metaforicamente', 'letteralmente', 'una specie di', 'una sorta di'], irony: ['cosiddetto', 'cosiddetta', 'cosiddetti', 'cosiddette', 'che bello', 'sì, certo', 'grazie tante'], copula: ['è', 'sono', 'era', 'erano'], det: ['il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una'], of: ['di', 'del', 'della'], pron: [] },
+    other: { simile: [], metaphor: [], irony: [], copula: [], det: [], of: [], pron: [] },
+  };
+  /** tropes(A, lang, text) → candidate hits {type, sent, toks, cue} */
+  function tropes(A, lang, text) {
+    const { toks, sents } = A, hits = [], T = TROPE_CUES[lang] || TROPE_CUES.other, stop = STOPSET[lang] || STOPSET.other;
+    const content = i => i >= 0 && i < toks.length && !toks[i].filler && !stop.has(toks[i].f) && /\p{L}/u.test(toks[i].f);
+    const add = (type, ti, cue) => { if (hits.length < 4000) hits.push({ type, sent: toks[ti[0]].sent, toks: ti, cue }); };
+    const words = s => [...String(s).normalize('NFC').matchAll(TOK)].map(q => fold(q[0]));
+    const F = new Set();
+    const match = (s, phrase) => {   // the token positions where a cue phrase (words, '*' = any one word) starts inside sentence s
+      const ws = words(phrase), out = [];
+      for (let k = 0; k + ws.length <= s.toks.length; k++) if (ws.every((w, j) => w === '*' || toks[s.toks[k + j]].f === w)) out.push(k);
+      return { ws, out };
+    };
+    const cs = new Set((T.copula || []).map(fold)), ds = new Set((T.det || []).map(fold)), ofs = new Set((T.of || []).map(fold)), pr = new Set((T.pron || []).map(fold));
+    sents.forEach(s => {
+      for (const type of TROPES) for (const cue of T[type]) {
+        const { ws, out } = match(s, cue);
+        for (const k of out) {
+          const at = s.toks.slice(k, k + ws.length);
+          if (F.has(type + at[0])) continue;
+          if (type === 'simile') {
+            const before = s.toks.slice(0, k).filter(content), after = s.toks.slice(k + ws.length).filter(content);
+            if (!before.length || !after.length) continue;
+            if (lang === 'en' && cue === 'like' && k > 0 && pr.has(toks[s.toks[k - 1]].f)) continue;   // "I like", "would like", "looks like" are not similes
+          }
+          F.add(type + at[0]); add(type, at, cue); break;
+        }
+      }
+      // the genitive metaphor: copula DET content-word OF
+      for (let k = 0; k + 3 < s.toks.length; k++) {
+        const t = j => toks[s.toks[k + j]].f;
+        if (cs.has(t(0)) && (ds.has(t(1)) || !ds.size) && content(s.toks[k + (ds.size ? 2 : 1)]) && ofs.size && ofs.has(t(ds.size ? 3 : 2)) && !F.has('metaphor' + s.toks[k])) { F.add('metaphor' + s.toks[k]); add('metaphor', s.toks.slice(k, k + 4), 'X is the Y of Z'); }
+      }
+    });
+    // scare quotes around 1–3 words and "?!" (irony markers), found in the raw text and mapped to their tokens
+    const t = String(text || '').normalize('NFC');
+    for (const q of t.matchAll(/["“«„]([^"”»“\n]{1,60})["”»“]/gu)) {
+      const n = [...q[1].matchAll(TOK)].length; if (n < 1 || n > 3) continue;
+      const i0 = toks.findIndex(x => x.i >= q.index); if (i0 < 0) continue;
+      add('irony', [i0], 'scare quotes');
+    }
+    for (const q of t.matchAll(/(\?!|!\?|‽)/gu)) { let i0 = -1; for (let i = 0; i < toks.length; i++) if (toks[i].i < q.index) i0 = i; if (i0 >= 0) add('irony', [i0], q[0]); }
     return hits;
   }
 
@@ -726,6 +919,9 @@
     const thr = () => ev(isObj(m.delivery) ? m.delivery.pause : undefined, 0.25);
     const textOf = s => { let r = prep.text.get(s.id); if (!r) { r = analyse(typeof s.text === 'string' ? s.text : '', s.lang || lang0, extra); prep.text.set(s.id, r); } return r; };
     const figsOf = s => { let r = prep.figs.get(s.id); if (!r) { r = figures(textOf(s), s.lang || lang0); prep.figs.set(s.id, r); } return r; };
+    const soundsOf = s => { let r = prep.figs.get('♪' + s.id); if (!r) { r = soundFigures(textOf(s), s.lang || lang0); prep.figs.set('♪' + s.id, r); } return r; };
+    const tropesOf = s => { let r = prep.figs.get('τ' + s.id); if (!r) { r = tropes(textOf(s), s.lang || lang0, typeof s.text === 'string' ? s.text : ''); prep.figs.set('τ' + s.id, r); } return r; };
+    const syn = m.synizesis === true;
     let R = null; const RD = () => { if (!R) { const cs = []; R = round(spec, ev, cs); } return R; };
     let MI = null; const mapCodes = []; const MAPI = () => { if (!MI) MI = mapInfo(m.map || {}, ev, mapCodes); return MI; };
     const solveMap = id => { const af = MAPI().solve(); for (const c of mapCodes) code(id, c); return af; };
@@ -756,7 +952,7 @@
           case 'words': return d.words;
           case 'sentences': return A.sents.length;
           case 'clauses': return A.sents.reduce((a, x) => a + x.clauses.length, 0);
-          case 'syllables': return words.reduce((a, x) => a + syllables(x.s, lang), 0);
+          case 'syllables': return words.reduce((a, x) => a + syllables(x.s, lang, syn), 0);
           case 'duration': if (!isNum(dur)) code(o.id, 'no_duration'); return dur;
           case 'wpm': if (!(dur > 0)) { code(o.id, 'no_duration'); return NaN; } return d.words / (dur / 60);
           case 'articulation': if (!needT()) return NaN; return d.speak > 0 ? d.words / (d.speak / 60) : NaN;
@@ -771,7 +967,12 @@
           case 'cvSentence': { const [mu, sd] = meanSd(sl); if (!isNum(sd)) code(o.id, 'few_sentences'); return sd / mu; }
           case 'npvi': { const v = nPVI(sl); if (!isNum(v)) code(o.id, 'few_sentences'); return v; }
           case 'questions': return A.sents.filter(x => x.end === '?').length;
-          case 'readability': { const cs = []; const v = readability(words.map(x => x.s), A.sents.length, lang, o.formula, cs); cs.forEach(c => code(o.id, c)); return v; }
+          case 'readability': { const cs = []; const v = readability(words.map(x => x.s), A.sents.length, lang, o.formula, cs, syn); cs.forEach(c => code(o.id, c)); return v; }
+          case 'sound': case 'trope': { const hs = (of === 'sound' ? soundsOf : tropesOf)(s).filter(h => h.type === o.type); if (of === 'trope' && hs.length) code(o.id, 'candidate'); return hs.length; }
+          case 'soundAt': case 'tropeAt': { const n = Math.round(ev(o.sentence, NaN)); if (!(n >= 1 && n <= A.sents.length)) { code(o.id, 'no_sentence'); return NaN; } return (of === 'soundAt' ? soundsOf : tropesOf)(s).some(h => h.type === o.type && h.sent === n - 1) ? 1 : 0; }
+          case 'soundsBySentence': case 'tropesBySentence': { const c = new Array(Math.min(2000, A.sents.length)).fill(0); for (const h of (of === 'soundsBySentence' ? soundsOf : tropesOf)(s)) if (h.type === o.type && h.sent < c.length) c[h.sent]++; return c; }
+          case 'sounds': return figScene(A, soundsOf(s), o.type);
+          case 'tropes': return figScene(A, tropesOf(s), o.type, true);
           case 'figure': return figsOf(s).filter(h => h.type === o.type).length;
           case 'figureAt': { const n = Math.round(ev(o.sentence, NaN)); if (!(n >= 1 && n <= A.sents.length)) { code(o.id, 'no_sentence'); return NaN; } return figsOf(s).some(h => h.type === o.type && h.sent === n - 1) ? 1 : 0; }
           case 'sentenceLengths': return sl.slice(0, 2000);
@@ -793,7 +994,7 @@
       if (NEEDS.audience.includes(of)) {
         const s = spOf(o.speech), Au = m.audience || {}; if (!s) { code(o.id, 'no_speech'); return NaN; }
         const { A, lang, d, dur } = speechStats(o, s), words = A.toks.filter(x => !x.filler).map(x => x.s);
-        const cs = [], g = readability(words, A.sents.length, lang, Au.formula || 'fk', cs); cs.forEach(c => code(o.id, c));
+        const cs = [], g = readability(words, A.sents.length, lang, Au.formula || 'fk', cs, syn); cs.forEach(c => code(o.id, c));
         const gap = g - ev(Au.grade, NaN), wpm = dur > 0 ? d.words / (dur / 60) : NaN, lo = ev(Au.wpmLo, 140), hi = ev(Au.wpmHi, 170);
         const rg = !isNum(wpm) ? NaN : wpm < lo ? wpm - lo : wpm > hi ? wpm - hi : 0;
         if (!isNum(wpm)) code(o.id, 'no_duration');
@@ -916,9 +1117,44 @@
           }
           case 'map': return mapScene(I, o);
           case 'flow': return flowScene(I, o);
+          case 'bipolarLabel': case 'bipolarAccepted': case 'complexAttacks': {
+            // bipolar argumentation through logic@1 (Cayrol & Lagasquie-Schiex 2005, 2013): support edges with attack + undercut edges
+            const L = LG(), sup = I.edges.filter(e => e.k === 'support').map(e => [e.a, e.b]), B = L.bipolar(I.n, I.att, sup, o.support || 'general');
+            if (of === 'complexAttacks') return B.att.length - Object.values(B.kind).filter(k => k === 'direct').length;
+            if (I.n > 24) code(o.id, 'large_map');
+            const D = new Set(), af = L.afSolve(I.n, B.att, D); for (const c of D) code(o.id, c);
+            if (ni === undefined) return NaN;
+            const sem = o.semantics || 'grounded', Ls = sem === 'grounded' ? [af.grounded] : af[sem] || [];
+            if (!Ls.length) { code(o.id, 'no_extension'); return of === 'bipolarAccepted' ? 0 : NaN; }
+            if (of === 'bipolarLabel') return Ls[Math.min(Ls.length, Math.max(1, o.ext || 1)) - 1][ni];
+            return (o.mode === 'credulous' ? Ls.some(l => l[ni] === 1) : Ls.every(l => l[ni] === 1)) ? 1 : 0;
+          }
         }
       }
       if (of === 'schemeCQs') return SCHEMES[o.scheme] ? SCHEMES[o.scheme].cq : NaN;
+      // ----- ASPIC+ structured argumentation through logic@1 (Modgil & Prakken 2014): the theory's arguments, defeats, justified conclusions -----
+      if (NEEDS.theory.includes(of)) {
+        const L = LG(), Th = m.theory, A = L.aspic({ kb: arr(Th.kb).filter(isObj), rules: arr(Th.rules).filter(isObj), contraries: arr(Th.contraries).filter(isObj).map(c => [c.u, c.v]) }, { link: Th.link, ordering: Th.ordering, transpose: Th.transpose });
+        A.codes.forEach(c => code(o.id, c));
+        if (of === 'aspicArgs') return A.n;
+        if (of === 'aspicDefeats') return A.defeats.length;
+        const D = new Set(), af = L.afSolve(A.n, A.att, D); for (const c of D) code(o.id, c);
+        const sem = o.semantics || 'grounded', Ls = sem === 'grounded' ? [af.grounded] : af[sem] || [];
+        if (!Ls.length) code(o.id, 'no_extension');
+        if (of === 'postulates') { const p = A.postulates(Ls); const okAll = p.subClosed && p.strictClosed && p.directConsistent && p.indirectConsistent; if (!okAll) code(o.id, 'postulate'); return okAll ? 1 : 0; }
+        if (of === 'justified') {
+          const g = L.litOf(String(o.concl)), has = l => A.args.some((a, i) => l[i] === 1 && a.conc === g);
+          if (!Ls.length) return 0;
+          return (o.mode === 'credulous' ? Ls.some(has) : Ls.every(has)) ? 1 : 0;
+        }
+        if (of === 'aspic') {
+          const lab = Ls[0] || A.args.map(() => 0.5), n = A.n, sc = C.scene([-4.5, 4.5, -4.5, 4.5]);
+          const xy = i => [3.5 * Math.cos(Math.PI / 2 - 2 * Math.PI * i / Math.max(1, n)), 3.5 * Math.sin(Math.PI / 2 - 2 * Math.PI * i / Math.max(1, n))];
+          for (const [u, v] of A.att.slice(0, 600)) { const [x1, y1] = xy(u), [x2, y2] = xy(v); sc.seg(x1, y1, x2, y2, { c: 'muted', arrow: true }); }
+          A.args.slice(0, 200).forEach((a, i) => { const [x, y] = xy(i); sc.pt(x, y, { r: 6, c: lab[i] === 1 ? 'ok' : lab[i] === 0 ? 'bad' : 'warn', s: (a.conc[0] === '-' ? '¬' + a.conc.slice(1) : a.conc).slice(0, RAW_MAX) }); });
+          return sc.done();
+        }
+      }
       // ----- forms -----
       if (of === 'valid' || of === 'counter' || of === 'fallacy' || of === 'fallacies') {
         if (of === 'fallacies') { let n = 0; for (const f of arr(m.forms).filter(isObj)) { const cs = []; const r = formOf(f, cs); cs.forEach(c => code(o.id, c)); if (r && r.fal !== 'none') n++; } return n; }
@@ -1026,7 +1262,7 @@
     sc.txt(50, -50, { v: T.count });
     return sc.done();
   }
-  function figScene(A, hits, type) {
+  function figScene(A, hits, type, cues) {
     const lines = [], hl = new Set(hits.filter(h => !type || h.type === type).flatMap(h => h.toks));
     for (let si = 0; si < A.sents.length && lines.length < 40; si++) {
       let line = [], len = 0, first = true;
@@ -1042,6 +1278,7 @@
       const y = -k * 4;
       if (ln.n) sc.txt(-2, y, { v: ln.n, c: 'muted', anchor: 'end' });
       for (const [i, x] of ln.line) sc.txt(x, y, { s: A.toks[i].s.slice(0, RAW_MAX), c: hl.has(i) ? 'hi' : A.toks[i].filler ? 'muted' : 'base', anchor: 'start' });
+      if (cues && ln.n) { const cs = [...new Set(hits.filter(h => (!type || h.type === type) && h.sent === ln.n - 1).map(h => h.type + ': ' + h.cue))].join(' · '); if (cs) sc.txt(RAW_MAX + 1, y, { s: cs.slice(0, RAW_MAX), c: 'warn', anchor: 'start' }); }
     });
     return sc.done();
   }
@@ -1064,6 +1301,8 @@
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     FORMAT, SCHEMES, FALLACIES, ORDERS, FIGURES, FORMULAS,
     analyse, figures, syllables, sylEn, readability, nPVI, kendall, propForm, sylForm, panel, round,
+    // added: sound figures by phonetic keys, trope candidates by cues, Greek synizesis (syllables(w, 'el', true)); ASPIC+ / bipolar via logic@1
+    SOUNDS, TROPES, TROPE_CUES, phon, rimeOf, soundFigures, tropes, sylEl,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

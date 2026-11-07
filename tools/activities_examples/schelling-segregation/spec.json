@@ -24,7 +24,7 @@
  "readouts": [
   { "label": "similarLabel", "expr": "similar", "digits": 3 },
   { "label": "unhappyLabel", "expr": "unhappy", "digits": 3 },
-  { "label": "roundsLabel", "expr": "rounds", "digits": 0 }
+  { "label": "roundsLabel", "expr": "rounds", "format": "auto" }
  ],
  "plots": [
   { "kind": "series", "title": "plotTitle",

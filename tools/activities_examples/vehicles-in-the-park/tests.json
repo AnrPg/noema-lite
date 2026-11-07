@@ -1,0 +1,148 @@
+{
+ "cases": [
+  {
+   "name": "an ambulance on an emergency call: the ban applies but is defeated (passes)",
+   "exercise": "ch01-e941",
+   "steps": [
+    {
+     "set": "ambulance",
+     "value": true
+    },
+    {
+     "set": "emergency",
+     "value": true
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "forb": [
+      -0.5,
+      0.5
+     ],
+     "r1s": [
+      0.5,
+      1.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "a tank as a war memorial: the exception defeats the ban (passes)",
+   "exercise": "ch01-e941",
+   "steps": [
+    {
+     "set": "memorial",
+     "value": true
+    }
+   ],
+   "expect": {
+    "passed": true,
+    "values": {
+     "forb": [
+      -0.5,
+      0.5
+     ],
+     "r1s": [
+      0.5,
+      1.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "a private car: the ban fires (fails)",
+   "exercise": "ch01-e941",
+   "steps": [
+    {
+     "set": "car",
+     "value": true
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "forb": [
+      0.5,
+      1.5
+     ],
+     "r1s": [
+      1.5,
+      2.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "a bicycle: not a vehicle under the by-law, so the ban does not apply (fails)",
+   "exercise": "ch01-e941",
+   "steps": [
+    {
+     "set": "bicycle",
+     "value": true
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "forb": [
+      -0.5,
+      0.5
+     ],
+     "r1s": [
+      -0.5,
+      0.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "an ambulance with no emergency: still forbidden (fails)",
+   "exercise": "ch01-e941",
+   "steps": [
+    {
+     "set": "ambulance",
+     "value": true
+    }
+   ],
+   "expect": {
+    "passed": false,
+    "values": {
+     "forb": [
+      0.5,
+      1.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "explorer: the values are saved",
+   "steps": [
+    {
+     "set": "car",
+     "value": true
+    },
+    {
+     "set": "bicycle",
+     "value": true
+    }
+   ],
+   "expect": {
+    "state": [
+     "car",
+     "bicycle"
+    ],
+    "values": {
+     "fired": [
+      2.5,
+      3.5
+     ],
+     "defeated": [
+      0.5,
+      1.5
+     ]
+    }
+   }
+  }
+ ]
+}

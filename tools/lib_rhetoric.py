@@ -40,6 +40,8 @@ FIGURES = ["anaphora", "epistrophe", "symploce", "anadiplosis", "climax", "epana
            "alliteration", "tricolon", "isocolon", "asyndeton", "polysyndeton", "question", "antithesis"]
 FORMULAS = ["flesch", "fk", "fog", "amstad", "wstf", "kandel", "oborneva", "lix", "rix"]
 SEMS = "enum:grounded|preferred|stable"
+SOUND_T, TROPE_T, SUPPORT_T = "enum:assonance|consonance|rhyme|paronomasia", "enum:simile|metaphor|irony", "enum:general|deductive|necessary"
+LIT_RE = re.compile(r"\s*(?:[¬~!-]\s*)*[A-Za-z_][A-Za-z0-9_]{0,31}\s*")   # an ASPIC+ literal (the same as the JS LIT_RE)
 
 
 def _L(t, mx, mn=None, req=False):
@@ -76,6 +78,10 @@ TABLE = {
     "inoculation": _O({"r0": "numx", "tau": "numx", "attack": "numx", "boosters": _L("numx", 10), "horizon": "numx"}),
     "audience": _O({"grade": "numx", "formula": _e(FORMULAS), "wpmLo": "numx", "wpmHi": "numx", "tol": "numx"}),
     "delivery": _O({"pause": "numx", "window": "numx"}),
+    "synizesis": "bool",
+    "theory": _O({"kb": _L(_O({"f": "expr!", "kind": "enum:axiom|ordinary", "rank": "int:-1000:1000"}), 64),
+                  "rules": _L(_O({"id": "id!", "body": _L("expr", 8), "head": "expr!", "kind": "enum:strict|defeasible", "rank": "int:-1000:1000"}), 64),
+                  "contraries": _L(_O({"u": "expr!", "v": "expr!"}), 64), "link": "enum:last|weakest", "ordering": "enum:elitist|democratic", "transpose": "bool"}),
 }
 SP, TM, ND, RD = "ref", "ref!", "ref!", "int:1:20"
 _SIDE_E = _e(SIDES)
@@ -99,31 +105,40 @@ OUT = {
         "elaboration": {}, "attitude": {}, "central": {}, "peripheral": {}, "route": {},
         "resistance": {"at": "numx!"}, "attitudeAfter": {"at": "numx!"},
         "gradeGap": {"speech": SP}, "rateGap": {"speech": SP}, "fit": {"speech": SP},
+        "sound": {"speech": SP, "type": SOUND_T + "!"}, "soundAt": {"speech": SP, "type": SOUND_T + "!", "sentence": "numx!"},
+        "trope": {"speech": SP, "type": TROPE_T + "!"}, "tropeAt": {"speech": SP, "type": TROPE_T + "!", "sentence": "numx!"},
+        "bipolarLabel": {"node": ND, "support": SUPPORT_T, "semantics": SEMS, "ext": "int:1:64"}, "bipolarAccepted": {"node": ND, "support": SUPPORT_T, "semantics": SEMS, "mode": "enum:credulous|sceptical"},
+        "complexAttacks": {"support": SUPPORT_T}, "aspicArgs": {}, "aspicDefeats": {}, "justified": {"concl": "expr!", "semantics": SEMS, "mode": "enum:credulous|sceptical"}, "postulates": {"semantics": SEMS},
     },
     "series": {
         "sentenceLengths": {"speech": SP}, "sentenceAxis": {"speech": SP}, "figuresBySentence": {"speech": SP, "type": _e(FIGURES) + "!"},
         "rateCurve": {"speech": SP}, "timeAxis": {"speech": SP}, "pauseLengths": {"speech": SP},
         "durations": {}, "limits": {}, "speechAxis": {},
         "elmAxis": {}, "elmCentral": {}, "elmPeripheral": {}, "elmTotal": {}, "inocT": {}, "inocR": {},
+        "soundsBySentence": {"speech": SP, "type": SOUND_T + "!"}, "tropesBySentence": {"speech": SP, "type": TROPE_T + "!"},
     },
     "scene": {
         "toulmin": {"node": ND}, "map": {"semantics": SEMS}, "flow": {}, "figures": {"speech": SP, "type": _e(FIGURES)}, "timing": {"speech": SP},
+        "sounds": {"speech": SP, "type": SOUND_T}, "tropes": {"speech": SP, "type": TROPE_T}, "aspic": {"semantics": SEMS},
     },
 }
 NUMX_ORDER = ["sentence", "tau", "at"]
 NEEDS = {
     "speeches": ["words", "sentences", "clauses", "syllables", "duration", "wpm", "articulation", "pauses", "pauseRate", "meanPause", "longestPause", "fillers", "fillerRate",
                  "meanSentence", "sdSentence", "cvSentence", "npvi", "questions", "readability", "figure", "figureAt", "sentenceLengths", "sentenceAxis", "figuresBySentence",
-                 "rateCurve", "timeAxis", "pauseLengths", "figures", "timing", "gradeGap", "rateGap", "fit"],
+                 "rateCurve", "timeAxis", "pauseLengths", "figures", "timing", "gradeGap", "rateGap", "fit", "sound", "soundAt", "trope", "tropeAt", "soundsBySentence", "tropesBySentence",
+                 "sounds", "tropes"],
     "debate": ["limit", "overtime", "poiOffered", "poiAccepted", "poiProtected", "violations", "rank", "points", "speaks", "winner", "winnerSide", "consistent", "lpw",
                "ballotsFor", "margin", "tab", "swing", "durations", "limits", "speechAxis"],
-    "map": ["label", "accepted", "extensions", "inCount", "netBenefit", "weighedWinner", "dropped", "clash", "toulmin", "stockMet", "primaFacie", "cqOpen", "cqFailed", "slope", "map", "flow"],
+    "map": ["label", "accepted", "extensions", "inCount", "netBenefit", "weighedWinner", "dropped", "clash", "toulmin", "stockMet", "primaFacie", "cqOpen", "cqFailed", "slope", "map", "flow",
+            "bipolarLabel", "bipolarAccepted", "complexAttacks"],
     "forms": ["valid", "counter"],
     "outline": ["orderOk", "kendall", "misplaced"],
     "stasis": ["stasis"],
     "elm": ["elaboration", "attitude", "central", "peripheral", "route", "elmAxis", "elmCentral", "elmPeripheral", "elmTotal"],
     "inoculation": ["resistance", "attitudeAfter", "inocT", "inocR"],
     "audience": ["gradeGap", "rateGap", "fit"],
+    "theory": ["aspicArgs", "aspicDefeats", "justified", "postulates", "aspic"],
 }
 
 
@@ -238,6 +253,19 @@ def check_spec(spec):
         else:
             for i, x in enumerate(f):
                 if not (isinstance(x, str) and x.strip() != "" and _js_len(x) <= 32): E("value", f"model.delivery.fillers[{i}]", "needs a filler word or phrase (1-32 characters)")
+    th = M.get("theory")
+    if L.is_obj(th):
+        def lit(v, p):
+            if isinstance(v, str) and not LIT_RE.fullmatch(v): E("literal", p, "needs a literal (an atom or ¬atom)")
+        for i, k in enumerate(_arr(th.get("kb"))):
+            if L.is_obj(k): lit(k.get("f"), f"model.theory.kb[{i}].f")
+        for i, r in enumerate(_arr(th.get("rules"))):
+            if not L.is_obj(r): continue
+            for j, b in enumerate(_arr(r.get("body"))): lit(b, f"model.theory.rules[{i}].body[{j}]")
+            lit(r.get("head"), f"model.theory.rules[{i}].head")
+        for i, c in enumerate(_arr(th.get("contraries"))):
+            if L.is_obj(c): lit(c.get("u"), f"model.theory.contraries[{i}].u"); lit(c.get("v"), f"model.theory.contraries[{i}].v")
+        dups(th.get("rules"), "model.theory.rules")
 
     def out(o, at, E2, W2):
         T = OUT[o["kind"]].get(o["of"])
@@ -249,6 +277,7 @@ def check_spec(spec):
                     and not (sec == "forms" and isinstance(M.get("forms"), list) and len(M["forms"])):
                 E2("ref", at + ".of", f"needs model.{sec}")
         if o["of"] == "swing" and not (D and D.get("format") == "oxford"): E2("ref", at + ".of", "the vote swing is for the oxford format")
+        if o["of"] == "justified" and isinstance(o.get("concl"), str) and not LIT_RE.fullmatch(o["concl"]): E2("literal", at + ".concl", "needs a literal (an atom or ¬atom)")
         if o["of"] == "fallacy" and "node" not in o and "form" not in o: E2("value", at, "needs node or form")
         if o["of"] == "speaks" and "team" not in o and "speech" not in o: E2("value", at, "needs team or speech")
         if o["of"] in ("fallacies", "fallacy") and not MP and not (isinstance(M.get("forms"), list) and len(M["forms"])): E2("ref", at + ".of", "needs model.map or model.forms")

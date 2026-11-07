@@ -772,7 +772,7 @@
     if (codes.length) return { out: { valid: 0 }, codes, ARG: none };
     const copies = proc === 'moran' ? N : 2 * N, i0 = Math.round(p0 * copies);
     if (Math.abs(i0 / copies - p0) > 1e-9) codes.push('p0-rounded');
-    const rand = C.mulberry32(C.hash32('genetics-drift', seed >>> 0));
+    const rand = C.rng(seed >>> 0, 'genetics-drift');
     const meanP = new Array(G + 1).fill(0), meanH = new Array(G + 1).fill(0), keep = Math.min(reps, 20), trace = [];
     let fixed = 0, lost = 0, tfSum = 0;
     const finals = [];
@@ -912,7 +912,7 @@
     if (!(Ne > 0) || !(mu >= 0) || !(4 * Ne * mu <= 1000)) codes.push('param-range');
     if (!(reps >= 1) || reps * n > BUDGET) codes.push('budget');
     if (codes.length) return { out: { valid: 0 }, codes };
-    const rand = C.mulberry32(C.hash32('genetics-coalescent', seed >>> 0)), a = aN(n), theta = 4 * Ne * mu;
+    const rand = C.rng(seed >>> 0, 'genetics-coalescent'), a = aN(n), theta = 4 * Ne * mu;
     out.aN = a; out.eTmrca = 4 * Ne * (1 - 1 / n); out.eTotal = 4 * Ne * a; out.eS = theta * a;
     let sT = 0, sL = 0, sS = 0, sD = 0, nD = 0; const sfs = new Array(n).fill(0); let first = null;
     for (let r = 0; r < reps; r++) {
@@ -996,7 +996,7 @@
       if (!(N >= 4 && N <= 2000 && L >= 1 && L <= 200 && SG >= 1 && fr > 0 && fr <= 1 && hh > 0 && hh <= 1)) codes.push('sim-range');
       else if (N * L * SG > BUDGET) codes.push('budget');
       else {
-        const rand = C.mulberry32(C.hash32('genetics-quant', seed >>> 0));
+        const rand = C.rng(seed >>> 0, 'genetics-quant');
         let gen = []; for (let k = 0; k < N; k++) { const g = new Int8Array(2 * L); for (let j = 0; j < 2 * L; j++) g[j] = rand() < 0.5 ? 1 : 0; gen.push(g); }
         const gv = g => { let s2 = 0; for (let j = 0; j < g.length; j++) s2 += g[j]; return (s2 - L) / 2; };
         const VE = L / 8 * (1 - hh) / hh, sdE = Math.sqrt(VE);   // V_A at p = ½: 2pq·α² per locus = 1/8
@@ -1004,7 +1004,7 @@
         const stat = () => { const v = gen.map(gv), mn = v.reduce((x, y) => x + y, 0) / N; means.push(mn); vas.push(v.reduce((x, y) => x + (y - mn) * (y - mn), 0) / N); let c1 = 0; for (const g of gen) for (let j = 0; j < 2 * L; j++) c1 += g[j]; pfs.push(c1 / (2 * L * N)); };
         stat();
         for (let t2 = 0; t2 < SG; t2++) {
-          const ph = gen.map((g, k) => ({ k, z: gv(g) + sdE * C.gauss(rand) })).sort((x, y) => y.z - x.z || x.k - y.k);
+          const ph = gen.map((g, k) => ({ k, z: gv(g) + sdE * C.normal(rand) })).sort((x, y) => y.z - x.z || x.k - y.k);
           const nSel = Math.max(2, Math.round(fr * N)), par = ph.slice(0, nSel).map(x => gen[x.k]), nx = [];
           for (let k = 0; k < N; k++) {
             const a1 = Math.floor(rand() * nSel); let b1 = Math.floor(rand() * (nSel - 1)); if (b1 >= a1) b1++;

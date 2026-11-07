@@ -264,16 +264,32 @@
     return { engine, simEngine };
   }
   /** the Worker source of a library engine: NoemaExpr, this core, then the engine module; it sets self.noemaEngine */
-  function workerSource(moduleFn, global) {
-    const nx = NX() && typeof NX().source === 'function' ? NX().source() : '';
-    return nx + '\n;(' + noemaLibCoreModule.toString() + ')(self);\n;(' + moduleFn.toString() + ')(self);\nself.noemaEngine = self.' + global + '.simEngine;';
+  /** the simulation kernel NoemaSimKit (46_lib_simkit.js, docs/library/simkit.md): loaded by its script tag (index.html) or the
+      Worker source before the engines; under node (tests) a module that needs it loads it here. null when it cannot be had. */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  /** a seeded stream for one purpose (docs/library/simkit.md §2): the kernel's MRG32k3a stream (seed, name) — with its variates
+      r.normal, r.int, r.binomial… — and only where the kernel cannot be had the core's mulberry32 (FALLBACK, marked: deterministic too) */
+  function rng(seed, name) {
+    const K = kit();
+    if (K) return K.stream(seed >>> 0, String(name));
+    const r = mulberry32(hash32(String(name), seed >>> 0)); r.normal = (mu, sd) => (mu || 0) + (sd == null ? 1 : sd) * gauss(r); r.int = n => Math.min(n - 1, Math.floor(r() * n)); return r;
+  }
+  /** a standard normal from a stream of rng() (inversion: one uniform, CRN-friendly), or Box–Muller on a bare uniform function */
+  const normal = r => (r && typeof r.normal === 'function' ? r.normal(0, 1) : gauss(r));
+  /** opts.kit: the engine uses the kernel — its source goes in after the core */
+  function workerSource(moduleFn, global, opts) {
+    const nx = NX() && typeof NX().source === 'function' ? NX().source() : '', K = opts && opts.kit ? kit() : null;
+    return nx + '\n;(' + noemaLibCoreModule.toString() + ')(self);\n' + (K ? ';' + K.source() + '\n' : '') + ';(' + moduleFn.toString() + ')(self);\nself.noemaEngine = self.' + global + '.simEngine;';
   }
   const source = () => '(' + noemaLibCoreModule.toString() + ')(self);';
 
   root.NoemaLibCore = Object.freeze({
     MAX_POINTS, MAX_SCENE, ID_RE, NAME_RE, KEY_RE, RESERVED: Object.freeze(RESERVED.slice()), STATS: Object.freeze(STATS.slice()), ROLES: Object.freeze(ROLES.slice()),
     isObj, has, isNum, fail, checkKind, kindMsg, walk, problems, hasErrors, checkOutputs,
-    stats, thin, hash32, mulberry32, gauss, cx, scene, fitView, makeEngine, stepInstance, pickStep, copyData, workerSource, source,
+    stats, thin, hash32, mulberry32, gauss, cx, scene, fitView, makeEngine, stepInstance, pickStep, copyData, workerSource, source, kit, rng, normal,
   });
   /* i18n-ignore-end */
 })(typeof window !== 'undefined' ? window : globalThis);

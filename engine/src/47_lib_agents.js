@@ -862,7 +862,23 @@
      Multi-agent protocols
      ====================================================================================================================== */
   const numP = (v, d) => (v == null ? d : typeof v === 'number' ? v : C.cx(v)({}));
-  function contractNet(p, seed, env) {   // Smith 1980: cfp → propose / refuse → accept-proposal / reject-proposal → inform (done)
+  /** the min-cost assignment of n rows to distinct columns among m ≥ n (Kuhn 1955, Munkres 1957; potentials, O(n²m)) → its cost */
+  function hungarian(n, m, cost) {
+    const u = new Float64Array(n + 1), v = new Float64Array(m + 1), p = new Int32Array(m + 1), way = new Int32Array(m + 1);
+    for (let i = 1; i <= n; i++) {
+      p[0] = i; let j0 = 0; const minv = new Float64Array(m + 1).fill(Infinity), used = new Uint8Array(m + 1);
+      do {
+        used[j0] = 1; const i0 = p[j0]; let delta = Infinity, j1 = 0;
+        for (let j = 1; j <= m; j++) if (!used[j]) { const cur = cost(i0 - 1, j - 1) - u[i0] - v[j]; if (cur < minv[j]) { minv[j] = cur; way[j] = j0; } if (minv[j] < delta) { delta = minv[j]; j1 = j; } }
+        for (let j = 0; j <= m; j++) if (used[j]) { u[p[j]] += delta; v[j] -= delta; } else minv[j] -= delta;
+        j0 = j1;
+      } while (p[j0] !== 0);
+      do { const j1 = way[j0]; p[j0] = p[j1]; j0 = j1; } while (j0);
+    }
+    let total = 0; for (let j = 1; j <= m; j++) if (p[j]) total += cost(p[j] - 1, j - 1);
+    return total;
+  }
+  function contractNet(p, seed, env, codes) {   // Smith 1980: cfp → propose / refuse → accept-proposal / reject-proposal → inform (done)
     const r = SK().stream(seed, 'mas.contractnet'), T = p.tasks || (p.costs ? p.costs.length : 10), Cn = p.contractors || (p.costs ? p.costs[0].length : 5);
     const lo = typeof p.costMin === 'string' ? C.cx(p.costMin)(env) : (p.costMin != null ? p.costMin : 1), hi = typeof p.costMax === 'string' ? C.cx(p.costMax)(env) : (p.costMax != null ? p.costMax : 10);
     const lf = typeof p.loadFactor === 'string' ? C.cx(p.loadFactor)(env) : (p.loadFactor || 0), capC = p.capacity || Infinity;
@@ -877,9 +893,17 @@
       const [bc, c] = bids[0]; msgs['accept-proposal']++; msgs['reject-proposal'] += bids.length - 1; msgs.inform++;
       load[c]++; total += bc; winner.push(c);
     }
-    // the optimum without load effects: every task to its cheapest contractor (separable costs); with capacities, a min-cost
-    // assignment by successive shortest paths would be needed — reported for the uncapacitated case only
-    const optimal = Number.isFinite(capC) || lf ? NaN : cost.reduce((s, row) => s + Math.min(...row), 0);
+    // the optimum: without capacity or load effects every task goes to its cheapest contractor (separable costs); otherwise the
+    // min-cost assignment of tasks to contractor slots (slot k of contractor c costs cost·(1 + lf·k), increasing, so the slots fill
+    // in order) by the Hungarian algorithm (Kuhn 1955; O(n²m), within a work bound, else NaN and code budget)
+    let optimal;
+    if (!Number.isFinite(capC) && !lf) optimal = cost.reduce((s, row) => s + Math.min(...row), 0);
+    else {
+      const slots = Math.min(Number.isFinite(capC) ? capC : T, T), m = Cn * slots;
+      if (m < T) optimal = NaN;   // not every task can be placed
+      else if (T * T * m > 4e7) { optimal = NaN; if (codes) codes.code('budget'); }
+      else optimal = hungarian(T, m, (t, j) => cost[t][j % Cn] * (1 + lf * Math.floor(j / Cn)));
+    }
     const messages = Object.values(msgs).reduce((a, b) => a + b, 0);
     return { scalar: { totalCost: total, optimalCost: optimal, makespan: Math.max(...load), messages, refusals: msgs.refuse, unassigned }, series: { load, winner }, msgs };
   }
@@ -1117,7 +1141,7 @@
     const p = M.proto, codes = SK().codes(FATAL), out = {};
     let r = null;
     try {
-      if (p.kind === 'contractnet') r = contractNet(p, seed, env);
+      if (p.kind === 'contractnet') r = contractNet(p, seed, env, codes);
       else if (p.kind === 'auction') r = auction(p, seed, env);
       else if (p.kind === 'negotiation') r = negotiation(p, seed, env, codes);
       else if (p.kind === 'coalition') r = coalition(p, codes);

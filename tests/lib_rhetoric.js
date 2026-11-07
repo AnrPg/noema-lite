@@ -226,6 +226,41 @@ ok(!!(L && L.afSolve && L.parse && L.rowsOf && L.evalProp && L.syllogism && L.so
   near(r.out.r14, 0.6 * Math.exp(-1), 1e-12, 'inoculation (McGuire 1961; decay after about two weeks, Banas & Rains 2010): r(14) = r0/e');
   ok(r.out.r0 === 0.6 && r.out.r20 === 0.6 && Math.abs(r.out.a - (1 - 0.6 / Math.E)) < 1e-12 && r.out.t.length === 200 && r.out.rr.length === 200, 'a booster at day 20 restores the resistance; an attack then moves the attitude by A·(1 − r)'); }
 
+// ---- 7b. sound figures (phonetic keys), trope candidates (cues), Greek synizesis, bipolar and ASPIC+ through logic@1 ----
+{ const so = (id, t) => sc(id, 'sound', { speech: 's', type: t }), tr = (id, t) => sc(id, 'trope', { speech: 's', type: t });
+  const R1 = (text, lang, outs, extra) => run(Object.assign({ lang, speeches: [{ id: 's', text }] }, extra || {}), outs);
+  ok(X.phon('nation', 'en') === X.phon('station', 'en').slice(1) && X.rimeOf(X.phon('light', 'en')) === X.rimeOf(X.phon('night', 'en')) && X.phon('knight', 'en') === X.phon('night', 'en'),
+    'phonetic keys (en; Carney 1994): station = s + nation, light / night rhyme, knight = night (silent k, gh)');
+  ok(X.phon('παιδιά', 'el') === 'peDja' && X.phon('αύριο', 'el') === 'avrjo' && X.phon('ευχή', 'el') === 'efxi' && X.phon('μπαμπάς', 'el') === 'babas',
+    'phonetic keys (el; Holton et al. 1997 §1.1–1.4): αι = e, synizesis ι → j, αυ/ευ = av/ef by the next sound, μπ = b');
+  ok(X.phon('chanson', 'fr') === 'SAsO' && X.phon('beau', 'fr') === 'bo' && X.phon('хлеб', 'ru') === 'xlep' && X.phon('Tag', 'de') === 'tak' && X.phon('traduttore', 'it') === 'tradutore',
+    'phonetic keys: French nasals (Tranel 1987), final devoicing in Russian and German, Italian geminates as one');
+  const tw = R1('Twinkle, twinkle, little star, how I wonder what you are.', 'en', [so('r', 'rhyme')]), rn = R1('The rain in Spain stays mainly in the plain.', 'en', [so('a', 'assonance'), so('r', 'rhyme')]);
+  ok(tw.out.r === 1 && rn.out.a === 1 && rn.out.r === 0, 'rhyme: star / are (Taylor 1806); assonance: the rain in Spain stays mainly in the plain (Lerner & Loewe 1956), no rhyme inside one clause');
+  ok(R1('Traduttore, traditore.', 'it', [so('p', 'paronomasia')]).out.p === 1 && R1('Polyptoton: love loving lovers.', 'en', [so('p', 'paronomasia')]).out.p === 0,
+    'paronomasia: traduttore, traditore (one edit apart); words of one stem are polyptoton, not paronomasia');
+  ok(R1('Mike likes his bike and kite.', 'en', [so('c', 'consonance')]).out.c === 1, 'consonance: the final k sound of like, bike, kite (Mike starts with m: not alliteration)');
+  const t1 = R1('My love is like a red, red rose. I like tea. Life is the art of drawing without an eraser. He is, so to speak, a lion. Thanks to our "experts" the bridge fell. Oh great, another meeting?!', 'en',
+    [tr('s', 'simile'), tr('m', 'metaphor'), tr('i', 'irony'), sc('at', 'tropeAt', { speech: 's', type: 'simile', sentence: 2 }), { id: 'p', kind: 'scene', of: 'tropes', speech: 's' }]);
+  ok(t1.out.s === 1 && t1.out.m === 2 && t1.out.i === 3 && t1.out.at === 0 && has(t1, 's', 'candidate') && t1.out.p.items.some(it => /simile: like/.test(it.s || '')),
+    'trope candidates (Burns 1794; Goatly 1997 signalling; Brooke-Rose 1958 "A is the B of C"; Attardo 2000 markers): 1 simile (not "I like"), 2 metaphors, 3 irony cues, each with its cue and the code candidate');
+  ok(R1('Η ζωή είναι σαν ένα ταξίδι. Ο δήθεν φίλος του έφυγε.', 'el', [tr('s', 'simile'), tr('i', 'irony')]).out.s === 1 && R1('Er kämpft wie ein Löwe. Der sogenannte Experte schwieg.', 'de', [tr('s', 'simile'), tr('i', 'irony')]).out.i === 1,
+    'trope cues in Greek (σαν, δήθεν) and German (wie, sogenannte)');
+  const sy = t => R1(t, 'el', [sc('a', 'syllables')], { synizesis: true }).out.a, sy0 = t => R1(t, 'el', [sc('a', 'syllables')]).out.a;
+  ok(sy('παιδιά') === 2 && sy('ποιος') === 1 && sy('ήλιος') === 2 && sy('αλήθεια') === 3 && sy('Μαρία') === 3 && sy('προϊόν') === 3 && sy0('παιδιά') === 3,
+    'Greek synizesis (model.synizesis; Holton et al. 1997 §1.4.2): παιδιά 2, ποιος 1, ήλιος 2, αλήθεια 3; Μαρία, προϊόν keep the hiatus; off by default (παιδιά 3)');
+  // bipolar on the map (support edges + attacks) through logic@1
+  const mp = { nodes: [{ id: 'a' }, { id: 'b' }, { id: 'c' }], edges: [{ from: 'a', to: 'b', kind: 'support' }, { from: 'b', to: 'c', kind: 'attack' }] };
+  const bp = run({ map: mp }, [sc('k', 'complexAttacks'), sc('l', 'bipolarLabel', { node: 'c' }), sc('d', 'label', { node: 'c' }), sc('q', 'bipolarAccepted', { node: 'a', support: 'deductive' })]);
+  ok(bp.out.k === 1 && bp.out.l === 0 && bp.out.d === 0 && bp.out.q === 1, 'bipolar (Cayrol & Lagasquie-Schiex 2005) via logic@1: a ⇒ b → c adds the supported attack a → c');
+  const th = { kb: [{ f: 'snores', rank: 0 }, { f: 'professor', rank: 1 }], rules: [{ id: 'd1', body: ['snores'], head: 'misbehaves', rank: 0 }, { id: 'd2', body: ['misbehaves'], head: 'accessDenied', rank: 2 }, { id: 'd3', body: ['professor'], head: '¬accessDenied', rank: 1 }] };
+  const as = l => run({ theory: Object.assign({ link: l }, th) }, [sc('n', 'aspicArgs'), sc('d', 'aspicDefeats'), sc('j', 'justified', { concl: 'accessDenied' }), sc('p', 'postulates'), { id: 'g', kind: 'scene', of: 'aspic' }]).out;
+  ok(as('last').n === 5 && as('last').d === 1 && as('last').j === 1 && as('weakest').j === 0 && as('last').p === 1 && as('last').g.items.length === 7, 'ASPIC+ via logic@1 (Modgil & Prakken 2014 Ex. 3.23): last-link justifies accessDenied, weakest-link does not; postulates hold');
+  const E1 = s => X.checkSpec(s).filter(p => p.level === 'error').map(p => p.code).join();
+  ok(E1({ model: { theory: { kb: [{ f: 'p & q' }] } }, outputs: [sc('j', 'justified', { concl: 'p -> q' })] }) === 'literal,literal' && E1({ model: {}, outputs: [sc('j', 'aspicArgs')] }) === 'ref'
+    && E1({ model: { speeches: [{ id: 's', text: 'x' }] }, outputs: [sc('t', 'trope', { speech: 's', type: 'hyperbole' })] }) === 'enum', 'checks: ASPIC+ literals (literal), aspic outputs need model.theory (ref), trope types (enum)');
+}
+
 // ---- 8. the checks: codes, and the same problems in Python on every fixture ----
 const codes = s => X.checkSpec(s).filter(p => p.level === 'error').map(p => p.code + '@' + p.path);
 ok(codes({ model: { speeches: [{ id: 'a' }, { id: 'a' }] }, outputs: [] }).includes('dup@model.speeches[1].id'), 'check: duplicate ids');
