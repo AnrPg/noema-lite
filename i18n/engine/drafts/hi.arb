@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "अवशिष्ट उत्तराधिकारी के बिना शेष",
   "engine.author.f.lib.division": "विभाजन नियम",
   "engine.author.f.lib.penalty": "दंड",
-  "engine.author.f.lib.day": "दिन"
+  "engine.author.f.lib.day": "दिन",
+  "engine.author.f.lib.concl": "निष्कर्ष",
+  "engine.author.f.lib.theory": "तर्क सिद्धांत",
+  "engine.author.f.lib.ruleCodes": "नैतिक संहिताएँ",
+  "engine.author.f.lib.streams": "उपयोगिता धाराएँ",
+  "engine.author.f.lib.cycle": "दोहराने वाला भाग",
+  "engine.author.f.lib.ubuntu": "उबुंटु मामले",
+  "engine.author.f.lib.effects": "प्रभाव",
+  "engine.author.f.lib.who": "कौन",
+  "engine.author.f.lib.identity": "साझा पहचान",
+  "engine.author.f.lib.solidarity": "एकजुटता",
+  "engine.author.f.lib.byAgent": "कर्ता का अपना संबंध",
+  "engine.author.f.lib.stream": "धारा",
+  "engine.author.f.lib.option": "विकल्प"
 }

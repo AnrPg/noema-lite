@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "残余相続人のない残余",
   "engine.author.f.lib.division": "分割規則",
   "engine.author.f.lib.penalty": "刑罰",
-  "engine.author.f.lib.day": "日"
+  "engine.author.f.lib.day": "日",
+  "engine.author.f.lib.concl": "結論",
+  "engine.author.f.lib.theory": "議論理論",
+  "engine.author.f.lib.ruleCodes": "道徳規範",
+  "engine.author.f.lib.streams": "効用の流れ",
+  "engine.author.f.lib.cycle": "繰り返し部分",
+  "engine.author.f.lib.ubuntu": "ウブントゥの事例",
+  "engine.author.f.lib.effects": "影響",
+  "engine.author.f.lib.who": "誰",
+  "engine.author.f.lib.identity": "共有されたアイデンティティ",
+  "engine.author.f.lib.solidarity": "連帯",
+  "engine.author.f.lib.byAgent": "行為者自身の関係",
+  "engine.author.f.lib.stream": "流れ",
+  "engine.author.f.lib.option": "選択肢"
 }

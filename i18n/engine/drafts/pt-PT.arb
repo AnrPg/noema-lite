@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "Remanescente sem herdeiro residual",
   "engine.author.f.lib.division": "Regra de partilha",
   "engine.author.f.lib.penalty": "Pena",
-  "engine.author.f.lib.day": "Dia"
+  "engine.author.f.lib.day": "Dia",
+  "engine.author.f.lib.concl": "Conclusão",
+  "engine.author.f.lib.theory": "Teoria da argumentação",
+  "engine.author.f.lib.ruleCodes": "Códigos morais",
+  "engine.author.f.lib.streams": "Fluxos de utilidade",
+  "engine.author.f.lib.cycle": "Parte que se repete",
+  "engine.author.f.lib.ubuntu": "Casos ubuntu",
+  "engine.author.f.lib.effects": "Efeitos",
+  "engine.author.f.lib.who": "Quem",
+  "engine.author.f.lib.identity": "Identidade partilhada",
+  "engine.author.f.lib.solidarity": "Solidariedade",
+  "engine.author.f.lib.byAgent": "A relação do próprio agente",
+  "engine.author.f.lib.stream": "Fluxo",
+  "engine.author.f.lib.option": "Opção"
 }

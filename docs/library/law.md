@@ -136,13 +136,15 @@ Each table lists only that task's fields. Every field belongs to one table, `MOD
 | `aggregate` | `element` (default) or `product` |
 | `query` | an issue id |
 
-**cases** — `factors` and `cases` are required.
+**cases** — `cases` and one of `factors` or `dimensions` are required.
 
 | field | meaning |
 |---|---|
 | `factors[]` | `{id, side: p \| d, label}` |
-| `cases[]` | `{id, factors, outcome: p \| d, reason?, label}` |
+| `dimensions[]` | `{id, side: p \| d, label}` (≤ 32): a dimension with a magnitude; `side` is the side it favours more as the value grows |
+| `cases[]` | `{id, factors, values: [{dim, v}], outcome: p \| d, reason?, label}` |
 | `facts` / `toggles` | the current fact situation, as factor ids |
+| `values[]` | `{dim, v: expr}`: the current situation's magnitudes |
 | `side` | the side argued for (default p) |
 | `focus` | the case the per-case scalars read (default: the best case) |
 | `reasoning` | `result` (default) or `reason` |
@@ -281,7 +283,7 @@ Each table lists only that task's fields. Every field belongs to one table, `MOD
 
 ### 2.1 `rules` — defeasible logic
 
-The engine uses ambiguity-blocking defeasible logic with team defeat (Antoniou, Billington, Governatori & Maher 2001). It has
+By default the engine uses ambiguity-blocking defeasible logic with team defeat (Antoniou, Billington, Governatori & Maher 2001). It has
 four tags:
 
 - **+Δq**: q is a fact, or some strict rule for q has every body literal +Δ.
@@ -303,11 +305,25 @@ rule's `rank` and `issued`.
 - 0: it is blocked (a body literal is −∂);
 - ½: undecided.
 
+**Ambiguity propagation** (`variant: propagating`; Antoniou, Billington, Governatori, Maher & Rock 2000). The support tags:
+- **+Σq**: +Δq, or some strict or defeasible rule r for q has every body literal +Σ and every rule s for ∼q is discarded or
+  not superior to r;
+- **−Σq**: −Δq, and every rule for q has a body literal −Σ or is beaten by an applicable s for ∼q with s > r.
+
+In +∂ and −∂ an attacker then counts as soon as it is *supported* (every body literal +Σ), and is discarded only when it is
+unsupported. An ambiguous literal so spreads its ambiguity: with Quaker and Republican, blocking proves ¬antimilitary, and
+propagating proves neither. The scalar `supported` is 1 when `query` is +Σ (NaN under blocking).
+
+**Failure by looping** (`loops: fail`; Maier & Nute 2006, Billington 2008, the well-founded defeasible logics). After each
+fixpoint the greatest unfounded set of the literals still undecided is refuted (−Δ, −∂, −Σ): those with no rule whose body
+avoids both the refuted literals and the set itself. Then the fixpoint runs again, until nothing changes. A positive loop
+p ⇐ q ⇐ p so gives −∂p (code `loop`), and a rule with the exception p applies.
+
 **Codes.**
 - `inconsistent`: q and ∼q are both +Δ.
 - `unresolved`: two applicable rules conflict, neither is superior, and nothing is proved.
 - `undecided`: some literal is neither +∂ nor −∂. This happens with positive loops, a known limit of the basic proof theory
-  (Maher 2001).
+  (Maher 2001). With `loops: fail` it is resolved instead (code `loop`).
 
 **The scene** shows one node per rule (ok fires, bad defeated, muted blocked, warn undecided) and arrows from a superior rule to
 the rule it beats.
@@ -349,8 +365,12 @@ uses the elitist set ordering (∃X ∈ S1 ∀Y ∈ S2: X < Y; a strict, firm ar
 | `cause` | correlation intervening strength |
 | `commitment` | committed retracted |
 
-**Limits.** Closure under transposition is not computed: an author who needs the rationality postulates writes the
-contrapositives as rules.
+**Closure under transposition** (`closure: transposition`; Caminada & Amgoud 2007, Modgil & Prakken 2013 §3.2). For every
+strict rule φ1 … φn → ψ and each i, the rule φ1 … ∼ψ … φn → ∼φi is added (strict, with the rule's rank; its id is
+`<id>^<i>`), once for each distinct body and head. This restores the rationality postulates of direct and indirect
+consistency. In Caminada & Amgoud's example (wr ⇒ m, go ⇒ b, m → hs, b → ¬hs) the plain theory accepts m, b, hs and ¬hs
+together; with the closure, none of them. One pass is the whole closure: transposing a transposed rule gives back the
+rule or another of its n transpositions.
 
 ### 2.3 `carneades`
 
@@ -400,6 +420,25 @@ Every position reduces to one fact with a value:
 - **Counts.** `positions` is the number of descriptions (2 per fact value), and `derived` the number of those that were not
   stated.
 
+**Lindahl's types** (Lindahl 1977, *Position and Change*; Kanger 1972; Sergot 2013). About an atom p an agent x has three
+exhaustive alternatives: Do(x, p), Do(x, ¬p) and Pass(x, p) (doing neither). A duty of x (towards anyone, correlatives
+included) to see to p forbids Do ¬p and Pass; to ¬p forbids Do p and Pass; a passive duty (`passive: true`) forbids both
+doings. The one-agent type is the set of permitted alternatives (`lindahl`, and `lindahlOther` for `other`), numbered in this
+engine's order:
+
+| type | permitted | type | permitted |
+|---|---|---|---|
+| 1 | Do p, Do ¬p, Pass | 5 | Do ¬p, Pass |
+| 2 | Do p, Do ¬p | 6 | Do ¬p |
+| 3 | Do p, Pass | 7 | Pass |
+| 4 | Do p | 0 | none: code `conflict` |
+
+With two agents there are 7 possible joint alternatives (Do(x, p) with Do(y, ¬p), and its mirror, are impossible), in the
+order (x, y) = (Do p, Do p), (Do p, Pass), (Do ¬p, Do ¬p), (Do ¬p, Pass), (Pass, Do p), (Pass, Do ¬p), (Pass, Pass). A joint
+alternative is permitted when both its parts are. `joint` is their bit set (bit i for the i-th; the series `joint` lists
+them) and `jointCount` how many; none gives code `conflict`. The engine reports the joint permission set, not Lindahl's
+classification into his 26 two-agent types, which are a partition of these sets by symmetry.
+
 ### 2.5 `proof`
 
 **The probability of an issue.**
@@ -442,7 +481,12 @@ Sources: Ashley 1990, Aleven 2003, Horty 2011.
 
 **Precedential constraint.** A precedent c for s **forces** s in a situation F when:
 - its reason R ⊆ F (in the result model, R = all of c's pro-s factors; in the reason model, its `reason`); and
-- every factor of F for the other side is in c.
+- every factor of F for the other side is in c; and
+- on every dimension both c and F have a value, F is at least as favourable to c's winner (Horty 2019, "Reasoning with
+  dimensions and magnitudes", AI & Law 27:309; Prakken 2021): for a dimension favouring s, v(F) ≥ v(c) when c was won by s,
+  else v(F) ≤ v(c).
+
+A dimension both have counts in `shared(c)`, and one where F is weaker for c's winner counts as a distinction.
 
 **The scalars.**
 - `forced`: 1 (π), −1 (δ) or 0. Both together gives code `inconsistent`.
@@ -569,8 +613,11 @@ Events are processed in order of their effect.
 **Voting power.**
 - By enumeration of all 2ⁿ coalitions (n ≤ 20): normalised Banzhaf and Shapley–Shubik, for any game, double majorities
   included.
-- For more voters, with only a quota and integer weights (Σ ≤ 100 000): Banzhaf by generating functions. Shapley–Shubik then
-  gives NaN with code `budget`.
+- For more voters, with integer weights and no population quota: both exactly, by generating functions over (coalition size,
+  weight) in BigInt (Brams & Affuso 1976; Bilbao, Fernández, Jiménez Losada & López 2000, TOP 8:191). The counts for all voters
+  are built once, and each voter is removed by deconvolution, C₋ᵢ[k][s] = C[k][s] − C₋ᵢ[k−1][s−wᵢ]. A swing of i at size k
+  weighs k!(n−k−1)!/n! for Shapley–Shubik. A member-count quota is carried by the coalition size. The cost is about 2n²Σw; above
+  4·10⁶ (e.g. 100 voters of total weight 400) it gives NaN with code `budget`, as do non-integer weights or a population quota.
 
 ### 2.13 `citation`
 
@@ -620,10 +667,10 @@ in that list; no match gives code `no-match`.
 
 | task | scalars (`flag` everywhere) | `at` names | series |
 |---|---|---|---|
-| rules | holds definite refuted undecided fired defeated blocked conclusions status | status: a rule | status (per rule: 2/1/0/½) |
+| rules | holds definite refuted undecided supported fired defeated blocked conclusions status | status: a rule | status (per rule: 2/1/0/½) |
 | aspic | accepted credulous arguments attacks defeats extensions inCount status | status: a rule or scheme (1 if an argument topped by it is in) | labels (per argument) |
 | carneades | acceptable negation applicable arguments status | status: an argument | applicable |
-| hohfeld | holds contradictions conflicts positions derived | — | — |
+| hohfeld | holds contradictions conflicts positions derived lindahl lindahlOther joint jointCount | — | joint (the 7 joint alternatives, 1 permitted) |
 | proof | established claim posterior threshold product winner | established, posterior, threshold, winner: an issue (default `query`, else the first) | posteriors |
 | cases | forced permissible consistent onPoint best mostOnPoint shared distinctions binding | shared, distinctions, binding: a case (default `focus`) | shared, binding |
 | deadline | end endY endM endD weekday days businessDays extended expired remaining tolled longstopEnd | — | — |
@@ -650,11 +697,12 @@ Every task has the scene `drawing`. The roles are:
 |---|---|---|
 | `inconsistent` | rules, aspic, cases | strict contradictions; precedents that force both outcomes; an inconsistent case base |
 | `undecided` | rules | a literal neither +∂ nor −∂ (a positive loop) |
+| `loop` | rules | `loops: fail` refuted an unfounded set (a positive loop) |
 | `unresolved` | rules, obligations | a conflict that no priority settles |
-| `budget` | aspic, vote | 400 arguments, or 2·10⁵ search nodes in `afSolve`; Shapley–Shubik beyond 20 voters |
+| `budget` | aspic, vote | 400 arguments, or 2·10⁵ search nodes in `afSolve`; power indices beyond 20 voters over the generating-function budget |
 | `no-stable` | aspic | no stable extension |
 | `weight` | carneades | a weight outside 0–1 was clamped |
-| `contradiction`, `conflict` | hohfeld (and `conflict` in obligations) | opposites stated together; a duty to do and not to do; norms in conflict |
+| `contradiction`, `conflict` | hohfeld (and `conflict` in obligations) | opposites stated together; a duty to do and not to do (or a Lindahl type with no alternative left); norms in conflict |
 | `conjunction`, `shifted`, `probability` | proof | element by element ≠ the product; a presumption applied; a probability outside 0–1 |
 | `no-precedent` | cases | no case on point |
 | `month-end`, `rolled`, `tolled`, `longstop`, `expired` | deadline | as in §2.7 |
@@ -676,20 +724,17 @@ Every task has the scene `drawing`. The roles are:
 | rules, sup | 200, 400 | `size` (check) |
 | ASPIC+ arguments | 400; the rule combinations tried per rule ≤ 2000; 50 passes | `budget` |
 | Carneades arguments | 100, acyclic | `size`, `cycle` (check) |
-| issues, factors, cases | 32, 64, 100 | `size` |
+| issues, factors, dimensions, cases | 32, 64, 32, 100 | `size` |
 | dates | 1600–2400; periods n ≤ 100 000; a business-day scan ≤ 20 000 days; a roll ≤ 400 days; ≤ 32 tolling intervals | `date` (check), `value` |
 | obligations | 200 norms; 2000 steps (`horizon`) | `size`, `trace-truncated` |
-| voters | 64; exact indices by enumeration for ≤ 20; Banzhaf by generating functions for integer weights (Σ ≤ 100 000) | `budget` |
+| voters | 64; exact indices by enumeration for ≤ 20, by BigInt generating functions above (integer weights, n²·Σw ≤ 4·10⁶) | `budget` |
 | citation | 200 characters; templates ≤ 200 characters and ≤ 12 placeholders | `size`, `pattern` |
 | scenes, series | 2000 items or points | `scene-truncated`, `series-truncated` |
 
 **What the engine does not decide.**
 - **Legal meaning.** Whether something is a "vehicle" is the author's rule, not the engine's.
 - **Probability thresholds** are conventions, not law (civil-law systems use the judge's conviction, §286 ZPO). They are data.
-- **Defeasible logic** is the basic, ambiguity-blocking variant. Well-founded loop handling and ambiguity propagation are not
-  built.
-- **ASPIC+** does not close the rules under transposition.
-- **Lindahl's** 7 one-agent and 26 two-agent types, and HYPO's magnitude dimensions, are not modelled.
+- **Lindahl's** 26 two-agent types are reported as their joint permission set, not by Lindahl's own numbering.
 
 **Determinism.** Every loop is bounded, there is no randomness, and parts are visited in the order the spec lists them. A checked
 spec never throws: a run that cannot be computed gives NaN and a code.
@@ -712,6 +757,12 @@ spec never throws: a run that cannot be computed gives NaN and a code.
 | Tweety with r2 > r1; the vehicles in the park | Antoniou et al. 2001; Hart 1958 |
 | Nixon diamond: grounded rejects, preferred credulous | Dung 1995; Modgil & Prakken 2013 |
 | W = 2 (serious vs moderate); W = 1 stalemate | Alexy 2003 |
+| ambiguity blocking proves ¬antimilitary; propagating proves neither, both supported | Antoniou et al. 2000 |
+| a positive loop is refuted by failure by looping | Maier & Nute 2006; Billington 2008 |
+| married / bachelor: m, b, hs, ¬hs all accepted without transposition, none with it | Caminada & Amgoud 2007 |
+| Lindahl types T4, T6, T7, and 0 for a conflict of duties | Lindahl 1977 |
+| a precedent binds a fortiori on a dimension only at an equal or stronger magnitude | Horty 2019 |
+| 20 voters: generating functions = enumeration; 50 equal voters: 1/50 | Bilbao et al. 2000 |
 | ECLI:EU:C:2014:317; [2001] UKHL 15; 347 U.S. 483 (1954); BVerfGE 86, 1 | Council conclusions 2011/C 127/01; Bluebook |
 
 ## 7. API for other engines and tests
@@ -722,7 +773,8 @@ spec never throws: a run that cannot be computed gives NaN and a code.
 - `table` (the author's form: `model`, `outputs`, `fields: {code, at, name}`);
 - the data: `TASKS`, `TASK_OUT`, `AT_OF`, `CODES`, `REQ`, `MODEL_T`, `SCHEMES`, `STD_P`, `LEVEL`, `CITE_KINDS`;
 - the helpers: `parseLit`, `dayOf`, `civilFromDays`, `daysFromCivil`, `weekdayOf`, `addMonths`, `template`, `buildTheory`,
-  `defeasible`, `hohCanon`, `powerIndices`, `banzhafGF`, `cea`, `cel`, `carneadesCycle`.
+  `defeasible` (with `{variant, loops}`), `hohCanon`, `powerIndices`, `banzhafGF`, `weightedGF` (exact Banzhaf and
+  Shapley–Shubik), `cea`, `cel`, `carneadesCycle`.
 
 The engine has no dependency besides logic@1, which must load first (47 before 48).
 
@@ -731,13 +783,13 @@ The engine has no dependency besides logic@1, which must load first (47 before 4
 Adams v Lindsell (1818) 1 B & Ald 681 · Aleven 2003 (AIJ 150:183) · Alchourrón & Makinson 1981 · Alexy 2003 (Ratio Juris
 16:433), 2007 · ALI Model Penal Code 1962 · Allen 1986 (Boston U L Rev 66:401) · Antoniou, Billington, Governatori & Maher 2001
 (ACM TOCL 2:255) · Ashley 1990 (*Modeling Legal Argument*) · Aumann & Maschler 1985 (J Econ Theory 36:195) · Banzhaf 1965
-(Rutgers L Rev 19:317) · Bank Mellat v HM Treasury (No 2) [2013] UKSC 39 · BGB §§130, 187–193 · Brams & Affuso 1976 · Byrne v Van
-Tienhoven (1880) 5 CPD 344 · Cavendish v Makdessi [2015] UKSC 67 · CISG 1980 Arts 16, 18, 19, 74, 76 · Cohen 1977 (*The Probable
+(Rutgers L Rev 19:317) · Bilbao, Fernández, Jiménez Losada & López 2000 (TOP 8:191) · Billington 2008 (JELIA) · Bank Mellat v HM Treasury (No 2) [2013] UKSC 39 · BGB §§130, 187–193 · Brams & Affuso 1976 · Byrne v Van
+Tienhoven (1880) 5 CPD 344 · Caminada & Amgoud 2007 (AIJ 171:286) · Cavendish v Makdessi [2015] UKSC 67 · CISG 1980 Arts 16, 18, 19, 74, 76 · Cohen 1977 (*The Probable
 and the Provable*) · Coulson 1971 (*Succession in the Muslim Family*) · Council conclusions 2011/C 127/01 (ECLI) · Dung 1995 (AIJ
 77:321) · EU Regulation 1182/71 · Felsenthal & Machover 1998 · FRCP 6(a) · Gordon, Prakken & Walton 2007 (AIJ 171:875) ·
 Governatori 2005 (IJCIS 14:181) · Hadley v Baxendale (1854) 9 Exch 341 · Hart 1958 (Harvard L Rev 71:593) · Hinnant 2013
-(chrono date algorithms) · Hohfeld 1913, 1917 · Horty 2011 (Legal Theory 17:1) · Kaplan 1968 (Stanford L Rev 20:1065) · Kanger
-1972 · Lindahl 1977 · Maher 2001 · McCauliff 1982 (Vanderbilt L Rev 35:1293) · McDonnell Douglas v Green, 411 U.S. 792 (1973) ·
+(chrono date algorithms) · Hohfeld 1913, 1917 · Horty 2011 (Legal Theory 17:1), 2019 (AI & Law 27:309) · Kaplan 1968 (Stanford L Rev 20:1065) · Kanger
+1972 · Lindahl 1977 · Maher 2001 · Maier & Nute 2006 (JELIA) · McCauliff 1982 (Vanderbilt L Rev 35:1293) · McDonnell Douglas v Green, 411 U.S. 792 (1973) ·
 Modgil & Prakken 2013 (AIJ 195:361) · Morgan 1933 · Nute 1994 · Powers 1986 (*Studies in Qur'an and Hadith*) · Prakken 2010 (Arg &
 Comp 1:93), 2021 (AI & Law 29:559) · Prakken & Sartor 1996, 1997 · Prakken & Sergot 1996 · Qurʾān 4:11–12, 4:176 · R v Oakes
 [1986] 1 SCR 103 · Restatement (Second) of Contracts §§40, 42, 70, 344–356, 371 · Robert's Rules of Order 12th ed. · Sergot 2013

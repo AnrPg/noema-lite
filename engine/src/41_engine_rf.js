@@ -122,7 +122,22 @@
     return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   }
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
-  const gauss = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
+  const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  /** the simulation kernel (NoemaSimKit, 46_lib_simkit.js): MRG32k3a streams (one per purpose: the shadowing draw, the sweep), normals
+      by inversion (AS241), roots by Brent 1973. FALLBACK without the kernel (marked): mulberry32 + Box–Muller, bisection */
+  function kit() {
+    if (!root.NoemaSimKit && typeof require === 'function' && typeof __dirname === 'string') { try { require(require('path').join(__dirname, '46_lib_simkit.js')); } catch (e) { /* no kernel */ } }
+    return root.NoemaSimKit || null;
+  }
+  const streamOf = (name, seed) => { const K = kit(); return K ? K.stream(seed >>> 0, 'rf:' + name) : mulberry32(hash32(name, seed)); };
+  /** a root of g on [lo, hi] (g(lo) > 0 ≥ g(hi)): the kernel's Brent, else bisection */
+  function rootOf(g, lo, hi, tol) {
+    const K = kit();
+    if (K) { const a = g(lo), b = g(hi); if (a > 0 && b <= 0) { const r = K.brent(g, lo, hi, tol, a, b); if (Number.isFinite(r)) return r; } }
+    for (let i = 0; i < MAX_ITER && hi - lo > tol; i++) { const mid = (lo + hi) / 2; if (g(mid) > 0) lo = mid; else hi = mid; }
+    return (lo + hi) / 2;
+  }
 
   // ---- the link format: a table the checker walks (the same table in tools/rf.py) ----
   const MODELS = ['fspl', 'two-ray', 'log-distance', 'hata', 'indoor'], MODS = ['bpsk', 'qpsk', 'fsk', 'lora', 'ble', 'wifi'];
@@ -276,9 +291,8 @@
 
   // ---- the simulator ----
   function reqEbn0(mod, o) {   // Eb/N0 (linear) where the BER is 1e-3 (bisection on a monotone curve)
-    let lo = 1e-3, hi = 1e4;
-    for (let i = 0; i < 100; i++) { const mid = Math.sqrt(lo * hi); if (ber(mod, mid, o) > 1e-3) lo = mid; else hi = mid; }
-    return Math.sqrt(lo * hi);
+    // on log Eb/N0: log BER − log 1e-3 (Brent; the curve falls)
+    return Math.exp(rootOf(u => Math.log(ber(mod, Math.exp(u), o)) - Math.log(1e-3), Math.log(1e-3), Math.log(1e4), 1e-13));
   }
   function compileLink(link) {
     const L = norm(link), p = L.path, f = L.f, q = L.radio;
@@ -318,9 +332,9 @@
     const [lo0, hi0] = bounds(k.L), ok = d => k.prxOf(k.plMedian(d)) - k.sens >= k.L.fadeMargin;
     if (!ok(lo0)) return { range: 0, code: 'range-none' };
     if (ok(hi0)) return { range: hi0, code: 'range-open' };
-    let lo = Math.log(lo0), hi = Math.log(hi0);
-    for (let i = 0; i < MAX_ITER && hi - lo > 1e-12; i++) { const mid = (lo + hi) / 2; if (ok(Math.exp(mid))) lo = mid; else hi = mid; }
-    return { range: Math.exp(lo) };
+    // the margin over the fade margin on log d, made > 0 where ok() holds so the root is ok()'s edge (Brent)
+    const g = u => { const d = Math.exp(u), m = k.prxOf(k.plMedian(d)) - k.sens - k.L.fadeMargin; return ok(d) ? Math.max(m, 1e-300) : Math.min(m, 0); };
+    return { range: Math.exp(rootOf(g, Math.log(lo0), Math.log(hi0), 1e-12)) };
   }
 
   /** create(link, {seed}) → {run(), at(d), range(), ...}; throws code 'invalid' (with .problems) on errors of check() */
@@ -336,7 +350,7 @@
     }
     function run() {
       const codes = [], d = L.d, p = L.path, q = L.radio;
-      const shadow = p.sigma > 0 ? p.sigma * gauss(mulberry32(hash32('shadow', seed))) : 0;
+      const shadow = p.sigma > 0 ? p.sigma * gauss(streamOf('shadow', seed)) : 0;
       const a = at(d, shadow), rg = solveRange(k);
       if (rg.code) codes.push(rg.code);
       if (!Number.isFinite(a.plMedian)) codes.push('range');
@@ -351,7 +365,7 @@
       };
       // the distance sweep (shadowing: one seeded draw per point) and the error-rate curve
       const sw = L.sweep || (p.model === 'hata' ? { from: 1000, to: 20000, points: 200, scale: 'log' } : { from: Math.max(p.model === 'indoor' ? 1 : 0.1, d / 100), to: d * 10, points: 200, scale: 'log' });
-      const n = sw.points, D = [], r = mulberry32(hash32('sweep', seed));
+      const n = sw.points, D = [], r = streamOf('sweep', seed);
       for (let i = 0; i < n; i++) D.push(sw.scale === 'lin' ? sw.from + (sw.to - sw.from) * i / (n - 1) : sw.from * Math.pow(sw.to / sw.from, i / (n - 1)));
       const ser = { d: D, pl: [], plMedian: [], prx: [], prxMedian: [], margin: [] };
       for (const x of D) {
@@ -414,7 +428,8 @@
   };
   /** the engine's own source, to run it in a Worker: it defines self.NoemaRF and self.noemaEngine */
   const source = () => '(' + noemaRfModule.toString() + ')(self); self.noemaEngine = self.NoemaRF.simEngine;';
-  engine.workerSource = source();
+  /** the Worker: NoemaExpr and the simulation kernel when loaded, then this engine */
+  Object.defineProperty(engine, 'workerSource', { enumerable: true, get() { const K = kit(), NX = root.NoemaExpr; return (K && NX && typeof NX.source === 'function' ? NX.source() + '\n;' : '') + (K ? K.source() + '\n;' : '') + source(); } });
   root.NoemaRF = Object.freeze({
     id: ID, format: FORMAT, limits: Object.freeze({ points: MAX_POINTS, walls: MAX_WALLS, bindings: MAX_BINDINGS, iterations: MAX_ITER }),
     MODELS: Object.freeze(MODELS.slice()), MODS: Object.freeze(MODS.slice()), SCALARS: Object.freeze(SCALARS.slice()), SERIES: Object.freeze(SERIES.slice()),

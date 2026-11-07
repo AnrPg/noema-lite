@@ -610,7 +610,7 @@ def spec_names(spec):
 PARTS_LIM = {"parts": 8, "inputs": 24, "outputs": 48, "loops": 4, "iter": 50, "macro": 5000, "points": 2000}
 PART_KEYS = ["id", "engine", "model", "outputs", "inputs", "use", "with"]
 USE_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,60}$")
-STEPPERS = {"ode@1", "med@1", "clinic@1", "genetics@1", "des@1", "field@1", "agents@1"}   # the engines that can be stepped in time (the same list in engine/packcheck.js)
+STEPPERS = {"ode@1", "med@1", "clinic@1", "genetics@1", "des@1", "field@1", "agents@1", "thermal@1", "pid@1", "twin@1", "circuit-mna@1"}   # the engines that can be stepped in time (the same list in engine/packcheck.js)
 SPEC_KEYS |= {"parts", "couple"}
 
 def free_vars(src):

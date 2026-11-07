@@ -10,7 +10,7 @@ It is a plain module, `window.NoemaSimKit` (frozen). It loads after `46_lib_core
 fdlibm ports for `exp`, `log`, `sin`, `cos` and `pow`, so the numbers are the same on every device. It has no DOM, no network and no
 clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker:
 `NoemaExpr.source() + NoemaLibCore.source() + NoemaSimKit.source() + <engine module>` (`source()` returns `'(…)(self);'`, like the
-core's). Tests: `node tests/lib_simkit.js` (115 assertions against published values and exact solutions).
+core's). Tests: `node tests/lib_simkit.js` (119 assertions against published values and exact solutions).
 
 | § | what | functions |
 |---|---|---|
@@ -91,17 +91,17 @@ conditional (C) events are tried until none fires.
 ## 4. Continuous time: `integrate(cfg)`
 
 `cfg = {f(t, y, dy), y0, t0, tEnd, method, rtol, atol (a number or one per component), dt, hmax, pairs, maxSteps, samples,
-onSample(t, y), events, maxEvents, gtol, breaks, onSegment(seg, t0, t1)}`
+onSample(t, y), events, maxEvents, gtol, breaks, onSegment(seg, t0, t1), radauLinear}`
 → `{t, y, steps, rejected, nfev, events: [{t, j, kind, dir}], stop: 'end' | 'event' | <code>, method, codes}`.
 
 | method | what (source) |
 |---|---|
 | `auto` (default) | DOPRI5, switching to Rosenbrock when the stiffness test fires 15 times (HNW I §IV.2; like LSODA's switch, Petzold 1983): code `stiff-switched` |
 | `dopri5` | Dormand & Prince 1980 5(4), Hairer's dense output (contd5), PI step control β = 0.04 (Hairer, Nørsett & Wanner 1993 §II.4–II.6, §IV.2); code `stiff` when the test fires |
-| `tsit5` | Tsitouras 2011 5(4) (*Comput. Math. Appl.* 62:2), FSAL, smaller error constants than DOPRI5, the same PI control; cubic Hermite dense output. The test measures order 5. |
+| `tsit5` | Tsitouras 2011 5(4) (*Comput. Math. Appl.* 62:2), FSAL, smaller error constants than DOPRI5, the same PI control. Dense output: Tsitouras's own quartic continuous extension of order 4 (all eight order-4 conditions hold for every θ). The test measures order 5 and the dense output's local error O(h⁵). |
 | `rosenbrock` | the L-stable Rosenbrock 2(3) of Shampine & Reichelt 1997 (MATLAB ode23s), a finite-difference Jacobian, the ntrp23s dense output |
-| `ros3p` | ROS3P (Lang & Verwer 2001, *BIT* 41:4): Rosenbrock of order 3, A-stable, embedded order 2, in the form of Sandu et al. 1997 (KPP); the test measures order 3 |
-| `radau5` | Radau IIA of order 5 (Hairer & Wanner 1996 §IV.8, the method of RADAU5): L-stable, stiffly accurate, simplified Newton on the 3n × 3n stage system, RADAU5's error estimate, the collocation polynomial as dense output |
+| `ros3p` | ROS3P (Lang & Verwer 2001, *BIT* 41:4): Rosenbrock of order 3, A-stable, embedded order 2, in the form of Sandu et al. 1997 (KPP). Dense output: the cubic Hermite interpolant of y₀, f(y₀), y₁, f(y₁), a continuous extension of order 3 for any method of order ≥ 3 (HNW I §II.6, (6.7)–(6.8)). Three Rosenbrock stages cannot give an order-3 continuous extension of their own (four conditions on three weights). The test measures order 3 and the dense output's local error O(h⁴). |
+| `radau5` | Radau IIA of order 5 (Hairer & Wanner 1996 §IV.8, the method of RADAU5): L-stable, stiffly accurate, simplified Newton with RADAU5's transformation A⁻¹ = TΛT⁻¹: one real n × n system (γ/h − J) and one complex n × n system ((α − iβ)/h − J) per step, with the real one reused for the error estimate (HNW II §IV.8). `radauLinear: 'full'` solves the 3n × 3n real system instead. The test shows the same steps, f evaluations and results to 1e-14, and a 5× speed-up on 40 cells of a heat equation. RADAU5's error estimate; the collocation polynomial (degree 3) as dense output |
 | `rk4`, `midpoint`, `heun`, `euler` | fixed steps `dt`, with cubic Hermite dense output |
 | `verlet`, `yoshida4` | symplectic, for a separable Hamiltonian given by `pairs: [[q, p], …]` (every state in one pair): Störmer–Verlet kick–drift–kick (Hairer, Lubich & Wanner 2006 §I.1.4) and Yoshida 1990's 4th-order triple jump |
 

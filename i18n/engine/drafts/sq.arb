@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "Mbetje pa trashëgimtar të mbetjes",
   "engine.author.f.lib.division": "Rregulli i ndarjes",
   "engine.author.f.lib.penalty": "Dënimi",
-  "engine.author.f.lib.day": "Dita"
+  "engine.author.f.lib.day": "Dita",
+  "engine.author.f.lib.concl": "Përfundimi",
+  "engine.author.f.lib.theory": "Teoria e argumentimit",
+  "engine.author.f.lib.ruleCodes": "Kodet morale",
+  "engine.author.f.lib.streams": "Rrjedhat e dobisë",
+  "engine.author.f.lib.cycle": "Pjesa që përsëritet",
+  "engine.author.f.lib.ubuntu": "Rastet ubuntu",
+  "engine.author.f.lib.effects": "Efektet",
+  "engine.author.f.lib.who": "Kush",
+  "engine.author.f.lib.identity": "Identitet i përbashkët",
+  "engine.author.f.lib.solidarity": "Solidariteti",
+  "engine.author.f.lib.byAgent": "Marrëdhënia e vetë veprimtarit",
+  "engine.author.f.lib.stream": "Rrjedha",
+  "engine.author.f.lib.option": "Opsioni"
 }

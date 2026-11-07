@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "Asabesi olmayan kalan",
   "engine.author.f.lib.division": "Paylaşım kuralı",
   "engine.author.f.lib.penalty": "Ceza",
-  "engine.author.f.lib.day": "Gün"
+  "engine.author.f.lib.day": "Gün",
+  "engine.author.f.lib.concl": "Sonuç",
+  "engine.author.f.lib.theory": "Argümantasyon kuramı",
+  "engine.author.f.lib.ruleCodes": "Ahlak kuralları",
+  "engine.author.f.lib.streams": "Fayda akışları",
+  "engine.author.f.lib.cycle": "Tekrarlanan kısım",
+  "engine.author.f.lib.ubuntu": "Ubuntu vakaları",
+  "engine.author.f.lib.effects": "Etkiler",
+  "engine.author.f.lib.who": "Kim",
+  "engine.author.f.lib.identity": "Ortak kimlik",
+  "engine.author.f.lib.solidarity": "Dayanışma",
+  "engine.author.f.lib.byAgent": "Failin kendi ilişkisi",
+  "engine.author.f.lib.stream": "Akış",
+  "engine.author.f.lib.option": "Seçenek"
 }

@@ -2393,5 +2393,18 @@
   "engine.author.f.lib.deficit": "Υπόλοιπο χωρίς καθολικό κληρονόμο",
   "engine.author.f.lib.division": "Κανόνας διανομής",
   "engine.author.f.lib.penalty": "Ποινή",
-  "engine.author.f.lib.day": "Ημέρα"
+  "engine.author.f.lib.day": "Ημέρα",
+  "engine.author.f.lib.concl": "Συμπέρασμα",
+  "engine.author.f.lib.theory": "Θεωρία επιχειρηματολογίας",
+  "engine.author.f.lib.ruleCodes": "Ηθικοί κώδικες",
+  "engine.author.f.lib.streams": "Ροές χρησιμότητας",
+  "engine.author.f.lib.cycle": "Επαναλαμβανόμενο μέρος",
+  "engine.author.f.lib.ubuntu": "Περιπτώσεις ubuntu",
+  "engine.author.f.lib.effects": "Επιπτώσεις",
+  "engine.author.f.lib.who": "Ποιος",
+  "engine.author.f.lib.identity": "Κοινή ταυτότητα",
+  "engine.author.f.lib.solidarity": "Αλληλεγγύη",
+  "engine.author.f.lib.byAgent": "Η σχέση του ίδιου του δρώντος",
+  "engine.author.f.lib.stream": "Ροή",
+  "engine.author.f.lib.option": "Επιλογή"
 }

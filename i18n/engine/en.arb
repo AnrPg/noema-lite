@@ -10865,5 +10865,57 @@
   "engine.author.f.lib.day": "Day",
   "@engine.author.f.lib.day": {
     "description": "Label of the field “day” of a library engine’s model or outputs in the activity author (engines: law). Short."
+  },
+  "engine.author.f.lib.concl": "Conclusion",
+  "@engine.author.f.lib.concl": {
+    "description": "Label of the field “concl” of a library engine’s model or outputs in the activity author (engines: philo, rhetoric). Short."
+  },
+  "engine.author.f.lib.theory": "Argumentation theory",
+  "@engine.author.f.lib.theory": {
+    "description": "Label of the field “theory” of a library engine’s model or outputs in the activity author (engines: philo, rhetoric). Short."
+  },
+  "engine.author.f.lib.ruleCodes": "Moral codes",
+  "@engine.author.f.lib.ruleCodes": {
+    "description": "Label of the field “ruleCodes” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.streams": "Utility streams",
+  "@engine.author.f.lib.streams": {
+    "description": "Label of the field “streams” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.cycle": "Repeating part",
+  "@engine.author.f.lib.cycle": {
+    "description": "Label of the field “cycle” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.ubuntu": "Ubuntu cases",
+  "@engine.author.f.lib.ubuntu": {
+    "description": "Label of the field “ubuntu” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.effects": "Effects",
+  "@engine.author.f.lib.effects": {
+    "description": "Label of the field “effects” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.who": "Who",
+  "@engine.author.f.lib.who": {
+    "description": "Label of the field “who” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.identity": "Shared identity",
+  "@engine.author.f.lib.identity": {
+    "description": "Label of the field “identity” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.solidarity": "Solidarity",
+  "@engine.author.f.lib.solidarity": {
+    "description": "Label of the field “solidarity” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.byAgent": "The agent's own relationship",
+  "@engine.author.f.lib.byAgent": {
+    "description": "Label of the field “byAgent” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.stream": "Stream",
+  "@engine.author.f.lib.stream": {
+    "description": "Label of the field “stream” of a library engine’s model or outputs in the activity author (engines: philo). Short."
+  },
+  "engine.author.f.lib.option": "Option",
+  "@engine.author.f.lib.option": {
+    "description": "Label of the field “option” of a library engine’s model or outputs in the activity author (engines: philo). Short."
   }
 }

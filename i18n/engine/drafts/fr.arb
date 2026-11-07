@@ -2393,5 +2393,18 @@
   "engine.author.f.lib.deficit": "Reliquat sans héritier résiduaire",
   "engine.author.f.lib.division": "Règle de partage",
   "engine.author.f.lib.penalty": "Peine",
-  "engine.author.f.lib.day": "Jour"
+  "engine.author.f.lib.day": "Jour",
+  "engine.author.f.lib.concl": "Conclusion",
+  "engine.author.f.lib.theory": "Théorie de l’argumentation",
+  "engine.author.f.lib.ruleCodes": "Codes moraux",
+  "engine.author.f.lib.streams": "Flux d’utilité",
+  "engine.author.f.lib.cycle": "Partie répétée",
+  "engine.author.f.lib.ubuntu": "Cas ubuntu",
+  "engine.author.f.lib.effects": "Effets",
+  "engine.author.f.lib.who": "Qui",
+  "engine.author.f.lib.identity": "Identité partagée",
+  "engine.author.f.lib.solidarity": "Solidarité",
+  "engine.author.f.lib.byAgent": "La relation propre de l’agent",
+  "engine.author.f.lib.stream": "Flux",
+  "engine.author.f.lib.option": "Option"
 }

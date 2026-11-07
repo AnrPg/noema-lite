@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "Rest ohne Resterben",
   "engine.author.f.lib.division": "Teilungsregel",
   "engine.author.f.lib.penalty": "Strafe",
-  "engine.author.f.lib.day": "Tag"
+  "engine.author.f.lib.day": "Tag",
+  "engine.author.f.lib.concl": "Schlussfolgerung",
+  "engine.author.f.lib.theory": "Argumentationstheorie",
+  "engine.author.f.lib.ruleCodes": "Moralkodizes",
+  "engine.author.f.lib.streams": "Nutzenströme",
+  "engine.author.f.lib.cycle": "Wiederkehrender Teil",
+  "engine.author.f.lib.ubuntu": "Ubuntu-Fälle",
+  "engine.author.f.lib.effects": "Wirkungen",
+  "engine.author.f.lib.who": "Wer",
+  "engine.author.f.lib.identity": "Gemeinsame Identität",
+  "engine.author.f.lib.solidarity": "Solidarität",
+  "engine.author.f.lib.byAgent": "Die eigene Beziehung des Handelnden",
+  "engine.author.f.lib.stream": "Strom",
+  "engine.author.f.lib.option": "Option"
 }

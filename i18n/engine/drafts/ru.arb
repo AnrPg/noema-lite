@@ -2393,5 +2393,18 @@
   "engine.author.f.lib.deficit": "Остаток без остаточного наследника",
   "engine.author.f.lib.division": "Правило раздела",
   "engine.author.f.lib.penalty": "Наказание",
-  "engine.author.f.lib.day": "День"
+  "engine.author.f.lib.day": "День",
+  "engine.author.f.lib.concl": "Заключение",
+  "engine.author.f.lib.theory": "Теория аргументации",
+  "engine.author.f.lib.ruleCodes": "Моральные кодексы",
+  "engine.author.f.lib.streams": "Потоки полезности",
+  "engine.author.f.lib.cycle": "Повторяющаяся часть",
+  "engine.author.f.lib.ubuntu": "Случаи убунту",
+  "engine.author.f.lib.effects": "Последствия",
+  "engine.author.f.lib.who": "Кто",
+  "engine.author.f.lib.identity": "Общая идентичность",
+  "engine.author.f.lib.solidarity": "Солидарность",
+  "engine.author.f.lib.byAgent": "Собственное отношение агента",
+  "engine.author.f.lib.stream": "Поток",
+  "engine.author.f.lib.option": "Вариант"
 }

@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "باقٍ بلا عاصب",
   "engine.author.f.lib.division": "قاعدة القسمة",
   "engine.author.f.lib.penalty": "العقوبة",
-  "engine.author.f.lib.day": "اليوم"
+  "engine.author.f.lib.day": "اليوم",
+  "engine.author.f.lib.concl": "النتيجة",
+  "engine.author.f.lib.theory": "نظرية الحِجاج",
+  "engine.author.f.lib.ruleCodes": "القواعد الأخلاقية",
+  "engine.author.f.lib.streams": "تدفقات المنفعة",
+  "engine.author.f.lib.cycle": "الجزء المتكرر",
+  "engine.author.f.lib.ubuntu": "حالات أوبونتو",
+  "engine.author.f.lib.effects": "الآثار",
+  "engine.author.f.lib.who": "من",
+  "engine.author.f.lib.identity": "هوية مشتركة",
+  "engine.author.f.lib.solidarity": "التضامن",
+  "engine.author.f.lib.byAgent": "علاقة الفاعل نفسه",
+  "engine.author.f.lib.stream": "التدفق",
+  "engine.author.f.lib.option": "الخيار"
 }

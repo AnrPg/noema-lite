@@ -1565,5 +1565,18 @@
   "engine.author.f.lib.deficit": "無剩餘繼承人時的餘額",
   "engine.author.f.lib.division": "分配規則",
   "engine.author.f.lib.penalty": "刑罰",
-  "engine.author.f.lib.day": "日"
+  "engine.author.f.lib.day": "日",
+  "engine.author.f.lib.concl": "結論",
+  "engine.author.f.lib.theory": "論證理論",
+  "engine.author.f.lib.ruleCodes": "道德準則",
+  "engine.author.f.lib.streams": "效用流",
+  "engine.author.f.lib.cycle": "重複部分",
+  "engine.author.f.lib.ubuntu": "烏班圖案例",
+  "engine.author.f.lib.effects": "效果",
+  "engine.author.f.lib.who": "誰",
+  "engine.author.f.lib.identity": "共同身分",
+  "engine.author.f.lib.solidarity": "團結",
+  "engine.author.f.lib.byAgent": "行動者自身的關係",
+  "engine.author.f.lib.stream": "流",
+  "engine.author.f.lib.option": "選項"
 }
