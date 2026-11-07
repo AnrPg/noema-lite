@@ -5720,7 +5720,7 @@ function figureAsText(b) { const m = MEDIA[b.media] || {}; const regs = vRegions
 
     let tranCache = null;
     /* the transient: trapezoidal companion models, backward Euler on the first step and on every step that holds a source breakpoint
-       (SPICE's practice; a circuit is a DAE, so the kernel's ODE integrators do not apply). tranStart / tranAdvance are resumable:
+       (SPICE's practice): the FALLBACK without the kernel, and the gmin-stepping retry of tranAdvanceK below. tranStart / tranAdvance(K) are resumable:
        runTransient() and the stepper (docs/INTERACTIVE_LIBRARY.md §1.6) share them. */
     function tranStart(o, dt) {
       const pw = Array.isArray(o.power) ? o.power.filter(id => ck.byId.has(id)) : [];

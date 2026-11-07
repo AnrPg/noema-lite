@@ -360,7 +360,7 @@ kernel's clock: bit for bit), `genetics@1`'s χ² tail and Φ⁻¹ (`chi2Sf`, `n
 erfc (`erfc`, replacing NR erfcc's 1e-7), the circuit's noise sources (`counterStream`, Philox: sample i in O(1)), the θ-method
 transients of `thermal@1` and `circuit-mna@1` (`daeThetaInit` with `linear`, `beforeStep` for θ and the step's inputs, the circuit's
 full M and `limit` for pnjlim; ≤ 3e-13 and ≤ 3e-9 relative to the own steps). Kept on purpose: `prob@1`'s distribution functions
-(more accurate tails and log tails than the kernel's), the circuit's gmin-stepping retry of a step the kernel cannot solve, and the
+(they return ln P and ln Q with P and Q, which its log-densities and ln Φ need; where both exist they agree with the kernel's to 1e-13), the circuit's gmin-stepping retry of a step the kernel cannot solve, and the
 marked FALLBACKs for a context without the kernel. Load order: `46_lib_simkit.js` right after `35_simexpr.js` in index.html,
 first among the P6/library scripts of the bundle (tools/build.py `KERNEL`) and the harness.
 
