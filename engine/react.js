@@ -139,7 +139,7 @@ window.NoemaReact = (() => {
   /** First open of the day: a 7/30-day streak, or coming back after 3+ days. Called once by the shell. */
   function dayStart(acc) {
     try {
-      const k = `noema1:${acc}:meta:lastOpen`, last = +localStorage.getItem(k) || 0, now = Date.now(), d = NoemaDay.key();
+      const k = `noema1:${acc}:meta:lastOpen`, last = +localStorage.getItem(k) || 0, now = Date.now(), d = NoemaCore.clock.today();
       if (localStorage.getItem(k + 'Day') === d) return; localStorage.setItem(k, now); localStorage.setItem(k + 'Day', d);   // i18n-ignore (selectors, media queries, storage keys)
       const sn = window.Noema?.stats?.streakNow() || 0;
       if (last && now - last > 3 * 864e5) setTimeout(() => big('back'), 1200);

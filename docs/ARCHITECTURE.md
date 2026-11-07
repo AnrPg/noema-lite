@@ -1,0 +1,223 @@
+# noema-lite architecture
+
+This is the target architecture of the redesign and how far phase 1 has come. The decisions behind it are in
+`docs/adr/002-…` to `docs/adr/006-…`. The code is in `src/`, which is TypeScript 6 strict, bundled by esbuild. The old
+UI in `engine/` keeps running and reaches the new code through one global, `window.NoemaCore` (see §6).
+
+## 1. The picture
+
+```
+                       ┌──────────────────────────── composition roots (src/composition/) ───────────────────────────┐
+                       │  app.ts → browser.ts   worker.ts        tools.ts           connector.ts                       │
+                       │  (build/app.js)      (build/worker.js) (Node scripts)     (the MCP server)                    │
+                       │  pick adapters · register them in the typed Container · publish window.NoemaCore (browser only)│
+                       └───────┬──────────────────────────────┬──────────────────────────────────────────────┬───────┘
+                               │ wires                        │ wires                                        │
+             ┌─────────────────▼──────────────┐   ┌───────────▼───────────────────────┐            ┌─────────▼────────┐
+             │ adapters (src/adapters/)       │   │ features / engines / plugins      │            │ the old UI       │
+             │ browser · memory · local ·     │   │ (src/features, src/engines,       │            │ engine/*.js      │
+             │ supabase · claude · gemini     │   │  src/plugins: phase 2 onward)     │  NoemaCore │ (phases 1–2)     │
+             │ implement ▲ ports              │   │ use ▼ ports                       │◄───────────┤                  │
+             └────────────┼───────────────────┘   └───────────┬───────────────────────┘            └──────────────────┘
+                          │                                   │
+                    ┌─────┴───────────────────────────────────▼─────┐
+                    │ ports (src/ports/): Storage · Remote · Auth ·  │   interfaces + contract suites
+                    │ Clock · AI · Compute · ErrorReporter · I18n ·  │   (src/ports/contract/*.contract.ts)
+                    │ Telemetry · Notifier                           │
+                    └─────────────────────┬─────────────────────────┘
+                                          │ use
+                    ┌─────────────────────▼─────────────────────────┐
+                    │ kernel (src/kernel/): Result · NoemaError ·    │   pure TypeScript: no I/O, no globals
+                    │ ids · LocalDay · HLC · invariants              │
+                    └───────────────────────────────────────────────┘
+```
+
+## 2. Layers and the dependency rule
+
+Dependencies point inward only: **roots → adapters → ports → kernel**. Features, engines and plugins use ports and the
+kernel. They never use an adapter.
+
+| Layer | May import | Never imports | Holds |
+|---|---|---|---|
+| `src/kernel/` | nothing outside itself | everything else | values and rules without I/O: `Result`, `NoemaError` and its codes, branded ids, `LocalDay`, the hybrid logical clock, `invariant` |
+| `src/ports/` | kernel | adapters, roots, DOM types in signatures | the interfaces the core needs from the world, and their contract suites |
+| `src/adapters/` | kernel, ports, `adapters/local` (shared helpers), the platform | roots, other vendors' adapters, features | one technology per folder; the vendor's formats stop at its anti-corruption layer (ADR 006) |
+| `src/composition/` | everything | (no one imports a root) | the only code that picks adapters; the only holders of a `Container` |
+| `engine/` (old UI) | `window.NoemaCore` | `src/` modules directly | the screens phase 3 moves to `src/features/` |
+
+Helper 1's ESLint `boundaries` configuration checks these rules. Inside the layers, the rules are:
+
+- **Errors.** Every failure is a `NoemaError` with a stable code (ADR 004). The domain returns `Result<T, NoemaError>`
+  and does not throw. Adapters turn exceptions into Results at their edge. Every user code has a catalog text
+  (`i18n/errors/en.arb`, `err.<code>`). An internal code has none, because it never reaches the learner as itself.
+- **No empty catch.** A caught failure is reported (`ErrorReporter.report` / `catcher`) or carries a comment that says
+  why ignoring it is right.
+- **Time.** All time comes from the Clock port. A learner's day is always a `LocalDay` (ADR 005).
+- **Platform objects.** No module touches `document`, `localStorage`, `setTimeout` and the like when it is imported.
+  Adapters look them up on first use, so every root also loads in a bare `vm` (tests) and in a Worker.
+
+## 3. Kernel
+
+| Module | What |
+|---|---|
+| `result.ts` | `ok`, `err`, `map`, `andThen`, `match`, `all`, `fromThrowable`, `fromPromise`, … ; `Result<T, E = NoemaError>`, `AsyncResult<T>` |
+| `errors.ts` | `NoemaError {code, params, retryable, status}`; `USER_ERROR_CODES` (exactly the table of docs/i18n.md §6.2, checked by a test); `INTERNAL_ERROR_CODES`; `NoemaError.from(thrown)` |
+| `ids.ts` | branded ids (`AccountId`, `CourseId`, `NodeId`, `CardId`, …) whose constructors return a `Result` |
+| `day.ts` | `LocalDay` "YYYY-MM-DD"; arithmetic through local noon, so it is DST-safe (ADR 005) |
+| `hlc.ts` | the hybrid logical clock `{wall, count, node}` with a drift guard, encoded so that it sorts as text |
+| `invariant.ts` | `invariant`, `defined`, `assertNever` |
+
+## 4. Ports
+
+Each port is an interface in `src/ports/<name>.ts`. Each one also has a contract suite in
+`src/ports/contract/<name>.contract.ts` that every adapter of the port must pass. A network adapter passes it against a
+fake of its service (`src/adapters/testing/`).
+
+| Port | Purpose | Adapters |
+|---|---|---|
+| Storage | key-value store (sync), document store (IndexedDB-like, with transactions), quota, the **storage-full signal** | browser (localStorage + IndexedDB `noema-lite` v1, the same DB the loader opens), memory |
+| Remote | rows with compare-and-swap versions that are always strictly later, objects, rpc | supabase (PostgREST + Storage), memory |
+| Auth | session, sign in/up/out, refresh, change events | supabase (GoTrue), memory |
+| Clock | now, today (`LocalDay`), time zone, timers, `onDayChange` | browser (system), memory (manual) |
+| AI | provider-neutral chat with tools, JSON mode, streaming deltas, usage | claude (Messages API, SSE), gemini (generateContent) |
+| Compute | named jobs off the main thread, with timeouts, cancellation and progress | browser (Worker pool, which terminates a Worker on timeout), local (inline) |
+| ErrorReporter | journal (persisted, bounded), console, telemetry count, learner notice (throttled) | local |
+| I18n | `t`, `has`, `err`, `plural`, `format.*`, locale and direction | browser (over `NoemaI18n`), memory (catalogs) |
+| Telemetry | local counters and events only, never sent | local |
+| Notifier | toast · notice (at most 2 on screen, then overflow to the 🔔 bell) · alert (also the assertive live region `#noema-alert`) | browser (DOM), memory (recording) |
+
+## 5. Composition roots and the container
+
+`src/composition/container.ts` is a small typed DI container. **Its API is stable. Changing it needs an ADR.**
+
+```ts
+const STORAGE = token<Storage>('core.storage', 'this device’s storage');
+c.register(STORAGE, () => browserStorage());          // lazy singleton, made on first get
+c.register(ERRORS, r => createErrorReporter({ notifier: r.get(NOTIFIER) }));
+c.value(CONFIG, cfg);
+c.get(STORAGE); c.has(STORAGE); c.keys();
+c.freeze();                                            // a root is done: register/value now throw container.frozen
+```
+
+The rules:
+
+- A token is registered once. `{ replace: true }` is for tests only.
+- A cycle between factories fails with `container.cycle`.
+- An unknown token fails with `container.unknown`.
+
+The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOCK`, `I18N`, `NOTIFIER`, `TELEMETRY`,
+`ERRORS`, `JOBS`, `COMPUTE`, `AI` and `CLOUD`.
+
+| Root | Built to | What it picks |
+|---|---|---|
+| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project. It wires `storage.onFull` to the reporter, which raises the learner's alert. |
+| `worker.ts` | `build/worker.js` | the job registry (`jobs.ts`) served over `worker-protocol.ts` |
+| `tools.ts` | (imported by Node scripts) | memory storage, the system clock, the given catalogs, a recording notifier and inline Compute; no network |
+| `connector.ts` | (the MCP server) | empty in phase 1; the connector area fills `CONNECTOR_REGISTRATIONS` |
+
+The Worker script comes from the one-file bundle's `<script type="text/plain" id="noema-worker:worker">` when that
+exists. Otherwise it is the file next to `build/app.js` (`build/worker.js`). A page opened from `file://` gets no Worker, so its jobs run
+inline. The Compute port promises the same results either way.
+
+## 6. The phase bridge: `window.NoemaCore`
+
+`index.html` and the bundle load `build/app.js` after the vendor scripts and before `engine/i18n.js` and every other
+engine script. The global is defined once, non-writable and frozen. Surface version 1 (the source of truth is the
+header of `src/composition/bridge.ts`):
+
+```
+NoemaCore.version                       1
+NoemaCore.day.of(moment?)               "YYYY-MM-DD" of a Date / epoch ms / date text (now when left out)
+NoemaCore.day.add(day, n)               n calendar days later (n < 0: earlier), DST-safe
+NoemaCore.day.between(a, b)             whole days from a to b
+NoemaCore.day.weekStart(day, first=1)   the Monday (first = 0: Sunday) of that week
+NoemaCore.day.compare(a, b)             -1 | 0 | 1
+NoemaCore.day.is(x)                     a real "YYYY-MM-DD" day?
+NoemaCore.clock.now() · today() · timeZone() · onDayChange(fn) → unsubscribe
+NoemaCore.errors.report(error, { where, severity, context, notify }) → journal entry
+NoemaCore.errors.catcher(where, { severity, context, notify }) → (error) => undefined
+NoemaCore.errors.journal() · clearJournal() · onReport(fn) → unsubscribe
+NoemaCore.storage.kv.get(key) → text | null · set(key, text) → boolean · delete(key) · keys(prefix) → string[]
+NoemaCore.storage.estimate() → Promise<{ usage, quota, persisted } | null> · persist() → Promise<boolean>
+NoemaCore.notify.toast(text, { ms }) · notice(text, { ms }) · alert(text, { ms }) · onOverflow(fn) → unsubscribe
+NoemaCore.i18n.t · has · err · plural · locale · dir · format.{number,percent,date,time,relative,list,compare} · onChange
+NoemaCore.telemetry.count(name, by) · event(name, data) · snapshot() · reset()
+NoemaCore.compute.run(job, input, { timeoutMs, signal, onProgress }) → Promise (rejects with a NoemaError)
+NoemaCore.NoemaError                    the error class
+NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
+```
+
+The bridge speaks the old code's language. It returns plain values and throws exceptions instead of returning
+Results: a failed write is `false`, and a bad day throws `day.invalid`. Every failure it swallows goes to the
+ErrorReporter, once per code and page. A full storage needs no call from the caller. The adapter raises the
+storage-full signal, and the root reports it as `storage.quota`. The reporter then shows the learner `⚠️` plus the text
+of `loader.storage.full` at most once a minute, as a long toast and in the live region. In phase 1 these old globals
+moved behind the bridge:
+
+- `NoemaDay` (`engine/day.js`, deleted);
+- the `noema:storagefull` event and its loader listener;
+- the three toast implementations (`toastL`, `Notices.add` and the engine's `toast`);
+- every empty catch in `loader.js`, `shell.js`, `cloud.js` and `engine/src/10_core.js`.
+
+**When the bridge goes:** phase 3 moves the last old screens into `src/features/`. That phase deletes
+`src/composition/bridge.ts`, the global, and every `NoemaCore.` left in `engine/`, then `engine/` itself. Until then:
+
+- the surface only grows (a new name, never a changed meaning);
+- `version` goes up when a name is removed.
+
+## 7. Patterns
+
+| Pattern | Where |
+|---|---|
+| Ports and adapters (hexagonal) | `src/ports`, `src/adapters`, ADR 002 |
+| `Result` instead of exceptions, ErrorReporter port, no empty catch | `src/kernel/result.ts`, `errors.ts`, ADR 004 |
+| Anti-corruption layer | `src/adapters/supabase`, `claude`, `gemini`, ADR 006 |
+| Contract tests (one suite per port, every adapter passes it) | `src/ports/contract/` |
+| Composition root + typed DI container | `src/composition/` |
+| Hybrid logical clock, compare-and-swap versions | `src/kernel/hlc.ts`, `adapters/supabase/client.ts` `versionAfter`, ADR 005 |
+| Schema-first contracts | `src/contracts/` (helper 2) |
+| Microkernel plugins | `src/plugins/` (helper 4) |
+| Saga with idempotency keys, event sourcing of learning events, CQRS read models in a Worker (Compute jobs), local-first with an outbox, statecharts, specifications, design tokens | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
+
+## 8. How to add …
+
+**A feature.**
+
+1. Put its domain in `src/features/<name>/`. That code uses ports and the kernel only and returns Results.
+2. Give its screens to the root through a `Registration` (`c => c.register(TOKEN, r => make(r.get(STORAGE), …))`)
+   appended to `APP_REGISTRATIONS` in `browser.ts`.
+3. While old screens still need it, add a `BridgeExtension` to `BRIDGE_EXTENSIONS`. A core name is refused.
+4. Every word goes through `I18n` with keys in `i18n/<component>/en.arb` plus drafts.
+
+**A port.**
+
+1. Write `src/ports/<name>.ts`: the interface, with Result-returning methods and no platform types in the signatures.
+2. Write `src/ports/contract/<name>.contract.ts`: the behaviour every adapter must have.
+3. Add a token in `tokens.ts` and register an adapter in each root that needs it.
+4. Add its internal error codes to `INTERNAL_ERROR_CODES`. A user code also goes into docs/i18n.md §6.2 and
+   `i18n/errors/en.arb`.
+
+**An adapter.**
+
+1. Write `src/adapters/<technology>/`: one technology, its formats converted at the edge (ADR 006). Platform objects
+   are looked up on first use, and options let tests pass fakes.
+2. Write a test that runs the port's contract suite against it. A network adapter uses a fake in
+   `src/adapters/testing/`.
+3. Register it in the root that should use it. No other code changes.
+
+**A plugin.**
+
+1. Write it in `src/plugins/` (helper 4's microkernel).
+2. It reaches the core only through the ports its manifest names, which the root hands it.
+3. A heavy job is a Compute job: append a `JobRegistration` to `JOB_REGISTRATIONS` in `src/composition/jobs.ts`, so
+   the Worker and the inline fallback run the same code.
+
+## 9. Building and testing
+
+| Command | What it does |
+|---|---|
+| `npm run typecheck` | `tsc` over `src/` |
+| `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
+| `npm run build` | esbuild: `src/composition/app.ts` → `build/app.js` and `src/composition/worker.ts` → `build/worker.js` (both IIFE, ES2022). Both files are committed like `engine/engine.js`. |
+
+The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

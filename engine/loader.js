@@ -21,14 +21,15 @@
   }
 
   /* ---------------- tiny utils ---------------- */
-  /** The browser's storage for this site is full (every engine's name for it). Writers that hit it fire 'noema:storagefull'
-      (here, engine/shell.js, engine/cloud.js); the loader tells the learner once a minute at most (storageFullWarning). */
-  const isQuota = e => !!e && (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED' || e.code === 22 || e.code === 1014);
+  const caught = (where, severity = 'warning') => NoemaCore.errors.catcher(where, { severity });   // a background step that failed: into the error journal (src/ports/error-reporter.ts)
+  /** This device's key-value storage, through the core (NoemaCore.storage, src/adapters/browser/storage.ts): a write the
+      browser refuses is false, and a full storage raises the core's storage-full signal, which warns the learner once a
+      minute at most (i18n key loader.storage.full, in the assertive live region #noema-alert). */
   const ls = {
-    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { console.warn('[Noema] storage write failed', k, e); if (isQuota(e)) dispatchEvent(new CustomEvent('noema:storagefull', { detail: { key: k } })); return false; } },
-    del(k) { try { localStorage.removeItem(k); } catch (e) { } },
-    keys(prefix) { const out = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(prefix)) out.push(k); } } catch (e) { } return out; },
+    get: k => NoemaCore.storage.kv.get(k),
+    set: (k, v) => NoemaCore.storage.kv.set(k, v),
+    del: k => NoemaCore.storage.kv.delete(k),
+    keys: prefix => NoemaCore.storage.kv.keys(prefix),
   };
   const jget = (k, d) => { try { const v = ls.get(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const jset = (k, v) => ls.set(k, JSON.stringify(v));
@@ -46,7 +47,7 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));   // i18n-ignore (HTML escapes)
   const slugify = s => String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
   const stamp = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`; };
-  const toastL = (m, ms = 2400) => { m = plainText(m); if (window.toast) return window.toast(m, ms); let t = document.querySelector('.toasts'); if (!t) { t = el('div', { class: 'toasts' }); document.body.append(t); } const x = el('div', { class: 'toast' }, m); t.append(x); setTimeout(() => x.remove(), ms); };
+  const toastL = (m, ms = 2400) => NoemaCore.notify.toast(plainText(m), { ms });
   async function sha256(s) { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); } catch (e) { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) | 0; return 'x' + h; } }
 
   /* ---------------- IndexedDB (imported packs, folder handles, restore points) ---------------- */
@@ -105,7 +106,7 @@
       const acc = key.slice(P.length).split(':')[0];
       const mk = `${P}${acc}:meta:mtime`; const m = jget(mk, {}); m[key.slice((P + acc + ':').length)] = Date.now(); jset(mk, m);
       jset(`${P}${acc}:meta:dirty`, Date.now());
-      this.listeners.forEach(f => { try { f(key, acc); } catch (e) { } });
+      this.listeners.forEach(f => { try { f(key, acc); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.kv.listener', severity: 'error' }); } });
     },
     accountData(acc) {   // every data key of an account, keyed by suffix (without "noema1:<acc>:")
       const pre = `${P}${acc}:`; const out = {};
@@ -174,13 +175,13 @@
   }
 
   /* ---------------- account-level stats (XP / streak across all subjects) ---------------- */
-  const today = () => NoemaDay.key();   // the learner's local day (engine/day.js)
+  const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
   const Stats = {
     get() { return Object.assign({ xp: 0, xpDay: {}, streak: 0, lastDay: null, bySubject: {} }, jget(KV.accountKey('stats'), {})); },
     put(s) { KV.set(KV.accountKey('stats'), JSON.stringify(s)); },
-    touchStreak() { const s = this.get(), d = today(); if (s.lastDay === d) return s; const diff = s.lastDay ? NoemaDay.between(s.lastDay, d) : 99; s.streak = diff === 1 ? s.streak + 1 : 1; s.lastDay = d; this.put(s); return s; },
+    touchStreak() { const s = this.get(), d = today(); if (s.lastDay === d) return s; const diff = NoemaCore.day.is(s.lastDay) ? NoemaCore.day.between(s.lastDay, d) : 99; s.streak = diff === 1 ? s.streak + 1 : 1; s.lastDay = d; this.put(s); return s; },
     add(n) { const s = this.touchStreak(); s.xp += n; s.xpDay[today()] = (s.xpDay[today()] || 0) + n; s.bySubject[KV.subj] = (s.bySubject[KV.subj] || 0) + n; const keys = Object.keys(s.xpDay).sort(); while (keys.length > 400) delete s.xpDay[keys.shift()]; this.put(s); return s; },
-    streakNow() { const s = this.get(); return s.lastDay && NoemaDay.between(s.lastDay, today()) <= 1 ? s.streak : 0; },
+    streakNow() { const s = this.get(); return NoemaCore.day.is(s.lastDay) && NoemaCore.day.between(s.lastDay, today()) <= 1 ? s.streak : 0; },
     todayXP() { return this.get().xpDay[today()] || 0; },
   };
 
@@ -237,11 +238,11 @@
     const id = pack.subject.id, ok = f => f && f.format === 'noema-translation' && f.pack === id && Array.isArray(f.chapters);
     let f = window.NOEMA_TRANSLATIONS?.[`${id}|${loc}`];
     const lib = meta?.trLocales?.[loc]?.path;
-    if (!ok(f) && lib) { await loadScript(lib).catch(() => { }); f = window.NOEMA_TRANSLATIONS?.[`${id}|${loc}`]; }
+    if (!ok(f) && lib) { await loadScript(lib).catch(caught('loader.translation.script', 'info')); f = window.NOEMA_TRANSLATIONS?.[`${id}|${loc}`]; }
     if (!ok(f)) f = await IDB.get('packs', trKey(acc, id, loc)).catch(() => null);
     if ((!ok(f) || (pack.version && f.version && f.version !== pack.version)) && isCloudAcc(acc)) {   // none here, or made for another version: the account's copy
       const r = await NoemaCloud.downloadObject(`packs/${id}.tr.${loc}.json`).then(x => x.json()).catch(() => null);
-      if (ok(r)) { f = r; IDB.put('packs', trKey(acc, id, loc), r).catch(() => { }); }
+      if (ok(r)) { f = r; IDB.put('packs', trKey(acc, id, loc), r).catch(caught('loader.translation.cache')); }
     }
     if (!ok(f)) { console.warn('[noema] translation not found', id, loc); return false; }
     pack.translations[loc] = { ...t, chapters: f.chapters };
@@ -252,7 +253,7 @@
     for (const [loc, t] of Object.entries(p.translations || {})) {
       if (!t || !Array.isArray(t.chapters)) continue;
       const f = { format: 'noema-translation', v: 1, pack: p.subject.id, locale: loc, source: p.subject.language || 'en', version: p.version || null, chapters: t.chapters };
-      await IDB.put('packs', trKey(acc, p.subject.id, loc), f).catch(() => { });
+      await IDB.put('packs', trKey(acc, p.subject.id, loc), f).catch(caught('loader.translation.cache'));
       if (isCloudAcc(acc)) await NoemaCloud.uploadObject(`packs/${p.subject.id}.tr.${loc}.json`, new Blob([JSON.stringify(f)], { type: 'application/json' }), 'application/json').catch(e => console.warn(e));
       p.translations[loc] = { file: true, chapters: t.chapters.length };
     }
@@ -330,12 +331,12 @@
   async function deleteSubject(acc, s) {
     const stored = await IDB.get('packs', acc + '|' + s.id).catch(() => null);
     const locs = Object.keys(stored?.translations || {});   // its translations go with it (docs/i18n.md §10)
-    if (stored && window.NoemaSrcFiles?.removeActivityFiles) await NoemaSrcFiles.removeActivityFiles(acc, stored).catch(() => { });   // and its H5P activities' files
-    await IDB.del('packs', acc + '|' + s.id).catch(() => { });
-    for (const l of locs) await IDB.del('packs', trKey(acc, s.id, l)).catch(() => { });
+    if (stored && window.NoemaSrcFiles?.removeActivityFiles) await NoemaSrcFiles.removeActivityFiles(acc, stored).catch(caught('loader.subject.remove'));   // and its H5P activities' files
+    await IDB.del('packs', acc + '|' + s.id).catch(caught('loader.subject.remove'));
+    for (const l of locs) await IDB.del('packs', trKey(acc, s.id, l)).catch(caught('loader.subject.remove'));
     KV.del(KV.accountKey('packmeta:' + s.id, acc)); KV.del(KV.accountKey('subjoverride:' + s.id, acc));
     if (isCloudAcc(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/packs/${s.id}.json`, ...locs.map(l => `${NoemaCloud.session().user.id}/packs/${s.id}.tr.${l}.json`)]).catch(e => console.warn('[delete subject]', e));
-    if (window.NoemaSrcFiles) await NoemaSrcFiles.removeAll(acc, s.id).catch(() => { });
+    if (window.NoemaSrcFiles) await NoemaSrcFiles.removeAll(acc, s.id).catch(caught('loader.subject.remove'));
     if (s.curriculum && window.NoemaCurriculum) { const c = NoemaCurriculum.get(acc, s.curriculum); if (c?.nodes[s.node]) { c.nodes[s.node].pack = null; NoemaCurriculum.save(acc, c); } }
     // 📦 every other step it teaches (attached to them): the step is planned and prepared the usual way again
     if (window.NoemaCurriculum?.stepsOf) for (const { c, nid } of NoemaCurriculum.stepsOf(acc, s.id)) { if (c.nodes[nid].pack?.assigned) NoemaCurriculum.Edit.detach(acc, c.id, nid); else { const cc = NoemaCurriculum.get(acc, c.id); cc.nodes[nid].pack = null; NoemaCurriculum.save(acc, cc); } }
@@ -376,8 +377,8 @@
   const needsPictures = p => Object.values(p?.media || {}).some(m => m.fetch === 'app' && !m.data);
   async function embedWebPictures(acc, p, { wait = 20000 } = {}) {
     if (!needsPictures(p) || !window.NoemaClaude) return p;
-    const job = NoemaClaude.fillWebPictures(p).then(r => { if (r.embedded) IDB.put('packs', acc + '|' + p.subject.id, p).catch(() => { }); });
-    await Promise.race([job, new Promise(r => setTimeout(r, wait))]).catch(() => { });
+    const job = NoemaClaude.fillWebPictures(p).then(r => { if (r.embedded) IDB.put('packs', acc + '|' + p.subject.id, p).catch(caught('loader.pictures.cache')); });
+    await Promise.race([job, new Promise(r => setTimeout(r, wait))]).catch(caught('loader.pictures'));
     return p;
   }
   async function getPack(acc, meta) {
@@ -395,7 +396,7 @@
     if (meta.path) { await loadScript(meta.path); if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id]; }
     if (window.NoemaCloud && NoemaCloud.session()) {
       let err = null; const p = await NoemaCloud.downloadPack(meta.id).catch(e => { err = e; return null; });
-      if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); if (cached) toastL('✨ ' + tr('loader.pack.upToDate', { title: meta.title || meta.id }), 3000); return embedWebPictures(acc, p); }
+      if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(caught('loader.pack.cache')); if (cached) toastL('✨ ' + tr('loader.pack.upToDate', { title: meta.title || meta.id }), 3000); return embedWebPictures(acc, p); }
       if (cached && err) { console.warn('[noema] the new version could not be downloaded', err); toastL('⚠️ ' + tr('loader.pack.newFailed', { title: meta.title || meta.id, error: (err.message || err.code ? errMsg(err) : '') || tr('loader.pack.network') }), 7000); }
     }
     if (cached) return cached;
@@ -541,7 +542,7 @@
     const CU = window.NoemaCurriculum, ref = pack?.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);
     if (!CU?.stepsOf) return ref;
     const on = CU.stepsOf(acc, meta.id), uses = r => !!r && on.some(x => x.c.id === r.id && x.nid === r.node);
-    let via = null; try { via = JSON.parse(sessionStorage.getItem('noema-device:viaStep') || 'null'); } catch (e) { }
+    let via = null; try { via = JSON.parse(sessionStorage.getItem('noema-device:viaStep') || 'null'); } catch (e) { /* no sessionStorage here (blocked site data): the step this tab came from is only a back link, nothing is lost */ }
     if (via?.acc === acc && via.sid === meta.id && uses(via)) return { id: via.id, node: via.node };
     if (uses(ref)) return ref;
     if (on.length) return { id: on[0].c.id, node: on[0].nid };
@@ -617,11 +618,11 @@
             list.length > 6 ? el('button', { class: 'pick-cur', onclick: () => CM()?.library(acc, { onStudy }) }, el('b', {}, `+${list.length - 6}`), el('span', { class: 'tiny' }, tr('pick.curricula', null, acc))) : null);
         };
         // 📚 the Shelf: folded away once the learner has a map (it remembers, per device, whether it was left open)
-        const SK = `${P}${acc}:pickShelfOpen`; let remembered = null; try { remembered = localStorage.getItem(SK); } catch (e) { }
+        const SK = `${P}${acc}:pickShelfOpen`; let remembered = null; remembered = ls.get(SK);
         const sum = el('summary', {}, tr('pick.shelf', { n: subs.length }, acc));
         const shelfBox = el('details', { class: 'pick-shelf', open: remembered != null ? remembered === '1' : !(CU?.list(acc) || []).length || !CM() },
           sum, el('p', { class: 'tiny' }, tr('pick.shelfSub', null, acc)), q, S.list);
-        sum.addEventListener('click', () => setTimeout(() => { try { localStorage.setItem(SK, shelfBox.open ? '1' : '0'); } catch (e) { } if (shelfBox.open && subs.length > 8) q.focus(); }, 0));   // only the learner's own choice is remembered
+        sum.addEventListener('click', () => setTimeout(() => { ls.set(SK, shelfBox.open ? '1' : '0'); if (shelfBox.open && subs.length > 8) q.focus(); }, 0));   // only the learner's own choice is remembered
         box.append(brandHead(tr('pick.what', null, acc), `${a.emoji || ''} ${a.name}`), modes, reqs, curs, shelfBox,
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { landed(acc, s); pick(s); } }) }, tr('pick.create', null, acc)), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { landed(acc, s); pick(s); } }) }, tr('pick.explore', null, acc)), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, tr('pick.switchProfile', null, acc)),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, tr('pick.close', null, acc)) : null));
@@ -669,7 +670,7 @@
     if (data instanceof Error) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, errMsg(data)), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
     NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data }); NoemaLangUI.claude.startPolling(acc.id);
     langProfiles(meta);
-    AutoBackup.start(acc.id).catch(() => { });
+    AutoBackup.start(acc.id).catch(caught('loader.autobackup'));
   }
   /* ---------------- language courses inside the frame (docs/NEW_FRAME_AND_LANGUAGES.md, docs/LANGUAGES.md §8) ----------------
      The Languages tab (#/lang) lists the learner's courses; #/lang/<course>/… draws a course inside the frame (NoemaLangUI.start
@@ -702,7 +703,7 @@
     const v = [...new Set(codes)];
     if (window.NoemaThemes?.putSettings) NoemaThemes.putSettings({ studyLangs: v }, acc);
     else { const k = `${P}${acc}:a:settings`, s = jget(k, {}) || {}; s.studyLangs = v; KV.set(k, JSON.stringify(s)); }
-    try { dispatchEvent(new CustomEvent('noema:study', { detail: { acc, langs: v } })); } catch (e) { }
+    try { dispatchEvent(new CustomEvent('noema:study', { detail: { acc, langs: v } })); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.event.study', severity: 'debug' }); }
   }
   /** A new course the learner made: its languages are studied (once the learner has answered). */
   const studyAdd = (acc, codes) => { const st = STUDY(acc); if (st && (codes || []).some(c => !st.includes(c))) putStudy(acc, [...st, ...codes]); };
@@ -710,9 +711,9 @@
   function langEndo(code, acc) {
     const cap = (s, loc) => { const a = [...String(s || '')]; return a.length ? a[0].toLocaleUpperCase(loc) + a.slice(1).join('') : ''; };
     let own = '', ui = '';
-    try { own = new Intl.DisplayNames([code], { type: 'language' }).of(code) || ''; } catch (e) { }
+    try { own = new Intl.DisplayNames([code], { type: 'language' }).of(code) || ''; } catch (e) { /* a language this browser cannot name: the code is shown instead */ }
     const loc = (window.NoemaI18n && NoemaI18n.lang(uiPref(acc))) || 'en';
-    try { ui = new Intl.DisplayNames([loc, 'en'], { type: 'language' }).of(code) || ''; } catch (e) { }
+    try { ui = new Intl.DisplayNames([loc, 'en'], { type: 'language' }).of(code) || ''; } catch (e) { /* a language this browser cannot name: the code is shown instead */ }
     if (!own || own.toLowerCase() === code.toLowerCase()) own = ui || code;
     return { own: cap(own, code), ui: cap(ui || code, loc) };
   }
@@ -763,7 +764,7 @@
   const langDay = () => { const d = new Date(); return Math.floor((d.getTime() - d.getTimezoneOffset() * 60000) / 864e5); };   // = NoemaLang.dayNumber
   const langHash = id => '#/lang/' + encodeURIComponent(id);
   const langFlags = m => (m.languages || []).map(c => LANG_FLAGS[c] || c.toUpperCase()).join(' ');
-  const langNames = (codes, acc, loc = null) => { let dn = null; try { dn = new Intl.DisplayNames([loc || (window.NoemaI18n && NoemaI18n.lang(uiPref(acc))) || 'en', 'en'], { type: 'language' }); } catch (e) { } return codes.map(c => { try { return dn?.of(c) || c; } catch (e) { return c; } }).join(' · '); };
+  const langNames = (codes, acc, loc = null) => { let dn = null; try { dn = new Intl.DisplayNames([loc || (window.NoemaI18n && NoemaI18n.lang(uiPref(acc))) || 'en', 'en'], { type: 'language' }); } catch (e) { /* no Intl.DisplayNames for this locale: the codes are shown instead */ } return codes.map(c => { try { return dn?.of(c) || c; } catch (e) { return c; } }).join(' · '); };
   /** Progress without loading the course (7 MB): from the stored learner state (docs/LANGUAGES.md §5.6) — per language the words met
       and the reviews due today; the next lesson as the course last showed it. */
   function langProgress(acc, meta) {
@@ -1192,36 +1193,26 @@
   };
   /* ---- 🔔 news that arrived (a step's pack, a new part, links…): a short toast while at most 2 are on screen at once;
      a 3rd one moves them all to the bell, where they wait until cleared — toasts never stack up over the page ---- */
-  const NOTICE_MAX = 2, NOTICE_KEEP = 200;   // keep: a storage bound only (the oldest beyond it go first)
+  const NOTICE_KEEP = 200;   // keep: a storage bound only (the oldest beyond it go first)
   const Notices = {
-    shown: [], burst: 0,   // the notice toasts on screen now: { el, text, at, timer }; till when news goes straight to the bell
     key: acc => 'noema-notices:' + (acc || 'local'),   // this device only (not synced): what arrived here
-    list(acc) { try { const a = JSON.parse(localStorage.getItem(this.key(acc)) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } },
-    write(acc, a) { try { localStorage.setItem(this.key(acc), JSON.stringify(a.slice(-NOTICE_KEEP))); } catch (e) { } Notes.local(); },
+    list(acc) { const a = jget(this.key(acc), []); return Array.isArray(a) ? a : []; },
+    write(acc, a) { jset(this.key(acc), a.slice(-NOTICE_KEEP)); Notes.local(); },
     keep(acc, items) { this.write(acc, [...this.list(acc), ...items.map(x => ({ id: 'note:' + x.at + ':' + Math.random().toString(36).slice(2, 7), kind: 'notice', text: x.text, at: x.at }))]); },
     dismiss(acc, id) { this.write(acc, this.list(acc).filter(x => x.id !== id)); },
     clear(acc) { this.write(acc, []); },
-    /** A piece of news: a toast, or — when NOTICE_MAX are on screen already — into the bell with the ones on screen. */
-    add(msg, ms = 4000) {
-      const text = plainText(msg), at = Date.now(), acc = Notes.acc || window.Noema?.account?.id || KV.acc;
-      this.shown = this.shown.filter(x => x.el.isConnected);
-      if (this.shown.length >= NOTICE_MAX || at < this.burst) {   // the rest of a burst follows them to the bell, until it has been quiet for a while
-        const moved = this.shown.splice(0); moved.forEach(x => { clearTimeout(x.timer); x.el.remove(); });
-        this.burst = at + ms; this.keep(acc, [...moved, { text, at }]); return;
-      }
-      let t = document.querySelector('.toasts'); if (!t) { t = el('div', { class: 'toasts' }); document.body.append(t); }
-      const x = { el: el('div', { class: 'toast notice', role: 'status' }, text), text, at };
-      x.timer = setTimeout(() => { x.el.remove(); this.shown = this.shown.filter(y => y !== x); }, ms);
-      t.append(x.el); this.shown.push(x);
-    },
+    /** A piece of news: a toast while at most two are on screen; a third moves them all to the bell (NoemaCore.notify's
+        rule, src/ports/notifier.ts), with the rest of the burst — they arrive here through onOverflow (below). */
+    add(msg, ms = 4000) { NoemaCore.notify.notice(plainText(msg), { ms }); },
   };
+  NoemaCore.notify.onOverflow(items => Notices.keep(Notes.acc || window.Noema?.account?.id || KV.acc, items));
   const UPDATE_KINDS = ['curupdate', 'stepupdate', 'subjupdate'];
   const Notes = {
     pending: [], remote: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
     /** An answered share or invitation leaves the list and the cloud's cached copy (else local() would bring it back). */
     drop(id) { this.remote = this.remote.filter(x => x.id !== id); this.pending = this.pending.filter(x => x.id !== id); this.emit(); },
-    emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
+    emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.notes.listener', severity: 'error' }); } }); },
     /** 🔔 = shares and invitations (from the cloud) + updates that wait for the learner (shared curricula, their steps, Explore subjects). */
     local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list, ...Notices.list(this.acc)]; this.emit(); return this.pending; },
     async refresh() {
@@ -1324,7 +1315,7 @@
     }
     if (n) toastL('📎 ' + tr('loader.files.attached', { n }), 4000);
     if (bad.length) toastL('⚠️ ' + tr('loader.files.notAttached', { n: bad.length, files: bad.join(', ') }), 6000);
-    if (j.bundleFiles) { j.bundleFiles = null; window.NoemaClaude?.saveJob(j).catch(() => { }); }
+    if (j.bundleFiles) { j.bundleFiles = null; window.NoemaClaude?.saveJob(j).catch(caught('loader.claude.job')); }
   }
   const SKILL_URL = (location.protocol.startsWith('http') ? '' : SITE) + '/downloads/noema-pack-builder.zip';
   const CLAUDE_PROMPT = /* i18n-ignore: a message the learner pastes into Claude (stays English, docs/i18n.md §5.2) */ 'Create a noema-lite subject pack from the files I attached.\nSubject title: …\nLanguage of the material: …\nMy goal: exam / understanding / project\nUse the noema-pack-builder skill if you have it; otherwise use the noema-lite connector (noema_get_toolkit + noema_authoring_guide). Include every file I attached in the package — if you split a PDF, its parts, each as its own source — and save it to my noema-lite account with its source files.';
@@ -1636,7 +1627,7 @@
     async collect(acc, { includeSecrets = false } = {}) {
       const a = getAccount(acc) || { id: acc };
       const data = KV.accountData(acc);
-      if (data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; if (includeSecrets && GeminiKey.get(acc)) s.apiKey = GeminiKey.get(acc); data['a:settings'] = JSON.stringify(s); } catch (e) { } }   // the Gemini key lives on the device (GeminiKey)
+      if (data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; if (includeSecrets && GeminiKey.get(acc)) s.apiKey = GeminiKey.get(acc); data['a:settings'] = JSON.stringify(s); } catch (e) { /* settings that are not JSON hold no key to strip: they are backed up as they are */ } }   // the Gemini key lives on the device (GeminiKey)
       const packs = (await importedPacks(acc)).map(p => ({ id: p.subject.id, pack: p }));
       const conversations = window.NoemaConvos ? await NoemaConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
       return { format: 'noema-lite-backup', version: 2, conversationSchema: window.NoemaConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
@@ -1664,7 +1655,7 @@
       if (mode === 'replace') ls.keys(pre).forEach(k => { if (!k.slice(pre.length).startsWith('meta:') && !(k.slice(pre.length) in obj.data)) KV.del(k); });   // a synced account deletes them in the cloud too
       for (const [suf, val] of Object.entries(obj.data)) {
         let v = val;
-        if (suf === 'a:settings') { try { const nv = JSON.parse(val); if (obj.includesSecrets && nv.apiKey) GeminiKey.set(targetAcc, nv.apiKey); delete nv.apiKey; v = JSON.stringify(nv); } catch (e) { } }   // without secrets: this device's key stays
+        if (suf === 'a:settings') { try { const nv = JSON.parse(val); if (obj.includesSecrets && nv.apiKey) GeminiKey.set(targetAcc, nv.apiKey); delete nv.apiKey; v = JSON.stringify(nv); } catch (e) { /* settings that are not JSON hold no key to take out: they are restored as they are */ } }   // without secrets: this device's key stays
         KV.set(pre + suf, typeof v === 'string' ? v : JSON.stringify(v));
       }
       for (const p of obj.importedPacks || []) await IDB.put('packs', targetAcc + '|' + p.id, p.pack);
@@ -1699,7 +1690,7 @@
       // canonical folder layout:  <chosen>/backups/noema-lite-backup_<acc>_<day>.json (+ _latest)   <chosen>/conversations/<subject>/<YYYY-MM>/<id>.json|.md
       const bdir = await h.getDirectoryHandle('backups', { create: true });
       const obj = await Backup.collect(acc);
-      const day = NoemaDay.key();
+      const day = NoemaCore.clock.today();
       for (const name of [`noema-lite-backup_${acc}_${day}.json`, `noema-lite-backup_${acc}_latest.json`]) {
         const fh = await bdir.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(JSON.stringify(obj, null, 1)); await w.close();
       }
@@ -1710,10 +1701,10 @@
       clearInterval(this.timer);
       const h = await this.handle(acc); if (!h) { this.status = 'off'; return; }
       this.status = (await this.permitted(h)) ? 'on' : 'needs-permission';
-      this.timer = setInterval(() => this.run(acc).catch(() => { }), Math.max(1, CFG.autoBackupMinutes) * 60e3);
+      this.timer = setInterval(() => this.run(acc).catch(caught('loader.autobackup')), Math.max(1, CFG.autoBackupMinutes) * 60e3);
       // conversations are written to the folder within ~20 s of any change (independently of the 5-minute backup)
       if (window.NoemaConvos && !this._convoHook) { this._convoHook = true; let t; NoemaConvos.onChange(a => { if (a !== acc) return; clearTimeout(t); t = setTimeout(async () => { const hd = await this.handle(acc); if (hd && await this.permitted(hd)) NoemaConvos.writeToFolder(acc, hd).catch(e => console.warn('[Noema] convo folder write', e)); }, 20000); }); }
-      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.run(acc).catch(() => { }); });
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.run(acc).catch(caught('loader.autobackup')); });
     },
   };
 
@@ -1771,22 +1762,10 @@
     if (inUse) { const o = inUse; inUse = null; document.querySelectorAll('[data-inuse-inert]').forEach(x => { x.inert = false; delete x.dataset.inuseInert; }); o.classList.add('out'); setTimeout(() => o.remove(), 250); }
   });
 
-  /* the browser's storage is full: what was just saved (progress, settings) is NOT on this device — say so, once a minute at most */
-  let storageFullAt = 0;
-  addEventListener('noema:storagefull', () => {
-    if (Date.now() - storageFullAt < 60e3) return; storageFullAt = Date.now();
-    const text = tr('loader.storage.full');
-    toastL('⚠️ ' + text, 12000);
-    // screen readers hear it at once: an assertive live region of its own (the toasts are not live regions), with or without a subject open
-    let live = document.getElementById('noema-alert');
-    if (!live) { live = el('div', { id: 'noema-alert', role: 'alert', 'aria-live': 'assertive', style: { position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' } }); document.body.append(live); }
-    live.textContent = ''; setTimeout(() => { live.textContent = text; }, 50);   // emptied first, so the same warning is announced again
-  });
-
   /* ---------------- boot ---------------- */
   async function start() {
     document.body.classList.add('noema-booting');
-    if (window.NoemaI18n) { try { await Promise.race([NoemaI18n.ready, new Promise(r => setTimeout(r, 4000))]); } catch (e) { } }
+    if (window.NoemaI18n) { try { await Promise.race([NoemaI18n.ready, new Promise(r => setTimeout(r, 4000))]); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.i18n.ready', severity: 'warning' }); } }
     migrateOldPrefix(); try { await migrateOldIDB(); } catch (e) { console.warn('[noema] old browser database not migrated', e); }
     if (CFG.supabaseUrl && (CFG.supabaseKey || CFG.supabaseAnonKey) && window.NoemaCloud) { try { await NoemaCloud.init(CFG); } catch (e) { console.warn('[Noema] cloud init failed', e); } }
     const url = new URLSearchParams(location.search);
@@ -1799,7 +1778,7 @@
     GeminiKey.migrate(acc.id);   // before the first pull, so a synced a:settings never replaces the only copy of the key
     if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
     if (window.NoemaI18n) { const st = jget(`${P}${acc.id}:a:settings`, {}) || {}; try { await Promise.race([NoemaI18n.use(st.lang, st.numerals ? { digits: { 'ar-EG': st.numerals } } : {}), new Promise(r => setTimeout(r, 4000))]); } catch (e) { console.warn('[i18n]', e); } }   // the account's UI language, before the first screen
-    try { const md = document.querySelector('meta[name="description"]'); if (md && window.NoemaI18n) md.content = tr('loader.meta.description'); } catch (e) { }   // index.html has no words of its own before the scripts run
+    try { const md = document.querySelector('meta[name="description"]'); if (md && window.NoemaI18n) md.content = tr('loader.meta.description'); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.meta.description', severity: 'info' }); }   // index.html has no words of its own before the scripts run
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);   // already in the pickers: curricula and shares change keys there
     Notes.start(acc.id);
     try { window.NoemaCurriculum?.Gen.start(acc.id); window.NoemaCurJobs?.App.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background; picks up what the Claude app did
@@ -1815,7 +1794,7 @@
     const course = meta?.kind === 'language' ? meta : null;
     if (course && SHELL()) langBoot(acc, course, url.get('subject') === course.id);
     if (SHELL()) { try { NoemaShell.mount({ engine: !!meta && !course }); document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); } catch (e) { console.error('[shell]', e); } }
-    if (!meta || course) { if (SHELL()) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); window.NoemaReact?.dayStart(acc.id); AutoBackup.start(acc.id).catch(() => { }); } return; }
+    if (!meta || course) { if (SHELL()) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); window.NoemaReact?.dayStart(acc.id); AutoBackup.start(acc.id).catch(caught('loader.autobackup')); } return; }
     return openEngine(acc, subs, meta);
   }
   /** Boot the engine on a subject. background: the frame needs the engine's account pages (Me › Profile, AI, Help…) or the
@@ -1856,7 +1835,7 @@
     if (background) return;
     window.NoemaReact?.dayStart(acc.id);
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);
-    AutoBackup.start(acc.id).catch(() => { });
+    AutoBackup.start(acc.id).catch(caught('loader.autobackup'));
   }
   /** The frame asks for an engine when none is open (see openEngine). Resolves true once it is there. */
   Noema.ensureEngine = () => {

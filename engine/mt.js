@@ -168,7 +168,7 @@ window.NoemaMT = (() => {
   };
 
   /* ---------- caps: per session (requests), per minute, per day (characters) ---------- */
-  const today = () => NoemaDay.key();   // the learner's local day (engine/day.js)
+  const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
   const uk = acc => 'noema-device:mt:day:' + acc, sk = acc => 'noema-mt:session:' + acc;
   const recent = [];
   const usage = {

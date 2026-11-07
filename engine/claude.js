@@ -197,7 +197,7 @@ window.NoemaClaude = (() => {
 
   /* ---------- the conversation ---------- */
   /* i18n-ignore-start */   // prompts, tool definitions and messages for Claude: English (docs/i18n.md §5.2, approach 6)
-  const today = () => NoemaDay.key();
+  const today = () => NoemaCore.clock.today();
   const SYSTEM = (job = {}) => `You are building a noema-lite subject pack for the user, running inside the noema-lite app through the Claude API (the user is watching a progress screen; they are not technical).
 The noema-pack-builder skill is available in your code-execution container — follow its SKILL.md and both references completely (coverage, quality bar, ≥ 3 picture exercises per picture, all three kinds of pictures). Differences in THIS environment:
 ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.
