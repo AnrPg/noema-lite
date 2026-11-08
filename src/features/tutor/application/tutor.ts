@@ -98,6 +98,8 @@ export interface TutorDeps {
 /** A turn that failed: its words, and what can help (a key, or copying the prompt). */
 export interface TurnError {
   readonly text: string;
+  /** the learner's message that did not go: still shown above the error (it is not kept in the conversation) */
+  readonly sent: string;
   readonly needsKey: boolean;
   readonly prompt: string | null;
 }
@@ -175,6 +177,10 @@ export class TutorSession {
       threads: null,
       directive: null,
     }).trim();
+  }
+  /** the COURSE NOTES the AI gets with the context now ('' when its part is not in the course) */
+  context(): string {
+    return contextText(this.ctx, this.#d.course);
   }
   /** the task of a button by name */
   intent(name: string, given = ''): string {
@@ -325,7 +331,7 @@ export class TutorSession {
       persona: this.#d.persona(),
       subject: this.#d.subject(),
       intent,
-      context: contextText(this.ctx, this.#d.course),
+      context: this.context(),
       lang: this.#d.language(),
       threads: ts,
       directive,
@@ -359,12 +365,13 @@ export class TutorSession {
       this.#maybeTitle(key);
       this.#d.touchStreak();
     } catch (e) {
-      hist.pop();
+      const lost = hist.pop();
       this.persist(key);
       const ne = e instanceof NoemaError ? e : null;
       const kind = ne ? aiErrorKind(ne) : 'other';
       this.error = {
         text: this.#d.i18n.err(e),
+        sent: lost?.role === 'user' ? lost.text : '',
         needsKey: kind === 'no_key' || kind === 'unauthorized' || /key/i.test(str((e as Error | null)?.message ?? '')),
         prompt: ai?.fallbackPrompt?.() ?? null,
       };

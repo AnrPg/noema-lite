@@ -53,7 +53,7 @@ export interface ShellApi {
     build: (w: { head: HTMLElement; body: HTMLElement; close: () => void; refocus: () => void }) => void,
     o?: { cls?: string },
   ): void;
-  svg(key: string): string;
+  svg(key: string): HTMLElement;
   fmtDate(t: unknown, o?: Intl.DateTimeFormatOptions): string;
   tv(): { tutor: string };
   convos?: (openId?: string) => void;

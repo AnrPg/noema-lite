@@ -92,7 +92,7 @@ export function conversationsWindow(
               )
               .join('\n\n---\n\n'),
           download,
-          closeIcon: () => S.svg('close'),
+          closeIcon: () => S.svg('close').innerHTML, // the shell's icon is a span.ns-svg; the window draws its own
         };
         body.append(el);
         void el.load(openId ?? null);

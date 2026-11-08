@@ -112,6 +112,7 @@ export class NoemaTutorPanel extends TutorElement {
         </div>`,
       );
     const e = s.error;
+    if (e?.sent) out.push(html`<div class="msg me">${v.md(e.sent)}</div>`);
     if (e)
       out.push(
         html`<div class="msg err" role="alert">
@@ -251,6 +252,9 @@ export class NoemaTutorPanel extends TutorElement {
       greet = html`<div class="msg ai ns-greet" lang=${ui}>${name ? hi : hi.replace(/,?\s+([.,])/, '$1')}</div>`;
     }
     const sub = shellSub(v, s.mode);
+    // one line: the button's text is read whole ("Socratic · I ask you▾"), so no whitespace around its parts
+    // prettier-ignore
+    const modeBtn = html`<button class="ns-modesel" type="button" data-pop="1" aria-haspopup="menu" aria-expanded="false" @click=${modeMenu}><b>${shellMode(v, s.mode)}</b>${sub ? html`<span class="sub"> · ${sub}</span>` : nothing}<span class="caret" aria-hidden="true">▾</span></button>`;
     return html`<div class="dh ns-dh" lang=${ui}>
         <div class="top">
           ${this.#faceEl()}<b class="ns-tname grow">${v.tutor().name}</b>${more}
@@ -267,13 +271,7 @@ export class NoemaTutorPanel extends TutorElement {
           </button>
         </div>
         <div class="ns-modelabel">${v.L(v.tutor().plural ? 'tutorHelpsPl' : 'tutorHelps')}</div>
-        <div class="ns-menu ns-modewrap">
-          <button class="ns-modesel" type="button" data-pop="1" aria-haspopup="menu" aria-expanded="false" @click=${modeMenu}>
-            <b>${shellMode(v, s.mode)}</b>${sub ? html`<span class="sub"> · ${sub}</span>` : nothing}<span class="caret" aria-hidden="true"
-              >▾</span
-            >
-          </button>
-        </div>
+        <div class="ns-menu ns-modewrap">${modeBtn}</div>
       </div>
       <div class="ns-forrow" lang=${ui}>
         <span class="ctxchip ns-forchip"

@@ -241,10 +241,10 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(page, S + 'sources deck', () => page.evaluate(() => { document.querySelector('.modal')?.remove(); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }), 600);
     await visit(page, S + 'a source', () => page.evaluate(id => { NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(false); NoemaCore.studyUi.current().app.sourcesUi.open(id); }, info.src), 1200);
     await visit(page, S + 'notifications', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); document.querySelector('.viewer, .srcviewer')?.remove(); openNotes(); }), 500);
-    await visit(page, S + 'tutor', () => page.evaluate(sid => { document.querySelectorAll('.modal').forEach(m => m.remove()); openTutor({ kind: 'section', id: sid }, 'socratic'); }, info.sec[0]), 600);
-    await visit(page, S + 'tutor history', () => page.evaluate(() => { T.showHistory = true; renderTutor(); }), 500);
-    await visit(page, S + 'tutor modes', () => page.evaluate(() => { T.showHistory = false; renderTutor(); [...document.querySelectorAll('.drawer select, .drawer .modechips button')].forEach(x => x.click?.()); }), 400);
-    await visit(page, S + 'focus sprint', () => page.evaluate(() => { closeTutor(); NoemaCore.studyUi.current().app.toggleSprint(); }), 500);
+    await visit(page, S + 'tutor', () => page.evaluate(sid => { document.querySelectorAll('.modal').forEach(m => m.remove()); NoemaTutor.current().session.openTutor({ kind: 'section', id: sid }, 'socratic'); }, info.sec[0]), 600);
+    await visit(page, S + 'tutor history', () => page.evaluate(() => { NoemaTutor.current().session.toggleHistory(true); }), 500);
+    await visit(page, S + 'tutor modes', () => page.evaluate(async () => { NoemaTutor.current().session.toggleHistory(false); await new Promise(r => setTimeout(r, 100)); [...document.querySelectorAll('.drawer select, .drawer .modechips button')].forEach(x => x.click?.()); }), 400);
+    await visit(page, S + 'focus sprint', () => page.evaluate(() => { NoemaTutor.current().session.close(); NoemaCore.studyUi.current().app.toggleSprint(); }), 500);
     for (const tab of ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help']) await visit(page, S + 'account menu: ' + tab, () => page.evaluate(t => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu(t); document.querySelectorAll('.modal details').forEach(d => d.open = true); }, tab), 700);
     await visit(page, S + 'guides', async () => { for (const g of ['gemini', 'backupFolder', 'restore', 'cloudUser', 'cloudOwner', 'github', 'claude', 'curricula', 'friends']) { await page.evaluate(g => { document.querySelectorAll('.modal').forEach(m => m.remove()); openGuide(g); }, g); await wait(150); await grab(page); } }, 200);
     const bad = { name: 'notes.json', mimeType: 'application/json', buffer: Buffer.from('{ not json') };
@@ -264,8 +264,8 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     for (const [name, res] of [['401', { status: 401, body: '{"error":{"code":401,"message":"API key not valid. Please pass a valid API key.","status":"UNAUTHENTICATED"}}' }], ['429', { status: 429, body: '{"error":{"code":429,"message":"Resource has been exhausted","status":"RESOURCE_EXHAUSTED"}}' }], ['500', { status: 500, body: '{"error":{"code":500,"message":"Internal error","status":"INTERNAL"}}' }], ['offline', null]]) {
       await ctx.unroute('**/generativelanguage.googleapis.com/**').catch(() => { });
       await ctx.route('**/generativelanguage.googleapis.com/**', r => res ? r.fulfill({ status: res.status, contentType: 'application/json', body: res.body }) : r.abort('internetdisconnected'));
-      await visit(page, 'AI error ' + name + ': tutor', () => page.evaluate(async () => { S.settings.apiKey = 'TESTKEY'; S.settings.model = 'gemini-3-flash-preview'; S.settings.models = ['gemini-3-flash-preview']; openTutor({ kind: 'section', id: COURSE[0].sections[0].id }, 'socratic'); await sendTutor('hi').catch(() => { }); }), 1500);
-      await visit(page, 'AI error ' + name + ': grading', () => page.evaluate(async () => { closeTutor(); const ex = ALL_EX.find(e => e.type === 'free') || ALL_EX[0]; location.hash = '#/ex/' + ex.id; await new Promise(r => setTimeout(r, 400)); const ta = document.querySelector('main .ex textarea'); if (ta) { ta.value = 'my answer'; ta.dispatchEvent(new Event('input', { bubbles: true })); } document.querySelector('main .ex')?._check?.(); }), 1500);
+      await visit(page, 'AI error ' + name + ': tutor', () => page.evaluate(async () => { S.settings.apiKey = 'TESTKEY'; S.settings.model = 'gemini-3-flash-preview'; S.settings.models = ['gemini-3-flash-preview']; const T = NoemaTutor.current().session; T.openTutor({ kind: 'section', id: COURSE[0].sections[0].id }, 'socratic'); await T.send('hi').catch(() => { }); }), 1500);
+      await visit(page, 'AI error ' + name + ': grading', () => page.evaluate(async () => { NoemaTutor.current().session.close(); const ex = ALL_EX.find(e => e.type === 'free') || ALL_EX[0]; location.hash = '#/ex/' + ex.id; await new Promise(r => setTimeout(r, 400)); const ta = document.querySelector('main .ex textarea'); if (ta) { ta.value = 'my answer'; ta.dispatchEvent(new Event('input', { bubbles: true })); } document.querySelector('main .ex')?._check?.(); }), 1500);
       await visit(page, 'AI error ' + name + ': settings test', () => page.evaluate(() => { openAccountMenu('settings'); document.querySelectorAll('.modal details').forEach(d => d.open = true); [...document.querySelectorAll('.modal button')].filter(b => /🔍|🧪/.test(b.textContent)).forEach(b => b.click()); }), 1500);
       await page.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
     }
@@ -386,7 +386,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     for (const hsh of ['#/ch/' + ch, '#/ch/' + ch + '/practice', '#/ch/' + ch + '/traps', '#/ch/' + ch + '/practice/filters', '#/s/' + sec, '#/cards', '#/mistakes', '#/lightning', '#/drills']) { await go(page, hsh, 800); await menus(page, hsh); }
     await visit(page, 'tutor (frame)', () => page.click('#ns-fab'), 700);
     await menus(page, 'tutor (frame)', '.drawer .ns-menubtn, .drawer .ns-modesel');
-    await visit(page, 'conversations', async () => { await page.evaluate(() => closeTutor()); await page.evaluate(async () => { const t = new Date().toISOString(); await Noema.convos.put(Noema.account.id, Noema.convos.normalize({ kind: 'tutor', mode: 'socratic', title: 'Old Chat', context: { type: 'course' }, messages: [{ role: 'user', content: 'hi', createdAt: t }, { role: 'assistant', content: 'hello', createdAt: t }] }, { account: { id: Noema.account.id, kind: 'local' }, subject: { id: SUBJ.id, title: SUBJ.title } })); NoemaShell.convos(); }); }, 900);
+    await visit(page, 'conversations', async () => { await page.evaluate(() => NoemaTutor.current().session.close()); await page.evaluate(async () => { const t = new Date().toISOString(); await Noema.convos.put(Noema.account.id, Noema.convos.normalize({ kind: 'tutor', mode: 'socratic', title: 'Old Chat', context: { type: 'course' }, messages: [{ role: 'user', content: 'hi', createdAt: t }, { role: 'assistant', content: 'hello', createdAt: t }] }, { account: { id: Noema.account.id, kind: 'local' }, subject: { id: SUBJ.id, title: SUBJ.title } })); NoemaShell.convos(); }); }, 900);
     await visit(page, 'a conversation', () => page.click('.ns-cvmain'), 500);
     await page.keyboard.press('Escape');
     // a Roadmap (as tests/shell.js makes one)
@@ -589,7 +589,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
       await shot('exercise', () => page.evaluate(() => { location.hash = '#/ex/' + ALL_EX.find(e => e.type === 'mcq').id; }));
       await shot('picture_exercise', () => page.evaluate(() => { location.hash = '#/ex/' + ALL_EX.find(e => e.type === 'img_drag').id; }));
       await shot('tutor', () => page.click('#ns-fab'));
-      await page.evaluate(() => closeTutor());
+      await page.evaluate(() => NoemaTutor.current().session.close());
       await shot('lang_home', () => page.evaluate(c => { location.hash = '#/lang/' + c; }, COURSE), 3000);
       await shot('lang_word', () => page.evaluate(c => { const { C } = NoemaLangUI.UI; location.hash = '#/lang/' + c + '/w/de/' + encodeURIComponent(Object.keys(C.lang.de.lex)[40]); }, COURSE), 1200);
       await shot('lang_grammar', () => page.evaluate(c => { location.hash = '#/lang/' + c + '/fn/fn.plural.noun/ar'; }, COURSE), 1200);
