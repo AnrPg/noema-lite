@@ -389,6 +389,21 @@ test('the knowledge map: the chapter’s learnables by level, their points and t
   );
 });
 
+test('⚑ the reported exercises: listed, one cleared (the list follows), the last one cleared closes it', () => {
+  const flags = f.state.flags as Record<string, { why: string; note?: string }>;
+  flags['c1-e1'] = { why: 'wrong', note: 'the answer is B' };
+  flags['c2-e1'] = { why: 'unclear' };
+  ui.inspect.reported();
+  const box = (): HTMLElement | null => document.querySelector('.modal .box');
+  assert.equal(box()?.querySelectorAll('.flaglist li').length, 2);
+  assert.match(box()?.textContent ?? '', /the answer is B/);
+  box()?.querySelector<HTMLButtonElement>('.flaglist li .btn')?.click();
+  assert.ok(f.events.includes('exercise.unflagged:c1-e1'));
+  assert.equal(box()?.querySelectorAll('.flaglist li').length, 1, 'the list follows');
+  box()?.querySelector<HTMLButtonElement>('.flaglist li .btn')?.click();
+  assert.equal(box(), null, 'nothing left: it closes');
+});
+
 test('the words for the engine: an exercise and a section as text for the AI; progress is recorded as events', () => {
   const e = f.host.chapters[0]?.exercises[0];
   assert.ok(e);

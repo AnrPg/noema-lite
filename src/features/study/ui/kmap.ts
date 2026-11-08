@@ -1,13 +1,12 @@
 /**
  * The pack's knowledge map ("Info"): chapter.map is written before the chapter (CONTENT_SPEC.md, noema.map/v1): points
  * {id, text, level, cats, taughtIn} and learnables {id, kp, goal}; an exercise points to a learnable with `lr`. Here: the
- * map's overlay, the Mistakes gym by trap, and the exercises the learner reported (⚑). The map is a light-DOM
- * element on the study base (lit/base.ts) in the frame's dialog.
+ * map's overlay, the Mistakes gym by trap, and the exercises the learner reported (⚑). The map and the reported
+ * exercises are light-DOM elements on the study base (lit/base.ts) in the frame's dialog.
  */
 import type { Chapter, Exercise, KnowledgePoint } from '../domain/pack.ts';
 import type { StudyApp } from './app.ts';
 import { h } from './dom.ts';
-import { fmt } from './text.ts';
 import { F, html, nothing, StudyElement, tag, type TemplateResult } from './lit/base.ts';
 
 export const KMAP_CATS = [
@@ -186,72 +185,86 @@ export function mistakesByCat(app: StudyApp, list: readonly Exercise[]): HTMLEle
 
 /** ⚑ the exercises the learner reported (state.flags): listed, and copied as JSON for Claude to revise them (their ids kept) */
 export function reportedView(app: StudyApp): void {
-  const flags = app.state.flags ?? {};
-  const ids = Object.keys(flags).filter(id => app.course.exercise(id));
   app.host.frame.modal((box, close) => {
-    box.append(
-      h('h3', {}, `⚑ ${app.t('engine.flags.title', { n: ids.length })}`),
-      h('p', { class: 'tiny' }, app.t('engine.flags.intro')),
-      h(
-        'ul',
-        { class: 'flaglist' },
-        ids.map(id => {
-          const f = flags[id],
-            e = app.course.exercise(id);
-          return h(
-            'li',
-            {},
-            h('b', {}, app.t(`engine.ex.report_${f?.why ?? 'other'}`)),
-            ' · ',
-            h('span', { html: fmt((e?.q ?? '').slice(0, 120)) }),
-            f?.note ? h('div', { class: 'tiny' }, `“${f.note}”`) : null,
-            h(
-              'button',
-              {
-                class: 'btn ghost small',
-                type: 'button',
-                onclick: () => {
-                  app.host.learn('exercise.unflagged', id);
-                  close();
-                  if (Object.keys(app.state.flags ?? {}).length) reportedView(app);
-                },
-              },
-              app.t('engine.flags.clear'),
-            ),
-          );
-        }),
-      ),
-      h(
-        'div',
-        { class: 'row', style: { justifyContent: 'flex-end', marginTop: '14px' } },
-        h('button', { class: 'btn', type: 'button', onclick: close }, app.t('engine.kmap.close')),
-        h(
-          'button',
-          {
-            class: 'btn primary',
-            type: 'button',
-            onclick: async () => {
-              const s = app.host.subject;
-              // a request for Claude (English, like the prompts)
-              const own = (x: object): object => Object.fromEntries(Object.entries(x).filter(([k]) => !k.startsWith('_')));
-              const txt =
-                `Revise these exercises of the noema-lite subject "${s.title}" (id ${s.id}) with a patch {"reviseExercises":[…]} that keeps every id (tools/CONTENT_SPEC.md "Additive updates"). The learner's reports:\n` +
-                JSON.stringify(
-                  ids.map(id => ({ report: flags[id], exercise: own(app.course.exercise(id) ?? {}) })),
-                  null,
-                  1,
-                );
-              try {
-                await navigator.clipboard.writeText(txt);
-                app.toast(`📋 ${app.t('engine.flags.copied')}`);
-              } catch (e) {
-                app.toast(`⚠️ ${app.errText(e)}`, 4000);
-              }
-            },
-          },
-          `📋 ${app.t('engine.flags.copy')}`,
-        ),
-      ),
-    );
+    box.append(new StudyReported(app, close).redraw());
   });
 }
+
+class StudyReported extends StudyElement {
+  readonly #app: StudyApp;
+  readonly #close: () => void;
+  constructor(app: StudyApp, close: () => void) {
+    super();
+    this.#app = app;
+    this.#close = close;
+  }
+
+  #ids(): string[] {
+    const app = this.#app;
+    return Object.keys(app.state.flags ?? {}).filter(id => app.course.exercise(id));
+  }
+
+  /** a request for Claude (English, like the prompts) on the clipboard */
+  async #copy(): Promise<void> {
+    const app = this.#app,
+      s = app.host.subject,
+      flags = app.state.flags ?? {};
+    const own = (x: object): object => Object.fromEntries(Object.entries(x).filter(([k]) => !k.startsWith('_')));
+    const txt =
+      `Revise these exercises of the noema-lite subject "${s.title}" (id ${s.id}) with a patch {"reviseExercises":[…]} that keeps every id (tools/CONTENT_SPEC.md "Additive updates"). The learner's reports:\n` +
+      JSON.stringify(
+        this.#ids().map(id => ({ report: flags[id], exercise: own(app.course.exercise(id) ?? {}) })),
+        null,
+        1,
+      );
+    try {
+      await navigator.clipboard.writeText(txt);
+      app.toast(`📋 ${app.t('engine.flags.copied')}`);
+    } catch (e) {
+      app.toast(`⚠️ ${app.errText(e)}`, 4000);
+    }
+  }
+
+  override render(): TemplateResult {
+    const app = this.#app,
+      flags = app.state.flags ?? {},
+      ids = this.#ids();
+    return html`<h3>⚑ ${app.t('engine.flags.title', { n: ids.length })}</h3>
+      <p class="tiny">${app.t('engine.flags.intro')}</p>
+      <ul class="flaglist">
+        ${ids.map(id => {
+          const f = flags[id],
+            e = app.course.exercise(id);
+          return html`<li>
+            <b>${app.t(`engine.ex.report_${f?.why ?? 'other'}`)}</b> · <span>${F((e?.q ?? '').slice(0, 120))}</span>
+            ${f?.note ? html`<div class="tiny">“${f.note}”</div>` : nothing}
+            <button
+              class="btn ghost small"
+              type="button"
+              @click=${() => {
+                app.host.learn('exercise.unflagged', id);
+                // the list follows; the last one cleared closes it
+                if (this.#ids().length) this.redraw();
+                else this.#close();
+              }}
+            >
+              ${app.t('engine.flags.clear')}
+            </button>
+          </li>`;
+        })}
+      </ul>
+      <div class="row kmapfoot">
+        <button
+          class="btn"
+          type="button"
+          @click=${() => {
+            this.#close();
+          }}
+        >
+          ${app.t('engine.kmap.close')}
+        </button>
+        <button class="btn primary" type="button" @click=${() => this.#copy()}>📋 ${app.t('engine.flags.copy')}</button>
+      </div>`;
+  }
+}
+tag('study-reported', StudyReported);
