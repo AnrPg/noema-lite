@@ -1,11 +1,10 @@
-/* The app's script files the connector runs, in load order (= the order index.html loads them): the pack checks, the
-   curriculum code, the picture library, the language courses' core. tools/connector_bundle.mjs bundles each "legacy:<path>"
+/* The app's script files the connector runs, in load order (= the order index.html loads them): the activity runtimes'
+   package checkers (h5p, wasm, embed: the content checks of src/features/content read them), the curriculum code, the picture library, the language courses' core. tools/connector_bundle.mjs bundles each "legacy:<path>"
    import as its text (one copy: the app's own file). The data contracts and the engine library they read are ES modules
    (src/contracts, src/engines): src/composition/connector.ts hands them to these files as NoemaCore. */
 import report from 'legacy:engine/report.js';
 import enginereq from 'legacy:engine/enginereq.js';
 import h5p from 'legacy:engine/src/38_activity_h5p.js';
-import packcheck from 'legacy:engine/packcheck.js';
 import wasm from 'legacy:engine/src/44_activity_wasm.js';
 import embed from 'legacy:engine/src/45_activity_embed.js';
 import llm from 'legacy:engine/llm.js';
@@ -24,7 +23,6 @@ export const LEGACY_SOURCES: readonly LegacySource[] = [
   S('engine/report.js', report),
   S('engine/enginereq.js', enginereq),
   S('engine/src/38_activity_h5p.js', h5p),
-  S('engine/packcheck.js', packcheck),
   S('engine/src/44_activity_wasm.js', wasm),
   S('engine/src/45_activity_embed.js', embed),
   S('engine/llm.js', llm),

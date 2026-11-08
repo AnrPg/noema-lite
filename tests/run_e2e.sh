@@ -31,19 +31,19 @@ set +e; FAILED=()
 # ONLY="connector|lib_.*" bash tests/run_e2e.sh: only the suites whose name matches (after the same preparation; names joined by |)
 RAN=0
 run() { local name="$1"; shift; if [ -n "${ONLY:-}" ] && ! [[ "$name" =~ ^(${ONLY})$ ]]; then return 0; fi; RAN=$((RAN+1)); echo; echo "▶ $name"; "$@"; local rc=$?; [ $rc -eq 0 ] || { echo "✖ $name failed (exit $rc)"; FAILED+=("$name"); }; }
-run simexpr node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: JS and Python agree bit for bit (docs/INTERACTIVE_SIMEXPR.md)
+run simexpr node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: the golden outputs bit for bit (docs/INTERACTIVE_SIMEXPR.md)
 run circuit node "$ROOT/tests/circuit.js"           # the circuit engine circuit-mna@1: MNA, transients, faults, instruments (docs/INTERACTIVE_CIRCUIT.md)
 run circuit2 node "$ROOT/tests/circuit2.js"          # the full circuit physics (docs/INTERACTIVE_CIRCUIT.md §9): AC, lines, op-amp GBW/slew, capacitances, pickup, real meters
-for e in thermal pid rf twin; do run "$e" node "$ROOT/tests/$e.js"; done   # the P6 engines thermal@1, pid@1, rf@1, twin@1: JS = Python, the worker (docs/INTERACTIVE_ENGINES.md)
+for e in thermal pid rf twin; do run "$e" node "$ROOT/tests/$e.js"; done   # the P6 engines thermal@1, pid@1, rf@1, twin@1: the golden checks, the worker (docs/INTERACTIVE_ENGINES.md)
 run activities_h5p node "$ROOT/tests/activities_h5p.js"    # the h5p@1 runtime with a stub host: the sandbox, scores, state, languages, hostile libraries, 0 requests (docs/INTERACTIVE_H5P.md)
-run activities node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, JS = Python rules (html-app, sim-spec, checks), never allow-same-origin
+run activities node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, the golden rules (html-app, sim-spec, checks), never allow-same-origin
 run activities_app node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop; sim-spec@1, the checks grader, circuit-mna@1 and the fault bench; py-module@1 over http with the fetched Pyodide; h5p@1 beside the pack and in the one-file bundle; wasm-module@1, the xAPI export, external-embed@1 (card, Settings "Ask again") (BROWSERS=chromium,firefox,webkit)
 run activity_author node "$ROOT/tests/activity_author.js" --browser "$T"   # the activity author (P6): #/author in the built site, classic router and the frame (subject ⋮ › Create an activity), the form, preview, .zip, 320 px
-run activities_wasm node "$ROOT/tests/activities_wasm.js" --app "$T"   # wasm-module@1 + engine wasm@1: parity with wasm_check.py, the ABI, no network in the worker, runaway, in the app (docs/INTERACTIVE_WASM.md)
-run activities_embed node "$ROOT/tests/activities_embed.js" --browser   # external-embed@1: the allow-list, JS = Python URL and item rules, the consent card, a hostile page (a local fake provider; docs/INTERACTIVE_EMBED.md)
+run activities_wasm node "$ROOT/tests/activities_wasm.js" --app "$T"   # wasm-module@1 + engine wasm@1: the golden reports, the ABI, no network in the worker, runaway, in the app (docs/INTERACTIVE_WASM.md)
+run activities_embed node "$ROOT/tests/activities_embed.js" --browser   # external-embed@1: the allow-list, the URL and item rules, the consent card, a hostile page (a local fake provider; docs/INTERACTIVE_EMBED.md)
 run parts node "$ROOT/tests/parts.js"   # several engines in one activity: the plan, the steppers, the co-simulation (docs/INTERACTIVE_LIBRARY.md §1.6)
 for f in "$ROOT"/tests/lib_*.js; do run "$(basename "$f" .js)" node "$f"; done   # each engine of the library, the kernel, and the snapshots of every engine's outputs
-run enginelib node "$ROOT/tests/enginelib.js"         # the engine library of sim-spec@1: the core, the catalogue, JS = Python checks of every engine (docs/INTERACTIVE_LIBRARY.md)
+run enginelib node "$ROOT/tests/enginelib.js"         # the engine library of sim-spec@1: the core, the catalogue, the golden checks of every engine (docs/INTERACTIVE_LIBRARY.md)
 run xapi node "$ROOT/tests/xapi.js"            # the xAPI 1.0.3 / cmi5 export (docs/INTERACTIVE_XAPI.md)
 run h5p_import python3 "$ROOT/tests/h5p_import.py"   # H5P import into the exercise types (docs/INTERACTIVE_AUTHORING.md §H5P)
 run shell node "$ROOT/tests/shell.js" "$T"
@@ -58,7 +58,7 @@ run thinking_types node "$ROOT/tests/thinking_types.js" "$T"   # flaw, case, pre
 run reports node "$ROOT/tests/reports.js" "$T"         # ⚑ problem reports: the button, the locator, the admins' page, the connector tools (docs/REPORTS.md)
 run enginereq node "$ROOT/tests/enginereq.js" "$T"       # ⚙ requests for new engines: #/engines, the form, the answers, the connector tools (docs/INTERACTIVE_LIBRARY.md §3)
 run validate_visual python3 "$ROOT/tests/validate_visual.py"
-run pack_rules node "$ROOT/tests/pack_rules.js"   # the quality rules, Python and JS alike (tools/pack_rules.json, docs/PIPELINES.md §4)
+run pack_rules node "$ROOT/tests/pack_rules.js"   # the pack and quality rules: the golden issues, validate.py through the bridge (CONTENT_SPEC.md, docs/PIPELINES.md §4)
 run pipelines python3 "$ROOT/tests/pipelines.py"   # the content flows, step by step (tools/pipelines/, docs/PIPELINES.md)
 run quality_fixtures python3 "$ROOT/tests/quality_fixtures.py"   # the Q1–Q8 good/bad exercise samples (tools/CONTENT_SPEC.md)
 run validate_pack_i18n python3 "$ROOT/tests/validate_pack_i18n.py"   # packs in several languages: subject.i18n, translated chapters (docs/i18n.md §10)

@@ -35,12 +35,11 @@ const embedText = () => cp.execFileSync('python3', [path.join(ROOT, 'tools', 'bu
 /* ---------- the modules, as the app loads them ---------- */
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaLibSchema = ENGINES.kernel('schema'), NoemaLibGraph = ENGINES.mod('graph@1'), NoemaLibGenetics = ENGINES.mod('genetics@1'), NoemaLibClinic = ENGINES.mod('clinic@1');
-require(path.join(ROOT, 'engine', 'packcheck.js'));
 const SF = require(path.join(ROOT, 'engine', 'schemaform.js'));
 require(path.join(ROOT, 'tools', 'i18n', 'node.js')).load();   // the app's i18n runtime (English): the page reads its words through NoemaI18n
 require(EMBED);
 const AA = require(path.join(ROOT, 'engine', 'activity_author.js'));
-const P = globalThis.NoemaPackCheck;
+const P = globalThis.NoemaCore.content;   // the content checks (build/noema-tools.cjs), as the app's NoemaCore.content
 const sim = SCH('noema.sim-spec.v1.schema.json'), regSchema = SCH('noema.activities.v1.schema.json');
 const reg = SF.registry(SCHEMA_FILES.map(SCH));
 AA.registry(SCHEMA_FILES.map(SCH));

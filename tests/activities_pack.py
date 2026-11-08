@@ -275,7 +275,8 @@ r = mk(bad, 'op3'); check(r.returncode == 1 and 'activities/_parts/oral-pk.json 
 # what is refused
 def refused(name, change, want):
     w = os.path.join(T, 'bad-' + name); shutil.copytree(sd, w); shutil.rmtree(os.path.join(w, 'build'), ignore_errors=True); change(w)
-    r = mk(w, 'ob-' + name); check(r.returncode == 1 and want in r.stdout, 'refused: ' + name, r.stdout + r.stderr)
+    q = lambda s: s.replace("'", '"')   # the names in the messages are quoted "…" (the content checks), as '…' by the former Python twin
+    r = mk(w, 'ob-' + name); check(r.returncode == 1 and q(want) in q(r.stdout), 'refused: ' + name, r.stdout + r.stderr)
 refused('missing locale', lambda w: os.remove(os.path.join(w, 'activities', 'alias-lab', 'strings.fr.json')), 'strings for fr are missing')
 refused('network link', lambda w: open(os.path.join(w, 'activities', 'alias-lab', 'app.html'), 'a').write('<img src="https://x.example/p.png">'), 'a link to the network')
 refused('same-origin', lambda w: open(os.path.join(w, 'activities', 'alias-lab', 'app.html'), 'a').write('<!-- allow-same-origin -->'), 'allow-same-origin')

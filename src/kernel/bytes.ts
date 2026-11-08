@@ -2,15 +2,16 @@
    gives the same digest in a page, a Worker, the connector and the Node tools (the content checks compare a bundle's sha256
    with its registry entry everywhere, never only where crypto.subtle happens to exist). */
 
-const ENC = new TextEncoder();
-const DEC = new TextDecoder('utf-8');
+// made on first use: loading the module needs nothing of the platform (build/app.js also starts in a bare context)
+let ENC: TextEncoder | null = null;
+let DEC: TextDecoder | null = null;
 
 /** the UTF-8 bytes of a text */
-export const utf8Bytes = (text: string): Uint8Array => ENC.encode(text);
+export const utf8Bytes = (text: string): Uint8Array => (ENC ??= new TextEncoder()).encode(text);
 /** the length of a text in UTF-8 bytes */
-export const utf8Length = (text: string): number => ENC.encode(text).length;
+export const utf8Length = (text: string): number => utf8Bytes(text).length;
 /** a text from UTF-8 bytes (malformed sequences become U+FFFD) */
-export const utf8Text = (bytes: Uint8Array): string => DEC.decode(bytes);
+export const utf8Text = (bytes: Uint8Array): string => (DEC ??= new TextDecoder('utf-8')).decode(bytes);
 
 const B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 const B64_INDEX = new Map(Array.from({ length: B64.length }, (_, i) => [B64.charAt(i), i]));

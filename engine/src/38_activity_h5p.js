@@ -4,8 +4,8 @@
    without scripts whose policy says frame-src 'none' (no self-navigation), the item runs in the wrapper's own frame with
    sandbox="allow-scripts" (opaque origin) and a CSP with no network at all and scripts ONLY by hash.
    The frame never fetches anything. The HOST page reads the package (inline base64, bytes, a loader function, or a URL it fetches
-   itself), checks its sha256, unzips it (DecompressionStream, no zip library), checks it against the allow-list (check(), the same
-   rules as tools/h5p_check.py) and builds the frame's document: the core and every library's preloadedJs as inline scripts (each with
+   itself), checks its sha256, unzips it (DecompressionStream, no zip library), checks it against the allow-list (check(): the rules the
+   content checks use in the app, the connector and the Node tools) and builds the frame's document: the core and every library's preloadedJs as inline scripts (each with
    the loop guard of 33_activity_guard.js, then allowed by its hash), every preloadedCss as an inline style with its url()s turned into
    data: URIs, content.json inside H5PIntegration. The content's own files (pictures, audio, video) are handed over the MessagePort as
    transferred ArrayBuffers right after the handshake; inside, H5P.getPath answers with blob: URLs made from them.
@@ -87,7 +87,7 @@
     return out;
   }
 
-  /* ---------- the rules (the same as tools/h5p_check.py; the messages are the same too) ---------- */
+  /* ---------- the rules (the content checks call them too: build/noema-tools.cjs for the Python tools and the skill) ---------- */
   const allowed = (name, mm) => (ALLOW.content[name] || []).includes(mm) || (ALLOW.libraries[name] || []).includes(mm);
   function walk(v, path, out) {
     if (Array.isArray(v)) v.forEach((x, i) => walk(x, path.concat(String(i)), out));

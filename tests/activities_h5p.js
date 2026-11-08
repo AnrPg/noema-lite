@@ -1,7 +1,7 @@
 /* The h5p@1 runtime (engine/src/38_activity_h5p.js, docs/INTERACTIVE_H5P.md, docs/adr/001 D11), in real browsers, with a stub host
    like skill/noema-pack-builder/scripts/activity_harness.js (ACT.registerRuntime stubbed, ACTP taken from 32_activities.js):
-     1. the rules: tools/h5p_allow.json = NoemaH5P.ALLOW; tools/h5p_check.py and NoemaH5P.check give the same errors on the same
-        packages (the fixtures and hostile variants: outside links, YouTube, a library off the list or refused, a .php file, a script in
+     1. the rules: tools/h5p_allow.json = NoemaH5P.ALLOW; NoemaH5P.check gives the golden errors of the former Python twin
+        (tools/h5p_check.py, tests/fixtures/parity/activities_h5p.json) on the same packages (the fixtures and hostile variants: outside links, YouTube, a library off the list or refused, a .php file, a script in
         content/, a missing library, a path that leaves the package);
      2. the frames: the wrapper without scripts (frame-src 'none'), the item in a frame sandboxed with exactly allow-scripts, scripts
         only by hash (no 'unsafe-inline', no 'unsafe-eval');
@@ -101,12 +101,8 @@ window.run = function (act, init) {
 const THEME = { tokens: { bg: '#fafaf7', card: '#ffffff', ink: '#222', c: '#4a6fa5', font: 'system-ui, sans-serif' }, scheme: 'light', reducedMotion: false, textScale: 1, dir: 'ltr' };
 const initOf = (id, o = {}) => ({ activityId: id, exerciseId: o.ex || null, attemptId: 't', seed: 1, task: {}, locale: o.locale || 'en', strings: {}, theme: THEME, state: o.state || null, stateVersion: 1, capabilities: ['state', 'events', 'resize', 'result'], limits: { msgBytes: 65536, stateBytes: 262144, eventsPerSec: 50 } });
 
-/* ---------- 1. the rules (no browser needed for the Python side) ---------- */
-function pyCheck(buf) {
-  const f = path.join(TMP, 'v' + Math.random().toString(36).slice(2) + '.h5p'); fs.writeFileSync(f, buf);
-  const out = cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'h5p_check.py'), f, '--json'], { encoding: 'utf8' });
-  return JSON.parse(out.stdout || '{}')[f] || { errors: ['h5p_check.py: ' + (out.stderr || '').slice(-200)], warnings: [] };
-}
+/* ---------- 1. the rules: the golden answers of the former Python twin tools/h5p_check.py, one per package in order ---------- */
+const GOLDEN = require('./golden.cjs')('activities_h5p')('rules');
 let TMP;
 
 async function run(name, beacon, hits) {
@@ -134,7 +130,7 @@ async function run(name, beacon, hits) {
   };
   const results = L => L.filter(m => m.type === 'result');
 
-  console.log('— the rules: the same in Python and in the app');
+  console.log('— the rules: the golden answers in the app');
   if (name === (process.env.BROWSERS || 'chromium').split(',')[0]) {
     const allow = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'h5p_allow.json'), 'utf8'));
     const js = await p.evaluate(() => NoemaH5P.ALLOW);
@@ -143,13 +139,15 @@ async function run(name, beacon, hits) {
       && JSON.stringify(allow.libraries) === JSON.stringify(js.libraries) && JSON.stringify(allow.refuse) === JSON.stringify(js.refuse)
       && JSON.stringify(allow.files.extensions) === JSON.stringify(js.extensions) && JSON.stringify(allow.files.noExtension) === JSON.stringify(js.noExtension);
     ok(same, 'tools/h5p_allow.json and NoemaH5P.ALLOW agree');
-    for (const [k, buf] of [...Object.entries(PKG).map(([k, b]) => ['fixture ' + k, b]), ...Object.entries(BAD)]) {
-      const py = pyCheck(buf);
+    const all = [...Object.entries(PKG).map(([k, b]) => ['fixture ' + k, b]), ...Object.entries(BAD)];
+    ok(all.length === GOLDEN.length, `a golden answer for each of the ${all.length} packages`);
+    for (const [i, [k, buf]] of all.entries()) {
+      const py = GOLDEN[i] || { errors: [], warnings: [] };
       const jsr = await p.evaluate(async b64 => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
         try { const r = NoemaH5P.check(await NoemaH5P.unzip(u)); return { errors: r.errors, warnings: r.warnings }; } catch (e) { return { errors: ['unzip: ' + e.message], warnings: [] }; } }, buf.toString('base64'));
       const want = k.startsWith('fixture') ? 0 : 1;
       ok(!!py.errors.length === !!want && JSON.stringify(py.errors) === JSON.stringify(jsr.errors) && JSON.stringify(py.warnings) === JSON.stringify(jsr.warnings),
-        `${k}: ${want ? 'refused' : 'accepted'} by h5p_check.py and NoemaH5P.check alike${py.errors.length ? ' — ' + py.errors[0] : ''}${JSON.stringify(py.errors) !== JSON.stringify(jsr.errors) ? '  (JS: ' + JSON.stringify(jsr.errors).slice(0, 200) + ')' : ''}`);
+        `${k}: ${want ? 'refused' : 'accepted'} by NoemaH5P.check, as the golden answer${py.errors.length ? ' — ' + py.errors[0] : ''}${JSON.stringify(py.errors) !== JSON.stringify(jsr.errors) ? '  (JS: ' + JSON.stringify(jsr.errors).slice(0, 200) + ')' : ''}`);
     }
   }
 

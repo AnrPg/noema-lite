@@ -51,5 +51,32 @@ export interface CheckEnv {
   readonly embed: EmbedChecks | null;
   readonly h5p: H5PChecks | null;
 }
+/** the engine library as a root has it (src/engines/library.ts EngineLibrary, NoemaCore.engines): its expression language and
+    its loaded engines */
+export interface EngineSource {
+  readonly expr: ExprChecker | null;
+  loaded(id: string): unknown;
+}
+/** where the activity runtimes publish their checkers (NoemaWasm, NoemaEmbed, NoemaH5P): the page, or the scope that ran them */
+export type RuntimeHost = () => Readonly<Record<string, unknown>>;
+const pick = (host: RuntimeHost, name: string): unknown => host()[name] ?? null;
+
+/** the CheckEnv of a root: the library's expression language and loaded engines, the runtimes' checkers as they are when a check
+    runs (the app's runtimes load after the core; the connector's and the Node tools' scope is filled after the checks are made) */
+export function envOf(engines: EngineSource, host: RuntimeHost): CheckEnv {
+  return {
+    expr: engines.expr,
+    engine: (id: string) => engines.loaded(id) as EngineChecks | null,
+    get wasm() {
+      return pick(host, 'NoemaWasm') as WasmChecks | null;
+    },
+    get embed() {
+      return pick(host, 'NoemaEmbed') as EmbedChecks | null;
+    },
+    get h5p() {
+      return pick(host, 'NoemaH5P') as H5PChecks | null;
+    },
+  };
+}
 /** no expression language and no engine: the checks that need them say they are not loaded here */
 export const NO_ENGINES: CheckEnv = { expr: null, engine: () => null, wasm: null, embed: null, h5p: null };

@@ -271,8 +271,8 @@
   async function attachTranslation(acc, f) {
     const meta = (await subjectsFor(acc)).find(x => x.id === f.pack);
     if (!meta) throw new Error(tr('loader.tr.noSubject', { id: String(f.pack || '') }));
-    const pack = await getPack(acc, meta), r = NoemaPackCheck.checkTranslation(f, pack);
-    if (r.errors.length) throw new Error(tr('loader.tr.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (engine/packcheck.js)
+    const pack = await getPack(acc, meta), r = NoemaCore.content.checkTranslation(f, pack);
+    if (r.errors.length) throw new Error(tr('loader.tr.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (src/features/content)
     await IDB.put('packs', trKey(acc, f.pack, f.locale), f);
     if (isCloudAcc(acc)) await NoemaCloud.uploadObject(`packs/${f.pack}.tr.${f.locale}.json`, new Blob([JSON.stringify(f)], { type: 'application/json' }), 'application/json').catch(e => console.warn(e));
     if (meta.origin === 'imported') {   // the subject now names it, on every device

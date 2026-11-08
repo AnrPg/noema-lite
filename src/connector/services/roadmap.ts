@@ -10,7 +10,7 @@ export interface RoadmapTodo {
 /** 🌐 What of a Roadmap is still to be translated into the locales every pack gets — the source texts, ready for
     noema_save_roadmap_translation. only: a step id → that step alone (with the Roadmap's title). */
 export function roadmapTodo(E: EngineApi, c: Curriculum, { only = null }: { only?: string | null } = {}): RoadmapTodo[] {
-  const want = E.packCheck.requiredLocales(c.language || 'en').translations,
+  const want = E.content.requiredLocales(c.language || 'en').translations,
     out: RoadmapTodo[] = [];
   for (const loc of want) {
     const T = E.curriculum.i18nTodo(c, loc),

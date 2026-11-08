@@ -38,7 +38,7 @@ export const tool: Tool = {
     } catch (e) {
       return fail(`No uploaded file found for "${sid}" (${message(e).slice(0, 120)}). Run the curl command from noema_start_upload first.`);
     }
-    const res = ctx.engine.packCheck.checkPack(p, sid, { requireQuality: true });
+    const res = ctx.engine.content.checkPack(p, sid, { requireQuality: true });
     if (res.errors.length)
       return fail(
         `The pack has ${res.errors.length} error(s) — fix them, rebuild with make_pack.py and upload again:\n- ${res.errors.slice(0, 40).join('\n- ')}`,

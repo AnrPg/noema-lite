@@ -296,7 +296,7 @@ const KA = { generate: { kind: 'karate' } };
   ok(ctx.self.noemaEngine.create(ka, {}).run({}).b === G.engine.create(ka, {}).run({}).b, 'the Worker: karate betweenness bit for bit');
 }
 {
-  // check codes (the parity with tools/lib_graph.py is tests/enginelib.js)
+  // check codes (the golden outputs of the former Python twin are in tests/enginelib.js)
   const C1 = s => G.checkSpec(s).filter(p => p.level === 'error').map(p => p.code);
   ok(C1(spec({ graph: dg(CLRS_DIJ, true), generate: { kind: 'karate' } }, [])).includes('graph'), 'check: graph and generate together → graph');
   ok(C1(spec({ graph: dg(CLRS_DIJ, true), run: { alg: 'kruskal' } }, [])).includes('undirected-required'), 'check: Kruskal on a digraph → undirected-required');
@@ -317,15 +317,13 @@ const KA = { generate: { kind: 'karate' } };
   ok(t1 < 50, `speed: a typical run (CLRS Dijkstra + karate PageRank with scenes) ${t1} ms < 50 ms`);
   ok(t3 < 2000, `speed: the worst allowed (G(2000, 0.01) properties, Girvan–Newman on karate, Brandes cut by the budget) ${t3} ms < 2 s`);
 }
-// ---------- the reference activity dijkstra-steps (its exercise's checks and tests.json; packcheck and activities.py agree) ----------
+// ---------- the reference activity dijkstra-steps (its exercise's checks and tests.json; the content checks pass it) ----------
 {
   const AD = path.join(ROOT, 'tools', 'activities_examples', 'dijkstra-steps'), rd = f => JSON.parse(fs.readFileSync(path.join(AD, f), 'utf8'));
   const ex = rd('spec.json'), sim = G.engine.create(ex, { seed: 1 });
   const LOC = ['en', 'el', 'ru', 'de', 'fr'], tables = Object.fromEntries(LOC.map(l => [l, rd(`strings.${l}.json`)]));
-  require(path.join(ROOT, 'engine', 'packcheck.js'));
-  const js = globalThis.NoemaPackCheck.checkSimSpec(ex, tables);
-  const py = JSON.parse(require('child_process').execFileSync('python3', ['-c', 'import json, sys, activities as A; d = json.loads(sys.stdin.read()); print(json.dumps(A.check_spec(d[0], tables=d[1])))'], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify([ex, tables]), encoding: 'utf8' }));
-  ok(js.length === 0 && py.length === 0, `dijkstra-steps: the spec passes packcheck (JS) and activities.check_spec (Python) with its five string tables${js.length + py.length ? ': ' + js.concat(py).join('; ') : ''}`);
+  const js = ENGINES.content().checkSimSpec(ex, tables);
+  ok(js.length === 0, `dijkstra-steps: the spec passes the content checks (checkSimSpec) with its five string tables${js.length ? ': ' + js.join('; ') : ''}`);
   ok(LOC.every(l => JSON.stringify(Object.keys(tables[l]).sort()) === JSON.stringify(Object.keys(tables.en).sort())), 'dijkstra-steps: the five string tables have the same keys');
   const act = rd('activity.json'); ok(act.id === 'dijkstra-steps' && act.runtime === 'sim-spec@1' && fs.readFileSync(path.join(AD, 'fallback.svg'), 'utf8').startsWith('<svg'), 'dijkstra-steps: activity.json and fallback.svg');
   const checks = ['dx < dOld', 'wst >= wLeast', 'frame == steps'].map(e => NoemaExpr.compile(e));

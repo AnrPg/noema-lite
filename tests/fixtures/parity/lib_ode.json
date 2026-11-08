@@ -1,0 +1,949 @@
+{
+ "tables": {
+  "in": null,
+  "out": [
+   [
+    "nan",
+    "blow-up",
+    "step-underflow",
+    "budget",
+    "time",
+    "map-escape",
+    "zeno",
+    "stiff",
+    "stiff-switched",
+    "event-limit",
+    "newton",
+    "non-hyperbolic",
+    "eigen",
+    "lyap-short",
+    "invariant-drift",
+    "period-not-found",
+    "template-quantity",
+    "degenerate-closed-form",
+    "stopped"
+   ],
+   [
+    "auto",
+    "dopri5",
+    "rosenbrock",
+    "rk4",
+    "heun",
+    "midpoint",
+    "euler",
+    "verlet",
+    "yoshida4"
+   ],
+   [
+    "t",
+    "state",
+    "eventTime",
+    "eventState",
+    "invariant",
+    "lyapT",
+    "lyapRun",
+    "sweepParam",
+    "sweepValue"
+   ],
+   [
+    "final",
+    "stat",
+    "at",
+    "eventCount",
+    "eventTime",
+    "eventPeriod",
+    "period",
+    "drift",
+    "eqCount",
+    "eq",
+    "eigRe",
+    "eigIm",
+    "eqStable",
+    "eqType",
+    "lyap",
+    "lyapSum",
+    "kaplanYorke",
+    "quantity",
+    "steps",
+    "rejected",
+    "flag",
+    "ok"
+   ],
+   [
+    "phase",
+    "cobweb",
+    "orbit",
+    "section"
+   ]
+  ]
+ },
+ "tmeta": {
+  "in": null,
+  "out": {
+   "sir": {
+    "kind": "ode",
+    "params": [
+     "beta",
+     "gamma",
+     "mu",
+     "N",
+     "I0",
+     "Rinit"
+    ],
+    "states": [
+     "S",
+     "I",
+     "R"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "peak"
+    ],
+    "invariants": [
+     "total"
+    ],
+    "quantities": [
+     "R0",
+     "herd",
+     "finalSize",
+     "peakI",
+     "Sstar",
+     "Istar",
+     "period"
+    ],
+    "pairs": false
+   },
+   "seir": {
+    "kind": "ode",
+    "params": [
+     "beta",
+     "sigma",
+     "gamma",
+     "mu",
+     "N",
+     "E0",
+     "I0"
+    ],
+    "states": [
+     "S",
+     "E",
+     "I",
+     "R"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [
+     "total"
+    ],
+    "quantities": [
+     "R0",
+     "herd",
+     "growth"
+    ],
+    "pairs": false
+   },
+   "sirs": {
+    "kind": "ode",
+    "params": [
+     "beta",
+     "gamma",
+     "omega",
+     "N",
+     "I0"
+    ],
+    "states": [
+     "S",
+     "I",
+     "R"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [
+     "total"
+    ],
+    "quantities": [
+     "R0",
+     "Istar"
+    ],
+    "pairs": false
+   },
+   "pk": {
+    "kind": "ode",
+    "params": [
+     "dose",
+     "V",
+     "CL",
+     "ka",
+     "F",
+     "tau",
+     "doses",
+     "rate",
+     "Tinf"
+    ],
+    "states": [
+     "Ag",
+     "Ac"
+    ],
+    "aux": [
+     "C",
+     "k"
+    ],
+    "delays": [],
+    "events": [
+     "dose",
+     "infusionEnd"
+    ],
+    "invariants": [],
+    "quantities": [
+     "k",
+     "thalf",
+     "AUC",
+     "tmax",
+     "Cmax",
+     "Racc",
+     "CssMax",
+     "CssMin",
+     "Cavg",
+     "Css",
+     "loading"
+    ],
+    "pairs": false
+   },
+   "pk2": {
+    "kind": "ode",
+    "params": [
+     "dose",
+     "V1",
+     "k10",
+     "k12",
+     "k21"
+    ],
+    "states": [
+     "A1",
+     "A2"
+    ],
+    "aux": [
+     "C"
+    ],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "alpha",
+     "beta",
+     "A",
+     "B",
+     "Vss",
+     "thalfBeta"
+    ],
+    "pairs": false
+   },
+   "mm": {
+    "kind": "ode",
+    "params": [
+     "Vmax",
+     "Km",
+     "S0",
+     "I",
+     "Ki",
+     "Kiu"
+    ],
+    "states": [
+     "S",
+     "P"
+    ],
+    "aux": [
+     "ac",
+     "au",
+     "v"
+    ],
+    "delays": [],
+    "events": [],
+    "invariants": [
+     "mass"
+    ],
+    "quantities": [
+     "KmApp",
+     "VmaxApp",
+     "v0",
+     "Sexact",
+     "IC50"
+    ],
+    "pairs": false
+   },
+   "mmfull": {
+    "kind": "ode",
+    "params": [
+     "k1",
+     "km1",
+     "k2",
+     "E0",
+     "S0"
+    ],
+    "states": [
+     "E",
+     "S",
+     "Cx",
+     "P"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [
+     "enzyme",
+     "substrate"
+    ],
+    "quantities": [
+     "Km",
+     "Vmax",
+     "qssaRatio"
+    ],
+    "pairs": false
+   },
+   "logistic": {
+    "kind": "ode",
+    "params": [
+     "r",
+     "K",
+     "N0"
+    ],
+    "states": [
+     "N"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "Nexact",
+     "tInflect",
+     "maxRate",
+     "doubling"
+    ],
+    "pairs": false
+   },
+   "gompertz": {
+    "kind": "ode",
+    "params": [
+     "r",
+     "K",
+     "N0"
+    ],
+    "states": [
+     "N"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "Nexact",
+     "Ninflect",
+     "tInflect"
+    ],
+    "pairs": false
+   },
+   "allee": {
+    "kind": "ode",
+    "params": [
+     "r",
+     "K",
+     "A",
+     "N0"
+    ],
+    "states": [
+     "N"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "threshold"
+    ],
+    "pairs": false
+   },
+   "lv": {
+    "kind": "ode",
+    "params": [
+     "alpha",
+     "beta",
+     "gamma",
+     "delta",
+     "x0",
+     "y0"
+    ],
+    "states": [
+     "x",
+     "y"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "cycle"
+    ],
+    "invariants": [
+     "H"
+    ],
+    "quantities": [
+     "xStar",
+     "yStar",
+     "smallPeriod"
+    ],
+    "pairs": false
+   },
+   "rm": {
+    "kind": "ode",
+    "params": [
+     "r",
+     "K",
+     "a",
+     "h",
+     "eff",
+     "m",
+     "x0",
+     "y0"
+    ],
+    "states": [
+     "x",
+     "y"
+    ],
+    "aux": [
+     "fr"
+    ],
+    "delays": [],
+    "events": [
+     "cycle"
+    ],
+    "invariants": [],
+    "quantities": [
+     "xStar",
+     "yStar",
+     "Kc"
+    ],
+    "pairs": false
+   },
+   "competition": {
+    "kind": "ode",
+    "params": [
+     "r1",
+     "r2",
+     "K1",
+     "K2",
+     "a12",
+     "a21",
+     "N10",
+     "N20"
+    ],
+    "states": [
+     "N1",
+     "N2"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "outcome",
+     "N1star",
+     "N2star"
+    ],
+    "pairs": false
+   },
+   "chemostat": {
+    "kind": "ode",
+    "params": [
+     "mumax",
+     "Ks",
+     "Y",
+     "Sin",
+     "D",
+     "S0",
+     "X0"
+    ],
+    "states": [
+     "S",
+     "X"
+    ],
+    "aux": [
+     "mu"
+    ],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "Sstar",
+     "Xstar",
+     "Dc",
+     "Dopt"
+    ],
+    "pairs": false
+   },
+   "toggle": {
+    "kind": "ode",
+    "params": [
+     "a1",
+     "a2",
+     "beta",
+     "gamma",
+     "iptg",
+     "Kd",
+     "eta",
+     "u0",
+     "v0"
+    ],
+    "states": [
+     "u",
+     "v"
+    ],
+    "aux": [
+     "ue"
+    ],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [],
+    "pairs": false
+   },
+   "repressilator": {
+    "kind": "ode",
+    "params": [
+     "alpha",
+     "alpha0",
+     "beta",
+     "nH",
+     "m10",
+     "m20",
+     "m30"
+    ],
+    "states": [
+     "m1",
+     "m2",
+     "m3",
+     "p1",
+     "p2",
+     "p3"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "cycle"
+    ],
+    "invariants": [],
+    "quantities": [],
+    "pairs": false
+   },
+   "hh": {
+    "kind": "ode",
+    "params": [
+     "I",
+     "Ipulse",
+     "tOn",
+     "tDur",
+     "temp",
+     "gNa",
+     "gK",
+     "gL",
+     "ENa",
+     "EK",
+     "EL",
+     "Cm"
+    ],
+    "states": [
+     "V",
+     "m",
+     "h",
+     "nK"
+    ],
+    "aux": [
+     "phi",
+     "am",
+     "bm",
+     "ah",
+     "bh",
+     "an",
+     "bn",
+     "Iapp",
+     "INa",
+     "IK",
+     "IL"
+    ],
+    "delays": [],
+    "events": [
+     "spike",
+     "pulseOn",
+     "pulseOff"
+    ],
+    "invariants": [],
+    "quantities": [
+     "phi"
+    ],
+    "pairs": false
+   },
+   "fhn": {
+    "kind": "ode",
+    "params": [
+     "a",
+     "b",
+     "eps",
+     "I",
+     "v0",
+     "w0"
+    ],
+    "states": [
+     "v",
+     "w"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "spike"
+    ],
+    "invariants": [],
+    "quantities": [
+     "IH1",
+     "IH2"
+    ],
+    "pairs": false
+   },
+   "pendulum": {
+    "kind": "ode",
+    "params": [
+     "g",
+     "L",
+     "q",
+     "F",
+     "w",
+     "theta0",
+     "omega0"
+    ],
+    "states": [
+     "theta",
+     "omega"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "turn"
+    ],
+    "invariants": [
+     "E"
+    ],
+    "quantities": [
+     "T0",
+     "T",
+     "ratio"
+    ],
+    "pairs": true
+   },
+   "lorenz": {
+    "kind": "ode",
+    "params": [
+     "sigma",
+     "rho",
+     "beta",
+     "x0",
+     "y0",
+     "z0"
+    ],
+    "states": [
+     "x",
+     "y",
+     "z"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "zmax"
+    ],
+    "invariants": [],
+    "quantities": [
+     "rhoH",
+     "Cx",
+     "divergence"
+    ],
+    "pairs": false
+   },
+   "rossler": {
+    "kind": "ode",
+    "params": [
+     "a",
+     "b",
+     "c",
+     "x0",
+     "y0",
+     "z0"
+    ],
+    "states": [
+     "x",
+     "y",
+     "z"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "section"
+    ],
+    "invariants": [],
+    "quantities": [],
+    "pairs": false
+   },
+   "vdp": {
+    "kind": "ode",
+    "params": [
+     "mu",
+     "x0",
+     "y0"
+    ],
+    "states": [
+     "x",
+     "y"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "up"
+    ],
+    "invariants": [],
+    "quantities": [
+     "relaxPeriod"
+    ],
+    "pairs": false
+   },
+   "brusselator": {
+    "kind": "ode",
+    "params": [
+     "A",
+     "B",
+     "x0",
+     "y0"
+    ],
+    "states": [
+     "x",
+     "y"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "up"
+    ],
+    "invariants": [],
+    "quantities": [
+     "Bhopf",
+     "xStar",
+     "yStar"
+    ],
+    "pairs": false
+   },
+   "duffing": {
+    "kind": "ode",
+    "params": [
+     "delta",
+     "alpha",
+     "beta",
+     "gamma",
+     "omega",
+     "x0",
+     "v0"
+    ],
+    "states": [
+     "x",
+     "v"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [
+     "strobe"
+    ],
+    "invariants": [],
+    "quantities": [
+     "forcingPeriod"
+    ],
+    "pairs": false
+   },
+   "robertson": {
+    "kind": "ode",
+    "params": [
+     "k1",
+     "k2",
+     "k3"
+    ],
+    "states": [
+     "y1",
+     "y2",
+     "y3"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [
+     "mass"
+    ],
+    "quantities": [],
+    "pairs": false
+   },
+   "arenstorf": {
+    "kind": "ode",
+    "params": [
+     "mu",
+     "x0",
+     "vy0"
+    ],
+    "states": [
+     "x",
+     "y",
+     "vx",
+     "vy"
+    ],
+    "aux": [
+     "D1",
+     "D2"
+    ],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "period"
+    ],
+    "pairs": false
+   },
+   "kepler": {
+    "kind": "ode",
+    "params": [
+     "GM",
+     "x0",
+     "y0",
+     "vx0",
+     "vy0"
+    ],
+    "states": [
+     "x",
+     "y",
+     "vx",
+     "vy"
+    ],
+    "aux": [
+     "r3"
+    ],
+    "delays": [],
+    "events": [],
+    "invariants": [
+     "energy",
+     "angmom"
+    ],
+    "quantities": [
+     "period"
+    ],
+    "pairs": true
+   },
+   "logisticmap": {
+    "kind": "map",
+    "params": [
+     "r",
+     "x0"
+    ],
+    "states": [
+     "x"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "fixedPoint",
+     "r2",
+     "feigenbaum"
+    ],
+    "pairs": false
+   },
+   "ricker": {
+    "kind": "map",
+    "params": [
+     "r",
+     "x0"
+    ],
+    "states": [
+     "x"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "fixedPoint",
+     "flip"
+    ],
+    "pairs": false
+   },
+   "henon": {
+    "kind": "map",
+    "params": [
+     "a",
+     "b",
+     "x0",
+     "y0"
+    ],
+    "states": [
+     "x",
+     "y"
+    ],
+    "aux": [],
+    "delays": [],
+    "events": [],
+    "invariants": [],
+    "quantities": [
+     "fpX"
+    ],
+    "pairs": false
+   },
+   "delaylogistic": {
+    "kind": "dde",
+    "params": [
+     "r",
+     "K",
+     "tau",
+     "x0"
+    ],
+    "states": [
+     "x"
+    ],
+    "aux": [],
+    "delays": [
+     "xd"
+    ],
+    "events": [
+     "up"
+    ],
+    "invariants": [],
+    "quantities": [
+     "tauHopf"
+    ],
+    "pairs": false
+   },
+   "mackeyglass": {
+    "kind": "dde",
+    "params": [
+     "beta",
+     "gamma",
+     "nH",
+     "tau",
+     "x0"
+    ],
+    "states": [
+     "x"
+    ],
+    "aux": [],
+    "delays": [
+     "xd"
+    ],
+    "events": [],
+    "invariants": [],
+    "quantities": [],
+    "pairs": false
+   }
+  }
+ }
+}

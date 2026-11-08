@@ -1,0 +1,514 @@
+{
+ "check": {
+  "in": "c541c4efc5888c6dee6fa106fb94e04edf08543507d8bb5fdc2d083f5ed911cb",
+  "out": {
+   "devices": [
+    [],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "device is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "device is not an object",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "format",
+      "path": "format",
+      "msg": "not noema.twin/v1",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "battery.capacity",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "schedule.period",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sim.duration",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "battery",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "enum",
+      "path": "battery.chem",
+      "msg": "one of li-ion, lifepo4, alkaline, nimh, custom",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "battery.cells",
+      "msg": "needs an integer from 1 to 6",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "battery.selfDischarge",
+      "msg": "needs a number from 0 to 1",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "battery.rInt",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "battery.soc0",
+      "msg": "needs a number from 0 to 1",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "battery.curve",
+      "msg": "a custom battery needs a curve from soc 0 to 1, rising",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "value",
+      "path": "battery.curve",
+      "msg": "a custom battery needs a curve from soc 0 to 1, rising",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "unknown-field",
+      "path": "battery.curve",
+      "msg": "ignored (chem is not custom)",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "battery.curve[0].v",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "battery.curve[1]",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "power.sleep",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "power",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "schedule.period",
+      "msg": "needs a number > 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "schedule.sense",
+      "msg": "must be shorter than the period",
+      "level": "error"
+     },
+     {
+      "code": "budget",
+      "path": "sim.duration",
+      "msg": "more events than sim.maxEvents",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "schedule.txEvery",
+      "msg": "needs an integer from 1 to 10000",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "schedule.ack",
+      "msg": "needs true or false",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "schedule.retries",
+      "msg": "needs an integer from 0 to 8",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "sensors",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "sensors[2].id",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "sensors[3]",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "size",
+      "path": "sensors",
+      "msg": "more than 8 items",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "enum",
+      "path": "radio.tech",
+      "msg": "one of lora, ble, fsk",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "radio.bw",
+      "msg": "LoRa bandwidth from 7.8 to 500 kHz",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "radio.sf",
+      "msg": "needs an integer from 7 to 12",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "radio.payload",
+      "msg": "needs an integer from 0 to 255",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "brownout.v",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "budget",
+      "path": "sim.duration",
+      "msg": "more events than sim.maxEvents",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "sim.samples",
+      "msg": "needs an integer from 2 to 2000",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sim.maxEvents",
+      "msg": "needs an integer from 1 to 5000000",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "unknown-field",
+      "path": "colour",
+      "msg": "ignored",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "budget",
+      "path": "sim.duration",
+      "msg": "more events than sim.maxEvents",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "budget",
+      "path": "sim.duration",
+      "msg": "more events than sim.maxEvents",
+      "level": "error"
+     }
+    ]
+   ],
+   "faults": [
+    [],
+    [
+     {
+      "code": "fault",
+      "path": "",
+      "msg": "faults must be a list",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0]",
+      "msg": "a fault is an object {kind, ...}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].kind",
+      "msg": "one of sensor-stuck, sensor-drift, battery-ageing, antenna-detached, wake-period, brownout, clock-drift, sync-wake, busy-channel, sensor-tempco",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].sensor",
+      "msg": "not a sensor of the device",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].value",
+      "msg": "needs a number",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].at",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].factor",
+      "msg": "needs a number > 0 and <= 1",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].factor",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[0].rInt",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[0].factor",
+      "msg": "needs a number > 0 and <= 1",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].side",
+      "msg": "unknown field",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "faults[0].period",
+      "msg": "needs a number > 0",
+      "level": "error"
+     }
+    ]
+   ],
+   "specs": [
+    [],
+    [
+     {
+      "code": "format",
+      "path": "model",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "unknown-field",
+      "path": "model.x",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "format",
+      "path": "outputs",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "model.bindings[1].field",
+      "msg": "not a numeric field of the device",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[2].field",
+      "msg": "not a numeric field of the device",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[2].expr",
+      "msg": "needs an expression",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[3]",
+      "msg": "a binding is an object {field, expr}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "not a scalar of twin@1",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].sensor",
+      "msg": "not a sensor of the device",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].sensor",
+      "msg": "not a sensor of the device",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[4].kind",
+      "msg": "scalar or series",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5]",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "output",
+      "path": "outputs[0].sensor",
+      "msg": "not a sensor of the device",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "model.device.battery",
+      "msg": "not an object",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.device.schedule",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.device.sim",
+      "msg": "missing",
+      "level": "error"
+     }
+    ]
+   ]
+  }
+ }
+}

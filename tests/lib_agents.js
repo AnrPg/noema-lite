@@ -8,11 +8,12 @@
    4. protocols: Contract Net (Smith 1980) against the optimal assignment, auctions (Vickrey 1961: truthful bidding dominant in the
       second-price auction; revenue equivalence (n−1)/(n+1)), Rubinstein 1982 bargaining (1−δ₂)/(1−δ₁δ₂), Zeuthen → Nash 1950, the
       core and Shapley value (glove game, majority game), Axelrod's 1984 tournament (TFT against ALLD) and its ecology;
-   5. codes, the checker and its Python twin, the sim adapter, the stepper, the Worker source, speed, and the reference activity
+   5. codes, the checker and the golden outputs of its former Python twin, the sim adapter, the stepper, the Worker source, speed, and the reference activity
       schelling-segregation (its tests.json).
    Usage: node tests/lib_agents.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_agents');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
@@ -151,7 +152,7 @@ ok(A.TEMPLATES.length === 10 && A.PROTOCOLS.length === 5 && A.ACTIONS.length ===
   ok(same[0] === same[1] && other !== same[0], 'deterministic per seed: the same seed gives the same run, another seed another');
 }
 
-// ---------- 6. the checker and its Python twin ----------
+// ---------- 6. the checker and the golden outputs of its former Python twin ----------
 {
   const E = s => A.checkSpec(s).filter(p => p.level === 'error').map(p => p.code + ' ' + p.path);
   ok(E(spec({ space: { kind: 'none' }, breeds: [{ id: 'a', count: 1, rules: [{ do: 'move', how: 'random' }] }], steps: 1 }, [])).includes('value model.breeds[0].rules[0].how'), 'a model without space has no movement');
@@ -161,19 +162,14 @@ ok(A.TEMPLATES.length === 10 && A.PROTOCOLS.length === 5 && A.ACTIONS.length ===
   ok(E(spec({ protocol: { kind: 'auction' } }, [P('x', 'shapley')])).includes('output outputs[0].name'), 'a protocol output names what that protocol gives');
   const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'enginelib', 'agents.json'), 'utf8')).specs;
   const js = fx.map(s => { const p = A.checkSpec(s), bad = p.some(q => q.level === 'error'); return { p, x: bad ? null : A.exprs(s), k: bad ? null : A.keys(s) }; });
-  const py = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_agents as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else [list(t) for t in M.exprs(s)],'k':None if bad else [list(t) for t in M.keys(s)]})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(fx), encoding: 'utf8' }));
+  const py = want('check', fx, js);
   const same = js.filter((r, i) => JSON.stringify(r) === JSON.stringify(py[i])).length;
-  ok(fx.length >= 20 && same === fx.length && js.some(r => r.x) && js.some(r => !r.x), `tools/lib_agents.py agrees with the JS checker on ${same}/${fx.length} fixture specs (problems, expressions, keys; good and bad)`);
-  const pyc = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_agents as M; print(json.dumps([M.CODES,M.SERIES,M.SCALARS,M.SCENES,M.ACTIONS,M.PROTOCOLS,M.PROTO_NAMES,list(M.TEMPLATES),M.TEMPLATES,M.IPD]))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(pyc) === JSON.stringify([A.CODES, A.SERIES, A.SCALARS, A.SCENES, A.ACTIONS, A.PROTOCOLS, A.PROTO_NAMES, A.TEMPLATES, A.templateParams(), A.IPD]), 'the Python twin has the same codes, outputs, actions, protocols, templates (and their parameters) and IPD strategies');
+  ok(fx.length >= 20 && same === fx.length && js.some(r => r.x) && js.some(r => !r.x), `the JS checker gives the golden outputs of the former twin tools/lib_agents.py on ${same}/${fx.length} fixture specs (problems, expressions, keys; good and bad)`);
+  const pyc = want('tables', undefined, [A.CODES, A.SERIES, A.SCALARS, A.SCENES, A.ACTIONS, A.PROTOCOLS, A.PROTO_NAMES, A.TEMPLATES, A.templateParams(), A.IPD]);
+  ok(JSON.stringify(pyc) === JSON.stringify([A.CODES, A.SERIES, A.SCALARS, A.SCENES, A.ACTIONS, A.PROTOCOLS, A.PROTO_NAMES, A.TEMPLATES, A.templateParams(), A.IPD]), 'the same, as the golden tables of the former Python twin: codes, outputs, actions, protocols, templates (and their parameters) and IPD strategies');
   const tp = A.TEMPLATES.map(t => { const x = A.template(t); return { reporters: x.reporters.map(r => r.id), vars: [].concat(...x.breeds.map(b => Object.keys(b.vars || {}))), breeds: x.breeds.map(b => b.id), hist: (x.hist || []).map(h => h.id) }; });
-  const pyt = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_agents as M; print(json.dumps([M.TPL[t] for t in M.TEMPLATES]))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(tp) === JSON.stringify(pyt), 'the Python twin knows each template\'s reporters, variables, breeds and histograms');
+  const pyt = want('templates', undefined, tp);
+  ok(JSON.stringify(tp) === JSON.stringify(pyt), 'the golden tables of the former Python twin hold each template\'s reporters, variables, breeds and histograms');
   let allOk = true, worst = 0;
   fx.forEach(s => { if (A.checkSpec(s).some(p => p.level === 'error')) return; const env = {}; for (const p of s.params || []) env[p.id] = p.default; const [r, t] = ms(() => A.run(s, env, { seed: 1 })); worst = Math.max(worst, t); for (const o of s.outputs) { const v = r.out[o.id]; if (o.kind === 'series' ? !Array.isArray(v) || v.length > 2000 : o.kind === 'scene' ? !v || !Array.isArray(v.items) || v.items.length > 2000 || !v.items.every(it => C.ROLES.includes(it.c || 'base')) : typeof v !== 'number') allOk = false; } });
   ok(allOk && worst < 2000, `every good fixture runs: series ≤ 2000 points, scenes ≤ 2000 items in roles only, scalars numbers; the slowest ${worst.toFixed(0)} ms (< 2 s)`);

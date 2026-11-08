@@ -1,6 +1,6 @@
 /* external-embed@1 (docs/activities-dev/embed.md): an allow-listed third-party page in a frame, opt-in, explore only.
    1. Node (always): the runtime's copy of the allow-list equals tools/embed_allow.json; the URL grammar and the item / pack rules give the
-      same codes in JS (engine/src/45_activity_embed.js NoemaEmbed) and Python (tools/embed_check.py) on the same cases; the runtime
+      expected codes (engine/src/45_activity_embed.js NoemaEmbed, which the content checks use) on every case; the runtime
       registers only when the deployment switches it on; no provider asks for a sandbox token outside the safe set.
    2. Browser (with --browser): a stub host (like skill/noema-pack-builder/scripts/activity_harness.js) with the real runtime on
       http://localhost:<a>, and a LOCAL fake provider on https://127.0.0.1:<b> (a self-signed certificate, made here with openssl)
@@ -16,13 +16,6 @@ const SRC = fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.
 const ALLOW = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'embed_allow.json'), 'utf8'));
 const E = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));
 const codes = list => list.map(m => (m.match(/(?:^|: )([a-z][a-z-]+):/) || [])[1] || m).sort();
-const py = (fn, payload) => {
-  const tmp = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-')), 'cases.json'); fs.writeFileSync(tmp, JSON.stringify(payload));
-  return JSON.parse(cp.execFileSync('python3', ['-I', '-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import embed_check as C
-d = json.load(open(sys.argv[1], encoding='utf-8')); out = {}
-${fn}
-print(json.dumps(out))`, tmp], { encoding: 'utf8' }));
-};
 
 console.log('— the allow-list');
 ok(JSON.stringify(E.PROVIDERS) === JSON.stringify(ALLOW.providers), 'the runtime\'s copy of the allow-list equals tools/embed_allow.json');
@@ -32,7 +25,7 @@ ok(ALLOW.providers.every(p => p.supportsResult === false), 'no provider has a re
 ok(ALLOW.providers.every(p => ['id', 'name', 'status', 'origins', 'path', 'licenses', 'creditMust', 'credit', 'terms', 'notes'].every(k => k in p) && /^https:\/\//.test(p.terms)), 'every provider has its licence, credit template, terms URL and notes');
 ok(['phet', 'geogebra', 'desmos'].every(id => E.PROVIDERS.find(p => p.id === id)?.status === 'allowed') && ['falstad', 'circuitjs', 'wokwi'].every(id => E.PROVIDERS.find(p => p.id === id)?.status === 'pending'), 'allowed: PhET, GeoGebra, Desmos; pending (terms not confirmed): Falstad, CircuitJS1, Wokwi');
 
-console.log('— URLs: the grammar and the exact match (JS and Python)');
+console.log('— URLs: the grammar and the exact match');
 const PH = 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html';
 const URLS = [
   ['phet', PH, 'ok'], ['phet', PH + '?locale=el', 'ok'], ['phet', 'https://phet.colorado.edu/sims/html/ohms-law/1.4.21/ohms-law_el.html', 'ok'],
@@ -52,14 +45,12 @@ const URLS = [
   ['phet', PH + '?locale=el&brand=x', 'url-query'], ['phet', PH + '?', 'ok'], ['desmos', 'https://www.desmos.com/calculator/zukjgk9iry', 'url-query'], ['desmos', 'https://www.desmos.com/calculator/zukjgk9iry?embed&x', 'url-query'],
   ['phet', PH + '#x', 'url-hash'], ['phet', PH + 'x'.repeat(2100), 'url-long'],
 ];
-const pyU = py(`for i, (pid, u, _) in enumerate(d):
-    p = next(x for x in C.providers() if x['id'] == pid); m = C.match(u, p); out[i] = 'ok' if m.get('ok') else m['code']`, URLS);
 URLS.forEach(([pid, u, want], i) => {
   const m = E.match(u, E.PROVIDERS.find(p => p.id === pid)), js = m.ok ? 'ok' : m.code;
-  ok(js === want && pyU[i] === want, `${pid} ${JSON.stringify(String(u).slice(0, 70))} → ${want}${js !== want || pyU[i] !== want ? `  (JS ${js}, Python ${pyU[i]})` : ''}`);
+  ok(js === want, `${pid} ${JSON.stringify(String(u).slice(0, 70))} → ${want}${js !== want ? `  (got ${js})` : ''}`);
 });
 
-console.log('— items and packs (JS and Python give the same codes)');
+console.log('— items and packs (the expected codes)');
 const good = () => ({ id: 'ohm-phet', runtime: 'external-embed@1', provider: 'phet', url: PH + '?locale=el', stateVersion: 1,
   credit: 'PhET Interactive Simulations, University of Colorado Boulder · Ohm\'s Law · CC-BY-4.0 · https://phet.colorado.edu', license: 'CC-BY-4.0',
   fallback: { media: 'ohm-still', text: 'Ohm\'s law: the current grows with the voltage and falls with the resistance (I = V / R).' },
@@ -87,33 +78,27 @@ const ITEMS = {
   'not an object': [a => null, ['item']],
 };
 const itemCases = Object.entries(ITEMS).map(([k, [f]]) => { const a = good(); const r = f(a); return [k, r === null ? null : a]; });
-const pyI = py(`for k, a in d:
-    e, w = C.check_item(a); out[k] = [e, w]`, itemCases);
 for (const [k, a] of itemCases) {
-  const js = E.check(a), want = ITEMS[k][1].slice().sort(), jc = codes(js.errors), pc = codes(pyI[k][0]);
-  ok(JSON.stringify(jc) === JSON.stringify(want) && JSON.stringify(pc) === JSON.stringify(want) && js.warnings.length === pyI[k][1].length,
-    `${k}: ${want.join(', ') || 'no errors'}${JSON.stringify(jc) !== JSON.stringify(want) || JSON.stringify(pc) !== JSON.stringify(want) ? `  (JS ${jc.join(',')} | Python ${pc.join(',')})` : ''}`);
+  const js = E.check(a), want = ITEMS[k][1].slice().sort(), jc = codes(js.errors);
+  ok(JSON.stringify(jc) === JSON.stringify(want) && js.warnings.length === (k.startsWith('non-commercial') ? 1 : 0),
+    `${k}: ${want.join(', ') || 'no errors'}${JSON.stringify(jc) !== JSON.stringify(want) ? `  (got ${jc.join(',')})` : ''}`);
 }
 ok(E.check({ ...good(), license: 'CC-BY-NC-4.0' }).warnings.some(w => /^license-nc/.test(w)), 'a non-commercial licence is a warning (the owner decides)');
 const pack = sim => ({ activities: { format: 'noema.activities/v1', items: [good(), { id: 'other', runtime: 'html-app@1' }] },
   chapters: [{ id: 'ch01', exercises: sim ? [{ id: 'ch01-e900', type: 'sim', activity: 'ohm-phet' }] : [{ id: 'ch01-e1', type: 'mcq' }] }] });
-const pyP = py(`for k, p in d:
-    e, w = C.check_pack(p); out[k] = e`, [['block', pack(false)], ['sim', pack(true)]]);
-ok(E.checkPack(pack(false)).errors.length === 0 && pyP.block.length === 0, 'a pack with the embed in a theory block passes (other runtimes are left to their own checks)');
-ok(E.checkPack(pack(true)).errors.some(m => /sim-embed/.test(m)) && pyP.sim.some(m => /sim-embed/.test(m)), 'a sim exercise on an embed is refused (explore only), in JS and Python');
-ok(cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'embed_check.py'), path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-')), 'x.json')], { encoding: 'utf8' }).status !== 0, 'embed_check.py: a missing file fails');
+ok(E.checkPack(pack(false)).errors.length === 0, 'a pack with the embed in a theory block passes (other runtimes are left to their own checks)');
+ok(E.checkPack(pack(true)).errors.some(m => /sim-embed/.test(m)), 'a sim exercise on an embed is refused (explore only)');
 
 { // the folder form: activities/activities.json names no strings; each language's title is in activities/<id>/strings.<locale>.json
   const d = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-embed-reg-')), a = good(), st = a.strings; delete a.strings;
   fs.mkdirSync(path.join(d, 'activities', a.id), { recursive: true });
   fs.writeFileSync(path.join(d, 'activities', 'activities.json'), JSON.stringify({ format: 'noema.activities/v1', items: [a] }));
   for (const [l, t] of Object.entries(st)) fs.writeFileSync(path.join(d, 'activities', a.id, `strings.${l}.json`), JSON.stringify(t));
-  const run = f => cp.spawnSync('python3', ['-I', path.join(ROOT, 'tools', 'embed_check.py'), f], { encoding: 'utf8' });
-  const r1 = run(path.join(d, 'activities', 'activities.json'));
-  fs.writeFileSync(path.join(d, 'pack.json'), JSON.stringify({ activities: { format: 'noema.activities/v1', items: [a] } }));
-  const r2 = run(path.join(d, 'pack.json'));
-  ok(r1.status === 0 && /no errors/.test(r1.stdout) && r2.status === 1 && /strings-title/.test(r2.stdout),
-    'embed_check.py on activities/activities.json reads the strings beside it (a good embed passes); a built pack without strings is still refused ' + JSON.stringify([r1.stdout, r2.stdout]));
+  // the skill's activity_lint.py reads the folder (tools/noema_lib.py load_activities) and checks it with the content checks
+  const r1 = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_lint.py'), d], { encoding: 'utf8' });
+  const r2 = E.checkPack({ activities: { format: 'noema.activities/v1', items: [a] } });
+  ok(/1 activity/.test(r1.stdout) && !/strings-title/.test(r1.stdout) && r2.errors.some(m => /strings-title/.test(m)),
+    'activity_lint.py on the activities folder reads the strings beside it (no strings-title); a built pack without strings is still refused ' + JSON.stringify([r1.stdout, r1.stderr]));
 }
 
 console.log('— registration (opt-in per deployment)');

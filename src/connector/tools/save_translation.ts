@@ -80,7 +80,7 @@ export const tool: Tool = {
       raw = JSON.stringify(f);
     }
     const tr: Translation = f;
-    const r = ctx.engine.packCheck.checkTranslation(tr, p);
+    const r = ctx.engine.content.checkTranslation(tr, p);
     if (r.errors.length) return fail(`${r.errors.length} error(s):\n- ${r.errors.slice(0, 40).join('\n- ')}`);
     const key = sagaKey('translation', sid, loc, (await sha256Hex(raw || JSON.stringify(tr))).slice(0, 32));
     try {

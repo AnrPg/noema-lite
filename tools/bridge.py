@@ -9,7 +9,7 @@ Source files of a bridge (next to the subject, or next to a pack.json):
                           "t": {"<k>#<sense id>": {t, note?, st?, src?}}, "sections": {sid: "preview in the native language"}}
   bridges/from-<locale>/core.json + <native>.json   the same, for a learner who reads the pack's TRANSLATION into <locale>
                           (docs/BRIDGE.md §2.4): its words are the translation's words, "source" is <locale>. Every new pack
-                          gets every pair — from its own language and from each translation (pack_rules.json "bridgesFrom"),
+                          gets every pair — from its own language and from each translation (the pack rules' languages.bridgesFrom),
                           made AFTER the translation: e.g. an English pack → en→el/ru/ar/de/fr, el→en/ru/ar/de/fr, ru→en/el/ar/de/fr, de→en/el/ru/ar/fr, fr→en/el/ru/ar/de: 25 pairs.
 
 Commands (SUBJ = a subject folder, or a pack .json with its bridges/ folder beside it). --from <locale> (every command):
@@ -18,7 +18,7 @@ noema-translation file beside a pack .json (<id>.tr.<locale>.json, or --translat
   python3 tools/bridge.py todo SUBJ [--chapters ch01,ch02] [--limit 400]   content words no entry covers yet (most frequent first)
   python3 tools/bridge.py coverage SUBJ [--native el]                      share of the content words covered, per chapter
   python3 tools/bridge.py check SUBJ                                       core + every native: errors, stale or missing translations, orphan anchors
-  python3 tools/bridge.py require SUBJ                                     check + EVERY pair a new pack needs (pack_rules.json "languages": from its
+  python3 tools/bridge.py require SUBJ                                     check + EVERY pair a new pack needs (the pack rules' languages: from its
                                                                            own language and from each translation into en, el, ru, ar, de, fr minus the
                                                                            language read), each covering >= 90 % of the content words and >= 80 %
                                                                            of the everyday ones (with --from: that translation's pairs only)
@@ -280,7 +280,7 @@ def src_of(e, s):
 def coverage(pack, entries, keep=(), chapters=None):
     """→ {'all': (covered, total), 'everyday': (covered, total), chapter id: (covered, total)} over the content words of
     the theory. 'everyday': the words of band 1 (or no band) and every word no entry covers yet — a bridge for A2/B1
-    learners must not skip the everyday words (tools/pack_rules.json "languages".bridgeCoverage)."""
+    learners must not skip the everyday words (the pack rules' languages.bridgeCoverage, src/features/content/domain/rules.ts)."""
     lang = pack['subject'].get('language', 'en'); idx = Index(list(entries) + [{'k': k, 'band': 3} for k in keep])   # keep: names left as they are count as covered
     res = {'all': [0, 0], 'everyday': [0, 0]}
     for cid, sid, blocks in sections(pack, chapters):
@@ -302,9 +302,9 @@ def coverage(pack, entries, keep=(), chapters=None):
     return res
 
 def required(pack):
-    """The natives every new pack gets a bridge into (tools/pack_rules.json "languages", minus the pack's language) and the minimum coverage."""
-    from noema_lib import languages
-    L = languages(); own = (pack['subject'].get('language') or 'en').split('-')[0].lower()
+    """The natives every new pack gets a bridge into (the pack rules' "languages", minus the pack's language) and the minimum coverage."""
+    import noema_core
+    L = noema_core.rules()['languages']; own = (pack['subject'].get('language') or 'en').split('-')[0].lower()
     return [x for x in L.get('bridges') or [] if x.split('-')[0].lower() != own], L.get('bridgeCoverage') or {}
 
 def require(pack, bdir):
@@ -321,12 +321,12 @@ def require(pack, bdir):
     return E, W
 
 def require_all(subj, translation=None):
-    """require() for every pair a new pack needs: from its own language, then from each translation (pack_rules.json
+    """require() for every pair a new pack needs: from its own language, then from each translation (the pack rules'
     "bridgesFrom") — each translation's bridges come from its own words, so it must exist first. → (errors, warnings)"""
-    from noema_lib import bridge_pairs
+    import noema_core
     pack, bdir = load(subj); own = (pack['subject'].get('language') or 'en').split('-')[0].lower()
     E, W = require(pack, bdir)
-    for src in sorted({s for s, _n in bridge_pairs(own)} - {own}):
+    for src in sorted({s for s, _n in noema_core.required_locales(own)[2]} - {own}):
         try: tp, tdir = load(subj, src, None)
         except SystemExit as e: E.append(f'from {src}: {e}'); continue
         if not os.path.exists(os.path.join(tdir, 'core.json')): E.append(f'from {src}: no bridges/from-{src}/core.json yet — a learner reading the {src} translation gets 文A help too (bridge.py todo SUBJ --from {src})'); continue

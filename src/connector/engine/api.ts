@@ -2,22 +2,16 @@
    engine/legacy.ts loads the files; these interfaces are their contract as the connector uses it. */
 import type { Json } from '../util.ts';
 import type { RequestOptions } from '../services/supabase.ts';
+import type { ContentChecks } from '../../features/content/application/index.ts';
 
 export interface CheckResult {
   errors: string[];
   warnings: string[];
   counts?: Record<string, number>;
 }
-export interface PackCounts {
-  chapters: number;
-  sections: number;
-  exercises: number;
-  visual: number;
-  media: number;
-  [k: string]: number;
-}
+/** checkPack's answer: its counts (chapters, sections, exercises, visual, media) are there when the pack is an object */
 export interface PackCheckResult extends CheckResult {
-  counts: PackCounts;
+  counts: Readonly<Record<string, number>>;
 }
 
 /** A pack as the connector reads it (the full format: src/contracts/schemas, tools/CONTENT_SPEC.md). */
@@ -78,18 +72,6 @@ export interface Bridge {
   sections?: Record<string, { preview?: string }>;
   anchors?: unknown[];
   [k: string]: unknown;
-}
-
-export interface NoemaPackCheck {
-  checkPack(p: unknown, expectId: string | undefined, o: { requireQuality: boolean }): PackCheckResult;
-  checkTranslation(f: unknown, p: Pack): CheckResult;
-  checkActivityPackages(
-    p: { activities: { items: PackActivity[] } },
-    bytesOf: (a: PackActivity) => Uint8Array | null,
-  ): Promise<{ errors: string[] }>;
-  checkBridge(b: unknown, pack?: Pack): CheckResult;
-  requiredLocales(own: string): { translations: string[]; bridgePairs: { source: string; native: string }[] };
-  LANGS: { bridgeCoverage?: { all?: number; everyday?: number } };
 }
 
 /* ---------- curricula (engine/curriculum.js, curjobs.js, curshare.js, curimport.js, sourceplan.js) ---------- */
@@ -382,7 +364,8 @@ export interface NoemaEngineCatalog {
 }
 
 export interface EngineApi {
-  packCheck: NoemaPackCheck;
+  /** the content checks (src/features/content: NoemaCore.content of the app) */
+  content: ContentChecks;
   curJobs: NoemaCurJobs;
   curriculum: NoemaCurriculum;
   curShare: NoemaCurShare | null;

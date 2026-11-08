@@ -109,7 +109,7 @@ const ACT = (() => {
   const engines = () => [...new Set([...Object.keys(ENGINES), ...(LIBR()?.ids() || [])])];
   /** the library engines an activity needs (its spec's engine, its parts', a mini-app's) and not loaded yet */
   function unloaded(a) {
-    const L = LIBR(), need = window.NoemaPackCheck?.needRequires ? NoemaPackCheck.needRequires([a], PARTS) : [];
+    const L = LIBR(), need = window.NoemaCore?.content?.needRequires ? NoemaCore.content.needRequires([a], PARTS) : [];
     return L ? need.filter(r => r.startsWith('engine:')).map(r => r.slice(7)).filter(id => !Object.prototype.hasOwnProperty.call(ENGINES, id) && L.has(id) && !L.loaded(id)) : [];
   }
 
@@ -315,7 +315,7 @@ const ACT = (() => {
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => setTimeout(() => LIVE.forEach(s => s.send('theme', theme())), 50));
 
   /* ---------- content the app cannot show: never a crash (docs/adr/001 D1) ---------- */
-  const knownType = t => !!(window.NoemaPackCheck?.TYPES?.has(t));
+  const knownType = t => !!(window.NoemaCore?.content?.TYPES?.has(t));
   /** A chapter's exercises without the ones this app cannot run (an unknown type from a newer app, a sim whose runtime is off here):
       they stay in the pack and come back once the app can show them. */
   function keepRunnable(c) {

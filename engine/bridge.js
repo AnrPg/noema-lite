@@ -170,7 +170,7 @@ window.NoemaBridge = (() => {
       listed in the synced index so every device finds it. → { pack, native, title } */
   async function attach(acc, b) {
     acc = accNow(acc);
-    const C = window.NoemaPackCheck?.checkBridge;
+    const C = window.NoemaCore?.content?.checkBridge;
     const subs = N().subjectsFor ? await N().subjectsFor(acc) : [];
     const meta = subs.find(s => s.id === b?.pack);
     let pack = null; try { pack = meta && N().loadSubject ? await N().loadSubject(acc, b.pack) : null; } catch (e) { }

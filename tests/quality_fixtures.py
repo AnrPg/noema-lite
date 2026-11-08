@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The quality fixtures (CONTENT_SPEC.md, Q1–Q8) stay what they claim to be: every bad exercise points to its
 source or is trivial, every good one is self-contained and carries lr/think and a real explanation.
-The shared checker (tools/pack_rules.json) runs on the same files."""
+The shared checker (src/features/content/domain/quality.ts, through build/noema-tools.cjs) runs on the same files."""
 import json, re, sys
 from pathlib import Path
 

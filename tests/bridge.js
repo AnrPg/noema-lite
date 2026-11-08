@@ -19,9 +19,9 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 /* ---------- 1. without a browser ---------- */
 function unit() {
   console.log('— words, matching and the checks, without a browser');
-  const ctx = { console, URL, URLSearchParams, TextEncoder, TextDecoder }; ctx.window = ctx; vm.createContext(ctx);   // what a browser page has (the contracts' validators check URIs with URL)
-  for (const f of ['engine/contracts.js', 'engine/catalog.js', 'engine/wordlink.js', 'engine/packcheck.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
-  const W = ctx.NoemaWordlink, C = ctx.NoemaPackCheck.checkBridge;
+  const ctx = { console, URL, URLSearchParams, TextEncoder, TextDecoder }; ctx.window = ctx; vm.createContext(ctx);   // what a browser page has
+  for (const f of ['engine/catalog.js', 'engine/wordlink.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
+  const W = ctx.NoemaWordlink, C = require('./engines.cjs').content().checkBridge;   // the content checks (build/noema-tools.cjs), as the app's NoemaCore.content
   ok(W.tokenize("Spark's data-skew, don’t 42x").map(t => t.t).join('|') === "Spark's|data-skew|don’t|42x", "words keep ' and - inside them, digits count as letters");
   const idx = W.index([{ k: 'data', forms: [] }, { k: 'data skew', forms: ['data skews'] }, { k: 'κατάσταση', forms: ['καταστάσεις'] }, { k: 'Delta', case: true }]);
   const f = t => W.find(t, idx).map(m => m.entry.k + '=' + m.form).join(' | ');

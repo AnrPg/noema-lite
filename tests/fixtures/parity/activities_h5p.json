@@ -1,0 +1,99 @@
+{
+ "rules": {
+  "in": null,
+  "out": [
+   {
+    "errors": [],
+    "warnings": []
+   },
+   {
+    "errors": [],
+    "warnings": [
+     "H5PEditor.RadioGroup-1.1/: a library no content uses (left out when playing)",
+     "H5PEditor.ShowWhen-1.0/: a library no content uses (left out when playing)"
+    ]
+   },
+   {
+    "errors": [],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "content.json question: an outside link (https:) — everything must be inside the package"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "content.json media.type.params.sources.0.path: an outside link (youtube.com) — everything must be inside the package"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "content.json question: an outside link (\"//cdn.example.org) — everything must be inside the package"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "H5P.Evil 1.0: not on the allow-list (tools/h5p_allow.json)"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "H5P.MathDisplay 1.0: refused (loads MathJax from a CDN at run time)"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "H5P.MultiChoice 1.99: not on the allow-list (tools/h5p_allow.json)",
+     "H5P.MultiChoice 1.99: missing from the package (H5P.MultiChoice-1.99/library.json)"
+    ],
+    "warnings": [
+     "H5P.MultiChoice-1.16/: a library no content uses (left out when playing)"
+    ]
+   },
+   {
+    "errors": [
+     "content/shell.php: files of type .php are not allowed"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "content/run.js: a script outside a library folder"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "H5P.JoubelUI 1.3: missing from the package (H5P.JoubelUI-1.3/library.json)"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "../../etc/x.txt: a path that leaves the package"
+    ],
+    "warnings": [
+     "../: a library no content uses (left out when playing)"
+    ]
+   },
+   {
+    "errors": [
+     "no h5p.json"
+    ],
+    "warnings": []
+   },
+   {
+    "errors": [
+     "H5P.Question: not an allowed content type (tools/h5p_allow.json \"content\")"
+    ],
+    "warnings": []
+   }
+  ]
+ }
+}

@@ -11,6 +11,7 @@
  *   node noema-tools.cjs check-pack PACK.json [--strict] [--expect ID] [--require-quality] [--balance N]
  *   node noema-tools.cjs rules                      the pack rules (RULES, QUALITY, LANGUAGES) as JSON
  * Exit code 1 when a check has errors (validate, check-pack), 2 on a usage error.
+ * Required as a module (the node suites: tests/engines.cjs content()), it exports the checks and runs no command.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -22,7 +23,7 @@ import { runLegacy } from '../connector/engine/legacy.ts';
 import { nodeEngines } from '../engines/node.ts';
 import { pyRepr, type ChapterOptions } from '../features/content/domain/chapter.ts';
 import { isObj, type Obj } from '../features/content/domain/util.ts';
-import { contentChecks } from './content.ts';
+import { contentChecks } from '../features/content/application/index.ts';
 
 const engines = nodeEngines();
 /** the activity runtimes' checkers, run once in a scope of their own (they read NoemaCore by name, as on the page) */
@@ -64,6 +65,7 @@ const str = (v: unknown): string => (typeof v === 'string' ? v : '');
 const OPS: Readonly<Record<string, Op>> = {
   'contracts.check': (id, doc) => contracts.check(str(id), doc).issues,
   rules: () => C.PACK_RULES,
+  'activities.rules': () => C.ACTIVITY_RULES,
   'chapter.check': (chapter, opts) => {
     const o = isObj(opts) ? (opts as ChapterOptions) : {};
     return C.checkChapter(chapter, o);
@@ -91,6 +93,10 @@ const OPS: Readonly<Record<string, Op>> = {
   'exercise.check': (e, media) => C.checkExercise(e, media),
 };
 
+/** JSON for Python: a Set is its sorted list, a RegExp its source */
+const plain = (_k: string, v: unknown): unknown =>
+  v instanceof Set ? [...(v as Set<unknown>)].map(String).sort() : v instanceof RegExp ? v.source : v;
+
 async function batch(): Promise<void> {
   const jobs = JSON.parse(fs.readFileSync(0, 'utf8')) as unknown;
   if (!Array.isArray(jobs)) throw new Error('batch: stdin must be a JSON list of [op, ...args]');
@@ -108,7 +114,7 @@ async function batch(): Promise<void> {
       out.push({ ok: false, error: errText(e) });
     }
   }
-  process.stdout.write(JSON.stringify(out));
+  process.stdout.write(JSON.stringify(out, plain));
 }
 
 /** the value of a flag (--name value), or undefined */
@@ -220,12 +226,18 @@ async function main(argv: readonly string[]): Promise<number> {
   return 2;
 }
 
-main(process.argv.slice(2)).then(
-  code => {
-    process.exitCode = code;
-  },
-  (e: unknown) => {
-    process.stderr.write(`noema-tools: ${errText(e)}\n`);
-    process.exitCode = 2;
-  },
-);
+/** required as a module (the node suites, tests/engines.cjs content()): the checks, without running a command */
+export const checks = C;
+export { engines };
+
+const isMain = typeof require !== 'undefined' && require.main === module;
+if (isMain)
+  main(process.argv.slice(2)).then(
+    code => {
+      process.exitCode = code;
+    },
+    (e: unknown) => {
+      process.stderr.write(`noema-tools: ${errText(e)}\n`);
+      process.exitCode = 2;
+    },
+  );

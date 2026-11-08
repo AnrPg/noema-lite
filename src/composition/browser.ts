@@ -25,6 +25,7 @@ import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
 import * as contracts from '../contracts/index.ts';
 import { createAppEngines } from '../engines/register.ts';
+import { contentChecks } from '../features/content/application/index.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
@@ -39,11 +40,15 @@ export const APP_REGISTRATIONS: readonly Registration[] = [
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
-  // the compiled data contracts (src/contracts): the shape checks of engine/packcheck.js and every other reader. Node,
-  // the connector and the skill get the same module as engine/contracts.js (tools/contracts.mjs builds both from it).
+  // the compiled data contracts (src/contracts): the shape checks of the content checks and every other reader. The
+  // connector and the Node tools (build/noema-tools.cjs: the Python tools and the skill) bundle the same module.
   { name: 'contracts', build: () => contracts },
-  // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
+  // the engine library: the activity core (engine/src/32_activities.js), the content checks, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the content checks (src/features/content): the pack, chapter, quality, translation, bridge and activity rules — the
+  // generator (engine/packgen.js), the loader, the activity runtimes and the author; the runtimes' package checkers
+  // (NoemaWasm, NoemaEmbed, NoemaH5P) are read from the page when a check runs (their scripts load after this one)
+  { name: 'content', build: r => contentChecks(r.get(ENGINES), () => globalThis) },
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */

@@ -2,7 +2,7 @@
    The pack carries only DATA (item.spec): controls, formulas in the expression language (NoemaCore.engines.expr, src/engines/kernel/simexpr.js), readouts and
    plots. No code of the pack runs, so there is no frame: the app's own trusted code renders the controls and the plots with its own
    DOM and styles (theme tokens, dark mode, keyboard, labels, 320 px) — docs/adr/001 "as built". The spec is checked with the same
-   rules as the validators (NoemaPackCheck.checkSimSpec) before anything is shown; a spec that fails shows the activity's fallback.
+   rules as the validators (NoemaCore.content.checkSimSpec) before anything is shown; a spec that fails shows the activity's fallback.
    Engines (ACT.registerEngine, or the engine library NoemaCore.engines, loaded by ACT when an activity needs one): formula@1 is built in (the derived values are the model). Another engine computes outputs from the
    inputs (scalars and time series): { id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs },
    workerSource? }. An engine with workerSource runs in a Worker (runs that can take longer than ~50 ms: P3's circuit engine);
@@ -92,7 +92,7 @@
   }
   /* ---------- parts: several engines in one spec (docs/INTERACTIVE.md §12.8) ----------
      partsRunner(spec, opts, onFail, deps?) → the same interface as engineRunner { run(env, done), measure, close }, over the plan of
-     NoemaPackCheck.partsPlan: each part is an engine instance of its own (its Worker, its prepare, its ≤ 5 s per job) on the part's spec
+     NoemaCore.content.partsPlan: each part is an engine instance of its own (its Worker, its prepare, its ≤ 5 s per job) on the part's spec
      (its model and outputs, the spec's consts and params, its inputs as names). One run of the graph, in the plan's order:
        derived   — a formula over everything computed before it;
        part      — a chain step: its inputs (numbers, formulas, or {series, points? | stat?} of an earlier part) → run() once;
@@ -109,7 +109,7 @@
      [{code, part? | loop?, …}]. deps (tests): {engine(id), runner(E, spec, opts, onFail), lib, plan, partSpec, compile, now}. */
   function partsRunner(spec, opts, onFail, deps) {
     deps = deps || {};
-    const PC = window.NoemaPackCheck || {}, C = deps.compile || NoemaCore.engines.expr.compile, now = deps.now || (() => performance.now());
+    const PC = window.NoemaCore?.content || {}, C = deps.compile || NoemaCore.engines.expr.compile, now = deps.now || (() => performance.now());
     const lib = deps.lib !== undefined ? deps.lib : (ACT.PARTS || window.Noema?.pack?.activities?.parts || null);
     const plan = (deps.plan || PC.partsPlan)(spec, lib), mkSpec = deps.partSpec || PC.partSpec, engineOf = deps.engine || (id => ACT.engine(id));
     const mkRunner = deps.runner || engineRunner, seed = ((opts && opts.seed) >>> 0) || 1, cons = Object.assign({}, (opts && opts.task) || spec.consts || {});
@@ -311,14 +311,14 @@
   /** a spec whose parts reuse activities/_parts ({use, with}): the same spec with each part written out (the checks then see whole parts);
       any other spec is returned as it is */
   function withParts(spec) {
-    const PC = window.NoemaPackCheck;
+    const PC = window.NoemaCore?.content;
     if (!PC || !PC.resolveParts || !spec || typeof spec !== 'object' || !Array.isArray(spec.parts) || !spec.parts.some(p => p && typeof p === 'object' && p.use !== undefined)) return spec;
     const E = [], R = PC.resolveParts(spec, ACT.PARTS || window.Noema?.pack?.activities?.parts || null, E);
     return E.length || !R ? spec : { ...spec, parts: R.map(r => r.p) };
   }
   /** the engine a spec with parts shows simView: the checks of every part's engine on its part's spec, the bench of the bench part */
   function partsEngine(spec) {
-    const PC = window.NoemaPackCheck, lib = ACT.PARTS || window.Noema?.pack?.activities?.parts || null;
+    const PC = window.NoemaCore?.content, lib = ACT.PARTS || window.Noema?.pack?.activities?.parts || null;
     if (!PC || !PC.partsPlan) return null;
     const plan = PC.partsPlan(spec, lib), Es = plan.parts.map(p => (typeof p.engine === 'string' ? ACT.engine(p.engine) : null));
     if (!plan.parts.length || Es.some(e => !e)) return null;
@@ -480,7 +480,7 @@
       const E = host ? host.engine : PT ? partsEngine(spec) : typeof engId === 'string' ? ACT.engine(engId) : null;
       if (!E) { console.warn('[noema] sim-spec', act.id, 'unknown engine', engId); later(() => onFail('unsupported')); return port; }
       if (spec && spec.bench && !E.bench) { console.warn('[noema] sim-spec', act.id, 'engine', engId, 'takes no measurements'); later(() => onFail('unsupported')); return port; }
-      const probs = window.NoemaPackCheck?.checkSimSpec ? NoemaPackCheck.checkSimSpec(spec, tables, host ? null : ACT.engines(), host ? host.check : undefined) : ['the spec checker is not loaded'];
+      const probs = window.NoemaCore?.content?.checkSimSpec ? NoemaCore.content.checkSimSpec(spec, tables, host ? null : ACT.engines(), host ? host.check : undefined) : ['the spec checker is not loaded'];
       if (!probs.length && E.check) try { probs.push(...(E.check(spec) || [])); } catch (e) { probs.push(String(e.message || e)); }
       if (probs.length) { console.warn('[noema] sim-spec', act.id, probs.slice(0, 5).join(' | ')); later(() => onFail('spec')); return port; }
 

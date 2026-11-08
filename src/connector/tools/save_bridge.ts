@@ -36,7 +36,7 @@ export const tool: Tool = {
   definition: {
     name: 'noema_save_bridge',
     description:
-      'Save one built language bridge (format "noema-bridge", made by tools/bridge.py build, ≤ 1.5 MB) to the learner\'s account, for one of their own packs or a library pack. A bridge is one pair: the language the learner READS → their native language. The language read is the pack\'s own or one of its translations (source, e.g. the el translation of an en pack: el→en, el→ru, el→ar), and every new pack gets every pair (pack_rules.json "bridgesFrom"); a translation\'s bridges are built from that translation\'s text (tools/bridge.py --from <locale>) after it is saved. Bridges are usually 50–150 KB: do NOT paste the file — call with subject_id + native only to get an upload command, run it (curl), then call again with the same subject_id + native. bridge_json (inline) is only for small files. It is checked exactly as the app checks it (against the pack: its id, its language, plain text only, no function words); problems come back as a list. On success every device of the learner shows the 文A help for that pack and native language. To publish a draft (status reviewed), change "status" in the file and save it again the same way.',
+      "Save one built language bridge (format \"noema-bridge\", made by tools/bridge.py build, ≤ 1.5 MB) to the learner's account, for one of their own packs or a library pack. A bridge is one pair: the language the learner READS → their native language. The language read is the pack's own or one of its translations (source, e.g. the el translation of an en pack: el→en, el→ru, el→ar), and every new pack gets every pair (the pack rules' languages.bridgesFrom, src/features/content/domain/rules.ts); a translation's bridges are built from that translation's text (tools/bridge.py --from <locale>) after it is saved. Bridges are usually 50–150 KB: do NOT paste the file — call with subject_id + native only to get an upload command, run it (curl), then call again with the same subject_id + native. bridge_json (inline) is only for small files. It is checked exactly as the app checks it (against the pack: its id, its language, plain text only, no function words); problems come back as a list. On success every device of the learner shows the 文A help for that pack and native language. To publish a draft (status reviewed), change \"status\" in the file and save it again the same way.",
     inputSchema: {
       type: 'object',
       properties: {
@@ -99,7 +99,7 @@ export const tool: Tool = {
       return fail(
         `The uploaded file is the bridge ${b.pack} → ${b.native} (from ${String(b.source)}), not ${sid} → ${want}${wsrc ? ` (from ${wsrc})` : ''}. Upload the right file and call again.`,
       );
-    const PC = ctx.engine.packCheck;
+    const PC = ctx.engine.content;
     const first = PC.checkBridge(b);
     if (first.errors.length) return fail(`${first.errors.length} error(s):\n- ${first.errors.slice(0, 40).join('\n- ')}`);
     if (!ID_RE.test(b.pack)) return fail('pack: not a subject id');
@@ -138,13 +138,13 @@ export const tool: Tool = {
               await ctx.storage.remove([up]).catch(() => undefined);
               return true;
             });
-          const c = res.counts ?? {};
-          const mins = ctx.engine.packCheck.LANGS.bridgeCoverage ?? {},
+          const c = res.counts;
+          const mins = ctx.engine.content.LANGS.bridgeCoverage,
             low = [
-              typeof b.coverage === 'number' && mins.all != null && b.coverage < mins.all
+              typeof b.coverage === 'number' && b.coverage < mins.all
                 ? `the content words ${Math.round(b.coverage * 100)}% < ${Math.round(mins.all * 100)}%`
                 : '',
-              typeof b.everyday === 'number' && mins.everyday != null && b.everyday < mins.everyday
+              typeof b.everyday === 'number' && b.everyday < mins.everyday
                 ? `the everyday words ${Math.round(b.everyday * 100)}% < ${Math.round(mins.everyday * 100)}%`
                 : '',
             ].filter(Boolean);
