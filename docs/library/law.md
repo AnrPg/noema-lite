@@ -1,4 +1,4 @@
-# `law@1` — computable legal reasoning (`src/engines/law/law.js`, `NoemaLibLaw`)
+# `law@1` — computable legal reasoning (`src/engines/law/law.ts`, `NoemaLibLaw`)
 
 `law@1` is a general, **jurisdiction-neutral** engine of the library (`docs/INTERACTIVE_LIBRARY.md`). It provides tools:
 

@@ -100,8 +100,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('law@1', ['engine:logic@1']),
-    () => import('./law/law.js'),
-    () => import('noema-worker:./law/law.js#simEngine'),
+    () => import('./law/law.ts'),
+    () => import('noema-worker:./law/law.ts#simEngine'),
   ),
   def(
     manifest('agents@1', ['engine:logic@1']),

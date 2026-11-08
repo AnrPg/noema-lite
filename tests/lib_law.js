@@ -1,4 +1,4 @@
-/* law@1 (src/engines/law/law.js, docs/library/law.md): published reference values (Carneades DSL's murder example, van Gijzel &
+/* law@1 (src/engines/law/law.ts, docs/library/law.md): published reference values (Carneades DSL's murder example, van Gijzel &
    Nilsson 2014; the Talmud's estate division, Aumann & Maschler 1985; the Minbariyya ʿawl case; the EEC 1958 Council's voting power,
    Felsenthal & Machover 1998; USSG level 20 / category I; Kaplan's threshold with Blackstone's ratio; the MPC homicide ladder; Byrne v
    Van Tienhoven vs CISG 16(1); EU Reg. 1182/71 month ends; Hart's vehicles in the park; the Nixon diamond in ASPIC+), every edge case
