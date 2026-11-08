@@ -7,3 +7,4 @@ export * from './hlc.ts';
 export * from './invariant.ts';
 export * from './promise.ts';
 export * from './text.ts';
+export * from './bytes.ts';

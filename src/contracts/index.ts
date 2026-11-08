@@ -1,6 +1,7 @@
 /* noema-lite — the data contracts: one JSON Schema per format (src/contracts/schemas), the types and compiled validators
-   generated from them (npm run contracts → src/contracts/generated, src/contracts/validate.ts), and the rules and
-   migrations that belong to the formats (src/contracts/rules, src/contracts/migrations). tools/CONTENT_SPEC.md "Data contracts".
+   generated from them (npm run contracts → src/contracts/generated, src/contracts/validate.ts), and the migrations that
+   belong to the formats (src/contracts/migrations). What a schema cannot say (the content rules, the level rules) is in
+   src/features/content/domain. tools/CONTENT_SPEC.md "Data contracts".
 
    check(id, data) → { ok, issues }: id is a contract id — a schema ("noema.pack.v3") or one of its $defs
    ("noema.chapter.v1#exercise"); CONTRACT_IDS lists them all. A Result, never an exception (an unknown id is an issue). */
@@ -41,5 +42,4 @@ export function problems(id: string, data: unknown, where = ''): string[] {
   return check(id, data).issues.map(i => (where ? (i.path ? `${where}.${i.text}` : `${where}: ${i.text}`) : i.text));
 }
 
-export * as rules from './rules/index.ts';
 export * as migrations from './migrations/index.ts';

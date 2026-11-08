@@ -1,5 +1,5 @@
 /* noema-lite — the levels model's rules: a prerequisite never sits above the step that needs it; the difficulty mix
-   holds within each level of a pack; every level named is on its ladder (src/contracts/rules/levels.ts). */
+   holds within each level of a pack; every level named is on its ladder (src/features/content/domain/levels.ts). */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {

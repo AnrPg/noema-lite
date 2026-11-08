@@ -7,9 +7,10 @@
      • known            — every level a step or a pack's content names is a level of its ladder
      • prerequisite     — a prerequisite never sits at a higher level than the step that needs it: it starts at the
                           step's first level or lower (its from ≤ the step's from)
-     • difficultyMix    — the difficulty mix (tools/pack_rules.json quality "mix.difficulty": 20 / 25 / 55 % ± 5)
+     • difficultyMix    — the difficulty mix (rules.ts QUALITY "mix.difficulty": 20 / 25 / 55 % ± 5)
                           holds within each level of a pack, not only over the whole pack */
 import { spec, all, type RuleIssue, type Spec } from './spec.ts';
+import { QUALITY } from './rules.ts';
 
 export type LevelKind = 'grade' | 'semester' | 'year' | 'difficulty' | 'custom';
 export interface Level {
@@ -48,12 +49,13 @@ export interface PackLike {
   readonly chapters: readonly ChapterLike[];
 }
 
-/** The difficulty mix of tools/pack_rules.json (quality, "mix.difficulty"): percent per difficulty, and the tolerance. */
+/** The difficulty mix of rules.ts (QUALITY, "mix.difficulty"): percent per difficulty, and the tolerance. */
 export interface DifficultyMix {
   readonly target: Readonly<Record<string, number>>;
   readonly tol: number;
 }
-export const DIFFICULTY_MIX: DifficultyMix = { target: { '1': 20, '2': 25, '3': 55 }, tol: 5 };
+const MIX = QUALITY.checks.find(c => c.id === 'mix.difficulty');
+export const DIFFICULTY_MIX: DifficultyMix = { target: MIX?.target ?? { '1': 20, '2': 25, '3': 55 }, tol: MIX?.tol ?? 5 };
 
 const issue = (rule: string, at: string, message: string): RuleIssue => ({ rule, at, message });
 

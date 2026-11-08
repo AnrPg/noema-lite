@@ -447,7 +447,7 @@ A level says for whom a piece of content is: a school grade, a semester, a year 
 * **A pack** names the levels it teaches: `subject.levels: ["g7"]` (ids of its Roadmap's ladder) or its own ladder.
 * **A chapter, section, exercise, flashcard or playbook** may name its own `"level": "g7"` (a level of the pack); without
   one it is its parent's: an exercise or card → its section → its chapter → the pack's, when the pack names one level.
-* **The rules** (`src/contracts/rules/levels.ts`): the difficulty mix (`tools/pack_rules.json` "mix.difficulty",
+* **The rules** (`src/features/content/domain/levels.ts`): the difficulty mix (`tools/pack_rules.json` "mix.difficulty",
   20 / 25 / 55 % ± 5) holds within each level of a pack, not only over the whole pack; every level named is one of
   the pack's.
 * Not to be confused with a knowledge-map point's `level` (foundation / core / advanced: how deep the point goes) or a

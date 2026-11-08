@@ -361,7 +361,7 @@ course by semester); levels are never invented.
   confused with `nodes[id].levels`, the processing levels (Marzano & Kendall, §1) its goals ask for.
 * **A step's pack** names its level(s) in `subject.levels` (the Roadmap's ids), and its chapters, sections, exercises
   and cards may name their own (tools/CONTENT_SPEC.md "Levels").
-* **The rules** (`src/contracts/rules/levels.ts`, `roadmapLevels`): the ladder is well formed, every step's level is on
+* **The rules** (`src/features/content/domain/levels.ts`, `roadmapLevels`): the ladder is well formed, every step's level is on
   it, and **a prerequisite never sits above the step that needs it** — for every link `from → to`, the first level of
   `from` is at most the first level of `to` (a step of semester 2 never needs one of semester 3). Steps without a level
   are not compared.
