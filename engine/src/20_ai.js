@@ -217,7 +217,7 @@ function explainable(el, get) {
   el.classList.add('xable');
   const b = h('button', { class: 'xbtn', type: 'button', title: tE('engine.tutor.explainThis'), 'aria-label': tE('engine.tutor.explainThisAria'), onclick: e => { e.stopPropagation(); e.preventDefault(); explainItem(get()); } }, '💡');
   // a block with its own buttons on top (a picture's ⤢, a question set's recall switch) takes the 💡 into that row, so it never covers them
-  const dock = el.querySelector(':scope > .vx-fig > .vx > .vx-tools, :scope > .ask > .hd');
+  const dock = el.querySelector(':scope > study-figure > .vx-fig > .vx > .vx-tools, :scope > .ask > .hd');
   if (dock) { b.classList.add('docked'); const zoom = $(':scope > .vx-zoom', dock); zoom ? dock.insertBefore(b, zoom) : dock.append(b); }
   else el.append(b);
   return el;

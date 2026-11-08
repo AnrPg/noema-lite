@@ -5,11 +5,12 @@
 import { classMap } from 'lit/directives/class-map.js';
 import type { Block, Media, Region } from '../../../domain/pack.ts';
 import type { StudyApp } from '../../app.ts';
-import { F, html, nothing, ref, tag } from '../../lit/base.ts';
+import { F, html, nothing, ref, StudyElement, tag } from '../../lit/base.ts';
 import { rCenter } from './geometry.ts';
-import { PictureElement } from './stage.ts';
+import { pictured } from './stage.ts';
 
-export class StudyFigure extends PictureElement {
+export class StudyFigure extends pictured(StudyElement) {
+  protected readonly app: StudyApp;
   readonly #caption: string | undefined;
   readonly #explore: boolean;
   readonly #named: readonly Region[];
@@ -21,7 +22,9 @@ export class StudyFigure extends PictureElement {
   #tipEl: HTMLDivElement | null = null;
 
   constructor(app: StudyApp, media: Readonly<Record<string, Media>>, b: Block) {
-    super(app, media, b);
+    super();
+    this.app = app;
+    this.picture(app, media, b);
     this.#caption = b.caption ?? this.m?.caption;
     this.#explore = !!this.regs.length && b.explore !== false;
     this.#named = this.#explore ? this.regs.filter(r => r.label && !r.id.endsWith('-area')) : [];
@@ -29,7 +32,7 @@ export class StudyFigure extends PictureElement {
     this.hover(this.regs);
     for (const r of this.#named) this.cover(r.id, true);
     // keyboard exploring: arrows move, the part under the crosshair is shown and said; Enter peeks under a cover
-    this.keys = {
+    this.keyHooks = {
       tap: (x, y) => {
         const r = this.hits(x, y)[0];
         if (r && this.covered(r)) {

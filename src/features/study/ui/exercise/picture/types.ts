@@ -10,24 +10,20 @@ import type { Region } from '../../../domain/pack.ts';
 import { replay, shuffle } from '../../dom.ts';
 import { F, html, live, nothing, tag } from '../../lit/base.ts';
 import { mcq } from '../basic.ts';
+import type { Answer } from '../../../domain/grading/grade.ts';
 import { verdictOf, type Renderer, type Widget, type WidgetCtx } from '../widget.ts';
 import { ids, vTargets } from './geometry.ts';
-import { hint, PictureElement, results, SlotPicture } from './stage.ts';
+import { hint, PictureWidget, results, SlotPicture } from './stage.ts';
 
-/** a picture type's element: its answer area once it is drawn, and what it does first (an occlusion's first part) */
-interface TypeElement extends PictureElement {
-  widget(): Widget;
-  start?(): void;
-}
-/** a picture type: its element, or the "picture missing" line when the pack lacks the picture */
+/** a picture type: its element (the occlusion asks its first part once it is made), or, when the pack lacks the
+ *  picture, the element saying so with nothing to check */
 const visual =
-  (Ctor: new (c: WidgetCtx) => TypeElement): Renderer =>
+  (Ctor: new (c: WidgetCtx) => PictureWidget & Widget & { start?(): void }): Renderer =>
   c => {
     const el = new Ctor(c).redraw();
     if (!el.m) return { el, check: () => null };
-    const w = el.widget();
     el.start?.();
-    return w;
+    return el;
   };
 
 /* ---------- 📍 hotspot: tap the place(s) ---------- */
@@ -35,16 +31,15 @@ const H3 = ['left', 'centre', 'right'] as const,
   V3 = ['top', 'middle', 'bottom'] as const; // the message's select values
 const third = (v: number, of: number): number => Math.min(2, Math.floor((3 * v) / of));
 
-export class ImgHotspot extends PictureElement {
-  readonly #c: WidgetCtx;
+export class ImgHotspot extends PictureWidget {
   readonly #ans: readonly Region[];
   readonly #any: boolean;
   readonly #multi: boolean;
   readonly #pins: { readonly x: number; readonly y: number; cls: string }[] = [];
   #notes: { readonly r: Region; readonly why: string }[] = [];
   constructor(c: WidgetCtx) {
-    super(c.app, c.media, c.ex);
-    this.#c = c;
+    super(c);
+    this.picture(c.app, c.media, c.ex);
     const { ex, app } = c;
     this.#ans = ids(ex.answer)
       .map(id => this.RG.get(id))
@@ -53,10 +48,10 @@ export class ImgHotspot extends PictureElement {
     this.#multi = !this.#any && (this.#ans.length > 1 || !!ex.multi);
     if (ex.maskLabels) for (const r of this.regs) this.cover(r.id, true, 'plain');
     this.aim = true;
-    this.keys = {
+    this.keyHooks = {
       tap: (x, y) => this.#tapAt(x, y),
       undo: () => {
-        if (this.#c.api.locked() || !this.#pins.length) return '';
+        if (this.api.locked() || !this.#pins.length) return '';
         this.#pins.pop();
         this.redraw();
         return app.t('engine.vx.lastPinRemoved');
@@ -73,7 +68,7 @@ export class ImgHotspot extends PictureElement {
   // A pin never catches the tap itself (on a small picture it would cover the part next to it): a tap within about 10
   // screen pixels of a pin removes that pin, anywhere else adds one.
   #tapAt(x: number, y: number): string {
-    const { app, api } = this.#c;
+    const { app, api } = this;
     if (api.locked()) return '';
     const sb = this.stageEl?.getBoundingClientRect(),
       sx = (sb?.width ?? this.W) / this.W,
@@ -116,57 +111,55 @@ export class ImgHotspot extends PictureElement {
         : nothing
     }`;
   }
-  #answer = (): { pins: [number, number][] } => ({ pins: this.#pins.map(p => [p.x, p.y]) });
-  widget(): Widget {
-    const { ex } = this.#c;
-    return {
-      el: this,
-      answer: this.#answer,
-      check: () => verdictOf(ex, this.#answer(), this.regs).ok,
-      reveal: () => {
-        this.uncoverAll();
-        for (const r of this.#ans) {
-          this.outline(r.id, 'right');
-          if (r.label) this.tag(r.id, r.label, 'right');
-        }
-        const right = verdictOf(ex, this.#answer(), this.regs).items ?? [];
-        const why = ex.why && !Array.isArray(ex.why) ? (ex.why as Readonly<Record<string, string>>) : {};
-        this.#pins.forEach((p, i) => {
-          const ok = !!right[i];
-          p.cls = ok ? 'right' : 'wrong';
-          if (ok) return;
-          const r = this.hits(p.x, p.y)[0];
-          if (!r) return;
-          this.outline(r.id, 'wrong');
-          const w = why[r.id];
-          if (w) this.#notes.push({ r, why: w });
-        });
-        this.redraw();
-      },
-    };
+  answer(): { pins: [number, number][] } {
+    return { pins: this.#pins.map(p => [p.x, p.y]) };
+  }
+  check(): boolean | null {
+    return verdictOf(this.ex, this.answer(), this.regs).ok;
+  }
+  reveal(): void {
+    const { ex } = this;
+    this.revealed = true;
+    this.uncoverAll();
+    for (const r of this.#ans) {
+      this.outline(r.id, 'right');
+      if (r.label) this.tag(r.id, r.label, 'right');
+    }
+    const right = verdictOf(ex, this.answer(), this.regs).items ?? [];
+    const why = ex.why && !Array.isArray(ex.why) ? (ex.why as Readonly<Record<string, string>>) : {};
+    this.#pins.forEach((p, i) => {
+      const ok = !!right[i];
+      p.cls = ok ? 'right' : 'wrong';
+      if (ok) return;
+      const r = this.hits(p.x, p.y)[0];
+      if (!r) return;
+      this.outline(r.id, 'wrong');
+      const w = why[r.id];
+      if (w) this.#notes.push({ r, why: w });
+    });
+    this.redraw();
   }
 }
 
 /* ---------- 🧭 sequence: tap the parts in order ---------- */
-export class ImgSequence extends PictureElement {
-  readonly #c: WidgetCtx;
+export class ImgSequence extends PictureWidget {
   readonly #among: readonly Region[];
   readonly #order: readonly string[];
   readonly #picks: Region[] = [];
   #marks: readonly boolean[] | null = null;
   #ok: boolean | null = null;
   constructor(c: WidgetCtx) {
-    super(c.app, c.media, c.ex);
-    this.#c = c;
+    super(c);
+    this.picture(c.app, c.media, c.ex);
     const { app } = c;
     this.#among = vTargets(c.ex, this.regs);
     this.#order = ids(c.ex.answer);
     this.aim = true;
     this.hover(this.#among);
-    this.keys = {
+    this.keyHooks = {
       tap: (x, y) => this.#tapAt(x, y),
       undo: () => {
-        if (this.#c.api.locked() || !this.#picks.length) return '';
+        if (this.api.locked() || !this.#picks.length) return '';
         this.#picks.pop();
         this.#drawn();
         return app.t('engine.vx.lastStepRemoved');
@@ -185,7 +178,7 @@ export class ImgSequence extends PictureElement {
     this.redraw();
   }
   #tapAt(x: number, y: number): string {
-    const { app, api } = this.#c;
+    const { app, api } = this;
     if (api.locked()) return '';
     const r = this.hits(x, y, this.#among)[0];
     if (!r) {
@@ -235,20 +228,18 @@ export class ImgSequence extends PictureElement {
       </div>
       ${path}`;
   }
-  #answer = (): { sequence: string[] } => ({ sequence: this.#picks.map(r => r.id) });
-  widget(): Widget {
-    const { ex } = this.#c;
-    return {
-      el: this,
-      answer: this.#answer,
-      check: () => verdictOf(ex, this.#answer()).ok,
-      reveal: () => {
-        const g = verdictOf(ex, this.#answer());
-        this.#marks = g.items ?? [];
-        this.#ok = g.ok;
-        this.redraw();
-      },
-    };
+  answer(): { sequence: string[] } {
+    return { sequence: this.#picks.map(r => r.id) };
+  }
+  check(): boolean | null {
+    return verdictOf(this.ex, this.answer()).ok;
+  }
+  reveal(): void {
+    const g = verdictOf(this.ex, this.answer());
+    this.revealed = true;
+    this.#marks = g.items ?? [];
+    this.#ok = g.ok;
+    this.redraw();
   }
 }
 
@@ -263,14 +254,13 @@ function gridTiles({ ex, media }: WidgetCtx): readonly Region[] | undefined {
       tiles.push({ id: `t${String(j * c + i)}`, shape: 'rect', x: (i * m.w) / c, y: (j * m.h) / rr, w: m.w / c, h: m.h / rr, rx: 0 });
   return tiles;
 }
-export class ImgReveal extends PictureElement {
-  readonly #c: WidgetCtx;
+export class ImgReveal extends PictureWidget {
   readonly #hidden: number;
   #opened = 0;
   readonly #mc: Widget;
   constructor(c: WidgetCtx) {
-    super(c.app, c.media, c.ex, gridTiles(c));
-    this.#c = c;
+    super(c);
+    this.picture(c.app, c.media, c.ex, gridTiles(c));
     const start = new Set(ids(c.ex.start));
     this.#hidden = this.regs.length - start.size;
     this.regs.forEach((r, i) => {
@@ -295,24 +285,32 @@ export class ImgReveal extends PictureElement {
       </div>
       ${this.#mc.el}`;
   }
-  widget(): Widget {
-    const { ex } = this.#c;
-    const mc = this.#mc;
-    const many = !!ex.multi || (Array.isArray(ex.answer) && ex.answer.length > 1);
-    return {
-      el: this,
-      auto: !many,
-      ...(mc.keys ? { keys: mc.keys } : {}),
-      ...(mc.answer ? { answer: mc.answer } : {}),
-      ...(mc.given ? { given: mc.given } : {}),
-      check: () => (mc.answer ? verdictOf(ex, mc.answer()).ok : null),
-      reveal: () => {
-        mc.reveal?.();
-        this.uncoverAll();
-        this.redraw();
-      },
-      bonus: () => Math.round((6 * (this.#hidden - this.#opened)) / Math.max(1, this.#hidden)),
-    };
+  /** one answer is the check (unless it asks for several) */
+  get auto(): boolean {
+    return !(!!this.ex.multi || (Array.isArray(this.ex.answer) && this.ex.answer.length > 1));
+  }
+  // the options are an mcq's (basic.ts): its keys, its answer and its words
+  keys(k: number): void {
+    this.#mc.keys?.(k);
+  }
+  answer(): Answer {
+    return this.#mc.answer?.() ?? { picked: [] };
+  }
+  given(): string {
+    return this.#mc.given?.() ?? '';
+  }
+  check(): boolean | null {
+    return verdictOf(this.ex, this.answer()).ok;
+  }
+  reveal(): void {
+    this.revealed = true;
+    this.#mc.reveal?.();
+    this.uncoverAll();
+    this.redraw();
+  }
+  /** extra XP for the tiles left covered */
+  bonus(): number {
+    return Math.round((6 * (this.#hidden - this.#opened)) / Math.max(1, this.#hidden));
   }
 }
 
@@ -323,7 +321,6 @@ interface Chip {
   readonly i: number;
 }
 export class ImgDrag extends SlotPicture {
-  readonly #c: WidgetCtx;
   protected readonly targets: readonly Region[];
   readonly #chips: readonly Chip[];
   readonly #zoneW: number;
@@ -335,15 +332,15 @@ export class ImgDrag extends SlotPicture {
   #justDragged = false;
   #marks: readonly boolean[] | null = null;
   constructor(c: WidgetCtx) {
-    super(c.app, c.media, c.ex);
-    this.#c = c;
+    super(c);
+    this.picture(c.app, c.media, c.ex);
     this.targets = vTargets(c.ex, this.regs);
     if (c.ex.mask !== false) for (const r of this.targets) this.cover(r.id, true);
     this.#chips = shuffle([...this.targets.map(r => r.label ?? ''), ...(c.ex.distractors ?? [])]).map((text, i) => ({ text, i }));
     this.#zoneW = Math.min(170, 26 + Math.max(...this.#chips.map(ch => ch.text.length)) * 7.4); // fits any label: the layout check holds
   }
   get #locked(): boolean {
-    return this.#c.api.locked();
+    return this.api.locked();
   }
   #put(k: number, chip: Chip): void {
     for (const [kk, ch] of [...this.#place]) if (ch === chip) this.#place.delete(kk);
@@ -502,36 +499,29 @@ export class ImgDrag extends SlotPicture {
         : nothing
     }`;
   }
-  #answer = (): { slots: (string | null)[] } => ({ slots: this.targets.map((_r, k) => this.#place.get(k)?.text ?? null) });
-  widget(): Widget {
-    const { ex } = this.#c;
-    return {
-      el: this,
-      answer: this.#answer,
-      check: () => verdictOf(ex, this.#answer(), this.regs).ok,
-      given: () => this.#answer().slots.join(', '),
-      reveal: () => {
-        const right = verdictOf(ex, this.#answer(), this.regs).items ?? [];
-        this.#marks = this.targets.map((_r, k) => !!right[k]);
-        this.uncoverAll();
-        this.targets.forEach((r, k) => {
-          this.outline(r.id, right[k] ? 'right' : 'wrong');
-        });
-        this.redraw();
-      },
-    };
+  answer(): { slots: (string | null)[] } {
+    return { slots: this.targets.map((_r, k) => this.#place.get(k)?.text ?? null) };
+  }
+  check(): boolean | null {
+    return verdictOf(this.ex, this.answer(), this.regs).ok;
+  }
+  given(): string {
+    return this.answer().slots.join(', ');
+  }
+  reveal(): void {
+    this.#marks = this.markSlots(verdictOf(this.ex, this.answer(), this.regs).items);
+    this.redraw();
   }
 }
 
 /* ---------- ✏️ label: type the names ---------- */
 export class ImgLabel extends SlotPicture {
-  readonly #c: WidgetCtx;
   protected readonly targets: readonly Region[];
   readonly #values: string[];
   #grade: { readonly items: readonly boolean[]; readonly typos: readonly boolean[] } | null = null;
   constructor(c: WidgetCtx) {
-    super(c.app, c.media, c.ex);
-    this.#c = c;
+    super(c);
+    this.picture(c.app, c.media, c.ex);
     this.targets = vTargets(c.ex, this.regs);
     this.#values = this.targets.map(() => '');
     if (c.ex.mask !== false) for (const r of this.targets) this.cover(r.id, true);
@@ -555,7 +545,7 @@ export class ImgLabel extends SlotPicture {
         e.preventDefault();
         const nx = this.controls<HTMLInputElement>('.vx-input')[k + 1];
         if (nx) nx.focus();
-        else this.#c.api.check();
+        else this.api.check();
       }}
     />`;
   }
@@ -570,40 +560,35 @@ export class ImgLabel extends SlotPicture {
         : nothing
     }`;
   }
-  #answer = (): { slots: string[] } => ({ slots: [...this.#values] });
-  widget(): Widget {
-    const { ex } = this.#c;
-    return {
-      el: this,
-      focus: () => {
-        if (!this.compact()) this.controls<HTMLInputElement>('.vx-input')[0]?.focus({ preventScroll: true });
-      },
-      answer: this.#answer,
-      check: () => verdictOf(ex, this.#answer(), this.regs).ok,
-      given: () => this.#answer().slots.join(', '),
-      reveal: () => {
-        const g = verdictOf(ex, this.#answer(), this.regs);
-        this.#grade = { items: this.targets.map((_r, k) => !!g.items?.[k]), typos: this.targets.map((_r, k) => !!g.typos?.[k]) };
-        this.uncoverAll();
-        this.targets.forEach((r, k) => {
-          this.outline(r.id, g.items?.[k] ? 'right' : 'wrong');
-        });
-        this.redraw();
-      },
-    };
+  /** the first name to type (when the inputs sit on the picture) */
+  override focus(): void {
+    if (!this.compact()) this.controls<HTMLInputElement>('.vx-input')[0]?.focus({ preventScroll: true });
+  }
+  answer(): { slots: string[] } {
+    return { slots: [...this.#values] };
+  }
+  check(): boolean | null {
+    return verdictOf(this.ex, this.answer(), this.regs).ok;
+  }
+  given(): string {
+    return this.answer().slots.join(', ');
+  }
+  reveal(): void {
+    const g = verdictOf(this.ex, this.answer(), this.regs);
+    this.#grade = { items: this.markSlots(g.items), typos: this.targets.map((_r, k) => !!g.typos?.[k]) };
+    this.redraw();
   }
 }
 
 /* ---------- 🔽 select: a list per part ---------- */
 export class ImgSelect extends SlotPicture {
-  readonly #c: WidgetCtx;
   protected readonly targets: readonly Region[];
   readonly #shared: readonly string[];
   readonly #values: string[];
   #marks: readonly boolean[] | null = null;
   constructor(c: WidgetCtx) {
-    super(c.app, c.media, c.ex);
-    this.#c = c;
+    super(c);
+    this.picture(c.app, c.media, c.ex);
     this.targets = vTargets(c.ex, this.regs);
     this.#values = this.targets.map(() => '');
     if (c.ex.mask !== false) for (const r of this.targets) this.cover(r.id, true);
@@ -637,30 +622,23 @@ export class ImgSelect extends SlotPicture {
         : nothing
     }`;
   }
-  #answer = (): { slots: (string | null)[] } => ({ slots: this.#values.map(v => v || null) });
-  widget(): Widget {
-    const { ex } = this.#c;
-    return {
-      el: this,
-      answer: this.#answer,
-      check: () => verdictOf(ex, this.#answer(), this.regs).ok,
-      given: () => this.#answer().slots.join(', '),
-      reveal: () => {
-        const right = verdictOf(ex, this.#answer(), this.regs).items ?? [];
-        this.#marks = this.targets.map((_r, k) => !!right[k]);
-        this.uncoverAll();
-        this.targets.forEach((r, k) => {
-          this.outline(r.id, right[k] ? 'right' : 'wrong');
-        });
-        this.redraw();
-      },
-    };
+  answer(): { slots: (string | null)[] } {
+    return { slots: this.#values.map(v => v || null) };
+  }
+  check(): boolean | null {
+    return verdictOf(this.ex, this.answer(), this.regs).ok;
+  }
+  given(): string {
+    return this.answer().slots.join(', ');
+  }
+  reveal(): void {
+    this.#marks = this.markSlots(verdictOf(this.ex, this.answer(), this.regs).items);
+    this.redraw();
   }
 }
 
 /* ---------- 🙈 occlusion: one covered part at a time: recall, reveal, rate ---------- */
-export class ImgOcclusion extends PictureElement {
-  readonly #c: WidgetCtx;
+export class ImgOcclusion extends PictureWidget {
   readonly #targets: readonly Region[];
   #k = 0;
   #knew = 0;
@@ -668,8 +646,8 @@ export class ImgOcclusion extends PictureElement {
   #shown = false;
   #final: boolean | null = null;
   constructor(c: WidgetCtx) {
-    super(c.app, c.media, c.ex);
-    this.#c = c;
+    super(c);
+    this.picture(c.app, c.media, c.ex);
     const all = vTargets(c.ex, this.regs);
     this.#targets = c.ex.order === 'random' ? shuffle(all) : all;
     for (const r of this.#targets) this.cover(r.id, true, 'occ');
@@ -686,7 +664,7 @@ export class ImgOcclusion extends PictureElement {
       cv.open =
         i === this.#k
           ? () => {
-              if (!this.#c.api.locked()) this.#show();
+              if (!this.api.locked()) this.#show();
             }
           : undefined;
     });
@@ -723,10 +701,10 @@ export class ImgOcclusion extends PictureElement {
     this.#focusOn();
   }
   #finish(): void {
-    const ok = verdictOf(this.#c.ex, { knew: this.#targets.map((_, i) => !!this.#marks[i]) }).ok === true;
+    const ok = verdictOf(this.ex, { knew: this.#targets.map((_, i) => !!this.#marks[i]) }).ok === true;
     this.#final = ok;
     this.redraw();
-    this.#c.api.done(ok);
+    this.api.done(ok);
   }
   protected override layer(): unknown {
     return this.#targets.map((r, i) => {
@@ -792,18 +770,20 @@ export class ImgOcclusion extends PictureElement {
       </div>
     </div>`;
   }
-  widget(): Widget {
-    return { el: this, selfDone: true, given: () => this.app.t('engine.vx.recalled', { n: this.#knew, of: this.#targets.length }) };
+  /** it grades itself (api.done) */
+  readonly selfDone = true;
+  given(): string {
+    return this.app.t('engine.vx.recalled', { n: this.#knew, of: this.#targets.length });
   }
 }
 
-tag('study-img-hotspot', ImgHotspot);
-tag('study-img-sequence', ImgSequence);
-tag('study-img-reveal', ImgReveal);
-tag('study-img-drag', ImgDrag);
-tag('study-img-label', ImgLabel);
-tag('study-img-select', ImgSelect);
-tag('study-img-occlusion', ImgOcclusion);
+tag('study-ex-img-hotspot', ImgHotspot);
+tag('study-ex-img-sequence', ImgSequence);
+tag('study-ex-img-reveal', ImgReveal);
+tag('study-ex-img-drag', ImgDrag);
+tag('study-ex-img-label', ImgLabel);
+tag('study-ex-img-select', ImgSelect);
+tag('study-ex-img-occlusion', ImgOcclusion);
 
 export const VISUAL_TYPES: Readonly<Record<string, Renderer>> = {
   img_hotspot: visual(ImgHotspot),

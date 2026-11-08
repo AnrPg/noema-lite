@@ -54,7 +54,9 @@ export function clockContract(name: string, make: () => ClockHarness): void {
       const i = h.clock.setInterval(() => {
         n++;
       }, 10);
-      await h.pass(55);
+      // time passes until it has fired three times (a busy machine runs the system clock's timers late: a fixed 55 ms
+      // window would see fewer ticks without anything being wrong); the bound only keeps a broken interval from hanging
+      for (let waited = 0; n < 3 && waited < 5000; waited += 10) await h.pass(10);
       h.clock.clearInterval(i);
       const seen = n;
       await h.pass(40);
