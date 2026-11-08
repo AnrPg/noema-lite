@@ -22,19 +22,25 @@ import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-report
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
 import { inlineCompute } from '../adapters/local/jobs.ts';
 import { STUDY_BRIDGE, STUDY_REGISTRATIONS } from './study.ts';
+import { STUDY_PIECE, STUDY_UI_BRIDGE } from './study-ui.ts';
+import type { StudyPiece } from './study-pages.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
 import { lazyContracts, type LazyContracts } from '../contracts/lazy.ts';
 import { provideContracts } from '../contracts/page.ts';
 import { createLazyEngines, type EnginesPiece } from '../engines/lazy.ts';
+import { createRuntimeLibrary, lazyRuntimePlugins, type RuntimesPiece } from '../runtimes/library.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
+import { lazySourceId, pieceLoader } from './pieces.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, token, type Registration } from './container.ts';
 import { lazyContentChecks, type LazyContentChecks } from '../features/content/application/lazy.ts';
 import type { ChecksPiece } from './contracts.ts';
 import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
+import { languagesBridge } from './languages.ts';
+import { COMMUNITY_APP_BRIDGE, COMMUNITY_SCREENS, type Screens } from './community-app.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { browserLearning, learningBridge } from './learning.ts';
 import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
@@ -46,6 +52,7 @@ import {
   COMPUTE,
   CONFIG,
   ENGINES,
+  RUNTIMES,
   ERRORS,
   I18N,
   JOBS,
@@ -76,10 +83,14 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: r => r.get(CONTRACTS) },
   // the engine library: the activity core (engine/src/32_activities.js), the content checks, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the activity runtimes (src/runtimes): ACT.runtime(id) loads one (build/runtimes.js), the content checks read their checks
+  { name: 'runtimes', build: r => r.get(RUNTIMES) },
   // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
   learningBridge,
-  // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
+  // search, vault, social, reports, engineRequests: the domains of the community screens (src/features/*/ui, NoemaCore.community)
   ...COMMUNITY_BRIDGE,
+  // NoemaCore.community: the community screens (search, vault, people, ⚑ reports, Explore, #/engines), loaded on first use
+  ...COMMUNITY_APP_BRIDGE,
   // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
   // index's records, built in the Worker): src/composition/study.ts
   ...STUDY_BRIDGE,
@@ -105,6 +116,10 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
         },
       }),
   },
+  // the language courses before any course is loaded (src/features/languages): the Languages tab, Today, the loader
+  languagesBridge,
+  // NoemaCore.studyUi: the study area's pages (area 2), mounted by the older page for the open subject: src/composition/study-ui.ts
+  ...STUDY_UI_BRIDGE,
 ];
 
 /** the data contracts of the page, their validators loaded on demand (NoemaCore.contracts) */
@@ -151,66 +166,16 @@ export function workerFactory(page: PageLike, scriptUrl: string | null): () => W
   };
 }
 
-/** The id of the inline copy of a lazy piece (build/<name>.js) in the one-file bundle (tools/build.py writes it). */
-export const lazySourceId = (name: string): string => `noema-lazy:${name}`;
+export { lazySourceId, pieceLoader } from './pieces.ts';
 export const ENGINES_SOURCE_ID = lazySourceId('engines');
-
-/** Where build/<name>.js is: next to this script. */
-const pieceUrlNextTo = (script: string | undefined, name: string): string | null =>
-  script && /app\.js(\?.*)?$/.test(script) ? script.replace(/app\.js(\?.*)?$/, `${name}.js$1`) : null;
-
-/**
- * Runs the lazy piece build/<name>.js once (the bundle's inline copy, else the file next to app.js) and hands over what it
- * left on globalThis[key] (src/composition/engines.ts, src/composition/contracts.ts).
- */
-export function pieceLoader<T>(page: PageLike, script: string | undefined, name: string, key: string): () => Promise<T> {
-  const url = pieceUrlNextTo(script, name),
-    file = `build/${name}.js`;
-  const left = (): T | undefined => (globalThis as Record<string, unknown>)[key] as T | undefined;
-  let loading: Promise<T> | null = null;
-  return () =>
-    (loading ??= new Promise<T>((resolve, reject) => {
-      const doc = (globalThis as { document?: Document }).document;
-      const settle = (): void => {
-        const p = left();
-        if (p) resolve(p);
-        else reject(new NoemaError('compute.unavailable', `${file} did not load`));
-      };
-      if (left()) {
-        settle();
-        return;
-      }
-      if (!doc) {
-        reject(new NoemaError('compute.unavailable', `no page to load ${file} into`));
-        return;
-      }
-      const s = doc.createElement('script');
-      const inline = page.document?.getElementById(lazySourceId(name))?.textContent;
-      if (inline) {
-        s.textContent = inline;
-        doc.head.append(s);
-        settle();
-        return;
-      }
-      if (!url) {
-        reject(new NoemaError('compute.unavailable', `${file} cannot be located`));
-        return;
-      }
-      s.src = url;
-      s.onload = settle;
-      s.onerror = () => {
-        reject(new NoemaError('compute.unavailable', `${file} could not be loaded`));
-      };
-      doc.head.append(s);
-    }).catch((e: unknown) => {
-      loading = null; // a failed load may be tried again
-      throw e;
-    }));
-}
 
 /** Runs build/engines.js once and hands over its piece. */
 export const enginesLoader = (page: PageLike, script: string | undefined): (() => Promise<EnginesPiece>) =>
   pieceLoader<EnginesPiece>(page, script, 'engines', '__noemaEnginesPiece');
+
+/** Runs build/runtimes.js once and hands over its piece. */
+export const runtimesLoader = (page: PageLike, script: string | undefined): (() => Promise<RuntimesPiece>) =>
+  pieceLoader<RuntimesPiece>(page, script, 'runtimes', '__noemaRuntimesPiece');
 
 /** Runs build/contracts.js once and hands over the compiled contracts and the content checks. */
 export const checksLoader = (page: PageLike, script: string | undefined): (() => Promise<ChecksPiece>) =>
@@ -235,7 +200,19 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   // the data contracts and the content checks (src/contracts, src/features/content): their code in build/contracts.js, one
   // piece, loaded the first time either is asked to be ready (NoemaCore.contracts.ready() brings both). The learning log's
   // event contract is in build/app.js (src/contracts/page.ts): the log opens without the piece.
-  c.register(CHECKS_PIECE, () => checksLoader(page, script));
+  // the activity runtimes (src/runtimes): manifests at once, the code of all in build/runtimes.js, loaded the first
+  // time an activity needs one (ACT.runtime(id)); their checks come with the content checks (build/contracts.js)
+  let checksPiece: ChecksPiece | null = null;
+  c.register(RUNTIMES, () =>
+    createRuntimeLibrary(lazyRuntimePlugins(runtimesLoader(page, script)), () => checksPiece?.runtimeChecks ?? null),
+  );
+  c.register(CHECKS_PIECE, () => {
+    const load = checksLoader(page, script);
+    return () => load().then(p => (checksPiece = p));
+  });
+  c.register(COMMUNITY_SCREENS, () => pieceLoader<Screens>(page, script, 'community', '__noemaCommunityPiece'));
+  // the study area's pages (src/features/study/ui): build/study.js, loaded before the first subject opens
+  c.register(STUDY_PIECE, () => pieceLoader<StudyPiece>(page, script, 'study', '__noemaStudyPiece'));
   c.register(CONTRACTS, r => {
     const load = r.get(CHECKS_PIECE);
     return lazyContracts(() =>
@@ -247,8 +224,13 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   });
   c.register(CONTENT, r => {
     const load = r.get(CHECKS_PIECE);
-    // the runtimes' package checkers (NoemaWasm, NoemaEmbed, NoemaH5P) are read from the page when a check runs
-    return lazyContentChecks(() => load().then(p => p.contentChecks(r.get(ENGINES), () => globalThis)));
+    // the typed runtimes' checks (src/runtimes: wasm, embed, h5p)
+    return lazyContentChecks(() =>
+      load().then(p => {
+        const runtimes = p.runtimeCheckers(p.runtimeChecks);
+        return p.contentChecks(r.get(ENGINES), runtimes);
+      }),
+    );
   });
   c.register(TOAST_SURFACE, () => switchableSurface());
   c.register(NOTIFIER, r => browserNotifier(r.get(TOAST_SURFACE)));

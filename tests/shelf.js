@@ -66,7 +66,7 @@ const makeMap = (p, { provider = 'auto', planned = true, attachFirst = false } =
 const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(Noema.account.id, cid).nodes[nid], { cid, nid });
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = claude(); await new Promise(r => api.listen(APORT, r));
   // the connector exactly as tools/build.py bundles it (tests/connector_fn.js), pointed at the emulator
@@ -143,7 +143,7 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
   await p.click('.cm-panel noema-button:has-text("Review")'); await wait(2500);
   ok(await p.evaluate(() => Noema.subject?.id === 'demo-physics' && Noema.node?.node === 'kinematics'), 'studying the step opens the subject, which knows its step (🧭 back to the map)');
-  ok(await p.locator('.curchip').count() > 0, 'the subject has the 🧭 Map button');
+  ok(await until(() => p.$('.subjhead .subjkicker'), 8000) && await p.locator('.subjhead .subjkicker[title="Open the Roadmap"]').count() > 0, 'the subject has the 🧭 Map button');
 
   console.log('— B2. take it off; a step’s own subject goes to the Shelf');
   const det = await p.evaluate(cid => NoemaCurriculum.Edit.detach(Noema.account.id, cid, 'kinematics'), cid);

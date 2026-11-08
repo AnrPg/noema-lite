@@ -16,7 +16,7 @@
        cache first for every file the manifest /vendor/pyodide/manifest.json pins, a network copy kept only when its sha256
        is the manifest's (else 502, never cached), anything else under /vendor/pyodide/ or /vendor/pywheels/ refused (404),
        the manifest itself network first, and the hidden script-less loader page /vendor/pyodide/__loader.html, whose fetch()
-       engine/src/37_activity_py.js uses to read the pinned files through this worker;
+       src/runtimes/py-module/runner.ts uses to read the pinned files through this worker;
      · on activate: every noema-* cache of another build is deleted; Python files the current manifest no longer pins too.
    On `npm run dev` the prelude is { version: 'dev', shell: [] }: only the Python part works, everything else goes to the
    network, so a reload always shows the code as it is. */
@@ -40,7 +40,7 @@ const ORIGIN = sw.location.origin;
 const SHELL = `noema-shell-${CFG.version}`;
 const RUNTIME = `noema-rt-${CFG.version}`;
 const DATA = 'noema-data-v1';
-const PY = 'noema-py-v1'; // the same name engine/src/37_activity_py.js reads when no worker is there
+const PY = 'noema-py-v1'; // the same name src/runtimes/py-module/runner.ts reads when no worker is there
 const KEEP = new Set([SHELL, RUNTIME, DATA, PY]);
 const at = (p: string): string => new URL(p, ORIGIN + '/').href;
 const SHELL_URLS = new Set(CFG.shell.map(at));

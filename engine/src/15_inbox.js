@@ -7,7 +7,7 @@
    a row read twice (a failed delete, two open tabs, two devices) counts once. Malformed items are skipped. */
 const INBOX = 'a:inbox:', RESULTS_SCHEMA = 'noema.results/v1';
 const inboxRun = { busy: false };
-function cardKeyKnown(key) { return FULL_COURSE.some(c => c.flashcards.some(f => f._key === key)); }   // card keys as the decks use them (50_sources.js)
+function cardKeyKnown(key) { return FULL_COURSE.some(c => c.flashcards.some(f => f._key === key)); }   // card keys as the decks use them (40_views.js)
 /** One parsed row (its key: `key`) → the events it stands for (drafts with their own ids; nothing recorded yet). */
 function inboxDrafts(key, v) {
   const out = [];
@@ -50,7 +50,7 @@ async function checkInbox() {
     if (!(await LOG.flush())) return n;
     if (n) await CL.push(ACCOUNT.id);
     for (const k of done) await CL.kvDelete(k).catch(() => { });
-    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
+    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); }
   } catch (e) { console.warn('[inbox]', e); } finally { inboxRun.busy = false; }
   return n;
 }

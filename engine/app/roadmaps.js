@@ -426,6 +426,19 @@
       }), ovFoot(closeBtn(close)));
     });
   }
+  /** 🌍 The Roadmaps others share, for the classic screens (src/features/roadmaps/ui/public.ts; the frame has #/explore). */
+  function explore() {
+    const x = customElements.get('noema-roadmap-public')?.open({ account: acc() });
+    if (x) on(x, { 'roadmap-open': d => openMap(d.roadmap), 'roadmap-library': () => openLibrary() });
+  }
+  /** 🔎 A member takes the owner's changes they want (src/features/roadmaps/ui/review.ts). onDone: taken or kept (not “Not now”).
+      → once the review shows, or there was nothing to review. */
+  function reviewChanges(a, cid, { onDone = () => { } } = {}) {
+    const x = customElements.get('noema-roadmap-review')?.open({ account: a, roadmapId: cid });
+    if (!x) return Promise.resolve();
+    x.addEventListener('roadmap-changes-done', () => onDone());
+    return x.ready;
+  }
   /** The library's requests (src/features/roadmaps/ui/library.ts). */
   function wireLibrary(lib, { leave = () => { } } = {}) {
     return on(lib, {
@@ -433,7 +446,7 @@
       'roadmap-new': () => { leave(); CM()?.create(acc()); },
       'roadmap-from-sources': () => { leave(); fromSources(); },
       'roadmap-import': () => { leave(); CM()?.importMap(acc()); },
-      'roadmap-explore': () => { leave(); if (shell()) window.NoemaShell.go('#/explore'); else CM()?.exploreCurricula(acc()); },
+      'roadmap-explore': () => { leave(); if (shell()) window.NoemaShell.go('#/explore'); else explore(); },
       'roadmap-shelf': () => { leave(); if (shell()) window.NoemaShell.go('#/shelf'); else N.openShelf?.(acc()); },
     });
   }
@@ -460,7 +473,7 @@
       'roadmap-show-app': d => showApp(cid, d.step),
       'roadmap-attach-many': () => CM()?.attachMany(a, cid),
       'roadmap-plan-now': () => { leave(); CM()?.planNow(a, cid); },
-      'roadmap-review-changes': () => CM()?.reviewChanges(a, cid),
+      'roadmap-review-changes': () => reviewChanges(a, cid),
       'roadmap-share': () => customElements.get('noema-roadmap-share')?.open({ account: a, roadmapId: cid }),
       'roadmap-setup-claude': () => CM()?.setupClaude(a),
     });
@@ -498,7 +511,7 @@
     window.NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : ''));
   }
   Object.assign(N, { curricula: openLibrary, curriculumMap: openMap, fromSources });
-  Object.assign(APP, { wireLibrary, wireMap, showApp, mapNext });
+  Object.assign(APP, { wireLibrary, wireMap, showApp, mapNext, reviewChanges });
   }
   {
   const S = window.NoemaShell;
@@ -518,7 +531,7 @@
   PAGES.learn = () => {
     const lib = APP.wireLibrary(Object.assign(document.createElement('noema-roadmap-library'), { account: acc(), heading: 2 }));
     const v = page({ tab: 'learn', crumbs: [[L('knowledge')]], corner: true, menu: learnMenu() }, h('h1', {}, L('knowledge')), lib);
-    const nCol = window.NoemaSearch?.collections?.().length || 0;   // saved searches: a quiet link, only when there are some
+    const nCol = window.NoemaCore?.community?.search.collections().length || 0;   // saved searches: a quiet link, only when there are some
     if (nCol) v.append(h('div', { class: 'ns-shelf' }, h('button', { class: 'ns-shelflink ns-collink', onclick: () => go('#/search') }, svg('search'), ' ', L('sr_collectionsN', { n: nCol }))));
   };
   function learnMenu() {

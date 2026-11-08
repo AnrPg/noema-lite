@@ -4988,5 +4988,9 @@
   "lang.study.allApp": "All the app’s languages…",
   "@lang.study.allApp": {
     "description": "D21: course settings — button that opens the chooser with every language the app offers (in every course)."
+  },
+  "lang.screen.failed": "This page could not be opened. Reload the app to try again.",
+  "@lang.screen.failed": {
+    "description": "A page of the language course (a new screen) could not be loaded: shown in its place."
   }
 }

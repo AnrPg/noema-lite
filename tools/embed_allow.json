@@ -1,6 +1,6 @@
 {
   "format": "noema.embed-allow/v1",
-  "about": "Providers an external-embed@1 activity may open (docs/activities-dev/embed.md). A URL must match one provider exactly: https only, its origin one of origins, its path / query / hash fully matching the patterns (a regex subset that JS and Python read alike; anchored at both ends). status 'pending': known, refused until its embedding terms are confirmed. The copy in engine/src/45_activity_embed.js must equal this file (tests/activities_embed.js).",
+  "about": "Providers an external-embed@1 activity may open (docs/activities-dev/embed.md). A URL must match one provider exactly: https only, its origin one of origins, its path / query / hash fully matching the patterns (a regex subset that JS and Python read alike; anchored at both ends). status 'pending': known, refused until its embedding terms are confirmed. The runtime (src/runtimes/external-embed/check.ts) imports this file as it is.",
   "providers": [
     {
       "id": "phet",

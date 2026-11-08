@@ -1,5 +1,5 @@
 /* Interactive activities without a browser (docs/INTERACTIVE.md, docs/adr/001):
-   1. the loop guard (engine/src/33_activity_guard.js): every loop gets the guard, nothing else changes, the program still runs
+   1. the loop guard (src/runtimes/loop-guard.ts): every loop gets the guard, nothing else changes, the program still runs
       the same, an endless loop throws; strings, templates, regexes and comments are left alone;
    2. the protocol checks (ACTP in engine/src/32_activities.js): sizes, types, payloads, a newer version;
    3. the rules (the content checks, src/features/content: checkActivities) give the golden errors of the former Python twin
@@ -13,8 +13,10 @@ const ROOT = path.resolve(__dirname, '..');
 let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 
 // 1. the loop guard
-require(path.join(ROOT, 'engine', 'src', '33_activity_guard.js'));
-const LG = globalThis.NoemaLoopGuard;
+const RTN = require(path.join(ROOT, 'build', 'runtimes-node.cjs'));   // the typed runtimes (npm run build): the loop guard, html-app@1's engine bridge
+const LG = RTN.loopGuard;
+/** the sources of a typed runtime (src/runtimes/<dir>), joined */
+const RTSRC = dir => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', dir)).filter(f => f.endsWith('.ts')).sort().map(f => fs.readFileSync(path.join(ROOT, 'src', 'runtimes', dir, f), 'utf8')).join('\n');
 const T = src => LG.transform(src, 'G').code;
 ok(T('while (a) b();') === 'while (G()&&(a)) b();', 'while (c) → while (G()&&(c))');
 ok(T('do { x++ } while (x < 3);') === 'do { x++ } while (G()&&(x < 3));', 'do … while (c) gets the guard too');
@@ -41,7 +43,7 @@ try { runIn('while (true) {}', 200); } catch (e) { thrown = e; }
 ok(thrown && /ran too long/.test(thrown.message) && Date.now() - t0 < 2000, `an endless loop throws after the budget (${Date.now() - t0} ms)`);
 try { const x = runIn('var it = { [Symbol.iterator]() { return { next: () => ({ done: false, value: 1 }) }; } }; for (var v of it) {}', 200); ctxT = x.ctx; } catch (e) { thrown = e; }
 ok(/ran too long/.test(thrown.message), 'an endless iterator (for … of) is stopped too');
-ok(fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8').includes('NoemaLoopGuard.transform(s.textContent, G)'), 'html-app@1 guards every script of the bundle before it hashes it');
+ok(/s\.textContent = transform\(s\.textContent, G\)\.code;\s+hashes\.push\(await sha256\(s\.textContent\)\)/.test(RTSRC('html-app')), 'html-app@1 guards every script of the bundle before it hashes it');
 
 // 2. the protocol checks
 const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
@@ -63,9 +65,7 @@ ok(ACTP.check(M('py:out', { outputs: { a: 1 } }, { re: 'py1' })).ok && ACTP.chec
 // 3. the rules, against the golden outputs of the former Python twin (tests/golden.cjs)
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaExpr = ENGINES.kernel('expr'), NoemaCircuit = ENGINES.kernel('circuit'), NoemaEngineCatalog = ENGINES.lib.catalog, NoemaThermal = ENGINES.mod('thermal@1'), NoemaPID = ENGINES.mod('pid@1'), NoemaRF = ENGINES.mod('rf@1'), NoemaTwin = ENGINES.mod('twin@1');
-require(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'));   // NoemaWasm (P6): the wasm runtime's own tests below
-globalThis.NoemaEmbed = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));   // NoemaEmbed: the external-embed@1 rules (P6)
-const P = NoemaCore.content;   // the content checks (build/noema-tools.cjs: with the runtimes' checkers of engine/src/38, 44, 45)
+const P = NoemaCore.content;   // the content checks (build/noema-tools.cjs: with the runtimes' checkers, src/runtimes)
 const golden = require('./golden.cjs')('activities');
 const html = fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'alias-lab', 'app.html'), 'utf8');
 const crypto = require('crypto');
@@ -534,13 +534,14 @@ ok(!('py-module@1' in P.ACTIVITY_RULES.LATER) && !('h5p@1' in P.ACTIVITY_RULES.L
   const hd = hk.filter(k => JSON.stringify(P.checkActivities(packs.find(x => x[0] === k)[1], Object.keys(packs.find(x => x[0] === k)[1].translations || {})).errors.map(m => m.replace(/'/g, '"'))) !== JSON.stringify(pyh[k].map(m => m.replace(/'/g, '"'))));
   ok(hk.length >= 15 && !hd.length, `h5p@1: checkActivities gives the golden messages on ${hk.length} packs ${hd.slice(0, 2).join(', ')}`);
 }
-{ // h5p@1: the packages themselves — checkActivityPackages (through NoemaH5P, the app's own checker) gives the golden errors and
+{ // h5p@1: the packages themselves — checkActivityPackages (through the runtime's own checker, src/runtimes/h5p) gives the golden errors and
   // warnings of the former twin (check_h5p_packages through tools/h5p_check.py) on the reference, the fixtures and broken or hostile variants
-  globalThis.window = globalThis; require(path.join(ROOT, 'engine', 'src', '38_activity_h5p.js'));
-  const H = globalThis.NoemaH5P, allow = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'h5p_allow.json'), 'utf8'));
+  const H = RTN.RUNTIME_CHECKS.h5p, allow = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'h5p_allow.json'), 'utf8'));
   ok(JSON.stringify(Object.fromEntries(Object.entries(allow.content).map(([k, v]) => [k, v.versions]))) === JSON.stringify(H.ALLOW.content) && JSON.stringify(allow.libraries) === JSON.stringify(H.ALLOW.libraries)
     && JSON.stringify(allow.refuse) === JSON.stringify(H.ALLOW.refuse) && JSON.stringify(allow.files.extensions) === JSON.stringify(H.ALLOW.extensions) && JSON.stringify(Object.keys(allow.content).filter(k => !allow.content[k].tested)) === JSON.stringify(H.ALLOW.untested),
-    'one allow-list: tools/h5p_allow.json = NoemaH5P.ALLOW (the app, the connector and the content checks use it)');
+    'one allow-list: tools/h5p_allow.json = the h5p@1 checks\' ALLOW (the app, the connector and the content checks use it)');
+  ok(RTN.RUNTIME_DESCRIPTORS.some(d => d.manifest.id === 'h5p@1' && d.switch === 'on') && !fs.existsSync(path.join(ROOT, 'engine', 'src', '38_activity_h5p.js')) && !fs.existsSync(path.join(ROOT, 'engine', 'src', '33_activity_guard.js')),
+    'h5p@1 is a typed runtime of the registry (src/runtimes/h5p, on by default); its old script and the old loop guard are gone');
   const hdir = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-h5p-parity-'));
   cp.execFileSync('python3', ['-c', `import sys, zipfile, json, os
 src, out = sys.argv[1], sys.argv[2]
@@ -589,7 +590,7 @@ open(os.path.join(out, 'not-a-zip.h5p'), 'wb').write(b'not a zip at all')`, path
       const good = k in want ? !r.errors.length : r.errors.length > 0;
       if (!same || !good) diff.push(`${k}: JS ${JSON.stringify(r)} golden ${JSON.stringify(y)}`.slice(0, 600));
     }
-    ok(!diff.length, `h5p@1 packages: checkActivityPackages (NoemaH5P.check) gives the golden answers on ${hpk.length} packs (${Object.keys(want).length} good, the rest refused) ${diff[0] || ''}`);
+    ok(!diff.length, `h5p@1 packages: checkActivityPackages (the h5p@1 checks) gives the golden answers on ${hpk.length} packs (${Object.keys(want).length} good, the rest refused) ${diff[0] || ''}`);
     const pw = (await P.checkActivityPackages(hpk.find(x => x[0] === 'file attribution')[1], rd)).warnings;
     ok(pw.some(m => /attribution/.test(m)), 'an attribution link is a warning only (shown as text)');
   })();
@@ -611,32 +612,36 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
     return it.spec.outputs.filter(o => o.kind === 'scalar').every(o => Object.is(+a1[o.id], +a2[o.id]) || Math.abs(a1[o.id] - a2[o.id]) <= 1e-12 * Math.abs(a2[o.id])); });
   ok(sameRun.every(Boolean), `each engine's workerSource alone (as in the Worker) computes the same scalars as on the page: ${sameRun.join(', ')}`);
 }
+/** the sources of the sim-spec@1 runtime (src/runtimes/sim-spec), together */
+const SIMSRC = () => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec')).filter(f => f.endsWith('.ts')).sort().map(f => fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec', f), 'utf8')).join('\n');
 { // the runtime's own words go through tE() and exist in every UI language (the drafts)
-  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
+  const src = SIMSRC(), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
   for (const k of ['V', 'I', 'R', 'scope', 'logic', 'bode', 'log', 'rssi', 'T', 'clock']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
   for (const k of ['dc', 'ac', 'rms', 'avg']) keys.push('engine.act.bench.mode.' + k);   // (built: 'engine.act.bench.mode.' + mode)
   const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'); for (const m of src32.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);
-  const srcPy = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js'), 'utf8'); for (const m of srcPy.matchAll(/tE\('(engine\.(?:act\.py|py)\.[a-zA-Z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);   // py-module@1: the notes and Settings
+  const srcPy = ['src/runtimes/py-module/runtime.ts', 'src/runtimes/manifests.ts', 'engine/src/70_account.js'].map(f => fs.readFileSync(path.join(ROOT, ...f.split('/')), 'utf8')).join('\n');
+  for (const m of srcPy.matchAll(/(?:\btE\(|host\.t\(|note: )'(engine\.(?:act\.py|py)\.[a-zA-Z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);   // py-module@1: the notes, the descriptor's note and Settings
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
   const miss = keys.filter(k => !en[k]).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return keys.filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.length >= 5 && !miss.length, `the sim runtime's ${keys.length} host strings are in en.arb and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
 }
 { // P6: the words of the outside-page card, the core's embed notes, the Settings line and the xAPI export exist in every UI language
   const keys = new Set();
-  for (const f of ['45_activity_embed.js', '32_activities.js', '70_account.js', '40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, 'engine', 'src', f), 'utf8').matchAll(/\b(?:T|tE)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
+  for (const f of ['src/runtimes/external-embed/runtime.ts', 'engine/src/32_activities.js', 'engine/src/70_account.js', 'engine/src/40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, ...f.split('/')), 'utf8').matchAll(/\b(?:T|tE|t)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
   const miss = [...keys].filter(k => !en[k] || !en['@' + k]?.description).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return [...keys].filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.size >= 14 && !miss.length, `the ${keys.size} P6 host strings (outside-page card, notes, Settings "Ask again", xAPI export) are in en.arb with descriptions and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
-  const wsrc = fs.readFileSync(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'), 'utf8');
-  ok(!/\btE\(/.test(wsrc) && !/innerHTML|insertAdjacentHTML|document\.write|\beval\s*\(|new\s+Function/.test(wsrc.replace(/\/\*[\s\S]*?\*\//g, '')), 'wasm-module@1 adds no words of its own (failures are the core\'s codes) and never puts HTML or code from the pack in the page');
+  const wdir = path.join(ROOT, 'src', 'runtimes', 'wasm-module'), wsrc = fs.readdirSync(wdir).map(f => fs.readFileSync(path.join(wdir, f), 'utf8')).join('\n');
+  ok(!/\btE\(|\bhost\.t\(/.test(wsrc) && !/innerHTML|insertAdjacentHTML|document\.write|\beval\s*\(|new\s+Function/.test(wsrc.replace(/\/\*[\s\S]*?\*\//g, '')), 'wasm-module@1 adds no words of its own (failures are the core\'s codes) and never puts HTML or code from the pack in the page');
 }
 { // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
-  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
-  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaCore\.content\.checkSimSpec\(spec, tables, host \? null : ACT\.engines\(\), host \? host\.check : undefined\)/.test(src) && /NoemaCore\.engines\.expr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through the expression language (NoemaCore.engines.expr)');
+  const src = SIMSRC(), s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
+  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /PC\.checkSimSpec\(spec0, tables, viewHost \? null : cmp\.engines\(\), viewHost \? viewHost\.check : undefined\)/.test(src)
+    && /const C = \(s: string\): Compiled => cmp\.compile\(s\)/.test(src) && /compile: src => LIBR\(\)\.expr\.compile\(src\)/.test(s32), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through the expression language (NoemaCore.engines.expr)');
 }
 
 { // html-app@1 + the engine library (docs/INTERACTIVE.md §8.1): the "engines" a mini-app lists — the golden words, pack.requires,
-  // the protocol messages, the host bridge (34_activity_html.js) and the reference mini-game cheapest-route (graph@1)
+  // the protocol messages, the host bridge (src/runtimes/html-app/bridge.ts) and the reference mini-game cheapest-route (graph@1)
   const CR = path.join(ROOT, 'tools', 'activities_examples', 'cheapest-route'), crHtml = fs.readFileSync(path.join(CR, 'app.html'), 'utf8');
   const crItem = { ...JSON.parse(fs.readFileSync(path.join(CR, 'activity.json'), 'utf8')), html: crHtml, sha256: crypto.createHash('sha256').update(crHtml).digest('hex'), bytes: Buffer.byteLength(crHtml),
     strings: Object.fromEntries(['en', 'el', 'ru', 'de', 'fr'].map(l => [l, JSON.parse(fs.readFileSync(path.join(CR, `strings.${l}.json`), 'utf8'))])) };
@@ -682,21 +687,18 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
   ok(!ACTP.check(M('engine:run', { engine: 'graph@1', spec: 'x' })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, seed: -1 })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, inputs: [1] })).ok
     && !ACTP.check(M('engine:check', { engine: 7, spec: {} })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: { big: 'x'.repeat(70 * 1024) } })).ok, 'a spec that is not an object, a bad seed, inputs that are a list, an engine that is not a text and a request over 64 KB are refused (strikes)');
   // the host bridge: the frame's policy is unchanged (no Worker in the frame); only library engines, only declared ones, only in a Worker, with limits
-  const h34 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8'), s35 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
-  ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /NoemaCore\?\.engines\?\.catalog\.LIBRARY/.test(h34) && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
+  const h34 = RTSRC('html-app'), s35 = SIMSRC(), s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
+  ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /new Set\(cmp\.library\(\)\)/.test(h34) && /library: \(\) => \[\.\.\.\(LIBR\(\)\?\.catalog\?\.LIBRARY \|\| \[\]\)\]/.test(s32)
+    && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
     && /outBytes: 512 \* 1024, perSec: 30, timeouts: 3/.test(h34) && /bridge\.close\(\)/.test(h34) && /'superseded'/.test(h34),
     'html-app@1: the frame still has no Worker and no network; the host runs only declared library engines, only in their Worker, ≤ 512 KB out, ≤ 30 requests/s, 3 timeouts and the engine is off, every Worker ended on unmount');
-  ok(/ACT\.engineRunner = engineRunner/.test(s35) && /function respec\(s2, o2\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
+  ok(/import \{ engineRunner, type EngineRunner, type MakeRunner \} from '\.\.\/sim-spec\/runner\.ts'/.test(h34) && /function respec\(s2: unknown, o2\?: EngineOpts\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
   // the bridge itself, in Node with a fake Worker runner: codes, the queue, the limits
-  const vmctx = { console, Promise, Date, JSON, Object, Array, Set, String, Number, Math, Error, isFinite, setTimeout, clearTimeout };
-  vmctx.window = vmctx; vmctx.Worker = function () { };
   let runs = [], closed = 0, inW = true;
   const graphE = { id: 'graph@1', workerSource: 'x', check: sp => (sp.model.bad ? ['model.bad: no'] : []), create() { } };
-  vmctx.NoemaCore = { engines: { catalog: { LIBRARY: ['graph@1', 'timeline@1'] } } };
-  vmctx.ACTP = ACTP;
-  vmctx.ACT = { registerRuntime() { }, engine: id => (id === 'graph@1' ? graphE : null), engineRunner(E, spec, opts, onFail) { const r = { spec, opts, onFail, run(inp, done) { runs.push({ inp, done, r }); }, respec(sp, o) { r.spec = sp; r.opts = o; }, close() { closed++; }, inWorker: () => inW }; return r; } };
-  vm.createContext(vmctx);
-  vm.runInContext(h34.replace('ACT.registerRuntime({', 'globalThis.__bridge = engineBridge; ACT.registerRuntime({'), vmctx);
+  const BHOST = { compute: { engine: id => (id === 'graph@1' ? graphE : null), engines: () => ['graph@1'], library: () => ['graph@1', 'timeline@1'], compile: () => null, content: () => null, parts: () => null }, warn() { } };
+  const DEPS = { workers: true, runner(E, spec, opts, onFail) { const r = { spec, opts, onFail, run(inp, done) { runs.push({ inp, done, r }); }, respec(sp, o) { r.spec = sp; r.opts = o; }, close() { closed++; }, inWorker: () => inW }; return r; } };
+  const vmctx = { __bridge: (act, seed, reply) => RTN.engineBridge(BHOST, act, seed, reply, DEPS) };
   const out = [], B = vmctx.__bridge({ engines: ['graph@1', 'timeline@1', 'warp@1'] }, 99, (type, payload, extra) => out.push({ type, payload, re: extra.re }));
   const last = () => out[out.length - 1].payload, spec = { model: { graph: {} }, outputs: [{ id: 'd', kind: 'scalar', of: 'result' }] };
   const R = (id, type, payload) => B.handle({ type, id, payload });
@@ -725,7 +727,7 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
 }
 
 // 4. never allow-same-origin
-const files = cp.execSync('git ls-files engine cloud tools skill', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
+const files = cp.execSync('git ls-files engine cloud tools skill src/runtimes', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html|ts)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
 const bad = [];
 for (const f of files) {
   const s = fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -733,12 +735,12 @@ for (const f of files) {
 }
 const okFiles = ['engine/viewer.js'];   // (the source viewer frames an outside web page from its own URL: its own origin, never pack content)
 ok(bad.filter(b => !okFiles.some(f => b.startsWith(f))).length === 0, 'no code gives a frame allow-same-origin ' + JSON.stringify(bad.filter(b => !okFiles.some(f => b.startsWith(f))).slice(0, 3)));
-ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8')), 'html-app@1 sets sandbox to exactly allow-scripts');
+ok(/frame\.setAttribute\('sandbox', 'allow-scripts'\)/.test(RTSRC('html-app')) && /wf\.setAttribute\('sandbox', 'allow-scripts'\)/.test(RTSRC('html-app')), 'html-app@1 sets sandbox to exactly allow-scripts (the wrapper frame and the mini-app\'s)');
 // h5p@1 in the toolkit, the connector, the site and the bundle (docs/INTERACTIVE_H5P.md)
 const COMPOSE = { browser: fs.readFileSync(path.join(ROOT, 'src', 'composition', 'browser.ts'), 'utf8'), connector: fs.readFileSync(path.join(ROOT, 'src', 'composition', 'connector.ts'), 'utf8') };   // the composition roots that wire the engine library
 const srv = (function all(d) { return fs.readdirSync(d, { withFileTypes: true }).map(e => e.isDirectory() ? all(path.join(d, e.name)) : e.name.endsWith('.ts') ? fs.readFileSync(path.join(d, e.name), 'utf8') : '').join('\n'); })(path.join(ROOT, 'src', 'connector')), bld = fs.readFileSync(path.join(ROOT, 'tools', 'build.py'), 'utf8');
-ok(/scripts\/noema-tools\.cjs', bundle_text\('noema-tools'\)/.test(bld) && /'38_activity_h5p\.js', '32_activities\.css'/.test(bld) && /'player\.js', 'LICENSE', 'LICENSE-NOTICE\.txt'\] \+ sorted/.test(bld) && /activity_host\/h5p\/' \+ f/.test(bld) && /'INTERACTIVE_H5P\.md'\)(?: \+ INTERACTIVE_P6)? if/.test(bld) && /'engine\/src\/38_activity_h5p\.js'/.test(bld),
-  'h5p@1: the skill zip carries the package rules (noema-tools.cjs: NoemaH5P.check), the runtime and the player for the harness (with its licences and readable source); the connector runs NoemaH5P; the guide part "interactive" includes INTERACTIVE_H5P.md');
+ok(/scripts\/noema-tools\.cjs', bundle_text\('noema-tools'\)/.test(bld) && /'32_activities\.js', '32_activities\.css'\): z\.write/.test(bld) && /'player\.js', 'LICENSE', 'LICENSE-NOTICE\.txt'\] \+ sorted/.test(bld) && /activity_host\/h5p\/' \+ f/.test(bld) && /'INTERACTIVE_H5P\.md'\)(?: \+ INTERACTIVE_P6)? if/.test(bld) && !/38_activity_h5p|33_activity_guard/.test(bld) && /H5P_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'checks.ts'), 'utf8')) && /RUNTIME_CHECKS/.test(srv),
+  'h5p@1: the skill zip carries the package rules (noema-tools.cjs: RUNTIME_CHECKS.h5p), the runtime (inside noema-core.js) and the player for the harness (with its licences and readable source); the connector checks with RUNTIME_CHECKS.h5p; the guide part "interactive" includes INTERACTIVE_H5P.md');
 ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player\.js/.test(bld) && /h5p_entries\(m\)/.test(bld), 'h5p@1: the one-file bundle carries the player and small .h5p files inline; the site copies the library\'s .h5p files');
 { const sf = fs.readFileSync(path.join(ROOT, 'engine', 'srcfiles.js'), 'utf8'), ld = ['library', 'community'].map(f => fs.readFileSync(path.join(ROOT, 'engine', 'app', f + '.js'), 'utf8')).join('\n');
   ok(/wireActivities\(acc\.id, meta, pack\)/.test(ld) && /attachActivityFiles\(acc, b\.pack, b\.file\)/.test(ld) && /enumerable: false/.test(sf) && /packs\/\$\{subj\}\/\$\{a\.entry\}/.test(sf) && /actPath = \(uid: string, sid: string, a: PackActivity\): string => `\$\{uid\}\/packs\/\$\{sid\}\/\$\{a\.entry\}/.test(srv),
@@ -747,27 +749,30 @@ ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player
 
 ok(/["']?enum["']?: \[\s*["']workflow["'],\s*["']content["'],\s*["']visual["'],\s*["']interactive["']/.test(srv) && /interactive: D\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
-ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '37_activity_py\.js'/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
+ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'32_activities\.js', '32_activities\.css'/.test(bld) && /py-module@1/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
 ok(NoemaCore.engines.has('circuit-mna@1') && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the circuit engine for the harness (in noema-core.js) and the scripts (in noema-tools.cjs); the guide part "interactive" includes the circuit engine');
 ok(['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(id => NoemaCore.engines.has(id)) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
   && COMPOSE.connector.includes('engines: nodeEngines()') && /\{ name: 'engines', build: r => r\.get\(ENGINES\) \}/.test(COMPOSE.browser) && /core_scripts = \(f'<script>\{esc\(bundle_text\("app"\)\)\}<\/script>/.test(bld),
   'the P6 engines: the skill zip carries the engines for the harness and the scripts; the connector (every engine in hand) and the app (build/app.js: NoemaCore.engines, the site and the bundle) have them in the content checks; the guide part "interactive" includes INTERACTIVE_ENGINES.md');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
   ok(html.indexOf('<script src="build/app.js">') > 0 && !html.includes('packcheck.js') && !html.includes('engines.js') && /\{ name: 'content', build: r => r\.get\(CONTENT\) \}/.test(COMPOSE.browser) && /p\.contentChecks\(r\.get\(ENGINES\)/.test(COMPOSE.browser), 'the shell has the engine library and the content checks on NoemaCore (NoemaCore.engines, NoemaCore.content: their code in the lazy pieces)'); }
-ok(['noema_core.py', 'embed_allow.json', 'h5p_allow.json', 'h5p_import.py'].every(f => new RegExp(`SKILL_TOOLS = \\[[^\\]]*'${f.replace('.', '\\.')}'`).test(bld)) && /'44_activity_wasm\.js'\): z\.write/.test(bld)
+ok(['noema_core.py', 'embed_allow.json', 'h5p_allow.json', 'h5p_import.py'].every(f => new RegExp(`SKILL_TOOLS = \\[[^\\]]*'${f.replace('.', '\\.')}'`).test(bld)) && !/'44_activity_wasm\.js'/.test(bld) && /attachRuntimes/.test(fs.readFileSync(path.join(ROOT, 'src', 'composition', 'harness.ts'), 'utf8'))
   && /INTERACTIVE_P6 = \('INTERACTIVE_WASM\.md', 'INTERACTIVE_EMBED\.md', 'INTERACTIVE_XAPI\.md'\)/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\) \+ INTERACTIVE_P6 if os\.path\.exists/.test(bld) && ['INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md'].every(f => fs.existsSync(path.join(ROOT, 'docs', f))),
-  'P6: the skill zip carries noema_core.py (the wasm and embed rules in noema-tools.cjs), the allow-lists to read, h5p_import.py and the wasm runtime for the harness; the guide part "interactive" includes the wasm, embed and xAPI pages');
+  'P6: the skill zip carries noema_core.py (the wasm and embed rules in noema-tools.cjs), the allow-lists to read, h5p_import.py and the wasm runtime for the harness (inside noema-core.js: src/runtimes, NoemaCore.attachRuntimes); the guide part "interactive" includes the wasm, embed and xAPI pages');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  ok(['44_activity_wasm.js', '45_activity_embed.js'].every(f => html.includes('engine/src/' + f) && new RegExp(`'engine/src/${f.replace('.', '\\.')}'`).test(bld.split('CONNECTOR_ENGINE = ')[1].split('\n')[0]) && bld.includes(`rd("engine/src/${f}")`) && /^PAGE_SRC = \('43_xapi\.js', '44_activity_wasm\.js', '45_activity_embed\.js'\)$/m.test(bld) && /for f in PAGE_SRC: shutil\.copy/.test(bld))
-    && /^var NoemaEmbed = /m.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'), 'utf8')),
-    'the shell, the site, the one-file bundle and the connector load NoemaWasm and NoemaEmbed for the content checks (45 declares var: it is loaded twice in the app)'); }
-{ const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
-  ok(/why === 'embed-refused' \|\| why === 'embed-graded' \? stop\(tE\('engine\.act\.embed\.refused'\), false\)/.test(src) && /why === 'embed-offline' \? stop\(tE\('engine\.act\.embed\.offline'\)\)/.test(src) && /why === 'embed-timeout' \? stop\(tE\('engine\.act\.embed\.timeout'/.test(src),
+  ok(!html.includes('44_activity_wasm') && !fs.existsSync(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js')) && !fs.existsSync(path.join(ROOT, 'engine', 'src', '43_page_runtimes.js')) && !/44_activity_wasm/.test(bld) && /^PAGE_SRC = \('43_xapi\.js',\)$/m.test(bld) && /for f in PAGE_SRC: shutil\.copy/.test(bld)
+    && /wasm: WASM_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'checks.ts'), 'utf8')) && !/44_activity_wasm/.test(fs.readFileSync(path.join(ROOT, 'src', 'connector', 'engine', 'sources.ts'), 'utf8') + fs.readFileSync(path.join(ROOT, 'src', 'composition', 'noema-tools.ts'), 'utf8'))
+    && !html.includes('45_activity_embed') && !fs.existsSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'))
+    && /\{ name: 'runtimes', build: r => r\.get\(RUNTIMES\) \}/.test(COMPOSE.browser) && /p\.scopeCheckers\(\(\) => globalThis, p\.runtimeChecks\)/.test(COMPOSE.browser)
+    && /RUNTIME_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'composition', 'noema-tools.ts'), 'utf8')) && /RUNTIME_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'connector', 'engine', 'index.ts'), 'utf8')),
+    'wasm-module@1 and external-embed@1 are typed runtimes (src/runtimes): their checks (RUNTIME_CHECKS) reach the content checks of the app, the connector and the tools, their code is NoemaCore.runtimes (build/runtimes.js); no page, bundle or connector loads engine/src/44 any more'); }
+{ const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'), rt = fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'external-embed', 'runtime.ts'), 'utf8');
+  ok(/failText\?\.\(why, a\)/.test(src) && /code === 'embed-refused' \|\| code === 'embed-graded'\) return \{ text: host\.t\('engine\.act\.embed\.refused'\), restart: false \}/.test(rt) && /code === 'embed-offline'\) return \{ text: host\.t\('engine\.act\.embed\.offline'\), restart: true \}/.test(rt) && /code === 'embed-timeout'\) return \{ text: host\.t\('engine\.act\.embed\.timeout'[^}]*\}\), restart: true \}/.test(rt),
     'the core: a refused or graded outside page stops without Restart; offline or not loaded stops with Restart (retry)'); }
 ok(COMPOSE.connector.includes('engines: nodeEngines()') && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs the engine library (the expression language, every engine) in its content checks (sim-spec checks) and serves the expression language in the guide');
-{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('<script src="build/app.js">'), b = html.indexOf('engine/src/44_activity_wasm.js');
-  ok(a > 0 && a < b && bld.indexOf('{core_scripts}') > 0 && bld.indexOf('{core_scripts}') < bld.indexOf('rd("engine/src/44_activity_wasm.js")'),
-    'the shell, the site and the one-file bundle load the engine library and the content checks (build/app.js) before the runtimes\' package checkers (a sim-spec pack imported before any subject is open is checked, not refused)'); }
+{ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('<script src="build/app.js">');
+  ok(a > 0 && bld.indexOf('{core_scripts}') > 0 && /checksPiece\?\.runtimeChecks/.test(COMPOSE.browser) && /runtimeChecks: RUNTIME_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'composition', 'contracts.ts'), 'utf8')),
+    'the shell, the site and the one-file bundle load the engine library (build/app.js) and the content checks with the runtimes\' checks (build/contracts.js: RUNTIME_CHECKS) before any subject (a wasm pack imported before any subject is open is checked, not refused)'); }
 { // activity_new.py --runtime sim-spec@1 starts from rc-lowpass
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
   const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-filter', '--runtime', 'sim-spec@1'], { encoding: 'utf8' });
@@ -800,15 +805,15 @@ ok(COMPOSE.connector.includes('engines: nodeEngines()') && /INTERACTIVE_SIMEXPR\
     'activity_new.py --from heatsink / pid-tune / lora-link / sensor-node / wasm-oscillator copies each reference (its engine, strings, fallback, two TODO cases from its own tests); the usage names them');
 }
 { // py-module@1 in the app: the runtime is drawn by the sim-spec view (no pack HTML), the runner stays sandboxed, Python never in the bundle
-  const ui = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js'), 'utf8'), rt = fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py.js'), 'utf8');
-  ok(/ACT\.simView\(box/.test(ui) && /check: \{ python: true \}/.test(ui) && !/innerHTML|eval\s*\(|new\s+Function/.test(ui), 'py-module@1 renders through the sim-spec view (its spec checked with python: true), no HTML from the pack');
-  ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(rt) && /connect-src 'none'/.test(rt) && /!window\.NOEMA_BUNDLE/.test(rt), 'the Python runner: sandbox exactly allow-scripts, no network; not available in the one-file bundle');
+  const ui = fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'py-module', 'runtime.ts'), 'utf8'), rt = fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'py-module', 'runner.ts'), 'utf8'), man = fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'manifests.ts'), 'utf8');
+  ok(/host\.simView\(\s*box/.test(ui) && /simView: \(box, c, o\) => \(RUNTIMES\[SIM\] \? RUNTIMES\[SIM\]\.view\(box, c, o\)/.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8')) && /check: \{ python: true \}/.test(ui) && !/innerHTML|eval\s*\(|new\s+Function/.test(ui), 'py-module@1 renders through the sim-spec view (its spec checked with python: true), no HTML from the pack');
+  ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(rt) && /connect-src 'none'/.test(rt) && /!g\.NOEMA_BUNDLE/.test(man) && /availableHere\('website'/.test(rt) && /\['py-module@1', 'on', \[\], \{ where: 'website'/.test(man) && !fs.existsSync(path.join(ROOT, 'engine', 'src', '37_activity_py.js')) && !fs.existsSync(path.join(ROOT, 'engine', 'src', '37_activity_py_ui.js')), 'the Python runner: sandbox exactly allow-scripts, no network; not available in the one-file bundle (the descriptor\'s rule, known before the code is loaded)');
   const core = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
-  ok(/'py-module@1': true/.test(core) && /!window\.NOEMA_BUNDLE && window\.isSecureContext && \/\^https\?:\$\//.test(rt), "py-module@1 is on by default (ADR 001 §10: tested in Chromium, Firefox and WebKit); NOEMA_CONFIG.activities['py-module@1'] = false switches it off; it still refuses itself in the one-file bundle and on file://");
+  ok(/'py-module@1': true/.test(core) && /!g\.NOEMA_BUNDLE &&\s+g\.isSecureContext &&\s+\/\^https\?:\$\//.test(man), "py-module@1 is on by default (ADR 001 §10: tested in Chromium, Firefox and WebKit); NOEMA_CONFIG.activities['py-module@1'] = false switches it off; it still refuses itself in the one-file bundle and on file://");
   const d = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-actnew-'));
   const r = cp.spawnSync('python3', [path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), d, 'my-py', '--from', 'py-filter'], { encoding: 'utf8' });
   const reg = fs.existsSync(path.join(d, 'activities', 'activities.json')) ? JSON.parse(fs.readFileSync(path.join(d, 'activities', 'activities.json'), 'utf8')) : null;
   ok(r.status === 0 && reg?.items?.[0]?.runtime === 'py-module@1' && reg.items[0].entry === 'activities/my-py/main.py' && fs.existsSync(path.join(d, 'activities', 'my-py', 'main.py')) && fs.existsSync(path.join(d, 'activities', 'my-py', 'spec.json')), 'activity_new.py --from py-filter copies the Python reference (main.py, spec.json, strings, the registry entry) ' + (r.stdout + r.stderr).slice(-200));
-  ok(/'INTERACTIVE_PYTHON\.md'/.test(bld) && /'37_activity_py\.js', '37_activity_py_ui\.js'/.test(bld) && /def write_service_worker/.test(bld) && /\/vendor\/pyodide\/manifest\.json\\n  Cache-Control: no-cache/.test(bld), 'the build: the guide part "interactive" and the skill carry INTERACTIVE_PYTHON.md and the Python runtime; the site writes the service worker (/sw.js, it keeps the Python files) and sends the Python headers');
+  ok(/'INTERACTIVE_PYTHON\.md'/.test(bld) && !/37_activity_py/.test(bld) && /def write_service_worker/.test(bld) && /\/vendor\/pyodide\/manifest\.json\\n  Cache-Control: no-cache/.test(bld), 'the build: the guide part "interactive" and the skill carry INTERACTIVE_PYTHON.md and the Python runtime; the site writes the service worker (/sw.js, it keeps the Python files) and sends the Python headers');
 }
 (globalThis.__h5pParity || Promise.resolve()).catch(e => ok(false, 'h5p@1 package parity: ' + e.message)).then(() => { console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities: ${n} checks passed`); process.exit(fails ? 1 : 0); });

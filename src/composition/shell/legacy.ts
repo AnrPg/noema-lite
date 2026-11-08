@@ -43,7 +43,6 @@ export interface CurMap {
 export interface EngineApi {
   route(): void;
   openTutor?(): void;
-  focus?(): void;
   retheme?(): void;
   accView?(view: string, body: HTMLElement, close: () => void, o?: { only?: string }): void;
 }
@@ -70,18 +69,14 @@ export interface CloudStatus {
   readonly syncing?: boolean;
   readonly pending?: number | boolean;
 }
-export interface Social {
-  start(): void;
-  onChange(f: () => void): void;
-  waiting(): number;
-  page(k: string, args: readonly string[], ctx: unknown): void;
+/** What the frame uses of the community screens (NoemaCore.community: src/composition/community-app.ts). */
+export interface Community {
+  readonly social: { start(): void; onChange(f: () => void): () => void; waiting(): number };
+  readonly report: { isAdmin(): Promise<boolean>; newCount(): Promise<number>; open(): Promise<void> };
+  readonly search: { quick(here: unknown): Promise<void>; hereNow(): unknown; collections(): readonly unknown[] };
 }
-export interface Report {
-  isAdmin?(): Promise<boolean>;
-  newCount(): Promise<number>;
-  open(): void;
-  page(rest: readonly string[], ctx: unknown): void;
-}
+/** the community screens, once build/app.js has run */
+export const community = (): Community | null => (globalThis as { NoemaCore?: { community?: Community } }).NoemaCore?.community ?? null;
 export interface Convos {
   readonly SCHEMA?: string;
   migrateLegacy(acc: string, subs: unknown): Promise<unknown>;
@@ -130,6 +125,8 @@ export interface NoemaAreas {
   notes?: Notes;
   shareRow?(sh: unknown, o: { onAccepted: (s: { kind?: string; curriculum?: string; id?: string; title?: string }) => void }): HTMLElement;
   boot?: AreaBoot;
+  /** what the areas lend each other (engine/app/*.js); the study area's focus sprint (engine/app/study.js) */
+  app?: { study?: { toggleSprint(): void } };
 }
 /** the library's part of the start (engine/app/library.js, engine/app/languages.js, engine/app/roadmaps.js) */
 export interface AreaBoot {
@@ -157,11 +154,8 @@ export interface LegacyWindow {
   NoemaCurriculum?: Curriculum;
   NoemaCurMap?: CurMap;
   NoemaCloud?: Cloud;
-  NoemaSocial?: Social;
-  NoemaReport?: Report;
   NoemaConvos?: Convos;
   NoemaReact?: { big(k: string, text?: string): unknown; dayStart(acc: string): void };
-  NoemaSearch?: { quick(here: unknown): void; page(ctx: unknown): void; hereNow?(): unknown };
   NoemaMT?: { panel(acc: string | null): HTMLElement };
   NoemaLang?: { SUPPORTED_NATIVES?: readonly string[] };
   NoemaLangUI?: { titleOf?(id: string): string };

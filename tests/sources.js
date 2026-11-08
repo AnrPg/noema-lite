@@ -15,7 +15,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
 
 (async () => {
   execFileSync('python3', [path.join(ROOT, 'tests/fixtures/make_viewer_files.py'), TF], { stdio: 'ignore' });
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000); const E = []; p.on('pageerror', e => E.push(e.message));
@@ -107,10 +107,10 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   const op1 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
   ok(op0 === 0 && op1 > 0.5, `the icon is hidden and appears on hover (opacity ${op0} → ${op1})`);
   await p.click('.reader .blk >> nth=0 >> .xbtn'); await wait(500);
-  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ctxchip')?.textContent, mode: T.mode, ctx: tutorContextText(), sec: SEC[T.ctx.sec]?.title }));
-  ok(xs.open && /^🔎 /.test(xs.chip) && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
+  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ns-forchip')?.textContent, mode: NoemaTutor.current().session.mode, ctx: NoemaTutor.current().session.context(), sec: SEC[NoemaTutor.current().session.ctx.sec]?.title }));
+  ok(xs.open && /Kinetic energy/.test(xs.chip || '') && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
   ok(/^FOCUS/.test(xs.ctx) && xs.ctx.includes('WIDER CONTEXT') && xs.ctx.includes(xs.sec) && /THE CHAPTER/.test(xs.ctx), 'the AI gets the part itself first, then its section and chapter as wider context');
-  await p.evaluate(() => closeTutor());
+  await p.evaluate(() => NoemaTutor.current().session.close());
   await p.screenshot({ path: SHOTS + '/s7_explain.png' });
 
   console.log('— ❓ Help: setting up Claude (both ways), always there');
@@ -125,8 +125,9 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelectorAll('.modal, .noema-overlay').forEach(o => o.remove()));
 
   console.log('— remove the file');
-  await p.evaluate(() => { DECK.expanded.ecb = true; toggleSourcesDeck(true); }); await wait(200);
-  p.once('dialog', d => d.accept()); await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(3500);
+  await p.evaluate(() => { NoemaCore.studyUi.current().app.sourcesUi.expand('ecb'); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }); await wait(200);
+  await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(200);
+  await p.click('.modal .btn.primary'); await wait(3500);   // the app's own yes / no question (no browser dialog)
   ok(!Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && !srv.srcfiles(gia, 'kytt').ecb, 'removed from the cloud and the index');
 
   console.log('— a package (.noema.zip): the pack + its source files, exactly as split');
@@ -152,7 +153,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(/\/\s*18/.test(await p.locator('.vw-ov').innerText()), 'the part has its own 18 pages (13–30)');
   await p.screenshot({ path: SHOTS + '/s6_package_part.png' }); await p.keyboard.press('Escape'); await wait(200);
   await p.click('.srcref:has-text("Σημ")'); ok(await until(async () => /Notes travel with the package/.test(await p.locator('.vw-ov').innerText())), 'the note (Markdown) from the package opens too'); await p.keyboard.press('Escape');
-  await p.evaluate(() => toggleSourcesDeck(true)); await wait(300);
+  await p.evaluate(() => NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true)); await wait(300);
   ok(await p.locator('.srcdeck .srccard').count() === 3 && await p.locator('.srcdeck .srccard .srceye').count() === 3, '📚 Sources: one card per part, each with its file (👁)');
   await p.click('.srcdeck .srccard:has-text("μέρος 2") .srcmain'); await wait(300);
   const c2txt = await p.locator('.srcdeck .srccard:has-text("μέρος 2")').innerText();
@@ -180,8 +181,8 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(await p.locator('.noema-chip:has-text("Spark & Delta (my notes)")').count() === 1, 'a library subject can be renamed (only for you) — the list updates');
   await p.screenshot({ path: SHOTS + '/s5_rename.png' });
   await p.click('.noema-chip:has-text("Spark & Delta")');
-  const renamed = await until(async () => /Spark & Delta \(my notes\)/.test(await p.locator('.subjchip').textContent()), 20000);
-  if (!renamed) console.log('   subjchip:', await p.locator('.subjchip').innerText().catch(e => e.message), await p.evaluate(() => location.href + ' ' + JSON.stringify(Noema.subject?.title)));
+  const renamed = await until(async () => /Spark & Delta \(my notes\)/.test(await p.evaluate(() => document.title)), 20000);   // the open subject's name (the frame's crumbs and the tab's title)
+  if (!renamed) console.log('   title:', await p.evaluate(() => document.title), await p.evaluate(() => location.href + ' ' + JSON.stringify(Noema.subject?.title)));
   ok(renamed, 'the new name is used in the app');
   ok(await until(() => /Spark & Delta/.test(srv.state.kv[gia]?.['a:subjoverride:databricks']?.value || ''), 15000), 'and synced to every device');
   await p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);

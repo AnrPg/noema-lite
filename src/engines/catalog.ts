@@ -23,7 +23,7 @@ const E = (
 ): CatalogEntry => Object.freeze({ id, layer, plugin, file, slug, words: Object.freeze(words), ...(extra || {}) });
 const CATALOG = Object.freeze([
   // the library: general engines, each for a whole family of subjects
-  E('formula@1', 'library', false, 'engine/src/35_activity_sim.js', 'formula', [
+  E('formula@1', 'library', false, 'engine/src/32_activities.js', 'formula', [
     'formula',
     'equation',
     'function',
@@ -1002,7 +1002,7 @@ const CATALOG = Object.freeze([
     'html-app@1',
     'free',
     false,
-    'engine/src/34_activity_html.js',
+    'src/runtimes/html-app/runtime.ts',
     'htmlapp',
     [
       'game',
@@ -1025,7 +1025,7 @@ const CATALOG = Object.freeze([
     'py-module@1',
     'free',
     false,
-    'engine/src/37_activity_py.js',
+    'src/runtimes/py-module/runtime.ts',
     'python',
     [
       'python',
@@ -1144,7 +1144,7 @@ const CATALOG = Object.freeze([
     'wasm@1',
     'plugin',
     false,
-    'engine/src/44_activity_wasm.js',
+    'src/runtimes/wasm-module/runtime.ts',
     'wasm',
     ['webassembly', 'wasm', 'compiled', 'c', 'rust', 'fast simulation'],
     { runtime: 'wasm-module@1' },
@@ -1189,9 +1189,18 @@ function suggest(text: unknown, opts?: { readonly limit?: number | undefined } |
   return out.slice(0, (opts && opts.limit) || 4);
 }
 
+/** the library's engines by field, as the #/engines page and the activity author list them (the field's words: engine.engines.group.<g>) */
+const GROUPS: CatalogApi['GROUPS'] = Object.freeze([
+  Object.freeze(['math', Object.freeze(['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'logic@1', 'des@1', 'field@1'])] as const),
+  Object.freeze(['life', Object.freeze(['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1', 'agents@1'])] as const),
+  Object.freeze(['arts', Object.freeze(['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'])] as const),
+  Object.freeze(['thought', Object.freeze(['rhetoric@1', 'philo@1', 'law@1'])] as const),
+]);
+
 const API: CatalogApi = Object.freeze({
   CATALOG,
   LIBRARY: Object.freeze(LIBRARY),
+  GROUPS,
   byId,
   suggest,
   fold,

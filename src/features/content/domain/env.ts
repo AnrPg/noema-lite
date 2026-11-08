@@ -26,11 +26,12 @@ export interface EngineChecks {
   readonly check?: (model: unknown) => readonly EngineIssue[];
   readonly checkFaults?: (model: unknown, apply: readonly unknown[]) => readonly EngineIssue[];
 }
-/** the checks of the activity runtimes that read binary packages (engine/src/44_activity_wasm.js, 45_activity_embed.js,
-    38_activity_h5p.js: the runtimes themselves use them before they run an item) */
+/** the checks of the activity runtimes that read binary packages (src/runtimes/wasm-module, src/runtimes/external-embed,
+    src/runtimes/h5p: the runtimes themselves use them before they run an item) */
 export interface WasmChecks {
   checkItem(item: unknown): { readonly problems: readonly string[] };
-  checkModel(spec: unknown, items: Readonly<Record<string, unknown>>): readonly string[];
+  /** expr: the expression language that checks the model's inputs (null: they are not checked here) */
+  checkModel(spec: unknown, items: Readonly<Record<string, unknown>>, expr: ExprChecker | null): readonly string[];
 }
 export interface EmbedChecks {
   check(item: unknown): { readonly errors: readonly string[]; readonly warnings: readonly string[] };
@@ -57,9 +58,14 @@ export interface EngineSource {
   readonly expr: ExprChecker | null;
   loaded(id: string): unknown;
 }
-/** where the activity runtimes publish their checkers (NoemaWasm, NoemaEmbed, NoemaH5P): the page, or the scope that ran them */
-export type RuntimeHost = () => Readonly<Record<string, unknown>>;
-const pick = (host: RuntimeHost, name: string): unknown => host()[name] ?? null;
+/** the runtimes' checkers as a root has them when a check runs (src/runtimes RUNTIME_CHECKS, and the runtimes still loaded as
+    scripts: the page, or the scope that ran them); null where one is not loaded */
+export interface RuntimeCheckers {
+  readonly wasm: WasmChecks | null;
+  readonly embed: EmbedChecks | null;
+  readonly h5p: H5PChecks | null;
+}
+export type RuntimeHost = () => RuntimeCheckers;
 
 /** the CheckEnv of a root: the library's expression language and loaded engines, the runtimes' checkers as they are when a check
     runs (the app's runtimes load after the core; the connector's and the Node tools' scope is filled after the checks are made) */
@@ -68,13 +74,13 @@ export function envOf(engines: EngineSource, host: RuntimeHost): CheckEnv {
     expr: engines.expr,
     engine: (id: string) => engines.loaded(id) as EngineChecks | null,
     get wasm() {
-      return pick(host, 'NoemaWasm') as WasmChecks | null;
+      return host().wasm;
     },
     get embed() {
-      return pick(host, 'NoemaEmbed') as EmbedChecks | null;
+      return host().embed;
     },
     get h5p() {
-      return pick(host, 'NoemaH5P') as H5PChecks | null;
+      return host().h5p;
     },
   };
 }

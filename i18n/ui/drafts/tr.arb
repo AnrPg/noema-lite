@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "Daha az hareket",
   "ui.kit.motion.full": "Tam",
   "ui.kit.language": "Arayüz dili",
-  "ui.kit.lookNote": "Buradaki seçimler bu cihaza ve yalnızca bu sayfaya aittir."
+  "ui.kit.lookNote": "Buradaki seçimler bu cihaza ve yalnızca bu sayfaya aittir.",
+  "ui.study.onlyMyLevel": "Yalnızca benim seviyem ({level})",
+  "ui.study.myLevelTip": "Yalnızca ulaştığın seviyedeki alıştırmalarla çalış",
+  "ui.study.level": "Seviye"
 }

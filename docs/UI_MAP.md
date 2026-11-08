@@ -1,6 +1,6 @@
 # Where everything went: the new frame, control by control
 
-The redesign (the frame (src/composition/shell/host.ts, src/ui/screens/shell), engine/src/95_shell.css, the views in engine/src/40_views.js) keeps every function of the
+The redesign (the frame (src/composition/shell/host.ts, src/ui/screens/shell), engine/src/95_shell.css, the study area's pages in src/features/study/ui) keeps every function of the
 older screens. The ones you use every day stay on the page. The rest move into a **⋮** menu (top right), a **▾** menu next
 to the button they belong to, or appear only where they are needed. This file maps each of the 528 controls of the older
 screens (the survey ids in the left column: T = top bar, H = subject home, C = chapter, S = section, …) to its new home.
@@ -71,6 +71,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | C23 ⚠️ Start trap drill | Traps tab › Traps, no timer; new: ⚡ True or false against the clock (`#/lightning/<chapter>`) |
 | C24 pitfalls + 💡 | Traps tab, unchanged |
 | — | New in Practice: Mistakes of this chapter (when there are some) |
+| — | New in Practice › Choose what to practise and in the mixed round: 🎚️ Only my level (a chip; only when the subject has a level ladder with exercises at several levels) |
 
 ## 4. A section (`#/s/<id>`), reading mode
 | Old | New home |

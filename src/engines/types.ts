@@ -111,6 +111,8 @@ export interface Suggestion {
 }
 export interface CatalogApi {
   readonly CATALOG: readonly CatalogEntry[];
+  /** the library's engines by field: [field, engine ids] (the #/engines page, the activity author) */
+  readonly GROUPS: readonly (readonly [string, readonly string[]])[];
   readonly LIBRARY: readonly string[];
   byId(id: string): CatalogEntry | null;
   suggest(text: string, opts?: { readonly limit?: number }): Suggestion[];

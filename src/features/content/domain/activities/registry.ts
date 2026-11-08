@@ -361,7 +361,7 @@ export function createActivityChecks(env: CheckEnv) {
             E.push(`${w}: the spec (activities/${aid}/spec.json: the controls, readouts and plots the app draws) is missing`);
           else E.push(...sim.checkSimSpec(a.spec, strings, null, { python: true }).map(m => `${w}: ${m}`));
         } else if (rt === WASM) {
-          if (!env.wasm) E.push(`${w}: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here`);
+          if (!env.wasm) E.push(`${w}: the WebAssembly checker (src/runtimes/wasm-module) is not loaded here`);
           else E.push(...env.wasm.checkItem(a).problems.map(m => `${w}: ${m}`));
           const sp = a.spec;
           if (sp !== undefined && sp !== null) {
@@ -372,7 +372,7 @@ export function createActivityChecks(env: CheckEnv) {
             E.push(...sim.checkSimSpec(ownSpec(a), strings, null, { items: every }).map(m => `${w}: ${m}`));
           }
         } else if (rt === EMBED) {
-          if (!env.embed) E.push(`${w}: the outside-page checker (NoemaEmbed, engine/src/45_activity_embed.js) is not loaded here`);
+          if (!env.embed) E.push(`${w}: the outside-page checker (src/runtimes/external-embed) is not loaded here`);
           else {
             const r = env.embed.check(a);
             E.push(...r.errors.map(m => `${w}: ${m}`));
@@ -454,7 +454,7 @@ export function createActivityChecks(env: CheckEnv) {
     const reg = isObj(p) ? p.activities : null;
     const items = (isObj(reg) ? objs(reg.items) : []).filter(a => a.runtime === H5P && typeof a.id === 'string');
     if (!items.length) return { errors: E, warnings: W };
-    if (!H) return { errors: E, warnings: ['h5p@1: the package checker (NoemaH5P, engine/src/38_activity_h5p.js) is not loaded here'] };
+    if (!H) return { errors: E, warnings: ['h5p@1: the package checker (src/runtimes/h5p) is not loaded here'] };
     const b64 = (x: unknown): Uint8Array => fromBase64(s(x)) ?? new Uint8Array(0);
     const unzip = async (u: Uint8Array): Promise<Readonly<Record<string, Uint8Array>> | null> => {
       try {

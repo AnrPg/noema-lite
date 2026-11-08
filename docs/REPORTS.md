@@ -8,7 +8,7 @@ a screenshot and enough data to find **exactly one place to change**, for a pers
 | The button | foot of the side rail from 760 px wide (speech bubble with "!"); on phones Me › Report a problem |
 | The kinds and statuses, the brief, the repository's files, the row as sent | `src/features/reports/domain/report.ts` (pure TypeScript; the connector imports it) |
 | Sending (and the outbox while offline), the admins' check, list, answer, delete | `src/features/reports/application/reports.ts` over the port `ReportServer` (`src/ports/reports.ts`; Supabase: `src/adapters/supabase/reports.ts`); the page reads it as `NoemaCore.reports` |
-| The dialog, the locator, the admins' page | `engine/report.js` (`window.NoemaReport`: `open`, `collect`, `shoot`, `pointAt`, `page`), styles `engine/src/96_report.css` |
+| The dialog, the locator, the admins' page | `src/features/reports/ui/` (`dialog.ts` the dialog, `locate.ts` `collect`, `shot.ts` `shoot` and `pointAt`, `admin.ts` the page `#/admin`, `styles.ts`); ⚑ calls `NoemaCore.community.report.open()`; the rail button's own style is `engine/src/96_report.css` |
 | The engine's half of the locator | `engine/src/85_locate.js` (`locateItem`, handed to the shell as `engine.locate`) |
 | The table | `cloud/supabase.sql` §15 `noema_error_reports` |
 | Claude through the connector | `noema_reports`, `noema_report`, `noema_report_update` (`src/connector/tools/reports.ts`, `report.ts`, `report_update.ts`) |
@@ -28,7 +28,7 @@ a screenshot and enough data to find **exactly one place to change**, for a pers
 4. "What is sent" in the dialog shows the whole locator before sending.
 
 ## 2. The locator (v1): finding the one place to change
-`NoemaReport.collect(target)` builds it from four sources, strongest first:
+`collect(target)` (`src/features/reports/ui/locate.ts`) builds it from four sources, strongest first:
 
 * **The data chain**: the `data-*` attributes from the target up to the page (`data-ex` exercise, `data-ch` chapter,
   `data-bid` block, `data-card` flashcard, `data-pid` drill, `data-nf` the field inside the item, such as `options.2`,

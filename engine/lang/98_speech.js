@@ -255,7 +255,7 @@ WIDGETS.speak = (it, done) => {
     box.append(fbBoxSp(ok, spText(it), ' — ', it.gloss || '', h('div', { class: 'tiny' }, LT('lang.speech.checkedHeard')))); done(ok); };
   const heardView = r => {
     const tokens = s ? (s.tokens || []).filter(k => !k.p) : [{ t: lx.lemma }];
-    return h('div', { class: 'lx-heard' }, h('span', { class: 'tiny' }, LT('lang.speech.heard') + ' '), h('span', { class: 'lx-w', lang: c, dir: X.language.dir || 'ltr' }, '“' + (r.heard || '…') + '”'),
+    return h('div', { class: 'lx-heard' }, h('span', { class: 'tiny' }, LT('lang.speech.heard') + ' '), ['“', word(c, r.heard || '…', { sub: false }), '”'],
       h('div', { class: 'lx-heardwords', lang: c, dir: X.language.dir || 'ltr' }, ...tokens.map((k, i) => h('span', { class: 'lx-hw ' + (r.matched[i] ? 'ok' : 'miss') }, k.t))));
   };
   const listen = async () => {

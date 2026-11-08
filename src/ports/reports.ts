@@ -2,7 +2,7 @@
  * Reports port: what problem reports and engine requests need from the cloud (docs/REPORTS.md; cloud/supabase.sql §15,
  * §16): the rows, and whether the signed-in person is one of the app's admins (noema_admins). The database decides who
  * reads and changes what. Adapter: src/adapters/supabase/reports.ts; contract: src/ports/contract/reports.contract.ts.
- * The locator is what the app collects about the place of a report (engine/report.js collect); it comes back from the
+ * The locator is what the app collects about the place of a report (src/features/reports/ui/locate.ts collect); it comes back from the
  * database, so every part of it is optional.
  */
 import type { AsyncResult } from '../kernel/result.ts';

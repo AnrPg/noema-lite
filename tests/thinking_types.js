@@ -41,7 +41,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.click('.noema-chip:has-text("Demo Physics")'); await wait(1300);
   await p.evaluate(fx => { for (const e of fx) { e._ch = COURSE[0]; EX[e.id] = e; } }, FIX);
-  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); }, id); await wait(200); };
+  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); }, id); await wait(200); };
   const result = () => p.evaluate(() => { const c = document.getElementById('T'); return c._locked() ? (c.querySelector('.explain.ok') ? 'ok' : 'bad') : 'open'; });
   const check = async () => { await p.click('#T .actions button:has-text("Check")'); await wait(150); };
   const opt = (text, scope = '#T') => p.click(`${scope} .opt:has-text(${JSON.stringify(text)})`);
@@ -102,7 +102,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   await p.click('.modal .opt:has-text("Unclear")'); await p.fill('.modal textarea', 'two balls of the same size?'); await p.click('.modal .btn.primary'); await wait(150);
   ok(await p.evaluate(() => S.flags?.['ch01-e903']?.why === 'unclear' && /same size/.test(S.flags['ch01-e903'].note)), '⚑: the report is kept in the subject state');
   ok(await p.locator('#T .exflag.on').count() === 1, '⚑: the button shows it was reported');
-  const src = await p.evaluate(() => SOURCES[0]?.id);
+  const src = await p.evaluate(() => NoemaCore.studyUi.current().app.course.sources[0]?.id);
   await p.evaluate(src => { EX['ch01-e903'].cite = { src, loc: 'p. 3' }; }, src); await card('ch01-e903');
   ok(await p.locator('#T .excite').count() === 0, 'source chip: never before the answer');
   await opt('Both at the same moment');
@@ -115,23 +115,24 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   ok(await p.evaluate(() => NoemaCore.study.practice.sibling(EX['ch01-e901'], [EX['ch01-e901']], ALL_EX, e => e._ch)?.id === 'ch01-e907'), 'after a mistake: a sibling in another type is found for the round');
 
   console.log('— knowledge map, Mistakes gym by trap, reported exercises');
-  await p.evaluate(() => {
-    COURSE[0].map = { format: 'noema.map/v1', chapter: 'ch01',
+  await p.evaluate(() => {   // the pack's first chapter gets a map and the two exercises; the study area rebuilds its course from the pack
+    const A = NoemaCore.studyUi.current().app, c0 = A.full[0];
+    c0.map = { format: 'noema.map/v1', chapter: 'ch01',
       points: [{ id: 'ch01-k01', text: 'Kinetic energy grows with the square of speed', level: 'foundation', cats: ['formula'] },
         { id: 'ch01-k02', text: 'Fall time does not depend on mass', level: 'core', cats: ['pitfall', 'confusable'] },
         { id: 'ch01-k03', text: 'Energy conservation', level: 'foundation', taughtIn: 'P1. Mechanics basics' }],
       learnables: [{ id: 'ch01-l01', kp: ['ch01-k01'], goal: 'Compute kinetic energy' }, { id: 'ch01-l03', kp: ['ch01-k02'], goal: 'Predict free fall' }] };
-    COURSE[0].exercises.push(EX['ch01-e901'], EX['ch01-e903']); ALL_EX.push(EX['ch01-e903']);
+    c0.exercises.push(EX['ch01-e901'], EX['ch01-e903']); A.setFilter(null);
   });
-  await p.evaluate(() => knowledgeMap('ch01')); await wait(200);
+  await p.evaluate(() => NoemaCore.studyUi.current().inspect.knowledgeMap('ch01')); await wait(200);
   ok(await p.locator('.kmapbox .kmaplr').count() === 2, 'knowledge map: one row per learnable');
   ok(await p.locator('.kmapbox .kmaplv').allTextContents().then(t => t.join('|') === 'Basics|Core|Taught earlier on the Roadmap'), 'knowledge map: grouped basics → core, then what an earlier step taught');
   ok(await p.locator('.kmapbox .kmaplr:has-text("Predict free fall") .pill:has-text("Easily confused")').count() === 1, 'knowledge map: the categories of a learnable are shown');
   await p.click('.kmapbox .kmaplr:has-text("Predict free fall") button'); await wait(300);
-  ok(await p.evaluate(() => RUN && RUN.list.length === 1 && RUN.list[0].id === 'ch01-e903'), 'knowledge map: ▶ practises that learnable');
-  await p.evaluate(() => { record(EX['ch01-e903'], false); location.hash = '#/mistakes'; }); await wait(400);
+  ok(await p.evaluate(() => { const r = NoemaCore.studyUi.current().app.round?.actor.snapshot.context; return !!r && r.list.length === 1 && r.list[0].id === 'ch01-e903'; }), 'knowledge map: ▶ practises that learnable');
+  await p.evaluate(() => { NoemaCore.studyUi.current().app.record(EX['ch01-e903'], false); location.hash = '#/mistakes'; }); await wait(400);
   ok(await p.locator('.gymcats .fchip:has-text("Easily confused")').count() === 1 && await p.locator('.gymcats .fchip:has-text("Traps")').count() === 1, 'Mistakes gym: chips by kind of trap');
-  await p.evaluate(() => reportedView()); await wait(200);
+  await p.evaluate(() => NoemaCore.studyUi.current().inspect.reported()); await wait(200);
   ok(await p.locator('.modal .flaglist li').count() === 1, 'reported exercises: listed');
   await p.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
 

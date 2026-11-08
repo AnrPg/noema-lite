@@ -51,14 +51,8 @@
 .acchip:hover{transform:scale(1.06)}
 .syncdot{position:absolute;inset-inline-end:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;border:2px solid var(--bg);background:var(--ink3)}
 .syncdot.ok{background:var(--ok)}.syncdot.busy{background:var(--warn);animation:blink 1s infinite}.syncdot.err{background:var(--bad)}
-.modal .box.accbox{width:min(720px,100%)}
-.accbox .tabs{flex-wrap:wrap;overflow:visible}   /* every tab visible (❓ Help was pushed off the edge) */
-.acchead{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-.accemo{font-size:42px}
-.accstats{display:flex;gap:6px;flex-wrap:wrap}
 .accbody{min-height:200px}
 .accbody h3{margin:0 0 6px}
-.sublist{display:grid;gap:8px}
 .subrow{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--bg);margin-bottom:8px}
 .dangerzone{margin-top:24px;padding:14px 16px;border-radius:16px;border:1.5px dashed var(--bad);background:var(--bad-bg)}
 .herohead strong{font-weight:800;background:linear-gradient(90deg,#ff6b6b,#ffb020 30%,#2ec4b6 55%,#4d7cfe 75%,#a35cff);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -219,7 +213,6 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 /* 📚 From your sources (curmap.js fromSources) */
 .cm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:12px 0}
 .cm-card{display:grid;gap:6px;padding:14px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);font:inherit;color:inherit;text-align:start;cursor:pointer}.cm-card:hover{border-color:var(--violet)}
-.cm-pubcard{cursor:default}.cm-pubcard:hover{border-color:var(--line)}
 .cm-cardtop{display:flex;gap:8px;align-items:center}.cm-emo{font-size:22px}
 .cm-bar{height:8px;border-radius:99px;background:var(--bg2);overflow:hidden;margin:6px 0}.cm-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--ok));transition:width .4s}
 .cm-keys{display:grid;gap:6px;margin:6px 0}.cm-keyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -348,10 +341,6 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-attachlist{display:grid;gap:6px;margin:10px 0;padding-inline-start:22px;max-height:48vh;overflow:auto}
 .cm-attachlist li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:8px;align-items:center}
 .cm-attachstep{font-weight:700;font-size:14px;overflow-wrap:anywhere}
-.cm-changes{display:flex;flex-direction:column;gap:6px;margin:10px 0;max-height:50vh;overflow:auto}
-.cm-change{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);line-height:1.4;font-size:14px;cursor:pointer;overflow-wrap:anywhere}
-.cm-change.own{background:var(--warn-bg)}
-.cm-change input{margin-top:3px;flex:none}
 .pick-curs{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin:4px 0 12px}
 .pick-cur{display:grid;gap:4px;text-align:start;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);font:inherit;color:inherit;cursor:pointer}
 .pick-cur:hover{border-color:var(--violet)}.pick-cur .tiny{color:var(--ink2)}

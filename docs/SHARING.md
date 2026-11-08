@@ -21,7 +21,7 @@ parts and joined again. Withdrawing a share or a public subject deletes its copi
 
 | What | Where |
 |---|---|
-| 🔗 Share | a small button on each of **your own** subjects in the subject picker (appears on hover; always visible on phones) and in ⚙️ → Subjects |
+| 🔗 Share | a small button on each of **your own** subjects in the subject picker (appears on hover; always visible on phones), in ⚙️ → Subjects and in the subject’s ⋮ |
 | 🌍 Explore | top bar of every subject, and at the bottom of the subject picker |
 | 🔔 Bell | top bar; the red number is how many subjects are waiting for your answer |
 | Banner | under the top bar when a new share arrives: **Accept** · **Reject** · **Later** |
@@ -60,19 +60,28 @@ Icons on the subject chips: 🔒 only yours · 🤝 shared with you · 🌍 take
   🔔 too; you take the changes you want.
 
 ## 5. 🌍 Explore
-- Cards show only the emoji and the title. **Click / tap a card = choose it**: it is added to your subjects
-  and opens.
-- The details appear in an info popup — **point at a card** with the mouse (or focus it with Tab); on a
-  phone or tablet **press and hold** the card (it opens from the bottom, with *📚 Study this subject*;
-  tap outside to close).
-- The popup: owner (📚 library or 👤 name), language, size, description, statistics (chapters, sections,
-  exercises, picture exercises, pictures, flashcards, debug playbooks), the **chapters as a numbered list**
-  in a fixed-size box that scrolls (its height follows the screen), sources with links, licence note.
+- A page (`#/explore/subjects`; the Roadmaps others share: `#/explore`), in folded sections by domain; typing in the field
+  shows only the matches (title, description, who shares it). Each row shows the emoji and the title. **Click / tap a row =
+  choose it**: it is added to your subjects and opens. Where no frame draws pages (the classic screens), the same page
+  opens in a dialog.
+- The details are behind **ⓘ** beside the row (on a phone it opens from the bottom), with *Study this subject*: owner
+  (the library or the person's name), language, description, statistics (chapters, sections, exercises, picture exercises,
+  pictures, flashcards, debug playbooks), the **chapters as a numbered list** in a fixed-size box that scrolls, sources
+  with links, the source files, licence note. 👤 beside a row opens the page of the person who shares it.
 - 🌐 **Translate**: a title or description in another language than yours can be machine-translated with your own
   Claude or Gemini key (off until you turn it on — Me › Language & appearance, or the first time you tap it); *Show original*
   brings the author's words back. Only public and shared texts are ever sent (docs/i18n.md §11).
 
-## 6. How it is stored (for the curious)
+## 6. The code
+| Part | Where |
+|---|---|
+| The share dialog | `src/features/sharing/ui/share.ts` (Lit on the kit; `NoemaCore.community.share(subject)`, `Noema.share`); its data and the cloud's calls: `src/composition/sharing-host.ts` over `engine/cloud.js` and `engine/srcfiles.js` |
+| 🌍 Explore | `src/features/sharing/ui/explore.ts` (`#/explore`, `#/explore/subjects`; `NoemaCore.community.explore(kind)` in a dialog) |
+| 🔔 the bell's sharing rows (a share, an invitation, an update, news, *Clear all*) | `src/features/sharing/ui/notes.ts` (`Noema.shareRow`, `Noema.noticesClear`); what they do: the Notes of `engine/app/community.js` |
+| 🔔 the banner under the top bar (the newest share, invitation or update; *+n more in the bell*, *Later*) | `src/features/sharing/ui/bar.ts`, the same row as the bell's; drawn into the frame's `.sharebar` (classic and new: `NoemaCore.community.notes.bar(el)`) once something waits |
+| The screens' routes | `src/composition/community-ui.ts` (loaded as `build/community.js` the first time one opens) |
+
+## 7. How it is stored (for the curious)
 | Data | Where | Who can read |
 |---|---|---|
 | Public subject info | table `noema_public_packs` | everyone |

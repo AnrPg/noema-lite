@@ -104,6 +104,7 @@ async function open(b, { w = 1100, h = 900, settings = {}, sid = 'ch01-s05' } = 
   await page.goto('about:blank'); await page.goto(APP_URL); await wait(900);
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1300);
   if (sid) await section(page, sid);
+  else { await page.evaluate(() => { location.hash = '#/subject'; }); await wait(500); }   // the subject's home (#/ is Today)
   return page;
 }
 async function section(page, sid) {

@@ -12,7 +12,7 @@ cp -r "$T/tests/fixtures/demo-physics" "$T/library/subjects/demo-physics"
 mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/accounts/anr/packs/secret-notes"
 # (sed -i.bak works with both GNU sed on Linux and BSD sed on macOS)
 sed -i.bak 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physics"/"title": "Secret Notes"/' "$T/accounts/anr/packs/secret-notes/subject.json" && rm -f "$T/accounts/anr/packs/secret-notes/subject.json.bak"
-# the older suites test the classic screens (shell: false: the subject picker at start, no first-time questions); tests/shell.js sets noema-test:newUI for the new frame
+# the older suites start without the frame's Today (shell: false: the subject picker at start, no first-time questions); a subject always opens in the frame; tests/shell.js sets noema-test:newUI for the frame from the start
 echo "if (typeof localStorage !== 'undefined' && localStorage.getItem('noema-test:newUI') !== '1') Object.assign(window.NOEMA_CONFIG, { askSubjectOnStart: true, onboarding: false, shell: false });" >> "$T/config.js"
 # no app-shell service worker in the suites (page.route must see every request; tests/pwa.js turns it on for itself); py-module@1
 # still registers the same worker for its Python files, as on the website
@@ -38,7 +38,7 @@ for e in thermal pid rf twin; do run "$e" node "$ROOT/tests/$e.js"; done   # the
 run activities_h5p node "$ROOT/tests/activities_h5p.js"    # the h5p@1 runtime with a stub host: the sandbox, scores, state, languages, hostile libraries, 0 requests (docs/INTERACTIVE_H5P.md)
 run activities node "$ROOT/tests/activities.js"        # the loop guard, the protocol checks, the golden rules (html-app, sim-spec, checks), never allow-same-origin
 run activities_app node "$ROOT/tests/activities_app.js" "$T" "$T/act-pack.json"   # activities in the app: sandbox, handshake, state, grading, fallbacks, endless loop; sim-spec@1, the checks grader, circuit-mna@1 and the fault bench; py-module@1 over http with the fetched Pyodide; h5p@1 beside the pack and in the one-file bundle; wasm-module@1, the xAPI export, external-embed@1 (card, Settings "Ask again") (BROWSERS=chromium,firefox,webkit)
-run activity_author node "$ROOT/tests/activity_author.js" --browser "$T"   # the activity author (P6): #/author in the built site, classic router and the frame (subject ⋮ › Create an activity), the form, preview, .zip, 320 px
+run activity_author node "$ROOT/tests/activity_author.js" --browser "$T"   # the activity author (P6): #/author in the built site, by its address and by the subject ⋮ › Create an activity (the frame), the form, preview, .zip, 320 px
 run activities_wasm node "$ROOT/tests/activities_wasm.js" --app "$T"   # wasm-module@1 + engine wasm@1: the golden reports, the ABI, no network in the worker, runaway, in the app (docs/INTERACTIVE_WASM.md)
 run activities_embed node "$ROOT/tests/activities_embed.js" --browser   # external-embed@1: the allow-list, the URL and item rules, the consent card, a hostile page (a local fake provider; docs/INTERACTIVE_EMBED.md)
 run parts node "$ROOT/tests/parts.js"   # several engines in one activity: the plan, the steppers, the co-simulation (docs/INTERACTIVE_LIBRARY.md §1.6)
@@ -116,7 +116,7 @@ run i18n_runtime node "$ROOT/tests/i18n_runtime.js" "$T"   # the runtime audit: 
 run mt node "$ROOT/tests/mt.js" "$T"   # machine translation of shared content: policy, cache, caps, toggle (docs/i18n.md §11; provider mocked)
 run weblate_tools python3 "$ROOT/tests/weblate_tools.py"   # Weblate tools: facade round trip, prune_drafts, draft-import and setup plans (no network)
 run i18n_rtl node "$ROOT/tests/i18n_rtl.js" "$T"   # RTL (ar-XB): dir switching, mirroring, bidi isolation, LTR islands, self-hosted script fonts
-run a11y node "$ROOT/tests/a11y.js" "$T"   # accessibility (axe): start screen, a subject's chapter, settings, a language course's home and a word card, the UI kit (#/ui-kit), at desktop and 320 px; chapter, course and kit for robot, litF, fruit in light and dark — no serious/critical violation
+run a11y node "$ROOT/tests/a11y.js" "$T"   # accessibility (axe): start screen, a subject's chapter, settings, the activity author, a language course's home and a word card, the UI kit (#/ui-kit), at desktop and 320 px; chapter, course and kit for robot, litF, fruit in light and dark — no serious/critical violation
 run ui_kit node "$ROOT/tests/ui_kit.js" "$T"   # the UI foundation (src/ui) through #/ui-kit: lazy, 1280 / 320 px, 24 px targets, keyboard, forms, appearance, right to left
 run pwa node "$ROOT/tests/pwa.js" "$T"   # the installable app: web manifest, one service worker, offline after the first visit, "update ready"
 

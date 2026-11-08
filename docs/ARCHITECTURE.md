@@ -155,6 +155,9 @@ NoemaCore.NoemaError                    the error class
 NoemaCore.contracts                     the compiled data contracts (src/contracts)
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
+NoemaCore.runtimes                      the activity runtimes (src/runtimes/library.ts, §6.4): ids(), has(id), manifest(id),
+                                        switchOf(id), isOn(id, flags), load(id) → Promise<module>, loaded(id), checks (null until
+                                        build/contracts.js is in)
 NoemaCore.learning.open(account) → Promise<report>   the learning log (src/composition/learning.ts, its header is the source)
 NoemaCore.learning.record({ type, subject?, item?, data, origin?, id?, day? }) → event | null · recordOnce(drafts) → Promise
 NoemaCore.learning.progress(subject) · progressOf(account, subject) · hasProgress · stats()
@@ -183,6 +186,7 @@ NoemaCore.vault                         the vault (src/features/vault): FORMATS,
 NoemaCore.social                        people (src/features/social): state, onChange, refresh, search, putFile, the rules
 NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
                                         reject with a NoemaError
+NoemaCore.languages                     the language courses before any is loaded (src/features/languages, §6.5)
 ```
 
 **The learning log.** What the learner does is an event (`noema.events/v1`,
@@ -213,8 +217,8 @@ answers `auth.not_signed_in`.
 
 - **Grading** (`src/features/study/domain/grading`): every exercise type is graded by one pure function from the
   exercise and the learner's answer in the exercise's own indices (the answer shapes are in the header of `grade.ts`).
-  The old renderers (`engine/src/30_exercises.js`, `31_types.js`, `32_activities.js`, `35_visual.js`) only collect the
-  answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
+  The answer areas (`src/features/study/ui/exercise/*.ts`; the `sim` type's in `engine/src/32_activities.js`) only
+  collect the answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
   `grading.test.ts` (every exercise of the library and the fixtures) prove the results are the old ones.
 - **FSRS-6** (`fsrs.ts`, `fsrs-optimizer.ts`): the scheduler of py-fsrs 6 (its reference values in the tests) and an
   optimiser that fits the 21 parameters to the learner's reviews (Adam on the log loss, in the Worker:
@@ -255,12 +259,15 @@ kernels several engines share built once.
 **Lazy pieces.** The start path of the page is `build/app.js` (about 470 KB, 133 KB gzipped: the core, the expression
 language, the catalogue and the 26 manifests of `src/engines/manifests.ts`; phase 2's learning log, sync, read models, Roadmaps
 and community, about 330 KB; and the learning log's event contract, about 140 KB) and `build/ui.js` (the frame and the shell's
-screens: about 240 KB). Two pieces of kind `lazy` stay out of it:
+screens: about 240 KB). Pieces of kind `lazy` stay out of it:
 
 | piece | entry | what | when it runs |
 |---|---|---|---|
 | `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, the content checks before they check a pack that names an engine, the author |
+| `build/lang-activities.js` | `src/composition/lang-activities.ts` | the screens of area 5 (languages and activities) on `build/ui.js`'s Lit and kit (about 36 KB) | the first language page (`NoemaShell.area5`, §6.5) |
+| `build/runtimes.js` | `src/composition/runtimes.ts` | the code of every typed activity runtime (§6.4) | the first time an activity needs one (`ACT.runtime(id)`) |
 | `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) and the content checks built on them (`src/features/content`, about 120 KB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`, which brings both), after the first screen on Today, and before the Roadmaps start their jobs; a check before that is a bug and throws (`src/contracts/lazy.ts`, `src/features/content/application/lazy.ts`) |
+| `build/author.js` | `src/composition/author.ts` | the activity author (`src/features/author`, `src/ui/screens/author`: `noema-schema-form`, `noema-author`; about 115 KB) | the first time `#/author` opens (`src/composition/shell/author-page.ts`, after the engines, the schema kernel and the content checks) |
 
 The learning log checks every event it reads or makes, and it opens before the first screen: its contract
 (`noema.events.v1#event`, `tools/contracts.mjs` `START_CONTRACTS`) is compiled a second time into
@@ -312,7 +319,8 @@ bridge's UI half and starts the app:
 | `window.Noema` | `src/composition/shell/core.ts` | the profiles, the timed key/value store, the stats, the Gemini key (this device only), the app's IndexedDB, backups and restore points, the auto-backup, the 🔔 news of this device, the start's overlays |
 | `window.NoemaThemes` | `src/composition/shell/themes.ts` over `src/features/shell/domain/characters.ts` | the characters on the tokens: the 5-minute try, free changes for 15 days, then one every 5 days |
 | `window.NoemaShell` | `src/composition/shell/host.ts`, `src/ui/screens/shell/` | the frame (`noema-shell-frame`), the router over every hash route (`routes.ts`), Today, Progress, Settings, the character gallery, the Me menu, the first-time questions, the profile picker; the toolkit the areas draw their pages with |
-| the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage`, their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
+| the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js`, `study.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage` (the study area its pages of the open subject with `{ subject: true }`: the frame waits for the subject's engine; its host's frame part is `NoemaShell.studyFrame`), their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
+| the activity author | `src/composition/shell/author-page.ts`, the piece `build/author.js` (`src/features/author`, `src/ui/screens/author`) | `#/author` (`NoemaShell.registerPage`; `Noema.app.author` for the classic router): `noema-schema-form`, a form from a JSON Schema, and `noema-author` (docs/activities-dev/authoring_ui.md) |
 
 `NoemaCore.notify` draws on the kit's toaster once the root has started (`NoemaCore.toasts.use`); what does not fit goes to
 the 🔔. With `config.shell: false` the classic screens run without the frame (the older browser suites use them).
@@ -345,7 +353,9 @@ Each slice hands its screens **one data port** the same way the kit hands its se
 that the nearest provider answers. The Roadmaps' (`src/features/roadmaps/ui/`, the event `noema-roadmaps-data`, port
 `data.ts` `RoadmapsData`): the library and its invitations, the map (classic, treasure, list; level bands, `layout.ts`) with
 the selected step and its preparation, the levels (the ladder, the level test, the level-reached moment, Claude's proposed
-arrangement), a step's placement test, sharing, the Claude app's inbox, preparing ahead and From your sources. A screen
+arrangement), a step's placement test, sharing, the public Roadmaps (`public.ts`, the classic screens' Explore), a
+member's review of the owner's changes (`review.ts`, `Noema.app.reviewChanges`), the Claude app's inbox, preparing ahead
+and From your sources. A screen
 never reads a global: `src/composition/roadmaps-ui.ts` implements the port over the engine's scripts today, and the lead
 swaps that file, never the screens. The root (`ui-root.ts`) defines the elements and provides the port on `<body>`; the
 area `engine/app/roadmaps.js` mounts them: the Knowledge page (`#/learn`, the library) and the map page (`#/map/<id>`,
@@ -353,7 +363,119 @@ its ⋮ holding the legend, the view, sharing, settings and export) with the fra
 with `config.shell: false` (`Noema.curricula()`, `Noema.curriculumMap(id)`, `Noema.fromSources()`). What belongs to
 another screen (opening a subject, editing a step) a screen asks for by an event (`roadmap-study`, `roadmap-edit-step` …);
 the page that mounts it answers. The dialogs not yet in Lit (a new Roadmap, import, a step's editor, attaching subjects,
-the Roadmap's settings, Roadmaps others share) stay in `engine/curmap.js`.
+the Roadmap's settings) stay in `engine/curmap.js`.
+
+### 6.4 The activity runtimes
+
+The runtimes that show an item of `pack.activities` are plugins of kind `runtime` in `src/runtimes/<name>/` (strict TypeScript,
+layer `runtimes` of the ESLint boundaries: kernel, contracts, ports, plugins and itself). `manifests.ts` lists each with its
+switch (`on`: unless `config.js` says false; `opt-in`: only when it says true), `plugins.ts` its lazy entry, `checks.ts` the
+pure checks (`RUNTIME_CHECKS`, which the roots hand the content checks through `scopeCheckers`). A runtime module's
+`create(host)` takes a `RuntimeHost` (`types.ts`: the app's words, the protocol's envelope and its check, the account settings, the
+deployment's switches, the compute side) and returns the `ActivityRuntime` the activity core mounts (`mount(box, ctx) → port`, `waits`,
+`failText(code, act)`), or null when it is off. The core (`engine/src/32_activities.js`) knows every runtime by its manifest
+at once (`ACT.caps()`, `ACT.hasRuntime(id)`), loads its code when an activity starts (`ACT.runtime(id)` → Promise), and
+`ACT.loadedRuntime(id)` is the registered one. A runtime may bring engines of sim-spec@1 (`ActivityRuntime.engines`, named in
+its manifest line so that `ACT.engines()` and `ACT.caps()` know them at start): the core loads the runtime when an activity needs
+one of them and registers them (`wasm-module@1` brings `wasm@1`). The host gives a runtime the open pack's items (`items()`), the
+expression language (`expr()`), the runtimes registered now (`loadedRuntime(id)`), a deployment setting (`config(key)`), the
+app's numbers (`num`) and the sim-spec view (`simView`, which `py-module@1` draws its controls with). Where a runtime can run at all,
+when not everywhere, is its descriptor's `available` rule (`manifests.ts`, `availableHere`; `py-module@1`: only the website), so
+`ACT.enabled(id)` and the fallback's words are known before its code is loaded. The page has the code in the lazy piece
+`build/runtimes.js`; the node suites read `build/runtimes-node.cjs` (`src/runtimes/node.ts`); the activity host
+(`build/harness.js`) holds it inline and makes them for its stub core (`NoemaCore.attachRuntimes(act, host)`). A runtime's styles
+are `src/runtimes/<name>/*.css` (`tools/build.py` adds them to `engine/engine.css`). The runtimes that compute reach the
+engines, the expression language, the content checks and the pack's parts only through `host.compute` (`compute.ts`; the core
+hands them over), never by importing those layers; `host.check` is the protocol's rules for a message a frame sent. Moved so far:
+`external-embed@1`, `wasm-module@1` / `wasm@1`, `py-module@1`, `sim-spec@1` (`sim-spec/`: the view, the bench, the engine runner
+and the parts orchestrator; the core preloads it for an item that draws with its view), `html-app@1` (`html-app/`: the bootstrap,
+the document with its policy and wrapper frame, the engine bridge; the loop guard is `loop-guard.ts`) and `h5p@1` (`h5p/`: the package
+rules of `tools/h5p_allow.json` in `RUNTIME_CHECKS.h5p`, the frame's bootstrap, the document in html-app@1's frames, the reader and
+the mount; the player is the app's own file, loaded through `host.asset`, which the core answers with the folder `engine.js` came
+from). No runtime is a script of `engine/src` any more.
+
+### 6.5 Area 5's screens: languages and activities (phase 3)
+
+The screens of area 5 are Lit elements in the light DOM (`src/ui/screens/screen.ts`, `NoemaScreen`): the page's sheets
+(`engine/engine.css`, the course sheet `engine/langui.css` generated from `engine/lang/*.css`) style them, so their markup
+keeps the class names those sheets and the browser suites use. Each screen reads through one port of its own, a small
+interface beside it (`languages-port.ts`, `course-port.ts`); the root that mounts a screen hands it the
+adapter.
+
+| File | Holds |
+|---|---|
+| `src/ui/screens/languages-activities.ts` | **the one route file of area 5**: `AREA5_ROUTES` (`#/lang`, `#/lang/:code`), `mountArea5(match, host, ports, t)` → the element and the frame's chrome (crumbs, back, tab), the parts that are not pages (`mountArea5Part`: `lang-strip`, `study-chooser`, `lang-courses`, `lang-today`, `lang-lanes`, `lang-lesson`), `defineArea5()` |
+| `src/ui/screens/languages/` | the Languages tab (`languages-page.ts`, D21), the question "Which languages do you want to study?" (`study-chooser.ts`), Today's card (`lang-today.ts`), a language's home (`lang-home.ts`, D29: continue, the path, the study areas, the bookshelf, the tools) the chip strip (`lang-strip.ts`), ⫴ the parallel lanes (`lang-lanes.ts`), the head of a lesson: its four-step ladder, Continue, Deepen, Aa· (`lang-lesson-head.ts`); and the elements the course runtime makes itself (`document.createElement`, `.port` = the course: `screenEl` in `engine/lang/14_screens.js`): `noema-lang-word` — every foreign word and run, its reading under it (D24), its words underlined and opening their card, the new-word marker (D23), plain inside controls and exercises (`lang-word.ts`, with the Aa· switch `noema-lang-translit`) —, the aspect pages (`lang-aspect.ts`), 🧩 sorting and 🔁 principal parts (`lang-drills.ts`), the peculiarities (`lang-peculiar.ts`), a lesson's page, its run and its result (`lang-lesson.ts`), *In other languages* and the table of a meaning (`lang-others.ts`). The course's own parts not ported yet (grammar cards, word cards, exercises, notes) reach them as nodes |
+| `src/features/languages/` | the courses of the device before any course is loaded: the pure rules (`domain/courses.ts`: the courses, the languages offered and studied, a course's progress from its stored records, the course of a language) and the service over the device's keys (`application/courses.ts`) |
+| `src/composition/languages.ts` | `NoemaCore.languages`: that service over the root's storage, clock and settings writer (`NoemaThemes.putSettings`) |
+| `src/composition/area5.ts` | `NoemaShell.area5`: `has(hash)`, `mount(hash, host, ctx)` → the chrome, `part(name, host, ctx, options)`, `load()`, `now()`; the first call runs the lazy piece `build/lang-activities.js` (`src/composition/pieces.ts`, kind `lazy`: next to `build/ui.js`, or the one-file bundle's inline copy) |
+| `src/composition/ui-shared.ts` | the modules `build/ui.js` shares with that piece (Lit, its directives, the kit's core, dialog, icons, the router's routes) on `globalThis.__noemaUiShared`; the esbuild plugin `uiShared` (`tools/esbuild.mjs`) reads every such import from there and fails the build on any other module of Lit or `src/ui/{core,kit,frame,router}`, so the page keeps one Lit, one overlay stack and one class per element |
+| `src/composition/lang-activities-root.ts` · `-ports.ts` | the root of that piece: the services (the I18n port over `engine/i18n.js`, the system clock, the interface languages) and the adapters of the ports (`NoemaCore.languages`, the open course's port that `engine/lang/14_screens.js` hands over) |
+
+The pages mount these screens through `NoemaShell.area5`: `engine/app/languages.js` (the Languages tab, registered with
+`NoemaShell.registerPage('lang', …)`; Today's card; Choose another course; the course runtime is loaded with the piece) and
+the course runtime (`engine/lang/14_screens.js`: a language's home, the strip, the chooser inside a course, the lanes, a
+lesson's head).
+`#/engines` belongs to the Community area (`src/features/reports/ui/engines.ts`). A dialog of a screen goes to the frame, outside the screen, and gets
+the screen's services itself (`NoemaScreen.openDialog`).
+
+Tests: `src/ui/test/languages.test.ts` (happy-dom), `src/features/languages/application/courses.test.ts`, and in a browser
+`tests/lang_home.js`, `tests/lang_select.js`, `tests/lang_lanes.js`, `tests/lang_lessons.js`.
+
+### 6.6 The study area's pages (phase 3, area 2)
+
+The subject's pages are `src/features/study/ui` (element `feature-ui` in `eslint.config.js`: the kit, the ports, the
+feature's domain, never an adapter): home (`#/subject`), chapter (`#/ch/<id>[/<tab>[/<focus>]]`), section (`#/s/<id>`),
+practice and its round (`#/practice/<id>`, `#/run`, `#/srun`), boss, lightning, cards and drills, the Mistakes gym,
+what's new, one exercise (`#/ex/<id>`), the sources deck and the file viewer's entry points, the knowledge map and the
+reported exercises. The route table is `ui/routes.ts` (`STUDY_ROUTES`, typed with `defineRoutes`), one file for the lead
+to merge into the app's.
+
+- **One adapter.** Every screen reaches the world through `StudyHost` (`ui/host.ts`): the progress record, the frame,
+  the character's reactions, the Roadmap, activities, 文A, the search's rounds, the source files, the tutor and the AI.
+  Today the older page implements it (`engine/src/40_views.js` `studyHost()`) and mounts the area with
+  `NoemaCore.studyUi.mount(host)` (`src/composition/study-ui.ts`); the shell's root will hand in its own.
+- **A round is a statechart.** `domain/session.ts` (`roundMachine`: asking → answered → summary, the boss's lives, a
+  sibling exercise after a mistake) on `kernel/statechart.ts`; the run page only sends `ANSWER` and `NEXT`.
+- **Only my level.** A chip in the round's filters and the mixed round (`app.onlyMyLevel`, saved in
+  `settings.onlyMyLevel`): offered when the subject has a level ladder (the Roadmap's or the pack's) with exercises at
+  several levels; it keeps the exercises at the level the read models say the learner reached.
+- **Lit, light DOM.** Every page and element is a Lit element on the study base (`ui/lit/base.ts`: `StudyElement`,
+  `StudyScreen` and `show()`, `StudyPage`, `tag()` and `defineStudyElements()`), drawn in the light DOM with the classes
+  the existing CSS and suites know, and drawn at once (`redraw()` renders synchronously: the keys, the suites and the unit
+  tests read the page in the same task). An exercise type is an `ExerciseWidget` (`ui/exercise/widget.ts`), a picture type
+  a `PictureWidget` (`ui/exercise/picture/`); grading stays the domain's `verdictOf`. Each tag is named once (`tag()`
+  refuses a second). `build/study.js` carries its own copy of Lit. The frame draws the crumbs and ⋮.
+- **Tests.** `src/composition/study-ui.test.ts` (the pages over a fake host in happy-dom), the domain's tests, and the
+  browser suites (`e2e`, `socratic`, `visual`, `visual_pack`, `thinking_types`, `sources`, `bridge`, `shell`), which look
+  in through `NoemaCore.studyUi.current()` (`app`, `exerciseCard`, `inspect`).
+
+### 6.7 The tutor, its conversations and its threads (phase 3)
+
+The mascot's help in lessons and exercises is `src/features/tutor` (formerly `engine/src/20_ai.js`, `60_convos.js`,
+`65_threads.js`):
+
+- **Domain** (pure): `domain/prompts.ts` (the modes, the task of each button, the course context, the reply language,
+  the one-shot jobs' prompts and schemas), `domain/threads.ts` (Socratic elicitation threads: budgets, the hidden
+  `<noema-state>` control line, closure), `domain/conversation.ts` (the in-memory shape ↔ the canonical
+  `noema.conversation/v1` record, titles, the Markdown export, origins, other apps' modes).
+- **Use cases**: `application/tutor.ts` `TutorSession` (one per open subject: the drawer's state, a turn streamed over
+  the AI port, saving, history, resume, rename, delete, export) and `application/jobs.ts` `TutorJobs` (grading, a new
+  question, a drill; each saved as a conversation too). Their ports: `AI` (`ports/ai.ts`) and `ConversationStore`
+  (`ports/conversations.ts`).
+- **Adapters**: the Gemini key (`adapters/gemini`, with the model list and the 404 re-detect in the composition), a
+  Claude key on this device (`adapters/claude`), else the copy fallback (`adapters/local/copy-prompt.ts`: nothing is
+  sent; the drawer offers the whole prompt to copy). The store is `adapters/browser/conversations.ts` over
+  `engine/convos.js` (IndexedDB, the backup folder, cloud sync and the search keep reading it; the record shape did not
+  change, so nothing is migrated).
+- **Screens** (Lit, light DOM, the classes the CSS and suites know): `ui/panel.ts` (the drawer, its thread tracker and
+  history), `ui/conversations.ts` (Me › Conversations, the frame's window), `ui/explain.ts` (💡).
+- **Composition**: the drawer is used only with a subject open, so it is part of the lazy study piece
+  (`build/study.js`, which carries its own copy of Lit for it; the study pages stay typed DOM):
+  `NoemaCore.studyUi.tutor(host)` (`src/composition/tutor.ts`), mounted by `engine/src/40_views.js` `tutorHost()`
+  before the study area, which gets its `TutorPort` and `AiPort` from it. Me › Conversations is in `build/ui.js`
+  (`src/composition/conversations-window.ts`: `NoemaShell.convos` / `goConvo`). `window.NoemaTutor` gives the mounted
+  tutor (`current()`: `session`, `ai`, `port`, …) and its markdown (`md`); the browser suites look in through it.
 
 ## 7. Patterns
 
@@ -416,6 +538,6 @@ the Roadmap's settings, Roadmaps others share) stay in `engine/curmap.js`.
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the pieces `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the pieces `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, `runtimes-node.cjs` (the activity runtimes for the node suites, §6.4), `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

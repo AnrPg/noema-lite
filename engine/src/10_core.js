@@ -3,7 +3,7 @@
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
-/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (20_ai.js), not for the learner
+/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (src/features/tutor/domain/prompts.ts), not for the learner
 const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
 /* i18n-ignore-end */
 // in the new frame the tutor is the character on screen now (NoemaThemes.current(): the learner's own, or the one on a 5-minute try), named in the menus' language;
@@ -103,7 +103,7 @@ function codeBlock(code, lang) {
 }
 /* chat markdown */
 function md(s) {                 // full markdown (marked + DOMPurify when available), lite fallback
-  if (window.marked && window.DOMPurify) { try { return mdRich(s); } catch (e) { NoemaCore.errors.report(e, { where: 'engine.markdown', severity: 'warning' }); } }
+  if (window.NoemaTutor?.md) { try { return NoemaTutor.md(s); } catch (e) { NoemaCore.errors.report(e, { where: 'engine.markdown', severity: 'warning' }); } }   // marked + DOMPurify (src/composition/tutor-page.ts)
   return mdLite(s);
 }
 function mdLite(s) {
@@ -197,27 +197,11 @@ function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 LOG.onSettings(g => { const x = { ...g }; delete x.apiKey; Object.assign(S.settings, x, { srcOn: subjectSrcOn() }); seeSettings(); });
 LOG.onChange((evs, why) => {
   if (why === 'local') return;   // this page's own: it drew them already
-  try { renderTopStats(); if (why !== 'tab') route(); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.render', severity: 'error' }); }   // another tab's answer never redraws an exercise being done here
+  try { if (why !== 'tab') route(); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.render', severity: 'error' }); }   // another tab's answer never redraws an exercise being done here
 });
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
 function touchStreak() { Noema.stats.touchStreak(); }
-function addXP(n, el) {
-  if (n <= 0) return;
-  const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(LOG.stats().xp || 0).lv : 0;
-  learnt('xp.earned', null, { amount: Math.max(1, Math.round(n)) });
-  renderTopStats();
-  const r = el?.getBoundingClientRect?.();
-  const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, tE('engine.core.xpFloat', { n }));
-  document.body.append(f); setTimeout(() => f.remove(), 1200);
-  const RX = window.NoemaShell?.mounted ? window.NoemaReact : null;   // the character's reactions live in the new frame
-  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 ' + tE('engine.core.goalSmashed')); }
-  else if (LV && RX && LV(LOG.stats().xp || 0).lv > lv0) RX.big('level');
-}
-/** An answer to an exercise (conf: how sure the learner was this time: sure | think | guess). */
-function record(ex, ok, firstTry = true, conf = null) {
-  learnt('answer.given', ex.id, { ok: !!ok, firstTry: !!firstTry, ...(conf ? { conf } : {}) });
-}
 const solved = id => NoemaCore.study.practice.solved(S.res, id);
 
 /* ---------- sound ---------- */
@@ -278,29 +262,5 @@ function applyTheme() {
 /* ---------- progress: the study domain's (src/features/study/domain/queries.ts) ---------- */
 const chProgress = c => NoemaCore.study.progress.chapter(c, S.read, S.res);
 
-/* ---------- section plain text (for AI context) ---------- */
-/* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)
-function blockText(b) {
-  switch (b.t) {
-    case 'p': return b.text;
-    case 'list': return b.items.map(x => '- ' + x).join('\n');
-    case 'code': return '```' + (b.lang || '') + '\n' + b.code + '\n```';
-    case 'diagram': return b.text;
-    case 'table': return [b.head.join(' | '), ...b.rows.map(r => r.join(' | '))].join('\n');
-    case 'callout': return `[${b.kind.toUpperCase()}] ${b.title || ''}: ${b.text}`;
-    case 'compare': return b.items.map(i => i.title + ': ' + i.points.join('; ')).join('\n');
-    case 'flow': return b.items.join(' → ');
-    case 'reveal': return `Q: ${b.label}\nA: ${b.text}`;
-    case 'ask': return (b.title || 'Ask yourself') + ':\n' + b.questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
-    case 'terms': return b.items.map(i => `${i.term}: ${i.def}`).join('\n');
-    case 'figure': return figureAsText(b);
-    case 'interactive': return interactiveAsText(b);
-  }
-  return '';
-}
-function sectionText(s) { return `## ${s.title}\n${s.hook || ''}\n` + s.blocks.map(blockText).join('\n\n'); }
-function chapterOutline(c) {
-  return `# Chapter ${c.num}: ${c.title} — ${c.subtitle}\nMantra: ${c.mantra}\nSections:\n` + c.sections.map(s => `- ${s.title}: ${s.hook || ''}`).join('\n') +
-    '\nKey pitfalls:\n' + c.pitfalls.map(p => `- ${p.title}: ${p.text}`).join('\n');
-}
-/* i18n-ignore-end */
+/* ---------- the course as text for the AI: the study area's (src/features/study/domain/as-text.ts) ---------- */
+const sectionText = s => STUDY.sectionText(s), chapterOutline = c => STUDY.chapterOutline(c);

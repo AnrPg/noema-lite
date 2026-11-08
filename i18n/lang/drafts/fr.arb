@@ -898,5 +898,6 @@
   "lang.study.close": "Fermer",
   "lang.study.note": "Décoche une langue pour arrêter de l’étudier : ce que tu y as appris est gardé et revient dès que tu la coches de nouveau.",
   "lang.study.keptNote": "Les langues que tu n’étudies pas en ce moment gardent leurs progrès : coches-en une pour l’étudier de nouveau.",
-  "lang.study.allApp": "Toutes les langues de l’app…"
+  "lang.study.allApp": "Toutes les langues de l’app…",
+  "lang.screen.failed": "Cette page n’a pas pu s’ouvrir. Rechargez l’application pour réessayer."
 }

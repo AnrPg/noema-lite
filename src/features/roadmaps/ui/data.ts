@@ -62,6 +62,18 @@ export interface RoadmapsData {
   readonly sources: SourcesPort;
   /** the learner's character and its little pictures (trusted SVG of the app) */
   readonly art: ArtPort;
+  /** 🌐 texts other learners shared, translated on request (docs/i18n.md §11) */
+  readonly translate: TranslatePort;
+}
+
+/** 🌐 Machine translation of a shared text, on the learner's request (their own key; consent, caps and policy are the app's). */
+export interface TranslatePort {
+  /** marks an element whose text another learner shared (its stored language; kind: 'explore.roadmap', 'shared.roadmap' …) */
+  mark(el: HTMLElement, o: { language?: string | null; kind: string }): void;
+  /** "🌐 Translate" / "Show original" for one item's marked elements (null: nothing there needs a translation) */
+  toggle(account: string, els: readonly HTMLElement[]): HTMLElement | null;
+  /** "🌐 Translate all" for every marked text inside root, as it is redrawn (null: no translator in this app) */
+  bar(account: string, root: HTMLElement): HTMLElement | null;
 }
 
 export interface ArtPort {
@@ -116,8 +128,47 @@ export interface Member {
   readonly status: string;
 }
 
+/** 🌍 A Roadmap another learner made public. */
+export interface PublicRoadmap {
+  readonly id: string;
+  readonly title: string;
+  readonly description?: string;
+  /** who shares it (their account and name) */
+  readonly owner?: string;
+  readonly owner_name?: string;
+  readonly language?: string;
+  readonly updated_at?: string;
+  /** its steps (0: not known) and the ones prepared */
+  readonly steps: number;
+  readonly prepared: number;
+  /** it is on this device (mine, or joined) · it is mine */
+  readonly have: boolean;
+  readonly own: boolean;
+}
+
+/** One change of the owner's newest map that a member may take into their copy. */
+export interface Change {
+  readonly key: string;
+  /** map · add · del · info · plan · mat · links */
+  readonly kind: string;
+  readonly text: string;
+  /** a step the member studies from their own subject (offered unticked) */
+  readonly own?: boolean;
+}
+
+/** The owner's newest map as changes (list empty: nothing new); the rest is the app's, handed back to takeChanges. */
+export interface Incoming {
+  readonly list: readonly Change[];
+}
+
 export interface SharePort {
   invites(account: string): Promise<Invite[]>;
+  /** 🌍 the Roadmaps other learners made public */
+  explore(account: string): Promise<PublicRoadmap[]>;
+  /** 🔔 the owner's changes waiting for a member */
+  incoming(account: string, roadmapId: string): Promise<Incoming>;
+  /** take these of them ([]: keep my copy); the others are not offered again until they change */
+  takeChanges(account: string, roadmapId: string, keys: readonly string[], inc: Incoming): Promise<void>;
   join(account: string, roadmapId: string): Promise<Roadmap>;
   decline(roadmapId: string): Promise<void>;
   publish(account: string, roadmapId: string, o: { isPublic: boolean; steps: boolean; onLog: (line: string) => void }): Promise<void>;

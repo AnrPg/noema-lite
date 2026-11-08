@@ -11,7 +11,7 @@ Files:
 |---|---|
 | The query side: the record's shape, folding, the transliteration rule, the query and its scores, snippets, the page's address, saved and recent searches, the scope and status filters, the practice round's steps | `src/features/search/domain/` (pure TypeScript), `src/features/search/application/search.ts` (the search with the interface language's collation); the page reads it as `NoemaCore.search` (`src/composition/community.ts`) |
 | The builders of the records and the stored index | `src/features/catalog` (`NoemaCore.catalog`: `fromPack`, `fromCurriculum`, `fromLangCourse`, `fromConvos`, `index(account, sources)`; the records are built in the Worker and kept in IndexedDB); the records keep the shape of §3 |
-| The sheet, the page, the collections, the round | `engine/search.js` |
+| The sheet, the page, the collections, the round | `src/features/search/ui/` (`quick.ts` the sheet, `page.ts` the page and the collections, `results.ts` the rows, `model.ts` the round and the shared state; mounted by `src/composition/community-ui.ts`) |
 
 Its words are in `engine/i18n_shell.js` as `sr_*` keys, in every interface language, like the rest of the new frame,
 engine hooks in `engine/src/40_views.js` (deep links, the `#/srun` round), the frame (src/composition/shell/host.ts, src/ui/screens/shell) (🔎 in the top bar, `/`
@@ -143,7 +143,7 @@ changed. To fit the same model fully, when convenient:
 
 1. **Origin of language conversations.** In `persistTutor`, add
    `context.origin = { via: 'lang', world: 'lang', course: UI.id, lang: ctx.lang, intent: ctx.intent, fn?: ctx.fn, node?: ctx.node }`
-   (keys ≤20 letters, string values; `engine/convos.js` keeps them). Name new `via` values in `engine/search.js`
+   (keys ≤20 letters, string values; `engine/convos.js` keeps them). Name new `via` values in `src/features/search/ui/results.ts`
    (`via_*` words, four languages) if the tutor is opened from distinct buttons (a word card, a sentence, a lesson).
 2. **Deep links that highlight.** The word, meaning, grammar and lesson addresses already open the right page. If a
    sentence or a peculiarity should open scrolled to and highlighted like a theory block, accept an optional last

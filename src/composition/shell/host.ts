@@ -10,10 +10,11 @@ import { arrive, backFrom, type TrailStep } from '../../features/shell/domain/tr
 import { CHARACTER_GROUPS, isCharacter } from '../../features/shell/domain/characters.ts';
 import { EMPTY_FRAME, type FrameModel, type FrameTab, type NoemaShellFrame } from '../../ui/screens/shell/frame.ts';
 import { ENGINE_ROUTES, placeOf } from '../../ui/screens/shell/routes.ts';
+import { studyFrame, type StudyFramePage } from './study-frame.ts';
 import type { ShellArt, ShellContext, TutorVars } from '../../ui/screens/shell/base.ts';
 import { closePops, fitRow, h, menuButton, modal, popMenu, tipped, tone, type DomKit, type Kid, type MenuEntry } from './dom.ts';
 import { jsonOf, putJson, type DeviceKv } from './kv.ts';
-import { legacy, type EngineApi, type SubjectMeta } from './legacy.ts';
+import { community, legacy, type EngineApi, type SubjectMeta } from './legacy.ts';
 import type { Themes } from './themes.ts';
 
 const DAY = 864e5;
@@ -35,8 +36,10 @@ export interface Chrome {
   readonly corner?: boolean;
   readonly sub?: boolean;
 }
-/** a page: drawn into <main> for the rest of its address */
+/** a page: drawn into <main> for the rest of its address; it returns KEPT when the page shown is the one drawn before
+    (the same address drawn again, e.g. on a theme that arrives late: the scroll stays where it is) */
 export type PageFn = (args: readonly string[]) => unknown;
+export const KEPT = 'kept';
 /** a world the languages branch registers (docs/SHELF_AND_LANGUAGES.md) */
 export interface World {
   route?: (args: readonly string[]) => unknown;
@@ -196,6 +199,10 @@ export function createHost(core: HostCore) {
   /* ---------- worlds and pages ---------- */
   const WORLDS: Record<string, World> = {};
   const PAGES: Record<string, PageFn> = {};
+  /** the pages of the open subject an area registers (the study area's: engine/app/study.js) */
+  const SUBJECT_PAGES = new Set<string>();
+  /** a page of the open subject: drawn once its engine is there, in the subject's language, under its top bar */
+  const isSubjectPage = (k: string): boolean => ENGINE_ROUTES.has(k) || SUBJECT_PAGES.has(k);
   let mounted = false;
   let chromeNow: Chrome = {};
   let frame: NoemaShellFrame | null = null;
@@ -219,14 +226,16 @@ export function createHost(core: HostCore) {
       route();
     }
   }
-  /** an area's page: drawn for the addresses #/<key>/… */
-  function registerPage(key: string, fn: PageFn): void {
+  /** an area's page: drawn for the addresses #/<key>/… (subject: a page of the open subject) */
+  function registerPage(key: string, fn: PageFn, o: { subject?: boolean } = {}): void {
     PAGES[key] = fn;
+    if (o.subject) SUBJECT_PAGES.add(key);
+    else SUBJECT_PAGES.delete(key);
   }
 
   /* ---------- the frame ---------- */
   let peopleWaiting = 0;
-  const social = (): boolean => !!W().NoemaSocial && core.account()?.kind === 'cloud' && !!W().NoemaCloud?.session();
+  const social = (): boolean => !!community() && core.account()?.kind === 'cloud' && !!W().NoemaCloud?.session();
   function tabsList(): FrameTab[] {
     const w = core.themes.world();
     const t: FrameTab[] = [{ key: 'today', href: '#/', icon: 'sun', label: L('today'), title: L('today') }];
@@ -419,7 +428,7 @@ export function createHost(core: HostCore) {
     const top = frame?.top;
     for (const e of [top, frame?.querySelector('.ns-tabs'), frame?.querySelector('#ns-fab'), parts.layer])
       if (e instanceof HTMLElement) e.lang = lang(); // the frame itself always speaks the menus' language
-    if (ENGINE_ROUTES.has(k)) {
+    if (isSubjectPage(k)) {
       docLang(core.subject()?.language || 'en');
       if (!ENGINE && pendingEngine) {
         chrome({ tab: 'learn', crumbs: [['…']] });
@@ -433,7 +442,16 @@ export function createHost(core: HostCore) {
       }
       if (core.backgroundEngine()) core.foreground(); // a quietly loaded subject you now study is the one a reload reopens
       chrome(subjectChrome());
-      ENGINE.route();
+      const own = SUBJECT_PAGES.has(k) ? PAGES[k] : undefined;
+      if (!own) {
+        ENGINE.route();
+        return;
+      }
+      try {
+        void Promise.resolve(own(args)).catch(fail);
+      } catch (e) {
+        fail(e);
+      }
       return;
     }
     docLang(lang());
@@ -455,12 +473,15 @@ export function createHost(core: HostCore) {
     parts.main.dataset['page'] = k;
     document.body.classList.remove('ns-mapmode');
     const fn = PAGES[k] ?? PAGES[''];
+    let kept = false;
     try {
-      void Promise.resolve(fn?.(args)).catch(fail);
+      const r = fn?.(args);
+      kept = r === KEPT;
+      void Promise.resolve(r).catch(fail);
     } catch (e) {
       fail(e);
     }
-    scrollTo({ top: 0 });
+    if (!kept) scrollTo({ top: 0 });
   }
   function fail(e: unknown): void {
     console.error('[shell]', e);
@@ -509,7 +530,7 @@ export function createHost(core: HostCore) {
   function here(): unknown {
     const { page: k, args } = placeOf(location.hash);
     const s = core.subject();
-    if (ENGINE_ROUTES.has(k) && s?.id && !isLang(s)) return { kind: 'subj', id: s.id, title: s.title };
+    if (isSubjectPage(k) && s?.id && !isLang(s)) return { kind: 'subj', id: s.id, title: s.title };
     if (k === 'map' && args[0]) {
       const c = W().NoemaCurriculum?.get(acc(), args[0]);
       if (c) return { kind: 'cur', id: c.id, title: shortTitle(c) };
@@ -522,7 +543,7 @@ export function createHost(core: HostCore) {
         title: W().NoemaLangUI?.titleOf?.(args[0]) || reg.find(x => x.id === args[0])?.title || args[0],
       };
     }
-    if (k === 'search') return W().NoemaSearch?.hereNow?.() ?? null;
+    if (k === 'search') return community()?.search.hereNow() ?? null;
     return null;
   }
 
@@ -556,7 +577,7 @@ export function createHost(core: HostCore) {
 
   /* ---------- the parts of the frame that follow the account ---------- */
   function wireSocial(): void {
-    const S = W().NoemaSocial;
+    const S = community()?.social;
     if (!S || !social()) return;
     drawTabs();
     S.start();
@@ -580,11 +601,10 @@ export function createHost(core: HostCore) {
     paint(C.status());
   }
   function wireReports(): void {
-    const R = W().NoemaReport;
+    const R = community()?.report;
     if (!R) return;
     setModel({ report: true });
-    const isAdmin = R.isAdmin?.bind(R);
-    if (!isAdmin) return;
+    const isAdmin = R.isAdmin.bind(R);
     const check = (): void => {
       isAdmin()
         .then(yes => {
@@ -642,10 +662,10 @@ export function createHost(core: HostCore) {
       meMenu(d.anchor, d.rail);
     });
     f.addEventListener('shell-find', () => {
-      W().NoemaSearch?.quick(here());
+      void community()?.search.quick(here());
     });
     f.addEventListener('shell-report', () => {
-      W().NoemaReport?.open();
+      void community()?.report.open();
     });
     f.addEventListener('shell-fab', () => {
       if (chromeNow.tutor) chromeNow.tutor();
@@ -702,10 +722,10 @@ export function createHost(core: HostCore) {
         search &&
         !target?.closest('input, textarea, select, [contenteditable="true"]') &&
         !parts.layer.querySelector('[data-sticky], .ns-modal') &&
-        W().NoemaSearch
+        community()
       ) {
         e.preventDefault();
-        W().NoemaSearch?.quick(here());
+        void community()?.search.quick(here());
       }
     });
     document.addEventListener(
@@ -737,7 +757,7 @@ export function createHost(core: HostCore) {
   function noEngine(msg: string): void {
     pendingEngine = false;
     core.toast(msg, 6000);
-    if (ENGINE_ROUTES.has(placeOf(location.hash).page)) location.replace('#/');
+    if (isSubjectPage(placeOf(location.hash).page)) location.replace('#/');
     else route();
   }
   /** Small items an engine page shows in the top bar, next to ⋮ (e.g. the focus-sprint clock). */
@@ -758,6 +778,30 @@ export function createHost(core: HostCore) {
     page,
     screen,
     registerPage,
+    isSubjectPage,
+    /** the frame as the study area sees it (src/features/study/ui/host.ts FramePort) */
+    studyFrame: (pageParts: StudyFramePage) =>
+      studyFrame(
+        {
+          main: parts.main,
+          chrome,
+          subjectChrome,
+          menuButton: (items, o) => menuButton(kit, items, o),
+          sheet,
+          setActs,
+          noteRecent,
+          toast: (m, ms) => {
+            core.toast(m, ms);
+          },
+          L,
+          place: () => {
+            const s = core.subject(),
+              node = (W() as { Noema?: { node?: { id: string; node: string } | null } }).Noema?.node ?? null;
+            return s ? { subj: s.id, title: s.title ?? '', cid: node?.id ?? null, node: node?.node ?? null } : null;
+          },
+        },
+        pageParts,
+      ),
     registerWorld,
     whenMounted,
     attachEngine,
@@ -801,9 +845,10 @@ export function createHost(core: HostCore) {
     hiddenToday,
     hideToday,
     isLang,
-    ENGINE_ROUTES,
     WORLDS,
     PAGES,
+    /** what a page returns when it kept the page drawn before (route(): the scroll stays) */
+    KEPT,
     reports,
     GROUPS: CHARACTER_GROUPS,
     ctx: (): ShellContext => ({ ...ctx, art: art() }),

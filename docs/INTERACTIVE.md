@@ -145,7 +145,8 @@ each translation). Numbers through `noema.fmt.number(n)`. Visible text in the HT
 - Engines of the library (§8.1) run in the HOST's Worker, never in the frame: only those the registry entry lists, ≤ 5 s a run,
   one run at a time per engine, ≤ 30 requests a second, outputs ≤ 512 KB.
 - Messages: at most 64 KB, each one checked; five bad messages stop the activity. A frame that navigates away is stopped.
-- At most 2 activities run at once (1 on a phone); one that leaves the screen pauses, and the oldest is parked (Start).
+- At most 2 activities run at once (1 on a phone); one that leaves the screen pauses, and the oldest is parked (Start). One whose
+  runtime is still loading holds its slot too, so blocks that come into view together start only as many as there are slots.
 - An activity that cannot run (unknown activity, runtime off or missing, bundle changed, error) shows its fallback picture
   and text. An exercise type the app does not know is hidden (it stays in the pack) instead of breaking the chapter.
 - A pack whose `requires` names something this app lacks: the open tab reloads to a newer build when it comes back to the
@@ -260,7 +261,7 @@ into `_headers` — `docs/INTERACTIVE_PYTHON.md` §7.
 
 1. `python3 activity_lint.py <subject-dir>` — no errors (and no warnings you cannot explain); for a sim-spec it checks every
    expression against the names the spec declares, every label key in every table, the limits; for a circuit the netlist,
-   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of `NoemaH5P.check` (allowed
+   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of the h5p@1 checks (`src/runtimes/h5p/check.ts`) (allowed
    content types and libraries, no outside link, no file type H5P refuses) on the package and on each translation.
 2. `python3 activity_test.py <subject-dir>` — it loads, says hello, shows its words in every language, reports right and wrong
    results for the solutions and wrong attempts you listed, and no console errors (a bench: `measure` / `diagnose` steps, the
@@ -464,7 +465,7 @@ outputs, and says how they are coupled. A spec without `parts` behaves exactly a
   engine goes into `pack.requires`.
 - **The bench** of a spec with parts is `spec.bench.part`: the id of a `circuit-mna@1` or `twin@1` part; its measurements use that
   part's latest inputs.
-- **Runtime** (`ACT.partsRunner`, 35_activity_sim.js): every part has its own engine instance and Worker; the latest inputs win (a
+- **Runtime** (`partsRunner`, src/runtimes/sim-spec/parts.ts): every part has its own engine instance and Worker; the latest inputs win (a
   run under way stops at its next step); the whole graph has 5 s (else the activity stops: Restart). The checks grader reads the
   values once the latest inputs are computed, as for one engine.
 - **Mini-apps**: `noema.sim(spec).run(inputs, {seed}?)` → `{outputs, values, codes}` runs `{consts?, derived?, parts, couple?}` with

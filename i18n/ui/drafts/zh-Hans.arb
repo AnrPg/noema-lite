@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "减少动效",
   "ui.kit.motion.full": "完整",
   "ui.kit.language": "界面语言",
-  "ui.kit.lookNote": "这里的选择只适用于此设备和此页面。"
+  "ui.kit.lookNote": "这里的选择只适用于此设备和此页面。",
+  "ui.study.onlyMyLevel": "仅限我的水平（{level}）",
+  "ui.study.myLevelTip": "只练习你已达到的水平的题目",
+  "ui.study.level": "水平"
 }

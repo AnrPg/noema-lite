@@ -1,4 +1,4 @@
-/* The activity author (engine/activity_author.js, engine/schemaform.js, docs/activities-dev/authoring_ui.md).
+/* The activity author (src/features/author, src/ui/screens/author: noema-schema-form and noema-author; docs/activities-dev/authoring_ui.md).
    Node (always): the sim-spec schema (src/contracts/schemas/noema.sim-spec.v1.schema.json) accepts the reference specs and never refuses what
    the validators accept (the parity cases of tests/activities.js), and refuses the structural ones; the registry schema accepts the
    reference entries; the form generator reaches every value of the reference specs with a typed schema (no raw-data fallback);
@@ -11,8 +11,8 @@
    (NoemaLibSchema.specSchema) that accepts its reference activities and every fixture spec its own checkSpec accepts
    (tests/fixtures/enginelib/<name>.json), refuses the structural mistakes, and has a label for every field word; check() finds no
    problem in the references; the references ship in activity_author_schemas.js (NoemaActivityRefs).
-   Browser (with --browser; BROWSERS=chromium (default),firefox,webkit): the page in the built site, through its route #/author (classic router,
-   then the new frame: subject ⋮ › Create an activity, the crumbs, 320 px): rc-lowpass built from scratch through the form equals the reference; a bad formula shows its error at its field;
+   Browser (with --browser; BROWSERS=chromium (default),firefox,webkit): the page in the built site, through its route #/author (the address,
+   then the way in: subject ⋮ › Create an activity, the crumbs, 320 px): rc-lowpass built from scratch through the form equals the reference; a bad formula shows its error at its field;
    the preview follows a changed start value; the .zip download passes activity_lint.py; undo / redo; 360 px without horizontal
    scroll; dark mode; graph@1: picked in the engine picker → started from its reference → the preview draws its scene → a wrong
    model field shows the engine's own message at the field → the .zip passes activity_lint.py.
@@ -35,11 +35,14 @@ const embedText = () => cp.execFileSync('python3', [path.join(ROOT, 'tools', 'bu
 /* ---------- the modules, as the app loads them ---------- */
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaLibSchema = ENGINES.kernel('schema'), NoemaLibGraph = ENGINES.mod('graph@1'), NoemaLibGenetics = ENGINES.mod('genetics@1'), NoemaLibClinic = ENGINES.mod('clinic@1');
-const SF = require(path.join(ROOT, 'engine', 'schemaform.js'));
-require(path.join(ROOT, 'tools', 'i18n', 'node.js')).load();   // the app's i18n runtime (English): the page reads its words through NoemaI18n
+// the author's core (src/features/author: the forms' JSON Schema core, the author) through the node bridge build/noema-tools.cjs
+const TOOLS = require(path.join(ROOT, 'build', 'noema-tools.cjs')), SF = TOOLS.schemaForm;
+const NoemaI18n = require(path.join(ROOT, 'tools', 'i18n', 'node.js')).load();   // the app's i18n runtime (English): the page reads its words through NoemaI18n
 require(EMBED);
-const AA = require(path.join(ROOT, 'engine', 'activity_author.js'));
 const P = globalThis.NoemaCore.content;   // the content checks (build/noema-tools.cjs), as the app's NoemaCore.content
+// the author over what the page gives it (src/composition/author.ts): the engine library, the content checks, the words, the shipped references
+const AA = TOOLS.authoring({ engines: () => globalThis.NoemaCore.engines, checks: () => P, words: NoemaI18n,
+  refs: () => globalThis.NoemaActivityRefs || {}, schemas: () => Object.values(globalThis.NoemaActivitySchemas || {}) });
 const sim = SCH('noema.sim-spec.v1.schema.json'), regSchema = SCH('noema.activities.v1.schema.json');
 const reg = SF.registry(SCHEMA_FILES.map(SCH));
 AA.registry(SCHEMA_FILES.map(SCH));
@@ -295,10 +298,11 @@ console.log('— documents, files, zip');
     ok(!miss.length && !badPh.length, `${l}: a draft for every key, with the placeholders of English ${miss.slice(0, 4).concat(badPh.slice(0, 4))}`);
   }
   ok(cp.spawnSync('node', [path.join(ROOT, 'tools', 'i18n', 'check.js')], { encoding: 'utf8' }).status === 0, 'tools/i18n/check.js: 0 errors (ICU, plural categories per locale, placeholders, descriptions)');
-  const src = fs.readFileSync(path.join(ROOT, 'engine', 'activity_author.js'), 'utf8') + fs.readFileSync(path.join(ROOT, 'engine', 'schemaform.js'), 'utf8');
+  const rdAll = dir => fs.readdirSync(path.join(ROOT, dir)).filter(f => /\.ts$/.test(f) && !/\.test\.ts$/.test(f)).map(f => fs.readFileSync(path.join(ROOT, dir, f), 'utf8')).join('\n');
+  const src = ['src/features/author/domain', 'src/features/author/application', 'src/ui/screens/author'].map(rdAll).join('\n');   // the author's code: its domain, application and screens
   const used = [...new Set([...src.matchAll(/\b(?:TT|T)\('([\w.]+)'/g)].map(m => m[1]))].filter(k => !/\.$/.test(k));
   ok(used.every(k => k in EN), 'every word the code asks for is in en.arb ' + used.filter(k => !(k in EN)));
-  const views = fs.readFileSync(path.join(ROOT, 'engine', 'src', '40_views.js'), 'utf8');
+  const views = fs.readFileSync(path.join(ROOT, 'engine', 'app', 'study.js'), 'utf8') + fs.readFileSync(path.join(ROOT, 'src', 'composition', 'shell', 'author-page.ts'), 'utf8');   // the menu item (the study area's subject ⋮), and the route (its page)
   const routeKeys = [...views.matchAll(/tE\('engine\.author\.([\w.]+)'/g)].map(m => m[1]);
   ok(routeKeys.length >= 4 && routeKeys.every(k => k in EN), 'the route and its menu item use catalog words ' + routeKeys);
   const titles = new Set(); (function tw(o) { if (Array.isArray(o)) o.forEach(tw); else if (o && typeof o === 'object') { if (typeof o.title === 'string') titles.add(o.title); Object.values(o).forEach(tw); } })([sim, regSchema]);
@@ -332,16 +336,16 @@ async function browser() {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true });
     const p = await ctx.newPage(); p.setDefaultTimeout(10000);
     const E = []; p.on('pageerror', e => E.push(e.message));
-    // the built site with a subject open (the classic router: run_e2e.sh switches the frame off), then the route #/author
+    // the built site with a subject open (in the frame: a subject always opens there), then the route #/author
     // (the site ships no profile of this device: one local profile, so the app opens it without asking "Who is studying?")
     await p.goto(SITE_URL); await p.evaluate(() => { localStorage.clear(); localStorage.setItem('noema1:accounts', JSON.stringify([{ id: 'author', name: 'Author', emoji: '🙂', pin: null, created: Date.now(), learner: '' }])); });
     await p.goto(SITE_URL + '?subject=demo-physics'); await wait(1500);
     ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && ACT.engines().includes('formula@1'))), 'the built site is up with a subject and its sim-spec@1 runtime');
-    ok(await p.evaluate(() => typeof NoemaActivityAuthor === 'undefined'), 'the author’s scripts are not loaded before the route is opened');
+    ok(await p.evaluate(() => !customElements.get('noema-author') && !window.__noemaAuthorPiece), 'the author’s scripts are not loaded before the route is opened');
     await p.evaluate(() => { location.hash = '#/author'; });
-    ok(await until(() => p.evaluate(() => !!(window.NoemaActivityAuthor?.current && document.querySelector('main .aa h1')))), 'classic router: #/author loads the author’s scripts and opens the page');
-    ok(await p.evaluate(() => [...document.styleSheets].some(x => /activity_author\.css$/.test(x.href || ''))), 'its stylesheet is loaded with it');
-    await p.evaluate(() => { window.__aa = NoemaActivityAuthor.current; });
+    ok(await until(() => p.evaluate(() => !!(window.__noemaAuthorPiece && document.querySelector('main noema-author') && document.querySelector('main .aa h1')))), 'the address #/author loads the author’s scripts (build/author.js) and opens the page');
+    ok(await p.evaluate(() => !!document.querySelector('style[data-author-css]') && getComputedStyle(document.querySelector('.aa-main')).display === 'grid'), 'its stylesheet is loaded with it');
+    await p.evaluate(() => { window.__aa = document.querySelector('main noema-author'); });
     ok(await p.locator('.aa h1').innerText() === EN.title && await p.locator('.aa-pbox .sim').count() === 1, 'the page shows the form (in the catalog’s words) and the preview of the blank activity (the real runtime)');
 
     // build rc-lowpass from scratch through the form
@@ -444,8 +448,11 @@ async function browser() {
     const dark = await p.evaluate(() => { const lum = c => { const m = c.match(/\d+(\.\d+)?/g).map(Number); return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; }; const f = document.querySelector('.aa .sf-in'); return { bg: lum(getComputedStyle(f).backgroundColor), ink: lum(getComputedStyle(f).color) }; });
     ok(dark.bg < 0.35 && dark.ink > 0.6, `dark mode: the fields are dark with light text (${dark.bg.toFixed(2)} / ${dark.ink.toFixed(2)})`);
     // a library engine: graph@1 from its reference activity, the scene in the preview, a checkSpec message at its field, the .zip
-    await p.emulateMedia({ colorScheme: 'light' }); await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
-    await p.evaluate(() => { window.__aa = NoemaActivityAuthor.current; });   // (the page may have been mounted again meanwhile)
+    // the router draws the route again on a change of the colour scheme (engine/src/40_views.js): the same page, its work kept
+    const before = await p.evaluate(() => { window.__aa0 = document.querySelector('main noema-author'); return JSON.stringify(__aa0.get()); });
+    await p.emulateMedia({ colorScheme: 'light' }); await p.evaluate(() => document.documentElement.removeAttribute('data-theme')); await wait(400);
+    ok(await p.evaluate(b => document.querySelector('main noema-author') === __aa0 && JSON.stringify(__aa0.get()) === b, before), 'a change of the colour scheme draws the route again with the same page and its work');
+    await p.evaluate(() => { window.__aa = document.querySelector('main noema-author'); });
     const hasGraph = await p.evaluate(() => !!document.querySelector('[data-aa=type] option[value="lib:graph@1"]'));
     ok(hasGraph, 'the kind select offers the library engines this app has (graph@1 among them, in its group)');
     if (hasGraph) {
@@ -485,7 +492,7 @@ async function browser() {
 
     // several engines in one spec: the kind "parts", each part with its engine's form; the reference pk-ode (when shipped) runs in the preview
     if (await p.evaluate(() => !!document.querySelector('[data-aa=type] option[value="sim-parts"]'))) {
-      await p.evaluate(() => { window.__aa = NoemaActivityAuthor.current; });
+      await p.evaluate(() => { window.__aa = document.querySelector('main noema-author'); });
       await p.selectOption('[data-aa=type]', 'sim-parts'); await wait(200);
       const hasRef = await p.locator('[data-aa=start-ref]').count();
       await p.click(hasRef ? '[data-aa=start-ref]' : '[data-aa=start-blank]');
@@ -506,7 +513,7 @@ async function browser() {
 
     // leaving the route stops the page (its keys and preview)
     await p.evaluate(() => { location.hash = '#/'; }); await wait(400);
-    ok(await p.evaluate(() => NoemaActivityAuthor.current === null && !document.querySelector('.aa')), 'leaving #/author stops the page');
+    ok(await p.evaluate(() => !document.querySelector('noema-author') && !document.querySelector('.aa')), 'leaving #/author stops the page');
 
     // the new frame: the one way in is the subject’s ⋮ › Create an activity; the crumbs end with the page’s title
     await p.emulateMedia({ colorScheme: 'light' });

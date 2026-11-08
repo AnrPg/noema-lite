@@ -60,3 +60,10 @@
 .msg.me .mdx th{background:none;color:inherit}
 .msg.me .mdx .tablewrap{background:transparent;border-color:rgba(255,255,255,.3)}
 @media (max-width:720px){.srcdeck{top:55px}.deckinner{padding:14px 16px}.newpill.corner{top:10px;inset-inline-end:10px}}
+.srcpick{display:none}
+.srccard .chev.open{transform:rotate(90deg)}
+.srcnew{margin-inline-start:6px}
+.srcmeta{margin:6px 0}
+.srcacts{margin-top:10px}
+.deckfoot{margin-top:10px}
+study-whats-new-btn{display:contents}

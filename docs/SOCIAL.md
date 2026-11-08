@@ -5,8 +5,9 @@ buddies, talk one to one with files, subjects and Roadmaps, and keep study group
 rules: the name as searched, the server's refusals, the bond with a person, what waits) and `src/features/social/application/`
 (what is known now in one state, my row, finding people, a file into a room with nothing left behind) over the port
 `SocialServer` (`src/ports/social.ts`; Supabase: `src/adapters/supabase/social.ts`), read by the pages as `NoemaCore.social`;
-`engine/social.js` draws the pages (`#/people`, `#/chat/<room>`, `#/group/<room>`, `#/join/<code>`; the People tab of the side
-bar), `cloud/supabase.sql` §12, words `i18n/social/`. Tests: `src/features/social/application/social.test.ts` and the port's
+`src/features/social/ui/` draws the pages (`#/people` in `home.ts`, `#/chat/<room>` in `chat.ts`, `#/group/<room>` and
+`#/join/<code>` in `group.ts`, the sheets in `parts.ts`; the People tab of the side bar; mounted by
+`src/composition/community-ui.ts`), `cloud/supabase.sql` §12, words `i18n/social/`. Tests: `src/features/social/application/social.test.ts` and the port's
 contract `src/ports/contract/social.contract.ts` (`npm run test:unit`), `tests/social.js` (three people in the browser, against
 `tests/mock_social.js`) and `tests/sql_policies.py`.
 

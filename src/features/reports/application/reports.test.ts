@@ -118,7 +118,7 @@ describe('the brief and the files', () => {
     );
     assert.deepEqual(
       repoFiles({ route: { page: 'vault' }, kind: 'display' }).map(f => f.path),
-      ['engine/vault.js'],
+      ['src/features/vault/ui/page.ts'],
     );
   });
   test('every catalog key’s prefix leads to its component (i18n/<component>/en.arb)', () => {

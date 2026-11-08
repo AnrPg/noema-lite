@@ -167,7 +167,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   PLAN = { recommend: 'course', reasons: ['Two short files on one topic: gene expression.', 'About 6 pages: one concise subject.'], title: 'Molecular biology', summary: 'From DNA to RNA.',
     course: { chapters: [{ title: 'Replication', files: ['dna-replication.pdf pp. 1–4'] }, { title: 'Transcription', files: ['Transcription notes.md'] }] },
     roadmap: { steps: [{ ref: 'replication', title: 'DNA replication', role: 'foundation', prerequisites: [], files: ['dna-replication.pdf pp. 1–2'] }, { ref: 'transcription', title: 'Transcription', role: 'aspect', prerequisites: ['replication'], files: ['dna-replication.pdf pp. 3–4', 'Transcription notes.md'] }] } };
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = vendors(); await new Promise(r => api.listen(APORT, r));
   const browser = await chromium.launch();
@@ -230,7 +230,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     console.log('— the Claude app, by copy and paste');
     await wait(1500); await until(() => p.evaluate(() => !!window.NoemaCurMap && !!window.Noema?.account), 15000);
     await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.fromSources(Noema.account.id); }); await wait(300);
-    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader select', 'app'); await p.click('.cm-srcread'); await wait(1500);
+    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader select', 'app'); await p.click('.cm-srcread'); await until(() => p.locator('.cm-srccopytask').count(), 10000);
     ok(await p.locator('.cm-srccopytask').count() === 1 && await p.locator('.cm-srcchosen').count() === 0, 'with the Claude app: copy the task, paste the answer');
     await p.fill('.cm-src .cm-srcanswer textarea', JSON.stringify({ ...good, title: 'x' })); await p.click('.cm-srcuse'); await wait(200);
     ok(/problem/.test(await p.locator('.cm-src .status.bad').innerText()), 'an answer about other files: its problems, to copy back to Claude');

@@ -6,7 +6,9 @@ material. Code: `src/features/vault/domain/` (the formats and their first bytes,
 filters, the sorts, the folders, the pins: pure TypeScript), `src/features/vault/application/vault.ts` (upload — the row, the
 file, the server's check, nothing left behind when a step fails —, the field graph kept on the device, ratings, reports) over
 the port `VaultServer` (`src/ports/vault.ts`; Supabase: `src/adapters/supabase/vault.ts`), read by the page as
-`NoemaCore.vault`; `engine/vault.js` draws the page (`#/vault`, the Vault tab of the side bar); `cloud/supabase.sql` §13,
+`NoemaCore.vault`; `src/features/vault/ui/` draws the page (`#/vault`, the Vault tab of the side bar: Lit screens on the kit,
+`page.ts` the folders and filters, `upload.ts` and `form.ts` the upload, `file.ts` a file's sheet, preview, report and edit,
+`model.ts` what they share; mounted by `src/composition/community-ui.ts`); `cloud/supabase.sql` §13,
 words `i18n/vault/`. Tests: `src/features/vault/**/*.test.ts` and the port's contract `src/ports/contract/vault.contract.ts`
 (`npm run test:unit`), `tests/vault.js` (the browser).
 

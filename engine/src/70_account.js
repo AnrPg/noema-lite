@@ -1,5 +1,4 @@
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')   // i18n-ignore
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
   // icon: an emoji (the older sections) or { line: '<engine/art.js key>' }, a line icon of the new frame (no emoji on new headers)
@@ -11,15 +10,61 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
   return d;
 }
 /** Settings › Data: the outside activities (external-embed@1, docs/INTERACTIVE_EMBED.md) the learner let open without asking — one quiet
-    line with ⓘ and "Ask again" (NoemaEmbed.consent: S.settings.embedOk, an account setting); nothing at all while there is no yes to forget. */
+    line with ⓘ and "Ask again" (S.settings.embedOk, an account setting, src/runtimes/external-embed); nothing at all while there is no yes to forget. */
 function embedConsentRow() {
-  const E = window.NoemaEmbed, ids = E?.consent?.list?.() || [];
+  const chosen = () => (S.settings?.embedOk && typeof S.settings.embedOk === 'object' ? Object.keys(S.settings.embedOk) : []), ids = chosen();
   if (!ids.length) return null;
-  const names = ids.map(id => (E.PROVIDERS || []).find(p => p.id === id)?.name || id);
+  const providers = window.NoemaCore?.runtimes?.checks?.embed?.PROVIDERS || [];
+  const names = ids.map(id => providers.find(p => p.id === id)?.name || id);
   const row = h('div', { class: 'subrow embedconsent', 'data-embed-consent': '' },
     h('span', { class: 'grow tiny' }, tE('engine.act.embed.settings', { names: window.NoemaI18n?.fmt?.list ? NoemaI18n.fmt.list(names) : names.join(', ') }), ' ', tip(tE('engine.act.embed.settingsTip'))),
-    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { for (const id of E.consent.list()) E.consent.forget(id); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
+    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { S.settings.embedOk = {}; save(); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
   return row;
+}
+/** Settings › Data and sync: "Prepare Python for offline" — the core, numpy, scipy and the allow-listed extras, with progress and what is
+    on the device (one line; the details per part in its ⓘ). Only where Python activities can run (the website, the runtime switched on).
+    The service is the runtime's own (src/runtimes/py-module: ACT.runtime('py-module@1') → .py), loaded when the section is drawn. */
+function pyOfflineSection() {
+  const ID = 'py-module@1';   // i18n-ignore
+  if (typeof ACT === 'undefined' || !ACT.enabled(ID)) return null;
+  const line = h('span', { class: 'tiny' }, tE('engine.py.checking'));
+  const info = h('span', {});
+  const bar = h('progress', { class: 'act-pybar', max: '1', value: '0', hidden: true });
+  const btn = h('button', { class: 'btn small', type: 'button', 'data-py': 'prepare', hidden: true, onclick: () => prepare(false) });
+  const body = h('div', { class: 'act-pyset' }, h('div', { class: 'row' }, line, info), h('div', { class: 'row' }, btn, bar));
+  const sec = accSection({ line: 'download' }, tE('engine.py.title'), { status: { ok: false, text: '…' }, info: tE('engine.py.info'), body });   // i18n-ignore (a placeholder)
+  const pill = sec.querySelector('summary .pill');
+  const service = () => ACT.runtime(ID).then(rt => rt?.py || null, () => null);
+  let all = null;
+  const setPill = (ok, text) => { pill.className = 'pill ' + (ok ? 'c' : 'warnpill'); pill.textContent = text; };
+  async function draw() {
+    let n = null, st = null;
+    try { const PY = await service(); if (!PY) throw new Error('no python'); const man = await PY._manifest(); all = ['numpy', 'scipy', ...Object.keys(man.wheels || {})]; n = await PY.need(all); st = await PY.status(); } catch (e) { n = null; }
+    if (!sec.isConnected && n === null) return;
+    if (!n) { setPill(false, tE('engine.py.notReady')); line.textContent = tE('engine.py.noFiles'); btn.hidden = true; info.replaceChildren(); return; }
+    const ready = n.missing === 0;
+    setPill(ready, ready ? tE('engine.py.ready') : n.missing < n.files ? tE('engine.py.partly') : tE('engine.py.notReady'));
+    line.textContent = ready ? tE('engine.py.have', { size: fmtBytes(n.bytes) }) : tE('engine.py.part', { have: fmtBytes(n.bytes - n.missingBytes), total: fmtBytes(n.bytes) });
+    const G = st && st.groups ? st.groups : {};
+    const parts = Object.entries(G).map(([k, g]) => `${k === 'core' ? 'Python' : k} ${fmtBytes(g.bytes)} ${g.ready ? '✓' : '—'}`).join(' · ');   // i18n-ignore (names and marks)
+    info.replaceChildren(tip(parts + '\n' + (st && st.persisted ? tE('engine.py.kept') : tE('engine.py.mayEvict'))));
+    btn.textContent = tE('engine.py.prepare', { size: fmtBytes(n.missingBytes) }); btn.hidden = ready; btn.disabled = false;
+  }
+  async function prepare(force) {
+    btn.disabled = true; bar.hidden = false; bar.value = 0;
+    const onProgress = d => { if (d.totalBytes) { bar.value = d.bytes / d.totalBytes; line.textContent = tE('engine.py.progress', { done: fmtBytes(d.bytes), total: fmtBytes(d.totalBytes) }); } };
+    let r; try { const PY = await service(); if (!PY) throw Object.assign(new Error('no python'), { code: 'unavailable' }); r = await PY.prepareOffline({ include: all || ['numpy', 'scipy'], onProgress, force }); } catch (e) { r = { ok: false, failed: [{}], code: e.code }; }
+    bar.hidden = true;
+    if (r.code === 'save-data') {
+      line.textContent = tE('engine.py.saveData'); btn.disabled = false;
+      btn.replaceWith(h('button', { class: 'btn small', type: 'button', 'data-py': 'anyway', onclick: e => { e.target.replaceWith(btn); prepare(true); } }, tE('engine.py.anyway')));
+      return;
+    }
+    await draw();
+    if (!r.ok) line.textContent = tE('engine.py.failed', { n: (r.failed || []).length || 1 });
+  }
+  draw();
+  return sec;
 }
 const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });
 /** A moment / a day / a time of day in the UI language (the same fields the browser's toLocale…String() shows). */
@@ -27,8 +72,15 @@ const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIM
 const fmtWhen = t => t ? (window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, { ...WHEN_DAY, ...WHEN_TIME }) : new Date(t).toLocaleString()) : '—';
 const fmtDay = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, WHEN_DAY) : new Date(t).toLocaleDateString();
 const fmtTime = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.time(t, WHEN_TIME) : new Date(t).toLocaleTimeString();
-/** A language's name in the UI language (Intl.DisplayNames), for the learner; langName() keeps the English one for the prompts. */
-const uiLangName = code => window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(code) : langName(code);
+/** A language's name in the UI language (Intl.DisplayNames), for the learner (else the English one the prompts use). */
+const uiLangName = code => window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(code) : window.NoemaLLM?.langLabel ? NoemaLLM.langLabel(code) : code;
+/** the 🗣 language the tutor writes in ('' = automatic: the app's language) */
+const chatLang = () => S.settings.chatLang || '';
+/** 🗣 the language of the AI conversations: automatic, the course's language, every UI language (the tutor's choices) */
+function chatLangSelect({ cls = '', onChange = null, persist = true } = {}) {
+  return h('select', { class: cls, title: tE('engine.tutor.chatLangTip'), 'aria-label': tE('engine.tutor.chatLangAria'), onchange: e => { if (persist) { S.settings.chatLang = e.target.value; save(); } onChange?.(e.target.value); } },
+    ...TUTOR_UI.chatLangs().map(([v, l]) => h('option', { value: v, selected: TUTOR_UI.chatLangIs(v) || (!v && !chatLang()), ...(v ? { lang: v } : {}) }, '🗣 ' + l)));
+}
 /** A restore point's name in the UI language of now: its catalog key (k, p) when it has one, else the words it was saved with. */
 const storedLabel = x => x.k && window.NoemaI18n?.has(x.k) ? tE(x.k, x.p || {}) : x.label;
 /** A cloud snapshot's name: the app's own snapshots are stored with fixed English names (matched by engine/cloud.js too) → the UI language;
@@ -38,23 +90,9 @@ const snapLabel = l => Object.prototype.hasOwnProperty.call(SNAP_LABEL, l) ? tE(
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); seeSettings(); }
 
-const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
-function openAccountMenu(tab = 'profile') {
-  if (SHL()) { closeTutor(); $$('.modal').forEach(m => m.remove()); return go('#/me/' + (ME_PAGE[tab] || '')); }   // the shell's “Me” pages (engine/shell.js)
-  modal((box, close) => {
-    box.classList.add('accbox');
-    const body = h('div', { class: 'accbody' });
-    const tabs = h('div', { class: 'tabs' });
-    const show = t => { tab = t; $$('button', tabs).forEach(b => b.classList.toggle('on', b.dataset.t === t)); body.innerHTML = ''; ACC_VIEWS[t](body, close); };
-    ACC_TABS.forEach(k => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, t('acc.' + k))));
-    const st = Noema.stats.get();
-    box.append(h('div', { class: 'acchead' }, h('div', { class: 'accemo' }, ACCOUNT.emoji || '🙂'),
-      h('div', { class: 'grow' }, h('h2', {}, ACCOUNT.name), h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? '☁️ ' + tE('engine.acc.cloudAccount', { email: ACCOUNT.email }) : '💻 ' + tE('engine.acc.localProfile'))),
-      h('div', { class: 'accstats' }, h('span', { class: 'chip xp' }, '⭐ ' + tE('engine.acc.xpTotal', { n: st.xp })), h('span', { class: 'chip streak' }, '🔥 ' + tE('engine.acc.streak', { n: Noema.stats.streakNow() }))),
-      h('button', { class: 'iconbtn', onclick: close }, '✕')), tabs, body);
-    show(tab);
-  });
-}
+const ME_PAGE = { profile: 'me/profile', settings: 'me/ai', subjects: 'subjects', backup: 'me/data', cloud: 'me/data', help: 'help' };
+/** the account's pages: the frame's (Me ›, the Subjects page, Help) */
+function openAccountMenu(tab = 'profile') { TUTOR_UI?.close(); $$('.modal').forEach(m => m.remove()); go('#/' + (ME_PAGE[tab] || 'me')); }
 
 /** A subject's name for people: its title, else the Roadmap step it was made for, else its id made readable ("cur-bq29at-prerequisite-round-1-storage-tables-k8jn" → "Prerequisite round 1 storage tables"). */
 function subjectLabel(sid, list = []) {
@@ -71,15 +109,15 @@ const ACC_VIEWS = {
     const set = accountSettings(); const CL = window.NoemaClaude; const acc = ACCOUNT.id;
     // — Gemini (the tutor and every in-app AI helper)
     const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': tE('engine.acc.geminiKey') });   // i18n-ignore (the shape of a key)
-    const sel = h('select', { 'aria-label': tE('engine.acc.geminiModel') }, ...(S.settings.models.length ? S.settings.models : FALLBACK_MODELS).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
+    const sel = h('select', { 'aria-label': tE('engine.acc.geminiModel') }, ...(S.settings.models.length ? S.settings.models : TUTOR_UI.gemini.fallbackModels).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
     const gstat = h('div', { class: 'tiny' }, S.settings.model ? tE('engine.acc.currentModel', { model: S.settings.model }) : tE('engine.acc.modelOnFirstUse'));
     const geminiBox = h('div', {},
       !S.settings.apiKey ? h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, tE('engine.acc.noGeminiKey')), h('div', {}, tE('engine.acc.freeTwoMin') + ' ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, tE('engine.acc.showMeHow')))) : null,
       h('div', { class: 'field' }, h('label', {}, tE('engine.acc.geminiKey') + ' ', tip(tE('engine.acc.geminiKeyTip'))), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? tE('engine.acc.keyStoredCloud') : tE('engine.acc.keyStoredLocal'))),
       h('div', { class: 'field' }, h('label', {}, tE('engine.acc.geminiModel')), sel,
         h('div', { class: 'row' },
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = tE('engine.acc.detecting'); try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = tE('engine.acc.foundModels', { n: ms.length, model: S.settings.model }); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🔍 ' + tE('engine.acc.detectModels')),
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = tE('engine.acc.testing'); try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: ' + tE('engine.acc.testReply') }] }], temperature: 0 }); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🧪 ' + tE('engine.acc.test'))),   // i18n-ignore (a prompt)
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = tE('engine.acc.detecting'); try { const ms = await TUTOR_UI.gemini.detect(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = tE('engine.acc.foundModels', { n: ms.length, model: S.settings.model }); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🔍 ' + tE('engine.acc.detectModels')),
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = tE('engine.acc.testing'); try { const t = await TUTOR_UI.gemini.test('Reply with exactly: ' + tE('engine.acc.testReply')); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🧪 ' + tE('engine.acc.test'))),   // i18n-ignore (a prompt)
         gstat));
     // — Claude (optional): the API key for ✨ Create with Claude and curricula; never synced
     const ckey = h('input', { type: 'password', value: CL ? CL.Key.get(acc) : '', placeholder: 'sk-ant-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': tE('engine.acc.claudeKey') });   // i18n-ignore (the shape of a key)
@@ -118,7 +156,7 @@ const ACC_VIEWS = {
       ...NoemaI18n.LOCALES.filter(l => NoemaI18n.available().includes(l) || l.tag === S.settings.lang).map(l => h('option', { value: l.tag, selected: S.settings.lang === l.tag, lang: l.tag }, `${l.name} · ${l.tag}`)));
     const chatL = chatLangSelect({ persist: false });
     const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, tE('engine.acc.chatLang') + ' ', tip(tE('engine.acc.chatLangTip'))), chatL,
-      h('div', { class: 'tiny' }, tE('engine.acc.chatLangNote', { title: SUBJ.title, lang: uiLangName(COURSE_LANG) }))));
+      h('div', { class: 'tiny' }, tE('engine.acc.chatLangNote', { title: SUBJ.title, lang: uiLangName(SUBJ.language || 'en') }))));
     const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, tE('engine.acc.theme')), theme), h('div', { class: 'field' }, h('label', {}, tE('engine.acc.goal')), goal)),
       h('div', { class: 'field' }, h('label', {}, t('set.uiLang') + ' ', tip(t('set.uiLangTip'))), uiL),
       h('label', { class: 'row', style: { margin: '8px 0' } }, snd, tE('engine.acc.sound')),
@@ -142,7 +180,7 @@ const ACC_VIEWS = {
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
             if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }
           if (relabel) { flushSave(); location.reload(); return; }   // the menus are drawn once: show them in the new language
-          applyTheme(); close(); route(); renderTopStats(); toast(tE('engine.acc.saved'));
+          applyTheme(); close(); route(); toast(tE('engine.acc.saved'));
         } }, tE('engine.acc.saveSettings'))));
   },
 
@@ -179,26 +217,6 @@ const ACC_VIEWS = {
           Noema.backup.download(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: false }));
           Noema.wipeAccountData(ACCOUNT.id); Noema.removeLocalAccount(ACCOUNT.id); Noema.jset('noema1:current', {}); setTimeout(() => location.reload(), 800);
         }) }, '🗑️ ' + tE('engine.acc.deleteProfile'))) : null);
-  },
-
-  async subjects(body) {
-    const list = await Noema.subjectsFor(ACCOUNT.id);
-    const set = accountSettings(); const hidden = new Set(set.hiddenSubjects || []);
-    const CU = window.NoemaCurriculum, on = id => CU?.stepsOf ? CU.stepsOf(ACCOUNT.id, id).length : 0;   // 📦 how many curriculum steps a subject teaches (none: 📚 on the Shelf)
-    body.append(h('p', { class: 'muted' }, tE('engine.acc.subjIntro')),
-      CU ? h('p', { class: 'tiny' }, '🧭 ' + tE('engine.acc.subjRoadmap')) : null,
-      h('div', { class: 'sublist' }, ...list.map(s => h('div', { class: 'subrow' },
-        h('label', { class: 'switch' }, h('input', { type: 'checkbox', checked: !hidden.has(s.id), onchange: e => { e.target.checked ? hidden.delete(s.id) : hidden.add(s.id); putAccountSettings({ hiddenSubjects: [...hidden] }); } }), h('i')),
-        h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
-        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, [s.origin === 'library' ? tE('engine.acc.originLibrary') : s.origin === 'private' ? '🔒 ' + tE('engine.acc.originPrivate') : '📥 ' + tE('engine.acc.originImported'), tE('engine.acc.subjCounts', { c: s.counts?.chapters ?? '?', e: s.counts?.exercises ?? '?' }), ...(CU ? [on(s.id) ? '🧭 ' + tE('engine.acc.onSteps', { n: on(s.id) }) : '📚 ' + tE('engine.acc.onShelf')] : [])].join(' · '))),
-        s.id === SUBJ.id ? h('span', { class: 'pill c' }, tE('engine.acc.isOpen')) : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, tE('engine.acc.open')),
-        h('button', { class: 'iconbtn', title: tE('engine.acc.editTip'), 'aria-label': tE('engine.acc.editAria', { title: s.title }), onclick: () => Noema.editSubject(s, { onChange: () => openAccountMenu('subjects') }) }, '✏️'),
-        s.origin !== 'library' ? h('button', { class: 'iconbtn', title: tE('engine.acc.shareTip'), onclick: () => Noema.share(s) }, '🔗') : null))),
-      h('div', { class: 'row', style: { marginTop: '14px' } },
-        h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ ' + tE('engine.acc.createWithClaude')),
-        CU && Noema.openShelf ? h('button', { class: 'btn', onclick: () => Noema.openShelf(ACCOUNT.id) }, '📚 ' + tE('engine.acc.openShelf')) : null,
-        h('label', { class: 'btn' }, '📥 ' + tE('engine.acc.importPack'), h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(tE('engine.share.openNow', { title: s.title }), () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + errText(er), 4000); } } })),
-        h('button', { class: 'btn', onclick: () => Noema.exportPackage(ACCOUNT.id, Noema.pack) }, '⬇️ ' + tE('engine.acc.exportPackage', { title: SUBJ.title }))));
   },
 
   async backup(body) {
@@ -250,7 +268,7 @@ const ACC_VIEWS = {
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
       accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
       embedConsentRow(),
-      window.pyOfflineSection?.() || '');   // Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
+      pyOfflineSection() || '');   // Prepare Python for offline: only where Python activities can run
     drawFs(); drawRP();
   },
 
