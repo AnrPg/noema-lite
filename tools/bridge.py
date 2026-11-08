@@ -172,7 +172,7 @@ def wj(p, o):
     with open(p, 'w', encoding='utf-8') as f: json.dump(o, f, ensure_ascii=False, indent=1); f.write('\n')
 
 def translated(chapters, tchs):
-    """engine/loader.js translatedChapters: each chapter in the translation's words (same ids); a chapter the translation
+    """engine/app/library.js translatedChapters: each chapter in the translation's words (same ids); a chapter the translation
     lacks — or whose sections differ — stays as it is."""
     tr = {c.get('id'): c for c in tchs or []}; out = []
     for c in chapters:

@@ -115,7 +115,7 @@ are the learning log (`src/composition/learning.ts`).
 
 | Root | Built to | What it picks |
 |---|---|---|
-| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`), the data contracts (`NoemaCore.contracts`) and the content checks (`NoemaCore.content`, `src/features/content`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
+| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`, its code in the lazy `build/engines.js`), the data contracts (`CONTRACTS`, `NoemaCore.contracts`, the validators in `build/contracts.js`; §6.1) and the content checks (`NoemaCore.content`, `src/features/content`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
 | `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines, content }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
 | `noema-tools.ts` | `build/noema-tools.cjs` (Node, CommonJS) | the content checks with the contracts and the engine library, and the runtimes' package checkers (`engine/src/38`, `44`, `45`) run in a scope of their own: the one bridge of the Python tools and the skill's scripts (`tools/noema_core.py`; commands `validate`, `check-pack`, `rules`, `batch`) |
 | `ui.ts` → `ui-root.ts` | `build/ui.js` (IIFE, kind `dev`: not in the site or the one-file bundle) | the I18n port over `engine/i18n.js`, the system clock, the device storage for the demo's appearance, the Notifier policy over the frame's toaster; mounts the frame and the kit's demo for `#/ui-kit` (§6.3) |
@@ -195,7 +195,7 @@ types: an activity's saved state, a section opened, a setting). On each open the
 the old places (`s:<subject>:state`, `a:stats`, the first time `a:settings`): the old texts are archived in the log's meta, the
 events are added (their ids are made from their content, so converting twice adds nothing), then the old keys leave the
 key-value store. `a:settings` stays the old screens' copy: what they write there becomes `setting.changed` events
-(`engine/loader.js`) and the copy follows the log. Backups (version 3) carry the events. Cards and drills fold as the read
+(the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js)) and the copy follows the log. Backups (version 3) carry the events. Cards and drills fold as the read
 models fold them (FSRS-6 replayed on the imported schedule with the learner's `fsrs` setting; a change of it schedules every
 card again). Events are stamped by the sync's device clock (`DEVICE_CLOCK`); the log fills the seams of the other features
 (`src/composition/learning.ts` `learningSeams`): `STUDY_EVENTS` (the read models' feed, which merges the imports the way the
@@ -245,22 +245,34 @@ moved behind the bridge:
   `NoemaLib<Engine>`) and their page scripts `engine/src/35_simexpr.js`, `36_engine_circuit*.js`, `39–42_engine_*.js`,
   `43_engines_p6.js`, `46–49_lib_*.js`: they are `NoemaCore.engines` now (§6.1).
 
-### 6.1 Engines in the app bundle
+### 6.1 Engines and contracts out of the start path
 
 Every engine of sim-spec@1 is an ES module in `src/engines/<name>/` and a plugin of the microkernel (`src/plugins`: a manifest
-with its capabilities, a lazy entry, a lazy Worker bundle; `src/engines/plugins.ts` lists them). `tools/esbuild.mjs` puts the
-whole library into `build/app.js`; its plugin `noemaWorkers` turns `noema-worker:<module>#<export>` into the engine's Worker
-bundle as text, with the kernels several engines share built once.
+with its capabilities, a lazy entry, a lazy Worker bundle; `src/engines/plugins.ts` lists them). `tools/esbuild.mjs` builds the
+library; its plugin `noemaWorkers` turns `noema-worker:<module>#<export>` into the engine's Worker bundle as text, with the
+kernels several engines share built once.
 
-**Lazy, inside one IIFE.** The app bundle must stay a classic IIFE (it runs before the old scripts, and the one-file bundle opens
-from `file://`, where neither module scripts nor fetched chunks load), so esbuild inlines every `import()`. That still keeps the
-start cost low: each engine module is wrapped in a lazy initialiser that runs only when `NoemaCore.engines.load()` first asks for
-that engine (an activity before it mounts, the content checks before they check a pack that names it, the author before its forms), and
-each Worker bundle is a string literal, which the page parses but never compiles until a Worker runs it. At start the page builds
-only the 26 manifests. The alternative, one file per engine fetched on demand, was rejected: it cannot work in the one-file
-bundle or from `file://`, so it would need a second loading path for the same code. The cost is the download (about 3.6 MB of
-the 5 MB `build/app.js`, 1.4 MB of its gzip), cached by the service worker. When phase 3 makes the app an ES module, turning on
-`splitting` in `tools/esbuild.mjs` makes those `import()`s real chunks with no change in `src/engines`.
+**Lazy pieces.** The start path of the page is `build/app.js` (about 470 KB, 133 KB gzipped: the core, the expression
+language, the catalogue and the 26 manifests of `src/engines/manifests.ts`; phase 2's learning log, sync, read models, Roadmaps
+and community, about 330 KB; and the learning log's event contract, about 140 KB) and `build/ui.js` (the frame and the shell's
+screens: about 240 KB). Two pieces of kind `lazy` stay out of it:
+
+| piece | entry | what | when it runs |
+|---|---|---|---|
+| `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, the content checks before they check a pack that names an engine, the author |
+| `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) and the content checks built on them (`src/features/content`, about 120 KB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`, which brings both), after the first screen on Today, and before the Roadmaps start their jobs; a check before that is a bug and throws (`src/contracts/lazy.ts`, `src/features/content/application/lazy.ts`) |
+
+The learning log checks every event it reads or makes, and it opens before the first screen: its contract
+(`noema.events.v1#event`, `tools/contracts.mjs` `START_CONTRACTS`) is compiled a second time into
+`src/contracts/validate-start.ts`, and `build/app.js` and `build/ui.js` bundle `src/contracts/page.ts` in place of
+`src/contracts/index.ts` (the esbuild plugin `pageContracts`): that contract at once, every other one from the piece.
+
+A piece is a classic script: the page adds it as `<script src>` next to `build/app.js` (`pieceLoader` in
+`src/composition/browser.ts`), and the one-file bundle carries it as text (`<script type="text/plain" id="noema-lazy:<name>">`,
+`tools/build.py`) and runs that, so the same path works from `file://`. The piece hands its module over on
+`globalThis.__noema<Name>Piece`. A failed load (offline before the service worker has cached it) is tried again on the next ask.
+`tools/esbuild.mjs` holds `build/app.js` to 480 KB, so a change that pulls the engines or the validators back into the start
+path fails the build. `build/harness.js` (one activity without the app) and the Node bundles keep the whole library inline.
 
 **Exact arithmetic.** No bundle is minified with `minifySyntax` (whitespace and names only): the engines must compute every
 double as their source writes it, bit for bit with the golden outputs of their former Python twins (`tests/fixtures/parity/`).
@@ -289,10 +301,21 @@ on a token colour or a token colour as text without such a pair.
 - the surface only grows (a new name, never a changed meaning);
 - `version` goes up when a name is removed.
 
-### 6.3 The UI foundation
+### 6.3 The UI foundation and the app's root
 
-`src/ui/` is the new UI's foundation in Lit (`lit` 3.3.3): the parts every phase-3 screen is built from. Nothing of the old
-UI is replaced yet; a screen moves over when its feature does.
+`src/ui/` is the new UI's foundation in Lit (`lit` 3.3.3): the parts every phase-3 screen is built from. The app's root is
+`build/ui.js` (`src/composition/ui.ts` → `ui-root.ts`, kind `page`), loaded right after `engine/i18n.js`. It publishes the
+bridge's UI half and starts the app:
+
+| Part | Where | What |
+|---|---|---|
+| `window.Noema` | `src/composition/shell/core.ts` | the profiles, the timed key/value store, the stats, the Gemini key (this device only), the app's IndexedDB, backups and restore points, the auto-backup, the 🔔 news of this device, the start's overlays |
+| `window.NoemaThemes` | `src/composition/shell/themes.ts` over `src/features/shell/domain/characters.ts` | the characters on the tokens: the 5-minute try, free changes for 15 days, then one every 5 days |
+| `window.NoemaShell` | `src/composition/shell/host.ts`, `src/ui/screens/shell/` | the frame (`noema-shell-frame`), the router over every hash route (`routes.ts`), Today, Progress, Settings, the character gallery, the Me menu, the first-time questions, the profile picker; the toolkit the areas draw their pages with |
+| the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage`, their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
+
+`NoemaCore.notify` draws on the kit's toaster once the root has started (`NoemaCore.toasts.use`); what does not fit goes to
+the 🔔. With `config.shell: false` the classic screens run without the frame (the older browser suites use them).
 
 | Folder | Holds |
 |---|---|
@@ -310,9 +333,10 @@ The rules:
   least 24 × 24 px; nothing scrolls sideways at 320 px; logical properties and the `--u-flip` switch mirror right to left.
 - **Look.** Only the tokens (`engine/tokens.css`), pale surfaces, few and short animations (`data-motion="reduced"` and the
   system setting stop them).
-- **Loading.** The bundle `build/ui.js` is kind `dev`: `engine/loader.js` adds it only for `#/ui-kit` on localhost, so the
-  start screen never loads it. Phase 3's shell makes it a `page` entry and its root the app's root.
-- **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-root.test.ts`, and in a
+- **Loading.** `build/ui.js` is on the start path (with `build/app.js`, §6.1); the kit's demo `build/ui-kit.js` is kind `dev`:
+  the root adds it only for `#/ui-kit` on localhost.
+- **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-kit-root.test.ts`,
+  `src/features/shell/domain/domain.test.ts`, `src/composition/shell/kv.test.ts`, `src/ui/screens/shell/routes.test.ts`, and in a
   browser `tests/ui_kit.js` (layout, targets, focus, form association, right to left) and `tests/a11y.js` (axe).
 
 ## 7. Patterns
@@ -376,6 +400,6 @@ The rules:
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui.js` (development only, §6.3), `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the pieces `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

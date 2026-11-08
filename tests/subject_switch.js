@@ -1,4 +1,4 @@
-/* Opening another subject while one is open (engine/loader.js switchTo): the page reloads on the new one.
+/* Opening another subject while one is open (window.Noema.switchTo, src/composition/shell/core.ts): the page reloads on the new one.
    Over a real network the reload takes a moment, and the old page still handles its hashchange meanwhile;
    it must not write the old subject back as the one to reopen (bug of 2026-10-22: every course opened the last one).
    Served over http with a slow index.html, so the race happens as it does on the site.

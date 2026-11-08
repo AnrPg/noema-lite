@@ -8,7 +8,12 @@ import { fileURLToPath } from 'node:url';
 import { LOCALES, uiCatalogs } from './services.ts';
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
-const SRC = [join(ROOT, 'src/ui'), join(ROOT, 'src/composition/ui-root.ts')];
+const SRC = [
+  join(ROOT, 'src/ui'),
+  join(ROOT, 'src/composition/ui-kit-root.ts'),
+  join(ROOT, 'src/composition/ui-root.ts'),
+  join(ROOT, 'src/composition/shell'),
+];
 
 function files(p: string): string[] {
   if (statSync(p).isFile()) return [p];

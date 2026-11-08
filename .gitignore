@@ -50,3 +50,4 @@ tools/vault_fields/.cache/
 # generated from src/contracts/schemas by npm run contracts (tools/contracts.mjs)
 src/contracts/generated/
 src/contracts/validate.ts
+src/contracts/validate-start.ts

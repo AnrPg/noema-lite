@@ -13,7 +13,7 @@ can overwrite what another one did.
 | the tokens, the registration, the phase bridge `NoemaCore.sync` | `src/composition/sync.ts` |
 | the cloud side: `noema_events`, `noema_settings`, their read functions | `cloud/supabase.sql` §19 |
 | the key/value channel (curricula, language courses, records, the entry tables, conversations) | `engine/cloud.js` |
-| the "in use" card, the start | `engine/loader.js` |
+| the "in use" card, the start | the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js) |
 | the open subject takes in what changed under it | `engine/src/10_core.js` (`noema:remote`) |
 
 ## What travels how
@@ -131,7 +131,7 @@ every 30 s while the tab is used and released when the tab is hidden or closed.
   pulls; the open page reads again what changed under it (`noema:remote`, every key of the account after a takeover,
   because another tab of the same browser may have written it).
 * Is it in use right now? This one shows **"Noema is open on iPhone · Safari"** with one **Use here** button
-  (`engine/loader.js`). Nothing is saved on the waiting device (`Noema.kv.frozen`) and its loop is paused; it looks again
+  (the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js)). Nothing is saved on the waiting device (`Noema.kv.frozen`) and its loop is paused; it looks again
   every 10 s while it is shown. "Use here" takes the lease anyway, which pauses the other device (same card) and brings its
   work here. The paused device carries on by itself once the other one is put away.
 * Two tabs writing the row at once: one wins, the other reads again (at most twice, then it waits).

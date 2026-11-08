@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import { memoryStorage } from '../adapters/memory/storage.ts';
 import { memoryHash } from '../ui/router/router.ts';
 import { settle, testServices } from '../ui/test/services.ts';
-import { APPEARANCE_KEY, loadAppearance, startUiKit } from './ui-root.ts';
+import { APPEARANCE_KEY, loadAppearance, startUiKit } from './ui-kit-root.ts';
 
 test('the kit in its frame: sections from the hash, the unknown corrected, leaving reloads, the appearance kept', async () => {
   const s = testServices();

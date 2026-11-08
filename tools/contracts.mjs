@@ -13,6 +13,10 @@
                                               and the message index the error formatter reads (x-message); the app
                                               (build/app.js: NoemaCore.contracts), the connector and the Node tools
                                               (build/noema-tools.cjs, which the Python tools call) bundle it
+     src/contracts/validate-start.ts          the same, for the contracts the app's page checks before its validators are
+                                              in (START_CONTRACTS: the learning log's events, checked when the log
+                                              opens): build/app.js holds these few, build/contracts.js all of them
+                                              (src/contracts/page.ts)
 
    Checks while it builds: every file is draft 2020-12 with a stable versioned $id
    (https://noema-lite.netlify.app/schemas/noema.<name>.v<N>.schema.json, the file's own name), every schema compiles in
@@ -76,6 +80,22 @@ function compiledForm(x, base) {
       o[k] = m ? defId(file, m[1]) : frag ? `${file}#${frag}` : file;
     } else if (k === '$defs' || k === 'properties' || k === 'patternProperties') o[k] = Object.fromEntries(Object.entries(v).map(([n, y]) => [n, compiledForm(y, base)]));
     else o[k] = VALUE.has(k) ? v : compiledForm(v, base);
+  }
+  return o;
+}
+
+/** The contracts the page needs at its start (src/contracts/page.ts): the learning log checks every event it reads or
+    makes against the first, and the log opens before the first screen. */
+export const START_CONTRACTS = ['noema.events.v1#event'];
+/** a schema without its words for people (description, title, $comment, examples): the standalone code embeds the
+    schema objects it reads, and the page's copy needs only what validates (x-message stays: the formatter's words) */
+function bare(x) {
+  if (Array.isArray(x)) return x.map(bare);
+  if (!x || typeof x !== 'object') return x;
+  const o = {};
+  for (const [k, v] of Object.entries(x)) {
+    if (k === 'description' || k === 'title' || k === '$comment' || k === 'examples') continue;
+    o[k] = (k === 'properties' || k === '$defs' || k === 'patternProperties') ? Object.fromEntries(Object.entries(v).map(([n, y]) => [n, bare(y)])) : VALUE.has(k) ? v : bare(v);
   }
   return o;
 }
@@ -232,7 +252,13 @@ async function main() {
     mods.map(([n, f]) => `export type * as ${ns(n)} from './${f}';`).join('\n') + '\n');
   const vpath = path.join(DIR, 'validate.ts');
   fs.writeFileSync(vpath, validatorsModule(schemas, code, list));
-  console.log(`contracts: wrote src/contracts/generated/ (${mods.length} modules), src/contracts/validate.ts`);
+  const start = list.filter(e => START_CONTRACTS.includes(e.key));
+  if (start.length !== START_CONTRACTS.length) throw new Error(`START_CONTRACTS names a contract that does not exist: ${START_CONTRACTS.join(', ')}`);
+  const startSchemas = schemas.filter(s => start.some(e => e.ref.startsWith(s.id)));
+  const startAjv = makeAjv(startSchemas.map(s => ({ ...s, schema: bare(s.schema) })), { code: { source: true, esm: true } });
+  const startCode = standalone(startAjv, Object.fromEntries(start.map((e, i) => [`v${i}`, entryId(e)])));
+  fs.writeFileSync(path.join(DIR, 'validate-start.ts'), validatorsModule(startSchemas, startCode, start));
+  console.log(`contracts: wrote src/contracts/generated/ (${mods.length} modules), src/contracts/validate.ts, src/contracts/validate-start.ts`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(e => { console.error('✗ contracts:', e.message); process.exit(1); });

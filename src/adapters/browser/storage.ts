@@ -50,7 +50,7 @@ export interface BrowserStorageOptions {
   readonly now?: () => number;
 }
 
-/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once; also
+/** The app's IndexedDB as the UI root opens it (src/composition/shell/core.ts IDB: same name, version and stores, so both can use it at once; also
     engine/lang/95_claude.js). Version 2 added `sync` (the outbox, the settings registers and the sync cursors:
     src/features/sync); version 3 the learning log (log.events, log.ids, log.snapshots, log.meta:
     src/adapters/local/event-store.ts), so an event and its place in the outbox are written in one transaction. */
