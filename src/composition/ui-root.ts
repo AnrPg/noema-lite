@@ -761,7 +761,7 @@ export function createApp(win: Window = window): App {
   themes.onChange(() => {
     bar.ctx = shell.ctx();
     bar.data = settingsData();
-    bar.requestUpdate();
+    if (win.customElements.get('noema-preview-bar')) bar.requestUpdate(); // (the first apply runs before the elements are defined)
   });
 
   /* ---------- Me ▾ ---------- */
@@ -863,6 +863,7 @@ export function createApp(win: Window = window): App {
     const a = found ?? (accs.length === 1 && !cur.loggedOut && accs[0] ? accs[0] : await pickAccount());
     N.kv.acc = a.id;
     N.account = a;
+    N.geminiKey.migrate(a.id); // before the first pull, so a synced a:settings never replaces the only copy of the key
     if (a.kind === 'cloud' && C) await race(C.pull(a.id), 7000).catch(core.errors.catcher('loader.cloud.pull', { severity: 'warning' })); // else: the local cache
     if (I18) {
       const st = settings();

@@ -104,7 +104,9 @@ export function createThemes(host: ThemesHost) {
     if (!acc) return;
     const k = `${P}${acc}:a:settings`;
     const gone = new Set(Object.keys(patch).filter(x => patch[x] === undefined));
-    const s: Settings = Object.fromEntries(Object.entries({ ...(jsonOf<Settings | null>(host.kv, k, {}) || {}), ...patch }).filter(([x]) => !gone.has(x)));
+    const s: Settings = Object.fromEntries(
+      Object.entries({ ...(jsonOf<Settings | null>(host.kv, k, {}) || {}), ...patch }).filter(([x]) => !gone.has(x)),
+    );
     host.write(k, JSON.stringify(s));
     const live = (globalThis as { S?: { settings?: Settings } }).S; // the open engine's copy of the settings
     if (live?.settings) Object.assign(live.settings, patch);

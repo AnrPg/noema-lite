@@ -7,7 +7,8 @@ export type Kid = Node | string | number | null | undefined | false | readonly K
 export type Attrs = Record<string, unknown>;
 
 /** a value as text: strings and numbers as they are, anything else as JSON */
-const text = (v: unknown): string => (typeof v === 'string' ? v : typeof v === 'number' || typeof v === 'boolean' ? String(v) : JSON.stringify(v));
+const text = (v: unknown): string =>
+  typeof v === 'string' ? v : typeof v === 'number' || typeof v === 'boolean' ? String(v) : JSON.stringify(v);
 
 export function h(tag: string, attrs?: Attrs | null, ...kids: Kid[]): HTMLElement {
   const e = document.createElement(tag);
@@ -39,7 +40,10 @@ export function guardDom(): void {
       const orig = proto[fn] as ((...xs: unknown[]) => unknown) & { __noemaGuard?: boolean };
       if (typeof orig !== 'function' || orig.__noemaGuard) continue;
       const guarded = function (this: unknown, ...xs: unknown[]) {
-        return orig.apply(this, xs.filter(x => x != null && x !== false));
+        return orig.apply(
+          this,
+          xs.filter(x => x != null && x !== false),
+        );
       } as ((...xs: unknown[]) => unknown) & { __noemaGuard?: boolean };
       guarded.__noemaGuard = true;
       proto[fn] = guarded;
@@ -82,7 +86,12 @@ export interface DomKit {
 }
 
 /** A pop-over list of actions under (or over) its button, kept on the screen; ↑ ↓ move between its items. */
-export function popMenu(kit: DomKit, anchor: HTMLElement, items: readonly MenuEntry[], { down = true }: { down?: boolean } = {}): HTMLElement {
+export function popMenu(
+  kit: DomKit,
+  anchor: HTMLElement,
+  items: readonly MenuEntry[],
+  { down = true }: { down?: boolean } = {},
+): HTMLElement {
   const list = items.filter((x): x is MenuItem | '-' => !!x);
   const pop = h(
     'div',
@@ -103,7 +112,13 @@ export function popMenu(kit: DomKit, anchor: HTMLElement, items: readonly MenuEn
                 else it.run?.(e);
               },
             },
-            it.icon ? h('span', { class: 'mi' }, typeof it.icon === 'string' && it.icon.length > 2 && kit.hasIcon(it.icon) ? kit.svg(it.icon) : it.icon) : null,
+            it.icon
+              ? h(
+                  'span',
+                  { class: 'mi' },
+                  typeof it.icon === 'string' && it.icon.length > 2 && kit.hasIcon(it.icon) ? kit.svg(it.icon) : it.icon,
+                )
+              : null,
             h('span', { class: 'mt' }, it.label, it.sub ? h('small', {}, it.sub) : null),
             it.badge ? kit.pill(it.badge, it.tone ?? 1) : null,
           ),
@@ -162,7 +177,13 @@ export function popMenu(kit: DomKit, anchor: HTMLElement, items: readonly MenuEn
 export function menuButton(
   kit: DomKit,
   items: readonly MenuEntry[] | (() => readonly MenuEntry[]),
-  { label, cls = 'ns-iconbtn', content = null, down = true, dot = false }: { label: string; cls?: string; content?: Node | null; down?: boolean; dot?: boolean },
+  {
+    label,
+    cls = 'ns-iconbtn',
+    content = null,
+    down = true,
+    dot = false,
+  }: { label: string; cls?: string; content?: Node | null; down?: boolean; dot?: boolean },
 ): HTMLElement {
   const b: HTMLElement = h(
     'button',
@@ -220,7 +241,10 @@ export function tipped<E extends HTMLElement>(el: E, text: string): E {
       r = tip.getBoundingClientRect();
     let y = a.top - r.height - 8;
     if (y < 8) y = a.bottom + 8;
-    Object.assign(tip.style, { left: `${String(Math.max(8, Math.min(innerWidth - r.width - 8, a.left + a.width / 2 - r.width / 2)))}px`, top: `${String(y)}px` });
+    Object.assign(tip.style, {
+      left: `${String(Math.max(8, Math.min(innerWidth - r.width - 8, a.left + a.width / 2 - r.width / 2)))}px`,
+      top: `${String(y)}px`,
+    });
   };
   for (const [k, f] of [
     ['mouseenter', show],

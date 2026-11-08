@@ -1,6 +1,6 @@
-/* The token set of every character (engine/themes.js: one character = one theme and its mascot): its palette in light and dark,
+/* The token set of every character (src/features/shell/domain/characters.ts: one character = one theme and its mascot): its palette in light and dark,
    its typography and its shape. The order is the gallery's (animals, fairy tales, grown-up); who is in which group and how
-   playful each one is stay in engine/themes.js, the words in i18n/characters/. */
+   playful each one is stay in the shell's domain, the words in i18n/characters/. */
 import type { CharacterTokens } from './types.ts';
 
 export const CHARACTERS = {

@@ -113,7 +113,9 @@ class SettingsBase extends ShellElement {
 /** #/me: the account's settings */
 export class NoemaSettings extends SettingsBase {
   #item(icon: TemplateResult, title: string, sub: string, run: () => void): TemplateResult {
-    return html`<button class="ns-item" @click=${run}>${icon}<span class="t"><b>${title}</b>${sub ? html`<small>${sub}</small>` : nothing}</span>${this.chev()}</button>`;
+    return html`<button class="ns-item" @click=${run}>
+      ${icon}<span class="t"><b>${title}</b>${sub ? html`<small>${sub}</small>` : nothing}</span>${this.chev()}
+    </button>`;
   }
   protected override firstUpdated(): void {
     const out = this.querySelector<HTMLElement>('.ns-logout');
@@ -132,9 +134,11 @@ export class NoemaSettings extends SettingsBase {
         : `${tutor} · ${d.canChange() ? this.L('canChange') : this.L('nextChange', { date: d.date(d.nextChangeAt()) })}`;
     const go = (h: string) => () => this.ctx?.go(h);
     return html`<div class="ns-hello">
-        ${d.avatar
-          ? html`<img class="ns-avatar big" src=${d.avatar} alt="" />`
-          : html`<span class="ns-me ns-avatar big" data-emoji="1">${d.emoji}</span>`}
+        ${
+          d.avatar
+            ? html`<img class="ns-avatar big" src=${d.avatar} alt="" />`
+            : html`<span class="ns-me ns-avatar big" data-emoji="1">${d.emoji}</span>`
+        }
         <div class="grow">
           <h1>${this.L('settings')}</h1>
           <p class="tiny">${[d.name, d.sub].filter(Boolean).join(' · ')}</p>
@@ -162,12 +166,28 @@ export class NoemaSettings extends SettingsBase {
         ${this.#item(this.ico('user', 4), this.L('profile'), this.L('profileSub'), go('#/me/profile'))}
         ${this.#item(this.ico('spark', 2), this.L('aiTitle'), this.L('aiSub'), go('#/me/ai'))}
         ${this.#item(this.ico('palette', 4), this.L('look'), this.L('lookSub', { lang: d.localeName() }), go('#/me/look'))}
-        ${this.#item(this.ico('clock', 1), this.L('activity'), this.L('activitySub'), () => { d.activity(); })}
+        ${this.#item(this.ico('clock', 1), this.L('activity'), this.L('activitySub'), () => {
+          d.activity();
+        })}
         ${this.#item(this.ico('cloud', 1), this.L('data'), this.L('dataSub'), go('#/me/data'))}
       </div>
       <div class="ns-fitrow">
-        <button class="btn small" @click=${() => { d.switchProfile(); }}>${this.icon('user')}${this.L('switchProfile')}</button>
-        <button class="btn small ns-logout" @click=${() => { d.logOut(); }}>${this.icon('logout')}${this.L('logOut')}</button>
+        <button
+          class="btn small"
+          @click=${() => {
+            d.switchProfile();
+          }}
+        >
+          ${this.icon('user')}${this.L('switchProfile')}
+        </button>
+        <button
+          class="btn small ns-logout"
+          @click=${() => {
+            d.logOut();
+          }}
+        >
+          ${this.icon('logout')}${this.L('logOut')}
+        </button>
       </div>`;
   }
 }
@@ -250,7 +270,13 @@ export class NoemaLook extends SettingsBase {
         ).map(
           ([k, def, label]) =>
             html`<label class="row ns-check"
-              ><input type="checkbox" ?checked=${flag(k, def)} @change=${(e: Event) => { d.put({ [k]: (e.target as HTMLInputElement).checked }); }} />${label}</label
+              ><input
+                type="checkbox"
+                ?checked=${flag(k, def)}
+                @change=${(e: Event) => {
+                  d.put({ [k]: (e.target as HTMLInputElement).checked });
+                }}
+              />${label}</label
             >`,
         )}
         <label class="row ns-check"
@@ -262,7 +288,9 @@ export class NoemaLook extends SettingsBase {
             style="width:110px"
             aria-label=${this.L('dailyGoal')}
             .value=${String((s['goal'] as number | undefined) || 120)}
-            @change=${(e: Event) => { d.put({ goal: Math.max(20, Number((e.target as HTMLInputElement).value) || 120) }); }}
+            @change=${(e: Event) => {
+              d.put({ goal: Math.max(20, Number((e.target as HTMLInputElement).value) || 120) });
+            }}
           />${this.L('dailyGoal')}</label
         >
       </section>
@@ -309,8 +337,10 @@ export class NoemaCharacters extends SettingsBase {
           : this.L('changedOn', { date: d.date(d.changedAt()), next: d.date(d.nextChangeAt()) });
     const sample = this.L('fontSample'); // “Aa” + a greeting in the UI language: how each font looks
     const groups = d.groups();
-    return html`<div><span class="ns-label">${this.L('companion')}</span>
-        <h1>${this.L('character')}</h1></div>
+    return html`<div>
+        <span class="ns-label">${this.L('companion')}</span>
+        <h1>${this.L('character')}</h1>
+      </div>
       <p class="ns-muted">${this.L('characterIntro')}</p>
       <p class="tiny">${rule}</p>
       ${GROUPS.map(g =>
@@ -326,32 +356,36 @@ export class NoemaCharacters extends SettingsBase {
                 <span class="tiny">${k.title} · ${k.world}</span>
                 <span class="sws">${[1, 2, 3, 4, 5].map(i => html`<i style=${`background:var(--swatch${String(i)})`}></i>`)}</span>
                 <span class="fs">${sample}</span>
-                ${cur || locked
-                  ? nothing
-                  : html`<div class="row">
-                      <button
-                        class="btn small soft"
-                        data-try=${k.id}
-                        @click=${() => {
-                          d.startPreview(k.id);
-                          d.toast(this.L('tryingNow', { tutor: k.tutor }), 2500);
-                        }}
-                      >
-                        ${this.L('try5')}
-                      </button>
-                      ${!d.chosen() || can
-                        ? html`<button
-                            class="btn small"
-                            data-choose=${k.id}
-                            @click=${() => {
-                              d.choose(k.id);
-                              d.celebrate(this.L('welcomeWorld'));
-                            }}
-                          >
-                            ${this.L('choose')}
-                          </button>`
-                        : nothing}
-                    </div>`}
+                ${
+                  cur || locked
+                    ? nothing
+                    : html`<div class="row">
+                        <button
+                          class="btn small soft"
+                          data-try=${k.id}
+                          @click=${() => {
+                            d.startPreview(k.id);
+                            d.toast(this.L('tryingNow', { tutor: k.tutor }), 2500);
+                          }}
+                        >
+                          ${this.L('try5')}
+                        </button>
+                        ${
+                          !d.chosen() || can
+                            ? html`<button
+                                class="btn small"
+                                data-choose=${k.id}
+                                @click=${() => {
+                                  d.choose(k.id);
+                                  d.celebrate(this.L('welcomeWorld'));
+                                }}
+                              >
+                                ${this.L('choose')}
+                              </button>`
+                            : nothing
+                        }
+                      </div>`
+                }
               </div>`;
             })}
           </div>`,
@@ -384,7 +418,14 @@ export class NoemaPreviewBar extends SettingsBase {
           }}
         >
           ${this.L('keepIt')}</button
-        ><button class="btn small" @click=${() => { d.endPreview(); }}>${this.L('endTry')}</button></span
+        ><button
+          class="btn small"
+          @click=${() => {
+            d.endPreview();
+          }}
+        >
+          ${this.L('endTry')}
+        </button></span
       >
       ${can ? nothing : html`<span class="tiny full">${this.L('keepFrom', { date: d.date(d.nextChangeAt()) })}</span>`}
     </div>`;
@@ -430,13 +471,31 @@ export class NoemaOnboarding extends SettingsBase {
         <div class="ns-modal ns-onb" role="dialog" aria-modal="true" aria-labelledby="ns-onb-title" data-sticky="1">
           ${this.face(undefined, 'breathe')}
           <h1 class="center" id="ns-onb-title">${this.L('onbWhat')}</h1>
-          <button class="ns-choice" data-pick="know" @click=${() => { this.#pick('know'); }}>
+          <button
+            class="ns-choice"
+            data-pick="know"
+            @click=${() => {
+              this.#pick('know');
+            }}
+          >
             ${this.ico('path', 1)}<span><b>${this.L('knowledge')}</b><small>${this.L('onbKnow')}</small></span>
           </button>
-          <button class="ns-choice" data-pick="lang" @click=${() => { this.#pick('lang'); }}>
+          <button
+            class="ns-choice"
+            data-pick="lang"
+            @click=${() => {
+              this.#pick('lang');
+            }}
+          >
             ${this.icoTxt('文A', 3)}<span><b>${this.L('languages')}</b><small>${this.L('onbLang')}</small></span>
           </button>
-          <button class="ns-choice" data-pick="both" @click=${() => { this.#pick('both'); }}>
+          <button
+            class="ns-choice"
+            data-pick="both"
+            @click=${() => {
+              this.#pick('both');
+            }}
+          >
             ${this.ico('star', 2)}<span><b>${this.L('both')}</b><small>${this.L('onbBoth')}</small></span>
           </button>
           <p class="tiny center">${this.L('onbChangeLater')}</p>
@@ -471,9 +530,16 @@ export class NoemaOnboarding extends SettingsBase {
             ),
           )}
         </div>
-        <button class="btn primary" data-onbdone="1" @click=${() => { this.#finish(); }}>${this.L('onbGo')}</button>
+        <button
+          class="btn primary"
+          data-onbdone="1"
+          @click=${() => {
+            this.#finish();
+          }}
+        >
+          ${this.L('onbGo')}
+        </button>
         <p class="tiny center">${this.L('onbWhoLater')}</p>
       </div>`;
   }
 }
-

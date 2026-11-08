@@ -3,7 +3,7 @@
  *
  *  • toast(text)  — a short message that fades (a status, not announced by screen readers).
  *  • notice(text) — a piece of news (a step ready, links added): a toast while at most two are on screen; a third moves
- *    them all to the overflow listeners (the 🔔 bell, engine/loader.js), so toasts never stack up over the page.
+ *    them all to the overflow listeners (the 🔔 bell, src/composition/ui-root.ts), so toasts never stack up over the page.
  *  • alert(text)  — something the learner must not miss (the storage is full): a long toast AND an assertive live region,
  *    so screen readers announce it at once, the same text again when it repeats.
  */

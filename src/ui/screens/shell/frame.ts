@@ -145,9 +145,9 @@ export class NoemaShellFrame extends ShellElement {
       data-tab=${t.key}
       @click=${() => this.emit('shell-go', t.href)}
     >
-      <span class="i2">${t.text ? html`<span class="ns-tx">${t.icon}</span>` : this.icon(t.icon)}</span><span class="lb">${t.label}</span>${people
-        ? html`<span class="bellbadge" style=${n ? '' : 'display:none'}>${n || ''}</span>`
-        : nothing}
+      <span class="i2">${t.text ? html`<span class="ns-tx">${t.icon}</span>` : this.icon(t.icon)}</span><span class="lb">${t.label}</span>${
+        people ? html`<span class="bellbadge" style=${n ? '' : 'display:none'}>${n || ''}</span>` : nothing
+      }
     </button>`;
   }
 
@@ -164,7 +164,9 @@ export class NoemaShellFrame extends ShellElement {
     return html`
       <div class="ns-land" aria-hidden="true">${unsafeHTML(art?.land(ch) ?? '')}</div>
       ${p?.preview ?? nothing}
-      <button class="ns-brand" aria-label=${this.L('today')} @click=${() => this.emit('shell-go', '#/')}>${unsafeHTML(art?.mascot(ch) ?? '')}</button>
+      <button class="ns-brand" aria-label=${this.L('today')} @click=${() => this.emit('shell-go', '#/')}>
+        ${unsafeHTML(art?.mascot(ch) ?? '')}
+      </button>
       <header class="ns-top" id="ns-top" @click=${this.#guard}>
         <button class=${'ns-back' + (m.back ? ' on' : '')} aria-label=${this.L('back')} @click=${() => this.emit('shell-back')}>←</button>
         <nav class="ns-crumbs" aria-label=${this.L('where')}>${crumbs}</nav>
@@ -201,9 +203,9 @@ export class NoemaShellFrame extends ShellElement {
             this.emit('shell-me', { anchor: e.currentTarget, rail: false });
           }}
         >
-          <span class="ns-meemo">${m.me.emoji}</span>${m.sync
-            ? html`<i class=${'syncdot ' + m.sync.state} id="syncdot" title=${m.sync.title}></i>`
-            : nothing}
+          <span class="ns-meemo">${m.me.emoji}</span>${
+            m.sync ? html`<i class=${'syncdot ' + m.sync.state} id="syncdot" title=${m.sync.title}></i>` : nothing
+          }
         </button>
       </header>
       ${p?.share ?? nothing}
@@ -218,24 +220,25 @@ export class NoemaShellFrame extends ShellElement {
           this.emit('shell-me', { anchor: e.currentTarget, rail: true });
         }}
       >
-        <span class="ns-me"><span class="ns-meemo">${m.me.emoji}</span></span><span class="ns-mename" title=${m.me.name}
-          >${m.me.name || this.L('me')}</span
-        >
+        <span class="ns-me"><span class="ns-meemo">${m.me.emoji}</span></span
+        ><span class="ns-mename" title=${m.me.name}>${m.me.name || this.L('me')}</span>
       </button>
-      ${m.report
-        ? html`<button
-            class=${'ns-railreport nr-skip' + (m.reportDot ? ' has-dot' : '')}
-            id="ns-report"
-            title=${this.t('report.buttonTip')}
-            aria-label=${this.t('report.button')}
-            @click=${(e: Event) => {
-              e.stopPropagation();
-              this.emit('shell-report');
-            }}
-          >
-            ${this.icon('report')}<i class="ns-dot" aria-hidden="true"></i>
-          </button>`
-        : nothing}
+      ${
+        m.report
+          ? html`<button
+              class=${'ns-railreport nr-skip' + (m.reportDot ? ' has-dot' : '')}
+              id="ns-report"
+              title=${this.t('report.buttonTip')}
+              aria-label=${this.t('report.button')}
+              @click=${(e: Event) => {
+                e.stopPropagation();
+                this.emit('shell-report');
+              }}
+            >
+              ${this.icon('report')}<i class="ns-dot" aria-hidden="true"></i>
+            </button>`
+          : nothing
+      }
       ${p?.main ?? nothing}
       <button
         class="ns-fab full"

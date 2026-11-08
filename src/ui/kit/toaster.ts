@@ -142,25 +142,27 @@ export class NoemaToaster extends NoemaElement {
 
   override render(): TemplateResult {
     // .toasts and .toast: the names the app's toasts always had (the browser suites find them by these)
-    return html`<div class="toasts">${repeat(
-        this.#items,
-        x => x.id,
-        x =>
-          html`<div class="t toast ${x.kind}" role=${x.kind === 'notice' ? 'status' : 'none'}>
-            ${x.kind === 'alert' ? icon('alert') : ''}<span>${x.text}</span>
-            <button
-              class="ctl x"
-              type="button"
-              aria-label=${this.t('ui.toast.dismiss')}
-              title=${this.t('ui.toast.dismiss')}
-              @click=${() => {
-                this.#drop(x);
-              }}
-            >
-              ${icon('close')}
-            </button>
-          </div>`,
-      )}</div>
+    return html`<div class="toasts">
+        ${repeat(
+          this.#items,
+          x => x.id,
+          x =>
+            html`<div class="t toast ${x.kind}" role=${x.kind === 'notice' ? 'status' : 'none'}>
+              ${x.kind === 'alert' ? icon('alert') : ''}<span>${x.text}</span>
+              <button
+                class="ctl x"
+                type="button"
+                aria-label=${this.t('ui.toast.dismiss')}
+                title=${this.t('ui.toast.dismiss')}
+                @click=${() => {
+                  this.#drop(x);
+                }}
+              >
+                ${icon('close')}
+              </button>
+            </div>`,
+        )}
+      </div>
       <div class="vh" role="alert" aria-live="assertive" aria-atomic="true">${this.#live}</div>`;
   }
 }

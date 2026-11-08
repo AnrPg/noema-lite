@@ -61,7 +61,7 @@ function savedAppearance(raw: string): Partial<Appearance> | null {
   }
 }
 
-/** The demo's appearance: the device's saved choice, else the character on the page (engine/themes.js put it there), else the default. */
+/** The demo's appearance: the device's saved choice, else the character on the page (the UI root put it there), else the default. */
 export function loadAppearance(kv: KeyValueStore, root: HTMLElement): Appearance {
   const r = kv.get(APPEARANCE_KEY);
   const a = r.ok && r.value ? savedAppearance(r.value) : null;

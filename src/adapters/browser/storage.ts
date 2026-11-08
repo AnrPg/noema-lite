@@ -49,7 +49,7 @@ export interface BrowserStorageOptions {
   readonly now?: () => number;
 }
 
-/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once). */
+/** The app's IndexedDB as the UI root opens it (src/composition/shell/core.ts IDB) (same name, version and stores, so both can use it at once). */
 export const APP_DB = Object.freeze({ name: 'noema-lite', version: 1, collections: ['packs', 'handles', 'restore', 'convos'] as const });
 
 const unavailable = (what: string, cause?: unknown): NoemaError =>

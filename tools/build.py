@@ -346,7 +346,8 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'tokens.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
+    os.makedirs(os.path.join(out, 'engine', 'app'), exist_ok=True)
+    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True)
     for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
     # the TypeScript bundles of the page (build/: npm run build) with their source maps — build/app.js holds the engine library
@@ -390,6 +391,7 @@ def build_site(metas):
 # the app shell the service worker precaches besides what index.html loads: the study engine (loaded when a subject opens),
 # the UI catalogs (any locale offline; not the test pseudo-locales), the language-course UI, the activity author's files
 # (#/author), the web manifest and its icons. Packs and data are not in it (network first, the last copy offline).
+APP_AREAS = ('app/library.js', 'app/community.js', 'app/roadmaps.js', 'app/languages.js')   # the areas of the app on the frame, in index.html's order
 SHELL_EXTRA = ('engine/engine.js', 'engine/i18n/*.js', 'engine/langcore.js', 'engine/langui.js', 'engine/langui.css', 'engine/schemaform.js', 'engine/activity_author*.js', 'engine/activity_author.css',
                'build/*.js', 'manifest.webmanifest', 'icons/*.png', 'icons/*.svg', 'fonts/*.css')   # build/*.js: the page bundles and every Worker bundle (offline on first use)
 def write_service_worker(out):
@@ -612,6 +614,7 @@ def build_bundle(metas):
     core_scripts = (f'<script>{esc(bundle_text("app"))}</script>\n' if bundle_file('app') else '') + ''.join(
         f'<script type="text/plain" id="noema-worker:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'worker') + ''.join(
         f'<script type="text/plain" id="noema-lazy:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'lazy')   # build/engines.js: run when first needed
+    app_areas = ''.join(f'<script>{esc(rd("engine/" + f))}</script>\n' for f in APP_AREAS)   # the areas on the frame (engine/app/*.js)
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>
@@ -629,7 +632,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
 <script>{esc(rd("engine/vendor/intl-messageformat.iife.js"))}</script>
 {i18n_cats}<script>{esc(rd("engine/i18n.js"))}</script>
-<script>{esc(rd("engine/themes.js"))}</script>
+<script>{esc(bundle_text("ui"))}</script>
 <script>{esc(rd("engine/art.js"))}</script>
 <script>{esc(rd("engine/convos.js"))}</script>
 <script>{esc(rd("engine/cloud.js"))}</script>
@@ -662,12 +665,10 @@ def build_bundle(metas):
 <script>{esc(rd("engine/vendor/modern-screenshot.umd.js"))}</script>
 <script>{esc(rd("engine/report.js"))}</script>
 <script>{esc(rd("engine/enginereq.js"))}</script>
-<script>{esc(rd("engine/shell.js"))}</script>
-<script>{esc(rd("engine/react.js"))}</script>
+{app_areas}<script>{esc(rd("engine/react.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>
 <script>{esc(rd("engine/vendor/h5p/3.8.2/player.js"))}</script>
 <script type="text/plain" id="noema-engine-src">{esc(rd("engine/engine.js"))}</script>
-<script>{esc(rd("engine/loader.js"))}</script>
 </body></html>'''
     out = os.path.join(ROOT, 'dist', 'noema-lite.html'); wt(out, html)
     print(f'bundle → dist/noema-lite.html ({len(html)/1e6:.1f} MB, {len(reg_metas)} subjects{", with local config" if local else ""})')

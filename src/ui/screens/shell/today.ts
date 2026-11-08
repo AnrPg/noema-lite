@@ -93,14 +93,28 @@ export class NoemaToday extends ShellElement {
   }
   #go(c: TodayContinue | NonNullable<TodayModel['firstMap']>, meta: TemplateResult): TemplateResult {
     return html`<div class="ns-gowrap">
-      <button class="ns-go" @click=${() => { c.open(); }}>
+      <button
+        class="ns-go"
+        @click=${() => {
+          c.open();
+        }}
+      >
         <span class="rm">${c.emoji ? c.emoji + ' ' : this.icon(c.icon)} ${c.where}</span>
         <h2>${c.title}</h2>
         <span class="meta">${meta}</span>
         ${'step' in c && c.step ? html`<span class="step wide">${this.L('stepIs', { step: c.step })}</span>` : nothing}
         <span class="arrow" aria-hidden="true">→</span>
       </button>
-      <button class="ns-goclose" title=${this.L('hideToday')} aria-label=${this.L('hideToday')} @click=${() => { this.#hide(c.hideId); }}>${this.icon('close')}</button>
+      <button
+        class="ns-goclose"
+        title=${this.L('hideToday')}
+        aria-label=${this.L('hideToday')}
+        @click=${() => {
+          this.#hide(c.hideId);
+        }}
+      >
+        ${this.icon('close')}
+      </button>
     </div>`;
   }
   override render(): TemplateResult {
@@ -122,33 +136,45 @@ export class NoemaToday extends ShellElement {
         </div>
       </div>
       <div class="ns-stack">
-        ${c
-          ? this.#go(
-              c,
-              html`${c.chapter ? this.pill(this.L('chOf', { n: c.chapter.n, of: c.chapter.of }), 2) : nothing}${c.section
-                ? this.pill(this.L('secOf', { n: c.section.n, of: c.section.of }), 4)
-                : c.start
-                  ? this.pill(this.L('start'), 1)
-                  : nothing}`,
-            )
-          : nothing}
+        ${
+          c
+            ? this.#go(
+                c,
+                html`${c.chapter ? this.pill(this.L('chOf', { n: c.chapter.n, of: c.chapter.of }), 2) : nothing}${
+                  c.section
+                    ? this.pill(this.L('secOf', { n: c.section.n, of: c.section.of }), 4)
+                    : c.start
+                      ? this.pill(this.L('start'), 1)
+                      : nothing
+                }`,
+              )
+            : nothing
+        }
         <div class="ns-langlead" style="display:contents"></div>
         ${c ? nothing : html`<div class="ns-first" style="display:contents">${this.#first(m, d)}</div>`}
         <div class="ns-langafter" style="display:contents"></div>
-        ${m.elsewhere.length
-          ? html`<div>
-              <span class="ns-label">${this.L('continueElsewhere')}</span>
-              <div class="ns-list">
-                ${m.elsewhere.map(
-                  r =>
-                    html`<button class="ns-item" @click=${() => { r.open(); }}>
-                      ${this.icoTxt(r.emoji || (r.title || '?').slice(0, 1), r.tone, r.emoji ? 'emo' : 'txt')}
-                      <span class="t"><b>${r.title}</b><small>${r.sub}</small></span>${this.chev()}
-                    </button>`,
-                )}
-              </div>
-            </div>`
-          : nothing}
+        ${
+          m.elsewhere.length
+            ? html`<div>
+                <span class="ns-label">${this.L('continueElsewhere')}</span>
+                <div class="ns-list">
+                  ${m.elsewhere.map(
+                    r =>
+                      html`<button
+                        class="ns-item"
+                        @click=${() => {
+                          r.open();
+                        }}
+                      >
+                        ${this.icoTxt(r.emoji || (r.title || '?').slice(0, 1), r.tone, r.emoji ? 'emo' : 'txt')}
+                        <span class="t"><b>${r.title}</b><small>${r.sub}</small></span
+                        >${this.chev()}
+                      </button>`,
+                  )}
+                </div>
+              </div>`
+            : nothing
+        }
         <div>
           <span class="ns-label">${this.L('forToday')}</span>
           <div class="ns-duo">
@@ -186,7 +212,14 @@ export class NoemaToday extends ShellElement {
       <h2>${this.L('welcomeTitle')}</h2>
       <p class="ns-muted">${this.L('welcomeText')}</p>
       <div class="row">
-        <button class="btn primary" @click=${() => { d.newRoadmap(); }}>${this.L('newRoadmap')}</button>
+        <button
+          class="btn primary"
+          @click=${() => {
+            d.newRoadmap();
+          }}
+        >
+          ${this.L('newRoadmap')}
+        </button>
         <button class="btn" @click=${() => this.ctx?.go('#/discover')}>${this.L('discover')}</button>
         <button class="btn ghost" @click=${() => this.ctx?.go('#/shelf')}>${this.L('shelf')}</button>
       </div>
@@ -194,7 +227,14 @@ export class NoemaToday extends ShellElement {
   }
   /** a card that opens something, with an (i) beside its title: the card is clicked anywhere, its title is the button
       (keyboard and screen readers), and the (i) is a button of its own next to it, never inside it */
-  #vcard(kind: 'review' | 'gym', icon: TemplateResult, badge: TemplateResult | typeof nothing, title: string, tip: string, sub: string): TemplateResult {
+  #vcard(
+    kind: 'review' | 'gym',
+    icon: TemplateResult,
+    badge: TemplateResult | typeof nothing,
+    title: string,
+    tip: string,
+    sub: string,
+  ): TemplateResult {
     const d = this.data,
       id = 'ns-vcard-' + kind;
     return html`<div class="ns-vcard" @click=${() => d?.review(kind)}>
@@ -209,8 +249,8 @@ export class NoemaToday extends ShellElement {
             d?.review(kind);
           }}
         >
-          ${title}</button
-        >
+          ${title}
+        </button>
         <button
           class="ns-hint"
           aria-label=${this.L('whatIsThis')}

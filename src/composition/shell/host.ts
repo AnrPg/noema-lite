@@ -85,7 +85,13 @@ export function createHost(core: HostCore) {
   const art = (): ShellArt => {
     const a = W().NoemaArt;
     return a
-      ? { svg: (k, c) => a.svg(k, c), mascot: (m, w, hh) => a.mascot(m, w, hh), land: m => a.land(m), collection: (m, n, f) => a.collection(m, n, f), has: k => !!a.I[k] }
+      ? {
+          svg: (k, c) => a.svg(k, c),
+          mascot: (m, w, hh) => a.mascot(m, w, hh),
+          land: m => a.land(m),
+          collection: (m, n, f) => a.collection(m, n, f),
+          has: k => !!a.I[k],
+        }
       : { svg: () => '', mascot: () => '', land: () => '', collection: () => '', has: () => false };
   };
 
@@ -95,7 +101,8 @@ export function createHost(core: HostCore) {
     const nom = t.nom || t.n;
     return { tutor: t.n, tutorAcc: t.acc, tutorTo: t.to, tutorNom: nom, Tutor: nom ? (nom[0] ?? '').toUpperCase() + nom.slice(1) : t.n };
   }
-  const L = (k: string, v?: Record<string, unknown> | null): string => W().NoemaI18n?.t('sh.' + k, { ...tv(), ...(v ?? {}) }, uiPref()) ?? k;
+  const L = (k: string, v?: Record<string, unknown> | null): string =>
+    W().NoemaI18n?.t('sh.' + k, { ...tv(), ...(v ?? {}) }, uiPref()) ?? k;
   /** a sentence with some of its values in bold (names and titles stay text, never markup) */
   function rich(k: string, vals: Record<string, Kid>): Kid[] {
     const names = Object.keys(vals),
@@ -119,7 +126,8 @@ export function createHost(core: HostCore) {
 
   /* ---------- icons and small parts ---------- */
   const svg = (k: string, cls = 'i'): HTMLElement => h('span', { class: 'ns-svg', html: art().svg(k, cls) });
-  const faceEl = (m: string = core.themes.current(), cls = ''): HTMLElement => h('span', { class: 'ns-face ' + cls, 'aria-hidden': 'true', html: art().mascot(m) });
+  const faceEl = (m: string = core.themes.current(), cls = ''): HTMLElement =>
+    h('span', { class: 'ns-face ' + cls, 'aria-hidden': 'true', html: art().mascot(m) });
   const ico = (k: string, n = 1): HTMLElement => h('span', { class: 'ns-ico', style: tone(n) }, svg(k));
   const icoTxt = (x: Kid, n = 1, cls = 'txt'): HTMLElement => h('span', { class: 'ns-ico ' + cls, style: tone(n) }, x);
   const pill = (x: Kid, n = 1, cls = ''): HTMLElement => h('span', { class: 'ns-pill ' + cls, style: tone(n) }, x);
@@ -137,7 +145,14 @@ export function createHost(core: HostCore) {
       html: `<svg viewBox="0 0 ${s} ${s}" width="${s}" height="${s}" aria-hidden="true"><circle cx="${c}" cy="${c}" r="${String(r)}" fill="none" stroke="var(--line)" stroke-width="${String(stroke)}"/><circle class="ns-arc" cx="${c}" cy="${c}" r="${String(r)}" fill="none" stroke="var(--acc)" stroke-width="${String(stroke)}" stroke-linecap="round" style="--C:${String(C)};stroke-dasharray:${String(C)};stroke-dashoffset:${String(off)}"/></svg>`,
     });
   }
-  const kit: DomKit = { svg, pill, hasIcon: k => art().has(k), go: (x: string) => { go(x); } };
+  const kit: DomKit = {
+    svg,
+    pill,
+    hasIcon: k => art().has(k),
+    go: (x: string) => {
+      go(x);
+    },
+  };
 
   /* ---------- the learner's places (device-local) ---------- */
   const recentKey = (): string => `noema1:${acc() ?? ''}:meta:recent`;
@@ -220,7 +235,8 @@ export function createHost(core: HostCore) {
     t.push({ key: 'discover', href: '#/discover', icon: 'compass', label: L('discover'), title: L('discover') });
     // the vault and people are places of their own, not corners of Discover (people: cloud accounts only)
     t.push({ key: 'vault', href: '#/vault', icon: 'vault', label: L('vault'), title: L('vaultSub') });
-    if (social()) t.push({ key: 'people', href: '#/people', icon: 'community', label: L('people'), title: L('peopleSub'), badge: peopleWaiting });
+    if (social())
+      t.push({ key: 'people', href: '#/people', icon: 'community', label: L('people'), title: L('peopleSub'), badge: peopleWaiting });
     t.push({ key: 'progress', href: '#/progress', icon: 'star', label: L('progress'), title: L('progress') });
     return t;
   }
@@ -295,9 +311,7 @@ export function createHost(core: HostCore) {
   let tipT = 0;
   function tip(text: string): void {
     parts.layer.querySelector('.ns-tip')?.remove();
-    const ps = text
-      .split(/(?<=[.!?;·])\s+(?=\S)/)
-      .filter(Boolean);
+    const ps = text.split(/(?<=[.!?;·])\s+(?=\S)/).filter(Boolean);
     const t: HTMLElement = h(
       'div',
       {
@@ -373,7 +387,12 @@ export function createHost(core: HostCore) {
       h(
         'aside',
         { class: 'ns-sheet ' + cls, role: 'dialog', 'aria-label': title },
-        h('div', { class: 'ns-shhead' }, h('b', {}, title), h('button', { class: 'ns-iconbtn', 'aria-label': L('close'), onclick: close }, svg('close'))),
+        h(
+          'div',
+          { class: 'ns-shhead' },
+          h('b', {}, title),
+          h('button', { class: 'ns-iconbtn', 'aria-label': L('close'), onclick: close }, svg('close')),
+        ),
         body,
       ),
     );
@@ -381,7 +400,8 @@ export function createHost(core: HostCore) {
     plainWatch(body);
     return close;
   }
-  const modalOn = (title: string, build: Parameters<typeof modal>[2], o?: { cls?: string }): (() => void) => modal(parts.layer, title, build, o);
+  const modalOn = (title: string, build: Parameters<typeof modal>[2], o?: { cls?: string }): (() => void) =>
+    modal(parts.layer, title, build, o);
   let plainWatch: (root: HTMLElement) => void = () => undefined;
 
   /* ======================= routing ======================= */
@@ -397,7 +417,8 @@ export function createHost(core: HostCore) {
       if (document.documentElement.lang !== l) document.documentElement.lang = l;
     };
     const top = frame?.top;
-    for (const e of [top, frame?.querySelector('.ns-tabs'), frame?.querySelector('#ns-fab'), parts.layer]) if (e instanceof HTMLElement) e.lang = lang(); // the frame itself always speaks the menus' language
+    for (const e of [top, frame?.querySelector('.ns-tabs'), frame?.querySelector('#ns-fab'), parts.layer])
+      if (e instanceof HTMLElement) e.lang = lang(); // the frame itself always speaks the menus' language
     if (ENGINE_ROUTES.has(k)) {
       docLang(core.subject()?.language || 'en');
       if (!ENGINE && pendingEngine) {
@@ -463,7 +484,12 @@ export function createHost(core: HostCore) {
   }
   const shortTitle = (c: { title?: string; goal?: string }): string => {
     const t = W().NoemaCurriculum?.shownTitle(c as never) || c.title || c.goal || '';
-    return t.length > 28 ? t.split(/[:—–(-]/)[0]?.trim().slice(0, 28) || t.slice(0, 28) : t;
+    return t.length > 28
+      ? t
+          .split(/[:—–(-]/)[0]
+          ?.trim()
+          .slice(0, 28) || t.slice(0, 28)
+      : t;
   };
   /** The default top bar of a subject's pages; the engine's views refine it (crumbs, ⋮). */
   function subjectChrome(extra: Chrome = {}): Chrome {
@@ -490,7 +516,11 @@ export function createHost(core: HostCore) {
     }
     if (k === 'lang' && args[0]) {
       const reg = (W().NOEMA_REGISTRY as { languages?: { id: string; title?: string }[] } | undefined)?.languages ?? [];
-      return { kind: 'course', id: args[0], title: W().NoemaLangUI?.titleOf?.(args[0]) || reg.find(x => x.id === args[0])?.title || args[0] };
+      return {
+        kind: 'course',
+        id: args[0],
+        title: W().NoemaLangUI?.titleOf?.(args[0]) || reg.find(x => x.id === args[0])?.title || args[0],
+      };
     }
     if (k === 'search') return W().NoemaSearch?.hereNow?.() ?? null;
     return null;
@@ -514,7 +544,13 @@ export function createHost(core: HostCore) {
       pop.style,
       rail
         ? { left: px(r.left), right: 'auto', top: 'auto', bottom: px(innerHeight - r.top + 6), maxHeight: px(r.top - 14) }
-        : { right: px(Math.max(8, innerWidth - r.right)), left: 'auto', top: px(r.bottom + 6), bottom: 'auto', maxHeight: px(innerHeight - r.bottom - 14) },
+        : {
+            right: px(Math.max(8, innerWidth - r.right)),
+            left: 'auto',
+            top: px(r.bottom + 6),
+            bottom: 'auto',
+            maxHeight: px(innerHeight - r.bottom - 14),
+          },
     );
   }
 
@@ -569,7 +605,14 @@ export function createHost(core: HostCore) {
 
   /* ---------- mount ---------- */
   let onMounted: () => void = () => undefined;
-  const ctx: ShellContext = { art: art(), character: () => core.themes.current(), tutorVars: m => tv(m), go: x => { go(x); } };
+  const ctx: ShellContext = {
+    art: art(),
+    character: () => core.themes.current(),
+    tutorVars: m => tv(m),
+    go: x => {
+      go(x);
+    },
+  };
   function mount({ engine = false }: { engine?: boolean } = {}): void {
     if (mounted) return;
     mounted = true;
@@ -653,8 +696,14 @@ export function createHost(core: HostCore) {
       }
       // / or Ctrl/⌘ K: search (not while typing, not over a window that must be answered)
       const target = e.target as Element | null;
-      const search = (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) || ((e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey));
-      if (search && !target?.closest('input, textarea, select, [contenteditable="true"]') && !parts.layer.querySelector('[data-sticky], .ns-modal') && W().NoemaSearch) {
+      const search =
+        (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) || ((e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey));
+      if (
+        search &&
+        !target?.closest('input, textarea, select, [contenteditable="true"]') &&
+        !parts.layer.querySelector('[data-sticky], .ns-modal') &&
+        W().NoemaSearch
+      ) {
         e.preventDefault();
         W().NoemaSearch?.quick(here());
       }
@@ -668,6 +717,13 @@ export function createHost(core: HostCore) {
     );
     route();
     onMounted();
+    for (const f of mountedHooks.splice(0)) f();
+  }
+  /** What an area wires into the frame once it is there (at once when it is): the share bar, a world's tab… */
+  const mountedHooks: (() => void)[] = [];
+  function whenMounted(f: () => void): void {
+    if (mounted) f();
+    else mountedHooks.push(f);
   }
 
   /* ======================= for the engine ======================= */
@@ -703,6 +759,7 @@ export function createHost(core: HostCore) {
     screen,
     registerPage,
     registerWorld,
+    whenMounted,
     attachEngine,
     noEngine,
     setActs,
@@ -729,8 +786,10 @@ export function createHost(core: HostCore) {
     vcard,
     sheet,
     modal: modalOn,
-    menuButton: (items: readonly MenuEntry[] | (() => readonly MenuEntry[]), o: { label?: string; cls?: string; content?: Node | null; down?: boolean; dot?: boolean } = {}) =>
-      menuButton(kit, items, { ...o, label: o.label ?? L('more') }),
+    menuButton: (
+      items: readonly MenuEntry[] | (() => readonly MenuEntry[]),
+      o: { label?: string; cls?: string; content?: Node | null; down?: boolean; dot?: boolean } = {},
+    ) => menuButton(kit, items, { ...o, label: o.label ?? L('more') }),
     popMenu: (anchor: HTMLElement, items: readonly MenuEntry[], o?: { down?: boolean }) => popMenu(kit, anchor, items, o),
     closePops,
     fitRow,

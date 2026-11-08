@@ -1,5 +1,5 @@
 /**
- * THE PHASE BRIDGE: window.NoemaCore, the one way the old UI (engine/loader.js, engine/shell.js, engine/src/*.js,
+ * THE PHASE BRIDGE: window.NoemaCore, the one way the old UI (build/ui.js, engine/app/*.js, engine/src/*.js,
  * engine/lang/*, engine/*.js) reaches the new core in phases 1 and 2. Phase 3 moves the last old screens into
  * src/features/ and deletes this file, the global and every `NoemaCore.` in engine/ (docs/ARCHITECTURE.md §6).
  *

@@ -3,7 +3,7 @@
  * docs/ARCHITECTURE.md §5). It is the one place that picks the
  * browser adapters, wires them into the container and publishes the phase bridge window.NoemaCore (src/composition/
  * bridge.ts has its exact surface). index.html and the one-file bundle load build/app.js right after the vendor
- * scripts, before engine/i18n.js and every other engine script, so NoemaCore exists when engine/loader.js runs.
+ * scripts, before engine/i18n.js and every other engine script, so NoemaCore exists when build/ui.js and engine/app/*.js run.
  *
  * Evaluating this module touches no DOM, timer or network: every adapter looks up its platform objects when first used,
  * so the root also loads in a bare vm (tests/bridge.js, tests/mt.js, src/composition/composition.test.ts).

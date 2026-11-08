@@ -43,15 +43,33 @@ export class NoemaBellList extends NoemaElement {
       x.kind === 'notice'
         ? html`<div class="nx-req nx-notice">
             <div class="grow">${x.text}${x.at ? html`<div class="tiny">${d.ago(x.at)}</div>` : nothing}</div>
-            <button class="btn small ghost" title=${this.t('loader.note.dismiss')} aria-label=${this.t('loader.note.dismiss')} @click=${() => { d.dismiss(x.id); }}>✕</button>
+            <button
+              class="btn small ghost"
+              title=${this.t('loader.note.dismiss')}
+              aria-label=${this.t('loader.note.dismiss')}
+              @click=${() => {
+                d.dismiss(x.id);
+              }}
+            >
+              ✕
+            </button>
           </div>`
         : d.row(x),
     )}
-    ${news
-      ? html`<div class="row nx-noticeclear" style="justify-content:flex-end">
-          <button class="btn small ghost" @click=${() => { d.clear(); }}>${this.t('loader.note.clearAll')}</button>
-        </div>`
-      : nothing}`;
+    ${
+      news
+        ? html`<div class="row nx-noticeclear" style="justify-content:flex-end">
+            <button
+              class="btn small ghost"
+              @click=${() => {
+                d.clear();
+              }}
+            >
+              ${this.t('loader.note.clearAll')}
+            </button>
+          </div>`
+        : nothing
+    }`;
   }
 }
 

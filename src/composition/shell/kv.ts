@@ -130,16 +130,19 @@ export function mergeAccounts(seeds: readonly SavedAccount[], saved: readonly Sa
   return [...map.values()].filter(a => !gone.has(a.id));
 }
 
+/** Lower-case latin letters and digits joined by "-", at most 30 (accents dropped; may be empty): ids of profiles and packs. */
+export const slugify = (s: string): string =>
+  s
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 30);
+
 /** A profile id from its name: lower-case latin letters and digits, unique among `taken`. */
 export function profileId(name: string, taken: ReadonlySet<string>): string {
-  const base =
-    name
-      .toLowerCase()
-      .normalize('NFKD')
-      .replace(/[̀-ͯ]/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 30) || 'profile';
+  const base = slugify(name) || 'profile';
   let id = base,
     k = 2;
   while (taken.has(id)) id = `${base}-${String(k++)}`;
@@ -153,11 +156,22 @@ export class LocalAccounts {
     private readonly now: () => number,
   ) {}
   list(): Account[] {
-    return mergeAccounts(this.seeds(), jsonOf<SavedAccount[]>(this.kv, P + 'accounts', []), jsonOf<string[]>(this.kv, P + 'accounts:removed', []));
+    return mergeAccounts(
+      this.seeds(),
+      jsonOf<SavedAccount[]>(this.kv, P + 'accounts', []),
+      jsonOf<string[]>(this.kv, P + 'accounts:removed', []),
+    );
   }
   save(a: SavedAccount): void {
     const list = jsonOf<SavedAccount[]>(this.kv, P + 'accounts', []).filter(x => x.id !== a.id);
-    list.push({ id: a.id, name: a.name, emoji: a.emoji ?? '', pin: a.pin ?? null, created: a.created ?? this.now(), learner: a.learner ?? '' });
+    list.push({
+      id: a.id,
+      name: a.name,
+      emoji: a.emoji ?? '',
+      pin: a.pin ?? null,
+      created: a.created ?? this.now(),
+      learner: a.learner ?? '',
+    });
     putJson(this.kv, P + 'accounts', list);
     putJson(
       this.kv,
@@ -224,6 +238,17 @@ export class GeminiKey {
     if (v && v !== this.builtIn()) this.kv.set(this.k(acc), v);
     else this.kv.delete(this.k(acc));
   }
+  /** a:settings never holds the key (it is synced and backed up): one found there moves here, and a:settings is written
+      without it, which also clears the cloud's copy (the engine asks once a subject is open) */
+  migrate(acc: string | null = this.store.acc): void {
+    if (!acc) return;
+    const sk = this.store.accountKey('settings', acc);
+    const s = jsonOf<Record<string, unknown> | null>(this.store, sk, null);
+    if (!s || typeof s !== 'object' || !('apiKey' in s)) return;
+    const { apiKey, ...rest } = s;
+    if (apiKey && !this.get(acc)) this.set(acc, apiKey);
+    this.store.set(sk, JSON.stringify(rest));
+  }
 }
 
 /** A piece of 🔔 news kept on this device. */
@@ -259,7 +284,10 @@ export class NoticeStore {
     for (const f of [...this.#listeners]) f();
   }
   keep(acc: string | null, items: readonly { text: string; at: number }[]): void {
-    this.write(acc, [...this.list(acc), ...items.map(x => ({ id: `note:${String(x.at)}:${this.rand()}`, kind: 'notice' as const, text: x.text, at: x.at }))]);
+    this.write(acc, [
+      ...this.list(acc),
+      ...items.map(x => ({ id: `note:${String(x.at)}:${this.rand()}`, kind: 'notice' as const, text: x.text, at: x.at })),
+    ]);
   }
   dismiss(acc: string | null, id: string): void {
     this.write(

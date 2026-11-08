@@ -86,9 +86,22 @@ test('treasures, chapters done, what is due', () => {
     m.filter(x => x.found).map(x => x.id),
     ['cards', 'week'],
   );
-  assert.equal(chaptersDone([{ id: 'ch01', sections: 2 }, { num: 2, sections: 1 }], { read: { 'ch01-s01': 1, 'ch01-s02': 1 } }), 1);
+  assert.equal(
+    chaptersDone(
+      [
+        { id: 'ch01', sections: 2 },
+        { num: 2, sections: 1 },
+      ],
+      { read: { 'ch01-s01': 1, 'ch01-s02': 1 } },
+    ),
+    1,
+  );
   assert.equal(chaptersDone([], { boss: { ch01: true, ch02: false } }), 1);
-  const st = { fc: { a: { due: '2026-11-01' }, b: { due: '2026-12-01' } }, pb: { c: { due: '2026-10-01' } }, res: { x: { last: false }, y: { last: true } } };
+  const st = {
+    fc: { a: { due: '2026-11-01' }, b: { due: '2026-12-01' } },
+    pb: { c: { due: '2026-10-01' } },
+    res: { x: { last: false }, y: { last: true } },
+  };
   assert.deepEqual(dueCount(st, d('2026-11-02')), { fc: 1, pb: 1 });
   assert.equal(wrongCount(st), 1);
 });

@@ -205,17 +205,33 @@ export class NoemaAccountPicker extends NoemaElement {
               placeholder=${this.t('loader.profile.pinPlaceholder')}
               aria-label=${this.t('loader.profile.pinPlaceholder')}
             />
-            <div class="row">${back}<button class="btn primary" @click=${() => void this.#create()}>${this.t('loader.profile.create')}</button></div>
+            <div class="row">
+              ${back}<button class="btn primary" @click=${() => void this.#create()}>${this.t('loader.profile.create')}</button>
+            </div>
           </div>`;
       case 'in':
       case 'up': {
         const up = this.mode === 'up';
         return html`${this.#head(up ? this.t('loader.cloud.createTitle') : this.t('loader.cloud.signIn'), this.t('loader.cloud.private'))}
           <div class="noema-form">
-            ${up
-              ? html`<input name="display" class="noema-input" placeholder=${this.t('loader.cloud.displayName')} aria-label=${this.t('loader.cloud.displayName')} />`
-              : nothing}
-            <input name="email" class="noema-input" type="email" autocomplete="email" placeholder=${this.t('loader.cloud.email')} aria-label=${this.t('loader.cloud.email')} />
+            ${
+              up
+                ? html`<input
+                    name="display"
+                    class="noema-input"
+                    placeholder=${this.t('loader.cloud.displayName')}
+                    aria-label=${this.t('loader.cloud.displayName')}
+                  />`
+                : nothing
+            }
+            <input
+              name="email"
+              class="noema-input"
+              type="email"
+              autocomplete="email"
+              placeholder=${this.t('loader.cloud.email')}
+              aria-label=${this.t('loader.cloud.email')}
+            />
             <input
               name="password"
               class="noema-input"
@@ -254,9 +270,13 @@ export class NoemaAccountPicker extends NoemaElement {
       <div class="noema-accgrid">
         ${d.accounts().map(
           (a, i) =>
-            html`<button class="noema-acc" style=${`animation-delay:${String(i * 50)}ms`} @click=${() => {
-              this.#choose(a);
-            }}>
+            html`<button
+              class="noema-acc"
+              style=${`animation-delay:${String(i * 50)}ms`}
+              @click=${() => {
+                this.#choose(a);
+              }}
+            >
               <span class="noema-accemo" data-emoji="1">${a.emoji || '🙂'}</span><b>${a.name}</b
               ><small>${a.kind === 'cloud' ? a.email : (a.pin ? '🔒 ' : '') + this.t('pick.local')}</small>
             </button>`,
@@ -271,11 +291,13 @@ export class NoemaAccountPicker extends NoemaElement {
           <span class="noema-accemo" data-emoji="1">➕</span><b>${this.t('pick.newProfile')}</b><small>${this.t('pick.onDevice')}</small>
         </button>
       </div>
-      ${d.cloud
-        ? html`<div class="noema-cloudrow">
-            <button class="btn ai" @click=${() => (this.mode = 'in')}>${this.t('pick.cloudSignIn')}</button
-            ><span class="tiny">${this.t('pick.cloudHint')}</span>
-          </div>`
-        : nothing}`;
+      ${
+        d.cloud
+          ? html`<div class="noema-cloudrow">
+              <button class="btn ai" @click=${() => (this.mode = 'in')}>${this.t('pick.cloudSignIn')}</button
+              ><span class="tiny">${this.t('pick.cloudHint')}</span>
+            </div>`
+          : nothing
+      }`;
   }
 }

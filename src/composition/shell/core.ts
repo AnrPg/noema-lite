@@ -8,13 +8,34 @@
  */
 import { CHARACTER_EMOJI } from '../../features/shell/domain/characters.ts';
 import { dayOf } from '../../kernel/day.ts';
-import { AccountKv, AccountStats, GeminiKey, LocalAccounts, NoticeStore, P, jsonOf, profileId, putJson, type Account, type DeviceKv } from './kv.ts';
+import {
+  AccountKv,
+  AccountStats,
+  GeminiKey,
+  LocalAccounts,
+  NoticeStore,
+  P,
+  jsonOf,
+  profileId,
+  putJson,
+  slugify,
+  type Account,
+  type DeviceKv,
+} from './kv.ts';
 import { h, type Kid } from './dom.ts';
 import { legacy, type AreaBoot, type NoemaAreas, type SubjectMeta } from './legacy.ts';
 import type { NoemaCoreBridge } from '../bridge.ts';
 
 export const VERSION = '1.0.0';
-export const APP_DEFAULTS = { appName: 'noema-lite', supabaseUrl: '', supabaseKey: '', autoBackupMinutes: 5, askSubjectOnStart: false, shell: true, onboarding: true };
+export const APP_DEFAULTS = {
+  appName: 'noema-lite',
+  supabaseUrl: '',
+  supabaseKey: '',
+  autoBackupMinutes: 5,
+  askSubjectOnStart: false,
+  shell: true,
+  onboarding: true,
+};
 
 /* ---------------- 🧹 the frame speaks without the older screens' emoji ----------------
    A dialog of the older screens opened from the frame, the Roadmap page and the toasts lose their pictographs (the frame
@@ -152,7 +173,10 @@ interface DirHandle {
   queryPermission(o: unknown): Promise<string>;
   requestPermission(o: unknown): Promise<string>;
   getDirectoryHandle(n: string, o: { create: boolean }): Promise<DirHandle>;
-  getFileHandle(n: string, o: { create: boolean }): Promise<{ createWritable(): Promise<{ write(t: string): Promise<void>; close(): Promise<void> }> }>;
+  getFileHandle(
+    n: string,
+    o: { create: boolean },
+  ): Promise<{ createWritable(): Promise<{ write(t: string): Promise<void>; close(): Promise<void> }> }>;
 }
 
 export function createCore(core: NoemaCoreBridge) {
@@ -162,10 +186,20 @@ export function createCore(core: NoemaCoreBridge) {
   const REG = W().NOEMA_REGISTRY ?? { accounts: [], subjects: [] };
   const kv: DeviceKv = core.storage.kv;
   const caught = (where: string, severity: 'warning' | 'info' | 'error' = 'warning') => core.errors.catcher(where, { severity });
-  const KV = new AccountKv(kv, () => Date.now(), e => core.errors.report(e, { where: 'loader.kv.listener', severity: 'error' }));
-  const locals = new LocalAccounts(kv, () => REG.accounts ?? [], () => Date.now());
+  const KV = new AccountKv(
+    kv,
+    () => Date.now(),
+    e => core.errors.report(e, { where: 'loader.kv.listener', severity: 'error' }),
+  );
+  const locals = new LocalAccounts(
+    kv,
+    () => REG.accounts ?? [],
+    () => Date.now(),
+  );
   const stats = new AccountStats(KV, () => dayOf(core.clock.now()));
-  const geminiKey = new GeminiKey(kv, KV, () => (typeof LOCAL['geminiKey'] === 'string' ? LOCAL['geminiKey'] : (W().DEFAULT_GEMINI_KEY ?? '')));
+  const geminiKey = new GeminiKey(kv, KV, () =>
+    typeof LOCAL['geminiKey'] === 'string' ? LOCAL['geminiKey'] : (W().DEFAULT_GEMINI_KEY ?? ''),
+  );
   const notices = new NoticeStore(kv, () => Math.random().toString(36).slice(2, 7));
   const jget = <T>(k: string, d: T): T => jsonOf<T>(kv, k, d);
   const jset = (k: string, v: unknown): boolean => putJson(kv, k, v);
@@ -174,7 +208,8 @@ export function createCore(core: NoemaCoreBridge) {
   /** the interface language: the account's settings.lang (else the last account's), else the browser's */
   const uiPref = (acc: string | null = KV.acc ?? jget<{ acc?: string }>(P + 'current', {}).acc ?? null): unknown =>
     acc ? jget<Json>(`${P}${acc}:a:settings`, {})['lang'] : null;
-  const tr = (key: string, vars?: Record<string, unknown> | null, acc?: string | null): string => W().NoemaI18n?.t(key, vars ?? null, uiPref(acc)) ?? key;
+  const tr = (key: string, vars?: Record<string, unknown> | null, acc?: string | null): string =>
+    W().NoemaI18n?.t(key, vars ?? null, uiPref(acc)) ?? key;
   /** <b> <i> <code> <kbd> in a message (literal text for ICU) → those elements, with plain text inside (never HTML) */
   const tagged = (t: string): Kid[] => {
     const out: Kid[] = [];
@@ -274,7 +309,13 @@ export function createCore(core: NoemaCoreBridge) {
     if (!s) return null;
     const id = 'u_' + s.user.id,
       prof = jget<{ name?: string; emoji?: string }>(P + id + ':a:profile', {});
-    return { id, kind: 'cloud', email: s.user.email, name: prof.name || s.user.user_metadata?.name || s.user.email.split('@')[0] || '', emoji: prof.emoji || '☁️' };
+    return {
+      id,
+      kind: 'cloud',
+      email: s.user.email,
+      name: prof.name || s.user.user_metadata?.name || s.user.email.split('@')[0] || '',
+      emoji: prof.emoji || '☁️',
+    };
   }
   const allAccounts = (): Account[] => {
     const c = cloudAccount();
@@ -283,7 +324,8 @@ export function createCore(core: NoemaCoreBridge) {
   const getAccount = (id: string | null | undefined): Account | null => allAccounts().find(a => a.id === id) ?? null;
 
   /* ---------------- backups & restore ---------------- */
-  const fmtWhen = (t: number): string => W().NoemaI18n?.fmt.date(t, { dateStyle: 'medium', timeStyle: 'short' }) ?? new Date(t).toLocaleString();
+  const fmtWhen = (t: number): string =>
+    W().NoemaI18n?.fmt.date(t, { dateStyle: 'medium', timeStyle: 'short' }) ?? new Date(t).toLocaleString();
   const areas = (): NoemaAreas => Noema;
   const backup = {
     async collect(acc: string, { includeSecrets = false }: { includeSecrets?: boolean } = {}): Promise<Backup> {
@@ -387,7 +429,8 @@ export function createCore(core: NoemaCoreBridge) {
       if (C) {
         if (mode === 'replace') await C.clear(targetAcc);
         const a = getAccount(targetAcc) ?? { id: targetAcc, kind: 'local' };
-        for (const r of obj.conversations ?? []) await C.put(targetAcc, { ...(r as Json), account: { id: a.id, kind: a.kind } }, { keepUpdatedAt: true });
+        for (const r of obj.conversations ?? [])
+          await C.put(targetAcc, { ...(r as Json), account: { id: a.id, kind: a.kind } }, { keepUpdatedAt: true });
         if (mode === 'replace') kv.delete(`${P}${targetAcc}:meta:convosMigrated`);
       }
       if (targetAcc === KV.acc) KV.sealed = targetAcc; // every caller reloads (or switches profile) next
@@ -524,7 +567,10 @@ export function createCore(core: NoemaCoreBridge) {
     boot: {} as AreaBoot,
     el: h,
     esc: (s: unknown): string =>
-      (typeof s === 'string' ? s : s == null ? '' : JSON.stringify(s)).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] ?? c), // i18n-ignore (HTML escapes)
+      (typeof s === 'string' ? s : s == null ? '' : JSON.stringify(s)).replace(
+        /[&<>"']/g,
+        c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] ?? c,
+      ), // i18n-ignore (HTML escapes)
     jget,
     jset,
     tr,
@@ -533,7 +579,7 @@ export function createCore(core: NoemaCoreBridge) {
     caught,
     sha256,
     stamp,
-    slugify: (s: unknown): string => profileId(String(s), new Set()),
+    slugify: (s: unknown): string => slugify(String(s)),
     uiPref,
     overlay,
     brandHead,

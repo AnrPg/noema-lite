@@ -60,7 +60,14 @@ export class NoemaProgressPage extends ShellElement {
   }
   /** the medal's words */
   medalText(x: Medal): string {
-    const KEY = { step: 'medalStep', cards: 'medalCards', week: 'medalWeek', boss: 'medalBoss', xp: 'medalXp', month: 'medalMonth' } as const;
+    const KEY = {
+      step: 'medalStep',
+      cards: 'medalCards',
+      week: 'medalWeek',
+      boss: 'medalBoss',
+      xp: 'medalXp',
+      month: 'medalMonth',
+    } as const;
     return this.L(KEY[x.id], { n: x.n });
   }
   medalMark(x: Medal): TemplateResult | string {
@@ -124,13 +131,16 @@ export class NoemaProgressPage extends ShellElement {
           ${m.days.map(
             (d, i) =>
               html`<div>
-                <i class=${i === 6 ? 'today' : ''} style=${`height:${String((d.xp / max) * 100)}%;--i:${String(i)}`}></i><span>${d.label}</span>
+                <i class=${i === 6 ? 'today' : ''} style=${`height:${String((d.xp / max) * 100)}%;--i:${String(i)}`}></i
+                ><span>${d.label}</span>
               </div>`,
           )}
         </div>
       </section>
       <section class="ns-panel"><span class="ns-label">${this.L('treasures')}</span>${this.medals(m.medals)}</section>
-      <p class="tiny">${this.L('gameNote')} <button class="linkish" @click=${() => this.ctx?.go('#/me/look')}>${this.L('look')}</button></p>`;
+      <p class="tiny">
+        ${this.L('gameNote')} <button class="linkish" @click=${() => this.ctx?.go('#/me/look')}>${this.L('look')}</button>
+      </p>`;
   }
   /** the treasures: found ones in their colour, the others locked */
   medals(list: readonly Medal[]): TemplateResult {
