@@ -16,6 +16,7 @@ const i18n: I18n = {
   err: e => (e instanceof Error ? e.message : typeof e === 'string' ? e : ''),
   plural: n => new Intl.PluralRules('en').select(n),
   locale: () => 'en',
+  chain: () => ['en'],
   dir: () => 'ltr',
   format: {
     number: (n, o) => new Intl.NumberFormat('en', o).format(n),

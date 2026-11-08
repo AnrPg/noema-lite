@@ -34,6 +34,7 @@ import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
 import { accountKvStore, kvRoadmapEventLog } from './roadmap-events.ts';
+import { randomId, registerSync, syncBridge } from './sync.ts';
 import {
   AI,
   CLOCK,
