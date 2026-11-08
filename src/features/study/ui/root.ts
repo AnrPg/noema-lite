@@ -10,6 +10,7 @@ import { chapterOutline, figureAsText, sectionText } from '../domain/as-text.ts'
 import type { Block, Chapter, Exercise, Section } from '../domain/pack.ts';
 import { exerciseCard, exerciseText, type CardElement, type CardOptions } from './exercise/card.ts';
 import { figureBlock, rCenter, vRegions, vTargets } from './exercise/visual.ts';
+import { defineStudyElements } from './lit/base.ts';
 import { knowledgeMap, reportedView } from './kmap.ts';
 import type { MenuEntry, StudyHost } from './host.ts';
 import type { AiPort, TutorPort } from './parts.ts';
@@ -47,6 +48,7 @@ export interface StudyUi {
 }
 
 export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; readonly ai: AiPort }, i18n: I18n, clock: Clock): StudyUi {
+  defineStudyElements();
   const app = new StudyApp(host, i18n, clock);
   app.tutor = host.tutor;
   app.ai = host.ai;

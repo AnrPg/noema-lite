@@ -15,9 +15,9 @@ import {
   mixedView,
   oneExercise,
   playLightning,
-  runView,
   searchRunView,
 } from './screens/practice.ts';
+import { runView } from './screens/round.ts';
 import { sectionView } from './screens/section.ts';
 import { whatsNewView } from './sources.ts';
 import { STUDY_ROUTES, type StudyRoutes } from './route-table.ts';
