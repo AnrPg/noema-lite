@@ -93,3 +93,21 @@ export function domSurface(
 
 export const browserNotifier = (surface: NotifierSurface = domSurface(), options: NotifierOptions = {}): Notifier =>
   policyNotifier(surface, options);
+
+/** A surface whose drawing can move: the page's `.toasts` until the frame's kit toaster takes over (NoemaCore.toasts.use). */
+export interface SwitchableSurface extends NotifierSurface {
+  /** draws on `surface` from now on (null: back to the first one) */
+  use(surface: NotifierSurface | null): void;
+}
+export function switchableSurface(first: NotifierSurface = domSurface()): SwitchableSurface {
+  let now: NotifierSurface | null = null;
+  return {
+    show: (text, kind, ms) => (now ?? first).show(text, kind, ms),
+    announce: text => {
+      (now ?? first).announce(text);
+    },
+    use(surface) {
+      now = surface;
+    },
+  };
+}

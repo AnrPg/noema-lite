@@ -4,18 +4,10 @@
    The order is the catalogue's (catalog.js): the library first, then the domain plugins. A new engine gets its line here, in
    node.ts and in the catalogue; src/engines/plugins.test.ts checks that the three agree. */
 import type { PluginManifest } from '../plugins/index.ts';
+import { manifest } from './manifests.ts';
+export { EXPR } from './manifests.ts';
 import type { EngineModule, EnginePlugin } from './types.ts';
 
-/** the capability every engine needs: the expression language on the main thread (prepare, the checks), provided by the library */
-export const EXPR = 'kernel:expr';
-const manifest = (id: `${string}@${number}`, needs: readonly string[] = []): PluginManifest => ({
-  id,
-  kind: 'engine',
-  version: `${id.slice(id.lastIndexOf('@') + 1)}.0.0`,
-  needs: [EXPR, ...needs],
-  provides: ['engine:' + id],
-  locales: [],
-});
 const def = (
   m: PluginManifest,
   entry: () => Promise<{ default: EngineModule }>,

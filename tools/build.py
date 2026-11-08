@@ -353,7 +353,7 @@ def build_site(metas):
     # too (NoemaCore.engines); the connector is a function, the harness and the node bundles are not the site's
     os.makedirs(os.path.join(out, 'build'))
     for e in BUILD_MANIFEST['entries'].values():
-        if e['kind'] in ('page', 'worker'):
+        if e['kind'] in ('page', 'lazy', 'worker'):
             for f in (e['file'], e['map']): shutil.copy(os.path.join(BUILD, f), os.path.join(out, 'build', f))
     # the installable app (PWA): the web manifest and its icons
     shutil.copy(os.path.join(ROOT, 'manifest.webmanifest'), out)
@@ -610,7 +610,8 @@ def build_bundle(metas):
     # the TypeScript core (build/app.js: window.NoemaCore) before every older script, and each Worker's code as text: the one
     # file cannot load build/<worker>.js from file://, so the app starts a Worker from a Blob of <script id="noema-worker:<name>">
     core_scripts = (f'<script>{esc(bundle_text("app"))}</script>\n' if bundle_file('app') else '') + ''.join(
-        f'<script type="text/plain" id="noema-worker:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'worker')
+        f'<script type="text/plain" id="noema-worker:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'worker') + ''.join(
+        f'<script type="text/plain" id="noema-lazy:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'lazy')   # build/engines.js: run when first needed
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>

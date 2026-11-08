@@ -1773,6 +1773,7 @@
   async function start() {
     if (uiKit()) return;
     document.body.classList.add('noema-booting');
+    const contractsIn = NoemaCore.contracts.ready().catch(e => NoemaCore.errors.report(e, { where: 'loader.contracts', severity: 'warning' }));   // build/contracts.js, beside the start
     if (window.NoemaI18n) { try { await Promise.race([NoemaI18n.ready, new Promise(r => setTimeout(r, 4000))]); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.i18n.ready', severity: 'warning' }); } }
     migrateOldPrefix(); try { await migrateOldIDB(); } catch (e) { console.warn('[noema] old browser database not migrated', e); }
     if (CFG.supabaseUrl && (CFG.supabaseKey || CFG.supabaseAnonKey) && window.NoemaCloud) { try { await NoemaCloud.init(CFG); } catch (e) { console.warn('[Noema] cloud init failed', e); } }
@@ -1788,6 +1789,7 @@
     if (window.NoemaI18n) { const st = jget(`${P}${acc.id}:a:settings`, {}) || {}; try { await Promise.race([NoemaI18n.use(st.lang, st.numerals ? { digits: { 'ar-EG': st.numerals } } : {}), new Promise(r => setTimeout(r, 4000))]); } catch (e) { console.warn('[i18n]', e); } }   // the account's UI language, before the first screen
     try { const md = document.querySelector('meta[name="description"]'); if (md && window.NoemaI18n) md.content = tr('loader.meta.description'); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.meta.description', severity: 'info' }); }   // index.html has no words of its own before the scripts run
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);   // already in the pickers: curricula and shares change keys there
+    await contractsIn;   // the shape checks (packcheck.js) of everything below
     Notes.start(acc.id);
     try { window.NoemaCurriculum?.Gen.start(acc.id); window.NoemaCurJobs?.App.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background; picks up what the Claude app did
     const subs = await subjectsFor(acc.id);

@@ -5,7 +5,7 @@
 import { createPluginRegistry, type PluginRegistry, type Support } from '../plugins/index.ts';
 import NoemaExpr from './kernel/simexpr.js';
 import NoemaEngineCatalog from './catalog.js';
-import { EXPR } from './plugins.ts';
+import { EXPR } from './manifests.ts';
 import type { CatalogApi, EngineModule, EnginePlugin, ExprApi, LoadedEngine, RegisteredEngine, SchemaApi } from './types.ts';
 
 export interface LoadFailure {

@@ -111,7 +111,7 @@ The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOC
 
 | Root | Built to | What it picks |
 |---|---|---|
-| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`) and the data contracts (`NoemaCore.contracts`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
+| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`, its code in the lazy `build/engines.js`) and the data contracts (`CONTRACTS`, `NoemaCore.contracts`, the validators in the lazy `build/contracts.js`; §6.1). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
 | `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
 | `ui.ts` → `ui-root.ts` | `build/ui.js` (IIFE, kind `dev`: not in the site or the one-file bundle) | the I18n port over `engine/i18n.js`, the system clock, the device storage for the demo's appearance, the Notifier policy over the frame's toaster; mounts the frame and the kit's demo for `#/ui-kit` (§6.3) |
 | `worker.ts` | `build/worker.js` | the job registry (`jobs.ts`) served over `worker-protocol.ts` |
@@ -168,22 +168,28 @@ moved behind the bridge:
   `NoemaLib<Engine>`) and their page scripts `engine/src/35_simexpr.js`, `36_engine_circuit*.js`, `39–42_engine_*.js`,
   `43_engines_p6.js`, `46–49_lib_*.js`: they are `NoemaCore.engines` now (§6.1).
 
-### 6.1 Engines in the app bundle
+### 6.1 Engines and contracts out of the start path
 
 Every engine of sim-spec@1 is an ES module in `src/engines/<name>/` and a plugin of the microkernel (`src/plugins`: a manifest
-with its capabilities, a lazy entry, a lazy Worker bundle; `src/engines/plugins.ts` lists them). `tools/esbuild.mjs` puts the
-whole library into `build/app.js`; its plugin `noemaWorkers` turns `noema-worker:<module>#<export>` into the engine's Worker
-bundle as text, with the kernels several engines share built once.
+with its capabilities, a lazy entry, a lazy Worker bundle; `src/engines/plugins.ts` lists them). `tools/esbuild.mjs` builds the
+library; its plugin `noemaWorkers` turns `noema-worker:<module>#<export>` into the engine's Worker bundle as text, with the
+kernels several engines share built once.
 
-**Lazy, inside one IIFE.** The app bundle must stay a classic IIFE (it runs before the old scripts, and the one-file bundle opens
-from `file://`, where neither module scripts nor fetched chunks load), so esbuild inlines every `import()`. That still keeps the
-start cost low: each engine module is wrapped in a lazy initialiser that runs only when `NoemaCore.engines.load()` first asks for
-that engine (an activity before it mounts, `packcheck.js` before it checks a pack that names it, the author before its forms), and
-each Worker bundle is a string literal, which the page parses but never compiles until a Worker runs it. At start the page builds
-only the 26 manifests. The alternative, one file per engine fetched on demand, was rejected: it cannot work in the one-file
-bundle or from `file://`, so it would need a second loading path for the same code. The cost is the download (about 3.6 MB of
-the 5 MB `build/app.js`, 1.4 MB of its gzip), cached by the service worker. When phase 3 makes the app an ES module, turning on
-`splitting` in `tools/esbuild.mjs` makes those `import()`s real chunks with no change in `src/engines`.
+**Lazy pieces.** The start path of the page is `build/app.js` (the core, the expression language, the catalogue and the 26
+manifests of `src/engines/manifests.ts`: about 105 KB) and `build/ui.js` (the frame and the shell's screens: about 240 KB).
+Two pieces of kind `lazy` stay out of it:
+
+| piece | entry | what | when it runs |
+|---|---|---|---|
+| `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, `packcheck.js` before it checks a pack that names an engine, the author |
+| `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`), and after the first screen on Today; `NoemaCore.contracts.check()` before that is a bug and throws (`src/contracts/lazy.ts`) |
+
+A piece is a classic script: the page adds it as `<script src>` next to `build/app.js` (`pieceLoader` in
+`src/composition/browser.ts`), and the one-file bundle carries it as text (`<script type="text/plain" id="noema-lazy:<name>">`,
+`tools/build.py`) and runs that, so the same path works from `file://`. The piece hands its module over on
+`globalThis.__noema<Name>Piece`. A failed load (offline before the service worker has cached it) is tried again on the next ask.
+`tools/esbuild.mjs` holds `build/app.js` to 192 KB, so a change that pulls the engines or the validators back into the start
+path fails the build. `build/harness.js` (one activity without the app) and the Node bundles keep the whole library inline.
 
 **Exact arithmetic.** No bundle is minified with `minifySyntax` (whitespace and names only): the engines must compute every
 double as their source writes it, bit for bit with their Python twins (`tools/lib_*.py`, `tools/{circuit,thermal,pid,rf,twin}.py`).
@@ -295,6 +301,6 @@ The rules:
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui.js` (development only, §6.3), `engines-node.cjs`, and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the lazy `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

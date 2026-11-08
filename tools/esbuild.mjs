@@ -32,9 +32,10 @@
    text (<script type="text/plain" id="noema-worker:<name>">).
    (The connector stays one ESM file: Netlify treats every top-level file of the functions directory as a function.)
 
-   The engine library (src/engines) is in build/app.js: every engine is a plugin whose code esbuild wraps in a lazy initialiser
-   (it runs the first time NoemaCore.engines.load() asks for it) and whose Worker bundle is a string (noemaWorkers below), so
-   the page parses it but runs none of it at start (docs/ARCHITECTURE.md "Engines in the app bundle").
+   The engine library (src/engines) is split: build/app.js holds the expression language, the catalogue and every engine's
+   manifest (NoemaCore.engines answers at once); the code of every engine, its Worker bundle (a string: noemaWorkers below)
+   and the schema kernel are build/engines.js (kind "lazy"), which the page runs the first time NoemaCore.engines.load() or
+   schema() needs it (src/engines/lazy.ts) — the start path never downloads or parses them (docs/ARCHITECTURE.md).
 
    Minification is whitespace and names only, never syntax (minifySyntax): it would rewrite arithmetic (constant folding,
    reordered operands), and the engines must compute every double exactly as their source writes it — their Python twins
@@ -58,15 +59,21 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
 /** kind: page = a script of the site and the one-file bundle; worker = a Worker of the app; sw = the service worker;
     harness = a browser script for pages other than the app (not in the site); dev = a browser script the development pages load
     on demand (not in the site or the one-file bundle); node = a bundle for Node (format esm | cjs)
-    @typedef {{ name: string, in: string, kind: 'page' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
+    @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
+/** lazy = a script of the site and the one-file bundle the page runs only when it needs it (the one-file bundle keeps it as
+    text: <script type="text/plain" id="noema-lazy:<name>">) */
+const APP_KB = 192;   // the start path (build/app.js + build/ui.js, about 340 KB): the engines and the contracts are lazy pieces
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
-  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 5248 },   // 1.4 MB the core and the contracts + 3.6 MB the engine library (1.8 code, 1.8 Worker text)
+  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
+  { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
+  { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1536 },   // the compiled data contracts: loaded beside the start (src/contracts/lazy.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
-  { name: 'ui', in: 'src/composition/ui.ts', kind: 'dev', out: 'ui.js', budgetKB: 256 },   // Lit + the kit + its demo; loaded only on #/ui-kit
+  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 320 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui)
+  { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
 ];
 const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
