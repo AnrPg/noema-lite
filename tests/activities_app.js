@@ -449,7 +449,7 @@ async function simSpec(p, ctx, E) {
     ok(fit.page && fit.box && fit.inside && fit.svg && fit.touch, `${w} px: no sideways scrolling, the plots fit, touch targets >= 36 px ${JSON.stringify(fit)}`);
   }
   await p.setViewportSize({ width: 1280, height: 900 }); await wait(300);
-  await p.emulateMedia({ colorScheme: 'dark' }); await openSec(); await wait(300);
+  await p.emulateMedia({ colorScheme: 'dark' }); await openSec(); await until(() => p.evaluate(s => !!document.querySelector(s)?.querySelector('.sim-plot path.sim-line'), SEL), 8000);   // the page is drawn again for the new scheme
   const lum = c => { const m = (c.match(/[\d.]+/g) || [255, 255, 255]).map(Number); return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; };
   const dk = await p.evaluate(s => { const r = document.querySelector(s); const box = r.querySelector('.act-box'), dd = r.querySelector('.sim-ro dd'), ln = r.querySelector('.sim-plot path.sim-line');
     return { bg: getComputedStyle(box).backgroundColor, ink: getComputedStyle(dd).color, line: getComputedStyle(ln).stroke }; }, SEL);
