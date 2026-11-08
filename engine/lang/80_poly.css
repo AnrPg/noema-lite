@@ -72,6 +72,9 @@ ruby.lx-rw,ruby.lx-tok,ruby.lx-ru{margin-inline:.1em}
 .lx-lhmore { margin-top: 14px; }
 .lx-others { margin: 14px 0; border: 1px solid var(--line, #0002); border-radius: 10px; padding: 6px 12px; }
 .lx-others > summary { cursor: pointer; font-weight: 600; }
+/* the words of the table are links (they open the word's card): a word under another stands at least 24 px from it (WCAG 2.2 2.5.8) */
+.lx-compare td:nth-child(2) { line-height: 2; }
+.lx-compare td > .lx-wbox { margin-block: 5px; }
 .lx-fulltable { display: inline-block; margin-top: 8px; }
 
 /* aspects: a small label and a pale tint per side of the language (no icons) */
