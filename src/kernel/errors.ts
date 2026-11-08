@@ -121,6 +121,7 @@ export const INTERNAL_ERROR_CODES = [
   'storage.failed', // a storage operation failed for another reason (a transaction error)
   'remote.conflict', // compare-and-swap refused: the row changed since the version the writer read
   'remote.unknown_collection', // a Remote collection the adapter has no table for
+  'sync.invalid_event', // an event from the cloud that is not one (skipped; the others are kept)
   'compute.timeout', // a job ran longer than its time limit (its Worker is stopped)
   'compute.cancelled', // a job was cancelled by its caller
   'compute.unknown_job', // no handler is registered for the job name

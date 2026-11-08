@@ -57,8 +57,8 @@
       if (this.db) return Promise.resolve(this.db);
       return new Promise((res, rej) => {
         if (!window.indexedDB) return rej(new Error(tr('loader.err.noIndexedDB')));
-        const r = indexedDB.open('noema-lite', 1);
-        r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
+        const r = indexedDB.open('noema-lite', 2);   // the same version and stores as src/adapters/browser/storage.ts APP_DB (sync: the outbox and the settings registers)
+        r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos', 'sync'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
         r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error);
       });
     },
@@ -88,7 +88,7 @@
   /* ---------------- namespaced key/value store (+ mtimes for sync, dirty flag for backups) ---------------- */
   const KV = {
     acc: null, subj: null, listeners: [],
-    frozen: null,   // an account in use on another device right now (engine/cloud.js lease): nothing of it is saved here until "Use here"
+    frozen: null,   // an account in use on another device right now (NoemaCore.sync.lease): nothing of it is saved here until "Use here"
     sealed: null,   // an account just restored: the page reloads, and its last save must not write the old state back
     paused(key) { return [this.frozen, this.sealed].some(a => a && key.startsWith(`${P}${a}:`) && !key.startsWith(`${P}${a}:meta:`)); },
     accountKey(name, acc = this.acc) { return `${P}${acc}:a:${name}`; },
@@ -1731,12 +1731,12 @@
     async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== Noema.account.id) Noema.switchTo(a.id, null); },
   };
 
-  /* ---------------- "in use on another device" (engine/cloud.js lease) ----------------
+  /* ---------------- "in use on another device" (NoemaCore.sync.lease, src/features/sync) ----------------
      Shown while another tab or device is being used right now. Nothing is saved here meanwhile, so the two can never
      undo each other's progress; "Use here" pauses the other one and brings in what it did. */
   let inUse = null;
   function showInUse({ holder, unsynced }) {
-    const where = holder?.sameDevice ? tr('inuse.otherTab') : holder?.os ? tr('loader.inuse.device', { os: holder.os, browser: holder.br || 'none' }) : (holder?.name || tr('inuse.otherDevice'));   // os, br: newer apps; name: English words of older ones
+    const where = holder?.sameDevice ? tr('inuse.otherTab') : holder?.os ? tr('loader.inuse.device', { os: holder.os, browser: holder.br || 'none' }) : tr('inuse.otherDevice');
     const draw = (box, busy) => {
       box.innerHTML = '';
       box.append(el('div', { class: 'noema-inuse-dot' }),
@@ -1744,7 +1744,7 @@
         el('p', {}, tr('inuse.why')),
         el('button', { class: 'btn primary', disabled: busy || null, onclick: async () => {
           draw(box, true);
-          const st = await NoemaCloud.lease.check({ take: true });
+          const st = await NoemaCore.sync.lease.check({ take: true });
           if (st === 'mine') toastL(tr('inuse.continued')); else { draw(box, false); toastL(tr('inuse.offline'), 4000); }
         } }, tr('inuse.use')),
         el('p', { class: 'muted small' }, tr('inuse.useNote', { where })),
@@ -1758,10 +1758,15 @@
     }
     draw(inUse.firstChild, false); inUse.querySelector('button')?.focus();
   }
-  addEventListener('noema:inuse', e => {
-    if (e.detail?.state === 'other') return showInUse(e.detail);
-    if (inUse) { const o = inUse; inUse = null; document.querySelectorAll('[data-inuse-inert]').forEach(x => { x.inert = false; delete x.dataset.inuseInert; }); o.classList.add('out'); setTimeout(() => o.remove(), 250); }
-  });
+  let watchingInUse = false;
+  function watchInUse() {
+    if (watchingInUse) return; watchingInUse = true;
+    NoemaCore.sync.lease.onChange((state, holder) => {
+      Noema.kv.frozen = state === 'other' ? KV.acc : null;   // paused: this device saves nothing
+      if (state === 'other') return showInUse({ holder, unsynced: NoemaCore.sync.status().pending });
+      if (inUse) { const o = inUse; inUse = null; document.querySelectorAll('[data-inuse-inert]').forEach(x => { x.inert = false; delete x.dataset.inuseInert; }); o.classList.add('out'); setTimeout(() => o.remove(), 250); }
+    });
+  }
 
   /* ---------------- boot ---------------- */
   /** #/ui-kit on a development page (localhost): the UI foundation of phase 3 (src/ui, build/ui.js) and its demo instead of
@@ -1785,10 +1790,12 @@
     if (!acc) acc = accs.length === 1 && !cur.loggedOut ? accs[0] : await pickAccount();   // after Log out (Me ▾) the list of profiles, even with only one
     KV.acc = acc.id; Noema.account = acc;
     GeminiKey.migrate(acc.id);   // before the first pull, so a synced a:settings never replaces the only copy of the key
-    if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
+    if (acc.kind === 'cloud' && window.NoemaCloud) {   // the sync starts (its first pull, the lease; already in the pickers: curricula and shares change keys there)
+      watchInUse(); NoemaCloud.startAutoSync(acc.id);
+      await Promise.race([NoemaCore.sync.ready(), new Promise(r => setTimeout(r, 7000))]);   // what the other devices did, before the first screen (offline: the local copy)
+    }
     if (window.NoemaI18n) { const st = jget(`${P}${acc.id}:a:settings`, {}) || {}; try { await Promise.race([NoemaI18n.use(st.lang, st.numerals ? { digits: { 'ar-EG': st.numerals } } : {}), new Promise(r => setTimeout(r, 4000))]); } catch (e) { console.warn('[i18n]', e); } }   // the account's UI language, before the first screen
     try { const md = document.querySelector('meta[name="description"]'); if (md && window.NoemaI18n) md.content = tr('loader.meta.description'); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.meta.description', severity: 'info' }); }   // index.html has no words of its own before the scripts run
-    if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);   // already in the pickers: curricula and shares change keys there
     Notes.start(acc.id);
     try { window.NoemaCurriculum?.Gen.start(acc.id); window.NoemaCurJobs?.App.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background; picks up what the Claude app did
     const subs = await subjectsFor(acc.id);
@@ -1847,7 +1854,6 @@
     document.getElementById('noema-splash')?.remove();
     if (background) return;
     window.NoemaReact?.dayStart(acc.id);
-    if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);
     AutoBackup.start(acc.id).catch(caught('loader.autobackup'));
   }
   /** The frame asks for an engine when none is open (see openEngine). Resolves true once it is there. */

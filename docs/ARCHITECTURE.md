@@ -23,12 +23,12 @@ UI in `engine/` keeps running and reaches the new code through one global, `wind
                     ┌─────┴───────────────────────────────────▼─────┐
                     │ ports (src/ports/): Storage · Remote · Auth ·  │   interfaces + contract suites
                     │ Clock · AI · Compute · ErrorReporter · I18n ·  │   (src/ports/contract/*.contract.ts)
-                    │ Telemetry · Notifier                           │
+                    │ Telemetry · Notifier · Lifecycle               │
                     └─────────────────────┬─────────────────────────┘
                                           │ use
                     ┌─────────────────────▼─────────────────────────┐
                     │ kernel (src/kernel/): Result · NoemaError ·    │   pure TypeScript: no I/O, no globals
-                    │ ids · LocalDay · HLC · invariants              │
+                    │ ids · LocalDay · HLC · statecharts · invariants│
                     └───────────────────────────────────────────────┘
 ```
 
@@ -66,6 +66,7 @@ Helper 1's ESLint `boundaries` configuration checks these rules. Inside the laye
 | `ids.ts` | branded ids (`AccountId`, `CourseId`, `NodeId`, `CardId`, …) whose constructors return a `Result` |
 | `day.ts` | `LocalDay` "YYYY-MM-DD"; arithmetic through local noon, so it is DST-safe (ADR 005) |
 | `hlc.ts` | the hybrid logical clock `{wall, count, node}` with a drift guard, encoded so that it sorts as text |
+| `statechart.ts` | a small typed statechart: states, events, guards, context updates, timed transitions, effects as data; `transition()` is pure, `createActor` runs one on an injected scheduler, `transitionIds` lists every transition for coverage tests (the sync loop and the lease, docs/SYNC.md) |
 | `invariant.ts` | `invariant`, `defined`, `assertNever` |
 
 ## 4. Ports
@@ -76,8 +77,8 @@ fake of its service (`src/adapters/testing/`).
 
 | Port | Purpose | Adapters |
 |---|---|---|
-| Storage | key-value store (sync), document store (IndexedDB-like, with transactions), quota, the **storage-full signal** | browser (localStorage + IndexedDB `noema-lite` v1, the same DB the loader opens), memory |
-| Remote | rows with compare-and-swap versions that are always strictly later, objects, rpc | supabase (PostgREST + Storage), memory |
+| Storage | key-value store (sync), document store (IndexedDB-like, with transactions), quota, the **storage-full signal** | browser (localStorage + IndexedDB `noema-lite` v2 with the collection `sync`, the same DB the loader opens), memory |
+| Remote | rows with compare-and-swap versions that are always strictly later, objects, rpc; an append-only **log** (idempotent by id, read by cursor) and last-writer-wins **registers** (by clock stamp, one from the future clamped) — docs/SYNC.md | supabase (PostgREST + Storage), memory |
 | Auth | session, sign in/up/out, refresh, change events | supabase (GoTrue), memory |
 | Clock | now, today (`LocalDay`), time zone, timers, `onDayChange` | browser (system), memory (manual) |
 | AI | provider-neutral chat with tools, JSON mode, streaming deltas, usage | claude (Messages API, SSE), gemini (generateContent) |
@@ -86,6 +87,7 @@ fake of its service (`src/adapters/testing/`).
 | I18n | `t`, `has`, `err`, `plural`, `format.*`, locale and direction | browser (over `NoemaI18n`), memory (catalogs) |
 | Telemetry | local counters and events only, never sent | local |
 | Notifier | toast · notice (at most 2 on screen, then overflow to the 🔔 bell) · alert (also the assertive live region `#noema-alert`) | browser (DOM), memory (recording) |
+| Lifecycle | the page: shown or hidden, on line, left, touched; this device's kind and browser; this tab's id | browser (document, window, sessionStorage), memory (manual) |
 
 ## 5. Composition roots and the container
 
@@ -162,6 +164,7 @@ NoemaCore.catalog                       the search index's records (src/features
                                         toneNumbers · BLOCK_KIND · SCHEMA · index(account, sources) → { load, refresh, records,
                                         byKey, state, on, forget } (the records built in the Worker, kept in noema-lite-search)
 NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
+NoemaCore.sync                          the sync loop, the lease, the settings registers (src/composition/sync.ts, docs/SYNC.md)
 ```
 
 #### 6.0 The study domain and its read models (phase 2)
@@ -286,7 +289,8 @@ The rules:
 | Web components, context by event, an overlay stack | `src/ui/` (§6.3) |
 | CQRS read models in a Worker (Compute jobs `study.project`, `catalog.records`), followed on the page event by event | `src/features/study/application/read-models.ts`, `src/features/catalog/application/index-store.ts` (§6.0) |
 | Pure domain graders and schedulers (Strategy per exercise type; FSRS-6) | `src/features/study/domain/grading`, `fsrs.ts` (§6.0) |
-| Saga with idempotency keys, event sourcing of learning events, local-first with an outbox, statecharts, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
+| Local-first with an outbox, statecharts | `src/features/sync` (the outbox in the event append's own transaction, the loop and the lease as statecharts), `src/kernel/statechart.ts`, docs/SYNC.md |
+| Saga with idempotency keys, event sourcing of learning events, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
 
 ## 8. How to add …
 

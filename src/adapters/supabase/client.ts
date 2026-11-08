@@ -50,6 +50,8 @@ export interface CallOptions {
   /** With the user's session (default) or only the project key. */
   readonly auth?: boolean;
   readonly signal?: AbortSignal;
+  /** The request outlives the page (it is being closed); the body must stay under 64 KB. */
+  readonly keepalive?: boolean;
 }
 
 export interface Answer {
@@ -175,6 +177,7 @@ export class SupabaseClient {
         headers,
         body,
         ...(o.signal ? { signal: o.signal } : {}),
+        ...(o.keepalive ? { keepalive: true } : {}),
       });
     } catch (e) {
       return err(networkError(path, e));

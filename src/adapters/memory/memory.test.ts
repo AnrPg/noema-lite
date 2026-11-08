@@ -7,6 +7,8 @@ import { computeContract } from '../../ports/contract/compute.contract.ts';
 import { errorReporterContract } from '../../ports/contract/error-reporter.contract.ts';
 import { CONTRACT_CATALOGS, i18nContract } from '../../ports/contract/i18n.contract.ts';
 import { notifierContract } from '../../ports/contract/notifier.contract.ts';
+import { lifecycleContract } from '../../ports/contract/lifecycle.contract.ts';
+import { manualLifecycle } from './lifecycle.ts';
 import { remoteContract } from '../../ports/contract/remote.contract.ts';
 import { storageContract } from '../../ports/contract/storage.contract.ts';
 import { telemetryContract } from '../../ports/contract/telemetry.contract.ts';
@@ -126,3 +128,22 @@ errorReporterContract(
     },
   },
 );
+
+lifecycleContract('manual', () => {
+  const l = manualLifecycle();
+  return {
+    lifecycle: l,
+    setVisible: v => {
+      l.setVisible(v);
+    },
+    goOnline: () => {
+      l.setOnline(true);
+    },
+    touch: () => {
+      l.touch();
+    },
+    close: () => {
+      l.leave();
+    },
+  };
+});

@@ -578,9 +578,13 @@
   "@err.ui.selftest.step.profile": {
     "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
   },
-  "err.ui.selftest.step.progress": "Progress sync (key/value)",
+  "err.ui.selftest.step.progress": "Key/value sync (roadmaps, language courses…)",
   "@err.ui.selftest.step.progress": {
     "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list. Short."
+  },
+  "err.ui.selftest.step.sync": "Learning log and settings sync",
+  "@err.ui.selftest.step.sync": {
+    "description": "Self-check of the cloud connection (Me › Cloud): the name of one check in the list (the tables the learning events and the settings are synced through). Short."
   },
   "err.ui.selftest.step.conversations": "Conversations",
   "@err.ui.selftest.step.conversations": {

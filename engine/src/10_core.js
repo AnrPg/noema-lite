@@ -186,17 +186,19 @@ function flushSave() {
   Object.assign(S.settings, cur); seeSettings();   // the page's copy follows what the others saved
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
-/* another device's progress or settings arrived (engine/cloud.js): fold them into what this page holds, so the next save
-   can't write the older copy back over them. Progress only grows: answers, reviews and read sections of both are kept. */
+/* the stored progress or settings changed under this page (NoemaCore.sync: another device's settings, the cloud's old copy of
+   a subject this device lacked, another tab of this browser that had the account): fold them into what this page holds, so
+   the next save can't write the older copy back over them. The stored copy wins; what only this page holds is kept. */
 addEventListener('noema:remote', e => {
-  if (e.detail?.acc !== ACCOUNT.id || !window.NoemaCloud?.mergeState) return;
+  if (e.detail?.acc !== ACCOUNT.id) return;
   const keys = e.detail.keys || [];
   if (keys.includes(STATE_KEY) && Noema.kv.get(STATE_KEY) == null) {   // deleted on another device (e.g. a restore without this subject): start empty, don't upload the old copy again
     for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
     Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null });
   } else if (keys.includes(STATE_KEY)) {
     let st = {}; try { st = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.state', severity: 'warning' }); }
-    const { settings, ...mine } = S; const merged = NoemaCloud.mergeState(mine, st); delete merged.settings;
+    const { settings, ...mine } = S, merged = { ...mine, ...st, xp: Math.max(mine.xp || 0, st.xp || 0) }; delete merged.settings;
+    for (const f of ['read', 'res', 'pb', 'fc', 'boss']) merged[f] = { ...(mine[f] || {}), ...(st[f] || {}) };
     for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
     Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
     if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;

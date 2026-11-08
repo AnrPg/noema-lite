@@ -7,7 +7,7 @@ import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { NoemaError } from '../../kernel/errors.ts';
 import type { Auth, AuthEvent } from '../auth.ts';
-import type { Remote } from '../remote.ts';
+import type { LogEntry, Remote } from '../remote.ts';
 
 export interface RemoteHarness {
   readonly remote: Remote;
@@ -170,6 +170,101 @@ export function remoteContract(name: string, make: RemoteFactory): void {
       assert.deepEqual(
         value(await remote.objects.list('private', 'u1/files')).map(o => o.path),
         ['u1/files/b.bin'],
+      );
+    });
+
+    test('log: append is idempotent by id; reads go on from a cursor, page by page, each entry once', async () => {
+      const { remote } = await signedIn();
+      const ev = (i: number): LogEntry => ({
+        id: `ev${i}`,
+        kind: 'answer.given',
+        stamp: `${String(1_700_000_000_000 + i).padStart(15, '0')}-00000-devA`,
+        device: 'devA',
+        body: { id: `ev${i}`, n: i },
+      });
+      value(await remote.log.append('events', [ev(1), ev(2), ev(3)]));
+      value(await remote.log.append('events', [ev(2), ev(3), ev(4)])); // sent again after a lost answer: nothing doubles
+      const p1 = value(await remote.log.read('events', { after: null, limit: 3 }));
+      assert.deepEqual(
+        p1.entries.map(e => e.id),
+        ['ev1', 'ev2', 'ev3'],
+      );
+      assert.ok(p1.more);
+      assert.deepEqual(p1.entries[1]?.body, { id: 'ev2', n: 2 });
+      assert.equal(p1.entries[1].kind, 'answer.given');
+      const p2 = value(await remote.log.read('events', { after: p1.cursor, limit: 3 }));
+      assert.deepEqual(
+        p2.entries.map(e => e.id),
+        ['ev4'],
+      );
+      assert.ok(!p2.more);
+      const p3 = value(await remote.log.read('events', { after: p2.cursor, limit: 3 }));
+      assert.deepEqual([p3.entries.length, p3.more, p3.cursor], [0, false, p2.cursor], 'nothing new: the cursor stays');
+      value(await remote.log.append('events', [ev(5)]));
+      assert.deepEqual(
+        value(await remote.log.read('events', { after: p3.cursor })).entries.map(e => e.id),
+        ['ev5'],
+      );
+      assert.equal(code(await remote.log.read('nope', { after: null })), 'remote.unknown_collection');
+    });
+
+    test('registers: the later stamp wins per key, an equal or earlier one is not kept; reads from a cursor; removal', async () => {
+      const t = Date.parse('2026-11-07T12:00:00.000Z');
+      const { remote } = await signedIn(() => t);
+      const st = (ms: number, count = 0, node = 'devA'): string =>
+        `${String(t + ms).padStart(15, '0')}-${String(count).padStart(5, '0')}-${node}`;
+      const kept = value(
+        await remote.registers.put('settings', [
+          { key: 'settings.goal', value: 100, stamp: st(-1000), device: 'devA' },
+          { key: 'settings.lang', value: 'el', stamp: st(-900), device: 'devA' },
+        ]),
+      );
+      assert.deepEqual(
+        kept.map(e => e.key),
+        ['settings.goal', 'settings.lang'],
+      );
+      const first = value(await remote.registers.read('settings', { after: null }));
+      assert.equal(first.entries.length, 2);
+      const again = value(
+        await remote.registers.put('settings', [
+          { key: 'settings.goal', value: 50, stamp: st(-2000), device: 'devB' }, // older: not kept
+          { key: 'settings.lang', value: 'fr', stamp: st(-900), device: 'devA' }, // the same stamp: not kept
+          { key: 'settings.goal', value: 150, stamp: st(-1000, 1, 'devB'), device: 'devB' }, // later by its counter: kept
+          { key: 'settings.sound', value: null, stamp: st(-500), device: 'devB' }, // a removal is a value too
+        ]),
+      );
+      assert.deepEqual(
+        again.map(e => [e.key, e.value]),
+        [
+          ['settings.goal', 150],
+          ['settings.sound', null],
+        ],
+      );
+      const next = value(await remote.registers.read('settings', { after: first.cursor }));
+      assert.deepEqual(next.entries.map(e => [e.key, e.value]).sort(), [
+        ['settings.goal', 150],
+        ['settings.sound', null],
+      ]);
+      const all = value(await remote.registers.read('settings', { after: null }));
+      assert.deepEqual(Object.fromEntries(all.entries.map(e => [e.key, e.value])), {
+        'settings.goal': 150,
+        'settings.lang': 'el',
+        'settings.sound': null,
+      });
+      assert.equal(code(await remote.registers.read('nope', { after: null })), 'remote.unknown_collection');
+    });
+
+    test("registers: a stamp from a clock far ahead of the cloud is stored as the cloud's time", async () => {
+      const t = Date.parse('2026-11-07T12:00:00.000Z');
+      const { remote } = await signedIn(() => t);
+      const ahead = `${String(t + 365 * 86_400_000).padStart(15, '0')}-00000-devX`;
+      const [e] = value(await remote.registers.put('settings', [{ key: 'settings.goal', value: 1, stamp: ahead, device: 'devX' }]));
+      assert.ok(e && e.stamp < ahead && Number(e.stamp.slice(0, 15)) <= t + 1000, 'clamped to the cloud clock: ' + String(e?.stamp));
+      const later = `${String(t + 1000).padStart(15, '0')}-00000-devA`;
+      assert.equal(
+        value(await remote.registers.put('settings', [{ key: 'settings.goal', value: 2, stamp: later, device: 'devA' }])).length,
+        1,
+        'a real later write wins',
       );
     });
 

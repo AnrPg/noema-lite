@@ -1387,5 +1387,107 @@ alter table public.noema_sagas enable row level security;
 drop policy if exists "own sagas" on public.noema_sagas;
 create policy "own sagas" on public.noema_sagas for all to authenticated using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
 
--- 14) Check: should list the 30 noema_ tables with rls_enabled = true
+-- 19) SYNC, LOCAL FIRST (docs/SYNC.md): every device keeps its own data and sends only what changed.
+--     noema_events    the learning log: one row per event (an answer given, a card rated…), append-only, written once
+--                     by the device it happened on (a repeated send of the same id does nothing), never changed or
+--                     deleted. Devices merge the log by id, so nothing two devices did is ever lost.
+--     noema_settings  the account's settings, one row per field (key "settings.<field>"; value null: removed). The
+--                     later stamp wins, per field; a write with an earlier (or the same) stamp leaves the row as it is.
+--     hlc: the hybrid logical clock stamp of the device ("<15-digit ms>-<5-digit counter>-<device>"), so the text order
+--     is the time order. A stamp more than 5 minutes ahead of the server's clock is stored as the server's time (a
+--     device whose clock runs ahead never wins for ever).
+--     Reading: noema_events_since / noema_settings_since (after, max_rows) → the rows after a cursor "<tx>:<seq>", in
+--     order, with their own cursor. Only rows of transactions older than every running one are passed, so a reader never
+--     skips a row that commits later with a smaller number. Owner only.
+create table if not exists public.noema_events (
+  user_id    uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  id         text not null check (char_length(id) between 1 and 120),
+  type       text not null check (char_length(type) between 1 and 80),
+  hlc        text not null check (hlc ~ '^[0-9]{15}-[0-9]{5}-[A-Za-z0-9_-]{1,64}$'),
+  device     text not null check (char_length(device) between 1 and 64),
+  body       jsonb not null check (jsonb_typeof(body) = 'object' and pg_column_size(body) <= 65536),
+  tx         xid8 not null default pg_current_xact_id(),
+  seq        bigint generated always as identity,
+  created_at timestamptz not null default now(),
+  primary key (user_id, id)
+);
+create index if not exists noema_events_read on public.noema_events (user_id, tx, seq);
+create sequence if not exists public.noema_settings_seq;
+create table if not exists public.noema_settings (
+  user_id    uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  key        text not null check (char_length(key) between 1 and 200),
+  value      jsonb check (value is null or pg_column_size(value) <= 65536),
+  hlc        text not null check (hlc ~ '^[0-9]{15}-[0-9]{5}-[A-Za-z0-9_-]{1,64}$'),
+  device     text not null check (char_length(device) between 1 and 64),
+  tx         xid8 not null default pg_current_xact_id(),
+  seq        bigint not null default nextval('public.noema_settings_seq'),
+  updated_at timestamptz not null default now(),
+  primary key (user_id, key)
+);
+create index if not exists noema_settings_read on public.noema_settings (user_id, tx, seq);
+
+-- the server's part of a write: the transaction and order of the row (never the client's), a stamp from the future
+-- brought back to now; for a setting, a stamp not later than the stored one keeps the stored row (last writer wins)
+create or replace function public.noema_sync_stamp() returns trigger language plpgsql security definer set search_path = public as $$
+declare now_ms bigint := floor(extract(epoch from clock_timestamp()) * 1000);
+begin
+  if substr(new.hlc, 1, 15)::bigint > now_ms + 300000 then
+    new.hlc := lpad(now_ms::text, 15, '0') || '-00000-' || substr(new.hlc, 23);
+  end if;
+  if tg_op = 'UPDATE' then
+    if new.hlc collate "C" <= old.hlc collate "C" then return null; end if;
+    new.user_id := old.user_id; new.key := old.key;
+  end if;
+  new.tx := pg_current_xact_id();
+  if tg_table_name = 'noema_settings' then
+    new.seq := nextval('public.noema_settings_seq'); new.updated_at := now();
+  else
+    new.created_at := now();
+  end if;
+  return new;
+end $$;
+drop trigger if exists noema_events_stamp on public.noema_events;
+create trigger noema_events_stamp before insert on public.noema_events for each row execute function public.noema_sync_stamp();
+drop trigger if exists noema_settings_stamp on public.noema_settings;
+create trigger noema_settings_stamp before insert or update on public.noema_settings for each row execute function public.noema_sync_stamp();
+alter table public.noema_events   enable row level security;
+alter table public.noema_settings enable row level security;
+drop policy if exists "own events: read"     on public.noema_events;
+drop policy if exists "own events: add"      on public.noema_events;
+drop policy if exists "own settings: read"   on public.noema_settings;
+drop policy if exists "own settings: add"    on public.noema_settings;
+drop policy if exists "own settings: change" on public.noema_settings;
+create policy "own events: read"     on public.noema_events   for select to authenticated using (user_id = (select auth.uid()));
+create policy "own events: add"      on public.noema_events   for insert to authenticated with check (user_id = (select auth.uid()));
+create policy "own settings: read"   on public.noema_settings for select to authenticated using (user_id = (select auth.uid()));
+create policy "own settings: add"    on public.noema_settings for insert to authenticated with check (user_id = (select auth.uid()));
+create policy "own settings: change" on public.noema_settings for update to authenticated using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
+
+create or replace function public.noema_events_since(after text default null, max_rows int default 1000)
+returns table (id text, type text, hlc text, device text, body jsonb, cursor text)
+language sql stable security invoker set search_path = public as $$
+  select e.id, e.type, e.hlc, e.device, e.body, e.tx::text || ':' || e.seq::text
+  from public.noema_events e
+  where e.user_id = (select auth.uid())
+    and e.tx < pg_snapshot_xmin(pg_current_snapshot())
+    and (after is null or (e.tx, e.seq) > (split_part(after, ':', 1)::xid8, split_part(after, ':', 2)::bigint))
+  order by e.tx, e.seq
+  limit least(greatest(coalesce(max_rows, 1000), 1), 1000)
+$$;
+create or replace function public.noema_settings_since(after text default null, max_rows int default 1000)
+returns table (key text, value jsonb, hlc text, device text, cursor text)
+language sql stable security invoker set search_path = public as $$
+  select s.key, s.value, s.hlc, s.device, s.tx::text || ':' || s.seq::text
+  from public.noema_settings s
+  where s.user_id = (select auth.uid())
+    and s.tx < pg_snapshot_xmin(pg_current_snapshot())
+    and (after is null or (s.tx, s.seq) > (split_part(after, ':', 1)::xid8, split_part(after, ':', 2)::bigint))
+  order by s.tx, s.seq
+  limit least(greatest(coalesce(max_rows, 1000), 1), 1000)
+$$;
+grant usage on sequence public.noema_settings_seq to authenticated;
+grant execute on function public.noema_events_since(text, int)   to authenticated;
+grant execute on function public.noema_settings_since(text, int) to authenticated;
+
+-- 14) Check: should list the 32 noema_ tables with rls_enabled = true
 select tablename, rowsecurity as rls_enabled from pg_tables where schemaname = 'public' and tablename like 'noema_%' order by 1;
