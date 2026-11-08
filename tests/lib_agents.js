@@ -1,4 +1,4 @@
-/* agents@1 (src/engines/agents/agents.js, docs/library/agents.md) against published and exact values:
+/* agents@1 (src/engines/agents/agents.ts, docs/library/agents.md) against published and exact values:
    1. the classic models: Schelling 1971 (mild preferences, strong segregation), Boids / Vicsek order, SIR well mixed against the
       Kermack–McKendrick 1927 final size (replications with Student-t intervals), the Ising model against Onsager 1944, DeGroot 1974
       consensus = the degree-weighted mean, the voter model's martingale, wolf–sheep coexistence, Sugarscape inequality;

@@ -105,8 +105,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('agents@1', ['engine:logic@1']),
-    () => import('./agents/agents.js'),
-    () => import('noema-worker:./agents/agents.js#simEngine'),
+    () => import('./agents/agents.ts'),
+    () => import('noema-worker:./agents/agents.ts#simEngine'),
   ),
   def(
     manifest('field@1'),

@@ -1,4 +1,4 @@
-# `agents@1` — agent-based models and multi-agent systems (`src/engines/agents/agents.js`, `NoemaLibAgents`)
+# `agents@1` — agent-based models and multi-agent systems (`src/engines/agents/agents.ts`, `NoemaLibAgents`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). A model is described in the terms of the ODD protocol (Grimm et
 al. 2006, 2020; Railsback & Grimm 2019): **entities** (breeds of agents with typed state, patches, globals), **space** (continuous,

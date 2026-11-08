@@ -786,7 +786,7 @@ const CATALOG = Object.freeze([
     'délai',
     'succession',
   ]),
-  E('agents@1', 'library', true, 'src/engines/agents/agents.js', 'agents', [
+  E('agents@1', 'library', true, 'src/engines/agents/agents.ts', 'agents', [
     'agent',
     'agent-based',
     'multi-agent',

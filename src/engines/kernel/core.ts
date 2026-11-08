@@ -24,7 +24,7 @@ export type TableNode = string | Shape;
 export interface Shape {
   readonly $obj?: Table;
   readonly $list?: TableNode;
-  readonly $map?: string;
+  readonly $map?: TableNode;
   readonly min?: number;
   readonly max?: number;
   readonly $req?: boolean;

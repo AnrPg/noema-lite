@@ -1,4 +1,4 @@
-# `clinic@1` — clinical reasoning: differentials, thresholds, decisions, virtual patients, triage (`src/engines/clinic/clinic.js`, `NoemaLibClinic`)
+# `clinic@1` — clinical reasoning: differentials, thresholds, decisions, virtual patients, triage (`src/engines/clinic/clinic.ts`, `NoemaLibClinic`)
 
 The deepest engine of the library (`docs/INTERACTIVE_LIBRARY.md`): it models **how a clinician reasons**, not one formula. A spec can
 hold any of ten sections, and they work together: a differential diagnosis updated finding by finding with Bayes' theorem (with the
