@@ -63,6 +63,59 @@ export interface Calendar {
   clear(): void;
 }
 
+/** a distribution of durations or counts, ready to draw (dist()): not ok → NaN moments and NaN draws */
+export interface Dist {
+  readonly ok: boolean;
+  readonly mean: number;
+  readonly var: number;
+  readonly scv: number;
+  readonly draw: (r: Stream) => number;
+}
+/** a Student-t interval over values (ci()) */
+export interface Ci {
+  readonly n: number;
+  readonly mean: number;
+  readonly sd: number;
+  readonly half: number;
+  readonly lo: number;
+  readonly hi: number;
+  readonly level: number;
+}
+/** the options of an event scheduled on the discrete-event executive */
+export interface SimOpts {
+  readonly prio?: number;
+  readonly kind?: unknown;
+  readonly data?: unknown;
+}
+/** an event of the executive, as its handler gets it */
+export interface SimEvent {
+  readonly t: number;
+  readonly prio: number;
+  readonly seq: number;
+  readonly fn: (e: SimEvent) => void;
+  readonly kind: unknown;
+  readonly data: unknown;
+}
+/** how run(until) stopped */
+export interface SimRun {
+  readonly t: number;
+  readonly events: number;
+  readonly stop: string;
+}
+/** the discrete-event executive (sim()): next-event time advance over a calendar of closures */
+export interface Sim {
+  readonly now: number;
+  readonly events: number;
+  readonly pending: number;
+  readonly codes: Codes;
+  readonly tEnd: number;
+  at(t: number, fn: (e: SimEvent) => void, op?: SimOpts | null): number;
+  after(dt: number, fn: (e: SimEvent) => void, op?: SimOpts | null): number;
+  cancel(id: number): boolean;
+  stop(code?: string): void;
+  run(until?: number): SimRun;
+}
+
 declare const api: {
   readonly [name: string]: unknown;
   readonly stream: (
@@ -78,6 +131,27 @@ declare const api: {
   readonly normInv: (p: number) => number;
   readonly codes: (fatalList?: readonly string[] | null) => Codes;
   readonly calendar: () => Calendar;
+  readonly TIME_UNITS: readonly string[];
+  readonly dist: (d: unknown) => Dist;
+  readonly sim: (
+    o?: {
+      readonly tEnd?: number;
+      readonly maxEvents?: number;
+      readonly zeno?: number;
+      readonly logCap?: number;
+      readonly t0?: number;
+      readonly eps?: number;
+    } | null,
+  ) => Sim;
+  readonly ci: (values: Iterable<number> | null | undefined, level?: number) => Ci;
+  readonly acf: (x: ArrayLike<number> & Iterable<number>, k: number) => number;
+  readonly mser5: (x: ArrayLike<number> | null | undefined) => { d: number; dBatches: number; short: boolean; z: number[] };
+  readonly littleCheck: (L: number, lambda: number, W: number) => number;
+  readonly linspace: (a: number, b: number, n: number) => number[];
+  readonly piecewise: (
+    pts: readonly (readonly number[])[] | null | undefined,
+    o?: { readonly step?: boolean; readonly period?: number } | null,
+  ) => (t: number) => number;
   readonly stepper: <S, P = unknown>(def: CoreStepper<S, P> & { readonly id?: unknown }) => CoreStepper<S, P>;
 };
 export default api;
