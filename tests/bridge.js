@@ -19,7 +19,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 /* ---------- 1. without a browser ---------- */
 function unit() {
   console.log('— words, matching and the checks, without a browser');
-  const ctx = { console }; ctx.window = ctx; vm.createContext(ctx);
+  const ctx = { console, URL, URLSearchParams, TextEncoder, TextDecoder }; ctx.window = ctx; vm.createContext(ctx);   // what a browser page has (the contracts' validators check URIs with URL)
   for (const f of ['engine/contracts.js', 'engine/catalog.js', 'engine/wordlink.js', 'engine/packcheck.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const W = ctx.NoemaWordlink, C = ctx.NoemaPackCheck.checkBridge;
   ok(W.tokenize("Spark's data-skew, don’t 42x").map(t => t.t).join('|') === "Spark's|data-skew|don’t|42x", "words keep ' and - inside them, digits count as letters");
@@ -47,7 +47,7 @@ function unit() {
     ok(C(x, pack).errors.some(e => /translation saved first/.test(e)), 'a bridge from a translation the pack does not have yet is refused (bridges come after the translations)');
     ok(!C({ ...x, native: 'en' }, tp).errors.length, 'el → en: a translation\'s bridge into the pack\'s own language is fine'); }
   // the app: one bridge per pair, keyed "<native>" from the pack's language and "<source>.<native>" from a translation
-  { const store = {}, bx = { console, Intl, localStorage: { getItem: k => store[k] ?? null, setItem: (k, v) => { store[k] = String(v); } } }; bx.window = bx; vm.createContext(bx);
+  { const store = {}, bx = { console, Intl, URL, URLSearchParams, TextEncoder, TextDecoder, localStorage: { getItem: k => store[k] ?? null, setItem: (k, v) => { store[k] = String(v); } } }; bx.window = bx; vm.createContext(bx);
     for (const f of ['build/app.js', 'engine/bridge.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), bx);
     const B = bx.NoemaBridge; store['noema1:u1:a:bridges'] = JSON.stringify({ p1: { ru: { v: 'a', status: 'draft' }, ar: { v: 'b', status: 'draft' }, 'el.ru': { v: 'c', status: 'draft', source: 'el' }, 'el.en': { v: 'd', status: 'reviewed', source: 'el' } } });
     const subj = { id: 'p1', language: 'en' };
@@ -95,13 +95,13 @@ function unit() {
 }
 
 /* ---------- 2. in the browser ---------- */
-let URL = '';   // the app over http (set before the browser part)
+let APP_URL = '';   // the app over http (set before the browser part)
 async function open(b, { w = 1100, h = 900, settings = {}, sid = 'ch01-s05' } = {}) {
   const page = await (await b.newContext({ viewport: { width: w, height: h } })).newPage();
   page._errors = []; page.on('pageerror', e => page._errors.push(e.message));
-  await page.goto(URL); await wait(200);
+  await page.goto(APP_URL); await wait(200);
   await page.evaluate(s => { localStorage.clear(); localStorage.setItem('noema1:anr:a:settings', JSON.stringify({ lang: 'en', ...s })); localStorage.setItem('noema1:current', JSON.stringify({ acc: 'anr' })); }, settings);
-  await page.goto('about:blank'); await page.goto(URL); await wait(900);
+  await page.goto('about:blank'); await page.goto(APP_URL); await wait(900);
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1300);
   if (sid) await section(page, sid);
   return page;
@@ -114,7 +114,7 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
 
 (async () => {
   unit();
-  URL = await appUrl(ROOT);
+  APP_URL = await appUrl(ROOT);
   const b = await chromium.launch();
   try {
     console.log('— the first time: the native language, then the level');
@@ -190,7 +190,7 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
     });
     ok(/DET|function/i.test(res.refused), 'a bridge with a function word is refused (' + res.refused.slice(0, 80) + ')');
     ok(res.got?.native === 'el' && res.av.el?.own, 'a correct one is attached to the account and listed as its own');
-    await page.goto('about:blank'); await page.goto(URL); await wait(900);
+    await page.goto('about:blank'); await page.goto(APP_URL); await wait(900);
     await page.click('.noema-chip:has-text("Demo Physics")'); await wait(1200); await section(page, 'ch01-s01');
     const dp = await page.$$eval('.nb-root .nw', x => x.map(e => e.dataset.k + (e.querySelector('.nw-rt') ? '=' + e.querySelector('.nw-rt').textContent : '')));
     ok(dp.includes('kinetic energy=κινητική ενέργεια'), `its words are linked after a reload, the phrase before the word (${dp.slice(0, 4).join(', ')})`);
@@ -206,7 +206,7 @@ const count = (page, sel) => page.$$eval(sel, x => x.length);
       const bs = natives.map(n => JSON.parse(fs.readFileSync(path.join(require('os').tmpdir(), `bridge-${src}-${n}.json`), 'utf8')));
       const r = await page.evaluate(async ({ FP, bs }) => { await Noema.importPack('anr', FP); for (const x of bs) await NoemaBridge.attach('anr', x); return Object.keys(NoemaBridge.available('anr', FP.subject.id)).sort().join(','); }, { FP, bs });
       ok(r === natives.slice().sort().join(','), `${src}: the pack is imported with its five bridges (${r})`);
-      await page.goto('about:blank'); await page.goto(URL); await wait(900);
+      await page.goto('about:blank'); await page.goto(APP_URL); await wait(900);
       await page.click(`.noema-chip:has-text("${FP.subject.title}")`); await wait(1000);
       for (const nat of [...natives, src]) {
         await page.evaluate(n => { NoemaBridge.setNative('anr', n); location.hash = '#/'; }, nat); await wait(500);

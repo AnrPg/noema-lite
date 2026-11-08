@@ -76,7 +76,7 @@ async function signUp(browser, email, name) {
   ok(srv.state.shares.find(s => s.subject_id === 'heart-test').status === 'accepted', 'Accept → share accepted'); await wait(3500);
   const bob = Object.values(srv.state.users).find(u => u.email === 'bob@example.com').id;
   ok(!!srv.state.kv[bob]?.['a:packmeta:heart-test'] && Object.keys(srv.state.files).some(k => k === `${bob}/packs/heart-test.json`), 'the pack is copied into Bob’s own account (synced to all his devices)');
-  const bIdx = JSON.parse(srv.state.kv[bob]?.['a:srcfiles:heart-test']?.value || '{}');
+  const bIdx = srv.srcfiles(bob, 'heart-test');
   const bParts = Object.keys(srv.state.files).filter(k => k.startsWith(`${bob}/sources/heart-test/atlas/file.pdf.p`)).sort();
   ok(bIdx.notes?.name === 'Σημειώσεις καρδιάς.pdf' && bIdx.atlas?.chunks === 4 && Buffer.concat(bParts.map(k => Buffer.from(srv.state.files[k].data))).equals(bytes(BIG, 7)) && Buffer.from(srv.state.files[`${bob}/sources/heart-test/notes/file.pdf`].data).equals(bytes(5000, 3)), 'Bob gets the source files too, byte for byte, in his own account');
   ok(!JSON.stringify(JSON.parse(Buffer.from(srv.state.files[`${bob}/packs/heart-test.json`].data).toString())).includes('sharedFiles'), 'the download addresses are not kept in Bob’s copy of the pack');

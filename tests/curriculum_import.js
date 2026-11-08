@@ -252,8 +252,8 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   ok(A.files.some(f => f.name === 'dna-replication.pdf') && job.uploads === 1, 'the PDF is uploaded into Claude’s sandbox with the job');
   ok(/THESE FILES ARE THE SOURCES/.test(job.system) && /Do NOT research the theory on the web/.test(job.system) && !job.tools.includes('web_fetch_20250910'), 'Claude builds from the file — no web research of the theory (no web_fetch)');
   ok(/m1: dna-replication\.pdf \(4 pages\)/.test(job.first) && /From the material: dna-replication\.pdf pp\. 1–1/.test(job.first), 'the brief names the file (source id m1) and each chapter’s pages');
-  const ixOk = await until(() => { const ix = JSON.parse(srv.state.kv[iro]?.['a:srcfiles:' + pidDna]?.value || '{}'); return Object.keys(ix).join() === 'm1' && ix.m1.size === A.pdf.length && ix.m1.cloud; }, 15000);
-  if (!ixOk) console.log('   index:', srv.state.kv[iro]?.['a:srcfiles:' + pidDna]?.value);
+  const ixOk = await until(() => { const ix = srv.srcfiles(iro, pidDna); return Object.keys(ix).join() === 'm1' && ix.m1.size === A.pdf.length && ix.m1.cloud; }, 15000);
+  if (!ixOk) console.log('   index:', JSON.stringify(srv.srcfiles(iro, pidDna)));
   ok(ixOk, 'the packaged file is the step subject’s source (👁 at the cited pages)');
 
   console.log('— a step with notes, built by Gemini from their text');
