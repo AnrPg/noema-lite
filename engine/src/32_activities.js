@@ -2,7 +2,7 @@
    A pack may carry activities (pack.activities, format noema.activities/v1): mini-apps, minigames and simulations. They appear as a
    theory block { t: 'interactive', activity } (an explorer, not graded) or as an exercise { type: 'sim', activity, task, grade, hints }.
    This file is the trusted core (ports & adapters): it knows only the RuntimeAdapter port, never a runtime by name.
-     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (html-app@1 in 34_activity_html.js, sim-spec@1 in
+     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (src/runtimes: loaded by runtime(id); html-app@1 in 34_activity_html.js, sim-spec@1 in
                                                                        35_activity_sim.js; more in P3–P4). autoHeight: it renders in the
                                                                        app's own DOM and takes the height it needs (no frame)
      registerEngine({ id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? })
@@ -70,10 +70,16 @@ const ACT = (() => {
   // every runtime is on unless config.js switches it off (docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = false;
   // py-module@1 still needs NoemaPy.available() (the website: never file:// or the one-file bundle)
   const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': true }, window.NOEMA_CONFIG?.activities || {});
-  /** a runtime that is registered, switched on and can run here (available(): py-module@1 only on the website, never file:// or the one-file bundle) */
-  const enabled = id => !!(Object.prototype.hasOwnProperty.call(RUNTIMES, id) && flags()[id] !== false && (typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
+  /** the typed runtimes (src/runtimes, NoemaCore.runtimes): known at once by their manifests, their code loaded when an activity needs it */
+  const RTL = () => window.NoemaCore?.runtimes || null;
+  const own = id => Object.prototype.hasOwnProperty.call(RUNTIMES, id);
+  /** switched on by the deployment: a typed runtime by its own rule ('opt-in': only when config.js says true), the others unless false */
+  const switchedOn = id => (RTL()?.has(id) ? RTL().isOn(id, flags()) : flags()[id] !== false);
+  /** a runtime that is registered (or a typed one not loaded yet), switched on and can run here (available(): py-module@1 only on the
+      website, never file:// or the one-file bundle) */
+  const enabled = id => !!((own(id) || !!RTL()?.has(id)) && switchedOn(id) && (!own(id) || typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
-  const caps = () => new Set(['activities/v1', ...Object.keys(RUNTIMES).filter(enabled).map(id => 'runtime:' + id), ...engines().map(id => 'engine:' + id)]);
+  const caps = () => new Set(['activities/v1', ...[...new Set([...Object.keys(RUNTIMES), ...(RTL()?.ids() || [])])].filter(enabled).map(id => 'runtime:' + id), ...engines().map(id => 'engine:' + id)]);
   const canRun = a => !!(a && enabled(a.runtime));
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
@@ -95,8 +101,23 @@ const ACT = (() => {
     return { tokens: tk, scheme: lum < 0.5 ? 'dark' : 'light', reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches, textScale: parseFloat(cs.fontSize) / 16 || 1, dir: document.documentElement.dir || 'ltr' };
   }
   /** a runtime: { id, version, mount(slot, ctx) → port, autoHeight?, available?() → false where it cannot run (its fallback shows, with unavailable?() as the note),
-      failText?(code) → { text, restart } | null (its own words for a failure code; else the core's) } */
+      failText?(code, act) → { text, restart } | null (its own words for a failure code of that item; else the core's) } */
   function registerRuntime(def) { if (def && def.id && typeof def.mount === 'function') RUNTIMES[def.id] = def; }
+  /** what a typed runtime gets from the app (src/runtimes/types.ts RuntimeHost) */
+  const HOST = Object.freeze({
+    t: (k, v) => tE(k, v), message: (type, payload, extra) => ACTP.out(type, payload, extra),
+    setting: k => (S.settings ? S.settings[k] : undefined), setSetting: (k, v) => { if (!S.settings) return; S.settings[k] = v; if (typeof save === 'function') save(); },
+    flags: () => flags(), warn: (...w) => console.warn(...w), now: () => Date.now(),
+  });
+  const pendingRt = {};
+  /** a runtime ready to mount: one registered here, or a typed one loaded now (once) and made for this app → Promise<runtime | null> */
+  function runtime(id) {
+    if (own(id)) return Promise.resolve(RUNTIMES[id]);
+    const L = RTL();
+    if (!L?.has(id) || !switchedOn(id)) return Promise.resolve(null);
+    return pendingRt[id] ||= L.load(id).then(m => { const def = m.create(HOST); if (def) registerRuntime(def); delete pendingRt[id]; return def || null; },
+      e => { delete pendingRt[id]; console.warn('[noema] runtime', id, 'not loaded', e); return null; });
+  }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
   /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
       (workerSource: the engine's code as text, defining self.noemaEngine = { create }; it then runs in a Worker — docs/INTERACTIVE.md §12.6) */
@@ -231,17 +252,21 @@ const ACT = (() => {
     }
     // a runtime that first shows a card and no frame (external-embed@1 before consent) does not count toward the live activities
     // until it says so (ctx.onLive): a card holds no slot and parks nothing (docs/INTERACTIVE_EMBED.md)
-    const waits = () => { try { return !!RUNTIMES[a.runtime].waits?.(a); } catch (e) { return false; } };
+    const waits = () => { try { return !!RUNTIMES[a.runtime]?.waits?.(a); } catch (e) { return false; } };
     function goLive() { if (sess.destroyed || !sess.port || LIVE.includes(sess)) return; makeRoom(); LIVE.push(sess); }
     /** start: first the library engines the activity needs (each loaded once, on demand), then the runtime. A failed load shows as
         the runtime's own failure (its engine is missing) */
     function start() {
       if (sess.destroyed) return;
       const want = unloaded(a);
-      if (!want.length) return begin();
+      if (!want.length && own(a.runtime)) return begin();
       teardown(); box.classList.remove('act-fallback'); note.textContent = tE('engine.act.loading');
       const tok = sess.loading = {};
-      LIBR().load(want).then(() => { if (sess.loading === tok && !sess.destroyed) begin(); });
+      Promise.all([want.length ? LIBR().load(want) : null, runtime(a.runtime)]).then(([, rt]) => {
+        if (sess.loading !== tok || sess.destroyed) return;
+        if (!rt) { sess.loading = null; return stop(tE('engine.act.failed')); }
+        begin();
+      });
     }
     function begin() {
       sess.loading = null;
@@ -272,12 +297,8 @@ const ACT = (() => {
         sess.port = RUNTIMES[a.runtime].mount(box, { act: a, init, title: tE('engine.act.frameTitle', { id: a.id }),
           onLive: () => Promise.resolve().then(goLive),
           onMessage: raw => { const r = ACTP.check(raw); if (r.ok) onMessage(r.msg); else if (r.version) stop(tE('engine.act.newerProtocol'), false); else if (!r.ignore) strike(r.why); },
-          onFail: why => { const own = RUNTIMES[a.runtime].failText?.(why); return own ? stop(own.text, !!own.restart) : why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
+          onFail: why => { const mine = RUNTIMES[a.runtime].failText?.(why, a); return mine ? stop(mine.text, !!mine.restart) : why === 'unsupported' ? stop(tE('engine.act.notHere'), false) : why === 'spec' ? stop(tE('engine.act.failed'), false)
             : why === 'runaway' ? stop(tE('engine.act.stopped'))
-            // external-embed@1 (docs/INTERACTIVE_EMBED.md): refused or mounted as an exercise → the fallback for good; offline or not loaded → Restart retries
-            : why === 'embed-refused' || why === 'embed-graded' ? stop(tE('engine.act.embed.refused'), false)
-            : why === 'embed-offline' ? stop(tE('engine.act.embed.offline'))
-            : why === 'embed-timeout' ? stop(tE('engine.act.embed.timeout', { provider: (window.NoemaEmbed?.PROVIDERS || []).find(p => p.id === a.provider)?.name || String(a.provider || '') }))
             : stop(why === 'navigated' ? tE('engine.act.misbehaved') : tE('engine.act.failed')); } });
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
@@ -328,7 +349,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime: id => RUNTIMES[id] || null, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */

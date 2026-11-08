@@ -7,14 +7,22 @@ import { ownSpec, partMsg, partSpec, resolveParts } from '../domain/activities/s
 import { checkBalance } from '../domain/balance.ts';
 import { checkBridge } from '../domain/bridge.ts';
 import { checkChapter, checkSubject, type ChapterOptions } from '../domain/chapter.ts';
-import { envOf, type CheckEnv, type EngineSource, type RuntimeHost } from '../domain/env.ts';
+import {
+  envOf,
+  type CheckEnv,
+  type EngineSource,
+  type H5PChecks,
+  type RuntimeCheckers,
+  type RuntimeHost,
+  type WasmChecks,
+} from '../domain/env.ts';
 import { checkExercise } from '../domain/exercise.ts';
 import { checkPack, BLOCKS, ID_RE, TYPES, type PackCheckOptions } from '../domain/pack.ts';
 import { checkQuality } from '../domain/quality.ts';
 import { LANGUAGES, PACK_RULES, QUALITY, RULES } from '../domain/rules.ts';
 import { checkTranslation, requiredLocales } from '../domain/translation.ts';
 
-export type { CheckEnv, EngineSource, RuntimeHost } from '../domain/env.ts';
+export type { CheckEnv, EngineSource, RuntimeCheckers, RuntimeHost } from '../domain/env.ts';
 export { NO_ENGINES } from '../domain/env.ts';
 
 export function createContentChecks(env: CheckEnv) {
@@ -62,3 +70,16 @@ export type ContentChecks = ReturnType<typeof createContentChecks>;
     their checkers (the page for the app and the activity host; the scope that ran engine/src/38, 44, 45 for the connector and
     the Node tools) */
 export const contentChecks = (engines: EngineSource, host: RuntimeHost): ContentChecks => createContentChecks(envOf(engines, host));
+
+/** the runtimes' checkers of a root: the typed ones it hands in (src/runtimes RUNTIME_CHECKS) and those the runtimes still loaded
+    as scripts publish in a scope (the page, or the scope that ran them: NoemaWasm, NoemaH5P), read when a check runs */
+export const scopeCheckers =
+  (scope: () => Readonly<Record<string, unknown>>, typed: Partial<RuntimeCheckers>): RuntimeHost =>
+  () => {
+    const s = scope();
+    return {
+      wasm: typed.wasm ?? ((s.NoemaWasm ?? null) as WasmChecks | null),
+      h5p: typed.h5p ?? ((s.NoemaH5P ?? null) as H5PChecks | null),
+      embed: typed.embed ?? null,
+    };
+  };

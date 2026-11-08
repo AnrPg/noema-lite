@@ -17,6 +17,8 @@ const ELEMENTS = [
   { type: 'application', pattern: 'src/features/*/application', partialMatch: false, capture: ['feature'] },
   { type: 'plugins', pattern: 'src/plugins', partialMatch: false },
   { type: 'engines', pattern: 'src/engines', partialMatch: false },
+  // the activity runtimes (src/runtimes): plugins that draw into the box the activity core gives them (a driving adapter, like the UI)
+  { type: 'runtimes', pattern: 'src/runtimes', partialMatch: false },
   { type: 'adapters', pattern: 'src/adapters', partialMatch: false },
   // the UI's tests (src/ui/test/) wire the components to the memory adapters, as a composition root would (listed before 'ui',
   // which would match them too)
@@ -35,11 +37,12 @@ const MAY_IMPORT = {
   application: ['kernel', 'contracts', 'ports', 'domain', 'application'],
   plugins: ['kernel', 'contracts', 'ports', 'plugins'],
   engines: ['kernel', 'contracts', 'ports', 'plugins', 'engines'],
+  runtimes: ['kernel', 'contracts', 'ports', 'plugins', 'runtimes'],
   adapters: ['kernel', 'contracts', 'ports', 'adapters'],
   // the UI (src/ui: the component kit, the router, the frame) is a driving adapter: it reaches the core through the ports
   ui: ['kernel', 'contracts', 'ports', 'ui'],
   'ui-test': ['kernel', 'contracts', 'ports', 'adapters', 'ui'],
-  connector: ['kernel', 'contracts', 'ports', 'domain', 'application', 'plugins', 'engines', 'connector'],
+  connector: ['kernel', 'contracts', 'ports', 'domain', 'application', 'plugins', 'engines', 'runtimes', 'connector'],
   composition: ELEMENTS.map(e => e.type),
 };
 /** the layers that never touch the DOM, the network, storage or the clock directly (they get them through ports) */

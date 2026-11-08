@@ -16,6 +16,7 @@ import type { Storage } from '../ports/storage.ts';
 import type { Telemetry } from '../ports/telemetry.ts';
 import type { MutableJobRegistry } from '../adapters/local/jobs.ts';
 import type { EngineLibrary } from '../engines/register.ts';
+import type { RuntimeLibrary } from '../runtimes/library.ts';
 import type { LearningLog } from '../features/study/application/learning-log.ts';
 import { token } from './container.ts';
 
@@ -49,6 +50,10 @@ export const CLOUD = token<Cloud | null>('core.cloud', 'Auth + Remote of the Sup
 export const ENGINES = token<EngineLibrary>(
   'engines.library',
   'the engine library of sim-spec@1 (src/engines): the expression language, the catalogue, every engine as a lazy plugin',
+);
+export const RUNTIMES = token<RuntimeLibrary>(
+  'runtimes.library',
+  'the activity runtimes (src/runtimes): their manifests and checks at once, their code a lazy plugin each',
 );
 export const EVENT_STORE = token<EventStore>('study.eventStore', 'the learning log on this device (EventStore port)');
 export const LEARNING = token<LearningLog>('study.log', 'the learning log of the account in use (src/features/study/application)');

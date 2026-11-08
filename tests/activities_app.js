@@ -334,16 +334,16 @@ async function xapiApp(p, ctx, E) {
 async function embedApp(p, ctx, E) {
   console.log('— external-embed@1: off by default');
   const E0 = E.length;
-  ok(await p.evaluate(() => !ACT.runtime('external-embed@1') && !ACT.caps().has('runtime:external-embed@1')), 'the runtime is off in config (the app lacks runtime:external-embed@1)');
+  ok(await p.evaluate(async () => !(await ACT.runtime('external-embed@1')) && !ACT.hasRuntime('external-embed@1') && !ACT.caps().has('runtime:external-embed@1')), 'the runtime is off in config (the app lacks runtime:external-embed@1)');
   const reqs = []; await ctx.route('https://phet.colorado.edu/**', r => { reqs.push(r.request().url()); r.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>fake PhET</title><p id="sim">Ohm</p>' }); });
   await ctx.addInitScript(() => { let v; Object.defineProperty(window, 'NOEMA_CONFIG', { configurable: true, get: () => v, set: x => { v = x; if (x && typeof x === 'object') x.activities = Object.assign({}, x.activities, { 'external-embed@1': true }); } }); });
   await p.reload(); await wait(1500);
-  ok(await p.evaluate(() => !!ACT.runtime('external-embed@1')), 'switched on (NOEMA_CONFIG.activities["external-embed@1"] = true): the runtime registers');
+  ok(await p.evaluate(async () => ACT.caps().has('runtime:external-embed@1') && !ACT.loadedRuntime('external-embed@1') && (await ACT.runtime('external-embed@1'))?.id === 'external-embed@1' && !!ACT.loadedRuntime('external-embed@1')), 'switched on (NOEMA_CONFIG.activities["external-embed@1"] = true): the app has runtime:external-embed@1, and ACT.runtime loads it (NoemaCore.runtimes, build/runtimes.js) and registers it');
   const ITEM = { id: 'ohm-phet', runtime: 'external-embed@1', stateVersion: 1, provider: 'phet', url: 'https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_all.html',
     credit: 'PhET Interactive Simulations, University of Colorado Boulder · Ohm’s Law · CC-BY-4.0 · https://phet.colorado.edu', license: 'CC-BY-4.0', height: 480,
     fallback: { media: 'alias-lab-still', text: 'Ohm’s law: the current through a resistor grows with the voltage and falls with the resistance, I = V / R.' }, strings: { en: { title: 'Ohm’s law simulation', why: 'Move V and R and watch I.' } } };
   const mountBlk = () => p.evaluate(a => { ACT.ITEMS[a.id] = a; const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: a.id })); scrollTo(0, 0); }, ITEM);
-  await p.evaluate(() => { NoemaEmbed.consent.forget('phet'); }); await mountBlk(); await startIfParked(p, 'main .act');
+  await p.evaluate(() => { const o = Object.assign({}, S.settings.embedOk); delete o.phet; S.settings.embedOk = o; save(); }); await mountBlk(); await startIfParked(p, 'main .act');
   ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-embed-card'))), 'the card comes first');
   const cardT = await p.evaluate(() => document.querySelector('main .act-embed-card').textContent);
   ok(/needs the network/.test(cardT) && /cookies/.test(cardT) && /Open PhET/.test(cardT) && /CC-BY-4\.0/.test(cardT) && /terms/.test(cardT), 'the card: what opens, network and cookies, the credit and licence, the terms, Open PhET');
@@ -353,7 +353,7 @@ async function embedApp(p, ctx, E) {
   const fr = await p.$eval('main iframe.act-embed-frame', f => ({ sandbox: f.getAttribute('sandbox'), ref: f.getAttribute('referrerpolicy'), csp: (f.srcdoc.match(/frame-src [^;"]+/) || [''])[0], scripts: /<script/i.test(f.srcdoc), allow: f.getAttribute('allow') }));
   ok(fr.sandbox === 'allow-scripts allow-same-origin' && fr.ref === 'no-referrer' && fr.csp === 'frame-src https://phet.colorado.edu' && !fr.scripts && /camera 'none'/.test(fr.allow), 'the frames: the provider\'s tokens only, no referrer, the wrapper has no scripts and frames only the provider ' + JSON.stringify(fr));
   ok(reqs.every(u => u.startsWith('https://phet.colorado.edu/sims/html/ohms-law/')) && await p.evaluate(() => /PhET/.test(document.querySelector('main .act-embed-credit')?.textContent || '')), 'only the allowed URL is requested; the credit stays under the frame');
-  ok(await p.evaluate(() => !!S.settings.embedOk?.phet && NoemaEmbed.consent.list().includes('phet')), 'the choice is remembered (S.settings.embedOk, an account setting)');
+  ok(await p.evaluate(() => !!S.settings.embedOk?.phet && Object.keys(S.settings.embedOk).includes('phet')), 'the choice is remembered (S.settings.embedOk, an account setting)');
   await mountBlk(); await startIfParked(p, 'main .act');
   ok(await until(() => p.evaluate(() => !!document.querySelector('main iframe.act-embed-frame') && !document.querySelector('main .act-embed-card'))), 'next time it opens without the card');
 
@@ -364,7 +364,7 @@ async function embedApp(p, ctx, E) {
   const row = await p.evaluate(() => { const r = document.querySelector('[data-embed-consent]'); return { text: r.textContent, tip: !!r.querySelector('.tip, [title], button[aria-label]'), btns: r.querySelectorAll('button').length }; });
   ok(/PhET/.test(row.text) && /Ask again/.test(row.text) && row.btns >= 1, 'the line names PhET, has its ⓘ and "Ask again" ' + JSON.stringify(row));
   await p.click('[data-embed-consent] button:has-text("Ask again")'); await wait(300);
-  ok(await p.evaluate(() => !document.querySelector('[data-embed-consent]') && NoemaEmbed.consent.list().length === 0 && !S.settings.embedOk?.phet), '"Ask again" forgets the choice, and the line goes away');
+  ok(await p.evaluate(() => !document.querySelector('[data-embed-consent]') && Object.keys(S.settings.embedOk || {}).length === 0 && !S.settings.embedOk?.phet), '"Ask again" forgets the choice, and the line goes away');
   await mountBlk(); await startIfParked(p, 'main .act');
   ok(await until(() => p.evaluate(() => !!document.querySelector('main .act-embed-card'))), 'the card asks again');
   await p.evaluate(async () => { const m = document.querySelector('main'); m.innerHTML = ''; const b = document.createElement('div'); m.append(b); await ACC_VIEWS.backup(b, () => { }); });
@@ -383,7 +383,7 @@ async function embedApp(p, ctx, E) {
   await p.click('#live-e1 .act-embed-open');
   ok(await until(() => p.evaluate(() => !!document.querySelector('#live-e1 iframe.act-embed-frame') && ACT.LIVE.includes(__live.e1) && ACT.LIVE.length === 2 && document.querySelectorAll('main .sim').length === 1)),
     'Open: the frame is live now, and the older simulation is parked to make room ' + JSON.stringify(await p.evaluate(() => ({ live: ACT.LIVE.length, sims: document.querySelectorAll('main .sim').length }))));
-  await p.evaluate(() => { for (const s of Object.values(__live)) s.destroy(); document.querySelector('main').innerHTML = ''; NoemaEmbed.consent.forget('phet'); });
+  await p.evaluate(() => { for (const s of Object.values(__live)) s.destroy(); document.querySelector('main').innerHTML = ''; { const o = Object.assign({}, S.settings.embedOk); delete o.phet; S.settings.embedOk = o; save(); } });
 
   console.log('— external-embed@1: offline, and never graded');
   await ctx.setOffline(true); await mountBlk(); await startIfParked(p, 'main .act');
@@ -518,7 +518,7 @@ async function simSpec(p, ctx, E) {
     const a = JSON.parse(JSON.stringify(ACT.ITEMS['rc-lowpass'])); a.id = 'slow';
     a.spec = { format: 'noema.sim-spec/v1', engine: 'slow-test@1', model: {}, params: [{ id: 'tau', kind: 'number', label: 'resistance', min: 0, max: 10, default: 1 }], outputs: [{ id: 'vEnd', kind: 'scalar' }], readouts: [{ label: 'voltage', expr: 'vEnd' }] };
     const box = document.createElement('div'); document.body.append(box); const msgs = [];
-    const port = ACT.runtime('sim-spec@1').mount(box, { act: a, init: { locale: 'en', stateVersion: 1 }, onMessage: m => msgs.push(m), onFail: c => msgs.push({ fail: c }) });
+    const port = ACT.loadedRuntime('sim-spec@1').mount(box, { act: a, init: { locale: 'en', stateVersion: 1 }, onMessage: m => msgs.push(m), onFail: c => msgs.push({ fail: c }) });
     const until = async f => { for (let i = 0; i < 60; i++) { if (f()) return true; await new Promise(r => setTimeout(r, 50)); } return false; };
     const first = await until(() => port.values()?.vEnd === 1);
     const inp = box.querySelector('input[data-param="tau"]'); inp.value = '7'; inp.dispatchEvent(new Event('input', { bubbles: true })); inp.dispatchEvent(new Event('change', { bubbles: true }));

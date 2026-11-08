@@ -438,7 +438,7 @@
     id: 'wasm-module@1', version: 1, autoHeight: true,
     /** an item with its own spec: the sim-spec renderer with this module as the engine; without one there is nothing to show */
     mount(box, ctx) {
-      const a = ctx.act, sim = ACTREF.runtime?.('sim-spec@1');
+      const a = ctx.act, sim = (ACTREF.loadedRuntime || ACTREF.runtime)?.('sim-spec@1');
       api.register(a);
       if (!sim || !isObj(a.spec)) { Promise.resolve().then(() => ctx.onFail(sim ? 'spec' : 'unsupported')); return { send() { }, close() { }, values: () => null }; }
       const spec = Object.assign({}, a.spec, { engine: 'wasm@1', model: Object.assign({}, a.spec.model, { module: a.id }) });

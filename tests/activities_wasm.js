@@ -268,7 +268,7 @@ async function appPart(browser, ref) {
   const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
   const p = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
   await p.goto((await appUrl(APP)) + '?subject=' + (process.env.APP_SUBJECT || 'demo-physics')); await wait(1500);
-  if (!ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && !!ACT.engine('wasm@1') && !!ACT.runtime('wasm-module@1'))), 'the app has wasm@1 and wasm-module@1 (engine.js built with 44_activity_wasm.js)')) return;
+  if (!ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && !!ACT.engine('wasm@1') && !!ACT.loadedRuntime('wasm-module@1'))), 'the app has wasm@1 and wasm-module@1 (engine.js built with 44_activity_wasm.js)')) return;
   ok(await p.evaluate(() => ACT.caps().has('runtime:wasm-module@1') && ACT.caps().has('engine:wasm@1')), 'ACT.caps() names runtime:wasm-module@1 and engine:wasm@1 (pack.requires)');
   await p.evaluate(I => { Object.assign(ACT.ITEMS, I); }, ITEMS);
   // a block that comes into view while the live slots are taken (blocks of the cleared page are destroyed only by their watchdog, ≤ 2 s)

@@ -64,8 +64,7 @@ ok(ACTP.check(M('py:out', { outputs: { a: 1 } }, { re: 'py1' })).ok && ACTP.chec
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaExpr = ENGINES.kernel('expr'), NoemaCircuit = ENGINES.kernel('circuit'), NoemaEngineCatalog = ENGINES.lib.catalog, NoemaThermal = ENGINES.mod('thermal@1'), NoemaPID = ENGINES.mod('pid@1'), NoemaRF = ENGINES.mod('rf@1'), NoemaTwin = ENGINES.mod('twin@1');
 require(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'));   // NoemaWasm (P6): the wasm runtime's own tests below
-globalThis.NoemaEmbed = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));   // NoemaEmbed: the external-embed@1 rules (P6)
-const P = NoemaCore.content;   // the content checks (build/noema-tools.cjs: with the runtimes' checkers of engine/src/38, 44, 45)
+const P = NoemaCore.content;   // the content checks (build/noema-tools.cjs: with the runtimes' checkers, src/runtimes and engine/src/38, 44)
 const golden = require('./golden.cjs')('activities');
 const html = fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'alias-lab', 'app.html'), 'utf8');
 const crypto = require('crypto');
@@ -623,7 +622,7 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
 }
 { // P6: the words of the outside-page card, the core's embed notes, the Settings line and the xAPI export exist in every UI language
   const keys = new Set();
-  for (const f of ['45_activity_embed.js', '32_activities.js', '70_account.js', '40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, 'engine', 'src', f), 'utf8').matchAll(/\b(?:T|tE)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
+  for (const f of ['src/runtimes/external-embed/runtime.ts', 'engine/src/32_activities.js', 'engine/src/70_account.js', 'engine/src/40_views.js']) for (const m of fs.readFileSync(path.join(ROOT, ...f.split('/')), 'utf8').matchAll(/\b(?:T|tE|t)\('((?:engine\.act\.embed|engine\.xapi)\.[a-zA-Z]+)'/g)) keys.add(m[1]);
   const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'en.arb'), 'utf8')), dr = fs.readdirSync(path.join(ROOT, 'i18n', 'engine', 'drafts'));
   const miss = [...keys].filter(k => !en[k] || !en['@' + k]?.description).concat(...dr.map(f => { const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n', 'engine', 'drafts', f), 'utf8')); return [...keys].filter(k => !d[k]).map(k => f + ':' + k); }));
   ok(keys.size >= 14 && !miss.length, `the ${keys.size} P6 host strings (outside-page card, notes, Settings "Ask again", xAPI export) are in en.arb with descriptions and in all ${dr.length} drafts ${miss.slice(0, 3).join(' ')}`);
@@ -758,11 +757,13 @@ ok(['noema_core.py', 'embed_allow.json', 'h5p_allow.json', 'h5p_import.py'].ever
   && /INTERACTIVE_P6 = \('INTERACTIVE_WASM\.md', 'INTERACTIVE_EMBED\.md', 'INTERACTIVE_XAPI\.md'\)/.test(bld) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\) \+ INTERACTIVE_P6 if os\.path\.exists/.test(bld) && ['INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md'].every(f => fs.existsSync(path.join(ROOT, 'docs', f))),
   'P6: the skill zip carries noema_core.py (the wasm and embed rules in noema-tools.cjs), the allow-lists to read, h5p_import.py and the wasm runtime for the harness; the guide part "interactive" includes the wasm, embed and xAPI pages');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  ok(['44_activity_wasm.js', '45_activity_embed.js'].every(f => html.includes('engine/src/' + f) && new RegExp(`'engine/src/${f.replace('.', '\\.')}'`).test(bld.split('CONNECTOR_ENGINE = ')[1].split('\n')[0]) && bld.includes(`rd("engine/src/${f}")`) && /^PAGE_SRC = \('43_xapi\.js', '44_activity_wasm\.js', '45_activity_embed\.js'\)$/m.test(bld) && /for f in PAGE_SRC: shutil\.copy/.test(bld))
-    && /^var NoemaEmbed = /m.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'), 'utf8')),
-    'the shell, the site, the one-file bundle and the connector load NoemaWasm and NoemaEmbed for the content checks (45 declares var: it is loaded twice in the app)'); }
-{ const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
-  ok(/why === 'embed-refused' \|\| why === 'embed-graded' \? stop\(tE\('engine\.act\.embed\.refused'\), false\)/.test(src) && /why === 'embed-offline' \? stop\(tE\('engine\.act\.embed\.offline'\)\)/.test(src) && /why === 'embed-timeout' \? stop\(tE\('engine\.act\.embed\.timeout'/.test(src),
+  ok(['44_activity_wasm.js'].every(f => html.includes('engine/src/' + f) && new RegExp(`'engine/src/${f.replace('.', '\\.')}'`).test(bld.split('CONNECTOR_ENGINE = ')[1].split('\n')[0]) && bld.includes(`rd("engine/src/${f}")`) && /^PAGE_SRC = \('43_xapi\.js', '44_activity_wasm\.js'\)$/m.test(bld) && /for f in PAGE_SRC: shutil\.copy/.test(bld))
+    && !html.includes('45_activity_embed') && !fs.existsSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'))
+    && /\{ name: 'runtimes', build: r => r\.get\(RUNTIMES\) \}/.test(COMPOSE.browser) && /p\.scopeCheckers\(\(\) => globalThis, p\.runtimeChecks\)/.test(COMPOSE.browser)
+    && /RUNTIME_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'composition', 'noema-tools.ts'), 'utf8')) && /RUNTIME_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'connector', 'engine', 'index.ts'), 'utf8')),
+    'the shell, the site, the one-file bundle and the connector load NoemaWasm for the content checks; external-embed@1 is a typed runtime (src/runtimes): its checks reach the content checks of the app, the connector and the tools, its code is NoemaCore.runtimes (build/runtimes.js)'); }
+{ const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'), rt = fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'external-embed', 'runtime.ts'), 'utf8');
+  ok(/failText\?\.\(why, a\)/.test(src) && /code === 'embed-refused' \|\| code === 'embed-graded'\) return \{ text: host\.t\('engine\.act\.embed\.refused'\), restart: false \}/.test(rt) && /code === 'embed-offline'\) return \{ text: host\.t\('engine\.act\.embed\.offline'\), restart: true \}/.test(rt) && /code === 'embed-timeout'\) return \{ text: host\.t\('engine\.act\.embed\.timeout'[^}]*\}\), restart: true \}/.test(rt),
     'the core: a refused or graded outside page stops without Restart; offline or not loaded stops with Restart (retry)'); }
 ok(COMPOSE.connector.includes('engines: nodeEngines()') && /INTERACTIVE_SIMEXPR\.md/.test(bld), 'the connector runs the engine library (the expression language, every engine) in its content checks (sim-spec checks) and serves the expression language in the guide');
 { const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), a = html.indexOf('<script src="build/app.js">'), b = html.indexOf('engine/src/44_activity_wasm.js');

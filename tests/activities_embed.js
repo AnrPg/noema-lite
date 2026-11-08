@@ -1,7 +1,7 @@
 /* external-embed@1 (docs/activities-dev/embed.md): an allow-listed third-party page in a frame, opt-in, explore only.
-   1. Node (always): the runtime's copy of the allow-list equals tools/embed_allow.json; the URL grammar and the item / pack rules give the
-      expected codes (engine/src/45_activity_embed.js NoemaEmbed, which the content checks use) on every case; the runtime
-      registers only when the deployment switches it on; no provider asks for a sandbox token outside the safe set.
+   1. Node (always): the runtime's allow-list is tools/embed_allow.json; the URL grammar and the item / pack rules give the
+      expected codes (src/runtimes/external-embed/check.ts through build/runtimes-node.cjs, the checks the content checks use) on
+      every case; the runtime is made only when the deployment switches it on; no provider asks for a sandbox token outside the safe set.
    2. Browser (with --browser): a stub host (like skill/noema-pack-builder/scripts/activity_harness.js) with the real runtime on
       http://localhost:<a>, and a LOCAL fake provider on https://127.0.0.1:<b> (a self-signed certificate, made here with openssl)
       standing in for a real one — the internet is never used. Checks: the consent card comes first and nothing is requested from the
@@ -12,13 +12,14 @@
 const path = require('path'), fs = require('fs'), cp = require('child_process'), vm = require('vm'), os = require('os');
 const ROOT = path.resolve(__dirname, '..');
 let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) fails++; console.log((c ? '✓ ' : '✗ ') + m); return c; };
-const SRC = fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'), 'utf8');
+const RTDIR = path.join(ROOT, 'src', 'runtimes', 'external-embed');
+const SRC = ['check.ts', 'runtime.ts'].map(f => fs.readFileSync(path.join(RTDIR, f), 'utf8')).join('\n');
 const ALLOW = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'embed_allow.json'), 'utf8'));
-const E = require(path.join(ROOT, 'engine', 'src', '45_activity_embed.js'));
+const RT = require(path.join(ROOT, 'build', 'runtimes-node.cjs')), E = RT.RUNTIME_CHECKS.embed;   // npm run build
 const codes = list => list.map(m => (m.match(/(?:^|: )([a-z][a-z-]+):/) || [])[1] || m).sort();
 
 console.log('— the allow-list');
-ok(JSON.stringify(E.PROVIDERS) === JSON.stringify(ALLOW.providers), 'the runtime\'s copy of the allow-list equals tools/embed_allow.json');
+ok(JSON.stringify(E.PROVIDERS) === JSON.stringify(ALLOW.providers) && /from '\.\.\/\.\.\/\.\.\/tools\/embed_allow\.json' with \{ type: 'json' \}/.test(SRC), 'the runtime\'s allow-list is tools/embed_allow.json (imported as it is: one copy)');
 ok(ALLOW.providers.every(p => p.origins.every(o => /^https:\/\/[a-z0-9.-]+(:\d+)?$/.test(o)) && Array.isArray(p.sandbox) && p.sandbox.every(t => E.SANDBOX_OK.has(t))), 'every provider: exact https origins, sandbox tokens from the safe set only');
 ok(!JSON.stringify(ALLOW).match(/allow-top-navigation|allow-popups-to-escape-sandbox|allow-modals|allow-downloads/), 'no provider gets top navigation, escaping popups, modals or downloads');
 ok(ALLOW.providers.every(p => p.supportsResult === false), 'no provider has a result channel: every embed is explore only');
@@ -101,12 +102,15 @@ ok(E.checkPack(pack(true)).errors.some(m => /sim-embed/.test(m)), 'a sim exercis
     'activity_lint.py on the activities folder reads the strings beside it (no strings-title); a built pack without strings is still refused ' + JSON.stringify([r1.stdout, r1.stderr]));
 }
 
-console.log('— registration (opt-in per deployment)');
-const reg = cfg => { const got = []; const ctx = { ACT: { registerRuntime: d => got.push(d.id) }, window: { NOEMA_CONFIG: cfg }, document: {}, console, Promise, setTimeout, clearTimeout, URL }; vm.createContext(ctx); vm.runInContext(SRC, ctx); return got; };
-ok(reg(undefined).length === 0 && reg({ activities: { 'external-embed@1': 'yes' } }).length === 0, 'not switched on: the runtime does not register (packs that need it show their fallback)');
-ok(JSON.stringify(reg({ activities: { 'external-embed@1': true } })) === '["external-embed@1"]', 'NOEMA_CONFIG.activities["external-embed@1"] === true: it registers');
+async function registration() {
+  console.log('— registration (opt-in per deployment)');
+  const mod = await RT.runtimes.load('external-embed@1');
+  const reg = flags => { const d = mod.create({ t: k => k, message: (type, payload) => ({ p: 'noema.activity', v: 1, type, payload: payload || {} }), setting: () => undefined, setSetting() { }, flags: () => flags || {}, warn() { }, now: () => 0 }); return d ? [d.id] : []; };
+  ok(reg(undefined).length === 0 && reg({ 'external-embed@1': 'yes' }).length === 0 && !RT.runtimes.isOn('external-embed@1', { 'external-embed@1': 'yes' }), 'not switched on: the runtime is not made (packs that need it show their fallback)');
+  ok(JSON.stringify(reg({ 'external-embed@1': true })) === '["external-embed@1"]' && RT.runtimes.isOn('external-embed@1', { 'external-embed@1': true }) && RT.runtimes.switchOf('external-embed@1') === 'opt-in', 'NOEMA_CONFIG.activities["external-embed@1"] === true: it is made (NoemaCore.runtimes, an opt-in runtime)');
+}
 ok(!/innerHTML|insertAdjacentHTML|document\.write|eval\(|new Function/.test(SRC), 'the runtime never writes HTML from strings and never evaluates code');
-ok(!/allow-top-navigation|allow-popups-to-escape/.test(SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '').replace(/\/\*@providers\*\/[\s\S]*?\/\*@end\*\//, '')), 'the runtime\'s code names no top-navigation or escaping-popup token');
+ok(!/allow-top-navigation|allow-popups-to-escape/.test(SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '')), 'the runtime\'s code names no top-navigation or escaping-popup token');
 
 /* ======================================== 2. the browser part ======================================== */
 async function browserPart() {
@@ -146,18 +150,23 @@ if (t === 'hostile') setTimeout(function () {
     { id: 'fakepending', name: 'PendingSim', status: 'pending', origins: [PROV], path: '/.*', query: '.*', hash: null, sandbox: ['allow-scripts', 'allow-same-origin'], licenses: ['CC-BY-4.0'], creditMust: 'P', credit: 'P', terms: PROV + '/t3', supportsResult: false, notes: 'test' },
   ];
   const s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'), ACTPsrc = s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = ('));
-  const rt = SRC.replace(/\/\*@providers\*\/[\s\S]*?\/\*@end\*\//, () => '/*@providers*/' + JSON.stringify(TEST_PROVIDERS) + '/*@end*/');
-  const HOST = `<!doctype html><meta charset="utf-8"><style>${fs.readFileSync(path.join(ROOT, 'engine', 'src', '45_activity_embed.css'), 'utf8')}</style>
+  const piece = fs.readFileSync(path.join(ROOT, 'build', 'runtimes.js'), 'utf8');   // the page's lazy piece of the runtimes (npm run build)
+  const HOST = `<!doctype html><meta charset="utf-8"><style>${fs.readFileSync(path.join(RTDIR, 'embed.css'), 'utf8')}</style>
 <body style="margin:0;font-family:system-ui"><div id="box" class="act-box" style="position:relative;width:100%;height:420px"></div><div id="fb"></div><script>
 window.NOEMA_CONFIG = { activities: { 'external-embed@1': true } };
 var S = { settings: (function () { try { return JSON.parse(localStorage.getItem('embedS') || '{}'); } catch (e) { return {}; } })() };
 function save() { localStorage.setItem('embedS', JSON.stringify(S.settings)); }
 function tE(k, v) { return k + (v ? ' ' + JSON.stringify(v) : ''); }
-var RT = null; var ACT = { registerRuntime: function (d) { RT = d; } };
+var RT = null;
 ${ACTPsrc}
-</script><script>${rt}</script><script>
+</script><script>${piece.replace(/<\/script/gi, '<\\/script')}</script><script>
+var HOSTPORT = { t: tE, message: ACTP.out, setting: function (k) { return S.settings[k]; }, setSetting: function (k, v) { S.settings[k] = v; save(); },
+  flags: function () { return NOEMA_CONFIG.activities; }, warn: function () { console.warn.apply(console, arguments); }, now: Date.now };
+window.READY = __noemaRuntimesPiece.plugins.find(function (p) { return p.manifest.id === 'external-embed@1'; }).entry().then(function (m) { RT = m.createWith(HOSTPORT, ${JSON.stringify(TEST_PROVIDERS)}); });
+</script><script>
 window.LOG = []; window.H = null;
-window.run = function (act, init) {
+window.run = async function (act, init) {
+  await window.READY;
   var box = document.getElementById('box'); box.innerHTML = ''; document.getElementById('fb').textContent = ''; window.LOG = [];
   if (window.H) try { window.H.close(); } catch (e) { }
   window.H = RT.mount(box, { act: act, init: init, title: 'activity ' + act.id,
@@ -267,6 +276,7 @@ addEventListener('message', function (e) { LOG.push({ type: 'stray', data: e.dat
 }
 
 (async () => {
+  await registration();
   if (process.argv.includes('--browser')) await browserPart();
   console.log(fails ? `\n${fails} of ${n} failed` : `\nactivities_embed: ${n} checks passed`); process.exit(fails ? 1 : 0);
 })();

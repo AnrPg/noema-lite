@@ -11,14 +11,15 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
   return d;
 }
 /** Settings › Data: the outside activities (external-embed@1, docs/INTERACTIVE_EMBED.md) the learner let open without asking — one quiet
-    line with ⓘ and "Ask again" (NoemaEmbed.consent: S.settings.embedOk, an account setting); nothing at all while there is no yes to forget. */
+    line with ⓘ and "Ask again" (S.settings.embedOk, an account setting, src/runtimes/external-embed); nothing at all while there is no yes to forget. */
 function embedConsentRow() {
-  const E = window.NoemaEmbed, ids = E?.consent?.list?.() || [];
+  const chosen = () => (S.settings?.embedOk && typeof S.settings.embedOk === 'object' ? Object.keys(S.settings.embedOk) : []), ids = chosen();
   if (!ids.length) return null;
-  const names = ids.map(id => (E.PROVIDERS || []).find(p => p.id === id)?.name || id);
+  const providers = window.NoemaCore?.runtimes?.checks?.embed?.PROVIDERS || [];
+  const names = ids.map(id => providers.find(p => p.id === id)?.name || id);
   const row = h('div', { class: 'subrow embedconsent', 'data-embed-consent': '' },
     h('span', { class: 'grow tiny' }, tE('engine.act.embed.settings', { names: window.NoemaI18n?.fmt?.list ? NoemaI18n.fmt.list(names) : names.join(', ') }), ' ', tip(tE('engine.act.embed.settingsTip'))),
-    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { for (const id of E.consent.list()) E.consent.forget(id); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
+    h('button', { class: 'btn small ghost', type: 'button', onclick: () => { S.settings.embedOk = {}; save(); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
   return row;
 }
 const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });

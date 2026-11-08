@@ -372,7 +372,7 @@ export function createActivityChecks(env: CheckEnv) {
             E.push(...sim.checkSimSpec(ownSpec(a), strings, null, { items: every }).map(m => `${w}: ${m}`));
           }
         } else if (rt === EMBED) {
-          if (!env.embed) E.push(`${w}: the outside-page checker (NoemaEmbed, engine/src/45_activity_embed.js) is not loaded here`);
+          if (!env.embed) E.push(`${w}: the outside-page checker (src/runtimes/external-embed) is not loaded here`);
           else {
             const r = env.embed.check(a);
             E.push(...r.errors.map(m => `${w}: ${m}`));

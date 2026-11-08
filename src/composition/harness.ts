@@ -7,7 +7,8 @@
  */
 import * as contracts from '../contracts/index.ts';
 import { createAppEngines } from '../engines/register.ts';
-import { contentChecks } from '../features/content/application/index.ts';
+import { contentChecks, scopeCheckers } from '../features/content/application/index.ts';
+import { RUNTIME_CHECKS } from '../runtimes/checks.ts';
 
 const page = globalThis as { NoemaCore?: unknown };
 if (!page.NoemaCore) {
@@ -17,7 +18,10 @@ if (!page.NoemaCore) {
       version: 1,
       contracts,
       engines,
-      content: contentChecks(engines, () => globalThis as unknown as Readonly<Record<string, unknown>>),
+      content: contentChecks(
+        engines,
+        scopeCheckers(() => globalThis as unknown as Readonly<Record<string, unknown>>, RUNTIME_CHECKS),
+      ),
     }),
     writable: false,
     enumerable: false,
