@@ -1,5 +1,6 @@
-/* WCAG 2 contrast of the token sets: which text token is read on which surface token, and the arithmetic that checks it
-   (tokens.test.ts runs it over every character in light and dark, so no theme can drop below the minimum). */
+/* WCAG 2 contrast of the token sets: which text token is read on which surface token, the arithmetic that checks it
+   (tokens.test.ts runs it over every character in light and dark, so no theme can drop below the minimum), and the two
+   rules that derive text-safe colours: fillFor (text on a colour used as a fill) and textOn (a colour used as text). */
 import type { Palette } from './types.ts';
 
 /** WCAG 2.x 1.4.3: normal text needs 4.5:1 (large text and UI components 3:1; every text token here is used at normal sizes) */
@@ -65,7 +66,50 @@ export function surface(p: Palette, s: Surface): string {
   return s === 'bg2' ? mixSrgb(p.line, p.bg, 0.6) : p[s];
 }
 
-/** the pairs of a palette below the minimum: "ink3 on bg 2.60" */
+/** the two text colours on a coloured fill: white, and a near-black ink (the base set's dark background) */
+export const ON_LIGHT = '#ffffff';
+export const ON_DARK = '#14161d';
+/** a colour used as a fill with text on it */
+export interface Fill {
+  readonly fill: string;
+  readonly on: string;
+}
+/** text on a colour used as a fill (a chapter's colour, the base accent) — the one rule of every "colour with a word on it":
+    white when it reads on the colour as it is, else the dark ink when that does, else white on the colour darkened just
+    enough (1 % steps towards black). Always ≥ 4.5:1: black under white reaches 21:1. */
+export function fillFor(c: string, min = TEXT_MIN): Fill {
+  if (contrast(ON_LIGHT, c) >= min) return { fill: c, on: ON_LIGHT };
+  if (contrast(ON_DARK, c) >= min) return { fill: c, on: ON_DARK };
+  for (let p = 99; p >= 0; p--) {
+    const fill = mixSrgb(c, '#000000', p / 100);
+    if (contrast(ON_LIGHT, fill) >= min) return { fill, on: ON_LIGHT };
+  }
+  return { fill: '#000000', on: ON_LIGHT };
+}
+/** a colour as text on these surfaces: the colour itself when it reads on all of them, else mixed with the ink (1 % steps)
+    until it does. The ink reads on every surface (TEXT_ON), so the mix always ends. */
+export function textOn(c: string, ink: string, surfaces: readonly string[], min = TEXT_MIN): string {
+  for (let p = 100; p >= 0; p--) {
+    const t = p === 100 ? c : mixSrgb(c, ink, p / 100);
+    if (surfaces.every(s => contrast(t, s) >= min)) return t;
+  }
+  return ink;
+}
+
+/** the surfaces the accent is read on as text (links, a lane's name, a word in the accent) */
+export const ACC_TEXT_ON: readonly Surface[] = ['bg', 'paper', 'bg2', 'accSoft'];
+/** the colours a palette derives (css.ts writes them beside the palette): accText, the accent as text (--acc-text) */
+export function derived(p: Palette): { readonly accText: string } {
+  return {
+    accText: textOn(
+      p.acc,
+      p.ink,
+      ACC_TEXT_ON.map(s => surface(p, s)),
+    ),
+  };
+}
+
+/** the pairs of a palette below the minimum: "ink3 on bg 2.60" (its derived accent as text included) */
 export function contrastFailures(p: Palette, min = TEXT_MIN): string[] {
   const out: string[] = [];
   for (const { text, on } of TEXT_ON)
@@ -73,5 +117,10 @@ export function contrastFailures(p: Palette, min = TEXT_MIN): string[] {
       const r = contrast(p[text], surface(p, s));
       if (r < min) out.push(`${text} on ${s} ${r.toFixed(2)}`);
     }
+  const { accText } = derived(p);
+  for (const s of ACC_TEXT_ON) {
+    const r = contrast(accText, surface(p, s));
+    if (r < min) out.push(`accText on ${s} ${r.toFixed(2)}`);
+  }
   return out;
 }

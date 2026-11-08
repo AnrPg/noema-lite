@@ -15,7 +15,7 @@ function start({ acc, id, data, host = null, onRoute = null, base = null, scope 
   document.documentElement.lang = UI.C.explainLang;
   document.body.classList.add('lx');
   document.body.classList.toggle('lx-nohelp', UI.prefs.translit === false);
-  if (host) { host.replaceChildren(h('div', { class: 'lx-top lx-subbar', role: 'tablist', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
+  if (host) { host.replaceChildren(h('nav', { class: 'lx-top lx-subbar', 'aria-label': LT('lang.shell.yourLanguages') }), h('div', { class: 'lx-main' })); frameWatch(host); }   // inside the frame: its top bar and tabs stay
   else document.body.append(h('header', { class: 'topbar lx-top' }), h('main', { class: 'lx-main' }));
   if (!wired) {
     wired = true;
@@ -106,6 +106,11 @@ const inScope = (inner, c) => inner.split('/').map(x => UI.C.lang[x] ? c : x).jo
 function syncStrip() {
   if (UI.scope || !FR.on) return;
   document.querySelectorAll('.lx-subbar .lx-flagchip, .lx-top .lx-flagchip').forEach(b => b.classList.toggle('on', FR.pick ? b.dataset.lang === FR.pick.cur : b.classList.contains('lx-allchip')));
+  markStrip();
+}
+/** The strip is a row of links in effect (each chip opens an address): the chip that is on is the current one for assistive technology too. */
+function markStrip() {
+  document.querySelectorAll('.lx-subbar .lx-flagchip, .lx-top .lx-flagchip').forEach(b => { if (b.classList.contains('on')) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
 }
 
 function topbar() {
@@ -122,7 +127,7 @@ function topbar() {
     const open = c => { location.hash = (c ? '#/lang/' + encodeURIComponent(c) : '#/lang/' + encodeURIComponent(UI.id)) + (inner ? '/' + (c ? inScope(inner, c) : inner) : ''); };
     const all = h('button', { class: 'chip lx-flagchip lx-allchip' + (UI.scope ? '' : ' on'), title: LT('lang.hub.allTip'), onclick: () => open(null) }, LT('lang.hub.all'));
     const pick = c => { if (!UI.scope && FR.pick) FR.pick.fn(c); else open(c); };
-    t.append(all, ...activeLangs().map((c, i) => { const b = chips[i]; b.classList.toggle('on', c === UI.scope); b.onclick = () => pick(c); return b; }), h('span', { class: 'spacer' }), explain); syncStrip(); return;
+    t.append(all, ...activeLangs().map((c, i) => { const b = chips[i]; b.classList.toggle('on', c === UI.scope); b.onclick = () => pick(c); return b; }), h('span', { class: 'spacer' }), explain); syncStrip(); markStrip(); return;
   }   // the frame has the title (crumbs), ⚙️ and the other courses (⋮)
   t.append(
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '🌍'), h('span', { class: 'lx-title' }, courseTitle())),

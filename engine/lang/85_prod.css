@@ -27,7 +27,7 @@
 .lx-check1{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
 .lx-aspects{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}
 .lx-aspect{padding:8px 10px;border-radius:10px;background:var(--card)}
-.lx-aspect b{text-transform:capitalize;display:block}.lx-score{color:var(--violet);letter-spacing:1px}
+.lx-aspect b{text-transform:capitalize;display:block}.lx-score{color:var(--violet-ink);letter-spacing:1px}
 .lx-marked{font-size:18px;line-height:1.7;margin:8px 0;overflow-wrap:anywhere}
 .lx-cor ins{margin-inline-start:3px}
 .lx-digits{font-variant-numeric:tabular-nums;font-weight:700}

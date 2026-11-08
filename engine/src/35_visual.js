@@ -66,12 +66,12 @@ function vStage(ex, { regions } = {}) {
   const tools = h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn);
   const wrap = h('div', { class: 'vx' }, tools, stage, below);
   // Full screen: the picture moves to <body> (an animated/transformed ancestor would otherwise trap position:fixed)
-  // and comes back to its placeholder afterwards; the accent colours travel with it.
+  // and comes back to its placeholder afterwards; its chapter's colours (data-ci) travel with it.
   let holder = null;
   function toggleFull(on = !wrap.classList.contains('full')) {
     if (on === wrap.classList.contains('full')) return;
     if (on) {
-      const cs = getComputedStyle(wrap); wrap.style.setProperty('--c', cs.getPropertyValue('--c')); wrap.style.setProperty('--c-bg', cs.getPropertyValue('--c-bg')); wrap.style.setProperty('--c-ink', cs.getPropertyValue('--c-ink'));
+      const ci = wrap.parentElement?.closest('[data-ci]')?.dataset.ci; if (ci) wrap.dataset.ci = ci;
       holder = document.createComment('vx'); wrap.replaceWith(holder); document.body.append(wrap);
     } else if (holder) { holder.replaceWith(wrap); holder = null; }
     wrap.classList.toggle('full', on); document.body.classList.toggle('vx-noscroll', on); zoomBtn.textContent = on ? '✕' : '⤢';

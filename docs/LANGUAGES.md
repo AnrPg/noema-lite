@@ -965,7 +965,8 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
     rows, texts and sets), `.ns-pill` labels, the segmented flag rail, panels on `--paper` with a `--line` border and the
     character's radius (`--r`, `--br`, `--ir`), type in `--display` / `--font` at the frame's scale (h1 1.75rem, h2 1.2rem), spacing
     of 12–22 px between blocks; colours only from `--bg --paper --ink --ink2 --ink3 --line --acc --acc-ink --acc-soft --t1…--t4`
-    (+ the colour of each language, §9.5).
+    (+ the colour of each language, §9.5); `--acc` is a fill, border or line — the accent as text (a link, a step's label) is
+    `--acc-text`, which reads at 4.5:1 on the character's surfaces (`--acc-ink` is the text *on* the accent).
   * **The character's own look** reaches the course like every page of main: the `[data-m]` rules of `95_shell.css` for icons, pills,
     buttons and panels apply to the course's rows (they are the same components), and the course's own cards, lists and labels follow
     the same rules (the bear's dashed lines, the robot's and knight's square labels, round switches for the axolotl, alien, berry and
@@ -1360,6 +1361,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-11-08 — Accessibility of the course screens (no decision changed): links and other accent-coloured text use `--acc-text` (the accent made text-safe per character, `src/ui/tokens`); the strip of languages is a `nav` whose current chip has `aria-current` (it was a tablist without tabs); selects in the frame are painted by the character; `tests/a11y.js` audits the course's home and a word's card.
 - 2026-10-18 (later) — **D28**: main parameters vs “More”, reading never listed as a parameter.
 - 2026-10-18 (evening) — **D29**: the home of one language (`#/lang/<code>`), the strip of your languages, “In other languages” instead of the Compare toggle; aspect sections staged.
 - 2026-10-18 — **D27**: every section of a word card is trained and tested (the coverage rule), plus round-3 fixes (spacing under words, Hebrew voice text without niqqud, reading for words outside the course, next-word button).

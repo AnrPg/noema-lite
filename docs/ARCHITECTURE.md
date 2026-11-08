@@ -196,6 +196,14 @@ connector, whose root imports `src/engines/node.ts` (`tools/connector_bundle.mjs
 as `engine/tokens.css` (`tools/tokens.mjs`; generated, never committed), which `index.html` links after `engine/engine.css` and
 the one-file bundle inlines.
 
+Contrast is part of the tokens, not of each rule: `contrast.ts` names which text token is read on which surface and derives
+the text-safe colours — `--acc-text` (the accent as text), and for a colour used as a fill under text, `--<name>-fill` and
+`--<name>-on` for c, violet, ok, warn, bad and info (`fillFor`: white, else a dark ink, else white on the colour darkened
+just enough; a character: its accent under its accent ink, a tint's ink under its paper). A
+chapter's colours (`chapters.ts`) are rules on `[data-ci="<n>"]`, in light and dark; `setAccent` only sets the number.
+`tokens.test.ts` checks every pair at 4.5:1 for every character and chapter colour in both schemes; CSS never writes white
+on a token colour or a token colour as text without such a pair.
+
 **When the bridge goes:** phase 3 moves the last old screens into `src/features/`. That phase deletes
 `src/composition/bridge.ts`, the global, and every `NoemaCore.` left in `engine/`, then `engine/` itself. Until then:
 

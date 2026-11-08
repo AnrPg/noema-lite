@@ -11,13 +11,9 @@ const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title,
 if (window.NoemaShell?.mounted && window.NoemaThemes) for (const [k, f] of [['name', t => t.n], ['avatar', t => t.emoji]]) Object.defineProperty(TUTOR, k, { get: () => f(NoemaThemes.tutor()), enumerable: true });
 const APP_TITLE = SUBJ.appTitle || `${SUBJ.title} Quest`;
 const DEFAULT_KEY = Noema.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
-const PALETTE = [
-  ['#ff6b6b','#ffe7e7'],['#ff922b','#fff0e1'],['#f2a20c','#fff4d6'],['#40c057','#e4f7e8'],['#12b5a5','#ddf6f3'],
-  ['#3b9cf6','#e1effe'],['#5c6cff','#e8eaff'],['#9254ff','#f0e7ff'],['#e64fa5','#fde6f3'],['#f0563d','#fde9e4'],['#2b8a3e','#e3f4e6'],['#1c7ed6','#dfeefc'],['#d9480f','#ffe8d9']];
-const PALETTE_DARK = ['#ff8787','#ffa94d','#ffc53d','#69db7c','#38d9c6','#5fb0ff','#8291ff','#b083ff','#f783c6','#ff8a6e','#51cf66','#4dabf7','#ff8c42'];
-/* a chapter's colour as text (--c-ink: its number, its pills): C_INK_SHARE % of the colour, the rest the character's ink, so it reads at
-   4.5:1 on every surface of every character in light and dark (src/ui/tokens/tokens.test.ts checks it); the colour itself stays for fills */
-const C_INK_SHARE = 45, C_BG_DARK = '#1f232e';
+/* a chapter's colours (--c, --c-bg, --c-ink as text, --c-fill/--c-on as a fill under text) come from engine/tokens.css by
+   data-ci (src/ui/tokens/chapters.ts, light and dark, checked for contrast by tokens.test.ts); this is their number */
+const CHAPTER_COLOURS = 13;
 
 /* ---------- indexes ---------- */
 const CH = {}, SEC = {}, EX = {}, PB = {};
@@ -282,13 +278,7 @@ function confirmBox(text, onYes) {
 
 /* ---------- theming per chapter ---------- */
 function isDark() { return document.documentElement.dataset.theme === 'dark' || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); }   // i18n-ignore
-function setAccent(el, ch) {
-  const i = ch ? (ch._ci ?? ch._i) % PALETTE.length : 7;
-  const c = isDark() ? PALETTE_DARK[i] : PALETTE[i][0];
-  const bg = isDark() ? `color-mix(in srgb, ${PALETTE_DARK[i]} 18%, ${C_BG_DARK})` : PALETTE[i][1];   // i18n-ignore
-  el.style.setProperty('--c', c); el.style.setProperty('--c-bg', bg);
-  el.style.setProperty('--c-ink', `color-mix(in srgb, ${c} ${C_INK_SHARE}%, var(--ink))`);   // i18n-ignore
-}
+function setAccent(el, ch) { el.dataset.ci = String(ch ? (ch._ci ?? ch._i) % CHAPTER_COLOURS : 7); }
 function applyTheme() {
   const t = S.settings.theme;
   if (t === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;

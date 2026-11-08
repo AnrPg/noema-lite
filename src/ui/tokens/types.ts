@@ -100,6 +100,8 @@ export interface BaseColours {
   readonly infoBg: Colour;
   readonly violet: Colour;
   readonly violetBg: Colour;
+  /** violet as text (a character maps it to its --acc-text) */
+  readonly violetInk: Colour;
   /** the accent of the older screens */
   readonly c: Colour;
   readonly cBg: Colour;

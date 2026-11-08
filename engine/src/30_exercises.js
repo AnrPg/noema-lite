@@ -5,7 +5,8 @@ const TYPE_ICON = { mcq: '🎯', tf: '⚖️', odd: '🕵️', order: '🔢', ma
 const TAG_ICON = { concept: '', syntax: '', pitfall: '⚠️', debug: '🔧', exam: '🎓', interview: '🎤', calc: '🧮', compare: '⚖️' };
 const iconLabel = (icons, prefix) => new Proxy(icons, { get: (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k) ? (o[k] ? o[k] + ' ' : '') + tE(prefix + k) : undefined });
 const TYPE_LABEL = iconLabel(TYPE_ICON, 'engine.exType.'), TAG_LABEL = iconLabel(TAG_ICON, 'engine.exTag.');
-const PAIR_COLORS = ['#7c5cff', '#ff922b', '#12b5a5', '#e64fa5', '#3b9cf6', '#40c057', '#f2a20c'];
+/** the colours of matched pairs: chapter colours (data-ci), so each pair's number has a text colour that reads on it */
+const PAIR_COLOURS = [7, 1, 4, 8, 5, 3, 2];
 
 /* Each renderer returns { el, check(): true|false|null, reveal(), auto?: bool, selfDone?: bool } */
 const R = {};
@@ -76,9 +77,9 @@ R.match = (ex, api) => {
   const lb = {}, rb = {};
   function paint() {
     const used = Object.entries(link);
-    Object.values(lb).forEach(b => { b.classList.remove('sel'); b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
-    Object.values(rb).forEach(b => { b.querySelector('.tag')?.remove(); b.style.borderColor = ''; });
-    used.forEach(([l, r], k) => { const c = PAIR_COLORS[k % PAIR_COLORS.length]; [lb[l], rb[r]].forEach(b => { b.style.borderColor = c; b.append(h('span', { class: 'tag', style: { background: c } }, nf(k + 1))); }); });
+    Object.values(lb).forEach(b => { b.classList.remove('sel'); b.querySelector('.tag')?.remove(); b.style.borderColor = ''; delete b.dataset.ci; });
+    Object.values(rb).forEach(b => { b.querySelector('.tag')?.remove(); b.style.borderColor = ''; delete b.dataset.ci; });
+    used.forEach(([l, r], k) => { const ci = String(PAIR_COLOURS[k % PAIR_COLOURS.length]); [lb[l], rb[r]].forEach(b => { b.dataset.ci = ci; b.style.borderColor = 'var(--c)'; b.append(h('span', { class: 'tag' }, nf(k + 1))); }); });
     if (selL != null) lb[selL].classList.add('sel');
   }
   L.forEach(it => { lb[it.i] = h('button', { class: 'mitem', onclick: () => { if (api.locked()) return; if (link[it.i] != null) { delete link[it.i]; } selL = selL === it.i ? null : it.i; paint(); } }, F(it.t)); lcol.append(lb[it.i]); });
@@ -233,7 +234,7 @@ R.free = (ex, api) => {
       const g = await aiGrade(ex, ta.value);
       const sc = Math.max(0, Math.min(100, g.score | 0));
       out.innerHTML = '';
-      out.append(h('div', { class: 'fb ai' }, h('div', { class: 'row' }, h('span', { class: 'score', style: { background: sc >= 70 ? 'var(--ok)' : sc >= 45 ? 'var(--warn)' : 'var(--bad)' } }, sc), h('b', { class: 'grow', html: fmt(g.verdict) })),
+      out.append(h('div', { class: 'fb ai' }, h('div', { class: 'row' }, h('span', { class: 'score' + (sc >= 70 ? ' good' : sc >= 45 ? ' mid' : '') }, sc), h('b', { class: 'grow', html: fmt(g.verdict) })),
         g.covered?.length ? h('div', { style: { marginTop: '8px' } }, '✅ ', F(g.covered.join(' · '))) : null,
         g.missing?.length ? h('div', { style: { marginTop: '4px' } }, '➕ ' + tE('engine.ex.missing') + ' ', F(g.missing.join(' · '))) : null,
         g.mistakes?.length ? h('div', { style: { marginTop: '4px' } }, '❌ ', F(g.mistakes.join(' · '))) : null,
@@ -300,7 +301,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     h('span', { class: 'diff', title: tE('engine.ex.difficulty', { n: ex.difficulty }) }, ...[1, 2, 3].map(i => h('i', { class: i <= ex.difficulty ? 'on' : '' }))),
     ...(ex.tags || []).filter(t => t !== 'concept').map(t => h('span', { class: 'pill' }, TAG_LABEL[t] || t)),
     newPill(ex),
-    ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet)' } }, '✨ ' + tE('engine.ex.aiMade')) : null,
+    ex._ai ? h('span', { class: 'pill', style: { background: 'var(--violet-bg)', color: 'var(--violet-ink)' } }, '✨ ' + tE('engine.ex.aiMade')) : null,
     showSection && SEC[ex.section] ? h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, chTitle(ch.num, SEC[ex.section].title)) : null);
   const q = h('div', { class: 'q', 'data-nf': 'q', html: fmt(ex.q || '') });
   card.append(head, q);
