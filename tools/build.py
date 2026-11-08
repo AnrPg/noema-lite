@@ -474,7 +474,7 @@ def build_skill(out_zip):
     tmp_zip = out_zip + '.tmp'   # moved into place only once the limits below pass: a refused zip never sits where the user takes it from
     with zipfile.ZipFile(tmp_zip, 'w', zipfile.ZIP_DEFLATED) as z:
         for f in sorted(glob.glob(os.path.join(src, '**', '*'), recursive=True)):
-            if os.path.isfile(f) and '__pycache__' not in f: z.write(f, os.path.join('noema-pack-builder', os.path.relpath(f, src)))
+            if os.path.isfile(f) and '__pycache__' not in f: z.write(f, 'noema-pack-builder/' + os.path.relpath(f, src).replace(os.sep, '/'))
         for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
         z.writestr('noema-pack-builder/scripts/noema-tools.cjs', bundle_text('noema-tools'))   # the content checks for the scripts (noema_core.py): build/noema-tools.cjs
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'pipelines', '*.json'))): z.write(f, f'noema-pack-builder/scripts/pipelines/{os.path.basename(f)}')   # docs/PIPELINES.md
@@ -512,6 +512,7 @@ def build_skill(out_zip):
         for a, b in lang_builder_files():
             name = 'noema-pack-builder/' + ('LANGUAGE_BUILDER.md' if b == 'SKILL.md' else b)
             if name not in have: z.write(a, name); have.add(name)
+    with zipfile.ZipFile(tmp_zip) as z:   # read back once it is closed (reading a zip while it is written fails on Windows)
         n = len(z.namelist())
         nested = [i for i in z.namelist() if zipfile.is_zipfile(io.BytesIO(z.read(i)))]
     problem = (f'the skill zip has {n} files; claude.ai accepts at most {SKILL_MAX_FILES}' if n > SKILL_MAX_FILES else
