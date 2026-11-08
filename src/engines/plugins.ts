@@ -95,8 +95,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('craft@1'),
-    () => import('./craft/craft.js'),
-    () => import('noema-worker:./craft/craft.js#simEngine'),
+    () => import('./craft/craft.ts'),
+    () => import('noema-worker:./craft/craft.ts#simEngine'),
   ),
   def(
     manifest('law@1', ['engine:logic@1']),
