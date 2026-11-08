@@ -4,13 +4,13 @@
    src/engines/plugins.test.ts checks that it lists exactly the plugins of plugins.ts. */
 import { createEngineLibrary, type EngineLibrary } from './library.ts';
 import { ENGINE_PLUGINS } from './plugins.ts';
-import type { EngineModule, KernelApi } from './types.ts';
-import NoemaExpr from './kernel/simexpr.js';
-import NoemaLibCore from './kernel/core.js';
-import NoemaSimKit from './kernel/simkit.js';
-import NoemaSpaceKit from './kernel/space.js';
-import NoemaLibSchema from './kernel/schema.js';
-import NoemaCircuit from './circuit/circuit.js';
+import type { EngineModule } from './types.ts';
+import NoemaExpr from './kernel/simexpr.ts';
+import NoemaLibCore from './kernel/core.ts';
+import NoemaSimKit from './kernel/simkit.ts';
+import NoemaSpaceKit from './kernel/space.ts';
+import NoemaLibSchema from './kernel/schema.ts';
+import NoemaCircuit from './circuit/circuit.ts';
 import m0 from './ode/ode.js';
 import w0 from 'noema-worker:./ode/ode.js#simEngine';
 import m1 from './prob/prob.js';
@@ -27,10 +27,10 @@ import m6 from './seq/seq.js';
 import w6 from 'noema-worker:./seq/seq.js#simEngine';
 import m7 from './med/med.js';
 import w7 from 'noema-worker:./med/med.js#simEngine';
-import m8 from './clinic/clinic.js';
-import w8 from 'noema-worker:./clinic/clinic.js#simEngine';
-import m9 from './anatomy/anatomy.js';
-import w9 from 'noema-worker:./anatomy/anatomy.js#simEngine';
+import m8 from './clinic/clinic.ts';
+import w8 from 'noema-worker:./clinic/clinic.ts#simEngine';
+import m9 from './anatomy/anatomy.ts';
+import w9 from 'noema-worker:./anatomy/anatomy.ts#simEngine';
 import m10 from './timeline/timeline.js';
 import w10 from 'noema-worker:./timeline/timeline.js#simEngine';
 import m11 from './music/music.js';
@@ -43,8 +43,8 @@ import m14 from './craft/craft.js';
 import w14 from 'noema-worker:./craft/craft.js#simEngine';
 import m15 from './law/law.js';
 import w15 from 'noema-worker:./law/law.js#simEngine';
-import m16 from './agents/agents.js';
-import w16 from 'noema-worker:./agents/agents.js#simEngine';
+import m16 from './agents/agents.ts';
+import w16 from 'noema-worker:./agents/agents.ts#simEngine';
 import m17 from './field/field.js';
 import w17 from 'noema-worker:./field/field.js#simEngine';
 import m18 from './des/des.js';
@@ -53,8 +53,8 @@ import m19 from './philo/philo.js';
 import w19 from 'noema-worker:./philo/philo.js#simEngine';
 import m20 from './rhetoric/rhetoric.js';
 import w20 from 'noema-worker:./rhetoric/rhetoric.js#simEngine';
-import m21 from './circuit/sim.js';
-import w21 from 'noema-worker:./circuit/sim.js#simEngine';
+import m21 from './circuit/sim.ts';
+import w21 from 'noema-worker:./circuit/sim.ts#simEngine';
 import m22 from './thermal/thermal.js';
 import w22 from 'noema-worker:./thermal/thermal.js#adapter';
 import m23 from './pid/pid.js';
@@ -94,12 +94,12 @@ export const IN_HAND: Readonly<Record<string, readonly [EngineModule, string]>> 
   'twin@1': [m25, w25],
 });
 /** the kernels, for their own tests */
-export const KERNELS: Readonly<Record<string, KernelApi>> = Object.freeze({
-  expr: NoemaExpr as unknown as KernelApi,
+export const KERNELS = Object.freeze({
+  expr: NoemaExpr,
   core: NoemaLibCore,
   simkit: NoemaSimKit,
   space: NoemaSpaceKit,
-  schema: NoemaLibSchema as unknown as KernelApi,
+  schema: NoemaLibSchema,
   circuit: NoemaCircuit,
 });
 /** a library with every engine loaded */

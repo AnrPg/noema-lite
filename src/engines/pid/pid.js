@@ -8,7 +8,7 @@
    Pure JS, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
    Python twin of check / checkSpec: tools/pid.py. Schema: src/contracts/schemas/noema.pid.v1.schema.json.
    A plugin of the engine library (one line of src/engines/plugins.ts). Also used by tests/pid.js (node). */
-import NoemaSimKit from '../kernel/simkit.js';
+import NoemaSimKit from '../kernel/simkit.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'pid@1';
   const MAX_STEPS = 200000, MAX_BINDINGS = 24, MAX_STEPS_SIGNAL = 32, BLOWUP = 1e12;

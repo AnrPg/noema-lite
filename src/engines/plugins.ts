@@ -65,13 +65,13 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('clinic@1', ['engine:med@1']),
-    () => import('./clinic/clinic.js'),
-    () => import('noema-worker:./clinic/clinic.js#simEngine'),
+    () => import('./clinic/clinic.ts'),
+    () => import('noema-worker:./clinic/clinic.ts#simEngine'),
   ),
   def(
     manifest('anatomy@1'),
-    () => import('./anatomy/anatomy.js'),
-    () => import('noema-worker:./anatomy/anatomy.js#simEngine'),
+    () => import('./anatomy/anatomy.ts'),
+    () => import('noema-worker:./anatomy/anatomy.ts#simEngine'),
   ),
   def(
     manifest('timeline@1'),
@@ -105,8 +105,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('agents@1', ['engine:logic@1']),
-    () => import('./agents/agents.js'),
-    () => import('noema-worker:./agents/agents.js#simEngine'),
+    () => import('./agents/agents.ts'),
+    () => import('noema-worker:./agents/agents.ts#simEngine'),
   ),
   def(
     manifest('field@1'),
@@ -130,8 +130,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('circuit-mna@1'),
-    () => import('./circuit/sim.js'),
-    () => import('noema-worker:./circuit/sim.js#simEngine'),
+    () => import('./circuit/sim.ts'),
+    () => import('noema-worker:./circuit/sim.ts#simEngine'),
   ),
   def(
     manifest('thermal@1'),

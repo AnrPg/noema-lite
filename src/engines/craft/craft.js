@@ -8,7 +8,7 @@
    shade, stock solutions, mordants). Every model and constant cites its source beside the code and in the chapter; values marked
    (verify) there were transcribed from secondary sources and must be checked against the primary source.
    Pure, bounded, deterministic JS: no DOM, no network, no clock; numbers, codes and the model's own short texts only. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */   // code, not text: only codes, numbers and the model's own symbols leave this module
   const C = NoemaLibCore;
   const ID = 'craft@1';

@@ -21,10 +21,10 @@
    (unstable, cfl) and the run gives NaN unless the spec asks to see the instability (allowUnstable) — never silent.
    Pure, deterministic per seed (NoemaSimKit streams), bounded (≤ 1e8 node-steps, ≤ 3e6 per-node formula evaluations), never throws.
    Tests: node tests/lib_field.js. */
-import NoemaLibCore from '../kernel/core.js';
-import NoemaExpr from '../kernel/simexpr.js';
-import NoemaSimKit from '../kernel/simkit.js';
-import NoemaSpaceKit from '../kernel/space.js';
+import NoemaLibCore from '../kernel/core.ts';
+import NoemaExpr from '../kernel/simexpr.ts';
+import NoemaSimKit from '../kernel/simkit.ts';
+import NoemaSpaceKit from '../kernel/space.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this module
   const C = NoemaLibCore, S = NoemaSpaceKit;
   const SK = () => NoemaSimKit;   // the time / randomness / output-analysis kernel (src/engines/kernel/simkit.js, loaded before this file)

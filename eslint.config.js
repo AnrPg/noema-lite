@@ -61,9 +61,6 @@ module.exports = tseslint.config(
   { files: ['engine/**/*.js', 'config*.js'], languageOptions: { sourceType: 'script' } },
   { files: ['**/*.mjs'], languageOptions: { ecmaVersion: 'latest', sourceType: 'module' } },
 
-  /* ---------- the engines' own code (src/engines/**\/*.js): plain ES modules (src/package.json), typed at their edge by a .d.ts
-     beside each (the TypeScript rules apply there and to the .ts around them). Here only what the architecture asks of a pure
-     layer: no empty catch and no DOM / network / storage / clock (rules below, PURE). ---------- */
   { files: ['src/**/*.js'], languageOptions: { ecmaVersion: 'latest', sourceType: 'module' }, rules: { 'no-empty': ['error', { allowEmptyCatch: false }] } },
   { files: ['src/**/vendor/**'], languageOptions: { sourceType: 'commonjs' } },
 
@@ -95,6 +92,10 @@ module.exports = tseslint.config(
       }],
     },
   },
+  /* ---------- the engines (src/engines/**): numeric kernels index their arrays by loop counters and ids they checked, and
+     noUncheckedIndexedAccess types every such read as possibly undefined. `a[i]!` states that the index is in range; it is erased,
+     so the JavaScript is the source's arithmetic as written (the engines compute every double bit for bit as before). ---------- */
+  { files: ['src/engines/**/*.ts'], rules: { '@typescript-eslint/no-non-null-assertion': 'off' } },
   {
     files: PURE,
     rules: {

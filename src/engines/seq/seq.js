@@ -26,7 +26,7 @@
                  sites, guide GC, U6 poly-T, seed uniqueness, the guide nearest a target.
    Pure JS, no DOM, no learner text: numbers, codes and only the model's own short texts (sequence pieces, enzyme names) as `s`.
    Python twin of checkSpec / exprs / keys: tools/lib_seq.py. Tests: node tests/lib_seq.js. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys and numbers leave this module
   const C = NoemaLibCore;
   const ID = 'seq@1';

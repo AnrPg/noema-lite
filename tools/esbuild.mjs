@@ -104,8 +104,9 @@ export function entries() {
 /** whitespace and names only, never syntax (the engines' arithmetic stays exactly as written: see the header) */
 const MINIFY = { minifyWhitespace: true, minifyIdentifiers: true, minifySyntax: false };
 const ENGINES = path.join(ROOT, 'src', 'engines');
-/** the modules of src/engines built once as their own piece and shared by the Worker bundles that import them */
-export const SHARED_PIECES = ['kernel/simexpr.js', 'kernel/simkit.js', 'kernel/core.js', 'kernel/space.js', 'logic/logic.js', 'med/med.js'];
+/** the modules of src/engines built once as their own piece and shared by the Worker bundles that import them (by module name: the path
+    under src/engines without its extension, the key of self.__noemaShared) */
+export const SHARED_PIECES = ['kernel/simexpr', 'kernel/simkit', 'kernel/core', 'kernel/space', 'logic/logic', 'med/med'];
 
 /** The esbuild plugin of the engines' Worker bundles (src/engines/plugins.ts, node.ts):
     `import src from 'noema-worker:./prob/prob.js#simEngine'` is the Worker bundle of that engine as TEXT — the module and what
@@ -114,7 +115,7 @@ export const SHARED_PIECES = ['kernel/simexpr.js', 'kernel/simkit.js', 'kernel/c
     each after its own dependencies, then its own part, and a bundle holds each piece's text once. One instance per build()
     keeps the pieces for every entry of that build (the app, the harness, the node bundle and the connector). */
 export function noemaWorkers() {
-  const keyOf = abs => { const r = path.relative(ENGINES, abs).split(path.sep).join('/'); return SHARED_PIECES.includes(r) ? r : null; };
+  const keyOf = abs => { const r = path.relative(ENGINES, abs).split(path.sep).join('/').replace(/\.[jt]s$/, ''); return SHARED_PIECES.includes(r) ? r : null; };
   const pieces = new Map();   // key → Promise<{ text, deps }>
   /** an import of a shared module (other than the piece being built) reads it from self.__noemaShared */
   const shared = (own, used) => ({

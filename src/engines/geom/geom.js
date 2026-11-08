@@ -9,8 +9,8 @@
    verbatim; tolerant decisions use a scale S of the free points (research §4.3). Every object is rebuilt from the free points along
    the DAG on every run (no drift). Pure JS, no DOM, no words: numbers, codes, keys and the model's own ids (`s`).
    Python twin of checkSpec / exprs / keys: tools/lib_geom.py. Tests: node tests/lib_geom.js, node tests/enginelib.js. */
-import NoemaLibCore from '../kernel/core.js';
-import NoemaExpr from '../kernel/simexpr.js';
+import NoemaLibCore from '../kernel/core.ts';
+import NoemaExpr from '../kernel/simexpr.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys and numbers leave this engine
   const C = NoemaLibCore;
   const ID = 'geom@1';

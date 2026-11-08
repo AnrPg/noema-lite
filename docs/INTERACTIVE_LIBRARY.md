@@ -29,7 +29,7 @@ the limits and edge cases, the reference values its tests assert).
 | `src/engines/plugins.ts` | one line per engine: its manifest (`engine:<id>`), how to load its module and its Worker bundle |
 | `src/engines/library.ts` | the engine library on `NoemaCore.engines`: `ids()`, `load(ids)`, `loaded(id)`, `engine(id)`, `catalog`, `expr`, `schema()` |
 | `src/engines/kernel/schema.js` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
-| `src/engines/catalog.js` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
+| `src/engines/catalog.ts` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
 | `docs/library/<name>.md` | the engine's chapter |
 | `tests/lib_<name>.js` | its tests: reference values from the literature (with the source in the test's message), the edge cases, the codes, speed, the Worker source; and `tests/fixtures/enginelib/<name>.json` (good and bad specs), whose checks `tests/enginelib.js` holds to the golden outputs of the former Python twins (`tests/fixtures/parity/enginelib.json`; a new engine's checks are recorded there with `NOEMA_GOLDEN_UPDATE=1`, tests/golden.cjs) |
 | `tools/activities_examples/<example>/` | at least one reference activity per engine (spec.json, strings.en/el/ru/de/fr.json, the registry entry), started with `activity_new.py --from <example>` |

@@ -282,7 +282,7 @@ const FIX = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'eng
   ok(JSON.stringify(wr) === JSON.stringify(r), 'the Worker source in a fresh global gives the same outputs');
   const sa = spec(Object.assign({}, AR, G), [{ id: 'v', kind: 'scalar', of: 'valid', argument: 'cd' }, { id: 'i', kind: 'scalar', of: 'ipd', strategy: 'tft', what: 'share' }]);
   const wa = ctx.self.noemaEngine.create(sa, { seed: 3 }).run({}), pa = L.engine.create(sa, { seed: 3 }).run({});
-  ok(!!ctx.self.__noemaShared['logic/logic.js'] && !!ctx.self.__noemaShared['kernel/simkit.js'] && wa.v === 1 && wa.i === pa.i, 'the Worker carries logic@1 and NoemaSimKit: arguments and seeded tournaments agree');
+  ok(!!ctx.self.__noemaShared['logic/logic'] && !!ctx.self.__noemaShared['kernel/simkit'] && wa.v === 1 && wa.i === pa.i, 'the Worker carries logic@1 and NoemaSimKit: arguments and seeded tournaments agree');
   const param = spec({ populations: [{ id: 'A', groups: [{ n: 'na', w: 100 }] }, { id: 'Z', groups: [{ n: 1e7, w: 'wz' }] }] }, [{ id: 'c', kind: 'scalar', of: 'compare', a: 'A', b: 'Z', rule: 'total' }]);
   const en = L.engine.create(param, {});
   ok(en.run({ na: 1000, wz: 0.1 }).c === -1 && en.run({ na: 1e5, wz: 0.1 }).c === 1, 'numbers of the model may be expressions over the spec\'s names');
