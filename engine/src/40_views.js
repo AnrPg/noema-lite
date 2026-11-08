@@ -597,6 +597,21 @@ function runSummary() {
       R0.after ? h('button', { class: 'btn primary ns-srnext', onclick: R0.after.run }, R0.after.label) : null,
       h('button', { class: 'btn', onclick: () => go(R0.back) }, tE('engine.run.done'))))));
 }
+/* ---------- ⚙ #/engines: the engines of activities and requests for new ones — src/features/reports/ui/engines.ts (NoemaCore.community),
+   drawn into the engine's view; this side says which engines and runtimes this app runs (the activity core) ---------- */
+function engineHere(e) {
+  if (typeof ACT === 'undefined') return false;
+  if (e.runtime) return !!(ACT.runtime(typeof e.runtime === 'string' ? e.runtime : e.id) || ACT.runtime(e.id));   // an engine of the library counts before it is loaded
+  return ACT.engines().includes(e.id);
+}
+function enginesView() {
+  shellChrome({ sub: true, crumbs: [[tE('engine.engines.title')]], back: HOME() });
+  const v = view(SHL() ? null : backBtn('← ' + SUBJ.title, HOME())), C = window.NoemaCore?.community;
+  if (!C) { v.append(h('p', {}, tE('engine.engines.unavailable'))); return; }
+  const box = h('div'); v.append(box);
+  C.mount(box, location.hash, c => { if (box.isConnected) shellChrome({ sub: true, crumbs: (c.crumbs || []).map(x => [x.label, x.href]), back: c.back }); }, { engineHere, subjectId: SUBJ?.id || null, back: HOME() })
+    .catch(e => { box.replaceChildren(h('p', {}, errText(e))); });
+}
 /* ---------- 🔎 a round made from search results (NoemaCore.community.search): this subject's exercises, then its cards ---------- */
 function searchRunView() {
   const X = window.NoemaCore?.community?.search, R = X?.round(), st = R?.steps?.[R.i];
@@ -876,7 +891,7 @@ function route() {
   if (p[0] === 'mistakes') return mistakesView();
   if (p[0] === 'new') return whatsNewView();
   if (p[0] === 'author') return authorView();
-  if (p[0] === 'engines') return enginesView(p[1]);   // the engines of activities and requests for new ones (49_lib_view.js)
+  if (p[0] === 'engines') return enginesView();   // the engines of activities and requests for new ones (src/features/reports/ui/engines.ts)
   if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
   homeView();
 }

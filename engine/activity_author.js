@@ -64,10 +64,8 @@
 
   /* ---------- the engine library: a kind for every engine whose module exports its table (docs/INTERACTIVE_LIBRARY.md §1.5) ---------- */
   const LS = () => ENG()?.schema() || null;
-  const GROUPS = [['math', ['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1']], ['life', ['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1']],
-    ['arts', ['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1']]];   // = ENGINE_GROUPS of 49_lib_view.js (the #/engines page), used when that file is not loaded
-  /* global ENGINE_GROUPS */
-  const groups = () => (typeof ENGINE_GROUPS !== 'undefined' && Array.isArray(ENGINE_GROUPS) ? ENGINE_GROUPS : GROUPS);
+  /** the library's engines by field: the catalogue's one list (src/engines/catalog.js GROUPS, also the #/engines page's) */
+  const groups = () => ENG()?.catalog?.GROUPS || [];
   /** the library engines here: catalogue entries whose module is loaded with its checker and table (and, in the app, runnable) */
   function libEngines() {
     const L = ENG(), out = [];

@@ -5,6 +5,7 @@
  *
  *   #/search?…                      the search page                       (src/features/search/ui)
  *   #/admin/reports[/<id>][?f=…]   the ⚑ reports, for the app's admins   (src/features/reports/ui)
+ *   #/engines[/new]                 ⚙ engines of activities, requests     (src/features/reports/ui), inside the engine
  *   (no address)                    🔎 the quick sheet · ⚑ the report dialog
  */
 import type { ScreenChrome } from '../features/community/ui/host.ts';
@@ -12,17 +13,21 @@ import { CHROME_EVENT, type CommunityScreen } from '../features/community/ui/scr
 import type { Here } from '../features/search/domain/params.ts';
 import { NoemaReportAdmin } from '../features/reports/ui/admin.ts';
 import { openReport } from '../features/reports/ui/dialog.ts';
+import { NoemaEnginesPage, type EnginesDeps } from '../features/reports/ui/engines.ts';
+import type { CatalogEntry } from '../engines/types.ts';
 import { NoemaSearchPage } from '../features/search/ui/page.ts';
 import { NoemaSearchQuick, quickSearch, type SearchScreenDeps } from '../features/search/ui/quick.ts';
 import { provideServices, requestServices } from '../ui/core/services.ts';
 import { defineUi } from '../ui/index.ts';
 import { defineRoutes, type RouteMatch } from '../ui/router/routes.ts';
 import type { CommunityApp } from './community-app.ts';
-import { CLOCK } from './tokens.ts';
+import { ENGINE_REQUESTS } from './community.ts';
+import { CLOCK, ENGINES } from './tokens.ts';
 
 export const COMMUNITY_ROUTES = defineRoutes({
   search: '/search',
   reports: '/admin/reports/:id?',
+  engines: '/engines/:sub?',
 });
 type R = typeof COMMUNITY_ROUTES.table;
 type Match = RouteMatch<R>;
@@ -32,13 +37,21 @@ export const COMMUNITY_ELEMENTS = {
   'noema-search-page': NoemaSearchPage,
   'noema-search-quick': NoemaSearchQuick,
   'noema-report-admin': NoemaReportAdmin,
+  'noema-engines-page': NoemaEnginesPage,
 } as const;
 
 export interface CommunityScreens {
   has(hash: string): boolean;
-  mount(el: HTMLElement, hash: string, onChrome: (c: ScreenChrome) => void): HTMLElement | null;
+  mount(el: HTMLElement, hash: string, onChrome: (c: ScreenChrome) => void, ctx?: MountContext): HTMLElement | null;
   quickSearch(here: Here | null): void;
   openReport(): void;
+}
+
+/** what the place that mounts a screen adds (the engine's #/engines: the engines it runs, the open subject, its home) */
+export interface MountContext {
+  readonly engineHere?: (e: CatalogEntry) => boolean;
+  readonly subjectId?: string | null;
+  readonly back?: string;
 }
 
 let made: CommunityScreens | null = null;
@@ -57,7 +70,7 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
   const searchDeps: SearchScreenDeps = { ...app.search.d, ui: app.search };
 
   /** the element of a matched address, with its deps */
-  const screenOf = (m: Match): CommunityScreen | null => {
+  const screenOf = (m: Match, ctx: MountContext): CommunityScreen | null => {
     const doc = win.document;
     switch (m.name) {
       case 'search': {
@@ -71,15 +84,30 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
         el.reportId = m.params.id ?? '';
         return el;
       }
+      case 'engines': {
+        const el = doc.createElement('noema-engines-page');
+        const deps: EnginesDeps = {
+          host: app.host,
+          notify: app.notify,
+          requests: app.r.get(ENGINE_REQUESTS),
+          catalog: () => app.r.get(ENGINES).catalog,
+          engineHere: ctx.engineHere ?? (() => false),
+          subjectId: () => ctx.subjectId ?? null,
+          back: ctx.back ?? '#/',
+        };
+        el.deps = deps;
+        el.sub = m.params.sub ?? '';
+        return el;
+      }
     }
   };
 
   made = {
     has: hash => COMMUNITY_ROUTES.match(hash) !== null,
-    mount: (el, hash, onChrome) => {
+    mount: (el, hash, onChrome, ctx = {}) => {
       const m = COMMUNITY_ROUTES.match(hash);
       if (!m) return null;
-      const screen = screenOf(m);
+      const screen = screenOf(m, ctx);
       if (!screen) return null;
       screen.addEventListener(CHROME_EVENT, e => {
         onChrome((e as CustomEvent<ScreenChrome>).detail);

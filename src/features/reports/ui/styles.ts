@@ -321,3 +321,121 @@ export const POINT_CSS = css`
     border-radius: 6px;
   }
 `;
+
+/** ⚙ #/engines: the catalogue of engines and the requests for new ones — quiet, one column, wraps at 320 px */
+export const ENGINES_CSS = css`
+  .eng-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .eng-head h2 {
+    margin: 0;
+  }
+  .eng-intro {
+    max-width: 64ch;
+  }
+  .eng-sec {
+    margin-top: 18px;
+  }
+  .eng-sec h3 {
+    font-size: 1rem;
+    margin: 0 0 6px;
+  }
+  .eng-list,
+  .eng-reqs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .eng-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 10px;
+    align-items: baseline;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: var(--u-paper);
+    border: 1px solid var(--u-line);
+    min-width: 0;
+  }
+  .eng-row b {
+    font-weight: 600;
+  }
+  .eng-id {
+    font-size: 0.78em;
+    color: var(--u-ink3);
+    overflow-wrap: anywhere;
+  }
+  .eng-what {
+    flex: 1 1 100%;
+    font-size: 0.88em;
+    color: var(--u-ink2);
+    overflow-wrap: anywhere;
+  }
+  .eng-req {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--u-line);
+    background: var(--u-paper);
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+  .eng-req-h {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    align-items: baseline;
+  }
+  .eng-req-h b {
+    overflow-wrap: anywhere;
+  }
+  .eng-st-available {
+    --bgc: var(--u-ok);
+    --fgc: var(--u-ok-ink);
+  }
+  .eng-st-declined,
+  .eng-st-duplicate {
+    --bgc: var(--u-line);
+    --fgc: var(--u-ink2);
+  }
+  .eng-answer {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .eng-admin {
+    font-size: 0.9em;
+    display: grid;
+    gap: 6px;
+  }
+  .eng-admin summary,
+  .eng-more > summary {
+    cursor: pointer;
+    min-height: 24px;
+    color: var(--u-ink2);
+  }
+  .eng-admin .nc-row > * {
+    flex: 1 1 8em;
+    min-width: 0;
+  }
+  .eng-f {
+    display: grid;
+    gap: 3px;
+    margin: 8px 0;
+  }
+  .eng-f span {
+    font-size: 0.88em;
+    color: var(--u-ink2);
+  }
+  .eng-sug:empty {
+    display: none;
+  }
+  .eng-sug {
+    margin: 4px 0 6px;
+  }
+`;

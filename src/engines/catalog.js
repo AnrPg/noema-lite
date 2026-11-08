@@ -73,6 +73,14 @@
     return out.slice(0, (opts && opts.limit) || 4);
   }
 
-  const API = Object.freeze({ CATALOG, LIBRARY: Object.freeze(LIBRARY), byId, suggest, fold });
+  /** the library's engines by field, as the #/engines page and the activity author list them (the field's words: engine.engines.group.<g>) */
+  const GROUPS = Object.freeze([
+    Object.freeze(['math', Object.freeze(['formula@1', 'ode@1', 'prob@1', 'graph@1', 'geom@1', 'logic@1', 'des@1', 'field@1'])]),
+    Object.freeze(['life', Object.freeze(['genetics@1', 'seq@1', 'med@1', 'clinic@1', 'anatomy@1', 'agents@1'])]),
+    Object.freeze(['arts', Object.freeze(['timeline@1', 'music@1', 'map@1', 'text@1', 'craft@1'])]),
+    Object.freeze(['thought', Object.freeze(['rhetoric@1', 'philo@1', 'law@1'])]),
+  ]);
+
+  const API = Object.freeze({ CATALOG, LIBRARY: Object.freeze(LIBRARY), GROUPS, byId, suggest, fold });
   export default API;
   /* i18n-ignore-end */

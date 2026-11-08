@@ -96,9 +96,14 @@ export function communityBridge(r: Resolver): unknown {
   return Object.freeze({
     /** is this address one of the community screens */
     has: async (hash: string): Promise<boolean> => (await ui()).has(hash),
-    mount: (el: HTMLElement, hash: string, onChrome: (c: ScreenChrome) => void): Promise<HTMLElement | null> => {
+    mount: (
+      el: HTMLElement,
+      hash: string,
+      onChrome: (c: ScreenChrome) => void,
+      ctx?: ScreensModule.MountContext,
+    ): Promise<HTMLElement | null> => {
       const s = now();
-      return s ? Promise.resolve(s.mount(el, hash, onChrome)) : ui().then(x => x.mount(el, hash, onChrome));
+      return s ? Promise.resolve(s.mount(el, hash, onChrome, ctx)) : ui().then(x => x.mount(el, hash, onChrome, ctx));
     },
     report: Object.freeze({
       /** ⚑ pressed: the place and the screenshot, then the dialog */
