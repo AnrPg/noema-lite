@@ -22,7 +22,7 @@
                  1996), liability threshold heritability (Falconer 1965), a seeded polygenic truncation-selection simulation.
    Pure JS, no DOM, no learner text: numbers, codes and only the model's own short texts (allele names, ids) as `s`.
    Python twin of checkSpec / exprs / keys: tools/lib_genetics.py. Tests: node tests/lib_genetics.js. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys and numbers leave this module
   const C = NoemaLibCore;
   const ID = 'genetics@1';

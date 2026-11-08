@@ -7,7 +7,7 @@
    or a rate that would harm a real patient is reported as a code — never a silent number.
    Every formula names its source beside it (paper/guideline + year); the chapter lists them all. Pure, deterministic, bounded.
    clinic@1 (src/engines/clinic/clinic.js) reuses these calculators through NoemaLibMed.calc. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */
   const C = NoemaLibCore;
   const ID = 'med@1';

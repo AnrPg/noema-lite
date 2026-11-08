@@ -7,7 +7,7 @@
    duty cycle, BLE and Wi-Fi airtime (rough). Pure JS, no DOM, no text for the learner: codes and numbers only.
    The link (noema.rf/v1) is described in docs/INTERACTIVE_ENGINES.md §4 and src/contracts/schemas/noema.rf.v1.schema.json. Python twin of
    check() / checkSpec(): tools/rf.py. It is a plugin of the engine library: one line of src/engines/plugins.ts. Tests: node tests/rf.js. */
-import NoemaSimKit from '../kernel/simkit.js';
+import NoemaSimKit from '../kernel/simkit.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'rf@1', FORMAT = 'noema.rf/v1';
   const MAX_POINTS = 2000, MAX_WALLS = 32, MAX_BINDINGS = 24, MAX_ITER = 200;

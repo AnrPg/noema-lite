@@ -21,10 +21,10 @@
    (Onsager 1944), DeGroot consensus.
    Pure, deterministic per seed, bounded (≤ 5000 agents, ≤ 2000 steps, an operation budget with the code budget), never throws.
    Tests: node tests/lib_agents.js. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
-import NoemaSimKit from '../kernel/simkit.js';
-import NoemaSpaceKit from '../kernel/space.js';
+import NoemaSimKit from '../kernel/simkit.ts';
+import NoemaSpaceKit from '../kernel/space.ts';
 import NoemaLibLogic from '../logic/logic.js';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this module
   const C = NoemaLibCore, S = NoemaSpaceKit;

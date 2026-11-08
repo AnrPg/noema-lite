@@ -4,12 +4,12 @@
    src/engines/plugins.test.ts checks that it lists exactly the plugins of plugins.ts. */
 import { createEngineLibrary, type EngineLibrary } from './library.ts';
 import { ENGINE_PLUGINS } from './plugins.ts';
-import type { EngineModule, KernelApi } from './types.ts';
+import type { EngineModule } from './types.ts';
 import NoemaExpr from './kernel/simexpr.ts';
-import NoemaLibCore from './kernel/core.js';
-import NoemaSimKit from './kernel/simkit.js';
-import NoemaSpaceKit from './kernel/space.js';
-import NoemaLibSchema from './kernel/schema.js';
+import NoemaLibCore from './kernel/core.ts';
+import NoemaSimKit from './kernel/simkit.ts';
+import NoemaSpaceKit from './kernel/space.ts';
+import NoemaLibSchema from './kernel/schema.ts';
 import NoemaCircuit from './circuit/circuit.js';
 import m0 from './ode/ode.js';
 import w0 from 'noema-worker:./ode/ode.js#simEngine';
@@ -96,11 +96,10 @@ export const IN_HAND: Readonly<Record<string, readonly [EngineModule, string]>> 
 /** the kernels, for their own tests */
 export const KERNELS = Object.freeze({
   expr: NoemaExpr,
-
   core: NoemaLibCore,
   simkit: NoemaSimKit,
   space: NoemaSpaceKit,
-  schema: NoemaLibSchema as unknown as KernelApi,
+  schema: NoemaLibSchema,
   circuit: NoemaCircuit,
 });
 /** a library with every engine loaded */

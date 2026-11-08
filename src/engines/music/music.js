@@ -11,7 +11,7 @@
    2005; R. Cohn 1998; N. H. Fletcher & T. D. Rossing 1998; ISO 16:1975; the Forte table is music21's (chord/tables.py, BSD-3-Clause,
    © C. Ariza, M. S. Cuthbert), as 208 prime-form bit masks.  Pure, bounded, deterministic; numbers, codes and notation symbols only.
    Tests: node tests/lib_music.js */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */
   const C = NoemaLibCore;
   const ID = 'music@1';

@@ -6,7 +6,7 @@
    seeded randomness from the core. Sources of each method: in the comment beside it and in docs/library/graph.md.
    Pure JS, no DOM, no words for the learner: numbers, codes and the model's own node ids (`s`). Python twin of checkSpec / exprs /
    keys: tools/lib_graph.py. Tests: node tests/lib_graph.js, node tests/enginelib.js. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys and numbers leave this engine
   const C = NoemaLibCore;

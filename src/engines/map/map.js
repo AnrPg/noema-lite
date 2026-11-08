@@ -6,7 +6,7 @@
    time). Drawings: the Natural Earth 1:110m land outline (vendored), graticule, places, routes, territories, Tissot ellipses.
    Pure, bounded, deterministic; numbers, codes and keys only. Vendored (engine/vendor/): geographiclib-geodesic@2.2.0 (MIT) and
    world-atlas@2.0.2 land-110m (ISC / Natural Earth public domain) — both travel to the Worker in front of this module. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
 import geodesic from './vendor/geodesic.cjs';
 import LAND110 from './vendor/land-110m.json' with { type: 'json' };
   /* i18n-ignore-start */   // code, not text: only codes, keys and numbers leave this module

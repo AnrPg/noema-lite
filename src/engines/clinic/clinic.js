@@ -17,7 +17,7 @@
    Outputs name "<section>.<what>[.<id>]" (docs/library/clinic.md lists them). The body's numbers (oxygen saturation, content, NEWS2)
    come from med@1 (NoemaLibMed.calc): its module travels with this one to the Worker. EDUCATIONAL ONLY — never clinical advice.
    Pure, deterministic (seeded noise only), bounded. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
 import NoemaLibMed from '../med/med.js';
   /* i18n-ignore-start */
   const C = NoemaLibCore;

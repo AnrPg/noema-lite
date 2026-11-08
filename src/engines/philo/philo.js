@@ -15,8 +15,8 @@
    (exact for two, replicator-approximate beyond), Poisson voting games (Myerson 1998, 2000: pivots, magnitudes, equilibria).
    Sources: beside each function and in docs/library/philo.md. Pure, bounded, deterministic; numbers, codes and keys only.
    Tests: node tests/lib_philo.js */
-import NoemaLibCore from '../kernel/core.js';
-import NoemaSimKit from '../kernel/simkit.js';
+import NoemaLibCore from '../kernel/core.ts';
+import NoemaSimKit from '../kernel/simkit.ts';
 import NoemaLibLogic from '../logic/logic.js';
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own ids leave this engine
   const C = NoemaLibCore;

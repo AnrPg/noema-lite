@@ -6,7 +6,7 @@
    Pure JS, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
    Format noema.thermal/v1: src/contracts/schemas/noema.thermal.v1.schema.json. Python twin of check / checkSpec: tools/thermal.py.
    A plugin of the engine library (one line of src/engines/plugins.ts). Also used by tests/thermal.js (node). */
-import NoemaSimKit from '../kernel/simkit.js';
+import NoemaSimKit from '../kernel/simkit.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'thermal@1', FORMAT = 'noema.thermal/v1';
   const MAX_NODES = 50, MAX_LINKS = 200, MAX_SOURCES = 24, MAX_THERMOSTATS = 8, MAX_STEPS = 200000, MAX_POINTS = 20001, MAX_BINDINGS = 24;

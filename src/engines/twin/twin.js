@@ -8,7 +8,7 @@
    a brown-out level set too high. Deterministic for a seed; bounded (sim.maxEvents → code 'budget'). Codes and numbers only.
    The device (noema.twin/v1): docs/INTERACTIVE_ENGINES.md §5, src/contracts/schemas/noema.twin.v1.schema.json. Python twin of check(),
    checkFaults(), checkSpec(): tools/twin.py. It is a plugin of the engine library: one line of src/engines/plugins.ts. Tests: node tests/twin.js. */
-import NoemaSimKit from '../kernel/simkit.js';
+import NoemaSimKit from '../kernel/simkit.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'twin@1', FORMAT = 'noema.twin/v1';
   const MAX_SENSORS = 8, MAX_SAMPLES = 2000, MAX_EVENTS = 5000000, DEF_EVENTS = 1000000, MAX_LOG = 1000, MAX_TRACE = 4000, MAX_POINTS = 2000, MAX_BINDINGS = 24;

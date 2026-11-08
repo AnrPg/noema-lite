@@ -15,8 +15,8 @@
    Kleinrock, Queueing Systems I 1975; Cobham 1954 (Oper. Res. 2); Jackson 1957 (Oper. Res. 5); Little 1961; White 1997 (MSER).
    Pure, deterministic (MRG32k3a streams, one per purpose: common random numbers across scenarios), bounded (≤ 200 000 events in all
    replications), never throws. No learner text: numbers, codes, keys. Tests: node tests/lib_des.js. */
-import NoemaLibCore from '../kernel/core.js';
-import NoemaSimKit from '../kernel/simkit.js';
+import NoemaLibCore from '../kernel/core.ts';
+import NoemaSimKit from '../kernel/simkit.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys and numbers leave this module
   const C = NoemaLibCore, SK = NoemaSimKit;
   const ID = 'des@1';

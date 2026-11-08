@@ -4,7 +4,7 @@
    its module with its registered engine: the shape ACT.registerEngine takes, with its Worker bundle as text (workerSource). */
 import { createPluginRegistry, type PluginRegistry, type Support } from '../plugins/index.ts';
 import NoemaExpr from './kernel/simexpr.ts';
-import NoemaEngineCatalog from './catalog.js';
+import NoemaEngineCatalog from './catalog.ts';
 import { EXPR } from './plugins.ts';
 import type { CatalogApi, EngineModule, EnginePlugin, ExprApi, LoadedEngine, RegisteredEngine, SchemaApi } from './types.ts';
 

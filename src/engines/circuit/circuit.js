@@ -10,7 +10,7 @@
    trapezoidal integration with a backward-Euler step at the start and on every step that holds a source discontinuity.
    The netlist (noema.circuit/v1) is described in docs/INTERACTIVE_CIRCUIT.md and src/contracts/schemas/noema.circuit.v1.schema.json.
    Also used by tests/circuit.js (node). */
-import NoemaSimKit from '../kernel/simkit.js';
+import NoemaSimKit from '../kernel/simkit.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this engine
   const ID = 'circuit-mna@1', FORMAT = 'noema.circuit/v1';
   const MAX_NODES = 60, MAX_ELEMENTS = 200, MAX_STEPS = 200000;

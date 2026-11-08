@@ -8,7 +8,7 @@
    hendecasyllable, sapphic) that lists EVERY valid scansion with the assumptions it makes, English accentual-syllabic metre (iambic
    pentameter with a simplified Kiparsky stress-maximum rule) and rhyme schemes. Pure JS (String.normalize, \p{…}, Intl.Segmenter
    when asked for), deterministic, bounded; numbers, codes, keys and the model's own short texts (`s`) only. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own words leave this module
   const C = NoemaLibCore;
   const ID = 'text@1';

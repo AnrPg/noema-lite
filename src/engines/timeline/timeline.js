@@ -10,7 +10,7 @@
    were generated once from ICU 78 (Unicode License v3) with node's Intl; the Bahá'í Naw-Rúz table 172–221 BE from the March equinox
    (Meeus ch. 27) and the geometric sunset in Tehran, checked against the Bahá'í World Centre dates published for 2024–2031.
    Pure, bounded, deterministic; no DOM, no clock; numbers and codes only. Tests: node tests/lib_timeline.js */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */
   const C = NoemaLibCore;
   const ID = 'timeline@1';

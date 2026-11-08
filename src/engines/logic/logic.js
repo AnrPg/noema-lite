@@ -10,7 +10,7 @@
    Sources of each method: beside it and in docs/library/logic.md. Pure JS, no DOM, no words for the learner: numbers, codes and the
    model's own formulas as short raw texts (`s`). Deterministic, bounded, never throws for a checked spec. Python twin of checkSpec /
    exprs / keys (with the same parser and its messages): tools/lib_logic.py. Tests: node tests/lib_logic.js, node tests/enginelib.js. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own formulas leave this engine
   const C = NoemaLibCore;
   const ID = 'logic@1';

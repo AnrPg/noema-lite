@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { checkManifest } from '../plugins/index.ts';
 import { ENGINE_PLUGINS, EXPR } from './plugins.ts';
 import { createEngineLibrary } from './library.ts';
-import NoemaEngineCatalog from './catalog.js';
+import NoemaEngineCatalog from './catalog.ts';
 import type { EngineModule, EnginePlugin, SchemaApi } from './types.ts';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));

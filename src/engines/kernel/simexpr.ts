@@ -1299,8 +1299,16 @@ function hypot(...a: number[]) {
 const PI = 3.141592653589793,
   E_ = 2.718281828459045;
 
-const fnDef = (fn: Fn, mn: number, mx?: number) => Object.freeze({ fn, min: mn, max: mx === undefined ? mn : mx });
-const FUNCS: Readonly<Record<string, { readonly fn: Fn; readonly min: number; readonly max: number } | undefined>> = Object.freeze(
+const fnDef = (fn: Fn, mn: number, mx?: number): FnDef => Object.freeze({ fn, min: mn, max: mx === undefined ? mn : mx });
+/** a function of the language: its implementation and its arity */
+export interface FnDef {
+  readonly fn: Fn;
+  readonly min: number;
+  readonly max: number;
+}
+/** the functions by a name read at run time (an unknown name is undefined) */
+export type FuncTable = Readonly<Record<string, FnDef | undefined>>;
+const FUNCS = Object.freeze(
   Object.assign(Object.create(null) as object, {
     sin: fnDef(sin, 1),
     cos: fnDef(cos, 1),
@@ -1708,7 +1716,7 @@ function semantic(ast: ExprNode, vars: ReadonlySet<string> | null, extra: Readon
         walk(n.b);
         return;
       case 'call': {
-        const def = FUNCS[n.fn];
+        const def = (FUNCS as FuncTable)[n.fn];
         const mn = def ? def.min : 0,
           mx = def ? def.max : LIMITS.args;
         if (!def && !extra.has(n.fn)) errs.push({ code: 'E_UNKNOWN_FN', pos: posOf(n), msg: "unknown function '" + n.fn + "'" });
@@ -1833,7 +1841,7 @@ function build(node: ExprNode, ext: Readonly<Record<string, (...a: number[]) => 
     case 'call': {
       const args = node.args.map(x => build(x, ext)),
         name = node.fn;
-      const def = FUNCS[name];
+      const def = (FUNCS as FuncTable)[name];
       if (def) {
         const f = def.fn;
         if (args.length === 1) {

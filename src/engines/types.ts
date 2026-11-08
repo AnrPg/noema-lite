@@ -4,6 +4,7 @@
    never learner text. */
 import type { Plugin, PluginManifest } from '../plugins/index.ts';
 import type NoemaExpr from './kernel/simexpr.ts';
+import type NoemaLibSchema from './kernel/schema.ts';
 import type { Evaluator } from './kernel/simexpr.ts';
 
 /** a problem of a model: the same codes and messages as the engine's Python twin (tools/lib_<name>.py, tools/<name>.py) */
@@ -116,20 +117,8 @@ export interface CatalogApi {
   fold(s: string): string;
 }
 
-/** the engine library's model tables as JSON Schemas, for the activity author (kernel/schema.js, docs/INTERACTIVE_LIBRARY.md §1.5) */
-export interface SchemaApi {
-  readonly PARTS_ID: string;
-  readonly STYLES: readonly string[];
-  schemaId(engineId: string): string;
-  specSchema(engineId: string, table: unknown, simSchema: unknown): unknown;
-  partsSchema(engines: ReadonlyArray<{ readonly id: string; readonly table: unknown }>, simSchema: unknown): unknown;
-  toSchema(table: unknown, opts?: unknown): unknown;
-  ofs(table: unknown, model: unknown, kind: string): string[];
-  outKinds(table: unknown): string[];
-  titles(table: unknown): unknown;
-  symbolic(table: unknown): unknown;
-  kindSchema(kind: string): unknown;
-}
+/** the engine library's model tables as JSON Schemas, for the activity author (kernel/schema.ts, docs/INTERACTIVE_LIBRARY.md §1.5) */
+export type SchemaApi = typeof NoemaLibSchema;
 
 /** the kernels of the library as modules (their own tests use them; the app reaches them only through the engines) */
 export type KernelApi = Readonly<Record<string, unknown>>;

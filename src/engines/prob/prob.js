@@ -33,7 +33,7 @@
    functions are NoemaExpr's fdlibm ports (never the platform's Math.* except sqrt, floor and the IEEE-exact operations); seeded
    randomness only (the kernel's streams). A value outside a method's validity range is never a silent wrong number: it is NaN or
    Infinity with an issue counted (outputs issue.<code>). */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
   /* i18n-ignore-start */   // code, not text: only codes, numbers and the model's own state names leave this module
   const C = NoemaLibCore;

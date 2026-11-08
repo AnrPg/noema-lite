@@ -16,7 +16,7 @@
    Terminologia Anatomica 2e (2019); ISNCSCI 2019; others beside each method. Pure, bounded, deterministic JS: no DOM, no network,
    no clock; numbers, codes, structure ids and the structures' own short names (`s`) or the pack's keys only. Educational, never
    clinical advice. */
-import NoemaLibCore from '../kernel/core.js';
+import NoemaLibCore from '../kernel/core.ts';
   /* i18n-ignore-start */   // code, not text: only codes, numbers, ids and the model's own names leave this module
   const C = NoemaLibCore;
   const ID = 'anatomy@1';
