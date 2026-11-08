@@ -14,6 +14,7 @@ const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), os = require('os');
 const { start } = require('./mock_supabase');
 const { connectorHandler, removeConnector } = require('./connector_fn');
+const { deepText } = require('./deep');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -31,7 +32,7 @@ async function signUp(browser, email, name, { phone = false } = {}) {
   await p.click('button:has-text("Create account")'); await wait(1300);
   return { p, E, ctx };
 }
-const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(x => x.remove()));
+const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-share').forEach(x => x.remove()));
 
 (async () => {
   const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false, storageChunkBytes: 200000 };`;
@@ -71,7 +72,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   await A.p.click('.cm-mode:has-text("Roadmaps")'); await wait(400);
   ok(await A.p.locator('.cm-explorebtn').isVisible() && await A.p.locator('.cm-sharebtn').count() === 1, '🧭 Curricula: 🌍 Explore curricula, and 👥 on her own curriculum');
   await A.p.click('.cm-sharebtn'); await wait(300);
-  ok(/keeps their own progress/i.test(await A.p.locator('.cm-sharedlg').innerText()) && /Nobody can overwrite a step someone else prepared/.test(await A.p.locator('.cm-sharedlg').innerText()) && /Include the 1 step you prepared/.test(await A.p.locator('.cm-sharedlg').innerText()), 'the dialog says the rules: own progress, shared steps, nobody overwrites anybody — and offers her prepared step');
+  { const dt = await deepText(A.p, '.cm-sharedlg'); ok(/keeps their own progress/i.test(dt) && /Nobody can overwrite a step someone else prepared/.test(dt) && /Include the 1 step you prepared/.test(dt), 'the dialog says the rules: own progress, shared steps, nobody overwrites anybody — and offers her prepared step'); }
   await A.p.screenshot({ path: SHOTS + '/cs1_share.png' });
   await A.p.click('.cm-sharepeople');
   ok(await until(() => S.curs[cid] && stepOf(cid, 'atoms')?.status === 'ready', 15000), 'shared: the map is in the cloud, her prepared step too (ready, by Anna)');
@@ -80,10 +81,10 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   const atomsRow = stepOf(cid, 'atoms');
   ok(atomsRow.author === anna && atomsRow.author_name === 'Anna' && S.curFiles[atomsRow.path + '.p000'] || S.curFiles[atomsRow.path], 'the step’s subject is in the shared bucket, in her own folder: ' + atomsRow.path + (atomsRow.meta.chunks ? ` (${atomsRow.meta.chunks} parts)` : ''));
   ok(Object.keys(S.curFiles).some(k => k.startsWith(cid + '/files/')) && sc.meta.files?.f_membranes, 'her material file goes with the map (the members prepare “Membranes” from it)');
-  await A.p.fill('.cm-sharedlg input[type=email]', 'bob@example.com'); await A.p.fill('.cm-sharedlg input[placeholder^="A message"]', 'Let us split the work!');
+  await A.p.fill('.cm-sharedlg .cm-email input', 'bob@example.com'); await A.p.fill('.cm-sharedlg .cm-message input', 'Let us split the work!');
   await A.p.click('.cm-invitebtn');
   ok(await until(() => S.mems.some(m => m.email === 'bob@example.com' && m.status === 'pending')), '📨 Bob is invited');
-  ok(await until(async () => /bob@example\.com/.test(await A.p.locator('.cm-members').innerText()) && /invited/.test(await A.p.locator('.cm-members').innerText())), 'the dialog lists him: ⏳ invited');
+  ok(await until(async () => /bob@example\.com/.test(await deepText(A.p, '.cm-members')) && /invited/.test(await deepText(A.p, '.cm-members'))), 'the dialog lists him: ⏳ invited');
   await A.p.screenshot({ path: SHOTS + '/cs2_shared.png' });
   await closeAll(A.p);
 
@@ -102,18 +103,18 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(await until(async () => (await cur(B, cid)).remote?.atoms?.status === 'ready'), 'he sees that Anna prepared “Atoms”');
   await B.p.keyboard.press('Escape').catch(() => { }); await closeAll(B.p);
   await B.p.evaluate(cid => Noema.curriculumMap(cid), cid); await wait(800);
-  ok(/Shared by Anna/.test(await B.p.locator('.cm-sharebar').innerText()) && /your progress is your own/.test(await B.p.locator('.cm-sharebar').innerText()), 'the map: “👥 Shared by Anna · … · your progress is your own”');
+  ok(/Shared by Anna/.test(await deepText(B.p, '.cm-sharebar')) && /your progress is your own/.test(await deepText(B.p, '.cm-sharebar')), 'the map: “👥 Shared by Anna · … · your progress is your own”');
   ok(await B.p.locator('.cm-node[data-id="atoms"] .cm-by').count() === 1 && /prepared by Anna/.test(await B.p.locator('.cm-node[data-id="atoms"]').getAttribute('aria-label')), '“Atoms”: ⚡👤 prepared by Anna');
   ok(await B.p.locator('button:has-text("➕ Step")').count() === 0 && await B.p.locator('.cm-sharetool').count() === 0, 'a member does not change the map (no ➕ Step, no sharing)');
   await B.p.screenshot({ path: SHOTS + '/cs3_member_map.png' });
   await B.p.click('.cm-node[data-id="atoms"]'); await wait(300);
-  ok(/Prepared by Anna/.test(await B.p.locator('.cm-panel').innerText()) && await B.p.locator('.cm-panel .cm-editrow').count() === 0, 'its panel: “⚡ Prepared by Anna — shared with everybody”, no ✏️ Edit step');
+  ok(/Prepared by Anna/.test(await deepText(B.p, '.cm-panel')) && await B.p.locator('.cm-panel .cm-editrow').count() === 0, 'its panel: “⚡ Prepared by Anna — shared with everybody”, no ✏️ Edit step');
   const atomsId = await B.p.evaluate(cid => NoemaCurriculum.packId(NoemaCurriculum.get(Noema.account.id, cid), 'atoms'), cid);
   ok(await until(async () => (await cur(B, cid)).nodes.atoms.pack?.status === 'ready'), 'the next prepared step is fetched ahead into his account (it opens at once)');
   const bp = (await cur(B, cid)).nodes.atoms.pack;
   ok(bp.shared && bp.by === 'Anna' && bp.author === anna && bp.version === 'anna-atoms-v1', '…with who prepared it and its version');
   await B.p.click('.cm-node[data-id="atoms"]'); await wait(300);
-  await B.p.click('.cm-panel button:has-text("Study this step")');
+  await B.p.click('.cm-panel noema-button:has-text("Study this step")');
   ok(await until(() => B.p.evaluate(() => !!document.querySelector('.nodebanner')), 8000), '…and it opens as his subject, with the curriculum banner');
   ok(!!S.kv[bob]['a:packmeta:' + atomsId] && !!S.files[`${bob}/packs/${atomsId}.json`], 'it is his own copy now (his cloud), under the same subject id as Anna’s');
   await B.p.evaluate(({ cid }) => NoemaCurriculum.setMastered(Noema.account.id, NoemaCurriculum.get(Noema.account.id, cid), 'atoms', 'test', { score: 0.9 }), { cid });
@@ -135,7 +136,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   await A.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
   ok((await cur(A, cid)).remote.cells?.status === 'preparing' && (await cur(A, cid)).remote.cells.by === 'Bob', 'Anna sees “⏳ Bob is preparing this step”');
   await A.p.evaluate(cid => Noema.curriculumMap(cid), cid); await wait(700); await A.p.click('.cm-node[data-id="cells"]'); await wait(300);
-  ok(/Bob is preparing this step/.test(await A.p.locator('.cm-panel').innerText()) && await A.p.locator('.cm-panel button:has-text("Prepare this step now")').count() === 0, 'her panel: “⏳ Bob is preparing this step” — no ⚡ Prepare button');
+  ok(/Bob is preparing this step/.test(await deepText(A.p, '.cm-panel')) && await A.p.locator('.cm-panel noema-button:has-text("Prepare this step now")').count() === 0, 'her panel: “⏳ Bob is preparing this step” — no ⚡ Prepare button');
   ok(await A.p.locator('.cm-node[data-id="cells"] .cm-by').innerText() === '⏳👤', 'on her map: ⏳👤');
   await A.p.screenshot({ path: SHOTS + '/cs4_others_prep.png' });
   // a second run of Bob's Claude (scheduled) does not get it again
@@ -178,7 +179,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(await card.count() === 1 && /Anna/.test(await card.innerText()) && /4 steps/.test(await card.innerText()) && /2 prepared/.test(await card.innerText()), '🌍 Explore curricula: “Cell biology” · 👤 Anna · 4 steps · ⚡ 2 prepared');
   await Cc.p.screenshot({ path: SHOTS + '/cs5_explore.png' });
   await card.locator('.cm-joinbtn').click();
-  ok(await until(() => S.mems.some(m => m.user_id === carl && m.status === 'joined')) && await until(async () => /Shared by Anna/.test(await Cc.p.locator('.cm-sharebar').innerText().catch(() => ''))), '➕ Join → he is in, and the map opens');
+  ok(await until(() => S.mems.some(m => m.user_id === carl && m.status === 'joined')) && await until(async () => /Shared by Anna/.test(await deepText(Cc.p, '.cm-sharebar').catch(() => ''))), '➕ Join → he is in, and the map opens');
   ok(await Cc.p.locator('.cm-node .cm-by').count() === 2, 'both prepared steps show ⚡👤');
   // Carl prepares “Energy” (here with his own AI: reserve, build, publish)
   ok(await Cc.p.evaluate(cid => NoemaCurShare.claim(Noema.account.id, NoemaCurriculum.get(Noema.account.id, cid), 'energy'), cid), 'Carl reserves “Energy” (nobody has it)');
@@ -305,7 +306,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   const w = await P.p.evaluate(() => document.documentElement.scrollWidth);
   ok(w <= 392 && await P.p.locator('.cm-pubcard').count() === 1, 'phone: Explore curricula fits (' + w + ' px)');
   await P.p.screenshot({ path: SHOTS + '/cs6_phone.png' });
-  await A.p.click('summary:has-text("Stop sharing")'); A.p.once('dialog', d => d.accept()); await A.p.click('.cm-stopshare');
+  await A.p.click('summary:has-text("Stop sharing")'); await A.p.click('.cm-stopshare'); await wait(200); await A.p.click('.cm-stopyes');
   ok(await until(() => !S.curs[cid]) && !S.steps.some(r => r.curriculum === cid) && !Object.keys(S.curFiles).some(k => k.startsWith(cid + '/')), 'Anna stops sharing: the shared map, its steps and files are gone');
   await Cc.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
   const cc = await cur(Cc, cid);

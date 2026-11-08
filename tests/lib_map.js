@@ -1,4 +1,4 @@
-/* map@1 (src/engines/map/map.js, docs/library/map.md): published reference values (Snyder 1987, Karney 2013, Šavrič et al. 2018,
+/* map@1 (src/engines/map/map.ts, docs/library/map.md): published reference values (Snyder 1987, Karney 2013, Šavrič et al. 2018,
    PROJ 9 / GeographicLib 2.1 as independent implementations), the edge cases and their codes, the checks, the sim adapter, the Worker
    source in a fresh global, speed.   Run: node tests/lib_map.js */
 'use strict';

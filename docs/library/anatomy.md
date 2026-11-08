@@ -1,4 +1,4 @@
-# `anatomy@1` — computable anatomy: lesions, relations, paths, ranges of motion, biomechanics, regions, the visual pathway, the cord (`src/engines/anatomy/anatomy.js`, `NoemaLibAnatomy`)
+# `anatomy@1` — computable anatomy: lesions, relations, paths, ranges of motion, biomechanics, regions, the visual pathway, the cord (`src/engines/anatomy/anatomy.ts`, `NoemaLibAnatomy`)
 
 An engine of the library (`docs/INTERACTIVE_LIBRARY.md`) that turns anatomy from lists into a **model the learner can question**.
 Cut a nerve at a level, and it says which muscles are paralysed or weak, which movements, reflexes, skin areas and functions are

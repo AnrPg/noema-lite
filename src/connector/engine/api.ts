@@ -326,7 +326,7 @@ export interface NoemaLang {
   checkLangPackage(data: LangCourseData, pkg: LangPackage, o: { peers: LangCourseData[] }): string[];
 }
 
-/* ---------- the catalogue of the engine library (src/engines/catalog.js) ---------- */
+/* ---------- the catalogue of the engine library (src/engines/catalog.ts) ---------- */
 export interface NoemaEngineCatalog {
   byId(id: string): { layer?: string } | null | undefined;
   /** the engines that may already do what a text describes, best first */

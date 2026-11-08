@@ -1,4 +1,4 @@
-# `prob@1` — probability and statistics (`src/engines/prob/prob.js`, `NoemaLibProb`)
+# `prob@1` — probability and statistics (`src/engines/prob/prob.ts`, `NoemaLibProb`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for probability and statistics. It runs from the basics (a
 distribution's pmf, a die, a coin) through the classic tests and intervals to the things a modern course has: exact coverage of
@@ -18,7 +18,7 @@ The engine is pure and deterministic. Every elementary function comes from Noema
 `cos`, `tan`, `atan`, …), so a result is the same bit for bit in every browser and in the Worker. `Math` is used only for the
 correctly rounded operations (`sqrt`, `floor`, `abs`). The random numbers of the first 14 modes are `mulberry32`, seeded by
 `hash32('prob:<mode>', seed)`. The five later modes (`combin`, `gof`, `mcmc`, `multivar`, `rand`) take theirs from NoemaSimKit
-(`src/engines/kernel/simkit.js`): L'Ecuyer's MRG32k3a, one named stream per purpose (`prob.mcmc.chain<c>`, `prob.rand.<kind>`, …).
+(`src/engines/kernel/simkit.ts`): L'Ecuyer's MRG32k3a, one named stream per purpose (`prob.mcmc.chain<c>`, `prob.rand.<kind>`, …).
 The Worker source then carries NoemaSimKit too. Without the kit these modes give NaN and the code `no-kit`, never another
 generator's numbers.
 

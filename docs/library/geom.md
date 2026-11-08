@@ -1,4 +1,4 @@
-# `geom@1` — Euclidean constructions in the plane (`src/engines/geom/geom.js`, `NoemaLibGeom`)
+# `geom@1` — Euclidean constructions in the plane (`src/engines/geom/geom.ts`, `NoemaLibGeom`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). A construction is a list of objects, each built from earlier
 ones, as in GeoGebra or Cinderella: free points bound to the spec's params, points on objects, classified intersections, 16

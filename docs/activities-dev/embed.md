@@ -2,8 +2,8 @@
 
 An activity that is a page of a third-party provider (a PhET simulation, a GeoGebra applet, a Desmos graph) shown in a frame.
 It is **opt-in, needs the network, and is explore only** (a theory block, never a graded `sim`). Files: the allow-list
-`tools/embed_allow.json`, the runtime `engine/src/45_activity_embed.js` (+ `45_activity_embed.css`), the checks
-`NoemaEmbed.check` / `checkPack` (the content checks call them everywhere), the tests `tests/activities_embed.js`.
+`tools/embed_allow.json`, the runtime `src/runtimes/external-embed/` (`runtime.ts` + `embed.css`; a plugin of kind `runtime`, `NoemaCore.runtimes`), the checks
+`check.ts` `check` / `checkPack` (`RUNTIME_CHECKS.embed`: the content checks call them everywhere), the tests `tests/activities_embed.js`.
 
 ## 1. Providers and their terms (researched 2026-11; `notes` in the allow-list has the details)
 
@@ -25,7 +25,7 @@ these has one) or a self-hosted copy (same origin) — that is a later decision,
 `{format: "noema.embed-allow/v1", providers: [{ id, name, status: "allowed"|"pending", origins: ["https://exact.host"],
 path, query|null, hash|null, sandbox: [tokens], licenses: [...], creditMust, credit (template), terms, supportsResult, notes }]}`.
 `path` / `query` / `hash` are regexes matched against the **whole** part (anchored; a portable subset of regex syntax);
-`query: null` = no query allowed. The runtime carries an exact copy (`/*@providers*/ … /*@end*/`); the test fails when they differ.
+`query: null` = no query allowed. The runtime imports this file as it is (`check.ts`): there is one copy.
 Adding a provider: research its terms, add it as `pending`, switch to `allowed` only when embedding is clearly permitted.
 
 ## 3. The item (in `activities/activities.json`)
@@ -55,7 +55,7 @@ words. No `entry`, `html`, `spec` or `capabilities` (the page does not speak the
    the credit · licence · a link to the provider's terms (new tab, `noopener noreferrer`), and **Open {provider}**. Nothing of the
    provider is requested before Open (tested with a request counter).
 2. **Remembered per provider.** Open stores `S.settings.embedOk[<provider>] = time` (an account setting, synced); next time the
-   frame opens without the card. `NoemaEmbed.consent.list() / forget(id)` are for a Settings row "ask again".
+   frame opens without the card. The account setting `embedOk` (`consentOf` in `runtime.ts`) is what the Settings row "ask again" lists and clears.
 3. **The frame.** Two frames as in `html-app@1`: the app's frame is a wrapper without scripts (CSP `script-src 'none';
    frame-src <provider origins>`); the provider's page runs in the wrapper's frame and can navigate only within its provider.
    Both: `sandbox` = the provider's tokens (for every listed provider `allow-scripts allow-same-origin` — the provider's own origin, for its
@@ -103,9 +103,9 @@ forged result) → 0 beacon hits, the top page unmoved, no popup; offline (befor
    `origins` of every `allowed` provider (generate it from `tools/embed_allow.json`) — the wrapper (`about:srcdoc`) inherits the
    page's policy, so the provider must be in both; never `allow-*` changes elsewhere. Then switch on in `config.js`.
 3. Validators: the content checks (`src/features/content/domain/activities/`) know `external-embed@1` in `RUNTIMES`, skip the
-   bundle rules for it, call `NoemaEmbed.check` (read from the page, or from the scope that ran `45_…` in the connector and
+   bundle rules for it, call `RUNTIME_CHECKS.embed.check` (`src/runtimes/checks.ts`, which every root hands the content checks: the app with `build/contracts.js`, the connector and
    `noema-tools.cjs`) and refuse `sim-embed`; `make_pack.py` / `unpack.py` accept an item without `entry`; the skill zip ships
    the allow-list.
 4. `i18n/engine/*.arb`: the keys of §6. `docs/INTERACTIVE.md` §1 (a row), §10 (offline), the ADR "as built"; `tests/run_e2e.sh`
-   runs `node tests/activities_embed.js` (+ `--browser`); `tests/activities.js` §4 may name `45_activity_embed.js` (its sandbox
+   runs `node tests/activities_embed.js` (+ `--browser`); `tests/activities.js` §4 may name `src/runtimes/external-embed` (its sandbox
    tokens come from the allow-list: the provider's origin, never pack content).

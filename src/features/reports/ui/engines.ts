@@ -24,7 +24,7 @@ import {
 } from '../domain/engine-requests.ts';
 import { ENGINES_CSS } from './styles.ts';
 
-/** what the page reads of the engines' catalogue (src/engines/catalog.js, handed in by the composition) */
+/** what the page reads of the engines' catalogue (src/engines/catalog.ts, handed in by the composition) */
 export interface CatalogEntry {
   readonly id: string;
   readonly layer: 'library' | 'free' | 'plugin';

@@ -249,12 +249,7 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
       await need<Promise<unknown>>(g('NoemaCurShare'), 'join', acc(), id, { viaRoom: o.viaRoom });
     },
     fromSources: files => {
-      call(g('NoemaCurMap'), 'fromSources', acc(), {
-        files: [...files],
-        onStudy: (id: string) => {
-          call(N(), 'open', id);
-        },
-      });
+      call(N(), 'fromSources', acc(), { files: [...files] });
     },
     pdfPages: async file => {
       try {

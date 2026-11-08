@@ -3,8 +3,8 @@
    the pack checker before it checks a pack (NoemaPackCheck.enginesNamed), the activity author before its forms. A loaded engine is
    its module with its registered engine: the shape ACT.registerEngine takes, with its Worker bundle as text (workerSource). */
 import { createPluginRegistry, type PluginRegistry, type Support } from '../plugins/index.ts';
-import NoemaExpr from './kernel/simexpr.js';
-import NoemaEngineCatalog from './catalog.js';
+import NoemaExpr from './kernel/simexpr.ts';
+import NoemaEngineCatalog from './catalog.ts';
 import { EXPR } from './manifests.ts';
 import type { CatalogApi, EngineModule, EnginePlugin, ExprApi, LoadedEngine, RegisteredEngine, SchemaApi } from './types.ts';
 

@@ -602,7 +602,7 @@ function runSummary() {
    drawn into the engine's view; this side says which engines and runtimes this app runs (the activity core) ---------- */
 function engineHere(e) {
   if (typeof ACT === 'undefined') return false;
-  if (e.runtime) return !!(ACT.runtime(typeof e.runtime === 'string' ? e.runtime : e.id) || ACT.runtime(e.id));   // an engine of the library counts before it is loaded
+  if (e.runtime) return !!(ACT.hasRuntime(typeof e.runtime === 'string' ? e.runtime : e.id) || ACT.hasRuntime(e.id));   // an engine of the library counts before it is loaded
   return ACT.engines().includes(e.id);
 }
 function enginesView() {

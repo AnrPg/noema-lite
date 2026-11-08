@@ -1,4 +1,4 @@
-/* timeline@1 (src/engines/timeline/timeline.js, docs/library/timeline.md): published reference values (the source in each message),
+/* timeline@1 (src/engines/timeline/timeline.ts, docs/library/timeline.md): published reference values (the source in each message),
    the calendars against ICU (node's Intl, an independent implementation) on thousands of days, the edge cases and their codes, the
    checker's codes, the sim adapter, the Worker source in a fresh global, speed.  Run: node tests/lib_timeline.js */
 'use strict';

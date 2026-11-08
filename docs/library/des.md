@@ -1,4 +1,4 @@
-# `des@1` — discrete-event simulation of queues and service networks (`src/engines/des/des.js`, `NoemaLibDES`)
+# `des@1` — discrete-event simulation of queues and service networks (`src/engines/des/des.ts`, `NoemaLibDES`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`), built on the simulation kernel `NoemaSimKit`
 (`docs/library/simkit.md`). Entities of up to 8 classes arrive from up to 8 sources. A source can be Poisson, use any interarrival

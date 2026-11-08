@@ -6,14 +6,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { check, problems, CONTRACT_IDS, isContractId } from './index.ts';
 import { repoFiles, FILE_KINDS } from './repo.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SCHEMAS = path.join(ROOT, 'src', 'contracts', 'schemas');
-const require = createRequire(import.meta.url);
 const readJson = (rel: string): unknown => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
 
 interface Built {
@@ -142,15 +140,4 @@ test('a Roadmap with levels, its inbox entries and claims', () => {
   );
   assert.ok(check('noema.curriculum.v1#inboxEntry', { v: 1, kind: 'step', nid: 'a', packId: 'p', at: '2026-11-07T10:00:00Z' }).ok);
   assert.ok(check('noema.curriculum.v1#claim', { v: 1, nid: 'a', at: '2026-11-07T10:00:00Z', run: 'x1' }).ok);
-});
-
-/* ---------- the copies of a format that live elsewhere are the contract's ---------- */
-test("noema.curriculum-agents.v1 is engine/curriculum.js's agent schemas", () => {
-  const g = globalThis as unknown as Record<string, unknown>;
-  g.window ??= globalThis;
-  g.localStorage ??= { getItem: () => null, setItem: () => undefined, key: () => null, length: 0 };
-  require(path.join(ROOT, 'engine', 'curriculum.js'));
-  const S = (g.NoemaCurriculum as { schemas: Record<string, unknown> }).schemas;
-  const defs = (readJson('src/contracts/schemas/noema.curriculum-agents.v1.schema.json') as { $defs: Record<string, unknown> }).$defs;
-  assert.deepEqual(defs, { dag: S.S_DAG, audit: S.S_AUDIT, expand: S.S_EXPAND, plan: S.S_PLAN });
 });

@@ -4,6 +4,7 @@
    phone layout → the Gemini path (in-browser pack generator, diagrams) → resume after a stop.
    Usage: node tests/curriculum.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { deepText } = require('./deep');
 const path = require('path'), fs = require('fs'), http = require('http');
 const { start } = require('./mock_supabase');
 const F = require('./fixtures/curriculum_agents');
@@ -12,6 +13,7 @@ const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 30000, step = 250) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
+/** the words of an element as the learner reads them, through its shadow roots (the screens of src/features/<area>/ui) */
 const PORT = 54337, BASE = `http://localhost:${PORT}`, APORT = 54338, ABASE = `http://localhost:${APORT}`;
 const KEY = 'sk-ant-api03-' + 'k'.repeat(40);
 const FX = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
@@ -101,8 +103,8 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   const U = await signUp(browser, 'eva@example.com', 'Eva'); const p = U.p;
   ok(await p.locator('.cm-mode').count() === 1 + (await p.evaluate(() => (window.NOEMA_REGISTRY.languages || []).length ? 1 : 0)) && await p.locator('details.pick-shelf').count() === 1, 'the subject picker leads with 🧭 Curricula (and 🌍 Languages when there are language courses); the other subjects wait on the 📚 Shelf');
   await p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
-  ok(/No Roadmap yet/.test(await p.locator('.noema-ovbox').last().innerText()), 'the library starts empty');
-  await p.locator('.noema-ovbox').last().locator('button:has-text("New Roadmap")').click(); await wait(300);
+  ok(/No Roadmap yet/.test(await p.locator('noema-roadmap-library .empty').innerText()), 'the library starts empty');
+  await p.click('noema-roadmap-library .cm-new'); await wait(300);
   await p.click('.cg-go'); await wait(150);
   ok(/goal topic/.test(await p.locator('.cg-kstat.bad').last().innerText()), 'Build without a goal → a friendly pointer');
   ok(await p.locator('.cm-provider').inputValue() === 'claudeapp' && await p.locator('.cm-appinfo').isVisible(), 'a cloud account: the Claude app (your Claude plan) is preselected and explained');
@@ -141,33 +143,33 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   await p.click('button:has-text("Open the Roadmap")'); await wait(800);
   ok(await p.locator('.cm-node').count() === 25 && await p.locator('.cm-band').count() === 3, 'map: 25 nodes in three parts (Prerequisites · goal · Applications)');
   const roots = ['sets_and_events', 'calculus_basics', 'philosophy_of_induction'];
-  ok(await p.evaluate(r => r.every(id => document.querySelector(`.cm-node[data-id="${id}"]`).classList.contains('cm-open')), roots) && await p.locator('.cm-node.cm-locked').count() === 22, 'the 3 starting prerequisites are open, the other 22 steps locked 🔒');
+  ok(await p.evaluate(r => r.every(id => document.querySelector('noema-roadmap-map').shadowRoot.querySelector(`.cm-node[data-id="${id}"]`).classList.contains('cm-open')), roots) && await p.locator('.cm-node.cm-locked').count() === 22, 'the 3 starting prerequisites are open, the other 22 steps locked 🔒');
   await p.click('.cm-node[data-id="likelihood"]'); await wait(300);
-  const lockTxt = await p.locator('.cm-panel').innerText();
-  ok(/Locked/.test(lockTxt) && /Probability distributions/.test(lockTxt) && await p.locator('.cm-panel .cm-chapters li').count() === 4 && !(await p.locator('.cm-panel button:has-text("Study")').count()), 'a locked step shows its info and chapters, what to master first — and no Study button');
+  const lockTxt = await deepText(p, '.cm-panel');
+  ok(/Locked/.test(lockTxt) && /Probability distributions/.test(lockTxt) && await p.locator('.cm-panel .cm-chapters li').count() === 4 && !(await p.locator('.cm-panel noema-button:has-text("Study")').count()), 'a locked step shows its info and chapters, what to master first — and no Study button');
   await p.click('.cm-panel .cm-chapters li >> nth=0'); ok(/🎯/.test(await p.locator('.cm-chd').innerText()), 'tap a chapter → its teaching goals and coverage');
   await p.screenshot({ path: SHOTS + '/k3_map.png' });
 
   console.log('— “I already know this” (placement test) opens the next step');
-  ok(await p.evaluate(() => document.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-locked')), '“Probability basics” is locked (its prerequisite “Sets and events” is not mastered)');
+  ok(await p.evaluate(() => document.querySelector('noema-roadmap-map').shadowRoot.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-locked')), '“Probability basics” is locked (its prerequisite “Sets and events” is not mastered)');
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(300);
-  await p.click('.cm-panel button:has-text("I already know this")'); await wait(200);
-  ok(/8 of 10 right/.test(await p.locator('.noema-ovbox').last().innerText()) && await p.locator('.cm-test').count() === 0, 'first it says what the test is (Proceed / Go back), nothing is prepared yet');
-  await p.click('.cm-teststart');
-  ok(await until(() => p.locator('.cm-test .cm-opts').count(), 10000), 'Proceed → a 10-question placement test opens');
-  for (let i = 0; i < 10; i++) { await p.click('.cm-opts button >> nth=0'); await p.click('.cm-test button.primary'); await wait(60); }
-  ok(/mastered/.test(await p.locator('.cm-test').innerText()), '10/10 → mastered');
-  await p.click('.cm-test button:has-text("OK")'); await wait(500);
-  ok(await p.evaluate(() => document.querySelector('.cm-node[data-id="sets_and_events"]').classList.contains('cm-mastered') && document.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-open')), 'it is mastered and “Probability basics” is now open');
+  await p.click('.cm-panel noema-button:has-text("I already know this")'); await wait(200);
+  ok(/8 of 10 right/.test(await deepText(p, 'noema-roadmap-step-test')) && await p.locator('noema-roadmap-step-test noema-roadmap-quiz').count() === 0, 'first it says what the test is (Proceed / Go back), nothing is prepared yet');
+  await p.click('noema-roadmap-step-test noema-button.start');
+  ok(await until(() => p.locator('noema-roadmap-step-test noema-roadmap-quiz .opt').count(), 10000), 'Proceed → a 10-question placement test opens');
+  for (let i = 0; i < 10; i++) { await p.click('noema-roadmap-step-test noema-roadmap-quiz .opt >> nth=0'); await p.click('noema-roadmap-step-test noema-button.next'); await wait(60); }
+  ok(/mastered/.test(await deepText(p, 'noema-roadmap-step-test')), '10/10 → mastered');
+  await p.click('noema-roadmap-step-test noema-button:has-text("OK")'); await wait(500);
+  ok(await p.evaluate(() => document.querySelector('noema-roadmap-map').shadowRoot.querySelector('.cm-node[data-id="sets_and_events"]').classList.contains('cm-mastered') && document.querySelector('noema-roadmap-map').shadowRoot.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-open')), 'it is mastered and “Probability basics” is now open');
   await p.screenshot({ path: SHOTS + '/k6_progress.png' });
-  await p.click('.cm-node[data-id="sets_and_events"]'); await wait(200); await p.click('.cm-panel button:has-text("Undo")'); await wait(400);
-  ok(await p.evaluate(() => document.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-locked')), '↩ Undo locks the dependent step again');
+  await p.click('.cm-node[data-id="sets_and_events"]'); await wait(200); await p.click('.cm-panel noema-button:has-text("Undo")'); await wait(400);
+  ok(await p.evaluate(() => document.querySelector('noema-roadmap-map').shadowRoot.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-locked')), '↩ Undo locks the dependent step again');
 
   console.log('— review before preparing (the learner can change the step first)');
   await wait(2500);
   ok(A.node.length === 0 && await p.locator('.cm-node.cm-open .cm-badges:has-text("📝")').count() === 3, 'nothing is generated before you review it (open steps show 📝)');
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(300);
-  await p.click('.cm-panel button:has-text("Review & prepare")'); await wait(400);
+  await p.click('.cm-panel noema-button:has-text("Review & prepare")'); await wait(400);
   ok(/before it is prepared/.test(await p.locator('.noema-ovbox').last().innerText()) && await p.locator('.cm-chedit .cm-chrow').count() === 4, 'the review shows the step with its 4 planned chapters, editable');
   await p.fill('.cm-chedit .cm-chrow >> nth=0 >> input', 'My own first chapter');
   await p.click('.cm-chedit .cm-chrow >> nth=1 >> button[aria-label="Remove chapter"]');
@@ -181,7 +183,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(/My own first chapter/.test(A.node[0].first) && /Extra: Venn diagrams/.test(A.node[0].first) && !/Core definitions \(sets_and_events\)/.test(A.node[0].first), 'and Claude builds exactly that plan');
 
   console.log('— automatic preparation when you turn the review off');
-  await p.click('.cm-tools button[title="Settings of this Roadmap"]'); await wait(300);
+  await p.click('.cm-ovtop .cm-settingsbtn'); await wait(300);
   await p.uncheck('label:has-text("review each step") input'); await p.click('.noema-ovbox button:has-text("Save")');
   ok(await until(async () => Object.values((await cur(p)).nodes).filter(n => n.pack?.status === 'ready').length === 2, 40000), 'the next open step is prepared in the background (prefetch 2)');
   c = await cur(p);
@@ -190,18 +192,18 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(/Planned chapters/.test(A.node[0].first) && /already mastered/.test(A.node[0].first), 'the brief carries the chapter plan and what the learner already knows');
   ok(ready.every(n => Object.keys(srv.state.files).includes(`${eva}/packs/${n.pack.id}.json`)), 'prepared steps are stored as subjects in the cloud account');
   await p.click(`.cm-node[data-id="${ready[0].id}"]`); await wait(300);
-  ok(await p.locator('.cm-panel button:has-text("Study this step")').count() === 1, 'an open, prepared step has 📖 Study');
+  ok(await p.locator('.cm-panel noema-button:has-text("Study this step")').count() === 1, 'an open, prepared step has 📖 Study');
   await p.screenshot({ path: SHOTS + '/k4_ready.png' });
 
   console.log('— study a step, master it');
   const target = ready[0];
-  await p.click(`.cm-node[data-id="${target.id}"]`); await p.click('.cm-panel button:has-text("Study this step")'); await wait(2500);
+  await p.click(`.cm-node[data-id="${target.id}"]`); await p.click('.cm-panel noema-button:has-text("Study this step")'); await wait(2500);
   ok(await p.evaluate(t => typeof SUBJ !== 'undefined' && SUBJ.id === t, target.pack.id), 'the step opens as a full subject in the engine (theory, exercises, tutor…)');
   ok(await p.locator('.nodebanner').count() === 1 && await p.locator('.curchip:has-text("Map")').count() === 1, 'the subject shows its place in the curriculum, its mastery and a 🧭 Map button');
   await p.screenshot({ path: SHOTS + '/k5_node_subject.png' });
   await p.evaluate(() => { COURSE.forEach(ch => { ch.sections.forEach(s => learnt('section.read', s.id)); ch.exercises.forEach(e => record(e, true)); }); flushSave(); });
   await p.click('.nodebanner button:has-text("Map")'); await wait(800);
-  ok(await p.evaluate(t => document.querySelector(`.cm-node[data-id="${t}"]`).classList.contains('cm-mastered'), target.id), 'all sections read + exercises solved → the step is ✅ mastered (automatically)');
+  ok(await p.evaluate(t => document.querySelector('noema-roadmap-map').shadowRoot.querySelector(`.cm-node[data-id="${t}"]`).classList.contains('cm-mastered'), target.id), 'all sections read + exercises solved → the step is ✅ mastered (automatically)');
 
   console.log('— editing the map');
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(300);
@@ -215,7 +217,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(!opts.includes('distributions') && !opts.includes('likelihood') && opts.includes('calculus_basics'), 'only steps that keep the graph acyclic can be added as prerequisites');
   await p.selectOption('select[aria-label="Add prerequisite"]', 'calculus_basics'); await p.click('.noema-ovbox button:has-text("Save")'); await wait(300);
   ok((await cur(p)).edges.some(e => e.from === 'calculus_basics' && e.to === 'prob_basics'), 'links can be added (prerequisites / dependents)');
-  await p.click('.cm-tools button:has-text("Step")'); await wait(300);
+  await p.click('.cm-ovtop .cm-addstepbtn'); await wait(300);
   await p.fill('.noema-ovbox input[placeholder="Name of the step"]', 'Measure theory (light)'); await p.selectOption('select[aria-label="Add dependent step"]', 'distributions');
   await p.click('.noema-ovbox button:has-text("Add the step")');
   ok(await until(async () => { const cc = await cur(p); const n = Object.values(cc.nodes).find(x => x.title === 'Measure theory (light)'); return n && n.chapters.length === 4 && cc.edges.some(e => e.from === n.id && e.to === 'distributions'); }, 15000), '➕ a new step is added where you put it, and the AI plans its chapters');
@@ -238,7 +240,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   console.log('— the Gemini path (free key, pack generated in the browser)');
   const V = await signUp(browser, 'finn@example.com', 'Finn'); const q = V.p;
   await q.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(localStorage.getItem(k) || '{}'); s.apiKey = 'AIza-test-key'; localStorage.setItem(k, JSON.stringify(s)); });
-  await q.click('.cm-mode:has-text("Roadmaps")'); await q.locator('.noema-ovbox').last().locator('button:has-text("New Roadmap")').click(); await wait(300);
+  await q.click('.cm-mode:has-text("Roadmaps")'); await q.locator('noema-roadmap-library .cm-new').click(); await wait(300);
   await q.selectOption('.cm-provider', 'auto');
   ok(/✅ Gemini/.test(await q.locator('.cm-keys').first().innerText()) && /➖ Claude/.test(await q.locator('.cm-keys').first().innerText()), 'without a Claude key the Gemini key is used');
   await q.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference'); await q.selectOption('label:has-text("Depth") select', 'standard'); await q.selectOption('label:has-text("Prepare ahead") select', '1');
@@ -252,12 +254,12 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(await until(() => q.locator('.cg-status.ready').count(), 30000) && A.gemDag === dagBefore, 'Continue finishes it without redoing the finished agents');
   ok(A.gem.some(g => g.json === 'application/json'), 'Gemini answers in JSON mode (validated + repaired by the app)');
   await q.click('button:has-text("Open the Roadmap")'); await wait(500);
-  await q.click('.cm-node[data-id="philosophy_of_induction"]'); await q.click('.cm-panel button:has-text("Review & prepare")'); await wait(300); await q.click('button:has-text("Looks good — prepare it")');
+  await q.click('.cm-node[data-id="philosophy_of_induction"]'); await q.click('.cm-panel noema-button:has-text("Review & prepare")'); await wait(300); await q.click('button:has-text("Looks good — prepare it")');
   ok(await until(async () => Object.values((await cur(q)).nodes).some(n => n.pack?.status === 'ready'), 40000), 'the first open step is generated in the browser (research → subject → chapters)');
   ok(A.gem.some(g => g.tools?.[0]?.google_search), 'research uses Google Search grounding');
   ok(A.gem.filter(g => g.chapter === 1 && g.n > 1).length >= 1, 'an incomplete chapter is sent back for repair');
   const gc = await cur(q); const gn = Object.values(gc.nodes).find(n => n.pack?.status === 'ready');
-  await q.click(`.cm-node[data-id="${gn.id}"]`); await q.click('.cm-panel button:has-text("Study this step")'); await wait(2500);
+  await q.click(`.cm-node[data-id="${gn.id}"]`); await q.click('.cm-panel noema-button:has-text("Study this step")'); await wait(2500);
   ok(await q.evaluate(() => typeof SUBJ !== 'undefined' && COURSE.length === 4 && ALL_EX.length >= 60), 'the generated subject opens: 4 chapters (one per planned chapter), all exercise types');
   ok(await q.evaluate(() => Object.values(MEDIA).some(m => /^data:image\/svg\+xml/.test(m.data) && m.regions.length === 3)), 'diagrams are drawn with clickable regions (picture exercises work)');
   ok(await q.evaluate(() => (Array.isArray(SOURCES) ? SOURCES : SOURCES.sources || []).some(s => /example\.org/.test(s.url || ''))), 'the sources found by Google Search are listed');

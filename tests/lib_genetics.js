@@ -1,4 +1,4 @@
-/* genetics@1 (src/engines/genetics/genetics.js, docs/library/genetics.md) against published and exactly derived values:
+/* genetics@1 (src/engines/genetics/genetics.ts, docs/library/genetics.md) against published and exactly derived values:
    1. crosses: Mendel's ratios and χ² (Mendel 1866), epistasis presets, ABO, lethal yellow (Castle & Little 1910), X-linkage,
       linkage and three-point coincidence; 2. pedigrees (Bayes carrier risks); 3. Hardy–Weinberg, the exact test (Wigginton 2005)
       against brute-force enumeration; 4. selection, mutation, migration; 5. drift: Kimura 1962, Moran 1958, H decay (statistical,

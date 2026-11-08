@@ -2,7 +2,7 @@
    (docs/activities-dev/authoring_ui.md; ADR 001 D12 "an authoring UI generated from the same JSON Schemas as the validators").
    • Types: sim-spec@1 with formula@1 or circuit-mna@1 (registerType() for later runtimes: html-app@1, py-module@1, h5p@1), and with
      EVERY engine of the library whose module exports its `table` (docs/INTERACTIVE_LIBRARY.md §1.5): its form comes from that table
-     (NoemaCore.engines.schema().specSchema, src/engines/kernel/schema.js; the page loads the library's engines and that kernel before the author: loadAuthor in engine/src/40_views.js); the picker groups the engines as #/engines does and offers the engine's
+     (NoemaCore.engines.schema().specSchema, src/engines/kernel/schema.ts; the page loads the library's engines and that kernel before the author: loadAuthor in engine/src/40_views.js); the picker groups the engines as #/engines does and offers the engine's
      reference activity (NoemaActivityRefs, written into activity_author_schemas.js by tools/build.py) or a blank one.
    • The forms: NoemaSchemaForm over src/contracts/schemas/noema.activities.v1 (the registry entry) and noema.sim-spec.v1 (+ noema.circuit.v1);
      the words of each label key in every language right under the key, and a table of all words (en, el, ru, de, fr, + any language).
