@@ -347,6 +347,7 @@ class DebateWidget extends ExerciseWidget {
           (s, i) =>
             html`<button
               class="opt${this.#side === i ? ' sel' : this.#side !== null ? ' dim' : ''}"
+              ?disabled=${this.#side !== null && this.#side !== i}
               @click=${() => {
                 if (this.api.locked() || this.#side !== null) return;
                 this.#side = i;
