@@ -44,7 +44,8 @@ def load_subject(sdir):
     chs = {}
     for f in sorted(glob.glob(os.path.join(sdir, 'chapters', 'ch*.json'))):
         c = rj(f); chs[c['id']] = c
-        c.setdefault('src', SRC.get('chapters', {}).get(c['id']) or (SRC['sources'][0]['id'] if SRC.get('sources') else None))
+        src = SRC.get('chapters', {}).get(c['id']) or (SRC['sources'][0]['id'] if SRC.get('sources') else None)
+        if src: c.setdefault('src', src)   # a subject without sources: no src at all (the contract: a source id, a string)
     report = []
     for pf in sorted(glob.glob(os.path.join(sdir, 'patches', '*.json'))):
         P = rj(pf); psrc = SRC.get('patches', {}).get(os.path.basename(pf))

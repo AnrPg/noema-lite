@@ -85,7 +85,6 @@ def build_contracts():
     _CONTRACTS_BUILT = True
 
 def build_engine():
-    build_contracts()
     wt(os.path.join(ENGINE, 'activity_author_schemas.js'), author_schemas_js())
     # the UI catalogs: i18n/<component>/<locale>.arb → engine/i18n/<locale>.js (docs/i18n.md)
     subprocess.run(['node', os.path.join(ROOT, 'tools', 'i18n', 'build.js')], check=True)
@@ -675,6 +674,7 @@ def build_bundle(metas):
 
 if __name__ == '__main__':
     if '--author-schemas' in args: sys.stdout.write(author_schemas_js()); sys.exit(0)   # (tests/activity_author.js: is the copy current?)
+    build_contracts()   # first: src/contracts/validate.ts and the types are generated, and the TypeScript bundles import them
     run_esbuild()
     build_engine()
     if 'engine' in args: sys.exit(0)

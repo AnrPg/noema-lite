@@ -291,7 +291,8 @@ WIDGETS.speak = (it, done) => {
 async function readAloud(btn, c) {
   if (SP.reading) { SP.reading.stop = true; try { speechSynthesis.cancel(); } catch (e) { } SP.reading = null; btn.textContent = '🔊 ' + LT('lang.speech.wholeText'); return; }
   const job = SP.reading = { stop: false }; btn.textContent = '⏹ ' + LT('lang.sess.stop');
-  for (const el of document.querySelectorAll('.lx-reader .lx-rsent > [data-say]')) {
+  // each sentence once, in order: the sentence itself, or inside the span that glues a short one to its 🔊 (decorate)
+  for (const el of document.querySelectorAll('.lx-reader .lx-rsent > [data-say], .lx-reader .lx-rsent > .lx-spkglue > [data-say]')) {
     if (job.stop || !btn.isConnected) break;
     el.classList.add('lx-reading'); const ok = await say(c, el.dataset.say); el.classList.remove('lx-reading');
     if (!ok) break;

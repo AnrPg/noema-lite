@@ -70,29 +70,38 @@ else:
 used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['type'].startswith('img_'))
 for m in media:   # (an activity's still picture, its fallback, needs no exercises)
     if used[m] < per_pic and m not in ACTS.fallback_media(acts): errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
+def validate(*a):
+    """validate.py on one file (a chapter, a translation, subject.json)"""
+    return subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), *a], capture_output=True, text=True)
+def validate_errors(r):
+    """its ERROR lines; a validator that failed without saying why (it crashed: no node, no contracts.js) is an error too,
+    never a pass"""
+    e = [l for l in r.stdout.splitlines() if l.startswith('ERROR')]
+    if r.returncode != 0 and not e: e = ['ERROR validate.py failed: ' + ((r.stderr or r.stdout).strip().splitlines() or ['exit code ' + str(r.returncode)])[-1]]
+    return e
 with tempfile.TemporaryDirectory() as td:
     mp = os.path.join(td, 'media.json'); json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in media.items()}, open(mp, 'w', encoding='utf-8'))
     ap = os.path.join(td, 'activities.json'); json.dump({a['id']: {k: v for k, v in a.items() if k not in ('html', 'python')} for a in (acts or {}).get('items', []) if isinstance(a, dict) and 'id' in a}, open(ap, 'w', encoding='utf-8'), ensure_ascii=False)
     ax = ['--activities', ap] if acts else []
     for c in chapters:
         p = os.path.join(td, c['id'] + '.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
-        r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), *ax, *balance(c['id'])], capture_output=True, text=True)
+        r = validate(p, '--media', mp, '--min-visual', str(min_vis), *ax, *balance(c['id']))
         print(r.stdout.splitlines()[0] if r.stdout else c['id'])
         for l in r.stdout.splitlines():
             if l.startswith('WARN: ['): print(f'{c["id"]}: ' + l)
-        errs += [f'{c["id"]}: ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')]
+        errs += [f'{c["id"]}: ' + l for l in validate_errors(r)]
     if translations or 'i18n' in meta:   # the other languages: subject.i18n, and every translated chapter against its source
-        r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), os.path.join(sdir, 'subject.json'), '--subject', '--translations', ','.join(translations)], capture_output=True, text=True)
+        r = validate(os.path.join(sdir, 'subject.json'), '--subject', '--translations', ','.join(translations))
         for l in r.stdout.splitlines():
             if l.startswith('WARN'): print('subject.json: ' + l)
-        errs += ['subject.json: ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')]
+        errs += ['subject.json: ' + l for l in validate_errors(r)]
     for loc, chs in translations.items():
         for c in chs:
             if not any(x['id'] == c.get('id') for x in chapters): errs.append(f'ERROR translations/{loc}/{c.get("id")}: not a chapter of the subject'); continue
             p = os.path.join(td, f'{loc}.{c["id"]}.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
-            r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis), *ax, '--source', os.path.join(td, c['id'] + '.json')], capture_output=True, text=True)
+            r = validate(p, '--media', mp, '--min-visual', str(min_vis), *ax, '--source', os.path.join(td, c['id'] + '.json'))
             print(f'translations/{loc}: ' + (r.stdout.splitlines()[0] if r.stdout else c['id']))
-            errs += [f'translations/{loc}/{c["id"]}: ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')]
+            errs += [f'translations/{loc}/{c["id"]}: ' + l for l in validate_errors(r)]
 if errs:
     print('\n'.join(errs)); print(f'\n✗ {len(errs)} error(s) — pack NOT written.'); sys.exit(1)
 counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in chapters), 'exercises': sum(len(c['exercises']) for c in chapters),
