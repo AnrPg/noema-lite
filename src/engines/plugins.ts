@@ -135,8 +135,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('thermal@1'),
-    () => import('./thermal/thermal.js'),
-    () => import('noema-worker:./thermal/thermal.js#adapter'),
+    () => import('./thermal/thermal.ts'),
+    () => import('noema-worker:./thermal/thermal.ts#adapter'),
   ),
   def(
     manifest('pid@1'),
