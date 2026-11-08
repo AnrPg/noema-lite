@@ -68,7 +68,7 @@ VIEWS.aspects = (v, r) => {
           if (regs.length || (p.connotation && p.connotation !== 'neutral') || (p.status && p.status !== 'current')) rows[k].push([lx, 'use', { regs, conn: p.connotation, status: p.status }]); }
       }
     }
-    const FACETS = { idioms: ['reg'], registers: ['reg', 'conn', 'status'] }, fold = x => (window.NoemaCatalog ? NoemaCatalog.fold(x) : String(x).toLowerCase());
+    const FACETS = { idioms: ['reg'], registers: ['reg', 'conn', 'status'] }, fold = x => (window.NoemaCore?.search ? NoemaCore.search.fold(x) : String(x).toLowerCase());
     const facetLabel = (f, v) => f === 'reg' ? regWord(v) : f === 'conn' ? CONNOTATION[v] + ' ' + LT('lang.card.conn.' + v) : codeWord('lang.expl.status.', v);
     const metaOf = (key, it) => key === 'use' ? { reg: it.regs, conn: it.conn && it.conn !== 'neutral' ? [it.conn] : [], status: it.status && it.status !== 'current' ? [it.status] : [] } : { reg: [].concat(it.register || []).filter(x => x !== 'neutral'), conn: [], status: [] };
     for (const k of parts) {   // each part is a section that folds (closed), with its own text filter and, where the data has them, chips by register / shade / status

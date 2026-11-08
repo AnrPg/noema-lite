@@ -165,7 +165,18 @@ NoemaCore.catalog                       the search index's records (src/features
                                         byKey, state, on, forget } (the records built in the Worker, kept in noema-lite-search)
 NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
 NoemaCore.sync                          the sync loop, the lease, the settings registers (src/composition/sync.ts, docs/SYNC.md)
+NoemaCore.search                        the query side of search (src/features/search): fold, forms, latin, matches,
+                                        search(records, q, filters), snip(hit), params, saved, recent, keeper, roundSteps
+NoemaCore.vault                         the vault (src/features/vault): FORMATS, checkFile, fields(), the server's use cases
+NoemaCore.social                        people (src/features/social): state, onChange, refresh, search, putFile, the rules
+NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
+                                        reject with a NoemaError
 ```
+
+The community parts are composed in `src/composition/community.ts` (`COMMUNITY_REGISTRATIONS`, `COMMUNITY_BRIDGE`): the
+tokens `REST`, `VAULT`, `SOCIAL`, `REPORTS` and `ENGINE_REQUESTS`. `REST` is a second Supabase client over PostgREST, RPC
+and Storage that shares the signed-in session (`noema1:cloud:session`) with `CLOUD`; without a cloud project every call
+answers `auth.not_signed_in`.
 
 #### 6.0 The study domain and its read models (phase 2)
 

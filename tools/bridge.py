@@ -34,7 +34,7 @@ The same functions build the library's bridges (tools/build.py) and run in the s
 import os, sys, json, re, glob, unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# ---------- text: the same folding, words and ids as the app (engine/catalog.js fold, src/features/catalog ids, engine/wordlink.js) ----------
+# ---------- text: the same folding, words and ids as the app (src/features/search fold, src/features/catalog ids, engine/wordlink.js) ----------
 def fold(s):
     out = []
     for ch in str(s or ''):

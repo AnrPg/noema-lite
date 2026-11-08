@@ -1,4 +1,4 @@
-/* ⚙ Requests for new engines of interactive activities (engine/enginereq.js, engine/src/49_lib_view.js, docs/INTERACTIVE_LIBRARY.md §3)
+/* ⚙ Requests for new engines of interactive activities (src/features/reports: NoemaCore.engineRequests, engine/src/49_lib_view.js, docs/INTERACTIVE_LIBRARY.md §3)
    against the Supabase emulator (rules of cloud/supabase.sql §16) and the connector (src/connector: noema_request_engine,
    noema_engine_requests, noema_engine_request_update).
    Without a browser: normalize (required fields, limits, accuracy, the catalogue's suggestions), cleanPatch, the brief, the local store.
@@ -21,10 +21,10 @@ const WHAT = 'Chemical equilibrium of a reversible reaction: the learner changes
 async function unit() {
   console.log('— the domain, without a browser');
   const ls = new Map(); const ctx = { console, localStorage: { getItem: k => ls.has(k) ? ls.get(k) : null, setItem: (k, v) => ls.set(k, String(v)) } }; ctx.window = ctx; vm.createContext(ctx);
-  ctx.NoemaCore = { engines: require('./engines.cjs').lib };   // the engine library: its catalogue suggests
-  vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine/enginereq.js'), 'utf8'), ctx);
-  const R = ctx.NoemaEngineRequests;
-  ok(R && typeof R.normalize === 'function' && typeof R.store === 'function', 'engine/enginereq.js loads without a page (as in the connector)');
+  Object.assign(ctx, { URL, URLSearchParams, TextEncoder, TextDecoder, crypto: require('crypto').webcrypto });
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'build/app.js'), 'utf8'), ctx);   // window.NoemaCore (npm run build)
+  const R = ctx.NoemaCore.engineRequests;
+  ok(R && typeof R.normalize === 'function' && typeof R.store === 'function', 'NoemaCore.engineRequests (src/features/reports): the domain and the stores');
   let n = R.normalize({});
   ok(n.problems.map(p => p.field + ':' + p.code).join() === 'title:missing,what:missing', 'a name and what to simulate are required: ' + n.problems.map(p => p.field + ':' + p.code).join());
   n = R.normalize({ title: 'abc', what: 'too short', accuracy: 'exact' });

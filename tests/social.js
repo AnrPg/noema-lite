@@ -22,9 +22,9 @@ function unit() {
   console.log('— the name as searched, and the refusals, without a browser');
   const EN = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n/social/en.arb'), 'utf8'));
   const NoemaI18n = { t: (k, p = {}) => String(EN[k] ?? k).replace(/\{(\w+)\}/g, (m, x) => p[x] != null ? String(p[x]) : m), err: e => String(e?.message || e), fmt: { number: n => String(n) } };
-  const ctx = { window: {}, crypto: require('crypto').webcrypto, console, URLSearchParams, NoemaI18n, document: { addEventListener() { } } }; ctx.window = ctx; vm.createContext(ctx);
-  for (const f of ['engine/catalog.js', 'engine/vault.js', 'engine/social.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
-  const s = ctx.NoemaSocial.searchOf('Νίκος Παπαδάκης');
+  const ctx = { window: {}, crypto: require('crypto').webcrypto, console, URL, URLSearchParams, TextEncoder, TextDecoder, NoemaI18n, document: { addEventListener() { } } }; ctx.window = ctx; vm.createContext(ctx);
+  for (const f of ['build/app.js', 'engine/vault.js', 'engine/social.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);   // build/app.js: NoemaCore.social (npm run build)
+  const s = ctx.NoemaCore.social.nameSearch('Νίκος Παπαδάκης');
   ok(/νικο[σς]/.test(s) && /nikos/.test(s) && /papadakis/.test(s), 'Νίκος Παπαδάκης is searched as written (no accents) and in Latin letters: ' + s);
   ok(/only from their study buddies/.test(ctx.NoemaSocial.why(new Error('they do not take messages from you'))) && /50 MB are full/.test(ctx.NoemaSocial.why(new Error('storage quota: 1 of 52428800 bytes used'))), 'the server’s refusals are said in the learner’s words');
 }

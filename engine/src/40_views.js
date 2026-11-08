@@ -439,7 +439,7 @@ function sectionMenu(s) {
 }
 function sectionView(sid, bid) {
   const s = SEC[sid]; if (!s) return go(HOME());
-  const bids = s._bids || (s._bids = NoemaCore.catalog.blockIds(s.blocks));   // stable ids (engine/catalog.js): #/s/<section>/<block> opens exactly that block
+  const bids = s._bids || (s._bids = NoemaCore.catalog.blockIds(s.blocks));   // stable ids (src/features/catalog): #/s/<section>/<block> opens exactly that block
   const c = s._ch; setAccent(document.body, c);
   S.last = sid; save();
   setTutorContext({ kind: 'section', id: sid });
