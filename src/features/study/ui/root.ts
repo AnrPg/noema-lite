@@ -15,7 +15,7 @@ import type { MenuEntry, StudyHost } from './host.ts';
 import type { AiPort, TutorPort } from './parts.ts';
 import { showStudyRoute, STUDY_SEGMENTS } from './routes.ts';
 import { rateCard } from './screens/cards.ts';
-import { subjectMenu } from './screens/home.ts';
+import { openSearch, resetProgress, subjectMenu } from './screens/home.ts';
 import { wireCopy } from './text.ts';
 
 export interface StudyUi {
@@ -40,8 +40,10 @@ export interface StudyUi {
     targets(ex: Exercise): string[];
     knowledgeMap(chapterId?: string): void;
     reported(): void;
-    /** the subject's ⋮ as it is now */
+    /** the subject's ⋮ as it is now, and two of its dialogs (the search in the subject, the reset's question) */
     subjectMenu(): (MenuEntry | null)[];
+    search(): void;
+    reset(): void;
   };
   /** a flashcard rated elsewhere (the inbox): 0 again, 1 good, 2 easy */
   rateCard(key: string, q: 0 | 1 | 2, at?: number): void;
@@ -86,6 +88,12 @@ export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; rea
         reportedView(app);
       },
       subjectMenu: () => subjectMenu(app)(),
+      search: () => {
+        openSearch(app);
+      },
+      reset: () => {
+        resetProgress(app);
+      },
     },
     rateCard: (key, q, at) => {
       rateCard(app, key, q, at);

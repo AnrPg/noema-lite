@@ -233,18 +233,18 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(page, S + 'flashcards rated', () => page.evaluate(() => [...document.querySelectorAll('main .rate button, main .fcrate button')][0]?.click()), 400);
     if (info.drill) { await go(page, '#/drill/' + info.drill, 700); await visit(page, S + 'drill checked', () => page.evaluate(() => [...document.querySelectorAll('main .btn.primary')].pop()?.click()), 500); }
     await visit(page, S + 'mistakes gym (with mistakes)', async () => { await page.evaluate(() => { const e = ALL_EX.slice(0, 3); e.forEach(x => S.res[x.id] = { n: 1, ok: 0, last: false }); save(); location.hash = '#/x'; location.hash = '#/mistakes'; }); }, 700);
-    await visit(page, S + 'a run to its summary', async () => { await page.evaluate(() => startRun(ALL_EX.filter(e => ['mcq', 'tf', 'cloze'].includes(e.type)).slice(0, 3), { title: '🎯' }));
+    await visit(page, S + 'a run to its summary', async () => { await page.evaluate(() => NoemaCore.studyUi.current().app.startRound(ALL_EX.filter(e => ['mcq', 'tf', 'cloze'].includes(e.type)).slice(0, 3), { title: '🎯' }));
       for (let i = 0; i < 7; i++) { await wait(300); await grab(page); await page.evaluate(() => { const c = document.querySelector('main .ex'); if (c && !c._locked?.()) c._check?.(); else [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent).pop()?.click(); }); } }, 800);
     await visit(page, S + 'boss exam', async () => { await page.evaluate(c => { location.hash = '#/boss/' + c; }, ch); await wait(600); await page.evaluate(() => [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent)[0]?.click());
       for (let i = 0; i < 6; i++) { await wait(300); await grab(page); await page.evaluate(() => { const c = document.querySelector('main .ex'); if (c && !c._locked?.()) c._check?.(); else [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent).pop()?.click(); }); } }, 800);
-    await visit(page, S + 'search', async () => { await page.evaluate(() => openSearch()); await wait(300); await page.fill('.modal input', 'a'); await page.keyboard.type('xyzqq'); await wait(300); await page.fill('.modal input', 'the'); }, 600);
+    await visit(page, S + 'search', async () => { await page.evaluate(() => NoemaCore.studyUi.current().inspect.search()); await wait(300); await page.fill('.modal input', 'a'); await page.keyboard.type('xyzqq'); await wait(300); await page.fill('.modal input', 'the'); }, 600);
     await visit(page, S + 'sources deck', () => page.evaluate(() => { document.querySelector('.modal')?.remove(); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }), 600);
     await visit(page, S + 'a source', () => page.evaluate(id => { NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(false); NoemaCore.studyUi.current().app.sourcesUi.open(id); }, info.src), 1200);
     await visit(page, S + 'notifications', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); document.querySelector('.viewer, .srcviewer')?.remove(); openNotes(); }), 500);
     await visit(page, S + 'tutor', () => page.evaluate(sid => { document.querySelectorAll('.modal').forEach(m => m.remove()); openTutor({ kind: 'section', id: sid }, 'socratic'); }, info.sec[0]), 600);
     await visit(page, S + 'tutor history', () => page.evaluate(() => { T.showHistory = true; renderTutor(); }), 500);
     await visit(page, S + 'tutor modes', () => page.evaluate(() => { T.showHistory = false; renderTutor(); [...document.querySelectorAll('.drawer select, .drawer .modechips button')].forEach(x => x.click?.()); }), 400);
-    await visit(page, S + 'focus sprint', () => page.evaluate(() => { closeTutor(); focusSprint(document.querySelector('.timer')); }), 500);
+    await visit(page, S + 'focus sprint', () => page.evaluate(() => { closeTutor(); NoemaCore.studyUi.current().app.toggleSprint(); }), 500);
     for (const tab of ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help']) await visit(page, S + 'account menu: ' + tab, () => page.evaluate(t => { document.querySelectorAll('.modal').forEach(m => m.remove()); openAccountMenu(t); document.querySelectorAll('.modal details').forEach(d => d.open = true); }, tab), 700);
     await visit(page, S + 'guides', async () => { for (const g of ['gemini', 'backupFolder', 'restore', 'cloudUser', 'cloudOwner', 'github', 'claude', 'curricula', 'friends']) { await page.evaluate(g => { document.querySelectorAll('.modal').forEach(m => m.remove()); openGuide(g); }, g); await wait(150); await grab(page); } }, 200);
     const bad = { name: 'notes.json', mimeType: 'application/json', buffer: Buffer.from('{ not json') };
@@ -255,7 +255,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await page.evaluate(() => document.querySelector('.vw-ov')?.remove());
     await visit(page, S + 'subject menu', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); location.hash = '#/'; }), 600);
     await visit(page, S + 'home buttons', () => page.evaluate(() => [...document.querySelectorAll('main .subjmenu, main .menubtn, main [aria-haspopup]')].forEach(b => b.click())), 400);
-    await visit(page, S + 'reset progress (confirm)', () => page.evaluate(() => resetProgress(() => { })), 400);
+    await visit(page, S + 'reset progress (confirm)', () => page.evaluate(() => NoemaCore.studyUi.current().inspect.reset()), 400);
     await visit(page, S + 'what is new', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); location.hash = '#/new'; }), 500);
   }
   /** The AI helpers when the provider fails: a wrong key, quota, a server error, no network. */
