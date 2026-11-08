@@ -23,6 +23,7 @@ import type { ProgressModel } from '../ui/screens/shell/progress.ts';
 import type { CharacterInfo, SettingsData } from '../ui/screens/shell/settings.ts';
 import type { TodayData, TodayModel } from '../ui/screens/shell/today.ts';
 import type { NoemaCoreBridge } from './bridge.ts';
+import { registerAuthorPage } from './shell/author-page.ts';
 import { createCore, sha256, type NoemaCoreObject } from './shell/core.ts';
 import { guardDom, h, type MenuEntry } from './shell/dom.ts';
 import { createHost, type Host, type HostCore, type Recent } from './shell/host.ts';
@@ -761,6 +762,8 @@ export function createApp(win: Window = window): App {
     el.data = settingsData();
     shell.screen({ tab: 'me', crumbs: [[L('myAccount'), '#/me'], [L('character')]], back: '#/me' }, el);
   });
+  // #/author: the activity author (its code loads on the first visit: build/author.js)
+  registerAuthorPage(shell, N as unknown as { app?: Record<string, unknown> });
   // the 5-minute try's bar, above the top bar
   const bar = document.createElement('noema-preview-bar');
   shell.preview.append(bar);

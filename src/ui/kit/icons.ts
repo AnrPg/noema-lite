@@ -41,6 +41,9 @@ export const ICONS = {
   trash: 'M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3',
   share: 'M12 15V4M8 8l4-4 4 4M5 13v6h14v-6',
   download: 'M12 4v11M8 11l4 4 4-4M5 19h14',
+  upload: 'M12 15V4M8 8l4-4 4 4M5 19h14',
+  undo: 'M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3',
+  redo: 'M15 14l5-5-5-5M20 9H10a6 6 0 0 0 0 12h3',
   cards: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
   list: 'M9 6h11M9 12h11M9 18h11M4 6v.01M4 12v.01M4 18v.01',
   lock: 'M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3',
@@ -49,7 +52,7 @@ export type IconName = keyof typeof ICONS;
 export const ICON_NAMES = Object.keys(ICONS) as IconName[];
 
 /** the icons that point along the line of text (mirrored right to left) */
-const DIRECTIONAL: ReadonlySet<IconName> = new Set<IconName>(['back', 'forward']);
+const DIRECTIONAL: ReadonlySet<IconName> = new Set<IconName>(['back', 'forward', 'undo', 'redo']);
 
 export const isIconName = (x: unknown): x is IconName => typeof x === 'string' && Object.hasOwn(ICONS, x);
 

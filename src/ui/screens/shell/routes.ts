@@ -34,8 +34,8 @@ export const APP_ROUTES = defineRoutes({
 });
 export type AppRoutes = typeof APP_ROUTES.table;
 
-/** the first segments the open subject's engine draws (engine/src/40_views.js); #/author: the activity author; #/engines:
-    the engines of activities and requests for new ones */
+/** the first segments the open subject's engine draws (engine/src/40_views.js); #/engines: the engines of activities and
+    requests for new ones (#/author, the activity author, is a page of its own: src/composition/shell/author-page.ts) */
 export const ENGINE_ROUTES: ReadonlySet<string> = new Set([
   'subject',
   'ch',
@@ -51,7 +51,6 @@ export const ENGINE_ROUTES: ReadonlySet<string> = new Set([
   'mistakes',
   'new',
   'ex',
-  'author',
   'engines',
 ]);
 

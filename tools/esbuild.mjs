@@ -15,9 +15,9 @@
      ui.js         src/composition/ui.ts — the app's UI root (src/composition/ui-root.ts: Lit, the kit, the frame and the shell's
                    screens, window.Noema / NoemaThemes / NoemaShell; the areas' screens of src/features/<name>/ui with their data
                    ports, e.g. src/composition/roadmaps-ui.ts), right after app.js and engine/i18n.js.
-     engines.js, contracts.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts and the
-                   content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
-                   (src/contracts/page.ts, pageContracts below).
+     engines.js, contracts.js, author.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts
+                   and the content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
+                   (src/contracts/page.ts, pageContracts below); the activity author (src/composition/author.ts, #/author).
      ui-kit.js     src/composition/ui-kit.ts — the kit's demo on #/ui-kit (a local host only; kind "dev").
      lang-activities.js  src/composition/lang-activities.ts — the screens of area 5 (languages and activities, src/ui/screens/
                    languages-activities.ts), kind "lazy": the shell loads it on the first language page (NoemaShell.area5). It
@@ -82,6 +82,7 @@ export const ENTRIES = [
   { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
   { name: 'runtimes', in: 'src/composition/runtimes.ts', kind: 'lazy', out: 'runtimes.js', budgetKB: 512 },   // the activity runtimes' code (src/runtimes): loaded when an activity first needs one (ACT.runtime)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
+  { name: 'author', in: 'src/composition/author.ts', kind: 'lazy', out: 'author.js', budgetKB: 160 },   // the activity author (#/author): its forms, checks and files; loaded on the first visit (src/composition/shell/author-page.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
