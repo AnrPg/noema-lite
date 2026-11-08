@@ -16,6 +16,7 @@ import type { AiPort, TutorPort } from './parts.ts';
 import { showStudyRoute, STUDY_SEGMENTS } from './routes.ts';
 import { openSearch, resetProgress, subjectMenu } from './screens/home.ts';
 import { wireCopy } from './text.ts';
+import { defineStudyElements } from './lit/base.ts';
 
 export interface StudyUi {
   readonly app: StudyApp;
@@ -47,6 +48,7 @@ export interface StudyUi {
 }
 
 export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; readonly ai: AiPort }, i18n: I18n, clock: Clock): StudyUi {
+  defineStudyElements();
   const app = new StudyApp(host, i18n, clock);
   app.tutor = host.tutor;
   app.ai = host.ai;

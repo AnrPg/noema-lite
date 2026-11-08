@@ -5,12 +5,12 @@
  */
 import { sectionText } from '../../domain/as-text.ts';
 import type { StudyApp } from '../app.ts';
-import { h } from '../dom.ts';
+import type { Chapter } from '../../domain/pack.ts';
 import type { MenuEntry, MenuItem } from '../host.ts';
 import { knowledgeMap, reportedView } from '../kmap.ts';
-import { setAccent } from '../parts.ts';
-import { fmt } from '../text.ts';
-import { animateRings, practiceButton, view } from '../view.ts';
+import { F, html, nothing, show, StudyElement, StudyScreen, tag, type TemplateResult } from '../lit/base.ts';
+import { accentOf, setAccent } from '../parts.ts';
+import { animateRings, growBars, practiceButton } from '../view.ts';
 
 /** 🎯 Practice ▾: every way to practise the whole subject */
 export function practiceItems(app: StudyApp): (MenuEntry | null)[] {
@@ -149,33 +149,26 @@ export function resetProgress(app: StudyApp): void {
 
 /** 🔎 jump to any concept of the subject */
 export function openSearch(app: StudyApp): void {
-  const results = h('div', { class: 'results' });
-  const ex = app.host.subject.searchExamples;
-  const inp = h('input', {
-    class: 'noema-input',
-    placeholder: `${app.L('searchConcept')}${ex ? ` (${ex})` : ''}`,
-    'aria-label': app.L('searchSubject'),
-    oninput: () => {
-      searchSections(app, inp.value, results);
-    },
-  });
-  const fill = (body: HTMLElement, close: () => void): void => {
-    body.append(h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), inp), results);
-    results.addEventListener('click', e => {
-      if (e.target instanceof Element && e.target.closest('.result')) close();
-    });
+  app.host.frame.sheet(app.L('searchSubject'), (body, close) => {
+    const s = new StudySearch(app, close);
+    s.redraw();
+    body.append(s);
     setTimeout(() => {
-      inp.focus();
+      s.querySelector('input')?.focus();
     }, 50);
-  };
-  app.host.frame.sheet(app.L('searchSubject'), fill);
+  });
 }
 
-let searchIndex: { readonly course: unknown; readonly items: { id: string; title: string; body: string; text: string }[] } | null = null;
-function searchSections(app: StudyApp, q0: string, box: HTMLElement): void {
-  box.replaceChildren();
+interface Found {
+  readonly id: string;
+  readonly title: string;
+  readonly body: string;
+  readonly text: string;
+}
+let searchIndex: { readonly course: unknown; readonly items: Found[] } | null = null;
+function searchSections(app: StudyApp, q0: string): (Found & { sc: number })[] | null {
   const q = q0.trim().toLowerCase();
-  if (q.length < 2) return;
+  if (q.length < 2) return null;
   if (searchIndex?.course !== app.course)
     searchIndex = {
       course: app.course,
@@ -187,7 +180,7 @@ function searchSections(app: StudyApp, q0: string, box: HTMLElement): void {
       ),
     };
   const words = q.split(/\s+/);
-  const res = searchIndex.items
+  return searchIndex.items
     .map(x => {
       let sc = 0;
       for (const w of words) {
@@ -201,34 +194,65 @@ function searchSections(app: StudyApp, q0: string, box: HTMLElement): void {
     .filter(x => x !== null)
     .sort((a, b) => b.sc - a.sc)
     .slice(0, 7);
-  if (!res.length) {
-    const who = app.host.frame.character();
-    box.append(h('div', { class: 'tiny' }, app.t('engine.search.none', { tutor: who.name, avatar: who.avatar })));
-    return;
-  }
-  res.forEach((r, i) => {
-    const s = app.course.section(r.id);
-    const c = s && app.course.chapterOf(s);
-    if (!s || !c) return;
-    const pos = r.body.indexOf(words[0] ?? '');
-    const snip = r.text.slice(Math.max(0, pos - 50), pos + 90).replace(/\s+/g, ' ');
-    box.append(
-      h(
-        'button',
-        {
-          class: 'result',
-          type: 'button',
-          style: { animationDelay: `${String(i * 30)}ms` },
-          onclick: () => {
-            app.go(`#/s/${s.id}`);
-          },
-        },
-        h('b', {}, `${c.emoji ?? ''} ${s.title}`),
-        h('small', {}, app.chTitle(c.num, `…${snip}…`)),
-      ),
-    );
-  });
 }
+
+/** the search in the subject (its sheet's body) */
+class StudySearch extends StudyElement {
+  readonly #app: StudyApp;
+  readonly #close: () => void;
+  #q = '';
+  constructor(app: StudyApp, close: () => void) {
+    super();
+    this.#app = app;
+    this.#close = close;
+  }
+  override render(): TemplateResult {
+    const app = this.#app;
+    const ex = app.host.subject.searchExamples;
+    return html`<div class="search">
+        <span class="si">🔎</span
+        ><input
+          class="noema-input"
+          placeholder=${`${app.L('searchConcept')}${ex ? ` (${ex})` : ''}`}
+          aria-label=${app.L('searchSubject')}
+          @input=${(e: Event) => {
+            this.#q = (e.target as HTMLInputElement).value;
+            this.redraw();
+          }}
+        />
+      </div>
+      <div class="results">${this.#results()}</div>`;
+  }
+  #results(): unknown {
+    const app = this.#app;
+    const res = searchSections(app, this.#q);
+    if (!res) return nothing;
+    if (!res.length) {
+      const who = app.host.frame.character();
+      return html`<div class="tiny">${app.t('engine.search.none', { tutor: who.name, avatar: who.avatar })}</div>`;
+    }
+    const first = this.#q.trim().toLowerCase().split(/\s+/)[0] ?? '';
+    return res.map((r, i) => {
+      const s = app.course.section(r.id);
+      const c = s && app.course.chapterOf(s);
+      if (!s || !c) return nothing;
+      const pos = r.body.indexOf(first);
+      const snip = r.text.slice(Math.max(0, pos - 50), pos + 90).replace(/\s+/g, ' ');
+      return html`<button
+        class="result"
+        type="button"
+        style="animation-delay:${i * 30}ms"
+        @click=${() => {
+          this.#close();
+          app.go(`#/s/${s.id}`);
+        }}
+      >
+        <b>${`${c.emoji ?? ''} ${s.title}`}</b><small>${app.chTitle(c.num, `…${snip}…`)}</small>
+      </button>`;
+    });
+  }
+}
+tag('study-search', StudySearch);
 
 const CHVIEW_KEY = 'noema-chview';
 /** the learner's choice of list or cards (a device preference; a private window keeps it for this page only) */
@@ -249,199 +273,178 @@ function chapterViewStyle(): 'list' | 'cards' {
 }
 
 /** a chapter's "new" corner (a new source's chapter, or new content in it) */
-export function newBadge(
-  app: StudyApp,
-  x: { readonly isNew?: boolean; readonly newWhole?: boolean },
-  chapter: boolean,
-): HTMLElement | null {
-  if (!x.isNew) return null;
+export function newBadge(app: StudyApp, x: { readonly isNew?: boolean; readonly newWhole?: boolean }, chapter: boolean): unknown {
+  if (!x.isNew) return nothing;
   if (chapter)
-    return h('span', { class: 'newpill corner' }, `✨ ${x.newWhole ? app.t('engine.src.newChapter') : app.t('engine.src.newContent')}`);
-  return h('span', { class: 'newpill' }, `✨ ${app.t('engine.src.new')}`);
+    return html`<span class="newpill corner">✨ ${x.newWhole ? app.t('engine.src.newChapter') : app.t('engine.src.newContent')}</span>`;
+  return html`<span class="newpill">✨ ${app.t('engine.src.new')}</span>`;
 }
+
+/** #/subject */
+export class StudyHome extends StudyScreen {
+  #style = chapterViewStyle();
+  #practice: HTMLElement | null = null;
+  #tags: readonly Node[] | null = null;
+
+  protected page(): TemplateResult {
+    const app = this.app;
+    const S = app.state,
+      subj = app.host.subject;
+    const p = app.courseProgress();
+    const last = S.last ? app.course.section(S.last) : undefined;
+    const first = app.course.chapters[0]?.sections[0];
+    const nSec = app.course.chapters.reduce((a, c) => a + c.sections.length, 0);
+    const st = app.station();
+    const pr = { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) };
+    const mantra = subj.hero?.mantra ?? subj.description;
+    const barW = st ? Math.round(Math.min(st.read, st.solved / st.pass) * 100) : Math.round((p.sr + p.ex) * 50);
+    const barTip = st
+      ? st.done
+        ? app.L('stationDone')
+        : app.L('stationMastery', { ...pr, p: Math.round(st.pass * 100) })
+      : app.L('subjProgress', pr);
+    const go = (href: string) => () => {
+      app.go(href);
+    };
+    this.#practice ??= practiceButton(app, practiceItems(app));
+    this.#tags ??= app.host.frame.subjectTags();
+    // one plain header (a step of which Roadmap · the title · one line · one bar)
+    return html`<section class="subjhead${st ? ' station' : ''}">
+        ${
+          st
+            ? html`<button
+                class="ns-kicker subjkicker"
+                type="button"
+                title=${app.L('openMap')}
+                @click=${() => {
+                  app.host.roadmap.openMap();
+                }}
+              >
+                ${app.L('stationOf', { title: st.title })} ›
+              </button>`
+            : nothing
+        }
+        <h1 class="herohead">${subj.title}${this.#tags}</h1>
+        ${mantra ? html`<p class="mantra">${F(mantra)}</p>` : nothing}
+        <div class="subjbar" title=${barTip}>
+          <div class="bar"><i style="width:${barW}%"></i></div>
+          <span class="tiny">${st?.done ? `✓ ${app.L('stationMastered')}` : app.L('subjProgress', pr)}</span>
+        </div>
+        <div class="row subjgo">
+          ${
+            last
+              ? html`<button class="btn primary" type="button" @click=${go(`#/s/${last.id}`)}>
+                  ${app.L('continueSec', { title: last.title })}
+                </button>`
+              : first
+                ? html`<button class="btn primary" type="button" @click=${go(`#/s/${first.id}`)}>${app.L('startCh1')}</button>`
+                : nothing
+          }
+          ${this.#practice} ${app.sourcesUi.whatsNewButton()}
+        </div>
+      </section>
+      <div class="row chlisthead">
+        <h2 class="grow">${app.t('home.chapters')}</h2>
+        <span class="tiny hide-s">${app.L('subjCounts', { c: app.course.chapters.length, s: nSec, e: app.course.exercises.length })}</span>
+        <div class="ns-seg small chviewseg" role="radiogroup" aria-label=${app.L('chView')}>
+          ${(['list', 'cards'] as const).map(
+            k =>
+              html`<button
+                type="button"
+                data-v=${k}
+                class=${this.#style === k ? 'on' : ''}
+                role="radio"
+                aria-checked=${String(this.#style === k)}
+                @click=${() => {
+                  this.#style = k;
+                  rememberView(k);
+                  this.redraw();
+                  growBars(this);
+                }}
+              >
+                ${k === 'list' ? app.L('viewList') : app.L('viewCards')}
+              </button>`,
+          )}
+        </div>
+      </div>
+      <div class="chbox">${this.#style === 'cards' ? this.#cards() : this.#list()}</div>`;
+  }
+
+  #cards(): TemplateResult {
+    const app = this.app,
+      S = app.state;
+    return html`<div class="chapters">
+      ${app.course.chapters.map(
+        (c, i) =>
+          html`<button
+            class="chcard"
+            type="button"
+            data-ci=${accentOf(c)}
+            style="animation-delay:${i * 40}ms"
+            @click=${() => {
+              app.go(`#/ch/${c.id}`);
+            }}
+          >
+            ${newBadge(app, c, true)}
+            <div class="emo">${c.emoji ?? ''}</div>
+            <div class="num">${`${app.L('chapterN', { n: c.num })}${S.boss[c.id] ? ' · 🏆' : ''}`}</div>
+            <h3>${c.title}</h3>
+            <p>${c.subtitle ?? ''}</p>
+            ${this.#bars(c)}
+          </button>`,
+      )}
+    </div>`;
+  }
+  #bars(c: Chapter): TemplateResult {
+    const app = this.app,
+      cp = app.progress(c);
+    return html`<div class="bars">
+      <div class="barlbl"><span>📖 ${app.L('theory')}</span><span>${app.pct(Math.round(cp.sr * 100))}</span></div>
+      <div class="bar"><i style="width:0%" data-w="${cp.sr * 100}%"></i></div>
+      <div class="barlbl"><span>🎯 ${app.L('practice')}</span><span>${app.pct(Math.round(cp.ex * 100))}</span></div>
+      <div class="bar alt"><i style="width:0%" data-w="${cp.ex * 100}%"></i></div>
+    </div>`;
+  }
+
+  #list(): TemplateResult {
+    const app = this.app,
+      S = app.state;
+    return html`<div class="chlist">
+      ${app.course.chapters.map((c, i) => {
+        const cp = app.progress(c),
+          pct = Math.round((cp.sr + cp.ex) * 50);
+        return html`<button
+          class="chrow${pct >= 100 ? ' done' : ''}"
+          type="button"
+          data-ci=${accentOf(c)}
+          style="animation-delay:${i * 25}ms"
+          @click=${() => {
+            app.go(`#/ch/${c.id}`);
+          }}
+        >
+          <span class="emo">${c.emoji ?? ''}</span>
+          <span class="grow"
+            ><small>${app.L('chapterN', { n: c.num })}${S.boss[c.id] ? ' · 🏆' : ''}</small><b>${c.title}</b>${
+              c.subtitle ? html`<small class="sub">${c.subtitle}</small>` : nothing
+            }</span
+          >
+          ${newBadge(app, c, true)}
+          <span class="chpct"
+            ><span class="minibar"><i style="width:${pct}%"></i></span><small>${app.pct(pct)}</small></span
+          >
+        </button>`;
+      })}
+    </div>`;
+  }
+}
+tag('study-home', StudyHome);
 
 export function homeView(app: StudyApp): void {
   app.tutor.setContext(null);
   setAccent(document.body, null);
   app.host.frame.chrome({ crumbs: [], corner: true, menu: subjectMenu(app) });
   app.host.frame.noteRecent({});
-  const S = app.state,
-    subj = app.host.subject;
-  const p = app.courseProgress();
-  const last = S.last ? app.course.section(S.last) : undefined;
-  const first = app.course.chapters[0]?.sections[0];
-  const nSec = app.course.chapters.reduce((a, c) => a + c.sections.length, 0);
-  const body = h('div', { class: 'chbox' });
-  let style = chapterViewStyle();
-  const segBtns = (['list', 'cards'] as const).map(k =>
-    h(
-      'button',
-      {
-        type: 'button',
-        'data-v': k,
-        class: style === k ? 'on' : '',
-        role: 'radio',
-        'aria-checked': String(style === k),
-        onclick: () => {
-          style = k;
-          rememberView(k);
-          for (const b of segBtns) {
-            b.classList.toggle('on', b.dataset['v'] === k);
-            b.setAttribute('aria-checked', String(b.dataset['v'] === k));
-          }
-          draw();
-        },
-      },
-      k === 'list' ? app.L('viewList') : app.L('viewCards'),
-    ),
-  );
-  const seg = h('div', { class: 'ns-seg small chviewseg', role: 'radiogroup', 'aria-label': app.L('chView') }, segBtns);
-  const st = app.station();
-  const pr = { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) };
-  const mantra = subj.hero?.mantra ?? subj.description;
-  const titleEl = h('h1', { class: 'herohead' }, subj.title, ...app.host.frame.subjectTags());
-  const mantraEl = mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null;
-  // one plain header (a step of which Roadmap · the title · one line · one bar)
-  const top = [
-    st
-      ? h(
-          'button',
-          {
-            class: 'ns-kicker subjkicker',
-            type: 'button',
-            title: app.L('openMap'),
-            onclick: () => {
-              app.host.roadmap.openMap();
-            },
-          },
-          app.L('stationOf', { title: st.title }),
-          ' ›',
-        )
-      : null,
-    titleEl,
-    mantraEl,
-  ];
-  const barW = st ? Math.round(Math.min(st.read, st.solved / st.pass) * 100) : Math.round((p.sr + p.ex) * 50);
-  const barTip = st
-    ? st.done
-      ? app.L('stationDone')
-      : app.L('stationMastery', { ...pr, p: Math.round(st.pass * 100) })
-    : app.L('subjProgress', pr);
-  const go = (href: string) => () => {
-    app.go(href);
-  };
-  const v = view(
-    app,
-    h(
-      'section',
-      { class: `subjhead${st ? ' station' : ''}` },
-      ...top,
-      h(
-        'div',
-        { class: 'subjbar', title: barTip },
-        h('div', { class: 'bar' }, h('i', { style: { width: `${String(barW)}%` } })),
-        h('span', { class: 'tiny' }, st?.done ? `✓ ${app.L('stationMastered')}` : app.L('subjProgress', pr)),
-      ),
-      h(
-        'div',
-        { class: 'row subjgo' },
-        last
-          ? h(
-              'button',
-              { class: 'btn primary', type: 'button', onclick: go(`#/s/${last.id}`) },
-              app.L('continueSec', { title: last.title }),
-            )
-          : first
-            ? h('button', { class: 'btn primary', type: 'button', onclick: go(`#/s/${first.id}`) }, app.L('startCh1'))
-            : null,
-        practiceButton(app, practiceItems(app)),
-        app.sourcesUi.whatsNewButton(),
-      ),
-    ),
-    h(
-      'div',
-      { class: 'row chlisthead' },
-      h('h2', { class: 'grow' }, app.t('home.chapters')),
-      h('span', { class: 'tiny hide-s' }, app.L('subjCounts', { c: app.course.chapters.length, s: nSec, e: app.course.exercises.length })),
-      seg,
-    ),
-    body,
-  );
-  function draw(): void {
-    body.replaceChildren();
-    if (style === 'cards') {
-      body.append(
-        h(
-          'div',
-          { class: 'chapters' },
-          app.course.chapters.map((c, i) => {
-            const cp = app.progress(c);
-            const card = h(
-              'button',
-              { class: 'chcard', type: 'button', style: { animationDelay: `${String(i * 40)}ms` }, onclick: go(`#/ch/${c.id}`) },
-              newBadge(app, c, true),
-              h('div', { class: 'emo' }, c.emoji ?? ''),
-              h('div', { class: 'num' }, `${app.L('chapterN', { n: c.num })}${S.boss[c.id] ? ' · 🏆' : ''}`),
-              h('h3', {}, c.title),
-              h('p', {}, c.subtitle ?? ''),
-              h(
-                'div',
-                { class: 'bars' },
-                h('div', { class: 'barlbl' }, h('span', {}, `📖 ${app.L('theory')}`), h('span', {}, app.pct(Math.round(cp.sr * 100)))),
-                h('div', { class: 'bar' }, h('i', { style: { width: '0%' }, 'data-w': `${String(cp.sr * 100)}%` })),
-                h('div', { class: 'barlbl' }, h('span', {}, `🎯 ${app.L('practice')}`), h('span', {}, app.pct(Math.round(cp.ex * 100)))),
-                h('div', { class: 'bar alt' }, h('i', { style: { width: '0%' }, 'data-w': `${String(cp.ex * 100)}%` })),
-              ),
-            );
-            setAccent(card, c);
-            return card;
-          }),
-        ),
-      );
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => {
-          for (const i of body.querySelectorAll<HTMLElement>('.bar>i[data-w]')) i.style.width = i.dataset['w'] ?? '';
-        }),
-      );
-    } else {
-      body.append(
-        h(
-          'div',
-          { class: 'chlist' },
-          app.course.chapters.map((c, i) => {
-            const cp = app.progress(c),
-              pct = Math.round((cp.sr + cp.ex) * 50);
-            const row = h(
-              'button',
-              {
-                class: `chrow${pct >= 100 ? ' done' : ''}`,
-                type: 'button',
-                style: { animationDelay: `${String(i * 25)}ms` },
-                onclick: go(`#/ch/${c.id}`),
-              },
-              h('span', { class: 'emo' }, c.emoji ?? ''),
-              h(
-                'span',
-                { class: 'grow' },
-                h('small', {}, app.L('chapterN', { n: c.num }), S.boss[c.id] ? ' · 🏆' : ''),
-                h('b', {}, c.title),
-                c.subtitle ? h('small', { class: 'sub' }, c.subtitle) : null,
-              ),
-              newBadge(app, c, true),
-              h(
-                'span',
-                { class: 'chpct' },
-                h('span', { class: 'minibar' }, h('i', { style: { width: `${String(pct)}%` } })),
-                h('small', {}, app.pct(pct)),
-              ),
-            );
-            setAccent(row, c);
-            return row;
-          }),
-        ),
-      );
-    }
-  }
-  draw();
+  const v = show(app, new StudyHome(app));
+  growBars(v);
   animateRings(v);
 }
