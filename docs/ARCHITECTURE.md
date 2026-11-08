@@ -370,7 +370,7 @@ the Roadmap's settings) stay in `engine/curmap.js`.
 The runtimes that show an item of `pack.activities` are plugins of kind `runtime` in `src/runtimes/<name>/` (strict TypeScript,
 layer `runtimes` of the ESLint boundaries: kernel, contracts, ports, plugins and itself). `manifests.ts` lists each with its
 switch (`on`: unless `config.js` says false; `opt-in`: only when it says true), `plugins.ts` its lazy entry, `checks.ts` the
-pure checks (`RUNTIME_CHECKS`, which the roots hand the content checks through `scopeCheckers`). A runtime module's
+pure checks (`RUNTIME_CHECKS`, which the roots hand the content checks through `runtimeCheckers`). A runtime module's
 `create(host)` takes a `RuntimeHost` (`types.ts`: the app's words, the protocol's envelope and its check, the account settings, the
 deployment's switches, the compute side) and returns the `ActivityRuntime` the activity core mounts (`mount(box, ctx) → port`, `waits`,
 `failText(code, act)`), or null when it is off. The core (`engine/src/32_activities.js`) knows every runtime by its manifest
