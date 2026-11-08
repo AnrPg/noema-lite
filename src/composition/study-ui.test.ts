@@ -1,6 +1,7 @@
 /* The study area's pages in a DOM (happy-dom) over a fake host: the routes it draws and the ones it leaves to the app,
    a one-exercise round answered with the keyboard and mouse (recorded, XP, the summary), a locked Roadmap step, the
-   "only my level" filter, the source filter (the engine's indexes follow), and the words for the engine. */
+   "only my level" filter, the source filter (the engine's indexes follow), the words for the engine, a boss battle's hearts,
+   the Mistakes gym and the lightning round. */
 import '../ui/test/dom.ts';
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, test } from 'node:test';
@@ -273,4 +274,78 @@ test('the words for the engine: an exercise and a section as text for the AI; pr
     f.events.includes('section.opened:c1-s1') && f.events.includes('section.read:c1-s1'),
     'opening and reading a section are events',
   );
+});
+
+const optionClick = (word: string): void => {
+  const b = [...main().querySelectorAll<HTMLButtonElement>('.ex .opt')].find(
+    x => x.textContent.trim().endsWith(word) && !x.textContent.includes('also'),
+  );
+  assert.ok(b, `the option “${word}”`);
+  b.click();
+};
+const nextButton = (): HTMLButtonElement => {
+  const b = main().querySelector<HTMLButtonElement>('.btn.primary[data-next]');
+  assert.ok(b, 'Next');
+  return b;
+};
+
+test('a boss battle: each mistake costs a heart; with none left the round ends in the boss’s summary', () => {
+  ui.app.startRound([...ui.app.course.exercises], { boss: 'c1', keepOrder: true, back: '#/ch/c1' });
+  ui.show('#/run');
+  assert.equal(main().querySelector('.hearts')?.textContent, '❤️❤️❤️');
+  assert.equal(nextButton().style.display, 'none', 'Next waits for the answer');
+  for (let k = 1; k <= 3; k++) {
+    optionClick('wrong');
+    assert.equal(ui.app.round?.actor.snapshot.context.lives, 3 - k);
+    assert.equal(main().querySelector('.hearts')?.textContent, '❤️'.repeat(3 - k) + '🤍'.repeat(k));
+    assert.equal(nextButton().style.display, '');
+    if (k === 3) assert.equal(nextButton().textContent.trim(), ui.app.t('engine.run.seeResult'));
+    nextButton().click();
+  }
+  assert.equal(ui.app.round?.actor.snapshot.state, 'summary');
+  assert.equal(main().querySelector('.summary .big')?.textContent, '👾');
+  assert.equal(main().querySelectorAll('.summary li').length, 3, 'the three mistakes to review');
+});
+
+test('the Mistakes gym: the wrong answers by chapter, each a round that comes back to the gym', () => {
+  ui.show('#/mistakes');
+  assert.ok(main().querySelector('.empty'), 'nothing to train yet');
+  Object.assign(f.state.res, { 'c1-e1': { n: 1, ok: 0, last: false } }); // its last answer wrong (the fake's fold keeps no "last")
+  ui.show('#/mistakes');
+  const node = main().querySelector<HTMLButtonElement>('button.node');
+  assert.ok(node);
+  assert.match(node.textContent, /Chapter 1/);
+  node.click();
+  const R = ui.app.round;
+  assert.equal(R?.back, '#/mistakes');
+  assert.deepEqual(
+    R.actor.snapshot.context.list.map(e => e.id),
+    ['c1-e1'],
+  );
+});
+
+test('the lightning round: ← is true; the game stops when its page leaves', () => {
+  const c1 = f.host.chapters[0];
+  assert.ok(c1);
+  (c1.exercises as Exercise[]).push({
+    id: 'c1-t1',
+    type: 'tf',
+    section: 'c1-s1',
+    difficulty: 1,
+    tags: [],
+    q: 'Sky is blue',
+    answer: true,
+    explain: 'It is.',
+  });
+  ui = createStudyUi(f.host, i18n, clock);
+  ui.show('#/lightning');
+  assert.equal(main().querySelectorAll('.lightning select option').length, 3, 'every chapter, or all of them');
+  ui.show('#/lightning/c1');
+  assert.match(main().querySelector('.stmt')?.textContent ?? '', /Sky is blue/);
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+  const answer = f.state.res['c1-t1'];
+  assert.equal(answer?.ok, 1);
+  ui.show('#/subject');
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+  assert.equal(answer.n, 1, 'no answer after the game left');
 });
