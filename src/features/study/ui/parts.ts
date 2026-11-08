@@ -1,14 +1,11 @@
 /**
- * Small pieces every study screen draws: a pack text as safe markup, a code block, a pill, the chapter colour of an
+ * Small pieces every study screen draws: a pack text as an element, a code block, a pill, the chapter colour of an
  * element, the character's "Ask" button, and the AI and tutor services the screens call (implemented by tutor/).
  */
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { Chapter, Drill, Exercise, Section } from '../domain/pack.ts';
 import { h } from './dom.ts';
 import { codeBlockHtml, fmt, guessLang, type Text } from './text.ts';
 
-/** a pack's inline text as markup in a Lit template */
-export const F = (s: Text): unknown => unsafeHTML(fmt(s));
 /** a pack's inline text as an element */
 export const fEl = (s: Text): HTMLSpanElement => h('span', { html: fmt(s) });
 

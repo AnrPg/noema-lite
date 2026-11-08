@@ -8,7 +8,7 @@ import type { StudyApp } from '../app.ts';
 import { h } from '../dom.ts';
 import type { MenuEntry } from '../host.ts';
 import { knowledgeMap } from '../kmap.ts';
-import { F, setAccent } from '../parts.ts';
+import { setAccent } from '../parts.ts';
 import { fmt } from '../text.ts';
 import { typeLabel } from '../exercise/card.ts';
 import { flashDeck, drillList } from './cards.ts';
@@ -572,5 +572,3 @@ function practiceSetup(app: StudyApp, body: HTMLElement, c: Chapter): void {
   );
   upd();
 }
-
-export { F };
