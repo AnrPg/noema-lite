@@ -419,7 +419,7 @@
       one you are "in" and without the start-of-day things start() already did. */
   let engineBoot = null, engineScript = null;   // engineScript: engine.js being loaded or loaded (once per page)
   async function openEngine(acc, subs, meta, { background = false } = {}) {
-    await NoemaCore.contracts.ready();   // the engine checks content (activities, the author): its checks come with the contracts' validators
+    await Promise.all([NoemaCore.contracts.ready(), NoemaCore.studyUi.ready()]);   // the engine checks content (activities, the author): its checks come with the contracts' validators; the study pages are build/study.js
     KV.subj = meta.id;
     if (!background) Noema.setCurrent(acc.id, meta.id);
     if (N.migrate.quest(acc.id, meta.id)) await NoemaCore.learning.migrate();   // Databricks Quest's progress, once its pack is opened (src/composition/shell/migrate.ts)

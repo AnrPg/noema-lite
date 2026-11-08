@@ -76,6 +76,7 @@ export const ENTRIES = [
   { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
   { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
+  { name: 'study', in: 'src/composition/study-pages.ts', kind: 'lazy', out: 'study.js', budgetKB: 320 },   // the study area's pages (src/features/study/ui): loaded before the first subject opens (src/composition/study-ui.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },

@@ -22,7 +22,8 @@ import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-report
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
 import { inlineCompute } from '../adapters/local/jobs.ts';
 import { STUDY_BRIDGE, STUDY_REGISTRATIONS } from './study.ts';
-import { STUDY_UI_BRIDGE } from './study-ui.ts';
+import { STUDY_PIECE, STUDY_UI_BRIDGE } from './study-ui.ts';
+import type { StudyPiece } from './study-pages.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
@@ -239,6 +240,8 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   // piece, loaded the first time either is asked to be ready (NoemaCore.contracts.ready() brings both). The learning log's
   // event contract is in build/app.js (src/contracts/page.ts): the log opens without the piece.
   c.register(CHECKS_PIECE, () => checksLoader(page, script));
+  // the study area's pages (src/features/study/ui): build/study.js, loaded before the first subject opens
+  c.register(STUDY_PIECE, () => pieceLoader<StudyPiece>(page, script, 'study', '__noemaStudyPiece'));
   c.register(CONTRACTS, r => {
     const load = r.get(CHECKS_PIECE);
     return lazyContracts(() =>
