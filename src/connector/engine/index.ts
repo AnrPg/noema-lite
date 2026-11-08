@@ -12,7 +12,8 @@ import type {
   NoemaSourcePlan,
 } from './api.ts';
 import { runLegacy, type LegacyScope, type LegacySource } from './legacy.ts';
-import { contentChecks, type EngineSource } from '../../features/content/application/index.ts';
+import { contentChecks, scopeCheckers, type EngineSource } from '../../features/content/application/index.ts';
+import { RUNTIME_CHECKS } from '../../runtimes/checks.ts';
 
 /** A module the files must have made (its type is the one api.ts declares for it). */
 function need(scope: LegacyScope, name: string): unknown {
@@ -28,7 +29,10 @@ export function engineFrom(sources: readonly LegacySource[], provide: LegacyScop
   let s: LegacyScope = {};
   const core = (provide.NoemaCore ?? {}) as { engines?: EngineSource };
   if (!core.engines) throw new Error("the connector's engine needs NoemaCore.engines (the engine library) from its composition root");
-  const content = contentChecks(core.engines, () => s);
+  const content = contentChecks(
+    core.engines,
+    scopeCheckers(() => s, RUNTIME_CHECKS),
+  );
   s = runLegacy([...sources], { ...provide, NoemaCore: Object.freeze({ ...core, content }) });
   return {
     content,
@@ -40,7 +44,7 @@ export function engineFrom(sources: readonly LegacySource[], provide: LegacyScop
     llm: need(s, 'NoemaLLM') as NoemaLLM,
     imgLib: need(s, 'NoemaImgLib') as NoemaImgLib,
     lang: need(s, 'NoemaLang') as NoemaLang,
-    // the catalogue of the engine library (src/engines/catalog.js), on the NoemaCore the composition root provides
+    // the catalogue of the engine library (src/engines/catalog.ts), on the NoemaCore the composition root provides
     engineCatalog: (s.NoemaCore as { engines?: { catalog?: NoemaEngineCatalog } } | undefined)?.engines?.catalog ?? null,
   };
 }

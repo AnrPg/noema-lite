@@ -1,4 +1,4 @@
-/* des@1 (src/engines/des/des.js, docs/library/des.md) against queueing theory and exact solutions:
+/* des@1 (src/engines/des/des.ts, docs/library/des.md) against queueing theory and exact solutions:
    1. the spec check: tests/fixtures/enginelib/des.json (good and bad specs) and the golden outputs of its former Python twin tools/lib_des.py (check_spec, exprs, keys);
    2. analytic values whose CI must hold the theory: M/M/1, M/M/c (Erlang C), M/D/1 and M/G/1 (Pollaczek–Khinchine), M/M/1/K,
       a Jackson network, non-preemptive and preemptive-resume priorities (Cobham 1954; Conway, Maxwell & Miller 1967), M/G/∞,

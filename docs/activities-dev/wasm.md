@@ -2,7 +2,7 @@
 
 A pack may carry a precompiled WebAssembly module: the simulation core of an activity written in C, Rust or AssemblyScript (a
 microcontroller emulator, a DSP kernel, a physics step function). The ADR's D12 (P6) names it; this page is its design as built.
-Code: `engine/src/44_activity_wasm.js` · checked by the content checks (`src/features/content`; the toolkit's `activity_lint.py` through `noema-tools.cjs`) · tests: `tests/activities_wasm.js` · fixtures: `tests/fixtures/wasm/`.
+Code: `src/runtimes/wasm-module/` (`check.ts`, `worker.ts`, `runtime.ts`: a typed runtime, docs/ARCHITECTURE.md §6.4) · checked by the content checks (`src/features/content`; the toolkit's `activity_lint.py` through `noema-tools.cjs`) · tests: `tests/activities_wasm.js` · fixtures: `tests/fixtures/wasm/`.
 
 ## Design
 
@@ -61,9 +61,9 @@ cannot hand it a module that imports something else; a signature mismatch the re
    bytes travel with each run (`prepare`), the worker keeps one instance per module. `create` on the page refuses (code `worker`):
    a module never runs on the page's own thread. **Budget here = the sim runtime's 5 s per run** (`RUN_TIMEOUT` of
    35_activity_sim.js): over it the worker is terminated, `runaway`, the core offers Restart.
-2. **The runtime `wasm-module@1`** (`ACT.registerRuntime`): an item with its own `spec` mounts as that spec with `engine: "wasm@1"`
+2. **The runtime `wasm-module@1`** (loaded by `ACT.runtime(id)` from `build/runtimes.js`; it brings the engine `wasm@1`, which the core registers): an item with its own `spec` mounts as that spec with `engine: "wasm@1"`
    and `model.module` = the item itself (one item instead of two). Without a spec: `spec` (the fallback).
-   **`window.NoemaWasm.load(item, {budgetMs, seed})`** → a handle for host code (a future emulator UI, the tests):
+   **`api.load(item, {budgetMs, seed})`** of the module (`NoemaCore.runtimes.load('wasm-module@1')`) → a handle for host code (a future emulator UI, the tests):
    `call(fn, inputs, nOut) → {out: Float64Array, log, ms, pages}`, `raw(fn, …i32) → {value}`, `restart()`, `close()`, `state()`.
    Each call has `budgetMs` (50–5000, default 1000; loading max(1 s, budget)): over it the worker is terminated, the call rejects
    with code `runaway`, later calls reject with `stopped`, `restart()` starts a fresh worker from the same checked bytes.
@@ -81,7 +81,7 @@ JS of the pack ever runs in the worker; if the app ever adds a CSP, it must keep
 ## Tools and tests
 
 * `python3 activity_lint.py <subject-dir>` (the toolkit) — the item and the module's report (imports, exports, memory, sha256) and
-  the errors, through `noema-tools.cjs` (the content checks call `NoemaWasm.checkItem` / `checkModel`).
+  the errors, through `noema-tools.cjs` (the content checks call `checkItem` / `checkModel` of `RUNTIME_CHECKS.wasm`).
 * `tests/fixtures/wasm/*.wat` + the committed `.wasm`: `osc` (a damped oscillator `step`, an endless `spin`, `grow`, `rnd`, a log in
   `init`), `imem` (imported memory without a maximum), `forbidden` (`env.fetch_url`), `badsig`, `bigmem` (max 65536 pages), `nomax`.
   No toolchain needed: `watasm.py` assembles the flat-syntax subset (`python3 tests/fixtures/wasm/watasm.py --all`); `wat2wasm`
@@ -92,12 +92,13 @@ JS of the pack ever runs in the worker; if the app ever adds a CSP, it must keep
 ## Wired in (what the integration added)
 
 * The content checks (`src/features/content/domain/activities/`): `wasm-module@1` in `RUNTIMES` (and to `CHECKS_RUNTIMES`, it exposes values
-  through its spec), `wasm@1` to `ENGINES`; call `check_item` / `NoemaWasm.checkItem` for the item and `check_model` /
+  through its spec), `wasm@1` to `ENGINES`; call `checkItem` (`RUNTIME_CHECKS.wasm`) for the item and `check_model` /
   `checkModel` for a wasm@1 spec; `requiredCaps` must add `engine:wasm@1` for a wasm-module@1 item with a spec, and accept the
   `wasm`, `sha256`, `bytes`, `abi`, `spec` keys of the item. `make_pack.py` / `unpack.py`: `activities/<id>/module.wasm` ↔ base64.
-* `tools/build.py skill`: ships `44_activity_wasm.js` in `activity_host/` (and in `noema-tools.cjs` for the checks); the harness loads
-  `44_activity_wasm.js` and give its stub `ACT` an `ITEMS` map (or call `NoemaWasm.register(item)`).
+* `tools/build.py skill`: the runtime is inside `activity_host/noema-core.js` (build/harness.js: `NoemaCore.runtimes`) and the checks
+  inside `noema-tools.cjs`; the harness gives its stub `ACT` an `ITEMS` map and calls `NoemaCore.attachRuntimes(ACT, host)`, which makes
+  every typed runtime that is on and registers it with its engines.
 * `docs/INTERACTIVE.md` §1 / §12.6: the runtime row and the engine; the ADR's "as built".
 * **UI strings: none new.** Failures reuse the core's codes (`spec` → "could not start", `unsupported`, `runaway` → "stopped
-  responding · Restart"); `NoemaWasm.load` rejects with codes only (`import`, `memory`, `spec`, `worker`, `runaway`, `stopped`, `abi`,
+  responding · Restart"); `load` rejects with codes only (`import`, `memory`, `spec`, `worker`, `runaway`, `stopped`, `abi`,
   `step`, `trap`) — host code that shows them adds its own `engine.act.wasm.*` keys in every UI language.

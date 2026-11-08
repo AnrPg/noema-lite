@@ -1,4 +1,4 @@
-# `ode@1` — dynamical systems: ODEs, delay equations and maps (`src/engines/ode/ode.js`, `NoemaLibODE`)
+# `ode@1` — dynamical systems: ODEs, delay equations and maps (`src/engines/ode/ode.ts`, `NoemaLibODE`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). It takes any system x′ = f(t, x) of up to 12 states written in
 NoemaExpr, a delay equation with constant lags, or a map x₍ₙ₊₁₎ = g(n, xₙ). It also has 32 ready **templates**: epidemics,

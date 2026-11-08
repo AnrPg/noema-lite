@@ -1,4 +1,4 @@
-# `NoemaSpaceKit` — space for the engine library (`src/engines/kernel/space.js`)
+# `NoemaSpaceKit` — space for the engine library (`src/engines/kernel/space.ts`)
 
 A kit, not an engine: grids with boundary conditions, finite-difference operators and their stability analysis, neighbourhoods,
 graphs used as space, continuous-space neighbour search, toroidal distances, random walks, spatial statistics and two scene

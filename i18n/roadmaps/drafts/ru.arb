@@ -169,5 +169,16 @@
   "roadmap.levels.kind.year": "{n}-й курс",
   "roadmap.levels.difficulty.introductory": "Начальный",
   "roadmap.levels.difficulty.intermediate": "Средний",
-  "roadmap.levels.difficulty.advanced": "Продвинутый"
+  "roadmap.levels.difficulty.advanced": "Продвинутый",
+  "roadmap.levels.title": "Уровни",
+  "roadmap.levels.ladder": "Уровни этой дорожной карты",
+  "roadmap.levels.progress": "Освоенные шаги уровня {level}",
+  "roadmap.levels.moment.title": "Новый уровень",
+  "roadmap.levels.moment.next": "Дальше: {level}",
+  "roadmap.levels.moment.go": "Продолжить",
+  "roadmap.levels.test.loading": "Собираем вопросы…",
+  "roadmap.levels.proposal.gone": "По этому предложению уже принято решение.",
+  "roadmap.quiz.answers": "Ответы",
+  "roadmap.quiz.right": "Верно.",
+  "roadmap.quiz.wrong": "Неверно."
 }

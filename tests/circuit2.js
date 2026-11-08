@@ -1,4 +1,4 @@
-/* The circuit engine's second-generation physics (src/engines/circuit/circuit.js, docs/INTERACTIVE_CIRCUIT.md §9), against the physics.
+/* The circuit engine's second-generation physics (src/engines/circuit/circuit.ts, docs/INTERACTIVE_CIRCUIT.md §9), against the physics.
    1. the same DC point as the first model; 2. AC analysis (RC, RLC, an op-amp's closed-loop bandwidth, a quarter-wave line);
    3. op-amp slew rate, output resistance with a capacitive load; 4. transmission lines (delay, reflections); 5. floating nodes (pickup);
    6. meter modes (true RMS, AC, average-responding, true averages of PWM), the meter's input resistance; 7. MOSFET gate charge,

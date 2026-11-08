@@ -37,7 +37,7 @@ export interface Curriculum {
   stepsOf?(acc: string | null, subj: string): unknown[];
 }
 export interface CurMap {
-  create(acc: string | null, o: { onStudy: (sid: string) => void }): void;
+  create(acc: string | null): void;
 }
 /** the open subject's engine (engine/src/40_views.js attachEngine) */
 export interface EngineApi {

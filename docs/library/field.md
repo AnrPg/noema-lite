@@ -1,4 +1,4 @@
-# `field@1` — fields on grids and cellular automata (`src/engines/field/field.js`, `NoemaLibField`)
+# `field@1` — fields on grids and cellular automata (`src/engines/field/field.ts`, `NoemaLibField`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`): how a quantity **spreads** (heat, diffusion), **travels**
 (advection), **waves**, **reacts** (reaction–diffusion, Turing patterns, travelling fronts) or **settles** (Poisson, Laplace) on a
