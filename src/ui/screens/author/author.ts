@@ -23,8 +23,9 @@ import { authorStyles } from './styles.ts';
 
 /** the activity's preview: the app's real runtime, drawn into a box */
 export interface AuthorPreview {
-  /** whether the runtime is there yet (the app may still be starting the subject's engine): asked again until it is */
-  ready?(): boolean;
+  /** resolves once the runtime is on the page (the app may still be starting the subject's engine): true, or false when it
+      cannot come; the preview waits for it */
+  ready?(): Promise<boolean>;
   show(
     box: HTMLElement,
     item: Record<string, unknown>,
@@ -274,6 +275,33 @@ export class NoemaAuthor extends NoemaElement {
       this.#paintPreview();
     });
   }
+  /** the runtime's readiness: unknown, asked (a Promise pending), there, or not coming */
+  #runtime: boolean | 'asked' | null = null;
+  #waitRuntime(p: AuthorPreview): void {
+    if (!p.ready) {
+      this.#runtime = true;
+      this.#paintPreview();
+      return;
+    }
+    if (this.#runtime === false) {
+      this.#prevNote = this.#TT('previewOff');
+      this.requestUpdate();
+      return;
+    }
+    if (this.#runtime === 'asked') return;
+    this.#runtime = 'asked';
+    p.ready().then(
+      ok => {
+        this.#runtime = ok;
+        if (this.preview === p && this.isConnected) this.#paintPreview();
+      },
+      (e: unknown) => {
+        console.warn('[noema] author preview runtime', e); // i18n-ignore (a console line)
+        this.#runtime = false;
+        if (this.preview === p && this.isConnected) this.#paintPreview();
+      },
+    );
+  }
   #paintPreview(): void {
     const box = this.#pbox.value,
       d = this.#d();
@@ -282,10 +310,8 @@ export class NoemaAuthor extends NoemaElement {
       this.requestUpdate();
       return;
     }
-    if (this.preview.ready && !this.preview.ready()) {
-      this.#prevNote = this.#TT('previewOff');
-      this.requestUpdate();
-      if (this.isConnected) this.#schedulePreview(500);
+    if (this.#runtime !== true) {
+      this.#waitRuntime(this.preview);
       return;
     }
     const stale = this.#probs.some(p => p.tab === 'spec' || (p.tab === 'strings' && p.key));

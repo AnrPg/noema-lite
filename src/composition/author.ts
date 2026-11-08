@@ -25,7 +25,7 @@ declare const S: { act?: Record<string, unknown> } | undefined;
 
 interface Page {
   NoemaCore?: { engines?: unknown; content?: unknown; learning?: { record(e: unknown): unknown } };
-  Noema?: { subject?: { id?: string } | null };
+  Noema?: { subject?: { id?: string } | null; ensureEngine?(): Promise<boolean> };
   NoemaActivitySchemas?: Record<string, unknown>;
   NoemaActivityRefs?: Record<string, unknown>;
 }
@@ -33,7 +33,7 @@ const W = (): Page => globalThis as unknown as Page;
 const act = (): ActRuntime | null => (typeof ACT !== 'undefined' && typeof ACT.mount === 'function' ? ACT : null);
 
 /** the preview: the app's real sim-spec@1 runtime (ACT.mount), always from the spec's defaults (never a saved state); the
-    runtime is looked up at every show, since the frame may still be starting the subject's engine when the page opens */
+    runtime is looked up at every show; ready() waits for the subject's engine (the frame may open the page before it) */
 function actPreview(): AuthorPreview {
   const ID = 'author-preview',
     key = 'blk:author:' + ID;
@@ -51,7 +51,12 @@ function actPreview(): AuthorPreview {
     }
   };
   return {
-    ready: () => !!act(),
+    // the classic screens run inside the engine (ACT is there); the frame may open #/author before the subject's engine has
+    // started: Noema.ensureEngine resolves once it is on the page (it starts one in the background if none is open)
+    async ready() {
+      if (!act()) await W().Noema?.ensureEngine?.();
+      return !!act();
+    },
     show(box, it, spec, strings, locale) {
       const A = act();
       if (!A) throw new Error('the activity runtime is not on the page');

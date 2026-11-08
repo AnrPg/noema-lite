@@ -74,9 +74,26 @@ function loadAuthor(): Promise<AuthorPiece> {
   }));
 }
 const onAuthor = (): boolean => /^#\/author(?:[/?]|$)/.test(location.hash);
+/** The page's one author while the learner stays on #/author. Both routers draw their page again without leaving it (the
+    classic one on a change of the colour scheme or another tab's answer, the frame when a subject attaches or the theme
+    changes): the same element, and the work in it, is put back. Leaving the route (hashchange) lets it go. */
+let current: HTMLElement | null = null;
+let watching = false;
+function watchLeave(): void {
+  if (watching) return;
+  watching = true;
+  window.addEventListener('hashchange', () => {
+    if (!onAuthor()) current = null;
+  });
+}
 
 /** Draws the author into `box` once it has loaded (the learner may have gone elsewhere meanwhile); `lead` stays above it. */
 async function open(box: HTMLElement, lead: readonly Node[]): Promise<void> {
+  watchLeave();
+  if (current) {
+    box.replaceChildren(...lead, current);
+    return;
+  }
   box.replaceChildren(...lead, h('p', { class: 'muted' }, tE('engine.author.loading')));
   let piece: AuthorPiece;
   try {
@@ -87,7 +104,8 @@ async function open(box: HTMLElement, lead: readonly Node[]): Promise<void> {
     return;
   }
   if (!onAuthor() || !box.isConnected) return;
-  box.replaceChildren(...lead, piece.open());
+  current ??= piece.open(); // (a second draw that waited for the same load puts back the first one's page)
+  box.replaceChildren(...lead, current);
 }
 
 /** #/author in the frame, and Noema.app.author for the classic router */
@@ -97,10 +115,7 @@ export function registerAuthorPage(shell: AuthorPageHost, noema: { app?: Record<
     const c: Chrome = shell.engine
       ? shell.subjectChrome({ sub: true, crumbs: [[title]], back: '#/subject' })
       : { tab: 'learn', crumbs: [[title]], back: '#/' };
-    const kept = document.querySelector('main noema-author'); // the same page drawn again (a subject attached, a theme): the work stays
-    const v = shell.page({ ...c, cls: 'ns-author' });
-    if (kept) v.append(kept);
-    else void open(v, []);
+    void open(shell.page({ ...c, cls: 'ns-author' }), []);
   });
   (noema.app ??= {})['author'] = (box: HTMLElement, ...lead: Node[]): Promise<void> => open(box, lead); // the classic router (engine/src/40_views.js, shell: false)
 }
