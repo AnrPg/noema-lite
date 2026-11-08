@@ -54,7 +54,9 @@ export function clockContract(name: string, make: () => ClockHarness): void {
       const i = h.clock.setInterval(() => {
         n++;
       }, 10);
-      await h.pass(55);
+      // time passes in steps of the interval: a real clock's interval fires once after a stall of the event loop (a busy
+      // machine), however long, so one long wait could see a single tick; the steps give every tick its turn
+      for (let waited = 0; waited < 55 || (n < 3 && waited < 5000); waited += 10) await h.pass(10);
       h.clock.clearInterval(i);
       const seen = n;
       await h.pass(40);

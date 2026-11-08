@@ -9,6 +9,8 @@ const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
+/** the first truthy answer of f within ms (a page that is still loading or saving is waited for, not read too early) */
+const until = async (f, ms = 10000) => { const end = Date.now() + ms; for (;;) { const v = await f().catch(() => null); if (v || Date.now() > end) return v; await wait(100); } };
 function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/fonts\.g|ERR_FILE_NOT_FOUND|net::ERR|404|Failed to load resource|Not allowed to load local resource: file:/.test(m.text())) bag.push(m.text()); }); }
 
 async function mockGemini(ctx) {
@@ -138,7 +140,7 @@ async function mockGemini(ctx) {
   ok(await page.evaluate(() => !S.settings.lang) && enTiles.includes('Lightning round'), 'back to automatic: the browser’s language (English): ' + enTiles.join(' · '));
   // switch subject → math subject
   await page.evaluate(() => Noema.switchTo('anr', 'demo-physics', '#/subject')); await wait(1800);
-  ok(await page.evaluate(() => SUBJ.id === 'demo-physics' && S.xp === 0), 'switched to Demo Physics with separate progress');
+  ok(await until(() => page.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.id === 'demo-physics' && S.xp === 0)), 'switched to Demo Physics with separate progress');
   ok(await page.$$eval('.katex', k => k.length) > 0, 'math rendered with KaTeX on home');
   await page.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(700);
   ok(await page.$$eval('.katex-display', k => k.length) > 0, 'display math rendered in a section');
@@ -200,6 +202,7 @@ async function mockGemini(ctx) {
   await pA.fill('input[placeholder="Display name"]', 'ANR Cloud'); await pA.fill('input[type=email]', 'anr@example.com'); await pA.fill('input[type=password]', 'secret123');
   await pA.screenshot({ path: SHOTS + '/b1_signup.png' });
   await pA.click('button:has-text("Create account")'); await wait(900);
+  await until(() => pA.$$eval('.noema-chip', c => c.length >= 2)); await wait(300);   // the account's subjects are listed (then nothing more comes)
   ok(await pA.$$eval('.noema-chip', c => c.length) === 2, 'cloud account sees shared subjects only (no private ones)');
   await pA.click('.noema-chip:has-text("Databricks")'); await wait(1600);
   await pA.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(500);

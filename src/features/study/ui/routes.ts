@@ -4,20 +4,16 @@
  */
 import type { RouteMatch } from '../../../ui/router/routes.ts';
 import type { StudyApp } from './app.ts';
+import { bossView } from './screens/boss.ts';
 import { cardsView, drillView, drillsView } from './screens/cards.ts';
 import { chapterView } from './screens/chapter.ts';
 import { homeView } from './screens/home.ts';
-import {
-  bossView,
-  lightningView,
-  lockedView,
-  mistakesView,
-  mixedView,
-  oneExercise,
-  playLightning,
-  runView,
-  searchRunView,
-} from './screens/practice.ts';
+import { lightningView, playLightning } from './screens/lightning.ts';
+import { oneExercise } from './screens/practice.ts';
+import { mistakesView } from './screens/mistakes.ts';
+import { lockedView, mixedView } from './screens/mixed.ts';
+import { runView } from './screens/round.ts';
+import { searchRunView } from './screens/search-round.ts';
 import { sectionView } from './screens/section.ts';
 import { whatsNewView } from './sources.ts';
 import { STUDY_ROUTES, type StudyRoutes } from './route-table.ts';

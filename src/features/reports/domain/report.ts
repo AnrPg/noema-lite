@@ -63,7 +63,7 @@ const CODE: Readonly<Record<string, string>> = {
   ch: 'src/features/study/ui/screens/chapter.ts',
   s: 'src/features/study/ui/screens/section.ts',
   ex: 'src/features/study/ui/exercise/card.ts',
-  run: 'src/features/study/ui/screens/practice.ts',
+  run: 'src/features/study/ui/screens/round.ts',
   practice: 'src/features/study/ui/screens/chapter.ts',
   cards: 'src/features/study/ui/screens/cards.ts',
   drill: 'src/features/study/ui/screens/cards.ts',
