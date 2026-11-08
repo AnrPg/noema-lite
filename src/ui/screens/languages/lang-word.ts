@@ -12,7 +12,7 @@
  * .lx-help, .lx-run, .lx-rw, .lx-tok, .lx-newword). Until it is on the page it holds the plain text, so a reader of the
  * element's text gets the word at once.
  */
-import { html, nothing, type TemplateResult } from 'lit';
+import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { NoemaScreen } from '../screen.ts';
 import type { WordPort, WordToken, WordView } from './course-port.ts';
 
@@ -59,10 +59,15 @@ export class NoemaLangWord extends NoemaScreen {
     this.plain = false;
   }
 
-  /** light DOM, emptied of the plain text it held before it was drawn */
+  /** light DOM */
   protected override createRenderRoot(): HTMLElement {
-    this.replaceChildren();
     return this;
+  }
+
+  /** the plain text it holds until it is drawn stays until then (the course reads a word's text right after it is placed) */
+  protected override update(changed: PropertyValues): void {
+    if (!this.hasUpdated) this.replaceChildren();
+    super.update(changed);
   }
 
   override connectedCallback(): void {
