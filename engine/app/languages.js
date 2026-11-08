@@ -162,7 +162,7 @@
       const hs = location.hash || '#/', inCourse = /^#\/lang\/[^/]+/.test(hs);
       if (!inCourse) { document.body.classList.remove('lx-frame'); window.NoemaLangUI?.prod?.closeLangTutor?.(); document.querySelector('.lx-pop')?.remove(); if (window.NoemaLangUI?.FR?.on) document.title = CFG.appName || 'noema-lite'; }
       const k = hs.replace(/^#\/?/, '').split('/')[0];
-      if (NoemaShell.ENGINE_ROUTES?.has(k) && NoemaShell.engine && Noema.subject?.id && Noema.subject.kind !== 'language' && KV.acc) Noema.setCurrent(KV.acc, Noema.subject.id);
+      if (NoemaShell.isSubjectPage?.(k) && NoemaShell.engine && Noema.subject?.id && Noema.subject.kind !== 'language' && KV.acc) Noema.setCurrent(KV.acc, Noema.subject.id);
     });
   }
   /** 📥 Import: a package (<id>.noema.zip = pack + its source files) or a plain pack (.json). */

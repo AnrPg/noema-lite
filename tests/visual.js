@@ -17,7 +17,7 @@ async function open(browser, viewport, opts = {}) {
 }
 /** Render one exercise card alone in <main>; returns a locator. */
 async function card(p, id) {
-  await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); window.scrollTo(0, 0); }, id);
+  await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); window.scrollTo(0, 0); }, id);
   await wait(250); return p.locator('#T');
 }
 /** Page coordinates of an image point (image units). */
@@ -205,7 +205,7 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   await p.evaluate(() => { location.hash = '#/ch/ch01/filters'; }); await wait(500);
   ok(/Drag the labels/.test(await p.locator('main').innerText()), 'practice filters show the visual types');
   // tutor context
-  ok(await p.evaluate(() => /Labeled parts: .*Boiler/.test(exerciseAsText(EX['ch01-e104'])) && /Correct order: Fuel → Boiler/.test(exerciseAsText(EX['ch01-e103']))), 'the tutor gets a text version of the picture and the answers');
+  ok(await p.evaluate(() => /Labeled parts: .*Boiler/.test(NoemaCore.studyUi.current().exerciseText(EX['ch01-e104'])) && /Correct order: Fuel → Boiler/.test(NoemaCore.studyUi.current().exerciseText(EX['ch01-e103']))), 'the tutor gets a text version of the picture and the answers');
   ok(!E.length, 'desktop: no page errors ' + JSON.stringify(E.slice(0, 3)));
 
   /* ======================= phone, touch ======================= */

@@ -35,7 +35,7 @@ async function signUp(browser, email, name, { phone = false } = {}) {
 const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-share').forEach(x => x.remove()));
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false, storageChunkBytes: 200000 };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false, storageChunkBytes: 200000 };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg, maxObject: 300000 });
   const S = srv.state, stepOf = (cid, nid) => S.steps.find(r => r.curriculum === cid && r.node_id === nid);
   // the connector exactly as tools/build.py bundles it (tests/connector_fn.js), pointed at the emulator
@@ -105,7 +105,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   await B.p.keyboard.press('Escape').catch(() => { }); await closeAll(B.p);
   await B.p.evaluate(cid => Noema.curriculumMap(cid), cid); await wait(800);
   ok(/Shared by Anna/.test(await deepText(B.p, '.cm-sharebar')) && /your progress is your own/.test(await deepText(B.p, '.cm-sharebar')), 'the map: “👥 Shared by Anna · … · your progress is your own”');
-  ok(await B.p.locator('.cm-node[data-id="atoms"] .cm-by').count() === 1 && /prepared by Anna/.test(await B.p.locator('.cm-node[data-id="atoms"]').getAttribute('aria-label')), '“Atoms”: ⚡👤 prepared by Anna');
+  ok(await B.p.locator('.cm-node[data-id="atoms"] .cm-pip[data-k="others"]').count() === 1 && /prepared by Anna/.test(await B.p.locator('.cm-node[data-id="atoms"]').getAttribute('aria-label')), '“Atoms”: ⚡👤 prepared by Anna');
   ok(await B.p.locator('button:has-text("➕ Step")').count() === 0 && await B.p.locator('.cm-sharetool').count() === 0, 'a member does not change the map (no ➕ Step, no sharing)');
   await B.p.screenshot({ path: SHOTS + '/cs3_member_map.png' });
   await B.p.click('.cm-node[data-id="atoms"]'); await wait(300);
@@ -116,7 +116,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok(bp.shared && bp.by === 'Anna' && bp.author === anna && bp.version === 'anna-atoms-v1', '…with who prepared it and its version');
   await B.p.click('.cm-node[data-id="atoms"]'); await wait(300);
   await B.p.click('.cm-panel noema-button:has-text("Study this step")');
-  ok(await until(() => B.p.evaluate(() => !!document.querySelector('.nodebanner')), 8000), '…and it opens as his subject, with the curriculum banner');
+  ok(await until(() => B.p.evaluate(() => !!document.querySelector('.subjhead.station .subjkicker')), 8000), '…and it opens as his subject, with the curriculum banner');
   ok(!!S.kv[bob]['a:packmeta:' + atomsId] && !!S.files[`${bob}/packs/${atomsId}.json`], 'it is his own copy now (his cloud), under the same subject id as Anna’s');
   await B.p.evaluate(({ cid }) => NoemaCurriculum.setMastered(Noema.account.id, NoemaCurriculum.get(Noema.account.id, cid), 'atoms', 'test', { score: 0.9 }), { cid });
   await wait(4000);

@@ -25,7 +25,7 @@ const FX = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(pat
 const JSZip = require(path.join(ROOT, 'engine/vendor/viewer/jszip.min.js'));
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   // the connector exactly as tools/build.py bundles it (tests/connector_fn.js), pointed at the emulator
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
@@ -380,7 +380,9 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   const sv = await p.evaluate(() => { const d = Noema.claudeSetupView(Noema.account.id, { open: 'C' }); document.body.append(d); const c = d.querySelector('.cg-way-c'); const t = { open: c.open, text: c.innerText, order: [...d.querySelectorAll('.cg-way > summary b')].map(b => b.textContent.slice(0, 2)) }; d.remove(); return t; });
   ok(sv.open && /recommended for Roadmaps/.test(sv.text) && /usually the cheapest/.test(sv.text) && /Add custom connector/.test(sv.text) && /Copy the message/.test(sv.text) && sv.order.length === 3, '❓ Set up Claude has a 3rd way, C — ⭐ recommended for curricula (usually the cheapest), with its own steps');
   const ph = await ctx.newPage(); await ph.setViewportSize({ width: 390, height: 844 }); await ph.goto(BASE + '/'); await wait(1200); if (await ph.isVisible('.noema-inuse')) { await ph.click('.noema-inuse .btn'); await wait(1000); }   // the first window is still in use: continue here
-  await ph.evaluate(id => Noema.curriculumMap(id, null, { app: true }), cid3).catch(() => { }); await wait(800);
+  await ph.evaluate(id => Noema.curriculumMap(id, null, { app: true }), cid3).catch(() => { });
+  // measured once the panel is drawn and its opening animation (a pop that overshoots to 108 %) is over: a busy machine draws it late
+  await until(() => ph.$('noema-roadmap-inbox'), 8000); await ph.evaluate(() => Promise.all(document.getAnimations().filter(a => a.effect?.getComputedTiming().endTime !== Infinity).map(a => a.finished.catch(() => null))));
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('noema-roadmap-inbox'), ...(document.querySelector('noema-roadmap-map')?.shadowRoot?.querySelectorAll('.cm-appbar') || [])].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), 'phone: the Claude-app panel fits');
   await ph.screenshot({ path: SHOTS + '/ca2_phone.png' });
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));

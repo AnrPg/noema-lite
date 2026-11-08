@@ -59,14 +59,14 @@ export const componentsOf = (key: string): readonly string[] => COMPONENT[key.sp
 
 /** The code that draws each screen (by the first part of its address). */
 const CODE: Readonly<Record<string, string>> = {
-  subject: 'engine/src/40_views.js',
-  ch: 'engine/src/40_views.js',
-  s: 'engine/src/40_views.js',
-  ex: 'engine/src/30_exercises.js',
-  run: 'engine/src/40_views.js',
-  practice: 'engine/src/40_views.js',
-  cards: 'engine/src/40_views.js',
-  drill: 'engine/src/40_views.js',
+  subject: 'src/features/study/ui/screens/home.ts',
+  ch: 'src/features/study/ui/screens/chapter.ts',
+  s: 'src/features/study/ui/screens/section.ts',
+  ex: 'src/features/study/ui/exercise/card.ts',
+  run: 'src/features/study/ui/screens/practice.ts',
+  practice: 'src/features/study/ui/screens/chapter.ts',
+  cards: 'src/features/study/ui/screens/cards.ts',
+  drill: 'src/features/study/ui/screens/cards.ts',
   lang: 'engine/lang/*.js (→ engine/langui.js)',
   vault: 'src/features/vault/ui/page.ts',
   people: 'src/features/social/ui/home.ts',

@@ -182,30 +182,6 @@
   "@view.latest": {
     "description": "Page heading (with emoji) of the “What’s new” page when nothing is new any more: the most recent additions to the subject."
   },
-  "acc.profile": "👤 Profile",
-  "@acc.profile": {
-    "description": "Legacy account-menu entry (with emoji) for the profile — currently not used by the app (the Me page has replaced the menu)."
-  },
-  "acc.settings": "⚙️ Settings",
-  "@acc.settings": {
-    "description": "Legacy account-menu entry (with emoji) for settings — currently not used by the app."
-  },
-  "acc.subjects": "📚 Subjects",
-  "@acc.subjects": {
-    "description": "Legacy account-menu entry (with emoji) for the subject list — currently not used by the app."
-  },
-  "acc.backup": "💾 Backup & restore",
-  "@acc.backup": {
-    "description": "Legacy account-menu entry (with emoji) for backup and restore — currently not used by the app."
-  },
-  "acc.cloud": "☁️ Cloud",
-  "@acc.cloud": {
-    "description": "Legacy account-menu entry (with emoji) for the cloud account — currently not used by the app."
-  },
-  "acc.help": "❓ Help",
-  "@acc.help": {
-    "description": "Legacy account-menu entry (with emoji) for help — currently not used by the app."
-  },
   "set.uiLang": "Language of the menus",
   "@set.uiLang": {
     "description": "Settings (classic account view): label and accessible name of the select that picks the language of the app’s interface (menus, buttons). Not the language of the course content."

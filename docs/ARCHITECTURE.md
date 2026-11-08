@@ -217,8 +217,8 @@ answers `auth.not_signed_in`.
 
 - **Grading** (`src/features/study/domain/grading`): every exercise type is graded by one pure function from the
   exercise and the learner's answer in the exercise's own indices (the answer shapes are in the header of `grade.ts`).
-  The old renderers (`engine/src/30_exercises.js`, `31_types.js`, `32_activities.js`, `35_visual.js`) only collect the
-  answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
+  The answer areas (`src/features/study/ui/exercise/*.ts`; the `sim` type's in `engine/src/32_activities.js`) only
+  collect the answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
   `grading.test.ts` (every exercise of the library and the fixtures) prove the results are the old ones.
 - **FSRS-6** (`fsrs.ts`, `fsrs-optimizer.ts`): the scheduler of py-fsrs 6 (its reference values in the tests) and an
   optimiser that fits the 21 parameters to the learner's reviews (Adam on the log loss, in the Worker:
@@ -319,7 +319,7 @@ bridge's UI half and starts the app:
 | `window.Noema` | `src/composition/shell/core.ts` | the profiles, the timed key/value store, the stats, the Gemini key (this device only), the app's IndexedDB, backups and restore points, the auto-backup, the 🔔 news of this device, the start's overlays |
 | `window.NoemaThemes` | `src/composition/shell/themes.ts` over `src/features/shell/domain/characters.ts` | the characters on the tokens: the 5-minute try, free changes for 15 days, then one every 5 days |
 | `window.NoemaShell` | `src/composition/shell/host.ts`, `src/ui/screens/shell/` | the frame (`noema-shell-frame`), the router over every hash route (`routes.ts`), Today, Progress, Settings, the character gallery, the Me menu, the first-time questions, the profile picker; the toolkit the areas draw their pages with |
-| the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage`, their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
+| the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js`, `study.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage` (the study area its pages of the open subject with `{ subject: true }`: the frame waits for the subject's engine; its host's frame part is `NoemaShell.studyFrame`), their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
 | the activity author | `src/composition/shell/author-page.ts`, the piece `build/author.js` (`src/features/author`, `src/ui/screens/author`) | `#/author` (`NoemaShell.registerPage`; `Noema.app.author` for the classic router): `noema-schema-form`, a form from a JSON Schema, and `noema-author` (docs/activities-dev/authoring_ui.md) |
 
 `NoemaCore.notify` draws on the kit's toaster once the root has started (`NoemaCore.toasts.use`); what does not fit goes to
@@ -419,6 +419,58 @@ the screen's services itself (`NoemaScreen.openDialog`).
 
 Tests: `src/ui/test/languages.test.ts` (happy-dom), `src/features/languages/application/courses.test.ts`, and in a browser
 `tests/lang_home.js`, `tests/lang_select.js`, `tests/lang_lanes.js`, `tests/lang_lessons.js`.
+
+### 6.6 The study area's pages (phase 3, area 2)
+
+The subject's pages are `src/features/study/ui` (element `feature-ui` in `eslint.config.js`: the kit, the ports, the
+feature's domain, never an adapter): home (`#/subject`), chapter (`#/ch/<id>[/<tab>[/<focus>]]`), section (`#/s/<id>`),
+practice and its round (`#/practice/<id>`, `#/run`, `#/srun`), boss, lightning, cards and drills, the Mistakes gym,
+what's new, one exercise (`#/ex/<id>`), the sources deck and the file viewer's entry points, the knowledge map and the
+reported exercises. The route table is `ui/routes.ts` (`STUDY_ROUTES`, typed with `defineRoutes`), one file for the lead
+to merge into the app's.
+
+- **One adapter.** Every screen reaches the world through `StudyHost` (`ui/host.ts`): the progress record, the frame,
+  the character's reactions, the Roadmap, activities, 文A, the search's rounds, the source files, the tutor and the AI.
+  Today the older page implements it (`engine/src/40_views.js` `studyHost()`) and mounts the area with
+  `NoemaCore.studyUi.mount(host)` (`src/composition/study-ui.ts`); the shell's root will hand in its own.
+- **A round is a statechart.** `domain/session.ts` (`roundMachine`: asking → answered → summary, the boss's lives, a
+  sibling exercise after a mistake) on `kernel/statechart.ts`; the run page only sends `ANSWER` and `NEXT`.
+- **Only my level.** A chip in the round's filters and the mixed round (`app.onlyMyLevel`, saved in
+  `settings.onlyMyLevel`): offered when the subject has a level ladder (the Roadmap's or the pack's) with exercises at
+  several levels; it keeps the exercises at the level the read models say the learner reached.
+- **DOM, not Lit.** The pages are typed DOM (`ui/dom.ts` `h()`) drawing the classes the existing CSS and suites know;
+  the bundle stays free of Lit (it is `build/ui.js`'s). With the new frame (`frame.framed`) the frame draws the crumbs
+  and ⋮; without it (an old index.html) each page keeps its back button and tiles.
+- **Tests.** `src/composition/study-ui.test.ts` (the pages over a fake host in happy-dom), the domain's tests, and the
+  browser suites (`e2e`, `socratic`, `visual`, `visual_pack`, `thinking_types`, `sources`, `bridge`, `shell`), which look
+  in through `NoemaCore.studyUi.current()` (`app`, `exerciseCard`, `inspect`).
+
+### 6.7 The tutor, its conversations and its threads (phase 3)
+
+The mascot's help in lessons and exercises is `src/features/tutor` (formerly `engine/src/20_ai.js`, `60_convos.js`,
+`65_threads.js`):
+
+- **Domain** (pure): `domain/prompts.ts` (the modes, the task of each button, the course context, the reply language,
+  the one-shot jobs' prompts and schemas), `domain/threads.ts` (Socratic elicitation threads: budgets, the hidden
+  `<noema-state>` control line, closure), `domain/conversation.ts` (the in-memory shape ↔ the canonical
+  `noema.conversation/v1` record, titles, the Markdown export, origins, other apps' modes).
+- **Use cases**: `application/tutor.ts` `TutorSession` (one per open subject: the drawer's state, a turn streamed over
+  the AI port, saving, history, resume, rename, delete, export) and `application/jobs.ts` `TutorJobs` (grading, a new
+  question, a drill; each saved as a conversation too). Their ports: `AI` (`ports/ai.ts`) and `ConversationStore`
+  (`ports/conversations.ts`).
+- **Adapters**: the Gemini key (`adapters/gemini`, with the model list and the 404 re-detect in the composition), a
+  Claude key on this device (`adapters/claude`), else the copy fallback (`adapters/local/copy-prompt.ts`: nothing is
+  sent; the drawer offers the whole prompt to copy). The store is `adapters/browser/conversations.ts` over
+  `engine/convos.js` (IndexedDB, the backup folder, cloud sync and the search keep reading it; the record shape did not
+  change, so nothing is migrated).
+- **Screens** (Lit, light DOM, the classes the CSS and suites know): `ui/panel.ts` (the drawer, its thread tracker and
+  history), `ui/conversations.ts` (Me › Conversations, the frame's window), `ui/explain.ts` (💡).
+- **Composition**: the drawer is used only with a subject open, so it is part of the lazy study piece
+  (`build/study.js`, which carries its own copy of Lit for it; the study pages stay typed DOM):
+  `NoemaCore.studyUi.tutor(host)` (`src/composition/tutor.ts`), mounted by `engine/src/40_views.js` `tutorHost()`
+  before the study area, which gets its `TutorPort` and `AiPort` from it. Me › Conversations is in `build/ui.js`
+  (`src/composition/conversations-window.ts`: `NoemaShell.convos` / `goConvo`). `window.NoemaTutor` gives the mounted
+  tutor (`current()`: `session`, `ai`, `port`, …) and its markdown (`md`); the browser suites look in through it.
 
 ## 7. Patterns
 

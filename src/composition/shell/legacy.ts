@@ -43,7 +43,6 @@ export interface CurMap {
 export interface EngineApi {
   route(): void;
   openTutor?(): void;
-  focus?(): void;
   retheme?(): void;
   accView?(view: string, body: HTMLElement, close: () => void, o?: { only?: string }): void;
 }
@@ -126,6 +125,8 @@ export interface NoemaAreas {
   notes?: Notes;
   shareRow?(sh: unknown, o: { onAccepted: (s: { kind?: string; curriculum?: string; id?: string; title?: string }) => void }): HTMLElement;
   boot?: AreaBoot;
+  /** what the areas lend each other (engine/app/*.js); the study area's focus sprint (engine/app/study.js) */
+  app?: { study?: { toggleSprint(): void } };
 }
 /** the library's part of the start (engine/app/library.js, engine/app/languages.js, engine/app/roadmaps.js) */
 export interface AreaBoot {

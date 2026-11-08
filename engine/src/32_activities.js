@@ -217,7 +217,7 @@ const ACT = (() => {
     const fallback = (why) => {
       box.innerHTML = ''; box.classList.add('act-fallback'); box.style.height = '';
       const f = a?.fallback || {};
-      if (f.media && typeof MEDIA !== 'undefined' && MEDIA[f.media]) box.append(figureBlock({ t: 'figure', media: f.media, explore: false }));
+      if (f.media && MEDIA[f.media] && STUDY) box.append(STUDY.figure({ t: 'figure', media: f.media, explore: false }));   // the study area's figure (src/features/study/ui/exercise/visual.ts)
       if (f.text) box.append(h('p', { class: 'act-fbtext', html: fmt(f.text) }));
       if (why) note.textContent = why;
     };
@@ -370,13 +370,14 @@ const ACT = (() => {
   const knownType = t => !!(window.NoemaCore?.content?.TYPES?.has(t));
   /** A chapter's exercises without the ones this app cannot run (an unknown type from a newer app, a sim whose runtime is off here):
       they stay in the pack and come back once the app can show them. */
+  const runnable = e => knownType(e.type) && (e.type !== 'sim' || canRun(ITEMS[e.activity]));
   function keepRunnable(c) {
     const keep = [], hidden = [];
-    for (const e of c.exercises || []) ((knownType(e.type) && (e.type !== 'sim' || canRun(ITEMS[e.activity]))) ? keep : hidden).push(e);
+    for (const e of c.exercises || []) (runnable(e) ? keep : hidden).push(e);
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, runnable, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */
@@ -404,8 +405,9 @@ function interactiveBlock(b) {
 /** The text of an interactive block for the AI and for search: its fallback text (what it shows and teaches). */
 function interactiveAsText(b) { const a = ACT.ITEMS[b.activity]; return `[Interactive activity ${b.activity}] ${a?.fallback?.text || ''}${b.caption ? '\nCaption: ' + b.caption : ''}`; }   // i18n-ignore (AI context)
 
-/** exercise type sim: the activity + a hint ladder; Check grades with the exercise's grader (reported: the activity's own result). */
-R.sim = (ex, api) => {
+/** exercise type sim: the activity + a hint ladder; Check grades with the exercise's grader (reported: the activity's own result).
+    The study area's exercise card shows it (its host's activities.exercise, engine/src/40_views.js). */
+function simWidget(ex, api) {
   const holder = h('div', { class: 'act-exwrap' });
   const sess = ACT.mount(holder, ex.activity, { ex, task: ex.task, start: true });
   const hints = Array.isArray(ex.hints) ? ex.hints.filter(x => typeof x === 'string') : [];
@@ -427,9 +429,9 @@ R.sim = (ex, api) => {
   return {
     el,
     answer: () => { const g = sess.grade?.(); return g ? { ok: g.ok, score: g.score } : {}; },
-    check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return verdict(ex, { ok: !!g.ok, ...(typeof g.score === 'number' ? { score: g.score } : {}) }); },
+    check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return NoemaCore.study.grade(ex, { ok: !!g.ok, ...(typeof g.score === 'number' ? { score: g.score } : {}) }).ok; },
     reveal() { if (hintBtn) hintBtn.disabled = true; try { sess.port?.reveal?.(); } catch (e) { } if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
     bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
     given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)
   };
-};
+}

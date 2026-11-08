@@ -46,19 +46,19 @@ async function mockGemini(ctx) {
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   ok(await page.evaluate(() => S.xp === 50 && Object.keys(S.res).length === 2 && S.settings.apiKey === 'LEGACYKEY'), 'legacy progress migrated into anr/databricks');
   ok(await page.evaluate(() => localStorage.getItem('noema-device:geminiKey:anr') === 'LEGACYKEY' && !localStorage.getItem('noema1:anr:a:settings').includes('LEGACYKEY')), 'the Gemini key moved out of a:settings into this device only');
-  ok(await page.evaluate(() => CV.list.length === 1 && CV.list[0].title === 'Old Chat'), 'legacy conversations migrated');
+  ok(await page.evaluate(() => NoemaTutor.current().session.list.length === 1 && NoemaTutor.current().session.list[0].title === 'Old Chat'), 'legacy conversations migrated');
   const canon = await page.evaluate(async () => { const l = await Noema.convos.list('anr'); return l.length === 1 && l[0].schema === 'noema.conversation/v1' && l[0].messages[1].role === 'assistant' && l[0].subject.id === 'databricks'; });
   ok(canon, 'legacy conversation converted to canonical noema.conversation/v1 in IndexedDB');
   // background persistence of a live tutor chat + one-shot AI grading
-  await page.evaluate(() => { S.settings.apiKey = 'TESTKEY'; flushSave(); openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic'); });
-  await page.evaluate(() => sendTutor('What is a deletion vector?')); await wait(1500);
-  await page.evaluate(async () => { const ex = ALL_EX.find(e => e.type === 'free'); await aiGrade(ex, 'my answer'); const ex2 = ALL_EX.find(e => e.type === 'write'); await aiGrade(ex2, 'SELECT 1'); await aiQuestion(SEC['ch05-s04']); });
+  await page.evaluate(() => { S.settings.apiKey = 'TESTKEY'; flushSave(); NoemaTutor.current().session.openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic'); });
+  await page.evaluate(() => NoemaTutor.current().session.send('What is a deletion vector?')); await wait(1500);
+  await page.evaluate(async () => { const ex = ALL_EX.find(e => e.type === 'free'); const ai = NoemaTutor.current().ai; await ai.grade(ex, 'my answer'); const ex2 = ALL_EX.find(e => e.type === 'write'); await ai.grade(ex2, 'SELECT 1'); await ai.question(SEC['ch05-s04']); });
   await wait(800);
   const recs = await page.evaluate(async () => (await Noema.convos.list('anr')).map(r => [r.kind, r.mode, r.context.type, r.context.id, r.messages.length, r.title]));
   ok(recs.some(r => r[0] === 'tutor' && r[2] === 'section' && r[3] === 'ch05-s04' && r[4] >= 2), 'tutor chat saved automatically with its context: ' + JSON.stringify(recs.find(r => r[0] === 'tutor' && r[3] === 'ch05-s04')));
   ok(['grading', 'code-review', 'question'].every(k => recs.some(r => r[0] === k)), 'AI grading, code review and generated question are saved as conversations');
   await page.screenshot({ path: SHOTS + '/a2b_tutor.png' });
-  await page.evaluate(() => { T.showHistory = true; renderTutor(); }); await wait(300);
+  await page.evaluate(() => { NoemaTutor.current().session.toggleHistory(true); }); await wait(300);
   await page.screenshot({ path: SHOTS + '/a2c_history.png' });
   // a conversation written by Meletee (same schema, its own tutor modes): kept as written, not read as 'socratic'
   const mel = await page.evaluate(async () => {
@@ -68,19 +68,19 @@ async function mockGemini(ctx) {
     return [a.mode, a.meta?.app, b.mode, Noema.convos.normalize({ ...base, mode: 'why-chain' }).mode];
   });
   ok(mel.join() === 'feynman,meletee,socratic,why-chain', 'Meletee’s modes are kept (an invalid mode still reads as socratic): ' + mel.join());
-  await page.evaluate(() => closeTutor());
+  await page.evaluate(() => NoemaTutor.current().session.close());
   await page.reload(); await wait(900); await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  ok(await page.evaluate(() => CV.list.length >= 5 && CV.list.some(c => c.kind === 'tutor' && c.msgs.length >= 2)), 'conversations survive a reload (loaded from IndexedDB)');
-  ok(await page.evaluate(() => { T.showHistory = true; openTutor(); renderTutor(); const c = [...$$('.cvcard')].find(x => x.textContent.includes('Feynman: Delta')); return !!c && c.querySelector('.cvfrom')?.textContent === 'from Meletee' && c.textContent.includes('Feynman coach'); }), 'conversation list: Meletee’s chat shows “from Meletee” and its mode');
+  ok(await page.evaluate(() => NoemaTutor.current().session.list.length >= 5 && NoemaTutor.current().session.list.some(c => c.kind === 'tutor' && c.msgs.length >= 2)), 'conversations survive a reload (loaded from IndexedDB)');
+  ok(await page.evaluate(async () => { NoemaTutor.current().session.openTutor(); NoemaTutor.current().session.toggleHistory(true); await new Promise(r => setTimeout(r, 200)); const c = [...$$('.cvcard')].find(x => x.textContent.includes('Feynman: Delta')); return !!c && c.querySelector('.cvfrom')?.textContent === 'from Meletee' && c.textContent.includes('Feynman coach'); }), 'conversation list: Meletee’s chat shows “from Meletee” and its mode');
   await page.screenshot({ path: SHOTS + '/a2d_history_meletee.png' });
-  const melOpen = await page.evaluate(async () => { const cv = CV.list.find(c => c.id === 'cv_000000mel1aaaaaa'); openConvo(cv); const m = T.mode; cv.title = 'Feynman: Delta Lake'; cv.titleSource = 'user'; saveConvos(cv); await new Promise(r => setTimeout(r, 300)); const r = await Noema.convos.get('anr', cv.id); closeTutor(); return [m, r.mode, r.meta?.app, r.model?.provider, r.title]; });
+  const melOpen = await page.evaluate(async () => { const T = NoemaTutor.current().session, cv = T.list.find(c => c.id === 'cv_000000mel1aaaaaa'); T.openConversation(cv); const m = T.mode; cv.title = 'Feynman: Delta Lake'; cv.titleSource = 'user'; T.save(cv); await new Promise(r => setTimeout(r, 300)); const r = await Noema.convos.get('anr', cv.id); T.close(); return [m, r.mode, r.meta?.app, r.model?.provider, r.title]; });
   ok(melOpen.join() === 'explain,feynman,meletee,claude,Feynman: Delta Lake', 'opened in the tutor as a plain explanation; saving again keeps its mode, app and provider: ' + melOpen.join());
   ok(await page.evaluate(() => Noema.stats.get().xp === 50 && Noema.stats.streakNow() >= 0), 'account-level stats seeded');
   ok(await page.evaluate(async () => NoemaCore.learning.hasProgress('databricks') && Object.keys(S.res).length > 0 && !localStorage.getItem('noema1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1') && Object.keys(await NoemaCore.learning.archive()).includes('s:databricks:state')), 'the old progress became events of the learning log (its old value archived there), legacy keys kept (nothing deleted)');
   // stable flashcard ids: progress keyed by a card's position (chNN#k) moves to the card's id once; a:caps says so
   await page.evaluate(async () => { localStorage.setItem('noema1:anr:s:databricks:state', JSON.stringify({ fc: { 'ch01#2': { box: 3, due: '2099-12-01' }, 'ch02#0': { box: 1, due: '2026-01-01' }, 'ch02-f001': { box: 4, due: '2099-11-11' } } })); await NoemaCore.learning.migrate(); await NoemaCore.learning.flush(); });   // an old copy (the old sync, an old backup)
   await page.reload(); await wait(900); await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  const mig = await page.evaluate(async () => { await NoemaCore.learning.flush(); return { fc: S.fc, boxes: Object.fromEntries(Object.entries(S.fc).map(([k, v]) => [k, NoemaCore.study.fsrs.box(v)])), key: CH.ch01.flashcards[2]._key, due: countDueCards(), moved: (await NoemaCore.learning.events()).filter(e => e.type === 'card.imported' && e.data.from).map(e => e.data.from + '>' + e.item).sort(), caps: JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}') }; });
+  const mig = await page.evaluate(async () => { await NoemaCore.learning.flush(); return { fc: S.fc, boxes: Object.fromEntries(Object.entries(S.fc).map(([k, v]) => [k, NoemaCore.study.fsrs.box(v)])), key: CH.ch01.flashcards[2]._key, due: NoemaCore.studyUi.current().app.dueCards(), moved: (await NoemaCore.learning.events()).filter(e => e.type === 'card.imported' && e.data.from).map(e => e.data.from + '>' + e.item).sort(), caps: JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}') }; });
   ok(mig.key === 'ch01-f003' && mig.boxes['ch01-f003'] === 3 && !mig.fc['ch01#2'], 'positional card progress (ch01#2) moved to the card id ch01-f003 (an old Leitner box 3 is an FSRS memory of that interval)');
   ok(mig.boxes['ch02-f001'] === 4 && !mig.fc['ch02#0'], 'when both keys exist the one reviewed last (the id) wins and the positional key is dropped');
   ok(mig.moved.join() === 'ch01#2>ch01-f003,ch02#0>ch02-f001' && mig.due === 0, 'the move is recorded once, as events (nothing due yet): ' + mig.moved.join());
@@ -89,62 +89,69 @@ async function mockGemini(ctx) {
   const reg = await page.evaluate(() => {
     const fails = []; S.settings.chunk = false;
     for (const c of COURSE) { for (const s of c.sections) { try { location.hash = '#/s/' + s.id; route(); } catch (e) { fails.push(s.id + e.message); } } }
-    let n = 0; for (const ex of ALL_EX) { try { const card = exerciseCard(ex, { noXP: true }); document.body.append(card); card.remove(); n++; } catch (e) { fails.push(ex.id + e.message); } }
-    S.settings.chunk = true; return { fails, n, total: ALL_EX.length, vis: ALL_EX.filter(isVisual).length };
+    let n = 0; for (const ex of ALL_EX) { try { const card = NoemaCore.studyUi.current().exerciseCard(ex, { noXP: true }); document.body.append(card); card.remove(); n++; } catch (e) { fails.push(ex.id + e.message); } }
+    S.settings.chunk = true; return { fails, n, total: ALL_EX.length, vis: ALL_EX.filter(e => /^img_/.test(e.type || '')).length };
   });
   ok(!reg.fails.length && reg.n === reg.total && reg.n >= 1644 + 53 && reg.vis >= 53, `regression: ${reg.n} exercises (${reg.vis} visual) & all sections render`);
   // a single exercise by id (#/ex/<id>, deep links from Meletee) → a one-exercise run; announced in a:caps
   const exId = await page.evaluate(() => ALL_EX[7].id);
   await page.evaluate(id => { location.hash = '#/ex/' + id; }, exId); await wait(700);
-  ok(await page.evaluate(id => location.hash === '#/run' && RUN.list.length === 1 && RUN.list[0].id === id && RUN.back === '#/s/' + EX[id].section, exId), '#/ex/<id> opens that one exercise, back to its section');
+  ok(await page.evaluate(id => { const R = NoemaCore.studyUi.current().app.round, l = R?.actor.snapshot.context.list || []; return location.hash === '#/run' && l.length === 1 && l[0].id === id && R.back === '#/s/' + EX[id].section; }, exId), '#/ex/<id> opens that one exercise, back to its section');
   ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}').exerciseRoute === 1), 'a:caps announces exerciseRoute');
   await page.evaluate(() => { location.hash = '#/ex/nope-e999'; }); await wait(400);
-  ok(await page.evaluate(() => location.hash === '#/ex/nope-e999' && !!$('main') && !RUN?.list.some(e => e.id === 'nope-e999')), 'an unknown exercise id falls back to home');
-  await page.evaluate(() => { location.hash = '#/'; }); await wait(500);
+  ok(await page.evaluate(() => location.hash === '#/ex/nope-e999' && !!$('main') && !(NoemaCore.studyUi.current().app.round?.actor.snapshot.context.list || []).some(e => e.id === 'nope-e999')), 'an unknown exercise id falls back to home');
+  await page.evaluate(() => { location.hash = '#/subject'; }); await wait(500);
   await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
-  // account menu tabs
-  for (const t of ['profile', 'settings', 'subjects', 'backup', 'cloud']) { await page.evaluate(t => { $('.modal')?.remove(); openAccountMenu(t); }, t); await wait(350); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
-  ok(await page.$$eval('.modal .tabs button', b => b.map(x => x.textContent).join('|')) === '👤 Profile|⚙️ Settings|📚 Subjects|💾 Backup & restore|☁️ Cloud|❓ Help', 'account menu has 6 tabs: Profile · Settings · Subjects · Backup · Cloud · Help');
-  await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('backup'); }); await wait(500);
+  // the account's pages are the frame's Me pages (the engine's views in them)
+  const meAt = {};
+  for (const t of ['profile', 'settings', 'backup', 'cloud', 'help']) { await page.evaluate(t => { openAccountMenu(t); }, t); await wait(450); meAt[t] = await page.evaluate(() => location.hash); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
+  ok(JSON.stringify(meAt) === JSON.stringify({ profile: '#/me/profile', settings: '#/me/ai', backup: '#/me/data', cloud: '#/me/data', help: '#/help' }), 'the account menu opens the Me pages: ' + JSON.stringify(meAt));
+  await page.evaluate(() => { openAccountMenu('backup'); }); await wait(500);
   // four sections (download, folder, restore, restore points) and, where Python activities can run (the website, over http), Prepare Python for offline
-  const bk = await page.evaluate(() => ({ n: $$('.modal details.accsec').length, open: $$('.modal details.accsec[open]').length, py: ACT.enabled('py-module@1'), pySec: $$('.modal details.accsec .act-pyset').length }));
+  const BK = "$$('main .ns-accbody')[1]";
+  const bk = await page.evaluate(BK => { const b = eval(BK); return { n: $$('details.accsec', b).length, open: $$('details.accsec[open]', b).length, py: ACT.enabled('py-module@1'), pySec: $$('details.accsec .act-pyset', b).length }; }, BK);
   ok(bk.n === 4 + (bk.py ? 1 : 0) && bk.pySec === (bk.py ? 1 : 0) && bk.open === 0, 'backup & restore sections are collapsed by default ' + JSON.stringify(bk));
-  await page.click('.modal details.accsec:nth-of-type(2) summary'); await wait(300);
-  ok(await page.evaluate(() => $$('.modal details.accsec[open]').length === 1), 'a section expands on click');
+  await page.evaluate(BK => { $$('details.accsec', eval(BK))[1].querySelector('summary').click(); }, BK); await wait(300);
+  ok(await page.evaluate(BK => $$('details.accsec[open]', eval(BK)).length === 1, BK), 'a section expands on click');
   await page.screenshot({ path: SHOTS + '/a3b_backup_expanded.png' });
-  await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('help'); }); await wait(400);
-  ok(await page.$$eval('.modal details.accsec', d => d.length) === 9, 'help tab lists 9 setup guides');
+  await page.evaluate(() => { openAccountMenu('help'); }); await wait(500);
+  ok(await page.$$eval('main details.accsec', d => d.length) === 9, 'help lists 9 setup guides');
   await page.screenshot({ path: SHOTS + '/a3c_help.png' });
-  await page.evaluate(() => $('.modal')?.remove());
+  await page.evaluate(() => { location.hash = '#/subject'; }); await wait(400);
   // menus in the learner's language (engine/i18n.js): ⚙️ Settings → Language of the menus
   ok(await page.evaluate(async () => { await Promise.all(['el', 'ru', 'fr'].map(l => NoemaI18n.load(l))); const B = NoemaI18n.catalogs, en = Object.keys(B.en.m); return ['el', 'ru', 'fr'].every(l => en.every(k => B[l].m[k] || (B[l].d || {})[k])); }), 'every menu string is translated (or drafted) in el, ru and fr');
-  const setUiLang = async v => { await page.evaluate(v => { $('.modal')?.remove(); openAccountMenu('settings'); const sel = $('.modal select[aria-label="' + t('set.uiLang') + '"]'); sel.value = v; $('.modal [data-act="save-settings"]').click(); }, v); await wait(1200); };
+  // the engine's settings view (Me › Settings), drawn on its own: the language of the menus, then Save
+  const setUiLang = async v => { await page.evaluate(v => { const b = h('div', { class: 'accbody' }); document.body.append(b); ACC_VIEWS.settings(b, () => b.remove()); const sel = $('select[aria-label="' + t('set.uiLang') + '"]', b); sel.value = v; $('[data-act="save-settings"]', b).click(); }, v); await wait(1200); };
   await setUiLang('fr');
   ok(await page.evaluate(() => document.body.innerText.includes('Qu’est-ce que tu veux étudier\u202f?')), 'after the change the subject picker speaks French');
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  const fr = await page.evaluate(() => ({ tiles: $$('.modes .mode b').map(b => b.textContent), tutor: $('.iconbtn.tutor span').textContent, ch: (location.hash = '#/ch/ch01', route(), $$('main .tabs button').map(b => b.textContent.trim()).join('|')), back: $('main .back').textContent, cards: (location.hash = '#/cards', route(), $('main .back').textContent + ' ' + $('main h1').textContent), tabs: (openAccountMenu('profile'), $$('.modal .tabs button').map(b => b.textContent).join('|')) }));
-  ok(fr.tiles.includes('Manche éclair') && fr.tiles.includes('Salle des erreurs') && fr.tutor === 'Tuteur', 'home tiles and top bar in French: ' + fr.tiles.join(' · '));
-  ok(/Apprendre/.test(fr.ch) && /S’entraîner/.test(fr.ch) && fr.back === '← Tous les chapitres' && fr.cards === '← Accueil 🃏 Cartes mémoire', 'chapter tabs, back buttons and view titles in French');
-  ok(fr.tabs.startsWith('👤 Profil|⚙️ Réglages|📚 Matières'), 'account menu tabs in French: ' + fr.tabs);
+  // Practice ▾ of the subject's home (the frame's list), the chapter's tabs and a page's title
+  const practiceList = () => page.evaluate(async () => { location.hash = '#/subject'; await new Promise(r => setTimeout(r, 400)); for (let i = 0; i < 30 && !$('.ns-practicebtn'); i++) await new Promise(r => setTimeout(r, 100)); $('.ns-practicebtn').click(); await new Promise(r => setTimeout(r, 200)); const l = $$('.ns-pop [role=menuitem] .mt').map(x => x.firstChild.textContent.trim()); NoemaShell.closePops(); return l.length ? l : [location.hash, $('main')?.dataset.page, String($$('.ns-pop').length), document.body.innerText.slice(0, 200)]; });
+  const frTiles = await practiceList();
+  const fr = await page.evaluate(() => ({ ch: (location.hash = '#/ch/ch01', route(), $$('main .tabs button').map(b => b.textContent.trim()).join('|')), cards: (location.hash = '#/cards', route(), $('main h1').textContent), me: NoemaShell.L('settings') }));
+  ok(frTiles.includes('Manche éclair') && frTiles.includes('Salle des erreurs'), 'Practice ▾ in French: ' + frTiles.join(' · '));
+  ok(/Apprendre/.test(fr.ch) && /S’entraîner/.test(fr.ch) && fr.cards === '🃏 Cartes mémoire', 'chapter tabs and view titles in French: ' + JSON.stringify(fr));
+  ok(fr.me === 'Réglages', 'the frame speaks French too: ' + fr.me);
   await setUiLang('');
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  ok(await page.evaluate(() => { location.hash = '#/'; route(); return !S.settings.lang && $$('.modes .mode b').some(b => b.textContent === 'Lightning round'); }), 'back to automatic: the browser’s language (English)');
+  const enTiles = await practiceList();
+  ok(await page.evaluate(() => !S.settings.lang) && enTiles.includes('Lightning round'), 'back to automatic: the browser’s language (English): ' + enTiles.join(' · '));
   // switch subject → math subject
-  await page.evaluate(() => Noema.switchTo('anr', 'demo-physics')); await wait(1800);
+  await page.evaluate(() => Noema.switchTo('anr', 'demo-physics', '#/subject')); await wait(1800);
   ok(await page.evaluate(() => SUBJ.id === 'demo-physics' && S.xp === 0), 'switched to Demo Physics with separate progress');
   ok(await page.$$eval('.katex', k => k.length) > 0, 'math rendered with KaTeX on home');
   await page.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(700);
   ok(await page.$$eval('.katex-display', k => k.length) > 0, 'display math rendered in a section');
-  ok(await page.evaluate(() => TUTOR.name === 'Ada' && MODES.socratic.sys.includes('physics')), 'tutor persona comes from subject.json');
+  ok(await page.evaluate(() => TUTOR.name === NoemaThemes.tutor().n && NoemaTutor.current().session.system('socratic').includes('physics')), 'the tutor is the character on screen; its subject (physics) comes from subject.json');
   await page.screenshot({ path: SHOTS + '/a4_physics_section.png', fullPage: true });
-  const xpOk = await page.evaluate(() => { const a = Noema.stats.get(); addXP(10); flushSave(); const b = Noema.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
+  const xpOk = await page.evaluate(() => { const a = Noema.stats.get(); NoemaCore.studyUi.current().app.xp(10); flushSave(); const b = Noema.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
   ok(xpOk, 'XP counted per subject and in the account total');
   // new profile: full isolation
-  await page.evaluate(() => { Noema.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); Noema.switchTo('maria', 'databricks'); }); await wait(1800);
-  ok(await page.evaluate(() => ACCOUNT.id === 'maria' && S.xp === 0 && Object.keys(S.res).length === 0 && CV.list.length === 0 && S.settings.apiKey !== 'LEGACYKEY'), 'profile Maria is isolated (progress, conversations, API key)');
+  await page.evaluate(() => { Noema.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); Noema.switchTo('maria', 'databricks', '#/subject'); }); await wait(1800);
+  ok(await page.evaluate(() => ACCOUNT.id === 'maria' && S.xp === 0 && Object.keys(S.res).length === 0 && NoemaTutor.current().session.list.length === 0 && S.settings.apiKey !== 'LEGACYKEY'), 'profile Maria is isolated (progress, conversations, API key)');
   ok(await page.evaluate(async () => !(await Noema.subjectsFor('maria')).some(s => s.id === 'secret-notes')), 'private subject of ANR is not visible to Maria');
-  ok(await page.evaluate(async () => (await Noema.convos.list('maria')).length === 0 && CV.list.length === 0), 'Maria sees none of ANR’s conversations');
-  await page.evaluate(() => { location.hash = '#/'; route(); }); await wait(500);
+  ok(await page.evaluate(async () => (await Noema.convos.list('maria')).length === 0 && NoemaTutor.current().session.list.length === 0), 'Maria sees none of ANR’s conversations');
+  await page.evaluate(() => { location.hash = '#/subject'; }); await wait(500);
   ok(!!(await page.$('.setupbar')) && (await page.$$eval('.setuprow', r => r.length)) === 2, 'first-sessions setup banner (no key, no backups) on the home page');
   await page.screenshot({ path: SHOTS + '/a6_banner.png' });
   await page.click('.setuprow .iconbtn'); await wait(400);
@@ -181,7 +188,7 @@ async function mockGemini(ctx) {
 
   /* ======================= B. CLOUD (http + mocked Supabase) ======================= */
   console.log('B. cloud mode (mock Supabase)');
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:54329', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:54329', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: 54329, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await mockGemini(devA); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
   await pA.goto('http://localhost:54329/'); await wait(900);
@@ -199,8 +206,8 @@ async function mockGemini(ctx) {
   { const sa = await pA.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(400); } }
   const tipW = await pA.$$eval('main .callout.tip', els => els.map(e => ({ w: e.getBoundingClientRect().width, cur: getComputedStyle(e).cursor })));
   ok(tipW.length > 0 && tipW.every(t => t.w > 300 && t.cur !== 'help'), 'tip callouts render full width (no clash with the ⓘ tooltip style)');
-  await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; S.settings.goal = 150; flushSave(); });
-  await pA.evaluate(() => { openTutor({ kind: 'chapter', id: 'ch05' }, 'quiz'); }); await pA.evaluate(() => sendTutor('quiz me')); await pA.evaluate(() => closeTutor());
+  await pA.evaluate(() => { const A = NoemaCore.studyUi.current().app; A.record(EX['ch01-e001'], true); A.xp(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; S.settings.goal = 150; flushSave(); });
+  await pA.evaluate(() => { NoemaTutor.current().session.openTutor({ kind: 'chapter', id: 'ch05' }, 'quiz'); }); await pA.evaluate(() => NoemaTutor.current().session.send('quiz me')); await pA.evaluate(() => NoemaTutor.current().session.close());
   await wait(4200);
   const uidA = Object.keys(srv.state.users)[0];
   ok(Object.values(srv.state.convs[uidA] || {}).some(r => r.kind === 'tutor' && r.mode === 'quiz' && r.record.schema === 'noema.conversation/v1'), 'conversation pushed to the cloud (noema_conversations)');
@@ -275,7 +282,7 @@ async function mockGemini(ctx) {
   ok(await pB.evaluate(() => S.settings.goal === 150 && S.settings.oldOnly === 'kept'), 'device B pulled the settings: the later choice per field (goal from device A), what only the old row had (oldOnly)');
   ok(await pB.evaluate(() => S.res['ch01-e002']?.n === 2 && S.res['ch01-e001']?.n === 1), 'the cloud’s old progress row is taken in on a device that had none (the learning log’s migration); device A’s answer arrives as its event');
   ok(await pB.evaluate(() => S.settings.apiKey === 'OLDKEY' && localStorage.getItem('noema-device:geminiKey:' + ACCOUNT.id) === 'OLDKEY' && !localStorage.getItem(Noema.kv.accountKey('settings')).includes('OLDKEY')), 'a key synced by an older version is moved to this device');
-  ok(await pB.evaluate(() => CV.list.some(c => c.mode === 'quiz' && c.msgs.length >= 2)), 'device B has the conversation from device A');
+  ok(await pB.evaluate(() => NoemaTutor.current().session.list.some(c => c.mode === 'quiz' && c.msgs.length >= 2)), 'device B has the conversation from device A');
   await pB.screenshot({ path: SHOTS + '/b3_deviceB_mobile.png' });
   await wait(3500); ok(!srv.state.kv[uidA]['a:settings'].value.includes('OLDKEY') && JSON.parse(srv.state.kv[uidA]['a:settings'].value).goal === 90 && !srv.state.settings.some(r => r.key === 'settings.apiKey'), '… and removed from the cloud row (the row stays for older apps; the key never goes to the registers)');
   ok(srv.state.settings.find(r => r.key === 'settings.oldOnly')?.value === 'kept' && srv.state.settings.find(r => r.key === 'settings.goal')?.value === 150, 'the old row’s fields reach the registers; a newer choice is never replaced by it');

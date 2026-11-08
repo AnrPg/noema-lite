@@ -498,6 +498,18 @@
   "@engine.tutor.howKey": {
     "description": "Button under an AI error about the API key (after 🔑): opens the guide to get a free Gemini key."
   },
+  "engine.tutor.thinking": "The tutor is writing…",
+  "@engine.tutor.thinking": {
+    "description": "Screen-reader label of the three animated dots shown while the tutor (the learner's character) writes its answer."
+  },
+  "engine.tutor.copyPrompt": "Copy the prompt",
+  "@engine.tutor.copyPrompt": {
+    "description": "Button under the tutor's \"no AI key\" error (after 📋): copies the whole request (instructions and the conversation) so the learner can paste it into any AI chat they use."
+  },
+  "engine.tutor.promptCopied": "Prompt copied — paste it into your AI chat.",
+  "@engine.tutor.promptCopied": {
+    "description": "Toast after the learner copied the tutor's prompt (after 📋). Short."
+  },
   "engine.log.exCtx": "{ch} · {id}",
   "@engine.log.exCtx": {
     "description": "Context label of a saved AI grading conversation: chapter and section (engine.common.chTitle), then the exercise’s id. Usually unchanged.",
@@ -3261,98 +3273,6 @@
   "engine.acc.deleteProfile": "Delete this profile",
   "@engine.acc.deleteProfile": {
     "description": "Account menu › Profile: button (after 🗑️)."
-  },
-  "engine.acc.subjIntro": "Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.",
-  "@engine.acc.subjIntro": {
-    "description": "Account menu › Subjects: intro."
-  },
-  "engine.acc.subjRoadmap": "The way to study is a Roadmap: each of its steps is taught by a subject. The subjects on no step wait on your 📚 Shelf — study them from there, or put them on a Roadmap (🧭 Put on a Roadmap…).",
-  "@engine.acc.subjRoadmap": {
-    "description": "Account menu › Subjects: note (after 🧭). “Put on a Roadmap…” is the name of a menu item."
-  },
-  "engine.acc.originLibrary": "Library",
-  "@engine.acc.originLibrary": {
-    "description": "Account menu › Subjects: where a subject comes from (the shared library)."
-  },
-  "engine.acc.originPrivate": "Private (folder)",
-  "@engine.acc.originPrivate": {
-    "description": "Account menu › Subjects: origin (after 🔒): a private folder of the installation."
-  },
-  "engine.acc.originImported": "Imported",
-  "@engine.acc.originImported": {
-    "description": "Account menu › Subjects: origin (after 📥): imported by this profile."
-  },
-  "engine.acc.subjCounts": "{c} chapters · {e} exercises",
-  "@engine.acc.subjCounts": {
-    "description": "Account menu › Subjects: counts of a subject (c, e are numbers, or ? when unknown).",
-    "placeholders": {
-      "c": {
-        "type": "String",
-        "example": "12"
-      },
-      "e": {
-        "type": "String",
-        "example": "340"
-      }
-    }
-  },
-  "engine.acc.onSteps": "{n, plural, one {on # Roadmap step} other {on # Roadmap steps}}",
-  "@engine.acc.onSteps": {
-    "description": "Account menu › Subjects (after 🧭): on how many Roadmap steps the subject is.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.acc.onShelf": "on the Shelf",
-  "@engine.acc.onShelf": {
-    "description": "Account menu › Subjects (after 📚): the subject is on no Roadmap step."
-  },
-  "engine.acc.isOpen": "open",
-  "@engine.acc.isOpen": {
-    "description": "Account menu › Subjects: pill on the subject that is open now. Lowercase."
-  },
-  "engine.acc.open": "Open",
-  "@engine.acc.open": {
-    "description": "Account menu › Subjects: button that opens a subject."
-  },
-  "engine.acc.editTip": "Rename, describe or delete",
-  "@engine.acc.editTip": {
-    "description": "Account menu › Subjects: tooltip of ✏️."
-  },
-  "engine.acc.editAria": "Edit {title}",
-  "@engine.acc.editAria": {
-    "description": "Account menu › Subjects: screen-reader label of ✏️. title = the subject.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Databricks"
-      }
-    }
-  },
-  "engine.acc.shareTip": "Share or make public",
-  "@engine.acc.shareTip": {
-    "description": "Account menu › Subjects: tooltip of 🔗."
-  },
-  "engine.acc.openShelf": "Open the Shelf",
-  "@engine.acc.openShelf": {
-    "description": "Account menu › Subjects: button (after 📚)."
-  },
-  "engine.acc.importPack": "Import subject pack…",
-  "@engine.acc.importPack": {
-    "description": "Account menu › Subjects: button (after 📥)."
-  },
-  "engine.acc.exportPackage": "Export “{title}” (package with its source files)",
-  "@engine.acc.exportPackage": {
-    "description": "Account menu › Subjects: button (after ⬇️). title = the open subject.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Databricks"
-      }
-    }
   },
   "engine.bk.noFolders": "This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.",
   "@engine.bk.noFolders": {

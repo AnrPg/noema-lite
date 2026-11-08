@@ -77,7 +77,8 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
     text: <script type="text/plain" id="noema-lazy:<name>">) */
 const APP_KB = 544;   // + 24 KB (area 4, phase 3): the community's eager half (the search's, the vault's and the reports' models, the host; the screens are build/community.js); + 8 KB the language courses service (NoemaCore.languages). The core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
                       // with the agents' prompts that left engine/curriculum.js, community: about 360 KB) and the learning log's event contract
-                      // (about 140 KB), the engines' catalogue (about 28 KB) and the language courses before one is loaded (NoemaCore.languages, about 5 KB); the engines, the other contracts and the content checks are lazy pieces
+                      // (about 140 KB), the engines' catalogue (about 28 KB) and the language courses before one is loaded (NoemaCore.languages, about 5 KB); the engines, the other contracts and the content checks are lazy pieces.
+                      // 520 since the runtimes' manifests (src/runtimes) and the study pages' bridge and route table (src/composition/study-ui.ts) joined it
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
   { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
@@ -85,12 +86,13 @@ export const ENTRIES = [
   { name: 'community', in: 'src/composition/community-piece.ts', kind: 'lazy', out: 'community.js', budgetKB: 640 },   // the community screens (Lit and the UI kit with them): loaded when one is first opened (src/composition/community-app.ts)
   { name: 'runtimes', in: 'src/composition/runtimes.ts', kind: 'lazy', out: 'runtimes.js', budgetKB: 512 },   // the activity runtimes' code (src/runtimes): loaded when an activity first needs one (ACT.runtime)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
+  { name: 'study', in: 'src/composition/study-pages.ts', kind: 'lazy', out: 'study.js', budgetKB: 320 },   // the study area's pages (src/features/study/ui): loaded before the first subject opens (src/composition/study-ui.ts)
   { name: 'author', in: 'src/composition/author.ts', kind: 'lazy', out: 'author.js', budgetKB: 160 },   // the activity author (#/author): its forms, checks and files; loaded on the first visit (src/composition/shell/author-page.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5632 },   // the contracts + the engine library
-  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 384 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui)
+  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 400 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui), the tutor's conversations window (src/features/tutor/ui/conversations.ts; 400 since it joined)
   { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
   { name: 'lang-activities', in: 'src/composition/lang-activities.ts', kind: 'lazy', shared: 'ui', out: 'lang-activities.js', budgetKB: 256 },   // the screens of languages and activities on build/ui.js's Lit and kit; loaded on the first language page
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },

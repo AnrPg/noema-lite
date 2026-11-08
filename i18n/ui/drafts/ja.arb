@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "動きを減らす",
   "ui.kit.motion.full": "すべて",
   "ui.kit.language": "表示言語",
-  "ui.kit.lookNote": "ここでの選択はこの端末とこのページだけに適用されます。"
+  "ui.kit.lookNote": "ここでの選択はこの端末とこのページだけに適用されます。",
+  "ui.study.onlyMyLevel": "自分のレベルだけ（{level}）",
+  "ui.study.myLevelTip": "到達したレベルの問題だけを練習します",
+  "ui.study.level": "レベル"
 }

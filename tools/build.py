@@ -391,7 +391,7 @@ def build_site(metas):
 # the app shell the service worker precaches besides what index.html loads: the study engine (loaded when a subject opens),
 # the UI catalogs (any locale offline; not the test pseudo-locales), the language-course UI, the activity author's files
 # (#/author), the web manifest and its icons. Packs and data are not in it (network first, the last copy offline).
-APP_AREAS = ('app/library.js', 'app/community.js', 'app/roadmaps.js', 'app/languages.js')   # the areas of the app on the frame, in index.html's order
+APP_AREAS = ('app/library.js', 'app/community.js', 'app/roadmaps.js', 'app/languages.js', 'app/study.js')   # the areas of the app on the frame, in index.html's order
 SHELL_EXTRA = ('engine/engine.js', 'engine/i18n/*.js', 'engine/langcore.js', 'engine/langui.js', 'engine/langui.css', 'engine/activity_author_schemas.js',
                'build/*.js', 'manifest.webmanifest', 'icons/*.png', 'icons/*.svg', 'fonts/*.css')   # build/*.js: the page bundles and every Worker bundle (offline on first use)
 def write_service_worker(out):

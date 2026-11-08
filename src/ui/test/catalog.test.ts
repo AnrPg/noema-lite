@@ -1,18 +1,23 @@
 /* The words of the UI foundation: every key the code asks for is in i18n/ui/en.arb (or built at run time from a prefix
    of dynamic_keys.txt), every key of en.arb is used, and each of the 14 drafts has every key with the same placeholders. */
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { LOCALES, uiCatalogs } from './services.ts';
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
+const FEATURES = join(ROOT, 'src/features');
 const SRC = [
   join(ROOT, 'src/ui'),
   join(ROOT, 'src/composition/ui-kit-root.ts'),
   join(ROOT, 'src/composition/ui-root.ts'),
   join(ROOT, 'src/composition/shell'),
+  // the areas' own screens (src/features/<area>/ui) ask for their words from the same catalog
+  ...readdirSync(FEATURES)
+    .map(f => join(FEATURES, f, 'ui'))
+    .filter(p => existsSync(p)),
 ];
 
 function files(p: string): string[] {

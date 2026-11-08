@@ -1,584 +1,107 @@
-/* ===================== Views ===================== */
+/* ===================== The subject's engine pages, the author, the boot ===================== */
+/* The subject's pages (#/subject, #/ch, #/s, practice, cards, drills, the Mistakes gym, sources, what's new) are the study
+   area's (src/features/study/ui, build/study.js), which engine/app/study.js registers in the frame with their host adapter
+   (src/features/study/ui/host.ts). This file keeps the engine's indexes the study area's course feeds (followCourse), the
+   activity author (#/author), the engines' page (#/engines, src/features/reports/ui/engines.ts) and the boot. */
 const main = () => $('main');
-/* The new frame (engine/shell.js) owns the top bar, the tabs, the back arrow and the ⋮ menus; these views draw
-   the pages of the open subject (#/subject, #/ch, #/s, …) and tell it their crumbs and menu (docs/UI_MAP.md).
-   Without the shell (an old index.html) the classic top bar below is used. */
 const SHL = () => window.NoemaShell?.mounted ? window.NoemaShell : null;
 const SL = (k, v) => window.NoemaShell ? NoemaShell.L(k, v) : k;
-const HOME = () => SHL() ? '#/subject' : '#/';
+const HOME = () => '#/subject';
 function shellChrome(c = {}) { const X = SHL(); if (X) X.chrome(X.subjectChrome(c)); }
-const backBtn = (label, hash) => SHL() ? null : h('button', { class: 'back', onclick: () => go(hash) }, label);
-function view(...kids) { const m = main(); m.innerHTML = ''; m.dataset.page = '@engine'; const v = h('div', { class: 'view' }, ...kids); const fb = typeof filterBanner === 'function' ? filterBanner() : null; if (fb) v.prepend(fb); if (STEP_LOCK) v.prepend(h('div', { class: 'lockbar', role: 'note' }, '🔒 ' + SL('lockedPreview'))); m.append(v); scrollTo({ top: 0 }); return v; }
-/* ---------- 🔒 a Roadmap step that is still locked opens for reading: its theory is there, its exercises wait until the step opens ---------- */
-let STEP_LOCK = null;
-/** { missing: titles of the steps to master first } when every Roadmap step this subject teaches is still locked, else null. */
-function stepLock() {
-  const CU = window.NoemaCurriculum, acc = ACCOUNT?.id; if (!CU?.stepsOf || !acc) return null;
-  const on = CU.stepsOf(acc, SUBJ.id).filter(x => !x.c.nodes[x.nid].pack?.assigned).map(x => ({ ...x, all: CU.statuses(acc, x.c) })).filter(x => x.all[x.nid]);   // a subject of the learner's own, attached to a step, stays theirs
-  if (!on.length || on.some(x => x.all[x.nid].open || x.all[x.nid].mastered)) return null;
-  const x = on[0]; return { missing: (x.all[x.nid].parents || []).filter(p => !x.all[p]?.mastered).map(p => x.c.nodes[p]?.title || p) };
-}
-const lockNote = () => h('div', { class: 'locknote' }, '🔒 ', SL('exLocked', { list: STEP_LOCK.missing.join(', ') || '…' }));
-function lockedView() {
-  shellChrome({ sub: true, crumbs: [[SL('exercisesWord')]], back: HOME(), corner: true });
-  view(lockNote(), h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go(HOME()) }, '📖 ' + SL('backToTheory'))));
-}
-const LOCKED_ROUTES = new Set(['practice', 'run', 'srun', 'boss', 'lightning', 'cards', 'drills', 'drill', 'mistakes', 'ex']);   // i18n-ignore
+/** the page of #/engines; the study pages draw their own */
+function view(...kids) { const m = main(); m.innerHTML = ''; m.dataset.page = '@engine'; const v = h('div', { class: 'view' }, ...kids); m.append(v); scrollTo({ top: 0 }); return v; }
 const go = hash => { location.hash = hash; };
-/** Remember where the learner reads (Today › Continue, across subjects; engine/shell.js). */
-function noteRecent(extra = {}) {
-  const X = window.NoemaShell; if (!X?.noteRecent) return;
-  X.noteRecent({ subj: SUBJ.id, title: SUBJ.title, cid: Noema.node?.id || null, node: Noema.node?.node || null, ...extra });
-}
 
-/* ---------- top bar (classic, without the shell) ---------- */
-let timerT = null, timerEnd = 0;
-function renderTopStats() {
-  const x = $('#xpchip'), s = $('#streakchip');
-  if (x) x.textContent = '⭐ ' + tE('engine.top.xp', { n: S.xp });
-  if (s) s.textContent = '🔥 ' + nf(Noema.stats.streakNow());
+/* ---------- the study area's course: the engine's indexes follow it ---------- */
+let STUDY = null;   // Noema.app.study.mount() at boot (engine/app/study.js): { app, show(hash), segments, figure, figureText, exerciseText, inspect }
+const MEDIA = Noema.pack?.media || {};   // the pack's pictures by id (the study area's media; 32_activities.js)
+const FULL_COURSE = COURSE.slice();   // the pack's chapters before the source filter (15_inbox.js, the tutor's host, 85_locate.js)
+FULL_COURSE.forEach(c => c.flashcards.forEach((f, k) => { f._key = f.id || f._key || c.id + '#' + k; }));   // SRS keys: the card's id (packs without ids: its position), independent of filtering
+{ /* tell sibling apps (Meletee, a:caps) that card progress is keyed by card id; each feature merges only its own flag */
+  const k = Noema.kv.accountKey('caps'); let c = {}; try { c = JSON.parse(Noema.kv.get(k) || '{}') || {}; } catch (e) { }
+  if (!c.stableCardIds) Noema.kv.set(k, JSON.stringify({ ...c, stableCardIds: 1 }));
 }
-/** ⏱️ The 15-minute focus sprint (top bar chip, or the shell's ⋮ with a small clock next to it). */
-function focusSprint(btn) {
-  const clock = btn || $('.ns-focus') || (SHL() ? (() => { const b = h('button', { class: 'chip timer ns-focus', title: t('top.focusTitle'), onclick: () => focusSprint() }); SHL().setActs([b]); return b; })() : null);
-  const idle = () => { clock?.classList.remove('running'); if (clock) { if (clock.classList.contains('ns-focus')) clock.remove(); else clock.textContent = '⏱️ ' + t('top.focus'); } };
-  if (timerT) { clearInterval(timerT); timerT = null; idle(); return; }
-  timerEnd = Date.now() + 15 * 60e3; clock?.classList.add('running');
-  const tick = () => { const left = Math.max(0, timerEnd - Date.now()); const c = $('.timer.running') || clock; if (c) c.textContent = `⏱️ ${String(left / 60e3 | 0).padStart(2, '0')}:${String((left / 1e3 | 0) % 60).padStart(2, '0')}`; if (!left) { clearInterval(timerT); timerT = null; idle(); confetti(120); beep('win'); toast('🎉 ' + tE('engine.top.sprintDone'), 5000); } };
-  tick(); timerT = setInterval(tick, 1000);
-}
-function topbar() {
-  const timer = h('button', { class: 'chip timer hide-m', title: t('top.focusTitle'), onclick: () => focusSprint(timer) }, '⏱️ ' + t('top.focus'));
-  return h('header', { class: 'topbar' },
-    h('div', { class: 'brand', onclick: () => go('#/') }, window.NoemaArt && window.NoemaThemes ? h('div', { class: 'logo', html: NoemaArt.mascot(NoemaThemes.current()) }) : null, h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),   // i18n-ignore (the app's name)
-    h('button', { class: 'subjchip', title: t('top.switchSubject'), onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
-    h('div', { class: 'spacer' }),
-    Noema.node ? h('button', { class: 'chip curchip', title: t('top.mapTitle'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🧭', h('span', { class: 'hide-s' }, ' ' + t('top.map')))
-      : h('button', { class: 'chip curchip', title: t('top.curriculaTitle'), onclick: () => Noema.curricula() }, '🧭', h('span', { class: 'hide-s' }, ' ' + t('top.curricula'))),
-    h('button', { class: 'chip explorechip', title: t('top.exploreTitle'), onclick: () => Noema.explore() }, '🌍', h('span', { class: 'hide-s' }, ' ' + t('top.explore'))),
-    timer,
-    h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: t('top.streak') }),
-    h('button', { class: 'iconbtn srcbtn', title: t('top.sources'), onclick: () => toggleSourcesDeck() }, '📚'),
-    h('button', { class: 'iconbtn hide-m', title: t('top.theme'), onclick: () => { S.settings.theme = isDark() ? 'light' : 'dark'; save(); applyTheme(); route(); } }, '🌓'),
-    bellButton(),
-    h('button', { class: 'iconbtn tutor', title: t('top.tutorTitle'), onclick: () => openTutor() }, TUTOR.avatar, h('span', {}, t('top.tutor'))),
-    h('button', { class: 'acchip', title: t('top.account', { name: ACCOUNT.name }), onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
-}
-
-/* ---------- 🔔 notifications: subjects shared with me (bell + banner; the shell has its own) ---------- */
-function bellButton() {
-  const badge = h('span', { class: 'bellbadge' });
-  const b = h('button', { class: 'iconbtn bell', id: 'bellbtn', title: t('top.notifications'), 'aria-label': t('top.notifications'), onclick: () => openNotes() }, '🔔', badge);
-  Noema.notes.on(list => { badge.textContent = list.length || ''; badge.style.display = list.length ? '' : 'none'; b.classList.toggle('has', !!list.length); });
-  return b;
-}
-function openNotes() {
-  modal((box, close) => {
-    const body = h('div');
-    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? tE('engine.notes.nothing') : tE('engine.notes.needCloud'))); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(tE('engine.share.openNow', { title: s.title }), () => s.kind === 'curriculum' ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } }))); const clr = Noema.noticesClear?.(list); if (clr) body.append(clr); };
-    Noema.notes.on(draw);
-    box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 ' + t('top.notifications')), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
+/** The engine's indexes (COURSE, CH, SEC, EX, PB, ALL_EX) follow the study area's course (the source filter): the tutor,
+    the search's places (85_locate.js), the inbox and the activities read them. */
+function followCourse(course) {
+  COURSE.length = 0; ALL_EX.length = 0;
+  for (const o of [CH, SEC, EX, PB]) for (const k of Object.keys(o)) delete o[k];
+  course.chapters.forEach((c, i) => {
+    c._i = i; COURSE.push(c); CH[c.id] = c;
+    c.sections.forEach((s, j) => { s._ch = c; s._j = j; s._full = s.full; SEC[s.id] = s; });
+    c.exercises.forEach(e => { e._ch = c; EX[e.id] = e; ALL_EX.push(e); });
+    c.debug.forEach(d => { d._ch = c; PB[d.id] = d; });
   });
 }
-/** 🔔 the banner under the top bar (src/features/sharing/ui/bar.ts, NoemaCore.community): drawn once a share or an update waits */
-function shareBanner() {
-  const bar = h('div', { class: 'sharebar', role: 'status' });
-  Noema.notes.on(list => { if (list.some(x => x.kind !== 'notice')) window.NoemaCore?.community?.notes.bar(bar).catch(e => console.error('[sharebar]', e)); });
-  return bar;
+/* ---------- the tutor's host (src/composition/tutor.ts TutorPageHost) ---------- */
+/* The tutor, its conversations and its threads are src/features/tutor (the session, the prompts, the screens), mounted from
+   the study piece (NoemaCore.studyUi.tutor) before the study area, which gets its two ports (TUTOR_UI.port, TUTOR_UI.ai).
+   This host gives it the open subject: the course after the source filter, the character, the settings, the page's drawer. */
+let TUTOR_UI = null;   // NoemaCore.studyUi.tutor(tutorHost()) at boot: { session, port, ai, md, gemini, chatLangs, chatLangIs, open, close, … }
+/* i18n-ignore-start */   // the learner profile is part of the AI's prompts (English)
+function learnerProfile() {
+  let learner = '';
+  try { learner = JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }   // no settings yet: the default profile
+  learner = learner || ACCOUNT.learner || `The learner (${ACCOUNT.name || 'the student'}) learns best when challenged, tested and given tightly structured, co-located information.`;
+  return `${learner} ${TUTOR.prior || ''}`.trim();
 }
-
-
-/* ---------- the subject's page (#/subject): where you are, Continue, Practice ▾, the chapters as a list or as cards ---------- */
-function ring(pct, size = 120, stroke = 12, color = 'var(--c)') {
-  const r = (size - stroke) / 2, C = 2 * Math.PI * r;
-  const holder = h('div', { style: { position: 'absolute', inset: '0' }, html: `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="transform:rotate(-90deg)"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--bg2)" stroke-width="${stroke}"/><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)" data-off="${C * (1 - Math.min(1, pct))}"/></svg>` });
-  return holder;
+/* i18n-ignore-end */
+/** a part of the whole pack (before the source filter): its chapter, or the exercise itself */
+function findFull(kind, id) {
+  for (const c of FULL_COURSE) {
+    if (kind === 'chapter' && c.id === id) return c;
+    if (kind === 'section' && c.sections.some(s => s.id === id)) return c;
+    if (kind === 'playbook' && c.debug.some(d => d.id === id)) return c;
+    if (kind === 'exercise') { const e = c.exercises.find(x => x.id === id); if (e) return e; }
+  }
+  return null;
 }
-function animateRings(root) { requestAnimationFrame(() => requestAnimationFrame(() => $$('circle[data-off]', root).forEach(c => c.style.strokeDashoffset = c.dataset.off))); }
-/** Read / solved over the whole subject (0…1). */
-function courseProgress() {
-  return NoemaCore.study.progress.chapter({ id: '', sections: COURSE.flatMap(c => c.sections), exercises: ALL_EX }, S.read, S.res);
+function tutorHost() {
+  const fullSec = s => s._full ? { ...s, blocks: s._full.blocks } : s;
+  const visible = (kind, id) => kind === 'section' ? SEC[id] : kind === 'chapter' ? CH[id] : kind === 'playbook' ? PB[id] : kind === 'exercise' ? findFull('exercise', id) : null;
+  const learner = learnerProfile();
+  return {
+    account: { id: ACCOUNT.id, name: ACCOUNT.name || '', kind: ACCOUNT.kind || 'local' },
+    subject: () => ({ id: SUBJ.id, title: SUBJ.title, language: SUBJ.language || 'en', math: !!SUBJ.features?.math, code: !!SUBJ.features?.code, packVersion: Noema.pack?.version || null }),
+    persona: () => ({ name: TUTOR.name, avatar: TUTOR.avatar, domain: TUTOR.domain, prior: TUTOR.prior || '', examples: TUTOR.examples, interviewer: TUTOR.interviewer, simulation: TUTOR.simulation, terminology: TUTOR.terminology, examinerRole: TUTOR.examinerRole }),
+    learner: () => learner,
+    course: {
+      outlines: () => COURSE.map(chapterOutline),
+      section: id => { const s = SEC[id]; return s ? { title: s.title, chapter: s._ch.id, text: sectionText(fullSec(s)), mantra: s._ch.mantra || '' } : null; },
+      chapter: id => { const c = CH[id]; return c ? { num: c.num, title: c.title, outline: chapterOutline(c) } : null; },
+      playbook: id => PB[id] || null,
+    },
+    exerciseText: id => { const e = findFull('exercise', id); return e ? STUDY.exerciseText(e) : null; },
+    exerciseTextOf: ex => STUDY.exerciseText(ex),
+    sectionOf: id => EX[id]?.section || null,
+    filteredOut: (kind, id) => !visible(kind, id) && !!findFull(kind, id),
+    showAll: () => STUDY.app.setFilter(null),
+    preloaded: Noema.preloadedConvos || [],
+    settings: () => S.settings, save, toast, touchStreak,
+    openSettings: () => openAccountMenu('settings'), openGuide: () => openGuide('gemini'),
+    drawer: () => $('aside.drawer'), scrim: () => $('.scrim'),
+    framed: () => !!SHL(),
+    face: () => SHL() && window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : '',
+    tutor: () => ({ name: TUTOR.name, avatar: TUTOR.avatar, plural: !!window.NoemaThemes?.tutor?.()?.pl }),
+    uiLang,
+    appTitle: APP_TITLE, appName: Noema.config.appName || 'noema-lite',   // i18n-ignore (the app's name)
+  };
 }
-/** This subject is a station of a 🧭 Roadmap: which one, its mastery so far, the way back to the map. */
-/** The subject as a step of a Roadmap: where, how far to mastery (and the 🎉 once it is mastered). → null when it is not a step */
-function stationInfo() {
-  if (!Noema.node || !window.NoemaCurMap) return null;
-  const info = NoemaCurMap.nodeInfo(ACCOUNT.id, Noema.node); if (!info) return null;
-  const { sr: read, ex: solved } = courseProgress();
-  const done = info.st.mastered || (read >= 0.999 && solved >= NoemaCurriculum.PASS);
-  if (done && !S.nodeDone) { learnt('subject.finished', null); setTimeout(() => window.NoemaReact?.big('node'), 600); }
-  return { info, read, solved, done };
-}
-function nodeBanner() {
-  const st = stationInfo(); if (!st) return null;
-  const { info, read, solved, done } = st;
-  return h('div', { class: 'callout key nodebanner' }, h('span', { class: 'ci' }, '🧭'),
-    h('div', { class: 'grow' }, h('b', { class: 't' }, SL('stationOf', { title: info.c.title || info.c.goal })),
-      h('div', { class: 'tiny' }, done ? SL('stationDone') : SL('stationMastery', { r: Math.round(read * 100), e: Math.round(solved * 100), p: Math.round(NoemaCurriculum.PASS * 100) })),
-      h('div', { class: 'nbbar' }, h('i', { style: { width: Math.round(Math.min(read, solved / NoemaCurriculum.PASS) * 100) + '%' } }))),
-    h('button', { class: 'btn small', onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🗺️ ' + SL('openMap')));
-}
-/** 🎯 Practice ▾ — every way to practise the whole subject, in one place. */
-function practiceItems() {
-  if (STEP_LOCK) return [{ label: SL('exercisesWord'), sub: SL('exLocked', { list: STEP_LOCK.missing.join(', ') || '…' }), icon: '🔒', run: () => toast('🔒 ' + SL('lockedPreview'), 4000) }];
-  const dueFc = countDueCards(), duePb = countDuePlaybooks(), wrong = mistakesList().length;
-  return [
-    { label: t('home.mixed'), sub: t('home.mixedSub'), icon: '🎲', href: '#/practice/all' },
-    { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: '#/cards', badge: dueFc ? t('home.due', { n: dueFc }) : null, tone: 4 },
-    Object.keys(PB).length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: '#/drills', badge: duePb ? t('home.due', { n: duePb }) : null, tone: 4 } : null,
-    { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', href: '#/mistakes', badge: wrong ? nf(wrong) : null, tone: 3 },
-    { label: t('home.lightning'), sub: t('home.lightningSub'), icon: '⚡', href: '#/lightning' },
-    '-',
-    { label: SHL() ? SL('askTutor') : t('home.tutor'), sub: SHL() ? SL(window.NoemaThemes?.tutor?.()?.pl ? 'askTutorSubPl' : 'askTutorSub') : t('home.tutorSub'), icon: TUTOR.avatar, run: () => openTutor(null, 'socratic', null, { intent: INTENT.course }) }];
-}
-function practiceButton(items = practiceItems()) {
-  const X = SHL();
-  if (!X?.menuButton) return h('div', { class: 'modes' }, ...items.filter(x => x && x !== '-').map(it => modeTile(it.icon, it.label, it.sub, it.href, it.badge, it.run)));
-  return X.menuButton(items, { cls: 'btn ns-practicebtn', label: t('ch.practice'), content: h('span', {}, t('ch.practice'), ' ▾') });
-}
-function modeTile(ic, title, sub, hash, badge, fn) {
-  return h('button', { class: 'mode', onclick: fn || (() => go(hash)) }, badge ? h('span', { class: 'pill badge', style: { background: '#ffe3d3', color: '#e8590c' } }, badge) : null, h('span', { class: 'ic' }, ic), h('b', {}, title), h('small', {}, sub));
-}
-/** ⋮ of the subject: everything that is not studying itself. */
-async function subjectMeta() { return (await Noema.subjectsFor(ACCOUNT.id)).find(x => x.id === SUBJ.id) || { ...SUBJ, origin: Noema.subjectMeta?.origin }; }
-function subjectMenu() {
-  const own = m => m.origin !== 'library';
-  return () => [
-    { label: SL('searchSubject'), icon: 'search', run: openSearch },
-    newSources().length ? { label: t('view.whatsNew'), icon: 'spark', href: '#/new' } : null,
-    { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
-    hasKmap() ? { label: tE('engine.kmap.title'), sub: tE('engine.kmap.menuSub'), icon: 'map', run: () => knowledgeMap() } : null,
-    Object.keys(S.flags || {}).length ? { label: tE('engine.flags.menu', { n: Object.keys(S.flags).length }), icon: 'help', run: () => reportedView() } : null,
-    { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
-    '-',
-    Noema.node ? { label: SL('openMap'), icon: 'map', run: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) } : null,
-    window.NoemaCurMap?.attachDialog ? { label: Noema.node ? SL('otherStation') : SL('putOnMap'), sub: SL('putOnMapSub'), icon: 'path', run: async () => NoemaCurMap.attachDialog(ACCOUNT.id, { subject: await subjectMeta(), onDone: () => location.reload() }) } : null,
-    { label: SL('editSubject'), sub: SL('editSubjectSub'), icon: 'edit', run: async () => Noema.editSubject(await subjectMeta(), { onChange: () => location.reload() }) },
-    { label: tE('engine.author.create'), sub: tE('engine.author.createSub'), icon: 'wrench', href: '#/author' },
-    { label: tE('engine.engines.menu'), sub: tE('engine.engines.menuSub'), icon: 'spark', href: '#/engines' },
-    own(Noema.subjectMeta || {}) ? { label: SL('shareSubject'), sub: SL('shareSubjectSub'), icon: 'share', run: async () => Noema.share(await subjectMeta()) } : null,   // library subjects are everybody's already
-    { label: SL('exportPackage'), sub: SL('exportPackageSub'), icon: 'download', run: () => Noema.exportPackage(ACCOUNT.id, Noema.pack).catch(e => toast('⚠️ ' + errText(e), 4000)) },
-    window.NoemaXAPI ? { label: tE('engine.xapi.export'), sub: tE('engine.xapi.exportSub'), icon: 'download', run: exportXAPI } : null,
-    window.NoemaXAPI ? { label: tE('engine.xapi.cmi5'), sub: tE('engine.xapi.cmi5Sub'), icon: 'download', run: exportCmi5 } : null,
-    { label: SL('pickSubject'), icon: 'book', run: () => Noema.openSubjectPicker() },
-    '-',
-    { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
-}
-/** ⋮ › Export learning record (xAPI): this subject's activity attempts and answers, from the learning log (NoemaCore.learning.xapi), as
-    an xAPI 1.0.3 file, made by NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the
-    account id, never an e-mail. The pack's own subject (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
-async function exportXAPI() {
-  let r;
-  try { const { attempts, answers } = await LOG.xapi(SUBJ.id); r = NoemaXAPI.subjectRecord({ attempts, answers, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
-  catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
-  if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
-  saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
-}
-/** ⋮ › Course package for an LMS (cmi5): the subject's chapters as a cmi5 course structure in a .zip (NoemaXAPI.subjectCmi5; JSZip, the
-    app's zip writer); its AUs open the chapters on the site, with the same ids as the xAPI record. */
-async function exportCmi5() {
-  try {
-    const r = NoemaXAPI.subjectCmi5({ pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, site: Noema.config?.siteUrl });
-    saveBlob(r.name, await NoemaXAPI.zip(r.files));
-  } catch (e) { toast('⚠️ ' + errText(e), 4000); }
-}
+/** a file to download (the subject's exports, engine/app/study.js; an engine request, src/features/reports/ui/engines.ts) */
 function saveBlob(name, blob) {
   const u = URL.createObjectURL(blob), a = h('a', { href: u, download: name });
   document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 10000);
   toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
-function resetProgress(after) {
-  confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); learnt('subject.reset', null); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
-}
-/** 🔎 Jump to any concept of the subject. */
-function openSearch() {
-  const results = h('div', { class: 'results' });
-  const inp = h('input', { class: 'noema-input', placeholder: `${SL('searchConcept')}${SUBJ.searchExamples ? ' (' + SUBJ.searchExamples + ')' : ''}`, 'aria-label': SL('searchSubject'), oninput: e => doSearch(e.target.value, results) });
-  const X = SHL();
-  if (X?.sheet) { X.sheet(SL('searchSubject'), (body, close) => { body.append(h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), inp), results); results.addEventListener('click', e => { if (e.target.closest('.result')) close(); }); setTimeout(() => inp.focus(), 50); }); return; }
-  modal((box, close) => { box.append(h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), inp), results); results.addEventListener('click', e => { if (e.target.closest('.result')) close(); }); setTimeout(() => inp.focus(), 50); });
-}
-const CHVIEW_KEY = 'noema-chview';
-function chapterViewStyle() { try { return localStorage.getItem(CHVIEW_KEY) === 'list' ? 'list' : 'cards'; } catch (e) { return 'cards'; } }   // cards unless the learner chose the list
-function homeView() {
-  setTutorContext(null);
-  setAccent(document.body, null);
-  shellChrome({ corner: true, menu: subjectMenu() });
-  noteRecent();
-  const p = courseProgress(), last = S.last && SEC[S.last], first = COURSE[0]?.sections[0];
-  const nSec = COURSE.reduce((a, c) => a + c.sections.length, 0);
-  const body = h('div', { class: 'chbox' });
-  let style = chapterViewStyle();
-  const seg = h('div', { class: 'ns-seg small chviewseg', role: 'radiogroup', 'aria-label': SL('chView') }, ...[['list', SL('viewList')], ['cards', SL('viewCards')]].map(([k, l]) => h('button', { 'data-v': k, class: style === k ? 'on' : '', role: 'radio', 'aria-checked': String(style === k), onclick: () => { style = k; try { localStorage.setItem(CHVIEW_KEY, k); } catch (e) { } $$('button', seg).forEach(b => { b.classList.toggle('on', b.dataset.v === k); b.setAttribute('aria-checked', String(b.dataset.v === k)); }); draw(); } }, l)));
-  const X = SHL(), st = X ? stationInfo() : null, pr = { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) };
-  const mantra = SUBJ.hero?.mantra || SUBJ.description;
-  // the frame: one plain header (a step of which Roadmap · the title · one line · one bar); the classic screens keep the emoji and the step banner
-  const top = X ? [st ? h('button', { class: 'ns-kicker subjkicker', title: SL('openMap'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, SL('stationOf', { title: st.info.c.title || st.info.c.goal }), ' ›') : null,
-      h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || '', Noema.bridgeTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null]
-    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, SUBJ.emoji || '📘'), h('div', { class: 'grow' }, h('h1', { class: 'herohead' }, SUBJ.title, Noema.langTag?.(SUBJ) || '', Noema.bridgeTag?.(SUBJ) || ''), mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null))];
-  const barW = st ? Math.round(Math.min(st.read, st.solved / NoemaCurriculum.PASS) * 100) : Math.round((p.sr + p.ex) * 50);
-  const barTip = st ? (st.done ? SL('stationDone') : SL('stationMastery', { ...pr, p: Math.round(NoemaCurriculum.PASS * 100) })) : SL('subjProgress', pr);
-  const v = view(
-    setupBanner(), X ? null : nodeBanner(),
-    h('section', { class: 'subjhead' + (st ? ' station' : '') }, ...top,
-      h('div', { class: 'subjbar', title: barTip }, h('div', { class: 'bar' }, h('i', { style: { width: barW + '%' } })), h('span', { class: 'tiny' }, st?.done ? '✓ ' + SL('stationMastered') : SL('subjProgress', pr))),
-      h('div', { class: 'row subjgo' },
-        last ? h('button', { class: 'btn primary', onclick: () => go(`#/s/${last.id}`) }, SL('continueSec', { title: last.title }))
-          : first ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + first.id) }, SL('startCh1')) : null,
-        practiceButton(), whatsNewButton())),
-    h('div', { class: 'row chlisthead' }, h('h2', { class: 'grow' }, t('home.chapters')), h('span', { class: 'tiny hide-s' }, SL('subjCounts', { c: COURSE.length, s: nSec, e: ALL_EX.length })), seg),
-    body);
-  function draw() {
-    body.innerHTML = '';
-    if (style === 'cards') {
-      body.append(h('div', { class: 'chapters' }, ...COURSE.map((c, i) => {
-        const p = chProgress(c);
-        const card = h('button', { class: 'chcard', style: { animationDelay: i * 40 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
-          newBadge(c), h('div', { class: 'emo' }, c.emoji), h('div', { class: 'num' }, `${SL('chapterN', { n: c.num })}${S.boss[c.id] ? ' · 🏆' : ''}`), h('h3', {}, c.title), h('p', {}, c.subtitle),
-          h('div', { class: 'bars' },
-            h('div', { class: 'barlbl' }, h('span', {}, '📖 ' + SL('theory')), h('span', {}, pctText(Math.round(p.sr * 100)))), h('div', { class: 'bar' }, h('i', { style: { width: '0%' }, 'data-w': p.sr * 100 + '%' })),
-            h('div', { class: 'barlbl' }, h('span', {}, '🎯 ' + SL('practice')), h('span', {}, pctText(Math.round(p.ex * 100)))), h('div', { class: 'bar alt' }, h('i', { style: { width: '0%' }, 'data-w': p.ex * 100 + '%' }))));
-        setAccent(card, c); return card;
-      })));
-      requestAnimationFrame(() => requestAnimationFrame(() => $$('.bar>i[data-w]', body).forEach(i => i.style.width = i.dataset.w)));
-    } else {
-      body.append(h('div', { class: 'chlist' }, ...COURSE.map((c, i) => {
-        const p = chProgress(c), pct = Math.round((p.sr + p.ex) * 50);
-        const row = h('button', { class: 'chrow' + (pct >= 100 ? ' done' : ''), style: { animationDelay: i * 25 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
-          h('span', { class: 'emo' }, c.emoji), h('span', { class: 'grow' }, h('small', {}, SL('chapterN', { n: c.num }), S.boss[c.id] ? ' · 🏆' : ''), h('b', {}, c.title), c.subtitle ? h('small', { class: 'sub' }, c.subtitle) : null),
-          newBadge(c), h('span', { class: 'chpct' }, h('span', { class: 'minibar' }, h('i', { style: { width: pct + '%' } })), h('small', {}, pctText(pct))));
-        setAccent(row, c); return row;
-      })));
-    }
-  }
-  draw();
-  animateRings(v);
-}
-let searchIdx = null;
-function doSearch(q, box) {
-  box.innerHTML = '';
-  q = q.trim().toLowerCase(); if (q.length < 2) return;
-  if (!searchIdx) searchIdx = Object.values(SEC).map(s => ({ s, title: s.title.toLowerCase(), body: sectionText(s).toLowerCase() }));
-  const words = q.split(/\s+/);
-  const res = searchIdx.map(x => { let sc = 0; for (const w of words) { if (x.title.includes(w)) sc += 10; const c = x.body.split(w).length - 1; if (!c) return null; sc += Math.min(c, 8); } return { ...x, sc }; }).filter(Boolean).sort((a, b) => b.sc - a.sc).slice(0, 7);
-  if (!res.length) { box.append(h('div', { class: 'tiny' }, tE('engine.search.none', { tutor: TUTOR.name, avatar: TUTOR.avatar }))); return; }
-  res.forEach((r, i) => {
-    const pos = r.body.indexOf(words[0]);
-    const snip = sectionText(r.s).slice(Math.max(0, pos - 50), pos + 90).replace(/\s+/g, ' ');
-    const b = h('button', { class: 'result', style: { animationDelay: i * 30 + 'ms' }, onclick: () => go('#/s/' + r.s.id) }, h('b', {}, `${r.s._ch.emoji} ${r.s.title}`), h('small', {}, chTitle(r.s._ch.num, `…${snip}…`)));
-    box.append(b);
-  });
-}
 
-/* ---------- chapter: Theory · Practice · Traps (the old Cards and Debug-drill tabs live inside Practice; their links still work) ---------- */
-let chTab = {};
-/** A row of choices: a ⋮-style pop-up in the shell, plain buttons without it. */
-function choiceList(items) {
-  return h('div', { class: 'plist' }, ...items.filter(Boolean).map(it => h('button', { class: 'pitem' + (it.cls ? ' ' + it.cls : ''), onclick: it.run || (() => go(it.href)) },
-    h('span', { class: 'pic' }, it.icon), h('span', { class: 'grow' }, h('b', {}, it.label), it.sub ? h('small', {}, it.sub) : null), it.badge != null && it.badge !== '' ? h('span', { class: 'pill c' }, it.badge) : null, h('span', { class: 'chev', 'aria-hidden': 'true' }, '›'))));
-}
-function chapterMenu(c) {
-  return () => [{ label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id: c.id, origin: { via: 'chapterSocratic', ch: c.id } }, 'socratic', null, { intent: INTENT.chSocratic }) },
-    { label: SL('searchSubject'), icon: 'search', run: openSearch }, { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() },
-    c.map?.learnables?.length ? { label: tE('engine.kmap.title'), sub: tE('engine.kmap.menuSub'), icon: 'map', run: () => knowledgeMap(c.id) } : null,
-    { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() }, '-',
-    { label: SL('allChapters'), icon: 'list', href: HOME() }];
-}
-/** → the next chapter; after the last one, the next step of the Roadmap this subject teaches (on its map). */
-function nextAfterChapter(c) {
-  const nx = COURSE[COURSE.indexOf(c) + 1];
-  if (nx) return h('button', { class: 'btn nextch', title: nx.title, onclick: () => go('#/ch/' + nx.id) }, SL('nextChapterBtn', { title: nx.title }) + ' ' + arrowOn());
-  const CU = window.NoemaCurriculum, acc = ACCOUNT?.id, at = CU?.stepsOf && acc ? CU.stepsOf(acc, SUBJ.id)[0] : null; if (!at) return null;
-  const all = CU.statuses(acc, at.c), ord = CU.order(at.c).filter(x => at.c.nodes[x]);
-  const to = ord.find(x => (all[x]?.parents || []).includes(at.nid)) || CU.nextUp(acc, at.c).find(x => x !== at.nid);
-  return to ? h('button', { class: 'btn nextch', title: CU.shownNode(at.c, to).title, onclick: () => go('#/map/' + encodeURIComponent(at.c.id) + '/' + encodeURIComponent(to)) }, SL('nextStepBtn', { title: CU.shownNode(at.c, to).title }) + ' ' + arrowOn()) : null;
-}
-function chapterView(id, tab, focus) {
-  const c = CH[id]; if (!c) return go(HOME());
-  setAccent(document.body, c);
-  if (S.lastChapter !== id) learnt('chapter.opened', id);
-  setTutorContext({ kind: 'chapter', id });
-  tab = tab || chTab[id] || 'learn'; chTab[id] = tab;
-  const on = ['debug', 'cards', 'filters'].includes(tab) ? 'practice' : ['learn', 'practice', 'traps'].includes(tab) ? tab : 'learn';
-  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`]], back: HOME(), corner: true, menu: chapterMenu(c) });
-  noteRecent({ chNum: c.num, chOf: COURSE.length });
-  const p = chProgress(c);
-  const tabs = [['learn', t('ch.learn'), c.sections.length], ['practice', t('ch.practice'), c.exercises.length], ['traps', t('ch.traps'), c.pitfalls.length]];
-  const body = h('div');
-  const v = view(
-    backBtn(t('ch.all'), HOME()),
-    h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
-      h('div', { class: 'grow' }, h('div', { class: 'num' }, SL('chOf', { n: c.num, of: COURSE.length })), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c),
-        c.map?.learnables?.length ? h('button', { class: 'kmapbtn', type: 'button', onclick: () => knowledgeMap(c.id) }, 'ⓘ ' + tE('engine.kmap.chip', { n: c.map.learnables.length })) : null),
-      h('div', { class: 'chring' }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { class: 'chringc' }, pctText(Math.round((p.sr + p.ex) * 50))))),
-    explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),   // i18n-ignore (for the AI)
-    h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map(([k, l, n]) => h('button', { class: on === k ? 'on' : '', role: 'tab', 'aria-selected': String(on === k), onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, nf(n))))),
-    body);
-  animateRings(v);
-  if (on === 'learn') {
-    const nextSec = c.sections.find(s => !S.read[s.id]);
-    body.append(
-      h('details', { class: 'obj' }, h('summary', {}, '🎯 ' + SL('objectives') + ' ▸'), h('ul', {}, ...c.objectives.map(o => h('li', { html: fmt(o) })))),
-      h('div', { class: 'path' }, ...c.sections.map((s, i) => {
-        const nEx = c.exercises.filter(e => e.section === s.id), nOk = nEx.filter(e => solved(e.id)).length;
-        return h('button', { class: 'node' + (S.read[s.id] ? ' done' : ''), style: { animationDelay: i * 35 + 'ms' }, onclick: () => go('#/s/' + s.id) },
-          h('div', { class: 'dot' }, S.read[s.id] ? '✓' : nf(i + 1)), h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, s.hook || '')),
-          h('div', { class: 'meta' }, newBadge(s), h('span', { class: 'pill' + (nOk === nEx.length && nEx.length ? ' c' : '') }, `🎯 ${nf(nOk)}/${nf(nEx.length)}`)));
-      })),
-      h('div', { class: 'row', style: { marginTop: '22px' } },
-        nextSec ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + nextSec.id) }, (S.read[c.sections[0].id] ? SL('continueSec', { title: nextSec.title }) : SL('startReading'))) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${id}/practice`) }, '🎯 ' + SL('practiceChapter')),
-        nextAfterChapter(c),
-        h('button', { class: 'btn ghost', onclick: () => openTutor({ kind: 'chapter', id, origin: { via: 'chapterSocratic', ch: id } }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} ${SL('chSocratic')}`)));
-  } else if (on === 'practice') {
-    if (STEP_LOCK) body.append(lockNote());
-    else if (tab === 'practice') body.append(chapterPractice(c));
-    else {
-      body.append(h('button', { class: 'linkish subback', onclick: () => go(`#/ch/${id}/practice`) }, '‹ ' + SL('allWays')));
-      if (tab === 'debug') drillList(body, c.debug);
-      else if (tab === 'cards') flashDeck(body, c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c })));
-      else practiceSetup(body, c);
-    }
-  } else if (on === 'traps') {
-    const traps = c.exercises.filter(e => e.tags.some(t => ['pitfall', 'exam'].includes(t))), tf = c.exercises.filter(e => e.type === 'tf');
-    body.append(h('p', { class: 'muted' }, SL('trapsIntro')),
-      h('div', { class: 'row', style: { marginBottom: '14px' } },
-        traps.length ? h('button', { class: 'btn primary', onclick: () => startRun(traps, { title: `⚠️ ${SL('trapDrill')} · ${chShort(c.num)}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ ' + SL('trapsNoTimer')) : null,
-        tf.length >= 3 ? h('button', { class: 'btn', onclick: () => go('#/lightning/' + id) }, '⚡ ' + SL('trapsTimed')) : null),
-      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', 'data-pid': NoemaCore.catalog.trapId(p), style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ ' + tE('engine.ch.fixHtml', { fix: fmt(p.fix) }) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));   // i18n-ignore (text, what: for the AI)
-    if (focus) showHit(body.querySelector(`[data-pid="${focus}"]`));
-  }
-}
-/** Practice tab: every way to practise this chapter. */
-function chapterPractice(c) {
-  const id = c.id, ok = c.exercises.filter(e => solved(e.id)).length, wrong = c.exercises.filter(e => S.res[e.id]?.last === false);
-  const dueC = NoemaCore.study.cards.countDue(S.fc, c.flashcards.map((f, i) => f._key || c.id + '#' + i));
-  const dueD = c.debug.filter(drillDue).length;
-  return choiceList([
-    c.exercises.length ? { label: SL('round10'), sub: SL('solvedOf', { n: ok, of: c.exercises.length }), icon: '🎯', cls: 'main', run: () => startRun(c.exercises, { title: '🎯 ' + chTitle(c.num, c.title), count: 10, back: `#/ch/${id}/practice` }) } : null,
-    c.exercises.length ? { label: SL('chooseRound'), sub: SL('chooseRoundSub'), icon: '🎛️', href: `#/ch/${id}/filters` } : null,
-    c.flashcards.length ? { label: t('home.cards'), sub: t('home.cardsSub'), icon: '🃏', href: `#/ch/${id}/cards`, badge: dueC ? t('home.due', { n: dueC }) : nf(c.flashcards.length) } : null,
-    c.debug.length ? { label: t('home.drills'), sub: t('home.drillsSub'), icon: '🔧', href: `#/ch/${id}/debug`, badge: dueD ? t('home.due', { n: dueD }) : nf(c.debug.length) } : null,
-    wrong.length ? { label: t('home.mistakes'), sub: t('home.mistakesSub'), icon: '🔁', badge: nf(wrong.length), run: () => startRun(wrong, { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: wrong.length, back: `#/ch/${id}/practice` }) } : null,
-    c.exercises.length ? { label: S.boss[id] ? SL('bossBeaten') : SL('boss'), sub: SL('bossSub'), icon: S.boss[id] ? '🏆' : '👾', href: `#/boss/${id}` } : null,
-    { label: SL('chSocratic'), sub: SL('chSocraticSub'), icon: TUTOR.avatar, run: () => openTutor({ kind: 'chapter', id, origin: { via: 'chapterSocratic', ch: id } }, 'socratic', null, { intent: INTENT.chSocratic }) }]);
-}
 
-/* ---------- section reader ---------- */
-const CALLOUT_IC = { key: '🔑', pitfall: '⚠️', tip: '💡', exam: '🎓', warn: '🚧', analogy: '🧩', debug: '🔧', interview: '🎤' };
-function renderBlock(b, i, sid) {
-  const wrap = h('div', { class: 'blk b-' + b.t, style: { animationDelay: (i % 6) * 60 + 'ms' } });
-  switch (b.t) {
-    case 'p': wrap.append(h('p', { 'data-nf': 'text', html: fmt(b.text) })); break;
-    case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map((x, k) => h('li', { 'data-nf': 'items.' + k, html: fmt(x) })))); break;
-    case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
-    case 'figure': wrap.append(figureBlock(b)); break;
-    case 'interactive': wrap.append(interactiveBlock({ ...b, _sec: sid })); break;
-    case 'diagram': wrap.append(h('div', { class: 'diagram', 'data-nf': 'text' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
-    case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map((x, k) => h('th', { 'data-nf': 'head.' + k, html: fmt(x) })))), h('tbody', {}, ...b.rows.map((r, j) => h('tr', {}, ...r.map((x, k) => h('td', { 'data-nf': `rows.${j}.${k}`, html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break;
-    case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', 'data-nf': 'title', html: fmt(b.title) }) : null, h('div', { 'data-nf': 'text', html: fmt(b.text) }))); break;
-    case 'compare': wrap.append(h('div', { class: 'compare' }, ...b.items.map((it, k) => h('div', { 'data-nf': 'items.' + k }, h('h4', { 'data-nf': `items.${k}.title`, html: fmt(it.title) }), h('ul', {}, ...it.points.map((p, j) => h('li', { 'data-nf': `items.${k}.points.${j}`, html: fmt(p) }))))))); break;
-    case 'flow': { const f = h('div', { class: 'flow' }); b.items.forEach((x, k) => { if (k) f.append(h('span', { class: 'ar' }, '→')); f.append(h('span', { class: 'st', 'data-nf': 'items.' + k, style: { animationDelay: k * 70 + 'ms' }, html: fmt(x) })); }); wrap.append(f); if (b.caption) wrap.append(h('div', { class: 'caption', 'data-nf': 'caption', html: fmt(b.caption) })); break; }
-    case 'reveal': { const r = h('div', { class: 'reveal' }, h('button', { onclick: () => { r.classList.toggle('open'); if (r.classList.contains('open') && !r._xp) { r._xp = 1; addXP(1, r); } } }, h('span', {}, '🤔'), h('span', { class: 'q', 'data-nf': 'label', html: fmt(b.label) }), h('span', { class: 'chev' }, '▸')), h('div', { class: 'ans', 'data-nf': 'text', html: fmt(b.text) })); wrap.append(r); break; }
-    case 'ask': {
-      const box = h('div', { class: 'ask' });
-      const ol = h('ol', {}, ...b.questions.map((q, k) => { const li = h('li', { 'data-nf': 'questions.' + k, onclick: () => li.classList.add('shown') }, h('span', { html: fmt(q) })); return li; }));
-      const tog = h('button', { class: 'btn small', style: { marginLeft: 'auto' }, onclick: () => { box.classList.toggle('recall'); $$('li', ol).forEach(l => l.classList.remove('shown')); tog.textContent = box.classList.contains('recall') ? '👁️ ' + tE('engine.blk.showAll') : '🙈 ' + tE('engine.blk.recallMode'); } }, '🙈 ' + tE('engine.blk.recallMode'));
-      box.append(h('div', { class: 'hd' }, '🧠', h('span', { html: fmt(b.title || tE('engine.blk.askYourself')) }), tog), ol);
-      wrap.append(box); break;
-    }
-    case 'terms': wrap.append(h('div', { class: 'terms' }, ...b.items.map((t, k) => h('div', { class: 'term' }, h('b', { 'data-nf': `items.${k}.term`, html: fmt(t.term) }), h('div', { class: 'tiny', 'data-nf': `items.${k}.def`, style: { color: 'var(--ink2)', fontSize: '14px' }, html: fmt(t.def) }))))); break;
-  }
-  return wrap;
-}
-/** 💡 on a block and on its cards / items (compare columns, terms, list items, table rows). */
-/* i18n-ignore-start */   // the kind of a part, and its text: words of the AI's prompt (explainItem)
-const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', interactive: 'interactive activity', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
-function explainParts(el, b, s) {
-  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || tE('engine.aimsg.thisFigure')) : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson', bid: el.dataset.bid }));
-  if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card', bid: el.dataset.bid })); });
-  if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term', bid: el.dataset.bid })); });
-  if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point', bid: el.dataset.bid })); });
-  if (b.t === 'table') $$('tbody tr', el).forEach((d, k) => { const r = b.rows[k]; if (r) explainable(d.lastElementChild || d, () => ({ label: r[0], text: b.head.map((hd, j) => `${hd}: ${r[j] ?? ''}`).join('\n'), sec: s, what: 'row of the table', bid: el.dataset.bid })); });
-  return el;
-}
-/* i18n-ignore-end */
-function chunkBlocks(blocks) {
-  // group into bite-size chunks of ~3–4 blocks, never splitting right after a heading-like callout
-  const out = []; let cur = [], weight = 0;
-  blocks.forEach(b => {
-    const w = b.t === 'p' ? 1 : b.t === 'list' ? 1.3 : b.t === 'code' || b.t === 'diagram' || b.t === 'table' || b.t === 'compare' ? 1.6 : 1;
-    cur.push(b); weight += w;
-    if (weight >= 3.6) { out.push(cur); cur = []; weight = 0; }
-  });
-  if (cur.length) { if (out.length && cur.length === 1) out[out.length - 1].push(...cur); else out.push(cur); }
-  return out;
-}
-const revealedChunks = {};
-function sectionMenu(s) {
-  const fresh = () => { const slot = $('.freshslot'); if (slot) { slot.dispatchEvent(new Event('noema-fresh')); slot.scrollIntoView({ behavior: 'smooth', block: 'center' }); } else go('#/s/' + s.id); };
-  return () => [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, $('.freshslot') ? { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: fresh } : null, { label: SL('searchSubject'), icon: 'search', run: openSearch },
-    { label: SL('sources'), sub: SL('sourcesSub'), icon: 'book', run: () => toggleSourcesDeck() }, { label: timerT ? SL('focusStop') : SL('focusSprint'), sub: SL('focusSprintSub'), icon: 'clock', run: () => focusSprint() },
-    window.NoemaBridge?.menuItem() || null, '-', { label: SL('allSections'), icon: 'list', href: '#/ch/' + s._ch.id }];
-}
-function sectionView(sid, bid) {
-  const s = SEC[sid]; if (!s) return go(HOME());
-  const bids = s._bids || (s._bids = NoemaCore.catalog.blockIds(s.blocks));   // stable ids (src/features/catalog): #/s/<section>/<block> opens exactly that block
-  const c = s._ch; setAccent(document.body, c);
-  if (S.last !== sid) learnt('section.opened', sid);
-  setTutorContext({ kind: 'section', id: sid });
-  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + c.id]], back: '#/ch/' + c.id, reading: true, menu: sectionMenu(s) });
-  noteRecent({ sid, secTitle: s.title, chNum: c.num, chOf: COURSE.length, secNum: s._j + 1, secOf: c.sections.length });
-  const chunks = S.settings.chunk ? chunkBlocks(s.blocks) : [s.blocks];
-  let shown = revealedChunks[sid] || (S.read[sid] ? chunks.length : 1);
-  const target = bid ? s.blocks[bids.indexOf(bid)] : null;   // a found block: every chunk up to it is shown
-  if (target) { const ci = chunks.findIndex(ch => ch.includes(target)); if (ci >= 0 && ci + 1 > shown) shown = revealedChunks[sid] = ci + 1; }
-  const prev = c.sections[s._j - 1], next = c.sections[s._j + 1];
-  const body = h('div');
-  const pl = h('div', { class: 'progressline' }, h('i', { style: { width: '0%' } }));
-  const tail = h('div');
-  const headRow = h('div', { class: 'row' }, h('span', { class: 'pill c' }, SHL() ? `${SL('chOf', { n: c.num, of: COURSE.length })} · ${SL('secOf', { n: s._j + 1, of: c.sections.length })}` : tE('engine.sec.nOfM', { n: s._j + 1, of: c.sections.length })), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ ' + SL('read')) : null);
-  const v = view(h('div', { class: 'reader' },
-    backBtn(`${arrowBack()} ${c.emoji} ` + chTitle(c.num, c.title), '#/ch/' + c.id),
-    pl,
-    explainable(h('div', { class: 'sechead' }, headRow,
-      h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),   // i18n-ignore (for the AI)
-    body, tail));
-  function draw(scroll) {
-    body.innerHTML = '';
-    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0, s.id); el.dataset.bid = bids[s.blocks.indexOf(b)]; markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
-    pl.firstChild.style.width = (shown / chunks.length * 100) + '%';
-    tail.innerHTML = '';
-    if (shown < chunks.length) {
-      tail.append(h('div', { class: 'continue' }, h('div', { class: 'row' },
-        h('button', { class: 'btn primary', onclick: () => { shown++; revealedChunks[sid] = shown; draw(true); } }, `${SL('continueRead')} ▾  (${nf(shown)}/${nf(chunks.length)})`),
-        h('button', { class: 'btn ghost small', onclick: () => { shown = chunks.length; revealedChunks[sid] = shown; draw(); } }, SL('showAll')))));
-      if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    } else {
-      if (!S.read[sid]) {
-        learnt('section.read', sid); addXP(5, pl);
-        if (c.sections.every(x => S.read[x.id])) { if (!S.chapters[c.id]) learnt('chapter.finished', c.id); setTimeout(() => window.NoemaReact?.big('chapter'), 500); }   // the last section of the chapter
-      }
-      tail.append(sectionTail(s, prev, next));
-      if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    }
-    window.NoemaBridge?.section({ sid, body, head: headRow });   // 文A language help: the words of the theory in the learner's language (engine/bridge.js, docs/BRIDGE.md)
-  }
-  draw();
-  if (target) showHit(body.querySelector(`[data-bid="${bids[s.blocks.indexOf(target)]}"]`));
-}
-/** A place opened from the search (src/features/search/ui): brought into view and outlined for a moment. */
-function showHit(el) {
-  if (!el) return;
-  setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('ns-hit'); setTimeout(() => el.classList.remove('ns-hit'), 2600); }, 120);
-}
-/** The section's AI buttons: [the learner's first message (their bubble, in the UI language), the task for the AI]. */
-const SEC_ASK = { socratic: ['engine.aimsg.secSocratic', 'secSocratic'], debug: ['engine.aimsg.secDebug', 'secDebug'], interview: ['engine.aimsg.secInterview', 'secInterview'] };
-function askSection(s, mode) { const [msg, intent] = SEC_ASK[mode]; openTutor({ kind: 'section', id: s.id, origin: { via: 'section_' + mode, sec: s.id } }, mode, tE(msg, { title: s.title }), { intent: INTENT[intent] }); }
-function sectionTail(s, prev, next) {
-  const c = s._ch;
-  const exs = c.exercises.filter(e => e.section === s.id);
-  const quick = exs.filter(e => e.quick);
-  const pbs = c.debug.filter(d => d.section === s.id);
-  const zone = h('div', { class: 'quickzone' });
-  if (STEP_LOCK) { if (exs.length || pbs.length) zone.append(lockNote()); }
-  else if (quick.length) {
-    zone.append(h('h3', {}, '⚡ ' + SL('quickCheck'), h('span', { class: 'tiny' }, SL('quickCheckSub', { n: quick.length }))));
-    quick.forEach(e => zone.append(exerciseCard(e)));
-  }
-  if (pbs.length && !STEP_LOCK) {
-    zone.append(h('h3', { style: { margin: '22px 0 10px' } }, '🔧 ' + SL('sectionDrill')));
-    pbs.forEach(d => zone.append(drillTile(d)));
-  }
-  const fresh = h('div', { class: STEP_LOCK ? '' : 'freshslot' });
-  const freshQ = async () => { const note = h('p', { class: 'tiny' }, '✨ ' + SL('generating')); fresh.prepend(note); try { const ex = await aiQuestion(s); note.replaceWith(exerciseCard(ex)); } catch (er) { note.remove(); toast('⚠️ ' + errText(er), 4000); } };
-  const ask = [{ label: SL('askSocratic'), icon: TUTOR.avatar, run: () => askSection(s, 'socratic') }, { label: SL('askDebug'), icon: '🔧', run: () => askSection(s, 'debug') },
-    { label: SL('askInterview'), icon: '🎤', run: () => askSection(s, 'interview') }, '-', { label: SL('askFresh'), sub: SL('askFreshSub'), icon: '✨', run: freshQ }];
-  const X = SHL();
-  if (!STEP_LOCK) fresh.addEventListener('noema-fresh', freshQ);   // the section's ⋮ › A new question
-  // in the frame the tutor's ways (Socratic, debugging, interview) are in its own window and a new question in the section's ⋮
-  zone.append(fresh, h('div', { class: 'row sectools' },
-    X ? null : h('span', { class: 'row' }, ...ask.filter(a => a !== '-').map(a => h('button', { class: 'btn' + (a.icon === TUTOR.avatar ? ' ai' : ''), onclick: a.run }, `${a.icon} ${a.label}`))),
-    exs.length && !STEP_LOCK ? h('button', { class: 'btn ghost', onclick: () => startRun(exs, { title: `🎯 ${s.title}`, count: exs.length, back: '#/s/' + s.id }) }, '🎯 ' + SL('allExercises', { n: exs.length })) : null));
-  if (!X) {
-    zone.append(h('div', { class: 'secnav' },
-      prev ? h('button', { class: 'btn', onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + prev.title) : h('span'),
-      next ? h('button', { class: 'btn primary', onclick: () => go('#/s/' + next.id) }, next.title + ' ' + arrowOn()) : h('button', { class: 'btn primary', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())));
-    return zone;
-  }
-  // the frame: one big “Next section” (the next chapter's first one after the last section), the chapter's practice beside it
-  const nextCh = !next && COURSE[COURSE.indexOf(c) + 1], to = next || nextCh?.sections[0];
-  zone.append(h('nav', { class: 'secnav ns-secnav', 'aria-label': SL('nextSection') },
-    to ? h('button', { class: 'btn primary secnext', onclick: () => go('#/s/' + to.id) }, h('span', { class: 'nx' }, SL('nextSection') + ' ' + arrowOn()), h('small', {}, next ? next.title : SL('nextChapterFirst', { n: nextCh.num, title: nextCh.title })))
-      : h('button', { class: 'btn primary secnext', onclick: () => go(`#/ch/${c.id}/practice`) }, h('span', { class: 'nx' }, '🎯 ' + SL('practiceChapter') + ' ' + arrowOn())),
-    to && !next ? h('button', { class: 'btn', onclick: () => go(`#/ch/${c.id}/practice`) }, '🎯 ' + SL('practiceChapter')) : null,
-    prev ? h('button', { class: 'btn ghost small secprev', title: prev.title, onclick: () => go('#/s/' + prev.id) }, arrowBack() + ' ' + SL('prevSection')) : null));
-  return zone;
-}
-
-/* ---------- practice ---------- */
-function practiceSetup(body, c) {
-  const st = { sec: 'all', types: new Set(), tags: new Set(), diff: 0, mode: 'smart', count: 10 };
-  const info = h('span', { class: 'tiny' });
-  const pool = () => c.exercises.filter(e => (st.sec === 'all' || e.section === st.sec) && (!st.types.size || st.types.has(e.type)) && (!st.tags.size || e.tags.some(t => st.tags.has(t))) && (!st.diff || e.difficulty === st.diff));
-  const upd = () => { const p = pool(); info.textContent = tE('engine.prac.match', { n: p.length, solved: p.filter(e => solved(e.id)).length }); };
-  const chipset = (items, set, label) => h('div', { class: 'fchips' }, ...items.map(([k, l]) => { const b = h('button', { class: 'fchip', onclick: () => { set.has(k) ? set.delete(k) : set.add(k); b.classList.toggle('on'); upd(); } }, l); return b; }));
-  const types = [...new Set(c.exercises.map(e => e.type))];
-  const secSel = h('select', { class: 'sel', onchange: e => { st.sec = e.target.value; upd(); } }, h('option', { value: 'all' }, tE('engine.prac.allSections')), ...c.sections.map(s => h('option', { value: s.id }, s.title)));
-  const diffChips = h('div', { class: 'fchips' }, ...[[0, tE('engine.prac.any')], [1, '● ' + tE('engine.prac.easy')], [2, '●● ' + tE('engine.prac.medium')], [3, '●●● ' + tE('engine.prac.hard')]].map(([d, l]) => { const b = h('button', { class: 'fchip' + (d === 0 ? ' on' : ''), onclick: () => { st.diff = d; $$('.fchip', diffChips).forEach(x => x.classList.remove('on')); b.classList.add('on'); upd(); } }, l); return b; }));
-  const countChips = h('div', { class: 'fchips' }, ...[[5, nf(5)], [10, nf(10)], [20, nf(20)], [999, '∞ ' + tE('engine.prac.all')]].map(([n, l]) => { const b = h('button', { class: 'fchip' + (n === 10 ? ' on' : ''), onclick: () => { st.count = n; $$('.fchip', countChips).forEach(x => x.classList.remove('on')); b.classList.add('on'); } }, l); return b; }));
-  body.append(h('div', { class: 'card filters' },
-    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.section')), secSel),
-    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.types')), chipset(types.map(t => [t, TYPE_LABEL[t]]), st.types)),
-    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.focus')), chipset([['pitfall', '⚠️'], ['debug', '🔧'], ['exam', '🎓'], ['syntax', '⌨️'], ['calc', '🧮'], ['interview', '🎤'], ['compare', '⚖️']].map(([k, i]) => [k, i + ' ' + tE('engine.prac.focus_' + k)]), st.tags)),
-    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.difficulty')), diffChips),
-    h('div', {}, h('div', { class: 'lbl' }, tE('engine.prac.roundSize')), countChips),
-    h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { const p = pool(); if (!p.length) return toast(tE('engine.prac.noMatch')); startRun(p, { title: '🎯 ' + tE('engine.run.chPractice', { num: c.num }), count: st.count, back: `#/ch/${c.id}/practice` }); } }, '▶ ' + tE('engine.prac.start')), info)));
-  upd();
-}
-/* A round's order (mistakes first, facades of one learnable spread) and the sibling after a wrong answer: the study
-   domain's (src/features/study/domain/queries.ts, NoemaCore.study.practice). */
-function startRun(list, opt = {}) {
-  RUN = { list: (opt.keepOrder ? list : NoemaCore.study.practice.order(list, S.res)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || tE('engine.run.practice'), back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null, after: opt.after || null };   // after: { label, run } — what comes next (a round made from search results)
-  if (location.hash === '#/run') runView(); else go('#/run');
-}
-let RUN = null;
-function runView() {
-  if (!RUN) return go(HOME());
-  const R0 = RUN;
-  shellChrome({ sub: true, crumbs: [[R0.title]], back: R0.back, reading: true });
-  if (R0.i >= R0.list.length || (R0.lives && R0.lives <= 0)) return runSummary();
-  const ex = R0.list[R0.i];
-  setAccent(document.body, ex._ch);
-  setTutorContext({ kind: 'section', id: ex.section });
-  const nextBtn = h('button', { class: 'btn primary', 'data-next': '1', style: { display: 'none' }, onclick: () => { R0.i++; runView(); } }, R0.i + 1 < R0.list.length ? tE('engine.run.next') : tE('engine.run.finish'));
-  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (!R0.boss) { const sib = NoemaCore.study.practice.sibling(ex, R0.list, ALL_EX, e => e._ch); if (sib) { R0.list.splice(Math.min(R0.i + 3, R0.list.length), 0, sib); R0.sib = R0.sib || new Set(); R0.sib.add(sib.id); } } if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
-  view(h('div', { class: 'runner' },
-    h('div', { class: 'runtop' }, h('button', { class: 'iconbtn', title: tE('engine.run.quit'), onclick: () => go(R0.back) }, '✕'),
-      h('div', { class: 'bar' }, h('i', { style: { width: (R0.i / R0.list.length * 100) + '%' } })),
-      R0.boss ? h('span', { class: 'hearts' }, '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)) : null,
-      h('b', { class: 'tiny' }, `${nf(R0.i + 1)}/${nf(R0.list.length)}`)),
-    h('div', { class: 'tiny', style: { marginBottom: '8px', fontWeight: 700 } }, R0.title, R0.sib?.has(ex.id) ? h('span', { class: 'pill sibpill' }, '↻ ' + tE('engine.run.sibling')) : null),
-    card, h('div', { class: 'row', style: { justifyContent: 'flex-end' } }, nextBtn)));
-}
-function runSummary() {
-  const R0 = RUN, n = R0.i, pct = n ? R0.ok / n : 0, xp = S.xp - R0.xp0;
-  let big = pct >= .9 ? '🏆' : pct >= .7 ? '🎉' : pct >= .5 ? '💪' : '🌱';
-  let msg = tE(pct >= .9 ? 'engine.run.outstanding' : pct >= .7 ? 'engine.run.great' : pct >= .5 ? 'engine.run.solid' : 'engine.run.goodStart');
-  const RX = SHL() ? window.NoemaReact : null;
-  if (R0.boss) {
-    const won = R0.lives > 0 && R0.i >= R0.list.length && pct >= .7;
-    if (won) { learnt('boss.won', R0.boss); big = '🏆'; msg = tE('engine.run.bossWon'); RX?.big('bosswin'); } else { big = '👾'; msg = tE('engine.run.bossLost'); }
-  } else if (R0.back === '#/mistakes' && R0.ok && !mistakesList().length) RX?.big('gym');   // the gym is empty
-  else if (n >= 5 && R0.ok === n) RX?.big('perfect');
-  if (pct >= .7) { if (!RX) confetti(); beep('win'); }
-  view(h('div', { class: 'runner' }, h('div', { class: 'card summary' },
-    h('div', { class: 'big' }, big), h('h2', {}, msg),
-    h('div', { class: 'statgrid' }, h('div', { class: 'stat' }, h('b', {}, `${nf(R0.ok)}/${nf(n)}`), h('span', { class: 'tiny' }, tE('engine.run.correct'))), h('div', { class: 'stat' }, h('b', {}, pctText(Math.round(pct * 100))), h('span', { class: 'tiny' }, tE('engine.run.accuracy'))), h('div', { class: 'stat' }, h('b', {}, '+' + nf(xp)), h('span', { class: 'tiny' }, tE('engine.run.xp')))),
-    R0.wrong.length ? h('div', { style: { textAlign: 'left', margin: '0 0 18px' } }, h('b', {}, tE('engine.run.reviewThese')), h('ul', {}, ...R0.wrong.map(e => h('li', { html: fmt((e.q || '').slice(0, 140)) })))) : null,
-    h('div', { class: 'row', style: { justifyContent: 'center' } },
-      R0.wrong.length ? h('button', { class: 'btn primary', onclick: () => startRun(R0.wrong, { title: '🔁 ' + tE('engine.run.retry'), count: R0.wrong.length, back: R0.back }) }, '🔁 ' + tE('engine.run.retry')) : null,
-      R0.after ? h('button', { class: 'btn primary ns-srnext', onclick: R0.after.run }, R0.after.label) : null,
-      h('button', { class: 'btn', onclick: () => go(R0.back) }, tE('engine.run.done'))))));
+/* ---------- router ---------- */
+/** the engine's own pages of the subject (the frame sends #/engines here: NoemaShell.attachEngine; #/author is a page of its
+    own: src/composition/shell/author-page.ts) */
+function enginePage() {
+  const p = (location.hash || '#/').slice(2).split('/');
+  if (innerWidth < 720) TUTOR_UI.close();
+  if (p[0] === 'engines') return enginesView();   // the engines of activities and requests for new ones (src/features/reports/ui/engines.ts)
 }
 /* ---------- ⚙ #/engines: the engines of activities and requests for new ones — src/features/reports/ui/engines.ts (NoemaCore.community),
    drawn into the engine's view; this side says which engines and runtimes this app runs (the activity core) ---------- */
@@ -589,293 +112,25 @@ function engineHere(e) {
 }
 function enginesView() {
   shellChrome({ sub: true, crumbs: [[tE('engine.engines.title')]], back: HOME() });
-  const v = view(SHL() ? null : backBtn('← ' + SUBJ.title, HOME())), C = window.NoemaCore?.community;
+  const v = view(), C = window.NoemaCore?.community;
   if (!C) { v.append(h('p', {}, tE('engine.engines.unavailable'))); return; }
   const box = h('div'); v.append(box);
   C.mount(box, location.hash, c => { if (box.isConnected) shellChrome({ sub: true, crumbs: (c.crumbs || []).map(x => [x.label, x.href]), back: c.back }); }, { engineHere, subjectId: SUBJ?.id || null, back: HOME() })
     .catch(e => { box.replaceChildren(h('p', {}, errText(e))); });
 }
-/* ---------- 🔎 a round made from search results (NoemaCore.community.search): this subject's exercises, then its cards ---------- */
-function searchRunView() {
-  const X = window.NoemaCore?.community?.search, R = X?.round(), st = R?.steps?.[R.i];
-  if (!st || st.sj !== SUBJ.id) return go(X ? '#/search' : HOME());
-  const after = X.after();
-  if (st.kind === 'ex') {
-    const list = st.ids.map(id => EX[id]).filter(Boolean);
-    if (!list.length) return after ? after.run() : go(R.back);
-    return startRun(list, { title: st.title, count: list.length, back: R.back, after });
-  }
-  const keys = new Set(st.keys || []), cards = allCards().filter(c => keys.has(c.key));
-  if (!cards.length) return after ? after.run() : go(R.back);
-  shellChrome({ sub: true, crumbs: [[st.title]], back: R.back, reading: true });
-  const body = h('div');
-  view(h('h1', {}, st.title), body);
-  flashDeck(body, cards, { all: true, onDone: () => h('div', { class: 'row', style: { justifyContent: 'center' } }, after ? h('button', { class: 'btn primary ns-srnext', onclick: after.run }, after.label) : null, h('button', { class: 'btn', onclick: () => go(R.back) }, t('sh.sr_backToResults'))) });
-}
-function mistakesList() { return NoemaCore.study.practice.mistakes(ALL_EX, S.res); }
-function mistakesView() {
-  setAccent(document.body, null);
-  shellChrome({ sub: true, crumbs: [[t('home.mistakes')]], back: HOME() });
-  const list = mistakesList();
-  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mistakes')),
-    h('p', { class: 'muted' }, tE('engine.gym.intro')),
-    list.length ? h('div', {}, h('div', { class: 'row', style: { margin: '8px 0 18px' } }, h('button', { class: 'btn primary', onclick: () => startRun(list, { title: t('view.mistakes'), count: 15, back: '#/mistakes' }) }, '▶ ' + tE('engine.gym.train', { n: Math.min(15, list.length), of: list.length }))),
-      mistakesByCat(list),
-      h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: '🔁 ' + tE('engine.run.chMistakes', { num: c.num }), count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, nf(n))) : null; })))
-      : h('div', { class: 'empty' }, h('div', { class: 'e' }, '✨'), h('p', {}, tE('engine.gym.empty'))));
-}
-function mixedView() {
-  setAccent(document.body, null);
-  shellChrome({ sub: true, crumbs: [[t('home.mixed')]], back: HOME() });
-  const readSecs = new Set(Object.keys(S.read));
-  const pool = ALL_EX.filter(e => readSecs.has(e.section));
-  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.mixed')),
-    h('p', { class: 'muted' }, tE('engine.mixed.intro')),
-    h('div', { class: 'row', style: { marginTop: '14px' } },
-      h('button', { class: 'btn primary', disabled: !pool.length, onclick: () => startRun(pool, { title: '🎲 ' + tE('engine.mixed.readTitle'), count: 12, back: '#/practice/all' }) }, '▶ ' + tE('engine.mixed.fromRead', { n: pool.length })),
-      h('button', { class: 'btn', onclick: () => startRun(ALL_EX, { title: '🎲 ' + tE('engine.mixed.allTitle'), count: 12, back: '#/practice/all' }) }, '▶ ' + tE('engine.mixed.fromAll', { n: ALL_EX.length })),
-      h('button', { class: 'btn', onclick: () => startRun(ALL_EX.filter(e => e.tags.includes('debug')), { title: '🔧 ' + tE('engine.mixed.debugOnly'), count: 12, back: '#/practice/all' }) }, '🔧 ' + tE('engine.mixed.debugOnly')),
-      h('button', { class: 'btn', onclick: () => startRun(ALL_EX.filter(e => e.tags.includes('exam')), { title: '🎓 ' + tE('engine.mixed.examOnly'), count: 12, back: '#/practice/all' }) }, '🎓 ' + tE('engine.mixed.examOnly'))));
-}
-function bossView(id) {
-  const c = CH[id]; if (!c) return go(HOME());
-  setAccent(document.body, c);
-  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + id], [SL('boss')]], back: '#/ch/' + id + '/practice' });
-  view(backBtn(`${arrowBack()} ${c.title}`, '#/ch/' + id),
-    h('div', { class: 'card summary' }, h('div', { class: 'big' }, '👾'), h('h1', {}, tE('engine.boss.title', { num: c.num })),
-      h('p', { class: 'muted' }, tE('engine.boss.intro')),
-      h('button', { class: 'btn primary', style: { marginTop: '10px' }, onclick: () => {
-        const pool = c.exercises.filter(e => e.type !== 'free');
-        const hard = shuffle(pool.filter(e => e.difficulty >= 2)), easy = shuffle(pool.filter(e => e.difficulty < 2));
-        const pick = [...hard.slice(0, 12), ...easy.slice(0, 3)];
-        startRun(shuffle(pick).slice(0, 15), { title: '👾 ' + tE('engine.boss.runTitle', { num: c.num }), count: 15, back: '#/ch/' + id, lives: 3, boss: id, keepOrder: true });
-        window.NoemaReact?.big('boss');
-      } }, '⚔️ ' + tE('engine.boss.fight'))));
-}
-
-/* ---------- lightning ---------- */
-function lightningView() {
-  setAccent(document.body, null);
-  shellChrome({ sub: true, crumbs: [[t('home.lightning')]], back: HOME() });
-  const chSel = h('select', { class: 'sel' }, h('option', { value: 'all' }, tE('engine.light.allChapters')), ...COURSE.map(c => h('option', { value: c.id }, `${c.emoji} ${chShort(c.num)} ${c.title}`)));
-  const best = S.bestLightning || 0;
-  view(backBtn(t('nav.home'), HOME()),
-    h('div', { class: 'card lightning' }, h('div', { style: { fontSize: '56px' } }, '⚡'), h('h1', {}, t('view.lightning')),
-      h('p', { class: 'muted' }, tE('engine.light.intro')),
-      h('div', { class: 'row', style: { justifyContent: 'center', margin: '14px 0' } }, chSel), h('p', { class: 'tiny' }, tE('engine.light.best', { n: best })),
-      h('button', { class: 'btn primary', onclick: () => playLightning(chSel.value) }, '▶ ' + tE('engine.light.go'))));
-}
-function playLightning(chid) {
-  const pool = shuffle(ALL_EX.filter(e => e.type === 'tf' && (chid === 'all' || e._ch.id === chid)));
-  if (!pool.length) { toast(tE('engine.light.noTf')); return go(HOME()); }
-  const c0 = CH[chid], back = c0 ? `#/ch/${chid}/traps` : '#/lightning', here = location.hash;
-  shellChrome({ sub: true, crumbs: c0 ? [[`${c0.emoji} ${c0.title}`, '#/ch/' + chid], [t('home.lightning')]] : [[t('home.lightning')]], back, reading: true });
-  let i = 0, score = 0, end = Date.now() + 60e3, wrong = [], over = false, warned = false;
-  const clock = h('div', { class: 'clock' }, '60'), stmt = h('div', { class: 'stmt' }), sc = h('div', { class: 'tiny' });
-  const ans = v => { if (over) return; const ex = pool[i % pool.length]; if (v === ex.answer) { score++; beep('ok'); stmt.classList.remove('pop'); void stmt.offsetWidth; stmt.classList.add('pop'); } else { wrong.push(ex); beep('bad'); stmt.classList.remove('shake'); void stmt.offsetWidth; stmt.classList.add('shake'); } record(ex, v === ex.answer); i++; draw(); };
-  const draw = () => { const ex = pool[i % pool.length]; stmt.innerHTML = ''; stmt.append(h('div', { html: fmt(ex.q) })); setAccent(stmt, ex._ch); sc.textContent = tE('engine.light.score', { n: score }); };
-  const key = e => { if (e.key === 'ArrowLeft') ans(true); if (e.key === 'ArrowRight') ans(false); };
-  document.addEventListener('keydown', key);
-  view(h('div', { class: 'runner lightning' + (SHL() ? ' has-ask' : '') }, SHL() ? askBuddyBtn(() => askAIAbout(pool[i % pool.length], null)) : null, clock, stmt, h('div', { class: 'tfrow' }, h('button', { class: 'tfbtn t', onclick: () => ans(true) }, '👍 ' + tE('engine.ex.true') + '  ←'), h('button', { class: 'tfbtn f', onclick: () => ans(false) }, '→  👎 ' + tE('engine.ex.false'))), h('div', { style: { marginTop: '12px' } }, sc)));
-  draw();
-  const tmr = setInterval(() => {   // (not `t`: that is the translation function, used above in this function)
-    if (location.hash !== here) { clearInterval(tmr); document.removeEventListener('keydown', key); over = true; return; }
-    const left = Math.max(0, Math.ceil((end - Date.now()) / 1000)); clock.textContent = left;
-    if (left <= 5 && left > 0) { if (!warned) { warned = true; window.NoemaReact?.big('timer'); } else window.NoemaReact?.tick(left); }
-    if (!left) {
-      clearInterval(tmr); document.removeEventListener('keydown', key); over = true;
-      addXP(score * 3, clock);
-      const pb = score > (S.bestLightning || 0); learnt('drill.scored', null, { kind: 'lightning', score });
-      if (!wrong.length && score >= 5 && SHL() && window.NoemaReact) window.NoemaReact.big('timerwin'); else if (score >= 8 || pb) confetti();
-      beep('win');
-      view(h('div', { class: 'runner' }, h('div', { class: 'card summary' }, h('div', { class: 'big' }, pb ? '🏅' : '⚡'), h('h2', {}, tE(pb ? 'engine.light.resultBest' : 'engine.light.result', { n: score })),
-        wrong.length ? h('div', { style: { textAlign: 'left', marginTop: '16px', display: 'grid', gap: '10px' } }, h('b', {}, tE('engine.light.fooled')), ...wrong.map(ex => h('div', { class: 'explain bad' }, h('div', { class: 'hd' }, ex.answer ? tE('engine.light.TRUE') : tE('engine.light.FALSE')), h('div', { html: '<b>' + fmt(ex.q) + '</b>' }), h('div', { style: { marginTop: '4px' }, html: fmt(ex.explain) })))) : h('p', {}, tE('engine.light.flawless')),
-        h('div', { class: 'row', style: { justifyContent: 'center', marginTop: '18px' } }, h('button', { class: 'btn primary', onclick: () => playLightning(chid) }, '⚡ ' + tE('engine.light.again')), h('button', { class: 'btn', onclick: () => go(c0 ? back : HOME()) }, c0 ? SL('back') : tE('engine.light.home'))))));
-    }
-  }, 200);
-}
-
-/* ---------- flashcards and debug drills: scheduled by FSRS-6 (src/features/study/domain/fsrs.ts, NoemaCore.study.fsrs) ----------
-   A review is an event of the learning log (card.reviewed, playbook.reviewed: its FSRS rating); the log folds S.fc / S.pb,
-   each card's and drill's FSRS memory, with the learner's own parameters once fitted (the setting fsrs), else FSRS-6's.
-   An entry still in the old Leitner shape ({ box, due }) is read as the memory it stands for. */
-/* one review of a card: q 0 = again, 1 = good, 2 = easy → the card's memory now */
-function rateCardKey(key, q, from = new Date()) { learnt('card.reviewed', key, { rating: LOG.cardRating(q) }, { day: NoemaCore.day.of(from) }); return S.fc[key]; }
-function countDueCards() { return NoemaCore.study.cards.countDue(S.fc, allCards().map(c => c.key)); }
-/** Fits the FSRS parameters to the learner's reviews again once enough new ones came (the Worker; quietly, nothing to wait for). */
-function refitFsrs() {
-  NoemaCore.study.models.refit(S.settings.fsrs || null).then(r => { if (!r) return; S.settings.fsrs = { parameters: r.parameters, ...(S.settings.fsrs?.retention ? { retention: S.settings.fsrs.retention } : {}), n: r.n }; save(); })
-    .catch(e => NoemaCore.errors.report(e, { where: 'engine.fsrs.refit', severity: 'warning' }));
-}
-function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c }))); }
-function cardsView(key) {
-  setAccent(document.body, null);
-  shellChrome({ sub: true, crumbs: [[t('home.cards')]], back: HOME() });
-  const body = h('div');
-  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.cards')), h('p', { class: 'muted' }, tE('engine.cards.intro')), body);
-  const one = key ? allCards().filter(c => c.key === key) : [];   // #/cards/<key>: the one card the search found
-  if (one.length) { flashDeck(body, one, { all: true }); return; }
-  flashDeck(body, allCards());
-}
-function flashDeck(body, cards, { all = false, onDone = null } = {}) {
-  const deck = NoemaCore.study.cards.queue(cards, S.fc, { all }), queue = deck.queue;   // all: every card given (the ones the search found), due or not
-  body.append(h('div', { class: 'row', style: { margin: '6px 0 16px' } }, h('span', { class: 'pill c' }, tE('engine.cards.due', { n: deck.due })), h('span', { class: 'pill' }, tE('engine.cards.new', { n: deck.fresh })), h('span', { class: 'pill' }, tE('engine.cards.resting', { n: deck.resting }))));
-  const stage = h('div'); body.append(stage);
-  let i = 0;
-  function show() {
-    stage.innerHTML = '';
-    if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, tE('engine.cards.done')))); if (queue.length) { confetti(80); refitFsrs(); } if (onDone) stage.append(onDone()); return; }
-    const c = queue[i];
-    const fl = h('div', { class: 'flash', 'data-card': c.key }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
-      h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} ` + chTitle(c._ch.num, `${nf(i + 1)}/${nf(queue.length)}`)), h('div', { 'data-nf': 'q', html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, tE('engine.cards.flip'))),
-      h('div', { class: 'face back' }, h('small', {}, tE('engine.cards.answer')), h('div', { 'data-nf': 'a', html: fmt(c.a) }))));
-    setAccent(fl, c._ch);
-    if (SHL()) { fl.classList.add('has-ask'); fl.append(askBuddyBtn(() => askAboutCard(c, fl.classList.contains('flipped')))); }
-    const rate = q => { rateCardKey(c.key, q); addXP(q === 0 ? 1 : 2, fl); if (q === 0) queue.push(c); i++; show(); };
-    stage.append(fl, h('div', { class: 'rate' }, h('button', { class: 'btn', onclick: () => rate(0) }, '😵 ' + tE('engine.cards.again')), h('button', { class: 'btn', onclick: () => rate(1) }, '🙂 ' + tE('engine.cards.good')), h('button', { class: 'btn primary', onclick: () => rate(2) }, '😎 ' + tE('engine.cards.easy'))),
-      c.section && SEC[c.section] ? h('div', { style: { textAlign: 'center', marginTop: '10px' } }, h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => go('#/s/' + c.section) }, tE('engine.cards.openSection'))) : null);
-  }
-  show();
-}
-
-/** Ask the character about a flashcard: a hint while its answer is hidden, a deeper explanation once it is turned. */
-/* i18n-ignore-start */   // the card as context for the AI and the learner's first messages to it (prompts)
-function askAboutCard(c, turned) {
-  const ctx = { kind: 'exercise', id: 'fc:' + c.key, origin: { via: turned ? 'cardExplain' : 'cardHint', card: c.key, ...(c.section ? { sec: c.section } : {}) }, text: `Flashcard (chapter ${c._ch.num} “${c._ch.title}”)\nFront: ${c.q}\nBack: ${c.a}` };
-/* i18n-ignore-end */
-  if (turned) openTutor(ctx, 'explain', tE('engine.aimsg.cardExplain'));   // the learner's first messages: their bubble, in the UI language
-  else openTutor(ctx, 'hint', tE('engine.aimsg.cardHint'), { intent: INTENT.exHint('') });
-}
-
-/* ---------- debug drills ---------- */
-function countDuePlaybooks() { return NoemaCore.study.cards.countDue(S.pb, Object.keys(PB)); }
-/** A drill to do: never done, or due again. */
-const drillDue = d => !S.pb[d.id] || NoemaCore.study.fsrs.isDue(S.pb[d.id]);
-function drillTile(d) {
-  const r = { box: NoemaCore.study.fsrs.box(S.pb[d.id]) };   // mastery 0–5: the interval reached, on the old boxes' scale
-  const t = h('button', { class: 'pb', onclick: () => go('#/drill/' + d.id) }, h('span', { class: 'ic' }, '🔧'),
-    h('div', { class: 'grow' }, h('b', { html: fmt(d.title) }), newPill(d), h('div', { class: 'tiny' }, tE(d.mnemonic ? 'engine.drill.questionsMnemo' : 'engine.drill.questions', { n: d.askYourself.length }))),
-    h('div', { class: 'boxes', title: tE('engine.drill.mastery') }, ...[1, 2, 3, 4, 5].map(i => h('i', { class: i <= r.box ? 'on' : '' }))));
-  setAccent(t, d._ch); return t;
-}
-function drillList(body, list) {
-  const due = list.filter(drillDue);
-  body.append(h('p', { class: 'muted' }, tE('engine.drill.intro')),
-    h('div', { class: 'row', style: { marginBottom: '14px' } }, due.length ? h('button', { class: 'btn primary', onclick: () => go('#/drill/' + due[0].id) }, '▶ ' + tE('engine.drill.nextDue', { n: due.length })) : h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, tE('engine.drill.allRested'))),
-    h('div', { style: { display: 'grid', gap: '10px' } }, ...list.map(drillTile)));
-}
-function drillsView() {
-  setAccent(document.body, null);
-  shellChrome({ sub: true, crumbs: [[t('home.drills')]], back: HOME() });
-  const body = h('div');
-  view(backBtn(t('nav.home'), HOME()), h('h1', {}, t('view.drills')),
-    h('p', { class: 'muted' }, tE('engine.drill.playbooks', { n: Object.keys(PB).length })), body);
-  COURSE.forEach(c => { if (!c.debug.length) return; const sub = h('div', { style: { margin: '22px 0 0' } }); body.append(h('h3', { style: { margin: '20px 0 10px' } }, `${c.emoji} ` + chTitle(c.num, c.title)), sub); sub.append(...c.debug.map(drillTile)); });
-}
-function drillView(id) {
-  const d = PB[id]; if (!d) return go('#/drills');
-  const c = d._ch; setAccent(document.body, c);
-  setTutorContext({ kind: 'playbook', id });
-  shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + c.id], [t('home.drills'), `#/ch/${c.id}/debug`]], back: `#/ch/${c.id}/debug`, reading: true });
-  const ta = h('textarea', { class: 'answer', placeholder: tE('engine.drill.placeholder') });
-  const stage = h('div');
-  view(h('div', { class: 'reader' },
-    backBtn(`${arrowBack()} ${c.emoji} ` + tE('engine.drill.back', { num: c.num }), `#/ch/${c.id}/debug`),
-    h('span', { class: 'pill c' }, '🔧 ' + tE('engine.drill.pill')), h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
-    h('div', { class: 'tiny', style: { fontWeight: 700, marginBottom: '6px' } }, tE('engine.drill.symptom')), h('div', { class: 'symptom', html: fmt(d.symptom) }),
-    h('h3', { style: { margin: '22px 0 8px' } }, '🧠 ' + tE('engine.drill.askYourself')), ta,
-    h('div', { class: 'actions', style: { display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '10px' } },
-      h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 ' + tE('engine.drill.reveal')),
-      h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ ' + tE('engine.ex.grading'); try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + errText(er), 4000); reveal(null); } } }, '✨ ' + tE('engine.drill.grade')),
-      h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 ' + tE('engine.drill.order')),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id, origin: { via: 'drillRoleplay', drill: id } }, 'debug', tE('engine.aimsg.pbRoleplay', { title: d.title }), { intent: INTENT.pbRoleplay }) }, '🎭 ' + tE('engine.drill.roleplay', { tutor: TUTOR.name }))),   // the learner's first message: their bubble, in the UI language
-    stage));
-  function orderDrill() {
-    stage.innerHTML = '';
-    const ex = { id: d.id + '-ord', type: 'order', q: tE('engine.drill.orderQ'), items: d.askYourself.slice(0, 9), explain: tE('engine.drill.orderExplain'), difficulty: 2, tags: ['debug'], _ch: c, _ai: true, section: d.section };
-    stage.append(h('div', { style: { marginTop: '18px' } }, exerciseCard(ex, { noXP: false })));
-  }
-  function reveal(g) {
-    stage.innerHTML = '';
-    const hit = new Set(g?.hit || []);
-    const checks = d.askYourself.map((q, i) => h('input', { type: 'checkbox', checked: hit.has(i) }));
-    if (g) stage.append(h('div', { class: 'fb ai' }, h('div', { class: 'row' }, h('span', { class: 'score', style: { background: g.score >= 70 ? 'var(--ok)' : g.score >= 45 ? 'var(--warn)' : 'var(--bad)' } }, g.score | 0), h('div', { class: 'grow' }, md(g.feedback)))));
-    stage.append(
-      h('div', { class: 'ask', style: { marginTop: '18px' } }, h('div', { class: 'hd' }, '🧠 ' + tE('engine.drill.checklist'), h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, tE('engine.drill.tick'))),
-        h('div', { class: 'rubric' }, ...d.askYourself.map((q, i) => h('label', {}, checks[i], h('span', {}, h('b', {}, nf(i + 1) + '. '), F(q)))))),
-      d.mnemonic ? h('div', { style: { marginTop: '14px' } }, h('div', { class: 'tiny', style: { fontWeight: 700 } }, tE('engine.drill.hook')), h('div', { class: 'mnemo', html: fmt(d.mnemonic) })) : null,
-      h('h3', { style: { margin: '22px 0 10px' } }, '🛠️ ' + tE('engine.drill.steps')), h('div', { class: 'steps' }, ...d.steps.map((s, i) => h('div', { class: 'stepc' }, h('b', { html: `${i + 1}. ` + fmt(s.do) }), s.why ? h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: '↳ ' + fmt(s.why) }) : null, s.code ? h('div', { style: { marginTop: '8px' } }, codeBlock(s.code, guessLang(s.code))) : null))),
-      h('h3', { style: { margin: '22px 0 10px' } }, '🎯 ' + tE('engine.drill.causes')), h('ul', {}, ...d.rootCauses.map(r => h('li', { html: fmt(r) }))),
-      h('div', { class: 'callout tip', style: { marginTop: '12px' } }, h('span', { class: 'ci' }, '✅'), h('b', { class: 't' }, tE('engine.ex.fix')), h('div', { html: fmt(d.fix) })),
-      h('h3', { style: { margin: '24px 0 10px' } }, tE('engine.drill.howWell')),
-      h('div', { class: 'row' }, ...[['😵 ' + tE('engine.drill.blank'), 0], ['🤔 ' + tE('engine.drill.partly'), 1], ['😎 ' + tE('engine.drill.nailed'), 2]].map(([l, q]) => h('button', { class: 'btn' + (q === 2 ? ' primary' : ''), onclick: () => {
-        const ticked = checks.filter(x => x.checked).length / checks.length;
-        // blank → again, partly → hard, nailed → easy with most of the checklist ticked, else good
-        learnt('playbook.reviewed', d.id, { rating: LOG.playbookRating(q, ticked), score: ticked }); addXP(3 + Math.round(ticked * 7), stage);
-        if (q === 2) confetti(70);
-        const all = Object.values(PB).filter(x => x.id !== d.id && drillDue(x));
-        const nxt = all.find(x => x._ch === c) || all[0];
-        toast(nxt ? tE('engine.drill.savedNext') : tE('engine.drill.saved'));
-        setTimeout(() => go(nxt ? '#/drill/' + nxt.id : `#/ch/${c.id}/debug`), 700);
-      } }, l))));
-    stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-/* ---------- router ---------- */
-/** The subject's pages. In the shell, #/ is Today and the subject lives at #/subject; any other address is the shell's. */
-function route() {
-  const p = (location.hash || '#/').slice(2).split('/');
-  const X = SHL();
-  if (X && !X.ENGINE_ROUTES.has(p[0])) return X.route();
-  closeTutorIfMobile();
-  STEP_LOCK = stepLock();
-  if (STEP_LOCK && LOCKED_ROUTES.has(p[0])) return lockedView();
-  if (p[0] === 'subject' && p[1] === 'sources') { homeView(); setTimeout(() => toggleSourcesDeck(), 200); return; }
-  if (!p[0] || p[0] === 'subject') return homeView();
-  if (p[0] === 'ch') return chapterView(p[1], p[2], p[3]);
-  if (p[0] === 's') return sectionView(p[1], p[2]);
-  if (p[0] === 'practice') return p[1] === 'all' ? mixedView() : (chTab[p[1]] = 'practice', chapterView(p[1], 'practice'));
-  if (p[0] === 'run') return runView();
-  if (p[0] === 'srun') return searchRunView();
-  if (p[0] === 'boss') return bossView(p[1]);
-  if (p[0] === 'lightning') return p[1] && CH[p[1]] ? playLightning(p[1]) : lightningView();
-  if (p[0] === 'cards') return cardsView(p[1] ? decodeURIComponent(p[1]) : null);
-  if (p[0] === 'drills') return drillsView();
-  if (p[0] === 'drill') return drillView(p[1]);
-  if (p[0] === 'mistakes') return mistakesView();
-  if (p[0] === 'new') return whatsNewView();
-  if (p[0] === 'author') { const m = main(); m.dataset.page = '@engine'; return Noema.app.author(m, backBtn('← ' + SUBJ.title, HOME())); }   // ✎ the activity author (src/composition/shell/author-page.ts; in the frame it is a page of its own)
-  if (p[0] === 'engines') return enginesView();   // the engines of activities and requests for new ones (src/features/reports/ui/engines.ts)
-  if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
-  homeView();
-}
+/** draw the page again (another tab's answers, the settings, the theme): the frame's router */
+function route() { NoemaShell.route(); }
 // tell other apps (a:caps, synced) that #/ex/<id> exists; each feature merges its own flag
 { const k = Noema.kv.accountKey('caps'); let c = {}; try { c = JSON.parse(Noema.kv.get(k) || '{}') || {}; } catch (e) { } if (!c.exerciseRoute) Noema.kv.set(k, JSON.stringify({ ...c, exerciseRoute: 1 })); }
-function closeTutorIfMobile() { if (innerWidth < 720) closeTutor(); }
-
-/* ---------- keyboard ---------- */
-document.addEventListener('keydown', e => {
-  if (e.target.matches('input,textarea,select')) return;
-  if (e.key === 'Escape') { closeTutor(); $('.modal')?.remove(); return; }
-  const cards = $$('main .ex'); const card = cards.find(c => !c._locked?.()) ;
-  if (!card) { if (e.key === 'Enter') { const nb = [...$$('main .btn.primary')].find(b => b.offsetParent && (b.dataset.next || /Next|Finish|See result/.test(b.textContent))); nb?.click(); } return; }   // i18n-ignore (the English words: older buttons)
-  if (/^[1-6]$/.test(e.key) && card._w.keys) { card._w.keys(+e.key - 1); }
-  else if (e.key === 'Enter') card._check();
-});
 
 /* ---------- boot ---------- */
 function boot() {
   applyTheme();
-  const X = SHL();
-  if (X) document.body.append(h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));   // the shell has the top bar, the banner and <main>
-  else document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
-  renderTopStats();
-  if (!X) addEventListener('hashchange', route);
+  document.body.append(h('div', { class: 'scrim', onclick: () => TUTOR_UI.close() }), h('aside', { class: 'drawer' }));   // the frame has the top bar, the banner and <main>
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());   // i18n-ignore
-  if (X) { X.attachEngine({ route, locate: locateItem, openTutor: () => openTutor(), focus: () => focusSprint(), history: () => X.convos(), resumeConvo, convoChanged,
-    accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });
-    setTimeout(resumeConvo, 300); }
-  else route();
-  if (S.settings.apiKey && !S.settings.models.length) detectModels().catch(() => { });
+  NoemaShell.attachEngine({ route: enginePage, locate: locateItem, openTutor: () => TUTOR_UI.open(), history: () => NoemaShell.convos(),
+    resumeConvo: () => TUTOR_UI.resumeAsked(), convoChanged: (id, patch) => TUTOR_UI.changed(id, patch),
+    accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => TUTOR_UI.refresh() });
+  setTimeout(() => TUTOR_UI.resumeAsked(), 300);
+  if (S.settings.apiKey && !S.settings.models.length) TUTOR_UI.gemini.detect().catch(() => { });   // offline or a bad key: ⚙️ Settings says why
 }
