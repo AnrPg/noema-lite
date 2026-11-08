@@ -57,6 +57,34 @@ export const SHARE_CSS = css`
   }
 `;
 
+export const NOTES_CSS = css`
+  noema-share-row {
+    display: block;
+  }
+  .nx-req {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    overflow-wrap: anywhere;
+  }
+  .nx-req .nc-grow {
+    flex: 1 1 200px;
+    min-width: 0;
+  }
+  .nx-reqacts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .nx-noticeclear {
+    justify-content: flex-end;
+  }
+`;
+
 export const EXPLORE_CSS = css`
   .ex-view h1 {
     margin: 0 0 4px;
@@ -116,9 +144,18 @@ export const EXPLORE_CSS = css`
   }
   .ex-info .ex-chapters {
     max-height: 300px;
-    overflow: auto;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm, 8px);
+    padding: 4px 8px;
+    margin: 4px 0 8px;
+  }
+  .ex-info .ex-chapters ol {
     margin: 0;
-    padding-inline-start: 1.4em;
+    padding-inline-start: 1.6em;
+  }
+  .ex-info .ex-chapters li {
+    margin: 4px 0;
   }
   .ex-info .ex-facts {
     display: flex;

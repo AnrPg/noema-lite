@@ -2,7 +2,7 @@
 
 A pack may carry a precompiled WebAssembly module: the simulation core of an activity written in C, Rust or AssemblyScript (a
 microcontroller emulator, a DSP kernel, a physics step function). The ADR's D12 (P6) names it; this page is its design as built.
-Code: `engine/src/44_activity_wasm.js` · check tool: `tools/wasm_check.py` · tests: `tests/activities_wasm.js` · fixtures: `tests/fixtures/wasm/`.
+Code: `engine/src/44_activity_wasm.js` · checked by the content checks (`src/features/content`; the toolkit's `activity_lint.py` through `noema-tools.cjs`) · tests: `tests/activities_wasm.js` · fixtures: `tests/fixtures/wasm/`.
 
 ## Design
 
@@ -31,7 +31,7 @@ pack item (base64 + sha256 + abi) → page: decode, sha256, inspect() (our binar
   function of the inputs and the seed (what the checks grader and the replay tests need). A module that keeps state across runs (an
   emulator stepping on) sets it to `false`. `noema_now` is for logs and pacing only, never for results.
 
-## The rules (the same in `inspect()` and `tools/wasm_check.py`, the same messages)
+## The rules (`inspect()`: the app, the connector and the toolkit run the same code)
 
 | code | refused when |
 |---|---|
@@ -80,23 +80,22 @@ JS of the pack ever runs in the worker; if the app ever adds a CSP, it must keep
 
 ## Tools and tests
 
-* `python3 tools/wasm_check.py MODULE.wasm [--max-pages N] [--step NAME] [--init NAME] [--json]` — the report (imports, exports with
-  their types, memory, sha256) and the errors; `--item item.json` checks a whole item. `check_item` / `check_model` are importable
-  for `tools/activities.py` (the integrator wires them in).
+* `python3 activity_lint.py <subject-dir>` (the toolkit) — the item and the module's report (imports, exports, memory, sha256) and
+  the errors, through `noema-tools.cjs` (the content checks call `NoemaWasm.checkItem` / `checkModel`).
 * `tests/fixtures/wasm/*.wat` + the committed `.wasm`: `osc` (a damped oscillator `step`, an endless `spin`, `grow`, `rnd`, a log in
   `init`), `imem` (imported memory without a maximum), `forbidden` (`env.fetch_url`), `badsig`, `bigmem` (max 65536 pages), `nomax`.
   No toolchain needed: `watasm.py` assembles the flat-syntax subset (`python3 tests/fixtures/wasm/watasm.py --all`); `wat2wasm`
   accepts the same files.
-* `node tests/activities_wasm.js --node` — parity, sha256, the ABI mapping (the worker code run in node). Without `--node`: the
+* `node tests/activities_wasm.js --node` — the golden reports of the former Python twin, sha256, the ABI mapping (the worker code run in node). Without `--node`: the
   browser part (Chromium, Firefox, WebKit); `--app <dir>`: also in the built app.
 
-## For the integrator (the files this phase did not touch)
+## Wired in (what the integration added)
 
-* `engine/packcheck.js` + `tools/activities.py`: add `wasm-module@1` to `RUNTIMES` (and to `CHECKS_RUNTIMES`, it exposes values
+* The content checks (`src/features/content/domain/activities/`): `wasm-module@1` in `RUNTIMES` (and to `CHECKS_RUNTIMES`, it exposes values
   through its spec), `wasm@1` to `ENGINES`; call `check_item` / `NoemaWasm.checkItem` for the item and `check_model` /
   `checkModel` for a wasm@1 spec; `requiredCaps` must add `engine:wasm@1` for a wasm-module@1 item with a spec, and accept the
   `wasm`, `sha256`, `bytes`, `abi`, `spec` keys of the item. `make_pack.py` / `unpack.py`: `activities/<id>/module.wasm` ↔ base64.
-* `tools/build.py skill`: ship `44_activity_wasm.js` in `activity_host/` and `wasm_check.py` in the toolkit; the harness should load
+* `tools/build.py skill`: ships `44_activity_wasm.js` in `activity_host/` (and in `noema-tools.cjs` for the checks); the harness loads
   `44_activity_wasm.js` and give its stub `ACT` an `ITEMS` map (or call `NoemaWasm.register(item)`).
 * `docs/INTERACTIVE.md` §1 / §12.6: the runtime row and the engine; the ADR's "as built".
 * **UI strings: none new.** Failures reuse the core's codes (`spec` → "could not start", `unsupported`, `runaway` → "stopped

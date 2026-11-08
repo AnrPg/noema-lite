@@ -4,10 +4,8 @@ A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for the numbers 
 time-varying-elastance pressure–volume loop), respiration and oxygen transport, acid–base (Henderson–Hasselbalch, compensation rules,
 Stewart), the kidney (CKD-EPI 2021, EKFC, Cockcroft–Gault, KDIGO), fluids and sodium, pharmacodynamics and pharmacokinetics, the
 glucose–insulin minimal model, body size, the ECG, 20 validated scores (each with its version and year) and clinical epidemiology (2×2
-tables, Bayes, the Fagan nomogram, effect measures, ROC, Kaplan–Meier). **108 functions.** The Python twin is `tools/lib_med.py`
-(`ID`, `check_spec`, `exprs`, `keys`; the same function table `SIG`, byte for byte). It checks and does not compute, and it gives the
-same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_med.js` (106 assertions) and
-`node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/med.json`, 25 specs). The reference activity is
+tables, Bayes, the Fagan nomogram, effect measures, ROC, Kaplan–Meier). **108 functions.** The tests are `node tests/lib_med.js` (106 assertions) and
+`node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/med.json`, 25 specs). The reference activity is
 `tools/activities_examples/pv-loop` (the left ventricle's pressure–volume loop: contractility, filling pressure and resistance as
 sliders). The research behind this chapter is in the project's `engine-library/research/med.md` (part A).
 
@@ -55,7 +53,7 @@ closed-form superposition for the PK models, a bisection for the iso-shunt curve
 - **Limits**: ≤ 48 items, ≤ 24 inputs per item, every series ≤ 2000 points (thinned by the core), every scene ≤ 2000 items, the PV loop
   ≤ 200 000 RK4 steps (8 beats at 0.5 ms), Kaplan–Meier ≤ 500 subjects. A typical run takes well under 1 ms; the PV loop about 20 ms.
 
-### 1.1 Checker codes (`checkSpec`, the same in `tools/lib_med.py`)
+### 1.1 Checker codes (`checkSpec`)
 
 | code | level | when |
 |---|---|---|
@@ -387,7 +385,7 @@ Beyond these: NEWS2 of the RCP's worked example, the PV loop's behaviour (a high
 resistance → a higher pressure and a smaller SV; a higher filling pressure → a bigger SV, Frank–Starling), Bohr dead space, the iso-shunt
 curve flattening above 30 % shunt, the ABG interpreter on textbook gases, Stewart's SIG, KDIGO cells, AKI stages, the checker's codes,
 the sim adapter (`engine.create(spec).run(inputs)`), the Worker source in a fresh `vm` context (identical outputs), speed, and the
-equality of the function table in JS and Python.
+function table `SIG` (the golden one of the former Python twin).
 
 ## 8. The reference activity `pv-loop`
 

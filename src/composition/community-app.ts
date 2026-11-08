@@ -12,7 +12,7 @@
  */
 import { browserStorage } from '../adapters/browser/storage.ts';
 import type { CatalogIndex, IndexSource } from '../features/catalog/application/index-store.ts';
-import type { CommunityHost, ScreenChrome } from '../features/community/ui/host.ts';
+import type { CommunityHost, HostSubject, NoteItem, ScreenChrome } from '../features/community/ui/host.ts';
 import { searchService } from '../features/search/application/search.ts';
 import type { Here } from '../features/search/domain/params.ts';
 import { SearchUi, type SearchDeps } from '../features/search/ui/model.ts';
@@ -25,7 +25,7 @@ import { SocialUi } from '../features/social/ui/model.ts';
 import type { VaultFile } from '../ports/vault.ts';
 import type { BridgeExtension } from './bridge.ts';
 import type * as ScreensModule from './community-ui.ts';
-import type { Resolver } from './container.ts';
+import { token, type Resolver } from './container.ts';
 import { oldAppHost } from './community-host.ts';
 import { captureErrors, oldAppReportContext } from './community-old.ts';
 import { REPORTS, SOCIAL, VAULT } from './community.ts';
@@ -92,15 +92,12 @@ export function communityApp(
   return { r, host, notify, i18n, search: new SearchUi(searchDeps, () => i18n), reports, vault, social: socialUi };
 }
 
-/** the screens, loaded once */
-type Screens = typeof ScreensModule;
+/** the screens (build/community.js), loaded once */
+export type Screens = typeof ScreensModule;
+/** the load of build/community.js (the page registers it: src/composition/browser.ts) */
+export const COMMUNITY_SCREENS = token<() => Promise<Screens>>('community.screens', 'the load of build/community.js');
 let screens: Promise<Screens> | null = null,
   loaded: Screens | null = null;
-const loadScreens = (): Promise<Screens> =>
-  (screens ??= import('./community-ui.ts').then(m => {
-    loaded = m;
-    return m;
-  }));
 
 export function communityBridge(r: Resolver): unknown {
   const win = globalThis as Window & typeof globalThis;
@@ -114,6 +111,17 @@ export function communityBridge(r: Resolver): unknown {
       });
     }));
   const cloudOn = (): boolean => A().host.account()?.kind === 'cloud' && !!A().host.session();
+  const loadScreens = (): Promise<Screens> =>
+    (screens ??= r
+      .get(COMMUNITY_SCREENS)()
+      .then(m => {
+        loaded = m;
+        return m;
+      })
+      .catch((e: unknown) => {
+        screens = null; // a failed load may be tried again
+        throw e;
+      }));
   const ui = async (): Promise<ReturnType<Screens['communityScreens']>> => (await loadScreens()).communityScreens(A(), win);
   /** once the screens are loaded, a screen is mounted in the same task (the frame never shows a page half drawn) */
   const now = (): ReturnType<Screens['communityScreens']> | null => (loaded ? loaded.communityScreens(A(), win) : null);
@@ -139,6 +147,27 @@ export function communityBridge(r: Resolver): unknown {
     ): Promise<HTMLElement | null> => {
       const s = now();
       return s ? Promise.resolve(s.mount(el, hash, onChrome, ctx)) : ui().then(x => x.mount(el, hash, onChrome, ctx));
+    },
+    /** 🔔 the bell's sharing rows (a share, an invitation, an update, news) and its "Clear all" */
+    notes: Object.freeze({
+      row: async (
+        el: HTMLElement,
+        item: NoteItem,
+        o: { onAccepted?: (s: { readonly kind?: string; readonly id?: string }) => void } = {},
+      ) => {
+        (await ui()).noteRow(el, item, o.onAccepted ?? null);
+      },
+      clear: async (el: HTMLElement) => {
+        (await ui()).noticesClear(el);
+      },
+    }),
+    /** 🧭 Explore in a dialog (kind 'subjects' or '': Roadmaps), where no frame draws the page (the classic screens) */
+    explore: async (kind: string) => {
+      (await ui()).explore(kind);
+    },
+    /** 🔗 the share dialog of one of the learner's subjects (public, with a person; its source files with it) */
+    share: async (s: HostSubject) => {
+      (await ui()).share(s);
     },
     report: Object.freeze({
       /** ⚑ pressed: the place and the screenshot, then the dialog */

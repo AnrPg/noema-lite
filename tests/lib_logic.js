@@ -16,9 +16,10 @@
    8. deontic: input/output logic out1–out4 (Makinson & van der Torre 2000), norms with deadlines, contrary-to-duty, conflicts by lex
       superior / specialis / posterior, the agents@1 API (evalNorms, normMonitor, perAgent);
    9. argumentation (Dung 1995): Nixon diamond, odd cycle, ideal and semi-stable; the API for other engines; the adapter, the Worker
-      source, check codes and the Python twin, speed, the reference activities.   Usage: node tests/lib_logic.js */
+      source, check codes and the golden outputs of the former Python twin, speed, the reference activities.   Usage: node tests/lib_logic.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_logic');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
@@ -333,7 +334,7 @@ ok(L.id === 'logic@1' && Object.isFrozen(L) && L.engine.id === 'logic@1' && L.en
 function norms0() { return [{ id: 'pay', kind: 'O', cond: 'order', act: 'paid', within: 1 }]; }
 function trace0() { return [{ facts: ['order'] }, {}]; }
 
-// ---------- 11. the adapter, the Worker, the checks and the Python twin, speed ----------
+// ---------- 11. the adapter, the Worker, the checks and the golden outputs of the former Python twin, speed ----------
 {
   const sp = spec({ task: 'epistemic', puzzle: { kind: 'muddy', n: 3, muddy: 2 }, formula: 'K_c1 m1', step: 'k' }, [O('v', 'value'), O('w', 'worlds'), S('l', 'worldsLeft'), SC]);
   const a = L.engine.create(sp, { seed: 1 }).run({ k: 2 });
@@ -351,20 +352,15 @@ function trace0() { return [{ facts: ['order'] }, {}]; }
     'exprs: every number written as an expression with its path; keys: the labels of worlds and arguments');
   const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'enginelib', 'logic.json'), 'utf8')).specs;
   const js = fx.map(s => { const p = L.checkSpec(s), bad = p.some(q => q.level === 'error'); return { p, x: bad ? null : L.exprs(s), k: bad ? null : L.keys(s) }; });
-  const py = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_logic as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else M.exprs(s),'k':None if bad else M.keys(s)})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(fx), encoding: 'utf8' }));
+  const py = want('check', fx, js);
   let same = 0; js.forEach((r, i) => { if (JSON.stringify(r) === JSON.stringify(py[i])) same++; else console.log('  spec', i, '\n  JS', JSON.stringify(r), '\n  PY', JSON.stringify(py[i])); });
   const good = js.filter(r => !r.p.some(q => q.level === 'error')).length;
-  ok(same === fx.length && good >= 10 && fx.length - good >= 10, `tools/lib_logic.py = the JS checkSpec / exprs / keys on ${same}/${fx.length} fixtures (${good} good, ${fx.length - good} bad)`);
+  ok(same === fx.length && good >= 10 && fx.length - good >= 10, `the JS checkSpec / exprs / keys give the golden outputs of the former twin tools/lib_logic.py on ${same}/${fx.length} fixtures (${good} good, ${fx.length - good} bad)`);
   const texts = ['p ∧ (q', '[p]K_a q', 'O(p / q', 'AG(p → AF q)', 'p U q', '∀x. P(x) → ∃y R(x, y)', 'x ≠ f(y)', 'K p', 'C_{a,b} p ∧ E_a q', '◇p ★', '((p))', 'G(p U q) R r', 'O(b | a) ∧ F c'];
   const langs = ['prop', 'epistemic', 'dyadic', 'ctl', 'ltl', 'fol', 'fol', 'epistemic', 'epistemic', 'modal', 'prop', 'ltl', 'dyadic'];
   const pj = texts.map((t, i) => { const r = L.parse(t, langs[i]); return r.ok ? 'ok' : [r.code, r.pos, r.msg]; });
-  const pp = JSON.parse(execFileSync('python3', ['-c', 'import json,sys,lib_logic as M\nd=json.loads(sys.stdin.read())\nprint(json.dumps([(lambda r: "ok" if r["ok"] else [r["code"], r["pos"], r["msg"]])(M.parse(t, l)) for t, l in zip(d[0], d[1])]))'], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify([texts, langs]), encoding: 'utf8' }));
-  ok(JSON.stringify(pj) === JSON.stringify(pp), 'the parser in Python gives the same codes, positions and messages');
+  const pp = want('parse', [texts, langs], pj);
+  ok(JSON.stringify(pj) === JSON.stringify(pp), 'the parser gives the golden codes, positions and messages of the former Python twin');
   const t0 = Date.now(); R({ task: 'truth-table', formula: '(p -> q) & (q -> r) -> (p -> r)' }, [O('v', 'valid'), SC]); R({ task: 'epistemic', puzzle: { kind: 'muddy', n: 3, muddy: 2 }, formula: 'K_c1 m1' }, [O('v', 'value'), SC]); R({ task: 'ctl', preset: 'mutex', formula: 'AG (t1 -> AF c1)' }, [O('v', 'value'), SC]); const t1 = Date.now() - t0;
   const t2 = Date.now();
   R({ task: 'truth-table', formula: Array.from({ length: 12 }, (_, i) => 'a' + i).join(' | ') }, [O('v', 'valid'), SC]);

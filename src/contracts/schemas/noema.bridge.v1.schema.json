@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.bridge.v1.schema.json",
   "title": "noema-lite 文A language bridge (noema-bridge, noema-bridge-core, noema-bridge-locale v1)",
-  "description": "Language help for a learner who reads a pack in a language that is not their own (docs/BRIDGE.md). The built bridge (the root: what the app reads, noema_save_bridge, bridge.<native>.js) and its two source files: bridges/core.json ($defs/core) and bridges/<native>.json ($defs/locale). That every anchor and key word names an entry, and that a bridge belongs to its pack, is checked by engine/packcheck.js checkBridge and tools/bridge.py.",
+  "description": "Language help for a learner who reads a pack in a language that is not their own (docs/BRIDGE.md). The built bridge (the root: what the app reads, noema_save_bridge, bridge.<native>.js) and its two source files: bridges/core.json ($defs/core) and bridges/<native>.json ($defs/locale). That every anchor and key word names an entry, and that a bridge belongs to its pack, is checked by checkBridge (src/features/content/domain/bridge.ts; tools/bridge.py through build/noema-tools.cjs).",
   "$ref": "#/$defs/built",
   "$defs": {
     "plain": {

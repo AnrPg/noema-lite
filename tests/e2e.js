@@ -76,14 +76,14 @@ async function mockGemini(ctx) {
   const melOpen = await page.evaluate(async () => { const cv = CV.list.find(c => c.id === 'cv_000000mel1aaaaaa'); openConvo(cv); const m = T.mode; cv.title = 'Feynman: Delta Lake'; cv.titleSource = 'user'; saveConvos(cv); await new Promise(r => setTimeout(r, 300)); const r = await Noema.convos.get('anr', cv.id); closeTutor(); return [m, r.mode, r.meta?.app, r.model?.provider, r.title]; });
   ok(melOpen.join() === 'explain,feynman,meletee,claude,Feynman: Delta Lake', 'opened in the tutor as a plain explanation; saving again keeps its mode, app and provider: ' + melOpen.join());
   ok(await page.evaluate(() => Noema.stats.get().xp === 50 && Noema.stats.streakNow() >= 0), 'account-level stats seeded');
-  ok(await page.evaluate(() => !!localStorage.getItem('noema1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1')), 'namespaced keys written, legacy keys kept (nothing deleted)');
+  ok(await page.evaluate(async () => NoemaCore.learning.hasProgress('databricks') && Object.keys(S.res).length > 0 && !localStorage.getItem('noema1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1') && Object.keys(await NoemaCore.learning.archive()).includes('s:databricks:state')), 'the old progress became events of the learning log (its old value archived there), legacy keys kept (nothing deleted)');
   // stable flashcard ids: progress keyed by a card's position (chNN#k) moves to the card's id once; a:caps says so
-  await page.evaluate(() => { S.fc = { 'ch01#2': { box: 3, due: '2099-12-01' }, 'ch02#0': { box: 1, due: '2026-01-01' }, 'ch02-f001': { box: 4, due: '2099-11-11' } }; flushSave(); });
+  await page.evaluate(async () => { localStorage.setItem('noema1:anr:s:databricks:state', JSON.stringify({ fc: { 'ch01#2': { box: 3, due: '2099-12-01' }, 'ch02#0': { box: 1, due: '2026-01-01' }, 'ch02-f001': { box: 4, due: '2099-11-11' } } })); await NoemaCore.learning.migrate(); await NoemaCore.learning.flush(); });   // an old copy (the old sync, an old backup)
   await page.reload(); await wait(900); await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  const mig = await page.evaluate(() => ({ fc: S.fc, key: CH.ch01.flashcards[2]._key, due: countDueCards(), saved: JSON.parse(localStorage.getItem('noema1:anr:s:databricks:state')).fc, caps: JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}') }));
-  ok(mig.key === 'ch01-f003' && mig.fc['ch01-f003']?.box === 3 && !mig.fc['ch01#2'], 'positional card progress (ch01#2) moved to the card id ch01-f003');
-  ok(mig.fc['ch02-f001']?.box === 4 && !mig.fc['ch02#0'], 'when both keys exist the id wins and the positional key is dropped');
-  ok(mig.saved['ch01-f003']?.box === 3 && !mig.saved['ch01#2'] && mig.due === 0, 'the move is saved (nothing due yet)');
+  const mig = await page.evaluate(async () => { await NoemaCore.learning.flush(); return { fc: S.fc, boxes: Object.fromEntries(Object.entries(S.fc).map(([k, v]) => [k, NoemaCore.study.fsrs.box(v)])), key: CH.ch01.flashcards[2]._key, due: countDueCards(), moved: (await NoemaCore.learning.events()).filter(e => e.type === 'card.imported' && e.data.from).map(e => e.data.from + '>' + e.item).sort(), caps: JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}') }; });
+  ok(mig.key === 'ch01-f003' && mig.boxes['ch01-f003'] === 3 && !mig.fc['ch01#2'], 'positional card progress (ch01#2) moved to the card id ch01-f003 (an old Leitner box 3 is an FSRS memory of that interval)');
+  ok(mig.boxes['ch02-f001'] === 4 && !mig.fc['ch02#0'], 'when both keys exist the one reviewed last (the id) wins and the positional key is dropped');
+  ok(mig.moved.join() === 'ch01#2>ch01-f003,ch02#0>ch02-f001' && mig.due === 0, 'the move is recorded once, as events (nothing due yet): ' + mig.moved.join());
   ok(mig.caps.stableCardIds === 1, 'a:caps announces stableCardIds');
   // regression: every section renders, every exercise accepts its correct answer
   const reg = await page.evaluate(() => {
@@ -151,13 +151,14 @@ async function mockGemini(ctx) {
   ok((await page.$$eval('.setuprow', r => r.length)) === 1, 'a banner item can be dismissed');
   // backup → restore
   const backupOk = await page.evaluate(async () => {
-    const b = await Noema.backup.collect('anr'); if (!b.data['s:databricks:state'] || b.data['a:settings'].includes('LEGACYKEY')) return 'bad backup ' + Object.keys(b.data).join(',');
-    await Noema.backup.apply(b, 'maria', 'replace');
-    const st = JSON.parse(localStorage.getItem('noema1:maria:s:databricks:state')); const pts = await Noema.backup.listRestorePoints('maria');
-    const src = JSON.parse(localStorage.getItem('noema1:anr:s:databricks:state'));
+    const b = await Noema.backup.collect('anr'); if (b.version !== 3 || !b.events.some(e => e.subject === 'databricks' && e.account === 'anr') || b.data['a:settings'].includes('LEGACYKEY')) return 'bad backup ' + Object.keys(b.data).join(',');
+    await Noema.backup.apply(b, 'maria', 'replace'); await NoemaCore.learning.flush();
+    const st = NoemaCore.learning.progress('databricks'), pts = await Noema.backup.listRestorePoints('maria');   // Maria's log is the open one
+    const xp = b.events.filter(e => e.type === 'xp.earned' && e.subject === 'databricks').reduce((a, e) => a + e.data.amount, 0);
+    const answered = [...new Set(b.events.filter(e => /^answers?\./.test(e.type) && e.subject === 'databricks').map(e => e.item))].sort();
     const nc = (await Noema.convos.list('maria')).length, na = (await Noema.convos.list('anr', { includeDeleted: true })).length;
     if (nc !== na || b.conversations.length !== na) return 'conversations ' + nc + '/' + na;
-    return st.xp === src.xp && JSON.stringify(st.res) === JSON.stringify(src.res) && pts.length >= 1 ? 'ok' : 'bad restore ' + JSON.stringify({ xp: st.xp, pts: pts.length });
+    return st.xp === xp && xp > 0 && JSON.stringify(Object.keys(st.res).sort()) === JSON.stringify(answered) && (await NoemaCore.learning.events()).every(e => e.account === 'maria') && pts.length >= 1 ? 'ok' : 'bad restore ' + JSON.stringify({ xp: st.xp, want: xp, pts: pts.length });
   });
   ok(backupOk === 'ok', backupOk + ' — backup of ANR restored into Maria (+ restore point created, API key excluded)');
   ok(await page.evaluate(async () => { const b = await Noema.backup.collect('anr', { includeSecrets: true }); const k = JSON.parse(b.data['a:settings']).apiKey; const prev = localStorage.getItem('noema-device:geminiKey:maria'); await Noema.backup.apply(b, 'maria', 'merge'); const got = localStorage.getItem('noema-device:geminiKey:maria'), kept = localStorage.getItem('noema1:maria:a:settings'); prev ? localStorage.setItem('noema-device:geminiKey:maria', prev) : localStorage.removeItem('noema-device:geminiKey:maria'); return !!k && k === localStorage.getItem('noema-device:geminiKey:anr') && got === k && !kept.includes(k); }), 'a backup with secrets carries this device’s Gemini key, and restoring it puts the key on the device');
@@ -234,10 +235,10 @@ async function mockGemini(ctx) {
     const n1 = await pA.evaluate(() => checkInbox());
     const after = await pA.evaluate(k => ({ n: S.res['ch01-e004']?.n || 0, ok: S.res['ch01-e005'], card: NoemaCore.study.fsrs.memory(S.fc[k]), due: NoemaCore.study.fsrs.isDue(S.fc[k]), read: !!S.read['ch01-s02'], ext: S.ext?.meletee }), before.card);
     ok(n1 === 4 && after.read && after.n === before.n + 1 && after.card?.reps === before.reps + 1 && after.card.phase === 'review' && !after.due && after.ext?.length === 1 && after.ext[0].rating === 'hard', 'inbox row applied: section read, exercise recorded, card rated, review kept in S.ext.meletee (' + n1 + ' items)');
+    ok(await pA.evaluate(async () => NoemaCore.learning.pending() === 0 && (await NoemaCore.learning.events()).filter(e => e.origin === 'inbox').length === 4), 'its items are events of the learning log (origin inbox), stored before the row was deleted');
     ok(!after.ok, 'malformed items in a row are skipped');
     ok(!inbox['a:inbox:meletee:001'] && !inbox['a:inbox:meletee:002'] && !inbox['a:inbox:meletee:005'], 'applied, unreadable and empty rows are deleted from the inbox');
     ok(!!inbox['a:inbox:meletee:003'] && !!inbox['a:inbox:other:004'], 'rows of another subject or an unknown format stay in the inbox');
-    ok(await pA.evaluate(() => { const st = JSON.parse(Noema.kv.get(STATE_KEY)); return !!st.inboxDone?.['a:inbox:meletee:001'] && !!st.read['ch01-s02']; }), 'the changed state is saved before the row is deleted');
     put('a:inbox:meletee:001', row);   // the same row again (a delete that failed, another tab): counted once
     const n2 = await pA.evaluate(() => checkInbox());
     ok(n2 === 0 && await pA.evaluate(n => S.res['ch01-e004'].n === n, after.n) && !inbox['a:inbox:meletee:001'], 'a row applied twice does not count twice (and is deleted)');
@@ -266,13 +267,13 @@ async function mockGemini(ctx) {
   ok(await pB.evaluate(() => Noema.kv.set(Noema.kv.accountKey('probe'), '1') === false), 'nothing is saved on the waiting device');
   await pB.click('.noema-inuse button:has-text("Use here")'); await wait(1200);
   ok(!(await pB.isVisible('.noema-inuse')) && await pB.evaluate(() => NoemaCore.sync.lease.state === 'mine'), '"Use here" continues on device B');
-  ok(await pA.evaluate(() => NoemaCore.sync.lease.check()) === 'other' && await pA.isVisible('.noema-inuse') && await pA.evaluate(() => !Noema.kv.set(STATE_KEY, '{}')) && await pA.evaluate(() => NoemaCore.sync.status().state === 'paused'), 'device A pauses with the same card, saves nothing and holds its sync');
+  ok(await pA.evaluate(() => NoemaCore.sync.lease.check()) === 'other' && await pA.isVisible('.noema-inuse') && await pA.evaluate(() => !Noema.kv.set(Noema.kv.accountKey('probe'), '1')) && await pA.evaluate(() => NoemaCore.sync.status().state === 'paused'), 'device A pauses with the same card, saves nothing and holds its sync');
   ok(await pA.evaluate(() => [...document.body.children].filter(x => !x.classList.contains('noema-inuse-ov')).every(x => x.inert) && document.activeElement?.closest('.noema-inuse')), '… the app underneath is inert and the focus is on “Use here”');
   const chipsB = await pB.$$eval('.noema-chip', c => c.map(x => x.textContent));
   ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
   await pB.click('.noema-chip:has-text("Databricks")'); await wait(1600);
   ok(await pB.evaluate(() => S.settings.goal === 150 && S.settings.oldOnly === 'kept'), 'device B pulled the settings: the later choice per field (goal from device A), what only the old row had (oldOnly)');
-  ok(await pB.evaluate(() => S.res['ch01-e002']?.n === 2 && !S.res['ch01-e001']), 'the cloud’s old progress row is kept on a device that had none (for the learning log’s migration); device A’s answers travel as events, not here');
+  ok(await pB.evaluate(() => S.res['ch01-e002']?.n === 2 && S.res['ch01-e001']?.n === 1), 'the cloud’s old progress row is taken in on a device that had none (the learning log’s migration); device A’s answer arrives as its event');
   ok(await pB.evaluate(() => S.settings.apiKey === 'OLDKEY' && localStorage.getItem('noema-device:geminiKey:' + ACCOUNT.id) === 'OLDKEY' && !localStorage.getItem(Noema.kv.accountKey('settings')).includes('OLDKEY')), 'a key synced by an older version is moved to this device');
   ok(await pB.evaluate(() => CV.list.some(c => c.mode === 'quiz' && c.msgs.length >= 2)), 'device B has the conversation from device A');
   await pB.screenshot({ path: SHOTS + '/b3_deviceB_mobile.png' });

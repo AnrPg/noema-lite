@@ -20,7 +20,7 @@ import type { MessageParams } from '../ports/i18n.ts';
 
 /* The globals as these calls use them (loosely typed: they are plain scripts). */
 type Fn = (...a: never[]) => unknown;
-type Any = Record<string, unknown> & { [k: string]: unknown };
+export type Any = Record<string, unknown> & { [k: string]: unknown };
 interface Win {
   readonly location: Location;
   readonly history: History;
@@ -33,18 +33,18 @@ const fn = (o: unknown, name: string): Fn | null => {
   const f = o && typeof o === 'object' ? (o as Any)[name] : undefined;
   return typeof f === 'function' ? (f.bind(o) as Fn) : null;
 };
-const obj = (o: unknown): Any | null => (o && typeof o === 'object' ? (o as Any) : null);
-const str = (x: unknown): string => (typeof x === 'string' ? x : typeof x === 'number' ? String(x) : '');
+export const obj = (o: unknown): Any | null => (o && typeof o === 'object' ? (o as Any) : null);
+export const str = (x: unknown): string => (typeof x === 'string' ? x : typeof x === 'number' ? String(x) : '');
 /** a method of an older script's object, called when it is there (its answer is what that script returns) */
 type Method = (...a: unknown[]) => unknown;
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- the caller names what the plain script answers
-const call = <T>(o: unknown, name: string, ...args: unknown[]): T | undefined => {
+export const call = <T>(o: unknown, name: string, ...args: unknown[]): T | undefined => {
   const f = fn(o, name) as Method | null;
   return f ? (f(...args) as T) : undefined;
 };
 /** … and one that must be there */
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- the caller names what the plain script answers
-const need = <T>(o: unknown, name: string, ...args: unknown[]): T => {
+export const need = <T>(o: unknown, name: string, ...args: unknown[]): T => {
   const f = fn(o, name) as Method | null;
   if (!f) throw new Error(`${name} is not available here`);
   return f(...args) as T;
@@ -72,15 +72,6 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
       return win.localStorage.getItem(k);
     } catch {
       return null; // site data blocked: as if nothing was stored
-    }
-  };
-  const jget = <T>(k: string, d: T): T => {
-    const v = lsGet(k);
-    if (v == null) return d;
-    try {
-      return JSON.parse(v) as T;
-    } catch {
-      return d; // a value written by hand: the default
     }
   };
   const accountKey = (name: string): string => {
@@ -283,7 +274,8 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
 
     /* ---------- the search ---------- */
     searchSources,
-    subjectStatus: id => jget<Record<string, unknown> | null>(`noema1:${acc() ?? ''}:s:${id}:state`, null),
+    // the learning log's fold (null: no progress, or another account)
+    subjectStatus: id => obj(call<unknown>(obj(g('NoemaCore'))?.['learning'], 'progressOf', acc(), id)) ?? null,
     roadmapPacks: id => {
       const c = obj(call<unknown>(CU(), 'get', acc(), id));
       return Object.values(obj(c?.['nodes']) ?? {})
@@ -295,15 +287,26 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     },
 
     /* ---------- Explore and sharing ---------- */
-    publicSubjects: async () => (await call<Promise<PublicItem[]>>(N(), 'publicSubjects')) ?? [],
+    publicSubjects: async () => {
+      const r = obj(await call<Promise<unknown>>(N(), 'publicSubjects'));
+      const all = r?.['all'];
+      return Array.isArray(all) ? (all as PublicItem[]) : [];
+    },
     studyPublic: async item => {
       await need<Promise<unknown>>(N(), 'studyPublic', item);
     },
-    publicRoadmaps: async () => (await call<Promise<PublicItem[]>>(CU(), 'publicList', acc())) ?? [],
+    publicRoadmaps: async () => (await call<Promise<PublicItem[]>>(g('NoemaCurMap'), 'publicRoadmaps', acc())) ?? [],
     openPublicRoadmap: async item => {
-      await need<Promise<unknown>>(CU(), 'openPublic', acc(), item);
+      await need<Promise<unknown>>(g('NoemaCurMap'), 'openPublic', acc(), item, {
+        onOpen: (id: string) => {
+          host.go('#/map/' + encodeURIComponent(id));
+        },
+      });
     },
-    domains: () => call<string[]>(CU(), 'domains') ?? [],
+    domains: () => {
+      const d = CU()?.['DOMAINS'];
+      return Array.isArray(d) ? d.map(str) : [];
+    },
     langTag: item => {
       const t = call<unknown>(N(), 'langTag', item);
       return t instanceof HTMLElement ? t : null;
@@ -312,11 +315,26 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
       call(g('NoemaMT'), 'mark', el, o);
     },
     translateBar: scope => {
-      const mt = g('NoemaMT');
-      const t = call<unknown>(mt, 'toggle', acc(), [...scope.querySelectorAll('[data-mt]')]);
+      const t = call<unknown>(g('NoemaMT'), 'bar', acc(), scope);
       return t instanceof HTMLElement ? t : null;
     },
     share: parts.share,
+    notes: {
+      accept: item => need<Promise<unknown>>(obj(N()?.['notes']), 'accept', item),
+      reject: async item => {
+        await need<Promise<unknown>>(obj(N()?.['notes']), 'reject', item);
+      },
+      update: async (item, take) => {
+        await need<Promise<unknown>>(obj(N()?.['notes']), 'update', item, take);
+      },
+      dismiss: id => {
+        call(obj(N()?.['notices']), 'dismiss', str(obj(N()?.['notes'])?.['acc']), id);
+      },
+      clear: () => {
+        call(obj(N()?.['notices']), 'clear', str(obj(N()?.['notes'])?.['acc']));
+      },
+    },
+    ago: at => call<string>(obj(g('NoemaI18n')?.['fmt']), 'ago', at) ?? '',
 
     /* ---------- ⚑ reports ---------- */
     report: parts.report,

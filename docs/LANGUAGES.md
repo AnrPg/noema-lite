@@ -75,8 +75,8 @@ Work now continues on `main` (or on short-lived branches merged back), under the
   are shown as ⏳ and never offered).
 * **Additive code.** Language code lives in its own files (`engine/langcore.js`, `engine/lang/*`, `tools/*lang*`,
   `library/languages/`, `tests/lang*`). Other files are touched only at registration points (the build lists,
-  `index.html`, the subject picker, the boot and the frame's `registerWorld('lang', …)` in `engine/loader.js`, two small
-  hooks in `engine/shell.js` — §8 *Inside the frame*), and only for courses with `kind: "language"`; ordinary subjects and
+  `index.html`, the subject picker, the boot and the frame's `registerWorld('lang', …)` in `engine/app/languages.js`, two small
+  hooks in the frame (src/composition/shell/host.ts) — §8 *Inside the frame*), and only for courses with `kind: "language"`; ordinary subjects and
   curricula take exactly the same code paths as before.
 * **Own storage namespace.** Learner state lives only in `…:s:lang:<course>:*` keys (§5.6); no existing key changes format.
   Automated tests use the Supabase emulator, never the cloud account.
@@ -920,7 +920,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 
 ## 8. User interface
 
-* **Inside the frame** (2026-10-09, docs/NEW_FRAME_AND_LANGUAGES.md; `engine/loader.js` registers `NoemaShell.registerWorld('lang', { page, route, create, menu, today })`):
+* **Inside the frame** (2026-10-09, docs/NEW_FRAME_AND_LANGUAGES.md; `engine/app/languages.js` registers `NoemaShell.registerWorld('lang', { page, route, create, menu, today })`):
   * **The Languages tab** (`#/lang`, icon 文A, shown for "Languages" or "Both"): one row per course — the library's (`REG.languages`)
     and the learner's own account courses (P8, `a:langcourse:<id>`) — with its flags, languages, words met, the reviews due today
     and the next lesson; a bar for the words met; each row's ⋮: Start / Continue · Course settings · ✨ Through Claude. **+ New language**
@@ -986,7 +986,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
   * **Plain chrome**: titles, summaries and buttons drop their pictographs, as main's frame does (`Noema.plain`); kept: flags,
     foreign words, lesson text, the pictures of words and exercises, 🆕 marks, arrows and ✓. `lang` / `dir` on every foreign span,
     the keyboard of every exercise and the 390 px layout are unchanged (`tests/lang_frame.js` H checks them with four characters).
-* **Languages to study (D21, 2026-10-11)** — `engine/loader.js` (`Noema.langStudy`: `studyChooser`, `langChosen`, `studyOffered`),
+* **Languages to study (D21, 2026-10-11)** — `engine/app/languages.js` (`Noema.langStudy`: `studyChooser`, `langChosen`, `studyOffered`),
   `engine/lang/00_base.js` (`studyChoice`, `toggleStudy`, `restudy`), `langcore.studyLangs` / `course(data, {languages})`; tested by `tests/lang_select.js`.
   * **The question** “Which languages do you want to study?” lists every language the app offers — the union of the library's courses
     (`REG.languages`, with the languages packages added) and the learner's own (`a:langcourse:*`) — each with its flag, its own name
@@ -1240,7 +1240,7 @@ private storage; the app adds the language to the course by itself. D1–D29 app
 | `tools/langlib.py`, `tests/fixtures/lang-vectors.json` | the shared helpers in Python (cells, vowel marks, pinyin, joining tokens) and the vectors both twins must pass |
 | `engine/langcore.js` | pure module (no DOM; also runs in Node and in the connector): loading the course packs, state machine, SM-2 two-track scheduler, gating, known sets, form index, tokenizer/segmenter, feasibility, bank selection, session planner, script utilities (strip marks, positional forms, pinyin numbers ↔ marks, transliteration) |
 | `engine/lang/*.js`, `engine/lang/lang.css` → `engine/langui.js`, `engine/langui.css` (built) | the language-course UI, a bundle of its own, loaded **instead of** `engine.js` when a language course is open (so the subject engine is untouched): `00_base` (helpers, word rendering, storage), `10_shell` (top bar, routes, home, vocabulary map), `20_cards` (node page, flag card, compare, word card), `30_vocab` (field map, name-them-all, settings), `40_ex` (exercises), `50_session` (the session runner); later `60_grammar`, `70_script`, `80_input` … |
-| `engine/lang/97_frame.css`, `engine/lang/99z_frame.js`, `engine/loader.js` (*language courses inside the frame*) | the course inside the new frame (§8): the Languages tab, `#/lang/<course>/…`, Today's card, the ⋮ |
+| `engine/lang/97_frame.css`, `engine/lang/99z_frame.js`, `engine/app/languages.js` (*language courses inside the frame*) | the course inside the new frame (§8): the Languages tab, `#/lang/<course>/…`, Today's card, the ⋮ |
 | `library/languages/<id>/course.pack.js` (built) | the whole course as one script (`window.NOEMA_LANGPACKS[id]`); the registry lists it under `languages` |
 | `tools/validate_lang.py`, `tools/lang_refcheck.py`, `src/contracts/schemas/noema.lang.v1.schema.json` | validation |
 | `tools/lang_course.py` (`package`, `unpack --package`), `tools/lang_readback.js`, `src/contracts/schemas/noema.langpack.v1.schema.json`, `skill/noema-language-builder/` | the language package and the skill that makes it (§10.2) |
@@ -1333,7 +1333,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 - Done (§10.1): `engine/langcore.js` (P8 section: account course skeleton, task queue, task texts, `checkLangAnswer`,
   `applyLangAnswer`, inbox merge, the parallel order in JS, refill requests, night queue), `engine/lang/95_claude.js` +
   `95_claude.css` (✨ new course dialog, `#/claude` queue page, ▶ key runner, 📋 copy / paste, 💬 connector message, inbox
-  poll, refill card on the function page, comparison tables, account course storage), hooks in `engine/loader.js` (the
+  poll, refill card on the function page, comparison tables, account course storage), hooks in `engine/app/languages.js` (the
   🌍 overlay lists account courses and offers ✨; account courses open from the device or the cloud), `engine/cloud.js`
   (`a:langin:` / `a:langclaim:` stay in the cloud), connector tools `noema_lang_courses` · `noema_lang_task` ·
   `noema_lang_submit` (`src/connector`, langcore bundled by `tools/connector_bundle.mjs`), `tools/lang_course.py` (course ↔

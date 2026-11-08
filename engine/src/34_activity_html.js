@@ -212,11 +212,11 @@ APP.postMessage({t:'hello',nonce:N},'*');
       s.next = job;
     }
     /* noema.sim(spec).run(inputs): a spec with parts {consts?, derived?, parts, couple?} whose engines are all declared and allowed;
-       the inputs override its consts; the same checks as a sim-spec@1 spec (packcheck), run by the sim runtime's parts orchestrator
+       the inputs override its consts; the same checks as a sim-spec@1 spec (NoemaCore.content), run by the sim runtime's parts orchestrator
        (ACT.partsRunner: each part in its engine's Worker, ≤ 5 s in all). One run at a time per mini-app and one waiting ("superseded"). */
     const sims = { runner: null, key: null, busy: null, next: null };
     function simJob(m) {
-      const p = m.payload, rid = m.id, sp = p.spec, PC = window.NoemaPackCheck;
+      const p = m.payload, rid = m.id, sp = p.spec, PC = window.NoemaCore?.content;
       if (!Array.isArray(sp.parts) || typeof ACT.partsRunner !== 'function' || !PC?.checkSimSpec) return no(rid, Array.isArray(sp.parts) ? 'unavailable' : 'spec', 'the spec is {consts?, derived?, parts, couple?}', Array.isArray(sp.parts) ? undefined : ['spec.parts: a list of parts is required']);
       const engs = [...new Set(sp.parts.map(q => (q && typeof q === 'object' ? q.engine : null)))];
       const bad = engs.find(e => typeof e !== 'string' || !declared.has(e)); if (bad !== undefined) return no(rid, 'undeclared', 'the activity\'s registry entry does not list ' + String(bad).slice(0, 40) + ' in "engines"');

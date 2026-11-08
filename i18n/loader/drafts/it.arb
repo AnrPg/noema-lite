@@ -2,6 +2,7 @@
   "@@locale": "it",
   "loader.export.missingActivities": "{n, plural, one {# elemento interattivo è rimasto} many {# elementi interattivi sono rimasti} other {# elementi interattivi sono rimasti}} fuori dal pacchetto: il file .h5p non è su questo dispositivo ({items}). Apri la materia una volta online, poi esportala di nuovo.",
   "loader.storage.full": "La memoria di questo dispositivo è piena, quindi i tuoi ultimi progressi non sono stati salvati qui. Fai un backup (Io › Dati e sincronizzazione), poi rimuovi le materie che non ti servono più.",
+  "loader.storage.low": "Lo spazio di archiviazione di questo dispositivo è quasi pieno ({pct}% in uso). Fai un backup (Io › Dati e sincronizzazione), poi rimuovi le materie che non ti servono più.",
   "loader.pwa.updateReady": "È pronta una nuova versione.",
   "loader.pwa.reload": "Ricarica",
   "loader.pwa.later": "Più tardi"

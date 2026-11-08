@@ -1,0 +1,133 @@
+{
+ "cases": {
+  "in": "50b5d038474b5adcd25a7bb72b42e0b35db2adc1e4b91ffc884fcfc9115417a8",
+  "out": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [
+    "spec.parts must be a list of 1–8 parts {id, engine, model, outputs, inputs?}"
+   ],
+   [
+    "spec.parts must be a list of 1–8 parts {id, engine, model, outputs, inputs?}"
+   ],
+   [
+    "spec.parts must be a list of 1–8 parts {id, engine, model, outputs, inputs?}"
+   ],
+   [
+    "spec.parts[1].id: the part pk is listed twice"
+   ],
+   [
+    "spec.parts[1].outputs[0].id: the name cmax is used twice"
+   ],
+   [
+    "spec.parts[0].outputs[0].id: the name D is used twice"
+   ],
+   [
+    "spec.parts[1].inputs.cin: unknown variable 'nope' in “nope * 2”"
+   ],
+   [
+    "spec.parts[1].inputs.cin: unknown variable 'c' in “c”"
+   ],
+   [
+    "spec.parts: pk → eff → pk depend on each other in a cycle: declare it in spec.couple.loops (a fixed point) or spec.couple.cosim (in time)"
+   ],
+   [
+    "spec.parts: pk → pk depend on each other in a cycle: declare it in spec.couple.loops (a fixed point) or spec.couple.cosim (in time)"
+   ],
+   [
+    "spec.couple.loops[0].tol is required: a number > 0 (the largest relative change that counts as settled)"
+   ],
+   [
+    "spec.couple.loops[0].maxIter is a whole number 1–50",
+    "spec.couple.loops[0].relax is a number in (0, 1] (1 = no relaxation)",
+    "spec.couple.loops[0].init.c must name a scalar output of a part of the loop",
+    "spec.couple.loops[0].init.eEnd must be a number"
+   ],
+   [
+    "spec.couple.loops[0].parts: \"zz\" is not a part of spec.parts"
+   ],
+   [
+    "spec.parts[1].model: needs graph or generate (one of them)",
+    "spec.parts[1].outputs[0].of: needs model.run (an algorithm)",
+    "spec.couple.cosim.parts: the engine graph@1 of the part g cannot be stepped in time (a co-simulation needs agents@1, circuit-mna@1, clinic@1, des@1, field@1, genetics@1, med@1, ode@1, pid@1, thermal@1, twin@1); couple it in a chain or a loop"
+   ],
+   [
+    "spec.couple.cosim: (tEnd − t0) / dt is more than 5000 macro steps"
+   ],
+   [
+    "spec.couple.cosim.dt is required (the macro step: how often the parts exchange their values)",
+    "spec.couple.cosim.order must list each part of the co-simulation once (the order they exchange in)"
+   ],
+   [
+    "spec.couple.cosim.parts: the part pk is already in the loop 0"
+   ],
+   [
+    "spec.parts[1].inputs.cin.points is a whole number 2–2000 (a series input is at most 2000 points)"
+   ],
+   [
+    "spec.parts[0].inputs.s.series must name a series output of another part",
+    "spec.parts: pk → pk depend on each other in a cycle: declare it in spec.couple.loops (a fixed point) or spec.couple.cosim (in time)"
+   ],
+   [
+    "spec.parts[1].inputs.cin: the parts of a co-simulation exchange numbers at each step, not series (use the output's id in a formula)"
+   ],
+   [
+    "spec.parts[0].use: activities/_parts/no-such-part.json is not in the pack",
+    "spec.parts[1].inputs.cin: unknown variable 'cmax' in “cmax”"
+   ],
+   [
+    "spec.parts[0].use must be the name of a file activities/_parts/<name>.json (lower-case letters, digits and -)",
+    "spec.parts[1].with needs use (the part of activities/_parts it changes)",
+    "spec.parts[1].inputs.cin: unknown variable 'cmax' in “cmax”"
+   ],
+   [
+    "spec.engine: a spec with parts names the engine of each part (leave spec.engine out, or \"formula@1\")",
+    "spec.outputs: a spec with parts lists the outputs of each part (spec.parts[i].outputs)"
+   ],
+   [
+    "spec.couple: coupling needs parts (spec.parts)"
+   ],
+   [
+    "spec.couple is \"chain\" or {loops?: […], cosim?: {…}}"
+   ],
+   [
+    "spec.parts[0].engine: unknown engine \"warp@1\" (this version knows agents@1, anatomy@1, circuit-mna@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, pid@1, prob@1, rf@1, rhetoric@1, seq@1, text@1, thermal@1, timeline@1, twin@1, wasm@1)",
+    "spec.parts[1].engine: formula@1 computes nothing a part could add (use derived)"
+   ],
+   [
+    "spec.parts[1].model.solve: missing"
+   ],
+   [
+    "spec.parts[0].model.items[0].in.dose: unknown variable 'k3' in “k3”"
+   ],
+   [
+    "spec.bench.part must be the id of a part whose engine takes measurements (circuit-mna@1, twin@1)"
+   ],
+   [
+    "spec.parts[0]: unknown field 'colour'",
+    "spec.parts[0].inputs.w: unknown field 'at'",
+    "spec.parts[0].inputs.w.series must name a series output of another part",
+    "spec.parts: pk → pk depend on each other in a cycle: declare it in spec.couple.loops (a fixed point) or spec.couple.cosim (in time)"
+   ]
+  ]
+ },
+ "plan": {
+  "in": "a6f0c97f9a461f32df133da1c2c193f58f977c476b5817889ec3a2640ec7f82a",
+  "out": [
+   {
+    "k": "loop",
+    "i": 0,
+    "parts": [
+     "a",
+     "b"
+    ],
+    "derived": []
+   }
+  ]
+ }
+}

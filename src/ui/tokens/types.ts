@@ -1,5 +1,5 @@
 /* The design tokens of the app (docs/ARCHITECTURE.md "Design tokens"): typed data, one token set per character (theme and mascot
-   in one: engine/themes.js), on top of the base set every screen starts from. css.ts turns them into CSS custom properties
+   in one: src/features/shell/domain/characters.ts), on top of the base set every screen starts from. css.ts turns them into CSS custom properties
    (engine/tokens.css); nothing else in the app writes a colour, a font or a shape of a character. */
 
 /** a CSS colour as the stylesheet writes it (#rrggbb, rgba(…), color-mix(…)) */

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.curriculum.v1.schema.json",
   "title": "noema-lite Roadmap (noema.curriculum/v1) and its inbox and claims",
-  "description": "A Roadmap (curriculum): KV a:curriculum:<id>, the app's export (📥 import keeps it), a shared copy (docs/CURRICULUM.md §5, §6b, §8). The connector never writes the record: what Claude does arrives as inbox entries (KV a:curin:<cid>:<seq>, $defs/inboxEntry, §7) and a step handed to a run is claimed (KV a:curclaim:<cid>:<nid>, $defs/claim). Levels (§11): the Roadmap's ladder (levels) and each step's level — optional, additive (a reader that does not know them ignores them, so the format stays v1). Semantic rules (acyclic, every edge names steps, a prerequisite never at a higher level than its step) are in engine/curriculum.js and src/contracts/rules.",
+  "description": "A Roadmap (curriculum): KV a:curriculum:<id>, the app's export (📥 import keeps it), a shared copy (docs/CURRICULUM.md §5, §6b, §8). The connector never writes the record: what Claude does arrives as inbox entries (KV a:curin:<cid>:<seq>, $defs/inboxEntry, §7) and a step handed to a run is claimed (KV a:curclaim:<cid>:<nid>, $defs/claim). Levels (§11): the Roadmap's ladder (levels) and each step's level — optional, additive (a reader that does not know them ignores them, so the format stays v1). Semantic rules (acyclic, every edge names steps, a prerequisite never at a higher level than its step) are in engine/curriculum.js and src/contracts/rules/levels.ts.",
   "$ref": "#/$defs/curriculum",
   "$defs": {
     "nodeId": { "type": "string", "minLength": 1 },

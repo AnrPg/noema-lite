@@ -1,0 +1,435 @@
+{
+ "check": {
+  "in": "28348b60595f09ee630fa5887627fa66293cb60d5014e65c1527a3e7fc92c9c9",
+  "out": {
+   "links": [
+    [],
+    [],
+    [
+     {
+      "code": "format",
+      "path": "format",
+      "msg": "not noema.rf/v1",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "link is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "link is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "link is not an object",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "value",
+      "path": "f",
+      "msg": "needs a number > 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "f",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "f",
+      "msg": "needs a number > 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "fadeMargin",
+      "msg": "needs a number",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "tx",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "tx.cable",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "rx.nf",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "rx.bw",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "rx.snr",
+      "msg": "needs a number",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "range",
+      "path": "path.ht",
+      "msg": "outside 30 to 200 m (Okumura-Hata)",
+      "level": "error"
+     },
+     {
+      "code": "range",
+      "path": "path.hr",
+      "msg": "outside 1 to 10 m (Okumura-Hata)",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "enum",
+      "path": "path.env",
+      "msg": "one of urban, urban-large, suburban, open",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "enum",
+      "path": "path.env",
+      "msg": "one of residential, office, commercial",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "range",
+      "path": "d",
+      "msg": "below 1 m (ITU-R P.1238)",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "path.floors",
+      "msg": "needs an integer from 0 to 20",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "enum",
+      "path": "path.walls[0].type",
+      "msg": "one of drywall, wood, glass, brick, concrete, metal",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "path.walls[2].count",
+      "msg": "needs an integer from 1 to 50",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "path.walls",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "path.obstacle.d1",
+      "msg": "must be less than d",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "path.obstacle.d1",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "radio.bw",
+      "msg": "LoRa bandwidth from 7.8 to 500 kHz",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "enum",
+      "path": "radio.rate",
+      "msg": "one of 6, 9, 12, 18, 24, 36, 48, 54",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "value",
+      "path": "radio.header",
+      "msg": "needs true or false",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "radio.phy",
+      "msg": "one of 1M, 2M",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "radio.sf",
+      "msg": "needs an integer from 7 to 12",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "radio.cr",
+      "msg": "needs an integer from 1 to 4",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "radio.preamble",
+      "msg": "needs an integer from 0 to 65535",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "radio.payload",
+      "msg": "needs an integer from 0 to 255",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "radio.interval",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "radio.dutyLimit",
+      "msg": "needs a number from 0 to 1",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "sweep",
+      "msg": "from must be less than to",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "sweep.points",
+      "msg": "needs an integer from 2 to 2000",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "sweep.scale",
+      "msg": "one of log, lin",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "snrSweep",
+      "msg": "from must be less than to",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "path.ht",
+      "msg": "needs a number > 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "unknown-field",
+      "path": "extra",
+      "msg": "ignored",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "range",
+      "path": "f",
+      "msg": "outside 1 MHz to 100 GHz",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "path.sigma",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     }
+    ]
+   ],
+   "specs": [
+    [],
+    [
+     {
+      "code": "format",
+      "path": "model",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "model",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "unknown-field",
+      "path": "model.x",
+      "msg": "ignored",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "model.bindings",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "model.bindings[0].expr",
+      "msg": "needs an expression",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[1].expr",
+      "msg": "needs an expression",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[2]",
+      "msg": "a binding is an object {field, expr}",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[3].field",
+      "msg": "not a numeric field of the link",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "not a series of rf@1",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].kind",
+      "msg": "scalar or series",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3]",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "outputs",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "model.link.d",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "size",
+      "path": "model.bindings",
+      "msg": "more than 24 items",
+      "level": "error"
+     }
+    ]
+   ]
+  }
+ }
+}

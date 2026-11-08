@@ -75,7 +75,7 @@ export interface StreakImported extends EventEnvelope {
 
 /** The learner reached a level of a Roadmap's ladder (or of a pack's own ladder: `roadmap` is then the subject id). */
 export interface LevelReached extends EventEnvelope {
-  readonly type: 'level.reached';
+  readonly type: 'roadmap.level.reached';
   readonly roadmap: string;
   readonly level: string;
 }

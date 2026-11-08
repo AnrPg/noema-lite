@@ -6,9 +6,8 @@ pharmacokinetics, enzymes, populations, gene circuits, neurons, mechanics and ch
 doses, Poincaré sections), equilibria with the eigenvalues of their Jacobian, Lyapunov exponents, parameter sweeps (orbit diagrams),
 the drift of conserved quantities, closed-form template quantities and phase portraits (a scene).
 
-The Python twin is `tools/lib_ode.py` (`ID`, `check_spec`, `exprs`, `keys`, and the template table `TMETA`). It checks and does not
-compute, and it gives the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_ode.js`
-(97 assertions against published values) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/ode.json`,
+The tests are `node tests/lib_ode.js`
+(97 assertions against published values) and `node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/ode.json`,
 36 specs: 12 good, 24 bad). The reference activity is `tools/activities_examples/predator-prey` (the Rosenzweig–MacArthur model,
 with the carrying capacity K as a slider and the paradox of enrichment at K_c = 7/3). The research behind this chapter is in the
 project's `engine-library/research/math.md` (§ ode@1) and `research/life.md` (§ ODE templates).
@@ -96,7 +95,7 @@ A map has no events and no delays. A name is used once in the model and must not
 The static checks also verify the budget. A fixed step must satisfy (tEnd − t0)/dt ≤ maxSteps; a constant tEnd for a map must be
 within maxSteps; a map sweep must satisfy points × (transient + keep) ≤ maxSteps. Each of these is reported as `budget`.
 
-### 1.3 Checker codes (`checkSpec`, the same in `tools/lib_ode.py`)
+### 1.3 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|
@@ -338,7 +337,7 @@ code is also a `flag`.
 | Lotka–Volterra from (2, 1) | period 6.6085, H kept to 1e-8 | 1e-3 | Volterra 1926 |
 | bouncing ball, e = 0.8 | Zeno time √(2/g)(1 + 2e/(1 − e)) | 1e-3 | elementary |
 
-The tests also check every runtime code, the checker codes, the Python twin's tables (TMETA, codes, methods and output names),
+The tests also check every runtime code, the checker codes, the golden tables of the former Python twin (TMETA, codes, methods and output names),
 the sim adapter, the Worker source in a fresh global (the same outputs, bit for bit), the speed (the reference activity runs in
 under 50 ms; a Lorenz spectrum and a 200 000-iteration orbit diagram each run in under 2 s), and the cases of the reference
 activity's `tests.json`.

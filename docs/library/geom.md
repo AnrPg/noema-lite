@@ -7,10 +7,9 @@ over a sweep, and computational geometry (convex hull, Delaunay, Voronoi, the mi
 disk). It gives measures and tolerant asserts ("are these collinear?") as scalars, any measure against the sweep as a series,
 "is it always true?" by random placements, and the construction as a scene.
 
-The Python twin is `tools/lib_geom.py` (`ID`, `check_spec`, `exprs`, `keys` and the same lists). It checks and does not compute,
-and it gives the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_geom.js` (84
+The tests are `node tests/lib_geom.js` (84
 assertions: the reference table, every edge case, the predicates, the sweep, the adapter, the Worker, speed, the reference
-activity) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/geom.json`, 23 specs: 9 good, 14 bad).
+activity) and `node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/geom.json`, 23 specs: 9 good, 14 bad).
 The reference activity is `tools/activities_examples/euler-line`. The research behind this chapter is in the project's
 `engine-library/research/math.md` (§4, table E1–E17).
 
@@ -87,7 +86,7 @@ absolute free coordinate (≥ 1) and a quantity counts as zero when it is at mos
 predicate is not the right test of a theorem in floating point: the centroid (8/3, 4/3) is not representable, so O, G, H are
 almost never exactly collinear, and the `collinear` assert is tolerant for that reason (research §4.3).
 
-### 1.3 Checker codes (`checkSpec`, the same in `tools/lib_geom.py`)
+### 1.3 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

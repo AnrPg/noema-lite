@@ -124,7 +124,7 @@ function stationInfo() {
   const info = NoemaCurMap.nodeInfo(ACCOUNT.id, Noema.node); if (!info) return null;
   const { sr: read, ex: solved } = courseProgress();
   const done = info.st.mastered || (read >= 0.999 && solved >= NoemaCurriculum.PASS);
-  if (done && !S.nodeDone) { S.nodeDone = Date.now(); save(); setTimeout(() => window.NoemaReact?.big('node'), 600); }
+  if (done && !S.nodeDone) { learnt('subject.finished', null); setTimeout(() => window.NoemaReact?.big('node'), 600); }
   return { info, read, solved, done };
 }
 function nodeBanner() {
@@ -182,12 +182,12 @@ function subjectMenu() {
     '-',
     { label: SL('resetProgress', { title: SUBJ.title }), icon: 'close', danger: true, run: resetProgress }];
 }
-/** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
-    NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. The pack's own subject
-    (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
-function exportXAPI() {
+/** ⋮ › Export learning record (xAPI): this subject's activity attempts and answers, from the learning log (NoemaCore.learning.xapi), as
+    an xAPI 1.0.3 file, made by NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the
+    account id, never an e-mail. The pack's own subject (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
+async function exportXAPI() {
   let r;
-  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  try { const { attempts, answers } = await LOG.xapi(SUBJ.id); r = NoemaXAPI.subjectRecord({ attempts, answers, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
   catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
   if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
   saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));
@@ -206,7 +206,7 @@ function saveBlob(name, blob) {
   toast('⬇️ ' + name, 3000);   // i18n-ignore (a file name)
 }
 function resetProgress(after) {
-  confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
+  confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); learnt('subject.reset', null); flushSave(); if (typeof after === 'function') after(); route(); renderTopStats(); });
 }
 /** 🔎 Jump to any concept of the subject. */
 function openSearch() {
@@ -314,6 +314,7 @@ function nextAfterChapter(c) {
 function chapterView(id, tab, focus) {
   const c = CH[id]; if (!c) return go(HOME());
   setAccent(document.body, c);
+  if (S.lastChapter !== id) learnt('chapter.opened', id);
   setTutorContext({ kind: 'chapter', id });
   tab = tab || chTab[id] || 'learn'; chTab[id] = tab;
   const on = ['debug', 'cards', 'filters'].includes(tab) ? 'practice' : ['learn', 'practice', 'traps'].includes(tab) ? tab : 'learn';
@@ -441,7 +442,7 @@ function sectionView(sid, bid) {
   const s = SEC[sid]; if (!s) return go(HOME());
   const bids = s._bids || (s._bids = NoemaCore.catalog.blockIds(s.blocks));   // stable ids (src/features/catalog): #/s/<section>/<block> opens exactly that block
   const c = s._ch; setAccent(document.body, c);
-  S.last = sid; save();
+  if (S.last !== sid) learnt('section.opened', sid);
   setTutorContext({ kind: 'section', id: sid });
   shellChrome({ sub: true, crumbs: [[`${c.emoji} ${c.title}`, '#/ch/' + c.id]], back: '#/ch/' + c.id, reading: true, menu: sectionMenu(s) });
   noteRecent({ sid, secTitle: s.title, chNum: c.num, chOf: COURSE.length, secNum: s._j + 1, secOf: c.sections.length });
@@ -472,8 +473,8 @@ function sectionView(sid, bid) {
       if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     } else {
       if (!S.read[sid]) {
-        S.read[sid] = true; save(); addXP(5, pl);
-        if (c.sections.every(x => S.read[x.id])) setTimeout(() => window.NoemaReact?.big('chapter'), 500);   // the last section of the chapter
+        learnt('section.read', sid); addXP(5, pl);
+        if (c.sections.every(x => S.read[x.id])) { if (!S.chapters[c.id]) learnt('chapter.finished', c.id); setTimeout(() => window.NoemaReact?.big('chapter'), 500); }   // the last section of the chapter
       }
       tail.append(sectionTail(s, prev, next));
       if (scroll) { const els = $$('.blk', body); const first = els[els.length - chunks[shown - 1].length]; first?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
@@ -584,7 +585,7 @@ function runSummary() {
   const RX = SHL() ? window.NoemaReact : null;
   if (R0.boss) {
     const won = R0.lives > 0 && R0.i >= R0.list.length && pct >= .7;
-    if (won) { S.boss[R0.boss] = true; save(); big = '🏆'; msg = tE('engine.run.bossWon'); RX?.big('bosswin'); } else { big = '👾'; msg = tE('engine.run.bossLost'); }
+    if (won) { learnt('boss.won', R0.boss); big = '🏆'; msg = tE('engine.run.bossWon'); RX?.big('bosswin'); } else { big = '👾'; msg = tE('engine.run.bossLost'); }
   } else if (R0.back === '#/mistakes' && R0.ok && !mistakesList().length) RX?.big('gym');   // the gym is empty
   else if (n >= 5 && R0.ok === n) RX?.big('perfect');
   if (pct >= .7) { if (!RX) confetti(); beep('win'); }
@@ -702,7 +703,7 @@ function playLightning(chid) {
     if (!left) {
       clearInterval(tmr); document.removeEventListener('keydown', key); over = true;
       addXP(score * 3, clock);
-      const pb = score > (S.bestLightning || 0); if (pb) { S.bestLightning = score; save(); }
+      const pb = score > (S.bestLightning || 0); learnt('drill.scored', null, { kind: 'lightning', score });
       if (!wrong.length && score >= 5 && SHL() && window.NoemaReact) window.NoemaReact.big('timerwin'); else if (score >= 8 || pb) confetti();
       beep('win');
       view(h('div', { class: 'runner' }, h('div', { class: 'card summary' }, h('div', { class: 'big' }, pb ? '🏅' : '⚡'), h('h2', {}, tE(pb ? 'engine.light.resultBest' : 'engine.light.result', { n: score })),
@@ -713,14 +714,11 @@ function playLightning(chid) {
 }
 
 /* ---------- flashcards and debug drills: scheduled by FSRS-6 (src/features/study/domain/fsrs.ts, NoemaCore.study.fsrs) ----------
-   S.fc / S.pb hold each card's and drill's FSRS memory; an entry still in the old Leitner shape ({ box, due }) is read
-   as the memory it stands for and replaced at its next review. The parameters are the learner's own once fitted
-   (S.settings.fsrs, a:settings), else FSRS-6's. */
-/** The card buttons (0 again, 1 good, 2 easy) as FSRS ratings. */
-const CARD_RATING = [1, 3, 4];
-const reviewed = (state, rating, at = NoemaCore.clock.now()) => NoemaCore.study.fsrs.review(state, rating, { at, ...(S.settings.fsrs || {}) });
-/* one review of a card: q 0 = again, 1 = good, 2 = easy, at `from` */
-function rateCardKey(key, q, from = new Date()) { const r = reviewed(S.fc[key], CARD_RATING[q], from.getTime()); S.fc[key] = r; save(); return r; }
+   A review is an event of the learning log (card.reviewed, playbook.reviewed: its FSRS rating); the log folds S.fc / S.pb,
+   each card's and drill's FSRS memory, with the learner's own parameters once fitted (the setting fsrs), else FSRS-6's.
+   An entry still in the old Leitner shape ({ box, due }) is read as the memory it stands for. */
+/* one review of a card: q 0 = again, 1 = good, 2 = easy → the card's memory now */
+function rateCardKey(key, q, from = new Date()) { learnt('card.reviewed', key, { rating: LOG.cardRating(q) }, { day: NoemaCore.day.of(from) }); return S.fc[key]; }
 function countDueCards() { return NoemaCore.study.cards.countDue(S.fc, allCards().map(c => c.key)); }
 /** Fits the FSRS parameters to the learner's reviews again once enough new ones came (the Worker; quietly, nothing to wait for). */
 function refitFsrs() {
@@ -831,7 +829,7 @@ function drillView(id) {
       h('div', { class: 'row' }, ...[['😵 ' + tE('engine.drill.blank'), 0], ['🤔 ' + tE('engine.drill.partly'), 1], ['😎 ' + tE('engine.drill.nailed'), 2]].map(([l, q]) => h('button', { class: 'btn' + (q === 2 ? ' primary' : ''), onclick: () => {
         const ticked = checks.filter(x => x.checked).length / checks.length;
         // blank → again, partly → hard, nailed → easy with most of the checklist ticked, else good
-        S.pb[d.id] = reviewed(S.pb[d.id], q === 0 ? 1 : q === 1 ? 2 : ticked >= .7 ? 4 : 3); save(); addXP(3 + Math.round(ticked * 7), stage);
+        learnt('playbook.reviewed', d.id, { rating: LOG.playbookRating(q, ticked), score: ticked }); addXP(3 + Math.round(ticked * 7), stage);
         if (q === 2) confetti(70);
         const all = Object.values(PB).filter(x => x.id !== d.id && drillDue(x));
         const nxt = all.find(x => x._ch === c) || all[0];

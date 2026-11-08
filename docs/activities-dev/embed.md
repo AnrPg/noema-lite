@@ -3,7 +3,7 @@
 An activity that is a page of a third-party provider (a PhET simulation, a GeoGebra applet, a Desmos graph) shown in a frame.
 It is **opt-in, needs the network, and is explore only** (a theory block, never a graded `sim`). Files: the allow-list
 `tools/embed_allow.json`, the runtime `engine/src/45_activity_embed.js` (+ `45_activity_embed.css`), the checks
-`tools/embed_check.py` (= `NoemaEmbed.check` / `checkPack` in JS), the tests `tests/activities_embed.js`.
+`NoemaEmbed.check` / `checkPack` (the content checks call them everywhere), the tests `tests/activities_embed.js`.
 
 ## 1. Providers and their terms (researched 2026-11; `notes` in the allow-list has the details)
 
@@ -24,7 +24,7 @@ these has one) or a self-hosted copy (same origin) — that is a later decision,
 
 `{format: "noema.embed-allow/v1", providers: [{ id, name, status: "allowed"|"pending", origins: ["https://exact.host"],
 path, query|null, hash|null, sandbox: [tokens], licenses: [...], creditMust, credit (template), terms, supportsResult, notes }]}`.
-`path` / `query` / `hash` are regexes matched against the **whole** part (anchored; a subset JS and Python read alike);
+`path` / `query` / `hash` are regexes matched against the **whole** part (anchored; a portable subset of regex syntax);
 `query: null` = no query allowed. The runtime carries an exact copy (`/*@providers*/ … /*@end*/`); the test fails when they differ.
 Adding a provider: research its terms, add it as `pending`, switch to `allowed` only when embedding is clearly permitted.
 
@@ -40,7 +40,7 @@ Adding a provider: research its terms, add it as `pending`, switch to `allowed` 
 with `strings.<locale>.title` (what opens, required in every language) and `.why` (optional, one line) — the consent card's own
 words. No `entry`, `html`, `spec` or `capabilities` (the page does not speak the activity protocol).
 
-**Rules** (codes; JS and Python identical): `runtime`, `provider-unknown`, `provider-pending`, `provider-sandbox`; the URL:
+**Rules** (codes): `runtime`, `provider-unknown`, `provider-pending`, `provider-sandbox`; the URL:
 `url-missing`, `url-long` (> 2048), `url-scheme` (must start with `https://` exactly: no `http:`, `javascript:`, `data:`, `//`),
 `url-chars` (spaces, controls, `\`, quotes, `<>`, non-ASCII), `url-userinfo`, `url-host` (lower-case, dotted), `url-origin`
 (exact origin incl. port), `url-path` (also `//`, `.`/`..` segments, `%2e %2f %5c %00`), `url-query`, `url-hash`;
@@ -71,8 +71,8 @@ words. No `entry`, `html`, `spec` or `capabilities` (the page does not speak the
 
 ## 5. Tests — `tests/activities_embed.js`
 
-Node (`node tests/activities_embed.js`, 72 checks): the copy equals the allow-list; 41 URL cases and 20 item cases give the same
-codes in JS and Python; `checkPack` refuses a sim; opt-in registration; no HTML from strings. Browser (`--browser`,
+Node (`node tests/activities_embed.js`, 72 checks): the copy equals the allow-list; 41 URL cases and 20 item cases give their expected
+codes; `checkPack` refuses a sim; opt-in registration; no HTML from strings. Browser (`--browser`,
 `BROWSERS=chromium,firefox,webkit`, under the shared browser lock): a stub host on `http://localhost:<a>` and a **local fake
 provider** on `https://127.0.0.1:<b>` (self-signed, made with openssl; `ignoreHTTPSErrors`), a beacon server on a third port:
 card first and 0 provider requests before Open; Open → exact sandbox tokens, no Referer, only the allowed origin; the choice
@@ -102,9 +102,10 @@ forged result) → 0 beacon hits, the top page unmoved, no popup; offline (befor
 2. **Site CSP** (`tools/build.py` → `dist/site/_headers`, none today): when a CSP is added, `frame-src 'self'` + the
    `origins` of every `allowed` provider (generate it from `tools/embed_allow.json`) — the wrapper (`about:srcdoc`) inherits the
    page's policy, so the provider must be in both; never `allow-*` changes elsewhere. Then switch on in `config.js`.
-3. Validators: `tools/activities.py` and `engine/packcheck.js` add `external-embed@1` to `RUNTIMES`, skip the bundle rules for
-   it and call `embed_check.check_item` / the same rules (packcheck cannot load `45_…`: share or copy `check`), and refuse
-   `sim-embed`; `make_pack.py` / `unpack.py` accept an item without `entry`; the skill zip ships `embed_check.py` + the allow-list.
+3. Validators: the content checks (`src/features/content/domain/activities/`) know `external-embed@1` in `RUNTIMES`, skip the
+   bundle rules for it, call `NoemaEmbed.check` (read from the page, or from the scope that ran `45_…` in the connector and
+   `noema-tools.cjs`) and refuse `sim-embed`; `make_pack.py` / `unpack.py` accept an item without `entry`; the skill zip ships
+   the allow-list.
 4. `i18n/engine/*.arb`: the keys of §6. `docs/INTERACTIVE.md` §1 (a row), §10 (offline), the ADR "as built"; `tests/run_e2e.sh`
    runs `node tests/activities_embed.js` (+ `--browser`); `tests/activities.js` §4 may name `45_activity_embed.js` (its sandbox
    tokens come from the allow-list: the provider's origin, never pack content).

@@ -1,0 +1,988 @@
+{
+ "data": {
+  "in": null,
+  "out": {
+   "custom": {
+    "chart": [
+     "rows"
+    ],
+    "symmetry": [
+     "orbifold"
+    ]
+   },
+   "modes": [
+    "fiber",
+    "chart",
+    "weave",
+    "stitch",
+    "quilt",
+    "symmetry",
+    "sew",
+    "wood",
+    "ceramic",
+    "metal",
+    "book",
+    "leather",
+    "dye"
+   ],
+   "schema": {
+    "fiber": {
+     "craft": "enum:knit|crochet",
+     "unit": "enum:cm|in",
+     "sts": "numx!",
+     "rows": "numx",
+     "over": "numx",
+     "width": "numx",
+     "length": "numx",
+     "mult": "numx",
+     "plus": "numx",
+     "round": "enum:nearest|up|down|even",
+     "patternSts": "numx",
+     "category": "int:0:7",
+     "distribute": {
+      "$obj": {
+       "from": "numx!",
+       "change": "numx!",
+       "kind": "enum:inc|dec|dec2",
+       "work": "enum:flat|round"
+      }
+     },
+     "shape": {
+      "$obj": {
+       "fromSts": "numx!",
+       "toSts": "numx!",
+       "overRows": "numx!",
+       "perEvent": "numx",
+       "rsOnly": "bool"
+      }
+     },
+     "yarn": {
+      "$obj": {
+       "swatchGrams": "numx!",
+       "swatchArea": "numx!",
+       "projectArea": "numx!",
+       "metersPerGram": "numx",
+       "skeinMeters": "numx",
+       "safety": "numx"
+      }
+     },
+     "circle": {
+      "$obj": {
+       "start": "numx",
+       "rounds": "numx!"
+      }
+     }
+    },
+    "chart": {
+     "kind": "enum:stitch|color",
+     "work": "enum:flat|round",
+     "castOn": "numx",
+     "maxFloat": "numx",
+     "gauge": "numx",
+     "maxFloatCm": "numx",
+     "repeat": "numx"
+    },
+    "weave": {
+     "shafts": "numx",
+     "treadles": "numx",
+     "threading": {
+      "$list": "int:1:32",
+      "max": 2000
+     },
+     "tieup": {
+      "$list": {
+       "$list": "int:1:32",
+       "max": 32
+      },
+      "max": 64
+     },
+     "treadling": {
+      "$list": {
+       "$list": "int:1:64",
+       "max": 64
+      },
+      "max": 2000
+     },
+     "liftplan": {
+      "$list": {
+       "$list": "int:1:32",
+       "max": 32
+      },
+      "max": 2000
+     },
+     "structure": {
+      "$obj": {
+       "type": "enum:plain|twill|satin!",
+       "up": "numx",
+       "down": "numx",
+       "shafts": "numx",
+       "move": "numx",
+       "face": "enum:warp|weft",
+       "ends": "numx",
+       "picks": "numx"
+      }
+     },
+     "shed": "enum:rising|sinking",
+     "repeat": "bool",
+     "maxFloat": "numx",
+     "wpi": "numx",
+     "colors": {
+      "$obj": {
+       "warp": {
+        "$list": "int:0:7",
+        "max": 2000
+       },
+       "weft": {
+        "$list": "int:0:7",
+        "max": 2000
+       }
+      }
+     },
+     "warp": {
+      "$obj": {
+       "unit": "enum:in|cm",
+       "width": "numx!",
+       "length": "numx!",
+       "epi": "numx!",
+       "drawIn": "numx",
+       "shrink": "numx",
+       "takeUp": "numx",
+       "waste": "numx",
+       "pieces": "numx",
+       "ppi": "numx"
+      }
+     },
+     "basket": {
+      "$obj": {
+       "stakes": "numx",
+       "diameter": "numx",
+       "spacing": "numx"
+      }
+     }
+    },
+    "stitch": {
+     "w": "numx!",
+     "h": "numx!",
+     "count": "numx!",
+     "over": "numx",
+     "unit": "enum:in|cm",
+     "margin": "numx",
+     "fabricW": "numx",
+     "fabricH": "numx",
+     "strands": "numx",
+     "skein": "numx",
+     "waste": "numx",
+     "stitches": "numx"
+    },
+    "quilt": {
+     "finished": "numx",
+     "sa": "numx",
+     "cols": "numx",
+     "rows": "numx",
+     "block": "numx",
+     "sashing": "numx",
+     "border": "numx",
+     "binding": {
+      "$obj": {
+       "extra": "numx",
+       "strip": "numx",
+       "wof": "numx"
+      }
+     },
+     "cut": {
+      "$obj": {
+       "count": "numx!",
+       "w": "numx!",
+       "h": "numx!",
+       "wof": "numx"
+      }
+     },
+     "backing": {
+      "$obj": {
+       "margin": "numx",
+       "wof": "numx"
+      }
+     },
+     "bias": {
+      "$obj": {
+       "square": "numx!",
+       "strip": "numx!"
+      }
+     },
+     "geese": "numx"
+    },
+    "symmetry": {
+     "group": "enum:p1|p2|pm|pg|cm|pmm|pmg|pgg|cmm|p4|p4m|p4g|p3|p3m1|p31m|p6|p6m|hop|step|sidle|spinning-hop|spinning-sidle|jump|spinning-jump",
+     "groupIndex": "numx",
+     "motif": {
+      "$list": "fin",
+      "max": 128
+     },
+     "cells": "numx",
+     "b": "numx",
+     "angle": "numx",
+     "classify": {
+      "$obj": {
+       "rot": "numx!",
+       "mirrors": "numx",
+       "twoDirs": "numx",
+       "onMirrors": "numx",
+       "glide": "numx"
+      }
+     },
+     "classifyFrieze": {
+      "$obj": {
+       "vmirror": "numx",
+       "hmirror": "numx",
+       "turn": "numx",
+       "glide": "numx"
+      }
+     },
+     "vertex": {
+      "$list": "int:3:42",
+      "max": 8
+     }
+    },
+    "sew": {
+     "skirt": {
+      "$obj": {
+       "waist": "numx!",
+       "length": "numx!",
+       "fraction": "numx"
+      }
+     },
+     "gather": {
+      "$obj": {
+       "finished": "numx!",
+       "ratio": "numx!"
+      }
+     },
+     "pleats": {
+      "$obj": {
+       "finished": "numx!",
+       "depth": "numx!",
+       "count": "numx!"
+      }
+     },
+     "ease": {
+      "$obj": {
+       "body": "numx!",
+       "ease": "numx!",
+       "stretch": "numx"
+      }
+     },
+     "piece": {
+      "$obj": {
+       "pts": {
+        "$req": true,
+        "$list": "fin",
+        "max": 128,
+        "min": 6
+       },
+       "sa": "numx!"
+      }
+     },
+     "grade": {
+      "$obj": {
+       "rule": {
+        "$req": true,
+        "$list": "fin",
+        "max": 128
+       },
+       "steps": "numx"
+      }
+     },
+     "pack": {
+      "$obj": {
+       "width": "numx!",
+       "rects": {
+        "$req": true,
+        "$list": {
+         "$list": "fin",
+         "max": 2,
+         "min": 2
+        },
+        "max": 60,
+        "min": 1
+       }
+      }
+     }
+    },
+    "wood": {
+     "species": "enum:ash-white|basswood|beech|birch-yellow|cherry-black|hickory-shagbark|maple-sugar|maple-red|oak-red|oak-white|walnut-black|yellow-poplar|douglas-fir|pine-white|pine-ponderosa|redwood|cedar-western-red|spruce-sitka|mahogany|teak",
+     "width": "numx",
+     "mcFrom": "numx",
+     "mcTo": "numx",
+     "cut": "enum:flat|quarter",
+     "board": {
+      "$obj": {
+       "t": "numx!",
+       "w": "numx!",
+       "l": "numx!"
+      }
+     },
+     "emc": {
+      "$obj": {
+       "tempF": "numx!",
+       "rh": "numx!"
+      }
+     },
+     "shelf": {
+      "$obj": {
+       "t": "numx!",
+       "w": "numx!",
+       "span": "numx!",
+       "load": "numx!",
+       "e": "numx",
+       "creep": "numx"
+      }
+     },
+     "cutlist": {
+      "$obj": {
+       "stock": "numx!",
+       "kerf": "numx",
+       "pieces": {
+        "$req": true,
+        "$list": "numx",
+        "max": 60,
+        "min": 1
+       }
+      }
+     },
+     "dovetail": "numx"
+    },
+    "ceramic": {
+     "fired": "numx",
+     "shrink": "numx",
+     "dry": "numx",
+     "fire": "numx",
+     "cone": "enum:022|021|020|019|018|017|016|015|014|013|012|011|010|09|08|07|06|05.5|05|04|03|02|01|1|2|3|4|5|5.5|6|7|8|9|10|11|12|13|14",
+     "coneIndex": "numx",
+     "rate": "numx",
+     "type": "enum:ss|ssfe|large|largefe|small",
+     "tempC": "numx",
+     "recipe": {
+      "$list": {
+       "$obj": {
+        "mat": "id!",
+        "w": "numx!"
+       }
+      },
+      "max": 16
+     },
+     "materials": {
+      "$map": {
+       "$map": "fin",
+       "max": 20
+      },
+      "max": 16
+     },
+     "target": {
+      "$map": "numx",
+      "max": 20
+     },
+     "batch": {
+      "$list": "id",
+      "max": 8
+     },
+     "expansion": "enum:et|appen",
+     "bodyCoe": "numx"
+    },
+    "metal": {
+     "size": "numx",
+     "scale": "enum:us|uk|iso|jp|ch|mm",
+     "thickness": "numx",
+     "width": "numx",
+     "metal": "enum:fine-gold|22k|18k|14k|9k|fine-silver|britannia|sterling|platinum950|palladium950|copper|brass|bronze|titanium|steel",
+     "density": "numx",
+     "awg": "numx",
+     "swg": "numx",
+     "wireLength": "numx",
+     "karat": "numx",
+     "alloy": {
+      "$obj": {
+       "mass": "numx!",
+       "from": "numx!",
+       "to": "numx!",
+       "add": "numx"
+      }
+     }
+    },
+    "book": {
+     "pages": "numx!",
+     "folds": "numx",
+     "sheetsPerSig": "numx",
+     "caliper": "numx",
+     "swell": "numx",
+     "grain": "enum:long|short",
+     "sheet": "numx"
+    },
+    "leather": {
+     "oz": "numx",
+     "seam": "numx",
+     "pitch": "numx",
+     "thickness": "numx",
+     "tail": "numx"
+    },
+    "dye": {
+     "wof": "numx!",
+     "dos": "numx",
+     "stock": "numx",
+     "mordant": "numx",
+     "liquor": "numx"
+    }
+   },
+   "outs": {
+    "fiber": {
+     "scalar": [
+      "castOnRaw",
+      "castOn",
+      "achievedWidth",
+      "widthError",
+      "rowCount",
+      "gauge10",
+      "cycMin",
+      "cycMax",
+      "gaugeInRange",
+      "sizeFactor",
+      "distResult",
+      "distGapMin",
+      "distGapMax",
+      "shapeEvents",
+      "shapeEveryA",
+      "shapeTimesA",
+      "shapeEveryB",
+      "shapeTimesB",
+      "grams",
+      "meters",
+      "skeins",
+      "circleSts",
+      "circleTotal"
+     ],
+     "series": [
+      "gaps",
+      "positions",
+      "shapeRows",
+      "shapeSts",
+      "circleRounds"
+     ],
+     "scene": [
+      "distribution",
+      "shaping"
+     ],
+     "issues": [
+      "consumes-too-many",
+      "impossible",
+      "non-integer",
+      "range",
+      "rounded"
+     ]
+    },
+    "chart": {
+     "scalar": [
+      "rowsCount",
+      "width",
+      "stitchesStart",
+      "stitchesEnd",
+      "unbalancedRows",
+      "firstUnbalanced",
+      "maxFloat",
+      "longFloats",
+      "colorsMax",
+      "floatLimit"
+     ],
+     "series": [
+      "rowNo",
+      "rowIn",
+      "rowOut",
+      "rowFloat"
+     ],
+     "scene": [
+      "chart"
+     ],
+     "issues": [
+      "unbalanced-row",
+      "float-too-long",
+      "consumes-too-many"
+     ]
+    },
+    "weave": {
+     "scalar": [
+      "ends",
+      "picks",
+      "warpFloat",
+      "weftFloat",
+      "warpFaced",
+      "noInterlace",
+      "longFloats",
+      "regular",
+      "satins",
+      "interlace",
+      "sett",
+      "widthInReed",
+      "warpEnds",
+      "wovenLength",
+      "warpLength",
+      "warpTotal",
+      "warpTotalLong",
+      "weftTotal",
+      "stakesNeeded",
+      "parityOk"
+     ],
+     "series": [],
+     "scene": [
+      "drawdown"
+     ],
+     "issues": [
+      "float-too-long",
+      "no-interlace",
+      "impossible",
+      "parity"
+     ]
+    },
+    "stitch": {
+     "scalar": [
+      "effCount",
+      "widthIn",
+      "heightIn",
+      "widthCm",
+      "heightCm",
+      "cutW",
+      "cutH",
+      "fits",
+      "perStitchMm",
+      "stitchesPerSkein",
+      "skeins"
+     ],
+     "series": [],
+     "scene": [
+      "layout"
+     ],
+     "issues": [
+      "impossible",
+      "range"
+     ]
+    },
+    "quilt": {
+     "scalar": [
+      "square",
+      "hst2",
+      "hst2Exact",
+      "hst4",
+      "hst4Exact",
+      "hst8",
+      "qst",
+      "qstExact",
+      "diagonal",
+      "sideSetting",
+      "sideSettingExact",
+      "corner",
+      "cornerExact",
+      "geeseLarge",
+      "geeseSmall",
+      "quiltW",
+      "quiltH",
+      "bindingLength",
+      "bindingStrips",
+      "bindingYards",
+      "perStrip",
+      "strips",
+      "cutYards",
+      "backingYards",
+      "backingPanels",
+      "biasLength"
+     ],
+     "series": [],
+     "scene": [
+      "hst",
+      "layout"
+     ],
+     "issues": [
+      "impossible",
+      "range"
+     ]
+    },
+    "symmetry": {
+     "scalar": [
+      "groupIdx",
+      "copies",
+      "cost",
+      "isPlane",
+      "classified",
+      "frieze",
+      "vertexSum",
+      "angleOk",
+      "tiles",
+      "chiral"
+     ],
+     "series": [],
+     "scene": [
+      "pattern"
+     ],
+     "issues": [
+      "not-a-group"
+     ]
+    },
+    "sew": {
+     "scalar": [
+      "skirtRadius",
+      "skirtW",
+      "skirtH",
+      "hem",
+      "gather",
+      "pleats",
+      "garment",
+      "easeOk",
+      "area",
+      "saArea",
+      "perimeter",
+      "concave",
+      "packLength",
+      "packEfficiency",
+      "packLower"
+     ],
+     "series": [],
+     "scene": [
+      "piece",
+      "pack"
+     ],
+     "issues": [
+      "concave",
+      "impossible",
+      "range"
+     ]
+    },
+    "wood": {
+     "scalar": [
+      "boardFeet",
+      "cubicMeters",
+      "cR",
+      "cT",
+      "movement",
+      "movementFull",
+      "shrinkAt",
+      "emc",
+      "sag",
+      "sagLimit",
+      "sagOk",
+      "boards",
+      "boardsOpt",
+      "lowerBound",
+      "utilisation",
+      "dovetailDeg"
+     ],
+     "series": [
+      "emcRh",
+      "emcCurve"
+     ],
+     "scene": [
+      "cutlist",
+      "movement"
+     ],
+     "issues": [
+      "beyond-fsp",
+      "extrapolated",
+      "impossible",
+      "range",
+      "out-of-table"
+     ]
+    },
+    "ceramic": {
+     "scalar": [
+      "wet",
+      "totalShrink",
+      "volShrink",
+      "coneTemp",
+      "coneAt",
+      "coneFrac",
+      "fluxSum",
+      "siAl",
+      "firedYield",
+      "expansion",
+      "glazeMinusBody",
+      "batchResidual"
+     ],
+     "prefix": {
+      "umf.": [
+       "SiO2",
+       "Al2O3",
+       "B2O3",
+       "Li2O",
+       "Na2O",
+       "K2O",
+       "MgO",
+       "CaO",
+       "SrO",
+       "BaO",
+       "ZnO",
+       "PbO",
+       "TiO2",
+       "ZrO2",
+       "Fe2O3"
+      ],
+      "wt.": [
+       "SiO2",
+       "Al2O3",
+       "B2O3",
+       "Li2O",
+       "Na2O",
+       "K2O",
+       "MgO",
+       "CaO",
+       "SrO",
+       "BaO",
+       "ZnO",
+       "PbO",
+       "TiO2",
+       "ZrO2",
+       "Fe2O3"
+      ],
+      "batch.": [
+       "0",
+       "1",
+       "2",
+       "3",
+       "4",
+       "5",
+       "6",
+       "7"
+      ]
+     },
+     "series": [
+      "coneNo",
+      "coneTemps"
+     ],
+     "scene": [
+      "stull"
+     ],
+     "issues": [
+      "unity-off",
+      "negative-batch",
+      "out-of-table",
+      "extrapolated",
+      "impossible"
+     ]
+    },
+    "metal": {
+     "scalar": [
+      "diameter",
+      "circumference",
+      "us",
+      "uk",
+      "iso",
+      "jp",
+      "ch",
+      "blank",
+      "bandVolume",
+      "bandMass",
+      "density",
+      "awgMm",
+      "swgMm",
+      "wireMass",
+      "fineness",
+      "alloyAdd"
+     ],
+     "series": [],
+     "scene": [
+      "ring"
+     ],
+     "issues": [
+      "out-of-table",
+      "impossible",
+      "rounded"
+     ]
+    },
+    "book": {
+     "scalar": [
+      "pagesPerSig",
+      "signatures",
+      "blanks",
+      "leaves",
+      "sheets",
+      "spine",
+      "creep",
+      "needGrain",
+      "grainOk"
+     ],
+     "series": [],
+     "scene": [
+      "imposition"
+     ],
+     "issues": [
+      "grain-wrong",
+      "range"
+     ]
+    },
+    "leather": {
+     "scalar": [
+      "mm",
+      "holes",
+      "adjustedPitch",
+      "thread",
+      "ruleOfThumb",
+      "spi"
+     ],
+     "series": [],
+     "scene": [],
+     "issues": [
+      "non-integer",
+      "range"
+     ]
+    },
+    "dye": {
+     "scalar": [
+      "dyeGrams",
+      "stockMl",
+      "mordantGrams",
+      "bathLitres"
+     ],
+     "series": [],
+     "scene": [],
+     "issues": [
+      "range"
+     ]
+    }
+   },
+   "cones": [
+    "022",
+    "021",
+    "020",
+    "019",
+    "018",
+    "017",
+    "016",
+    "015",
+    "014",
+    "013",
+    "012",
+    "011",
+    "010",
+    "09",
+    "08",
+    "07",
+    "06",
+    "05.5",
+    "05",
+    "04",
+    "03",
+    "02",
+    "01",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "5.5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14"
+   ],
+   "wallpaper": [
+    "p1",
+    "p2",
+    "pm",
+    "pg",
+    "cm",
+    "pmm",
+    "pmg",
+    "pgg",
+    "cmm",
+    "p4",
+    "p4m",
+    "p4g",
+    "p3",
+    "p3m1",
+    "p31m",
+    "p6",
+    "p6m"
+   ],
+   "frieze": [
+    "hop",
+    "step",
+    "sidle",
+    "spinning-hop",
+    "spinning-sidle",
+    "jump",
+    "spinning-jump"
+   ],
+   "species": [
+    "ash-white",
+    "basswood",
+    "beech",
+    "birch-yellow",
+    "cherry-black",
+    "hickory-shagbark",
+    "maple-sugar",
+    "maple-red",
+    "oak-red",
+    "oak-white",
+    "walnut-black",
+    "yellow-poplar",
+    "douglas-fir",
+    "pine-white",
+    "pine-ponderosa",
+    "redwood",
+    "cedar-western-red",
+    "spruce-sitka",
+    "mahogany",
+    "teak"
+   ],
+   "metals": [
+    "fine-gold",
+    "22k",
+    "18k",
+    "14k",
+    "9k",
+    "fine-silver",
+    "britannia",
+    "sterling",
+    "platinum950",
+    "palladium950",
+    "copper",
+    "brass",
+    "bronze",
+    "titanium",
+    "steel"
+   ],
+   "materials": [
+    "silica",
+    "whiting",
+    "wollastonite",
+    "kaolin",
+    "potash_feldspar",
+    "soda_feldspar",
+    "talc",
+    "dolomite",
+    "zinc_oxide",
+    "magnesium_carbonate",
+    "strontium_carbonate",
+    "barium_carbonate",
+    "lithium_carbonate",
+    "spodumene"
+   ],
+   "oxides": [
+    "SiO2",
+    "Al2O3",
+    "B2O3",
+    "Li2O",
+    "Na2O",
+    "K2O",
+    "MgO",
+    "CaO",
+    "SrO",
+    "BaO",
+    "ZnO",
+    "PbO",
+    "TiO2",
+    "ZrO2",
+    "Fe2O3"
+   ]
+  }
+ }
+}

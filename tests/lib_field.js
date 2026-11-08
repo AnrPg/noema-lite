@@ -9,11 +9,12 @@
    4. Laplace in a square (the centre is ¼ by superposition), SOR / Gauss–Seidel / Jacobi iteration counts;
    5. cellular automata: rule 90 (Sierpiński: population 2^popcount(t)), rule 30 (Wolfram 1983, OEIS A070952), the Life glider,
       the abelian sandpile (Bak, Tang & Wiesenfeld 1987; Dhar 1990: sync = async), forest fire, Greenberg–Hastings;
-   6. events, interrupts, probes, codes, the checker (and its Python twin), the sim adapter, the stepper, the Worker source, speed,
+   6. events, interrupts, probes, codes, the checker (and the golden outputs of its former Python twin), the sim adapter, the stepper, the Worker source, speed,
       and the reference activity heat-stability (its tests.json).
    Usage: node tests/lib_field.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_field');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
@@ -176,7 +177,7 @@ const KERN = 'sqrt(0.0025/(0.0025+2*0.1*t))*exp(-x^2/(2*(0.0025+2*0.1*t)))';
   ok(cfl.out.c > 1 && codes(cfl).some(c => c === 'cfl' || c === 'unstable') && Number.isNaN(cfl.out.f), `C = ${cfl.out.c.toFixed(2)} > 1: the CFL condition is broken (code cfl/unstable)`);
 }
 
-// ---------- 7. the checker and its Python twin ----------
+// ---------- 7. the checker and the golden outputs of its former Python twin ----------
 {
   const P = s => F.checkSpec(s).filter(p => p.level === 'error').map(p => p.code + ' ' + p.path);
   ok(P(spec({ equation: 'heat', grid: { nx: 20 } }, [S('x', 'r')])).includes('value model.D') && P(spec({ equation: 'heat', grid: { nx: 20 }, D: 1 }, [S('x', 'r')])).includes('value model.tEnd'), 'heat needs D and tEnd');
@@ -187,16 +188,11 @@ const KERN = 'sqrt(0.0025/(0.0025+2*0.1*t))*exp(-x^2/(2*(0.0025+2*0.1*t)))';
   ok(P(spec({ equation: 'wave', grid: { nx: 20 }, c: 1, tEnd: 1 }, [S('a', 'turing'), Sc('h', 'heatmap')])).length === 2, 'outputs of another equation: Turing on a wave, a heat map on a line');
   const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'enginelib', 'field.json'), 'utf8')).specs;
   const js = fx.map(s => { const p = F.checkSpec(s), bad = p.some(q => q.level === 'error'); return { p, x: bad ? null : F.exprs(s), k: bad ? null : F.keys(s) }; });
-  const py = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_field as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else [list(t) for t in M.exprs(s)],'k':None if bad else [list(t) for t in M.keys(s)]})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(fx), encoding: 'utf8' }));
+  const py = want('check', fx, js);
   const same = js.filter((r, i) => JSON.stringify(r) === JSON.stringify(py[i])).length;
-  ok(fx.length >= 20 && same === fx.length && js.some(r => r.x) && js.some(r => !r.x), `tools/lib_field.py agrees with the JS checker on ${same}/${fx.length} fixture specs (problems, expressions, keys; good and bad)`);
-  const pyc = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_field as M; print(json.dumps([M.CODES,M.SERIES,M.SCALARS,M.SCENES,M.EQUATIONS,M.METHODS,M.CA_RULES,M.KINETICS]))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(pyc) === JSON.stringify([F.CODES, F.SERIES, F.SCALARS, F.SCENES, F.EQUATIONS, F.METHODS, F.CA_RULES, F.KINETICS]), 'the Python twin has the same codes, outputs, equations, methods, rules and kinetics');
+  ok(fx.length >= 20 && same === fx.length && js.some(r => r.x) && js.some(r => !r.x), `the JS checker gives the golden outputs of the former twin tools/lib_field.py on ${same}/${fx.length} fixture specs (problems, expressions, keys; good and bad)`);
+  const pyc = want('tables', undefined, [F.CODES, F.SERIES, F.SCALARS, F.SCENES, F.EQUATIONS, F.METHODS, F.CA_RULES, F.KINETICS]);
+  ok(JSON.stringify(pyc) === JSON.stringify([F.CODES, F.SERIES, F.SCALARS, F.SCENES, F.EQUATIONS, F.METHODS, F.CA_RULES, F.KINETICS]), 'the same, as the golden tables of the former Python twin: codes, outputs, equations, methods, rules and kinetics');
   // every good fixture runs, fast enough, with outputs of the declared kinds
   let allOk = true, worst = 0;
   fx.forEach(s => { if (F.checkSpec(s).some(p => p.level === 'error')) return; const env = {}; for (const p of s.params || []) env[p.id] = p.default; const [r, t] = ms(() => F.run(s, env, { seed: 1 })); worst = Math.max(worst, t); for (const o of s.outputs) { const v = r.out[o.id]; if (o.kind === 'series' ? !Array.isArray(v) || v.length > 2000 : o.kind === 'scene' ? !v || !Array.isArray(v.items) || v.items.length > 2000 || !v.items.every(it => C.ROLES.includes(it.c || 'base')) : typeof v !== 'number') allOk = false; } });

@@ -1,5 +1,5 @@
 {
-  "about": "Shared corpus of the sim-spec@1 expression language (src/engines/kernel/simexpr.js and tools/simexpr.py); run by tests/simexpr.js in both twins. A case: src (or gen: [[text, times], ...] concatenated), env, and what to expect: value (numbers; true/false; \"NaN\", \"Infinity\", \"-Infinity\", \"-0\" as strings) or error (code, optional pos) of evaluate; check ([[code, pos], ...] of check(src, {vars})); print (print(parse(src))). env values use the same encoding.",
+  "about": "Shared corpus of the sim-spec@1 expression language (src/engines/kernel/simexpr.js); run by tests/simexpr.js, also against the golden outputs of the former Python twin. A case: src (or gen: [[text, times], ...] concatenated), env, and what to expect: value (numbers; true/false; \"NaN\", \"Infinity\", \"-Infinity\", \"-0\" as strings) or error (code, optional pos) of evaluate; check ([[code, pos], ...] of check(src, {vars})); print (print(parse(src))). env values use the same encoding.",
   "cases": [
     {"src": "0", "value": 0},
     {"src": "42", "value": 42},

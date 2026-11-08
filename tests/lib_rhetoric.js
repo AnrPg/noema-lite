@@ -3,9 +3,10 @@
    et al. 1975, Amstad 1978, Bamberger & Vanecek 1984, Kandel & Moles 1958, Oborneva 2006, Björnsson 1968, Anderson 1983), figures on
    classic texts in five languages (Churchill 1940, Lincoln 1863, Kennedy 1961, Caesar, Dickens 1859, Molière 1668, Mark 2:27 in German
    and Russian, Kazantzakis' epitaph), Dung 1995 semantics (through logic@1), the textbook syllogisms (Copi & Cohen), every edge case
-   and its code, the checks (JS = Python on the fixtures), the sim adapter, the Worker source, speed.  Run: node tests/lib_rhetoric.js */
+   and its code, the checks (the golden outputs of the former Python twin on the fixtures), the sim adapter, the Worker source, speed.  Run: node tests/lib_rhetoric.js */
 'use strict';
-const path = require('path'), vm = require('vm'), fs = require('fs'), { execFileSync } = require('child_process');
+const path = require('path'), vm = require('vm'), fs = require('fs');
+const want = require('./golden.cjs')('lib_rhetoric');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
@@ -259,7 +260,7 @@ ok(!!(L && L.afSolve && L.parse && L.rowsOf && L.evalProp && L.syllogism), 'logi
     && E1({ model: { speeches: [{ id: 's', text: 'x' }] }, outputs: [sc('t', 'trope', { speech: 's', type: 'hyperbole' })] }) === 'enum', 'checks: ASPIC+ literals (literal), aspic outputs need model.theory (ref), trope types (enum)');
 }
 
-// ---- 8. the checks: codes, and the same problems in Python on every fixture ----
+// ---- 8. the checks: codes, and the golden problems of the former Python twin on every fixture ----
 const codes = s => X.checkSpec(s).filter(p => p.level === 'error').map(p => p.code + '@' + p.path);
 ok(codes({ model: { speeches: [{ id: 'a' }, { id: 'a' }] }, outputs: [] }).includes('dup@model.speeches[1].id'), 'check: duplicate ids');
 ok(codes({ model: { speeches: [{ id: 'a', role: 'XX', team: 'T' }], debate: { format: 'bp', teams: [] } }, outputs: [] }).join() === 'ref@model.speeches[0].team,ref@model.speeches[0].role', 'check: a team and a role the format does not have');
@@ -269,14 +270,9 @@ ok(codes({ model: { map: { nodes: [{ id: 'a', scheme: 'sign', cq: [1, 1, 1] }] }
 ok(codes({ model: { speeches: [{ id: 'a', text: 'x'.repeat(20001) }] }, outputs: [] }).includes('size@model.speeches[0].text'), 'check: a speech over 20 000 characters');
 { const specs = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'enginelib', 'rhetoric.json'), 'utf8')).specs;
   const js = specs.map(s => { const p = X.checkSpec(s), bad = p.some(q => q.level === 'error'); return { p, x: bad ? null : X.exprs(s), k: bad ? null : X.keys(s) }; });
-  const py = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_rhetoric as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else M.exprs(s),'k':None if bad else M.keys(s)})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(specs), encoding: 'utf8' }));
+  const py = want('check', specs, js);
   const same = js.filter((r, i) => JSON.stringify(r) === JSON.stringify(py[i])).length;
-  ok(specs.length >= 20 && same === specs.length, `JS and Python checks agree on ${same}/${specs.length} fixture specs (problems, exprs, keys)`);
+  ok(specs.length >= 20 && same === specs.length, `the JS gives the golden outputs of the former Python twin on ${same}/${specs.length} fixture specs (problems, exprs, keys)`);
   ok(specs.some(s => !X.checkSpec(s).some(p => p.level === 'error')) && specs.some(s => X.checkSpec(s).some(p => p.level === 'error')), 'the fixtures hold good and bad specs');
   const allCodes = new Set(specs.flatMap(s => X.checkSpec(s).map(p => p.code)));
   ok(['format', 'value', 'size', 'enum', 'unknown-field', 'dup', 'ref', 'output'].every(c => allCodes.has(c)), 'the fixtures cover every checker code: ' + [...allCodes].join(', '));

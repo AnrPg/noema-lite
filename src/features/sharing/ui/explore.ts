@@ -14,6 +14,8 @@ import { CommunityScreen, type ScreenBase } from '../../community/ui/screen.ts';
 import { adopt, COMMON } from '../../community/ui/styles.ts';
 import { EXPLORE_CSS } from './styles.ts';
 
+/** said by the page when what it showed is open (bubbles) */
+export const EXPLORE_DONE = 'noema-explore-done';
 const STATS = ['chapters', 'sections', 'exercises', 'visual', 'pictures', 'flashcards', 'playbooks'] as const;
 const n = (x: unknown): number => (typeof x === 'number' && Number.isFinite(x) ? x : 0);
 const rec = (x: unknown): Readonly<Record<string, unknown>> => (x && typeof x === 'object' ? (x as Readonly<Record<string, unknown>>) : {});
@@ -41,7 +43,6 @@ export class NoemaExplorePage extends CommunityScreen {
   #items: PublicItem[] | null = null;
   #error = '';
   #q = '';
-  #focused = false;
   #loaded = '';
   /** the shared texts, each one element kept across drawings (its translation shown stays) */
   #texts = new Map<string, HTMLElement>();
@@ -101,7 +102,11 @@ export class NoemaExplorePage extends CommunityScreen {
     return el;
   }
   async #open(e: Event, x: PublicItem): Promise<void> {
-    await this.busy(e.currentTarget, () => (this.#rm ? this.host.openPublicRoadmap(x) : this.host.studyPublic(x)));
+    if (await this.busy(e.currentTarget, () => (this.#rm ? this.host.openPublicRoadmap(x) : this.host.studyPublic(x)))) this.#done();
+  }
+  /** what it showed is open now (Explore in a dialog, the classic screens: the dialog closes) */
+  #done(): void {
+    this.dispatchEvent(new CustomEvent(EXPLORE_DONE, { bubbles: true }));
   }
   #row(x: PublicItem, i: number): TemplateResult {
     const tone = `--bgc: var(--t${(i % 4) + 1}); --fgc: var(--t${(i % 4) + 1}i)`;
@@ -182,9 +187,20 @@ export class NoemaExplorePage extends CommunityScreen {
           ${
             chapters.length
               ? html`<span class="nc-label">${T('nChapters', { n: chapters.length })}</span>
-                  <ol class="ex-chapters">
-                    ${chapters.map(ch => html`<li>${s(ch['emoji'])} ${s(ch['title'])}</li>`)}
-                  </ol>`
+                  <div class="ex-chapters" tabindex="0" aria-label=${T('chapters')}>
+                    <ol>
+                      ${chapters.map(
+                        ch =>
+                          html`<li>
+                            ${s(ch['emoji'])} <strong>${s(ch['title'])}</strong>${
+                              n(ch['sections']) || n(ch['exercises'])
+                                ? html` — <em>${T('chapterCounts', { sections: n(ch['sections']), exercises: n(ch['exercises']) })}</em>`
+                                : nothing
+                            }
+                          </li>`,
+                      )}
+                    </ol>
+                  </div>`
               : nothing
           }
           ${
@@ -226,6 +242,7 @@ export class NoemaExplorePage extends CommunityScreen {
               void this.busy(e.currentTarget, async () => {
                 await this.host.studyPublic(x);
                 close();
+                this.#done();
               });
             }}
             >${this.t('loader.explore.study')}</noema-button
@@ -263,7 +280,8 @@ export class NoemaExplorePage extends CommunityScreen {
         ${head}
         <div class="nc-panel nc-empty"><p>${this.#L(rm ? 'noPublicRoadmaps' : 'noPublicSubjects')}</p></div>
       </div>`;
-    const searching = this.#focused || !!this.#q.trim();
+    // typing shows only the matches (a dialog gives the field the focus first: the sections stay until something is typed)
+    const searching = !!this.#q.trim();
     const hits = matches(items, this.#q);
     const ph = this.#L(rm ? 'searchRoadmaps' : 'searchSubjects');
     return html`<div class="ex-view">
@@ -275,14 +293,6 @@ export class NoemaExplorePage extends CommunityScreen {
         aria-label=${ph}
         @input=${(e: Event) => {
           this.#q = (e.target as HTMLInputElement).value;
-          this.requestUpdate();
-        }}
-        @focus=${() => {
-          this.#focused = true;
-          this.requestUpdate();
-        }}
-        @blur=${() => {
-          this.#focused = false;
           this.requestUpdate();
         }}
       />

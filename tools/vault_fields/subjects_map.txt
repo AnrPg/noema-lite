@@ -1,4 +1,4 @@
-# The old fixed list of the vault (engine/vault.js SUBJECTS) → fields, for files uploaded before the graph
+# The old fixed list of the vault (the deleted engine/vault.js SUBJECTS) → fields, for files uploaded before the graph
 math Q395
 statistics Q12483
 physics Q413

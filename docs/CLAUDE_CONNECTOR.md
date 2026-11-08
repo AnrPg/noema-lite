@@ -11,7 +11,7 @@ creating the account:
 | The user… | never leaves noema-lite | chats with Claude in Claude's app |
 | Skill | **uploaded automatically** by the app (Skills API, with the user's key) | optional — the connector gives Claude the same toolkit |
 | Result | imported into the picker automatically | saved by the connector → appears in the picker |
-| Code | `engine/claude.js` + `claudeGuide()` in `engine/loader.js` | `src/connector` (+ skill zip) — see **The connector's code** below |
+| Code | `engine/claude.js` + `claudeGuide()` in the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js) | `src/connector` (+ skill zip) — see **The connector's code** below |
 
 Why not "log in with your Claude subscription" inside noema-lite? Anthropic allows subscription logins
 only in its own apps; third-party apps must use an API key. Way B keeps the subscription inside

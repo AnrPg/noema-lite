@@ -1,5 +1,5 @@
 """Shared helpers for noema-lite tools (stdlib only — runs anywhere Python 3.8+ runs)."""
-import json, os, glob, hashlib, datetime
+import base64, json, os, glob, hashlib, datetime
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 LIB = os.path.join(ROOT, 'library')
@@ -142,29 +142,99 @@ def translation_file(pack, loc, chapters):
     if sub: t['subject'] = sub
     return t
 
-def languages():
-    """tools/pack_rules.json "languages": the translations and 文A bridges every new pack gets."""
-    here = os.path.dirname(os.path.abspath(__file__))
-    for f in (os.path.join(here, 'pack_rules.json'), os.path.join(ROOT, 'tools', 'pack_rules.json')):
-        if os.path.exists(f): return rj(f).get('languages') or {}
-    return {}
-
-def required_locales(own):
-    """→ (translations, bridges) every new pack in language OWN gets: the lists of pack_rules.json minus its own language."""
-    L = languages(); o = (own or 'en').split('-')[0].lower()
-    keep = lambda xs: [x for x in xs if x.split('-')[0].lower() != o]
-    return keep(L.get('translations') or []), keep(L.get('bridges') or [])
-
-def bridge_pairs(own, translations=None):
-    """Every 文A bridge a new pack gets: (the language the learner reads, their native language) — from the pack's own
-    language and, when pack_rules.json "bridgesFrom" says so, from each of its translations (made after the translation)."""
-    L = languages(); o = (own or 'en').split('-')[0].lower()
-    tr = [x.split('-')[0].lower() for x in (translations if translations is not None else required_locales(own)[0])]
-    src = [o] + (tr if 'translations' in (L.get('bridgesFrom') or []) else [])
-    return [(s, n.split('-')[0].lower()) for s in src for n in (L.get('bridges') or []) if n.split('-')[0].lower() != s]
-
 def content_hash(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:16]
+
+# ---------------- interactive activities (docs/INTERACTIVE.md — noema.activities/v1) ----------------
+# The subject's activities/ folder read into the pack's registry; their RULES are the app's (src/features/content, through
+# noema_core.py: check_activities, check_packages, requires).
+ACTIVITIES_FORMAT = "noema.activities/v1"
+def _str(x): return isinstance(x, str) and x.strip() != ""
+def sha256(text): return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+def load_activities(sdir):
+    """activities/ of a subject folder → (registry for the pack, problems). Bundles and string tables are read in."""
+    p = os.path.join(sdir, "activities", "activities.json")
+    if not os.path.exists(p): return None, []
+    probs = []
+    try: reg = json.load(open(p, encoding="utf-8"))
+    except Exception as e: return None, [f"ERROR activities/activities.json: {e}"]
+    items = []
+    for a in reg.get("items") or []:
+        a = dict(a); aid = a.get("id", "?")
+        entry = a.get("entry")
+        if a.get("runtime") == "html-app@1":
+            f = os.path.join(sdir, entry) if _str(entry) else None
+            if not f or not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found"); a["html"] = ""
+            else: a["html"] = open(f, encoding="utf-8", newline="").read()
+            a["sha256"] = sha256(a["html"]); a["bytes"] = len(a["html"].encode("utf-8"))
+        elif a.get("runtime") == "py-module@1":   # Python (activities/<id>/main.py) + the spec the app draws (activities/<id>/spec.json)
+            if not _str(entry): entry = a["entry"] = f"activities/{aid}/main.py"
+            f = os.path.join(sdir, entry)
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found"); a["python"] = ""
+            else: a["python"] = open(f, encoding="utf-8", newline="").read()
+            a["sha256"] = sha256(a["python"]); a["bytes"] = len(a["python"].encode("utf-8"))
+            f = os.path.join(sdir, "activities", aid, "spec.json")
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json not found")
+            else:
+                try: a["spec"] = json.load(open(f, encoding="utf-8"))
+                except Exception as e: probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json: {e}")
+        elif a.get("runtime") == "sim-spec@1":
+            if not _str(entry): entry = a["entry"] = f"activities/{aid}/spec.json"
+            f = os.path.join(sdir, entry)
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found")
+            else:
+                try: a["spec"] = json.load(open(f, encoding="utf-8"))
+                except Exception as e: probs.append(f"ERROR activity {aid}: {entry}: {e}")
+        elif a.get("runtime") == "wasm-module@1":   # the module: activities/<id>/module.wasm → base64 + sha256 + bytes; its own spec (optional): spec.json
+            if not _str(entry): entry = a["entry"] = f"activities/{aid}/module.wasm"
+            f = os.path.join(sdir, entry)
+            if not os.path.exists(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found")
+            else:
+                b = open(f, "rb").read(); a["wasm"] = base64.b64encode(b).decode("ascii"); a["sha256"] = hashlib.sha256(b).hexdigest(); a["bytes"] = len(b)
+            f = os.path.join(sdir, "activities", aid, "spec.json")
+            if os.path.exists(f):
+                try: a["spec"] = json.load(open(f, encoding="utf-8"))
+                except Exception as e: probs.append(f"ERROR activity {aid}: activities/{aid}/spec.json: {e}")
+        elif a.get("runtime") == "h5p@1":
+            if not _str(entry): entry = a["entry"] = f"activities/{aid}/item.h5p"
+            f = os.path.join(sdir, entry)
+            if not os.path.isfile(f): probs.append(f"ERROR activity {aid}: entry {entry!r} not found")
+            else:
+                b = open(f, "rb").read(); a["sha256"] = hashlib.sha256(b).hexdigest(); a["bytes"] = len(b)
+            by = dict(a.get("h5pByLocale") or {}) if isinstance(a.get("h5pByLocale"), (dict, type(None))) else a.get("h5pByLocale")
+            for kind in ("content", "l10n"):   # activities/<id>/content.<locale>.json (+ l10n.<locale>.json: H5P's own strings) → inline
+                for f2 in sorted(glob.glob(os.path.join(sdir, "activities", aid, kind + ".*.json"))):
+                    loc = os.path.basename(f2)[len(kind) + 1:-5]
+                    if not isinstance(by, dict): continue
+                    try: by[loc] = {**(by.get(loc) or {}), kind: json.load(open(f2, encoding="utf-8"))}
+                    except Exception as e: probs.append(f"ERROR activity {aid}: {os.path.relpath(f2, sdir)}: {e}")
+            if by: a["h5pByLocale"] = by
+        tables = {}
+        pat = ((a.get("strings") or {}).get("file") if isinstance(a.get("strings"), dict) else None) or f"activities/{aid}/strings.{{locale}}.json"
+        pre, suf = os.path.basename(pat).split("{locale}", 1) if "{locale}" in pat else (os.path.basename(pat), "")
+        for f in sorted(glob.glob(os.path.join(sdir, pat.replace("{locale}", "*")))):
+            name = os.path.basename(f); loc = name[len(pre):len(name) - len(suf)]
+            try: tables[loc] = json.load(open(f, encoding="utf-8"))
+            except Exception as e: probs.append(f"ERROR activity {aid}: {os.path.relpath(f, sdir)}: {e}")
+        a["strings"] = tables
+        items.append(a)
+    parts = {}   # activities/_parts/<name>.json: part definitions a spec reuses with "use" (docs/INTERACTIVE.md §12.8)
+    for f in sorted(glob.glob(os.path.join(sdir, "activities", "_parts", "*.json"))):
+        try: parts[os.path.basename(f)[:-5]] = json.load(open(f, encoding="utf-8"))
+        except Exception as e: probs.append(f"ERROR activities/_parts/{os.path.basename(f)}: {e}")
+    return {"format": reg.get("format"), "items": items, **({"parts": parts} if parts else {})}, probs
+
+def fallback_media(reg):
+    """the pictures the activities show when they cannot run (they need no exercises of their own)"""
+    return {(a.get("fallback") or {}).get("media") for a in (reg or {}).get("items") or [] if isinstance(a, dict) and isinstance(a.get("fallback"), dict)} - {None}
+
+def hash_part(reg):
+    """what of the activities goes into pack.version: each bundle's sha256, its strings and its settings"""
+    h = {a.get("id"): {k: v for k, v in a.items() if k not in ("html", "wasm", "python", "h5p")} for a in (reg or {}).get("items") or [] if isinstance(a, dict)}
+    if isinstance(reg, dict) and reg.get("parts"): h["_parts"] = reg["parts"]   # activities/_parts (§12.8): a changed part is a new version
+    return h
+
 
 # ---------------- media (docs/VISUAL.md — noema.media/v1) ----------------
 # Licences. noema-lite is a PERSONAL study app: any picture may be used as long as its source is recorded
@@ -212,7 +282,6 @@ def image_size(path):
 
 def load_media(sdir, embed=True):
     """Return ({id: item}, report). Items carry mime, w, h and (embed=True) a data: URI."""
-    import base64
     reg = rj(os.path.join(sdir, 'media', 'media.json'), {'format': 'noema.media/v1', 'items': []})
     out, report = {}, []
     if reg.get('format') != 'noema.media/v1': report.append('ERROR media.json: format must be "noema.media/v1"')

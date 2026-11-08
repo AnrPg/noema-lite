@@ -9,7 +9,7 @@
  *   await askText(deps, { heading, label, value, ok, cancel })                  a word to type → the text, or null
  */
 import { html, render, type TemplateResult } from 'lit';
-import { NoemaDialog, type DialogCloseDetail } from '../../../ui/kit/dialog.ts';
+import type { NoemaDialog, DialogCloseDetail } from '../../../ui/kit/dialog.ts';
 import type { ScreenBase } from './screen.ts';
 
 export interface DialogOptions {
@@ -36,8 +36,9 @@ export interface DialogHandle {
 
 export function openDialog(deps: ScreenBase, o: DialogOptions): DialogHandle {
   const doc = globalThis.document;
+  // the kit may be the frame's (build/ui.js defined it first): the same element, another copy of its class
+  if (!doc.defaultView?.customElements.get('noema-dialog')) throw new Error('the UI kit is not defined (defineUi)');
   const dlg = doc.createElement('noema-dialog');
-  if (!(dlg instanceof NoemaDialog)) throw new Error('the UI kit is not defined (defineUi)');
   dlg.heading = o.heading;
   dlg.className = ['nc-dlg', o.cls ?? ''].join(' ').trim();
   if (o.placement) dlg.placement = o.placement;

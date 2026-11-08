@@ -187,9 +187,39 @@ export interface CommunityHost {
   translateBar(scope: HTMLElement): HTMLElement | null;
   /** the share dialog's data and calls (engine/cloud.js) */
   share: ShareHost;
+  /** 🔔 what the bell's sharing rows do (the older Notes: engine/app/community.js) */
+  notes: NotesHost;
+  /** how long ago, in the learner's words ("5 minutes ago") */
+  ago(at: string | number): string;
 
   /* ---------- ⚑ reports ---------- */
   report: ReportContext;
+}
+
+/** 🔔 One thing the bell lists of sharing: a share or an invitation (no kind / 'curriculum'), an update, a piece of news. */
+export interface NoteItem {
+  readonly id: string;
+  readonly kind?: 'curriculum' | 'curupdate' | 'stepupdate' | 'subjupdate' | 'notice';
+  readonly title: string;
+  readonly from_name?: string;
+  readonly from_email?: string;
+  readonly message?: string;
+  readonly language?: string;
+  readonly meta?: Readonly<Record<string, unknown>>;
+  readonly text?: string;
+  readonly at?: string | number;
+  readonly count?: number;
+  readonly lines?: readonly string[];
+  readonly curTitle?: string;
+  readonly steps?: number;
+  readonly [more: string]: unknown;
+}
+export interface NotesHost {
+  accept(item: NoteItem): Promise<unknown>;
+  reject(item: NoteItem): Promise<void>;
+  update(item: NoteItem, take: boolean): Promise<void>;
+  dismiss(id: string): void;
+  clear(): void;
 }
 
 /** What the share dialog of a subject uses (the cloud's sharing: engine/cloud.js). */

@@ -2,10 +2,11 @@
    Nilsson 2014; the Talmud's estate division, Aumann & Maschler 1985; the Minbariyya ʿawl case; the EEC 1958 Council's voting power,
    Felsenthal & Machover 1998; USSG level 20 / category I; Kaplan's threshold with Blackstone's ratio; the MPC homicide ladder; Byrne v
    Van Tienhoven vs CISG 16(1); EU Reg. 1182/71 month ends; Hart's vehicles in the park; the Nixon diamond in ASPIC+), every edge case
-   and its code, the check codes, JS ↔ Python parity on tests/fixtures/enginelib/law.json, the schema of the author's form, the sim
+   and its code, the check codes, the golden outputs of the former Python twin on tests/fixtures/enginelib/law.json, the schema of the author's form, the sim
    adapter, the Worker source, speed, and the reference activity vehicles-in-the-park.  Run: node tests/lib_law.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_law');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
@@ -291,7 +292,7 @@ const flag = c => sc('f_' + c, 'flag', { code: c });
   r = R({ task: 'obligations', norms: [{ id: 'a', kind: 'O', cond: 'c', act: 'x' }, { id: 'b', kind: 'F', cond: 'c', act: 'x' }], trace: [{ day: 0, facts: ['c'] }] }, [sc('c', 'conflicts')]);
   ok(r.out.c === 1 && has(r, 'conflict') && has(r, 'unresolved'), 'an obligation and a prohibition of the same act: a conflict (logic@1), unresolved'); }
 
-// ---- 16. checks, parity with Python, the schema ----
+// ---- 16. checks, the golden outputs of the former Python twin, the schema ----
 const codes = s => X.checkSpec(s).filter(p => p.level === 'error').map(p => p.code + '@' + p.path);
 const mk = (model, outputs) => ({ format: 'noema.sim-spec/v1', engine: 'law@1', model, outputs: outputs || [] });
 ok(codes(mk({ task: 'rules', rules: [{ id: 'a', then: 'p & q' }] })).includes('literal@model.rules[0].then'), 'check: a rule head that is no literal (code literal)');
@@ -305,15 +306,10 @@ ok(codes(mk({ task: 'rules', rules: [{ id: 'a', then: 'p' }] }, [sc('x', 'status
 ok(codes(mk({ task: 'rules', rules: [{ id: 'a', then: 'p' }] }, [sc('x', 'weight')])).includes('output@outputs[0].of'), 'check: an output the task does not compute');
 { const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests/fixtures/enginelib/law.json'), 'utf8')).specs;
   const js = fx.map(s => { const p = X.checkSpec(s), bad = p.some(q => q.level === 'error'); return { p, x: bad ? null : X.exprs(s), k: bad ? null : X.keys(s) }; });
-  const py = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_law as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else [list(t) for t in M.exprs(s)],'k':None if bad else [list(t) for t in M.keys(s)]})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(fx), encoding: 'utf8' }));
+  const py = want('check', fx, js);
   let same = 0; js.forEach((r, i) => { if (JSON.stringify(r) === JSON.stringify(py[i])) same++; else console.log('  spec', i, '\n  JS', JSON.stringify(r), '\n  PY', JSON.stringify(py[i])); });
   const good = js.filter(r => !r.p.some(q => q.level === 'error')).length;
-  ok(same === fx.length && good >= 10 && fx.length - good >= 10, `tools/lib_law.py = the JS checkSpec / exprs / keys on ${same}/${fx.length} fixtures (${good} good, ${fx.length - good} bad)`);
+  ok(same === fx.length && good >= 10 && fx.length - good >= 10, `the JS checkSpec / exprs / keys give the golden outputs of the former twin tools/lib_law.py on ${same}/${fx.length} fixtures (${good} good, ${fx.length - good} bad)`);
   const allCodes = new Set(js.flatMap(r => r.p.map(q => q.code)));
   ok(['format', 'value', 'enum', 'size', 'unknown-field', 'literal', 'duplicate', 'ref', 'cq', 'cycle', 'date', 'grid', 'pattern', 'output', 'parse-token', 'parse-paren', 'parse-eof'].every(c => allCodes.has(c)), 'the fixtures cover every check code: ' + [...allCodes].sort().join(' '));
   ok(X.exprs(fx[0]).some(e => e[1] === 'model.toggles[0].on') && X.keys(fx[0]).some(k => k[0] === 'ruleNoVehicles'), 'exprs lists the numx of the model, keys its labels');

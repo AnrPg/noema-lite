@@ -1,0 +1,653 @@
+{
+ "inspect": {
+  "in": "529b1143df18ecc41c7cecfd45d05aadd154907a5877c41cee3798c5f34c209a",
+  "out": [
+   {
+    "ok": true,
+    "errors": [],
+    "bytes": 410,
+    "sha256": "5c8ce60e0d3bacb693a05a53aae8eef011b15103505a9bfd6dbd88f326192062",
+    "imports": [
+     {
+      "module": "noema",
+      "name": "noema_log",
+      "kind": "func",
+      "type": "(i32,i32)->()"
+     },
+     {
+      "module": "noema",
+      "name": "noema_random",
+      "kind": "func",
+      "type": "()->(f64)"
+     }
+    ],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "init",
+      "kind": "func",
+      "type": "(i32)->()"
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     },
+     {
+      "name": "spin",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     },
+     {
+      "name": "grow",
+      "kind": "func",
+      "type": "(i32)->(i32)"
+     },
+     {
+      "name": "rnd",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 2,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": true,
+    "errors": [],
+    "bytes": 410,
+    "sha256": "5c8ce60e0d3bacb693a05a53aae8eef011b15103505a9bfd6dbd88f326192062",
+    "imports": [
+     {
+      "module": "noema",
+      "name": "noema_log",
+      "kind": "func",
+      "type": "(i32,i32)->()"
+     },
+     {
+      "module": "noema",
+      "name": "noema_random",
+      "kind": "func",
+      "type": "()->(f64)"
+     }
+    ],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "init",
+      "kind": "func",
+      "type": "(i32)->()"
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     },
+     {
+      "name": "spin",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     },
+     {
+      "name": "grow",
+      "kind": "func",
+      "type": "(i32)->(i32)"
+     },
+     {
+      "name": "rnd",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 2,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": true,
+    "errors": [],
+    "bytes": 148,
+    "sha256": "5f01421a051cf648cb5f890b2d20b2d35f866d149fa8cfdb3c921dc5ba44826d",
+    "imports": [
+     {
+      "module": "noema",
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "module": "noema",
+      "name": "noema_now",
+      "kind": "func",
+      "type": "()->(f64)"
+     }
+    ],
+    "exports": [
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     },
+     {
+      "name": "grow",
+      "kind": "func",
+      "type": "(i32)->(i32)"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": null,
+     "imported": true,
+     "exported": false
+    },
+    "start": false
+   },
+   {
+    "ok": true,
+    "errors": [],
+    "bytes": 148,
+    "sha256": "5f01421a051cf648cb5f890b2d20b2d35f866d149fa8cfdb3c921dc5ba44826d",
+    "imports": [
+     {
+      "module": "noema",
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "module": "noema",
+      "name": "noema_now",
+      "kind": "func",
+      "type": "()->(f64)"
+     }
+    ],
+    "exports": [
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     },
+     {
+      "name": "grow",
+      "kind": "func",
+      "type": "(i32)->(i32)"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": null,
+     "imported": true,
+     "exported": false
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "import: env.fetch_url (func) is not in the host ABI (module \"noema\": noema_log, noema_now, noema_random, memory)"
+    ],
+    "bytes": 83,
+    "sha256": "254f4ec17d08d0a016bbc36fa2a1dceae7bdcd17ca2170c4469c2efcd596e1ea",
+    "imports": [
+     {
+      "module": "env",
+      "name": "fetch_url",
+      "kind": "func",
+      "type": "(i32,i32)->()"
+     }
+    ],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 2,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "import: env.fetch_url (func) is not in the host ABI (module \"noema\": noema_log, noema_now, noema_random, memory)"
+    ],
+    "bytes": 83,
+    "sha256": "254f4ec17d08d0a016bbc36fa2a1dceae7bdcd17ca2170c4469c2efcd596e1ea",
+    "imports": [
+     {
+      "module": "env",
+      "name": "fetch_url",
+      "kind": "func",
+      "type": "(i32,i32)->()"
+     }
+    ],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 2,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "import: noema.noema_now must be ()->(f64), it is ()->(i32)"
+    ],
+    "bytes": 78,
+    "sha256": "4b8a11a67ec7d32913216fa63b153127b8cfb46ff871f85958351da5fcd5137b",
+    "imports": [
+     {
+      "module": "noema",
+      "name": "noema_now",
+      "kind": "func",
+      "type": "()->(i32)"
+     }
+    ],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 2,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "import: noema.noema_now must be ()->(f64), it is ()->(i32)"
+    ],
+    "bytes": 78,
+    "sha256": "4b8a11a67ec7d32913216fa63b153127b8cfb46ff871f85958351da5fcd5137b",
+    "imports": [
+     {
+      "module": "noema",
+      "name": "noema_now",
+      "kind": "func",
+      "type": "()->(i32)"
+     }
+    ],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 2,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "memory: the declared maximum is 65536 pages (at most 16)"
+    ],
+    "bytes": 55,
+    "sha256": "6430de16b2ea8481450c41f2c8ae84543aa74fed4297fc12059b3def00a20891",
+    "imports": [],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 65536,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "memory: the declared maximum is 65536 pages (at most 256)"
+    ],
+    "bytes": 55,
+    "sha256": "6430de16b2ea8481450c41f2c8ae84543aa74fed4297fc12059b3def00a20891",
+    "imports": [],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": 65536,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "memory: the memory has no maximum (declare one of at most 16 pages)"
+    ],
+    "bytes": 52,
+    "sha256": "9ab1b0ceaf016cf50e7fd01214ad3498ef46f5c52a5173bdbb2ba18f51a42e77",
+    "imports": [],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": null,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "memory: the memory has no maximum (declare one of at most 256 pages)"
+    ],
+    "bytes": 52,
+    "sha256": "9ab1b0ceaf016cf50e7fd01214ad3498ef46f5c52a5173bdbb2ba18f51a42e77",
+    "imports": [],
+    "exports": [
+     {
+      "name": "memory",
+      "kind": "memory",
+      "type": null
+     },
+     {
+      "name": "step",
+      "kind": "func",
+      "type": "(i32,i32,i32,i32)->()"
+     }
+    ],
+    "memory": {
+     "min": 1,
+     "max": null,
+     "imported": false,
+     "exported": true
+    },
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: the module is malformed (section 10)"
+    ],
+    "bytes": 200,
+    "sha256": "b1913034eb73edc5607b6d5411d2a9e84d7cf1ec0b487f90209e4eaf605aef77",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: the module is malformed (section 10)"
+    ],
+    "bytes": 200,
+    "sha256": "b1913034eb73edc5607b6d5411d2a9e84d7cf1ec0b487f90209e4eaf605aef77",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: not a WebAssembly module (magic or version)"
+    ],
+    "bytes": 15,
+    "sha256": "9977afebaff841be6b13cbd100b25b76729e63042de4875931928c0c5bafd979",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: not a WebAssembly module (magic or version)"
+    ],
+    "bytes": 15,
+    "sha256": "9977afebaff841be6b13cbd100b25b76729e63042de4875931928c0c5bafd979",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: not a WebAssembly module (magic or version)"
+    ],
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: not a WebAssembly module (magic or version)"
+    ],
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "size: the module is 2097160 bytes (at most 2097152)"
+    ],
+    "bytes": 2097160,
+    "sha256": "89cd15ad065437f5676b305bab14ad1fee402a0aa618599e4ab7560fe72d7469",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "size: the module is 2097160 bytes (at most 2097152)"
+    ],
+    "bytes": 2097160,
+    "sha256": "89cd15ad065437f5676b305bab14ad1fee402a0aa618599e4ab7560fe72d7469",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: not a WebAssembly module (magic or version)"
+    ],
+    "bytes": 410,
+    "sha256": "1c815bdf66b1f09de506bcb5945eea3edb1957a6b37ce160b108e57c18d6e187",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   },
+   {
+    "ok": false,
+    "errors": [
+     "format: not a WebAssembly module (magic or version)"
+    ],
+    "bytes": 410,
+    "sha256": "1c815bdf66b1f09de506bcb5945eea3edb1957a6b37ce160b108e57c18d6e187",
+    "imports": [],
+    "exports": [],
+    "memory": null,
+    "start": false
+   }
+  ]
+ },
+ "items": {
+  "in": "afeb121fa587ea184b49903d21dec8e0a22a445fc183244c649eaea63f0a51c8",
+  "out": [
+   [],
+   [
+    "sha256: does not match the module"
+   ],
+   [
+    "wasm: not valid base64"
+   ],
+   [
+    "abi: unknown key extra",
+    "abi.maxPages: a whole number from 1 to 1024",
+    "abi.budgetMs: a whole number from 50 to 5000",
+    "abi.scratch: a byte offset, a multiple of 8"
+   ],
+   [
+    "abi.scratch: the module exports no alloc(bytes); give the byte offset of its input/output area"
+   ],
+   [
+    "runtime: must be wasm-module@1"
+   ],
+   [
+    "bytes: 7, but the module has 410"
+   ],
+   [
+    "import: env.fetch_url (func) is not in the host ABI (module \"noema\": noema_log, noema_now, noema_random, memory)"
+   ],
+   [
+    "memory: the declared maximum is 65536 pages (at most 16)"
+   ],
+   [],
+   [
+    "export: no function \"nope\""
+   ],
+   [
+    "the item must be an object"
+   ]
+  ]
+ },
+ "models": {
+  "in": "9accecda4296989e3aa100a61c1b9292c02e78647820cb4a81e87f750edd447a",
+  "out": [
+   [],
+   [
+    "spec.model.module: no wasm-module@1 item \"nope\" in the pack"
+   ],
+   [
+    "spec.model: unknown key extra"
+   ],
+   [
+    "spec.model.step: grow is not a step function of the module"
+   ],
+   [
+    "spec.model.outputs[2]: a scalar takes one value (no n)"
+   ],
+   [
+    "spec.outputs: x has no place in spec.model.outputs",
+    "spec.outputs: E has no place in spec.model.outputs"
+   ],
+   [
+    "spec.model.inputs[1]: unknown variable 'nosuch' in “nosuch + 1”",
+    "spec.model.inputs[2]: an expression (a text such as “2*x + 1”) is required"
+   ],
+   [
+    "spec.model.inputs: a list of 1 to 64 expressions"
+   ],
+   [
+    "spec.model.module: the module bad-core is refused (import: env.fetch_url (func) is not in the host ABI (module \"noema\": noema_log, noema_now, noema_random, memory))"
+   ],
+   [
+    "spec.model.init: step is not an init function of the module"
+   ],
+   [
+    "spec.model: wasm@1 needs a model {module, inputs, outputs, step?, init?}"
+   ]
+  ]
+ }
+}

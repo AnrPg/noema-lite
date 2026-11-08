@@ -47,7 +47,7 @@ nothing in the code held to it as a type.
   - "a language this browser cannot name: the code is shown instead";
   - "only waiting for the other run to end: its error is its caller's".
 
-  Phase 1 applied this to `engine/loader.js`, `engine/shell.js`, `engine/cloud.js` and `engine/src/10_core.js`.
+  Phase 1 applied this to the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js), the frame (src/composition/shell/host.ts, src/ui/screens/shell), `engine/cloud.js` and `engine/src/10_core.js`.
 
 ## Consequences
 

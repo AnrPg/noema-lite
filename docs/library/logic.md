@@ -23,14 +23,11 @@ Unicode. Its parser gives precise error codes and positions. Over that language 
 Each task gives scalars, series, a scene and a trace. A slider bound to `model.step` walks through the trace: the SAT decisions,
 the resolvents, the tableau's worlds, the announcements, the grounded iterations, or the days of a norm trace.
 
-The Python twin is `tools/lib_logic.py`. It has the same tables and the same parser, with the same codes, positions and messages.
-It gives the same problems as the JS `checkSpec`, and it does not compute the tasks.
-
 The tests:
 - `node tests/lib_logic.js` has 148 assertions: published values, every code, the API, the adapter, the Worker, speed and the
   reference activities.
-- `tests/fixtures/enginelib/logic.json` has 60 specs (28 good, 32 bad). `node tests/enginelib.js` runs the JS ↔ Python parity on
-  it once the catalogue lists `logic@1`; until then `tests/lib_logic.js` runs that parity itself.
+- `tests/fixtures/enginelib/logic.json` has 60 specs (28 good, 32 bad). `node tests/enginelib.js` holds the checks to the golden outputs of the former Python
+  twin on it once the catalogue lists `logic@1`; until then `tests/lib_logic.js` does it itself.
 
 The reference activities are `tools/activities_examples/muddy-children` (epistemic) and `tools/activities_examples/duty-repair`
 (contrary-to-duty norms over a week).
@@ -108,7 +105,7 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 | `step` | numx | traces | how far the trace is shown (default: all); for epistemic, the number of announcements applied; for norms, the number of trace steps checked |
 | `view` | 4 numbers | scenes | the scene's view |
 
-### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_logic.py`)
+### 1.2 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

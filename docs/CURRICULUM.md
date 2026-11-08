@@ -99,7 +99,7 @@ mastered-by-test step can be undone. A step **opens** when all its prerequisites
   call per planned chapter in noema-lite's own format (contract from `tools/CONTENT_SPEC.md` +
   `docs/VISUAL.md`, shipped as `engine/authoring.js`), with 0–2 diagrams per chapter (only where they teach) drawn by the JS
   diagram kit (flow, cycle, hub, layers, tree, compare — SVG + clickable regions) and picture exercises
-  on them. Each chapter is checked by `engine/packcheck.js` (strict) plus quantity rules (≥ 4 exercises per section; `engine/packcheck.js` strict; ≥ 3 picture exercises when the chapter has a diagram; ≥ 25 % pitfall/debug/exam; flashcards, pitfalls…) and
+  on them. Each chapter is checked by `checkPack` (strict; `src/features/content`, `NoemaCore.content`) plus quantity rules (≥ 4 exercises per section; `checkPack` strict; ≥ 3 picture exercises when the chapter has a diagram; ≥ 25 % pitfall/debug/exam; flashcards, pitfalls…) and
   repaired by Gemini when needed. Progress is saved per chapter (resumes after a reload).
 * Two devices never build the same step (a lock in the synced key `a:curgen:<id>`, renewed every minute).
 
@@ -472,7 +472,7 @@ repaired graph, 25-node map in three parts, locked/open, chapter details, backgr
 next 2 steps by Claude skill jobs (web search + fetch), cloud storage and sync, studying a step in the
 engine, automatic mastery, placement test unlocking the next step and undo, phone layout, the Gemini path
 (stop + resume without redoing agents, Google Search research, repaired chapter, 4-chapter subject with
-drawn diagrams and listed sources). `engine/packcheck.js` is also the connector's pack gate.
+drawn diagrams and listed sources). The same content checks (`src/features/content`) are also the connector's pack gate.
 `tests/curriculum_app.js`: §7 end to end — the connector (run in-process as the learner's Claude) builds a curriculum's map
 (a wrong answer sent back), plans it in batches, prepares a reviewed step; an imported map with a PDF (signed link, the same
 file not uploaded twice); copy / paste, a step bundle and its package; re-plan with a wish; Set up Claude → C; phone.

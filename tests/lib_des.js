@@ -1,5 +1,5 @@
 /* des@1 (src/engines/des/des.js, docs/library/des.md) against queueing theory and exact solutions:
-   1. the spec check: tests/fixtures/enginelib/des.json (good and bad specs) and its Python twin tools/lib_des.py (check_spec, exprs, keys);
+   1. the spec check: tests/fixtures/enginelib/des.json (good and bad specs) and the golden outputs of its former Python twin tools/lib_des.py (check_spec, exprs, keys);
    2. analytic values whose CI must hold the theory: M/M/1, M/M/c (Erlang C), M/D/1 and M/G/1 (Pollaczek–Khinchine), M/M/1/K,
       a Jackson network, non-preemptive and preemptive-resume priorities (Cobham 1954; Conway, Maxwell & Miller 1967), M/G/∞,
       Little's law; reneging (M/M/1+M) and balking against their birth–death chains; LIFO = FIFO in the mean; SPT < FIFO;
@@ -9,7 +9,8 @@
       makeEngine (stepInit / stepTo), speed; the reference activity ed-triage (its tests.json cases and string tables).
    Usage: node tests/lib_des.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_des');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
@@ -45,15 +46,10 @@ ok(Object.isFrozen(D) && D.id === 'des@1' && typeof D.engine.create === 'functio
   const js = specs.map(s => { const p = D.checkSpec(s), bad = C.hasErrors(p); return { p, x: bad ? null : D.exprs(s), k: bad ? null : D.keys(s) }; });
   const good = js.filter(r => !r.p.some(q => q.level === 'error')).length;
   ok(specs.length >= 20 && good >= 5 && specs.length - good >= 15, `des.json: ${specs.length} specs, ${good} good and ${specs.length - good} bad`);
-  const py = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_des as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else M.exprs(s),'k':None if bad else M.keys(s)})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(specs), encoding: 'utf8' }));
+  const py = want('check', specs, js);
   const norm = v => JSON.stringify(v);
   let same = 0; js.forEach((r, i) => { if (norm(r) === norm(py[i])) same++; else console.log(`  spec ${i}\n  JS ${norm(r).slice(0, 500)}\n  PY ${norm(py[i]).slice(0, 500)}`); });
-  ok(same === specs.length, `JS and Python agree on ${same}/${specs.length} specs (checkSpec messages, exprs, keys)`);
+  ok(same === specs.length, `the JS gives the golden outputs of the former Python twin on ${same}/${specs.length} specs (checkSpec messages, exprs, keys)`);
   const bad = specs.filter((s, i) => js[i].p.some(q => q.level === 'error'));
   ok(bad.every(s => D.run(s, {}, { seed: 1 }).codes.some(c => c.code === 'model')), 'a bad spec runs to the code model, without throwing');
 }

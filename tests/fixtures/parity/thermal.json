@@ -1,0 +1,661 @@
+{
+ "check": {
+  "in": "250f28f0ba222c7aa3bd638e8c5d2c65ee9be5dbedd9d4fda4afaf59537ecde9",
+  "out": {
+   "n": [
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "network is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "network is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "network is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "nodes",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "sources",
+      "msg": "not an array",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "thermostats",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "format",
+      "msg": "not noema.thermal/v1",
+      "level": "error"
+     }
+    ],
+    [],
+    [],
+    [
+     {
+      "code": "unknown-field",
+      "path": "x",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "value",
+      "path": "ambient",
+      "msg": "needs a temperature (°C) above -273.15",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "nodes[0].zz",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "unknown-field",
+      "path": "links[0].q",
+      "msg": "ignored",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "nodes[0].fixed",
+      "msg": "needs a temperature (°C) above -273.15",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "nodes[0]",
+      "msg": "a fixed node takes no C or T0",
+      "level": "error"
+     },
+     {
+      "code": "id",
+      "path": "nodes[1].id",
+      "msg": "bad id",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "nodes[2]",
+      "msg": "node is not an object",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "nodes[3].T0",
+      "msg": "needs a temperature (°C) above -273.15",
+      "level": "error"
+     },
+     {
+      "code": "dup-id",
+      "path": "nodes[4].id",
+      "msg": "duplicate id c",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "links[0].conv.z",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "links[0].conv.h",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "links[0].conv.A",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "links[1].rad",
+      "msg": "needs an object {eps, A}",
+      "level": "error"
+     },
+     {
+      "code": "link",
+      "path": "links[2]",
+      "msg": "needs exactly one of R, G, conv, rad",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "links[3]",
+      "msg": "link is not an object",
+      "level": "error"
+     },
+     {
+      "code": "unknown-node",
+      "path": "links[4].a",
+      "msg": "not a node of the network",
+      "level": "error"
+     },
+     {
+      "code": "unknown-node",
+      "path": "links[4].b",
+      "msg": "not a node of the network",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "links[4].G",
+      "msg": "needs a number > 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "boundary-link",
+      "path": "links[0]",
+      "msg": "both ends are boundaries",
+      "level": "warning"
+     },
+     {
+      "code": "self-loop",
+      "path": "links[1]",
+      "msg": "both ends on one node",
+      "level": "error"
+     },
+     {
+      "code": "fixed-node",
+      "path": "sources[0].node",
+      "msg": "a source on a fixed node does nothing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[0].P.step.P",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[0].P.step.t0",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "unknown-node",
+      "path": "sources[1].node",
+      "msg": "not a node of the network",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[1].P",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[2].P.pwm.zz",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[2].P.pwm.freq",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[2].P.pwm.duty",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[3].P.sine",
+      "msg": "needs an object",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[4].P",
+      "msg": "one of a number, step, pwm, sine",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "sources[5].P",
+      "msg": "needs a number or a waveform",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "thermostats[0]",
+      "msg": "low must be below high",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "thermostats[0].mode",
+      "msg": "heat or cool",
+      "level": "error"
+     },
+     {
+      "code": "unknown-node",
+      "path": "thermostats[1].sensor",
+      "msg": "not a node of the network",
+      "level": "error"
+     },
+     {
+      "code": "thermostat",
+      "path": "thermostats[1].source",
+      "msg": "this source already has a thermostat",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "thermostats[1].low",
+      "msg": "needs a number",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "thermostats[1].high",
+      "msg": "needs a number",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "thermostats[2]",
+      "msg": "thermostat is not an object",
+      "level": "error"
+     },
+     {
+      "code": "unknown-source",
+      "path": "thermostats[3].source",
+      "msg": "not a source of the network",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "floating",
+      "path": "nodes[0]",
+      "msg": "no path to a boundary from a (no steady state)",
+      "level": "warning"
+     },
+     {
+      "code": "singular",
+      "path": "nodes[2]",
+      "msg": "no heat capacity and no path to a boundary: c",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "size",
+      "path": "nodes",
+      "msg": "more than 50 nodes",
+      "level": "error"
+     },
+     {
+      "code": "size",
+      "path": "links",
+      "msg": "more than 200 links",
+      "level": "error"
+     }
+    ]
+   ],
+   "s": [
+    [
+     {
+      "code": "model",
+      "path": "model",
+      "msg": "thermal@1 needs a model {network, bindings?, transient?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "model",
+      "msg": "thermal@1 needs a model {network, bindings?, transient?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "model",
+      "msg": "thermal@1 needs a model {network, bindings?, transient?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "model.network",
+      "msg": "needs a network {format: \"noema.thermal/v1\", nodes, links, sources?, thermostats?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "model",
+      "path": "model.network",
+      "msg": "needs a network {format: \"noema.thermal/v1\", nodes, links, sources?, thermostats?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "model.network.links",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [],
+    [
+     {
+      "code": "unknown-field",
+      "path": "model.extra",
+      "msg": "unknown field",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "model.bindings[0]",
+      "msg": "an object {element, prop?, expr}",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[1].prop",
+      "msg": "one of C, T0",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[1].expr",
+      "msg": "needs an expression",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "model.bindings[2].z",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[4].element",
+      "msg": "not an id of the network (or ambient)",
+      "level": "error"
+     },
+     {
+      "code": "binding",
+      "path": "model.bindings[5].prop",
+      "msg": "one of P",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "transient",
+      "path": "model.transient",
+      "msg": "needs an object {tEnd, dt?, method?, start?, points?}",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[4]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "unknown-field",
+      "path": "model.transient.q",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "transient",
+      "path": "model.transient.tEnd",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "transient",
+      "path": "model.transient.dt",
+      "msg": "needs a number > 0 or an expression",
+      "level": "error"
+     },
+     {
+      "code": "transient",
+      "path": "model.transient.method",
+      "msg": "trap or be",
+      "level": "error"
+     },
+     {
+      "code": "transient",
+      "path": "model.transient.start",
+      "msg": "T0 or steady",
+      "level": "error"
+     },
+     {
+      "code": "transient",
+      "path": "model.transient.points",
+      "msg": "needs a whole number from 2 to 20001",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "transient",
+      "path": "model.transient.points",
+      "msg": "needs a whole number from 2 to 20001",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "budget",
+      "path": "model.transient",
+      "msg": "tEnd / dt is more than 200000 steps",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "model.network.links[0].R",
+      "msg": "needs a number > 0",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "output",
+      "path": "outputs[2]",
+      "msg": "must name what it reads: one of node, link, source, thermostat, tau, time",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].time",
+      "msg": "true on a series output (the time axis)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[4].time",
+      "msg": "true on a series output (the time axis)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5].tau",
+      "msg": "a whole number from 1 to the number of nodes with a heat capacity, on a scalar output",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[6]",
+      "msg": "at and stat belong to a scalar output of a node, link, source or thermostat",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[7].node",
+      "msg": "not a node of the network",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[8]",
+      "msg": "at and stat belong to a scalar output of a node, link, source or thermostat",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[9]",
+      "msg": "at or stat, not both",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[9].at",
+      "msg": "needs a number ≥ 0 or an expression",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[9].stat",
+      "msg": "one of final, min, max, mean, pp, rms",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "outputs[10].zz",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[11].link",
+      "msg": "not a link of the network",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "output",
+      "path": "outputs[0]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[4]",
+      "msg": "needs model.transient {tEnd, dt?}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "output",
+      "path": "outputs[0]",
+      "msg": "a thermostat has no steady state: give at or stat",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].thermostat",
+      "msg": "not a thermostat of the network",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3]",
+      "msg": "a thermostat has no steady state: give at or stat",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "binding",
+      "path": "model.bindings[3].prop",
+      "msg": "one of C, T0",
+      "level": "error"
+     }
+    ],
+    []
+   ]
+  }
+ }
+}

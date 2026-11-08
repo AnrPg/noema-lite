@@ -10,14 +10,16 @@
  *   #/people · #/chat/<room> · #/group/<room> · #/join/<code>   👥 people     (src/features/social/ui)
  *   (no address)                    🔎 the quick sheet · ⚑ the report dialog
  */
-import { NoemaExplorePage } from '../features/sharing/ui/explore.ts';
+import { EXPLORE_DONE, NoemaExplorePage } from '../features/sharing/ui/explore.ts';
 import { NoemaSharePanel, openShare } from '../features/sharing/ui/share.ts';
-import type { HostSubject } from '../features/community/ui/host.ts';
+import type { HostSubject, NoteItem } from '../features/community/ui/host.ts';
+import { NoemaNoticesClear, NoemaShareRow } from '../features/sharing/ui/notes.ts';
 import type { ScreenChrome } from '../features/community/ui/host.ts';
 import { CHROME_EVENT, type CommunityScreen } from '../features/community/ui/screen.ts';
 import type { Here } from '../features/search/domain/params.ts';
 import { NoemaReportAdmin } from '../features/reports/ui/admin.ts';
 import { openReport } from '../features/reports/ui/dialog.ts';
+import { openDialog } from '../features/community/ui/dialogs.ts';
 import { NoemaEnginesPage, type EnginesDeps } from '../features/reports/ui/engines.ts';
 import type { CatalogEntry } from '../engines/types.ts';
 import { NoemaSearchPage } from '../features/search/ui/page.ts';
@@ -67,6 +69,8 @@ export const COMMUNITY_ELEMENTS = {
   'noema-person-actions': NoemaPersonActions,
   'noema-explore-page': NoemaExplorePage,
   'noema-share-panel': NoemaSharePanel,
+  'noema-share-row': NoemaShareRow,
+  'noema-notices-clear': NoemaNoticesClear,
 } as const;
 
 export interface CommunityScreens {
@@ -76,6 +80,12 @@ export interface CommunityScreens {
   openReport(): void;
   /** ✉ a vault file into one of my conversations */
   sendTo(item: SendItem): void;
+  /** 🔔 one of the bell's sharing rows drawn into el (onAccepted: a share accepted, what it gave) */
+  noteRow(el: HTMLElement, item: NoteItem, onAccepted: ((s: { readonly kind?: string; readonly id?: string }) => void) | null): void;
+  /** 🔔 "Clear all" under the bell's list, drawn into el */
+  noticesClear(el: HTMLElement): void;
+  /** 🧭 Explore in a dialog (the classic screens, which have no frame to draw the page in) */
+  explore(kind: string): void;
   /** 🔗 the share dialog of one of the learner's subjects */
   share(s: HostSubject): void;
   /** the buttons of someone's page (#/u/<id>) drawn into el */
@@ -196,6 +206,32 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
     },
     sendTo: item => {
       void openSendTo(socialDeps, { kind: item.kind, id: item.id, title: item.title }, item.title);
+    },
+    explore: kind => {
+      const m = COMMUNITY_ROUTES.match('#/explore' + (kind ? '/' + kind : ''));
+      const screen = m ? screenOf(m, {}) : null;
+      if (!screen) return;
+      const d = openDialog(app.reports, {
+        heading: app.i18n.t(kind === 'subjects' ? 'loader.explore.title' : 'sh.exploreRoadmaps'),
+        cls: 'ex-dlg',
+        wide: true,
+        content: screen,
+      });
+      screen.addEventListener(EXPLORE_DONE, () => {
+        d.close();
+      });
+    },
+    noteRow: (el, item, onAccepted) => {
+      const row = win.document.createElement('noema-share-row');
+      row.deps = { host: app.host, notify: app.notify };
+      row.item = item;
+      row.onAccepted = onAccepted;
+      el.replaceChildren(row);
+    },
+    noticesClear: el => {
+      const c = win.document.createElement('noema-notices-clear');
+      c.deps = { host: app.host, notify: app.notify };
+      el.replaceChildren(c);
     },
     share: s => {
       void openShare({ host: app.host, notify: app.notify, i18n: app.i18n }, s);

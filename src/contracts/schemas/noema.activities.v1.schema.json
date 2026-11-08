@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.activities.v1.schema.json",
   "title": "registry",
-  "description": "The registry of a subject's activities, activities/activities.json (docs/INTERACTIVE.md §3). The shape that tools/activities.py check_activities and engine/packcheck.js checkActivities enforce for the folder form (make_pack.py adds spec / html, strings, sha256 and bytes inline). Cross-file rules stay with the validators: unique ids, fallback.media is a picture of the pack, a runtime this app runs, the string tables, the runtime's own fields (python, packages, abi, provider, url…). entry names the file of every runtime but external-embed@1, which has none (its url is the page). Titles are keys of the authoring UI's labels (engine.author.f.<title> in i18n/engine/en.arb).",
+  "description": "The registry of a subject's activities, activities/activities.json (docs/INTERACTIVE.md §3). The shape that checkActivities (src/features/content/domain/activities/registry.ts) enforces for the folder form (make_pack.py adds spec / html, strings, sha256 and bytes inline). Cross-file rules stay with the validators: unique ids, fallback.media is a picture of the pack, a runtime this app runs, the string tables, the runtime's own fields (python, packages, abi, provider, url…). entry names the file of every runtime but external-embed@1, which has none (its url is the page). Titles are keys of the authoring UI's labels (engine.author.f.<title> in i18n/engine/en.arb).",
   "type": "object",
   "required": ["format", "items"],
   "properties": {

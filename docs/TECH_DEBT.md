@@ -109,6 +109,15 @@ how-to. Each locale: ≈200 k characters of drafts → review in Weblate → fla
 **Think first:** Turkish suffixes after placeholders (vowel harmony: rephrase so no suffix follows `{name}`); zh-Hant is
 Taiwan vocabulary, not a conversion of zh-Hans; Arabic: MSA, gender-neutral phrasing, digits from ICU only.
 
+**Redesign status (2026-11-08, phases 2–3):** the owner (14:18 UTC) kept five languages: new UI strings are written in
+en, el, ru, de and fr; the other locales wait here. Already drafted in all 14 locales during the redesign (keep, review later): `i18n/ui`
+(the Lit kit, 147+ keys) and `i18n/roadmaps`. Waiting, per catalog:
+
+| Catalog | Done | Waiting |
+|---|---|---|
+| `i18n/roadmaps-map` (754 keys) | el, fr, ru, de | es-ES (480/754 drafted), ar-EG, hi, it, ja, pt-PT, sq, tr, zh-Hans, zh-Hant (0/754) |
+| new phase-3 keys (study, community, languages, shell, roadmaps) | en, el, ru, de, fr | the other 10 locales |
+
 ### TD-10 · Language lessons: etymology, folk tradition and culture as sections of each lesson — ⏸ parked by the owner (2026-10-18)
 **What:** the aspect sections of a theory lesson (D29) exist for what the data already says (sounds, word forms, sentences, meaning, vocabulary, use — from the grammar points' `category`) and the library lists writing, listening & speaking and reading. **Etymology, folk tradition and culture** are not sections of the lessons: grammar points carry no such category, so each language needs new content per lesson (and exercises for it, D27) before the lesson can show them.
 **Size:** large — new writing per language and lesson, a data field (e.g. `aspect` on lesson blocks), validator rules, exercise generators and tests; roughly a content project per language.

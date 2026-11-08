@@ -78,8 +78,10 @@ def chapters_of(d, sub):
     return {os.path.basename(f)[:-5]: f for f in sorted(glob.glob(os.path.join(d, sub, "ch*.json")))}
 
 def local_check(kind, d, run):
-    """→ (ok, lines). The checks pipeline.py runs itself, with the same code as make_pack.py (pack_quality.py)."""
-    from pack_quality import check_quality
+    """→ (ok, lines). The checks pipeline.py runs itself, with the same code as make_pack.py and the app (the quality rules of
+    src/features/content, through noema_core.py)."""
+    import noema_core
+    check_quality = lambda ch, feats: [(x["level"], x["rule"], x["msg"]) for x in noema_core.check_quality(ch, {"features": {f: True for f in feats}})]
     L = []
     if kind == "run": return True, ["run.json is here"]
     if kind == "subject":
@@ -95,7 +97,7 @@ def local_check(kind, d, run):
             m = rj(f)
             if m is None: ok = False; L.append(f"{cid}: map/{cid}.json is not valid JSON"); continue
             feats = {k for k, v in ((rj(os.path.join(d, "subject.json")) or {}).get("features") or {}).items() if v}
-            iss = [x for x in check_quality({"id": cid, "map": m, "exercises": [], "sections": []}, feats, set())
+            iss = [x for x in check_quality({"id": cid, "map": m, "exercises": [], "sections": []}, feats)
                    if x[1] in ("map.present", "map.refs", "map.exhaustive") or (x[1] == "fit.declared" and "unknown value" in x[2])]
             for _, _, msg in iss: L.append(msg)
             ok = ok and not iss
@@ -117,7 +119,7 @@ def local_check(kind, d, run):
         if not chs: return False, ["no chapters yet"]
         for cid, f in chs.items():
             c = rj(f) or {}; c["map"] = rj(os.path.join(d, "map", cid + ".json")); c["review"] = rj(os.path.join(d, "review", cid + ".json"))
-            iss = [x for x in check_quality(c, set(), set()) if x[1] == "review.done" and (kind == "review" or "blind" in x[2] or "no second-pass" in x[2])]
+            iss = [x for x in check_quality(c, set()) if x[1] == "review.done" and (kind == "review" or "blind" in x[2] or "no second-pass" in x[2])]
             for _, _, msg in iss: L.append(msg)
             ok = ok and not iss
         return ok, L or ["every chapter: " + ("blind re-solve recorded, every mismatch fixed" if kind == "blind" else "rubric and blind re-solve done")]
@@ -126,9 +128,8 @@ def local_check(kind, d, run):
             r = subprocess.run([sys.executable, find("make_pack.py"), d, td], capture_output=True, text=True)
         tail = (r.stdout + r.stderr).strip().splitlines()[-25:]
         return r.returncode == 0, tail
-    if kind == "translations":   # a full translation of every chapter into en, el, ru, de, fr minus the pack's language (pack_rules.json "languages")
-        from noema_lib import required_locales
-        s = rj(os.path.join(d, "subject.json")) or {}; need, _b = required_locales(s.get("language", "en"))
+    if kind == "translations":   # a full translation of every chapter into en, el, ru, de, fr minus the pack's language (the pack rules' languages)
+        s = rj(os.path.join(d, "subject.json")) or {}; need = noema_core.required_locales(s.get("language", "en"))[0]
         chs = sorted(chapters_of(d, "chapters")); ok = bool(chs)
         if not chs: return False, ["no chapters yet"]
         for loc in need:

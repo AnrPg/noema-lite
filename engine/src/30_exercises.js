@@ -392,7 +392,7 @@ function reportBtn(ex) {
       const note = h('textarea', { class: 'answer', rows: 3, placeholder: tE('engine.ex.reportNote') }); note.value = S.flags?.[ex.id]?.note || '';
       box.append(h('h3', {}, '⚑ ' + tE('engine.ex.reportTitle')), h('div', { class: 'opts' }, ...opts), note,
         h('div', { class: 'row', style: { marginTop: '14px', justifyContent: 'flex-end' } }, h('button', { class: 'btn', onclick: close }, tE('engine.core.cancel')),
-          h('button', { class: 'btn primary', onclick: () => { if (!why) { opts[0].parentElement.classList.add('shake'); return; } S.flags = S.flags || {}; S.flags[ex.id] = { why, note: note.value.trim().slice(0, 2000), t: Date.now() }; save(); b.classList.add('on'); b.title = tE('engine.ex.reported'); close(); toast('⚑ ' + tE('engine.ex.reportSaved')); } }, tE('engine.ex.reportSend'))));
+          h('button', { class: 'btn primary', onclick: () => { if (!why) { opts[0].parentElement.classList.add('shake'); return; } const nt = note.value.trim().slice(0, 2000); learnt('exercise.flagged', ex.id, { why, ...(nt ? { note: nt } : {}) }); b.classList.add('on'); b.title = tE('engine.ex.reported'); close(); toast('⚑ ' + tE('engine.ex.reportSaved')); } }, tE('engine.ex.reportSend'))));
     });
   } }, '⚑');
   return b;

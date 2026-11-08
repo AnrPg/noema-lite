@@ -1,6 +1,6 @@
 /* The UI foundation (phase 3, src/ui; docs/ARCHITECTURE.md §6.3) in a real browser, through its demo #/ui-kit (development
    only: served from localhost), Playwright + Chromium:
-     A. lazy: the start screen never asks for build/ui.js; #/ui-kit loads it and shows the frame and the kit, no page error
+     A. lazy: the start screen never asks for build/ui-kit.js; #/ui-kit loads it and shows the frame and the kit, no page error
      B. every section at 1280 px and 320 px: no sideways scrolling, every control at least 24 × 24 px (WCAG 2.5.8)
      C. the keyboard: a menu (↓ opens on the first item, Escape closes, focus back), a dialog (focus inside, Tab stays in
         it, Escape closes, focus back on its button), tabs (→ selects the next), the skip link, a yes / no question
@@ -55,14 +55,14 @@ const frameReady = page => page.waitForSelector('noema-app-frame noema-ui-kit', 
   });
   const page = await ctx.newPage(), E = [], asked = [];
   page.on('pageerror', e => E.push(e.message));
-  page.on('request', r => { if (/\/build\/ui\.js/.test(r.url())) asked.push(r.url()); });
+  page.on('request', r => { if (/\/build\/ui-kit\.js/.test(r.url())) asked.push(r.url()); });
 
   console.log('— A. lazy');
   await page.goto(url); await page.evaluate(() => localStorage.clear()); await page.reload(); await wait(1500);
-  ok(!asked.length, 'the start screen never asks for build/ui.js');
+  ok(!asked.length, 'the start screen never asks for build/ui-kit.js');
   await page.goto(url + '#/ui-kit'); await page.reload();
   ok(await frameReady(page), '#/ui-kit shows the frame with the kit');
-  ok(asked.length === 1, `#/ui-kit loads build/ui.js once (${asked.length})`);
+  ok(asked.length === 1, `#/ui-kit loads build/ui-kit.js once (${asked.length})`);
   ok(await page.evaluate(() => !document.getElementById('noema-splash') && !document.body.classList.contains('noema-booting')), 'the splash is gone');
   ok(await page.evaluate(() => document.querySelectorAll('noema-app-frame').length === 1 && !document.querySelector('#app .card, .home')), 'only the new frame is on the page (the older screens did not start)');
 

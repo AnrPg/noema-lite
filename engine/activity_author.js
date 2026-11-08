@@ -6,7 +6,7 @@
      reference activity (NoemaActivityRefs, written into activity_author_schemas.js by tools/build.py) or a blank one.
    • The forms: NoemaSchemaForm over src/contracts/schemas/noema.activities.v1 (the registry entry) and noema.sim-spec.v1 (+ noema.circuit.v1);
      the words of each label key in every language right under the key, and a table of all words (en, el, ru, de, fr, + any language).
-   • Checks at the field: the schema, then the validators' own rules (NoemaPackCheck.checkSimSpec, checkActivities) — the same
+   • Checks at the field: the schema, then the validators' own rules (NoemaCore.content.checkSimSpec, checkActivities) — the same
      messages as activity_lint.py / make_pack.py / the connector; every formula through the expression language (NoemaCore.engines.expr.check) with the declared names.
    • The preview: the app's real sim-spec@1 runtime (ACT.mount), debounced, beside the form (stacked below 960 px).
    • Files: the activity folder (activities/activities.json, activities/<id>/spec.json, strings.<locale>.json) as a .zip or one by
@@ -19,7 +19,7 @@
   const SIM_ID = 'https://noema-lite.netlify.app/schemas/noema.sim-spec.v1.schema.json';
   const REG_ID = 'https://noema-lite.netlify.app/schemas/noema.activities.v1.schema.json';
   const SF = () => root.NoemaSchemaForm || (typeof require === 'function' ? require('./schemaform.js') : null);
-  const PC = () => root.NoemaPackCheck || null;
+  const PC = () => root.NoemaCore?.content || null;
   const ENG = () => root.NoemaCore?.engines || null;   // the engine library (src/engines): the catalogue, the loaded engines, the schema kernel
   const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
   const clone = v => JSON.parse(JSON.stringify(v));
@@ -102,7 +102,7 @@
   const PARTS_ID = () => (LS() && LS().PARTS_ID) || '';
   const hasParts = d => isObj(d) && isObj(d.spec) && Array.isArray(d.spec.parts);
   const partOf = (spec, path) => (path[0] === 'parts' && typeof path[1] === 'number' && Array.isArray(spec.parts) && isObj(spec.parts[path[1]]) ? spec.parts[path[1]] : null);
-  /** the spec one part shows its engine (packcheck partSpec): its model and outputs, the consts and params, its inputs as names */
+  /** the spec one part shows its engine (NoemaCore.content.partSpec): its model and outputs, the consts and params, its inputs as names */
   function partSub(spec, p) {
     const consts = Object.assign({}, isObj(spec.consts) ? spec.consts : {});
     for (const k of Object.keys(isObj(p.inputs) ? p.inputs : {})) if (!(k in consts)) consts[k] = 1;
@@ -281,7 +281,7 @@
   function actPreview() {
     if (typeof ACT === 'undefined' || !ACT || typeof ACT.mount !== 'function') return null;   // eslint-disable-line no-undef
     const key = 'blk:author:' + PREVIEW_ID;
-    const forget = () => { try { if (typeof S !== 'undefined' && S.act) delete S.act[key]; } catch (e) { } };   // eslint-disable-line no-undef
+    const forget = () => { try { if (typeof S !== 'undefined' && S.act?.[key]) NoemaCore.learning.record({ type: 'activity.saved', subject: Noema.subject.id, item: key, data: { v: 1, state: null } }); } catch (e) { } };   // eslint-disable-line no-undef
     return {
       show(box, it, spec, strings, locale) {
         forget();   // a preview always starts from the spec's defaults (never from a saved state)

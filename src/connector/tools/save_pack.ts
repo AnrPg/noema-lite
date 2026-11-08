@@ -39,7 +39,7 @@ export const tool: Tool = {
     } catch (e) {
       return fail('pack_json is not valid JSON: ' + message(e));
     }
-    const res = ctx.engine.packCheck.checkPack(p, undefined, { requireQuality: true });
+    const res = ctx.engine.content.checkPack(p, undefined, { requireQuality: true });
     if (res.errors.length) return fail(`${res.errors.length} error(s):\n- ${res.errors.slice(0, 40).join('\n- ')}`);
     if ((ctx.env.config.library ?? []).some(s => s.id === p.subject.id))
       return fail(`"${p.subject.id}" is a library subject id — use a new id.`);

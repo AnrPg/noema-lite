@@ -19,7 +19,7 @@ a form, sees the activity run beside it and downloads the folder that `make_pack
 
 ## The schemas and the validators
 
-The schema states the **shape** that `tools/activities.py check_spec` and `engine/packcheck.js checkSimSpec` enforce: fields
+The schema states the **shape** that `checkSimSpec` of the content checks (`src/features/content/domain/activities/simspec.ts`) enforces: fields
 (`additionalProperties: false` exactly where the validators say "unknown field"), types, enums, limits, `kind` → its fields
 (`oneOf` with a discriminator), `engine` → `model` / `outputs` / `bench` (`if` / `then` / `else`). What a schema cannot say stays
 with the validators (names unique and not reserved, every formula over the declared names, min < max ≤ …, the netlist, the
@@ -82,7 +82,7 @@ a route, `#/author`; it works with any subject open (the activity is not added t
 
 1. **Loading**: `authorView` (`engine/src/40_views.js`) loads `schemaform.js`, `activity_author_schemas.js`, `activity_author.js` and
    `activity_author.css` from `NOEMA_ENGINE_BASE` on the first visit; `tools/build.py` copies them into the site and inlines them in
-   the bundle (scripts after `packcheck.js`, the CSS in the bundle's style).
+   the bundle (scripts after `build/app.js`, which has the content checks; the CSS in the bundle's style).
 2. **Router**: `#/author` in the classic `route()` and in the shell (`ENGINE_ROUTES`), drawn with
    `shellChrome({ sub: true, crumbs: [[tE('engine.author.title')]] })`; leaving the route destroys the page (`NoemaActivityAuthor.current`).
    The way in: subject ⋮ › Create an activity (`engine.author.create`, line icon `wrench`, `engine.author.createSub` under it).

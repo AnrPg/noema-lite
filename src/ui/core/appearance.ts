@@ -23,7 +23,7 @@ export interface Appearance {
   readonly motion: Motion;
 }
 
-/** the character a learner who has not chosen sees (engine/themes.js DEFAULT) */
+/** the character a learner who has not chosen sees (src/features/shell/domain/characters.ts DEFAULT_CHARACTER) */
 export const DEFAULT_CHARACTER: CharacterId = 'hedge';
 export const DEFAULT_APPEARANCE: Appearance = { scheme: 'system', character: DEFAULT_CHARACTER, motion: 'system' };
 
