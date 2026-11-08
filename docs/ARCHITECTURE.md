@@ -364,6 +364,33 @@ to merge into the app's.
   browser suites (`e2e`, `socratic`, `visual`, `visual_pack`, `thinking_types`, `sources`, `bridge`, `shell`), which look
   in through `NoemaCore.studyUi.current()` (`app`, `exerciseCard`, `inspect`).
 
+### 6.5 The tutor, its conversations and its threads (phase 3)
+
+The mascot's help in lessons and exercises is `src/features/tutor` (formerly `engine/src/20_ai.js`, `60_convos.js`,
+`65_threads.js`):
+
+- **Domain** (pure): `domain/prompts.ts` (the modes, the task of each button, the course context, the reply language,
+  the one-shot jobs' prompts and schemas), `domain/threads.ts` (Socratic elicitation threads: budgets, the hidden
+  `<noema-state>` control line, closure), `domain/conversation.ts` (the in-memory shape ↔ the canonical
+  `noema.conversation/v1` record, titles, the Markdown export, origins, other apps' modes).
+- **Use cases**: `application/tutor.ts` `TutorSession` (one per open subject: the drawer's state, a turn streamed over
+  the AI port, saving, history, resume, rename, delete, export) and `application/jobs.ts` `TutorJobs` (grading, a new
+  question, a drill; each saved as a conversation too). Their ports: `AI` (`ports/ai.ts`) and `ConversationStore`
+  (`ports/conversations.ts`).
+- **Adapters**: the Gemini key (`adapters/gemini`, with the model list and the 404 re-detect in the composition), a
+  Claude key on this device (`adapters/claude`), else the copy fallback (`adapters/local/copy-prompt.ts`: nothing is
+  sent; the drawer offers the whole prompt to copy). The store is `adapters/browser/conversations.ts` over
+  `engine/convos.js` (IndexedDB, the backup folder, cloud sync and the search keep reading it; the record shape did not
+  change, so nothing is migrated).
+- **Screens** (Lit, light DOM, the classes the CSS and suites know): `ui/panel.ts` (the drawer, its thread tracker and
+  history), `ui/conversations.ts` (Me › Conversations, the frame's window), `ui/explain.ts` (💡).
+- **Composition**: the drawer is used only with a subject open, so it is part of the lazy study piece
+  (`build/study.js`, which carries its own copy of Lit for it; the study pages stay typed DOM):
+  `NoemaCore.studyUi.tutor(host)` (`src/composition/tutor.ts`), mounted by `engine/src/40_views.js` `tutorHost()`
+  before the study area, which gets its `TutorPort` and `AiPort` from it. Me › Conversations is in `build/ui.js`
+  (`src/composition/conversations-window.ts`: `NoemaShell.convos` / `goConvo`). `window.NoemaTutor` gives the mounted
+  tutor (`current()`: `session`, `ai`, `port`, …) and its markdown (`md`); the browser suites look in through it.
+
 ## 7. Patterns
 
 | Pattern | Where |
