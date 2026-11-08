@@ -243,19 +243,23 @@ export interface StudySettings {
   [k: string]: unknown;
 }
 
-/** The learner's progress in the open subject (the engine's state record of it). */
+/** The learner's progress in the open subject: the fold of the account's learning log (read only: a change is an event, StudyHost.learn). */
 export interface StudyState {
-  xp: number;
-  read: Record<string, boolean>;
-  res: Record<string, AnswerRecord>;
-  pb: Record<string, unknown>;
-  fc: Record<string, unknown>;
-  boss: Record<string, boolean>;
-  last: string | null;
-  flags?: Record<string, { why: string; note: string; t: number }>;
-  bestLightning?: number;
-  seenSrc?: Record<string, boolean>;
-  nodeDone?: number;
-  settings: StudySettings;
-  [k: string]: unknown;
+  readonly xp: number;
+  readonly read: Readonly<Record<string, boolean>>;
+  readonly res: Readonly<Record<string, Readonly<AnswerRecord>>>;
+  readonly pb: Readonly<Record<string, unknown>>;
+  readonly fc: Readonly<Record<string, unknown>>;
+  readonly boss: Readonly<Record<string, boolean>>;
+  readonly last: string | null;
+  readonly lastChapter?: string | null;
+  /** chapters whose every section was read */
+  readonly chapters?: Readonly<Record<string, boolean>>;
+  readonly flags?: Readonly<Record<string, { readonly why: string; readonly note?: string; readonly t?: number }>>;
+  readonly bestLightning?: number;
+  readonly seenSrc?: Readonly<Record<string, boolean>>;
+  readonly nodeDone?: number | null;
+  /** the page's copy of the settings (a:settings and this subject's): the only part a screen may change */
+  readonly settings: StudySettings;
+  readonly [k: string]: unknown;
 }

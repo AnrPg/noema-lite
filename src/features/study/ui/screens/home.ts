@@ -142,10 +142,7 @@ export function resetProgress(app: StudyApp): void {
   void app.host.frame.confirm(app.t('engine.home.resetConfirm', { title })).then(async yes => {
     if (!yes) return;
     await app.host.restorePoint(app.t('engine.home.resetPoint', { title }));
-    const S = app.state as unknown as Record<string, unknown>;
-    const settings = app.state.settings;
-    for (const k of Object.keys(S)) Reflect.deleteProperty(S, k);
-    Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: app.clock.now(), settings });
+    app.host.learn('subject.reset', null);
     app.host.flush();
     app.rerender();
   });

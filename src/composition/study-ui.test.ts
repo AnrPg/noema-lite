@@ -39,6 +39,8 @@ const chapter = (n: number): Chapter => ({
 interface Fake {
   host: StudyHost & { readonly tutor: TutorPort; readonly ai: AiPort };
   state: StudyState;
+  /** the events the pages recorded (type and item) */
+  events: string[];
   xp: number[];
   followed: Course[];
   lock: { missing: readonly string[] } | null;
@@ -48,17 +50,22 @@ interface Fake {
 function fake(): Fake {
   const main = document.createElement('main');
   document.body.append(main);
-  const state: StudyState = {
-    xp: 0,
-    read: {},
-    res: {},
-    pb: {},
-    fc: {},
-    boss: {},
-    last: null,
-    settings: { goal: 50, chunk: false, sound: false },
+  // a small fold of the events the tests look at (the real one: src/features/study/domain/events/projection.ts)
+  const res: Record<string, { n: number; ok: number }> = {},
+    read: Record<string, boolean> = {},
+    fc: Record<string, unknown> = {};
+  const state: StudyState = { xp: 0, read, res, pb: {}, fc, boss: {}, last: null, settings: { goal: 50, chunk: false, sound: false } };
+  const f: Fake = { state, events: [], xp: [], followed: [], lock: null, level: null, host: null as never };
+  const learn: StudyHost['learn'] = (type, item, data = {}) => {
+    f.events.push(`${type}:${item ?? ''}`);
+    if (type === 'answer.given' && item) {
+      const r = (res[item] ??= { n: 0, ok: 0 });
+      r.n++;
+      if (data['ok']) r.ok++;
+    }
+    if (type === 'section.read' && item) read[item] = true;
+    if (type === 'card.reviewed' && item) fc[item] = { rating: data['rating'] };
   };
-  const f: Fake = { state, xp: [], followed: [], lock: null, level: null, host: null as never };
   const noop = (): void => undefined;
   f.host = {
     subject: { id: 'subj', title: 'Physics' },
@@ -73,6 +80,7 @@ function fake(): Fake {
       chapters: {},
     },
     state,
+    learn,
     save: noop,
     flush: noop,
     addXP: n => {
@@ -254,13 +262,16 @@ test('the source filter: only one book’s chapters, the engine follows, and bac
   assert.equal(ui.app.course.chapters.length, 2);
 });
 
-test('the words for the engine: an exercise and a section as text for the AI; a card rated elsewhere', () => {
+test('the words for the engine: an exercise and a section as text for the AI; progress is recorded as events', () => {
   const e = f.host.chapters[0]?.exercises[0];
   assert.ok(e);
   assert.match(ui.exerciseText(e), /Exercise \(mcq\): Question c1-e1/);
   const sec = f.host.chapters[0]?.sections[0];
   assert.ok(sec);
   assert.match(ui.sectionText(sec), /## Section 1\.1\n[\s\S]*Theory of chapter 1/);
-  ui.rateCard('c1-f1', 1, clock.now());
-  assert.ok(f.state.fc['c1-f1'], 'the card has its FSRS memory');
+  ui.show('#/s/c1-s1');
+  assert.ok(
+    f.events.includes('section.opened:c1-s1') && f.events.includes('section.read:c1-s1'),
+    'opening and reading a section are events',
+  );
 });

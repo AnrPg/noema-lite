@@ -19,7 +19,7 @@ import {
 } from '../domain/course.ts';
 import { atLevel, currentLevel, levelOf, offersLevelFilter } from '../domain/my-level.ts';
 import type { AnswerRecord, Chapter, Drill, Exercise, Flashcard } from '../domain/pack.ts';
-import { cardMemoryOf, checkParameters, masteryBox, newCard, scheduler, type CardMemory, type Rating } from '../domain/fsrs.ts';
+import { cardMemoryOf, masteryBox } from '../domain/fsrs.ts';
 import {
   cardQueue,
   chapterProgress,
@@ -178,15 +178,13 @@ export class StudyApp {
     return newSources(this.course.sources, this.state.seenSrc);
   }
   markSeen(ids?: readonly string[]): void {
-    const seen = (this.state.seenSrc ??= {});
-    for (const id of ids ?? this.course.sources.map(s => s.id)) seen[id] = true;
-    this.host.save();
+    for (const id of ids ?? this.course.sources.map(s => s.id))
+      if (!this.state.seenSrc?.[id]) this.host.learn('source.seen', id, { seen: true });
     this.course = this.#build();
   }
   /** a source shown as new again */
   markUnseen(id: string): void {
-    if (this.state.seenSrc) Reflect.deleteProperty(this.state.seenSrc, id);
-    this.host.save();
+    this.host.learn('source.seen', id, { seen: false });
     this.course = this.#build();
   }
   /** the source filter: the ids to show (null: everything) */
@@ -213,8 +211,7 @@ export class StudyApp {
     const { sr: read, ex: solved } = this.courseProgress();
     const done = st.mastered || (read >= 0.999 && solved >= st.pass);
     if (done && !this.state.nodeDone) {
-      this.state.nodeDone = this.clock.now();
-      this.host.save();
+      this.host.learn('subject.finished', null);
       setTimeout(() => {
         this.host.feedback.big('node');
       }, 600);
@@ -240,24 +237,14 @@ export class StudyApp {
   cards(chapters: readonly Chapter[] = this.course.chapters): CardItem[] {
     return chapters.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key ?? f.id ?? `${c.id}#${String(i)}`, chapter: c })));
   }
-  /** one answer, kept with how sure the learner was */
-  record(ex: Exercise, ok: boolean, conf: AnswerRecord['conf'] | null = null): void {
-    const r: AnswerRecord = this.state.res[ex.id] ?? { n: 0, ok: 0 };
-    r.n++;
-    if (ok) r.ok++;
-    r.last = ok;
-    r.t = this.clock.now();
-    if (conf) r.conf = conf;
-    else delete r.conf;
-    this.state.res[ex.id] = r;
-    this.host.save();
+  /** one answer, kept with how sure the learner was (an answer.given event: the log folds state.res) */
+  record(ex: Exercise, ok: boolean, conf: AnswerRecord['conf'] | null = null, firstTry = true): void {
+    this.host.learn('answer.given', ex.id, { ok, firstTry, ...(conf ? { conf } : {}) });
   }
   /** XP for something the learner did, with the character's reaction to a goal or a new level */
   xp(n: number, at: Element | null = null): void {
     if (n <= 0) return;
-    this.state.xp += n;
     const crossed = this.host.addXP(n);
-    this.host.save();
     this.host.feedback.xpFloat(n, at);
     if (crossed.goal) {
       if (this.host.feedback.reacts) this.host.feedback.big('goal');
@@ -267,13 +254,6 @@ export class StudyApp {
   }
 
   /* ---------- cards and drills: FSRS-6 (domain/fsrs.ts) ---------- */
-  /** a card's or a drill's memory after a review (the learner's own parameters once fitted) */
-  review(raw: unknown, rating: Rating, at = this.clock.now()): CardMemory {
-    const f = this.state.settings.fsrs ?? null;
-    const p = f?.parameters ? checkParameters(f.parameters) : null;
-    const s = scheduler({ ...(p?.ok ? { parameters: p.value } : {}), ...(f?.retention ? { retention: f.retention } : {}) });
-    return s.review(cardMemoryOf(raw) ?? newCard(at), rating, at);
-  }
   deck<C extends { readonly key: string }>(cards: readonly C[], o: { readonly all?: boolean } = {}): CardQueue<C> {
     return cardQueue(cards, this.state.fc, this.clock.today(), { random: Math.random, ...(o.all ? { all: true } : {}) });
   }
@@ -344,9 +324,13 @@ export class StudyApp {
   startRound(list: readonly Exercise[], o: RoundOptions = {}): void {
     const pool = this.onlyMyLevel && !o.keepOrder ? this.atMyLevel(list) : list;
     const ordered = (o.keepOrder ? [...pool] : roundOrder(pool.length ? pool : list, this.state.res, Math.random)).slice(0, o.count ?? 10);
-    const m = roundMachine<Exercise>(ordered, { boss: o.boss ?? null }, {
-      sibling: (ex, round) => siblingOf(ex, round, this.course.exercises, Math.random, e => this.course.chapterOf(e)),
-    });
+    const m = roundMachine<Exercise>(
+      ordered,
+      { boss: o.boss ?? null },
+      {
+        sibling: (ex, round) => siblingOf(ex, round, this.course.exercises, Math.random, e => this.course.chapterOf(e)),
+      },
+    );
     this.round = {
       actor: startRound(m, () => this.clock.now()),
       title: o.title ?? this.t('engine.run.practice'),

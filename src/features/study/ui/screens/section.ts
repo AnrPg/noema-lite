@@ -400,8 +400,7 @@ export function sectionView(app: StudyApp, sid: string, bid?: string): void {
   const bids = app.host.blockIds(s.blocks); // stable ids: #/s/<section>/<block> opens exactly that block
   setAccent(document.body, c);
   const S = app.state;
-  S.last = sid;
-  app.host.save();
+  if (S.last !== sid) app.host.learn('section.opened', sid);
   app.tutor.setContext({ kind: 'section', id: sid });
   const j = app.course.sectionIndex(s);
   let freshSlot: HTMLElement | null = null;
@@ -534,14 +533,15 @@ export function sectionView(app: StudyApp, sid: string, bid?: string): void {
       );
     } else {
       if (!S.read[sid]) {
-        S.read[sid] = true;
-        app.host.save();
+        app.host.learn('section.read', sid);
         app.xp(5, pl);
         // the last section of the chapter
-        if (c.sections.every(x => S.read[x.id]))
+        if (c.sections.every(x => S.read[x.id])) {
+          if (!S.chapters?.[c.id]) app.host.learn('chapter.finished', c.id);
           setTimeout(() => {
             app.host.feedback.big('chapter');
           }, 500);
+        }
       }
       const t = sectionTail(app, s, c, prev, next);
       freshSlot = t.querySelector<HTMLElement>('.freshslot');

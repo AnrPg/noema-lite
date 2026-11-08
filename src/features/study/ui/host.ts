@@ -11,6 +11,24 @@ import type { Chapter, Exercise, Media, StudyState, SubjectInfo } from '../domai
 import type { SourceInfo, SourceRegistry } from '../domain/course.ts';
 import type { Widget, WidgetApi } from './exercise/widget.ts';
 
+/** The learning events the study pages record (the log's types: src/features/study/domain/events/types.ts). */
+export type StudyEventType =
+  | 'answer.given'
+  | 'xp.earned'
+  | 'section.opened'
+  | 'section.read'
+  | 'chapter.opened'
+  | 'chapter.finished'
+  | 'subject.finished'
+  | 'subject.reset'
+  | 'boss.won'
+  | 'drill.scored'
+  | 'card.reviewed'
+  | 'playbook.reviewed'
+  | 'exercise.flagged'
+  | 'exercise.unflagged'
+  | 'source.seen';
+
 /** One entry of a ⋮ menu or a Practice ▾ list ('-': a line). */
 export type MenuEntry =
   | '-'
@@ -176,8 +194,10 @@ export interface StudyHost {
   readonly chapters: readonly Chapter[];
   readonly media: Readonly<Record<string, Media>>;
   readonly sources: SourceRegistry | null;
-  /** the learner's progress in this subject (a live record: save() writes it) */
+  /** the learner's progress in this subject: the fold of the learning log, live (an event recorded folds in at once) */
   readonly state: StudyState;
+  /** records one learning event of this subject in the account's log (src/features/study/domain/events) */
+  learn(type: StudyEventType, item: string | null, data?: Readonly<Record<string, unknown>>, more?: { readonly day?: string }): void;
   save(): void;
   flush(): void;
   /** XP for the subject and the account (the day's goal and the XP level follow) → what it crossed */

@@ -15,7 +15,7 @@ function view(...kids) { const m = main(); m.innerHTML = ''; m.dataset.page = '@
 const go = hash => { location.hash = hash; };
 
 /* ---------- the study area's host (src/features/study/ui/host.ts) ---------- */
-let STUDY = null;   // NoemaCore.studyUi.mount(studyHost()) at boot: { app, show(hash), segments, figure, figureText, exerciseText, rateCard }
+let STUDY = null;   // NoemaCore.studyUi.mount(studyHost()) at boot: { app, show(hash), segments, figure, figureText, exerciseText, inspect }
 const MEDIA = Noema.pack?.media || {};   // the pack's pictures by id (the study area's media; 32_activities.js)
 const FULL_COURSE = COURSE.slice();   // the pack's chapters before the source filter (15_inbox.js, 60_convos.js, 85_locate.js)
 FULL_COURSE.forEach(c => c.flashcards.forEach((f, k) => { f._key = f.id || f._key || c.id + '#' + k; }));   // SRS keys: the card's id (packs without ids: its position), independent of filtering
@@ -115,10 +115,11 @@ function studyHost() {
     subject: SUBJ, account: { id: ACCOUNT.id, name: ACCOUNT.name || '', kind: ACCOUNT.kind || 'local' },
     chapters: FULL_COURSE, media: MEDIA, sources: window.SOURCES || null,
     state: S, save, flush: () => { flushSave(); renderTopStats(); },
+    learn: (type, item, data, more) => { learnt(type, item, data || {}, more || {}); },   // the learning log (10_core.js): S folds it in
     addXP(n) {
-      const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(Noema.stats.get().xp || 0).lv : 0;
-      Noema.stats.add(n); renderTopStats();
-      return { goal: before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal, level: !!LV && LV(Noema.stats.get().xp || 0).lv > lv0 };
+      const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(LOG.stats().xp || 0).lv : 0;
+      learnt('xp.earned', null, { amount: Math.max(1, Math.round(n)) }); renderTopStats();
+      return { goal: before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal, level: !!LV && LV(LOG.stats().xp || 0).lv > lv0 };
     },
     get goal() { return S.settings.goal; },
     courseChanged: followCourse,

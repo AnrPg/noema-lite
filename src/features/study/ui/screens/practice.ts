@@ -149,8 +149,7 @@ function runSummary(app: StudyApp): void {
   };
   if (c.boss !== null) {
     if (r.bossWon) {
-      app.state.boss[c.boss] = true;
-      app.host.save();
+      app.host.learn('boss.won', c.boss);
       big = '🏆';
       msg = app.t('engine.run.bossWon');
       big2('bosswin');
@@ -636,10 +635,7 @@ export function playLightning(app: StudyApp, chid: string): void {
     over = true;
     app.xp(score * 3, clock);
     const pb = score > (app.state.bestLightning ?? 0);
-    if (pb) {
-      app.state.bestLightning = score;
-      app.host.save();
-    }
+    app.host.learn('drill.scored', null, { kind: 'lightning', score });
     if (!wrong.length && score >= 5 && app.host.frame.framed && app.host.feedback.reacts) app.host.feedback.big('timerwin');
     else if (score >= 8 || pb) app.host.feedback.confetti();
     app.host.feedback.beep('win');

@@ -20,7 +20,11 @@ test('a round: one answer per exercise, NEXT moves on, the end is the summary', 
   assert.equal(s.snapshot.state, 'asking', 'NEXT before an answer does nothing');
   s.send({ type: 'ANSWER', ok: true });
   s.send({ type: 'ANSWER', ok: false });
-  assert.deepEqual([s.snapshot.state, s.snapshot.context.last, s.snapshot.context.ok], ['answered', true, 1], 'a second answer to the same exercise does nothing');
+  assert.deepEqual(
+    [s.snapshot.state, s.snapshot.context.last, s.snapshot.context.ok],
+    ['answered', true, 1],
+    'a second answer to the same exercise does nothing',
+  );
   s.send({ type: 'NEXT' });
   s.send({ type: 'ANSWER', ok: false });
   s.send({ type: 'NEXT' });

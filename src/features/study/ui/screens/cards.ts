@@ -3,7 +3,7 @@
  * (domain/fsrs.ts). state.fc and state.pb hold each card's and drill's memory; an entry still in the old Leitner shape
  * is read as the memory it stands for and replaced at its next review.
  */
-import { EASY, GOOD, AGAIN, HARD, type Rating } from '../../domain/fsrs.ts';
+import { cardRating, playbookRating } from '../../domain/events/types.ts';
 import type { Drill, Exercise } from '../../domain/pack.ts';
 import type { CardItem, StudyApp } from '../app.ts';
 import { append, h } from '../dom.ts';
@@ -12,13 +12,9 @@ import { askButton, codeEl, setAccent } from '../parts.ts';
 import { fmt, guessLang } from '../text.ts';
 import { backBtn, view } from '../view.ts';
 
-/** the card buttons (0 again, 1 good, 2 easy) as FSRS ratings */
-const CARD_RATING: readonly Rating[] = [AGAIN, GOOD, EASY];
-
-/** A card rated (0 again, 1 good, 2 easy) at a time: here, or an answer from the 📥 inbox (another app, later). */
-export function rateCard(app: StudyApp, key: string, q: 0 | 1 | 2, at = app.clock.now()): void {
-  app.state.fc[key] = app.review(app.state.fc[key], CARD_RATING[q] ?? GOOD, at);
-  app.host.save();
+/** A card rated (0 again, 1 good, 2 easy): a card.reviewed event with its FSRS rating (the log folds state.fc). */
+export function rateCard(app: StudyApp, key: string, q: 0 | 1 | 2): void {
+  app.host.learn('card.reviewed', key, { rating: cardRating(q) });
 }
 
 export function cardsView(app: StudyApp, key?: string): void {
@@ -418,8 +414,7 @@ export function drillView(app: StudyApp, id: string): void {
               onclick: () => {
                 const ticked = checks.filter(x => x.checked).length / Math.max(1, checks.length);
                 // blank → again, partly → hard, nailed → easy with most of the checklist ticked, else good
-                app.state.pb[d.id] = app.review(app.state.pb[d.id], q === 0 ? AGAIN : q === 1 ? HARD : ticked >= 0.7 ? EASY : GOOD);
-                app.host.save();
+                app.host.learn('playbook.reviewed', d.id, { rating: playbookRating(q, ticked), score: ticked });
                 app.xp(3 + Math.round(ticked * 7), stage);
                 if (q === 2) app.host.feedback.confetti(70);
                 const others = app.course.chapters.flatMap(x => x.debug).filter(x => x.id !== d.id && app.drillDue(x));

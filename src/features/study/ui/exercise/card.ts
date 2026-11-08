@@ -385,8 +385,8 @@ function reportButton(app: StudyApp, ex: Exercise): HTMLButtonElement {
                       replay(optsBox, 'shake');
                       return;
                     }
-                    (app.state.flags ??= {})[ex.id] = { why, note: note.value.trim().slice(0, 2000), t: app.clock.now() };
-                    app.host.save();
+                    const nt = note.value.trim().slice(0, 2000);
+                    app.host.learn('exercise.flagged', ex.id, { why, ...(nt ? { note: nt } : {}) });
                     b.classList.add('on');
                     b.title = app.t('engine.ex.reported');
                     close();

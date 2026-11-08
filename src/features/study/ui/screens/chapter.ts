@@ -92,6 +92,7 @@ export function chapterView(app: StudyApp, id: string, tab0?: string, focus?: st
     return;
   }
   setAccent(document.body, c);
+  if (app.state.lastChapter !== id) app.host.learn('chapter.opened', id);
   app.tutor.setContext({ kind: 'chapter', id });
   const tab = tab0 ?? app.chapterTab.get(id) ?? 'learn';
   app.chapterTab.set(id, tab);

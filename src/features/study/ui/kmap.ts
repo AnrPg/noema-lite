@@ -201,10 +201,9 @@ export function reportedView(app: StudyApp): void {
                 class: 'btn ghost small',
                 type: 'button',
                 onclick: () => {
-                  Reflect.deleteProperty(flags, id);
-                  app.host.save();
+                  app.host.learn('exercise.unflagged', id);
                   close();
-                  if (Object.keys(flags).length) reportedView(app);
+                  if (Object.keys(app.state.flags ?? {}).length) reportedView(app);
                 },
               },
               app.t('engine.flags.clear'),
