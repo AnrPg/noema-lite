@@ -19,7 +19,7 @@ import {
   searchRunView,
 } from './screens/practice.ts';
 import { sectionView } from './screens/section.ts';
-import { whatsNewView } from './sources.ts';
+import { whatsNewView } from './screens/whats-new.ts';
 import { STUDY_ROUTES, type StudyRoutes } from './route-table.ts';
 
 export type StudyRoute = RouteMatch<StudyRoutes>;
