@@ -11,10 +11,11 @@ import type { Block, Chapter, Exercise, Section } from '../domain/pack.ts';
 import { exerciseCard, exerciseText, type CardElement, type CardOptions } from './exercise/card.ts';
 import { figureBlock, rCenter, vRegions, vTargets } from './exercise/visual.ts';
 import { knowledgeMap, reportedView } from './kmap.ts';
-import type { StudyHost } from './host.ts';
+import type { MenuEntry, StudyHost } from './host.ts';
 import type { AiPort, TutorPort } from './parts.ts';
 import { showStudyRoute, STUDY_SEGMENTS } from './routes.ts';
 import { rateCard } from './screens/cards.ts';
+import { subjectMenu } from './screens/home.ts';
 import { wireCopy } from './text.ts';
 
 export interface StudyUi {
@@ -39,6 +40,8 @@ export interface StudyUi {
     targets(ex: Exercise): string[];
     knowledgeMap(chapterId?: string): void;
     reported(): void;
+    /** the subject's ⋮ as it is now */
+    subjectMenu(): (MenuEntry | null)[];
   };
   /** a flashcard rated elsewhere (the inbox): 0 again, 1 good, 2 easy */
   rateCard(key: string, q: 0 | 1 | 2, at?: number): void;
@@ -82,6 +85,7 @@ export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; rea
       reported: () => {
         reportedView(app);
       },
+      subjectMenu: () => subjectMenu(app)(),
     },
     rateCard: (key, q, at) => {
       rateCard(app, key, q, at);

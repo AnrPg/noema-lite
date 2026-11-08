@@ -16,7 +16,7 @@
   const OPEN = ['new', 'seen', 'fixing'];
   // the i18n component of a catalog key's prefix (i18n/<component>/en.arb, docs/i18n.md §5.1); 'roadmap.' lives in two
   const COMPONENT = { sh: ['shell'], engine: ['engine'], vault: ['vault'], social: ['social'], roadmap: ['roadmaps', 'roadmaps-map'], lang: ['lang'], lc: ['langcore'], err: ['errors'], loader: ['loader'],
-    char: ['characters'], bridge: ['bridge'], mt: ['mt'], packs: ['packs'], email: ['email'], report: ['report'], top: ['core'], home: ['core'], ch: ['core'], nav: ['core'], view: ['core'], acc: ['core'], set: ['core'], inuse: ['core'], pick: ['core'] };
+    char: ['characters'], bridge: ['bridge'], mt: ['mt'], packs: ['packs'], email: ['email'], report: ['report'], ui: ['ui'], top: ['core'], home: ['core'], ch: ['core'], nav: ['core'], view: ['core'], acc: ['core'], set: ['core'], inuse: ['core'], pick: ['core'] };
   const componentsOf = key => COMPONENT[String(key).split('.')[0]] || ['core'];
 
   /** The files of the repository (AnrPg/noema-lite) where the reported thing is written, most likely first. */

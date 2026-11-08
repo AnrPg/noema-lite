@@ -301,11 +301,11 @@ async function wasmApp(p, ctx, E) {
 async function xapiApp(p, ctx, E) {
   console.log('— xAPI: the export');
   const E0 = E.length;
-  const item = await p.evaluate(() => { const it = subjectMenu()().find(x => x && x.label === tE('engine.xapi.export')); return it ? { label: it.label, sub: it.sub } : null; });
+  const item = await p.evaluate(() => { const it = NoemaCore.studyUi.current().inspect.subjectMenu().find(x => x && x.label === tE('engine.xapi.export')); return it ? { label: it.label, sub: it.sub } : null; });
   ok(item && /xAPI/.test(item.label) && item.sub, 'the subject\'s ⋮ menu has the quiet item "Export learning record (xAPI)" ' + JSON.stringify(item));
   // a learner reading the subject in another language: SUBJ carries its translated name (subject.i18n), the chapters stay the pack's own
   const own = await p.evaluate(() => { window.__subjTitle = SUBJ.title; SUBJ.title = 'Titre traduit (fr)'; return Noema.pack.subject.title; });
-  const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 10000 }), p.evaluate(() => subjectMenu()().find(x => x && x.label === tE('engine.xapi.export')).run())]);
+  const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 10000 }), p.evaluate(() => NoemaCore.studyUi.current().inspect.subjectMenu().find(x => x && x.label === tE('engine.xapi.export')).run())]);
   const file = JSON.parse(require('fs').readFileSync(await dl.path(), 'utf8'));
   ok(JSON.stringify(file).includes(own) && !JSON.stringify(file).includes('Titre traduit'), 'the record names the course as the pack does (its own title with its own chapters), not the translated name of the UI');
   ok(dl.suggestedFilename() === 'demo-activities.xapi.json' && file.format === 'noema.xapi-export/v1' && file.statements.length >= 5, `a JSON file is downloaded: ${dl.suggestedFilename()}, ${file.statements?.length} statements`);
@@ -314,9 +314,9 @@ async function xapiApp(p, ctx, E) {
   ok(file.statements.some(s => /passed|failed/.test(s.verb.id) && /ch01-e908/.test(s.object.id)) && file.statements.some(s => /answered/.test(s.verb.id) || /attempted/.test(s.verb.id)), 'the wasm exercise\'s result and the other attempts are in it');
   ok(await p.evaluate(f => NoemaXAPI.validateAll(f.statements).length === 0, file), 'the statements are valid xAPI 1.0.3 (NoemaXAPI.validateAll)');
   console.log('— cmi5: the course package');
-  const c5 = await p.evaluate(() => { const it = subjectMenu()().find(x => x && x.label === tE('engine.xapi.cmi5')); return it ? { sub: it.sub, icon: it.icon } : null; });
+  const c5 = await p.evaluate(() => { const it = NoemaCore.studyUi.current().inspect.subjectMenu().find(x => x && x.label === tE('engine.xapi.cmi5')); return it ? { sub: it.sub, icon: it.icon } : null; });
   ok(c5 && c5.sub && c5.icon === 'download', 'next to it, the quiet item "Course package for an LMS (cmi5)" ' + JSON.stringify(c5));
-  const [dz] = await Promise.all([p.waitForEvent('download', { timeout: 10000 }), p.evaluate(() => subjectMenu()().find(x => x && x.label === tE('engine.xapi.cmi5')).run())]);
+  const [dz] = await Promise.all([p.waitForEvent('download', { timeout: 10000 }), p.evaluate(() => NoemaCore.studyUi.current().inspect.subjectMenu().find(x => x && x.label === tE('engine.xapi.cmi5')).run())]);
   const zbytes = require('fs').readFileSync(await dz.path());
   const xml = await p.evaluate(async b64 => { const z = await JSZip.loadAsync(Uint8Array.from(atob(b64), c => c.charCodeAt(0))); return { names: Object.keys(z.files), xml: await z.file('cmi5.xml')?.async('string') }; }, zbytes.toString('base64'));
   const base = file.pack.activityBase;
