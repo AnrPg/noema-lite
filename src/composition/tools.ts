@@ -12,6 +12,7 @@ import { memoryStorage } from '../adapters/memory/storage.ts';
 import type { Clock } from '../ports/clock.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
+import { memoryLearning } from './learning.ts';
 import { CLOCK, CLOUD, COMPUTE, CONFIG, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
 
 export interface ToolsCoreOptions {
@@ -22,7 +23,10 @@ export interface ToolsCoreOptions {
 }
 
 /** Helpers append the registrations their tools need here. */
-export const TOOLS_REGISTRATIONS: readonly Registration[] = [];
+export const TOOLS_REGISTRATIONS: readonly Registration[] = [
+  // the learning log in memory (tests and tools that replay events)
+  memoryLearning,
+];
 
 export function createToolsContainer(o: ToolsCoreOptions = {}, extra: readonly Registration[] = []): Container {
   const c = new Container();

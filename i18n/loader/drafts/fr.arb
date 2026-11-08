@@ -486,6 +486,7 @@
   "loader.tr.noSubject": "Cette traduction appartient à une matière que vous n’avez pas encore ({id}). Importez d’abord la matière.",
   "loader.tr.invalid": "Cette traduction ne correspond pas à sa matière : {list}",
   "loader.storage.full": "Le stockage de cet appareil est plein : tes derniers progrès n'ont pas été enregistrés ici. Fais une sauvegarde (Moi › Données et synchro), puis retire les matières dont tu n'as plus besoin.",
+  "loader.storage.low": "Le stockage de cet appareil est presque plein ({pct} % utilisés). Fais une sauvegarde (Moi › Données et synchronisation), puis retire les matières dont tu n’as plus besoin.",
   "loader.pwa.updateReady": "Une nouvelle version est prête.",
   "loader.pwa.reload": "Recharger",
   "loader.pwa.later": "Plus tard"

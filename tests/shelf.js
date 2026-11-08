@@ -134,7 +134,10 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   ok(/now taught by your own subject — check that this step still fits/.test(await p.locator('.cm-flag').innerText()), 'the step after it is flagged (⚑ check that it still fits)');
   await p.screenshot({ path: SHOTS + '/sh3_map.png' });
   ok(!(await p.evaluate(() => Noema.shelf(Noema.account.id).then(l => l.map(s => s.id)))).includes('demo-physics'), 'it is no longer on the Shelf');
-  await p.evaluate(({ cid }) => { const acc = Noema.account.id, n = NoemaCurriculum.get(acc, cid).nodes.kinematics; const res = {}; for (let i = 0; i < n.pack.exercises; i++) res['e' + i] = { ok: 1 }; localStorage.setItem(`noema1:${acc}:s:demo-physics:state`, JSON.stringify({ read: Object.fromEntries(n.pack.sections.map(x => [x, 1])), res })); }, { cid });
+  await p.evaluate(async ({ cid }) => { const acc = Noema.account.id, n = NoemaCurriculum.get(acc, cid).nodes.kinematics, L = NoemaCore.learning;   // the learner read every section and solved every exercise
+    for (const x of n.pack.sections) L.record({ type: 'section.read', subject: 'demo-physics', item: x, data: {} });
+    for (let i = 0; i < n.pack.exercises; i++) L.record({ type: 'answer.given', subject: 'demo-physics', item: 'e' + i, data: { ok: true } });
+    await L.flush(); }, { cid });
   ok(await p.evaluate(cid => { const C = NoemaCurriculum; return C.nodeStatus(Noema.account.id, C.get(Noema.account.id, cid), 'kinematics').mastered; }, cid), 'progress in the subject is the step’s progress (all read + 80 % solved → mastered)');
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
   await p.click('.cm-panel button:has-text("Review")'); await wait(2500);

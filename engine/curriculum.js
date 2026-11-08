@@ -559,7 +559,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   /** Auto mastery from the node's pack: every section read + ≥ 80 % of its exercises solved. */
   function packMastery(acc, n) {
     if (!n.pack || n.pack.status !== 'ready') return { score: 0, read: 0, mastered: false };
-    let st = null; try { st = JSON.parse(localStorage.getItem(`noema1:${acc}:s:${n.pack.id}:state`) || 'null'); } catch (e) { }
+    const st = window.NoemaCore?.learning?.progressOf?.(acc, n.pack.id) || null;   // the learning log's fold (none outside the app)
     const secs = n.pack.sections || [], total = n.pack.exercises || 0;
     const read = secs.length ? secs.filter(s => st?.read?.[s]).length / secs.length : 0;
     const solved = total ? Object.values(st?.res || {}).filter(r => r.ok > 0).length / total : 0;

@@ -33,6 +33,8 @@ export type DocKey = string;
 export interface DocListOptions {
   /** Only keys that start with it. */
   readonly prefix?: string;
+  /** Only keys after it (it excluded). */
+  readonly after?: DocKey;
   /** At most this many entries, in key order. */
   readonly limit?: number;
 }

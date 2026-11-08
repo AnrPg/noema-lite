@@ -34,8 +34,8 @@ import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridg
 import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
+import { browserLearning, learningBridge } from './learning.ts';
 import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
-import { accountKvStore, kvRoadmapEventLog } from './roadmap-events.ts';
 import { randomId, registerSync, syncBridge } from './sync.ts';
 import {
   AI,
@@ -58,14 +58,15 @@ import {
 export const APP_REGISTRATIONS: readonly Registration[] = [
   // the engine library (src/engines): its plugins' manifests at once, each engine's code and Worker bundle when first loaded
   c => c.register(ENGINES, () => createAppEngines()),
+  // the learning log (event sourcing, src/features/study): the account's LearningLog over the app's IndexedDB, and the
+  // seams it fills: the read models' feed, the sync's event log and old progress, the Roadmap events
+  browserLearning,
   // the community features (src/features/{search,vault,social,reports}): their Supabase adapters and use cases
   ...COMMUNITY_REGISTRATIONS,
   // the study read models (src/features/study) and the search index's store (src/features/catalog)
   ...STUDY_REGISTRATIONS,
   // local-first sync (src/features/sync, docs/SYNC.md): the outbox, the settings registers, the loop and the lease
   registerSync,
-  // the Roadmap events (levels reached, restructurings) of the account, in its synced store
-  c => c.register(ROADMAP_EVENTS, r => kvRoadmapEventLog(accountKvStore(() => r.get(STORAGE).kv))),
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
@@ -74,6 +75,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: () => contracts },
   // the engine library: the activity core (engine/src/32_activities.js), the content checks, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
+  learningBridge,
   // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
   ...COMMUNITY_BRIDGE,
   // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search

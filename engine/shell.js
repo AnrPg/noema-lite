@@ -54,10 +54,10 @@ window.NoemaShell = (() => {
   const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
   const toast = (m, ms) => (N()?.toast || (x => console.log(x)))(m, ms);
 
-  /* ---------- the learner's state across subjects (read from storage; the engine owns the open subject) ---------- */
+  /* ---------- the learner's state across subjects (the learning log's fold, NoemaCore.learning; read only) ---------- */
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const jset = (k, v) => NoemaCore.storage.kv.set(k, JSON.stringify(v));   // a full storage: the core warns the learner   // the loader tells the learner
-  const stateOf = sid => jget(`noema1:${acc()}:s:${sid}:state`, null);
+  const stateOf = sid => NoemaCore.learning.progressOf(acc(), sid);
   const recentKey = () => `noema1:${acc()}:meta:recent`;
   /** The places the learner was reading, newest first (written by the engine: noteRecent). Device-local. */
   const recent = () => (jget(recentKey(), []) || []).filter(r => r && r.subj);
@@ -558,7 +558,7 @@ window.NoemaShell = (() => {
       window.NoemaXAPI ? { label: XL('cmi5'), sub: XL('cmi5Sub'), icon: 'download', run: () => exportRecord(s, 'cmi5') } : null,
       hide ? { label: L(hidden ? 'subjShow' : 'subjHide'), icon: 'eye', run: () => { const l = new Set(settings().hiddenSubjects || []); hidden ? l.delete(s.id) : l.add(s.id); TH().putSettings({ hiddenSubjects: [...l] }); subjCache = null; refresh(); } } : null];
   }
-  /** a subject's ⋮ › the learning record (xAPI, from the subject's saved state) or the course package for an LMS (cmi5) — the same files
+  /** a subject's ⋮ › the learning record (xAPI, from the learning log) or the course package for an LMS (cmi5) — the same files
       as the subject's own ⋮ in the engine (NoemaXAPI.subjectRecord / subjectCmi5, engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) */
   async function exportRecord(s, kind) {
     try {
@@ -566,7 +566,7 @@ window.NoemaShell = (() => {
       let name, blob;
       if (kind === 'cmi5') { const r = NoemaXAPI.subjectCmi5({ pack: subj, chapters, site }); name = r.name; blob = await NoemaXAPI.zip(r.files); }
       else {
-        const st = stateOf(s.id) || {}, r = NoemaXAPI.subjectRecord({ att: st.att, res: st.res, pack: subj, chapters, accountId: acc(), site, now: Date.now() });
+        const { attempts, answers } = await NoemaCore.learning.xapi(s.id), r = NoemaXAPI.subjectRecord({ attempts, answers, pack: subj, chapters, accountId: acc(), site, now: Date.now() });
         if (!r) { toast(XL('none'), 3500); return; }
         name = r.name; blob = new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' });
       }

@@ -9,6 +9,7 @@ import { NoemaError } from '../../kernel/errors.ts';
 import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../kernel/result.ts';
 import { textOf } from '../../kernel/text.ts';
 import type { Unsubscribe } from '../../ports/common.ts';
+import { EVENT_COLLECTIONS } from '../local/event-store.ts';
 import {
   isQuotaError,
   type DocKey,
@@ -38,7 +39,7 @@ export interface StorageManagerLike {
 }
 
 export interface BrowserStorageOptions {
-  /** The IndexedDB database (default: the app's own, "noema-lite" version 2). */
+  /** The IndexedDB database (default: the app's own, "noema-lite" version 3). */
   readonly dbName?: string;
   readonly dbVersion?: number;
   /** Its object stores (created when missing). */
@@ -49,12 +50,14 @@ export interface BrowserStorageOptions {
   readonly now?: () => number;
 }
 
-/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once).
-    Version 2 added `sync` (the outbox, the settings registers and the sync cursors: src/features/sync). */
+/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once; also
+    engine/lang/95_claude.js). Version 2 added `sync` (the outbox, the settings registers and the sync cursors:
+    src/features/sync); version 3 the learning log (log.events, log.ids, log.snapshots, log.meta:
+    src/adapters/local/event-store.ts), so an event and its place in the outbox are written in one transaction. */
 export const APP_DB = Object.freeze({
   name: 'noema-lite',
-  version: 2,
-  collections: ['packs', 'handles', 'restore', 'convos', 'sync'] as const,
+  version: 3,
+  collections: ['packs', 'handles', 'restore', 'convos', 'sync', ...EVENT_COLLECTIONS] as const,
 });
 
 const unavailable = (what: string, cause?: unknown): NoemaError =>
@@ -260,7 +263,9 @@ export function idbDocuments(o: IdbOptions): DocumentStore {
       },
       list: <T>(c: string, lo: DocListOptions = {}) =>
         new Promise<Array<readonly [DocKey, T]>>((resolve, reject) => {
-          const range = lo.prefix ? IDBKeyRange.bound(lo.prefix, lo.prefix + '￿') : undefined;
+          // a key after `after` is at least after + U+0000 (the lowest code unit): the range needs no open bound
+          const lower = lo.after !== undefined && lo.after + '\u0000' > (lo.prefix ?? '') ? lo.after + '\u0000' : lo.prefix;
+          const range = lower !== undefined ? IDBKeyRange.bound(lower, (lo.prefix ?? '') + '\uffff') : undefined;
           const out: Array<readonly [DocKey, T]> = [];
           const cur = store(c).openCursor(range);
           cur.onsuccess = () => {

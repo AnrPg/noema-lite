@@ -69,7 +69,7 @@ export const ENTRIES = [
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
-  { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
+  { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5632 },   // the contracts + the engine library
   { name: 'ui', in: 'src/composition/ui.ts', kind: 'dev', out: 'ui.js', budgetKB: 256 },   // Lit + the kit + its demo; loaded only on #/ui-kit
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
   { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + engine/src/38, 44, 45
