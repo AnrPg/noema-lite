@@ -323,9 +323,12 @@ window.NoemaShell = (() => {
 
   /* ======================= routing ======================= */
   const PAGES = {};
+  let routedHash = null;
   function route() {
     if (!mounted) return;
-    closePops();
+    // a menu closes when the learner goes elsewhere, not when the same page is drawn again (e.g. the search index got ready)
+    if (location.hash !== routedHash) closePops();
+    routedHash = location.hash;
     const p = (location.hash || '#/').replace(/^#\/?/, '').split('?')[0].split('/').map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } });   // #/search?q=…: the page's own settings after ?
     const k = p[0] || '';
     // <html lang>: the subject's language on its own pages (its text), the menus' language everywhere else
