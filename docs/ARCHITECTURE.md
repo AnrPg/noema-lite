@@ -168,8 +168,8 @@ NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSI
 
 - **Grading** (`src/features/study/domain/grading`): every exercise type is graded by one pure function from the
   exercise and the learner's answer in the exercise's own indices (the answer shapes are in the header of `grade.ts`).
-  The old renderers (`engine/src/30_exercises.js`, `31_types.js`, `32_activities.js`, `35_visual.js`) only collect the
-  answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
+  The answer areas (`src/features/study/ui/exercise/*.ts`; the `sim` type's in `engine/src/32_activities.js`) only
+  collect the answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
   `grading.test.ts` (every exercise of the library and the fixtures) prove the results are the old ones.
 - **FSRS-6** (`fsrs.ts`, `fsrs-optimizer.ts`): the scheduler of py-fsrs 6 (its reference values in the tests) and an
   optimiser that fits the 21 parameters to the learner's reviews (Adam on the log loss, in the Worker:
@@ -269,6 +269,31 @@ The rules:
   start screen never loads it. Phase 3's shell makes it a `page` entry and its root the app's root.
 - **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-root.test.ts`, and in a
   browser `tests/ui_kit.js` (layout, targets, focus, form association, right to left) and `tests/a11y.js` (axe).
+
+### 6.4 The study area's pages (phase 3, area 2)
+
+The subject's pages are `src/features/study/ui` (element `feature-ui` in `eslint.config.js`: the kit, the ports, the
+feature's domain, never an adapter): home (`#/subject`), chapter (`#/ch/<id>[/<tab>[/<focus>]]`), section (`#/s/<id>`),
+practice and its round (`#/practice/<id>`, `#/run`, `#/srun`), boss, lightning, cards and drills, the Mistakes gym,
+what's new, one exercise (`#/ex/<id>`), the sources deck and the file viewer's entry points, the knowledge map and the
+reported exercises. The route table is `ui/routes.ts` (`STUDY_ROUTES`, typed with `defineRoutes`), one file for the lead
+to merge into the app's.
+
+- **One adapter.** Every screen reaches the world through `StudyHost` (`ui/host.ts`): the progress record, the frame,
+  the character's reactions, the Roadmap, activities, 文A, the search's rounds, the source files, the tutor and the AI.
+  Today the older page implements it (`engine/src/40_views.js` `studyHost()`) and mounts the area with
+  `NoemaCore.studyUi.mount(host)` (`src/composition/study-ui.ts`); the shell's root will hand in its own.
+- **A round is a statechart.** `domain/session.ts` (`roundMachine`: asking → answered → summary, the boss's lives, a
+  sibling exercise after a mistake) on `kernel/statechart.ts`; the run page only sends `ANSWER` and `NEXT`.
+- **Only my level.** A chip in the round's filters and the mixed round (`app.onlyMyLevel`, saved in
+  `settings.onlyMyLevel`): offered when the subject has a level ladder (the Roadmap's or the pack's) with exercises at
+  several levels; it keeps the exercises at the level the read models say the learner reached.
+- **DOM, not Lit.** The pages are typed DOM (`ui/dom.ts` `h()`) drawing the classes the existing CSS and suites know;
+  the bundle stays free of Lit (it is `build/ui.js`'s). With the new frame (`frame.framed`) the frame draws the crumbs
+  and ⋮; without it (an old index.html) each page keeps its back button and tiles.
+- **Tests.** `src/composition/study-ui.test.ts` (the pages over a fake host in happy-dom), the domain's tests, and the
+  browser suites (`e2e`, `socratic`, `visual`, `visual_pack`, `thinking_types`, `sources`, `bridge`, `shell`), which look
+  in through `NoemaCore.studyUi.current()` (`app`, `exerciseCard`, `inspect`).
 
 ## 7. Patterns
 

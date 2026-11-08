@@ -39,7 +39,7 @@
       if (k.locale && k.locale !== 'en') add(`i18n/${c}/${k.locale}.arb`, `the ${k.locale} translation of ${k.key} (Weblate; Claude’s drafts: i18n/${c}/drafts/${k.locale}.arb)`);
     }
     const page = loc.route?.page;
-    const CODE = { subject: 'engine/src/40_views.js', ch: 'engine/src/40_views.js', s: 'engine/src/40_views.js', ex: 'engine/src/30_exercises.js', run: 'engine/src/40_views.js', practice: 'engine/src/40_views.js', cards: 'engine/src/40_views.js', drill: 'engine/src/40_views.js',
+    const CODE = { subject: 'src/features/study/ui/screens/home.ts', ch: 'src/features/study/ui/screens/chapter.ts', s: 'src/features/study/ui/screens/section.ts', ex: 'src/features/study/ui/exercise/card.ts', run: 'src/features/study/ui/screens/practice.ts', practice: 'src/features/study/ui/screens/chapter.ts', cards: 'src/features/study/ui/screens/cards.ts', drill: 'src/features/study/ui/screens/cards.ts',
       lang: 'engine/lang/*.js (→ engine/langui.js)', vault: 'engine/vault.js', people: 'engine/social.js', chat: 'engine/social.js', group: 'engine/social.js', search: 'engine/search.js', map: 'engine/curmap.js', learn: 'engine/shell.js', '': 'engine/shell.js', me: 'engine/shell.js', admin: 'engine/report.js' };
     if (['display', 'broken'].includes(loc.kind) || !out.length) add(CODE[page] || 'engine/shell.js', 'the code that draws this screen');
     return out;

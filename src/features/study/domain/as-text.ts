@@ -34,7 +34,7 @@ export function figureAsText(media: MediaMap, b: Block): string {
   return `[FIGURE] ${m?.alt ?? b.media ?? ''}${cap ? ` — ${cap}` : ''}${regs.length ? `\nParts: ${regs.map(r => (r.label ?? '') + (r.note ? `: ${r.note}` : '')).join('; ')}` : ''}`;
 }
 
-/** the critical-thinking types (31_types) */
+/** the critical-thinking types (ui/exercise/thinking.ts) */
 export function typeAsText(ex: Exercise): string {
   switch (ex.type) {
     case 'flaw': {

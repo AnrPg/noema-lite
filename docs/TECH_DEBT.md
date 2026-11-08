@@ -41,7 +41,7 @@ privacy — never upload without consent), transcripts for accessibility and for
 
 ### TD-3 · Keyboard-only answering for picture exercises — ✅ closed 2026-10-07
 Every picture exercise now works without a mouse or touch screen (`vStage().keyboard()` in
-`engine/src/35_visual.js`):
+`src/features/study/ui/exercise/visual.ts`):
 - **Tab** focuses the picture; a crosshair appears in the middle.
 - **Arrow keys** move it (4 % of the picture per press, **Shift** + arrow = 1 % for small parts).
 - **Enter / Space** taps at the crosshair (hotspot: places the pin; sequence: picks the next part;
