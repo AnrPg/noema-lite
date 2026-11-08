@@ -10,6 +10,9 @@
  *   #/people · #/chat/<room> · #/group/<room> · #/join/<code>   👥 people     (src/features/social/ui)
  *   (no address)                    🔎 the quick sheet · ⚑ the report dialog
  */
+import { NoemaExplorePage } from '../features/sharing/ui/explore.ts';
+import { NoemaSharePanel, openShare } from '../features/sharing/ui/share.ts';
+import type { HostSubject } from '../features/community/ui/host.ts';
 import type { ScreenChrome } from '../features/community/ui/host.ts';
 import { CHROME_EVENT, type CommunityScreen } from '../features/community/ui/screen.ts';
 import type { Here } from '../features/search/domain/params.ts';
@@ -43,6 +46,7 @@ export const COMMUNITY_ROUTES = defineRoutes({
   chat: '/chat/:room',
   group: '/group/:room',
   join: '/join/:code',
+  explore: '/explore/:kind?',
 });
 type R = typeof COMMUNITY_ROUTES.table;
 type Match = RouteMatch<R>;
@@ -61,6 +65,8 @@ export const COMMUNITY_ELEMENTS = {
   'noema-group-page': NoemaGroupPage,
   'noema-join-page': NoemaJoinPage,
   'noema-person-actions': NoemaPersonActions,
+  'noema-explore-page': NoemaExplorePage,
+  'noema-share-panel': NoemaSharePanel,
 } as const;
 
 export interface CommunityScreens {
@@ -70,6 +76,8 @@ export interface CommunityScreens {
   openReport(): void;
   /** ✉ a vault file into one of my conversations */
   sendTo(item: SendItem): void;
+  /** 🔗 the share dialog of one of the learner's subjects */
+  share(s: HostSubject): void;
   /** the buttons of someone's page (#/u/<id>) drawn into el */
   personActions(el: HTMLElement, userId: string): void;
 }
@@ -156,6 +164,12 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
         el.code = m.params.code;
         return el;
       }
+      case 'explore': {
+        const el = doc.createElement('noema-explore-page');
+        el.deps = { host: app.host, notify: app.notify };
+        el.kind = m.params.kind ?? '';
+        return el;
+      }
     }
   };
 
@@ -182,6 +196,9 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
     },
     sendTo: item => {
       void openSendTo(socialDeps, { kind: item.kind, id: item.id, title: item.title }, item.title);
+    },
+    share: s => {
+      void openShare({ host: app.host, notify: app.notify, i18n: app.i18n }, s);
     },
     personActions: (el, userId) => {
       const a = win.document.createElement('noema-person-actions');
