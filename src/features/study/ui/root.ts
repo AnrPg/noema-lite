@@ -9,7 +9,8 @@ import { StudyApp } from './app.ts';
 import { chapterOutline, figureAsText, sectionText } from '../domain/as-text.ts';
 import type { Block, Chapter, Exercise, Section } from '../domain/pack.ts';
 import { exerciseCard, exerciseText, type CardElement, type CardOptions } from './exercise/card.ts';
-import { figureBlock } from './exercise/visual.ts';
+import { figureBlock, rCenter, vRegions, vTargets } from './exercise/visual.ts';
+import { knowledgeMap, reportedView } from './kmap.ts';
 import type { StudyHost } from './host.ts';
 import type { AiPort, TutorPort } from './parts.ts';
 import { showStudyRoute, STUDY_SEGMENTS } from './routes.ts';
@@ -31,6 +32,14 @@ export interface StudyUi {
   exerciseText(ex: Exercise): string;
   /** an exercise's card, outside a round (the suites render every one) */
   exerciseCard(ex: Exercise, o?: CardOptions): CardElement;
+  /** what the browser suites look into: a picture exercise's parts (their centres) and the parts it asks about, and
+      the two dialogs the ⋮ menus open (the knowledge map, the reported exercises) */
+  readonly inspect: {
+    parts(ex: Exercise): { readonly id: string; readonly label: string; readonly c: readonly [number, number] }[];
+    targets(ex: Exercise): string[];
+    knowledgeMap(chapterId?: string): void;
+    reported(): void;
+  };
   /** a flashcard rated elsewhere (the inbox): 0 again, 1 good, 2 easy */
   rateCard(key: string, q: 0 | 1 | 2, at?: number): void;
 }
@@ -64,6 +73,16 @@ export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; rea
     chapterOutline,
     exerciseText: ex => exerciseText(app, ex),
     exerciseCard: (ex, o) => exerciseCard(app, ex, o),
+    inspect: {
+      parts: ex => vRegions(ex, ex.media ? host.media[ex.media] : undefined).map(r => ({ id: r.id, label: r.label ?? '', c: rCenter(r) })),
+      targets: ex => vTargets(ex, vRegions(ex, ex.media ? host.media[ex.media] : undefined)).map(r => r.id),
+      knowledgeMap: id => {
+        knowledgeMap(app, id);
+      },
+      reported: () => {
+        reportedView(app);
+      },
+    },
     rateCard: (key, q, at) => {
       rateCard(app, key, q, at);
     },

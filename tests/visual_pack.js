@@ -21,8 +21,8 @@ async function run(browser, viewport, touch) {
   for (const id of ids) {
     await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id);
     await wait(120);
-    const I = await p.evaluate(id => { const ex = EX[id]; const m = MEDIA[ex.media]; const regs = vRegions(ex, m); return { type: ex.type, W: m.w, H: m.h, answer: ex.answer, any: !!ex.any, options: ex.options,
-      regs: Object.fromEntries(regs.map(r => [r.id, { c: rCenter(r), label: r.label }])), targets: vTargets(ex, regs).map(r => r.id), compact: document.querySelector('#T .vx').classList.contains('compact') }; }, id);
+    const I = await p.evaluate(id => { const ex = EX[id]; const m = MEDIA[ex.media], I = NoemaCore.studyUi.current().inspect; return { type: ex.type, W: m.w, H: m.h, answer: ex.answer, any: !!ex.any, options: ex.options,
+      regs: Object.fromEntries(I.parts(ex).map(r => [r.id, { c: r.c, label: r.label }])), targets: I.targets(ex), compact: document.querySelector('#T .vx').classList.contains('compact') }; }, id);
     if (I.compact) listed++;
     const at = async id2 => { const el = p.locator('#T .vx-stage'); await el.scrollIntoViewIfNeeded(); const b = await el.boundingBox(); const [x, y] = I.regs[id2].c; return [b.x + x / I.W * b.width, b.y + y / I.H * b.height]; };
     const checkBtn = async () => { const b = await p.$('#T button:has-text("Check")'); if (b) { await b.scrollIntoViewIfNeeded(); await (touch ? b.tap() : b.click()); } };

@@ -126,7 +126,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
       learnables: [{ id: 'ch01-l01', kp: ['ch01-k01'], goal: 'Compute kinetic energy' }, { id: 'ch01-l03', kp: ['ch01-k02'], goal: 'Predict free fall' }] };
     COURSE[0].exercises.push(EX['ch01-e901'], EX['ch01-e903']); ALL_EX.push(EX['ch01-e903']);
   });
-  await p.evaluate(() => knowledgeMap('ch01')); await wait(200);
+  await p.evaluate(() => NoemaCore.studyUi.current().inspect.knowledgeMap('ch01')); await wait(200);
   ok(await p.locator('.kmapbox .kmaplr').count() === 2, 'knowledge map: one row per learnable');
   ok(await p.locator('.kmapbox .kmaplv').allTextContents().then(t => t.join('|') === 'Basics|Core|Taught earlier on the Roadmap'), 'knowledge map: grouped basics → core, then what an earlier step taught');
   ok(await p.locator('.kmapbox .kmaplr:has-text("Predict free fall") .pill:has-text("Easily confused")').count() === 1, 'knowledge map: the categories of a learnable are shown');
@@ -134,7 +134,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   ok(await p.evaluate(() => { const r = NoemaCore.studyUi.current().app.round?.service.state.context; return !!r && r.list.length === 1 && r.list[0].id === 'ch01-e903'; }), 'knowledge map: ▶ practises that learnable');
   await p.evaluate(() => { S.res['ch01-e903'] = { n: 1, ok: 0, last: false, t: Date.now() }; location.hash = '#/mistakes'; }); await wait(400);
   ok(await p.locator('.gymcats .fchip:has-text("Easily confused")').count() === 1 && await p.locator('.gymcats .fchip:has-text("Traps")').count() === 1, 'Mistakes gym: chips by kind of trap');
-  await p.evaluate(() => reportedView()); await wait(200);
+  await p.evaluate(() => NoemaCore.studyUi.current().inspect.reported()); await wait(200);
   ok(await p.locator('.modal .flaglist li').count() === 1, 'reported exercises: listed');
   await p.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
 

@@ -167,7 +167,7 @@ const ACT = (() => {
     const fallback = (why) => {
       box.innerHTML = ''; box.classList.add('act-fallback'); box.style.height = '';
       const f = a?.fallback || {};
-      if (f.media && Noema.pack?.media?.[f.media] && STUDY) box.append(STUDY.figure({ t: 'figure', media: f.media, explore: false }));   // the study area's figure (src/features/study/ui/exercise/visual.ts)
+      if (f.media && MEDIA[f.media] && STUDY) box.append(STUDY.figure({ t: 'figure', media: f.media, explore: false }));   // the study area's figure (src/features/study/ui/exercise/visual.ts)
       if (f.text) box.append(h('p', { class: 'act-fbtext', html: fmt(f.text) }));
       if (why) note.textContent = why;
     };

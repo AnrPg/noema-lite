@@ -16,6 +16,7 @@ const go = hash => { location.hash = hash; };
 
 /* ---------- the study area's host (src/features/study/ui/host.ts) ---------- */
 let STUDY = null;   // NoemaCore.studyUi.mount(studyHost()) at boot: { app, show(hash), segments, figure, figureText, exerciseText, rateCard }
+const MEDIA = Noema.pack?.media || {};   // the pack's pictures by id (the study area's media; 32_activities.js)
 const FULL_COURSE = COURSE.slice();   // the pack's chapters before the source filter (15_inbox.js, 60_convos.js, 85_locate.js)
 FULL_COURSE.forEach(c => c.flashcards.forEach((f, k) => { f._key = f.id || f._key || c.id + '#' + k; }));   // SRS keys: the card's id (packs without ids: its position), independent of filtering
 { /* tell sibling apps (Meletee, a:caps) that card progress is keyed by card id; each feature merges only its own flag */
@@ -112,7 +113,7 @@ function studyHost() {
   const RX = () => SHL() ? window.NoemaReact : null, SF = () => window.NoemaSrcFiles;
   return {
     subject: SUBJ, account: { id: ACCOUNT.id, name: ACCOUNT.name || '', kind: ACCOUNT.kind || 'local' },
-    chapters: FULL_COURSE, media: Noema.pack?.media || {}, sources: window.SOURCES || null,
+    chapters: FULL_COURSE, media: MEDIA, sources: window.SOURCES || null,
     state: S, save, flush: () => { flushSave(); renderTopStats(); },
     addXP(n) {
       const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(Noema.stats.get().xp || 0).lv : 0;

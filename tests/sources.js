@@ -125,7 +125,8 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
 
   console.log('— remove the file');
   await p.evaluate(() => { NoemaCore.studyUi.current().app.sourcesUi.expand('ecb'); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }); await wait(200);
-  p.once('dialog', d => d.accept()); await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(3500);
+  await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(200);
+  await p.click('.modal .btn.primary'); await wait(3500);   // the app's own yes / no question (no browser dialog)
   ok(!Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && !srv.srcfiles(gia, 'kytt').ecb, 'removed from the cloud and the index');
 
   console.log('— a package (.noema.zip): the pack + its source files, exactly as split');

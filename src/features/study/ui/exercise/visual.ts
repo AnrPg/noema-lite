@@ -45,9 +45,10 @@ function rShape(r: Region, cls: string, pad = 0): SVGElement {
   return sv('rect', { x: n0(r.x) - pad, y: n0(r.y) - pad, width: n0(r.w) + 2 * pad, height: n0(r.h) + 2 * pad, rx: r.rx ?? 8, class: cls });
 }
 /** the regions of an exercise or a figure: its own, else the picture's (docs/VISUAL.md §3) */
-const vRegions = (ex: { readonly regions?: readonly Region[] }, m: Media | undefined): readonly Region[] => ex.regions ?? m?.regions ?? [];
+export const vRegions = (ex: { readonly regions?: readonly Region[] }, m: Media | undefined): readonly Region[] =>
+  ex.regions ?? m?.regions ?? [];
 /** the parts an exercise asks about, in its order (the study domain's rule) */
-function vTargets(ex: Exercise, regs: readonly Region[]): Region[] {
+export function vTargets(ex: Exercise, regs: readonly Region[]): Region[] {
   return targetsOf(ex['targets'], regs).flatMap(g => regs.filter(r => r.id === g.id).slice(0, 1));
 }
 const ids = (x: unknown): string[] => (Array.isArray(x) ? x.filter((v): v is string => typeof v === 'string') : []);
