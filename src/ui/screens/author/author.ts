@@ -23,6 +23,8 @@ import { authorStyles } from './styles.ts';
 
 /** the activity's preview: the app's real runtime, drawn into a box */
 export interface AuthorPreview {
+  /** whether the runtime is there yet (the app may still be starting the subject's engine): asked again until it is */
+  ready?(): boolean;
   show(
     box: HTMLElement,
     item: Record<string, unknown>,
@@ -278,6 +280,12 @@ export class NoemaAuthor extends NoemaElement {
     if (!this.preview) {
       this.#prevNote = this.#TT('previewOff');
       this.requestUpdate();
+      return;
+    }
+    if (this.preview.ready && !this.preview.ready()) {
+      this.#prevNote = this.#TT('previewOff');
+      this.requestUpdate();
+      if (this.isConnected) this.#schedulePreview(500);
       return;
     }
     const stale = this.#probs.some(p => p.tab === 'spec' || (p.tab === 'strings' && p.key));

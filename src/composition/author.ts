@@ -32,10 +32,9 @@ interface Page {
 const W = (): Page => globalThis as unknown as Page;
 const act = (): ActRuntime | null => (typeof ACT !== 'undefined' && typeof ACT.mount === 'function' ? ACT : null);
 
-/** the preview: the app's real sim-spec@1 runtime (ACT.mount), always from the spec's defaults (never a saved state) */
-function actPreview(): AuthorPreview | null {
-  const A = act();
-  if (!A) return null;
+/** the preview: the app's real sim-spec@1 runtime (ACT.mount), always from the spec's defaults (never a saved state); the
+    runtime is looked up at every show, since the frame may still be starting the subject's engine when the page opens */
+function actPreview(): AuthorPreview {
   const ID = 'author-preview',
     key = 'blk:author:' + ID;
   const forget = (): void => {
@@ -52,7 +51,10 @@ function actPreview(): AuthorPreview | null {
     }
   };
   return {
+    ready: () => !!act(),
     show(box, it, spec, strings, locale) {
+      const A = act();
+      if (!A) throw new Error('the activity runtime is not on the page');
       forget();
       A.ITEMS[ID] = { ...it, id: ID, spec: structuredClone(spec), strings: { [locale]: strings[locale] ?? {} } };
       const sess = A.mount(box, ID, { place: 'author', start: true });

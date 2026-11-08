@@ -1,5 +1,5 @@
 /* Accessibility of the main pages (axe-core through @axe-core/playwright; the WCAG 2.0/2.1/2.2 A and AA rules), in the app's frame:
-   the start screen (Today), a subject's chapter, the settings, the language course's home (the polyglot course) and a word's
+   the start screen (Today), a subject's chapter, the settings, the activity author (#/author), the language course's home (the polyglot course) and a word's
    card in it (closed, and with “In other languages” open), at desktop width and at 320 px; then the chapter and the two language screens for three characters (robot; litF, whose art draws
    letters; fruit, the palest accent) in light and dark, so neither a character's colours and art nor a chapter's colour can fail.
    The UI foundation's demo (#/ui-kit, src/ui: every component of the kit in the new frame) is audited the same way: its four
@@ -33,6 +33,8 @@ function firstChapter() {
   const TODAY = { name: 'start screen (Today)', at: '' },
     CHAPTER = { name: `a subject's chapter (${SUBJECT} › ${ch})`, at: `?subject=${SUBJECT}#/ch/${ch}` },
     SETTINGS = { name: 'settings (Me › AI and settings)', at: '#/me/ai' },
+    // the activity author (src/ui/screens/author: noema-schema-form, noema-author) with its preview of the blank activity
+    AUTHOR = { name: 'the activity author (#/author)', at: `?subject=${SUBJECT}#/author`, ready: 'main noema-author .aa-pbox iframe, main noema-author .aa-pbox .sim', wait: 2500 },
     LANG = { name: `the language-course home (#/lang/${COURSE})`, at: `#/lang/${COURSE}`, settings: LANGS, ready: '.lx-fhome', wait: 1500 },
     WORD = { name: "a word's card in the course (#/lang/he/c/person.teacher)", at: '#/lang/he/c/person.teacher', settings: LANGS, ready: '.lx-others', wait: 1500 },
     // the same card with "In other languages" open: the table of the word in every language, its words and 🔊 buttons (target size)
@@ -41,11 +43,11 @@ function firstChapter() {
   const KIT = ['basics', 'overlays', 'forms', 'look'].map(s => ({ name: `the UI kit (#/ui-kit/${s})`, at: `#/ui-kit/${s}`, ready: 'noema-app-frame noema-ui-kit', wait: 600 }));
   const robot = pages => pages.map(p => ({ ...p, character: 'robot' }));
   const RUNS = [
-    { label: 'desktop', viewport: { width: 1280, height: 900 }, pages: robot([TODAY, CHAPTER, SETTINGS, LANG, WORD, WORD_OPEN, ...KIT]) },
-    { label: '320 px', viewport: { width: 320, height: 700 }, pages: robot([TODAY, CHAPTER, SETTINGS, LANG, WORD, WORD_OPEN, ...KIT]) },
+    { label: 'desktop', viewport: { width: 1280, height: 900 }, pages: robot([TODAY, CHAPTER, SETTINGS, AUTHOR, LANG, WORD, WORD_OPEN, ...KIT]) },
+    { label: '320 px', viewport: { width: 320, height: 700 }, pages: robot([TODAY, CHAPTER, SETTINGS, AUTHOR, LANG, WORD, WORD_OPEN, ...KIT]) },
     ...['light', 'dark'].map(scheme => ({
       label: `three characters, ${scheme}`, viewport: { width: 1280, height: 900 }, colorScheme: scheme,
-      pages: ['robot', 'litF', 'fruit'].flatMap(character => [CHAPTER, LANG, WORD, WORD_OPEN, KIT[0], KIT[2]].map(p => ({ ...p, name: `${character}: ${p.name}`, character }))),
+      pages: ['robot', 'litF', 'fruit'].flatMap(character => [CHAPTER, AUTHOR, LANG, WORD, WORD_OPEN, KIT[0], KIT[2]].map(p => ({ ...p, name: `${character}: ${p.name}`, character }))),
     })),
   ];
   const browser = await chromium.launch();
