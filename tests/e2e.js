@@ -38,7 +38,7 @@ async function mockGemini(ctx) {
   await page.goto(url);
   // seed legacy single-file-app data, then reload
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem('dbquest_v1', JSON.stringify({ xp: 50, xpDay: { '2026-10-06': 50 }, streak: 3, lastDay: '2026-10-06', read: { 'ch01-s01': true }, res: { 'ch01-e001': { n: 1, ok: 1, last: true }, 'ch01-e002': { n: 1, ok: 0, last: false } }, pb: {}, fc: {}, boss: {}, last: 'ch01-s01', settings: { apiKey: 'LEGACYKEY', theme: 'auto', goal: 120, sound: true, chunk: true, models: [], model: '' } })); localStorage.setItem('dbquest_convos_v1', JSON.stringify([{ id: 'cv_x', created: 1, updated: 2, mode: 'socratic', ctx: null, title: 'Old Chat', msgs: [{ role: 'user', text: 'hi' }, { role: 'model', text: 'hello' }] }])); });
-  await page.reload(); await wait(900);
+  await page.reload(); await page.waitForSelector('.noema-chip', { timeout: 20000 }); await wait(900);   // the picker is drawn once the start finished (slower on a busy machine)
   const chips = await page.$$eval('.noema-chip', c => c.map(x => x.textContent));
   ok(chips.length === 3 && chips.some(c => c.includes('Demo Physics')) && chips.some(c => c.includes('🔒')), 'subject picker lists library + private subjects: ' + chips.join(' | '));
   ok(await page.$$eval('.noema-grouphead', g => g.length) >= 2, 'subjects are grouped');
