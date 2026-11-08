@@ -273,7 +273,7 @@ async function mockGemini(ctx) {
   ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
   await pB.click('.noema-chip:has-text("Databricks")'); await wait(1600);
   ok(await pB.evaluate(() => S.settings.goal === 150 && S.settings.oldOnly === 'kept'), 'device B pulled the settings: the later choice per field (goal from device A), what only the old row had (oldOnly)');
-  ok(await pB.evaluate(() => S.res['ch01-e002']?.n === 2 && !S.res['ch01-e001']), 'the cloud’s old progress row is kept on a device that had none (for the learning log’s migration); device A’s answers travel as events, not here');
+  ok(await pB.evaluate(() => S.res['ch01-e002']?.n === 2 && S.res['ch01-e001']?.n === 1), 'the cloud’s old progress row is taken in on a device that had none (the learning log’s migration); device A’s answer arrives as its event');
   ok(await pB.evaluate(() => S.settings.apiKey === 'OLDKEY' && localStorage.getItem('noema-device:geminiKey:' + ACCOUNT.id) === 'OLDKEY' && !localStorage.getItem(Noema.kv.accountKey('settings')).includes('OLDKEY')), 'a key synced by an older version is moved to this device');
   ok(await pB.evaluate(() => CV.list.some(c => c.mode === 'quiz' && c.msgs.length >= 2)), 'device B has the conversation from device A');
   await pB.screenshot({ path: SHOTS + '/b3_deviceB_mobile.png' });
