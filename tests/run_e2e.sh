@@ -28,8 +28,9 @@ rm -rf "$T/library/subjects/demo-physics" && mv "$T/demo-physics.lib" "$T/librar
 
 # every suite runs, even after one fails; the failed ones are listed at the end (and the script fails)
 set +e; FAILED=()
-# ONLY="connector|lib_.*" bash tests/run_e2e.sh: only the suites whose name matches (after the same preparation)
-run() { local name="$1"; shift; if [ -n "${ONLY:-}" ] && ! [[ "$name" =~ ^(${ONLY})$ ]]; then return 0; fi; echo; echo "▶ $name"; "$@"; local rc=$?; [ $rc -eq 0 ] || { echo "✖ $name failed (exit $rc)"; FAILED+=("$name"); }; }
+# ONLY="connector|lib_.*" bash tests/run_e2e.sh: only the suites whose name matches (after the same preparation; names joined by |)
+RAN=0
+run() { local name="$1"; shift; if [ -n "${ONLY:-}" ] && ! [[ "$name" =~ ^(${ONLY})$ ]]; then return 0; fi; RAN=$((RAN+1)); echo; echo "▶ $name"; "$@"; local rc=$?; [ $rc -eq 0 ] || { echo "✖ $name failed (exit $rc)"; FAILED+=("$name"); }; }
 run simexpr node "$ROOT/tests/simexpr.js"          # the expression language of sim-spec@1: JS and Python agree bit for bit (docs/INTERACTIVE_SIMEXPR.md)
 run circuit node "$ROOT/tests/circuit.js"           # the circuit engine circuit-mna@1: MNA, transients, faults, instruments (docs/INTERACTIVE_CIRCUIT.md)
 run circuit2 node "$ROOT/tests/circuit2.js"          # the full circuit physics (docs/INTERACTIVE_CIRCUIT.md §9): AC, lines, op-amp GBW/slew, capacitances, pickup, real meters
@@ -119,4 +120,5 @@ run pwa node "$ROOT/tests/pwa.js" "$T"   # the installable app: web manifest, on
 
 echo
 if [ ${#FAILED[@]} -gt 0 ]; then echo "✖ ${#FAILED[@]} suite(s) failed: ${FAILED[*]}"; exit 1; fi
-echo "✔ every suite passed"
+if [ "$RAN" -eq 0 ]; then echo "✖ no suite matched ONLY=${ONLY:-} (join names with |)"; exit 1; fi
+echo "✔ every suite passed ($RAN)"

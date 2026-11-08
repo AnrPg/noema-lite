@@ -33,7 +33,6 @@ def run_esbuild():
     global BUILD_MANIFEST
     if '--no-esbuild' not in args:
         if not os.path.isdir(os.path.join(ROOT, 'node_modules', 'esbuild')): sys.exit('✗ the TypeScript build needs its tools: run  npm ci  once (Node 22)')
-        build_contracts()   # the bundles import the generated validators (src/contracts/validate.ts)
         r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'esbuild.mjs')], cwd=ROOT)
         if r.returncode != 0: sys.exit('✗ npm run build (tools/esbuild.mjs) failed')
     mp = os.path.join(BUILD, 'manifest.json')
