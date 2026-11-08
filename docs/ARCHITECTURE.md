@@ -87,6 +87,7 @@ fake of its service (`src/adapters/testing/`).
 | I18n | `t`, `has`, `err`, `plural`, `format.*`, locale and direction | browser (over `NoemaI18n`), memory (catalogs) |
 | Telemetry | local counters and events only, never sent | local |
 | Notifier | toast · notice (at most 2 on screen, then overflow to the 🔔 bell) · alert (also the assertive live region `#noema-alert`) | browser (DOM), memory (recording) |
+| EventStore | the learning log of each account: append-only, idempotent by event id (a forgotten event's id stays known), read in order or after a stamp, one snapshot of the fold (dropped when an event lands at or before it), meta values, a watch for other tabs, the **storage-full signal** (all or nothing per append); an append of events made here also queues them in the sync's outbox **in the same transaction** (`EventOutbox`; received ones never) | browser (the app's IndexedDB `noema-lite` v3, collections `log.events`, `log.ids`, `log.snapshots`, `log.meta` beside `sync`; BroadcastChannel to the other tabs), memory; both over the document store (`adapters/local/event-store.ts`) |
 | Lifecycle | the page: shown or hidden, on line, left, touched; this device's kind and browser; this tab's id | browser (document, window, sessionStorage), memory (manual) |
 
 ## 5. Composition roots and the container
@@ -109,7 +110,8 @@ The rules:
 - An unknown token fails with `container.unknown`.
 
 The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOCK`, `I18N`, `NOTIFIER`, `TELEMETRY`,
-`ERRORS`, `JOBS`, `COMPUTE`, `AI` and `CLOUD`; `ENGINES` is the engine library (`src/engines`).
+`ERRORS`, `JOBS`, `COMPUTE`, `AI` and `CLOUD`; `ENGINES` is the engine library (`src/engines`); `EVENT_STORE` and `LEARNING`
+are the learning log (`src/composition/learning.ts`).
 
 | Root | Built to | What it picks |
 |---|---|---|
@@ -153,6 +155,13 @@ NoemaCore.NoemaError                    the error class
 NoemaCore.contracts                     the compiled data contracts (src/contracts)
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
+NoemaCore.learning.open(account) → Promise<report>   the learning log (src/composition/learning.ts, its header is the source)
+NoemaCore.learning.record({ type, subject?, item?, data, origin?, id?, day? }) → event | null · recordOnce(drafts) → Promise
+NoemaCore.learning.progress(subject) · progressOf(account, subject) · hasProgress · stats()
+NoemaCore.learning.settings(subject?) · settingsWritten(value) · setSubjectSetting(subject, key, value) · onSettings · onChange
+NoemaCore.learning.events() · eventsOf(account) · exportLog() · xapi(subject) · archive() · append(events) · restore(events, o)
+NoemaCore.learning.cardRating(grade) · playbookRating(grade, ticked) · idFor(prefix, parts) · backupStamp · flush · pending · migrate
+                                        · compact() · clear(account) · account()
 NoemaCore.study                         the study domain (src/features/study, the source of truth is the header of
                                         src/composition/study.ts): grade(ex, answer, { regions }) → { ok: true|false|null, score,
                                         items, typos, missing, parts } · targets · hits · fsrs.{review, memory, isDue, dueDay,
@@ -175,6 +184,25 @@ NoemaCore.social                        people (src/features/social): state, onC
 NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
                                         reject with a NoemaError
 ```
+
+**The learning log.** What the learner does is an event (`noema.events/v1`,
+`src/contracts/schemas/noema.events.v1.schema.json`: an id, an HLC stamp, the learner's day, the device, the account, the subject
+and item, and the data of its type — answer given, card reviewed, section read, XP earned, setting changed, …). The log only
+grows: an undo is itself an event (`log.restored` for a backup brought back, `subject.reset`). The progress the screens read
+is its fold (`src/features/study/domain/events/projection.ts`; the old screens hold the same objects while events fold in),
+kept as a snapshot with the tail after it; compaction forgets only events a later one of the same key supersedes ("latest"
+types: an activity's saved state, a section opened, a setting). On each open the log converts what this device still keeps in
+the old places (`s:<subject>:state`, `a:stats`, the first time `a:settings`): the old texts are archived in the log's meta, the
+events are added (their ids are made from their content, so converting twice adds nothing), then the old keys leave the
+key-value store. `a:settings` stays the old screens' copy: what they write there becomes `setting.changed` events
+(`engine/loader.js`) and the copy follows the log. Backups (version 3) carry the events. Cards and drills fold as the read
+models fold them (FSRS-6 replayed on the imported schedule with the learner's `fsrs` setting; a change of it schedules every
+card again). Events are stamped by the sync's device clock (`DEVICE_CLOCK`); the log fills the seams of the other features
+(`src/composition/learning.ts` `learningSeams`): `STUDY_EVENTS` (the read models' feed, which merges the imports the way the
+log does and asks for a rebuild after a restore), `SYNC_EVENT_LOG` (another device's events, kept once and never sent back),
+`LEGACY_PROGRESS` (the cloud's old progress rows, converted like this device's own) and `ROADMAP_EVENTS` (levels reached and
+tested, restructurings: `roadmap.*` events, the read models' level too); a restructuring hands the subjects the progress of
+the items that moved to them (`adoptProgress`: what a subject lacks becomes its events; XP stays where it was earned).
 
 The community parts are composed in `src/composition/community.ts` (`COMMUNITY_REGISTRATIONS`, `COMMUNITY_BRIDGE`): the
 tokens `REST`, `VAULT`, `SOCIAL`, `REPORTS` and `ENGINE_REQUESTS`. `REST` is a second Supabase client over PostgREST, RPC
@@ -300,11 +328,12 @@ The rules:
 | Schema-first contracts | `src/contracts/` (helper 2) |
 | Microkernel plugins | `src/plugins/` (manifest, registry, capability checks), the engines in `src/engines/` (§6.1) |
 | Design tokens | `src/ui/tokens/` → `engine/tokens.css` (§6.2) |
+| Event sourcing of learning events (append-only log, content-hash ids, snapshots, compaction, undo as an event) | `src/features/study/domain/events/`, `application/learning-log.ts`, the EventStore port (§4, §6) |
 | Web components, context by event, an overlay stack | `src/ui/` (§6.3) |
 | CQRS read models in a Worker (Compute jobs `study.project`, `catalog.records`), followed on the page event by event | `src/features/study/application/read-models.ts`, `src/features/catalog/application/index-store.ts` (§6.0) |
 | Pure domain graders and schedulers (Strategy per exercise type; FSRS-6) | `src/features/study/domain/grading`, `fsrs.ts` (§6.0) |
 | Local-first with an outbox, statecharts | `src/features/sync` (the outbox in the event append's own transaction, the loop and the lease as statecharts), `src/kernel/statechart.ts`, docs/SYNC.md |
-| Saga with idempotency keys, event sourcing of learning events, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
+| Saga with idempotency keys, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
 
 ## 8. How to add …
 

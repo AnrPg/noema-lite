@@ -453,7 +453,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   `make_pack.py` inlines `module.wasm` as base64 + sha256; `unpack.py` writes it back byte for byte; an embed has no file.
   `45_activity_embed.js` declares `var NoemaEmbed`, because the app loads it both on its own (for packcheck) and inside `engine.js`.
 * **xAPI export** (`43_xapi.js`, `docs/INTERACTIVE_XAPI.md`): the subject's ⋮ menu has "Export learning record (xAPI)"; it
-  writes `<subject>.xapi.json` (`noema.xapi-export/v1`, xAPI 1.0.3 statements from `S.att` and `S.res`). The actor is
+  writes `<subject>.xapi.json` (`noema.xapi-export/v1`, xAPI 1.0.3 statements from the learning log's attempts and answers). The actor is
   `{account: {homePage: <site>, name: <account id>}}` — never an e-mail. Next to it **Course package for an LMS (cmi5)**
   downloads `<subject>.cmi5.zip` (cmi5.xml, zipped with JSZip like the package export); an LMS launch is not implemented, and
   there is no LRS posting. The shell's "My subjects" ⋮ has both items too (from the subject's saved state and pack:

@@ -283,7 +283,7 @@
   function actPreview() {
     if (typeof ACT === 'undefined' || !ACT || typeof ACT.mount !== 'function') return null;   // eslint-disable-line no-undef
     const key = 'blk:author:' + PREVIEW_ID;
-    const forget = () => { try { if (typeof S !== 'undefined' && S.act) delete S.act[key]; } catch (e) { } };   // eslint-disable-line no-undef
+    const forget = () => { try { if (typeof S !== 'undefined' && S.act?.[key]) NoemaCore.learning.record({ type: 'activity.saved', subject: Noema.subject.id, item: key, data: { v: 1, state: null } }); } catch (e) { } };   // eslint-disable-line no-undef
     return {
       show(box, it, spec, strings, locale) {
         forget();   // a preview always starts from the spec's defaults (never from a saved state)

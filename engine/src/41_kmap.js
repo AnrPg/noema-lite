@@ -62,7 +62,7 @@ function reportedView() {
   modal((box, close) => {
     box.append(h('h3', {}, '⚑ ' + tE('engine.flags.title', { n: ids.length })), h('p', { class: 'tiny' }, tE('engine.flags.intro')),
       h('ul', { class: 'flaglist' }, ...ids.map(id => { const f = S.flags[id], e = EX[id]; return h('li', {}, h('b', {}, tE('engine.ex.report_' + f.why)), ' · ', h('span', { html: fmt((e.q || '').slice(0, 120)) }), f.note ? h('div', { class: 'tiny' }, '“' + f.note + '”') : null,
-        h('button', { class: 'btn ghost small', onclick: () => { delete S.flags[id]; save(); close(); if (Object.keys(S.flags).length) reportedView(); } }, tE('engine.flags.clear'))); })),
+        h('button', { class: 'btn ghost small', onclick: () => { learnt('exercise.unflagged', id); close(); if (Object.keys(S.flags).length) reportedView(); } }, tE('engine.flags.clear'))); })),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '14px' } }, h('button', { class: 'btn', onclick: close }, tE('engine.kmap.close')),
         h('button', { class: 'btn primary', onclick: async () => {
           /* i18n-ignore-start */   // a request for Claude (English, like the prompts)

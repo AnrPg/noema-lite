@@ -79,13 +79,16 @@ export interface StudyModel {
 
 export const DEFAULT_GOAL = 120;
 
+/** FSRS-6's own parameters and the default retention (until the learner's are fitted). */
+export const DEFAULT_FSRS: FsrsSettings = Object.freeze({ parameters: FSRS6_DEFAULT_PARAMETERS, retention: 0.9 });
+
 export const emptyModel = (): StudyModel => ({
   version: 1,
   subjects: {},
   xp: { total: 0, byDay: {} },
   streak: null,
   goal: DEFAULT_GOAL,
-  fsrs: { parameters: FSRS6_DEFAULT_PARAMETERS, retention: 0.9 },
+  fsrs: DEFAULT_FSRS,
   levels: {},
   seen: {},
   through: '',
@@ -108,7 +111,8 @@ function withSubject(m: StudyModel, id: string, f: (s: SubjectModel) => SubjectM
   return { ...m, subjects: { ...m.subjects, [id]: f(m.subjects[id] ?? emptySubject()) } };
 }
 
-function fsrsOf(value: unknown, was: FsrsSettings): FsrsSettings {
+/** The FSRS settings a setting value names (what it lacks, or gives out of range, stays as it was). */
+export function fsrsOf(value: unknown, was: FsrsSettings): FsrsSettings {
   const v = (value && typeof value === 'object' ? value : {}) as { parameters?: unknown; retention?: unknown };
   const p = Array.isArray(v.parameters) ? checkParameters(v.parameters) : null;
   const r = num(v.retention);
@@ -176,7 +180,7 @@ export function applyEvent(model: StudyModel, e: LoggedEvent): StudyModel {
       if (days === null || !through) return m;
       return { ...m, streak: { days, through: through as LocalDay } };
     }
-    case 'level.reached': {
+    case 'roadmap.level.reached': {
       const roadmap = str(e.roadmap),
         level = str(e.level);
       return roadmap && level ? { ...m, levels: { ...m.levels, [roadmap]: { level, at } } } : m;

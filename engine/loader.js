@@ -57,8 +57,8 @@
       if (this.db) return Promise.resolve(this.db);
       return new Promise((res, rej) => {
         if (!window.indexedDB) return rej(new Error(tr('loader.err.noIndexedDB')));
-        const r = indexedDB.open('noema-lite', 2);   // the same version and stores as src/adapters/browser/storage.ts APP_DB (sync: the outbox and the settings registers)
-        r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos', 'sync'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
+        const r = indexedDB.open('noema-lite', 3);   // the same version and stores as src/adapters/browser/storage.ts APP_DB (sync: the outbox and the settings registers; log.*: the learning log)
+        r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos', 'sync', 'log.events', 'log.ids', 'log.snapshots', 'log.meta'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
         r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error);
       });
     },
@@ -157,13 +157,15 @@
     ls.set(P + 'migrated:idb', String(Date.now()));
   }
 
-  /* ---------------- legacy migration (Databricks Quest v1–v3 single-file app) ---------------- */
+  /* ---------------- legacy migration (Databricks Quest v1–v3 single-file app) ----------------
+     Its progress is written the way this app kept it before the learning log (s:<subject>:state, a:stats), which the log
+     then converts (NoemaCore.learning.migrate) → true when something was written. */
   function migrateLegacy(acc, subj) {
-    if (ls.get(P + 'migrated:legacy')) return;
+    if (ls.get(P + 'migrated:legacy')) return false;
     const old = ls.get('dbquest_v1'), oldC = ls.get('dbquest_convos_v1');
-    if (!old && !oldC) { ls.set(P + 'migrated:legacy', 'none'); return; }
-    if (subj !== 'databricks') return;                       // wait until the Databricks pack is opened
-    if (ls.get(KV.subjectKey('state', subj, acc))) { ls.set(P + 'migrated:legacy', 'skipped'); return; }
+    if (!old && !oldC) { ls.set(P + 'migrated:legacy', 'none'); return false; }
+    if (subj !== 'databricks') return false;                 // wait until the Databricks pack is opened
+    if (NoemaCore.learning.account() === acc && NoemaCore.learning.hasProgress(subj)) { ls.set(P + 'migrated:legacy', 'skipped'); return false; }
     try {
       if (old) { const s = JSON.parse(old); const settings = s.settings || {}; delete s.settings; s.srcOn = settings.srcOn || null; delete settings.srcOn;
         KV.set(KV.subjectKey('state', subj, acc), JSON.stringify(s)); const cur = jget(KV.accountKey('settings', acc), {}); KV.set(KV.accountKey('settings', acc), JSON.stringify({ ...settings, ...cur }));
@@ -171,17 +173,18 @@
       if (oldC) KV.set(KV.subjectKey('convos', subj, acc), oldC);
       ls.set(P + 'migrated:legacy', JSON.stringify({ acc, at: Date.now() }));
       setTimeout(() => toastL('✅ ' + tr('loader.legacy.carriedOver')), 1500);
-    } catch (e) { console.warn('[Noema] legacy migration failed', e); }
+      return true;
+    } catch (e) { console.warn('[Noema] legacy migration failed', e); return false; }
   }
 
-  /* ---------------- account-level stats (XP / streak across all subjects) ---------------- */
+  /* ---------------- account-level stats (XP / streak across all subjects): folded from the learning log ----------------
+     (NoemaCore.learning: XP is recorded as xp.earned events, src/features/study/application/learning-log.ts) */
   const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
   const Stats = {
-    get() { return Object.assign({ xp: 0, xpDay: {}, streak: 0, lastDay: null, bySubject: {} }, jget(KV.accountKey('stats'), {})); },
-    put(s) { KV.set(KV.accountKey('stats'), JSON.stringify(s)); },
-    touchStreak() { const s = this.get(), d = today(); if (s.lastDay === d) return s; const diff = NoemaCore.day.is(s.lastDay) ? NoemaCore.day.between(s.lastDay, d) : 99; s.streak = diff === 1 ? s.streak + 1 : 1; s.lastDay = d; this.put(s); return s; },
-    add(n) { const s = this.touchStreak(); s.xp += n; s.xpDay[today()] = (s.xpDay[today()] || 0) + n; s.bySubject[KV.subj] = (s.bySubject[KV.subj] || 0) + n; const keys = Object.keys(s.xpDay).sort(); while (keys.length > 400) delete s.xpDay[keys.shift()]; this.put(s); return s; },
-    /** the streak and today's XP are the study domain's (NoemaCore.study.xp): days in a row with XP, the stored run carried */
+    get() { const s = NoemaCore.learning.stats(); return { ...s, xpDay: { ...s.xpDay }, bySubject: { ...s.bySubject } }; },   // a copy: what it was then
+    /** today counts for the streak (studied without XP, e.g. a tutor chat) */
+    touchStreak() { if (NoemaCore.learning.stats().lastDay !== today()) NoemaCore.learning.record({ type: 'day.active', data: {} }); return this.get(); },
+    /** the streak and today's XP are the study domain's (NoemaCore.study.xp): days in a row with XP, the log's run carried */
     streakNow() { const s = this.get(); return NoemaCore.study.xp.streak(s.xpDay, undefined, NoemaCore.day.is(s.lastDay) ? { days: s.streak || 0, through: s.lastDay } : null); },
     todayXP() { return NoemaCore.study.xp.today(this.get().xpDay); },
   };
@@ -365,8 +368,8 @@
   }
   function countPack(p) { const ch = p.chapters || []; return { chapters: ch.length, sections: ch.reduce((a, c) => a + c.sections.length, 0), exercises: ch.reduce((a, c) => a + c.exercises.length, 0) }; }
   function subjectProgress(acc, s) {
-    const st = jget(KV.subjectKey('state', s.id, acc), null); if (!st || !s.counts?.exercises) return 0;
-    const ok = Object.values(st.res || {}).filter(r => r.ok > 0).length;
+    const L = NoemaCore.learning; if (L.account() !== acc || !s.counts?.exercises || !L.hasProgress(s.id)) return 0;
+    const ok = Object.values(L.progress(s.id).res).filter(r => r.ok > 0).length;
     return Math.min(1, ok / s.counts.exercises);
   }
 
@@ -1631,8 +1634,9 @@
       if (data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; if (includeSecrets && GeminiKey.get(acc)) s.apiKey = GeminiKey.get(acc); data['a:settings'] = JSON.stringify(s); } catch (e) { /* settings that are not JSON hold no key to strip: they are backed up as they are */ } }   // the Gemini key lives on the device (GeminiKey)
       const packs = (await importedPacks(acc)).map(p => ({ id: p.subject.id, pack: p }));
       const conversations = window.NoemaConvos ? await NoemaConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
-      return { format: 'noema-lite-backup', version: 2, conversationSchema: window.NoemaConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
-        account: { id: a.id, name: a.name, emoji: a.emoji, kind: a.kind || 'local', email: a.email || null }, includesSecrets: !!includeSecrets, data, importedPacks: packs };
+      const events = await NoemaCore.learning.eventsOf(acc);   // the learning log (noema.events/v1): answers, reviews, XP, settings…
+      return { format: 'noema-lite-backup', version: 3, conversationSchema: window.NoemaConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
+        account: { id: a.id, name: a.name, emoji: a.emoji, kind: a.kind || 'local', email: a.email || null }, includesSecrets: !!includeSecrets, data, events, importedPacks: packs };
     },
     fileName(acc) { return `noema-lite-backup_${acc}_${stamp()}.json`; },
     download(obj) { jset(`${P}${obj.account.id}:meta:lastDownloadBackup`, Date.now()); const b = new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }); const u = URL.createObjectURL(b); const x = el('a', { href: u, download: this.fileName(obj.account.id) }); document.body.append(x); x.click(); x.remove(); setTimeout(() => URL.revokeObjectURL(u), 5000); },
@@ -1648,7 +1652,9 @@
     async restorePoint(acc, label, words) { const snap = await this.collect(acc, { includeSecrets: true }); const key = acc + '|' + Date.now(); await IDB.put('restore', key, { label, at: Date.now(), snap, ...(words?.k ? { k: words.k, p: words.p || {} } : {}) }); /* label: the words of now; k, p: a catalog key, shown in the UI language of later */ const all = (await IDB.entries('restore', acc + '|')).sort((x, y) => x[1].at - y[1].at); while (all.length > 12) { const [k] = all.shift(); await IDB.del('restore', k); } return key; },
     async listRestorePoints(acc) { try { return (await IDB.entries('restore', acc + '|')).map(([k, v]) => ({ key: k, label: v.label, k: v.k || null, p: v.p || null, at: v.at, size: JSON.stringify(v.snap).length })).sort((a, b) => b.at - a.at); } catch (e) { return []; } },
     async getRestorePoint(key) { return (await IDB.get('restore', key))?.snap; },
-    /** mode: 'replace' (wipe target profile, then write) | 'merge' (overwrite keys present in backup) */
+    /** mode: 'replace' (wipe target profile, then write) | 'merge' (overwrite keys present in backup). The learning log: the
+        backup's events are added; replace also makes what was learnt after the backup no longer count (an event: nothing is
+        deleted). A backup from before the log (version 1–2) keeps its progress in s:<subject>:state, which the log converts. */
     async apply(obj, targetAcc, mode = 'replace') {
       obj = this.validate(obj);
       await this.restorePoint(targetAcc, tr('loader.backup.beforeRestore', { when: fmtWhen(Date.now()) }));   // a label the learner reads later: in the language of now
@@ -1660,6 +1666,8 @@
         KV.set(pre + suf, typeof v === 'string' ? v : JSON.stringify(v));
       }
       for (const p of obj.importedPacks || []) await IDB.put('packs', targetAcc + '|' + p.id, p.pack);
+      await NoemaCore.learning.restore(Array.isArray(obj.events) ? obj.events : [], { mode, madeAt: Date.parse(obj.createdAt) || Date.now(), account: targetAcc });
+      if (targetAcc === NoemaCore.learning.account()) await NoemaCore.learning.migrate();   // another profile's: when it is opened
       if (window.NoemaConvos) {
         if (mode === 'replace') await NoemaConvos.clear(targetAcc);
         const a = getAccount(targetAcc) || { id: targetAcc };
@@ -1724,7 +1732,7 @@
     curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
     curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, publicSubjects() { return publicSubjects(Noema.account.id); }, plain: { text: t => plainOn() ? plainText(t) : t, tree: plainTree, watch: plainWatch }, infoCard, packInfo, langTag, bridgeTag: s => window.NoemaBridge?.tag(s) || null, localizedSubject,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
-    wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); ls.del(Notices.key(id)); },   // 🔔 its news too (kept outside the synced keys)
+    wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); ls.del(Notices.key(id)); return NoemaCore.learning.clear(id); },   // 🔔 its news too (kept outside the synced keys); its learning log → Promise
     setCurrent(acc, subj) { if (Noema.switching) return; jset(P + 'current', { acc, subj }); },   // while a switch reloads the page, the subject still open must not take its place back
     switchTo(acc, subj, hash) { Noema.switching = true; jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname + (hash || '')); return; } location.hash = hash || ''; location.reload(); },   // a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …)
     async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s?.kind === 'language' && SHELL() && NoemaShell.mounted) return NoemaShell.go('#/lang/' + encodeURIComponent(s.courseId)); if (s && s.id !== Noema.subject?.id) Noema.switchTo(Noema.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },
@@ -1768,6 +1776,37 @@
     });
   }
 
+  /* ---------------- the learning log (NoemaCore.learning, src/composition/learning.ts) ----------------
+     Every answer, review, read section, XP… is an event of the account's log; the screens read its fold. a:settings stays
+     the old screens' copy of the account's settings: what they write there becomes setting.changed events, and the copy
+     follows the log (another tab, a restore, another device). Old values that still arrive in s:<subject>:state or a:stats
+     (an old backup) are converted to events; the cloud's old rows reach the log through NoemaCore.sync.legacyProgress. */
+  let settingsCopy = false;   // the copy is being written from the log: not a change of the learner's
+  function writeSettingsCopy(acc, s) {
+    const k = KV.accountKey('settings', acc), cur = jget(k, {}) || {}, next = { ...s };
+    for (const x of Object.keys(cur)) if (x === 'apiKey' || !/^[A-Za-z][A-Za-z0-9_.-]{0,60}$/.test(x)) next[x] = cur[x];   // what the log does not hold: a device-only value the old copy may still have (GeminiKey.migrate takes it), a name no setting may have
+    settingsCopy = true; try { KV.set(k, JSON.stringify(next)); } finally { settingsCopy = false; }
+  }
+  async function openLearning(acc) {
+    const L = NoemaCore.learning;
+    try { await L.open(acc); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.learning.open', severity: 'error', notify: true }); return; }
+    L.settingsWritten(jget(KV.accountKey('settings', acc), {}) || {});   // what was written while the log was closed (a pull, a restore into this profile)
+    writeSettingsCopy(acc, L.settings());
+    L.onSettings(s => { if (L.account() === acc) writeSettingsCopy(acc, s); });
+    L.onChange(() => { if (L.account() === acc) jset(`${P}${acc}:meta:dirty`, Date.now()); });   // the folder backup runs when something changed
+  }
+  KV.listeners.push((key, acc) => {
+    const L = NoemaCore.learning;
+    if (settingsCopy || acc !== L.account() || key !== KV.accountKey('settings', acc)) return;
+    L.settingsWritten(jget(key, {}) || {});
+  });
+  addEventListener('noema:remote', e => {
+    const L = NoemaCore.learning, acc = e.detail?.acc;
+    if (!acc || acc !== L.account()) return;
+    const keys = e.detail.keys || [], pre = `${P}${acc}:`;
+    if (keys.includes(pre + 'a:settings')) L.settingsWritten(jget(pre + 'a:settings', {}) || {});   // the settings registers of another device (NoemaCore.sync); progress comes as events
+  });
+
   /* ---------------- boot ---------------- */
   /** #/ui-kit on a development page (localhost): the UI foundation of phase 3 (src/ui, build/ui.js) and its demo instead of
       these screens; leaving the route reloads the page, which starts them again (docs/ARCHITECTURE.md §6.3) */
@@ -1789,6 +1828,7 @@
     const accs = allAccounts();
     if (!acc) acc = accs.length === 1 && !cur.loggedOut ? accs[0] : await pickAccount();   // after Log out (Me ▾) the list of profiles, even with only one
     KV.acc = acc.id; Noema.account = acc;
+    await openLearning(acc.id);
     GeminiKey.migrate(acc.id);   // before the first pull, so a synced a:settings never replaces the only copy of the key
     if (acc.kind === 'cloud' && window.NoemaCloud) {   // the sync starts (its first pull, the lease; already in the pickers: curricula and shares change keys there)
       watchInUse(); NoemaCloud.startAutoSync(acc.id);
@@ -1820,7 +1860,7 @@
   async function openEngine(acc, subs, meta, { background = false } = {}) {
     KV.subj = meta.id;
     if (!background) Noema.setCurrent(acc.id, meta.id);
-    migrateLegacy(acc.id, meta.id);
+    if (migrateLegacy(acc.id, meta.id)) await NoemaCore.learning.migrate();
     jset(`${P}${acc.id}:meta:sessions`, (jget(`${P}${acc.id}:meta:sessions`, 0) || 0) + 1);
     if (window.NoemaConvos) {
       try { await NoemaConvos.migrateLegacy(acc.id, subs); } catch (e) { console.warn('[Noema] conversation migration', e); }

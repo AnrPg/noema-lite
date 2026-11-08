@@ -37,7 +37,7 @@ const LOG: LoggedEvent[] = [
   ev('xp.earned', T0 + DAY_MS, { subject: 'chem', amount: 5 }),
   ev('xp.earned', T0 + DAY_MS, { amount: -3 }),
   ev('setting.changed', T0, { key: 'goal', value: 200 }),
-  ev('level.reached', T0 + 7000, { roadmap: 'cur1', level: 'sem2' }),
+  ev('roadmap.level.reached', T0 + 7000, { roadmap: 'cur1', level: 'sem2' }),
   ev('streak.imported', T0, { days: 4, through: '2026-02-28' }),
   ev('something.new', T0, { whatever: 1 }),
 ];

@@ -67,7 +67,7 @@ window.NoemaSearch = (() => {
   function keeper(P) {
     const a = acc();
     return NS.keeper(P, {
-      subject: id => jget(`noema1:${a}:s:${id}:state`, null),
+      subject: id => NoemaCore.learning.progressOf(a, id),   // the learning log's fold (null: no progress, or another account)
       roadmapPacks: id => Object.values(window.NoemaCurriculum?.get(a, id)?.nodes || {}).map(n => n.pack?.id).filter(Boolean),
     });
   }

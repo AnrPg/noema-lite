@@ -92,6 +92,15 @@ export function storageContract(name: string, make: StorageFactory): void {
         ['c|1'],
       );
       assert.equal(value(await docs.list('restore')).length, 5);
+      assert.deepEqual(
+        value(await docs.list('restore', { prefix: 'a|', after: 'a|1' })).map(([k]) => k),
+        ['a|2', 'a|3'],
+        'after: only the keys after it',
+      );
+      assert.deepEqual(
+        value(await docs.list('restore', { after: 'a|3', limit: 2 })).map(([k]) => k),
+        ['b|2', 'c|1'],
+      );
     });
 
     test('docs: a transaction keeps all its writes, across collections', async () => {

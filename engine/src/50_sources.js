@@ -86,7 +86,7 @@ function sourceChips(c) {
         h('span', { class: 'e' }, s.emoji || '📘'), h('span', {}, short(r.label ? (s.short && !r.label.includes(s.short) ? s.short + ' ' + r.label : r.label) : s.short || s.title)), av ? h('span', { class: 'eye', 'aria-hidden': 'true' }, '👁') : null); }));
 }
 function newSources() { return SOURCES.filter(s => isNewSrc(s.id)).map(s => s.id); }
-function markSeen(ids) { S.seenSrc = S.seenSrc || {}; (ids || SOURCES.map(s => s.id)).forEach(id => S.seenSrc[id] = true); save(); }
+function markSeen(ids) { (ids || SOURCES.map(s => s.id)).forEach(id => { if (!S.seenSrc[id]) learnt('source.seen', id, { seen: true }); }); }
 
 /* ---------- per-source statistics over the FULL course ---------- */
 function sourceStats() {
@@ -241,7 +241,7 @@ function renderSourcesDeck() {
         h('div', { class: 'row', style: { marginTop: '10px' } },
           h('button', { class: 'btn small', onclick: () => setSrcFilter([s.id]) }, '🔎 ' + tE('engine.deck.onlyThis')),
           isNewSrc(s.id) ? h('button', { class: 'btn small', onclick: () => { markSeen([s.id]); applySourceFilter(); route(); renderSourcesDeck(); } }, '✔ ' + tE('engine.new.markSeen')) : null,
-          s.id !== SOURCES[0].id && S.seenSrc?.[s.id] ? h('button', { class: 'btn small ghost', onclick: () => { delete S.seenSrc[s.id]; save(); applySourceFilter(); route(); renderSourcesDeck(); } }, '↺ ' + tE('engine.deck.markNew')) : null)) : null);
+          s.id !== SOURCES[0].id && S.seenSrc?.[s.id] ? h('button', { class: 'btn small ghost', onclick: () => { learnt('source.seen', s.id, { seen: false }); applySourceFilter(); route(); renderSourcesDeck(); } }, '↺ ' + tE('engine.deck.markNew')) : null)) : null);
     inner.append(card);
   });
   inner.append(h('div', { class: 'tiny', style: { marginTop: '10px' } }, tE('engine.deck.footer')));

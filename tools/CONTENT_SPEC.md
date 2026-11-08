@@ -428,6 +428,7 @@ that match and exist, an answer that is one of its own options, a region inside 
 | account: `a:settings` · `a:packmeta:*` · `a:srcfiles` · `account.json` · `library/groups.json` | `noema.account.v1#settings` · `noema.subject.v1#packmeta` · `noema.account.v1#srcfiles` · `#profile` · `#groups` |
 | a language course's files · its facades · a language package | `noema.lang.v1#<kind>` · `noema.langfacade.v1` · `noema.langpack.v1` |
 | interactive activities · sim-spec@1 and its engines · the xAPI export | `noema.activities.v1` · `noema.sim-spec.v1`, `noema.circuit.v1` … · `noema.xapi-export.v1` |
+| the learning log (answers, reviews, XP, settings… as events; in a backup: `events`) | `noema.events.v1` (`#event`: one event) |
 | the input of every connector tool | `noema.mcp-tools.v1#<tool name>` |
 
 `npm ci && npm run contracts` (`tools/contracts.mjs`; `tools/build.py` runs it first) generates the types
