@@ -1,5 +1,5 @@
 /**
- * Practice: a round made from search results (#/srun), the Mistakes gym, a mixed round, the boss battle, the lightning round, one exercise (#/ex/<id>), and
+ * Practice: the Mistakes gym, a mixed round, the boss battle, the lightning round, one exercise (#/ex/<id>), and
  * the page of a Roadmap step still locked.
  */
 import type { Exercise } from '../../domain/pack.ts';
@@ -10,7 +10,6 @@ import { askButton, setAccent } from '../parts.ts';
 import { fmt } from '../text.ts';
 import { lockNote, view } from '../view.ts';
 import { myLevelChip } from './chapter.ts';
-import { flashDeck } from './cards.ts';
 
 export function lockedView(app: StudyApp): void {
   app.host.frame.chrome({ sub: true, crumbs: [[app.L('exercisesWord')]], back: HOME, corner: true });
@@ -33,69 +32,6 @@ export function lockedView(app: StudyApp): void {
       ),
     ),
   );
-}
-
-/** #/srun: a round made from search results, this subject's exercises, then its cards */
-export function searchRunView(app: StudyApp): void {
-  const X = app.host.search;
-  const st = X.step();
-  if (!st) {
-    app.go(X.page);
-    return;
-  }
-  const after = X.after();
-  if (st.kind === 'ex') {
-    const list = (st.ids ?? []).map(id => app.course.exercise(id)).filter((e): e is Exercise => !!e);
-    if (!list.length) {
-      if (after) after.run();
-      else app.go(st.back);
-      return;
-    }
-    app.startRound(list, { title: st.title, count: list.length, back: st.back, after, keepOrder: true });
-    return;
-  }
-  const keys = new Set(st.keys ?? []),
-    cards = app.cards().filter(c => keys.has(c.key));
-  if (!cards.length) {
-    if (after) after.run();
-    else app.go(st.back);
-    return;
-  }
-  app.host.frame.chrome({ sub: true, crumbs: [[st.title]], back: st.back, reading: true });
-  const body = h('div');
-  view(app, h('h1', {}, st.title), body);
-  flashDeck(app, body, cards, {
-    all: true,
-    onDone: () =>
-      h(
-        'div',
-        { class: 'row', style: { justifyContent: 'center' } },
-        after
-          ? h(
-              'button',
-              {
-                class: 'btn primary ns-srnext',
-                type: 'button',
-                onclick: () => {
-                  after.run();
-                },
-              },
-              after.label,
-            )
-          : null,
-        h(
-          'button',
-          {
-            class: 'btn',
-            type: 'button',
-            onclick: () => {
-              app.go(st.back);
-            },
-          },
-          app.L('sr_backToResults'),
-        ),
-      ),
-  });
 }
 
 /** #/mistakes: every exercise whose last answer was wrong, by trap and by chapter */
