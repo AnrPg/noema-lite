@@ -25,8 +25,8 @@ const def = (
 export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   def(
     manifest('ode@1'),
-    () => import('./ode/ode.js'),
-    () => import('noema-worker:./ode/ode.js#simEngine'),
+    () => import('./ode/ode.ts'),
+    () => import('noema-worker:./ode/ode.ts#simEngine'),
   ),
   def(
     manifest('prob@1'),
