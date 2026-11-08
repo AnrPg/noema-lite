@@ -151,3 +151,16 @@ peculiarities, the lesson body, "In other languages", underlined words, Aa·). W
 - the remaining views (vocab2, grammar2, poly, prod, script, speech, qa, claude, notes, session) as Lit screens, and the
   old files deleted.
 Read docs/LANGUAGE_RULES.md first. Postponed to save the owner's weekly usage; start only when the owner says so (suggested split: two helpers, rules and progress; screens).
+
+### TD-13 · The last old-JS screens into Lit — ⏸ postponed by the owner (2026-11-08)
+Phase 3 ported to Lit the shell, the study area, the tutor, the community screens, #/author, the language screens and
+the Roadmaps' map, library, share dialog, public list and change review. These screens are still old JS (`h(...)` DOM,
+the engine's modals):
+- `engine/curmap.js`: the Roadmap dialogs: new Roadmap (keys, provider, Claude setup), planning progress, the step
+  editor, a step's sources, import, export, settings; plus the Roadmap modals left in `engine/app/roadmaps.js`;
+- `engine/app/library.js` and `engine/app/community.js`: the parts of the library, the subject picker, the Subjects page,
+  import and the Shelf still drawn by hand;
+- `engine/viewer.js` (the file viewer), `engine/bridge.js` (the 文A bridge's UI) and `engine/mt.js` (the translation
+  toggles and marks): their logic to typed `src` code, their UI to Lit.
+Each keeps its features and the CSS classes the suites read; the old code is deleted. Postponed to save the owner's
+weekly usage; start only when the owner says so (suggested split: three helpers along the three items).
