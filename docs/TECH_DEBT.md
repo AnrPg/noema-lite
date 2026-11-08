@@ -137,3 +137,17 @@ They also lack the languages every new pack gets since 2026-10-21 (docs/PIPELINE
 English, Greek and Russian, and since 2026-11-05 German and French too (Databricks: el, ru, de, fr), and 文A bridges for
 every pair into English, Greek, Russian, Arabic, German and French (Databricks has en → el, ru, ar only) — the Databricks bridges
 of PR #29 are drafts measured before the everyday-word minimum (`tools/bridge.py require`).
+
+### TD-12 · Language course runtime into the hexagonal design — 🔺 high priority, postponed by the owner (2026-11-08)
+`engine/lang/` (35 files, about 490 KB) still holds the language courses as engine-scope scripts sharing globals:
+vocabulary, grammar, exercises and their grading, study sessions, scripts and transliteration, speech, production,
+polyglot cards, notes, Claude inside a lesson. The phase-3 redesign ported only the language screens to Lit (the
+Languages tab, a language's home, chip strip, chooser, Today's card, parallel lanes, the lesson head, aspects, drills and
+peculiarities, the lesson body, "In other languages", underlined words, Aa·). What is left, by the plan's patterns:
+- the rules (next item, grading, transliteration, lesson rules D1–D29) as pure TS in `src/features/languages/domain`, with tests;
+- language progress onto the learning log (event sourcing, FSRS-6) instead of the KV keys, migrating every existing
+  learner's progress without loss;
+- speech, transliteration and the in-lesson Claude as adapters behind ports;
+- the remaining views (vocab2, grammar2, poly, prod, script, speech, qa, claude, notes, session) as Lit screens, and the
+  old files deleted.
+Read docs/LANGUAGE_RULES.md first. Postponed to save the owner's weekly usage; do it next, as two helpers (rules and progress; screens).
