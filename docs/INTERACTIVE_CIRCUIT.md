@@ -96,7 +96,7 @@ the learner checks the diagnosis on the bench and can take **another device**.
 sim-spec engine `circuit-mna@1` (`bench: true`, a `prepare` that evaluates the expressions on the main thread), a plugin of the engine
 library (`NoemaCore.engines.engine('circuit-mna@1')`, whose `workerSource` is its Worker bundle (the text a Worker runs), built by esbuild from the module and the kernel pieces it imports (`noemaWorkers` in `tools/esbuild.mjs`)). Pure JS, deterministic, no DOM, no learner text: results are
 numbers and codes; the activity words them. Schema: `src/contracts/schemas/noema.circuit.v1.schema.json`. Tests: `node tests/circuit.js`;
-JS and Python (`tools/circuit.py`, the validators' twin) give the same findings for `check` / `checkFaults` (`tests/activities.js`).
+`check` / `checkFaults` give the golden findings of their former Python twin (`tests/activities.js`, `tests/fixtures/parity/`); the validators everywhere call them.
 
 ```js
 circuit = { id: 'circuit-mna@1', format: 'noema.circuit/v1', limits: {nodes: 60, elements: 200, steps: 200000}, FAULT_KINDS, check, checkFaults, create, num }
@@ -169,7 +169,7 @@ read every internal step so far, DC outputs as in `run()`, AC and probes NaN. It
 | `{element, kind: 'reverse', pins?}` | the part is soldered the other way round: two of its pins swap places (default the two pins of a two-terminal part; a three-terminal part names `pins`, e.g. `[0, 2]`). Applied before an open trace, so a pin reference follows the leg |
 
 An unknown element, node, pin or kind throws code `fault`; `checkFaults` lists the same problems without throwing (the validators
-use it, and its Python twin in `tools/circuit.py`). Results never name a fault.
+use it, and the content checks). Results never name a fault.
 
 ## 5. Instruments — `sim.measure(probe)`
 

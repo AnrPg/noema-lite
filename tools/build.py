@@ -432,7 +432,7 @@ PY_HEADERS = ('/vendor/pyodide/manifest.json\n  Cache-Control: no-cache\n  Acces
               f'/vendor/pyodide/{PY_VERSION}/*.wasm\n  Content-Type: application/wasm\n'
               '/vendor/pywheels/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n  Cross-Origin-Resource-Policy: cross-origin\n')
 
-SKILL_TOOLS = ['noema_lib.py', 'noema_core.py', 'h5p_import.py', 'bridge.py', 'validate.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
+SKILL_TOOLS = ['noema_lib.py', 'noema_core.py', 'embed_allow.json', 'h5p_allow.json', 'h5p_import.py', 'bridge.py', 'validate.py', 'pipeline.py', 'svgkit.py', 'extract_images.py', 'fetch_image.py', 'find_images.py']
 LANG_SKILL_TOOLS = ['validate_lang.py', 'lang_refcheck.py', 'langlib.py', 'lang_course.py', 'lang_script.py', 'lang_phenomena.py', 'lang_readback.js', 'lang_facade.py']
 # P6 runtimes and exports (docs/adr/001 D12): in the skill's references and the connector's guide part "interactive"
 INTERACTIVE_P6 = ('INTERACTIVE_WASM.md', 'INTERACTIVE_EMBED.md', 'INTERACTIVE_XAPI.md')

@@ -113,7 +113,7 @@ pid-tune, lora-link or sensor-node from the other references of `tools/activitie
 - `hints` (at most 6): shown one by one under the activity; each one costs: the score × 0.85 per hint, never below × 0.5. A hint leads to the next good question, never to the answer.
 - `reveal`: shown after a right answer, `explain` as for every exercise.
 - Quality rules: `sim` is **opt-in** — it counts for a chapter only when `fits.types` of its map names it, and then at least
-  one is needed (`tools/pack_rules.json` `optIn`, `fit.types.minPerKind`).
+  one is needed (the pack rules' `optIn`, `fit.types.minPerKind`: `src/features/content/domain/rules.ts`).
 
 ## 5. Words and languages
 
@@ -152,7 +152,7 @@ each translation). Numbers through `noema.fmt.number(n)`. Visible text in the HT
   front; meanwhile the fallbacks show.
 
 `make_pack.py`, `tools/build.py`, the connector (`noema_save_pack`, `noema_finish_upload`) and the app check the same rules
-(`tools/activities.py`, `engine/packcheck.js` `checkActivities`; `tests/activities.js` keeps them equal).
+(`checkActivities` of the content checks, `src/features/content/domain/activities/`; `tests/activities.js` holds it to its golden messages).
 
 ## 8. The window.noema API (html-app@1)
 
@@ -226,7 +226,7 @@ timeouts the engine is off until the mini-app restarts; every Worker ends when t
 library: they are pure, bounded and deterministic, hold no hidden state of the learner and never see the app's data — never
 `formula@1` (it computes nothing a mini-app cannot) nor a plugin (`circuit-mna@1`, the P6 engines and their benches with hidden faults).
 
-**Declared, checked, required.** The validators (`tools/activities.py`, `engine/packcheck.js`, the same messages) check that
+**Declared, checked, required.** The validators (the content checks, `src/features/content`: the app, the connector and the Python tools alike) check that
 `engines` is a list of library ids and that every `noema.engine('<id>')` in the bundle is listed; `make_pack.py` adds
 `engine:<id>` to `pack.requires`, so an app without that engine reloads to a newer build, and a mini-app that lists an engine this
 app cannot run shows its fallback. `activity_test.py` runs it with the real engines (a step `{"waitFor": "<selector>"}` waits for
@@ -260,7 +260,7 @@ into `_headers` — `docs/INTERACTIVE_PYTHON.md` §7.
 
 1. `python3 activity_lint.py <subject-dir>` — no errors (and no warnings you cannot explain); for a sim-spec it checks every
    expression against the names the spec declares, every label key in every table, the limits; for a circuit the netlist,
-   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of `h5p_check.py` (allowed
+   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of `NoemaH5P.check` (allowed
    content types and libraries, no outside link, no file type H5P refuses) on the package and on each translation.
 2. `python3 activity_test.py <subject-dir>` — it loads, says hello, shows its words in every language, reports right and wrong
    results for the solutions and wrong attempts you listed, and no console errors (a bench: `measure` / `diagnose` steps, the
@@ -380,11 +380,11 @@ and derived values; scalar outputs join the names of readouts, marks and checks,
 than 5 s stops the activity (Restart). Runs are queued: only the latest inputs are computed (a slider dragged fast skips the
 ones in between), measurements are answered in order, and the checks grader never reads the results of older inputs. `prepare`
 lets an engine evaluate the spec's own expressions (with the app's NoemaExpr, `compile`) before the inputs go to the worker. The
-validators know the same list of engines as the app (`ENGINES` in `tools/activities.py` and `engine/packcheck.js`); `make_pack.py`
+validators know the same list of engines as the app (`ENGINES` of the content checks, `src/features/content/domain/activities/rules.ts`); `make_pack.py`
 adds `engine:<id>` to `pack.requires`. `circuit-mna@1` validates `model` (the netlist with the engine's own `check()`, bindings to
 real parts and properties, the transient's step budget), the outputs (nodes and parts of the netlist) and the bench.
-`thermal@1`, `pid@1`, `rf@1` and `twin@1` validate `model` and the outputs with their own `checkSpec` (JS, loaded beside
-`packcheck.js`) and `check_spec` (Python, `tools/{thermal,pid,rf,twin}.py`), with the same messages; the validators then check
+`thermal@1`, `pid@1`, `rf@1` and `twin@1` validate `model` and the outputs with their own `checkSpec` (the engine library, which the
+content checks call: one source for the app, the connector and the Python tools); the validators then check
 every expression of the model (each binding's `expr`; for `thermal@1` and `pid@1` also the transient's `tEnd` / `dt` and every
 output's `at`) as formulas over the spec's names (`docs/INTERACTIVE_ENGINES.md` §1).
 
@@ -471,7 +471,7 @@ outputs, and says how they are coupled. A spec without `parts` behaves exactly a
   engines its registry entry lists (§8.1); `inputs` override the consts. Message `sim:run {spec, inputs?, seed?}`, answered by
   `engine:result`.
 
-The validators (`checkSimSpec` in `engine/packcheck.js`, `check_spec` in `tools/activities.py`) give the same messages;
+The validators (`checkSimSpec` of the content checks, `src/features/content/domain/activities/simspec.ts`) give one set of messages;
 `tests/parts.js` checks them on `tests/fixtures/parts_cases.json`, the steppers, the orchestrator and the three references:
 `pk-ode` (`med@1` + `ode@1` in time), `genetics-prob` (`genetics@1` → `prob@1`, a chain) and `ancient-voyage` (`map@1` →
 `timeline@1`), each available as `activity_new.py --from <name>`.

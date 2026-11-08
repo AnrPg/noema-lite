@@ -29,19 +29,15 @@ There are 16 tasks (`model.task`):
 | `shares` | succession (priority sums, fixed shares, ʿawl, radd, residuaries, escheat) and division (proportional, CEA, CEL, the Talmud) | Qurʾān 4:11–12, 4:176; Coulson 1971; Powers 1986; Kethuboth 93a; Aumann & Maschler 1985; Thomson 2003 |
 | `obligations` | contract clauses over a dated trace in calendar or business days: violations, fulfilments, contrary-to-duty repair, penalties | logic@1 `evalNorms` (Dignum et al. 2004; Prakken & Sergot 1996); Governatori 2005 |
 
-**Python twin.** `tools/lib_law.py` has the same tables (copied from the module as JSON). It parses literals with
-`tools/lib_logic.py`, and it gives the same problems, `exprs` and `keys` as the JS on every fixture. It does not compute the
-tasks.
-
 **Tests.**
 - `node tests/lib_law.js` has 182 assertions:
   - the published values and every edge code;
   - the check codes;
-  - the parity on `tests/fixtures/enginelib/law.json` (46 specs: 21 good, 25 bad);
+  - the golden outputs of the former Python twin on `tests/fixtures/enginelib/law.json` (46 specs: 21 good, 25 bad);
   - the JSON Schema of the author's form;
   - the adapter, the Worker and speed;
   - the reference activity.
-- `node tests/enginelib.js` adds the parity once the catalogue lists `law@1`.
+- `node tests/enginelib.js` checks them too, once the catalogue lists `law@1`.
 
 **Reference activity.** `tools/activities_examples/vehicles-in-the-park` works through Hart's "no vehicles in the park" with an
 emergency exception and a war-memorial exception.
@@ -83,7 +79,7 @@ emergency exception and a war-memorial exception.
 
 ### 1.1 The model (`model`), by task
 
-Each table lists only that task's fields. Every field belongs to one table, `MODEL_T`, which both twins walk.
+Each table lists only that task's fields. Every field belongs to one table, `MODEL_T`, which the checker walks.
 
 **rules** — `rules` (≤ 200) is required.
 
@@ -262,7 +258,7 @@ Each table lists only that task's fields. Every field belongs to one table, `MOD
 | `order` | as in `rules` |
 | `step` | how many steps are checked |
 
-### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_law.py`)
+### 1.2 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

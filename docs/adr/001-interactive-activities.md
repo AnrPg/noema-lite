@@ -555,3 +555,15 @@ site, the one-file bundle), `build/harness.js` (`NoemaCore` of an activity host:
 `build/engines-node.cjs` (`tests/engines.cjs`); the connector imports `src/engines/node.ts` in its root. The Python twins and
 the parity fixtures are unchanged; the outputs of every engine were compared run by run with the page scripts they replace.
 `engine/src/43_engines_p6.js` became `engine/src/43_page_runtimes.js` (only `wasm-module@1` and `external-embed@1` stay page runtimes).
+
+## 18. Addendum — one source for the checks, no Python twins (2026-11-08)
+
+The sections above name Python twins of the validators and the engines' checks (`tools/activities.py`, `simexpr.py`,
+`circuit.py`, `thermal.py`, `pid.py`, `rf.py`, `twin.py`, `enginelib.py`, `lib_<name>.py`, `wasm_check.py`, `embed_check.py`,
+`h5p_check.py`) and `engine/packcheck.js`. They are gone. The checks of a pack and its activities are one TypeScript source,
+`src/features/content` (the app's `NoemaCore.content`, the connector, the Gemini generator), and the Python tools and the skill's
+scripts run the same code in node through one bridge, `build/noema-tools.cjs` (`tools/noema_core.py`; the skill ships it as
+`scripts/noema-tools.cjs`). The runtimes' package checkers stay where they were (`engine/src/38_activity_h5p.js`,
+`44_activity_wasm.js`, `45_activity_embed.js`) and the content checks call them. The JS = Python parity tests became JS tests
+against the golden outputs of the twins, captured from them before they were deleted (`tests/golden.cjs`,
+`tests/fixtures/parity/`).

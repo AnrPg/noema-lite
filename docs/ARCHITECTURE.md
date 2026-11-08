@@ -110,8 +110,9 @@ The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOC
 
 | Root | Built to | What it picks |
 |---|---|---|
-| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`) and the data contracts (`NoemaCore.contracts`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
-| `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
+| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`), the data contracts (`NoemaCore.contracts`) and the content checks (`NoemaCore.content`, `src/features/content`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
+| `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines, content }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
+| `noema-tools.ts` | `build/noema-tools.cjs` (Node, CommonJS) | the content checks with the contracts and the engine library, and the runtimes' package checkers (`engine/src/38`, `44`, `45`) run in a scope of their own: the one bridge of the Python tools and the skill's scripts (`tools/noema_core.py`; commands `validate`, `check-pack`, `rules`, `batch`) |
 | `worker.ts` | `build/worker.js` | the job registry (`jobs.ts`) served over `worker-protocol.ts` |
 | `tools.ts` | (imported by Node scripts) | memory storage, the system clock, the given catalogs, a recording notifier and inline Compute; no network |
 | `connector.ts` | the MCP server (Netlify function) | `register()` wires `src/connector` (one module per tool, sagas, the entry tables) with the app engine files it shares, loaded in a scope of their own (`src/connector/engine/legacy.ts`), and hands those files `NoemaCore = { contracts, engines }`: the ES modules of `src/contracts` and the engine library with every engine in hand (`src/engines/node.ts`, the pack checks are synchronous); bundled by `tools/connector_bundle.mjs` |
@@ -148,6 +149,8 @@ NoemaCore.NoemaError                    the error class
 NoemaCore.contracts                     the compiled data contracts (src/contracts)
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
+NoemaCore.content                       the content checks (src/features/content): checkPack, checkChapter, checkActivities,
+                                        checkSimSpec, checkQuality, checkTranslation, checkBridge, the rules (a BRIDGE_EXTENSION)
 NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
 ```
 
@@ -176,7 +179,7 @@ bundle as text, with the kernels several engines share built once.
 **Lazy, inside one IIFE.** The app bundle must stay a classic IIFE (it runs before the old scripts, and the one-file bundle opens
 from `file://`, where neither module scripts nor fetched chunks load), so esbuild inlines every `import()`. That still keeps the
 start cost low: each engine module is wrapped in a lazy initialiser that runs only when `NoemaCore.engines.load()` first asks for
-that engine (an activity before it mounts, `packcheck.js` before it checks a pack that names it, the author before its forms), and
+that engine (an activity before it mounts, the content checks before they check a pack that names it, the author before its forms), and
 each Worker bundle is a string literal, which the page parses but never compiles until a Worker runs it. At start the page builds
 only the 26 manifests. The alternative, one file per engine fetched on demand, was rejected: it cannot work in the one-file
 bundle or from `file://`, so it would need a second loading path for the same code. The cost is the download (about 3.6 MB of
@@ -184,7 +187,7 @@ the 5 MB `build/app.js`, 1.4 MB of its gzip), cached by the service worker. When
 `splitting` in `tools/esbuild.mjs` makes those `import()`s real chunks with no change in `src/engines`.
 
 **Exact arithmetic.** No bundle is minified with `minifySyntax` (whitespace and names only): the engines must compute every
-double as their source writes it, bit for bit with their Python twins (`tools/lib_*.py`, `tools/{circuit,thermal,pid,rf,twin}.py`).
+double as their source writes it, bit for bit with the golden outputs of their former Python twins (`tests/fixtures/parity/`).
 
 The same library reaches the other environments as named entries of the same list: `build/harness.js` (above),
 `build/engines-node.cjs` (`src/engines/node.ts`, every engine in hand, for the node suites through `tests/engines.cjs`), and the

@@ -77,7 +77,7 @@ rule below (Q1–Q8) applies to it** — self-contained, explained, testing the 
 5. **ADHD-friendly**: see rule 0 above — it applies to every rule here.
 6. **Accuracy**: faithful to the sources; correct clear errors (and say so in the coverage notes); no invented facts.
 7. Diagrams redrawn cleanly (≤70 chars wide). Every diagram is explained in detail right after it (Q7b). Explanations teach (why right + why the tempting wrong answer is wrong). Every exercise type used several times per chapter.
-8. **Visual learning (docs/VISUAL.md §5–6) — only pictures with high teaching value.** A picture is used only when it teaches something the text alone cannot (where things are, what they look like, how they connect, how a quantity behaves); **no picture is better than a decorative or weak one**, and pictures are never added to meet a count. Look for them in three places: (a) the pictures of the sources (`tools/extract_images.py`), (b) the web — high-quality, information-rich photographs and diagrams, any licence for personal study, always with the source recorded (`tools/fetch_image.py`), (c) redrawn diagrams and **function graphs** where the subject has them (`tools/svgkit.py`). Verify each picture is correct, relevant and sharp. **Explain every picture in detail** right after it: what it shows, how to read it and what it teaches (Q7b). **Every picture gets ≥ 3 exercises of ≥ 2 visual types** and a `figure`; a chapter that has pictures has ≥ 3 visual exercises and every picture exercise type ≥ 3 times (tools/pack_rules.json). A chapter without a picture that teaches has none. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3, "minPerKind": 3}`.
+8. **Visual learning (docs/VISUAL.md §5–6) — only pictures with high teaching value.** A picture is used only when it teaches something the text alone cannot (where things are, what they look like, how they connect, how a quantity behaves); **no picture is better than a decorative or weak one**, and pictures are never added to meet a count. Look for them in three places: (a) the pictures of the sources (`tools/extract_images.py`), (b) the web — high-quality, information-rich photographs and diagrams, any licence for personal study, always with the source recorded (`tools/fetch_image.py`), (c) redrawn diagrams and **function graphs** where the subject has them (`tools/svgkit.py`). Verify each picture is correct, relevant and sharp. **Explain every picture in detail** right after it: what it shows, how to read it and what it teaches (Q7b). **Every picture gets ≥ 3 exercises of ≥ 2 visual types** and a `figure`; a chapter that has pictures has ≥ 3 visual exercises and every picture exercise type ≥ 3 times (the pack rules, `src/features/content/domain/rules.ts`). A chapter without a picture that teaches has none. Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3, "minPerKind": 3}`.
 
 ## Quality rules Q1–Q8 (binding for every chapter Claude or Gemini writes)
 The learner never reads the sources. The app is the only place they learn from, so every lesson and exercise must stand
@@ -360,9 +360,9 @@ IDs: `chNN-eNNN`, unique, sequential.
 ```
 
 ## Quantity guide
-Checked per chapter by `tools/pack_rules.json` (one rule list, read by `validate.py` / `make_pack.py` / `build.py` and by
-`engine/packcheck.js` for the app, the Gemini generator and the connector's `noema_finish_upload`; the steps in order:
-`docs/PIPELINES.md`). For packs with `subject.authoring.rules` ≥ 2 (written by `start_subject.py`):
+Checked per chapter by the content checks (`src/features/content`: one rule list, `domain/rules.ts`, and one checker for
+the app, the Gemini generator, the connector's `noema_finish_upload` and — through the one Node bridge `build/noema-tools.cjs`
+that `tools/noema_core.py` calls — `validate.py` / `make_pack.py` / `build.py`; the steps in order: `docs/PIPELINES.md`). For packs with `subject.authoring.rules` ≥ 2 (written by `start_subject.py`):
 * **only what fits**: the chapter's map (`map/chNN.json` `fits`) declares the exercise types, focus tags and paradigms
   (`mode`) that make sense for it; every other value has a reason in `unfit` (code types without `features.code`,
   `calc` without `features.math` and the picture types without a picture are unfit by themselves);
@@ -412,7 +412,7 @@ the section id and exercise ids that cover it. Use it to self-audit before finis
 ### The data contracts (the shape of every file)
 Every format has ONE JSON Schema in `src/contracts/schemas/` (draft 2020-12, a stable versioned id
 `https://noema-lite.netlify.app/schemas/noema.<name>.v<N>.schema.json`; a change that old files would fail is a new `vN`
-with a migration). The app (`engine/packcheck.js`), the connector, `tools/validate.py` and the skill check the SHAPE of a
+with a migration). The app (`NoemaCore.content`), the connector, `tools/validate.py` and the skill check the SHAPE of a
 file with the same compiled validators and the same words; their own code checks only what a schema cannot say (ids
 that match and exist, an answer that is one of its own options, a region inside its picture, the quality rules).
 
@@ -431,9 +431,9 @@ that match and exist, an answer that is one of its own options, a region inside 
 | the input of every connector tool | `noema.mcp-tools.v1#<tool name>` |
 
 `npm ci && npm run contracts` (`tools/contracts.mjs`; `tools/build.py` runs it first) generates the types
-(`src/contracts/generated/`), the validators (`src/contracts/validate.ts`, ajv standalone code: no `eval`) and
-`engine/contracts.js` (`NoemaCore.contracts`, for the classic scripts, the connector and `tools/contracts.py`). They are
-never committed. A schema that changes the shape of files already written gets a migration (`src/contracts/migrations`,
+(`src/contracts/generated/`) and the validators (`src/contracts/validate.ts`, ajv standalone code: no `eval`), which the
+app (`NoemaCore.contracts`), the connector and `build/noema-tools.cjs` (the Python tools and the skill's scripts) bundle. They
+are never committed. A schema that changes the shape of files already written gets a migration (`src/contracts/migrations`,
 `npm run migrate`): it upgrades every file of the repository, keeps every chapter, section, exercise, card, source,
 translation and word (the counts before and after are compared for every file) and leaves a file already migrated as it is.
 
@@ -447,7 +447,7 @@ A level says for whom a piece of content is: a school grade, a semester, a year 
 * **A pack** names the levels it teaches: `subject.levels: ["g7"]` (ids of its Roadmap's ladder) or its own ladder.
 * **A chapter, section, exercise, flashcard or playbook** may name its own `"level": "g7"` (a level of the pack); without
   one it is its parent's: an exercise or card → its section → its chapter → the pack's, when the pack names one level.
-* **The rules** (`src/features/content/domain/levels.ts`): the difficulty mix (`tools/pack_rules.json` "mix.difficulty",
+* **The rules** (`src/features/content/domain/levels.ts`): the difficulty mix (the quality rule "mix.difficulty",
   20 / 25 / 55 % ± 5) holds within each level of a pack, not only over the whole pack; every level named is one of
   the pack's.
 * Not to be confused with a knowledge-map point's `level` (foundation / core / advanced: how deep the point goes) or a
@@ -463,7 +463,7 @@ that are not its own language** — the WHOLE pack: every chapter (terms in brac
 Metadata: title, app title, description, hero… — required for each translation locale) — and then 文A bridges for **every
 pair** of the language read → the learner's native language: from the pack's language and from each translation into
 English, Greek, Russian, Arabic, German and French other than the language read, made after the translations (docs/BRIDGE.md §2.4;
-`tools/pack_rules.json` "languages", docs/PIPELINES.md §4b). The flow's steps `translate` and `bridges` check them before `make_pack.py`. Other
+the pack rules' `languages`, `src/features/content/domain/rules.ts`; docs/PIPELINES.md §4b). The flow's steps `translate` and `bridges` check them before `make_pack.py`. Other
 languages only when the user asks. Locale codes: the app's UI locales `el ru fr de it es-ES pt-PT sq tr ar-EG hi ja
 zh-Hans zh-Hant en`, or a bare language (`es`, `pt`, `ar`) that covers its regional ones.
 
