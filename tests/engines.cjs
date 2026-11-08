@@ -7,7 +7,7 @@
      E.kernel(name)   expr | core | simkit | space | schema | circuit (the netlist simulator of circuit-mna@1)
      E.core()         globalThis.NoemaCore = { engines: E.lib, content }: what the activity core and the page's scripts read
      E.content()      the content checks (src/features/content: checkPack, checkActivities, checkSimSpec, the rules…), as the app's
-                      NoemaCore.content: build/noema-tools.cjs required as a module (with engine/src/38, 44, 45 run in its own scope)
+                      NoemaCore.content: build/noema-tools.cjs required as a module (with the runtimes' checks, src/runtimes, and engine/src/38 run in its own scope)
      E.worker(id)     the global of a fresh vm context that ran the engine's Worker bundle: .noemaEngine, and .__noemaShared[key]
                       the shared pieces in it (kernel/simexpr.js, kernel/core.js, kernel/simkit.js, kernel/space.js, logic/logic.js, med/med.js) */
 'use strict';

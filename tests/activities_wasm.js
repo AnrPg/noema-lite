@@ -1,4 +1,4 @@
-/* wasm-module@1 and the sim-spec engine wasm@1 (engine/src/44_activity_wasm.js, docs/activities-dev/wasm.md).
+/* wasm-module@1 and the sim-spec engine wasm@1 (src/runtimes/wasm-module, docs/activities-dev/wasm.md).
    Node part (always):
      1. the fixtures: every tests/fixtures/wasm/*.wat assembles (watasm.py) to exactly the committed .wasm, and node's own WebAssembly accepts it;
      2. the golden reports: NoemaWasm.inspect gives the report (imports, exports, memory, errors, sha256) of the former Python twin
@@ -7,8 +7,8 @@
      3. the synchronous sha256 equals node's crypto; the sim spec of the browser part passes NoemaCore.content.checkSimSpec;
      4. the ABI mapping: the worker's own code (run here in node) through the engine's prepare → the oscillator's numbers exactly,
         the seeded noema_random, the capped log, a capped memory grow; neutralise() removes the network globals.
-   Browser part (unless --node): a stub host page like activity_harness.js builds (ACTP from 32_activities.js, the sim runtime, this
-     file) served over http, plus a beacon server: the oscillator through the sim-spec renderer (values and plot), the runtime
+   Browser part (unless --node): a stub host page like activity_harness.js builds (ACTP from 32_activities.js, the sim runtime, the
+     typed runtimes of build/harness.js made for it by NoemaCore.attachRuntimes) served over http, plus a beacon server: the oscillator through the sim-spec renderer (values and plot), the runtime
      wasm-module@1 with its own spec, runaway (engine: 5 s; NoemaWasm.load: budget 300 ms) and Restart, a forbidden import refused
      (the page check and the worker's own), the memory limits, 0 requests from the worker (fetch, XHR, WebSocket, EventSource,
      importScripts, Worker, sendBeacon). With --app <built repo dir>: the same oscillator, runaway + Restart and the refused import in
@@ -22,12 +22,21 @@ let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) { fails++; console.log
 const canon = v => JSON.stringify(v, (k, x) => x && typeof x === 'object' && !Array.isArray(x) ? Object.fromEntries(Object.keys(x).sort().map(q => [q, x[q]])) : x);
 const want = require('./golden.cjs')('activities_wasm');   // the golden outputs of the former Python twin (tests/golden.cjs)
 
-/* the app's pieces in node: NoemaExpr, the content checks (NoemaCore.content), a stub ACT that captures what 44_activity_wasm.js registers */
+/* the app's pieces in node: NoemaExpr, the content checks (NoemaCore.content), a stub ACT that captures what the runtime wasm-module@1
+   brings when it is made for a host (build/runtimes-node.cjs: the runtime and its engine wasm@1) */
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaExpr = ENGINES.kernel('expr');
 const REGD = { engines: {}, runtimes: {} };
 globalThis.ACT = { ITEMS: {}, registerEngine: d => { REGD.engines[d.id] = d; }, registerRuntime: d => { REGD.runtimes[d.id] = d; }, runtime: id => REGD.runtimes[id] || null };
-const W = require(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'));
+const RTN = require(path.join(ROOT, 'build', 'runtimes-node.cjs'));
+const HOST = { t: k => k, message: (type, payload) => ({ p: 'noema.activity', v: 1, type, payload: payload || {} }), setting: () => undefined, setSetting: () => { }, flags: () => ({}), warn: () => { }, now: () => Date.now(),
+  items: () => globalThis.ACT.ITEMS, expr: () => globalThis.NoemaCore.engines.expr, loadedRuntime: id => REGD.runtimes[id] || null };
+let W = null;   // the module's api (NoemaCore.runtimes.load('wasm-module@1') → module.api: the checks, load, workerSource, the worker's functions)
+async function attach() {
+  const mod = await RTN.runtimes.load('wasm-module@1'); W = mod.api;
+  const def = mod.create(HOST); globalThis.ACT.registerRuntime(def); for (const e of def.engines || []) globalThis.ACT.registerEngine(e);
+}
+const SX = globalThis.NoemaCore.engines.expr;   // the expression language the content checks hand checkModel
 
 /* the fixtures and the items / specs both parts use */
 const wasm = f => fs.readFileSync(path.join(FIX, f + '.wasm'));
@@ -97,8 +106,8 @@ function nodePart() {
     { ...S, model: { ...S.model, inputs: ['k', 'nosuch + 1', ''] } }, { ...S, model: { ...S.model, inputs: [] } }, { ...S, model: { ...S.model, module: 'bad-core' } },
     { ...S, model: { ...S.model, init: 'step' } }, { ...S, model: null }];
   const PM = want('models', [...modelCases, ITEMS]);
-  modelCases.forEach((c, i) => { const J = W.checkModel(c, ITEMS); ok(canon(J) === canon(PM[i]), `model case ${i}: the same problems ${canon(J)}${canon(J) === canon(PM[i]) ? '' : ' / golden ' + canon(PM[i])}`); });
-  ok(W.checkModel(S, ITEMS).length === 0, 'the oscillator model passes');
+  modelCases.forEach((c, i) => { const J = W.checkModel(c, ITEMS, SX); ok(canon(J) === canon(PM[i]), `model case ${i}: the same problems ${canon(J)}${canon(J) === canon(PM[i]) ? '' : ' / golden ' + canon(PM[i])}`); });
+  ok(W.checkModel(S, ITEMS, SX).length === 0, 'the oscillator model passes');
 
   console.log('— 3. sha256, the spec');
   let shaOk = true; for (const len of [0, 1, 55, 56, 63, 64, 65, 1000, 123457]) { const b = crypto.randomBytes(len); if (W.sha256(new Uint8Array(b)) !== crypto.createHash('sha256').update(b).digest('hex')) shaOk = false; }
@@ -106,7 +115,7 @@ function nodePart() {
   const engs = ['formula@1', 'circuit-mna@1', 'wasm@1'];
   for (const id of ['osc-sim', 'osc-spin', 'bad-sim']) { const p = globalThis.NoemaCore.content.checkSimSpec(ITEMS[id].spec, STRINGS, engs); ok(p.length === 0, `the spec of ${id} passes checkSimSpec ${p.slice(0, 2).join(' | ')}`); }
   const ownSpec = { ...ITEMS['osc-own'].spec, engine: 'wasm@1', model: { ...ITEMS['osc-own'].spec.model, module: 'osc-own' } };
-  ok(globalThis.NoemaCore.content.checkSimSpec(ownSpec, STRINGS, engs).length === 0 && W.checkModel(ownSpec, ITEMS).length === 0, 'the own spec of osc-own (as the runtime completes it) passes');
+  ok(globalThis.NoemaCore.content.checkSimSpec(ownSpec, STRINGS, engs).length === 0 && W.checkModel(ownSpec, ITEMS, SX).length === 0, 'the own spec of osc-own (as the runtime completes it) passes');
 
   console.log('— 4. the ABI mapping (the worker code, run in node)');
   const E = REGD.engines['wasm@1'];
@@ -136,7 +145,8 @@ function nodePart() {
   const fake = { fetch() { }, XMLHttpRequest() { }, WebSocket() { }, EventSource() { }, importScripts() { }, Worker() { }, postMessage() { } };
   const proto = { indexedDB: {}, caches: {} }; Object.setPrototypeOf(fake, proto); W._neutralise(fake);
   ok(['fetch', 'XMLHttpRequest', 'WebSocket', 'EventSource', 'importScripts', 'Worker', 'indexedDB', 'caches'].every(k => fake[k] === undefined) && typeof fake.postMessage === 'function', 'neutralise: the network globals are gone (own and inherited), postMessage stays');
-  ok(!/tE\(|textContent\s*=\s*['"`]/.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'), 'utf8')), 'the engine file shows no text of its own (codes only)');
+  const RT_DIR = path.join(ROOT, 'src', 'runtimes', 'wasm-module'), rtSrc = fs.readdirSync(RT_DIR).map(f => fs.readFileSync(path.join(RT_DIR, f), 'utf8')).join('\n');
+  ok(!/tE\(|host\.t\(|textContent\s*=\s*['"`]/.test(rtSrc), 'the runtime\'s files show no text of their own (codes only)');
 }
 
 /* ---------- the browser part ---------- */
@@ -154,7 +164,12 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 ${hline}
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
+</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${rd('35_activity_sim.js')}</script><script>
+var RTHOST = { t: tE, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, setting: function () { return undefined; }, setSetting: function () {},
+  flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); },
+  items: function () { return ACT.ITEMS; }, expr: function () { return NoemaCore.engines.expr; }, loadedRuntime: function (id) { return RT[id] || null; } };
+// the typed runtimes made for this page (wasm-module@1 and its engine wasm@1); NoemaWasm: the module's api (load, workerSource, …)
+window.READY = Promise.all([NoemaCore.attachRuntimes(ACT, RTHOST), NoemaCore.runtimes.load('wasm-module@1').then(function (m) { window.NoemaWasm = m.api; })]);
 window.LOG = []; window.H = null;
 window.run = function (id, task) {
   var act = ACT.ITEMS[id], box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];
@@ -182,7 +197,7 @@ window.run = function (id, task) {
     const errs = []; p.on('pageerror', e => errs.push(e.message));
     pageHits.length = 0; beaconHits.length = 0;
     await p.goto(PAGE);
-    ok(await p.evaluate(() => !!(window.NoemaWasm && EN['wasm@1'] && RT['wasm-module@1'] && RT['sim-spec@1'])), 'the page has the sim runtime, wasm@1 and wasm-module@1');
+    ok(await p.evaluate(() => window.READY.then(() => !!(window.NoemaWasm && EN['wasm@1'] && RT['wasm-module@1'] && RT['sim-spec@1']))), 'the page has the sim runtime, wasm@1 and wasm-module@1');
     const started = () => until(() => p.evaluate(() => LOG.some(m => m.type === 'ready' || m.type === 'fail')));
     const values = () => until(() => p.evaluate(() => { const v = window.H && H.values && H.values(); return !!(v && typeof v.E === 'number' && v.E === v.E); }));
 
@@ -261,14 +276,14 @@ window.run = function (id, task) {
   srv.close(); beacon.close();
 }
 
-/* the real app (a built engine.js with 44_activity_wasm.js in it), like tests/activities_app.js: the items are put into ACT.ITEMS of an open subject */
+/* the real app (wasm-module@1 a typed runtime of build/runtimes.js, loaded by ACT.runtime), like tests/activities_app.js: the items are put into ACT.ITEMS of an open subject */
 async function appPart(browser, ref) {
   console.log('  — the real app');
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
   const p = await (await browser.newContext({ viewport: { width: 1280, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
   await p.goto((await appUrl(APP)) + '?subject=' + (process.env.APP_SUBJECT || 'demo-physics')); await wait(1500);
-  if (!ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && !!ACT.engine('wasm@1') && !!ACT.loadedRuntime('wasm-module@1'))), 'the app has wasm@1 and wasm-module@1 (engine.js built with 44_activity_wasm.js)')) return;
+  if (!ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && ACT.hasRuntime('wasm-module@1') && ACT.engines().includes('wasm@1'))), 'the app knows wasm@1 and wasm-module@1 before their code is loaded (the manifests of src/runtimes)')) return;
   ok(await p.evaluate(() => ACT.caps().has('runtime:wasm-module@1') && ACT.caps().has('engine:wasm@1')), 'ACT.caps() names runtime:wasm-module@1 and engine:wasm@1 (pack.requires)');
   await p.evaluate(I => { Object.assign(ACT.ITEMS, I); }, ITEMS);
   // a block that comes into view while the live slots are taken (blocks of the cleared page are destroyed only by their watchdog, ≤ 2 s)
@@ -278,6 +293,7 @@ async function appPart(browser, ref) {
     const b = p.locator('main .act-bar button.btn.primary'); if (await b.count()) await b.first().click(); };
   await mountBlk('osc-sim');
   ok(await until(() => p.evaluate(() => !!document.querySelector('main .sim') && /Energy at the end/.test(document.querySelector('main').textContent))), 'the oscillator renders in the app (controls, readout) ' + JSON.stringify(await p.evaluate(() => document.querySelector('main').innerText.slice(0, 160))));
+  ok(await p.evaluate(() => !!ACT.loadedRuntime('wasm-module@1') && !!ACT.engine('wasm@1')), 'the sim-spec activity on engine wasm@1 loaded wasm-module@1 (ACT.runtime) and registered its engine');
   const want = ref.E.toFixed(6);
   ok(await until(() => p.evaluate(w => document.querySelector('main').textContent.replace(/−/g, '-').includes(w), want)), `the readout shows E = ${want}`);
   await mountBlk('osc-spin');
@@ -292,6 +308,7 @@ async function appPart(browser, ref) {
 
 (async () => {
   console.log('wasm-module@1 / wasm@1');
+  await attach();
   nodePart();
   if (!NODE_ONLY) await browserPart();
   console.log(fails ? `\n✗ ${fails} of ${n} failed` : `\n✓ all ${n} fine`);

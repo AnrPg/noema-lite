@@ -108,6 +108,7 @@ const ACT = (() => {
     t: (k, v) => tE(k, v), message: (type, payload, extra) => ACTP.out(type, payload, extra),
     setting: k => (S.settings ? S.settings[k] : undefined), setSetting: (k, v) => { if (!S.settings) return; S.settings[k] = v; if (typeof save === 'function') save(); },
     flags: () => flags(), warn: (...w) => console.warn(...w), now: () => Date.now(),
+    items: () => ITEMS, expr: () => LIBR()?.expr || null, loadedRuntime: id => RUNTIMES[id] || null,
   });
   const pendingRt = {};
   /** a runtime ready to mount: one registered here, or a typed one loaded now (once) and made for this app → Promise<runtime | null> */
@@ -115,7 +116,7 @@ const ACT = (() => {
     if (own(id)) return Promise.resolve(RUNTIMES[id]);
     const L = RTL();
     if (!L?.has(id) || !switchedOn(id)) return Promise.resolve(null);
-    return pendingRt[id] ||= L.load(id).then(m => { const def = m.create(HOST); if (def) registerRuntime(def); delete pendingRt[id]; return def || null; },
+    return pendingRt[id] ||= L.load(id).then(m => { const def = m.create(HOST); if (def) { registerRuntime(def); for (const e of def.engines || []) registerEngine(e); } delete pendingRt[id]; return def || null; },
       e => { delete pendingRt[id]; console.warn('[noema] runtime', id, 'not loaded', e); return null; });
   }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
@@ -126,12 +127,17 @@ const ACT = (() => {
   const LIBR = () => window.NoemaCore?.engines || null;
   /** an engine ready to run: one registered here, or one of the library once it is loaded (null before) */
   const engine = id => Object.prototype.hasOwnProperty.call(ENGINES, id) ? ENGINES[id] : LIBR()?.engine(id) || null;
-  /** every engine this app has: the registered ones and the library's, loaded or not */
-  const engines = () => [...new Set([...Object.keys(ENGINES), ...(LIBR()?.ids() || [])])];
+  /** every engine this app has: the registered ones, the library's and those a typed runtime brings (wasm@1), loaded or not */
+  const engines = () => [...new Set([...Object.keys(ENGINES), ...(LIBR()?.ids() || []), ...(RTL()?.engines().filter(e => switchedOn(RTL().engineOwner(e))) || [])])];
   /** the library engines an activity needs (its spec's engine, its parts', a mini-app's) and not loaded yet */
   function unloaded(a) {
     const L = LIBR(), need = window.NoemaCore?.content?.needRequires ? NoemaCore.content.needRequires([a], PARTS) : [];
     return L ? need.filter(r => r.startsWith('engine:')).map(r => r.slice(7)).filter(id => !Object.prototype.hasOwnProperty.call(ENGINES, id) && L.has(id) && !L.loaded(id)) : [];
+  }
+  /** the typed runtimes whose engines an activity needs (wasm@1 of wasm-module@1) and that are not here yet */
+  function owners(a) {
+    const R = RTL(), need = R && window.NoemaCore?.content?.needRequires ? NoemaCore.content.needRequires([a], PARTS) : [];
+    return [...new Set(need.filter(r => r.startsWith('engine:')).map(r => r.slice(7)).filter(id => !Object.prototype.hasOwnProperty.call(ENGINES, id)).map(id => R.engineOwner(id)).filter(Boolean))];
   }
 
   /* ---------- persistence, in the learning log: S.act (explorer state per activity and place: activity.saved) and S.att (the last
@@ -258,11 +264,11 @@ const ACT = (() => {
         the runtime's own failure (its engine is missing) */
     function start() {
       if (sess.destroyed) return;
-      const want = unloaded(a);
-      if (!want.length && own(a.runtime)) return begin();
+      const want = unloaded(a), rts = owners(a);
+      if (!want.length && !rts.length && own(a.runtime)) return begin();
       teardown(); box.classList.remove('act-fallback'); note.textContent = tE('engine.act.loading');
       const tok = sess.loading = {};
-      Promise.all([want.length ? LIBR().load(want) : null, runtime(a.runtime)]).then(([, rt]) => {
+      Promise.all([want.length ? LIBR().load(want) : null, runtime(a.runtime), ...rts.map(runtime)]).then(([, rt]) => {
         if (sess.loading !== tok || sess.destroyed) return;
         if (!rt) { sess.loading = null; return stop(tE('engine.act.failed')); }
         begin();

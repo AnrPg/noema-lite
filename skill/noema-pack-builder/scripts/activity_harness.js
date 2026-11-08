@@ -10,7 +10,7 @@
    picks the 7th diagnosis; "readings": [[i, lo, hi]] checks the number of the i-th measurement, "log": n how many there are;
    a case's "task" (e.g. {"fault": "rOpen"}) overrides the exercise's task.params.
    wasm-module@1 (docs/INTERACTIVE_WASM.md): activities/<id>/module.wasm (+ its own spec.json) runs like a sim-spec@1 activity, with
-   the app's wasm runtime (44_activity_wasm.js: the module checked, then run in a worker without network); a sim-spec@1 spec with
+   the app's wasm runtime (src/runtimes/wasm-module, inside noema-core.js: the module checked, then run in a worker without network); a sim-spec@1 spec with
    engine wasm@1 finds its module item in activities.json. external-embed@1 is not run here (it needs the network and the provider's
    page): check it with activity_lint.py.
    py-module@1 (docs/INTERACTIVE_PYTHON.md) runs like sim-spec@1 (the same steps and expectations; "values" are Python's scalar outputs),
@@ -87,7 +87,8 @@ const has = f => fs.existsSync(path.join(srcDir, f));
 // activity_host/noema-core.js, or the repository's build/harness.js (npm run build)
 const corePath = [path.join(srcDir, 'noema-core.js'), path.join(srcDir, '..', '..', 'build', 'harness.js')].find(f => fs.existsSync(f));
 const SIMOK = has('35_activity_sim.js') && !!corePath;
-const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
+// wasm-module@1 and the engine wasm@1 (P6): typed runtimes (src/runtimes) inside noema-core.js, made for this page by NoemaCore.attachRuntimes
+const WASMOK = SIMOK && /attachRuntimes/.test(fs.readFileSync(corePath, 'utf8'));
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
 // the site's service worker (it keeps the Python files): the built site's /sw.js or the repository's build/sw.js (npm run build); served
@@ -121,12 +122,17 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_activity_sim.js')}</script>${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_activity_sim.js')}</script>${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+/* the typed runtimes (src/runtimes: wasm-module@1 and its engine wasm@1), made for this page as the app's ACT.runtime(id) makes them */
+var RTHOST = { t: tE, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, setting: function () { return undefined; }, setSetting: function () {},
+  flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); },
+  items: function () { return ACT.ITEMS; }, expr: function () { return window.NoemaCore ? NoemaCore.engines.expr : null; }, loadedRuntime: function (id) { return RT[id] || null; } };
+window.RUNTIMES_READY = window.NoemaCore && NoemaCore.attachRuntimes ? NoemaCore.attachRuntimes(ACT, RTHOST) : Promise.resolve([]);
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 /* every engine of the library loaded first (once: the app loads only those an activity needs) */
 window.run = function (act, init, modules) {
-  return (window.NoemaCore ? NoemaCore.engines.load(NoemaCore.engines.ids()) : Promise.resolve()).then(function () { mount(act, init, modules); });
+  return Promise.all([window.NoemaCore ? NoemaCore.engines.load(NoemaCore.engines.ids()) : null, window.RUNTIMES_READY]).then(function () { mount(act, init, modules); });
 };
 function mount(act, init, modules) {
   if (modules) ACT.ITEMS = modules;

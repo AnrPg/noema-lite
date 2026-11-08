@@ -30,6 +30,31 @@ export interface RuntimeHost {
   warn(...what: readonly unknown[]): void;
   /** the time now (ms) */
   now(): number;
+  /** the open pack's activities items by id (ACT.ITEMS) */
+  items(): Readonly<Record<string, unknown>>;
+  /** the expression language (NoemaCore.engines.expr), or null where it is not loaded */
+  expr(): ExprCheck | null;
+  /** another runtime as it is registered now (wasm-module@1 shows its own spec with sim-spec@1), or null */
+  loadedRuntime(id: string): ActivityRuntime | null;
+}
+
+/** the expression language as a runtime's checks use it */
+export interface ExprCheck {
+  check(src: string, opts?: { readonly vars?: readonly string[] }): readonly { readonly msg: string }[];
+}
+
+/** an engine of sim-spec@1 that a runtime brings (wasm@1), in the shape the activity core registers (ACT.registerEngine) */
+export interface SimEngineDef {
+  readonly id: string;
+  check?(spec: Readonly<Record<string, unknown>>): readonly string[];
+  /** on the page: the spec's expressions compiled once → the inputs of each run */
+  prepare?(
+    spec: Readonly<Record<string, unknown>>,
+    compile: (src: string) => (env: Readonly<Record<string, unknown>>) => unknown,
+  ): (env: Readonly<Record<string, unknown>>) => unknown;
+  create(spec: Readonly<Record<string, unknown>>, opts?: unknown): { run(inputs: unknown): unknown };
+  /** the engine's code as text for its Worker (self.noemaEngine = { create }) */
+  readonly workerSource?: string;
 }
 
 /** an item of pack.activities as the runtime reads it: untrusted data, checked before use */
@@ -81,6 +106,8 @@ export interface ActivityRuntime {
   failText?(code: string, act?: ActivityItem): FailText | null;
   available?(): boolean;
   unavailable?(): string | null;
+  /** the engines of sim-spec@1 it brings (the core registers them when the runtime is made) */
+  readonly engines?: readonly SimEngineDef[];
   /** it renders in the app's DOM and takes the height it needs */
   readonly autoHeight?: boolean;
   readonly startTimeoutMs?: number;
@@ -98,5 +125,7 @@ export type RuntimeSwitch = 'on' | 'opt-in';
 export interface RuntimePlugin {
   readonly manifest: PluginManifest;
   readonly switch: RuntimeSwitch;
+  /** the engines of sim-spec@1 it brings (src/runtimes/manifests.ts) */
+  readonly engines: readonly string[];
   readonly entry: () => Promise<RuntimeModule>;
 }

@@ -84,7 +84,7 @@ export const ENTRIES = [
   { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 320 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui)
   { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
-  { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + engine/src/38, 44, 45
+  { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + the runtimes' checks (src/runtimes) + engine/src/38
   { name: 'runtimes-node', in: 'src/runtimes/node.ts', kind: 'node', format: 'cjs', out: 'runtimes-node.cjs', budgetKB: 512 },   // the runtimes' checks and code for the node suites
   { name: 'roadmaps-node', in: 'src/composition/roadmaps-node.ts', kind: 'node', format: 'cjs', out: 'roadmaps-node.cjs', budgetKB: 256 },
 ];

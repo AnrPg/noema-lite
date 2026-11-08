@@ -12,6 +12,10 @@ export interface RuntimeLibrary {
   has(id: string): boolean;
   manifest(id: string): PluginManifest | null;
   switchOf(id: string): RuntimeSwitch | null;
+  /** the engines of sim-spec@1 the runtimes bring, every one (before any runtime's code is loaded) */
+  engines(): string[];
+  /** the runtime that brings this engine of sim-spec@1, or null */
+  engineOwner(engine: string): string | null;
   /** is it switched on by these flags (NOEMA_CONFIG.activities)? */
   isOn(id: string, flags: Readonly<Record<string, unknown>>): boolean;
   /** its code, loaded once (a failed load rejects and may be tried again) */
@@ -25,17 +29,21 @@ export interface RuntimeLibrary {
 
 export function createRuntimeLibrary(plugins: readonly RuntimePlugin[], checks: () => RuntimeChecks | null): RuntimeLibrary {
   const reg = createPluginRegistry<RuntimeModule>();
-  const switches = new Map<string, RuntimeSwitch>();
+  const switches = new Map<string, RuntimeSwitch>(),
+    owners = new Map<string, string>();
   for (const p of plugins) {
     const r = reg.register({ manifest: p.manifest, entry: p.entry });
     if (!r.ok) throw new Error(`runtime ${p.manifest.id}: ${r.error.code}`);
     switches.set(p.manifest.id, p.switch);
+    for (const e of p.engines) owners.set(e, p.manifest.id);
   }
   return Object.freeze({
     ids: () => reg.manifests('runtime').map(m => m.id),
     has: (id: string) => reg.has(id),
     manifest: (id: string) => reg.manifest(id),
     switchOf: (id: string) => switches.get(id) ?? null,
+    engines: () => [...owners.keys()],
+    engineOwner: (engine: string) => owners.get(engine) ?? null,
     isOn: (id: string, flags: Readonly<Record<string, unknown>>) => {
       const sw = switches.get(id);
       return !!sw && switchedOn(sw, flags[id]);
