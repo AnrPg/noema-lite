@@ -223,7 +223,7 @@ const CATALOG = Object.freeze([
     'plus court chemin',
     'algorithme',
   ]),
-  E('geom@1', 'library', true, 'src/engines/geom/geom.js', 'geom', [
+  E('geom@1', 'library', true, 'src/engines/geom/geom.ts', 'geom', [
     'geometry',
     'construction',
     'triangle',
@@ -267,7 +267,7 @@ const CATALOG = Object.freeze([
     'cercle',
     'angle',
   ]),
-  E('genetics@1', 'library', true, 'src/engines/genetics/genetics.js', 'genetics', [
+  E('genetics@1', 'library', true, 'src/engines/genetics/genetics.ts', 'genetics', [
     'genetics',
     'gene',
     'allele',
@@ -682,7 +682,7 @@ const CATALOG = Object.freeze([
     'mètre',
     'poésie',
   ]),
-  E('craft@1', 'library', true, 'src/engines/craft/craft.js', 'craft', [
+  E('craft@1', 'library', true, 'src/engines/craft/craft.ts', 'craft', [
     'craft',
     'handcraft',
     'knitting',
@@ -831,7 +831,7 @@ const CATALOG = Object.freeze([
     'enchère',
     'négociation',
   ]),
-  E('field@1', 'library', true, 'src/engines/field/field.js', 'field', [
+  E('field@1', 'library', true, 'src/engines/field/field.ts', 'field', [
     'heat',
     'diffusion',
     'wave',
@@ -870,7 +870,7 @@ const CATALOG = Object.freeze([
     'grille',
     'automate cellulaire',
   ]),
-  E('des@1', 'library', true, 'src/engines/des/des.js', 'des', [
+  E('des@1', 'library', true, 'src/engines/des/des.ts', 'des', [
     'queue',
     'queueing',
     'waiting line',

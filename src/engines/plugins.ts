@@ -45,13 +45,13 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('geom@1'),
-    () => import('./geom/geom.js'),
-    () => import('noema-worker:./geom/geom.js#simEngine'),
+    () => import('./geom/geom.ts'),
+    () => import('noema-worker:./geom/geom.ts#simEngine'),
   ),
   def(
     manifest('genetics@1'),
-    () => import('./genetics/genetics.js'),
-    () => import('noema-worker:./genetics/genetics.js#simEngine'),
+    () => import('./genetics/genetics.ts'),
+    () => import('noema-worker:./genetics/genetics.ts#simEngine'),
   ),
   def(
     manifest('seq@1'),
@@ -95,8 +95,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('craft@1'),
-    () => import('./craft/craft.js'),
-    () => import('noema-worker:./craft/craft.js#simEngine'),
+    () => import('./craft/craft.ts'),
+    () => import('noema-worker:./craft/craft.ts#simEngine'),
   ),
   def(
     manifest('law@1', ['engine:logic@1']),
@@ -110,13 +110,13 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('field@1'),
-    () => import('./field/field.js'),
-    () => import('noema-worker:./field/field.js#simEngine'),
+    () => import('./field/field.ts'),
+    () => import('noema-worker:./field/field.ts#simEngine'),
   ),
   def(
     manifest('des@1'),
-    () => import('./des/des.js'),
-    () => import('noema-worker:./des/des.js#simEngine'),
+    () => import('./des/des.ts'),
+    () => import('noema-worker:./des/des.ts#simEngine'),
   ),
   def(
     manifest('philo@1', ['engine:logic@1']),
