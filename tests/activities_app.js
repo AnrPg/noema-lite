@@ -697,8 +697,11 @@ async function p6engines(p, ctx, E) {
   const direct = (aid, vals) => p.evaluate(([a, v]) => { const sp = ACT.ITEMS[a].spec, E = ACT.engine(sp.engine), env = { ...(sp.consts || {}) };
     for (const q of sp.params) env[q.id] = q.id in v ? v[q.id] : q.default; for (const d of sp.derived || []) env[d.id] = NoemaCore.engines.expr.compile(d.expr)(env);
     return E.create(sp, { seed: 1 }).run(E.prepare(sp, NoemaCore.engines.expr.compile)(env)); }, [aid, vals]);
-  ok(await p.evaluate(() => ['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(e => ACT.caps().has('engine:' + e) && typeof ACT.engine(e)?.workerSource === 'string') && ACT.engine('twin@1').bench === true && checkRequires().every(x => x === 'runtime:py-module@1' && !ACT.enabled('py-module@1'))),
-    'the app has engine:thermal@1, engine:pid@1, engine:rf@1 and engine:twin@1 (each with a workerSource; twin@1 runs benches); pack.requires is met (but for Python where it cannot run) ' + JSON.stringify(await p.evaluate(() => checkRequires())));
+  // the library's engines are known at once (caps, pack.requires) and loaded the first time an activity needs one (NoemaCore.engines.load)
+  const p6 = await p.evaluate(async () => { const ids = ['thermal@1', 'pid@1', 'rf@1', 'twin@1'], known = ids.every(e => ACT.caps().has('engine:' + e)), rep = await NoemaCore.engines.load(ids);
+    return { known, ok: rep.ok, failed: rep.failed, worker: ids.every(e => typeof ACT.engine(e)?.workerSource === 'string'), bench: ACT.engine('twin@1')?.bench === true, req: checkRequires(), met: checkRequires().every(x => x === 'runtime:py-module@1' && !ACT.enabled('py-module@1')) }; });
+  ok(p6.known && p6.ok && p6.worker && p6.bench && p6.met,
+    'the app has engine:thermal@1, engine:pid@1, engine:rf@1 and engine:twin@1 (each loads with a workerSource; twin@1 runs benches); pack.requires is met (but for Python where it cannot run) ' + JSON.stringify(p6));
 
   console.log('— thermal@1: heatsink');
   const HS = 'main .act-blk .act[data-activity="heatsink"]';
@@ -901,8 +904,13 @@ async function python(name) {
     await p.evaluate(() => { S.settings.lang = 'el'; save(); }); await p.reload(); await wait(1200);
     await p.evaluate(() => { location.hash = '#/me/data'; }); await wait(800); await p.evaluate(() => document.querySelectorAll('details').forEach(d => d.open = true)); await wait(300);
     const el = await until(() => p.evaluate(() => [...document.querySelectorAll('details summary')].some(x => /Python για τις δραστηριότητες/.test(x.textContent))), 8000);
-    const elTxt = await p.evaluate(() => { const d = [...document.querySelectorAll('details')].find(x => /Python για τις δραστηριότητες/.test(x.querySelector('summary')?.textContent || '')); return d ? d.textContent : ''; });
-    ok(el && /Όχι σε αυτή τη συσκευή|Εν μέρει εδώ/.test(elTxt) && /Ετοίμασε την Python/.test(elTxt), 'the shell\'s Data and sync page has the section, in Greek: ' + elTxt.slice(0, 160));
+    // the pill and the button are drawn once the section has read what is on the device (NoemaPy.need, over http)
+    const elSec = () => p.evaluate(() => { const d = [...document.querySelectorAll('details')].find(x => /Python για τις δραστηριότητες/.test(x.querySelector('summary')?.textContent || ''));
+      return d ? { pill: d.querySelector('summary .pill')?.textContent || '', line: d.querySelector('.act-pyset .tiny')?.textContent || '', btn: d.querySelector('[data-py="prepare"]')?.textContent || '' } : null; });
+    const elOk = s => !!s && /Όχι σε αυτή τη συσκευή|Εν μέρει εδώ/.test(s.pill) && /Ετοίμασε την Python/.test(s.btn);
+    await until(async () => elOk(await elSec()), 15000);
+    const elS = await elSec();
+    ok(el && elOk(elS), 'the shell\'s Data and sync page has the section, in Greek: ' + JSON.stringify(elS));
     await p.evaluate(() => { window.__pyLines = []; new MutationObserver(() => { for (const l of document.querySelectorAll('.act-pyline')) { const x = l.textContent; if (x && window.__pyLines[window.__pyLines.length - 1] !== x) window.__pyLines.push(x); } }).observe(document.body, { childList: true, subtree: true, characterData: true }); });
     await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(600);
     if (await p.evaluate(() => { const b = [...document.querySelectorAll('main button')].find(x => x.textContent.trim() === SL('showAll')); b?.click(); return !!b; })) await wait(300);   // the section in steps: "show all" (in Greek)

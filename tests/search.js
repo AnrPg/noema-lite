@@ -96,7 +96,8 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   ok((await texts(page, '.ns-srcols .ns-item b')).includes('Energy things') && (await texts(page, '.ns-srcols .ns-label'))[0] === 'Saved searches', 'the empty page lists the saved searches');
   await page.goto(url + '#/search?q=kinetic'); await page.reload(); await until(() => page.$('#ns-top .ns-menubtn'), 8000);
   await page.click('#ns-top .ns-menubtn'); await page.waitForSelector('.ns-pop');
-  ok((await texts(page, '.ns-pop button')).some(t => t.startsWith('Saved searches (1)')), 'the search page’s ⋮ leads to the saved searches');
+  const popT = await texts(page, '.ns-pop button');
+  ok(popT.some(t => t.startsWith('Saved searches (1)')), 'the search page’s ⋮ leads to the saved searches ' + JSON.stringify(popT));
   await page.locator('.ns-pop button', { hasText: 'Saved searches' }).first().click(); await wait(600);
   ok(await page.evaluate(() => location.hash === '#/search') && await page.$('.ns-srcols'), '… which open the list');
   ok(await page.$('.ns-srrecent'), '… and recent searches on this device');

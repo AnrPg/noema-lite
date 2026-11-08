@@ -106,7 +106,9 @@ async function mockGemini(ctx) {
   for (const t of ['profile', 'settings', 'subjects', 'backup', 'cloud']) { await page.evaluate(t => { $('.modal')?.remove(); openAccountMenu(t); }, t); await wait(350); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
   ok(await page.$$eval('.modal .tabs button', b => b.map(x => x.textContent).join('|')) === '👤 Profile|⚙️ Settings|📚 Subjects|💾 Backup & restore|☁️ Cloud|❓ Help', 'account menu has 6 tabs: Profile · Settings · Subjects · Backup · Cloud · Help');
   await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('backup'); }); await wait(500);
-  ok(await page.evaluate(() => $$('.modal details.accsec').length === 4 && $$('.modal details.accsec[open]').length === 0), 'backup & restore sections are collapsed by default');
+  // four sections (download, folder, restore, restore points) and, where Python activities can run (the website, over http), Prepare Python for offline
+  const bk = await page.evaluate(() => ({ n: $$('.modal details.accsec').length, open: $$('.modal details.accsec[open]').length, py: ACT.enabled('py-module@1'), pySec: $$('.modal details.accsec .act-pyset').length }));
+  ok(bk.n === 4 + (bk.py ? 1 : 0) && bk.pySec === (bk.py ? 1 : 0) && bk.open === 0, 'backup & restore sections are collapsed by default ' + JSON.stringify(bk));
   await page.click('.modal details.accsec:nth-of-type(2) summary'); await wait(300);
   ok(await page.evaluate(() => $$('.modal details.accsec[open]').length === 1), 'a section expands on click');
   await page.screenshot({ path: SHOTS + '/a3b_backup_expanded.png' });

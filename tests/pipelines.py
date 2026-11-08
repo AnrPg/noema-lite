@@ -44,6 +44,7 @@ import re
 work = tempfile.mkdtemp(prefix="pipe-"); sk = os.path.join(work, "_skill"); os.makedirs(os.path.join(sk, "pipelines"))
 for f in os.listdir(SCRIPTS): shutil.copy(os.path.join(SCRIPTS, f), sk) if f.endswith(".py") else None
 for t in re.search(r"SKILL_TOOLS = \[([^\]]*)\]", open(os.path.join(TOOLS, "build.py"), encoding="utf-8").read()).group(1).replace("'", "").split(", "): shutil.copy(os.path.join(TOOLS, t), sk)
+shutil.copy(os.path.join(ROOT, "engine", "contracts.js"), sk)   # the data contracts validate.py checks shapes with, as build_skill puts them in scripts/
 for f in os.listdir(pipeline.PIPES): shutil.copy(os.path.join(pipeline.PIPES, f), os.path.join(sk, "pipelines"))
 P = lambda *a: subprocess.run([sys.executable, os.path.join(sk, "pipeline.py"), *a], capture_output=True, text=True)
 try:
@@ -156,7 +157,7 @@ try:
     ok("write          stale" in st and "checks         stale" in st and "map            done" in st, "a change to the chapter makes write and every later step stale, not the map")
     r = P("check", d, "checks"); ok(r.returncode == 1 and r.stdout.startswith("first: review"), "checks: refused while an earlier step is stale")
     ok(all(P("check", d, x).returncode == 0 for x in ("write", "blind_solve", "review", "translate", "bridges")), "write, blind_solve, review, translate, bridges: checked again")
-    r = P("check", d, "checks"); ok(r.returncode == 1 and "[self.contained]" in r.stdout, "checks: make_pack.py refuses the pointer to the source (self.contained)")
+    r = P("check", d, "checks"); ok(r.returncode == 1 and "[self.contained]" in r.stdout, "checks: make_pack.py refuses the pointer to the source (self.contained)" + ("" if "[self.contained]" in r.stdout else "\n" + r.stdout + r.stderr))
     ok(P("next", d).stdout.startswith("next: checks"), "next: the first step that is not done")
 finally:
     shutil.rmtree(work, ignore_errors=True)
