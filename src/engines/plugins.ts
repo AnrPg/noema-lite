@@ -120,8 +120,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('philo@1', ['engine:logic@1']),
-    () => import('./philo/philo.js'),
-    () => import('noema-worker:./philo/philo.js#simEngine'),
+    () => import('./philo/philo.ts'),
+    () => import('noema-worker:./philo/philo.ts#simEngine'),
   ),
   def(
     manifest('rhetoric@1', ['engine:logic@1']),
