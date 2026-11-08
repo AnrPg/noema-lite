@@ -5,43 +5,14 @@ import '../../../../ui/test/dom.ts';
 import assert from 'node:assert/strict';
 import { afterEach, describe, test } from 'node:test';
 import { defineUi } from '../../../../ui/index.ts';
-import { settle } from '../../../../ui/test/services.ts';
 import { defineRoadmapsUi, NoemaRoadmapStepTest } from '../index.ts';
 import type { QuizDone } from '../quiz.ts';
 import { cleanup, fakeData, host, QUESTIONS, roadmap } from './fixtures.ts';
+import { click, find, flush, text } from './query.ts';
 
 defineUi();
 defineRoadmapsUi();
 afterEach(cleanup);
-
-/** everything under an element (its own shadow root first), through the shadow roots */
-const deep = (r: Element | ShadowRoot): Element[] => {
-  const kids = [...(r instanceof Element && r.shadowRoot ? [r.shadowRoot] : []), r];
-  return kids.flatMap(k => [...k.children].flatMap(e => [e, ...deep(e)]));
-};
-const find = (sel: string, root: Element = document.body): HTMLElement | undefined =>
-  deep(root).find((e): e is HTMLElement => e.matches(sel));
-/** the text a learner sees: every text node, through the shadow roots (slotted text once) */
-const text = (root: Node): string => {
-  const walk = (n: Node): string =>
-    n.nodeType === 3
-      ? (n.textContent ?? '')
-      : n.nodeType === 8
-        ? ''
-        : [...(n instanceof Element && n.shadowRoot ? [n.shadowRoot] : []), ...n.childNodes].map(walk).join(' ');
-  return walk(root).replace(/\s+/g, ' ');
-};
-const click = (sel: string, root?: Element): void => {
-  const e = find(sel, root);
-  if (!e) throw new Error(`no ${sel}`);
-  (e.shadowRoot?.querySelector('button') ?? e).click();
-};
-const flush = async (): Promise<void> => {
-  for (let i = 0; i < 4; i++) {
-    await new Promise(r => setTimeout(r, 0));
-    await settle(document.body);
-  }
-};
 
 describe('the quiz', () => {
   test('one question after the other: right and wrong shown with why, then the result event', async () => {

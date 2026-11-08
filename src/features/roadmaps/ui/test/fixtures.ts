@@ -11,7 +11,17 @@ import type { LevelView } from '../../application/levels.ts';
 import type { TestQuestion } from '../../domain/levels.ts';
 import { levelProgress } from '../../domain/levels.ts';
 import type { Roadmap } from '../../domain/model.ts';
-import { provideRoadmapsData, type PackExercises, type RoadmapsData } from '../data.ts';
+import { statuses } from '../../domain/status.ts';
+import {
+  provideRoadmapsData,
+  type AppTask,
+  type Invite,
+  type Member,
+  type PackExercises,
+  type RoadmapsData,
+  type SourcePlan,
+} from '../data.ts';
+import { stopEvents } from './query.ts';
 
 const ROOT = new URL('../../../../../i18n/', import.meta.url).pathname;
 const plain = (m: Record<string, string>): Record<string, string> =>
@@ -83,7 +93,35 @@ export interface FakeData extends RoadmapsData {
   /** what advance() reaches next (then nothing) */
   reachNext: string[];
   decideError: string | null;
+  /** a cloud account is signed in */
+  cloud: boolean;
+  invitesList: Invite[];
+  membersList: Member[];
+  /** what the clipboard got */
+  copied: string[];
+  /** the step being prepared on this device */
+  busyKey: string | null;
+  task: AppTask | null;
+  /** what the AI proposes for the material */
+  plan: SourcePlan;
+  listeners: Set<() => void>;
+  /** tell the screens something changed */
+  change(): void;
 }
+
+export const PLAN: SourcePlan = {
+  via: 'estimate',
+  recommend: 'roadmap',
+  reasons: ['2 files, about 300 pages in all', 'The files form 2 separate parts that build on each other'],
+  title: 'Cell biology',
+  course: { chapters: [{ title: 'Cells', files: ['a.pdf'] }] },
+  roadmap: {
+    steps: [
+      { title: 'Membranes', summary: 'what a cell is made of', files: ['a.pdf pp. 1–20'] },
+      { title: 'Genes', files: ['b.pdf'] },
+    ],
+  },
+};
 
 /** A fake port: the Roadmap in memory, the levels as the domain computes them, every call recorded. */
 export function fakeData(c: Roadmap): FakeData {
@@ -153,6 +191,162 @@ export function fakeData(c: Roadmap): FakeData {
     },
     inline: md => md.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'),
     notify: t => notes.push(t),
+
+    cloud: false,
+    invitesList: [],
+    membersList: [],
+    copied: [],
+    busyKey: null,
+    task: null,
+    plan: PLAN,
+    listeners: new Set(),
+    change: () => {
+      for (const f of d.listeners) f();
+    },
+    list: () => [d.c],
+    statuses: (_acc, cc) =>
+      statuses(
+        cc,
+        id => {
+          const ready = cc.nodes[id]?.pack?.status === 'ready',
+            m = d.masteredIds.has(id);
+          return { score: m ? 1 : ready ? 0.4 : 0, read: m ? 1 : 0, mastered: m };
+        },
+        {},
+      ),
+    onChange: f => {
+      d.listeners.add(f);
+      return () => {
+        d.listeners.delete(f);
+      };
+    },
+    copy: t => {
+      d.copied.push(t);
+      return Promise.resolve(true);
+    },
+    cloudOn: () => d.cloud,
+    shelfCount: () => Promise.resolve(3),
+    prep: {
+      busy: () => d.busyKey,
+      live: () => 'chapter 2 of 4',
+      paused: () => false,
+      request: (_a, _c, id, o) => {
+        calls.push(`request ${id}${o?.raiseBudget ? ' ' + String(o.raiseBudget) : ''}`);
+      },
+      stop: () => {
+        calls.push('stop');
+      },
+      toApp: (_c, id) => {
+        calls.push(`toApp ${id}`);
+      },
+      fromApp: (_c, id) => {
+        calls.push(`fromApp ${id}`);
+      },
+      queueMany: (_a, _c, n, o) => {
+        calls.push(`queueMany ${String(n)} ${String(o.review)}`);
+        return { queued: 2, needReview: 1, needPlan: 0 };
+      },
+      unmaster: (_a, _c, id) => {
+        calls.push(`unmaster ${id}`);
+        d.masteredIds.delete(id);
+      },
+    },
+    share: {
+      invites: () => Promise.resolve(d.invitesList),
+      join: (_a, id) => {
+        calls.push(`join ${id}`);
+        return Promise.resolve({ ...d.c, id });
+      },
+      decline: id => {
+        calls.push(`decline ${id}`);
+        d.invitesList = d.invitesList.filter(i => i.curriculum !== id);
+        return Promise.resolve();
+      },
+      publish: (_a, id, o) => {
+        calls.push(`publish ${id} ${String(o.isPublic)} ${String(o.steps)}`);
+        o.onLog('shared');
+        d.c = { ...d.c, shared: { role: 'owner', public: o.isPublic } };
+        return Promise.resolve();
+      },
+      setPublic: (_a, id, on) => {
+        calls.push(`setPublic ${id} ${String(on)}`);
+        return Promise.resolve();
+      },
+      invite: (_a, id, email, msg) => {
+        calls.push(`invite ${id} ${email} ${msg}`);
+        return Promise.resolve();
+      },
+      members: () => Promise.resolve(d.membersList),
+      removeMember: (_id, email, o) => {
+        calls.push(`removeMember ${email} ${String(o.pending)}`);
+        return Promise.resolve();
+      },
+      unpublish: (_a, id) => {
+        calls.push(`unpublish ${id}`);
+        d.c = { ...d.c, shared: null };
+        return Promise.resolve();
+      },
+      download: (_a, _c, sid) => {
+        calls.push(`download ${sid}`);
+        return Promise.resolve('p-' + sid);
+      },
+      keepStep: (_a, _c, sid) => {
+        calls.push(`keep ${sid}`);
+      },
+    },
+    app: {
+      start: () => undefined,
+      message: (_c, n) => `MESSAGE x${String(n)}`,
+      lastCheck: () => null,
+      error: () => null,
+      poll: () => {
+        calls.push('poll');
+        return Promise.resolve(1);
+      },
+      copyTask: () => d.task,
+      paste: (_a, _c, tid, text) => {
+        calls.push(`paste ${tid}`);
+        return text.trim().startsWith('{') ? { line: '✓ planned 2 steps' } : { errors: ['not JSON', 'no steps'] };
+      },
+      downloadFiles: () => Promise.resolve(),
+      bundle: (_a, _c, sid) => {
+        calls.push(`bundle ${sid}`);
+        return Promise.resolve({ name: sid + '.zip', missing: [] });
+      },
+      importPackage: (_a, _c, sid) => {
+        calls.push(`import ${sid}`);
+        return Promise.resolve({ title: 'Imported' });
+      },
+    },
+    sources: {
+      keys: () => ({ claude: false, gemini: false }),
+      canMakeHere: () => false,
+      languages: () => ({ en: 'English', el: 'Greek' }),
+      providerReady: (_a, p) => p === 'claudeapp',
+      defaultProvider: () => 'claudeapp',
+      unzip: () => Promise.resolve([]),
+      inventory: (files, onLog) => {
+        calls.push(`inventory ${String(files.length)}`);
+        files.forEach(f => {
+          onLog(f.name);
+        });
+        return Promise.resolve(files.map(f => ({ name: f.name })));
+      },
+      estimate: () => {
+        calls.push('estimate');
+        return d.plan;
+      },
+      propose: () => Promise.resolve(d.plan),
+      task: inv => `TASK ${inv.map(i => i.name).join(',')}`,
+      fromAnswer: text => (text.includes('{') ? { plan: d.plan } : { errors: ['not JSON'] }),
+      makeRoadmap: (_a, p, _inv, o) => {
+        calls.push(`makeRoadmap ${o.title || p.title} ${o.provider}`);
+        return Promise.resolve({ id: 'new1', next: 'app' as const });
+      },
+      courseMessage: () => 'COURSE MESSAGE',
+      courseBrief: () => 'BRIEF',
+    },
+    art: { mascot: () => '<svg class="mascot"></svg>' },
   };
   return d;
 }
@@ -170,5 +364,6 @@ export function host(data: RoadmapsData, s: TestServices = services()): HTMLElem
 /** After each test: the page empty, the providers gone. */
 export function cleanup(): void {
   for (const f of stops.splice(0)) f();
+  stopEvents();
   document.body.replaceChildren();
 }
