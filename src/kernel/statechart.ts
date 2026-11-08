@@ -102,7 +102,7 @@ export function machine<C, E extends EventObject, S extends string>(config: Mach
     },
     accepts(from) {
       const n = node(from.value);
-      return n.final ? [] : (Object.keys(n.on ?? {}));
+      return n.final ? [] : Object.keys(n.on ?? {});
     },
   };
 }

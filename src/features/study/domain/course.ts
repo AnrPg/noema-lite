@@ -202,7 +202,8 @@ function indexCourse(
     section: id => sec.get(id),
     exercise: id => ex.get(id),
     drill: id => pb.get(id),
-    chapterOf: item => parent.get(item.id),
+    // an item made on the spot (a new question of the AI) is in its section's chapter
+    chapterOf: item => parent.get(item.id) ?? ('section' in item && typeof item.section === 'string' ? parent.get(item.section) : undefined),
     sectionIndex: s => at.get(s.id) ?? -1,
     source: id => src.get(id),
   };

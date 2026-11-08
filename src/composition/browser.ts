@@ -21,6 +21,7 @@ import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-report
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
 import { inlineCompute } from '../adapters/local/jobs.ts';
 import { STUDY_BRIDGE, STUDY_REGISTRATIONS } from './study.ts';
+import { STUDY_UI_BRIDGE } from './study-ui.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
@@ -50,6 +51,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
   // index's records, built in the Worker): src/composition/study.ts
   ...STUDY_BRIDGE,
+  // NoemaCore.studyUi: the study area's pages (area 2), mounted by the older page for the open subject: src/composition/study-ui.ts
+  ...STUDY_UI_BRIDGE,
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */
