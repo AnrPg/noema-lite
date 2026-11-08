@@ -31,7 +31,7 @@ const ACTP = (() => {
     'a11y:announce': p => str(p.text, LIM.text) && p.text.trim().length > 0,
     error: p => CODE.test(p.code || '') && (p.message == null || str(p.message, LIM.detail)),
     pong: p => true, ack: p => true, nack: p => true,
-    // py-module@1 (37_activity_py.js): the runner's own messages, checked in full by NoemaPy.protocol before they get here; the core only notes them
+    // py-module@1 (src/runtimes/py-module): the runner's own messages, checked in full by its pyCheck before they get here; the core only notes them
     'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
     'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
     // html-app@1: a mini-app asks for an engine of the library (34_activity_html.js engineBridge checks the rest: declared, the spec, the inputs)
@@ -68,7 +68,7 @@ const ACT = (() => {
   const PARTS = reg && reg.parts && typeof reg.parts === 'object' && !Array.isArray(reg.parts) ? reg.parts : {};   // activities/_parts: the parts a spec reuses ({use, with}, docs/INTERACTIVE.md §12.8)
   const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
   // every runtime is on unless config.js switches it off (docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = false;
-  // py-module@1 still needs NoemaPy.available() (the website: never file:// or the one-file bundle)
+  // py-module@1 still needs the website (its descriptor's rule in src/runtimes/manifests.ts: never file:// or the one-file bundle)
   const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': true }, window.NOEMA_CONFIG?.activities || {});
   /** the typed runtimes (src/runtimes, NoemaCore.runtimes): known at once by their manifests, their code loaded when an activity needs it */
   const RTL = () => window.NoemaCore?.runtimes || null;
@@ -77,7 +77,9 @@ const ACT = (() => {
   const switchedOn = id => (RTL()?.has(id) ? RTL().isOn(id, flags()) : flags()[id] !== false);
   /** a runtime that is registered (or a typed one not loaded yet), switched on and can run here (available(): py-module@1 only on the
       website, never file:// or the one-file bundle) */
-  const enabled = id => !!((own(id) || !!RTL()?.has(id)) && switchedOn(id) && (!own(id) || typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
+  const enabled = id => !!((own(id) || !!RTL()?.has(id)) && switchedOn(id) && (own(id) ? typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available() : RTL().available(id)));
+  /** the words the fallback shows where a runtime that is switched on cannot run (its own, or a typed runtime's descriptor's) */
+  const unavailableNote = id => { if (!switchedOn(id)) return null; const R0 = RUNTIMES[id]; if (R0) return typeof R0.unavailable === 'function' ? R0.unavailable() : null; const k = RTL()?.unavailableNote(id); return k ? tE(k) : null; };
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
   const caps = () => new Set(['activities/v1', ...[...new Set([...Object.keys(RUNTIMES), ...(RTL()?.ids() || [])])].filter(enabled).map(id => 'runtime:' + id), ...engines().map(id => 'engine:' + id)]);
   const canRun = a => !!(a && enabled(a.runtime));
@@ -109,6 +111,8 @@ const ACT = (() => {
     setting: k => (S.settings ? S.settings[k] : undefined), setSetting: (k, v) => { if (!S.settings) return; S.settings[k] = v; if (typeof save === 'function') save(); },
     flags: () => flags(), warn: (...w) => console.warn(...w), now: () => Date.now(),
     items: () => ITEMS, expr: () => LIBR()?.expr || null, loadedRuntime: id => RUNTIMES[id] || null,
+    config: k => window.NOEMA_CONFIG?.[k], num: (n, o) => window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n, o) : o?.maximumFractionDigits != null ? n.toFixed(o.maximumFractionDigits) : String(n),
+    simView: (box, c, o) => (typeof ACT !== 'undefined' && ACT.simView ? ACT.simView(box, c, o) : null),
   });
   const pendingRt = {};
   /** a runtime ready to mount: one registered here, or a typed one loaded now (once) and made for this app → Promise<runtime | null> */
@@ -206,7 +210,7 @@ const ACT = (() => {
     const btn = (label, onclick, cls = 'btn small') => h('button', { class: cls, type: 'button', onclick }, label);
 
     if (!a) { fallback(tE('engine.act.missing')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
-    if (!canRun(a)) { const R0 = RUNTIMES[a.runtime], why = R0 && flags()[a.runtime] !== false && typeof R0.unavailable === 'function' ? R0.unavailable() : null; fallback(why || tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
+    if (!canRun(a)) { const why = unavailableNote(a.runtime); fallback(why || tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
 
     let timer = null, pingT = null, io = null, saveT = null;
     function stop(reason, offerRestart = true) {
@@ -250,7 +254,7 @@ const ACT = (() => {
         case 'result': sess.result = { score: p.score, passed: p.passed, detail: p.detail || null, t: Date.now() }; sess.onResult?.(sess.result); return;
         case 'hint:request': { const r = sess.nextHint?.(); sess.port?.send('hint', { text: r || null }, { re: m.id }); return; }
         case 'a11y:announce': live.textContent = ''; setTimeout(() => { live.textContent = p.text; }, 30); return;
-        case 'py:out': case 'py:status': return;   // the Python runtime's own traffic (37_activity_py_ui.js reads it)
+        case 'py:out': case 'py:status': return;   // the Python runtime's own traffic (src/runtimes/py-module reads it)
         case 'error':
           if (p.code === 'runaway') return stop(tE('engine.act.stopped'));
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;

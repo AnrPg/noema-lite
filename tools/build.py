@@ -486,8 +486,8 @@ def build_skill(out_zip):
             for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
                 if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
         z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
-        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed runtimes (src/runtimes: wasm-module@1)
-        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed runtimes (src/runtimes: wasm-module@1, py-module@1)
+        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '38_activity_h5p.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
@@ -594,7 +594,7 @@ def build_bundle(metas):
     if '--subjects' in args: sel = set(args[args.index('--subjects') + 1].split(','))
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     # a source inlined in a <script>: '</script' would end it, and '<!--' followed later by '<script' (the Python runner's srcdoc,
-    # 37_activity_py.js) puts the HTML parser in the 'double escaped' state, where '</script>' no longer ends the element (the
+    # src/runtimes/py-module/runner.ts) puts the HTML parser in the 'double escaped' state, where '</script>' no longer ends the element (the
     # engine then swallowed the loader and the bundle stayed blank). Both are written as JS escapes that mean the same text.
     esc = lambda s: s.replace('</script', '<\\/script').replace('<!--', '<\\x21--')
     packs = ''.join(f'<script>{esc(rd(m["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel))

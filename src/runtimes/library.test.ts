@@ -72,6 +72,9 @@ const host = (flags: Record<string, unknown>): RuntimeHost => {
     items: () => ({}),
     expr: () => null,
     loadedRuntime: () => null,
+    config: () => undefined,
+    num: n => String(n),
+    simView: () => null,
   };
 };
 

@@ -6,6 +6,7 @@ import type { RuntimeModule, RuntimePlugin } from './types.ts';
 const ENTRIES: Readonly<Record<string, () => Promise<{ default: RuntimeModule }>>> = {
   'external-embed@1': () => import('./external-embed/runtime.ts'),
   'wasm-module@1': () => import('./wasm-module/runtime.ts'),
+  'py-module@1': () => import('./py-module/runtime.ts'),
 };
 
 export const RUNTIME_PLUGINS: readonly RuntimePlugin[] = Object.freeze(

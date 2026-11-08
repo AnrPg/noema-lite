@@ -22,6 +22,51 @@ function embedConsentRow() {
     h('button', { class: 'btn small ghost', type: 'button', onclick: () => { S.settings.embedOk = {}; save(); row.remove(); toast(tE('engine.act.embed.forgotten')); } }, tE('engine.act.embed.forget')));
   return row;
 }
+/** Settings › Data and sync: "Prepare Python for offline" — the core, numpy, scipy and the allow-listed extras, with progress and what is
+    on the device (one line; the details per part in its ⓘ). Only where Python activities can run (the website, the runtime switched on).
+    The service is the runtime's own (src/runtimes/py-module: ACT.runtime('py-module@1') → .py), loaded when the section is drawn. */
+function pyOfflineSection() {
+  const ID = 'py-module@1';   // i18n-ignore
+  if (typeof ACT === 'undefined' || !ACT.enabled(ID)) return null;
+  const line = h('span', { class: 'tiny' }, tE('engine.py.checking'));
+  const info = h('span', {});
+  const bar = h('progress', { class: 'act-pybar', max: '1', value: '0', hidden: true });
+  const btn = h('button', { class: 'btn small', type: 'button', 'data-py': 'prepare', hidden: true, onclick: () => prepare(false) });
+  const body = h('div', { class: 'act-pyset' }, h('div', { class: 'row' }, line, info), h('div', { class: 'row' }, btn, bar));
+  const sec = accSection({ line: 'download' }, tE('engine.py.title'), { status: { ok: false, text: '…' }, info: tE('engine.py.info'), body });   // i18n-ignore (a placeholder)
+  const pill = sec.querySelector('summary .pill');
+  const service = () => ACT.runtime(ID).then(rt => rt?.py || null, () => null);
+  let all = null;
+  const setPill = (ok, text) => { pill.className = 'pill ' + (ok ? 'c' : 'warnpill'); pill.textContent = text; };
+  async function draw() {
+    let n = null, st = null;
+    try { const PY = await service(); if (!PY) throw new Error('no python'); const man = await PY._manifest(); all = ['numpy', 'scipy', ...Object.keys(man.wheels || {})]; n = await PY.need(all); st = await PY.status(); } catch (e) { n = null; }
+    if (!sec.isConnected && n === null) return;
+    if (!n) { setPill(false, tE('engine.py.notReady')); line.textContent = tE('engine.py.noFiles'); btn.hidden = true; info.replaceChildren(); return; }
+    const ready = n.missing === 0;
+    setPill(ready, ready ? tE('engine.py.ready') : n.missing < n.files ? tE('engine.py.partly') : tE('engine.py.notReady'));
+    line.textContent = ready ? tE('engine.py.have', { size: fmtBytes(n.bytes) }) : tE('engine.py.part', { have: fmtBytes(n.bytes - n.missingBytes), total: fmtBytes(n.bytes) });
+    const G = st && st.groups ? st.groups : {};
+    const parts = Object.entries(G).map(([k, g]) => `${k === 'core' ? 'Python' : k} ${fmtBytes(g.bytes)} ${g.ready ? '✓' : '—'}`).join(' · ');   // i18n-ignore (names and marks)
+    info.replaceChildren(tip(parts + '\n' + (st && st.persisted ? tE('engine.py.kept') : tE('engine.py.mayEvict'))));
+    btn.textContent = tE('engine.py.prepare', { size: fmtBytes(n.missingBytes) }); btn.hidden = ready; btn.disabled = false;
+  }
+  async function prepare(force) {
+    btn.disabled = true; bar.hidden = false; bar.value = 0;
+    const onProgress = d => { if (d.totalBytes) { bar.value = d.bytes / d.totalBytes; line.textContent = tE('engine.py.progress', { done: fmtBytes(d.bytes), total: fmtBytes(d.totalBytes) }); } };
+    let r; try { const PY = await service(); if (!PY) throw Object.assign(new Error('no python'), { code: 'unavailable' }); r = await PY.prepareOffline({ include: all || ['numpy', 'scipy'], onProgress, force }); } catch (e) { r = { ok: false, failed: [{}], code: e.code }; }
+    bar.hidden = true;
+    if (r.code === 'save-data') {
+      line.textContent = tE('engine.py.saveData'); btn.disabled = false;
+      btn.replaceWith(h('button', { class: 'btn small', type: 'button', 'data-py': 'anyway', onclick: e => { e.target.replaceWith(btn); prepare(true); } }, tE('engine.py.anyway')));
+      return;
+    }
+    await draw();
+    if (!r.ok) line.textContent = tE('engine.py.failed', { n: (r.failed || []).length || 1 });
+  }
+  draw();
+  return sec;
+}
 const fmtBytes = n => n > 1e6 ? tE('engine.common.sizeMB', { size: window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n / 1e6, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (n / 1e6).toFixed(1) }) : n > 1e3 ? tE('engine.common.sizeKB', { size: nf(Math.round(n / 1e3)) }) : tE('engine.common.sizeB', { size: nf(n) });
 /** A moment / a day / a time of day in the UI language (the same fields the browser's toLocale…String() shows). */
 const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIME = { hour: 'numeric', minute: '2-digit', second: '2-digit' };
@@ -251,7 +296,7 @@ const ACC_VIEWS = {
           } })), guideBtn('restore', '♻️ ' + tE('engine.bk.howRestore'))] }),
       accSection('🕘', tE('engine.bk.secPoints'), { status: { ok: true, text: nf(pts0.length) }, info: tE('engine.bk.pointsInfo'), body: rpBox }),
       embedConsentRow(),
-      window.pyOfflineSection?.() || '');   // Prepare Python for offline (37_activity_py_ui.js): only where Python activities can run
+      pyOfflineSection() || '');   // Prepare Python for offline: only where Python activities can run
     drawFs(); drawRP();
   },
 

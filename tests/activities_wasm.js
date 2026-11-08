@@ -30,7 +30,8 @@ const REGD = { engines: {}, runtimes: {} };
 globalThis.ACT = { ITEMS: {}, registerEngine: d => { REGD.engines[d.id] = d; }, registerRuntime: d => { REGD.runtimes[d.id] = d; }, runtime: id => REGD.runtimes[id] || null };
 const RTN = require(path.join(ROOT, 'build', 'runtimes-node.cjs'));
 const HOST = { t: k => k, message: (type, payload) => ({ p: 'noema.activity', v: 1, type, payload: payload || {} }), setting: () => undefined, setSetting: () => { }, flags: () => ({}), warn: () => { }, now: () => Date.now(),
-  items: () => globalThis.ACT.ITEMS, expr: () => globalThis.NoemaCore.engines.expr, loadedRuntime: id => REGD.runtimes[id] || null };
+  items: () => globalThis.ACT.ITEMS, expr: () => globalThis.NoemaCore.engines.expr, loadedRuntime: id => REGD.runtimes[id] || null,
+  config: () => undefined, num: n => String(n), simView: () => null };
 let W = null;   // the module's api (NoemaCore.runtimes.load('wasm-module@1') → module.api: the checks, load, workerSource, the worker's functions)
 async function attach() {
   const mod = await RTN.runtimes.load('wasm-module@1'); W = mod.api;
@@ -167,7 +168,8 @@ window.ACTP = ACTP;
 </script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${rd('35_activity_sim.js')}</script><script>
 var RTHOST = { t: tE, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, setting: function () { return undefined; }, setSetting: function () {},
   flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); },
-  items: function () { return ACT.ITEMS; }, expr: function () { return NoemaCore.engines.expr; }, loadedRuntime: function (id) { return RT[id] || null; } };
+  items: function () { return ACT.ITEMS; }, expr: function () { return NoemaCore.engines.expr; }, loadedRuntime: function (id) { return RT[id] || null; },
+  config: function () { return undefined; }, num: function (n) { return String(n); }, simView: function () { return null; } };
 // the typed runtimes made for this page (wasm-module@1 and its engine wasm@1); NoemaWasm: the module's api (load, workerSource, …)
 window.READY = Promise.all([NoemaCore.attachRuntimes(ACT, RTHOST), NoemaCore.runtimes.load('wasm-module@1').then(function (m) { window.NoemaWasm = m.api; })]);
 window.LOG = []; window.H = null;

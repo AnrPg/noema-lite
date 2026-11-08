@@ -1,4 +1,4 @@
-/* py-module@1 (engine/src/37_activity_py.js, the service worker src/composition/sw.ts → build/sw.js, tools/fetch_pyodide.py) in real browsers.
+/* py-module@1 (src/runtimes/py-module: runner.ts, the service worker src/composition/sw.ts → build/sw.js, tools/fetch_pyodide.py) in real browsers.
      node tests/activities_py.js [chromium] [firefox] [webkit]        (default: all three, one after the other)
    Needs Playwright and network to cdn.jsdelivr.net + files.pythonhosted.org the first time (tools/fetch_pyodide.py; the downloads are kept
    in $NOEMA_PYODIDE_CACHE or ~/.cache/noema-pyodide). Firefox/WebKit: PLAYWRIGHT_BROWSERS_PATH=<dir with them>; a browser that is not
@@ -52,10 +52,15 @@ const s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js')
 const ACTP_SRC = s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = ('));
 const HOST = `<!doctype html><meta charset="utf-8"><title>py host</title><body><div id="box" style="position:relative;height:120px"></div>
 <script>window.NOEMA_CONFIG = { py: location.search.indexOf('nosw') >= 0 ? { sw: false } : {} };
-var RT = null; var ACT = { registerRuntime: function (d) { RT = d; } };
+var RT = null;
 ${ACTP_SRC}
 window.ACTP = ACTP;</script>
-<script>${fs.readFileSync(path.join(ROOT, 'engine', 'src', '37_activity_py.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script>
+<script>${fs.readFileSync(path.join(ROOT, 'build', 'runtimes.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script>
+<script>/* the runtime's Python service alone (build/runtimes.js: py-module@1, module.service(host)); RT: its runner, where Python can run */
+window.READY = __noemaRuntimesPiece.plugins.find(function (p) { return p.manifest.id === 'py-module@1'; }).entry().then(function (m) {
+  window.NoemaPy = m.service({ config: function (k) { return (window.NOEMA_CONFIG || {})[k]; }, message: ACTP.out, warn: function () { console.warn.apply(console, arguments); } });
+  if (NoemaPy.available()) RT = { id: 'py-module@1', mount: NoemaPy.mountRunner };
+});</script>
 <script>
 window.LOG = []; window.PY = []; window.H = null;
 window.run = function (act, over) {
@@ -245,7 +250,7 @@ const results = {};
     let fails = 0;
     const ok = (c, m) => { R.checks[m] = !!c; console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) fails++; return c; };
     console.log(`\n— ${name} ${browser.version()}`);
-    const page = async (ctx, q = '') => { const p = await ctx.newPage(); p.on('pageerror', e => console.log('    [pageerror]', e.message)); await p.goto(ORIGIN + '/host.html' + q); return p; };
+    const page = async (ctx, q = '') => { const p = await ctx.newPage(); p.on('pageerror', e => console.log('    [pageerror]', e.message)); await p.goto(ORIGIN + '/host.html' + q); await p.evaluate(() => window.READY); return p; };
     const waitPy = async (p, ms = 120000) => {   // → 'ready' | 'fail:<why>' | 'timeout'
       const t0 = Date.now();
       while (Date.now() - t0 < ms) {

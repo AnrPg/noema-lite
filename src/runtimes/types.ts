@@ -36,6 +36,43 @@ export interface RuntimeHost {
   expr(): ExprCheck | null;
   /** another runtime as it is registered now (wasm-module@1 shows its own spec with sim-spec@1), or null */
   loadedRuntime(id: string): ActivityRuntime | null;
+  /** one of the deployment's settings (NOEMA_CONFIG[key]: py-module@1 reads 'py') */
+  config(key: string): unknown;
+  /** a number in the learner's format */
+  num(n: number, opts?: Intl.NumberFormatOptions): string;
+  /** the sim-spec@1 view for a runtime that computes the outputs itself (py-module@1), or null where sim-spec@1 is not here */
+  simView(box: HTMLElement, ctx: SimViewContext, opts: SimViewOptions): SimView | null;
+}
+
+/** what the sim-spec@1 view gets from the runtime that hosts it */
+export interface SimViewContext {
+  readonly act: ActivityItem;
+  readonly init: ActivityInit | null;
+  onMessage(message: ProtocolMessage): void;
+  onFail(code: string): void;
+}
+/** the engine of a hosted sim-spec@1 view: it computes the outputs of the latest inputs */
+export interface SimViewRunner {
+  run(inputs: unknown, done: (outputs: unknown) => void): void;
+  measure(): void;
+  close(): void;
+}
+export interface SimViewOptions {
+  readonly engine: { readonly id: string };
+  /** the options of the spec's check (py-module@1: { python: true }) */
+  readonly check: Readonly<Record<string, unknown>>;
+  readonly runner: () => SimViewRunner;
+  /** more state saved beside the controls' values */
+  readonly stateExtra: () => Readonly<Record<string, unknown>>;
+  /** once the spec has passed its check: the runtime adds its own parts to the view's root */
+  readonly decorate: (root: HTMLElement) => void;
+}
+export interface SimView {
+  send(type: string, payload?: unknown, extra?: unknown): void;
+  close(): void;
+  values(): unknown;
+  reveal?(): void;
+  saveSoon?(): void;
 }
 
 /** the expression language as a runtime's checks use it */
@@ -87,6 +124,8 @@ export interface RuntimePort {
   close(): void;
   /** the values the checks grader reads (sim-spec@1) */
   values?(): unknown;
+  /** after Check (an exercise): what the activity shows then */
+  reveal?(): void;
 }
 
 /** a runtime's own words for a failure code; restart: the core offers Restart */
@@ -118,6 +157,13 @@ export interface RuntimeModule {
   create(host: RuntimeHost): ActivityRuntime | null;
 }
 
+/** where a runtime can run, known before its code is loaded: 'website' = the site over http(s) with a service worker's cache,
+    Workers and WebAssembly (never file:// or the one-file bundle); note: the key of the words the fallback shows elsewhere */
+export interface RuntimeAvailability {
+  readonly where: 'website';
+  readonly note: string;
+}
+
 /** 'on': on unless config.js switches it off; 'opt-in': off unless config.js sets it to true */
 export type RuntimeSwitch = 'on' | 'opt-in';
 
@@ -127,5 +173,7 @@ export interface RuntimePlugin {
   readonly switch: RuntimeSwitch;
   /** the engines of sim-spec@1 it brings (src/runtimes/manifests.ts) */
   readonly engines: readonly string[];
+  /** where it can run at all, when not everywhere (manifests.ts availableHere) */
+  readonly available?: RuntimeAvailability;
   readonly entry: () => Promise<RuntimeModule>;
 }

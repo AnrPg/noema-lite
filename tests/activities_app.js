@@ -845,7 +845,7 @@ async function python(name) {
   try {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await ctx.addInitScript(flagOn);
     let p = await page(ctx, URL0 + '/index.html');
-    ok(await p.evaluate(() => !!ACT.ITEMS['py-filter'] && NoemaPy.available() && ACT.caps().has('runtime:py-module@1') && checkRequires().length === 0), 'on the website (http, the runtime on): the app has runtime:py-module@1, pack.requires is met');
+    ok(await p.evaluate(() => !!ACT.ITEMS['py-filter'] && NoemaCore.runtimes.available('py-module@1') && ACT.caps().has('runtime:py-module@1') && checkRequires().length === 0), 'on the website (http, the runtime on): the app has runtime:py-module@1, pack.requires is met');
     // every text the quiet line shows (first use → loading → gone): from a local server Python loads in moments, so the
     // first-use note may be replaced by the progress before a poll would see it
     await p.evaluate(() => { window.__pyLines = []; new MutationObserver(() => { for (const l of document.querySelectorAll('.act-pyline')) { const x = l.textContent; if (x && window.__pyLines[window.__pyLines.length - 1] !== x) window.__pyLines.push(x); } }).observe(document.body, { childList: true, subtree: true, characterData: true }); });
@@ -885,8 +885,8 @@ async function python(name) {
     const st1 = await pyDet.evaluate(d => ({ line: d.querySelector('.act-pyset .tiny')?.textContent, btn: d.querySelector('[data-py="prepare"]')?.hidden, tip: d.textContent }));
     ok(/numpy and scipy/.test(st1.line) && st1.btn === true, `after: what is on the device (${st1.line}); no button`);
     ok(VH.some(u => /scipy/.test(u)), 'Prepare fetched scipy too');
-    const status = await p.evaluate(() => NoemaPy.status());
-    ok(status && status.groups && Object.values(status.groups).every(g => g.ready), 'NoemaPy.status(): every group is cached ' + JSON.stringify(Object.fromEntries(Object.entries(status?.groups || {}).map(([k, g]) => [k, g.ready]))));
+    const status = await p.evaluate(() => ACT.runtime('py-module@1').then(rt => rt.py.status()));
+    ok(status && status.groups && Object.values(status.groups).every(g => g.ready), 'the Python service status(): every group is cached ' + JSON.stringify(Object.fromEntries(Object.entries(status?.groups || {}).map(([k, g]) => [k, g.ready]))));
     await p.evaluate(() => document.querySelectorAll('.modal').forEach(m => m.remove()));
 
     console.log('— py-module@1: offline after Prepare');
@@ -904,7 +904,7 @@ async function python(name) {
     await p.evaluate(() => { S.settings.lang = 'el'; save(); }); await p.reload(); await wait(1200);
     await p.evaluate(() => { location.hash = '#/me/data'; }); await wait(800); await p.evaluate(() => document.querySelectorAll('details').forEach(d => d.open = true)); await wait(300);
     const el = await until(() => p.evaluate(() => [...document.querySelectorAll('details summary')].some(x => /Python για τις δραστηριότητες/.test(x.textContent))), 8000);
-    // the pill and the button are drawn once the section has read what is on the device (NoemaPy.need, over http)
+    // the pill and the button are drawn once the section has read what is on the device (the Python service's need, over http)
     const elSec = () => p.evaluate(() => { const d = [...document.querySelectorAll('details')].find(x => /Python για τις δραστηριότητες/.test(x.querySelector('summary')?.textContent || ''));
       return d ? { pill: d.querySelector('summary .pill')?.textContent || '', line: d.querySelector('.act-pyset .tiny')?.textContent || '', btn: d.querySelector('[data-py="prepare"]')?.textContent || '' } : null; });
     const elOk = s => !!s && /Όχι σε αυτή τη συσκευή|Εν μέρει εδώ/.test(s.pill) && /Ετοίμασε την Python/.test(s.btn);
@@ -925,7 +925,7 @@ async function python(name) {
       c4.on('request', r => { if (new URL(r.url()).pathname.startsWith('/vendor/')) V4.push(new URL(r.url()).pathname); });
       const b = await page(c4, URL0 + '/bundle.html'); await openBlock(b); await wait(800);
       const f = await fbOf(b);
-      const bu = await b.evaluate(() => ({ bundle: !!window.NOEMA_BUNDLE, py: NoemaPy.available() }));
+      const bu = await b.evaluate(() => ({ bundle: !!window.NOEMA_BUNDLE, py: NoemaCore.runtimes.available('py-module@1') || ACT.hasRuntime('py-module@1') }));
       ok(bu.bundle && !bu.py && f && !f.sim && f.fb && /works only on the website/.test(f.note) && !V4.length, `the one-file bundle (even over http): the fallback, "works only on the website", no /vendor request ${JSON.stringify({ ...bu, vendor: V4.slice(0, 4), ...f, text: undefined })}`);
       await c4.close();
     } else console.log('  (no dist/noema-lite.html: python3 tools/build.py bundle)');

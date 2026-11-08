@@ -356,11 +356,14 @@ at once (`ACT.caps()`, `ACT.hasRuntime(id)`), loads its code when an activity st
 `ACT.loadedRuntime(id)` is the registered one. A runtime may bring engines of sim-spec@1 (`ActivityRuntime.engines`, named in
 its manifest line so that `ACT.engines()` and `ACT.caps()` know them at start): the core loads the runtime when an activity needs
 one of them and registers them (`wasm-module@1` brings `wasm@1`). The host gives a runtime the open pack's items (`items()`), the
-expression language (`expr()`) and the runtimes registered now (`loadedRuntime(id)`). The page has the code in the lazy piece
+expression language (`expr()`), the runtimes registered now (`loadedRuntime(id)`), a deployment setting (`config(key)`), the
+app's numbers (`num`) and the sim-spec view (`simView`, which `py-module@1` draws its controls with). Where a runtime can run at all,
+when not everywhere, is its descriptor's `available` rule (`manifests.ts`, `availableHere`; `py-module@1`: only the website), so
+`ACT.enabled(id)` and the fallback's words are known before its code is loaded. The page has the code in the lazy piece
 `build/runtimes.js`; the node suites read `build/runtimes-node.cjs` (`src/runtimes/node.ts`); the activity host
 (`build/harness.js`) holds it inline and makes them for its stub core (`NoemaCore.attachRuntimes(act, host)`). A runtime's styles
 are `src/runtimes/<name>/*.css` (`tools/build.py` adds them to `engine/engine.css`). Moved so far: `external-embed@1`,
-`wasm-module@1` / `wasm@1`. Still scripts of `engine/src`: `html-app@1` (34), `sim-spec@1` (35), `py-module@1` (37), `h5p@1` (38).
+`wasm-module@1` / `wasm@1`, `py-module@1`. Still scripts of `engine/src`: `html-app@1` (34), `sim-spec@1` (35), `h5p@1` (38).
 
 ## 7. Patterns
 
