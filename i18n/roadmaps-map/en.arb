@@ -4074,16 +4074,6 @@
   "@roadmap.map.map.whole": {
     "description": "Tooltip of the button that zooms the map out so all of it fits."
   },
-  "roadmap.map.lib.openMap": "Open “{title}”",
-  "@roadmap.map.lib.openMap": {
-    "description": "Screen-reader label of a Roadmap's card in the library: it opens the Roadmap.",
-    "placeholders": {
-      "title": {
-        "type": "String",
-        "example": "Physics"
-      }
-    }
-  },
   "roadmap.map.pnl.edit": "Edit this step",
   "@roadmap.map.pnl.edit": {
     "description": "Tooltip and screen-reader label of the ✏️ button of a step's panel: change its name, place, links or chapters."

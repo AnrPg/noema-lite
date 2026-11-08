@@ -10,6 +10,7 @@
      F. 🧭 Put on a map… from the Shelf; ⚙️ → Subjects; phone layout
    Usage: node tests/shelf.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { deepText } = require('./deep');
 const path = require('path'), fs = require('fs'), os = require('os'), http = require('http');
 const { start } = require('./mock_supabase');
 const { connectorHandler, removeConnector } = require('./connector_fn');
@@ -116,8 +117,8 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   await p.click('.cm-attachgo');
   ok(await until(async () => /🔄/.test(await p.locator('.cm-node[data-id="kinematics"] .cm-badges').innerText()), 5000), 'the step shows 🔄 while it is re-planned');
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  const panel = await p.locator('.cm-panel').innerText();
-  ok(/Re-planning it to match its subject|Being re-planned/.test(panel) && !(await p.locator('.cm-panel button:has-text("Study this step")').count()), 'and it is closed: no 📖 Study while its new plan is coming');
+  const panel = await deepText(p, '.cm-panel');
+  ok(/Re-planning it to match its subject|Being re-planned/.test(panel) && !(await p.locator('.cm-panel noema-button:has-text("Study this step")').count()), 'and it is closed: no 📖 Study while its new plan is coming');
   ok(await until(async () => !(await node(p, cid, 'kinematics')).replan, 15000), 'the new plan arrives');
   const call = A.plans.slice(before);
   ok(call.length === 1 && call[0].ids.join() === 'kinematics', 'only that step went to the chapter planner');
@@ -129,7 +130,7 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   await wait(600);
   ok(/📦/.test(await p.locator('.cm-node[data-id="kinematics"] .cm-badges').innerText()), 'the map shows 📦 on it');
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  ok(/Taught by your subject “Demo Physics”/.test(await p.locator('.cm-panel').innerText()) && await p.locator('.cm-panel button:has-text("Study this step")').isVisible(), 'its panel: 📦 taught by your subject · 📖 Study this step');
+  ok(/Taught by your subject “Demo Physics”/.test(await deepText(p, '.cm-panel')) && await p.locator('.cm-panel noema-button:has-text("Study this step")').isVisible(), 'its panel: 📦 taught by your subject · 📖 Study this step');
   await p.click('.cm-node[data-id="energy"]'); await wait(300);
   ok(/now taught by your own subject — check that this step still fits/.test(await p.locator('.cm-flag').innerText()), 'the step after it is flagged (⚑ check that it still fits)');
   await p.screenshot({ path: SHOTS + '/sh3_map.png' });
@@ -140,7 +141,7 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
     await L.flush(); }, { cid });
   ok(await p.evaluate(cid => { const C = NoemaCurriculum; return C.nodeStatus(Noema.account.id, C.get(Noema.account.id, cid), 'kinematics').mastered; }, cid), 'progress in the subject is the step’s progress (all read + 80 % solved → mastered)');
   await p.click('.cm-node[data-id="kinematics"]'); await wait(300);
-  await p.click('.cm-panel button:has-text("Review")'); await wait(2500);
+  await p.click('.cm-panel noema-button:has-text("Review")'); await wait(2500);
   ok(await p.evaluate(() => Noema.subject?.id === 'demo-physics' && Noema.node?.node === 'kinematics'), 'studying the step opens the subject, which knows its step (🧭 back to the map)');
   ok(await p.locator('.curchip').count() > 0, 'the subject has the 🧭 Map button');
 
@@ -183,8 +184,8 @@ const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(N
   const app = await makeMap(p, { provider: 'claudeapp', planned: false, attachFirst: true });
   let w = await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return { hold: NoemaCurriculum.holding(c), work: NoemaCurJobs.work(c) }; }, app);
   ok(w.hold && !w.work.toPlan.length, 'Claude app: while the learner attaches their subjects, no step is handed out to plan');
-  await p.evaluate(() => NoemaCurMap.map(Noema.account.id, NoemaCurriculum.list(Noema.account.id).find(c => c.provider === 'claudeapp').id)); await wait(900);
-  ok(await p.locator('.cm-holdbar button:has-text("Attach subjects")').isVisible() && await p.locator('.cm-holdbar button:has-text("Plan the steps now")').isVisible(), 'the map says so: 📦 Attach subjects · ▶ Plan the steps now');
+  await p.evaluate(() => Noema.curriculumMap(NoemaCurriculum.list(Noema.account.id).find(c => c.provider === 'claudeapp').id)); await wait(900);
+  ok(await p.locator('.cm-holdbar noema-button:has-text("Attach subjects")').isVisible() && await p.locator('.cm-holdbar noema-button:has-text("Plan the steps now")').isVisible(), 'the map says so: 📦 Attach subjects · ▶ Plan the steps now');
   await p.click('.cm-holdbar .cm-attachsubs'); await wait(600);
   await box().locator('button:has-text("Suggest matches")').click(); await wait(200);
   ok(await box().locator('select[aria-label="Subject for Physics of motion"]').inputValue() === 'demo-physics', '✨ Suggest matches pairs “Demo Physics” with “Physics of motion” (no AI)');

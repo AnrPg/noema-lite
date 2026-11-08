@@ -749,7 +749,6 @@
   "roadmap.map.band.noLevel": "Без уровня",
   "roadmap.map.map.summary": "Освоено {m, number} из {n, number}",
   "roadmap.map.map.whole": "Показать всю карту",
-  "roadmap.map.lib.openMap": "Открыть «{title}»",
   "roadmap.map.pnl.edit": "Изменить этот шаг",
   "roadmap.map.pnl.sources": "Источники этого шага",
   "roadmap.map.pnl.readTheory": "Читать теорию",

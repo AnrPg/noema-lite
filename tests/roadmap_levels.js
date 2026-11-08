@@ -42,7 +42,8 @@ const openMap = async (page, url, cid) => { await page.goto(url + '#/map/' + cid
 /** the text a learner sees in an element, through its shadow roots (slotted text once) */
 const deepText = (page, sel) => page.evaluate(sel => {
   const walk = n => n.nodeType === 3 ? n.textContent : n.nodeType !== 1 && n.nodeType !== 11 ? '' : [...(n.shadowRoot ? [n.shadowRoot] : []), ...n.childNodes].map(walk).join(' ');
-  const el = document.querySelector(sel); return el ? walk(el).replace(/\s+/g, ' ') : '';
+  const deep = r => r.querySelector(sel) || [...r.querySelectorAll('*')].map(e => e.shadowRoot && deep(e.shadowRoot)).find(Boolean) || null;   // the map draws its parts in its shadow root
+  const el = deep(document); return el ? walk(el).replace(/\s+/g, ' ') : '';
 }, sel);
 const barText = page => deepText(page, 'noema-roadmap-levels');
 /** an open dialog of a Roadmap element: count() > 0 while it is open; innerText() its words */
@@ -50,7 +51,8 @@ const dlg = (page, tag) => ({ count: () => page.locator(`${tag} dialog[open]`).c
 /** no sideways scrolling, every visible control at least 24 × 24 px, inside a Roadmap element (shadow roots included) */
 const fit = (page, tag) => page.evaluate(tag => {
   const all = r => [...r.querySelectorAll('*')].flatMap(e => [e, ...(e.shadowRoot ? all(e.shadowRoot) : [])]);
-  const el = document.querySelector(tag); const small = [];
+  const deep = r => r.querySelector(tag) || [...r.querySelectorAll('*')].map(e => e.shadowRoot && deep(e.shadowRoot)).find(Boolean) || null;   // the map draws its parts in its shadow root
+  const el = deep(document); const small = [];
   for (const b of all(el)) {
     if (!b.matches('button, a[href], input, select')) continue;
     const r = b.getBoundingClientRect(); if (!r.width && !r.height) continue;
@@ -164,7 +166,7 @@ const answerAll = async (page, host, pick) => {
   await seed(page, 'lv-e', { levelTest: true, mastered: true });
   await openMap(page, url, 'lv-e');
   { const f = await fit(page, 'noema-roadmap-levels'); ok(f.scroll <= 0 && !f.small.length, `the bar at 320 px: no sideways scrolling (${f.scroll}), targets ≥ 24 px ${f.small.join(', ')}`); }
-  const axeBar = await new AxeBuilder({ page }).withTags(TAGS).include('noema-roadmap-levels').analyze();
+  const axeBar = await new AxeBuilder({ page }).withTags(TAGS).include({ fromShadowDom: ['noema-roadmap-map', 'noema-roadmap-levels'] }).analyze();
   ok(!axeBar.violations.length, 'axe: the level bar ' + axeBar.violations.map(v => v.id).join(', '));
   await page.locator('noema-roadmap-levels noema-button.take').click();
   await until(async () => /8 questions/.test(await dlg(page, 'noema-roadmap-level-test').innerText()));

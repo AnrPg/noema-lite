@@ -310,9 +310,6 @@ export function createApp(win: Window = window): App {
     const w = themes.world();
     return w === 'both' || (w === 'lang') === shell.isLang(s);
   };
-  const onStudy = (sid: string): void => {
-    shell.open(sid);
-  };
   function reviewGo(kind: 'review' | 'gym', per: readonly { s: SubjectMeta; fc: number; pb: number; wr: number }[]): void {
     const list = per.filter(x => (kind === 'gym' ? x.wr : x.fc + x.pb));
     const dest = (x: { fc: number }): string => (kind === 'gym' ? '#/mistakes' : x.fc ? '#/cards' : '#/drills');
@@ -472,7 +469,7 @@ export function createApp(win: Window = window): App {
         reviewGo(kind, per);
       },
       newRoadmap: () => {
-        W().NoemaCurMap?.create(acc(), { onStudy });
+        W().NoemaCurMap?.create(acc());
       },
       tip: t => {
         shell.tip(t);
@@ -489,7 +486,7 @@ export function createApp(win: Window = window): App {
         crumbs: [[L('today')]],
         menu: [
           { label: L('pickSubject'), icon: 'book', run: () => void N.openSubjectPicker?.() },
-          { label: L('newRoadmap'), icon: 'map', run: () => W().NoemaCurMap?.create(acc(), { onStudy }) },
+          { label: L('newRoadmap'), icon: 'map', run: () => W().NoemaCurMap?.create(acc()) },
           shell.engine ? { label: L('focusSprint'), sub: L('focusSprintSub'), icon: 'clock', run: () => shell.engine?.focus?.() } : null,
           { label: L('switchProfile'), icon: 'user', run: () => void N.openAccountPicker() },
         ],

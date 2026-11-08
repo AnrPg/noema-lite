@@ -749,7 +749,6 @@
   "roadmap.map.band.noLevel": "Ohne Niveau",
   "roadmap.map.map.summary": "{m, number} von {n, number} gemeistert",
   "roadmap.map.map.whole": "Ganze Karte ansehen",
-  "roadmap.map.lib.openMap": "„{title}“ öffnen",
   "roadmap.map.pnl.edit": "Diesen Schritt bearbeiten",
   "roadmap.map.pnl.sources": "Quellen dieses Schritts",
   "roadmap.map.pnl.readTheory": "Theorie lesen",

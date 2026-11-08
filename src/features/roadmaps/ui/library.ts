@@ -2,7 +2,7 @@
  * 🧭 The learner's Roadmaps: a card per Roadmap (its progress, shared or not, what waits for the Claude app), the
  * invitations to Roadmaps other people share (📬 Join / No thanks), and the ways to a new one.
  *
- *   <noema-roadmap-library account=…></noema-roadmap-library>
+ *   <noema-roadmap-library account=… heading=1|2></noema-roadmap-library>   (heading 2: on a page that has its own title)
  *
  * Where to go is asked by an event (bubbling, composed): roadmap-open { roadmap, status } · roadmap-new ·
  * roadmap-from-sources · roadmap-import · roadmap-explore · roadmap-shelf. 👥 on a card opens the sharing dialog here.
@@ -14,7 +14,6 @@ import { work } from '../domain/work.ts';
 import type { Roadmap } from '../domain/model.ts';
 import type { Invite } from './data.ts';
 import { RoadmapElement } from './element.ts';
-import { openDialog } from './open.ts';
 import { NoemaRoadmapShare } from './share.ts';
 import { screen } from './styles.ts';
 
@@ -101,7 +100,12 @@ export class NoemaRoadmapInvite extends RoadmapElement {
 }
 
 export class NoemaRoadmapLibrary extends RoadmapElement {
-  static override properties = { account: { type: String }, invites: { state: true }, shelf: { state: true } };
+  static override properties = {
+    account: { type: String },
+    heading: { type: Number, reflect: true },
+    invites: { state: true },
+    shelf: { state: true },
+  };
   static override styles = [
     base,
     screen,
@@ -110,10 +114,17 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
         display: block;
         padding: 16px;
       }
-      h1 {
+      h1,
+      h2 {
         margin: 0 0 4px;
         font-family: var(--u-display);
         font-size: 1.4rem;
+      }
+      :host([heading='2']) {
+        padding: 0;
+      }
+      h2 {
+        font-size: 1.15rem;
       }
       .ways {
         margin: 14px 0;
@@ -130,6 +141,10 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
       }
       .cm-cardwrap {
         position: relative;
+      }
+      /* the Roadmap's own words (its language, not the interface's) take the direction of their first letter */
+      .cm-cardtop strong {
+        unicode-bidi: plaintext;
       }
       .cm-card {
         display: grid;
@@ -191,6 +206,8 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
     `,
   ];
   declare account: string;
+  /** 1: the page's title; 2: under the title of a page that has its own */
+  declare heading: number;
   declare invites: Invite[];
   declare shelf: number | null;
   #off: (() => void) | null = null;
@@ -198,6 +215,7 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
   constructor() {
     super();
     this.account = '';
+    this.heading = 1;
     this.invites = [];
     this.shelf = null;
   }
@@ -258,7 +276,6 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
       <button
         class="cm-card"
         data-id=${c.id}
-        aria-label=${this.t('roadmap.map.lib.openMap', { title })}
         @click=${(): void => {
           this.emit('roadmap-open', { roadmap: c.id, status: c.status ?? '' });
         }}
@@ -288,7 +305,7 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
               label=${this.t('roadmap.map.lib.shareAria', { title: c.title ?? c.goal ?? '' })}
               title=${this.t(sh ? 'roadmap.map.lib.sharingTip' : 'roadmap.map.lib.shareTip')}
               @click=${(): void => {
-                openDialog(Object.assign(new NoemaRoadmapShare(), { account: this.account, roadmapId: c.id }));
+                NoemaRoadmapShare.open({ account: this.account, roadmapId: c.id });
               }}
             ></noema-icon-button>`
           : nothing
@@ -302,7 +319,7 @@ export class NoemaRoadmapLibrary extends RoadmapElement {
       this.emit(type);
     };
     return html`
-      <h1>🧭 ${this.t('roadmap.map.lib.title')}</h1>
+      ${this.heading === 2 ? html`<h2>🧭 ${this.t('roadmap.map.lib.title')}</h2>` : html`<h1>🧭 ${this.t('roadmap.map.lib.title')}</h1>`}
       <p class="tiny">${this.t('roadmap.map.lib.lead')}</p>
       <div class="row ways">
         <noema-button class="cm-new" @click=${go('roadmap-new')}>➕ ${this.t('roadmap.map.lib.new')}</noema-button>

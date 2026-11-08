@@ -3,7 +3,7 @@
  * prepared included or not; once shared: public ⇄ only invited, invite someone, the people (withdraw, remove), stop
  * sharing. Everybody keeps their own progress; the prepared steps are shared. A dialog:
  *
- *   openDialog(Object.assign(new NoemaRoadmapShare(), { account, roadmapId }))
+ *   NoemaRoadmapShare.open({ account, roadmapId })
  *
  * Fires roadmap-shared { roadmap } after every change.
  */
@@ -12,6 +12,7 @@ import { base } from '../../../ui/core/styles.ts';
 import type { NoemaDialog, NoemaSwitch, NoemaTextField } from '../../../ui/index.ts';
 import type { Member } from './data.ts';
 import { RoadmapElement } from './element.ts';
+import { openDialog } from './open.ts';
 import { screen } from './styles.ts';
 
 const STATUS: Readonly<Record<string, string>> = {
@@ -76,6 +77,11 @@ export class NoemaRoadmapShare extends RoadmapElement {
     this.busy = false;
     this.members = null;
     this.confirmStop = false;
+  }
+
+  /** Opens the sharing of a Roadmap (the library's 👥, the map's Share). */
+  static open(p: { account: string; roadmapId: string }): NoemaRoadmapShare {
+    return openDialog(Object.assign(new NoemaRoadmapShare(), p));
   }
 
   get #dialog(): NoemaDialog | null {

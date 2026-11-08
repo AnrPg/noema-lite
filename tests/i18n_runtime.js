@@ -493,18 +493,18 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
     const cid2 = await page.evaluate(() => { const C = NoemaCurriculum, acc = Noema.account.id; const c = C.blank({ goal: 'Data engineering', language: 'en', provider: 'auto', prefetch: 0 });
       c.nodes = { a: { id: 'a', title: 'Python basics', summary: 'Python basics', role: 'foundation', part: C.PART.foundation, learningGoals: [], chapters: [] } }; c.edges = []; c.goalId = 'a'; c.paths = { minimal: [], deep: ['a'] }; c.title = 'Data engineer'; c.status = 'ready'; C.save(acc, c); return c.id; });
-    await visit(page, 'Roadmap share dialog', () => page.evaluate(id => { NoemaCurMap.shareCurriculum(Noema.account.id, id); }, cid2), 1200);
-    await visit(page, 'Roadmap share: with people', () => page.click('.noema-ovbox .cm-sharepeople'), 2500);
-    await visit(page, 'Roadmap share: invite', async () => { await page.fill('.noema-ovbox input[type=email]', 'bob@example.com'); await page.keyboard.press('Enter'); await wait(300); await page.evaluate(() => [...document.querySelectorAll('.noema-ovbox input[type=email]')].pop()?.closest('div')?.querySelector('button')?.click()); }, 2000);
-    await visit(page, 'Roadmap share: bad invite', async () => { await page.fill('.noema-ovbox input[type=email]', 'not-an-address'); await page.keyboard.press('Enter'); await wait(300); await page.evaluate(() => [...document.querySelectorAll('.noema-ovbox input[type=email]')].pop()?.closest('div')?.querySelector('button')?.click()); }, 1200);
-    await visit(page, 'Roadmap share: public', () => page.click('.noema-ovbox .cm-publictoggle'), 2000);
+    await visit(page, 'Roadmap share dialog', () => page.evaluate(id => { customElements.get('noema-roadmap-share').open({ account: Noema.account.id, roadmapId: id }); }, cid2), 1200);
+    await visit(page, 'Roadmap share: with people', () => page.click('noema-roadmap-share .cm-sharepeople'), 2500);
+    await visit(page, 'Roadmap share: invite', async () => { await page.fill('noema-roadmap-share .cm-email input', 'bob@example.com'); await page.click('noema-roadmap-share .cm-invitebtn'); }, 2000);
+    await visit(page, 'Roadmap share: bad invite', async () => { await page.fill('noema-roadmap-share .cm-email input', 'not-an-address'); await page.click('noema-roadmap-share .cm-invitebtn'); }, 1200);
+    await visit(page, 'Roadmap share: public', () => page.click('noema-roadmap-share .cm-publictoggle'), 2000);
     await openDetails(page, 'Roadmap share');
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'Roadmaps library (shared)', () => page.evaluate(() => { NoemaCurMap.library(Noema.account.id); }), 1500);
+    await page.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-share').forEach(o => o.remove()));
+    await visit(page, 'Roadmaps library (shared)', () => page.evaluate(() => { Noema.curricula(); }), 1500);
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
     await visit(page, 'Roadmaps others share', () => page.evaluate(() => { NoemaCurMap.exploreCurricula(Noema.account.id); }), 1500);
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'the shared map', () => page.evaluate(id => NoemaCurMap.map(Noema.account.id, id), cid2), 1500);
+    await visit(page, 'the shared map', () => page.evaluate(id => Noema.curriculumMap(id), cid2), 1500);
     await page.context().close();
     // Bob: the requests, the banner, the bell, the invitation
     const bob = await newPage({ config: { askSubjectOnStart: true, shell: false } });
@@ -515,8 +515,8 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(bob, 'Bob: notifications', () => bob.evaluate(() => openNotes()), 1000);
     await visit(bob, 'Bob: banner later', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); [...document.querySelectorAll('.sharebar button')].pop()?.click(); }), 800);
     await visit(bob, 'Bob: accept from the bell', () => bob.evaluate(() => { openNotes(); setTimeout(() => document.querySelector('.modal button.primary')?.click(), 300); }), 3000);
-    await visit(bob, 'Bob: Roadmaps (invitation)', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); NoemaCurMap.library(Noema.account.id); }), 2000);
-    await visit(bob, 'Bob: join', () => bob.evaluate(() => [...document.querySelectorAll('.noema-ovbox button.primary')].find(b => b.closest('.cm-invite, .cm-inv, li, .row'))?.click()), 2500);
+    await visit(bob, 'Bob: Roadmaps (invitation)', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); Noema.curricula(); }), 2000);
+    await visit(bob, 'Bob: join', () => bob.click('noema-roadmap-library .cm-join'), 2500);
     await bob.context().close();
     // the OAuth consent page of the Claude connector
     const oa = await newPage();

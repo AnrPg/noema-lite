@@ -65,6 +65,13 @@ export class NoemaRoadmapStep extends RoadmapElement {
         font-family: var(--u-display);
         font-size: 1.15rem;
       }
+      /* the Roadmap's own words (its language, not the interface's) take the direction of their first letter */
+      .cm-ptitle h3,
+      .cm-pre > .cm-names,
+      h2,
+      li {
+        unicode-bidi: plaintext;
+      }
       .cm-ptitle {
         display: flex;
         gap: 10px;
@@ -717,7 +724,7 @@ export class NoemaRoadmapStep extends RoadmapElement {
             : nothing
         }
         ${
-          pk.status !== 'generating'
+          member && pk.status !== 'generating'
             ? this.#btn(
                 '📦 ' + this.t(own ? 'roadmap.map.own.another' : 'roadmap.map.own.use'),
                 () => {
@@ -728,7 +735,7 @@ export class NoemaRoadmapStep extends RoadmapElement {
             : nothing
         }
         ${
-          own
+          member && own
             ? this.#btn(
                 '↩ ' + this.t('roadmap.map.own.detach'),
                 () => {

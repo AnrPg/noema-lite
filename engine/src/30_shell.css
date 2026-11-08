@@ -217,58 +217,20 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-mode small{font-weight:500;color:var(--ink2);font-size:12.5px}.cm-mode.on{border-color:var(--violet);background:var(--violet-bg)}.cm-mode:not(.on):hover{border-color:var(--violet)}
 .cm-lib{width:min(860px,100%)}
 /* 📚 From your sources (curmap.js fromSources) */
-.cm-srcresult{display:contents}
-.cm-srccard{display:grid;gap:10px;padding:14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card)}
-.cm-srcact{align-items:center;gap:8px}
-.cm-srcreader{border:0;background:none;color:var(--ink3);font:inherit;font-size:13px;cursor:pointer;max-width:16em}
-.cm-srcmore{position:relative;margin-inline-start:auto}.cm-srcmore>summary{list-style:none;cursor:pointer;padding:2px 10px;border-radius:8px;color:var(--ink2);font-size:18px}.cm-srcmore>summary::-webkit-details-marker{display:none}
-.cm-srcmorebody{position:absolute;inset-inline-end:0;top:100%;z-index:6;width:min(320px,80vw);padding:10px;display:grid;gap:8px;border:1px solid var(--line);border-radius:12px;background:var(--card);box-shadow:0 6px 24px rgba(0,0,0,.12)}
-.cm-src .cg-tip.pop>.cg-tipbody{position:absolute;z-index:6;inset-inline-start:0;top:100%;width:max-content;max-width:min(320px,78vw);box-shadow:0 6px 24px rgba(0,0,0,.12)}
-.cm-src .cg-tip.pop>summary{width:18px;height:18px;font-size:11px;opacity:.7}
-.cm-srcstep{display:grid;gap:8px;padding-top:10px;border-top:1px solid var(--line)}
-.cm-srcchosen{display:flex;gap:8px;align-items:center}.cm-srcswitch{justify-self:start;color:var(--ink3);font-size:13px}
-.cm-srcwhy{margin:4px 0;padding-inline-start:18px;display:grid;gap:2px;color:var(--ink2)}
-.cm-srcplan{max-height:min(48vh,420px);overflow:auto}.cm-srcrefs{color:var(--ink3);overflow-wrap:anywhere}
-.cm-srcfiles{max-height:220px;overflow:auto}
 .cm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:12px 0}
 .cm-card{display:grid;gap:6px;padding:14px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);font:inherit;color:inherit;text-align:start;cursor:pointer}.cm-card:hover{border-color:var(--violet)}
-.cm-cardwrap{position:relative;display:grid}.cm-cardwrap>.cm-card{padding-inline-end:46px}
-.cm-sharebtn{position:absolute;top:8px;inset-inline-end:8px;min-width:34px}
-.cm-sharedby{color:var(--violet-ink)}
 .cm-pubcard{cursor:default}.cm-pubcard:hover{border-color:var(--line)}
-.cm-invites:empty{display:none}.cm-invites{margin:10px 0}
-.cm-sharebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 14px;background:var(--bg2);border-bottom:1px solid var(--line);font-size:13px}
-.cm-sharebar:empty{padding:0;border:0}
-.cm-by{white-space:nowrap}.cm-byline{margin:4px 0;color:var(--ink2)}
-.cm-members{display:grid;gap:2px}.cm-sharelog{min-height:1.2em;margin:6px 0}
 .cm-cardtop{display:flex;gap:8px;align-items:center}.cm-emo{font-size:22px}
 .cm-bar{height:8px;border-radius:99px;background:var(--bg2);overflow:hidden;margin:6px 0}.cm-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--ok));transition:width .4s}
 .cm-keys{display:grid;gap:6px;margin:6px 0}.cm-keyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .cm-stages{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}.cm-stages li{padding:8px 12px;border-radius:12px;background:var(--bg2)}.cm-stages li.now{background:var(--violet-bg);font-weight:700}.cm-stages li.done{background:var(--ok-bg)}
 .noema-overlay.cm-ov{padding:0}
-.noema-ovbox.cm-full{width:100vw;max-width:none;height:100dvh;max-height:none;border-radius:0;padding:0;display:grid;grid-template-rows:auto auto auto 1fr auto;grid-template-columns:minmax(0,1fr);overflow:clip;animation:none}
-.cm-top{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.cm-title{flex:1;min-width:180px;display:grid}.cm-title b{font-size:17px;line-height:1.25}.cm-sum{font-size:12.5px;color:var(--ink2)}
-.cm-tools{display:flex;gap:6px;flex-wrap:wrap}
-.cm-body{position:relative;min-height:0;display:flex}
-.cm-scroll{flex:1;overflow:auto;background:var(--bg);touch-action:pan-x pan-y;overscroll-behavior:contain}
-.cm-canvas{position:relative}.cm-inner{position:absolute;inset-inline-start:0;top:0;transform-origin:0 0}
-.cm-band{position:absolute;top:4px;border-radius:18px;pointer-events:none}.cm-band span{position:sticky;display:inline-block;margin:10px 14px;font-weight:800;font-size:14px;letter-spacing:.02em;color:var(--ink2);text-transform:uppercase}
-.cm-prereq{background:color-mix(in srgb,var(--info-bg) 70%,transparent)}.cm-core{background:color-mix(in srgb,var(--violet-bg) 75%,transparent)}.cm-apps{background:color-mix(in srgb,var(--ok-bg) 70%,transparent)}
+.noema-ovbox.cm-full{width:100vw;max-width:none;height:100dvh;max-height:none;border-radius:0;padding:0;display:flex;flex-direction:column;overflow:clip;animation:none}
+.cm-full>.cm-ovtop{display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid var(--line)}
+.cm-full>noema-roadmap-map{flex:1;min-height:0}   /* a Roadmap's map on the classic screens (engine/app/roadmaps.js) */
 .cm-edges{position:absolute;inset-inline-start:0;top:0;pointer-events:none}.cm-edges path{fill:none;stroke:var(--line);stroke-width:2;opacity:.9}
 .cm-edges path.ok{stroke:var(--ok)}.cm-edges path.hl{stroke:var(--violet);stroke-width:3.2;opacity:1}.cm-edges path.dim{opacity:.18}
-.cm-node{position:absolute;display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr auto;column-gap:6px;align-items:center;padding:8px 10px;border-radius:14px;border:2px solid var(--line);background:var(--card);font:inherit;font-size:13.5px;font-weight:700;line-height:1.25;color:inherit;text-align:start;cursor:pointer;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05);transition:transform .12s,box-shadow .12s}
-.cm-node:hover,.cm-node:focus-visible{transform:translateY(-2px);box-shadow:var(--shadow);outline:none;z-index:2}
-.cm-node .cm-t{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.cm-node .cm-badges{position:absolute;inset-inline-end:6px;top:4px;font-size:12px}.cm-node .cm-ic{font-size:18px}
-.cm-node .cm-prog{position:absolute;inset-inline-start:0;bottom:0;height:4px;background:var(--violet)}
-.cm-open{border-color:var(--violet);box-shadow:0 0 0 3px color-mix(in srgb,var(--violet) 22%,transparent)}
-.cm-mastered{border-color:var(--ok);background:var(--ok-bg)}
-.cm-locked{opacity:.62;background:var(--bg2);border-style:dashed}
-.cm-node.sel{outline:3px solid var(--violet);outline-offset:2px;z-index:3}.cm-node.dim{opacity:.32}
-.cm-r-intro,.cm-r-synthesis{font-size:14.5px}.cm-r-synthesis.cm-open,.cm-r-intro.cm-open{background:var(--violet-bg)}
-.cm-panel{width:min(420px,40vw);border-inline-start:1px solid var(--line);background:var(--card);overflow:auto;padding:16px;display:none;position:relative}
-.cm-panel.on{display:block}.cm-pclose{position:absolute;inset-inline-end:10px;top:10px}
+.cm-r-intro,.cm-r-synthesis{font-size:14.5px}
 /* the step panel's emoji buttons (✏️ edit, 📚 sources) and the sources sheet */
 .cm-emo{min-width:36px;justify-content:center;font-size:16px;padding-inline:8px}
 .cm-srcbox{max-width:560px}.cm-srchead h3{margin:0}
@@ -277,20 +239,7 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-srcrow:hover:not([disabled]){border-color:var(--c)}.cm-srcrow[disabled]{opacity:.65;cursor:default}
 .cm-srcrow b{display:block;font-weight:600}.cm-srcrow small{display:block;color:var(--ink3);font-size:12.5px;margin-top:2px}
 .cm-srcic{font-size:20px;line-height:1}.cm-srceye{opacity:.7}
-.cm-ptitle{display:flex;gap:10px;align-items:center;padding-inline-end:36px}.cm-ptitle h3{margin:0;font-size:19px}.cm-ptitle .cm-ic{font-size:28px}
-.cm-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.cm-live{display:grid;gap:2px;padding:8px 10px;border-radius:12px;background:var(--violet-bg);font-weight:700;width:100%}
-.cm-lock{padding:8px 10px;border-radius:12px;background:var(--bg2)}
-.cm-lock p{margin:0} .cm-prereqs{margin:6px 0 0;padding-left:1.2em;display:grid;gap:3px} .cm-prereqs li.done a{opacity:.7}
-.cm-goals{margin:4px 0 10px;padding-inline-start:20px;display:grid;gap:3px;font-size:14px}
-.cm-chapters li{cursor:pointer}.cm-chapters li:hover{color:var(--violet-ink)}.cm-chd{display:grid;gap:3px;margin:4px 0 6px;padding:6px 8px;border-radius:8px;background:var(--card);color:var(--ink2);font-weight:400}
-.cm-pre{margin:6px 0}
-.cm-legend{padding:6px 14px;border-top:1px solid var(--line);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.cm-next{display:grid;gap:6px;padding-inline-start:22px}
 .nodebanner{align-items:center;gap:10px}.nodebanner .grow{flex:1;display:grid;gap:4px}.nbbar{height:6px;border-radius:99px;background:var(--bg2);overflow:hidden}.nbbar i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--ok))}
-@media (max-width:720px){
-  .cm-panel{position:absolute;inset-inline-start:0;inset-inline-end:0;bottom:0;width:auto;max-height:72%;border-inline-start:0;border-top:1px solid var(--line);border-radius:20px 20px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.18);z-index:5}
-  .cm-top{padding:8px 10px}.cm-tools .btn{padding:6px 10px}
-}
 /* chapter header: the sources of the chapter (tap = open the source at that page) */
 .srcrefs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
 .srcrefs-l{font-size:12.5px;color:var(--ink2);font-weight:600}
@@ -337,7 +286,6 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 @media (max-width:720px){.cm-filetable tr{display:grid;grid-template-columns:1fr auto}.cm-filetable td:nth-child(2){grid-column:1/-1;width:auto}}
 .cm-chline{display:flex;gap:4px;align-items:center}.cm-chline .noema-input{flex:1;margin:0}
 .cm-chrow details{margin:4px 0 0}.cm-chrow textarea{margin-top:4px}
-.cm-editrow{margin:6px 0 10px}
 
 /* 💡 explain this (hover a part of the lesson) */
 .xable{position:relative}
@@ -388,23 +336,11 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 
 /* 💬 the Claude app (the learner's Claude plan) does curriculum work — engine/curjobs.js */
 .cm-appinfo{margin:8px 0;padding:10px 12px;border-radius:12px;background:var(--violet-bg)}.cm-appinfo p{margin:0 0 6px}.cm-appinfo ul{margin:0;padding-inline-start:18px}
-.cm-apppanel{display:flex;flex-direction:column;gap:8px;margin:10px 0}
-.cm-appwait{padding:10px 12px;border-radius:12px;background:var(--violet-bg);font-size:14px}
-.cm-appsteps{margin:0}.cm-count{max-width:260px}
-.cm-paste{width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace}
-.cm-pasteout:empty{display:none}.cm-pasteout{margin-top:6px}
-.cm-appbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:var(--violet-bg);border-bottom:1px solid var(--line);font-size:14px}
-.cm-appbar:empty{padding:0;border:0}
-.cm-appq{background:var(--violet-bg);padding:8px 10px;border-radius:10px}
-.cm-otherways{margin-top:6px}
 .cg-badge{display:inline-block;margin-inline-start:8px;padding:2px 8px;border-radius:999px;background:var(--warn-bg);color:var(--ink,inherit);font-size:12px;font-weight:700;white-space:nowrap}
 .cg-recommend{margin:6px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px}
 .cg-way-c>summary{border-inline-start:4px solid var(--warn);padding-inline-start:8px}
 .cg-choice-c{outline:2px solid var(--warn)}
 /* 📦 subjects you already have, on steps · 📚 the Shelf (docs/CURRICULUM.md §9) */
-.cm-holdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:var(--warn-bg);border-bottom:1px solid var(--line);font-size:14px}
-.cm-holdbar:empty{padding:0;border:0}
-noema-roadmap-levels.cm-levels{margin:8px 14px}   /* 🪜 the levels on the classic map (src/features/roadmaps/ui/level-bar.ts) */
 .cm-attachwarn{display:block;margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px;line-height:1.45}
 .cm-attachshared{margin-top:6px;font-weight:600}
 .cm-attachchips{max-height:42vh;overflow:auto;margin:8px 0}
@@ -416,8 +352,6 @@ noema-roadmap-levels.cm-levels{margin:8px 14px}   /* 🪜 the levels on the clas
 .cm-change{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);line-height:1.4;font-size:14px;cursor:pointer;overflow-wrap:anywhere}
 .cm-change.own{background:var(--warn-bg)}
 .cm-change input{margin-top:3px;flex:none}
-.cm-replanning{background:var(--warn-bg)}
-.cm-flag{color:var(--ink2)}
 .pick-curs{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin:4px 0 12px}
 .pick-cur{display:grid;gap:4px;text-align:start;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);font:inherit;color:inherit;cursor:pointer}
 .pick-cur:hover{border-color:var(--violet)}.pick-cur .tiny{color:var(--ink2)}

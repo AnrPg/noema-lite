@@ -352,9 +352,11 @@ export class NoemaRoadmapFromSources extends RoadmapElement {
     return html`<div class="cm-srcstep">
         <div class="cm-srcchosen" data-shape=${shape}>
           <strong>${this.t('roadmap.map.src.made.' + shape, { n: n[shape] })}</strong>
-          <ul class="cm-srcwhy tiny">
-            ${p.reasons.map(r => html`<li>${r}</li>`)}
-          </ul>
+          <noema-tip topic=${this.t('roadmap.map.moreInfo')}
+            ><ul class="cm-srcwhy tiny">
+              ${p.reasons.map(r => html`<li>${r}</li>`)}
+            </ul></noema-tip
+          >
         </div>
         <noema-button
           size="sm"

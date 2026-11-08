@@ -20,9 +20,10 @@ import { nextUp, summary, type StepStatus } from '../domain/status.ts';
 import { shownNode } from '../domain/i18n.ts';
 import type { Roadmap } from '../domain/model.ts';
 import { RoadmapElement } from './element.ts';
+import type { NoemaRoadmapLevels } from './level-bar.ts';
 import { classicEdge, classicPlaces, columnSpan, mapColumns, NODE, related, TREASURE, treasureCurve, treasureLayout } from './layout.ts';
 import { marks, remoteOf, type Mark } from './marks.ts';
-import { ROLE_ICON } from './step.ts';
+import { ROLE_ICON, type NoemaRoadmapStep } from './step.ts';
 import { screen } from './styles.ts';
 
 export type MapView = 'map' | 'treasure' | 'list';
@@ -36,6 +37,8 @@ export class NoemaRoadmapMap extends RoadmapElement {
     roadmapId: { type: String, attribute: 'roadmap-id' },
     view: { type: String, reflect: true },
     focusStep: { type: String, attribute: 'focus-step' },
+    /** the page's ⋮ offers the legend (showLegend), so the map shows no ⓘ of its own */
+    legendInMenu: { type: Boolean, attribute: 'legend-in-menu' },
     selected: { state: true },
     zoom: { state: true },
   };
@@ -50,6 +53,12 @@ export class NoemaRoadmapMap extends RoadmapElement {
         height: 100%;
         background: var(--u-bg);
         color: var(--u-ink);
+      }
+      /* the Roadmap's own words (its language, not the interface's) take the direction of their first letter */
+      .cm-title strong,
+      .cm-listnode .cm-t > b,
+      .cm-tlabel {
+        unicode-bidi: plaintext;
       }
       .cm-top {
         display: flex;
@@ -444,6 +453,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
   declare roadmapId: string;
   declare view: MapView;
   declare focusStep: string;
+  declare legendInMenu: boolean;
   declare selected: string | null;
   declare zoom: number;
   #off: (() => void) | null = null;
@@ -458,6 +468,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
     this.roadmapId = '';
     this.view = 'map';
     this.focusStep = '';
+    this.legendInMenu = false;
     this.selected = null;
     this.zoom = 1;
   }
@@ -470,6 +481,10 @@ export class NoemaRoadmapMap extends RoadmapElement {
       this.#timer = setTimeout(() => {
         this.#timer = null;
         this.requestUpdate();
+        // the open panel keeps its attributes (same step), so it is told too: a re-plan, a subject attached, a pack ready
+        this.renderRoot.querySelector<NoemaRoadmapStep>('noema-roadmap-step')?.requestUpdate();
+        // a step mastered (or a level test taken) elsewhere: the levels move up while the map is open
+        this.renderRoot.querySelector<NoemaRoadmapLevels>('noema-roadmap-levels')?.refresh();
       }, 400);
     });
   }
@@ -519,6 +534,17 @@ export class NoemaRoadmapMap extends RoadmapElement {
       y = parseFloat(b.style.top) * this.zoom,
       r = sc.getBoundingClientRect();
     sc.scrollTo({ left: Math.max(0, x - r.width / 2), top: Math.max(0, y - r.height / 2) });
+  }
+
+  /** Show the map as a map (classic or treasure) or as a list; roadmap-view { view } tells the page (it remembers it). */
+  setView(v: MapView): void {
+    this.view = v;
+    this.emit('roadmap-view', { view: v });
+  }
+
+  /** What the signs on the map mean (the ⓘ of the tools; a page's ⋮ asks too). */
+  showLegend(): void {
+    this.#dialog('.cm-legenddlg')?.show();
   }
 
   #zoomTo(z: number): void {
@@ -817,7 +843,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
         hero = html`<span class="cm-hero ${rg > lg ? 'r' : 'l'}" title=${this.t('roadmap.map.tmap.here')}>${unsafeHTML(mascot)}</span>`;
       }
       const label =
-        `${code[id] ?? ''} · ${n.title} — ${this.t('roadmap.map.st.state', { s: state })}` +
+        `${code[id] ?? ''} ${n.title} — ${this.t('roadmap.map.st.state', { s: state })}` +
         (s.open && !s.mastered && pct ? ` (${this.i18n.format.percent(pct / 100)})` : '') +
         mk.map(m => ', ' + this.#markTitle(m)).join('');
       const cls = [
@@ -841,7 +867,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
           this.select(id);
         }}
       >
-        <span class="cm-dot">${inside}</span><b class="cm-code">${code[id]}</b><span class="cm-t">${n.title}</span>
+        <span class="cm-dot">${inside}</span><b class="cm-code">${code[id]}</b> <span class="cm-t">${n.title}</span>
         <span class="cm-badges">${mk.map(m => html`<i class="cm-pip" data-k=${m.k} title=${this.#markTitle(m)}>${m.emoji}</i>`)}</span>
         ${hero}
       </button>`;
@@ -992,8 +1018,7 @@ export class NoemaRoadmapMap extends RoadmapElement {
         : this.t('roadmap.map.lib.cardStats', { m: s.mastered, total: s.total, open: s.open, ready: s.ready }) +
           (paused ? ' · ⏸ ' + this.t('roadmap.map.map.paused') : '');
     const setView = (v: MapView): void => {
-      this.view = v;
-      this.emit('roadmap-view', { view: v });
+      this.setView(v);
     };
     if (this.view !== 'list') this.#mapView = this.view;
     const mapLike = this.#mapView;
@@ -1070,15 +1095,19 @@ export class NoemaRoadmapMap extends RoadmapElement {
             }}
             >▶ ${this.t('roadmap.map.map.nextUp')}</noema-button
           >
-          <noema-icon-button
-            class="cm-legendbtn"
-            icon="info"
-            size="sm"
-            label=${this.t('roadmap.map.sign.title')}
-            @click=${(): void => {
-              this.#dialog('.cm-legenddlg')?.show();
-            }}
-          ></noema-icon-button>
+          ${
+            this.legendInMenu
+              ? nothing
+              : html`<noema-icon-button
+                  class="cm-legendbtn"
+                  icon="info"
+                  size="sm"
+                  label=${this.t('roadmap.map.sign.title')}
+                  @click=${(): void => {
+                    this.#dialog('.cm-legenddlg')?.show();
+                  }}
+                ></noema-icon-button>`
+          }
         </div>
       </div>
       ${this.#holdBar(c)}

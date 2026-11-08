@@ -749,7 +749,6 @@
   "roadmap.map.band.noLevel": "Sin nivel",
   "roadmap.map.map.summary": "{m, number} de {n, number} dominados",
   "roadmap.map.map.whole": "Ver todo el mapa",
-  "roadmap.map.lib.openMap": "Abrir «{title}»",
   "roadmap.map.pnl.edit": "Editar este paso",
   "roadmap.map.pnl.sources": "Fuentes de este paso",
   "roadmap.map.pnl.readTheory": "Leer la teoría",
