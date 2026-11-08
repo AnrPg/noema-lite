@@ -1,12 +1,14 @@
 /**
  * The pack's knowledge map ("Info"): chapter.map is written before the chapter (CONTENT_SPEC.md, noema.map/v1): points
  * {id, text, level, cats, taughtIn} and learnables {id, kp, goal}; an exercise points to a learnable with `lr`. Here: the
- * map's overlay, the Mistakes gym by trap, and the exercises the learner reported (⚑).
+ * map's overlay, the Mistakes gym by trap, and the exercises the learner reported (⚑). The map is a light-DOM
+ * element on the study base (lit/base.ts) in the frame's dialog.
  */
 import type { Chapter, Exercise, KnowledgePoint } from '../domain/pack.ts';
 import type { StudyApp } from './app.ts';
 import { h } from './dom.ts';
 import { fmt } from './text.ts';
+import { F, html, nothing, StudyElement, tag, type TemplateResult } from './lit/base.ts';
 
 export const KMAP_CATS = [
   'pitfall',
@@ -40,103 +42,111 @@ const lrExercises = (c: Chapter, lr: string): Exercise[] => c.exercises.filter(e
 export function knowledgeMap(app: StudyApp, focus?: string): void {
   app.host.frame.modal((box, close) => {
     box.classList.add('kmapbox');
-    const chs = app.course.chapters.filter(c => c.map?.learnables?.length);
-    box.append(h('h3', {}, app.t('engine.kmap.title')), h('p', { class: 'tiny' }, app.t('engine.kmap.intro')));
-    for (const c of chs) {
-      const m = c.map ?? {},
-        learnables = m.learnables ?? [],
-        P = new Map((m.points ?? []).map(p => [p.id, p]));
-      const mastery = (lr: string): { n: number; ok: number } => {
-        const ex = lrExercises(c, lr);
-        return { n: ex.length, ok: ex.filter(e => app.solved(e.id)).length };
-      };
-      const done = learnables.map(l => mastery(l.id)).filter(x => x.n && x.ok === x.n).length;
-      const det = h(
-        'details',
-        { class: 'kmapch', open: c.id === focus || chs.length === 1 },
-        h(
-          'summary',
-          {},
-          h('span', {}, `${c.emoji ?? '📘'} ${c.title}`),
-          h(
-            'span',
-            { class: 'tiny' },
-            app.t('engine.kmap.chSummary', { points: (m.points ?? []).length, learnables: learnables.length, done }),
-          ),
-        ),
-      );
-      // a learnable sits at the level of its most basic point (core if none)
-      const lowest = (kp: readonly string[] | undefined): number =>
-        Math.min(...(kp ?? []).map(k => LEVELS.indexOf((P.get(k)?.level ?? '') as (typeof LEVELS)[number])).filter(i => i >= 0), 1);
-      LEVELS.forEach((lv, li) => {
-        const ls = learnables.filter(l => lowest(l.kp) === li);
-        if (!ls.length) return;
-        det.append(h('div', { class: 'lbl kmaplv' }, app.t(`engine.kmap.level_${lv}`)));
-        for (const l of ls) {
-          const ms = mastery(l.id),
-            pts = (l.kp ?? []).map(k => P.get(k)).filter((p): p is KnowledgePoint => !!p);
-          const cats = [...new Set(pts.flatMap(p => p.cats ?? []))];
-          det.append(
-            h(
-              'div',
-              { class: 'kmaplr' },
-              h(
-                'div',
-                { class: 'row' },
-                h('b', { class: 'grow', html: fmt(l.goal ?? pts[0]?.text ?? l.id) }),
-                ms.n
-                  ? h(
-                      'button',
-                      {
-                        class: 'btn small',
-                        type: 'button',
-                        title: app.t('engine.kmap.practise'),
-                        onclick: () => {
-                          close();
-                          app.startRound(lrExercises(c, l.id), { title: `🧭 ${l.goal ?? l.id}`, count: ms.n, back: location.hash });
-                        },
-                      },
-                      `${app.nf(ms.ok)}/${app.nf(ms.n)} ▶`,
-                    )
-                  : null,
-              ),
-              cats.length
-                ? h(
-                    'div',
-                    { class: 'kmapcats' },
-                    cats.map(k => h('span', { class: 'pill' }, app.t(`engine.cat.${k}`))),
-                  )
-                : null,
-              h(
-                'ul',
-                {},
-                pts.map(p => h('li', { html: fmt(p.text) })),
-              ),
-            ),
-          );
-        }
-      });
-      const earlier = (m.points ?? []).filter(p => p.taughtIn);
-      if (earlier.length)
-        det.append(
-          h('div', { class: 'lbl kmaplv' }, app.t('engine.kmap.earlier')),
-          h(
-            'ul',
-            { class: 'tiny' },
-            earlier.map(p => h('li', {}, h('span', { html: fmt(p.text) }), ' — ', h('i', {}, String(p.taughtIn ?? '')))),
-          ),
-        );
-      box.append(det);
-    }
-    box.append(
-      h(
-        'div',
-        { class: 'row', style: { justifyContent: 'flex-end', marginTop: '14px' } },
-        h('button', { class: 'btn', type: 'button', onclick: close }, app.t('engine.kmap.close')),
-      ),
-    );
+    box.append(new StudyKnowledgeMap(app, close, focus).redraw());
   });
 }
+
+class StudyKnowledgeMap extends StudyElement {
+  readonly #app: StudyApp;
+  readonly #close: () => void;
+  readonly #focus: string | undefined;
+  constructor(app: StudyApp, close: () => void, focus?: string) {
+    super();
+    this.#app = app;
+    this.#close = close;
+    this.#focus = focus;
+  }
+
+  override render(): TemplateResult {
+    const app = this.#app;
+    const chs = app.course.chapters.filter(c => c.map?.learnables?.length);
+    return html`<h3>${app.t('engine.kmap.title')}</h3>
+      <p class="tiny">${app.t('engine.kmap.intro')}</p>
+      ${chs.map(c => this.#chapter(c, c.id === this.#focus || chs.length === 1))}
+      <div class="row kmapfoot">
+        <button
+          class="btn"
+          type="button"
+          @click=${() => {
+            this.#close();
+          }}
+        >
+          ${app.t('engine.kmap.close')}
+        </button>
+      </div>`;
+  }
+
+  #chapter(c: Chapter, open: boolean): TemplateResult {
+    const app = this.#app;
+    const m = c.map ?? {},
+      learnables = m.learnables ?? [],
+      P = new Map((m.points ?? []).map(p => [p.id, p]));
+    const mastery = (lr: string): { n: number; ok: number } => {
+      const ex = lrExercises(c, lr);
+      return { n: ex.length, ok: ex.filter(e => app.solved(e.id)).length };
+    };
+    const done = learnables.map(l => mastery(l.id)).filter(x => x.n && x.ok === x.n).length;
+    // a learnable sits at the level of its most basic point (core if none)
+    const lowest = (kp: readonly string[] | undefined): number =>
+      Math.min(...(kp ?? []).map(k => LEVELS.indexOf((P.get(k)?.level ?? '') as (typeof LEVELS)[number])).filter(i => i >= 0), 1);
+    const earlier = (m.points ?? []).filter(p => p.taughtIn);
+    return html`<details class="kmapch" ?open=${open}>
+      <summary>
+        <span>${`${c.emoji ?? '📘'} ${c.title}`}</span>
+        <span class="tiny"
+          >${app.t('engine.kmap.chSummary', { points: (m.points ?? []).length, learnables: learnables.length, done })}</span
+        >
+      </summary>
+      ${LEVELS.map((lv, li) => {
+        const ls = learnables.filter(l => lowest(l.kp) === li);
+        if (!ls.length) return nothing;
+        return html`<div class="lbl kmaplv">${app.t(`engine.kmap.level_${lv}`)}</div>
+          ${ls.map(l => {
+            const ms = mastery(l.id),
+              pts = (l.kp ?? []).map(k => P.get(k)).filter((p): p is KnowledgePoint => !!p);
+            const cats = [...new Set(pts.flatMap(p => p.cats ?? []))];
+            return html`<div class="kmaplr">
+              <div class="row">
+                <b class="grow">${F(l.goal ?? pts[0]?.text ?? l.id)}</b>
+                ${
+                  ms.n
+                    ? html`<button
+                        class="btn small"
+                        type="button"
+                        title=${app.t('engine.kmap.practise')}
+                        @click=${() => {
+                          this.#close();
+                          app.startRound(lrExercises(c, l.id), { title: `🧭 ${l.goal ?? l.id}`, count: ms.n, back: location.hash });
+                        }}
+                      >
+                        ${app.nf(ms.ok)}/${app.nf(ms.n)} ▶
+                      </button>`
+                    : nothing
+                }
+              </div>
+              ${
+                cats.length
+                  ? html`<div class="kmapcats">${cats.map(k => html`<span class="pill">${app.t(`engine.cat.${k}`)}</span>`)}</div>`
+                  : nothing
+              }
+              <ul>
+                ${pts.map(p => html`<li>${F(p.text)}</li>`)}
+              </ul>
+            </div>`;
+          })}`;
+      })}
+      ${
+        earlier.length
+          ? html`<div class="lbl kmaplv">${app.t('engine.kmap.earlier')}</div>
+              <ul class="tiny">
+                ${earlier.map(p => html`<li><span>${F(p.text)}</span> — <i>${String(p.taughtIn ?? '')}</i></li>`)}
+              </ul>`
+          : nothing
+      }
+    </details>`;
+  }
+}
+tag('study-knowledge-map', StudyKnowledgeMap);
 
 /** the Mistakes gym by trap: the open mistakes grouped by the categories of their knowledge points */
 export function mistakesByCat(app: StudyApp, list: readonly Exercise[]): HTMLElement | null {

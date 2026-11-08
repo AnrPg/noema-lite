@@ -30,7 +30,21 @@ const chapter = (n: number): Chapter => ({
   objectives: [],
   src: n === 2 ? 'b' : 'a',
   sections: [{ id: `c${String(n)}-s1`, title: `Section ${String(n)}.1`, blocks: [{ t: 'p', text: `Theory of chapter ${String(n)}` }] }],
-  exercises: [ex(`c${String(n)}-e1`, `c${String(n)}-s1`, 'l1'), ex(`c${String(n)}-e2`, `c${String(n)}-s1`, 'l2')],
+  exercises: [
+    { ...ex(`c${String(n)}-e1`, `c${String(n)}-s1`, 'l1'), ...(n === 1 ? { lr: 'c1-L1' } : {}) },
+    ex(`c${String(n)}-e2`, `c${String(n)}-s1`, 'l2'),
+  ],
+  ...(n === 1
+    ? {
+        map: {
+          points: [
+            { id: 'c1-p1', text: 'Energy is conserved', level: 'core', cats: ['pitfall'] },
+            { id: 'c1-p2', text: 'Work moves energy', taughtIn: 'Chapter 0' },
+          ],
+          learnables: [{ id: 'c1-L1', kp: ['c1-p1'], goal: 'Use the conservation of energy' }],
+        },
+      }
+    : {}),
   flashcards: [{ q: 'Front', a: 'Back', id: `c${String(n)}-f1` }],
   debug:
     n === 1
@@ -66,8 +80,19 @@ function fake(): Fake {
   // a small fold of the events the tests look at (the real one: src/features/study/domain/events/projection.ts)
   const res: Record<string, { n: number; ok: number }> = {},
     read: Record<string, boolean> = {},
-    fc: Record<string, unknown> = {};
-  const state: StudyState = { xp: 0, read, res, pb: {}, fc, boss: {}, last: null, settings: { goal: 50, chunk: false, sound: false } };
+    fc: Record<string, unknown> = {},
+    flags: Record<string, { why: string; note?: string }> = {};
+  const state: StudyState = {
+    xp: 0,
+    read,
+    res,
+    pb: {},
+    fc,
+    boss: {},
+    last: null,
+    settings: { goal: 50, chunk: false, sound: false },
+    flags,
+  };
   const f: Fake = { state, events: [], xp: [], followed: [], lock: null, level: null, host: null as never };
   const learn: StudyHost['learn'] = (type, item, data = {}) => {
     f.events.push(`${type}:${item ?? ''}`);
@@ -78,6 +103,7 @@ function fake(): Fake {
     }
     if (type === 'section.read' && item) read[item] = true;
     if (type === 'card.reviewed' && item) fc[item] = { rating: data['rating'] };
+    if (type === 'exercise.unflagged' && item) Reflect.deleteProperty(flags, item);
   };
   const noop = (): void => undefined;
   f.host = {
@@ -116,9 +142,17 @@ function fake(): Fake {
       },
       sheet: () => noop,
       modal: build => {
+        const m = document.createElement('div');
+        m.className = 'modal';
         const box = document.createElement('div');
-        build(box, noop);
-        return noop;
+        box.className = 'box';
+        m.append(box);
+        const close = (): void => {
+          m.remove();
+        };
+        build(box, close);
+        document.body.append(m);
+        return close;
       },
       toast: noop,
       confirm: () => Promise.resolve(true),
@@ -336,6 +370,23 @@ test('the sources deck: a card per source, unfolded to its file, a source left o
   ui.app.sourcesUi.toggleDeck(false);
   assert.equal(deck()?.querySelector('.srccard'), null);
   assert.equal(document.querySelectorAll('.srcdeck').length, 1, 'one deck');
+});
+
+test('the knowledge map: the chapter’s learnables by level, their points and traps; one starts a round of its exercises', () => {
+  ui.inspect.knowledgeMap('c1');
+  const box = (): HTMLElement | null => document.querySelector('.modal .box.kmapbox');
+  assert.ok(box()?.querySelector('details.kmapch[open]'), 'the chapter asked for is unfolded');
+  assert.match(box()?.textContent ?? '', /Use the conservation of energy/);
+  assert.match(box()?.textContent ?? '', /Energy is conserved/);
+  assert.equal(box()?.querySelectorAll('.kmapcats .pill').length, 1, 'its trap’s category');
+  assert.match(box()?.textContent ?? '', /Work moves energy — Chapter 0/);
+  box()?.querySelector<HTMLButtonElement>('.kmaplr .btn')?.click();
+  assert.equal(box(), null, 'the map closes');
+  assert.equal(location.hash, '#/run');
+  assert.deepEqual(
+    ui.app.round?.actor.snapshot.context.list.map(e => e.id),
+    ['c1-e1'],
+  );
 });
 
 test('the words for the engine: an exercise and a section as text for the AI; progress is recorded as events', () => {
