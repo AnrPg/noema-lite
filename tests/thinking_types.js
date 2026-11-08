@@ -118,13 +118,14 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   ok(await p.evaluate(() => NoemaCore.study.practice.sibling(EX['ch01-e901'], [EX['ch01-e901']], ALL_EX, e => e._ch)?.id === 'ch01-e907'), 'after a mistake: a sibling in another type is found for the round');
 
   console.log('— knowledge map, Mistakes gym by trap, reported exercises');
-  await p.evaluate(() => {
-    COURSE[0].map = { format: 'noema.map/v1', chapter: 'ch01',
+  await p.evaluate(() => {   // the pack's first chapter gets a map and the two exercises; the study area rebuilds its course from the pack
+    const A = NoemaCore.studyUi.current().app, c0 = A.full[0];
+    c0.map = { format: 'noema.map/v1', chapter: 'ch01',
       points: [{ id: 'ch01-k01', text: 'Kinetic energy grows with the square of speed', level: 'foundation', cats: ['formula'] },
         { id: 'ch01-k02', text: 'Fall time does not depend on mass', level: 'core', cats: ['pitfall', 'confusable'] },
         { id: 'ch01-k03', text: 'Energy conservation', level: 'foundation', taughtIn: 'P1. Mechanics basics' }],
       learnables: [{ id: 'ch01-l01', kp: ['ch01-k01'], goal: 'Compute kinetic energy' }, { id: 'ch01-l03', kp: ['ch01-k02'], goal: 'Predict free fall' }] };
-    COURSE[0].exercises.push(EX['ch01-e901'], EX['ch01-e903']); ALL_EX.push(EX['ch01-e903']);
+    c0.exercises.push(EX['ch01-e901'], EX['ch01-e903']); A.setFilter(null);
   });
   await p.evaluate(() => NoemaCore.studyUi.current().inspect.knowledgeMap('ch01')); await wait(200);
   ok(await p.locator('.kmapbox .kmaplr').count() === 2, 'knowledge map: one row per learnable');
