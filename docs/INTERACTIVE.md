@@ -145,7 +145,8 @@ each translation). Numbers through `noema.fmt.number(n)`. Visible text in the HT
 - Engines of the library (§8.1) run in the HOST's Worker, never in the frame: only those the registry entry lists, ≤ 5 s a run,
   one run at a time per engine, ≤ 30 requests a second, outputs ≤ 512 KB.
 - Messages: at most 64 KB, each one checked; five bad messages stop the activity. A frame that navigates away is stopped.
-- At most 2 activities run at once (1 on a phone); one that leaves the screen pauses, and the oldest is parked (Start).
+- At most 2 activities run at once (1 on a phone); one that leaves the screen pauses, and the oldest is parked (Start). One whose
+  runtime is still loading holds its slot too, so blocks that come into view together start only as many as there are slots.
 - An activity that cannot run (unknown activity, runtime off or missing, bundle changed, error) shows its fallback picture
   and text. An exercise type the app does not know is hidden (it stays in the pack) instead of breaking the chapter.
 - A pack whose `requires` names something this app lacks: the open tab reloads to a newer build when it comes back to the

@@ -85,6 +85,10 @@ const ACT = (() => {
   const canRun = a => !!(a && enabled(a.runtime));
   const LIVE = [];   // the activities running now (at most liveMax())
   const liveMax = () => innerWidth < 720 ? 1 : 2;
+  // the activities on their way to LIVE (their runtime or engines still loading): they hold a slot too, so blocks that come into
+  // view together never start more than liveMax() at once (else the last to finish loading parks the first, which never restarts)
+  const STARTING = new Set();
+  const starting = except => { let n = 0; for (const s of STARTING) { if (!s.loading || s.destroyed || !s.root.isConnected) STARTING.delete(s); else if (s !== except) n++; } return n; };
   const rnd32 = () => (crypto.getRandomValues(new Uint32Array(1))[0]) >>> 0;
   const uid = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('');
   /** the URL of one of the app's own files under engine/ (host.asset: the H5P player), as this page reaches it: NOEMA_ENGINE_BASE, else
@@ -288,7 +292,7 @@ const ACT = (() => {
       const rts = [...new Set([...needs(a), ...owners(a)])].filter(id => !own(id));
       if (!want.length && !rts.length) return begin();
       teardown(); box.classList.remove('act-fallback'); note.textContent = tE('engine.act.loading');
-      const tok = sess.loading = {};
+      const tok = sess.loading = {}; STARTING.add(sess);
       Promise.all([want.length ? LIBR().load(want) : null, ...rts.map(runtime)]).then(([, ...rt]) => {
         if (sess.loading !== tok || sess.destroyed) return;
         if (!own(a.runtime) || rt.some(x => !x)) { sess.loading = null; return stop(tE('engine.act.failed')); }
@@ -353,7 +357,7 @@ const ACT = (() => {
       fallback(''); setBar(btn('▶ ' + tE('engine.act.start'), () => start(), 'btn primary small'));
       io = new IntersectionObserver(es => {
         for (const e of es) {
-          if (e.isIntersecting && !sess.port && !sess.parked && (LIVE.length < liveMax() || waits())) start();
+          if (e.isIntersecting && !sess.port && !sess.parked && (LIVE.length + starting(sess) < liveMax() || waits())) start();
           else if (sess.port && sess.alive) sess.port.send(e.isIntersecting ? 'resume' : 'pause');
         }
       }, { threshold: 0.15 });

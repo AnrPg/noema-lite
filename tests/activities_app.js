@@ -23,6 +23,9 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
 // a block that came into view while two others hold the live slots waits with its Start button (at most 2 run at once): press it
 const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel), 1500)) return; const b = p.locator(sel + ' .act-bar button'); if (await b.count()) await b.first().click({ timeout: 5000 }).catch(() => {}); };   // (it may start by itself meanwhile: the button is gone)
+// the exercise card #T has computed its latest inputs: its session's values() (what the checks grader reads; null while a run is pending,
+// and Check then only asks to finish first)
+const computed = p => until(() => p.evaluate(() => !!ACT.LIVE.find(s => s.root.closest('#T'))?.values?.()));
 const actFrame = (p, sel) => p.frames().find(f => f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame() && sel(f));   // the mini-app: inside the wrapper frame
 
 const http = require('http'); const hits = []; let BEACON = '';
@@ -202,7 +205,11 @@ async function appEngines(p, ctx, E) {
   const CR = path.join(__dirname, '..', 'tools', 'activities_examples', 'cheapest-route'), html = fs.readFileSync(path.join(CR, 'app.html'), 'utf8');
   const item = { ...JSON.parse(fs.readFileSync(path.join(CR, 'activity.json'), 'utf8')), html, strings: { en: JSON.parse(fs.readFileSync(path.join(CR, 'strings.en.json'), 'utf8')) } }; delete item.entry;
   await p.evaluate(() => { const W = window.Worker; window.__W = W; window.__wn = 0; window.__wt = 0;
-    window.Worker = class extends W { constructor(...a) { super(...a); window.__wn++; } terminate() { window.__wt++; return super.terminate(); } }; });
+    // window.__hold: the replies of the Workers wait (the queue check below: run 1 cannot end before runs 2 and 3 reach the host)
+    window.__hold = false; window.__held = [];
+    window.Worker = class extends W { constructor(...a) { super(...a); window.__wn++; this.addEventListener('message', e => { if (window.__hold && !e.__again) { e.stopImmediatePropagation(); window.__held.push([this, e.data]); } }); }
+      terminate() { window.__wt++; return super.terminate(); } };
+    window.__release = () => { window.__hold = false; for (const [w, data] of window.__held.splice(0)) { const e = new MessageEvent('message', { data }); e.__again = true; w.dispatchEvent(e); } }; });
   const mount = async (it) => {
     await p.evaluate(it => { ACT.ITEMS[it.id] = it; const m = document.querySelector('main'); m.innerHTML = ''; ACT.sweep(); m.append(interactiveBlock({ t: 'interactive', activity: it.id })); scrollTo(0, 0); }, it);
     if (!await until(() => p.evaluate(() => !!document.querySelector('main iframe.act-frame')), 3000)) { const b = p.locator('main .act-bar button'); if (await b.count()) await b.first().click({ timeout: 5000 }).catch(() => {}); }
@@ -234,8 +241,15 @@ async function appEngines(p, ctx, E) {
     r.undeclared = await err(noema.engine('timeline@1').run(sp, {}));
     r.inputs = await err(g.run(sp, { 'not a name': 1 }));
     r.clone = await err(g.run(Object.assign({}, sp, { f: function () { } }), {}));
-    r.queue = (await Promise.allSettled([g.run(sp, {}), g.run(sp, {}), g.run(sp, {})])).map(x => x.status === 'fulfilled' ? x.value.outputs.best : x.reason.code);
+    window.__sp = sp;
     return r; });
+  // one run at a time and one waiting: the host holds run 1's reply until the frame has the middle run's answer (each message of the
+  // port is a task of its own, so without the hold run 1 may end before runs 2 and 3 reach the host, and nothing is waiting to be replaced)
+  await p.evaluate(() => { window.__hold = true; });
+  await f.evaluate(() => { const g = noema.engine('graph@1'), sp = window.__sp; window.__q = [g.run(sp, {}), g.run(sp, {}), g.run(sp, {})].map(pr => pr.then(v => v.outputs.best, e => e.code)); window.__q2 = null; window.__q[1].then(v => { window.__q2 = v; }); });
+  await until(() => f.evaluate(() => window.__q2 !== null));
+  await p.evaluate(() => window.__release());
+  codes.queue = await f.evaluate(() => Promise.all(window.__q));
   ok(codes.run.best === 5 && JSON.stringify(codes.run.path) === '[0,1,2]', 'noema.engine(\'graph@1\').run(spec, inputs) → the outputs the spec names (Dijkstra: 5 along a – b – c) ' + JSON.stringify(codes.run));
   ok(codes.check.length >= 1 && codes.spec[0] === 'spec' && codes.spec[1] >= 1, 'check(spec) → the engine\'s own problems; run on a bad model is refused with code spec and the problems ' + JSON.stringify([codes.check, codes.spec]));
   ok(codes.undeclared[0] === 'undeclared' && codes.inputs[0] === 'inputs' && codes.clone[0] === 'spec', 'an engine the entry does not list, bad inputs and a spec that is not plain data are refused with their codes ' + JSON.stringify([codes.undeclared, codes.inputs, codes.clone]));
@@ -275,9 +289,9 @@ async function wasmApp(p, ctx, E) {
     return until(() => p.evaluate(() => !!document.querySelector('#T .sim-ro dd')?.textContent)); };
   const setC = v => p.evaluate(v => { const e = document.querySelector('#T [data-param="c"]'); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, v);
   ok(await card(), 'the exercise card mounts the module');
-  await setC(1); await wait(700); await p.click('#T button:has-text("Check")'); await wait(300);
+  await setC(1); await computed(p); await p.click('#T button:has-text("Check")'); await wait(300);
   ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.bad') && /1 of 2|1 \/ 2/.test(c.querySelector('.act-checks-sum')?.textContent || ''); }), 'c = 1 (about 8 % left) is graded wrong: 1 of 2 conditions met');
-  await card(); await setC(1.6); await wait(700); await p.click('#T button:has-text("Check")'); await wait(300);
+  await card(); await setC(1.6); await computed(p); await p.click('#T button:has-text("Check")'); await wait(300);
   ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.ok'); }), 'c = 1.6 is graded right');
   ok(await p.evaluate(() => S.att?.['ch01-e908']?.result?.passed === true && S.att['ch01-e908'].events.length >= 1), 'the attempt is saved (S.att)');
 
@@ -429,8 +443,8 @@ async function simSpec(p, ctx, E) {
   await p.reload(); await wait(1200);
   ok(await openSec() && /995\s*Hz/.test((await ro())[0]) && await p.locator(SEL + ' input.sim-num[data-param="R"]').inputValue() === '1600', 'after a reload the saved values come back');
   // Reset puts the defaults back
-  await p.locator(SEL + ' .sim-foot button').click(); await wait(150);
-  ok(/339\s*Hz/.test((await ro())[0]), 'Reset brings back the defaults');
+  await p.locator(SEL + ' .sim-foot button').click();
+  ok(await until(async () => /339\s*Hz/.test((await ro())[0])), 'Reset brings back the defaults ' + JSON.stringify((await ro())[0]));
   // pause (the block left the screen): nothing is computed until resume
   await p.evaluate(() => ACT.LIVE.find(s => s.act.id === 'rc-lowpass').send('pause'));
   await p.locator(SEL + ' input.sim-num[data-param="R"]').fill('2000'); await p.locator(SEL + ' input.sim-num[data-param="R"]').press('Tab'); await wait(100);
@@ -458,7 +472,7 @@ async function simSpec(p, ctx, E) {
 
   console.log('— sim-spec@1: the sim exercise (checks grader)');
   const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX['ch01-e901']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
-  const setR = async v => { const n = p.locator('#T input.sim-num[data-param="R"]'); await n.fill(String(v)); await n.press('Tab'); await wait(150); };
+  const setR = async v => { const n = p.locator('#T input.sim-num[data-param="R"]'); await n.fill(String(v)); await n.press('Tab'); await computed(p); };
   const check = async () => { await p.click('#T button:has-text("Check")'); await wait(300); };
   await card();
   ok(await p.evaluate(() => !!EX['ch01-e901'] && !document.querySelector('#T iframe')), 'the sim exercise with a sim-spec activity is shown');
@@ -745,7 +759,7 @@ async function p6engines(p, ctx, E) {
   for (const [id, sets, want] of tries) {
     await card(id);
     for (const [k, v] of sets) { if (typeof v === 'string') await p.selectOption(`#T select[data-param="${k}"]`, v); else await setNum('#T', k, v); }
-    await wait(300);
+    await computed(p);
     const g = await grade();
     ok(want ? g.ok && !g.bad : g.bad && !g.ok, `${id} ${sets.map(([k, v]) => k + ' ' + v).join(', ')}: graded ${want ? 'right' : 'wrong'} (${g.list})`);
   }
