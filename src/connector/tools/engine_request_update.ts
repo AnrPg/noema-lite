@@ -1,7 +1,7 @@
 /* noema_engine_request_update — answer a request for a new engine (admins) */
 import { argStr, fail, text, type Tool } from '../tool.ts';
 import { isAdmin } from '../services/admin.ts';
-import type { EngineRequestRow } from '../engine/api.ts';
+import { cleanRequestPatch, type EngineRequestRow } from '../../features/reports/domain/index.ts';
 import { UUID_RE } from '../util.ts';
 
 export const tool: Tool = {
@@ -36,15 +36,14 @@ export const tool: Tool = {
     },
   },
   async handler(args, ctx) {
-    const Q = ctx.engine.engineRequests;
     if (!(await isAdmin(ctx)))
       return fail(
         "Only the app's admins (table noema_admins, cloud/supabase.sql §13b) answer requests for new engines; this account is not one.",
       );
     const id = argStr(args, 'id');
     if (!UUID_RE.test(id)) return fail('id: a request id from noema_engine_requests');
-    const patch = Q.cleanPatch(args);
-    if (patch.error) return fail(patch.error);
+    const patch = cleanRequestPatch(args);
+    if ('error' in patch) return fail(patch.error);
     if (!Object.keys(patch).length) return fail('Nothing to change: give status, engine_id, answer or fixed_in.');
     const done = await ctx.sb.request<EngineRequestRow[] | null>(`/rest/v1/noema_engine_requests?id=eq.${id}`, {
       method: 'PATCH',

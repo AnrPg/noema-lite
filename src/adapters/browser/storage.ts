@@ -38,7 +38,7 @@ export interface StorageManagerLike {
 }
 
 export interface BrowserStorageOptions {
-  /** The IndexedDB database (default: the app's own, "noema-lite" version 1). */
+  /** The IndexedDB database (default: the app's own, "noema-lite" version 2). */
   readonly dbName?: string;
   readonly dbVersion?: number;
   /** Its object stores (created when missing). */
@@ -49,8 +49,13 @@ export interface BrowserStorageOptions {
   readonly now?: () => number;
 }
 
-/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once). */
-export const APP_DB = Object.freeze({ name: 'noema-lite', version: 1, collections: ['packs', 'handles', 'restore', 'convos'] as const });
+/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once).
+    Version 2 added `sync` (the outbox, the settings registers and the sync cursors: src/features/sync). */
+export const APP_DB = Object.freeze({
+  name: 'noema-lite',
+  version: 2,
+  collections: ['packs', 'handles', 'restore', 'convos', 'sync'] as const,
+});
 
 const unavailable = (what: string, cause?: unknown): NoemaError =>
   new NoemaError('storage.unavailable', `this browser gives no ${what} here`, cause === undefined ? {} : { cause });

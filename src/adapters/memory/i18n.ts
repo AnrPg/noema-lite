@@ -78,6 +78,7 @@ export function catalogI18n(catalogs: Catalogs, initialLocale = 'en'): I18n & { 
     },
     plural: n => new Intl.PluralRules(locale).select(n),
     locale: () => locale,
+    chain: l => chainOf(l ?? locale),
     dir: (): TextDirection => (RTL.test(locale) ? 'rtl' : 'ltr'),
     format,
     onChange(listener): Unsubscribe {

@@ -1,7 +1,7 @@
 /* noema_request_engine — ask for a new engine of interactive activities (the catalogue is consulted first) */
 import { argFlag, fail, text, type Tool } from '../tool.ts';
 import { suggestedText } from '../services/admin.ts';
-import type { EngineRequestRow } from '../engine/api.ts';
+import { normalizeRequest, REQUEST_FIELDS, type EngineRequestRow, type RequestFieldName } from '../../features/reports/domain/index.ts';
 import { message } from '../util.ts';
 
 export const tool: Tool = {
@@ -62,12 +62,12 @@ export const tool: Tool = {
     },
   },
   async handler(args, ctx) {
-    const Q = ctx.engine.engineRequests;
-    const { row, problems } = Q.normalize({ ...args, via: 'claude' });
+    const cat = ctx.engine.engineCatalog;
+    const { row, problems } = normalizeRequest({ ...args, via: 'claude' }, cat ? t => cat.suggest(t) : null);
     const words: Record<string, (f: string) => string> = {
       missing: () => 'required',
-      short: f => `at least ${Q.FIELDS[f]?.min} characters`,
-      long: f => `at most ${Q.FIELDS[f]?.max} characters`,
+      short: f => `at least ${REQUEST_FIELDS[f as RequestFieldName].min} characters`,
+      long: f => `at most ${REQUEST_FIELDS[f as RequestFieldName].max} characters`,
       value: () => 'not one of the allowed values',
     };
     if (problems.length)
@@ -85,7 +85,7 @@ export const tool: Tool = {
     } catch (e) {
       return fail(message(e).replace(/^Supabase \d+: /, ''));
     }
-    const got = r?.[0] ?? row;
+    const got: { readonly id?: string; readonly title?: string | null } = r?.[0] ?? row;
     return text(
       `✅ Request sent: ${got.id || ''} “${got.title}”. The app's admins answer it; the person sees the answer on #/engines (⋮ › Engines of activities) and here with noema_engine_requests.\n\n${intro}`,
     );

@@ -6,11 +6,9 @@ import type {
   NoemaCurShare,
   NoemaCurImport,
   NoemaEngineCatalog,
-  NoemaEngineRequests,
   NoemaImgLib,
   NoemaLang,
   NoemaLLM,
-  NoemaReport,
   NoemaSourcePlan,
 } from './api.ts';
 import { runLegacy, type LegacyScope, type LegacySource } from './legacy.ts';
@@ -42,8 +40,6 @@ export function engineFrom(sources: readonly LegacySource[], provide: LegacyScop
     llm: need(s, 'NoemaLLM') as NoemaLLM,
     imgLib: need(s, 'NoemaImgLib') as NoemaImgLib,
     lang: need(s, 'NoemaLang') as NoemaLang,
-    report: need(s, 'NoemaReport') as NoemaReport,
-    engineRequests: need(s, 'NoemaEngineRequests') as NoemaEngineRequests,
     // the catalogue of the engine library (src/engines/catalog.js), on the NoemaCore the composition root provides
     engineCatalog: (s.NoemaCore as { engines?: { catalog?: NoemaEngineCatalog } } | undefined)?.engines?.catalog ?? null,
   };

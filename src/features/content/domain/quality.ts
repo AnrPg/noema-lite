@@ -2,7 +2,7 @@
    §4, tools/CONTENT_SPEC.md) as specifications: one small rule per check id of QUALITY.checks, each with its own test
    (quality.test.ts), composed into qualitySpec. checkQuality(chapter, subject) runs them all and gives every issue with its
    level (error | warn) and its message "<chapter>: [<rule>] <what>". chapter.map = map/chNN.json, chapter.review = review/chNN.json. */
-import { all, spec, type RuleIssue, type Spec } from './spec.ts';
+import { all, spec, type RuleIssue, type Spec } from '../../../contracts/rules/spec.ts';
 import { QUALITY, type QualityCheck } from './rules.ts';
 import { has, isObj, isStr, list, obj, objs, qv, s, type Obj } from './util.ts';
 

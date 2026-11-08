@@ -82,7 +82,7 @@ Next to the subject (`library/subjects/<id>/bridges/`), or next to a pack's `.js
   **stale** (shown as "the text changed since this translation was written") until someone checks it and runs `stamp`.
 * `status`: `draft` until a person who speaks the language reviewed it, then `reviewed`.
 * Plain text only (no markup), translation ≤ 200 characters, note ≤ 400, preview ≤ 1500, ≤ 30 key words a section.
-* Block ids (`at: "<section>/<block id>"`) are the app's own (`NoemaCatalog.blockIds`, the same in `tools/bridge.py`).
+* Block ids (`at: "<section>/<block id>"`) are the app's own (`NoemaCore.catalog.blockIds`, src/features/catalog; the same in `tools/bridge.py`).
 
 * `cues` (core only, optional) on a sense: words of the source language whose presence in the same sentence means this
   sense (*order* sequence: `"arrival order"`, `"in order"`; purchase: `"e-shop"`, `"customer"`). `tools/bridge.py anchor`

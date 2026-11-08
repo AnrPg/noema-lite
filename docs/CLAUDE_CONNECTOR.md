@@ -116,7 +116,18 @@ subject id + signed links to the learner's files), `noema_curriculum_submit` (ch
 problems come back to fix), and `noema_create_roadmap` (a new Roadmap from the material the learner gave Claude —
 docs/FROM_SOURCES.md §5), `noema_roadmap_map` + `noema_extend_roadmap` (a new part of a Roadmap that exists, from new
 material, joined to its steps by `"@<step id>"` — docs/FROM_SOURCES.md §6), `noema_link_roadmap_steps` (prerequisite
-links between steps already on a Roadmap, prepared ones too, and wrong links removed; only the map changes — §6). Prompt `curriculum_work`. A step is saved with the usual upload; `noema_finish_upload`
+links between steps already on a Roadmap, prepared ones too, and wrong links removed; only the map changes — §6).
+**🪜 Levels** (docs/CURRICULUM.md §11): `noema_create_roadmap` and `noema_extend_roadmap` take the ladder Claude proposes
+with the map (`"levels"`: a preset — `"grade:5-9"`, `"semester:6"`, `"year:4"`, `"difficulty"` — or the course's own list)
+and each step's `"level"` (an id or `{ "from", "to" }`), checked by the level rules (a prerequisite never above its step; a
+part adds levels at the top of the ladder, of the same kind); `noema_create_roadmap` `level_test` asks for a level test
+before moving up. `noema_curriculum_task` `level` and `noema_pipeline` `level` (+ `curriculum_id`) give the work of one
+level with what that level means for difficulty (§11.4). `noema_restructure_levels` proposes a new arrangement by level —
+a new ladder, steps or chapters moved, a step split per level, steps merged, links changed — as a plan that goes to the
+inbox and is applied **only once the learner (in a shared Roadmap its owner) approves it in the app**, keeping every id so
+progress, translations and bridges follow the material (§11.3); `action: "status"` shows the proposal waiting and the
+last decisions; a member's Claude is refused. The tools' code uses the Roadmaps domain (`src/features/roadmaps/domain`)
+directly. Prompt `curriculum_work`. A step is saved with the usual upload; `noema_finish_upload`
 recognises a curriculum step by its subject id, registers it with its curriculum and node, links packaged files that are
 the learner's own (same SHA-256) instead of asking for them again, and tells the app through the inbox.
 **Shared curricula** (docs/CURRICULUM.md §8): a step handed out is also reserved among the curriculum's participants (steps
@@ -176,7 +187,7 @@ never writes anything twice:
 | `roadmap-i18n` — `noema_save_roadmap_translation` | Roadmap + locale + SHA-256 | written into the Roadmap → the inbox entry |
 | `bridge` — `noema_save_bridge` | pack + pair + SHA-256 | the bridge file (undone if a later step fails) → its row → the upload cleared |
 | `roadmap` — `noema_create_roadmap` | SHA-256 of the plan | the Roadmap record (made once: a retry reuses its id) |
-| `extend` / `links` — `noema_extend_roadmap`, `noema_link_roadmap_steps` | Roadmap + SHA-256 | the inbox entry (its key fixed by the saga) |
+| `extend` / `links` / `restructure` — `noema_extend_roadmap`, `noema_link_roadmap_steps`, `noema_restructure_levels` | Roadmap + SHA-256 | the inbox entry (its key fixed by the saga) |
 | `answer` — `noema_curriculum_submit` | Roadmap + task + SHA-256 of the answer | the inbox entry |
 | `lang-answer` — `noema_lang_submit` | course + task + SHA-256 | the inbox entry → the task's claim released |
 | `langpack` — `noema_lang_package_finish` | course + language + SHA-256 of the package | the package's record |
@@ -219,7 +230,9 @@ again; a map that does not fit stays where it is).
   (numbered steps, tips, FAQ), phone layout, `/api/img` safety.
 * `tests/connector.js` — way B: 401 + resource metadata, protocol, every tool, toolkit + prompt,
   upload → check → register, refusal of broken packs, the sagas (finished twice → nothing written twice; busy; resumed),
-  the rows of the entry tables, consent page, the subject in the picker.
+  the rows of the entry tables, Roadmaps by level (levels with the map and with a new part, refused levels, the map's
+  levels, `level` on `noema_curriculum_task` and `noema_pipeline`, `noema_restructure_levels`: a refused plan, the
+  proposal in the inbox with nothing changed, sent again, status), consent page, the subject in the picker.
 * `src/connector/**/*.test.ts` — the saga runner, the compare-and-swap, the argument checks, the engine's scope.
 * `tests/sql_policies.py` — the entry tables and sagas: owner only, the server's stamp, the move of the old kv maps.
 * `tests/lang_package.js` — way D: the package round trip (`lang_course.py package` / `unpack --package`), the check that

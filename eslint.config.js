@@ -18,6 +18,9 @@ const ELEMENTS = [
   { type: 'plugins', pattern: 'src/plugins', partialMatch: false },
   { type: 'engines', pattern: 'src/engines', partialMatch: false },
   { type: 'adapters', pattern: 'src/adapters', partialMatch: false },
+  // the UI's tests (src/ui/test/) wire the components to the memory adapters, as a composition root would (listed before 'ui',
+  // which would match them too)
+  { type: 'ui-test', pattern: 'src/ui/test', partialMatch: false },
   { type: 'ui', pattern: 'src/ui', partialMatch: false },
   { type: 'connector', pattern: 'src/connector', partialMatch: false },
   { type: 'composition', pattern: 'src/composition', partialMatch: false },
@@ -33,7 +36,9 @@ const MAY_IMPORT = {
   plugins: ['kernel', 'contracts', 'ports', 'plugins'],
   engines: ['kernel', 'contracts', 'ports', 'plugins', 'engines'],
   adapters: ['kernel', 'contracts', 'ports', 'adapters'],
-  ui: ['kernel', 'contracts', 'ui'],
+  // the UI (src/ui: the component kit, the router, the frame) is a driving adapter: it reaches the core through the ports
+  ui: ['kernel', 'contracts', 'ports', 'ui'],
+  'ui-test': ['kernel', 'contracts', 'ports', 'adapters', 'ui'],
   connector: ['kernel', 'contracts', 'ports', 'domain', 'application', 'plugins', 'engines', 'connector'],
   composition: ELEMENTS.map(e => e.type),
 };

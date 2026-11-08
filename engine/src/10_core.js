@@ -56,7 +56,6 @@ const F = s => h('span', { html: fmt(s) });
 /* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
 const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
 const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -187,17 +186,19 @@ function flushSave() {
   Object.assign(S.settings, cur); seeSettings();   // the page's copy follows what the others saved
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
-/* another device's progress or settings arrived (engine/cloud.js): fold them into what this page holds, so the next save
-   can't write the older copy back over them. Progress only grows: answers, reviews and read sections of both are kept. */
+/* the stored progress or settings changed under this page (NoemaCore.sync: another device's settings, the cloud's old copy of
+   a subject this device lacked, another tab of this browser that had the account): fold them into what this page holds, so
+   the next save can't write the older copy back over them. The stored copy wins; what only this page holds is kept. */
 addEventListener('noema:remote', e => {
-  if (e.detail?.acc !== ACCOUNT.id || !window.NoemaCloud?.mergeState) return;
+  if (e.detail?.acc !== ACCOUNT.id) return;
   const keys = e.detail.keys || [];
   if (keys.includes(STATE_KEY) && Noema.kv.get(STATE_KEY) == null) {   // deleted on another device (e.g. a restore without this subject): start empty, don't upload the old copy again
     for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
     Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null });
   } else if (keys.includes(STATE_KEY)) {
     let st = {}; try { st = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.state', severity: 'warning' }); }
-    const { settings, ...mine } = S; const merged = NoemaCloud.mergeState(mine, st); delete merged.settings;
+    const { settings, ...mine } = S, merged = { ...mine, ...st, xp: Math.max(mine.xp || 0, st.xp || 0) }; delete merged.settings;
+    for (const f of ['read', 'res', 'pb', 'fc', 'boss']) merged[f] = { ...(mine[f] || {}), ...(st[f] || {}) };
     for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
     Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
     if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;
@@ -227,7 +228,7 @@ function record(ex, ok, firstTry = true, conf = null) {
   if (conf) r.conf = conf; else delete r.conf;   // how sure the learner was this time: sure | think | guess
   S.res[ex.id] = r; save();
 }
-const solved = id => S.res[id]?.ok > 0;
+const solved = id => NoemaCore.study.practice.solved(S.res, id);
 
 /* ---------- sound ---------- */
 let AC;
@@ -284,12 +285,8 @@ function applyTheme() {
   if (t === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
 }
 
-/* ---------- progress ---------- */
-function chProgress(c) {
-  const sr = c.sections.filter(s => S.read[s.id]).length / c.sections.length;
-  const ex = c.exercises.filter(e => solved(e.id)).length / c.exercises.length;
-  return { sr, ex };
-}
+/* ---------- progress: the study domain's (src/features/study/domain/queries.ts) ---------- */
+const chProgress = c => NoemaCore.study.progress.chapter(c, S.read, S.res);
 
 /* ---------- section plain text (for AI context) ---------- */
 /* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)

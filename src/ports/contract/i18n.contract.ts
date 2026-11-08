@@ -53,6 +53,9 @@ export function i18nContract(name: string, make: I18nFactory): void {
       h.i18n.onChange(l => seen.push(l));
       await h.use('el');
       assert.equal(h.i18n.locale(), 'el');
+      assert.deepEqual([...h.i18n.chain()], ['el', 'en']);
+      assert.deepEqual([...h.i18n.chain('pt-PT')], ['pt-PT', 'pt', 'en']);
+      assert.deepEqual([...h.i18n.chain('zh-Hant')], ['zh-Hant', 'en']);
       assert.equal(h.i18n.t('home.hello', { name: 'Ada' }), 'Γεια σου, Ada!');
       assert.equal(h.i18n.t('only.en'), 'English only');
       assert.equal(h.i18n.dir(), 'ltr');

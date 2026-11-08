@@ -5,6 +5,12 @@ import { roadmapTodoText } from '../services/roadmap.ts';
 import { sagaKey } from '../services/sagas.ts';
 import type { Curriculum } from '../engine/api.ts';
 import { sha256Hex, str, type Json } from '../util.ts';
+import { ladderLine, queueAll } from '../../features/roadmaps/domain/index.ts';
+import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
+
+/** 🪜 What plan_json says about levels (docs/CURRICULUM.md §11) — shared with noema_extend_roadmap. */
+export const LEVELS_DOC =
+  ' Levels (optional; propose them when the material has them — school grades, semesters, years of study, or a difficulty ladder): "levels" is a preset — "grade:5-9", "semester:6", "year:4", "difficulty" (introductory · intermediate · advanced) — or a list [{ "id": "s1", "names": { "<lang>": "…" } }, …] lowest first (kind "custom" unless named); each step may then carry "level": "<level id>" or { "from": "<id>", "to": "<id>" } (a step spanning levels). A prerequisite never sits at a higher level than the step that builds on it. The learner moves up a level by itself once every step up to it is mastered (with an optional level test).';
 
 export const tool: Tool = {
   definition: {
@@ -18,7 +24,8 @@ export const tool: Tool = {
         plan_json: {
           type: 'string',
           description:
-            'ONE JSON object: { "title": "…", "summary": "…", "steps": [{ "ref": "s1", "title": "…", "summary": "what it covers", "role": "foundation|intro|aspect|subtopic|related|synthesis|application", "prerequisites": ["refs of earlier steps"], "files": ["path/of/file.pdf pp. 12–40", …] }], "files": [{ "path": "path/of/file.pdf", "pages": 120 }] } — "files" lists EVERY file the learner gave you (pages for PDFs); every file must be used by a step, and pages must exist.',
+            'ONE JSON object: { "title": "…", "summary": "…", "levels": "semester:2", "steps": [{ "ref": "s1", "title": "…", "summary": "what it covers", "role": "foundation|intro|aspect|subtopic|related|synthesis|application", "prerequisites": ["refs of earlier steps"], "level": "s1", "files": ["path/of/file.pdf pp. 12–40", …] }], "files": [{ "path": "path/of/file.pdf", "pages": 120 }] } — "files" lists EVERY file the learner gave you (pages for PDFs); every file must be used by a step, and pages must exist.' +
+            LEVELS_DOC,
         },
         language: {
           type: 'string',
@@ -27,6 +34,11 @@ export const tool: Tool = {
         learner: {
           type: 'string',
           description: 'optional: who the learner is and their goal (one line)',
+        },
+        level_test: {
+          type: 'boolean',
+          description:
+            'optional, with levels: true asks the learner for a short level test (80 % to pass) before moving up a level; default false — moving up is automatic once every step of the level is mastered.',
         },
         prepare: {
           type: 'boolean',
@@ -46,17 +58,18 @@ export const tool: Tool = {
     } catch {
       return fail('plan_json is not valid JSON — send ONE JSON object (no prose around it).');
     }
-    const r = E.sourcePlan.fromClaude(d);
+    const lang = (argStr(args, 'language') || 'en').toLowerCase();
+    if (!CUR.LANG[lang]) return fail(`Unknown language "${lang}". Use one of: ${Object.keys(CUR.LANG).join(', ')}`);
+    const r = E.sourcePlan.fromClaude(d, { lang });
     if (r.errors)
       return fail(
         `Your Roadmap has ${r.errors.length} problem(s) — fix ALL of them and call noema_create_roadmap again with the complete corrected object:\n- ${r.errors.slice(0, 40).join('\n- ')}`,
       );
-    const lang = (argStr(args, 'language') || 'en').toLowerCase();
-    if (!CUR.LANG[lang]) return fail(`Unknown language "${lang}". Use one of: ${Object.keys(CUR.LANG).join(', ')}`);
     const prepare = !argOff(args, 'prepare'),
-      learner = argStr(args, 'learner').slice(0, 400);
+      learner = argStr(args, 'learner').slice(0, 400),
+      levelTest = args.level_test === true && r.levels.length > 0;
     // the same plan sent again (a retry) is the same Roadmap: never a second one
-    const key = sagaKey('roadmap', (await sha256Hex([rawPlan, lang, learner, prepare].join('\n'))).slice(0, 40));
+    const key = sagaKey('roadmap', (await sha256Hex([rawPlan, lang, learner, prepare, levelTest].join('\n'))).slice(0, 40));
     const out = await ctx.sagas.run<string>('roadmap', key, async s => {
       // the record is made and written in one step (its id is new each time it is made): a resumed run reuses the one written
       const c = (await s.step('record', async () => {
@@ -65,23 +78,20 @@ export const tool: Tool = {
           const n = c.nodes[nid];
           if (n) n.chatFiles = f;
         }
-        if (prepare) {
-          const t0 = Date.now();
-          CUR.order(c).forEach((nid, i) => {
-            const n = c.nodes[nid];
-            if (!n) return;
-            n.pack = { id: CUR.packId(c, nid), status: 'app', queuedAt: new Date(t0 + i).toISOString(), error: null, auto: false };
-            n.reviewed = new Date(t0).toISOString();
-          });
+        if (r.levels.length) {
+          c.levels = r.levels;
+          if (levelTest) c.levelTest = true;
         }
+        if (prepare) queueAll(c as unknown as Roadmap, Date.now());
         c.fromSources = { at: new Date().toISOString(), via: 'connector' };
         if (r.plan.summary) c.summary = str(r.plan.summary).slice(0, 400);
         await ctx.kv.put('a:curriculum:' + c.id, c);
         return c as unknown as Json;
       })) as unknown as Curriculum;
-      const n = Object.keys(c.nodes).length;
+      const n = Object.keys(c.nodes).length,
+        lv = c.levels?.length ? `\nLevels: ${ladderLine(c)}${c.levelTest ? ' (a level test before moving up)' : ''}.` : '';
       return (
-        `✅ The Roadmap “${c.title}” (${c.id}) is in the learner's noema-lite account: ${n} steps, ${c.edges.length} ${c.edges.length === 1 ? 'link' : 'links'}. It appears under Roadmaps the next time the app syncs.\nNext: call noema_curriculum_task with curriculum_id "${c.id}" — first the chapter plans of its steps, then ${prepare ? 'every step in study order (all are queued for you)' : 'the steps the learner queues in the app'}, one subject each, from the files of this chat.` +
+        `✅ The Roadmap “${c.title}” (${c.id}) is in the learner's noema-lite account: ${n} steps, ${c.edges.length} ${c.edges.length === 1 ? 'link' : 'links'}. It appears under Roadmaps the next time the app syncs.${lv}\nNext: call noema_curriculum_task with curriculum_id "${c.id}" — first the chapter plans of its steps, then ${prepare ? 'every step in study order (all are queued for you)' : 'the steps the learner queues in the app'}, one subject each, from the files of this chat.` +
         roadmapTodoText(E, c)
       );
     });

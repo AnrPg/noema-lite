@@ -9,7 +9,7 @@ import { checkBalance } from './balance.ts';
 import { checkExercise } from './exercise.ts';
 import { BLOCKS, checkPack, TYPES } from './pack.ts';
 import { QUALITY } from './rules.ts';
-import { DIFFICULTY_MIX } from './levels.ts';
+import { DIFFICULTY_MIX } from '../../../contracts/rules/levels.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..');
 const chapterSchema = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/contracts/schemas/noema.chapter.v1.schema.json'), 'utf8')) as {

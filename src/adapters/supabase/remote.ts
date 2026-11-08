@@ -3,12 +3,15 @@
  * here (TABLES, BUCKETS); a row's version is its `updated_at`, and every accepted write stamps one strictly later than the
  * one it replaced (versionAfter). Compare-and-swap: PATCH … &updated_at=eq.<expected> (no row back = refused), and an
  * insert that never overwrites (resolution=ignore-duplicates) for "must not exist yet".
+ * Logs and registers (cloud/supabase.sql §19): an append is an insert that ignores ids already there; a register write is
+ * an upsert the table's trigger keeps only when its stamp is later (and clamps a stamp from the future); reads go through
+ * the `*_since` functions, whose cursor ("<transaction>:<sequence>") only ever passes entries that every later read sees too.
  */
 import { NoemaError } from '../../kernel/errors.ts';
 import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../kernel/result.ts';
 import { textOf } from '../../kernel/text.ts';
 import type { Json } from '../../ports/common.ts';
-import type { ObjectInfo, Remote, RemoteRow, RowListOptions } from '../../ports/remote.ts';
+import type { LogEntry, ObjectInfo, Page, ReadFrom, RegisterEntry, Remote, RemoteRow, RowListOptions } from '../../ports/remote.ts';
 import { versionAfter, type SupabaseClient } from './client.ts';
 
 export interface TableMap {
@@ -21,6 +24,24 @@ export interface TableMap {
 export const TABLES: { readonly [collection: string]: TableMap } = Object.freeze({
   kv: { table: 'noema_kv', key: 'key', value: 'value', version: 'updated_at' },
 });
+export interface StreamMap {
+  readonly table: string;
+  /** The function that reads it from a cursor: (after text, max_rows int) → rows + cursor. */
+  readonly since: string;
+}
+/** The app's logs → their tables (append-only). */
+export const LOGS: { readonly [stream: string]: StreamMap } = Object.freeze({
+  events: { table: 'noema_events', since: 'noema_events_since' },
+});
+/** The app's register collections → their tables (last writer wins by stamp). */
+export const REGISTERS: { readonly [collection: string]: StreamMap } = Object.freeze({
+  settings: { table: 'noema_settings', since: 'noema_settings_since' },
+});
+/** Rows per request (PostgREST takes more; this keeps each body small). */
+export const BATCH = 100;
+/** Rows per read (the functions cap it the same way). */
+export const READ_MAX = 1000;
+
 /** The app's buckets → Supabase Storage buckets. */
 export const BUCKETS: { readonly [bucket: string]: string } = Object.freeze({
   private: 'noema-private',
@@ -37,6 +58,8 @@ const conflict = (collection: string, key: string): NoemaError =>
 
 export interface SupabaseRemoteOptions {
   readonly tables?: { readonly [collection: string]: TableMap };
+  readonly logs?: { readonly [stream: string]: StreamMap };
+  readonly registers?: { readonly [collection: string]: StreamMap };
   readonly buckets?: { readonly [bucket: string]: string };
 }
 
@@ -77,7 +100,7 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
       const r = await client.call(q);
       return r.ok ? ok(rowsOf(T, r.value.body).filter(x => !lo.prefix || x.key.startsWith(lo.prefix))) : r;
     },
-    async put(collection, key, value, { expected }) {
+    async put(collection, key, value, { expected, keepalive }) {
       const t = tableOf(collection);
       if (!t.ok) return t;
       const T = t.value,
@@ -88,6 +111,7 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
           method: 'POST',
           body: [{ ...(user ? { user_id: user } : {}), [T.key]: key, [T.value]: value, [T.version]: version }],
           headers: { Prefer: 'resolution=ignore-duplicates,return=representation' },
+          ...(keepalive ? { keepalive: true } : {}),
         });
         if (!r.ok) return r;
         const got = rowsOf(T, r.value.body)[0];
@@ -100,6 +124,7 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
           method: 'PATCH',
           body: { [T.value]: value, [T.version]: version },
           headers: { Prefer: 'return=representation' },
+          ...(keepalive ? { keepalive: true } : {}),
         },
       );
       if (!r.ok) return r;
@@ -123,6 +148,85 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
       const still = await rows.get(collection, key); // nothing deleted: gone already (fine) or changed (refused)
       if (!still.ok) return still;
       return still.value ? err(conflict(collection, key)) : OK_VOID;
+    },
+  };
+
+  const streamOf = (maps: { readonly [k: string]: StreamMap }, c: string): Result<StreamMap> => {
+    const t = maps[c];
+    return t ? ok(t) : err(new NoemaError('remote.unknown_collection', 'no table for the collection ' + c, { params: { collection: c } }));
+  };
+  const logMaps = o.logs ?? LOGS,
+    registerMaps = o.registers ?? REGISTERS;
+  const str = (x: unknown): string => (typeof x === 'string' ? x : textOf(x ?? ''));
+  /** A `*_since` answer → a page (the ACL: no table column passes it). */
+  async function since<T>(t: StreamMap, from: ReadFrom, entry: (r: Record<string, unknown>) => T): AsyncResult<Page<T>> {
+    const limit = Math.min(from.limit ?? READ_MAX, READ_MAX);
+    const r = await client.call(`/rest/v1/rpc/${enc(t.since)}`, { method: 'POST', body: { after: from.after, max_rows: limit } });
+    if (!r.ok) return r;
+    const got = Array.isArray(r.value.body) ? (r.value.body as Array<Record<string, unknown>>) : [];
+    const last = got.at(-1);
+    return ok({ entries: got.map(entry), cursor: last ? str(last['cursor']) : from.after, more: got.length >= limit });
+  }
+  const json = (x: unknown): Json => (x === undefined ? null : (x as Json));
+  const toLog = (r: Record<string, unknown>): LogEntry =>
+    Object.freeze({ id: str(r['id']), kind: str(r['type']), stamp: str(r['hlc']), device: str(r['device']), body: json(r['body']) });
+  const toRegister = (r: Record<string, unknown>): RegisterEntry =>
+    Object.freeze({ key: str(r['key']), value: json(r['value']), stamp: str(r['hlc']), device: str(r['device']) });
+
+  const log: Remote['log'] = {
+    async append(stream, entries, so = {}) {
+      const t = streamOf(logMaps, stream);
+      if (!t.ok) return t;
+      const user = uid();
+      for (let i = 0; i < entries.length; i += BATCH) {
+        const rows = entries.slice(i, i + BATCH).map(e => ({
+          ...(user ? { user_id: user } : {}),
+          id: e.id,
+          type: e.kind,
+          hlc: e.stamp,
+          device: e.device,
+          body: e.body,
+        }));
+        const r = await client.call(`/rest/v1/${t.value.table}?on_conflict=user_id,id`, {
+          method: 'POST',
+          body: rows,
+          headers: { Prefer: 'resolution=ignore-duplicates,return=minimal' },
+          ...(so.keepalive ? { keepalive: true } : {}),
+        });
+        if (!r.ok) return r;
+      }
+      return OK_VOID;
+    },
+    async read(stream, from) {
+      const t = streamOf(logMaps, stream);
+      return t.ok ? since(t.value, from, toLog) : t;
+    },
+  };
+
+  const registers: Remote['registers'] = {
+    async put(collection, entries, so = {}) {
+      const t = streamOf(registerMaps, collection);
+      if (!t.ok) return t;
+      const user = uid(),
+        kept: RegisterEntry[] = [];
+      for (let i = 0; i < entries.length; i += BATCH) {
+        const rows = entries
+          .slice(i, i + BATCH)
+          .map(e => ({ ...(user ? { user_id: user } : {}), key: e.key, value: e.value, hlc: e.stamp, device: e.device }));
+        const r = await client.call(`/rest/v1/${t.value.table}?on_conflict=user_id,key`, {
+          method: 'POST',
+          body: rows,
+          headers: { Prefer: 'resolution=merge-duplicates,return=representation' },
+          ...(so.keepalive ? { keepalive: true } : {}),
+        });
+        if (!r.ok) return r;
+        if (Array.isArray(r.value.body)) for (const x of r.value.body as Array<Record<string, unknown>>) kept.push(toRegister(x));
+      }
+      return ok(kept);
+    },
+    async read(collection, from) {
+      const t = streamOf(registerMaps, collection);
+      return t.ok ? since(t.value, from, toRegister) : t;
     },
   };
 
@@ -178,6 +282,8 @@ export function supabaseRemote(client: SupabaseClient, o: SupabaseRemoteOptions 
   return {
     rows,
     objects,
+    log,
+    registers,
     async rpc(name, args) {
       const r = await client.call(`/rest/v1/rpc/${enc(name)}`, { method: 'POST', body: args });
       return r.ok ? ok((r.value.body ?? null) as Json) : r;

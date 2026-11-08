@@ -122,6 +122,14 @@
           "type": "string",
           "description": "with steps: the flow id (1, 1b, 2 … 8, L1, L2)"
         },
+        "level": {
+          "type": "string",
+          "description": "with detect or steps, for a Roadmap with levels: the level this work is for (its id or name; noema_roadmap_map lists them) — the steps then say what that level means for the content (difficulty relative to the level, the pack's \"levels\")"
+        },
+        "curriculum_id": {
+          "type": "string",
+          "description": "with level: the Roadmap (may be omitted when there is only one)"
+        },
         "facts": {
           "type": "object",
           "description": "with detect: what the learner gave and asked",
@@ -298,7 +306,7 @@
       "properties": {
         "plan_json": {
           "type": "string",
-          "description": "ONE JSON object: { \"title\": \"…\", \"summary\": \"…\", \"steps\": [{ \"ref\": \"s1\", \"title\": \"…\", \"summary\": \"what it covers\", \"role\": \"foundation|intro|aspect|subtopic|related|synthesis|application\", \"prerequisites\": [\"refs of earlier steps\"], \"files\": [\"path/of/file.pdf pp. 12–40\", …] }], \"files\": [{ \"path\": \"path/of/file.pdf\", \"pages\": 120 }] } — \"files\" lists EVERY file the learner gave you (pages for PDFs); every file must be used by a step, and pages must exist."
+          "description": "ONE JSON object: { \"title\": \"…\", \"summary\": \"…\", \"levels\": \"semester:2\", \"steps\": [{ \"ref\": \"s1\", \"title\": \"…\", \"summary\": \"what it covers\", \"role\": \"foundation|intro|aspect|subtopic|related|synthesis|application\", \"prerequisites\": [\"refs of earlier steps\"], \"level\": \"s1\", \"files\": [\"path/of/file.pdf pp. 12–40\", …] }], \"files\": [{ \"path\": \"path/of/file.pdf\", \"pages\": 120 }] } — \"files\" lists EVERY file the learner gave you (pages for PDFs); every file must be used by a step, and pages must exist. Levels (optional; propose them when the material has them — school grades, semesters, years of study, or a difficulty ladder): \"levels\" is a preset — \"grade:5-9\", \"semester:6\", \"year:4\", \"difficulty\" (introductory · intermediate · advanced) — or a list [{ \"id\": \"s1\", \"names\": { \"<lang>\": \"…\" } }, …] lowest first (kind \"custom\" unless named); each step may then carry \"level\": \"<level id>\" or { \"from\": \"<id>\", \"to\": \"<id>\" } (a step spanning levels). A prerequisite never sits at a higher level than the step that builds on it. The learner moves up a level by itself once every step up to it is mastered (with an optional level test)."
         },
         "language": {
           "type": "string",
@@ -307,6 +315,10 @@
         "learner": {
           "type": "string",
           "description": "optional: who the learner is and their goal (one line)"
+        },
+        "level_test": {
+          "type": "boolean",
+          "description": "optional, with levels: true asks the learner for a short level test (80 % to pass) before moving up a level; default false — moving up is automatic once every step of the level is mastered."
         },
         "prepare": {
           "type": "boolean",
@@ -335,7 +347,7 @@
         },
         "plan_json": {
           "type": "string",
-          "description": "ONE JSON object: { \"part\": \"name of this part, e.g. Week 5 — Thermodynamics\", \"summary\": \"…\", \"steps\": [{ \"ref\": \"n1\", \"title\": \"…\", \"summary\": \"what it covers\", \"role\": \"foundation|intro|aspect|subtopic|related|synthesis|application\", \"prerequisites\": [\"n0\", \"@existing_step_id\"], \"before\": [\"@existing_step_id\"], \"files\": [\"path/of/file.pdf pp. 3–20\", …] }], \"files\": [{ \"path\": \"path/of/file.pdf\", \"pages\": 40 }] } — refs (n1, n2…) name the new steps inside this part; \"@id\" names a step already on the map. \"files\" lists EVERY new file the learner gave you (pages for PDFs); every file must be used by a step."
+          "description": "ONE JSON object: { \"part\": \"name of this part, e.g. Week 5 — Thermodynamics\", \"summary\": \"…\", \"levels\": [{ \"id\": \"s3\", \"kind\": \"semester\", \"names\": { \"en\": \"Semester 3\" } }], \"steps\": [{ \"ref\": \"n1\", \"title\": \"…\", \"summary\": \"what it covers\", \"role\": \"foundation|intro|aspect|subtopic|related|synthesis|application\", \"prerequisites\": [\"n0\", \"@existing_step_id\"], \"before\": [\"@existing_step_id\"], \"level\": \"s3\", \"files\": [\"path/of/file.pdf pp. 3–20\", …] }], \"files\": [{ \"path\": \"path/of/file.pdf\", \"pages\": 40 }] } — refs (n1, n2…) name the new steps inside this part; \"@id\" names a step already on the map. \"files\" lists EVERY new file the learner gave you (pages for PDFs); every file must be used by a step. A step's \"level\" is one of the Roadmap's levels (noema_roadmap_map lists them); \"levels\" (leave it out when the ladder has what you need) adds new levels at the top of the ladder (the next semester) or gives a Roadmap without levels its first ladder. Levels (optional; propose them when the material has them — school grades, semesters, years of study, or a difficulty ladder): \"levels\" is a preset — \"grade:5-9\", \"semester:6\", \"year:4\", \"difficulty\" (introductory · intermediate · advanced) — or a list [{ \"id\": \"s1\", \"names\": { \"<lang>\": \"…\" } }, …] lowest first (kind \"custom\" unless named); each step may then carry \"level\": \"<level id>\" or { \"from\": \"<id>\", \"to\": \"<id>\" } (a step spanning levels). A prerequisite never sits at a higher level than the step that builds on it. The learner moves up a level by itself once every step up to it is mastered (with an optional level test)."
         },
         "independent": {
           "type": "boolean",
@@ -359,6 +371,25 @@
         "links_json": {
           "type": "string",
           "description": "ONE JSON object: { \"links\": [{ \"from\": \"@<prerequisite step id>\", \"to\": \"@<step that builds on it>\", \"why\": \"one line: what of from the step to needs\" }], \"remove\": [{ \"from\": \"@…\", \"to\": \"@…\" }] } — remove is optional (to take away a wrong link)"
+        }
+      }
+    },
+    "noema_restructure_levels": {
+      "description": "🪜 Propose a new arrangement of a Roadmap by level (skill §0c): give it a ladder of levels (school grades, semesters, years of study, a difficulty ladder or the course's own), move steps and chapters to other levels, split a step that spans levels, merge steps of one level, move steps on the map. It is only a PROPOSAL: the learner sees it in the app with every change listed and approves or declines it (in a shared Roadmap, its owner); nothing changes before that. Approved, it keeps every id — a step keeps its id (a split's first part, a merge's target), chapters, sections and exercises keep theirs — so the learner's progress follows the material, and translations and 文A bridges move with their chapters. A subject the learner attached to a step never changes (it may only change level); in a shared Roadmap a prepared step is not split or merged. First call noema_roadmap_map for the step ids, chapter refs and levels. action \"status\" shows the proposal waiting and the last decisions.",
+      "type": "object",
+      "properties": {
+        "curriculum_id": {
+          "type": "string",
+          "description": "the Roadmap (noema_curricula / noema_roadmap_map)"
+        },
+        "action": {
+          "type": "string",
+          "enum": ["propose", "status"],
+          "description": "propose (default, with plan_json) or status"
+        },
+        "plan_json": {
+          "type": "string",
+          "description": "ONE JSON object: { \"why\": \"one or two sentences for the learner: why this arrangement is better\", \"levels\": \"semester:6\" or [{ \"id\": \"s1\", \"names\": { \"<lang>\": \"…\" } }, …] (optional: the new ladder, replacing the Roadmap's), \"steps\": [{ \"step\": \"@<step id>\", \"level\": \"s2\" | { \"from\": \"s2\", \"to\": \"s3\" } | null }], \"chapters\": [{ \"step\": \"@<step id>\", \"chapter\": \"<chapter ref>\", \"level\": \"s3\" | null }] (a planned chapter at another level than its step), \"split\": [{ \"step\": \"@<step id>\", \"parts\": [{ \"title\": \"…\", \"level\": \"s1\", \"chapters\": [\"c1\", \"c2\"] }, { \"title\": \"…\", \"level\": \"s2\", \"chapters\": [\"c3\"] }] }] (every chapter ref of the step in exactly one part; the first part keeps the step's id and subject), \"merge\": [{ \"into\": \"@<step id>\", \"steps\": [\"@<step id>\", …], \"title\": \"…\" }], \"links\": [{ \"from\": \"@…\", \"to\": \"@…\", \"why\": \"…\" }], \"unlink\": [{ \"from\": \"@…\", \"to\": \"@…\" }] } — give only what changes."
         }
       }
     },
@@ -386,6 +417,10 @@
         "force": {
           "type": "boolean",
           "description": "with step: take over a step that another run claimed but stopped preparing without saving"
+        },
+        "level": {
+          "type": "string",
+          "description": "🪜 only the work of this level of the Roadmap (its id or name, e.g. \"s2\" or \"Semester 2\"; noema_roadmap_map lists the levels): its chapter plans and steps, and the task says what the level means — the difficulty of the exercises is relative to the level (a hard exercise of semester 1 is a semester-1 exercise), and the pack carries \"levels\": [\"<id>\"]"
         }
       }
     },

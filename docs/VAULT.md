@@ -2,8 +2,13 @@
 
 Decided with the user on 2026-10-20 (thread "Sources workflow, vault, social, study buddies"). Students share lecture notes,
 slides, past exams (with or without solutions), exercise sets, lab work, summaries, books, recordings and any other study
-material. Code: `engine/vault.js` (page `#/vault`, the Vault tab of the side bar), `cloud/supabase.sql` §13, words `i18n/vault/`.
-Test: `tests/vault.js`.
+material. Code: `src/features/vault/domain/` (the formats and their first bytes, the field graph, the page's address, the
+filters, the sorts, the folders, the pins: pure TypeScript), `src/features/vault/application/vault.ts` (upload — the row, the
+file, the server's check, nothing left behind when a step fails —, the field graph kept on the device, ratings, reports) over
+the port `VaultServer` (`src/ports/vault.ts`; Supabase: `src/adapters/supabase/vault.ts`), read by the page as
+`NoemaCore.vault`; `engine/vault.js` draws the page (`#/vault`, the Vault tab of the side bar); `cloud/supabase.sql` §13,
+words `i18n/vault/`. Tests: `src/features/vault/**/*.test.ts` and the port's contract `src/ports/contract/vault.contract.ts`
+(`npm run test:unit`), `tests/vault.js` (the browser).
 
 ## 1. Strictly organised, searchable across every branch
 The Vault opens on the Folders view (the Files view lists every file; the count of what is shown is a quiet line at the end). The Folders view has two ways in: **by school** (university › department › course, the default) and **by field** (down the
@@ -43,7 +48,7 @@ and the name of those who ticked **Show my name**. That name is taken from their
 client. The storage path is `noema-vault/files/<id>.<ext>`, with no person in it.
 
 ## 3. Restrictive
-* **Formats**: only documents, slides, spreadsheets, e-books, pictures, audio and video (`FORMATS`: pdf doc(x) odt rtf txt md tex
+* **Formats**: only documents, slides, spreadsheets, e-books, pictures, audio and video (`FORMATS` in `src/features/vault/domain/formats.ts`: pdf doc(x) odt rtf txt md tex
   csv ppt(x) odp xls(x) ods epub png jpg gif webp heic mp3 m4a wav ogg flac mp4 mov webm). There are no programs, scripts,
   archives or SVG. Three checks enforce this: the extension, the **first bytes** of the file (a program renamed `.pdf` is
   refused), and the database itself (a mime and path check, plus the bucket's `allowed_mime_types`).

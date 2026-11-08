@@ -27,7 +27,7 @@ export const token = <T>(key: string, description: string = key): Token<T> => Ob
 
 export interface Resolver {
   get<T>(t: Token<T>): T;
-  has(t: Token<unknown>): boolean;
+  has<T>(t: Token<T>): boolean;
 }
 
 export type Factory<T> = (r: Resolver) => T;
@@ -76,7 +76,7 @@ export class Container implements Resolver {
     }
   }
 
-  has(t: Token<unknown>): boolean {
+  has<T>(t: Token<T>): boolean {
     return this.#entries.has(t.key);
   }
 
