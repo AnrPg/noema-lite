@@ -4,11 +4,12 @@
    model.run.step). Every algorithm is hand-written so that each step can be shown (frontier, relaxations, augmenting paths, unions);
    every DFS-like algorithm is iterative (no recursion). Deterministic: neighbours in index order, ties broken by (key, node index),
    seeded randomness from the core. Sources of each method: in the comment beside it and in docs/library/graph.md.
-   Pure JS, no DOM, no words for the learner: numbers, codes and the model's own node ids (`s`). Python twin of checkSpec / exprs /
-   keys: tools/lib_graph.py. Tests: node tests/lib_graph.js, node tests/enginelib.js. */
+   Pure JS, no DOM, no words for the learner: numbers, codes and the model's own node ids (`s`). checkSpec / exprs /
+   keys: the golden outputs of the former Python twin (tests/fixtures/parity/enginelib.json). Tests: node tests/lib_graph.js, node tests/enginelib.js. */
 import NoemaLibCore from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
-import type { Env, Obj, Scene, Stream, Table, View } from '../kernel/core.ts';
+import type { Env, Rec, SceneData, Stream, Table, View } from '../kernel/core.ts';
+import type { FuncTable } from '../kernel/simexpr.ts';
 import type { Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes, keys and numbers leave this engine
 /** a number or an expression over the spec's names (`numx`) */
@@ -232,10 +233,11 @@ const MAX_N = 2000,
   BUDGET = 200000,
   MAX_FRAMES = 2000,
   MAX_EVENTS = 40000;
-const isObj = (v: unknown): v is Obj => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 // the transcendental functions are NoemaExpr's fdlibm ports (the same bits in every browser; research §0.1), Math as a fallback
-const FN = (n: string): Fn1 => (NoemaExpr.FUNCS[n] ? NoemaExpr.FUNCS[n].fn : (Math as unknown as Readonly<Record<string, Fn1>>)[n]!);
+const FX: FuncTable = NoemaExpr.FUNCS;
+const FN = (n: string): Fn1 => (FX[n] ? FX[n].fn : (Math as unknown as Readonly<Record<string, Fn1>>)[n]!);
 const sin = FN('sin'),
   cos = FN('cos'),
   log = FN('log'),
@@ -243,7 +245,7 @@ const sin = FN('sin'),
   abs = Math.abs;
 const PI = 3.141592653589793;
 
-/* ---------- the model format (the same table in tools/lib_graph.py) ---------- */
+/* ---------- the model format (the same table as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
 const ALGS = [
   'none',
   'bfs',
@@ -497,7 +499,7 @@ const CODES = [
 ];
 const LABELS = ['id', 'value', 'both', 'none'];
 
-/* ---------- the generators' node counts (the static size a check knows; the same in Python) ---------- */
+/* ---------- the generators' node counts (the static size a check knows) ---------- */
 function genCount(g: GenSpec): number {
   const k = g.kind;
   if (k === 'grid') return (g.rows || 0) * (g.cols || 0);
@@ -512,7 +514,7 @@ function genCount(g: GenSpec): number {
 const genIds = (g: GenSpec, N: number): string[] =>
   g.kind === 'konigsberg' ? ['A', 'B', 'C', 'D'] : Array.from({ length: N }, (_, i) => `n${i}`);
 
-/** checkSpec(spec) → [{code, path, msg, level}] (the same as tools/lib_graph.py check_spec) */
+/** checkSpec(spec) → [{code, path, msg, level}] (the same as the former Python twin check_spec (tests/fixtures/parity/enginelib.json)) */
 function checkSpec(spec: unknown): Problem[] {
   const { P, E, W } = C.problems();
   const m = isObj(spec) ? spec.model : undefined;
@@ -644,7 +646,7 @@ function checkSpec(spec: unknown): Problem[] {
 /** exprs(spec) → [[source, path, local names]]: every expression of the model */
 function exprs(spec: unknown): Array<[string, string, string[]]> {
   const out: Array<[string, string, string[]]> = [],
-    m = spec && (spec as Obj).model;
+    m = spec && (spec as Rec).model;
   if (!isObj(m)) return out;
   const sx = (v: unknown, p: string) => {
     if (typeof v === 'string') out.push([v, p, []]);
@@ -670,7 +672,7 @@ function exprs(spec: unknown): Array<[string, string, string[]]> {
 /** keys(spec) → [[key, path]]: every string key the model names */
 function keys(spec: unknown): Array<[string, string]> {
   const out: Array<[string, string]> = [],
-    m = spec && (spec as Obj).model;
+    m = spec && (spec as Rec).model;
   if (isObj(m) && isObj(m.graph) && Array.isArray(m.graph.nodes))
     (m.graph.nodes as unknown[]).forEach((nd, i) => {
       if (isObj(nd) && typeof nd.label === 'string') out.push([nd.label, `model.graph.nodes[${i}].label`]);
@@ -3796,7 +3798,7 @@ const EDGE_STYLE: Readonly<Record<number, readonly [string, number, boolean?]>> 
   8: ['ok', 4],
   9: ['info', 3],
 };
-function drawing(G: Graph, S: State, o: OutputSpec, viewIn: View | null, weighted: boolean): Scene {
+function drawing(G: Graph, S: State, o: OutputSpec, viewIn: View | null, weighted: boolean): SceneData {
   const view = viewIn || C.fitView(Array.from(G.X), Array.from(G.Y), 0.15),
     sc = C.scene(view),
     W = view[1]! - view[0]!,

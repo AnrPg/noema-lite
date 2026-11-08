@@ -6,7 +6,7 @@
    metrics (rise time, overshoot, settling time, steady-state error, IAE / ISE / ITAE, time in saturation).
    Fixed-step RK4 with the plant input held over each step; the controller runs every Ts (rounded to whole steps).
    TypeScript strict, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
-   Python twin of check / checkSpec: tools/pid.py. Schema: src/contracts/schemas/noema.pid.v1.schema.json.
+   check / checkSpec: the golden outputs of the former Python twin (tests/fixtures/parity/pid.json). Schema: src/contracts/schemas/noema.pid.v1.schema.json.
    A plugin of the engine library (one line of src/engines/plugins.ts). Also used by tests/pid.js (node). */
 import NoemaSimKit from '../kernel/simkit.ts';
 import type { Compiled, CreateOptions, Inputs, Problem, Spec, StepResult } from '../types.ts';
@@ -237,7 +237,7 @@ const ZN = Object.freeze({
   }), // Kp × T/(K·L), Ti and Td × L
 });
 
-// ---- check(model) → [{code, path, msg, level}] (twin: tools/pid.py check) ----
+// ---- check(model) → [{code, path, msg, level}] (the golden outputs of the former twin's check: tests/fixtures/parity/pid.json) ----
 function checkFields(
   q: Rec,
   F: Readonly<Record<string, string>>,

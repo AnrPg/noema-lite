@@ -1109,7 +1109,7 @@ const COMMA: Readonly<Record<string, readonly number[]>> = {
 const PRIMES = [2, 3, 5, 7, 11, 13];
 const monzoCents = (mz: readonly number[]) => mz.reduce((s, e, i) => s + e * 1200 * log2(PRIMES[i]!), 0);
 
-/* ---------- the checker (the same codes, paths and messages as tools/lib_music.py) ---------- */
+/* ---------- the checker (the same codes, paths and messages as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
 const MSG = {
   pitch: 'needs a pitch such as C4, F#3, Bb5, Ebb2, Gx4 (quarter tones: ^ up, v down)',
   pc: 'needs a pitch class such as C, F#, Bb',
@@ -1191,12 +1191,9 @@ function checkSpec(spec: unknown): Problem[] {
     ID,
     ['scalar', 'series', 'scene', 'sound'],
     (o, at) => {
-      const tb =
-        C.has(T.OUT, o.kind as string) && C.has(T.OUT[o.kind as string]!, o.of as string)
-          ? T.OUT[o.kind as string]![o.of as string]!
-          : null;
+      const tb = C.has(T.OUT, o.kind) && C.has(T.OUT[o.kind]!, o.of) ? T.OUT[o.kind]![o.of]! : null;
       if (!tb) {
-        E('output', at + '.of', `${o.of as string} is not a ${o.kind as string} output of ${ID}`);
+        E('output', at + '.of', `${o.of} is not a ${o.kind} output of ${ID}`);
         return;
       }
       C.walk(o, tb, at, E, W);
@@ -1216,7 +1213,7 @@ function checkSpec(spec: unknown): Problem[] {
       if (o.of === 'play' && ['set', 'progression', 'rhythm'].filter(k => o[k] !== undefined).length !== 1)
         E('value', at, 'needs one of set, progression, rhythm');
       if (
-        ['keyboard', 'staff', 'clock', 'circle', 'tonnetz'].includes(o.of as string) &&
+        ['keyboard', 'staff', 'clock', 'circle', 'tonnetz'].includes(o.of) &&
         o.kind === 'scene' &&
         !['set', 'progression', 'rhythm'].some(k => o[k] !== undefined)
       )
@@ -1247,7 +1244,7 @@ function gather(spec: unknown, kind: string): Expr[] {
   if (!C.isObj(spec)) return out;
   collect(spec.model, { $obj: T.MODEL }, 'model', kind, out);
   (Array.isArray(spec.outputs) ? spec.outputs : []).forEach((o: unknown, i) => {
-    if (C.isObj(o) && C.has(T.OUT, o.kind as string) && C.has(T.OUT[o.kind as string]!, o.of as string))
+    if (C.isObj(o) && C.has(T.OUT, o.kind) && C.has(T.OUT[o.kind as string]!, o.of))
       collect(o, { $obj: T.OUT[o.kind as string]![o.of as string]! }, `outputs[${i}]`, kind, out);
   });
   return out;

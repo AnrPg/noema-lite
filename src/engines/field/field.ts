@@ -25,8 +25,9 @@ import NoemaLibCore from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
 import NoemaSimKit from '../kernel/simkit.ts';
 import NoemaSpaceKit from '../kernel/space.ts';
-import type { CoreStepper, Emit, NumFn, Rec, SceneData, StepCtx, Table } from '../kernel/core.ts';
-import type { Grid, Side, SideName } from '../kernel/space.ts';
+import type { Emit, NumFn, Rec, SceneData, StepCtx, Table } from '../kernel/core.ts';
+import type { Grid, Limiter, Side, SideName } from '../kernel/space.ts';
+import type { StepperDef } from '../kernel/simkit.ts';
 import type { Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes and numbers leave this module
 const C = NoemaLibCore,
@@ -125,21 +126,32 @@ interface BcSpec {
   readonly a: Cc | null;
   readonly b: Cc | null;
 }
-/** a probe: its formulas, replaced by their values (px, py, x0…y1) and its nodes when a run in time starts */
+/** a probe of the prepared model: its formulas (the prepared model is shared by every run: placeProbes evaluates them per run) */
 interface Probe {
   readonly id: unknown;
-  at: unknown;
+  readonly at: unknown;
   readonly stat: unknown;
   readonly field: unknown;
   readonly x: Cc | null;
   readonly y: Cc | null;
-  x0: Cc | number | null;
-  x1: Cc | number | null;
-  y0: Cc | number | null;
-  y1: Cc | number | null;
-  px?: number;
-  py?: number;
-  nodes?: number[];
+  readonly x0: Cc | null;
+  readonly x1: Cc | null;
+  readonly y0: Cc | null;
+  readonly y1: Cc | null;
+}
+/** a probe placed for one run: its numbers on this run's names and grid, the nodes of an area (a line of a 1-D grid is an area) */
+interface RunProbe {
+  readonly id: unknown;
+  readonly at: unknown;
+  readonly stat: unknown;
+  readonly field: unknown;
+  readonly px: number;
+  readonly py: number;
+  readonly x0: number;
+  readonly x1: number;
+  readonly y0: number;
+  readonly y1: number;
+  readonly nodes: number[] | null;
 }
 /** an event: a quantity crossing a level */
 interface FieldEvent {
@@ -161,7 +173,7 @@ interface Interrupt {
 type Out = Rec & { readonly tc: Cc | null; readonly xc: Cc | null; readonly yc: Cc | null; readonly ec: Cc | null };
 /** the prepared model */
 interface Model {
-  readonly m: Rec & { readonly grid: Rec };
+  readonly m: Rec & { readonly grid: Rec & { readonly nx: number; readonly ny?: number } }; // the grid's sizes checked by TABLE (int:2:2000!, int:2:200)
   readonly eq: string;
   readonly dim: 1 | 2;
   readonly vn: string[];
@@ -245,6 +257,8 @@ interface FieldRes {
   readonly ca?: undefined;
   readonly ok?: undefined;
   readonly R: GridR;
+  /** the probes placed for this run (placeProbes) */
+  probes: RunProbe[];
   N?: number;
   dt?: number;
   tEnd?: number;
@@ -350,7 +364,7 @@ interface LiveState {
   readonly evSeen: Record<string, number>;
 }
 
-/* ---------- the model checker (the same table and messages as tools/lib_field.py) ---------- */
+/* ---------- the model checker (the same table and messages as the former Python twin (tests/fixtures/parity/lib_field.json)) ---------- */
 const SIDE = { type: 'enum:' + S.BC_TYPES.join('|'), value: 'numx', a: 'numx', b: 'numx' };
 const BC = { $obj: { all: { $obj: SIDE }, left: { $obj: SIDE }, right: { $obj: SIDE }, bottom: { $obj: SIDE }, top: { $obj: SIDE } } };
 const SHAPE = { shape: 'enum:point|rect|circle|all!', x: 'numx', y: 'numx', r: 'numx', x0: 'numx', x1: 'numx', y0: 'numx', y1: 'numx' };
@@ -613,8 +627,8 @@ function checkSpec(spec: Spec | null): Problem[] {
       const of = o.of,
         kd = o.kind,
         known = kd === 'series' ? SERIES : kd === 'scalar' ? SCALARS : SCENES;
-      if (!known.includes(of as string)) {
-        E('output', at + '.of', `${ID} computes as a ${kd as string}: ${known.join(', ')}`);
+      if (!known.includes(of)) {
+        E('output', at + '.of', `${ID} computes as a ${kd}: ${known.join(', ')}`);
         return;
       }
       for (const [f, k] of Object.entries(OUT_FIELDS))
@@ -625,7 +639,7 @@ function checkSpec(spec: Spec | null): Problem[] {
       if (of === 'y') need(dim === 2, at, 'of', 'y is for a 2-D grid');
       if (of === 'profile' && dim === 2)
         need((o.y == null) !== (o.x == null), at, 'y', 'a 2-D profile needs y (a row) or x (a column), one of them');
-      if (['profile', 'heatmap', 'at', 'final', 'error', 'probe'].includes(of as string)) {
+      if (['profile', 'heatmap', 'at', 'final', 'error', 'probe'].includes(of)) {
         if (o.t != null) need(!isP && !isCA, at, 't', 'a time is for an equation in time');
       }
       if (of === 'probe') need(probes.includes(o.probe as string), at, 'probe', 'a probe of model.probes');
@@ -1151,9 +1165,9 @@ function fieldStat(R: GridR, u: ArrayLike<number>, stat: unknown, solid?: Uint8A
   if (stat === 'energy') return 0.5 * s2 * cellArea;
   return NaN;
 }
-function probeValue(R: GridR, u: ArrayLike<number>, P: Probe, solid: Uint8Array | null | undefined) {
+function probeValue(R: GridR, u: ArrayLike<number>, P: RunProbe, solid: Uint8Array | null | undefined) {
   const { G } = R;
-  if (P.at === 'point') return S.sample(G, u, P.px!, P.py!);
+  if (P.at === 'point') return S.sample(G, u, P.px, P.py);
   if (P.at === 'line') {
     const n = Math.max(G.nx, G.ny);
     let s = 0,
@@ -1161,24 +1175,19 @@ function probeValue(R: GridR, u: ArrayLike<number>, P: Probe, solid: Uint8Array 
       mn = Infinity;
     for (let q = 0; q < n; q++) {
       const a = n > 1 ? q / (n - 1) : 0,
-        v = S.sample(
-          G,
-          u,
-          (P.x0 as number) + a * ((P.x1 as number) - (P.x0 as number)),
-          (P.y0 as number) + a * ((P.y1 as number) - (P.y0 as number)),
-        );
+        v = S.sample(G, u, P.x0 + a * (P.x1 - P.x0), P.y0 + a * (P.y1 - P.y0));
       s += v;
       if (v > mx) mx = v;
       if (v < mn) mn = v;
     }
-    const len = Math.hypot((P.x1 as number) - (P.x0 as number), (P.y1 as number) - (P.y0 as number));
+    const len = Math.hypot(P.x1 - P.x0, P.y1 - P.y0);
     return P.stat === 'max' ? mx : P.stat === 'min' ? mn : P.stat === 'total' ? (s / n) * len : s / n;
   }
   let s = 0,
     c = 0,
     mx = -Infinity,
     mn = Infinity;
-  for (const k of P.nodes!) {
+  for (const k of P.nodes || []) {
     if (solid && solid[k]) continue;
     const v = u[k]!;
     s += v;
@@ -1188,6 +1197,35 @@ function probeValue(R: GridR, u: ArrayLike<number>, P: Probe, solid: Uint8Array 
   }
   if (!c) return NaN;
   return P.stat === 'max' ? mx : P.stat === 'min' ? mn : P.stat === 'total' ? s * R.cellArea : s / c;
+}
+/** the probes of the model placed for a run: their formulas on the run's names, the nodes of an area (a new list each run: the
+      prepared model is never changed, so a second run with the same prepared model gives the same values) */
+function placeProbes(M: Model, G: Grid, env: Env): RunProbe[] {
+  return M.probes.map(p => {
+    const px = val(p.x, env),
+      py = G.dim === 2 ? val(p.y, env) : 0,
+      x0 = val(p.x0, env),
+      x1 = val(p.x1, env),
+      y0 = G.dim === 2 ? val(p.y0, env) : 0,
+      y1 = G.dim === 2 ? val(p.y1, env) : 0;
+    const area = p.at === 'area' || (p.at === 'line' && G.dim === 1);
+    const nodes = !area
+      ? null
+      : p.at === 'area'
+        ? shapeNodes(
+            G,
+            {
+              shape: 'rect',
+              x0: { num: true, val: x0 },
+              x1: { num: true, val: x1 },
+              y0: { num: true, val: y0 },
+              y1: { num: true, val: y1 },
+            },
+            env,
+          )
+        : shapeNodes(G, { shape: 'rect', x0: { num: true, val: x0 }, x1: { num: true, val: x1 } }, env);
+    return { id: p.id, at: area ? 'area' : p.at, stat: p.stat, field: p.field, px, py, x0, x1, y0, y1, nodes };
+  });
 }
 /** the front: the largest x where u ≥ level along the line (1-D: the grid; 2-D: the row nearest y), interpolated */
 function frontX(R: GridR, u: ArrayLike<number>, level: number, row: number) {
@@ -1434,7 +1472,7 @@ function runTime(M: Model, env: Env, ctx: Ctx, seed: number, mode?: 'stepper'): 
   const maxSteps = Number.isInteger(m.maxSteps) ? (m.maxSteps as number) : DEF_STEPS;
   const N = Math.max(1, Math.ceil(tEnd / dt0 - 1e-9));
   const work = N * G.cells * (M.two ? 2 : 1);
-  const res: FieldRes = { R, N, dt: tEnd / N, tEnd, stab: {}, rec: { t: [] }, ev: {}, frames: [], snaps: new Map() };
+  const res: FieldRes = { R, N, dt: tEnd / N, tEnd, stab: {}, rec: { t: [] }, ev: {}, frames: [], snaps: new Map(), probes: [] };
   if (N > maxSteps || work > MAX_WORK) {
     ctx.code('budget');
     return res;
@@ -1612,31 +1650,9 @@ function runTime(M: Model, env: Env, ctx: Ctx, seed: number, mode?: 'stepper'): 
   for (const e of M.events)
     if (['max', 'min', 'mean', 'total'].includes(e.of as string)) statKeys.add((e.field as string) + ':' + (e.of as string));
   for (const k of statKeys) res.rec[k] = [];
-  for (const p of M.probes) {
-    p.px = val(p.x, env);
-    p.py = G.dim === 2 ? val(p.y, env) : 0;
-    p.x0 = val(p.x0 as Cc | null, env);
-    p.x1 = val(p.x1 as Cc | null, env);
-    p.y0 = G.dim === 2 ? val(p.y0 as Cc | null, env) : 0;
-    p.y1 = G.dim === 2 ? val(p.y1 as Cc | null, env) : 0;
-    if (p.at === 'area')
-      p.nodes = shapeNodes(
-        G,
-        {
-          shape: 'rect',
-          x0: { num: true, val: p.x0 },
-          x1: { num: true, val: p.x1 },
-          y0: { num: true, val: p.y0 },
-          y1: { num: true, val: p.y1 },
-        },
-        env,
-      );
-    if (p.at === 'line' && G.dim === 1) {
-      p.at = 'area';
-      p.nodes = shapeNodes(G, { shape: 'rect', x0: { num: true, val: p.x0 }, x1: { num: true, val: p.x1 } }, env);
-    }
-    res.rec['p:' + (p.id as string)] = [];
-  }
+  const probes = placeProbes(M, G, env);
+  res.probes = probes;
+  for (const p of probes) res.rec['p:' + (p.id as string)] = [];
   const frontLevel = M.front ? val(M.front.level, env) : NaN,
     frontRow = M.front && G.dim === 2 ? S.nearest(G, G.x0, M.front.y ? val(M.front.y, env) : (G.y0 + G.y1) / 2)[1] : 0;
   if (M.front) res.rec.front = [];
@@ -1676,7 +1692,7 @@ function runTime(M: Model, env: Env, ctx: Ctx, seed: number, mode?: 'stepper'): 
   const record = (n: number) => {
     res.rec.t.push(n * h);
     for (const k of statKeys) res.rec[k]!.push(statNow(k));
-    for (const p of M.probes) res.rec['p:' + (p.id as string)]!.push(probeValue(R, fieldOf(p.field), p, sol));
+    for (const p of probes) res.rec['p:' + (p.id as string)]!.push(probeValue(R, fieldOf(p.field), p, sol));
     if (M.front) res.rec.front!.push(frontX(R, fieldOf(M.front.field), frontLevel, frontRow)!);
   };
   const frame = () => {
@@ -1687,8 +1703,8 @@ function runTime(M: Model, env: Env, ctx: Ctx, seed: number, mode?: 'stepper'): 
     e.of === 'probe'
       ? probeValue(
           R,
-          fieldOf(M.probes.find(p => p.id === e.probe)!.field),
-          M.probes.find(p => p.id === e.probe)!,
+          fieldOf(probes.find(p => p.id === e.probe)!.field),
+          probes.find(p => p.id === e.probe)!,
           sol,
         )
       : e.of === 'front'
@@ -1765,7 +1781,8 @@ function runTime(M: Model, env: Env, ctx: Ctx, seed: number, mode?: 'stepper'): 
   };
   const ROWS = Array.from({ length: G.ny }, (_, j) => rowKs(j)),
     COLS = G.dim === 2 ? Array.from({ length: G.nx }, (_, i) => colKs(i)) : [];
-  const LIM = S.LIMITERS[meth] || (meth === 'upwind' ? S.LIMITERS.upwind : meth === 'laxwendroff' ? S.LIMITERS.laxwendroff : null);
+  const LIMS: Readonly<Record<string, Limiter | undefined>> = S.LIMITERS;
+  const LIM = LIMS[meth] || (meth === 'upwind' ? S.LIMITERS.upwind : meth === 'laxwendroff' ? S.LIMITERS.laxwendroff : null);
   const sweep = (arr: Float64Array, out: Float64Array, axis: number) => {
     // one conservative advection sweep (LeVeque 2002 §6.12 high-resolution, §19.5 splitting)
     const st = axis === 0 ? 1 : G.sx,
@@ -2299,6 +2316,7 @@ function runPoisson(M: Model, env: Env, ctx: Ctx): FieldRes | null {
     ev: {},
     frames: [],
     snaps: new Map(),
+    probes: placeProbes(M, G, env),
     drift: NaN,
   };
 }
@@ -2320,7 +2338,7 @@ function runCA(M: Model, env: Env, ctx: Ctx, seed: number): CaRes {
   const m = M.m,
     ca = M.ca!,
     dim = M.dim,
-    nx = m.grid.nx as number,
+    nx = m.grid.nx,
     ny = dim === 2 ? (m.grid.ny as number) || nx : 1,
     n = nx * ny;
   const rng = SK().stream(seed, 'field.ca');
@@ -2643,7 +2661,7 @@ function buildOutputs(
       else if (of === 'stat' && o.kind === 'series') v = (res!.rec[f + ':' + (o.stat as string)] || []).slice();
       else if (of === 'probe' && atTime(o) && res!.snaps.get(Math.max(0, Math.min(res!.N!, Math.round(val(o.tc, env) / res!.dt!))))) {
         const sn = res!.snaps.get(Math.max(0, Math.min(res!.N!, Math.round(val(o.tc, env) / res!.dt!)))),
-          pr = M.probes.find(p => p.id === o.probe);
+          pr = res!.probes.find(p => p.id === o.probe);
         v = pr ? probeValue(res!.R, pr.field === 'v' ? sn!.v! : sn!.u, pr, res!.sol) : NaN;
       } else if (of === 'probe') {
         const s = res!.rec['p:' + (o.probe as string)] || [];
@@ -2654,7 +2672,7 @@ function buildOutputs(
               ? probeValue(
                   res!.R,
                   res!.u!,
-                  M.probes.find(p => p.id === o.probe)!,
+                  res!.probes.find(p => p.id === o.probe)!,
                   res!.sol,
                 )
               : s[s.length - 1];
@@ -2789,13 +2807,13 @@ function run(
      → {state, out, dt, events}): an equation in time advances by whole steps of its own dt (h = tEnd / N), the inputs (the spec's
      names) are applied before each macro step; poisson and ca are computed once, at the first step ---------- */
 const asSpec = (m: unknown): Spec => (isObj(m) && isObj(m.model) ? m : { format: 'noema.sim-spec/v1', engine: ID, model: m, outputs: [] });
-const stepDef: CoreStepper<StepState | null> & { readonly id: string } = {
+const stepDef: StepperDef<StepState | null, StepCtx | undefined> = {
   id: ID,
-  init(model, inputs: Readonly<Record<string, number | boolean>> | undefined, sctx: StepCtx | undefined) {
+  init(model, inputs, sctx) {
     const spec = sctx && isObj(sctx.spec) && sctx.spec.model === model ? sctx.spec : asSpec(model),
       M = prepare(spec);
     if (!M) return { bad: true, spec }; // makeEngine passes the model and the whole spec in ctx
-    const env = Object.assign(Object.create(null) as Env, inputs || {}),
+    const env = Object.assign(Object.create(null) as Env, inputs),
       ctx = makeCtx(),
       seed = ((sctx && sctx.seed) as number) >>> 0 || 1;
     if (M.eq === 'ca' || M.eq === 'poisson') return { spec, M, env, ctx, seed, once: true, evSeen: {} };
@@ -2838,8 +2856,8 @@ const stepDef: CoreStepper<StepState | null> & { readonly id: string } = {
   },
   snapshot: null,
 };
-const stepper = NoemaSimKit.stepper(stepDef);
-const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
+const stepper = NoemaSimKit.stepper(stepDef)!;
+const { engine, simEngine } = C.makeEngine<Model | null>({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
 const API = Object.freeze({
   table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: OUT_FIELDS }, // the form of the activity author (src/engines/kernel/schema.ts)
   id: ID,

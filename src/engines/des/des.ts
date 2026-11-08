@@ -92,7 +92,6 @@ interface Ent {
   svcRun?: number;
   end: number;
   evId: number;
-  inService?: boolean;
   stolen: boolean;
   downLeft: number;
 }
@@ -221,7 +220,7 @@ const SERIES = ['t', 'qlen', 'inSystem', 'busySeries', 'repValues', 'waits', 'lo
 const SCENES = ['network', 'gantt', 'log'];
 
 /* ======================================================================================================================
-     The model checker (the same table, codes and messages as tools/lib_des.py)
+     The model checker (the same table, codes and messages as the former Python twin (tests/fixtures/parity/lib_des.json))
      ====================================================================================================================== */
 // prettier-ignore
 const DIST: Table = { dist: 'enum:' + DIST_KINDS.join('|') + '!', value: 'numx', mean: 'numx', rate: 'numx', sd: 'numx', cv: 'numx', min: 'numx', max: 'numx', mode: 'numx',
@@ -470,8 +469,8 @@ function checkSpec(spec: unknown): Problem[] {
       const of = o.of,
         kd = o.kind,
         known = kd === 'series' ? SERIES : kd === 'scalar' ? SCALARS : SCENES;
-      if (!known.includes(of as string)) {
-        E2('output', at + '.of', `${ID} computes as a ${kd as string}: ${known.join(', ')}`);
+      if (!known.includes(of)) {
+        E2('output', at + '.of', `${ID} computes as a ${kd}: ${known.join(', ')}`);
         return;
       }
       if (o.station != null) need(isSt(o.station), 'station', 'a station of the model');
@@ -479,7 +478,7 @@ function checkSpec(spec: unknown): Problem[] {
       const meas = of === 'theory' || of === 'covers' || of === 'repValues' ? o.measure : of;
       if (of === 'theory' || of === 'covers') need(THEORY.includes(o.measure as string), 'measure', 'one of ' + THEORY.join(', '));
       if (of === 'repValues') need(MEASURES.includes(o.measure as string), 'measure', 'one of ' + MEASURES.join(', '));
-      if ((STATION_ONLY.includes(meas as string) || ['qlen', 'busySeries'].includes(of as string) || meas === 'util') && o.station == null)
+      if ((STATION_ONLY.includes(meas as string) || ['qlen', 'busySeries'].includes(of) || meas === 'util') && o.station == null)
         need(false, 'station', 'needs a station');
       if (o.class != null && MEASURES.concat(THEORY).includes(meas as string) && !CLASSABLE.includes(meas as string))
         E2('output', at + '.class', `${meas as string} is not computed per class`);
@@ -1298,7 +1297,8 @@ function replication(M: Model, P: Params, o: RepOpts): Live | RepRes {
   }
   function renege(X: XS, e: Ent) {
     e.renId = null;
-    if (e.gone || e.inService) return;
+    // an entity in service (X.inSvc) has stopped waiting: its patience no longer counts
+    if (e.gone) return;
     if (!X.inSvc.has(e)) {
       e.gone = true;
       dequeued(X, e);

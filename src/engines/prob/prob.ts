@@ -34,74 +34,16 @@
    randomness only (the kernel's streams). A value outside a method's validity range is never a silent wrong number: it is NaN or
    Infinity with an issue counted (outputs issue.<code>). */
 import NoemaLibCore from '../kernel/core.ts';
+import type { Emit, SceneData, Stream, Table, TableNode } from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
-import type { EngineCore, Problem, SimEngine } from '../types.ts';
+import type { FuncTable } from '../kernel/simexpr.ts';
+import type { Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes, numbers and the model's own state names leave this module
 type Obj = Record<string, unknown>;
 type Env = Readonly<Record<string, unknown>>;
-type Report = (code: string, path: string, msg: string) => void;
 /** a number of the model, or an expression over the spec's names */
 type Numx = number | string;
-/** a drawing of a plot of kind `scene` (src/engines/kernel/core.ts scene) */
-interface Scene {
-  readonly view: number[];
-  readonly items: unknown[];
-}
-/** the options of a drawn item: its role c, a text s, a number v, a key, an anchor, a width w, arrow, dash, fill, closed, a radius r */
-type ItemOpts = Readonly<Record<string, unknown>>;
-interface SceneBuilder {
-  pt(x: number, y: number, o?: ItemOpts): void;
-  seg(x1: number, y1: number, x2: number, y2: number, o?: ItemOpts): void;
-  circ(x: number, y: number, r: number, o?: ItemOpts): void;
-  poly(pts: number[], o?: ItemOpts): void;
-  txt(x: number, y: number, o?: ItemOpts): void;
-  done(): Scene;
-}
-/** a seeded stream of the simulation kernel (src/engines/kernel/simkit.ts): uniform draws, and the variates this engine uses */
-interface Stream {
-  (): number;
-  normal(mu: number, sd: number): number;
-  int(lo: number, hi?: number): number;
-  gamma(shape: number, scale: number): number;
-}
-/** a field kind of a table: a type name, or a nested object or list */
-type Kind =
-  string | { readonly $obj?: Table; readonly $list?: Kind; readonly $req?: boolean; readonly min?: number; readonly max?: number };
-type Table = Readonly<Record<string, Kind>>;
-/** what this engine uses of the library's core (src/engines/kernel/core.ts, still untyped at its edge) */
-interface CoreUse {
-  readonly MAX_POINTS: number;
-  readonly isObj: <T>(v: T) => v is T & Obj;
-  readonly isNum: (v: unknown) => v is number;
-  readonly has: (o: unknown, k: unknown) => boolean;
-  checkKind(kind: string, v: unknown): boolean;
-  kindMsg(kind: string): string;
-  problems(): { P: Problem[]; E: Report; W: Report };
-  hasErrors(P: Problem[]): boolean;
-  walk(o: unknown, T: unknown, path: string, E: Report, W: Report): void;
-  checkOutputs(
-    spec: unknown,
-    id: string,
-    kinds: readonly string[],
-    out: (o: Obj, at: string, E: Report, W: Report) => void,
-    E: Report,
-    W: Report,
-  ): void;
-  cx(v: unknown): (env: Env) => unknown;
-  scene(view: number[]): SceneBuilder;
-  fitView(xs: number[], ys: number[]): number[];
-  thin(a: number[], n: number): number[];
-  rng(seed: number, name: string): Stream;
-  kit(): { normInv(p: number): number; stream(seed: number, name: string): Stream } | null;
-  makeEngine(def: {
-    id: string;
-    checkSpec: (spec: unknown) => Problem[];
-    run: (spec: ProbSpec, env: Env | null | undefined, opts?: RunOpts | null) => { out: Obj };
-    prepare: (spec: unknown) => Prepared;
-    scenes: boolean;
-  }): { engine: EngineCore; simEngine: SimEngine };
-}
-/** the schema of every mode, the families, the outputs each mode computes (the JSON shared with tools/lib_prob.py) */
+/** the schema of every mode, the families, the outputs each mode computes (the JSON its former Python twin shared (tests/fixtures/parity/lib_prob.json)) */
 interface ProbData {
   readonly modes: string[];
   readonly families: Readonly<Record<string, { readonly disc: number; readonly p: Readonly<Record<string, string>> }>>;
@@ -213,7 +155,7 @@ interface PModel {
   readonly to?: Numx;
   readonly pu?: Numx;
 }
-interface ProbSpec {
+interface ProbSpec extends Spec {
   readonly model: PModel;
   readonly outputs: { readonly id: string; readonly kind: string; readonly of: string }[];
 }
@@ -339,12 +281,12 @@ interface SR {
 interface Res {
   o: Out;
   sr: SR;
-  sc: Record<string, Scene>;
+  sc: Record<string, SceneData>;
   lazy?: Record<string, () => unknown>;
 }
-const C = NoemaLibCore as unknown as CoreUse;
+const C = NoemaLibCore;
 const ID = 'prob@1';
-/* the schema of every mode, the families, the outputs each mode computes — the SAME JSON is embedded in tools/lib_prob.py
+/* the schema of every mode, the families, the outputs each mode computes — JSON its former Python twin embedded (its golden outputs: tests/fixtures/parity/lib_prob.json)
      (tests/lib_prob.js checks that the two copies are identical) */
 // prettier-ignore
 const DATA: ProbData = {"modes":["dist","mc","sampling","test","ci","power","bayes","screen","simpson","multi","markov","walk","queue","bootstrap","combin","gof","mcmc","multivar","rand"],"families":{"bernoulli":{"disc":1,"p":{"p":"unit!"}},"binomial":{"disc":1,"p":{"n":"int:0:1000000000!","p":"unit!"}},"geometric":{"disc":1,"p":{"p":"unit!","trials":"bool"}},"negbinomial":{"disc":1,"p":{"r":"pos!","p":"unit!"}},"poisson":{"disc":1,"p":{"lambda":"nonneg!"}},"hypergeometric":{"disc":1,"p":{"N":"int:0:1000000000!","K":"int:0:1000000000!","n":"int:0:1000000000!"}},"dunif":{"disc":1,"p":{"a":"int:-1000000000:1000000000!","b":"int:-1000000000:1000000000!"}},"categorical":{"disc":1,"p":{"probs":"list!","values":"flist"}},"uniform":{"disc":0,"p":{"a":"fin!","b":"fin!"}},"normal":{"disc":0,"p":{"mu":"fin","sigma":"pos"}},"lognormal":{"disc":0,"p":{"mu":"fin","sigma":"pos"}},"exponential":{"disc":0,"p":{"rate":"pos"}},"gamma":{"disc":0,"p":{"shape":"pos!","rate":"pos","scale":"pos"}},"beta":{"disc":0,"p":{"a":"pos!","b":"pos!"}},"chi2":{"disc":0,"p":{"df":"pos!"}},"t":{"disc":0,"p":{"df":"pos!"}},"f":{"disc":0,"p":{"d1":"pos!","d2":"pos!"}},"cauchy":{"disc":0,"p":{"x0":"fin","gamma":"pos"}},"weibull":{"disc":0,"p":{"shape":"pos!","scale":"pos"}},"laplace":{"disc":0,"p":{"mu":"fin","b":"pos"}},"logistic":{"disc":0,"p":{"mu":"fin","s":"pos"}},"pareto":{"disc":0,"p":{"xm":"pos","alpha":"pos!"}},"gumbel":{"disc":0,"p":{"mu":"fin","beta":"pos"}},"triangular":{"disc":0,"p":{"a":"fin!","b":"fin!","c":"fin!"}},"rayleigh":{"disc":0,"p":{"sigma":"pos"}}},"schema":{"dist":{"x":"numx","lo":"numx","hi":"numx","p":"numx","pu":"numx","from":"numx","to":"numx","points":"int:2:2000"},"mc":{"expr":"expr!","n":"numx","seed":"int:0:4294967295","conf":"numx","bins":"int:2:200","exact":"numx"},"sampling":{"size":"numx!","reps":"numx","stat":"enum:mean|sum|median|var|sd|min|max","seed":"int:0:4294967295","bins":"int:2:200"},"test":{"kind":"enum:z-one|t-one|t-paired|t-welch|t-pooled|prop-one|prop-two|binom-exact|sign|chi2-gof|chi2-indep|g-test|fisher|mcnemar|f-var|anova|pearson|regression|mann-whitney|wilcoxon!","x":{"$list":"numx","max":2000},"y":{"$list":"numx","max":2000},"groups":{"$list":{"$list":"numx","max":2000},"max":20},"table":{"$list":{"$list":"numx","max":20},"max":20},"observed":{"$list":"numx","max":100},"probs":{"$list":"numx","max":100},"summary":{"$obj":{"mean":"numx!","sd":"numx!","n":"numx!","mean2":"numx","sd2":"numx","n2":"numx"}},"k":"numx","n":"numx","k2":"numx","n2":"numx","mu0":"numx","p0":"numx","sigma":"numx","ratio0":"numx","alpha":"numx","alt":"enum:two-sided|less|greater","correct":"bool","exact":"bool","ddof":"numx","points":"int:2:2000"},"ci":{"kind":"enum:prop|poisson|mean|variance!","k":"numx","n":"numx","t":"numx","x":{"$list":"numx","max":2000},"summary":{"$obj":{"mean":"numx!","sd":"numx!","n":"numx!"}},"sigma":"numx","conf":"numx","method":"enum:wald|wilson|agresti-coull|clopper-pearson|jeffreys|exact|t|z|chi2","p":"numx","points":"int:2:2000"},"power":{"kind":"enum:z-one|t-one|t-paired|t-two|prop-two|binom-exact!","effect":"numx","p0":"numx","p1":"numx","p2":"numx","n":"numx","alpha":"numx","alt":"enum:two-sided|less|greater","target":"numx","nMax":"int:2:2000","dMax":"numx","points":"int:2:2000"},"bayes":{"kind":"enum:beta-binomial|gamma-poisson|normal-normal!","prior":{"$obj":{"a":"numx","b":"numx","mu":"numx","sd":"numx"}},"k":"numx","n":"numx","sum":"numx","t":"numx","xbar":"numx","sigma":"numx","theta0":"numx","conf":"numx","points":"int:2:2000","from":"numx","to":"numx"},"screen":{"prev":"numx!","sens":"numx!","spec":"numx!","pop":"numx","tests":"numx"},"simpson":{"strata":{"$req":true,"$list":{"$obj":{"k1":"numx!","n1":"numx!","k2":"numx!","n2":"numx!"}},"max":20,"min":1}},"multi":{"p":{"$list":"numx","max":2000},"method":"enum:bonferroni|holm|hochberg|bh|by","alpha":"numx","sim":{"$obj":{"m":"numx!","m0":"numx!","effect":"numx!","reps":"numx","seed":"int:0:4294967295"}}},"markov":{"states":{"$req":true,"$list":"id","max":100,"min":1},"labels":{"$list":"key","max":100},"P":{"$req":true,"$list":{"$list":"numx","max":100},"max":100,"min":1},"init":{"$list":"numx","max":100},"start":"ref","steps":"numx","normalize":"bool"},"walk":{"kind":"enum:srw|ruin|galton-watson!","p":"numx","N":"numx","i":"numx","steps":"numx","paths":"numx","reps":"numx","seed":"int:0:4294967295","a":"numx","dim":"int:1:3","offspring":{"$list":"numx","max":64},"m":"numx","gens":"numx"},"queue":{"lambda":"numx!","mu":"numx!","c":"numx","nMax":"int:1:2000"},"bootstrap":{"x":{"$req":true,"$list":"numx","max":2000,"min":2},"y":{"$list":"numx","max":2000},"stat":"enum:mean|median|sd|var|trimmed|diff-means|corr","B":"numx","conf":"numx","seed":"int:0:4294967295","trim":"numx","perm":"bool","alt":"enum:two-sided|less|greater"},"combin":{"kind":"enum:multinomial|coupon|birthday!","n":"numx","probs":{"$list":"numx","max":400},"x":{"$list":"numx","max":64},"i":"numx","j":"numx","types":"numx","copies":"numx","want":"numx","m":"numx","mMax":"int:1:2000","days":"numx","people":"numx","k":"numx","target":"numx","nMax":"int:1:2000"},"gof":{"kind":"enum:ks-one|ks-two|shapiro-wilk|anderson-darling|chi2-fit!","x":{"$list":"numx","max":2000},"y":{"$list":"numx","max":2000},"estimate":"bool","alt":"enum:two-sided|less|greater","exact":"bool","bins":"int:2:100","ddof":"int:0:10","alpha":"numx","points":"int:2:2000"},"mcmc":{"kind":"enum:metropolis|gibbs-bivnormal|gibbs-normal!","logdens":"expr","params":{"$list":"name","max":6,"min":1},"init":{"$list":"numx","max":6},"scale":{"$list":"numx","max":6},"iters":"numx","burn":"numx","thin":"numx","chains":"int:1:8","seed":"int:0:4294967295","spread":"numx","rho":"numx","x":{"$list":"numx","max":2000},"prior":{"$obj":{"mu0":"numx","sd0":"numx","a":"numx","b":"numx"}},"lags":"int:1:200","bins":"int:2:200"},"multivar":{"kind":"enum:mvnormal|corr|ols|logistic|pca|dirichlet!","mu":{"$list":"numx","max":10,"min":1},"cov":{"$list":{"$list":"numx","max":10},"max":10},"x":{"$list":"numx","max":10},"data":{"$list":{"$list":"numx","max":10,"min":1},"max":2000,"min":1},"y":{"$list":"numx","max":2000},"w":{"$list":"numx","max":2000},"intercept":"bool","scale":"bool","conc":{"$list":"numx","max":10,"min":2},"conf":"numx","i":"int:0:9","j":"int:0:9","n":"numx","seed":"int:0:4294967295","maxIter":"int:1:200"},"rand":{"kind":"enum:amplify|quicksort|quickselect|karger|freivalds|primality|rounding|balls|bloom|countmin|hll|reservoir|cover|twosat|bounds|skiplist|treap|mcpi!","err":"numx","sided":"enum:one|two","k":"numx","delta":"numx","p":"numx","n":"numx","r":"numx","m":"numx","d":"numx","L":"numx","N":"numx","T":"numx","w":"numx","s":"numx","t":"numx","i":"numx","a":"numx","b":"numx","bits":"numx","eps":"numx","target":"numx","kMax":"int:1:2000","x":{"$list":"numx","max":2000},"edges":{"$list":{"$list":"numx","max":2,"min":2},"max":400},"A":{"$list":{"$list":"numx","max":16},"max":16},"B":{"$list":{"$list":"numx","max":16},"max":16},"Cm":{"$list":{"$list":"numx","max":16},"max":16},"graph":"enum:path|cycle|complete|star|lollipop|hypercube","start":"numx","reps":"numx","seed":"int:0:4294967295","expr":"expr","exact":"numx","points":"int:2:2000"}},"custom":{"dist":["dist"],"sampling":["parent"],"mc":["draws"],"gof":["dist"],"rand":["dist"]},"ranges":{"dist":{"p":"unit","pu":"unit"},"mc":{"n":"int:1:200000","conf":"unit"},"sampling":{"size":"int:1:10000","reps":"int:1:10000"},"test":{"alpha":"unit","p0":"unit","sigma":"pos","ddof":"int:0:100","k":"nonneg","n":"nonneg","k2":"nonneg","n2":"nonneg","ratio0":"pos"},"ci":{"conf":"unit","k":"nonneg","n":"nonneg","t":"pos","p":"unit","sigma":"pos"},"power":{"alpha":"unit","target":"unit","n":"pos","p0":"unit","p1":"unit","p2":"unit","dMax":"pos"},"bayes":{"prior.a":"nonneg","prior.b":"nonneg","prior.sd":"pos","k":"nonneg","n":"nonneg","sum":"nonneg","t":"pos","sigma":"pos","conf":"unit"},"screen":{"prev":"unit","sens":"unit","spec":"unit","pop":"int:1:2000","tests":"int:1:20"},"simpson":{},"multi":{"alpha":"unit","sim.m":"int:1:1000","sim.m0":"int:0:1000","sim.reps":"int:1:2000"},"markov":{"steps":"int:0:1000000"},"walk":{"p":"unit","N":"int:1:2000","i":"int:0:2000","steps":"int:1:10000","paths":"int:0:50","reps":"int:0:20000","a":"int:1:10000","m":"nonneg","gens":"int:1:200"},"queue":{"lambda":"pos","mu":"pos","c":"int:1:1000"},"bootstrap":{"B":"int:10:20000","conf":"unit","trim":"unit"},"combin":{"n":"int:0:100000","i":"int:0:63","j":"int:0:63","types":"int:1:2000","copies":"int:1:20","want":"int:1:2000","m":"int:0:1000000","days":"int:1:100000","people":"int:0:100000","k":"int:2:100","target":"unit"},"gof":{"alpha":"unit"},"mcmc":{"iters":"int:10:200000","burn":"int:0:200000","thin":"int:1:100","spread":"nonneg","prior.sd0":"pos","prior.a":"pos","prior.b":"pos"},"multivar":{"conf":"unit","n":"int:0:2000"},"rand":{"err":"unit","delta":"unit","p":"unit","eps":"unit","target":"unit","k":"int:0:100000","n":"int:0:1000000","r":"int:1:1000000","m":"int:1:100000000","d":"int:1:64","L":"int:0:100000","N":"int:0:9007199254740991","T":"int:0:100000000","w":"int:1:1000000","s":"nonneg","t":"int:0:1000","i":"int:0:1000000","bits":"int:4:16","start":"int:0:1000","reps":"int:0:100000"}},"kindField":{"test":"kind","ci":"kind","power":"kind","bayes":"kind","walk":"kind","bootstrap":"stat","multi":"*","combin":"kind","gof":"kind","mcmc":"kind","multivar":"kind","rand":"kind"},"needs":{"test":{"z-one":[["x","sigma"],["summary","sigma"]],"t-one":[["x"],["summary"]],"t-paired":[["x","y"]],"t-welch":[["x","y"],["summary"]],"t-pooled":[["x","y"],["summary"]],"prop-one":[["k","n"]],"prop-two":[["k","n","k2","n2"]],"binom-exact":[["k","n"]],"sign":[["x"]],"chi2-gof":[["observed","probs"]],"chi2-indep":[["table"]],"g-test":[["table"],["observed","probs"]],"fisher":[["table"]],"mcnemar":[["table"]],"f-var":[["x","y"],["summary"]],"anova":[["groups"]],"pearson":[["x","y"]],"regression":[["x","y"]],"mann-whitney":[["x","y"]],"wilcoxon":[["x"]]},"ci":{"prop":[["k","n"]],"poisson":[["k"]],"mean":[["x"],["summary"]],"variance":[["x"],["summary"]]},"power":{"z-one":[["effect"]],"t-one":[["effect"]],"t-paired":[["effect"]],"t-two":[["effect"]],"prop-two":[["p1","p2"]],"binom-exact":[["p0","p1"]]},"bayes":{"beta-binomial":[["prior.a","prior.b","k","n"]],"gamma-poisson":[["prior.a","prior.b","sum","t"]],"normal-normal":[["prior.mu","prior.sd","xbar","n","sigma"]]},"walk":{"srw":[["steps"]],"ruin":[["p","N","i"]],"galton-watson":[["offspring"],["m"]]},"bootstrap":{"diff-means":[["y"]],"corr":[["y"]]},"multi":{"*":[["p"],["sim"]]},"combin":{"multinomial":[["n","probs"]],"coupon":[["types"],["probs"]]},"gof":{"ks-one":[["x","dist"]],"ks-two":[["x","y"]],"shapiro-wilk":[["x"]],"anderson-darling":[["x","dist"],["x","estimate"]],"chi2-fit":[["x","dist"]]},"mcmc":{"metropolis":[["logdens","params","init"]],"gibbs-normal":[["x"]]},"multivar":{"mvnormal":[["mu","cov"]],"corr":[["data"]],"ols":[["data","y"]],"logistic":[["data","y"]],"pca":[["data"]],"dirichlet":[["conc"]]},"rand":{"amplify":[["err"],["p"]],"quicksort":[["n"]],"quickselect":[["n","r"]],"karger":[["n"],["edges"]],"freivalds":[["n"],["A","B","Cm"]],"primality":[["N"]],"rounding":[["x"]],"balls":[["n"]],"bloom":[["m","n"]],"countmin":[["w","d"]],"hll":[["bits"]],"reservoir":[["n","k"]],"cover":[["graph","n"],["edges"]],"twosat":[["n"]],"bounds":[["dist","a"]],"skiplist":[["n"]],"treap":[["n"]],"mcpi":[["n"]]}},"ciMethods":{"prop":["wald","wilson","agresti-coull","clopper-pearson","jeffreys"],"poisson":["exact","wald"],"mean":["t","z"],"variance":["chi2"]},"outs":{"dist":{"scalar":["mean","var","sd","skew","kurt","median","mode","pdf","logpdf","cdf","sf","logcdf","logsf","prob","quantile","isf","normApprox","poissonApprox","supportLo","supportHi"],"series":["x","pdf","cdf","area","normal"],"scene":[],"issues":["param","degenerate","moment-undefined","moment-infinite","underflow","no-convergence","approx","pdf-infinite","normalized"]},"mc":{"scalar":["estimate","se","ciLo","ciHi","sd","n","nanFrac","err","covered","indicator"],"series":["runN","runMean","runLo","runHi","histX","histDensity","exactDensity"],"scene":[],"issues":["few-samples","infinite-variance","rare-event","nan-draws","param","budget","normalized"]},"sampling":{"scalar":["statMean","statSd","theoMean","theoSe","ratio","ks","skewStat"],"series":["histX","histDensity","normalDensity","runN","runMean"],"scene":[],"issues":["infinite-variance","no-mean","param","budget","normalized"]},"test":{"scalar":["stat","df","df2","p","reject","crit","ciLo","ciHi","estimate","se","effect","n","intercept","r2"],"series":["nullX","nullPdf","dataX","dataY","fitY"],"scene":[],"issues":["zero-variance","low-expected","ties-approx","zero-cell","zero-diffs","few-data","bad-data","param"]},"ci":{"scalar":["lo","hi","width","est","coverAt","meanCover","minCover"],"prefix":{"lo.":["wald","wilson","agresti-coull","clopper-pearson","jeffreys"],"hi.":["wald","wilson","agresti-coull","clopper-pearson","jeffreys"],"coverAt.":["wald","wilson","agresti-coull","clopper-pearson","jeffreys"],"meanCover.":["wald","wilson","agresti-coull","clopper-pearson","jeffreys"],"minCover.":["wald","wilson","agresti-coull","clopper-pearson","jeffreys"]},"series":["covP","cover"],"sprefix":{"cover.":["wald","wilson","agresti-coull","clopper-pearson","jeffreys"]},"scene":[],"issues":["param","few-data"]},"power":{"scalar":["power","nNeeded","nExact","crit","ncp","effectH"],"series":["powerN","powerByN","powerD","powerByD"],"scene":[],"issues":["param","approx","not-reached"]},"bayes":{"scalar":["postA","postB","postMean","postMode","postSd","ciLo","ciHi","hpdLo","hpdHi","pAbove","bf01","predNext","priorMean","mle"],"series":["theta","prior","like","post"],"scene":[],"issues":["improper-posterior","hpd-not-interval","mode-boundary","param"]},"screen":{"scalar":["ppv","npv","lrPos","lrNeg","tp","fp","fn","tn","posRate","accuracy","youden","dor","preOdds","postOdds","ppvRepeat"],"series":[],"scene":["icons"],"issues":["param"]},"simpson":{"scalar":["pooled1","pooled2","pooledDiff","std1","std2","stdDiff","paradox","mhOR","strata"],"prefix":{"rate1.":"$strata","rate2.":"$strata","diff.":"$strata"},"series":["stratum","rates1","rates2"],"scene":[],"issues":["param","zero-cell"]},"multi":{"scalar":["m","rejected","rejectedRaw","minAdj","fwerIndep","threshold","simFwer","simFdr","simPower","simFwerRaw","simFdrRaw"],"prefix":{"adj.":"$p"},"series":["rank","sortedP","bhLine","adjSorted"],"scene":[],"issues":["param","budget"]},"markov":{"scalar":["classes","closed","transient","period","irreducible","absorbing","tAbsorb","tAbsorbVar","tv","mixTime"],"prefix":{"pi.":"$states","p.":"$states","ret.":"$states","absorb.":"$states","hit.":"$states"},"series":["n","tv"],"sprefix":{"dist.":"$states"},"scene":["diagram"],"issues":["not-stochastic","reducible","periodic","not-reached","param"]},"walk":{"scalar":["pWin","pRuin","duration","simWin","simDuration","pZero","pReturn","mean","var","pMax","returnFrac","extinct","m","simExtinct"],"series":["k","pmf","iGrid","pWinByI","gen","qByGen"],"scene":["paths"],"issues":["param","critical-slow","capped","budget","normalized"]},"queue":{"scalar":["rho","a","p0","erlangB","erlangC","lq","l","wq","w"],"series":["qn","qProb"],"scene":[],"issues":["unstable","param"]},"bootstrap":{"scalar":["estimate","se","bias","pctLo","pctHi","basicLo","basicHi","bcaLo","bcaHi","normLo","normHi","permP","B"],"series":["histX","histCount","histDensity"],"scene":[],"issues":["param","few-data","budget","bca-undefined"]},"combin":{"scalar":["pmf","logpmf","outcomes","chi2","pChi2","pExact","cov","corr","eT","varT","sdT","pDone","median","eTApprox","pMatch","pNone","nFor","pApprox","expPairs"],"prefix":{"mean.":"$probs","var.":"$probs"},"series":["m","pmfT","cdfT","nGrid","pByN","approxByN","k","marg"],"scene":[],"issues":["param","budget","approx","normalized","underflow"]},"gof":{"scalar":["stat","p","pAsym","n","n2","df","reject","dPlus","dMinus","w","statAdj","minExpected"],"series":["ecdfX","ecdfY","cdfY","qqX","qqY","binLo","observed","expected"],"scene":[],"issues":["param","ties","few-data","approx","low-expected","estimated","zero-range","discrete","budget"]},"mcmc":{"scalar":["accept","draws","rhatMax","essMin"],"prefix":{"mean.":"$params","sd.":"$params","q05.":"$params","q50.":"$params","q95.":"$params","ess.":"$params","essTail.":"$params","rhat.":"$params","mcse.":"$params"},"series":["iter","lag"],"sprefix":{"trace.":"$params","trace2.":"$params","acf.":"$params","histX.":"$params","histDensity.":"$params"},"scene":[],"issues":["param","budget","no-kit","not-converged","low-ess","accept-extreme","nan-density"]},"multivar":{"scalar":["logpdf","pdf","maha","cdf","pEllipse","logdet","dim","r","rho","tau","pR","pRho","pTau","r2","adjR2","sigma","fStat","fP","df","dfModel","logLik","aic","bic","deviance","nullDeviance","iter","totalVar","entropy","n"],"prefix":{"mean.":"$dim","var.":"$dim","sd.":"$dim","eig.":"$dim","prop.":"$dim","cumProp.":"$dim","coef.":"$coef","se.":"$coef","stat.":"$coef","p.":"$coef","ciLo.":"$coef","ciHi.":"$coef","load.":"$dim2","cov.":"$dim2","corr.":"$dim2","chol.":"$dim2"},"series":["fitted","resid","lev","cook","pc1","pc2","scree","drawX","drawY","ellX","ellY"],"scene":[],"issues":["param","not-pd","singular","separation","no-convergence","few-data","ties","dim","budget"]},"rand":{"scalar":["errK","kNeeded","kHoeffding","lvExpected","lvTail","eComp","varComp","approxComp","simMean","simSd","pSuccess","pFailK","kRuns","minCut","simSuccess","pKS","errBound","errExact","pDetect","equal","isPrime","fermatLiars","mrLiars","fracFermat","fracMR","carmichael","witness","mu","pAbove","chernoffUpper","pBelow","chernoffLower","uncovered","uncoveredBound","eMax","pMaxLe","approxMax","simMax","eCollisions","pCollision","pCollisionBound","fpExact","fpApprox","fpClassic","kOpt","kOptInt","mFor","simFp","eps","delta","errAbs","wFor","dFor","simMaxErr","simMeanErr","simFracOver","stdErr","simRelSd","simRelBias","inclusion","chi2","pChi2","coverExact","hitMax","matthews","aleliunas","simCover","eSteps","worstSteps","pFailT","markovT","rounds","exact","markov","chebyshev","cantelli","chernoff","hoeffding","tightest","eHeight","searchCost","pointers","approxHeight","eDepth","eDepthAvg","heightApprox","estimate","se","err","seExact","errRootN"],"series":["kGrid","errByK","histX","histDensity","loadGrid","pMax","fpByK","pos","freq","aGrid","exactBy","markovBy","chebyshevBy","cantelliBy","chernoffBy","hoeffdingBy","runN","runEst","runLo","runHi","tGrid","pFailByT"],"scene":[],"issues":["param","budget","no-kit","not-applicable","approx","big-number","disconnected"]}}};
@@ -354,7 +296,7 @@ const isObj = C.isObj,
 const fin = Number.isFinite;
 
 /* ===================================================================================================================== */
-/* the model checker (the same codes, paths, messages and order as tools/lib_prob.py)                                    */
+/* the model checker (the same codes, paths, messages and order as the former Python twin (tests/fixtures/parity/lib_prob.json))                                    */
 /* ===================================================================================================================== */
 const MISSING = undefined;
 function dig(o: unknown, path: string) {
@@ -374,7 +316,7 @@ function specNames(spec: Obj) {
 }
 /** the table of one distribution object: {family!, …its parameters} */
 function distTable(F: ProbData['families'][string] | null) {
-  const T: Record<string, Kind> = { family: 'enum:' + Object.keys(DATA.families).join('|') + '!' };
+  const T: Record<string, TableNode> = { family: 'enum:' + Object.keys(DATA.families).join('|') + '!' };
   if (!F) return T;
   for (const [k, kd] of Object.entries(F.p)) {
     const req = kd.endsWith('!'),
@@ -386,7 +328,7 @@ function distTable(F: ProbData['families'][string] | null) {
   }
   return T;
 }
-function checkDist(o: unknown, p: string, E: Report, W: Report) {
+function checkDist(o: unknown, p: string, E: Emit, W: Emit) {
   if (!isObj(o)) {
     E('format', p, 'not an object');
     return;
@@ -401,11 +343,11 @@ function checkDist(o: unknown, p: string, E: Report, W: Report) {
     if (b === 'list') {
       if (Array.isArray(v))
         v.forEach((x, i) => {
-          if (isNum(x) && x < 0) E('value', `${p}.${k}[${i}]`, C.kindMsg('nonneg'));
+          if (isNum(x) && x < 0) E('value', `${p}.${k}[${i}]`, C.kindMsg('nonneg')!);
         });
       continue;
     }
-    if (isNum(v) && !C.checkKind(b, v)) E('value', `${p}.${k}`, C.kindMsg(b));
+    if (isNum(v) && !C.checkKind(b, v)) E('value', `${p}.${k}`, C.kindMsg(b)!);
   }
   const f = o.family,
     n = (k: string) => isNum(o[k]);
@@ -500,16 +442,15 @@ function checkSpec(spec: unknown) {
     ID,
     KINDS,
     (o, at) => {
-      if (mode && !outOk(mode, m, o.kind as string, o.of as string))
-        E('output', at + '.of', `${mode} computes no ${o.kind as string} "${o.of as string}"`);
+      if (mode && !outOk(mode, m, o.kind, o.of)) E('output', at + '.of', `${mode} computes no ${o.kind} "${o.of}"`);
     },
     E,
     W,
   );
   return P;
 }
-/** the checks a table cannot say (the same order and messages as tools/lib_prob.py extra) */
-function extra(mode: string, m: Obj, spec: Obj, E: Report, W: Report) {
+/** the checks a table cannot say (the same order and messages as the former Python twin extra (tests/fixtures/parity/lib_prob.json)) */
+function extra(mode: string, m: Obj, spec: Obj, E: Emit, W: Emit) {
   if (mode === 'dist' || mode === 'sampling') {
     const f = mode === 'dist' ? 'dist' : 'parent';
     if (m[f] === undefined) E('value', 'model.' + f, 'missing');
@@ -528,7 +469,7 @@ function extra(mode: string, m: Obj, spec: Obj, E: Report, W: Report) {
         const taken = specNames(spec);
         for (const k of ks) {
           const p = 'model.draws.' + k;
-          if (!C.checkKind('name', k)) E('value', p, C.kindMsg('name'));
+          if (!C.checkKind('name', k)) E('value', p, C.kindMsg('name')!);
           else if (taken.includes(k)) E('value', p, 'is already a name of the spec');
           else checkDist(d[k], p, E, W);
         }
@@ -537,7 +478,7 @@ function extra(mode: string, m: Obj, spec: Obj, E: Report, W: Report) {
   }
   for (const [f, kd] of Object.entries(DATA.ranges[mode]!)) {
     const v = dig(m, f);
-    if (isNum(v) && !C.checkKind(kd, v)) E('value', 'model.' + f, C.kindMsg(kd));
+    if (isNum(v) && !C.checkKind(kd, v)) E('value', 'model.' + f, C.kindMsg(kd)!);
   }
   const kf = DATA.kindField[mode];
   if (kf && DATA.needs[mode]) {
@@ -596,7 +537,7 @@ function extra(mode: string, m: Obj, spec: Obj, E: Report, W: Report) {
   } else if (mode === 'combin') {
     if (A(m.probs))
       m.probs.forEach((x, i) => {
-        if (isNum(x) && x < 0) E('value', `model.probs[${i}]`, C.kindMsg('nonneg'));
+        if (isNum(x) && x < 0) E('value', `model.probs[${i}]`, C.kindMsg('nonneg')!);
       });
     if (k === 'multinomial' && A(m.probs) && m.probs.length > 64) E('size', 'model.probs', 'more than 64 items');
     if (k === 'multinomial' && A(m.probs) && A(m.x) && m.x.length !== m.probs.length)
@@ -650,7 +591,7 @@ function extra(mode: string, m: Obj, spec: Obj, E: Report, W: Report) {
   }
 }
 
-/** every expression of the model: [source, path, local names] (the same order as tools/lib_prob.py exprs): the distributions
+/** every expression of the model: [source, path, local names] (the same order as the former Python twin exprs (tests/fixtures/parity/lib_prob.json)): the distributions
       first, then the fields in the schema's order; model.expr of mc may use the names of its draws */
 function exprs(spec: unknown) {
   const out: Found[] = [],
@@ -674,7 +615,7 @@ function exprs(spec: unknown) {
   if (m.mode === 'sampling') visitDist(m.parent, 'model.parent');
   if (m.mode === 'mc' && isObj(m.draws)) for (const k of Object.keys(m.draws)) visitDist(m.draws[k], 'model.draws.' + k);
   if (m.mode === 'gof' || m.mode === 'rand') visitDist(m.dist, 'model.dist');
-  const visit = (v: unknown, kd: Kind | undefined, p: string) => {
+  const visit = (v: unknown, kd: TableNode | undefined, p: string) => {
     if (v === undefined || kd === undefined) return;
     if (typeof kd === 'string') {
       const b = kd.replace('!', '');
@@ -730,7 +671,7 @@ function issueBag(): Issues {
 /* ===================================================================================================================== */
 /* special functions                                                                                                      */
 /* ===================================================================================================================== */
-const FX = NoemaExpr.FUNCS;
+const FX: FuncTable = NoemaExpr.FUNCS;
 const fx = (n: string, alt: (...a: number[]) => number) => (FX[n] ? FX[n].fn : alt);
 const exp = fx('exp', Math.exp),
   log = fx('log', Math.log),
@@ -1033,83 +974,9 @@ function lncdf(z: number) {
   return z < 0 ? r[3] - LN2 : log1p(-0.5 * r[1]);
 }
 const npdf = (z: number) => exp(-0.5 * z * z) / 2.5066282746310002;
-/** Φ⁻¹(p): Wichura's AS 241 PPND16 (Appl. Stat. 37:477, 1988; relative accuracy ~1e-16) — the kernel's (NoemaSimKit.normInv);
-      FALLBACK without the kernel: the same three rational approximations here */
+/** Φ⁻¹(p): Wichura's AS 241 PPND16 (Appl. Stat. 37:477, 1988; relative accuracy ~1e-16) — the kernel's (NoemaSimKit.normInv) */
 function qnorm(p: number) {
-  const K = C.kit();
-  if (K) return Number.isNaN(p) || p < 0 || p > 1 ? NaN : K.normInv(p);
-  return qnormOwn(p);
-}
-function qnormOwn(p: number) {
-  if (Number.isNaN(p) || p < 0 || p > 1) return NaN;
-  if (p === 0) return -Infinity;
-  if (p === 1) return Infinity;
-  const q = p - 0.5;
-  if (abs(q) <= 0.425) {
-    const r = 0.180625 - q * q;
-    return (
-      (q *
-        (((((((2509.0809287301226727 * r + 33430.575583588128105) * r + 67265.770927008700853) * r + 45921.953931549871457) * r +
-          13731.693765509461125) *
-          r +
-          1971.5909503065514427) *
-          r +
-          133.14166789178437745) *
-          r +
-          3.387132872796366608)) /
-      (((((((5226.495278852854561 * r + 28729.085735721942674) * r + 39307.89580009271061) * r + 21213.794301586595867) * r +
-        5394.1960214247511077) *
-        r +
-        687.1870074920579083) *
-        r +
-        42.313330701600911252) *
-        r +
-        1)
-    );
-  }
-  let r = q < 0 ? p : 1 - p;
-  r = sqrt(-log(r));
-  let v;
-  if (r <= 5) {
-    r -= 1.6;
-    v =
-      (((((((7.7454501427834140764e-4 * r + 0.0227238449892691845833) * r + 0.24178072517745061177) * r + 1.27045825245236838258) * r +
-        3.64784832476320460504) *
-        r +
-        5.7694972214606914055) *
-        r +
-        4.6303378461565452959) *
-        r +
-        1.42343711074968357734) /
-      (((((((1.05075007164441684324e-9 * r + 5.475938084995344946e-4) * r + 0.0151986665636164571966) * r + 0.14810397642748007459) * r +
-        0.68976733498510000455) *
-        r +
-        1.6763848301838038494) *
-        r +
-        2.05319162663775882187) *
-        r +
-        1);
-  } else {
-    r -= 5;
-    v =
-      (((((((2.01033439929228813265e-7 * r + 2.71155556874348757815e-5) * r + 0.0012426609473880784386) * r + 0.026532189526576123093) * r +
-        0.29656057182850489123) *
-        r +
-        1.7848265399172913358) *
-        r +
-        5.4637849111641143699) *
-        r +
-        6.6579046435011037772) /
-      (((((((2.04426310338993978564e-15 * r + 1.4215117583164458887e-7) * r + 1.8463183175100546818e-5) * r + 7.868691311456132591e-4) * r +
-        0.0148753612908506148525) *
-        r +
-        0.13692988092273580531) *
-        r +
-        0.59983220655588793769) *
-        r +
-        1);
-  }
-  return q < 0 ? -v : v;
+  return Number.isNaN(p) || p < 0 || p > 1 ? NaN : C.kit().normInv(p);
 }
 /** erfc⁻¹(y) = −Φ⁻¹(y/2)/√2 */
 const erfcinv = (y: number) => -qnorm(y / 2) / Math.SQRT2;
@@ -4132,7 +3999,7 @@ function runBayes(m: PModel, R: Rz, I: Issues) {
 function runScreen(m: PModel, R: Rz, I: Issues) {
   const g = getter(R),
     o: Out = {},
-    sc: Record<string, Scene> = {};
+    sc: Record<string, SceneData> = {};
   const pv = g(m, 'prev'),
     se = g(m, 'sens'),
     sp = g(m, 'spec'),
@@ -4481,7 +4348,7 @@ function runMarkov(m: PModel, R: Rz, I: Issues) {
   const g = getter(R),
     o: Out = {},
     sr: SR = {},
-    sc: Record<string, Scene> = {},
+    sc: Record<string, SceneData> = {},
     out: Res = { o, sr, sc };
   const S = m.states!,
     K = S.length;
@@ -4703,7 +4570,7 @@ function runWalk(m: PModel, R: Rz, I: Issues, seed: number) {
   const g = getter(R),
     o: Out = {},
     sr: SR = {},
-    sc: Record<string, Scene> = {},
+    sc: Record<string, SceneData> = {},
     out: Res = { o, sr, sc };
   const r = C.rng(seed, 'prob:walk'),
     kind = m.kind;
@@ -5224,15 +5091,10 @@ function runBoot(m: PModel, R: Rz, I: Issues, seed: number) {
 /* ===================================================================================================================== */
 /* shared tools of the later modes (combin, gof, mcmc, multivar, rand)                                                    */
 /* ===================================================================================================================== */
-/** a named NoemaSimKit stream (L'Ecuyer's MRG32k3a, src/engines/kernel/simkit.ts) — the randomness of the later modes; null and the code
-      no-kit when the kit is not loaded (the result is then NaN, never another generator's numbers) */
-function kitStream(seed: number, name: string, I: Issues) {
-  const K = C.kit();
-  if (!K || typeof K.stream !== 'function') {
-    I.add('no-kit');
-    return null;
-  }
-  return K.stream(seed >>> 0, 'prob.' + name);
+/** a named NoemaSimKit stream (L'Ecuyer's MRG32k3a, src/engines/kernel/simkit.ts) — the randomness of the later modes (the kit is
+      imported with the core, so the issue no-kit of the outputs' vocabulary is never raised) */
+function kitStream(seed: number, name: string) {
+  return C.kit().stream(seed >>> 0, 'prob.' + name);
 }
 /** H_n = Σ 1/i (summed to 1e4, else the asymptotic series ln n + γ + 1/2n − 1/12n² + 1/120n⁴ − 1/252n⁶, error < 1e-25) */
 function harm(n: number) {
@@ -6445,8 +6307,7 @@ function runMcmc(m: PModel, R: Rz, I: Issues, env: Env, prepared: Prepared | nul
     I.add('budget');
     return out;
   }
-  const r0 = kitStream(seed, 'mcmc.init', I);
-  if (!r0) return out;
+  const r0 = kitStream(seed, 'mcmc.init');
   const draws = names.map((): Float64Array[] => []);
   let acc = 0,
     prop = 0;
@@ -6471,15 +6332,15 @@ function runMcmc(m: PModel, R: Rz, I: Issues, env: Env, prepared: Prepared | nul
       return v;
     };
     for (let c = 0; c < C; c++) {
-      const r = kitStream(seed, `mcmc.chain${c}`, I);
+      const r = kitStream(seed, `mcmc.chain${c}`);
       let x = init.map((v, i) => v + (c ? spread * scale[i]! * r0.normal(0, 1) : 0)),
         lx = ld(x);
       const ch = names.map(() => new Float64Array(floor((iters - burn) / thin)));
       let kept = 0;
       for (let t = 0; t < iters; t++) {
-        const y = x.map((v, i) => v + scale[i]! * r!.normal(0, 1)),
+        const y = x.map((v, i) => v + scale[i]! * r.normal(0, 1)),
           ly = ld(y),
-          lu = log(r!());
+          lu = log(r());
         if (t >= burn) prop++;
         if (lu < ly - lx || (lx === -Infinity && ly > -Infinity)) {
           x = y;
@@ -6506,7 +6367,7 @@ function runMcmc(m: PModel, R: Rz, I: Issues, env: Env, prepared: Prepared | nul
     }
     const sd = sqrt(1 - rho * rho);
     for (let c = 0; c < C; c++) {
-      const r = kitStream(seed, `mcmc.chain${c}`, I);
+      const r = kitStream(seed, `mcmc.chain${c}`);
       let x = init[0]! + (c ? spread * r0.normal(0, 1) : 0),
         y = init[1]! + (c ? spread * r0.normal(0, 1) : 0);
       const L = floor((iters - burn) / thin),
@@ -6514,8 +6375,8 @@ function runMcmc(m: PModel, R: Rz, I: Issues, env: Env, prepared: Prepared | nul
         cy = new Float64Array(L);
       let kept = 0;
       for (let t = 0; t < iters; t++) {
-        x = r!.normal(rho * y, sd);
-        y = r!.normal(rho * x, sd);
+        x = r.normal(rho * y, sd);
+        y = r.normal(rho * x, sd);
         if (t >= burn && (t - burn) % thin === 0 && kept < L) {
           cx[kept] = x;
           cy[kept] = y;
@@ -6544,7 +6405,7 @@ function runMcmc(m: PModel, R: Rz, I: Issues, env: Env, prepared: Prepared | nul
       xm = sx / n,
       s2 = meanVar(x).var;
     for (let c = 0; c < C; c++) {
-      const r = kitStream(seed, `mcmc.chain${c}`, I);
+      const r = kitStream(seed, `mcmc.chain${c}`);
       let mu = xm + (c ? spread * sqrt(s2 / n) * r0.normal(0, 1) : 0),
         tau = 1 / s2;
       const L = floor((iters - burn) / thin),
@@ -6553,10 +6414,10 @@ function runMcmc(m: PModel, R: Rz, I: Issues, env: Env, prepared: Prepared | nul
       let kept = 0;
       for (let t = 0; t < iters; t++) {
         const pp = p0 + n * tau;
-        mu = r!.normal((p0 * mu0 + tau * sx) / pp, 1 / sqrt(pp));
+        mu = r.normal((p0 * mu0 + tau * sx) / pp, 1 / sqrt(pp));
         let ss = 0;
         for (const v of x) ss += (v - mu) * (v - mu);
-        tau = r!.gamma(a + n / 2, 1 / (b + ss / 2));
+        tau = r.gamma(a + n / 2, 1 / (b + ss / 2));
         if (t >= burn && (t - burn) % thin === 0 && kept < L) {
           cm[kept] = mu;
           cs[kept] = 1 / sqrt(tau);
@@ -6701,23 +6562,21 @@ function runMultivar(m: PModel, R: Rz, I: Issues, seed: number) {
     }
     const nd = g(m, 'n', 0);
     if (nd > 0) {
-      const r = kitStream(seed, 'multivar.mvn', I);
-      if (r) {
-        const dx: number[] = [],
-          dy: number[] = [];
-        for (let t = 0; t < nd; t++) {
-          const z = mu.map(() => r.normal(0, 1)),
-            v = mu.map((u, i) => {
-              let s = u;
-              for (let k = 0; k <= i; k++) s += L[i]![k]! * z[k]!;
-              return s;
-            });
-          dx.push(v[0]!);
-          dy.push(K > 1 ? v[1]! : 0);
-        }
-        sr.drawX = dx;
-        sr.drawY = dy;
+      const r = kitStream(seed, 'multivar.mvn');
+      const dx: number[] = [],
+        dy: number[] = [];
+      for (let t = 0; t < nd; t++) {
+        const z = mu.map(() => r.normal(0, 1)),
+          v = mu.map((u, i) => {
+            let s = u;
+            for (let k = 0; k <= i; k++) s += L[i]![k]! * z[k]!;
+            return s;
+          });
+        dx.push(v[0]!);
+        dy.push(K > 1 ? v[1]! : 0);
       }
+      sr.drawX = dx;
+      sr.drawY = dy;
     }
     if (K >= 2) {
       // the conf ellipse of the first two coordinates: μ + √χ²₂(conf)·L₂(cos θ, sin θ)
@@ -6773,19 +6632,17 @@ function runMultivar(m: PModel, R: Rz, I: Issues, seed: number) {
     }
     const nd = g(m, 'n', 0);
     if (nd > 0) {
-      const r = kitStream(seed, 'multivar.dir', I);
-      if (r) {
-        const dx: number[] = [],
-          dy: number[] = [];
-        for (let t = 0; t < nd; t++) {
-          const gs = al.map(a => r.gamma(a, 1)),
-            s = sum(gs);
-          dx.push(gs[0]! / s);
-          dy.push(gs[1]! / s);
-        }
-        sr.drawX = dx;
-        sr.drawY = dy;
+      const r = kitStream(seed, 'multivar.dir');
+      const dx: number[] = [],
+        dy: number[] = [];
+      for (let t = 0; t < nd; t++) {
+        const gs = al.map(a => r.gamma(a, 1)),
+          s = sum(gs);
+        dx.push(gs[0]! / s);
+        dy.push(gs[1]! / s);
       }
+      sr.drawX = dx;
+      sr.drawY = dy;
     }
     return out;
   }
@@ -7172,7 +7029,7 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
     I.add('param');
     return out;
   };
-  const rng = () => kitStream(seed, 'rand.' + kind!, I);
+  const rng = () => kitStream(seed, 'rand.' + kind!);
   const simStats = (v: Vec, intBins?: boolean) => {
     const mv = meanVar(v);
     o.simMean = mv.mean;
@@ -7251,7 +7108,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       if (reps > 0 && budget(reps * n * 2)) {
         // the comparisons only depend on the subproblem sizes: C = n − 1 + C(U − 1) + C(n − U)
         const r = rng();
-        if (!r) return out;
         const v: number[] = [];
         for (let t = 0; t < reps; t++) {
           const st = [n];
@@ -7279,7 +7135,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       o.approxComp = 2 * n * (1 - (a > 0 ? a * log(a) : 0) - (a < 1 ? (1 - a) * log(1 - a) : 0)); // 2n(1 + H(α)), H the entropy in nats
       if (reps > 0 && budget(reps * n * 2)) {
         const r = rng();
-        if (!r) return out;
         const v: number[] = [];
         for (let t = 0; t < reps; t++) {
           let s = n,
@@ -7337,7 +7192,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
         if (reps > 0 && budget(reps * Gr.E.length * 4)) {
           // contraction = Kruskal on a uniformly random edge order (MR §1.1)
           const r = rng();
-          if (!r) return out;
           let ok = 0;
           const E = Gr.E.slice(),
             cuts: number[] = [];
@@ -7537,7 +7391,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       }
       if (reps > 0 && budget(reps * (n * d + mb))) {
         const r = rng();
-        if (!r) return out;
         const load = new Int32Array(mb),
           v = [];
         for (let t = 0; t < reps; t++) {
@@ -7626,7 +7479,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       sr.fpByK = fb;
       if (reps > 0 && budget(reps * (T + k + mb / 32))) {
         const r = rng();
-        if (!r) return out;
         const bits = new Uint8Array(mb);
         let fpC = 0;
         for (let t = 0; t < reps; t++) {
@@ -7666,7 +7518,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
           f = Array.from({ length: n }, (_, i) => Math.round((Nt * pow(i + 1, -s)) / Hs)),
           Ntot = sum(f);
         const r = rng();
-        if (!r) return out;
         let mxS = 0,
           meS = 0,
           over = 0;
@@ -7710,7 +7561,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
         const am = M === 16 ? 0.673 : M === 32 ? 0.697 : M === 64 ? 0.709 : 0.7213 / (1 + 1.079 / M),
           reg = new Uint8Array(M),
           r = rng();
-        if (!r) return out;
         const est = [];
         for (let t = 0; t < reps; t++) {
           reg.fill(0);
@@ -7751,7 +7601,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       o.inclusion = pi;
       if (reps > 0 && budget(reps * n)) {
         const r = rng();
-        if (!r) return out;
         const cnt = new Float64Array(n),
           res = new Int32Array(k);
         for (let t = 0; t < reps; t++) {
@@ -7850,7 +7699,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       }
       if (reps > 0) {
         const r = rng();
-        if (!r) return out;
         const v: number[] = [];
         let steps = 0;
         for (let t = 0; t < reps && steps < 2e7; t++) {
@@ -8021,7 +7869,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       o.pointers = n / (1 - p);
       if (reps > 0 && budget(reps * n * 2)) {
         const r = rng();
-        if (!r) return out;
         const v: number[] = [];
         for (let t = 0; t < reps; t++) {
           let mx = 0;
@@ -8047,7 +7894,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
       if (reps > 0 && budget(reps * n * 30)) {
         // the height of the BST of a random insertion order
         const r = rng();
-        if (!r) return out;
         const v: number[] = [],
           L = new Int32Array(n),
           Rr = new Int32Array(n),
@@ -8104,7 +7950,6 @@ function runRand(m: PModel, R: Rz, I: Issues, seed: number, env: Env, prepared: 
         return out;
       }
       const r = rng();
-      if (!r) return out;
       let f: () => number;
       if (useExpr) {
         const fn = (prepared && prepared.fns.get(m.expr)) || C.cx(m.expr),
@@ -8282,9 +8127,10 @@ function compute(
   };
 }
 /** run(spec, env, {seed, prepared}) → {out: {<output id>: value}} */
-function run(spec: ProbSpec, env: Env | null | undefined, opts: RunOpts | null | undefined) {
-  const P = checkSpec(spec);
+function run(sp: Spec, env: Env | null | undefined, opts: RunOpts | null | undefined) {
+  const P = checkSpec(sp);
   if (C.hasErrors(P)) return { out: {} };
+  const spec = sp as ProbSpec; // checkSpec found no error: the model and outputs have the shapes of ProbSpec
   const want = new Set(spec.outputs.map(o => o.of));
   const res = compute(spec.model, env, opts && opts.prepared, { seed: opts && opts.seed, want });
   const out: Obj = {},

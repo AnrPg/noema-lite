@@ -8,10 +8,10 @@
    deontic logic on preference models, input/output logic out1–out4, norms with deadlines over agent traces: evalNorms / normMonitor,
    conflicts by lex superior / specialis / posterior) and abstract argumentation (Dung 1995: grounded, complete, preferred, stable).
    Sources of each method: beside it and in docs/library/logic.md. Pure JS, no DOM, no words for the learner: numbers, codes and the
-   model's own formulas as short raw texts (`s`). Deterministic, bounded, never throws for a checked spec. Python twin of checkSpec /
-   exprs / keys (with the same parser and its messages): tools/lib_logic.py. Tests: node tests/lib_logic.js, node tests/enginelib.js. */
+   model's own formulas as short raw texts (`s`). Deterministic, bounded, never throws for a checked spec. checkSpec /
+   exprs / keys (with the same parser and its messages): the golden outputs of the former Python twin (tests/fixtures/parity/lib_logic.json). Tests: node tests/lib_logic.js, node tests/enginelib.js. */
 import NoemaLibCore from '../kernel/core.ts';
-import type { Env, Obj, Scene, View } from '../kernel/core.ts';
+import type { Env, Rec, SceneData, View } from '../kernel/core.ts';
 import type { Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes, keys, numbers and the model's own formulas leave this engine
 /** a number or an expression over the spec's names (`numx`) */
@@ -24,21 +24,21 @@ interface Tok {
   readonly pos: number;
 }
 /** a parse error: its code, position (in code points) and message */
-interface PErr {
+export interface PErr {
   readonly code: string;
   readonly pos: number;
   readonly msg: string;
 }
-type Parsed = { readonly ok: true; readonly ast: Fm } | ({ readonly ok: false } & PErr);
+export type Parsed = { readonly ok: true; readonly ast: Fm } | ({ readonly ok: false } & PErr);
 /** a term of first-order logic: a name, or f(t1, …, tn) */
-interface Term {
+export interface Term {
   t: string;
   n: string;
   args: Term[];
 }
 /** a formula, one node shape for every language: t the operator; a, b, c, f, p the subformulas; n a name (atom, predicate), v a variable,
       ag an agent, g a group, args / l / r the terms, pos where it stands in the text */
-interface Fm {
+export interface Fm {
   t: string;
   a?: Fm | undefined;
   b?: Fm | undefined;
@@ -215,6 +215,12 @@ interface NormInst {
   violated: boolean;
 }
 type NormRec = Record<string, unknown>;
+/** a violation or a fulfilment of a norm that normMonitor's step reports: the norm, the agent (per agent), the step, the time … */
+export interface NormRecord {
+  readonly norm: string;
+  readonly agent?: string;
+  readonly [field: string]: unknown;
+}
 interface NormOpts {
   readonly order?: unknown;
   readonly perAgent?: boolean;
@@ -245,15 +251,24 @@ interface ARule {
   kind: string;
   rank: number;
 }
-interface AspicIn {
-  readonly kb?: readonly { readonly f: unknown; readonly kind?: string; readonly rank?: unknown }[];
-  readonly rules?: readonly {
-    readonly id?: string;
-    readonly body?: readonly unknown[];
-    readonly head: unknown;
-    readonly kind?: string;
-    readonly rank?: unknown;
-  }[];
+/** a premise of an ASPIC+ theory's knowledge base: a literal f, axiom or ordinary, its rank */
+export interface AspicKbIn {
+  readonly f: unknown;
+  readonly kind?: string;
+  readonly rank?: unknown;
+}
+/** a rule of an ASPIC+ theory: body → head, strict or defeasible, its rank */
+export interface AspicRuleIn {
+  readonly id?: string;
+  readonly body?: readonly unknown[];
+  readonly head: unknown;
+  readonly kind?: string;
+  readonly rank?: unknown;
+}
+/** an ASPIC+ theory (aspic()) */
+export interface AspicIn {
+  readonly kb?: readonly AspicKbIn[];
+  readonly rules?: readonly AspicRuleIn[];
   readonly contraries?: readonly (readonly [unknown, unknown])[];
 }
 /** the labelling of an argumentation framework: 1 in, 0 out, 0.5 undecided */
@@ -405,7 +420,7 @@ type LogicSpec = Spec & { readonly model: LogicModel; readonly outputs?: readonl
 interface Res {
   s: Record<string, number | boolean>;
   se: Record<string, number[]>;
-  scene: Scene | null;
+  scene: SceneData | null;
 }
 /** a row of a truth table, with the role of each cell */
 type Row = (string | number)[] & { roles?: string[] };
@@ -428,7 +443,7 @@ interface TaskCtx {
 }
 const C = NoemaLibCore;
 const ID = 'logic@1';
-const isObj = (v: unknown): v is Obj => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const MAX_LEN = 2000,
   MAX_DEPTH = 100,
@@ -578,7 +593,7 @@ const TEMP1 = ['X', 'F', 'G'],
   CTL2 = ['AX', 'AF', 'AG', 'EX', 'EF', 'EG'];
 const EPI_RE = /^(K|B)_([A-Za-z0-9]{1,16})$/,
   GRP_RE = /^(C|E|D)_([A-Za-z0-9]{1,16})$/;
-/** parse(text, lang) → {ok: true, ast} | {ok: false, code, pos, msg}; the same codes, positions and messages as tools/lib_logic.py */
+/** parse(text, lang) → {ok: true, ast} | {ok: false, code, pos, msg}; the same codes, positions and messages as the former Python twin (tests/fixtures/parity/lib_logic.json) */
 function parse(text: unknown, lang?: string | null): Parsed {
   lang = lang || 'prop';
   const F: Feat = FEAT[lang] || {};
@@ -3081,8 +3096,8 @@ function normMonitor(norms: unknown, opts?: NormOpts | null) {
     viol = new Set<string>(),
     fulf = new Set<string>(),
     agentsSeen: string[] = [];
-  const V: NormRec[] = [],
-    Fu: NormRec[] = [],
+  const V: NormRecord[] = [],
+    Fu: NormRecord[] = [],
     CF: NormRec[] = [],
     perStep: number[] = [],
     activePerStep: number[] = [],
@@ -3092,11 +3107,11 @@ function normMonitor(norms: unknown, opts?: NormOpts | null) {
     nF = 0,
     nC = 0;
   const listOf = (x: unknown): string[] => (Array.isArray(x) ? x.filter(a => typeof a === 'string') : []);
-  function stepFn(st?: Obj | null): { violations: NormRec[]; fulfilments: NormRec[] } {
+  function stepFn(st?: Rec | null): { violations: NormRecord[]; fulfilments: NormRecord[] } {
     st = isObj(st) ? st : {};
     const t = isNum(st.t) ? st.t : step,
-      newV: NormRec[] = [],
-      newF: NormRec[] = [];
+      newV: NormRecord[] = [],
+      newF: NormRecord[] = [];
     if (step >= MAX_TRACE * 10) {
       codes.add('size');
       return { violations: newV, fulfilments: newF };
@@ -3270,7 +3285,7 @@ function normMonitor(norms: unknown, opts?: NormOpts | null) {
     step++;
     return { violations: newV, fulfilments: newF };
   }
-  function endMaintain(n: Norm, ag: string, k: string, inst: NormInst, t: number, newF: NormRec[]): void {
+  function endMaintain(n: Norm, ag: string, k: string, inst: NormInst, t: number, newF: NormRecord[]): void {
     if (!inst.violated) {
       const r = ag ? { norm: n.id, agent: ag, step, t, since: inst.since } : { norm: n.id, step, t, since: inst.since };
       newF.push(r);
@@ -3302,7 +3317,7 @@ function normMonitor(norms: unknown, opts?: NormOpts | null) {
 /** evalNorms(norms, trace, opts) → {violations, fulfilments, pending, conflicts, codes, counts, perStep, activePerStep} */
 function evalNorms(norms: unknown, trace: unknown, opts?: NormOpts | null) {
   const m = normMonitor(norms, opts);
-  for (const st of (Array.isArray(trace) ? trace : []).slice(0, MAX_TRACE * 10)) m.step(st as Obj);
+  for (const st of (Array.isArray(trace) ? trace : []).slice(0, MAX_TRACE * 10)) m.step(st as Rec);
   return m.result();
 }
 
@@ -3722,7 +3737,7 @@ function bipolar(n: number, att: readonly (readonly number[])[], sup: readonly (
 }
 
 /* =====================================================================================================================
-     8. The spec: the model format (the same table in tools/lib_logic.py), the checks, the expressions and keys */
+     8. The spec: the model format (the same table as the former Python twin (tests/fixtures/parity/lib_logic.json)), the checks, the expressions and keys */
 const TASKS = [
   'truth-table',
   'equivalent',
@@ -4072,7 +4087,7 @@ function predsOf(f: Fm, out?: [string, number][]): [string, number][] {
   return out;
 }
 const PUZ_AGENTS = (pz: PuzzleIn) => (pz.kind === 'muddy' ? Array.from({ length: pz.n || 3 }, (_, i) => `c${i + 1}`) : ['a', 'b']);
-/** checkSpec(spec) → [{code, path, msg, level}] (the same as tools/lib_logic.py check_spec) */
+/** checkSpec(spec) → [{code, path, msg, level}] (the same as the former Python twin check_spec (tests/fixtures/parity/lib_logic.json)) */
 function checkSpec(spec: unknown): Problem[] {
   const { P, E, W } = C.problems();
   const m = (isObj(spec) ? spec.model : undefined) as LogicModel | undefined;
@@ -4314,7 +4329,7 @@ const num = (v: unknown, env: Env, d: number) => {
 };
 const on = (v: unknown, env: Env) => v === undefined || num(v, env, 1) > 0.5;
 /** a scene of text lines (a proof, a trace, a normal form): line i at y = −i; roles per line */
-function textScene(lines: readonly Line[], D: DiagSink): Scene {
+function textScene(lines: readonly Line[], D: DiagSink): SceneData {
   const n = Math.min(lines.length, C.MAX_SCENE - 1);
   if (lines.length > n) D.add('scene-truncated');
   const sc = C.scene([0, 40, -(Math.max(n, 1) + 0.5), 0.5]);
@@ -4322,7 +4337,7 @@ function textScene(lines: readonly Line[], D: DiagSink): Scene {
   return sc.done();
 }
 /** a scene of a graph: worlds / states / arguments as points (role from truth), relations as arrows, ids and atoms as `s` */
-function graphScene(nodes: readonly GNode[], edges: readonly GLink[], view: View | undefined): Scene {
+function graphScene(nodes: readonly GNode[], edges: readonly GLink[], view: View | undefined): SceneData {
   const n = nodes.length;
   const xs = nodes.map((nd, i) => (isNum(nd.x) ? nd.x : Math.cos(Math.PI / 2 - (2 * Math.PI * i) / Math.max(n, 1)) * (n > 1 ? 3 : 0)));
   const ys = nodes.map((nd, i) => (isNum(nd.y) ? nd.y : Math.sin(Math.PI / 2 - (2 * Math.PI * i) / Math.max(n, 1)) * (n > 1 ? 3 : 0)));
@@ -5147,8 +5162,8 @@ const TASK: Readonly<Record<string, (c: TaskCtx) => void>> = {
       sc.txt(-1.5, -j, { s: short(id), c: 'info' });
       sc.seg(0, -j, N, -j, { c: 'muted' });
     });
-    for (const v of res.violations) sc.pt((v.step as number) + 0.5, -ids.indexOf(v.norm as string), { r: 5, c: 'bad' });
-    for (const f of res.fulfilments) sc.pt((f.step as number) + 0.5, -ids.indexOf(f.norm as string), { r: 5, c: 'ok' });
+    for (const v of res.violations) sc.pt((v.step as number) + 0.5, -ids.indexOf(v.norm), { r: 5, c: 'bad' });
+    for (const f of res.fulfilments) sc.pt((f.step as number) + 0.5, -ids.indexOf(f.norm), { r: 5, c: 'ok' });
     for (const p of res.pending) sc.pt(k, -ids.indexOf(p.norm as string), { r: 4, c: 'warn' });
     sc.seg(k, 0.8, k, -(ids.length - 0.5), { c: 'hi', dash: true });
     R.scene = sc.done();

@@ -31,12 +31,6 @@ type Prepared = Record<string, NumFn>;
 /** every computed value by output name: a number or a series */
 type Out = Record<string, number | number[]>;
 type Code = (c: string) => void;
-/** the parts of med@1 this engine uses (its calculators) */
-interface MedCalc {
-  readonly sev: (po2: number) => number;
-  readonly content: (hb: number, s: number, po2: number) => number;
-  readonly news2: (x: Readonly<Record<string, number>>) => { score: number; band: number };
-}
 /* ---------- the model (as checkSpec leaves it: numx values are numbers, booleans or formulas) ---------- */
 interface HypM {
   readonly id: string;
@@ -234,7 +228,7 @@ const C = NoemaLibCore;
 const ID = 'clinic@1';
 const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const fin = Number.isFinite as (v: unknown) => v is number;
-const Mx = NoemaLibMed as unknown as { readonly calc: MedCalc };
+const Mx = NoemaLibMed;
 const CODES = ['normalised', 'certain', 'approx', 'impossible', 'incomplete', 'range', 'unsafe', 'no-test-zone'];
 const SECTIONS = ['ddx', 'threshold', 'tests', 'tree', 'markov', 'cea', 'triage', 'vp', 'sct', 'calib'] as const;
 type Section = (typeof SECTIONS)[number];
@@ -258,7 +252,7 @@ const GRADE = [
   'infoEff',
 ];
 
-/* ---------- the model checker (the same codes, paths and messages as tools/lib_clinic.py) ---------- */
+/* ---------- the model checker (the same codes, paths and messages as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
 const HYP = { id: 'id!', prior: 'numx!', mustNotMiss: 'bool', act: 'numx', treatedBy: { $list: 'ref', max: 10 }, key: 'key' };
 const FIND = {
   id: 'id!',
@@ -396,7 +390,7 @@ function specNames(spec: Rec) {
   return n;
 }
 
-/** every output name the model offers: {scalar: [...], series: [...], scene: [...]} (the same lists in Python) */
+/** every output name the model offers: {scalar: [...], series: [...], scene: [...]} (the same lists as the former Python twin) */
 function offered(m: unknown) {
   const S: string[] = [],
     R: string[] = [],
@@ -630,8 +624,8 @@ function checkSpec(spec: unknown) {
     ['scalar', 'series', 'scene'],
     (o, at, E2, W2) => {
       for (const k of Object.keys(o)) if (!['id', 'kind', 'of'].includes(k)) W2('unknown-field', `${at}.${k}`, 'ignored');
-      if (!off[o.kind as keyof typeof off].includes(o.of as string))
-        E2('output', at + '.of', `${o.of as string} is not a ${o.kind as string} of this model (docs/library/clinic.md)`);
+      if (!off[o.kind as keyof typeof off].includes(o.of))
+        E2('output', at + '.of', `${o.of} is not a ${o.kind} of this model (docs/library/clinic.md)`);
     },
     E,
     W,
@@ -1331,9 +1325,16 @@ function runTriage(t: Readonly<Record<string, Rec>>, F: Prepared, env: Env, out:
     out['triage.dangerZone'] = dz;
   }
   if (isObj(t.news2!)) {
-    const x: Record<string, number> = {};
-    for (const k of ['rr', 'spo2', 'o2', 'sbp', 'hr', 'cvpu', 'temp', 'scale2']) x[k] = g('news2', k, 0);
-    const r = Mx.calc.news2(x);
+    const r = Mx.calc.news2({
+      rr: g('news2', 'rr', 0),
+      spo2: g('news2', 'spo2', 0),
+      o2: g('news2', 'o2', 0),
+      sbp: g('news2', 'sbp', 0),
+      hr: g('news2', 'hr', 0),
+      cvpu: g('news2', 'cvpu', 0),
+      temp: g('news2', 'temp', 0),
+      scale2: g('news2', 'scale2', 0),
+    });
     out['triage.news2'] = r.score;
     out['triage.news2band'] = r.band;
   }
@@ -1367,7 +1368,7 @@ function runTriage(t: Readonly<Record<string, Rec>>, F: Prepared, env: Env, out:
 const VDEF: Readonly<Record<string, number>> = { essential: 0.3, timely: 0.25, safety: 0.2, efficiency: 0.1, order: 0.05, calib: 0.1 };
 /** the arterial PO₂ whose O₂ content is ca (content is monotone in PO₂): Brent's root (NoemaSimKit.brent; Brent 1973 ch. 4) on
       [0, P_A]; a content outside the bracket gives its nearer end; 40 bisections when Brent gives no finite root */
-function pao2Of(content: MedCalc['content'], sev: MedCalc['sev'], hb: number, ca: number, pA: number) {
+function pao2Of(content: (typeof NoemaLibMed.calc)['content'], sev: (typeof NoemaLibMed.calc)['sev'], hb: number, ca: number, pA: number) {
   const g = (p: number) => content(hb, sev(p), p) - ca,
     K = C.kit();
   const g0 = g(0),
@@ -1409,7 +1410,7 @@ function vpPar(pg: (k: string, d: number) => number) {
   };
 }
 /** the physiology at (tt, y): what is measured and what drives the derivatives */
-function vpPhys(P: VpPar, S: VpSim, acts: readonly Act[], tt: number, y: Readonly<Y6>, Mx: { readonly calc: MedCalc }) {
+function vpPhys(P: VpPar, S: VpSim, acts: readonly Act[], tt: number, y: Readonly<Y6>, Mx: { readonly calc: typeof NoemaLibMed.calc }) {
   const on = (a: Act) => fin(a.at) && a.at <= tt;
   const fio2 = acts.reduce((f, a) => (fin(a.o2) && on(a) ? Math.max(f, clamp(a.o2, 0.21, 1)) : f), 0.21),
     vaso = acts.reduce((d, a) => (fin(a.vaso) && on(a) ? a.vaso : d), 0);
@@ -1467,7 +1468,7 @@ function vpDeriv(P: VpPar, S: VpSim, acts: readonly Act[], tt: number, y: Readon
   dy[5] = (svt - sv) / 2;
 }
 /** the grid time t (state S.y): the stop of a bleed, the values now (S.ph, S.mapPrev), the caller's record */
-function vpAt(P: VpPar, S: VpSim, acts: readonly Act[], t: number, Mx: { readonly calc: MedCalc }, onGrid: OnGrid | null) {
+function vpAt(P: VpPar, S: VpSim, acts: readonly Act[], t: number, Mx: { readonly calc: typeof NoemaLibMed.calc }, onGrid: OnGrid | null) {
   if (acts.some(a => a.stop && fin(a.at) && a.at <= t)) S.bleeding = false;
   const ph = vpPhys(P, S, acts, t, S.y, Mx);
   S.mapPrev = ph.MAP;
@@ -1482,7 +1483,7 @@ function vpAdvance(
   acts: readonly Act[],
   ts: readonly number[],
   hs: number,
-  Mx: { readonly calc: MedCalc },
+  Mx: { readonly calc: typeof NoemaLibMed.calc },
   onGrid: OnGrid | null,
 ) {
   const K = C.kit(),

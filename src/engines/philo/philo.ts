@@ -19,6 +19,7 @@ import NoemaLibCore from '../kernel/core.ts';
 import type { NumFn, Rec, RunOpts, Table, TableNode } from '../kernel/core.ts';
 import NoemaSimKit from '../kernel/simkit.ts';
 import NoemaLibLogic from '../logic/logic.ts';
+import type { Fm } from '../logic/logic.ts';
 import type { Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes, keys, numbers and the model's own ids leave this engine
 const C = NoemaLibCore;
@@ -1285,7 +1286,7 @@ const isObj = C.isObj,
 const arrOf = (v: unknown): unknown[] => (Array.isArray(v) ? (v as unknown[]) : []);
 const BUDGET = 200000; // method evaluations (social choice searches), cost-weighted
 
-/* ---------- the checker (the same codes, paths and messages as tools/lib_philo.py) ---------- */
+/* ---------- the checker (the same codes, paths and messages as the former Python twin (tests/fixtures/parity/lib_philo.json)) ---------- */
 const COLL = [
   'populations',
   'cases',
@@ -1327,7 +1328,7 @@ function checkSpec(spec: unknown): Problem[] {
       E('value', `model.cases[${i}]`, 'needs a preset, or kAct and kNot');
   });
   arr('profiles').forEach((x, i) => {
-    if (!isObj(x) || !isObj(x.traits) || !has(T.VIRT, x.scheme as string)) return;
+    if (!isObj(x) || !isObj(x.traits) || !has(T.VIRT, x.scheme)) return;
     for (const k of Object.keys(x.traits))
       if (!T.VIRT[x.scheme as string]!.includes(k)) E('value', `model.profiles[${i}].traits.${k}`, `not a trait of ${x.scheme as string}`);
   });
@@ -1376,7 +1377,7 @@ function checkSpec(spec: unknown): Problem[] {
     if (!isObj(x)) return;
     const p = `model.problems[${i}]`;
     if (x.preset !== undefined) {
-      if (has(T.PROB, x.preset as string) && typeof x.id === 'string') acts[x.id] = T.PROB[x.preset as string]!.acts;
+      if (has(T.PROB, x.preset) && typeof x.id === 'string') acts[x.id] = T.PROB[x.preset as string]!.acts;
       return;
     }
     if (!['acts', 'states', 'u', 'pAct', 'pCause'].every(k => Array.isArray(x[k]))) {
@@ -1422,7 +1423,7 @@ function checkSpec(spec: unknown): Problem[] {
   arr('experiments').forEach((x, i) => {
     if (!isObj(x)) return;
     const p = `model.experiments[${i}]`;
-    const te = has(T.TE, x.te as string) ? T.TE[x.te as string] : null;
+    const te = has(T.TE, x.te) ? T.TE[x.te as string] : null;
     if (!te && x.te === undefined && !(Array.isArray(x.options) && isObj(x.positions))) {
       E('value', p, 'needs te, or options and positions');
       return;
@@ -1438,7 +1439,7 @@ function checkSpec(spec: unknown): Problem[] {
   arr('thinkers').forEach((x, i) => {
     if (!isObj(x)) return;
     const p = `model.thinkers[${i}]`;
-    if (!has(T.THINKERS, x.id as string) && (x.born === undefined || x.died === undefined || x.trad === undefined))
+    if (!has(T.THINKERS, x.id) && (x.born === undefined || x.died === undefined || x.trad === undefined))
       E('value', p, 'needs born, died and trad (not a built-in thinker)');
     arrOf(x.infl).forEach((r, j) => {
       if (typeof r === 'string' && C.ID_RE.test(r) && !thinkerIds.includes(r)) E('ref', `${p}.infl[${j}]`, `no thinker ${r}`);
@@ -1490,14 +1491,13 @@ function checkSpec(spec: unknown): Problem[] {
     ID,
     ['scalar', 'series', 'scene'],
     (o, at) => {
-      const tb =
-        has(T.OUT, o.kind as string) && has(T.OUT[o.kind as string]!, o.of as string) ? T.OUT[o.kind as string]![o.of as string]! : null;
+      const tb = has(T.OUT, o.kind) && has(T.OUT[o.kind]!, o.of) ? T.OUT[o.kind]![o.of]! : null;
       if (!tb) {
-        E('output', at + '.of', `${o.of as string} is not a ${o.kind as string} output of ${ID}`);
+        E('output', at + '.of', `${o.of} is not a ${o.kind} output of ${ID}`);
         return;
       }
       C.walk(o, tb, at, E, W);
-      const refs = T.REFS[o.of as string] || {};
+      const refs = T.REFS[o.of] || {};
       const okId = (v: unknown): v is string => typeof v === 'string' && C.ID_RE.test(v);
       for (const [f, coll] of Object.entries(refs)) {
         const vs: [unknown, string][] = Array.isArray(o[f])
@@ -1527,14 +1527,14 @@ function checkSpec(spec: unknown): Problem[] {
         !expPos[o.experiment as string]!.includes(o.position)
       )
         E('ref', at + '.position', `no position ${o.position}`);
-      if (['ipd', 'match', 'shares'].includes(o.of as string) && !tour) E('value', at, 'needs model.tournament');
+      if (['ipd', 'match', 'shares'].includes(o.of) && !tour) E('value', at, 'needs model.tournament');
       if (o.of === 'ipd' && tour && typeof o.strategy === 'string' && !arrOf(tour.strategies).includes(o.strategy))
         E('ref', at + '.strategy', `${o.strategy} is not in model.tournament.strategies`);
-      if (['sorites', 'degree', 'bound'].includes(o.of as string) && !isObj(M.sorites)) E('value', at, 'needs model.sorites');
+      if (['sorites', 'degree', 'bound'].includes(o.of) && !isObj(M.sorites)) E('value', at, 'needs model.sorites');
       if (o.of === 'map' && !arr('thinkers').length) E('value', at, 'needs model.thinkers');
       if (o.of === 'trait' && typeof o.trait === 'string') {
         const pr = arr('profiles').find((x): x is Rec => isObj(x) && x.id === o.profile);
-        if (pr && has(T.VIRT, pr.scheme as string) && !T.VIRT[pr.scheme as string]!.includes(o.trait))
+        if (pr && has(T.VIRT, pr.scheme) && !T.VIRT[pr.scheme as string]!.includes(o.trait))
           E('value', at + '.trait', `not a trait of ${pr.scheme as string}`);
       }
     },
@@ -1569,7 +1569,7 @@ function exprs(spec: unknown): [string, string, string[]][] {
   if (!isObj(spec)) return out;
   collect(spec.model, { $obj: T.MODEL }, 'model', out);
   arrOf(spec.outputs).forEach((o, i) => {
-    if (isObj(o) && has(T.OUT, o.kind as string) && has(T.OUT[o.kind as string]!, o.of as string))
+    if (isObj(o) && has(T.OUT, o.kind) && has(T.OUT[o.kind as string]!, o.of))
       collect(o, { $obj: T.OUT[o.kind as string]![o.of as string]! }, `outputs[${i}]`, out);
   });
   return out;
@@ -2808,7 +2808,7 @@ interface Bare {
 const strip = (f: unknown): Bare | undefined => (isObj(f) ? { t: f.t, n: f.n, a: strip(f.a), b: strip(f.b) } : undefined);
 const eqF = (f: unknown, g: unknown) => JSON.stringify(strip(f)) === JSON.stringify(strip(g));
 /** the argument's form (Copi, Cohen & McMahon 2014): 1 MP, 2 MT, 3 HS, 4 DS, 5 CD; −1 affirming the consequent, −2 denying the antecedent; 0 other */
-function formOf(ps: readonly Rec[], c: Rec): number {
+function formOf(ps: readonly Fm[], c: Fm): number {
   const perms =
     ps.length === 2
       ? [
@@ -2841,7 +2841,7 @@ function formOf(ps: readonly Rec[], c: Rec): number {
 /** validity (logic@1 entails: the truth table, the first countermodel), the number of countermodels (logic@1 truthTable) and the form */
 function argument(A: Rec, flag: Flag): { valid: number; counters: number; form: number } | null {
   const L = NoemaLibLogic,
-    fs: Rec[] = [];
+    fs: Fm[] = [];
   for (const s of (A.premises as unknown[]).concat([A.conclusion])) {
     const r = L.parse(s, 'prop');
     if (!r.ok) {
@@ -3583,7 +3583,7 @@ function run(spec: Spec | null, env: Readonly<Record<string, number | boolean>> 
   );
   const popIds = (arrOf(M.populations) as Rec[]).map(x => x.id);
   const cases = byId('cases', x => {
-    const b: Case = has(T.CASES, x.preset as string)
+    const b: Case = has(T.CASES, x.preset)
       ? T.CASES[x.preset as string]!
       : { kAct: 0, sAct: 1, kNot: 0, sNot: 1, means: false, redirect: false, personal: false, consent: false, driver: false };
     const r = { ...b };
@@ -3592,7 +3592,7 @@ function run(spec: Spec | null, env: Readonly<Record<string, number | boolean>> 
     return r;
   });
   const maxims = byId('maxims', x => {
-    const b: Maxim = has(T.MAXIMS, x.preset as string)
+    const b: Maxim = has(T.MAXIMS, x.preset)
       ? T.MAXIMS[x.preset as string]!
       : { conception: false, practical: false, natural: false, will: false };
     const r = { ...b };
@@ -3625,7 +3625,7 @@ function run(spec: Spec | null, env: Readonly<Record<string, number | boolean>> 
     priors: Array.isArray(x.priors) ? (x.priors as unknown[][]).map(q => q.map(X)) : null,
   }));
   const probs = byId('problems', (x): { acts: unknown[]; u: Mat; pAct: Mat; pCause: number[] } => {
-    if (has(T.PROB, x.preset as string)) {
+    if (has(T.PROB, x.preset)) {
       const b = T.PROB[x.preset as string]!,
         acc = num(X(x.acc), b.acc),
         big = num(X(x.big), b.big),
@@ -3659,7 +3659,7 @@ function run(spec: Spec | null, env: Readonly<Record<string, number | boolean>> 
     };
   });
   const games = byId('games', (x): Game => {
-    if (has(T.GAMES, x.preset as string)) {
+    if (has(T.GAMES, x.preset)) {
       const g = T.GAMES[x.preset as string]!;
       if (g.pay) return { pay: g.pay.map(r => r.map(c => c.slice())) };
       const [t0, r0, p0, s0] = g.TRPS as [number, number, number, number],
@@ -3684,13 +3684,13 @@ function run(spec: Spec | null, env: Readonly<Record<string, number | boolean>> 
   });
   const beliefs = byId('beliefs', x => ({ h: X(x.h), eh: X(x.eh), enh: X(x.enh) }));
   const know = byId('knowledge', x => {
-    const b = has(T.KCASES, x.preset as string) ? T.KCASES[x.preset as string]! : {};
+    const b = has(T.KCASES, x.preset) ? T.KCASES[x.preset as string]! : {};
     const r: Record<string, boolean> = { ...b };
     for (const k of T.KF.concat(['intuition'])) if (typeof x[k] === 'boolean') r[k] = x[k];
     return r;
   });
   const exps = byId('experiments', x => {
-    const te = has(T.TE, x.te as string) ? T.TE[x.te as string]! : { o: [], p: {} };
+    const te = has(T.TE, x.te) ? T.TE[x.te as string]! : { o: [], p: {} };
     return { o: Array.isArray(x.options) ? (x.options as unknown[]) : te.o, p: { ...te.p, ...(isObj(x.positions) ? x.positions : {}) } };
   });
   const thinkers = new Map<unknown, Thinker>(
@@ -4354,7 +4354,7 @@ function run(spec: Spec | null, env: Readonly<Record<string, number | boolean>> 
       }
       case 'teAnswer': {
         const e = exps.get(o.experiment);
-        if (!e || !has(e.p, o.position as string)) return NaN;
+        if (!e || !has(e.p, o.position)) return NaN;
         return e.o.indexOf(e.p[o.position as string]);
       }
       case 'teCount': {

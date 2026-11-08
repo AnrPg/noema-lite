@@ -20,10 +20,11 @@
        Banas & Rains 2010) as teaching models, audience fit.
    Logic (Dung semantics, validity, syllogisms) is NOT re-implemented here: it is called from NoemaLibLogic (src/engines/logic/logic.ts);
    (src/engines/logic/logic.ts loads first; its source travels to the Worker in front of this module). Pure JS, deterministic, bounded; numbers, codes, keys
-   and the model's own short texts (`s`, ≤ 64 characters) only. Python twin of the checks: tools/lib_rhetoric.py. */
+   and the model's own short texts (`s`, ≤ 64 characters) only. The checks: the golden outputs of the former Python twin (tests/fixtures/parity/lib_rhetoric.json). */
 import NoemaLibCore from '../kernel/core.ts';
+import type { RunOpts, Table, TableNode } from '../kernel/core.ts';
 import NoemaLibLogic from '../logic/logic.ts';
-import type { EngineCore, Problem, SimEngine } from '../types.ts';
+import type { AspicKbIn, AspicRuleIn, Fm } from '../logic/logic.ts';
 /* eslint-disable @typescript-eslint/no-base-to-string -- the model's own texts (a speech text, a node's s, a word) are read with String()
    as they always were: run() and the exported pieces may be given values checkSpec has not seen, and such a value reads as its String() */
 /* i18n-ignore-start */ // code, not text: only codes, keys, numbers and the model's own words leave this module
@@ -31,89 +32,17 @@ type Obj = Record<string, unknown>;
 /** a value of the author's JSON */
 type Json = Obj | unknown[] | string | number | boolean | null | undefined;
 type Env = Readonly<Record<string, unknown>>;
-type Report = (code: string, path: string, msg: string) => void;
 /** a number of the model, or an expression over the spec's names */
 type Numx = number | string;
-/** a drawing of a plot of kind `scene` (src/engines/kernel/core.ts scene) */
-interface Scene {
-  readonly view: number[];
-  readonly items: unknown[];
-}
-/** the options of a drawn item: its role c, a text s, a number v, a key, an anchor, a width w, arrow, dash, fill, closed, a radius r */
-type ItemOpts = Readonly<Record<string, unknown>>;
-interface SceneBuilder {
-  pt(x: number, y: number, o?: ItemOpts): void;
-  seg(x1: number, y1: number, x2: number, y2: number, o?: ItemOpts): void;
-  poly(pts: number[], o?: ItemOpts): void;
-  txt(x: number, y: number, o?: ItemOpts): void;
-  done(): Scene;
-}
 /** a code of a run: the output it belongs to and the code */
 interface RunCode {
   readonly id: string;
   readonly code: string;
 }
-/** what a run is given besides the inputs: the model compiled once (prepare) */
-interface RunOpts {
-  readonly prepared?: Prepared;
-}
-/** what this engine uses of the library's core (src/engines/kernel/core.ts, still untyped at its edge) */
-interface CoreUse {
-  readonly ID_RE: RegExp;
-  problems(): { P: Problem[]; E: Report; W: Report };
-  walk(o: unknown, T: unknown, path: string, E: Report, W: Report): void;
-  checkOutputs(
-    spec: unknown,
-    id: string,
-    kinds: readonly string[],
-    out: (o: Obj, at: string, E: Report, W: Report) => void,
-    E: Report,
-    W: Report,
-  ): void;
-  cx(v: unknown): (env: Env) => unknown;
-  scene(view: number[]): SceneBuilder;
-  thin(a: number[], n: number): number[];
-  makeEngine(def: {
-    id: string;
-    checkSpec: (spec: unknown) => Problem[];
-    run: (spec: RhSpec | null | undefined, env: Env, opts?: RunOpts | null) => { out: Obj; codes: RunCode[] };
-    prepare: () => Prepared;
-    scenes: boolean;
-  }): { engine: EngineCore; simEngine: SimEngine };
-}
-/** a formula of logic@1 (its parse tree: the node type t, the operands a and b; positions pos) */
-interface Ast {
-  readonly t: string;
-  readonly a?: Ast;
-  readonly b?: Ast;
-}
 /** the semantics of logic@1 that give several labellings (a semantics logic@1 does not name gives undefined: read as optional) */
 type Sem = 'complete' | 'preferred' | 'stable';
 /** what logic@1 afSolve gives: the grounded labelling and the labellings of each semantics (1 in, 0 out, 0.5 undecided) */
 type AF = { readonly grounded: number[] } & Readonly<Partial<Record<Sem, number[][]>>>;
-type Att = [number, number][];
-/** what this engine uses of logic@1 (src/engines/logic/logic.ts, still untyped at its edge) */
-interface LogicUse {
-  parse(text: string, lang: string): { readonly ok: boolean; readonly ast: Ast; readonly code?: string };
-  atomsOf(f: Ast, out: string[]): string[];
-  rowsOf(atoms: string[]): Record<string, boolean>[];
-  evalProp(f: Ast, v: Record<string, boolean>): boolean;
-  syllogism(mood: string, figure: number, existential: boolean): { readonly valid: boolean };
-  afSolve(n: number, att: Att, D: Set<string>): AF;
-  bipolar(n: number, att: Att, sup: Att, mode: string): { readonly att: Att; readonly kind: Readonly<Record<string, string>> };
-  litOf(x: string): string | null;
-  aspic(
-    th: { kb: Obj[]; rules: Obj[]; contraries: [unknown, unknown][] },
-    opts: { link: unknown; ordering: unknown; transpose: unknown },
-  ): {
-    readonly codes: string[];
-    readonly n: number;
-    readonly defeats: unknown[];
-    readonly att: Att;
-    readonly args: { readonly conc: string }[];
-    postulates(L: number[][]): { subClosed: boolean; strictClosed: boolean; directConsistent: boolean; indirectConsistent: boolean };
-  };
-}
 /* ---------- the author's model, as checkSpec lets it through (the table TABLE below): every part may be missing ---------- */
 interface Poi {
   readonly at?: Numx;
@@ -203,9 +132,10 @@ interface Form {
   readonly existential?: boolean;
   readonly mood?: string;
 }
+/** the theory of the model (TABLE: every kb item has its f, every rule its id and head) */
 interface Theory {
-  readonly kb?: Obj[];
-  readonly rules?: Obj[];
+  readonly kb?: AspicKbIn[];
+  readonly rules?: AspicRuleIn[];
   readonly contraries?: { readonly u?: unknown; readonly v?: unknown }[];
   readonly link?: string;
   readonly ordering?: string;
@@ -256,15 +186,11 @@ interface RhSpec {
   readonly model?: Model;
   readonly outputs?: OutDecl[];
 }
-/** a field kind of the model table: a type name, or a nested object or list */
-type Kind =
-  string | { readonly $obj?: Table; readonly $list?: Kind; readonly $req?: boolean; readonly min?: number; readonly max?: number };
-type Table = Readonly<Record<string, Kind>>;
 /** a table of each language (other: any language without its own) */
 type ByLang<T> = Record<string, T> & { other: T };
 /** a string of the model found by exprs or keys: [the source, its path] (an expression also with its names, filled in by the caller) */
 type Found = [string, string, string[]?];
-const C = NoemaLibCore as unknown as CoreUse;
+const C = NoemaLibCore;
 const ID = 'rhetoric@1';
 /** an object of the model (not a list): a value of a typed part keeps its type */
 const isObj = <T>(v: T): v is T & Obj => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -514,13 +440,13 @@ const SEMS = 'enum:grounded|preferred|stable';
 const SOUND_T = 'enum:assonance|consonance|rhyme|paronomasia',
   TROPE_T = 'enum:simile|metaphor|irony',
   SUPPORT_T = 'enum:general|deductive|necessary';
-/** an ASPIC+ literal: an atom or its negation (¬ ~ ! -), checked the same way in tools/lib_rhetoric.py; logic@1 builds the arguments */
+/** an ASPIC+ literal: an atom or its negation (¬ ~ ! -), checked the same way as the former Python twin (tests/fixtures/parity/lib_rhetoric.json); logic@1 builds the arguments */
 const LIT_RE = /^\s*(?:[¬~!-]\s*)*[A-Za-z_][A-Za-z0-9_]{0,31}\s*$/;
 
-/* ---------- the model table (the same codes and messages as tools/lib_rhetoric.py) ---------- */
-const L_ = (t: Kind, max: number, min?: number, req?: boolean): Kind =>
+/* ---------- the model table (the same codes and messages as the former Python twin (tests/fixtures/parity/lib_rhetoric.json)) ---------- */
+const L_ = (t: TableNode, max: number, min?: number, req?: boolean): TableNode =>
   Object.assign(req ? { $req: true } : {}, { $list: t, max }, min ? { min } : {});
-const O_ = (t: Table): Kind => ({ $obj: t });
+const O_ = (t: Table): TableNode => ({ $obj: t });
 const SPEECH = {
   id: 'id!',
   team: 'ref',
@@ -1027,15 +953,15 @@ function checkSpec(spec: unknown) {
     ID,
     ['scalar', 'series', 'scene'],
     (o, at, E2, W2) => {
-      const T = OUT[o.kind as string]![o.of as string];
+      const T = OUT[o.kind]![o.of];
       if (!T) {
-        E2('output', at + '.of', `${o.kind as string} outputs of ${ID} are: ${Object.keys(OUT[o.kind as string]!).join(', ')}`);
+        E2('output', at + '.of', `${o.kind} outputs of ${ID} are: ${Object.keys(OUT[o.kind]!).join(', ')}`);
         return;
       }
       C.walk(o, Object.assign({ id: 'expr', kind: 'expr', of: 'expr' }, T), at, E2, W2);
       for (const [sec, ofs] of Object.entries(NEEDS))
         if (
-          ofs.includes(o.of as string) &&
+          ofs.includes(o.of) &&
           !isObj(M[sec]) &&
           !(sec === 'speeches' && Array.isArray(M.speeches) && M.speeches.length) &&
           !(sec === 'forms' && Array.isArray(M.forms) && M.forms.length)
@@ -1046,7 +972,7 @@ function checkSpec(spec: unknown) {
         E2('literal', at + '.concl', 'needs a literal (an atom or ¬atom)');
       if (o.of === 'fallacy' && o.node === undefined && o.form === undefined) E2('value', at, 'needs node or form');
       if (o.of === 'speaks' && o.team === undefined && o.speech === undefined) E2('value', at, 'needs team or speech');
-      if (['fallacies', 'fallacy'].includes(o.of as string) && !MP && !(Array.isArray(M.forms) && M.forms.length))
+      if (['fallacies', 'fallacy'].includes(o.of) && !MP && !(Array.isArray(M.forms) && M.forms.length))
         E2('ref', at + '.of', 'needs model.map or model.forms');
       const R: [string, unknown[], string][] = [
         ['speech', sIds, 'not a speech of the model'],
@@ -2200,7 +2126,7 @@ function kendall(a: number[], b: number[]) {
 
 /* =====================================================================================================================
      3. Logic, from logic@1 (never re-implemented here) */
-const LG = () => NoemaLibLogic as unknown as LogicUse; // logic@1: afSolve, parse, atomsOf, evalProp, rowsOf, syllogism, source (docs/library/logic.md §9)
+const LG = () => NoemaLibLogic; // logic@1: afSolve, parse, atomsOf, evalProp, rowsOf, syllogism, source (docs/library/logic.md §9)
 const strip = (a: unknown) => JSON.stringify(a, (k: string, v: unknown) => (k === 'pos' ? undefined : v));
 /** a propositional form: valid by truth table (logic@1 parse / atomsOf / rowsOf / evalProp); the first counterexample row; the named
       formal fallacy when the form is affirming the consequent or denying the antecedent (a premise p→q with q, resp. ¬p, ⊢ p, resp. ¬q) */
@@ -2213,7 +2139,7 @@ interface FormResult {
 }
 function propForm(f: Form, codes: string[]): FormResult | null {
   const L = LG();
-  const ps: Ast[] = [],
+  const ps: Fm[] = [],
     all = [...f.premises!, f.conclusion];
   for (const x of all) {
     const r = L.parse(String(x), 'prop');
@@ -2547,7 +2473,7 @@ const teamPoints = (nT: number, rank: number) => (nT === 4 ? 4 - rank : rank ===
 function prepare(): Prepared {
   return { cache: new Map(), text: new Map(), figs: new Map() };
 }
-function run(spec: RhSpec | null | undefined, env: Env, opts?: RunOpts | null) {
+function run(spec: RhSpec | null | undefined, env: Env, opts?: RunOpts<Prepared> | null) {
   const prep = (opts && opts.prepared) || prepare(),
     cache = prep.cache;
   const ev = (v: unknown, d: number): number => {
@@ -3154,7 +3080,7 @@ function run(spec: RhSpec | null | undefined, env: Env, opts?: RunOpts | null) {
           if (of === 'complexAttacks') return B.att.length - Object.values(B.kind).filter(k => k === 'direct').length;
           if (I.n > 24) code(o.id, 'large_map');
           const D = new Set<string>(),
-            af = L.afSolve(I.n, B.att, D);
+            af: AF = L.afSolve(I.n, B.att, D);
           for (const c of D) code(o.id, c);
           if (ni === undefined) return NaN;
           const sem = o.semantics || 'grounded',
@@ -3189,7 +3115,7 @@ function run(spec: RhSpec | null | undefined, env: Env, opts?: RunOpts | null) {
       if (of === 'aspicArgs') return A.n;
       if (of === 'aspicDefeats') return A.defeats.length;
       const D = new Set<string>(),
-        af = L.afSolve(A.n, A.att, D);
+        af: AF = L.afSolve(A.n, A.att, D);
       for (const c of D) code(o.id, c);
       const sem = o.semantics || 'grounded',
         Ls = sem === 'grounded' ? [af.grounded] : af[sem as Sem] || [];

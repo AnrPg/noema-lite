@@ -6,7 +6,7 @@
    distance, bit and packet error rates against SNR (BPSK, QPSK, FSK, BLE, Wi-Fi rough, LoRa SF7–12), LoRa airtime (Semtech) and
    duty cycle, BLE and Wi-Fi airtime (rough). Pure TypeScript (strict), no DOM, no text for the learner: codes and numbers only.
    The link (noema.rf/v1) is described in docs/INTERACTIVE_ENGINES.md §4 and src/contracts/schemas/noema.rf.v1.schema.json (its type:
-   src/contracts/generated/rf.v1.ts). Python twin of check() / checkSpec(): tools/rf.py. It is a plugin of the engine library: one line
+   src/contracts/generated/rf.v1.ts). check() / checkSpec(): the golden outputs of the former Python twin (tests/fixtures/parity/rf.json). It is a plugin of the engine library: one line
    of src/engines/plugins.ts. Tests: node tests/rf.js. */
 import NoemaSimKit from '../kernel/simkit.ts';
 import type { HttpsNoemaLiteNetlifyAppSchemasNoemaRfV1SchemaJson as RfLinkContract } from '../../contracts/generated/rf.v1.ts';
@@ -21,12 +21,6 @@ type Wall = NonNullable<Path['walls']>[number];
 interface Uniform {
   (): number;
   normal?: (mu: number, sd: number) => number;
-}
-/** what this engine uses of the simulation kernel (src/engines/kernel/simkit.ts, docs/library/simkit.md) */
-interface SimKitUse {
-  erfc(x: number): number;
-  stream(seed: number, name: string): Uniform;
-  brent(g: (x: number) => number, a: number, b: number, tol: number, fa: number, fb: number): number;
 }
 type Report = (code: string, path: string, msg: string) => void;
 /** a shape of the link table: a kind ('pos', 'int:1:50', 'enum:a|b' …, '!' = required), an object or a list of objects */
@@ -283,8 +277,8 @@ const boxMuller = (r: Uniform) => {
 };
 /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.ts): MRG32k3a streams (one per purpose: the shadowing draw, the sweep), normals
       by inversion (AS241), roots by Brent 1973. FALLBACK without the kernel (marked): mulberry32 + Box–Muller, bisection */
-function kit(): SimKitUse | null {
-  return NoemaSimKit as unknown as SimKitUse;
+function kit(): typeof NoemaSimKit | null {
+  return NoemaSimKit;
 }
 const streamOf = (name: string, seed: number) => {
   const K = kit();
@@ -309,7 +303,7 @@ function rootOf(g: (x: number) => number, lo: number, hi: number, tol: number) {
   return (lo + hi) / 2;
 }
 
-// ---- the link format: a table the checker walks (the same table in tools/rf.py) ----
+// ---- the link format: a table the checker walks (the same table as the former Python twin (tests/fixtures/parity/rf.json)) ----
 const MODELS = ['fspl', 'two-ray', 'log-distance', 'hata', 'indoor'],
   MODS = ['bpsk', 'qpsk', 'fsk', 'lora', 'ble', 'wifi'];
 const WALL_T: Table = { type: 'enum:' + Object.keys(WALLS).join('|'), loss: 'nonneg', count: 'int:1:50' };
@@ -358,7 +352,7 @@ const TABLE: Table = {
   sweep: { $obj: { from: 'pos!', to: 'pos!', points: `int:2:${MAX_POINTS}`, scale: 'enum:log|lin' } },
   snrSweep: { $obj: { from: 'fin!', to: 'fin!', points: `int:2:${MAX_POINTS}` } },
 };
-/** the generic walk of a table: codes format, value, enum, size, unknown-field (a warning); the same messages as tools/rf.py */
+/** the generic walk of a table: codes format, value, enum, size, unknown-field (a warning); the same messages as the former Python twin (tests/fixtures/parity/rf.json) */
 function checkNum(kind: string, v: unknown) {
   if (kind === 'bool') return typeof v === 'boolean';
   if (kind.startsWith('int:')) {

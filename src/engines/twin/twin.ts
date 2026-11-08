@@ -6,8 +6,8 @@
    and airtime — the minimal formulas of rf@1, duplicated so the worker needs one file), brown-out resets below a voltage, and
    hidden FAULTS (as the circuit bench): sensor stuck / drifting, an aged battery, a detached antenna, a misconfigured wake period,
    a brown-out level set too high. Deterministic for a seed; bounded (sim.maxEvents → code 'budget'). Codes and numbers only.
-   The device (noema.twin/v1): docs/INTERACTIVE_ENGINES.md §5, src/contracts/schemas/noema.twin.v1.schema.json. Python twin of check(),
-   checkFaults(), checkSpec(): tools/twin.py. It is a plugin of the engine library: one line of src/engines/plugins.ts. Tests: node tests/twin.js. */
+   The device (noema.twin/v1): docs/INTERACTIVE_ENGINES.md §5, src/contracts/schemas/noema.twin.v1.schema.json. check(),
+   checkFaults(), checkSpec(): the golden outputs of the former Python twin (tests/fixtures/parity/twin.json). It is a plugin of the engine library: one line of src/engines/plugins.ts. Tests: node tests/twin.js. */
 import NoemaSimKit from '../kernel/simkit.ts';
 import type { Compiled, CreateOptions, EngineInstance, Inputs, Outputs, Problem, Spec, StepResult } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes and numbers leave this engine
@@ -21,11 +21,6 @@ interface Stream {
   (): number;
   readonly normal?: (mu: number, sd: number) => number;
   readonly poisson?: (mean: number) => number;
-}
-/** the simulation kernel (kernel/simkit.js) as this engine calls it */
-interface KitUse {
-  erfc(x: number): number;
-  stream(seed: number, name: string): Stream;
 }
 /** a kind of the device table: a string kind ('pos!', 'enum:a|b', …), an object of fields, or a list of objects (max items) */
 type Kd = string | KdNode;
@@ -381,9 +376,8 @@ const boxMuller = (r: Stream): number => {
 };
 /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.ts): its MRG32k3a streams, one per purpose (radio, each sensor, the network);
       normals by inversion (AS241), Poisson by inversion. FALLBACK without the kernel (marked): mulberry32 + Box–Muller */
-function kit(): KitUse | null {
-  // kernel/simkit.js is typed at its edge as an opaque KernelApi (kernel/simkit.d.ts): KitUse is the part of it this engine calls
-  return NoemaSimKit as unknown as KitUse;
+function kit(): typeof NoemaSimKit | null {
+  return NoemaSimKit;
 }
 const streamOf = (name: string, seed: number): Stream => {
   const K = kit();
@@ -458,7 +452,7 @@ const interp = (c: Curve, x: number): number => {
   return c[c.length - 1]![1];
 };
 
-// ---- the device format: a table the checker walks (the same table in tools/twin.py) ----
+// ---- the device format: a table the checker walks (the same table as the former Python twin (tests/fixtures/parity/twin.json)) ----
 const TECHS = ['lora', 'ble', 'fsk'];
 const TABLE: Table = {
   format: 'const',

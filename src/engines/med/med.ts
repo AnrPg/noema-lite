@@ -8,7 +8,7 @@
    Every formula names its source beside it (paper/guideline + year); the chapter lists them all. Pure, deterministic, bounded.
    clinic@1 (src/engines/clinic/clinic.ts) reuses these calculators through NoemaLibMed.calc. */
 import NoemaLibCore from '../kernel/core.ts';
-import type { CheckedOutput, Env, Obj, Scene, StepContext, Table } from '../kernel/core.ts';
+import type { CheckedOutput, Env, Rec, SceneData, StepCtx, Table } from '../kernel/core.ts';
 import type { Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */
 /** a function of the table SIG: its inputs ("!" = required), scalar outputs, series and whether it draws a scene */
@@ -275,6 +275,8 @@ type InName =
   | 'zc';
 /** the inputs of a calculator in canonical units (NaN = absent) */
 type X = Readonly<Record<InName, number>>;
+/** the vital signs NEWS2 scores (calc.news2; clinic@1 calls it) */
+export type News2In = Pick<X, 'rr' | 'spo2' | 'o2' | 'sbp' | 'hr' | 'cvpu' | 'temp' | 'scale2'>;
 /** the options of an item (each function reads its own; epi.km's times and events are required by its table) */
 interface Opts {
   readonly shape?: string;
@@ -319,7 +321,7 @@ type Cin = Record<string, (env: Env) => number | boolean>;
 interface ItemRun {
   readonly v: Num;
   readonly s: Record<string, number[]>;
-  readonly sc: Scene | null;
+  readonly sc: SceneData | null;
   readonly codes: string[];
 }
 /** a spec whose model checkSpec passed */
@@ -508,7 +510,7 @@ const SIG: SigTable = {
   flags: ['range', 'validity', 'unsafe', 'units', 'impossible', 'deprecated', 'verify', 'incomplete'],
 };
 const FLAGS = SIG.flags;
-const isObj = (v: unknown): v is Obj => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const fin = Number.isFinite as (v: unknown) => v is number;
 const sigIn = (fn: string) =>
   SIG.fns[fn]!.in.split(' ')
@@ -516,7 +518,7 @@ const sigIn = (fn: string) =>
     .map(t => ({ name: t.replace('!', '') as InName, req: t.endsWith('!') }));
 const words = (s: string) => s.split(' ').filter(Boolean);
 
-/* ---------- the model checker (the same codes, paths and messages as tools/lib_med.py) ---------- */
+/* ---------- the model checker (the same codes, paths and messages as the former Python twin (tests/fixtures/parity/lib_med.json)) ---------- */
 const ITEM = { id: 'id!', fn: 'expr!', in: { $map: 'numx', max: 24 }, units: { $map: 'expr', max: 12 }, key: 'key' };
 const TABLE: Table = { items: { $req: true, $list: { $obj: ITEM }, min: 1, max: 48 } };
 function checkSpec(spec: unknown): Problem[] {
@@ -530,12 +532,12 @@ function checkSpec(spec: unknown): Problem[] {
   const items: unknown[] = Array.isArray(m.items) ? m.items : [];
   const strip = (it: unknown) => {
     if (!isObj(it)) return it;
-    const o: Obj = {};
+    const o: Record<string, unknown> = {};
     for (const k of Object.keys(it)) if (k !== 'opts') o[k] = it[k];
     return o;
   };
   C.walk({ ...m, items: Array.isArray(m.items) ? (m.items as unknown[]).map(strip) : m.items }, TABLE, 'model', E, W);
-  const byId: Record<string, Obj> = {};
+  const byId: Record<string, Rec> = {};
   items.forEach((it, i) => {
     const p = `model.items[${i}]`;
     if (!isObj(it)) return;
@@ -608,7 +610,7 @@ function checkSpec(spec: unknown): Problem[] {
 function exprs(spec: Spec | null | undefined) {
   const out: Array<[string, string, string[]]> = [],
     items: unknown[] =
-      isObj(spec && spec.model) && Array.isArray((spec!.model as Obj).items) ? ((spec!.model as Obj).items as unknown[]) : [];
+      isObj(spec && spec.model) && Array.isArray((spec!.model as Rec).items) ? ((spec!.model as Rec).items as unknown[]) : [];
   items.forEach((it, i) => {
     if (isObj(it) && isObj(it.in))
       for (const [k, v] of Object.entries(it.in)) if (typeof v === 'string') out.push([v, `model.items[${i}].in.${k}`, []]);
@@ -618,7 +620,7 @@ function exprs(spec: Spec | null | undefined) {
 function keys(spec: Spec | null | undefined) {
   const out: Array<[string, string]> = [],
     items: unknown[] =
-      isObj(spec && spec.model) && Array.isArray((spec!.model as Obj).items) ? ((spec!.model as Obj).items as unknown[]) : [];
+      isObj(spec && spec.model) && Array.isArray((spec!.model as Rec).items) ? ((spec!.model as Rec).items as unknown[]) : [];
   items.forEach((it, i) => {
     if (isObj(it) && typeof it.key === 'string') out.push([it.key, `model.items[${i}].key`]);
   });
@@ -765,61 +767,16 @@ function plausible(name: string, v: number, code: Code) {
 /* ---------- small numerics ---------- */
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const lg = Math.log10;
-function erf(x: number) {
-  const s = Math.sign(x);
-  x = Math.abs(x);
-  const t = 1 / (1 + 0.3275911 * x);
-  const y = 1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
-  return s * y;
-}
 /* Φ, Φ⁻¹ and roots by the simulation kernel (NoemaSimKit, docs/library/simkit.md): Φ by the incomplete gamma, Φ⁻¹ by Wichura's AS241
-     (about 16 digits), roots by Brent 1973; FALLBACK without the kernel (marked): A&S 7.1.26 (|error| < 1.5e-7), Acklam, bisection */
-const Phi = (x: number) => {
-  const K = C.kit();
-  return K ? K.normCdf(x) : 0.5 * (1 + erf(x / Math.SQRT2));
-};
-const PhiInv = (p: number) => {
-  const K = C.kit();
-  return K ? K.normInv(p) : PhiInvAcklam(p);
-};
-function PhiInvAcklam(p: number) {
-  // Acklam's rational approximation (rel. error < 1.15e-9)
-  if (!(p > 0 && p < 1)) return p === 0 ? -Infinity : p === 1 ? Infinity : NaN;
-  const a = [-3.969683028665376e1, 2.209460984245205e2, -2.759285104469687e2, 1.38357751867269e2, -3.066479806614716e1, 2.506628277459239];
-  const b = [-5.447609879822406e1, 1.615858368580409e2, -1.556989798598866e2, 6.680131188771972e1, -1.328068155288572e1];
-  const c = [-7.784894002430293e-3, -3.223964580411365e-1, -2.400758277161838, -2.549732539343734, 4.374664141464968, 2.938163982698783];
-  const d = [7.784695709041462e-3, 3.224671290700398e-1, 2.445134137142996, 3.754408661907416];
-  const pl = 0.02425;
-  if (p < pl) {
-    const q = Math.sqrt(-2 * Math.log(p));
-    return (
-      (((((c[0]! * q + c[1]!) * q + c[2]!) * q + c[3]!) * q + c[4]!) * q + c[5]!) /
-      ((((d[0]! * q + d[1]!) * q + d[2]!) * q + d[3]!) * q + 1)
-    );
-  }
-  if (p > 1 - pl) {
-    const q = Math.sqrt(-2 * Math.log(1 - p));
-    return (
-      -(((((c[0]! * q + c[1]!) * q + c[2]!) * q + c[3]!) * q + c[4]!) * q + c[5]!) /
-      ((((d[0]! * q + d[1]!) * q + d[2]!) * q + d[3]!) * q + 1)
-    );
-  }
-  const q = p - 0.5,
-    r = q * q;
-  return (
-    ((((((a[0]! * r + a[1]!) * r + a[2]!) * r + a[3]!) * r + a[4]!) * r + a[5]!) * q) /
-    (((((b[0]! * r + b[1]!) * r + b[2]!) * r + b[3]!) * r + b[4]!) * r + 1)
-  );
-}
+     (about 16 digits), roots by Brent 1973 (bisection when the kernel's root is not finite or the signs do not change) */
+const Phi = (x: number) => C.kit().normCdf(x);
+const PhiInv = (p: number) => C.kit().normInv(p);
 function bisect(f: (x: number) => number, a: number, b: number, n?: number) {
-  const K = C.kit();
-  if (K) {
-    const fa = f(a),
-      fb = f(b);
-    if (fa * fb <= 0) {
-      const r = K.brent(f, a, b, 1e-13 * Math.max(1, Math.abs(a), Math.abs(b)), fa, fb);
-      if (Number.isFinite(r)) return r;
-    }
+  const fa = f(a),
+    fb = f(b);
+  if (fa * fb <= 0) {
+    const r = C.kit().brent(f, a, b, 1e-13 * Math.max(1, Math.abs(a), Math.abs(b)), fa, fb);
+    if (Number.isFinite(r)) return r;
   }
   return bisectOwn(f, a, b, n);
 }
@@ -855,7 +812,7 @@ interface Calc {
   Phi: (x: number) => number;
   PhiInv: (p: number) => number;
   logit: (p: number) => number;
-  news2: (x: X) => { score: number; band: number; red: number };
+  news2: (x: News2In) => { score: number; band: number; red: number };
   qsofa: (x: X) => { score: number; positive: number };
   pkConc: (t: number, d: Dosing) => number;
 }
@@ -2159,7 +2116,7 @@ function b(v: number) {
 
 /* ---------- scenes ---------- */
 /** the scene of an item: its numbers (and its PV loop), its inputs → the drawing */
-const SCENE: Readonly<Record<string, (r: Res, x: X) => Scene | null>> = {
+const SCENE: Readonly<Record<string, (r: Res, x: X) => SceneData | null>> = {
   'cardio.pvloop': r => {
     const L = r.$loop;
     if (!L) return null;
@@ -2306,7 +2263,7 @@ function runItem(it: Item, env: Env, cin: Cin): ItemRun {
     s: Record<string, number[]> = {};
   for (const k of words(S.out)) v[k] = fin(res[k]) ? res[k] : NaN;
   for (const k of words(S.series)) s[k] = res.$s && Array.isArray(res.$s[k]) ? C.thin(res.$s[k], C.MAX_POINTS) : [];
-  let sc: Scene | null = null;
+  let sc: SceneData | null = null;
   if (S.scene && !bad && SCENE[it.fn]) {
     try {
       sc = SCENE[it.fn]!({ ...res, $loop: res.$loop }, x);
@@ -2320,7 +2277,7 @@ function runItem(it: Item, env: Env, cin: Cin): ItemRun {
 }
 function prepare(spec: Spec | null | undefined): Cin[] {
   const items: unknown[] =
-    isObj(spec && spec.model) && Array.isArray((spec!.model as Obj).items) ? ((spec!.model as Obj).items as unknown[]) : [];
+    isObj(spec && spec.model) && Array.isArray((spec!.model as Rec).items) ? ((spec!.model as Rec).items as unknown[]) : [];
   return items.map(it => {
     const cin: Cin = {};
     if (isObj(it) && isObj(it.in)) for (const [k, v] of Object.entries(it.in)) cin[k] = C.cx(v);
@@ -2432,7 +2389,7 @@ interface MedState {
   readonly pk: Record<string, PkState>;
 }
 const stepper = {
-  init(model: unknown, inputs: Env, sc: StepContext): MedState {
+  init(model: unknown, inputs: Env, sc: StepCtx): MedState {
     const items: readonly Item[] = isObj(model) && Array.isArray(model.items) ? (model.items as Item[]) : [],
       cins = (sc.prepared as Cin[] | null) || prepare(sc.spec),
       st: MedState = { t: sc.t0 || 0, t0: sc.t0 || 0, pk: {} };
@@ -2450,7 +2407,7 @@ const stepper = {
     });
     return st;
   },
-  step(st: MedState, inputs: Env, t: number, dt: number, sc: StepContext) {
+  step(st: MedState, inputs: Env, t: number, dt: number, sc: StepCtx) {
     const items = (sc.spec as MedSpec).model.items,
       cins = (sc.prepared as Cin[] | null) || prepare(sc.spec),
       env = inputs,
@@ -2494,61 +2451,35 @@ const stepper = {
         const m = Math.min(20000, Math.max(1, Math.ceil((span * rate) / 0.05))),
           h = span / m,
           K = C.kit();
-        if (K) {
-          // the kernel's RK4 (NoemaSimKit.integrate, fixed step h); the AUC is one more state, c' = conc: exact for the scheme
-          const na = a.length,
-            yy = new Array<number>(na),
-            grid: number[] = [];
-          for (let j = 1; j <= m; j++) grid.push(j === m ? cuts[s + 1]! : cuts[s]! + j * h);
-          const R = K.integrate({
-            f: (tt, y, dy) => {
-              for (let q = 0; q < na; q++) yy[q] = y[q]!;
-              const d = f(yy, tt);
-              for (let q = 0; q < na; q++) dy[q] = d[q]!;
-              dy[na] = pkConcOf(it.fn, x, yy);
-            },
-            y0: [...a, 0],
-            t0: cuts[s]!,
-            tEnd: cuts[s + 1]!,
-            method: 'rk4',
-            dt: h,
-            maxSteps: m + 2,
-            samples: grid,
-            onSample: (tt, y) => {
-              const c2 = pkConcOf(it.fn, x, Array.from(y).slice(0, na));
-              cmax = Math.max(cmax, c2);
-              cmin = Math.min(cmin, c2);
-            },
-          });
-          for (let q = 0; q < na; q++) a[q] = Math.max(0, R.y[q]!);
-          auc += R.y[na]!;
-          c = pkConcOf(it.fn, x, a);
-          if (R.stop !== 'end') fail = fail || 'nan';
-          continue;
-        }
-        for (let j = 0; j < m; j++) {
-          // FALLBACK without the kernel: the classical RK4 here
-          const tt = cuts[s]! + j * h,
-            k1 = f(a, tt),
-            k2 = f(
-              a.map((v, q) => v + (h / 2) * k1[q]!),
-              tt + h / 2,
-            ),
-            k3 = f(
-              a.map((v, q) => v + (h / 2) * k2[q]!),
-              tt + h / 2,
-            ),
-            k4 = f(
-              a.map((v, q) => v + h * k3[q]!),
-              tt + h,
-            );
-          for (let q = 0; q < a.length; q++) a[q] = Math.max(0, a[q]! + (h / 6) * (k1[q]! + 2 * k2[q]! + 2 * k3[q]! + k4[q]!));
-          const c2 = pkConcOf(it.fn, x, a);
-          auc += (h * (c + c2)) / 2;
-          c = c2;
-          cmax = Math.max(cmax, c);
-          cmin = Math.min(cmin, c);
-        }
+        // the kernel's RK4 (NoemaSimKit.integrate, fixed step h); the AUC is one more state, c' = conc: exact for the scheme
+        const na = a.length,
+          yy = new Array<number>(na),
+          grid: number[] = [];
+        for (let j = 1; j <= m; j++) grid.push(j === m ? cuts[s + 1]! : cuts[s]! + j * h);
+        const R = K.integrate({
+          f: (tt, y, dy) => {
+            for (let q = 0; q < na; q++) yy[q] = y[q]!;
+            const d = f(yy, tt);
+            for (let q = 0; q < na; q++) dy[q] = d[q]!;
+            dy[na] = pkConcOf(it.fn, x, yy);
+          },
+          y0: [...a, 0],
+          t0: cuts[s]!,
+          tEnd: cuts[s + 1]!,
+          method: 'rk4',
+          dt: h,
+          maxSteps: m + 2,
+          samples: grid,
+          onSample: (tt, y) => {
+            const c2 = pkConcOf(it.fn, x, Array.from(y).slice(0, na));
+            cmax = Math.max(cmax, c2);
+            cmin = Math.min(cmin, c2);
+          },
+        });
+        for (let q = 0; q < na; q++) a[q] = Math.max(0, R.y[q]!);
+        auc += R.y[na]!;
+        c = pkConcOf(it.fn, x, a);
+        if (R.stop !== 'end') fail = fail || 'nan';
       }
       if (!a.every(fin)) fail = fail || 'nan';
       ns.pk[it.id] = { a, cmax, cmin, auc, c };

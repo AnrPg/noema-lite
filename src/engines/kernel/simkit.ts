@@ -330,32 +330,38 @@ export type PartStep = {
   readonly events?: unknown;
   readonly fail?: string | undefined;
 };
-export interface StepperDef<S = unknown> {
+/** a part as an engine defines it: S its state, C the context its caller passes (makeEngine's StepCtx; nothing in a bare cosim) */
+export interface StepperDef<S = unknown, C = unknown> {
   readonly id?: unknown;
-  readonly init?: ((model: unknown, inputs: Inputs, ctx: unknown) => S) | undefined;
-  readonly step?: ((state: S, inputs: Inputs, t: number, dt: number, ctx: unknown) => PartStep | null | undefined) | undefined;
+  readonly init?: ((model: unknown, inputs: Inputs, ctx: C) => S) | undefined;
+  readonly step?: ((state: S, inputs: Inputs, t: number, dt: number, ctx: C) => PartStep | null | undefined) | undefined;
   readonly snapshot?: ((state: S) => unknown) | null | undefined;
   readonly restore?: ((snap: unknown) => S) | null | undefined;
   readonly output?: ((state: S) => Rec | null | undefined) | undefined;
-  readonly onEvent?: ((state: S, ev: SimEvent, t: number) => unknown) | undefined;
+  /** an event of another part: a SimEvent in cosim, an event record of the orchestrator under makeEngine */
+  readonly onEvent?: ((state: S, ev: unknown, t: number) => unknown) | undefined;
 }
-/** a checked part (stepper()) */
-export interface Part {
+/** a part of cosim (stepper()'s, or a plain {id, init?, step, …}); C the context its caller passes */
+export interface Part<C = unknown> {
   readonly id: string;
   readonly kind: 'stepper';
-  init?(model: unknown, inputs: Inputs, ctx: unknown): unknown;
+  init?(model: unknown, inputs: Inputs, ctx: C): unknown;
   step(
     state: unknown,
     inputs: Inputs | null,
     t: number,
     dt: number,
-    ctx: unknown,
+    ctx: C,
   ): { state: unknown; out: Rec; dt: number; events: SimEvent[]; fail?: string | undefined };
   readonly snapshot: ((state: unknown) => unknown) | null;
   readonly restore: ((snap: unknown) => unknown) | null;
   readonly output: ((state: unknown) => Rec | null | undefined) | null;
-  readonly onEvent: ((state: unknown, ev: SimEvent, t: number) => unknown) | null;
+  readonly onEvent: ((state: unknown, ev: unknown, t: number) => unknown) | null;
   readonly inputs?: ((outs: Readonly<Record<string, Rec>>, t: number) => Inputs | null | undefined) | undefined;
+}
+/** a part checked by stepper(): it always has init, so it is also the stepper makeEngine takes (CoreStepper) */
+export interface SteppedPart<C = unknown> extends Part<C> {
+  init(model: unknown, inputs: Inputs, ctx: C): unknown;
 }
 export interface OdeStepperDef {
   readonly id?: unknown;
@@ -1579,7 +1585,7 @@ function calendar() {
     }
   }
   return {
-    schedule(t: number, kind: unknown, data: unknown, prio: number) {
+    schedule(t: number, kind: unknown, data: unknown, prio?: number) {
       if (!(typeof t === 'number') || Number.isNaN(t)) return -1;
       const e: CalEntry = { t, prio: prio || 0, seq: seq++, kind, data };
       e.id = e.seq;
@@ -4290,7 +4296,7 @@ function daeThetaInit(cfg: DaeThetaConfig | null) {
     stop,
     codes: C.list,
   });
-  const fail0 = (r: DaeThetaResult) => ({ ok: false, result: r, advance: () => r, t: r.t, y: r.y });
+  const fail0 = (r: DaeThetaResult) => ({ ok: false as const, result: r, advance: () => r, t: r.t, y: r.y });
   const done = (t: number, y: Nums | null, stop: string) => fail0(done0(t, y, stop));
   if (!cfg || typeof cfg.f !== 'function' || !n || !(cfg.dt! > 0) || (cfg.tEnd != null && !(cfg.tEnd >= t0))) {
     C.code('bad-config');
@@ -4561,7 +4567,7 @@ function daeThetaInit(cfg: DaeThetaConfig | null) {
     }
   };
   return {
-    ok: true,
+    ok: true as const,
     advance,
     get t() {
       return t;
@@ -5289,7 +5295,7 @@ function clone(v: unknown, depth?: number): unknown {
       The wrapper never throws: a failing step returns {state, out: {}, dt: 0, events: [], fail: 'part-failed'}; events are normalised
       to event records with source = id; snapshot/restore default to clone (so a state must be plain data: no closures, or give your
       own snapshot/restore, or set snapshot: null to say the part cannot be iterated). */
-function stepper<S>(def: StepperDef<S> | null): Part | null {
+function stepper<S, C = unknown>(def: StepperDef<S, C> | null): SteppedPart<C> | null {
   if (!def || typeof def.step !== 'function') return null;
   const id = def.id == null ? 'part' : textOf(def.id);
   const norm = (evs: unknown, t: number) =>
@@ -5301,17 +5307,17 @@ function stepper<S>(def: StepperDef<S> | null): Part | null {
           : event(fin(e.t) ? e.t : t, id, e.kind != null ? e.kind : e.name, e.data, e.prio),
       )
       .map(e => (e.to ? e : Array.isArray(e.to) ? e : e));
-  const S: Part = {
+  const S: SteppedPart<C> = {
     id,
     kind: 'stepper',
-    init(model: unknown, inputs: Inputs, ctx: unknown) {
+    init(model: unknown, inputs: Inputs, ctx: C) {
       try {
         return def.init ? def.init(model, inputs, ctx) : {};
       } catch {
         return null;
       }
     },
-    step(state: unknown, inputs: Inputs | null, t: number, dt: number, ctx: unknown) {
+    step(state: unknown, inputs: Inputs | null, t: number, dt: number, ctx: C) {
       let r;
       try {
         r = def.step!(state as S, inputs || {}, t, dt, ctx);
@@ -5358,7 +5364,7 @@ function stepper<S>(def: StepperDef<S> | null): Part | null {
         }
       : null,
     onEvent: def.onEvent
-      ? (state: unknown, ev: SimEvent, t: number) => {
+      ? (state: unknown, ev: unknown, t: number) => {
           try {
             const r = def.onEvent!(state as S, ev, t);
             return r === undefined ? state : r;
@@ -5742,5 +5748,9 @@ const API = Object.freeze({
   wrapRun,
   cosim,
 });
+/** the discrete-event executive sim(o) gives */
+export type Sim = ReturnType<typeof sim>;
+/** a confidence interval of ci() */
+export type Ci = ReturnType<typeof ci>;
 export default API;
 /* i18n-ignore-end */

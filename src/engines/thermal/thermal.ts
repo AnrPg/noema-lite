@@ -4,7 +4,7 @@
    thermostats with hysteresis. Steady state (Newton when radiation is present), transients (trapezoidal, backward Euler on the
    first step, on source edges and on thermostat switching; or backward Euler throughout), linearised time constants.
    Pure JS, deterministic, no DOM, no text for the learner: codes and numbers only, the activity host words them.
-   Format noema.thermal/v1: src/contracts/schemas/noema.thermal.v1.schema.json. Python twin of check / checkSpec: tools/thermal.py.
+   Format noema.thermal/v1: src/contracts/schemas/noema.thermal.v1.schema.json. check / checkSpec: the golden outputs of the former Python twin (tests/fixtures/parity/thermal.json).
    A plugin of the engine library (one line of src/engines/plugins.ts). Also used by tests/thermal.js (node). */
 import NoemaSimKit from '../kernel/simkit.ts';
 import type { Compiled, EngineInstance, Inputs, Outputs, Problem, Spec, StepResult } from '../types.ts';
@@ -90,27 +90,6 @@ interface Prepared {
   readonly $tran?: { readonly tEnd: number; readonly dt: number } | null;
   readonly $at?: Readonly<Record<string, number>>;
 }
-/** the θ-method DAE solver of the simulation kernel (kernel/simkit.js daeThetaInit), as this engine calls it */
-interface DaeResult {
-  readonly t: number;
-  readonly stop: string;
-}
-interface KitUse {
-  daeThetaInit(cfg: {
-    readonly M: Float64Array;
-    readonly f: (t: number, y: Float64Array, out: Float64Array) => void;
-    readonly jac: (t: number, y: Float64Array, J: Float64Array) => void;
-    readonly linear: boolean;
-    readonly beforeStep: (ta: number, tb: number, y: Float64Array) => { readonly theta: number };
-    readonly y0: Float64Array;
-    readonly t0: number;
-    readonly tEnd: number;
-    readonly dt: number;
-    readonly newtonTol: number;
-    readonly maxSteps: number;
-    readonly onStep: (t: number, y: Float64Array) => void;
-  }): { readonly ok: boolean; readonly result: DaeResult; advance(t: number): DaeResult };
-}
 const ID = 'thermal@1',
   FORMAT = 'noema.thermal/v1';
 const MAX_NODES = 50,
@@ -131,9 +110,8 @@ const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFin
 /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.ts): a transient and the stepper run on its θ-method DAE solver
       (daeThetaInit: Newton with LU, or one factored solve for a linear network; the massless nodes algebraic rows; θ and the sources'
       mean power chosen per step); FALLBACK without the kernel (marked): the same θ-step here (stepCore) */
-function kit(): KitUse | null {
-  // kernel/simkit.js is typed at its edge as an opaque KernelApi (kernel/simkit.d.ts): KitUse is the part of it this engine calls
-  return NoemaSimKit as unknown as KitUse;
+function kit(): typeof NoemaSimKit | null {
+  return NoemaSimKit;
 }
 function fail(code: string, extra?: Rec) {
   const e = new Error('thermal: ' + code) as Error & { code: string };
@@ -246,7 +224,7 @@ function wave(P: PowerSpec): Wave {
   };
 }
 
-// ---- check(network) → [{code, path, msg, level}] (twin: tools/thermal.py check) ----
+// ---- check(network) → [{code, path, msg, level}] (the golden outputs of the former twin's check: tests/fixtures/parity/thermal.json) ----
 const TOP_KEYS = ['format', 'ambient', 'nodes', 'links', 'sources', 'thermostats', 'meta'];
 const NODE_KEYS = ['id', 'C', 'T0', 'fixed', 'label', 'note'];
 const LINK_KEYS = ['id', 'a', 'b', 'R', 'G', 'conv', 'rad', 'label', 'note'];
@@ -948,7 +926,7 @@ function makeSim(ck: Compiled_) {
         each source's exact mean over the step (sp, out) and θ is 1 (backward Euler) on the first step, on a source edge and on a
         thermostat switch, ½ (trapezoidal) otherwise — what stepCore does. onStep(i, x) after each. */
   function kernelRun(
-    KS: KitUse,
+    KS: typeof NoemaSimKit,
     x0: Float64Array,
     gate: boolean[],
     sp: { [i: number]: number },

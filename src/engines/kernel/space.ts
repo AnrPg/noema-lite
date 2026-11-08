@@ -77,6 +77,10 @@ export interface Bounds {
   readonly bottom?: Side | null | undefined;
   readonly top?: Side | null | undefined;
 }
+/** the name of a side of a grid */
+export type SideName = keyof Bounds;
+/** a flux limiter φ(θ) */
+export type Limiter = (th: number) => number;
 /** the parameters of a scheme's amplification factor: the diffusion number r and the Courant number C */
 export interface AmpParams {
   readonly r?: number | undefined;
@@ -120,7 +124,7 @@ const MAX_N = 200,
   MAX_N1 = 2000,
   MAX_CELLS = 40000,
   GHOST = 2;
-const SIDES = ['left', 'right', 'bottom', 'top'];
+const SIDES: SideName[] = ['left', 'right', 'bottom', 'top'];
 const BC_TYPES = ['dirichlet', 'neumann', 'robin', 'periodic'];
 const RAMP = ['muted', 'info', 'ok', 'warn', 'bad']; // the role ramp of a heat map, low → high (roles, never colours)
 const fin = Number.isFinite as (v: unknown) => v is number;
@@ -191,13 +195,13 @@ function interior(G: Grid, u: Nums) {
   return r;
 }
 /** index of the node nearest to (x, y) → [i, j] (clamped) */
-function nearest(G: Grid, x: number, y: number) {
+function nearest(G: Grid, x: number, y: number): [number, number] {
   const i = Math.max(0, Math.min(G.nx - 1, Math.round((x - G.x0) / G.dx)));
   const j = G.dim === 2 ? Math.max(0, Math.min(G.ny - 1, Math.round((y - G.y0) / G.dy))) : 0;
   return [i, j];
 }
 /** bilinear interpolation of a padded field at (x, y) (clamped to the domain) */
-function sample(G: Grid, u: Nums, x: number, y: number) {
+function sample(G: Grid, u: ArrayLike<number>, x: number, y: number) {
   const fx = Math.max(0, Math.min(G.nx - 1, (x - G.x0) / G.dx)),
     i = Math.min(G.nx - 2, Math.floor(fx)),
     a = fx - i;

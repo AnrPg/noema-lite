@@ -8,11 +8,12 @@
    Geom. 18:305) as vendored robust-predicates@3.0.3 (public domain, engine/vendor/robust-predicates@3.0.3, ~13 kB), imported
    verbatim from ./vendor/robust-predicates.cjs; tolerant decisions use a scale S of the free points (research §4.3). Every object is
    rebuilt from the free points along the DAG on every run (no drift). Pure TypeScript, no DOM, no words: numbers, codes, keys and the model's own ids (`s`).
-   Python twin of checkSpec / exprs / keys: tools/lib_geom.py. Tests: node tests/lib_geom.js, node tests/enginelib.js. */
+   checkSpec / exprs / keys: the golden outputs of the former Python twin (tests/fixtures/parity/enginelib.json). Tests: node tests/lib_geom.js, node tests/enginelib.js. */
 import NoemaLibCore from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
 import RP from './vendor/robust-predicates.cjs';
 import type { NumFn, Rec, SceneData, Table, View } from '../kernel/core.ts';
+import type { FuncTable } from '../kernel/simexpr.ts';
 import type { Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes, keys and numbers leave this engine
 const C = NoemaLibCore;
@@ -197,7 +198,8 @@ type Out = Rec;
 
 const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
-const FN = (n: string): Fn => (NoemaExpr.FUNCS[n] ? NoemaExpr.FUNCS[n].fn : (Math as unknown as Readonly<Record<string, Fn>>)[n]!);
+const FX: FuncTable = NoemaExpr.FUNCS;
+const FN = (n: string): Fn => (FX[n] ? FX[n].fn : (Math as unknown as Readonly<Record<string, Fn>>)[n]!);
 const sin = FN('sin'),
   cos = FN('cos'),
   atan2 = FN('atan2'),
@@ -225,7 +227,7 @@ const orient = (ax: number, ay: number, bx: number, by: number, cx: number, cy: 
 const incircle = (ax: number, ay: number, bx: number, by: number, cx: number, cy: number, dx: number, dy: number) =>
   RP.incircle(ax, ay, bx, by, cx, cy, dx, dy);
 
-/* ---------- the model format (the same tables in tools/lib_geom.py) ---------- */
+/* ---------- the model format (the same tables as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
 // static types: P point · L line · S segment · R ray · C circle · K conic · G polygon · U curve · T set of segments
 // prettier-ignore
 const TYPE_NAMES: Readonly<Record<string, string>> = { P: 'a point', L: 'a line', S: 'a segment', R: 'a ray', C: 'a circle', K: 'a conic', G: 'a polygon', U: 'a curve', T: 'a set' };
@@ -345,7 +347,7 @@ function sigOk(alts: Sig, types: ReadonlyArray<string | null>) {
   });
 }
 
-/** checkSpec(spec) → [{code, path, msg, level}] (the same as tools/lib_geom.py check_spec) */
+/** checkSpec(spec) → [{code, path, msg, level}] (the same as the former Python twin check_spec (tests/fixtures/parity/enginelib.json)) */
 function checkSpec(spec: unknown): Problem[] {
   const { P, E, W } = C.problems();
   const m = isObj(spec) ? spec.model : undefined;
@@ -498,8 +500,8 @@ function checkSpec(spec: unknown): Problem[] {
     (o, at) => {
       for (const k of Object.keys(o)) if (!OUT_FIELDS.includes(k)) W('unknown-field', at + '.' + k, 'ignored');
       const list = o.kind === 'scalar' ? SCALAR_OF : o.kind === 'series' ? SERIES_OF : ['drawing'];
-      if (!list.includes(o.of as string)) {
-        E('output', at + '.of', `${o.kind as string} outputs of ${ID}: ${list.join(', ')}`);
+      if (!list.includes(o.of)) {
+        E('output', at + '.of', `${o.kind} outputs of ${ID}: ${list.join(', ')}`);
         return;
       }
       if (o.kind === 'scene') {
@@ -525,11 +527,11 @@ function checkSpec(spec: unknown): Problem[] {
           return;
         }
         sig = SIGS[o.test as string];
-        what = o.test;
+        what = o.test as string;
       } else if (o.test !== undefined) W('unknown-field', at + '.test', 'ignored');
       if (o.of === 'sweep' || (o.of === 'flag' && o.at === undefined)) return;
       if (o.of === 'flag') sig = [['PLSRCKGUT']];
-      else if (!sig) sig = SIGS[o.of as string];
+      else if (!sig) sig = SIGS[o.of];
       if (!Array.isArray(o.at)) {
         E('value', at + '.at', o.at === undefined ? 'missing (the objects it is about)' : 'not an array');
         return;
@@ -545,7 +547,7 @@ function checkSpec(spec: unknown): Problem[] {
           bad = true;
         } else ts.push(types.get(r) as string | null);
       });
-      if (!bad && !sigOk(sig!, ts)) E('type', at + '.at', `${what as string} needs ${sigText(sig!)}`);
+      if (!bad && !sigOk(sig!, ts)) E('type', at + '.at', `${what} needs ${sigText(sig!)}`);
       if (o.of === 'always' && ((o.samples as number) || 20) * (isObj(m) && Array.isArray(m.objects) ? m.objects.length : 0) > BUDGET)
         E('budget', at + '.samples', `samples × objects is more than ${BUDGET}`);
     },

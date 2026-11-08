@@ -25,9 +25,9 @@ import type { Problem, Spec } from '../types.ts';
 const C = NoemaLibCore;
 const ID = 'ode@1';
 const FX = NoemaExpr.FUNCS;
-const exp = FX.exp!.fn,
-  log = FX.log!.fn,
-  sin = FX.sin!.fn;
+const exp = FX.exp.fn,
+  log = FX.log.fn,
+  sin = FX.sin.fn;
 const sqrt = Math.sqrt,
   abs = Math.abs,
   PI = 3.141592653589793;
@@ -1070,7 +1070,7 @@ const TEMPLATES: Readonly<Record<string, Template>> = {
   },
 };
 const TEMPLATE_NAMES = Object.keys(TEMPLATES);
-/** what the validators need to know of each template (the Python twin carries the same table) */
+/** what the validators need to know of each template (the former Python twin carried the same table: its golden outputs) */
 function templateMeta(): Record<string, TMeta> {
   const o: Record<string, TMeta> = {};
   for (const k of TEMPLATE_NAMES) {
@@ -1092,7 +1092,7 @@ function templateMeta(): Record<string, TMeta> {
 const TMETA = templateMeta();
 
 /* ======================================================================================================================
-     The model checker (the same table and messages as tools/lib_ode.py)
+     The model checker (the same table and messages as the former Python twin (tests/fixtures/parity/lib_ode.json))
      ====================================================================================================================== */
 const SOLVE: Table = {
   t0: 'numx',
@@ -1376,8 +1376,8 @@ function checkSpec(spec: unknown): Problem[] {
     ID,
     ['scalar', 'series', 'scene'],
     (o, at) => {
-      const of = o.of as string,
-        kd = o.kind as string;
+      const of = o.of,
+        kd = o.kind;
       const known = kd === 'series' ? SERIES : kd === 'scalar' ? SCALARS : SCENES;
       if (!known.includes(of)) {
         E('output', at + '.of', `${ID} computes as a ${kd}: ${known.join(', ')}`);
@@ -2344,8 +2344,8 @@ function rangeOf(xs: number[], ys: number[], box: number[] | null): View {
     view = [x0 - px, x1 + px, y0 - py, y1 + py];
   }
   if (box) for (let i = 0; i < 4; i++) if (fin(box[i])) view[i] = box[i]!;
-  if (!(view[1]! > view[0]!)) view[1] = view[0]! + 1;
-  if (!(view[3]! > view[2]!)) view[3] = view[2]! + 1;
+  if (!(view[1] > view[0])) view[1] = view[0] + 1;
+  if (!(view[3] > view[2])) view[3] = view[2] + 1;
   return view;
 }
 function phaseScene(M: Model, env: Env, ctx: Ctx, traj: Traj, eqs: Equilibrium[] | null): SceneData {

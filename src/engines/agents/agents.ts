@@ -26,7 +26,7 @@ import NoemaExpr from '../kernel/simexpr.ts';
 import NoemaSimKit from '../kernel/simkit.ts';
 import NoemaSpaceKit from '../kernel/space.ts';
 import NoemaLibLogic from '../logic/logic.ts';
-import type { CoreStepper, Emit, NumFn, Stats } from '../kernel/core.ts';
+import type { Emit, NumFn, Stats } from '../kernel/core.ts';
 import type { Codes, StepperDef } from '../kernel/simkit.ts';
 import type { Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes and numbers leave this module
@@ -361,10 +361,6 @@ interface NormStepIn {
   readonly facts?: Readonly<Record<string, readonly string[]>>;
   readonly acts?: Readonly<Record<string, readonly string[]>>;
 }
-interface Monitor {
-  step(st: NormStepIn): { readonly violations?: readonly NormRecord[]; readonly fulfilments?: readonly NormRecord[] };
-  result(): unknown;
-}
 /** a formula of the fallback's propositional logic */
 type Prop = { t: 'top' | 'bot' } | { t: 'atom'; n: string } | { t: 'not'; a: Prop } | { t: 'and' | 'or' | 'imp' | 'iff'; a: Prop; b: Prop };
 /** what a protocol gives */
@@ -383,9 +379,7 @@ type StepSt = { readonly bad: true } | { readonly bad?: undefined; spec: Rec; M:
 
 const C = NoemaLibCore,
   S = NoemaSpaceKit;
-const LG = NoemaLibLogic as unknown as {
-  readonly normMonitor?: (norms: readonly object[], opts: { readonly perAgent: boolean }) => Monitor;
-};
+const LG = NoemaLibLogic;
 
 const ID = 'agents@1';
 const MAX_AGENTS = 5000,
@@ -440,7 +434,7 @@ const TEMPLATES: Readonly<Record<string, Readonly<Record<string, number>>>> = {
   degroot: { N: 20, k: 2, p: 0.2, selfw: 1 },
 };
 
-/* ---------- the model checker (the same table and messages as tools/lib_agents.py) ---------- */
+/* ---------- the model checker (the same table and messages as the former Python twin (tests/fixtures/parity/lib_agents.json)) ---------- */
 const SPACE_T = {
   kind: 'enum:' + SPACES.join('|') + '!',
   w: 'numx',
@@ -911,12 +905,12 @@ function checkSpec(spec: unknown) {
       const of = o.of,
         kd = o.kind,
         known = kd === 'series' ? SERIES : kd === 'scalar' ? SCALARS : SCENES;
-      if (!known.includes(of as string)) {
-        E('output', at + '.of', `${ID} computes as a ${kd as string}: ${known.join(', ')}`);
+      if (!known.includes(of)) {
+        E('output', at + '.of', `${ID} computes as a ${kd}: ${known.join(', ')}`);
         return;
       }
       for (const [f, k] of Object.entries(OUT_FIELDS)) if (o[f] != null && !C.checkKind(k, o[f])) E('output', at + '.' + f, C.kindMsg(k)!);
-      if (['reporter', 'final', 'stat', 'replMean', 'replLo', 'replHi', 'replHalf', 'replSd', 'replValues'].includes(of as string))
+      if (['reporter', 'final', 'stat', 'replMean', 'replLo', 'replHi', 'replHalf', 'replSd', 'replValues'].includes(of))
         need(
           typeof o.reporter === 'string' && reps.includes(o.reporter),
           at,
@@ -924,7 +918,7 @@ function checkSpec(spec: unknown) {
           'a reporter of the model' + (reps.length ? ': ' + reps.join(', ') : ''),
         );
       if (of === 'stat') need(C.STATS.includes(o.stat as string), at, 'stat', 'one of ' + C.STATS.join(', '));
-      if (/^repl/.test(of as string)) need(isObj(m.replications), at, 'of', 'needs model.replications');
+      if (/^repl/.test(of)) need(isObj(m.replications), at, 'of', 'needs model.replications');
       if (of === 'hist' || of === 'histEdges')
         need(
           objs(m.hist).some(h => h.id === o.hist) || (tpl && objs(template(tpl)!.hist).some(h => h.id === o.hist)),
@@ -963,8 +957,8 @@ function checkSpec(spec: unknown) {
       }
       if (of === 'protocol' || of === 'protocolSeries') {
         if (need(!!proto && PROTOCOLS.includes(proto.kind as string), at, 'of', 'needs model.protocol')) {
-          const nm = PROTO_NAMES[proto!.kind as string]![kd as string]!;
-          need(nm.includes(o.name as string), at, 'name', `${proto!.kind as string} gives as a ${kd as string}: ${nm.join(', ')}`);
+          const nm = PROTO_NAMES[proto!.kind as string]![kd]!;
+          need(nm.includes(o.name as string), at, 'name', `${proto!.kind as string} gives as a ${kd}: ${nm.join(', ')}`);
         }
       }
       if (of === 'space') need(!proto, at, 'of', 'a protocol has no space');
@@ -2605,7 +2599,7 @@ function simulate(M: Prep, env0: Rec | null | undefined, seed: number, opsCap: n
     }
     const r = monitor!.step({ t, facts, acts });
     let nv = 0;
-    for (const v of r.violations || []) {
+    for (const v of r.violations) {
       const nm = M.norms.find(n => n.id === v.norm),
         ag = agents.find(a => String(a.id) === String(v.agent));
       if (nm && nm.breed && ag && ag.B.id !== nm.breed) continue;
@@ -2619,7 +2613,7 @@ function simulate(M: Prep, env0: Rec | null | undefined, seed: number, opsCap: n
         if (Vd) ag.v[sc.var] = coerce(Vd, ag.v[sc.var]! + ev(sc.add!));
       }
     }
-    for (const f of r.fulfilments || []) {
+    for (const f of r.fulfilments) {
       const nm = M.norms.find(n => n.id === f.norm),
         ag = agents.find(a => String(a.id) === String(f.agent));
       if (nm && nm.breed && ag && ag.B.id !== nm.breed) continue;
@@ -3611,7 +3605,7 @@ const stepDef: StepperDef<StepSt> = {
   },
   snapshot: null,
 };
-const stepper = NoemaSimKit.stepper(stepDef)! as unknown as CoreStepper<unknown, Prepared | null>;
+const stepper = NoemaSimKit.stepper(stepDef)!;
 
 const { engine, simEngine } = C.makeEngine<Prepared | null>({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
 const API = Object.freeze({

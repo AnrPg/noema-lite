@@ -21,7 +21,7 @@
      quant       quantitative genetics: the breeder's equation (Lush 1937) with truncation intensity, one-locus values (Falconer & Mackay
                  1996), liability threshold heritability (Falconer 1965), a seeded polygenic truncation-selection simulation.
    Pure JS, no DOM, no learner text: numbers, codes and only the model's own short texts (allele names, ids) as `s`.
-   Python twin of checkSpec / exprs / keys: tools/lib_genetics.py. Tests: node tests/lib_genetics.js. */
+   checkSpec / exprs / keys: the golden outputs of the former Python twin (tests/fixtures/parity/enginelib.json). Tests: node tests/lib_genetics.js. */
 import NoemaLibCore from '../kernel/core.ts';
 import type { CoreStepper, Emit, NumFn, Rec, SceneData, Table, TableNode } from '../kernel/core.ts';
 import type { Stream } from '../kernel/simkit.ts';
@@ -335,7 +335,7 @@ const sampler = (r: Uniform) =>
         exp: (rate: number) => expo(r, rate),
       };
 
-/* ---------- the model tables (the same as tools/lib_genetics.py) ---------- */
+/* ---------- the model tables (the same as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
 const LOCUS: Table = {
   id: 'name!',
   alleles: { $req: true, $list: 'id', min: 1, max: 6 },
@@ -397,14 +397,14 @@ const EPI: Readonly<Record<string, readonly number[]>> = {
   cumulative: [0, 1, 1, 2],
 };
 
-/* ---------- checkSpec (the same problems, in the same order, as tools/lib_genetics.py check_spec) ---------- */
+/* ---------- checkSpec (the same problems, in the same order, as the former Python twin check_spec (tests/fixtures/parity/enginelib.json)) ---------- */
 const ARG_MSG: Readonly<Record<string, string>> = {
   pattern: 'needs a genotype pattern (one token per locus: _, A_, A/a or A/)',
   int: 'needs an integer from 0 to 4095',
   id: 'needs the id of a person of the pedigree',
   pair: 'needs two allele indices i/j (0-based, i <= j)',
 };
-/** the number of distinct values (numbers, texts, booleans; anything else counts as distinct) — as tools/lib_genetics.py */
+/** the number of distinct values (numbers, texts, booleans; anything else counts as distinct) — as the former Python twin (tests/fixtures/parity/enginelib.json) */
 const uniqCount = (a: readonly unknown[]) =>
   new Set(
     a.map((x, i) =>
@@ -454,14 +454,14 @@ function checkSpec(spec: unknown): Problem[] {
     (o, at) => {
       for (const k of Object.keys(o)) if (!['id', 'kind', 'of', 'arg'].includes(k)) W('unknown-field', at + '.' + k, 'ignored');
       if (!mode) return;
-      const d = has(OUTS[mode]!, o.of) ? OUTS[mode]![o.of as string]! : null;
+      const d = has(OUTS[mode]!, o.of) ? OUTS[mode]![o.of]! : null;
       if (!d || d[0] !== o.kind) {
         E(
           'output',
           at + '.of',
           `one of ${Object.keys(OUTS[mode]!)
             .filter(k => OUTS[mode]![k]![0] === o.kind)
-            .join(', ')} (a ${o.kind as string} of mode ${mode})`,
+            .join(', ')} (a ${o.kind} of mode ${mode})`,
         );
         return;
       }

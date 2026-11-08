@@ -7,7 +7,7 @@ import type NoemaExpr from './kernel/simexpr.ts';
 import type NoemaLibSchema from './kernel/schema.ts';
 import type { Evaluator } from './kernel/simexpr.ts';
 
-/** a problem of a model: the same codes and messages as the engine's Python twin (tools/lib_<name>.py, tools/<name>.py) */
+/** a problem of a model: stable codes and messages, held by the golden outputs of the former Python twins (tests/fixtures/parity/*.json, tests/golden.cjs) */
 export interface Problem {
   readonly code: string;
   readonly path: string;
@@ -70,7 +70,7 @@ export interface RegisteredEngine extends EngineCore {
 export interface EngineModule {
   readonly id: string;
   readonly engine: EngineCore;
-  /** library engines: the model checker with the Python twin's codes, the model's expressions and string keys, the author's form */
+  /** library engines: the model checker with its stable codes, the model's expressions and string keys, the author's form */
   readonly checkSpec?: (spec: Spec) => Problem[];
   readonly exprs?: (spec: Spec) => Array<[string, string, string[]?]>;
   readonly keys?: (spec: Spec) => Array<[string, string]>;
@@ -91,7 +91,7 @@ export interface EnginePlugin extends Plugin<EngineModule> {
 /** the expression language of sim-spec@1 (kernel/simexpr.ts, docs/INTERACTIVE_SIMEXPR.md) */
 export type ExprApi = typeof NoemaExpr;
 
-/** the catalogue of every way an activity can compute (catalog.js, docs/INTERACTIVE_LIBRARY.md §2) */
+/** the catalogue of every way an activity can compute (catalog.ts, docs/INTERACTIVE_LIBRARY.md §2) */
 export interface CatalogEntry {
   readonly id: string;
   readonly layer: 'library' | 'free' | 'plugin';

@@ -1,7 +1,7 @@
 /* Every engine of sim-spec@1 as a plugin of the microkernel (src/plugins): its manifest (data, read at start) and two lazy entries,
    its code and its Worker bundle (the text a Worker runs; built by the esbuild plugin noemaWorkers of tools/esbuild.mjs from
    "noema-worker:<module>#<export>": the module, bundled with what it imports, sets self.noemaEngine to that export).
-   The order is the catalogue's (catalog.js): the library first, then the domain plugins. A new engine gets its line here, in
+   The order is the catalogue's (catalog.ts): the library first, then the domain plugins. A new engine gets its line here, in
    node.ts and in the catalogue; src/engines/plugins.test.ts checks that the three agree. */
 import type { PluginManifest } from '../plugins/index.ts';
 import type { EngineModule, EnginePlugin } from './types.ts';

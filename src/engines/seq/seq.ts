@@ -25,64 +25,22 @@
      crispr      CRISPR guides: PAM search on both strands for SpCas9 (NGG), SpCas9-NG (NG), SaCas9 (NNGRRT) and Cas12a (TTTV), cut
                  sites, guide GC, U6 poly-T, seed uniqueness, the guide nearest a target.
    Pure TypeScript (strict), no DOM, no learner text: numbers, codes and only the model's own short texts (sequence pieces, enzyme
-   names) as `s`. Python twin of checkSpec / exprs / keys: tools/lib_seq.py. Tests: node tests/lib_seq.js. */
+   names) as `s`. checkSpec / exprs / keys: the golden outputs of the former Python twin (tests/fixtures/parity/lib_seq.json). Tests: node tests/lib_seq.js. */
 import NoemaLibCore from '../kernel/core.ts';
-import type { EngineCore, Problem, SimEngine } from '../types.ts';
+import type { Emit, SceneData, Table } from '../kernel/core.ts';
 /* eslint-disable @typescript-eslint/no-misused-spread, @typescript-eslint/no-deprecated -- a sequence is ASCII letters (seqCheck refuses
-   any other character), so [...s] is its letters; substr(start, length) is the slicing of the Python twin, kept as written */
+   any other character), so [...s] is its letters; substr(start, length) is the slicing of the former Python twin, kept as written */
 /* i18n-ignore-start */ // code, not text: only codes, keys and numbers leave this module
 type Obj = Record<string, unknown>;
 type Env = Readonly<Record<string, unknown>>;
-type Report = (code: string, path: string, msg: string) => void;
 /** a number of the model, or an expression over the spec's names */
 type Numx = number | string;
-/** a drawing of a plot of kind `scene` (src/engines/kernel/core.ts scene) */
-interface Scene {
-  readonly view: number[];
-  readonly items: unknown[];
-}
-/** the options of a drawn item: its role c, a text s, a number v, a key, an anchor, a width w, arrow, dash, fill, closed, a radius r */
-type ItemOpts = Readonly<Record<string, unknown>>;
-interface SceneBuilder {
-  pt(x: number, y: number, o?: ItemOpts): void;
-  seg(x1: number, y1: number, x2: number, y2: number, o?: ItemOpts): void;
-  circ(x: number, y: number, r: number, o?: ItemOpts): void;
-  poly(pts: number[], o?: ItemOpts): void;
-  txt(x: number, y: number, o?: ItemOpts): void;
-  done(): Scene;
-}
 /** what a run gives: the outputs by name, the codes (read as optional: run() takes a result without them), and the functions of the
     outputs that take an argument (arg) */
 interface RunResult {
   readonly out: Readonly<Record<string, unknown>>;
   readonly codes?: string[];
   readonly ARG?: Readonly<Record<string, (arg: never) => unknown>>;
-}
-/** what this engine uses of the library's core (src/engines/kernel/core.ts, still untyped at its edge) */
-interface CoreUse {
-  readonly ID_RE: RegExp;
-  readonly KEY_RE: RegExp;
-  problems(): { P: Problem[]; E: Report; W: Report };
-  walk(o: unknown, T: unknown, path: string, E: Report, W: Report): void;
-  checkOutputs(
-    spec: unknown,
-    id: string,
-    kinds: readonly string[],
-    out: (o: Obj, at: string, E: Report, W: Report) => void,
-    E: Report,
-    W: Report,
-  ): void;
-  cx(v: unknown): (env: Env) => unknown;
-  scene(view: number[]): SceneBuilder;
-  thin(a: number[], n: number): number[];
-  rng(seed: number, name: string): () => number;
-  kit(): { brent(g: (x: number) => number, a: number, b: number, tol: number, fa: number, fb: number): number } | null;
-  makeEngine(def: {
-    id: string;
-    checkSpec: (spec: unknown) => Problem[];
-    run: (spec: SeqSpec | null | undefined, env: Env | null | undefined, o?: { readonly seed?: number }) => { out: Obj; codes: string[] };
-    scenes: boolean;
-  }): { engine: EngineCore; simEngine: SimEngine };
 }
 /** a variant of mutate */
 interface Variant {
@@ -181,7 +139,7 @@ interface OutputDecl {
 }
 /** the part of a sim-spec@1 a run reads */
 type SeqSpec = { readonly model?: unknown; readonly outputs?: (OutputDecl | null | undefined)[] };
-const C = NoemaLibCore as unknown as CoreUse;
+const C = NoemaLibCore;
 const ID = 'seq@1';
 const BUDGET = 200000;
 const has = (o: unknown, k: string) => o !== null && typeof o === 'object' && Object.prototype.hasOwnProperty.call(o, k);
@@ -717,11 +675,7 @@ function translate(s: string, off: number, id: number, o?: { readonly cds?: bool
   return p;
 }
 
-/* ---------- the checker (the same problems, in the same order, as tools/lib_seq.py check_spec; SPEC is the same JSON there) ---------- */
-/** a shape of the checker's tables: a kind ('numx', 'int:1:33', 'enum:a|b' …, '!' = required), an object, a list (core walk) */
-type Kind =
-  string | { readonly $obj?: Table; readonly $list?: Kind; readonly $req?: boolean; readonly min?: number; readonly max?: number };
-type Table = Readonly<Record<string, Kind>>;
+/* ---------- the checker (the same problems, in the same order, as the former Python twin check_spec (tests/fixtures/parity/lib_seq.json); SPEC is the same JSON there) ---------- */
 /** a sequence field of a mode: [name, alphabet, max length, min length, required] */
 type SeqField = readonly [string, string, number, number, boolean];
 interface SpecData {
@@ -998,7 +952,7 @@ const ARG_OK: Readonly<Record<string, (a: unknown) => boolean>> = {
   issue: a => typeof a === 'string' && ISSUES.includes(a),
 };
 /** checks one sequence of the model → its letters, or null */
-function seqCheck(v: unknown, path: string, alpha: string, max: number, min: number, E: Report) {
+function seqCheck(v: unknown, path: string, alpha: string, max: number, min: number, E: Emit) {
   if (typeof v !== 'string') {
     E('value', path, 'needs a sequence (a text)');
     return null;
@@ -1048,7 +1002,7 @@ function checkSpec(spec: unknown) {
         for (const k of Object.keys(x)) if (k !== nest[1]) y[k] = x[k];
         return y;
       });
-    C.walk(rest, TABLES[mode], 'model', E, W);
+    C.walk(rest, TABLES[mode]!, 'model', E, W); // SPEC.tables has every mode
     semantic(mode, m, E);
   }
   C.checkOutputs(
@@ -1057,23 +1011,23 @@ function checkSpec(spec: unknown) {
     [S, SE, SC],
     (o, at, E2) => {
       if (!mode) return;
-      const d = has(OUTS[mode], o.of as string) ? OUTS[mode]![o.of as string] : null;
+      const d = has(OUTS[mode], o.of) ? OUTS[mode]![o.of] : null;
       if (!d) {
-        E2('output', at + '.of', `${mode} computes no ${o.kind as string} "${o.of as string}"`);
+        E2('output', at + '.of', `${mode} computes no ${o.kind} "${o.of}"`);
         return;
       }
       if (d[0] !== o.kind) {
-        E2('output', at + '.kind', `"${o.of as string}" is a ${d[0]}`);
+        E2('output', at + '.kind', `"${o.of}" is a ${d[0]}`);
         return;
       }
-      if (d[1] && !ARG_OK[d[1]]!(o.arg)) E2('output', at + '.arg', `"${o.of as string}" ${SPEC.argMsg[d[1]]!}`);
+      if (d[1] && !ARG_OK[d[1]]!(o.arg)) E2('output', at + '.arg', `"${o.of}" ${SPEC.argMsg[d[1]]!}`);
     },
     E,
     W,
   );
   return P;
 }
-function semantic(mode: string, m: Obj, E: Report) {
+function semantic(mode: string, m: Obj, E: Emit) {
   const got: Record<string, string | null> = {};
   for (const [f, alpha, max, min, req] of SEQS[mode]!) {
     let al = alpha;
@@ -1304,9 +1258,9 @@ type TranslateOut = {
   cai: number;
   nOrfs: number;
   longestOrf: number;
-  translation: Scene;
-  orfMap: Scene;
-  strands: Scene;
+  translation: SceneData;
+  orfMap: SceneData;
+  strands: SceneData;
   valid: number;
 };
 /** an open reading frame: its frame f, first codon i, length nt, codons, partial (1: 5′, 2: 3′), start and end (1-based on the top strand) */
@@ -1734,7 +1688,7 @@ type MutateOut = {
   transitions: number;
   transversions: number;
   effects: number[];
-  hgvs: Scene;
+  hgvs: SceneData;
   valid: number;
 };
 /** a variant applied: its effect, its HGVS names (c, p) and, when applied, the rest of effectOf and whether it is a transition (tr) */
@@ -1914,7 +1868,7 @@ type DivergenceOut = {
   dS: number;
   dN: number;
   omega: number;
-  alignment: Scene;
+  alignment: SceneData;
   valid: number;
 };
 function runDivergence(m: SeqModel) {
@@ -2267,9 +2221,9 @@ type TmOut = {
   fwdMism: number;
   revMism: number;
   nProducts: number;
-  pcr: Scene;
+  pcr: SceneData;
   nIssues: number;
-  duplex: Scene;
+  duplex: SceneData;
   valid: number;
 };
 function runTm(m: SeqModel, env: Env) {
@@ -2710,8 +2664,8 @@ type AlignOut = {
   zScore: number;
   pShuffle: number;
   shuffleScores: number[];
-  alignment: Scene;
-  dp: Scene;
+  alignment: SceneData;
+  dp: SceneData;
   valid: number;
 };
 /** a traceback: the aligned strings and where they start and end */
@@ -2894,7 +2848,7 @@ function drawDP(a: string, b: string, r: Dp, tb: Traceback, type: string) {
 /** a windowed dot plot: a dot at (i, j) when ≥ k of the w letters of a[i…] and b[j…] match (Maizel & Lenk 1981); one sliding count
       per diagonal, O(m·n). More than 900 dots are pooled into a 30 × 30 grid (the dot's size grows with log10 of its count). */
 /** the outputs of dotplot */
-type DotplotOut = { cells: number; longestDiag: number; nHits: number; nHitsRev: number; dots: Scene; valid: number };
+type DotplotOut = { cells: number; longestDiag: number; nHits: number; nHitsRev: number; dots: SceneData; valid: number };
 function runDotplot(m: SeqModel, env: Env) {
   const codes: string[] = [],
     out = {} as DotplotOut;
@@ -3080,8 +3034,8 @@ type DigestOut = {
   fragmentsSorted: number[];
   outOfRange: number;
   bands: number;
-  gel: Scene;
-  map: Scene;
+  gel: SceneData;
+  map: SceneData;
   valid: number;
 };
 /** a feature as the map draws it: 1-based a…b, its label key, on the minus strand */
@@ -3308,7 +3262,7 @@ type ProteinOut = {
   hydroX: number[];
   hydropathy: number[];
   muH: number;
-  wheel: Scene;
+  wheel: SceneData;
   valid: number;
 };
 function runProtein(m: SeqModel, env: Env) {
@@ -3342,11 +3296,10 @@ function runProtein(m: SeqModel, env: Env) {
   let lo = 0,
     hi = 14;
   const pk = m.pk || 'bjellqvist',
-    K = C.kit(),
     q0 = chargeAt(cnt, nt, ct, lo, pk),
     q1 = chargeAt(cnt, nt, ct, hi, pk);
-  // the pH of zero net charge: Brent's root (NoemaSimKit.brent; the charge falls with pH); bisection when it is not bracketed or without the kernel
-  const rb = K && q0 > 0 && q1 < 0 ? K.brent(p => chargeAt(cnt, nt, ct, p, pk), lo, hi, 1e-13, q0, q1) : NaN;
+  // the pH of zero net charge: Brent's root (NoemaSimKit.brent; the charge falls with pH); bisection when it is not bracketed
+  const rb = q0 > 0 && q1 < 0 ? C.kit().brent(p => chargeAt(cnt, nt, ct, p, pk), lo, hi, 1e-13, q0, q1) : NaN;
   if (Number.isFinite(rb)) out.pI = rb;
   else {
     for (let it = 0; it < 60; it++) {
@@ -3460,7 +3413,7 @@ type CrisprOut = {
   nearestGc: number;
   nearestPolyT: number;
   nearestSeedHits: number;
-  guides: Scene;
+  guides: SceneData;
   valid: number;
 };
 /** a guide: its strand, cuts, protospacer, PAM, seed, GC fraction, poly-T, the other sites of its seed and whether it is a good one */

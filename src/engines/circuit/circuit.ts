@@ -913,7 +913,7 @@ function check(nl: unknown, opts?: unknown) {
 }
 
 /** checkFaults(netlist, faults) → problems of a list of faults on a netlist that passes check() (the same codes and paths as check;
-      the validators run it on a bench's faults before the app ever compiles them). Twin: tools/circuit.py check_faults. */
+      the validators run it on a bench's faults before the app ever compiles them). Golden outputs of the former twin's check_faults: tests/fixtures/parity/enginelib.json. */
 const FAULT_KINDS = ['open', 'short', 'drift', 'open-trace', 'reverse'];
 const FAULT_KEYS = new Set(['kind', 'element', 'pin', 'pins', 'factor', 'param', 'node', 'side']);
 function checkFaults(nl: unknown, faults: unknown, opts?: unknown) {
@@ -2379,8 +2379,8 @@ function makeSim(ck: ReturnType<typeof compile>, noise: Noise | null) {
         },
       }); // a halved substep is not a grid point
       const r = D.ok ? D.advance(sEnd * dt) : D.result;
-      if (r!.stop === 'end' && R.s >= sEnd) break;
-      if (r!.stop === 'budget') throw fail('budget', { steps: sEnd, limit: MAX_STEPS });
+      if (r.stop === 'end' && R.s >= sEnd) break;
+      if (r.stop === 'budget') throw fail('budget', { steps: sEnd, limit: MAX_STEPS });
       lastS = -1;
       tranAdvance(R, 1); // the own step with gmin stepping (throws no-convergence when that fails too)
     }

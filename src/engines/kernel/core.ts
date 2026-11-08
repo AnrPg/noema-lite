@@ -2,7 +2,7 @@
    The library engines (ode@1, prob@1, graph@1, geom@1 …: src/engines/<name>/) are GENERAL engines: each covers a whole family of subjects
    (any system of equations, any distribution, any graph, any construction) instead of one domain. They share this core — the
    hexagon's inner ring:
-     • the model checker: a declarative table walked with the same codes and messages as its Python twin (tools/enginelib.py walk),
+     • the model checker: a declarative table walked with the same codes and messages as the golden outputs of its former Python twin's walk (tests/fixtures/parity/enginelib.json),
      • numbers that may be expressions over the spec's names (`numx`), compiled with the app's NoemaExpr in the engine itself,
      • seeded randomness (mulberry32), statistics of a series (final, min, max, mean, pp, rms), thinning to the plot limit,
      • scenes: the drawings an engine returns (points, segments, circles, polygons, labels) for a plot of kind `scene`,
@@ -33,13 +33,19 @@ export interface Shape {
 export type Table = Readonly<Record<string, TableNode>>;
 /** a writer of problems: E (an error) or W (a warning) */
 export type Emit = (code: string, path: string, msg: string) => void;
+/** the numbers of a run: the spec's consts, params and derived values */
+export type Env = Readonly<Record<string, number | boolean>>;
+/** an output of the spec after checkOutputs' common checks: its kind is one the engine computes and its `of` a text */
+export type CheckedOutput = Rec & { readonly kind: string; readonly of: string };
+export type { Stream } from './simkit.ts';
 /** an error of the core with its code */
 export type CoreError = Error & { code: string } & Record<string, unknown>;
 
 const MAX_POINTS = 2000,
   MAX_SCENE = 2000;
 const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
-const has = (o: object, k: string) => Object.prototype.hasOwnProperty.call(o, k);
+/** has(o, k): k is an own key of o (any k: hasOwnProperty turns it into a key) */
+const has = (o: object, k: unknown) => Object.prototype.hasOwnProperty.call(o, k as PropertyKey);
 const ID_RE = /^[A-Za-z][A-Za-z0-9_-]{0,31}$/; // ids of model parts (nodes, objects, states)
 const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]{0,31}$/; // names an expression can use (variables of an ODE)
 const KEY_RE = /^[a-z][a-zA-Z0-9_.-]{0,63}$/; // keys of the activity's string tables (= packcheck ACT.KEY_RE)
@@ -51,7 +57,7 @@ function fail(code: string, extra?: Rec | null): CoreError {
   return e;
 }
 
-/* ---------- the model checker: a table of kinds, walked like rf@1's (the same messages as tools/enginelib.py) ----------
+/* ---------- the model checker: a table of kinds, walked like rf@1's (the same messages as the former Python twin (tests/fixtures/parity/enginelib.json)) ----------
      kinds: pos · nonneg · fin · unit (0–1) · bool · int:a:b · enum:a|b · id · name · key · expr (a non-empty text) ·
             numx (a number or an expression) · ref (an id, resolved by the engine); a trailing "!" = required.
      shapes: {$obj: T} · {$list: T or kind, min?, max} · {$map: kind, max} (an object of names → kind) */
@@ -160,13 +166,15 @@ function problems(): { P: Problem[]; E: Emit; W: Emit } {
 }
 const hasErrors = (P: readonly Problem[]) => P.some(p => p.level === 'error');
 
+/** an output whose kind is a text (one of the engine's kinds, checked before) and whose `of` is a non-empty text */
+const isOutput = (o: Rec): o is CheckedOutput => typeof o.kind === 'string' && typeof o.of === 'string' && o.of !== '';
 /** the common part of every library engine's outputs: [{id, kind: scalar | series | scene, of, …}]; each output's own fields are
       checked by the engine's `out(o, at, E, W)` → false when the output is not one the engine computes */
 function checkOutputs(
   spec: unknown,
   id: string,
   kinds: readonly unknown[],
-  out: (o: Rec, at: string, E: Emit, W: Emit) => unknown,
+  out: (o: CheckedOutput, at: string, E: Emit, W: Emit) => unknown,
   E: Emit,
   W: Emit,
 ): void {
@@ -185,7 +193,7 @@ function checkOutputs(
       E('output', at + '.kind', 'one of ' + kinds.join(', '));
       return;
     }
-    if (typeof o.of !== 'string' || !o.of) {
+    if (!isOutput(o)) {
       E('output', at + '.of', 'names what ' + id + ' computes');
       return;
     }
@@ -342,7 +350,7 @@ function scene(view: View): Scene {
   };
 }
 /** the bounding view [x0, x1, y0, y1] of points with a margin (never empty) */
-function fitView(xs: ArrayLike<number>, ys: ArrayLike<number>, margin?: number | null): View {
+function fitView(xs: ArrayLike<number>, ys: ArrayLike<number>, margin?: number | null): [number, number, number, number] {
   let x0 = Infinity,
     x1 = -Infinity,
     y0 = Infinity,
@@ -403,8 +411,8 @@ export interface CoreStepper<S = unknown, P = unknown> {
   ): CoreStep<S> | null | undefined;
   readonly snapshot?: ((state: S) => unknown) | null | undefined;
   readonly restore?: ((snap: unknown) => S) | null | undefined;
-  readonly output?: ((state: S, ctx: StepCtx<P>) => unknown) | undefined;
-  readonly onEvent?: ((state: S, ev: unknown, t: number) => S | undefined) | undefined;
+  readonly output?: ((state: S, ctx: StepCtx<P>) => unknown) | null | undefined;
+  readonly onEvent?: ((state: S, ev: unknown, t: number) => S | undefined) | null | undefined;
 }
 /** an engine of the library as its module defines it (makeEngine's def) */
 export interface EngineDef<P = unknown, S = unknown> {

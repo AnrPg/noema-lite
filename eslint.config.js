@@ -61,8 +61,6 @@ module.exports = tseslint.config(
   { files: ['engine/**/*.js', 'config*.js'], languageOptions: { sourceType: 'script' } },
   { files: ['**/*.mjs'], languageOptions: { ecmaVersion: 'latest', sourceType: 'module' } },
 
-  { files: ['src/**/*.js'], languageOptions: { ecmaVersion: 'latest', sourceType: 'module' }, rules: { 'no-empty': ['error', { allowEmptyCatch: false }] } },
-  { files: ['src/**/vendor/**'], languageOptions: { sourceType: 'commonjs' } },
 
   /* ---------- src/: TypeScript, strict ---------- */
   ...tseslint.configs.strictTypeChecked.map(c => ({ ...c, files: ['src/**/*.ts'] })),

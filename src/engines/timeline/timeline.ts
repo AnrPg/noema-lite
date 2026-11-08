@@ -11,79 +11,15 @@
    (Meeus ch. 27) and the geometric sunset in Tehran, checked against the Bahá'í World Centre dates published for 2024–2031.
    Pure, bounded, deterministic; no DOM, no clock; numbers and codes only. Tests: node tests/lib_timeline.js */
 import NoemaLibCore from '../kernel/core.ts';
-import type { EngineCore, Inputs, Problem, SimEngine, Spec } from '../types.ts';
+import type { Emit, SceneData, Table, TableNode } from '../kernel/core.ts';
+import type { Inputs, Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */
 
-/* ---------- types: the core functions this engine calls (kernel/core.js), its tables, model and outputs as checkSpec admits them ---------- */
+/* ---------- types: the core functions this engine calls (kernel/core.ts), its tables, model and outputs as checkSpec admits them ---------- */
 type Rec = Record<string, unknown>;
-/** a writer of problems: E (an error) or W (a warning) of the core's problems() */
-type Report = (code: string, path: string, msg: string) => void;
-/** a kind of the checker's tables: a string kind ('numx', 'enum:a|b!', …), an object of fields or a list */
-type Kd = string | KdNode;
-interface KdNode {
-  readonly $obj?: Table;
-  readonly $list?: Kd;
-  readonly $req?: boolean;
-  readonly min?: number;
-  readonly max?: number;
-}
-type Table = Readonly<Record<string, Kd>>;
 /** a seeded stream of uniforms in [0, 1) (core.rng) */
 type Rng = () => number;
-/** the options of a scene item: a key of the string tables, a number (v), the anchor, colour role, width, radius, fill */
-interface SceneOpts {
-  readonly key?: string;
-  readonly v?: number;
-  readonly anchor?: 'start' | 'middle' | 'end';
-  readonly c?: string;
-  readonly w?: number;
-  readonly r?: number;
-  readonly fill?: boolean;
-  readonly closed?: boolean;
-}
-interface SceneOut {
-  readonly view: number[];
-  readonly items: Rec[];
-}
-interface SceneBuilder {
-  seg(x1: number, y1: number, x2: number, y2: number, o?: SceneOpts): void;
-  poly(pts: number[], o?: SceneOpts): void;
-  txt(x: number, y: number, o?: SceneOpts): void;
-  pt(x: number, y: number, o?: SceneOpts): void;
-  done(): SceneOut;
-}
-interface CoreUse {
-  readonly MAX_POINTS: number;
-  readonly ID_RE: RegExp;
-  isObj(v: unknown): v is Rec;
-  readonly isNum: (v: unknown) => v is number;
-
-  has(o: object, k: unknown): k is string;
-  problems(): { P: Problem[]; E: Report; W: Report };
-  walk(o: unknown, table: Table, path: string, E: Report, W: Report): void;
-  checkOutputs(
-    spec: unknown,
-    id: string,
-    kinds: readonly string[],
-    out: (o: Rec, at: string, E: Report, W: Report) => void,
-    E: Report,
-    W: Report,
-  ): void;
-  cx(v: unknown): (env: Inputs) => number;
-  rng(seed: number, name: string): Rng;
-  normal(r: Rng): number;
-  thin(a: readonly number[], n?: number): number[];
-  scene(view: number[]): SceneBuilder;
-  makeEngine(def: {
-    readonly id: string;
-    readonly checkSpec: (spec: unknown) => Problem[];
-    readonly run: (spec: Spec, env: Inputs, opts?: RunOpts) => RunResult;
-    readonly prepare: (spec: Spec) => Prepared;
-    readonly scenes: boolean;
-  }): { engine: EngineCore; simEngine: SimEngine };
-}
-// kernel/core.js is typed at its edge as an opaque KernelApi (kernel/core.d.ts): CoreUse is the part of it this engine calls
-const C = NoemaLibCore as unknown as CoreUse;
+const C = NoemaLibCore;
 const ID = 'timeline@1';
 
 /** the fields of a date as the calendars read them (numbers once the run has computed the model's expressions) */
@@ -1943,8 +1879,8 @@ function synthDendro(
   return { master, sample };
 }
 
-/* ---------- the checker (the same codes, paths and messages as tools/lib_timeline.py) ---------- */
-function checkDate(d: unknown, p: string, E: Report, W: Report): void {
+/* ---------- the checker (the same codes, paths and messages as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
+function checkDate(d: unknown, p: string, E: Emit, W: Emit): void {
   if (!C.isObj(d) || typeof d.cal !== 'string' || !C.has(T.IN, d.cal)) return;
   const S = T.IN[d.cal]!;
   for (const f of S.req) if (d[f] === undefined) E('value', p + '.' + f, 'missing');
@@ -2031,7 +1967,7 @@ function checkSpec(spec: unknown): Problem[] {
     (o, at) => {
       const tb = C.has(T.OUT, o.kind) && C.has(T.OUT[o.kind]!, o.of) ? T.OUT[o.kind]![o.of]! : null;
       if (!tb) {
-        E('output', at + '.of', `${String(o.of)} is not a ${String(o.kind)} output of ${ID}`);
+        E('output', at + '.of', `${o.of} is not a ${o.kind} output of ${ID}`);
         return;
       }
       C.walk(o, tb, at, E, W);
@@ -2060,10 +1996,10 @@ function checkSpec(spec: unknown): Problem[] {
   );
   return P;
 }
-/** every value of a kind (numx: expressions; key: string keys) along a table, in the table's order (the same walk as the Python twin) */
+/** every value of a kind (numx: expressions; key: string keys) along a table, in the table's order (the same walk as the former Python twin) */
 /** an expression or key of the spec: [its text, its path] (an expression also lists its names: none here) */
 type Found = [string, string] | [string, string, string[]];
-function collect(v: unknown, kd: Kd, p: string, kind: string, out: Found[]): void {
+function collect(v: unknown, kd: TableNode, p: string, kind: string, out: Found[]): void {
   if (typeof kd === 'string') {
     if (kd.replace(/!$/, '') === kind && typeof v === 'string' && v.trim() !== '') out.push(kind === 'numx' ? [v, p, []] : [v, p]);
     return;
@@ -2084,7 +2020,7 @@ function gather(spec: unknown, kind: string): Found[] {
   if (!C.isObj(spec)) return out;
   collect(spec.model, { $obj: T.MODEL }, 'model', kind, out);
   (Array.isArray(spec.outputs) ? (spec.outputs as unknown[]) : []).forEach((o, i) => {
-    if (C.isObj(o) && C.has(T.OUT, o.kind) && C.has(T.OUT[o.kind]!, o.of))
+    if (C.isObj(o) && typeof o.kind === 'string' && typeof o.of === 'string' && C.has(T.OUT, o.kind) && C.has(T.OUT[o.kind]!, o.of))
       collect(o, { $obj: T.OUT[o.kind]![o.of]! }, `outputs[${i}]`, kind, out);
   });
   return out;
@@ -2160,7 +2096,7 @@ function run(spec: Spec, env: Inputs, opts?: RunOpts): RunResult {
     if (!codes.some(c => c.code === code && c.of === of)) codes.push({ code, of });
   };
   function dateRD(d: unknown, of: string): Dated {
-    if (!C.isObj(d) || !C.has(CAL, d.cal) || !CAL[d.cal]!.to) {
+    if (!C.isObj(d) || typeof d.cal !== 'string' || !C.has(CAL, d.cal) || !CAL[d.cal]!.to) {
       flag('invalid', of);
       return { rd: NaN, flags: ['invalid'] };
     }
@@ -2462,7 +2398,7 @@ function run(spec: Spec, env: Inputs, opts?: RunOpts): RunResult {
     }
     return mode === 'accession' ? n + 1 : n + 2;
   }
-  function sceneOf(q: Query): SceneOut {
+  function sceneOf(q: Query): SceneData {
     const ax: AxisSpec = M.axis || {},
       era = q.era || ax.era || 'civil';
     const fromD = q.from || ax.from,

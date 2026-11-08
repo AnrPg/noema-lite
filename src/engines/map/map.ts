@@ -9,7 +9,7 @@
 import NoemaLibCore from '../kernel/core.ts';
 import geodesic from './vendor/geodesic.cjs';
 import LAND110 from './vendor/land-110m.json' with { type: 'json' };
-import type { CheckedOutput, Env, Obj, Table } from '../kernel/core.ts';
+import type { CheckedOutput, Env, Rec, Table } from '../kernel/core.ts';
 import type { Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes, keys and numbers leave this module
 /** a number or an expression over the spec's names (`numx`) */
@@ -172,7 +172,7 @@ const C = NoemaLibCore;
 const ID = 'map@1';
 const D2R = Math.PI / 180,
   R2D = 180 / Math.PI;
-const isObj = (v: unknown): v is Obj => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 
 /* ---------- constants ---------- */
@@ -234,7 +234,7 @@ const PROJS = [
 const AREA_UNITS: Readonly<Record<string, number>> = { km2: 1e6, m2: 1, ha: 1e4, mi2: 2589988.110336 };
 const LIM = { places: 500, edges: 2000, territories: 64, rings: 16, ringNums: 4000, vertices: 20000, routes: 32, via: 64, cells: 400000 };
 
-/* ---------- the model table (the same codes and messages as tools/lib_map.py) ---------- */
+/* ---------- the model table (the same codes and messages as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
 const PROJ_T = {
   type: `enum:${PROJS.join('|')}!`,
   lon0: 'numx',
@@ -355,7 +355,7 @@ function checkSpec(spec: unknown): Problem[] {
   const { P, E, W } = C.problems();
   const m = isObj(spec) ? spec.model : undefined;
   C.walk(m, TABLE, 'model', E, W);
-  const M: Obj = isObj(m) ? m : {};
+  const M: Rec = isObj(m) ? m : {};
   const places = new Set<string>(),
     terrs = new Set<string>();
   const arr = (v: unknown): unknown[] => (Array.isArray(v) ? (v as unknown[]) : []);
@@ -407,7 +407,7 @@ function checkSpec(spec: unknown): Problem[] {
     !(vw.bbox[1] < vw.bbox[3] && vw.bbox[1] >= -90 && vw.bbox[3] <= 90)
   )
     E('value', 'model.view.bbox', 'needs [west, south, east, north] with -90 <= south < north <= 90');
-  const units: Obj = isObj(M.units) ? M.units : {};
+  const units: Rec = isObj(M.units) ? M.units : {};
   for (const [k, u] of Object.entries(units))
     if (isObj(u) && isNum(u.m) && ((isNum(u.min) && u.min > u.m) || (isNum(u.max) && u.max < u.m)))
       E('value', `model.units.${k}`, 'needs min <= m <= max');
@@ -469,10 +469,10 @@ function checkSpec(spec: unknown): Problem[] {
   return P;
 }
 
-/** every expression of the model: [source, path, local names] (the same order as tools/lib_map.py) */
+/** every expression of the model: [source, path, local names] (the same order as the former Python twin (tests/fixtures/parity/enginelib.json)) */
 function exprs(spec: unknown) {
   const out: Array<[string, string, string[]]> = [],
-    m: Obj = isObj(spec) && isObj(spec.model) ? spec.model : {};
+    m: Rec = isObj(spec) && isObj(spec.model) ? spec.model : {};
   const add = (v: unknown, p: string) => {
     if (typeof v === 'string') out.push([v, p, []]);
   };
@@ -523,7 +523,7 @@ function exprs(spec: unknown) {
 }
 function keys(spec: unknown) {
   const out: Array<[string, string]> = [],
-    m: Obj = isObj(spec) && isObj(spec.model) ? spec.model : {};
+    m: Rec = isObj(spec) && isObj(spec.model) ? spec.model : {};
   (Array.isArray(m.places) ? (m.places as unknown[]) : []).forEach((p, i) => {
     if (isObj(p) && typeof p.label === 'string') out.push([p.label, `model.places[${i}].label`]);
   });

@@ -2315,7 +2315,7 @@ function reach(a: string, b: string, system: string, vs: Str) {
   return !!r.path;
 }
 
-/* ---------- the model: tables walked by the core's checker (the SAME tables travel in INDEX to tools/lib_anatomy.py) ---------- */
+/* ---------- the model: tables walked by the core's checker (the SAME tables travel in INDEX, as they did to the former Python twin (tests/fixtures/parity/lib_anatomy.json)) ---------- */
 const VIS_SITES = [
   'optic-nerve-L',
   'optic-nerve-R',
@@ -2544,7 +2544,7 @@ const OUTS: Readonly<Record<string, Readonly<Record<Kind, Str>>>> = {
   cord: { scalar: CORD_OUT, series: [], scene: ['section'] },
 };
 
-/** the index of the data the checkers need (ids and their types, levels, movements, the output names…): tools/lib_anatomy.py
+/** the index of the data the checkers need (ids and their types, levels, movements, the output names…): the former Python twin (tests/fixtures/parity/lib_anatomy.json)
       embeds this SAME JSON (tests/lib_anatomy.js checks that the two copies are identical) */
 let IDX: Idx | null = null;
 function index(): Idx {
@@ -2603,7 +2603,7 @@ function index(): Idx {
   return IDX;
 }
 
-/* ---------- the model checker (the same order, codes and messages as tools/lib_anatomy.py) ---------- */
+/* ---------- the model checker (the same order, codes and messages as the former Python twin (tests/fixtures/parity/lib_anatomy.json)) ---------- */
 const NOT_KNOWN = 'not a structure of anatomy@1';
 function checkSpec(spec: unknown) {
   const { P, E, W } = C.problems();
@@ -2623,7 +2623,7 @@ function checkSpec(spec: unknown) {
     ID,
     kinds,
     (o, at) => {
-      if (mode && !outputKnown(mode, o, m, I)) E('output', at + '.of', `${mode} computes no ${o.kind as string} "${o.of as string}"`);
+      if (mode && !outputKnown(mode, o, m, I)) E('output', at + '.of', `${mode} computes no ${o.kind} "${o.of}"`);
     },
     E,
     W,
@@ -2879,7 +2879,7 @@ function outputKnown(mode: string, o: Rec, m: Rec, I: Idx) {
   return false;
 }
 
-/** every expression of the model: [source, path, local names] in the schema's order (the same as tools/lib_anatomy.py exprs) */
+/** every expression of the model: [source, path, local names] in the schema's order (the same as the former Python twin exprs (tests/fixtures/parity/lib_anatomy.json)) */
 function exprs(spec: unknown) {
   const out: [string, string, string[]][] = [],
     m = isObj(spec) ? spec.model : null;

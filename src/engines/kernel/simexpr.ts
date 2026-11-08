@@ -3,7 +3,7 @@
    && || !, c ? a : b and a fixed list of math functions. No eval, no new Function, no property access, no strings, no loops:
    a hand-written lexer and recursive-descent (precedence-climbing) parser build a JSON-able tree, a validator checks it, and
    compile() turns it into a tree of closures. Each evaluation visits each node at most once (≤ 2000 nodes).
-   Twin: tools/simexpr.py — the same grammar, tree, error codes and messages, and the same doubles bit for bit
+   The golden outputs of the former Python twin: tests/fixtures/parity/simexpr.json — the same grammar, tree, error codes and messages, and the same doubles bit for bit
    (tests/simexpr.js runs a shared corpus and a seeded fuzz through both). For that the transcendental functions are not the
    platform's Math (each browser and libm differ in the last bit) but ports of fdlibm, written with + - * / and bit access only;
    sqrt, floor, ceil, trunc, abs and % are exact in IEEE 754 and so the same everywhere.

@@ -23,10 +23,10 @@
      obligations    contract clauses over a dated trace in calendar or business days: logic@1 evalNorms (deadlines, contrary-to-duty)
    Logic is never re-implemented: parse, key, afSolve and evalNorms come from NoemaLibLogic (src/engines/logic/logic.ts, its §9 API).
    Pure JS, no DOM, no words for the learner: numbers, codes, keys and the model's own short texts (`s`). Deterministic, bounded,
-   never throws for a checked spec. Python twin of checkSpec / exprs / keys: tools/lib_law.py. Tests: node tests/lib_law.js. */
+   never throws for a checked spec. checkSpec / exprs / keys: the golden outputs of the former Python twin (tests/fixtures/parity/lib_law.json). Tests: node tests/lib_law.js. */
 import NoemaLibCore from '../kernel/core.ts';
 import NoemaLibLogic from '../logic/logic.ts';
-import type { Env, Obj, Report, Scene } from '../kernel/core.ts';
+import type { Env, Rec, Emit, SceneData } from '../kernel/core.ts';
 import type { Problem, Spec } from '../types.ts';
 /** a number or an expression over the spec's names (`numx`) */
 type Numx = number | string | boolean;
@@ -84,7 +84,7 @@ interface Scal {
 }
 type Ser = Record<string, number[]>;
 interface Res {
-  scene: Scene | null;
+  scene: SceneData | null;
 }
 type Runner = (m: LawModel, env: Env, D: Diag, S: Scal, SE: Ser, Rn: Res) => void;
 /** a row of a text scene; a node and an edge of a graph scene */
@@ -208,7 +208,7 @@ interface Try {
 const C = NoemaLibCore;
 const LG = (): typeof NoemaLibLogic | undefined => NoemaLibLogic; // logic@1 (docs/library/logic.md §9): parse, key, afSolve, evalNorms
 const ID = 'law@1';
-const isObj = (v: unknown): v is Obj => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const MAX_RULES = 200,
   MAX_ARGS = 400,
@@ -222,7 +222,7 @@ const short = (s: unknown) => {
 };
 
 /* =====================================================================================================================
-     1. The model format: ONE table (the same in tools/lib_law.py), walked by the core; REQ names what each task needs */
+     1. The model format: ONE table (the same as the former Python twin (tests/fixtures/parity/lib_law.json)), walked by the core; REQ names what each task needs */
 const TASKS = [
   'rules',
   'aspic',
@@ -731,7 +731,7 @@ function template(t: unknown): Tpl {
 }
 
 /* =====================================================================================================================
-     3. checkSpec / exprs / keys (the same as tools/lib_law.py check_spec / exprs / keys) */
+     3. checkSpec / exprs / keys (the same as the former Python twin check_spec / exprs / keys (tests/fixtures/parity/lib_law.json)) */
 const ATOM_OK = /^[A-Za-z_][A-Za-z0-9_]{0,31}$/;
 function litFields(m: LawModel): [string, string][] {
   // every literal of the model, in a fixed order: [text, path]
@@ -787,7 +787,7 @@ function litFields(m: LawModel): [string, string][] {
   }
   return out;
 }
-function dupes(arr: unknown, base: string, E: Report, what: string): Set<string> {
+function dupes(arr: unknown, base: string, E: Emit, what: string): Set<string> {
   const seen = new Set<string>();
   if (Array.isArray(arr))
     arr.forEach((x: unknown, i: number) => {
@@ -802,7 +802,7 @@ const idsOf = (arr: unknown) =>
   new Set(
     (Array.isArray(arr) ? (arr as unknown[]) : []).filter((x): x is { id: string } => isObj(x) && typeof x.id === 'string').map(x => x.id),
   );
-/** checkSpec(spec) → [{code, path, msg, level}] (the same as tools/lib_law.py check_spec) */
+/** checkSpec(spec) → [{code, path, msg, level}] (the same as the former Python twin check_spec (tests/fixtures/parity/lib_law.json)) */
 function checkSpec(spec: unknown): Problem[] {
   const { P, E, W } = C.problems();
   const m = (isObj(spec) ? spec.model : undefined) as LawModel | undefined;
@@ -818,7 +818,7 @@ function checkSpec(spec: unknown): Problem[] {
     return P;
   }
   const task = m.task;
-  for (const r of REQ[task]!.filter(r => !r.split('|').some(f => (m as Obj)[f] !== undefined)))
+  for (const r of REQ[task]!.filter(r => !r.split('|').some(f => (m as Rec)[f] !== undefined)))
     E('value', 'model.' + r.split('|')[0]!, `missing (${task} needs ${REQ[task]!.map(x => x.split('|').join(' or ')).join(', ')})`);
   for (const [s, p] of litFields(m)) {
     const r = parseLit(s);
@@ -1015,7 +1015,7 @@ function checkSpec(spec: unknown): Problem[] {
       const lists = o.kind === 'scalar' && AT_OF[task] && AT_OF[task][o.of];
       if (o.at !== undefined) {
         if (!lists) W('unknown-field', at + '.at', 'ignored');
-        else if (typeof o.at !== 'string' || !lists.split('|').some(l => idsOf((m as Obj)[l]).has(o.at as string)))
+        else if (typeof o.at !== 'string' || !lists.split('|').some(l => idsOf((m as Rec)[l]).has(o.at as string)))
           E('ref', at + '.at', `not an id of model.${lists.split('|').join(' or model.')}`);
       }
       if (task === 'citation' && o.of === 'field') {
@@ -1114,7 +1114,7 @@ const num = (v: unknown, env: Env, d: number): number => {
 const on = (v: unknown, env: Env) => v === undefined || num(v, env, 1) > 0.5;
 const b01 = (b: unknown) => (b ? 1 : 0);
 /** a scene of text rows (row i at y = −i): [{s?, key?, v?, c}] with an optional mark column */
-function rowsScene(rows: readonly Row[], D: DiagSink): Scene {
+function rowsScene(rows: readonly Row[], D: DiagSink): SceneData {
   const n = Math.min(rows.length, Math.floor((C.MAX_SCENE - 1) / 2));
   if (rows.length > n) D.add('scene-truncated');
   const sc = C.scene([0, 40, -(Math.max(n, 1) + 0.5), 0.5]);
@@ -1130,7 +1130,7 @@ function rowsScene(rows: readonly Row[], D: DiagSink): Scene {
   return sc.done();
 }
 /** a graph scene: nodes on a ring (or at x, y), arrows between them */
-function graphScene(nodes: readonly GNode[], edges: readonly GEdge[]): Scene {
+function graphScene(nodes: readonly GNode[], edges: readonly GEdge[]): SceneData {
   const n = nodes.length,
     R = n > 1 ? 3 + n * 0.08 : 0;
   const xs = nodes.map((_, i) => Math.cos(Math.PI / 2 - (2 * Math.PI * i) / Math.max(n, 1)) * R),
@@ -3079,7 +3079,7 @@ function runObligations(m: LawModel, env: Env, D: Diag, S: Scal, SE: Ser, Rn: Re
   );
   for (const c of r.codes) if (['conflict', 'unresolved', 'parse', 'trace-truncated'].includes(c)) D.add(c);
   const pen = new Map((m.norms || []).map(n => [n.id, num(n.penalty, env, 0)]));
-  const penalties = r.violations.reduce((a, v) => a + (pen.get(v.norm as string) || 0), 0);
+  const penalties = r.violations.reduce((a, v) => a + (pen.get(v.norm) || 0), 0);
   Object.assign(S, {
     violations: r.counts.violations,
     fulfilments: r.counts.fulfilments,

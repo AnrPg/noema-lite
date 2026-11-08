@@ -9,58 +9,13 @@
    pentameter with a simplified Kiparsky stress-maximum rule) and rhyme schemes. Pure JS (String.normalize, \p{…}, Intl.Segmenter
    when asked for), deterministic, bounded; numbers, codes, keys and the model's own short texts (`s`) only. */
 import NoemaLibCore from '../kernel/core.ts';
-import type { EngineCore, Inputs, Problem, SimEngine, Spec } from '../types.ts';
+import type { SceneData } from '../kernel/core.ts';
+import type { Inputs, Problem, Spec } from '../types.ts';
 /* i18n-ignore-start */ // code, not text: only codes, keys, numbers and the model's own words leave this module
 
-/* ---------- types: the core functions this engine calls (kernel/core.js), its model and outputs as checkSpec admits them ---------- */
+/* ---------- types: the core functions this engine calls (kernel/core.ts), its model and outputs as checkSpec admits them ---------- */
 type Rec = Record<string, unknown>;
-/** a writer of problems: E (an error) or W (a warning) of the core's problems() */
-type Report = (code: string, path: string, msg: string) => void;
-/** the options of a scene item: a text of the model (s), a key of the string tables, a number (v); anchor, colour role, fill, dash */
-interface SceneOpts {
-  readonly s?: string | undefined;
-  readonly key?: string | undefined;
-  readonly v?: number;
-  readonly anchor?: 'start' | 'end';
-  readonly c?: string;
-  readonly fill?: boolean;
-  readonly dash?: boolean;
-}
-interface SceneOut {
-  readonly view: number[];
-  readonly items: Rec[];
-}
-interface SceneBuilder {
-  seg(x1: number, y1: number, x2: number, y2: number, o?: SceneOpts): void;
-  poly(pts: number[], o?: SceneOpts): void;
-  txt(x: number, y: number, o?: SceneOpts): void;
-  done(): SceneOut;
-}
-interface CoreUse {
-  readonly ID_RE: RegExp;
-  problems(): { P: Problem[]; E: Report; W: Report };
-  walk(o: unknown, table: unknown, path: string, E: Report, W: Report): void;
-  checkOutputs(
-    spec: unknown,
-    id: string,
-    kinds: readonly string[],
-    out: (o: Rec, at: string, E: Report, W: Report) => void,
-    E: Report,
-    W: Report,
-  ): void;
-  cx(v: unknown): (env: Inputs) => number;
-  thin(a: readonly number[], n?: number): number[];
-  scene(view: number[]): SceneBuilder;
-  makeEngine(def: {
-    readonly id: string;
-    readonly checkSpec: (spec: unknown) => Problem[];
-    readonly run: (spec: Spec, env: Inputs, opts?: { readonly prepared?: Prepared | null }) => RunResult;
-    readonly prepare: (spec: Spec) => Prepared;
-    readonly scenes: boolean;
-  }): { engine: EngineCore; simEngine: SimEngine };
-}
-// kernel/core.js is typed at its edge as an opaque KernelApi (kernel/core.d.ts): CoreUse is the part of it this engine calls
-const C = NoemaLibCore as unknown as CoreUse;
+const C = NoemaLibCore;
 const ID = 'text@1';
 const isObj = (v: unknown): v is Rec => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
@@ -172,7 +127,7 @@ const MEASURES = ['pmi', 'npmi', 'mi3', 't', 'chi2', 'g2', 'dice', 'logDice'];
 const LIM = { texts: 30, body: 60000, lexicon: 2000, tokens: 200000, readings: 4096 };
 const RAW_MAX = 64;
 
-/* ---------- the model table (the same codes and messages as tools/lib_text.py) ---------- */
+/* ---------- the model table (the same codes and messages as the former Python twin (tests/fixtures/parity/enginelib.json)) ---------- */
 const TABLE = {
   texts: { $req: true, $list: { $obj: { id: 'id!', lang: `enum:${LANGS.join('|')}`, label: 'key' } }, min: 1, max: LIM.texts },
   normalize: {
@@ -323,8 +278,8 @@ function checkSpec(spec: unknown): Problem[] {
     ['scalar', 'series', 'scene'],
     (o, at, E2, W2) => {
       // checkOutputs gives only outputs whose kind is one of the three and whose of is a text
-      const kind = o.kind as string,
-        of = o.of as string;
+      const kind = o.kind,
+        of = o.of;
       const T = OUT[kind]![of];
       if (!T) {
         E2('output', at + '.of', `${kind} outputs of ${ID} are: ${Object.keys(OUT[kind]!).join(', ')}`);
@@ -2047,7 +2002,7 @@ function run(spec: Spec, env: Inputs, opts?: { readonly prepared?: Prepared | nu
     if (o.kind === 'scene') return drawScene(o, t);
     return NaN;
   }
-  function drawScene(o: Output, t: TextDoc): SceneOut {
+  function drawScene(o: Output, t: TextDoc): SceneData {
     const clip = (s: string) => s.slice(0, 64);
 
     if (o.of === 'kwic') {
