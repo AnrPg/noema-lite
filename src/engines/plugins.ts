@@ -70,8 +70,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('anatomy@1'),
-    () => import('./anatomy/anatomy.js'),
-    () => import('noema-worker:./anatomy/anatomy.js#simEngine'),
+    () => import('./anatomy/anatomy.ts'),
+    () => import('noema-worker:./anatomy/anatomy.ts#simEngine'),
   ),
   def(
     manifest('timeline@1'),

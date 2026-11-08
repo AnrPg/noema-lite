@@ -454,7 +454,7 @@ const CATALOG = Object.freeze([
     'diagnostic différentiel',
     'patient',
   ]),
-  E('anatomy@1', 'library', true, 'src/engines/anatomy/anatomy.js', 'anatomy', [
+  E('anatomy@1', 'library', true, 'src/engines/anatomy/anatomy.ts', 'anatomy', [
     'anatomy',
     'anatomical',
     'muscle',
