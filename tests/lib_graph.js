@@ -1,4 +1,4 @@
-/* graph@1 (src/engines/graph/graph.js, docs/library/graph.md) against published values:
+/* graph@1 (src/engines/graph/graph.ts, docs/library/graph.md) against published values:
    1. CLRS (Cormen, Leiserson, Rivest & Stein, Introduction to Algorithms, 3rd ed. 2009 / 4th ed. 2022) figures: Dijkstra, Bellman–Ford
       (and its negative cycle), Floyd–Warshall, MST, max flow / min cut, SCC; Königsberg (Euler 1736); two triangles bridged;
    2. Zachary's karate club (Zachary 1977) against networkx 3.x: clustering, transitivity, diameter, average path, PageRank,

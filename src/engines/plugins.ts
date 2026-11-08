@@ -40,8 +40,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('graph@1'),
-    () => import('./graph/graph.js'),
-    () => import('noema-worker:./graph/graph.js#simEngine'),
+    () => import('./graph/graph.ts'),
+    () => import('noema-worker:./graph/graph.ts#simEngine'),
   ),
   def(
     manifest('geom@1'),
