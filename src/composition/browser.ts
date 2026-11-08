@@ -217,7 +217,7 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
     // the typed runtimes' checks (src/runtimes: wasm, embed, h5p)
     return lazyContentChecks(() =>
       load().then(p => {
-        const runtimes = p.scopeCheckers(() => globalThis, p.runtimeChecks);
+        const runtimes = p.runtimeCheckers(p.runtimeChecks);
         return p.contentChecks(r.get(ENGINES), runtimes);
       }),
     );

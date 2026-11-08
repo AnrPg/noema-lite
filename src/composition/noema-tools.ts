@@ -19,17 +19,14 @@ import * as contracts from '../contracts/index.ts';
 import { nodeEngines } from '../engines/node.ts';
 import { pyRepr, type ChapterOptions } from '../features/content/domain/chapter.ts';
 import { isObj, type Obj } from '../features/content/domain/util.ts';
-import { contentChecks, scopeCheckers } from '../features/content/application/index.ts';
+import { contentChecks, runtimeCheckers } from '../features/content/application/index.ts';
 import { RUNTIME_CHECKS } from '../runtimes/checks.ts';
 import { createAuthoring } from '../features/author/application/index.ts';
 import { schemaApi } from '../features/author/domain/schema.ts';
 
 const engines = nodeEngines();
 /** the activity runtimes' checkers are all typed (src/runtimes): no runtime publishes one in a scope here */
-const C = contentChecks(
-  engines,
-  scopeCheckers(() => ({}), RUNTIME_CHECKS),
-);
+const C = contentChecks(engines, runtimeCheckers(RUNTIME_CHECKS));
 
 const readJson = (file: string): unknown => JSON.parse(fs.readFileSync(file, 'utf8')) as unknown;
 const errText = (e: unknown): string => (e instanceof Error ? e.message : String(e));
