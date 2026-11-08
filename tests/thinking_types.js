@@ -112,10 +112,10 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   ok(await p.locator('#T .explain .excite .srcref:has-text("p. 3")').count() === 1, 'source chip: shown after the answer, with the place');
 
   console.log('— facades of one learnable in a round');
-  const order = await p.evaluate(() => spreadFacades([{ id: 1, lr: 'a' }, { id: 2, lr: 'a' }, { id: 3, lr: 'b' }, { id: 4, lr: 'a' }, { id: 5, lr: 'c' }]).map(e => e.lr).join(''));
+  const order = await p.evaluate(() => NoemaCore.study.practice.spread([{ id: 1, lr: 'a' }, { id: 2, lr: 'a' }, { id: 3, lr: 'b' }, { id: 4, lr: 'a' }, { id: 5, lr: 'c' }]).map(e => e.lr).join(''));
   ok(!/(.)\1/.test(order.slice(0, 4)), `facades are spread out (${order})`);
   await p.evaluate(() => { const a = EX['ch01-e901'], b = { ...EX['ch01-e903'], id: 'ch01-e907', lr: a.lr }; EX[b.id] = b; ALL_EX.push(a, b); });
-  ok(await p.evaluate(() => siblingOf(EX['ch01-e901'], [EX['ch01-e901']])?.id === 'ch01-e907'), 'after a mistake: a sibling in another type is found for the round');
+  ok(await p.evaluate(() => NoemaCore.study.practice.sibling(EX['ch01-e901'], [EX['ch01-e901']], ALL_EX, e => e._ch)?.id === 'ch01-e907'), 'after a mistake: a sibling in another type is found for the round');
 
   console.log('— knowledge map, Mistakes gym by trap, reported exercises');
   await p.evaluate(() => {

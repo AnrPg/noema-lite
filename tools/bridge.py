@@ -34,7 +34,7 @@ The same functions build the library's bridges (tools/build.py) and run in the s
 import os, sys, json, re, glob, unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# ---------- text: the same folding, words and ids as the app (engine/catalog.js, engine/wordlink.js) ----------
+# ---------- text: the same folding, words and ids as the app (engine/catalog.js fold, src/features/catalog ids, engine/wordlink.js) ----------
 def fold(s):
     out = []
     for ch in str(s or ''):
@@ -64,7 +64,7 @@ def tokenize(s):
     return out
 
 def hash36(s):
-    """engine/catalog.js hash36 (over UTF-16 code units)."""
+    """src/features/catalog/domain/records.ts hash36 (over UTF-16 code units)."""
     b = str(s).encode('utf-16-le'); h1 = 0x811c9dc5; h2 = 0
     for k in range(0, len(b), 2):
         c = b[k] | (b[k + 1] << 8)
@@ -82,7 +82,7 @@ def _js(o):
     return json.dumps({k: v for k, v in o.items() if not str(k).startswith('_')} if isinstance(o, dict) else o, ensure_ascii=False, separators=(',', ':'))
 
 def block_ids(blocks):
-    """engine/catalog.js blockIds: the id of a block comes from what it holds."""
+    """src/features/catalog/domain/records.ts blockIds: the id of a block comes from what it holds."""
     seen = {}; out = []
     for b in blocks or []:
         u = _js(b).encode('utf-16-le')[:12000].decode('utf-16-le', 'ignore')

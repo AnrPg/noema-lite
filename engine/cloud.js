@@ -124,7 +124,8 @@
   /* ---------- combining two copies of a key (progress only grows) ---------- */
   const perId = (x, y, pick) => { const o = { ...(y || {}) }; for (const [id, v] of Object.entries(x || {})) o[id] = id in o && isObj(v) && isObj(o[id]) ? pick(v, o[id]) : v; return o; };
   const moreTries = (x, y) => (x.n || 0) !== (y.n || 0) ? ((x.n || 0) > (y.n || 0) ? x : y) : ((x.t || 0) >= (y.t || 0) ? x : y);
-  const laterReview = (x, y) => String(x.due || '') !== String(y.due || '') ? (String(x.due || '') > String(y.due || '') ? x : y) : ((x.box || 0) >= (y.box || 0) ? x : y);
+  /** of two copies of a card's or drill's schedule (FSRS, or the old Leitner shape), the one reviewed last: the study domain's */
+  const laterReview = (x, y) => NoemaCore.study.fsrs.later(x, y);
   /** A subject's progress (s:<subject>:state): a = this device's copy (wins on plain settings), b = the other one. */
   function mergeState(a, b) {
     const ra = a.resetAt || 0, rb = b.resetAt || 0;

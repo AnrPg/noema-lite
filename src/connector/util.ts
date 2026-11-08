@@ -28,7 +28,7 @@ export const sleep = (ms: number): Promise<void> => new Promise(r => setTimeout(
 export const jitter = (base: number, spread: number): Promise<void> => sleep(base + Math.random() * spread);
 export const message = (e: unknown): string => (e instanceof Error ? e.message : str(e));
 
-/** = engine/catalog.js hash36: the version stamp of a bridge's content. */
+/** = src/features/catalog/domain/records.ts hash36: the version stamp of a bridge's content. */
 export function hash36(input: string): string {
   let h1 = 0x811c9dc5,
     h2 = 0;

@@ -132,6 +132,7 @@ export const INTERNAL_ERROR_CODES = [
   'hlc.overflow', // more events in one millisecond than the counter holds (the physical clock stands still)
   'day.invalid', // not a calendar day "YYYY-MM-DD"
   'id.invalid', // not a valid id of its kind
+  'study.invalid', // study data that does not fit its model: a rating, FSRS parameters, an answer of another shape
   'container.unknown', // the composition root has no registration for a token
   'container.cycle', // registrations that depend on each other in a circle
   'container.frozen', // a registration after the container was frozen
