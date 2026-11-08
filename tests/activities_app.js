@@ -486,10 +486,10 @@ async function simSpec(p, ctx, E) {
     const m = document.querySelector('main'); m.innerHTML = ''; m.append(interactiveBlock({ t: 'interactive', activity: id })); scrollTo(0, 0);
   }, [id, change]);
   const fbState = () => p.evaluate(() => ({ sim: !!document.querySelector('main .sim'), fb: !!document.querySelector('main .act-fallback img'), text: document.querySelector('main .act-fbtext')?.textContent || '', note: document.querySelector('main .act-note')?.textContent || '', restart: !!document.querySelector('main .act-bar button') && /Restart/.test(document.querySelector('main .act-bar').textContent) }));
-  await mountItem('rc-badspec', "a.spec.derived.push({ id: 'x', expr: 'R +* 2' });"); await wait(500);
+  await mountItem('rc-badspec', "a.spec.derived.push({ id: 'x', expr: 'R +* 2' });"); await until(async () => (await fbState()).note, 6000);
   let st = await fbState();
   ok(!st.sim && st.fb && /1 kHz/.test(st.text) && /could not start/.test(st.note) && !st.restart, `an invalid spec: the fallback picture and text, no simulation ${JSON.stringify(st.note)}`);
-  await mountItem('rc-engine', "a.spec.engine = 'warp@9';"); await wait(500);
+  await mountItem('rc-engine', "a.spec.engine = 'warp@9';"); await until(async () => (await fbState()).note, 6000);
   st = await fbState();
   ok(!st.sim && st.fb && /cannot run in this version/.test(st.note), 'an engine this app does not have: the fallback, "cannot run in this version"');
   await p.evaluate(() => { window.NOEMA_CONFIG.activities = { 'sim-spec@1': false }; }); await mountItem('rc-off', ''); await wait(300);

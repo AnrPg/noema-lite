@@ -116,6 +116,7 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   await page.evaluate(() => NoemaSearch.goStep(99)); await wait(800);
   ok(await page.evaluate(() => !NoemaSearch.round() && location.hash.startsWith('#/search?q=E_k&t=exercise')), 'the end of the round goes back to the results');
   await page.goto(url + '#/search'); await page.reload(); await until(() => page.$('.ns-srcols'), 8000);
+  await until(() => page.evaluate(() => !!NoemaShell.engine), 8000); await wait(300);   // the subject's engine attaches (it redraws the page)
   await page.click('.ns-srcols .ns-menubtn'); await page.waitForSelector('.ns-pop');
   await page.locator('.ns-pop button', { hasText: 'Delete' }).first().click(); await wait(400);
   ok(await page.evaluate(() => NoemaSearch.collections().length === 0), 'delete a collection');
