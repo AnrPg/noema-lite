@@ -18,6 +18,10 @@ export interface SourceInfo {
   readonly emoji?: string;
   readonly pages?: string;
   readonly added?: string;
+  /** its file: a path in the package, its name and checksum */
+  readonly file?: string;
+  readonly fileName?: string;
+  readonly sha256?: string;
 }
 export interface SourceRegistry {
   readonly sources: readonly SourceInfo[];
@@ -77,7 +81,8 @@ export function fullCourse(chapters: readonly Chapter[], sources: readonly Sourc
   }));
 }
 
-const srcOf = (it: { readonly src?: string | undefined }, parent: { readonly src: string }): string => it.src ?? parent.src;
+/** the source an item comes from: its own, else its parent's */
+export const srcOf = (it: { readonly src?: string | undefined }, parent: { readonly src: string }): string => it.src ?? parent.src;
 
 /** Is a source new for this learner (seen: the ids marked as seen)? */
 export function isNewSource(

@@ -19,11 +19,23 @@ import {
   type SourceRef,
 } from '../domain/course.ts';
 import { atLevel, currentLevel, levelOf, offersLevelFilter } from '../domain/my-level.ts';
-import type { AnswerRecord, Chapter, Exercise, Flashcard } from '../domain/pack.ts';
-import { chapterProgress, isSolved, mistakes, roundOrder, siblingOf } from '../domain/queries.ts';
+import type { AnswerRecord, Chapter, Drill, Exercise, Flashcard } from '../domain/pack.ts';
+import { cardMemoryOf, checkParameters, masteryBox, newCard, scheduler, type CardMemory, type Rating } from '../domain/fsrs.ts';
+import {
+  cardQueue,
+  chapterProgress,
+  countDue,
+  isDue,
+  isSolved,
+  mistakes,
+  roundOrder,
+  siblingOf,
+  type CardQueue,
+} from '../domain/queries.ts';
 import { roundMachine, startRound, type RoundContext, type RoundEvent, type RoundState } from '../domain/session.ts';
 import type { StudyHost } from './host.ts';
 import type { AiPort, TutorPort, ViewerPort } from './parts.ts';
+import { SourcesUi } from './sources.ts';
 
 /** A round in play: its exercises' statechart and what the screen shows around it. */
 export interface Round {
@@ -63,7 +75,14 @@ export class StudyApp {
   /** the tutor and the AI's one-shot jobs (set by the root once tutor/ is made, before any screen is drawn) */
   tutor!: TutorPort;
   ai!: AiPort;
-  viewer!: ViewerPort;
+  /** the sources: chips, the filter's bar, the deck, opening a source */
+  readonly sourcesUi: SourcesUi;
+  readonly viewer: ViewerPort;
+  /** the page on screen (its route's name) and the Roadmap step's lock while it lasts */
+  route = '';
+  lock: { readonly missing: readonly string[] } | null = null;
+  /** draws the page of the address again (set by the root) */
+  rerender: () => void = () => undefined;
   /** the tab each chapter was left on */
   readonly chapterTab = new Map<string, string>();
   /** chunks of a section already shown (bite-size reading) */
@@ -81,6 +100,8 @@ export class StudyApp {
     this.#aliases = sourceAliases(sources);
     this.full = fullCourse(host.chapters, sources, host.sources);
     this.course = this.#build();
+    this.sourcesUi = new SourcesUi(this);
+    this.viewer = this.sourcesUi;
   }
   readonly full: Course['full'];
 
@@ -163,6 +184,12 @@ export class StudyApp {
     this.host.save();
     this.course = this.#build();
   }
+  /** a source shown as new again */
+  markUnseen(id: string): void {
+    if (this.state.seenSrc) Reflect.deleteProperty(this.state.seenSrc, id);
+    this.host.save();
+    this.course = this.#build();
+  }
   /** the source filter: the ids to show (null: everything) */
   setFilter(ids: readonly string[] | null): void {
     this.state.settings.srcOn = ids?.length && ids.length < this.course.sources.length ? [...ids] : null;
@@ -174,6 +201,27 @@ export class StudyApp {
   }
 
   /* ---------- progress ---------- */
+  /** The subject as a step of a Roadmap: its mastery so far (the 🎉 once mastered); null when it is not a step. */
+  station(): {
+    readonly title: string;
+    readonly read: number;
+    readonly solved: number;
+    readonly pass: number;
+    readonly done: boolean;
+  } | null {
+    const st = this.host.roadmap.station();
+    if (!st) return null;
+    const { sr: read, ex: solved } = this.courseProgress();
+    const done = st.mastered || (read >= 0.999 && solved >= st.pass);
+    if (done && !this.state.nodeDone) {
+      this.state.nodeDone = this.clock.now();
+      this.host.save();
+      setTimeout(() => {
+        this.host.feedback.big('node');
+      }, 600);
+    }
+    return { title: st.title, read, solved, pass: st.pass, done };
+  }
   progress(c: Chapter): { readonly sr: number; readonly ex: number } {
     return chapterProgress(c, this.state.read, this.state.res);
   }
@@ -217,6 +265,41 @@ export class StudyApp {
       else this.host.feedback.confetti(160);
       this.toast(`🎯 ${this.t('engine.core.goalSmashed')}`);
     } else if (crossed.level && this.host.feedback.reacts) this.host.feedback.big('level');
+  }
+
+  /* ---------- cards and drills: FSRS-6 (domain/fsrs.ts) ---------- */
+  /** a card's or a drill's memory after a review (the learner's own parameters once fitted) */
+  review(raw: unknown, rating: Rating, at = this.clock.now()): CardMemory {
+    const f = this.state.settings.fsrs ?? null;
+    const p = f?.parameters ? checkParameters(f.parameters) : null;
+    const s = scheduler({ ...(p?.ok ? { parameters: p.value } : {}), ...(f?.retention ? { retention: f.retention } : {}) });
+    return s.review(cardMemoryOf(raw) ?? newCard(at), rating, at);
+  }
+  deck<C extends { readonly key: string }>(cards: readonly C[], o: { readonly all?: boolean } = {}): CardQueue<C> {
+    return cardQueue(cards, this.state.fc, this.clock.today(), { random: Math.random, ...(o.all ? { all: true } : {}) });
+  }
+  dueCards(chapters?: readonly Chapter[]): number {
+    return countDue(
+      this.state.fc,
+      this.clock.today(),
+      this.cards(chapters).map(c => c.key),
+    );
+  }
+  dueDrills(): number {
+    return countDue(
+      this.state.pb,
+      this.clock.today(),
+      this.course.chapters.flatMap(c => c.debug.map(d => d.id)),
+    );
+  }
+  /** a drill to do: never done, or due again */
+  drillDue(d: Drill): boolean {
+    const raw = this.state.pb[d.id];
+    return !raw || isDue(raw, this.clock.today());
+  }
+  /** a drill's mastery 0–5 (its five dots) */
+  drillBox(d: Drill): number {
+    return masteryBox(cardMemoryOf(this.state.pb[d.id]));
   }
 
   /* ---------- only my level ---------- */
@@ -272,7 +355,8 @@ export class StudyApp {
       xp0: this.state.xp,
       after: o.after ?? null,
     };
-    this.go('#/run');
+    if (location.hash === '#/run') this.rerender();
+    else this.go('#/run');
   }
 
   /* ---------- ⏱️ the focus sprint (15 minutes) ---------- */

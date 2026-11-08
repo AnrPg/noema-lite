@@ -8,7 +8,7 @@
  */
 import type { Course } from '../domain/course.ts';
 import type { Chapter, Exercise, Media, StudyState, SubjectInfo } from '../domain/pack.ts';
-import type { SourceRegistry } from '../domain/course.ts';
+import type { SourceInfo, SourceRegistry } from '../domain/course.ts';
 import type { Widget, WidgetApi } from './exercise/widget.ts';
 
 /** One entry of a ⋮ menu or a Practice ▾ list ('-': a line). */
@@ -27,6 +27,9 @@ export type MenuEntry =
       readonly tone?: number;
     };
 
+/** one entry of a ⋮ menu (not a line) */
+export type MenuItem = Exclude<MenuEntry, '-'>;
+
 /** The frame's top bar for a screen (docs/UI_MAP.md "The frame"). */
 export interface Chrome {
   /** the crumbs after the subject's own (the subject's are the frame's) */
@@ -42,6 +45,12 @@ export interface Chrome {
 }
 
 export interface FramePort {
+  /** the new frame is on (else the older page: its own back buttons and tiles) */
+  readonly framed: boolean;
+  /** the page's <main> */
+  main(): HTMLElement;
+  /** the account's setup reminders over the subject's page (area 1), or null */
+  setupBanner(): HTMLElement | null;
   chrome(c: Chrome): void;
   /** a ▾ button with a list (Practice ▾): the frame's menu button */
   menuButton(items: readonly (MenuEntry | null)[], o: { readonly label: string; readonly cls?: string }): HTMLElement;
@@ -134,6 +143,33 @@ export interface SearchRoundPort {
   readonly page: string;
 }
 
+/** The files of the subject's sources on this device or in the cloud (engine/srcfiles.js). */
+export interface SourceFilesPort {
+  /** can the source be opened: a stored file, or a web address (url) */
+  available(s: SourceInfo): { readonly url?: string; readonly stored: boolean } | null;
+  /** the files attached, by source id */
+  index(): Readonly<Record<string, { readonly name: string; readonly size: number; readonly cloud: boolean }>>;
+  webUrl(s: SourceInfo): string | null;
+  get(id: string): Promise<{ readonly blob: Blob; readonly name: string; readonly type: string } | null>;
+  put(id: string, file: File): Promise<void>;
+  remove(id: string): Promise<void>;
+  /** a book's page as the page of its split file */
+  filePage(s: SourceInfo, page: number): number;
+}
+
+/** What the file viewer opens (engine/viewer.js NoemaViewer.open). */
+export type FileToOpen =
+  | { readonly url: string; readonly title: string; readonly subtitle: string; readonly page: number | null; readonly start: number | null }
+  | {
+      readonly blob: Blob;
+      readonly name: string;
+      readonly type: string;
+      readonly title: string;
+      readonly subtitle: string;
+      readonly page: number | null;
+      readonly start: null;
+    };
+
 export interface StudyHost {
   readonly subject: SubjectInfo;
   readonly account: { readonly id: string; readonly name: string; readonly kind: string };
@@ -159,6 +195,13 @@ export interface StudyHost {
   readonly bridge: BridgePort;
   readonly subjectActions: SubjectActionsPort;
   readonly search: SearchRoundPort;
-  /** ⚑ the problem report of an item (area 4); null when reports are off */
-  reportButton(item: { readonly kind: string; readonly id: string }): HTMLElement | null;
+  readonly sourceFiles: SourceFilesPort;
+  /** opens a file in the viewer */
+  openFile(f: FileToOpen): void;
+  /** fits the FSRS parameters again when enough new reviews came (the read models' Worker); null: no fit due */
+  refitFsrs(last: { readonly n?: number } | null): Promise<{ readonly parameters: readonly number[]; readonly n: number } | null>;
+  /** the stable ids of a section's blocks (the catalogue's) */
+  blockIds(blocks: readonly unknown[]): readonly string[];
+  /** a trap's stable id (the catalogue's) */
+  trapId(p: unknown): string;
 }

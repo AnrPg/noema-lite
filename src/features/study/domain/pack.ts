@@ -168,6 +168,23 @@ export interface Pitfall {
   readonly src?: string;
 }
 
+export interface KnowledgePoint {
+  readonly id: string;
+  readonly text: string;
+  readonly level?: string;
+  readonly cats?: readonly string[];
+  readonly taughtIn?: string | number;
+}
+export interface Learnable {
+  readonly id: string;
+  readonly kp?: readonly string[];
+  readonly goal?: string;
+}
+export interface KnowledgeMap {
+  readonly points?: readonly KnowledgePoint[];
+  readonly learnables?: readonly Learnable[];
+}
+
 export interface Chapter {
   readonly id: string;
   readonly num: number;
@@ -185,7 +202,8 @@ export interface Chapter {
   readonly flashcards: readonly Flashcard[];
   readonly debug: readonly Drill[];
   readonly pitfalls: readonly Pitfall[];
-  readonly map?: { readonly learnables?: readonly unknown[] };
+  /** the knowledge map written before the chapter (noema.map/v1): its points and learnables */
+  readonly map?: KnowledgeMap;
   /** the chapter's colour number (its place in the whole pack) */
   readonly _ci?: number;
   readonly _i?: number;
