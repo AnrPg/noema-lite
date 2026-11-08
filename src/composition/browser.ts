@@ -31,6 +31,7 @@ import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
+import { COMMUNITY_APP_BRIDGE } from './community-app.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
@@ -75,6 +76,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'engines', build: r => r.get(ENGINES) },
   // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
   ...COMMUNITY_BRIDGE,
+  // NoemaCore.community: the community screens (search, vault, people, ⚑ reports, Explore, #/engines), loaded on first use
+  ...COMMUNITY_APP_BRIDGE,
   // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
   // index's records, built in the Worker): src/composition/study.ts
   ...STUDY_BRIDGE,

@@ -1,0 +1,318 @@
+/**
+ * The community screens' host (src/features/community/ui/host.ts) over the app of today: the older scripts' globals
+ * (window.Noema of engine/loader.js, NoemaShell, NoemaCloud, NoemaCurriculum, NoemaConvos, NoemaThemes, NoemaMT …),
+ * read when a screen asks, never at load. This is the one file of the community area that knows those names; the
+ * phase-3 shell gives the screens a host over its own services instead.
+ */
+import type {
+  CommunityHost,
+  HostAccount,
+  HostPack,
+  HostRoadmap,
+  HostSearchSource,
+  HostSession,
+  HostSubject,
+  PublicItem,
+  ReportContext,
+  ShareHost,
+} from '../features/community/ui/host.ts';
+import type { MessageParams } from '../ports/i18n.ts';
+
+/* The globals as these calls use them (loosely typed: they are plain scripts). */
+type Fn = (...a: never[]) => unknown;
+type Any = Record<string, unknown> & { [k: string]: unknown };
+interface Win {
+  readonly location: Location;
+  readonly history: History;
+  readonly document: Document;
+  readonly localStorage: Storage;
+  readonly addEventListener: Window['addEventListener'];
+  readonly [name: string]: unknown;
+}
+const fn = (o: unknown, name: string): Fn | null => {
+  const f = o && typeof o === 'object' ? (o as Any)[name] : undefined;
+  return typeof f === 'function' ? (f.bind(o) as Fn) : null;
+};
+const obj = (o: unknown): Any | null => (o && typeof o === 'object' ? (o as Any) : null);
+const str = (x: unknown): string => (typeof x === 'string' ? x : typeof x === 'number' ? String(x) : '');
+/** a method of an older script's object, called when it is there (its answer is what that script returns) */
+type Method = (...a: unknown[]) => unknown;
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- the caller names what the plain script answers
+const call = <T>(o: unknown, name: string, ...args: unknown[]): T | undefined => {
+  const f = fn(o, name) as Method | null;
+  return f ? (f(...args) as T) : undefined;
+};
+/** … and one that must be there */
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- the caller names what the plain script answers
+const need = <T>(o: unknown, name: string, ...args: unknown[]): T => {
+  const f = fn(o, name) as Method | null;
+  if (!f) throw new Error(`${name} is not available here`);
+  return f(...args) as T;
+};
+
+export interface OldAppHostParts {
+  /** the ⚑ locator's engine side (report-context.ts) */
+  readonly report: ReportContext;
+  /** the share dialog's cloud calls */
+  readonly share: ShareHost;
+}
+
+export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
+  const g = (name: string): Any | null => obj(win[name]);
+  const N = (): Any | null => g('Noema');
+  const S = (): Any | null => g('NoemaShell');
+  const CU = (): Any | null => g('NoemaCurriculum');
+  const acc = (): string | null => str(obj(N()?.['account'])?.['id']) || str(obj(N()?.['kv'])?.['acc']) || null;
+  const world = (): 'know' | 'lang' | 'both' => {
+    const w = call<string>(obj(g('NoemaThemes')), 'world');
+    return w === 'lang' || w === 'both' ? w : 'know';
+  };
+  const lsGet = (k: string): string | null => {
+    try {
+      return win.localStorage.getItem(k);
+    } catch {
+      return null; // site data blocked: as if nothing was stored
+    }
+  };
+  const jget = <T>(k: string, d: T): T => {
+    const v = lsGet(k);
+    if (v == null) return d;
+    try {
+      return JSON.parse(v) as T;
+    } catch {
+      return d; // a value written by hand: the default
+    }
+  };
+  const accountKey = (name: string): string => {
+    const kv = obj(N()?.['kv']);
+    return call<string>(kv, 'accountKey', name) ?? `noema1:${acc() ?? ''}:a:${name}`;
+  };
+  const isLangSubj = (s: HostSubject): boolean => s.kind === 'language' || s.id.startsWith('lang:');
+
+  /* the last address that was not the search page (where its ← goes) */
+  const outsideOf = new Map<string, string>();
+  const noteOutside = (): void => {
+    const h = win.location.hash;
+    for (const p of outsideOf.keys()) if (!h.startsWith(p)) outsideOf.set(p, h);
+  };
+  win.addEventListener('hashchange', noteOutside);
+
+  /** where every record of the search comes from: the subjects' packs, the Roadmaps, the language courses, the conversations */
+  async function searchSources(): Promise<HostSearchSource[]> {
+    const a = acc(),
+      w = world(),
+      out: HostSearchSource[] = [];
+    const n = N();
+    if (!a || !n) return out;
+    if (w !== 'lang') {
+      const subs = (
+        (await (call<Promise<HostSubject[]>>(n, 'subjectsFor', a) ?? Promise.resolve([])).catch(() => [])) as HostSubject[]
+      ).filter(s => !isLangSubj(s) && !s.hidden);
+      for (const s of subs)
+        out.push({
+          key: 'pack:' + s.id,
+          label: s.title || s.id,
+          sig: [str(s['version']), str(s['updated']), JSON.stringify(s['counts'] ?? {}), s.title || '', s.description ?? ''].join('|'),
+          input: async () => {
+            const packs = obj(win['NOEMA_PACKS']);
+            const had = !!packs?.[s.id];
+            const p = await need<Promise<unknown>>(n, 'loadSubject', a, s.id);
+            const open = obj(obj(obj(n['pack'])?.['subject']))?.['id'];
+            if (!had && packs && open !== s.id) Reflect.deleteProperty(packs, s.id); // read once; the page keeps only the subject studied
+            return { kind: 'pack', data: p, meta: s };
+          },
+        });
+      for (const c of call<Any[]>(CU(), 'list', a) ?? [])
+        out.push({
+          key: 'cur:' + str(c['id']),
+          label: str(c['title']) || str(c['goal']) || str(c['id']),
+          sig: str(c['updated']),
+          input: () => Promise.resolve({ kind: 'curriculum', data: call<unknown>(CU(), 'get', a, c['id']) ?? c }),
+        });
+    }
+    if (w !== 'know' && fn(n, 'langCourses')) {
+      const reg = obj(win['NOEMA_REGISTRY']);
+      const hash36 = (s: string): string => call<string>(obj(obj(win['NoemaCore'])?.['catalog']), 'hash36', s) ?? String(s.length);
+      for (const m of call<Any[]>(n, 'langCourses') ?? []) {
+        const id = str(m['courseId']);
+        const own = m['account'] ? (lsGet(`noema1:${a}:a:langcourse:${id}`) ?? '') : '';
+        out.push({
+          key: 'lang:' + id,
+          label: str(m['title']) || id,
+          sig: [str(m['version']), str(m['path']), str(reg?.['builtAt']), own ? hash36(own) : ''].join('|'),
+          input: async () => ({ kind: 'lang', data: await need<Promise<unknown>>(n, 'langData', m), meta: m }),
+        });
+      }
+    }
+    const cv = g('NoemaConvos');
+    const all = cv ? ((await (call<Promise<Any[]>>(cv, 'list', a) ?? Promise.resolve([])).catch(() => [])) as Any[]) : [];
+    const live = all.filter(
+      r => !r['deleted'] && Array.isArray(r['messages']) && r['messages'].length && (!r['kind'] || r['kind'] === 'tutor'),
+    );
+    const t = (k: string): string => call<string>(S(), 'L', k) ?? k;
+    out.push({
+      key: 'convos',
+      label: t('sr_t_convo'),
+      sig:
+        String(live.length) +
+        '|' +
+        live.reduce((m, r) => (str(r['updatedAt']) > m ? str(r['updatedAt']) : m), '') +
+        '|' +
+        String(live.map(r => str(r['title'])).join('').length),
+      input: () => Promise.resolve({ kind: 'convos', data: live }),
+    });
+    return out;
+  }
+
+  const host: CommunityHost = {
+    /* ---------- the address ---------- */
+    hash: () => win.location.hash,
+    go: hash => {
+      if (fn(S(), 'go')) call(S(), 'go', hash);
+      else win.location.hash = hash;
+    },
+    replace: hash => {
+      const l = win.location;
+      win.history.replaceState(win.history.state, '', l.pathname + l.search + hash);
+    },
+    link: hash => win.location.origin + win.location.pathname + hash,
+    outside: prefix => {
+      if (!outsideOf.has(prefix)) outsideOf.set(prefix, win.location.hash.startsWith(prefix) ? '' : win.location.hash);
+      return outsideOf.get(prefix) ?? '';
+    },
+
+    /* ---------- the account ---------- */
+    account: () => {
+      const a = obj(N()?.['account']);
+      const id = acc();
+      if (!id) return null;
+      const r: HostAccount = {
+        id,
+        kind: a?.['kind'] === 'cloud' ? 'cloud' : 'local',
+        ...(str(a?.['name']) ? { name: str(a?.['name']) } : {}),
+        ...(str(a?.['emoji']) ? { emoji: str(a?.['emoji']) } : {}),
+      };
+      return r;
+    },
+    session: () => {
+      const s = obj(call<unknown>(g('NoemaCloud'), 'session'));
+      const user = obj(s?.['user']);
+      const id = str(user?.['id']) || str(s?.['userId']);
+      if (!id) return null;
+      const r: HostSession = { userId: id, ...(str(user?.['email']) ? { email: str(user?.['email']) } : {}) };
+      return r;
+    },
+    signIn: () => {
+      call(N(), 'pickAccount');
+    },
+    world,
+    getAccountSetting: name => lsGet(accountKey(name)),
+    setAccountSetting: (name, value) => {
+      const kv = obj(N()?.['kv']);
+      if (fn(kv, 'set')) call(kv, 'set', accountKey(name), value);
+      else win.localStorage.setItem(accountKey(name), value); // (engine/loader.js is always there in the app: its kv syncs it)
+    },
+
+    /* ---------- the frame ---------- */
+    overlay: el => {
+      win.document.body.append(el);
+      return () => {
+        el.remove();
+      };
+    },
+    face: mood => {
+      const f = call<unknown>(S(), 'faceEl', undefined, mood ?? 'breathe');
+      return f instanceof HTMLElement ? f : null;
+    },
+    word: (key: string, params?: MessageParams) => {
+      const i18n = g('NoemaI18n');
+      return call<string>(i18n, 't', key, params) ?? key;
+    },
+
+    /* ---------- the learner's subjects and Roadmaps ---------- */
+    subjects: async () => {
+      const a = acc();
+      if (!a) return [];
+      return ((await call<Promise<HostSubject[]>>(N(), 'subjectsFor', a)) ?? []).filter(s => !s.hidden);
+    },
+    loadSubject: async id => {
+      const a = acc();
+      if (!a) return null;
+      return (await need<Promise<HostPack | null>>(N(), 'loadSubject', a, id)) ?? null;
+    },
+    importPack: (pack, meta) => need<Promise<HostSubject>>(N(), 'importPack', acc(), pack, meta),
+    openSubject: (id, hash) => {
+      if (fn(S(), 'open')) call(S(), 'open', id, hash);
+      else call(N(), 'pickSubject', acc(), id);
+    },
+    openSubjectId: () => {
+      if (!S()?.['engine']) return null;
+      return str(obj(N()?.['subject'])?.['id']) || null;
+    },
+    roadmaps: () => call<HostRoadmap[]>(CU(), 'list', acc()) ?? [],
+    roadmap: id => call<HostRoadmap | null>(CU(), 'get', acc(), id) ?? null,
+    publishRoadmap: async (id, o) => {
+      await need<Promise<unknown>>(CU(), 'publish', acc(), id, { public: o.isPublic });
+    },
+    joinRoadmap: async (id, o) => {
+      await need<Promise<unknown>>(CU(), 'joinShared', acc(), id, { viaRoom: o.viaRoom });
+    },
+    fromSources: files => {
+      call(g('NoemaSourcePlan'), 'open', { files });
+    },
+    pdfPages: async file => {
+      const n = await call<Promise<number>>(g('NoemaSrcFiles'), 'pdfPages', file);
+      return typeof n === 'number' ? n : null;
+    },
+    publicPage: async userId => {
+      const r = await call<Promise<{ published?: boolean } | null>>(g('NoemaProfile'), 'get', userId);
+      return r ?? null;
+    },
+
+    /* ---------- the search ---------- */
+    searchSources,
+    subjectStatus: id => jget<Record<string, unknown> | null>(`noema1:${acc() ?? ''}:s:${id}:state`, null),
+    roadmapPacks: id => {
+      const c = obj(call<unknown>(CU(), 'get', acc(), id));
+      return Object.values(obj(c?.['nodes']) ?? {})
+        .map(n => str(obj(obj(n)?.['pack'])?.['id']))
+        .filter(Boolean);
+    },
+    openConversation: id => {
+      call(S(), 'convos', id);
+    },
+
+    /* ---------- Explore and sharing ---------- */
+    publicSubjects: async () => (await call<Promise<PublicItem[]>>(N(), 'publicSubjects')) ?? [],
+    studyPublic: async item => {
+      await need<Promise<unknown>>(N(), 'studyPublic', item);
+    },
+    publicRoadmaps: async () => (await call<Promise<PublicItem[]>>(CU(), 'publicList', acc())) ?? [],
+    openPublicRoadmap: async item => {
+      await need<Promise<unknown>>(CU(), 'openPublic', acc(), item);
+    },
+    domains: () => call<string[]>(CU(), 'domains') ?? [],
+    langTag: item => {
+      const t = call<unknown>(N(), 'langTag', item);
+      return t instanceof HTMLElement ? t : null;
+    },
+    translatable: (el, o) => {
+      call(g('NoemaMT'), 'mark', el, o);
+    },
+    translateBar: scope => {
+      const mt = g('NoemaMT');
+      const t = call<unknown>(mt, 'toggle', acc(), [...scope.querySelectorAll('[data-mt]')]);
+      return t instanceof HTMLElement ? t : null;
+    },
+    share: parts.share,
+
+    /* ---------- ⚑ reports, #/engines ---------- */
+    report: parts.report,
+    engineHere: entry => {
+      const act = obj(obj(win['NoemaEngine'])?.['ACT']) ?? obj(win['ACT']);
+      if (entry.runtime && entry.runtime !== true) return !!obj(act?.['runtime'])?.[entry.runtime];
+      return !!obj(act?.['engines'])?.[entry.id];
+    },
+  };
+  return host;
+}
