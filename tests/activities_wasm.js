@@ -148,15 +148,21 @@ async function browserPart() {
   const hline = fs.readFileSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_harness.js'), 'utf8').split('\n').find(l => l.startsWith('function h(tag'));
   const WORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}' };
   const HOST = `<!doctype html><meta charset="utf-8"><style>${rd('32_activities.css')}</style><body><div id="box" class="act-box"></div><script>
-var RT = {}, EN = {}; var ACT = { ITEMS: ${JSON.stringify(ITEMS)}, registerRuntime: function (d) { RT[d.id] = d; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, runtime: function (id) { return RT[id] || null; } };
+var RT = {}, EN = {}; var ACT = { ITEMS: ${JSON.stringify(ITEMS)}, registerRuntime: function (d) { RT[d.id] = d; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, runtime: function (id) { return RT[id] || null; }, loadedRuntime: function (id) { return RT[id] || null; } };
 var WORDS = ${JSON.stringify(WORDS)};
 function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
 ${hline}
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
+/* what the typed sim-spec@1 runtime (src/runtimes/sim-spec) gets from its host */
+var HOSTPORT = { t: tE, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, check: function (raw) { return ACTP.check(raw); }, setting: function () { return undefined; }, setSetting: function () { },
+  flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); }, asset: function (p) { return p; },
+  compute: { engine: function (id) { return ACT.engine(id); }, engines: function () { return ACT.engines(); }, library: function () { return NoemaCore.engines.catalog.LIBRARY.slice(); },
+    compile: function (src) { return NoemaCore.engines.expr.compile(src); }, content: function () { return NoemaCore.content; }, parts: function () { return null; } } };
+</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>window.SIMREADY = NoemaCore.runtimes.load('sim-spec@1').then(function (m) { var d = m.create(HOSTPORT); RT[d.id] = d; });</script><script>${rd('44_activity_wasm.js')}</script><script>
 window.LOG = []; window.H = null;
-window.run = function (id, task) {
+window.run = async function (id, task) {
+  await window.SIMREADY;
   var act = ACT.ITEMS[id], box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];
   if (window.H) try { window.H.close(); } catch (e) {}
   var init = { activityId: id, exerciseId: null, attemptId: 't', seed: 12345, task: task || {}, locale: 'en', strings: (act.strings || {}).en || {}, theme: {}, state: null, stateVersion: 1, capabilities: [], limits: {} };

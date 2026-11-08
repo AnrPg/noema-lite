@@ -51,6 +51,16 @@ const host = (flags: Record<string, unknown>): RuntimeHost => {
     flags: () => flags,
     warn: () => undefined,
     now: () => 1,
+    check: () => ({ ok: false, why: 'not here' }),
+    asset: p => 'engine/' + p,
+    compute: {
+      engine: () => null,
+      engines: () => [],
+      library: () => [],
+      compile: () => () => NaN,
+      content: () => null,
+      parts: () => null,
+    },
   };
 };
 

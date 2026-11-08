@@ -349,14 +349,17 @@ The runtimes that show an item of `pack.activities` are plugins of kind `runtime
 layer `runtimes` of the ESLint boundaries: kernel, contracts, ports, plugins and itself). `manifests.ts` lists each with its
 switch (`on`: unless `config.js` says false; `opt-in`: only when it says true), `plugins.ts` its lazy entry, `checks.ts` the
 pure checks (`RUNTIME_CHECKS`, which the roots hand the content checks through `scopeCheckers`). A runtime module's
-`create(host)` takes a `RuntimeHost` (`types.ts`: the app's words, the protocol's envelope, the account settings, the
-deployment's switches) and returns the `ActivityRuntime` the activity core mounts (`mount(box, ctx) → port`, `waits`,
+`create(host)` takes a `RuntimeHost` (`types.ts`: the app's words, the protocol's envelope and its check, the account settings, the
+deployment's switches, the compute side) and returns the `ActivityRuntime` the activity core mounts (`mount(box, ctx) → port`, `waits`,
 `failText(code, act)`), or null when it is off. The core (`engine/src/32_activities.js`) knows every runtime by its manifest
 at once (`ACT.caps()`, `ACT.hasRuntime(id)`), loads its code when an activity starts (`ACT.runtime(id)` → Promise), and
 `ACT.loadedRuntime(id)` is the registered one. The page has the code in the lazy piece `build/runtimes.js`; the node suites
 read `build/runtimes-node.cjs` (`src/runtimes/node.ts`). A runtime's styles are `src/runtimes/<name>/*.css` (`tools/build.py`
-adds them to `engine/engine.css`). Moved so far: `external-embed@1`. Still scripts of `engine/src`: `html-app@1` (34),
-`sim-spec@1` (35), `py-module@1` (37), `h5p@1` (38), `wasm-module@1` / `wasm@1` (44).
+adds them to `engine/engine.css`). The runtimes that compute reach the engines, the expression language, the content checks
+and the pack's parts only through `host.compute` (`compute.ts`; the core hands them over), never by importing those layers.
+Moved so far: `external-embed@1`, `sim-spec@1` (`sim-spec/`: the view, the bench, the engine runner and the parts orchestrator;
+the core keeps `ACT.simView` for the runtimes built on it). Still scripts of `engine/src`: `html-app@1` (34), `py-module@1` (37),
+`h5p@1` (38), `wasm-module@1` / `wasm@1` (44).
 
 ## 7. Patterns
 

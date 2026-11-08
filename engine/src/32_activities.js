@@ -3,7 +3,7 @@
    theory block { t: 'interactive', activity } (an explorer, not graded) or as an exercise { type: 'sim', activity, task, grade, hints }.
    This file is the trusted core (ports & adapters): it knows only the RuntimeAdapter port, never a runtime by name.
      registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (src/runtimes: loaded by runtime(id); html-app@1 in 34_activity_html.js, sim-spec@1 in
-                                                                       35_activity_sim.js; more in P3–P4). autoHeight: it renders in the
+                                                                       src/runtimes/sim-spec; more in P3–P4). autoHeight: it renders in the
                                                                        app's own DOM and takes the height it needs (no frame)
      registerEngine({ id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? })
                                                                        an engine of sim-spec@1 (formula@1 built in; the circuit engine in P3)
@@ -108,7 +108,17 @@ const ACT = (() => {
     t: (k, v) => tE(k, v), message: (type, payload, extra) => ACTP.out(type, payload, extra),
     setting: k => (S.settings ? S.settings[k] : undefined), setSetting: (k, v) => { if (!S.settings) return; S.settings[k] = v; if (typeof save === 'function') save(); },
     flags: () => flags(), warn: (...w) => console.warn(...w), now: () => Date.now(),
+    check: raw => ACTP.check(raw),
+    // the engines (this core's and the library's), the expression language, the content checks and the pack's parts (src/runtimes/compute.ts)
+    compute: Object.freeze({
+      engine: id => engine(id), engines: () => engines(), library: () => [...(LIBR()?.catalog?.LIBRARY || [])],
+      compile: src => LIBR().expr.compile(src), content: () => window.NoemaCore?.content || null, parts: () => PARTS,
+    }),
   });
+  const SIM = 'sim-spec@1';
+  /** the typed runtimes an item needs before it mounts: its own, and the sim-spec view that the runtimes built on it draw with
+      (an item with its own spec: py-module@1, wasm-module@1; a mini-app that lists engines runs them with the sim runtime's runners) */
+  const needs = a => [...new Set([a.runtime, ...(a.runtime !== SIM && ((a.spec && typeof a.spec === 'object') || (Array.isArray(a.engines) && a.engines.length)) ? [SIM] : [])])];
   const pendingRt = {};
   /** a runtime ready to mount: one registered here, or a typed one loaded now (once) and made for this app → Promise<runtime | null> */
   function runtime(id) {
@@ -122,6 +132,7 @@ const ACT = (() => {
   /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
       (workerSource: the engine's code as text, defining self.noemaEngine = { create }; it then runs in a Worker — docs/INTERACTIVE.md §12.6) */
   function registerEngine(def) { if (def && typeof def.id === 'string' && /^[a-z][a-z0-9-]*@\d+$/.test(def.id) && typeof def.create === 'function') ENGINES[def.id] = def; }
+  registerEngine({ id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) });   // sim-spec@1's built-in engine: the derived values are the model
   /** the engine library (src/engines, NoemaCore.engines): its engines are known at once and loaded when an activity needs one */
   const LIBR = () => window.NoemaCore?.engines || null;
   /** an engine ready to run: one registered here, or one of the library once it is loaded (null before) */
@@ -259,12 +270,13 @@ const ACT = (() => {
     function start() {
       if (sess.destroyed) return;
       const want = unloaded(a);
-      if (!want.length && own(a.runtime)) return begin();
+      const rts = needs(a).filter(id => !own(id));
+      if (!want.length && !rts.length) return begin();
       teardown(); box.classList.remove('act-fallback'); note.textContent = tE('engine.act.loading');
       const tok = sess.loading = {};
-      Promise.all([want.length ? LIBR().load(want) : null, runtime(a.runtime)]).then(([, rt]) => {
+      Promise.all([want.length ? LIBR().load(want) : null, ...rts.map(runtime)]).then(([, ...rt]) => {
         if (sess.loading !== tok || sess.destroyed) return;
-        if (!rt) { sess.loading = null; return stop(tE('engine.act.failed')); }
+        if (!own(a.runtime) || rt.some(x => !x)) { sess.loading = null; return stop(tE('engine.act.failed')); }
         begin();
       });
     }
@@ -349,7 +361,12 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  /** the sim-spec view (src/runtimes/sim-spec) for the runtimes that compute the outputs themselves (py-module@1): loaded before they mount (needs) */
+  const simView = (box, ctx, host) => RUNTIMES[SIM].view(box, ctx, host);
+  /** the sim runtime's runners for the engines a mini-app lists (html-app@1, 34_activity_html.js): loaded before it mounts (needs) */
+  const engineRunner = (E, spec, opts, onFail) => RUNTIMES[SIM].engineRunner(E, spec, opts, onFail);
+  const partsRunner = (spec, opts, onFail) => RUNTIMES[SIM].partsRunner(spec, opts, onFail);
+  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, simView, engineRunner, partsRunner, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */

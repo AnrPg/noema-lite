@@ -19,7 +19,10 @@ export interface RuntimeDescriptor {
   readonly switch: RuntimeSwitch;
 }
 
-const LIST: readonly (readonly [`${string}@${number}`, RuntimeSwitch])[] = [['external-embed@1', 'opt-in']];
+const LIST: readonly (readonly [`${string}@${number}`, RuntimeSwitch])[] = [
+  ['external-embed@1', 'opt-in'],
+  ['sim-spec@1', 'on'],
+];
 
 /** every runtime the registry holds */
 export const RUNTIME_DESCRIPTORS: readonly RuntimeDescriptor[] = Object.freeze(

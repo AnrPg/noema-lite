@@ -610,8 +610,10 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
     return it.spec.outputs.filter(o => o.kind === 'scalar').every(o => Object.is(+a1[o.id], +a2[o.id]) || Math.abs(a1[o.id] - a2[o.id]) <= 1e-12 * Math.abs(a2[o.id])); });
   ok(sameRun.every(Boolean), `each engine's workerSource alone (as in the Worker) computes the same scalars as on the page: ${sameRun.join(', ')}`);
 }
+/** the sources of the sim-spec@1 runtime (src/runtimes/sim-spec), together */
+const SIMSRC = () => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec')).filter(f => f.endsWith('.ts')).sort().map(f => fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec', f), 'utf8')).join('\n');
 { // the runtime's own words go through tE() and exist in every UI language (the drafts)
-  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8'), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
+  const src = SIMSRC(), keys = [...new Set([...src.matchAll(/tE\('(engine\.act\.(?:sim|bench)\.[a-zA-Z]+(?:\.[a-zA-Z]+)*)'/g)].map(m => m[1]))];
   for (const k of ['V', 'I', 'R', 'scope', 'logic', 'bode', 'log', 'rssi', 'T', 'clock']) keys.push('engine.act.bench.inst.' + k);   // (built: 'engine.act.bench.inst.' + kind)
   for (const k of ['dc', 'ac', 'rms', 'avg']) keys.push('engine.act.bench.mode.' + k);   // (built: 'engine.act.bench.mode.' + mode)
   const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8'); for (const m of src32.matchAll(/tE\('(engine\.act\.sim\.[a-z]+)'/g)) if (!keys.includes(m[1])) keys.push(m[1]);
@@ -630,8 +632,9 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
   ok(!/\btE\(/.test(wsrc) && !/innerHTML|insertAdjacentHTML|document\.write|\beval\s*\(|new\s+Function/.test(wsrc.replace(/\/\*[\s\S]*?\*\//g, '')), 'wasm-module@1 adds no words of its own (failures are the core\'s codes) and never puts HTML or code from the pack in the page');
 }
 { // the sim runtime renders without a frame and never runs pack code: no eval / Function / HTML from the pack
-  const src = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
-  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /NoemaCore\.content\.checkSimSpec\(spec, tables, host \? null : ACT\.engines\(\), host \? host\.check : undefined\)/.test(src) && /NoemaCore\.engines\.expr\.compile/.test(src), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through the expression language (NoemaCore.engines.expr)');
+  const src = SIMSRC(), s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
+  ok(!/\beval\s*\(|new\s+Function|innerHTML|insertAdjacentHTML|document\.write/.test(src) && /PC\.checkSimSpec\(spec0, tables, viewHost \? null : cmp\.engines\(\), viewHost \? viewHost\.check : undefined\)/.test(src)
+    && /const C = \(s: string\): Compiled => cmp\.compile\(s\)/.test(src) && /compile: src => LIBR\(\)\.expr\.compile\(src\)/.test(s32), 'sim-spec@1: no eval, no new Function, no HTML from the pack; the spec is checked before it is shown; formulas only through the expression language (NoemaCore.engines.expr)');
 }
 
 { // html-app@1 + the engine library (docs/INTERACTIVE.md §8.1): the "engines" a mini-app lists — the golden words, pack.requires,
@@ -681,11 +684,11 @@ ok(JSON.stringify(P.needRequires(sbase().activities.items)) === JSON.stringify([
   ok(!ACTP.check(M('engine:run', { engine: 'graph@1', spec: 'x' })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, seed: -1 })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, inputs: [1] })).ok
     && !ACTP.check(M('engine:check', { engine: 7, spec: {} })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: { big: 'x'.repeat(70 * 1024) } })).ok, 'a spec that is not an object, a bad seed, inputs that are a list, an engine that is not a text and a request over 64 KB are refused (strikes)');
   // the host bridge: the frame's policy is unchanged (no Worker in the frame); only library engines, only declared ones, only in a Worker, with limits
-  const h34 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8'), s35 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '35_activity_sim.js'), 'utf8');
+  const h34 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8'), s35 = SIMSRC();
   ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /NoemaCore\?\.engines\?\.catalog\.LIBRARY/.test(h34) && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
     && /outBytes: 512 \* 1024, perSec: 30, timeouts: 3/.test(h34) && /bridge\.close\(\)/.test(h34) && /'superseded'/.test(h34),
     'html-app@1: the frame still has no Worker and no network; the host runs only declared library engines, only in their Worker, ≤ 512 KB out, ≤ 30 requests/s, 3 timeouts and the engine is off, every Worker ended on unmount');
-  ok(/ACT\.engineRunner = engineRunner/.test(s35) && /function respec\(s2, o2\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
+  ok(/engineRunner: \(E, spec, opts, onFail\) =>\s+engineRunner\(E, spec, opts, onFail/.test(s35) && /function respec\(s2: unknown, o2\?: EngineOpts\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
   // the bridge itself, in Node with a fake Worker runner: codes, the queue, the limits
   const vmctx = { console, Promise, Date, JSON, Object, Array, Set, String, Number, Math, Error, isFinite, setTimeout, clearTimeout };
   vmctx.window = vmctx; vmctx.Worker = function () { };
@@ -746,7 +749,7 @@ ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player
 
 ok(/["']?enum["']?: \[\s*["']workflow["'],\s*["']content["'],\s*["']visual["'],\s*["']interactive["']/.test(srv) && /interactive: D\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
-ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'35_activity_sim\.js', '37_activity_py\.js'/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
+ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'34_activity_html\.js', '37_activity_py\.js'/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
 ok(NoemaCore.engines.has('circuit-mna@1') && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the circuit engine for the harness (in noema-core.js) and the scripts (in noema-tools.cjs); the guide part "interactive" includes the circuit engine');
 ok(['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(id => NoemaCore.engines.has(id)) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
   && COMPOSE.connector.includes('engines: nodeEngines()') && /\{ name: 'engines', build: r => r\.get\(ENGINES\) \}/.test(COMPOSE.browser) && /core_scripts = \(f'<script>\{esc\(bundle_text\("app"\)\)\}<\/script>/.test(bld),

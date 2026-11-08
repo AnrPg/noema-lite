@@ -131,7 +131,7 @@ import NoemaSimKit from './simkit.js';
     return env => { try { const r = f(env); return typeof r === 'boolean' ? +r : r; } catch (e) { return NaN; } };
   }
 
-  /* ---------- scenes: what a plot of kind `scene` draws (engine/src/35_activity_sim.js drawScene) ----------
+  /* ---------- scenes: what a plot of kind `scene` draws (src/runtimes/sim-spec/plot.ts drawScene) ----------
      {view: [x0, x1, y0, y1], items: [
         {k: 'pt',   x, y, r?, c?, key?, v?}                 a point (r in px; key: a label key of the string tables; v: a number shown)
         {k: 'seg',  x1, y1, x2, y2, c?, arrow?, w?, dash?, key?, v?}   a segment / an arrow (w: width in px)

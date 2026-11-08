@@ -464,7 +464,7 @@ outputs, and says how they are coupled. A spec without `parts` behaves exactly a
   engine goes into `pack.requires`.
 - **The bench** of a spec with parts is `spec.bench.part`: the id of a `circuit-mna@1` or `twin@1` part; its measurements use that
   part's latest inputs.
-- **Runtime** (`ACT.partsRunner`, 35_activity_sim.js): every part has its own engine instance and Worker; the latest inputs win (a
+- **Runtime** (`partsRunner`, src/runtimes/sim-spec/parts.ts): every part has its own engine instance and Worker; the latest inputs win (a
   run under way stops at its next step); the whole graph has 5 s (else the activity stops: Restart). The checks grader reads the
   values once the latest inputs are computed, as for one engine.
 - **Mini-apps**: `noema.sim(spec).run(inputs, {seed}?)` → `{outputs, values, codes}` runs `{consts?, derived?, parts, couple?}` with

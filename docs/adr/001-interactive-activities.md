@@ -255,7 +255,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 8. As built — P2 (`sim-spec@1`, 2026-11-04)
 
-* **No frame.** A spec is data: the app's own code (`engine/src/35_activity_sim.js`) renders the controls, readouts and plots in the
+* **No frame.** A spec is data: the app's own code (`src/runtimes/sim-spec`) renders the controls, readouts and plots in the
   page with the app's DOM, styles and tokens, and computes them with NoemaExpr and the registered engines. Nothing of the pack is
   ever executed or put in the page as HTML (labels are text nodes, plots are SVG built element by element), so the sandbox, the CSP
   and the loop guard that protect the app from *code* have nothing to guard here; a frame would only cost what the brief wanted
@@ -294,7 +294,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   and needs no expression language. The model is `{netlist, bindings, transient, noise}`; outputs are node/branch series, DC or
   transient scalars (`at`, `stat`) and probe readings (docs/INTERACTIVE_CIRCUIT.md §1).
 * **A bench is a minimal extension of the spec** (`spec.bench`: faults, points, instruments, budget, diagnosis) rendered by the
-  sim-spec runtime itself (`makeBench` in 35_activity_sim.js), for engines that declare `bench: true`; the engine adds
+  sim-spec runtime itself (`makeBench` in src/runtimes/sim-spec/bench.ts), for engines that declare `bench: true`; the engine adds
   `measure(inputs, probe)` next to `run`. The runner queues runs and measurements: the latest run wins, measurements are first in,
   first out, and every result still passes the P2 gate (`values()` is null while the latest inputs are not computed). The bench's
   values `diagnosis`, `measurements`, `correct` join the checks' names only (not readouts or marks, never declarable), and
@@ -322,7 +322,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **The binding: a spec drawn by the app, numbers from Python.** A py-module@1 item carries `python` (its `main.py`, inline with
   `sha256` and `bytes`), `packages` (⊆ numpy, scipy and the allow-listed extras of `tools/pywheels_allow.json`), `requiresNetwork`
   (required `true` with an extra), `stepMs` (100–10 000) and a `spec` in the sim-spec@1 format without `engine`, `model` or `bench` and
-  with at least one `output`. The app mounts the sim-spec view of 35_activity_sim.js (`ACT.simView`, the P2 runtime turned into a
+  with at least one `output`. The app mounts the sim-spec view of src/runtimes/sim-spec (`ACT.simView`, the P2 runtime turned into a
   function with an optional host: its engine id, its spec check, its runner, extra state, a decoration) with a runner that calls
   Python's `step(inputs, state)` one at a time, the latest inputs winning. So the learner gets the app's own controls, readouts and
   plots (theme, 360 px, keyboard, screen reader) and **the checks grader works on Python's outputs unchanged** (the P2 rev gate keeps
@@ -531,7 +531,7 @@ a spec without `parts` is checked, run and graded exactly as before, and every o
 - **The stepper contract** (`docs/INTERACTIVE_LIBRARY.md` §1.6) is an optional `stepper` of `makeEngine`: `init`, `step`, optional
   `snapshot` / `restore` / `output` / `onEvent`, the signature of `NoemaSimKit.stepper`. Only engines with one may be co-simulated
   (`STEPPERS`, the same list in both validators).
-- **Runtime.** `ACT.partsRunner` (35_activity_sim.js) runs the plan: one engine instance and Worker per part (each job ≤ 5 s), the
+- **Runtime.** `partsRunner` (src/runtimes/sim-spec/parts.ts) runs the plan: one engine instance and Worker per part (each job ≤ 5 s), the
   whole graph ≤ 5 s, the latest inputs win. A loop that does not settle or a part that fails gives NaN and a visible note
   (`engine.act.sim.noConverge`, `engine.act.sim.partFailed`), never a crash or a stale value.
 - **Reuse.** `activities/_parts/<name>.json`, referenced with `use` / `with`, travels as `pack.activities.parts` (hashed with the

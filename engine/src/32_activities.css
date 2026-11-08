@@ -15,7 +15,7 @@
 .act:fullscreen { background: var(--bg); padding: 12px; display: flex; flex-direction: column; }
 .act:fullscreen .act-box { flex: 1; height: auto !important; }
 .act-hints .fb { margin-top: 6px; }
-/* ---- sim-spec@1 (35_activity_sim.js): the app's own controls and plots, no frame; fits 320 px, tokens for light and dark ---- */
+/* ---- sim-spec@1 (src/runtimes/sim-spec): the app's own controls and plots, no frame; fits 320 px, tokens for light and dark ---- */
 .sim { padding: 12px; display: grid; gap: 12px; min-width: 0; color: var(--ink); }
 .sim-title { margin: 0; font-size: 15px; font-weight: 600; }
 .sim-intro { margin: 0; color: var(--ink2); }

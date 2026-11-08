@@ -5,7 +5,7 @@
      outputs: [{id, kind: 'scalar', node | branch | power, at? | stat?} | {id, kind: 'scalar', probe: {kind: V | I | R, mode?, zin?, …}}
                | {id, kind: 'series', time: true | node | branch | power} | {id, kind: 'series', ac: 'f' | 'db' | 'phase' | 'mag', node?, ref?}
                | {id, kind: 'scalar', ac: 'db' | 'phase' | 'mag', node, ref?, at: frequency} | {id, kind: 'scalar', ac: 'dcDb' | 'peakDb' | 'fPeak' | 'f3db' | 'fLow3db' | 'fUnity' | 'pm', node, ref?}]
-   and, for a fault-finding bench, `bench` (35_activity_sim.js renders it; this engine answers its measurements).
+   and, for a fault-finding bench, `bench` (src/runtimes/sim-spec/bench.ts renders it; this engine answers its measurements).
    The engine runs in a Worker (its bundle: this adapter and the engine, src/engines/plugins.ts); the expressions (bindings,
    transient times, `at`) are the app's expression language on the main thread (prepare), so the worker gets numbers only. The hidden
    fault of a bench reaches the engine as opts.faults (the change to the circuit), never the page. */

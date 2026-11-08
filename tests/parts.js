@@ -2,7 +2,7 @@
    1. the plan (NoemaCore.content.partsPlan): the order of derived values and parts, loops and the co-simulation as units;
    2. the steppers of the library engines (makeEngine's optional `stepper`): ode@1 against exp decay, med@1 against the closed form,
       clinic@1 bit for bit against run(), snapshot / restore;
-   3. the orchestrator (35_activity_sim.js partsRunner) with inline engine runners: chain, series inputs, a fixed point (and one that
+   3. the orchestrator (src/runtimes/sim-spec/parts.ts partsRunner, build/runtimes-node.cjs) with inline engine runners: chain, series inputs, a fixed point (and one that
       does not settle), a co-simulation (with iterate), the latest inputs win, a failing part;
    4. the reference activities (tools/activities_examples/pk-ode, genetics-prob, ancient-voyage): their spec passes the content checks and
       every case of their tests.json holds under the orchestrator.
@@ -16,10 +16,15 @@ const near = (a, b, tol) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(b));
 globalThis.window = globalThis;
 const ENG = {};
 globalThis.ACT = { PARTS: {}, registerEngine: d => { ENG[d.id] = d; }, registerRuntime() { }, engine: id => ENG[id] || NoemaCore.engines.engine(id), engines: () => [...Object.keys(ENG), ...NoemaCore.engines.ids()] };   // = ACT of engine/src/32_activities.js: its own engines, then the library's
+ENG['formula@1'] = { id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) };   // built into the activity core (engine/src/32_activities.js)
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaExpr = ENGINES.kernel('expr'), NoemaLibCore = ENGINES.kernel('core'), NoemaEngineCatalog = ENGINES.lib.catalog, NoemaLibODE = ENGINES.mod('ode@1');
-require(path.join(SRC, '35_activity_sim.js'));
+const RTN = require(path.join(ROOT, 'build', 'runtimes-node.cjs'));   // the typed runtimes (npm run build): sim-spec@1's orchestrator and runner
 const PC = NoemaCore.content, A = globalThis.ACT;
+// what the activity core hands the sim runtime (src/runtimes/compute.ts ComputeHost, engine/src/32_activities.js HOST.compute)
+const CX = { compute: { engine: id => A.engine(id), engines: () => A.engines(), library: () => [...NoemaCore.engines.catalog.LIBRARY], compile: s => NoemaExpr.compile(s), content: () => PC, parts: () => A.PARTS }, warn: (...w) => console.warn(...w) };
+A.partsRunner = (spec, opts, onFail, deps) => RTN.partsRunner(CX, spec, opts, onFail, deps);
+A.engineRunner = (E, spec, opts, onFail) => RTN.engineRunner(E, spec, opts, onFail);
 const want = require('./golden.cjs')('parts');   // the golden outputs of the former Python twin (tests/golden.cjs)
 
 const base = o => ({ format: 'noema.sim-spec/v1', params: [{ id: 'D', kind: 'slider', label: 'dLabel', min: 1, max: 10, default: 5 }], ...o });
@@ -100,7 +105,7 @@ function runParts(spec, env, o) {
   });
 }
 (async () => {
-  ok(typeof A.partsRunner === 'function', 'ACT.partsRunner is exported (35_activity_sim.js)');
+  ok(typeof RTN.partsRunner === 'function' && typeof RTN.engineRunner === 'function', 'the parts orchestrator and the engine runner are exported (src/runtimes/sim-spec, build/runtimes-node.cjs)');
   const chain = await runParts(base({ parts: [pk(), od()] }));
   const single = A.engine('med@1').create({ ...PC.partSpec(base({}), pk()) }, { seed: 1 }).run({ D: 5, dose: 500 });
   ok(chain.outputs && near(chain.outputs.cmax, single.cmax, 1e-12) && chain.outputs.c.length > 10 && near(chain.outputs.eEnd, single.cmax, 1e-4) && !chain.codes.length, 'chain: med@1 → ode@1 (the ODE relaxes to the c_max it is given)');

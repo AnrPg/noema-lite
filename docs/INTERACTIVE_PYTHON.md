@@ -116,7 +116,7 @@ A sim exercise on a py-module@1 activity is graded like a sim-spec@1 one:
 
 Page (trusted: reads and checks the files) → `py:boot` with the bytes over a MessagePort → a hidden sandboxed runner frame (our script
 only) → a blob: Worker with Pyodide, whose `fetch`/`importScripts` only look up those bytes. The app side is
-`engine/src/37_activity_py_ui.js`: it mounts the sim-spec view of `35_activity_sim.js` (`ACT.simView`) with a host whose runner is
+`engine/src/37_activity_py_ui.js`: it mounts the sim-spec view of `src/runtimes/sim-spec` (`ACT.simView`) with a host whose runner is
 Python's `step()`; the runner itself is `engine/src/37_activity_py.js` (`NoemaPy.mountRunner`).
 
 * **The runner has no network at all** (`connect-src 'none'`). A service worker never controls an opaque-origin (sandboxed) client, so

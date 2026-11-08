@@ -486,8 +486,8 @@ def build_skill(out_zip):
             for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
                 if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
         z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
-        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts and the engine library
-        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed activity runtimes (src/runtimes)
+        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
