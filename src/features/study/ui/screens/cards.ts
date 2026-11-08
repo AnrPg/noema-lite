@@ -2,29 +2,41 @@
  * Flashcards (#/cards[/<key>]) and debug drills (#/drills, #/drill/<id>): both scheduled by FSRS-6
  * (domain/fsrs.ts). state.fc and state.pb hold each card's and drill's memory; an entry still in the old Leitner shape
  * is read as the memory it stands for and replaced at its next review.
+ *
+ * Light-DOM elements on the study base (lit/base.ts): the deck (`study-flash-deck`), a drill's tile and the list of a
+ * chapter's drills (the chapter and the section show them too), and the three pages.
  */
+import { keyed } from 'lit/directives/keyed.js';
 import { cardRating, playbookRating } from '../../domain/events/types.ts';
 import type { Drill, Exercise } from '../../domain/pack.ts';
 import type { CardItem, StudyApp } from '../app.ts';
-import { append, h } from '../dom.ts';
 import { exerciseCard } from '../exercise/card.ts';
-import { askButton, codeEl, setAccent } from '../parts.ts';
-import { fmt, guessLang } from '../text.ts';
-import { view } from '../view.ts';
+import { codeT, F, html, M, nothing, ref, show, StudyElement, StudyScreen, tag, type TemplateResult } from '../lit/base.ts';
+import { accentOf, setAccent } from '../parts.ts';
 
 /** A card rated (0 again, 1 good, 2 easy): a card.reviewed event with its FSRS rating (the log folds state.fc). */
 export function rateCard(app: StudyApp, key: string, q: 0 | 1 | 2): void {
   app.host.learn('card.reviewed', key, { rating: cardRating(q) });
 }
 
-export function cardsView(app: StudyApp, key?: string): void {
-  setAccent(document.body, null);
-  app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.cards')]], back: '#/subject' });
-  const body = h('div');
-  view(app, h('h1', {}, app.t('view.cards')), h('p', { class: 'muted' }, app.t('engine.cards.intro')), body);
-  const one = key ? app.cards().filter(c => c.key === key) : []; // #/cards/<key>: the one card the search found
-  if (one.length) flashDeck(app, body, one, { all: true });
-  else flashDeck(app, body, app.cards());
+/** the frame's quiet "Ask <character>" on a card: the face alone, its name on hover or focus */
+function askT(app: StudyApp, run: () => void): TemplateResult {
+  const who = app.host.frame.character(),
+    label = app.L('askTutor');
+  return html`<button
+    class="exask"
+    type="button"
+    title=${label}
+    aria-label=${label}
+    @click=${(e: Event) => {
+      e.stopPropagation();
+      run();
+    }}
+  >
+    ${
+      who.face ? html`<span class="exface" aria-hidden="true">${M(who.face)}</span>` : html`<span aria-hidden="true">${who.avatar}</span>`
+    }<span class="lbl">${label}</span>
+  </button>`;
 }
 
 /** Ask the character about a flashcard: a hint while its answer is hidden, a deeper explanation once it is turned. */
@@ -50,225 +62,536 @@ function refitFsrs(app: StudyApp): void {
   });
 }
 
-export function flashDeck(
-  app: StudyApp,
-  body: HTMLElement,
-  cards: readonly CardItem[],
-  o: { readonly all?: boolean; readonly onDone?: () => HTMLElement } = {},
-): void {
-  const deck = app.deck(cards, o.all ? { all: true } : {}),
-    queue = deck.queue; // all: every card given (the ones the search found), due or not
-  body.append(
-    h(
-      'div',
-      { class: 'row', style: { margin: '6px 0 16px' } },
-      h('span', { class: 'pill c' }, app.t('engine.cards.due', { n: deck.due })),
-      h('span', { class: 'pill' }, app.t('engine.cards.new', { n: deck.fresh })),
-      h('span', { class: 'pill' }, app.t('engine.cards.resting', { n: deck.resting })),
-    ),
-  );
-  const stage = h('div');
-  body.append(stage);
-  let i = 0;
-  const show = (): void => {
-    stage.replaceChildren();
-    const c = queue[i];
-    if (!c) {
-      stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, app.t('engine.cards.done'))));
-      if (queue.length) {
-        app.host.feedback.confetti(80);
-        refitFsrs(app);
-      }
-      if (o.onDone) stage.append(o.onDone());
-      return;
+export interface DeckOptions {
+  /** every card given (the ones the search found), due or not */
+  readonly all?: boolean;
+  /** what follows the last card (a round made from search results: its next part) */
+  readonly onDone?: () => unknown;
+}
+
+/** A deck of flashcards: the counts, one card at a time (tap to turn), and Again · Good · Easy. */
+export class StudyFlashDeck extends StudyElement {
+  readonly #app: StudyApp;
+  readonly #queue: CardItem[];
+  readonly #due: number;
+  readonly #fresh: number;
+  readonly #resting: number;
+  readonly #onDone: (() => unknown) | undefined;
+  #i = 0;
+  #flipped = false;
+
+  constructor(app: StudyApp, cards: readonly CardItem[], o: DeckOptions = {}) {
+    super();
+    this.#app = app;
+    const deck = app.deck(cards, o.all ? { all: true } : {});
+    this.#queue = deck.queue;
+    this.#due = deck.due;
+    this.#fresh = deck.fresh;
+    this.#resting = deck.resting;
+    this.#onDone = o.onDone;
+  }
+
+  #flip(): void {
+    this.#flipped = !this.#flipped;
+    this.redraw();
+  }
+
+  #rate(c: CardItem, q: 0 | 1 | 2): void {
+    const app = this.#app;
+    rateCard(app, c.key, q);
+    app.xp(q === 0 ? 1 : 2, this.querySelector('.flash'));
+    if (q === 0) this.#queue.push(c);
+    this.#i++;
+    this.#flipped = false;
+    if (this.#i >= this.#queue.length) {
+      app.host.feedback.confetti(80);
+      refitFsrs(app);
     }
-    const fl = h(
-      'div',
-      { class: 'flash has-ask', 'data-card': c.key },
-      h(
-        'div',
-        {
-          class: 'inner',
-          role: 'button',
-          tabindex: '0',
-          'aria-label': app.t('engine.cards.flip'),
-          onclick: () => {
-            fl.classList.toggle('flipped');
-          },
-          onkeydown: (e: Event) => {
-            if (e instanceof KeyboardEvent && (e.key === ' ' || e.key === 'Enter') && e.target === e.currentTarget) {
-              e.preventDefault();
-              e.stopPropagation();
-              fl.classList.toggle('flipped');
-            }
-          },
-        },
-        h(
-          'div',
-          { class: 'face' },
-          h('small', {}, `${c.chapter.emoji ?? ''} ${app.chTitle(c.chapter.num, `${app.nf(i + 1)}/${app.nf(queue.length)}`)}`),
-          h('div', { 'data-nf': 'q', html: fmt(c.q) }),
-          h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, app.t('engine.cards.flip')),
-        ),
-        h('div', { class: 'face back' }, h('small', {}, app.t('engine.cards.answer')), h('div', { 'data-nf': 'a', html: fmt(c.a) })),
-      ),
-    );
-    setAccent(fl, c.chapter);
-    const who = app.host.frame.character();
-    fl.append(
-      askButton(who.face, who.avatar, app.L('askTutor'), () => {
-        askAboutCard(app, c, fl.classList.contains('flipped'));
-      }),
-    );
-    const rate = (q: 0 | 1 | 2): void => {
-      rateCard(app, c.key, q);
-      app.xp(q === 0 ? 1 : 2, fl);
-      if (q === 0) queue.push(c);
-      i++;
-      show();
-    };
+    this.redraw();
+  }
+
+  override render(): TemplateResult {
+    const app = this.#app;
+    return html`<div class="row deckcounts">
+        <span class="pill c">${app.t('engine.cards.due', { n: this.#due })}</span>
+        <span class="pill">${app.t('engine.cards.new', { n: this.#fresh })}</span>
+        <span class="pill">${app.t('engine.cards.resting', { n: this.#resting })}</span>
+      </div>
+      <div>${this.#card()}</div>`;
+  }
+
+  #card(): unknown {
+    const app = this.#app,
+      queue = this.#queue,
+      i = this.#i,
+      c = queue[i];
+    if (!c)
+      return html`<div class="empty">
+          <div class="e">🌟</div>
+          <p>${app.t('engine.cards.done')}</p>
+        </div>
+        ${this.#onDone ? this.#onDone() : nothing}`;
     const sec = c.section ? app.course.section(c.section) : undefined;
-    append(stage, [
-      fl,
-      h(
-        'div',
-        { class: 'rate' },
-        h(
-          'button',
-          {
-            class: 'btn',
-            type: 'button',
-            onclick: () => {
-              rate(0);
-            },
-          },
-          `😵 ${app.t('engine.cards.again')}`,
-        ),
-        h(
-          'button',
-          {
-            class: 'btn',
-            type: 'button',
-            onclick: () => {
-              rate(1);
-            },
-          },
-          `🙂 ${app.t('engine.cards.good')}`,
-        ),
-        h(
-          'button',
-          {
-            class: 'btn primary',
-            type: 'button',
-            onclick: () => {
-              rate(2);
-            },
-          },
-          `😎 ${app.t('engine.cards.easy')}`,
-        ),
-      ),
-      sec
-        ? h(
-            'div',
-            { style: { textAlign: 'center', marginTop: '10px' } },
-            h(
-              'button',
-              {
-                class: 'tiny linkish',
-                type: 'button',
-                style: { textDecoration: 'underline' },
-                onclick: () => {
-                  app.go(`#/s/${sec.id}`);
-                },
-              },
-              app.t('engine.cards.openSection'),
-            ),
-          )
-        : null,
-    ]);
-  };
-  show();
+    const onKey = (e: KeyboardEvent): void => {
+      if ((e.key === ' ' || e.key === 'Enter') && e.target === e.currentTarget) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.#flip();
+      }
+    };
+    // a new .flash for every card (keyed): the next card never turns back on screen
+    return keyed(
+      i,
+      html`<div class="flash has-ask${this.#flipped ? ' flipped' : ''}" data-card=${c.key} data-ci=${accentOf(c.chapter)}>
+          <div
+            class="inner"
+            role="button"
+            tabindex="0"
+            aria-label=${app.t('engine.cards.flip')}
+            @click=${() => {
+              this.#flip();
+            }}
+            @keydown=${onKey}
+          >
+            <div class="face">
+              <small>${`${c.chapter.emoji ?? ''} ${app.chTitle(c.chapter.num, `${app.nf(i + 1)}/${app.nf(queue.length)}`)}`}</small>
+              <div data-nf="q">${F(c.q)}</div>
+              <div class="tiny flipnote">${app.t('engine.cards.flip')}</div>
+            </div>
+            <div class="face back">
+              <small>${app.t('engine.cards.answer')}</small>
+              <div data-nf="a">${F(c.a)}</div>
+            </div>
+          </div>
+          ${askT(app, () => {
+            askAboutCard(app, c, this.#flipped);
+          })}
+        </div>
+        <div class="rate">
+          <button
+            class="btn"
+            type="button"
+            @click=${() => {
+              this.#rate(c, 0);
+            }}
+          >
+            😵 ${app.t('engine.cards.again')}
+          </button>
+          <button
+            class="btn"
+            type="button"
+            @click=${() => {
+              this.#rate(c, 1);
+            }}
+          >
+            🙂 ${app.t('engine.cards.good')}
+          </button>
+          <button
+            class="btn primary"
+            type="button"
+            @click=${() => {
+              this.#rate(c, 2);
+            }}
+          >
+            😎 ${app.t('engine.cards.easy')}
+          </button>
+        </div>
+        ${
+          sec
+            ? html`<div class="deckopen">
+                <button
+                  class="tiny linkish"
+                  type="button"
+                  @click=${() => {
+                    app.go(`#/s/${sec.id}`);
+                  }}
+                >
+                  ${app.t('engine.cards.openSection')}
+                </button>
+              </div>`
+            : nothing
+        }`,
+    );
+  }
+}
+tag('study-flash-deck', StudyFlashDeck);
+
+/** Puts a deck of flashcards into `body` (the chapter's Cards tab, a search round's cards); → the deck. */
+export function flashDeck(app: StudyApp, body: HTMLElement, cards: readonly CardItem[], o: DeckOptions = {}): StudyFlashDeck {
+  const deck = new StudyFlashDeck(app, cards, o).redraw();
+  body.append(deck);
+  return deck;
+}
+
+/** #/cards[/<key>]: every card of the course (the due ones first), or the one card the search found */
+class StudyCardsPage extends StudyScreen {
+  readonly #deck: StudyFlashDeck;
+  constructor(app: StudyApp, key?: string) {
+    super(app);
+    const one = key ? app.cards().filter(c => c.key === key) : [];
+    this.#deck = (one.length ? new StudyFlashDeck(app, one, { all: true }) : new StudyFlashDeck(app, app.cards())).redraw();
+  }
+  protected page(): unknown {
+    const app = this.app;
+    return html`<h1>${app.t('view.cards')}</h1>
+      <p class="muted">${app.t('engine.cards.intro')}</p>
+      ${this.#deck}`;
+  }
+}
+tag('study-cards-page', StudyCardsPage);
+
+export function cardsView(app: StudyApp, key?: string): void {
+  setAccent(document.body, null);
+  app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.cards')]], back: '#/subject' });
+  show(app, new StudyCardsPage(app, key));
 }
 
 /* ---------- debug drills ---------- */
-export function drillTile(app: StudyApp, d: Drill): HTMLElement {
-  const box = app.drillBox(d); // mastery 0–5: the interval reached, on the old boxes' scale
-  const ch = app.course.chapterOf(d);
-  const isNew = !!d.src && !!ch && d.src !== (ch as { src?: string }).src && app.isNewSource(d.src);
-  const t = h(
-    'button',
-    {
-      class: 'pb',
-      type: 'button',
-      onclick: () => {
+
+/** A drill's tile: its title, how many questions, its mastery (0–5: the interval reached, on the old boxes' scale). */
+export class StudyDrillTile extends StudyElement {
+  readonly #app: StudyApp;
+  readonly #d: Drill;
+  constructor(app: StudyApp, d: Drill) {
+    super();
+    this.#app = app;
+    this.#d = d;
+  }
+  override render(): TemplateResult {
+    const app = this.#app,
+      d = this.#d;
+    const box = app.drillBox(d);
+    const ch = app.course.chapterOf(d);
+    const isNew = !!d.src && !!ch && d.src !== (ch as { src?: string }).src && app.isNewSource(d.src);
+    return html`<button
+      class="pb"
+      type="button"
+      data-ci=${accentOf(ch)}
+      @click=${() => {
         app.go(`#/drill/${d.id}`);
-      },
-    },
-    h('span', { class: 'ic' }, '🔧'),
-    h(
-      'div',
-      { class: 'grow' },
-      h('b', { html: fmt(d.title) }),
-      isNew ? h('span', { class: 'newpill' }, `✨ ${app.t('engine.src.new')}`) : null,
-      h(
-        'div',
-        { class: 'tiny' },
-        app.t(d.mnemonic ? 'engine.drill.questionsMnemo' : 'engine.drill.questions', { n: d.askYourself.length }),
-      ),
-    ),
-    h(
-      'div',
-      { class: 'boxes', title: app.t('engine.drill.mastery') },
-      [1, 2, 3, 4, 5].map(i => h('i', { class: i <= box ? 'on' : '' })),
-    ),
-  );
-  setAccent(t, ch);
-  return t;
+      }}
+    >
+      <span class="ic" aria-hidden="true">🔧</span>
+      <div class="grow">
+        <b>${F(d.title)}</b>${isNew ? html`<span class="newpill">✨ ${app.t('engine.src.new')}</span>` : nothing}
+        <div class="tiny">${app.t(d.mnemonic ? 'engine.drill.questionsMnemo' : 'engine.drill.questions', { n: d.askYourself.length })}</div>
+      </div>
+      <div class="boxes" title=${app.t('engine.drill.mastery')}>
+        ${[1, 2, 3, 4, 5].map(i => html`<i class=${i <= box ? 'on' : ''}></i>`)}
+      </div>
+    </button>`;
+  }
+}
+tag('study-drill-tile', StudyDrillTile);
+
+export function drillTile(app: StudyApp, d: Drill): StudyDrillTile {
+  return new StudyDrillTile(app, d).redraw();
 }
 
-export function drillList(app: StudyApp, body: HTMLElement, list: readonly Drill[]): void {
-  const due = list.filter(d => app.drillDue(d));
-  const first = due[0];
-  body.append(
-    h('p', { class: 'muted' }, app.t('engine.drill.intro')),
-    h(
-      'div',
-      { class: 'row', style: { marginBottom: '14px' } },
-      first
-        ? h(
-            'button',
-            {
-              class: 'btn primary',
-              type: 'button',
-              onclick: () => {
-                app.go(`#/drill/${first.id}`);
-              },
-            },
-            `▶ ${app.t('engine.drill.nextDue', { n: due.length })}`,
-          )
-        : h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, app.t('engine.drill.allRested')),
-    ),
-    h(
-      'div',
-      { style: { display: 'grid', gap: '10px' } },
-      list.map(d => drillTile(app, d)),
-    ),
-  );
+/** A chapter's drills: the next due one first, then every tile. */
+export class StudyDrillList extends StudyElement {
+  readonly #app: StudyApp;
+  readonly #list: readonly Drill[];
+  constructor(app: StudyApp, list: readonly Drill[]) {
+    super();
+    this.#app = app;
+    this.#list = list;
+  }
+  override render(): TemplateResult {
+    const app = this.#app;
+    const due = this.#list.filter(d => app.drillDue(d));
+    const first = due[0];
+    return html`<p class="muted">${app.t('engine.drill.intro')}</p>
+      <div class="row drillnext">
+        ${
+          first
+            ? html`<button
+                class="btn primary"
+                type="button"
+                @click=${() => {
+                  app.go(`#/drill/${first.id}`);
+                }}
+              >
+                ▶ ${app.t('engine.drill.nextDue', { n: due.length })}
+              </button>`
+            : html`<span class="pill rested">${app.t('engine.drill.allRested')}</span>`
+        }
+      </div>
+      <div class="drilltiles">${this.#list.map(d => drillTile(app, d))}</div>`;
+  }
 }
+tag('study-drill-list', StudyDrillList);
+
+/** Puts a chapter's drills into `body` (the chapter's Drills tab); → the list. */
+export function drillList(app: StudyApp, body: HTMLElement, list: readonly Drill[]): StudyDrillList {
+  const el = new StudyDrillList(app, list).redraw();
+  body.append(el);
+  return el;
+}
+
+/** #/drills: every chapter's drills */
+class StudyDrillsPage extends StudyScreen {
+  protected page(): unknown {
+    const app = this.app;
+    const n = app.course.chapters.reduce((a, c) => a + c.debug.length, 0);
+    return html`<h1>${app.t('view.drills')}</h1>
+      <p class="muted">${app.t('engine.drill.playbooks', { n })}</p>
+      <div>
+        ${app.course.chapters
+          .filter(c => c.debug.length)
+          .map(
+            c =>
+              html`<h3 class="drillch">${`${c.emoji ?? ''} ${app.chTitle(c.num, c.title)}`}</h3>
+                <div class="drilltiles">${c.debug.map(d => drillTile(app, d))}</div>`,
+          )}
+      </div>`;
+  }
+}
+tag('study-drills-page', StudyDrillsPage);
 
 export function drillsView(app: StudyApp): void {
   setAccent(document.body, null);
   app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.drills')]], back: '#/subject' });
-  const body = h('div');
-  const n = app.course.chapters.reduce((a, c) => a + c.debug.length, 0);
-  view(app, h('h1', {}, app.t('view.drills')), h('p', { class: 'muted' }, app.t('engine.drill.playbooks', { n })), body);
-  for (const c of app.course.chapters) {
-    if (!c.debug.length) continue;
-    const sub = h('div', { style: { margin: '22px 0 0' } });
-    body.append(h('h3', { style: { margin: '20px 0 10px' } }, `${c.emoji ?? ''} ${app.chTitle(c.num, c.title)}`), sub);
-    sub.append(...c.debug.map(d => drillTile(app, d)));
+  show(app, new StudyDrillsPage(app));
+}
+
+type Graded = { readonly score: number; readonly hit: readonly number[]; readonly feedback: string };
+
+/** #/drill/<id>: the symptom, the learner's own checklist, then the steps, the causes and the fix, and how well it went */
+class StudyDrillPage extends StudyScreen {
+  readonly #d: Drill;
+  readonly #cid: string;
+  /** what is under the buttons: nothing yet, the order exercise, or the answer revealed (with the AI's grade) */
+  #stage:
+    | { readonly kind: 'none' }
+    | { readonly kind: 'order'; readonly card: HTMLElement }
+    | {
+        readonly kind: 'reveal';
+        readonly g: Graded | null;
+        readonly md: HTMLElement | null;
+      } = { kind: 'none' };
+  #grading = false;
+  #answer: HTMLTextAreaElement | null = null;
+  #stageEl: HTMLElement | null = null;
+
+  constructor(app: StudyApp, d: Drill, chapterId: string) {
+    super(app);
+    this.#d = d;
+    this.#cid = chapterId;
+  }
+
+  #reveal(g: Graded | null): void {
+    this.#grading = false;
+    this.#stage = { kind: 'reveal', g, md: g ? this.app.ai.md(g.feedback) : null };
+    this.redraw();
+    this.#stageEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  #order(): void {
+    const app = this.app,
+      d = this.#d;
+    const ex: Exercise = {
+      id: `${d.id}-ord`,
+      type: 'order',
+      q: app.t('engine.drill.orderQ'),
+      items: d.askYourself.slice(0, 9),
+      explain: app.t('engine.drill.orderExplain'),
+      difficulty: 2,
+      tags: ['debug'],
+      _ai: true,
+      section: d.section ?? '',
+    };
+    this.#stage = { kind: 'order', card: exerciseCard(app, ex) };
+    this.redraw();
+  }
+
+  async #grade(): Promise<void> {
+    const ta = this.#answer;
+    if (!ta) return;
+    if (!ta.value.trim()) {
+      ta.classList.add('shake');
+      setTimeout(() => {
+        ta.classList.remove('shake');
+      }, 500);
+      return;
+    }
+    this.#grading = true;
+    this.redraw();
+    try {
+      this.#reveal(await this.app.ai.drillGrade(this.#d, ta.value));
+    } catch (er) {
+      this.app.toast(`⚠️ ${this.app.errText(er)}`, 4000);
+      this.#reveal(null);
+    }
+  }
+
+  #rated(q: 0 | 1 | 2): void {
+    const app = this.app,
+      d = this.#d,
+      cid = this.#cid;
+    const checks = [...this.querySelectorAll<HTMLInputElement>('.rubric input[type=checkbox]')];
+    const ticked = checks.filter(x => x.checked).length / Math.max(1, checks.length);
+    // blank → again, partly → hard, nailed → easy with most of the checklist ticked, else good
+    app.host.learn('playbook.reviewed', d.id, { rating: playbookRating(q, ticked), score: ticked });
+    app.xp(3 + Math.round(ticked * 7), this.#stageEl);
+    if (q === 2) app.host.feedback.confetti(70);
+    const others = app.course.chapters.flatMap(x => x.debug).filter(x => x.id !== d.id && app.drillDue(x));
+    const nxt = others.find(x => app.course.chapterOf(x)?.id === cid) ?? others[0];
+    app.toast(nxt ? app.t('engine.drill.savedNext') : app.t('engine.drill.saved'));
+    setTimeout(() => {
+      app.go(nxt ? `#/drill/${nxt.id}` : `#/ch/${cid}/debug`);
+    }, 700);
+  }
+
+  protected page(): unknown {
+    const app = this.app,
+      d = this.#d,
+      id = d.id;
+    const who = app.host.frame.character();
+    return html`<div class="reader">
+      <span class="pill c">🔧 ${app.t('engine.drill.pill')}</span>
+      <h1 class="drilltitle">${F(d.title)}</h1>
+      <div class="tiny drilllbl">${app.t('engine.drill.symptom')}</div>
+      <div class="symptom">${F(d.symptom)}</div>
+      <h3 class="drillh">🧠 ${app.t('engine.drill.askYourself')}</h3>
+      <textarea
+        class="answer"
+        placeholder=${app.t('engine.drill.placeholder')}
+        aria-label=${app.t('engine.drill.askYourself')}
+        ${ref(el => {
+          this.#answer = (el as HTMLTextAreaElement | undefined) ?? null;
+        })}
+      ></textarea>
+      <div class="actions drillacts">
+        <button
+          class="btn primary"
+          type="button"
+          @click=${() => {
+            this.#reveal(null);
+          }}
+        >
+          👀 ${app.t('engine.drill.reveal')}
+        </button>
+        <button class="btn ai" type="button" ?disabled=${this.#grading} @click=${() => this.#grade()}>
+          ✨ ${this.#grading ? app.t('engine.ex.grading') : app.t('engine.drill.grade')}
+        </button>
+        <button
+          class="btn"
+          type="button"
+          @click=${() => {
+            this.#order();
+          }}
+        >
+          🔢 ${app.t('engine.drill.order')}
+        </button>
+        <button
+          class="btn"
+          type="button"
+          @click=${() => {
+            // the learner's first message: their bubble, in the UI language
+            app.tutor.open(
+              { kind: 'playbook', id, origin: { via: 'drillRoleplay', drill: id } },
+              'debug',
+              app.t('engine.aimsg.pbRoleplay', { title: d.title }),
+              {
+                intent: app.tutor.intent('pbRoleplay'),
+              },
+            );
+          }}
+        >
+          🎭 ${app.t('engine.drill.roleplay', { tutor: who.name })}
+        </button>
+      </div>
+      <div
+        ${ref(el => {
+          this.#stageEl = (el as HTMLElement | undefined) ?? null;
+        })}
+      >
+        ${this.#stageT()}
+      </div>
+    </div>`;
+  }
+
+  #stageT(): unknown {
+    const st = this.#stage;
+    if (st.kind === 'none') return nothing;
+    if (st.kind === 'order') return html`<div class="drillorder">${st.card}</div>`;
+    const app = this.app,
+      d = this.#d,
+      g = st.g;
+    const hit = new Set(g?.hit ?? []);
+    const tone = (s: number): string => (s >= 70 ? 'var(--ok)' : s >= 45 ? 'var(--warn)' : 'var(--bad)');
+    const RATES = [
+      [`😵 ${app.t('engine.drill.blank')}`, 0],
+      [`🤔 ${app.t('engine.drill.partly')}`, 1],
+      [`😎 ${app.t('engine.drill.nailed')}`, 2],
+    ] as const;
+    return html`${
+        g
+          ? html`<div class="fb ai">
+              <div class="row">
+                <span class="score" style=${`background:${tone(g.score)}`}>${app.nf(Math.trunc(g.score))}</span>
+                <div class="grow">${st.md}</div>
+              </div>
+            </div>`
+          : nothing
+      }
+      <div class="ask drillcheck">
+        <div class="hd">🧠 ${app.t('engine.drill.checklist')}<span class="tiny drilltick">${app.t('engine.drill.tick')}</span></div>
+        <div class="rubric">
+          ${d.askYourself.map(
+            (q, i) =>
+              html`<label
+                ><input type="checkbox" ?checked=${hit.has(i)} /><span><b>${app.nf(i + 1)}. </b><span>${F(q)}</span></span></label
+              >`,
+          )}
+        </div>
+      </div>
+      ${
+        d.mnemonic
+          ? html`<div class="drillhook">
+              <div class="tiny drilllbl">${app.t('engine.drill.hook')}</div>
+              <div class="mnemo">${F(d.mnemonic)}</div>
+            </div>`
+          : nothing
+      }
+      <h3 class="drillh">🛠️ ${app.t('engine.drill.steps')}</h3>
+      <div class="steps">
+        ${d.steps.map(
+          (s, i) =>
+            html`<div class="stepc">
+              <b>${app.nf(i + 1)}. ${F(s.do)}</b>
+              ${s.why ? html`<div class="tiny stepwhy">↳ ${F(s.why)}</div>` : nothing}
+              ${s.code ? html`<div class="stepcode">${codeT(s.code, undefined, app.t('engine.core.copy'))}</div>` : nothing}
+            </div>`,
+        )}
+      </div>
+      <h3 class="drillh">🎯 ${app.t('engine.drill.causes')}</h3>
+      <ul>
+        ${d.rootCauses.map(r => html`<li>${F(r)}</li>`)}
+      </ul>
+      <div class="callout tip drillfix">
+        <span class="ci">✅</span><b class="t">${app.t('engine.ex.fix')}</b>
+        <div>${F(d.fix)}</div>
+      </div>
+      <h3 class="drillh">${app.t('engine.drill.howWell')}</h3>
+      <div class="row">
+        ${RATES.map(
+          ([l, q]) =>
+            html`<button
+              class="btn${q === 2 ? ' primary' : ''}"
+              type="button"
+              @click=${() => {
+                this.#rated(q);
+              }}
+            >
+              ${l}
+            </button>`,
+        )}
+      </div>`;
   }
 }
+tag('study-drill-page', StudyDrillPage);
 
 export function drillView(app: StudyApp, id: string): void {
   const d = app.course.drill(id);
@@ -288,211 +611,5 @@ export function drillView(app: StudyApp, id: string): void {
     back: `#/ch/${c.id}/debug`,
     reading: true,
   });
-  const ta = h('textarea', {
-    class: 'answer',
-    placeholder: app.t('engine.drill.placeholder'),
-    'aria-label': app.t('engine.drill.askYourself'),
-  });
-  const stage = h('div');
-  const who = app.host.frame.character();
-  const orderDrill = (): void => {
-    stage.replaceChildren();
-    const ex: Exercise = {
-      id: `${d.id}-ord`,
-      type: 'order',
-      q: app.t('engine.drill.orderQ'),
-      items: d.askYourself.slice(0, 9),
-      explain: app.t('engine.drill.orderExplain'),
-      difficulty: 2,
-      tags: ['debug'],
-      _ai: true,
-      section: d.section ?? '',
-    };
-    stage.append(h('div', { style: { marginTop: '18px' } }, exerciseCard(app, ex)));
-  };
-  const reveal = (g: { score: number; hit: number[]; feedback: string } | null): void => {
-    stage.replaceChildren();
-    const hit = new Set(g?.hit ?? []);
-    const checks = d.askYourself.map((_, i) => h('input', { type: 'checkbox', checked: hit.has(i) }));
-    if (g)
-      stage.append(
-        h(
-          'div',
-          { class: 'fb ai' },
-          h(
-            'div',
-            { class: 'row' },
-            h(
-              'span',
-              { class: 'score', style: { background: g.score >= 70 ? 'var(--ok)' : g.score >= 45 ? 'var(--warn)' : 'var(--bad)' } },
-              app.nf(Math.trunc(g.score)),
-            ),
-            h('div', { class: 'grow' }, app.ai.md(g.feedback)),
-          ),
-        ),
-      );
-    const RATES = [
-      [`😵 ${app.t('engine.drill.blank')}`, 0],
-      [`🤔 ${app.t('engine.drill.partly')}`, 1],
-      [`😎 ${app.t('engine.drill.nailed')}`, 2],
-    ] as const;
-    append(stage, [
-      h(
-        'div',
-        { class: 'ask', style: { marginTop: '18px' } },
-        h(
-          'div',
-          { class: 'hd' },
-          `🧠 ${app.t('engine.drill.checklist')}`,
-          h('span', { class: 'tiny', style: { marginLeft: 'auto' } }, app.t('engine.drill.tick')),
-        ),
-        h(
-          'div',
-          { class: 'rubric' },
-          d.askYourself.map((q, i) =>
-            h('label', {}, checks[i], h('span', {}, h('b', {}, `${app.nf(i + 1)}. `), h('span', { html: fmt(q) }))),
-          ),
-        ),
-      ),
-      d.mnemonic
-        ? h(
-            'div',
-            { style: { marginTop: '14px' } },
-            h('div', { class: 'tiny', style: { fontWeight: '700' } }, app.t('engine.drill.hook')),
-            h('div', { class: 'mnemo', html: fmt(d.mnemonic) }),
-          )
-        : null,
-      h('h3', { style: { margin: '22px 0 10px' } }, `🛠️ ${app.t('engine.drill.steps')}`),
-      h(
-        'div',
-        { class: 'steps' },
-        d.steps.map((s, i) =>
-          h(
-            'div',
-            { class: 'stepc' },
-            h('b', { html: `${app.nf(i + 1)}. ${fmt(s.do)}` }),
-            s.why ? h('div', { class: 'tiny', style: { color: 'var(--ink2)', fontSize: '14px' }, html: `↳ ${fmt(s.why)}` }) : null,
-            s.code ? h('div', { style: { marginTop: '8px' } }, codeEl(s.code, guessLang(s.code), app.t('engine.core.copy'))) : null,
-          ),
-        ),
-      ),
-      h('h3', { style: { margin: '22px 0 10px' } }, `🎯 ${app.t('engine.drill.causes')}`),
-      h(
-        'ul',
-        {},
-        d.rootCauses.map(r => h('li', { html: fmt(r) })),
-      ),
-      h(
-        'div',
-        { class: 'callout tip', style: { marginTop: '12px' } },
-        h('span', { class: 'ci' }, '✅'),
-        h('b', { class: 't' }, app.t('engine.ex.fix')),
-        h('div', { html: fmt(d.fix) }),
-      ),
-      h('h3', { style: { margin: '24px 0 10px' } }, app.t('engine.drill.howWell')),
-      h(
-        'div',
-        { class: 'row' },
-        RATES.map(([l, q]) =>
-          h(
-            'button',
-            {
-              class: `btn${q === 2 ? ' primary' : ''}`,
-              type: 'button',
-              onclick: () => {
-                const ticked = checks.filter(x => x.checked).length / Math.max(1, checks.length);
-                // blank → again, partly → hard, nailed → easy with most of the checklist ticked, else good
-                app.host.learn('playbook.reviewed', d.id, { rating: playbookRating(q, ticked), score: ticked });
-                app.xp(3 + Math.round(ticked * 7), stage);
-                if (q === 2) app.host.feedback.confetti(70);
-                const others = app.course.chapters.flatMap(x => x.debug).filter(x => x.id !== d.id && app.drillDue(x));
-                const nxt = others.find(x => app.course.chapterOf(x)?.id === c.id) ?? others[0];
-                app.toast(nxt ? app.t('engine.drill.savedNext') : app.t('engine.drill.saved'));
-                setTimeout(() => {
-                  app.go(nxt ? `#/drill/${nxt.id}` : `#/ch/${c.id}/debug`);
-                }, 700);
-              },
-            },
-            l,
-          ),
-        ),
-      ),
-    ]);
-    stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-  view(
-    app,
-    h(
-      'div',
-      { class: 'reader' },
-      h('span', { class: 'pill c' }, `🔧 ${app.t('engine.drill.pill')}`),
-      h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
-      h('div', { class: 'tiny', style: { fontWeight: '700', marginBottom: '6px' } }, app.t('engine.drill.symptom')),
-      h('div', { class: 'symptom', html: fmt(d.symptom) }),
-      h('h3', { style: { margin: '22px 0 8px' } }, `🧠 ${app.t('engine.drill.askYourself')}`),
-      ta,
-      h(
-        'div',
-        { class: 'actions', style: { display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '10px' } },
-        h(
-          'button',
-          {
-            class: 'btn primary',
-            type: 'button',
-            onclick: () => {
-              reveal(null);
-            },
-          },
-          `👀 ${app.t('engine.drill.reveal')}`,
-        ),
-        h(
-          'button',
-          {
-            class: 'btn ai',
-            type: 'button',
-            onclick: async (e: Event) => {
-              if (!ta.value.trim()) {
-                ta.classList.add('shake');
-                setTimeout(() => {
-                  ta.classList.remove('shake');
-                }, 500);
-                return;
-              }
-              const b = e.currentTarget as HTMLButtonElement;
-              b.disabled = true;
-              b.textContent = `✨ ${app.t('engine.ex.grading')}`;
-              try {
-                reveal(await app.ai.drillGrade(d, ta.value));
-              } catch (er) {
-                app.toast(`⚠️ ${app.errText(er)}`, 4000);
-                reveal(null);
-              }
-            },
-          },
-          `✨ ${app.t('engine.drill.grade')}`,
-        ),
-        h('button', { class: 'btn', type: 'button', onclick: orderDrill }, `🔢 ${app.t('engine.drill.order')}`),
-        h(
-          'button',
-          {
-            class: 'btn',
-            type: 'button',
-            onclick: () => {
-              // the learner's first message: their bubble, in the UI language
-              app.tutor.open(
-                { kind: 'playbook', id, origin: { via: 'drillRoleplay', drill: id } },
-                'debug',
-                app.t('engine.aimsg.pbRoleplay', { title: d.title }),
-                {
-                  intent: app.tutor.intent('pbRoleplay'),
-                },
-              );
-            },
-          },
-          `🎭 ${app.t('engine.drill.roleplay', { tutor: who.name })}`,
-        ),
-      ),
-      stage,
-    ),
-  );
+  show(app, new StudyDrillPage(app, d, c.id));
 }

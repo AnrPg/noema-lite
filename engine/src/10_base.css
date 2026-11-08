@@ -344,11 +344,28 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
 .flash .back{transform:rotateY(180deg);background:var(--c-bg);font-weight:550;font-size:17px}
 .flash .face small{position:absolute;top:14px;inset-inline-start:18px;font-size:12px;color:var(--ink3);font-weight:700}
 .rate{display:flex;gap:8px;justify-content:center;margin-top:18px}
+.deckcounts{margin:6px 0 16px}
+.flash .flipnote{position:absolute;bottom:14px}
+.deckopen{text-align:center;margin-top:10px}.deckopen .linkish{text-decoration:underline}
 
 /* ---------- debug drill ---------- */
 .pb{border-radius:20px;border:1px solid var(--line);background:var(--card);padding:16px 18px;display:flex;gap:14px;align-items:center;text-align:start;transition:transform .2s;animation:slideIn .4s both}
 .pb:hover{transform:translateY(-2px);border-color:var(--c)}
 .pb .ic{font-size:26px}
+.drillnext{margin-bottom:14px}
+.drilltiles{display:grid;gap:10px}
+.pill.rested{background:var(--ok-bg);color:var(--ok)}
+.drillch{margin:20px 0 10px}
+.drilltitle{margin:10px 0 14px}
+.drilllbl{font-weight:700;margin-bottom:6px}
+.reader .drillh{margin:22px 0 10px}
+.drillacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.drillorder,.drillcheck{margin-top:18px}
+.drilltick{margin-inline-start:auto}
+.drillhook{margin-top:14px}
+.stepc .stepwhy{color:var(--ink2);font-size:14px}
+.stepc .stepcode{margin-top:8px}
+.drillfix{margin-top:12px}
 .boxes{display:flex;gap:3px}
 .boxes i{width:8px;height:8px;border-radius:3px;background:var(--line)}
 .boxes i.on{background:#e8590c}

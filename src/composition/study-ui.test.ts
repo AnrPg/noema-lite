@@ -32,7 +32,20 @@ const chapter = (n: number): Chapter => ({
   sections: [{ id: `c${String(n)}-s1`, title: `Section ${String(n)}.1`, blocks: [{ t: 'p', text: `Theory of chapter ${String(n)}` }] }],
   exercises: [ex(`c${String(n)}-e1`, `c${String(n)}-s1`, 'l1'), ex(`c${String(n)}-e2`, `c${String(n)}-s1`, 'l2')],
   flashcards: [{ q: 'Front', a: 'Back', id: `c${String(n)}-f1` }],
-  debug: [],
+  debug:
+    n === 1
+      ? [
+          {
+            id: 'c1-d1',
+            title: 'The lamp stays dark',
+            symptom: 'No light',
+            askYourself: ['Is it plugged in?', 'Is the bulb whole?'],
+            steps: [{ do: 'Check the plug', why: 'The cheapest cause first' }],
+            rootCauses: ['A loose plug'],
+            fix: 'Plug it in',
+          },
+        ]
+      : [],
   pitfalls: [],
 });
 
@@ -232,6 +245,44 @@ test('a locked Roadmap step: its theory opens, its exercises wait', () => {
   ui.show('#/s/c1-s1');
   assert.ok(main().querySelector('.lockbar'));
   assert.match(text(), /Theory of chapter 1/);
+});
+
+test('flashcards (#/cards): drawn at once, turned by a tap or the keyboard, rated, then done', () => {
+  ui.show('#/cards');
+  assert.equal(main().querySelector('h1')?.textContent, i18n.t('view.cards'), 'the title is there in the same task');
+  const flash = (): HTMLElement | null => main().querySelector('.flash');
+  assert.ok(flash()?.querySelector('.exask'), 'the quiet “Ask” is in the card’s corner');
+  main().querySelector<HTMLElement>('.flash .inner')?.click();
+  assert.ok(flash()?.classList.contains('flipped'), 'a tap turns it');
+  const inner = main().querySelector<HTMLElement>('.flash .inner');
+  inner?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  assert.ok(!flash()?.classList.contains('flipped'), 'Enter turns it back');
+  const first = flash()?.dataset['card'];
+  [...main().querySelectorAll<HTMLButtonElement>('.rate .btn')][1]?.click();
+  assert.ok(f.events.includes(`card.reviewed:${first ?? ''}`), 'Good is a card.reviewed event');
+  assert.notEqual(flash()?.dataset['card'], first, 'the next card comes');
+  assert.ok(!flash()?.classList.contains('flipped'), 'face up');
+  main().querySelector<HTMLButtonElement>('.rate .btn.primary')?.click();
+  assert.ok(main().querySelector('.empty'), 'the deck is done');
+});
+
+test('debug drills: the list, a drill revealed with its checklist, rated as a playbook.reviewed event', () => {
+  ui.show('#/drills');
+  const tile = main().querySelector<HTMLButtonElement>('.pb');
+  assert.match(tile?.textContent ?? '', /The lamp stays dark/);
+  ui.show('#/drill/c1-d1');
+  assert.match(text(), /No light/);
+  const reveal = main().querySelector<HTMLButtonElement>('.drillacts .btn.primary');
+  reveal?.click();
+  const boxes = [...main().querySelectorAll<HTMLInputElement>('.rubric input[type=checkbox]')];
+  assert.equal(boxes.length, 2, 'the checklist');
+  assert.match(text(), /A loose plug/);
+  const one = boxes[0];
+  assert.ok(one);
+  one.checked = true;
+  const nailed = [...main().querySelectorAll<HTMLButtonElement>('.reader .row .btn.primary')].at(-1);
+  nailed?.click();
+  assert.ok(f.events.includes('playbook.reviewed:c1-d1'));
 });
 
 test('“Only my level” keeps a round at the learner’s level', () => {
