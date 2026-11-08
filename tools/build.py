@@ -33,6 +33,7 @@ def run_esbuild():
     global BUILD_MANIFEST
     if '--no-esbuild' not in args:
         if not os.path.isdir(os.path.join(ROOT, 'node_modules', 'esbuild')): sys.exit('✗ the TypeScript build needs its tools: run  npm ci  once (Node 22)')
+        build_contracts()   # the bundles import the generated validators (src/contracts/validate.ts)
         r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'esbuild.mjs')], cwd=ROOT)
         if r.returncode != 0: sys.exit('✗ npm run build (tools/esbuild.mjs) failed')
     mp = os.path.join(BUILD, 'manifest.json')
@@ -73,11 +74,15 @@ def author_schemas_js():
             '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + ';\n'
             '  root.NoemaActivityRefs = ' + json.dumps(refs, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
 
+_CONTRACTS_BUILT = False
 def build_contracts():
     """The data contracts (src/contracts/schemas → engine/contracts.js, src/contracts/validate.ts and the types): generated,
     never committed (npm run contracts; it needs the packages of package.json: npm ci). Everything below checks with them."""
+    global _CONTRACTS_BUILT
+    if _CONTRACTS_BUILT: return   # once per run
     if not os.path.isdir(os.path.join(ROOT, 'node_modules', 'ajv')): sys.exit('build: the data contracts need the node packages first: npm ci')
     subprocess.run(['node', os.path.join(ROOT, 'tools', 'contracts.mjs')], check=True)
+    _CONTRACTS_BUILT = True
 
 def build_engine():
     build_contracts()
