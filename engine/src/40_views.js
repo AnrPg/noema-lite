@@ -597,9 +597,9 @@ function runSummary() {
       R0.after ? h('button', { class: 'btn primary ns-srnext', onclick: R0.after.run }, R0.after.label) : null,
       h('button', { class: 'btn', onclick: () => go(R0.back) }, tE('engine.run.done'))))));
 }
-/* ---------- 🔎 a round made from search results (engine/search.js): this subject's exercises, then its cards ---------- */
+/* ---------- 🔎 a round made from search results (NoemaCore.community.search): this subject's exercises, then its cards ---------- */
 function searchRunView() {
-  const X = window.NoemaSearch, R = X?.round(), st = R?.steps?.[R.i];
+  const X = window.NoemaCore?.community?.search, R = X?.round(), st = R?.steps?.[R.i];
   if (!st || st.sj !== SUBJ.id) return go(X ? '#/search' : HOME());
   const after = X.after();
   if (st.kind === 'ex') {

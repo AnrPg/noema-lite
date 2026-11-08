@@ -90,6 +90,10 @@ export interface ReportContext {
   look(): { readonly character: string | null; readonly world: string | null };
   /** the catalogs of the interface: locale → key → message (for the reverse lookup of a word) */
   catalogs(): Readonly<Record<string, Readonly<Record<string, unknown>>>>;
+  /** the last errors of the page (kept from the start: a report about something broken says what failed) */
+  errors(): readonly { readonly level: string; readonly at: string; readonly msg: string }[];
+  /** the screenshot library (modern-screenshot), loaded on the first report */
+  screenshots(): Promise<{ domToJpeg(node: Node, options: Readonly<Record<string, unknown>>): Promise<string> }>;
 }
 
 /** A menu entry of a screen's ⋮ (the frame draws it). */

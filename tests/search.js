@@ -1,4 +1,4 @@
-/* The search (engine/search.js, NoemaCore.search and NoemaCore.catalog, docs/SEARCH.md), Playwright + Chromium, in the new frame:
+/* The search (src/features/search/ui through NoemaCore.community, NoemaCore.search and NoemaCore.catalog, docs/SEARCH.md), Playwright + Chromium, in the new frame:
      A. 🔎 in the top bar (and / or Ctrl K): the quick sheet, results grouped by kind, Knowledge or Languages on each
      B. #/search: its own page and address, kind chips, filters, “here” as a scope, exact matches on top
      C. stable addresses: a theory block, a trap and a single flashcard open where they are, highlighted
@@ -18,14 +18,18 @@ function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.m
 const texts = (page, sel) => page.$$eval(sel, l => l.map(x => x.textContent.trim()));
 /** open a folded group of results on the search page */
 const openGroup = async (page, ty) => { await until(() => page.$(`.ns-srgrp[data-ty="${ty}"] .ns-srfold`), 8000); if (!(await page.$(`.ns-srgrp.open[data-ty="${ty}"]`))) await page.click(`.ns-srgrp[data-ty="${ty}"] .ns-srfold`); await wait(200); };
-const ready = async page => { await wait(600); return until(() => page.evaluate(() => { const I = NoemaSearch.index(); return !I.state.busy && I.records().length > 0; }), 60000, 300); };
+const ready = async page => { await wait(600); return until(() => page.evaluate(() => { const I = NoemaCore.community.search.index(); return !I.state.busy && I.records().length > 0; }), 60000, 300); };
 
 (async () => {
   const browser = await chromium.launch();
   const url = await appUrl(ROOT);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await ctx.newPage(); const E = []; errs(page, E);
-  let answer = null; page.on('dialog', d => d.type() === 'prompt' || d.type() === 'confirm' ? d.accept(answer ?? undefined) : d.dismiss());
+  page.on('dialog', d => d.dismiss());   // the app asks in its own dialogs (.nc-ask, .nc-asktext), never the browser's
+  /** answers the app's own question: a name typed (askText), or yes */
+  const answer = async text => { if (text != null) { await page.waitForSelector('.nc-asktext .nc-askfield input'); await page.fill('.nc-asktext .nc-askfield input', text); await page.click('.nc-asktext .nc-ok'); } else { await page.waitForSelector('.nc-ask .nc-ok'); await page.click('.nc-ask .nc-ok'); } await wait(300); };
+  /** opens a row's ⋮ (the kit's menu) and picks an item */
+  const rowMenu = async (sel, item) => { await page.click(sel + ' noema-menu'); await page.locator('noema-menu-item:visible', { hasText: item }).first().click(); };
 
   await page.goto(url); await page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); localStorage.setItem('noema-test:newUI', '1'); }); await page.reload();
   await until(() => page.$('.ns-onb [data-pick="know"]'));
@@ -79,7 +83,7 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   await page.evaluate(async () => { await NoemaConvos.put(Noema.account.id, { id: 'cv_0000000001aaaaaa', kind: 'tutor', mode: 'explain', title: 'Why squared?', subject: { id: 'demo-physics', title: 'Demo Physics' },
     context: { type: 'exercise', id: 'ch01-e001', label: 'Exercise', origin: { via: 'explainDifferently', ex: 'ch01-e001' } }, messages: [{ role: 'user', content: 'why is the velocity squared in kinetic energy?' }, { role: 'assistant', content: 'Because work adds up over distance.' }] }); });
   await page.goto(url + '#/search?q=velocity%20squared'); await page.reload(); await ready(page);
-  await until(() => page.evaluate(() => NoemaSearch.index().records().some(r => r.ty === 'convo')), 20000);
+  await until(() => page.evaluate(() => NoemaCore.community.search.index().records().some(r => r.ty === 'convo')), 20000);
   ok(await until(() => page.$('.ns-srgrp[data-ty="convo"]'), 10000), 'conversations are their own group');
   await openGroup(page, 'convo');
   const via = await page.$eval('.ns-sr[data-ty="convo"] .ns-srvia', x => x.textContent).catch(() => '');
@@ -90,10 +94,10 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   console.log('E. collections and the practice round');
   await page.goto(url + '#/search?q=energy'); await page.reload(); await ready(page); await until(() => page.$('.ns-srsave'), 8000);
   ok((await page.$eval('.ns-srsave', b => b.textContent)) === 'Keep this search', 'the button says what it does: “Keep this search”');
-  answer = 'Energy things'; await page.click('.ns-srsave'); await wait(500);
-  ok(await page.evaluate(() => NoemaSearch.collections().some(c => c.name === 'Energy things' && c.p.q === 'energy')) && (await page.evaluate(() => location.hash)).includes('c=q'), 'save the search as a collection (kept with the account)');
+  await page.click('.ns-srsave'); await answer('Energy things'); await wait(300);
+  ok(await page.evaluate(() => NoemaCore.community.search.collections().some(c => c.name === 'Energy things' && c.p.q === 'energy')) && (await page.evaluate(() => location.hash)).includes('c=q'), 'save the search as a collection (kept with the account)');
   await page.goto(url + '#/search'); await page.reload(); await until(() => page.$('.ns-srcols'), 8000);
-  ok((await texts(page, '.ns-srcols .ns-item b')).includes('Energy things') && (await texts(page, '.ns-srcols .ns-label'))[0] === 'Saved searches', 'the empty page lists the saved searches');
+  ok((await texts(page, '.ns-srcols .nc-item b')).includes('Energy things') && (await texts(page, '.ns-srcols .nc-label'))[0] === 'Saved searches', 'the empty page lists the saved searches');
   await page.goto(url + '#/search?q=kinetic'); await page.reload(); await until(() => page.$('#ns-top .ns-menubtn'), 8000);
   await page.click('#ns-top .ns-menubtn'); await page.waitForSelector('.ns-pop');
   const popT = await texts(page, '.ns-pop button');
@@ -101,24 +105,22 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   await page.locator('.ns-pop button', { hasText: 'Saved searches' }).first().click(); await wait(600);
   ok(await page.evaluate(() => location.hash === '#/search') && await page.$('.ns-srcols'), '… which open the list');
   ok(await page.$('.ns-srrecent'), '… and recent searches on this device');
-  await page.click('.ns-srcols .ns-menubtn'); await page.waitForSelector('.ns-pop');
-  answer = 'Energy'; await page.locator('.ns-pop button', { hasText: 'Rename' }).first().click(); await wait(400);
-  ok(await page.evaluate(() => NoemaSearch.collections()[0]?.name === 'Energy'), 'rename a collection');
+  await rowMenu('.ns-srcols', 'Rename'); await answer('Energy');
+  ok(await page.evaluate(() => NoemaCore.community.search.collections()[0]?.name === 'Energy'), 'rename a collection');
   await page.goto(url + '#/search?q=E_k&t=exercise,card'); await page.reload(); await ready(page);
   ok(await until(() => page.$('.ns-srpractise'), 8000), '“Practise these results” shows when the filter keeps only things that can be practised');
   await page.click('.ns-srpractise');
-  ok(await until(() => page.evaluate(() => /^#\/s?run$/.test(location.hash) && NoemaSearch.round()?.steps?.length > 0), 15000), 'Practise these results: a round, its first step opens: ' + await page.evaluate(() => JSON.stringify(NoemaSearch.round()?.steps?.map(s => s.kind))));
+  ok(await until(() => page.evaluate(() => /^#\/s?run$/.test(location.hash) && NoemaCore.community.search.round()?.steps?.length > 0), 15000), 'Practise these results: a round, its first step opens: ' + await page.evaluate(() => JSON.stringify(NoemaCore.community.search.round()?.steps?.map(s => s.kind))));
   await page.screenshot({ path: SHOTS + '/sr_e_round.png' });
   ok(await until(() => page.$('.runner .runtop')), 'the exercises of the round open in the runner');
-  ok(await page.evaluate(() => /Next|end/i.test(NoemaSearch.after()?.label || '')), 'each step knows the next one (or the end): ' + await page.evaluate(() => NoemaSearch.after()?.label));
-  await page.evaluate(() => NoemaSearch.goStep(1)); await wait(1200);
-  ok(await until(() => page.evaluate(() => location.hash === '#/srun' && NoemaSearch.round()?.i === 1 && document.body.textContent.includes('Formula for'))), 'the next step: the flashcards found');
-  await page.evaluate(() => NoemaSearch.goStep(99)); await wait(800);
-  ok(await page.evaluate(() => !NoemaSearch.round() && location.hash.startsWith('#/search?q=E_k&t=exercise')), 'the end of the round goes back to the results');
+  ok(await page.evaluate(() => /Next|end/i.test(NoemaCore.community.search.after()?.label || '')), 'each step knows the next one (or the end): ' + await page.evaluate(() => NoemaCore.community.search.after()?.label));
+  await page.evaluate(() => NoemaCore.community.search.goStep(1)); await wait(1200);
+  ok(await until(() => page.evaluate(() => location.hash === '#/srun' && NoemaCore.community.search.round()?.i === 1 && document.body.textContent.includes('Formula for'))), 'the next step: the flashcards found');
+  await page.evaluate(() => NoemaCore.community.search.goStep(99)); await wait(800);
+  ok(await page.evaluate(() => !NoemaCore.community.search.round() && location.hash.startsWith('#/search?q=E_k&t=exercise')), 'the end of the round goes back to the results');
   await page.goto(url + '#/search'); await page.reload(); await until(() => page.$('.ns-srcols'), 8000);
-  await page.click('.ns-srcols .ns-menubtn'); await page.waitForSelector('.ns-pop');
-  await page.locator('.ns-pop button', { hasText: 'Delete' }).first().click(); await wait(400);
-  ok(await page.evaluate(() => NoemaSearch.collections().length === 0), 'delete a collection');
+  await rowMenu('.ns-srcols', 'Delete'); await answer();
+  ok(await page.evaluate(() => NoemaCore.community.search.collections().length === 0), 'delete a collection');
 
   console.log('F. Greek');
   await page.evaluate(() => NoemaThemes.putSettings({ lang: 'el' })); await page.goto(url + '#/search?q=kinetic'); await page.reload(); await ready(page); await until(() => page.$('.ns-srfilt'), 8000);

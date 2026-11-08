@@ -108,7 +108,7 @@ window.NoemaShell = (() => {
     F.crumbs = h('nav', { class: 'ns-crumbs', 'aria-label': L('where') });
     F.acts = h('div', { class: 'ns-acts' });
     F.bellBadge = h('span', { class: 'bellbadge' });
-    F.find = h('button', { class: 'ns-iconbtn ns-find', id: 'ns-find', title: L('sr_search'), 'aria-label': L('sr_search'), 'aria-keyshortcuts': '/', onclick: () => window.NoemaSearch?.quick(here()) }, svg('search'));   // 🔎 everything, everywhere (engine/search.js)
+    F.find = h('button', { class: 'ns-iconbtn ns-find', id: 'ns-find', title: L('sr_search'), 'aria-label': L('sr_search'), 'aria-keyshortcuts': '/', onclick: () => CM_()?.search.quick(here()) }, svg('search'));   // 🔎 everything, everywhere (src/features/search/ui)
     F.peopleBadge = h('span', { class: 'bellbadge' });
     F.people = null;   // 👥 conversations, buddies, groups (engine/social.js): a tab of the side bar, with what waits there (drawTabs)
     F.bell = h('button', { class: 'ns-iconbtn bell', id: 'bellbtn', title: L('notifications'), 'aria-label': L('notifications'), onclick: openNotes }, svg('bell'), F.bellBadge);
@@ -118,7 +118,7 @@ window.NoemaShell = (() => {
     F.tabs = h('nav', { class: 'ns-tabs', 'aria-label': L('mainNav') });
     F.railMe = h('button', { class: 'ns-railme', 'data-pop': '1', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: e => { e.stopPropagation(); meMenu(F.railMe, true); } }, h('span', { class: 'ns-me' }, h('span', { class: 'ns-meemo' })), h('span', { class: 'ns-mename' }, L('me')));
     // ⚑ report a problem (engine/report.js, docs/REPORTS.md): at the foot of the side bar, above Me; on phones in Me ▾
-    F.railReport = h('button', { class: 'ns-railreport nr-skip', id: 'ns-report', title: RL('buttonTip'), 'aria-label': RL('button'), onclick: e => { e.stopPropagation(); window.NoemaReport?.open(); } }, svg('report'), h('i', { class: 'ns-dot', 'aria-hidden': 'true' }));
+    F.railReport = h('button', { class: 'ns-railreport nr-skip', id: 'ns-report', title: RL('buttonTip'), 'aria-label': RL('button'), onclick: e => { e.stopPropagation(); closePops(); CM_()?.report.open(); } }, svg('report'), h('i', { class: 'ns-dot', 'aria-hidden': 'true' }));
     // "Me" (top right on phones) opens the same menu: Me · Settings · Help · My subjects — Switch account · Log out
     Object.assign(F.topMe.dataset, { pop: '1' }); F.topMe.setAttribute('aria-haspopup', 'menu'); F.topMe.setAttribute('aria-expanded', 'false');
     F.top.addEventListener('click', e => { if (e.target.closest('#ns-topme')) { e.stopPropagation(); meMenu(F.topMe); } }, true);
@@ -137,7 +137,7 @@ window.NoemaShell = (() => {
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') { if (closePops()) return; if (F.layer.firstChild && !F.layer.querySelector('[data-sticky]')) { F.layer.replaceChildren(); return; } }
       // / or Ctrl/⌘ K: search (not while typing, not over a window that must be answered)
-      if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey || (e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey)) && !e.target.closest?.('input, textarea, select, [contenteditable="true"]') && !F.layer.querySelector('[data-sticky], .ns-modal') && window.NoemaSearch) { e.preventDefault(); NoemaSearch.quick(here()); }   // i18n-ignore (selector)
+      if ((e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey || (e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey)) && !e.target.closest?.('input, textarea, select, [contenteditable="true"]') && !F.layer.querySelector('[data-sticky], .ns-modal') && !document.querySelector('noema-dialog[open]') && CM_()) { e.preventDefault(); CM_().search.quick(here()); }   // i18n-ignore (selector)
     });
     document.addEventListener('click', e => { if (!e.target.closest('.ns-pop, [data-pop]')) closePops(); }, true);
     route();
@@ -324,7 +324,7 @@ window.NoemaShell = (() => {
 
   /* ======================= routing ======================= */
   const PAGES = {};
-  let routedHash = null;
+  let routedHash = null, keepScroll = false;   // keepScroll: the page now is the one drawn before (a community screen kept)
   function route() {
     if (!mounted) return;
     // a menu closes when the learner goes elsewhere, not when the same page is drawn again (e.g. the search index got ready)
@@ -354,7 +354,8 @@ window.NoemaShell = (() => {
     document.body.classList.remove('ns-mapmode');
     const page = PAGES[k] || PAGES[''];
     try { page(p.slice(1)); } catch (e) { console.error('[shell]', e); F.main.replaceChildren(h('div', { class: 'ns-view' }, h('p', {}, e.message))); }
-    scrollTo({ top: 0 });
+    if (!keepScroll) scrollTo({ top: 0 });
+    keepScroll = false;
   }
   /** Draw a page into <main>: chrome + content. */
   function page(c, ...kids) {
@@ -377,14 +378,25 @@ window.NoemaShell = (() => {
     if (ENGINE_ROUTES.has(p[0]) && N()?.subject?.id && !isLang(N().subject)) return { kind: 'subj', id: N().subject.id, title: N().subject.title };
     if (p[0] === 'map' && p[1]) { const c = CU()?.get(acc(), p[1]); if (c) return { kind: 'cur', id: c.id, title: shortTitle(c) }; }
     if (p[0] === 'lang' && p[1]) return { kind: 'course', id: p[1], title: window.NoemaLangUI?.titleOf?.(p[1]) || (window.NOEMA_REGISTRY?.languages || []).find(x => x.id === p[1])?.title || p[1] };
-    if (p[0] === 'search') return window.NoemaSearch?.hereNow?.() || null;
+    if (p[0] === 'search') return CM_()?.search.hereNow() || null;
     return null;
   }
-  /* ---------- 🔎 the search page (#/search?q=…): engine/search.js draws it ---------- */
-  PAGES.search = () => {
-    if (!window.NoemaSearch) { page({ tab: null, crumbs: [[L('sr_search')]] }, h('p', { class: 'ns-muted' }, '…')); return; }
-    NoemaSearch.page({ page, h, L, go, open, sheet, menuButton, faceEl, pill, svg, ico, chev, main: F.main });
-  };
+  /* ---------- the community screens (NoemaCore.community: src/composition/community-ui.ts, Lit on the UI kit) ----------
+     🔎 #/search · 🗄️ #/vault · 👥 #/people #/chat #/group #/join · 🧭 #/explore · ⚑ #/admin/reports: drawn into the page,
+     their tab, crumbs, ← and ⋮ told to the frame as they change */
+  const CM_ = () => window.NoemaCore?.community || null;
+  const communityChrome = c => chrome({ tab: c.tab, crumbs: (c.crumbs || []).map(x => [x.label, x.href]), back: c.back, menu: c.menu?.length ? c.menu.map(it => it === '-' ? '-' : { ...it }) : null });
+  function communityPage(tab, title) {
+    const at = location.hash, was = F.main.querySelector(':scope > .ns-community')?.firstElementChild;
+    // the same address drawn again (the frame redraws on a theme or a world that arrives late): the screen stays as it is, open menus and all
+    if (was?.screenChrome && was.shownHash === at) { keepScroll = true; return was; }   // (its chrome is the one shown)
+    const v = page({ tab, crumbs: [[title]] });
+    v.classList.add('ns-community');
+    CM_()?.mount(v, at, c => { if (v.isConnected) communityChrome(c); })
+      .catch(e => { console.error('[community]', e); if (v.isConnected) v.replaceChildren(h('p', {}, e.message)); });
+    return v;
+  }
+  PAGES.search = () => communityPage(null, L('sr_search'));
 
   /* ---------- 🗄️ the vault (#/vault?…): engine/vault.js draws it ---------- */
   PAGES.vault = () => {
@@ -487,7 +499,7 @@ window.NoemaShell = (() => {
     if (!list.length) v.append(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L('noRoadmaps')), h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => CM()?.create(acc(), { onStudy }) }, L('newRoadmap')), h('button', { class: 'btn', onclick: () => CM()?.importMap(acc(), { onStudy }) }, L('importMap')), h('button', { class: 'btn ghost', onclick: () => CM()?.exploreCurricula?.(acc(), { onStudy }) }, L('exploreRoadmaps')))));
     v.append(...list.map((c, i) => roadmapCard(c, i)));
     const shelfLbl = h('span', {}, L('shelf')), shelfBtn = h('button', { class: 'ns-shelflink', onclick: () => go('#/shelf') }, svg('shelf'), ' ', shelfLbl);
-    const nCol = window.NoemaSearch?.collections?.().length || 0;   // saved searches: a quiet link, only when there are some
+    const nCol = CM_()?.search.collections().length || 0;   // saved searches: a quiet link, only when there are some
     v.append(h('div', { class: 'ns-shelf' }, shelfBtn, nCol ? h('button', { class: 'ns-shelflink ns-collink', onclick: () => go('#/search') }, svg('search'), ' ', L('sr_collectionsN', { n: nCol })) : null));
     N().shelf?.(acc()).then(l => { shelfLbl.textContent = L('shelfN', { n: l.length }); }).catch(caught('shell.shelf.count', 'info'));
     const off = CU()?.onChange?.(() => { if (v.isConnected && F.main.dataset.page === 'learn') { clearTimeout(PAGES.learn.t); PAGES.learn.t = setTimeout(() => { if (v.isConnected) PAGES.learn(); }, 300); } else off?.(); });
@@ -712,18 +724,18 @@ window.NoemaShell = (() => {
   const weekKey = () => NoemaCore.day.weekStart(today());   // the local Monday of this week
   function rememberMedals(n) { const k = `noema1:${acc()}:meta:medals`, was = jget(k, null); jset(k, n); if (was != null && n > was) window.NoemaReact?.big('medal'); }
 
-  /* ---------- ⚑ problem reports (engine/report.js): the words, and whether this account reviews them (an admin) ---------- */
+  /* ---------- ⚑ problem reports (NoemaCore.community.report: src/features/reports/ui): the words, and whether this account reviews them (an admin) ---------- */
   const RL = (k, v) => window.NoemaI18n ? NoemaI18n.t('report.' + k, v, uiPref()) : k;
   const reports = { admin: false, fresh: 0 };
   function wireReports() {
-    const R = window.NoemaReport; if (!R?.isAdmin) return;
+    const R = CM_()?.report; if (!R) return;
     const check = () => R.isAdmin().then(ok => { reports.admin = ok; return ok ? R.newCount() : 0; }).then(n => { reports.fresh = n || 0; F.railReport.classList.toggle('has-dot', reports.fresh > 0); }).catch(caught('shell.reports.count', 'info'));
     check(); addEventListener('hashchange', () => { if (/^#\/admin/.test(location.hash) || reports.admin) check(); });
   }
-  /* ---------- 🛠️ admin pages (#/admin/reports[/<id>]): engine/report.js draws them ---------- */
-  PAGES.admin = ([what, ...rest]) => {
-    if (what !== 'reports' || !window.NoemaReport) { location.replace('#/'); return; }
-    NoemaReport.page(rest, { page, h, L, go, pill, svg, chev, sheet, modal, menuButton });
+  /* ---------- 🛠️ admin pages (#/admin/reports[/<id>]): src/features/reports/ui ---------- */
+  PAGES.admin = ([what]) => {
+    if (what !== 'reports' || !CM_()) { location.replace('#/'); return; }
+    communityPage(null, RL('adminTitle'));
   };
 
   /* ---------- Me ▾: a menu — Me (the page others see) · Settings · Help · My subjects — Switch account · Log out ---------- */
@@ -734,7 +746,7 @@ window.NoemaShell = (() => {
       { label: L('settings'), sub: L('settingsSub'), icon: 'gear', href: '#/me' },
       { label: L('help'), sub: L('helpSub'), icon: 'help', href: '#/help' },
       { label: L('mySubjects'), sub: L('subjectsSub'), icon: 'book', href: '#/subjects' },
-      window.NoemaReport ? { label: RL('button'), sub: RL('menuSub'), icon: 'report', cls: 'ns-reportitem', run: () => NoemaReport.open() } : null,
+      CM_() ? { label: RL('button'), sub: RL('menuSub'), icon: 'report', cls: 'ns-reportitem', run: () => CM_().report.open() } : null,
       reports.admin ? { label: RL('adminTitle'), sub: RL('adminSub'), icon: 'list', href: '#/admin/reports', badge: reports.fresh ? String(reports.fresh) : null, tone: 5 } : null,
       '-',
       { label: L('switchAccount'), icon: 'people', run: () => N().openAccountPicker?.() },

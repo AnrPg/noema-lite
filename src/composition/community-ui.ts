@@ -4,10 +4,14 @@
  * it); the older frame (engine/shell.js) and the phase-3 frame both mount through `mount`.
  *
  *   #/search?…                      the search page                       (src/features/search/ui)
+ *   #/admin/reports[/<id>][?f=…]   the ⚑ reports, for the app's admins   (src/features/reports/ui)
+ *   (no address)                    🔎 the quick sheet · ⚑ the report dialog
  */
 import type { ScreenChrome } from '../features/community/ui/host.ts';
-import { CHROME_EVENT, type CommunityScreen, type ScreenBase } from '../features/community/ui/screen.ts';
+import { CHROME_EVENT, type CommunityScreen } from '../features/community/ui/screen.ts';
 import type { Here } from '../features/search/domain/params.ts';
+import { NoemaReportAdmin } from '../features/reports/ui/admin.ts';
+import { openReport } from '../features/reports/ui/dialog.ts';
 import { NoemaSearchPage } from '../features/search/ui/page.ts';
 import { NoemaSearchQuick, quickSearch, type SearchScreenDeps } from '../features/search/ui/quick.ts';
 import { provideServices, requestServices } from '../ui/core/services.ts';
@@ -18,6 +22,7 @@ import { CLOCK } from './tokens.ts';
 
 export const COMMUNITY_ROUTES = defineRoutes({
   search: '/search',
+  reports: '/admin/reports/:id?',
 });
 type R = typeof COMMUNITY_ROUTES.table;
 type Match = RouteMatch<R>;
@@ -26,12 +31,14 @@ type Match = RouteMatch<R>;
 export const COMMUNITY_ELEMENTS = {
   'noema-search-page': NoemaSearchPage,
   'noema-search-quick': NoemaSearchQuick,
+  'noema-report-admin': NoemaReportAdmin,
 } as const;
 
 export interface CommunityScreens {
   has(hash: string): boolean;
   mount(el: HTMLElement, hash: string, onChrome: (c: ScreenChrome) => void): HTMLElement | null;
   quickSearch(here: Here | null): void;
+  openReport(): void;
 }
 
 let made: CommunityScreens | null = null;
@@ -58,6 +65,12 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
         el.deps = searchDeps;
         return el;
       }
+      case 'reports': {
+        const el = doc.createElement('noema-report-admin');
+        el.deps = app.reports;
+        el.reportId = m.params.id ?? '';
+        return el;
+      }
     }
   };
 
@@ -78,6 +91,9 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
     },
     quickSearch: here => {
       quickSearch(searchDeps, here, k => app.i18n.t(k));
+    },
+    openReport: () => {
+      void openReport(app.reports);
     },
   };
   return made;

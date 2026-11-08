@@ -18,11 +18,14 @@ import type { Here } from '../features/search/domain/params.ts';
 import { SearchUi, type SearchDeps } from '../features/search/ui/model.ts';
 import type { I18n } from '../ports/i18n.ts';
 import type { Notifier } from '../ports/notifier.ts';
+import type { ReportDeps } from '../features/reports/ui/dialog.ts';
 import type { BridgeExtension } from './bridge.ts';
 import type * as ScreensModule from './community-ui.ts';
 import type { Resolver } from './container.ts';
 import { oldAppHost } from './community-host.ts';
-import { oldAppReportContext, oldAppShare } from './community-old.ts';
+import { captureErrors, oldAppReportContext } from './community-old.ts';
+import { REPORTS } from './community.ts';
+import { oldAppShare } from './sharing-host.ts';
 import { catalogBridge } from './study.ts';
 import { CLOCK, I18N, NOTIFIER, STORAGE } from './tokens.ts';
 
@@ -33,14 +36,15 @@ export interface CommunityApp {
   readonly notify: Notifier;
   readonly i18n: I18n;
   readonly search: SearchUi;
+  readonly reports: ReportDeps;
 }
 
 type OpenIndex = (account: string, sources: () => Promise<readonly IndexSource[]>) => CatalogIndex;
 
 const newId = (): string => Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
 
-export function communityApp(r: Resolver, win: Window & typeof globalThis): CommunityApp {
-  const host = oldAppHost(win as never, { report: oldAppReportContext(win), share: oldAppShare(win) });
+export function communityApp(r: Resolver, win: Window & typeof globalThis, errors: ReturnType<typeof captureErrors>): CommunityApp {
+  const host = oldAppHost(win as never, { report: oldAppReportContext(win, errors), share: oldAppShare(win) });
   const i18n = r.get(I18N),
     notify = r.get(NOTIFIER);
   const searchDeps: SearchDeps = {
@@ -54,7 +58,8 @@ export function communityApp(r: Resolver, win: Window & typeof globalThis): Comm
     now: () => r.get(CLOCK).now(),
     newId,
   };
-  return { r, host, notify, i18n, search: new SearchUi(searchDeps, () => i18n) };
+  const reports: ReportDeps = { host, notify, i18n, win, reports: r.get(REPORTS), newId: () => win.crypto.randomUUID() };
+  return { r, host, notify, i18n, search: new SearchUi(searchDeps, () => i18n), reports };
 }
 
 /** the screens, loaded once */
@@ -70,7 +75,10 @@ const loadScreens = (): Promise<Screens> =>
 export function communityBridge(r: Resolver): unknown {
   const win = globalThis as Window & typeof globalThis;
   let app: CommunityApp | null = null;
-  const A = (): CommunityApp => (app ??= communityApp(r, win));
+  // the page's errors from the start (a ⚑ report carries the last ones); Node and the tests' vm have no page
+  const errors = typeof win.addEventListener === 'function' && 'console' in win ? captureErrors(win) : () => [];
+  const A = (): CommunityApp => (app ??= communityApp(r, win, errors));
+  const cloudOn = (): boolean => A().host.account()?.kind === 'cloud' && !!A().host.session();
   const ui = async (): Promise<ReturnType<Screens['communityScreens']>> => (await loadScreens()).communityScreens(A(), win);
   /** once the screens are loaded, a screen is mounted in the same task (the frame never shows a page half drawn) */
   const now = (): ReturnType<Screens['communityScreens']> | null => (loaded ? loaded.communityScreens(A(), win) : null);
@@ -80,6 +88,10 @@ export function communityBridge(r: Resolver): unknown {
       win.setTimeout(() => {
         A().search.warmIfUsed();
       }, 8000);
+      // ⚑ reports kept while offline go when the app is back
+      win.setTimeout(() => {
+        if (cloudOn()) void A().reports.reports.flush();
+      }, 4000);
     });
   return Object.freeze({
     /** is this address one of the community screens */
@@ -88,6 +100,24 @@ export function communityBridge(r: Resolver): unknown {
       const s = now();
       return s ? Promise.resolve(s.mount(el, hash, onChrome)) : ui().then(x => x.mount(el, hash, onChrome));
     },
+    report: Object.freeze({
+      /** ⚑ pressed: the place and the screenshot, then the dialog */
+      open: async () => {
+        (await ui()).openReport();
+      },
+      /** does this account review the reports (an admin of the app) */
+      isAdmin: async (): Promise<boolean> => {
+        if (!cloudOn()) return false;
+        const x = await A().reports.reports.isAdmin();
+        return x.ok && x.value;
+      },
+      /** the new reports waiting for an admin */
+      newCount: async (): Promise<number> => {
+        if (!cloudOn()) return 0;
+        const x = await A().reports.reports.newCount();
+        return x.ok ? x.value : 0;
+      },
+    }),
     search: Object.freeze({
       quick: async (here: Here | null) => {
         (await ui()).quickSearch(here);
