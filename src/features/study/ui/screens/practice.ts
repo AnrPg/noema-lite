@@ -1,5 +1,5 @@
 /**
- * Practice: the boss battle, the lightning round, one exercise (#/ex/<id>).
+ * Practice: the lightning round, one exercise (#/ex/<id>).
  */
 import type { Exercise } from '../../domain/pack.ts';
 import { HOME, type StudyApp } from '../app.ts';
@@ -7,54 +7,6 @@ import { h, replay, shuffle } from '../dom.ts';
 import { askButton, setAccent } from '../parts.ts';
 import { fmt } from '../text.ts';
 import { view } from '../view.ts';
-
-/** #/boss/<chapter>: 15 exercises, mostly hard ones, three lives */
-export function bossView(app: StudyApp, id: string): void {
-  const c = app.course.chapter(id);
-  if (!c) {
-    app.go(HOME);
-    return;
-  }
-  setAccent(document.body, c);
-  app.host.frame.chrome({
-    sub: true,
-    crumbs: [[`${c.emoji ?? ''} ${c.title}`, `#/ch/${id}`], [app.L('boss')]],
-    back: `#/ch/${id}/practice`,
-  });
-  view(
-    app,
-    h(
-      'div',
-      { class: 'card summary' },
-      h('div', { class: 'big' }, '👾'),
-      h('h1', {}, app.t('engine.boss.title', { num: c.num })),
-      h('p', { class: 'muted' }, app.t('engine.boss.intro')),
-      h(
-        'button',
-        {
-          class: 'btn primary',
-          type: 'button',
-          style: { marginTop: '10px' },
-          onclick: () => {
-            const pool = c.exercises.filter(e => e.type !== 'free');
-            const hard = shuffle(pool.filter(e => e.difficulty >= 2)),
-              easy = shuffle(pool.filter(e => e.difficulty < 2));
-            const pick = [...hard.slice(0, 12), ...easy.slice(0, 3)];
-            app.startRound(shuffle(pick).slice(0, 15), {
-              title: `👾 ${app.t('engine.boss.runTitle', { num: c.num })}`,
-              count: 15,
-              back: `#/ch/${id}`,
-              boss: id,
-              keepOrder: true,
-            });
-            app.host.feedback.big('boss');
-          },
-        },
-        `⚔️ ${app.t('engine.boss.fight')}`,
-      ),
-    ),
-  );
-}
 
 /** #/lightning: true or false against the clock (60 seconds) */
 export function lightningView(app: StudyApp): void {
