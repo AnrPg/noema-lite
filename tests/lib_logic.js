@@ -1,4 +1,4 @@
-/* logic@1 (src/engines/logic/logic.js, docs/library/logic.md) against published values:
+/* logic@1 (src/engines/logic/logic.ts, docs/library/logic.md) against published values:
    1. the parser: every error code with its position, ASCII = Unicode, printing round trips, each language's operators;
    2. propositional: De Morgan, Peirce's law (Enderton 2001), PHP(3,2) unsatisfiable (Cook & Reckhow 1979), DPLL = CDCL = truth tables
       on 60 seeded random 3-CNF, Tseitin equisatisfiable, CNF/DNF equivalent, resolution, Fitch proofs and every line code, Horn

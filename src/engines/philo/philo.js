@@ -17,7 +17,7 @@
    Tests: node tests/lib_philo.js */
 import NoemaLibCore from '../kernel/core.js';
 import NoemaSimKit from '../kernel/simkit.js';
-import NoemaLibLogic from '../logic/logic.js';
+import NoemaLibLogic from '../logic/logic.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own ids leave this engine
   const C = NoemaLibCore;
   const ID = 'philo@1';

@@ -85,7 +85,7 @@ until achieved; **single-minded** until achieved or impossible; **open-minded** 
 
 `norms: [{id, kind O|F|P, act, cond, deadline, within, until, rank, issued, mode achieve|maintain, breed, sanction {var, add}}]`:
 obligations, prohibitions and permissions over the actions agents take (`act` names) and the facts (bool variables, `breed_<id>`,
-true globals). They are monitored each step by `NoemaLibLogic.normMonitor` (src/engines/logic/logic.js, `docs/library/logic.md` §9) per
+true globals). They are monitored each step by `NoemaLibLogic.normMonitor` (src/engines/logic/logic.ts, `docs/library/logic.md` §9) per
 agent; without it a fallback monitor with the same records runs (code `logic-fallback`; tested to give the same violations). A
 violation applies its sanction to the agent's variable. Outputs `violations` (series per step, or a total / per norm),
 `fulfilments`.

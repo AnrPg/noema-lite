@@ -12,7 +12,7 @@ round with a three-judge panel: the learner predicts the panel's ranking). The r
 `engine-library/research/rhetoric.md`.
 
 **Logic is not re-implemented here.** Dung semantics, truth tables and syllogisms come from `logic@1` (its module, imported:
-`afSolve`, `parse`, `atomsOf`, `evalProp`, `rowsOf`, `syllogism`; `docs/library/logic.md` §9). `src/engines/logic/logic.js` loads before this
+`afSolve`, `parse`, `atomsOf`, `evalProp`, `rowsOf`, `syllogism`; `docs/library/logic.md` §9). `src/engines/logic/logic.ts` loads before this
 file, and the Worker source of `rhetoric@1` is `NoemaExpr + core + logic@1 (source()) + rhetoric@1`, so the page and the Worker run
 the same code. Pure JS, no vendored dependency, deterministic, bounded; numbers, codes, keys and the model's own short texts (`s`, ≤ 64
 characters) leave the engine. No learner words: figure and fallacy names are indices into fixed lists (§5, §6), which the activity

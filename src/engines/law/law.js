@@ -21,11 +21,11 @@
      shares         succession and division: fixed shares with ʿawl / radd (farāʾiḍ, Qurʾān 4:11–12, 4:176), residue, the Talmud's
                     estate division (Kethuboth 93a; Aumann & Maschler 1985), proportional, CEA, CEL
      obligations    contract clauses over a dated trace in calendar or business days: logic@1 evalNorms (deadlines, contrary-to-duty)
-   Logic is never re-implemented: parse, key, afSolve and evalNorms come from NoemaLibLogic (src/engines/logic/logic.js, its §9 API).
+   Logic is never re-implemented: parse, key, afSolve and evalNorms come from NoemaLibLogic (src/engines/logic/logic.ts, its §9 API).
    Pure JS, no DOM, no words for the learner: numbers, codes, keys and the model's own short texts (`s`). Deterministic, bounded,
    never throws for a checked spec. Python twin of checkSpec / exprs / keys: tools/lib_law.py. Tests: node tests/lib_law.js. */
 import NoemaLibCore from '../kernel/core.js';
-import NoemaLibLogic from '../logic/logic.js';
+import NoemaLibLogic from '../logic/logic.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own short texts leave this engine
   const C = NoemaLibCore;
   const LG = () => NoemaLibLogic;   // logic@1 (docs/library/logic.md §9): parse, key, afSolve, evalNorms

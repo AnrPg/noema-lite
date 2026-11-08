@@ -35,8 +35,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('logic@1'),
-    () => import('./logic/logic.js'),
-    () => import('noema-worker:./logic/logic.js#simEngine'),
+    () => import('./logic/logic.ts'),
+    () => import('noema-worker:./logic/logic.ts#simEngine'),
   ),
   def(
     manifest('graph@1'),
