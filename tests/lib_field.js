@@ -1,4 +1,4 @@
-/* field@1 (src/engines/field/field.js, docs/library/field.md) against exact and published values:
+/* field@1 (src/engines/field/field.ts, docs/library/field.md) against exact and published values:
    1. heat: the Gaussian kernel (Crank–Nicolson, FTCS at the auto step, BTCS, ADI in 2-D), the decaying sine mode, conservation
       under Neumann walls, the FTCS instability beyond r = ½ (von Neumann), Robin cooling to its steady profile, sources, obstacles,
       the 9-point Laplacian;
@@ -169,6 +169,15 @@ const KERN = 'sqrt(0.0025/(0.0025+2*0.1*t))*exp(-x^2/(2*(0.0025+2*0.1*t)))';
   ok(near(e2.out.th, lo, 2e-3) && e2.out.fl === 1, `the time the middle of a rod heated at one end reaches ¼: ${e2.out.th.toFixed(4)} (the Fourier series ${lo.toFixed(4)}), the run stops there (code stopped)`);
   const pr = run({ dim: 2, equation: 'heat', grid: { nx: 21, ny: 21 }, D: 1, init: 'x', bc: { all: { type: 'neumann', value: 0 } }, probes: [{ id: 'a', at: 'area', x0: 0, x1: 0.5, y0: 0, y1: 1, stat: 'mean' }, { id: 'l', at: 'line', x0: 0, x1: 1, y0: 0.5, y1: 0.5, stat: 'max' }], tEnd: 0.001 }, [S('a', 'probe', { probe: 'a', t: 0 }), S('l', 'probe', { probe: 'l', t: 0 })]);
   ok(near(pr.out.a, 0.25, 0.02) && near(pr.out.l, 1, 1e-9), `probes: an area mean of u = x over the left half ≈ ¼ (${pr.out.a.toFixed(4)}), a line max 1`);
+  // the prepared model is shared by every run of an instance (makeEngine prepares once): a run must not change it
+  {
+    const ps = spec({ equation: 'heat', grid: { nx: 41 }, D: 1, init: 'sin(pi*x)', tEnd: 0.05, bc: { all: { type: 'dirichlet', value: 0 } },
+      probes: [{ id: 'mid', at: 'line', x0: 0.4, x1: 0.6, stat: 'mean' }, { id: 'pt', at: 'point', x: 0.5 }, { id: 'ar', at: 'area', x0: 0.2, x1: 0.8 }] },
+      [S('l', 'probe', { probe: 'mid' }), S('p', 'probe', { probe: 'pt' }), S('a', 'probe', { probe: 'ar' })]);
+    const M = F.prepare(ps), r1 = F.run(ps, {}, { seed: 1, prepared: M }), r2 = F.run(ps, {}, { seed: 1, prepared: M }), r3 = F.run(ps, {}, { seed: 1 });
+    ok(['l', 'p', 'a'].every(k => Number.isFinite(r1.out[k]) && r2.out[k] === r1.out[k] && r3.out[k] === r1.out[k]),
+      `the same prepared model run twice: the line, point and area probes give the same values (${r1.out.l.toFixed(6)}, ${r1.out.p.toFixed(6)}, ${r1.out.a.toFixed(6)}) as a run that prepares its own`);
+  }
   const bud = run({ dim: 2, equation: 'heat', grid: { nx: 200, ny: 200 }, D: 1, init: '0', tEnd: 10 }, [S('f', 'final', { stat: 'max' }), S('fl', 'flag', { code: 'budget' })]);
   ok(codes(bud).includes('budget') && Number.isNaN(bud.out.f), 'a run beyond the work budget (10⁸ node-steps): code budget, NaN — never a hang');
   const nan = run({ equation: 'heat', grid: { nx: 20 }, D: 1, init: 'sqrt(-1)', tEnd: 0.01 }, [S('f', 'final', { stat: 'max' })]);

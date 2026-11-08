@@ -286,8 +286,8 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 9. As built — P3 (`circuit-mna@1` and the fault-finding bench, 2026-11-04)
 
-* **The engine in sim-spec.** `src/engines/circuit/circuit.js` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
-  instruments, seeded noise) is registered by `src/engines/circuit/sim.js` as `circuit-mna@1` with `{bench: true, check,
+* **The engine in sim-spec.** `src/engines/circuit/circuit.ts` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
+  instruments, seeded noise) is registered by `src/engines/circuit/sim.ts` as `circuit-mna@1` with `{bench: true, check,
   prepare, create, workerSource}`. `workerSource` is the engine's own source (`NoemaCircuit.source()`, the module's
   `Function.toString`) plus the adapter's: one copy of the code, the same in the page and in the worker. `prepare` evaluates the
   spec's expressions (bindings, transient times, `at`) with the app's NoemaExpr on the main thread, so the worker gets numbers only
@@ -393,7 +393,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 12. As built — P6 engines (`thermal@1`, `pid@1`, `rf@1`, `twin@1`, 2026-11-04)
 
-* **Registration like `circuit-mna@1`.** The four engines (`src/engines/thermal/thermal.js` … `src/engines/twin/twin.js`, each with its
+* **Registration like `circuit-mna@1`.** The four engines (`src/engines/thermal/thermal.ts` … `src/engines/twin/twin.ts`, each with its
   Python twin `tools/{thermal,pid,rf,twin}.py`) are registered by `engine/src/43_page_runtimes.js`, one `ACT.registerEngine(…engine)`
   each: `{id, check, prepare, create, workerSource}`, and `bench: true` for `twin@1`. Every run is in a Worker built from the
   engine's own source; `prepare` evaluates the expressions on the main thread. Formats and APIs: `docs/INTERACTIVE_ENGINES.md`
@@ -507,7 +507,7 @@ request for each subject; Γ: a library of general engines), **Γ is the canonic
 - **Γ, the library** (`docs/INTERACTIVE_LIBRARY.md`): general engines, each for a whole family of subjects — mathematics (`formula@1`,
   `ode@1`, `prob@1`, `graph@1`, `geom@1`), life sciences and medicine (`genetics@1`, `seq@1`, `med@1`, `clinic@1` — clinical reasoning,
   its own engine and the deepest — `anatomy@1`), humanities, arts and crafts (`timeline@1` with every calendar first-class, `music@1`,
-  `map@1`, `text@1`, `craft@1`). One contract (`src/engines/kernel/core.js` + a module per engine + a Python twin of its checks), new output kinds
+  `map@1`, `text@1`, `craft@1`). One contract (`src/engines/kernel/core.ts` + a module per engine + a Python twin of its checks), new output kinds
   `scene` and `sound` and line styles for library engines only. Models follow current published science; every source, validity
   range and "check before release" value is in the engine's chapter (`docs/library/<name>.md`).
 - **A, the free way**, stays: `formula@1` is in the library; `html-app@1` and `py-module@1` when no engine fits.

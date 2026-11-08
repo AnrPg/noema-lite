@@ -1,4 +1,4 @@
-/* rhetoric@1 (src/engines/rhetoric/rhetoric.js, docs/library/rhetoric.md): the format rules (WUDC BP manual, WSDC rules, NSDA LD and
+/* rhetoric@1 (src/engines/rhetoric/rhetoric.ts, docs/library/rhetoric.md): the format rules (WUDC BP manual, WSDC rules, NSDA LD and
    policy, IDEA Karl Popper, Intelligence Squared), the readability formulas with their published coefficients (Flesch 1948, Kincaid
    et al. 1975, Amstad 1978, Bamberger & Vanecek 1984, Kandel & Moles 1958, Oborneva 2006, Björnsson 1968, Anderson 1983), figures on
    classic texts in five languages (Churchill 1940, Lincoln 1863, Kennedy 1961, Caesar, Dickens 1859, Molière 1668, Mark 2:27 in German

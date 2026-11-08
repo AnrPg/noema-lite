@@ -1,4 +1,4 @@
-/* philo@1 (src/engines/philo/philo.js, docs/library/philo.md): published reference values (the source in each message), the edge cases
+/* philo@1 (src/engines/philo/philo.ts, docs/library/philo.md): published reference values (the source in each message), the edge cases
    and their codes, the checker's codes and the the golden outputs of the former Python twin on the fixtures, the sim adapter, the Worker source in a fresh
    global, speed. Run: node tests/lib_philo.js */
 'use strict';

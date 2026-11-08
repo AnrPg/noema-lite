@@ -312,7 +312,7 @@ export function createSimSpec(env: CheckEnv) {
     unknownKeys(m, MODEL_KEYS, 'spec.model', E);
     const ck = CK();
     if (!ck?.check) {
-      E.push(`spec.model: the ${CIRCUIT} checker (src/engines/circuit/sim.js) is not loaded here`);
+      E.push(`spec.model: the ${CIRCUIT} checker (src/engines/circuit/sim.ts) is not loaded here`);
       return;
     }
     if (!isObj(m.netlist)) {

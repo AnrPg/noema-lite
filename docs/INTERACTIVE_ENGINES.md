@@ -108,7 +108,7 @@ start, sets P̄ (each source's exact mean over the step, on the engine's own gri
 read at every step; a series output gives its value now, `stat` runs over every internal step, `at` once passed, the steady and τ
 outputs as in `run()`. Stepped to tEnd it equals `transient()` (tests/parts.js).
 
-## 3. `pid@1` — control loops (`src/engines/pid/pid.js`)
+## 3. `pid@1` — control loops (`src/engines/pid/pid.ts`)
 
 Tune a PID on a plant, watch windup, compare P and PI, see dead time and noise.
 
@@ -185,7 +185,7 @@ dead time reads the input history at t − θ. The same core serves `run()` and 
 its value now, the metrics and stats run over the history so far. Without the kernel: a marked FALLBACK (the same RK4 here).
 The Worker source carries NoemaExpr and the kernel.
 
-## 4. `rf@1` — radio links and propagation (`src/engines/rf/rf.js`)
+## 4. `rf@1` — radio links and propagation (`src/engines/rf/rf.ts`)
 
 IoT radio benches: link budgets, path loss, range, error rates, airtime.
 

@@ -136,7 +136,7 @@ export function requestBrief(r: EngineRequestRow): string {
   L.push(
     '## How to build it',
     '',
-    'Follow docs/INTERACTIVE_LIBRARY.md §1 (AnrPg/noema-lite): first decide whether an engine of the library can be EXTENDED (additive, the same id) — a new engine only when the model is a new family. A new engine is the module `src/engines/<name>/<name>.js` on the core (src/engines/kernel/core.js), a plugin of src/engines/plugins.ts, with its Python twin `tools/lib_<name>.py`, its chapter `docs/library/<name>.md` (every model with its source), tests with published reference values and edge cases, fixtures for the JS ↔ Python parity, a reference activity, its words in every UI locale, and its entry in the catalogue. Then answer the request with noema_engine_request_update (status available, engine_id, fixed_in).',
+    'Follow docs/INTERACTIVE_LIBRARY.md §1 (AnrPg/noema-lite): first decide whether an engine of the library can be EXTENDED (additive, the same id) — a new engine only when the model is a new family. A new engine is the module `src/engines/<name>/<name>.ts` (strict TypeScript) on the core (src/engines/kernel/core.ts), a plugin of src/engines/plugins.ts, its chapter `docs/library/<name>.md` (every model with its source), tests with published reference values and edge cases, fixtures of good and bad specs whose checks are recorded as golden outputs (tests/fixtures/enginelib/<name>.json), a reference activity, its words in every UI locale, and its entry in the catalogue. Then answer the request with noema_engine_request_update (status available, engine_id, fixed_in).',
   );
   return L.join('\n');
 }

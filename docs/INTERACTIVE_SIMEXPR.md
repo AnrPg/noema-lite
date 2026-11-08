@@ -3,7 +3,7 @@
 Formulas in a declarative simulation (`v0 * t - 0.5 * g * t^2`, `abs(err) < tol && t > 1`) are written in this small language.
 In a spec (docs/INTERACTIVE.md §12) an expression may name the spec's `consts`, its `params`, the `derived` values defined before it
 and the engine's scalar `outputs`; a function plot adds its `x.var`. The validators check every expression against exactly those names.
-One implementation: `src/engines/kernel/simexpr.js` (`NoemaCore.engines.expr`, the app, the replay worker and the
+One implementation: `src/engines/kernel/simexpr.ts` (`NoemaCore.engines.expr`, the app, the replay worker and the
 validators: the content checks, which the connector and the Python tools run too, through `build/noema-tools.cjs`). It is held
 to the golden outputs of its former Python twin (the grammar, the tree, the error codes and messages, every double bit for bit:
 `tests/fixtures/parity/simexpr.json`). No `eval`, no `new Function`, no third-party evaluator: a hand-written lexer and

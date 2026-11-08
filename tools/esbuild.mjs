@@ -109,7 +109,7 @@ const ENGINES = path.join(ROOT, 'src', 'engines');
 export const SHARED_PIECES = ['kernel/simexpr', 'kernel/simkit', 'kernel/core', 'kernel/space', 'logic/logic', 'med/med'];
 
 /** The esbuild plugin of the engines' Worker bundles (src/engines/plugins.ts, node.ts):
-    `import src from 'noema-worker:./prob/prob.js#simEngine'` is the Worker bundle of that engine as TEXT — the module and what
+    `import src from 'noema-worker:./prob/prob.ts#simEngine'` is the Worker bundle of that engine as TEXT — the module and what
     it imports, as one IIFE script that sets self.noemaEngine to the named export. The kernels several engines share
     (SHARED_PIECES) are built once each as a piece that sets self.__noemaShared[<path>]: a Worker's text is the pieces it needs,
     each after its own dependencies, then its own part, and a bundle holds each piece's text once. One instance per build()

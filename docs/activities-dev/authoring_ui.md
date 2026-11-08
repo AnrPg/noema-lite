@@ -9,7 +9,7 @@ a form, sees the activity run beside it and downloads the folder that `make_pack
 |---|---|
 | `src/contracts/schemas/noema.sim-spec.v1.schema.json` | the shape of a `sim-spec@1` spec (formula@1, circuit-mna@1, the bench); `$ref`s `noema.circuit.v1` for the netlist |
 | `src/contracts/schemas/noema.activities.v1.schema.json` | the registry `activities/activities.json` and its entry (`$defs/item`) |
-| `src/engines/kernel/schema.js` | `NoemaCore.engines.schema()` (loaded with `loadSchema()`): a library engine's `table` → the schema of its activities (`specSchema`), what an output may compute (`ofs`), the line styles (docs/INTERACTIVE_LIBRARY.md §1.5) |
+| `src/engines/kernel/schema.ts` | `NoemaCore.engines.schema()` (loaded with `loadSchema()`): a library engine's `table` → the schema of its activities (`specSchema`), what an output may compute (`ofs`), the line styles (docs/INTERACTIVE_LIBRARY.md §1.5) |
 | `engine/schemaform.js` | `NoemaSchemaForm`: registry + `$ref`, `validate`, `skeleton`, branches, `walk` (no DOM, runs in Node) and `form()` |
 | `engine/activity_author.js` | `NoemaActivityAuthor`: the page (`mount`, `view`), types, `check`, files, zip / unzip, import, the preview adapter |
 | `engine/activity_author.css` | its styles (the app's tokens; light, dark; 320 px up) |

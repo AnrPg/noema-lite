@@ -1,4 +1,4 @@
-/* geom@1 (src/engines/geom/geom.js, docs/library/geom.md) against published values (research math.md §4, table E1–E17):
+/* geom@1 (src/engines/geom/geom.ts, docs/library/geom.md) against published values (research math.md §4, table E1–E17):
    triangle centres (Kimberling, Encyclopedia of Triangle Centers; Coxeter & Greitzer 1967), the Euler line and Feuerbach's
    theorem, circle and line intersections with their classes, conics through five points, inversion, Apollonius' problem,
    the shoelace formula and Pick's theorem, the atan2 angle, the exact predicates (Shewchuk 1997; robust-predicates 3.0.3 —

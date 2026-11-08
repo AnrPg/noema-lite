@@ -9,7 +9,7 @@ clinic, …) can join through the stepper adapters of §8 without rewriting thei
 It is a plain ES module (`src/engines/kernel/simkit.ts`, its default export frozen), imported by the core and the engines that use it; it uses NoemaExpr's
 fdlibm ports for `exp`, `log`, `sin`, `cos` and `pow`, so the numbers are the same on every device. It has no DOM, no network and no
 clock. Every loop is bounded, and a run never throws: it gives NaN or an empty result and **codes**. In a Worker it is part of the
-engine's Worker bundle (esbuild, `noemaWorkers` in `tools/esbuild.mjs`), shared once as `self.__noemaShared['kernel/simkit.js']`. Tests: `node tests/lib_simkit.js` (145 assertions against published values and exact solutions).
+engine's Worker bundle (esbuild, `noemaWorkers` in `tools/esbuild.mjs`), shared once as `self.__noemaShared['kernel/simkit']`. Tests: `node tests/lib_simkit.js` (145 assertions against published values and exact solutions).
 
 | § | what | functions |
 |---|---|---|
