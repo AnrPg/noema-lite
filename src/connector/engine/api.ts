@@ -332,53 +332,11 @@ export interface NoemaLang {
   checkLangPackage(data: LangCourseData, pkg: LangPackage, o: { peers: LangCourseData[] }): string[];
 }
 
-/* ---------- problem reports (engine/report.js) and engine requests (engine/enginereq.js, the catalogue) ---------- */
-export interface ReportRow {
-  id: string;
-  status?: string;
-  kind?: string;
-  item?: string;
-  subject?: string;
-  route?: string;
-  note?: string;
-  created_at?: string;
-  shot?: string;
-  locator?: unknown;
-  fixed_in?: string;
-  [k: string]: unknown;
-}
-export interface NoemaReport {
-  OPEN: string[];
-  STATUSES: string[];
-  brief(r: ReportRow): string;
-}
-export interface EngineRequestRow {
-  id?: string;
-  title?: string;
-  status?: string;
-  engine_id?: string;
-  accuracy?: string;
-  field?: string;
-  requester_name?: string;
-  suggested?: string[];
-  answer?: string;
-  fixed_in?: string;
-  created_at?: string;
-  [k: string]: unknown;
-}
-export interface NoemaEngineRequests {
-  normalize(input: Record<string, unknown>): {
-    row: EngineRequestRow & { suggested: string[] };
-    problems: { field: string; code: string }[];
-  };
-  FIELDS: Record<string, { min?: number; max?: number }>;
-  COLS: string;
-  OPEN: string[];
-  brief(r: EngineRequestRow): string;
-  cleanPatch(args: Record<string, unknown>): Record<string, unknown> & { error?: string };
-}
+/* ---------- the catalogue of the engine library (src/engines/catalog.js) ---------- */
 export interface NoemaEngineCatalog {
   byId(id: string): { layer?: string } | null | undefined;
+  /** the engines that may already do what a text describes, best first */
+  suggest(text: string): { id: string }[];
 }
 
 export interface EngineApi {
@@ -391,7 +349,5 @@ export interface EngineApi {
   llm: NoemaLLM;
   imgLib: NoemaImgLib;
   lang: NoemaLang;
-  report: NoemaReport;
-  engineRequests: NoemaEngineRequests;
   engineCatalog: NoemaEngineCatalog | null;
 }

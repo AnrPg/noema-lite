@@ -149,7 +149,18 @@ NoemaCore.contracts                     the compiled data contracts (src/contrac
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
 NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
+NoemaCore.search                        the query side of search (src/features/search): fold, forms, latin, matches,
+                                        search(records, q, filters), snip(hit), params, saved, recent, keeper, roundSteps
+NoemaCore.vault                         the vault (src/features/vault): FORMATS, checkFile, fields(), the server's use cases
+NoemaCore.social                        people (src/features/social): state, onChange, refresh, search, putFile, the rules
+NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
+                                        reject with a NoemaError
 ```
+
+The community parts are composed in `src/composition/community.ts` (`COMMUNITY_REGISTRATIONS`, `COMMUNITY_BRIDGE`): the
+tokens `REST`, `VAULT`, `SOCIAL`, `REPORTS` and `ENGINE_REQUESTS`. `REST` is a second Supabase client over PostgREST, RPC
+and Storage that shares the signed-in session (`noema1:cloud:session`) with `CLOUD`; without a cloud project every call
+answers `auth.not_signed_in`.
 
 The bridge speaks the old code's language. It returns plain values and throws exceptions instead of returning
 Results: a failed write is `false`, and a bad day throws `day.invalid`. Every failure it swallows goes to the

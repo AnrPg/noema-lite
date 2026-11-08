@@ -1,7 +1,7 @@
 /* noema_report — one problem report: the brief, the locator, the screenshot (admins) */
 import { argStr, fail, type Tool } from '../tool.ts';
 import { isAdmin, NOT_ADMIN_REPORTS } from '../services/admin.ts';
-import type { ReportRow } from '../engine/api.ts';
+import { reportBrief, type ReportRow } from '../../features/reports/domain/index.ts';
 import type { Content } from '../tool.ts';
 import { UUID_RE } from '../util.ts';
 
@@ -46,7 +46,7 @@ export const tool: Tool = {
       {
         type: 'text',
         text:
-          ctx.engine.report.brief(r) +
+          reportBrief(r) +
           '\n\n## The locator (everything the app sent)\n\n```json\n' +
           JSON.stringify(r.locator ?? {}, null, 1).slice(0, 60000) +
           '\n```',

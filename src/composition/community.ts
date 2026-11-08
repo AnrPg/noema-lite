@@ -203,6 +203,9 @@ export const COMMUNITY_BRIDGE: readonly BridgeExtension[] = [
         },
         me: () => svc.me(),
         onChange: (f: () => void) => svc.onChange(f),
+        changed: () => {
+          svc.changed();
+        },
         bond: (x: string) => svc.bond(x),
         requests: () => svc.requests(),
         waiting: () => svc.waiting(),
@@ -213,6 +216,7 @@ export const COMMUNITY_BRIDGE: readonly BridgeExtension[] = [
         server: Object.freeze({ ...promisedAll(svc.server), uid: () => svc.server.uid() }),
         refusalKey: social.refusalKey,
         nameSearch: social.nameSearch,
+        cleanQuery: social.cleanQuery,
         MAX_BODY: social.MAX_BODY,
       });
     },

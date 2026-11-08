@@ -1,7 +1,7 @@
 /* noema_reports — the problem reports learners sent (admins) */
 import { argStr, fail, text, type Tool } from '../tool.ts';
 import { isAdmin, NOT_ADMIN_REPORTS } from '../services/admin.ts';
-import type { ReportRow } from '../engine/api.ts';
+import { REPORT_OPEN, type ReportRow } from '../../features/reports/domain/index.ts';
 import { ID_RE, str } from '../util.ts';
 
 export const tool: Tool = {
@@ -32,12 +32,11 @@ export const tool: Tool = {
     },
   },
   async handler(args, ctx) {
-    const R = ctx.engine.report;
     if (!(await isAdmin(ctx))) return fail(NOT_ADMIN_REPORTS);
     const st = argStr(args, 'status') || 'open',
       lim = Math.max(1, Math.min(200, Number(args.limit) || 30)),
       subj = argStr(args, 'subject');
-    const f = st === 'all' ? '' : '&status=in.(' + (st === 'open' ? R.OPEN : [st]).join(',') + ')';
+    const f = st === 'all' ? '' : '&status=in.(' + (st === 'open' ? REPORT_OPEN : [st]).join(',') + ')';
     const rows = await ctx.sb.request<ReportRow[]>(
       `/rest/v1/noema_error_reports?select=id,kind,status,item,subject,route,note,reporter_name,app_version,created_at${f}${subj && ID_RE.test(subj) ? '&subject=eq.' + encodeURIComponent(subj) : ''}&order=created_at.desc&limit=${lim}`,
     );

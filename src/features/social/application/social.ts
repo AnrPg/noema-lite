@@ -44,6 +44,8 @@ export interface SocialService {
   me(): string | null;
   /** f now and on every change → stop listening */
   onChange(f: () => void): () => void;
+  /** the screen changed the state (a room read): tell the listeners */
+  changed(): void;
   /** my row: made the first time (findable, buddies may message me), kept in step with the account's name and emoji */
   ensureMe(account: AccountLike, force?: boolean): AsyncResult<PersonRow>;
   savePrivacy(patch: Readonly<Record<string, unknown>>): AsyncResult<void>;
@@ -100,6 +102,7 @@ export function socialService({
       return S;
     },
     me,
+    changed: emit,
     onChange(f) {
       listeners.add(f);
       f();
