@@ -1,4 +1,4 @@
-/* ⚙ Requests for new engines of interactive activities (src/features/reports: NoemaCore.engineRequests, src/ui/screens/activities/engines-page.ts, docs/INTERACTIVE_LIBRARY.md §3)
+/* ⚙ Requests for new engines of interactive activities (src/features/reports: NoemaCore.engineRequests, engine/src/49_lib_view.js, docs/INTERACTIVE_LIBRARY.md §3)
    against the Supabase emulator (rules of cloud/supabase.sql §16) and the connector (src/connector: noema_request_engine,
    noema_engine_requests, noema_engine_request_update).
    Without a browser: normalize (required fields, limits, accuracy, the catalogue's suggestions), cleanPatch, the brief, the local store.

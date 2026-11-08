@@ -19,7 +19,7 @@ import {
   type Area5Ports,
   type PartOptions,
 } from '../ui/screens/languages-activities.ts';
-import { enginesPort, languagesPort, type CoreForScreens } from './lang-activities-ports.ts';
+import { languagesPort, type CoreForScreens } from './lang-activities-ports.ts';
 import type { ScreenChrome, ScreenContext, ScreensApi } from './screens-bridge.ts';
 
 /** What the root uses of engine/i18n.js (NoemaI18n) for the interface languages. */
@@ -36,8 +36,7 @@ export interface LangActivitiesOptions {
 
 /** The screens' mount function over a page (window, its NoemaCore and NoemaI18n). */
 export function langActivities(o: LangActivitiesOptions = {}): ScreensApi {
-  const win = o.win ?? window,
-    doc = win.document;
+  const win = o.win ?? window;
   const rt = (): I18nRuntimeLocales | undefined => (win as unknown as { NoemaI18n?: I18nRuntimeLocales }).NoemaI18n;
   const core = (): CoreForScreens => o.core ?? (win as unknown as { NoemaCore: CoreForScreens }).NoemaCore;
   defineUi(win.customElements);
@@ -62,7 +61,6 @@ export function langActivities(o: LangActivitiesOptions = {}): ScreensApi {
     provideServices(host, services);
   };
   const ports = (ctx: ScreenContext): Area5Ports => ({
-    engines: () => enginesPort(core(), ctx, doc),
     course: () => (ctx.course as CoursePort | undefined) ?? null,
     languages: () => {
       const svc = core().languages;

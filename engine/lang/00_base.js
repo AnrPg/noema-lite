@@ -95,13 +95,18 @@ function romanTok(code, text, lexId) {
 /** Is the run inside a sentence of another language (prose with its own words around it)? Then the reading goes in [square brackets] after the word. */
 const wantRoman = code => UI.prefs.translit !== false || needTranslit(code);   // the learner's setting, but always until the letters are known (§5.5)
 const inProse = run => { const p = run.parentElement; if (!p) return false; let t = ''; for (const n of p.childNodes) if (n !== run && n.nodeType === 3) t += n.textContent; return /\p{L}/u.test(t); };
-/** D23: the small on-screen switch for the line under foreign words (transliteration / pinyin); only where a studied language has one. */
+/** D23: does a studied language have a line under its foreign words (transliteration / pinyin)? Then the lesson's Aa· switch shows it. */
+const hasTranslit = () => activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization);
+/** D23: show or hide that line (the switch on a lesson's page, src/ui/screens/languages/lang-lesson-head.ts). */
+function setTranslit(on) {
+  UI.prefs.translit = on; UI.prefs.pinyin = on; save(); document.body.classList.toggle('lx-nohelp', !on); if (!$('.lx-session')) render();
+}
+/** The same switch in a running lesson (the lesson's run is not a screen yet). */
 function translitToggle() {
-  if (!activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization)) return null;
-  const off = () => UI.prefs.translit === false, b = h('button', { class: 'btn ghost small lx-translit', 'aria-pressed': String(!off()), onclick: () => {
-    const hide = !off(); UI.prefs.translit = !hide; UI.prefs.pinyin = !hide; save(); document.body.classList.toggle('lx-nohelp', hide); b.title = LT(hide ? 'lang.translit.show' : 'lang.translit.hide'); b.setAttribute('aria-pressed', String(!hide)); if (!$('.lx-session')) render();
-  } }, 'Aa·');
-  b.title = LT(off() ? 'lang.translit.show' : 'lang.translit.hide'); return b;
+  if (!hasTranslit()) return null;
+  const b = h('button', { class: 'btn ghost small lx-translit', onclick: () => { setTranslit(UI.prefs.translit === false); paint(); } }, 'Aa·');
+  const paint = () => { const on = UI.prefs.translit !== false; b.setAttribute('aria-pressed', String(on)); b.title = LT(on ? 'lang.translit.hide' : 'lang.translit.show'); };
+  paint(); return b;
 }
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
 function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {}) {

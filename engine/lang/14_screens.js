@@ -49,6 +49,8 @@ const COURSE_PORT = {
   setLanesView(k) { UI.prefs.lanesView = k || undefined; save(); },
   laneInfo: (c, nid) => laneInfo(c, nid),
   openStep: (c, nid) => laneOpen(c, nid),
+  lessonHead: nid => lessonHead(nid),
+  setTranslit: on => setTranslit(on),
 };
 /** The address the new screens know a course page by: #/lang/<code or course>/<the course's own address>. */
 function screenHash() {

@@ -1,14 +1,14 @@
 /**
- * NoemaCore.screens — how the older shell (engine/shell.js, engine/loader.js, engine.js) mounts the new screens of area 5
+ * NoemaCore.screens — how the older shell (engine/shell.js, engine/loader.js, the course runtime engine/langui.js) mounts the new screens of area 5
  * (languages and activities, src/ui/screens/languages-activities.ts) while it still runs. The screens are not in
  * build/app.js: they are the bundle build/lang-activities.js (Lit, the kit, the screens), loaded on the first mount, which
  * hands its mount function back with register(). In the one-file bundle that script is inline and registers at once.
  *
- *   await NoemaCore.screens.mount('#/engines', hostElement, { account, subject, runtimes })
+ *   await NoemaCore.screens.mount('#/lang', hostElement, { account, go, createCourse })
  *     → { crumbs: [{ label, href? }], back?, tab? } (what the frame shows around it), or null when no screen has that address
  *   await NoemaCore.screens.part('lang-strip', hostElement, { course }, options)   a part of a page (the strip of languages)
  *   NoemaCore.screens.now()  → the same mount and part, synchronous, once the bundle is on the page (else null)
- *   NoemaCore.screens.has('#/engines')  → true when area 5 has a screen for the address (no loading)
+ *   NoemaCore.screens.has('#/lang')  → true when area 5 has a screen for the address (no loading)
  *
  * When the new root owns the router (phase 3, the shell), it imports the route file itself and this extension goes with
  * the bridge.
@@ -16,15 +16,10 @@
 import { NoemaError } from '../kernel/errors.ts';
 import type { BridgeExtension } from './bridge.ts';
 
-/** What the older page knows and the screens need: the profile, the open subject, which runtimes the page can mount. */
+/** What the older page knows and the screens need: the profile, the open course, the frame's navigation. */
 export interface ScreenContext {
   /** the profile: its id and kind (local profiles keep their requests on this device) */
   readonly account: { readonly id?: string | null; readonly kind?: string } | null;
-  readonly subject?: string | null;
-  /** does this page run that runtime or engine (the activity core of the open subject: ACT.runtime / ACT.engines) */
-  readonly runs?: (id: string, runtime: string | null) => boolean;
-  /** the open subject's title (the author's crumbs) */
-  readonly subjectTitle?: string | null;
   /** the open language course's port (engine/lang/14_screens.js: src/ui/screens/languages/course-port.ts) */
   readonly course?: unknown;
   /** opens an address of the app (the shell's router; else the address bar) */

@@ -6,7 +6,6 @@
  *
  *   #/lang                       the Languages tab (languages/languages-page.ts, D21)
  *   #/lang/<code>                the home of one language (languages/lang-home.ts, D29)
- *   #/engines, #/engines/new     the engines of activities and the requests for new ones (activities/engines-page.ts)
  *
  * Parts that are not pages (mountArea5Part):
  *   lang-strip      the strip of the learner's languages on every language page (languages/lang-strip.ts)
@@ -14,13 +13,13 @@
  *   lang-courses    the courses as rows (Choose another course); options { onPick }
  *   lang-today      Today's card of a course (languages/lang-today.ts); options { course }
  *   lang-lanes      ⫴ the parallel lanes of the open course (languages/lang-lanes.ts)
+ *   lang-lesson     the head of a lesson's page: the ladder, Continue, Deepen, Aa· (languages/lang-lesson-head.ts); options { node }
  */
 import { defineRoutes, type RouteMatch } from '../router/routes.ts';
-import type { EnginesPort } from './activities/engines-port.ts';
-import { NoemaEngineRequestForm, NoemaEnginesPage } from './activities/engines-page.ts';
 import type { CoursePort } from './languages/course-port.ts';
 import { NoemaLangHome } from './languages/lang-home.ts';
 import { NoemaLangLanes } from './languages/lang-lanes.ts';
+import { NoemaLangLessonHead } from './languages/lang-lesson-head.ts';
 import { NoemaLangStrip } from './languages/lang-strip.ts';
 import { NoemaLangToday } from './languages/lang-today.ts';
 import { NoemaLangCourses, NoemaLanguagesPage } from './languages/languages-page.ts';
@@ -30,21 +29,19 @@ import { NoemaStudyChooser } from './languages/study-chooser.ts';
 export const AREA5_ROUTES = defineRoutes({
   languages: '/lang',
   language: '/lang/:code',
-  engines: '/engines/:sub?',
 });
 export type Area5Routes = typeof AREA5_ROUTES.table;
 export type Area5Match = RouteMatch<Area5Routes>;
 
 /** The ports of area 5's screens; the root makes the one a screen needs when it mounts it. */
 export interface Area5Ports {
-  engines(): EnginesPort;
   /** the open language course (null when none is open: a course page then has nothing to show) */
   course(): CoursePort | null;
   /** the language courses of this device, before any is loaded */
   languages(): LanguagesPort;
 }
 
-export const AREA5_PARTS = ['lang-strip', 'study-chooser', 'lang-courses', 'lang-today', 'lang-lanes'] as const;
+export const AREA5_PARTS = ['lang-strip', 'study-chooser', 'lang-courses', 'lang-today', 'lang-lanes', 'lang-lesson'] as const;
 export type Area5Part = (typeof AREA5_PARTS)[number];
 export const isArea5Part = (s: string): s is Area5Part => (AREA5_PARTS as readonly string[]).includes(s);
 
@@ -54,6 +51,7 @@ export interface PartOptions {
   readonly none?: boolean;
   readonly onDone?: (codes: readonly string[]) => void;
   readonly onPick?: (courseId: string) => void;
+  readonly node?: string;
 }
 
 /** What the frame shows around a screen: the crumbs after the frame's own, the back address, the tab that is on. */
@@ -70,8 +68,6 @@ export interface Area5Mounted {
 
 /** Every element of area 5 and its tag. */
 export const AREA5_ELEMENTS = {
-  'noema-engines-page': NoemaEnginesPage,
-  'noema-engine-request-form': NoemaEngineRequestForm,
   'noema-languages-page': NoemaLanguagesPage,
   'noema-lang-courses': NoemaLangCourses,
   'noema-study-chooser': NoemaStudyChooser,
@@ -79,12 +75,11 @@ export const AREA5_ELEMENTS = {
   'noema-lang-home': NoemaLangHome,
   'noema-lang-strip': NoemaLangStrip,
   'noema-lang-lanes': NoemaLangLanes,
+  'noema-lang-lesson-head': NoemaLangLessonHead,
 } as const;
 
 declare global {
   interface HTMLElementTagNameMap {
-    'noema-engines-page': NoemaEnginesPage;
-    'noema-engine-request-form': NoemaEngineRequestForm;
     'noema-languages-page': NoemaLanguagesPage;
     'noema-lang-courses': NoemaLangCourses;
     'noema-study-chooser': NoemaStudyChooser;
@@ -92,6 +87,7 @@ declare global {
     'noema-lang-home': NoemaLangHome;
     'noema-lang-strip': NoemaLangStrip;
     'noema-lang-lanes': NoemaLangLanes;
+    'noema-lang-lesson-head': NoemaLangLessonHead;
   }
 }
 
@@ -120,12 +116,6 @@ export function mountArea5(m: Area5Match, host: HTMLElement, ports: Area5Ports, 
       el.port = ports.course();
       el.code = m.params.code;
       return put(el, { crumbs: [], tab: 'lang' });
-    }
-    case 'engines': {
-      const el = make(doc, 'noema-engines-page');
-      el.port = ports.engines();
-      el.openForm = m.params.sub === 'new';
-      return put(el, { crumbs: [{ label: t('engine.engines.title') }] });
     }
   }
 }
@@ -162,6 +152,13 @@ export function mountArea5Part(part: Area5Part, host: HTMLElement, ports: Area5P
     case 'lang-lanes': {
       const s = make(doc, 'noema-lang-lanes');
       s.port = ports.course();
+      el = s;
+      break;
+    }
+    case 'lang-lesson': {
+      const s = make(doc, 'noema-lang-lesson-head');
+      s.port = ports.course();
+      s.node = o.node ?? '';
       el = s;
       break;
     }

@@ -853,18 +853,6 @@ async function authorView() {
   NoemaActivityAuthor.view(m);
   if (!SHL()) m.prepend(backBtn('← ' + SUBJ.title, HOME()));
 }
-/* ---------- the new screens of languages and activities (src/ui/screens/languages-activities.ts, build/lang-activities.js):
-   mounted through NoemaCore.screens into the subject's page while this engine draws the page around them ---------- */
-/** does this page run that runtime or engine (the activity core, ACT) */
-const actRuns = (id, runtime) => typeof ACT !== 'undefined' && (runtime ? !!(ACT.runtime(runtime) || ACT.runtime(id)) : ACT.engines().includes(id));
-async function screenView(title) {
-  const hash = location.hash || '#/';
-  shellChrome({ sub: true, crumbs: [[title]], back: HOME() });
-  const host = h('div', { class: 'noema-screen' }), v = view(SHL() ? null : backBtn('← ' + SUBJ.title, HOME()));
-  v.append(host);
-  try { await NoemaCore.screens.mount(hash, host, { account: ACCOUNT, subject: SUBJ?.id || null, subjectTitle: SUBJ?.title || null, runs: actRuns }); }
-  catch (e) { NoemaCore.errors.report(e, { where: 'engine.screens', severity: 'warning' }); host.replaceChildren(h('p', {}, tE('engine.engines.unavailable'))); }
-}
 function route() {
   const p = (location.hash || '#/').slice(2).split('/');
   if (p[0] !== 'author' && window.NoemaActivityAuthor?.current) { try { NoemaActivityAuthor.current.destroy(); } catch (e) { } NoemaActivityAuthor.current = null; }   // left the author: its preview and keys stop
@@ -888,7 +876,7 @@ function route() {
   if (p[0] === 'mistakes') return mistakesView();
   if (p[0] === 'new') return whatsNewView();
   if (p[0] === 'author') return authorView();
-  if (p[0] === 'engines') return screenView(tE('engine.engines.title'));   // the engines of activities and requests for new ones (src/ui/screens/activities/engines-page.ts)
+  if (p[0] === 'engines') return enginesView(p[1]);   // the engines of activities and requests for new ones (49_lib_view.js)
   if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
   homeView();
 }

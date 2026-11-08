@@ -104,6 +104,33 @@ export interface LaneInfo {
   readonly others: readonly { readonly code: string; readonly label: string; readonly state: string }[];
 }
 
+/** The head of a lesson's page: its step and title, each language's state, the ladder, what the buttons do. */
+export interface LessonHead {
+  readonly step: string;
+  readonly title: string;
+  readonly langs: readonly {
+    readonly code: string;
+    readonly flag: string;
+    /** the node state (open, learning, passed …): the pill's tint */
+    readonly state: string;
+    /** that state in words (with its sign) */
+    readonly stateLabel: string;
+    /** the best lesson check, percent (null: not taken) */
+    readonly pct: number | null;
+  }[];
+  /** D22: the four steps over the languages that can learn it now (null: none can) */
+  readonly ladder: {
+    readonly steps: readonly { readonly id: string; readonly done: boolean; readonly open: boolean }[];
+    readonly next: string | null;
+  } | null;
+  /** the languages that can learn it now (Continue runs the ladder for them) */
+  readonly can: readonly string[];
+  /** words met with more to learn about them: Deepen */
+  readonly deepen: { readonly n: number; readonly href: string } | null;
+  /** D23: the line under foreign words, where a studied language has one (null: none has) */
+  readonly translit: { readonly on: boolean } | null;
+}
+
 export interface CoursePort {
   /** the home of one language of the course */
   home(code: string): LangHomeModel;
@@ -122,4 +149,8 @@ export interface CoursePort {
   laneInfo(code: string, node: string): LaneInfo;
   /** opens a step of the path in that language (its lesson or its page) */
   openStep(code: string, node: string): void;
+  /** the head of a lesson's page (null: not a lesson of the languages shown) */
+  lessonHead(node: string): LessonHead | null;
+  /** D23: show or hide the transliteration / pinyin under foreign words */
+  setTranslit(on: boolean): void;
 }

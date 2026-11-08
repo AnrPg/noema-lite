@@ -74,9 +74,6 @@ function fakePort(rows: CourseRow[], study: string[] | null = null): Fake {
 const ports = (P: LanguagesPort): Area5Ports => ({
   languages: () => P,
   course: () => null,
-  engines: () => {
-    throw new Error('not in these tests');
-  },
 });
 
 async function page(P: LanguagesPort): Promise<HTMLElement> {
@@ -97,14 +94,13 @@ const click = async (root: HTMLElement, sel: string): Promise<void> => {
 };
 
 describe('the routes of area 5', () => {
-  test('#/lang, #/lang/<code>, #/engines and #/engines/new', () => {
+  test('#/lang and #/lang/<code>; #/engines is not area 5 (Community has it)', () => {
     assert.equal(AREA5_ROUTES.match('/lang')?.name, 'languages');
     assert.equal(AREA5_ROUTES.match('/nowhere'), null);
     const l = AREA5_ROUTES.match('/lang/de');
     assert.ok(l?.name === 'language');
     assert.equal(l.params.code, 'de');
-    const e = AREA5_ROUTES.match('/engines/new');
-    assert.equal(e?.name === 'engines' ? e.params.sub : '', 'new');
+    assert.equal(AREA5_ROUTES.match('/engines'), null);
   });
 });
 
@@ -209,7 +205,8 @@ describe('⫴ parallel lanes', () => {
   });
   function coursePort(width = 1200) {
     const log: string[] = [];
-    let view: '' | 'tiles' | 'dots' = '';
+    let view: '' | 'tiles' | 'dots' = '',
+      translit = true;
     const P = {
       log,
       home: () => {
@@ -218,7 +215,7 @@ describe('⫴ parallel lanes', () => {
       strip: () => ({ langs: [], current: null, explainName: 'English' }),
       go: (h: string) => log.push('go ' + h),
       pick: () => undefined,
-      continueLesson: () => undefined,
+      continueLesson: (id: string, langs: readonly string[]) => log.push(`continue ${id} ${langs.join()}`),
       session: () => undefined,
       lanes: () => ({
         langs: [lang('de'), lang('he')],
@@ -243,6 +240,33 @@ describe('⫴ parallel lanes', () => {
         others: code === 'de' ? [{ code: 'he', label: 'he-name', state: 'passed' }] : [],
       }),
       openStep: (code: string, node: string) => log.push(`open ${code} ${node}`),
+      lessonHead: (node: string) =>
+        node === 'fd.01'
+          ? {
+              step: 'S01',
+              title: 'Hello',
+              langs: [
+                { code: 'de', flag: 'DE', state: 'learning', stateLabel: '◑ learning', pct: 80 },
+                { code: 'he', flag: 'HE', state: 'locked', stateLabel: '🔒 locked', pct: null },
+              ],
+              ladder: {
+                steps: [
+                  { id: 'wl', done: true, open: true },
+                  { id: 'wp', done: false, open: true },
+                  { id: 'tr', done: false, open: false },
+                  { id: 'tp', done: false, open: false },
+                ],
+                next: 'wp',
+              },
+              can: ['de'],
+              deepen: { n: 4, href: '#/deepen/fd.01/de' },
+              translit: { on: translit },
+            }
+          : null,
+      setTranslit: (on: boolean) => {
+        translit = on;
+        log.push('translit ' + String(on));
+      },
     };
     return P;
   }
@@ -278,5 +302,27 @@ describe('⫴ parallel lanes', () => {
     assert.ok(again && !again.querySelector('.lx-linfo-oth'), 'its other language replaces it in place');
     again.querySelector<HTMLElement>('.btn.primary')?.click();
     assert.equal(C.log.at(-1), 'open he S01');
+  });
+  test('a lesson: the four-step ladder (done, now, later), Continue for the languages that can, Deepen, Aa·', async () => {
+    const C = coursePort(),
+      host = mount();
+    mountArea5Part('lang-lesson', host, { ...ports(fakePort([])), course: () => C }, { node: 'fd.01' });
+    await settle(host);
+    assert.deepEqual(
+      [...host.querySelectorAll<HTMLElement>('.lx-ladder li')].map(li => `${li.dataset['step'] ?? ''}:${li.className}`),
+      ['wl:done', 'wp:now', 'tr:later', 'tp:later'],
+    );
+    assert.equal(host.querySelectorAll('.lx-ns').length, 2);
+    assert.equal(host.querySelector<HTMLElement>('.lx-continue')?.dataset['step'], 'wp');
+    await click(host, '.lx-continue');
+    await click(host, '.lx-deepenbtn');
+    assert.equal(host.querySelector('.lx-translit')?.getAttribute('aria-pressed'), 'true');
+    await click(host, '.lx-translit');
+    assert.equal(host.querySelector('.lx-translit')?.getAttribute('aria-pressed'), 'false');
+    assert.deepEqual(C.log, ['continue fd.01 de', 'go #/deepen/fd.01/de', 'translit false']);
+    const none = mount();
+    mountArea5Part('lang-lesson', none, { ...ports(fakePort([])), course: () => C }, { node: 'nope' });
+    await settle(none);
+    assert.equal(none.querySelector('h1'), null, 'not a lesson: nothing');
   });
 });
