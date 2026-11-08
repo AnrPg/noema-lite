@@ -255,7 +255,9 @@ export function idbDocuments(o: IdbOptions): DocumentStore {
       },
       list: <T>(c: string, lo: DocListOptions = {}) =>
         new Promise<Array<readonly [DocKey, T]>>((resolve, reject) => {
-          const range = lo.prefix ? IDBKeyRange.bound(lo.prefix, lo.prefix + '￿') : undefined;
+          // a key after `after` is at least after + U+0000 (the lowest code unit): the range needs no open bound
+          const lower = lo.after !== undefined && lo.after + '\u0000' > (lo.prefix ?? '') ? lo.after + '\u0000' : lo.prefix;
+          const range = lower !== undefined ? IDBKeyRange.bound(lower, (lo.prefix ?? '') + '\uffff') : undefined;
           const out: Array<readonly [DocKey, T]> = [];
           const cur = store(c).openCursor(range);
           cur.onsuccess = () => {

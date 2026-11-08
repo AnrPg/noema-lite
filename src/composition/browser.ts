@@ -30,12 +30,15 @@ import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
+import { browserLearning, learningBridge } from './learning.ts';
 import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ENGINES, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
 
 /** Helpers append their registrations here (each registers its own tokens; a token already taken is an error). */
 export const APP_REGISTRATIONS: readonly Registration[] = [
   // the engine library (src/engines): its plugins' manifests at once, each engine's code and Worker bundle when first loaded
   c => c.register(ENGINES, () => createAppEngines()),
+  // the learning log (event sourcing, src/features/study): IndexedDB "noema-learning" and the account's LearningLog
+  browserLearning,
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
@@ -44,6 +47,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: () => contracts },
   // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
+  learningBridge,
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */

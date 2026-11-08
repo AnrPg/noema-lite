@@ -1,0 +1,1034 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.events.v1.schema.json",
+  "title": "noema-lite learning log (noema.events/v1)",
+  "description": "The learner's learning log (event sourcing, src/features/study/domain/events): every answer, review, section read, XP, level and setting change is one event, only ever appended. Progress, streak, the card queue and the xAPI export are computed from the events; two devices merge by the union of their events (by id). The root is a log as exported (a backup); $defs/event is one event.",
+  "type": "object",
+  "required": ["format", "account", "events"],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "noema.events/v1"
+    },
+    "account": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._@-]{0,199}$"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    }
+  },
+  "$defs": {
+    "eventId": {
+      "description": "An event's id, unique for ever: a UUID for the app's own events, a content hash for imported ones (so an import repeated adds nothing).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,99}$",
+      "x-message": "is not an event id"
+    },
+    "hlc": {
+      "description": "A hybrid logical clock stamp (src/kernel/hlc.ts): <wall ms, 15 digits>-<count, 5 digits>-<device>; it sorts as text in time order.",
+      "type": "string",
+      "pattern": "^\\d{15}-\\d{5}-[A-Za-z0-9_-]{1,64}$",
+      "x-message": "is not a hybrid clock stamp"
+    },
+    "day": {
+      "description": "The learner's local day (YYYY-MM-DD).",
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
+      "x-message": "is not a day (YYYY-MM-DD)"
+    },
+    "id": {
+      "description": "A subject, Roadmap or other id (src/kernel/ids.ts).",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._@:-]{0,199}$",
+      "x-message": "is not an id"
+    },
+    "item": {
+      "description": "The id of what the event is about: an exercise, a card's key (chNN-fNNN, or chNN#k for an old card without an id), a section, a chapter, a source, an activity's place.",
+      "type": "string",
+      "pattern": "^[^\\u0000-\\u001f]{1,300}$",
+      "x-message": "is not an item id"
+    },
+    "attempt": {
+      "description": "One attempt at an interactive exercise (engine/src/32_activities.js): its id, seed, start t0 and last change t (ms), hints used, result and its own events.",
+      "type": "object",
+      "required": ["t"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "seed": {},
+        "t0": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "t": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hints": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result": {
+          "type": ["object", "null"]
+        },
+        "events": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "event": {
+      "description": "One event of the learning log: v 1, a unique id, its type, the HLC stamp at, the learner's local day, the device and account, the subject and item it is about, and its data (one shape per type).",
+      "type": "object",
+      "required": ["v", "id", "type", "at", "day", "device", "account", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "v": {
+          "const": 1
+        },
+        "id": {
+          "$ref": "#/$defs/eventId"
+        },
+        "type": {
+          "enum": [
+            "activity.attempted",
+            "activity.saved",
+            "answer.given",
+            "answers.imported",
+            "boss.won",
+            "card.imported",
+            "card.reviewed",
+            "chapter.finished",
+            "chapter.opened",
+            "day.active",
+            "drill.scored",
+            "exercise.flagged",
+            "exercise.unflagged",
+            "external.studied",
+            "level.reached",
+            "log.restored",
+            "playbook.imported",
+            "playbook.reviewed",
+            "section.opened",
+            "section.read",
+            "setting.changed",
+            "source.seen",
+            "stats.imported",
+            "subject.finished",
+            "subject.reset",
+            "xp.earned"
+          ]
+        },
+        "at": {
+          "$ref": "#/$defs/hlc"
+        },
+        "day": {
+          "$ref": "#/$defs/day"
+        },
+        "device": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$"
+        },
+        "account": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._@-]{0,199}$"
+        },
+        "subject": {
+          "$ref": "#/$defs/id"
+        },
+        "item": {
+          "$ref": "#/$defs/item"
+        },
+        "origin": {
+          "description": "Where the event came from: the learner in the app (the default), the one-time migration of the old state, another app's results inbox, or a backup brought back.",
+          "enum": ["app", "migration", "inbox", "restore"]
+        },
+        "data": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "activity.attempted"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_activity_attempted"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "activity.saved"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_activity_saved"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "answer.given"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_answer_given"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "answers.imported"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_answers_imported"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "boss.won"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_boss_won"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "card.imported"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_card_imported"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "card.reviewed"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_card_reviewed"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "chapter.finished"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_chapter_finished"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "chapter.opened"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_chapter_opened"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "day.active"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_day_active"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": ["subject"]
+                },
+                {
+                  "required": ["item"]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "drill.scored"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_drill_scored"
+              }
+            },
+            "not": {
+              "required": ["item"]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "exercise.flagged"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_exercise_flagged"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "exercise.unflagged"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_exercise_unflagged"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "external.studied"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_external_studied"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "level.reached"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_level_reached"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": ["subject"]
+                },
+                {
+                  "required": ["item"]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "log.restored"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_log_restored"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": ["subject"]
+                },
+                {
+                  "required": ["item"]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "playbook.imported"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_playbook_imported"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "playbook.reviewed"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_playbook_reviewed"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "section.opened"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_section_opened"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "section.read"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_section_read"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "setting.changed"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_setting_changed"
+              }
+            },
+            "not": {
+              "required": ["item"]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "source.seen"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject", "item"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_source_seen"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "stats.imported"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_stats_imported"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": ["subject"]
+                },
+                {
+                  "required": ["item"]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "subject.finished"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_subject_finished"
+              }
+            },
+            "not": {
+              "required": ["item"]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "subject.reset"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data", "subject"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_subject_reset"
+              }
+            },
+            "not": {
+              "required": ["item"]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "xp.earned"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_xp_earned"
+              }
+            },
+            "not": {
+              "required": ["item"]
+            }
+          }
+        }
+      ]
+    },
+    "data_activity_attempted": {
+      "description": "An attempt at an interactive exercise (item: the exercise id): its seed, hints, result and its own events (the xAPI export reads them). The latest attempt is the one the exercise shows.",
+      "type": "object",
+      "required": ["attempt"],
+      "additionalProperties": false,
+      "properties": {
+        "attempt": {
+          "$ref": "#/$defs/attempt"
+        }
+      }
+    },
+    "data_activity_saved": {
+      "description": "An activity's saved state (item: the activity's place key); state null forgets it. Only the latest per item counts (compaction keeps it alone).",
+      "type": "object",
+      "required": ["v", "state"],
+      "additionalProperties": false,
+      "properties": {
+        "v": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "state": {}
+      }
+    },
+    "data_answer_given": {
+      "description": "An answer to an exercise (item: the exercise id). ok: right or wrong; firstTry: the first try of this round; conf: how sure the learner said they were.",
+      "type": "object",
+      "required": ["ok"],
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        },
+        "firstTry": {
+          "type": "boolean"
+        },
+        "conf": {
+          "enum": ["sure", "think", "guess"]
+        }
+      }
+    },
+    "data_answers_imported": {
+      "description": "The answers to one exercise counted before the log existed (the old state blob's res entry): n tries, ok right, the last one right or not, at t (ms). Several imports of one exercise (two devices' copies) merge by the most tries, as the old blob merged.",
+      "type": "object",
+      "required": ["n", "ok", "last"],
+      "additionalProperties": false,
+      "properties": {
+        "n": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ok": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "t": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conf": {
+          "enum": ["sure", "think", "guess"]
+        }
+      }
+    },
+    "data_boss_won": {
+      "description": "A chapter's boss round won (item: the chapter id).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_card_imported": {
+      "description": "A flashcard's schedule from before the log (the old Leitner box 0-5 and its due day).",
+      "type": "object",
+      "required": ["box"],
+      "additionalProperties": false,
+      "properties": {
+        "box": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "due": {
+          "$ref": "#/$defs/day"
+        }
+      }
+    },
+    "data_card_reviewed": {
+      "description": "A flashcard reviewed (item: the card's key): the FSRS rating 1 again, 2 hard, 3 good, 4 easy.",
+      "type": "object",
+      "required": ["rating"],
+      "additionalProperties": false,
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        }
+      }
+    },
+    "data_chapter_finished": {
+      "description": "Every section of a chapter read (item: the chapter id).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_chapter_opened": {
+      "description": "A chapter's page opened (item: the chapter id).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_day_active": {
+      "description": "The learner studied today without earning XP (a tutor conversation): the day counts for the streak.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_drill_scored": {
+      "description": "A timed drill's score (the best one is the record).",
+      "type": "object",
+      "required": ["kind", "score"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": ["lightning"]
+        },
+        "score": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "data_exercise_flagged": {
+      "description": "The learner reported a problem with an exercise (item: its id).",
+      "type": "object",
+      "required": ["why"],
+      "additionalProperties": false,
+      "properties": {
+        "why": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{0,30}$"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      }
+    },
+    "data_exercise_unflagged": {
+      "description": "A report of a problem with an exercise taken back (item: its id).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_external_studied": {
+      "description": "Study done in another app (the results inbox, noema.results/v1) that noema-lite has no other event for (item: the chapter or section id).",
+      "type": "object",
+      "required": ["app", "kind", "event"],
+      "additionalProperties": false,
+      "properties": {
+        "app": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,32}$"
+        },
+        "kind": {
+          "enum": ["section", "chapter"]
+        },
+        "event": {
+          "enum": ["review", "studied"]
+        },
+        "rating": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "date": {
+          "type": "string",
+          "maxLength": 10
+        }
+      }
+    },
+    "data_level_reached": {
+      "description": "The learner's current level of a Roadmap is now this level.",
+      "type": "object",
+      "required": ["roadmap", "level"],
+      "additionalProperties": false,
+      "properties": {
+        "roadmap": {
+          "$ref": "#/$defs/id"
+        },
+        "level": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{0,40}$"
+        }
+      }
+    },
+    "data_log_restored": {
+      "description": "A backup or restore point brought back: the events after upTo and before this one no longer count (they stay in the log).",
+      "type": "object",
+      "required": ["upTo"],
+      "additionalProperties": false,
+      "properties": {
+        "upTo": {
+          "$ref": "#/$defs/hlc"
+        }
+      }
+    },
+    "data_playbook_imported": {
+      "description": "A playbook's schedule from before the log (box and due day).",
+      "type": "object",
+      "required": ["box"],
+      "additionalProperties": false,
+      "properties": {
+        "box": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "due": {
+          "$ref": "#/$defs/day"
+        }
+      }
+    },
+    "data_playbook_reviewed": {
+      "description": "A debugging playbook rehearsed (item: its id): how well the learner says it went (1 blank, 2 partly, 4 nailed: the FSRS ratings) and the share of its checklist they ticked.",
+      "type": "object",
+      "required": ["rating", "score"],
+      "additionalProperties": false,
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "data_section_opened": {
+      "description": "A section of a chapter opened (item: the section id): the last one opened is where the learner continues.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_section_read": {
+      "description": "A section read to its end (item: the section id).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_setting_changed": {
+      "description": "A setting set (value) or removed (removed: true): an account setting, or a subject's own when subject is set. The latest by HLC wins per key.",
+      "type": "object",
+      "required": ["key"],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,60}$"
+        },
+        "value": {},
+        "removed": {
+          "const": true
+        }
+      }
+    },
+    "data_source_seen": {
+      "description": "A source of the subject marked seen (or new again) (item: the source id).",
+      "type": "object",
+      "required": ["seen"],
+      "additionalProperties": false,
+      "properties": {
+        "seen": {
+          "type": "boolean"
+        }
+      }
+    },
+    "data_stats_imported": {
+      "description": "The XP and streak across subjects from before the log (the old a:stats). Several imports merge as the old copies merged (the larger counts).",
+      "type": "object",
+      "required": ["xp", "xpDay", "streak", "bySubject"],
+      "additionalProperties": false,
+      "properties": {
+        "xp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "xpDay": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/day"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "streak": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lastDay": {
+          "$ref": "#/$defs/day"
+        },
+        "bySubject": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "data_subject_finished": {
+      "description": "A subject made for a Roadmap step finished (the step is done).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_subject_reset": {
+      "description": "The learner reset a subject's progress: the subject's earlier events no longer count for it (they stay in the log, and in the XP across subjects).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "data_xp_earned": {
+      "description": "XP earned (in a subject when subject is set).",
+      "type": "object",
+      "required": ["amount"],
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "reason": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9.-]{0,40}$"
+        }
+      }
+    }
+  }
+}
