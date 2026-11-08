@@ -1,28 +1,27 @@
-/* The catalogue of the search (docs/SEARCH.md), in Node — no browser: its records (src/features/catalog, through the
-   built build/app.js: NoemaCore.catalog) and the query side (engine/catalog.js):
+/* The catalogue of the search (docs/SEARCH.md), in Node — no browser: its records (src/features/catalog,
+   NoemaCore.catalog) and its query side (src/features/search, NoemaCore.search), both from the built build/app.js:
      A. fold(): accents, case, ß, final sigma, Hebrew points, Arabic vowel marks, pinyin tones do not matter
      B. stable ids: a block keeps its id when the pack is rebuilt; two identical blocks differ; traps by their title
      C. records of a pack, a Roadmap, a language course and conversations: kinds, fields, addresses, paths
      D. search: grouped by kind in a fixed order, the field that matched, exact matches on top, snippets, filters
-   Usage: node tests/search_catalog.js */
+   Needs build/app.js (npm run build). Usage: node tests/search_catalog.js */
 const path = require('path');
 global.window = global;
-require(path.join(__dirname, '..', 'build', 'app.js'));
-require(path.join(__dirname, '..', 'engine', 'catalog.js'));
-const C = window.NoemaCatalog, K = window.NoemaCore.catalog;   // the query; the records
+require(path.join(__dirname, '..', 'build', 'app.js'));   // window.NoemaCore: the records and the query
+const S = window.NoemaCore.search, K = window.NoemaCore.catalog;   // the query; the records
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 
 console.log('A. fold');
-ok(C.fold('Μεταστόρ ΣΟΦΟΣ') === 'μεταστορ σοφοσ', 'Greek: no accents, lower case, final sigma = σ');
-ok(C.fold('Straße Ärger') === 'strasse arger', 'German: ß = ss, umlauts as plain vowels');
-ok(C.fold('שָׁלוֹם') === 'שלום', 'Hebrew: the vowel points do not matter');
-ok(C.fold('أَنَا') === 'انا' && C.fold('ʾana') === 'ana', 'Arabic: the vowel marks and hamza do not matter; ʾ in transliterations neither');
-ok(K.toneNumbers('nǐ hǎo') === 'ni3 hao3' && C.fold('wǒ') === 'wo', 'pinyin: with tone marks, without, or with tone numbers');
-const fm = C.foldMap('Ärger über Straße');
+ok(S.fold('Μεταστόρ ΣΟΦΟΣ') === 'μεταστορ σοφοσ', 'Greek: no accents, lower case, final sigma = σ');
+ok(S.fold('Straße Ärger') === 'strasse arger', 'German: ß = ss, umlauts as plain vowels');
+ok(S.fold('שָׁלוֹם') === 'שלום', 'Hebrew: the vowel points do not matter');
+ok(S.fold('أَنَا') === 'انا' && S.fold('ʾana') === 'ana', 'Arabic: the vowel marks and hamza do not matter; ʾ in transliterations neither');
+ok(S.toneNumbers('nǐ hǎo') === 'ni3 hao3' && S.fold('wǒ') === 'wo', 'pinyin: with tone marks, without, or with tone numbers');
+const fm = S.foldMap('Ärger über Straße');
 ok(fm.t === 'arger uber strasse' && fm.map[fm.t.indexOf('strasse') + 5] === 'Ärger über Straße'.indexOf('ß'), 'foldMap: every folded letter knows where it came from (to cut snippets)');
 ok(K.plain('Kinetic **energy** is $E_k = \\tfrac{1}{2} m v^2$, see [docs](http://x)') === 'Kinetic energy is E_k = 1/2 m v^2, see docs', 'plain(): no markdown, links or math markup');
 
-ok(C.fold('ǧamal ḵubz ṯalāṯa ġayn') === 'jamal khubz thalatha ghayn', 'scholarly letters read as the plain ones typed (š sh, ǧ j, ḵ kh, ṯ th, ġ gh)');
+ok(S.fold('ǧamal ḵubz ṯalāṯa ġayn') === 'jamal khubz thalatha ghayn', 'scholarly letters read as the plain ones typed (š sh, ǧ j, ḵ kh, ṯ th, ġ gh)');
 console.log('B. stable ids');
 const blocks = [{ t: 'p', text: 'One' }, { t: 'p', text: 'Two' }, { t: 'p', text: 'One' }];
 const ids = K.blockIds(blocks);
@@ -64,26 +63,31 @@ ok(lv[0].w === 'lang' && lv[0].co === 'mini' && !lv[0].sj && lv[0].lg.join() ===
 
 console.log('D. search');
 const all = [...pr, ...cur, ...lr, ...cv];
-const r1 = C.search(all, 'metastore');
+const r1 = S.search(all, 'metastore');
 const order = r1.groups.map(g => g[0]);
 ok(order.join() === ['roadmap', 'station', 'chapter', 'section', 'theory', 'exercise', 'card', 'trap', 'drill', 'source', 'convo'].filter(t => order.includes(t)).join() && order.includes('station') && order.includes('convo'), 'grouped by kind, in one fixed order: ' + order.join(', '));
 const chap = r1.groups.find(g => g[0] === 'chapter')[1][0];
-ok(C.snip(chap, 'metastore').field === 'subtitle', 'a chapter found by its subtitle says so (Chapter · Subtitle)');
-const sn = C.snip(r1.groups.find(g => g[0] === 'theory')[1].find(x => x.r.x.bt === 'paragraph'), 'METASTORE');
+ok(S.snip(chap).field === 'subtitle', 'a chapter found by its subtitle says so (Chapter · Subtitle)');
+const sn = S.snip(r1.groups.find(g => g[0] === 'theory')[1].find(x => x.r.x.bt === 'paragraph'));
 ok(sn.hit === 'metastore' && sn.pre === 'The ' && sn.post.startsWith(' holds'), 'the snippet: a little before and after, the word as written: ' + JSON.stringify(sn));
 ok(r1.exact.some(x => x.r.ty === 'section') && r1.exact.some(x => x.r.ty === 'theory' && x.r.x.bt === 'terms'), 'exact matches on top: the section titled “Metastore” and the term “Metastore”');
-const r2 = C.search(all, 'wacht auf');
+const r2 = S.search(all, 'wacht auf');
 ok(r2.groups[0]?.[0] === 'word' && r2.groups[0][1][0].r.ti === 'aufwachen', 'a word is found by any of its forms (“wacht auf” → aufwachen)');
-ok(C.search(all, 'xing3').exact[0]?.r.ti.startsWith('醒') && C.search(all, 'xing').total >= 1, 'Chinese: pinyin with or without tone numbers finds 醒');
+ok(S.search(all, 'xing3').exact[0]?.r.ti.startsWith('醒') && S.search(all, 'xing').total >= 1, 'Chinese: pinyin with or without tone numbers finds 醒');
 const ar = K.fromLangCourse({ course: { id: 'ar', title: 'Ar' }, fields: [{ field: 'f', title: 'Home', concepts: [{ id: 'n.dish', gloss: 'dish' }] }], nodes: [{ id: 'n1', kind: 'lesson', title: 'Home', concepts: ['n.dish'] }], functions: [],
   langs: { ar: { language: { name: 'Arabic' }, lexicon: { n1: { lexemes: [{ id: 'ar:sahn', lemma: 'صَحْن', translit: 'ṣaḥn', senses: ['n.dish'] }, { id: 'he:shalom', lemma: 'שָׁלוֹם', translit: 'šālôm', senses: ['n.dish'] }] } }, grammar: {}, bank: [] } } }, { courseId: 'ar', title: 'Ar' });
-ok(['صحن', 'صَحْن', 'ṣaḥn', 'sahn', 'SAHN'].every(q => C.search(ar, q).total >= 1) && ['שלום', 'šālôm', 'shalom'].every(q => C.search(ar, q).total >= 1), 'transliteration: a word is found in its own script, scholarly Latin (ṣaḥn, šālôm) or plain Latin (sahn, shalom)');
-ok(C.search(all, 'metastore', { w: 'lang' }).total === 0 && C.search(all, 'wake', { w: 'know' }).total === 0, 'filter: one side of the app');
-ok(C.search(all, 'aufwachen', { types: ['sentence'] }).total === 0 && C.search(all, 'aufgewacht', { types: ['sentence'] }).total === 1, 'filter: kinds');
-ok(C.search(all, 'wake', { langs: ['zh'] }).groups.every(([, l]) => l.every(x => x.r.lg.includes('zh'))), 'filter: languages');
-ok(C.search(all, 'm').total === 0 && C.search(all, '  ').total === 0, 'one letter is not a search');
+ok(['صحن', 'صَحْن', 'ṣaḥn', 'sahn', 'SAHN'].every(q => S.search(ar, q).total >= 1) && ['שלום', 'šālôm', 'shalom'].every(q => S.search(ar, q).total >= 1), 'transliteration: a word is found in its own script, scholarly Latin (ṣaḥn, šālôm) or plain Latin (sahn, shalom)');
+ok(S.search(all, 'metastore', { w: 'lang' }).total === 0 && S.search(all, 'wake', { w: 'know' }).total === 0, 'filter: one side of the app');
+ok(S.search(all, 'aufwachen', { types: ['sentence'] }).total === 0 && S.search(all, 'aufgewacht', { types: ['sentence'] }).total === 1, 'filter: kinds');
+ok(S.search(all, 'wake', { langs: ['zh'] }).groups.every(([, l]) => l.every(x => x.r.lg.includes('zh'))), 'filter: languages');
+ok(S.search(all, 'm').total === 0 && S.search(all, '  ').total === 0, 'one letter is not a search');
+const gr = [{ ty: 'section', w: 'know', k: 'g1', ti: 'Βιολογία', f: [['title', 'Βιολογία'], ['hook', 'Η μελέτη της ζωής: κύτταρα, γονίδια']], h: '#/s/g1' }];
+ok(['βιολογια', 'viologia', 'biologia', 'BIOLOGIA'].every(q => S.search(gr, q).exact[0]?.r.k === 'g1'), 'Greek is found as written, in plain Latin (viologia) and in scholarly Latin (biologia), as an exact match');
+const gs = S.snip(S.search(gr, 'kyttara').groups[0][1][0]);
+ok(gs.hit === 'κύτταρα' && gs.field === 'hook', 'a match in Latin letters shows the word as written in its own script: ' + JSON.stringify(gs));
+ok(S.search([{ ty: 'section', w: 'know', k: 'l1', ti: 'Biologia', f: [['title', 'Biologia']], h: '#' }], 'Βιολογία').total === 1, 'and the other way: «Βιολογία» finds "Biologia"');
 const big = []; for (let i = 0; i < 40000; i++) big.push({ ty: 'theory', w: 'know', k: 'k' + i, ti: 't', f: [['paragraph', 'lorem ipsum dolor sit amet consectetur ' + i]], h: '#' });
-C.search(big, 'warm'); const t0 = Date.now(); C.search(big, 'consectetur 3999'); const ms = Date.now() - t0;
+S.search(big, 'warm'); const t0 = Date.now(); S.search(big, 'consectetur 3999'); const ms = Date.now() - t0;
 ok(ms < 400, `40 000 records searched in ${ms} ms`);
 
 console.log(fails ? `\n${fails} failed` : '\nall passed');

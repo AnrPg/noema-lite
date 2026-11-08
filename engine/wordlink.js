@@ -2,7 +2,7 @@
    noema-lite — word linking: the one place that finds a dictionary's words in a page's text (docs/BRIDGE.md §4).
    A dictionary is a list of entries { k, forms: [...], case? } (forms may be several words: "data skew"); the text is
    cut into words (letters, marks and digits; ' and - inside a word belong to it), every word is compared folded
-   (engine/catalog.js fold(): accents, case, final sigma … do not matter; Arabic clitics too: readings()), the longest
+   (NoemaCore.search.fold, src/features/search/domain/fold.ts: accents, case, final sigma … do not matter; Arabic clitics too: readings()), the longest
    entry that starts at a word wins.
      · tokenize(text) → [{ t, i, j }] · index(entries) → idx · find(text, idx) → [{ i, j, entry, form }]
      · decorate(root, idx, { pick }) wraps the matches of every text node in root (never inside code, maths, buttons,
@@ -15,7 +15,7 @@
    ===================================================================================== */
 (function (root) {
   'use strict';
-  const fold = s => (root.NoemaCatalog ? root.NoemaCatalog.fold(s) : String(s ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase());
+  const fold = s => (root.NoemaCore?.search ? root.NoemaCore.search.fold(s) : String(s ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase());
   /* i18n-ignore-start */   // patterns and CSS selectors
   const WORD = /[\p{L}\p{M}\p{N}]+(?:['’\-‐][\p{L}\p{M}\p{N}]+)*/gu;
   const GAP = /^[ \t ]+$/;   // between the words of one entry: spaces only (never across a line or punctuation)

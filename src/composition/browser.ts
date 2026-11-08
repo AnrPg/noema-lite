@@ -30,6 +30,7 @@ import { createAppEngines } from '../engines/register.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
+import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { browserLearning, learningBridge } from './learning.ts';
@@ -59,6 +60,8 @@ export const APP_REGISTRATIONS: readonly Registration[] = [
   // the learning log (event sourcing, src/features/study): the account's LearningLog over the app's IndexedDB, and the
   // seams it fills: the read models' feed, the sync's event log and old progress, the Roadmap events
   browserLearning,
+  // the community features (src/features/{search,vault,social,reports}): their Supabase adapters and use cases
+  ...COMMUNITY_REGISTRATIONS,
   // the study read models (src/features/study) and the search index's store (src/features/catalog)
   ...STUDY_REGISTRATIONS,
   // local-first sync (src/features/sync, docs/SYNC.md): the outbox, the settings registers, the loop and the lease
@@ -73,6 +76,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'engines', build: r => r.get(ENGINES) },
   // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
   learningBridge,
+  // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
+  ...COMMUNITY_BRIDGE,
   // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
   // index's records, built in the Worker): src/composition/study.ts
   ...STUDY_BRIDGE,

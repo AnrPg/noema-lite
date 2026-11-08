@@ -20,7 +20,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 function unit() {
   console.log('— words, matching and the checks, without a browser');
   const ctx = { console, URL, URLSearchParams, TextEncoder, TextDecoder }; ctx.window = ctx; vm.createContext(ctx);   // what a browser page has (the contracts' validators check URIs with URL)
-  for (const f of ['build/app.js', 'engine/contracts.js', 'engine/catalog.js', 'engine/wordlink.js', 'engine/packcheck.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
+  for (const f of ['build/app.js', 'engine/contracts.js', 'engine/wordlink.js', 'engine/packcheck.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const W = ctx.NoemaWordlink, C = ctx.NoemaPackCheck.checkBridge;
   ok(W.tokenize("Spark's data-skew, don’t 42x").map(t => t.t).join('|') === "Spark's|data-skew|don’t|42x", "words keep ' and - inside them, digits count as letters");
   const idx = W.index([{ k: 'data', forms: [] }, { k: 'data skew', forms: ['data skews'] }, { k: 'κατάσταση', forms: ['καταστάσεις'] }, { k: 'Delta', case: true }]);

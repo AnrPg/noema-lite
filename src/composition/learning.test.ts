@@ -554,3 +554,22 @@ test('the seams in the root: Roadmap events in the log (once by id, read back), 
   value(await c.get(LEGACY_PROGRESS).accept('anr', 's:demo:state', JSON.stringify({ read: { s7: true } })));
   assert.ok(log.progress('demo').read['s7']);
 });
+
+test('a restructured Roadmap: a subject is handed the progress of the items that moved to it, once, nothing doubled', async () => {
+  const r = rig();
+  value(await r.log.open('anr'));
+  r.log.record({ type: 'answer.given', subject: 'big', item: 'ch02-e001', data: { ok: true } });
+  r.log.record({ type: 'section.read', subject: 'big', item: 'ch02-s01', data: {} });
+  r.log.record({ type: 'card.reviewed', subject: 'big', item: 'ch02-f001', data: { rating: 3 } });
+  r.log.record({ type: 'answer.given', subject: 'part', item: 'ch02-e009', data: { ok: false } });
+  const moved = JSON.parse(JSON.stringify(r.log.progress('big'))) as Record<string, unknown>;
+  assert.ok(value(await r.log.adoptProgress('anr', 'part', moved)) >= 3);
+  const p = r.log.progress('part');
+  assert.deepEqual(p.res['ch02-e001'], r.log.progress('big').res['ch02-e001'], 'the answers moved with their item');
+  assert.deepEqual(p.read, { 'ch02-s01': true });
+  assert.deepEqual(p.fc['ch02-f001'], r.log.progress('big').fc['ch02-f001'], 'the card keeps its FSRS memory');
+  assert.equal(p.res['ch02-e009']?.n, 1, 'what the subject had stays as it was');
+  assert.equal(p.xp, 0, 'XP stays where it was earned');
+  assert.equal(value(await r.log.adoptProgress('anr', 'part', moved)), 0, 'handed twice: nothing more');
+  assert.equal(r.log.stats().xp, 0);
+});

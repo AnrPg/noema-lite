@@ -6,81 +6,15 @@
    text and its catalog key, the UI and content languages, the language course, the build of the app, the last errors.
    Sent to the table noema_error_reports (cloud/supabase.sql §15); the app's admins (noema_admins) review them on
    #/admin/reports, and Claude reads them through the connector (noema_reports, noema_report) with the same brief.
-   The brief and the repository paths are pure functions (no DOM): tools/build.py prepends this file to the connector.
+   The brief, the repository paths, sending and the outbox: src/features/reports (NoemaCore.reports, also the connector's).
    ===================================================================================== */
 (function (root) {
   'use strict';
-  /* i18n-ignore-start */   // codes, paths and the brief: read by the person or the AI who fixes the problem, in English
-  const KINDS = ['content', 'translation', 'display', 'broken', 'idea', 'other'];
-  const STATUSES = ['new', 'seen', 'fixing', 'fixed', 'wontfix', 'duplicate'];
-  const OPEN = ['new', 'seen', 'fixing'];
-  // the i18n component of a catalog key's prefix (i18n/<component>/en.arb, docs/i18n.md §5.1); 'roadmap.' lives in two
-  const COMPONENT = { sh: ['shell'], engine: ['engine'], vault: ['vault'], social: ['social'], roadmap: ['roadmaps', 'roadmaps-map'], lang: ['lang'], lc: ['langcore'], err: ['errors'], loader: ['loader'],
-    char: ['characters'], bridge: ['bridge'], mt: ['mt'], packs: ['packs'], email: ['email'], report: ['report'], top: ['core'], home: ['core'], ch: ['core'], nav: ['core'], view: ['core'], acc: ['core'], set: ['core'], inuse: ['core'], pick: ['core'] };
-  const componentsOf = key => COMPONENT[String(key).split('.')[0]] || ['core'];
-
-  /** The files of the repository (AnrPg/noema-lite) where the reported thing is written, most likely first. */
-  function repoFiles(loc) {
-    loc = loc || {}; const out = [], s = loc.subject || {}, it = loc.item || {}, ch = it.chapter?.id || loc.place?.chapter;
-    const add = (path, why) => { if (path && !out.some(x => x.path === path)) out.push({ path, why }); };
-    const tr = s.translation;
-    if (s.id && s.origin === 'library') {
-      const base = `library/subjects/${s.id}/`;
-      if (tr && (it.exercise || it.card || it.block || it.drill || it.trap || it.section)) add(base + `translations/${tr}/${ch || '<chapter>'}.json`, `the ${tr} translation the learner was reading (same ids as the source)`);
-      if (ch) add(base + `chapters/${ch}.json`, 'the chapter in the pack’s own language (or a patch in patches/ that adds or revises the item: search its id)');
-      add(base + 'patches/', 'additive patches: an item added later lives here (search its id)');
-      if (s.bridge) add(base + `bridges/${s.bridge}.json`, `文A language help into ${s.bridge} (docs/BRIDGE.md)`);
-      add(base + 'subject.json', 'the subject’s title, description, tutor');
-    } else if (s.id && s.owner) add(`accounts/${s.owner}/packs/${s.id}/` + (ch ? `chapters/${ch}.json` : ''), 'a private pack of a local profile');
-    else if (s.id) add(`(cloud) <owner>/packs/${s.id}.json`, `a pack in a learner’s account (origin: ${s.origin || '?'}), not in the repository: get it with the connector (noema_get_pack_url) or ask its owner`);
-    if (loc.lang?.course) add(`library/languages/${loc.lang.course}/`, 'the language course (read docs/LANGUAGE_RULES.md before any change)');
-    for (const k of loc.target?.i18n || []) for (const c of componentsOf(k.key)) {
-      add(`i18n/${c}/en.arb`, `interface text ${k.key} (English, written by hand)`);
-      if (k.locale && k.locale !== 'en') add(`i18n/${c}/${k.locale}.arb`, `the ${k.locale} translation of ${k.key} (Weblate; Claude’s drafts: i18n/${c}/drafts/${k.locale}.arb)`);
-    }
-    const page = loc.route?.page;
-    const CODE = { subject: 'engine/src/40_views.js', ch: 'engine/src/40_views.js', s: 'engine/src/40_views.js', ex: 'engine/src/30_exercises.js', run: 'engine/src/40_views.js', practice: 'engine/src/40_views.js', cards: 'engine/src/40_views.js', drill: 'engine/src/40_views.js',
-      lang: 'engine/lang/*.js (→ engine/langui.js)', vault: 'engine/vault.js', people: 'engine/social.js', chat: 'engine/social.js', group: 'engine/social.js', search: 'engine/search.js', map: 'engine/curmap.js', learn: 'engine/shell.js', '': 'engine/shell.js', me: 'engine/shell.js', admin: 'engine/report.js' };
-    if (['display', 'broken'].includes(loc.kind) || !out.length) add(CODE[page] || 'engine/shell.js', 'the code that draws this screen');
-    return out;
-  }
-  const line = (k, v) => (v == null || v === '' ? '' : `- **${k}:** ${v}\n`);
-  const q = s => s == null ? '' : '“' + String(s).replace(/\s+/g, ' ').trim() + '”';
-  /** The brief for whoever fixes it (Markdown, English): what was reported, the one place it points to, and where that is in the repository. */
-  function brief(r) {
-    const L = r.locator || {}, it = L.item || {}, s = L.subject || {}, t = L.target || {}, rt = L.route || {};
-    let o = `# noema-lite problem report ${r.id || ''}\n\n`;
-    o += line('Kind', r.kind) + line('Status', r.status) + line('Sent', r.created_at || L.at) + line('By', [r.reporter_name, r.reporter_email].filter(Boolean).join(' · '));
-    o += `\n## What the learner wrote\n\n${r.note ? '> ' + String(r.note).replace(/\n/g, '\n> ') : '(nothing — see the screenshot and the place)'}\n`;
-    o += `\n## The place (unique)\n\n` + line('Item id', r.item || L.itemRef) + line('Address', rt.hash ? '`' + rt.hash + '`' + (L.app?.url ? ` (open: ${L.app.url}${rt.hash})` : '') : '');
-    if (s.id) o += line('Subject', `\`${s.id}\` “${s.title || ''}” · origin ${s.origin || '?'} · pack version ${s.version || '?'}${s.builtAt ? ' (built ' + s.builtAt + ')' : ''}`)
-      + line('Content language', `shown ${it.content?.shown || s.shown || '?'}${(it.content?.translation || s.translation) ? ` — a TRANSLATION of the pack’s ${it.content?.packLanguage || s.packLanguage || '?'}` : ' (the pack’s own language)'}${s.bridge ? ` · 文A help into ${s.bridge}` : ''}`);
-    if (it.chapter) o += line('Chapter', `\`${it.chapter.id}\` (${it.chapter.num ?? '?'}) ${q(it.chapter.title)}`);
-    if (it.section) o += line('Section', `\`${it.section.id}\` ${q(it.section.title)}`);
-    if (it.block) o += line('Block', `\`${it.block.id}\` = blocks[${it.block.index}] of the section, type \`${it.block.t}\`: ${q(it.block.text)}` + (it.block.textOwn ? ` · in the pack’s language: ${q(it.block.textOwn)}` : ''));
-    if (it.exercise) o += line('Exercise', `\`${it.exercise.id}\` type \`${it.exercise.type || '?'}\`${it.exercise.notInPack ? ' — NOT in the pack (' + it.exercise.note + ')' : ''}: ${q(it.exercise.q)}` + (it.exercise.qOwn ? ` · in the pack’s language: ${q(it.exercise.qOwn)}` : '') + (it.exercise.cite ? ` · cite ${JSON.stringify(it.exercise.cite)}` : ''));
-    if (it.card) o += line('Flashcard', `key \`${it.card.key}\` (flashcards[${it.card.index}] of the chapter): ${q(it.card.q)} → ${q(it.card.a)}`);
-    if (it.drill) o += line('Debug drill', `\`${it.drill.id}\` ${q(it.drill.title)}`);
-    if (it.trap) o += line('Trap', `\`${it.trap.id}\` = pitfalls[${it.trap.index}] ${q(it.trap.title)}`);
-    if (it.field) o += line('Field', `\`${it.field.path}\` = ${q(it.field.shown)}` + (it.field.own != null ? ` · in the pack’s language: ${q(it.field.own)}` : ''));
-    if (L.lang) o += line('Language course', Object.entries(L.lang).map(([k, v]) => `${k} \`${v}\``).join(' · '));
-    if (t.text || t.selector) o += line(t.picked ? 'Pointed at' : 'In view', `${q(t.text)}${t.selector ? ' — `' + t.selector + '`' : ''}`);
-    if ((t.i18n || []).length) o += line('Interface text', t.i18n.map(k => `\`${k.key}\` (${k.locale}) ${q(k.text)}`).join('; '));
-    if ((t.data || []).length) o += line('data-* of the element and its parents', t.data.map(d => Object.entries(d).map(([k, v]) => `${k}=${v}`).join(' ')).join(' ‹ '));
-    if (t.given) o += line('The learner’s answer', q(t.given));
-    if (L.visible?.length) o += line('Also on screen', L.visible.map(v => `${v.ref} ${q(v.text)}`).join('; '));
-    const ui = L.ui || {};
-    o += `\n## The app\n\n` + line('Build', [L.app?.version, L.app?.commit && 'commit ' + L.app.commit, L.app?.builtAt && 'built ' + L.app.builtAt, L.app?.frame ? 'the frame' : 'classic screens', L.app?.bundle && 'single-file bundle'].filter(Boolean).join(' · '))
-      + line('Interface', `${ui.locale || '?'} (${ui.dir || 'ltr'}) · ${ui.theme || ''} · character ${ui.character || '?'} · ${ui.viewport ? ui.viewport.w + '×' + ui.viewport.h + ' @' + ui.viewport.dpr : ''} · scrolled ${ui.scroll?.y ?? 0}px`)
-      + line('Browser', ui.ua) + line('Screen', [L.screen?.title && q(L.screen.title), (L.screen?.crumbs || []).join(' › ')].filter(Boolean).join(' · '));
-    if (L.errors?.length) o += `\n## Recent errors in the console\n\n` + L.errors.map(e => `- ${e.level} ${e.at || ''}: ${String(e.msg).slice(0, 300)}`).join('\n') + '\n';
-    const files = repoFiles({ ...L, kind: r.kind });
-    o += `\n## Where to fix it (repository AnrPg/noema-lite)\n\n` + files.map(f => `- \`${f.path}\` — ${f.why}`).join('\n') + '\n';
-    o += `\n## How\n\n1. Find the item by its id (unique in the pack) in the files above; never by its position alone.\n2. Fix the text where the learner read it: a translation is fixed in its translation file, the pack’s own text in the chapter (or the patch that added it); keep every id.\n3. Interface text: the key in i18n/<component>/en.arb (English) or the locale’s file; then node tools/i18n/check.js.\n4. Rebuild and check: python3 tools/build.py (validates the packs); language courses: docs/LANGUAGE_RULES.md first.\n5. Mark the report fixed with the commit or pull request (connector: noema_report_update, or #/admin/reports).\n`;
-    return o;
-  }
-  /* i18n-ignore-end */
-  const API = root.NoemaReport = { KINDS, STATUSES, OPEN, brief, repoFiles, componentsOf };
+  // the reports' domain and use cases (the kinds, the statuses, the brief, the repository paths, sending and the outbox, the admins' list)
+  // are NoemaCore.reports (src/features/reports); this file is the ⚑ dialog, the place it collects and #/admin/reports
+  const R = root.NoemaCore.reports;
+  const { KINDS, STATUSES } = R;
+  const API = root.NoemaReport = {};
   if (typeof document === 'undefined' || !root.document) return;
 
   /* ======================= in the app ======================= */
@@ -89,7 +23,6 @@
   const toast = (m, ms) => N()?.toast?.(m, ms);
   const clip = (s, n = 300) => { s = String(s ?? '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n) + '…' : s; };
   const cloudOn = () => N()?.account?.kind === 'cloud' && !!CL()?.session?.();
-  const api = (path, o) => CL().api(path, o);
 
   /* ---------- the last errors of the page (kept from the start: a report about something broken says what failed) ---------- */
   const ERRS = [];
@@ -278,16 +211,9 @@
   }
 
   /* ---------- sending (and keeping it when offline) ---------- */
-  const OUTBOX = 'noema1:report:outbox';
-  const outbox = () => { try { return JSON.parse(localStorage.getItem(OUTBOX) || '[]') || []; } catch (e) { return []; } };
-  const putOutbox = l => { try { localStorage.setItem(OUTBOX, JSON.stringify(l.slice(-3))); } catch (e) { try { localStorage.setItem(OUTBOX, JSON.stringify(l.slice(-3).map(r => ({ ...r, shot: null })))); } catch (e2) { } } };
-  const row = (loc, kind, noteText, shot) => ({ id: crypto.randomUUID(), kind, note: clip(noteText, 4000) || null, route: clip(loc.route.hash, 600), subject: loc.subject?.id || null, item: clip(loc.itemRef, 300), locator: loc, shot: shot || null, app_version: clip([loc.app.version, loc.app.commit && String(loc.app.commit).slice(0, 12)].filter(Boolean).join('+'), 80) });
-  const post = r => api('/rest/v1/noema_error_reports', { method: 'POST', body: [r], headers: { Prefer: 'return=minimal' } });
-  async function flush() {
-    if (!cloudOn()) return; const l = outbox(); if (!l.length) return;
-    const left = []; for (const r of l) { try { await post(r); } catch (e) { if (e.network) left.push(r); } }
-    putOutbox(left);
-  }
+  const row = (loc, kind, noteText, shot) => R.row(crypto.randomUUID(), loc, kind, noteText, shot);
+  /** what waits on this device goes when the app is back (and signed in to the cloud) */
+  const flush = () => (cloudOn() ? R.flush() : Promise.resolve(0));
 
   /* ---------- the dialog ---------- */
   function download(name, text, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
@@ -326,9 +252,8 @@
         if (!kind) { kinds.classList.remove('shake'); void kinds.offsetWidth; kinds.classList.add('shake'); err.textContent = T('pickKind'); return; }
         const r = row(loc, kind, text, withShot ? shot : null);
         send.disabled = true; send.textContent = T('sending');
-        try { await post(r); close(); toast(T('sent'), 4000); }
+        try { const how = await R.send(r); close(); toast(how === 'queued' ? T('queued') : T('sent'), how === 'queued' ? 5000 : 4000); }
         catch (e) {
-          if (e.network) { putOutbox([...outbox(), r]); close(); toast(T('queued'), 5000); return; }
           send.disabled = false; send.textContent = T('send'); err.textContent = T('failed', { error: root.NoemaI18n?.err ? NoemaI18n.err(e) : e.message });
         }
       } }, T('send'));
@@ -344,20 +269,9 @@
   }
 
   /* ---------- admins (noema_admins): who sees the reports ---------- */
-  let adminP = null, adminFor = null;
-  function isAdmin() {
-    if (!cloudOn()) return Promise.resolve(false);
-    const me = CL().uid(); if (adminFor !== me) { adminFor = me; adminP = null; }
-    return adminP || (adminP = api('/rest/v1/noema_admins?select=user_id&limit=1').then(r => Array.isArray(r) && r.length > 0).catch(() => { adminP = null; return false; }));
-  }
-  const newCount = () => api('/rest/v1/noema_error_reports?select=id&status=eq.new&limit=500').then(r => (r || []).length).catch(() => 0);
-  const COLS = 'id,reporter_name,reporter_email,kind,note,route,subject,item,status,admin_note,fixed_in,app_version,created_at,updated_at';
-  const Server = {
-    list: st => api(`/rest/v1/noema_error_reports?select=${COLS}${st && st !== 'all' ? '&status=in.(' + (st === 'open' ? OPEN : [st]).join(',') + ')' : ''}&order=created_at.desc&limit=300`),
-    one: id => api(`/rest/v1/noema_error_reports?select=*&id=eq.${encodeURIComponent(id)}`).then(r => (r || [])[0] || null),
-    save: (id, patch) => api(`/rest/v1/noema_error_reports?id=eq.${encodeURIComponent(id)}`, { method: 'PATCH', body: patch, headers: { Prefer: 'return=minimal' } }),
-    remove: id => api(`/rest/v1/noema_error_reports?id=eq.${encodeURIComponent(id)}`, { method: 'DELETE' }),
-  };
+  const isAdmin = () => (cloudOn() ? R.isAdmin() : Promise.resolve(false));
+  const newCount = () => (cloudOn() ? R.newCount() : Promise.resolve(0));
+  const Server = { list: R.list, one: R.one, save: R.save, remove: R.remove };
 
   /* ---------- #/admin/reports[/<id>]: the review page ---------- */
   const when = t => { try { return NoemaI18n.fmt.ago ? NoemaI18n.fmt.ago(Date.parse(t)) : new Date(t).toLocaleString(); } catch (e) { return String(t); } };
@@ -406,7 +320,7 @@
     const status = h('select', { class: 'nr-status', 'aria-label': T('status') }, ...STATUSES.map(s => h('option', { value: s, selected: s === r.status }, T('st_' + s))));
     const anote = h('textarea', { class: 'nr-anote', rows: 3, maxlength: 4000, placeholder: T('answerPh') }); anote.value = r.admin_note || '';
     const fixed = h('input', { class: 'nr-fixed', type: 'text', maxlength: 300, placeholder: T('fixedIn') }); fixed.value = r.fixed_in || '';
-    const copy = async () => { const t = brief(r); try { await navigator.clipboard.writeText(t); toast(T('copied'), 4000); } catch (e) { download(`report-${r.id}.md`, t, 'text/markdown;charset=utf-8'); } };
+    const copy = async () => { const t = R.brief(r); try { await navigator.clipboard.writeText(t); toast(T('copied'), 4000); } catch (e) { download(`report-${r.id}.md`, t, 'text/markdown;charset=utf-8'); } };
     box.replaceChildren(
       h('div', { class: 'nr-dhead' }, h('span', { class: 'nr-pills' }, pill(T('st_' + r.status), TONE[r.status] || 1), pill(T('kind_' + r.kind), 6)), h('small', { class: 'ns-muted' }, T('from', { name: [r.reporter_name, r.reporter_email].filter(Boolean).join(' · ') || '?', when: when(r.created_at) }))),
       h('blockquote', { class: 'nr-quote', dir: 'auto' }, r.note || T('noNote')),

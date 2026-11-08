@@ -176,6 +176,23 @@ const KNOWN = new Set([
   'srcOn',
 ]);
 
+/** The per-item progress a subject is handed (its items moved here from other subjects: a Roadmap restructured) that it
+    does not have yet, as an old state blob for subjectEvents: the sections read, answers, cards, drills and chapters won
+    it lacks. Its XP is not handed over: it stays where it was earned (the account's total is the same either way). */
+export function missingProgress(state: unknown, have: Readonly<Record<string, unknown>> | null): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  if (!isObj(state)) return out;
+  for (const field of ['read', 'res', 'fc', 'pb', 'boss'] as const) {
+    const m = state[field],
+      mine = have?.[field];
+    if (!isObj(m)) continue;
+    const kept = isObj(mine) ? mine : {};
+    const add = Object.fromEntries(Object.entries(m).filter(([id]) => !Object.prototype.hasOwnProperty.call(kept, id)));
+    if (Object.keys(add).length) out[field] = add;
+  }
+  return out;
+}
+
 /** A stored card schedule as the log keeps it: an FSRS memory as it is (checked), an old Leitner one as box and due day. */
 export function cardStateOf(v: Record<string, unknown>): CardState | null {
   if ('phase' in v) {

@@ -35,6 +35,7 @@ import {
   compareEvents,
   contentId,
   makeEvent,
+  missingProgress,
   parseEvent,
   Projection,
   settingsEvents,
@@ -690,6 +691,23 @@ export class LearningLog {
     return this.#keepOld(account, [[key, text]], r.events, unknown);
   }
 
+  /**
+   * A subject handed the progress of items that moved to it (a Roadmap restructured: its chapters split into new subjects or
+   * joined into one), as the old per-subject state: what it does not have yet becomes events of it (their ids made from
+   * their content, so handing the same twice adds nothing). Nothing leaves the subjects the items came from → how many.
+   */
+  async adoptProgress(account: string, subject: string, state: unknown): AsyncResult<number> {
+    if (!ITEM_ID.test(subject)) return err(new NoemaError('events.invalid', 'not a subject id: ' + subject.slice(0, 80)));
+    const have = account === this.#account && this.#projection.hasSubject(subject) ? this.#projection.subjectProgress(subject) : null;
+    const blob = missingProgress(state, have as Readonly<Record<string, unknown>> | null);
+    if (!Object.keys(blob).length) return ok(0);
+    const r = subjectEvents(subject, blob, this.#legacyStamp(account));
+    const added = await this.#d.store.append(account, r.events as StoredEvent[]);
+    if (!added.ok) return added;
+    if (account === this.#account && added.value.length) this.#ingest(added.value as LearningEvent[], 'append');
+    return ok(added.value.length);
+  }
+
   /** The old texts into the log's archive first (nothing is dropped before it is safe), then their events → how many were new. */
   async #keepOld(
     account: string,
@@ -743,6 +761,7 @@ export class LearningLog {
   }
 }
 
+const ITEM_ID = /^[A-Za-z0-9][A-Za-z0-9._@:-]{0,199}$/;
 const closed = (): NoemaError => new NoemaError('events.closed', 'the learning log is not open');
 function parseJson(text: string): unknown {
   try {

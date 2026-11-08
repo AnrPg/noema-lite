@@ -8,203 +8,76 @@
    sits under Physics and under Medicine — seeded from ISCED-F and Wikidata, named in every UI language; people propose
    new ones (usable by them at once) and Claude, through the connector, accepts, names and places them for everybody.
    Anonymous: the server keeps the uploader for deleting and take-downs, nobody else sees it (view noema_vault); a person
-   may choose to show their name. Restrictive: only the formats of FORMATS (no programs, scripts, archives or SVG), each
+   may choose to show their name. Restrictive: only the formats of src/features/vault/domain/formats.ts (no programs, scripts, archives or SVG), each
    file checked by its first bytes, ≤ 20 MB a file, ≤ 50 MB a person; reports hide a file (cloud/supabase.sql §13).
    The page: #/vault?q=…&<filters> (Files or Folders); the list is read once and filtered here, so a search matches the
    words in any script, accents or not, Greek and Cyrillic also in Latin letters.
    ===================================================================================== */
 window.NoemaVault = (() => {
   'use strict';
-  const N = () => window.Noema, CL = () => window.NoemaCloud, CAT = () => window.NoemaCatalog;
+  const N = () => window.Noema, CL = () => window.NoemaCloud;
   const T = (k, p) => window.NoemaI18n ? NoemaI18n.t('vault.' + k, p) : k;
   const acc = () => N()?.account?.id || null;
   const toast = (m, ms) => N()?.toast?.(m, ms);
   const enc = encodeURIComponent;
-  const BUCKET = 'noema-vault', MAX_FILE = 20 * 1048576, QUOTA = 50 * 1048576;
-  const KINDS = ['notes', 'slides', 'exam', 'exam_solved', 'exercises', 'lab', 'summary', 'book', 'recording', 'other'];
-  /* the formats a file may have: extension → [mime, group, check of its first bytes]. Nothing else is accepted. */
-  const at = (b, off, s) => [...s].every((ch, i) => b[off + i] === ch.charCodeAt(0));
-  const ZIP = b => at(b, 0, 'PK\x03\x04'), OLE = b => b[0] === 0xD0 && b[1] === 0xCF && b[2] === 0x11 && b[3] === 0xE0, FTYP = b => at(b, 4, 'ftyp');
-  const TEXT = b => !b.slice(0, 4096).includes(0);
-  const FORMATS = {
-    pdf: ['application/pdf', 'doc', b => at(b, 0, '%PDF')],   // i18n-ignore (file signatures)
-    doc: ['application/msword', 'doc', OLE], docx: ['application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'doc', ZIP],
-    odt: ['application/vnd.oasis.opendocument.text', 'doc', ZIP], rtf: ['application/rtf', 'doc', b => at(b, 0, '{\\rtf')],   // i18n-ignore (file signatures)
-    txt: ['text/plain', 'text', TEXT], md: ['text/markdown', 'text', TEXT], tex: ['text/x-tex', 'text', TEXT], csv: ['text/csv', 'sheet', TEXT],
-    ppt: ['application/vnd.ms-powerpoint', 'slides', OLE], pptx: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'slides', ZIP],
-    odp: ['application/vnd.oasis.opendocument.presentation', 'slides', ZIP],
-    xls: ['application/vnd.ms-excel', 'sheet', OLE], xlsx: ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'sheet', ZIP],
-    ods: ['application/vnd.oasis.opendocument.spreadsheet', 'sheet', ZIP], epub: ['application/epub+zip', 'book', ZIP],
-    png: ['image/png', 'image', b => b[0] === 0x89 && at(b, 1, 'PNG')], jpg: ['image/jpeg', 'image', b => b[0] === 0xFF && b[1] === 0xD8], jpeg: ['image/jpeg', 'image', b => b[0] === 0xFF && b[1] === 0xD8],
-    gif: ['image/gif', 'image', b => at(b, 0, 'GIF8')], webp: ['image/webp', 'image', b => at(b, 0, 'RIFF') && at(b, 8, 'WEBP')], heic: ['image/heic', 'image', FTYP],
-    mp3: ['audio/mpeg', 'audio', b => at(b, 0, 'ID3') || (b[0] === 0xFF && (b[1] & 0xE0) === 0xE0)], m4a: ['audio/mp4', 'audio', FTYP],
-    wav: ['audio/wav', 'audio', b => at(b, 0, 'RIFF') && at(b, 8, 'WAVE')], ogg: ['audio/ogg', 'audio', b => at(b, 0, 'OggS')], flac: ['audio/flac', 'audio', b => at(b, 0, 'fLaC')],
-    mp4: ['video/mp4', 'video', FTYP], mov: ['video/quicktime', 'video', FTYP], webm: ['video/webm', 'video', b => b[0] === 0x1A && b[1] === 0x45 && b[2] === 0xDF && b[3] === 0xA3],
-  };
-  const GROUPS = ['doc', 'slides', 'sheet', 'book', 'image', 'audio', 'video', 'text'];
-  const extOf = name => ((String(name).toLowerCase().match(/\.([a-z0-9]{1,5})$/) || [])[1] || '');
-  const groupOf = f => FORMATS[extOf(f.file_name || f.name)]?.[1] || 'doc';
-  const ACCEPT = Object.keys(FORMATS).map(e => '.' + e).join(',');
+  // the vault's rules and data (docs/VAULT.md) are NoemaCore.vault (src/features/vault): the formats and their checks, the
+  // server, the field graph, the page's address, the filters, the sorts, the folders, the pins. This file draws the pages.
+  const VC = window.NoemaCore.vault, SE = window.NoemaCore.search;
+  const { KINDS, GROUPS, ACCEPT, SCHOOL, NONE, listOf, same, fieldsOf, langsOf, stars } = VC;
+  const groupOf = f => VC.groupOf(f.file_name || f.name);
+  const LIMIT_MB = { tooBig: VC.MAX_FILE_MB, quotaFull: VC.QUOTA_MB };
   /** Is this file one the vault takes? → '' or the reason (for the learner). Reads its first bytes. */
   async function checkFile(file, usedBytes = 0) {
-    const f = FORMATS[extOf(file.name)];
-    if (!f) return T('badFormat');
-    if (file.size > MAX_FILE) return T('tooBig', { mb: 20 });
-    if (!file.size) return T('empty');
-    if (usedBytes + file.size > QUOTA) return T('quotaFull', { mb: 50 });
     const head = new Uint8Array(await file.slice(0, 4096).arrayBuffer());
-    if (!f[2](head)) return T('notWhatItSays');
-    return '';
+    const why = VC.checkFile(file.name, file.size, head, usedBytes);
+    return why ? T(why, { mb: LIMIT_MB[why] }) : '';
   }
-
-  /* ---------- text: the same words in any script — accents or not, Greek and Cyrillic also in Latin letters ---------- */
-  const GR = { α: 'a', β: 'v', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'i', θ: 'th', ι: 'i', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'x', ο: 'o', π: 'p', ρ: 'r', σ: 's', τ: 't', υ: 'y', φ: 'f', χ: 'ch', ψ: 'ps', ω: 'o' };
-  const GR2 = { ...GR, β: 'b', η: 'e', υ: 'u', χ: 'kh' };   // the scholarly letters (biologia, kh…)
-  const CY = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh', з: 'z', и: 'i', й: 'i', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'kh', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'shch', ъ: '', ы: 'y', ь: '', э: 'e', ю: 'yu', я: 'ya' };
-  const fold = s => CAT()?.fold ? CAT().fold(s) : String(s ?? '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  const latin = (s, map) => s.replace(/ου/g, 'ou').replace(/[α-ωа-яё]/g, ch => map[ch] ?? CY[ch] ?? ch);
-  /** The forms a text is searched in: as written (folded), in plain Latin letters, in scholarly Latin letters. */
-  const forms = s => { const f = fold(s); return [f, latin(f, GR), latin(f, GR2)]; };
-  const matches = (hay, q) => { const H = forms(hay); return forms(q).every(() => true) && q.split(/\s+/).filter(Boolean).every(w => { const W = forms(w); return W.some(x => H.some(y => y.includes(x))); }); };
+  const fold = SE.fold;
 
   /* ---------- the server (row-level security applies: cloud/supabase.sql §13) ---------- */
-  const api = (path, o) => CL().api(path, o);
   const Server = {
-    list: () => api('/rest/v1/noema_vault?select=*&order=created_at.desc&limit=5000'),
-    myRatings: () => api('/rest/v1/noema_vault_ratings?select=file_id,stars'),
-    myReports: () => api('/rest/v1/noema_vault_reports?select=file_id,reason'),
-    async upload(meta, file, onProgress) {
-      const id = crypto.randomUUID(), ext = extOf(file.name), path = `files/${id}.${ext}`;
-      await api('/rest/v1/noema_vault_files', { method: 'POST', body: [{ ...meta, id, file_name: file.name.slice(0, 200), mime: FORMATS[ext][0], size: file.size, path }], headers: { Prefer: 'return=minimal' } });
-      try {
-        await CL().putFile(BUCKET, path, file, FORMATS[ext][0], { onProgress });
-        await api('/rest/v1/rpc/noema_vault_finish', { method: 'POST', body: { fid: id } });
-      } catch (e) { await Server.remove({ id, path }).catch(() => { }); throw e; }
-      return id;
-    },
-    async remove(f) { await CL().deleteObjects(BUCKET, [f.path]).catch(() => { }); await api('/rest/v1/noema_vault_files?id=eq.' + enc(f.id), { method: 'DELETE' }); },
-    edit: (id, patch) => api('/rest/v1/noema_vault_files?id=eq.' + enc(id), { method: 'PATCH', body: patch, headers: { Prefer: 'return=minimal' } }),
-    rate: (id, stars) => api('/rest/v1/noema_vault_ratings?on_conflict=file_id,user_id', { method: 'POST', body: [{ file_id: id, user_id: CL().uid(), stars }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } }),
-    report: (id, reason, note) => api('/rest/v1/noema_vault_reports', { method: 'POST', body: [{ file_id: id, reporter: CL().uid(), reason, note: note || null }], headers: { Prefer: 'return=minimal' } }),
-    count: (id, what) => api('/rest/v1/rpc/noema_vault_count', { method: 'POST', body: { fid: id, what } }).catch(() => { }),
-    blob: f => CL().getFile(BUCKET, f.path, 0, { type: f.mime }),
-    async fields() {   // every accepted field (and my own proposals), 1000 rows a page (the server's limit)
-      const out = [];
-      for (let o = 0; ; o += 1000) { const r = (await api(`/rest/v1/noema_vault_fields?select=id,names,aliases,parents,status&status=in.(accepted,proposed)&order=id&limit=1000&offset=${o}`)) || []; out.push(...r); if (r.length < 1000) return out; }
-    },
-    fieldsStamp: () => api('/rest/v1/noema_vault_fields?select=updated_at&order=updated_at.desc&limit=1'),
-    propose: (name, lang, parents) => api('/rest/v1/rpc/noema_vault_field_propose', { method: 'POST', body: { name, lang, parents } }),
-    suggest: (title, course) => api('/rest/v1/rpc/noema_vault_field_suggest', { method: 'POST', body: { title: title || '', course: course || null } }),
+    list: () => VC.list(),
+    myRatings: () => VC.myRatings(),
+    myReports: () => VC.myReports(),
+    upload: (meta, file) => VC.upload(meta, { name: file.name, size: file.size, blob: file }),
+    remove: f => VC.remove(f),
+    edit: (id, patch) => VC.edit(id, patch),
+    rate: (id, stars) => VC.rate(id, stars),
+    report: (id, reason, note) => VC.report(id, reason, note || null),
+    count: (id, what) => VC.count(id, what),
+    blob: f => VC.download(f),
+    propose: (name, lang, parents) => VC.propose(name, lang, parents),
+    /** the fields others chose for files with a similar title or course → their ids */
+    suggest: (title, course) => VC.suggest(title || '', course || null),
   };
 
-  /* ---------- 🧭 the fields: one shared graph (cloud/supabase.sql §13b); a field may sit under many parents ---------- */
+  /* ---------- 🧭 the fields: one shared graph (cloud/supabase.sql §13b), named in the menus' language ---------- */
   const Fields = (() => {
-    let byId = new Map(), kids = new Map(), ups = new Map(), hay = new Map(), words = null, loading = null;
+    const G = () => VC.fields();
     const loc = () => window.NoemaI18n?.locale || globalThis.document?.documentElement?.lang || 'en';
-    function set(rows) {
-      byId = new Map(rows.map(r => [r.id, r])); kids = new Map(); ups = new Map(); hay = new Map(); words = null;
-      for (const r of rows) for (const p of r.parents || []) { if (!kids.has(p)) kids.set(p, []); kids.get(p).push(r.id); }
-    }
-    const get = id => byId.get(id);
-    /** its name in the menus' language (else the same language of another country, else English) */
-    const name = id => { const n = byId.get(id)?.names; if (!n) return String(id); const l = loc(), b = l.split('-')[0];
-      return n[l] || n[b] || Object.entries(n).find(([k]) => k.split('-')[0] === b)?.[1] || n.en || Object.values(n)[0] || String(id); };
-    const allNames = id => { const r = byId.get(id); return r ? [...Object.values(r.names || {}), ...(r.aliases || [])] : []; };
-    /** the field and every field above it, by any path */
-    const up = id => { let s = ups.get(id); if (s) return s; s = new Set(); const st = [id]; while (st.length) { const x = st.pop(); if (s.has(x)) continue; s.add(x); for (const p of byId.get(x)?.parents || []) st.push(p); } ups.set(id, s); return s; };
-    const children = id => (kids.get(id) || []).filter(x => byId.get(x)?.status === 'accepted' || byId.get(x)?.status === 'proposed');
-    const roots = () => [...byId.values()].filter(r => !(r.parents || []).length && r.status === 'accepted').map(r => r.id);
-    /** w is a word of v with at most one typo (two in long words), comparing w with v's start of the same length */
-    const near = (w, v) => { const k = w.length >= 7 ? 2 : 1; if (v.length < w.length - k) return false;
-      for (const t of new Set([v.slice(0, w.length), v.slice(0, w.length + 1), v.slice(0, Math.max(1, w.length - 1))])) if (dist(w, t, k) <= k) return true; return false; };
-    const dist = (a, b, k) => { if (Math.abs(a.length - b.length) > k) return k + 1; let p = Array.from({ length: b.length + 1 }, (_, j) => j), pp = null;
-      for (let i = 1; i <= a.length; i++) { const c = [i]; let lo = i;
-        for (let j = 1; j <= b.length; j++) { c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
-          if (pp && i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) c[j] = Math.min(c[j], pp[j - 2] + 1);   // swapped letters count once
-          lo = Math.min(lo, c[j]); }
-        if (lo > k) return k + 1; pp = p; p = c; }
-      return p[b.length]; };
-    /** every word of every name → its fields, and the initials of every name → its fields (built once per graph) */
-    const index = () => { if (words) return words; const W = new Map(), I = new Map(), put = (m, k, id) => { let x = m.get(k); if (!x) m.set(k, x = new Set()); x.add(id); };
-      for (const id of byId.keys()) for (const x of formsOf(id)) { const ws = x.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
-        for (const w of ws) if (w.length >= 3) put(W, w, id); }
-      for (const id of byId.keys()) for (const nm of new Set([byId.get(id).names?.en, name(id)])) {   // initials: of the English name and of the name in the menus' language
-        const ws = fold(nm || '').split(/[^\p{L}\p{N}]+/u).filter(w => w.length > 2), ini = ws.map(w => w[0]).join(''); if (ws.length >= 2) put(I, ini, id); }
-      return words = { words: W, inits: I }; };
-    const formsOf = id => { let f = hay.get(id); if (!f) { f = allNames(id).flatMap(forms); hay.set(id, f); } return f; };
-    /** fields whose names (any language) start with or contain the words; the closest first */
-    function find(q, n = 12) {
-      const W = forms(String(q || '').trim()); if (!W[0]) return [];
-      const out = [];
-      for (const id of byId.keys()) { let best = 0;
-        for (const x of formsOf(id)) for (const w of W) { const sc = x === w ? 4 : x.startsWith(w) ? 3 : x.includes(' ' + w) ? 2 : x.includes(w) ? 1 : 0; if (sc > best) best = sc; }
-        if (best) out.push([best, id]); }
-      // and the near misses: initials (ml → Machine learning), then a typo or two (genitcs → Genetics)
-      const seen = new Map(out.map(x => [x[1], x])), give = (id, sc) => { const o = seen.get(id); if (o) o[0] = Math.max(o[0], sc); else { const r = [sc, id]; seen.set(id, r); out.push(r); } };
-      const ix = index(), q1 = W[0].replace(/\s+/g, ''), tw = W[0].split(/\s+/).filter(Boolean);
-      if (/^[\p{L}]{2,5}$/u.test(q1)) for (const id of ix.inits.get(q1) || []) give(id, (q1.length <= 3 ? 3.5 : 2.5) + Math.min(allNames(id).length, 30) / 1000);   // the better known first
-      if (out.length < n && tw.every(w => w.length >= 4)) {
-        let ids = null;
-        for (const w of tw) { const got = new Set(); for (const [v, s2] of ix.words) if ((v[0] === w[0] || v[1] === w[1]) && near(w, v)) for (const id of s2) got.add(id); ids = ids ? new Set([...ids].filter(x => got.has(x))) : got; }
-        for (const id of ids || []) give(id, .5);
-      }
-      return out.sort((a, b) => b[0] - a[0] || name(a[1]).length - name(b[1]).length).slice(0, n).map(x => x[1]);
-    }
-    /** the fields a text names (a title, a course: "Σημειώσεις Γενετικής" → Genetics), the most specific first */
-    function fromText(text, n = 8) {
-      const toks = fold(text).split(/[^\p{L}\p{N}]+/u).filter(Boolean); if (!toks.length) return [];
-      const like = (t, w) => w.length >= 5 ? t.startsWith(w.slice(0, Math.max(4, w.length - 2))) : t === w;   // endings differ (Γενετική, Γενετικής)
-      const hits = [];
-      for (const id of byId.keys()) { if (byId.get(id).status !== 'accepted') continue;
-        for (const nm of allNames(id)) { const ws = fold(nm).split(/[^\p{L}\p{N}]+/u).filter(Boolean); if (!ws.length || ws.join('').length < 4) continue;
-          if (toks.some((_, i) => ws.every((w, j) => toks[i + j] && like(toks[i + j], w)))) { hits.push([ws.length, nm.length, id]); break; } } }
-      // an abbreviation written in capitals: AI → Artificial intelligence, ML → Machine learning
-      const caps = new Set((String(text).match(/\b[A-Z\u0391-\u03A9\u0410-\u042F]{2,5}\b/gu) || []).map(fold));
-      if (caps.size) for (const id of byId.keys()) { if (byId.get(id).status !== 'accepted') continue;
-        const nm = byId.get(id).names?.en || ''; const ws = fold(nm).split(/[^\p{L}\p{N}]+/u).filter(w => w.length > 2);   // the English name's initials
-        if (ws.length >= 2 && caps.has(ws.map(w => w[0]).join(''))) hits.push([ws.length, nm.length, id]); }
-      let ids = hits.sort((a, b) => b[0] - a[0] || b[1] - a[1]).map(x => x[2]);
-      ids = [...new Set(ids)].filter(id => !ids.some(o => o !== id && up(o).has(id)));   // Medical physics, not also Physics
-      // then the field that begins with a word of the text (systems → Systems engineering), one per word
-      // (only when the names gave few: the words of matched names are left out, and so are the fields above a match)
-      if (ids.length < 3) { const used = new Set(ids.flatMap(id => formsOf(id).join(' ').split(/\s+/)));
-        for (const w of [...new Set(toks.filter(t => t.length >= 5 && !used.has(t)))]) for (const id of find(w, 1)) if (!ids.includes(id) && !ids.some(o => up(o).has(id)) && formsOf(id).some(x => x.startsWith(w.slice(0, Math.max(5, w.length - 2))))) ids.push(id); }
-      return ids.slice(0, n);
-    }
-    /** read once (the browser keeps a copy; it is read again when a field changed, or a day later) */
-    function load() {
-      if (loading) return loading;
-      const key = 'noema-vault-fields-v1:' + (CL()?.uid?.() || '');
-      return loading = (async () => {
-        let c = null; try { c = JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { }
-        const stamp = (await Server.fieldsStamp().catch(() => null))?.[0]?.updated_at || '';
-        if (c && c.stamp === stamp && Date.now() - c.at < 864e5 && Array.isArray(c.rows)) { set(c.rows); return; }
-        const rows = await Server.fields(); set(rows);
-        try { localStorage.setItem(key, JSON.stringify({ stamp, at: Date.now(), rows })); } catch (e) { }
-      })().catch(e => { loading = null; throw e; });
-    }
-    /** a field I just proposed: mine at once */
-    const addLocal = r => { set([...byId.values(), r]); };
-    return { load, get, name, allNames, up, children, roots, find, fromText, addLocal, set, loc, size: () => byId.size };
+    return {
+      load: () => VC.loadFields(),
+      get: id => G().get(id),
+      name: id => G().name(id, loc()),
+      allNames: id => G().allNames(id),
+      up: id => G().up(id),
+      children: id => G().children(id),
+      roots: () => G().roots(),
+      find: (q, n) => G().find(q, loc(), n),
+      fromText: (text, n) => G().fromText(text, loc(), n),
+      loc,
+      size: () => G().size,
+    };
   })();
 
   /* ---------- the page's settings, in the address: #/vault?q=…&u=…&sem=3&k=notes,exam … ---------- */
-  const KEYS = ['q', 'v', 'by', 'f', 'u', 'd', 'c', 'p', 'y', 'sem', 'k', 'sub', 'x', 'sol', 'hw', 'lg', 'ft', 'r', 'used', 'mine', 'g', 'sort', 'id'];   // g: a study group's folder · id: open that file
-  const parse = () => { const q = new URLSearchParams((location.hash.split('?')[1] || '')); const P = {}; for (const k of KEYS) if (q.get(k)) P[k] = q.get(k); return P; };
-  const hashOf = P => { const q = new URLSearchParams(); for (const k of KEYS) if (P[k]) q.set(k, P[k]); const s = q.toString(); return '#/vault' + (s ? '?' + s : ''); };
-  const listOf = s => String(s || '').split(',').filter(Boolean);
-  /* the folders: a view of the one table, never copies. Two ways in — by school (the default) and by field — then the files, grouped by type */
-  const SCHOOL = ['university', 'department', 'course'];   // by field: the path goes down the field graph
-  const same = (a, b) => fold(a) === fold(b);
+  const parse = () => VC.parse(location.hash);
+  const hashOf = VC.hashOf;
   /* a file's languages: a list (el,ru) · university, department, course, year, semester: optional (null: not given; no semester: any) */
-  const NONE = '-';   // the folder of the files without that detail (in the address: f=-›…)
-  const fieldsOf = f => Array.isArray(f.fields) ? f.fields : [];
   const fieldNames = f => fieldsOf(f).map(Fields.name).join(', ');
-  const inField = (f, id) => fieldsOf(f).some(x => Fields.up(x).has(id));   // filed under it, or under a field below it
+  const inField = (f, id) => VC.inField(f, id, VC.fields());   // filed under it, or under a field below it
   const uni = v => v == null || v === '' || v === NONE ? T('unspecified') : String(v);
-  const langsOf = f => listOf(f.language);
   const semName = n => +n ? T('semN', { n: +n }) : T('semAny');
-  const given = v => v != null && v !== '';
   /** What the search words look in: the title and every field (a year, a type, a subject, a language, in the menus' words). */
   // the menus' words in every language this page holds (the menus' own, English, any other already loaded): "notes" and "Σημειώσεις" both find the type
   const every = k => { const out = new Set([T(k)]); for (const c of Object.values(window.NOEMA_I18N || {})) { const w = c?.m?.['vault.' + k] ?? c?.d?.['vault.' + k]; if (typeof w === 'string' && !/[{}]/.test(w)) out.add(w); } return [...out]; };
@@ -213,21 +86,9 @@ window.NoemaVault = (() => {
     f.year ? String(f.year) : '', f.semester ? semName(f.semester) : '', ...langsOf(f).flatMap(langWords), ...(f.has_exercises ? every('c.exercises') : []), ...(f.has_solutions ? every('c.solutions') : []),
     ...(f.handwritten ? every('c.handwritten') : [])].filter(Boolean).join(' · ');
   /** The files that pass every filter (and the words of the search). */
-  function filter(all, P) {
-    const k = listOf(P.k), ft = listOf(P.ft);
-    return all.filter(f => (!P.u || same(f.university, P.u)) && (!P.d || same(f.department, P.d)) && (!P.c || same(f.course, P.c)) && (!P.p || same(f.professor || '', P.p))
-      && (!P.y || String(f.year) === P.y) && (!P.sem || String(f.semester) === P.sem || !f.semester) && (!k.length || k.includes(f.kind)) && (!P.sub || inField(f, P.sub))
-      && (!P.x || f.has_exercises) && (!P.sol || f.has_solutions) && (!P.hw || (P.hw === 'hand' ? f.handwritten : !f.handwritten)) && (!P.lg || langsOf(f).includes(P.lg))
-      && (!ft.length || ft.includes(groupOf(f))) && (!P.r || (f.rating_n && f.rating_sum / f.rating_n >= +P.r)) && (!P.used || f.used > 0) && (!P.mine || f.mine) && (!P.g || f.room === P.g)
-      && (!P.q || matches(hayOf(f), P.q)));
-  }
-  const SORTS = { new: (a, b) => String(b.created_at).localeCompare(String(a.created_at)), rating: (a, b) => stars(b) - stars(a) || b.rating_n - a.rating_n, downloads: (a, b) => b.downloads - a.downloads, year: (a, b) => b.year - a.year };
-  const stars = f => f.rating_n ? f.rating_sum / f.rating_n : 0;
+  const filter = (all, P) => VC.filter(all, P, VC.fields(), hayOf);
   /** distinct values of a field (the way they were first written), most used first */
-  function values(rows, field) {
-    const m = new Map(); for (const r of rows) { const v = r[field]; if (v == null || v === '') continue; const key = fold(v); const x = m.get(key) || { v, n: 0 }; x.n++; m.set(key, x); }
-    return [...m.values()].sort((a, b) => b.n - a.n || String(a.v).localeCompare(String(b.v), undefined, { numeric: true }));
-  }
+  const values = VC.values;
 
   /* ---------- small helpers for the view ---------- */
   const num = n => window.NoemaI18n ? NoemaI18n.fmt.number(n) : String(n);
@@ -241,10 +102,10 @@ window.NoemaVault = (() => {
   const groupName = id => groups.find(g => g.id === id)?.name || T('aGroup');
   async function load(force = false) {
     if (cache && !force) return cache;
-    const [rows, rt, rp, gs] = await Promise.all([Server.list(), Server.myRatings().catch(() => []), Server.myReports().catch(() => []), window.NoemaSocial ? NoemaSocial.groups().catch(() => []) : [],
+    const [rows, rt, rp, gs] = await Promise.all([Server.list(), Server.myRatings().catch(() => ({})), Server.myReports().catch(() => ({})), window.NoemaSocial ? NoemaSocial.groups().catch(() => []) : [],
       Fields.load().catch(e => console.warn('vault fields', e))]);   // without them the files still show
     groups = gs || [];
-    cache = rows || []; mineR = Object.fromEntries((rt || []).map(r => [r.file_id, r.stars])); mineRep = Object.fromEntries((rp || []).map(r => [r.file_id, r.reason]));
+    cache = rows || []; mineR = rt || {}; mineRep = rp || {};
     return cache;
   }
 
@@ -263,9 +124,9 @@ window.NoemaVault = (() => {
     const upBtn = h('button', { class: 'btn primary vt-upbtn', onclick: () => upload(ctx, () => refresh(true), { room: P.g || '' }) }, svg('upload'), ' ', T('upload'));
     const viewSeg = h('div', { class: 'ns-seg small vt-viewseg', role: 'radiogroup', 'aria-label': T('view') });
     const filtBtn = h('button', { class: 'btn small ghost vt-filtbtn', 'aria-haspopup': 'dialog', onclick: () => openFilters() });
-    const sortSel = h('select', { class: 'noema-input small vt-sort', 'aria-label': T('sort'), onchange: () => setP({ sort: sortSel.value === 'new' ? '' : sortSel.value }) }, ...Object.keys(SORTS).map(k => h('option', { value: k }, T('sort.' + k))));
+    const sortSel = h('select', { class: 'noema-input small vt-sort', 'aria-label': T('sort'), onchange: () => setP({ sort: sortSel.value === 'new' ? '' : sortSel.value }) }, ...VC.SORTS.map(k => h('option', { value: k }, T('sort.' + k))));
     const filt = h('div', { class: 'vt-filters' });
-    const FKEYS = () => KEYS.filter(k => !['q', 'v', 'by', 'f', 'sort', 'id'].includes(k) && P[k]);
+    const FKEYS = () => VC.activeFilters(P);
     const clearAll = () => h('button', { class: 'btn small ghost vt-clearall', disabled: FKEYS().length ? null : true, onclick: () => setP(Object.fromEntries(FKEYS().map(k => [k, '']))) }, svg('close'), ' ', T('clear'));
     const fhead = h('div', { class: 'row vt-fhead' });
     /** the filters: a side panel; the page behind follows every choice at once */
@@ -302,12 +163,12 @@ window.NoemaVault = (() => {
         group(T('g.quality'), sel(T('f.rating'), 'r', [['3', T('r.3')], ['4', T('r.4')]])),
         group(T('g.use'), h('div', { class: 'ns-srchips' }, chip('used', '1', T('c.used')))),
         groups.length ? group(T('g.group'), sel(T('f.group'), 'g', groups.map(g => [g.id, g.name]), { bare: true })) : '');   // '' not null: the DOM would write "null"
-      const n = KEYS.filter(k => !['q', 'v', 'by', 'f', 'sort', 'id'].includes(k) && P[k]).length;
+      const n = VC.activeFilters(P).length;
       filtBtn.replaceChildren(svg('filter'), ' ', n ? T('filtersN', { n }) : T('filters'));
       // the filters in use, each one removable
       const label = k => ({ u: uni(P.u), d: P.d, c: P.c, p: P.p, y: P.y, sem: semName(P.sem), k: listOf(P.k).map(x => T('kind.' + x)).join(', '), sub: Fields.name(P.sub), x: T('c.exercises'), sol: T('c.solutions'),
         hw: T(P.hw === 'hand' ? 'c.handwritten' : 'c.typed'), lg: langName(P.lg), ft: listOf(P.ft).map(x => T('ft.' + x)).join(', '), r: T('r.' + P.r), used: T('c.used'), mine: T('myUploads'), g: groupName(P.g) })[k];
-      const on = KEYS.filter(k => !['q', 'v', 'by', 'f', 'sort', 'id'].includes(k) && P[k]);
+      const on = VC.activeFilters(P);
       chips.replaceChildren(...on.map(k => h('button', { class: 'ns-srchip on vt-chip', 'data-f': k, title: T('removeFilter', { what: label(k) }), 'aria-label': T('removeFilter', { what: label(k) }), onclick: () => setP({ [k]: '' }) }, label(k), h('span', { class: 'vt-chipx', 'aria-hidden': 'true' }, '×'))),   // i18n-ignore (×)
         on.length > 1 ? h('button', { class: 'linkish vt-clearchips', onclick: () => setP(Object.fromEntries(on.map(k => [k, '']))) }, T('clear')) : '');
       fhead.replaceChildren(h('small', { class: 'tiny ns-muted' }, T('results', { n: filter(all, P).length })), clearAll());
@@ -319,42 +180,38 @@ window.NoemaVault = (() => {
         h('span', { class: 'vt-meta tiny' }, f.room ? pill(groupName(f.room), 2, 'vt-grouppill') : null, f.mine && f.status !== 'ok' ? pill(T('status.' + f.status)) : null, rating ? h('span', { title: T('ratingN', { n: f.rating_n }) }, rating) : null, f.downloads ? h('span', { title: T('downloadsN', { n: f.downloads }) }, '⬇ ' + num(f.downloads)) : null), chev());   // i18n-ignore (★ ⬇: signs)
     }
     function files(list) {
-      const sorted = [...list].sort(SORTS[P.sort] || SORTS.new);
+      const sorted = VC.sort(list, P.sort);
       return sorted.length ? h('div', { class: 'ns-list vt-list' }, ...sorted.slice(0, 300).map(card)) : empty();
     }
     const empty = () => h('div', { class: 'ns-panel ns-empty vt-empty' }, ctx.faceEl(undefined, 'breathe'), h('p', {}, all.length ? T('none') : T('emptyVault')), h('button', { class: 'btn small primary', onclick: () => upload(ctx, () => refresh(true)) }, T('upload')));
     /* 📁 the folders: school › department › course, or down the field graph; at the end the files by type, with chips for language, year, semester */
-    const valsOf = (f, lev) => given(f[lev]) ? [f[lev]] : [];
     const MISC = { university: () => T('miscUniversity'), department: () => T('miscDepartment'), course: () => T('miscCourse'), field: () => T('miscField') };   // “Other departments”: the level shows in the name
     const folderName = (lev, v) => v === NONE ? MISC[lev]() : lev === 'field' ? Fields.name(v) : String(v);
     const pinKey = () => `noema1:${acc()}:a:vaultpins`;
-    const pins = () => { try { return JSON.parse(N()?.kv?.get(pinKey()) || '[]'); } catch (e) { return []; } };
-    const putPins = l => N()?.kv?.set(pinKey(), JSON.stringify(l.slice(0, 12)));
+    const pins = () => { try { return VC.pins.list(JSON.parse(N()?.kv?.get(pinKey()) || '[]')); } catch (e) { return []; } };
+    const putPins = l => N()?.kv?.set(pinKey(), JSON.stringify(l));
     function folders(list) {
-      const by = P.by === 'field' ? 'field' : 'school', path = (P.f || '').split('›').filter(Boolean);
+      const by = P.by === 'field' ? 'field' : 'school', path = VC.folderPath(P.f);
       const LV = by === 'field' ? path.map(() => 'field') : SCHOOL, depth = Math.min(path.length, LV.length);
-      const here = list.filter(f => path.slice(0, depth).every((p, i) => { const vs = valsOf(f, LV[i]); return vs.length ? vs.some(v => String(v) === p || same(v, p)) : p === NONE; }));
       // the two ways in: a small toggle at the end of the path row (rarely changed)
       const ways = h('div', { class: 'ns-seg small vt-ways', role: 'radiogroup', 'aria-label': T('folders') }, ...[['school', T('waySchool')], ['field', T('wayField')]].map(([k, l]) =>
         h('button', { class: by === k ? 'on' : '', role: 'radio', 'aria-checked': String(by === k), title: k === 'school' ? T('bySchool') : T('byField'), 'data-by': k, onclick: () => setP({ by: k === 'school' ? '' : k, f: '' }) }, l)));
       const label = path.slice(0, depth).map((p, i) => folderName(LV[i], p)).join(' › ');
-      const mine = pins(), pinned = mine.some(x => x.by === by && x.f === (P.f || ''));
+      const mine = pins(), pinned = VC.pins.isPinned(mine, by, P.f || '');
       const pinBtn = depth ? h('button', { class: 'ns-iconbtn vt-pin' + (pinned ? ' on' : ''), 'aria-pressed': String(pinned), title: pinned ? T('unpin') : T('pin'), 'aria-label': pinned ? T('unpin') : T('pin'),
-        onclick: () => { putPins(pinned ? mine.filter(x => !(x.by === by && x.f === P.f)) : [{ by, f: P.f, label }, ...mine]); draw(); } }, svg('pushpin')) : null;
+        onclick: () => { putPins(pinned ? VC.pins.unpin(mine, by, P.f) : VC.pins.pin(mine, { by, f: P.f, label })); draw(); } }, svg('pushpin')) : null;
       // the pinned folders: behind one button; each opens its folder, × forgets it
       const pinList = h('div', { class: 'vt-pinlist', hidden: true }, ...mine.map(x => h('span', { class: 'chip vt-pinchip' },
         h('button', { class: 'linkish', onclick: () => setP({ by: x.by === 'school' ? '' : x.by, f: x.f }) }, x.label),
-        h('button', { class: 'vt-chipx', title: T('removePin', { name: x.label }), 'aria-label': T('removePin', { name: x.label }), onclick: () => { putPins(pins().filter(y => !(y.by === x.by && y.f === x.f))); draw(); } }, '×'))));   // i18n-ignore (×)
+        h('button', { class: 'vt-chipx', title: T('removePin', { name: x.label }), 'aria-label': T('removePin', { name: x.label }), onclick: () => { putPins(VC.pins.unpin(pins(), x.by, x.f)); draw(); } }, '×'))));   // i18n-ignore (×)
       const pinsBtn = mine.length ? h('button', { class: 'btn small ghost vt-pinsbtn', 'aria-expanded': 'false', title: T('pinnedFolders'), 'aria-label': T('pinnedFolders'), onclick: e => { pinList.hidden = !pinList.hidden; e.currentTarget.setAttribute('aria-expanded', String(!pinList.hidden)); } }, svg('pushpin'), ' ', num(mine.length), ' ', chev()) : null;
       const crumbs = h('nav', { class: 'vt-path', 'aria-label': T('folders') }, h('button', { class: 'linkish', onclick: () => setP({ f: '' }) }, by === 'school' ? T('allSchools') : T('allFields')),
         ...path.slice(0, depth).flatMap((p, i) => [h('span', { 'aria-hidden': 'true' }, ' › '), h('button', { class: 'linkish', onclick: () => setP({ f: path.slice(0, i + 1).join('›') }) }, folderName(LV[i], p))]), pinBtn ? ' ' : null, pinBtn);
       const pinRow = h('div', { class: 'row vt-fhead2' }, crumbs, h('span', { class: 'grow' }), pinsBtn, ways);
       const head = [pinRow, pinList];
       if (by === 'field') return h('div', {}, ...head, fieldFolder(list, path));
-      if (depth >= LV.length) return h('div', {}, ...head, ending(here));
-      const lev = LV[depth], kids = values(here.flatMap(f => valsOf(f, lev).map(v => ({ [lev]: v }))), lev), none = here.filter(f => !valsOf(f, lev).length).length;
-      kids.sort((a, b) => b.n - a.n || folderName(lev, a.v).localeCompare(folderName(lev, b.v)));
-      if (none) kids.push({ v: NONE, n: none });
+      const { here, level: lev, kids } = VC.schoolFolder(list, path, folderName);
+      if (!lev) return h('div', {}, ...head, ending(here));
       return h('div', {}, ...head, kids.length ? h('div', { class: 'ns-list vt-folders' }, ...kids.map(x => h('button', { class: 'ns-item vt-folder', 'data-v': String(x.v), onclick: () => setP({ f: [...path.slice(0, depth), String(x.v)].join('›') }) },
         h('span', { class: 'ns-ico' }, svg('vault')), h('span', { class: 't' }, h('b', {}, folderName(lev, x.v)), h('small', {}, T('nFiles', { n: x.n }))), chev()))) : empty());
     }
@@ -363,13 +220,7 @@ window.NoemaVault = (() => {
     /** By field: the fields under this one that hold files (a file under two of them shows in both: a view, not a copy),
         then the files filed under this field itself. At the top: the broad fields, and Misc for fields not known here. */
     function fieldFolder(list, path) {
-      const node = path[path.length - 1];
-      if (node === NONE) return ending(list.filter(f => !fieldsOf(f).some(x => Fields.get(x))));
-      const here = node ? list.filter(f => inField(f, node)) : list;
-      const kids = (node ? Fields.children(node) : Fields.roots()).map(v => ({ v, n: here.filter(f => inField(f, v)).length })).filter(x => x.n)
-        .sort((a, b) => b.n - a.n || Fields.name(a.v).localeCompare(Fields.name(b.v)));
-      if (!node) { const lost = here.filter(f => !fieldsOf(f).some(x => Fields.get(x))).length; if (lost) kids.push({ v: NONE, n: lost }); }
-      const direct = node ? here.filter(f => fieldsOf(f).includes(node)) : [];
+      const { node, here, kids, direct } = VC.fieldFolder(list, path, VC.fields(), Fields.name);
       if (!kids.length) return ending(here);
       return h('div', {}, h('div', { class: 'ns-list vt-folders' }, ...kids.map(x => folderRow(x, folderName('field', x.v), [...path, String(x.v)].join('›')))),
         direct.length ? h('h3', { class: 'vt-directhead' }, T('filedHere', { name: Fields.name(node) })) : null, direct.length ? ending(direct) : null);
@@ -381,7 +232,7 @@ window.NoemaVault = (() => {
       const uniq = a => [...new Set(a)];
       const bar = [...chipsOf('lg', uniq(list.flatMap(langsOf)), langName), ...chipsOf('y', uniq(list.map(f => f.year).filter(Boolean)).sort((a, b) => b - a), String),
         ...chipsOf('sem', uniq(list.map(f => f.semester).filter(Boolean)).sort((a, b) => a - b), semName)];
-      const sorted = [...list].sort(SORTS[P.sort] || SORTS.new), kinds = KINDS.filter(k => sorted.some(f => f.kind === k));
+      const sorted = VC.sort(list, P.sort), kinds = KINDS.filter(k => sorted.some(f => f.kind === k));
       return h('div', {}, bar.length ? h('div', { class: 'ns-srchips vt-endchips' }, ...bar) : null,
         ...kinds.map(k => h('section', { class: 'vt-kindgroup', 'data-kind': k }, h('h3', { class: 'vt-kindhead' }, T('kind.' + k), ' ', h('small', { class: 'ns-muted' }, num(sorted.filter(f => f.kind === k).length))),
           h('div', { class: 'ns-list vt-list' }, ...sorted.filter(f => f.kind === k).slice(0, 300).map(card)))));
@@ -500,7 +351,7 @@ window.NoemaVault = (() => {
     const [shL, sh] = box('show_name', T('showName'));
     const desc = h('textarea', { class: 'noema-input', 'data-k': 'description', rows: 2, maxlength: 1000, placeholder: T('descPh') }); desc.value = init.description || '';
     // a name already in the vault, written another way (case, accents, spaces) → that one: the folders stay one per place
-    const snap = (i, field) => i.addEventListener('change', () => { const m = values(all, field).find(x => fold(String(x.v)).replace(/\s+/g, ' ').trim() === fold(i.value).replace(/\s+/g, ' ').trim()); if (m) i.value = String(m.v); });
+    const snap = (i, field) => i.addEventListener('change', () => { const m = VC.snapName(all, field, i.value); if (m != null) i.value = m; });
     snap(u, 'university'); snap(d, 'department'); snap(c, 'course'); snap(p, 'professor');
     const el = h('div', { class: 'vt-form' }, list('vt-dl-u', 'university'), list('vt-dl-d', 'department'), list('vt-dl-c', 'course'), list('vt-dl-p', 'professor'),
       h('fieldset', { class: 'vt-fs' }, h('legend', {}, T('g.where')), uL, dL, cL, pL),
@@ -545,7 +396,6 @@ window.NoemaVault = (() => {
       const parents = chosen.filter(id => Fields.get(id)?.status === 'accepted');   // under the fields chosen already; Claude places it for good
       try {
         const id = await Server.propose(w, Fields.loc(), parents);
-        if (!Fields.get(id)) Fields.addLocal({ id, names: { [Fields.loc()]: w }, aliases: [], parents, status: 'proposed' });
         note.hidden = false; add(id);
       } catch (e) { toast('⚠️ ' + (window.NoemaI18n ? NoemaI18n.err(e) : e.message), 6000); b.disabled = false; }
     }
@@ -554,7 +404,7 @@ window.NoemaVault = (() => {
     // what others chose for files with a similar title or course (the server counts; no names)
     let asked = '';
     const suggest = () => { draw(); const a = askOf(); const k = a.title + '|' + a.course; if (k === asked || (!a.title && !a.course)) return; asked = k;
-      Server.suggest(a.title, a.course).then(r => { fromOthers = (r || []).map(x => x.field); draw(); }).catch(() => { }); };
+      Server.suggest(a.title, a.course).then(r => { fromOthers = r || []; draw(); }).catch(() => { }); };
     draw(); suggest();
     return { el: h('div', { class: 'vt-fpick' }, box, q, res, note), ids: () => [...chosen], suggest };
   }
@@ -562,7 +412,7 @@ window.NoemaVault = (() => {
     const { h } = ctx;
     let all = []; try { all = await load(); } catch (e) { }
     let usedBytes = all.filter(f => f.mine).reduce((a, f) => a + (f.size || 0), 0);
-    if (window.NoemaSocial) usedBytes = await NoemaSocial.Server.used().catch(() => usedBytes);   // the files sent in conversations count too
+    if (window.NoemaSocial && CL()?.session?.()) usedBytes = await NoemaCore.social.server.usedBytes().catch(() => usedBytes);   // the files sent in conversations count too
     const used = () => usedBytes;
     dialog(ctx, T('uploadTitle'), (body, close) => {
       let items = [];   // [{ file, title, problem }]
@@ -586,7 +436,7 @@ window.NoemaVault = (() => {
         flist.replaceChildren(...items.map((x, i) => h('li', { class: x.problem ? 'bad' : '' }, x.problem ? h('span', {}, x.file.name) : h('input', { class: 'noema-input small vt-title', 'aria-label': T('fileTitle'), maxlength: 160, value: x.title, oninput: e => { x.title = e.target.value; }, onchange: () => form.suggest() }),
           h('span', { class: 'tiny' }, ' ' + mb(x.file.size) + ' '), x.problem ? h('span', { class: 'tiny vt-problem' }, x.problem) : null,
           h('button', { class: 'btn small ghost', 'aria-label': T('removeFile', { name: x.file.name }), onclick: () => { items.splice(i, 1); drawFiles(); } }, '✕'))));   // i18n-ignore (✕)
-        quota.textContent = T('quota', { used: mb(used()), max: mb(QUOTA), mb: 20 });
+        quota.textContent = T('quota', { used: mb(used()), max: mb(VC.QUOTA), mb: VC.MAX_FILE_MB });
       }
       async function send() {
         err.textContent = '';
@@ -627,5 +477,5 @@ window.NoemaVault = (() => {
     ctx.sheet(T('howItWorks'), body => body.append(...['about1', 'about2', 'about3', 'about4', 'about5'].map(k => ctx.h('p', {}, T(k, { mb: 20, quota: 50 })))));
   }
 
-  return { page, filter, matches, forms, checkFile, values, KINDS, FORMATS, GROUPS, Server, Fields, hashOf, parse, load, reset: () => { cache = null; } };
+  return { page, checkFile, filter, Fields, load, reset: () => { cache = null; } };
 })();

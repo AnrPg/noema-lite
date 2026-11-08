@@ -1780,7 +1780,7 @@
      Every answer, review, read section, XP… is an event of the account's log; the screens read its fold. a:settings stays
      the old screens' copy of the account's settings: what they write there becomes setting.changed events, and the copy
      follows the log (another tab, a restore, another device). Old values that still arrive in s:<subject>:state or a:stats
-     (the old sync, an old backup) are converted to events. */
+     (an old backup) are converted to events; the cloud's old rows reach the log through NoemaCore.sync.legacyProgress. */
   let settingsCopy = false;   // the copy is being written from the log: not a change of the learner's
   function writeSettingsCopy(acc, s) {
     const k = KV.accountKey('settings', acc), cur = jget(k, {}) || {}, next = { ...s };

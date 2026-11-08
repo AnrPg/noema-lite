@@ -19,47 +19,27 @@ const PORT = 54381, BASE = `http://localhost:${PORT}`;
 
 /* ---------- 1. without a browser ---------- */
 async function unit() {
-  console.log('— the search, the format checks and the filters, without a browser');
+  // the rules themselves (the formats, the field graph, the filters, the folders) are unit-tested in src/features/vault (npm run test:unit);
+  // here: the page's own part over them (build/app.js + engine/vault.js, as the browser loads them)
+  console.log('— the format checks in the learner’s words, the search with the menus’ words, without a browser');
   const EN = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n/vault/en.arb'), 'utf8'));   // the English words, placeholders filled in
   const NoemaI18n = { t: (k, p = {}) => String(EN[k] ?? k).replace(/\{(\w+)(?:, number)?\}/g, (m, x) => p[x] != null ? String(p[x]) : m), fmt: { number: n => String(n) } };
-  const ctx = { window: {}, crypto: require('crypto').webcrypto, console, URLSearchParams, NoemaI18n }; ctx.window = ctx; vm.createContext(ctx);
-  for (const f of ['engine/catalog.js', 'engine/vault.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
-  const V = ctx.NoemaVault;
-  V.Fields.set(JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/vault_fields/fields.json'), 'utf8')).map(f => ({ ...f, status: 'accepted' })));   // the seed of the field graph
-  ok(V.matches('Σημειώσεις Βιολογίας · Πανεπιστήμιο Κρήτης', 'viologias') && V.matches('Σημειώσεις Βιολογίας', 'biologias') && V.matches('Σημειώσεις Βιολογίας', 'βιολογιας') && V.matches('Βιολογία', 'ΒΙΟΛΟΓΊΑ'), 'Greek is found as written, without accents, in plain Latin (viologia) and scholarly Latin (biologia)');
-  ok(V.matches('Генетика, МГУ', 'genetika') && V.matches('Café Économie', 'cafe economie') && !V.matches('Genetics', 'physics'), 'Cyrillic in Latin letters, accents ignored, other words not');
+  const ctx = { window: {}, crypto: require('crypto').webcrypto, console, URL, URLSearchParams, TextEncoder, TextDecoder, NoemaI18n }; ctx.window = ctx; vm.createContext(ctx);
+  for (const f of ['build/app.js', 'engine/vault.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);   // build/app.js: NoemaCore (npm run build)
+  const V = ctx.NoemaVault, S = ctx.NoemaCore.search;
+  ok(S.matches('Σημειώσεις Βιολογίας · Πανεπιστήμιο Κρήτης', 'viologias') && S.matches('Σημειώσεις Βιολογίας', 'biologias') && S.matches('Σημειώσεις Βιολογίας', 'βιολογιας') && S.matches('Βιολογία', 'ΒΙΟΛΟΓΊΑ'), 'Greek is found as written, without accents, in plain Latin (viologia) and scholarly Latin (biologia)');
   const file = (name, bytes, size) => ({ name, size: size ?? bytes.length, slice: () => ({ arrayBuffer: async () => Uint8Array.from(bytes).buffer }) });
   const b = s => [...Buffer.from(s, 'binary')];
   ok(await V.checkFile(file('notes.pdf', b('%PDF-1.7 ...'))) === '', 'a real PDF is taken');
   ok(/not what its name says/.test(await V.checkFile(file('notes.pdf', b('MZ\x90\x00 a program'))) || ''), 'a program renamed .pdf is refused by its first bytes');
   ok(/does not take/.test(await V.checkFile(file('setup.exe', b('MZ'))) || '') && /does not take/.test(await V.checkFile(file('a.svg', b('<svg'))) || '') && /does not take/.test(await V.checkFile(file('all.zip', b('PK\x03\x04'))) || ''), 'programs, SVG pictures and archives are refused');
-  ok(/Bigger than 20 MB/.test(await V.checkFile(file('big.pdf', b('%PDF'), 21 * 1048576)) || '') && /50 MB/.test(await V.checkFile(file('a.pdf', b('%PDF'), 5 * 1048576), 48 * 1048576) || ''), 'files over 20 MB and over the 50 MB quota are refused');
-  ok(await V.checkFile(file('slides.pptx', b('PK\x03\x04....'))) === '' && await V.checkFile(file('talk.mp3', b('ID3....'))) === '' && /not what/.test(await V.checkFile(file('notes.txt', [65, 0, 66])) || ''), 'slides and audio are taken; a “text” file with binary in it is not');
+  ok(/Bigger than 20 MB/.test(await V.checkFile(file('big.pdf', b('%PDF'), 21 * 1048576)) || '') && /50 MB/.test(await V.checkFile(file('a.pdf', b('%PDF'), 5 * 1048576), 48 * 1048576) || ''), 'files over 20 MB and over the 50 MB quota are refused, in the learner’s words');
   const rows = [
-    { university: 'University of Crete', department: 'Biology', course: 'Genetics', year: 2023, semester: 3, kind: 'notes', fields: ['Q7162'], language: 'en', title: 'Genetics notes', file_name: 'g.pdf' },
-    { university: 'Πανεπιστήμιο Αθηνών', department: 'Βιολογίας', course: 'Γενετική', year: 2021, semester: 3, kind: 'notes', fields: ['Q7162'], language: 'el', title: 'Σημειώσεις Γενετικής', file_name: 'g2.pdf', has_solutions: true },
-    { university: 'University of Crete', department: 'Biology', course: 'Genetics', year: 2023, semester: 3, kind: 'exam', fields: ['Q7162', 'Q420'], language: 'en', title: 'Exam 2023', file_name: 'e.pdf' },
-    { university: 'University of Crete', department: 'Physics', course: 'Mechanics', year: 2022, semester: 1, kind: 'notes', fields: ['Q413'], language: 'en', title: 'Mechanics', file_name: 'm.pdf' }];
-  const got = P => V.filter(rows, P).map(r => r.title).join(' | ');
-  ok(got({ sub: 'Q420', k: 'notes', sem: '3' }) === 'Genetics notes | Σημειώσεις Γενετικής', 'biology notes of any university and any year, 3rd semester: both universities');
-  ok(got({ u: 'university of crete', y: '2023' }) === 'Genetics notes | Exam 2023' && got({ sol: '1' }) === 'Σημειώσεις Γενετικής' && got({ q: 'genetiki' }) === 'Genetics notes | Σημειώσεις Γενετικής | Exam 2023' && got({ q: 'athinon' }) === 'Σημειώσεις Γενετικής', 'a university in any case, a year, “has solutions”, Greek in Latin letters (the field Genetics is Γενετική in Greek: all three)');
-  const more = [...rows, { university: null, department: null, course: null, year: 2026, semester: null, kind: 'other', fields: ['Q1120908'], language: 'el,ru', title: 'Glossary el–ru', file_name: 'gl.pdf' }];
-  const got2 = P => V.filter(more, P).map(r => r.title).join(' | ');
-  ok(got2({ sem: '1' }) === 'Mechanics | Glossary el–ru' && got2({ lg: 'ru' }) === 'Glossary el–ru' && got2({ lg: 'el' }) === 'Σημειώσεις Γενετικής | Glossary el–ru', 'a file of any semester shows under every semester; a file in Greek and Russian under either language');
-  ok(got2({ q: 'glossary 2026' }) === 'Glossary el–ru' && got2({ q: '2026' }) === 'Glossary el–ru' && got2({ q: 'notes 2021' }) === 'Σημειώσεις Γενετικής', 'the search looks in every field too: a year, a type; a file without a university, course or semester is still found');
-  ok(got({ q: 'lecture notes 2023' }) === 'Genetics notes', 'the type’s menu word (English, always on the page) finds the type');
-  console.log('— the field graph');
-  const F = V.Fields, en = id => F.name(id);
-  ok(F.up('Q1120908').has('Q413') && F.up('Q1120908').has('Q11190') && F.up('Q1120908').has('b_hw') && F.up('Q1120908').has('b_ns'), 'Medical physics sits under Physics and under Medicine (and so under both broad fields): a graph, not a tree');
-  ok(got2({ sub: 'Q413' }) === 'Mechanics | Glossary el–ru' && got2({ sub: 'Q11190' }) === 'Glossary el–ru' && got2({ sub: 'b_ns' }).split(' | ').length === 5, 'a field’s filter holds the files of every field below it, by any path');
-  ok(got2({ q: 'ιατρική φυσική' }) === 'Glossary el–ru' && got2({ q: 'physique medicale' }) === 'Glossary el–ru' && got2({ q: 'genetika' }).split(' | ').length === 3, 'the search finds a file by its fields’ names in any language (Greek, French without accents, Russian in Latin letters)');
-  ok(F.find('ιατρική φυσ')[0] === 'Q1120908' && F.find('radiolog').some(id => en(id) === 'Radiology') && F.find('физика')[0] === 'Q413', 'finding a field: part of its name, in any language');
-  ok(F.find('genitcs').some(id => en(id) === 'Genetics') && F.find('machin lerning').some(id => en(id) === 'Machine learning') && F.find('ml').some(id => en(id) === 'Machine learning') && F.find('γενετκη').some(id => en(id) === 'Genetics'), 'typing still finds, also with a typo or by initials');
-  ok(F.find('physics')[0] === 'Q413', 'the close matches stay first');
-  ok(F.fromText('Σημειώσεις Γενετικής').includes('Q7162') && F.fromText('Medical physics lecture 3').join() === 'Q1120908' && !F.fromText('Lecture 1').length, 'suggestions from a title, inflected Greek too; the specific field, not also the one above it');
-  ok(F.fromText('the modern ai and data platform · AI systems').includes('Q11660') && F.fromText('Organic chemistry exam').map(en).join() === 'Organic chemistry', 'an abbreviation in capitals (AI → Artificial intelligence); a field named in a title');
-  ok(F.roots().length === 10 && F.roots().every(id => /^b_/.test(id)), 'the top: the ten broad fields of ISCED-F');
-  ok(V.hashOf({ q: 'dna', sem: '3', k: 'notes,exam' }) === '#/vault?q=dna&sem=3&k=notes%2Cexam', 'the filters live in the address');
+    { university: 'University of Crete', course: 'Genetics', year: 2023, semester: 3, kind: 'notes', fields: [], language: 'en', title: 'Genetics notes', file_name: 'g.pdf' },
+    { university: 'Πανεπιστήμιο Αθηνών', course: 'Γενετική', year: 2021, semester: 3, kind: 'exam', fields: [], language: 'el', title: 'Σημειώσεις Γενετικής', file_name: 'g2.pdf', has_solutions: true }];
+  const got = q => V.filter(rows, { q }).map(r => r.title).join(' | ');
+  ok(got('lecture notes 2023') === 'Genetics notes' && got('athinon') === 'Σημειώσεις Γενετικής' && got('solutions') === 'Σημειώσεις Γενετικής', 'the type’s and the contents’ menu words (English, always on the page) find the files; Greek in Latin letters');
+  ok(ctx.NoemaCore.vault.hashOf({ q: 'dna', sem: '3', k: 'notes,exam' }) === '#/vault?q=dna&sem=3&k=notes%2Cexam', 'the filters live in the address');
 }
 
 /* ---------- 2. in the browser ---------- */

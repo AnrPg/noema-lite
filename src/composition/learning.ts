@@ -19,6 +19,7 @@
  *   NoemaCore.learning.events() · eventsOf(account) · exportLog() · xapi(subject) · archive() → Promise
  *   NoemaCore.learning.append(events) → Promise<added> · restore(events, { mode, madeAt, account? }) → Promise<{ added }>
  *   NoemaCore.learning.backupStamp(events, madeAt) · flush() → Promise<boolean> · pending() · migrate() · compact() · clear(account)
+ *   NoemaCore.learning.adoptProgress(account, subject, state) → Promise<added>   (a restructured Roadmap: progress of moved items)
  */
 import { browserEventStore } from '../adapters/browser/event-store.ts';
 import { memoryEventStore } from '../adapters/memory/event-store.ts';
@@ -299,6 +300,7 @@ export const learningBridge: BridgeExtension = {
       },
       pending: () => L().pending,
       migrate: () => plain(L().migrateLegacy(), 'learning.migrate', { added: 0, unknown: [] }),
+      adoptProgress: (account: string, subject: string, state: unknown) => thrown(L().adoptProgress(account, subject, state)),
       compact: () => plain(L().compact(), 'learning.compact', 0),
       clear: (account: string) => plain(L().clear(account), 'learning.clear', undefined),
     });

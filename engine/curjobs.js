@@ -354,8 +354,9 @@
     async remove(acc, id) {
       try { const s = (await root.Noema.subjectsFor(acc)).find(x => x.id === id); if (s) await root.Noema.deleteSubject(s); return ok(undefined); } catch (e) { return fail(e); }
     },
-    state(acc, id) { try { return JSON.parse(localStorage.getItem(`noema1:${acc}:s:${id}:state`) || 'null'); } catch (e) { return null; } },
-    async setState(acc, id, st) { try { root.Noema.kv.set(`noema1:${acc}:s:${id}:state`, JSON.stringify(st)); return ok(undefined); } catch (e) { return fail(e); } },
+    /* the subject's progress is the learning log's fold; what a subject is handed (its items moved here) becomes its events */
+    state(acc, id) { const p = root.NoemaCore.learning.progressOf(acc, id); return p ? JSON.parse(JSON.stringify(p)) : null; },
+    async setState(acc, id, st) { try { await root.NoemaCore.learning.adoptProgress(acc, id, st); return ok(undefined); } catch (e) { return fail(e); } },
   };
   /** 🪜 The learner decides on a restructuring proposal: approve (applied to the Roadmap and its subjects; nothing is lost) or
       decline. In a shared Roadmap only its owner decides (the map is theirs). → { ok, changes } | { error } */
