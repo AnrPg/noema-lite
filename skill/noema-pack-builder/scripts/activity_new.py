@@ -62,9 +62,11 @@ if not os.path.isdir(_ed) and os.path.isfile(_eb):
     _tmp = tempfile.mkdtemp(prefix='.activities_examples-', dir=HERE)   # unpacked aside, renamed when whole: an interrupted run leaves no half folder
     for _p, _b in _files.items():
         _parts = _p.split('/')
-        if not _p or _p.startswith('/') or '\\' in _p or ':' in _parts[0] or any(x in ('', '.', '..') for x in _parts):
+        _t = os.path.realpath(os.path.join(_tmp, *_parts))
+        if (not _p or _p.startswith('/') or '\\' in _p or ':' in _p or any(x in ('', '.', '..') for x in _parts)
+                or os.path.commonpath([_t, os.path.realpath(_tmp)]) != os.path.realpath(_tmp)):   # no drive anywhere (a/D:/x), never outside the folder
             shutil.rmtree(_tmp); sys.exit(f'✗ activities_examples.json: the path {_p!r} is not a plain relative path')
-        _t = os.path.join(_tmp, *_parts); os.makedirs(os.path.dirname(_t), exist_ok=True)
+        os.makedirs(os.path.dirname(_t), exist_ok=True)
         with open(_t, 'wb') as fh: fh.write(base64.b64decode(_b, validate=True))
     os.replace(_tmp, _ed)
 src = next((d for d in (os.path.join(HERE, 'activities_examples', ref), os.path.join(HERE, '..', '..', '..', 'tools', 'activities_examples', ref)) if os.path.isdir(d)), None)

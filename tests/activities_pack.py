@@ -390,7 +390,7 @@ for ref_, id_ in (('led-bench', 'my-bench'), ('planets-quiz', 'my-quiz')):
 with open(os.path.join(nw, 'activities', 'my-quiz', 'item.h5p'), 'rb') as a_, open(os.path.join(ROOT, 'tools', 'activities_examples', 'planets-quiz', 'item.h5p'), 'rb') as b_:
     check(a_.read() == b_.read(), 'the .h5p restored from the bundle is byte-identical to its source')
 check(not any(f.startswith('.activities_examples-') for f in os.listdir(S)), 'the bundle is unpacked aside and renamed whole (no temporary folder left)')
-for bad_ in ('../escape.txt', '/abs.txt', 'a/../../escape.txt', 'C:/x.txt', 'a\\..\\x.txt'):
+for bad_ in ('../escape.txt', '/abs.txt', 'a/../../escape.txt', 'C:/x.txt', 'a/D:/escape.txt', 'a\\..\\x.txt'):
     S2 = os.path.join(T, 'tampered'); shutil.rmtree(S2, ignore_errors=True); os.makedirs(S2)
     shutil.copy(os.path.join(S, 'activity_new.py'), S2); wj(os.path.join(S2, 'activities_examples.json'), {'format': 'noema.files/v1', 'files': {bad_: ''}})
     w2 = os.path.join(T, 'w-bad'); shutil.rmtree(w2, ignore_errors=True); os.makedirs(w2)
