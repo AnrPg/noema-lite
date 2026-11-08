@@ -1,0 +1,19 @@
+# keys of the UI foundation (src/ui) built at run time: the kinds and states of a level badge (src/ui/kit/level-badge.ts),
+# the demo's sections, leads, options and menu items (src/ui/demo/ui-kit.ts)
+ui.level.kind.*
+ui.level.state.*
+ui.kit.section.*
+ui.kit.lead.*
+ui.kit.game.*
+ui.kit.scheme.*
+ui.kit.motion.*
+ui.kit.edit
+ui.kit.share
+ui.kit.export
+ui.kit.locked
+ui.kit.delete
+ui.kit.flashcards
+ui.kit.mistakes
+ui.kit.lightning
+ui.kit.resetDone
+ui.kit.kept

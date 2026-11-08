@@ -2,6 +2,8 @@
    the start screen (Today), a subject's chapter, the settings, the language course's home (the polyglot course) and a word's
    card in it (closed, and with “In other languages” open), at desktop width and at 320 px; then the chapter and the two language screens for three characters (robot; litF, whose art draws
    letters; fruit, the palest accent) in light and dark, so neither a character's colours and art nor a chapter's colour can fail.
+   The UI foundation's demo (#/ui-kit, src/ui: every component of the kit in the new frame) is audited the same way: its four
+   sections at both widths, two of them for the three characters in light and dark.
    Fails on every violation axe rates serious or critical (moderate and minor ones are listed, not failed).
    Usage: node tests/a11y.js [prepared-repo-dir]   (tests/run_e2e.sh passes its prepared copy, which has the demo-physics subject;
    on the repo alone the Databricks subject is used)   PW=<path to playwright> */
@@ -35,13 +37,15 @@ function firstChapter() {
     WORD = { name: "a word's card in the course (#/lang/he/c/person.teacher)", at: '#/lang/he/c/person.teacher', settings: LANGS, ready: '.lx-others', wait: 1500 },
     // the same card with "In other languages" open: the table of the word in every language, its words and 🔊 buttons (target size)
     WORD_OPEN = { ...WORD, name: "a word's card, “In other languages” open", unfold: 'details.lx-others', shown: 'details.lx-others[open] .lx-compare .lx-spk' };
+  // the UI foundation's demo (served from localhost only); its character comes from its own appearance (set below)
+  const KIT = ['basics', 'overlays', 'forms', 'look'].map(s => ({ name: `the UI kit (#/ui-kit/${s})`, at: `#/ui-kit/${s}`, ready: 'noema-app-frame noema-ui-kit', wait: 600 }));
   const robot = pages => pages.map(p => ({ ...p, character: 'robot' }));
   const RUNS = [
-    { label: 'desktop', viewport: { width: 1280, height: 900 }, pages: robot([TODAY, CHAPTER, SETTINGS, LANG, WORD, WORD_OPEN]) },
-    { label: '320 px', viewport: { width: 320, height: 700 }, pages: robot([TODAY, CHAPTER, SETTINGS, LANG, WORD, WORD_OPEN]) },
+    { label: 'desktop', viewport: { width: 1280, height: 900 }, pages: robot([TODAY, CHAPTER, SETTINGS, LANG, WORD, WORD_OPEN, ...KIT]) },
+    { label: '320 px', viewport: { width: 320, height: 700 }, pages: robot([TODAY, CHAPTER, SETTINGS, LANG, WORD, WORD_OPEN, ...KIT]) },
     ...['light', 'dark'].map(scheme => ({
       label: `three characters, ${scheme}`, viewport: { width: 1280, height: 900 }, colorScheme: scheme,
-      pages: ['robot', 'litF', 'fruit'].flatMap(character => [CHAPTER, LANG, WORD, WORD_OPEN].map(p => ({ ...p, name: `${character}: ${p.name}`, character }))),
+      pages: ['robot', 'litF', 'fruit'].flatMap(character => [CHAPTER, LANG, WORD, WORD_OPEN, KIT[0], KIT[2]].map(p => ({ ...p, name: `${character}: ${p.name}`, character }))),
     })),
   ];
   const browser = await chromium.launch();
@@ -54,7 +58,9 @@ function firstChapter() {
     await page.goto(url); await page.evaluate(() => { localStorage.clear(); localStorage.setItem('noema-test:newUI', '1'); }); await page.reload(); await wait(900);
     for (const pg of run.pages) {
       const settings = { lang: 'en', world: 'know', character: pg.character, onboarded: Date.now(), ...(pg.settings || {}) };
-      await page.evaluate(s => { const id = window.Noema?.account?.id; if (id) localStorage.setItem(`noema1:${id}:a:settings`, JSON.stringify(s)); }, settings);
+      // after the UI kit (the older screens did not start there): back to them, so the account's settings can be written
+      if (!(await page.evaluate(() => !!window.Noema?.account))) { await page.goto(url); await page.reload(); await wait(900); }
+      await page.evaluate(s => { const id = window.Noema?.account?.id; if (id) localStorage.setItem(`noema1:${id}:a:settings`, JSON.stringify(s)); localStorage.setItem('noema-ui:appearance', JSON.stringify({ scheme: 'system', character: s.character, motion: 'system' })); }, settings);
       await page.goto(url + pg.at); await page.reload();
       let ready = !pg.ready || await page.waitForSelector(pg.ready, { timeout: 25000 }).then(() => true, () => false);
       await wait(pg.wait || 1500);

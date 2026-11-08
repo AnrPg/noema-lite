@@ -42,6 +42,7 @@ kernel. They never use an adapter.
 | `src/kernel/` | nothing outside itself | everything else | values and rules without I/O: `Result`, `NoemaError` and its codes, branded ids, `LocalDay`, the hybrid logical clock, `invariant` |
 | `src/ports/` | kernel | adapters, roots, DOM types in signatures | the interfaces the core needs from the world, and their contract suites |
 | `src/adapters/` | kernel, ports, `adapters/local` (shared helpers), the platform | roots, other vendors' adapters, features | one technology per folder; the vendor's formats stop at its anti-corruption layer (ADR 006) |
+| `src/ui/` (the new UI, phase 3) | kernel, contracts, ports, itself (its tests in `src/ui/test/` also the adapters, as a root would) | adapters, roots, the old UI | a driving adapter: Lit components that reach the core through the ports they are handed (§6.3) |
 | `src/composition/` | everything | (no one imports a root) | the only code that picks adapters; the only holders of a `Container` |
 | `engine/` (old UI) | `window.NoemaCore` | `src/` modules directly | the screens phase 3 moves to `src/features/` |
 
@@ -112,6 +113,7 @@ The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOC
 |---|---|---|
 | `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`) and the data contracts (`NoemaCore.contracts`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
 | `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
+| `ui.ts` → `ui-root.ts` | `build/ui.js` (IIFE, kind `dev`: not in the site or the one-file bundle) | the I18n port over `engine/i18n.js`, the system clock, the device storage for the demo's appearance, the Notifier policy over the frame's toaster; mounts the frame and the kit's demo for `#/ui-kit` (§6.3) |
 | `worker.ts` | `build/worker.js` | the job registry (`jobs.ts`) served over `worker-protocol.ts` |
 | `tools.ts` | (imported by Node scripts) | memory storage, the system clock, the given catalogs, a recording notifier and inline Compute; no network |
 | `connector.ts` | the MCP server (Netlify function) | `register()` wires `src/connector` (one module per tool, sagas, the entry tables) with the app engine files it shares, loaded in a scope of their own (`src/connector/engine/legacy.ts`), and hands those files `NoemaCore = { contracts, engines }`: the ES modules of `src/contracts` and the engine library with every engine in hand (`src/engines/node.ts`, the pack checks are synchronous); bundled by `tools/connector_bundle.mjs` |
@@ -210,6 +212,32 @@ on a token colour or a token colour as text without such a pair.
 - the surface only grows (a new name, never a changed meaning);
 - `version` goes up when a name is removed.
 
+### 6.3 The UI foundation
+
+`src/ui/` is the new UI's foundation in Lit (`lit` 3.3.3): the parts every phase-3 screen is built from. Nothing of the old
+UI is replaced yet; a screen moves over when its feature does.
+
+| Folder | Holds |
+|---|---|
+| `core/` | `NoemaElement` (the base: services, `t()`, the direction, `emit()`), the services (`UiServices`: I18n, Clock, the interface languages) handed down by a `noema-ui-services` event from the nearest provider, the shared styles (`--u-*` aliases of the tokens), the keyboard helpers (`moveIndex`, type-ahead; ← → swap right to left), `place()` for popovers, focus helpers, the overlay stack (`openOverlay`: Escape and a press outside close the top one only, never past a modal) and the appearance (`applyAppearance`: `data-theme`, `data-m`, `data-motion`, the theme colour) |
+| `kit/` | buttons and icon buttons, menus, dialogs (native `<dialog>`, modal or a sheet), the toaster (the Notifier port's surface: toasts, notices with `role="status"`, alerts through an assertive live region), tabs, chips, cards, ⓘ tips, form fields (form-associated: text, select, switch, radio group), lists and collapsibles, progress (bar, ring), the level badge, line icons |
+| `router/` | `defineRoutes()` (typed hash routes: `:name`, `:name?`, `*rest`, the query) and `createRouter()` over a `HashLocation` (`browserHash`, `memoryHash` for tests) |
+| `frame/` | `noema-app-frame` (top bar with back and crumbs, the tabs as a bottom bar on phones and a rail from 760 px, skip link, `<main>`) and `noema-layer` (toasts and dialogs; `confirmDialog`) |
+| `demo/` | `noema-ui-kit`, the demo of every component (`#/ui-kit`) |
+
+The rules:
+
+- **Words.** Every text comes from the I18n port (`i18n/ui/`, keys `ui.*`, drafts in the 14 other locales); keys built at
+  run time are listed in `i18n/ui/dynamic_keys.txt`. A component follows a locale change; the frame sets `lang` and `dir`.
+- **Accessibility.** Each component carries its role, name and state; it works with the keyboard alone; every target is at
+  least 24 × 24 px; nothing scrolls sideways at 320 px; logical properties and the `--u-flip` switch mirror right to left.
+- **Look.** Only the tokens (`engine/tokens.css`), pale surfaces, few and short animations (`data-motion="reduced"` and the
+  system setting stop them).
+- **Loading.** The bundle `build/ui.js` is kind `dev`: `engine/loader.js` adds it only for `#/ui-kit` on localhost, so the
+  start screen never loads it. Phase 3's shell makes it a `page` entry and its root the app's root.
+- **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-root.test.ts`, and in a
+  browser `tests/ui_kit.js` (layout, targets, focus, form association, right to left) and `tests/a11y.js` (axe).
+
 ## 7. Patterns
 
 | Pattern | Where |
@@ -223,6 +251,7 @@ on a token colour or a token colour as text without such a pair.
 | Schema-first contracts | `src/contracts/` (helper 2) |
 | Microkernel plugins | `src/plugins/` (manifest, registry, capability checks), the engines in `src/engines/` (§6.1) |
 | Design tokens | `src/ui/tokens/` → `engine/tokens.css` (§6.2) |
+| Web components, context by event, an overlay stack | `src/ui/` (§6.3) |
 | Saga with idempotency keys, event sourcing of learning events, CQRS read models in a Worker (Compute jobs), local-first with an outbox, statecharts, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
 
 ## 8. How to add …
@@ -266,6 +295,6 @@ on a token colour or a token colour as text without such a pair.
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `engines-node.cjs`, and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui.js` (development only, §6.3), `engines-node.cjs`, and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

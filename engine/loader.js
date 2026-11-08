@@ -1763,7 +1763,15 @@
   });
 
   /* ---------------- boot ---------------- */
+  /** #/ui-kit on a development page (localhost): the UI foundation of phase 3 (src/ui, build/ui.js) and its demo instead of
+      these screens; leaving the route reloads the page, which starts them again (docs/ARCHITECTURE.md §6.3) */
+  function uiKit() {
+    if (!/^#\/ui-kit(?:[/?]|$)/.test(location.hash) || !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) return false;
+    document.body.append(Object.assign(document.createElement('script'), { src: 'build/ui.js' }));
+    return true;
+  }
   async function start() {
+    if (uiKit()) return;
     document.body.classList.add('noema-booting');
     if (window.NoemaI18n) { try { await Promise.race([NoemaI18n.ready, new Promise(r => setTimeout(r, 4000))]); } catch (e) { NoemaCore.errors.report(e, { where: 'loader.i18n.ready', severity: 'warning' }); } }
     migrateOldPrefix(); try { await migrateOldIDB(); } catch (e) { console.warn('[noema] old browser database not migrated', e); }

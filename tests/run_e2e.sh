@@ -115,7 +115,8 @@ run i18n_runtime node "$ROOT/tests/i18n_runtime.js" "$T"   # the runtime audit: 
 run mt node "$ROOT/tests/mt.js" "$T"   # machine translation of shared content: policy, cache, caps, toggle (docs/i18n.md §11; provider mocked)
 run weblate_tools python3 "$ROOT/tests/weblate_tools.py"   # Weblate tools: facade round trip, prune_drafts, draft-import and setup plans (no network)
 run i18n_rtl node "$ROOT/tests/i18n_rtl.js" "$T"   # RTL (ar-XB): dir switching, mirroring, bidi isolation, LTR islands, self-hosted script fonts
-run a11y node "$ROOT/tests/a11y.js" "$T"   # accessibility (axe): start screen, a subject's chapter, settings, a language course's home and a word card, at desktop and 320 px; chapter and course for robot, litF, fruit in light and dark — no serious/critical violation
+run a11y node "$ROOT/tests/a11y.js" "$T"   # accessibility (axe): start screen, a subject's chapter, settings, a language course's home and a word card, the UI kit (#/ui-kit), at desktop and 320 px; chapter, course and kit for robot, litF, fruit in light and dark — no serious/critical violation
+run ui_kit node "$ROOT/tests/ui_kit.js" "$T"   # the UI foundation (src/ui) through #/ui-kit: lazy, 1280 / 320 px, 24 px targets, keyboard, forms, appearance, right to left
 run pwa node "$ROOT/tests/pwa.js" "$T"   # the installable app: web manifest, one service worker, offline after the first visit, "update ready"
 
 echo
