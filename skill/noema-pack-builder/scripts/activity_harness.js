@@ -3,7 +3,7 @@
      node activity_harness.js test    SUBJECT_DIR [ID]          → every activity in every language: it says hello, shows no
                                                                    errors, and each case of activities/<id>/tests.json holds
      node activity_harness.js preview SUBJECT_DIR ID [OUT_DIR]  → screenshots: light, dark, 360 px wide, the fallback
-   sim-spec@1 activities run in the app's own sim runtime (35_activity_sim.js, with the spec check of packcheck.js); in their
+   sim-spec@1 activities run in the app's own sim runtime (35_activity_sim.js, with the spec check of the content checks: NoemaCore.content); in their
    tests.json a step {"set": "<param id>", "value": v} sets a control, "values": {name: number | [lo, hi]} checks a computed value,
    "passed" the exercise's checks grader, "state" the saved values. A bench (circuit-mna@1 or twin@1, docs/INTERACTIVE.md §12.7): a step
    {"measure": {"instrument": "V", "a": "TP3", "b": "GND"}} (or {"instrument": "I", "part": 0}) takes a measurement, {"diagnose": 6}
@@ -12,7 +12,7 @@
    wasm-module@1 (docs/INTERACTIVE_WASM.md): activities/<id>/module.wasm (+ its own spec.json) runs like a sim-spec@1 activity, with
    the app's wasm runtime (44_activity_wasm.js: the module checked, then run in a worker without network); a sim-spec@1 spec with
    engine wasm@1 finds its module item in activities.json. external-embed@1 is not run here (it needs the network and the provider's
-   page): check it with embed_check.py.
+   page): check it with activity_lint.py.
    py-module@1 (docs/INTERACTIVE_PYTHON.md) runs like sim-spec@1 (the same steps and expectations; "values" are Python's scalar outputs),
    over a small local http server that also serves the pinned Python files: from $NOEMA_PYODIDE_SITE (a folder with vendor/pyodide/manifest.json,
    e.g. dist/site after `python3 tools/fetch_pyodide.py`) or the repository's dist/site. Without them the Python activities are skipped
@@ -82,12 +82,11 @@ const THEMES = {
   dark: { tokens: { bg: '#16181c', bg2: '#1e2126', card: '#22262c', ink: '#e8e6e1', ink2: '#b9b6ae', ink3: '#8b8880', line: '#353a42', ok: '#5cc08a', bad: '#e2766d', warn: '#e0a84f', info: '#7fa8d8', c: '#8fb0e0', font: 'system-ui, sans-serif', mono: 'ui-monospace, monospace', r: '12px' }, scheme: 'dark', reducedMotion: false, textScale: 1, dir: 'ltr' },
 };
 const has = f => fs.existsSync(path.join(srcDir, f));
-const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
-// NoemaCore of an activity host (src/composition/harness.ts): the data contracts packcheck.js checks shapes with and the engine
-// library (the expression language, every engine of sim-spec@1, the catalogue) — the skill's activity_host/noema-core.js, or the
-// repository's build/harness.js (npm run build)
+// NoemaCore of an activity host (src/composition/harness.ts): the data contracts, the engine library (the expression language,
+// every engine of sim-spec@1, the catalogue) and the content checks (the spec check of sim-spec@1) — the skill's
+// activity_host/noema-core.js, or the repository's build/harness.js (npm run build)
 const corePath = [path.join(srcDir, 'noema-core.js'), path.join(srcDir, '..', '..', 'build', 'harness.js')].find(f => fs.existsSync(f));
-const SIMOK = has('35_activity_sim.js') && !!corePath && !!pcPath;
+const SIMOK = has('35_activity_sim.js') && !!corePath;
 const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
@@ -122,7 +121,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_activity_sim.js')}</script>${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 /* every engine of the library loaded first (once: the app loads only those an activity needs) */
@@ -189,7 +188,7 @@ function mount(act, init, modules) {
 
   for (const a of items) {
     console.log(`\n— ${a.id} (${a.runtime})`);
-    if (a.runtime === 'external-embed@1') { console.log('  (an outside page: not run here — it needs the network; check it with embed_check.py, and look at it in the app)'); continue; }
+    if (a.runtime === 'external-embed@1') { console.log('  (an outside page: not run here — it needs the network; check it with activity_lint.py, and look at it in the app)'); continue; }
     if (a.runtime === 'wasm-module@1' && !a.spec) { console.log('  (a module without its own spec: it runs through the sim-spec@1 activities whose spec names it in model.module)'); continue; }
     const PY = a.runtime === 'py-module@1', WA = a.runtime === 'wasm-module@1', SIM = a.runtime === 'sim-spec@1' || PY || WA;
     const H5 = a.runtime === 'h5p@1';

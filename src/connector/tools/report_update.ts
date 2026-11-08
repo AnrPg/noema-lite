@@ -1,7 +1,7 @@
 /* noema_report_update — change a problem report: status, note, fixed_in (admins) */
 import { argStr, fail, text, type Tool } from '../tool.ts';
 import { isAdmin, NOT_ADMIN_REPORTS } from '../services/admin.ts';
-import type { ReportRow } from '../engine/api.ts';
+import { REPORT_STATUSES, type ReportRow } from '../../features/reports/domain/index.ts';
 import { str, UUID_RE } from '../util.ts';
 
 export const tool: Tool = {
@@ -32,13 +32,12 @@ export const tool: Tool = {
     },
   },
   async handler(args, ctx) {
-    const R = ctx.engine.report;
     if (!(await isAdmin(ctx))) return fail(NOT_ADMIN_REPORTS);
     const id = argStr(args, 'id');
     if (!UUID_RE.test(id)) return fail('id: a report id from noema_reports');
     const patch: Record<string, unknown> = {};
     if (args.status != null) {
-      if (!R.STATUSES.includes(str(args.status))) return fail('status: one of ' + R.STATUSES.join(', '));
+      if (!(REPORT_STATUSES as readonly string[]).includes(str(args.status))) return fail('status: one of ' + REPORT_STATUSES.join(', '));
       patch.status = str(args.status);
     }
     if (args.note != null) patch.admin_note = str(args.note).slice(0, 4000) || null;

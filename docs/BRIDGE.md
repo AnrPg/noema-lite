@@ -6,7 +6,7 @@ gives that learner the words of *this* pack, in the meaning they have *in it*, i
 the pack and without a dictionary of the whole language.
 
 Code: `engine/wordlink.js` (finding words in a page), `engine/bridge.js` (everything the learner sees),
-`engine/src/36_bridge.css`, `NoemaPackCheck.checkBridge` in `engine/packcheck.js` (shared with the connector), the tool
+`engine/src/36_bridge.css`, `checkBridge` in `src/features/content/domain/bridge.ts` (`NoemaCore.content`, shared with the connector and `tools/bridge.py`), the tool
 `tools/bridge.py`, words `i18n/bridge/` (en; drafts el, ru, fr, ar-EG). Test: `tests/bridge.js`. Pilot: Databricks (English) →
 Greek, Russian, Arabic, chapter 1 complete; test packs in Greek, Russian, Arabic, German and French (`tests/fixtures/bridges/`), each with
 bridges into the other five, so **every direction among English, Greek, Russian, Arabic, German and French** that a pack
@@ -82,7 +82,7 @@ Next to the subject (`library/subjects/<id>/bridges/`), or next to a pack's `.js
   **stale** (shown as "the text changed since this translation was written") until someone checks it and runs `stamp`.
 * `status`: `draft` until a person who speaks the language reviewed it, then `reviewed`.
 * Plain text only (no markup), translation ≤ 200 characters, note ≤ 400, preview ≤ 1500, ≤ 30 key words a section.
-* Block ids (`at: "<section>/<block id>"`) are the app's own (`NoemaCatalog.blockIds`, the same in `tools/bridge.py`).
+* Block ids (`at: "<section>/<block id>"`) are the app's own (`NoemaCore.catalog.blockIds`, src/features/catalog; the same in `tools/bridge.py`).
 
 * `cues` (core only, optional) on a sense: words of the source language whose presence in the same sentence means this
   sense (*order* sequence: `"arrival order"`, `"in order"`; purchase: `"e-shop"`, `"customer"`). `tools/bridge.py anchor`
@@ -122,7 +122,7 @@ chapters, previews, entries) — that is where the badge comes from, without loa
 ### 2.4 Pairs: the language the learner READS → their native language (translations too)
 A bridge is one **pair**: from the language the learner reads to their native language. The language read is the pack's
 own **or one of its translations** (docs/i18n.md §10): a learner who opened the Greek translation of an English pack reads
-Greek, so the help they need is **el → ru**, not en → ru. Every new pack gets every pair (`tools/pack_rules.json`
+Greek, so the help they need is **el → ru**, not en → ru. Every new pack gets every pair (the pack rules' `languages`
 "languages" `"bridgesFrom": ["own", "translations"]`) — for an English pack translated into Greek, Russian, German and
 French (25 pairs):
 
@@ -199,7 +199,7 @@ the student's own lectures would use, then a plain explanation in brackets when 
 the section is about in 2–4 sentences; it never replaces the section. Work chapter by chapter, most important first:
 a chapter is useful when it is complete.
 
-**Every new pack needs them** (docs/PIPELINES.md §4b, `tools/pack_rules.json` "languages"): every pair of §2.4 — from the
+**Every new pack needs them** (docs/PIPELINES.md §4b, the pack rules' `languages`): every pair of §2.4 — from the
 pack's language and from each of its translations into each of English, Greek, Russian, Arabic, German and French other than
 the language read, each made after its translation — covering ≥ 90 % of the content words and ≥ 80 % of the
 everyday ones — learners may be at A2/B1, so the everyday words of the explanations count, not only the field's terms.

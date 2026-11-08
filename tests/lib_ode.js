@@ -5,11 +5,12 @@
       Hénon, the logistic map at r = 4), delay equations (Hutchinson), maps;
    3. the templates against their closed forms (SIR final size and peak, SEIR R0, PK one- and two-compartment, Michaelis–Menten by
       Lambert W, logistic and Gompertz, chemostat, toggle switch, repressilator, Hodgkin–Huxley, FitzHugh–Nagumo);
-   4. every runtime code (blow-up, nan, budget, zeno, stiff, …), the check codes, the Python twin's template table;
+   4. every runtime code (blow-up, nan, budget, zeno, stiff, …), the check codes, the golden template table of the former Python twin;
    5. the sim adapter, the Worker source in a fresh global, speed, and the reference activity predator-prey (its tests.json).
    Usage: node tests/lib_ode.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_ode');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
@@ -206,7 +207,7 @@ for (const [th, want, tol] of [[Math.PI / 2, 1.1803405990160962, 1e-8], [3.0, 2.
   ok(O.CODES.every(c => typeof c === 'string') && ['blow-up', 'nan', 'budget', 'zeno', 'stiff', 'stiff-switched', 'newton', 'map-escape', 'lyap-short', 'invariant-drift', 'period-not-found', 'template-quantity', 'degenerate-closed-form', 'stopped', 'non-hyperbolic', 'time'].every(c => O.CODES.includes(c)), 'every runtime code above is in NoemaLibODE.CODES (the flag output names them)');
 }
 
-// ---------- 5. checks, the Python twin ----------
+// ---------- 5. checks, the golden outputs of the former Python twin ----------
 {
   const ck = s => O.checkSpec(s).filter(p => p.level === 'error').map(p => p.code + ' ' + p.path);
   ok(!ck(spec({ template: 'sir', solve: { tEnd: 10 } }, [S('R0', 'quantity', { name: 'R0' })])).length, 'a template spec with a quantity has no problems');
@@ -217,10 +218,10 @@ for (const [th, want, tol] of [[Math.PI / 2, 1.1803405990160962, 1e-8], [3.0, 2.
   ok(ck(spec({ states: [{ id: 'x', init: 1 }], rhs: { x: '-x' }, events: [{ id: 'e', when: 'x', at: 1 }], solve: { tEnd: 1 } }, [])).includes('event model.events[0]'), 'an event with when and at: event');
   const ex = O.exprs(spec({ states: [{ id: 'x', init: 'x0' }], rhs: { x: '-k*x' }, solve: { tEnd: 'T' } }, [S('a', 'at', { var: 'x', t: 'T/2' })]));
   ok(JSON.stringify(ex) === JSON.stringify([['x0', 'model.states[0].init', []], ['-k*x', 'model.rhs.x', ['x', 't']], ['T', 'model.solve.tEnd', []], ['T/2', 'outputs[0].t', []]]), 'exprs: every expression with its local names (the states and t inside the equations, none outside)');
-  const pyMeta = JSON.parse(execFileSync('python3', ['-c', 'import json, lib_ode; print(json.dumps(lib_ode.TMETA))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(pyMeta) === JSON.stringify(O.templateMeta()), `tools/lib_ode.py TMETA = templateMeta() of the JS (${Object.keys(pyMeta).length} templates)`);
-  const pyLists = JSON.parse(execFileSync('python3', ['-c', 'import json, lib_ode as M; print(json.dumps([M.CODES, M.METHODS, M.SERIES, M.SCALARS, M.SCENES]))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8' }));
-  ok(JSON.stringify(pyLists) === JSON.stringify([O.CODES, O.METHODS, O.SERIES, O.SCALARS, O.SCENES]), 'the Python twin has the same codes, methods and output names');
+  const pyMeta = want('tmeta', undefined, O.templateMeta());
+  ok(JSON.stringify(pyMeta) === JSON.stringify(O.templateMeta()), `the golden TMETA of the former twin tools/lib_ode.py = templateMeta() of the JS (${Object.keys(pyMeta).length} templates)`);
+  const pyLists = want('tables', undefined, [O.CODES, O.METHODS, O.SERIES, O.SCALARS, O.SCENES]);
+  ok(JSON.stringify(pyLists) === JSON.stringify([O.CODES, O.METHODS, O.SERIES, O.SCALARS, O.SCENES]), 'the same, as the golden tables of the former Python twin: codes, methods and output names');
 }
 
 // ---------- 6. the adapter, the Worker, speed, the reference activity ----------

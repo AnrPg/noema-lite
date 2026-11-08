@@ -64,7 +64,6 @@ export interface Cloud {
   pull(acc: string): Promise<unknown>;
   pullConvos(acc: string): Promise<unknown>;
   startAutoSync(acc: string): void;
-  lease: { check(o: { take: boolean }): Promise<string> };
 }
 export interface CloudStatus {
   readonly error?: string;

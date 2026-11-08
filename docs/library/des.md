@@ -10,9 +10,8 @@ waits, time-weighted queue lengths, utilisation, throughput and counts with Stud
 replications, or from batch means of one long run, after a fixed warm-up or one found by MSER-5. Where queueing theory has an exact
 value it gives that too, and says whether the interval covers it.
 
-The Python twin is `tools/lib_des.py` (`ID`, `check_spec`, `exprs`, `keys`). It checks and does not compute, and it gives the same
-problems (code, path, message, level) as the JS `checkSpec`. Tests: `node tests/lib_des.js` (60 assertions against queueing theory,
-birth–death chains and exact counts; JS ↔ Python parity on `tests/fixtures/enginelib/des.json`, 29 specs: 7 good, 22 bad). The
+Tests: `node tests/lib_des.js` (60 assertions against queueing theory,
+birth–death chains and exact counts; the golden outputs of the former Python twin on `tests/fixtures/enginelib/des.json`, 29 specs: 7 good, 22 bad). The
 reference activity is `tools/activities_examples/ed-triage`: an emergency department with triage, two patient classes,
 pre-emptive priority and patients who leave unseen.
 

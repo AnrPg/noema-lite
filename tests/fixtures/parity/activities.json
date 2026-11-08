@@ -1,0 +1,3117 @@
+{
+ "packs": {
+  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "out": {
+   "good": [
+    0,
+    0,
+    null
+   ],
+   "no format": [
+    1,
+    0,
+    null
+   ],
+   "bad id": [
+    3,
+    0,
+    null
+   ],
+   "later runtime": [
+    2,
+    0,
+    null
+   ],
+   "py-module without its Python and spec": [
+    2,
+    0,
+    [
+     "activity alias-lab: the Python file (activities/alias-lab/main.py) is missing",
+     "activity alias-lab: the spec (activities/alias-lab/spec.json: the controls, readouts and plots the app draws) is missing"
+    ]
+   ],
+   "sim-spec without its spec": [
+    3,
+    0,
+    null
+   ],
+   "unknown runtime": [
+    2,
+    0,
+    null
+   ],
+   "no fallback": [
+    2,
+    0,
+    null
+   ],
+   "fallback picture missing": [
+    1,
+    0,
+    null
+   ],
+   "missing locale": [
+    1,
+    0,
+    null
+   ],
+   "keys differ": [
+    1,
+    0,
+    null
+   ],
+   "network": [
+    1,
+    0,
+    null
+   ],
+   "handler": [
+    1,
+    0,
+    null
+   ],
+   "sha mismatch": [
+    1,
+    0,
+    null
+   ],
+   "no requires": [
+    1,
+    0,
+    null
+   ],
+   "unknown activity": [
+    1,
+    0,
+    null
+   ],
+   "checks grading": [
+    2,
+    0,
+    null
+   ],
+   "bad seed": [
+    1,
+    0,
+    null
+   ],
+   "bad height": [
+    1,
+    0,
+    null
+   ],
+   "too many hints": [
+    1,
+    0,
+    null
+   ],
+   "spec good": [
+    0,
+    0,
+    null
+   ],
+   "spec: no format": [
+    1,
+    0,
+    null
+   ],
+   "spec: unknown field": [
+    1,
+    0,
+    null
+   ],
+   "spec: unknown engine": [
+    2,
+    0,
+    null
+   ],
+   "spec: model for formula@1": [
+    1,
+    0,
+    null
+   ],
+   "spec: outputs for formula@1": [
+    1,
+    0,
+    null
+   ],
+   "spec: no params": [
+    3,
+    0,
+    null
+   ],
+   "spec: 25 params": [
+    3,
+    0,
+    null
+   ],
+   "spec: min > max": [
+    1,
+    0,
+    null
+   ],
+   "spec: default out of range": [
+    1,
+    0,
+    null
+   ],
+   "spec: log scale from 0": [
+    1,
+    0,
+    null
+   ],
+   "spec: a reserved name": [
+    2,
+    0,
+    null
+   ],
+   "spec: pi as a name": [
+    1,
+    0,
+    null
+   ],
+   "spec: false as a name": [
+    2,
+    0,
+    null
+   ],
+   "spec: true as the x var": [
+    2,
+    0,
+    null
+   ],
+   "spec: a name used twice": [
+    1,
+    0,
+    null
+   ],
+   "spec: unknown variable": [
+    1,
+    0,
+    null
+   ],
+   "spec: not the language": [
+    1,
+    0,
+    null
+   ],
+   "spec: property access": [
+    1,
+    0,
+    null
+   ],
+   "spec: a later derived value used early": [
+    1,
+    0,
+    null
+   ],
+   "spec: bad choice": [
+    2,
+    0,
+    null
+   ],
+   "spec: a good choice and toggle": [
+    0,
+    0,
+    null
+   ],
+   "spec: label not in the tables": [
+    1,
+    0,
+    null
+   ],
+   "spec: label missing in one table": [
+    2,
+    0,
+    null
+   ],
+   "spec: 7 plots": [
+    1,
+    0,
+    null
+   ],
+   "spec: 2001 points": [
+    1,
+    0,
+    null
+   ],
+   "spec: x var clashes": [
+    2,
+    0,
+    null
+   ],
+   "spec: series plot without an engine series": [
+    2,
+    0,
+    null
+   ],
+   "spec: bad axis limit expression": [
+    1,
+    0,
+    null
+   ],
+   "spec: y min above max": [
+    1,
+    0,
+    null
+   ],
+   "spec: bad mark": [
+    1,
+    0,
+    null
+   ],
+   "spec: unit too long": [
+    1,
+    0,
+    null
+   ],
+   "spec: not an object": [
+    1,
+    0,
+    null
+   ],
+   "spec: over 64 KB": [
+    41,
+    0,
+    null
+   ],
+   "spec: engine:… in requires": [
+    1,
+    0,
+    null
+   ],
+   "checks: none": [
+    1,
+    0,
+    null
+   ],
+   "checks: unknown name": [
+    1,
+    0,
+    null
+   ],
+   "checks: bad weight": [
+    1,
+    0,
+    null
+   ],
+   "checks: bad pass": [
+    1,
+    0,
+    null
+   ],
+   "checks: label missing": [
+    1,
+    0,
+    null
+   ],
+   "checks: on an html-app": [
+    1,
+    0,
+    null
+   ],
+   "reported on a sim-spec": [
+    1,
+    0,
+    null
+   ],
+   "task param not a const": [
+    1,
+    0,
+    null
+   ],
+   "task param not a number": [
+    1,
+    0,
+    null
+   ],
+   "circuit good": [
+    0,
+    0,
+    null
+   ],
+   "circuit: rc-transient (no bench)": [
+    0,
+    0,
+    null
+   ],
+   "circuit: no engine:… in requires": [
+    1,
+    0,
+    null
+   ],
+   "circuit: no model": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bad netlist": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an unknown model field": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a binding to no part": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a binding to no prop": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a binding with a bad expression": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bad transient": [
+    1,
+    0,
+    null
+   ],
+   "circuit: bad noise": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an output on no node": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bad stat": [
+    2,
+    0,
+    null
+   ],
+   "circuit: a good scalar output in a readout": [
+    0,
+    0,
+    null
+   ],
+   "circuit: a bench name in a readout": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bench on formula@1": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bench without faults": [
+    7,
+    0,
+    null
+   ],
+   "circuit: a fault id twice": [
+    2,
+    0,
+    null
+   ],
+   "circuit: a fault on no part": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an unknown fault kind": [
+    1,
+    0,
+    null
+   ],
+   "circuit: open-trace on a side that does not touch": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a point on no node": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a point on no pin": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a point label missing": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an unknown instrument": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an ammeter on no part": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a scope and a logic analyser": [
+    0,
+    0,
+    null
+   ],
+   "circuit: a bad budget": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a diagnosis that names no fault": [
+    2,
+    0,
+    null
+   ],
+   "circuit: a fault no diagnosis names": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a diagnosis label missing in one table": [
+    2,
+    0,
+    null
+   ],
+   "circuit: a diagnosis label missing everywhere": [
+    1,
+    0,
+    null
+   ],
+   "circuit: one option": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an unknown bench field": [
+    1,
+    0,
+    null
+   ],
+   "circuit: task.fault not a fault": [
+    1,
+    0,
+    null
+   ],
+   "circuit: task.fault a list": [
+    0,
+    0,
+    null
+   ],
+   "circuit: task.fault a bad list": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a check on the diagnosis index": [
+    0,
+    0,
+    null
+   ],
+   "circuit: a check on an unknown name": [
+    1,
+    0,
+    null
+   ],
+   "circuit: the event log on a circuit bench": [
+    1,
+    0,
+    null
+   ],
+   "circuit: good ac, power and instrument extras": [
+    0,
+    0,
+    null
+   ],
+   "circuit: ac on a resistor": [
+    1,
+    0,
+    null
+   ],
+   "circuit: ac without fStop": [
+    1,
+    0,
+    null
+   ],
+   "circuit: ac fStop below fStart": [
+    1,
+    0,
+    null
+   ],
+   "circuit: ac with too many points": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an ac output with no model.ac": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an ac point with no frequency": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an ac curve of a stat": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an ac output on no node": [
+    1,
+    0,
+    null
+   ],
+   "circuit: ref on a node output": [
+    1,
+    0,
+    null
+   ],
+   "circuit: power of no part": [
+    2,
+    0,
+    null
+   ],
+   "circuit: power without at or stat": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a probe in a bad mode": [
+    1,
+    0,
+    null
+   ],
+   "circuit: an ohmmeter with zin": [
+    1,
+    0,
+    null
+   ],
+   "circuit: modes on the ohmmeter": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a mode twice": [
+    1,
+    0,
+    null
+   ],
+   "circuit: zin on the ammeter": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a meter window without tEnd": [
+    1,
+    0,
+    null
+   ],
+   "circuit: leads on the voltmeter": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a lead with a negative inductance": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a lead label missing": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bode with no source": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bode without fStart": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a probe window that averages nothing": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a probe window without tEnd": [
+    1,
+    0,
+    null
+   ],
+   "circuit: a bench meter window that averages nothing": [
+    1,
+    0,
+    null
+   ],
+   "circuit: fStart on the scope": [
+    1,
+    0,
+    null
+   ],
+   "py good": [
+    0,
+    0,
+    []
+   ],
+   "py: graded \"reported\" (noema.result)": [
+    0,
+    0,
+    []
+   ],
+   "py: a task param for Python only": [
+    0,
+    0,
+    []
+   ],
+   "py: scipy declared and imported": [
+    0,
+    0,
+    []
+   ],
+   "py: an allow-listed extra with requiresNetwork": [
+    0,
+    0,
+    []
+   ],
+   "py: no runtime in requires": [
+    1,
+    0,
+    [
+     "pack.requires must list runtime:py-module@1 (make_pack.py writes it)"
+    ]
+   ],
+   "py: no Python file": [
+    1,
+    0,
+    [
+     "activity py-filter: the Python file (activities/py-filter/main.py) is missing"
+    ]
+   ],
+   "py: no spec": [
+    1,
+    0,
+    [
+     "activity py-filter: the spec (activities/py-filter/spec.json: the controls, readouts and plots the app draws) is missing"
+    ]
+   ],
+   "py: no step()": [
+    1,
+    0,
+    [
+     "activity py-filter: the Python file defines no step(inputs, state) at the top level"
+    ]
+   ],
+   "py: imports scipy without declaring it": [
+    1,
+    0,
+    [
+     "activity py-filter: the Python file imports scipy: list it in \"packages\""
+    ]
+   ],
+   "py: a package not on the list": [
+    1,
+    0,
+    [
+     "activity py-filter: package 'pandas' is not available (numpy, scipy and the allow-listed extras: quantiphy)"
+    ]
+   ],
+   "py: a package twice": [
+    1,
+    0,
+    [
+     "activity py-filter: packages lists a name twice"
+    ]
+   ],
+   "py: packages not a list": [
+    2,
+    0,
+    [
+     "activity py-filter: packages must be a list of names (numpy, scipy, quantiphy)",
+     "activity py-filter: the Python file imports numpy: list it in \"packages\""
+    ]
+   ],
+   "py: an extra without requiresNetwork": [
+    1,
+    0,
+    [
+     "activity py-filter: an extra package (quantiphy) is downloaded the first time: set \"requiresNetwork\": true"
+    ]
+   ],
+   "py: requiresNetwork not a boolean": [
+    1,
+    0,
+    [
+     "activity py-filter: requiresNetwork must be true or false"
+    ]
+   ],
+   "py: stepMs too long": [
+    1,
+    0,
+    [
+     "activity py-filter: stepMs is a whole number 100–10000 (the budget of one step(), in ms)"
+    ]
+   ],
+   "py: stepMs not whole": [
+    1,
+    0,
+    [
+     "activity py-filter: stepMs is a whole number 100–10000 (the budget of one step(), in ms)"
+    ]
+   ],
+   "py: import js": [
+    1,
+    0,
+    [
+     "activity py-filter: the browser (js, pyodide_js): Python has no page and no network here; return values from step() — found “import js”"
+    ]
+   ],
+   "py: the network": [
+    1,
+    0,
+    [
+     "activity py-filter: a network call: a Python activity has no network — found “pyodide.http”"
+    ]
+   ],
+   "py: urllib": [
+    1,
+    0,
+    [
+     "activity py-filter: a network call: a Python activity has no network — found “import urllib”"
+    ]
+   ],
+   "py: micropip": [
+    1,
+    0,
+    [
+     "activity py-filter: micropip: list the package in \"packages\" instead (only the allow-listed ones) — found “import micropip”"
+    ]
+   ],
+   "py: input()": [
+    1,
+    0,
+    [
+     "activity py-filter: input(): there is no console; the learner uses the controls of the spec — found “input(”"
+    ]
+   ],
+   "py: while True (a warning)": [
+    0,
+    1,
+    []
+   ],
+   "py: over 256 KB": [
+    1,
+    0,
+    [
+     "activity py-filter: the Python file is 271 KB (at most 256 KB)"
+    ]
+   ],
+   "py: sha mismatch": [
+    1,
+    0,
+    [
+     "activity py-filter: sha256 does not match the Python file"
+    ]
+   ],
+   "py: bytes mismatch": [
+    1,
+    0,
+    [
+     "activity py-filter: bytes does not match the Python file"
+    ]
+   ],
+   "py: spec names an engine": [
+    1,
+    0,
+    [
+     "activity py-filter: spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out"
+    ]
+   ],
+   "py: spec has a model": [
+    1,
+    0,
+    [
+     "activity py-filter: spec.model: a py-module@1 activity has no engine model (its Python code is the model)"
+    ]
+   ],
+   "py: spec has no outputs": [
+    3,
+    0,
+    [
+     "activity py-filter: spec.outputs: list what step() returns, at least one {id, kind: scalar | series}",
+     "ch01-e4: grade.checks[0].expr: unknown variable 'att1k' in “att1k <= -20”",
+     "ch01-e4: grade.checks[1].expr: unknown variable 'pass300' in “pass300 >= -3”"
+    ]
+   ],
+   "py: spec with a bench": [
+    1,
+    0,
+    [
+     "activity py-filter: spec.bench needs an engine that can take measurements (circuit-mna@1, twin@1)"
+    ]
+   ],
+   "py: a check on an unknown output": [
+    1,
+    0,
+    [
+     "ch01-e4: grade.checks[0].expr: unknown variable 'att2k' in “att2k <= -20”"
+    ]
+   ],
+   "py: a check on a series": [
+    1,
+    0,
+    [
+     "ch01-e4: grade.checks[0].expr: unknown variable 'gain' in “gain <= -20”"
+    ]
+   ],
+   "py: a task const not a number": [
+    1,
+    0,
+    [
+     "ch01-e4: task.params.fs must be a number"
+    ]
+   ],
+   "wasm good": [
+    0,
+    0,
+    null
+   ],
+   "wasm: through a sim-spec@1 spec (engine wasm@1)": [
+    0,
+    0,
+    null
+   ],
+   "wasm: the spec names no module": [
+    1,
+    1,
+    null
+   ],
+   "wasm: the module without its own spec in a block": [
+    1,
+    0,
+    null
+   ],
+   "wasm: sha256 does not match": [
+    2,
+    0,
+    null
+   ],
+   "wasm: not base64": [
+    2,
+    0,
+    null
+   ],
+   "wasm: no scratch and no alloc": [
+    2,
+    0,
+    null
+   ],
+   "wasm: a forbidden import": [
+    2,
+    0,
+    null
+   ],
+   "wasm: memory over the limit": [
+    2,
+    0,
+    null
+   ],
+   "wasm: the own spec on another engine": [
+    1,
+    0,
+    null
+   ],
+   "wasm: the own spec names another module": [
+    1,
+    0,
+    null
+   ],
+   "wasm: a model output not declared": [
+    1,
+    0,
+    null
+   ],
+   "wasm: a model input with an unknown name": [
+    1,
+    0,
+    null
+   ],
+   "wasm: no engine:wasm@1 in requires": [
+    1,
+    0,
+    null
+   ],
+   "wasm: graded \"reported\"": [
+    1,
+    0,
+    null
+   ],
+   "wasm: a check with an unknown name": [
+    1,
+    0,
+    null
+   ],
+   "embed good": [
+    0,
+    0,
+    null
+   ],
+   "embed: a pending provider (Wokwi)": [
+    1,
+    0,
+    null
+   ],
+   "embed: a pending provider (Falstad)": [
+    1,
+    0,
+    null
+   ],
+   "embed: an unknown provider": [
+    1,
+    0,
+    null
+   ],
+   "embed: http": [
+    1,
+    0,
+    null
+   ],
+   "embed: another origin": [
+    1,
+    0,
+    null
+   ],
+   "embed: an entry": [
+    1,
+    0,
+    null
+   ],
+   "embed: no credit": [
+    1,
+    0,
+    null
+   ],
+   "embed: no title": [
+    1,
+    0,
+    null
+   ],
+   "embed: in a sim exercise": [
+    1,
+    0,
+    null
+   ],
+   "embed: no runtime in requires": [
+    1,
+    0,
+    null
+   ],
+   "thermal good": [
+    0,
+    0,
+    null
+   ],
+   "thermal: no engine:… in requires": [
+    1,
+    0,
+    null
+   ],
+   "thermal: no network": [
+    1,
+    0,
+    null
+   ],
+   "thermal: a link with R and G": [
+    1,
+    0,
+    null
+   ],
+   "thermal: a node id twice": [
+    3,
+    0,
+    null
+   ],
+   "thermal: a binding to no element": [
+    1,
+    0,
+    null
+   ],
+   "thermal: a binding with a bad expression": [
+    1,
+    0,
+    null
+   ],
+   "thermal: a binding that is not the language": [
+    1,
+    0,
+    null
+   ],
+   "thermal: a bad transient expression": [
+    1,
+    0,
+    null
+   ],
+   "thermal: too many steps": [
+    1,
+    0,
+    null
+   ],
+   "thermal: an output on no node": [
+    1,
+    0,
+    null
+   ],
+   "thermal: a time constant beyond the capacities": [
+    1,
+    0,
+    null
+   ],
+   "thermal: an output at with an unknown name": [
+    1,
+    0,
+    null
+   ],
+   "thermal: a good output at an expression": [
+    0,
+    0,
+    null
+   ],
+   "thermal: a bench": [
+    1,
+    0,
+    null
+   ],
+   "pid good": [
+    0,
+    0,
+    null
+   ],
+   "pid: an unknown plant": [
+    1,
+    0,
+    null
+   ],
+   "pid: no transient": [
+    1,
+    0,
+    null
+   ],
+   "pid: a gain that is not a number": [
+    1,
+    0,
+    null
+   ],
+   "pid: a binding to no element": [
+    1,
+    0,
+    null
+   ],
+   "pid: a binding with a bad expression": [
+    1,
+    0,
+    null
+   ],
+   "pid: an unknown metric": [
+    1,
+    0,
+    null
+   ],
+   "pid: a scalar signal without at or stat": [
+    1,
+    0,
+    null
+   ],
+   "pid: an output at with an unknown name": [
+    1,
+    0,
+    null
+   ],
+   "pid: a transient dt that is not the language": [
+    1,
+    0,
+    null
+   ],
+   "pid: a good anti-windup toggle": [
+    0,
+    0,
+    null
+   ],
+   "rf good": [
+    0,
+    0,
+    null
+   ],
+   "rf: no link": [
+    1,
+    0,
+    null
+   ],
+   "rf: an unknown path model": [
+    1,
+    0,
+    null
+   ],
+   "rf: a frequency that is not a number": [
+    1,
+    0,
+    null
+   ],
+   "rf: a binding to no field": [
+    1,
+    0,
+    null
+   ],
+   "rf: a binding with a bad expression": [
+    1,
+    0,
+    null
+   ],
+   "rf: an empty binding expression": [
+    1,
+    0,
+    null
+   ],
+   "rf: an output it cannot compute": [
+    1,
+    0,
+    null
+   ],
+   "rf: a series that is not a series": [
+    1,
+    0,
+    null
+   ],
+   "rf: a check on an unknown name": [
+    1,
+    0,
+    null
+   ],
+   "twin good": [
+    0,
+    0,
+    null
+   ],
+   "twin: no device": [
+    1,
+    0,
+    null
+   ],
+   "twin: sensing longer than the period": [
+    1,
+    0,
+    null
+   ],
+   "twin: an unknown chemistry": [
+    1,
+    0,
+    null
+   ],
+   "twin: a binding to no field": [
+    1,
+    0,
+    null
+   ],
+   "twin: a binding with a bad expression": [
+    1,
+    0,
+    null
+   ],
+   "twin: an output on no sensor": [
+    1,
+    0,
+    null
+   ],
+   "twin bench good": [
+    0,
+    0,
+    null
+   ],
+   "twin bench: a fault of no kind": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: a stuck sensor the device does not have": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: a point at no probe of the device": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: a voltmeter on the current": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: a scope on the battery": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: an ammeter on a part": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: the event log on a point": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: a thermometer and a clock check": [
+    0,
+    0,
+    null
+   ],
+   "twin bench: the thermometer on a point": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: meter modes on the twin": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: a logic analyser": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: task.fault not a fault": [
+    1,
+    0,
+    null
+   ],
+   "twin bench: a diagnosis label missing in one table": [
+    2,
+    0,
+    null
+   ],
+   "h5p good": [
+    0,
+    0,
+    null
+   ],
+   "h5p good in el and ru": [
+    0,
+    0,
+    null
+   ],
+   "h5p: strings are checked when given": [
+    1,
+    0,
+    null
+   ],
+   "h5p: no sha256": [
+    1,
+    0,
+    null
+   ],
+   "h5p: a bad sha256": [
+    1,
+    0,
+    null
+   ],
+   "h5p: no bytes": [
+    1,
+    0,
+    null
+   ],
+   "h5p: entry not an .h5p": [
+    1,
+    0,
+    null
+   ],
+   "h5p: entry that leaves the folder": [
+    1,
+    0,
+    null
+   ],
+   "h5p: an html bundle too": [
+    1,
+    0,
+    null
+   ],
+   "h5p: inline h5p not base64 text": [
+    1,
+    0,
+    null
+   ],
+   "h5p: a translation missing": [
+    1,
+    0,
+    null
+   ],
+   "h5p: a language the pack is not read in": [
+    1,
+    0,
+    null
+   ],
+   "h5p: a bad h5pByLocale entry": [
+    1,
+    0,
+    null
+   ],
+   "h5p: a bad l10n": [
+    1,
+    0,
+    null
+   ],
+   "h5p: another package without sha256": [
+    1,
+    0,
+    null
+   ],
+   "h5p: h5pByLocale not an object": [
+    1,
+    0,
+    null
+   ],
+   "h5p: no requires": [
+    1,
+    0,
+    null
+   ],
+   "h5p: checks grading": [
+    1,
+    0,
+    null
+   ]
+  }
+ },
+ "p6": {
+  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "out": [
+   [
+    [],
+    []
+   ],
+   [
+    [],
+    []
+   ],
+   [
+    [
+     "activity osc-sim: spec.model.module: no wasm-module@1 item \"nope\" in the pack"
+    ],
+    [
+     "activity osc-core: not used by any interactive block or sim exercise"
+    ]
+   ],
+   [
+    [
+     "ch01-s01 block 1: interactive: activity wasm-oscillator is a wasm-module@1 module without its own spec: show it through a sim-spec@1 spec (engine wasm@1, model.module) or give it a spec"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: sha256: does not match the module",
+     "activity wasm-oscillator: spec.model.module: the module wasm-oscillator is refused (sha256: does not match the module)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: wasm: not valid base64",
+     "activity wasm-oscillator: spec.model.module: the module wasm-oscillator is refused (wasm: not valid base64)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: abi.scratch: the module exports no alloc(bytes); give the byte offset of its input/output area",
+     "activity wasm-oscillator: spec.model.module: the module wasm-oscillator is refused (abi.scratch: the module exports no alloc(bytes); give the byte offset of its input/output area)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: import: env.fetch_url (func) is not in the host ABI (module \"noema\": noema_log, noema_now, noema_random, memory)",
+     "activity wasm-oscillator: spec.model.module: the module wasm-oscillator is refused (import: env.fetch_url (func) is not in the host ABI (module \"noema\": noema_log, noema_now, noema_random, memory))"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: memory: the declared maximum is 65536 pages (at most 16)",
+     "activity wasm-oscillator: spec.model.module: the module wasm-oscillator is refused (memory: the declared maximum is 65536 pages (at most 16))"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: spec.engine: the own spec of a wasm-module@1 item runs on wasm@1 (leave engine out)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: spec.model.module: the own spec of a wasm-module@1 item runs this item (leave module out)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: spec.model.outputs[3]: v is not in spec.outputs"
+    ],
+    []
+   ],
+   [
+    [
+     "activity wasm-oscillator: spec.model.inputs[0]: unknown variable 'kk' in “kk”"
+    ],
+    []
+   ],
+   [
+    [
+     "pack.requires must list engine:wasm@1 (make_pack.py writes it)"
+    ],
+    []
+   ],
+   [
+    [
+     "ch01-e4: a wasm-module@1 activity reports nothing itself: grade it with {\"mode\": \"checks\", \"checks\": […]}"
+    ],
+    []
+   ],
+   [
+    [
+     "ch01-e4: grade.checks[0].expr: unknown variable 'Eend' in “Eend < 1”"
+    ],
+    []
+   ],
+   [
+    [],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: provider-pending: provider wokwi is not allowed yet (its embedding terms are not confirmed)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: provider-pending: provider falstad is not allowed yet (its embedding terms are not confirmed)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: provider-unknown: provider must be one of the allow-list (tools/embed_allow.json)"
+    ],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: url-scheme: url does not match provider phet exactly"
+    ],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: url-origin: url does not match provider phet exactly"
+    ],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: not-embed: an embed carries no bundle, spec or entry"
+    ],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: credit-missing: credit is required"
+    ],
+    []
+   ],
+   [
+    [
+     "activity ohm-phet: strings-title: strings.<locale>.title (what opens, in each language) is required"
+    ],
+    []
+   ],
+   [
+    [
+     "ch01-e5: sim-embed: activity ohm-phet is an outside page (explore only): use it in a theory block"
+    ],
+    []
+   ],
+   [
+    [
+     "pack.requires must list runtime:external-embed@1 (make_pack.py writes it)"
+    ],
+    []
+   ]
+  ]
+ },
+ "spec": {
+  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "out": [
+   [],
+   [
+    "spec: format must be \"noema.sim-spec/v1\""
+   ],
+   [
+    "spec: unknown field 'code'"
+   ],
+   [
+    "spec: unknown engine 'warp@9' (this version knows agents@1, anatomy@1, circuit-mna@1, clinic@1, craft@1, des@1, field@1, formula@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, pid@1, prob@1, rf@1, rhetoric@1, seq@1, text@1, thermal@1, timeline@1, twin@1, wasm@1)"
+   ],
+   [
+    "spec: model configures another engine; formula@1 has none"
+   ],
+   [
+    "spec.outputs come from an engine; formula@1 has none (use derived)"
+   ],
+   [
+    "spec.params must be a list of 1–24 controls",
+    "spec.derived[0].expr: unknown variable 'R' in “R * C”"
+   ],
+   [
+    "spec.params must be a list of 1–24 controls",
+    "spec.derived[0].expr: unknown variable 'R' in “R * C”"
+   ],
+   [
+    "spec.params[0]: min and max must be numbers, min < max"
+   ],
+   [
+    "spec.params[0].default must be a number from min to max"
+   ],
+   [
+    "spec.params[1]: a log scale needs min > 0"
+   ],
+   [
+    "spec.params[0].id: \"constructor\" is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)",
+    "spec.derived[0].expr: unknown variable 'R' in “R * C”"
+   ],
+   [
+    "spec.consts: \"pi\" is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)"
+   ],
+   [
+    "spec.params[0].id: \"false\" is not a usable name (a letter or _, then letters, digits, _; not pi, e or a reserved word)",
+    "spec.derived[0].expr: unknown variable 'R' in “R * C”"
+   ],
+   [
+    "spec.plots[0].x.var: 'true' must be a new name for the x axis (not one of the spec's names)",
+    "spec.plots[0].series[0].expr: unknown variable 'f' in “-10 * log10(1 + (f / fc)^2)”"
+   ],
+   [
+    "spec.derived[3].id: the name fc is used twice"
+   ],
+   [
+    "spec.derived[0].expr: unknown variable 'L' in “R * L”"
+   ],
+   [
+    "spec.readouts[0].expr: '.' (property access) is not allowed in “Math.sqrt(R)”"
+   ],
+   [
+    "spec.readouts[0].expr: '.' (property access) is not allowed in “R.constructor”"
+   ],
+   [
+    "spec.derived[0].expr: unknown variable 'fc' in “fc * 2”"
+   ],
+   [
+    "spec.params[2].options: two options have the same value",
+    "spec.params[2].default must be the value of one of the options"
+   ],
+   [],
+   [
+    "spec: the string nope is missing in strings.el, strings.en, strings.ru"
+   ],
+   [
+    "spec: the string time is missing in strings.el"
+   ],
+   [
+    "spec.plots must be a list of at most 6 plots"
+   ],
+   [
+    "spec.plots[0].points is a whole number 2–2000"
+   ],
+   [
+    "spec.plots[0].x.var: 'R' must be a new name for the x axis (not one of the spec's names)",
+    "spec.plots[0].series[0].expr: unknown variable 'f' in “-10 * log10(1 + (f / fc)^2)”"
+   ],
+   [
+    "spec.plots[0].x.series must name a series output of the engine",
+    "spec.plots[0].series[0].y must name a series output of the engine"
+   ],
+   [
+    "spec.plots[1].x.max: unknown variable 'taux' in “5 * taux”"
+   ],
+   [
+    "spec.plots[0].y: min must be below max"
+   ],
+   [
+    "spec.plots[0].marks[3] must be {axis: x | y, expr, label?}"
+   ],
+   [
+    "spec.params[0].unit must be a text of at most 16 characters"
+   ],
+   [
+    "spec: a JSON object is required (activities/<id>/spec.json)"
+   ],
+   [
+    "spec: at most 64 KB",
+    "spec.derived[3].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[4].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[5].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[6].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[7].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[8].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[9].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[10].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[11].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[12].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[13].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[14].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[15].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[16].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[17].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[18].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[19].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[20].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[21].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[22].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[23].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[24].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[25].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[26].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[27].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[28].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[29].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[30].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[31].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[32].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[33].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[34].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[35].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[36].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[37].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[38].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[39].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[40].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[41].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”",
+    "spec.derived[42].expr: the expression is longer than 2000 characters in “R + R + R + R + R + R + R + R + R + R + R + R + R + R + R + ”"
+   ],
+   [
+    "spec: unknown engine 'warp@9' (this version knows agents@1, anatomy@1, circuit-mna@1, clinic@1, craft@1, des@1, field@1, formula@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, pid@1, prob@1, rf@1, rhetoric@1, seq@1, text@1, thermal@1, timeline@1, twin@1, wasm@1)"
+   ],
+   [],
+   [],
+   [],
+   [
+    "spec.model: circuit-mna@1 needs a model {netlist, bindings?, transient?, noise?}"
+   ],
+   [
+    "spec.model.netlist.elements[2].value: needs a positive number"
+   ],
+   [
+    "spec.model: unknown field 'spice'"
+   ],
+   [
+    "spec.model.bindings[0].element is not a part of the netlist"
+   ],
+   [
+    "spec.model.bindings[0].prop cannot be set on this part (value of R, C, L and a DC source; on of a switch; pulse.v2, sine.freq, pwm.duty … of a source with that waveform)"
+   ],
+   [
+    "spec.model.bindings[0].expr: unknown variable 'nope' in “closed && nope”"
+   ],
+   [
+    "spec.model.transient: tEnd / dt is more than 200000 steps"
+   ],
+   [
+    "spec.model.noise is {rel?, abs?}: numbers from 0 to 1 (the meter's relative and absolute error)"
+   ],
+   [
+    "spec.outputs[0].node is not a node of the netlist"
+   ],
+   [
+    "spec.outputs[0].stat is one of final, min, max, mean, pp, rms",
+    "spec.outputs[0] needs model.transient {tEnd, dt?}"
+   ],
+   [],
+   [
+    "spec.readouts[0].expr: unknown variable 'diagnosis' in “diagnosis”"
+   ],
+   [
+    "spec.bench needs an engine that can take measurements (circuit-mna@1, twin@1)"
+   ],
+   [
+    "spec.bench.faults must be a list of 1–16 faults {id, apply}",
+    "spec.bench.diagnosis.options[2].fault must be the id of one of spec.bench.faults",
+    "spec.bench.diagnosis.options[3].fault must be the id of one of spec.bench.faults",
+    "spec.bench.diagnosis.options[4].fault must be the id of one of spec.bench.faults",
+    "spec.bench.diagnosis.options[5].fault must be the id of one of spec.bench.faults",
+    "spec.bench.diagnosis.options[6].fault must be the id of one of spec.bench.faults"
+   ],
+   [
+    "spec.bench.faults[1].id: the fault ledReversed is listed twice",
+    "spec.bench.diagnosis.options[5].fault must be the id of one of spec.bench.faults"
+   ],
+   [
+    "spec.bench.faults[0].apply[0].element: not a part of the netlist"
+   ],
+   [
+    "spec.bench.faults[0].apply[0].kind: one of open, short, drift, open-trace, reverse"
+   ],
+   [
+    "spec.bench.faults[4].apply[0].side[0]: does not touch the node"
+   ],
+   [
+    "spec.bench.points[0].at must be a node, a test point, gnd or a pin such as @R1.0 of the netlist"
+   ],
+   [
+    "spec.bench.points[3].at must be a node, a test point, gnd or a pin such as @R1.0 of the netlist"
+   ],
+   [
+    "spec: the string nope is missing in strings.el, strings.en, strings.ru"
+   ],
+   [
+    "spec.bench.instruments[3].kind is one of V, I, R, scope, logic, bode"
+   ],
+   [
+    "spec.bench.instruments[1].parts[0]: element must be a part of the netlist (and pin one of its pins)"
+   ],
+   [],
+   [
+    "spec.bench.budget is a whole number 1–100 (the measurements allowed)"
+   ],
+   [
+    "spec.bench.diagnosis.options[2].fault must be the id of one of spec.bench.faults",
+    "spec.bench.diagnosis: no option names the fault rOpen (the learner could not diagnose it)"
+   ],
+   [
+    "spec.bench.diagnosis: no option names the fault ledReversed (the learner could not diagnose it)"
+   ],
+   [
+    "spec: the string dxTrace is missing in strings.ru"
+   ],
+   [
+    "spec: the string dxNope is missing in strings.el, strings.en, strings.ru"
+   ],
+   [
+    "spec.bench.diagnosis.options must be a list of 2–12 options {label, fault?}"
+   ],
+   [
+    "spec.bench: unknown field 'answer'"
+   ],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [
+    "spec.bench.instruments[3].kind is one of V, I, R, scope, logic, bode"
+   ],
+   [],
+   [
+    "spec.model.ac.source must be a V or I part of the netlist (the source the analysis excites)"
+   ],
+   [
+    "spec.model.ac.fStop is required (Hz)"
+   ],
+   [
+    "spec.model.ac: fStop must be above fStart"
+   ],
+   [
+    "spec.model.ac.points is a whole number 2–1000"
+   ],
+   [
+    "spec.outputs[0] needs model.ac {source, fStart, fStop, points?}"
+   ],
+   [
+    "spec.outputs[0].at is required: the frequency (Hz) of this db"
+   ],
+   [
+    "spec.outputs[0].ac is one of f, db, phase, mag on a series output"
+   ],
+   [
+    "spec.outputs[0].node is not a node of the netlist (where the response is read)"
+   ],
+   [
+    "spec.outputs[0]: ref belongs to an ac output"
+   ],
+   [
+    "spec.outputs[0].power is not a part of the netlist (the part whose power is read)",
+    "spec.outputs[0] needs model.transient {tEnd, dt?}"
+   ],
+   [
+    "spec.outputs[0]: a power is read over the transient: give at or stat"
+   ],
+   [
+    "spec.outputs[0].probe must be a reading {kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?} on a scalar output"
+   ],
+   [
+    "spec.outputs[0].probe must be a reading {kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?} on a scalar output"
+   ],
+   [
+    "spec.bench.instruments[2].modes belongs to the multimeter (V, I): a list of dc, ac, rms, avg, each once"
+   ],
+   [
+    "spec.bench.instruments[0].modes belongs to the multimeter (V, I): a list of dc, ac, rms, avg, each once"
+   ],
+   [
+    "spec.bench.instruments[1].zin belongs to the voltmeter, the oscilloscope and the logic analyser: their input resistance in Ω (0 = ideal)"
+   ],
+   [
+    "spec.bench.instruments[0]: the multimeter's averaging window needs tEnd"
+   ],
+   [
+    "spec.bench.instruments[0].leads belongs to the oscilloscope: a list of 1–4 ground leads {label, lead, cin?}"
+   ],
+   [
+    "spec.bench.instruments[3].leads[0].lead is the ground lead's inductance in H (0 = none; about 1 nH per mm of wire)"
+   ],
+   [
+    "spec: the string leadNope is missing in strings.el, strings.en, strings.ru"
+   ],
+   [
+    "spec.bench.instruments[3].source must be a V or I part of the netlist (the source the analyser sweeps)"
+   ],
+   [
+    "spec.bench.instruments[3].fStart is required (Hz)"
+   ],
+   [
+    "spec.outputs[0].probe must be a reading {kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?} on a scalar output"
+   ],
+   [
+    "spec.outputs[0].probe must be a reading {kind: V | I | R, a, b? | element, pin?, mode?, zin?, tEnd?, dt?, tStart?} on a scalar output"
+   ],
+   [
+    "spec.bench.instruments[0]: the multimeter's averaging window needs tStart below tEnd"
+   ],
+   [
+    "spec.bench.instruments[3].fStart belongs to the frequency response analyser (bode)"
+   ],
+   [],
+   [],
+   [
+    "spec.model.network: needs a network {format: \"noema.thermal/v1\", nodes, links, sources?, thermostats?}"
+   ],
+   [
+    "spec.model.network.links[0]: needs exactly one of R, G, conv, rad"
+   ],
+   [
+    "spec.model.network.nodes[1].id: duplicate id J",
+    "spec.model.network.links[0].b: not a node of the network",
+    "spec.model.network.links[1].a: not a node of the network"
+   ],
+   [
+    "spec.model.bindings[0].element: not an id of the network (or ambient)"
+   ],
+   [
+    "spec.model.bindings[0].expr: unknown variable 'nope' in “Rsa * nope”"
+   ],
+   [
+    "spec.model.bindings[1].expr: '.' (property access) is not allowed in “Math.max(P, 1)”"
+   ],
+   [
+    "spec.model.transient.tEnd: unknown variable 'Rsa2' in “300 * Rsa2”"
+   ],
+   [
+    "spec.model.transient: tEnd / dt is more than 200000 steps"
+   ],
+   [
+    "spec.outputs[1].node: not a node of the network"
+   ],
+   [
+    "spec.outputs[5].tau: a whole number from 1 to the number of nodes with a heat capacity, on a scalar output"
+   ],
+   [
+    "spec.outputs[6].at: unknown variable 'tLater' in “tLater”"
+   ],
+   [],
+   [
+    "spec.bench needs an engine that can take measurements (circuit-mna@1, twin@1)"
+   ],
+   [],
+   [
+    "spec.model.plant.type: one of fopdt, second, integrator, motor, thermal, tank"
+   ],
+   [
+    "spec.model.transient: missing: every output of pid@1 comes from a run {tEnd, dt?}"
+   ],
+   [
+    "spec.model.controller.Kp: out of range"
+   ],
+   [
+    "spec.model.bindings[0].element: one of plant, controller, setpoint, load, disturbance, noise"
+   ],
+   [
+    "spec.model.bindings[1].expr: unexpected end of the expression in “Ki +”"
+   ],
+   [
+    "spec.outputs[4].metric: one of rise, overshoot, peak, peakTime, settling, yFinal, ess, iae, ise, itae, satTime"
+   ],
+   [
+    "spec.outputs[7]: a scalar signal needs at or stat"
+   ],
+   [
+    "spec.outputs[7].at: unknown variable 'later' in “later”"
+   ],
+   [
+    "spec.model.transient.dt: unknown variable 'tEnd' in “tEnd / 1000”"
+   ],
+   [],
+   [],
+   [
+    "spec.model.link: link is not an object"
+   ],
+   [
+    "spec.model.link.path.model: one of fspl, two-ray, log-distance, hata, indoor"
+   ],
+   [
+    "spec.model.link.f: needs a number > 0"
+   ],
+   [
+    "spec.model.bindings[1].field: not a numeric field of the link"
+   ],
+   [
+    "spec.model.bindings[1].expr: unknown variable 'nope' in “sf + nope”"
+   ],
+   [
+    "spec.model.bindings[2].expr: needs an expression"
+   ],
+   [
+    "spec.outputs[7].of: not a scalar of rf@1"
+   ],
+   [
+    "spec.outputs[7].of: not a series of rf@1"
+   ],
+   [],
+   [],
+   [
+    "spec.model.device: device is not an object"
+   ],
+   [
+    "spec.model.device.schedule.sense: must be shorter than the period"
+   ],
+   [
+    "spec.model.device.battery.chem: one of li-ion, lifepo4, alkaline, nimh, custom"
+   ],
+   [
+    "spec.model.bindings[0].field: not a numeric field of the device"
+   ],
+   [
+    "spec.model.bindings[0].expr: unknown variable 'zz' in “period * zz”"
+   ],
+   [
+    "spec.outputs[5].sensor: not a sensor of the device"
+   ],
+   [],
+   [
+    "spec.bench.faults[0].apply[0].kind: one of sensor-stuck, sensor-drift, battery-ageing, antenna-detached, wake-period, brownout, clock-drift, sync-wake, busy-channel, sensor-tempco"
+   ],
+   [
+    "spec.bench.faults[1].apply[0].sensor: not a sensor of the device"
+   ],
+   [
+    "spec.bench.points[0].at is one of vbat, vload, i, gnd (the battery, the battery under load, the supply current, the ground)"
+   ],
+   [
+    "spec.bench.instruments[0]: the twin's voltmeter reads vbat or vload against gnd (list its points: not the current i)"
+   ],
+   [
+    "spec.bench.instruments[2]: the twin's oscilloscope shows the supply current (list its points: only points at i)"
+   ],
+   [
+    "spec.bench.instruments[1].parts[0]: element must be battery (the twin's ammeter reads the supply current), without pin"
+   ],
+   [
+    "spec.bench.instruments[3]: the event log has only a kind"
+   ],
+   [],
+   [
+    "spec.bench.instruments[5]: the thermometer has only a kind"
+   ],
+   [
+    "spec.bench.instruments[0].modes belongs to the multimeter (V, I): a list of dc, ac, rms, avg, each once"
+   ],
+   [
+    "spec.bench.instruments[4].kind is one of V, I, scope, log, rssi, T, clock"
+   ],
+   [],
+   [
+    "spec: the string dxWake is missing in strings.fr"
+   ]
+  ]
+ },
+ "circuit": {
+  "in": "075787fb894a1e3c87c2fa7233f6ecedbb410435f4f362c00df80640bdf59134",
+  "out": {
+   "c": [
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "netlist is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "",
+      "msg": "netlist is not an object",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "nodes",
+      "msg": "not an array",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "elements",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "format",
+      "path": "format",
+      "msg": "not noema.circuit/v1",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "dup-node",
+      "path": "nodes[3]",
+      "msg": "duplicate node a",
+      "level": "error"
+     },
+     {
+      "code": "node-name",
+      "path": "nodes[4]",
+      "msg": "bad node name",
+      "level": "error"
+     },
+     {
+      "code": "node-name",
+      "path": "nodes[5]",
+      "msg": "ground cannot be a label",
+      "level": "error"
+     },
+     {
+      "code": "unknown-node",
+      "path": "nodes[2].probe",
+      "msg": "label of an unknown node",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "elements[0].x",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "dup-id",
+      "path": "elements[1].id",
+      "msg": "duplicate id R1",
+      "level": "error"
+     },
+     {
+      "code": "probe-only",
+      "path": "elements[1].n[0]",
+      "msg": "a probe-only label cannot be a terminal",
+      "level": "error"
+     },
+     {
+      "code": "unknown-node",
+      "path": "elements[1].n[1]",
+      "msg": "unknown node q",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[1].value",
+      "msg": "needs a positive number",
+      "level": "error"
+     },
+     {
+      "code": "id",
+      "path": "elements[2].id",
+      "msg": "bad id",
+      "level": "error"
+     },
+     {
+      "code": "type",
+      "path": "elements[2].type",
+      "msg": "unknown type",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[3].ic",
+      "msg": "needs a number",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[4].value.pulse.zz",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[4].value.pulse",
+      "msg": "rise + width + fall > period",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[5].value.sine.freq",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[6].value.dc",
+      "msg": "needs a number",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[7].value",
+      "msg": "one of dc, pulse, sine, pwm, noise",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[8].value.pwm.duty",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[9].value",
+      "msg": "this type takes params, not a value",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[9].on",
+      "msg": "only SW has on (true/false)",
+      "level": "error"
+     },
+     {
+      "code": "preset",
+      "path": "elements[9].preset",
+      "msg": "unknown preset",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[10].on",
+      "msg": "only SW has on (true/false)",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[10].params.Ron",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[10].params.Zz",
+      "msg": "unknown parameter",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[11].params.rails",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "unknown-node",
+      "path": "elements[12].n[1]",
+      "msg": "unknown node 5",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[12].value",
+      "msg": "needs a positive number",
+      "level": "error"
+     },
+     {
+      "code": "type",
+      "path": "elements[13].type",
+      "msg": "unknown type",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "vloop",
+      "path": "elements[1]",
+      "msg": "loop of voltage sources / inductors",
+      "level": "error"
+     },
+     {
+      "code": "self-loop",
+      "path": "elements[2]",
+      "msg": "both terminals on one node",
+      "level": "warning"
+     },
+     {
+      "code": "vloop",
+      "path": "elements[4]",
+      "msg": "op-amp output on a voltage-defined node",
+      "level": "error"
+     },
+     {
+      "code": "floating",
+      "path": "nodes[1]",
+      "msg": "no DC path to ground from b",
+      "level": "warning"
+     },
+     {
+      "code": "floating",
+      "path": "nodes[2]",
+      "msg": "no DC path to ground from c",
+      "level": "warning"
+     },
+     {
+      "code": "unused",
+      "path": "nodes[3]",
+      "msg": "no element uses d",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "no-ground",
+      "path": "elements",
+      "msg": "no element touches ground",
+      "level": "error"
+     },
+     {
+      "code": "floating",
+      "path": "nodes[0]",
+      "msg": "no DC path to ground from a",
+      "level": "warning"
+     },
+     {
+      "code": "floating",
+      "path": "nodes[1]",
+      "msg": "no DC path to ground from b",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "size",
+      "path": "nodes",
+      "msg": "more than 60 nodes",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "pickup.hum",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "pickup.zz",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "nodes[2].pickup",
+      "msg": "needs true or false",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[0].params",
+      "msg": "a line needs td (s) or len (m)",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[1].params.vf",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[2].params.Von",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[3].params.gbw",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[3].params.rout",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[4].params.body",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[5].params.Bv",
+      "msg": "out of range",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[6].value.noise.bw",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "elements[7].value.noise.colour",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "param",
+      "path": "elements[8].params.Cbe",
+      "msg": "out of range",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "vloop",
+      "path": "elements[2]",
+      "msg": "loop of voltage sources / inductors / lines",
+      "level": "error"
+     },
+     {
+      "code": "floating",
+      "path": "nodes[2]",
+      "msg": "no DC path to ground from f",
+      "level": "warning"
+     }
+    ],
+    [
+     {
+      "code": "value",
+      "path": "pickup",
+      "msg": "false, or {hum, amp, noise, bw, wander, offset, r}",
+      "level": "error"
+     }
+    ]
+   ],
+   "f": [
+    [
+     {
+      "code": "fault",
+      "path": "faults[1].element",
+      "msg": "not a part of the netlist",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[2].kind",
+      "msg": "one of open, short, drift, open-trace, reverse",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[3].node",
+      "msg": "not a node of the netlist",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[4].factor",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[5].param",
+      "msg": "not a parameter of the part",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[6].pin",
+      "msg": "not a pin of the part",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[7].side[0]",
+      "msg": "does not touch the node",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[7].side[2]",
+      "msg": "does not touch the node",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[7].side[3]",
+      "msg": "not a part of the netlist",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[8].colour",
+      "msg": "unknown field",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[9].add",
+      "msg": "needs a number",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[12].pins",
+      "msg": "two different pins of the part",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[13].pins",
+      "msg": "two different pins of the part",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[15].side",
+      "msg": "a list of parts (R1) or pins (R1.0) on the node",
+      "level": "error"
+     },
+     {
+      "code": "fault",
+      "path": "faults[16]",
+      "msg": "a fault is an object {element | node, kind}",
+      "level": "error"
+     }
+    ],
+    [
+     {
+      "code": "fault",
+      "path": "",
+      "msg": "faults must be a list",
+      "level": "error"
+     }
+    ]
+   ]
+  }
+ },
+ "py.rules": {
+  "in": null,
+  "out": [
+   [
+    "numpy",
+    "scipy"
+   ],
+   [
+    "quantiphy"
+   ],
+   262144,
+   [
+    100,
+    10000
+   ]
+  ]
+ },
+ "py.items": {
+  "in": "87f69f22f54bb040e55f37e8ebfb0edb2289018e38658268b7686cd33d932a74",
+  "out": [
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "the Python file is empty"
+     ],
+     []
+    ]
+   ],
+   [
+    [
+     "spec: a JSON object is required (activities/<id>/spec.json)"
+    ],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "the Python file defines no step(inputs, state) at the top level"
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "the Python file imports scipy: list it in \"packages\""
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "the Python file imports numpy: list it in \"packages\""
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "the browser (js, pyodide_js): Python has no page and no network here; return values from step() — found “import js”"
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "a network call: a Python activity has no network — found “pyodide.http”"
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "a network call: a Python activity has no network — found “import urllib”"
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "micropip: list the package in \"packages\" instead (only the allow-listed ones) — found “import micropip”"
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "input(): there is no console; the learner uses the controls of the spec — found “input(”"
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     [
+      "while True: each step() has a budget (stepMs, 3 s by default) and is stopped after it"
+     ]
+    ]
+   ],
+   [
+    [],
+    [
+     [
+      "the Python file is 271 KB (at most 256 KB)"
+     ],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [
+     "spec.engine: the outputs of a py-module@1 activity come from its Python step(); leave engine out"
+    ],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [
+     "spec.model: a py-module@1 activity has no engine model (its Python code is the model)"
+    ],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [
+     "spec.outputs: list what step() returns, at least one {id, kind: scalar | series}"
+    ],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [
+     "spec.bench needs an engine that can take measurements (circuit-mna@1, twin@1)"
+    ],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ],
+   [
+    [],
+    [
+     [],
+     []
+    ]
+   ]
+  ]
+ },
+ "h5p.registry": {
+  "in": "b3f38a47c5c0141d6b95564768e607de0fc0b7bd1a2528952429a75251d8f3be",
+  "out": {
+   "h5p good": [],
+   "h5p good in el and ru": [],
+   "h5p: strings are checked when given": [
+    "activity planets-quiz: strings.el and strings.en have different keys (a, b)"
+   ],
+   "h5p: no sha256": [
+    "activity planets-quiz: sha256 (of the .h5p file) is required"
+   ],
+   "h5p: a bad sha256": [
+    "activity planets-quiz: sha256 (of the .h5p file) is required"
+   ],
+   "h5p: no bytes": [
+    "activity planets-quiz: bytes (the size of the .h5p file, at most 100 MB) is required"
+   ],
+   "h5p: entry not an .h5p": [
+    "activity planets-quiz: entry must be the .h5p file beside the pack (activities/planets-quiz/item.h5p)"
+   ],
+   "h5p: entry that leaves the folder": [
+    "activity planets-quiz: entry must be the .h5p file beside the pack (activities/planets-quiz/item.h5p)"
+   ],
+   "h5p: an html bundle too": [
+    "activity planets-quiz: an h5p@1 item has no html (its .h5p file travels beside the pack)"
+   ],
+   "h5p: inline h5p not base64 text": [
+    "activity planets-quiz: h5p (inline) must be the .h5p file in base64"
+   ],
+   "h5p: a translation missing": [
+    "activity planets-quiz: h5pByLocale.ru is missing: the item's words in ru (activities/planets-quiz/content.ru.json)"
+   ],
+   "h5p: a language the pack is not read in": [
+    "activity planets-quiz: h5pByLocale.de: the pack is not read in de (en)"
+   ],
+   "h5p: a bad h5pByLocale entry": [
+    "activity planets-quiz: h5pByLocale.el must be {content} (its content.json) or {h5p, sha256} (another package in base64)"
+   ],
+   "h5p: a bad l10n": [
+    "activity planets-quiz: h5pByLocale.el.l10n must be an object (H5P's own strings)"
+   ],
+   "h5p: another package without sha256": [
+    "activity planets-quiz: h5pByLocale.el must be {content} (its content.json) or {h5p, sha256} (another package in base64)"
+   ],
+   "h5p: h5pByLocale not an object": [
+    "activity planets-quiz: h5pByLocale must be {locale: {content} | {h5p, sha256}}"
+   ],
+   "h5p: no requires": [
+    "pack.requires must list runtime:h5p@1 (make_pack.py writes it)"
+   ],
+   "h5p: checks grading": [
+    "ch01-e3: grade.mode \"checks\" needs an activity whose values the app can see (sim-spec@1, py-module@1, wasm-module@1); h5p@1 reports its own result: use \"reported\""
+   ]
+  }
+ },
+ "h5p.packages": {
+  "in": null,
+  "out": {
+   "file mc": [
+    [],
+    []
+   ],
+   "file drag": [
+    [],
+    []
+   ],
+   "file tf": [
+    [],
+    [
+     "activity planets-quiz: H5PEditor.RadioGroup-1.1/: a library no content uses (left out when playing)",
+     "activity planets-quiz: H5PEditor.ShowWhen-1.0/: a library no content uses (left out when playing)"
+    ]
+   ],
+   "file attribution": [
+    [],
+    [
+     "activity planets-quiz: content.json metadata.source: an outside link in the attribution (shown as text only)"
+    ]
+   ],
+   "file missing-library": [
+    [
+     "activity planets-quiz: H5P.JoubelUI 1.3: missing from the package (H5P.JoubelUI-1.3/library.json)"
+    ],
+    []
+   ],
+   "file no-h5p-json": [
+    [
+     "activity planets-quiz: no h5p.json"
+    ],
+    []
+   ],
+   "file not-a-zip": [
+    [
+     "activity planets-quiz: not a .h5p (zip) file"
+    ],
+    []
+   ],
+   "file outside-link": [
+    [
+     "activity planets-quiz: content.json question: an outside link (https:) — everything must be inside the package"
+    ],
+    []
+   ],
+   "file php": [
+    [
+     "activity planets-quiz: content/shell.php: files of type .php are not allowed"
+    ],
+    []
+   ],
+   "file refused": [
+    [
+     "activity planets-quiz: H5P.MathDisplay 1.0: refused (loads MathJax from a CDN at run time)"
+    ],
+    []
+   ],
+   "file script-in-content": [
+    [
+     "activity planets-quiz: content/run.js: a script outside a library folder"
+    ],
+    []
+   ],
+   "inline": [
+    [],
+    []
+   ],
+   "sha and bytes differ": [
+    [
+     "activity planets-quiz: the .h5p file activities/planets-quiz/item.h5p is missing"
+    ],
+    []
+   ],
+   "missing file": [
+    [
+     "activity planets-quiz: the .h5p file <tmp>/gone.h5p is missing"
+    ],
+    []
+   ],
+   "a translation with an outside link": [
+    [
+     "activity planets-quiz: the .h5p file activities/planets-quiz/item.h5p is missing"
+    ],
+    []
+   ],
+   "another package per language": [
+    [
+     "activity planets-quiz: the .h5p file activities/planets-quiz/item.h5p is missing"
+    ],
+    []
+   ]
+  }
+ },
+ "engines": {
+  "in": null,
+  "out": [
+   [
+    "agents@1",
+    "anatomy@1",
+    "circuit-mna@1",
+    "clinic@1",
+    "craft@1",
+    "des@1",
+    "field@1",
+    "formula@1",
+    "genetics@1",
+    "geom@1",
+    "graph@1",
+    "law@1",
+    "logic@1",
+    "map@1",
+    "med@1",
+    "music@1",
+    "ode@1",
+    "philo@1",
+    "pid@1",
+    "prob@1",
+    "rf@1",
+    "rhetoric@1",
+    "seq@1",
+    "text@1",
+    "thermal@1",
+    "timeline@1",
+    "twin@1",
+    "wasm@1"
+   ],
+   [
+    "circuit-mna@1",
+    "twin@1"
+   ]
+  ]
+ },
+ "app.engines": {
+  "in": "e3f4005a934ffe6d1bea011e4863bb2dfb95009a001f10bfdc4bf7120e44ec6d",
+  "out": {
+   "packs": [
+    [
+     [],
+     []
+    ],
+    [
+     [],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engines must be a list of 1–8 engine ids of the library (agents@1, anatomy@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, prob@1, rhetoric@1, seq@1, text@1, timeline@1)",
+      "activity cheapest-route: the bundle uses the engine \"graph@1\": list it in \"engines\""
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engines must be a list of 1–8 engine ids of the library (agents@1, anatomy@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, prob@1, rhetoric@1, seq@1, text@1, timeline@1)",
+      "activity cheapest-route: the bundle uses the engine \"graph@1\": list it in \"engines\""
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engines must be a list of 1–8 engine ids of the library (agents@1, anatomy@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, prob@1, rhetoric@1, seq@1, text@1, timeline@1)"
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engines must be a list of 1–8 engine ids of the library (agents@1, anatomy@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, prob@1, rhetoric@1, seq@1, text@1, timeline@1)",
+      "pack.requires must list engine:clinic@1, engine:genetics@1, engine:geom@1, engine:med@1, engine:music@1, engine:ode@1, engine:prob@1, engine:seq@1 (make_pack.py writes it)"
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engine \"warp@1\" is not an engine of the library (a mini-app can use agents@1, anatomy@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, prob@1, rhetoric@1, seq@1, text@1, timeline@1)"
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engine \"circuit-mna@1\" is not an engine of the library (a mini-app can use agents@1, anatomy@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, prob@1, rhetoric@1, seq@1, text@1, timeline@1)"
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engine \"formula@1\" is not an engine of the library (a mini-app can use agents@1, anatomy@1, clinic@1, craft@1, des@1, field@1, genetics@1, geom@1, graph@1, law@1, logic@1, map@1, med@1, music@1, ode@1, philo@1, prob@1, rhetoric@1, seq@1, text@1, timeline@1)"
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: engines lists an engine twice"
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: the bundle uses the engine \"timeline@1\": list it in \"engines\""
+     ],
+     []
+    ],
+    [
+     [
+      "activity cheapest-route: the bundle uses the engine \"graph@1\": list it in \"engines\""
+     ],
+     []
+    ],
+    [
+     [
+      "pack.requires must list engine:graph@1 (make_pack.py writes it)"
+     ],
+     []
+    ],
+    [
+     [
+      "activity alias-lab: engines: only an html-app@1 item lists engines (a sim-spec@1 spec names its engine in spec.engine)",
+      "activity alias-lab: the spec (activities/alias-lab/spec.json) is missing",
+      "ch01-e1: a sim-spec@1 activity reports nothing itself: grade it with {\"mode\": \"checks\", \"checks\": […]}",
+      "pack.requires must list runtime:sim-spec@1 (make_pack.py writes it)"
+     ],
+     []
+    ]
+   ],
+   "req": [
+    "activities/v1",
+    "runtime:html-app@1",
+    "engine:graph@1",
+    "engine:ode@1"
+   ]
+  }
+ }
+}

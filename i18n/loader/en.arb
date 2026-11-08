@@ -2686,6 +2686,16 @@
   "@loader.storage.full": {
     "description": "Warning toast when the browser's storage for the app is full and a save failed: the latest progress is not on this device. Names the Me page entry “Data and sync” (sh.data) where backups are made."
   },
+  "loader.storage.low": "This device's storage is almost full ({pct}% used). Make a backup (Me › Data and sync), then remove subjects you no longer need.",
+  "@loader.storage.low": {
+    "description": "Warning shown once when the browser storage for the app is at least 90% used, so that the learning progress still fits. {pct}: how full it is, a whole number (e.g. 93). Names the Me page entry “Data and sync” (sh.data) where backups are made.",
+    "placeholders": {
+      "pct": {
+        "type": "int",
+        "example": "93"
+      }
+    }
+  },
   "loader.pwa.updateReady": "A new version is ready.",
   "@loader.pwa.updateReady": {
     "description": "A note at the bottom of the screen when the website has a newer version than this open tab (the offline copy was updated). Short."

@@ -6,9 +6,9 @@ voice leading, rhythm, timbre and roughness, with **sounds to play**. Pitches ar
 traditions are not ranked: Western common practice, maqām (in a 24-tone approximation, flagged), the 72 Karnatic mēḷakarta,
 Euclidean rhythms of many traditions, and any equal division of the octave stand side by side.
 
-The Python twin is `tools/lib_music.py`: it checks and does not compute, and it embeds the same JSON tables. The tests are
+The tests are
 `node tests/lib_music.js` (90 assertions: published reference values M1–M19 of the research, the edge cases and their codes, the
-checker, the adapter with its sounds, the Worker, speed) and `node tests/enginelib.js` (JS ↔ Python parity on
+checker, the adapter with its sounds, the Worker, speed) and `node tests/enginelib.js` (the golden outputs of the former Python twin on
 `tests/fixtures/enginelib/music.json`, 25 specs). The reference activity is `tools/activities_examples/meantone-wolf`. The research
 is in the project's `engine-library/research/arts.md`.
 
@@ -61,7 +61,7 @@ is in the project's `engine-library/research/arts.md`.
   inharmonicity `B`), `closed` (odd harmonics), `bar` (free–free: 1, 2.756, 5.404, …), `membrane` (ideal: 1, 1.594, 2.136, …),
   `custom` (`ratios`, `amps`).
 
-### 1.3 Checker codes (`checkSpec`, the same in `tools/lib_music.py`)
+### 1.3 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

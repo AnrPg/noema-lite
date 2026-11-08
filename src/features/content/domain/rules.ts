@@ -1,0 +1,393 @@
+/* noema-lite — THE rules every new subject pack meets (format noema.packrules/v1): the ONE source for the app, the connector, the
+   Gemini generator, the Python tools (through the Node bridge, build/noema-tools.cjs: `node noema-tools.cjs rules` prints them)
+   and the skill. docs/PIPELINES.md §4, tools/CONTENT_SPEC.md.
+   Each check has an id, a level (error | warn) and what it asks; the Python tools, make_pack.py and build.py get the same verdicts.
+   · RULES: the quantity rules of packs with subject.authoring.minPerKind (the Gemini generator; older packs).
+   · QUALITY: the full rules Q1–Q8 of packs with subject.authoring.rules >= 2 (quality.ts runs them as specifications).
+   · LANGUAGES: the translations and 文A bridges every new pack gets (docs/PIPELINES.md §4b). */
+
+export interface BalanceRule {
+  readonly id: string;
+  readonly what: string;
+  readonly field: 'type' | 'difficulty' | 'tags';
+  readonly min: number;
+  readonly always: readonly (string | number)[];
+  readonly features: Readonly<Record<string, readonly string[]>>;
+}
+export const RULES: readonly BalanceRule[] = [
+  {
+    id: 'balance.type',
+    what: 'every exercise type',
+    field: 'type',
+    min: 3,
+    always: ['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'scenario', 'free'],
+    features: {
+      code: ['spotbug', 'write'],
+      math: ['calc'],
+      pictures: ['img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion'],
+    },
+  },
+  {
+    id: 'balance.difficulty',
+    what: 'every difficulty',
+    field: 'difficulty',
+    min: 3,
+    always: [1, 2, 3],
+    features: {},
+  },
+  {
+    id: 'balance.tag',
+    what: 'every focus tag',
+    field: 'tags',
+    min: 3,
+    always: ['concept', 'pitfall', 'debug', 'exam', 'interview', 'compare'],
+    features: {
+      code: ['syntax'],
+      math: ['calc'],
+    },
+  },
+];
+export const RULES_NOTES: readonly string[] = [
+  "A value under 'features' is required when the subject has that feature (subject.features.code / .math) or, for 'pictures', when the chapter has a picture (a figure block or a picture exercise): pictures only where they teach (docs/VISUAL.md §5), never to meet a count. A chapter that uses an optional value anyway needs the minimum too.",
+  "subject.authoring.minPerKind overrides every 'min' (start_subject.py writes 3). 0 turns the rules off: only for packs made before 2026-10-21.",
+  'Chapters of an older pack being extended (skill unpack.py) get warnings, new chapters errors.',
+];
+
+export interface QualityCheck {
+  readonly id: string;
+  readonly level: 'error' | 'warn';
+  readonly what: string;
+  readonly min?: number;
+  readonly minPerKind?: Readonly<Record<string, number>>;
+  readonly target?: Readonly<Record<string, number>>;
+  readonly tol?: number;
+  readonly recallMax?: number;
+  readonly applyPlusMin?: number;
+  readonly criticalMin?: number;
+  readonly maxInversions?: number;
+  readonly types?: number;
+  readonly kinds?: Readonly<Record<string, { readonly cols: number; readonly rows: number; readonly what: string }>>;
+  readonly skip?: readonly string[];
+  readonly patterns?: readonly string[];
+  readonly minChars?: number;
+  readonly minSentences?: number;
+  readonly minWords?: number;
+  readonly ratio?: number;
+  readonly rubricMin?: number;
+}
+export interface Quality {
+  readonly version: number;
+  readonly vocab: Readonly<Record<'types' | 'think' | 'applyPlus' | 'critical' | 'modes' | 'cats' | 'levels' | 'tags', readonly string[]>>;
+  readonly optIn: Readonly<Record<string, readonly string[]>>;
+  readonly autoUnfit: Readonly<Record<string, readonly string[]>>;
+  readonly checks: readonly QualityCheck[];
+  readonly notes: readonly string[];
+  readonly since: string;
+}
+export const QUALITY: Quality = {
+  version: 2,
+  vocab: {
+    types: [
+      'bucket',
+      'calc',
+      'case',
+      'cloze',
+      'debate',
+      'flaw',
+      'free',
+      'img_drag',
+      'img_hotspot',
+      'img_label',
+      'img_occlusion',
+      'img_reveal',
+      'img_select',
+      'img_sequence',
+      'inquiry',
+      'match',
+      'mcq',
+      'odd',
+      'order',
+      'predict',
+      'scenario',
+      'sim',
+      'spotbug',
+      'tf',
+      'tree',
+      'write',
+    ],
+    think: ['recall', 'explain', 'apply', 'discriminate', 'analyze', 'evaluate', 'create'],
+    applyPlus: ['apply', 'discriminate', 'analyze', 'evaluate', 'create'],
+    critical: ['analyze', 'evaluate', 'create'],
+    modes: [
+      'contradiction',
+      'reverse',
+      'whatif',
+      'perturb',
+      'causal',
+      'distinguish',
+      'translate',
+      'ambiguity',
+      'feynman',
+      'combine',
+      'dialectic',
+    ],
+    cats: [
+      'pitfall',
+      'confusable',
+      'falsefriend',
+      'detail',
+      'sequence',
+      'multipart',
+      'nomenclature',
+      'acronym',
+      'formula',
+      'edge',
+      'recent',
+      'hard-understand',
+      'hard-remember',
+    ],
+    levels: ['foundation', 'core', 'advanced'],
+    tags: ['concept', 'syntax', 'pitfall', 'debug', 'exam', 'interview', 'calc', 'compare'],
+  },
+  optIn: {
+    types: ['sim'],
+  },
+  autoUnfit: {
+    code: ['spotbug', 'write', 'syntax'],
+    math: ['calc'],
+    pictures: ['img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion'],
+  },
+  checks: [
+    {
+      id: 'map.present',
+      level: 'error',
+      what: 'the chapter has its knowledge map (map/chNN.json → chapter.map)',
+    },
+    {
+      id: 'map.refs',
+      level: 'error',
+      what: 'points and learnables are well formed: unique ids, known levels and categories, every kp / with id exists',
+    },
+    {
+      id: 'map.exhaustive',
+      level: 'error',
+      what: 'every knowledge point is in a learnable, or names the earlier DAG node that taught it (taughtIn)',
+    },
+    {
+      id: 'fit.declared',
+      level: 'error',
+      what: 'every exercise type, focus tag and paradigm is in fits, or has a reason in unfit',
+    },
+    {
+      id: 'fit.types',
+      level: 'error',
+      min: 3,
+      minPerKind: {
+        sim: 1,
+      },
+      what: 'every type in fits.types (sim, an interactive activity, is opt-in: listed in fits.types only where an activity teaches, then >= 1)',
+    },
+    {
+      id: 'fit.focus',
+      level: 'error',
+      min: 3,
+      what: 'every focus tag in fits.focus',
+    },
+    {
+      id: 'mode.coverage',
+      level: 'error',
+      min: 2,
+      what: 'every paradigm in fits.modes',
+    },
+    {
+      id: 'mix.difficulty',
+      level: 'error',
+      target: {
+        '1': 20,
+        '2': 25,
+        '3': 55,
+      },
+      tol: 5,
+      what: 'difficulty 1/2/3 = 20/25/55 % of the chapter',
+    },
+    {
+      id: 'mix.think',
+      level: 'error',
+      recallMax: 25,
+      applyPlusMin: 40,
+      criticalMin: 3,
+      what: 'recall <= 25 %, apply or higher >= 40 %, critical thinking (analyze/evaluate/create) >= 3 exercises',
+    },
+    {
+      id: 'mix.order',
+      level: 'warn',
+      maxInversions: 25,
+      what: 'inside a section, easier exercises come first',
+    },
+    {
+      id: 'lr.link',
+      level: 'error',
+      what: 'every exercise names its learnable (lr), its kind of thinking (think) and, if any, a known paradigm (mode)',
+    },
+    {
+      id: 'lr.facades',
+      level: 'error',
+      min: 2,
+      types: 2,
+      what: 'every learnable has >= 2 versions in >= 2 exercise types',
+    },
+    {
+      id: 'cats.facades',
+      level: 'error',
+      min: 2,
+      types: 2,
+      what: 'every knowledge point with a category has >= 2 exercises in >= 2 types',
+    },
+    {
+      id: 'source.questions',
+      level: 'error',
+      what: "every exercise / question / problem of the sources (map.sourceQuestions) is in the chapter, written out in full, with its answer: answerFrom 'source' (the source's own solution: its result is taken as correct, no second check, but the exercise's explanation is rewritten more detailed, insightful and explanatory than the source's) or 'claude' (solved here, then double-checked: check says how), and an exercise that cites it (cite.sq)",
+    },
+    {
+      id: 'theory.tables',
+      level: 'error',
+      kinds: {
+        compare: {
+          cols: 3,
+          rows: 2,
+          what: 'a comparative matrix: concepts side by side against the same criteria',
+        },
+        summary: {
+          cols: 2,
+          rows: 3,
+          what: "a table that categorises or sums up the chapter's concepts",
+        },
+        breakdown: {
+          cols: 4,
+          rows: 2,
+          what: 'related concepts brought together and broken down across columns of different parameters',
+        },
+      },
+      what: "the theory has all three kinds of table (a table block's kind: compare, summary, breakdown), each big enough to be one; a chapter with nothing to put in one gives the reason in map.unfit['table.<kind>']",
+    },
+    {
+      id: 'example.restated',
+      level: 'warn',
+      skip: ['explain', 'why', 'fb', 'outcome', 'model', 'rubric', 'fix', 'solution', 'note'],
+      what: "an exercise does not test the specifics of a lesson's example (unless the example is an interesting case in itself) and never points at it ('the example above', 'in the lesson's example'): it writes the example out in full and then asks a question that needs thinking about it (Q5b)",
+      patterns: [
+        '\\b(?:the|this|that|our) (?:worked )?example (?:above|earlier|before|we (?:saw|met|studied|read)|(?:from|in) (?:the|this) (?:lesson|theory|section|chapter))\\b',
+        "\\b(?:in|from) the (?:lesson|theory|section|chapter)(?:'s|’s)? example\\b",
+        '\\bas (?:in|shown in) the example\\b',
+        '\\b(?:recall|remember) the example\\b',
+        '(?:στο|το|του|από το) παράδειγμα (?:του μαθήματος|της θεωρίας|της ενότητας|του κεφαλαίου|παραπάνω|που είδαμε)',
+        'όπως στο παράδειγμα',
+        '(?:в|из) пример(?:е|а) (?:выше|урока|из урока|из теории)',
+      ],
+    },
+    {
+      id: 'figure.explained',
+      level: 'warn',
+      minChars: 120,
+      what: 'every figure, diagram and interactive activity of the theory is explained in detail right after it (a p, list or callout block, >= 120 characters): what it shows (its parts, axes, symbols, arrows, colours; for an activity: its controls and what to try), how to read it and what it teaches; a caption alone is not enough (Q7b)',
+    },
+    {
+      id: 'sequence.arrows',
+      level: 'warn',
+      what: "img_sequence (tap the parts in order) rarely teaches on a graph diagram (flowchart, pipeline, DAG, cycle): its arrows already show the order. Keep one only when tracing teaches something the picture does not already show, and say why in map.sequenceWhy['<media id>'] (Q5c)",
+    },
+    {
+      id: 'cite.present',
+      level: 'error',
+      what: 'every exercise keeps where it comes from in cite {src, loc} (metadata, never in the text)',
+    },
+    {
+      id: 'self.contained',
+      level: 'error',
+      what: "no exercise, card or theory text points at the source's structure (question numbers, pages, paragraphs, 'the source says')",
+      patterns: [
+        '\\bQ\\d{1,3}\\b',
+        '\\bRound \\d+\\b',
+        '\\bp\\.\\s?\\d+',
+        '\\bpages? \\d+',
+        '\\bparagraphs? \\d+',
+        '\\b(?:in|from|according to|see) the (?:source|document|slides?|pdf|handout|reading|text above)\\b',
+        '\\bthe (?:source|document|slides?|pdf|handout) (?:says|states|mentions|shows|lists|gives)\\b',
+        '\\bin the order (?:the source|it is) (?:gives|mentions|lists)',
+        'σελ(?:ίδα|\\.)\\s?\\d+',
+        '(?:η|την|στην|της) πηγή',
+        'σύμφωνα με το κείμενο',
+        'παράγραφο \\d+',
+      ],
+    },
+    {
+      id: 'explain.depth',
+      level: 'error',
+      minChars: 80,
+      minSentences: 2,
+      what: 'the explanation says why the answer is right and why the tempting wrong one is wrong (>= 2 sentences, >= 80 characters)',
+    },
+    {
+      id: 'mcq.why',
+      level: 'error',
+      what: 'every mcq / odd option has its why',
+    },
+    {
+      id: 'trivial.answer',
+      level: 'error',
+      minWords: 2,
+      what: 'the right option is not written in the question',
+    },
+    {
+      id: 'trivial.longest',
+      level: 'warn',
+      ratio: 1.6,
+      what: 'the right option is not by far the longest',
+    },
+    {
+      id: 'review.done',
+      level: 'error',
+      rubricMin: 15,
+      what: 'the second-pass review (review/chNN.json → chapter.review): rubric on >= 15 learnables (or all), every exercise solved blind, every mismatch fixed',
+    },
+  ],
+  notes: [
+    "Strictness: subject.authoring.rules >= 2 turns these checks on (start_subject.py writes 2). Errors when subject.authoring.by is 'claude' or 'gemini', warnings when it is 'learner' or 'import'. Packs without authoring.rules are not checked (made before 2026-10-21; TD-11).",
+    "The connector (noema_finish_upload, noema_save_pack) refuses a pack built since 'since' (pack.builtAt, or no builtAt at all) that has no subject.authoring.rules >= 2, so a pack cannot skip the checks by leaving the field out. Older packs keep working unchanged.",
+    'autoUnfit: a value that cannot fit the chapter needs no reason in unfit — the code types without subject.features.code, calc without .math, picture types when the chapter has no picture (pictures only where they teach, docs/VISUAL.md §5).',
+    'optIn: a value a chapter uses only where it teaches (sim, an interactive activity: docs/INTERACTIVE.md) needs no reason in unfit when it is left out; once listed in fits it counts like any other value, with its own minimum (fit.types minPerKind).',
+    'Counts are never checked: about 2 versions per learnable is the core set; there is no upper limit (docs/PIPELINES.md §4, a mild suggestion only).',
+  ],
+  since: '2026-10-22T00:00:00Z',
+};
+
+export interface Languages {
+  readonly version: number;
+  readonly translations: readonly string[];
+  readonly bridges: readonly string[];
+  readonly bridgesFrom: readonly string[];
+  readonly bridgeCoverage: { readonly everyday: number; readonly all: number };
+  readonly since: string;
+  readonly what: string;
+}
+export const LANGUAGES: Languages = {
+  version: 2,
+  translations: ['en', 'el', 'ru', 'de', 'fr'],
+  bridges: ['en', 'el', 'ru', 'ar', 'de', 'fr'],
+  bridgesFrom: ['own', 'translations'],
+  bridgeCoverage: {
+    everyday: 0.8,
+    all: 0.9,
+  },
+  since: '2026-10-22T00:00:00Z',
+  what: "Every pack with subject.authoring.rules >= 2 ends its flow with a full translation into each of 'translations' (minus its own language) and a 文A bridge for every pair (content language → native language): the content language is the pack's own language AND each of its translations ('bridgesFrom'), the native language each of 'bridges' that is not that content language (user rules 2026-10-21, 2026-10-22 and 2026-11-05: an en pack translated into el, ru, de and fr gets 25 pairs — from each of en, el, ru, de, fr into each of the other five of en, el, ru, ar, de, fr: en→el/ru/ar/de/fr, el→en/ru/ar/de/fr, ru→en/el/ar/de/fr, de→en/el/ru/ar/fr, fr→en/el/ru/ar/de). A translation's bridges are made after the translation, from its text. A translation is its own file (noema-translation, <id>.tr.<locale>.json; docs/i18n.md §10) with the pack's ids, structure and answers, plus the subject's name in that language (subject.i18n.<locale>: title, description, hero, ...). A bridge covers >= bridgeCoverage.all of the content words of the theory and >= bridgeCoverage.everyday of the everyday ones (band 1, and every word no entry covers yet). Checked at the end of the flow (tools/pipeline.py steps translate and bridges; noema_finish_upload lists what is missing), never on the first upload.",
+};
+
+/** the whole rule set as data (the bridge prints it; the skill reads it) */
+export const PACK_RULES = {
+  format: 'noema.packrules/v1',
+  rules: RULES,
+  notes: RULES_NOTES,
+  quality: QUALITY,
+  languages: LANGUAGES,
+} as const;

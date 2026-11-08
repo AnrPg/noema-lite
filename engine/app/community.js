@@ -84,6 +84,7 @@
   }
   /** Turn a pack object into one of the account's subjects (local + cloud). */
   async function importPack(acc, p, extra = {}) {
+    if (N.migrate.OLD_FORMATS.packFormats.includes(p.format)) p.format = 'noema-pack';   // a pack of the app's name before noema-lite
     if (p.format !== 'noema-pack' || !p.subject?.id || !Array.isArray(p.chapters)) throw new Error(tr('loader.import.notPack'));
     p.counts = p.counts || countPack(p);
     if (p.sharedFiles) { Object.defineProperty(p, '_sharedFiles', { value: p.sharedFiles, enumerable: false, configurable: true }); delete p.sharedFiles; }   // fetched by the caller (attachShared), not stored
@@ -385,7 +386,7 @@
   const toast = (m, ms) => N().toast(m, ms);
   const jget = (k, d) => N().jget(k, d);
   const jset = (k, v) => N().jset(k, v);
-  const stateOf = sid => jget(`noema1:${acc()}:s:${sid}:state`, null);
+  const stateOf = sid => NoemaCore.learning.progressOf(acc(), sid);   // the learning log's fold (read only)
   const subjects = force => APP.subjects(force);
   const h = S.h;
   const svg = S.svg;
@@ -600,21 +601,15 @@
     } finally { URL.revokeObjectURL(url); }
   }
   /** Buttons in one row when they all fit, else one under the other (never ragged) */
-  const LEVEL = xp => { let lv = 1, need = 100, left = xp; while (left >= need) { left -= need; lv++; need = Math.round(need * 1.18 / 10) * 10; } return { lv, into: left, need }; };
+  const LEVEL = xp => NoemaCore.study.xp.level(xp);
   /** The treasures (medals): [[found, key, mark, words, tone]] — the Progress tab and the page others see (only the keys of the found ones travel) */
   function medals({ fcN = 0, sn = 0, boss = 0, xp = 0 } = {}) {
     const mastered = (CU()?.list(acc()) || []).reduce((a, c) => a + (c.status === 'ready' ? CU().summary(acc(), c).mastered : 0), 0);
     return [[mastered >= 1, 'step', '1', L('medalStep'), 1], [fcN >= 100, 'cards', '100', L('medalCards', { n: Math.min(fcN, 100) }), 4], [sn >= 7, 'week', '7', L('medalWeek', { n: Math.min(sn, 7) }), 2], [boss >= 1, 'boss', svg('crown'), L('medalBoss'), 3], [xp >= 1000, 'xp', '1k', L('medalXp'), 1], [sn >= 30, 'month', '30', L('medalMonth', { n: Math.min(sn, 30) }), 2]];
   }
   const medalsEl = MED => h('div', { class: 'ns-medals' }, ...MED.map(([ok, , x, l, n]) => h('div', { class: 'ns-medal' + (ok ? '' : ' lock') }, h('div', { class: 'm', style: ok ? tone(n) : null }, x), h('small', {}, l))));
-  /** chapters of a subject with every section read (section ids are chNN-sNN); when the subject does not say how many
-      sections its chapters have, a chapter whose test is beaten counts */
-  function chaptersDone(s, x) {
-    const read = {}; Object.keys(x.read || {}).forEach(id => { const c = String(id).split('-s')[0]; read[c] = (read[c] || 0) + 1; });
-    const chs = s.chapters || s.meta?.chapters || [];
-    if (!chs.length) return Object.keys(x.boss || {}).filter(c => x.boss[c]).length;
-    return chs.filter(c => { const id = c.id || 'ch' + String(c.num).padStart(2, '0'), n = typeof c.sections === 'number' ? c.sections : (c.sections || []).length; return n > 0 && (read[id] || 0) >= n; }).length;
-  }
+  /** chapters of a subject with every section read (the study domain's count, NoemaCore.study.progress) */
+  const chaptersDone = (s, x) => NoemaCore.study.progress.chaptersDone(s.chapters || s.meta?.chapters || [], x.read, x.boss);
   let later = new Set();
   const accepted = s => { if (s.kind === 'curriculum') go('#/map/' + encodeURIComponent(s.curriculum)); else open(s.id); };
   function drawShareBar(list) {

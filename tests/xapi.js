@@ -38,24 +38,25 @@ function check(schema, v, at = '$', root = schema, out = []) {
   return out;
 }
 
-/* ---- sample attempts (the shape of S.att, engine/src/32_activities.js saveAttempt) and answers (S.res) ---- */
+/* ---- sample attempts and answers, as the learning log gives them (NoemaCore.learning.xapi, src/features/study/domain/events/xapi.ts) ---- */
 const T = Date.UTC(2026, 10, 4, 9, 0, 0);
-const att = {
-  'ch01-e010': { id: 'a0f3c9e1b2d4', seed: 4242, t0: T, t: T + 90000, hints: 2,
+const att = [
+  { exercise: 'ch01-e010', id: 'a0f3c9e1b2d4', seed: 4242, t0: T, t: T + 90000, hints: 2,
     result: { score: 0.72, passed: true, detail: 'R=10k', t: T + 65430 },
     events: [{ t: T + 1000, name: 'probe:placed', data: { node: 'n2' } }, { t: T + 5000, name: 'fs' }, { t: T + 60000, name: 'param:set', data: { R: 10000 } }] },
-  'ch01-e011': { id: 'b7e1aa90c3f2', seed: 7, t0: T + 100000, t: T + 100000 + 3725040, hints: 0,
+  { exercise: 'ch01-e011', id: 'b7e1aa90c3f2', seed: 7, t0: T + 100000, t: T + 100000 + 3725040, hints: 0,
     result: { score: 0.25, passed: false, detail: null, checks: [{ label: 'V out < 1 V', ok: true }, { label: 'I < 2 mA', ok: false }], t: T + 100000 + 3725040 },
     events: [{ t: T + 100500, name: 'switch' }] },
-  'ch02-e004': { id: 'c1d2e3f4a5b6', seed: 1, t0: T + 200000, t: T + 230000, hints: 1, result: null, events: [{ t: T + 210000, name: 'drag' }] },   // left without a result
-  'ch01-e012': { id: 'd9d9d9d9d9d9', seed: 3, t0: T + 300000, t: T + 310000, hints: 0, result: { score: 1, passed: true, t: T + 310000 }, events: [] },
-};
-const res = { 'ch01-e001': { n: 3, ok: 2, last: true, t: T + 400000, conf: 'sure' }, 'ch02-e002': { n: 1, ok: 0, last: false, t: T + 410000 } };
+  { exercise: 'ch02-e004', id: 'c1d2e3f4a5b6', seed: 1, t0: T + 200000, t: T + 230000, hints: 1, result: null, events: [{ t: T + 210000, name: 'drag' }] },   // left without a result
+  { exercise: 'ch01-e012', id: 'd9d9d9d9d9d9', seed: 3, t0: T + 300000, t: T + 310000, hints: 0, result: { score: 1, passed: true, t: T + 310000 }, events: [] },
+];
+// an entry counted before the log (n answers, okCount right) and one answer given in the app
+const res = [{ id: 'imp.0001', exercise: 'ch01-e001', ok: true, t: T + 400000, conf: 'sure', n: 3, okCount: 2 }, { id: 'evt-0002', exercise: 'ch02-e002', ok: false, t: T + 410000 }];
 const chapters = [
   { id: 'ch01', title: 'Circuits', subtitle: 'Ohm & Kirchhoff', exercises: [{ id: 'ch01-e001', type: 'mcq', q: 'Which law gives **V = IR**?' }, { id: 'ch01-e010', type: 'sim', q: 'Set the divider so that $V_{out} = 3$ V.' }, { id: 'ch01-e011', type: 'sim', q: 'Find the fault.' }, { id: 'ch01-e012', type: 'sim', q: 'Light the LED.' }] },
   { id: 'ch02', title: 'Transients', exercises: [{ id: 'ch02-e002', type: 'cloze', q: 'tau = [[RC]]' }, { id: 'ch02-e004', type: 'sim', q: 'Charge the capacitor.' }] },
 ];
-const input = { pack: { id: 'demo-circuits', title: 'Demo circuits', language: 'en' }, chapters, att, res };
+const input = { pack: { id: 'demo-circuits', title: 'Demo circuits', language: 'en' }, chapters, attempts: att, answers: res };
 const opts = { actor: { name: 'Ann', account: { homePage: 'https://noema-lite.netlify.app', name: 'acc-7f3a' } }, activityBase: 'https://noema-lite.netlify.app/xapi/demo-circuits/', registrationSeed: 'acc-7f3a|demo-circuits', locale: 'en' };
 
 // 1. the plain xAPI profile
@@ -64,13 +65,17 @@ const verbs = S.map(s => s.verb.display['en-US']);
 ok(verbs.filter(v => v === 'attempted').length === 4, 'one "attempted" per attempt (4)');
 ok(verbs.filter(v => v === 'interacted').length === 5, 'one "interacted" per event (5)');
 ok(verbs.filter(v => v === 'passed').length === 2 && verbs.filter(v => v === 'failed').length === 1, 'a result → passed / failed (2 + 1); an attempt without a result has none');
-ok(verbs.filter(v => v === 'answered').length === 2, 'each answered ordinary exercise (S.res) → one "answered"');
+ok(verbs.filter(v => v === 'answered').length === 2, 'each answer to an ordinary exercise → one "answered"');
+{ const a = S.filter(s => s.verb.display['en-US'] === 'answered');
+  ok(a[0].result.extensions[X.EXT_BASE + 'answers-count'] === 3 && a[0].result.extensions[X.EXT_BASE + 'correct-count'] === 2 && a[0].result.extensions[X.EXT_BASE + 'confidence'] === 'sure' && a[1].result.success === false && a[1].timestamp === new Date(T + 410000).toISOString(), 'an answer: its success, time and confidence; an entry from before the log keeps its counts');
+  const twice = X.statements({ ...input, answers: [...res, { ...res[1], id: 'evt-0003', ok: true, t: T + 420000 }] }, opts).filter(s => s.verb.display['en-US'] === 'answered');
+  ok(twice.length === 3 && new Set(twice.map(s => s.id)).size === 3, 'two answers to one exercise → two statements (each at its own time)'); }
 const file = X.exportFile(input, opts);
 const probs = check(SCHEMA, file);
 ok(!probs.length, 'the export file validates against the schema' + (probs.length ? ': ' + probs.slice(0, 5).join('; ') : ''));
 ok(!X.validateAll(S).length, 'NoemaXAPI.validateAll finds no problem' + (X.validateAll(S).length ? ': ' + X.validateAll(S).slice(0, 3).join('; ') : ''));
 ok(JSON.stringify(X.statements(input, opts)) === JSON.stringify(S), 'deterministic: the same input gives the same statements, byte for byte');
-ok(JSON.stringify(X.statements({ ...input, att: Object.fromEntries(Object.entries(att).reverse()), res: Object.fromEntries(Object.entries(res).reverse()) }, opts)) === JSON.stringify(S), 'the order of the keys of S.att / S.res does not matter');
+ok(JSON.stringify(X.statements({ ...input, attempts: [...att].reverse(), answers: [...res].reverse() }, opts)) === JSON.stringify(S), 'the order of the attempts and answers does not matter');
 ok(new Set(S.map(s => s.id)).size === S.length, 'every statement id is unique');
 const S2 = X.statements(input, { ...opts, registrationSeed: 'another' });
 ok(S2[0].context.registration !== S[0].context.registration && S2[0].id !== S[0].id, 'another registration seed → another registration and other ids');
@@ -118,7 +123,7 @@ for (const gran of ['chapter', 'activity']) {
   if (gran === 'chapter') ok(C.filter(s => s.verb.display['en-US'] === 'passed').length === 1, 'cmi5 (chapter): ch01 is passed once, though two of its sims passed; no failed after it');
   else ok(C.filter(s => s.verb.display['en-US'] === 'passed').length === 2, 'cmi5 (activity): each passed sim passes its own AU');
 }
-ok(X.validateAll([...X.statements({ ...input, res: null }, { ...opts, profile: 'cmi5' }), ...X.statements({ ...input, res: null }, { ...opts, profile: 'cmi5' }).map(s => ({ ...s, id: X.uuid5(s.id) }))]).some(p => /second passed/.test(p)), 'validateAll(): a second passed for an AU in one registration is a problem');
+ok(X.validateAll([...X.statements({ ...input, answers: null }, { ...opts, profile: 'cmi5' }), ...X.statements({ ...input, answers: null }, { ...opts, profile: 'cmi5' }).map(s => ({ ...s, id: X.uuid5(s.id) }))]).some(p => /second passed/.test(p)), 'validateAll(): a second passed for an AU in one registration is a problem');
 
 // 3. cmi5.xml
 const course = { id: 'demo-circuits', subject: { title: 'Demo circuits & <friends>', description: 'Circuits, step by step.', language: 'en' }, chapters };
@@ -175,9 +180,10 @@ print(sum(1 for d in docs for e in v.iter_errors(d)))`, path.join(ROOT, 'src', '
 
 // one subject as the app's menus export it (the subject's ⋮ and the shell's "My subjects" ⋮)
 { const pack = { id: 'demo', title: 'Demo', language: 'en' }, chapters = [{ id: 'ch01', title: 'One' }, { id: 'ch02', title: 'Two' }];
-  ok(X.subjectRecord({ att: {}, res: {}, pack, accountId: 'u1' }) === null && X.subjectRecord({ pack, accountId: 'u1' }) === null, 'subjectRecord: nothing recorded → null (the app says so instead of writing an empty file)');
-  const r = X.subjectRecord({ res: { 'ch01-e1': { n: 2, ok: 1, last: true, t: 1000 } }, pack, chapters, accountId: 'u1', site: 'https://x.org/', now: 5000 });
-  const same = X.exportFile({ att: {}, res: { 'ch01-e1': { n: 2, ok: 1, last: true, t: 1000 } }, pack, chapters },
+  ok(X.subjectRecord({ attempts: [], answers: [], pack, accountId: 'u1' }) === null && X.subjectRecord({ pack, accountId: 'u1' }) === null, 'subjectRecord: nothing recorded → null (the app says so instead of writing an empty file)');
+  const one = [{ id: 'evt-1', exercise: 'ch01-e1', ok: true, t: 1000 }];
+  const r = X.subjectRecord({ answers: one, pack, chapters, accountId: 'u1', site: 'https://x.org/', now: 5000 });
+  const same = X.exportFile({ attempts: [], answers: one, pack, chapters },
     { actor: { account: { homePage: 'https://x.org/', name: 'u1' } }, activityBase: 'https://x.org/xapi/demo/', registrationSeed: ['u1', 'demo'], now: 5000 });
   ok(r.name === 'demo.xapi.json' && JSON.stringify(r.file) === JSON.stringify(same) && !X.validateAll(r.file.statements).length, 'subjectRecord: <id>.xapi.json, the actor = the account id at the site, the same file as exportFile');
   const c = X.subjectCmi5({ pack, chapters, site: 'https://x.org' }), xml = c.files['cmi5.xml'];

@@ -19,118 +19,52 @@ window.NoemaSocial = (() => {
   const enc = encodeURIComponent;
   /** replaceChildren without the parts that are not there (the DOM would write “null”) */
   const put = (el, ...kids) => el.replaceChildren(...kids.filter(k => k != null && k !== false));
-  const BUCKET = 'noema-chat', MAX_BODY = 4000;
+  // what is known, the server and the rules (docs/SOCIAL.md) are NoemaCore.social (src/features/social); this file draws the pages
+  const SC = window.NoemaCore.social, SV = SC.server, VC = window.NoemaCore.vault, MAX_BODY = SC.MAX_BODY;
   /** The server's refusals in the learner's words (cloud/supabase.sql §12 raises them in English) */
-  const WHY = [[/do not take messages/, 'err.noMessages'], [/do not take invitations/, 'err.noInvites'], [/blocked|not possible/, 'err.blocked'], [/quota/, 'err.quota'],
-    [/too many messages/, 'err.slow'], [/too many open requests/, 'err.manyAsks'], [/too many new groups/, 'err.manyGroups'], [/group is full/, 'err.full'],
-    [/invitation link/, 'err.badLink'], [/person not found/, 'err.noPerson'], [/not a member/, 'err.notMember'], [/attachment not found/, 'err.attachment']];
-  const why = e => { const m = String(e?.message || e); const w = WHY.find(([re]) => re.test(m)); return w ? T(w[1], { mb: 50 }) : (window.NoemaI18n ? NoemaI18n.err(e) : m); };
+  const why = e => { const m = String(e?.message || e), k = SC.refusalKey(m); return k ? T(k, { mb: 50 }) : (window.NoemaI18n ? NoemaI18n.err(e) : m); };
   const fail = e => toast('⚠️ ' + why(e), 6000);
-
-  /* ---------- the server (row-level security and the functions of cloud/supabase.sql §12) ---------- */
-  const api = (path, o) => CL().api(path, o);
-  const rpc = (fn, body = {}) => api('/rest/v1/rpc/' + fn, { method: 'POST', body });
-  const minimal = { Prefer: 'return=minimal' };
-  /** the name as it is searched: folded, in plain and in scholarly Latin letters (one string, each word once) */
-  const searchOf = name => [...new Set((V()?.forms ? V().forms(name) : [String(name).toLowerCase()]).join(' ').split(/\s+/).filter(Boolean))].join(' ').slice(0, 600);
-  const clean = q => String(q || '').replace(/[,()"*\\:]/g, ' ').replace(/\s+/g, ' ').trim();
+  const clean = SC.cleanQuery;
+  /** the calls this file makes (src/ports/social.ts over Supabase: src/adapters/supabase/social.ts) */
   const Server = {
-    async people(ids) { ids = [...new Set(ids)].filter(Boolean); if (!ids.length) return []; return (await api(`/rest/v1/noema_people?select=user_id,display_name,emoji,university&user_id=in.(${ids.map(enc).join(',')})`)) || []; },
-    async search(q) {
-      const words = clean(q); if (words.length < 2) return [];
-      const forms = [...new Set((V()?.forms ? V().forms(words) : [words.toLowerCase()]))];
-      const rows = (await api(`/rest/v1/noema_people?select=user_id,display_name,emoji,university&or=(${forms.map(f => `search.ilike."*${enc(f)}*"`).join(',')})&user_id=neq.${me()}&limit=30`)) || [];   // i18n-ignore (a REST query)
-      return rows.filter(p => !S.blocks.includes(p.user_id));
-    },
-    buddies: () => api('/rest/v1/noema_buddies?select=*'),
-    ask: x => rpc('noema_buddy_ask', { x }),
-    answer: (x, yes) => rpc('noema_buddy_answer', { x, yes }),
-    unbuddy: x => { const [a, b] = [me(), x].sort(); return api(`/rest/v1/noema_buddies?a=eq.${a}&b=eq.${b}`, { method: 'DELETE' }); },
-    blocks: () => api('/rest/v1/noema_blocks?select=blocked,created_at'),
-    block: x => api('/rest/v1/noema_blocks', { method: 'POST', body: [{ blocker: me(), blocked: x }], headers: minimal }),
-    unblock: x => api(`/rest/v1/noema_blocks?blocked=eq.${x}`, { method: 'DELETE' }),
-    inbox: () => rpc('noema_inbox'),
-    dm: x => rpc('noema_dm_open', { x }),
-    group: g => rpc('noema_group_create', g),
-    async room(id) { return ((await api(`/rest/v1/noema_rooms?select=*&id=eq.${enc(id)}`)) || [])[0] || null; },
-    members: id => api(`/rest/v1/noema_room_members?select=user_id,role,status,last_read,muted,joined_at&room=eq.${enc(id)}&status=neq.left`),
-    latest: (id, n = 80) => api(`/rest/v1/noema_messages?select=*&room=eq.${enc(id)}&order=created_at.desc&limit=${n}`),
-    before: (id, t, n = 80) => api(`/rest/v1/noema_messages?select=*&room=eq.${enc(id)}&created_at=lt.${enc(t)}&order=created_at.desc&limit=${n}`),
-    async send(room, body, att = null) { return ((await api('/rest/v1/noema_messages', { method: 'POST', body: [{ room, author: me(), body: body || '', att }], headers: { Prefer: 'return=representation' } })) || [])[0]; },
-    edit: (id, body) => api(`/rest/v1/noema_messages?id=eq.${enc(id)}`, { method: 'PATCH', body: { body }, headers: minimal }),
-    remove: id => api(`/rest/v1/noema_messages?id=eq.${enc(id)}`, { method: 'PATCH', body: { deleted: true }, headers: minimal }),
-    report: (message, reason, note) => api('/rest/v1/noema_message_reports', { method: 'POST', body: [{ message, reporter: me(), reason, note: note || null }], headers: minimal }),
-    read: (room, at) => api(`/rest/v1/noema_room_members?room=eq.${enc(room)}&user_id=eq.${me()}`, { method: 'PATCH', body: { last_read: at }, headers: minimal }),
-    member: (room, user, patch) => api(`/rest/v1/noema_room_members?room=eq.${enc(room)}&user_id=eq.${enc(user)}`, { method: 'PATCH', body: patch, headers: minimal }),
-    setRoom: (room, patch) => api(`/rest/v1/noema_rooms?id=eq.${enc(room)}`, { method: 'PATCH', body: patch, headers: minimal }),
-    invite: (r, x) => rpc('noema_room_invite', { r, x }),
-    async peek(code) { return ((await rpc('noema_room_peek', { code })) || [])[0] || null; },
-    join: code => rpc('noema_room_join', { code }),
-    roadmaps: room => api(`/rest/v1/noema_room_roadmaps?select=*&room=eq.${enc(room)}`),
-    shareRoadmap: (room, curriculum) => api('/rest/v1/noema_room_roadmaps?on_conflict=room,curriculum', { method: 'POST', body: [{ room, curriculum, added_by: me() }], headers: { Prefer: 'resolution=ignore-duplicates,return=minimal' } }),
-    unshareRoadmap: (room, curriculum) => api(`/rest/v1/noema_room_roadmaps?room=eq.${enc(room)}&curriculum=eq.${enc(curriculum)}`, { method: 'DELETE' }),
-    async curricula(ids) { if (!ids.length) return []; return (await api(`/rest/v1/noema_curricula_shared?select=id,title,description,owner,owner_name,public,meta&id=in.(${ids.map(enc).join(',')})`)) || []; },
-    /** what this person keeps on the server: the vault and the files of conversations (≤ 50 MB together) */
-    async used() {
-      const [a, b] = await Promise.all([api(`/rest/v1/noema_chat_files?select=size&owner=eq.${me()}`).catch(() => []), api('/rest/v1/noema_vault_files?select=size').catch(() => [])]);
-      return [...(a || []), ...(b || [])].reduce((s, r) => s + (r.size || 0), 0);
-    },
-    /** a file in a room: its row (the server counts it), the file, then the server checks its size */
-    async putFile(room, file, mime) {
-      const ext = (String(file.name).toLowerCase().match(/\.([a-z0-9]{1,5})$/) || [])[1] || 'json', path = `rooms/${room}/${crypto.randomUUID()}.${ext}`;
-      await api('/rest/v1/noema_chat_files', { method: 'POST', body: [{ path, room, owner: me(), name: String(file.name).slice(0, 200), mime, size: file.size }], headers: minimal });
-      try { await CL().putFile(BUCKET, path, file, mime); await rpc('noema_chat_finish', { p: path }); }
-      catch (e) { await Server.dropFile(path).catch(() => { }); throw e; }
-      return path;
-    },
-    async dropFile(path) { await CL().deleteObjects(BUCKET, [path]).catch(() => { }); await api(`/rest/v1/noema_chat_files?path=eq.${enc(path)}`, { method: 'DELETE' }); },
-    blob: (path, type) => CL().getFile(BUCKET, path, 0, { type }),
+    ...SV,
+    search: q => SC.search(q),
+    group: g => SV.createGroup(g),
+    latest: (id, n = 80) => SV.latest(id, n),
+    before: (id, t, n = 80) => SV.before(id, t, n),
+    send: (room, body, att = null) => SV.send(room, body, att),
+    report: (message, reason, note) => SV.report(message, reason, note || null),
+    unbuddy: x => SC.unbuddy(x),
+    used: () => SV.usedBytes(),
+    /** a file in a room: its row (the server counts it), the file, then the server checks its size → its path */
+    putFile: (room, file, mime) => SC.putFile(room, { name: file.name || 'file.json', size: file.size, blob: file }, mime),
+    dropFile: path => SC.dropFile(path),
+    blob: (path, type) => SV.download(path, type),
     async page(id) { try { return await CL().publicPage(id); } catch (e) { return null; } },
   };
 
-  /* ---------- what is known now: my row, my conversations, my buddies, my blocks, names (one cache, one listener list) ---------- */
-  const S = { mine: null, inbox: [], buddies: [], blocks: [], names: {}, listeners: new Set(), started: false, loaded: false };
-  const emit = () => S.listeners.forEach(f => { try { f(); } catch (e) { } });
-  function onChange(f) { S.listeners.add(f); f(); return () => S.listeners.delete(f); }
+  /* ---------- what is known now: my row, my conversations, my buddies, my blocks, names (one state, one listener list) ---------- */
+  const S = SC.state;
+  let started = false;
+  const onChange = f => SC.onChange(f);
   /** my row: made the first time (findable, buddies may message me), kept in step with the account's name and emoji */
-  async function ensureMe(force = false) {
-    if (S.mine && !force) return S.mine;
-    const a = N()?.account || {}, name = String(a.name || CL().session().user.email.split('@')[0]).trim().slice(0, 80) || '…';
-    const row = ((await api(`/rest/v1/noema_people?select=*&user_id=eq.${me()}`)) || [])[0] || null, search = searchOf(name);
-    if (!row || row.display_name !== name || (row.emoji || null) !== (a.emoji || null) || row.search !== search) {
-      const up = { user_id: me(), display_name: name, emoji: a.emoji || null, search };
-      await api('/rest/v1/noema_people?on_conflict=user_id', { method: 'POST', body: [up], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
-      S.mine = { findable: true, dm_from: 'buddies', ...(row || {}), ...up };
-    } else S.mine = row;
-    return S.mine;
-  }
+  const ensureMe = (force = false) => { const a = N()?.account || {}; return SC.ensureMe({ name: a.name, emoji: a.emoji, email: CL()?.session?.()?.user?.email }, force); };
   /** the first-time note ("others can now find you") until it is dismissed or Privacy is saved, once per person on this device */
   const NOTED = () => 'noema-social-noted:' + me();
   const noted = () => { try { return localStorage.getItem(NOTED()) === '1'; } catch (e) { return true; } };
   const markNoted = () => { try { localStorage.setItem(NOTED(), '1'); } catch (e) { } };
-  async function savePrivacy(patch) { await api(`/rest/v1/noema_people?user_id=eq.${me()}`, { method: 'PATCH', body: patch, headers: minimal }); S.mine = { ...S.mine, ...patch }; emit(); }
-  async function refresh() {
-    if (!on()) return;
-    const [ib, bd, bl] = await Promise.all([Server.inbox(), Server.buddies(), Server.blocks()]);
-    S.inbox = ib || []; S.buddies = bd || []; S.blocks = (bl || []).map(x => x.blocked); S.loaded = true;
-    const unknown = S.buddies.map(b => b.a === me() ? b.b : b.a).filter(x => !S.names[x]);
-    if (unknown.length) await names(unknown).catch(() => { });
-    emit();
-  }
-  async function names(ids) { for (const p of await Server.people(ids.filter(x => !S.names[x]))) S.names[p.user_id] = p; return ids.map(x => S.names[x]).filter(Boolean); }
+  const savePrivacy = patch => SC.savePrivacy(patch);
+  const refresh = () => (on() ? SC.refresh() : Promise.resolve());
+  const names = ids => SC.names(ids);
   const nameOf = x => S.names[x]?.display_name || S.inbox.find(r => r.other === x)?.other_name || T('someone');
   const emojiOf = x => S.names[x]?.emoji || S.inbox.find(r => r.other === x)?.other_emoji || '';
   /** 🤝 with this person: 'buddies' · 'asked' (I asked) · 'theyAsked' · 'blocked' (I blocked them) · 'none' */
-  function bond(x) {
-    if (S.blocks.includes(x)) return 'blocked';
-    const b = S.buddies.find(r => (r.a === x || r.b === x)); if (!b) return 'none';
-    return b.status === 'buddies' ? 'buddies' : b.asked_by === me() ? 'asked' : 'theyAsked';
-  }
-  const requests = () => S.buddies.filter(b => b.status === 'pending' && b.asked_by !== me());
+  const bond = x => SC.bond(x);
+  const requests = () => SC.requests();
   /** what waits for me: unread messages (muted rooms aside), invitations to groups, buddy requests */
-  const waiting = () => S.inbox.reduce((n, r) => n + (r.status === 'invited' ? 1 : r.muted ? 0 : (r.unread || 0)), 0) + requests().length;
+  const waiting = () => SC.waiting();
   function start() {
-    if (S.started || !on()) return; S.started = true;
+    if (started || !on()) return; started = true;
     ensureMe().catch(e => console.warn('[social]', e.message));   // i18n-ignore (console)
     const tick = () => { if (document.visibilityState === 'visible' && on()) refresh().catch(() => { }); };
     tick(); setInterval(tick, 45000); document.addEventListener('visibilitychange', tick);
@@ -358,7 +292,7 @@ window.NoemaSocial = (() => {
       const newest = sorted[sorted.length - 1];
       if (newest && (!lastRead || newest.created_at > lastRead) && document.visibilityState === 'visible') {
         lastRead = newest.created_at; Server.read(rid, newest.created_at).catch(() => { });
-        const r = S.inbox.find(x => x.room === rid); if (r) { r.unread = 0; emit(); }
+        const r = S.inbox.find(x => x.room === rid); if (r) { r.unread = 0; SC.changed(); }
       }
     }
     async function reload(scroll = false) {
@@ -377,14 +311,14 @@ window.NoemaSocial = (() => {
     box.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); sendBtn.click(); } });
     sendBtn.onclick = async () => { const t = box.value.trim(); if (!t) return; sendBtn.disabled = true; if (await send(t)) { box.value = ''; grow(); } sendBtn.disabled = false; box.focus(); };
     async function pickFile() {
-      const inp = h('input', { type: 'file', accept: V()?.FORMATS ? Object.keys(V().FORMATS).map(x => '.' + x).join(',') : '', style: { display: 'none' } });
+      const inp = h('input', { type: 'file', accept: VC.ACCEPT, style: { display: 'none' } });
       inp.onchange = async () => {
         const f = inp.files[0]; inp.remove(); if (!f) return;
         const used = await Server.used().catch(() => 0);
-        const bad = V()?.checkFile ? await V().checkFile(f, used) : ''; if (bad) { toast('⚠️ ' + bad, 6000); return; }
+        const bad = await V().checkFile(f, used); if (bad) { toast('⚠️ ' + bad, 6000); return; }
         status.textContent = T('sending', { name: f.name });
-        try { const path = await Server.putFile(rid, f, V().FORMATS[(f.name.toLowerCase().match(/\.([a-z0-9]{1,5})$/) || [])[1]][0]);
-          if (!await send(box.value.trim(), { kind: 'file', path, name: f.name.slice(0, 200), mime: V().FORMATS[(f.name.toLowerCase().match(/\.([a-z0-9]{1,5})$/) || [])[1]][0], size: f.size })) await Server.dropFile(path).catch(() => { });
+        try { const mime = VC.FORMATS[VC.extOf(f.name)].mime, path = await Server.putFile(rid, f, mime);
+          if (!await send(box.value.trim(), { kind: 'file', path, name: f.name.slice(0, 200), mime, size: f.size })) await Server.dropFile(path).catch(() => { });
           else { box.value = ''; grow(); } }
         catch (e) { fail(e); }
         status.textContent = '';
@@ -444,7 +378,7 @@ window.NoemaSocial = (() => {
     const { h, svg } = ctx, a = m.att, mine = m.author === me();
     const box = h('div', { class: 'so-att so-att-' + a.kind });
     if (a.kind === 'file') {
-      const ext = (String(a.name).toLowerCase().match(/\.([a-z0-9]{1,5})$/) || [])[1] || '', g = V()?.FORMATS?.[ext]?.[1] || 'doc';
+      const g = VC.groupOf(a.name);
       const prev = h('div', { class: 'so-attprev' });
       const get = async () => new File([await Server.blob(a.path, a.mime)], a.name, { type: a.mime });
       const canShow = ['image', 'audio', 'video'].includes(g) || a.mime === 'application/pdf';
@@ -604,7 +538,7 @@ window.NoemaSocial = (() => {
     }, { cls: 'so-sheet' });
   }
   /** my study groups (for the vault: "Share with", the group filter) → [{ id, name }] */
-  async function groups() { if (!on()) return []; if (!S.loaded) await refresh().catch(() => { }); return S.inbox.filter(r => r.kind === 'group' && r.status === 'joined').map(r => ({ id: r.room, name: r.name })); }
+  async function groups() { if (!on()) return []; if (!S.loaded) await refresh().catch(() => { }); return SC.groups(); }
 
   /** The shell's routes: people · chat · group · join */
   function page(kind, args, ctx) {
@@ -623,5 +557,5 @@ window.NoemaSocial = (() => {
     refresh().then(draw, draw); return row;
   }
 
-  return { page, start, onChange, waiting, refresh, sendTo, groups, personActions, Server, bond, searchOf, why, get state() { return S; } };
+  return { page, start, onChange, waiting, refresh, sendTo, groups, personActions, bond, why };
 })();

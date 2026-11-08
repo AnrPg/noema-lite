@@ -1,16 +1,15 @@
 /**
  * window.Noema — the app's core for the older screens (the phase bridge's UI half, docs/ARCHITECTURE.md §6.3): the
- * profiles of this device and the open one, the timed key/value store, the stats, the Gemini key, the app's IndexedDB,
- * backups and restore points, the auto-backup to a folder, the 🔔 news kept here, the overlays of the start (who is
- * learning), the "in use on another device" cover, and the start itself. The other areas add their parts to it
- * (engine/app/*.js: the library, sharing and Explore, Roadmaps and Claude, the language courses) until phase 3 replaces
- * them; phase 2 replaces the data parts with NoemaCore's read models.
+ * profiles of this device and the open one, the timed key/value store, the stats (the learning log's), the Gemini key, the
+ * app's IndexedDB, backups and restore points (with the learning log's events), the auto-backup to a folder, the 🔔 news
+ * kept here, the data of the app's earlier versions (shell/migrate.ts) and the overlays of the start (who is learning).
+ * The other areas add their parts to it (engine/app/*.js: the library, sharing and Explore, Roadmaps and Claude, the
+ * language courses) until phase 3 replaces them.
  */
 import { CHARACTER_EMOJI } from '../../features/shell/domain/characters.ts';
-import { dayOf } from '../../kernel/day.ts';
+import { APP_DB } from '../../adapters/browser/storage.ts';
 import {
   AccountKv,
-  AccountStats,
   GeminiKey,
   LocalAccounts,
   NoticeStore,
@@ -23,7 +22,9 @@ import {
   type DeviceKv,
 } from './kv.ts';
 import { h, type Kid } from './dom.ts';
+import { LogStats, phase2 } from './learning.ts';
 import { legacy, type AreaBoot, type Convos, type NoemaAreas, type SubjectMeta } from './legacy.ts';
+import { OLD_FORMATS, oldData } from './migrate.ts';
 import type { NoemaCoreBridge } from '../bridge.ts';
 
 export const VERSION = '1.0.0';
@@ -50,16 +51,17 @@ export const plainText = (t: unknown): unknown => {
 };
 const KEEP = '[class*="emo"],[data-emoji],.md,.lesson,.ns-ico,script,style,textarea';
 
-/** The app's IndexedDB (imported packs, folder handles, restore points, conversations): the same database as NoemaCore.storage.docs. */
+/** The app's IndexedDB (imported packs, folder handles, restore points, conversations): the same database, version and
+    stores as NoemaCore's (src/adapters/browser/storage.ts APP_DB: the sync's outbox, the learning log), so both use it at once. */
 export const IDB = {
   db: null as IDBDatabase | null,
   open(): Promise<IDBDatabase> {
     if (this.db) return Promise.resolve(this.db);
     return new Promise((res, rej) => {
-      const r = indexedDB.open('noema-lite', 1);
+      const r = indexedDB.open(APP_DB.name, APP_DB.version);
       r.onupgradeneeded = () => {
         const d = r.result;
-        for (const n of ['packs', 'handles', 'restore', 'convos']) if (!d.objectStoreNames.contains(n)) d.createObjectStore(n);
+        for (const n of APP_DB.collections) if (!d.objectStoreNames.contains(n)) d.createObjectStore(n);
       };
       r.onsuccess = () => {
         this.db = r.result;
@@ -166,6 +168,9 @@ interface Backup {
   includesSecrets?: boolean;
   importedPacks?: { id: string; pack: unknown }[];
   conversations?: unknown[];
+  /** the learning log (noema.events/v1): answers, reviews, XP, settings… (version 3) */
+  events?: unknown[];
+  createdAt?: string;
   [k: string]: unknown;
 }
 interface DirHandle {
@@ -179,8 +184,9 @@ interface DirHandle {
   ): Promise<{ createWritable(): Promise<{ write(t: string): Promise<void>; close(): Promise<void> }> }>;
 }
 
-export function createCore(core: NoemaCoreBridge) {
+export function createCore(core0: NoemaCoreBridge) {
   const W = legacy;
+  const core = phase2(core0);
   const CFG: Json = { ...APP_DEFAULTS, ...(W().NOEMA_CONFIG ?? {}) };
   const LOCAL = W().NOEMA_CONFIG_LOCAL ?? {};
   const REG = W().NOEMA_REGISTRY ?? { accounts: [], subjects: [] };
@@ -196,7 +202,7 @@ export function createCore(core: NoemaCoreBridge) {
     () => REG.accounts ?? [],
     () => Date.now(),
   );
-  const stats = new AccountStats(KV, () => dayOf(core.clock.now()));
+  const stats = new LogStats(core);
   const geminiKey = new GeminiKey(kv, KV, () =>
     typeof LOCAL['geminiKey'] === 'string' ? LOCAL['geminiKey'] : (W().DEFAULT_GEMINI_KEY ?? ''),
   );
@@ -345,9 +351,10 @@ export function createCore(core: NoemaCoreBridge) {
       const packs = ((await areas().importedPacks?.(acc)) ?? []).map(p => ({ id: p.subject.id, pack: p }));
       const C = W().NoemaConvos;
       const conversations = C ? await C.list(acc, { includeDeleted: true }).catch(() => []) : [];
+      const events = await core.learning.eventsOf(acc); // the learning log (noema.events/v1): answers, reviews, XP, settings…
       return {
         format: 'noema-lite-backup',
-        version: 2,
+        version: 3,
         conversationSchema: C?.SCHEMA,
         conversations,
         app: CFG['appName'],
@@ -356,6 +363,7 @@ export function createCore(core: NoemaCoreBridge) {
         account: { id: a.id, name: a.name, emoji: a.emoji ?? '', kind: a.kind, email: a.email ?? null },
         includesSecrets: includeSecrets,
         data,
+        events,
         importedPacks: packs,
       };
     },
@@ -375,7 +383,25 @@ export function createCore(core: NoemaCoreBridge) {
     },
     validate(obj: unknown): Backup {
       const o = obj as Partial<Backup> | null;
-      if (o?.format === 'noema-lite-backup' && o.data) return o as Backup;
+      if (o && (o.format === 'noema-lite-backup' || OLD_FORMATS.backupFormats.includes(String(o.format))) && o.data) return o as Backup;
+      // the export of the single-file app (Databricks Quest): {xp, res, read, settings, ...}
+      const q = obj as { res?: unknown; settings?: unknown; xp?: unknown } | null;
+      if (q?.res && q.settings && typeof q.settings === 'object' && typeof q.xp === 'number') {
+        const settings = { ...(q.settings as Json) },
+          st: Json = { ...(q as Json) };
+        delete st['settings'];
+        st['srcOn'] = settings['srcOn'] ?? null;
+        delete settings['srcOn'];
+        return {
+          format: 'noema-lite-backup',
+          version: 1,
+          legacy: true,
+          createdAt: new Date().toISOString(),
+          account: { id: '?', name: tr('loader.backup.legacyName') },
+          data: { 'a:settings': JSON.stringify(settings), 's:databricks:state': JSON.stringify(st) },
+          importedPacks: [],
+        };
+      }
       throw new Error(tr('loader.backup.notBackup'));
     },
     async restorePoint(acc: string, label: string, words?: { k?: string; p?: Json }): Promise<string> {
@@ -402,7 +428,10 @@ export function createCore(core: NoemaCoreBridge) {
     async getRestorePoint(key: string): Promise<unknown> {
       return (await IDB.get<{ snap: unknown }>('restore', key))?.snap;
     },
-    /** mode: 'replace' (wipe the target profile, then write) | 'merge' (overwrite the keys the backup has) */
+    /** mode: 'replace' (wipe the target profile, then write) | 'merge' (overwrite the keys the backup has). The learning
+        log: the backup's events are added; replace also makes what was learnt after the backup no longer count (an event:
+        nothing is deleted). A backup from before the log (version 1–2) keeps its progress in s:<subject>:state, which the
+        log converts. */
     async apply(obj0: unknown, targetAcc: string, mode: 'replace' | 'merge' = 'replace'): Promise<true> {
       const obj = this.validate(obj0);
       await this.restorePoint(targetAcc, tr('loader.backup.beforeRestore', { when: fmtWhen(Date.now()) })); // a label the learner reads later: in the language of now
@@ -426,12 +455,19 @@ export function createCore(core: NoemaCoreBridge) {
         KV.set(pre + suf, typeof v === 'string' ? v : JSON.stringify(v));
       }
       for (const p of obj.importedPacks ?? []) await IDB.put('packs', targetAcc + '|' + p.id, p.pack);
+      await core.learning.restore(Array.isArray(obj.events) ? obj.events : [], {
+        mode,
+        madeAt: Date.parse(obj.createdAt ?? '') || Date.now(),
+        account: targetAcc,
+      });
+      if (targetAcc === core.learning.account()) await core.learning.migrate(); // another profile's: when it is opened
       const C = W().NoemaConvos;
       if (C) {
         if (mode === 'replace') await C.clear(targetAcc);
         const a = getAccount(targetAcc) ?? { id: targetAcc, kind: 'local' };
         for (const r of obj.conversations ?? [])
           await C.put(targetAcc, { ...(r as Json), account: { id: a.id, kind: a.kind } }, { keepUpdatedAt: true });
+        // v1 backups / old kv conversations are converted on the next start (NoemaConvos.migrateLegacy)
         if (mode === 'replace') kv.delete(`${P}${targetAcc}:meta:convosMigrated`);
       }
       if (targetAcc === KV.acc) KV.sealed = targetAcc; // every caller reloads (or switches profile) next
@@ -556,6 +592,21 @@ export function createCore(core: NoemaCoreBridge) {
     backup,
     autoBackup,
     notices,
+    /** the data of the app's earlier versions (shell/migrate.ts) */
+    migrate: oldData({
+      kv,
+      KV,
+      idb: IDB,
+      indexedDB: () => (globalThis as { indexedDB?: IDBFactory }).indexedDB,
+      convoSchema: () => W().NoemaConvos?.SCHEMA ?? 'noema.conversation/v1',
+      learning: core.learning,
+      carried: () => {
+        toast(tr('loader.legacy.carriedOver'));
+      },
+      warn: (where, e) => {
+        core.errors.report(e, { where, severity: 'warning' });
+      },
+    }),
     account: null as Account | null,
     subject: null as (SubjectMeta & Json) | null,
     subjectMeta: null as SubjectMeta | null,
@@ -603,10 +654,11 @@ export function createCore(core: NoemaCoreBridge) {
       locals.remove(id);
     },
     newProfileId: (name: string): string => profileId(name, new Set(allAccounts().map(a => a.id))),
-    /** every key of a profile, and its 🔔 news (kept outside the synced keys) */
-    wipeAccountData(id: string): void {
+    /** every key of a profile, its 🔔 news (kept outside the synced keys) and its learning log */
+    wipeAccountData(id: string): Promise<unknown> {
       for (const k of kv.keys(`${P}${id}:`)) kv.delete(k);
       kv.delete(notices.key(id));
+      return core.learning.clear(id);
     },
     /** while a switch reloads the page, the subject still open must not take its place back */
     setCurrent(acc: string, subj: string | null): void {

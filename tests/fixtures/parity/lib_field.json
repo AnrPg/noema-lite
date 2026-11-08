@@ -1,0 +1,1035 @@
+{
+ "tables": {
+  "in": null,
+  "out": [
+   [
+    "unstable",
+    "cfl",
+    "blow-up",
+    "budget",
+    "nan",
+    "grid",
+    "no-converge",
+    "incompatible",
+    "dt-auto",
+    "overshoot",
+    "mass-drift",
+    "cn-oscillation",
+    "event-limit",
+    "stopped",
+    "front-not-found",
+    "unknown-steady",
+    "not-turing",
+    "period-not-found",
+    "nine-point-dx",
+    "topple-limit",
+    "kernel"
+   ],
+   [
+    "x",
+    "y",
+    "t",
+    "profile",
+    "probe",
+    "stat",
+    "front",
+    "residual",
+    "population",
+    "avalanche",
+    "eventTime"
+   ],
+   [
+    "final",
+    "at",
+    "probe",
+    "eventTime",
+    "eventCount",
+    "frontSpeed",
+    "drift",
+    "cfl",
+    "r",
+    "dtMax",
+    "dt",
+    "gain",
+    "iterations",
+    "residual",
+    "error",
+    "wavelength",
+    "turing",
+    "turingK",
+    "turingWavelength",
+    "steps",
+    "population",
+    "density",
+    "cell",
+    "avalancheMean",
+    "avalancheTau",
+    "flag",
+    "ok"
+   ],
+   [
+    "heatmap",
+    "spacetime"
+   ],
+   [
+    "heat",
+    "advection",
+    "advdiff",
+    "wave",
+    "rd",
+    "poisson",
+    "ca"
+   ],
+   {
+    "heat": [
+     "ftcs",
+     "btcs",
+     "cn",
+     "adi"
+    ],
+    "advection": [
+     "upwind",
+     "laxwendroff",
+     "laxfriedrichs",
+     "centred",
+     "minmod",
+     "vanleer",
+     "superbee",
+     "mc"
+    ],
+    "advdiff": [
+     "upwind",
+     "laxwendroff",
+     "laxfriedrichs",
+     "centred",
+     "minmod",
+     "vanleer",
+     "superbee",
+     "mc"
+    ],
+    "wave": [
+     "leapfrog"
+    ],
+    "rd": [
+     "ftcs"
+    ],
+    "poisson": [
+     "sor",
+     "gs",
+     "jacobi"
+    ],
+    "ca": []
+   },
+   [
+    "elementary",
+    "life",
+    "gh",
+    "sandpile",
+    "forestfire"
+   ],
+   [
+    "grayscott",
+    "fhn",
+    "fisher",
+    "schnakenberg",
+    "brusselator",
+    "custom"
+   ]
+  ]
+ },
+ "check": {
+  "in": "bb2b0b6a9e8023731a674d8db3269ba9ac58d7c67292d9d1779fb2bd00c507ef",
+  "out": [
+   {
+    "p": [],
+    "x": [
+     [
+      "D",
+      "model.D",
+      [
+       "t"
+      ]
+     ],
+     [
+      "sin(pi*x)",
+      "model.init",
+      [
+       "x"
+      ]
+     ],
+     [
+      "exp(-pi^2*D*t)*sin(pi*x)",
+      "outputs[2].expr",
+      [
+       "x",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "0",
+      "model.init",
+      [
+       "x"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "exp(-(x^2+y^2)/0.02)",
+      "model.init",
+      [
+       "x",
+       "y"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.D",
+      [
+       "h",
+       "t"
+      ]
+     ],
+     [
+      "5",
+      "model.sources[0].rate",
+      [
+       "h",
+       "t"
+      ]
+     ],
+     [
+      "h",
+      "model.bc.left.a",
+      [
+       "h",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "v",
+      "model.vx",
+      [
+       "x",
+       "t"
+      ]
+     ],
+     [
+      "(x>0.2 && x<0.4)?1:0",
+      "model.init",
+      [
+       "x"
+      ]
+     ],
+     [
+      "(x>0.2 && x<0.4)?1:0",
+      "outputs[2].expr",
+      [
+       "x",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "0.5",
+      "model.vx",
+      [
+       "x",
+       "y",
+       "t"
+      ]
+     ],
+     [
+      "0.2",
+      "model.vy",
+      [
+       "x",
+       "y",
+       "t"
+      ]
+     ],
+     [
+      "exp(-((x-0.3)^2+(y-0.3)^2)/0.005)",
+      "model.init",
+      [
+       "x",
+       "y"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "x<0.5?x:1-x",
+      "model.init",
+      [
+       "x"
+      ]
+     ],
+     [
+      "0",
+      "model.initV",
+      [
+       "x"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "r",
+      "model.kp.r",
+      [
+       "t"
+      ]
+     ],
+     [
+      "x<5?1:0",
+      "model.init",
+      [
+       "x"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "F",
+      "model.kp.F",
+      [
+       "t"
+      ]
+     ],
+     [
+      "(abs(x-50)<5 && abs(y-50)<5)?0.5:1",
+      "model.init",
+      [
+       "x",
+       "y"
+      ]
+     ],
+     [
+      "(abs(x-50)<5 && abs(y-50)<5)?0.25:0",
+      "model.initV",
+      [
+       "x",
+       "y"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "1",
+      "model.init",
+      [
+       "x"
+      ]
+     ],
+     [
+      "0.9",
+      "model.initV",
+      [
+       "x"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "a*u-u^3-v",
+      "model.reaction.u",
+      [
+       "u",
+       "v",
+       "x",
+       "a",
+       "t"
+      ]
+     ],
+     [
+      "0.1*(u-v)",
+      "model.reaction.v",
+      [
+       "u",
+       "v",
+       "x",
+       "a",
+       "t"
+      ]
+     ],
+     [
+      "0.1*sin(x)",
+      "model.init",
+      [
+       "x"
+      ]
+     ],
+     [
+      "0",
+      "model.initV",
+      [
+       "x"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.grid",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.equation",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.grid.ny",
+      "msg": "only a 2-D grid (dim 2) has ny, y0, y1",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.vy",
+      "msg": "only a 2-D grid has vy",
+      "level": "error"
+     },
+     {
+      "code": "method",
+      "path": "model.method",
+      "msg": "adi is for a 2-D grid (on a line use cn or btcs)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "method",
+      "path": "model.method",
+      "msg": "heat is solved by: ftcs, btcs, cn, adi",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.D",
+      "msg": "missing (heat needs the diffusion coefficient D)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.tEnd",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "advection, advdiff or wave only",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "bc",
+      "path": "model.bc.right",
+      "msg": "periodic goes on both left and right",
+      "level": "error"
+     },
+     {
+      "code": "bc",
+      "path": "model.bc.left.value",
+      "msg": "periodic has no value",
+      "level": "error"
+     },
+     {
+      "code": "bc",
+      "path": "model.bc.right",
+      "msg": "robin needs a and b (a·u + b·∂u/∂n = value)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.reaction",
+      "msg": "only custom kinetics take reaction",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.reaction.w",
+      "msg": "the fields are u and v",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.Dv",
+      "msg": "missing (the diffusion coefficient of v)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.kp.Q",
+      "msg": "not a parameter of grayscott (its parameters: F, k)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.dim",
+      "msg": "the life automaton is 2-D",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.ca.bs",
+      "msg": "B/S notation: B then the birth counts, / S then the survival counts (B3/S23)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.ca.cells[0]",
+      "msg": "needs [i]",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.ca.drop",
+      "msg": "only the sandpile has drop",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.tEnd",
+      "msg": "not for a cellular automaton",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "not for a cellular automaton (population, density, avalanche…)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.ca.code",
+      "msg": "missing (the Wolfram rule number 0–255)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "the sandpile only",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "dup-name",
+      "path": "model.vars",
+      "msg": "the name x is a name of the field (x, y, u, v)",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.probes",
+      "msg": "the probe p is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.probes[0].x",
+      "msg": "a point needs x",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.probes[1].x1",
+      "msg": "a line needs x0, x1",
+      "level": "error"
+     },
+     {
+      "code": "event",
+      "path": "model.events[0].probe",
+      "msg": "a probe of model.probes",
+      "level": "error"
+     },
+     {
+      "code": "event",
+      "path": "model.events[1].probe",
+      "msg": "goes with of: probe",
+      "level": "error"
+     },
+     {
+      "code": "event",
+      "path": "model.events[1].of",
+      "msg": "needs model.front",
+      "level": "error"
+     },
+     {
+      "code": "event",
+      "path": "model.interrupts[0]",
+      "msg": "needs at (a time) or on (an event), not both",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.interrupts[0].set.z",
+      "msg": "not a variable of model.vars",
+      "level": "error"
+     },
+     {
+      "code": "event",
+      "path": "model.interrupts[1]",
+      "msg": "needs at (a time) or on (an event), not both",
+      "level": "error"
+     },
+     {
+      "code": "event",
+      "path": "model.interrupts[2].on",
+      "msg": "an event of model.events",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].nth",
+      "msg": "a whole number ±1–2000 (1 the first, −1 the last)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].event",
+      "msg": "an event of model.events",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].probe",
+      "msg": "a probe of model.probes",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "output",
+      "path": "outputs[0].of",
+      "msg": "heat, advdiff or rd only",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "only poisson iterates",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].of",
+      "msg": "two-field reaction–diffusion only",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].of",
+      "msg": "a heat map is for a 2-D grid (a line: spacetime)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[4].expr",
+      "msg": "needs the exact solution (an expression over x, y, t)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5].code",
+      "msg": "one of unstable, cfl, blow-up, budget, nan, grid, no-converge, incompatible, dt-auto, overshoot, mass-drift, cn-oscillation, event-limit, stopped, front-not-found, unknown-steady, not-turing, period-not-found, nine-point-dx, topple-limit, kernel",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5].code",
+      "msg": "one of unstable, cfl, blow-up, budget, nan, grid, no-converge, incompatible, dt-auto, overshoot, mass-drift, cn-oscillation, event-limit, stopped, front-not-found, unknown-steady, not-turing, period-not-found, nine-point-dx, topple-limit, kernel",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[6].of",
+      "msg": "a cellular automaton only",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[7].x",
+      "msg": "needs x",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[8].of",
+      "msg": "y is for a 2-D grid",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.tEnd",
+      "msg": "poisson is solved by iteration, not in time",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.dt",
+      "msg": "poisson is solved by iteration, not in time",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.events",
+      "msg": "poisson is solved by iteration, not in time",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].of",
+      "msg": "a space–time diagram is for a 1-D grid in time",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].t",
+      "msg": "a time is for an equation in time",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "shape",
+      "path": "model.sources[0].x",
+      "msg": "a point needs x",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.sources[0].y",
+      "msg": "a point on a 2-D grid needs y",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.sources[1].x1",
+      "msg": "a rect needs x0, x1, y0, y1",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.sources[1].y0",
+      "msg": "a rect needs x0, x1, y0, y1",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.sources[1].y1",
+      "msg": "a rect needs x0, x1, y0, y1",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.sources[2].y",
+      "msg": "a circle needs x, y, r",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.sources[2].r",
+      "msg": "a circle needs x, y, r",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.obstacles[0].shape",
+      "msg": "all is for sources",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.obstacles[1].r",
+      "msg": "a circle needs x, y, r",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.probes[0].y0",
+      "msg": "a area needs x0, x1, y0, y1",
+      "level": "error"
+     },
+     {
+      "code": "shape",
+      "path": "model.probes[0].y1",
+      "msg": "a area needs x0, x1, y0, y1",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].y",
+      "msg": "a 2-D profile needs y (a row) or x (a column), one of them",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].y",
+      "msg": "needs y on a 2-D grid",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.grid.nx",
+      "msg": "needs an integer from 2 to 2000",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.safety",
+      "msg": "needs a number from 0 to 1",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.frames",
+      "msg": "needs an integer from 2 to 200",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.vars",
+      "msg": "the name D is also a name of the spec (consts, params, derived)",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.vars",
+      "msg": "the name u is a name of the field (x, y, u, v)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].stat",
+      "msg": "one of max, min, mean, total, energy, l2",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].stat",
+      "msg": "one of max, min, mean, total, energy, l2",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "field@1 computes as a series: x, y, t, profile, probe, stat, front, residual, population, avalanche, eventTime",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.nine",
+      "msg": "the 9-point Laplacian is for a 2-D grid",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.kinetics",
+      "msg": "only reaction–diffusion (rd) has kinetics",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.Dv",
+      "msg": "only reaction–diffusion (rd) has Dv",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.ca",
+      "msg": "only a cellular automaton (equation ca) has ca",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.initV",
+      "msg": "only wave (u_t at t = 0) and two-field rd (v) have initV",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "output",
+      "path": "outputs[0].of",
+      "msg": "the sandpile only",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].x",
+      "msg": "needs x (the column)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].y",
+      "msg": "needs y (the row) on a 2-D grid",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].event",
+      "msg": "an event of model.events",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].nth",
+      "msg": "a whole number ±1–2000 (1 the first, −1 the last)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   }
+  ]
+ }
+}

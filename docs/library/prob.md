@@ -6,10 +6,10 @@ binomial intervals, power by the noncentral t, conjugate Bayes with HPD interval
 processes, queues and the bootstrap with BCa, and on to the multinomial and the classic occupancy problems, exact goodness-of-fit
 laws, MCMC with modern diagnostics, multivariate models and a toolbox for randomized algorithms. There is one engine with 19
 **modes** (`model.mode`). They share a checker, the
-distribution library (25 families), the special functions and a seeded random stream. The Python twin is `tools/lib_prob.py`. It
-checks and does not compute, and it embeds **the same JSON** (`DATA`: the families, every mode's schema, its outputs and the name
-lists; the test checks that the two copies are identical). The tests are `node tests/lib_prob.js` (208 assertions) and `node
-tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/prob.json`, 85 specs). The reference activities are
+distribution library (25 families), the special functions and a seeded random stream. Its
+**`DATA`** (the families, every mode's schema, its outputs and the name lists) is held to the golden one of the former Python twin.
+The tests are `node tests/lib_prob.js` (208 assertions) and `node
+tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/prob.json`, 85 specs). The reference activities are
 `tools/activities_examples/ci-coverage` (the coverage of Wald and Wilson intervals) and `tools/activities_examples/bloom-filter`
 (the false-positive rate of a Bloom filter against the number of hash functions, mode `rand`). The plan and the reference values P1–P29 are in
 the project's `engine-library/research/math.md` §2.
@@ -53,7 +53,7 @@ generator's numbers.
   Monte Carlo ≤ 2·10⁵ draws, sampling size × reps ≤ 10⁶, bootstrap B × n ≤ 4·10⁶, ruin walks ≤ 2·10⁶ steps, branching
   ≤ 5·10⁶ offspring draws. Work over a budget is refused up front, or stopped where it is, with the code `budget`.
 
-### 1.1 Checker codes (`checkSpec`, the same in `tools/lib_prob.py`)
+### 1.1 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

@@ -5,7 +5,7 @@
    The pack ships ONLY the .wasm, never JS. The module may import nothing but the host ABI (module "noema" or "env"):
      memory (one memory "memory", capped at abi.maxPages) · noema_log(ptr, len) (UTF-8, capped) · noema_now() → f64 ms ·
      noema_random() → f64 in [0, 1), seeded by the activity's seed. Anything else (WASI, JS glue, a table or global) → refused before
-     instantiation (inspect(): our own reader of the binary, the twin of tools/wasm_check.py; WebAssembly.Module.imports again in the worker).
+     instantiation (inspect(): our own reader of the binary, which the content checks use too; WebAssembly.Module.imports again in the worker).
    It runs in a dedicated blob: Worker whose network globals are removed before anything else (fetch, XHR, WebSocket, EventSource,
    WebTransport, importScripts, Worker, BroadcastChannel, IndexedDB, caches); the page reads and sha256-checks the bytes and hands them
    over — the worker never asks for anything. Every call has a time budget: over it, the worker is terminated (code 'runaway', restartable).
@@ -64,7 +64,7 @@
   }
   function fromB64(s) { const bin = atob(s), out = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
 
-  /* ---------- the binary reader (the twin of tools/wasm_check.py parse / inspect: the same rules, the same messages) ---------- */
+  /* ---------- the binary reader (the content checks and build/noema-tools.cjs use it: one set of rules and messages) ---------- */
   function parse(b) {
     const bad = w => Object.assign(new Error(w), { bad: w });
     if (b.length < 8 || b[0] !== 0 || b[1] !== 0x61 || b[2] !== 0x73 || b[3] !== 0x6d || b[4] !== 1 || b[5] || b[6] || b[7]) throw bad('magic');
@@ -99,7 +99,7 @@
     return { types, imports, funcs, memories: mems, exports, start };
   }
   const sig = t => '(' + t[0].join(',') + ')->(' + t[1].join(',') + ')';
-  /** → { ok, errors, bytes, sha256, imports, exports, memory, start } (the same object as tools/wasm_check.py inspect) */
+  /** → { ok, errors, bytes, sha256, imports, exports, memory, start } (tests/fixtures/parity/activities_wasm.json: the golden reports) */
   function inspect(bytes, maxPages = PAGES_DEFAULT, step = 'step', init = 'init') {
     const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes), E = [];
     const rep = { ok: false, errors: E, bytes: b.length, sha256: sha256(b), imports: [], exports: [], memory: null, start: false };

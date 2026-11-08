@@ -50,6 +50,10 @@ export interface CallOptions {
   /** With the user's session (default) or only the project key. */
   readonly auth?: boolean;
   readonly signal?: AbortSignal;
+  /** The request outlives the page (it is being closed); the body must stay under 64 KB. */
+  readonly keepalive?: boolean;
+  /** Leave the answer's body unread (a file to download: Answer.response has it). */
+  readonly raw?: boolean;
 }
 
 export interface Answer {
@@ -175,11 +179,13 @@ export class SupabaseClient {
         headers,
         body,
         ...(o.signal ? { signal: o.signal } : {}),
+        ...(o.keepalive ? { keepalive: true } : {}),
       });
     } catch (e) {
       return err(networkError(path, e));
     }
     const ct = response.headers.get('content-type') ?? '';
+    if (o.raw && response.ok) return ok({ status: response.status, body: null, response });
     if (!response.ok) {
       const text = await response.text().catch(() => '');
       let parsed: unknown = text;

@@ -1,7 +1,6 @@
-/* The shell's rules: the character catalogue and its change rule, how much game, the level, the streak, the treasures. */
+/* The shell's rules: the character catalogue and its change rule, how much game, the treasures. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import type { LocalDay } from '../../../kernel/day.ts';
 import {
   CHARACTER_EMOJI,
   CHARACTER_GROUPS,
@@ -16,9 +15,7 @@ import {
   ownedCharacter,
   worldOf,
 } from './characters.ts';
-import { addXp, chaptersDone, dueCount, levelOf, medals, statsOf, streakNow, todayXp, touchStreak, wrongCount } from './progress.ts';
-
-const d = (s: string) => s as LocalDay;
+import { medals } from './progress.ts';
 
 test('29 characters in three groups, each with a face', () => {
   assert.equal(CHARACTER_ORDER.length, 29);
@@ -65,43 +62,16 @@ test('what to learn and how much game', () => {
   assert.equal(gameOf({ game: 'off' }, { character: 'prism', lockCharacter: true }, 'prism'), 'off');
 });
 
-test('XP, the streak and the level', () => {
-  let s = statsOf(null);
-  s = addXp(s, 30, d('2026-11-01'), 'math');
-  s = addXp(s, 20, d('2026-11-02'), 'math');
-  assert.equal(s.streak, 2);
-  assert.equal(todayXp(s, d('2026-11-02')), 20);
-  assert.equal(s.bySubject['math'], 50);
-  assert.equal(streakNow(s, d('2026-11-03')), 2, 'yesterday still counts');
-  assert.equal(streakNow(s, d('2026-11-04')), 0);
-  assert.equal(touchStreak(s, d('2026-11-05')).streak, 1, 'a gap starts again');
-  assert.deepEqual(levelOf(0), { lv: 1, into: 0, need: 100 });
-  assert.deepEqual(levelOf(100), { lv: 2, into: 0, need: 120 });
-  assert.deepEqual(levelOf(250), { lv: 3, into: 30, need: 140 });
-});
-
-test('treasures, chapters done, what is due', () => {
+test('treasures', () => {
   const m = medals({ fcN: 120, sn: 8, xp: 50 });
   assert.deepEqual(
     m.filter(x => x.found).map(x => x.id),
     ['cards', 'week'],
   );
-  assert.equal(
-    chaptersDone(
-      [
-        { id: 'ch01', sections: 2 },
-        { num: 2, sections: 1 },
-      ],
-      { read: { 'ch01-s01': 1, 'ch01-s02': 1 } },
-    ),
-    1,
+  assert.deepEqual(
+    medals({ mastered: 1, boss: 2, xp: 1000, sn: 30 })
+      .filter(x => x.found)
+      .map(x => x.id),
+    ['step', 'week', 'boss', 'xp', 'month'],
   );
-  assert.equal(chaptersDone([], { boss: { ch01: true, ch02: false } }), 1);
-  const st = {
-    fc: { a: { due: '2026-11-01' }, b: { due: '2026-12-01' } },
-    pb: { c: { due: '2026-10-01' } },
-    res: { x: { last: false }, y: { last: true } },
-  };
-  assert.deepEqual(dueCount(st, d('2026-11-02')), { fc: 1, pb: 1 });
-  assert.equal(wrongCount(st), 1);
 });

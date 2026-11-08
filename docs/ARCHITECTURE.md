@@ -23,12 +23,12 @@ UI in `engine/` keeps running and reaches the new code through one global, `wind
                     ┌─────┴───────────────────────────────────▼─────┐
                     │ ports (src/ports/): Storage · Remote · Auth ·  │   interfaces + contract suites
                     │ Clock · AI · Compute · ErrorReporter · I18n ·  │   (src/ports/contract/*.contract.ts)
-                    │ Telemetry · Notifier                           │
+                    │ Telemetry · Notifier · Lifecycle               │
                     └─────────────────────┬─────────────────────────┘
                                           │ use
                     ┌─────────────────────▼─────────────────────────┐
                     │ kernel (src/kernel/): Result · NoemaError ·    │   pure TypeScript: no I/O, no globals
-                    │ ids · LocalDay · HLC · invariants              │
+                    │ ids · LocalDay · HLC · statecharts · invariants│
                     └───────────────────────────────────────────────┘
 ```
 
@@ -66,6 +66,7 @@ Helper 1's ESLint `boundaries` configuration checks these rules. Inside the laye
 | `ids.ts` | branded ids (`AccountId`, `CourseId`, `NodeId`, `CardId`, …) whose constructors return a `Result` |
 | `day.ts` | `LocalDay` "YYYY-MM-DD"; arithmetic through local noon, so it is DST-safe (ADR 005) |
 | `hlc.ts` | the hybrid logical clock `{wall, count, node}` with a drift guard, encoded so that it sorts as text |
+| `statechart.ts` | a small typed statechart: states, events, guards, context updates, timed transitions, effects as data; `transition()` is pure, `createActor` runs one on an injected scheduler, `transitionIds` lists every transition for coverage tests (the sync loop and the lease, docs/SYNC.md) |
 | `invariant.ts` | `invariant`, `defined`, `assertNever` |
 
 ## 4. Ports
@@ -76,8 +77,8 @@ fake of its service (`src/adapters/testing/`).
 
 | Port | Purpose | Adapters |
 |---|---|---|
-| Storage | key-value store (sync), document store (IndexedDB-like, with transactions), quota, the **storage-full signal** | browser (localStorage + IndexedDB `noema-lite` v1, the same DB the loader opens), memory |
-| Remote | rows with compare-and-swap versions that are always strictly later, objects, rpc | supabase (PostgREST + Storage), memory |
+| Storage | key-value store (sync), document store (IndexedDB-like, with transactions), quota, the **storage-full signal** | browser (localStorage + IndexedDB `noema-lite` v2 with the collection `sync`, the same DB the loader opens), memory |
+| Remote | rows with compare-and-swap versions that are always strictly later, objects, rpc; an append-only **log** (idempotent by id, read by cursor) and last-writer-wins **registers** (by clock stamp, one from the future clamped) — docs/SYNC.md | supabase (PostgREST + Storage), memory |
 | Auth | session, sign in/up/out, refresh, change events | supabase (GoTrue), memory |
 | Clock | now, today (`LocalDay`), time zone, timers, `onDayChange` | browser (system), memory (manual) |
 | AI | provider-neutral chat with tools, JSON mode, streaming deltas, usage | claude (Messages API, SSE), gemini (generateContent) |
@@ -86,6 +87,8 @@ fake of its service (`src/adapters/testing/`).
 | I18n | `t`, `has`, `err`, `plural`, `format.*`, locale and direction | browser (over `NoemaI18n`), memory (catalogs) |
 | Telemetry | local counters and events only, never sent | local |
 | Notifier | toast · notice (at most 2 on screen, then overflow to the 🔔 bell) · alert (also the assertive live region `#noema-alert`) | browser (DOM), memory (recording) |
+| EventStore | the learning log of each account: append-only, idempotent by event id (a forgotten event's id stays known), read in order or after a stamp, one snapshot of the fold (dropped when an event lands at or before it), meta values, a watch for other tabs, the **storage-full signal** (all or nothing per append); an append of events made here also queues them in the sync's outbox **in the same transaction** (`EventOutbox`; received ones never) | browser (the app's IndexedDB `noema-lite` v3, collections `log.events`, `log.ids`, `log.snapshots`, `log.meta` beside `sync`; BroadcastChannel to the other tabs), memory; both over the document store (`adapters/local/event-store.ts`) |
+| Lifecycle | the page: shown or hidden, on line, left, touched; this device's kind and browser; this tab's id | browser (document, window, sessionStorage), memory (manual) |
 
 ## 5. Composition roots and the container
 
@@ -107,12 +110,14 @@ The rules:
 - An unknown token fails with `container.unknown`.
 
 The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOCK`, `I18N`, `NOTIFIER`, `TELEMETRY`,
-`ERRORS`, `JOBS`, `COMPUTE`, `AI` and `CLOUD`; `ENGINES` is the engine library (`src/engines`).
+`ERRORS`, `JOBS`, `COMPUTE`, `AI` and `CLOUD`; `ENGINES` is the engine library (`src/engines`); `EVENT_STORE` and `LEARNING`
+are the learning log (`src/composition/learning.ts`).
 
 | Root | Built to | What it picks |
 |---|---|---|
-| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`, its code in the lazy `build/engines.js`) and the data contracts (`CONTRACTS`, `NoemaCore.contracts`, the validators in the lazy `build/contracts.js`; §6.1). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
-| `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
+| `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`, its code in the lazy `build/engines.js`), the data contracts (`CONTRACTS`, `NoemaCore.contracts`, the validators in `build/contracts.js`; §6.1) and the content checks (`NoemaCore.content`, `src/features/content`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
+| `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines, content }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
+| `noema-tools.ts` | `build/noema-tools.cjs` (Node, CommonJS) | the content checks with the contracts and the engine library, and the runtimes' package checkers (`engine/src/38`, `44`, `45`) run in a scope of their own: the one bridge of the Python tools and the skill's scripts (`tools/noema_core.py`; commands `validate`, `check-pack`, `rules`, `batch`) |
 | `ui.ts` → `ui-root.ts` | `build/ui.js` (IIFE, kind `dev`: not in the site or the one-file bundle) | the I18n port over `engine/i18n.js`, the system clock, the device storage for the demo's appearance, the Notifier policy over the frame's toaster; mounts the frame and the kit's demo for `#/ui-kit` (§6.3) |
 | `worker.ts` | `build/worker.js` | the job registry (`jobs.ts`) served over `worker-protocol.ts` |
 | `tools.ts` | (imported by Node scripts) | memory storage, the system clock, the given catalogs, a recording notifier and inline Compute; no network |
@@ -150,8 +155,80 @@ NoemaCore.NoemaError                    the error class
 NoemaCore.contracts                     the compiled data contracts (src/contracts)
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
+NoemaCore.learning.open(account) → Promise<report>   the learning log (src/composition/learning.ts, its header is the source)
+NoemaCore.learning.record({ type, subject?, item?, data, origin?, id?, day? }) → event | null · recordOnce(drafts) → Promise
+NoemaCore.learning.progress(subject) · progressOf(account, subject) · hasProgress · stats()
+NoemaCore.learning.settings(subject?) · settingsWritten(value) · setSubjectSetting(subject, key, value) · onSettings · onChange
+NoemaCore.learning.events() · eventsOf(account) · exportLog() · xapi(subject) · archive() · append(events) · restore(events, o)
+NoemaCore.learning.cardRating(grade) · playbookRating(grade, ticked) · idFor(prefix, parts) · backupStamp · flush · pending · migrate
+                                        · compact() · clear(account) · account()
+NoemaCore.study                         the study domain (src/features/study, the source of truth is the header of
+                                        src/composition/study.ts): grade(ex, answer, { regions }) → { ok: true|false|null, score,
+                                        items, typos, missing, parts } · targets · hits · fsrs.{review, memory, isDue, dueDay,
+                                        retrievability, later, box, defaults, optimize} · cards.{queue, countDue} ·
+                                        practice.{mistakes, countMistakes, solved, order, spread, sibling} ·
+                                        progress.{chapter, chaptersDone, levels} · xp.{today, goalReached, streak, level, dayOf} ·
+                                        models.{current, apply, start, rebuild, optimize, refit, onChange}
+NoemaCore.catalog                       the search index's records (src/features/catalog): fromPack · fromCurriculum ·
+                                        fromLangCourse · fromConvos · blockIds · blockText · trapId · cardKey · hash36 · plain ·
+                                        toneNumbers · BLOCK_KIND · SCHEMA · index(account, sources) → { load, refresh, records,
+                                        byKey, state, on, forget } (the records built in the Worker, kept in noema-lite-search)
+NoemaCore.content                       the content checks (src/features/content): checkPack, checkChapter, checkActivities,
+                                        checkSimSpec, checkQuality, checkTranslation, checkBridge, the rules (a BRIDGE_EXTENSION)
 NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
+NoemaCore.sync                          the sync loop, the lease, the settings registers (src/composition/sync.ts, docs/SYNC.md)
+NoemaCore.search                        the query side of search (src/features/search): fold, forms, latin, matches,
+                                        search(records, q, filters), snip(hit), params, saved, recent, keeper, roundSteps
+NoemaCore.vault                         the vault (src/features/vault): FORMATS, checkFile, fields(), the server's use cases
+NoemaCore.social                        people (src/features/social): state, onChange, refresh, search, putFile, the rules
+NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
+                                        reject with a NoemaError
 ```
+
+**The learning log.** What the learner does is an event (`noema.events/v1`,
+`src/contracts/schemas/noema.events.v1.schema.json`: an id, an HLC stamp, the learner's day, the device, the account, the subject
+and item, and the data of its type — answer given, card reviewed, section read, XP earned, setting changed, …). The log only
+grows: an undo is itself an event (`log.restored` for a backup brought back, `subject.reset`). The progress the screens read
+is its fold (`src/features/study/domain/events/projection.ts`; the old screens hold the same objects while events fold in),
+kept as a snapshot with the tail after it; compaction forgets only events a later one of the same key supersedes ("latest"
+types: an activity's saved state, a section opened, a setting). On each open the log converts what this device still keeps in
+the old places (`s:<subject>:state`, `a:stats`, the first time `a:settings`): the old texts are archived in the log's meta, the
+events are added (their ids are made from their content, so converting twice adds nothing), then the old keys leave the
+key-value store. `a:settings` stays the old screens' copy: what they write there becomes `setting.changed` events
+(the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js)) and the copy follows the log. Backups (version 3) carry the events. Cards and drills fold as the read
+models fold them (FSRS-6 replayed on the imported schedule with the learner's `fsrs` setting; a change of it schedules every
+card again). Events are stamped by the sync's device clock (`DEVICE_CLOCK`); the log fills the seams of the other features
+(`src/composition/learning.ts` `learningSeams`): `STUDY_EVENTS` (the read models' feed, which merges the imports the way the
+log does and asks for a rebuild after a restore), `SYNC_EVENT_LOG` (another device's events, kept once and never sent back),
+`LEGACY_PROGRESS` (the cloud's old progress rows, converted like this device's own) and `ROADMAP_EVENTS` (levels reached and
+tested, restructurings: `roadmap.*` events, the read models' level too); a restructuring hands the subjects the progress of
+the items that moved to them (`adoptProgress`: what a subject lacks becomes its events; XP stays where it was earned).
+
+The community parts are composed in `src/composition/community.ts` (`COMMUNITY_REGISTRATIONS`, `COMMUNITY_BRIDGE`): the
+tokens `REST`, `VAULT`, `SOCIAL`, `REPORTS` and `ENGINE_REQUESTS`. `REST` is a second Supabase client over PostgREST, RPC
+and Storage that shares the signed-in session (`noema1:cloud:session`) with `CLOUD`; without a cloud project every call
+answers `auth.not_signed_in`.
+
+#### 6.0 The study domain and its read models (phase 2)
+
+- **Grading** (`src/features/study/domain/grading`): every exercise type is graded by one pure function from the
+  exercise and the learner's answer in the exercise's own indices (the answer shapes are in the header of `grade.ts`).
+  The old renderers (`engine/src/30_exercises.js`, `31_types.js`, `32_activities.js`, `35_visual.js`) only collect the
+  answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
+  `grading.test.ts` (every exercise of the library and the fixtures) prove the results are the old ones.
+- **FSRS-6** (`fsrs.ts`, `fsrs-optimizer.ts`): the scheduler of py-fsrs 6 (its reference values in the tests) and an
+  optimiser that fits the 21 parameters to the learner's reviews (Adam on the log loss, in the Worker:
+  `study.fsrs.optimize`). Cards (`S.fc`) and drills (`S.pb`) hold FSRS memories; an entry in the old Leitner shape
+  `{ box, due }` is read as the memory it stands for (`fromLeitner`) and replaced at its next review, so no schedule is
+  lost. The three card buttons are the ratings Again, Good, Easy; a drill's blank / partly / nailed are Again, Hard,
+  and Easy (with ≥ 70 % of the checklist) or Good. The fitted parameters are kept in `a:settings.fsrs`.
+- **Read models** (`projections/`, CQRS): the learning log's events folded into the model of every subject (answers,
+  card and drill memories, reading, XP per day, the streak, the goal, levels, the FSRS setting). A rebuild runs in the
+  Worker (`study.project`); after it the page folds each new event itself. The events the read models read are listed
+  in `projections/input.ts`; the log reaches them through the `EventFeed` port of `application/read-models.ts`,
+  registered as `STUDY_EVENTS` by the learning log's store.
+- **Queries** (`queries.ts`): the card queue, due counts, the Mistakes gym, a round's order and siblings, chapter and
+  level progress, the day's XP, the goal, the streak (days with XP, plus a run carried over from before) and the XP level.
 
 The bridge speaks the old code's language. It returns plain values and throws exceptions instead of returning
 Results: a failed write is `false`, and a bad day throws `day.invalid`. Every failure it swallows goes to the
@@ -175,24 +252,30 @@ with its capabilities, a lazy entry, a lazy Worker bundle; `src/engines/plugins.
 library; its plugin `noemaWorkers` turns `noema-worker:<module>#<export>` into the engine's Worker bundle as text, with the
 kernels several engines share built once.
 
-**Lazy pieces.** The start path of the page is `build/app.js` (the core, the expression language, the catalogue and the 26
-manifests of `src/engines/manifests.ts`: about 105 KB) and `build/ui.js` (the frame and the shell's screens: about 240 KB).
-Two pieces of kind `lazy` stay out of it:
+**Lazy pieces.** The start path of the page is `build/app.js` (about 470 KB, 133 KB gzipped: the core, the expression
+language, the catalogue and the 26 manifests of `src/engines/manifests.ts`; phase 2's learning log, sync, read models, Roadmaps
+and community, about 330 KB; and the learning log's event contract, about 140 KB) and `build/ui.js` (the frame and the shell's
+screens: about 240 KB). Two pieces of kind `lazy` stay out of it:
 
 | piece | entry | what | when it runs |
 |---|---|---|---|
-| `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, `packcheck.js` before it checks a pack that names an engine, the author |
-| `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`), and after the first screen on Today; `NoemaCore.contracts.check()` before that is a bug and throws (`src/contracts/lazy.ts`) |
+| `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, the content checks before they check a pack that names an engine, the author |
+| `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) and the content checks built on them (`src/features/content`, about 120 KB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`, which brings both), after the first screen on Today, and before the Roadmaps start their jobs; a check before that is a bug and throws (`src/contracts/lazy.ts`, `src/features/content/application/lazy.ts`) |
+
+The learning log checks every event it reads or makes, and it opens before the first screen: its contract
+(`noema.events.v1#event`, `tools/contracts.mjs` `START_CONTRACTS`) is compiled a second time into
+`src/contracts/validate-start.ts`, and `build/app.js` and `build/ui.js` bundle `src/contracts/page.ts` in place of
+`src/contracts/index.ts` (the esbuild plugin `pageContracts`): that contract at once, every other one from the piece.
 
 A piece is a classic script: the page adds it as `<script src>` next to `build/app.js` (`pieceLoader` in
 `src/composition/browser.ts`), and the one-file bundle carries it as text (`<script type="text/plain" id="noema-lazy:<name>">`,
 `tools/build.py`) and runs that, so the same path works from `file://`. The piece hands its module over on
 `globalThis.__noema<Name>Piece`. A failed load (offline before the service worker has cached it) is tried again on the next ask.
-`tools/esbuild.mjs` holds `build/app.js` to 192 KB, so a change that pulls the engines or the validators back into the start
+`tools/esbuild.mjs` holds `build/app.js` to 480 KB, so a change that pulls the engines or the validators back into the start
 path fails the build. `build/harness.js` (one activity without the app) and the Node bundles keep the whole library inline.
 
 **Exact arithmetic.** No bundle is minified with `minifySyntax` (whitespace and names only): the engines must compute every
-double as their source writes it, bit for bit with their Python twins (`tools/lib_*.py`, `tools/{circuit,thermal,pid,rf,twin}.py`).
+double as their source writes it, bit for bit with the golden outputs of their former Python twins (`tests/fixtures/parity/`).
 
 The same library reaches the other environments as named entries of the same list: `build/harness.js` (above),
 `build/engines-node.cjs` (`src/engines/node.ts`, every engine in hand, for the node suites through `tests/engines.cjs`), and the
@@ -269,8 +352,12 @@ The rules:
 | Schema-first contracts | `src/contracts/` (helper 2) |
 | Microkernel plugins | `src/plugins/` (manifest, registry, capability checks), the engines in `src/engines/` (§6.1) |
 | Design tokens | `src/ui/tokens/` → `engine/tokens.css` (§6.2) |
+| Event sourcing of learning events (append-only log, content-hash ids, snapshots, compaction, undo as an event) | `src/features/study/domain/events/`, `application/learning-log.ts`, the EventStore port (§4, §6) |
 | Web components, context by event, an overlay stack | `src/ui/` (§6.3) |
-| Saga with idempotency keys, event sourcing of learning events, CQRS read models in a Worker (Compute jobs), local-first with an outbox, statecharts, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
+| CQRS read models in a Worker (Compute jobs `study.project`, `catalog.records`), followed on the page event by event | `src/features/study/application/read-models.ts`, `src/features/catalog/application/index-store.ts` (§6.0) |
+| Pure domain graders and schedulers (Strategy per exercise type; FSRS-6) | `src/features/study/domain/grading`, `fsrs.ts` (§6.0) |
+| Local-first with an outbox, statecharts | `src/features/sync` (the outbox in the event append's own transaction, the loop and the lease as statecharts), `src/kernel/statechart.ts`, docs/SYNC.md |
+| Saga with idempotency keys, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
 
 ## 8. How to add …
 
@@ -313,6 +400,6 @@ The rules:
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the lazy `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the pieces `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

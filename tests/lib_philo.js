@@ -1,8 +1,9 @@
 /* philo@1 (src/engines/philo/philo.js, docs/library/philo.md): published reference values (the source in each message), the edge cases
-   and their codes, the checker's codes and the JS ↔ Python parity on the fixtures, the sim adapter, the Worker source in a fresh
+   and their codes, the checker's codes and the the golden outputs of the former Python twin on the fixtures, the sim adapter, the Worker source in a fresh
    global, speed. Run: node tests/lib_philo.js */
 'use strict';
-const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs'), vm = require('vm');
+const want = require('./golden.cjs')('lib_philo');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
@@ -249,7 +250,7 @@ ok(Number.isNaN(A('bad', 'valid')) && codes(AR, { of: 'valid', argument: 'bad' }
     'a type whose every pivot is below 10⁻³⁰⁸ is underflow (not certified), n > 10⁵ is budget, a self-tie is missing');
 }
 
-// ---- 8. the checker: codes, and JS ↔ Python parity on the fixtures ----
+// ---- 8. the checker: codes, and the golden outputs of the former Python twin on the fixtures ----
 ok(hasErr(spec({ cases: [{ id: 'x' }] }, []), 'value', /cases\[0\]$/) && hasErr(spec({ cases: [{ id: 'x', preset: 'switch' }, { id: 'x', preset: 'loop' }] }, []), 'duplicate'), 'a case needs a preset or kAct and kNot; ids are unique');
 ok(hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], ballots: [{ n: 1, rank: ['a', 'z'] }] }] }, []), 'ref') && hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], ballots: [{ n: 1, rank: ['a', 'a'] }] }] }, []), 'duplicate') && hasErr(spec({ elections: [{ id: 'e', candidates: ['a', 'b'], axis: ['a'], ballots: [{ n: 1, rank: ['a'] }] }] }, []), 'value', /axis/), 'ballots name known candidates once; an axis has every candidate');
 ok(hasErr(spec({}, [{ id: 'x', kind: 'scalar', of: 'nope' }]), 'output') && hasErr(spec(EL, [{ id: 'x', kind: 'scalar', of: 'margin', election: 'tn', a: 'M', b: 'Q' }]), 'ref') && hasErr(spec(EL, [{ id: 'x', kind: 'scalar', of: 'criterion', election: 'tn', method: 'borda', criterion: 'iia' }]), 'value'), 'unknown outputs, unknown candidates, iia without other');
@@ -258,18 +259,13 @@ ok(hasErr(spec({}, [{ id: 'x', kind: 'scalar', of: 'ipd', strategy: 'tft', what:
 const FIX = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'fixtures', 'enginelib', 'philo.json'), 'utf8')).specs;
 {
   const js = FIX.map(s => { const p = L.checkSpec(s), bad = p.some(q => q.level === 'error'); return { p, x: bad ? null : L.exprs(s), k: bad ? null : L.keys(s) }; });
-  const pr = JSON.parse(execFileSync('python3', ['-c', `import json,sys,lib_philo as M
-out=[]
-for s in json.loads(sys.stdin.read()):
-    p=M.check_spec(s); bad=any(q['level']=='error' for q in p)
-    out.append({'p':p,'x':None if bad else [list(t) for t in M.exprs(s)],'k':None if bad else [list(t) for t in M.keys(s)]})
-print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify(FIX), encoding: 'utf8', maxBuffer: 1 << 26 }));
+  const pr = want('check', FIX, js);
   let same = 0; js.forEach((r, i) => { if (JSON.stringify(r) === JSON.stringify(pr[i])) same++; else console.log(`  spec ${i}\n  JS ${JSON.stringify(r).slice(0, 500)}\n  PY ${JSON.stringify(pr[i]).slice(0, 500)}`); });
-  ok(FIX.length >= 20 && same === FIX.length, `JS and Python agree on ${same}/${FIX.length} fixture specs (checkSpec, exprs, keys)`);
+  ok(FIX.length >= 20 && same === FIX.length, `the JS gives the golden outputs of the former Python twin on ${same}/${FIX.length} fixture specs (checkSpec, exprs, keys)`);
   const good = FIX.filter(s => !L.checkSpec(s).some(q => q.level === 'error')).length;
   ok(good >= 8 && FIX.length - good >= 8, `the fixtures hold good (${good}) and bad (${FIX.length - good}) specs`);
-  const pyT = JSON.parse(execFileSync('python3', ['-c', 'import json,lib_philo as M; print(json.dumps(M.T))'], { cwd: path.join(ROOT, 'tools'), encoding: 'utf8', maxBuffer: 1 << 26 }));
-  ok(JSON.stringify(pyT) === JSON.stringify(L.TABLES), 'the Python twin carries the same tables as the engine');
+  const pyT = want('tables', undefined, L.TABLES);
+  ok(JSON.stringify(pyT) === JSON.stringify(L.TABLES), 'the golden tables of the former Python twin hold the same tables as the engine');
   // every code of the checker appears in the fixtures
   const seen = new Set(js.flatMap(r => r.p.map(q => q.code)));
   ok(['format', 'value', 'enum', 'size', 'unknown-field', 'output', 'ref', 'duplicate'].every(c => seen.has(c)), 'the fixtures cover every checker code: ' + [...seen].sort().join(', '));

@@ -12,9 +12,13 @@ The app turns the result into a JSON file the learner downloads (the wiring is n
 | `validate(stmt)` / `validateAll(list)` | `[problem]` — the xAPI subset + the cmi5 rules (also across statements) |
 | `duration(ms)`, `uuid5(name, ns?)` | ISO 8601 duration to 0.01 s; RFC 4122 UUID v5 (SHA-1) |
 
-`input = { att: S.att, res?: S.res, pack?: {id, title, language}, chapters?: [chapter] }` — `S.att[exId] = {id, seed, t0, t,
-hints, result: {score, passed, detail, checks?, t}, events: [{t, name, data}]}` (engine/src/32_activities.js `saveAttempt`: the
-last 200 events); `S.res[exId] = {n, ok, last, t, conf?}` (10_core.js `record`). `att` may also be a list `[{exercise, …}]`.
+`input = { attempts, answers?, pack?: {id, title, language}, chapters?: [chapter] }`, both from the learning log
+(`NoemaCore.learning.xapi(subject)`, `src/features/study/domain/events/xapi.ts`; only what counts: a reset or a restore leaves
+the rest out) — `attempts = [{exercise, id, seed, t0, t, hints, result: {score, passed, detail, checks?, t}, events: [{t, name,
+data}]}]`: every attempt of an interactive exercise in its last version (`activity.attempted`, engine/src/32_activities.js
+`saveAttempt`: its last 200 events); `answers = [{id, exercise, ok, t, conf?, n?, okCount?}]`: every answer to an ordinary
+exercise (`answer.given`, 10_core.js `record`; `id` is the event's), and one entry per exercise for the answers counted before
+the log (`answers.imported`: `n` answers, `okCount` right).
 `chapters` only gives names and the parent chapter (otherwise the chapter is read from the id `chNN-eNNN`).
 
 `opts`: `actor: {name?, account: {homePage, name}}` (required; **never an email**: `mbox`, `mbox_sha1sum`, `openid` are never
@@ -30,7 +34,7 @@ written, a `name` with `@` is dropped, an actor without an account throws) · `a
 | each event | `interacted` | the exercise | ctx ext `event-name`, `event-index`, `event-data` (if any); timestamp = the event's `t` |
 | `result` | `passed` / `failed` | the exercise | `score {scaled, raw, min: 0, max: 1}`, `success`, `completion: true`, `duration` (t0 → result.t), ext `hints-used`, `detail`, `checks` [{label, ok}] |
 | an attempt without a result | — (only `attempted` + `interacted`) | | |
-| an `S.res` answer | `answered` | `<base>exercise/<exId>` (cmi.interaction, `interactionType` from the type) | `success` = last, `completion`, ext `answers-count`, `correct-count`, `confidence` |
+| an answer | `answered` | `<base>exercise/<exId>` (cmi.interaction, `interactionType` from the type) | `success` = ok, `completion`, ext `answers-count` (1, or `n`), `correct-count`, `confidence` |
 
 Context of every statement: `registration`, `language`, `parent` = `<base>chapter/<chId>`, `grouping` = the pack (`<base>`).
 Interaction types: mcq/odd/predict/inquiry/spotbug/img_hotspot → choice · tf → true-false · cloze/img_label → fill-in ·
@@ -62,11 +66,13 @@ CompletedAndPassed, NotApplicable), `masteryScore` (only when given), `launchMet
 the cmi5 statements use. Zipping it (cmi5.xml alone: the AUs are on the web) is up to the caller.
 
 ## Determinism
-Statement id = UUID v5 of registration | verb | object | attempt id | step; attempts sorted by `t0`, answers by id. The same
+Statement id = UUID v5 of registration | verb | object | attempt id | step (an answer: its event id); attempts sorted by `t0`,
+answers by time, then id. The same
 input and opts give the same bytes (a re-export is idempotent at an LRS). No `Date.now()`, no randomness.
 
 ## Limits
-- Exactly what `S.att` keeps: the **last** attempt of each sim and its last 200 events; earlier attempts are gone.
-- `S.res` keeps counts and the last outcome, not the learner's response: no `result.response`, one `answered` per exercise.
+- Every attempt of a sim is kept with its last 200 events (attempts made before the learning log: only the last one of each sim).
+- An answer keeps its outcome and confidence, not the learner's response: no `result.response`. Answers counted before the
+  learning log are one `answered` per exercise (with their counts).
 - `score.raw` = `scaled`, on 0–1 (the activity's own scale is not known).
 - The export describes statements; a cmi5 *launch* (fetch URL, auth token, LMS.LaunchData) is not implemented.

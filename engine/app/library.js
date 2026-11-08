@@ -124,8 +124,9 @@
   async function attachTranslation(acc, f) {
     const meta = (await subjectsFor(acc)).find(x => x.id === f.pack);
     if (!meta) throw new Error(tr('loader.tr.noSubject', { id: String(f.pack || '') }));
-    const pack = await getPack(acc, meta), r = NoemaPackCheck.checkTranslation(f, pack);
-    if (r.errors.length) throw new Error(tr('loader.tr.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (engine/packcheck.js)
+    await NoemaCore.contracts.ready();   // the content checks come with the contracts' validators (build/contracts.js)
+    const pack = await getPack(acc, meta), r = NoemaCore.content.checkTranslation(f, pack);
+    if (r.errors.length) throw new Error(tr('loader.tr.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (src/features/content)
     await IDB.put('packs', trKey(acc, f.pack, f.locale), f);
     if (isCloudAcc(acc)) await NoemaCloud.uploadObject(`packs/${f.pack}.tr.${f.locale}.json`, new Blob([JSON.stringify(f)], { type: 'application/json' }), 'application/json').catch(e => console.warn(e));
     if (meta.origin === 'imported') {   // the subject now names it, on every device
@@ -217,8 +218,8 @@
   }
   function countPack(p) { const ch = p.chapters || []; return { chapters: ch.length, sections: ch.reduce((a, c) => a + c.sections.length, 0), exercises: ch.reduce((a, c) => a + c.exercises.length, 0) }; }
   function subjectProgress(acc, s) {
-    const st = jget(KV.subjectKey('state', s.id, acc), null); if (!st || !s.counts?.exercises) return 0;
-    const ok = Object.values(st.res || {}).filter(r => r.ok > 0).length;
+    const L = NoemaCore.learning; if (L.account() !== acc || !s.counts?.exercises || !L.hasProgress(s.id)) return 0;
+    const ok = Object.values(L.progress(s.id).res).filter(r => r.ok > 0).length;
     return Math.min(1, ok / s.counts.exercises);
   }
 
@@ -420,6 +421,7 @@
   async function openEngine(acc, subs, meta, { background = false } = {}) {
     KV.subj = meta.id;
     if (!background) Noema.setCurrent(acc.id, meta.id);
+    if (N.migrate.quest(acc.id, meta.id)) await NoemaCore.learning.migrate();   // Databricks Quest's progress, once its pack is opened (src/composition/shell/migrate.ts)
     jset(`${P}${acc.id}:meta:sessions`, (jget(`${P}${acc.id}:meta:sessions`, 0) || 0) + 1);
     if (window.NoemaConvos) {
       try { await NoemaConvos.migrateLegacy(acc.id, subs); } catch (e) { console.warn('[Noema] conversation migration', e); }
@@ -453,7 +455,6 @@
     document.getElementById('noema-splash')?.remove();
     if (background) return;
     window.NoemaReact?.dayStart(acc.id);
-    if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);
     AutoBackup.start(acc.id).catch(caught('loader.autobackup'));
   }
   /** The frame asks for an engine when none is open (see openEngine). Resolves true once it is there. */
@@ -498,7 +499,7 @@
   const XL = k => window.NoemaI18n ? NoemaI18n.t('engine.xapi.' + k, null, uiPref()) : k;
   const toast = (m, ms) => N().toast(m, ms);
   const jget = (k, d) => N().jget(k, d);
-  const stateOf = sid => jget(`noema1:${acc()}:s:${sid}:state`, null);
+  const stateOf = sid => NoemaCore.learning.progressOf(acc(), sid);   // the learning log's fold (read only)
   const subjects = force => APP.subjects(force);
   const subjectId = () => N()?.subject?.id || null;
   const h = S.h;
@@ -562,7 +563,7 @@
       window.NoemaXAPI ? { label: XL('cmi5'), sub: XL('cmi5Sub'), icon: 'download', run: () => exportRecord(s, 'cmi5') } : null,
       hide ? { label: L(hidden ? 'subjShow' : 'subjHide'), icon: 'eye', run: () => { const l = new Set(settings().hiddenSubjects || []); hidden ? l.delete(s.id) : l.add(s.id); TH().putSettings({ hiddenSubjects: [...l] }); APP.dropSubjects(); refresh(); } } : null];
   }
-  /** a subject's ⋮ › the learning record (xAPI, from the subject's saved state) or the course package for an LMS (cmi5) — the same files
+  /** a subject's ⋮ › the learning record (xAPI, from the learning log) or the course package for an LMS (cmi5) — the same files
       as the subject's own ⋮ in the engine (NoemaXAPI.subjectRecord / subjectCmi5, engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) */
   async function exportRecord(s, kind) {
     try {
@@ -570,7 +571,7 @@
       let name, blob;
       if (kind === 'cmi5') { const r = NoemaXAPI.subjectCmi5({ pack: subj, chapters, site }); name = r.name; blob = await NoemaXAPI.zip(r.files); }
       else {
-        const st = stateOf(s.id) || {}, r = NoemaXAPI.subjectRecord({ att: st.att, res: st.res, pack: subj, chapters, accountId: acc(), site, now: Date.now() });
+        const { attempts, answers } = await NoemaCore.learning.xapi(s.id), r = NoemaXAPI.subjectRecord({ attempts, answers, pack: subj, chapters, accountId: acc(), site, now: Date.now() });
         if (!r) { toast(XL('none'), 3500); return; }
         name = r.name; blob = new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' });
       }

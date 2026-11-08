@@ -223,7 +223,7 @@ shows meanwhile).
 | `tools/pyodide_manifest.json` | the pin: the files with sha256 and bytes, the packages with their dependencies |
 | `tools/pywheels_allow.json` | the allow-list of extras (`quantiphy` 2.23, MIT, 43.6 KB) |
 | `tests/activities_py.js` | the runner in Chromium, Firefox and WebKit (numpy, scipy, the budget, no way out, extras, offline) |
-| `tests/activities.js`, `tests/activities_pack.py` | the validators (JS = Python), the pack round trip with main.py |
+| `tests/activities.js`, `tests/activities_pack.py` | the validators (their golden messages), the pack round trip with main.py |
 | `tests/activities_app.js` | the app over http: the first-use note, the view, the checks grader, Settings, offline, Greek, the fallbacks |
 
 The harness (`activity_test.py`, `activity_preview.py`) runs Python activities over a local http server when the files are there:

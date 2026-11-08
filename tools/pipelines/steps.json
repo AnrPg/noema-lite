@@ -187,7 +187,7 @@
   },
   "checks": {
    "title": "Every check (make_pack.py)",
-   "what": "python3 scripts/make_pack.py work/<id>: the quality rules of tools/pack_rules.json on every chapter, every translation against its chapter. Never deliver a pack that fails.",
+   "what": "python3 scripts/make_pack.py work/<id>: the quality rules (CONTENT_SPEC.md Q1–Q8) on every chapter, every translation against its chapter. Never deliver a pack that fails.",
    "needs": [
     "review",
     "translate",

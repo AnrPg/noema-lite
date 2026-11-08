@@ -25,7 +25,7 @@ const FX = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(pat
 /* ---------- 1. without a browser ---------- */
 function unit() {
   console.log('— the plan, without a browser');
-  const ctx = { window: {}, console }; ctx.globalThis = ctx; vm.createContext(ctx);
+  const ctx = { window: {}, console }; ctx.globalThis = ctx; require('./roadmaps_core')(ctx); vm.createContext(ctx);
   for (const f of ['engine/curriculum.js', 'engine/curimport.js', 'engine/sourceplan.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const P = ctx.window.NoemaSourcePlan;
   const doc = (p, pages, outline = []) => ({ path: p, name: p.split('/').pop(), size: pages * 40000, kind: 'pdf', paged: true, pages, outline, excerpt: '', file: { name: p.split('/').pop(), hint: p, size: pages * 40000 } });
@@ -238,7 +238,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     await p.screenshot({ path: SHOTS + '/src2_app.png', fullPage: true });
 
     console.log('— the connector: the learner’s Claude makes the Roadmap (noema_create_roadmap)');
-    const MCP = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // in tools/build.py CONNECTOR_ENGINE (the contracts and the engines are ES modules the connector imports)
+    const MCP = ['engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js'];   // in tools/build.py CONNECTOR_ENGINE (the contracts, the engines and the content checks are ES modules the connector imports)
     ok(MCP.every(f => fs.readFileSync(path.join(ROOT, 'src/connector/engine/sources.ts'), 'utf8').includes(`'${f}'`)), 'the connector bundles the From-your-sources code');
     const handler = await connectorHandler(ROOT, { config: { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] }, docs: { workflow: 'SKILL', content: 'C', visual: 'V' } });
     const T = (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'iro@example.com', password: 'secret123' }) })).json()).access_token;

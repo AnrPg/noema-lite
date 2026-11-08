@@ -1,4 +1,4 @@
-/* The new frame (engine/shell.js, docs/UI_MAP.md), Playwright + Chromium:
+/* The new frame (src/composition/ui-root.ts and src/ui/screens/shell, docs/UI_MAP.md), Playwright + Chromium:
      A. first start: what do you learn → who comes with you (29 characters) → Today; tabs follow the choice
      B. Knowledge, the Shelf and its ⋮ menus; a subject from the Shelf: chapters as a list or as cards, Practice ▾, the subject's ⋮
      C. chapter (Theory · Practice · Traps), section (reading mode, Ask ▾), the tutor sheet

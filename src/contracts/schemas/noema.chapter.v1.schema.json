@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.chapter.v1.schema.json",
   "title": "noema-lite chapter (chapters/chNN.json, translations/<locale>/chNN.json, pack.chapters[])",
-  "description": "A chapter of a subject: sections of theory blocks, exercises of every type, debug playbooks, pitfalls and flashcards, with its knowledge map and review (tools/CONTENT_SPEC.md \"Chapter object\" … \"Debug playbook\", docs/VISUAL.md for the picture exercises). $defs/chapter is what the engine needs to show and grade a chapter (engine/packcheck.js strict); $defs/chapterSource adds what the authoring contract requires of a chapter file in a subject folder (tools/validate.py). Every chapter, section, exercise and card may carry a level (a level id of the pack's levels; default: its parent's).",
+  "description": "A chapter of a subject: sections of theory blocks, exercises of every type, debug playbooks, pitfalls and flashcards, with its knowledge map and review (tools/CONTENT_SPEC.md \"Chapter object\" … \"Debug playbook\", docs/VISUAL.md for the picture exercises). $defs/chapter is what the engine needs to show and grade a chapter (checkPack strict, src/features/content/domain/pack.ts); $defs/chapterSource adds what the authoring contract requires of a chapter file in a subject folder (tools/validate.py). Every chapter, section, exercise and card may carry a level (a level id of the pack's levels; default: its parent's).",
   "$ref": "#/$defs/chapterSource",
   "$defs": {
     "text": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
@@ -736,7 +736,7 @@
     },
 
     "map": {
-      "description": "The chapter's knowledge map (map/chNN.json, noema.map/v1; tools/CONTENT_SPEC.md \"The knowledge map\"). Its rules (refs, exhaustive, fits) are the quality checks of tools/pack_rules.json.",
+      "description": "The chapter's knowledge map (map/chNN.json, noema.map/v1; tools/CONTENT_SPEC.md \"The knowledge map\"). Its rules (refs, exhaustive, fits) are the quality checks of src/features/content/domain/quality.ts (CONTENT_SPEC.md Q1–Q8).",
       "type": "object",
       "properties": {
         "format": { "const": "noema.map/v1" },

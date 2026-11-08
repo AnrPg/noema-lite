@@ -5,6 +5,8 @@ import { BUSY, REPLAYED } from '../services/packsave.ts';
 import { roadmapTodoText } from '../services/roadmap.ts';
 import { sagaKey } from '../services/sagas.ts';
 import { sha256Hex, str } from '../util.ts';
+import { LEVELS_DOC } from './create_roadmap.ts';
+import { ladderLine } from '../../features/roadmaps/domain/index.ts';
 
 export const tool: Tool = {
   definition: {
@@ -22,7 +24,8 @@ export const tool: Tool = {
         plan_json: {
           type: 'string',
           description:
-            'ONE JSON object: { "part": "name of this part, e.g. Week 5 — Thermodynamics", "summary": "…", "steps": [{ "ref": "n1", "title": "…", "summary": "what it covers", "role": "foundation|intro|aspect|subtopic|related|synthesis|application", "prerequisites": ["n0", "@existing_step_id"], "before": ["@existing_step_id"], "files": ["path/of/file.pdf pp. 3–20", …] }], "files": [{ "path": "path/of/file.pdf", "pages": 40 }] } — refs (n1, n2…) name the new steps inside this part; "@id" names a step already on the map. "files" lists EVERY new file the learner gave you (pages for PDFs); every file must be used by a step.',
+            'ONE JSON object: { "part": "name of this part, e.g. Week 5 — Thermodynamics", "summary": "…", "levels": [{ "id": "s3", "kind": "semester", "names": { "en": "Semester 3" } }], "steps": [{ "ref": "n1", "title": "…", "summary": "what it covers", "role": "foundation|intro|aspect|subtopic|related|synthesis|application", "prerequisites": ["n0", "@existing_step_id"], "before": ["@existing_step_id"], "level": "s3", "files": ["path/of/file.pdf pp. 3–20", …] }], "files": [{ "path": "path/of/file.pdf", "pages": 40 }] } — refs (n1, n2…) name the new steps inside this part; "@id" names a step already on the map. "files" lists EVERY new file the learner gave you (pages for PDFs); every file must be used by a step. A step\'s "level" is one of the Roadmap\'s levels (noema_roadmap_map lists them); "levels" (leave it out when the ladder has what you need) adds new levels at the top of the ladder (the next semester) or gives a Roadmap without levels its first ladder.' +
+            LEVELS_DOC,
         },
         independent: {
           type: 'boolean',
@@ -77,9 +80,10 @@ export const tool: Tool = {
       });
       const after = await curState(ctx, pk.c, ctx.uid),
         ids = Object.keys(r.entry.nodes);
+      const lv = r.entry.levels?.length ? `\nLevels: ${ladderLine(after)} (${r.entry.levels.length} new).` : '';
       const joins = r.entry.edges.filter(x => !r.entry.nodes[x.from] || !r.entry.nodes[x.to]).map(x => `@${x.from} → @${x.to}`);
       return (
-        `✅ The part “${r.entry.part.title}” is added to the Roadmap “${c.title || c.goal}” (${c.id}): ${ids.length} new step(s) — ${ids.map(id => `@${id} (“${r.entry.nodes[id]?.title}”)`).join(', ')}; joined to the map by ${joins.length ? joins.join(', ') : 'nothing (an independent part)'}. The learner's app adds it the next time it is open or syncs; nothing already prepared changed.\nNext: call noema_curriculum_task with curriculum_id "${c.id}" — first the chapter plans of the new steps, then ${prepare ? 'each new step in study order (all are queued for you)' : 'the steps the learner queues in the app'}, one subject each, from the files of this chat.` +
+        `✅ The part “${r.entry.part.title}” is added to the Roadmap “${c.title || c.goal}” (${c.id}): ${ids.length} new step(s) — ${ids.map(id => `@${id} (“${r.entry.nodes[id]?.title}”)`).join(', ')}; joined to the map by ${joins.length ? joins.join(', ') : 'nothing (an independent part)'}. The learner's app adds it the next time it is open or syncs; nothing already prepared changed.\nNext: call noema_curriculum_task with curriculum_id "${c.id}" — first the chapter plans of the new steps, then ${prepare ? 'each new step in study order (all are queued for you)' : 'the steps the learner queues in the app'}, one subject each, from the files of this chat.${lv}` +
         roadmapTodoText(E, after)
       );
     });

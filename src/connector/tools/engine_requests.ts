@@ -1,7 +1,7 @@
 /* noema_engine_requests — the requests for new engines: the person's own, or all of them for admins */
 import { argStr, fail, text, type Tool } from '../tool.ts';
 import { isAdmin } from '../services/admin.ts';
-import type { EngineRequestRow } from '../engine/api.ts';
+import { REQUEST_COLUMNS, REQUEST_OPEN, requestBrief, type EngineRequestRow } from '../../features/reports/domain/index.ts';
 import { str, UUID_RE } from '../util.ts';
 
 export const tool: Tool = {
@@ -32,9 +32,8 @@ export const tool: Tool = {
     },
   },
   async handler(args, ctx) {
-    const Q = ctx.engine.engineRequests,
-      admin = await isAdmin(ctx),
-      sel = `select=${Q.COLS}`;
+    const admin = await isAdmin(ctx),
+      sel = `select=${REQUEST_COLUMNS}`;
     if (args.id != null && args.id !== '') {
       const id = argStr(args, 'id');
       if (!UUID_RE.test(id)) return fail('id: a request id from noema_engine_requests');
@@ -49,7 +48,7 @@ export const tool: Tool = {
           })
           .catch(() => null);
       return text(
-        Q.brief(r) +
+        requestBrief(r) +
           (r.answer || r.engine_id
             ? `\n\n## The answer\n\n${r.engine_id ? 'Now done by ' + r.engine_id + '. ' : ''}${r.answer || ''}${r.fixed_in ? '\n\nBuilt in ' + r.fixed_in : ''}`
             : ''),
@@ -57,7 +56,7 @@ export const tool: Tool = {
     }
     const st = argStr(args, 'status') || (admin ? 'open' : 'all'),
       lim = Math.max(1, Math.min(200, Number(args.limit) || 30));
-    const f = st === 'all' ? '' : '&status=in.(' + (st === 'open' ? Q.OPEN : [st]).join(',') + ')';
+    const f = st === 'all' ? '' : '&status=in.(' + (st === 'open' ? REQUEST_OPEN : [st]).join(',') + ')';
     const who = admin ? '' : `&requester=eq.${encodeURIComponent(ctx.uid)}`;
     const rows = await ctx.sb.request<EngineRequestRow[]>(
       `/rest/v1/noema_engine_requests?${sel}${f}${who}&order=created_at.desc&limit=${lim}`,

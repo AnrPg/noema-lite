@@ -38,7 +38,7 @@ window.NoemaCurImport = (() => {
   /* i18n-ignore-end */
   const rt = (k, p = {}) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : String(EN[k] ?? k).replace(/\{(\w+)(?:, number)?\}/g, (m, x) => p[x] != null ? String(p[x]) : m);
   const ROLES = ['foundation', 'intro', 'aspect', 'subtopic', 'related', 'synthesis', 'application'];
-  const PART = { foundation: 'prereq', intro: 'core', aspect: 'core', subtopic: 'core', related: 'core', synthesis: 'core', application: 'apps', goal: 'core' };
+  const PART = () => window.NoemaCore.roadmaps.PART;   // a step's part of the map by its role (src/features/roadmaps/domain/model.ts)
   const ROLE_ALIASES = { prerequisite: 'foundation', prerequisites: 'foundation', prereq: 'foundation', foundation: 'foundation', basics: 'foundation', base: 'foundation', intro: 'intro', introduction: 'intro', overview: 'intro',
     aspect: 'aspect', core: 'aspect', goal: 'aspect', topic: 'aspect', main: 'aspect', subtopic: 'subtopic', sub: 'subtopic', related: 'related', synthesis: 'synthesis', capstone: 'synthesis', integration: 'synthesis', application: 'application', applications: 'application', app: 'application', apps: 'application' };
   const norm = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/ς/g, 'σ').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
@@ -308,7 +308,7 @@ window.NoemaCurImport = (() => {
     const resolve = r => { const s = String(r).trim(); return byKey.get(s) || byNum.get(s.replace(/\.$/, '')) || byTitle.get(norm(s)) || null; };
     const nodes = {};
     g.nodes.forEach((n, i) => { const role = ROLES.includes(n.role) ? n.role : 'aspect';
-      nodes[ids[i]] = { id: ids[i], title: fix(n.title).slice(0, 120), summary: n.summary || '', role, part: PART[role], chapters: n.chapters || [], learningGoals: n.learningGoals || [], fileRefs: [...(n.files || [])].map(x => typeof x === 'string' ? parseRef(x) : x), num: n.num || null, parent: n.parent ? byKey.get(n.parent) : null, key: n.key, imported: true }; });
+      nodes[ids[i]] = { id: ids[i], title: fix(n.title).slice(0, 120), summary: n.summary || '', role, part: PART()[role], chapters: n.chapters || [], learningGoals: n.learningGoals || [], fileRefs: [...(n.files || [])].map(x => typeof x === 'string' ? parseRef(x) : x), num: n.num || null, parent: n.parent ? byKey.get(n.parent) : null, key: n.key, imported: true }; });
     for (const s of g.section || []) { const id = resolve(s.key); if (id) nodes[id].fileRefs.push(...s.refs); else warnings.push('📎 ' + rt('roadmap.import.fileNotStep', { key: s.key })); }
     let edges = g.edges.map(([a, b]) => [resolve(a), resolve(b)]);
     g.nodes.forEach((n, i) => (n.after || []).forEach(a => { const p = resolve(a); if (p) edges.push([p, ids[i]]); else warnings.push(rt('roadmap.import.prereqNotStep', { step: n.title, prereq: a })); }));

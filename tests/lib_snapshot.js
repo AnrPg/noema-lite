@@ -10,8 +10,7 @@ const ROOT = path.join(__dirname, '..'), FIX = path.join(ROOT, 'tests', 'fixture
 globalThis.window = globalThis;
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaExpr = ENGINES.kernel('expr'), NoemaEngineCatalog = ENGINES.lib.catalog;
-require(path.join(ROOT, 'engine', 'packcheck.js'));
-const K = NoemaEngineCatalog, PC = globalThis.NoemaPackCheck, X = NoemaExpr;
+const K = NoemaEngineCatalog, PC = ENGINES.content(), X = NoemaExpr;
 const args = process.argv.slice(2), UPDATE = args.includes('--update'), only = args.filter(a => !a.startsWith('--'));
 const SEEDS = [1, 7, 20251105];
 let fails = 0, n = 0;

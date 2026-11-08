@@ -1,0 +1,713 @@
+{
+ "check": {
+  "in": "38737f5dc9c74a8b99b280b5c43ea822d54a94275a67b3631fbcf3384e2747b0",
+  "out": [
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 10",
+      "model.speeches[0].dur",
+      []
+     ],
+     [
+      "k",
+      "outputs[3].sentence",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "70 + k",
+      "model.debate.ballots[0].scores[1].pts",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "propLabel",
+      "model.debate.teams[0].label"
+     ],
+     [
+      "oppLabel",
+      "model.debate.teams[1].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 10",
+      "model.debate.post.for",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": [
+     [
+      "cLabel",
+      "model.map.nodes[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 2",
+      "model.map.nodes[0].impact",
+      []
+     ],
+     [
+      "k",
+      "outputs[1].tau",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.outline.parts[0].pos",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "needLabel",
+      "model.outline.parts[1].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k / 4",
+      "model.elm.motivation",
+      []
+     ],
+     [
+      "k * 5",
+      "model.inoculation.boosters[1]",
+      []
+     ],
+     [
+      "k * 3",
+      "outputs[2].at",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "dup",
+      "path": "model.speeches[1].id",
+      "msg": "the id a is used twice",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.speeches[0].text",
+      "msg": "needs a text (a string)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.speeches[0].timing[0]",
+      "msg": "needs [start, end] in seconds, 0 <= start <= end",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.speeches[0].timing",
+      "msg": "needs the text the timings belong to",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "format",
+      "path": "model.speeches[0].timing",
+      "msg": "not an array",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.speeches[0].timing",
+      "msg": "needs the text the timings belong to",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].of",
+      "msg": "scalar outputs of rhetoric@1 are: words, sentences, clauses, syllables, duration, wpm, articulation, pauses, pauseRate, meanPause, longestPause, fillers, fillerRate, meanSentence, sdSentence, cvSentence, npvi, questions, readability, figure, figureAt, limit, overtime, poiOffered, poiAccepted, poiProtected, violations, rank, points, speaks, winner, winnerSide, consistent, lpw, ballotsFor, margin, tab, swing, label, accepted, extensions, inCount, netBenefit, weighedWinner, dropped, clash, toulmin, stockMet, primaFacie, cqOpen, cqFailed, schemeCQs, fallacy, fallacies, slope, valid, counter, orderOk, kendall, misplaced, stasis, elaboration, attitude, central, peripheral, route, resistance, attitudeAfter, gradeGap, rateGap, fit, sound, soundAt, trope, tropeAt, bipolarLabel, bipolarAccepted, complexAttacks, aspicArgs, aspicDefeats, justified, postulates",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].kind",
+      "msg": "one of scalar, series, scene",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "ref",
+      "path": "outputs[0].team",
+      "msg": "not a team of model.debate",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[1].of",
+      "msg": "the vote swing is for the oxford format",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "ref",
+      "path": "model.speeches[0].team",
+      "msg": "not a team of model.debate",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.speeches[0].pois[0].by",
+      "msg": "not a team of model.debate",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.speeches[0].role",
+      "msg": "not a speech of the format: PM, LO, DPM, DLO, MG, MO, GW, OW",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.debate.ballots[0].winner",
+      "msg": "not a team of model.debate",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.debate.ballots[0].ranks[0].team",
+      "msg": "not a team of model.debate",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.debate.ballots[0].scores[0].speech",
+      "msg": "not a speech of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.debate.slots",
+      "msg": "missing (a custom format lists its speeches)",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[0].speech",
+      "msg": "not a speech of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.debate",
+      "msg": "an Oxford vote needs both pre and post",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.map.nodes[0].s",
+      "msg": "needs a short text (1-64 characters)",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.map.nodes[0].speech",
+      "msg": "not a speech of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.map.nodes[0].misrepresents",
+      "msg": "not a node of the map",
+      "level": "error"
+     },
+     {
+      "code": "size",
+      "path": "model.map.nodes[0].cq",
+      "msg": "the scheme popular has 2 critical questions",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.map.edges[0].to",
+      "msg": "not a node of the map",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "outputs[0]",
+      "msg": "needs node or form",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[1].node",
+      "msg": "not a node of the map",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.forms[0]",
+      "msg": "needs premises and a conclusion, or a mood and a figure",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.forms[1].mood",
+      "msg": "needs a mood of three letters A, E, I, O and a figure 1-4",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.forms[2]",
+      "msg": "needs premises (1-8) and a conclusion",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[0].form",
+      "msg": "not a form of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "ref",
+      "path": "model.outline.parts[0].part",
+      "msg": "not a part of monroe: attention, need, satisfaction, visualization, action",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.delivery.fillers[0]",
+      "msg": "needs a filler word or phrase (1-32 characters)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.delivery.fillers[1]",
+      "msg": "needs a filler word or phrase (1-32 characters)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "ref",
+      "path": "outputs[0].of",
+      "msg": "needs model.speeches",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[1].of",
+      "msg": "needs model.elm",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[2].of",
+      "msg": "needs model.outline",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[3].of",
+      "msg": "needs model.forms",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[3].form",
+      "msg": "not a form of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[4].of",
+      "msg": "needs model.map or model.forms",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[5].of",
+      "msg": "needs model.outline",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[6].of",
+      "msg": "needs model.stasis",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "outputs[7].at",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[7].of",
+      "msg": "needs model.inoculation",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "unknown-field",
+      "path": "model.extra",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "enum",
+      "path": "model.lang",
+      "msg": "one of en, el, de, fr, ru, es, it, other",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.elm.ability",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.elm.quality",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.elm.cue",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "model.audience.formula",
+      "msg": "one of flesch, fk, fog, amstad, wstf, kandel, oborneva, lix, rix",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "outputs[0].foo",
+      "msg": "ignored",
+      "level": "warning"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "size",
+      "path": "model.speeches[0].text",
+      "msg": "more than 20000 characters",
+      "level": "error"
+     },
+     {
+      "code": "size",
+      "path": "model.speeches",
+      "msg": "more than 40000 characters of text in all",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "size",
+      "path": "model.map.nodes[0].cq",
+      "msg": "the scheme sign has 2 critical questions",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[1].of",
+      "msg": "needs model.debate",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "outputs[1]",
+      "msg": "needs team or speech",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "format",
+      "path": "model",
+      "msg": "not an object",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "outputs",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "outputs[1].sentence",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "literal",
+      "path": "model.theory.kb[0].f",
+      "msg": "needs a literal (an atom or ¬atom)",
+      "level": "error"
+     },
+     {
+      "code": "literal",
+      "path": "model.theory.rules[1].body[0]",
+      "msg": "needs a literal (an atom or ¬atom)",
+      "level": "error"
+     },
+     {
+      "code": "literal",
+      "path": "model.theory.contraries[0].v",
+      "msg": "needs a literal (an atom or ¬atom)",
+      "level": "error"
+     },
+     {
+      "code": "dup",
+      "path": "model.theory.rules[1].id",
+      "msg": "the id r is used twice",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "outputs[0].type",
+      "msg": "one of simile, metaphor, irony",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[1].of",
+      "msg": "needs model.theory",
+      "level": "error"
+     },
+     {
+      "code": "literal",
+      "path": "outputs[1].concl",
+      "msg": "needs a literal (an atom or ¬atom)",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[2].of",
+      "msg": "needs model.map",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[2].node",
+      "msg": "not a node of the map",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.synizesis",
+      "msg": "needs true or false",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "model.theory.kb[0].kind",
+      "msg": "one of axiom, ordinary",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "model.theory.link",
+      "msg": "one of last, weakest",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "outputs[0].type",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[0].of",
+      "msg": "needs model.speeches",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[0].speech",
+      "msg": "not a speech of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   }
+  ]
+ }
+}

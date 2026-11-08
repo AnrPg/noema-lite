@@ -1,5 +1,5 @@
 /* 🔔 News that arrives (a step ready, a subject attached, a new part, links added — engine/curjobs.js through Noema.notice,
-   engine/loader.js Notices): at most 2 short toasts on screen at once; a 3rd moves them all to the bell, where they wait
+   src/composition/shell/kv.ts NoticeStore): at most 2 short toasts on screen at once; a 3rd moves them all to the bell, where they wait
    (on this device) until cleared one by one or with “Clear all”. The toasts never stack up over the page.
    Driven through the real inbox (NoemaCurJobs.App.poll) with 4 “links added” answers, the cloud calls stubbed.
      A. the new frame (shell.js): 2 toasts, then 0 toasts and 4 in the bell; ✕ one, reload keeps the rest, Clear all

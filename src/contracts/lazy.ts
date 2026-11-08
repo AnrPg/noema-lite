@@ -1,8 +1,9 @@
 /* The data contracts of the app's page without their validators (src/composition/browser.ts): the compiled validators are
    most of the contracts' code (src/contracts/validate.ts, about 1.4 MB), so the page loads them in one piece
    (build/contracts.js, src/composition/contracts.ts) after the first screen is drawn. The facade answers like the module
-   once the piece is in; the shell starts the load at start and waits for ready() before it opens a subject
-   (src/composition/ui-root.ts), and everything that checks a shape (engine/packcheck.js) runs after that. */
+   once the piece is in; the UI root starts the load at start and waits for ready() before it opens the learning log or a
+   subject (src/composition/ui-root.ts), so everything that checks a shape (the learning log, NoemaCore.content: their
+   domain modules reach the same piece through src/contracts/page.ts) runs after that. */
 import { NoemaError } from '../kernel/errors.ts';
 import type * as Contracts from './index.ts';
 
@@ -17,7 +18,6 @@ export interface LazyContracts {
   problems: ContractsPiece['problems'];
   isContractId: ContractsPiece['isContractId'];
   readonly CONTRACT_IDS: ContractsPiece['CONTRACT_IDS'];
-  readonly rules: ContractsPiece['rules'];
   readonly migrations: ContractsPiece['migrations'];
 }
 
@@ -48,9 +48,6 @@ export function lazyContracts(load: () => Promise<ContractsPiece>): LazyContract
     isContractId: (id: string) => need().isContractId(id),
     get CONTRACT_IDS() {
       return need().CONTRACT_IDS;
-    },
-    get rules() {
-      return need().rules;
     },
     get migrations() {
       return need().migrations;

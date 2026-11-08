@@ -49,9 +49,9 @@ alter default privileges in schema public grant all on tables to anon, authentic
     psql(seed); psql(seed)
     ok(True, 'cloud/supabase.sql runs, and runs again (idempotent); so does the seed of the vault fields')
     tables = psql("select tablename from pg_tables where schemaname='public' and tablename like 'noema_%' and rowsecurity order by 1")
-    ok(tables == ['noema_admins', 'noema_blocks', 'noema_bridges', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_engine_requests', 'noema_error_reports', 'noema_kv',
+    ok(tables == ['noema_admins', 'noema_blocks', 'noema_bridges', 'noema_buddies', 'noema_chat_files', 'noema_conversations', 'noema_curricula_shared', 'noema_curriculum_members', 'noema_curriculum_steps', 'noema_engine_requests', 'noema_error_reports', 'noema_events', 'noema_kv',
                   'noema_message_reports', 'noema_messages', 'noema_people', 'noema_profiles', 'noema_public_packs', 'noema_public_profiles', 'noema_room_members', 'noema_room_roadmaps',
-                  'noema_rooms', 'noema_sagas', 'noema_shares', 'noema_snapshots', 'noema_source_files', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 30 noema_ tables, all with row-level security: ' + ', '.join(tables))
+                  'noema_rooms', 'noema_sagas', 'noema_settings', 'noema_shares', 'noema_snapshots', 'noema_source_files', 'noema_vault_fields', 'noema_vault_files', 'noema_vault_hits', 'noema_vault_ratings', 'noema_vault_reports'], 'the 32 noema_ tables, all with row-level security: ' + ', '.join(tables))
     A, B, C = (str(uuid.uuid4()) for _ in range(3)); EA, EB, EC = 'anna@example.com', 'bob@example.com', 'carl@example.com'
     psql(f"insert into auth.users values ('{A}','{EA}'),('{B}','{EB}'),('{C}','{EC}')")
     # own data
@@ -70,6 +70,33 @@ alter default privileges in schema public grant all on tables to anon, authentic
     ok(psql("select count(*) from noema_bridges", B, EB) == ['0'] and psql("select pair from noema_bridges", A, EA) == ['en.ru'], 'bridges: one row per pack × pair, only the owner sees them')
     psql(f"insert into noema_sagas (user_id, key, kind) values ('{A}', 'pack:heart:1', 'pack')", A, EA)
     ok(psql("select count(*) from noema_sagas", B, EB) == ['0'] and psql("select status from noema_sagas", A, EA) == ['running'], 'sagas: owner only, running when they start')
+    # sync (§19): the events append-only and once per id, the settings per field with the later stamp, the cursors
+    now_ms = int(time.time() * 1000); H = lambda ms, n='devA', c=0: f'{ms:015d}-{c:05d}-{n}'
+    ev = lambda u, i, ms: f"('{u}', '{i}', 'answer.given', '{H(ms)}', 'devA', '{{\"id\":\"{i}\"}}')"
+    psql(f"insert into noema_events (user_id, id, type, hlc, device, body) values {ev(A, 'e1', now_ms)}, {ev(A, 'e2', now_ms + 1)} on conflict (user_id, id) do nothing", A, EA)
+    psql(f"insert into noema_events (user_id, id, type, hlc, device, body) values {ev(A, 'e2', now_ms + 1)}, {ev(A, 'e3', now_ms + 2)} on conflict (user_id, id) do nothing", A, EA)
+    ok(psql("select string_agg(id, ',' order by tx, seq) from noema_events", A, EA) == ['e1,e2,e3'] and psql("select count(*) from noema_events", B, EB) == ['0'], 'events: a repeated id is ignored; only the owner sees them')
+    ok(psql(f"insert into noema_events (user_id, id, type, hlc, device, body) values {ev(B, 'x', now_ms)}", A, EA, expect_error=True), 'nobody adds events for another user')
+    psql("update noema_events set type = 'changed'", A, EA); psql("delete from noema_events", A, EA)
+    ok(psql("select count(*) from noema_events where type = 'answer.given'", A, EA) == ['3'], 'events are never changed or deleted (no policy lets anyone)')
+    ok(psql(f"insert into noema_events (user_id, id, type, hlc, device, body) values ('{A}', 'bad', 't', 'yesterday', 'devA', '{{}}')", A, EA, expect_error=True), 'an event needs a clock stamp')
+    p1 = psql("select id || '|' || cursor from noema_events_since(null, 2)", A, EA)
+    c1 = p1[-1].split('|')[1]
+    p2 = psql(f"select id from noema_events_since('{c1}', 1000)", A, EA)
+    ok([x.split('|')[0] for x in p1] == ['e1', 'e2'] and p2 == ['e3'] and psql(f"select count(*) from noema_events_since('{c1}', 1000)", B, EB) == ['0'], "noema_events_since: pages in order from a cursor, only the owner's")
+    put = lambda key, val, ms, n='devA': psql(f"insert into noema_settings (user_id, key, value, hlc, device) values ('{A}', '{key}', {val}, '{H(ms, n)}', '{n}') on conflict (user_id, key) do update set value = excluded.value, hlc = excluded.hlc, device = excluded.device returning value::text", A, EA)
+    put('settings.goal', "'150'", now_ms)
+    ok(put('settings.goal', "'90'", now_ms - 5000, 'devB') == [] and psql("select value::text from noema_settings where key = 'settings.goal'", A, EA) == ['150'], 'settings: an earlier stamp leaves the stored value (and is not returned)')
+    ok(put('settings.goal', "'200'", now_ms + 1000, 'devB') == ['200'], 'settings: a later stamp wins')
+    put('settings.sound', 'null', now_ms + 2000)
+    ok(psql("select coalesce(value::text, 'null') from noema_settings where key = 'settings.sound'", A, EA) == ['null'], 'settings: a removal is a null value')
+    put('settings.lang', "'\"el\"'", now_ms + 365 * 86400000, 'devF')
+    far = psql("select substr(hlc, 1, 15)::bigint from noema_settings where key = 'settings.lang'", A, EA)
+    ok(int(far[0]) < now_ms + 600000 and put('settings.lang', "'\"fr\"'", now_ms + 4000) == ['"fr"'], "settings: a stamp far in the future is stored as the server's time, so a later write still wins")
+    s1 = psql("select key || '|' || cursor from noema_settings_since(null, 1000)", A, EA)
+    put('settings.goal', "'250'", now_ms + 5000)
+    s2 = psql(f"select key || '=' || value::text from noema_settings_since('{s1[-1].split('|')[1]}', 1000)", A, EA)
+    ok(sorted(x.split('|')[0] for x in s1) == ['settings.goal', 'settings.lang', 'settings.sound'] and s2 == ['settings.goal=250'] and psql("select count(*) from noema_settings_since(null, 1000)", B, EB) == ['0'], "noema_settings_since: a changed field comes again after the cursor; only the owner's")
     psql(f"insert into noema_kv (user_id, key, value) values ('{B}', 'a:srcfiles:lungs', '{{\"s1\":{{\"name\":\"l.pdf\",\"size\":9}},\"s2\":{{\"name\":\"m.pdf\"}}}}'), ('{B}', 'a:bridges', '{{\"lungs\":{{\"ru\":{{\"v\":\"a\"}},\"en.el\":{{\"v\":\"b\"}}}}}}'), ('{B}', 'a:srcfiles:broken', 'not json')")
     psql(sql); psql(sql)
     ok(psql("select subject_id || '/' || source_id || ':' || (meta->>'name') from noema_source_files order by 1", B, EB) == ['lungs/s1:l.pdf', 'lungs/s2:m.pdf']

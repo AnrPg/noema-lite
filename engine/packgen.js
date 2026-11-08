@@ -6,7 +6,7 @@
      3. chapters   — one call per planned chapter, in the app's own JSON format (tools/CONTENT_SPEC.md):
                      theory blocks, debug playbooks, pitfalls, flashcards and many exercise types, plus
                      0–2 diagrams (only where they teach) drawn by the diagram kit below (SVG + clickable regions) with picture exercises
-   Every chapter is checked by engine/packcheck.js (strict) + quantity rules; problems go back to Gemini
+   Every chapter is checked by the content checks (src/features/content, NoemaCore.content) (strict) + quantity rules; problems go back to Gemini
    for repair. Progress is saved after every step (IndexedDB), so generation resumes after a reload. */
 window.NoemaPackGen = (() => {
   const L = () => window.NoemaLLM;
@@ -226,7 +226,7 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
           if (d.id !== id) return [`"id" must be "${id}"`];
           let m; try { m = materialize(d, prefix); } catch (e) { return [e.message]; }
           const pack = { format: 'noema-pack', subject: { id: packId, title: 'x', features: { math: !!run.meta?.math, code: !!run.meta?.code } }, chapters: [m.chapter], media: m.media };
-          const r = window.NoemaPackCheck.checkPack(pack, null, { strict: true });
+          const r = window.NoemaCore.content.checkPack(pack, null, { strict: true });
           return [...r.errors, ...quality(d)].slice(0, 30);
         }, onRepair: e => onLog('   ↻ ' + rt('roadmap.fixing', { n: e.length })) });
       /* i18n-ignore-end */
@@ -235,10 +235,10 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
       run.chapters.push(m.chapter); Object.assign(run.media, m.media); await keep();
       onLog('   ✓ ' + rt('roadmap.gen.chapterDone', { sections: m.chapter.sections.length, exercises: m.chapter.exercises.length, flashcards: m.chapter.flashcards.length }));
     }
-    // 3b. translations — every chapter in English, Greek, Russian, German and French too (minus the step's own language; tools/pack_rules.json
-    //     "languages"): the same JSON with only the words translated, checked like an imported translation
+    // 3b. translations — every chapter in English, Greek, Russian, German and French too (minus the step's own language; the pack
+    //     rules' languages, src/features/content/domain/rules.ts): the same JSON with only the words translated, checked like an imported translation
     run.tr = run.tr || {};
-    for (const loc of window.NoemaPackCheck.requiredLocales(c.language || 'en').translations) {
+    for (const loc of window.NoemaCore.content.requiredLocales(c.language || 'en').translations) {
       const done = run.tr[loc] = run.tr[loc] || [];
       for (let i = done.length; i < run.chapters.length; i++) {
         if (signal?.aborted) throw new (L().LLMError)('Stopped.', 0, 'aborted');   // i18n-ignore (an internal signal: kind 'aborted')
@@ -249,7 +249,7 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
           system: `You are a professional translator of course material. Translate one chapter of a study pack from ${lang} into ${loc} (${name}), naturally and precisely, with the subject's established terms in ${loc}. Answer in JSON only.`,
           prompt: `Translate every text the learner reads in this chapter (titles, theory, questions, options, explanations, feedback, cards, playbooks, pitfalls) into ${loc}. Keep EXACTLY: every "id", "type", "section", "media", "t", "kind", "answer", "ok", "bucket", "to", numbers, the order and length of every list, every code block and inline code, formulas and LaTeX, and the [[…]] gaps of cloze texts (translate the words inside them). Return the whole chapter.\n\n${JSON.stringify(src)}`,
           schema: { type: 'object', required: ['id', 'sections', 'exercises'] },
-          validate: d => window.NoemaPackCheck.checkTranslation({ format: 'noema-translation', v: 1, pack: packId, locale: loc, chapters: [d] }, { subject: { id: packId, language: c.language || 'en' }, chapters: [src] }).errors.slice(0, 30),
+          validate: d => window.NoemaCore.content.checkTranslation({ format: 'noema-translation', v: 1, pack: packId, locale: loc, chapters: [d] }, { subject: { id: packId, language: c.language || 'en' }, chapters: [src] }).errors.slice(0, 30),
           onRepair: e => onLog('   ↻ ' + rt('roadmap.fixing', { n: e.length })) });
         /* i18n-ignore-end */
         add(usage); done.push({ ...data, id: src.id, src: src.src, ...(src.sources ? { sources: src.sources } : {}) }); await keep();
@@ -265,9 +265,9 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
     const pack = { format: 'noema-pack', v: 3, subject, sources, chapters: run.chapters, media: run.media, builtAt: new Date().toISOString(), generatedBy: 'gemini', curriculum: { id: c.id, node: nodeId } };
     if (Object.keys(run.tr).length) { pack.v = 2; pack.translations = Object.fromEntries(Object.entries(run.tr).map(([loc, chs]) => [loc, { chapters: chs }])); }   // the app keeps each in its own file (loader storeTranslations)
     /* i18n-ignore-end */
-    await window.NoemaCore.engines.load(window.NoemaPackCheck.enginesNamed(pack));   // the engines its activities name check their models (none for a chapter of text)
-    const r = window.NoemaPackCheck.checkPack(pack, packId, { strict: true });
-    if (r.errors.length) throw new Error(rt('roadmap.gen.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (engine/packcheck.js)
+    await window.NoemaCore.engines.load(window.NoemaCore.content.enginesNamed(pack));   // the engines its activities name check their models (none for a chapter of text)
+    const r = window.NoemaCore.content.checkPack(pack, packId, { strict: true });
+    if (r.errors.length) throw new Error(rt('roadmap.gen.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (src/features/content)
     pack.counts = { chapters: r.counts.chapters, sections: r.counts.sections, exercises: r.counts.exercises, visual: r.counts.visual, pictures: r.counts.media, flashcards: run.chapters.reduce((a, ch) => a + ch.flashcards.length, 0) };
     let h = 0; const js = JSON.stringify(pack.chapters); for (let i = 0; i < js.length; i += 7) h = (h * 31 + js.charCodeAt(i)) >>> 0; pack.version = 'g' + h.toString(16);
     await DB.del(packId).catch(() => { });

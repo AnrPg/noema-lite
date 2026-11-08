@@ -96,7 +96,7 @@ along with the course.
 `H5P.Summary`, `H5P.Dialogcards`. Allowed with a warning (not yet tested): `H5P.QuestionSet`, `H5P.InteractiveVideo` (the video
 must be inside the package: a YouTube or other outside link is refused), `H5P.BranchingScenario`, `H5P.CoursePresentation`.
 Refused: anything that loads from the network (`H5P.MathDisplay`, `H5P.IFrameEmbed`, `H5P.Twitter`, `H5P.GoogleMap`, …), any outside
-link in the content, files H5P itself would refuse (`.php`, `.html`, `.exe`). `python3 h5p_check.py item.h5p` says exactly what is
+link in the content, files H5P itself would refuse (`.php`, `.html`, `.exe`). `python3 activity_lint.py work/<id>` says exactly what is
 wrong with a package. Content-type libraries come inside the package with their own licences (normally MIT); give the content's own
 licence in `activity.json`.
 

@@ -1,4 +1,4 @@
-/* The search (engine/search.js, engine/catalog.js, docs/SEARCH.md), Playwright + Chromium, in the new frame:
+/* The search (engine/search.js, NoemaCore.search and NoemaCore.catalog, docs/SEARCH.md), Playwright + Chromium, in the new frame:
      A. 🔎 in the top bar (and / or Ctrl K): the quick sheet, results grouped by kind, Knowledge or Languages on each
      B. #/search: its own page and address, kind chips, filters, “here” as a scope, exact matches on top
      C. stable addresses: a theory block, a trap and a single flashcard open where they are, highlighted

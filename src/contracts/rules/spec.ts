@@ -1,6 +1,6 @@
 /* noema-lite — specifications: small, composable rules over the contracts' data (the specification pattern).
-   A rule never throws: it returns the issues it finds (none = satisfied). Phase 2 wires them into the checks
-   (engine/packcheck.js, the connector, the tools) through the composition roots. */
+   A rule never throws: it returns the issues it finds (none = satisfied). The pack checks (pack.ts), the quality rules
+   Q1–Q8 (quality.ts) and the level rules (levels.ts) are built from them; the app, the connector and the tools run the same. */
 
 export interface RuleIssue {
   /** the rule's stable id, e.g. "levels.prerequisite" */

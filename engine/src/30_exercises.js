@@ -8,7 +8,12 @@ const TYPE_LABEL = iconLabel(TYPE_ICON, 'engine.exType.'), TAG_LABEL = iconLabel
 /** the colours of matched pairs: chapter colours (data-ci), so each pair's number has a text colour that reads on it */
 const PAIR_COLOURS = [7, 1, 4, 8, 5, 3, 2];
 
-/* Each renderer returns { el, check(): true|false|null, reveal(), auto?: bool, selfDone?: bool } */
+/* Each renderer returns { el, answer(), check(): true|false|null, reveal(), auto?: bool, selfDone?: bool }. What is right
+   is decided by the study domain (src/features/study/domain/grading, NoemaCore.study.grade): answer() is what the
+   learner did, in the exercise's own indices (the shapes in grade.ts), and check() its verdict. */
+/** The verdict on an answer: { ok: true | false | null (not finished), score, items?, typos?, missing?, parts? } */
+const gradeOf = (ex, answer, ctx) => NoemaCore.study.grade(ex, answer, ctx);
+const verdict = (ex, answer, ctx) => gradeOf(ex, answer, ctx).ok;
 const R = {};
 
 R.mcq = (ex, api) => {
@@ -26,7 +31,8 @@ R.mcq = (ex, api) => {
   const el = h('div', {}, multi ? h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.selectAll', { n: ans.size })) : null, wrap);
   return {
     el, keys: k => { const b = btns[k]; b && b.click(); },
-    check() { if (!sel.size) return null; return sel.size === ans.size && [...sel].every(x => ans.has(x)); },
+    answer: () => ({ picked: [...sel] }),
+    check() { return verdict(ex, this.answer()); },
     given: () => [...sel].map(oi => String.fromCharCode(65 + oi) + '. ' + ex.options[oi]).join(' + '),
     reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', 'data-nf': 'why.' + oi, html: fmt(ex.why[oi]) })); }); },
   };
@@ -41,7 +47,8 @@ R.tf = (ex, api) => {
   const t = mk(true, '👍 ' + tE('engine.ex.true'), 't'), f = mk(false, '👎 ' + tE('engine.ex.false'), 'f');
   return {
     el: h('div', { class: 'tfrow' }, t, f), keys: k => (k === 0 ? t : k === 1 ? f : null)?.click(),
-    check: () => pick === null ? null : pick === ex.answer,
+    answer: () => ({ value: pick }),
+    check() { return verdict(ex, this.answer()); },
     given: () => pick === null ? '' : String(pick),
     reveal() { (ex.answer ? t : f).classList.add('right'); if (pick !== ex.answer) (pick ? t : f).classList.add('wrong'); },
   };
@@ -60,7 +67,8 @@ R.order = (ex, api) => {
   draw();
   return {
     el: h('div', {}, seq, pool),
-    check: () => picked.length < items.length ? null : picked.every((it, k) => it.i === k),
+    answer: () => ({ order: picked.map(it => it.i) }),
+    check() { return verdict(ex, this.answer()); },
     given: () => picked.map(it => it.t).join(' → '),
     reveal() {
       $$('.chipx', seq).forEach((b, k) => b.classList.add(picked[k].i === k ? 'right' : 'wrong'));
@@ -87,7 +95,8 @@ R.match = (ex, api) => {
   selL = 0; paint();
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.matchHint')), h('div', { class: 'matchgrid' }, lcol, rcol)),
-    check: () => Object.keys(link).length < L.length ? null : L.every(it => link[it.i] === it.i),
+    answer: () => ({ links: L.map(it => link[it.i] ?? null) }),
+    check() { return verdict(ex, this.answer()); },
     given: () => L.filter(it => link[it.i] != null).map(it => it.t + ' = ' + ex.pairs[link[it.i]][1]).join('; '),
     reveal() {
       L.forEach(it => { const ok = link[it.i] === it.i; lb[it.i].classList.add(ok ? 'right' : 'wrong'); });
@@ -122,7 +131,8 @@ R.bucket = (ex, api) => {
   draw();
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.bucketHint')), pool, h('div', { class: 'buckets' }, ...zones)),
-    check: () => Object.keys(place).length < items.length ? null : items.every(it => place[it.i] === it.bucket),
+    answer: () => ({ place: ex.items.map((_, i) => place[i] ?? null) }),
+    check() { return verdict(ex, this.answer()); },
     given: () => items.filter(it => place[it.i] != null).map(it => it.text + ' → ' + ex.buckets[place[it.i]]).join('; '),
     reveal() { zones.forEach(z => $$('.chipx', z).forEach(b => { const ok = place[b._it.i] === b._it.bucket; b.classList.add(ok ? 'right' : 'wrong'); if (!ok) b.append(h('small', { style: { opacity: .8 } }, ' → ' + ex.buckets[b._it.bucket])); })); },
   };
@@ -165,8 +175,9 @@ R.cloze = (ex, api) => {
   return {
     el: h('div', {}, box, bankEl), focus: () => !useBank && blanks[0]?.el.focus(),
     given: () => blanks.some(b => val(b)) ? blanks.map(b => val(b) || '—').join(' | ') : '',
-    check() { if (blanks.some(b => !norm(val(b)))) return null; return blanks.every(b => b.alts.some(a => norm(a) === norm(val(b)))); },
-    reveal() { blanks.forEach(b => { const ok = b.alts.some(a => norm(a) === norm(val(b))); b.el.classList.add(ok ? 'right' : 'wrong'); if (useBank) { if (!ok) b.el.append(h('span', { class: 'corr' }, '→ ' + b.alts[0])); } else { b.el.readOnly = true; if (!ok) b.el.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', margin: '0 4px', fontFamily: 'var(--mono)' } }, b.alts[0])); } }); if (bankEl) bankEl.style.display = 'none'; },
+    answer: () => ({ blanks: blanks.map(val) }),
+    check() { return verdict(ex, this.answer()); },
+    reveal() { const right = gradeOf(ex, { blanks: blanks.map(val) }).items || []; blanks.forEach((b, bi) => { const ok = !!right[bi]; b.el.classList.add(ok ? 'right' : 'wrong'); if (useBank) { if (!ok) b.el.append(h('span', { class: 'corr' }, '→ ' + b.alts[0])); } else { b.el.readOnly = true; if (!ok) b.el.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', margin: '0 4px', fontFamily: 'var(--mono)' } }, b.alts[0])); } }); if (bankEl) bankEl.style.display = 'none'; },
   };
 };
 
@@ -176,7 +187,8 @@ R.spotbug = (ex, api) => {
   const bugs = new Set(ex.bugs);
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.spotbugHint', { n: bugs.size })), h('div', { class: 'codelines' }, ...lines)),
-    check: () => !sel.size ? null : sel.size === bugs.size && [...sel].every(i => bugs.has(i)),
+    answer: () => ({ lines: [...sel] }),
+    check() { return verdict(ex, this.answer()); },
     given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1) + ' (0-based ' + i + ')').join(', '),   // i18n-ignore (for the AI)
     reveal() { lines.forEach((b, i) => { if (bugs.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); }); lines[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 ' + tE('engine.ex.fix')), /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('div', { html: fmt(ex.fix) }))); },
   };
@@ -187,8 +199,9 @@ R.calc = (ex, api) => {
   return {
     el: h('div', { class: 'calcrow' }, inp, h('b', { class: 'muted' }, ex.unit || '')), focus: () => inp.focus(),
     given: () => inp.value === '' ? '' : inp.value + ' ' + (ex.unit || ''),
-    check() { if (inp.value === '') return null; return Math.abs(+inp.value - ex.answer) <= (ex.tolerance || 0) + 1e-9; },
-    reveal() { inp.readOnly = true; inp.style.borderColor = Math.abs(+inp.value - ex.answer) <= (ex.tolerance || 0) + 1e-9 ? 'var(--ok)' : 'var(--bad)'; inp.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', fontSize: '15px' } }, `= ${ex.answer} ${ex.unit || ''}`)); },
+    answer: () => ({ value: inp.value === '' ? null : inp.value }),
+    check() { return verdict(ex, this.answer()); },
+    reveal() { inp.readOnly = true; inp.style.borderColor = verdict(ex, { value: inp.value }) ? 'var(--ok)' : 'var(--bad)'; inp.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', fontSize: '15px' } }, `= ${ex.answer} ${ex.unit || ''}`)); },
   };
 };
 
@@ -210,7 +223,7 @@ R.scenario = (ex, api) => {
           fbBox.append(h('div', { class: 'fb ok', html: '✅ ' + fmt(o.fb) }));
           k++;
           if (k < ex.steps.length) fbBox.append(h('div', { style: { marginTop: '10px' } }, h('button', { class: 'btn small primary', onclick: e => { e.target.remove(); step(); } }, tE('engine.ex.nextStep'))));
-          else api.done(mistakes === 0, mistakes);
+          else api.done(verdict(ex, { mistakes }), mistakes);
         } else { mistakes++; b.classList.add('wrong', 'shake'); beep('bad'); fbBox.append(h('div', { class: 'fb bad', html: '❌ ' + fmt(o.fb) })); }
       } }, h('span', { class: 'k' }, String.fromCharCode(65 + i)), F(o.text));
       opts.append(b);
@@ -240,7 +253,7 @@ R.free = (ex, api) => {
         g.mistakes?.length ? h('div', { style: { marginTop: '4px' } }, '❌ ', F(g.mistakes.join(' · '))) : null,
         h('div', { style: { marginTop: '8px' } }, md(g.feedback))));
       out.append(modelBox());
-      finish(sc >= 70);
+      finish(verdict(ex, { score: sc }));
     } catch (e) { out.innerHTML = ''; out.append(h('div', { class: 'fb bad' }, '⚠️ ' + tE('engine.ex.aiFailedSelf', { error: errText(e) }))); aiBtn.disabled = false; aiBtn.textContent = '✨ ' + tE('engine.ex.gradeAI'); }
   } }, '✨ ' + tE('engine.ex.gradeAI'));
   const modelBox = () => h('div', { class: 'explain' }, h('div', { class: 'hd' }, '📘 ' + tE('engine.ex.modelAnswer')), F(ex.model));
@@ -248,18 +261,19 @@ R.free = (ex, api) => {
     selfBtn.disabled = true; out.innerHTML = '';
     const checks = ex.rubric.map(r => h('input', { type: 'checkbox' }));
     out.append(modelBox(), h('div', { class: 'explain rubric' }, h('div', { class: 'hd' }, '☑️ ' + tE('engine.ex.tickCovered')), ...ex.rubric.map((r, i) => h('label', {}, checks[i], F(r))),
-      h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { const n = checks.filter(c => c.checked).length; e.target.disabled = true; finish(n / ex.rubric.length >= 0.7); } }, tE('engine.ex.done'))));
+      h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { e.target.disabled = true; finish(verdict(ex, { rubric: checks.map(c => c.checked) })); } }, tE('engine.ex.done'))));
   } }, '🙋 ' + tE('engine.ex.selfCheck'));
   return { el: h('div', {}, ta, h('div', { class: 'actions' }, aiBtn, selfBtn), out), selfDone: true, focus: () => ta.focus(), given: () => ta.value.trim() };
 };
 
 R.write = (ex, api) => {
   const ta = h('textarea', { class: 'answer code', spellcheck: 'false', placeholder: ex.lang ? tE('engine.ex.writeLang', { lang: ex.lang }) : tE('engine.ex.writeCode'), onkeydown: e => { if (e.key === 'Tab') { e.preventDefault(); const s = ta.selectionStart; ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd); ta.selectionStart = ta.selectionEnd = s + 2; } } });
-  const missing = () => ex.keywords.filter(k => !ta.value.toLowerCase().replace(/\s+/g, ' ').includes(k.toLowerCase().replace(/\s+/g, ' ')));
+  const missing = () => gradeOf(ex, { text: ta.value }).missing || [];
   return {
     el: h('div', {}, ta, h('div', { class: 'tiny', style: { marginTop: '6px' } }, tE('engine.ex.writeNote'))),
     focus: () => ta.focus(),
-    check() { if (!ta.value.trim()) return null; return missing().length === 0; },
+    answer: () => ({ text: ta.value }),
+    check() { return verdict(ex, this.answer()); },
     given: () => ta.value.trim() ? '\n```\n' + ta.value.trim() + '\n```\n' : '',
     reveal() {
       ta.readOnly = true;
@@ -378,7 +392,7 @@ function reportBtn(ex) {
       const note = h('textarea', { class: 'answer', rows: 3, placeholder: tE('engine.ex.reportNote') }); note.value = S.flags?.[ex.id]?.note || '';
       box.append(h('h3', {}, '⚑ ' + tE('engine.ex.reportTitle')), h('div', { class: 'opts' }, ...opts), note,
         h('div', { class: 'row', style: { marginTop: '14px', justifyContent: 'flex-end' } }, h('button', { class: 'btn', onclick: close }, tE('engine.core.cancel')),
-          h('button', { class: 'btn primary', onclick: () => { if (!why) { opts[0].parentElement.classList.add('shake'); return; } S.flags = S.flags || {}; S.flags[ex.id] = { why, note: note.value.trim().slice(0, 2000), t: Date.now() }; save(); b.classList.add('on'); b.title = tE('engine.ex.reported'); close(); toast('⚑ ' + tE('engine.ex.reportSaved')); } }, tE('engine.ex.reportSend'))));
+          h('button', { class: 'btn primary', onclick: () => { if (!why) { opts[0].parentElement.classList.add('shake'); return; } const nt = note.value.trim().slice(0, 2000); learnt('exercise.flagged', ex.id, { why, ...(nt ? { note: nt } : {}) }); b.classList.add('on'); b.title = tE('engine.ex.reported'); close(); toast('⚑ ' + tE('engine.ex.reportSaved')); } }, tE('engine.ex.reportSend'))));
     });
   } }, '⚑');
   return b;

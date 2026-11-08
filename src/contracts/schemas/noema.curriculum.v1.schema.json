@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.curriculum.v1.schema.json",
   "title": "noema-lite Roadmap (noema.curriculum/v1) and its inbox and claims",
-  "description": "A Roadmap (curriculum): KV a:curriculum:<id>, the app's export (📥 import keeps it), a shared copy (docs/CURRICULUM.md §5, §6b, §8). The connector never writes the record: what Claude does arrives as inbox entries (KV a:curin:<cid>:<seq>, $defs/inboxEntry, §7) and a step handed to a run is claimed (KV a:curclaim:<cid>:<nid>, $defs/claim). Levels (§11): the Roadmap's ladder (levels) and each step's level — optional, additive (a reader that does not know them ignores them, so the format stays v1). Semantic rules (acyclic, every edge names steps, a prerequisite never at a higher level than its step) are in engine/curriculum.js and src/contracts/rules.",
+  "description": "A Roadmap (curriculum): KV a:curriculum:<id>, the app's export (📥 import keeps it), a shared copy (docs/CURRICULUM.md §5, §6b, §8). The connector never writes the record: what Claude does arrives as inbox entries (KV a:curin:<cid>:<seq>, $defs/inboxEntry, §7) and a step handed to a run is claimed (KV a:curclaim:<cid>:<nid>, $defs/claim). Levels (§11): the Roadmap's ladder (levels) and each step's level — optional, additive (a reader that does not know them ignores them, so the format stays v1). Semantic rules (acyclic, every edge names steps, a prerequisite never at a higher level than its step) are in engine/curriculum.js and src/contracts/rules/levels.ts.",
   "$ref": "#/$defs/curriculum",
   "$defs": {
     "nodeId": { "type": "string", "minLength": 1 },
@@ -145,11 +145,100 @@
           "additionalProperties": { "type": "object" }
         },
         "linksApplied": { "type": "array", "items": { "type": "string" } },
-        "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" }
+        "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" },
+        "levelTest": {
+          "type": "boolean",
+          "description": "a level test (80 %) before the learner moves up a level (docs/CURRICULUM.md §11)"
+        },
+        "proposals": {
+          "description": "restructurings by level proposed by Claude (noema_restructure_levels): pending until the learner (in a shared Roadmap its owner) approves or declines; never shared with members",
+          "type": "array",
+          "items": { "$ref": "#/$defs/proposal" }
+        },
+        "restructuredAt": { "type": "string" }
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "required": ["id", "kind", "at", "plan", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "const": "restructure" },
+        "at": { "type": "string" },
+        "via": { "type": "string" },
+        "plan": { "$ref": "#/$defs/restructurePlan" },
+        "status": { "enum": ["pending", "applied", "declined"] },
+        "decidedAt": { "type": "string" }
+      }
+    },
+    "restructurePlan": {
+      "description": "A new arrangement of a Roadmap by level (src/features/roadmaps/domain/restructure.ts RestructurePlan): steps by id, chapters by ref; ids are kept.",
+      "type": "object",
+      "required": ["why"],
+      "properties": {
+        "why": { "type": "string" },
+        "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "level"],
+            "properties": {
+              "step": { "type": "string" },
+              "level": { "oneOf": [{ "$ref": "noema.common.v1.schema.json#/$defs/levelRef" }, { "type": "null" }] }
+            }
+          }
+        },
+        "chapters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "chapter", "level"],
+            "properties": { "step": { "type": "string" }, "chapter": { "type": "string" }, "level": { "type": ["string", "null"] } }
+          }
+        },
+        "split": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "parts"],
+            "properties": {
+              "step": { "type": "string" },
+              "parts": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "title", "chapters"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "title": { "type": "string" },
+                    "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelRef" },
+                    "chapters": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "merge": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["into", "steps"],
+            "properties": {
+              "into": { "type": "string" },
+              "steps": { "type": "array", "items": { "type": "string" } },
+              "title": { "type": "string" }
+            }
+          }
+        },
+        "links": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+        "unlink": { "type": "array", "items": { "$ref": "#/$defs/edge" } }
       }
     },
     "inboxEntry": {
-      "description": "KV a:curin:<cid>:<seq>: one thing the connector did for the Roadmap, which the app checks again and applies (docs/CURRICULUM.md §7). Kinds: an agent's answer (dag, audit, expand, plan: task + data), a prepared step (step), a subject attached to a step (assign), a translation (i18n), a new part (extend), links between steps (link). A kind the app does not know is kept, never lost.",
+      "description": "KV a:curin:<cid>:<seq>: one thing the connector did for the Roadmap, which the app checks again and applies (docs/CURRICULUM.md §7). Kinds: an agent's answer (dag, audit, expand, plan: task + data), a prepared step (step), a subject attached to a step (assign), a translation (i18n), a new part (extend), links between steps (link), a restructuring by level proposed for the learner's approval (restructure). A kind the app does not know is kept, never lost.",
       "type": "object",
       "required": ["v", "kind"],
       "properties": {
@@ -208,7 +297,8 @@
               },
               "nodes": { "type": "object", "additionalProperties": { "$ref": "#/$defs/node" } },
               "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
-              "prepare": { "type": "boolean" }
+              "prepare": { "type": "boolean" },
+              "levels": { "$ref": "noema.common.v1.schema.json#/$defs/levels" }
             }
           }
         },
@@ -221,6 +311,13 @@
               "links": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
               "remove": { "type": "array", "items": { "$ref": "#/$defs/edge" } }
             }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "restructure" } }, "required": ["kind"] },
+          "then": {
+            "required": ["id", "plan", "at"],
+            "properties": { "id": { "type": "string" }, "plan": { "$ref": "#/$defs/restructurePlan" } }
           }
         }
       ]

@@ -2,11 +2,9 @@
  * The app's data on this device, as the older screens and the cloud sync read it (docs/ARCHITECTURE.md §6.3): the
  * namespaced key/value store (noema1:<account>:a:<name>, noema1:<account>:s:<subject>:<name>, noema1:<account>:meta:*),
  * which notes every write's time (meta:mtime, for the sync) and the dirty flag (meta:dirty, for the backups); the
- * profiles of this device; the account-level stats; the Gemini key (this device only); and the 🔔 news kept here.
+ * profiles of this device; the Gemini key (this device only); and the 🔔 news kept here.
  * Everything goes through NoemaCore.storage.kv (src/adapters/browser/storage.ts), so a full storage warns once.
  */
-import type { LocalDay } from '../../kernel/day.ts';
-import { addXp, statsOf, streakNow, todayXp, touchStreak, type Stats } from '../../features/shell/domain/progress.ts';
 
 /** The device's key/value storage (NoemaCore.storage.kv). */
 export interface DeviceKv {
@@ -36,7 +34,7 @@ export class AccountKv {
   acc: string | null = null;
   subj: string | null = null;
   readonly listeners: Listener[] = [];
-  /** an account in use on another device right now (engine/cloud.js lease): nothing of it is saved until "Use here" */
+  /** an account in use on another device right now (NoemaCore.sync.lease): nothing of it is saved until "Use here" */
   frozen: string | null = null;
   /** an account just restored: the page reloads, and its last save must not write the old state back */
   sealed: string | null = null;
@@ -192,39 +190,6 @@ export class LocalAccounts {
       P + 'accounts',
       jsonOf<SavedAccount[]>(this.kv, P + 'accounts', []).filter(a => a.id !== id),
     );
-  }
-}
-
-/** The account-level stats (XP and streak across every subject): a:stats of the open account. */
-export class AccountStats {
-  private readonly store: AccountKv;
-  private readonly today: () => LocalDay;
-  constructor(store: AccountKv, today: () => LocalDay) {
-    this.store = store;
-    this.today = today;
-  }
-  get(): Stats {
-    return statsOf(jsonOf(this.store, this.store.accountKey('stats'), {}));
-  }
-  put(s: Stats): void {
-    this.store.set(this.store.accountKey('stats'), JSON.stringify(s));
-  }
-  touchStreak(): Stats {
-    const s0 = this.get(),
-      s = touchStreak(s0, this.today());
-    if (s !== s0) this.put(s);
-    return s;
-  }
-  add(n: number): Stats {
-    const s = addXp(this.get(), n, this.today(), this.store.subj);
-    this.put(s);
-    return s;
-  }
-  streakNow(): number {
-    return streakNow(this.get(), this.today());
-  }
-  todayXP(): number {
-    return todayXp(this.get(), this.today());
   }
 }
 

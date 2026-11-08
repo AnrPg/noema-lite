@@ -3,9 +3,10 @@
    2. transients: the RC step (τ = RC within 0.5 %), trapezoidal vs backward Euler, a sine source's amplitude, PWM mean and ripple;
    3. the time constants (one node, a massless node in the path, two nodes); a room with a thermostat (hysteresis, duty);
    4. check() / checkSpec() codes, the step budget, determinism, the speed of 20000 steps, the sim-spec adapter;
-   5. JS ↔ Python (tools/thermal.py) parity of check / check_spec on more than 30 networks and specs.
+   5. the golden outputs of the former Python twin (tools/thermal.py, tests/fixtures/parity) of check / check_spec on more than 30 networks and specs.
    Usage: node tests/thermal.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
+const want = require('./golden.cjs')('thermal');   // the golden outputs of the former Python twin (tests/golden.cjs)
 const ROOT = path.resolve(__dirname, '..');
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaThermal = ENGINES.mod('thermal@1');
@@ -193,7 +194,7 @@ const spec = () => ({ format: 'noema.sim-spec/v1', engine: 'thermal@1',
   ok(!miss.length, `checkSpec() finds the code of ${sc.length} bad specs ${miss.length ? String(miss[0][0]) : ''}`);
 }
 
-// ---------- 5. JS ↔ Python parity ----------
+// ---------- 5. the golden outputs of the former Python twin ----------
 {
   const nets = [null, 5, [], { nodes: 'a', links: [] }, { nodes: [], links: [], sources: {}, thermostats: 3 }, { format: 'x', nodes: [], links: [] },
     mosfet(), rc(), { ambient: -300, nodes: [{ id: 'a', C: 1, zz: 1 }], links: [{ id: 'r', a: 'a', R: 1, q: 2 }], meta: {}, x: 1 },
@@ -214,13 +215,11 @@ const spec = () => ({ format: 'noema.sim-spec/v1', engine: 'thermal@1',
       s => { s.model.network.sources[0].P = { pwm: { P: 10, freq: 1, duty: 0.5 } }; s.model.bindings = [{ element: 'Pd', prop: 'pwm.duty', expr: 'd' }, { element: 'Pd', expr: 'P' }, { element: 'J', prop: 'T0', expr: 'x' }, { element: 'HS', prop: 'fixed', expr: 'x' }]; },
       s => { s.model.network.links[2] = { id: 'Rsa', a: 'HS', conv: { h: 10, A: 0.1 } }; s.model.bindings = [{ element: 'Rsa', prop: 'conv.A', expr: 'A' }, { element: 'Rsa', expr: 'A' }]; },
     ].map(f => { const s = spec(); f(s); return s; })];
-  const tmp = path.join(os.tmpdir(), 'noema-thermal-parity.json'); fs.writeFileSync(tmp, JSON.stringify({ nets, specs }));
-  const py = JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import thermal as T; d = json.load(open(sys.argv[1], encoding='utf-8'))
-print(json.dumps({'n': [T.check(x) for x in d['nets']], 's': [T.check_spec(x) for x in d['specs']]}, ensure_ascii=False))`, tmp], { encoding: 'utf8' }));
   const js = { n: nets.map(x => T.check(x)), s: specs.map(x => T.checkSpec(x)) };
+  const py = want('check', { nets, specs }, js);   // the golden outputs of the former twin tools/thermal.py
   const diff = ['n', 's'].flatMap(k => js[k].map((r, i) => JSON.stringify(r) === JSON.stringify(py[k][i]) ? null : [k, i, r, py[k][i]]).filter(Boolean));
   const total = nets.length + specs.length, findings = js.n.flat().length + js.s.flat().length;
-  ok(!diff.length && total >= 30, `parity: JS and Python agree on ${nets.length} networks and ${specs.length} specs (${total} cases, ${findings} findings) ${diff.length ? JSON.stringify(diff[0]).slice(0, 700) : ''}`);
+  ok(!diff.length && total >= 30, `parity: the JS gives the golden outputs of the former Python twin on ${nets.length} networks and ${specs.length} specs (${total} cases, ${findings} findings) ${diff.length ? JSON.stringify(diff[0]).slice(0, 700) : ''}`);
 }
 
 console.log(`\nthermal: τ error ${pct(tauErr)}, T(τ) error trapezoidal ${trapErr.toExponential(2)} K / backward Euler ${beErr.toExponential(2)} K, thermostat duty error ${dutyErr.toFixed(4)}`);

@@ -8,6 +8,7 @@ import { abortReason } from '../../kernel/promise.ts';
 import { clockContract } from '../../ports/contract/clock.contract.ts';
 import { computeContract } from '../../ports/contract/compute.contract.ts';
 import { i18nContract } from '../../ports/contract/i18n.contract.ts';
+import { lifecycleContract } from '../../ports/contract/lifecycle.contract.ts';
 import { notifierContract } from '../../ports/contract/notifier.contract.ts';
 import { storageContract } from '../../ports/contract/storage.contract.ts';
 import { coreJobs, createJobRegistry, inlineCompute } from '../local/jobs.ts';
@@ -18,6 +19,7 @@ import { fakeWorkerFactory } from '../testing/fake-worker.ts';
 import { systemClock } from './clock.ts';
 import { workerCompute } from './compute.ts';
 import { noemaI18n, type NoemaI18nRuntime } from './i18n.ts';
+import { browserLifecycle, describeAgent, TAB_KEY, type PageLike } from './lifecycle.ts';
 import { browserNotifier, domSurface, LIVE_REGION_ID } from './notifier.ts';
 import { browserStorage } from './storage.ts';
 
@@ -218,4 +220,111 @@ test('the DOM surface: one .toasts box, notices with role=status, a hidden asser
   assert.equal(live.textContent, 'c');
   const none = browserNotifier(domSurface(() => undefined));
   none.toast('nowhere to draw: nothing happens, nothing throws');
+});
+
+/* ---------- lifecycle: visibilitychange, pagehide, online, input, the user agent, the tab id ---------- */
+function fakePage(): PageLike & { fire(target: 'doc' | 'win', type: string): void; vis: string; store: Map<string, string> } {
+  const ls = { doc: new Map<string, Set<() => void>>(), win: new Map<string, Set<() => void>>() };
+  const target = (m: Map<string, Set<() => void>>) => ({
+    addEventListener: (t: string, f: () => void) => {
+      if (!m.has(t)) m.set(t, new Set());
+      m.get(t)?.add(f);
+    },
+    removeEventListener: (t: string, f: () => void) => {
+      m.get(t)?.delete(f);
+    },
+  });
+  const store = new Map<string, string>();
+  const state = { vis: 'visible' };
+  const page = {
+    get vis(): string {
+      return state.vis;
+    },
+    set vis(v: string) {
+      state.vis = v;
+    },
+    store,
+    document: {
+      get visibilityState(): string {
+        return state.vis;
+      },
+      ...target(ls.doc),
+    },
+    navigator: {
+      onLine: true,
+      userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Version/18.0 Mobile/15E148 Safari/604.1',
+    },
+    sessionStorage: { getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v) },
+    ...target(ls.win),
+    fire(t: 'doc' | 'win', type: string) {
+      for (const f of [...(ls[t].get(type) ?? [])]) f();
+    },
+  };
+  return page;
+}
+lifecycleContract('browser (a fake page)', () => {
+  const p = fakePage();
+  const lifecycle = browserLifecycle(
+    () => p,
+    () => 'tabX',
+  );
+  return {
+    lifecycle,
+    setVisible: v => {
+      p.vis = v ? 'visible' : 'hidden';
+      p.fire('doc', 'visibilitychange');
+    },
+    goOnline: () => {
+      p.fire('win', 'online');
+    },
+    touch: () => {
+      p.fire('win', 'pointerdown');
+    },
+    close: () => {
+      p.fire('win', 'pagehide');
+    },
+  };
+});
+
+test('the device of a user agent; the tab id is kept in sessionStorage; no page at all is fine', () => {
+  assert.deepEqual(describeAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Version/18.0 Mobile/15E148 Safari/604.1'), {
+    os: 'iphone',
+    browser: 'Safari',
+  });
+  assert.deepEqual(describeAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Version/18.0 Safari/605.1.15', 5), {
+    os: 'ipad',
+    browser: 'Safari',
+  });
+  assert.deepEqual(describeAgent('Mozilla/5.0 (Linux; Android 14; Pixel 8) Chrome/130.0 Mobile Safari/537.36'), {
+    os: 'android_phone',
+    browser: 'Chrome',
+  });
+  assert.deepEqual(describeAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36 Edg/130.0'), {
+    os: 'windows',
+    browser: 'Edge',
+  });
+  assert.deepEqual(describeAgent(''), { os: 'other', browser: '' });
+  const p = fakePage();
+  assert.equal(
+    browserLifecycle(
+      () => p,
+      () => 'tabA',
+    ).tabId(),
+    'tabA',
+  );
+  assert.equal(p.store.get(TAB_KEY), 'tabA');
+  assert.equal(
+    browserLifecycle(
+      () => p,
+      () => 'tabB',
+    ).tabId(),
+    'tabA',
+    'a reload keeps the tab id',
+  );
+  const bare = browserLifecycle(
+    () => ({}),
+    () => 'tabC',
+  );
+  assert.deepEqual([bare.visible(), bare.online(), bare.tabId()], [true, true, 'tabC']);
+  bare.onLeave(() => assert.fail('nothing happens without a page'))();
 });

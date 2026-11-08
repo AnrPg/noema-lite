@@ -16,32 +16,85 @@ import { browserStorage } from '../adapters/browser/storage.ts';
 import { systemClock } from '../adapters/browser/clock.ts';
 import { noemaI18n } from '../adapters/browser/i18n.ts';
 import { browserNotifier, switchableSurface, type SwitchableSurface } from '../adapters/browser/notifier.ts';
+import { browserLifecycle } from '../adapters/browser/lifecycle.ts';
 import { workerCompute, type WorkerLike } from '../adapters/browser/compute.ts';
 import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-reporter.ts';
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
 import { inlineCompute } from '../adapters/local/jobs.ts';
+import { STUDY_BRIDGE, STUDY_REGISTRATIONS } from './study.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
-import { lazyContracts, type ContractsPiece, type LazyContracts } from '../contracts/lazy.ts';
+import { lazyContracts, type LazyContracts } from '../contracts/lazy.ts';
+import { provideContracts } from '../contracts/page.ts';
 import { createLazyEngines, type EnginesPiece } from '../engines/lazy.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, token, type Registration } from './container.ts';
+import { lazyContentChecks, type LazyContentChecks } from '../features/content/application/lazy.ts';
+import type { ChecksPiece } from './contracts.ts';
+import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
 import { buildJobRegistry } from './jobs.ts';
-import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ENGINES, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
+import { browserLearning, learningBridge } from './learning.ts';
+import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
+import { randomId, registerSync, syncBridge } from './sync.ts';
+import {
+  AI,
+  CLOCK,
+  CLOUD,
+  COMPUTE,
+  CONFIG,
+  ENGINES,
+  ERRORS,
+  I18N,
+  JOBS,
+  LIFECYCLE,
+  NOTIFIER,
+  STORAGE,
+  TELEMETRY,
+  type CoreConfig,
+} from './tokens.ts';
 
 /** Helpers append their registrations here (each registers its own tokens; a token already taken is an error). */
-export const APP_REGISTRATIONS: readonly Registration[] = [];
+export const APP_REGISTRATIONS: readonly Registration[] = [
+  // the learning log (event sourcing, src/features/study): the account's LearningLog over the app's IndexedDB, and the
+  // seams it fills: the read models' feed, the sync's event log and old progress, the Roadmap events
+  browserLearning,
+  // the community features (src/features/{search,vault,social,reports}): their Supabase adapters and use cases
+  ...COMMUNITY_REGISTRATIONS,
+  // the study read models (src/features/study) and the search index's store (src/features/catalog)
+  ...STUDY_REGISTRATIONS,
+  // local-first sync (src/features/sync, docs/SYNC.md): the outbox, the settings registers, the loop and the lease
+  registerSync,
+];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
-  // the compiled data contracts (src/contracts): the shape checks of engine/packcheck.js. In the page their validators are
-  // build/contracts.js, loaded after the first screen (src/contracts/lazy.ts: ready() resolves once they are in); Node,
-  // the connector and the skill get the same module as engine/contracts.js (tools/contracts.mjs builds both from it).
+  // the compiled data contracts (src/contracts): the shape checks of the learning log, the content checks and every other
+  // reader. In the page their validators are build/contracts.js (src/contracts/lazy.ts; the learning log's own contract is
+  // in build/app.js, src/contracts/page.ts); the connector and the Node tools (build/noema-tools.cjs) bundle the same module.
   { name: 'contracts', build: r => r.get(CONTRACTS) },
-  // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
+  // the engine library: the activity core (engine/src/32_activities.js), the content checks, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
+  learningBridge,
+  // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
+  ...COMMUNITY_BRIDGE,
+  // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
+  // index's records, built in the Worker): src/composition/study.ts
+  ...STUDY_BRIDGE,
+  // the sync loop, the settings, the lease ("in use on another device"): engine/cloud.js, engine/loader.js, the account page
+  syncBridge,
+  // the Roadmaps domain (graph, tasks, claims, inbox, levels, restructuring) and its services: curriculum.js, curjobs.js,
+  // curshare.js, curimport.js, sourceplan.js, curmap.js
+  { name: 'roadmaps', build: r => roadmapsSurface(r.get(ROADMAP_EVENTS)) },
+  // the 文A bridges' lookup (engine/bridge.js)
+  { name: 'bridges', build: () => bridgesDomain },
+  // the content checks (src/features/content): the pack, chapter, quality, translation, bridge and activity rules — the
+  // generator (engine/packgen.js), the library, the activity runtimes and the author. Their code comes with the contracts'
+  // validators (build/contracts.js, src/features/content/application/lazy.ts): every caller runs after
+  // NoemaCore.contracts.ready() (the root waits for it before it opens a subject or a course, the Roadmaps before their jobs)
+  { name: 'content', build: r => r.get(CONTENT) },
   // where the toasts are drawn: the frame (build/ui.js) hands NoemaCore.notify its kit toaster (src/ui/kit/toaster.ts)
   {
     name: 'toasts',
@@ -56,6 +109,10 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
 
 /** the data contracts of the page, their validators loaded on demand (NoemaCore.contracts) */
 export const CONTRACTS = token<LazyContracts>('core.contracts', 'the data contracts, their validators in build/contracts.js');
+/** the content checks of the page, their code loaded with the contracts' validators (NoemaCore.content) */
+export const CONTENT = token<LazyContentChecks>('core.content', 'the content checks, their code in build/contracts.js');
+/** the one load of build/contracts.js both share */
+const CHECKS_PIECE = token<() => Promise<ChecksPiece>>('core.checksPiece', 'the load of build/contracts.js');
 
 /** the surface NoemaCore.notify draws on (switchable: the page's `.toasts`, then the frame's toaster) */
 export const TOAST_SURFACE = token<SwitchableSurface>('core.toastSurface', 'where the notifier draws (NoemaCore.toasts.use)');
@@ -155,9 +212,9 @@ export function pieceLoader<T>(page: PageLike, script: string | undefined, name:
 export const enginesLoader = (page: PageLike, script: string | undefined): (() => Promise<EnginesPiece>) =>
   pieceLoader<EnginesPiece>(page, script, 'engines', '__noemaEnginesPiece');
 
-/** Runs build/contracts.js once and hands over the compiled contracts. */
-export const contractsLoader = (page: PageLike, script: string | undefined): (() => Promise<ContractsPiece>) =>
-  pieceLoader<ContractsPiece>(page, script, 'contracts', '__noemaContractsPiece');
+/** Runs build/contracts.js once and hands over the compiled contracts and the content checks. */
+export const checksLoader = (page: PageLike, script: string | undefined): (() => Promise<ChecksPiece>) =>
+  pieceLoader<ChecksPiece>(page, script, 'contracts', '__noemaContractsPiece');
 
 const DIAGNOSTIC_KEYS: ReadonlySet<string> = new Set([JOURNAL_KEY, TELEMETRY_KEY]);
 
@@ -175,9 +232,27 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   // the engine library (src/engines): the expression language, the catalogue and the manifests at once; every engine's code,
   // its Worker bundle and the schema kernel in build/engines.js, loaded the first time one is needed (src/engines/lazy.ts)
   c.register(ENGINES, () => createLazyEngines(enginesLoader(page, script)));
-  c.register(CONTRACTS, () => lazyContracts(contractsLoader(page, script)));
+  // the data contracts and the content checks (src/contracts, src/features/content): their code in build/contracts.js, one
+  // piece, loaded the first time either is asked to be ready (NoemaCore.contracts.ready() brings both). The learning log's
+  // event contract is in build/app.js (src/contracts/page.ts): the log opens without the piece.
+  c.register(CHECKS_PIECE, () => checksLoader(page, script));
+  c.register(CONTRACTS, r => {
+    const load = r.get(CHECKS_PIECE);
+    return lazyContracts(() =>
+      Promise.all([load(), r.get(CONTENT).ready()]).then(([p]) => {
+        provideContracts(p.contracts); // the domain modules' check in the page's bundles (src/contracts/page.ts)
+        return p.contracts;
+      }),
+    );
+  });
+  c.register(CONTENT, r => {
+    const load = r.get(CHECKS_PIECE);
+    // the runtimes' package checkers (NoemaWasm, NoemaEmbed, NoemaH5P) are read from the page when a check runs
+    return lazyContentChecks(() => load().then(p => p.contentChecks(r.get(ENGINES), () => globalThis)));
+  });
   c.register(TOAST_SURFACE, () => switchableSurface());
   c.register(NOTIFIER, r => browserNotifier(r.get(TOAST_SURFACE)));
+  c.register(LIFECYCLE, () => browserLifecycle(() => page as never, randomId));
   c.register(TELEMETRY, r => localTelemetry({ store: r.get(STORAGE).kv }));
   c.register(ERRORS, r => {
     const errors = createErrorReporter({

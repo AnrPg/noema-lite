@@ -125,7 +125,7 @@ const ACC_VIEWS = {
       h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, tE('engine.acc.chunk')));
     const subject = h('div', { class: 'row' },
       h('button', { class: 'btn small', onclick: () => show('backup') }, '💾 ' + tE('engine.acc.backupBtn')),
-      h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, resetAt: Date.now(), settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, '🗑️ ' + tE('engine.acc.resetBtn', { title: SUBJ.title })));
+      h('button', { class: 'btn small', onclick: () => confirmBox(tE('engine.home.resetConfirm', { title: SUBJ.title }), async () => { await Noema.backup.restorePoint(ACCOUNT.id, tE('engine.home.resetPoint', { title: SUBJ.title }), { k: 'engine.home.resetPoint', p: { title: SUBJ.title } }); learnt('subject.reset', null); flushSave(); close(); route(); renderTopStats(); }) }, '🗑️ ' + tE('engine.acc.resetBtn', { title: SUBJ.title })));
     const show = t => openAccountMenu(t);
     const hasClaude = !!(CL && CL.Key.get(acc));
     body.append(

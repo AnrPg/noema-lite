@@ -11,7 +11,7 @@
 import { systemClock } from '../adapters/browser/clock.ts';
 import { noemaI18n } from '../adapters/browser/i18n.ts';
 import { CHARACTER_GROUPS, isCharacter, type CharacterGroup, type World } from '../features/shell/domain/characters.ts';
-import { chaptersDone, dueCount, levelOf, medals, wrongCount, type SubjectProgress } from '../features/shell/domain/progress.ts';
+import { medals } from '../features/shell/domain/progress.ts';
 import { provideServices, type UiServices } from '../ui/core/services.ts';
 import { defineUi } from '../ui/index.ts';
 import type { PickerAccount, PickerData } from '../ui/screens/shell/account-picker.ts';
@@ -20,12 +20,12 @@ import type { BellItem } from '../ui/screens/shell/notices.ts';
 import type { ProgressModel } from '../ui/screens/shell/progress.ts';
 import type { CharacterInfo, SettingsData } from '../ui/screens/shell/settings.ts';
 import type { TodayData, TodayModel } from '../ui/screens/shell/today.ts';
-import { dayOf } from '../kernel/day.ts';
 import type { NoemaCoreBridge } from './bridge.ts';
 import { createCore, sha256, type NoemaCoreObject } from './shell/core.ts';
 import { guardDom, h, type MenuEntry } from './shell/dom.ts';
 import { createHost, type Host, type HostCore, type Recent } from './shell/host.ts';
 import { P, jsonOf, putJson, type Account } from './shell/kv.ts';
+import { phase2, settingsCopy } from './shell/learning.ts';
 import { legacy, type AreaBoot, type NoemaAreas, type SubjectMeta } from './shell/legacy.ts';
 import { createThemes, type Themes } from './shell/themes.ts';
 import { runtimeLocales, type I18nRuntimeLocales } from './ui-kit-root.ts';
@@ -48,7 +48,7 @@ const DEV_HOST = /^(localhost|127\.0\.0\.1|\[::1\])$/;
 /** Publishes the bridge's UI half on the page and wires the frame; start() runs the app (once the page has loaded). */
 export function createApp(win: Window = window): App {
   const W = legacy;
-  const core = (win as unknown as { NoemaCore: NoemaCoreBridge }).NoemaCore;
+  const core = phase2((win as unknown as { NoemaCore: NoemaCoreBridge }).NoemaCore);
   guardDom();
   const N = createCore(core) as NoemaCoreObject & NoemaAreas & AppExtras;
   const session = {
@@ -103,8 +103,9 @@ export function createApp(win: Window = window): App {
     const a = acc();
     return a && N.subjectsFor ? N.subjectsFor(a).catch(() => []) : [];
   };
-  const stateOf = (sid: string): SubjectProgress | null =>
-    jsonOf<SubjectProgress | null>(core.storage.kv, `${P}${acc() ?? ''}:s:${sid}:state`, null);
+  /** the learner's state in a subject: the learning log's fold (read only) */
+  const stateOf = (sid: string) => core.learning.progressOf(acc() ?? '', sid);
+  const S = core.study;
 
   /* ---------------- 🔔 the bell: what the notifier moved off the screen waits here, with shares and updates ---------------- */
   core.notify.onOverflow(items => {
@@ -234,63 +235,68 @@ export function createApp(win: Window = window): App {
     if (a.id !== N.account?.id) N.switchTo(a.id, null);
   };
 
-  /* ---------------- "in use on another device" (engine/cloud.js lease) ---------------- */
+  /* ---------------- "in use on another device" (NoemaCore.sync.lease, src/features/sync) ----------------
+     Shown while another tab or device is being used right now. Nothing is saved here meanwhile, so the two can never undo
+     each other's progress; "Use here" pauses the other one and brings in what it did. */
   let inUse: HTMLElement | null = null;
-  addEventListener('noema:inuse', e => {
-    const d = (
-      e as CustomEvent<{
-        state?: string;
-        holder?: { sameDevice?: boolean; os?: string; br?: string; name?: string };
-        unsynced?: boolean;
-      } | null>
-    ).detail;
-    if (d?.state === 'other') {
-      const ho = d.holder;
-      const where = ho?.sameDevice
-        ? N.tr('inuse.otherTab')
-        : ho?.os
-          ? N.tr('loader.inuse.device', { os: ho.os, browser: ho.br || 'none' })
-          : ho?.name || N.tr('inuse.otherDevice'); // os, br: newer apps; name: English words of older ones
-      const cover = document.createElement('noema-in-use');
-      cover.className = 'noema-ovbox noema-inuse';
-      cover.data = {
-        where,
-        unsynced: !!d.unsynced,
-        take: async () => {
-          const st = await W().NoemaCloud?.lease.check({ take: true });
-          if (st === 'mine') {
-            N.toast(N.tr('inuse.continued'));
-            return true;
-          }
-          N.toast(N.tr('inuse.offline'), 4000);
-          return false;
-        },
-      };
-      if (!inUse) {
-        inUse = h('div', { class: 'noema-overlay noema-inuse-ov', role: 'dialog', 'aria-modal': 'true' });
-        for (const x of [...document.body.children] as HTMLElement[])
-          if (!x.inert) {
-            x.inert = true; // keys and taps can't reach the app underneath
-            x.dataset['inuseInert'] = '1';
-          }
-        document.body.append(inUse);
-      }
-      inUse.replaceChildren(cover);
-      return;
+  function showInUse(holder: { sameDevice?: boolean; os?: string; br?: string } | null, unsynced: boolean): void {
+    const where = holder?.sameDevice
+      ? N.tr('inuse.otherTab')
+      : holder?.os
+        ? N.tr('loader.inuse.device', { os: holder.os, browser: holder.br || 'none' })
+        : N.tr('inuse.otherDevice');
+    const cover = document.createElement('noema-in-use');
+    cover.className = 'noema-ovbox noema-inuse';
+    cover.data = {
+      where,
+      unsynced,
+      take: async () => {
+        const st = await core.sync.lease.check({ take: true });
+        if (st === 'mine') {
+          N.toast(N.tr('inuse.continued'));
+          return true;
+        }
+        N.toast(N.tr('inuse.offline'), 4000);
+        return false;
+      },
+    };
+    if (!inUse) {
+      inUse = h('div', { class: 'noema-overlay noema-inuse-ov', role: 'dialog', 'aria-modal': 'true' });
+      for (const x of [...document.body.children] as HTMLElement[])
+        if (!x.inert) {
+          x.inert = true; // keys and taps can't reach the app underneath
+          x.dataset['inuseInert'] = '1';
+        }
+      document.body.append(inUse);
     }
-    if (inUse) {
-      const o = inUse;
-      inUse = null;
-      document.querySelectorAll<HTMLElement>('[data-inuse-inert]').forEach(x => {
-        x.inert = false;
-        delete x.dataset['inuseInert'];
-      });
-      o.classList.add('out');
-      setTimeout(() => {
-        o.remove();
-      }, 250);
-    }
-  });
+    inUse.replaceChildren(cover);
+  }
+  function hideInUse(): void {
+    if (!inUse) return;
+    const o = inUse;
+    inUse = null;
+    document.querySelectorAll<HTMLElement>('[data-inuse-inert]').forEach(x => {
+      x.inert = false;
+      delete x.dataset['inuseInert'];
+    });
+    o.classList.add('out');
+    setTimeout(() => {
+      o.remove();
+    }, 250);
+  }
+  let watchingInUse = false;
+  function watchInUse(): void {
+    if (watchingInUse) return;
+    watchingInUse = true;
+    core.sync.lease.onChange((state, holder) => {
+      N.kv.frozen = state === 'other' ? N.kv.acc : null; // paused: this device saves nothing
+      if (state === 'other') showInUse(holder, !!core.sync.status().pending);
+      else hideInUse();
+    });
+  }
+
+  /* ---------------- the learning log: the account's log open, a:settings its copy (shell/learning.ts) ---------------- */
+  const learning = settingsCopy(core, N.kv);
 
   /* ---------------- the shell's pages ---------------- */
   const fmtDate = shell.fmtDate;
@@ -423,13 +429,13 @@ export function createApp(win: Window = window): App {
         let dfc = 0,
           dpb = 0,
           wrong = 0;
-        const day = dayOf(core.clock.now());
         for (const s of subs) {
           if (!fits(s)) continue;
           const st = stateOf(s.id);
           if (!st) continue;
-          const d = dueCount(st, day),
-            wr = wrongCount(st);
+          // what is due and what was wrong: the study domain's (NoemaCore.study)
+          const d = { fc: S.cards.countDue(st.fc), pb: S.cards.countDue(st.pb) },
+            wr = S.practice.countMistakes(st.res);
           if (d.fc + d.pb + wr) per.push({ s, ...d, wr });
           dfc += d.fc;
           dpb += d.pb;
@@ -508,9 +514,9 @@ export function createApp(win: Window = window): App {
     for (const s of subs) {
       const x = stateOf(s.id);
       if (!x) continue;
-      done += chaptersDone(s.chapters ?? s.meta?.chapters ?? [], x);
-      fcN += Object.keys(x.fc ?? {}).length;
-      boss += Object.keys(x.boss ?? {}).length;
+      done += S.progress.chaptersDone(s.chapters ?? s.meta?.chapters ?? [], x.read, x.boss);
+      fcN += Object.keys(x.fc).length;
+      boss += Object.keys(x.boss).length;
     }
     // the collection: this week's chapters shine
     const wk = core.day.weekStart(day),
@@ -528,7 +534,7 @@ export function createApp(win: Window = window): App {
     putJson(core.storage.kv, mk, found);
     if (was != null && found > was) W().NoemaReact?.big('medal');
     return {
-      level: levelOf(st.xp),
+      level: S.xp.level(st.xp),
       xp: st.xp,
       streak: sn,
       days,
@@ -836,18 +842,20 @@ export function createApp(win: Window = window): App {
     win.customElements.upgrade(shell.preview); // the 5-minute try's bar was made before its element was defined
     const I18 = I();
     if (I18) await race(I18.ready, 4000).catch((e: unknown) => core.errors.report(e, { where: 'loader.i18n.ready', severity: 'warning' }));
+    // the data of the app's earlier versions on this device (its keys, its database), once (shell/migrate.ts)
+    N.migrate.prefix();
+    await N.migrate.idb().catch(core.errors.catcher('loader.migrate.idb', { severity: 'warning' }));
     const services = uiServices();
     provideServices(document.body, services);
     const toaster = document.createElement('noema-toaster');
     document.body.append(toaster);
     await toaster.updateComplete;
-    const bridge = core as unknown as { toasts: { use(s: unknown): void }; contracts: { ready(): Promise<void> } };
-    bridge.toasts.use(toaster); // NoemaCore.notify draws on the kit's toaster from now on
-    // the data contracts' validators (build/contracts.js): nothing opens a subject before they are in; on Today they load
-    // after the first screen is drawn
+    (core as unknown as { toasts: { use(s: unknown): void } }).toasts.use(toaster); // NoemaCore.notify draws on the kit's toaster from now on
+    // the data contracts' validators and the content checks (build/contracts.js): nothing opens a subject or a course before
+    // they are in; on Today they load after the first screen is drawn (the learning log's own contract is in build/app.js)
     let contractsLoad: Promise<void> | null = null;
     const contractsIn = (): Promise<void> =>
-      (contractsLoad ??= bridge.contracts.ready().catch(core.errors.catcher('loader.contracts', { severity: 'warning' })));
+      (contractsLoad ??= core.contracts.ready().catch(core.errors.catcher('loader.contracts', { severity: 'warning' })));
     // a subject will open (a link, the last session): its contracts load beside the rest of the start
     if (new URLSearchParams(location.search).get('subject') || N.jget<{ subj?: string }>(P + 'current', {}).subj) void contractsIn();
     const C = W().NoemaCloud;
@@ -867,8 +875,14 @@ export function createApp(win: Window = window): App {
     const a = found ?? (accs.length === 1 && !cur.loggedOut && accs[0] ? accs[0] : await pickAccount());
     N.kv.acc = a.id;
     N.account = a;
+    await learning.open(a.id);
     N.geminiKey.migrate(a.id); // before the first pull, so a synced a:settings never replaces the only copy of the key
-    if (a.kind === 'cloud' && C) await race(C.pull(a.id), 7000).catch(core.errors.catcher('loader.cloud.pull', { severity: 'warning' })); // else: the local cache
+    if (a.kind === 'cloud' && C) {
+      // the sync starts (its first pull, the lease; already in the pickers: curricula and shares change keys there)
+      watchInUse();
+      C.startAutoSync(a.id);
+      await race(core.sync.ready(), 7000); // what the other devices did, before the first screen (offline: the local copy)
+    }
     if (I18) {
       const st = settings();
       await race(I18.use(st['lang'], st['numerals'] ? { digits: { 'ar-EG': st['numerals'] } } : {}), 4000).catch(
@@ -877,7 +891,6 @@ export function createApp(win: Window = window): App {
       const md = document.querySelector<HTMLMetaElement>('meta[name="description"]');
       if (md) md.content = N.tr('loader.meta.description'); // index.html has no words of its own before the scripts run
     }
-    if (C && a.kind === 'cloud') C.startAutoSync(a.id); // already in the pickers: curricula and shares change keys there
     boot.started?.(a);
     const subs = await subjects();
     const wanted = url.get('subject') || (cur.acc === a.id ? (cur.subj ?? null) : null);

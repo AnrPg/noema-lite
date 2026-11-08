@@ -1,0 +1,825 @@
+{
+ "parse": {
+  "in": "0fad1eb8c55957d5ba7ad5126d69e30fd3c8bdac0d18fb833ae6c5beefdca4a7",
+  "out": [
+   [
+    "parse-paren",
+    6,
+    "\")\" is missing (to close \"(\" at 4) at 6"
+   ],
+   "ok",
+   [
+    "parse-paren",
+    7,
+    "\")\" is missing (to close \"(\" at 1) at 7"
+   ],
+   "ok",
+   "ok",
+   "ok",
+   "ok",
+   [
+    "parse-agent",
+    0,
+    "K needs an agent (K_a) at 0"
+   ],
+   "ok",
+   [
+    "parse-char",
+    3,
+    "unknown character \"★\" at 3"
+   ],
+   "ok",
+   "ok",
+   "ok"
+  ]
+ },
+ "check": {
+  "in": "721f4cc97735715fd74e55bf6fa2fec16d2e6400329e79b0fc4c3b0370f6f7f6",
+  "out": [
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.assign[0].value",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.step",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.worlds[1].x",
+      []
+     ],
+     [
+      "k > 0",
+      "model.edges[0].on",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "wOne",
+      "model.worlds[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.step",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.step",
+      []
+     ],
+     [
+      "k >= 0",
+      "model.norms[1].on",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.attacks[1].on",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "argA",
+      "model.args[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [
+     {
+      "code": "parse-paren",
+      "path": "model.formula",
+      "msg": "\")\" is missing (to close \"(\" at 0) at 6",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-op",
+      "path": "model.formula",
+      "msg": "\"[]\" is not an operator of the prop language at 0",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-ctl",
+      "path": "model.formula",
+      "msg": "G must stand right after A or E in CTL at 0",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-agent",
+      "path": "model.formula",
+      "msg": "K needs an agent (K_a) at 8",
+      "level": "error"
+     },
+     {
+      "code": "agent",
+      "path": "model.edges[0].ag",
+      "msg": "needs an agent of model.agents",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.worlds",
+      "msg": "missing (kripke needs worlds)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].of",
+      "msg": "scalar outputs of logic@1 for kripke: value, count, worlds, reflexive, serial, transitive, symmetric, euclidean, axT, axD, ax4, ax5, axB, flag",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "series outputs of logic@1 for kripke: truth",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].of",
+      "msg": "scene outputs of logic@1 for kripke: drawing",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "size",
+      "path": "model",
+      "msg": "more than 12 atoms (13)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "horn",
+      "path": "model.formulas[0]",
+      "msg": "not a Horn clause (p, a ∧ b → c, a ∧ b → ⊥)",
+      "level": "error"
+     },
+     {
+      "code": "horn",
+      "path": "model.goal",
+      "msg": "needs an atom",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.size",
+      "msg": "give domain or size, not both",
+      "level": "error"
+     },
+     {
+      "code": "arity",
+      "path": "model.preds[0].tuples[1]",
+      "msg": "needs 2 elements like the first tuple",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.preds[0].tuples[2][0]",
+      "msg": "not an element of the domain",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.consts[0].value",
+      "msg": "not an element of the domain",
+      "level": "error"
+     },
+     {
+      "code": "arity",
+      "path": "model.formula",
+      "msg": "R takes 2 arguments, not 1",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "duplicate",
+      "path": "model.worlds[1].id",
+      "msg": "the world w1 is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.worlds[1].holds[0]",
+      "msg": "needs an atom name (a letter or _, then letters, digits, _)",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.edges[0].v",
+      "msg": "not a world of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.world",
+      "msg": "not a world of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.mood",
+      "msg": "needs three of A, E, I, O (AAA … OOO)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "outputs[0].code",
+      "msg": "one of budget, bound, trace-truncated, size, vacuous, correspondence, deadlock, not-serial, not-equivalence, inconsistent-input, conflict, unresolved, no-stable, occurs, clash, grid-only, scene-truncated, series-truncated, contradiction, nd-error, nd-open, nd-goal, boundary, finite, empty, parse, norm, not-transposed, axioms-inconsistent, not-well-formed, postulate",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "outputs[1].node",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "unknown-field",
+      "path": "outputs[2].code",
+      "msg": "ignored",
+      "level": "warning"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "format",
+      "path": "model",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.task",
+      "msg": "one of truth-table, equivalent, entails, normal-form, sat, resolution, proof, horn, many-valued, fol-eval, unify, fol-resolution, syllogism, kripke, tableau, epistemic, ltl, ctl, dyadic, io, norms, af, aspic, bipolar",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "duplicate",
+      "path": "model.args[1].id",
+      "msg": "the argument a is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.attacks[0].v",
+      "msg": "not an argument of the framework",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.arg",
+      "msg": "not an argument of the framework",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-paren",
+      "path": "model.norms[1].deadline",
+      "msg": "\")\" is missing (to close \"(\" at 0) at 2",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.norms[0].act",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.norms[0].kind",
+      "msg": "missing (O, F or P)",
+      "level": "error"
+     },
+     {
+      "code": "duplicate",
+      "path": "model.norms[1].id",
+      "msg": "the norm n is listed twice",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "term",
+      "path": "model.terms[0]",
+      "msg": "needs a term (a name, or f(t1, …, tn))",
+      "level": "error"
+     },
+     {
+      "code": "parse-eof",
+      "path": "model.terms[1]",
+      "msg": "the formula ends too soon at 1",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-eof",
+      "path": "model.formula",
+      "msg": "the formula ends too soon at 5",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.loop",
+      "msg": "needs a position of the trace",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "size",
+      "path": "model.puzzle.n",
+      "msg": "at most 5 children (32 worlds)",
+      "level": "error"
+     },
+     {
+      "code": "agent",
+      "path": "model.formula",
+      "msg": "the agent c9 is not in model.agents",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-char",
+      "path": "model.premises[0]",
+      "msg": "unknown character \"★\" at 6",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.puzzle",
+      "msg": "give worlds or puzzle, not both",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.puzzle.muddy",
+      "msg": "at most n",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.formulas",
+      "msg": "needs two formulas",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "parse-paren",
+      "path": "model.formula",
+      "msg": "\")\" is missing (to close \"(\" at 1) at 8",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-eof",
+      "path": "model.formula",
+      "msg": "the formula ends too soon at 26",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.op",
+      "msg": "missing (io needs norms, goal, op)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.step",
+      []
+     ],
+     [
+      "k",
+      "model.ext",
+      []
+     ],
+     [
+      "k < 5",
+      "model.kb[1].on",
+      []
+     ],
+     [
+      "k > 0",
+      "model.rules[2].on",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "literal",
+      "path": "model.kb[0].f",
+      "msg": "needs a literal (an atom or ¬atom)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-paren",
+      "path": "model.rules[1].body[0]",
+      "msg": "\")\" is missing (to close \"(\" at 0) at 2",
+      "level": "error"
+     },
+     {
+      "code": "duplicate",
+      "path": "model.rules[1].id",
+      "msg": "the rule r is listed twice",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.link",
+      "msg": "one of last, weakest",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.kb",
+      "msg": "missing (aspic needs kb or rules)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "scalar outputs of logic@1 for aspic: args, attacks, defeats, extensions, credulous, skeptical, accepted, inCount, subClosed, strictClosed, directConsistent, indirectConsistent, transposed, wellFormed, axiomsConsistent, steps, frame, flag",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.kb[0].kind",
+      "msg": "one of axiom, ordinary",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.contraries[0].v",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.step",
+      []
+     ],
+     [
+      "k",
+      "model.args[0].x",
+      []
+     ],
+     [
+      "k > 2",
+      "model.supports[0].on",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "cLabel",
+      "model.args[2].label"
+     ]
+    ]
+   },
+   {
+    "p": [
+     {
+      "code": "ref",
+      "path": "model.supports[0].v",
+      "msg": "not an argument of the framework",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.arg",
+      "msg": "not an argument of the framework",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.support",
+      "msg": "one of general, deductive, necessary",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.system",
+      "msg": "one of K, D, T, K4, S4, B, S5",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   }
+  ]
+ }
+}

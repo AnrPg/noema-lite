@@ -245,15 +245,13 @@ function r_nothrow(r) { return r && Array.isArray(r.diag); }
   ok(t1 < 50, `speed: a typical run (a triangle, its centres, the Euler line, the scene) ${t1} ms < 50 ms`);
   ok(wc === 0 && wr.out.r.length === 960 && t3 < 2000, `speed: the worst allowed (200 moving points: their minimum enclosing circle's centre traced and the hull's area over 960 samples — samples × objects at the budget 200 000 — plus Delaunay and Voronoi) ${t3} ms < 2 s`);
 }
-// ---------- the reference activity euler-line (its exercise's checks and tests.json; packcheck and activities.py agree) ----------
+// ---------- the reference activity euler-line (its exercise's checks and tests.json; the content checks pass it) ----------
 {
   const AD = path.join(ROOT, 'tools', 'activities_examples', 'euler-line'), rd = f => JSON.parse(fs.readFileSync(path.join(AD, f), 'utf8'));
   const ex = rd('spec.json'), sim = G.engine.create(ex, { seed: 1 });
   const LOC = ['en', 'el', 'ru', 'de', 'fr'], tables = Object.fromEntries(LOC.map(l => [l, rd(`strings.${l}.json`)]));
-  require(path.join(ROOT, 'engine', 'packcheck.js'));
-  const js = globalThis.NoemaPackCheck.checkSimSpec(ex, tables);
-  const py = JSON.parse(require('child_process').execFileSync('python3', ['-c', 'import json, sys, activities as A; d = json.loads(sys.stdin.read()); print(json.dumps(A.check_spec(d[0], tables=d[1])))'], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify([ex, tables]), encoding: 'utf8' }));
-  ok(js.length === 0 && py.length === 0, `euler-line: the spec passes packcheck (JS) and activities.check_spec (Python) with its five string tables${js.length + py.length ? ': ' + js.concat(py).join('; ') : ''}`);
+  const js = ENGINES.content().checkSimSpec(ex, tables);
+  ok(js.length === 0, `euler-line: the spec passes the content checks (checkSimSpec) with its five string tables${js.length ? ': ' + js.join('; ') : ''}`);
   ok(LOC.every(l => JSON.stringify(Object.keys(tables[l]).sort()) === JSON.stringify(Object.keys(tables.en).sort())), 'euler-line: the five string tables have the same keys');
   const act = rd('activity.json'); ok(act.id === 'euler-line' && act.runtime === 'sim-spec@1' && fs.readFileSync(path.join(AD, 'fallback.svg'), 'utf8').startsWith('<svg'), 'euler-line: activity.json and fallback.svg');
   const checks = ['onC == 1', 'hIn == 1', 'line == 1'].map(e => NoemaExpr.compile(e));

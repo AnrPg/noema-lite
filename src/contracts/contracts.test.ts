@@ -1,7 +1,7 @@
 /* noema-lite — the data contracts: every schema compiles in ajv's strict mode with a stable versioned id, every data file
    of the repository satisfies its contract, the compiled validators word their errors, and the copies of a format that
-   live elsewhere (the Roadmap agents' schemas, packcheck's types, the difficulty mix) are the
-   same as the contract (the connector's tool list: src/connector/tools/tools.test.ts). node --test --experimental-strip-types src/contracts/contracts.test.ts (npm run test:unit). */
+   live elsewhere (the Roadmap agents' schemas) are the same as the contract (the content checks' types: src/features/content/domain/pack.test.ts;
+   the connector's tool list: src/connector/tools/tools.test.ts). node --test --experimental-strip-types src/contracts/contracts.test.ts (npm run test:unit). */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -10,7 +10,6 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { check, problems, CONTRACT_IDS, isContractId } from './index.ts';
 import { repoFiles, FILE_KINDS } from './repo.ts';
-import { DIFFICULTY_MIX } from './rules/levels.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SCHEMAS = path.join(ROOT, 'src', 'contracts', 'schemas');
@@ -154,25 +153,4 @@ test("noema.curriculum-agents.v1 is engine/curriculum.js's agent schemas", () =>
   const S = (g.NoemaCurriculum as { schemas: Record<string, unknown> }).schemas;
   const defs = (readJson('src/contracts/schemas/noema.curriculum-agents.v1.schema.json') as { $defs: Record<string, unknown> }).$defs;
   assert.deepEqual(defs, { dag: S.S_DAG, audit: S.S_AUDIT, expand: S.S_EXPAND, plan: S.S_PLAN });
-});
-
-test("engine/packcheck.js: its types and blocks are the contract's, and it checks shapes with the contracts", () => {
-  require(path.join(ROOT, 'engine', 'packcheck.js'));
-  const P = (
-    globalThis as unknown as { NoemaPackCheck: { TYPES: Set<string>; BLOCKS: Set<string>; checkExercise(e: object, m: object): string[] } }
-  ).NoemaPackCheck;
-  const chapter = readJson('src/contracts/schemas/noema.chapter.v1.schema.json') as {
-    $defs: { exerciseType: { enum: string[] }; block: { properties: { t: { enum: string[] } } } };
-  };
-  assert.deepEqual([...P.TYPES].sort(), [...chapter.$defs.exerciseType.enum].sort());
-  assert.deepEqual([...P.BLOCKS].sort(), [...chapter.$defs.block.properties.t.enum].sort());
-  assert.deepEqual(P.checkExercise({ id: 'ch01-e001', type: 'tf', section: 'ch01-s01', q: 'Q?', answer: 'yes' }, {}), [
-    'ch01-e001: answer: must be true or false',
-  ]);
-});
-
-test('DIFFICULTY_MIX is tools/pack_rules.json quality "mix.difficulty"', () => {
-  const rules = readJson('tools/pack_rules.json') as { quality: { checks: { id: string; target?: object; tol?: number }[] } };
-  const mix = rules.quality.checks.find(c => c.id === 'mix.difficulty');
-  assert.deepEqual({ target: mix?.target, tol: mix?.tol }, { target: DIFFICULTY_MIX.target, tol: DIFFICULTY_MIX.tol });
 });
