@@ -23,6 +23,9 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(150); } return false; };
 // a block that came into view while two others hold the live slots waits with its Start button (at most 2 run at once): press it
 const startIfParked = async (p, sel) => { if (await until(() => p.evaluate(s => !!document.querySelector(s + ' .sim'), sel), 1500)) return; const b = p.locator(sel + ' .act-bar button'); if (await b.count()) await b.first().click({ timeout: 5000 }).catch(() => {}); };   // (it may start by itself meanwhile: the button is gone)
+// the exercise card #T has computed its latest inputs: its session's values() (what the checks grader reads; null while a run is pending,
+// and Check then only asks to finish first)
+const computed = p => until(() => p.evaluate(() => !!ACT.LIVE.find(s => s.root.closest('#T'))?.values?.()));
 const actFrame = (p, sel) => p.frames().find(f => f.parentFrame() && f.parentFrame().parentFrame() === p.mainFrame() && sel(f));   // the mini-app: inside the wrapper frame
 
 const http = require('http'); const hits = []; let BEACON = '';
@@ -286,9 +289,9 @@ async function wasmApp(p, ctx, E) {
     return until(() => p.evaluate(() => !!document.querySelector('#T .sim-ro dd')?.textContent)); };
   const setC = v => p.evaluate(v => { const e = document.querySelector('#T [data-param="c"]'); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, v);
   ok(await card(), 'the exercise card mounts the module');
-  await setC(1); await wait(700); await p.click('#T button:has-text("Check")'); await wait(300);
+  await setC(1); await computed(p); await p.click('#T button:has-text("Check")'); await wait(300);
   ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.bad') && /1 of 2|1 \/ 2/.test(c.querySelector('.act-checks-sum')?.textContent || ''); }), 'c = 1 (about 8 % left) is graded wrong: 1 of 2 conditions met');
-  await card(); await setC(1.6); await wait(700); await p.click('#T button:has-text("Check")'); await wait(300);
+  await card(); await setC(1.6); await computed(p); await p.click('#T button:has-text("Check")'); await wait(300);
   ok(await p.evaluate(() => { const c = document.getElementById('T'); return c._locked() && !!c.querySelector('.explain.ok'); }), 'c = 1.6 is graded right');
   ok(await p.evaluate(() => S.att?.['ch01-e908']?.result?.passed === true && S.att['ch01-e908'].events.length >= 1), 'the attempt is saved (S.att)');
 
@@ -469,7 +472,7 @@ async function simSpec(p, ctx, E) {
 
   console.log('— sim-spec@1: the sim exercise (checks grader)');
   const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e901']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
-  const setR = async v => { const n = p.locator('#T input.sim-num[data-param="R"]'); await n.fill(String(v)); await n.press('Tab'); await wait(150); };
+  const setR = async v => { const n = p.locator('#T input.sim-num[data-param="R"]'); await n.fill(String(v)); await n.press('Tab'); await computed(p); };
   const check = async () => { await p.click('#T button:has-text("Check")'); await wait(300); };
   await card();
   ok(await p.evaluate(() => !!EX['ch01-e901'] && !document.querySelector('#T iframe')), 'the sim exercise with a sim-spec activity is shown');
@@ -756,7 +759,7 @@ async function p6engines(p, ctx, E) {
   for (const [id, sets, want] of tries) {
     await card(id);
     for (const [k, v] of sets) { if (typeof v === 'string') await p.selectOption(`#T select[data-param="${k}"]`, v); else await setNum('#T', k, v); }
-    await wait(300);
+    await computed(p);
     const g = await grade();
     ok(want ? g.ok && !g.bad : g.bad && !g.ok, `${id} ${sets.map(([k, v]) => k + ' ' + v).join(', ')}: graded ${want ? 'right' : 'wrong'} (${g.list})`);
   }
