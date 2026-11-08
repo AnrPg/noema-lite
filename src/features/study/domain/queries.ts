@@ -113,15 +113,23 @@ export function roundOrder<E extends { readonly id: string; readonly lr?: string
   return spreadFacades([...shuffled(g0, random), ...shuffled(g2, random), ...shuffled(g1, random), ...shuffled(g3, random)]);
 }
 
-/** After a wrong answer: one sibling of the same learnable, in another type, from the same chapter, not in the round yet. */
+/** After a wrong answer: one sibling of the same learnable, in another type, from the same chapter (`chapterOf`, by
+    default the exercise's `chapter`), not in the round yet. */
 export function siblingOf<
   E extends { readonly id: string; readonly type: string; readonly lr?: string | undefined; readonly chapter?: string | undefined },
->(ex: E, round: readonly { readonly id: string }[], all: readonly E[], random: Random): E | null {
+>(
+  ex: E,
+  round: readonly { readonly id: string }[],
+  all: readonly E[],
+  random: Random,
+  chapterOf: (e: E) => unknown = e => e.chapter,
+): E | null {
   if (!ex.lr) return null;
-  const inRound = new Set(round.map(e => e.id));
+  const inRound = new Set(round.map(e => e.id)),
+    ch = chapterOf(ex);
   return (
     shuffled(
-      all.filter(e => e.lr === ex.lr && e.chapter === ex.chapter && e.type !== ex.type && !inRound.has(e.id)),
+      all.filter(e => e.lr === ex.lr && chapterOf(e) === ch && e.type !== ex.type && !inRound.has(e.id)),
       random,
     )[0] ?? null
   );

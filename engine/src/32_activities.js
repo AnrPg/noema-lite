@@ -374,7 +374,8 @@ R.sim = (ex, api) => {
   }
   return {
     el,
-    check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return g.ok; },
+    answer: () => { const g = sess.grade?.(); return g ? { ok: g.ok, score: g.score } : {}; },
+    check() { const g = sess.grade?.(); if (!g) return null; if (Array.isArray(g.checks)) showChecks(g.checks); sess.saveAttempt?.(); return verdict(ex, { ok: !!g.ok, ...(typeof g.score === 'number' ? { score: g.score } : {}) }); },
     reveal() { if (hintBtn) hintBtn.disabled = true; try { sess.port?.reveal?.(); } catch (e) { } if (sess.result?.passed && ex.reveal) el.append(h('div', { class: 'explain' }, h('div', { html: fmt(ex.reveal) }))); },
     bonus: () => -Math.round((4 + (ex.difficulty || 1) * 4) * (1 - Math.max(0.5, Math.pow(0.85, used)))),   // each hint used: score × 0.85, never below × 0.5 (docs/adr/001 D8)
     given: () => sess.result ? `(the activity reported: ${sess.result.passed ? 'passed' : 'not passed'}, score ${sess.result.score}${sess.result.detail ? ', ' + sess.result.detail : ''})` : '',   // i18n-ignore (AI context)

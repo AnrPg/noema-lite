@@ -5,13 +5,14 @@
  * NoemaError thrown where the domain returns an error.
  *
  *   NoemaCore.study.grade(ex, answer, { regions }) → { ok: true | false | null (incomplete), score, items?, typos?, missing?, parts? }
+ *   NoemaCore.study.targets(ex, regions) → the parts it names · hits(region, x, y) → inside?
  *   NoemaCore.study.fsrs.review(state, rating 1–4, { at, parameters, retention }) → the card's FSRS memory after it
  *                   .memory(state) → memory | null · isDue(state, day?) · dueDay(state) → day | null
- *                   .retrievability(state, at?) · later(a, b) · defaults · optimize(reviews, parameters?) → Promise<result>
+ *                   .retrievability(state, at?) · later(a, b) · box(state) → 0–5 · defaults · optimize(reviews, parameters?) → Promise<result>
  *   NoemaCore.study.cards.queue(cards [{ key }], states, { day, newPerDay, all }) → { queue, due, fresh, resting }
  *                   .countDue(states, keys?, day?)
  *   NoemaCore.study.practice.mistakes(exercises, answers) · countMistakes(answers) · order(list, answers)
- *                   · sibling(ex, round, all) · spread(list) · solved(answers, id)
+ *                   · sibling(ex, round, all, chapterOf?) · spread(list) · solved(answers, id)
  *   NoemaCore.study.progress.chapter(chapter, read, answers) → { sr, ex } · chaptersDone(chapters, read, boss)
  *                   · levels(chapters, read, answers, { packLevels, ladder })
  *   NoemaCore.study.xp.today(byDay, day?) · goalReached(byDay, goal, day?) · streak(byDay, day?, carried?) · level(xp)
@@ -22,7 +23,7 @@
 import { browserStorage } from '../adapters/browser/storage.ts';
 import { dayOf, parseDay, type LocalDay } from '../kernel/day.ts';
 import { NoemaError } from '../kernel/errors.ts';
-import type { Result } from '../kernel/result.ts';
+import { ok, type Result } from '../kernel/result.ts';
 import type { DocumentStore } from '../ports/storage.ts';
 import { createCatalogIndex, INDEX_COLLECTION, type IndexSource } from '../features/catalog/application/index-store.ts';
 import { JOB_RECORDS } from '../features/catalog/application/jobs.ts';
@@ -36,13 +37,14 @@ import {
   dueDay,
   isRating,
   laterReview,
+  masteryBox,
   newCard,
   scheduler,
   type CardMemory,
 } from '../features/study/domain/fsrs.ts';
 import { shouldRefit, type OptimizeResult, type ReviewRecord } from '../features/study/domain/fsrs-optimizer.ts';
 import { gradeExercise, type Answer, type Exercise } from '../features/study/domain/grading/grade.ts';
-import type { Region } from '../features/study/domain/grading/regions.ts';
+import { hits, targetsOf, type Region } from '../features/study/domain/grading/regions.ts';
 import type { LoggedEvent } from '../features/study/domain/projections/input.ts';
 import * as Q from '../features/study/domain/queries.ts';
 import type { BridgeExtension } from './bridge.ts';
@@ -104,6 +106,8 @@ export function studyBridge(r: Resolver): unknown {
       return m ? scheduler().retrievability(m, at ?? clock.now()) : 0;
     },
     later: laterReview,
+    /** mastery 0–5 on the old boxes' scale (a drill's five dots) */
+    box: (raw: unknown): number => masteryBox(cardMemoryOf(raw)),
     optimize: (reviews: readonly ReviewRecord[], parameters?: readonly number[]): Promise<OptimizeResult> =>
       run<OptimizeResult>(JOB_OPTIMIZE, { reviews, ...(parameters ? { parameters } : {}) } satisfies OptimizeInput),
   });
@@ -113,6 +117,9 @@ export function studyBridge(r: Resolver): unknown {
       const g = unwrapOr(gradeExercise(ex, answer, ctx.regions ? { regions: ctx.regions } : {}));
       return g.status === 'incomplete' ? { ok: null, score: 0 } : { ok: g.ok, score: g.score, ...g.detail };
     },
+    /** The parts of a picture an exercise names (its `targets`, else every part), and whether (x, y) is inside one. */
+    targets: (ex: { targets?: unknown }, regions: readonly Region[]): Region[] => targetsOf(ex.targets, regions),
+    hits: (region: Region, x: number, y: number): boolean => hits(region, x, y),
     fsrs,
     cards: Object.freeze({
       queue: <C extends { key: string }>(
@@ -139,7 +146,8 @@ export function studyBridge(r: Resolver): unknown {
         ex: E,
         round: readonly { id: string }[],
         all: readonly E[],
-      ) => Q.siblingOf(ex, round, all, Math.random),
+        chapterOf?: (e: E) => unknown,
+      ) => Q.siblingOf(ex, round, all, Math.random, chapterOf),
     }),
     progress: Object.freeze({ chapter: Q.chapterProgress, chaptersDone: Q.chaptersDone, levels: Q.levelProgress }),
     xp: Object.freeze({
@@ -197,7 +205,11 @@ export function catalogBridge(r: Resolver): unknown {
         account,
         sources,
         docs: r.get(CATALOG_STORE),
-        build: input => r.get(COMPUTE).run<records.CatalogRecord[]>(JOB_RECORDS, input),
+        // in the Worker; a source the Worker cannot be sent (or a Worker that failed) is built on the page by the same code
+        build: async input => {
+          const built = await r.get(COMPUTE).run<records.CatalogRecord[]>(JOB_RECORDS, input);
+          return built.ok || built.error.code !== 'compute.failed' ? built : ok(records.recordsOf(input));
+        },
         report: (e, where) => r.get(ERRORS).report(e, { where, severity: 'warning' }),
       }),
   });

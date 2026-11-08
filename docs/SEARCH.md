@@ -5,7 +5,8 @@ block, exercises, flashcards, traps, debug drills, sources), language courses (w
 fields, sentences, peculiarities) and the conversations with the character. Content others share in Discover is not
 searched here; Discover has its own search.
 
-Files: `engine/catalog.js` (the catalogue: records, folding, scoring, the stored index), `engine/search.js` (the sheet,
+Files: `src/features/catalog` (the records and the stored index, built in the Worker; `NoemaCore.catalog`),
+`engine/catalog.js` (the query: folding, scoring, snippets), `engine/search.js` (the sheet,
 the page, saved searches, the practice round); its words are in `engine/i18n_shell.js` as `sr_*` keys, in every
 interface language, like the rest of the new frame, engine hooks in `engine/src/40_views.js` (deep links, the
 `#/srun` round), `engine/shell.js` (🔎 in the top bar, `/` and Ctrl K, the `#/search` page). Tests:
@@ -48,7 +49,7 @@ Matching: accents, case, ß/ss, final sigma, Hebrew points, Arabic vowel marks a
 matches with tone marks, without them, or with tone numbers (`xing3`). A word is found by any of its forms. Exercise
 answers and explanations are never indexed.
 
-## 3. Records (engine/catalog.js)
+## 3. Records (src/features/catalog/domain/records.ts)
 
 ```
 { ty, w: 'know'|'lang', k: unique key, ti: title, f: [[field, text]…], h: address, pa: [path…],
@@ -57,12 +58,14 @@ answers and explanations are never indexed.
 
 Builders: `fromPack(pack, meta)`, `fromCurriculum(cur)`, `fromLangCourse(data, meta)`, `fromConvos(list)`. A change in
 what a pack, a course or a conversation holds that should be searchable is a change in its builder (and in
-`tests/search_catalog.js`). Bump `SCHEMA` in catalog.js when records change shape: every stored index is rebuilt.
+`tests/search_catalog.js`). Bump `SCHEMA` in records.ts when records change shape: every stored index is rebuilt.
 
 The index is kept per account and source in IndexedDB `noema-lite-search` (store `src`, key `<account>|<source>`,
 value `{schema, sig, recs}`). Sources: `pack:<id>`, `cur:<id>`, `lang:<course>`, `convos`. Each has a signature
 (version, update time, counts); only sources whose signature changed are rebuilt, one at a time in the background,
-with a progress line. The Databricks pack (≈4 900 records) builds in ≈90 ms; a language course (≈10 000) in ≈180 ms;
+with a progress line. A source gives what its records are built from (`input()`: `{ kind: pack | curriculum | lang |
+convos, data, meta }`); the records are built in the Worker (the Compute job `catalog.records`,
+`src/features/catalog/application/index-store.ts`), on the page when no Worker can take it. The Databricks pack (≈4 900 records) builds in ≈90 ms; a language course (≈10 000) in ≈180 ms;
 a search then takes a few ms.
 
 ## 4. Stable addresses
@@ -111,7 +114,7 @@ lives in `sessionStorage` (`noema-device:searchRound`).
 
 ## 7. For the language side (requests to the language courses' owner)
 
-The search reads the language courses without changing them: `fromLangCourse()` in `engine/catalog.js` builds the
+The search reads the language courses without changing them: `fromLangCourse()` in `src/features/catalog` builds the
 records from the course data (`Noema.langCourses()` / `Noema.langData()`), and the language tutor's conversations
 (`engine/langui.js` `persistTutor`, subject `lang:<course>`) already land on the Languages side, in their course and
 language, with their label as the place. Nothing in `library/languages/`, `engine/lang*` or the language tests was

@@ -181,8 +181,9 @@
     put(s) { KV.set(KV.accountKey('stats'), JSON.stringify(s)); },
     touchStreak() { const s = this.get(), d = today(); if (s.lastDay === d) return s; const diff = NoemaCore.day.is(s.lastDay) ? NoemaCore.day.between(s.lastDay, d) : 99; s.streak = diff === 1 ? s.streak + 1 : 1; s.lastDay = d; this.put(s); return s; },
     add(n) { const s = this.touchStreak(); s.xp += n; s.xpDay[today()] = (s.xpDay[today()] || 0) + n; s.bySubject[KV.subj] = (s.bySubject[KV.subj] || 0) + n; const keys = Object.keys(s.xpDay).sort(); while (keys.length > 400) delete s.xpDay[keys.shift()]; this.put(s); return s; },
-    streakNow() { const s = this.get(); return NoemaCore.day.is(s.lastDay) && NoemaCore.day.between(s.lastDay, today()) <= 1 ? s.streak : 0; },
-    todayXP() { return this.get().xpDay[today()] || 0; },
+    /** the streak and today's XP are the study domain's (NoemaCore.study.xp): days in a row with XP, the stored run carried */
+    streakNow() { const s = this.get(); return NoemaCore.study.xp.streak(s.xpDay, undefined, NoemaCore.day.is(s.lastDay) ? { days: s.streak || 0, through: s.lastDay } : null); },
+    todayXP() { return NoemaCore.study.xp.today(this.get().xpDay); },
   };
 
   /* ---------------- subject packs in several languages (docs/i18n.md §10, pack format v3) ----------------

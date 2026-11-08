@@ -20,7 +20,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 function unit() {
   console.log('— words, matching and the checks, without a browser');
   const ctx = { console, URL, URLSearchParams, TextEncoder, TextDecoder }; ctx.window = ctx; vm.createContext(ctx);   // what a browser page has (the contracts' validators check URIs with URL)
-  for (const f of ['engine/contracts.js', 'engine/catalog.js', 'engine/wordlink.js', 'engine/packcheck.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
+  for (const f of ['build/app.js', 'engine/contracts.js', 'engine/catalog.js', 'engine/wordlink.js', 'engine/packcheck.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const W = ctx.NoemaWordlink, C = ctx.NoemaPackCheck.checkBridge;
   ok(W.tokenize("Spark's data-skew, don’t 42x").map(t => t.t).join('|') === "Spark's|data-skew|don’t|42x", "words keep ' and - inside them, digits count as letters");
   const idx = W.index([{ k: 'data', forms: [] }, { k: 'data skew', forms: ['data skews'] }, { k: 'κατάσταση', forms: ['καταστάσεις'] }, { k: 'Delta', case: true }]);
@@ -63,7 +63,7 @@ function unit() {
   const [sid, pyIds] = JSON.parse(ids);
   const P = JSON.parse(fs.readFileSync(path.join(subj, 'pack.json'), 'utf8'));
   const sec = P.chapters[0].sections.find(s => s.id === sid);
-  ok(JSON.stringify(ctx.NoemaCatalog.blockIds(sec.blocks)) === JSON.stringify(pyIds), `the tool's block ids are the app's (${sid}, ${pyIds.length} blocks)`);
+  ok(JSON.stringify(ctx.NoemaCore.catalog.blockIds(sec.blocks)) === JSON.stringify(pyIds), `the tool's block ids are the app's (${sid}, ${pyIds.length} blocks)`);
   // every pair of the six bridge languages (en el ru ar de fr): the fixtures in el, ru, ar, de and fr, each into the other five
   ok(W.find('والسلسلة بسلسلة للسلسلة السلاسل', W.index([{ k: 'سلسلة', forms: ['سلاسل'] }])).length === 4, 'Arabic: a word is found under its clitics (و, ب, لل, the article ال)');
   ok(W.find("l'hélicase d’hélicase hélicase", W.index([{ k: 'hélicase' }])).length === 3, 'French: a word is found under an elision (l\', d’)');

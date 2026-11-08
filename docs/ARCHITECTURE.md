@@ -148,8 +148,40 @@ NoemaCore.NoemaError                    the error class
 NoemaCore.contracts                     the compiled data contracts (src/contracts)
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
+NoemaCore.study                         the study domain (src/features/study, the source of truth is the header of
+                                        src/composition/study.ts): grade(ex, answer, { regions }) → { ok: true|false|null, score,
+                                        items, typos, missing, parts } · targets · hits · fsrs.{review, memory, isDue, dueDay,
+                                        retrievability, later, box, defaults, optimize} · cards.{queue, countDue} ·
+                                        practice.{mistakes, countMistakes, solved, order, spread, sibling} ·
+                                        progress.{chapter, chaptersDone, levels} · xp.{today, goalReached, streak, level, dayOf} ·
+                                        models.{current, apply, start, rebuild, optimize, refit, onChange}
+NoemaCore.catalog                       the search index's records (src/features/catalog): fromPack · fromCurriculum ·
+                                        fromLangCourse · fromConvos · blockIds · blockText · trapId · cardKey · hash36 · plain ·
+                                        toneNumbers · BLOCK_KIND · SCHEMA · index(account, sources) → { load, refresh, records,
+                                        byKey, state, on, forget } (the records built in the Worker, kept in noema-lite-search)
 NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
 ```
+
+#### 6.0 The study domain and its read models (phase 2)
+
+- **Grading** (`src/features/study/domain/grading`): every exercise type is graded by one pure function from the
+  exercise and the learner's answer in the exercise's own indices (the answer shapes are in the header of `grade.ts`).
+  The old renderers (`engine/src/30_exercises.js`, `31_types.js`, `32_activities.js`, `35_visual.js`) only collect the
+  answer (`answer()`) and show the verdict; `tests/thinking_types.js`, `visual.js`, `e2e.js` and the sweep in
+  `grading.test.ts` (every exercise of the library and the fixtures) prove the results are the old ones.
+- **FSRS-6** (`fsrs.ts`, `fsrs-optimizer.ts`): the scheduler of py-fsrs 6 (its reference values in the tests) and an
+  optimiser that fits the 21 parameters to the learner's reviews (Adam on the log loss, in the Worker:
+  `study.fsrs.optimize`). Cards (`S.fc`) and drills (`S.pb`) hold FSRS memories; an entry in the old Leitner shape
+  `{ box, due }` is read as the memory it stands for (`fromLeitner`) and replaced at its next review, so no schedule is
+  lost. The three card buttons are the ratings Again, Good, Easy; a drill's blank / partly / nailed are Again, Hard,
+  and Easy (with ≥ 70 % of the checklist) or Good. The fitted parameters are kept in `a:settings.fsrs`.
+- **Read models** (`projections/`, CQRS): the learning log's events folded into the model of every subject (answers,
+  card and drill memories, reading, XP per day, the streak, the goal, levels, the FSRS setting). A rebuild runs in the
+  Worker (`study.project`); after it the page folds each new event itself. The events the read models read are listed
+  in `projections/input.ts`; the log reaches them through the `EventFeed` port of `application/read-models.ts`,
+  registered as `STUDY_EVENTS` by the learning log's store.
+- **Queries** (`queries.ts`): the card queue, due counts, the Mistakes gym, a round's order and siblings, chapter and
+  level progress, the day's XP, the goal, the streak (days with XP, plus a run carried over from before) and the XP level.
 
 The bridge speaks the old code's language. It returns plain values and throws exceptions instead of returning
 Results: a failed write is `false`, and a bad day throws `day.invalid`. Every failure it swallows goes to the
@@ -223,7 +255,9 @@ on a token colour or a token colour as text without such a pair.
 | Schema-first contracts | `src/contracts/` (helper 2) |
 | Microkernel plugins | `src/plugins/` (manifest, registry, capability checks), the engines in `src/engines/` (§6.1) |
 | Design tokens | `src/ui/tokens/` → `engine/tokens.css` (§6.2) |
-| Saga with idempotency keys, event sourcing of learning events, CQRS read models in a Worker (Compute jobs), local-first with an outbox, statecharts, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
+| CQRS read models in a Worker (Compute jobs `study.project`, `catalog.records`), followed on the page event by event | `src/features/study/application/read-models.ts`, `src/features/catalog/application/index-store.ts` (§6.0) |
+| Pure domain graders and schedulers (Strategy per exercise type; FSRS-6) | `src/features/study/domain/grading`, `fsrs.ts` (§6.0) |
+| Saga with idempotency keys, event sourcing of learning events, local-first with an outbox, statecharts, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
 
 ## 8. How to add …
 

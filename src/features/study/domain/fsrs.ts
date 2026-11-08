@@ -282,6 +282,15 @@ export const isDueOn = (card: CardMemory, today: LocalDay): boolean => dueDay(ca
 /** The days of the old Leitner boxes 0–5 (the scheduler before FSRS): a box's interval. */
 export const LEITNER_BOX_DAYS: readonly number[] = Object.freeze([0, 1, 3, 7, 16, 35]);
 
+/** A memory's mastery on the old boxes' scale 0–5 (for a five-dot meter): how many of the boxes' intervals its stability
+    has reached; 0 for a card never reviewed (null) or still in its first steps. */
+export function masteryBox(card: CardMemory | null): number {
+  if (!card || card.reps === 0 || card.s === null) return 0;
+  let b = 0;
+  for (let i = 1; i < LEITNER_BOX_DAYS.length; i++) if (card.s >= (LEITNER_BOX_DAYS[i] ?? Infinity)) b = i;
+  return b;
+}
+
 /**
  * A card scheduled by the old Leitner boxes ({box, due: "YYYY-MM-DD"}), as an FSRS memory: in review, its stability the
  * box's interval (the time it was trusted to be remembered), a middle difficulty, due at the noon of the same day as

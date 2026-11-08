@@ -115,8 +115,7 @@ function ring(pct, size = 120, stroke = 12, color = 'var(--c)') {
 function animateRings(root) { requestAnimationFrame(() => requestAnimationFrame(() => $$('circle[data-off]', root).forEach(c => c.style.strokeDashoffset = c.dataset.off))); }
 /** Read / solved over the whole subject (0…1). */
 function courseProgress() {
-  const secs = COURSE.flatMap(c => c.sections.map(s => s.id)); const exN = COURSE.reduce((a, c) => a + c.exercises.length, 0);
-  return { sr: secs.length ? secs.filter(id => S.read[id]).length / secs.length : 0, ex: exN ? Object.values(S.res).filter(r => r.ok > 0).length / exN : 0 };
+  return NoemaCore.study.progress.chapter({ id: '', sections: COURSE.flatMap(c => c.sections), exercises: ALL_EX }, S.read, S.res);
 }
 /** This subject is a station of a 🧭 Roadmap: which one, its mastery so far, the way back to the map. */
 /** The subject as a step of a Roadmap: where, how far to mastery (and the 🎉 once it is mastered). → null when it is not a step */
@@ -362,15 +361,15 @@ function chapterView(id, tab, focus) {
       h('div', { class: 'row', style: { marginBottom: '14px' } },
         traps.length ? h('button', { class: 'btn primary', onclick: () => startRun(traps, { title: `⚠️ ${SL('trapDrill')} · ${chShort(c.num)}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ ' + SL('trapsNoTimer')) : null,
         tf.length >= 3 ? h('button', { class: 'btn', onclick: () => go('#/lightning/' + id) }, '⚡ ' + SL('trapsTimed')) : null),
-      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', 'data-pid': window.NoemaCatalog ? NoemaCatalog.trapId(p) : null, style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ ' + tE('engine.ch.fixHtml', { fix: fmt(p.fix) }) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));   // i18n-ignore (text, what: for the AI)
+      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', 'data-pid': NoemaCore.catalog.trapId(p), style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ ' + tE('engine.ch.fixHtml', { fix: fmt(p.fix) }) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));   // i18n-ignore (text, what: for the AI)
     if (focus) showHit(body.querySelector(`[data-pid="${focus}"]`));
   }
 }
 /** Practice tab: every way to practise this chapter. */
 function chapterPractice(c) {
   const id = c.id, ok = c.exercises.filter(e => solved(e.id)).length, wrong = c.exercises.filter(e => S.res[e.id]?.last === false);
-  const cards = c.flashcards.map((f, i) => f._key || c.id + '#' + i), dueC = cards.filter(k => S.fc[k] && cardDue(k)).length;
-  const dueD = c.debug.filter(d => !S.pb[d.id] || S.pb[d.id].due <= today()).length;
+  const dueC = NoemaCore.study.cards.countDue(S.fc, c.flashcards.map((f, i) => f._key || c.id + '#' + i));
+  const dueD = c.debug.filter(drillDue).length;
   return choiceList([
     c.exercises.length ? { label: SL('round10'), sub: SL('solvedOf', { n: ok, of: c.exercises.length }), icon: '🎯', cls: 'main', run: () => startRun(c.exercises, { title: '🎯 ' + chTitle(c.num, c.title), count: 10, back: `#/ch/${id}/practice` }) } : null,
     c.exercises.length ? { label: SL('chooseRound'), sub: SL('chooseRoundSub'), icon: '🎛️', href: `#/ch/${id}/filters` } : null,
@@ -440,7 +439,7 @@ function sectionMenu(s) {
 }
 function sectionView(sid, bid) {
   const s = SEC[sid]; if (!s) return go(HOME());
-  const bids = s._bids || (s._bids = window.NoemaCatalog ? NoemaCatalog.blockIds(s.blocks) : s.blocks.map((b, i) => 'b' + i));   // stable ids (engine/catalog.js): #/s/<section>/<block> opens exactly that block
+  const bids = s._bids || (s._bids = NoemaCore.catalog.blockIds(s.blocks));   // stable ids (engine/catalog.js): #/s/<section>/<block> opens exactly that block
   const c = s._ch; setAccent(document.body, c);
   S.last = sid; save();
   setTutorContext({ kind: 'section', id: sid });
@@ -553,29 +552,10 @@ function practiceSetup(body, c) {
     h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { const p = pool(); if (!p.length) return toast(tE('engine.prac.noMatch')); startRun(p, { title: '🎯 ' + tE('engine.run.chPractice', { num: c.num }), count: st.count, back: `#/ch/${c.id}/practice` }); } }, '▶ ' + tE('engine.prac.start')), info)));
   upd();
 }
-function runOrder(list) {
-  // previously wrong first (confident mistakes first of all; right-but-guessed with them), then unsolved, then the rest; shuffled inside groups
-  const g0 = [], g1 = [], g2 = [], g3 = [];
-  list.forEach(e => { const r = S.res[e.id]; if (!r) g1.push(e); else if (r.last === false && r.conf === 'sure') g0.push(e); else if (r.last === false || r.conf === 'guess') g2.push(e); else g3.push(e); });
-  return spreadFacades([...shuffle(g0), ...shuffle(g2), ...shuffle(g1), ...shuffle(g3)]);
-}
-/** Facades of one learnable (same `lr`, CONTENT_SPEC.md) never come one after the other: each is pushed back past the next exercise of another learnable. */
-function spreadFacades(list) {
-  const out = [], wait = [];
-  for (const e of list) {
-    const i = wait.findIndex(w => !w.lr || w.lr !== out[out.length - 1]?.lr); if (i >= 0) out.push(...wait.splice(i, 1));
-    if (e.lr && e.lr === out[out.length - 1]?.lr) wait.push(e); else out.push(e);
-  }
-  return out.concat(wait);
-}
-/** After a wrong answer: one sibling of the same learnable in another exercise type, not yet in this round (SRS "siblings"). */
-function siblingOf(ex, list) {
-  if (!ex.lr) return null;
-  const inRound = new Set(list.map(e => e.id));
-  return shuffle(ALL_EX.filter(e => e.lr === ex.lr && e._ch === ex._ch && e.type !== ex.type && !inRound.has(e.id)))[0] || null;
-}
+/* A round's order (mistakes first, facades of one learnable spread) and the sibling after a wrong answer: the study
+   domain's (src/features/study/domain/queries.ts, NoemaCore.study.practice). */
 function startRun(list, opt = {}) {
-  RUN = { list: (opt.keepOrder ? list : runOrder(list)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || tE('engine.run.practice'), back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null, after: opt.after || null };   // after: { label, run } — what comes next (a round made from search results)
+  RUN = { list: (opt.keepOrder ? list : NoemaCore.study.practice.order(list, S.res)).slice(0, opt.count || 10), i: 0, ok: 0, xp0: S.xp, wrong: [], title: opt.title || tE('engine.run.practice'), back: opt.back || HOME(), lives: opt.lives || 0, boss: opt.boss || null, after: opt.after || null };   // after: { label, run } — what comes next (a round made from search results)
   if (location.hash === '#/run') runView(); else go('#/run');
 }
 let RUN = null;
@@ -588,7 +568,7 @@ function runView() {
   setAccent(document.body, ex._ch);
   setTutorContext({ kind: 'section', id: ex.section });
   const nextBtn = h('button', { class: 'btn primary', 'data-next': '1', style: { display: 'none' }, onclick: () => { R0.i++; runView(); } }, R0.i + 1 < R0.list.length ? tE('engine.run.next') : tE('engine.run.finish'));
-  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (!R0.boss) { const sib = siblingOf(ex, R0.list); if (sib) { R0.list.splice(Math.min(R0.i + 3, R0.list.length), 0, sib); R0.sib = R0.sib || new Set(); R0.sib.add(sib.id); } } if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
+  const card = exerciseCard(ex, { showSection: true, onDone: (ok) => { if (ok) R0.ok++; else { R0.wrong.push(ex); if (!R0.boss) { const sib = NoemaCore.study.practice.sibling(ex, R0.list, ALL_EX, e => e._ch); if (sib) { R0.list.splice(Math.min(R0.i + 3, R0.list.length), 0, sib); R0.sib = R0.sib || new Set(); R0.sib.add(sib.id); } } if (R0.lives) { R0.lives--; $('.hearts') && ($('.hearts').textContent = '❤️'.repeat(R0.lives) + '🤍'.repeat(3 - R0.lives)); } } if (R0.lives === 0 && R0.boss) nextBtn.textContent = tE('engine.run.seeResult'); nextBtn.style.display = ''; nextBtn.classList.add('pop'); setTimeout(() => nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); } });
   view(h('div', { class: 'runner' },
     h('div', { class: 'runtop' }, h('button', { class: 'iconbtn', title: tE('engine.run.quit'), onclick: () => go(R0.back) }, '✕'),
       h('div', { class: 'bar' }, h('i', { style: { width: (R0.i / R0.list.length * 100) + '%' } })),
@@ -634,7 +614,7 @@ function searchRunView() {
   view(h('h1', {}, st.title), body);
   flashDeck(body, cards, { all: true, onDone: () => h('div', { class: 'row', style: { justifyContent: 'center' } }, after ? h('button', { class: 'btn primary ns-srnext', onclick: after.run }, after.label) : null, h('button', { class: 'btn', onclick: () => go(R.back) }, t('sh.sr_backToResults'))) });
 }
-function mistakesList() { return ALL_EX.filter(e => S.res[e.id] && S.res[e.id].last === false); }
+function mistakesList() { return NoemaCore.study.practice.mistakes(ALL_EX, S.res); }
 function mistakesView() {
   setAccent(document.body, null);
   shellChrome({ sub: true, crumbs: [[t('home.mistakes')]], back: HOME() });
@@ -717,12 +697,21 @@ function playLightning(chid) {
   }, 200);
 }
 
-/* ---------- flashcards (Leitner) ---------- */
-const BOX_DAYS = [0, 1, 3, 7, 16, 35];
-/* one Leitner step for a card: 0 = again (back to box 1), 1 = good (+1 box), 2 = easy (+2); due counted from `from` */
-function rateCardKey(key, q, from = new Date()) { const r = S.fc[key] || { box: 0 }; r.box = q === 0 ? 1 : Math.min(5, (r.box || 0) + (q === 2 ? 2 : 1)); r.due = NoemaCore.day.add(NoemaCore.day.of(from), BOX_DAYS[q === 0 ? 0 : r.box]); S.fc[key] = r; save(); return r; }
-function cardDue(key) { const r = S.fc[key]; return !r || !r.due || r.due <= today(); }
-function countDueCards() { return COURSE.reduce((a, c) => a + c.flashcards.filter((f, i) => { const k = f._key || c.id + '#' + i; return S.fc[k] && cardDue(k); }).length, 0); }
+/* ---------- flashcards and debug drills: scheduled by FSRS-6 (src/features/study/domain/fsrs.ts, NoemaCore.study.fsrs) ----------
+   S.fc / S.pb hold each card's and drill's FSRS memory; an entry still in the old Leitner shape ({ box, due }) is read
+   as the memory it stands for and replaced at its next review. The parameters are the learner's own once fitted
+   (S.settings.fsrs, a:settings), else FSRS-6's. */
+/** The card buttons (0 again, 1 good, 2 easy) as FSRS ratings. */
+const CARD_RATING = [1, 3, 4];
+const reviewed = (state, rating, at = NoemaCore.clock.now()) => NoemaCore.study.fsrs.review(state, rating, { at, ...(S.settings.fsrs || {}) });
+/* one review of a card: q 0 = again, 1 = good, 2 = easy, at `from` */
+function rateCardKey(key, q, from = new Date()) { const r = reviewed(S.fc[key], CARD_RATING[q], from.getTime()); S.fc[key] = r; save(); return r; }
+function countDueCards() { return NoemaCore.study.cards.countDue(S.fc, allCards().map(c => c.key)); }
+/** Fits the FSRS parameters to the learner's reviews again once enough new ones came (the Worker; quietly, nothing to wait for). */
+function refitFsrs() {
+  NoemaCore.study.models.refit(S.settings.fsrs || null).then(r => { if (!r) return; S.settings.fsrs = { parameters: r.parameters, ...(S.settings.fsrs?.retention ? { retention: S.settings.fsrs.retention } : {}), n: r.n }; save(); })
+    .catch(e => NoemaCore.errors.report(e, { where: 'engine.fsrs.refit', severity: 'warning' }));
+}
 function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c }))); }
 function cardsView(key) {
   setAccent(document.body, null);
@@ -734,15 +723,13 @@ function cardsView(key) {
   flashDeck(body, allCards());
 }
 function flashDeck(body, cards, { all = false, onDone = null } = {}) {
-  const seen = cards.filter(c => S.fc[c.key]);
-  const due = cards.filter(c => S.fc[c.key] && cardDue(c.key)), fresh = cards.filter(c => !S.fc[c.key]);
-  const queue = all ? shuffle(cards) : [...shuffle(due), ...shuffle(fresh).slice(0, 15)];   // all: every card given (the ones the search found), due or not
-  body.append(h('div', { class: 'row', style: { margin: '6px 0 16px' } }, h('span', { class: 'pill c' }, tE('engine.cards.due', { n: due.length })), h('span', { class: 'pill' }, tE('engine.cards.new', { n: fresh.length })), h('span', { class: 'pill' }, tE('engine.cards.resting', { n: seen.length - due.length }))));
+  const deck = NoemaCore.study.cards.queue(cards, S.fc, { all }), queue = deck.queue;   // all: every card given (the ones the search found), due or not
+  body.append(h('div', { class: 'row', style: { margin: '6px 0 16px' } }, h('span', { class: 'pill c' }, tE('engine.cards.due', { n: deck.due })), h('span', { class: 'pill' }, tE('engine.cards.new', { n: deck.fresh })), h('span', { class: 'pill' }, tE('engine.cards.resting', { n: deck.resting }))));
   const stage = h('div'); body.append(stage);
   let i = 0;
   function show() {
     stage.innerHTML = '';
-    if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, tE('engine.cards.done')))); if (queue.length) confetti(80); if (onDone) stage.append(onDone()); return; }
+    if (i >= queue.length) { stage.append(h('div', { class: 'empty' }, h('div', { class: 'e' }, '🌟'), h('p', {}, tE('engine.cards.done')))); if (queue.length) { confetti(80); refitFsrs(); } if (onDone) stage.append(onDone()); return; }
     const c = queue[i];
     const fl = h('div', { class: 'flash', 'data-card': c.key }, h('div', { class: 'inner', onclick: () => fl.classList.toggle('flipped') },
       h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} ` + chTitle(c._ch.num, `${nf(i + 1)}/${nf(queue.length)}`)), h('div', { 'data-nf': 'q', html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, tE('engine.cards.flip'))),
@@ -766,16 +753,18 @@ function askAboutCard(c, turned) {
 }
 
 /* ---------- debug drills ---------- */
-function countDuePlaybooks() { return Object.values(PB).filter(d => S.pb[d.id] && S.pb[d.id].due <= today()).length; }
+function countDuePlaybooks() { return NoemaCore.study.cards.countDue(S.pb, Object.keys(PB)); }
+/** A drill to do: never done, or due again. */
+const drillDue = d => !S.pb[d.id] || NoemaCore.study.fsrs.isDue(S.pb[d.id]);
 function drillTile(d) {
-  const r = S.pb[d.id] || { box: 0 };
+  const r = { box: NoemaCore.study.fsrs.box(S.pb[d.id]) };   // mastery 0–5: the interval reached, on the old boxes' scale
   const t = h('button', { class: 'pb', onclick: () => go('#/drill/' + d.id) }, h('span', { class: 'ic' }, '🔧'),
     h('div', { class: 'grow' }, h('b', { html: fmt(d.title) }), newPill(d), h('div', { class: 'tiny' }, tE(d.mnemonic ? 'engine.drill.questionsMnemo' : 'engine.drill.questions', { n: d.askYourself.length }))),
     h('div', { class: 'boxes', title: tE('engine.drill.mastery') }, ...[1, 2, 3, 4, 5].map(i => h('i', { class: i <= r.box ? 'on' : '' }))));
   setAccent(t, d._ch); return t;
 }
 function drillList(body, list) {
-  const due = list.filter(d => !S.pb[d.id] || S.pb[d.id].due <= today());
+  const due = list.filter(drillDue);
   body.append(h('p', { class: 'muted' }, tE('engine.drill.intro')),
     h('div', { class: 'row', style: { marginBottom: '14px' } }, due.length ? h('button', { class: 'btn primary', onclick: () => go('#/drill/' + due[0].id) }, '▶ ' + tE('engine.drill.nextDue', { n: due.length })) : h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, tE('engine.drill.allRested'))),
     h('div', { style: { display: 'grid', gap: '10px' } }, ...list.map(drillTile)));
@@ -825,13 +814,11 @@ function drillView(id) {
       h('div', { class: 'callout tip', style: { marginTop: '12px' } }, h('span', { class: 'ci' }, '✅'), h('b', { class: 't' }, tE('engine.ex.fix')), h('div', { html: fmt(d.fix) })),
       h('h3', { style: { margin: '24px 0 10px' } }, tE('engine.drill.howWell')),
       h('div', { class: 'row' }, ...[['😵 ' + tE('engine.drill.blank'), 0], ['🤔 ' + tE('engine.drill.partly'), 1], ['😎 ' + tE('engine.drill.nailed'), 2]].map(([l, q]) => h('button', { class: 'btn' + (q === 2 ? ' primary' : ''), onclick: () => {
-        const r = S.pb[d.id] || { box: 0 };
         const ticked = checks.filter(x => x.checked).length / checks.length;
-        r.box = q === 0 ? 1 : Math.min(5, r.box + (q === 2 && ticked >= .7 ? 2 : 1));
-        r.due = NoemaCore.day.add(today(), BOX_DAYS[q === 0 ? 0 : r.box]);
-        S.pb[d.id] = r; save(); addXP(3 + Math.round(ticked * 7), stage);
+        // blank → again, partly → hard, nailed → easy with most of the checklist ticked, else good
+        S.pb[d.id] = reviewed(S.pb[d.id], q === 0 ? 1 : q === 1 ? 2 : ticked >= .7 ? 4 : 3); save(); addXP(3 + Math.round(ticked * 7), stage);
         if (q === 2) confetti(70);
-        const all = Object.values(PB).filter(x => x.id !== d.id && (!S.pb[x.id] || S.pb[x.id].due <= today()));
+        const all = Object.values(PB).filter(x => x.id !== d.id && drillDue(x));
         const nxt = all.find(x => x._ch === c) || all[0];
         toast(nxt ? tE('engine.drill.savedNext') : tE('engine.drill.saved'));
         setTimeout(() => go(nxt ? '#/drill/' + nxt.id : `#/ch/${c.id}/debug`), 700);

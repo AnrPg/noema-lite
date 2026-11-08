@@ -17,11 +17,6 @@ function rCenter(r) {
   if (r.shape === 'poly') return [r.points.reduce((a, p) => a + p[0], 0) / r.points.length, r.points.reduce((a, p) => a + p[1], 0) / r.points.length];
   return [r.x + r.w / 2, r.y + r.h / 2];
 }
-function rHit(r, x, y) {
-  if (r.shape === 'circle') return (x - r.cx) ** 2 + (y - r.cy) ** 2 <= r.r ** 2;
-  if (r.shape === 'poly') { let ins = false; const P = r.points; for (let i = 0, j = P.length - 1; i < P.length; j = i++) { const [xi, yi] = P[i], [xj, yj] = P[j]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) ins = !ins; } return ins; }
-  return x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h;
-}
 const rArea = r => { const b = rBox(r); return b.w * b.h; };
 function rShape(r, cls, pad = 0) {
   if (r.shape === 'circle') return sv('circle', { cx: r.cx, cy: r.cy, r: r.r + pad, class: cls });
@@ -30,17 +25,8 @@ function rShape(r, cls, pad = 0) {
 }
 /** Regions of an exercise / figure: its own, else the picture's (docs/VISUAL.md §3). */
 const vRegions = (ex, m) => (Array.isArray(ex.regions) ? ex.regions : (m && m.regions) || []);
-const vTargets = (ex, regs) => (ex.targets ? ex.targets.map(id => regs.find(r => r.id === id)).filter(Boolean) : regs);
+const vTargets = (ex, regs) => NoemaCore.study.targets(ex, regs);
 
-/* ---------- typed answers: exact / alias / one small typo ---------- */
-function lev(a, b) { const m = a.length, n = b.length; if (!m || !n) return m + n; let p = Array.from({ length: n + 1 }, (_, j) => j); for (let i = 1; i <= m; i++) { const c = [i]; for (let j = 1; j <= n; j++) c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); p = c; } return p[n]; }
-function labelMatch(r, val, fuzzy = true) {
-  const v = norm(val); if (!v) return { ok: false };
-  const alts = [r.label, ...(r.accept || [])].map(norm);
-  if (alts.includes(v)) return { ok: true };
-  if (fuzzy) for (const a of alts) if (a.length >= 4 && lev(a, v) <= Math.max(1, Math.floor(a.length / 7))) return { ok: true, typo: true };
-  return { ok: false };
-}
 
 /** Attribution line: author · licence · link to the original (required by CC BY / Apache-2.0). */
 function vCredit(m) {
@@ -90,7 +76,7 @@ function vStage(ex, { regions } = {}) {
   const outline = (id, cls) => { const r = RG[id]; if (!r) return; const e = rShape(r, 'vx-out ' + cls, 3); gOut.append(e); return e; };
   const tag = (id, text, cls = '') => { const r = RG[id]; if (!r) return; const [x, y] = rCenter(r); const t = h('span', { class: 'vx-tag ' + cls, style: pos(x, y) }, text); layer.append(t); return t; };
   /** Regions containing the point, smallest first (so nested parts win). */
-  const hits = (x, y, among = regs) => among.filter(r => rHit(r, x, y)).sort((a, b) => rArea(a) - rArea(b));
+  const hits = (x, y, among = regs) => among.filter(r => NoemaCore.study.hits(r, x, y)).sort((a, b) => rArea(a) - rArea(b));
   const layouts = [];
   let crowded = false;      // controls would overlap on the picture → list them under it instead
   const narrow = () => !wrap.classList.contains('full') && stage.clientWidth > 0 && stage.clientWidth < 540;
@@ -183,7 +169,6 @@ R.img_hotspot = (ex, api) => {
   if (ex.maskLabels) st.regs.forEach(r => st.mask(r.id, true, 'plain'));
   const pins = [];
   st.stage.classList.add('vx-aim');
-  const inAns = p => ans.filter(r => rHit(r, p.x, p.y));
   function drop(p) { p.el.remove(); pins.splice(pins.indexOf(p), 1); pins.forEach((q, i) => { if (multi) q.el.textContent = i + 1; }); }
   // Pins never catch the tap themselves (on a small picture they would cover the neighbouring part):
   // a tap within ~10 screen px of an existing pin removes that pin, anywhere else adds one.
@@ -204,17 +189,14 @@ R.img_hotspot = (ex, api) => {
   st.below.prepend(vHint(multi ? tE('engine.vx.hotspotMulti', { n: ans.length }) : any ? tE('engine.vx.hotspotAny') : tE('engine.vx.hotspotOne')));
   return {
     el: st.el,
-    check() {
-      if (!pins.length) return null;
-      if (multi && pins.length < ans.length) return null;
-      return pins.every(p => inAns(p).length) && (any || ans.every(r => pins.some(p => rHit(r, p.x, p.y))));
-    },
+    answer: () => ({ pins: pins.map(p => [p.x, p.y]) }),
+    check() { return verdict(ex, this.answer(), { regions: st.regs }); },
     reveal() {
       Object.values(st.masks).forEach(e => e.classList.add('off'));
       ans.forEach(r => { st.outline(r.id, 'right'); if (r.label) st.tag(r.id, r.label, 'right'); });
-      const notes = [];
-      pins.forEach(p => {
-        const ok = inAns(p).length > 0; p.el.classList.add(ok ? 'right' : 'wrong');
+      const notes = [], right = gradeOf(ex, this.answer(), { regions: st.regs }).items || [];
+      pins.forEach((p, i) => {
+        const ok = !!right[i]; p.el.classList.add(ok ? 'right' : 'wrong');
         if (!ok) { const r = st.hits(p.x, p.y)[0]; if (r) { st.outline(r.id, 'wrong'); if (ex.why?.[r.id]) notes.push(h('div', { html: `❌ <b>${esc(r.label || r.id)}</b>: ` + fmt(ex.why[r.id]) })); } }
       });
       if (notes.length) st.below.append(h('div', { class: 'fb bad' }, ...notes));
@@ -253,10 +235,12 @@ R.img_sequence = (ex, api) => {
   draw();
   return {
     el: st.el,
-    check: () => picks.length < ex.answer.length ? null : picks.every((r, i) => r.id === ex.answer[i]),
+    answer: () => ({ sequence: picks.map(r => r.id) }),
+    check() { return verdict(ex, this.answer()); },
     reveal() {
-      picks.forEach((r, i) => badges[r.id]?.classList.add(r.id === ex.answer[i] ? 'right' : 'wrong'));
-      if (!picks.every((r, i) => r.id === ex.answer[i])) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' ' + arrowOn() + ' ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
+      const g = gradeOf(ex, this.answer()), right = g.items || [];
+      picks.forEach((r, i) => badges[r.id]?.classList.add(right[i] ? 'right' : 'wrong'));
+      if (!g.ok) st.below.append(h('div', { class: 'fb info' }, h('b', {}, '🧭 ' + tE('engine.vx.correctPath') + ' '), ...ex.answer.flatMap((id, i) => [i ? ' ' + arrowOn() + ' ' : '', h('span', { class: 'vx-chipref' }, `${i + 1}. ${st.RG[id]?.label || id}`)])));
     },
   };
 };
@@ -283,7 +267,8 @@ R.img_reveal = (ex, api) => {
   st.below.append(h('div', { class: 'tiny vx-hint' }, counter, ' · ' + tE('engine.vx.revealHint')), mc.el);
   return {
     el: st.el, auto: !(ex.multi || (Array.isArray(ex.answer) && ex.answer.length > 1)), keys: mc.keys,
-    check: mc.check,
+    answer: mc.answer,
+    check() { return verdict(ex, this.answer()); },
     reveal() { mc.reveal(); Object.values(st.masks).forEach(e => e.classList.add('off')); },
     bonus: () => Math.round(6 * (hidden - opened) / Math.max(1, hidden)),
   };
@@ -347,11 +332,12 @@ R.img_drag = (ex, api) => {
   }
   st.below.prepend(vHint(tE('engine.vx.dragHint')), bank);
   draw();
-  const okAt = s => !!place.get(s.k) && norm(place.get(s.k).text) === norm(s.r.label);
+  const answer = () => ({ slots: slots.map(s => place.get(s.k)?.text ?? null) });
   return {
-    el: st.el,
-    check: () => place.size < slots.length ? null : slots.every(okAt),
+    el: st.el, answer,
+    check: () => verdict(ex, answer(), { regions: st.regs }),
     reveal() {
+      const right = gradeOf(ex, answer(), { regions: st.regs }).items || [], okAt = s => !!right[s.k];
       Object.values(st.masks).forEach(e => e.classList.add('off'));
       slots.forEach(s => { const ok = okAt(s); s.ctl.classList.add(ok ? 'right' : 'wrong'); st.outline(s.r.id, ok ? 'right' : 'wrong'); });
       bank.remove();
@@ -368,11 +354,12 @@ R.img_label = (ex, api) => {
   const { slots } = vSlots(st, targets, (r, k) => h('input', { class: 'vx-input', placeholder: `${k + 1} ?`, 'aria-label': tE('engine.vx.partName', { n: k + 1 }), autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false',
     onkeydown: e => { if (e.key === 'Enter') { e.preventDefault(); const nx = slots[k + 1]; if (nx) nx.ctl.focus(); else api.check(); } } }));
   st.below.prepend(vHint(tE('engine.vx.labelHint')));
-  const res = s => labelMatch(s.r, s.ctl.value, ex.fuzzy !== false);
+  const answer = () => ({ slots: slots.map(s => s.ctl.value) });
   return {
-    el: st.el, focus: () => !st.compact() && slots[0]?.ctl.focus({ preventScroll: true }),
-    check: () => slots.some(s => !s.ctl.value.trim()) ? null : slots.every(s => res(s).ok),
+    el: st.el, focus: () => !st.compact() && slots[0]?.ctl.focus({ preventScroll: true }), answer,
+    check: () => verdict(ex, answer(), { regions: st.regs }),
     reveal() {
+      const g = gradeOf(ex, answer(), { regions: st.regs }), res = s => ({ ok: !!g.items?.[s.k], typo: !!g.typos?.[s.k] });
       Object.values(st.masks).forEach(e => e.classList.add('off'));
       slots.forEach(s => { const r = res(s); s.ctl.readOnly = true; s.ctl.classList.add(r.ok ? 'right' : 'wrong'); st.outline(s.r.id, r.ok ? 'right' : 'wrong'); });
       st.below.append(vResults(slots.map(s => ({ k: s.k, r: s.r, ...res(s), given: s.ctl.value.trim() }))));
@@ -388,11 +375,12 @@ R.img_select = (ex, api) => {
   const shared = [...new Set([...targets.map(r => r.label), ...(ex.distractors || [])])].sort(uiCompare);
   const { slots } = vSlots(st, targets, (r, k) => h('select', { class: 'vx-select', 'aria-label': tE('engine.vx.part', { n: k + 1 }) }, h('option', { value: '' }, tE('engine.vx.choose', { n: k + 1 })), ...(r.options || shared).map(o => h('option', { value: o }, o))));
   st.below.prepend(vHint(tE('engine.vx.selectHint')));
-  const okAt = s => norm(s.ctl.value) === norm(s.r.label);
+  const answer = () => ({ slots: slots.map(s => s.ctl.value || null) });
   return {
-    el: st.el,
-    check: () => slots.some(s => !s.ctl.value) ? null : slots.every(okAt),
+    el: st.el, answer,
+    check: () => verdict(ex, answer(), { regions: st.regs }),
     reveal() {
+      const right = gradeOf(ex, answer(), { regions: st.regs }).items || [], okAt = s => !!right[s.k];
       Object.values(st.masks).forEach(e => e.classList.add('off'));
       slots.forEach(s => { const ok = okAt(s); s.ctl.disabled = true; s.ctl.classList.add(ok ? 'right' : 'wrong'); st.outline(s.r.id, ok ? 'right' : 'wrong'); });
       st.below.append(vResults(slots.map(s => ({ k: s.k, r: s.r, ok: okAt(s), given: s.ctl.value }))));
@@ -427,9 +415,9 @@ R.img_occlusion = (ex, api) => {
       h('div', { class: 'actions' }, h('button', { class: 'btn small vx-yes', onclick: () => rate(true) }, '✓ ' + tE('engine.vx.knew')), h('button', { class: 'btn small vx-no', onclick: () => rate(false) }, '✗ ' + tE('engine.vx.didnt'))));
   }
   function finish() {
-    const pass = ex.pass ?? 0.8, score = knew / targets.length;
-    panel.append(h('div', { class: 'fb ' + (score >= pass ? 'ok' : 'bad') }, h('b', {}, tE('engine.vx.recalled', { n: knew, of: targets.length }) + ' '), score >= pass ? tE('engine.vx.strong') : tE('engine.vx.comeBack')));
-    api.done(score >= pass);
+    const ok = verdict(ex, { knew: targets.map((_, i) => !!marks[i]) });
+    panel.append(h('div', { class: 'fb ' + (ok ? 'ok' : 'bad') }, h('b', {}, tE('engine.vx.recalled', { n: knew, of: targets.length }) + ' '), ok ? tE('engine.vx.strong') : tE('engine.vx.comeBack')));
+    api.done(ok);
   }
   st.below.append(panel);
   focusOn();

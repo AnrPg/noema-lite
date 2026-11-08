@@ -18,6 +18,7 @@ import {
   fromLeitner,
   isDueOn,
   laterReview,
+  masteryBox,
   newCard,
   roundHalfEven,
   scheduler,
@@ -195,4 +196,10 @@ test('laterReview: the copy reviewed last wins, old and new shapes alike', () =>
   assert.equal(laterReview(b, a), b);
   assert.equal(laterReview<unknown>({ box: 2, due: '2020-01-01' }, b), b);
   assert.equal(laterReview(null, b), b);
+});
+
+test('masteryBox: the old boxes come back as they were, a fresh card is 0, a strong memory 5', () => {
+  for (let b = 0; b <= 5; b++) assert.equal(masteryBox(fromLeitner(b, '2026-03-01')), b);
+  assert.equal(masteryBox(null), 0);
+  assert.equal(masteryBox({ ...newCard(0), s: 400, reps: 9 }), 5);
 });
