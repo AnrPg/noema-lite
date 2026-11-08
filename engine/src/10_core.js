@@ -197,7 +197,7 @@ function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 LOG.onSettings(g => { const x = { ...g }; delete x.apiKey; Object.assign(S.settings, x, { srcOn: subjectSrcOn() }); seeSettings(); });
 LOG.onChange((evs, why) => {
   if (why === 'local') return;   // this page's own: it drew them already
-  try { renderTopStats(); if (why !== 'tab') route(); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.render', severity: 'error' }); }   // another tab's answer never redraws an exercise being done here
+  try { if (why !== 'tab') route(); } catch (x) { NoemaCore.errors.report(x, { where: 'engine.remote.render', severity: 'error' }); }   // another tab's answer never redraws an exercise being done here
 });
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });

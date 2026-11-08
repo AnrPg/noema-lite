@@ -8,6 +8,7 @@
  */
 import type { StudyUi } from '../features/study/ui/root.ts';
 import type { StudyHost } from '../features/study/ui/host.ts';
+import { STUDY_SEGMENTS } from '../features/study/ui/route-table.ts';
 import type { AiPort, TutorPort } from '../features/study/ui/parts.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { BridgeExtension } from './bridge.ts';
@@ -40,6 +41,8 @@ export const STUDY_UI_BRIDGE: readonly BridgeExtension[] = [
           ui = piece.createStudyUi(host, r.get(I18N), r.get(CLOCK));
           return ui;
         },
+        /** the first segments of the study addresses (the frame registers them before the pages' code is in) */
+        segments: STUDY_SEGMENTS,
         /** the study area mounted on this page (null before a subject opens) */
         current: (): StudyUi | null => ui,
       });

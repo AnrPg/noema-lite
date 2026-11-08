@@ -11,7 +11,7 @@ import { exerciseCard } from '../exercise/card.ts';
 import { mistakesByCat } from '../kmap.ts';
 import { askButton, setAccent } from '../parts.ts';
 import { fmt } from '../text.ts';
-import { backBtn, lockNote, view } from '../view.ts';
+import { lockNote, view } from '../view.ts';
 import { myLevelChip } from './chapter.ts';
 import { flashDeck } from './cards.ts';
 
@@ -143,7 +143,7 @@ function runSummary(app: StudyApp): void {
   let msg = app.t(
     pct >= 0.9 ? 'engine.run.outstanding' : pct >= 0.7 ? 'engine.run.great' : pct >= 0.5 ? 'engine.run.solid' : 'engine.run.goodStart',
   );
-  const reacts = app.host.frame.framed && app.host.feedback.reacts;
+  const reacts = app.host.feedback.reacts;
   const big2 = (k: string): void => {
     if (reacts) app.host.feedback.big(k);
   };
@@ -320,7 +320,6 @@ export function mistakesView(app: StudyApp): void {
   const list = app.mistakes();
   view(
     app,
-    backBtn(app, app.t('nav.home'), HOME),
     h('h1', {}, app.t('view.mistakes')),
     h('p', { class: 'muted' }, app.t('engine.gym.intro')),
     list.length
@@ -424,14 +423,7 @@ export function mixedView(app: StudyApp): void {
     );
   };
   draw();
-  view(
-    app,
-    backBtn(app, app.t('nav.home'), HOME),
-    h('h1', {}, app.t('view.mixed')),
-    h('p', { class: 'muted' }, app.t('engine.mixed.intro')),
-    myLevelChip(app, draw),
-    counts,
-  );
+  view(app, h('h1', {}, app.t('view.mixed')), h('p', { class: 'muted' }, app.t('engine.mixed.intro')), myLevelChip(app, draw), counts);
 }
 
 /** #/boss/<chapter>: 15 exercises, mostly hard ones, three lives */
@@ -449,7 +441,6 @@ export function bossView(app: StudyApp, id: string): void {
   });
   view(
     app,
-    backBtn(app, `${app.arrowBack} ${c.title}`, `#/ch/${id}`),
     h(
       'div',
       { class: 'card summary' },
@@ -495,7 +486,6 @@ export function lightningView(app: StudyApp): void {
   );
   view(
     app,
-    backBtn(app, app.t('nav.home'), HOME),
     h(
       'div',
       { class: 'card lightning' },
@@ -636,7 +626,7 @@ export function playLightning(app: StudyApp, chid: string): void {
     app.xp(score * 3, clock);
     const pb = score > (app.state.bestLightning ?? 0);
     app.host.learn('drill.scored', null, { kind: 'lightning', score });
-    if (!wrong.length && score >= 5 && app.host.frame.framed && app.host.feedback.reacts) app.host.feedback.big('timerwin');
+    if (!wrong.length && score >= 5 && app.host.feedback.reacts) app.host.feedback.big('timerwin');
     else if (score >= 8 || pb) app.host.feedback.confetti();
     app.host.feedback.beep('win');
     view(

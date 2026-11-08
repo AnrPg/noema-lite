@@ -100,51 +100,58 @@ async function mockGemini(ctx) {
   ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}').exerciseRoute === 1), 'a:caps announces exerciseRoute');
   await page.evaluate(() => { location.hash = '#/ex/nope-e999'; }); await wait(400);
   ok(await page.evaluate(() => location.hash === '#/ex/nope-e999' && !!$('main') && !(NoemaCore.studyUi.current().app.round?.actor.snapshot.context.list || []).some(e => e.id === 'nope-e999')), 'an unknown exercise id falls back to home');
-  await page.evaluate(() => { location.hash = '#/'; }); await wait(500);
+  await page.evaluate(() => { location.hash = '#/subject'; }); await wait(500);
   await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
-  // account menu tabs
-  for (const t of ['profile', 'settings', 'subjects', 'backup', 'cloud']) { await page.evaluate(t => { $('.modal')?.remove(); openAccountMenu(t); }, t); await wait(350); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
-  ok(await page.$$eval('.modal .tabs button', b => b.map(x => x.textContent).join('|')) === '👤 Profile|⚙️ Settings|📚 Subjects|💾 Backup & restore|☁️ Cloud|❓ Help', 'account menu has 6 tabs: Profile · Settings · Subjects · Backup · Cloud · Help');
-  await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('backup'); }); await wait(500);
+  // the account's pages are the frame's Me pages (the engine's views in them)
+  const meAt = {};
+  for (const t of ['profile', 'settings', 'backup', 'cloud', 'help']) { await page.evaluate(t => { openAccountMenu(t); }, t); await wait(450); meAt[t] = await page.evaluate(() => location.hash); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
+  ok(JSON.stringify(meAt) === JSON.stringify({ profile: '#/me/profile', settings: '#/me/ai', backup: '#/me/data', cloud: '#/me/data', help: '#/help' }), 'the account menu opens the Me pages: ' + JSON.stringify(meAt));
+  await page.evaluate(() => { openAccountMenu('backup'); }); await wait(500);
   // four sections (download, folder, restore, restore points) and, where Python activities can run (the website, over http), Prepare Python for offline
-  const bk = await page.evaluate(() => ({ n: $$('.modal details.accsec').length, open: $$('.modal details.accsec[open]').length, py: ACT.enabled('py-module@1'), pySec: $$('.modal details.accsec .act-pyset').length }));
+  const BK = "$$('main .ns-accbody')[1]";
+  const bk = await page.evaluate(BK => { const b = eval(BK); return { n: $$('details.accsec', b).length, open: $$('details.accsec[open]', b).length, py: ACT.enabled('py-module@1'), pySec: $$('details.accsec .act-pyset', b).length }; }, BK);
   ok(bk.n === 4 + (bk.py ? 1 : 0) && bk.pySec === (bk.py ? 1 : 0) && bk.open === 0, 'backup & restore sections are collapsed by default ' + JSON.stringify(bk));
-  await page.click('.modal details.accsec:nth-of-type(2) summary'); await wait(300);
-  ok(await page.evaluate(() => $$('.modal details.accsec[open]').length === 1), 'a section expands on click');
+  await page.evaluate(BK => { $$('details.accsec', eval(BK))[1].querySelector('summary').click(); }, BK); await wait(300);
+  ok(await page.evaluate(BK => $$('details.accsec[open]', eval(BK)).length === 1, BK), 'a section expands on click');
   await page.screenshot({ path: SHOTS + '/a3b_backup_expanded.png' });
-  await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('help'); }); await wait(400);
-  ok(await page.$$eval('.modal details.accsec', d => d.length) === 9, 'help tab lists 9 setup guides');
+  await page.evaluate(() => { openAccountMenu('help'); }); await wait(500);
+  ok(await page.$$eval('main details.accsec', d => d.length) === 9, 'help lists 9 setup guides');
   await page.screenshot({ path: SHOTS + '/a3c_help.png' });
-  await page.evaluate(() => $('.modal')?.remove());
+  await page.evaluate(() => { location.hash = '#/subject'; }); await wait(400);
   // menus in the learner's language (engine/i18n.js): ⚙️ Settings → Language of the menus
   ok(await page.evaluate(async () => { await Promise.all(['el', 'ru', 'fr'].map(l => NoemaI18n.load(l))); const B = NoemaI18n.catalogs, en = Object.keys(B.en.m); return ['el', 'ru', 'fr'].every(l => en.every(k => B[l].m[k] || (B[l].d || {})[k])); }), 'every menu string is translated (or drafted) in el, ru and fr');
-  const setUiLang = async v => { await page.evaluate(v => { $('.modal')?.remove(); openAccountMenu('settings'); const sel = $('.modal select[aria-label="' + t('set.uiLang') + '"]'); sel.value = v; $('.modal [data-act="save-settings"]').click(); }, v); await wait(1200); };
+  // the engine's settings view (Me › Settings), drawn on its own: the language of the menus, then Save
+  const setUiLang = async v => { await page.evaluate(v => { const b = h('div', { class: 'accbody' }); document.body.append(b); ACC_VIEWS.settings(b, () => b.remove()); const sel = $('select[aria-label="' + t('set.uiLang') + '"]', b); sel.value = v; $('[data-act="save-settings"]', b).click(); }, v); await wait(1200); };
   await setUiLang('fr');
   ok(await page.evaluate(() => document.body.innerText.includes('Qu’est-ce que tu veux étudier\u202f?')), 'after the change the subject picker speaks French');
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  const fr = await page.evaluate(() => ({ tiles: $$('.modes .mode b').map(b => b.textContent), tutor: $('.iconbtn.tutor span').textContent, ch: (location.hash = '#/ch/ch01', route(), $$('main .tabs button').map(b => b.textContent.trim()).join('|')), back: $('main .back').textContent, cards: (location.hash = '#/cards', route(), $('main .back').textContent + ' ' + $('main h1').textContent), tabs: (openAccountMenu('profile'), $$('.modal .tabs button').map(b => b.textContent).join('|')) }));
-  ok(fr.tiles.includes('Manche éclair') && fr.tiles.includes('Salle des erreurs') && fr.tutor === 'Tuteur', 'home tiles and top bar in French: ' + fr.tiles.join(' · '));
-  ok(/Apprendre/.test(fr.ch) && /S’entraîner/.test(fr.ch) && fr.back === '← Tous les chapitres' && fr.cards === '← Accueil 🃏 Cartes mémoire', 'chapter tabs, back buttons and view titles in French');
-  ok(fr.tabs.startsWith('👤 Profil|⚙️ Réglages|📚 Matières'), 'account menu tabs in French: ' + fr.tabs);
+  // Practice ▾ of the subject's home (the frame's list), the chapter's tabs and a page's title
+  const practiceList = () => page.evaluate(async () => { location.hash = '#/subject'; await new Promise(r => setTimeout(r, 400)); for (let i = 0; i < 30 && !$('.ns-practicebtn'); i++) await new Promise(r => setTimeout(r, 100)); $('.ns-practicebtn').click(); await new Promise(r => setTimeout(r, 200)); const l = $$('.ns-pop [role=menuitem] .mt').map(x => x.firstChild.textContent.trim()); NoemaShell.closePops(); return l.length ? l : [location.hash, $('main')?.dataset.page, String($$('.ns-pop').length), document.body.innerText.slice(0, 200)]; });
+  const frTiles = await practiceList();
+  const fr = await page.evaluate(() => ({ ch: (location.hash = '#/ch/ch01', route(), $$('main .tabs button').map(b => b.textContent.trim()).join('|')), cards: (location.hash = '#/cards', route(), $('main h1').textContent), me: NoemaShell.L('settings') }));
+  ok(frTiles.includes('Manche éclair') && frTiles.includes('Salle des erreurs'), 'Practice ▾ in French: ' + frTiles.join(' · '));
+  ok(/Apprendre/.test(fr.ch) && /S’entraîner/.test(fr.ch) && fr.cards === '🃏 Cartes mémoire', 'chapter tabs and view titles in French: ' + JSON.stringify(fr));
+  ok(fr.me === 'Réglages', 'the frame speaks French too: ' + fr.me);
   await setUiLang('');
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  ok(await page.evaluate(() => { location.hash = '#/'; route(); return !S.settings.lang && $$('.modes .mode b').some(b => b.textContent === 'Lightning round'); }), 'back to automatic: the browser’s language (English)');
+  const enTiles = await practiceList();
+  ok(await page.evaluate(() => !S.settings.lang) && enTiles.includes('Lightning round'), 'back to automatic: the browser’s language (English): ' + enTiles.join(' · '));
   // switch subject → math subject
-  await page.evaluate(() => Noema.switchTo('anr', 'demo-physics')); await wait(1800);
+  await page.evaluate(() => Noema.switchTo('anr', 'demo-physics', '#/subject')); await wait(1800);
   ok(await page.evaluate(() => SUBJ.id === 'demo-physics' && S.xp === 0), 'switched to Demo Physics with separate progress');
   ok(await page.$$eval('.katex', k => k.length) > 0, 'math rendered with KaTeX on home');
   await page.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(700);
   ok(await page.$$eval('.katex-display', k => k.length) > 0, 'display math rendered in a section');
-  ok(await page.evaluate(() => TUTOR.name === 'Ada' && MODES.socratic.sys.includes('physics')), 'tutor persona comes from subject.json');
+  ok(await page.evaluate(() => TUTOR.name === NoemaThemes.tutor().n && MODES.socratic.sys.includes('physics')), 'the tutor is the character on screen; its subject (physics) comes from subject.json');
   await page.screenshot({ path: SHOTS + '/a4_physics_section.png', fullPage: true });
   const xpOk = await page.evaluate(() => { const a = Noema.stats.get(); NoemaCore.studyUi.current().app.xp(10); flushSave(); const b = Noema.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
   ok(xpOk, 'XP counted per subject and in the account total');
   // new profile: full isolation
-  await page.evaluate(() => { Noema.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); Noema.switchTo('maria', 'databricks'); }); await wait(1800);
+  await page.evaluate(() => { Noema.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); Noema.switchTo('maria', 'databricks', '#/subject'); }); await wait(1800);
   ok(await page.evaluate(() => ACCOUNT.id === 'maria' && S.xp === 0 && Object.keys(S.res).length === 0 && CV.list.length === 0 && S.settings.apiKey !== 'LEGACYKEY'), 'profile Maria is isolated (progress, conversations, API key)');
   ok(await page.evaluate(async () => !(await Noema.subjectsFor('maria')).some(s => s.id === 'secret-notes')), 'private subject of ANR is not visible to Maria');
   ok(await page.evaluate(async () => (await Noema.convos.list('maria')).length === 0 && CV.list.length === 0), 'Maria sees none of ANR’s conversations');
-  await page.evaluate(() => { location.hash = '#/'; route(); }); await wait(500);
+  await page.evaluate(() => { location.hash = '#/subject'; }); await wait(500);
   ok(!!(await page.$('.setupbar')) && (await page.$$eval('.setuprow', r => r.length)) === 2, 'first-sessions setup banner (no key, no backups) on the home page');
   await page.screenshot({ path: SHOTS + '/a6_banner.png' });
   await page.click('.setuprow .iconbtn'); await wait(400);
@@ -181,7 +188,7 @@ async function mockGemini(ctx) {
 
   /* ======================= B. CLOUD (http + mocked Supabase) ======================= */
   console.log('B. cloud mode (mock Supabase)');
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:54329', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:54329', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: 54329, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await mockGemini(devA); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
   await pA.goto('http://localhost:54329/'); await wait(900);

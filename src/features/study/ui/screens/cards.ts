@@ -10,7 +10,7 @@ import { append, h } from '../dom.ts';
 import { exerciseCard } from '../exercise/card.ts';
 import { askButton, codeEl, setAccent } from '../parts.ts';
 import { fmt, guessLang } from '../text.ts';
-import { backBtn, view } from '../view.ts';
+import { view } from '../view.ts';
 
 /** A card rated (0 again, 1 good, 2 easy): a card.reviewed event with its FSRS rating (the log folds state.fc). */
 export function rateCard(app: StudyApp, key: string, q: 0 | 1 | 2): void {
@@ -21,13 +21,7 @@ export function cardsView(app: StudyApp, key?: string): void {
   setAccent(document.body, null);
   app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.cards')]], back: '#/subject' });
   const body = h('div');
-  view(
-    app,
-    backBtn(app, app.t('nav.home'), '#/subject'),
-    h('h1', {}, app.t('view.cards')),
-    h('p', { class: 'muted' }, app.t('engine.cards.intro')),
-    body,
-  );
+  view(app, h('h1', {}, app.t('view.cards')), h('p', { class: 'muted' }, app.t('engine.cards.intro')), body);
   const one = key ? app.cards().filter(c => c.key === key) : []; // #/cards/<key>: the one card the search found
   if (one.length) flashDeck(app, body, one, { all: true });
   else flashDeck(app, body, app.cards());
@@ -267,13 +261,7 @@ export function drillsView(app: StudyApp): void {
   app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.drills')]], back: '#/subject' });
   const body = h('div');
   const n = app.course.chapters.reduce((a, c) => a + c.debug.length, 0);
-  view(
-    app,
-    backBtn(app, app.t('nav.home'), '#/subject'),
-    h('h1', {}, app.t('view.drills')),
-    h('p', { class: 'muted' }, app.t('engine.drill.playbooks', { n })),
-    body,
-  );
+  view(app, h('h1', {}, app.t('view.drills')), h('p', { class: 'muted' }, app.t('engine.drill.playbooks', { n })), body);
   for (const c of app.course.chapters) {
     if (!c.debug.length) continue;
     const sub = h('div', { style: { margin: '22px 0 0' } });
@@ -437,7 +425,6 @@ export function drillView(app: StudyApp, id: string): void {
     h(
       'div',
       { class: 'reader' },
-      backBtn(app, `${app.arrowBack} ${c.emoji ?? ''} ${app.t('engine.drill.back', { num: c.num })}`, `#/ch/${c.id}/debug`),
       h('span', { class: 'pill c' }, `🔧 ${app.t('engine.drill.pill')}`),
       h('h1', { style: { margin: '10px 0 14px' }, html: fmt(d.title) }),
       h('div', { class: 'tiny', style: { fontWeight: '700', marginBottom: '6px' } }, app.t('engine.drill.symptom')),

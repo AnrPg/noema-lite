@@ -13,7 +13,7 @@ import { fmt } from '../text.ts';
 import { typeLabel } from '../exercise/card.ts';
 import { flashDeck, drillList } from './cards.ts';
 import { newBadge, openSearch, sprintEntry } from './home.ts';
-import { animateRings, backBtn, choiceList, lockNote, ring, showHit, view } from '../view.ts';
+import { animateRings, choiceList, lockNote, ring, showHit, view } from '../view.ts';
 
 const chSocratic = (app: StudyApp, c: Chapter): void => {
   app.tutor.open({ kind: 'chapter', id: c.id, origin: { via: 'chapterSocratic', ch: c.id } }, 'socratic', null, {
@@ -115,7 +115,6 @@ export function chapterView(app: StudyApp, id: string, tab0?: string, focus?: st
   const full = app.course.full.find(x => x.id === c.id) ?? null;
   const v = view(
     app,
-    backBtn(app, app.t('ch.all'), '#/subject'),
     h(
       'div',
       { class: 'chhead' },

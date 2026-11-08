@@ -11,7 +11,7 @@ import { figureBlock } from '../exercise/visual.ts';
 import type { MenuEntry } from '../host.ts';
 import { codeEl, setAccent } from '../parts.ts';
 import { fmt } from '../text.ts';
-import { backBtn, lockNote, showHit, view } from '../view.ts';
+import { lockNote, showHit, view } from '../view.ts';
 import { drillTile } from './cards.ts';
 import { openSearch, sprintEntry } from './home.ts';
 
@@ -435,16 +435,13 @@ export function sectionView(app: StudyApp, sid: string, bid?: string): void {
   const bar = h('i', { style: { width: '0%' } });
   const pl = h('div', { class: 'progressline' }, bar);
   const tail = h('div');
-  const framed = app.host.frame.framed;
   const headRow = h(
     'div',
     { class: 'row' },
     h(
       'span',
       { class: 'pill c' },
-      framed
-        ? `${app.L('chOf', { n: c.num, of: app.course.chapters.length })} · ${app.L('secOf', { n: j + 1, of: c.sections.length })}`
-        : app.t('engine.sec.nOfM', { n: j + 1, of: c.sections.length }),
+      `${app.L('chOf', { n: c.num, of: app.course.chapters.length })} · ${app.L('secOf', { n: j + 1, of: c.sections.length })}`,
     ),
     S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, `✓ ${app.L('read')}`) : null,
   );
@@ -453,7 +450,6 @@ export function sectionView(app: StudyApp, sid: string, bid?: string): void {
     h(
       'div',
       { class: 'reader' },
-      backBtn(app, `${app.arrowBack} ${c.emoji ?? ''} ${app.chTitle(c.num, c.title)}`, `#/ch/${c.id}`),
       pl,
       app.tutor.explainable(
         h(
@@ -583,46 +579,10 @@ function sectionTail(app: StudyApp, s: Section, c: Chapter, prev: Section | unde
       app.toast(`⚠️ ${app.errText(er)}`, 4000);
     }
   };
-  const who = app.host.frame.character();
-  const ask = [
-    {
-      label: app.L('askSocratic'),
-      icon: who.avatar,
-      ai: true,
-      run: () => {
-        askSection(app, s, 'socratic');
-      },
-    },
-    {
-      label: app.L('askDebug'),
-      icon: '🔧',
-      ai: false,
-      run: () => {
-        askSection(app, s, 'debug');
-      },
-    },
-    {
-      label: app.L('askInterview'),
-      icon: '🎤',
-      ai: false,
-      run: () => {
-        askSection(app, s, 'interview');
-      },
-    },
-    {
-      label: app.L('askFresh'),
-      icon: '✨',
-      ai: false,
-      run: () => {
-        void freshQ();
-      },
-    },
-  ];
   if (!locked)
     fresh.addEventListener('noema-fresh', () => {
       void freshQ();
     }); // the section's ⋮ › A new question
-  const framed = app.host.frame.framed;
   const go = (href: string) => () => {
     app.go(href);
   };
@@ -632,13 +592,6 @@ function sectionTail(app: StudyApp, s: Section, c: Chapter, prev: Section | unde
     h(
       'div',
       { class: 'row sectools' },
-      framed
-        ? null
-        : h(
-            'span',
-            { class: 'row' },
-            ask.map(a => h('button', { class: `btn${a.ai ? ' ai' : ''}`, type: 'button', onclick: a.run }, `${a.icon} ${a.label}`)),
-          ),
       exs.length && !locked
         ? h(
             'button',
@@ -654,24 +607,7 @@ function sectionTail(app: StudyApp, s: Section, c: Chapter, prev: Section | unde
         : null,
     ),
   );
-  if (!framed) {
-    zone.append(
-      h(
-        'div',
-        { class: 'secnav' },
-        prev ? h('button', { class: 'btn', type: 'button', onclick: go(`#/s/${prev.id}`) }, `${app.arrowBack} ${prev.title}`) : h('span'),
-        next
-          ? h('button', { class: 'btn primary', type: 'button', onclick: go(`#/s/${next.id}`) }, `${next.title} ${app.arrowOn}`)
-          : h(
-              'button',
-              { class: 'btn primary', type: 'button', onclick: go(`#/ch/${c.id}/practice`) },
-              `🎯 ${app.L('practiceChapter')} ${app.arrowOn}`,
-            ),
-      ),
-    );
-    return zone;
-  }
-  // the frame: one big "Next section" (the next chapter's first one after the last section), the chapter's practice beside it
+  // one big "Next section" (the next chapter's first one after the last section), the chapter's practice beside it
   const all = app.course.chapters;
   const nextCh = next ? undefined : all[all.findIndex(x => x.id === c.id) + 1];
   const to = next ?? nextCh?.sections[0];

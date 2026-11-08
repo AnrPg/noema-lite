@@ -63,8 +63,6 @@ export interface Chrome {
 }
 
 export interface FramePort {
-  /** the new frame is on (else the older page: its own back buttons and tiles) */
-  readonly framed: boolean;
   /** the page's <main> */
   main(): HTMLElement;
   /** the account's setup reminders over the subject's page (area 1), or null */

@@ -128,7 +128,7 @@
   }
   function subjectNow(rt) {
     const S = N()?.subject, P = N()?.pack, M = N()?.subjectMeta || {};
-    if (!S || !SH()?.ENGINE_ROUTES?.has(rt.page) || S.kind === 'language') return null;
+    if (!S || !SH()?.isSubjectPage?.(rt.page) || S.kind === 'language') return null;
     let bridge = null; try { const b = root.NoemaBridge?.settings?.(); bridge = b?.on === false ? null : (b?.native || b?.lang || null); } catch (e) { }
     return { id: S.id, title: clip(S.title, 120), origin: M.origin || null, owner: M.owner || P?.subject?.owner || null, version: P?.version || M.version || null, builtAt: P?.builtAt || null,
       packLanguage: S.sourceLanguage || S.language || 'en', shown: S.language || 'en', translation: S.sourceLanguage ? S.language : null, bridge: typeof bridge === 'string' ? bridge : null,

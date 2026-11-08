@@ -31,7 +31,6 @@ export function practiceItems(app: StudyApp): (MenuEntry | null)[] {
     duePb = app.dueDrills(),
     wrong = app.mistakes().length;
   const who = app.host.frame.character();
-  const framed = app.host.frame.framed;
   return [
     { label: app.t('home.mixed'), sub: app.t('home.mixedSub'), icon: '🎲', href: '#/practice/all' },
     {
@@ -63,8 +62,8 @@ export function practiceItems(app: StudyApp): (MenuEntry | null)[] {
     { label: app.t('home.lightning'), sub: app.t('home.lightningSub'), icon: '⚡', href: '#/lightning' },
     '-',
     {
-      label: framed ? app.L('askTutor') : app.t('home.tutor'),
-      sub: framed ? app.L(who.plural ? 'askTutorSubPl' : 'askTutorSub') : app.t('home.tutorSub'),
+      label: app.L('askTutor'),
+      sub: app.L(who.plural ? 'askTutorSubPl' : 'askTutorSub'),
       icon: who.avatar,
       run: () => {
         app.tutor.open(null, 'socratic', null, { intent: app.tutor.intent('course') });
@@ -169,8 +168,7 @@ export function openSearch(app: StudyApp): void {
       inp.focus();
     }, 50);
   };
-  if (app.host.frame.framed) app.host.frame.sheet(app.L('searchSubject'), fill);
-  else app.host.frame.modal(fill);
+  app.host.frame.sheet(app.L('searchSubject'), fill);
 }
 
 let searchIndex: { readonly course: unknown; readonly items: { id: string; title: string; body: string; text: string }[] } | null = null;
@@ -298,34 +296,31 @@ export function homeView(app: StudyApp): void {
     ),
   );
   const seg = h('div', { class: 'ns-seg small chviewseg', role: 'radiogroup', 'aria-label': app.L('chView') }, segBtns);
-  const framed = app.host.frame.framed;
   const st = app.station();
   const pr = { r: Math.round(p.sr * 100), e: Math.round(p.ex * 100) };
   const mantra = subj.hero?.mantra ?? subj.description;
   const titleEl = h('h1', { class: 'herohead' }, subj.title, ...app.host.frame.subjectTags());
   const mantraEl = mantra ? h('p', { class: 'mantra', html: fmt(mantra) }) : null;
-  // the frame: one plain header (a step of which Roadmap · the title · one line · one bar); the older page keeps the emoji and the step banner
-  const top = framed
-    ? [
-        st
-          ? h(
-              'button',
-              {
-                class: 'ns-kicker subjkicker',
-                type: 'button',
-                title: app.L('openMap'),
-                onclick: () => {
-                  app.host.roadmap.openMap();
-                },
-              },
-              app.L('stationOf', { title: st.title }),
-              ' ›',
-            )
-          : null,
-        titleEl,
-        mantraEl,
-      ]
-    : [h('div', { class: 'subjtop' }, h('span', { class: 'subjemo' }, subj.emoji ?? '📘'), h('div', { class: 'grow' }, titleEl, mantraEl))];
+  // one plain header (a step of which Roadmap · the title · one line · one bar)
+  const top = [
+    st
+      ? h(
+          'button',
+          {
+            class: 'ns-kicker subjkicker',
+            type: 'button',
+            title: app.L('openMap'),
+            onclick: () => {
+              app.host.roadmap.openMap();
+            },
+          },
+          app.L('stationOf', { title: st.title }),
+          ' ›',
+        )
+      : null,
+    titleEl,
+    mantraEl,
+  ];
   const barW = st ? Math.round(Math.min(st.read, st.solved / st.pass) * 100) : Math.round((p.sr + p.ex) * 50);
   const barTip = st
     ? st.done
@@ -337,7 +332,6 @@ export function homeView(app: StudyApp): void {
   };
   const v = view(
     app,
-    framed ? null : nodeBanner(app),
     h(
       'section',
       { class: `subjhead${st ? ' station' : ''}` },
@@ -450,39 +444,4 @@ export function homeView(app: StudyApp): void {
   }
   draw();
   animateRings(v);
-}
-
-/** the older page's banner of a Roadmap step: its mastery so far and the way to the map */
-function nodeBanner(app: StudyApp): HTMLElement | null {
-  const st = app.station();
-  if (!st) return null;
-  return h(
-    'div',
-    { class: 'callout key nodebanner' },
-    h('span', { class: 'ci' }, '🧭'),
-    h(
-      'div',
-      { class: 'grow' },
-      h('b', { class: 't' }, app.L('stationOf', { title: st.title })),
-      h(
-        'div',
-        { class: 'tiny' },
-        st.done
-          ? app.L('stationDone')
-          : app.L('stationMastery', { r: Math.round(st.read * 100), e: Math.round(st.solved * 100), p: Math.round(st.pass * 100) }),
-      ),
-      h('div', { class: 'nbbar' }, h('i', { style: { width: `${String(Math.round(Math.min(st.read, st.solved / st.pass) * 100))}%` } })),
-    ),
-    h(
-      'button',
-      {
-        class: 'btn small',
-        type: 'button',
-        onclick: () => {
-          app.host.roadmap.openMap();
-        },
-      },
-      `🗺️ ${app.L('openMap')}`,
-    ),
-  );
 }

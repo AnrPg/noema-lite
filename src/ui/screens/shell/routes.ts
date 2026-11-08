@@ -34,26 +34,10 @@ export const APP_ROUTES = defineRoutes({
 });
 export type AppRoutes = typeof APP_ROUTES.table;
 
-/** the first segments the open subject's engine draws (engine/src/40_views.js); #/author: the activity author; #/engines:
-    the engines of activities and requests for new ones */
-export const ENGINE_ROUTES: ReadonlySet<string> = new Set([
-  'subject',
-  'ch',
-  's',
-  'practice',
-  'run',
-  'srun',
-  'boss',
-  'lightning',
-  'cards',
-  'drills',
-  'drill',
-  'mistakes',
-  'new',
-  'ex',
-  'author',
-  'engines',
-]);
+/** the first segments the open subject's engine draws (engine/src/40_views.js): #/author, the activity author; #/engines,
+    the engines of activities and requests for new ones. The study area registers its own pages of the subject
+    (engine/app/study.js: NoemaShell.registerPage(…, { subject: true })). */
+export const ENGINE_ROUTES: ReadonlySet<string> = new Set(['author', 'engines']);
 
 /** An address as the frame dispatches it: the page (its first segment) and the rest of its path. */
 export interface Place {

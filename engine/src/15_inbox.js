@@ -50,7 +50,7 @@ async function checkInbox() {
     if (!(await LOG.flush())) return n;
     if (n) await CL.push(ACCOUNT.id);
     for (const k of done) await CL.kvDelete(k).catch(() => { });
-    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); renderTopStats(); }
+    if (n) { (Noema.notice || toast)('📥 ' + tE('engine.inbox.applied', { n })); }
   } catch (e) { console.warn('[inbox]', e); } finally { inboxRun.busy = false; }
   return n;
 }

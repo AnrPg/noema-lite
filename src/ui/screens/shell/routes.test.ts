@@ -26,5 +26,6 @@ test('every hash route of the app finds its page, its arguments and its query', 
     'admin',
   ])
     assert.equal(placeOf('#/' + p).page, p, p);
-  for (const p of ['subject', 'ch', 's', 'practice', 'cards', 'mistakes', 'author', 'engines']) assert.ok(ENGINE_ROUTES.has(p), p);
+  for (const p of ['author', 'engines']) assert.ok(ENGINE_ROUTES.has(p), p);
+  for (const p of ['subject', 'ch', 's']) assert.ok(!ENGINE_ROUTES.has(p), `${p}: the study area's page`);
 });

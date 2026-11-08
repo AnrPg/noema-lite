@@ -430,7 +430,7 @@
       try { Noema.preloadedConvos = await NoemaConvos.list(acc.id, { subject: meta.id, includeDeleted: false }); } catch (e) { Noema.preloadedConvos = []; }
     }
     let pack;
-    try { pack = await getPack(acc.id, meta); } catch (e) { if (SHELL() && NoemaShell.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(errMsg(e)); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, errMsg(e)), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
+    try { pack = await getPack(acc.id, meta); } catch (e) { if (window.NoemaShell?.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(errMsg(e)); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, errMsg(e)), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, tr('loader.chooseAnother')))); return; }
     const own = pack.subject.language || 'en';
     let contentLoc = packLocale(Object.keys(pack.translations || {}), own);   // docs/i18n.md §10
     if (contentLoc && !(await loadTranslation(acc.id, meta, pack, contentLoc))) contentLoc = null;   // its own file could not be had: the pack's own texts
@@ -441,7 +441,7 @@
     Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
     window.COURSE = contentLoc ? translatedChapters(pack, contentLoc) : pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
     if (!background) document.title = `${Noema.subject.title} · ${CFG.appName}`;
-    if (!SHELL() || !NoemaShell.mounted) document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS); in the frame each route sets it
+    if (!window.NoemaShell?.mounted) document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS); in the frame each route sets it
     if (background) Noema.backgroundEngine = true;
     if (Noema.subject.features?.math) await ensureMath();
     // start the engine

@@ -93,7 +93,6 @@ function fake(): Fake {
     },
     restorePoint: () => Promise.resolve(),
     frame: {
-      framed: false,
       main: () => main,
       setupBanner: () => null,
       chrome: noop,

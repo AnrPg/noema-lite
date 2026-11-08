@@ -1,8 +1,8 @@
 /**
  * THE STUDY AREA'S ROUTES (area 2): the subject's pages, one table for the lead to merge into the app's (src/ui/router).
- * The first matching route wins, so the longer patterns of a page come first. `STUDY_SCREENS` draws each route.
+ * The table is route-table.ts (the frame reads its segments without the screens); `showStudyRoute` draws each route.
  */
-import { defineRoutes, type RouteMatch } from '../../../ui/router/routes.ts';
+import type { RouteMatch } from '../../../ui/router/routes.ts';
 import type { StudyApp } from './app.ts';
 import { cardsView, drillView, drillsView } from './screens/cards.ts';
 import { chapterView } from './screens/chapter.ts';
@@ -20,48 +20,11 @@ import {
 } from './screens/practice.ts';
 import { sectionView } from './screens/section.ts';
 import { whatsNewView } from './sources.ts';
+import { STUDY_ROUTES, type StudyRoutes } from './route-table.ts';
 
-export const STUDY_ROUTES = defineRoutes({
-  home: '/',
-  sources: '/subject/sources',
-  subject: '/subject',
-  chapterFocus: '/ch/:id/:tab/:focus',
-  chapter: '/ch/:id/:tab?',
-  section: '/s/:id/:block?',
-  practice: '/practice/:id',
-  run: '/run',
-  srun: '/srun',
-  boss: '/boss/:id',
-  lightning: '/lightning/:id?',
-  cards: '/cards/:key?',
-  drills: '/drills',
-  drill: '/drill/:id',
-  mistakes: '/mistakes',
-  whatsNew: '/new',
-  exercise: '/ex/:id',
-});
-export type StudyRoutes = typeof STUDY_ROUTES.table;
 export type StudyRoute = RouteMatch<StudyRoutes>;
 export type StudyRouteName = StudyRoute['name'];
-
-/** the first segment of every study address (the frame sends these to the study area) */
-export const STUDY_SEGMENTS: ReadonlySet<string> = new Set([
-  '',
-  'subject',
-  'ch',
-  's',
-  'practice',
-  'run',
-  'srun',
-  'boss',
-  'lightning',
-  'cards',
-  'drills',
-  'drill',
-  'mistakes',
-  'new',
-  'ex',
-]);
+export { STUDY_ROUTES, STUDY_SEGMENTS } from './route-table.ts';
 
 /** the pages that wait while the Roadmap step is locked (its theory stays open) */
 const LOCKED: ReadonlySet<StudyRouteName> = new Set([
@@ -88,7 +51,6 @@ export function showStudyRoute(app: StudyApp, hash: string): boolean {
     return true;
   }
   switch (m.name) {
-    case 'home':
     case 'subject':
       homeView(app);
       break;

@@ -182,7 +182,7 @@ export function createApp(win: Window = window): App {
       if (a && s) N.setCurrent(a, s);
     },
   });
-  N.framed(() => SHELL() && shell.mounted);
+  N.framed(() => shell.mounted);
 
   /* ---------------- who is learning (the first-login overlay) ---------------- */
   const pickerData = (): PickerData => ({
@@ -488,7 +488,9 @@ export function createApp(win: Window = window): App {
         menu: [
           { label: L('pickSubject'), icon: 'book', run: () => void N.openSubjectPicker?.() },
           { label: L('newRoadmap'), icon: 'map', run: () => W().NoemaCurMap?.create(acc(), { onStudy }) },
-          shell.engine ? { label: L('focusSprint'), sub: L('focusSprintSub'), icon: 'clock', run: () => shell.engine?.focus?.() } : null,
+          shell.engine
+            ? { label: L('focusSprint'), sub: L('focusSprintSub'), icon: 'clock', run: () => N.app?.study?.toggleSprint() }
+            : null,
           { label: L('switchProfile'), icon: 'user', run: () => void N.openAccountPicker() },
         ],
       },
@@ -909,7 +911,8 @@ export function createApp(win: Window = window): App {
       await contractsIn();
       boot.langBoot?.(a, course, url.get('subject') === course.id);
     }
-    if (SHELL()) {
+    // a subject's pages are the frame's whatever the config says (shell: false keeps only a language course's own page)
+    if (SHELL() || (meta && !course)) {
       shell.mount({ engine: !!meta && !course });
       offSplash();
     }

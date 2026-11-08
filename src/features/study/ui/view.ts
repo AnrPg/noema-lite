@@ -8,25 +8,9 @@ import type { StudyApp } from './app.ts';
 import { h, type Child } from './dom.ts';
 import type { Chrome, MenuEntry } from './host.ts';
 
-/** The screen's frame: its crumbs and ⋮, and the back button the older page shows instead (label: where it leads). */
+/** The screen's frame: its crumbs and ⋮. */
 export function chrome(app: StudyApp, c: Chrome): void {
   app.host.frame.chrome(c);
-}
-
-/** the older page's back button (null in the frame, whose top bar has the arrow) */
-export function backBtn(app: StudyApp, label: string, hash: string): HTMLButtonElement | null {
-  if (app.host.frame.framed) return null;
-  return h(
-    'button',
-    {
-      class: 'back',
-      type: 'button',
-      onclick: () => {
-        app.go(hash);
-      },
-    },
-    label,
-  );
 }
 
 /** Replaces the page's content: <main> holds one .view (the filter's bar and the lock bar first); → the view. */
@@ -104,32 +88,9 @@ export function choiceList(app: StudyApp, items: readonly (Choice | null)[]): HT
   );
 }
 
-/** Practice ▾ (the frame's list), or the older page's tiles */
+/** Practice ▾: the frame's list */
 export function practiceButton(app: StudyApp, items: readonly (MenuEntry | null)[]): HTMLElement {
-  if (app.host.frame.framed) return app.host.frame.menuButton(items, { cls: 'btn ns-practicebtn', label: app.t('ch.practice') });
-  return h(
-    'div',
-    { class: 'modes' },
-    items
-      .filter((x): x is Exclude<MenuEntry, '-'> => !!x && x !== '-')
-      .map(it =>
-        h(
-          'button',
-          {
-            class: 'mode',
-            type: 'button',
-            onclick: () => {
-              if (it.run) it.run();
-              else if (it.href) app.go(it.href);
-            },
-          },
-          it.badge ? h('span', { class: 'pill badge', style: { background: '#ffe3d3', color: '#e8590c' } }, it.badge) : null,
-          h('span', { class: 'ic' }, it.icon ?? ''),
-          h('b', {}, it.label),
-          h('small', {}, it.sub ?? ''),
-        ),
-      ),
-  );
+  return app.host.frame.menuButton(items, { cls: 'btn ns-practicebtn', label: app.t('ch.practice') });
 }
 
 /** a place opened from the search: brought into view and outlined for a moment */

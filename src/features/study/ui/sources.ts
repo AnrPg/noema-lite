@@ -9,7 +9,7 @@ import { HOME, type StudyApp } from './app.ts';
 import { h } from './dom.ts';
 import type { ViewerPort } from './parts.ts';
 import { setAccent } from './parts.ts';
-import { backBtn, view } from './view.ts';
+import { view } from './view.ts';
 
 type FullChapter = Chapter & { readonly src: string; readonly _ci: number };
 
@@ -529,7 +529,6 @@ export function whatsNewView(app: StudyApp): void {
   };
   view(
     app,
-    backBtn(app, app.t('nav.home'), HOME),
     h('h1', {}, none ? app.t('view.latest') : app.t('view.whatsNew')),
     h(
       'p',
