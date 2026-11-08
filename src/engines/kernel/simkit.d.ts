@@ -31,6 +31,16 @@ export interface Stream {
 
 declare const api: {
   readonly [name: string]: unknown;
-  readonly stream: (seed: number, name: string, opts?: unknown) => Stream;
+  readonly stream: (
+    seed: number,
+    name: unknown,
+    opts?: {
+      readonly antithetic?: boolean | undefined;
+      readonly sub?: number | undefined;
+      readonly state?: readonly number[] | undefined;
+    } | null,
+  ) => Stream;
+  readonly chi2Sf: (x: number, k: number) => number;
+  readonly normInv: (p: number) => number;
 };
 export default api;
