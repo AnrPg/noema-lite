@@ -80,28 +80,10 @@ function openNotes() {
     box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 ' + t('top.notifications')), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
   });
 }
+/** 🔔 the banner under the top bar (src/features/sharing/ui/bar.ts, NoemaCore.community): drawn once a share or an update waits */
 function shareBanner() {
   const bar = h('div', { class: 'sharebar', role: 'status' });
-  let later = new Set();
-  const draw = list => {
-    const items = list.filter(x => !later.has(x.id) && x.kind !== 'notice'); bar.innerHTML = '';   // 🔔 news only waits in the bell
-    bar.classList.toggle('on', !!items.length); if (!items.length) return;
-    const sh = items[0];
-    if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {   // 🔔 an update that waits for me: take it or keep mine
-      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? '✅ ' + tE('engine.share.upToDate', { title: sh.title }) : '👍 ' + tE('engine.share.keepYours', { title: sh.title })); else b.disabled = false; } catch (er) { toast('⚠️ ' + errText(er), 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
-      bar.append(h('span', { class: 'grow' }, ...Noema.updateText(sh), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : ''),
-        h('button', { class: 'btn small primary', onclick: act(true) }, Noema.updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? tE('engine.share.keepMyCopy') : tE('engine.share.keepMine')),
-        h('button', { class: 'btn small ghost', title: tE('engine.share.laterTip'), onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, tE('engine.share.later')));
-      return;
-    }
-    const cur = sh.kind === 'curriculum';   // 👥 an invitation to a shared curriculum
-    const tB = h('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(ACCOUNT.id, [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: cur ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
-    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', ...tNodes(cur ? 'engine.share.invite' : 'engine.share.offer', null, { name: h('b', {}, sh.from_name || sh.from_email || tE('engine.share.someone')), title: tB }), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : '', mtT ? ' ' : '', mtT || ''),
-      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? '👥 ' + tE('engine.share.joined', { title: s.title }) : '✅ ' + tE('engine.share.added', { title: s.title })); confirmBox(tE('engine.share.openNow', { title: s.title }), () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + errText(er), 5000); e.target.disabled = false; } } }, '✓ ' + (cur ? tE('engine.share.join') : tE('engine.share.accept'))),
-      h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + errText(er))); } }, '✕ ' + tE('engine.share.reject')),
-      h('button', { class: 'btn small ghost', title: tE('engine.share.laterTip'), onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, tE('engine.share.later')));
-  };
-  Noema.notes.on(draw);
+  Noema.notes.on(list => { if (list.some(x => x.kind !== 'notice')) window.NoemaCore?.community?.notes.bar(bar).catch(e => console.error('[sharebar]', e)); });
   return bar;
 }
 
@@ -484,7 +466,7 @@ function sectionView(sid, bid) {
   draw();
   if (target) showHit(body.querySelector(`[data-bid="${bids[s.blocks.indexOf(target)]}"]`));
 }
-/** A place opened from the search (engine/search.js): brought into view and outlined for a moment. */
+/** A place opened from the search (src/features/search/ui): brought into view and outlined for a moment. */
 function showHit(el) {
   if (!el) return;
   setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('ns-hit'); setTimeout(() => el.classList.remove('ns-hit'), 2600); }, 120);
@@ -598,9 +580,24 @@ function runSummary() {
       R0.after ? h('button', { class: 'btn primary ns-srnext', onclick: R0.after.run }, R0.after.label) : null,
       h('button', { class: 'btn', onclick: () => go(R0.back) }, tE('engine.run.done'))))));
 }
-/* ---------- 🔎 a round made from search results (engine/search.js): this subject's exercises, then its cards ---------- */
+/* ---------- ⚙ #/engines: the engines of activities and requests for new ones — src/features/reports/ui/engines.ts (NoemaCore.community),
+   drawn into the engine's view; this side says which engines and runtimes this app runs (the activity core) ---------- */
+function engineHere(e) {
+  if (typeof ACT === 'undefined') return false;
+  if (e.runtime) return !!(ACT.hasRuntime(typeof e.runtime === 'string' ? e.runtime : e.id) || ACT.hasRuntime(e.id));   // an engine of the library counts before it is loaded
+  return ACT.engines().includes(e.id);
+}
+function enginesView() {
+  shellChrome({ sub: true, crumbs: [[tE('engine.engines.title')]], back: HOME() });
+  const v = view(SHL() ? null : backBtn('← ' + SUBJ.title, HOME())), C = window.NoemaCore?.community;
+  if (!C) { v.append(h('p', {}, tE('engine.engines.unavailable'))); return; }
+  const box = h('div'); v.append(box);
+  C.mount(box, location.hash, c => { if (box.isConnected) shellChrome({ sub: true, crumbs: (c.crumbs || []).map(x => [x.label, x.href]), back: c.back }); }, { engineHere, subjectId: SUBJ?.id || null, back: HOME() })
+    .catch(e => { box.replaceChildren(h('p', {}, errText(e))); });
+}
+/* ---------- 🔎 a round made from search results (NoemaCore.community.search): this subject's exercises, then its cards ---------- */
 function searchRunView() {
-  const X = window.NoemaSearch, R = X?.round(), st = R?.steps?.[R.i];
+  const X = window.NoemaCore?.community?.search, R = X?.round(), st = R?.steps?.[R.i];
   if (!st || st.sj !== SUBJ.id) return go(X ? '#/search' : HOME());
   const after = X.after();
   if (st.kind === 'ex') {
@@ -849,7 +846,7 @@ function route() {
   if (p[0] === 'mistakes') return mistakesView();
   if (p[0] === 'new') return whatsNewView();
   if (p[0] === 'author') { const m = main(); m.dataset.page = '@engine'; return Noema.app.author(m, backBtn('← ' + SUBJ.title, HOME())); }   // ✎ the activity author (src/composition/shell/author-page.ts; in the frame it is a page of its own)
-  if (p[0] === 'engines') return enginesView(p[1]);   // the engines of activities and requests for new ones (49_lib_view.js)
+  if (p[0] === 'engines') return enginesView();   // the engines of activities and requests for new ones (src/features/reports/ui/engines.ts)
   if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
   homeView();
 }

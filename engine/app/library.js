@@ -709,7 +709,7 @@
 
   Object.assign(APP, { importFile, landedOpen, subjectPct });
 
-  Object.assign(S, { convos, goConvo });   // the conversations' window (engine/engine.js, engine/search.js)
+  Object.assign(S, { convos, goConvo });   // the conversations' window (engine/engine.js, the search: src/features/search/ui)
   for (const [k, f] of Object.entries(PAGES)) S.registerPage(k, f);
   }
 })();

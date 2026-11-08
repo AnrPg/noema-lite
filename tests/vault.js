@@ -1,4 +1,4 @@
-/* 🗄️ The vault (engine/vault.js, docs/VAULT.md) against the Supabase emulator (rules of cloud/supabase.sql §13).
+/* 🗄️ The vault (src/features/vault, docs/VAULT.md) against the Supabase emulator (rules of cloud/supabase.sql §13).
    Without a browser: the search in any script (Greek in plain and scholarly Latin letters, accents or not), the format checks
    by the first bytes (a program renamed .pdf is refused), the filters across universities and years.
    In the browser: the Vault tab, an upload of several files with the required fields (a program, an SVG and a fake PDF
@@ -20,13 +20,13 @@ const PORT = 54381, BASE = `http://localhost:${PORT}`;
 /* ---------- 1. without a browser ---------- */
 async function unit() {
   // the rules themselves (the formats, the field graph, the filters, the folders) are unit-tested in src/features/vault (npm run test:unit);
-  // here: the page's own part over them (build/app.js + engine/vault.js, as the browser loads them)
+  // here: the page's own part over them (build/app.js: NoemaCore.community.vault, as the browser loads it)
   console.log('— the format checks in the learner’s words, the search with the menus’ words, without a browser');
   const EN = JSON.parse(fs.readFileSync(path.join(ROOT, 'i18n/vault/en.arb'), 'utf8'));   // the English words, placeholders filled in
-  const NoemaI18n = { t: (k, p = {}) => String(EN[k] ?? k).replace(/\{(\w+)(?:, number)?\}/g, (m, x) => p[x] != null ? String(p[x]) : m), fmt: { number: n => String(n) } };
+  const NoemaI18n = { t: (k, p = {}) => String(EN[k] ?? k).replace(/\{(\w+)(?:, number)?\}/g, (m, x) => p[x] != null ? String(p[x]) : m), fmt: { number: n => String(n) }, onChange() { } };   // (the I18n port listens for a change of language)
   const ctx = { window: {}, crypto: require('crypto').webcrypto, console, URL, URLSearchParams, TextEncoder, TextDecoder, NoemaI18n }; ctx.window = ctx; vm.createContext(ctx);
-  for (const f of ['build/app.js', 'engine/vault.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);   // build/app.js: NoemaCore (npm run build)
-  const V = ctx.NoemaVault, S = ctx.NoemaCore.search;
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'build/app.js'), 'utf8'), ctx);   // build/app.js: NoemaCore (npm run build)
+  const V = ctx.NoemaCore.community.vault, S = ctx.NoemaCore.search;
   ok(S.matches('Σημειώσεις Βιολογίας · Πανεπιστήμιο Κρήτης', 'viologias') && S.matches('Σημειώσεις Βιολογίας', 'biologias') && S.matches('Σημειώσεις Βιολογίας', 'βιολογιας') && S.matches('Βιολογία', 'ΒΙΟΛΟΓΊΑ'), 'Greek is found as written, without accents, in plain Latin (viologia) and scholarly Latin (biologia)');
   const file = (name, bytes, size) => ({ name, size: size ?? bytes.length, slice: () => ({ arrayBuffer: async () => Uint8Array.from(bytes).buffer }) });
   const b = s => [...Buffer.from(s, 'binary')];
@@ -146,11 +146,11 @@ c.save()`, f, text, String(pages)]); return f; };
     ok(/sem=3/.test(p.url()) && /k=notes/.test(p.url()) && await p.locator('.vt-active .vt-chip').count() === 3, 'the filters are in the address and shown as removable chips');
     await p.click('.vt-filters [data-f="sol"][data-v="1"]'); await wait(200);
     ok(await p.locator('.vt-file').count() === 1 && /Σημειώσεις Γενετικής/.test(await p.locator('.vt-file').innerText()), '+ has solutions: only Nikos’s notes');
-    ok(await p.locator('.ns-sheet.vt-filtsheet .vt-filters').count() === 1 && await p.locator('.vt-filters .ns-srchip.on .vt-chipx').count() === 2 && await p.locator('.vt-active .vt-chip .vt-chipx').count() === 4, 'the filters are a side panel; every chip that is on has its ×');
+    ok(await p.locator('noema-dialog.vt-filtsheet[placement="sheet"] .vt-filters').count() === 1 && await p.locator('.vt-filters .ns-srchip.on .vt-chipx').count() === 2 && await p.locator('.vt-active .vt-chip .vt-chipx').count() === 4, 'the filters are a side panel; every chip that is on has its ×');
     await p.screenshot({ path: SHOTS + '/vt1b_filters.png' });
     await p.click('.vt-filtsheet .vt-clearall'); await wait(200);
     ok(await p.locator('.vt-file').count() === 3 && !(await p.locator('.vt-active .vt-chip').count()) && await p.locator('.vt-filtsheet .vt-clearall[disabled]').count() === 1, '“Clear all” in the panel');
-    await p.click('.vt-filtsheet .ns-shhead .ns-iconbtn'); await wait(150);
+    await p.click('.vt-filtsheet .ctl.x'); await wait(150);
     await p.fill('.vt-q', 'genetiki athinon'); await wait(400);
     ok(await p.locator('.vt-file').count() === 1, 'search “genetiki athinon” in Latin letters finds “Γενετική”, Πανεπιστήμιο Αθηνών');
     await p.fill('.vt-q', ''); await wait(400);
@@ -200,20 +200,20 @@ c.save()`, f, text, String(pages)]); return f; };
     for (const [n, em] of [['Eleni', 'eleni@example.com'], ['Kostas', 'kostas@example.com']]) { await fetch(BASE + '/auth/v1/signup', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: em, password: 'secret123', data: { name: n } }) }); await rest(await token(em), '/rest/v1/noema_vault_reports', { method: 'POST', body: JSON.stringify([{ file_id: gid, reporter: Object.values(srv.state.users).find(u => u.email === em).id, reason: 'copyright' }]) }); }
     ok(srv.state.vfiles.find(f => f.id === gid).status === 'hidden' && !(await (await rest(await token('iro@example.com'), '/rest/v1/noema_vault?select=id')).json()).some(f => f.id === gid)
       && (await (await rest(T2, '/rest/v1/noema_vault?select=id,status')).json()).find(f => f.id === gid)?.status === 'hidden', 'three reports hide it from everybody but its owner');
-    await p.evaluate(() => NoemaVault.reset()); await p.reload(); await wait(800);
+    await p.evaluate(() => NoemaCore.community.vault.reset()); await p.reload(); await wait(800);
     ok(await until(() => p.locator('.vt-file').count().then(n => n === 2)), 'the hidden file is gone from the list');
     const mine = srv.state.vfiles.find(f => f.title === 'Genetics lecture 1');
     await p.click(`.vt-file[data-id="${mine.id}"]`); await wait(300);
     ok(/Shared by\s+someone who stays anonymous/.test(await p.locator('.vt-sheet').innerText()) && await p.locator('.vt-sheet .vt-moremenu').count() === 1 && await p.locator('.vt-sheet .vt-star').count() === 0, 'one’s own file: anonymous, no rating or reporting of it');
-    await p.click('.vt-sheet .vt-moremenu .ns-menubtn'); await p.click('.vt-sheet .vt-edit'); await wait(200); await p.fill('.ns-modal .vt-title', 'Genetics — lecture 1 (DNA)'); await p.check('.ns-modal [data-k="show_name"]'); await p.click('.vt-save'); await wait(500);
+    await p.click('.vt-sheet .vt-moremenu .ns-menubtn'); await p.click('.vt-sheet .vt-edit'); await wait(200); await p.fill('.vt-editdlg .vt-title', 'Genetics — lecture 1 (DNA)'); await p.check('.vt-editdlg [data-k="show_name"]'); await p.click('.vt-save'); await wait(500);
     ok(mine.title === 'Genetics — lecture 1 (DNA)' && mine.uploader_name === 'Iro' && mine.status === 'ok' && mine.downloads === 0, 'edit: the title changes, the name shown now (by choice); counters stay the server’s');
-    await p.evaluate(() => NoemaVault.reset()); await p.reload(); await wait(800);
+    await p.evaluate(() => NoemaCore.community.vault.reset()); await p.reload(); await wait(800);
     await p.click(`.vt-file[data-id="${mine.id}"]`); await wait(300);
     await p.click('.vt-course'); await wait(800);
     ok(await until(() => p.locator('.cm-src .cm-srcfiles li').count().then(n => n === 1)) && /Genetics lecture 1\.pdf/.test(await p.locator('.cm-srcfiles').innerText()), '“Make a course from it” opens From your sources with the file');
     await p.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    p.once('dialog', d => d.accept());
-    await p.click(`.vt-file[data-id="${mine.id}"]`); await wait(300); await p.click('.vt-sheet .vt-moremenu .ns-menubtn'); await p.click('.vt-sheet .vt-delete'); await wait(800);
+    await p.click(`.vt-file[data-id="${mine.id}"]`); await wait(300); await p.click('.vt-sheet .vt-moremenu .ns-menubtn'); await p.click('.vt-sheet .vt-delete'); await wait(300);
+    await p.click('.nc-ask .nc-ok'); await wait(800);   // “Delete …?” asked in the app’s own dialog
     ok(!srv.state.vfiles.some(f => f.id === mine.id) && !srv.state.vobj[mine.path] && await until(() => p.locator('.vt-file').count().then(n => n === 1)), 'delete: the row and the file are gone');
 
     console.log('— the phone width, Greek menus');

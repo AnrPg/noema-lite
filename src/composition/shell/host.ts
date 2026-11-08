@@ -13,7 +13,7 @@ import { ENGINE_ROUTES, placeOf } from '../../ui/screens/shell/routes.ts';
 import type { ShellArt, ShellContext, TutorVars } from '../../ui/screens/shell/base.ts';
 import { closePops, fitRow, h, menuButton, modal, popMenu, tipped, tone, type DomKit, type Kid, type MenuEntry } from './dom.ts';
 import { jsonOf, putJson, type DeviceKv } from './kv.ts';
-import { legacy, type EngineApi, type SubjectMeta } from './legacy.ts';
+import { community, legacy, type EngineApi, type SubjectMeta } from './legacy.ts';
 import type { Themes } from './themes.ts';
 
 const DAY = 864e5;
@@ -35,8 +35,10 @@ export interface Chrome {
   readonly corner?: boolean;
   readonly sub?: boolean;
 }
-/** a page: drawn into <main> for the rest of its address */
+/** a page: drawn into <main> for the rest of its address; it returns KEPT when the page shown is the one drawn before
+    (the same address drawn again, e.g. on a theme that arrives late: the scroll stays where it is) */
 export type PageFn = (args: readonly string[]) => unknown;
+export const KEPT = 'kept';
 /** a world the languages branch registers (docs/SHELF_AND_LANGUAGES.md) */
 export interface World {
   route?: (args: readonly string[]) => unknown;
@@ -226,7 +228,7 @@ export function createHost(core: HostCore) {
 
   /* ---------- the frame ---------- */
   let peopleWaiting = 0;
-  const social = (): boolean => !!W().NoemaSocial && core.account()?.kind === 'cloud' && !!W().NoemaCloud?.session();
+  const social = (): boolean => !!community() && core.account()?.kind === 'cloud' && !!W().NoemaCloud?.session();
   function tabsList(): FrameTab[] {
     const w = core.themes.world();
     const t: FrameTab[] = [{ key: 'today', href: '#/', icon: 'sun', label: L('today'), title: L('today') }];
@@ -455,12 +457,15 @@ export function createHost(core: HostCore) {
     parts.main.dataset['page'] = k;
     document.body.classList.remove('ns-mapmode');
     const fn = PAGES[k] ?? PAGES[''];
+    let kept = false;
     try {
-      void Promise.resolve(fn?.(args)).catch(fail);
+      const r = fn?.(args);
+      kept = r === KEPT;
+      void Promise.resolve(r).catch(fail);
     } catch (e) {
       fail(e);
     }
-    scrollTo({ top: 0 });
+    if (!kept) scrollTo({ top: 0 });
   }
   function fail(e: unknown): void {
     console.error('[shell]', e);
@@ -522,7 +527,7 @@ export function createHost(core: HostCore) {
         title: W().NoemaLangUI?.titleOf?.(args[0]) || reg.find(x => x.id === args[0])?.title || args[0],
       };
     }
-    if (k === 'search') return W().NoemaSearch?.hereNow?.() ?? null;
+    if (k === 'search') return community()?.search.hereNow() ?? null;
     return null;
   }
 
@@ -556,7 +561,7 @@ export function createHost(core: HostCore) {
 
   /* ---------- the parts of the frame that follow the account ---------- */
   function wireSocial(): void {
-    const S = W().NoemaSocial;
+    const S = community()?.social;
     if (!S || !social()) return;
     drawTabs();
     S.start();
@@ -580,11 +585,10 @@ export function createHost(core: HostCore) {
     paint(C.status());
   }
   function wireReports(): void {
-    const R = W().NoemaReport;
+    const R = community()?.report;
     if (!R) return;
     setModel({ report: true });
-    const isAdmin = R.isAdmin?.bind(R);
-    if (!isAdmin) return;
+    const isAdmin = R.isAdmin.bind(R);
     const check = (): void => {
       isAdmin()
         .then(yes => {
@@ -642,10 +646,10 @@ export function createHost(core: HostCore) {
       meMenu(d.anchor, d.rail);
     });
     f.addEventListener('shell-find', () => {
-      W().NoemaSearch?.quick(here());
+      void community()?.search.quick(here());
     });
     f.addEventListener('shell-report', () => {
-      W().NoemaReport?.open();
+      void community()?.report.open();
     });
     f.addEventListener('shell-fab', () => {
       if (chromeNow.tutor) chromeNow.tutor();
@@ -702,10 +706,10 @@ export function createHost(core: HostCore) {
         search &&
         !target?.closest('input, textarea, select, [contenteditable="true"]') &&
         !parts.layer.querySelector('[data-sticky], .ns-modal') &&
-        W().NoemaSearch
+        community()
       ) {
         e.preventDefault();
-        W().NoemaSearch?.quick(here());
+        void community()?.search.quick(here());
       }
     });
     document.addEventListener(
@@ -804,6 +808,8 @@ export function createHost(core: HostCore) {
     ENGINE_ROUTES,
     WORLDS,
     PAGES,
+    /** what a page returns when it kept the page drawn before (route(): the scroll stays) */
+    KEPT,
     reports,
     GROUPS: CHARACTER_GROUPS,
     ctx: (): ShellContext => ({ ...ctx, art: art() }),

@@ -518,7 +518,7 @@
   PAGES.learn = () => {
     const lib = APP.wireLibrary(Object.assign(document.createElement('noema-roadmap-library'), { account: acc(), heading: 2 }));
     const v = page({ tab: 'learn', crumbs: [[L('knowledge')]], corner: true, menu: learnMenu() }, h('h1', {}, L('knowledge')), lib);
-    const nCol = window.NoemaSearch?.collections?.().length || 0;   // saved searches: a quiet link, only when there are some
+    const nCol = window.NoemaCore?.community?.search.collections().length || 0;   // saved searches: a quiet link, only when there are some
     if (nCol) v.append(h('div', { class: 'ns-shelf' }, h('button', { class: 'ns-shelflink ns-collink', onclick: () => go('#/search') }, svg('search'), ' ', L('sr_collectionsN', { n: nCol }))));
   };
   function learnMenu() {

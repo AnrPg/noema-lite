@@ -1,4 +1,4 @@
-/* ⚙ Requests for new engines of interactive activities (src/features/reports: NoemaCore.engineRequests, engine/src/49_lib_view.js, docs/INTERACTIVE_LIBRARY.md §3)
+/* ⚙ Requests for new engines of interactive activities (src/features/reports: NoemaCore.engineRequests, src/features/reports/ui/engines.ts, docs/INTERACTIVE_LIBRARY.md §3)
    against the Supabase emulator (rules of cloud/supabase.sql §16) and the connector (src/connector: noema_request_engine,
    noema_engine_requests, noema_engine_request_update).
    Without a browser: normalize (required fields, limits, accuracy, the catalogue's suggestions), cleanPatch, the brief, the local store.
@@ -79,10 +79,10 @@ async function unit() {
     ok(await until(() => p.locator('#engreq-title').count()), 'Request a new engine opens the form, the name first');
     ok(!(await p.locator('#engreq-field').isVisible()) && await p.locator('details.eng-more').count() === 1, 'the optional details are folded');
     await p.click('[data-act="send"]'); await wait(200);
-    ok(/Name/.test(await p.locator('.modal .bad, .tiny.bad').first().innerText()) && !srv.state.ereqs.length, 'a name is required (nothing sent)');
+    ok(/Name/.test(await p.locator('.eng-err').first().innerText()) && !srv.state.ereqs.length, 'a name is required (nothing sent)');
     await p.fill('#engreq-title', 'Electronic filter with a resistor'); await p.fill('#engreq-what', 'short');
     await p.click('[data-act="send"]'); await wait(200);
-    ok(/40/.test(await p.locator('.tiny.bad').first().innerText()), 'what to simulate needs 40 characters: ' + await p.locator('.tiny.bad').first().innerText());
+    ok(/40/.test(await p.locator('.eng-err').first().innerText()), 'what to simulate needs 40 characters: ' + await p.locator('.eng-err').first().innerText());
     await p.fill('#engreq-what', 'An RC low-pass filter with a resistor and a capacitor: the learner changes R and C and sees the cutoff frequency and the voltage.');
     ok(await until(() => p.locator('.eng-sug .eng-row[data-engine="circuit-mna@1"]').count()), 'while writing, the engines that may already do it are shown');
     await p.click('details.eng-more summary'); await p.fill('#engreq-field', 'Electronics'); await p.selectOption('#engreq-accuracy', 'quantitative');
@@ -108,7 +108,7 @@ async function unit() {
     ok(await until(() => a.locator('.eng-req').count().then(n => n === 1)) && /1 request/.test(await a.locator('.eng-mine h3').innerText()), 'the admin sees every request');
     await a.click('.eng-admin summary'); await a.selectOption('.eng-admin select', 'available');
     await a.fill('.eng-admin input[aria-label="Engine that does it"]', 'circuit-mna@1'); await a.fill('.eng-admin input[aria-label="Note for the requester"]', 'The circuit plugin already does this.');
-    await a.click('.eng-admin button:has-text("Save")');
+    await a.click('.eng-admin noema-button:has-text("Save")');
     ok(await until(() => q.status === 'available' && q.engine_id === 'circuit-mna@1' && q.answer === 'The circuit plugin already does this.'), 'the admin answers it in place');
     await p.setViewportSize({ width: 1280, height: 900 }); await p.reload(); await wait(2000);
     ok(await until(() => p.locator('.eng-req .eng-st').innerText().then(t => /Available/.test(t))) && /circuit-mna@1/.test(await p.locator('.eng-req').innerText()) && /already does/.test(await p.locator('.eng-answer').innerText()), 'the requester sees the answer');

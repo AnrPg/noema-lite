@@ -1,4 +1,4 @@
-/* ⚑ Problem reports (engine/report.js, engine/src/85_locate.js, docs/REPORTS.md) against the Supabase emulator (rules of
+/* ⚑ Problem reports (src/features/reports/ui, engine/src/85_locate.js, docs/REPORTS.md) against the Supabase emulator (rules of
    cloud/supabase.sql §15) and the connector (src/connector: noema_reports, noema_report, noema_report_update).
    Without a browser: the brief and the repository paths from a locator.
    In the browser: the button at the foot of the side bar (a line icon, no emoji), the dialog with a screenshot of the
@@ -59,7 +59,7 @@ function unit() {
   };
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] }); const p = await ctx.newPage(); p.setDefaultTimeout(15000);
   const E = []; p.on('pageerror', e => E.push(e.message));
-  const openReport = async () => { await p.click('#ns-report'); return until(() => p.locator('.nr-modal .nr-send, .nr-modal .nr-actions .btn.primary').count()); };
+  const openReport = async () => { await p.click('#ns-report'); return until(() => p.locator('.nr-modal .nr-send, .nr-modal .nr-download').count()); };
   try {
     console.log('— the button and the dialog');
     await signUp(p, 'Iro', 'iro@example.com');
@@ -129,7 +129,7 @@ function unit() {
     ok(await p.locator('.ns-mepop .ns-reportitem').isVisible() && !(await p.locator('.ns-mepop button:has-text("Problem reports")').count()), 'Me ▾ has Report a problem; no Problem reports for someone who is not an admin');
     await p.keyboard.press('Escape'); await p.setViewportSize({ width: 1280, height: 900 });
     await p.goto(BASE + '/#/admin/reports'); await wait(1200);
-    ok(await until(() => p.locator('.nr-admin .ns-panel').count()) && !(await p.locator('.nr-item').count()) && await p.evaluate(() => document.querySelector('.nr-admin').innerText === NoemaI18n.t('report.notAdmin')), 'the reports page refuses an account that is not an admin');
+    ok(await until(() => p.locator('.nr-admin .nc-panel').count()) && !(await p.locator('.nr-item').count()) && await p.evaluate(() => document.querySelector('.nr-admin').innerText === NoemaI18n.t('report.notAdmin')), 'the reports page refuses an account that is not an admin');
     const iroT = (await (await fetch(BASE + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'iro@example.com', password: 'secret123' }) })).json()).access_token;
     const mine = await (await fetch(BASE + '/rest/v1/noema_error_reports?select=id,status', { headers: { apikey: 'k', authorization: 'Bearer ' + iroT } })).json();
     const patch = await fetch(BASE + `/rest/v1/noema_error_reports?id=eq.${mine[0].id}`, { method: 'PATCH', headers: { apikey: 'k', authorization: 'Bearer ' + iroT, 'content-type': 'application/json', prefer: 'return=representation' }, body: JSON.stringify({ status: 'fixed' }) });

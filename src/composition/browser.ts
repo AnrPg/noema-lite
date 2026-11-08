@@ -38,6 +38,7 @@ import { lazyContentChecks, type LazyContentChecks } from '../features/content/a
 import type { ChecksPiece } from './contracts.ts';
 import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
 import { languagesBridge } from './languages.ts';
+import { COMMUNITY_APP_BRIDGE, COMMUNITY_SCREENS, type Screens } from './community-app.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { browserLearning, learningBridge } from './learning.ts';
 import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
@@ -84,8 +85,10 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'runtimes', build: r => r.get(RUNTIMES) },
   // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
   learningBridge,
-  // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
+  // search, vault, social, reports, engineRequests: the domains of the community screens (src/features/*/ui, NoemaCore.community)
   ...COMMUNITY_BRIDGE,
+  // NoemaCore.community: the community screens (search, vault, people, ⚑ reports, Explore, #/engines), loaded on first use
+  ...COMMUNITY_APP_BRIDGE,
   // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
   // index's records, built in the Worker): src/composition/study.ts
   ...STUDY_BRIDGE,
@@ -203,6 +206,7 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
     const load = checksLoader(page, script);
     return () => load().then(p => (checksPiece = p));
   });
+  c.register(COMMUNITY_SCREENS, () => pieceLoader<Screens>(page, script, 'community', '__noemaCommunityPiece'));
   c.register(CONTRACTS, r => {
     const load = r.get(CHECKS_PIECE);
     return lazyContracts(() =>

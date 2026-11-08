@@ -347,7 +347,7 @@ def build_site(metas):
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
     os.makedirs(os.path.join(out, 'engine', 'app'), exist_ok=True)
-    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'activity_author_schemas.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's schemas and references load on #/author, with build/author.js)
+    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'activity_author_schemas.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's schemas and references load on #/author, with build/author.js)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True)
     for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮
     # the TypeScript bundles of the page (build/: npm run build) with their source maps — build/app.js holds the engine library
@@ -650,12 +650,8 @@ def build_bundle(metas):
 <script>{esc(rd("engine/curshare.js"))}</script>
 <script>{esc(rd("engine/curimport.js"))}</script>
 <script>{esc(rd("engine/sourceplan.js"))}</script>
-<script>{esc(rd("engine/vault.js"))}</script>
-<script>{esc(rd("engine/social.js"))}</script>
 <script>{esc(rd("engine/curmap.js"))}</script>
-<script>{esc(rd("engine/search.js"))}</script>
 <script>{esc(rd("engine/vendor/modern-screenshot.umd.js"))}</script>
-<script>{esc(rd("engine/report.js"))}</script>
 {app_areas}<script>{esc(rd("engine/react.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>
 <script>{esc(rd("engine/vendor/h5p/3.8.2/player.js"))}</script>
