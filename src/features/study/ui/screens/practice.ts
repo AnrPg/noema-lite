@@ -1,11 +1,10 @@
 /**
- * Practice: the Mistakes gym, a mixed round, the boss battle, the lightning round, one exercise (#/ex/<id>), and
+ * Practice: a mixed round, the boss battle, the lightning round, one exercise (#/ex/<id>), and
  * the page of a Roadmap step still locked.
  */
 import type { Exercise } from '../../domain/pack.ts';
 import { HOME, type StudyApp } from '../app.ts';
 import { h, replay, shuffle } from '../dom.ts';
-import { mistakesByCat } from '../kmap.ts';
 import { askButton, setAccent } from '../parts.ts';
 import { fmt } from '../text.ts';
 import { lockNote, view } from '../view.ts';
@@ -31,65 +30,6 @@ export function lockedView(app: StudyApp): void {
         `📖 ${app.L('backToTheory')}`,
       ),
     ),
-  );
-}
-
-/** #/mistakes: every exercise whose last answer was wrong, by trap and by chapter */
-export function mistakesView(app: StudyApp): void {
-  setAccent(document.body, null);
-  app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.mistakes')]], back: HOME });
-  const list = app.mistakes();
-  view(
-    app,
-    h('h1', {}, app.t('view.mistakes')),
-    h('p', { class: 'muted' }, app.t('engine.gym.intro')),
-    list.length
-      ? h(
-          'div',
-          {},
-          h(
-            'div',
-            { class: 'row', style: { margin: '8px 0 18px' } },
-            h(
-              'button',
-              {
-                class: 'btn primary',
-                type: 'button',
-                onclick: () => {
-                  app.startRound(list, { title: app.t('view.mistakes'), count: 15, back: '#/mistakes' });
-                },
-              },
-              `▶ ${app.t('engine.gym.train', { n: Math.min(15, list.length), of: list.length })}`,
-            ),
-          ),
-          mistakesByCat(app, list),
-          h(
-            'div',
-            { style: { display: 'grid', gap: '8px' } },
-            app.course.chapters.map(c => {
-              const mine = list.filter(e => app.course.chapterOf(e)?.id === c.id);
-              if (!mine.length) return null;
-              return h(
-                'button',
-                {
-                  class: 'node',
-                  type: 'button',
-                  onclick: () => {
-                    app.startRound(mine, {
-                      title: `🔁 ${app.t('engine.run.chMistakes', { num: c.num })}`,
-                      count: mine.length,
-                      back: '#/mistakes',
-                    });
-                  },
-                },
-                h('div', { class: 'dot' }, c.emoji ?? ''),
-                h('div', { class: 'grow' }, h('b', {}, c.title)),
-                h('span', { class: 'pill' }, app.nf(mine.length)),
-              );
-            }),
-          ),
-        )
-      : h('div', { class: 'empty' }, h('div', { class: 'e' }, '✨'), h('p', {}, app.t('engine.gym.empty'))),
   );
 }
 
