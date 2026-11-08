@@ -487,7 +487,7 @@ def build_skill(out_zip):
                 if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
         z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
         z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed runtimes (src/runtimes: sim-spec@1, html-app@1, wasm-module@1, py-module@1)
-        for f in ('32_activities.js', '33_activity_guard.js', '38_activity_h5p.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        for f in ('32_activities.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
@@ -524,7 +524,7 @@ def public_config():
 # the app's own code the connector runs, in load order (pack checks; curriculum tasks, checks and how answers change a
 # curriculum; pictures; language courses): src/connector/engine/sources.ts lists them and tools/connector_bundle.mjs bundles
 # each as its text. The data contracts and the engine library are ES modules the connector's composition root hands them.
-CONNECTOR_ENGINE = ('engine/src/38_activity_h5p.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
+CONNECTOR_ENGINE = ('engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
 
 def connector_engine_files():
     """The engine files src/connector/engine/sources.ts loads (LEGACY_SOURCES, in order)."""

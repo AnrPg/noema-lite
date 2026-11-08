@@ -136,7 +136,7 @@ mixed 64 KB rule was dropped because one path is simpler to test and the packs g
 **D3 · Tier A runaway code (new, from spike c).** The host rewrites every loop of a Tier A app's inline scripts at mount time, adding a
 time guard (`for`/`while`/`do`/`for … of`). Code the rewrite never saw cannot run: the CSP allows scripts **only by the hashes of the
 rewritten scripts** (no `'unsafe-inline'`, no `'unsafe-eval'`), so inline handlers, `javascript:` URLs, scripts added at run time,
-`eval` and `new Function` are refused by the browser (the spike's `'unsafe-inline'` policy is not the one P1 ships). **As built:** a small tokenizer (`engine/src/33_activity_guard.js`, no vendored parser)
+`eval` and `new Function` are refused by the browser (the spike's `'unsafe-inline'` policy is not the one P1 ships). **As built:** a small tokenizer (`engine/src/33_activity_guard.js`, now `src/runtimes/loop-guard.ts`; no vendored parser)
 that skips strings, template literals, comments and regular expressions and adds `G()&&(…)` to each loop condition; the scripts are
 then allowed by their hashes in the frame's CSP, so only the guarded scripts can run. After 1.5 s of uninterrupted running, the guard throws and the bootstrap reports `error {code:"runaway"}`; the host then shows
 *This activity stopped responding · Restart*. The lint also refuses obvious traps (`while(true)` without a `break`, huge array sizes,
@@ -357,7 +357,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 11. As built — P4b (`h5p@1`, 2026-11-04)
 
-* **The runtime** is the spike's (`engine/src/38_activity_h5p.js`, `window.NoemaH5P`: unzip, check, load, mount; the vendored player
+* **The runtime** is the spike's (`engine/src/38_activity_h5p.js`, `window.NoemaH5P`, now the typed runtime `src/runtimes/h5p`: unzip, check, load, mount; the vendored player
   `engine/vendor/h5p/3.8.2/`), unchanged in its security model: the item frame is opaque, offline, scripts by hash, inside the
   navigation-blocking wrapper; xAPI → `result` / `event` / `state` (docs/INTERACTIVE_H5P.md §3). It registers itself whenever it is
   in the engine (on by default; `NOEMA_CONFIG.activities['h5p@1'] = false` turns it off).
@@ -563,7 +563,7 @@ The sections above name Python twins of the validators and the engines' checks (
 `h5p_check.py`) and `engine/packcheck.js`. They are gone. The checks of a pack and its activities are one TypeScript source,
 `src/features/content` (the app's `NoemaCore.content`, the connector, the Gemini generator), and the Python tools and the skill's
 scripts run the same code in node through one bridge, `build/noema-tools.cjs` (`tools/noema_core.py`; the skill ships it as
-`scripts/noema-tools.cjs`). The runtimes' package checkers stay where they were (`engine/src/38_activity_h5p.js`,
+`scripts/noema-tools.cjs`). The runtimes' package checkers stay where they were (`engine/src/38_activity_h5p.js` — since moved to `src/runtimes/h5p/check.ts` —,
 `44_activity_wasm.js`, `45_activity_embed.js`) and the content checks call them. The JS = Python parity tests became JS tests
 against the golden outputs of the twins, captured from them before they were deleted (`tests/golden.cjs`,
 `tests/fixtures/parity/`).

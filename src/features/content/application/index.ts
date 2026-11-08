@@ -63,8 +63,8 @@ export type ContentChecks = ReturnType<typeof createContentChecks>;
     the Node tools) */
 export const contentChecks = (engines: EngineSource, host: RuntimeHost): ContentChecks => createContentChecks(envOf(engines, host));
 
-/** the runtimes' checkers of a root: the typed ones it hands in (src/runtimes RUNTIME_CHECKS) and those the runtimes still loaded
-    as scripts publish in a scope (the page, or the scope that ran them: NoemaH5P), read when a check runs */
+/** the runtimes' checkers of a root: the typed ones it hands in (src/runtimes RUNTIME_CHECKS: every root hands all three now, h5p@1
+    included), else one a page still publishes in a scope under the runtime's old global name (NoemaH5P), read when a check runs */
 export const scopeCheckers =
   (scope: () => Readonly<Record<string, unknown>>, typed: Partial<RuntimeCheckers>): RuntimeHost =>
   () => {

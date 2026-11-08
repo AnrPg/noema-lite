@@ -39,7 +39,7 @@ except noema_core.CoreUnavailable as e: print(f'ERROR {e}'); print('\n✗ the ch
 errs += ['activities: ' + x for x in ae]
 for w in aw: print('WARN activities: ' + w)
 # h5p@1: each .h5p file travels BESIDE the pack (in the .noema.zip as activities/<id>/item.h5p; the connector asks for it as for the
-# source files) — checked here like the app and the connector check it: sha256, bytes, the package rules (NoemaH5P.check)
+# source files) — checked here like the app and the connector check it: sha256, bytes, the package rules (the h5p@1 checks, src/runtimes/h5p)
 def _h5p_bytes(x):
     f = os.path.join(sdir, *str(x.get('entry') or '').split('/'))
     return open(f, 'rb').read() if os.path.isfile(f) else None

@@ -125,3 +125,27 @@ test('a failed load of the piece may be tried again', async () => {
   assert.ok(await lib.load('external-embed@1'));
   assert.equal(n, 2);
 });
+
+test('h5p@1 is on by default, its package rules are the allow-list of tools/h5p_allow.json and refuse what is not a package', async () => {
+  const lib = createRuntimeLibrary(RUNTIME_PLUGINS, () => RUNTIME_CHECKS);
+  assert.equal(lib.switchOf('h5p@1'), 'on');
+  assert.equal(lib.isOn('h5p@1', {}), true);
+  assert.equal(lib.isOn('h5p@1', { 'h5p@1': false }), false);
+  const allow = JSON.parse(fs.readFileSync(path.join(HERE, '..', '..', 'tools', 'h5p_allow.json'), 'utf8')) as {
+    content: Record<string, { versions: string[]; tested?: boolean }>;
+    libraries: unknown;
+    refuse: unknown;
+  };
+  const H = RUNTIME_CHECKS.h5p;
+  assert.deepEqual(H.ALLOW.content, Object.fromEntries(Object.entries(allow.content).map(([k, v]) => [k, v.versions])));
+  assert.deepEqual(
+    H.ALLOW.untested,
+    Object.keys(allow.content).filter(k => !allow.content[k]?.tested),
+  );
+  assert.deepEqual(H.ALLOW.libraries, allow.libraries);
+  assert.deepEqual(H.ALLOW.refuse, allow.refuse);
+  await assert.rejects(H.unzip(new TextEncoder().encode('not a zip at all')), /not a zip file/);
+  assert.deepEqual(H.check({}).errors, ['no h5p.json']);
+  const rt = (await lib.load('h5p@1')).create(host({}));
+  assert.equal(rt?.id, 'h5p@1');
+});
