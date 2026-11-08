@@ -761,7 +761,8 @@ export function createApp(win: Window = window): App {
   themes.onChange(() => {
     bar.ctx = shell.ctx();
     bar.data = settingsData();
-    if (win.customElements.get('noema-preview-bar')) bar.requestUpdate(); // (the first apply runs before the elements are defined)
+    if (win.customElements.get('noema-preview-bar')) win.customElements.upgrade(bar);
+    if (bar instanceof HTMLElement && 'requestUpdate' in bar) bar.requestUpdate(); // (the first apply runs before the elements are defined)
   });
 
   /* ---------- Me ▾ ---------- */
@@ -832,6 +833,7 @@ export function createApp(win: Window = window): App {
     document.body.classList.add('noema-booting');
     defineUi(win.customElements);
     defineShell(win.customElements);
+    win.customElements.upgrade(shell.preview); // the 5-minute try's bar was made before its element was defined
     const I18 = I();
     if (I18) await race(I18.ready, 4000).catch((e: unknown) => core.errors.report(e, { where: 'loader.i18n.ready', severity: 'warning' }));
     const services = uiServices();
@@ -846,6 +848,8 @@ export function createApp(win: Window = window): App {
     let contractsLoad: Promise<void> | null = null;
     const contractsIn = (): Promise<void> =>
       (contractsLoad ??= bridge.contracts.ready().catch(core.errors.catcher('loader.contracts', { severity: 'warning' })));
+    // a subject will open (a link, the last session): its contracts load beside the rest of the start
+    if (new URLSearchParams(location.search).get('subject') || N.jget<{ subj?: string }>(P + 'current', {}).subj) void contractsIn();
     const C = W().NoemaCloud;
     if (N.config['supabaseUrl'] && (N.config['supabaseKey'] || N.config['supabaseAnonKey']) && C)
       await C.init(N.config).catch(core.errors.catcher('loader.cloud.init', { severity: 'warning' }));

@@ -23,7 +23,7 @@ import {
   type DeviceKv,
 } from './kv.ts';
 import { h, type Kid } from './dom.ts';
-import { legacy, type AreaBoot, type NoemaAreas, type SubjectMeta } from './legacy.ts';
+import { legacy, type AreaBoot, type Convos, type NoemaAreas, type SubjectMeta } from './legacy.ts';
 import type { NoemaCoreBridge } from '../bridge.ts';
 
 export const VERSION = '1.0.0';
@@ -243,12 +243,13 @@ export function createCore(core: NoemaCoreBridge) {
       }
       return root;
     }
+    if (!(root instanceof Element || root instanceof DocumentFragment)) return root; // a comment (Lit's markers)
     const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT),
       list: Node[] = [];
     let n: Node | null;
     while ((n = w.nextNode())) list.push(n);
     for (const x of list) plainTree(x);
-    (root as Element).querySelectorAll('[title],[aria-label],[placeholder]').forEach(e => {
+    root.querySelectorAll('[title],[aria-label],[placeholder]').forEach(e => {
       for (const a of ['title', 'aria-label', 'placeholder']) {
         const v = e.getAttribute(a);
         if (v) {
@@ -562,7 +563,10 @@ export function createCore(core: NoemaCoreBridge) {
     node: null as unknown,
     backgroundEngine: false,
     switching: false,
-    convos: W().NoemaConvos ?? null,
+    /** engine/convos.js (it loads after the root) */
+    get convos(): Convos | null {
+      return W().NoemaConvos ?? null;
+    },
     preloadedConvos: [] as unknown[],
     boot: {} as AreaBoot,
     el: h,

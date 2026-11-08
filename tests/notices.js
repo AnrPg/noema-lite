@@ -40,7 +40,9 @@ const badge = (page, sel) => page.$eval(sel, b => b.style.display === 'none' ? 0
   ok(await until(() => page.$('#bellbtn')), 'the frame and its 🔔 are up');
   const sent = [];
   await page.exposeFunction('seen', t => sent.push(t));
-  const watch = () => page.evaluate(() => new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(x => x.classList?.contains('toast') && window.seen(x.textContent)))).observe(document.body, { childList: true, subtree: true }));
+  // the toasts are drawn in the kit's toaster (its shadow root): watch the page and every toaster in it
+  const watch = () => page.evaluate(() => { const mo = new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(x => x.classList?.contains('toast') && window.seen(x.querySelector?.('.msg')?.textContent ?? x.textContent))));
+    for (const r of [document.body, ...[...document.querySelectorAll('noema-toaster')].map(t => t.shadowRoot).filter(Boolean)]) mo.observe(r, { childList: true, subtree: true }); });
   await watch();
   ok(await arrive(page, 4, 'cn-four') === 4, 'the inbox applies 4 answers (links added) in one check');
   await wait(300);

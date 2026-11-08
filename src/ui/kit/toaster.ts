@@ -110,6 +110,8 @@ export class NoemaToaster extends NoemaElement {
       this.#drop(item);
     }, ms);
     this.requestUpdate();
+    // on screen at once: a burst that moves to the 🔔 within the same task still showed its first toasts
+    if (this.isConnected) this.performUpdate();
     return {
       remove: () => {
         this.#drop(item);
@@ -148,7 +150,7 @@ export class NoemaToaster extends NoemaElement {
           x => x.id,
           x =>
             html`<div class="t toast ${x.kind}" role=${x.kind === 'notice' ? 'status' : 'none'}>
-              ${x.kind === 'alert' ? icon('alert') : ''}<span>${x.text}</span>
+              ${x.kind === 'alert' ? icon('alert') : ''}<span class="msg">${x.text}</span>
               <button
                 class="ctl x"
                 type="button"
