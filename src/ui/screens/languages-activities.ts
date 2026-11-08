@@ -22,6 +22,8 @@
  *   noema-lang-sort      🧩 sorting a field's words into its groups, #/sort/<field> (languages/lang-drills.ts)
  *   noema-lang-parts     🔁 the principal parts of the words met, #/parts/<code> (languages/lang-drills.ts)
  *   noema-lang-peculiar  the peculiarities of a language, #/peculiar/<code> (languages/lang-peculiar.ts)
+ *   noema-lang-others    “In other languages” under a word; noema-lang-compare its table, #/cmp/c/<id> too (languages/lang-others.ts)
+ *   noema-lang-lesson    a lesson's page, #/lesson/<id>; noema-lang-run its run, noema-lang-result its end (languages/lang-lesson.ts)
  */
 import { defineRoutes, type RouteMatch } from '../router/routes.ts';
 import type { CoursePort } from './languages/course-port.ts';
@@ -37,6 +39,8 @@ import { NoemaLangTranslit, NoemaLangWord } from './languages/lang-word.ts';
 import { NoemaLangAspect } from './languages/lang-aspect.ts';
 import { NoemaLangParts, NoemaLangSort } from './languages/lang-drills.ts';
 import { NoemaLangPeculiar } from './languages/lang-peculiar.ts';
+import { NoemaLangLesson, NoemaLangResult, NoemaLangRun } from './languages/lang-lesson.ts';
+import { NoemaLangCompare, NoemaLangOthers } from './languages/lang-others.ts';
 
 export const AREA5_ROUTES = defineRoutes({
   languages: '/lang',
@@ -94,6 +98,11 @@ export const AREA5_ELEMENTS = {
   'noema-lang-sort': NoemaLangSort,
   'noema-lang-parts': NoemaLangParts,
   'noema-lang-peculiar': NoemaLangPeculiar,
+  'noema-lang-lesson': NoemaLangLesson,
+  'noema-lang-run': NoemaLangRun,
+  'noema-lang-result': NoemaLangResult,
+  'noema-lang-compare': NoemaLangCompare,
+  'noema-lang-others': NoemaLangOthers,
 } as const;
 
 declare global {
@@ -112,6 +121,11 @@ declare global {
     'noema-lang-sort': NoemaLangSort;
     'noema-lang-parts': NoemaLangParts;
     'noema-lang-peculiar': NoemaLangPeculiar;
+    'noema-lang-lesson': NoemaLangLesson;
+    'noema-lang-run': NoemaLangRun;
+    'noema-lang-result': NoemaLangResult;
+    'noema-lang-compare': NoemaLangCompare;
+    'noema-lang-others': NoemaLangOthers;
   }
 }
 

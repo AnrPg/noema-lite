@@ -70,6 +70,14 @@ export class NoemaLangWord extends NoemaScreen {
     this.style.display = 'contents';
   }
 
+  override willUpdate(): void {
+    // what 🔊 says (engine/lang/98_speech.js: the stored text, not the faded display)
+    if (this.text.trim() && this.code) {
+      this.dataset['say'] = this.text.normalize('NFC');
+      this.dataset['sayl'] = this.code;
+    }
+  }
+
   /** May its words open their cards here? */
   #linkable(): boolean {
     if (this.plain || this.closest(PLAIN)) return false;

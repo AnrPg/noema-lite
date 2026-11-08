@@ -323,6 +323,25 @@ describe('⫴ parallel lanes', () => {
       back: () => undefined,
       inFrame: () => false,
       hint: (t: string) => document.createTextNode(t),
+      lessonPage: () => null,
+      compare: () => [
+        {
+          code: 'de',
+          flag: 'DE',
+          label: 'German',
+          absent: null,
+          words: [{ lemma: 'Lehrer', lex: 'de.lehrer' }],
+          params: 'der',
+          example: null,
+        },
+      ],
+      others: () => ({ open: false, bridges: null, fullHref: '#/cmp/c/x' }),
+      setOthersOpen: (open: boolean) => {
+        log.push('others ' + String(open));
+      },
+      stopRun: (n: string) => {
+        log.push('stop ' + n);
+      },
       fold: (x: string) => x.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase(),
       aspect: (code: string, aspect: string): AspectPage | null =>
         aspect === 'nope'

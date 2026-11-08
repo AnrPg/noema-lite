@@ -32,36 +32,34 @@ function lessonHead(nid) {
     frame: !!FR.on,
   };
 }
+/** A lesson's page below its head (course-port.ts LessonPage; src/ui/screens/languages/lang-lesson.ts). */
+function lessonPage(nid) {
+  const n = UI.C.nodes[nid]; if (!n || n.kind !== 'lesson') return null;
+  const langs = lessonLangs(nid); if (!langs.length) return null;
+  const c = langs.includes(UI.lang) ? UI.lang : langs[0], X = LX(c), k = N.known(UI.C, UI.L, c);
+  const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(N.nodeStates(UI.C, UI.L, x)[nid]));
+  const theoryOpen = !can.includes(c) || ladderOf(nid, [c]).steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
+  const fns = N.lessonFunctions(UI.C, c, nid), pick = x => { UI.lang = x; UI.prefs.lang = x; save(); render(); };
+  const theory = theoryOpen ? { overview: fns.includes('fn.overview') ? typologyCard() : null, cards: [...fns].sort((x, y) => aspectRank(x) - aspectRank(y)).map(f => grammarCard(c, f, { compact: true, onPick: pick })) } : null;
+  // the same step in the other languages: their own extra points (D10)
+  const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length)
+    .map(([x, f]) => ({ code: x, flag: info(x).flag, fns: f.map(fid => ({ id: fid, title: UI.C.functions[fid]?.title || fid })) }));
+  let words = null;
+  if (n.concepts.length || (X.byNode[nid] || []).length)
+    words = { n: LNUM(n.concepts.length), tiles: [...n.concepts.map(cid => conceptTile(c, { cid }, k)), ...(X.byNode[nid] || []).filter(id => !(X.lex[id].senses || []).length).map(id => conceptTile(c, { lex: id }, k))] };
+  return { lang: courseLang(c), rail: railModel(null, c, pick), theory, extra, words };
+}
+/** #/lesson/<id>: noema-lang-lesson (its head, the theory once the words are done, the other languages' points, its words). */
 VIEWS.lesson = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n || n.kind !== 'lesson') return VIEWS.home(v);
   const langs = lessonLangs(nid); if (!langs.length) return VIEWS.home(v);
-  const c = langs.includes(UI.lang) ? UI.lang : langs[0], X = LX(c), k = N.known(UI.C, UI.L, c);
-  const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(N.nodeStates(UI.C, UI.L, x)[nid]));
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))));
-  const rail = flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); });
-  if (rail) v.append(h('div', { class: 'row' }, rail));
-  screenPart(v, 'lang-lesson', 'lx-screen lx-lessonhead', { node: nid });
+  const c = langs.includes(UI.lang) ? UI.lang : langs[0];
   if (FR.on) {   // the frame: one primary action on the page, Deepen and Aa· wait in its ⋮
     const dn = deepenCount(nid, c);
     if (dn) FR.viewActs.push({ label: LT('lang.deep.deepenN', { n: dn }), icon: 'gym', run: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) });
     if (hasTranslit()) { const on = UI.prefs.translit !== false; FR.viewActs.push({ label: LT(on ? 'lang.translit.hide' : 'lang.translit.show'), run: () => setTranslit(!on) }); }
   }
-  const theoryOpen = !can.includes(c) || ladderOf(nid, [c]).steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
-  const fns = N.lessonFunctions(UI.C, c, nid);
-  if (theoryOpen) {
-  if (fns.includes('fn.overview')) v.append(typologyCard());
-  v.append(h('h2', { class: 'lx-h2' }, '📖 ' + LT('lang.lesson.grammarIn', { lang: info(c).name })), ...[...fns].sort((x, y) => aspectRank(x) - aspectRank(y)).map(f => grammarCard(c, f, { compact: true, onPick: x => { UI.lang = x; UI.prefs.lang = x; save(); render(); } })));
-  }
-  // the same step in the other languages: their own extra points (D10)
-  const extra = langs.filter(x => x !== c).map(x => [x, N.lessonFunctions(UI.C, x, nid).filter(f => !fns.includes(f))]).filter(([, f]) => f.length);
-  if (extra.length) v.append(h('div', { class: 'lx-callout k-key' }, h('b', {}, '🔗 ' + LT('lang.lesson.othersLearn') + ' '),
-    h('ul', { class: 'lx-list' }, ...extra.map(([x, f]) => h('li', {}, info(x).flag, ' ', ...f.map(fid => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/${encodeURIComponent(fid)}/${x}`) }, UI.C.functions[fid]?.title || fid)))))));
-  if (n.concepts.length || (X.byNode[nid] || []).length) {
-    const grid = h('div', { class: 'lx-cgrid' });
-    for (const cid of n.concepts) grid.append(conceptTile(c, { cid }, k));
-    for (const id of (X.byNode[nid] || []).filter(id => !(X.lex[id].senses || []).length)) grid.append(conceptTile(c, { lex: id }, k));
-    v.append(h('h2', { class: 'lx-h2' }, '🔤 ' + LT('lang.lanes.sec.words') + ' ', h('span', { class: 'tiny' }, LNUM(n.concepts.length))), grid);
-  }
+  v.append(screenEl('noema-lang-lesson', { node: nid }));
 };
 
 
@@ -97,13 +95,14 @@ function runLesson(nid, langs, { checkOnly = false, step = null } = {}) {
 
 function runQueue(queue, { nid, langs, title, step }) {
   metNew.clear();   // the 🆕 words of this run, listed at the end (D20)
-  const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
-  m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ ' + LT('lang.sess.stop')), h('b', { class: 'tiny' }, title), translitToggle(), bar), stage));
+  const m = $('.lx-main'), run = screenEl('noema-lang-run', { node: nid, heading: title }), stage = run.stage;   // src/ui/screens/languages/lang-lesson.ts
+  m.replaceChildren(run); run.drawNow?.();
+  const bar = { set: pct => { run.pct = pct; } };
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
   const day = today();
   const nextBtn = (label = LT('lang.drill.next') + ' ' + arrowOn()) => { const b = h('button', { class: 'btn primary lx-next' }, label); b.onclick = next; stage.append(h('div', { class: 'row lx-nextrow' }, b)); setTimeout(() => b.focus(), 30); };
   function next() {
-    bar.firstChild.style.width = Math.round(i / Math.max(total, 1) * 100) + '%';
+    bar.set(i / Math.max(total, 1) * 100);
     const a = queue.shift(); if (!a) return finish();
     i++; stage.innerHTML = '';
     if (a.kind === 'screen') {
@@ -151,14 +150,18 @@ function runQueue(queue, { nid, langs, title, step }) {
   }
   function finish() {
     for (const [c, R] of Object.entries(results)) N.recordCheck(UI.C, UI.L, c, nid, R.n ? R.c / R.n : 0, day);
-    save(true); bar.firstChild.style.width = '100%'; stage.innerHTML = '';
-    const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)[nid]]));
-    stage.append(h('div', { class: 'lx-result' }, h('h2', {}, Object.keys(results).length ? '🏁 ' + LT('lang.lesson.checkDone') : '🎉 ' + LT('lang.lesson.wellDone')),
-      h('p', {}, LT('lang.lesson.stats', { nNew: stats.introduced, right: stats.right, wrong: stats.wrong })),
-      Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).label, ': ' + LT('lang.lesson.score', { c: R.c, n: R.n, pct: Math.round(R.c / R.n * 100) }) + ' — ', !['passed', 'known', 'mastered'].includes(st[c]) ? LT('lang.lesson.notYet') : R.c / R.n >= N.PASS ? '✔ ' + LT('lang.state.passed') : '✔ ' + LT('lang.lesson.passedBefore', { best: Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100) })))) : null,
-      langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, LT('lang.lesson.moreWaiting')) : null,
-      newWordsList(),
-      h('div', { class: 'row' }, step !== 'tp' && ladderOf(nid, langs).next ? continueButton(nid, langs) : qaNextLessonButton(nid, langs), h('button', { class: 'btn' + (qaNextLessonButton(nid, langs) ? '' : ' primary'), onclick: () => go('#/lesson/' + nid) }, LT('lang.lesson.back')), h('button', { class: 'btn', onclick: () => go('#/') }, LT('lang.home.map')))));
+    save(true); bar.set(100); stage.innerHTML = '';
+    const st = Object.fromEntries(langs.map(c => [c, N.nodeStates(UI.C, UI.L, c)[nid]])), nextL = qaNextLessonButton(nid, langs), more = step !== 'tp' && ladderOf(nid, langs).next;
+    const rows = Object.entries(results).map(([c, R]) => ({ code: c, flag: info(c).flag, label: info(c).label,
+      text: LT('lang.lesson.score', { c: R.c, n: R.n, pct: Math.round(R.c / R.n * 100) }) + ' — ' + (!['passed', 'known', 'mastered'].includes(st[c]) ? LT('lang.lesson.notYet') : R.c / R.n >= N.PASS ? '✔ ' + LT('lang.state.passed') : '✔ ' + LT('lang.lesson.passedBefore', { best: Math.round((UI.L.langs[c]?.checks?.[nid]?.best ?? 1) * 100) })) }));
+    const L = more ? ladderOf(nid, langs) : null;
+    const actions = [
+      more ? { label: '▶ ' + LT('lang.step.continue', { step: stepTitle(L.next) }), primary: true, cls: 'lx-continue', step: L.next, run: () => runLesson(nid, langs) }
+        : nextL ? { label: nextL.textContent, primary: true, cls: 'lx-nextlesson', run: () => nextL.click() } : null,
+      { label: LT('lang.lesson.back'), primary: !more && !nextL, run: () => go('#/lesson/' + nid) },
+      { label: LT('lang.home.map'), primary: false, run: () => go('#/') }].filter(Boolean);
+    stage.append(screenEl('noema-lang-result', { model: { checked: Object.keys(results).length > 0, introduced: stats.introduced, right: stats.right, wrong: stats.wrong, rows,
+      moreWaiting: langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length), newWords: newWordsList(), actions } }));
   }
   document.onkeydown = e => {
     if (!$('.lx-session')) { document.onkeydown = null; return; }

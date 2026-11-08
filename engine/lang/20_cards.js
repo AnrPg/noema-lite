@@ -42,13 +42,7 @@ VIEWS.c = (v, r) => {
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, info(UI.lang).flag + ' ' + LT('lang.card.noWordFor', { lang: info(UI.lang).name }) + ' '), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, LT('lang.card.instead') + ' ', h('b', {}, X.absent[cid].use)) : null));
     else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, '⏳ ' + LT('lang.card.unwrittenIn', { lang: info(UI.lang).name })));
     for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
-    if (UI.C.languages.length > 1) {   // the same meaning in the other languages: folded under the word (the full table is one link away)
-      const det = h('details', { class: 'lx-others', open: !!UI.prefs.compare });
-      det.addEventListener('toggle', () => { UI.prefs.compare = det.open; save(); });
-      det.append(h('summary', {}, LT('lang.hub.otherLangs')), compareTable(cid), polyConceptStrip(cid),   // + the bridges among its words (P6)
-        h('a', { class: 'lx-fulltable', href: FR.on ? toHash('#/cmp/c/' + cid) : '#/cmp/c/' + cid }, LT('lang.hub.fullTable') + ' →'));
-      v.append(det);
-    }
+    if (UI.C.languages.length > 1) v.append(screenEl('noema-lang-others', { concept: cid }));   // the same meaning in the other languages: folded under the word (src/ui/screens/languages/lang-others.ts)
     if (node) {   // on to the next word of the same lesson, or back to the lesson after the last
       const order = node.concepts || [], at = order.indexOf(cid), nx = at >= 0 ? order[at + 1] : null;
       v.append(h('div', { class: 'lx-nextword' }, nx
@@ -60,17 +54,18 @@ VIEWS.c = (v, r) => {
 };
 VIEWS.w = (v, r) => { const c = r.arg, lid = r.arg2; if (!UI.C.lang[c]?.lex[lid]) return VIEWS.home(v); v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.back() }, arrowBack() + ' ' + LT('lang.card.back'))), wordCardView(c, lid)); };
 
-function compareTable(cid) {
-  const rows = UI.C.languages.map(c => {
-    const X = LX(c), lids = X.byConcept[cid] || [];
-    const first = lids[0] && N.wordCard(UI.C, UI.L, c, lids[0]);
-    return h('tr', {}, h('th', {}, info(c).flag + ' ' + info(c).label),
-      h('td', {}, X.absent[cid] ? h('i', {}, '— ', X.absent[cid].use || LT('lang.card.noWordShort')) : lids.map((id, i) => [i ? h('br') : null, word(c, X.lex[id].lemma, { lex: X.lex[id] })])),
-      h('td', { class: 'tiny' }, first ? (first.params?.length ? paramsLine(c, lids[0]) : first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ')) : ''),
-      h('td', {}, first?.examples[0] ? h('span', {}, word(c, first.examples[0].text, { sub: false }), h('div', { class: 'tiny' }, first.examples[0].tr)) : ''));
+/** A meaning in every language studied (course-port.ts CompareRow). */
+function compareRows(cid) {
+  return UI.C.languages.map(c => {
+    const X = LX(c), lids = X.byConcept[cid] || [], first = lids[0] && N.wordCard(UI.C, UI.L, c, lids[0]);
+    return { code: c, flag: info(c).flag, label: info(c).label, absent: X.absent[cid] ? X.absent[cid].use || LT('lang.card.noWordShort') : null,
+      words: lids.map(id => ({ lemma: X.lex[id].lemma, lex: id })),
+      params: first ? (first.params?.length ? paramsLine(c, lids[0]) : first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ')) || '' : '',
+      example: first?.examples[0] ? { text: first.examples[0].text, tr: first.examples[0].tr || '' } : null };
   });
-  return h('div', { class: 'lx-compare lx-wordtable' }, h('table', {}, h('tbody', {}, ...rows)));   // narrow: a card per language (80_poly.css)
 }
+/** The table of a meaning in every language studied: noema-lang-compare (src/ui/screens/languages/lang-others.ts). */
+const compareTable = cid => screenEl('noema-lang-compare', { concept: cid });
 
 const CONNOTATION = { positive: '🙂', negative: '🙁', neutral: '😐', mixed: '🤔' };   // + lang.card.conn.<connotation>
 /** A code of a word profile in words of the explanation language (a value the catalog does not know stays as the course wrote it):

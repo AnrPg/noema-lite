@@ -99,11 +99,6 @@ const hasTranslit = () => activeLangs().some(c => LX(c).language.script !== 'Lat
 function setTranslit(on) {
   UI.prefs.translit = on; UI.prefs.pinyin = on; save(); document.body.classList.toggle('lx-nohelp', !on); if (!$('.lx-session')) render();
 }
-/** The same switch in a running lesson: noema-lang-translit (src/ui/screens/languages/lang-word.ts). */
-function translitToggle() {
-  if (!hasTranslit()) return null;
-  const b = document.createElement('noema-lang-translit'); b.port = COURSE_PORT; return b;
-}
 /** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it;
     its words open their cards — noema-lang-word (src/ui/screens/languages/lang-word.ts, answered by COURSE_PORT.word). It holds
     the plain text until it is drawn. */

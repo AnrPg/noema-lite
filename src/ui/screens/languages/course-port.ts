@@ -315,7 +315,61 @@ export interface PeculiarPage {
   }[];
 }
 
+/** A lesson's page below its head; the course's own parts (grammar cards, the overview, word tiles) come as nodes. */
+export interface LessonPage {
+  readonly lang: CourseLang;
+  readonly rail: RailModel | null;
+  /** D22: the theory, once the words are done (null: not yet) */
+  readonly theory: { readonly overview: Node | null; readonly cards: readonly Node[] } | null;
+  /** the points the other languages learn at the same step (D10) */
+  readonly extra: readonly { readonly code: string; readonly flag: string; readonly fns: readonly PointTile[] }[];
+  readonly words: { readonly n: string; readonly tiles: readonly Node[] } | null;
+}
+
+/** The end of a lesson's run. */
+export interface RunResult {
+  /** a check was taken */
+  readonly checked: boolean;
+  readonly introduced: number;
+  readonly right: number;
+  readonly wrong: number;
+  /** each language's check, in words */
+  readonly rows: readonly { readonly code: string; readonly flag: string; readonly label: string; readonly text: string }[];
+  readonly moreWaiting: boolean;
+  /** the words met before they were taught (D20), as the course lists them */
+  readonly newWords: Node | null;
+  readonly actions: readonly {
+    readonly label: string;
+    readonly primary: boolean;
+    readonly cls?: string;
+    readonly step?: string;
+    readonly run: () => void;
+  }[];
+}
+
+/** A meaning in one language of the course: its words, the parameters of the first, an example. */
+export interface CompareRow {
+  readonly code: string;
+  readonly flag: string;
+  readonly label: string;
+  /** the language has no word for it: what it uses instead (null: it has words) */
+  readonly absent: string | null;
+  readonly words: readonly { readonly lemma: string; readonly lex: string }[];
+  /** the first word's parameters, as the course draws them */
+  readonly params: Node | string;
+  readonly example: { readonly text: string; readonly tr: string } | null;
+}
+
 export interface CoursePort extends WordPort {
+  /** a meaning in every language studied */
+  compare(concept: string): readonly CompareRow[];
+  /** "In other languages" under a word (null: one language only) */
+  others(concept: string): { readonly open: boolean; readonly bridges: Node | null; readonly fullHref: string } | null;
+  setOthersOpen(open: boolean): void;
+  /** a lesson's page below its head (null: not a lesson of the languages shown) */
+  lessonPage(node: string): LessonPage | null;
+  /** ✕ stops a running lesson: back to its page */
+  stopRun(node: string): void;
   /** the peculiarities of a language (null: not a language of the course) */
   peculiar(code: string): PeculiarPage | null;
   setPeculiarFilter(f: 'all' | 'new' | 'familiar'): void;
