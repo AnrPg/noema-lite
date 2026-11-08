@@ -6,7 +6,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"; T="${TMPDIR:-/tmp}/noema-e2e"
 [ -d "$ROOT/node_modules/esbuild" ] || (cd "$ROOT" && npm ci --no-audit --no-fund)
 (cd "$ROOT" && python3 tools/build.py --no-validate >/dev/null)
 export NOEMA_BUILT=1   # tests/built.js: every suite finds the files built (no suite builds again)
-rm -rf "$T"; mkdir -p "$T"; (cd "$ROOT" && tar --exclude=.git --exclude=dist --exclude=data --exclude=node_modules -cf - .) | (cd "$T" && tar xf -)
+rm -rf "$T"; mkdir -p "$T"; (cd "$ROOT" && tar --exclude=.git --exclude=.claude --exclude=dist --exclude=data --exclude=node_modules -cf - .) | (cd "$T" && tar xf -)
 ln -s "$ROOT/node_modules" "$T/node_modules"   # the copy builds with the repo's own tools (esbuild)
 cp -r "$T/tests/fixtures/demo-physics" "$T/library/subjects/demo-physics"
 mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/accounts/anr/packs/secret-notes"
