@@ -518,7 +518,7 @@ async function simSpec(p, ctx, E) {
     const a = JSON.parse(JSON.stringify(ACT.ITEMS['rc-lowpass'])); a.id = 'slow';
     a.spec = { format: 'noema.sim-spec/v1', engine: 'slow-test@1', model: {}, params: [{ id: 'tau', kind: 'number', label: 'resistance', min: 0, max: 10, default: 1 }], outputs: [{ id: 'vEnd', kind: 'scalar' }], readouts: [{ label: 'voltage', expr: 'vEnd' }] };
     const box = document.createElement('div'); document.body.append(box); const msgs = [];
-    const port = ACT.loadedRuntime('sim-spec@1').mount(box, { act: a, init: { locale: 'en', stateVersion: 1 }, onMessage: m => msgs.push(m), onFail: c => msgs.push({ fail: c }) });
+    const port = (await ACT.runtime('sim-spec@1')).mount(box, { act: a, init: { locale: 'en', stateVersion: 1 }, onMessage: m => msgs.push(m), onFail: c => msgs.push({ fail: c }) });
     const until = async f => { for (let i = 0; i < 60; i++) { if (f()) return true; await new Promise(r => setTimeout(r, 50)); } return false; };
     const first = await until(() => port.values()?.vEnd === 1);
     const inp = box.querySelector('input[data-param="tau"]'); inp.value = '7'; inp.dispatchEvent(new Event('input', { bubbles: true })); inp.dispatchEvent(new Event('change', { bubbles: true }));

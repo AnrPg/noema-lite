@@ -25,6 +25,8 @@ export interface RuntimeDescriptor {
 
 const LIST: readonly (readonly [`${string}@${number}`, RuntimeSwitch, (readonly string[])?, RuntimeAvailability?])[] = [
   ['external-embed@1', 'opt-in'],
+  ['sim-spec@1', 'on'],
+  ['html-app@1', 'on'],
   ['wasm-module@1', 'on', ['wasm@1']],
   // Python needs the site's service worker and cache, Workers and WebAssembly: never file:// or the one-file bundle
   ['py-module@1', 'on', [], { where: 'website', note: 'engine.act.py.noHere' }],

@@ -4,6 +4,7 @@
    it needs from the app (words, the protocol's envelope, the learner's settings, the deployment's switches) comes in a RuntimeHost
    the core hands it when the runtime is created. */
 import type { PluginManifest } from '../plugins/index.ts';
+import type { ComputeHost } from './compute.ts';
 
 /** a message of the activity protocol (ACTP.out in engine/src/32_activities.js): what the core reads from a runtime */
 export interface ProtocolMessage {
@@ -13,6 +14,19 @@ export interface ProtocolMessage {
   readonly payload: Readonly<Record<string, unknown>>;
   readonly [extra: string]: unknown;
 }
+
+/** what the protocol's anti-corruption layer (ACTP.check of the core) says of a message a frame sent */
+export type ProtocolCheck =
+  | {
+      readonly ok: true;
+      readonly msg: {
+        readonly type: string;
+        readonly id?: string;
+        readonly re?: string;
+        readonly payload: Readonly<Record<string, unknown>>;
+      };
+    }
+  | { readonly ok: false; readonly why: string; readonly ignore?: boolean; readonly version?: boolean };
 
 /** what a runtime gets from the app (the activity core builds it) */
 export interface RuntimeHost {
@@ -30,6 +44,12 @@ export interface RuntimeHost {
   warn(...what: readonly unknown[]): void;
   /** the time now (ms) */
   now(): number;
+  /** a message a frame sent, checked by the protocol's rules (shape, size, the payload of its type) */
+  check(raw: unknown): ProtocolCheck;
+  /** the URL of one of the app's own files under engine/ (the H5P player), as the page reaches it */
+  asset(path: string): string;
+  /** the engines, the expression language, the content checks of sim-spec@1 and the pack's parts (compute.ts) */
+  readonly compute: ComputeHost;
   /** the open pack's activities items by id (ACT.ITEMS) */
   items(): Readonly<Record<string, unknown>>;
   /** the expression language (NoemaCore.engines.expr), or null where it is not loaded */

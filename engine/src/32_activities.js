@@ -2,8 +2,8 @@
    A pack may carry activities (pack.activities, format noema.activities/v1): mini-apps, minigames and simulations. They appear as a
    theory block { t: 'interactive', activity } (an explorer, not graded) or as an exercise { type: 'sim', activity, task, grade, hints }.
    This file is the trusted core (ports & adapters): it knows only the RuntimeAdapter port, never a runtime by name.
-     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (src/runtimes: loaded by runtime(id); html-app@1 in 34_activity_html.js, sim-spec@1 in
-                                                                       35_activity_sim.js; more in P3–P4). autoHeight: it renders in the
+     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (src/runtimes: loaded by runtime(id); html-app@1 and sim-spec@1 in
+                                                                       src/runtimes; more in P3–P4). autoHeight: it renders in the
                                                                        app's own DOM and takes the height it needs (no frame)
      registerEngine({ id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? })
                                                                        an engine of sim-spec@1 (formula@1 built in; the circuit engine in P3)
@@ -34,7 +34,7 @@ const ACTP = (() => {
     // py-module@1 (src/runtimes/py-module): the runner's own messages, checked in full by its pyCheck before they get here; the core only notes them
     'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
     'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
-    // html-app@1: a mini-app asks for an engine of the library (34_activity_html.js engineBridge checks the rest: declared, the spec, the inputs)
+    // html-app@1: a mini-app asks for an engine of the library (src/runtimes/html-app/bridge.ts checks the rest: declared, the spec, the inputs)
     'engine:check': p => str(p.engine, 40) && isObj(p.spec),
     'engine:run': p => str(p.engine, 40) && isObj(p.spec) && (p.inputs == null || isObj(p.inputs)) && (p.seed == null || (isInt(p.seed) && p.seed >= 0 && p.seed <= 4294967295)),
     // html-app@1: several engines of the library in one spec (docs/INTERACTIVE.md §12.8: {consts?, derived?, parts, couple?}), noema.sim(spec).run(inputs)
@@ -110,10 +110,20 @@ const ACT = (() => {
     t: (k, v) => tE(k, v), message: (type, payload, extra) => ACTP.out(type, payload, extra),
     setting: k => (S.settings ? S.settings[k] : undefined), setSetting: (k, v) => { if (!S.settings) return; S.settings[k] = v; if (typeof save === 'function') save(); },
     flags: () => flags(), warn: (...w) => console.warn(...w), now: () => Date.now(),
+    check: raw => ACTP.check(raw),
+    // the engines (this core's and the library's), the expression language, the content checks and the pack's parts (src/runtimes/compute.ts)
+    compute: Object.freeze({
+      engine: id => engine(id), engines: () => engines(), library: () => [...(LIBR()?.catalog?.LIBRARY || [])],
+      compile: src => LIBR().expr.compile(src), content: () => window.NoemaCore?.content || null, parts: () => PARTS,
+    }),
     items: () => ITEMS, expr: () => LIBR()?.expr || null, loadedRuntime: id => RUNTIMES[id] || null,
     config: k => window.NOEMA_CONFIG?.[k], num: (n, o) => window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n, o) : o?.maximumFractionDigits != null ? n.toFixed(o.maximumFractionDigits) : String(n),
-    simView: (box, c, o) => (typeof ACT !== 'undefined' && ACT.simView ? ACT.simView(box, c, o) : null),
+    simView: (box, c, o) => (RUNTIMES[SIM] ? RUNTIMES[SIM].view(box, c, o) : null),   // loaded before the item mounts (needs)
   });
+  const SIM = 'sim-spec@1';
+  /** the typed runtimes an item needs before it mounts: its own, and the sim-spec view that the runtimes built on it draw with
+      (an item with its own spec: py-module@1, wasm-module@1) */
+  const needs = a => [...new Set([a.runtime, ...(a.runtime !== SIM && a.spec && typeof a.spec === 'object' ? [SIM] : [])])];
   const pendingRt = {};
   /** a runtime ready to mount: one registered here, or a typed one loaded now (once) and made for this app → Promise<runtime | null> */
   function runtime(id) {
@@ -127,6 +137,7 @@ const ACT = (() => {
   /** an engine of sim-spec@1: { id: 'name@N', check?(spec) → [problems], create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? }
       (workerSource: the engine's code as text, defining self.noemaEngine = { create }; it then runs in a Worker — docs/INTERACTIVE.md §12.6) */
   function registerEngine(def) { if (def && typeof def.id === 'string' && /^[a-z][a-z0-9-]*@\d+$/.test(def.id) && typeof def.create === 'function') ENGINES[def.id] = def; }
+  registerEngine({ id: 'formula@1', check: () => [], create: () => ({ run: () => ({}) }) });   // sim-spec@1's built-in engine: the derived values are the model
   /** the engine library (src/engines, NoemaCore.engines): its engines are known at once and loaded when an activity needs one */
   const LIBR = () => window.NoemaCore?.engines || null;
   /** an engine ready to run: one registered here, or one of the library once it is loaded (null before) */
@@ -268,13 +279,15 @@ const ACT = (() => {
         the runtime's own failure (its engine is missing) */
     function start() {
       if (sess.destroyed) return;
-      const want = unloaded(a), rts = owners(a);
-      if (!want.length && !rts.length && own(a.runtime)) return begin();
+      const want = unloaded(a);
+      // the typed runtimes it needs: its own, the sim-spec view it draws with, the owners of the engines it uses (wasm-module@1: wasm@1)
+      const rts = [...new Set([...needs(a), ...owners(a)])].filter(id => !own(id));
+      if (!want.length && !rts.length) return begin();
       teardown(); box.classList.remove('act-fallback'); note.textContent = tE('engine.act.loading');
       const tok = sess.loading = {};
-      Promise.all([want.length ? LIBR().load(want) : null, runtime(a.runtime), ...rts.map(runtime)]).then(([, rt]) => {
+      Promise.all([want.length ? LIBR().load(want) : null, ...rts.map(runtime)]).then(([, ...rt]) => {
         if (sess.loading !== tok || sess.destroyed) return;
-        if (!rt) { sess.loading = null; return stop(tE('engine.act.failed')); }
+        if (!own(a.runtime) || rt.some(x => !x)) { sess.loading = null; return stop(tE('engine.act.failed')); }
         begin();
       });
     }
@@ -313,7 +326,7 @@ const ACT = (() => {
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       if (!waiting) LIVE.push(sess);
-      // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, 34_activity_html.js)
+      // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, src/runtimes/loop-guard.ts)
       pingT = setInterval(() => {
         if (!root.isConnected) return destroy();
         if (!sess.port) return;

@@ -986,7 +986,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
   * **Plain chrome**: titles, summaries and buttons drop their pictographs, as main's frame does (`Noema.plain`); kept: flags,
     foreign words, lesson text, the pictures of words and exercises, 🆕 marks, arrows and ✓. `lang` / `dir` on every foreign span,
     the keyboard of every exercise and the 390 px layout are unchanged (`tests/lang_frame.js` H checks them with four characters).
-* **Languages to study (D21, 2026-10-11)** — `engine/app/languages.js` (`Noema.langStudy`: `studyChooser`, `langChosen`, `studyOffered`),
+* **Languages to study (D21, 2026-10-11)** — `src/features/languages` (`NoemaCore.languages`: `study`, `setStudy`, `chosen`, `offered`), the chooser `src/ui/screens/languages/study-chooser.ts` (docs/ARCHITECTURE.md §6.4),
   `engine/lang/00_base.js` (`studyChoice`, `toggleStudy`, `restudy`), `langcore.studyLangs` / `course(data, {languages})`; tested by `tests/lang_select.js`.
   * **The question** “Which languages do you want to study?” lists every language the app offers — the union of the library's courses
     (`REG.languages`, with the languages packages added) and the learner's own (`a:langcourse:*`) — each with its flag, its own name

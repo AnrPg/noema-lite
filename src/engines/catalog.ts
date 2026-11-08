@@ -23,7 +23,7 @@ const E = (
 ): CatalogEntry => Object.freeze({ id, layer, plugin, file, slug, words: Object.freeze(words), ...(extra || {}) });
 const CATALOG = Object.freeze([
   // the library: general engines, each for a whole family of subjects
-  E('formula@1', 'library', false, 'engine/src/35_activity_sim.js', 'formula', [
+  E('formula@1', 'library', false, 'engine/src/32_activities.js', 'formula', [
     'formula',
     'equation',
     'function',
@@ -1002,7 +1002,7 @@ const CATALOG = Object.freeze([
     'html-app@1',
     'free',
     false,
-    'engine/src/34_activity_html.js',
+    'src/runtimes/html-app/runtime.ts',
     'htmlapp',
     [
       'game',

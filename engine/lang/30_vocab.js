@@ -138,18 +138,18 @@ function nativeAsk() {
     home until the learner answers (until then the course teaches what it taught before); none: the learner chose languages this
     course does not have — it asks for its own and shows nothing else. */
 function studyAsk(none = false) {
-  const S = window.Noema?.langStudy;
-  if (!S?.chooser || (!none && (studyAnswer() || offeredLangs().length < 2))) return null;
-  return h('div', { class: 'lx-card lx-study-ask', 'data-ask': 'study' }, S.chooser(UI.acc, { course: UI.id, none, onDone: () => restudy() }));
+  if (!none && (studyAnswer() || offeredLangs().length < 2)) return null;
+  const box = h('div', { class: 'lx-card lx-study-ask', 'data-ask': 'study' });
+  screenPart(box, 'study-chooser', 'lx-studypart', { course: UI.id, none, onDone: () => restudy() });
+  return box;
 }
 /** The same question at any time (⚙️ Settings, the frame's ⋮): in a sheet inside the frame, else over the page. */
 function studySheet() {
-  const S = window.Noema?.langStudy; if (!S?.chooser) return;
-  if (FR.on && window.NoemaShell?.sheet) return NoemaShell.sheet(LT('lang.study.menu'), (body, close) => body.append(S.chooser(UI.acc, { course: UI.id, onDone: () => { close(); restudy(); } })));
+  if (FR.on && window.NoemaShell?.sheet) return NoemaShell.sheet(LT('lang.study.menu'), (body, close) => screenPart(body, 'study-chooser', 'lx-studypart', { course: UI.id, onDone: () => { close(); restudy(); } }));
   document.querySelector('.lx-pop')?.remove();
-  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } },
-    h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, LT('lang.study.menu')), h('button', { class: 'btn ghost small', 'aria-label': LT('lang.study.close'), onclick: () => pop.remove() }, '✕')),
-      S.chooser(UI.acc, { course: UI.id, onDone: () => { pop.remove(); restudy(); } })));
+  const box = h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, LT('lang.study.menu')), h('button', { class: 'btn ghost small', 'aria-label': LT('lang.study.close'), onclick: () => pop.remove() }, '✕')));
+  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } }, box);
+  screenPart(box, 'study-chooser', 'lx-studypart', { course: UI.id, onDone: () => { pop.remove(); restudy(); } });
   document.body.append(pop);
 }
 /** D19: the language of the explanations — automatic (the native language's, else the UI's, when its facade is on) or the learner's choice (settings.speaker). */
@@ -161,28 +161,26 @@ function speakerPicker() {
 }
 const PEC_AREAS = ['script', 'orthography', 'phonology', 'morphology', 'syntax', 'lexicon', 'semantics', 'pragmatics', 'culture', 'numbers'];   // lang.pec.area.<area>
 /** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
-VIEWS.peculiar = (v, r) => {
-  const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, W = UI.C.data.world;
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, arrowBack() + ' ' + LT('lang.card.back'))),
-    h('h1', {}, '📚 ' + LT('lang.pec.title', { lang: info(c).name })), h('div', { class: 'row' }, flagRail(null, c, x => go('#/peculiar/' + x))));
-  if (!W) return v.append(h('p', { class: 'lx-note' }, LT('lang.pec.noCatalogue')));
+/** The page as the screen draws it (course-port.ts PeculiarPage; src/ui/screens/languages/lang-peculiar.ts). */
+function peculiarPage(code) {
+  const c = code && UI.C.lang[code] ? code : UI.lang, W = UI.C.data.world;
+  const base = { lang: courseLang(c), rail: railModel(null, c, x => go('#/peculiar/' + x)), catalogue: !!W, nNew: 0, nFam: 0, from: '', filter: UI.prefs.pecFilter || 'all', areas: [] };
+  if (!W) return base;
   const r2 = N.forLearner(UI.C, c, knowsL()), isNew = new Set(r2.new.map(x => x.p.id)), fam = Object.fromEntries(r2.familiar.map(x => [x.p.id, x.from]));
-  const filt = UI.prefs.pecFilter || 'all';
-  v.append(h('p', { class: 'tiny' }, LT('lang.pec.counts', { nNew: r2.new.length, nFam: r2.familiar.length, from: LLIST(r2.knownProfiles.map(langName)) || '—' }) + ' ',
-    ...['all', 'new', 'familiar'].map(f => h('button', { class: 'btn small' + (filt === f ? ' primary' : ''), 'data-filter': f, onclick: () => { UI.prefs.pecFilter = f; save(); go('#/peculiar/' + c); render(); } }, LT('lang.pec.filter.' + f)))));
-  const byArea = {};
+  const filt = base.filter, byArea = {};
   for (const p of W.phenomena[c] || []) {
     if (filt === 'new' && !isNew.has(p.id) || filt === 'familiar' && !fam[p.id]) continue;
     (byArea[p.area] = byArea[p.area] || []).push(p);
   }
-  for (const [area, ps] of Object.entries(byArea)) v.append(h('details', { class: 'lx-sec', open: true, 'data-area': area }, h('summary', {}, PEC_AREAS.includes(area) ? LT('lang.pec.area.' + area) : area, h('span', { class: 'tiny' }, ' ' + LNUM(ps.length))),
-    ...ps.map(p => h('details', { class: 'lx-pec', 'data-id': p.id }, h('summary', {}, isNew.has(p.id) ? '✨ ' : fam[p.id] ? '✓ ' : '', p.kind === 'lacks' ? '∅ ' : '', h('b', {}, p.title),
-        fam[p.id] ? h('span', { class: 'tiny' }, ' — ' + LT('lang.pec.familiarFrom', { from: LLIST(fam[p.id].map(langName)) })) : null),
-      h('p', {}, wordsIn(c, p.what)),
-      ...(p.examples || []).map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, wordsIn(c, e.text)), e.translit ? h('div', { class: 'tiny' }, e.translit) : null, e.note ? h('div', { class: 'lx-tr' }, e.note) : null)),
-      ...notesSections(p.notes, c, { compact: true }),   // R1: from the learner's languages · among the languages they learn
-      p.when ? h('p', { class: 'tiny' }, '🛤️ ' + LT('lang.pec.inCourse') + ' ', p.when) : null))));
-};
+  return { ...base, nNew: r2.new.length, nFam: r2.familiar.length, from: LLIST(r2.knownProfiles.map(langName)),
+    areas: Object.entries(byArea).map(([area, ps]) => ({ area, label: PEC_AREAS.includes(area) ? LT('lang.pec.area.' + area) : area, n: LNUM(ps.length),
+      items: ps.map(p => ({ id: p.id, title: p.title, lacks: p.kind === 'lacks', isNew: isNew.has(p.id), familiarFrom: fam[p.id] ? LLIST(fam[p.id].map(langName)) : '',
+        what: wordsIn(c, p.what), examples: (p.examples || []).map(e => ({ text: wordsIn(c, e.text), translit: e.translit || '', note: e.note || '' })),
+        notes: notesSections(p.notes, c, { compact: true }),   // R1: from the learner's languages · among the languages they learn
+        when: p.when || '' })) })) };
+}
+/** D18: the peculiarities of a language as a free library (no order): noema-lang-peculiar. */
+VIEWS.peculiar = (v, r) => { v.append(screenEl('noema-lang-peculiar', { code: r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang })); };
 VIEWS.settings = (v) => {
   const S = UI.L.settings;
   // D21: every language of the course, the ones studied ticked — a change is the learner's answer for the whole app (and the course is
@@ -197,7 +195,7 @@ VIEWS.settings = (v) => {
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
     h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
     h('p', { class: 'tiny lx-studynote' }, LT(UI.C.languages.length < UI.C.allLanguages.length ? 'lang.study.keptNote' : 'lang.study.note'), ' ',
-      window.Noema?.langStudy?.chooser ? h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp')) : null),
+      h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp'))),
     h('h3', { class: 'lx-h3' }, LT('lang.native.label')), nativePicker(() => { applyExplanationLocale(); render(); }), h('p', { class: 'tiny' }, LT('lang.native.note')), speakerPicker(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.knowAlready')), knowsEditor(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.sessions')), num(LT('lang.set.batch'), 'batch', 3, 30, 12), num(LT('lang.set.minutes'), 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),

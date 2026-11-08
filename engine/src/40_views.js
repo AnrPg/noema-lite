@@ -41,36 +41,12 @@ function saveBlob(name, blob) {
 }
 
 
-/* ---------- ✎ the activity author (#/author): an interactive activity built with a form, the real sim-spec@1 runtime as its preview
-   (docs/INTERACTIVE_AUTHORING.md, docs/activities-dev/authoring_ui.md). Its scripts load on the first visit (the single-file
-   bundle has them inline); the activity is not added to the open subject — the author downloads its folder. ---------- */
-let AUTHOR_LOAD = null;
-function loadAuthor() {
-  if (window.NoemaActivityAuthor) return Promise.resolve();
-  const base = window.NOEMA_ENGINE_BASE || 'engine/';
-  const js = f => new Promise((ok, no) => { const s = document.createElement('script'); s.src = base + f; s.onload = ok; s.onerror = () => no(new Error(f)); document.head.append(s); });
-  return AUTHOR_LOAD || (AUTHOR_LOAD = (async () => {
-    if (!document.querySelector('link[data-author-css]')) document.head.append(h('link', { rel: 'stylesheet', href: base + 'activity_author.css', 'data-author-css': '1' }));
-    for (const f of ['schemaform.js', 'activity_author_schemas.js', 'activity_author.js']) if (!(f === 'schemaform.js' ? window.NoemaSchemaForm : f === 'activity_author.js' ? window.NoemaActivityAuthor : window.NoemaActivitySchemas)) await js(f);
-    const L = window.NoemaCore.engines;   // the author offers every engine of the library: each one's table and checks, and the schema kernel its forms come from
-    await Promise.all([L.load(L.ids()), L.loadSchema()]);
-  })().catch(e => { AUTHOR_LOAD = null; throw e; }));
-}
-async function authorView() {
-  shellChrome({ sub: true, crumbs: [[tE('engine.author.title')]], back: HOME() });
-  const v = view(h('p', { class: 'muted' }, tE('engine.author.loading')));
-  try { await loadAuthor(); } catch (e) { v.replaceChildren(h('p', {}, tE('engine.author.loadFailed'))); return; }
-  if ((location.hash || '').slice(2).split('/')[0] !== 'author') return;   // the learner went elsewhere while it loaded
-  const m = main(); m.dataset.page = '@engine';
-  NoemaActivityAuthor.view(m);
-}
-
 /* ---------- router ---------- */
-/** the engine's own pages of the subject (the frame sends #/author and #/engines here: NoemaShell.attachEngine) */
+/** the engine's own pages of the subject (the frame sends #/engines here: NoemaShell.attachEngine; #/author is a page of its
+    own: src/composition/shell/author-page.ts) */
 function enginePage() {
   const p = (location.hash || '#/').slice(2).split('/');
   if (innerWidth < 720) closeTutor();
-  if (p[0] === 'author') return authorView();
   if (p[0] === 'engines') return enginesView(p[1]);   // the engines of activities and requests for new ones (49_lib_view.js)
 }
 /** draw the page again (another tab's answers, the settings, the theme): the frame's router */
@@ -82,9 +58,6 @@ function route() { NoemaShell.route(); }
 function boot() {
   applyTheme();
   document.body.append(h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));   // the frame has the top bar, the banner and <main>
-  addEventListener('hashchange', () => {   // left the author: its preview and keys stop
-    if (!/^#\/author(\/|$)/.test(location.hash || '') && window.NoemaActivityAuthor?.current) { try { NoemaActivityAuthor.current.destroy(); } catch (e) { } NoemaActivityAuthor.current = null; }
-  });
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());   // i18n-ignore
   NoemaShell.attachEngine({ route: enginePage, locate: locateItem, openTutor: () => openTutor(), history: () => NoemaShell.convos(), resumeConvo, convoChanged,
     accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });

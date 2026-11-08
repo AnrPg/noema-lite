@@ -129,6 +129,7 @@ export const INTERNAL_ERROR_CODES = [
   'compute.unknown_job', // no handler is registered for the job name
   'compute.failed', // the job's handler threw
   'compute.unavailable', // no Worker could be started (the inline fallback runs instead)
+  'ui.unavailable', // a bundle of screens (build/lang-activities.js) could not be loaded into the page
   'ai.unsupported', // the provider cannot do what the request asks (e.g. tools on a model without tools)
   'hlc.drift', // a remote hybrid-clock time is too far ahead of this device's clock
   'hlc.invalid', // a hybrid-clock time stamp that cannot be read

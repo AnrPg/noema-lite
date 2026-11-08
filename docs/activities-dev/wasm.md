@@ -60,7 +60,7 @@ cannot hand it a module that imports something else; a signature mismatch the re
    The engine has `workerSource` (the neutraliser + the worker code), so the sim runtime runs it in its blob worker; the checked
    bytes travel with each run (`prepare`), the worker keeps one instance per module. `create` on the page refuses (code `worker`):
    a module never runs on the page's own thread. **Budget here = the sim runtime's 5 s per run** (`RUN_TIMEOUT` of
-   35_activity_sim.js): over it the worker is terminated, `runaway`, the core offers Restart.
+   src/runtimes/sim-spec/runner.ts): over it the worker is terminated, `runaway`, the core offers Restart.
 2. **The runtime `wasm-module@1`** (loaded by `ACT.runtime(id)` from `build/runtimes.js`; it brings the engine `wasm@1`, which the core registers): an item with its own `spec` mounts as that spec with `engine: "wasm@1"`
    and `model.module` = the item itself (one item instead of two). Without a spec: `spec` (the fallback).
    **`api.load(item, {budgetMs, seed})`** of the module (`NoemaCore.runtimes.load('wasm-module@1')`) → a handle for host code (a future emulator UI, the tests):

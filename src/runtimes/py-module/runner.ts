@@ -9,7 +9,7 @@
    so Pyodide, numpy, scipy and the allow-listed extra wheels (micropip, our own index only) load without a request — and nothing else
    can be loaded: the lookup is emptied once Python has started, and the policy blocks every real request.
    A step that runs longer than its budget (3 s) ends the worker: error {code:'runaway'}; py:restart (or a new mount) starts it again.
-   Handshake as html-app@1 (34_activity_html.js): the runner posts hello {nonce} to the app, which hands over one MessagePort.
+   Handshake as html-app@1 (src/runtimes/html-app): the runner posts hello {nonce} to the app, which hands over one MessagePort.
    Not available on file:// copies and in the one-file bundle (no service worker, no cache, no files): the descriptor's rule
    (manifests.ts availableHere 'website'), so the core shows the fallback before any code is loaded.
    The service (createPyService): available(), prepareOffline({include, onProgress, force}), status(), need(packages), protocol, config(),

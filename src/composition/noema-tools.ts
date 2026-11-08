@@ -23,6 +23,8 @@ import { pyRepr, type ChapterOptions } from '../features/content/domain/chapter.
 import { isObj, type Obj } from '../features/content/domain/util.ts';
 import { contentChecks, scopeCheckers } from '../features/content/application/index.ts';
 import { RUNTIME_CHECKS } from '../runtimes/checks.ts';
+import { createAuthoring } from '../features/author/application/index.ts';
+import { schemaApi } from '../features/author/domain/schema.ts';
 
 const engines = nodeEngines();
 /** the activity runtimes' checkers, run once in a scope of their own (they read NoemaCore by name, as on the page) */
@@ -226,6 +228,10 @@ async function main(argv: readonly string[]): Promise<number> {
 /** required as a module (the node suites, tests/engines.cjs content()): the checks, without running a command */
 export const checks = C;
 export { engines };
+/** the activity author's core (src/features/author), for tests/activity_author.js: the forms' JSON Schema core, and the
+    author over the engines, checks and words it is given (createAuthoring) */
+export const schemaForm = schemaApi;
+export const authoring = createAuthoring;
 
 const isMain = typeof require !== 'undefined' && require.main === module;
 if (isMain)

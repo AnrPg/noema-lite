@@ -255,7 +255,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 8. As built — P2 (`sim-spec@1`, 2026-11-04)
 
-* **No frame.** A spec is data: the app's own code (`engine/src/35_activity_sim.js`) renders the controls, readouts and plots in the
+* **No frame.** A spec is data: the app's own code (`src/runtimes/sim-spec`) renders the controls, readouts and plots in the
   page with the app's DOM, styles and tokens, and computes them with NoemaExpr and the registered engines. Nothing of the pack is
   ever executed or put in the page as HTML (labels are text nodes, plots are SVG built element by element), so the sandbox, the CSP
   and the loop guard that protect the app from *code* have nothing to guard here; a frame would only cost what the brief wanted
@@ -294,7 +294,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   and needs no expression language. The model is `{netlist, bindings, transient, noise}`; outputs are node/branch series, DC or
   transient scalars (`at`, `stat`) and probe readings (docs/INTERACTIVE_CIRCUIT.md §1).
 * **A bench is a minimal extension of the spec** (`spec.bench`: faults, points, instruments, budget, diagnosis) rendered by the
-  sim-spec runtime itself (`makeBench` in 35_activity_sim.js), for engines that declare `bench: true`; the engine adds
+  sim-spec runtime itself (`makeBench` in src/runtimes/sim-spec/bench.ts), for engines that declare `bench: true`; the engine adds
   `measure(inputs, probe)` next to `run`. The runner queues runs and measurements: the latest run wins, measurements are first in,
   first out, and every result still passes the P2 gate (`values()` is null while the latest inputs are not computed). The bench's
   values `diagnosis`, `measurements`, `correct` join the checks' names only (not readouts or marks, never declarable), and
@@ -322,7 +322,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 * **The binding: a spec drawn by the app, numbers from Python.** A py-module@1 item carries `python` (its `main.py`, inline with
   `sha256` and `bytes`), `packages` (⊆ numpy, scipy and the allow-listed extras of `tools/pywheels_allow.json`), `requiresNetwork`
   (required `true` with an extra), `stepMs` (100–10 000) and a `spec` in the sim-spec@1 format without `engine`, `model` or `bench` and
-  with at least one `output`. The app mounts the sim-spec view of 35_activity_sim.js (`ACT.simView`, the P2 runtime turned into a
+  with at least one `output`. The app mounts the sim-spec view of src/runtimes/sim-spec (`ACT.simView`, the P2 runtime turned into a
   function with an optional host: its engine id, its spec check, its runner, extra state, a decoration) with a runner that calls
   Python's `step(inputs, state)` one at a time, the latest inputs winning. So the learner gets the app's own controls, readouts and
   plots (theme, 360 px, keyboard, screen reader) and **the checks grader works on Python's outputs unchanged** (the P2 rev gate keeps
@@ -479,14 +479,14 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 ## 14. As built — P6 (the authoring UI, 2026-11-04)
 
 * **A route, not a page of its own.** The preview must be the real `sim-spec@1` runtime, which lives in `engine.js` and starts only
-  with a subject open, so the author is the engine route `#/author` (`authorView` in `engine/src/40_views.js`; `author` is one of
-  the shell's `ENGINE_ROUTES`, so the frame draws it with `shellChrome({ sub: true, crumbs: [[Activity author]] })`). It works
+  with a subject open, so the author is the route `#/author` (since phase 3 a page of the frame, `NoemaShell.registerPage`, drawn with
+  `subjectChrome({ sub: true, crumbs: [[Activity author]] })`, and `Noema.app.author` for the classic router). It works
   with any subject open and never changes that subject: the activity leaves the device only as the downloaded folder.
 * **One quiet way in**: subject ⋮ › *Create an activity* (line icon `wrench`, a one-line explanation under it), next to Edit —
   where docs/UI_MAP.md keeps the tools that change content. No button on the subject page, nothing in Me.
-* **Loaded on first use.** `schemaform.js`, `activity_author_schemas.js`, `activity_author.js` and `activity_author.css` (≈ 110 KB)
-  are fetched from `NOEMA_ENGINE_BASE` the first time the route opens (the pattern of the language UI); the site copies them, the
-  one-file bundle has them inline. Leaving the route destroys the page (its keys, its preview session).
+* **Loaded on first use.** `activity_author_schemas.js` and the lazy piece `build/author.js` (strict TS and Lit since phase 3:
+  `src/features/author`, `src/ui/screens/author`; the old `schemaform.js`, `activity_author.js` and `.css` are gone) load the first
+  time the route opens; the site copies them, the one-file bundle has them inline. Leaving the route destroys the page (its keys, its preview session).
 * **The schemas** are copied into `engine/activity_author_schemas.js` by `tools/build.py` (a `file://` page cannot fetch them);
   `python3 tools/build.py --author-schemas` prints the copy, and `tests/activity_author.js` checks that the committed one is current.
 * **The words are engine strings.** The 287 `engine.author.*` keys (UI, field labels `f.<schema title>` / `p.<netlist property>`,
@@ -531,7 +531,7 @@ a spec without `parts` is checked, run and graded exactly as before, and every o
 - **The stepper contract** (`docs/INTERACTIVE_LIBRARY.md` §1.6) is an optional `stepper` of `makeEngine`: `init`, `step`, optional
   `snapshot` / `restore` / `output` / `onEvent`, the signature of `NoemaSimKit.stepper`. Only engines with one may be co-simulated
   (`STEPPERS`, the same list in both validators).
-- **Runtime.** `ACT.partsRunner` (35_activity_sim.js) runs the plan: one engine instance and Worker per part (each job ≤ 5 s), the
+- **Runtime.** `partsRunner` (src/runtimes/sim-spec/parts.ts) runs the plan: one engine instance and Worker per part (each job ≤ 5 s), the
   whole graph ≤ 5 s, the latest inputs win. A loop that does not settle or a part that fails gives NaN and a visible note
   (`engine.act.sim.noConverge`, `engine.act.sim.partFailed`), never a crash or a stale value.
 - **Reuse.** `activities/_parts/<name>.json`, referenced with `use` / `with`, travels as `pack.activities.parts` (hashed with the

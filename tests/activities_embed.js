@@ -159,7 +159,7 @@ function save() { localStorage.setItem('embedS', JSON.stringify(S.settings)); }
 function tE(k, v) { return k + (v ? ' ' + JSON.stringify(v) : ''); }
 var RT = null;
 ${ACTPsrc}
-</script><script>${piece.replace(/<\/script/gi, '<\\/script')}</script><script>
+</script><script>${piece.replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\x21--')}</script><script>
 var HOSTPORT = { t: tE, message: ACTP.out, setting: function (k) { return S.settings[k]; }, setSetting: function (k, v) { S.settings[k] = v; save(); },
   flags: function () { return NOEMA_CONFIG.activities; }, warn: function () { console.warn.apply(console, arguments); }, now: Date.now };
 window.READY = __noemaRuntimesPiece.plugins.find(function (p) { return p.manifest.id === 'external-embed@1'; }).entry().then(function (m) { RT = m.createWith(HOSTPORT, ${JSON.stringify(TEST_PROVIDERS)}); });

@@ -893,7 +893,7 @@ export function createSimSpec(env: CheckEnv) {
       cycles,
     };
   }
-  /** partsPlan(spec, lib) → the resolved parts, the order of evaluation, the problems — what the runtime (35_activity_sim.js) runs */
+  /** partsPlan(spec, lib) → the resolved parts, the order of evaluation, the problems — what the runtime (src/runtimes/sim-spec/parts.ts) runs */
   function partsPlan(spec: unknown, lib: unknown): PartsPlan {
     const E: string[] = [],
       R = isObj(spec) ? (resolveParts(spec, lib, E) ?? []) : [];

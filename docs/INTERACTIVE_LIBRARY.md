@@ -152,7 +152,7 @@ const { engine, simEngine } = C.makeEngine({ id, checkSpec, run, prepare, steppe
   one sample per step), an array (kept whole), a scene or a sound; only declared outputs pass (`pickStep`).
 - The instance gets `stepInit(inputs, t0) → {out}`, `stepTo(inputs, t, dt, inbox) → {out, dt, events, fail?}` (the inbox's events
   go to `onEvent` first), `snapshot() → slot` (−1: cannot; one slot, a new snapshot replaces it) and `restore(slot) → true/false`.
-  The Worker answers the messages `sinit`, `step`, `snap` and `restore` (35_activity_sim.js `engineRunner(...).step(kind, …)`).
+  The Worker answers the messages `sinit`, `step`, `snap` and `restore` (src/runtimes/sim-spec/runner.ts `engineRunner(...).step(kind, …)`).
   Without `stepper` nothing changes: `run` is as before (a part's series inputs arrive as `opts.series`).
 - Steppers now: `ode@1` (a flow or a map: events and crossings inside the step, `final` / `stat` running), `med@1` (the
   pharmacokinetic compartments, RK4 split at the doses; other items run as before), `clinic@1` (the virtual patient, the same
@@ -209,9 +209,9 @@ in its own way.
 
 | | where | what |
 |---|---|---|
-| the API | `engine/src/34_activity_html.js` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
-| the host | `34_activity_html.js` `engineBridge` | declared ∩ `NoemaCore.engines.catalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
-| the Worker | `35_activity_sim.js` `ACT.engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
+| the API | `src/runtimes/html-app/bootstrap.ts` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
+| the host | `src/runtimes/html-app/bridge.ts` `engineBridge` | declared ∩ `NoemaCore.engines.catalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
+| the Worker | `src/runtimes/sim-spec/runner.ts` `engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
 | the rules | `checkAppEngines` of the content checks (`src/features/content/domain/activities/registry.ts`); `needRequires` adds `engine:<id>` | |
 | the tests | `tests/activities.js` (the rules and their golden messages, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |
 | the reference | `tools/activities_examples/cheapest-route/` | a route game on `graph@1`: the learner picks roads, Dijkstra finds the cheapest route; keyboard, 320 px, five languages |

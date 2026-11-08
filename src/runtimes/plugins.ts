@@ -5,6 +5,8 @@ import type { RuntimeModule, RuntimePlugin } from './types.ts';
 
 const ENTRIES: Readonly<Record<string, () => Promise<{ default: RuntimeModule }>>> = {
   'external-embed@1': () => import('./external-embed/runtime.ts'),
+  'sim-spec@1': () => import('./sim-spec/runtime.ts'),
+  'html-app@1': () => import('./html-app/runtime.ts'),
   'wasm-module@1': () => import('./wasm-module/runtime.ts'),
   'py-module@1': () => import('./py-module/runtime.ts'),
 };

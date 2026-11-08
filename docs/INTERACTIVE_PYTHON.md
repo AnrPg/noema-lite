@@ -117,7 +117,7 @@ A sim exercise on a py-module@1 activity is graded like a sim-spec@1 one:
 Page (trusted: reads and checks the files) → `py:boot` with the bytes over a MessagePort → a hidden sandboxed runner frame (our script
 only) → a blob: Worker with Pyodide, whose `fetch`/`importScripts` only look up those bytes. py-module@1 is a typed
 runtime of the registry (`src/runtimes/py-module`, loaded only when an activity needs it: `ACT.runtime('py-module@1')`). The app side
-is `runtime.ts`: it mounts the sim-spec view (`host.simView`, i.e. `ACT.simView`) with a host whose runner is Python's `step()`; the
+is `runtime.ts`: it mounts the sim-spec view (`host.simView`: the view of `src/runtimes/sim-spec`) with a host whose runner is Python's `step()`; the
 runner itself is `runner.ts` (the runtime's Python service `py`: `py.mountRunner`).
 
 * **The runner has no network at all** (`connect-src 'none'`). A service worker never controls an opaque-origin (sandboxed) client, so
