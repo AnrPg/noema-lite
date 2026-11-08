@@ -30,6 +30,9 @@ export interface I18n {
   /** The CLDR plural category of n in the current locale. */
   plural(n: number): Intl.LDMLPluralRule;
   locale(): string;
+  /** The fallback chain of a locale (default: the current one), most wanted first: itself, its language without the region,
+      English (zh-Hant never falls to zh). A translated record (a pack's, a Roadmap's) is picked along it. */
+  chain(locale?: string): readonly string[];
   dir(): TextDirection;
   readonly format: I18nFormats;
   onChange(listener: (locale: string) => void): Unsubscribe;

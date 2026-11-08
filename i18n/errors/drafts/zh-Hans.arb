@@ -42,6 +42,7 @@
   "err.files.no_pack_json": "此 zip 不是 noema-lite 资料包（里面没有 pack.json）。",
   "err.files.bad_pack_json": "资料包中的 pack.json 无效：{detail}",
   "err.files.no_writer": "资料包写入器不可用。",
+  "err.roadmap.restructure": "无法应用新的安排：{detail}",
   "err.ai.unauthorized": "密钥未被接受——请检查是否完整复制（以 sk-ant- 开头），或创建一个新的。",
   "err.ai.unauthorized_short": "Claude API 密钥未被接受。",
   "err.ai.forbidden": "此密钥无权执行该操作（{detail}）。请使用你自己工作区的密钥。",

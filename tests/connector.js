@@ -300,6 +300,51 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok((await tool('noema_get_pack_url', { subject_id: 'tr-physics', locale: 'de' })).isError, 'get_pack_url with a locale the pack has no translation into: refused');
   ok(/library\/subjects\/databricks\/pack\.json/.test((await tool('noema_get_pack_url', { subject_id: 'databricks' })).content[0].text), 'library packs are offered from the website');
 
+  console.log('— 🪜 Roadmaps by level: levels proposed with the map, work of one level, a new arrangement for the learner to approve');
+  { // a learner of its own: the Roadmaps stay out of the account whose picker the app side checks below
+    const su2 = await (await fetch(BASE + '/auth/v1/signup', { method: 'POST', headers: { apikey: 'k', 'content-type': 'application/json' }, body: JSON.stringify({ email: 'levels-user@example.com', password: 'secret123' }) })).json();
+    const uid = Object.values(srv.state.users).find(u => u.email === 'levels-user@example.com').id;
+    const tool = async (name, args) => (await call({ jsonrpc: '2.0', id: 9, method: 'tools/call', params: { name, arguments: args } }, su2.access_token)).json?.result;
+    const T1 = r => r.content.map(x => x.text || '').join('\n');
+    const kvOf = k => { const v = srv.state.kv[uid]?.[k]?.value; return typeof v === 'string' ? JSON.parse(v) : v; };
+    const RM = { title: 'Physics I–II', summary: 'Two semesters.', levels: 'semester:2',
+      steps: [{ ref: 'v', title: 'Vectors', role: 'foundation', level: 's1' }, { ref: 'm', title: 'Mechanics', role: 'aspect', prerequisites: ['v'], level: { from: 's1', to: 's2' } }, { ref: 'o', title: 'Optics', role: 'aspect', prerequisites: ['m'], level: 's2' }] };
+    const badLv = await tool('noema_create_roadmap', { plan_json: JSON.stringify({ ...RM, steps: RM.steps.map(x => x.ref === 'o' ? { ...x, level: 's9' } : x) }), language: 'en' });
+    ok(badLv.isError && /level "s9" is not a level of the Roadmap/.test(T1(badLv)), 'a step at a level the ladder does not have is refused: ' + T1(badLv).split('\n')[1]);
+    const above = await tool('noema_create_roadmap', { plan_json: JSON.stringify({ ...RM, steps: RM.steps.map(x => x.ref === 'v' ? { ...x, level: 's2' } : x.ref === 'm' ? { ...x, level: 's1' } : x) }), language: 'en' });
+    ok(above.isError, 'a prerequisite above the step that builds on it is refused');
+    const made = await tool('noema_create_roadmap', { plan_json: JSON.stringify(RM), language: 'en', level_test: true });
+    const cid = (/\((c[0-9a-z]+)\)/.exec(T1(made)) || [])[1];
+    ok(!made.isError && /Levels: s1 = Semester 1 · s2 = Semester 2 \(a level test before moving up\)/.test(T1(made)), 'noema_create_roadmap keeps the ladder and the level test: ' + T1(made).split('\n').find(l => l.startsWith('Levels')));
+    const rec = kvOf('a:curriculum:' + cid);
+    const id = t => Object.values(rec.nodes).find(n => n.title === t)?.id;
+    ok(rec.levelTest === true && rec.nodes[id('Mechanics')].level?.to === 's2' && rec.nodes[id('Optics')].level === 's2' && Object.values(rec.nodes).every(n => n.pack?.status === 'app'), 'the record: levels, each step at its level, every step queued');
+    const map = T1(await tool('noema_roadmap_map', { curriculum_id: cid }));
+    ok(/level s1–s2/.test(map) && /Levels \(lowest first\): s1 = Semester 1 · s2 = Semester 2/.test(map) && /noema_restructure_levels/.test(map), 'noema_roadmap_map shows each step\'s level and the ladder');
+    const t2 = await tool('noema_curriculum_task', { curriculum_id: cid, level: 'Semester 2', peek: true });
+    ok(!t2.isError && /## Level: Semester 2 \(level id "s2"\)/.test(T1(t2)) && /"levels": \["s2"\]/.test(T1(t2)) && !/“Vectors”/.test(T1(t2).split('## Level')[0].split('chapters of')[1] || ''), 'noema_curriculum_task level: only that level\'s steps, and what the level means for difficulty');
+    const tBad = await tool('noema_curriculum_task', { curriculum_id: cid, level: 'Semester 9' });
+    ok(tBad.isError && /Its levels: s1 = Semester 1/.test(T1(tBad)), 'an unknown level is refused with the ladder');
+    const pl = await tool('noema_pipeline', { action: 'detect', facts: { step: true }, level: 's1', curriculum_id: cid });
+    ok(!pl.isError && /Flow 2/.test(T1(pl)) && /Level s1 of “Physics I–II”/.test(T1(pl)) && /"levels": \["s1"\]/.test(T1(pl)), 'noema_pipeline level: the flow and what that level means');
+    // a new arrangement: Optics moves up to a new third semester — only a proposal until the learner approves it
+    const plan = { why: 'Optics is third-semester work at this university.', levels: 'semester:3', steps: [{ step: '@' + id('Optics'), level: 's3' }] };
+    const badPlan = await tool('noema_restructure_levels', { curriculum_id: cid, plan_json: JSON.stringify({ why: 'x', steps: [{ step: '@' + id('Vectors'), level: 's2' }] }) });
+    ok(badPlan.isError && /prerequisite/.test(T1(badPlan)), 'a plan that breaks the level rules goes back with its problems');
+    const pr = await tool('noema_restructure_levels', { curriculum_id: cid, plan_json: JSON.stringify(plan) });
+    ok(!pr.isError && /waits for the learner's approval in the app/.test(T1(pr)) && /“Optics” \(@optics\): s2 → s3/.test(T1(pr)), 'noema_restructure_levels proposes; the reply lists the changes: ' + T1(pr).split('\n')[1]);
+    const rows = Object.keys(srv.state.kv[uid]).filter(k => k.startsWith('a:curin:' + cid + ':')).map(kvOf).filter(e => e.kind === 'restructure');
+    ok(rows.length === 1 && rows[0].plan.levels.length === 3 && rows[0].plan.steps[0].level === 's3', 'the proposal goes to the inbox (kind restructure), the Roadmap itself is unchanged');
+    ok(kvOf('a:curriculum:' + cid).nodes[id('Optics')].level === 's2', 'nothing changed before the learner decides');
+    ok(/REPLAYED|already saved|nothing was written again/.test(T1(await tool('noema_restructure_levels', { curriculum_id: cid, plan_json: JSON.stringify(plan) }))), 'the same plan sent again is not a second proposal');
+    const st = T1(await tool('noema_restructure_levels', { curriculum_id: cid, action: 'status' }));
+    ok(/Waiting for the learner's decision/.test(st) && /s2 → s3/.test(st), 'action status: the proposal waiting');
+    const ext = await tool('noema_extend_roadmap', { curriculum_id: cid, plan_json: JSON.stringify({ part: 'Semester 3', levels: 'semester:3', steps: [{ ref: 'w', title: 'Waves', role: 'aspect', prerequisites: ['@' + id('Mechanics')], level: 's3' }] }) });
+    ok(!ext.isError && /Levels: s1 = Semester 1 · s2 = Semester 2 · s3 = Semester 3 \(1 new\)/.test(T1(ext)), 'noema_extend_roadmap adds a level at the top with the new part: ' + (T1(ext).split('\n').find(l => l.startsWith('Levels')) || T1(ext).slice(0, 200)));
+    const extBad = await tool('noema_extend_roadmap', { curriculum_id: cid, plan_json: JSON.stringify({ part: 'Years', levels: 'year:2', steps: [{ ref: 'y', title: 'Relativity', role: 'aspect', prerequisites: ['@' + id('Optics')] }] }) });
+    ok(extBad.isError && /ladder is semester/.test(T1(extBad)), 'a part cannot bring a ladder of another kind');
+  }
+
   console.log('— the app side');
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 } }); const p = await ctx.newPage(); const E = []; p.on('pageerror', e => E.push(e.message));

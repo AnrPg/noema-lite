@@ -30,12 +30,16 @@ import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
+import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
+import { accountKvStore, kvRoadmapEventLog } from './roadmap-events.ts';
 import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ENGINES, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
 
 /** Helpers append their registrations here (each registers its own tokens; a token already taken is an error). */
 export const APP_REGISTRATIONS: readonly Registration[] = [
   // the engine library (src/engines): its plugins' manifests at once, each engine's code and Worker bundle when first loaded
   c => c.register(ENGINES, () => createAppEngines()),
+  // the Roadmap events (levels reached, restructurings) of the account, in its synced store
+  c => c.register(ROADMAP_EVENTS, r => kvRoadmapEventLog(accountKvStore(() => r.get(STORAGE).kv))),
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
@@ -44,6 +48,11 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: () => contracts },
   // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the Roadmaps domain (graph, tasks, claims, inbox, levels, restructuring) and its services: curriculum.js, curjobs.js,
+  // curshare.js, curimport.js, sourceplan.js, curmap.js
+  { name: 'roadmaps', build: r => roadmapsSurface(r.get(ROADMAP_EVENTS)) },
+  // the 文A bridges' lookup (engine/bridge.js)
+  { name: 'bridges', build: () => bridgesDomain },
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */

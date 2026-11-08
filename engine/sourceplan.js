@@ -12,6 +12,8 @@
    Runs without a browser too (tests): inventory needs NoemaViewer, the rest only plain objects. */
 window.NoemaSourcePlan = (() => {
   const C = () => window.NoemaCurriculum, L = () => window.NoemaLLM, I = () => window.NoemaCurImport;
+  /** The Roadmaps domain (src/features/roadmaps/domain): the levels a plan proposes (planLevels) and their rules. */
+  const R = () => window.NoemaCore.roadmaps;
   /* i18n-ignore-start — the English fallback of the words of this file (keep equal to i18n/roadmaps/en.arb) */
   const EN = {
     'roadmap.src.reasonSize': '{files, plural, one {# file} other {# files}}, about {pages, plural, one {# page} other {# pages}} in all',
@@ -201,15 +203,18 @@ ${describe(inv).slice(0, 60000)}
   }
   /* i18n-ignore-start (problems for Claude) */
   /** The connector's way (noema_create_roadmap): the learner's Claude read the files in its own chat and sends the Roadmap
-      { title, summary, steps: [{ ref, title, summary, role, prerequisites, files }], files: [{ path, pages }] } — checked like
-      the app's own proposal → { parsed, chat: { nodeId: ["file pp. a–b", …] } } (the files stay in that chat) or { errors }. */
-  function fromClaude(d) {
+      { title, summary, levels, steps: [{ ref, title, summary, role, prerequisites, level, files }], files: [{ path, pages }] } —
+      checked like the app's own proposal → { parsed, chat: { nodeId: ["file pp. a–b", …] }, levels } (the files stay in that
+      chat; 🪜 levels: the ladder, each parsed step carries its level, docs/CURRICULUM.md §11) or { errors }. */
+  function fromClaude(d, { lang = 'en' } = {}) {
     const e = [], steps = Array.isArray(d?.steps) ? d.steps : [];
     if (!d?.title || typeof d.title !== 'string') e.push('title is missing');
     if (steps.length < 2) e.push('steps: at least 2 steps (one topic is one subject: build it as a pack instead)');
     if (steps.length > MAX_STEPS) e.push(`steps: at most ${MAX_STEPS}`);
     steps.forEach((s, i) => { if (!s?.ref || !s?.title) e.push(`step ${i + 1}: ref and title are required`); if (s && !ROLES.includes(s.role)) s.role = 'aspect'; if (s) s.prerequisites = s.prerequisites || []; });
     if (e.length) return { errors: e };
+    const lv = R().planLevels(d, lang, []);
+    if (!lv.ok) return { errors: lv.error };
     const inv = (Array.isArray(d.files) ? d.files : []).filter(f => f?.path).map(f => ({ path: String(f.path), name: String(f.path).split('/').pop(), pages: +f.pages || 0, paged: +f.pages > 0 }));
     const plan = { title: d.title, summary: d.summary || '', roadmap: { steps: steps.map(s => ({ ref: String(s.ref), title: s.title, summary: s.summary || '', role: s.role, prerequisites: s.prerequisites.map(String), files: inv.length ? s.files || [] : [] })) } };
     const errs = inv.length ? check(plan, inv, { only: 'roadmap' }) : check(plan, [], { only: 'roadmap' });
@@ -217,14 +222,18 @@ ${describe(inv).slice(0, 60000)}
     if (!inv.length) plan.roadmap.steps.forEach((s, i) => { s.files = steps[i].files || []; });   // no file list: the steps' files are taken as Claude names them
     const parsed = I().parse(mapText(plan)), chat = {};
     for (const n of Object.values(parsed.nodes)) if (n.fileRefs?.length) chat[n.id] = n.fileRefs.map(r => r.range ? `${r.path} pp. ${r.range[0]}–${r.range[1]}` : r.path);
-    return { parsed, chat, plan };
+    for (const n of Object.values(parsed.nodes)) if (lv.value.of[n.key] !== undefined) n.level = lv.value.of[n.key];
+    const levels = lv.value.ladder;
+    if (levels.length) { const lp = R().levelProblems({ levels, nodes: parsed.nodes, edges: parsed.edges }); if (lp.length) return { errors: lp }; }
+    return { parsed, chat, plan, levels };
   }
   /** 🌱 Grow a Roadmap in parts (noema_extend_roadmap, docs/FROM_SOURCES.md §6): a NEW PART of an existing Roadmap — new steps
       from new material — joined to the steps already on the map. The one way to name a connection point: "@<step id>" (the
       ids noema_roadmap_map lists; they never change). In a new step, "prerequisites" holds refs of the part's own steps or
       "@id" of steps already on the map; "before": ["@id"] makes a new step a prerequisite of a step on the map that is not
-      prepared yet. d = { part, summary, steps: [{ ref, title, summary, role, prerequisites, before, files }], files }
-      → { entry } — the inbox entry { kind: 'extend', part, nodes, edges, prepare } that NoemaCurJobs.extend applies — or { errors }. */
+      prepared yet. d = { part, summary, levels, steps: [{ ref, title, summary, role, prerequisites, before, level, files }], files }
+      (🪜 levels: new levels at the top of the Roadmap's ladder, or the first ladder; a step's level is one of either)
+      → { entry } — the inbox entry { kind: 'extend', part, nodes, edges, prepare, levels? } that NoemaCurJobs.extend applies — or { errors }. */
   const REF_AT = /^@(.+)$/, normT = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
   /** "did you mean": up to 3 steps of the map whose id or title looks like x → "@id (“title”), …" or '' */
   const likeOn = have => {
@@ -246,6 +255,8 @@ ${describe(inv).slice(0, 60000)}
       s.prerequisites = [].concat(s.prerequisites || []).map(String); s.before = [].concat(s.before || []).map(String);
     });
     if (e.length) return { errors: e };
+    const lv = R().planLevels(d, c?.language || 'en', R().ladder(c || {}));
+    if (!lv.ok) return { errors: lv.error };
     const byTitle = new Map(Object.values(have).map(n => [normT(n.title), n.id]));
     const like = likeOn(have);
     const onMap = (s, x, how) => {
@@ -284,13 +295,14 @@ ${describe(inv).slice(0, 60000)}
     const nodes = {};
     for (const n of Object.values(parsed.nodes)) {
       const { fileRefs, key, parent, num, ...rest } = n, id = rename[n.id];
-      nodes[id] = { ...rest, id, chapters: [], learningGoals: [], addedIn: pid, ...(fileRefs?.length ? { chatFiles: fileRefs.map(r => r.range ? `${r.path} pp. ${r.range[0]}–${r.range[1]}` : r.path) } : {}) };
+      nodes[id] = { ...rest, id, chapters: [], learningGoals: [], addedIn: pid, ...(lv.value.of[key] !== undefined ? { level: lv.value.of[key] } : {}), ...(fileRefs?.length ? { chatFiles: fileRefs.map(r => r.range ? `${r.path} pp. ${r.range[0]}–${r.range[1]}` : r.path) } : {}) };
     }
     const edges = parsed.edges.map(x => ({ from: rename[x.from], to: rename[x.to], why: x.why || '' }));
     for (const x of ext) edges.push({ from: idOf[x.from] || x.from, to: idOf[x.to] || x.to, why: '' });
     const all = [...(c.edges || []), ...edges];
     if (!C().topo([...Object.keys(have), ...Object.keys(nodes)], all)) { const cyc = (C().topo.cycle || []).map(x => have[x]?.title || nodes[x]?.title).filter(Boolean); return { errors: [`these links form a cycle with the map${cyc.length ? ': ' + cyc.join(' → ') : ''} — a step cannot come before itself`] }; }
-    return { entry: { v: 1, kind: 'extend', part: { id: pid, title: part.slice(0, 120), summary: String(d.summary || '').slice(0, 400), at }, nodes, edges, prepare: !!prepare }, ids: idOf };
+    if (lv.value.ladder.length) { const lp = R().levelProblems({ levels: lv.value.ladder, nodes: { ...have, ...nodes }, edges: all }); if (lp.length) return { errors: lp }; }
+    return { entry: { v: 1, kind: 'extend', part: { id: pid, title: part.slice(0, 120), summary: String(d.summary || '').slice(0, 400), at }, nodes, edges, prepare: !!prepare, ...(lv.value.add.length ? { levels: lv.value.add } : {}) }, ids: idOf };
   }
   /** 🔗 Link steps that are on the map already (noema_link_roadmap_steps, docs/FROM_SOURCES.md §6): new prerequisite links
       between existing steps — prepared ones too: a link changes only the map (order, arrows, "after …"), never a step's

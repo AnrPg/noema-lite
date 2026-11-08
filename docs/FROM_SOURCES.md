@@ -50,9 +50,10 @@ and chosen — the name (from the proposal unless the learner typed one), and th
 ## 5. In Claude — the connector makes the Roadmap itself
 When the learner gives the material to their own Claude (skill §0b), Claude decides the shape by the same rule. One subject:
 it builds the pack as usual. A Roadmap: `noema_create_roadmap(plan_json, language, learner)` with `{ title, summary, steps:
-[{ ref, title, summary, role, prerequisites, files }], files: [{ path, pages }] }`. `fromClaude()` checks it like the app's own
-proposal (only the Roadmap shape: every listed file used, pages inside their file, unique refs, known prerequisites, no
-cycle), `NoemaCurImport.record()` builds the curriculum (provider `claudeapp`, `fromSources.via = 'connector'`) and the
+[{ ref, title, summary, role, prerequisites, level?, files }], files: [{ path, pages }], levels? }`. `fromClaude()` checks it
+like the app's own proposal (only the Roadmap shape: every listed file used, pages inside their file, unique refs, known
+prerequisites, no cycle; 🪜 the ladder and each step's level by the level rules, docs/CURRICULUM.md §11 — a new part may add
+levels at the top, `extendFromClaude()`), `NoemaCurImport.record()` builds the curriculum (provider `claudeapp`, `fromSources.via = 'connector'`) and the
 connector stores it as `a:curriculum:<id>`; the app takes it on its next sync. Unless `prepare: false`, every step is
 queued for the Claude app in study order (reviewed), so `noema_curriculum_task` hands out the chapter plans, then each step. The files stay in that Claude chat: each step
 keeps `chatFiles` (`"file pp. a–b"`), and the chapter-plan and step tasks of `noema_curriculum_task` list them as THE sources

@@ -42,6 +42,15 @@ Decide the shape the material calls for, the same way the app's **📚 From your
   (`prepare: false` makes only the map). Then go on as in *Curricula* below: `noema_curriculum_task` hands you the chapter
   plans, then the steps one by one — each from its files and pages in this chat. Without the connector, point the learner to
   📚 From your sources in the app (choose *My Claude app*, paste the task here, paste your JSON answer back).
+- **🪜 Levels** — only when the material has them (a school syllabus by grade, a degree by semester or year, a course in
+  tiers): give the Roadmap `"levels"` — a preset `"grade:5-9"`, `"semester:6"`, `"year:4"`, `"difficulty"` (introductory ·
+  intermediate · advanced) or the course's own list `[{ "id": "basics", "names": { "<lang>": "…" } }, …]`, lowest first —
+  and each step its `"level"` (`"s2"`, or `{ "from": "s2", "to": "s3" }` for a step that spans two). A prerequisite never
+  sits at a higher level than the step that builds on it. `level_test: true` only when the learner wants a test before
+  moving up (moving up is otherwise automatic once a level's steps are mastered). Never invent levels the material lacks.
+  To prepare one level's work: `noema_curriculum_task(curriculum_id, level)` — its tasks say what the level means:
+  **difficulty is relative to the level** (difficulty 3 = the hardest that is still that level's material), the 20 / 25 /
+  55 % mix holds within the level, and the pack gets `"levels": ["<id>"]`.
 Say your choice and its reason in one line and carry on with it unless the learner wants the other shape.
 When the message already carries **“The learner confirmed this chapter plan”** (sent by the app), do not decide again:
 write exactly those chapters, in that order, each from the pages it names.
@@ -280,6 +289,17 @@ message) **grows that Roadmap by a new part — never a second Roadmap** (flow 9
    another): `noema_link_roadmap_steps(curriculum_id, links_json)` with `{ "links": [{ "from": "@prerequisite", "to":
    "@dependent", "why": "…" }], "remove": [{ "from": "@a", "to": "@b" }] }` (`remove` optional, for a wrong link). Prepared
    steps may be the `to` side: only the map changes (order, arrows), never a subject or the learner's progress.
+7. **🪜 Levels.** A part may bring the next level (`"levels": "semester:3"` adds `s3` at the top; the ladder keeps its kind)
+   and each new step its `"level"` (`noema_roadmap_map` lists the ladder and every step's level). When the levels of what is
+   already there should change — the learner's syllabus moves a topic to another semester, a step spans two levels, two
+   small steps of one level belong together, or a Roadmap without levels should get them — propose it with
+   `noema_restructure_levels(curriculum_id, plan_json)`: `{ "why": "one or two sentences for the learner", "levels"?,
+   "steps": [{ "step": "@id", "level": "s3" }], "chapters": [{ "step": "@id", "chapter": "c4", "level": "s3" }],
+   "split": [{ "step": "@id", "parts": [{ "title": "…", "level": "s1", "chapters": ["c1", "c2"] }, { "title": "…", "level":
+   "s2", "chapters": ["c3"] }] }], "merge": [{ "into": "@id", "steps": ["@other"] }], "links"?, "unlink"? }` — only what
+   changes. It is a **proposal**: nothing changes until the learner (in a shared Roadmap its owner) approves it in the app;
+   say so, and that `action: "status"` shows the decision. Ids are kept, so the learner's progress, translations and
+   bridges follow the material; the learner's own subjects are never rewritten.
 
 ## Curricula: steps, maps and chapter plans (noema-lite connector)
 A noema-lite **curriculum** is a map of steps; every step becomes a subject pack. When the learner asks you to work on one

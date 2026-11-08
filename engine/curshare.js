@@ -27,7 +27,7 @@
   const enc = s => encodeURIComponent(s);
   const T = { cur: '/rest/v1/noema_curricula_shared', mem: '/rest/v1/noema_curriculum_members', steps: '/rest/v1/noema_curriculum_steps' };
   /* what stays with each person (their own settings, progress and AI work) — everything else is the shared map */
-  const LOCAL = ['log', 'usage', 'prefetch', 'nodeBudget', 'provider', 'model', 'autoApprove', 'shared', 'remote', 'error', 'errorInfo', 'updated'];
+  const LOCAL = ['log', 'usage', 'prefetch', 'nodeBudget', 'provider', 'model', 'autoApprove', 'shared', 'remote', 'error', 'errorInfo', 'updated', 'proposals'];   // 🪜 proposals: the owner's to decide
   const NODE_LOCAL = ['pack', 'reviewed', 'planWish', 'replan', 'assignedAt', 'planFrom', 'groupPlan'];   // 📦 an attached subject is the learner's own
   const NODE_PLAN = ['chapters', 'learningGoals', 'plannedAt', 'replanAt'];   // a step's chapter plan (= NoemaCurriculum.PLAN_KEYS): with an attached subject, the learner's own
   const clone = o => JSON.parse(JSON.stringify(o));

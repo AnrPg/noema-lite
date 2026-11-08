@@ -12,6 +12,8 @@
                    /sw.js from it, with the precache list and the build hash in front.
      harness.js    src/composition/harness.ts — window.NoemaCore = { contracts, engines } for a page that is not the app: the
                    skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
+     roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
+                   suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
      engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
                    (tests/engines.cjs). Not in the site.
      engine/tokens.css  the design tokens (src/ui/tokens, tools/tokens.mjs), written next to engine.css on every build.
@@ -63,6 +65,7 @@ export const ENTRIES = [
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
+  { name: 'roadmaps-node', in: 'src/composition/roadmaps-node.ts', kind: 'node', format: 'cjs', out: 'roadmaps-node.cjs', budgetKB: 256 },
 ];
 const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
 

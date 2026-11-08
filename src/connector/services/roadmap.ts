@@ -1,6 +1,8 @@
 /* A Roadmap's own texts for Claude: what is still to translate (docs/CURRICULUM.md §10) and the map to grow it from (§6). */
 import type { Curriculum, EngineApi } from '../engine/api.ts';
 import { str } from '../util.ts';
+import { ladderLine, levelText, pendingProposal } from '../../features/roadmaps/domain/index.ts';
+import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
 
 export interface RoadmapTodo {
   loc: string;
@@ -85,11 +87,19 @@ export function roadmapMapText(E: EngineApi, c: Curriculum): string {
     const n = c.nodes[id];
     if (!n) return '';
     const pre = c.edges.filter(e => e.to === id).map(e => '@' + e.from);
-    const chs = (n.chapters ?? []).map(ch => ch.title).filter(Boolean);
-    return `- @${id} — “${n.title}” · ${n.role || 'aspect'} · ${state(n)}${parts.length > 1 ? ` · part ${partOf(n.addedIn)}` : ''}${pre.length ? ` · after ${pre.join(', ')}` : ' · a starting step'}${n.summary ? `\n    ${str(n.summary).slice(0, 300)}` : ''}${chs.length ? `\n    chapters: ${chs.join(' · ').slice(0, 600)}` : ''}`;
+    const chs = (n.chapters ?? [])
+      .filter(ch => ch.title)
+      .map(ch => `${ch.ref} ${String(ch.title)}${typeof ch.level === 'string' && ch.level ? ` [${ch.level}]` : ''}`);
+    const lv = levelText(n);
+    return `- @${id} — “${n.title}” · ${n.role || 'aspect'}${lv ? ` · level ${lv}` : ''} · ${state(n)}${parts.length > 1 ? ` · part ${partOf(n.addedIn)}` : ''}${pre.length ? ` · after ${pre.join(', ')}` : ' · a starting step'}${n.summary ? `\n    ${str(n.summary).slice(0, 300)}` : ''}${chs.length ? `\n    chapters: ${chs.join(' · ').slice(0, 600)}` : ''}`;
   });
   const P = parts.length
     ? parts.map((p, i) => `${i + 1}. “${p.title}” (${str(p.at).slice(0, 10)}) — ${(p.steps ?? []).length} step(s)`).join('\n')
     : `1. “${c.title || c.goal}” — the whole map so far`;
-  return `The Roadmap “${c.title || c.goal}” (curriculum_id ${c.id}) · ${c.language || 'en'} · ${rows.length} steps, ${c.edges.length} links${c.shared && !c.shared.ended ? (c.shared.role === 'member' ? ` · 👥 shared by ${c.shared.ownerName || 'its owner'} (read only: the owner adds parts)` : ' · 👥 shared by the learner') : ''}\n\nSteps in study order — "@id" is each step's permanent connection point:\n${rows.join('\n')}\n\nParts:\n${P}\n\nTo grow it (noema_extend_roadmap): new steps get their own refs (n1, n2…); "prerequisites": ["@id"] = what a new step builds on, "before": ["@id"] = a step above that is not prepared yet and must come after the new one. Link to a step that already teaches a topic; never add it again. A missing link between two steps that are on the map already (prepared ones too): noema_link_roadmap_steps.`;
+  const R = c as unknown as Roadmap,
+    pend = pendingProposal(R),
+    L = c.levels?.length
+      ? `\n\nLevels (lowest first): ${ladderLine(R)}${c.levelTest ? ' · a level test before moving up' : ''}. A chapter at another level than its step shows it in [ ]. To rearrange by level (move, split or merge steps): noema_restructure_levels${pend ? ` — a proposal of ${pend.at.slice(0, 10)} waits for the learner's decision` : ''}.`
+      : `\n\nNo levels. To give it levels (grades, semesters, years, difficulty): noema_restructure_levels.`;
+  return `The Roadmap “${c.title || c.goal}” (curriculum_id ${c.id}) · ${c.language || 'en'} · ${rows.length} steps, ${c.edges.length} links${c.shared && !c.shared.ended ? (c.shared.role === 'member' ? ` · 👥 shared by ${c.shared.ownerName || 'its owner'} (read only: the owner adds parts)` : ' · 👥 shared by the learner') : ''}\n\nSteps in study order — "@id" is each step's permanent connection point:\n${rows.join('\n')}\n\nParts:\n${P}\n\nTo grow it (noema_extend_roadmap): new steps get their own refs (n1, n2…); "prerequisites": ["@id"] = what a new step builds on, "before": ["@id"] = a step above that is not prepared yet and must come after the new one. Link to a step that already teaches a topic; never add it again. A missing link between two steps that are on the map already (prepared ones too): noema_link_roadmap_steps.${L}`;
 }

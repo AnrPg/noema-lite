@@ -266,6 +266,6 @@ on a token colour or a token colour as text without such a pair.
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `engines-node.cjs`, and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

@@ -60,6 +60,8 @@ export const USER_ERROR_CODES = [
   'files.no_pack_json',
   'files.bad_pack_json',
   'files.no_writer',
+  // Roadmaps
+  'roadmap.restructure',
   // AI (Claude, Gemini)
   'ai.unauthorized',
   'ai.unauthorized_short',
