@@ -87,7 +87,7 @@
       pfLink: 'Copy the link', pfLinkTip: 'The address of your page, to send to someone', pfLinkCopied: 'Link copied', pfLevel: 'Level {lv}', pfXp: '{xp} XP', pfWords: '{n} words', pfNone: 'Nothing here yet.', pfMissing: 'This page is private, or it does not exist.', pfCloudErr: 'Could not reach the cloud: {e}', pfOpen: '{who}: their page', pfSharedRm: 'Roadmaps', pfSharedSubj: 'Subjects', pfUpdated: 'Updated {date}',
       subjLead: 'Grouped by Roadmap and station; open a group to see its subjects and chapters. Subjects on no Roadmap are on the Shelf.', subjStations: '{n} stations', subjStations1: '1 station', subjHidden: 'Hidden subjects', subjHide: 'Hide from the subject list', subjShow: 'Show in the subject list', subjOpen: 'Open', subjNone: 'No subjects yet.',
       bCreate: 'Create with Claude', bShelf: 'Shelf', bImport: 'Import', bShelfTip: 'The subjects that are on no Roadmap', exportCurTip: 'Export “{title}” with its source files (.zip)',
-      // 🔎 search (engine/search.js, docs/SEARCH.md)
+      // 🔎 search (src/features/search/ui, docs/SEARCH.md)
       sr_search: 'Search', sr_placeholder: 'Search everything…', sr_openPage: 'Open in a page', sr_exact: 'Exact match', sr_more: '+{n} more', sr_none: 'Nothing found for “{q}”.',
       sr_noneTip: 'Try another word, or fewer filters.', sr_typeMore: 'Type at least two letters.', sr_indexing: 'Hold on: I am leafing through every page of the app, so nothing escapes your search ({done} of {total}).',
       sr_indexingWhat: 'This happens once on each device, then only for what changes. What is found so far is shown below.', sr_results: '{n} results', sr_results1: '1 result',
@@ -196,7 +196,7 @@
       pfLink: 'Αντιγραφή συνδέσμου', pfLinkTip: 'Η διεύθυνση της σελίδας σου, για να τη στείλεις σε κάποιον', pfLinkCopied: 'Ο σύνδεσμος αντιγράφηκε', pfLevel: 'Επίπεδο {lv}', pfXp: '{xp} XP', pfWords: '{n} λέξεις', pfNone: 'Τίποτα ακόμα.', pfMissing: 'Αυτή η σελίδα είναι ιδιωτική ή δεν υπάρχει.', pfCloudErr: 'Δεν βρέθηκε σύνδεση με το cloud: {e}', pfOpen: 'Η σελίδα: {who}', pfSharedRm: 'Οδικοί χάρτες', pfSharedSubj: 'Θέματα', pfUpdated: 'Ενημέρωση {date}',
       subjLead: 'Ομαδοποιημένα ανά Οδικό χάρτη και σταθμό· άνοιξε μια ομάδα για να δεις τα θέματα και τα κεφάλαιά της. Τα θέματα εκτός Οδικού χάρτη είναι στο Ράφι.', subjStations: '{n} σταθμοί', subjStations1: '1 σταθμός', subjHidden: 'Κρυμμένα θέματα', subjHide: 'Απόκρυψη από τη λίστα θεμάτων', subjShow: 'Εμφάνιση στη λίστα θεμάτων', subjOpen: 'Άνοιγμα', subjNone: 'Δεν έχεις ακόμα θέματα.',
       bCreate: 'Με Claude', bShelf: 'Ράφι', bImport: 'Εισαγωγή', bShelfTip: 'Τα θέματα που δεν είναι σε κανέναν Οδικό χάρτη', exportCurTip: 'Εξαγωγή του «{title}» με τα αρχεία πηγής του (.zip)',
-      // 🔎 search (engine/search.js, docs/SEARCH.md)
+      // 🔎 search (src/features/search/ui, docs/SEARCH.md)
       sr_search: 'Αναζήτηση', sr_placeholder: 'Αναζήτηση σε όλα…', sr_openPage: 'Άνοιγμα σε σελίδα', sr_exact: 'Ακριβές ταίριασμα', sr_more: '+{n} ακόμη', sr_none: 'Δεν βρέθηκε τίποτα για «{q}».',
       sr_noneTip: 'Δοκίμασε άλλη λέξη ή λιγότερα φίλτρα.', sr_typeMore: 'Γράψε τουλάχιστον δύο γράμματα.', sr_indexing: 'Μια στιγμή: ξεφυλλίζω όλες τις σελίδες της εφαρμογής, για να μη σου ξεφύγει τίποτα ({done} από {total}).',
       sr_indexingWhat: 'Γίνεται μία φορά σε κάθε συσκευή και μετά μόνο για ό,τι αλλάζει. Όσα βρέθηκαν ως τώρα φαίνονται παρακάτω.', sr_results: '{n} αποτελέσματα', sr_results1: '1 αποτέλεσμα',
@@ -306,7 +306,7 @@
       pfLink: 'Скопировать ссылку', pfLinkTip: 'Адрес твоей страницы, чтобы отправить его кому-нибудь', pfLinkCopied: 'Ссылка скопирована', pfLevel: 'Уровень {lv}', pfXp: '{xp} XP', pfWords: 'слов: {n}', pfNone: 'Пока ничего.', pfMissing: 'Эта страница закрыта или не существует.', pfCloudErr: 'Нет связи с облаком: {e}', pfOpen: '{who}: страница', pfSharedRm: 'Дорожные карты', pfSharedSubj: 'Предметы', pfUpdated: 'Обновлено {date}',
       subjLead: 'По дорожным картам и этапам; открой группу, чтобы увидеть её предметы и главы. Предметы вне дорожных карт лежат на полке.', subjStations: 'этапов: {n}', subjStations1: '1 этап', subjHidden: 'Скрытые предметы', subjHide: 'Скрыть из списка предметов', subjShow: 'Показать в списке предметов', subjOpen: 'Открыть', subjNone: 'Предметов пока нет.',
       bCreate: 'С Claude', bShelf: 'Полка', bImport: 'Импорт', bShelfTip: 'Предметы, которых нет ни в одной дорожной карте', exportCurTip: 'Экспорт «{title}» вместе с исходными файлами (.zip)',
-      // 🔎 search (engine/search.js, docs/SEARCH.md)
+      // 🔎 search (src/features/search/ui, docs/SEARCH.md)
       sr_search: 'Поиск', sr_placeholder: 'Искать везде…', sr_openPage: 'Открыть на странице', sr_exact: 'Точное совпадение', sr_more: 'ещё {n}', sr_none: 'По запросу «{q}» ничего не найдено.',
       sr_noneTip: 'Попробуй другое слово или меньше фильтров.', sr_typeMore: 'Введи хотя бы две буквы.', sr_indexing: 'Минутку: листаю все страницы приложения, чтобы от поиска ничего не ускользнуло ({done} из {total}).',
       sr_indexingWhat: 'Это происходит один раз на каждом устройстве, потом только для того, что меняется. Найденное пока — ниже.', sr_results: 'Найдено: {n}', sr_results1: 'Найдено: 1',
@@ -417,7 +417,7 @@
       pfLink: 'Copier le lien', pfLinkTip: 'L’adresse de ta page, à envoyer à quelqu’un', pfLinkCopied: 'Lien copié', pfLevel: 'Niveau {lv}', pfXp: '{xp} XP', pfWords: '{n} mots', pfNone: 'Rien pour l’instant.', pfMissing: 'Cette page est privée ou n’existe pas.', pfCloudErr: 'Impossible de joindre le cloud : {e}', pfOpen: '{who} : sa page', pfSharedRm: 'Parcours', pfSharedSubj: 'Matières', pfUpdated: 'Mis à jour le {date}',
       subjLead: 'Classées par parcours et par étape ; ouvre un groupe pour voir ses matières et ses chapitres. Les matières hors parcours sont sur l’étagère.', subjStations: '{n} étapes', subjStations1: '1 étape', subjHidden: 'Matières masquées', subjHide: 'Masquer de la liste des matières', subjShow: 'Afficher dans la liste des matières', subjOpen: 'Ouvrir', subjNone: 'Pas encore de matières.',
       bCreate: 'Avec Claude', bShelf: 'Étagère', bImport: 'Importer', bShelfTip: 'Les matières qui ne sont dans aucun parcours', exportCurTip: `Exporter «${NB}{title}${NB}» avec ses fichiers sources (.zip)`,
-      // 🔎 search (engine/search.js, docs/SEARCH.md)
+      // 🔎 search (src/features/search/ui, docs/SEARCH.md)
       sr_search: 'Recherche', sr_placeholder: 'Rechercher partout…', sr_openPage: 'Ouvrir dans une page', sr_exact: 'Correspondance exacte', sr_more: '+{n} de plus', sr_none: `Rien trouvé pour «${NB}{q}${NB}».`,
       sr_noneTip: 'Essaie un autre mot, ou moins de filtres.', sr_typeMore: 'Tape au moins deux lettres.', sr_indexing: `Un instant${NB}: je feuillette toutes les pages de l’app pour que rien n’échappe à ta recherche ({done} sur {total}).`,
       sr_indexingWhat: 'Cela se fait une fois par appareil, puis seulement pour ce qui change. Ce qui est déjà trouvé s’affiche plus bas.', sr_results: '{n} résultats',

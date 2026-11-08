@@ -95,7 +95,7 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     const h = win.location.hash;
     for (const p of outsideOf.keys()) if (!h.startsWith(p)) outsideOf.set(p, h);
   };
-  win.addEventListener('hashchange', noteOutside);
+  if (typeof win.addEventListener === 'function') win.addEventListener('hashchange', noteOutside); // (Node and the tests' vm: no page)
 
   /** where every record of the search comes from: the subjects' packs, the Roadmaps, the language courses, the conversations */
   async function searchSources(): Promise<HostSearchSource[]> {
@@ -203,7 +203,7 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
       return r;
     },
     signIn: () => {
-      call(N(), 'pickAccount');
+      void call<Promise<unknown>>(N(), 'openAccountPicker');
     },
     world,
     getAccountSetting: name => lsGet(accountKey(name)),
@@ -252,17 +252,29 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     roadmaps: () => call<HostRoadmap[]>(CU(), 'list', acc()) ?? [],
     roadmap: id => call<HostRoadmap | null>(CU(), 'get', acc(), id) ?? null,
     publishRoadmap: async (id, o) => {
-      await need<Promise<unknown>>(CU(), 'publish', acc(), id, { public: o.isPublic });
+      await need<Promise<unknown>>(g('NoemaCurShare'), 'publish', acc(), id, { isPublic: o.isPublic });
     },
     joinRoadmap: async (id, o) => {
-      await need<Promise<unknown>>(CU(), 'joinShared', acc(), id, { viaRoom: o.viaRoom });
+      await need<Promise<unknown>>(g('NoemaCurShare'), 'join', acc(), id, { viaRoom: o.viaRoom });
     },
     fromSources: files => {
-      call(g('NoemaSourcePlan'), 'open', { files });
+      call(g('NoemaCurMap'), 'fromSources', acc(), {
+        files: [...files],
+        onStudy: (id: string) => {
+          call(N(), 'open', id);
+        },
+      });
     },
     pdfPages: async file => {
-      const n = await call<Promise<number>>(g('NoemaSrcFiles'), 'pdfPages', file);
-      return typeof n === 'number' ? n : null;
+      try {
+        const r = await call<Promise<{ pageCount?: number }>>(g('NoemaViewer'), 'extract', file, file.name, {
+          maxPages: 1,
+          outline: false,
+        });
+        return typeof r?.pageCount === 'number' ? r.pageCount : null;
+      } catch {
+        return null; // a PDF the reader cannot open: its pages stay unknown
+      }
     },
     publicPage: async userId => {
       const r = await call<Promise<{ published?: boolean } | null>>(g('NoemaProfile'), 'get', userId);
@@ -306,13 +318,8 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     },
     share: parts.share,
 
-    /* ---------- ⚑ reports, #/engines ---------- */
+    /* ---------- ⚑ reports ---------- */
     report: parts.report,
-    engineHere: entry => {
-      const act = obj(obj(win['NoemaEngine'])?.['ACT']) ?? obj(win['ACT']);
-      if (entry.runtime && entry.runtime !== true) return !!obj(act?.['runtime'])?.[entry.runtime];
-      return !!obj(act?.['engines'])?.[entry.id];
-    },
   };
   return host;
 }

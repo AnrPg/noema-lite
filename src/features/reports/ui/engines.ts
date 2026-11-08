@@ -8,7 +8,6 @@
  */
 import { html, nothing, type TemplateResult } from 'lit';
 import type { EngineRequestRow } from '../../../ports/reports.ts';
-import type { CatalogApi, CatalogEntry } from '../../../engines/types.ts';
 import { openDialog } from '../../community/ui/dialogs.ts';
 import { copyText, download } from '../../community/ui/format.ts';
 import type { ScreenChrome } from '../../community/ui/host.ts';
@@ -25,6 +24,22 @@ import {
 } from '../domain/engine-requests.ts';
 import { ENGINES_CSS } from './styles.ts';
 
+/** what the page reads of the engines' catalogue (src/engines/catalog.js, handed in by the composition) */
+export interface CatalogEntry {
+  readonly id: string;
+  readonly layer: 'library' | 'free' | 'plugin';
+  readonly plugin: boolean;
+  readonly file: string;
+  readonly slug: string;
+  readonly words: readonly string[];
+  readonly runtime?: boolean | string;
+}
+export interface CatalogApi {
+  readonly CATALOG: readonly CatalogEntry[];
+  readonly GROUPS: readonly (readonly [string, readonly string[]])[];
+  byId(id: string): CatalogEntry | null;
+  suggest(text: string): readonly { readonly id: string }[];
+}
 export interface EnginesDeps extends ScreenBase {
   readonly requests: EngineRequestService;
   readonly catalog: () => CatalogApi | null;
@@ -205,7 +220,14 @@ export class NoemaEnginesPage extends CommunityScreen<EnginesDeps> {
             ${field('sources')} ${field('examples')}
           </details>
           <p class="nc-err eng-err" aria-live="assertive">${err}</p>
-          <noema-button slot="actions" variant="quiet" @click=${() => close()}>${this.t('engine.core.cancel')}</noema-button>
+          <noema-button
+            slot="actions"
+            variant="quiet"
+            @click=${() => {
+              close();
+            }}
+            >${this.t('engine.core.cancel')}</noema-button
+          >
           <noema-button slot="actions" variant="primary" data-act="send" ?disabled=${sending} @click=${() => void send()}
             >${this.#T('send')}</noema-button
           >`,
@@ -326,7 +348,14 @@ export class NoemaEnginesPage extends CommunityScreen<EnginesDeps> {
     return html`<div class="nc eng-page">
       <div class="eng-head">
         <h2>${this.#T('title')}</h2>
-        <noema-button variant="primary" data-act="request" @click=${() => this.#request()}>${this.#T('request')}</noema-button>
+        <noema-button
+          variant="primary"
+          data-act="request"
+          @click=${() => {
+            this.#request();
+          }}
+          >${this.#T('request')}</noema-button
+        >
       </div>
       <p class="nc-muted eng-intro">${this.#T('intro')}</p>
       ${K.GROUPS.map(([g, ids]) =>

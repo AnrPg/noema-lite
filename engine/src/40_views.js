@@ -483,7 +483,7 @@ function sectionView(sid, bid) {
   draw();
   if (target) showHit(body.querySelector(`[data-bid="${bids[s.blocks.indexOf(target)]}"]`));
 }
-/** A place opened from the search (engine/search.js): brought into view and outlined for a moment. */
+/** A place opened from the search (src/features/search/ui): brought into view and outlined for a moment. */
 function showHit(el) {
   if (!el) return;
   setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('ns-hit'); setTimeout(() => el.classList.remove('ns-hit'), 2600); }, 120);

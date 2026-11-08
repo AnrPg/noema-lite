@@ -19,12 +19,16 @@ import { SearchUi, type SearchDeps } from '../features/search/ui/model.ts';
 import type { I18n } from '../ports/i18n.ts';
 import type { Notifier } from '../ports/notifier.ts';
 import type { ReportDeps } from '../features/reports/ui/dialog.ts';
+import type { VaultParams } from '../features/vault/domain/index.ts';
+import { VaultUi, type SendItem } from '../features/vault/ui/model.ts';
+import { SocialUi } from '../features/social/ui/model.ts';
+import type { VaultFile } from '../ports/vault.ts';
 import type { BridgeExtension } from './bridge.ts';
 import type * as ScreensModule from './community-ui.ts';
 import type { Resolver } from './container.ts';
 import { oldAppHost } from './community-host.ts';
 import { captureErrors, oldAppReportContext } from './community-old.ts';
-import { REPORTS } from './community.ts';
+import { REPORTS, SOCIAL, VAULT } from './community.ts';
 import { oldAppShare } from './sharing-host.ts';
 import { catalogBridge } from './study.ts';
 import { CLOCK, I18N, NOTIFIER, STORAGE } from './tokens.ts';
@@ -37,13 +41,20 @@ export interface CommunityApp {
   readonly i18n: I18n;
   readonly search: SearchUi;
   readonly reports: ReportDeps;
+  readonly vault: VaultUi;
+  readonly social: SocialUi;
 }
 
 type OpenIndex = (account: string, sources: () => Promise<readonly IndexSource[]>) => CatalogIndex;
 
 const newId = (): string => Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
 
-export function communityApp(r: Resolver, win: Window & typeof globalThis, errors: ReturnType<typeof captureErrors>): CommunityApp {
+export function communityApp(
+  r: Resolver,
+  win: Window & typeof globalThis,
+  errors: ReturnType<typeof captureErrors>,
+  sendTo: (item: SendItem) => void,
+): CommunityApp {
   const host = oldAppHost(win as never, { report: oldAppReportContext(win, errors), share: oldAppShare(win) });
   const i18n = r.get(I18N),
     notify = r.get(NOTIFIER);
@@ -59,7 +70,26 @@ export function communityApp(r: Resolver, win: Window & typeof globalThis, error
     newId,
   };
   const reports: ReportDeps = { host, notify, i18n, win, reports: r.get(REPORTS), newId: () => win.crypto.randomUUID() };
-  return { r, host, notify, i18n, search: new SearchUi(searchDeps, () => i18n), reports };
+  const social = r.get(SOCIAL);
+  const vault = new VaultUi({
+    host,
+    notify,
+    i18n: () => i18n,
+    vault: r.get(VAULT),
+    groups: async () => {
+      if (!host.session()) return [];
+      if (!social.state.loaded) await social.refresh();
+      return social.groups();
+    },
+    usedBytes: async () => {
+      if (!host.session()) return null;
+      const n = await social.server.usedBytes();
+      return n.ok ? n.value : null;
+    },
+    sendTo,
+  });
+  const socialUi = new SocialUi({ host, i18n: () => i18n, social, device: searchDeps.device, tab: searchDeps.tab, win });
+  return { r, host, notify, i18n, search: new SearchUi(searchDeps, () => i18n), reports, vault, social: socialUi };
 }
 
 /** the screens, loaded once */
@@ -77,7 +107,12 @@ export function communityBridge(r: Resolver): unknown {
   let app: CommunityApp | null = null;
   // the page's errors from the start (a ⚑ report carries the last ones); Node and the tests' vm have no page
   const errors = typeof win.addEventListener === 'function' && 'console' in win ? captureErrors(win) : () => [];
-  const A = (): CommunityApp => (app ??= communityApp(r, win, errors));
+  const A = (): CommunityApp =>
+    (app ??= communityApp(r, win, errors, item => {
+      void ui().then(s => {
+        s.sendTo(item);
+      });
+    }));
   const cloudOn = (): boolean => A().host.account()?.kind === 'cloud' && !!A().host.session();
   const ui = async (): Promise<ReturnType<Screens['communityScreens']>> => (await loadScreens()).communityScreens(A(), win);
   /** once the screens are loaded, a screen is mounted in the same task (the frame never shows a page half drawn) */
@@ -121,6 +156,33 @@ export function communityBridge(r: Resolver): unknown {
         if (!cloudOn()) return 0;
         const x = await A().reports.reports.newCount();
         return x.ok ? x.value : 0;
+      },
+    }),
+    vault: Object.freeze({
+      /** '' when the vault takes the file, else why not (in the learner's words); it reads the file's first bytes */
+      checkFile: (file: Pick<Blob, 'slice'> & { readonly name: string; readonly size: number }, usedBytes?: number) =>
+        A().vault.checkFile(file, usedBytes),
+      /** the files that pass the page's filters and search words */
+      filter: (all: readonly VaultFile[], P: VaultParams) => A().vault.filter(all, P),
+      /** forget the list read (the page reads it again) */
+      reset: () => {
+        A().vault.reset();
+      },
+    }),
+    social: Object.freeze({
+      /** the poll of what waits (a cloud account's start) */
+      start: () => {
+        A().social.start();
+      },
+      /** what waits for me: unread messages, invitations, buddy requests (the People button's count) */
+      waiting: () => A().social.waiting(),
+      onChange: (f: () => void) => A().social.onChange(f),
+      refresh: () => A().social.refresh(),
+      /** the server's refusals in the learner's words */
+      why: (e: unknown) => A().social.why(e),
+      /** the buttons of someone's page (#/u/<id>): message them, ask them to be buddies */
+      personActions: async (el: HTMLElement, userId: string) => {
+        (await ui()).personActions(el, userId);
       },
     }),
     search: Object.freeze({

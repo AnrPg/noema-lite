@@ -1,7 +1,7 @@
 /**
  * ⚑ Problem reports (docs/REPORTS.md): what a report is, its kinds and statuses, the files of the repository it points to,
  * and the brief — the English Markdown whoever fixes it (a person or Claude, through the connector) reads. The locator
- * the app collects (engine/report.js collect) is the input; it comes from the database, so every part is optional.
+ * the app collects (src/features/reports/ui/locate.ts collect) is the input; it comes from the database, so every part is optional.
  */
 import { textOf } from '../../../kernel/text.ts';
 import type { Locator, ReportRow } from '../../../ports/reports.ts';
@@ -68,16 +68,18 @@ const CODE: Readonly<Record<string, string>> = {
   cards: 'engine/src/40_views.js',
   drill: 'engine/src/40_views.js',
   lang: 'engine/lang/*.js (→ engine/langui.js)',
-  vault: 'engine/vault.js',
-  people: 'engine/social.js',
-  chat: 'engine/social.js',
-  group: 'engine/social.js',
-  search: 'engine/search.js',
+  vault: 'src/features/vault/ui/page.ts',
+  people: 'src/features/social/ui/home.ts',
+  chat: 'src/features/social/ui/chat.ts',
+  group: 'src/features/social/ui/group.ts',
+  join: 'src/features/social/ui/group.ts',
+  search: 'src/features/search/ui/page.ts',
+  engines: 'src/features/reports/ui/engines.ts',
   map: 'engine/curmap.js',
   learn: 'engine/shell.js',
   '': 'engine/shell.js',
   me: 'engine/shell.js',
-  admin: 'engine/report.js',
+  admin: 'src/features/reports/ui/admin.ts',
 };
 
 export interface RepoFile {

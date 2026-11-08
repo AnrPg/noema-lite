@@ -62,7 +62,7 @@ export async function openReport(d: ReportDeps): Promise<void> {
             dlg.redraw();
             const k = dlg.el.querySelector('.nr-kinds');
             k?.classList.remove('shake');
-            void (k as HTMLElement | null)?.offsetWidth;
+            k?.getBoundingClientRect(); // a reflow: the shake starts again
             k?.classList.add('shake');
             return;
           }
@@ -181,7 +181,14 @@ export async function openReport(d: ReportDeps): Promise<void> {
             ${local ? html`<p class="nr-signin">${T('signIn')}</p>` : html`<p class="nc-muted nr-privacy">${T('privacy')}</p>`}
             <p class="nr-err" role="alert">${error}</p>
           </div>
-          <noema-button slot="actions" variant="quiet" @click=${() => close()}>${T('cancel')}</noema-button>
+          <noema-button
+            slot="actions"
+            variant="quiet"
+            @click=${() => {
+              close();
+            }}
+            >${T('cancel')}</noema-button
+          >
           ${
             local
               ? html`<noema-button

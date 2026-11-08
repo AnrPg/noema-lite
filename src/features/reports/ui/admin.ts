@@ -64,18 +64,29 @@ export class NoemaReportAdmin extends CommunityScreen<ReportDeps> {
       this.requestUpdate();
     };
     const admin = cloudOn(this.deps) ? await R.isAdmin() : { ok: true as const, value: false };
-    if (!admin.ok) return set({ state: 'error', text: this.i18n.err(admin.error) });
-    if (!admin.value) return set({ state: 'refused' });
+    if (!admin.ok) {
+      set({ state: 'error', text: this.i18n.err(admin.error) });
+      return;
+    }
+    if (!admin.value) {
+      set({ state: 'refused' });
+      return;
+    }
     if (!this.reportId) {
       const r = await R.list(this.#filter());
-      return set(r.ok ? { state: 'list', rows: r.value } : { state: 'error', text: this.i18n.err(r.error) });
+      set(r.ok ? { state: 'list', rows: r.value } : { state: 'error', text: this.i18n.err(r.error) });
+      return;
     }
     const r = await R.one(this.reportId);
-    if (!r.ok) return set({ state: 'error', text: this.i18n.err(r.error) });
+    if (!r.ok) {
+      set({ state: 'error', text: this.i18n.err(r.error) });
+      return;
+    }
     const row = r.value;
     if (row?.status === 'new' && row.id) {
       void R.save(row.id, { status: 'seen' }); // opening it is seeing it (a refusal here changes nothing the admin does)
-      return set({ state: 'one', row: { ...row, status: 'seen' } });
+      set({ state: 'one', row: { ...row, status: 'seen' } });
+      return;
     }
     set({ state: 'one', row });
   }
@@ -103,7 +114,9 @@ export class NoemaReportAdmin extends CommunityScreen<ReportDeps> {
                 class=${x === f ? 'on' : ''}
                 aria-selected=${String(x === f)}
                 data-f=${x}
-                @click=${() => this.host.go('#/admin/reports?f=' + x)}
+                @click=${() => {
+                  this.host.go('#/admin/reports?f=' + x);
+                }}
               >
                 ${this.#T('f_' + x)}
               </button>`,
@@ -120,7 +133,9 @@ export class NoemaReportAdmin extends CommunityScreen<ReportDeps> {
                     type="button"
                     class="nr-item"
                     data-id=${s(r.id)}
-                    @click=${() => this.host.go('#/admin/reports/' + encodeURIComponent(s(r.id)))}
+                    @click=${() => {
+                      this.host.go('#/admin/reports/' + encodeURIComponent(s(r.id)));
+                    }}
                   >
                     ${this.#pills(r)}
                     <span class="t"

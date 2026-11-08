@@ -74,7 +74,7 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: () => contracts },
   // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
-  // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
+  // search, vault, social, reports, engineRequests: the domains of the community screens (src/features/*/ui, NoemaCore.community)
   ...COMMUNITY_BRIDGE,
   // NoemaCore.community: the community screens (search, vault, people, ⚑ reports, Explore, #/engines), loaded on first use
   ...COMMUNITY_APP_BRIDGE,

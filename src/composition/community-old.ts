@@ -55,7 +55,8 @@ export function captureErrors(win: Window): () => readonly PageError[] {
 }
 function safeJson(a: unknown): string {
   try {
-    return JSON.stringify(a) ?? '';
+    const s: unknown = JSON.stringify(a);
+    return typeof s === 'string' ? s : '';
   } catch {
     return str(a) || typeof a; // a cycle: its kind
   }
@@ -91,7 +92,7 @@ export function oldAppReportContext(win: Window, errors: () => readonly PageErro
     },
     locate: place => call(obj(g('NoemaShell')?.['engine']), 'locate', place) ?? null,
     given: el => {
-      const card = el.closest('.ex') as (Element & { _w?: { given?: () => unknown } }) | null;
+      const card = el.closest<Element & { _w?: { given?: () => unknown } }>('.ex');
       const v = card?._w?.given?.();
       return typeof v === 'string' && v ? v : null;
     },

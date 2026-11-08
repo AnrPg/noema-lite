@@ -6,6 +6,8 @@
  *   #/search?…                      the search page                       (src/features/search/ui)
  *   #/admin/reports[/<id>][?f=…]   the ⚑ reports, for the app's admins   (src/features/reports/ui)
  *   #/engines[/new]                 ⚙ engines of activities, requests     (src/features/reports/ui), inside the engine
+ *   #/vault?…                       🗄️ the vault: files students share     (src/features/vault/ui)
+ *   #/people · #/chat/<room> · #/group/<room> · #/join/<code>   👥 people     (src/features/social/ui)
  *   (no address)                    🔎 the quick sheet · ⚑ the report dialog
  */
 import type { ScreenChrome } from '../features/community/ui/host.ts';
@@ -17,6 +19,14 @@ import { NoemaEnginesPage, type EnginesDeps } from '../features/reports/ui/engin
 import type { CatalogEntry } from '../engines/types.ts';
 import { NoemaSearchPage } from '../features/search/ui/page.ts';
 import { NoemaSearchQuick, quickSearch, type SearchScreenDeps } from '../features/search/ui/quick.ts';
+import { NoemaVaultForm, type VaultScreenDeps } from '../features/vault/ui/form.ts';
+import { NoemaVaultPage } from '../features/vault/ui/page.ts';
+import { NoemaVaultUpload } from '../features/vault/ui/upload.ts';
+import type { SendItem } from '../features/vault/ui/model.ts';
+import { NoemaChatPage } from '../features/social/ui/chat.ts';
+import { NoemaGroupPage, NoemaJoinPage, NoemaPersonActions } from '../features/social/ui/group.ts';
+import { NoemaPeoplePage } from '../features/social/ui/home.ts';
+import { openSendTo, type SocialScreenDeps } from '../features/social/ui/parts.ts';
 import { provideServices, requestServices } from '../ui/core/services.ts';
 import { defineUi } from '../ui/index.ts';
 import { defineRoutes, type RouteMatch } from '../ui/router/routes.ts';
@@ -28,6 +38,11 @@ export const COMMUNITY_ROUTES = defineRoutes({
   search: '/search',
   reports: '/admin/reports/:id?',
   engines: '/engines/:sub?',
+  vault: '/vault',
+  people: '/people',
+  chat: '/chat/:room',
+  group: '/group/:room',
+  join: '/join/:code',
 });
 type R = typeof COMMUNITY_ROUTES.table;
 type Match = RouteMatch<R>;
@@ -38,6 +53,14 @@ export const COMMUNITY_ELEMENTS = {
   'noema-search-quick': NoemaSearchQuick,
   'noema-report-admin': NoemaReportAdmin,
   'noema-engines-page': NoemaEnginesPage,
+  'noema-vault-page': NoemaVaultPage,
+  'noema-vault-form': NoemaVaultForm,
+  'noema-vault-upload': NoemaVaultUpload,
+  'noema-people-page': NoemaPeoplePage,
+  'noema-chat-page': NoemaChatPage,
+  'noema-group-page': NoemaGroupPage,
+  'noema-join-page': NoemaJoinPage,
+  'noema-person-actions': NoemaPersonActions,
 } as const;
 
 export interface CommunityScreens {
@@ -45,6 +68,10 @@ export interface CommunityScreens {
   mount(el: HTMLElement, hash: string, onChrome: (c: ScreenChrome) => void, ctx?: MountContext): HTMLElement | null;
   quickSearch(here: Here | null): void;
   openReport(): void;
+  /** ✉ a vault file into one of my conversations */
+  sendTo(item: SendItem): void;
+  /** the buttons of someone's page (#/u/<id>) drawn into el */
+  personActions(el: HTMLElement, userId: string): void;
 }
 
 /** what the place that mounts a screen adds (the engine's #/engines: the engines it runs, the open subject, its home) */
@@ -68,6 +95,8 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
       locales: { list: () => [{ tag: app.i18n.locale(), name: app.i18n.locale(), dir: app.i18n.dir() }], use: tag => Promise.resolve(tag) },
     });
   const searchDeps: SearchScreenDeps = { ...app.search.d, ui: app.search };
+  const vaultDeps: VaultScreenDeps = { host: app.host, notify: app.notify, ui: app.vault };
+  const socialDeps: SocialScreenDeps = { host: app.host, notify: app.notify, ui: app.social, vault: app.vault };
 
   /** the element of a matched address, with its deps */
   const screenOf = (m: Match, ctx: MountContext): CommunityScreen | null => {
@@ -99,6 +128,34 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
         el.sub = m.params.sub ?? '';
         return el;
       }
+      case 'vault': {
+        const el = doc.createElement('noema-vault-page');
+        el.deps = vaultDeps;
+        return el;
+      }
+      case 'people': {
+        const el = doc.createElement('noema-people-page');
+        el.deps = socialDeps;
+        return el;
+      }
+      case 'chat': {
+        const el = doc.createElement('noema-chat-page');
+        el.deps = socialDeps;
+        el.room = m.params.room;
+        return el;
+      }
+      case 'group': {
+        const el = doc.createElement('noema-group-page');
+        el.deps = socialDeps;
+        el.room = m.params.room;
+        return el;
+      }
+      case 'join': {
+        const el = doc.createElement('noema-join-page');
+        el.deps = socialDeps;
+        el.code = m.params.code;
+        return el;
+      }
     }
   };
 
@@ -122,6 +179,15 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
     },
     openReport: () => {
       void openReport(app.reports);
+    },
+    sendTo: item => {
+      void openSendTo(socialDeps, { kind: item.kind, id: item.id, title: item.title }, item.title);
+    },
+    personActions: (el, userId) => {
+      const a = win.document.createElement('noema-person-actions');
+      a.deps = socialDeps;
+      a.person = userId;
+      el.replaceChildren(a);
     },
   };
   return made;

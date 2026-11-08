@@ -52,17 +52,25 @@ export function openDialog(deps: ScreenBase, o: DialogOptions): DialogHandle {
   if (o.content) dlg.append(o.content);
   draw();
   const remove = deps.host.overlay(dlg);
+  // A dialog belongs to the page it was opened on: going to another page closes it (?id= and the like stay)
+  const pathOf = (): string => globalThis.location.hash.split('?')[0] ?? '';
+  const page = pathOf();
+  const away = (): void => {
+    if (pathOf() !== page) close('away');
+  };
+  globalThis.addEventListener('hashchange', away);
   const closed = new Promise<string>(resolve => {
-    dlg.addEventListener(
-      'noema-close',
-      e => {
-        const v = (e as CustomEvent<DialogCloseDetail>).detail.value;
-        remove();
-        o.onClose?.(v);
-        resolve(v);
-      },
-      { once: true },
-    );
+    // A menu inside the dialog says noema-close too when it closes (and it bubbles): only the dialog's own counts.
+    const done = (e: Event): void => {
+      if (e.target !== dlg) return;
+      dlg.removeEventListener('noema-close', done);
+      globalThis.removeEventListener('hashchange', away);
+      const v = (e as CustomEvent<DialogCloseDetail>).detail.value;
+      remove();
+      o.onClose?.(v);
+      resolve(v);
+    };
+    dlg.addEventListener('noema-close', done);
   });
   void dlg.updateComplete.then(() => {
     dlg.show();

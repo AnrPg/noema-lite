@@ -188,10 +188,8 @@ export interface CommunityHost {
   /** the share dialog's data and calls (engine/cloud.js) */
   share: ShareHost;
 
-  /* ---------- ⚑ reports, #/engines ---------- */
+  /* ---------- ⚑ reports ---------- */
   report: ReportContext;
-  /** an engine (or runtime) of the catalogue this app runs */
-  engineHere(entry: { readonly id: string; readonly runtime?: string | boolean }): boolean;
 }
 
 /** What the share dialog of a subject uses (the cloud's sharing: engine/cloud.js). */
@@ -200,7 +198,7 @@ export interface ShareHost {
   prepare(subjectId: string): Promise<SharePrep>;
   /** is the subject public now (and since when) */
   published(subjectId: string): Promise<{ readonly at?: string } | null>;
-  publish(prep: SharePrep, o: { readonly files: boolean; readonly onProgress: (done: number, total: number) => void }): Promise<void>;
+  publish(prep: SharePrep, o: { readonly files: boolean; readonly onProgress: ShareProgress }): Promise<void>;
   unpublish(subjectId: string): Promise<void>;
   /** shares with one person (by e-mail), with a message */
   send(
@@ -209,15 +207,20 @@ export interface ShareHost {
       readonly email: string;
       readonly message: string;
       readonly files: boolean;
-      readonly onProgress: (done: number, total: number) => void;
+      readonly onProgress: ShareProgress;
     },
   ): Promise<void>;
   /** the shares of this subject sent to people */
   sent(subjectId: string): Promise<readonly { readonly id: string; readonly to_email: string; readonly status: string }[]>;
   withdraw(shareId: string): Promise<void>;
+  /** the package as a file to send by hand (a local profile) */
+  download(prep: SharePrep): void;
 }
+/** the files going up: done of total (total 0: still being prepared), the file now */
+export type ShareProgress = (done: number, total: number, name: string) => void;
 export interface SharePrep {
   readonly subject: HostSubject;
+  readonly counts: { readonly chapters: number; readonly exercises: number; readonly pictures: number };
   /** the pack's pictures that are not openly licensed (the warning asks to confirm) */
   readonly restricted: number;
   /** the source files that can go with it: their count and size */
