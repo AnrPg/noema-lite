@@ -54,7 +54,7 @@ import NoemaSimKit from '../kernel/simkit.ts';
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
   const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
   const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js): its MRG32k3a streams, one per purpose (radio, each sensor, the network);
+  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.ts): its MRG32k3a streams, one per purpose (radio, each sensor, the network);
       normals by inversion (AS241), Poisson by inversion. FALLBACK without the kernel (marked): mulberry32 + Box–Muller */
   function kit() {
     return NoemaSimKit;

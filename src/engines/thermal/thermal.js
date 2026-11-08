@@ -16,7 +16,7 @@ import NoemaSimKit from '../kernel/simkit.ts';
   const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const isNum = v => typeof v === 'number' && Number.isFinite(v);
-  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js): a transient and the stepper run on its θ-method DAE solver
+  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.ts): a transient and the stepper run on its θ-method DAE solver
       (daeThetaInit: Newton with LU, or one factored solve for a linear network; the massless nodes algebraic rows; θ and the sources'
       mean power chosen per step); FALLBACK without the kernel (marked): the same θ-step here (stepCore) */
   function kit() {

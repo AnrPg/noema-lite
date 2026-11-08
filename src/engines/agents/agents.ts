@@ -10,7 +10,7 @@
    contact (infection, influence), adopt (voter model), average (DeGroot 1974), ising (Glauber 1963 heat bath), flock (Reynolds
    1987), send (FIPA-ACL messages, FIPA 2002 SC00037J), and BDI deliberation (Rao & Georgeff 1995; Bratman 1987: goals, a plan
    library with context conditions, commitment blind / single-minded / open-minded). Norms (obligations, prohibitions,
-   permissions with deadlines, violations and sanctions) are monitored by NoemaLibLogic.normMonitor (src/engines/logic/logic.js) when it is
+   permissions with deadlines, violations and sanctions) are monitored by NoemaLibLogic.normMonitor (src/engines/logic/logic.ts) when it is
    loaded, otherwise by a documented fallback (code logic-fallback).
    Multi-agent protocols (model.protocol): Contract Net (Smith 1980), auctions English / Dutch / first- and second-price sealed
    (Vickrey 1961; revenue equivalence, Myerson 1981), bilateral negotiation (Rubinstein 1982 alternating offers; Zeuthen 1930
@@ -25,7 +25,7 @@ import NoemaLibCore from '../kernel/core.ts';
 import NoemaExpr from '../kernel/simexpr.ts';
 import NoemaSimKit from '../kernel/simkit.ts';
 import NoemaSpaceKit from '../kernel/space.ts';
-import NoemaLibLogic from '../logic/logic.js';
+import NoemaLibLogic from '../logic/logic.ts';
 import type { CoreStepper, Emit, NumFn, Stats } from '../kernel/core.ts';
 import type { Codes, StepperDef } from '../kernel/simkit.ts';
 import type { Spec } from '../types.ts';

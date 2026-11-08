@@ -35,13 +35,13 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('logic@1'),
-    () => import('./logic/logic.js'),
-    () => import('noema-worker:./logic/logic.js#simEngine'),
+    () => import('./logic/logic.ts'),
+    () => import('noema-worker:./logic/logic.ts#simEngine'),
   ),
   def(
     manifest('graph@1'),
-    () => import('./graph/graph.js'),
-    () => import('noema-worker:./graph/graph.js#simEngine'),
+    () => import('./graph/graph.ts'),
+    () => import('noema-worker:./graph/graph.ts#simEngine'),
   ),
   def(
     manifest('geom@1'),
@@ -60,8 +60,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('med@1'),
-    () => import('./med/med.js'),
-    () => import('noema-worker:./med/med.js#simEngine'),
+    () => import('./med/med.ts'),
+    () => import('noema-worker:./med/med.ts#simEngine'),
   ),
   def(
     manifest('clinic@1', ['engine:med@1']),
@@ -85,8 +85,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('map@1'),
-    () => import('./map/map.js'),
-    () => import('noema-worker:./map/map.js#simEngine'),
+    () => import('./map/map.ts'),
+    () => import('noema-worker:./map/map.ts#simEngine'),
   ),
   def(
     manifest('text@1'),
@@ -100,8 +100,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('law@1', ['engine:logic@1']),
-    () => import('./law/law.js'),
-    () => import('noema-worker:./law/law.js#simEngine'),
+    () => import('./law/law.ts'),
+    () => import('noema-worker:./law/law.ts#simEngine'),
   ),
   def(
     manifest('agents@1', ['engine:logic@1']),

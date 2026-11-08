@@ -1103,7 +1103,7 @@ import NoemaLibCore from '../kernel/core.ts';
   };
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, scenes: true, stepper });
   const API = Object.freeze({
-    table: { model: { $by: 'mode', $cases: TABLES }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(m => [m, Object.keys(OUTS[m]).reduce((a, k) => ((a[OUTS[m][k][0]] = a[OUTS[m][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'numx' } },   // the form of the activity author (src/engines/kernel/schema.js)
+    table: { model: { $by: 'mode', $cases: TABLES }, outputs: { $by: 'mode', $cases: Object.fromEntries(MODES.map(m => [m, Object.keys(OUTS[m]).reduce((a, k) => ((a[OUTS[m][k][0]] = a[OUTS[m][k][0]] || []).push(k), a), {})])) }, fields: { arg: 'numx' } },   // the form of the activity author (src/engines/kernel/schema.ts)
     id: ID, MODES, TABLES, OUTS, EPI, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine, stepper,
     // the formulas, for tests
     logFact, lgamma, gammaQ, chi2Sf, erfc, Phi, PhiInv, intensity, binomial, poisson, hweExact, kimuraU, haldane, kosambi, rHaldane, rKosambi, tajimaD, aN, ratioOf, chainOf,

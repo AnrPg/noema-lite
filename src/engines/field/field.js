@@ -27,7 +27,7 @@ import NoemaSimKit from '../kernel/simkit.ts';
 import NoemaSpaceKit from '../kernel/space.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this module
   const C = NoemaLibCore, S = NoemaSpaceKit;
-  const SK = () => NoemaSimKit;   // the time / randomness / output-analysis kernel (src/engines/kernel/simkit.js, loaded before this file)
+  const SK = () => NoemaSimKit;   // the time / randomness / output-analysis kernel (src/engines/kernel/simkit.ts, loaded before this file)
   const ID = 'field@1';
   const EQUATIONS = ['heat', 'advection', 'advdiff', 'wave', 'rd', 'poisson', 'ca'];
   const ADV = ['upwind', 'laxwendroff', 'laxfriedrichs', 'centred', 'minmod', 'vanleer', 'superbee', 'mc'];
@@ -1195,7 +1195,7 @@ import NoemaSpaceKit from '../kernel/space.ts';
   const stepper = NoemaSimKit && typeof NoemaSimKit.stepper === 'function' ? NoemaSimKit.stepper(stepDef) : stepDef;
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true, stepper });
   const API = Object.freeze({
-    table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: OUT_FIELDS },   // the form of the activity author (src/engines/kernel/schema.js)
+    table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES }, fields: OUT_FIELDS },   // the form of the activity author (src/engines/kernel/schema.ts)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine,
     EQUATIONS: Object.freeze(EQUATIONS.slice()), METHODS: Object.freeze(Object.assign({}, METHODS)), KINETICS: Object.freeze(KINETICS.slice()), CA_RULES: Object.freeze(CA_RULES.slice()),
     CODES: Object.freeze(CODES.slice()), SERIES: Object.freeze(SERIES.slice()), SCALARS: Object.freeze(SCALARS.slice()), SCENES: Object.freeze(SCENES.slice()), STATS: Object.freeze(STATS.slice()),

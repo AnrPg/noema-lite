@@ -1,4 +1,4 @@
-/* med@1 (src/engines/med/med.js, docs/library/med.md): published reference values (the source in each message, with its tolerance),
+/* med@1 (src/engines/med/med.ts, docs/library/med.md): published reference values (the source in each message, with its tolerance),
    the edge cases and their codes, the checker's codes, the sim adapter, the Worker source in a fresh global, speed, and the SIG table
    being the golden one of the former Python twin (tools/lib_med.py).  Run: node tests/lib_med.js */
 'use strict';

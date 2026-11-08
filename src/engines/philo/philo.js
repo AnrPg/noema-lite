@@ -17,7 +17,7 @@
    Tests: node tests/lib_philo.js */
 import NoemaLibCore from '../kernel/core.ts';
 import NoemaSimKit from '../kernel/simkit.ts';
-import NoemaLibLogic from '../logic/logic.js';
+import NoemaLibLogic from '../logic/logic.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own ids leave this engine
   const C = NoemaLibCore;
   const ID = 'philo@1';
@@ -631,7 +631,7 @@ import NoemaLibLogic from '../logic/logic.js';
     }
     return { pa, pb };
   }
-  /* the seeded streams: NoemaSimKit's MRG32k3a when it is loaded (src/engines/kernel/simkit.js, L'Ecuyer 1999), else the core's mulberry32
+  /* the seeded streams: NoemaSimKit's MRG32k3a when it is loaded (src/engines/kernel/simkit.ts, L'Ecuyer 1999), else the core's mulberry32
      — FALLBACK (marked): the same seed gives the same numbers on every device either way */
   function rngFor(seed, name) {
     const K = NoemaSimKit;
@@ -1466,7 +1466,7 @@ import NoemaLibLogic from '../logic/logic.js';
 
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   const API = Object.freeze({
-    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (src/engines/kernel/schema.js)
+    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (src/engines/kernel/schema.ts)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine, TABLES: T,
     value, compare, paradox, gini, verdict, ful, pairwise, method, condWinner, condLoser, smithSet, criterion, manipulable, singlePeaked,
     utility, evOf, euOf, ceOf, cpt, meu, stPete, nashCells, mixed, dominantStrat, paretoCell, match, tournament, hull, bargain,

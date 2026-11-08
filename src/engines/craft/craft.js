@@ -1256,7 +1256,7 @@ import NoemaLibCore from '../kernel/core.ts';
   }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   const API = Object.freeze({
-    table: { model: { $by: 'mode', $cases: DATA.schema }, outputs: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => { const O = DATA.outs[m]; return [m, { scalar: O.scalar.concat((O.issues || []).map(i => 'issue.' + i), ...Object.entries(O.prefix || {}).map(([p, l]) => l.map(x => p + x))), series: O.series || [], scene: O.scene || [] }]; })) } },   // the form of the activity author (src/engines/kernel/schema.js)
+    table: { model: { $by: 'mode', $cases: DATA.schema }, outputs: { $by: 'mode', $cases: Object.fromEntries(DATA.modes.map(m => { const O = DATA.outs[m]; return [m, { scalar: O.scalar.concat((O.issues || []).map(i => 'issue.' + i), ...Object.entries(O.prefix || {}).map(([p, l]) => l.map(x => p + x))), series: O.series || [], scene: O.scene || [] }]; })) } },   // the form of the activity author (src/engines/kernel/schema.ts)
     id: ID, DATA, checkSpec, exprs, keys, run, compute, engine: Object.freeze(engine), simEngine,
     // the engine's own functions and tables, for the tests
     distribute, shaping, runs, token, orbifoldCost, classifyWallpaper, classifyFrieze, canonVertex, GROUPS, emc, ffd, exactBins,

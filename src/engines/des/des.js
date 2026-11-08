@@ -1,5 +1,5 @@
 /* ===================== des@1 — discrete-event simulation of queues and service networks (docs/library/des.md) =====================
-   A GENERAL engine of the library (docs/INTERACTIVE_LIBRARY.md §1) on the simulation kernel NoemaSimKit (src/engines/kernel/simkit.js):
+   A GENERAL engine of the library (docs/INTERACTIVE_LIBRARY.md §1) on the simulation kernel NoemaSimKit (src/engines/kernel/simkit.ts):
    entities of up to 8 classes arrive from sources (Poisson, any interarrival distribution, a schedule of times, a rate schedule as a
    non-homogeneous Poisson process, batches), wait in queues (FIFO, LIFO, priority, SPT) at up to 16 stations (servers with a
    capacity, shifts, breakdowns and repairs, pre-emption with resume / restart / resample; delays = infinite servers), balk, renege

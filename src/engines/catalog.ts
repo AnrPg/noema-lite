@@ -151,7 +151,7 @@ const CATALOG = Object.freeze([
     'hasard',
     'aléatoire',
   ]),
-  E('logic@1', 'library', true, 'src/engines/logic/logic.js', 'logic', [
+  E('logic@1', 'library', true, 'src/engines/logic/logic.ts', 'logic', [
     'logic',
     'proof',
     'truth table',
@@ -179,7 +179,7 @@ const CATALOG = Object.freeze([
     'logique',
     'preuve',
   ]),
-  E('graph@1', 'library', true, 'src/engines/graph/graph.js', 'graph', [
+  E('graph@1', 'library', true, 'src/engines/graph/graph.ts', 'graph', [
     'graph',
     'network',
     'node',
@@ -352,7 +352,7 @@ const CATALOG = Object.freeze([
     'transcription',
     'protéine',
   ]),
-  E('med@1', 'library', true, 'src/engines/med/med.js', 'med', [
+  E('med@1', 'library', true, 'src/engines/med/med.ts', 'med', [
     'medicine',
     'medical',
     'physiology',
@@ -595,7 +595,7 @@ const CATALOG = Object.freeze([
     'accord',
     'accordage',
   ]),
-  E('map@1', 'library', true, 'src/engines/map/map.js', 'map', [
+  E('map@1', 'library', true, 'src/engines/map/map.ts', 'map', [
     'map',
     'projection',
     'geography',
@@ -737,7 +737,7 @@ const CATALOG = Object.freeze([
     'céramique',
     'émail',
   ]),
-  E('law@1', 'library', true, 'src/engines/law/law.js', 'law', [
+  E('law@1', 'library', true, 'src/engines/law/law.ts', 'law', [
     'law',
     'legal',
     'statute',

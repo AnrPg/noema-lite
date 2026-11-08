@@ -18,7 +18,7 @@ import NoemaSimKit from '../kernel/simkit.ts';
   const log10 = Math.log10;
   function fail(code, extra) { const e = new Error('rf: ' + code); e.code = code; if (extra) Object.assign(e, extra); return e; }
 
-  /** a number, or a string with an SI prefix ("868M", "125k") → number; anything else → NaN (as circuit.num, src/engines/circuit/circuit.js) */
+  /** a number, or a string with an SI prefix ("868M", "125k") → number; anything else → NaN (as circuit.num, src/engines/circuit/circuit.ts) */
   const SI = { f: 1e-15, p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, m: 1e-3, k: 1e3, K: 1e3, M: 1e6, meg: 1e6, G: 1e9 };
   function num(v) {
     if (typeof v === 'number') return Number.isFinite(v) ? v : NaN;
@@ -125,7 +125,7 @@ import NoemaSimKit from '../kernel/simkit.ts';
   function hash32(s, seed) { let h = (2166136261 ^ (seed >>> 0)) >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
   const gauss = r => (typeof r.normal === 'function' ? r.normal(0, 1) : boxMuller(r));
   const boxMuller = r => { const u = Math.max(r(), 1e-300), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js): MRG32k3a streams (one per purpose: the shadowing draw, the sweep), normals
+  /** the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.ts): MRG32k3a streams (one per purpose: the shadowing draw, the sweep), normals
       by inversion (AS241), roots by Brent 1973. FALLBACK without the kernel (marked): mulberry32 + Box–Muller, bisection */
   function kit() {
     return NoemaSimKit;

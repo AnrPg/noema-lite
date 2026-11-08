@@ -265,7 +265,7 @@ import NoemaSimKit from '../kernel/simkit.ts';
     return r;
   }
 
-  // ---- the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.js; docs/library/simkit.md): its RK4, breaks and streams ----
+  // ---- the simulation kernel (NoemaSimKit, src/engines/kernel/simkit.ts; docs/library/simkit.md): its RK4, breaks and streams ----
   function kit() {
     return NoemaSimKit;
   }

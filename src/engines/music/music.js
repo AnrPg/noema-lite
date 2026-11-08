@@ -547,7 +547,7 @@ import NoemaLibCore from '../kernel/core.ts';
   }
   const { engine, simEngine } = makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   const API = Object.freeze({
-    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (src/engines/kernel/schema.js)
+    table: { model: T.MODEL, outputs: T.OUT },   // the form of the activity author (src/engines/kernel/schema.ts)
     id: ID, checkSpec, exprs, keys, run, prepare, engine: Object.freeze(engine), simEngine, TABLES: T,
     parsePitch, parsePC, fromMidi, interval, parseIvl, transpose, tuner, normalForm, primeForm, iv, forteNumber, invariance, maskOf, pcsOf, analyseChord, roman, nrt, CHORDS,
     melakarta, bjorklund, necklace, evenness, partials, dPair, roughness, voiceLeading, resonator, monzoCents, COMMA, WELL, SCALE, MAQAM,

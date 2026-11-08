@@ -18,11 +18,11 @@
      • orders and models: Monroe's motivated sequence (1935), the parts of an oration (Cicero, De Inv. I.19), the canons, stasis
        (Hermagoras via Cicero / Quintilian), the Elaboration Likelihood Model (Petty & Cacioppo 1986) and inoculation (McGuire 1961;
        Banas & Rains 2010) as teaching models, audience fit.
-   Logic (Dung semantics, validity, syllogisms) is NOT re-implemented here: it is called from NoemaLibLogic (src/engines/logic/logic.js);
-   (src/engines/logic/logic.js loads first; its source travels to the Worker in front of this module). Pure JS, deterministic, bounded; numbers, codes, keys
+   Logic (Dung semantics, validity, syllogisms) is NOT re-implemented here: it is called from NoemaLibLogic (src/engines/logic/logic.ts);
+   (src/engines/logic/logic.ts loads first; its source travels to the Worker in front of this module). Pure JS, deterministic, bounded; numbers, codes, keys
    and the model's own short texts (`s`, ≤ 64 characters) only. Python twin of the checks: tools/lib_rhetoric.py. */
 import NoemaLibCore from '../kernel/core.ts';
-import NoemaLibLogic from '../logic/logic.js';
+import NoemaLibLogic from '../logic/logic.ts';
   /* i18n-ignore-start */   // code, not text: only codes, keys, numbers and the model's own words leave this module
   const C = NoemaLibCore;
   const ID = 'rhetoric@1';

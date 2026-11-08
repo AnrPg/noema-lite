@@ -1,4 +1,4 @@
-# `logic@1` — logic from truth tables to norms (`src/engines/logic/logic.js`, `NoemaLibLogic`)
+# `logic@1` — logic from truth tables to norms (`src/engines/logic/logic.ts`, `NoemaLibLogic`)
 
 `logic@1` is a general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). It has **one formula language**, written in ASCII or
 Unicode. Its parser gives precise error codes and positions. Over that language it runs **24 tasks**:
@@ -542,7 +542,7 @@ randomness.
 
 ## 9. API for other engines (philo@1, rhetoric@1, law@1, agents@1)
 
-These names of the module's default export (`import NoemaLibLogic from '../logic/logic.js'`) are stable. It imports the core;
+These names of the module's default export (`import NoemaLibLogic from '../logic/logic.ts'`) are stable. It imports the core;
 NoemaExpr is needed only for numx expressions. `engine.workerSource` is its Worker bundle: NoemaExpr, the core and this module. ASTs are plain objects `{t, …}`: `atom n`, `top`, `bot`, `not a`, `and/or/xor/imp/iff a b`,
 `all/ex v a`, `pred n args`, `eq l r`, `box/dia a ag?`, `O/P/F a c?`, `K/B ag a`, `EK/CK/DK g a`, `ann/annd f a`, `X/Fe/G a`,
 `U/R/W a b`, `A/E p`; terms `{t: 'fn', n, args}`.

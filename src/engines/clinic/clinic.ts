@@ -21,7 +21,7 @@ import NoemaLibCore from '../kernel/core.ts';
 import type { CoreStepper, Emit, NumFn, StepCtx } from '../kernel/core.ts';
 import type { Break } from '../kernel/simkit.ts';
 import type { Spec } from '../types.ts';
-import NoemaLibMed from '../med/med.js';
+import NoemaLibMed from '../med/med.ts';
 /* i18n-ignore-start */
 type Rec = Readonly<Record<string, unknown>>;
 /** the inputs of a run (consts, params, derived) */
