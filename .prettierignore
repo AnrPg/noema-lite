@@ -3,3 +3,4 @@ src/contracts/generated/
 src/package.json
 # vendored code and data, byte for byte as published (src/engines/map/vendor/README.md)
 src/engines/map/vendor/
+src/engines/geom/vendor/
