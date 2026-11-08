@@ -55,8 +55,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('seq@1'),
-    () => import('./seq/seq.js'),
-    () => import('noema-worker:./seq/seq.js#simEngine'),
+    () => import('./seq/seq.ts'),
+    () => import('noema-worker:./seq/seq.ts#simEngine'),
   ),
   def(
     manifest('med@1'),
