@@ -110,8 +110,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('field@1'),
-    () => import('./field/field.js'),
-    () => import('noema-worker:./field/field.js#simEngine'),
+    () => import('./field/field.ts'),
+    () => import('noema-worker:./field/field.ts#simEngine'),
   ),
   def(
     manifest('des@1'),
