@@ -91,3 +91,8 @@ export function askButton(face: string, avatar: string, label: string, onclick: 
     h('span', { class: 'lbl' }, label),
   );
 }
+
+/** The source viewer (sources/viewer.ts): a source's PDF at a page, its passage found, or its link. */
+export interface ViewerPort {
+  open(id: string, o?: { readonly page?: number | null; readonly find?: string | null; readonly title?: string }): void;
+}

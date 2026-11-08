@@ -23,7 +23,7 @@ import type { AnswerRecord, Chapter, Exercise, Flashcard } from '../domain/pack.
 import { chapterProgress, isSolved, mistakes, roundOrder, siblingOf } from '../domain/queries.ts';
 import { roundMachine, startRound, type RoundContext, type RoundEvent, type RoundState } from '../domain/session.ts';
 import type { StudyHost } from './host.ts';
-import type { AiPort, TutorPort } from './parts.ts';
+import type { AiPort, TutorPort, ViewerPort } from './parts.ts';
 
 /** A round in play: its exercises' statechart and what the screen shows around it. */
 export interface Round {
@@ -63,6 +63,7 @@ export class StudyApp {
   /** the tutor and the AI's one-shot jobs (set by the root once tutor/ is made, before any screen is drawn) */
   tutor!: TutorPort;
   ai!: AiPort;
+  viewer!: ViewerPort;
   /** the tab each chapter was left on */
   readonly chapterTab = new Map<string, string>();
   /** chunks of a section already shown (bite-size reading) */

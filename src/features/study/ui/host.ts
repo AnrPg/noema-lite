@@ -9,6 +9,7 @@
 import type { Course } from '../domain/course.ts';
 import type { Chapter, Exercise, Media, StudyState, SubjectInfo } from '../domain/pack.ts';
 import type { SourceRegistry } from '../domain/course.ts';
+import type { Widget, WidgetApi } from './exercise/widget.ts';
 
 /** One entry of a ⋮ menu or a Practice ▾ list ('-': a line). */
 export type MenuEntry =
@@ -103,8 +104,8 @@ export interface ActivitiesPort {
   asText(b: Readonly<Record<string, unknown>>): string;
   /** can this app run the exercise (a type or runtime it knows)? */
   runnable(ex: Exercise, chapter: Chapter): boolean;
-  /** an activity exercise's answer area (the sim type) in the card's contract */
-  exercise(ex: Exercise, api: unknown): unknown;
+  /** an activity exercise's answer area (the sim type) in the card's contract; null: not an activity's type */
+  exercise(ex: Exercise, api: WidgetApi): Widget | null;
 }
 
 /** 文A language help (docs/BRIDGE.md): the words of a section in the learner's language. */

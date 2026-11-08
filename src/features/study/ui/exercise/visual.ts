@@ -1188,23 +1188,3 @@ export function figureBlock(app: StudyApp, media: Readonly<Record<string, Media>
   if (cap) box.append(h('figcaption', { class: 'caption', html: fmt(cap) }));
   return box;
 }
-
-/* ---------- as text (the tutor's context, search): English, for the AI's prompts ---------- */
-export function visualAsText(media: Readonly<Record<string, Media>>, ex: Exercise): string {
-  const m = ex.media ? media[ex.media] : undefined;
-  const regs = vRegions(ex, m);
-  const L = (id: string): string => regs.find(r => r.id === id)?.label ?? id;
-  let t = `Picture: ${m?.alt ?? ex.media ?? ''}${m?.caption ? ` — ${m.caption}` : ''}\n`;
-  const named = vTargets(ex, regs).filter(r => r.label);
-  if (named.length) t += `Labeled parts: ${named.map(r => (r.label ?? '') + (r.note ? ` (${r.note})` : '')).join('; ')}\n`;
-  if (ex.type === 'img_hotspot') t += `Correct place(s): ${ids(ex.answer).map(L).join(', ')}\n`;
-  if (ex.type === 'img_sequence') t += `Correct order: ${ids(ex.answer).map(L).join(' → ')}\n`;
-  if (ex.distractors?.length) t += `Distractor labels: ${ex.distractors.join(', ')}\n`;
-  return t;
-}
-export function figureAsText(media: Readonly<Record<string, Media>>, b: Block): string {
-  const m = b.media ? media[b.media] : undefined;
-  const regs = vRegions(b, m).filter(r => r.label && !r.id.endsWith('-area'));
-  const cap = b.caption ?? m?.caption;
-  return `[FIGURE] ${m?.alt ?? b.media ?? ''}${cap ? ` — ${cap}` : ''}${regs.length ? `\nParts: ${regs.map(r => (r.label ?? '') + (r.note ? `: ${r.note}` : '')).join('; ')}` : ''}`;
-}
