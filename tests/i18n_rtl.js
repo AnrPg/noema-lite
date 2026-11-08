@@ -77,8 +77,8 @@ const seedRoadmap = page => page.evaluate(() => {   // a Roadmap whose steps' ti
 
   console.log('E. a pack’s text keeps its own direction; arrows written into texts and the wide frame mirror');
   await boot('ar-XB'); await seedRoadmap(page);
-  await page.evaluate(() => { location.hash = '#/learn'; }); await until(() => page.$('.ns-rmcard')); await page.click('.ns-rmcard'); await until(() => page.$('.cm-node[data-id="a"]'));
-  ok(await endsRight(page, '.cm-title b') === true, 'a Roadmap’s title “Data engineer?” reads left to right (the ? at its end)');
+  await page.evaluate(() => { location.hash = '#/learn'; }); await until(() => page.$('noema-roadmap-library .cm-card')); await page.click('noema-roadmap-library .cm-card'); await until(() => page.$('.cm-node[data-id="a"]'));
+  ok(await endsRight(page, '.cm-title strong') === true, 'a Roadmap’s title “Data engineer?” reads left to right (the ? at its end)');
   await page.click('.cm-node[data-id="a"]'); await until(() => page.$('.cm-ptitle h3'));
   ok(await endsRight(page, '.cm-ptitle h3') === true && await bidi(page, '.cm-pre>.cm-names') === 'plaintext', 'a step’s title in its panel and the names of the steps it opens keep their direction');
   await page.click('.cm-vbtn[data-list="true"]').catch(() => {}); await until(() => page.$('.cm-listnode'));

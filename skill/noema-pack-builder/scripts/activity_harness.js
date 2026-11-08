@@ -10,7 +10,7 @@
    picks the 7th diagnosis; "readings": [[i, lo, hi]] checks the number of the i-th measurement, "log": n how many there are;
    a case's "task" (e.g. {"fault": "rOpen"}) overrides the exercise's task.params.
    wasm-module@1 (docs/INTERACTIVE_WASM.md): activities/<id>/module.wasm (+ its own spec.json) runs like a sim-spec@1 activity, with
-   the app's wasm runtime (44_activity_wasm.js: the module checked, then run in a worker without network); a sim-spec@1 spec with
+   the app's wasm runtime (src/runtimes/wasm-module, inside noema-core.js: the module checked, then run in a worker without network); a sim-spec@1 spec with
    engine wasm@1 finds its module item in activities.json. external-embed@1 is not run here (it needs the network and the provider's
    page): check it with activity_lint.py.
    py-module@1 (docs/INTERACTIVE_PYTHON.md) runs like sim-spec@1 (the same steps and expectations; "values" are Python's scalar outputs),
@@ -87,14 +87,16 @@ const has = f => fs.existsSync(path.join(srcDir, f));
 // activity_host/noema-core.js, or the repository's build/harness.js (npm run build)
 const corePath = [path.join(srcDir, 'noema-core.js'), path.join(srcDir, '..', '..', 'build', 'harness.js')].find(f => fs.existsSync(f));
 const SIMOK = !!corePath;   // html-app@1 and sim-spec@1 are typed runtimes of noema-core.js (NoemaCore.runtimes)
-const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
+// wasm-module@1 and the engine wasm@1 (P6): typed runtimes (src/runtimes) inside noema-core.js, made for this page by NoemaCore.attachRuntimes
+const WASMOK = SIMOK && /attachRuntimes/.test(fs.readFileSync(corePath, 'utf8'));
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
 // the site's service worker (it keeps the Python files): the built site's /sw.js or the repository's build/sw.js (npm run build); served
 // with an empty app shell, so here it handles only the Python files
 const PYSW = [PYSITE && path.join(PYSITE, 'sw.js'), path.join(srcDir, '..', '..', 'build', 'sw.js')].find(f => f && fs.existsSync(f));
 const pySw = () => 'self.NOEMA_SW = {"version":"harness","shell":[]};\n' + fs.readFileSync(PYSW, 'utf8').replace(/^self\.NOEMA_SW = .*;$/m, '');
-const PYOK = SIMOK && has('37_activity_py.js') && has('37_activity_py_ui.js') && !!PYSITE && !!PYSW;
+// py-module@1 (P4): a typed runtime (src/runtimes/py-module) inside noema-core.js, like wasm-module@1
+const PYOK = WASMOK && !!PYSITE && !!PYSW;
 const NEEDHTTP = PYOK && items.some(a => a.runtime === 'py-module@1');
 // h5p@1: the runtime and the app's own H5P player (skill zip: activity_host/h5p/player.js; repository: engine/vendor/h5p/<version>/player.js)
 const playerPath = [path.join(srcDir, 'h5p', 'player.js'), path.join(srcDir, '..', 'vendor', 'h5p', '3.8.2', 'player.js')].find(f => fs.existsSync(f));
@@ -116,29 +118,27 @@ ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
 var RT = {}, EN = { 'formula@1': { id: 'formula@1', check: function () { return []; }, create: function () { return { run: function () { return {}; } }; } } };
 var ACT = { ITEMS: {}, PARTS: ${inl(JSON.stringify(PARTSLIB))}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, loadedRuntime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || (window.NoemaCore && NoemaCore.engines.engine(id)) || null; }, engines: function () { return Object.keys(EN).concat(window.NoemaCore ? NoemaCore.engines.ids() : []); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); },
-  simView: function (box, ctx, host) { return RT['sim-spec@1'].view(box, ctx, host); } };
+ };
 function nf(n) { return String(n); } function fmtBytes(n) { return n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B'; } function tip(t) { return document.createTextNode(''); }
 var WORDS = ${JSON.stringify(HOSTWORDS)};
 function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-/* what a typed runtime (src/runtimes) gets from its host: the words, the protocol, the engines and the content checks (as the app's ACT gives them) */
-var HOSTPORT = { t: tE, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, check: function (raw) { return ACTP.check(raw); }, setting: function () { return undefined; }, setSetting: function () { },
+</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script>${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+/* the typed runtimes (src/runtimes), made for this page as the app's ACT.runtime(id) makes them: what they get from their host — the words,
+   the protocol, the engines and the content checks (as the app's ACT gives them) */
+var RTHOST = { t: tE, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, check: function (raw) { return ACTP.check(raw); }, setting: function () { return undefined; }, setSetting: function () {},
   flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); }, asset: function (p) { return p; },
+  items: function () { return ACT.ITEMS; }, expr: function () { return window.NoemaCore ? NoemaCore.engines.expr : null; }, loadedRuntime: function (id) { return RT[id] || null; },
+  config: function (k) { return (window.NOEMA_CONFIG || {})[k]; }, num: function (n) { return String(n); }, simView: function (box, c, o) { return RT['sim-spec@1'] ? RT['sim-spec@1'].view(box, c, o) : null; },
   compute: { engine: function (id) { return ACT.engine(id); }, engines: function () { return ACT.engines(); }, library: function () { return window.NoemaCore ? NoemaCore.engines.catalog.LIBRARY.slice() : []; },
     compile: function (src) { return NoemaCore.engines.expr.compile(src); }, content: function () { return window.NoemaCore ? NoemaCore.content : null; }, parts: function () { return ACT.PARTS; } } };
-</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script>${SIMOK ? `${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+window.RUNTIMES_READY = window.NoemaCore && NoemaCore.attachRuntimes ? NoemaCore.attachRuntimes(ACT, RTHOST) : Promise.resolve([]);
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
-/* every engine of the library loaded first (once: the app loads only those an activity needs), and the typed runtimes (src/runtimes) made for this host */
-var TYPED = null;
-function typed() {
-  var L = window.NoemaCore && NoemaCore.runtimes; if (!L) return Promise.resolve();
-  return TYPED || (TYPED = Promise.all(L.ids().map(function (id) { return L.load(id).then(function (m) { var d = m.create(HOSTPORT); if (d) RT[d.id] = d; }); })));
-}
 window.run = function (act, init, modules) {
-  return Promise.all([window.NoemaCore ? NoemaCore.engines.load(NoemaCore.engines.ids()) : null, typed()]).then(function () { mount(act, init, modules); });
+  return Promise.all([window.NoemaCore ? NoemaCore.engines.load(NoemaCore.engines.ids()) : null, window.RUNTIMES_READY]).then(function () { mount(act, init, modules); });
 };
 function mount(act, init, modules) {
   if (modules) ACT.ITEMS = modules;
@@ -204,7 +204,7 @@ function mount(act, init, modules) {
     if (a.runtime === 'wasm-module@1' && !a.spec) { console.log('  (a module without its own spec: it runs through the sim-spec@1 activities whose spec names it in model.module)'); continue; }
     const PY = a.runtime === 'py-module@1', WA = a.runtime === 'wasm-module@1', SIM = a.runtime === 'sim-spec@1' || PY || WA;
     const H5 = a.runtime === 'h5p@1';
-    if (PY && !PYOK) { skipped++; console.log(`  (skipped: ${PYSITE ? 'the Python runner (activity_host/37_activity_py*.js) is missing from the toolkit' : 'the Python files are not here — set NOEMA_PYODIDE_SITE to a folder with vendor/pyodide/ (python3 tools/fetch_pyodide.py --site DIR)'})`); continue; }
+    if (PY && !PYOK) { skipped++; console.log(`  (skipped: ${PYSITE ? 'the Python runtime (inside activity_host/noema-core.js) is missing from the toolkit' : 'the Python files are not here — set NOEMA_PYODIDE_SITE to a folder with vendor/pyodide/ (python3 tools/fetch_pyodide.py --site DIR)'})`); continue; }
     if (!((a.runtime === 'html-app@1' && SIMOK) || (SIM && !WA && SIMOK) || (WA && WASMOK) || (H5 && H5POK))) { say(false, `runtime ${a.runtime}: this toolkit runs ${SIMOK ? 'html-app@1, sim-spec@1, py-module@1' : 'no runtime without noema-core.js'}${WASMOK ? ', wasm-module@1' : ''}${H5POK ? ', h5p@1' : ''} only for now`); continue; }
     if (H5 && a._missing) { say(false, `${a.entry || 'item.h5p'}: not found`); continue; }
     if (SIM && !a.spec) { say(false, `${PY || WA ? 'activities/' + a.id + '/spec.json' : a.entry || 'spec.json'}: not found or not JSON`); continue; }

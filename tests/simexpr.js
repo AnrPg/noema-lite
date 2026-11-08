@@ -218,7 +218,7 @@ else {
   ok(worst <= 1, 'the fdlibm ports are within 1 ulp of this platform\'s Math (' + exact + '/' + total + ' identical, worst ' + worst.toFixed(2) + ' ulp)');
 }
 {
-  const js = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'kernel', 'simexpr.js'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+  const js = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'kernel', 'simexpr.ts'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
   ok(!/\beval\s*\(|\bnew\s+Function\b|\bFunction\s*\(|\bsetTimeout\s*\(|\bimport\s*\(|\brequire\s*\(/.test(js), 'the expression language has no eval, no new Function, no dynamic import');
 }
 {

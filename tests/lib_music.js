@@ -1,4 +1,4 @@
-/* music@1 (src/engines/music/music.js, docs/library/music.md): published reference values (the source in each message), the edge cases
+/* music@1 (src/engines/music/music.ts, docs/library/music.md): published reference values (the source in each message), the edge cases
    and their codes, the checker's codes, the sim adapter (with its sound outputs), the Worker source in a fresh global, speed.
    Run: node tests/lib_music.js */
 'use strict';

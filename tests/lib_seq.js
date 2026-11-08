@@ -1,4 +1,4 @@
-/* seq@1 (src/engines/seq/seq.js, docs/library/seq.md) against published values and Biopython 1.88 (Cock et al. 2009), the test
+/* seq@1 (src/engines/seq/seq.ts, docs/library/seq.md) against published values and Biopython 1.88 (Cock et al. 2009), the test
    oracle the values were generated with (Biopython is not needed to run this file):
    1. alphabets, cleaning, reverse complement, GC (three conventions), masses; 2. the NCBI genetic codes, ambiguous codons, starts,
    context-dependent and incomplete stops; 3. ORFs in six frames, codon usage (RSCU, ENC, CAI); 4. mutations and HGVS names;

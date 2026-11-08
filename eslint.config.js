@@ -15,6 +15,9 @@ const ELEMENTS = [
   { type: 'ports', pattern: 'src/ports', partialMatch: false },
   { type: 'domain', pattern: 'src/features/*/domain', partialMatch: false, capture: ['feature'] },
   { type: 'application', pattern: 'src/features/*/application', partialMatch: false, capture: ['feature'] },
+  // a feature's screens (src/features/<name>/ui/: Lit on the kit) and their tests (…/ui/test/, listed first: 'feature-ui' would match them)
+  { type: 'feature-ui-test', pattern: 'src/features/*/ui/test', partialMatch: false, capture: ['feature'] },
+  { type: 'feature-ui', pattern: 'src/features/*/ui', partialMatch: false, capture: ['feature'] },
   { type: 'plugins', pattern: 'src/plugins', partialMatch: false },
   { type: 'engines', pattern: 'src/engines', partialMatch: false },
   // the activity runtimes (src/runtimes): plugins that draw into the box the activity core gives them (a driving adapter, like the UI)
@@ -42,6 +45,9 @@ const MAY_IMPORT = {
   // the UI (src/ui: the component kit, the router, the frame) is a driving adapter: it reaches the core through the ports
   ui: ['kernel', 'contracts', 'ports', 'ui'],
   'ui-test': ['kernel', 'contracts', 'ports', 'adapters', 'ui'],
+  // a feature's screens: the kit and the feature's own domain and application, the rest through ports (the data port of the screen)
+  'feature-ui': ['kernel', 'contracts', 'ports', 'domain', 'application', 'ui', 'feature-ui'],
+  'feature-ui-test': ['kernel', 'contracts', 'ports', 'adapters', 'domain', 'application', 'ui', 'ui-test', 'feature-ui', 'feature-ui-test'],
   connector: ['kernel', 'contracts', 'ports', 'domain', 'application', 'plugins', 'engines', 'runtimes', 'connector'],
   composition: ELEMENTS.map(e => e.type),
 };
@@ -64,11 +70,6 @@ module.exports = tseslint.config(
   { files: ['engine/**/*.js', 'config*.js'], languageOptions: { sourceType: 'script' } },
   { files: ['**/*.mjs'], languageOptions: { ecmaVersion: 'latest', sourceType: 'module' } },
 
-  /* ---------- the engines' own code (src/engines/**\/*.js): plain ES modules (src/package.json), typed at their edge by a .d.ts
-     beside each (the TypeScript rules apply there and to the .ts around them). Here only what the architecture asks of a pure
-     layer: no empty catch and no DOM / network / storage / clock (rules below, PURE). ---------- */
-  { files: ['src/**/*.js'], languageOptions: { ecmaVersion: 'latest', sourceType: 'module' }, rules: { 'no-empty': ['error', { allowEmptyCatch: false }] } },
-  { files: ['src/**/vendor/**'], languageOptions: { sourceType: 'commonjs' } },
 
   /* ---------- src/: TypeScript, strict ---------- */
   ...tseslint.configs.strictTypeChecked.map(c => ({ ...c, files: ['src/**/*.ts'] })),
@@ -98,6 +99,10 @@ module.exports = tseslint.config(
       }],
     },
   },
+  /* ---------- the engines (src/engines/**): numeric kernels index their arrays by loop counters and ids they checked, and
+     noUncheckedIndexedAccess types every such read as possibly undefined. `a[i]!` states that the index is in range; it is erased,
+     so the JavaScript is the source's arithmetic as written (the engines compute every double bit for bit as before). ---------- */
+  { files: ['src/engines/**/*.ts'], rules: { '@typescript-eslint/no-non-null-assertion': 'off' } },
   {
     files: PURE,
     rules: {

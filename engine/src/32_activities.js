@@ -31,7 +31,7 @@ const ACTP = (() => {
     'a11y:announce': p => str(p.text, LIM.text) && p.text.trim().length > 0,
     error: p => CODE.test(p.code || '') && (p.message == null || str(p.message, LIM.detail)),
     pong: p => true, ack: p => true, nack: p => true,
-    // py-module@1 (37_activity_py.js): the runner's own messages, checked in full by NoemaPy.protocol before they get here; the core only notes them
+    // py-module@1 (src/runtimes/py-module): the runner's own messages, checked in full by its pyCheck before they get here; the core only notes them
     'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
     'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
     // html-app@1: a mini-app asks for an engine of the library (src/runtimes/html-app/bridge.ts checks the rest: declared, the spec, the inputs)
@@ -68,7 +68,7 @@ const ACT = (() => {
   const PARTS = reg && reg.parts && typeof reg.parts === 'object' && !Array.isArray(reg.parts) ? reg.parts : {};   // activities/_parts: the parts a spec reuses ({use, with}, docs/INTERACTIVE.md §12.8)
   const RUNTIMES = {}, GRADERS = {}, ENGINES = {};
   // every runtime is on unless config.js switches it off (docs/adr/001 §4 "Feature flags"): NOEMA_CONFIG.activities['py-module@1'] = false;
-  // py-module@1 still needs NoemaPy.available() (the website: never file:// or the one-file bundle)
+  // py-module@1 still needs the website (its descriptor's rule in src/runtimes/manifests.ts: never file:// or the one-file bundle)
   const flags = () => Object.assign({ 'html-app@1': true, 'py-module@1': true }, window.NOEMA_CONFIG?.activities || {});
   /** the typed runtimes (src/runtimes, NoemaCore.runtimes): known at once by their manifests, their code loaded when an activity needs it */
   const RTL = () => window.NoemaCore?.runtimes || null;
@@ -77,7 +77,9 @@ const ACT = (() => {
   const switchedOn = id => (RTL()?.has(id) ? RTL().isOn(id, flags()) : flags()[id] !== false);
   /** a runtime that is registered (or a typed one not loaded yet), switched on and can run here (available(): py-module@1 only on the
       website, never file:// or the one-file bundle) */
-  const enabled = id => !!((own(id) || !!RTL()?.has(id)) && switchedOn(id) && (!own(id) || typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available()));
+  const enabled = id => !!((own(id) || !!RTL()?.has(id)) && switchedOn(id) && (own(id) ? typeof RUNTIMES[id].available !== 'function' || RUNTIMES[id].available() : RTL().available(id)));
+  /** the words the fallback shows where a runtime that is switched on cannot run (its own, or a typed runtime's descriptor's) */
+  const unavailableNote = id => { if (!switchedOn(id)) return null; const R0 = RUNTIMES[id]; if (R0) return typeof R0.unavailable === 'function' ? R0.unavailable() : null; const k = RTL()?.unavailableNote(id); return k ? tE(k) : null; };
   /** the capabilities of this app (pack.requires): the core + every runtime that is registered and switched on */
   const caps = () => new Set(['activities/v1', ...[...new Set([...Object.keys(RUNTIMES), ...(RTL()?.ids() || [])])].filter(enabled).map(id => 'runtime:' + id), ...engines().map(id => 'engine:' + id)]);
   const canRun = a => !!(a && enabled(a.runtime));
@@ -114,6 +116,9 @@ const ACT = (() => {
       engine: id => engine(id), engines: () => engines(), library: () => [...(LIBR()?.catalog?.LIBRARY || [])],
       compile: src => LIBR().expr.compile(src), content: () => window.NoemaCore?.content || null, parts: () => PARTS,
     }),
+    items: () => ITEMS, expr: () => LIBR()?.expr || null, loadedRuntime: id => RUNTIMES[id] || null,
+    config: k => window.NOEMA_CONFIG?.[k], num: (n, o) => window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n, o) : o?.maximumFractionDigits != null ? n.toFixed(o.maximumFractionDigits) : String(n),
+    simView: (box, c, o) => (RUNTIMES[SIM] ? RUNTIMES[SIM].view(box, c, o) : null),   // loaded before the item mounts (needs)
   });
   const SIM = 'sim-spec@1';
   /** the typed runtimes an item needs before it mounts: its own, and the sim-spec view that the runtimes built on it draw with
@@ -125,7 +130,7 @@ const ACT = (() => {
     if (own(id)) return Promise.resolve(RUNTIMES[id]);
     const L = RTL();
     if (!L?.has(id) || !switchedOn(id)) return Promise.resolve(null);
-    return pendingRt[id] ||= L.load(id).then(m => { const def = m.create(HOST); if (def) registerRuntime(def); delete pendingRt[id]; return def || null; },
+    return pendingRt[id] ||= L.load(id).then(m => { const def = m.create(HOST); if (def) { registerRuntime(def); for (const e of def.engines || []) registerEngine(e); } delete pendingRt[id]; return def || null; },
       e => { delete pendingRt[id]; console.warn('[noema] runtime', id, 'not loaded', e); return null; });
   }
   function registerGrader(def) { if (def && def.id && typeof def.grade === 'function') GRADERS[def.id] = def; }
@@ -137,12 +142,17 @@ const ACT = (() => {
   const LIBR = () => window.NoemaCore?.engines || null;
   /** an engine ready to run: one registered here, or one of the library once it is loaded (null before) */
   const engine = id => Object.prototype.hasOwnProperty.call(ENGINES, id) ? ENGINES[id] : LIBR()?.engine(id) || null;
-  /** every engine this app has: the registered ones and the library's, loaded or not */
-  const engines = () => [...new Set([...Object.keys(ENGINES), ...(LIBR()?.ids() || [])])];
+  /** every engine this app has: the registered ones, the library's and those a typed runtime brings (wasm@1), loaded or not */
+  const engines = () => [...new Set([...Object.keys(ENGINES), ...(LIBR()?.ids() || []), ...(RTL()?.engines().filter(e => switchedOn(RTL().engineOwner(e))) || [])])];
   /** the library engines an activity needs (its spec's engine, its parts', a mini-app's) and not loaded yet */
   function unloaded(a) {
     const L = LIBR(), need = window.NoemaCore?.content?.needRequires ? NoemaCore.content.needRequires([a], PARTS) : [];
     return L ? need.filter(r => r.startsWith('engine:')).map(r => r.slice(7)).filter(id => !Object.prototype.hasOwnProperty.call(ENGINES, id) && L.has(id) && !L.loaded(id)) : [];
+  }
+  /** the typed runtimes whose engines an activity needs (wasm@1 of wasm-module@1) and that are not here yet */
+  function owners(a) {
+    const R = RTL(), need = R && window.NoemaCore?.content?.needRequires ? NoemaCore.content.needRequires([a], PARTS) : [];
+    return [...new Set(need.filter(r => r.startsWith('engine:')).map(r => r.slice(7)).filter(id => !Object.prototype.hasOwnProperty.call(ENGINES, id)).map(id => R.engineOwner(id)).filter(Boolean))];
   }
 
   /* ---------- persistence, in the learning log: S.act (explorer state per activity and place: activity.saved) and S.att (the last
@@ -211,7 +221,7 @@ const ACT = (() => {
     const btn = (label, onclick, cls = 'btn small') => h('button', { class: cls, type: 'button', onclick }, label);
 
     if (!a) { fallback(tE('engine.act.missing')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
-    if (!canRun(a)) { const R0 = RUNTIMES[a.runtime], why = R0 && flags()[a.runtime] !== false && typeof R0.unavailable === 'function' ? R0.unavailable() : null; fallback(why || tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
+    if (!canRun(a)) { const why = unavailableNote(a.runtime); fallback(why || tE('engine.act.notHere')); return Object.assign(sess, { destroy() { }, grade: () => null }); }
 
     let timer = null, pingT = null, io = null, saveT = null;
     function stop(reason, offerRestart = true) {
@@ -255,7 +265,7 @@ const ACT = (() => {
         case 'result': sess.result = { score: p.score, passed: p.passed, detail: p.detail || null, t: Date.now() }; sess.onResult?.(sess.result); return;
         case 'hint:request': { const r = sess.nextHint?.(); sess.port?.send('hint', { text: r || null }, { re: m.id }); return; }
         case 'a11y:announce': live.textContent = ''; setTimeout(() => { live.textContent = p.text; }, 30); return;
-        case 'py:out': case 'py:status': return;   // the Python runtime's own traffic (37_activity_py_ui.js reads it)
+        case 'py:out': case 'py:status': return;   // the Python runtime's own traffic (src/runtimes/py-module reads it)
         case 'error':
           if (p.code === 'runaway') return stop(tE('engine.act.stopped'));
           note.textContent = tE('engine.act.error', { code: p.code }); console.warn('[noema] activity error', actId, p.code, p.message || ''); return;
@@ -270,7 +280,8 @@ const ACT = (() => {
     function start() {
       if (sess.destroyed) return;
       const want = unloaded(a);
-      const rts = needs(a).filter(id => !own(id));
+      // the typed runtimes it needs: its own, the sim-spec view it draws with, the owners of the engines it uses (wasm-module@1: wasm@1)
+      const rts = [...new Set([...needs(a), ...owners(a)])].filter(id => !own(id));
       if (!want.length && !rts.length) return begin();
       teardown(); box.classList.remove('act-fallback'); note.textContent = tE('engine.act.loading');
       const tok = sess.loading = {};
@@ -361,9 +372,7 @@ const ACT = (() => {
     if (hidden.length) { c.exercises = keep; c._hidden = (c._hidden || 0) + hidden.length; }
     return hidden;
   }
-  /** the sim-spec view (src/runtimes/sim-spec) for the runtimes that compute the outputs themselves (py-module@1): loaded before they mount (needs) */
-  const simView = (box, ctx, host) => RUNTIMES[SIM].view(box, ctx, host);
-  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, simView, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */

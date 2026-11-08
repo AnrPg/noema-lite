@@ -37,6 +37,24 @@ test('the switch rule: on unless false; opt-in only when true', () => {
   assert.equal(lib.isOn('external-embed@1', { 'external-embed@1': true }), true);
   assert.equal(lib.isOn('nope@1', { 'nope@1': true }), false);
   assert.equal(lib.checks, RUNTIME_CHECKS);
+  assert.equal(lib.switchOf('wasm-module@1'), 'on');
+  assert.equal(lib.isOn('wasm-module@1', {}), true);
+  assert.equal(lib.isOn('wasm-module@1', { 'wasm-module@1': false }), false);
+});
+
+test('a runtime names the engines of sim-spec@1 it brings before its code is loaded', async () => {
+  const lib = createRuntimeLibrary(RUNTIME_PLUGINS, () => RUNTIME_CHECKS);
+  assert.deepEqual(lib.engines(), ['wasm@1']);
+  assert.equal(lib.engineOwner('wasm@1'), 'wasm-module@1');
+  assert.equal(lib.engineOwner('formula@1'), null);
+  const rt = (await lib.load('wasm-module@1')).create(host({}));
+  assert.ok(rt);
+  assert.deepEqual(
+    (rt.engines ?? []).map(e => e.id),
+    ['wasm@1'],
+  );
+  assert.equal(rt.autoHeight, true);
+  assert.equal(typeof rt.engines?.[0]?.workerSource, 'string');
 });
 
 const host = (flags: Record<string, unknown>): RuntimeHost => {
@@ -61,6 +79,12 @@ const host = (flags: Record<string, unknown>): RuntimeHost => {
       content: () => null,
       parts: () => null,
     },
+    items: () => ({}),
+    expr: () => null,
+    loadedRuntime: () => null,
+    config: () => undefined,
+    num: n => String(n),
+    simView: () => null,
   };
 };
 

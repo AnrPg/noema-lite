@@ -349,7 +349,7 @@ def build_site(metas):
     os.makedirs(os.path.join(out, 'engine', 'app'), exist_ok=True)
     for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True)
-    for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm for the content checks (wasm-module@1)
+    for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮
     # the TypeScript bundles of the page (build/: npm run build) with their source maps — build/app.js holds the engine library
     # too (NoemaCore.engines); the connector is a function, the harness and the node bundles are not the site's
     os.makedirs(os.path.join(out, 'build'))
@@ -421,7 +421,7 @@ ENGINES_LICENSES = ('src/engines/map/vendor/LICENSE-geographiclib-geodesic.txt',
 # engine/src files the page loads by themselves, before engine.js (the shell checks packs with them and the ⋮ exports with
 # NoemaXAPI before any subject is open). They run once: engine.js leaves them out, and every page that starts the engine
 # (index.html, the one-file bundle) must load each of them — check_page_src() stops the build when one is missing.
-PAGE_SRC = ('43_xapi.js', '44_activity_wasm.js')
+PAGE_SRC = ('43_xapi.js',)
 def check_page_src():
     html = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
     miss = [f for f in ('engine/src/' + f for f in PAGE_SRC) if f'<script src="{f}"></script>' not in html]
@@ -486,8 +486,8 @@ def build_skill(out_zip):
             for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
                 if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
         z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
-        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed activity runtimes (src/runtimes)
-        for f in ('32_activities.js', '33_activity_guard.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts, the engine library and the typed runtimes (src/runtimes: sim-spec@1, html-app@1, wasm-module@1, py-module@1)
+        for f in ('32_activities.js', '33_activity_guard.js', '38_activity_h5p.js', '32_activities.css'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
@@ -524,7 +524,7 @@ def public_config():
 # the app's own code the connector runs, in load order (pack checks; curriculum tasks, checks and how answers change a
 # curriculum; pictures; language courses): src/connector/engine/sources.ts lists them and tools/connector_bundle.mjs bundles
 # each as its text. The data contracts and the engine library are ES modules the connector's composition root hands them.
-CONNECTOR_ENGINE = ('engine/src/38_activity_h5p.js', 'engine/src/44_activity_wasm.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
+CONNECTOR_ENGINE = ('engine/src/38_activity_h5p.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
 
 def connector_engine_files():
     """The engine files src/connector/engine/sources.ts loads (LEGACY_SOURCES, in order)."""
@@ -594,7 +594,7 @@ def build_bundle(metas):
     if '--subjects' in args: sel = set(args[args.index('--subjects') + 1].split(','))
     rd = lambda p: open(os.path.join(ROOT, p), encoding='utf-8').read()
     # a source inlined in a <script>: '</script' would end it, and '<!--' followed later by '<script' (the Python runner's srcdoc,
-    # 37_activity_py.js) puts the HTML parser in the 'double escaped' state, where '</script>' no longer ends the element (the
+    # src/runtimes/py-module/runner.ts) puts the HTML parser in the 'double escaped' state, where '</script>' no longer ends the element (the
     # engine then swallowed the loader and the bundle stayed blank). Both are written as JS escapes that mean the same text.
     esc = lambda s: s.replace('</script', '<\\/script').replace('<!--', '<\\x21--')
     packs = ''.join(f'<script>{esc(rd(m["path"]))}</script>\n' for m in metas if (not sel or m['id'] in sel))
@@ -639,7 +639,6 @@ def build_bundle(metas):
 <script>{esc(rd("engine/srcfiles.js"))}</script>
 <script>{esc(rd("engine/viewer.js"))}</script>
 <script>{esc(rd("engine/src/43_xapi.js"))}</script>
-<script>{esc(rd("engine/src/44_activity_wasm.js"))}</script>
 <script>{esc(rd("engine/schemaform.js"))}</script>
 <script>{esc(rd("engine/activity_author_schemas.js"))}</script>
 <script>{esc(rd("engine/activity_author.js"))}</script>

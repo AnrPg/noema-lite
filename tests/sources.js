@@ -4,6 +4,7 @@
 const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs'), { execFileSync } = require('child_process');
 const { start } = require('./mock_supabase');
+const { deepText } = require('./deep');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -161,10 +162,10 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-bad.noema.zip')).blob(); await Noema.importPackFile(Noema.account.id, new File([b], 'pkg-bad.noema.zip')); });
   await wait(1500);
   const badIdx = JSON.parse(await p.evaluate(() => localStorage.getItem(`noema1:${Noema.account.id}:a:srcfiles:pkg-bad`) || '{}'));
-  ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && /missing or damaged: ecb-1/.test(await p.locator('body').innerText()), 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
+  ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && /missing or damaged: ecb-1/.test(await deepText(p, 'body')), 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
   // a plain .json: imported, and the learner is told the files are in the package
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-physics.json')).text(); const pk = JSON.parse(b); pk.subject.id = 'pkg-json'; await Noema.importPackFile(Noema.account.id, new File([JSON.stringify(pk)], 'pkg-json.json', { type: 'application/json' })); });
-  ok(await until(async () => /not in this \.json — import the \.noema\.zip/.test(await p.locator('body').innerText()), 5000), 'importing only the .json says the 3 source files are in the .noema.zip package');
+  ok(await until(async () => /not in this \.json — import the \.noema\.zip/.test(await deepText(p, 'body')), 5000), 'importing only the .json says the 3 source files are in the .noema.zip package');
   // ⬇️ export: a package again, with every attached file
   const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 20000 }), p.evaluate(() => Noema.exportPackage(Noema.account.id, Noema.pack))]);
   const dlp = path.join(PK, 'export.zip'); await dl.saveAs(dlp);

@@ -6,7 +6,7 @@
 export interface ExprIssue {
   readonly msg: string;
 }
-/** the expression language (src/engines/kernel/simexpr.js): its problems, and its tree for the names an expression uses */
+/** the expression language (src/engines/kernel/simexpr.ts): its problems, and its tree for the names an expression uses */
 export interface ExprChecker {
   check(src: string, opts?: { readonly vars?: readonly string[] }): readonly ExprIssue[];
   parse(src: string): unknown;
@@ -26,11 +26,12 @@ export interface EngineChecks {
   readonly check?: (model: unknown) => readonly EngineIssue[];
   readonly checkFaults?: (model: unknown, apply: readonly unknown[]) => readonly EngineIssue[];
 }
-/** the checks of the activity runtimes that read binary packages (engine/src/44_activity_wasm.js, src/runtimes/external-embed,
+/** the checks of the activity runtimes that read binary packages (src/runtimes/wasm-module, src/runtimes/external-embed,
     engine/src/38_activity_h5p.js: the runtimes themselves use them before they run an item) */
 export interface WasmChecks {
   checkItem(item: unknown): { readonly problems: readonly string[] };
-  checkModel(spec: unknown, items: Readonly<Record<string, unknown>>): readonly string[];
+  /** expr: the expression language that checks the model's inputs (null: they are not checked here) */
+  checkModel(spec: unknown, items: Readonly<Record<string, unknown>>, expr: ExprChecker | null): readonly string[];
 }
 export interface EmbedChecks {
   check(item: unknown): { readonly errors: readonly string[]; readonly warnings: readonly string[] };

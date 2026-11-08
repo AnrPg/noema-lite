@@ -1,4 +1,4 @@
-/* The circuit engine circuit-mna@1 (src/engines/circuit/circuit.js, docs/INTERACTIVE_CIRCUIT.md) against analytic results:
+/* The circuit engine circuit-mna@1 (src/engines/circuit/circuit.ts, docs/INTERACTIVE_CIRCUIT.md) against analytic results:
    1. DC: divider, diode and LED with a resistor, BJT switch (Ebers–Moll saturation voltage), MOSFET switch, op-amp inverting gain;
    2. transients: RC charge, RL, series RLC (frequency and decay), RC low-pass at fc (sine steady state), PWM average through RC;
    3. instruments: ohmmeter, scope stats, logic analyser edges on a PWM node;
@@ -291,7 +291,7 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   ok(ms2 < 3000, `nonlinear (BJT driven by PWM) transient of 20000 steps in ${ms2.toFixed(1)} ms`);
 }
 
-{ // the sim-spec adapter (src/engines/circuit/sim.js): a logic capture of more than 2000 edges is cut where the edges kept end, never drawn flat to tEnd
+{ // the sim-spec adapter (src/engines/circuit/sim.ts): a logic capture of more than 2000 edges is cut where the edges kept end, never drawn flat to tEnd
   const def = ENGINES.mod('circuit-mna@1').engine;
   const nl = { nodes: ['p'], elements: [{ id: 'V1', type: 'V', n: ['p', 'gnd'], value: { pwm: { v: 5, freq: 100000, duty: 0.5 } } }, { id: 'R1', type: 'R', n: ['p', 'gnd'], value: 1000 }] };
   const m = def.create({ model: { netlist: nl } }, { seed: 1, faults: [] }).measure({}, { kind: 'logic', nodes: ['p'], threshold: 2.5, tEnd: 0.03, dt: 1e-6 });

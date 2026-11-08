@@ -169,5 +169,16 @@
   "roadmap.levels.kind.year": "Année {n}",
   "roadmap.levels.difficulty.introductory": "Initiation",
   "roadmap.levels.difficulty.intermediate": "Intermédiaire",
-  "roadmap.levels.difficulty.advanced": "Avancé"
+  "roadmap.levels.difficulty.advanced": "Avancé",
+  "roadmap.levels.title": "Niveaux",
+  "roadmap.levels.ladder": "Les niveaux de cette feuille de route",
+  "roadmap.levels.progress": "Étapes de {level} maîtrisées",
+  "roadmap.levels.moment.title": "Un nouveau niveau",
+  "roadmap.levels.moment.next": "Ensuite : {level}",
+  "roadmap.levels.moment.go": "Continuer",
+  "roadmap.levels.test.loading": "Les questions sont rassemblées…",
+  "roadmap.levels.proposal.gone": "Cette proposition a déjà été tranchée.",
+  "roadmap.quiz.answers": "Réponses",
+  "roadmap.quiz.right": "Juste.",
+  "roadmap.quiz.wrong": "Pas juste."
 }

@@ -1,4 +1,4 @@
-/* text@1 (src/engines/text/text.js, docs/library/text.md): published reference values (Manning & Schütze 1999; Flesch 1948 /
+/* text@1 (src/engines/text/text.ts, docs/library/text.md): published reference values (Manning & Schütze 1999; Flesch 1948 /
    Kincaid 1975 coefficients; the lexical-diversity package 0.1.1 of Kyle 2018 as an independent implementation; standard scansions
    of Virgil, Ovid and Homer), Unicode edge cases, the codes, the checks, the sim adapter, the Worker source, speed.
    Run: node tests/lib_text.js */

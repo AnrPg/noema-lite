@@ -7,7 +7,7 @@ import { ENGINE_PLUGINS } from './plugins.ts';
 
 /** the library of a page: every engine of plugins.ts, each loaded the first time it is needed */
 export function createAppEngines(): EngineLibrary {
-  return createEngineLibrary({ plugins: ENGINE_PLUGINS, schema: () => import('./kernel/schema.js').then(m => m.default) });
+  return createEngineLibrary({ plugins: ENGINE_PLUGINS, schema: () => import('./kernel/schema.ts').then(m => m.default) });
 }
 
 export type { EngineLibrary, LoadReport, LoadFailure } from './library.ts';
