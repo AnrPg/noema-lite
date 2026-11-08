@@ -1,4 +1,4 @@
-# `text@1` — texts and verse (`src/engines/text/text.js`, `NoemaLibText`)
+# `text@1` — texts and verse (`src/engines/text/text.ts`, `NoemaLibText`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for literature, linguistics, the classics and the digital
 humanities: tokens and types in every script, frequency laws, lexical diversity, concordances, collocations, keyness, stylometry,
