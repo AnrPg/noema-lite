@@ -15,7 +15,7 @@ import { lockedView, mixedView } from './screens/mixed.ts';
 import { runView } from './screens/round.ts';
 import { searchRunView } from './screens/search-round.ts';
 import { sectionView } from './screens/section.ts';
-import { whatsNewView } from './sources.ts';
+import { whatsNewView } from './screens/whats-new.ts';
 import { STUDY_ROUTES, type StudyRoutes } from './route-table.ts';
 
 export type StudyRoute = RouteMatch<StudyRoutes>;

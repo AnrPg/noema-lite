@@ -12,7 +12,6 @@ import { ExerciseCard, exerciseCard, exerciseText, type CardElement, type CardOp
 import { figureBlock, rCenter, vRegions, vTargets } from './exercise/visual.ts';
 import { defineStudyElements } from './lit/base.ts';
 import { knowledgeMap, reportedView } from './kmap.ts';
-import { defineStudyElements } from './lit/base.ts';
 import type { MenuEntry, StudyHost } from './host.ts';
 import type { AiPort, TutorPort } from './parts.ts';
 import { showStudyRoute, STUDY_SEGMENTS } from './routes.ts';

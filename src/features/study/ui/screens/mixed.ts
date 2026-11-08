@@ -6,8 +6,8 @@ import type { Exercise } from '../../domain/pack.ts';
 import { HOME, type StudyApp } from '../app.ts';
 import { html, show, StudyPage, StudyScreen, tag, type TemplateResult } from '../lit/base.ts';
 import { setAccent } from '../parts.ts';
-import { lockNote } from '../view.ts';
-import { myLevelChip } from './chapter.ts';
+import { lockNoteT } from '../view.ts';
+import { levelChip } from './chapter.ts';
 
 export function mixedView(app: StudyApp): void {
   setAccent(document.body, null);
@@ -16,16 +16,6 @@ export function mixedView(app: StudyApp): void {
 }
 
 export class StudyMixed extends StudyScreen {
-  /** the chip "Only my level" (null: no ladder); its change draws the counts again */
-  readonly #chip: HTMLElement | null;
-
-  constructor(app: StudyApp) {
-    super(app);
-    this.#chip = myLevelChip(app, () => {
-      this.redraw();
-    });
-  }
-
   protected page(): TemplateResult {
     const app = this.app;
     const all = app.course.exercises;
@@ -38,7 +28,7 @@ export class StudyMixed extends StudyScreen {
       exam = `🎓 ${app.t('engine.mixed.examOnly')}`;
     return html`<h1>${app.t('view.mixed')}</h1>
       <p class="muted">${app.t('engine.mixed.intro')}</p>
-      ${this.#chip}
+      ${levelChip(app, () => this.redraw())}
       <div class="row" style="margin-top:14px">
         <button class="btn primary" type="button" ?disabled=${!pool.length} @click=${go(pool, `🎲 ${app.t('engine.mixed.readTitle')}`)}>
           ▶ ${app.t('engine.mixed.fromRead', { n: n(pool) })}
@@ -74,7 +64,7 @@ tag('study-mixed', StudyMixed);
 /** a Roadmap step still locked: its practice pages wait, its theory is open */
 export function lockedView(app: StudyApp): void {
   app.host.frame.chrome({ sub: true, crumbs: [[app.L('exercisesWord')]], back: HOME, corner: true });
-  const note = lockNote(app);
+  const note = lockNoteT(app);
   show(
     app,
     new StudyPage(

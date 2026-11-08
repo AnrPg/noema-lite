@@ -1,19 +1,17 @@
 /**
  * The subject's sources: the chips of a chapter (tap one to open it at that page), the bar of the source filter, the
- * sources deck under the top bar (each source's file, what it brings, a filter of one or the new ones), "What's new"
- * (#/new), and opening a source in the file viewer.
+ * sources deck under the top bar (each source's file, what it brings, a filter of one or the new ones), the "What's new"
+ * button, and opening a source in the file viewer ("What's new" itself, #/new, is screens/whats-new.ts).
  *
  * SourcesUi is the screens' handle on them (and the viewer's entry: `open`); what it draws are light-DOM elements on the
  * study base (lit/base.ts): `study-source-chips`, `study-filter-bar`, `study-whats-new` and the deck, `study-sources-deck`.
  */
-import { sourceChapters, sourceStats, srcOf, type SourceInfo, type SourceStats } from '../domain/course.ts';
+import { sourceChapters, sourceStats, type SourceInfo, type SourceStats } from '../domain/course.ts';
 import type { Chapter } from '../domain/pack.ts';
-import { HOME, type StudyApp } from './app.ts';
+import type { StudyApp } from './app.ts';
 import { h } from './dom.ts';
 import { html, nothing, StudyElement, tag, type TemplateResult } from './lit/base.ts';
 import type { ViewerPort } from './parts.ts';
-import { setAccent } from './parts.ts';
-import { view } from './view.ts';
 
 type FullChapter = Chapter & { readonly src: string; readonly _ci: number };
 type FileMeta = { readonly name: string; readonly size: number; readonly cloud: boolean };
@@ -164,9 +162,9 @@ class StudySourceChips extends StudyElement {
             this.#ui.open(r.src, { page: r.page, start: r.start });
           }}
         >
-          <span class="e">${s.emoji ?? '📘'}</span><span>${short(label)}</span>${
-            av ? html`<span class="eye" aria-hidden="true">👁</span>` : nothing
-          }
+          <span class="e">${s.emoji ?? '📘'}</span><span>${short(label)}</span>${av
+            ? html`<span class="eye" aria-hidden="true">👁</span>`
+            : nothing}
         </button>`;
       })}
     </div>`;
@@ -270,7 +268,9 @@ class StudySourcesDeck extends StudyElement {
           <b>📚 ${app.t('engine.src.sources')}</b
           ><span class="tiny">
             ·
-            ${on ? app.t('engine.deck.countSome', { n: sources.length, shown: on.size }) : app.t('engine.deck.countAll', { n: sources.length })}</span
+            ${on
+              ? app.t('engine.deck.countSome', { n: sources.length, shown: on.size })
+              : app.t('engine.deck.countAll', { n: sources.length })}</span
           >
         </div>
         <button
@@ -282,19 +282,17 @@ class StudySourcesDeck extends StudyElement {
         >
           ${app.t('engine.deck.all')}
         </button>
-        ${
-          ns.length
-            ? html`<button
-                class="fchip${on && [...on].every(id => app.isNewSource(id)) ? ' on' : ''}"
-                type="button"
-                @click=${() => {
-                  ui.setFilter(ns);
-                }}
-              >
-                ✨ ${app.t('engine.deck.onlyNew')}
-              </button>`
-            : nothing
-        }
+        ${ns.length
+          ? html`<button
+              class="fchip${on && [...on].every(id => app.isNewSource(id)) ? ' on' : ''}"
+              type="button"
+              @click=${() => {
+                ui.setFilter(ns);
+              }}
+            >
+              ✨ ${app.t('engine.deck.onlyNew')}
+            </button>`
+          : nothing}
         <button
           class="iconbtn"
           type="button"
@@ -352,19 +350,17 @@ class StudySourcesDeck extends StudyElement {
           <b>${s.title}${app.isNewSource(s.id) ? html`<span class="newpill srcnew">✨ ${app.t('engine.src.new')}</span>` : nothing}</b>
           <small>${(s.subtitle ?? '') + (pagesText ? ` · ${pagesText}` : '')}</small>
         </button>
-        ${
-          fm || web
-            ? html`<button
-                class="iconbtn srceye"
-                type="button"
-                title=${`👁 ${app.t('engine.deck.preview')}${fm ? ` ${fm.name}` : ''}`}
-                aria-label=${app.t('engine.deck.previewAria')}
-                @click=${preview}
-              >
-                👁
-              </button>`
-            : nothing
-        }
+        ${fm || web
+          ? html`<button
+              class="iconbtn srceye"
+              type="button"
+              title=${`👁 ${app.t('engine.deck.preview')}${fm ? ` ${fm.name}` : ''}`}
+              aria-label=${app.t('engine.deck.previewAria')}
+              @click=${preview}
+            >
+              👁
+            </button>`
+          : nothing}
         <button class="iconbtn" type="button" aria-label=${s.title} aria-expanded=${String(exp)} @click=${fold}>
           <span class="chev${exp ? ' open' : ''}">▸</span>
         </button>
@@ -430,13 +426,11 @@ class StudySourcesDeck extends StudyElement {
             <button class="btn small primary" type="button" @click=${preview}>👁 ${app.t('engine.deck.preview')}</button>
             ${pick(`📎 ${app.t('engine.deck.attachInstead')}`, false)}`
         : html`<span class="tiny"
-              >${
-                s.sha256
-                  ? `📦 ${app.t('engine.deck.inPackage', { name: s.fileName ?? (s.file ?? '').split('/').pop() ?? '' })}`
-                  : s.file
-                    ? `📄 ${app.t('engine.deck.notAttached', { name: s.file.split('/').pop() ?? '' })}`
-                    : app.t('engine.deck.noFile')
-              }</span
+              >${s.sha256
+                ? `📦 ${app.t('engine.deck.inPackage', { name: s.fileName ?? (s.file ?? '').split('/').pop() ?? '' })}`
+                : s.file
+                  ? `📄 ${app.t('engine.deck.notAttached', { name: s.file.split('/').pop() ?? '' })}`
+                  : app.t('engine.deck.noFile')}</span
             >
             ${pick(`📎 ${app.t('engine.deck.attach')}`, true)}`;
     return html`<div class="srcbody">
@@ -445,33 +439,29 @@ class StudySourcesDeck extends StudyElement {
       </div>
       <div class="srcfile">${file}</div>
       <div class="tiny srcmeta">
-        ${
-          (s.pages ? `${/^\d/.test(s.pages) ? app.t('engine.deck.pages', { pages: s.pages }) : s.pages} · ` : '') +
-          app.t('engine.deck.added', { date: s.added ?? '—' })
-        }
+        ${(s.pages ? `${/^\d/.test(s.pages) ? app.t('engine.deck.pages', { pages: s.pages }) : s.pages} · ` : '') +
+        app.t('engine.deck.added', { date: s.added ?? '—' })}
       </div>
-      ${
-        chs.length
-          ? html`<div class="srcchs">
-              ${chs.map(
-                ({ c, ref }) =>
-                  html`<button
-                    class="srcch${ref.main ? '' : ' also'}"
-                    type="button"
-                    title=${ref.label}
-                    @click=${() => {
-                      ui.toggleDeck(false);
-                      app.go(`#/ch/${c.id}`);
-                    }}
-                  >
-                    ${`${c.emoji ?? ''} ${app.chTitle(c.num, c.title)}`}${
-                      ref.label ? html`<small> — ${ref.label.length > 60 ? `${ref.label.slice(0, 58)}…` : ref.label}</small>` : nothing
-                    }${ref.main ? nothing : html`<small> ${app.t('engine.deck.also')}</small>`}
-                  </button>`,
-              )}
-            </div>`
-          : html`<div class="tiny">${app.t('engine.deck.noChapter')}</div>`
-      }
+      ${chs.length
+        ? html`<div class="srcchs">
+            ${chs.map(
+              ({ c, ref }) =>
+                html`<button
+                  class="srcch${ref.main ? '' : ' also'}"
+                  type="button"
+                  title=${ref.label}
+                  @click=${() => {
+                    ui.toggleDeck(false);
+                    app.go(`#/ch/${c.id}`);
+                  }}
+                >
+                  ${`${c.emoji ?? ''} ${app.chTitle(c.num, c.title)}`}${ref.label
+                    ? html`<small> — ${ref.label.length > 60 ? `${ref.label.slice(0, 58)}…` : ref.label}</small>`
+                    : nothing}${ref.main ? nothing : html`<small> ${app.t('engine.deck.also')}</small>`}
+                </button>`,
+            )}
+          </div>`
+        : html`<div class="tiny">${app.t('engine.deck.noChapter')}</div>`}
       <div class="row srcacts">
         <button
           class="btn small"
@@ -482,34 +472,30 @@ class StudySourcesDeck extends StudyElement {
         >
           🔎 ${app.t('engine.deck.onlyThis')}
         </button>
-        ${
-          app.isNewSource(s.id)
-            ? html`<button
-                class="btn small"
-                type="button"
-                @click=${() => {
-                  app.markSeen([s.id]);
-                  this.#refresh();
-                }}
-              >
-                ✔ ${app.t('engine.new.markSeen')}
-              </button>`
-            : nothing
-        }
-        ${
-          s.id !== sources[0]?.id && app.state.seenSrc?.[s.id]
-            ? html`<button
-                class="btn small ghost"
-                type="button"
-                @click=${() => {
-                  app.markUnseen(s.id);
-                  this.#refresh();
-                }}
-              >
-                ↺ ${app.t('engine.deck.markNew')}
-              </button>`
-            : nothing
-        }
+        ${app.isNewSource(s.id)
+          ? html`<button
+              class="btn small"
+              type="button"
+              @click=${() => {
+                app.markSeen([s.id]);
+                this.#refresh();
+              }}
+            >
+              ✔ ${app.t('engine.new.markSeen')}
+            </button>`
+          : nothing}
+        ${s.id !== sources[0]?.id && app.state.seenSrc?.[s.id]
+          ? html`<button
+              class="btn small ghost"
+              type="button"
+              @click=${() => {
+                app.markUnseen(s.id);
+                this.#refresh();
+              }}
+            >
+              ↺ ${app.t('engine.deck.markNew')}
+            </button>`
+          : nothing}
       </div>
     </div>`;
   }
@@ -522,184 +508,4 @@ function fileSize(app: StudyApp, bytes: number): string {
         size: app.i18n.format.number(bytes / 1048576, { minimumFractionDigits: 1, maximumFractionDigits: 1 }),
       })
     : app.t('engine.common.sizeKB', { size: app.nf(Math.round(bytes / 1024)) });
-}
-
-/** #/new: what the new sources bring, and ways to study only that */
-export function whatsNewView(app: StudyApp): void {
-  setAccent(document.body, null);
-  const sources = app.course.sources;
-  let ids = app.newSources();
-  const none = !ids.length;
-  const lastSrc = sources.at(-1);
-  if (none && lastSrc) ids = [lastSrc.id];
-  const full = app.course.full;
-  const st = sourceStats(full, sources);
-  const pick = (k: 'sections' | 'enriched' | 'exercises' | 'playbooks' | 'cards' | 'pitfalls'): number =>
-    ids.reduce((a, id) => {
-      const x = st.get(id);
-      if (!x) return a;
-      const v = x[k];
-      return a + (typeof v === 'number' ? v : v.size);
-    }, 0);
-  const newChs = full.filter(c => ids.includes(c.src));
-  const enriched = [...new Set(ids.flatMap(id => [...(st.get(id)?.enriched ?? [])]))]
-    .map(sid => {
-      for (const c of full) {
-        const s = c.sections.find(x => x.id === sid);
-        if (s && !ids.includes(c.src)) return { s, c };
-      }
-      return null;
-    })
-    .filter(x => x !== null);
-  const exNew = full.flatMap(c => c.exercises.filter(e => ids.includes(srcOf(e, c))));
-  const pbNew = full.flatMap(c => c.debug.filter(d => ids.includes(srcOf(d, c))));
-  const ui = app.sourcesUi;
-  app.host.frame.chrome({ sub: true, crumbs: [[app.t('view.whatsNew')]], back: HOME });
-  const go = (href: string) => () => {
-    app.go(href);
-  };
-  view(
-    app,
-    h('h1', {}, none ? app.t('view.latest') : app.t('view.whatsNew')),
-    h(
-      'p',
-      { class: 'muted' },
-      ids
-        .map(id => {
-          const s = app.course.source(id);
-          return `${s?.emoji ?? '📗'} ${app.t('engine.new.srcPages', { title: s?.title ?? id, pages: s?.pages ?? '' })}`;
-        })
-        .join(' · ') + (none ? ` — ${app.t('engine.new.alreadySeen')}` : ''),
-    ),
-    h(
-      'div',
-      { class: 'statgrid', style: { gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))' } },
-      (
-        [
-          ['chapters', newChs.length],
-          ['sections', pick('sections') + pick('enriched')],
-          ['exercises', pick('exercises')],
-          ['drills', pick('playbooks')],
-          ['flashcards', pick('cards')],
-          ['traps', pick('pitfalls')],
-        ] as const
-      ).map(([l, n]) =>
-        h('div', { class: 'stat' }, h('b', {}, app.nf(n)), h('span', { class: 'tiny' }, app.t(`engine.new.stat_${l}`, { n }))),
-      ),
-    ),
-    h(
-      'div',
-      { class: 'row', style: { margin: '6px 0 24px' } },
-      h(
-        'button',
-        {
-          class: 'btn primary',
-          type: 'button',
-          onclick: () => {
-            ui.setFilter(ids);
-          },
-        },
-        `🔎 ${app.t('engine.new.filterAll')}`,
-      ),
-      h(
-        'button',
-        {
-          class: 'btn',
-          type: 'button',
-          onclick: () => {
-            app.setFilter(ids);
-            app.startRound(app.course.exercises, { title: `✨ ${app.t('engine.new.exercisesTitle')}`, count: 15, back: '#/new' });
-          },
-        },
-        `🎯 ${app.t('engine.new.practice', { n: exNew.length })}`,
-      ),
-      pbNew[0]
-        ? h(
-            'button',
-            {
-              class: 'btn',
-              type: 'button',
-              onclick: () => {
-                app.setFilter(ids);
-                app.go(`#/drill/${pbNew[0]?.id ?? ''}`);
-              },
-            },
-            `🔧 ${app.t('engine.new.drills', { n: pbNew.length })}`,
-          )
-        : null,
-      h(
-        'button',
-        {
-          class: 'btn',
-          type: 'button',
-          onclick: () => {
-            app.setFilter(ids);
-            app.go('#/cards');
-          },
-        },
-        `🃏 ${app.t('engine.new.cards')}`,
-      ),
-      none
-        ? null
-        : h(
-            'button',
-            {
-              class: 'btn ghost',
-              type: 'button',
-              onclick: () => {
-                app.markSeen(ids);
-                app.toast(app.t('engine.new.markedSeen'));
-                app.go(HOME);
-              },
-            },
-            `✔ ${app.t('engine.new.markSeen')}`,
-          ),
-    ),
-    newChs.length ? h('h2', { style: { marginBottom: '12px' } }, app.t('engine.new.chapters')) : null,
-    newChs.length
-      ? h(
-          'div',
-          { class: 'chapters' },
-          newChs.map((c, i) => {
-            const card = h(
-              'button',
-              { class: 'chcard', type: 'button', style: { animationDelay: `${String(i * 50)}ms` }, onclick: go(`#/ch/${c.id}`) },
-              h('div', { class: 'emo' }, c.emoji ?? ''),
-              h('div', { class: 'num' }, app.t('engine.new.chapterN', { num: c.num })),
-              h('h3', {}, c.title),
-              h('p', {}, c.subtitle ?? ''),
-              h('div', { class: 'tiny' }, app.t('engine.new.chCounts', { s: c.sections.length, e: c.exercises.length, d: c.debug.length })),
-            );
-            setAccent(card, c);
-            return card;
-          }),
-        )
-      : null,
-    enriched.length ? h('h2', { style: { margin: '28px 0 6px' } }, app.t('engine.new.enriched')) : null,
-    enriched.length ? h('p', { class: 'muted', style: { marginTop: '0' } }, app.t('engine.new.enrichedNote')) : null,
-    enriched.length
-      ? h(
-          'div',
-          { class: 'path' },
-          enriched.map(({ s, c }, i) => {
-            const n = h(
-              'button',
-              { class: 'node', type: 'button', style: { animationDelay: `${String(i * 25)}ms` }, onclick: go(`#/s/${s.id}`) },
-              h('div', { class: 'dot' }, c.emoji ?? ''),
-              h('div', { class: 'grow' }, h('b', {}, s.title), h('small', {}, app.chTitle(c.num, c.title))),
-              h(
-                'span',
-                { class: 'newpill' },
-                app.t('engine.new.added', {
-                  blocks: s.blocks.filter(b => b.src && ids.includes(b.src)).length,
-                  ex: c.exercises.filter(e => e.section === s.id && e.src && ids.includes(e.src)).length,
-                }),
-              ),
-            );
-            setAccent(n, c);
-            return n;
-          }),
-        )
-      : null,
-  );
 }
