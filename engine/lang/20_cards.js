@@ -69,7 +69,7 @@ function compareTable(cid) {
       h('td', { class: 'tiny' }, first ? (first.params?.length ? paramsLine(c, lids[0]) : first.parts.slice(0, 2).map(p => `${p[0]}: ${p[1]}`).join(' · ')) : ''),
       h('td', {}, first?.examples[0] ? h('span', {}, word(c, first.examples[0].text, { sub: false }), h('div', { class: 'tiny' }, first.examples[0].tr)) : ''));
   });
-  return h('div', { class: 'lx-compare' }, h('table', {}, h('tbody', {}, ...rows)));
+  return h('div', { class: 'lx-compare lx-wordtable' }, h('table', {}, h('tbody', {}, ...rows)));   // narrow: a card per language (80_poly.css)
 }
 
 const CONNOTATION = { positive: '🙂', negative: '🙁', neutral: '😐', mixed: '🤔' };   // + lang.card.conn.<connotation>

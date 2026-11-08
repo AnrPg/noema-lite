@@ -95,6 +95,8 @@ document.addEventListener('click', e => {
 }
 const SPK_SKIP = 'button, .lx-opts, .lx-opt, select, option, label, .lx-tile, .lx-tile1, .lx-slot, .lx-tiles, .lx-kbd, .lx-cands, .lx-tutor, [data-nospeak], .lx-hidecol, .lx-input, header, .lx-tmsg, .lx-diff, .lx-roman';   // i18n-ignore (selectors)
 const SPK_IN_STAGE = '.lx-fb, .lx-ref, .lx-intro, .lx-readtext, .lx-gram, .lx-typology, .lx-overview';   // inside an exercise: never on a prompt it would give away   // i18n-ignore (selectors)
+/** a word or a short phrase (up to this many characters) stays on one line with its 🔊; a longer text (a sentence) wraps between its words, and its 🔊 may start the next line */
+const SPK_GLUE_MAX = 24;
 function decorate(root) {
   if (!UI.C) return;
   if (!SP.capsSet) pushCaps();
@@ -106,7 +108,9 @@ function decorate(root) {
     const l = el.dataset.sayl || el.getAttribute('lang') || ''; if (!l || /-latn/i.test(l)) continue;
     const c = UI.C.lang[l] ? l : l.split('-')[0]; if (!UI.C.lang[c] && !N.SPEECH_TAGS[c]) continue;
     const text = el.dataset.say || el.textContent; if (!text || !text.trim()) continue;
-    el.after(speakerBtn(c, text));
+    // a word or a short phrase and its 🔊 in one span that does not wrap (98_speech.css): 🔊 never ends up alone on the next line
+    if (text.trim().length > SPK_GLUE_MAX) { el.after(speakerBtn(c, text)); continue; }
+    const glue = h('span', { class: 'lx-spkglue' }); el.replaceWith(glue); glue.append(el, speakerBtn(c, text));
   }
 }
 {
