@@ -1,5 +1,4 @@
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')   // i18n-ignore
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
   // icon: an emoji (the older sections) or { line: '<engine/art.js key>' }, a line icon of the new frame (no emoji on new headers)
@@ -84,23 +83,9 @@ const snapLabel = l => Object.prototype.hasOwnProperty.call(SNAP_LABEL, l) ? tE(
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); seeSettings(); }
 
-const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
-function openAccountMenu(tab = 'profile') {
-  if (SHL()) { closeTutor(); $$('.modal').forEach(m => m.remove()); return go('#/me/' + (ME_PAGE[tab] || '')); }   // the shell's “Me” pages (engine/shell.js)
-  modal((box, close) => {
-    box.classList.add('accbox');
-    const body = h('div', { class: 'accbody' });
-    const tabs = h('div', { class: 'tabs' });
-    const show = t => { tab = t; $$('button', tabs).forEach(b => b.classList.toggle('on', b.dataset.t === t)); body.innerHTML = ''; ACC_VIEWS[t](body, close); };
-    ACC_TABS.forEach(k => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, t('acc.' + k))));
-    const st = Noema.stats.get();
-    box.append(h('div', { class: 'acchead' }, h('div', { class: 'accemo' }, ACCOUNT.emoji || '🙂'),
-      h('div', { class: 'grow' }, h('h2', {}, ACCOUNT.name), h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? '☁️ ' + tE('engine.acc.cloudAccount', { email: ACCOUNT.email }) : '💻 ' + tE('engine.acc.localProfile'))),
-      h('div', { class: 'accstats' }, h('span', { class: 'chip xp' }, '⭐ ' + tE('engine.acc.xpTotal', { n: st.xp })), h('span', { class: 'chip streak' }, '🔥 ' + tE('engine.acc.streak', { n: Noema.stats.streakNow() }))),
-      h('button', { class: 'iconbtn', onclick: close }, '✕')), tabs, body);
-    show(tab);
-  });
-}
+const ME_PAGE = { profile: 'me/profile', settings: 'me/ai', subjects: 'subjects', backup: 'me/data', cloud: 'me/data', help: 'help' };
+/** the account's pages: the frame's (Me ›, the Subjects page, Help) */
+function openAccountMenu(tab = 'profile') { closeTutor(); $$('.modal').forEach(m => m.remove()); go('#/' + (ME_PAGE[tab] || 'me')); }
 
 /** A subject's name for people: its title, else the Roadmap step it was made for, else its id made readable ("cur-bq29at-prerequisite-round-1-storage-tables-k8jn" → "Prerequisite round 1 storage tables"). */
 function subjectLabel(sid, list = []) {
@@ -225,26 +210,6 @@ const ACC_VIEWS = {
           Noema.backup.download(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: false }));
           Noema.wipeAccountData(ACCOUNT.id); Noema.removeLocalAccount(ACCOUNT.id); Noema.jset('noema1:current', {}); setTimeout(() => location.reload(), 800);
         }) }, '🗑️ ' + tE('engine.acc.deleteProfile'))) : null);
-  },
-
-  async subjects(body) {
-    const list = await Noema.subjectsFor(ACCOUNT.id);
-    const set = accountSettings(); const hidden = new Set(set.hiddenSubjects || []);
-    const CU = window.NoemaCurriculum, on = id => CU?.stepsOf ? CU.stepsOf(ACCOUNT.id, id).length : 0;   // 📦 how many curriculum steps a subject teaches (none: 📚 on the Shelf)
-    body.append(h('p', { class: 'muted' }, tE('engine.acc.subjIntro')),
-      CU ? h('p', { class: 'tiny' }, '🧭 ' + tE('engine.acc.subjRoadmap')) : null,
-      h('div', { class: 'sublist' }, ...list.map(s => h('div', { class: 'subrow' },
-        h('label', { class: 'switch' }, h('input', { type: 'checkbox', checked: !hidden.has(s.id), onchange: e => { e.target.checked ? hidden.delete(s.id) : hidden.add(s.id); putAccountSettings({ hiddenSubjects: [...hidden] }); } }), h('i')),
-        h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
-        h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, [s.origin === 'library' ? tE('engine.acc.originLibrary') : s.origin === 'private' ? '🔒 ' + tE('engine.acc.originPrivate') : '📥 ' + tE('engine.acc.originImported'), tE('engine.acc.subjCounts', { c: s.counts?.chapters ?? '?', e: s.counts?.exercises ?? '?' }), ...(CU ? [on(s.id) ? '🧭 ' + tE('engine.acc.onSteps', { n: on(s.id) }) : '📚 ' + tE('engine.acc.onShelf')] : [])].join(' · '))),
-        s.id === SUBJ.id ? h('span', { class: 'pill c' }, tE('engine.acc.isOpen')) : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, tE('engine.acc.open')),
-        h('button', { class: 'iconbtn', title: tE('engine.acc.editTip'), 'aria-label': tE('engine.acc.editAria', { title: s.title }), onclick: () => Noema.editSubject(s, { onChange: () => openAccountMenu('subjects') }) }, '✏️'),
-        s.origin !== 'library' ? h('button', { class: 'iconbtn', title: tE('engine.acc.shareTip'), onclick: () => Noema.share(s) }, '🔗') : null))),
-      h('div', { class: 'row', style: { marginTop: '14px' } },
-        h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ ' + tE('engine.acc.createWithClaude')),
-        CU && Noema.openShelf ? h('button', { class: 'btn', onclick: () => Noema.openShelf(ACCOUNT.id) }, '📚 ' + tE('engine.acc.openShelf')) : null,
-        h('label', { class: 'btn' }, '📥 ' + tE('engine.acc.importPack'), h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(tE('engine.share.openNow', { title: s.title }), () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + errText(er), 4000); } } })),
-        h('button', { class: 'btn', onclick: () => Noema.exportPackage(ACCOUNT.id, Noema.pack) }, '⬇️ ' + tE('engine.acc.exportPackage', { title: SUBJ.title }))));
   },
 
   async backup(body) {

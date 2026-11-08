@@ -665,15 +665,17 @@ export function createCore(core0: NoemaCoreBridge) {
       if (Noema.switching) return;
       jset(P + 'current', { acc, subj });
     },
-    /** a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …) */
+    /** a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …; by default a
+        subject's page, since a subject always opens in the frame, else Today) */
     switchTo(acc: string, subj: string | null, hash?: string): void {
       Noema.switching = true;
       jset(P + 'current', { acc, subj, skipPicker: !!subj });
+      const to = hash ?? (subj ? '#/subject' : '');
       if (/[?&](subject|account)=/.test(location.search)) {
-        location.replace(location.pathname + (hash ?? ''));
+        location.replace(location.pathname + to);
         return;
       }
-      location.hash = hash ?? '';
+      location.hash = to;
       location.reload();
     },
     /** the frame is up: its texts lose the older screens' emoji */

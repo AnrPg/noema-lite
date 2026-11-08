@@ -51,14 +51,8 @@
 .acchip:hover{transform:scale(1.06)}
 .syncdot{position:absolute;inset-inline-end:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;border:2px solid var(--bg);background:var(--ink3)}
 .syncdot.ok{background:var(--ok)}.syncdot.busy{background:var(--warn);animation:blink 1s infinite}.syncdot.err{background:var(--bad)}
-.modal .box.accbox{width:min(720px,100%)}
-.accbox .tabs{flex-wrap:wrap;overflow:visible}   /* every tab visible (❓ Help was pushed off the edge) */
-.acchead{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-.accemo{font-size:42px}
-.accstats{display:flex;gap:6px;flex-wrap:wrap}
 .accbody{min-height:200px}
 .accbody h3{margin:0 0 6px}
-.sublist{display:grid;gap:8px}
 .subrow{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--bg);margin-bottom:8px}
 .dangerzone{margin-top:24px;padding:14px 16px;border-radius:16px;border:1.5px dashed var(--bad);background:var(--bad-bg)}
 .herohead strong{font-weight:800;background:linear-gradient(90deg,#ff6b6b,#ffb020 30%,#2ec4b6 55%,#4d7cfe 75%,#a35cff);-webkit-background-clip:text;background-clip:text;color:transparent}

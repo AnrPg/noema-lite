@@ -94,7 +94,7 @@ async function signUp(browser, email, name, viewport = { width: 1300, height: 90
 const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Object.keys(localStorage).find(k => k.includes(':a:curriculum:')).split(':')[1])[0]);
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = vendors(); await new Promise(r => api.listen(APORT, r));
   const browser = await chromium.launch();
@@ -199,10 +199,10 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   const target = ready[0];
   await p.click(`.cm-node[data-id="${target.id}"]`); await p.click('.cm-panel noema-button:has-text("Study this step")'); await wait(2500);
   ok(await p.evaluate(t => typeof SUBJ !== 'undefined' && SUBJ.id === t, target.pack.id), 'the step opens as a full subject in the engine (theory, exercises, tutor…)');
-  ok(await p.locator('.nodebanner').count() === 1 && await p.locator('.curchip:has-text("Map")').count() === 1, 'the subject shows its place in the curriculum, its mastery and a 🧭 Map button');
+  ok(await until(() => p.$('.subjhead.station')) && await p.locator('.subjhead.station').count() === 1 && await p.locator('.subjhead .subjbar .bar').count() === 1 && await p.locator('.subjhead .subjkicker[title="Open the Roadmap"]').count() === 1, 'the subject shows its place in the curriculum, its mastery and a 🧭 Map button');
   await p.screenshot({ path: SHOTS + '/k5_node_subject.png' });
   await p.evaluate(() => { COURSE.forEach(ch => { ch.sections.forEach(s => learnt('section.read', s.id)); ch.exercises.forEach(e => NoemaCore.studyUi.current().app.record(e, true)); }); flushSave(); });
-  await p.click('.nodebanner button:has-text("Map")'); await wait(800);
+  await p.click('.subjhead .subjkicker'); await until(() => p.$('noema-roadmap-map'), 8000); await wait(800);
   ok(await p.evaluate(t => document.querySelector('noema-roadmap-map').shadowRoot.querySelector(`.cm-node[data-id="${t}"]`).classList.contains('cm-mastered'), target.id), 'all sections read + exercises solved → the step is ✅ mastered (automatically)');
 
   console.log('— editing the map');
@@ -217,7 +217,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(!opts.includes('distributions') && !opts.includes('likelihood') && opts.includes('calculus_basics'), 'only steps that keep the graph acyclic can be added as prerequisites');
   await p.selectOption('select[aria-label="Add prerequisite"]', 'calculus_basics'); await p.click('.noema-ovbox button:has-text("Save")'); await wait(300);
   ok((await cur(p)).edges.some(e => e.from === 'calculus_basics' && e.to === 'prob_basics'), 'links can be added (prerequisites / dependents)');
-  await p.click('.cm-ovtop .cm-addstepbtn'); await wait(300);
+  await p.click('#ns-top .ns-menubtn'); await p.waitForSelector('.ns-pop'); await p.locator('.ns-pop button', { hasText: 'Add a step' }).first().click(); await wait(300);   // the map's page in the frame: ⋮ › Add a step
   await p.fill('.noema-ovbox input[placeholder="Name of the step"]', 'Measure theory (light)'); await p.selectOption('select[aria-label="Add dependent step"]', 'distributions');
   await p.click('.noema-ovbox button:has-text("Add the step")');
   ok(await until(async () => { const cc = await cur(p); const n = Object.values(cc.nodes).find(x => x.title === 'Measure theory (light)'); return n && n.chapters.length === 4 && cc.edges.some(e => e.from === n.id && e.to === 'distributions'); }, 15000), '➕ a new step is added where you put it, and the AI plans its chapters');

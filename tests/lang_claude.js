@@ -167,7 +167,7 @@ const { connectorHandler, removeConnector } = require('./connector_fn');
   const libMeta = { id: 'lang-mini', title: mini.course.title, emoji: '🌍', languages: mini.course.languages, explainLang: 'en', path: 'testfiles/lang-mini/course.pack.js', words: {} };
   const regTxt = fs.readFileSync(path.join(ROOT, 'dist/site/library/registry.js'), 'utf8'); const w0 = {}; new Function('window', regTxt)(w0);
   const REG = { ...w0.NOEMA_REGISTRY, languages: [libMeta] };
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };   // the older screens, like main's suites (tests/lang_frame.js tests the frame)`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false };   // the older screens, like main's suites (tests/lang_frame.js tests the frame)`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [], languages: [{ id: 'lang-mini', title: libMeta.title, languages: libMeta.languages, path: libMeta.path }] };
   const handler = await connectorHandler(ROOT, { config: CFG, docs: { workflow: 'SKILL', content: 'C', visual: 'V', languages: 'RULES' } });

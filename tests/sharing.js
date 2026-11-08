@@ -7,6 +7,7 @@ const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
+const until = async (fn, ms = 10000) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(200); } return false; };
 const PORT = 54333, BASE = `http://localhost:${PORT}`;
 
 async function signUp(browser, email, name) {
@@ -18,7 +19,7 @@ async function signUp(browser, email, name) {
   return { p, E, ctx };
 }
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, shell: false, storageChunkBytes: 200000 };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true, onboarding: false, shell: false, storageChunkBytes: 200000 };`;
   // like Supabase's free plan, the emulator refuses objects over a size (here 300 KB) → big source files travel in parts
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg, maxObject: 300000 });
   const BIG = 700000, bytes = (n, k) => { const b = Buffer.alloc(n); for (let i = 0; i < n; i++) b[i] = (i * k + (i >> 8)) % 251; return b; };
@@ -67,6 +68,7 @@ async function signUp(browser, email, name) {
 
   console.log('— Bob receives');
   const B = await signUp(browser, 'bob@example.com', 'Bob');
+  await until(async () => /2 subject\(s\) shared with you/i.test(await B.p.locator('.nx-reqs').innerText()));   // the requests come from the cloud after the picker is drawn
   ok(/2 subject\(s\) shared with you/i.test(await B.p.locator('.nx-reqs').innerText()) && /Anna/.test(await B.p.locator('.nx-reqs').innerText()), 'the subject picker lists the incoming requests');
   await B.p.click('.noema-chip:has-text("Databricks")'); await wait(1600);
   ok(await B.p.$eval('#bellbtn .bellbadge', b => b.textContent) === '2', '🔔 shows 2');
@@ -83,17 +85,17 @@ async function signUp(browser, email, name) {
   await B.p.click('.modal button:has-text("No"), .modal button:has-text("Cancel"), .modal .btn:not(.primary)').catch(() => { }); await wait(300);
   ok(await B.p.$eval('#bellbtn .bellbadge', b => b.textContent) === '1', '🔔 now shows 1');
   await B.p.click('#bellbtn'); await wait(300);
-  ok(/Lungs test/.test(await B.p.locator('.modal').last().innerText()), 'the bell lists the remaining request');
-  await B.p.click('.modal .nx-req button:has-text("Reject")'); await wait(700);
+  ok(/Lungs test/.test(await B.p.locator('#ns-layer .ns-sheet').last().innerText()), 'the bell lists the remaining request');
+  await B.p.click('#ns-layer .ns-sheet .nx-req button:has-text("Reject")'); await wait(700);
   ok(srv.state.shares.find(s => s.subject_id === 'lungs-test').status === 'rejected', 'Reject → share rejected');
   await B.p.keyboard.press('Escape'); await wait(200);
-  await B.p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);
-  ok(await B.p.locator('.noema-chip:has-text("Heart test")').count() === 1 && /🤝/.test(await B.p.locator('.noema-chip:has-text("Heart test")').innerText()), 'the accepted subject is in Bob’s picker (🤝 shared)');
+  await B.p.evaluate(() => { Noema.openSubjectPicker(); }); await until(() => B.p.locator('.noema-chip:has-text("Heart test")').count());   // the picker lists the subjects once they are read
+  ok(await B.p.locator('.noema-chip:has-text("Heart test")').count() === 1 && await B.p.locator('.noema-chip:has-text("Heart test") .o[title="shared by Anna"]').count() === 1, 'the accepted subject is in Bob’s picker (🤝 shared: the mark, plain in the frame, says by whom)');
   await B.p.click('.noema-chip:has-text("Heart test")'); await wait(1600);
-  ok(await B.p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart test'), 'and it opens');
+  ok(await until(() => B.p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart test')), 'and it opens');
 
   console.log('— 🌍 Explore');
-  await B.p.click('.explorechip'); await wait(700);
+  await B.p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.explore(); }); await until(() => B.p.locator('.nx-card').count());   // the subject's page in the frame has no 🌍 chip: Explore opens from the picker (or here)
   const cards = await B.p.locator('.nx-card').allInnerTexts();
   ok(cards.some(t => /Databricks/.test(t)) && cards.some(t => /Heart test/.test(t)) && cards.every(t => !/\d+ ch|exercises|library|Anna/.test(t)), 'Explore cards show only emoji + title (the details moved to the info popup)');
   await B.p.hover('.nx-card:has-text("Databricks")'); await wait(450);

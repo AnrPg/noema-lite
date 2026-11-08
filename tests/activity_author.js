@@ -11,8 +11,8 @@
    (NoemaLibSchema.specSchema) that accepts its reference activities and every fixture spec its own checkSpec accepts
    (tests/fixtures/enginelib/<name>.json), refuses the structural mistakes, and has a label for every field word; check() finds no
    problem in the references; the references ship in activity_author_schemas.js (NoemaActivityRefs).
-   Browser (with --browser; BROWSERS=chromium (default),firefox,webkit): the page in the built site, through its route #/author (classic router,
-   then the new frame: subject ⋮ › Create an activity, the crumbs, 320 px): rc-lowpass built from scratch through the form equals the reference; a bad formula shows its error at its field;
+   Browser (with --browser; BROWSERS=chromium (default),firefox,webkit): the page in the built site, through its route #/author (the address,
+   then the way in: subject ⋮ › Create an activity, the crumbs, 320 px): rc-lowpass built from scratch through the form equals the reference; a bad formula shows its error at its field;
    the preview follows a changed start value; the .zip download passes activity_lint.py; undo / redo; 360 px without horizontal
    scroll; dark mode; graph@1: picked in the engine picker → started from its reference → the preview draws its scene → a wrong
    model field shows the engine's own message at the field → the .zip passes activity_lint.py.
@@ -298,7 +298,7 @@ console.log('— documents, files, zip');
   const src = fs.readFileSync(path.join(ROOT, 'engine', 'activity_author.js'), 'utf8') + fs.readFileSync(path.join(ROOT, 'engine', 'schemaform.js'), 'utf8');
   const used = [...new Set([...src.matchAll(/\b(?:TT|T)\('([\w.]+)'/g)].map(m => m[1]))].filter(k => !/\.$/.test(k));
   ok(used.every(k => k in EN), 'every word the code asks for is in en.arb ' + used.filter(k => !(k in EN)));
-  const views = fs.readFileSync(path.join(ROOT, 'engine', 'src', '40_views.js'), 'utf8');
+  const views = fs.readFileSync(path.join(ROOT, 'engine', 'src', '40_views.js'), 'utf8') + fs.readFileSync(path.join(ROOT, 'engine', 'app', 'study.js'), 'utf8');   // the route (the engine) and its menu item (the study area's subject ⋮)
   const routeKeys = [...views.matchAll(/tE\('engine\.author\.([\w.]+)'/g)].map(m => m[1]);
   ok(routeKeys.length >= 4 && routeKeys.every(k => k in EN), 'the route and its menu item use catalog words ' + routeKeys);
   const titles = new Set(); (function tw(o) { if (Array.isArray(o)) o.forEach(tw); else if (o && typeof o === 'object') { if (typeof o.title === 'string') titles.add(o.title); Object.values(o).forEach(tw); } })([sim, regSchema]);
@@ -332,14 +332,14 @@ async function browser() {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true });
     const p = await ctx.newPage(); p.setDefaultTimeout(10000);
     const E = []; p.on('pageerror', e => E.push(e.message));
-    // the built site with a subject open (the classic router: run_e2e.sh switches the frame off), then the route #/author
+    // the built site with a subject open (in the frame: a subject always opens there), then the route #/author
     // (the site ships no profile of this device: one local profile, so the app opens it without asking "Who is studying?")
     await p.goto(SITE_URL); await p.evaluate(() => { localStorage.clear(); localStorage.setItem('noema1:accounts', JSON.stringify([{ id: 'author', name: 'Author', emoji: '🙂', pin: null, created: Date.now(), learner: '' }])); });
     await p.goto(SITE_URL + '?subject=demo-physics'); await wait(1500);
     ok(await until(() => p.evaluate(() => typeof ACT !== 'undefined' && ACT.engines().includes('formula@1'))), 'the built site is up with a subject and its sim-spec@1 runtime');
     ok(await p.evaluate(() => typeof NoemaActivityAuthor === 'undefined'), 'the author’s scripts are not loaded before the route is opened');
     await p.evaluate(() => { location.hash = '#/author'; });
-    ok(await until(() => p.evaluate(() => !!(window.NoemaActivityAuthor?.current && document.querySelector('main .aa h1')))), 'classic router: #/author loads the author’s scripts and opens the page');
+    ok(await until(() => p.evaluate(() => !!(window.NoemaActivityAuthor?.current && document.querySelector('main .aa h1')))), 'the address #/author loads the author’s scripts and opens the page');
     ok(await p.evaluate(() => [...document.styleSheets].some(x => /activity_author\.css$/.test(x.href || ''))), 'its stylesheet is loaded with it');
     await p.evaluate(() => { window.__aa = NoemaActivityAuthor.current; });
     ok(await p.locator('.aa h1').innerText() === EN.title && await p.locator('.aa-pbox .sim').count() === 1, 'the page shows the form (in the catalog’s words) and the preview of the blank activity (the real runtime)');
