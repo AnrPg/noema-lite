@@ -139,8 +139,8 @@ console.log('A. the chosen languages in langcore');
   await p.click('.ns-tab[data-tab="today"]'); await until(() => p.$('.ns-langgo'));
   ok(/🇸🇦 🇩🇪/.test(await p.innerText('.ns-langgo')) && !/🇨🇳/.test(await p.innerText('.ns-langgo')), 'Today: the course’s card with the chosen languages');
   await p.goto(url + '?account=anr#/lang'); await until(() => p.$('.ns-studychange'));
-  await p.click('.ns-studychange'); await until(() => p.$('.ns-sheet .noema-study'));
-  await p.click('.ns-sheet .noema-study-lang[data-lang="ar"]'); await p.click('.ns-sheet .noema-study-ok'); await until(async () => (await p.$$('.ns-studylang')).length === 1);
+  await p.click('.ns-studychange'); await until(() => p.$('.ns-studysheet .noema-study'));
+  await p.click('.ns-studysheet .noema-study-lang[data-lang="ar"]'); await p.click('.ns-studysheet .noema-study-ok'); await until(async () => (await p.$$('.ns-studylang')).length === 1);
   ok((await p.$$eval('.ns-studylang', l => l.map(x => x.dataset.lang))).join() === 'de', 'changed on the tab: German only');
   await p.click(`.ns-langitem[data-course="${COURSE}"]`); await p.waitForSelector('.lx-host .lx-main .lx-view', { timeout: 30000 }); await wait(600);
   ok(await U(() => NoemaLangUI.UI.C.languages.join()) === 'de' && await p.locator('.lx-flagchip[data-lang]').count() === 1 && await p.locator('.lx-fhome .ns-item[data-act="across"]').count() === 0,

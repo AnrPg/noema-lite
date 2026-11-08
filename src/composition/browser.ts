@@ -31,11 +31,13 @@ import { createLazyEngines, type EnginesPiece } from '../engines/lazy.ts';
 import { createRuntimeLibrary, lazyRuntimePlugins, type RuntimesPiece } from '../runtimes/library.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
+import { lazySourceId, pieceLoader } from './pieces.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, token, type Registration } from './container.ts';
 import { lazyContentChecks, type LazyContentChecks } from '../features/content/application/lazy.ts';
 import type { ChecksPiece } from './contracts.ts';
 import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
+import { languagesBridge } from './languages.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { browserLearning, learningBridge } from './learning.ts';
 import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
@@ -109,6 +111,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
         },
       }),
   },
+  // the language courses before any course is loaded (src/features/languages): the Languages tab, Today, the loader
+  languagesBridge,
 ];
 
 /** the data contracts of the page, their validators loaded on demand (NoemaCore.contracts) */
@@ -155,62 +159,8 @@ export function workerFactory(page: PageLike, scriptUrl: string | null): () => W
   };
 }
 
-/** The id of the inline copy of a lazy piece (build/<name>.js) in the one-file bundle (tools/build.py writes it). */
-export const lazySourceId = (name: string): string => `noema-lazy:${name}`;
+export { lazySourceId, pieceLoader } from './pieces.ts';
 export const ENGINES_SOURCE_ID = lazySourceId('engines');
-
-/** Where build/<name>.js is: next to this script. */
-const pieceUrlNextTo = (script: string | undefined, name: string): string | null =>
-  script && /app\.js(\?.*)?$/.test(script) ? script.replace(/app\.js(\?.*)?$/, `${name}.js$1`) : null;
-
-/**
- * Runs the lazy piece build/<name>.js once (the bundle's inline copy, else the file next to app.js) and hands over what it
- * left on globalThis[key] (src/composition/engines.ts, src/composition/contracts.ts).
- */
-export function pieceLoader<T>(page: PageLike, script: string | undefined, name: string, key: string): () => Promise<T> {
-  const url = pieceUrlNextTo(script, name),
-    file = `build/${name}.js`;
-  const left = (): T | undefined => (globalThis as Record<string, unknown>)[key] as T | undefined;
-  let loading: Promise<T> | null = null;
-  return () =>
-    (loading ??= new Promise<T>((resolve, reject) => {
-      const doc = (globalThis as { document?: Document }).document;
-      const settle = (): void => {
-        const p = left();
-        if (p) resolve(p);
-        else reject(new NoemaError('compute.unavailable', `${file} did not load`));
-      };
-      if (left()) {
-        settle();
-        return;
-      }
-      if (!doc) {
-        reject(new NoemaError('compute.unavailable', `no page to load ${file} into`));
-        return;
-      }
-      const s = doc.createElement('script');
-      const inline = page.document?.getElementById(lazySourceId(name))?.textContent;
-      if (inline) {
-        s.textContent = inline;
-        doc.head.append(s);
-        settle();
-        return;
-      }
-      if (!url) {
-        reject(new NoemaError('compute.unavailable', `${file} cannot be located`));
-        return;
-      }
-      s.src = url;
-      s.onload = settle;
-      s.onerror = () => {
-        reject(new NoemaError('compute.unavailable', `${file} could not be loaded`));
-      };
-      doc.head.append(s);
-    }).catch((e: unknown) => {
-      loading = null; // a failed load may be tried again
-      throw e;
-    }));
-}
 
 /** Runs build/engines.js once and hands over its piece. */
 export const enginesLoader = (page: PageLike, script: string | undefined): (() => Promise<EnginesPiece>) =>

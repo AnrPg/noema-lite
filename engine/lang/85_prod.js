@@ -378,7 +378,7 @@ function tutorText(c, text, targets) {
         const hit = ts.map(t => [t, rest.indexOf(t)]).filter(([, i]) => i >= 0).sort((a, b) => a[1] - b[1])[0];
         if (!hit) { holder.append(...wordsIn(c, rest)); break; }
         const [t, i] = hit; if (i) holder.append(...wordsIn(c, rest.slice(0, i)));
-        holder.append(h('span', { class: 'lx-w lx-tl', lang: c, dir: X.language.dir || 'ltr' }, t)); rest = rest.slice(i + t.length);
+        holder.append(word(c, t, { sub: false, cls: 'lx-tl' })); rest = rest.slice(i + t.length);
       }
       out.append(holder);
     }
@@ -438,8 +438,8 @@ const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('spa
   VIEWS.home = (v, r) => { home(v, r); if (UI.scope) return; const map = v.querySelector('.lx-maphead') || [...v.querySelectorAll('h2')].find(x => /The map/.test(x.textContent)); const lanes = prodLanes(); map ? map.before(lanes) : v.append(lanes); };   // i18n-ignore (the map's head is found by its class)
   const fn = VIEWS.fn;
   VIEWS.fn = (v, r) => { fn(v, r); const fid = r.arg; if (!UI.C.functions[fid] || fid === 'fn.overview') return; const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; v.querySelector('.lx-gram')?.before(tutorRow({ lang: c, fn: fid }, ['explain', 'compare', 'quiz'])); };
-  const lesson = VIEWS.lesson;
-  VIEWS.lesson = (v, r) => { lesson(v, r); const n = UI.C.nodes[r.arg]; if (!n || n.kind !== 'lesson') return; const langs = lessonLangs(r.arg); if (!langs.length) return; const c = langs.includes(UI.lang) ? UI.lang : langs[0]; v.querySelector('.lx-actions')?.after(tutorRow({ lang: c, node: r.arg }, ['quiz', 'chat'])); };
+  const page = lessonPage;   // the tutor under the lesson's head (src/ui/screens/languages/lang-lesson.ts: LessonPage.tutor)
+  lessonPage = nid => { const m = page(nid); if (!m) return m; const langs = lessonLangs(nid), c = langs.includes(UI.lang) ? UI.lang : langs[0]; return { ...m, tutor: tutorRow({ lang: c, node: nid }, ['quiz', 'chat']) }; };
   const node = VIEWS.node;
   VIEWS.node = (v, r) => { node(v, r); const n = UI.C.nodes[r.arg]; if (!n || n.kind === 'lesson') return; v.querySelector('.lx-actions')?.after(tutorRow({ lang: UI.lang, node: r.arg }, ['quiz', 'chat'])); };
 }
