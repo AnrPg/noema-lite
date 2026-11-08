@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 import { migrate, migrateText, counts, packV3, stringifyLike } from './index.ts';
 import { repoFiles } from '../repo.ts';
 import { check } from '../index.ts';
@@ -25,7 +26,8 @@ test('every file of the repository is migrated already, and a run over it change
 });
 
 test('pack.v3: a pack of v 1 or 2 becomes v 3 — the same bytes but the version, the same counts, its contract met', () => {
-  assert.ok(PACKS.length >= 6, PACKS.join(', '));
+  // the packs committed as data (fixtures); a library subject's pack.json is built from its chapters, already at v 3
+  assert.ok(PACKS.length >= 5, PACKS.join(', '));
   for (const rel of PACKS) {
     const now = read(rel),
       doc = JSON.parse(now) as Record<string, unknown>;
@@ -44,7 +46,12 @@ test('pack.v3: a pack of v 1 or 2 becomes v 3 — the same bytes but the version
 });
 
 test('the counts of the learning material, file by file (what a migration must keep)', () => {
-  const pack = counts(JSON.parse(read('library/subjects/databricks/pack.json')));
+  // the library subject as tools/build.py assembles it from its authored files (chapters + patches + sources): pack.json is
+  // generated, not committed, so a fresh checkout counts the source of truth itself
+  const py = `import json,sys; sys.path.insert(0,'tools'); from noema_lib import load_subject
+meta, src, chs, _ = load_subject('library/subjects/databricks')
+print(json.dumps({'format':'noema-pack','v':3,'subject':meta,'sources':src,'chapters':chs}))`;
+  const pack = counts(JSON.parse(execFileSync('python3', ['-c', py], { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 28 })));
   assert.ok(
     pack.chapters === 13 &&
       (pack.sections ?? 0) > 100 &&
