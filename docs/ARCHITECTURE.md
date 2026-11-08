@@ -353,7 +353,9 @@ Each slice hands its screens **one data port** the same way the kit hands its se
 that the nearest provider answers. The Roadmaps' (`src/features/roadmaps/ui/`, the event `noema-roadmaps-data`, port
 `data.ts` `RoadmapsData`): the library and its invitations, the map (classic, treasure, list; level bands, `layout.ts`) with
 the selected step and its preparation, the levels (the ladder, the level test, the level-reached moment, Claude's proposed
-arrangement), a step's placement test, sharing, the Claude app's inbox, preparing ahead and From your sources. A screen
+arrangement), a step's placement test, sharing, the public Roadmaps (`public.ts`, the classic screens' Explore), a
+member's review of the owner's changes (`review.ts`, `Noema.app.reviewChanges`), the Claude app's inbox, preparing ahead
+and From your sources. A screen
 never reads a global: `src/composition/roadmaps-ui.ts` implements the port over the engine's scripts today, and the lead
 swaps that file, never the screens. The root (`ui-root.ts`) defines the elements and provides the port on `<body>`; the
 area `engine/app/roadmaps.js` mounts them: the Knowledge page (`#/learn`, the library) and the map page (`#/map/<id>`,
@@ -361,7 +363,7 @@ its ⋮ holding the legend, the view, sharing, settings and export) with the fra
 with `config.shell: false` (`Noema.curricula()`, `Noema.curriculumMap(id)`, `Noema.fromSources()`). What belongs to
 another screen (opening a subject, editing a step) a screen asks for by an event (`roadmap-study`, `roadmap-edit-step` …);
 the page that mounts it answers. The dialogs not yet in Lit (a new Roadmap, import, a step's editor, attaching subjects,
-the Roadmap's settings, Roadmaps others share) stay in `engine/curmap.js`.
+the Roadmap's settings) stay in `engine/curmap.js`.
 
 ### 6.4 The activity runtimes
 

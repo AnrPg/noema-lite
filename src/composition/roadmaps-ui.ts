@@ -1,7 +1,7 @@
 /**
  * The Roadmap screens' data port (src/features/roadmaps/ui/data.ts) over the app as it is today: the Roadmaps of
  * engine/curriculum.js (window.NoemaCurriculum, its generator .Gen), the Claude-app inbox of engine/curjobs.js
- * (NoemaCurJobs.App.decide), sharing (NoemaCurShare), the packs (Noema.loadSubject), the notices, and the levels of
+ * (NoemaCurJobs.App.decide), sharing and the public Roadmaps (NoemaCurShare), shared texts translated (NoemaMT), the packs (Noema.loadSubject), the notices, and the levels of
  * NoemaCore.roadmaps. The one place the screens meet those globals: the lead swaps this file for NoemaCore.study / sync.
  *
  * The app's root (ui-root.ts) defines the Roadmap elements and provides this port on the page's body beside the kit's
@@ -12,6 +12,7 @@ import type { Roadmap } from '../features/roadmaps/domain/model.ts';
 import type { StepStatus } from '../features/roadmaps/domain/status.ts';
 import type {
   AppTask,
+  Incoming,
   Invite,
   Member,
   PackExercises,
@@ -25,6 +26,18 @@ import type { TestQuestion } from '../features/roadmaps/domain/levels.ts';
 import type { Unsubscribe } from '../ports/common.ts';
 
 type Listen = (f: () => void) => Unsubscribe;
+/** a public Roadmap as engine/curshare.js lists it (noema_curricula, public) */
+interface PublicRow {
+  id: string;
+  title: string;
+  description?: string | null;
+  owner?: string;
+  owner_name?: string | null;
+  language?: string | null;
+  updated_at?: string;
+  prepared?: number;
+  meta?: { counts?: { steps?: number } };
+}
 type Parsed = Record<string, unknown>;
 
 /** What the port uses of the older globals (engine/*.js). */
@@ -73,6 +86,9 @@ interface Globals {
   NoemaCurShare?: {
     isMember(c: Roadmap): boolean;
     invites(): Promise<(Invite & { meta?: { counts?: { steps?: number } } })[]>;
+    explore(): Promise<PublicRow[] | null>;
+    incoming(acc: string, cid: string): Promise<Incoming>;
+    takeChanges(acc: string, cid: string, keys: readonly string[], inc: Incoming): Promise<unknown>;
     join(acc: string, cid: string): Promise<Roadmap>;
     decline(cid: string): Promise<void>;
     publish(acc: string, cid: string, o: { isPublic: boolean; steps: boolean; onLog: (m: string) => void }): Promise<void>;
@@ -103,6 +119,11 @@ interface Globals {
     mapText(p: SourcePlan): string;
     courseBrief(p: SourcePlan): string;
     courseMessage(p: SourcePlan, inv: readonly SourceItem[], o: { language: string; goal: string }): string;
+  };
+  NoemaMT?: {
+    mark(el: HTMLElement, o: { language: string | null; kind: string }): HTMLElement;
+    toggle(acc: string, nodes: readonly HTMLElement[]): HTMLElement | null;
+    bar(acc: string, root: HTMLElement): HTMLElement;
   };
   NoemaLLM?: { available(acc: string): { claude: boolean; gemini: boolean }; pick(acc: string, provider: string): string | null };
   NoemaClaude?: { Key?: { get?: (acc: string) => string | null } };
@@ -265,6 +286,29 @@ export function legacyRoadmapsData(win: Window): RoadmapsData {
       publish: (acc, cid, o) => SH().publish(acc, cid, o),
       setPublic: (acc, cid, on) => SH().setPublic(acc, cid, on),
       invite: (acc, cid, email, msg) => SH().invite(acc, cid, email, msg),
+      async explore(acc) {
+        const me = g().NoemaCloud?.session?.()?.user.id;
+        return ((await SH().explore()) ?? []).map(x => {
+          const have = C().get(acc, x.id);
+          return {
+            id: x.id,
+            title: x.title,
+            ...(x.description ? { description: x.description } : {}),
+            ...(x.owner ? { owner: x.owner } : {}),
+            ...(x.owner_name ? { owner_name: x.owner_name } : {}),
+            ...(x.language ? { language: x.language } : {}),
+            ...(x.updated_at ? { updated_at: x.updated_at } : {}),
+            steps: x.meta?.counts?.steps ?? 0,
+            prepared: x.prepared ?? 0,
+            have: !!have,
+            own: (!!have && have.shared?.role !== 'member') || (!!me && me === x.owner),
+          };
+        });
+      },
+      incoming: (acc, cid) => SH().incoming(acc, cid),
+      async takeChanges(acc, cid, keys, inc) {
+        await SH().takeChanges(acc, cid, keys, inc);
+      },
       members: cid => SH().members(cid),
       removeMember: (cid, email, o) => SH().removeMember(cid, email, o),
       unpublish: (acc, cid) => SH().unpublish(acc, cid),
@@ -346,6 +390,13 @@ export function legacyRoadmapsData(win: Window): RoadmapsData {
       },
       courseMessage: (p, inv, o) => SP().courseMessage(p, inv, o),
       courseBrief: p => SP().courseBrief(p),
+    },
+    translate: {
+      mark(el, o) {
+        g().NoemaMT?.mark(el, { language: o.language ?? null, kind: o.kind });
+      },
+      toggle: (acc, els) => g().NoemaMT?.toggle(acc, els) ?? null,
+      bar: (acc, root) => g().NoemaMT?.bar(acc, root) ?? null,
     },
     art: {
       mascot() {

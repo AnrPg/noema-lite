@@ -323,8 +323,8 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
     await visit(page, 'attach dialog', () => page.evaluate(id => NoemaCurMap.attachDialog(Noema.account.id, { cid: id, nid: 'a' }), cid), 1000);
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'review changes', () => page.evaluate(id => NoemaCurMap.reviewChanges(Noema.account.id, id), cid), 800);
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
+    await visit(page, 'review changes', () => page.evaluate(id => Noema.app.reviewChanges(Noema.account.id, id), cid), 800);
+    await page.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-review').forEach(o => o.remove()));
     await visit(page, 'new Roadmap', () => page.evaluate(() => NoemaCurMap.create(Noema.account.id, {})), 1000);
     await openDetails(page, 'new Roadmap');
     await clickAll(page, 'new Roadmap: choices', '.noema-ovbox .cm-prov, .noema-ovbox [data-prov], .noema-ovbox .seg button');
@@ -503,8 +503,8 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await page.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-share').forEach(o => o.remove()));
     await visit(page, 'Roadmaps library (shared)', () => page.evaluate(() => { Noema.curricula(); }), 1500);
     await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
-    await visit(page, 'Roadmaps others share', () => page.evaluate(() => { NoemaCurMap.exploreCurricula(Noema.account.id); }), 1500);
-    await page.evaluate(() => document.querySelectorAll('.noema-overlay').forEach(o => o.remove()));
+    await visit(page, 'Roadmaps others share', () => page.evaluate(() => { customElements.get('noema-roadmap-public').open({ account: Noema.account.id }); }), 1500);
+    await page.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-public').forEach(o => o.remove()));
     await visit(page, 'the shared map', () => page.evaluate(id => Noema.curriculumMap(id), cid2), 1500);
     await page.context().close();
     // Bob: the requests, the banner, the bell, the invitation

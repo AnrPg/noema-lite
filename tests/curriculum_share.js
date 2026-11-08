@@ -32,7 +32,7 @@ async function signUp(browser, email, name, { phone = false } = {}) {
   await p.click('button:has-text("Create account")'); await wait(1300);
   return { p, E, ctx };
 }
-const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-share').forEach(x => x.remove()));
+const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay, noema-roadmap-share, noema-roadmap-public, noema-roadmap-review').forEach(x => x.remove()));
 
 (async () => {
   const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false, storageChunkBytes: 200000 };`;
@@ -207,7 +207,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok((await B.p.evaluate(() => Noema.notes.local().map(x => x.kind))).includes('curupdate'), '…it waits in 🔔');
   await closeAll(B.p); await B.p.evaluate(cid => Noema.curriculumMap(cid), cid); await wait(700);
   await B.p.click('.cm-reviewbtn'); await wait(600);
-  ok(await B.p.locator('.cm-review .cm-change').count() === 1 && /is now called “Membranes and transport”/.test(await B.p.locator('.cm-review').innerText()) && await B.p.isChecked('.cm-review .cm-change input'), '🔎 Review: each change with a tick box');
+  ok(await B.p.locator('.cm-review .cm-change').count() === 1 && /is now called “Membranes and transport”/.test(await deepText(B.p, '.cm-review')) && await B.p.isChecked('.cm-review .cm-change input'), '🔎 Review: each change with a tick box');
   await B.p.click('.cm-takechanges'); await wait(500);
   bc = await cur(B, cid);
   ok(bc.nodes.membranes.title === 'Membranes and transport' && !bc.shared.incoming && bc.nodes.atoms.pack?.status === 'ready' && bc.nodes.cells.pack?.status === 'ready' && bc.provider === 'claudeapp', 'taken: Bob has the new map — his steps, settings and progress stay');
@@ -252,7 +252,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   await B.p.evaluate(cid => NoemaCurShare.refresh(Noema.account.id, cid), cid);
   ok((await B.p.evaluate(cid => NoemaCurShare.incoming(Noema.account.id, cid).then(x => x.list.map(y => y.key)), cid)).join() === 'info:energy', 'what he left is not offered again (unless it changes again): only the new rename');
   const later = await B.p.evaluate(async cid => { const sh = Noema.notes.local().find(x => x.kind === 'curupdate' && x.curriculum === cid), row = Noema.shareRow(sh); document.body.append(row);
-    const pause = ms => new Promise(r => setTimeout(r, ms)), notNow = () => [...document.querySelectorAll('.cm-review button')].find(x => /Not now/.test(x.textContent));
+    const pause = ms => new Promise(r => setTimeout(r, ms)), notNow = () => [...(document.querySelector('.cm-review')?.shadowRoot?.querySelectorAll('noema-button') || [])].find(x => /Not now/.test(x.textContent));   // the review draws its buttons in its shadow root
     const take = () => [...row.querySelectorAll('.nx-take')].find(x => /Review/.test(x.textContent));   // the row is drawn by build/community.js
     for (let i = 0; i < 50 && !take(); i++) await pause(100);
     const b = take(); b.click();

@@ -7,7 +7,16 @@ import assert from 'node:assert/strict';
 import { afterEach, describe, test } from 'node:test';
 import { defineUi } from '../../../../ui/index.ts';
 import type { Roadmap } from '../../domain/model.ts';
-import { defineRoadmapsUi, mapColumns, NoemaRoadmapShare, openDialog, treasureLayout } from '../index.ts';
+import {
+  defineRoadmapsUi,
+  mapColumns,
+  NoemaRoadmapPublic,
+  NoemaRoadmapReview,
+  NoemaRoadmapShare,
+  openDialog,
+  publicMatches,
+  treasureLayout,
+} from '../index.ts';
 import type { NoemaRoadmapFromSources } from '../from-sources.ts';
 import type { NoemaRoadmapMap } from '../map.ts';
 import { cleanup, fakeData, host } from './fixtures.ts';
@@ -351,6 +360,142 @@ describe('sharing', () => {
     click('.cm-stopyes', s);
     await flush();
     assert.ok(d.calls.includes('unpublish r2'));
+  });
+});
+
+describe('the public Roadmaps', () => {
+  const pub = (id: string, title: string, o: { have?: boolean; own?: boolean; owner_name?: string } = {}) => ({
+    id,
+    title,
+    description: 'about ' + title,
+    owner_name: o.owner_name ?? 'Anna',
+    steps: 4,
+    prepared: 2,
+    have: !!o.have,
+    own: !!o.own,
+  });
+
+  test('the field matches the title, the description and who shares it', () => {
+    const l = [pub('x', 'Cell biology'), pub('y', 'Optics', { owner_name: 'Bob' })];
+    assert.deepEqual(
+      publicMatches(l, 'bob').map(x => x.id),
+      ['y'],
+    );
+    assert.deepEqual(
+      publicMatches(l, ' CELL ').map(x => x.id),
+      ['x'],
+    );
+    assert.equal(publicMatches(l, '').length, 2);
+  });
+
+  test('each card: who, steps, prepared; Join needs a cloud account, then opens; one on this device opens', async () => {
+    const d = fakeData(course());
+    d.publicList = [pub('x', 'Cell biology'), pub('r2', 'Genetics', { have: true, own: true })];
+    host(d);
+    const got = events('roadmap-open', 'roadmap-library');
+    NoemaRoadmapPublic.open({ account: 'u1' });
+    await flush();
+    const p = find('noema-roadmap-public') as HTMLElement;
+    const cards = findAll('.cm-pubcard', p);
+    assert.equal(cards.length, 2);
+    assert.match(text(cards[0] as HTMLElement), /Cell biology.*Anna.*4 steps.*2 prepared/);
+    assert.equal(find('[data-mt]', cards[0])?.textContent, 'Cell biology', 'the shared title is marked for translation');
+    assert.match(text(cards[1] as HTMLElement), /Open — it is yours/);
+    click('.cm-joinbtn', p);
+    await flush();
+    assert.match(d.notes.join(' '), /cloud account/);
+    assert.ok(!d.calls.some(c => c.startsWith('join')));
+    d.cloud = true;
+    click('.cm-joinbtn', p);
+    await flush();
+    assert.ok(d.calls.includes('join x'));
+    assert.deepEqual(got, [{ type: 'roadmap-open', detail: { roadmap: 'x' } }]);
+    assert.equal(find('noema-roadmap-public'), undefined, 'the dialog has closed');
+  });
+
+  test('typing shows the matches only; nothing shared yet says so', async () => {
+    const d = fakeData(course());
+    d.publicList = [pub('x', 'Cell biology'), pub('y', 'Optics')];
+    host(d);
+    NoemaRoadmapPublic.open({ account: 'u1' });
+    await flush();
+    const p = find('noema-roadmap-public') as HTMLElement;
+    type('.cm-pubsearch', 'opt', p);
+    await flush();
+    assert.equal(findAll('.cm-pubcard', p).length, 1);
+    type('.cm-pubsearch', 'zzz', p);
+    await flush();
+    assert.match(text(p), /Nothing matches/);
+    cleanup();
+    const e = fakeData(course());
+    host(e);
+    NoemaRoadmapPublic.open({ account: 'u1' });
+    await flush();
+    assert.match(text(find('noema-roadmap-public') as HTMLElement), /No public Roadmaps yet/);
+  });
+});
+
+describe('the review of the owner’s changes', () => {
+  const shared = (): Roadmap => ({ ...course(), shared: { role: 'member', ownerName: 'Anna' } });
+
+  test('each change with a tick box (one on a step taught from my own subject unticked); take the ticked ones', async () => {
+    const d = fakeData(shared());
+    d.changes = [
+      { key: 'info:b', kind: 'info', text: '“Genes” is now called “Genes and DNA”' },
+      { key: 'plan:c', kind: 'plan', text: 'a new plan for “Inheritance” (your own subject)', own: true },
+    ];
+    host(d);
+    const got = events('roadmap-changes-done');
+    const r = NoemaRoadmapReview.open({ account: 'u1', roadmapId: 'r2' });
+    await flush();
+    await r.ready;
+    assert.ok(r.classList.contains('cm-review'));
+    assert.match(text(r), /Anna changed “Genetics”/);
+    const rows = findAll('.cm-change', r);
+    assert.equal(rows.length, 2);
+    assert.ok(rows[1]?.classList.contains('own'));
+    assert.deepEqual(
+      rows.map(x => (x.querySelector('input') as HTMLInputElement).checked),
+      [true, false],
+    );
+    click('.cm-takechanges', r);
+    await flush();
+    assert.ok(d.calls.includes('take r2 info:b'));
+    assert.match(d.notes.join(' '), /Took 1 change/);
+    assert.equal(got.length, 1);
+    assert.equal(find('noema-roadmap-review'), undefined, 'the dialog has closed');
+  });
+
+  test('Keep my copy takes nothing; Not now closes and keeps the update waiting', async () => {
+    const d = fakeData(shared());
+    d.changes = [{ key: 'info:b', kind: 'info', text: 'renamed' }];
+    host(d);
+    const got = events('roadmap-changes-done');
+    let r = NoemaRoadmapReview.open({ account: 'u1', roadmapId: 'r2' });
+    await flush();
+    click('.cm-notnow', r);
+    await flush();
+    assert.equal(find('noema-roadmap-review'), undefined);
+    assert.equal(got.length, 0);
+    assert.ok(!d.calls.some(c => c.startsWith('take')));
+    r = NoemaRoadmapReview.open({ account: 'u1', roadmapId: 'r2' });
+    await flush();
+    click('.cm-keepmine', r);
+    await flush();
+    assert.ok(d.calls.includes('take r2 '));
+    assert.match(d.notes.join(' '), /You keep your copy/);
+    assert.equal(got.length, 1);
+  });
+
+  test('nothing new: the copy is brought up to date, no dialog', async () => {
+    const d = fakeData(shared());
+    host(d);
+    const r = NoemaRoadmapReview.open({ account: 'u1', roadmapId: 'r2' });
+    await flush();
+    await r.ready;
+    assert.ok(d.calls.includes('take r2 '));
+    assert.match(d.notes.join(' '), /Nothing new to take/);
+    assert.equal(find('noema-roadmap-review'), undefined);
   });
 });
 

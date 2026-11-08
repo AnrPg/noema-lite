@@ -15,9 +15,11 @@ import { statuses } from '../../domain/status.ts';
 import {
   provideRoadmapsData,
   type AppTask,
+  type Change,
   type Invite,
   type Member,
   type PackExercises,
+  type PublicRoadmap,
   type RoadmapsData,
   type SourcePlan,
 } from '../data.ts';
@@ -97,6 +99,9 @@ export interface FakeData extends RoadmapsData {
   cloud: boolean;
   invitesList: Invite[];
   membersList: Member[];
+  /** the public Roadmaps · the owner's changes waiting */
+  publicList: PublicRoadmap[];
+  changes: Change[];
   /** what the clipboard got */
   copied: string[];
   /** the step being prepared on this device */
@@ -195,6 +200,8 @@ export function fakeData(c: Roadmap): FakeData {
     cloud: false,
     invitesList: [],
     membersList: [],
+    publicList: [],
+    changes: [],
     copied: [],
     busyKey: null,
     task: null,
@@ -253,6 +260,13 @@ export function fakeData(c: Roadmap): FakeData {
     },
     share: {
       invites: () => Promise.resolve(d.invitesList),
+      explore: () => Promise.resolve(d.publicList),
+      incoming: () => Promise.resolve({ list: d.changes }),
+      takeChanges: (_a, id, keys) => {
+        calls.push(`take ${id} ${keys.join(',')}`);
+        d.changes = [];
+        return Promise.resolve();
+      },
       join: (_a, id) => {
         calls.push(`join ${id}`);
         return Promise.resolve({ ...d.c, id });
@@ -347,6 +361,13 @@ export function fakeData(c: Roadmap): FakeData {
       courseBrief: () => 'BRIEF',
     },
     art: { mascot: () => '<svg class="mascot"></svg>' },
+    translate: {
+      mark: (el, o) => {
+        el.dataset['mt'] = o.kind;
+      },
+      toggle: () => null,
+      bar: () => null,
+    },
   };
   return d;
 }

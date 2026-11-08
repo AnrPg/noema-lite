@@ -288,13 +288,42 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     studyPublic: async item => {
       await need<Promise<unknown>>(N(), 'studyPublic', item);
     },
-    publicRoadmaps: async () => (await call<Promise<PublicItem[]>>(g('NoemaCurMap'), 'publicRoadmaps', acc())) ?? [],
-    openPublicRoadmap: async item => {
-      await need<Promise<unknown>>(g('NoemaCurMap'), 'openPublic', acc(), item, {
-        onOpen: (id: string) => {
-          host.go('#/map/' + encodeURIComponent(id));
-        },
+    // 🌍 the public Roadmaps (engine/curshare.js explore), each with its domain and whether it is on this device (mine or joined)
+    publicRoadmaps: async () => {
+      const a = acc() ?? '',
+        me = str(obj(obj(call<unknown>(g('NoemaCloud'), 'session'))?.['user'])?.['id']);
+      const rows = ((await call<Promise<Any[] | null>>(g('NoemaCurShare'), 'explore')) ?? []).map(obj).filter(x => x !== null);
+      return rows.map((x): PublicItem => {
+        const have = obj(call<unknown>(CU(), 'get', a, x['id'])),
+          meta = obj(x['meta']),
+          counts = obj(meta?.['counts']);
+        const domain = call<string>(CU(), 'domainOf', { title: x['title'], description: x['description'], domain: meta?.['domain'] });
+        return {
+          ...(x as unknown as PublicItem),
+          ...(domain ? { domain } : {}),
+          steps: Number(counts?.['steps']) || 0,
+          prepared: Number(x['prepared']) || 0,
+          have: !!have,
+          own: (!!have && obj(have['shared'])?.['role'] !== 'member') || (!!me && me === str(x['owner'])),
+        };
       });
+    },
+    // open it: its map when it is on this device already, otherwise join it first (that needs a cloud account)
+    openPublicRoadmap: async item => {
+      const a = acc() ?? '',
+        open = (): void => {
+          host.go('#/map/' + encodeURIComponent(item.id));
+        };
+      if (call<unknown>(CU(), 'get', a, item.id)) {
+        open();
+        return;
+      }
+      const me = str(obj(obj(call<unknown>(g('NoemaCloud'), 'session'))?.['user'])?.['id']);
+      if (!me || a !== 'u_' + me) throw new Error(host.word('sh.joinNeedsCloud'));
+      const c = obj(await need<Promise<unknown>>(g('NoemaCurShare'), 'join', a, item.id));
+      const title = str(c?.['title']) || str(c?.['goal']);
+      call(N(), 'toast', host.word('sh.joinedRm', { title }), 4000);
+      open();
     },
     domains: () => {
       const d = CU()?.['DOMAINS'];

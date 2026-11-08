@@ -1,6 +1,6 @@
 /* noema-lite — 🧭 the Roadmaps' dialogs that are not in Lit yet: a new Roadmap (the agents' progress), importing a map,
-   editing / reviewing a step, a step's sources, subjects on steps, a member's review of the owner's changes, the public
-   Roadmaps, a Roadmap's settings. The library, the map and its step, sharing, the Claude app's inbox, preparing ahead and
+   editing / reviewing a step, a step's sources, subjects on steps, a Roadmap's settings. The library, the map and its step,
+   sharing, the public Roadmaps, a member's review of the owner's changes, the Claude app's inbox, preparing ahead and
    From your sources are the Lit screens of src/features/roadmaps/ui (engine/app/roadmaps.js mounts them; these dialogs
    open the library and a map through Noema.curricula / Noema.curriculumMap). Logic lives in engine/curriculum.js.
    docs/CURRICULUM.md */
@@ -13,8 +13,6 @@ window.NoemaCurMap = (() => {
   const CM = (k, p) => window.NoemaI18n ? window.NoemaI18n.t(k, p) : k;
   const cmBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←';   // arrows in texts follow the reading direction (docs/i18n.md §5)
   const errMsg = e => window.NoemaI18n ? window.NoemaI18n.err(e) : (e?.message || String(e));   // an error's words (its code's message, else its English text)
-  /** 🌐 a text another learner shared (docs/i18n.md §11): marked for machine translation (engine/mt.js), with its stored language. */
-  const mtMark = (node, language, kind) => window.NoemaMT ? window.NoemaMT.mark(node, { language, kind }) : node;
   /** A Roadmap's language for the learner: its name in the UI language (English keeps the words it always had: “Greek (Ελληνικά)”). */
   const langLabel = code => window.NoemaI18n && window.NoemaI18n.locale !== 'en' ? window.NoemaI18n.fmt.langName(code) : (C().LANG[code] || code);
   /** A stored error (c.error, a step's pack.error) in the UI language of the moment: its code (…errorInfo) when it has one, else the stored words. */
@@ -26,7 +24,6 @@ window.NoemaCurMap = (() => {
 
   /* ======================= 👥 shared curricula (engine/curshare.js, docs/CURRICULUM.md §8) ======================= */
   const SH = () => window.NoemaCurShare;
-  const SHARE_RULES = () => CM('roadmap.map.share.rules');
   /** The shell's words (i18n/shell, keys sh.*). Without the frame: the same catalog in a UI language other than English, else the
       English fallback d given here (it is the sh.* key's English, kept for the classic screens). */
   /** A message with elements inside (a bold name …): placeholders filled with \u0001…\u0008 markers → [text, element, text …]. */
@@ -38,49 +35,6 @@ window.NoemaCurMap = (() => {
   const openLibrary = () => window.Noema.curricula();
   const openMap = (cid, { app = false } = {}) => window.Noema.curriculumMap(cid, null, { app });
   const when = t => t ? (window.NoemaI18n ? window.NoemaI18n.fmt.date(t, { year: 'numeric', month: 'numeric', day: 'numeric' }) : new Date(t).toLocaleDateString()) : '';
-  /** 🌍 Curricula other learners made public: join one (or open it, if it is mine / I joined). */
-  function exploreCurricula(acc) {
-    overlay((box, close) => {
-      box.classList.add('cm-lib');
-      const grid = el('div', { class: 'cm-cards' }, el('p', { class: 'tiny' }, '⏳ …'));
-      const q = el('input', { class: 'noema-input noema-search', placeholder: '🔎 ' + CM('roadmap.map.pub.search'), oninput: () => drawList() });
-      let all = [];
-      const drawList = () => {
-        grid.innerHTML = ''; const w = q.value.trim().toLowerCase();
-        const list = all.filter(x => !w || [x.title, x.description, x.owner_name].join(' ').toLowerCase().includes(w));
-        if (!list.length) { grid.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '🌍'), el('p', {}, all.length ? CM('roadmap.map.pub.noMatch') : CM('roadmap.map.pub.none')))); return; }
-        for (const x of list) {
-          const have = C().get(acc, x.id), own = have && !(have.shared?.role === 'member') || (CL()?.session?.()?.user?.id === x.owner);
-          const tN = mtMark(el('b', {}, x.title), x.language, 'explore.roadmap'), dN = x.description ? mtMark(el('div', { class: 'tiny' }, x.description), x.language, 'explore.roadmap') : null;
-          grid.append(el('div', { class: 'cm-card cm-pubcard' },
-            el('div', { class: 'cm-cardtop' }, el('span', { class: 'cm-emo' }, '🧭'), tN),
-            dN,
-            window.NoemaMT?.toggle(acc, [tN, dN]),
-            el('div', { class: 'tiny' }, ['👤 ' + (x.owner_name || CM('roadmap.map.pub.someone')), x.meta?.counts?.steps ? CM('roadmap.map.inv.steps', { n: x.meta.counts.steps }) : CM('roadmap.map.inv.stepsUnknown'), '⚡ ' + CM('roadmap.map.pub.prepared', { n: x.prepared || 0 }), x.language ? '🗣️ ' + x.language : '', '🕒 ' + when(x.updated_at)].filter(Boolean).join(' · ')),
-            el('div', { class: 'row' }, have ? el('button', { class: 'btn small primary', onclick: () => { close(); openMap(x.id); } }, '🗺️ ' + (own ? CM('roadmap.map.pub.openYours') : CM('roadmap.map.pub.openJoined')))
-              : el('button', { class: 'btn small primary cm-joinbtn', onclick: async e => {
-                if (!cloudOn(acc)) { toast('☁️ ' + CM('roadmap.map.pub.joinNeedsCloud'), 5000); return; }
-                e.currentTarget.disabled = true; try { const c = await SH().join(acc, x.id); toast('👥 ' + CM('roadmap.map.inv.joined', { title: c.title || c.goal }), 5000); close(); openMap(x.id); } catch (er) { toast('⚠️ ' + errMsg(er), 5000); e.target.disabled = false; } } }, '➕ ' + CM('roadmap.map.inv.join')))));
-        }
-      };
-      box.append(head('🌍 ' + CM('roadmap.map.lib.explore'), CM('roadmap.map.pub.lead') + ' ' + SHARE_RULES()), q, window.NoemaMT?.bar(acc, grid) || null, grid,
-        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ghost', onclick: () => { close(); openLibrary(); } }, cmBack() + ' ' + CM('roadmap.map.pub.mine')), el('button', { class: 'btn small', onclick: close }, CM('roadmap.map.close'))));
-      SH().explore().then(l => { all = l || []; drawList(); }).catch(e => { grid.innerHTML = ''; grid.append(el('p', { class: 'cg-warn' }, '⚠️ ' + errMsg(e))); });
-    });
-  }
-  const CL = () => window.NoemaCloud;
-  /** 🔎 the shell's Explore page: the public Roadmaps → [{ id, title, description, domain, owner_name, steps, prepared, language, have, own }] */
-  async function publicRoadmaps(acc) {
-    return ((await SH().explore()) || []).map(x => { const have = C().get(acc, x.id);
-      return { ...x, domain: C().domainOf({ title: x.title, description: x.description, domain: x.meta?.domain }), steps: x.meta?.counts?.steps || 0, prepared: x.prepared || 0,
-        have: !!have, own: !!have && have.shared?.role !== 'member' || CL()?.session?.()?.user?.id === x.owner }; });
-  }
-  /** Open a public Roadmap: its map when it is on this device already, otherwise join it first (that needs a cloud account) */
-  async function openPublic(acc, x, { onOpen = id => openMap(id) } = {}) {
-    if (C().get(acc, x.id)) return onOpen(x.id);
-    if (!cloudOn(acc)) throw new Error(SL('joinNeedsCloud', 'Joining needs a noema-lite cloud account (Me › Cloud): your progress is kept there.'));   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
-    const c = await SH().join(acc, x.id); toast(SL('joinedRm', `You joined “${c.title || c.goal}”`, { title: c.title || c.goal }), 4000); onOpen(x.id);   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
-  }
 
   /* ======================= new curriculum ======================= */
   function keysBox(acc, onChange) {
@@ -162,23 +116,6 @@ window.NoemaCurMap = (() => {
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, CM('roadmap.map.new.buildStep'))), go, err)),
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, CM('roadmap.map.close'))));
       setTimeout(() => goal.focus(), 200);
-    });
-  }
-
-  /* ======================= 🔔 a member takes the owner's changes they want (docs/CURRICULUM.md §8) ======================= */
-  const CHANGE_ICON = { map: '🧭', add: '➕', del: '➖', info: '✏️', plan: '📝', mat: '📎', links: '🔗' };
-  async function reviewChanges(acc, cid, { onDone = () => { } } = {}) {
-    let inc; try { inc = await SH().incoming(acc, cid); } catch (e) { toast('⚠️ ' + errMsg(e), 5000); return; }
-    const c = C().get(acc, cid); if (!c) return;
-    if (!inc.list.length) { if (inc.record) await SH().takeChanges(acc, cid, [], inc); toast(CM('roadmap.map.chg.none'), 3500); onDone(); return; }
-    overlay((box, close) => {
-      box.classList.add('cg-box', 'cm-review');
-      const rows = inc.list.map(ch => { const cb = el('input', { type: 'checkbox', 'data-key': ch.key }); cb.checked = !ch.own; return [ch, cb]; });
-      const done = async keys => { try { await SH().takeChanges(acc, cid, keys, inc); toast(keys.length ? '✅ ' + CM('roadmap.map.chg.took', { n: keys.length }) : '👍 ' + CM('roadmap.map.chg.kept'), 4500); close(); onDone(); } catch (e) { toast('⚠️ ' + errMsg(e), 5000); } };
-      box.append(head('🔔 ' + CM('roadmap.map.chg.title', { who: c.shared?.ownerName || CM('roadmap.map.chg.theOwner'), title: c.title || c.goal }), CM('roadmap.map.chg.lead')),
-        el('div', { class: 'cm-changes' }, ...rows.map(([ch, cb]) => el('label', { class: 'cm-change' + (ch.own ? ' own' : '') }, cb, el('span', {}, (CHANGE_ICON[ch.kind] || '•') + ' ' + ch.text)))),
-        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn primary cm-takechanges', onclick: () => done(rows.filter(([, cb]) => cb.checked).map(([ch]) => ch.key)) }, '✓ ' + CM('roadmap.map.chg.take')),
-          el('button', { class: 'btn small cm-keepmine', onclick: () => done([]) }, CM('roadmap.map.chg.keep')), el('button', { class: 'btn small ghost', onclick: close }, CM('roadmap.map.notNow'))));
     });
   }
 
@@ -832,5 +769,5 @@ window.NoemaCurMap = (() => {
     });
   }
 
-  return { create, importMap, progress, planNow, nodeInfo, editStep, attachDialog, attachMany, replanNow, stepSources, reviewChanges, exploreCurricula, publicRoadmaps, openPublic, setupClaude, settings, exportMap };
+  return { create, importMap, progress, planNow, nodeInfo, editStep, attachDialog, attachMany, replanNow, stepSources, setupClaude, settings, exportMap };
 })();
