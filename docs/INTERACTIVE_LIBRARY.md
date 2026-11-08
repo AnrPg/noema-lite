@@ -29,7 +29,7 @@ the limits and edge cases, the reference values its tests assert).
 | `src/engines/plugins.ts` | one line per engine: its manifest (`engine:<id>`), how to load its module and its Worker bundle |
 | `src/engines/library.ts` | the engine library on `NoemaCore.engines`: `ids()`, `load(ids)`, `loaded(id)`, `engine(id)`, `catalog`, `expr`, `schema()` |
 | `src/engines/kernel/schema.js` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
-| `src/engines/catalog.js` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
+| `src/engines/catalog.ts` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
 | `tools/enginelib.py` | the Python twin of the core's checker (`walk`, `problems`, `check_outputs`) |
 | `tools/lib_<name>.py` | the Python twin of one engine's checks: `ID`, `check_spec(spec)`, `exprs(spec)`, `keys(spec)` — the same codes, paths and messages |
 | `docs/library/<name>.md` | the engine's chapter |

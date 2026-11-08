@@ -3784,7 +3784,7 @@ const API = Object.freeze({
         ]),
       ),
     },
-  }, // the form of the activity author (src/engines/kernel/schema.js)
+  }, // the form of the activity author (src/engines/kernel/schema.ts)
   // the engine's own functions and tables, for the tests
   index,
   graph,

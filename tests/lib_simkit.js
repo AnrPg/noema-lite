@@ -1,4 +1,4 @@
-/* NoemaSimKit (src/engines/kernel/simkit.js, docs/library/simkit.md) against published values and exact solutions:
+/* NoemaSimKit (src/engines/kernel/simkit.ts, docs/library/simkit.md) against published values and exact solutions:
    1. randomness: MRG32k3a's jump-ahead matrices (RngStreams.c A1p76 … A2p127), its recurrence checked in exact BigInt arithmetic,
       streams / substreams / antithetics, every variate's moments, KS tests; special functions (AS241, t quantiles, Γ, incomplete Γ, β);
    2. the calendar's tie rule, the executive (three-phase, activities with pre-emption, Zeno, budget);

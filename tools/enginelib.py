@@ -1,5 +1,5 @@
 """The shared core of the engine library of sim-spec@1 in Python (docs/INTERACTIVE_LIBRARY.md §1): the twin of the model checker of
-src/engines/kernel/core.js — the same kinds, codes, paths and messages (tests/enginelib.js runs both on the same models). The library
+src/engines/kernel/core.ts — the same kinds, codes, paths and messages (tests/enginelib.js runs both on the same models). The library
 engines' Python twins (tools/lib_<name>.py) build their check_spec on it; they do not simulate.
 
   walk(o, T, path, E, W)        the table walker: kinds pos nonneg fin unit bool int:a:b enum:a|b id ref name key expr numx (+ "!")

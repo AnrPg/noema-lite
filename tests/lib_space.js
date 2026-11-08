@@ -1,4 +1,4 @@
-/* NoemaSpaceKit (src/engines/kernel/space.js, docs/library/space.md) against exact and published values:
+/* NoemaSpaceKit (src/engines/kernel/space.ts, docs/library/space.md) against exact and published values:
    1. grids and boundary conditions (ghost cells: Dirichlet, Neumann, Robin, periodic), the 5- and 9-point Laplacians (exact on
       quadratics), gradients, bilinear sampling, the Thomas algorithm and its cyclic form (Sherman–Morrison);
    2. stability: the FTCS limit, Courant numbers, the von Neumann amplification factors (Morton & Mayers 2005; Strikwerda 2004),

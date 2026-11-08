@@ -1,5 +1,5 @@
-/* The engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core (src/engines/kernel/core.js and its twin tools/enginelib.py),
-   the catalogue (src/engines/catalog.js), the validators' hook (packcheck.js checkLib, activities.py check_lib), and — for every engine whose
+/* The engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core (src/engines/kernel/core.ts and its twin tools/enginelib.py),
+   the catalogue (src/engines/catalog.ts), the validators' hook (packcheck.js checkLib, activities.py check_lib), and — for every engine whose
    module exists — the JS ↔ Python parity of checkSpec / exprs / keys on its fixtures tests/fixtures/enginelib/<name>.json
    ({"specs": [spec, …]}). Each engine's own science tests are tests/lib_<name>.js.  Run: node tests/enginelib.js */
 'use strict';
