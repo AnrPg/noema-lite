@@ -96,6 +96,7 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   await B.p.evaluate(() => Noema.notes.refresh()); await wait(400);
   ok(/Anna invites you to the Roadmap “Cell biology”/.test(await B.p.locator('.sharebar').innerText()) && await B.p.locator('.sharebar .nx-accept:has-text("Join")').isVisible(), '🔔 the banner: “Anna invites you to the curriculum …” → Join');
   await B.p.click('.sharebar .nx-accept');
+  await B.p.click('.nc-ask .nc-cancel', { timeout: 8000 }).catch(() => { });   // “Open it now?” → not now
   ok(await until(() => S.mems.some(m => m.email === 'bob@example.com' && m.status === 'joined' && m.user_id === bob)), 'he joined');
   await until(async () => (await cur(B, cid))?.shared?.role === 'member', 8000);   // the server has him first; his copy is saved right after
   let bc = await cur(B, cid);
@@ -252,7 +253,9 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   ok((await B.p.evaluate(cid => NoemaCurShare.incoming(Noema.account.id, cid).then(x => x.list.map(y => y.key)), cid)).join() === 'info:energy', 'what he left is not offered again (unless it changes again): only the new rename');
   const later = await B.p.evaluate(async cid => { const sh = Noema.notes.local().find(x => x.kind === 'curupdate' && x.curriculum === cid), row = Noema.shareRow(sh); document.body.append(row);
     const pause = ms => new Promise(r => setTimeout(r, ms)), notNow = () => [...document.querySelectorAll('.cm-review button')].find(x => /Not now/.test(x.textContent));
-    const b = [...row.querySelectorAll('button')].find(x => /Review/.test(x.textContent)); b.click();
+    const take = () => [...row.querySelectorAll('.nx-take')].find(x => /Review/.test(x.textContent));   // the row is drawn by build/community.js
+    for (let i = 0; i < 50 && !take(); i++) await pause(100);
+    const b = take(); b.click();
     for (let i = 0; i < 50 && !notNow(); i++) await pause(100);
     const nn = notNow(); nn?.click(); await pause(600);
     const res = !!nn && !b.disabled && !document.querySelector('.cm-review') && Noema.notes.local().some(x => x.kind === 'curupdate'); row.remove(); return res; }, cid);

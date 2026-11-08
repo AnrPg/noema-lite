@@ -80,7 +80,7 @@ async function signUp(browser, email, name) {
   const bParts = Object.keys(srv.state.files).filter(k => k.startsWith(`${bob}/sources/heart-test/atlas/file.pdf.p`)).sort();
   ok(bIdx.notes?.name === 'Σημειώσεις καρδιάς.pdf' && bIdx.atlas?.chunks === 4 && Buffer.concat(bParts.map(k => Buffer.from(srv.state.files[k].data))).equals(bytes(BIG, 7)) && Buffer.from(srv.state.files[`${bob}/sources/heart-test/notes/file.pdf`].data).equals(bytes(5000, 3)), 'Bob gets the source files too, byte for byte, in his own account');
   ok(!JSON.stringify(JSON.parse(Buffer.from(srv.state.files[`${bob}/packs/heart-test.json`].data).toString())).includes('sharedFiles'), 'the download addresses are not kept in Bob’s copy of the pack');
-  await B.p.click('.modal button:has-text("No"), .modal button:has-text("Cancel"), .modal .btn:not(.primary)').catch(() => { }); await wait(300);
+  await B.p.click('.nc-ask .nc-cancel').catch(() => { }); await wait(300);   // “Open it now?” → not now
   ok(await B.p.$eval('#bellbtn .bellbadge', b => b.textContent) === '1', '🔔 now shows 1');
   await B.p.click('#bellbtn'); await wait(300);
   ok(/Lungs test/.test(await B.p.locator('.modal').last().innerText()), 'the bell lists the remaining request');
