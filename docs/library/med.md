@@ -1,4 +1,4 @@
-# `med@1` — physiology, pharmacology, laboratory medicine and validated scores (`src/engines/med/med.js`, `NoemaLibMed`)
+# `med@1` — physiology, pharmacology, laboratory medicine and validated scores (`src/engines/med/med.ts`, `NoemaLibMed`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for the numbers of medicine: the circulation (from cardiac output to a
 time-varying-elastance pressure–volume loop), respiration and oxygen transport, acid–base (Henderson–Hasselbalch, compensation rules,

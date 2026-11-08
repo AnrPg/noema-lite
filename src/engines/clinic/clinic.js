@@ -18,7 +18,7 @@
    come from med@1 (NoemaLibMed.calc): its module travels with this one to the Worker. EDUCATIONAL ONLY — never clinical advice.
    Pure, deterministic (seeded noise only), bounded. */
 import NoemaLibCore from '../kernel/core.js';
-import NoemaLibMed from '../med/med.js';
+import NoemaLibMed from '../med/med.ts';
   /* i18n-ignore-start */
   const C = NoemaLibCore;
   const ID = 'clinic@1';
