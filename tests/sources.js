@@ -107,10 +107,10 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   const op1 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
   ok(op0 === 0 && op1 > 0.5, `the icon is hidden and appears on hover (opacity ${op0} → ${op1})`);
   await p.click('.reader .blk >> nth=0 >> .xbtn'); await wait(500);
-  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ns-forchip')?.textContent, mode: T.mode, ctx: tutorContextText(), sec: SEC[T.ctx.sec]?.title }));
+  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ns-forchip')?.textContent, mode: NoemaTutor.current().session.mode, ctx: NoemaTutor.current().session.context(), sec: SEC[NoemaTutor.current().session.ctx.sec]?.title }));
   ok(xs.open && /Kinetic energy/.test(xs.chip || '') && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
   ok(/^FOCUS/.test(xs.ctx) && xs.ctx.includes('WIDER CONTEXT') && xs.ctx.includes(xs.sec) && /THE CHAPTER/.test(xs.ctx), 'the AI gets the part itself first, then its section and chapter as wider context');
-  await p.evaluate(() => closeTutor());
+  await p.evaluate(() => NoemaTutor.current().session.close());
   await p.screenshot({ path: SHOTS + '/s7_explain.png' });
 
   console.log('— ❓ Help: setting up Claude (both ways), always there');

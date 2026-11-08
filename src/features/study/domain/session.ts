@@ -1,5 +1,5 @@
 /**
- * A practice round as a statechart (src/kernel/statechart.ts; docs/ARCHITECTURE.md §6.4): a round of exercises, a boss
+ * A practice round as a statechart (src/kernel/statechart.ts; docs/ARCHITECTURE.md §6.6): a round of exercises, a boss
  * battle (three lives), the Mistakes gym, a round made from search results. Every screen that runs exercises one after
  * the other drives this machine and draws its snapshot, so a round can never be "between" two exercises or count an
  * answer twice.

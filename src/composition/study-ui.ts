@@ -14,6 +14,7 @@ import { NoemaError } from '../kernel/errors.ts';
 import type { BridgeExtension } from './bridge.ts';
 import { token } from './container.ts';
 import type { StudyPiece } from './study-pages.ts';
+import type { TutorPageHost, TutorUi } from './tutor.ts';
 import { CLOCK, I18N } from './tokens.ts';
 
 /** the one load of build/study.js (registered by the browser's composition: src/composition/browser.ts) */
@@ -24,6 +25,7 @@ export const STUDY_UI_BRIDGE: readonly BridgeExtension[] = [
     name: 'studyUi',
     build: r => {
       let ui: StudyUi | null = null,
+        tutor: TutorUi | null = null,
         piece: StudyPiece | null = null;
       return Object.freeze({
         /** resolves once the study pages' code is in (loads it the first time) */
@@ -43,6 +45,14 @@ export const STUDY_UI_BRIDGE: readonly BridgeExtension[] = [
         },
         /** the first segments of the study addresses (the frame registers them before the pages' code is in) */
         segments: STUDY_SEGMENTS,
+        /** the tutor of the open subject (src/composition/tutor.ts): mounted before the study area, which gets its two ports */
+        tutor(host: TutorPageHost): TutorUi {
+          if (!piece) throw new NoemaError('invariant.failed', 'the study pages are not loaded yet: await NoemaCore.studyUi.ready() first');
+          tutor = piece.mountTutor(host, r.get(I18N));
+          return tutor;
+        },
+        /** the tutor mounted on this page (null before a subject opens) */
+        currentTutor: (): TutorUi | null => tutor,
         /** the study area mounted on this page (null before a subject opens) */
         current: (): StudyUi | null => ui,
       });

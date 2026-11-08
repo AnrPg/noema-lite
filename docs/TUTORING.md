@@ -16,7 +16,7 @@ nested questions pile up, and the conversation never culminates in knowledge.
 | Culmination | no open threads → **🎓 What you learned** (all lessons) + one optional next step, instead of a new chain; after 10 learner turns the app asks the model to converge |
 | Learner controls | **💡 Just tell me** (resolve the focus thread now) and **🎓 Wrap up** (resolve everything + summary) in the tracker bar |
 
-**Mechanics (engine/src/65_threads.js):**
+**Mechanics (src/features/tutor/domain/threads.ts):**
 1. Before each call the app counts an attempt on the focus thread and appends a **TUTOR STATE** block to the system prompt:
    open threads (tree, attempts/budget, focus), lessons so far, learner turn count, and computed **DIRECTIVES**
    (resolve now / don’t open new threads / converge / wrap up).
@@ -40,7 +40,7 @@ beyond it. The conversation is saved like any other (context type `item`, with i
 ## 🗣 Language of the AI conversations
 ⚙️ Settings → **Language of the AI conversations** (also the 🗣 picker in the tutor, next to the topic): the tutor in every
 mode, the 💡 explanations, the AI feedback on answers and drills, and conversation titles are written in that language
-(`S.settings.chatLang`, a profile setting, synced). The rule is added to the instructions at call time (`langRule()` /
-`langFields()` in `engine/src/20_ai.js`), so a change applies to the next answer. The course material is **not** changed
+(`S.settings.chatLang`, a profile setting, synced). The rule is added to the instructions at call time (`ReplyLanguage.rule` /
+`fields()`, read by `src/features/tutor/domain/prompts.ts` through `engine/llm.js`), so a change applies to the next answer. The course material is **not** changed
 or translated: the notes sent to the tutor stay in the course language, and the tutor translates what it quotes (keeping
 code, formulas and names, and a key term's original form in parentheses). “Same as the course” = the previous behaviour.

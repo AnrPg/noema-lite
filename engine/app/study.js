@@ -14,24 +14,11 @@
   /** a page of the subject: the study area draws its address (an address it does not know: the subject's home) */
   const page = () => {
     if (!ui) return;
-    if (innerWidth < 720) window.closeTutor?.();
+    if (innerWidth < 720) TUTOR_UI?.close();
     if (!ui.show(location.hash || '#/subject')) ui.show('#/subject');
   };
   for (const k of NoemaCore.studyUi.segments) SH().registerPage(k, page, { subject: true });
 
-  /** The tutor's "Ask <character>" about an exercise — each its own conversation, mode and task: before answering → hints
-      (never the answer) · "Help me get it" after a wrong answer → Socratic, from the learner's answer · "Explain differently"
-      → a free, in-depth explanation from another angle. */
-  function askAIAbout(ex, mode, given = '') {
-    const m = mode === 'explain' ? 'explain' : mode === 'socratic' ? 'socratic' : 'hint';
-    const ctx = { kind: 'exercise', id: ex.id, text: STUDY.exerciseText(ex), origin: { via: m === 'explain' ? 'explainDifferently' : m === 'socratic' ? 'helpSocratic' : 'askHint', ex: ex.id, ...(ex.section ? { sec: ex.section } : {}) } };   // i18n-ignore (ids)
-    const key = ex.id + '|' + m;
-    T.hist[key] = []; delete T.tstate[key];
-    const mine = { answered: given ? 'yes' : 'no', given: given.length > 300 ? given.slice(0, 300) + '…' : given };   // the learner's first message (their bubble, in the UI language)
-    if (m === 'explain') openTutor(ctx, 'explain', tE('engine.aimsg.exExplain', mine), { intent: INTENT.exExplain(given) });
-    else if (m === 'socratic') openTutor(ctx, 'socratic', tE('engine.aimsg.exSocratic', mine), { intent: INTENT.exSocratic(given) });
-    else openTutor(ctx, 'hint', tE('engine.aimsg.exHint'), { intent: INTENT.exHint(given) });
-  }
   /** the Roadmap step this subject is attached to (its first), or null */
   function stepAt() { const CU = window.NoemaCurriculum; return CU?.stepsOf && ACCOUNT?.id ? CU.stepsOf(ACCOUNT.id, SUBJ.id)[0] || null : null; }
   /** { missing: the titles of the steps to master first } when every Roadmap step this subject teaches is still locked, else null */
@@ -155,14 +142,8 @@
       refitFsrs: last => NoemaCore.study.models.refit(last),
       blockIds: blocks => NoemaCore.catalog.blockIds(blocks),
       trapId: p => NoemaCore.catalog.trapId(p),
-      tutor: {
-        open: (ctx, mode, first, o) => openTutor(ctx, mode, first, o || {}),
-        close: () => closeTutor(), setContext: ctx => setTutorContext(ctx),
-        askAbout: (ex, mode, given) => askAIAbout(ex, mode, given || ''),
-        explainable: (el, what) => explainable(el, what),
-        intent: (name, given) => typeof INTENT[name] === 'function' ? INTENT[name](given || '') : INTENT[name] || '',
-      },
-      ai: { grade: (...a) => aiGrade(...a), question: (...a) => aiQuestion(...a), drillGrade: (...a) => aiDrillGrade(...a), md: x => md(x) },
+      tutor: TUTOR_UI.port,   // the tutor (src/composition/tutor.ts): mounted first (90_boot.js)
+      ai: TUTOR_UI.ai,
     };
   }
 

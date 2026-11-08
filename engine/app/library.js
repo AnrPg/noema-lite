@@ -627,89 +627,8 @@
     draw();
   };
 
-  /* ---------- 🕘 the conversations with the tutor, in every subject: a window in the middle of the screen, grouped by Roadmap and step ---------- */
-  const emoBtn = (emo, label, run) => h('button', { class: 'ns-emobtn', type: 'button', title: label, 'aria-label': label, onclick: run }, emo);
-  /** A window in the middle of the screen. build({ head, body, close }) */
-  /** A window in the middle of the screen: focus moves into it, Tab stays inside, and closing gives focus back to what opened it. */
-  const cvTitle = r => r.title || String(r.messages.find(m => m.role === 'user')?.content || '').replace(/\s+/g, ' ').slice(0, 60) || L('untitled');
-  const cvMode = r => { if (r.kind && r.kind !== 'tutor') return window.NoemaConvos?.KIND_NAME?.[r.kind] || r.kind; const m = String(r.mode || ''), k = 'mode' + m.charAt(0).toUpperCase() + m.slice(1); return m && window.NoemaI18n?.has('sh.' + k) ? L(k) : m; };   // a mode the catalog does not know: its code (a missing key no longer comes back as the key)
-  const cvWhat = r => !r.context || r.context.type === 'course' ? '' : r.context.type === 'exercise' ? L('forExercise') : r.context.label || '';   // a whole-subject chat needs no label (it read like a filter)
-  const cvText = t => String(t || '').replace(/<noema-state>[\s\S]*?<\/noema-state>/g, '').trim();
-  function cvMd(t) { const d = h('div', { class: 'ns-md' }); if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parse(cvText(t))); else d.textContent = cvText(t); return d; }
-  function download(name, text) { const a = h('a', { href: URL.createObjectURL(new Blob([text], { type: 'text/markdown;charset=utf-8' })), download: name }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
-  const cvMarkdown = r => window.NoemaConvos?.toMarkdown ? NoemaConvos.toMarkdown({ ...r, messages: r.messages.map(m => ({ ...m, content: cvText(m.content) })) }, { tutorName: tv().tutor, tutorAvatar: TH()?.tutor()?.emoji || '' }) : r.messages.map(m => `**${m.role === 'user' ? L('you') : tv().tutor}:** ${cvText(m.content)}`).join('\n\n');
-  const slug = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 60) || 'conversation';
-  /** Where a subject sits: { group: Roadmap (or "no Roadmap"), step: its step (or the subject itself) } */
-  function placeOf(sid, title) {
-    const st = window.NoemaCurriculum?.stepsOf ? NoemaCurriculum.stepsOf(acc(), sid) : [];
-    if (st.length) { const { c, nid } = st[0]; return { g: 'c:' + c.id, gt: CU().shownTitle(c) || L('roadmap'), s: c.id + '/' + nid, st: CU().shownNode(c, nid)?.title || title }; }
-    return { g: 'other', gt: L('otherSubjects'), s: 's:' + sid, st: title || sid };
-  }
-  function convos(openId) {   // openId: open that conversation at once (a search result)
-    const C = window.NoemaConvos; if (!C || !acc()) return;
-    let q = '', allKinds = false;
-    modal(L('activity'), ({ head, body, close, refocus }) => {
-      const closeBtn = h('button', { class: 'ns-iconbtn', 'aria-label': L('close'), onclick: close }, svg('close'));
-      const groups = h('div', { class: 'ns-cvgroups' });
-      const search = h('input', { class: 'noema-input ns-cvsearch', type: 'search', placeholder: L('convosSearch'), 'aria-label': L('convosSearch'), oninput: e => { q = e.target.value.trim().toLowerCase(); draw(); } });
-      let rows = [];
-      async function load() { rows = (await C.list(acc()).catch(() => [])).filter(r => r.messages?.length).sort((a, b) => String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''))); }
-      async function listView() {
-        await load();
-        const tutorOnly = rows.filter(r => !r.kind || r.kind === 'tutor'), others = rows.length - tutorOnly.length;
-        head.replaceChildren(...[h('h2', { class: 'grow' }, `${L('activity')} (${tutorOnly.length})`), rows.length ? emoBtn('⬇️', L('exportAll'), () => download('conversations.md', (allKinds ? rows : tutorOnly).map(cvMarkdown).join('\n\n---\n\n'))) : null, closeBtn].filter(Boolean));
-        body.replaceChildren(...[h('p', { class: 'tiny ns-muted' }, L('convosSaved')),
-          rows.length > 3 ? search : null,
-          others ? h('label', { class: 'row tiny ns-check' }, h('input', { type: 'checkbox', checked: allKinds, onchange: e => { allKinds = e.target.checked; draw(); } }), L('convosOthers', { n: others })) : null,
-          groups].filter(Boolean));   // replaceChildren() would print a null as text
-        draw(); refocus();
-      }
-      function draw() {
-        const shown = rows.filter(r => (allKinds || !r.kind || r.kind === 'tutor') && (!q || (cvTitle(r) + ' ' + cvWhat(r) + ' ' + (r.subject?.title || '') + ' ' + r.messages.map(m => m.content).join(' ')).toLowerCase().includes(q)));
-        if (!shown.length) { groups.replaceChildren(h('p', { class: 'ns-muted' }, rows.length ? L('noResults') : L('noConvos'))); return; }
-        const G = new Map();   // Roadmap → step → conversations, newest first (rows are sorted)
-        for (const r of shown) {
-          const p = placeOf(r.subject?.id || '', r.subject?.title);
-          if (!G.has(p.g)) G.set(p.g, { t: p.gt, steps: new Map() });
-          const g = G.get(p.g); if (!g.steps.has(p.s)) g.steps.set(p.s, { t: p.st, rows: [] }); g.steps.get(p.s).rows.push(r);
-        }
-        const first = [...G.keys()].sort((a, b) => (a === 'other') - (b === 'other'));
-        groups.replaceChildren(...first.map((gk, gi) => { const g = G.get(gk), n = [...g.steps.values()].reduce((a, s) => a + s.rows.length, 0);
-          return h('details', { class: 'ns-cvgrp', open: q || gi === 0 ? true : null }, h('summary', {}, h('span', { class: 'grow' }, g.t), pill(String(n), 4)),
-            ...[...g.steps.values()].map((s, si) => h('details', { class: 'ns-cvstep', open: q || (gi === 0 && si === 0) ? true : null }, h('summary', {}, h('span', { class: 'grow' }, s.t), h('span', { class: 'tiny' }, String(s.rows.length))), ...s.rows.map(row)))); }));
-      }
-      function row(r) {
-        let sure = false; const tl = h('b', {}, cvTitle(r));
-        return h('div', { class: 'ns-cvrow' },
-          h('button', { class: 'ns-cvmain', onclick: () => oneView(r) }, tl, h('small', {}, [cvMode(r), cvWhat(r), fmtDate(r.updatedAt, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), L('nMessages', { n: r.messages.length })].filter(Boolean).join(' · '))),
-          h('span', { class: 'ns-cvacts' },
-            emoBtn('✏️', L('rename'), () => { const inp = h('input', { class: 'noema-input', value: cvTitle(r), 'aria-label': L('rename'), onkeydown: e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { e.stopPropagation(); inp.value = cvTitle(r); inp.blur(); } },
-              onblur: async () => { const v = inp.value.trim().slice(0, 80); if (v && v !== cvTitle(r)) { r.title = v; r.titleSource = 'user'; r = await C.put(acc(), r); S.engine?.convoChanged?.(r.id, { title: v }); /* put() gives it a newer updatedAt, or other devices keep the old title */ } inp.replaceWith(tl); tl.textContent = cvTitle(r); setTimeout(refocus); } });
-              tl.replaceWith(inp); inp.focus(); inp.select(); }),
-            emoBtn('⬇️', L('exportMd'), () => download(slug(cvTitle(r)) + '.md', cvMarkdown(r))),
-            emoBtn('🗑️', L('del'), async e => { const b = e.currentTarget; if (!sure) { sure = true; b.textContent = '❓'; b.title = L('delAgain'); return; } await C.remove(acc(), r.id); S.engine?.convoChanged?.(r.id, null); listView(); })));
-      }
-      function oneView(r) {
-        head.replaceChildren(emoBtn('↩️', L('convBack'), listView), h('h2', { class: 'grow' }, cvTitle(r)), emoBtn('⬇️', L('exportMd'), () => download(slug(cvTitle(r)) + '.md', cvMarkdown(r))), closeBtn);
-        const p = placeOf(r.subject?.id || '', r.subject?.title);
-        body.replaceChildren(h('p', { class: 'tiny ns-muted' }, [p.st, cvMode(r), cvWhat(r), fmtDate(r.updatedAt, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })].filter(Boolean).join(' · ')),
-          h('div', { class: 'ns-cvmsgs' }, ...r.messages.filter(m => cvText(m.content)).map(m => h('div', { class: 'ns-cvmsg ' + (m.role === 'user' ? 'me' : 'ai') }, h('small', {}, m.role === 'user' ? L('you') : tv().tutor), cvMd(m.content)))),
-          r.subject?.id && (!r.kind || r.kind === 'tutor') ? h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => { close(); goConvo(r); } }, L('convContinue'))) : null);
-        body.scrollTop = 0; refocus();
-      }
-      if (openId) load().then(() => { const r = rows.find(x => x.id === openId); if (r) oneView(r); else listView(); }); else listView();
-    }, { cls: 'ns-convos' });
-  }
-  /** Continue a conversation in the tutor's window: in this subject at once, else after opening its subject (engine/src/60_convos.js resumeConvo). */
-  function goConvo(r) {
-    try { sessionStorage.setItem('noema-device:openConvo', JSON.stringify({ acc: acc(), sid: r.subject.id, id: r.id })); } catch (e) { /* no sessionStorage here (blocked site data): the conversation simply does not reopen by itself */ }
-    if (S.engine && r.subject.id === subjectId()) { S.engine.resumeConvo?.(); return; }
-    N().switchTo(acc(), r.subject.id, '#/subject');
-  }
-
   Object.assign(APP, { importFile, landedOpen, subjectPct });
 
-  Object.assign(S, { convos, goConvo });   // the conversations' window (engine/engine.js, engine/search.js)
   for (const [k, f] of Object.entries(PAGES)) S.registerPage(k, f);
   }
 })();

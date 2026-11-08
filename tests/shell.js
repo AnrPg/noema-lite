@@ -54,7 +54,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.reload(); await wait(1200);
   await page.click('#ns-fab'); await until(() => page.$('.drawer.open'), 12000);
   ok(await page.$('.drawer.open') && await page.evaluate(() => location.hash === '#/me/profile'), 'the tutor opens from any page, even before a subject is opened');
-  await page.evaluate(() => closeTutor());
+  await page.evaluate(() => NoemaTutor.current().session.close());
   await page.goto(url); await page.reload(); await wait(1200);
   ok(!(await page.$('.ns-onb')) && await page.$('.ns-hello'), 'after a reload the app opens on Today, no picker, no questions');
 
@@ -111,10 +111,10 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.click('.drawer .ns-modesel'); await wait(250);
   ok(has(await page.$$eval('.drawer .ns-pop button', l => l.map(x => x.querySelector('.mt')?.firstChild?.textContent.trim())), ['Socratic', 'Explain', 'Quiz', 'Interview', 'Case simulation']), 'the modes, each with its line');
   await page.click('.drawer .ns-pop button:has-text("Explain")'); await wait(250);
-  ok((await page.$eval('.drawer .ns-modesel b', d => d.textContent)) === 'Explain' && await page.evaluate(() => T.mode) === 'explain', 'picking a mode');
+  ok((await page.$eval('.drawer .ns-modesel b', d => d.textContent)) === 'Explain' && await page.evaluate(() => NoemaTutor.current().session.mode) === 'explain', 'picking a mode');
   ok(has(await menuItems(page, '.drawer .ns-menubtn'), ['Conversation history', 'New conversation', 'Conversation language']), 'the tutor’s ⋮: history, new, language (export once there is a conversation)');
-  await page.evaluate(() => { T.mode = 'socratic'; });
-  await page.evaluate(() => closeTutor());
+  await page.evaluate(() => { NoemaTutor.current().session.mode = 'socratic'; });
+  await page.evaluate(() => NoemaTutor.current().session.close());
 
   console.log('D. a Roadmap as a page');
   const cid = await page.evaluate(() => {

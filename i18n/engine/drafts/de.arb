@@ -1771,5 +1771,8 @@
   "engine.author.f.lib.wpmHi": "Höchste Wörter pro Minute",
   "engine.author.f.lib.wpmLo": "Niedrigste Wörter pro Minute",
   "engine.author.f.benchPart": "Gemessener Teil",
-  "engine.author.f.lib.eq": "Gleichgewicht (Index)"
+  "engine.author.f.lib.eq": "Gleichgewicht (Index)",
+  "engine.tutor.thinking": "Der Tutor schreibt…",
+  "engine.tutor.copyPrompt": "Prompt kopieren",
+  "engine.tutor.promptCopied": "Prompt kopiert – füge ihn in deinen KI-Chat ein."
 }

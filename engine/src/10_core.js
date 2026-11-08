@@ -3,7 +3,7 @@
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
-/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (20_ai.js), not for the learner
+/* i18n-ignore-start */   // the tutor's defaults are words for the AI's prompts (src/features/tutor/domain/prompts.ts), not for the learner
 const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
 /* i18n-ignore-end */
 // in the new frame the tutor is the character on screen now (NoemaThemes.current(): the learner's own, or the one on a 5-minute try), named in the menus' language;
@@ -103,7 +103,7 @@ function codeBlock(code, lang) {
 }
 /* chat markdown */
 function md(s) {                 // full markdown (marked + DOMPurify when available), lite fallback
-  if (window.marked && window.DOMPurify) { try { return mdRich(s); } catch (e) { NoemaCore.errors.report(e, { where: 'engine.markdown', severity: 'warning' }); } }
+  if (window.NoemaTutor?.md) { try { return NoemaTutor.md(s); } catch (e) { NoemaCore.errors.report(e, { where: 'engine.markdown', severity: 'warning' }); } }   // marked + DOMPurify (src/composition/tutor-page.ts)
   return mdLite(s);
 }
 function mdLite(s) {

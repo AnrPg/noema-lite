@@ -4,10 +4,13 @@
  * them over on self.__noemaStudyPiece, which the loader reads right after the script has run.
  */
 import { createStudyUi } from '../features/study/ui/root.ts';
+import { mountTutor } from './tutor.ts';
 
 /** what build/study.js hands the page */
 export interface StudyPiece {
   readonly createStudyUi: typeof createStudyUi;
+  /** the tutor of the open subject (src/composition/tutor.ts): only ever used with a subject open, so it comes with its pages */
+  readonly mountTutor: typeof mountTutor;
 }
 
-(globalThis as { __noemaStudyPiece?: StudyPiece }).__noemaStudyPiece = { createStudyUi };
+(globalThis as { __noemaStudyPiece?: StudyPiece }).__noemaStudyPiece = { createStudyUi, mountTutor };
