@@ -24,12 +24,12 @@ the limits and edge cases, the reference values its tests assert).
 
 | file | what |
 |---|---|
-| `src/engines/kernel/core.js` | `NoemaLibCore`: the model checker (a table walked with fixed codes and messages), `numx` numbers, seeded randomness, statistics, thinning, scenes, the adapter `makeEngine` |
-| `src/engines/<name>/<name>.js` | one engine each: an ES module whose default export is the engine's API |
+| `src/engines/kernel/core.ts` | `NoemaLibCore`: the model checker (a table walked with fixed codes and messages), `numx` numbers, seeded randomness, statistics, thinning, scenes, the adapter `makeEngine` |
+| `src/engines/<name>/<name>.ts` | one engine each: an ES module in strict TypeScript whose default export is the engine's API; it types its model and calls the kernels through their own exported types (`Rec`, `Table`, `Emit`, `CheckedOutput`, `SceneData`, `RunOpts`, `StepCtx` of `kernel/core.ts`; `Stream`, `StepperDef` of `kernel/simkit.ts`; `Grid` of `kernel/space.ts`) |
 | `src/engines/plugins.ts` | one line per engine: its manifest (`engine:<id>`), how to load its module and its Worker bundle |
 | `src/engines/library.ts` | the engine library on `NoemaCore.engines`: `ids()`, `load(ids)`, `loaded(id)`, `engine(id)`, `catalog`, `expr`, `schema()` |
-| `src/engines/kernel/schema.js` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
-| `src/engines/catalog.js` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
+| `src/engines/kernel/schema.ts` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
+| `src/engines/catalog.ts` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
 | `docs/library/<name>.md` | the engine's chapter |
 | `tests/lib_<name>.js` | its tests: reference values from the literature (with the source in the test's message), the edge cases, the codes, speed, the Worker source; and `tests/fixtures/enginelib/<name>.json` (good and bad specs), whose checks `tests/enginelib.js` holds to the golden outputs of the former Python twins (`tests/fixtures/parity/enginelib.json`; a new engine's checks are recorded there with `NOEMA_GOLDEN_UPDATE=1`, tests/golden.cjs) |
 | `tools/activities_examples/<example>/` | at least one reference activity per engine (spec.json, strings.en/el/ru/de/fr.json, the registry entry), started with `activity_new.py --from <example>` |
@@ -40,15 +40,17 @@ activity host, and into the connector, `src/composition/connector.ts`); the cont
 (`LIB` in `src/features/content/domain/activities/rules.ts`; the app's activity core reads it as `ACT.LIB`) list the ids; the catalogue lists its search words (en, el, ru, de, fr) and the UI
 catalogue its one-line description (`engine.engines.<slug>.what`, every UI locale).
 
-### 1.2 The module (JS)
+### 1.2 The module (TypeScript, strict)
 
-```js
-import NoemaLibCore from '../kernel/core.js';     // the kernel pieces it needs, imported (the Worker bundle carries them too)
+```ts
+import NoemaLibCore from '../kernel/core.ts';     // the kernel pieces it needs, imported (the Worker bundle carries them too)
+import type { CheckedOutput, Emit, Env, RunOpts, Table } from '../kernel/core.ts';
+import type { Problem, Spec } from '../types.ts';
   const C = NoemaLibCore;
-  function checkSpec(spec) { const { P, E, W } = C.problems(); C.walk(spec.model, TABLE, 'model', E, W); …; C.checkOutputs(spec, ID, ['scalar', 'series'], out, E, W); return P; }
-  function exprs(spec) { return [['x0 * exp(-k*t)', 'model.eq.x', ['x', 't']], …]; }   // every expression of the model: [source, path, local names]
-  function keys(spec) { return [['labelA', 'model.nodes[0].label'], …]; }               // every string key the model names
-  function run(spec, env, { seed, prepared }) { return { out: { t: [...], x: [...], xEnd: 0.1, drawing: { view, items } } }; }
+  function checkSpec(spec: Spec): Problem[] { const { P, E, W } = C.problems(); C.walk(spec.model, TABLE, 'model', E, W); …; C.checkOutputs(spec, ID, ['scalar', 'series'], out, E, W); return P; }
+  function exprs(spec: Spec) { return [['x0 * exp(-k*t)', 'model.eq.x', ['x', 't']], …]; }   // every expression of the model: [source, path, local names]
+  function keys(spec: Spec) { return [['labelA', 'model.nodes[0].label'], …]; }               // every string key the model names
+  function run(spec: Spec, env: Env, { seed, prepared }: RunOpts<Prepared>) { return { out: { t: [...], x: [...], xEnd: 0.1, drawing: { view, items } } }; }
   const { engine, simEngine } = C.makeEngine({ id: ID, checkSpec, run, prepare, scenes: true });
   const API = Object.freeze({ id: ID, checkSpec, exprs, keys, run, engine: Object.freeze(engine), simEngine,
     table: { model: TABLE, outputs: { scalar: SCALARS, series: SERIES, scene: SCENES } },   // the form of the activity author (§1.5)
@@ -104,7 +106,7 @@ then checks every expression and key with the spec's names: the messages a pack'
 
 The activity author (`#/author`, a subject's ⋮ › *Create an activity*) offers every library engine the app has, grouped like the
 catalogue. It builds the engine's form from one more export of the module, `table`, turned into a JSON Schema by
-`src/engines/kernel/schema.js` (`NoemaCore.engines.schema().specSchema(id, table, simSchema)`); an engine without `table` is simply not offered.
+`src/engines/kernel/schema.ts` (`NoemaCore.engines.schema().specSchema(id, table, simSchema)`); an engine without `table` is simply not offered.
 
 ```js
 table: {
@@ -132,7 +134,7 @@ table: {
 ### 1.6 The stepper: an engine in time (parts, `docs/INTERACTIVE.md` §12.8)
 
 An engine whose model evolves in time can be **co-simulated** with others: it gives `makeEngine` an optional `stepper`
-(src/engines/kernel/core.js), the same signature as `NoemaSimKit.stepper` / `cosim` (src/engines/kernel/simkit.js):
+(src/engines/kernel/core.ts), the same signature as `NoemaSimKit.stepper` / `cosim` (src/engines/kernel/simkit.ts):
 
 ```js
 const stepper = {

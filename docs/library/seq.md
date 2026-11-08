@@ -1,4 +1,4 @@
-# `seq@1` — DNA, RNA and protein sequences (`src/engines/seq/seq.js`, `NoemaLibSeq`)
+# `seq@1` — DNA, RNA and protein sequences (`src/engines/seq/seq.ts`, `NoemaLibSeq`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for molecular sequences, from base pairing to the tools of a
 molecular-biology bench. There is one engine with 9 **modes** (`model.mode`): `translate`, `mutate`, `divergence`, `tm`, `align`,

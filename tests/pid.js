@@ -1,4 +1,4 @@
-/* The control-loop engine pid@1 (src/engines/pid/pid.js, docs/INTERACTIVE_ENGINES.md §3) against analytic results:
+/* The control-loop engine pid@1 (src/engines/pid/pid.ts, docs/INTERACTIVE_ENGINES.md §3) against analytic results:
    1. metrics on known curves (first order, second order: rise, overshoot, peak time, settling 2 %);
    2. plants in open loop: first order (+ dead time), second order overshoot vs ζ, integrator, DC motor, thermal, tank;
    3. closed loop: P control ess = 1/(1 + K), PI removes it, IAE / ISE analytic, an integrator follows a ramp with ess = slope/(K·Kp),

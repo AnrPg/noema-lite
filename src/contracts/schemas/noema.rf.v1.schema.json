@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.rf.v1.schema.json",
   "title": "noema-lite radio link (noema.rf/v1)",
-  "description": "The link run by the radio engine rf@1 (src/engines/rf/rf.js). Units: f Hz, d and heights m, powers dBm, gains and losses dB or dBi, bandwidths Hz, bitrate b/s, times s. Human-readable spec: docs/INTERACTIVE_ENGINES.md §4. The engine's check() (twin: tools/rf.py) also tests what a schema cannot: the validity ranges of Okumura-Hata and ITU-R P.1238 (code 'range'), an obstacle beyond the receiver, walls without type or loss, LoRa bandwidths, Wi-Fi rates, sweeps whose from >= to. In a sim-spec the model is {link, bindings: [$defs.binding]} and each output ($defs.output) names a scalar or series of rf@1.",
+  "description": "The link run by the radio engine rf@1 (src/engines/rf/rf.ts). Units: f Hz, d and heights m, powers dBm, gains and losses dB or dBi, bandwidths Hz, bitrate b/s, times s. Human-readable spec: docs/INTERACTIVE_ENGINES.md §4. The engine's check() (twin: tools/rf.py) also tests what a schema cannot: the validity ranges of Okumura-Hata and ITU-R P.1238 (code 'range'), an obstacle beyond the receiver, walls without type or loss, LoRa bandwidths, Wi-Fi rates, sweeps whose from >= to. In a sim-spec the model is {link, bindings: [$defs.binding]} and each output ($defs.output) names a scalar or series of rf@1.",
   "type": "object",
   "required": ["f", "d"],
   "properties": {

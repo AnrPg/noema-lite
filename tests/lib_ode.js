@@ -1,4 +1,4 @@
-/* ode@1 (src/engines/ode/ode.js, docs/library/ode.md) against published values:
+/* ode@1 (src/engines/ode/ode.ts, docs/library/ode.md) against published values:
    1. the integrators: exact solutions, orders of convergence, dense output; the pendulum period by K (DLMF 19.2), the Arenstorf orbit
       (HNW I §II.0), Robertson's kinetics (HNW II §IV.10), van der Pol, the Brusselator;
    2. equilibria and eigenvalues (Lorenz ρ_H, the Brusselator and Rosenzweig–MacArthur Hopf points), Lyapunov exponents (Lorenz,

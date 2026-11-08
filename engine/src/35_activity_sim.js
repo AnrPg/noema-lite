@@ -1,5 +1,5 @@
 /* ===================== interactive activities — runtime sim-spec@1 (Tier B: a declarative simulation, docs/INTERACTIVE.md §12) =====================
-   The pack carries only DATA (item.spec): controls, formulas in the expression language (NoemaCore.engines.expr, src/engines/kernel/simexpr.js), readouts and
+   The pack carries only DATA (item.spec): controls, formulas in the expression language (NoemaCore.engines.expr, src/engines/kernel/simexpr.ts), readouts and
    plots. No code of the pack runs, so there is no frame: the app's own trusted code renders the controls and the plots with its own
    DOM and styles (theme tokens, dark mode, keyboard, labels, 320 px) — docs/adr/001 "as built". The spec is checked with the same
    rules as the validators (NoemaCore.content.checkSimSpec) before anything is shown; a spec that fails shows the activity's fallback.

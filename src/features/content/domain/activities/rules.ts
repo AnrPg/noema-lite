@@ -53,10 +53,10 @@ export const CIRCUIT = 'circuit-mna@1';
 export const TWIN = 'twin@1';
 /** the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (src/engines/<file>) */
 export const P6: Readonly<Record<string, string>> = {
-  'thermal@1': 'thermal/thermal.js',
-  'pid@1': 'pid/pid.js',
-  'rf@1': 'rf/rf.js',
-  'twin@1': 'twin/twin.js',
+  'thermal@1': 'thermal/thermal.ts',
+  'pid@1': 'pid/pid.ts',
+  'rf@1': 'rf/rf.ts',
+  'twin@1': 'twin/twin.ts',
 };
 /** the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core; each checks its model with its own checkSpec and
     lists the expressions (exprs) and string keys (keys) of its model */
@@ -83,7 +83,7 @@ export const LIB: Readonly<Record<string, string>> = Object.fromEntries(
     'field',
     'agents',
     'law',
-  ].map(n => [`${n}@1`, `${n}/${n}.js`]),
+  ].map(n => [`${n}@1`, `${n}/${n}.ts`]),
 );
 export const ENGINES: ReadonlySet<string> = new Set(['formula@1', CIRCUIT, ...Object.keys(P6), ...Object.keys(LIB), WASM_ENGINE]);
 export const isLib = (eng: unknown): eng is string => typeof eng === 'string' && Object.prototype.hasOwnProperty.call(LIB, eng);

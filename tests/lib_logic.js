@@ -1,4 +1,4 @@
-/* logic@1 (src/engines/logic/logic.js, docs/library/logic.md) against published values:
+/* logic@1 (src/engines/logic/logic.ts, docs/library/logic.md) against published values:
    1. the parser: every error code with its position, ASCII = Unicode, printing round trips, each language's operators;
    2. propositional: De Morgan, Peirce's law (Enderton 2001), PHP(3,2) unsatisfiable (Cook & Reckhow 1979), DPLL = CDCL = truth tables
       on 60 seeded random 3-CNF, Tseitin equisatisfiable, CNF/DNF equivalent, resolution, Fitch proofs and every line code, Horn
@@ -328,7 +328,7 @@ ok(L.id === 'logic@1' && Object.isFrozen(L) && L.engine.id === 'logic@1' && L.en
   const f = E(['forall x exists y R(x,y)'], 'exists y forall x R(x,y)', { logic: 'fol', lang: 'fol', maxSize: 2 }), g = E(['forall x P(x)'], 'exists x P(x)', { logic: 'fol', lang: 'fol' });
   ok(f.valid === false && f.counter.domain.length === 2 && g.valid === true && g.codes.includes('bounded'), 'entails in first-order logic: a 2-element countermodel to ∀∃ ⊢ ∃∀; ∀x P ⊢ ∃x P with no countermodel up to the bound');
   ok(L.truthTable([ast('p & q')]).cols[0].join('') === '1000' && L.rowsOf(['p', 'q']).length === 4 && L.syllogism('AAA', 1, false).valid && L.afSolve(2, [[0, 1]], L.diagSet()).grounded.join() === '1,0', 'truthTable, rowsOf, syllogism, afSolve are exported');
-  const W = ENGINES.worker('logic@1').__noemaShared['logic/logic.js'];
+  const W = ENGINES.worker('logic@1').__noemaShared['logic/logic'];
   ok(W && W.evalNorms(norms0(), trace0()).counts.violations === 1 && W.parse('p ∧', 'prop').code === 'parse-eof', 'the Worker bundle: logic@1 runs in a fresh global (parse and evalNorms)');
 }
 function norms0() { return [{ id: 'pay', kind: 'O', cond: 'order', act: 'paid', within: 1 }]; }

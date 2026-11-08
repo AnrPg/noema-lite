@@ -6,7 +6,7 @@
 export interface ExprIssue {
   readonly msg: string;
 }
-/** the expression language (src/engines/kernel/simexpr.js): its problems, and its tree for the names an expression uses */
+/** the expression language (src/engines/kernel/simexpr.ts): its problems, and its tree for the names an expression uses */
 export interface ExprChecker {
   check(src: string, opts?: { readonly vars?: readonly string[] }): readonly ExprIssue[];
   parse(src: string): unknown;

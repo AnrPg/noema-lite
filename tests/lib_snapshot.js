@@ -1,7 +1,7 @@
 /* The regression net of the engine library (docs/INTERACTIVE_LIBRARY.md): every engine's outputs on every good spec of its fixtures
    (tests/fixtures/enginelib/<name>.json) and on its reference activities (tools/activities_examples/*), at the defaults and at a few
    seeds, are recorded in tests/fixtures/enginelib/snapshots/<name>.json. When an engine is changed (e.g. to call the simulation kernel
-   kernel/simkit.js instead of its own integrator) the outputs must stay the same: bit for bit, or — where an engine documents a better
+   kernel/simkit.ts instead of its own integrator) the outputs must stay the same: bit for bit, or — where an engine documents a better
    method — within the tolerance named in the snapshot's "tol" (relative), changed only on purpose with --update and a reason.
    Usage: node tests/lib_snapshot.js [--update [engine…]] [engine…]   (with no names: every engine whose module and fixtures exist) */
 'use strict';
