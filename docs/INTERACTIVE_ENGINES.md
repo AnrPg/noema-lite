@@ -28,7 +28,7 @@ Which engine for which learning goal: `docs/INTERACTIVE_AUTHORING.md`.
   at runtime (a slider reaches an invalid value) gives NaN scalars and empty series; nothing throws into the page.
 - Schemas: `src/contracts/schemas/noema.{thermal,pid,rf,twin}.v1.schema.json`. Tests: `node tests/{thermal,pid,rf,twin}.js`.
 
-## 2. `thermal@1` — lumped thermal networks (`src/engines/thermal/thermal.js`)
+## 2. `thermal@1` — lumped thermal networks (`src/engines/thermal/thermal.ts`)
 
 A MOSFET on a heatsink, a PCB trace, a thermal time constant, a room with a heater and a thermostat.
 

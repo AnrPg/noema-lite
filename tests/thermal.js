@@ -1,4 +1,4 @@
-/* The thermal engine thermal@1 (src/engines/thermal/thermal.js, docs/INTERACTIVE_ENGINES.md §2) against analytic results:
+/* The thermal engine thermal@1 (src/engines/thermal/thermal.ts, docs/INTERACTIVE_ENGINES.md §2) against analytic results:
    1. steady state: ΔT = P·Rth exactly (a MOSFET on a heatsink), convection h·A, radiation, parallel paths, energy balance (a PCB trace);
    2. transients: the RC step (τ = RC within 0.5 %), trapezoidal vs backward Euler, a sine source's amplitude, PWM mean and ripple;
    3. the time constants (one node, a massless node in the path, two nodes); a room with a thermostat (hysteresis, duty);
