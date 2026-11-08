@@ -90,8 +90,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('text@1'),
-    () => import('./text/text.js'),
-    () => import('noema-worker:./text/text.js#simEngine'),
+    () => import('./text/text.ts'),
+    () => import('noema-worker:./text/text.ts#simEngine'),
   ),
   def(
     manifest('craft@1'),
