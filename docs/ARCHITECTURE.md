@@ -115,7 +115,7 @@ The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOC
 |---|---|---|
 | `app.ts` → `browser.ts` | `build/app.js` (IIFE) | browser storage, clock, i18n and notifier; local reporter and telemetry; Worker Compute with the inline fallback; the Claude/Gemini factory; Supabase when `config.js` names a project; the engine library (`ENGINES`, on the bridge as `NoemaCore.engines`) and the data contracts (`NoemaCore.contracts`). It wires `storage.onFull` to the reporter, which raises the learner's alert. |
 | `harness.ts` | `build/harness.js` (IIFE) | `NoemaCore = { version, contracts, engines }` for a page that hosts one activity without the app: the skill's activity harness (its zip carries it as `activity_host/noema-core.js`) and the test pages that do the same. Never loaded beside `build/app.js`. |
-| `ui.ts` → `ui-root.ts` | `build/ui.js` (IIFE, kind `dev`: not in the site or the one-file bundle) | the I18n port over `engine/i18n.js`, the system clock, the device storage for the demo's appearance, the Notifier policy over the frame's toaster; mounts the frame and the kit's demo for `#/ui-kit` (§6.3) |
+| `ui.ts` → `ui-root.ts`, `roadmaps-ui.ts` | `build/ui.js` (IIFE, kind `page`: on every page after `build/app.js`, inlined in the one-file bundle) | the I18n port over `engine/i18n.js`, the system clock, the Roadmap screens' data port over the engine's scripts (`roadmaps-ui.ts`), the device storage for the demo's appearance, the Notifier policy over the frame's toaster; mounts the frame and the kit's demo for `#/ui-kit` on localhost (§6.3) |
 | `worker.ts` | `build/worker.js` | the job registry (`jobs.ts`) served over `worker-protocol.ts` |
 | `tools.ts` | (imported by Node scripts) | memory storage, the system clock, the given catalogs, a recording notifier and inline Compute; no network |
 | `connector.ts` | the MCP server (Netlify function) | `register()` wires `src/connector` (one module per tool, sagas, the entry tables) with the app engine files it shares, loaded in a scope of their own (`src/connector/engine/legacy.ts`), and hands those files `NoemaCore = { contracts, engines }`: the ES modules of `src/contracts` and the engine library with every engine in hand (`src/engines/node.ts`, the pack checks are synchronous); bundled by `tools/connector_bundle.mjs` |
@@ -268,10 +268,22 @@ The rules:
   least 24 × 24 px; nothing scrolls sideways at 320 px; logical properties and the `--u-flip` switch mirror right to left.
 - **Look.** Only the tokens (`engine/tokens.css`), pale surfaces, few and short animations (`data-motion="reduced"` and the
   system setting stop them).
-- **Loading.** The bundle `build/ui.js` is kind `dev`: `engine/loader.js` adds it only for `#/ui-kit` on localhost, so the
-  start screen never loads it. Phase 3's shell makes it a `page` entry and its root the app's root.
+- **Loading.** The bundle `build/ui.js` is kind `page`: `index.html` loads it right after `build/app.js` (Lit cannot be in
+  `app.js`, which the node suites also run); it defines the kit and the screens the older ones already use, and serves the
+  kit's demo for `#/ui-kit` on localhost instead of the older screens. Phase 3's shell makes its root the app's root.
 - **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-root.test.ts`, and in a
   browser `tests/ui_kit.js` (layout, targets, focus, form association, right to left) and `tests/a11y.js` (axe).
+
+**A feature's screens** live in its slice: `src/features/<name>/ui/` (eslint element `feature-ui`: it may import the kernel,
+contracts, ports, its domain and application, `src/ui` and other feature UIs; its tests in `ui/test/` also the adapters).
+Each slice hands its screens **one data port** the same way the kit hands its services: a bubbling, composed request event
+that the nearest provider answers. The Roadmaps' (`src/features/roadmaps/ui/`, the event `noema-roadmaps-data`, port
+`data.ts` `RoadmapsData`): the library and its invitations, the map (classic, treasure, list; level bands, `layout.ts`) with
+the selected step and its preparation, the levels (the ladder, the level test, the level-reached moment, Claude's proposed
+arrangement), a step's placement test, sharing, the Claude app's inbox, preparing ahead and From your sources. A screen
+never reads a global: `src/composition/roadmaps-ui.ts` implements the port over the engine's scripts today, and the lead
+swaps that file, never the screens. What belongs to another screen (opening a subject, editing a step) a screen asks for
+by an event (`roadmap-study`, `roadmap-edit-step` …); the page that mounts it answers.
 
 ## 7. Patterns
 
@@ -333,6 +345,6 @@ The rules:
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui.js` (development only, §6.3), `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui.js` (the Lit kit and screens, §6.3), `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

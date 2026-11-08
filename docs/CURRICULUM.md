@@ -450,6 +450,21 @@ Nothing is lost:
 * The learning log gets `roadmap.restructured` (`{ proposal, moves: [{ item, from, to }] }`: every chapter that changed
   subject); a pack whose levels changed gets its new `subject.levels` and chapter levels.
 
+### 11.3a On the screen (`src/features/roadmaps/ui/`)
+* **The level bar** (`noema-roadmap-levels`, above the map): the ladder as badges, the current level and how many of its
+  steps are mastered, *… is done: take the level test* when a test is due, 🪜 *Claude proposes …* with **Review** for a
+  pending proposal (not for a member). Moving up happens when it is drawn; a level reached opens the short *A new level*
+  moment (its badge rises; no motion with reduced motion).
+* **The level test** (`noema-roadmap-level-test`) and **the review of a proposal** (`noema-roadmap-restructure`: every change
+  in the learner's words, Apply it / Keep it as it is) are dialogs; `noema-roadmap-step-test` is a step's placement test.
+* **Level bands on the map** (`layout.ts` `mapColumns`): a Roadmap with a ladder is drawn in bands, one per level, lowest
+  first — each level's steps in columns of their own (on the treasure map: layers), a step without a level beside its latest
+  prerequisite. Since a prerequisite never sits above the step that needs it (§11), every link still runs forwards. A
+  Roadmap without a ladder keeps the three parts (prerequisites · the goal · applications).
+* Every screen reads the Roadmap through one data port (`data.ts` `RoadmapsData`; today `src/composition/roadmaps-ui.ts`
+  over the engine's globals). Unit tests: `src/features/roadmaps/ui/test/` (happy-dom); in a browser
+  `tests/roadmap_levels.js` (the bar, the moment, both tests, approve and decline, 320 px, axe, the keyboard).
+
 ### 11.4 Work for one level (the learner's Claude)
 `noema_curriculum_task` `level` (an id or a name) hands out only that level's chapter plans and steps; the task then says
 what the level means (`levelBrief`): the difficulty of the exercises is **relative to the level** (difficulty 3 is the
