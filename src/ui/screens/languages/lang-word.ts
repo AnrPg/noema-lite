@@ -162,6 +162,7 @@ export class NoemaLangWord extends NoemaScreen {
       sub: this.sub,
       marks: this.marks || null,
       link: this.#linkable(),
+      quiet: !!this.parentElement?.classList.contains('lx-wbox'),
     });
     if (!v) return html`<span class="lx-w" lang=${this.code}>${this.text}</span>`;
     const w = this.#word(v, !v.help && this.#inProse());

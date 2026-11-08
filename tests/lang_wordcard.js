@@ -129,7 +129,8 @@ ok(!bad.length, `every word of the pilot course gets its parameters (${bad.slice
       }
       for (const b of t.querySelectorAll('.lx-spkglue > .lx-spk')) {   // a word or a short phrase (a sentence wraps, 98_speech.js)
         const w = b.previousElementSibling; if (!w) continue;
-        const wr = [...w.getClientRects()].pop(), br = b.getBoundingClientRect();
+        const rw = document.createRange(); rw.selectNodeContents(w);   // the word's own boxes (noema-lang-word draws none: display contents)
+        const wr = [...rw.getClientRects()].filter(x => x.width > 0).pop(), br = b.getBoundingClientRect();
         if (!wr || br.top > wr.bottom || br.bottom < wr.top) apart.push(b.dataset.text);
       }
       return { broken, apart, words: t.querySelectorAll('.lx-tok').length, over: document.scrollingElement.scrollWidth - innerWidth, inside: t.scrollWidth - t.clientWidth, dir: document.documentElement.dir || 'ltr', cards: getComputedStyle(t.querySelector('tr')).display !== 'table-row' };

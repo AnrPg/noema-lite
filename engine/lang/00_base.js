@@ -109,14 +109,14 @@ function word(code, text, { lex = null, cls = '', sub = true, marks = null, plai
   return e;
 }
 /** The word as the element draws it (COURSE_PORT.word): its marks, its reading under it, the words of the run when they may link. */
-function wordView(code, text, { lex = null, sub = true, marks = null, link = false } = {}) {
+function wordView(code, text, { lex = null, sub = true, marks = null, link = false, quiet = false } = {}) {
   const X = UI.C?.lang[code]; if (!X) return null;
   const lx = lex && X.lex[lex] || null, t = String(text ?? '');
   const help = !sub || !lx ? null : code === 'zh' ? (UI.prefs.pinyin !== false && lx.pinyin && t === lx.lemma ? { text: lx.pinyin.replace(/\s+/g, ''), lang: 'zh-Latn-pinyin' } : null)
     : (UI.prefs.translit !== false || needTranslit(code)) ? (r => r ? { text: r, lang: 'und-Latn' } : null)(romanTok(code, t, lx.id)) : null;   // always until the letters are known (§5.5)
   const view = { lang: code, dir: X.language.dir || 'ltr', shown: shownMarks(code, t, lx, marks), help, run: null };
   if (link && t.trim()) {
-    const toks = runTokens(code, t, { quiet: !!help || !wantRoman(code) });
+    const toks = runTokens(code, t, { quiet: quiet || !!help || !wantRoman(code) });   // the word's own box already has its reading
     view.run = { title: info(code).label + (toks?.some(k => k.lex) ? '' : ' · ' + LT('lang.prod.notInCourseTitle')), tokens: toks || [{ text: view.shown }] };   // what the coloured underline means; no card to open
   }
   return view;

@@ -51,6 +51,7 @@ export class NoemaLangLesson extends NoemaScreen {
         P.setLang(x);
       })}
       <div class="lx-screen lx-lessonhead"><noema-lang-lesson-head .port=${P} node=${this.node}></noema-lang-lesson-head></div>
+      ${m.tutor ?? nothing}
       ${
         m.theory
           ? html`${m.theory.overview ?? nothing}

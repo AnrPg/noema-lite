@@ -166,6 +166,8 @@ export interface WordOptions {
   readonly marks: string | null;
   /** the words may open their cards here */
   readonly link: boolean;
+  /** no reading under the words of the run: the box around the word shows one already */
+  readonly quiet: boolean;
 }
 
 /** What a foreign word needs of the course (lang-word.ts). */
@@ -324,6 +326,8 @@ export interface LessonPage {
   /** the points the other languages learn at the same step (D10) */
   readonly extra: readonly { readonly code: string; readonly flag: string; readonly fns: readonly PointTile[] }[];
   readonly words: { readonly n: string; readonly tiles: readonly Node[] } | null;
+  /** the tutor's buttons for the lesson (engine/lang/85_prod.js), under its head */
+  readonly tutor?: Node | null;
 }
 
 /** The end of a lesson's run. */
