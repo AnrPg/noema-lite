@@ -339,6 +339,17 @@ The rules:
   `src/features/shell/domain/domain.test.ts`, `src/composition/shell/kv.test.ts`, `src/ui/screens/shell/routes.test.ts`, and in a
   browser `tests/ui_kit.js` (layout, targets, focus, form association, right to left) and `tests/a11y.js` (axe).
 
+**A feature's screens** live in its slice: `src/features/<name>/ui/` (eslint element `feature-ui`: it may import the kernel,
+contracts, ports, its domain and application, `src/ui` and other feature UIs; its tests in `ui/test/` also the adapters).
+Each slice hands its screens **one data port** the same way the kit hands its services: a bubbling, composed request event
+that the nearest provider answers. The Roadmaps' (`src/features/roadmaps/ui/`, the event `noema-roadmaps-data`, port
+`data.ts` `RoadmapsData`): the library and its invitations, the map (classic, treasure, list; level bands, `layout.ts`) with
+the selected step and its preparation, the levels (the ladder, the level test, the level-reached moment, Claude's proposed
+arrangement), a step's placement test, sharing, the Claude app's inbox, preparing ahead and From your sources. A screen
+never reads a global: `src/composition/roadmaps-ui.ts` implements the port over the engine's scripts today, and the lead
+swaps that file, never the screens. What belongs to another screen (opening a subject, editing a step) a screen asks for
+by an event (`roadmap-study`, `roadmap-edit-step` …); the page that mounts it answers.
+
 ## 7. Patterns
 
 | Pattern | Where |

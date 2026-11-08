@@ -16,6 +16,7 @@ import { provideServices, type UiServices } from '../ui/core/services.ts';
 import { defineUi } from '../ui/index.ts';
 import type { PickerAccount, PickerData } from '../ui/screens/shell/account-picker.ts';
 import { defineShell } from '../ui/screens/shell/index.ts';
+import { defineRoadmapsUi, provideRoadmapsData } from '../features/roadmaps/ui/index.ts';
 import type { BellItem } from '../ui/screens/shell/notices.ts';
 import type { ProgressModel } from '../ui/screens/shell/progress.ts';
 import type { CharacterInfo, SettingsData } from '../ui/screens/shell/settings.ts';
@@ -28,6 +29,7 @@ import { P, jsonOf, putJson, type Account } from './shell/kv.ts';
 import { phase2, settingsCopy } from './shell/learning.ts';
 import { legacy, type AreaBoot, type NoemaAreas, type SubjectMeta } from './shell/legacy.ts';
 import { createThemes, type Themes } from './shell/themes.ts';
+import { legacyRoadmapsData } from './roadmaps-ui.ts';
 import { runtimeLocales, type I18nRuntimeLocales } from './ui-kit-root.ts';
 
 export interface App {
@@ -839,6 +841,7 @@ export function createApp(win: Window = window): App {
     document.body.classList.add('noema-booting');
     defineUi(win.customElements);
     defineShell(win.customElements);
+    defineRoadmapsUi(win.customElements);
     win.customElements.upgrade(shell.preview); // the 5-minute try's bar was made before its element was defined
     const I18 = I();
     if (I18) await race(I18.ready, 4000).catch((e: unknown) => core.errors.report(e, { where: 'loader.i18n.ready', severity: 'warning' }));
@@ -847,6 +850,7 @@ export function createApp(win: Window = window): App {
     await N.migrate.idb().catch(core.errors.catcher('loader.migrate.idb', { severity: 'warning' }));
     const services = uiServices();
     provideServices(document.body, services);
+    provideRoadmapsData(document.body, legacyRoadmapsData(win)); // the Roadmap screens' data port (roadmaps-ui.ts)
     const toaster = document.createElement('noema-toaster');
     document.body.append(toaster);
     await toaster.updateComplete;

@@ -49,17 +49,16 @@
   /* ---------- tasks ---------- */
   /* i18n-ignore-start — the tasks, their errors and the checks are for Claude (the connector, a copied task): English */
   const TITLES = { dag: 'Agent 1 — the Roadmap: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
-  const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
   const planGen = (c, ids) => R().planGen(c, ids);
   /** 🪜 The level a task targets (noema_curriculum_task level): what it is, its steps, what difficulty means there. */
   const levelPart = (c, level) => level ? '\n\n' + R().levelBrief(c, level) : '';
   function spec(c, kind, ids, { level = '' } = {}) {
-    const P = C().prompts, S = C().schemas, x = C().ctx(c);
-    if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S.S_DAG };
-    if (kind === 'audit') return { kind, id: 'audit', title: TITLES.audit, system: SYS.audit, prompt: P.auditPrompt(x, C().snapshot(c, { withSummaries: true })), schema: S.S_AUDIT };
-    if (kind === 'expand') return { kind, id: 'expand', title: TITLES.expand, system: SYS.expand, prompt: P.expandPrompt(x, C().snapshot(c), c.nodes[c.goalId]), schema: S.S_EXPAND };
-    if (kind === 'plan') return { kind, id: R().planTaskId(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + P.packageText(c, ids) + wishes(c, ids) + levelPart(c, level), schema: S.S_PLAN, downloads: downloadsOf(c, ids), ...(level ? { level } : {}) };
+    const P = R(), x = P.agentContext(c);
+    if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: P.dagRequest(c.goal), schema: P.S_DAG };
+    if (kind === 'audit') return { kind, id: 'audit', title: TITLES.audit, system: P.AUDIT_SYSTEM, prompt: P.auditPrompt(x, P.snapshot(c, { withSummaries: true })), schema: P.S_AUDIT };
+    if (kind === 'expand') return { kind, id: 'expand', title: TITLES.expand, system: P.EXPAND_SYSTEM, prompt: P.expandPrompt(x, P.snapshot(c), c.nodes[c.goalId]), schema: P.S_EXPAND };
+    if (kind === 'plan') return { kind, id: R().planTaskId(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, P.snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + P.packageText(c, ids) + wishes(c, ids) + levelPart(c, level), schema: P.S_PLAN, downloads: downloadsOf(c, ids), ...(level ? { level } : {}) };
     return null;
   }
   /** The learner's files of some steps, each file once (even when several steps or page ranges use it). */
@@ -98,10 +97,10 @@
   function check(c, t, data) {
     if (!data || typeof data !== 'object' || Array.isArray(data)) return ['the answer must be ONE JSON object (not a list, not text)'];
     const e = L().check(t.schema, data); if (e.length) return e;
-    if (t.kind === 'dag') return C().validateDag(data, C().ctx(c));
-    if (t.kind === 'audit') return C().validateAudit(data, C().auditBase(c));
-    if (t.kind === 'expand') return C().validateExpand(data, c);
-    if (t.kind === 'plan') return C().validatePlans(data, t.ids, c);
+    if (t.kind === 'dag') return R().validateDag(data, R().agentContext(c));
+    if (t.kind === 'audit') return R().validateAudit(data, R().auditBase(c));
+    if (t.kind === 'expand') return R().validateExpand(data, c);
+    if (t.kind === 'plan') return R().validatePlans(data, t.ids, c);
     return [];
   }
   /* i18n-ignore-end */
@@ -164,7 +163,7 @@
 
   /* ---------- texts (the same words in the connector, the copied task and the step bundle) ---------- */
   /* i18n-ignore-start — what Claude reads: the tasks, a step's brief, the message the learner pastes into a Claude chat */
-  const LANGN = c => C().LANG[c.language] || c.language;
+  const LANGN = c => R().LANG[c.language] || c.language;
   /** A map / plan task as text. mode 'connector' (answer with noema_curriculum_submit) or 'paste' (answer with the JSON only). */
   function taskText(c, t, mode = 'connector', { fileLines = [] } = {}) {
     const how = mode === 'connector'
