@@ -214,7 +214,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
   async function classic(page, subj, { pictures = false, light = false } = {}) {
     const S = subj + ' · ';
     const info = await page.evaluate(() => { const types = {}; for (const e of ALL_EX) if (!types[e.type]) types[e.type] = e.id;
-      return { chs: COURSE.map(c => c.id), sec: COURSE[0].sections.map(s => s.id), types, drill: Object.keys(PB)[0] || null, src: (SOURCES[0] || {}).id }; });
+      return { chs: COURSE.map(c => c.id), sec: COURSE[0].sections.map(s => s.id), types, drill: Object.keys(PB)[0] || null, src: (NoemaCore.studyUi.current().app.course.sources[0] || {}).id }; });
     await go(page, '#/', 800);
     const ch = info.chs[0];
     await go(page, '#/ch/' + ch, 700);
@@ -238,8 +238,8 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(page, S + 'boss exam', async () => { await page.evaluate(c => { location.hash = '#/boss/' + c; }, ch); await wait(600); await page.evaluate(() => [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent)[0]?.click());
       for (let i = 0; i < 6; i++) { await wait(300); await grab(page); await page.evaluate(() => { const c = document.querySelector('main .ex'); if (c && !c._locked?.()) c._check?.(); else [...document.querySelectorAll('main .btn.primary')].filter(b => b.offsetParent).pop()?.click(); }); } }, 800);
     await visit(page, S + 'search', async () => { await page.evaluate(() => openSearch()); await wait(300); await page.fill('.modal input', 'a'); await page.keyboard.type('xyzqq'); await wait(300); await page.fill('.modal input', 'the'); }, 600);
-    await visit(page, S + 'sources deck', () => page.evaluate(() => { document.querySelector('.modal')?.remove(); toggleSourcesDeck(true); }), 600);
-    await visit(page, S + 'a source', () => page.evaluate(id => { toggleSourcesDeck(false); return openSource(id); }, info.src), 1200);
+    await visit(page, S + 'sources deck', () => page.evaluate(() => { document.querySelector('.modal')?.remove(); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }), 600);
+    await visit(page, S + 'a source', () => page.evaluate(id => { NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(false); NoemaCore.studyUi.current().app.sourcesUi.open(id); }, info.src), 1200);
     await visit(page, S + 'notifications', () => page.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); document.querySelector('.viewer, .srcviewer')?.remove(); openNotes(); }), 500);
     await visit(page, S + 'tutor', () => page.evaluate(sid => { document.querySelectorAll('.modal').forEach(m => m.remove()); openTutor({ kind: 'section', id: sid }, 'socratic'); }, info.sec[0]), 600);
     await visit(page, S + 'tutor history', () => page.evaluate(() => { T.showHistory = true; renderTutor(); }), 500);

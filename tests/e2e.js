@@ -80,7 +80,7 @@ async function mockGemini(ctx) {
   // stable flashcard ids: progress keyed by a card's position (chNN#k) moves to the card's id once; a:caps says so
   await page.evaluate(() => { S.fc = { 'ch01#2': { box: 3, due: '2099-12-01' }, 'ch02#0': { box: 1, due: '2026-01-01' }, 'ch02-f001': { box: 4, due: '2099-11-11' } }; flushSave(); });
   await page.reload(); await wait(900); await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
-  const mig = await page.evaluate(() => ({ fc: S.fc, key: CH.ch01.flashcards[2]._key, due: countDueCards(), saved: JSON.parse(localStorage.getItem('noema1:anr:s:databricks:state')).fc, caps: JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}') }));
+  const mig = await page.evaluate(() => ({ fc: S.fc, key: CH.ch01.flashcards[2]._key, due: NoemaCore.studyUi.current().app.dueCards(), saved: JSON.parse(localStorage.getItem('noema1:anr:s:databricks:state')).fc, caps: JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}') }));
   ok(mig.key === 'ch01-f003' && mig.fc['ch01-f003']?.box === 3 && !mig.fc['ch01#2'], 'positional card progress (ch01#2) moved to the card id ch01-f003');
   ok(mig.fc['ch02-f001']?.box === 4 && !mig.fc['ch02#0'], 'when both keys exist the id wins and the positional key is dropped');
   ok(mig.saved['ch01-f003']?.box === 3 && !mig.saved['ch01#2'] && mig.due === 0, 'the move is saved (nothing due yet)');
@@ -89,17 +89,17 @@ async function mockGemini(ctx) {
   const reg = await page.evaluate(() => {
     const fails = []; S.settings.chunk = false;
     for (const c of COURSE) { for (const s of c.sections) { try { location.hash = '#/s/' + s.id; route(); } catch (e) { fails.push(s.id + e.message); } } }
-    let n = 0; for (const ex of ALL_EX) { try { const card = exerciseCard(ex, { noXP: true }); document.body.append(card); card.remove(); n++; } catch (e) { fails.push(ex.id + e.message); } }
-    S.settings.chunk = true; return { fails, n, total: ALL_EX.length, vis: ALL_EX.filter(isVisual).length };
+    let n = 0; for (const ex of ALL_EX) { try { const card = NoemaCore.studyUi.current().exerciseCard(ex, { noXP: true }); document.body.append(card); card.remove(); n++; } catch (e) { fails.push(ex.id + e.message); } }
+    S.settings.chunk = true; return { fails, n, total: ALL_EX.length, vis: ALL_EX.filter(e => /^img_/.test(e.type || '')).length };
   });
   ok(!reg.fails.length && reg.n === reg.total && reg.n >= 1644 + 53 && reg.vis >= 53, `regression: ${reg.n} exercises (${reg.vis} visual) & all sections render`);
   // a single exercise by id (#/ex/<id>, deep links from Meletee) → a one-exercise run; announced in a:caps
   const exId = await page.evaluate(() => ALL_EX[7].id);
   await page.evaluate(id => { location.hash = '#/ex/' + id; }, exId); await wait(700);
-  ok(await page.evaluate(id => location.hash === '#/run' && RUN.list.length === 1 && RUN.list[0].id === id && RUN.back === '#/s/' + EX[id].section, exId), '#/ex/<id> opens that one exercise, back to its section');
+  ok(await page.evaluate(id => { const R = NoemaCore.studyUi.current().app.round, l = R?.service.state.context.list || []; return location.hash === '#/run' && l.length === 1 && l[0].id === id && R.back === '#/s/' + EX[id].section; }, exId), '#/ex/<id> opens that one exercise, back to its section');
   ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}').exerciseRoute === 1), 'a:caps announces exerciseRoute');
   await page.evaluate(() => { location.hash = '#/ex/nope-e999'; }); await wait(400);
-  ok(await page.evaluate(() => location.hash === '#/ex/nope-e999' && !!$('main') && !RUN?.list.some(e => e.id === 'nope-e999')), 'an unknown exercise id falls back to home');
+  ok(await page.evaluate(() => location.hash === '#/ex/nope-e999' && !!$('main') && !(NoemaCore.studyUi.current().app.round?.service.state.context.list || []).some(e => e.id === 'nope-e999')), 'an unknown exercise id falls back to home');
   await page.evaluate(() => { location.hash = '#/'; }); await wait(500);
   await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
   // account menu tabs
@@ -137,7 +137,7 @@ async function mockGemini(ctx) {
   ok(await page.$$eval('.katex-display', k => k.length) > 0, 'display math rendered in a section');
   ok(await page.evaluate(() => TUTOR.name === 'Ada' && MODES.socratic.sys.includes('physics')), 'tutor persona comes from subject.json');
   await page.screenshot({ path: SHOTS + '/a4_physics_section.png', fullPage: true });
-  const xpOk = await page.evaluate(() => { const a = Noema.stats.get(); addXP(10); flushSave(); const b = Noema.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
+  const xpOk = await page.evaluate(() => { const a = Noema.stats.get(); NoemaCore.studyUi.current().app.xp(10); flushSave(); const b = Noema.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
   ok(xpOk, 'XP counted per subject and in the account total');
   // new profile: full isolation
   await page.evaluate(() => { Noema.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); Noema.switchTo('maria', 'databricks'); }); await wait(1800);
@@ -198,7 +198,7 @@ async function mockGemini(ctx) {
   { const sa = await pA.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(400); } }
   const tipW = await pA.$$eval('main .callout.tip', els => els.map(e => ({ w: e.getBoundingClientRect().width, cur: getComputedStyle(e).cursor })));
   ok(tipW.length > 0 && tipW.every(t => t.w > 300 && t.cur !== 'help'), 'tip callouts render full width (no clash with the ⓘ tooltip style)');
-  await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; S.settings.goal = 150; flushSave(); });
+  await pA.evaluate(() => { const A = NoemaCore.studyUi.current().app; A.record(EX['ch01-e001'], true); A.xp(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; S.settings.goal = 150; flushSave(); });
   await pA.evaluate(() => { openTutor({ kind: 'chapter', id: 'ch05' }, 'quiz'); }); await pA.evaluate(() => sendTutor('quiz me')); await pA.evaluate(() => closeTutor());
   await wait(4200);
   const uidA = Object.keys(srv.state.users)[0];
@@ -278,10 +278,10 @@ async function mockGemini(ctx) {
   ok(await pB.evaluate(() => SUBJ.id === 'demo-imported'), 'device B downloads the private pack from cloud storage');
   // compare-and-swap: a copy changed elsewhere meanwhile (an offline device with a wrong clock, the connector) is combined, never overwritten
   { const ids = await pB.evaluate(() => ALL_EX.slice(0, 3).map(e => e.id)); const sk = 's:demo-imported:state';
-    await pB.evaluate(async id => { record(EX[id], true); flushSave(); await NoemaCloud.push(ACCOUNT.id); }, ids[0]);
+    await pB.evaluate(async id => { NoemaCore.studyUi.current().app.record(EX[id], true); flushSave(); await NoemaCloud.push(ACCOUNT.id); }, ids[0]);
     const row = srv.state.kv[uidA][sk]; const other = JSON.parse(row.value); other.res[ids[1]] = { n: 3, ok: 2, last: true, t: Date.now() };
     srv.state.kv[uidA][sk] = { value: JSON.stringify(other), updated_at: '2020-01-01T00:00:00.000Z' };   // written by a device whose clock is years behind
-    await pB.evaluate(async id => { record(EX[id], true); flushSave(); await NoemaCloud.push(ACCOUNT.id); }, ids[2]);
+    await pB.evaluate(async id => { NoemaCore.studyUi.current().app.record(EX[id], true); flushSave(); await NoemaCloud.push(ACCOUNT.id); }, ids[2]);
     const got = JSON.parse(srv.state.kv[uidA][sk].value).res;
     ok(got[ids[0]] && got[ids[1]]?.n === 3 && got[ids[2]], 'a push never overwrites a newer copy: both devices’ answers are kept (whatever the clocks say)');
     ok(await pB.evaluate(id => S.res[id]?.n === 3, ids[1]), '… and the open page takes in the other device’s answers, so its next save keeps them');

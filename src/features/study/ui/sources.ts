@@ -38,9 +38,8 @@ export class SourcesUi implements ViewerPort {
     const page = o.page ? F.filePage(s, o.page) : null; // a part of a split PDF starts at the book's "firstPage"
     const av = F.available(s);
     if (!av) {
-      this.#open = true;
-      this.#expanded.add(id);
-      this.render();
+      this.expand(id);
+      this.toggleDeck(true);
       app.toast(`📎 ${app.t('engine.src.noFile')}`, 4500);
       return;
     }
@@ -151,6 +150,16 @@ export class SourcesUi implements ViewerPort {
     this.#app.setFilter(ids);
     this.#app.rerender();
     this.render();
+  }
+
+  /** a source's card in the deck shows its details (its file) */
+  expand(id: string): void {
+    this.#expanded.add(id);
+  }
+
+  /** the sources deck is open */
+  get deckOpen(): boolean {
+    return this.#open;
   }
 
   toggleDeck(force?: boolean): void {

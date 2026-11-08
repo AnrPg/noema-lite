@@ -44,7 +44,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.click('.noema-chip:has-text("Demo Physics")'); await wait(1300);
   await p.evaluate(fx => { for (const e of fx) { e._ch = COURSE[0]; EX[e.id] = e; } }, FIX);
-  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); }, id); await wait(200); };
+  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); }, id); await wait(200); };
   const result = () => p.evaluate(() => { const c = document.getElementById('T'); return c._locked() ? (c.querySelector('.explain.ok') ? 'ok' : 'bad') : 'open'; });
   const check = async () => { await p.click('#T .actions button:has-text("Check")'); await wait(150); };
   const opt = (text, scope = '#T') => p.click(`${scope} .opt:has-text(${JSON.stringify(text)})`);
@@ -105,7 +105,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   await p.click('.modal .opt:has-text("Unclear")'); await p.fill('.modal textarea', 'two balls of the same size?'); await p.click('.modal .btn.primary'); await wait(150);
   ok(await p.evaluate(() => S.flags?.['ch01-e903']?.why === 'unclear' && /same size/.test(S.flags['ch01-e903'].note)), '⚑: the report is kept in the subject state');
   ok(await p.locator('#T .exflag.on').count() === 1, '⚑: the button shows it was reported');
-  const src = await p.evaluate(() => SOURCES[0]?.id);
+  const src = await p.evaluate(() => NoemaCore.studyUi.current().app.course.sources[0]?.id);
   await p.evaluate(src => { EX['ch01-e903'].cite = { src, loc: 'p. 3' }; }, src); await card('ch01-e903');
   ok(await p.locator('#T .excite').count() === 0, 'source chip: never before the answer');
   await opt('Both at the same moment');
@@ -131,7 +131,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   ok(await p.locator('.kmapbox .kmaplv').allTextContents().then(t => t.join('|') === 'Basics|Core|Taught earlier on the Roadmap'), 'knowledge map: grouped basics → core, then what an earlier step taught');
   ok(await p.locator('.kmapbox .kmaplr:has-text("Predict free fall") .pill:has-text("Easily confused")').count() === 1, 'knowledge map: the categories of a learnable are shown');
   await p.click('.kmapbox .kmaplr:has-text("Predict free fall") button'); await wait(300);
-  ok(await p.evaluate(() => RUN && RUN.list.length === 1 && RUN.list[0].id === 'ch01-e903'), 'knowledge map: ▶ practises that learnable');
+  ok(await p.evaluate(() => { const r = NoemaCore.studyUi.current().app.round?.service.state.context; return !!r && r.list.length === 1 && r.list[0].id === 'ch01-e903'; }), 'knowledge map: ▶ practises that learnable');
   await p.evaluate(() => { S.res['ch01-e903'] = { n: 1, ok: 0, last: false, t: Date.now() }; location.hash = '#/mistakes'; }); await wait(400);
   ok(await p.locator('.gymcats .fchip:has-text("Easily confused")').count() === 1 && await p.locator('.gymcats .fchip:has-text("Traps")').count() === 1, 'Mistakes gym: chips by kind of trap');
   await p.evaluate(() => reportedView()); await wait(200);

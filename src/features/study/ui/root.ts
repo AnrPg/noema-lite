@@ -6,10 +6,14 @@
 import type { Clock } from '../../../ports/clock.ts';
 import type { I18n } from '../../../ports/i18n.ts';
 import { StudyApp } from './app.ts';
-import type { CardElement } from './exercise/card.ts';
+import { chapterOutline, figureAsText, sectionText } from '../domain/as-text.ts';
+import type { Block, Chapter, Exercise, Section } from '../domain/pack.ts';
+import { exerciseCard, exerciseText, type CardElement, type CardOptions } from './exercise/card.ts';
+import { figureBlock } from './exercise/visual.ts';
 import type { StudyHost } from './host.ts';
 import type { AiPort, TutorPort } from './parts.ts';
 import { showStudyRoute, STUDY_SEGMENTS } from './routes.ts';
+import { rateCard } from './screens/cards.ts';
 import { wireCopy } from './text.ts';
 
 export interface StudyUi {
@@ -18,6 +22,17 @@ export interface StudyUi {
   show(hash: string): boolean;
   /** the first segments of the study addresses */
   readonly segments: ReadonlySet<string>;
+  /** a figure block of the pack (an activity's fallback picture) */
+  figure(b: Block): HTMLElement;
+  /** the course as text for the AI (English, like its prompts): a figure, a section, a chapter's outline, an exercise */
+  figureText(b: Block): string;
+  sectionText(s: Section): string;
+  chapterOutline(c: Chapter): string;
+  exerciseText(ex: Exercise): string;
+  /** an exercise's card, outside a round (the suites render every one) */
+  exerciseCard(ex: Exercise, o?: CardOptions): CardElement;
+  /** a flashcard rated elsewhere (the inbox): 0 again, 1 good, 2 easy */
+  rateCard(key: string, q: 0 | 1 | 2, at?: number): void;
 }
 
 export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; readonly ai: AiPort }, i18n: I18n, clock: Clock): StudyUi {
@@ -39,11 +54,25 @@ export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; rea
       },
     );
   });
-  return { app, show, segments: STUDY_SEGMENTS };
+  return {
+    app,
+    show,
+    segments: STUDY_SEGMENTS,
+    figure: b => figureBlock(app, host.media, b),
+    figureText: b => figureAsText(host.media, b),
+    sectionText: sec => sectionText(sec, host.media, b => host.activities.asText(b)),
+    chapterOutline,
+    exerciseText: ex => exerciseText(app, ex),
+    exerciseCard: (ex, o) => exerciseCard(app, ex, o),
+    rateCard: (key, q, at) => {
+      rateCard(app, key, q, at);
+    },
+  };
 }
 
 function wireKeys(app: StudyApp): void {
   document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && app.sourcesUi.deckOpen) app.sourcesUi.toggleDeck(false);
     const t = e.target;
     if (t instanceof Element && t.matches('input,textarea,select,[contenteditable=""],[contenteditable="true"]')) return;
     if (e.key === 'Escape') {

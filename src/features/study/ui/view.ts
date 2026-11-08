@@ -35,11 +35,11 @@ export function view(app: StudyApp, ...kids: readonly (Child | readonly Child[])
   m.replaceChildren();
   m.dataset['page'] = '@engine';
   const v = h('div', { class: 'view' }, ...kids);
+  const setup = app.route === 'home' || app.route === 'subject' ? app.host.frame.setupBanner() : null;
+  if (setup) v.prepend(setup);
   const fb = app.sourcesUi.filterBanner();
   if (fb) v.prepend(fb);
   if (app.lock) v.prepend(h('div', { class: 'lockbar', role: 'note' }, `🔒 ${app.L('lockedPreview')}`));
-  const setup = app.host.frame.setupBanner();
-  if (setup && app.route === 'home') v.prepend(setup);
   m.append(v);
   scrollTo({ top: 0 });
   return v;

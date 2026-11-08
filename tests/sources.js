@@ -124,7 +124,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelectorAll('.modal, .noema-overlay').forEach(o => o.remove()));
 
   console.log('— remove the file');
-  await p.evaluate(() => { DECK.expanded.ecb = true; toggleSourcesDeck(true); }); await wait(200);
+  await p.evaluate(() => { NoemaCore.studyUi.current().app.sourcesUi.expand('ecb'); NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true); }); await wait(200);
   p.once('dialog', d => d.accept()); await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(3500);
   ok(!Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && !srv.srcfiles(gia, 'kytt').ecb, 'removed from the cloud and the index');
 
@@ -151,7 +151,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(/\/\s*18/.test(await p.locator('.vw-ov').innerText()), 'the part has its own 18 pages (13–30)');
   await p.screenshot({ path: SHOTS + '/s6_package_part.png' }); await p.keyboard.press('Escape'); await wait(200);
   await p.click('.srcref:has-text("Σημ")'); ok(await until(async () => /Notes travel with the package/.test(await p.locator('.vw-ov').innerText())), 'the note (Markdown) from the package opens too'); await p.keyboard.press('Escape');
-  await p.evaluate(() => toggleSourcesDeck(true)); await wait(300);
+  await p.evaluate(() => NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(true)); await wait(300);
   ok(await p.locator('.srcdeck .srccard').count() === 3 && await p.locator('.srcdeck .srccard .srceye').count() === 3, '📚 Sources: one card per part, each with its file (👁)');
   await p.click('.srcdeck .srccard:has-text("μέρος 2") .srcmain'); await wait(300);
   const c2txt = await p.locator('.srcdeck .srccard:has-text("μέρος 2")').innerText();

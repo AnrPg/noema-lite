@@ -81,7 +81,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   const sysNow = () => systems[systems.length - 1];
   const visible = () => p.$$eval('.drawer .msg.me', m => m.map(x => x.innerText).join('\n'));
   await p.evaluate(() => { closeTutor(); const ex = COURSE.flatMap(c => c.exercises).find(e => e.type === 'mcq' && !e.multi && !Array.isArray(e.answer));
-    window.__ex = ex; const card = exerciseCard(ex, { noXP: true }); card.id = 'tcard'; document.querySelector('main, #app, body').prepend(card); });
+    window.__ex = ex; const card = NoemaCore.studyUi.current().exerciseCard(ex, { noXP: true }); card.id = 'tcard'; document.querySelector('main, #app, body').prepend(card); });
   await wait(200);
   await p.click('#tcard button:has-text("Ask")'); await wait(700);
   ok(await p.evaluate(() => T.mode) === 'hint' && /NEVER reveal the answer/.test(sysNow()) && /BEFORE answering/.test(sysNow()) && !/TUTOR STATE/.test(sysNow()), '“Ask Brick” before answering → hint mode: hints only, never the answer');

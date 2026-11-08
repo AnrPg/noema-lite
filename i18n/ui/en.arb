@@ -587,5 +587,17 @@
   "ui.kit.lookNote": "The choices here are this device’s and only for this page.",
   "@ui.kit.lookNote": {
     "description": "UI kit demo: a note under the appearance settings."
+  },
+  "ui.study.onlyMyLevel": "Only my level ({level})",
+  "@ui.study.onlyMyLevel": {
+    "description": "A filter chip of a practice round: only the exercises at the learner’s level. {level} is the level’s name (e.g. “B1”, “Intermediate”)."
+  },
+  "ui.study.myLevelTip": "Practise only the exercises at the level you have reached",
+  "@ui.study.myLevelTip": {
+    "description": "Tooltip of the “Only my level” chip."
+  },
+  "ui.study.level": "Level",
+  "@ui.study.level": {
+    "description": "Label of the row of the round’s filters that holds the “Only my level” chip."
   }
 }

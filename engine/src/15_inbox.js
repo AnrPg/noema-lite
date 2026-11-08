@@ -8,7 +8,7 @@
    what they changed, so a row read twice (a failed delete, two open tabs) counts once. Malformed items are skipped. */
 const INBOX = 'a:inbox:', RESULTS_SCHEMA = 'noema.results/v1', INBOX_KEEP = 500, EXT_KEEP = 200;
 const inboxRun = { busy: false };
-function cardKeyKnown(key) { return FULL_COURSE.some(c => c.flashcards.some(f => f._key === key)); }   // card keys as the decks use them (50_sources.js)
+function cardKeyKnown(key) { return FULL_COURSE.some(c => c.flashcards.some(f => f._key === key)); }   // card keys as the decks use them (10_core.js)
 /** Apply one parsed row to S (no saving) → how many items were applied. */
 function applyResults(v) {
   let n = 0;
@@ -17,8 +17,8 @@ function applyResults(v) {
     if (!it || typeof it !== 'object' || typeof it.id !== 'string') continue;
     const at = Date.parse(it.at) || Date.parse(v.at) || Date.now();
     if (it.kind === 'section' && it.event === 'studied' && SEC[it.id]) { S.read[it.id] = true; n++; }
-    else if (it.kind === 'exercise' && typeof it.ok === 'boolean' && EX[it.id]) { record(EX[it.id], it.ok); n++; }
-    else if (it.kind === 'card' && [0, 1, 2].includes(it.grade) && cardKeyKnown(it.id)) { rateCardKey(it.id, it.grade, new Date(at)); n++; }
+    else if (it.kind === 'exercise' && typeof it.ok === 'boolean' && EX[it.id]) { STUDY.app.record(EX[it.id], it.ok); n++; }
+    else if (it.kind === 'card' && [0, 1, 2].includes(it.grade) && cardKeyKnown(it.id)) { STUDY.rateCard(it.id, it.grade, at); n++; }
     else if ((it.event === 'review' || it.event === 'studied') && (it.kind === 'chapter' ? CH[it.id] : SEC[it.id])) {
       // what noema-lite has no field for (a chapter studied elsewhere, a spaced review and its rating): kept for display
       S.ext = S.ext || {};

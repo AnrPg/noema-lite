@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "حركة أقل",
   "ui.kit.motion.full": "كاملة",
   "ui.kit.language": "لغة الواجهة",
-  "ui.kit.lookNote": "هذه الاختيارات خاصة بهذا الجهاز ولهذه الصفحة فقط."
+  "ui.kit.lookNote": "هذه الاختيارات خاصة بهذا الجهاز ولهذه الصفحة فقط.",
+  "ui.study.onlyMyLevel": "مستواي بس ({level})",
+  "ui.study.myLevelTip": "اتمرّن بس على التمارين اللي في المستوى اللي وصلت له",
+  "ui.study.level": "المستوى"
 }

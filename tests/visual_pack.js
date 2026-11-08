@@ -14,12 +14,12 @@ async function run(browser, viewport, touch) {
   const p = await ctx.newPage(); const E = []; p.on('pageerror', e => E.push(e.message));
   await p.goto(await appUrl(ROOT)); await p.evaluate(() => localStorage.clear()); await p.reload(); await wait(700);
   await p.click(`.noema-chip:has-text("${SUBJ}")`); await wait(1500);
-  const ids = await p.evaluate(() => ALL_EX.filter(isVisual).map(e => e.id));
+  const ids = await p.evaluate(() => ALL_EX.filter(e => /^img_/.test(e.type || '')).map(e => e.id));
   const tap = async (x, y) => touch ? p.touchscreen.tap(x, y) : p.mouse.click(x, y);
   const tapSel = async sel => touch ? p.tap(sel) : p.click(sel);
   let solved = 0, listed = 0;
   for (const id of ids) {
-    await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id);
+    await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id);
     await wait(120);
     const I = await p.evaluate(id => { const ex = EX[id]; const m = MEDIA[ex.media]; const regs = vRegions(ex, m); return { type: ex.type, W: m.w, H: m.h, answer: ex.answer, any: !!ex.any, options: ex.options,
       regs: Object.fromEntries(regs.map(r => [r.id, { c: rCenter(r), label: r.label }])), targets: vTargets(ex, regs).map(r => r.id), compact: document.querySelector('#T .vx').classList.contains('compact') }; }, id);

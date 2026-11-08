@@ -230,7 +230,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   await page.keyboard.press('Escape'); await wait(200);
   await pick(page, '#ns-top .ns-menubtn', 'Sources'); await wait(300);
   ok(await page.$('.srcdeck.open'), '⋮ › Sources: the sources deck');
-  await page.evaluate(() => toggleSourcesDeck(false)); await wait(300);
+  await page.evaluate(() => NoemaCore.studyUi.current().app.sourcesUi.toggleDeck(false)); await wait(300);
   await pick(page, '#ns-top .ns-menubtn', 'Focus sprint'); await wait(400);
   ok(/⏱️ 1[45]:\d\d/.test(await page.$eval('#ns-top .ns-focus', b => b.textContent)), '⋮ › Focus sprint: a small clock next to ⋮');
   await page.click('#ns-top .ns-focus'); await wait(200);

@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "Meno animazioni",
   "ui.kit.motion.full": "Complete",
   "ui.kit.language": "Lingua dell’interfaccia",
-  "ui.kit.lookNote": "Queste scelte valgono per questo dispositivo e solo per questa pagina."
+  "ui.kit.lookNote": "Queste scelte valgono per questo dispositivo e solo per questa pagina.",
+  "ui.study.onlyMyLevel": "Solo il mio livello ({level})",
+  "ui.study.myLevelTip": "Esercitati solo sugli esercizi del livello che hai raggiunto",
+  "ui.study.level": "Livello"
 }

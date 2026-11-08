@@ -125,7 +125,7 @@ async function run(name) {
   ok(await until(async () => { const g = actFrame(p, () => true); return g && (await g.evaluate(() => document.getElementById('fs')?.value)) === '10'; }), 'reopened: the saved state comes back');
 
   console.log('— the sim exercise');
-  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e900']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300); };
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX['ch01-e900']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300); };
   const simFrame = async () => { let g = null; await until(async () => { g = actFrame(p, () => true); return g && (await g.evaluate(() => !!document.getElementById('goal')?.textContent)); }); return g; };
   await card();
   let g = await simFrame();
@@ -271,7 +271,7 @@ async function wasmApp(p, ctx, E) {
   ok(await until(() => p.evaluate(() => S.act?.['blk:ch01-s01:wasm-oscillator']?.data?.values?.c === 1.6)), 'the state is saved (S.act)');
 
   console.log('— wasm-module@1: the sim exercise');
-  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e908']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300);
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX['ch01-e908']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300);
     return until(() => p.evaluate(() => !!document.querySelector('#T .sim-ro dd')?.textContent)); };
   const setC = v => p.evaluate(v => { const e = document.querySelector('#T [data-param="c"]'); e.value = String(v); e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }, v);
   ok(await card(), 'the exercise card mounts the module');
@@ -457,7 +457,7 @@ async function simSpec(p, ctx, E) {
   await p.emulateMedia({ colorScheme: 'light' }); await wait(200);
 
   console.log('— sim-spec@1: the sim exercise (checks grader)');
-  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e901']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX['ch01-e901']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
   const setR = async v => { const n = p.locator('#T input.sim-num[data-param="R"]'); await n.fill(String(v)); await n.press('Tab'); await wait(150); };
   const check = async () => { await p.click('#T button:has-text("Check")'); await wait(300); };
   await card();
@@ -557,7 +557,7 @@ async function circuit(p, ctx, E) {
   ok(await p.evaluate(() => ACT.caps().has('engine:circuit-mna@1') && !checkRequires().includes('engine:circuit-mna@1')), 'the app has engine:circuit-mna@1 (that part of pack.requires is met)');
 
   console.log('— circuit-mna@1: the fault bench (an exercise)');
-  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim-bench'))); };
+  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim-bench'))); };
   const measure = async (m) => {
     const n0 = await p.evaluate(() => document.querySelectorAll('#T .sim-log li').length);
     await p.selectOption('#T [data-bench="instrument"]', m.i);
@@ -734,7 +734,7 @@ async function p6engines(p, ctx, E) {
   ok(await until(async () => Math.abs(val(await ro(SN, 2)) - Math.round(sn.life / 86400)) < 1.5), `a wake every 15 minutes: ${await ro(SN, 2)} days of battery (engine ${(sn.life / 86400).toFixed(1)}), ${await ro(SN, 0)} readings a day`);
 
   console.log('— the P6 exercises: graded by their checks');
-  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
+  const card = async id => { await p.evaluate(id => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX[id]); c.id = 'T'; m.append(c); scrollTo(0, 0); }, id); await until(() => p.evaluate(() => !!document.querySelector('#T .sim .sim-ro dd')?.textContent)); };
   const grade = async () => { await p.click('#T button:has-text("Check")'); await until(() => p.evaluate(() => document.getElementById('T')._locked())); return p.evaluate(() => { const c = document.getElementById('T'); return { ok: !!c.querySelector('.explain.ok'), bad: !!c.querySelector('.explain.bad'), list: [...c.querySelectorAll('.act-checks li')].map(l => l.className).join() }; }); };
   const tries = [
     ['ch01-e904', [['Rsa', 3.5]], true], ['ch01-e904', [['Rsa', 1]], false],
@@ -863,7 +863,7 @@ async function python(name) {
     ok(VH.some(u => /numpy/.test(u)) && !VH.some(u => /scipy|openblas/.test(u)), 'numpy only: no scipy file was fetched (' + VH.length + ' /vendor requests)');
 
     console.log('— py-module@1: the sim exercise (checks on Python\'s outputs)');
-    const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e911']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await startIfParked(p, '#T'); return filled(p, '#T', 60000); };
+    const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX['ch01-e911']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await startIfParked(p, '#T'); return filled(p, '#T', 60000); };
     const check = async () => { await p.click('#T button:has-text("Check")'); await wait(400); };
     ok(await card(), 'the sim exercise ch01-e911 shows the Python activity ' + await p.evaluate(() => { const c = document.getElementById('T'); return JSON.stringify({ note: c?.querySelector('.act-note')?.textContent, line: c?.querySelector('.act-pyline')?.textContent, ro: [...(c?.querySelectorAll('.sim-ro dd') || [])].map(d => d.textContent), bar: c?.querySelector('.act-bar')?.textContent, live: ACT.LIVE.length }); }));
     await setN(p, '#T', 16); await until(async () => /5[.,]9/.test((await ro(p, '#T'))[1] || ''), 20000); await check();
@@ -979,7 +979,7 @@ async function h5p(p, ctx, E) {
   ok(g && await until(() => g.evaluate(() => { const li = [...document.querySelectorAll('.h5p-answer')].find(x => x.textContent.trim() === 'Jupiter'); return !!li && li.getAttribute('aria-checked') === 'true'; })), 'after a reload the saved state comes back: Jupiter is still chosen');
 
   console.log('— h5p@1: the sim exercise (grade "reported": the score H5P reports)');
-  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = exerciseCard(EX['ch01-e910']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300); await h5pStart(p, '#T'); return h5pFrame(p); };
+  const card = async () => { await p.evaluate(() => { const m = document.querySelector('main'); m.innerHTML = ''; const c = NoemaCore.studyUi.current().exerciseCard(EX['ch01-e910']); c.id = 'T'; m.append(c); scrollTo(0, 0); }); await wait(300); await h5pStart(p, '#T'); return h5pFrame(p); };
   g = await card();
   ok(!!g, 'the exercise mounts the H5P item');
   await p.click('#T button:has-text("Check")'); await wait(200);

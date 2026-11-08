@@ -15,6 +15,12 @@ import { backBtn, view } from '../view.ts';
 /** the card buttons (0 again, 1 good, 2 easy) as FSRS ratings */
 const CARD_RATING: readonly Rating[] = [AGAIN, GOOD, EASY];
 
+/** A card rated (0 again, 1 good, 2 easy) at a time: here, or an answer from the 📥 inbox (another app, later). */
+export function rateCard(app: StudyApp, key: string, q: 0 | 1 | 2, at = app.clock.now()): void {
+  app.state.fc[key] = app.review(app.state.fc[key], CARD_RATING[q] ?? GOOD, at);
+  app.host.save();
+}
+
 export function cardsView(app: StudyApp, key?: string): void {
   setAccent(document.body, null);
   app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.cards')]], back: '#/subject' });
@@ -125,8 +131,7 @@ export function flashDeck(
       }),
     );
     const rate = (q: 0 | 1 | 2): void => {
-      app.state.fc[c.key] = app.review(app.state.fc[c.key], CARD_RATING[q] ?? GOOD);
-      app.host.save();
+      rateCard(app, c.key, q);
       app.xp(q === 0 ? 1 : 2, fl);
       if (q === 0) queue.push(c);
       i++;

@@ -208,24 +208,6 @@ if (CARD_KEYS_MOVED) save();
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
 function touchStreak() { Noema.stats.touchStreak(); }
-function addXP(n, el) {
-  if (n <= 0) return;
-  const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(Noema.stats.get().xp || 0).lv : 0;
-  S.xp += n; Noema.stats.add(n); save();
-  renderTopStats();
-  const r = el?.getBoundingClientRect?.();
-  const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, tE('engine.core.xpFloat', { n }));
-  document.body.append(f); setTimeout(() => f.remove(), 1200);
-  const RX = window.NoemaShell?.mounted ? window.NoemaReact : null;   // the character's reactions live in the new frame
-  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 ' + tE('engine.core.goalSmashed')); }
-  else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
-}
-function record(ex, ok, firstTry = true, conf = null) {
-  const r = S.res[ex.id] || { n: 0, ok: 0 };
-  r.n++; if (ok) r.ok++; r.last = ok; r.t = Date.now();
-  if (conf) r.conf = conf; else delete r.conf;   // how sure the learner was this time: sure | think | guess
-  S.res[ex.id] = r; save();
-}
 const solved = id => NoemaCore.study.practice.solved(S.res, id);
 
 /* ---------- sound ---------- */
@@ -286,29 +268,5 @@ function applyTheme() {
 /* ---------- progress: the study domain's (src/features/study/domain/queries.ts) ---------- */
 const chProgress = c => NoemaCore.study.progress.chapter(c, S.read, S.res);
 
-/* ---------- section plain text (for AI context) ---------- */
-/* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)
-function blockText(b) {
-  switch (b.t) {
-    case 'p': return b.text;
-    case 'list': return b.items.map(x => '- ' + x).join('\n');
-    case 'code': return '```' + (b.lang || '') + '\n' + b.code + '\n```';
-    case 'diagram': return b.text;
-    case 'table': return [b.head.join(' | '), ...b.rows.map(r => r.join(' | '))].join('\n');
-    case 'callout': return `[${b.kind.toUpperCase()}] ${b.title || ''}: ${b.text}`;
-    case 'compare': return b.items.map(i => i.title + ': ' + i.points.join('; ')).join('\n');
-    case 'flow': return b.items.join(' → ');
-    case 'reveal': return `Q: ${b.label}\nA: ${b.text}`;
-    case 'ask': return (b.title || 'Ask yourself') + ':\n' + b.questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
-    case 'terms': return b.items.map(i => `${i.term}: ${i.def}`).join('\n');
-    case 'figure': return figureAsText(b);
-    case 'interactive': return interactiveAsText(b);
-  }
-  return '';
-}
-function sectionText(s) { return `## ${s.title}\n${s.hook || ''}\n` + s.blocks.map(blockText).join('\n\n'); }
-function chapterOutline(c) {
-  return `# Chapter ${c.num}: ${c.title} — ${c.subtitle}\nMantra: ${c.mantra}\nSections:\n` + c.sections.map(s => `- ${s.title}: ${s.hook || ''}`).join('\n') +
-    '\nKey pitfalls:\n' + c.pitfalls.map(p => `- ${p.title}: ${p.text}`).join('\n');
-}
-/* i18n-ignore-end */
+/* ---------- the course as text for the AI: the study area's (src/features/study/domain/as-text.ts) ---------- */
+const sectionText = s => STUDY.sectionText(s), chapterOutline = c => STUDY.chapterOutline(c);
