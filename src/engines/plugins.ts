@@ -30,8 +30,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('prob@1'),
-    () => import('./prob/prob.js'),
-    () => import('noema-worker:./prob/prob.js#simEngine'),
+    () => import('./prob/prob.ts'),
+    () => import('noema-worker:./prob/prob.ts#simEngine'),
   ),
   def(
     manifest('logic@1'),
