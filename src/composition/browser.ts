@@ -214,10 +214,10 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   });
   c.register(CONTENT, r => {
     const load = r.get(CHECKS_PIECE);
-    // the typed runtimes' checks (src/runtimes); those still loaded as scripts (NoemaWasm, NoemaH5P) are read from the page
+    // the typed runtimes' checks (src/runtimes: wasm, embed, h5p)
     return lazyContentChecks(() =>
       load().then(p => {
-        const runtimes = p.scopeCheckers(() => globalThis, p.runtimeChecks);
+        const runtimes = p.runtimeCheckers(p.runtimeChecks);
         return p.contentChecks(r.get(ENGINES), runtimes);
       }),
     );

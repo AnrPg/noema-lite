@@ -2,7 +2,7 @@
  * THE NODE TOOLS ROOT (build/noema-tools.cjs, an entry of tools/esbuild.mjs; the skill zip carries it as scripts/noema-tools.cjs):
  * the one bridge from the Python tools to the content checks. tools/noema_core.py runs it; so do the skill's scripts, build.py,
  * pipeline.py and the tests. The checks are the app's and the connector's (src/features/content), with every engine of the
- * library in hand (src/engines/node.ts) and the activity runtimes' own checkers (src/runtimes; engine/src/38, run in a scope of its own).
+ * library in hand (src/engines/node.ts) and the activity runtimes' own checkers (src/runtimes RUNTIME_CHECKS).
  *
  *   node noema-tools.cjs batch                      stdin: [[op, ...args], …] → stdout: [{ok: true, value} | {ok: false, error}, …]
  *   node noema-tools.cjs validate CHAPTER.json [--media M.json] [--activities A.json] [--min-visual N] [--quality error|warn]
@@ -15,39 +15,25 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import h5pSource from 'legacy:engine/src/38_activity_h5p.js';
 import * as contracts from '../contracts/index.ts';
-import { runLegacy } from '../connector/engine/legacy.ts';
 import { nodeEngines } from '../engines/node.ts';
 import { pyRepr, type ChapterOptions } from '../features/content/domain/chapter.ts';
 import { isObj, type Obj } from '../features/content/domain/util.ts';
-import { contentChecks, scopeCheckers } from '../features/content/application/index.ts';
+import { contentChecks, runtimeCheckers } from '../features/content/application/index.ts';
 import { RUNTIME_CHECKS } from '../runtimes/checks.ts';
 import { createAuthoring } from '../features/author/application/index.ts';
 import { schemaApi } from '../features/author/domain/schema.ts';
 
 const engines = nodeEngines();
-/** the activity runtimes' checkers, run once in a scope of their own (they read NoemaCore by name, as on the page) */
-const scope = runLegacy([{ path: 'engine/src/38_activity_h5p.js', text: h5pSource }], {
-  NoemaCore: Object.freeze({ version: 1, contracts, engines }),
-});
-const C = contentChecks(
-  engines,
-  scopeCheckers(() => scope, RUNTIME_CHECKS),
-);
+/** the activity runtimes' checkers are all typed (src/runtimes): no runtime publishes one in a scope here */
+const C = contentChecks(engines, runtimeCheckers(RUNTIME_CHECKS));
 
 const readJson = (file: string): unknown => JSON.parse(fs.readFileSync(file, 'utf8')) as unknown;
 const errText = (e: unknown): string => (e instanceof Error ? e.message : String(e));
 
 /** the .h5p checks of a package file (activity_new.py, h5p_import.py): its rules, and the main library */
 async function h5pFile(file: string): Promise<{ errors: string[]; warnings: string[]; main: string | null }> {
-  const H = scope.NoemaH5P as
-    | {
-        unzip(b: Uint8Array): Promise<Record<string, Uint8Array>>;
-        check(f: Record<string, Uint8Array>): { errors: string[]; warnings: string[]; main?: string };
-      }
-    | undefined;
-  if (!H) return { errors: ['the package checker (NoemaH5P) is not loaded'], warnings: [], main: null };
+  const H = RUNTIME_CHECKS.h5p;
   let files: Record<string, Uint8Array>;
   try {
     files = await H.unzip(new Uint8Array(fs.readFileSync(file)));

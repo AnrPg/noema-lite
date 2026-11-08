@@ -65,7 +65,7 @@ ok(ACTP.check(M('py:out', { outputs: { a: 1 } }, { re: 'py1' })).ok && ACTP.chec
 // 3. the rules, against the golden outputs of the former Python twin (tests/golden.cjs)
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaExpr = ENGINES.kernel('expr'), NoemaCircuit = ENGINES.kernel('circuit'), NoemaEngineCatalog = ENGINES.lib.catalog, NoemaThermal = ENGINES.mod('thermal@1'), NoemaPID = ENGINES.mod('pid@1'), NoemaRF = ENGINES.mod('rf@1'), NoemaTwin = ENGINES.mod('twin@1');
-const P = NoemaCore.content;   // the content checks (build/noema-tools.cjs: with the runtimes' checkers, src/runtimes and engine/src/38)
+const P = NoemaCore.content;   // the content checks (build/noema-tools.cjs: with the runtimes' checkers, src/runtimes)
 const golden = require('./golden.cjs')('activities');
 const html = fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'alias-lab', 'app.html'), 'utf8');
 const crypto = require('crypto');
@@ -534,13 +534,14 @@ ok(!('py-module@1' in P.ACTIVITY_RULES.LATER) && !('h5p@1' in P.ACTIVITY_RULES.L
   const hd = hk.filter(k => JSON.stringify(P.checkActivities(packs.find(x => x[0] === k)[1], Object.keys(packs.find(x => x[0] === k)[1].translations || {})).errors.map(m => m.replace(/'/g, '"'))) !== JSON.stringify(pyh[k].map(m => m.replace(/'/g, '"'))));
   ok(hk.length >= 15 && !hd.length, `h5p@1: checkActivities gives the golden messages on ${hk.length} packs ${hd.slice(0, 2).join(', ')}`);
 }
-{ // h5p@1: the packages themselves — checkActivityPackages (through NoemaH5P, the app's own checker) gives the golden errors and
+{ // h5p@1: the packages themselves — checkActivityPackages (through the runtime's own checker, src/runtimes/h5p) gives the golden errors and
   // warnings of the former twin (check_h5p_packages through tools/h5p_check.py) on the reference, the fixtures and broken or hostile variants
-  globalThis.window = globalThis; require(path.join(ROOT, 'engine', 'src', '38_activity_h5p.js'));
-  const H = globalThis.NoemaH5P, allow = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'h5p_allow.json'), 'utf8'));
+  const H = RTN.RUNTIME_CHECKS.h5p, allow = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'h5p_allow.json'), 'utf8'));
   ok(JSON.stringify(Object.fromEntries(Object.entries(allow.content).map(([k, v]) => [k, v.versions]))) === JSON.stringify(H.ALLOW.content) && JSON.stringify(allow.libraries) === JSON.stringify(H.ALLOW.libraries)
     && JSON.stringify(allow.refuse) === JSON.stringify(H.ALLOW.refuse) && JSON.stringify(allow.files.extensions) === JSON.stringify(H.ALLOW.extensions) && JSON.stringify(Object.keys(allow.content).filter(k => !allow.content[k].tested)) === JSON.stringify(H.ALLOW.untested),
-    'one allow-list: tools/h5p_allow.json = NoemaH5P.ALLOW (the app, the connector and the content checks use it)');
+    'one allow-list: tools/h5p_allow.json = the h5p@1 checks\' ALLOW (the app, the connector and the content checks use it)');
+  ok(RTN.RUNTIME_DESCRIPTORS.some(d => d.manifest.id === 'h5p@1' && d.switch === 'on') && !fs.existsSync(path.join(ROOT, 'engine', 'src', '38_activity_h5p.js')) && !fs.existsSync(path.join(ROOT, 'engine', 'src', '33_activity_guard.js')),
+    'h5p@1 is a typed runtime of the registry (src/runtimes/h5p, on by default); its old script and the old loop guard are gone');
   const hdir = fs.mkdtempSync(path.join(require('os').tmpdir(), 'noema-h5p-parity-'));
   cp.execFileSync('python3', ['-c', `import sys, zipfile, json, os
 src, out = sys.argv[1], sys.argv[2]
@@ -589,7 +590,7 @@ open(os.path.join(out, 'not-a-zip.h5p'), 'wb').write(b'not a zip at all')`, path
       const good = k in want ? !r.errors.length : r.errors.length > 0;
       if (!same || !good) diff.push(`${k}: JS ${JSON.stringify(r)} golden ${JSON.stringify(y)}`.slice(0, 600));
     }
-    ok(!diff.length, `h5p@1 packages: checkActivityPackages (NoemaH5P.check) gives the golden answers on ${hpk.length} packs (${Object.keys(want).length} good, the rest refused) ${diff[0] || ''}`);
+    ok(!diff.length, `h5p@1 packages: checkActivityPackages (the h5p@1 checks) gives the golden answers on ${hpk.length} packs (${Object.keys(want).length} good, the rest refused) ${diff[0] || ''}`);
     const pw = (await P.checkActivityPackages(hpk.find(x => x[0] === 'file attribution')[1], rd)).warnings;
     ok(pw.some(m => /attribution/.test(m)), 'an attribution link is a warning only (shown as text)');
   })();
@@ -738,8 +739,8 @@ ok(/frame\.setAttribute\('sandbox', 'allow-scripts'\)/.test(RTSRC('html-app')) &
 // h5p@1 in the toolkit, the connector, the site and the bundle (docs/INTERACTIVE_H5P.md)
 const COMPOSE = { browser: fs.readFileSync(path.join(ROOT, 'src', 'composition', 'browser.ts'), 'utf8'), connector: fs.readFileSync(path.join(ROOT, 'src', 'composition', 'connector.ts'), 'utf8') };   // the composition roots that wire the engine library
 const srv = (function all(d) { return fs.readdirSync(d, { withFileTypes: true }).map(e => e.isDirectory() ? all(path.join(d, e.name)) : e.name.endsWith('.ts') ? fs.readFileSync(path.join(d, e.name), 'utf8') : '').join('\n'); })(path.join(ROOT, 'src', 'connector')), bld = fs.readFileSync(path.join(ROOT, 'tools', 'build.py'), 'utf8');
-ok(/scripts\/noema-tools\.cjs', bundle_text\('noema-tools'\)/.test(bld) && /'38_activity_h5p\.js', '32_activities\.css'/.test(bld) && /'player\.js', 'LICENSE', 'LICENSE-NOTICE\.txt'\] \+ sorted/.test(bld) && /activity_host\/h5p\/' \+ f/.test(bld) && /'INTERACTIVE_H5P\.md'\)(?: \+ INTERACTIVE_P6)? if/.test(bld) && /'engine\/src\/38_activity_h5p\.js'/.test(bld),
-  'h5p@1: the skill zip carries the package rules (noema-tools.cjs: NoemaH5P.check), the runtime and the player for the harness (with its licences and readable source); the connector runs NoemaH5P; the guide part "interactive" includes INTERACTIVE_H5P.md');
+ok(/scripts\/noema-tools\.cjs', bundle_text\('noema-tools'\)/.test(bld) && /'32_activities\.js', '32_activities\.css'\): z\.write/.test(bld) && /'player\.js', 'LICENSE', 'LICENSE-NOTICE\.txt'\] \+ sorted/.test(bld) && /activity_host\/h5p\/' \+ f/.test(bld) && /'INTERACTIVE_H5P\.md'\)(?: \+ INTERACTIVE_P6)? if/.test(bld) && !/38_activity_h5p|33_activity_guard/.test(bld) && /H5P_CHECKS/.test(fs.readFileSync(path.join(ROOT, 'src', 'runtimes', 'checks.ts'), 'utf8')) && /RUNTIME_CHECKS/.test(srv),
+  'h5p@1: the skill zip carries the package rules (noema-tools.cjs: RUNTIME_CHECKS.h5p), the runtime (inside noema-core.js) and the player for the harness (with its licences and readable source); the connector checks with RUNTIME_CHECKS.h5p; the guide part "interactive" includes INTERACTIVE_H5P.md');
 ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player\.js/.test(bld) && /h5p_entries\(m\)/.test(bld), 'h5p@1: the one-file bundle carries the player and small .h5p files inline; the site copies the library\'s .h5p files');
 { const sf = fs.readFileSync(path.join(ROOT, 'engine', 'srcfiles.js'), 'utf8'), ld = ['library', 'community'].map(f => fs.readFileSync(path.join(ROOT, 'engine', 'app', f + '.js'), 'utf8')).join('\n');
   ok(/wireActivities\(acc\.id, meta, pack\)/.test(ld) && /attachActivityFiles\(acc, b\.pack, b\.file\)/.test(ld) && /enumerable: false/.test(sf) && /packs\/\$\{subj\}\/\$\{a\.entry\}/.test(sf) && /actPath = \(uid: string, sid: string, a: PackActivity\): string => `\$\{uid\}\/packs\/\$\{sid\}\/\$\{a\.entry\}/.test(srv),
@@ -748,7 +749,7 @@ ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player
 
 ok(/["']?enum["']?: \[\s*["']workflow["'],\s*["']content["'],\s*["']visual["'],\s*["']interactive["']/.test(srv) && /interactive: D\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
-ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'33_activity_guard\.js', '38_activity_h5p\.js'/.test(bld) && /py-module@1/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
+ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'32_activities\.js', '32_activities\.css'/.test(bld) && /py-module@1/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
 ok(NoemaCore.engines.has('circuit-mna@1') && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the circuit engine for the harness (in noema-core.js) and the scripts (in noema-tools.cjs); the guide part "interactive" includes the circuit engine');
 ok(['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(id => NoemaCore.engines.has(id)) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
   && COMPOSE.connector.includes('engines: nodeEngines()') && /\{ name: 'engines', build: r => r\.get\(ENGINES\) \}/.test(COMPOSE.browser) && /core_scripts = \(f'<script>\{esc\(bundle_text\("app"\)\)\}<\/script>/.test(bld),

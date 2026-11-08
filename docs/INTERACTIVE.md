@@ -261,7 +261,7 @@ into `_headers` — `docs/INTERACTIVE_PYTHON.md` §7.
 
 1. `python3 activity_lint.py <subject-dir>` — no errors (and no warnings you cannot explain); for a sim-spec it checks every
    expression against the names the spec declares, every label key in every table, the limits; for a circuit the netlist,
-   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of `NoemaH5P.check` (allowed
+   the bindings, the faults, points and instruments of a bench; for an h5p@1 item the package rules of the h5p@1 checks (`src/runtimes/h5p/check.ts`) (allowed
    content types and libraries, no outside link, no file type H5P refuses) on the package and on each translation.
 2. `python3 activity_test.py <subject-dir>` — it loads, says hello, shows its words in every language, reports right and wrong
    results for the solutions and wrong attempts you listed, and no console errors (a bench: `measure` / `diagnose` steps, the

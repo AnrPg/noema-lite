@@ -9,6 +9,7 @@ const ENTRIES: Readonly<Record<string, () => Promise<{ default: RuntimeModule }>
   'html-app@1': () => import('./html-app/runtime.ts'),
   'wasm-module@1': () => import('./wasm-module/runtime.ts'),
   'py-module@1': () => import('./py-module/runtime.ts'),
+  'h5p@1': () => import('./h5p/runtime.ts'),
 };
 
 export const RUNTIME_PLUGINS: readonly RuntimePlugin[] = Object.freeze(

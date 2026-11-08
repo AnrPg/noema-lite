@@ -6,14 +6,14 @@
  */
 import * as contracts from '../contracts/index.ts';
 import type { ContractsPiece } from '../contracts/lazy.ts';
-import { contentChecks, scopeCheckers } from '../features/content/application/index.ts';
+import { contentChecks, runtimeCheckers } from '../features/content/application/index.ts';
 import { RUNTIME_CHECKS, type RuntimeChecks } from '../runtimes/checks.ts';
 
 /** what build/contracts.js hands the page */
 export interface ChecksPiece {
   readonly contracts: ContractsPiece;
   readonly contentChecks: typeof contentChecks;
-  readonly scopeCheckers: typeof scopeCheckers;
+  readonly runtimeCheckers: typeof runtimeCheckers;
   /** the runtimes' pure checks (src/runtimes): the content checks read them, NoemaCore.runtimes.checks once this piece is in */
   readonly runtimeChecks: RuntimeChecks;
 }
@@ -21,6 +21,6 @@ export interface ChecksPiece {
 (globalThis as { __noemaContractsPiece?: ChecksPiece }).__noemaContractsPiece = {
   contracts,
   contentChecks,
-  scopeCheckers,
+  runtimeCheckers,
   runtimeChecks: RUNTIME_CHECKS,
 };
