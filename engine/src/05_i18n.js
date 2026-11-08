@@ -24,7 +24,7 @@ const nf = n => window.NoemaI18n?.fmt ? NoemaI18n.fmt.number(n) : String(n);
 const pctText = p => window.NoemaI18n?.fmt ? NoemaI18n.fmt.percent(p / 100) : p + '%';
 /** "Ch3": a chapter's short number. */
 const chShort = num => tE('engine.common.chShort', { num });
-/** A message with elements in it (a bold name …): tNodes('engine.share.invite', { title }, { name: h('b', {}, who) }) → [text, node, text …]
+/** A message with elements in it (a bold name …): tNodes(key, { title }, { name: h('b', {}, who) }) → [text, node, text …]
     for h()'s children. Each element placeholder must appear once in the message. */
 function tNodes(key, vars, nodes) {
   const p = { ...(vars || {}) }, marks = [];

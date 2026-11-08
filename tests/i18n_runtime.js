@@ -513,7 +513,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await wait(1500); await grab(bob, 'Bob: picker with requests');
     await visit(bob, 'Bob: Databricks', async () => { await bob.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.openSubjectPicker(); }); await wait(600); await bob.click('.noema-chip:has-text("Databricks")'); }, 2500);
     await visit(bob, 'Bob: notifications', () => bob.evaluate(() => openNotes()), 1000);
-    await visit(bob, 'Bob: banner later', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); [...document.querySelectorAll('.sharebar button')].pop()?.click(); }), 800);
+    await visit(bob, 'Bob: banner later', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); document.querySelector('.sharebar .nx-later')?.click(); }), 800);
     await visit(bob, 'Bob: accept from the bell', () => bob.evaluate(() => { openNotes(); setTimeout(() => document.querySelector('.modal button.primary')?.click(), 300); }), 3000);
     await visit(bob, 'Bob: Roadmaps (invitation)', () => bob.evaluate(() => { document.querySelectorAll('.modal').forEach(m => m.remove()); Noema.curricula(); }), 2000);
     await visit(bob, 'Bob: join', () => bob.click('noema-roadmap-library .cm-join'), 2500);

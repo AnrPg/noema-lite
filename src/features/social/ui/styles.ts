@@ -253,3 +253,71 @@ export const SOCIAL_CSS = css`
     display: none;
   }
 `;
+
+/** The page others see (#/profile, #/u/<id>): the picture and the words on top, the parts below, quiet. */
+export const PROFILE_CSS = css`
+  .pf-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin: 4px 0 8px;
+  }
+  .pf-face .nc-face {
+    width: 72px;
+    height: 72px;
+    font-size: 2rem;
+  }
+  .pf-bio {
+    margin: 0.3em 0 0;
+    color: var(--u-ink2);
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+  .pf-part {
+    display: grid;
+    gap: 8px;
+  }
+  .pf-part .nc-label {
+    margin: 0;
+  }
+  .pf-part .nc-list {
+    margin: 0;
+  }
+  .pf-share {
+    width: 100%;
+  }
+  .pf-foot {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .pf-foot p {
+    margin: 0;
+  }
+  .pf-state {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pf-state svg {
+    width: 16px;
+    height: 16px;
+  }
+  .pf-edit {
+    display: grid;
+    gap: 10px;
+  }
+  .pf-picrow {
+    gap: 14px;
+  }
+  .pf-switches {
+    padding: 0 14px;
+  }
+  .pf-switch + .pf-switch {
+    border-top: 1px solid var(--u-line);
+  }
+  .pf-link {
+    overflow-wrap: anywhere;
+    user-select: all;
+  }
+`;

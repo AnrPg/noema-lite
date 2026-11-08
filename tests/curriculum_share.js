@@ -94,8 +94,8 @@ const closeAll = p => p.evaluate(() => document.querySelectorAll('.noema-overlay
   const bob = Object.values(S.users).find(u => u.email === 'bob@example.com').id;
   await B.p.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   await B.p.evaluate(() => Noema.notes.refresh()); await wait(400);
-  ok(/Anna invites you to the Roadmap “Cell biology”/.test(await B.p.locator('.sharebar').innerText()) && await B.p.locator('.sharebar button:has-text("Join")').isVisible(), '🔔 the banner: “Anna invites you to the curriculum …” → Join');
-  await B.p.click('.sharebar button:has-text("Join")');
+  ok(/Anna invites you to the Roadmap “Cell biology”/.test(await B.p.locator('.sharebar').innerText()) && await B.p.locator('.sharebar .nx-accept:has-text("Join")').isVisible(), '🔔 the banner: “Anna invites you to the curriculum …” → Join');
+  await B.p.click('.sharebar .nx-accept');
   ok(await until(() => S.mems.some(m => m.email === 'bob@example.com' && m.status === 'joined' && m.user_id === bob)), 'he joined');
   await until(async () => (await cur(B, cid))?.shared?.role === 'member', 8000);   // the server has him first; his copy is saved right after
   let bc = await cur(B, cid);

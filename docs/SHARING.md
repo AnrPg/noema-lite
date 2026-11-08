@@ -78,6 +78,7 @@ Icons on the subject chips: 🔒 only yours · 🤝 shared with you · 🌍 take
 | The share dialog | `src/features/sharing/ui/share.ts` (Lit on the kit; `NoemaCore.community.share(subject)`, `Noema.share`); its data and the cloud's calls: `src/composition/sharing-host.ts` over `engine/cloud.js` and `engine/srcfiles.js` |
 | 🌍 Explore | `src/features/sharing/ui/explore.ts` (`#/explore`, `#/explore/subjects`; `NoemaCore.community.explore(kind)` in a dialog) |
 | 🔔 the bell's sharing rows (a share, an invitation, an update, news, *Clear all*) | `src/features/sharing/ui/notes.ts` (`Noema.shareRow`, `Noema.noticesClear`); what they do: the Notes of `engine/app/community.js` |
+| 🔔 the banner under the top bar (the newest share, invitation or update; *+n more in the bell*, *Later*) | `src/features/sharing/ui/bar.ts`, the same row as the bell's; drawn into the frame's `.sharebar` (classic and new: `NoemaCore.community.notes.bar(el)`) once something waits |
 | The screens' routes | `src/composition/community-ui.ts` (loaded as `build/community.js` the first time one opens) |
 
 ## 7. How it is stored (for the curious)

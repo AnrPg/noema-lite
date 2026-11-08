@@ -17,7 +17,6 @@
   const el = N.el;
   const slugify = N.slugify;
   const tr = N.tr;
-  const trx = N.trx;
   const overlay = N.overlay;
   const toastL = (m, ms) => N.toast(m, ms);
   const getAccount = N.getAccount;
@@ -209,13 +208,6 @@
     window.NoemaCore.community.notes.clear(box).catch(e => console.error('[notes]', e));
     return box;
   }
-  /** 🔔 An update as a row: what changed, and Take / Keep mine (it waits until the learner answers). */
-  function updateText(sh) {
-    if (sh.kind === 'curupdate') return ['🧭 ', ...trx('loader.upd.curChanged', { title: el('b', {}, sh.title) }, { who: sh.from_name || tr('loader.upd.owner') }), el('div', { class: 'tiny' }, sh.lines?.length ? tr('loader.upd.curChangesList', { n: num(sh.count), lines: sh.lines.join(' · ') }) : tr('loader.upd.curChanges', { n: num(sh.count) }))];
-    if (sh.kind === 'stepupdate') return ['⚡ ', ...trx('loader.upd.stepNew', { title: el('b', {}, sh.title) }, { who: sh.from_name || tr('loader.upd.author') }), el('div', { class: 'tiny' }, tr('loader.upd.stepNewSub', { roadmap: sh.curTitle }))];
-    return ['🌍 ', ...trx('loader.upd.subjNew', { title: el('b', {}, sh.title) }, { who: sh.from_name || tr('loader.upd.author') }), el('div', { class: 'tiny' }, tr('loader.upd.subjNewSub') + (sh.steps ? ' · ' + tr('loader.upd.subjSteps', { n: sh.steps }) : ''))];
-  }
-  const updateLabel = sh => sh.kind === 'curupdate' ? '🔎 ' + tr('loader.upd.review') : sh.kind === 'stepupdate' ? '⬇️ ' + tr('loader.upd.getIt') : '⬆️ ' + tr('loader.upd.update');
 
 
   Object.assign(APP, { Notes, explore, fmtWhen, importPack, isCloudAcc, shareDialog, shareRow });
@@ -223,7 +215,7 @@
   N.notices.onChange(() => Notes.local());   // 🔔 news kept on this device joins the bell's list
   Object.assign(N, {
     importPack, explore() { return explore(N.account.id); }, publicSubjects() { return publicSubjects(N.account.id); }, studyPublic, share(s) { return shareDialog(N.account.id, s); },
-    notes: Notes, shareRow, noticesClear, updateText, updateLabel, packInfo,
+    notes: Notes, shareRow, noticesClear, packInfo,
   });
   const started = N.boot.started;
   N.boot.started = acc => { started?.(acc); Notes.start(acc.id); };
@@ -233,44 +225,20 @@
   const PAGES = {};
   const TH = () => window.NoemaThemes;
   const N = () => window.Noema;
-  const CU = () => window.NoemaCurriculum;
   const CM = () => window.NoemaCurMap;
   const acc = () => N()?.account?.id || N()?.kv?.acc || null;
-  const settings = () => N().jget(`noema1:${acc()}:a:settings`, {}) || {};
-  const uiPref = () => settings().lang;
-  const lang = () => window.NoemaI18n ? NoemaI18n.lang(uiPref()) : 'en';
   const caught = (where, severity = 'warning') => NoemaCore.errors.catcher(where, { severity });
-  const toast = (m, ms) => N().toast(m, ms);
-  const jget = (k, d) => N().jget(k, d);
-  const jset = (k, v) => N().jset(k, v);
-  const stateOf = sid => NoemaCore.learning.progressOf(acc(), sid);   // the learning log's fold (read only)
-  const subjects = force => APP.subjects(force);
   const h = S.h;
-  const svg = S.svg;
-  const faceEl = S.faceEl;
-  const tone = S.tone;
   const ico = S.ico;
   const icoTxt = S.icoTxt;
-  const pill = S.pill;
   const chev = S.chev;
   const L = S.L;
-  const rich = S.rich;
-  const fmtDate = S.fmtDate;
-  const sheet = S.sheet;
-  const modal = S.modal;
-  const menuButton = S.menuButton;
-  const popMenu = S.popMenu;
-  const fitRow = S.fitRow;
-  const tipped = S.tipped;
   const go = S.go;
-  const open = S.open;
   const chrome = S.chrome;
   const page = S.page;
-  const isLang = S.isLang;
   const WORLDS = S.WORLDS;
   const importFile = (...a) => APP.importFile(...a);
   const landedOpen = (...a) => APP.landedOpen(...a);
-  const subjectPct = (...a) => APP.subjectPct(...a);
   /* ---------- the community screens (NoemaCore.community: src/composition/community-ui.ts, Lit on the UI kit, build/community.js) ----------
      🔎 #/search · 🗄️ #/vault · 👥 #/people #/chat #/group #/join · 🧭 #/explore · ⚑ #/admin/reports: drawn into the page,
      their tab, crumbs, ← and ⋮ told to the frame as they change */
@@ -317,136 +285,12 @@
     return communityPage(null, window.NoemaI18n ? NoemaI18n.t('report.adminTitle') : 'Reports');
   };
 
-  /* ---------- the page others see: Me (#/profile, yours) and #/u/<id> (somebody's, once published). docs/PROFILE.md ---------- */
-  const PAGE_PARTS = [['progress', 'pfProgress', 'pfProgressSub'], ['achievements', 'pfAch', 'pfAchSub'], ['languages', 'pfLangs', 'pfLangsSub'], ['topics', 'pfTopics', 'pfTopicsSub'], ['shares', 'pfShares', 'pfSharesSub']];
-  const myPageKey = () => `noema1:${acc()}:a:mypage`;
-  /** your page as kept on this device: { bio, avatar, show: { progress… }, published } — everything off until you switch it on */
-  const myPage = () => ({ bio: '', avatar: null, show: {}, published: false, ...(jget(myPageKey(), null) || {}) });
-  function putMyPage(p) { const v = JSON.stringify(p); if (N()?.kv?.set) N().kv.set(myPageKey(), v); else jset(myPageKey(), p); }
-  const cloudMe = () => N()?.account?.kind === 'cloud' && window.NoemaCloud?.session?.()?.user?.id ? NoemaCloud.session().user.id : null;
-  const avatarEl = (a, src, cls = '') => src ? h('img', { class: 'ns-avatar ' + cls, src, alt: '' }) : h('span', { class: 'ns-me ns-avatar ' + cls, 'data-emoji': '1' }, a.emoji || (a.display_name || a.name || '?').trim()[0]?.toUpperCase() || '?');
-  /** What the page shows of you now, only the parts switched on (progress, treasures, languages, topics) */
-  async function myCard(show) {
-    const card = {}, st = N().stats?.get() || { xp: 0 }, sn = N().stats?.streakNow() || 0, subs = await subjects();
-    let done = 0, fcN = 0, boss = 0; for (const s of subs) { const x = stateOf(s.id); if (!x) continue; done += chaptersDone(s, x); fcN += Object.keys(x.fc || {}).length; boss += Object.keys(x.boss || {}).length; }
-    if (show.progress) card.progress = { level: LEVEL(st.xp || 0).lv, xp: st.xp || 0, streak: sn, chapters: done };
-    if (show.achievements) card.achievements = medals({ fcN, sn, boss, xp: st.xp || 0 }).filter(m => m[0]).map(m => m[1]);
-    if (show.languages) card.languages = WORLDS.lang?.studying ? WORLDS.lang.studying() : subs.filter(isLang).map(s => ({ id: s.id, title: s.title, languages: [] }));
-    if (show.topics) card.topics = [...(CU()?.list(acc()) || []).filter(c => c.nodes && Object.keys(c.nodes).length).map(c => ({ kind: 'roadmap', title: c.title || c.goal, pct: Math.round(CU().summary(acc(), c).pct * 100) })),
-      ...subs.filter(s => !isLang(s) && !CU()?.stepsOf?.(acc(), s.id)?.length && subjectPct(s) > 0).map(s => ({ kind: 'subject', title: s.title, emoji: s.emoji || null, pct: Math.round(subjectPct(s) * 100) }))].slice(0, 40);
-    return card;
-  }
-  /** Send your page to the cloud (published or not: unpublished, only you can read it) */
-  async function saveMyPage(p) {
-    putMyPage(p);
-    if (!cloudMe()) return;
-    const a = N().account || {};
-    await NoemaCloud.saveMyPage({ published: p.published, display_name: a.name, emoji: a.emoji, bio: p.bio, avatar: p.avatar, show: p.show, card: await myCard(p.show) });
-  }
-  PAGES.profile = async () => {
-    const a = N().account || {}, uid = cloudMe(), v = page({ tab: 'me', crumbs: [[L('me')]], corner: true });
-    let p = myPage();
-    if (uid && !jget(myPageKey(), null)) { const r = await NoemaCloud.myPage().catch(() => null); if (r) { p = { bio: r.bio || '', avatar: r.avatar || null, show: r.show || {}, published: !!r.published }; putMyPage(p); } }   // another device wrote it
-    const draw = async () => {
-      const status = h('p', { class: 'ns-pfstate tiny' }, svg(p.published ? 'globe' : 'lock'), ' ', L(p.published ? 'pfPublic' : 'pfPrivate'));
-      const acts = fitRow(
-        tipped(h('button', { class: 'btn small', 'data-act': 'edit', onclick: editPage }, svg('edit'), L('pfEdit')), L('pfEditTip')),
-        uid ? tipped(h('button', { class: 'btn small' + (p.published ? '' : ' primary'), 'data-act': 'publish', onclick: async e => { e.currentTarget.disabled = true; p.published = !p.published; try { await saveMyPage(p); toast(L(p.published ? 'pfPublic' : 'pfPrivate'), 2500); } catch (er) { p.published = !p.published; toast(L('pfCloudErr', { e: er.message }), 5000); } draw(); } }, svg(p.published ? 'lock' : 'globe'), L(p.published ? 'pfUnpublish' : 'pfPublish')), L('pfPublishTip')) : null,
-        uid && p.published ? tipped(h('button', { class: 'btn small', 'data-act': 'link', onclick: () => { const url = location.href.split('#')[0].split('?')[0] + '#/u/' + uid; (navigator.clipboard?.writeText(url) || Promise.reject()).then(() => toast(L('pfLinkCopied'), 2500), () => prompt(L('pfLink'), url)); } }, svg('link'), L('pfLink')), L('pfLinkTip')) : null);
-      const card = await myCard(p.show);
-      v.replaceChildren(...pageView({ display_name: a.name, emoji: a.emoji, bio: p.bio, avatar: p.avatar, show: p.show, card }, { owner: uid, mine: true }), h('div', { class: 'ns-pffoot' }, status, uid ? null : h('p', { class: 'tiny ns-muted' }, L('pfNeedCloud')), acts));
-      if (uid && p.published) saveMyPage(p).catch(caught('shell.mypage.publish'));   // a published page follows your progress
-    };
-    function editPage() {
-      sheet(L('pfEdit'), (body, close) => {
-        const pic = h('div', { class: 'ns-pfpic' }, avatarEl(a, p.avatar, 'big'));
-        const file = h('input', { type: 'file', accept: 'image/jpeg,image/png,image/webp,image/gif', hidden: true, onchange: async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; try { p.avatar = await smallPicture(f); pic.replaceChildren(avatarEl(a, p.avatar, 'big')); delBtn.style.display = ''; } catch (er) { toast(L('pfPhotoBad'), 4000); } } });
-        const delBtn = h('button', { class: 'btn small ghost', style: { display: p.avatar ? '' : 'none' }, onclick: () => { p.avatar = null; pic.replaceChildren(avatarEl(a, null, 'big')); delBtn.style.display = 'none'; } }, L('pfPhotoDel'));
-        const bio = h('textarea', { class: 'noema-input ns-pfbio', maxlength: '600', rows: '4', placeholder: L('pfBioPh'), 'aria-label': L('pfBio') }); bio.value = p.bio || '';
-        const sw = PAGE_PARTS.map(([k, t, sub]) => { const inp = h('input', { type: 'checkbox', 'data-part': k, checked: !!p.show[k] || null }); return h('label', { class: 'ns-pfsw' }, h('span', { class: 'grow' }, h('b', {}, L(t)), h('small', {}, L(sub))), h('span', { class: 'switch' }, inp, h('i'))); });
-        body.append(h('div', { class: 'ns-pfedit' }, h('div', { class: 'row nowrap' }, pic, h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => file.click() }, svg('upload'), L(p.avatar ? 'pfPhoto' : 'pfPhotoAdd')), delBtn), file),
-          h('span', { class: 'ns-label' }, L('pfBio')), bio, h('span', { class: 'ns-label' }, L('pfShow')), h('p', { class: 'tiny' }, L('pfShowSub')), h('div', { class: 'ns-list ns-pfsws' }, ...sw),
-          h('div', { class: 'row' }, h('button', { class: 'btn primary', 'data-act': 'save', onclick: async e => {
-            e.currentTarget.disabled = true; p.bio = bio.value.trim().slice(0, 600); p.show = Object.fromEntries(sw.map(l => { const i = l.querySelector('input'); return [i.dataset.part, i.checked]; }));
-            try { await saveMyPage(p); toast(L('pfSaved'), 2000); } catch (er) { toast(L('pfCloudErr', { e: er.message }), 5000); }
-            close(); draw(); } }, L('pfDone')))));
-      }, { cls: 'ns-pfsheet' });
-    }
-    draw();
-  };
-  PAGES.u = async ([id]) => {
-    if (id && id === cloudMe()) return location.replace('#/profile');
-    const v = page({ tab: null, crumbs: [[L('me')]], back: '#/discover' }, h('p', { class: 'ns-muted' }, L('loading')));
-    let r = null; try { r = id && window.NoemaCloud ? await NoemaCloud.publicPage(id) : null; } catch (e) { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, h('p', {}, L('pfCloudErr', { e: e.message })))); return; }
-    if (!r || !r.published) { v.replaceChildren(h('div', { class: 'ns-panel ns-empty' }, faceEl(undefined, 'breathe'), h('p', {}, L('pfMissing')))); return; }
-    chrome({ tab: null, crumbs: [[r.display_name || '…']], back: '#/discover' });
-    const acts = h('div', { class: 'so-personacts' }); if (CMY() && window.NoemaCloud?.session?.()) CMY().social.personActions(acts, id).catch(caught('community.personActions', 'info'));
-    v.replaceChildren(...pageView(r, { owner: id }), acts, h('p', { class: 'tiny ns-muted' }, L('pfUpdated', { date: fmtDate(r.updated_at) })));
-  };
-  /** The page itself (yours as others see it, or somebody's): picture, name, a few words, then the parts that are shown */
-  function pageView(r, { owner, mine = false }) {
-    const show = r.show || {}, card = r.card || {}, part = (k, ...kids) => show[k] ? h('section', { class: 'ns-panel ns-pfpart', 'data-part': k }, h('span', { class: 'ns-label' }, L(PAGE_PARTS.find(x => x[0] === k)[1])), ...kids) : null;
-    const none = () => h('p', { class: 'tiny ns-muted' }, L('pfNone')), pr = card.progress;
-    const langName = c => { try { return new Intl.DisplayNames([lang()], { type: 'language' }).of(c) || c; } catch (e) { return c; } };
-    const shares = show.shares && owner ? h('div', { class: 'ns-pfshares' }, h('p', { class: 'tiny ns-muted' }, L('loading'))) : null;
-    if (shares) Promise.all([CM()?.publicRoadmaps ? CM().publicRoadmaps(acc()).catch(() => []) : [], N().publicSubjects ? N().publicSubjects().catch(() => ({ all: [] })) : { all: [] }]).then(([rms, ps]) => {
-      const rl = rms.filter(x => x.owner === owner), sl = (ps.all || []).filter(x => x.kind === 'public' && x.owner === owner), busy = async (b, fn) => { b.disabled = true; try { await fn(); } catch (er) { toast(er.message, 5000); } b.disabled = false; };
-      shares.replaceChildren(...(rl.length || sl.length ? [
-        rl.length ? h('span', { class: 'tiny ns-muted' }, L('pfSharedRm')) : null, rl.length ? h('div', { class: 'ns-list' }, ...rl.map((x, i) => h('button', { class: 'ns-item', onclick: e => busy(e.currentTarget, () => CM().openPublic(acc(), x, { onOpen: cid => go('#/map/' + encodeURIComponent(cid)) })) }, ico('map', (i % 4) + 1), h('span', { class: 't' }, h('b', {}, x.title), x.description ? h('small', {}, x.description) : null), chev()))) : null,
-        sl.length ? h('span', { class: 'tiny ns-muted' }, L('pfSharedSubj')) : null, sl.length ? h('div', { class: 'ns-list' }, ...sl.map((x, i) => h('button', { class: 'ns-item', onclick: e => busy(e.currentTarget, () => ps.study(x, s => open(s.id))) }, icoTxt(x.emoji || (x.title || '?').slice(0, 1), (i % 4) + 1, x.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, h('b', {}, x.title), x.description ? h('small', {}, x.description) : null), chev()))) : null] : [none()]));
-    });
-    const MED = Object.fromEntries(medals({ fcN: 100, sn: 30, boss: 1, xp: 1000 }).map(m => [m[1], m]));
-    return [h('div', { class: 'ns-hello ns-pfhead' }, avatarEl(r, r.avatar, 'big'), h('div', { class: 'grow' }, h('h1', {}, r.display_name || '…'), r.bio ? h('p', { class: 'ns-pfbiotext' }, r.bio) : mine ? h('p', { class: 'tiny ns-muted' }, L('pfBioPh')) : null)),
-      part('progress', pr ? h('div', { class: 'ns-pfstats' }, pill(L('pfLevel', { lv: pr.level }), 1), pill(L('pfXp', { xp: pr.xp || 0 }), 2), pr.streak ? pill(L('streakDays', { n: pr.streak }).replace(/\.$/, ''), 3) : null, pill(L('nChapters', { n: pr.chapters || 0 }), 4)) : none()),
-      part('achievements', (card.achievements || []).length ? medalsEl(card.achievements.filter(k => MED[k]).map(k => MED[k])) : none()),
-      part('languages', (card.languages || []).length ? h('div', { class: 'ns-list' }, ...card.languages.map(x => h('div', { class: 'ns-item' }, icoTxt('文A', 4), h('span', { class: 't' }, h('b', {}, x.title), h('small', {}, [(x.languages || []).map(langName).join(' · '), x.words ? L('pfWords', { n: x.words }) : null].filter(Boolean).join(' · ')))))) : none()),
-      part('topics', (card.topics || []).length ? h('div', { class: 'ns-list' }, ...card.topics.map((x, i) => h('div', { class: 'ns-item' }, x.kind === 'roadmap' ? ico('map', (i % 4) + 1) : icoTxt(x.emoji || (x.title || '?').slice(0, 1), (i % 4) + 1, x.emoji ? 'emo' : 'txt'), h('span', { class: 't' }, h('b', {}, x.title)), x.pct ? pill(x.pct + '%', 2) : null))) : none()),
-      part('shares', shares)].filter(Boolean);
-  }
-  /** A picture for the page: square, 256 px, JPEG (small enough to live in the page's row; nothing of the original file travels) */
-  async function smallPicture(f) {
-    if (f.size > 15e6) throw new Error('too big');
-    const url = URL.createObjectURL(f);
-    try {
-      const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = url; });
-      const S = 256, c = document.createElement('canvas'); c.width = c.height = S; const x = c.getContext('2d'), m = Math.min(img.naturalWidth, img.naturalHeight);
-      if (!m) throw new Error('empty');
-      x.fillStyle = '#fff'; x.fillRect(0, 0, S, S); x.drawImage(img, (img.naturalWidth - m) / 2, (img.naturalHeight - m) / 2, m, m, 0, 0, S, S);
-      for (const q of [0.85, 0.7, 0.55]) { const d = c.toDataURL('image/jpeg', q); if (d.length < 190000) return d; }
-      throw new Error('too big');
-    } finally { URL.revokeObjectURL(url); }
-  }
-  /** Buttons in one row when they all fit, else one under the other (never ragged) */
-  const LEVEL = xp => NoemaCore.study.xp.level(xp);
-  /** The treasures (medals): [[found, key, mark, words, tone]] — the Progress tab and the page others see (only the keys of the found ones travel) */
-  function medals({ fcN = 0, sn = 0, boss = 0, xp = 0 } = {}) {
-    const mastered = (CU()?.list(acc()) || []).reduce((a, c) => a + (c.status === 'ready' ? CU().summary(acc(), c).mastered : 0), 0);
-    return [[mastered >= 1, 'step', '1', L('medalStep'), 1], [fcN >= 100, 'cards', '100', L('medalCards', { n: Math.min(fcN, 100) }), 4], [sn >= 7, 'week', '7', L('medalWeek', { n: Math.min(sn, 7) }), 2], [boss >= 1, 'boss', svg('crown'), L('medalBoss'), 3], [xp >= 1000, 'xp', '1k', L('medalXp'), 1], [sn >= 30, 'month', '30', L('medalMonth', { n: Math.min(sn, 30) }), 2]];
-  }
-  const medalsEl = MED => h('div', { class: 'ns-medals' }, ...MED.map(([ok, , x, l, n]) => h('div', { class: 'ns-medal' + (ok ? '' : ' lock') }, h('div', { class: 'm', style: ok ? tone(n) : null }, x), h('small', {}, l))));
-  /** chapters of a subject with every section read (the study domain's count, NoemaCore.study.progress) */
-  const chaptersDone = (s, x) => NoemaCore.study.progress.chaptersDone(s.chapters || s.meta?.chapters || [], x.read, x.boss);
-  let later = new Set();
-  const accepted = s => { if (s.kind === 'curriculum') go('#/map/' + encodeURIComponent(s.curriculum)); else open(s.id); };
-  function drawShareBar(list) {
-    const bar = S.share, items = list.filter(x => !later.has(x.id) && x.kind !== 'notice'); bar.replaceChildren();   // 🔔 news only waits in the bell
-    bar.classList.toggle('on', !!items.length); if (!items.length) return;
-    const sh = items[0], more = items.length > 1 ? h('span', { class: 'tiny' }, '  ' + L('moreInBell', { n: items.length - 1 })) : null;
-    const laterBtn = h('button', { class: 'btn small ghost', title: L('decideLater'), onclick: () => { later.add(sh.id); drawShareBar(N().notes.pending); } }, L('later'));
-    if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {
-      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await N().notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? L('upToDate', { title: sh.title }) : L('keepYours', { title: sh.title })); else b.disabled = false; } catch (er) { toast(er.message, 5000); b.disabled = false; } };
-      bar.append(h('span', { class: 'grow' }, ...N().updateText(sh), more), h('button', { class: 'btn small primary', onclick: act(true) }, N().updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? L('keepCopy') : L('keepMine')), laterBtn);
-      return;
-    }
-    const cur = sh.kind === 'curriculum';
-    const tB = h('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(acc(), [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: cur ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
-    bar.append(h('span', { class: 'grow' }, svg(cur ? 'people' : 'bell'), ' ', ...rich(cur ? 'invitesYou' : 'wantsShare', { who: sh.from_name || sh.from_email || L('someone'), title: tB }), more, mtT ? ' ' : null, mtT),
-      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await N().notes.accept(sh); toast(L(cur ? 'joinedToast' : 'addedToast', { title: s.title })); APP.dropSubjects(); if (confirm(L('openNow', { title: s.title }))) accepted(s); } catch (er) { toast(er.message, 5000); e.target.disabled = false; } } }, cur ? L('join') : L('accept')),
-      h('button', { class: 'btn small', onclick: async () => { await N().notes.reject(sh).catch(er => toast(er.message)); } }, L('reject')), laterBtn);
-  }
+  /* ---------- the page others see: mine (#/profile) and somebody's (#/u/<id>): src/features/social/ui/profile.ts. docs/PROFILE.md ---------- */
+  PAGES.profile = () => communityPage('me', L('me'));
+  PAGES.u = () => communityPage(null, L('me'));
 
-
-  S.whenMounted(() => N().notes?.on(list => drawShareBar(list)));
+  /* ---------- 🔔 the banner under the top bar (src/features/sharing/ui/bar.ts): drawn once a share or an update waits ---------- */
+  S.whenMounted(() => N().notes?.on(list => { if (list.some(x => x.kind !== 'notice')) CMY()?.notes.bar(S.share).catch(caught('community.sharebar')); }));
   for (const [k, f] of Object.entries(PAGES)) S.registerPage(k, f);
   }
 })();

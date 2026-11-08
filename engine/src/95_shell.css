@@ -273,23 +273,6 @@ button.ns-item:hover{background:color-mix(in srgb,var(--acc-soft) 50%,var(--pape
 .ns-sch .ns-svg{color:var(--t2i)}
 .ns-avatar{object-fit:cover;flex:none;width:36px;height:36px;border-radius:50%}
 img.ns-avatar.big,.ns-avatar.big{width:72px;height:72px;font-size:2rem}
-.ns-pfhead{align-items:flex-start}
-.ns-pfbiotext{margin:.3em 0 0;color:var(--ink2);white-space:pre-line;overflow-wrap:anywhere}
-.ns-pfstate{display:flex;align-items:center;gap:4px;color:var(--ink3)}
-.ns-pfstate svg.i,.ns-pfedit .btn svg.i{width:16px;height:16px}
-.ns-pfedit .btn{gap:7px}
-.ns-pffoot{display:flex;flex-direction:column;gap:8px}
-.ns-pffoot p{margin:0}
-.ns-pfstats{display:flex;flex-wrap:wrap;gap:6px}
-.ns-pfpart{display:flex;flex-direction:column;gap:8px}
-.ns-pfshares{display:flex;flex-direction:column;gap:6px}
-.ns-pfedit{display:flex;flex-direction:column;gap:10px}
-.ns-pfedit .row.nowrap{align-items:center;gap:14px}
-.ns-pfbio{width:100%;resize:vertical;min-height:90px}
-.ns-pfsws .ns-pfsw{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer}
-.ns-pfsws .ns-pfsw+.ns-pfsw{border-top:1px solid var(--line)}
-.ns-pfsw .grow{display:flex;flex-direction:column}
-.ns-pfsw small{color:var(--ink3);font-size:.82rem}
 .ns-who{align-self:center;opacity:.55}
 .ns-who:hover,.ns-who:focus-visible{opacity:1}
 

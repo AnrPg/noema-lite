@@ -5,7 +5,7 @@
  * the host's (NotesHost over the older Notes: engine/app/community.js); the shared title can be read in the interface
  * language on request (🌐).
  */
-import { html, nothing, type TemplateResult } from 'lit';
+import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { CommunityElement, type ScreenBase } from '../../community/ui/screen.ts';
 import type { NoteItem } from '../../community/ui/host.ts';
 import { adopt, COMMON } from '../../community/ui/styles.ts';
@@ -60,6 +60,14 @@ export class NoemaShareRow extends CommunityElement {
   override connectedCallback(): void {
     super.connectedCallback();
     adopt(this.ownerDocument, 'notes', COMMON, NOTES_CSS);
+  }
+  /** another item in the same row (the banner shows the next one): its own title */
+  protected override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
+    if (changed.has('item')) {
+      this.#title = null;
+      this.#mt = null;
+    }
   }
   /** the title in bold, translatable on request (the personal message is never sent) */
   #titleEl(): HTMLElement {

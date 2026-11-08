@@ -72,7 +72,7 @@ async function signUp(browser, email, name) {
   ok(await B.p.$eval('#bellbtn .bellbadge', b => b.textContent) === '2', '🔔 shows 2');
   ok(await B.p.$eval('.sharebar', b => b.classList.contains('on') && /Anna/.test(b.innerText)), 'the top banner shows the newest request');
   await B.p.screenshot({ path: SHOTS + '/x2_banner.png' });
-  await B.p.click('.sharebar button:has-text("Accept")'); await wait(1200);
+  await B.p.click('.sharebar .nx-accept'); await wait(1200);
   ok(srv.state.shares.find(s => s.subject_id === 'heart-test').status === 'accepted', 'Accept → share accepted'); await wait(3500);
   const bob = Object.values(srv.state.users).find(u => u.email === 'bob@example.com').id;
   ok(!!srv.state.kv[bob]?.['a:packmeta:heart-test'] && Object.keys(srv.state.files).some(k => k === `${bob}/packs/heart-test.json`), 'the pack is copied into Bob’s own account (synced to all his devices)');
@@ -140,13 +140,13 @@ async function signUp(browser, email, name) {
   ok(srv.state.pubPacks.find(r => r.subject_id === 'heart-test')?.meta?.version === 'heart-test-v2', 'Anna publishes a new version of “Heart test”');
   let up = await Cc.p.evaluate(() => Noema.notes.refresh().then(l => l.filter(x => x.kind === 'subjupdate').map(x => x.subject)));
   ok(up.join() === 'heart-test' && /published a new version of/.test(await Cc.p.locator('.sharebar').innerText()), '🔔 Carl is told (bell + banner): Update or Keep mine');
-  await Cc.p.click('.sharebar button:has-text("Keep mine")'); await wait(500);
+  await Cc.p.click('.sharebar .nx-keep'); await wait(500);
   up = await Cc.p.evaluate(() => Noema.notes.refresh().then(l => l.filter(x => x.kind === 'subjupdate').length));
   ok(up === 0 && await Cc.p.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)).version) === 'heart-test-v1', '“Keep mine”: he keeps v1 and is not asked again about v2');
   await republish('heart-test-v3'); await wait(700);
   await A.p.check('.nx-warn input').catch(() => { }); await A.p.click('.nx-share .nx-republish'); await wait(900);
   await Cc.p.evaluate(() => Noema.notes.refresh()); await wait(300);
-  await Cc.p.click('.sharebar button:has-text("Update")'); await wait(2000);
+  await Cc.p.click('.sharebar .nx-take'); await wait(2000);
   const cm = await Cc.p.evaluate(async () => ({ meta: JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:packmeta:heart-test`)), pack: (await Noema.loadSubject(ACCOUNT.id, 'heart-test')).version }));
   ok(cm.meta.version === 'heart-test-v3' && cm.pack === 'heart-test-v3' && cm.meta.publicFrom === anna && !(await Cc.p.evaluate(() => Noema.notes.pending.some(x => x.kind === 'subjupdate'))), '⬆️ Update: he has v3 — the same subject (his progress stays), still from Anna');
   await A.p.click('.nx-share .ctl.x').catch(() => { });

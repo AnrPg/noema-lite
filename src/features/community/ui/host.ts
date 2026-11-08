@@ -161,8 +161,8 @@ export interface CommunityHost {
   fromSources(files: readonly File[]): void;
   /** the number of pages of a PDF (null: not known) */
   pdfPages(file: File): Promise<number | null>;
-  /** someone's public page (#/u/<id>): published or not (null: unknown) */
-  publicPage(userId: string): Promise<{ readonly published?: boolean } | null>;
+  /** someone's public page (#/u/<id>), as they published it (null: there is none; it throws when the cloud cannot be reached) */
+  publicPage(userId: string): Promise<PublicProfile | null>;
 
   /* ---------- the search ---------- */
   searchSources(): Promise<readonly HostSearchSource[]>;
@@ -196,6 +196,65 @@ export interface CommunityHost {
   report: ReportContext;
 }
 
+/** What accepting a share gave: a subject (its id) or a Roadmap joined (kind 'curriculum', its id in curriculum). */
+export interface AcceptedShare {
+  readonly kind?: string;
+  readonly curriculum?: string;
+  readonly id?: string;
+  readonly title?: string;
+}
+
+/** The parts of the page others see (docs/PROFILE.md), each off until the learner switches it on. */
+export type ProfilePart = 'progress' | 'achievements' | 'languages' | 'topics' | 'shares';
+export const PROFILE_PARTS: readonly ProfilePart[] = ['progress', 'achievements', 'languages', 'topics', 'shares'];
+/** My page as kept on this device (and in the cloud once published). */
+export interface MyPage {
+  readonly bio: string;
+  /** a small square JPEG (data: URL), or none */
+  readonly avatar: string | null;
+  readonly show: Readonly<Partial<Record<ProfilePart, boolean>>>;
+  readonly published: boolean;
+}
+/** What the page shows of someone now: only the parts switched on travel. */
+export interface ProfileCard {
+  readonly progress?: { readonly level: number; readonly xp: number; readonly streak: number; readonly chapters: number };
+  /** the ids of the treasures found (src/features/shell/domain/progress.ts) */
+  readonly achievements?: readonly string[];
+  readonly languages?: readonly {
+    readonly id?: string;
+    readonly title: string;
+    readonly languages?: readonly string[];
+    readonly words?: number;
+  }[];
+  readonly topics?: readonly {
+    readonly kind: 'roadmap' | 'subject';
+    readonly title: string;
+    readonly emoji?: string | null;
+    readonly pct: number;
+  }[];
+}
+/** Someone's page as the cloud keeps it (mine too, once saved). */
+export interface PublicProfile {
+  readonly display_name?: string;
+  readonly emoji?: string;
+  readonly bio?: string;
+  readonly avatar?: string | null;
+  readonly show?: Readonly<Partial<Record<ProfilePart, boolean>>>;
+  readonly card?: ProfileCard;
+  readonly published?: boolean;
+  readonly updated_at?: string;
+}
+export interface ProfileHost {
+  /** my id in the cloud (null: a local profile, or not signed in) — only a cloud account can publish */
+  me(): string | null;
+  /** my page: this device's copy, or the cloud's when another device wrote it */
+  load(): Promise<MyPage>;
+  /** keeps it here, and in the cloud with the card of what it shows */
+  save(p: MyPage): Promise<void>;
+  /** what the parts switched on show of me now */
+  card(show: MyPage['show']): Promise<ProfileCard>;
+}
+
 /** 🔔 One thing the bell lists of sharing: a share or an invitation (no kind / 'curriculum'), an update, a piece of news. */
 export interface NoteItem {
   readonly id: string;
@@ -215,6 +274,12 @@ export interface NoteItem {
   readonly [more: string]: unknown;
 }
 export interface NotesHost {
+  /** what waits now (shares, invitations, updates, news) */
+  pending(): readonly NoteItem[];
+  /** told the list at once and whenever it changes; → stops */
+  on(f: (list: readonly NoteItem[]) => void): () => void;
+  /** what a share accepted gave: the subject (or the Roadmap joined) opened */
+  open(s: AcceptedShare): void;
   accept(item: NoteItem): Promise<unknown>;
   reject(item: NoteItem): Promise<void>;
   update(item: NoteItem, take: boolean): Promise<void>;

@@ -12,6 +12,7 @@ import type {
   HostSearchSource,
   HostSession,
   HostSubject,
+  NoteItem,
   PublicItem,
   ReportContext,
   ShareHost,
@@ -262,10 +263,7 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
         return null; // a PDF the reader cannot open: its pages stay unknown
       }
     },
-    publicPage: async userId => {
-      const r = await call<Promise<{ published?: boolean } | null>>(g('NoemaProfile'), 'get', userId);
-      return r ?? null;
-    },
+    publicPage: async userId => obj(await call<Promise<unknown>>(g('NoemaCloud'), 'publicPage', userId)),
 
     /* ---------- the search ---------- */
     searchSources,
@@ -315,7 +313,38 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
     },
     share: parts.share,
     notes: {
-      accept: item => need<Promise<unknown>>(obj(N()?.['notes']), 'accept', item),
+      pending: () => {
+        const l = obj(N()?.['notes'])?.['pending'];
+        return Array.isArray(l) ? (l as NoteItem[]) : [];
+      },
+      on: f => {
+        const notes = obj(N()?.['notes']),
+          list = notes?.['listeners'];
+        if (!notes || !Array.isArray(list)) return () => undefined;
+        const g2 = (l: readonly NoteItem[]): void => {
+          f(l);
+        };
+        call(notes, 'on', g2);
+        return () => {
+          const i = list.indexOf(g2);
+          if (i >= 0) list.splice(i, 1);
+        };
+      },
+      open: s => {
+        const framed = S()?.['mounted'] === true; // the classic screens open them their own way
+        if (s.kind === 'curriculum') {
+          if (framed) host.go('#/map/' + encodeURIComponent(s.curriculum ?? ''));
+          else call(N(), 'curriculumMap', s.curriculum);
+        } else if (s.id) {
+          if (framed) host.openSubject(s.id);
+          else call(N(), 'switchTo', acc(), s.id);
+        }
+      },
+      accept: async item => {
+        const r = await need<Promise<unknown>>(obj(N()?.['notes']), 'accept', item);
+        call(obj(N()?.['app']), 'dropSubjects'); // the shelf counts it at once
+        return r;
+      },
       reject: async item => {
         await need<Promise<unknown>>(obj(N()?.['notes']), 'reject', item);
       },

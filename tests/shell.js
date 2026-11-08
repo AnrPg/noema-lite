@@ -342,7 +342,7 @@ const pick = async (page, btn, label) => { await page.click(btn); await page.wai
   ok(!(await page.$('.ns-pfpart')), 'nothing of you is shown until you switch it on');
   await page.click('[data-act="edit"]'); await until(() => page.$('.ns-pfsheet textarea'), 4000);
   await page.fill('.ns-pfsheet textarea', 'I study physics\nand Greek.');
-  await page.click('.ns-pfsheet .ns-pfsw:has(input[data-part="progress"])'); await page.click('.ns-pfsheet .ns-pfsw:has(input[data-part="topics"])');
+  await page.click('.ns-pfsheet noema-switch[data-part="progress"] button'); await page.click('.ns-pfsheet noema-switch[data-part="topics"] button');
   await page.setInputFiles('.ns-pfsheet input[type="file"]', { name: 'me.png', mimeType: 'image/png', buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEklEQVR4nGP4z8CAB+GTG8HSALfKY52fTcuYAAAAAElFTkSuQmCC', 'base64') });
   await until(() => page.$('.ns-pfsheet img.ns-avatar'), 4000);
   await page.click('.ns-pfsheet [data-act="save"]'); await wait(600);

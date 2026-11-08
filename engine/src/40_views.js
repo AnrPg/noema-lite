@@ -80,28 +80,10 @@ function openNotes() {
     box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 ' + t('top.notifications')), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
   });
 }
+/** 🔔 the banner under the top bar (src/features/sharing/ui/bar.ts, NoemaCore.community): drawn once a share or an update waits */
 function shareBanner() {
   const bar = h('div', { class: 'sharebar', role: 'status' });
-  let later = new Set();
-  const draw = list => {
-    const items = list.filter(x => !later.has(x.id) && x.kind !== 'notice'); bar.innerHTML = '';   // 🔔 news only waits in the bell
-    bar.classList.toggle('on', !!items.length); if (!items.length) return;
-    const sh = items[0];
-    if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {   // 🔔 an update that waits for me: take it or keep mine
-      const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? '✅ ' + tE('engine.share.upToDate', { title: sh.title }) : '👍 ' + tE('engine.share.keepYours', { title: sh.title })); else b.disabled = false; } catch (er) { toast('⚠️ ' + errText(er), 5000); b.disabled = false; } };   // 🔎 Review only opens the review: “Not now” there keeps the update waiting
-      bar.append(h('span', { class: 'grow' }, ...Noema.updateText(sh), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : ''),
-        h('button', { class: 'btn small primary', onclick: act(true) }, Noema.updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? tE('engine.share.keepMyCopy') : tE('engine.share.keepMine')),
-        h('button', { class: 'btn small ghost', title: tE('engine.share.laterTip'), onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, tE('engine.share.later')));
-      return;
-    }
-    const cur = sh.kind === 'curriculum';   // 👥 an invitation to a shared curriculum
-    const tB = h('b', {}, sh.title), mtT = window.NoemaMT ? NoemaMT.toggle(ACCOUNT.id, [NoemaMT.mark(tB, { language: sh.language || sh.meta?.language, kind: cur ? 'shared.roadmap' : 'shared.pack' })]) : null;   // 🌐 its title on request (the personal message is never sent)
-    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', ...tNodes(cur ? 'engine.share.invite' : 'engine.share.offer', null, { name: h('b', {}, sh.from_name || sh.from_email || tE('engine.share.someone')), title: tB }), items.length > 1 ? h('span', { class: 'tiny' }, '  ' + tE('engine.share.more', { n: items.length - 1 })) : '', mtT ? ' ' : '', mtT || ''),
-      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? '👥 ' + tE('engine.share.joined', { title: s.title }) : '✅ ' + tE('engine.share.added', { title: s.title })); confirmBox(tE('engine.share.openNow', { title: s.title }), () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + errText(er), 5000); e.target.disabled = false; } } }, '✓ ' + (cur ? tE('engine.share.join') : tE('engine.share.accept'))),
-      h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + errText(er))); } }, '✕ ' + tE('engine.share.reject')),
-      h('button', { class: 'btn small ghost', title: tE('engine.share.laterTip'), onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, tE('engine.share.later')));
-  };
-  Noema.notes.on(draw);
+  Noema.notes.on(list => { if (list.some(x => x.kind !== 'notice')) window.NoemaCore?.community?.notes.bar(bar).catch(e => console.error('[sharebar]', e)); });
   return bar;
 }
 

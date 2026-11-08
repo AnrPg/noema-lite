@@ -83,6 +83,25 @@ export const NOTES_CSS = css`
   .nx-noticeclear {
     justify-content: flex-end;
   }
+  noema-share-bar {
+    display: contents;
+  }
+  .nx-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    width: 100%;
+    max-width: none;
+  }
+  .nx-bar .nx-barrow {
+    flex: 1 1 260px;
+    min-width: 0;
+  }
+  .nx-bar .nx-req {
+    padding: 0;
+    border: 0;
+  }
 `;
 
 export const EXPLORE_CSS = css`

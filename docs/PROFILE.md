@@ -29,7 +29,13 @@ My subjects — Switch account · Log out. **Me** is the learner's own page, as 
 * Discover › What others share / Roadmaps others share: a quiet person button next to each row opens its owner's page.
 * `#/u/<id>` of an unpublished or unknown page says it is private or does not exist; your own id opens `#/profile`.
 
+## The code
+`src/features/social/ui/profile.ts` (Lit on the kit: `#/profile`, `#/u/<id>`, the ✏️ sheet; routes in
+`src/composition/community-ui.ts`, loaded as build/community.js); its data: `src/composition/profile-host.ts` (this
+device's copy, `engine/cloud.js` myPage / saveMyPage / publicPage, the card counted like the Progress page; the
+treasures: `src/features/shell/domain/progress.ts`).
+
 ## Words
-Every label is in engine/i18n_shell.js (`pf*`, `subj*`, `menuMeSub`, `settings*`, `logOut*`, `b*` keys) in en, el, ru, fr.
+Every label is in the frame's catalog, i18n/shell (`sh.pf*`, `subj*`, `menuMeSub`, `settings*`, `logOut*`, `b*` keys).
 Tests: tests/shell.js (J: the menu, My subjects, the page on a local profile, Log out), tests/sharing.js (publishing
 between two cloud accounts against the emulator), tests/sql_policies.py (the row-level security of §11).

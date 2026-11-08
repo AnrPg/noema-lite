@@ -160,6 +160,10 @@ export function communityBridge(r: Resolver): unknown {
       clear: async (el: HTMLElement) => {
         (await ui()).noticesClear(el);
       },
+      /** the banner under the top bar, drawn into the frame's .sharebar (shown while a share or an update waits) */
+      bar: async (el: HTMLElement) => {
+        (await ui()).shareBar(el);
+      },
     }),
     /** 🧭 Explore in a dialog (kind 'subjects' or '': Roadmaps), where no frame draws the page (the classic screens) */
     explore: async (kind: string) => {
@@ -209,10 +213,6 @@ export function communityBridge(r: Resolver): unknown {
       refresh: () => A().social.refresh(),
       /** the server's refusals in the learner's words */
       why: (e: unknown) => A().social.why(e),
-      /** the buttons of someone's page (#/u/<id>): message them, ask them to be buddies */
-      personActions: async (el: HTMLElement, userId: string) => {
-        (await ui()).personActions(el, userId);
-      },
     }),
     search: Object.freeze({
       quick: async (here: Here | null) => {

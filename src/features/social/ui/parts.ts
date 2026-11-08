@@ -129,12 +129,15 @@ export function openPerson(deps: SocialScreenDeps, x: string, changed: () => voi
     svc = ui.svc,
     T = (k: string, p?: P): string => ui.T(k, p);
   let page = false;
-  void deps.host.publicPage(x).then(r => {
-    if (r?.published) {
-      page = true;
-      d.redraw();
-    }
-  });
+  void deps.host
+    .publicPage(x)
+    .then(r => {
+      if (r?.published) {
+        page = true;
+        d.redraw();
+      }
+    })
+    .catch(() => undefined); // the cloud cannot be reached: the sheet goes without the link to their page
   const done = async (): Promise<void> => {
     await ui.refresh();
     d.close();

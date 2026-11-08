@@ -8,12 +8,15 @@
  *   #/engines[/new]                 ⚙ engines of activities, requests     (src/features/reports/ui), inside the engine
  *   #/vault?…                       🗄️ the vault: files students share     (src/features/vault/ui)
  *   #/people · #/chat/<room> · #/group/<room> · #/join/<code>   👥 people     (src/features/social/ui)
- *   (no address)                    🔎 the quick sheet · ⚑ the report dialog
+ *   #/profile · #/u/<id>            the page others see: mine, somebody's  (src/features/social/ui/profile.ts)
+ *   #/explore[/subjects]            🧭 Explore: Roadmaps, shared subjects  (src/features/sharing/ui)
+ *   (no address)                    🔎 the quick sheet · ⚑ the report dialog · 🔗 the share dialog · 🔔 the bell's rows, the banner
  */
 import { EXPLORE_DONE, NoemaExplorePage } from '../features/sharing/ui/explore.ts';
 import { NoemaSharePanel, openShare } from '../features/sharing/ui/share.ts';
 import type { HostSubject, NoteItem } from '../features/community/ui/host.ts';
 import { NoemaNoticesClear, NoemaShareRow } from '../features/sharing/ui/notes.ts';
+import { NoemaShareBar } from '../features/sharing/ui/bar.ts';
 import type { ScreenChrome } from '../features/community/ui/host.ts';
 import { CHROME_EVENT, type CommunityScreen } from '../features/community/ui/screen.ts';
 import type { Here } from '../features/search/domain/params.ts';
@@ -31,12 +34,14 @@ import type { SendItem } from '../features/vault/ui/model.ts';
 import { NoemaChatPage } from '../features/social/ui/chat.ts';
 import { NoemaGroupPage, NoemaJoinPage, NoemaPersonActions } from '../features/social/ui/group.ts';
 import { NoemaPeoplePage } from '../features/social/ui/home.ts';
+import { NoemaPersonProfile, NoemaProfilePage, type ProfileScreenDeps } from '../features/social/ui/profile.ts';
 import { openSendTo, type SocialScreenDeps } from '../features/social/ui/parts.ts';
 import { provideServices, requestServices } from '../ui/core/services.ts';
 import { defineUi } from '../ui/index.ts';
 import { defineRoutes, type RouteMatch } from '../ui/router/routes.ts';
 import type { CommunityApp } from './community-app.ts';
 import { ENGINE_REQUESTS } from './community.ts';
+import { oldAppProfile } from './profile-host.ts';
 import { CLOCK, ENGINES } from './tokens.ts';
 
 export const COMMUNITY_ROUTES = defineRoutes({
@@ -49,6 +54,8 @@ export const COMMUNITY_ROUTES = defineRoutes({
   group: '/group/:room',
   join: '/join/:code',
   explore: '/explore/:kind?',
+  profile: '/profile',
+  person: '/u/:id',
 });
 type R = typeof COMMUNITY_ROUTES.table;
 type Match = RouteMatch<R>;
@@ -71,6 +78,9 @@ export const COMMUNITY_ELEMENTS = {
   'noema-share-panel': NoemaSharePanel,
   'noema-share-row': NoemaShareRow,
   'noema-notices-clear': NoemaNoticesClear,
+  'noema-share-bar': NoemaShareBar,
+  'noema-profile-page': NoemaProfilePage,
+  'noema-person-profile': NoemaPersonProfile,
 } as const;
 
 export interface CommunityScreens {
@@ -88,8 +98,8 @@ export interface CommunityScreens {
   explore(kind: string): void;
   /** 🔗 the share dialog of one of the learner's subjects */
   share(s: HostSubject): void;
-  /** the buttons of someone's page (#/u/<id>) drawn into el */
-  personActions(el: HTMLElement, userId: string): void;
+  /** 🔔 the banner under the top bar drawn into the frame's .sharebar (its class "on" while something waits) */
+  shareBar(el: HTMLElement): void;
 }
 
 /** what the place that mounts a screen adds (the engine's #/engines: the engines it runs, the open subject, its home) */
@@ -115,6 +125,7 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
   const searchDeps: SearchScreenDeps = { ...app.search.d, ui: app.search };
   const vaultDeps: VaultScreenDeps = { host: app.host, notify: app.notify, ui: app.vault };
   const socialDeps: SocialScreenDeps = { host: app.host, notify: app.notify, ui: app.social, vault: app.vault };
+  const profileDeps: ProfileScreenDeps = { ...socialDeps, profile: oldAppProfile(win as unknown as Readonly<Record<string, unknown>>) };
 
   /** the element of a matched address, with its deps */
   const screenOf = (m: Match, ctx: MountContext): CommunityScreen | null => {
@@ -172,6 +183,17 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
         const el = doc.createElement('noema-join-page');
         el.deps = socialDeps;
         el.code = m.params.code;
+        return el;
+      }
+      case 'profile': {
+        const el = doc.createElement('noema-profile-page');
+        el.deps = profileDeps;
+        return el;
+      }
+      case 'person': {
+        const el = doc.createElement('noema-person-profile');
+        el.deps = profileDeps;
+        el.person = m.params.id;
         return el;
       }
       case 'explore': {
@@ -236,11 +258,14 @@ export function communityScreens(app: CommunityApp, win: Window): CommunityScree
     share: s => {
       void openShare({ host: app.host, notify: app.notify, i18n: app.i18n }, s);
     },
-    personActions: (el, userId) => {
-      const a = win.document.createElement('noema-person-actions');
-      a.deps = socialDeps;
-      a.person = userId;
-      el.replaceChildren(a);
+    shareBar: el => {
+      if (el.querySelector('noema-share-bar')) return;
+      const b = win.document.createElement('noema-share-bar');
+      b.deps = { host: app.host, notify: app.notify };
+      b.onShown = on => {
+        el.classList.toggle('on', on);
+      };
+      el.replaceChildren(b);
     },
   };
   return made;
