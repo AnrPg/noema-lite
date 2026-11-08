@@ -1,91 +1,12 @@
 /**
- * Practice: a mixed round, the boss battle, the lightning round, one exercise (#/ex/<id>), and
- * the page of a Roadmap step still locked.
+ * Practice: the boss battle, the lightning round, one exercise (#/ex/<id>).
  */
 import type { Exercise } from '../../domain/pack.ts';
 import { HOME, type StudyApp } from '../app.ts';
 import { h, replay, shuffle } from '../dom.ts';
 import { askButton, setAccent } from '../parts.ts';
 import { fmt } from '../text.ts';
-import { lockNote, view } from '../view.ts';
-import { myLevelChip } from './chapter.ts';
-
-export function lockedView(app: StudyApp): void {
-  app.host.frame.chrome({ sub: true, crumbs: [[app.L('exercisesWord')]], back: HOME, corner: true });
-  view(
-    app,
-    lockNote(app),
-    h(
-      'div',
-      { class: 'row' },
-      h(
-        'button',
-        {
-          class: 'btn primary',
-          type: 'button',
-          onclick: () => {
-            app.go(HOME);
-          },
-        },
-        `📖 ${app.L('backToTheory')}`,
-      ),
-    ),
-  );
-}
-
-/** #/practice/all: a mixed round over what was read, over everything, debugging only, exam only */
-export function mixedView(app: StudyApp): void {
-  setAccent(document.body, null);
-  app.host.frame.chrome({ sub: true, crumbs: [[app.t('home.mixed')]], back: HOME });
-  const all = app.course.exercises;
-  const pool = all.filter(e => app.state.read[e.section]);
-  const back = '#/practice/all';
-  const run = (list: readonly Exercise[], title: string) => () => {
-    app.startRound(list, { title, count: 12, back });
-  };
-  const counts = h('div', { class: 'row', style: { marginTop: '14px' } });
-  const draw = (): void => {
-    const n = (l: readonly Exercise[]): number => (app.onlyMyLevel ? app.atMyLevel(l).length || l.length : l.length);
-    counts.replaceChildren(
-      h(
-        'button',
-        { class: 'btn primary', type: 'button', disabled: !pool.length, onclick: run(pool, `🎲 ${app.t('engine.mixed.readTitle')}`) },
-        `▶ ${app.t('engine.mixed.fromRead', { n: n(pool) })}`,
-      ),
-      h(
-        'button',
-        { class: 'btn', type: 'button', onclick: run(all, `🎲 ${app.t('engine.mixed.allTitle')}`) },
-        `▶ ${app.t('engine.mixed.fromAll', { n: n(all) })}`,
-      ),
-      h(
-        'button',
-        {
-          class: 'btn',
-          type: 'button',
-          onclick: run(
-            all.filter(e => e.tags.includes('debug')),
-            `🔧 ${app.t('engine.mixed.debugOnly')}`,
-          ),
-        },
-        `🔧 ${app.t('engine.mixed.debugOnly')}`,
-      ),
-      h(
-        'button',
-        {
-          class: 'btn',
-          type: 'button',
-          onclick: run(
-            all.filter(e => e.tags.includes('exam')),
-            `🎓 ${app.t('engine.mixed.examOnly')}`,
-          ),
-        },
-        `🎓 ${app.t('engine.mixed.examOnly')}`,
-      ),
-    );
-  };
-  draw();
-  view(app, h('h1', {}, app.t('view.mixed')), h('p', { class: 'muted' }, app.t('engine.mixed.intro')), myLevelChip(app, draw), counts);
-}
+import { view } from '../view.ts';
 
 /** #/boss/<chapter>: 15 exercises, mostly hard ones, three lives */
 export function bossView(app: StudyApp, id: string): void {
