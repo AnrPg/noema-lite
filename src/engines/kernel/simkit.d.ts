@@ -1,5 +1,6 @@
 /* The typed boundary of the simulation kernel (the code: ./simkit.js). The types are those of kernel/simkit.ts as its strict
    TypeScript port names them, for the parts the engines typed before that port lands use (the port replaces this file). */
+import type { CoreStepper } from './core.js';
 /** a vector of numbers: an array or a typed array */
 export type Nums = ArrayLike<number>;
 /** a seeded stream of uniforms in (0, 1) with its variates (stream()) */
@@ -28,6 +29,39 @@ export interface Stream {
   shuffle<T>(a: T[]): T[];
   pick<T>(a: readonly T[]): T | undefined;
 }
+/** a code as codes() records it: the first occurrence of each, with its time */
+export interface CodeRec {
+  readonly code: string;
+  readonly level: 'error' | 'warning';
+  readonly t?: number;
+  readonly info?: unknown;
+}
+/** codes(fatalList): the codes of a run (a code in fatalList, or given as fatal, is an error) */
+export interface Codes {
+  readonly list: CodeRec[];
+  code(c: string, t?: number | null, info?: unknown, fatal?: boolean): void;
+  has(c: string): boolean;
+  fatal(): boolean;
+}
+/** an entry of the event calendar */
+export interface CalEntry {
+  readonly t: number;
+  readonly prio: number;
+  readonly seq: number;
+  readonly id: number;
+  readonly kind: unknown;
+  readonly data: unknown;
+}
+/** the event calendar: a heap ordered by (time, priority, insertion order), lazy cancellation */
+export interface Calendar {
+  schedule(t: number, kind: unknown, data?: unknown, prio?: number): number;
+  cancel(id: number): boolean;
+  peek(): number;
+  peekEntry(): CalEntry | null;
+  pop(): CalEntry | null;
+  readonly size: number;
+  clear(): void;
+}
 
 declare const api: {
   readonly [name: string]: unknown;
@@ -42,5 +76,8 @@ declare const api: {
   ) => Stream;
   readonly chi2Sf: (x: number, k: number) => number;
   readonly normInv: (p: number) => number;
+  readonly codes: (fatalList?: readonly string[] | null) => Codes;
+  readonly calendar: () => Calendar;
+  readonly stepper: <S, P = unknown>(def: CoreStepper<S, P> & { readonly id?: unknown }) => CoreStepper<S, P>;
 };
 export default api;
