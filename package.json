@@ -14,7 +14,7 @@
     "pretypecheck": "npm run contracts --silent",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prelint": "npm run contracts --silent",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
     "contracts": "node tools/contracts.mjs",

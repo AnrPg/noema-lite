@@ -1025,7 +1025,7 @@ const CATALOG = Object.freeze([
     'py-module@1',
     'free',
     false,
-    'engine/src/37_activity_py.js',
+    'src/runtimes/py-module/runtime.ts',
     'python',
     [
       'python',
@@ -1144,7 +1144,7 @@ const CATALOG = Object.freeze([
     'wasm@1',
     'plugin',
     false,
-    'engine/src/44_activity_wasm.js',
+    'src/runtimes/wasm-module/runtime.ts',
     'wasm',
     ['webassembly', 'wasm', 'compiled', 'c', 'rust', 'fast simulation'],
     { runtime: 'wasm-module@1' },

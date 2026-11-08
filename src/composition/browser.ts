@@ -28,6 +28,7 @@ import { createSupabase } from '../adapters/supabase/index.ts';
 import { lazyContracts, type LazyContracts } from '../contracts/lazy.ts';
 import { provideContracts } from '../contracts/page.ts';
 import { createLazyEngines, type EnginesPiece } from '../engines/lazy.ts';
+import { createRuntimeLibrary, lazyRuntimePlugins, type RuntimesPiece } from '../runtimes/library.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
@@ -46,6 +47,7 @@ import {
   COMPUTE,
   CONFIG,
   ENGINES,
+  RUNTIMES,
   ERRORS,
   I18N,
   JOBS,
@@ -76,6 +78,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: r => r.get(CONTRACTS) },
   // the engine library: the activity core (engine/src/32_activities.js), the content checks, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the activity runtimes (src/runtimes): ACT.runtime(id) loads one (build/runtimes.js), the content checks read their checks
+  { name: 'runtimes', build: r => r.get(RUNTIMES) },
   // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
   learningBridge,
   // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
@@ -212,6 +216,10 @@ export function pieceLoader<T>(page: PageLike, script: string | undefined, name:
 export const enginesLoader = (page: PageLike, script: string | undefined): (() => Promise<EnginesPiece>) =>
   pieceLoader<EnginesPiece>(page, script, 'engines', '__noemaEnginesPiece');
 
+/** Runs build/runtimes.js once and hands over its piece. */
+export const runtimesLoader = (page: PageLike, script: string | undefined): (() => Promise<RuntimesPiece>) =>
+  pieceLoader<RuntimesPiece>(page, script, 'runtimes', '__noemaRuntimesPiece');
+
 /** Runs build/contracts.js once and hands over the compiled contracts and the content checks. */
 export const checksLoader = (page: PageLike, script: string | undefined): (() => Promise<ChecksPiece>) =>
   pieceLoader<ChecksPiece>(page, script, 'contracts', '__noemaContractsPiece');
@@ -235,7 +243,16 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   // the data contracts and the content checks (src/contracts, src/features/content): their code in build/contracts.js, one
   // piece, loaded the first time either is asked to be ready (NoemaCore.contracts.ready() brings both). The learning log's
   // event contract is in build/app.js (src/contracts/page.ts): the log opens without the piece.
-  c.register(CHECKS_PIECE, () => checksLoader(page, script));
+  // the activity runtimes (src/runtimes): manifests at once, the code of all in build/runtimes.js, loaded the first
+  // time an activity needs one (ACT.runtime(id)); their checks come with the content checks (build/contracts.js)
+  let checksPiece: ChecksPiece | null = null;
+  c.register(RUNTIMES, () =>
+    createRuntimeLibrary(lazyRuntimePlugins(runtimesLoader(page, script)), () => checksPiece?.runtimeChecks ?? null),
+  );
+  c.register(CHECKS_PIECE, () => {
+    const load = checksLoader(page, script);
+    return () => load().then(p => (checksPiece = p));
+  });
   c.register(CONTRACTS, r => {
     const load = r.get(CHECKS_PIECE);
     return lazyContracts(() =>
@@ -247,8 +264,13 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   });
   c.register(CONTENT, r => {
     const load = r.get(CHECKS_PIECE);
-    // the runtimes' package checkers (NoemaWasm, NoemaEmbed, NoemaH5P) are read from the page when a check runs
-    return lazyContentChecks(() => load().then(p => p.contentChecks(r.get(ENGINES), () => globalThis)));
+    // the typed runtimes' checks (src/runtimes); those still loaded as scripts (NoemaWasm, NoemaH5P) are read from the page
+    return lazyContentChecks(() =>
+      load().then(p => {
+        const runtimes = p.scopeCheckers(() => globalThis, p.runtimeChecks);
+        return p.contentChecks(r.get(ENGINES), runtimes);
+      }),
+    );
   });
   c.register(TOAST_SURFACE, () => switchableSurface());
   c.register(NOTIFIER, r => browserNotifier(r.get(TOAST_SURFACE)));

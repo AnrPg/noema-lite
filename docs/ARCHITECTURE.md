@@ -155,6 +155,9 @@ NoemaCore.NoemaError                    the error class
 NoemaCore.contracts                     the compiled data contracts (src/contracts)
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
+NoemaCore.runtimes                      the activity runtimes (src/runtimes/library.ts, §6.4): ids(), has(id), manifest(id),
+                                        switchOf(id), isOn(id, flags), load(id) → Promise<module>, loaded(id), checks (null until
+                                        build/contracts.js is in)
 NoemaCore.learning.open(account) → Promise<report>   the learning log (src/composition/learning.ts, its header is the source)
 NoemaCore.learning.record({ type, subject?, item?, data, origin?, id?, day? }) → event | null · recordOnce(drafts) → Promise
 NoemaCore.learning.progress(subject) · progressOf(account, subject) · hasProgress · stats()
@@ -260,6 +263,7 @@ screens: about 240 KB). Two pieces of kind `lazy` stay out of it:
 | piece | entry | what | when it runs |
 |---|---|---|---|
 | `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, the content checks before they check a pack that names an engine, the author |
+| `build/runtimes.js` | `src/composition/runtimes.ts` | the code of every typed activity runtime (§6.4) | the first time an activity needs one (`ACT.runtime(id)`) |
 | `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) and the content checks built on them (`src/features/content`, about 120 KB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`, which brings both), after the first screen on Today, and before the Roadmaps start their jobs; a check before that is a bug and throws (`src/contracts/lazy.ts`, `src/features/content/application/lazy.ts`) |
 
 The learning log checks every event it reads or makes, and it opens before the first screen: its contract
@@ -355,6 +359,28 @@ another screen (opening a subject, editing a step) a screen asks for by an event
 the page that mounts it answers. The dialogs not yet in Lit (a new Roadmap, import, a step's editor, attaching subjects,
 the Roadmap's settings, Roadmaps others share) stay in `engine/curmap.js`.
 
+### 6.4 The activity runtimes
+
+The runtimes that show an item of `pack.activities` are plugins of kind `runtime` in `src/runtimes/<name>/` (strict TypeScript,
+layer `runtimes` of the ESLint boundaries: kernel, contracts, ports, plugins and itself). `manifests.ts` lists each with its
+switch (`on`: unless `config.js` says false; `opt-in`: only when it says true), `plugins.ts` its lazy entry, `checks.ts` the
+pure checks (`RUNTIME_CHECKS`, which the roots hand the content checks through `scopeCheckers`). A runtime module's
+`create(host)` takes a `RuntimeHost` (`types.ts`: the app's words, the protocol's envelope, the account settings, the
+deployment's switches) and returns the `ActivityRuntime` the activity core mounts (`mount(box, ctx) → port`, `waits`,
+`failText(code, act)`), or null when it is off. The core (`engine/src/32_activities.js`) knows every runtime by its manifest
+at once (`ACT.caps()`, `ACT.hasRuntime(id)`), loads its code when an activity starts (`ACT.runtime(id)` → Promise), and
+`ACT.loadedRuntime(id)` is the registered one. A runtime may bring engines of sim-spec@1 (`ActivityRuntime.engines`, named in
+its manifest line so that `ACT.engines()` and `ACT.caps()` know them at start): the core loads the runtime when an activity needs
+one of them and registers them (`wasm-module@1` brings `wasm@1`). The host gives a runtime the open pack's items (`items()`), the
+expression language (`expr()`), the runtimes registered now (`loadedRuntime(id)`), a deployment setting (`config(key)`), the
+app's numbers (`num`) and the sim-spec view (`simView`, which `py-module@1` draws its controls with). Where a runtime can run at all,
+when not everywhere, is its descriptor's `available` rule (`manifests.ts`, `availableHere`; `py-module@1`: only the website), so
+`ACT.enabled(id)` and the fallback's words are known before its code is loaded. The page has the code in the lazy piece
+`build/runtimes.js`; the node suites read `build/runtimes-node.cjs` (`src/runtimes/node.ts`); the activity host
+(`build/harness.js`) holds it inline and makes them for its stub core (`NoemaCore.attachRuntimes(act, host)`). A runtime's styles
+are `src/runtimes/<name>/*.css` (`tools/build.py` adds them to `engine/engine.css`). Moved so far: `external-embed@1`,
+`wasm-module@1` / `wasm@1`, `py-module@1`. Still scripts of `engine/src`: `html-app@1` (34), `sim-spec@1` (35), `h5p@1` (38).
+
 ## 7. Patterns
 
 | Pattern | Where |
@@ -416,6 +442,6 @@ the Roadmap's settings, Roadmaps others share) stay in `engine/curmap.js`.
 |---|---|
 | `npm run typecheck` | `tsc` over `src/` |
 | `npm run test:unit` | `node --test --experimental-strip-types "src/**/*.test.ts"`: kernel, every adapter against its contract, the roots, and `build/app.js` in a bare `vm` |
-| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the pieces `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
+| `npm run build` | esbuild, every entry of `tools/esbuild.mjs` `ENTRIES` within its size budget: `build/app.js`, the pieces `engines.js` and `contracts.js` (§6.1), `ui.js` (the UI root, §6.3), `pwa.js`, `worker.js`, `sw.js`, `harness.js`, `ui-kit.js` (development only), `engines-node.cjs`, `runtimes-node.cjs` (the activity runtimes for the node suites, §6.4), `roadmaps-node.cjs` (the Roadmaps domain for the node suites, `tests/roadmaps_core.js`), and `engine/tokens.css`. Generated, never committed. |
 
 The old suites (`tests/*.js`) load `build/app.js` wherever they load engine scripts that use `NoemaCore`.

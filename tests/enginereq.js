@@ -70,7 +70,7 @@ async function unit() {
     await p.evaluate(() => Noema.switchTo(Noema.account.id, 'demo-physics', '#/engines')); await wait(2500);
     ok(await until(() => p.locator('.eng-head h2').count()), '#/engines opens');
     const ids = await p.$$eval('.eng-row', l => l.map(e => e.dataset.engine));
-    const reg = await p.evaluate(() => NoemaCore.engines.catalog.CATALOG.filter(e => e.runtime ? ACT.runtime(typeof e.runtime === 'string' ? e.runtime : e.id) : ACT.engines().includes(e.id)).map(e => e.id));
+    const reg = await p.evaluate(() => NoemaCore.engines.catalog.CATALOG.filter(e => e.runtime ? ACT.hasRuntime(typeof e.runtime === 'string' ? e.runtime : e.id) : ACT.engines().includes(e.id)).map(e => e.id));
     ok(ids.includes('formula@1') && ids.includes('html-app@1') && ids.includes('circuit-mna@1') && ids.length === reg.length && ids.every(i => reg.includes(i)), `only the engines this app has (${ids.length}): ` + ids.join(', '));
     ok(await p.locator('.eng-row[data-engine="formula@1"] b').innerText() === 'Formulas' && !(await p.$$eval('.eng-row', l => l.some(e => /engine\.engines\./.test(e.innerText)))), 'every engine with its name and one line (no missing words)');
     await p.screenshot({ path: SHOTS + '/engines_page.png', fullPage: true });

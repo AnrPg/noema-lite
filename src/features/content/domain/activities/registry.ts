@@ -361,7 +361,7 @@ export function createActivityChecks(env: CheckEnv) {
             E.push(`${w}: the spec (activities/${aid}/spec.json: the controls, readouts and plots the app draws) is missing`);
           else E.push(...sim.checkSimSpec(a.spec, strings, null, { python: true }).map(m => `${w}: ${m}`));
         } else if (rt === WASM) {
-          if (!env.wasm) E.push(`${w}: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here`);
+          if (!env.wasm) E.push(`${w}: the WebAssembly checker (src/runtimes/wasm-module) is not loaded here`);
           else E.push(...env.wasm.checkItem(a).problems.map(m => `${w}: ${m}`));
           const sp = a.spec;
           if (sp !== undefined && sp !== null) {
@@ -372,7 +372,7 @@ export function createActivityChecks(env: CheckEnv) {
             E.push(...sim.checkSimSpec(ownSpec(a), strings, null, { items: every }).map(m => `${w}: ${m}`));
           }
         } else if (rt === EMBED) {
-          if (!env.embed) E.push(`${w}: the outside-page checker (NoemaEmbed, engine/src/45_activity_embed.js) is not loaded here`);
+          if (!env.embed) E.push(`${w}: the outside-page checker (src/runtimes/external-embed) is not loaded here`);
           else {
             const r = env.embed.check(a);
             E.push(...r.errors.map(m => `${w}: ${m}`));
