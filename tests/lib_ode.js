@@ -251,6 +251,11 @@ for (const [th, want, tol] of [[Math.PI / 2, 1.1803405990160962, 1e-8], [3.0, 2.
     const passed = checks.every(f => !!f(env));
     ok(inRange && (c.expect.passed == null || passed === c.expect.passed), `predator-prey: ${c.name}`);
   }
+  // the readout "the coexistence state is stable": below K = x* = 2/3 equilibrium 1 is the predator-free (K, 0), stable while the predators die out
+  const stableRo = NoemaExpr.compile(ex.readouts.find(r => r.label === 'stableLabel').expr);
+  const ro = K => { const v = { K, Kmin: ex.consts.Kmin }, out = sim.run(v); return { env: { ...v, ...Object.fromEntries(Object.entries(out).filter(([, x]) => typeof x === 'number')) } }; };
+  const lo = ro(0.5), hi = ro(2.2);
+  ok(lo.env.stable === 1 && lo.env.predEnd < 1e-6 && !stableRo(lo.env) && !!stableRo(hi.env), `predator-prey: at K = 0.5 the predators die out (predEnd ${lo.env.predEnd.toExponential(1)}) and the readout does not call it stable coexistence; at K = 2.2 it does`);
   const strings = ['en', 'el', 'ru', 'de', 'fr'].map(l => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', 'predator-prey', `strings.${l}.json`), 'utf8')));
   ok(strings.every(s => JSON.stringify(Object.keys(s).sort()) === JSON.stringify(Object.keys(strings[0]).sort())), 'predator-prey: the five string tables have the same keys');
 }
