@@ -15,6 +15,8 @@ const ELEMENTS = [
   { type: 'ports', pattern: 'src/ports', partialMatch: false },
   { type: 'domain', pattern: 'src/features/*/domain', partialMatch: false, capture: ['feature'] },
   { type: 'application', pattern: 'src/features/*/application', partialMatch: false, capture: ['feature'] },
+  // a feature's screens (phase 3): Lit components on the kit, driven by the feature's domain and application
+  { type: 'feature-ui', pattern: 'src/features/*/ui', partialMatch: false, capture: ['feature'] },
   { type: 'plugins', pattern: 'src/plugins', partialMatch: false },
   { type: 'engines', pattern: 'src/engines', partialMatch: false },
   { type: 'adapters', pattern: 'src/adapters', partialMatch: false },
@@ -39,6 +41,8 @@ const MAY_IMPORT = {
   // the UI (src/ui: the component kit, the router, the frame) is a driving adapter: it reaches the core through the ports
   ui: ['kernel', 'contracts', 'ports', 'ui'],
   'ui-test': ['kernel', 'contracts', 'ports', 'adapters', 'ui'],
+  // a feature's screens: the kit (ui), the feature's domain and use cases, the ports; never an adapter (the root hands them in)
+  'feature-ui': ['kernel', 'contracts', 'ports', 'domain', 'application', 'ui', 'feature-ui'],
   connector: ['kernel', 'contracts', 'ports', 'domain', 'application', 'plugins', 'engines', 'connector'],
   composition: ELEMENTS.map(e => e.type),
 };
