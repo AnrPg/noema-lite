@@ -448,8 +448,11 @@ async function browser() {
     const dark = await p.evaluate(() => { const lum = c => { const m = c.match(/\d+(\.\d+)?/g).map(Number); return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; }; const f = document.querySelector('.aa .sf-in'); return { bg: lum(getComputedStyle(f).backgroundColor), ink: lum(getComputedStyle(f).color) }; });
     ok(dark.bg < 0.35 && dark.ink > 0.6, `dark mode: the fields are dark with light text (${dark.bg.toFixed(2)} / ${dark.ink.toFixed(2)})`);
     // a library engine: graph@1 from its reference activity, the scene in the preview, a checkSpec message at its field, the .zip
-    await p.emulateMedia({ colorScheme: 'light' }); await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
-    await p.evaluate(() => { window.__aa = document.querySelector('main noema-author'); });   // (the page may have been mounted again meanwhile)
+    // the router draws the route again on a change of the colour scheme (engine/src/40_views.js): the same page, its work kept
+    const before = await p.evaluate(() => { window.__aa0 = document.querySelector('main noema-author'); return JSON.stringify(__aa0.get()); });
+    await p.emulateMedia({ colorScheme: 'light' }); await p.evaluate(() => document.documentElement.removeAttribute('data-theme')); await wait(400);
+    ok(await p.evaluate(b => document.querySelector('main noema-author') === __aa0 && JSON.stringify(__aa0.get()) === b, before), 'a change of the colour scheme draws the route again with the same page and its work');
+    await p.evaluate(() => { window.__aa = document.querySelector('main noema-author'); });
     const hasGraph = await p.evaluate(() => !!document.querySelector('[data-aa=type] option[value="lib:graph@1"]'));
     ok(hasGraph, 'the kind select offers the library engines this app has (graph@1 among them, in its group)');
     if (hasGraph) {
