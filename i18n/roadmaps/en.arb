@@ -1387,5 +1387,49 @@
   "roadmap.levels.difficulty.advanced": "Advanced",
   "@roadmap.levels.difficulty.advanced": {
     "description": "Roadmap: the third level of the difficulty ladder."
+  },
+  "roadmap.levels.title": "Levels",
+  "@roadmap.levels.title": {
+    "description": "The name of the box with a Roadmap’s levels on its map (for screen readers)."
+  },
+  "roadmap.levels.ladder": "The levels of this Roadmap",
+  "@roadmap.levels.ladder": {
+    "description": "The list of a Roadmap’s levels (each done, current or ahead), for screen readers."
+  },
+  "roadmap.levels.progress": "Steps of {level} mastered",
+  "@roadmap.levels.progress": {
+    "description": "The progress bar of the learner’s current level: how many of its steps are mastered. {level}: the level’s name, e.g. “Year 2”."
+  },
+  "roadmap.levels.moment.title": "A new level",
+  "@roadmap.levels.moment.title": {
+    "description": "The title of the moment the learner moves up a level."
+  },
+  "roadmap.levels.moment.next": "Next: {level}",
+  "@roadmap.levels.moment.next": {
+    "description": "Under “Level reached”: the level that comes next. {level}: its name."
+  },
+  "roadmap.levels.moment.go": "Continue",
+  "@roadmap.levels.moment.go": {
+    "description": "The button that closes the level-reached moment and goes back to the map."
+  },
+  "roadmap.levels.test.loading": "Gathering the questions…",
+  "@roadmap.levels.test.loading": {
+    "description": "While the questions of a level test are gathered from the level’s subjects."
+  },
+  "roadmap.levels.proposal.gone": "This proposal has already been decided.",
+  "@roadmap.levels.proposal.gone": {
+    "description": "Shown when the learner opens a restructuring proposal that was applied or declined meanwhile."
+  },
+  "roadmap.quiz.answers": "Answers",
+  "@roadmap.quiz.answers": {
+    "description": "The group of answer buttons of a test question, for screen readers."
+  },
+  "roadmap.quiz.right": "Right.",
+  "@roadmap.quiz.right": {
+    "description": "After an answer in a test: it was right (the explanation follows)."
+  },
+  "roadmap.quiz.wrong": "Not right.",
+  "@roadmap.quiz.wrong": {
+    "description": "After an answer in a test: it was wrong (the explanation follows; the right answer is marked)."
   }
 }

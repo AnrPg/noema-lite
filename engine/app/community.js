@@ -413,7 +413,6 @@
   const WORLDS = S.WORLDS;
   const importFile = (...a) => APP.importFile(...a);
   const landedOpen = (...a) => APP.landedOpen(...a);
-  const onStudy = (...a) => APP.onStudy(...a);
   const subjectPct = (...a) => APP.subjectPct(...a);
   /* ---------- 🔎 the search page (#/search?q=…): engine/search.js draws it ---------- */
   PAGES.search = () => {
@@ -484,12 +483,12 @@
       h('div', { class: 'ns-list' },
         item('search', 4, L('exploreShared'), w === 'lang' ? L('exploreLangSub') : L('exploreSub'), () => go('#/explore/subjects'), 'ns-explore'),
         w !== 'lang' ? item('people', 2, L('exploreRoadmaps'), L('exploreRoadmapsSub'), () => go('#/explore'), 'ns-explorerm') : null,
-        w !== 'lang' && CM()?.fromSources ? item('upload', 3, L('fromSources'), L('fromSourcesSub'), () => CM().fromSources(acc(), { onStudy }), 'ns-fromsrc') : null,
-        w !== 'lang' ? item('map', 1, L('newRoadmap'), L('newRoadmapSub'), () => CM()?.create(acc(), { onStudy }), 'ns-create') : null,
+        w !== 'lang' ? item('upload', 3, L('fromSources'), L('fromSourcesSub'), () => N().fromSources(acc()), 'ns-fromsrc') : null,
+        w !== 'lang' ? item('map', 1, L('newRoadmap'), L('newRoadmapSub'), () => CM()?.create(acc()), 'ns-create') : null,
         w !== 'lang' ? item('spark', 2, L('createClaude'), L('createClaudeSub'), () => N().claudeGuide({ onDone: s => landedOpen(s) })) : null,
         w !== 'know' && WORLDS.lang?.create ? item(icoTxt('文A', 3), 3, L('newLanguage'), L('newLanguageSub'), () => WORLDS.lang.create()) : null,
         item('upload', 1, L('importFile'), L('importFileSub'), importFile),
-        w !== 'lang' ? item('download', 4, L('importMap'), L('importMapSub'), () => CM()?.importMap(acc(), { onStudy })) : null),
+        w !== 'lang' ? item('download', 4, L('importMap'), L('importMapSub'), () => CM()?.importMap(acc())) : null),
       h('span', { class: 'ns-label' }, L('withClaude')),
       h('div', { class: 'ns-list' },
         item('chat', 4, L('claudeApp'), L('claudeAppSub'), () => N().claudeSetupView?.(acc(), { open: 'B' })),

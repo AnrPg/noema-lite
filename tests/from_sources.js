@@ -9,6 +9,7 @@
    noema_create_roadmap (the learner's Claude read the files in its chat; the app picks the Roadmap up on its next sync).
    Usage: node tests/from_sources.js <prepared-repo-dir> */
 const { chromium } = require(process.env.PW || 'playwright');
+const { deepText } = require('./deep');
 const path = require('path'), fs = require('fs'), http = require('http'), vm = require('vm'), crypto = require('crypto'), { execFileSync } = require('child_process');
 const { start } = require('./mock_supabase');
 const { connectorHandler, removeConnector } = require('./connector_fn');
@@ -180,11 +181,11 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
     console.log('— the wizard: the AI reads the material and proposes');
     await p.click('.cm-mode:has-text("Roadmaps")'); await wait(300);
-    await p.locator('.noema-ovbox').last().locator('.cm-srcbtn').click(); await wait(300);
-    ok(await p.locator('.cm-src h1').innerText() === 'From your sources', 'From your sources opens from 🧭 Roadmaps');
+    await p.locator('noema-roadmap-library .cm-srcbtn').click(); await wait(300);
+    ok(await p.locator('.cm-srcbox h1').innerText() === 'From your sources', 'From your sources opens from 🧭 Roadmaps');
     await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await wait(200);
-    ok(await p.locator('.cm-srcfiles li').count() === 2 && /2 files ·/.test(await p.locator('.cm-srccard').innerText()), 'the two files are listed with their size');
-    ok(await p.inputValue('.cm-srcreader') === 'auto', 'with a key, the AI reads it by default');
+    ok(await p.locator('.cm-srcfiles li').count() === 2 && /2 files ·/.test(await deepText(p, '.cm-src')), 'the two files are listed with their size');
+    ok(await p.inputValue('.cm-srcreader select') === 'auto', 'with a key, the AI reads it by default');
     await p.click('.cm-srcread');
     ok(await until(() => p.locator('.cm-srcchosen').count(), 20000), 'the app decided the shape');
     ok(await p.locator('.cm-srcshape, .cg-badge, .cm-src .cg-steps').count() === 0, 'no shape cards, no numbered steps: one card');
@@ -192,16 +193,16 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     ok(ag.length === 2 && /Helicase and the fork \(p\. 2\)/.test(ag[0].text) && /dna-replication\.pdf\nPDF, 4 pages/.test(ag[0].text) && /RNA polymerase reads the template/.test(ag[0].text), 'the AI got each file’s pages, outline and first lines (not the files)');
     ok(/"lecture-99\.pdf" is not one of the learner's files/.test(ag[1].repairText) && /course: these files are not used: dna-replication\.pdf/.test(ag[1].repairText), 'its wrong first answer went back with the problems, and the second was taken');
     ok(await p.locator('.cm-srcchosen').getAttribute('data-shape') === 'course' && await p.locator('.cm-srcswitch').innerText() === 'Make it a Roadmap instead', 'it chose one subject silently, with a quiet way to switch');
-    ok(/Two short files on one topic/.test(await p.locator('.cm-srcwhy').textContent()) && !(await p.locator('.cm-srcwhy').isVisible()) && await p.inputValue('.cm-srctitle') === 'Molecular biology', 'its reasons wait in the ⓘ bubble, and its name fills the name field');
-    ok(await p.locator('.cm-srcchosen b').innerText() === 'One subject · 2 chapters', 'one line says what it became: ' + await p.locator('.cm-srcchosen b').innerText());
-    ok(!(await p.locator('.cm-srcmorebody').isVisible()) && !(await p.locator('.cm-src .cg-tipbody').first().isVisible()), 'the options and the explanations are tucked away');
+    ok(/Two short files on one topic/.test(await p.locator('.cm-srcwhy').textContent()) && !(await p.locator('.cm-srcwhy').isVisible()) && await p.inputValue('.cm-srctitle input') === 'Molecular biology', 'its reasons wait in the ⓘ bubble, and its name fills the name field');
+    ok(await p.locator('.cm-srcchosen strong').innerText() === 'One subject · 2 chapters', 'one line says what it became: ' + await p.locator('.cm-srcchosen strong').innerText());
+    ok(!(await p.locator('.cm-srcmore .cm-srclang').isVisible()) && !(await p.locator('.cm-src noema-tip .panel').first().isVisible()), 'the options and the explanations are tucked away');
     await p.screenshot({ path: SHOTS + '/src1_proposal.png', fullPage: true });
     await p.click('.cm-srcswitch'); await wait(200);
-    ok(await p.locator('.cm-srcchosen b').innerText() === 'A Roadmap · 2 steps' && await p.locator('.cm-srcswitch').innerText() === 'Make it one subject instead' && await p.locator('.cm-srcplan li').count() === 2 && /dna-replication\.pdf pp\. 3–4 · Transcription notes\.md/.test(await p.locator('.cm-srcplan li >> nth=1').textContent()), 'flipped to the Roadmap: its steps with their files and pages');
-    await p.fill('.cm-srctitle', 'Gene expression');
+    ok(await p.locator('.cm-srcchosen strong').innerText() === 'A Roadmap · 2 steps' && await p.locator('.cm-srcswitch').innerText() === 'Make it one subject instead' && await p.locator('.cm-srcplan li').count() === 2 && /dna-replication\.pdf pp\. 3–4 · Transcription notes\.md/.test(await p.locator('.cm-srcplan li >> nth=1').textContent()), 'flipped to the Roadmap: its steps with their files and pages');
+    await p.fill('.cm-srctitle input', 'Gene expression');
 
     console.log('— a Roadmap from it');
-    await p.selectOption('.cm-src .cm-provider', 'auto'); await p.click('.cm-srcgo');
+    await p.selectOption('.cm-src .cm-provider select', 'auto'); await p.click('.cm-srcgo');
     ok(await until(() => p.locator('.cg-status.ready').count(), 30000), 'made: only the chapters are planned, then “ready”');
     ok(A.agent.filter(a => a.name !== 'submit_source_plan').every(a => a.name === 'submit_chapter_plans'), 'no DAG creator, auditor or expander ran');
     const c = await p.evaluate(() => NoemaCurriculum.list(Noema.account.id)[0]);
@@ -212,8 +213,8 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
     ok(rep.chapters.length === 4 && rep.chapters[0].material === 'dna-replication.pdf pp. 1–2', 'the planner planned each step from its pages: ' + rep.chapters[0].material);
     
     console.log('— one subject from it, with ✨ Create with Claude filled in');
-    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); NoemaCurMap.fromSources(Noema.account.id); }); await wait(300);
-    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader', 'estimate'); await p.click('.cm-srcread');
+    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.fromSources(Noema.account.id); }); await wait(300);
+    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader select', 'estimate'); await p.click('.cm-srcread');
     ok(await until(() => p.locator('.cm-srcchosen').count(), 10000) && /without AI/.test(await p.locator('.cm-srcwhy').textContent()) && await p.locator('.cm-srcchosen').getAttribute('data-shape') === 'course', 'without AI: an estimate, one subject: ' + await p.locator('.cm-srcwhy').textContent());
     await p.click('.cm-srcgo'); await wait(500);
     ok(await p.evaluate(() => [...document.querySelectorAll('.cg-box input.noema-input')].some(i => i.value === 'dna-replication')) && await p.locator('.cg-files li').count() === 2, 'Create with Claude opens with the name and both files');
@@ -228,12 +229,12 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
     console.log('— the Claude app, by copy and paste');
     await wait(1500); await until(() => p.evaluate(() => !!window.NoemaCurMap && !!window.Noema?.account), 15000);
-    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); NoemaCurMap.fromSources(Noema.account.id); }); await wait(300);
-    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader', 'app'); await p.click('.cm-srcread'); await wait(1500);
+    await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.fromSources(Noema.account.id); }); await wait(300);
+    await p.setInputFiles('.cm-src .cg-drop input[type=file]', FILES); await p.selectOption('.cm-srcreader select', 'app'); await p.click('.cm-srcread'); await wait(1500);
     ok(await p.locator('.cm-srccopytask').count() === 1 && await p.locator('.cm-srcchosen').count() === 0, 'with the Claude app: copy the task, paste the answer');
-    await p.fill('.cm-src .cm-paste', JSON.stringify({ ...good, title: 'x' })); await p.click('.cm-srcuse'); await wait(200);
-    ok(/problem/.test(await p.locator('.cm-src span.cg-kstat.bad').innerText()), 'an answer about other files: its problems, to copy back to Claude');
-    await p.fill('.cm-src .cm-paste', 'Here you go:\n' + JSON.stringify(PLAN)); await p.click('.cm-srcuse'); await wait(200);
+    await p.fill('.cm-src .cm-srcanswer textarea', JSON.stringify({ ...good, title: 'x' })); await p.click('.cm-srcuse'); await wait(200);
+    ok(/problem/.test(await p.locator('.cm-src .status.bad').innerText()), 'an answer about other files: its problems, to copy back to Claude');
+    await p.fill('.cm-src .cm-srcanswer textarea', 'Here you go:\n' + JSON.stringify(PLAN)); await p.click('.cm-srcuse'); await wait(200);
     ok(await p.locator('.cm-srcchosen').count() === 1 && await p.locator('.cm-srccopymsg').count() === 1, 'a good answer: the proposal, and the subject can be made in the Claude app (a message to paste)');
     await p.screenshot({ path: SHOTS + '/src2_app.png', fullPage: true });
 

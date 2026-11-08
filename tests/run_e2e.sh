@@ -49,6 +49,7 @@ run h5p_import python3 "$ROOT/tests/h5p_import.py"   # H5P import into the exerc
 run shell node "$ROOT/tests/shell.js" "$T"
 run subject_switch node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
 run notices node "$ROOT/tests/notices.js" "$T"   # news (a step ready, a new part…): at most 2 toasts at once, the rest in the 🔔 until cleared
+run roadmap_levels node "$ROOT/tests/roadmap_levels.js" "$T"   # 🪜 the levels of a Roadmap (src/features/roadmaps/ui): the ladder, the level-reached moment, the level test, Claude’s proposed arrangement; 320 px, axe, keyboard, RTL
 run search_catalog node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)
 run search node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, the practice round
 run e2e node "$ROOT/tests/e2e.js" "$T"

@@ -158,7 +158,15 @@ mastered station and the last 5 seconds of a timed round can bring a big reactio
 | MB1–MB6 bars | Unchanged, above the map |
 | MB "for your Claude app" bar | Gone from the map: a dot on the map's ⋮ while steps wait for material and you have never sent them to the Claude app; ⋮ › Copy the message for Claude |
 | ST1–ST24 station panel | A bottom sheet on phones. 📎 next to the title opens your material (its line is the tooltip); the path (Path C › Foundations) is a quiet subtitle next to the kind of step; the file name and pages are no longer under the title. "I already know this" first explains the test (Proceed / Go back). "Use a subject I have" and "Detach" are in ✏️ (Edit this step), which shows only fields you can change. The step's description is not repeated (its chapters and "After this step you can" say it). 📚 lists the step's sources (your material and the prepared subject's PDFs) and opens them. A locked step that is already prepared has "Read the theory": the subject opens read-only, with a 🔒 line on top, and its exercises, flashcards, drills and runs wait until the step opens |
+| — | **Levels** (a Roadmap with a ladder): the level bar above the map (the ladder, the current level and its progress, *take the level test*, 🪜 *Claude proposes a new arrangement* › Review); the map drawn in **level bands** (one per level, lowest first) instead of the three parts; *A new level* when one is reached. docs/CURRICULUM.md §11 |
 | everything else in §6 (NC, BP, IM, SCu, AT, RC, MS, AP-, NU, PT, SU) | Unchanged dialogs, opened from the places above |
+
+The screens of this section in Lit (`src/features/roadmaps/ui/`, phase 3): `noema-roadmap-library` (CL4–CL7),
+`noema-roadmap-map` (MP, MB, the level bands) with `noema-roadmap-step` (ST: study, prepare here or in the Claude app, look
+over the plan, wait for another member, the placement test, locked), `noema-roadmap-share` (sharing), `noema-roadmap-inbox`
+(Your Claude app: the message, ⟳, by hand), `noema-roadmap-prepare-ahead` (Settings › Prepare many steps ahead),
+`noema-roadmap-from-sources`, and the levels' (`noema-roadmap-levels`, `-level-test`, `-level-reached`, `-restructure`,
+`-step-test`). They keep the `cm-` classes the browser suites read.
 
 ## 10. Keyboard and gestures
 Unchanged, plus: Esc closes a ⋮ menu or a sheet; ↑ / ↓ move inside a ⋮ menu.
