@@ -80,8 +80,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('music@1'),
-    () => import('./music/music.js'),
-    () => import('noema-worker:./music/music.js#simEngine'),
+    () => import('./music/music.ts'),
+    () => import('noema-worker:./music/music.ts#simEngine'),
   ),
   def(
     manifest('map@1'),
@@ -140,8 +140,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('pid@1'),
-    () => import('./pid/pid.js'),
-    () => import('noema-worker:./pid/pid.js#adapter'),
+    () => import('./pid/pid.ts'),
+    () => import('noema-worker:./pid/pid.ts#adapter'),
   ),
   def(
     manifest('rf@1'),
