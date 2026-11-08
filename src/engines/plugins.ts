@@ -125,8 +125,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('rhetoric@1', ['engine:logic@1']),
-    () => import('./rhetoric/rhetoric.js'),
-    () => import('noema-worker:./rhetoric/rhetoric.js#simEngine'),
+    () => import('./rhetoric/rhetoric.ts'),
+    () => import('noema-worker:./rhetoric/rhetoric.ts#simEngine'),
   ),
   def(
     manifest('circuit-mna@1'),
