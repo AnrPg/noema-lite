@@ -312,6 +312,32 @@ test('the source filter: only one book’s chapters, the engine follows, and bac
   assert.equal(ui.app.course.chapters.length, 2);
 });
 
+test('the sources deck: a card per source, unfolded to its file, a source left out filters the course', () => {
+  ui.show('#/subject');
+  ui.app.sourcesUi.toggleDeck(true);
+  const deck = (): HTMLElement | null => document.querySelector('.srcdeck');
+  assert.ok(deck()?.classList.contains('open'));
+  assert.equal(deck()?.querySelectorAll('.srccard').length, 2);
+  deck()?.querySelector<HTMLButtonElement>('.srccard .srcmain')?.click();
+  assert.equal(deck()?.querySelectorAll('.srccard.exp').length, 1, 'a tap unfolds the card');
+  assert.ok(deck()?.querySelector('.srccard.exp .srcfile input[type=file]'), 'with 📎 Attach (no file yet)');
+  const include = deck()?.querySelectorAll<HTMLInputElement>('.srccard .switch input')[0];
+  assert.ok(include);
+  include.checked = false;
+  include.dispatchEvent(new Event('change', { bubbles: true }));
+  assert.deepEqual(
+    ui.app.course.chapters.map(c => c.id),
+    ['c2'],
+  );
+  assert.ok(main().querySelector('.filterbar'), 'the page says it is filtered');
+  assert.ok(deck()?.querySelector('.srccard.off'), 'the source left out is pale');
+  main().querySelector<HTMLButtonElement>('.filterbar .btn.primary')?.click();
+  assert.equal(ui.app.course.chapters.length, 2, 'Show everything');
+  ui.app.sourcesUi.toggleDeck(false);
+  assert.equal(deck()?.querySelector('.srccard'), null);
+  assert.equal(document.querySelectorAll('.srcdeck').length, 1, 'one deck');
+});
+
 test('the words for the engine: an exercise and a section as text for the AI; progress is recorded as events', () => {
   const e = f.host.chapters[0]?.exercises[0];
   assert.ok(e);
