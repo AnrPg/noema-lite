@@ -32,10 +32,10 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const HEX = /^#[0-9a-f]{6}$/i;
 
-test('the characters are those of engine/themes.js, in its order, each with a full palette in light and dark', () => {
-  const src = fs.readFileSync(path.join(ROOT, 'engine', 'themes.js'), 'utf8');
-  const data = /const DATA = (\{[^;]*\});/.exec(src)?.[1];
-  assert.ok(data, 'themes.js has DATA');
+test("the characters are those of the shell's domain (src/features/shell/domain/characters.ts), in its order, each with a full palette in light and dark", () => {
+  const src = fs.readFileSync(path.join(ROOT, 'src', 'features', 'shell', 'domain', 'characters.ts'), 'utf8');
+  const data = /export const CHARACTER_DATA = (\{[^;]*\}) as const/.exec(src)?.[1];
+  assert.ok(data, 'characters.ts has CHARACTER_DATA');
   assert.deepEqual(Object.keys(vm.runInNewContext(`(${data})`) as object), CHARACTER_IDS);
   for (const id of CHARACTER_IDS) {
     for (const scheme of ['light', 'dark'] as const) {

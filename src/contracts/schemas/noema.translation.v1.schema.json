@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noema-lite.netlify.app/schemas/noema.translation.v1.schema.json",
   "title": "noema-lite pack translation (noema-translation v1)",
-  "description": "One translation of a pack in its own file (<id>.tr.<locale>.json, translations/<locale>.json in the package, noema_save_translation): the chapters in one language with the pack's ids, structure and answers, and the subject's name in it. docs/i18n.md §10. That the chapters match the pack's is checked by engine/packcheck.js checkTranslation.",
+  "description": "One translation of a pack in its own file (<id>.tr.<locale>.json, translations/<locale>.json in the package, noema_save_translation): the chapters in one language with the pack's ids, structure and answers, and the subject's name in it. docs/i18n.md §10. That the chapters match the pack's is checked by checkTranslation (src/features/content/domain/translation.ts).",
   "type": "object",
   "required": ["format", "v", "pack", "locale", "chapters"],
   "properties": {

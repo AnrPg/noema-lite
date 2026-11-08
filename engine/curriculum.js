@@ -12,6 +12,8 @@
 window.NoemaCurriculum = (() => {
   const L = () => window.NoemaLLM;
   const N = () => window.Noema;
+  /** The Roadmaps domain (src/features/roadmaps/domain): the graph, plans, mastery, translations, levels — NoemaCore.roadmaps. */
+  const R = () => window.NoemaCore.roadmaps;
   const uid = () => Date.now().toString(36).slice(-5) + Math.random().toString(36).slice(2, 5);
   /** The learner's words for a key of i18n/roadmaps (docs/i18n.md). Without the i18n runtime — this file also runs in the
       Claude connector (tools/build.py) and in Node tests — the English catalog when it is loaded, else the key; nothing a
@@ -276,17 +278,10 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     } } },
   } };
 
-  /* ======================= graph helpers ======================= */
+  /* ======================= graph helpers (src/features/roadmaps/domain/graph.ts) ======================= */
   /** Kahn topological order; returns null when there is a cycle (and the nodes on it in .cycle). */
-  function topo(ids, edges) {
-    const indeg = new Map(ids.map(i => [i, 0])), out = new Map(ids.map(i => [i, []]));
-    for (const e of edges) { if (!indeg.has(e.from) || !indeg.has(e.to)) continue; indeg.set(e.to, indeg.get(e.to) + 1); out.get(e.from).push(e.to); }
-    const q = ids.filter(i => indeg.get(i) === 0), order = [];
-    while (q.length) { const n = q.shift(); order.push(n); for (const m of out.get(n)) { indeg.set(m, indeg.get(m) - 1); if (!indeg.get(m)) q.push(m); } }
-    if (order.length === ids.length) return order;
-    topo.cycle = ids.filter(i => indeg.get(i) > 0); return null;
-  }
-  const reach = (start, edges, dir = 'down') => { const adj = new Map(); for (const e of edges) { const [a, b] = dir === 'down' ? [e.from, e.to] : [e.to, e.from]; if (!adj.has(a)) adj.set(a, []); adj.get(a).push(b); } const seen = new Set(), st = [start]; while (st.length) { const n = st.pop(); for (const m of adj.get(n) || []) if (!seen.has(m)) { seen.add(m); st.push(m); } } return seen; };
+  function topo(ids, edges) { const r = R().topo(ids, edges); topo.cycle = r.cycle; return r.order; }
+  const reach = (start, edges, dir = 'down') => R().reach(start, edges, dir);
   const norm = t => String(t || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9α-ωа-я]+/g, ' ').trim();
   const E2 = es => es.map(e => ({ from: e.fromRef, to: e.toRef, why: e.rationale || '' }));
 
@@ -371,9 +366,10 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   function snapshot(c, { withSummaries = false } = {}) {
     return JSON.stringify({ goalId: c.goalId, nodes: Object.values(c.nodes).map(n => ({ id: n.id, title: n.title, role: n.role, ...(withSummaries && n.summary ? { summary: n.summary } : {}) })), edges: c.edges.map(e => [e.from, e.to]) });
   }
-  const PART = { foundation: 'prereq', intro: 'core', aspect: 'core', subtopic: 'core', related: 'core', synthesis: 'core', application: 'apps', goal: 'core' };
-  function addNode(c, n) { c.nodes[n.id] = { chapters: [], learningGoals: [], ...n, part: PART[n.role] }; }
-  function order(c) { return topo(Object.keys(c.nodes), c.edges) || Object.keys(c.nodes); }
+  /** A step's part of the map by its role (src/features/roadmaps/domain/model.ts PART). */
+  const partOf = role => R().PART[role];
+  function addNode(c, n) { c.nodes[n.id] = { chapters: [], learningGoals: [], ...n, part: partOf(n.role) }; }
+  const order = c => R().order(c);
 
   /* ======================= persistence (KV → cloud) ======================= */
   const kvKey = (acc, name) => `noema1:${acc}:a:${name}`;
@@ -509,61 +505,23 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   /* i18n-ignore-end */
   /** A step whose plan can no longer change: its subject was generated from it (or is being generated). A step taught by a
       pack the learner attached (pack.assigned) is not: its plan describes that pack and is re-planned when the pack changes. */
-  const planLocked = n => ['ready', 'generating'].includes(n?.pack?.status) && !n.pack.assigned;
+  const planLocked = n => R().planLocked(n);
   /** 👥 A step's chapter plan. In a shared curriculum a step taught by the learner's own subject has its own plan; the
-      group's waits in n.groupPlan meanwhile (engine/curshare.js keeps the same keys). */
-  const PLAN_KEYS = ['chapters', 'learningGoals', 'plannedAt', 'replanAt'];
-  const planOf = n => { const r = {}; for (const k of PLAN_KEYS) if (n?.[k] !== undefined) r[k] = JSON.parse(JSON.stringify(n[k])); return r; };
-  const setPlan = (n, p) => { for (const k of PLAN_KEYS) if (p?.[k] !== undefined) n[k] = JSON.parse(JSON.stringify(p[k])); else delete n[k]; };
+      group's waits in n.groupPlan meanwhile (engine/curshare.js keeps the same keys). src/features/roadmaps/domain/plans.ts */
+  const planOf = n => R().planOf(n);
+  const setPlan = (n, p) => R().setPlan(n, p);
   /** The chapter planner's answer → the steps (a step already prepared keeps its chapters). */
   function applyPlans(c, data) {
     for (const p of data.plans) { const n = c.nodes[p.nodeId]; if (!n || planLocked(n)) continue; n.learningGoals = p.learningGoals; n.chapters = p.chapters.map(ch => ({ ref: ch.ref, title: ch.title, goals: ch.teachingGoals, coverage: ch.requiredCoverage, ...(ch.material && ch.material !== '—' ? { material: ch.material } : {}) })); n.plannedAt = stampAfter(n.plannedAt, n.replanAt); delete n.replan; delete n.planWish; dropI18n(c, p.nodeId, ['learningGoals', 'chapters']); }
   }
-  /** Now as an ISO stamp, but always later than every stamp it supersedes (clock drift between devices, the same millisecond):
-      mergePlans orders plans and re-plan requests by these stamps. */
-  function stampAfter(...prev) { const t = Math.max(Date.now(), ...prev.map(v => (Date.parse(v || '') || 0) + 1)); return new Date(t).toISOString(); }
-  /** Two copies of one curriculum (this device's and the cloud's, or two devices'): bring the chapter plans that are newer in
-      `other` into `c` (mutates c) → true when c changed. Whole records are synced last-write-wins, so without this an older
-      copy saved anywhere (another device, a background save) silently dropped plans accepted meanwhile. A plan is newer
-      when its plannedAt is later than this copy's plannedAt and replanAt; plans from before plannedAt existed only fill
-      steps that have no chapters here and are not waiting to be re-planned. */
-  function mergePlans(c, other) {
-    if (!c?.nodes || !other?.nodes || c.id !== other.id) return false;
-    const t = v => Date.parse(v || '') || 0; let changed = false;
-    for (const [id, o] of Object.entries(other.nodes)) {
-      const n = c.nodes[id]; if (!n) continue;
-      // 📦 a pack attached to (or taken off) the step on the other copy, later than anything here (assignedAt marks both)
-      if (t(o.assignedAt) > t(n.assignedAt) && n.pack?.status !== 'generating') {
-        n.assignedAt = o.assignedAt; n.pack = o.pack ? JSON.parse(JSON.stringify(o.pack)) : null;
-        if (o.planFrom) n.planFrom = o.planFrom; else delete n.planFrom;
-        if (o.groupPlan || n.groupPlan) { setPlan(n, o); if (o.groupPlan) n.groupPlan = planOf(o.groupPlan); else delete n.groupPlan; }   // 👥 shared: the step's own plan (or the group's, back) comes with it
-        if (o.replan) { n.replan = true; n.replanAt = o.replanAt; if (c.stage === 'done') c.stage = 'plan'; }   // its re-plan comes with it
-        if (!o.reviewed) delete n.reviewed;
-        changed = true;
-      }
-      if (planLocked(n)) continue;
-      if ((o.pack?.assigned || o.groupPlan) && t(n.assignedAt) > t(o.assignedAt)) continue;   // 📦 the other copy's plan followed a subject this copy has taken off since: it never comes back over the plan the step has now
-      if (o.replan && t(o.replanAt) > Math.max(t(n.plannedAt), t(n.replanAt))) {   // a re-plan asked for on the other copy
-        n.replan = true; n.replanAt = o.replanAt; if (o.planWish) n.planWish = o.planWish; else delete n.planWish;
-        if (c.stage === 'done') c.stage = 'plan'; changed = true; continue;
-      }
-      if (!o.chapters?.length) continue;
-      const newer = o.plannedAt ? t(o.plannedAt) > Math.max(t(n.plannedAt), t(n.replanAt)) : !n.chapters?.length && !n.replan && !n.plannedAt;
-      if (!newer) continue;
-      n.learningGoals = o.learningGoals; n.chapters = o.chapters;
-      if (o.plannedAt) n.plannedAt = o.plannedAt; else delete n.plannedAt;
-      if (!n.replanAt || t(o.plannedAt) > t(n.replanAt)) { delete n.replan; delete n.planWish; }
-      changed = true;
-    }
-    for (const [loc, L] of Object.entries(other.i18n || {})) {   // 🌐 a Roadmap translation saved or changed later on the other copy
-      if (t(L?.at) > t(c.i18n?.[loc]?.at)) { (c.i18n = c.i18n || {})[loc] = JSON.parse(JSON.stringify(L)); changed = true; }
-    }
-    if (changed && c.provider === 'claudeapp' && c.stage === 'plan' && !Object.values(c.nodes).some(n => !planLocked(n) && (!n.chapters?.length || n.replan))) c.stage = 'done';
-    return changed;
-  }
+  /** Now as an ISO stamp, but always later than every stamp it supersedes (clock drift between devices, the same millisecond). */
+  const stampAfter = (...prev) => R().stampAfter(Date.now(), ...prev);
+  /** Two copies of one curriculum: bring the chapter plans, attachments, translations and restructurings that are newer in
+      `other` into `c` (mutates c) → true when c changed (src/features/roadmaps/domain/plans.ts). */
+  const mergePlans = (c, other) => R().mergePlans(c, other);
 
   /** 📦 Planning waits until the learner has attached the subjects they already have (option of a new / imported curriculum). */
-  const holding = c => !!c.attachFirst && Object.values(c.nodes || {}).some(n => !n.chapters?.length);
+  const holding = c => R().holding(c);
   /** Create (or resume) a curriculum; each stage is saved, so a closed tab continues where it stopped. */
   async function build(acc, cOrOpts, { onLog = () => { }, signal } = {}) {
     const c = cOrOpts.format ? cOrOpts : blank(cOrOpts);
@@ -601,21 +559,15 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   /** Auto mastery from the node's pack: every section read + ≥ 80 % of its exercises solved. */
   function packMastery(acc, n) {
     if (!n.pack || n.pack.status !== 'ready') return { score: 0, read: 0, mastered: false };
-    let st = null; try { st = JSON.parse(localStorage.getItem(`noema1:${acc}:s:${n.pack.id}:state`) || 'null'); } catch (e) { }
+    const st = window.NoemaCore?.learning?.progressOf?.(acc, n.pack.id) || null;   // the learning log's fold (none outside the app)
     const secs = n.pack.sections || [], total = n.pack.exercises || 0;
     const read = secs.length ? secs.filter(s => st?.read?.[s]).length / secs.length : 0;
     const solved = total ? Object.values(st?.res || {}).filter(r => r.ok > 0).length / total : 0;
     return { score: Math.min(1, solved), read, mastered: read >= 0.999 && solved >= PASS };
   }
-  function nodeStatus(acc, c, id, P = prog(acc, c.id), memo = {}) {
-    if (memo[id]) return memo[id];
-    const n = c.nodes[id]; const pm = packMastery(acc, n); const ov = P[id];
-    const mastered = !!(ov?.mastered || pm.mastered);
-    const parents = c.edges.filter(e => e.to === id).map(e => e.from);
-    const open = parents.every(p => nodeStatus(acc, c, p, P, memo).mastered);
-    const replanning = !!(n.pack?.assigned && (n.replan || !n.chapters?.length));   // 📦 a pack was attached: the step is closed until its new plan is here
-    return (memo[id] = { mastered, open, how: ov?.mastered ? ov.how : pm.mastered ? 'auto' : null, score: pm.score, read: pm.read, parents, locked: !open && !mastered, replanning });
-  }
+  /** Every step's status (src/features/roadmaps/domain/status.ts) from its subject's mastery and the placement tests. */
+  const statusesOf = (acc, c, P = prog(acc, c.id)) => R().statuses(c, id => packMastery(acc, c.nodes[id]), P);
+  const nodeStatus = (acc, c, id) => statusesOf(acc, c)[id];
   /** 📦 The steps (of this account's curricula on this device) that a subject teaches → [{ c, nid }] — a subject made for a
       step, or one the learner attached to one or more steps. A subject on no step is on the Shelf. */
   function stepsOf(acc, subjectId) {
@@ -623,44 +575,17 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     for (const c of list(acc)) for (const [nid, n] of Object.entries(c.nodes || {})) if (n.pack?.id === subjectId) out.push({ c, nid });
     return out;
   }
-  function statuses(acc, c) { const P = prog(acc, c.id), memo = {}; for (const id of Object.keys(c.nodes)) nodeStatus(acc, c, id, P, memo); return memo; }
+  const statuses = (acc, c) => statusesOf(acc, c);
   function setMastered(acc, c, id, how, extra = {}) { const P = prog(acc, c.id); if (how) P[id] = { mastered: true, how, at: new Date().toISOString(), ...extra }; else delete P[id]; kvSet(acc, 'curprog:' + c.id, P); emit(acc, c); }
-  function summary(acc, c) { const st = statuses(acc, c); const ids = Object.keys(c.nodes); const m = ids.filter(i => st[i].mastered).length; return { total: ids.length, mastered: m, open: ids.filter(i => st[i].open && !st[i].mastered).length, ready: ids.filter(i => c.nodes[i].pack?.status === 'ready').length, pct: ids.length ? m / ids.length : 0 }; }
+  const summary = (acc, c) => R().summary(c, statuses(acc, c));
   /** Open, not-yet-mastered nodes in a sensible study order (deep path first, then topological). */
-  function nextUp(acc, c) {
-    const st = statuses(acc, c); const ord = [...new Set([...(c.paths.deep || []), ...order(c)])].filter(id => c.nodes[id]);
-    return ord.filter(id => st[id].open && !st[id].mastered);
-  }
+  const nextUp = (acc, c) => R().nextUp(c, statuses(acc, c));
 
-  /* ======================= layout: layered DAG (three parts, left → right) ======================= */
-  function layout(c) {
-    const ord = order(c); const layer = {}; const parents = id => c.edges.filter(e => e.to === id).map(e => e.from);
-    for (const id of ord) layer[id] = Math.max(0, ...parents(id).map(p => layer[p] + 1));
-    // the three parts occupy their own column ranges
-    const ids = Object.keys(c.nodes); const part = id => c.nodes[id].part;
-    const maxPre = Math.max(0, ...ids.filter(i => part(i) === 'prereq').map(i => layer[i]));
-    const shift = (filter, min) => { for (const id of ord) if (filter(id)) layer[id] = Math.max(layer[id], min, ...parents(id).map(p => layer[p] + 1)); };
-    shift(i => part(i) === 'core', maxPre + 1);
-    const maxCore = Math.max(maxPre + 1, ...ids.filter(i => part(i) === 'core').map(i => layer[i]));
-    shift(i => part(i) === 'apps', maxCore + 1);
-    for (const id of ord) layer[id] = Math.max(layer[id], ...parents(id).map(p => layer[p] + 1));
-    const cols = []; for (const id of ord) (cols[layer[id]] = cols[layer[id]] || []).push(id);
-    // barycentre ordering, a few sweeps
-    const pos = {}; cols.forEach(col => col.forEach((id, i) => pos[id] = i));
-    for (let sweep = 0; sweep < 4; sweep++) for (let l = 1; l < cols.length; l++) {
-      if (!cols[l]) continue;
-      cols[l].sort((a, b) => { const ba = parents(a).map(p => pos[p]); const bb = parents(b).map(p => pos[p]); const ma = ba.length ? ba.reduce((x, y) => x + y) / ba.length : pos[a]; const mb = bb.length ? bb.reduce((x, y) => x + y) / bb.length : pos[b]; return ma - mb; });
-      cols[l].forEach((id, i) => pos[id] = i);
-    }
-    return { cols: cols.map(c2 => c2 || []), layer, parts: { prereq: [0, maxPre], core: [maxPre + 1, maxCore], apps: [maxCore + 1, cols.length - 1] } };
-  }
+  /* ======================= layout: layered DAG (three parts, left → right; src/features/roadmaps/domain/graph.ts) ======================= */
+  const layout = c => R().layout(c);
 
   /* ======================= node packs: ids ======================= */
-  function packId(c, nodeId) {
-    const slug = nodeId.replace(/_/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 38) || 'node';
-    let h = 0; for (const ch of c.id + nodeId) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-    return `cur-${c.id.slice(1, 7)}-${slug}-${h.toString(36).slice(0, 4)}`;
-  }
+  const packId = (c, nodeId) => R().packId(c, nodeId);
   /** The brief a pack generator receives for one node (what to teach and how it fits the curriculum). */
   /* i18n-ignore-start — a prompt */
   function nodeBrief(c, id) {
@@ -679,7 +604,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   /* i18n-ignore-end */
 
   /** The learner's files of a curriculum are stored once (a textbook may serve several steps): subject key curfiles-<id>. */
-  const curStore = cid => 'curfiles-' + cid;
+  const curStore = cid => R().curStore(cid);
   /** The file of a step's material entry (new: in the curriculum store; older ones: with the step's subject). */
   const materialFile = (acc, c, nid, f) => window.NoemaSrcFiles.get(acc, f.fileId ? curStore(c.id) : packId(c, nid), f.fileId || f.srcId);
   /* ======================= domains: how Explore groups what others share ======================= */
@@ -715,106 +640,27 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
      — made with the steps' pack translations (Claude: noema_save_roadmap_translation), never by the app itself. The stored
      record keeps the curriculum's own texts; only what is drawn takes the translation, field by field (a learning-goal list
      of another length, an unknown chapter → the own words). Editing a step drops that step's translated fields. */
-  const I18N_FIELDS = ['title', 'summary', 'learningGoals', 'domains', 'chapters'];
-  /** One chapter's translation, as stored: a title alone ("…") or { title, goals, coverage } → always the object form. */
-  const chT = v => typeof v === 'string' ? { title: v } : v && typeof v === 'object' && !Array.isArray(v) ? v : {};
-  const sameLen = (t, own) => Array.isArray(t) && Array.isArray(own) && t.length === own.length && t.every(x => typeof x === 'string' && x.trim());
+  /* 🌐 A Roadmap in several languages (src/features/roadmaps/domain/i18n.ts): the reader's locale comes from the I18n port
+     (NoemaCore.i18n: the UI locale and its fallback chain); without it (the connector) the own words. */
+  const uiChain = () => { const I = window.NoemaCore.i18n; return I ? { ui: I.locale(), chain: I.chain() } : { ui: 'en', chain: ['en'] }; };
   /** The locale of c.i18n to show for the UI language (its chain without the final English), or null: the own texts. */
-  function trLocale(c) {
-    const keys = Object.keys(c?.i18n || {}); if (!keys.length) return null;
-    const I = window.NoemaI18n, ui = I ? I.locale : 'en', key = t => String(t || 'en').split('-')[0].toLowerCase();
-    const want = (I?.chain ? I.chain(ui) : [ui]).filter(t => t !== 'en' || key(ui) === 'en');
-    for (const t of want) {
-      if (t.toLowerCase() === String(c.language || 'en').toLowerCase()) return null;
-      const k = keys.find(x => x.toLowerCase() === t.toLowerCase()); if (k) return k;
-    }
-    return null;
-  }
+  const trLocale = c => { const u = uiChain(); return R().trLocale(c, u.ui, u.chain); };
   /** The curriculum's title as the learner reads it. */
-  function shownTitle(c) {
-    const T = c?.i18n?.[trLocale(c)] || {};
-    return (typeof T.title === 'string' && T.title.trim()) || c?.title || c?.goal || '';
-  }
-  /** A step as the learner reads it: a copy with title, summary, learning goals, domains and chapters (title, goals, coverage) translated where c.i18n has them (for drawing only — never save it). */
-  function shownNode(c, id) {
-    const n = c?.nodes?.[id]; if (!n) return n;
-    const T = c.i18n?.[trLocale(c)]?.nodes?.[id]; if (!T) return n;
-    const out = { ...n };
-    if (typeof T.title === 'string' && T.title.trim()) out.title = T.title;
-    if (typeof T.summary === 'string' && T.summary.trim() && n.summary) out.summary = T.summary;
-    if (Array.isArray(T.learningGoals) && T.learningGoals.length === (n.learningGoals || []).length) out.learningGoals = T.learningGoals;
-    if (sameLen(T.domains, n.domains)) out.domains = T.domains;
-    if (T.chapters && Array.isArray(n.chapters)) out.chapters = n.chapters.map(ch => {
-      const t = chT(T.chapters[ch.ref]), x = { ...ch };
-      if (typeof t.title === 'string' && t.title.trim()) x.title = t.title;
-      if (sameLen(t.goals, ch.goals)) x.goals = t.goals;
-      if (sameLen(t.coverage, ch.coverage)) x.coverage = t.coverage;
-      return x;
-    });
-    return out;
-  }
-  /** Check one locale's translation of a Roadmap (all of it, or only some steps) → English diagnostics for Claude. */
-  function checkI18n(c, loc, d) {
-    const E = [];
-    if (!/^[a-z]{2,3}(-[A-Z][a-z]{3})?(-(?:[A-Z]{2}|\d{3}))?$/.test(String(loc || ''))) E.push('locale: a language code such as el, ru, en');   // i18n-ignore (for Claude)
-    else if (loc.split('-')[0].toLowerCase() === String(c.language || 'en').split('-')[0].toLowerCase()) E.push(`locale "${loc}" is the Roadmap's own language`);   // i18n-ignore (for Claude)
-    if (!d || typeof d !== 'object' || Array.isArray(d)) return [...E, 'the translation must be a JSON object { title, goal, nodes: { <step id>: { title, summary, learningGoals, domains, chapters: { <chapter ref>: { title, goals, coverage } } } } }'];   // i18n-ignore (for Claude)
-    for (const k of ['title', 'goal']) if (d[k] != null && typeof d[k] !== 'string') E.push(`${k} must be a string`);   // i18n-ignore (for Claude)
-    for (const [id, T] of Object.entries(d.nodes || {})) {
-      const n = c.nodes?.[id]; if (!n) { E.push(`nodes.${id}: no such step (use the step ids of the Roadmap)`); continue; }   // i18n-ignore (for Claude)
-      if (!T || typeof T !== 'object') { E.push(`nodes.${id} must be an object`); continue; }   // i18n-ignore (for Claude)
-      for (const k of Object.keys(T)) if (!I18N_FIELDS.includes(k)) E.push(`nodes.${id}.${k}: unknown field (only ${I18N_FIELDS.join(', ')})`);   // i18n-ignore (for Claude)
-      if (T.title != null && !(typeof T.title === 'string' && T.title.trim())) E.push(`nodes.${id}.title must be a non-empty string`);   // i18n-ignore (for Claude)
-      if (T.summary != null && typeof T.summary !== 'string') E.push(`nodes.${id}.summary must be a string`);   // i18n-ignore (for Claude)
-      if (T.learningGoals != null && !(Array.isArray(T.learningGoals) && T.learningGoals.length === (n.learningGoals || []).length && T.learningGoals.every(x => typeof x === 'string' && x.trim()))) E.push(`nodes.${id}.learningGoals: ${(n.learningGoals || []).length} strings, one per learning goal of the step, in the same order`);   // i18n-ignore (for Claude)
-      if (T.domains != null && !sameLen(T.domains, n.domains || [])) E.push(`nodes.${id}.domains: ${(n.domains || []).length} strings, one per domain of the step, in the same order`);   // i18n-ignore (for Claude)
-      if (T.chapters != null) {
-        if (typeof T.chapters !== 'object' || Array.isArray(T.chapters)) E.push(`nodes.${id}.chapters must be { <chapter ref>: { title, goals, coverage } }`);   // i18n-ignore (for Claude)
-        else {
-          const byRef = new Map((n.chapters || []).map(ch => [ch.ref, ch]));
-          for (const [r, v] of Object.entries(T.chapters)) {
-            const ch = byRef.get(r), at = `nodes.${id}.chapters.${r}`;   // i18n-ignore (for Claude)
-            if (!ch) { E.push(`${at}: no such chapter (refs: ${[...byRef.keys()].join(', ') || 'none planned yet'})`); continue; }   // i18n-ignore (for Claude)
-            if (typeof v === 'string') { if (!v.trim()) E.push(`${at} must be a non-empty string`); continue; }   // i18n-ignore (for Claude)
-            if (!v || typeof v !== 'object' || Array.isArray(v)) { E.push(`${at} must be { title, goals, coverage } (or the title alone)`); continue; }   // i18n-ignore (for Claude)
-            for (const k of Object.keys(v)) if (!['title', 'goals', 'coverage'].includes(k)) E.push(`${at}.${k}: unknown field (only title, goals, coverage)`);   // i18n-ignore (for Claude)
-            if (v.title != null && !(typeof v.title === 'string' && v.title.trim())) E.push(`${at}.title must be a non-empty string`);   // i18n-ignore (for Claude)
-            for (const k of ['goals', 'coverage']) if (v[k] != null && !sameLen(v[k], ch[k] || [])) E.push(`${at}.${k}: ${(ch[k] || []).length} strings, one per ${k === 'goals' ? 'teaching goal' : 'coverage item'} of the chapter, in the same order`);   // i18n-ignore (for Claude)
-          }
-        }
-      }
-    }
-    return E;
-  }
+  const shownTitle = c => R().shownTitle(c, trLocale(c));
+  /** A step as the learner reads it (a copy for drawing only — never save it). */
+  const shownNode = (c, id) => R().shownNode(c, id, trLocale(c));
+  /** Check one locale's translation of a Roadmap → English diagnostics for Claude. */
+  const checkI18n = (c, loc, d) => R().checkI18n(c, loc, d);
   /** Merge one locale's translation into c.i18n (only the fields given; the rest stays). */
-  function setI18n(c, loc, d) {
-    const cur = (c.i18n = c.i18n || {})[loc] = c.i18n[loc] || {};
-    cur.at = stampAfter(cur.at);   // mergePlans: the later translation of a locale wins between two copies
-    for (const k of ['title', 'goal']) if (typeof d[k] === 'string' && d[k].trim()) cur[k] = d[k].trim();
-    for (const [id, T] of Object.entries(d.nodes || {})) {
-      if (!c.nodes[id]) continue;
-      const x = (cur.nodes = cur.nodes || {})[id] = { ...(cur.nodes?.[id] || {}) };
-      for (const k of I18N_FIELDS) if (T[k] != null) x[k] = k === 'chapters' ? Object.fromEntries(Object.entries({ ...(x.chapters || {}), ...T.chapters }).map(([r, v]) => [r, T.chapters[r] != null ? { ...chT(x.chapters?.[r]), ...chT(v) } : chT(v)])) : T[k];
-    }
-    return c;
-  }
-  /** What is still untranslated in a locale → { title, nodes: [ids], goals: [ids], domains: [ids], chapters: [ids] } (planned steps only
-      for goals and chapters; a chapter counts as translated with its title, teaching goals and coverage — all that its panel shows). */
-  function i18nTodo(c, loc) {
-    const T = c.i18n?.[loc] || {}, N = T.nodes || {}, ids = Object.keys(c.nodes || {});
-    const chDone = (id, ch) => { const t = chT(N[id]?.chapters?.[ch.ref]); return !!t.title && ['goals', 'coverage'].every(k => !(ch[k] || []).length || sameLen(t[k], ch[k])); };
-    return { title: !T.title, nodes: ids.filter(id => !N[id]?.title), goals: ids.filter(id => (c.nodes[id].learningGoals || []).length && (N[id]?.learningGoals || []).length !== c.nodes[id].learningGoals.length),
-      domains: ids.filter(id => (c.nodes[id].domains || []).length && !sameLen(N[id]?.domains, c.nodes[id].domains)),
-      chapters: ids.filter(id => (c.nodes[id].chapters || []).some(ch => !chDone(id, ch))) };
-  }
+  const setI18n = (c, loc, d) => R().setI18n(c, loc, d, Date.now());
+  /** What is still untranslated in a locale → { title, nodes, goals, domains, chapters }. */
+  const i18nTodo = (c, loc) => R().i18nTodo(c, loc);
   /** A step's own texts changed: its translations of those fields no longer fit. */
-  function dropI18n(c, id, fields) {
-    for (const L of Object.values(c.i18n || {})) { const x = L.nodes?.[id]; if (!x || !fields.some(k => k in x)) continue; for (const k of fields) delete x[k]; if (!Object.keys(x).length) delete L.nodes[id]; L.at = stampAfter(L.at); }
-  }
+  const dropI18n = (c, id, fields) => R().dropI18n(c, id, fields, Date.now());
 
-  return { DOMAINS, domainOf, packageText, outlineOf, planLocked, PLAN_KEYS, planOf, setPlan, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, stampAfter, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
+  return { DOMAINS, domainOf, packageText, outlineOf, planLocked, get PLAN_KEYS() { return [...R().PLAN_KEYS]; }, planOf, setPlan, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, stampAfter, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
     trLocale, shownTitle, shownNode, checkI18n, setI18n, i18nTodo, dropI18n,
-    schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART, rt, errW, errInfo };
+    schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, get PART() { return R().PART; }, rt, errW, errInfo };
 })();
 
 /* ======================= node packs: generation queue (prefetch) + placement test =======================
@@ -1031,7 +877,7 @@ window.NoemaCurriculum.Gen = (() => {
 window.NoemaCurriculum.Edit = (() => {
   const C = window.NoemaCurriculum, L = () => window.NoemaLLM, rt = C.rt, errW = C.errW;
   const ROLES = ['foundation', 'intro', 'aspect', 'subtopic', 'related', 'synthesis', 'application'];
-  const PART = { foundation: 'prereq', intro: 'core', aspect: 'core', subtopic: 'core', related: 'core', synthesis: 'core', application: 'apps', goal: 'core' };
+  const PART = () => window.NoemaCore.roadmaps.PART;   // src/features/roadmaps/domain/model.ts
   const generated = n => ['ready', 'generating'].includes(n?.pack?.status);
   const slug = t => String(t || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 36) || 'step';
   /** Would these edges keep the graph acyclic? → null or an error message. */
@@ -1056,7 +902,7 @@ window.NoemaCurriculum.Edit = (() => {
     const before = { title: n.title, summary: n.summary, goals: JSON.stringify(n.learningGoals), chapters: JSON.stringify(n.chapters) };
     if (patch.title != null) { const t = String(patch.title).trim(); if (!t) return { error: rt('roadmap.edit.needName') }; n.title = t.slice(0, 120); if (n.pack?.id && !n.pack.assigned) C.kvSet(acc, 'subjoverride:' + n.pack.id, { ...(C.kvGet(acc, 'subjoverride:' + n.pack.id, {}) || {}), title: n.title }); }
     if (patch.summary != null) n.summary = String(patch.summary).trim();
-    if (patch.role && ROLES.includes(patch.role)) { n.role = patch.role; n.part = PART[patch.role]; }
+    if (patch.role && ROLES.includes(patch.role)) { n.role = patch.role; n.part = PART()[patch.role]; }
     if (patch.learningGoals) n.learningGoals = patch.learningGoals.map(x => String(x).trim()).filter(Boolean);
     if (patch.chapters) n.chapters = patch.chapters.filter(ch => String(ch.title || '').trim()).map((ch, i) => ({ ref: ch.ref || 'c' + (i + 1) + '_' + Date.now().toString(36).slice(-3), title: String(ch.title).trim(), goals: (ch.goals || []).map(String).filter(Boolean), coverage: (ch.coverage || []).map(String).filter(Boolean), ...(ch.material ? { material: String(ch.material) } : {}) }));
     const changed = [['title', n.title !== before.title], ['summary', n.summary !== before.summary], ['learningGoals', JSON.stringify(n.learningGoals) !== before.goals], ['chapters', JSON.stringify(n.chapters) !== before.chapters]].filter(x => x[1]).map(x => x[0]);
@@ -1066,7 +912,7 @@ window.NoemaCurriculum.Edit = (() => {
   /** Add a step → its id. */
   function add(acc, cid, { title, summary = '', role = 'foundation', parents = [], children = [] }) {
     const c = C.get(acc, cid); let id = slug(title); while (c.nodes[id]) id += '_x';
-    c.nodes[id] = { id, title: String(title).trim(), summary, role, part: PART[role] || 'prereq', chapters: [], learningGoals: [], added: 'user' };
+    c.nodes[id] = { id, title: String(title).trim(), summary, role, part: PART()[role] || 'prereq', chapters: [], learningGoals: [], added: 'user' };
     const edges = [...c.edges, ...parents.filter(p => c.nodes[p]).map(p => ({ from: p, to: id, why: 'Added by you' })), ...children.filter(k => c.nodes[k]).map(k => ({ from: id, to: k, why: 'Added by you' }))];   // i18n-ignore (links' reasons: data, not shown)
     const err = check(c, edges); if (err) return { error: err };
     c.edges = edges; C.save(acc, c); return { ok: true, id };

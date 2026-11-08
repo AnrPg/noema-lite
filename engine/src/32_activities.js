@@ -109,21 +109,25 @@ const ACT = (() => {
   const engines = () => [...new Set([...Object.keys(ENGINES), ...(LIBR()?.ids() || [])])];
   /** the library engines an activity needs (its spec's engine, its parts', a mini-app's) and not loaded yet */
   function unloaded(a) {
-    const L = LIBR(), need = window.NoemaPackCheck?.needRequires ? NoemaPackCheck.needRequires([a], PARTS) : [];
+    const L = LIBR(), need = window.NoemaCore?.content?.needRequires ? NoemaCore.content.needRequires([a], PARTS) : [];
     return L ? need.filter(r => r.startsWith('engine:')).map(r => r.slice(7)).filter(id => !Object.prototype.hasOwnProperty.call(ENGINES, id) && L.has(id) && !L.loaded(id)) : [];
   }
 
-  /* ---------- persistence: S.act (explorer state per activity and place) and S.att (the last attempt of each sim exercise) ---------- */
+  /* ---------- persistence, in the learning log: S.act (explorer state per activity and place: activity.saved) and S.att (the last
+     attempt of each sim exercise: activity.attempted) ---------- */
   const STATE_MAX = ACTP.LIM.state, KEEP_EVENTS = 200;
   function loadState(key) { const s = S.act?.[key]; return s && typeof s === 'object' ? s : null; }
-  function saveState(key, version, data) { S.act = S.act || {}; S.act[key] = { v: version, data, t: Date.now() }; save(); }
+  function saveState(key, version, data) { learnt('activity.saved', key, { v: Math.max(1, Math.floor(+version) || 1), state: data === undefined ? null : data }); }
   function saveAttempt(sess) {
     if (!sess.ex) return;
-    S.att = S.att || {};
     // the last attempt wins: a session that is torn down later (its card left the page) never overwrites an attempt begun after it
     const had = S.att[sess.ex.id]; if (had && had.id !== sess.attemptId && (had.t0 || 0) > sess.t0) return;
-    S.att[sess.ex.id] = { id: sess.attemptId, seed: sess.seed, t0: sess.t0, t: Date.now(), hints: sess.hintsUsed, result: sess.result, events: sess.events.slice(-KEEP_EVENTS) };
-    save();
+    const a = { t: Date.now(), result: sess.result || null, events: sess.events.slice(-KEEP_EVENTS) };
+    if (sess.attemptId != null) a.id = String(sess.attemptId);
+    if (sess.seed !== undefined) a.seed = sess.seed;
+    if (Number.isInteger(sess.t0) && sess.t0 >= 0) a.t0 = sess.t0;
+    if (Number.isInteger(sess.hintsUsed) && sess.hintsUsed >= 0) a.hints = sess.hintsUsed;
+    learnt('activity.attempted', sess.ex.id, { attempt: a });
   }
 
   /* ---------- graders (Strategy): reported — the activity reports its result; checks — host-side rules (P2, the expression language) ---------- */
@@ -315,7 +319,7 @@ const ACT = (() => {
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => setTimeout(() => LIVE.forEach(s => s.send('theme', theme())), 50));
 
   /* ---------- content the app cannot show: never a crash (docs/adr/001 D1) ---------- */
-  const knownType = t => !!(window.NoemaPackCheck?.TYPES?.has(t));
+  const knownType = t => !!(window.NoemaCore?.content?.TYPES?.has(t));
   /** A chapter's exercises without the ones this app cannot run (an unknown type from a newer app, a sim whose runtime is off here):
       they stay in the pack and come back once the app can show them. */
   const runnable = e => knownType(e.type) && (e.type !== 'sim' || canRun(ITEMS[e.activity]));

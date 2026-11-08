@@ -1,72 +1,149 @@
 /// <reference types="node" />
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { interpret, machine } from './statechart.ts';
+import { createActor, initialStep, transition, transitionIds, type MachineDef, type Scheduler } from './statechart.ts';
 
-type Ev = { type: 'START' } | { type: 'STOP'; force?: boolean } | { type: 'TICK' };
-const m = machine<{ n: number; log: string[] }, Ev, 'idle' | 'busy' | 'over'>({
+type S = 'idle' | 'busy' | 'done';
+type E = { type: 'GO'; n: number } | { type: 'TICK' } | { type: 'STOP' } | { type: 'RESET' };
+type F = 'work' | 'leftIdle' | 'enteredBusy' | 'finished' | 'boom';
+interface C {
+  readonly n: number;
+  readonly ticks: number;
+}
+
+const def: MachineDef<S, C, E, F> = {
+  id: 'test',
   initial: 'idle',
-  context: { n: 0, log: [] },
+  context: { n: 0, ticks: 0 },
   states: {
-    idle: { entry: c => ({ ...c, log: [...c.log, 'idle'] }), on: { START: { target: 'busy', action: c => ({ ...c, n: c.n + 1 }) } } },
-    busy: {
+    idle: {
+      exit: ['leftIdle'],
       on: {
-        TICK: { action: c => ({ ...c, n: c.n + 10 }) },
-        STOP: [
-          { target: 'over', guard: (_c, e) => e.force === true },
-          { target: 'idle', guard: c => c.n < 30 },
+        GO: [
+          { guard: (_, e) => e.n < 0, effects: ['boom'] },
+          { target: 'busy', assign: (c, e) => ({ ...c, n: e.n }), effects: ['work'] },
         ],
       },
-      always: [{ target: 'over', guard: c => c.n >= 100 }],
     },
-    over: { final: true },
+    busy: {
+      entry: ['enteredBusy'],
+      on: { TICK: { assign: c => ({ ...c, ticks: c.ticks + 1 }) }, GO: { target: 'busy', assign: (c, e) => ({ ...c, n: e.n }) } },
+      after: [
+        {
+          delay: c => c.n * 100,
+          then: [
+            { guard: c => c.ticks > 5, target: 'idle' },
+            { target: 'done', effects: ['finished'] },
+          ],
+        },
+      ],
+    },
+    done: { on: { RESET: { target: 'idle', assign: () => ({ n: 0, ticks: 0 }) } } },
   },
+  on: { STOP: { target: 'done' } },
+};
+
+/** A manual scheduler: time moves when the test says. */
+function manual(): Scheduler<number> & { advance(ms: number): void } {
+  let now = 0,
+    id = 0;
+  const timers = new Map<number, { at: number; f: () => void }>();
+  return {
+    now: () => now,
+    setTimeout(f, ms) {
+      timers.set(++id, { at: now + ms, f });
+      return id;
+    },
+    clearTimeout(h) {
+      timers.delete(h);
+    },
+    advance(ms) {
+      const end = now + ms;
+      for (;;) {
+        const next = [...timers.entries()].filter(([, t]) => t.at <= end).sort((a, b) => a[1].at - b[1].at)[0];
+        if (!next) break;
+        timers.delete(next[0]);
+        now = next[1].at;
+        next[1].f();
+      }
+      now = end;
+    },
+  };
+}
+
+test('transition is pure: guards pick the first that holds; exit → transition → entry effects; internal transitions stay', () => {
+  const meta = { now: 0 };
+  const s0 = initialStep(def, meta);
+  assert.deepEqual([s0.snapshot.state, s0.effects, s0.entered], ['idle', [], true]);
+  const neg = transition(def, s0.snapshot, { type: 'GO', n: -1 }, meta);
+  assert.deepEqual([neg.snapshot.state, neg.effects, neg.taken, neg.entered], ['idle', ['boom'], 'idle.on.GO.0', false]);
+  const go = transition(def, s0.snapshot, { type: 'GO', n: 3 }, meta);
+  assert.deepEqual(
+    [go.snapshot.state, go.snapshot.context.n, go.effects, go.taken],
+    ['busy', 3, ['leftIdle', 'work', 'enteredBusy'], 'idle.on.GO.1'],
+  );
+  assert.deepEqual(go.timers, [{ index: 0, delay: 300 }]);
+  const tick = transition(def, go.snapshot, { type: 'TICK' }, meta);
+  assert.deepEqual([tick.snapshot.state, tick.snapshot.context.ticks, tick.entered, tick.timers], ['busy', 1, false, []]);
+  assert.equal(transition(def, s0.snapshot, { type: 'TICK' }, meta).taken, null, 'an event nobody answers changes nothing');
+  assert.equal(transition(def, go.snapshot, { type: 'STOP' }, meta).taken, '*.on.STOP.0', 'the machine-wide answer');
+  assert.equal(transition(def, go.snapshot, { type: '@after', index: 7 }, meta).taken, null, 'an unknown timer');
+  const many = { ...go.snapshot, context: { n: 3, ticks: 6 } };
+  assert.deepEqual(
+    [
+      transition(def, many, { type: '@after', index: 0 }, meta).taken,
+      transition(def, go.snapshot, { type: '@after', index: 0 }, meta).taken,
+    ],
+    ['busy.after.0.0', 'busy.after.0.1'],
+    'a timer takes the first of its transitions whose guard holds',
+  );
+  assert.equal(go.snapshot.context.ticks, 0, 'the old snapshot is untouched');
 });
 
-test('transitions, guards in order, actions, entry, staying', () => {
-  const s0 = m.initial();
-  assert.deepEqual([s0.value, s0.context.log], ['idle', ['idle']]);
-  const r1 = m.transition(s0, { type: 'START' });
-  assert.equal(r1.snapshot.value, 'busy');
-  assert.equal(r1.snapshot.context.n, 1);
-  const r2 = m.transition(r1.snapshot, { type: 'TICK' });
-  assert.deepEqual([r2.changed, r2.snapshot.value, r2.snapshot.context.n], [true, 'busy', 11]);
-  assert.equal(m.transition(r2.snapshot, { type: 'STOP' }).snapshot.value, 'idle');
-  assert.equal(m.transition(r2.snapshot, { type: 'STOP', force: true }).snapshot.value, 'over');
-});
-
-test('an event the state does not accept, a guard that holds for none, a final state: nothing changes', () => {
-  const s0 = m.initial();
-  const r = m.transition(s0, { type: 'TICK' });
-  assert.equal(r.changed, false);
-  assert.equal(r.snapshot, s0);
-  const busy = m.initial({ n: 40, log: [] });
-  const b = m.transition(m.transition(busy, { type: 'START' }).snapshot, { type: 'STOP' });
-  assert.equal(b.changed, false);
-  const over = m.transition(m.transition(busy, { type: 'START' }).snapshot, { type: 'STOP', force: true }).snapshot;
-  assert.equal(over.done, true);
-  assert.deepEqual(m.accepts(over), []);
-  assert.equal(m.transition(over, { type: 'START' }).changed, false);
-});
-
-test('eventless transitions run after entry', () => {
-  const r = m.transition(m.initial({ n: 99, log: [] }), { type: 'START' });
-  assert.equal(r.snapshot.value, 'over');
-});
-
-test('interpret: listeners, queued sends, unsubscribe', () => {
-  const s = interpret(m);
-  const seen: string[] = [];
-  const stop = s.subscribe((snap, e) => {
-    seen.push(`${e.type}>${snap.value}`);
-    if (e.type === 'START') s.send({ type: 'TICK' });
+test('the actor runs events one at a time, fires timers, ignores the timers of a state it left, and covers every transition', () => {
+  const clock = manual();
+  const ran: F[] = [],
+    taken = new Set<string>();
+  const actor = createActor(def, {
+    scheduler: clock,
+    run: (f, send) => {
+      ran.push(f);
+      if (f === 'work') send({ type: 'TICK' }); // an effect that sends: handled after the current event
+    },
+    onError: () => assert.fail('no effect throws'),
   });
-  assert.equal(s.send({ type: 'START' }), true);
-  assert.deepEqual(seen, ['START>busy', 'TICK>busy']);
-  assert.equal(s.state.context.n, 11);
-  stop();
-  s.send({ type: 'STOP' });
-  assert.equal(seen.length, 2);
-  assert.equal(s.state.value, 'idle');
-  assert.equal(s.send({ type: 'TICK' }), false);
+  actor.subscribe((_, step) => {
+    if (step.taken) taken.add(step.taken);
+  });
+  actor.send({ type: 'GO', n: -1 });
+  actor.send({ type: 'GO', n: 2 });
+  assert.deepEqual([actor.snapshot.state, actor.snapshot.context.ticks], ['busy', 1]);
+  clock.advance(150);
+  actor.send({ type: 'GO', n: 1 }); // re-enter: the 200 ms timer stops, a 100 ms one starts
+  clock.advance(60);
+  assert.equal(actor.snapshot.state, 'busy', 'the first timer (200 ms after the first entry) was dropped');
+  clock.advance(50);
+  assert.equal(actor.snapshot.state, 'done');
+  actor.send({ type: 'RESET' });
+  actor.send({ type: 'STOP' });
+  assert.deepEqual(ran, ['boom', 'leftIdle', 'work', 'enteredBusy', 'enteredBusy', 'finished', 'leftIdle']);
+  taken.add('busy.after.0.0'); // its guard (more than five ticks) is the pure test's above
+  assert.deepEqual([...taken].sort(), transitionIds(def).sort(), 'every transition of the machine was taken');
+  actor.stop();
+  actor.send({ type: 'RESET' });
+  assert.equal(actor.snapshot.state, 'done', 'a stopped actor ignores events');
+});
+
+test('an effect that throws is reported and the machine goes on', () => {
+  const errors: unknown[] = [];
+  const actor = createActor(def, {
+    scheduler: manual(),
+    run: f => {
+      if (f === 'work') throw new Error('broken effect');
+    },
+    onError: e => errors.push(e),
+  });
+  actor.send({ type: 'GO', n: 1 });
+  assert.equal(actor.snapshot.state, 'busy');
+  assert.equal(errors.length, 1);
 });

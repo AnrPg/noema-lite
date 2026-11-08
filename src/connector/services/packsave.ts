@@ -33,7 +33,7 @@ import { sagaKey } from './sagas.ts';
 import { nameOf } from './supabase.ts';
 
 export const summary = (p: Pack, r: PackCheckResult): string =>
-  `✅ “${p.subject.title}” (${p.subject.id}) is in the noema-lite account: ${r.counts.chapters} chapters, ${r.counts.sections} sections, ${r.counts.exercises} exercises (${r.counts.visual} visual), ${r.counts.media} pictures.` +
+  `✅ “${p.subject.title}” (${p.subject.id}) is in the noema-lite account: ${r.counts.chapters ?? 0} chapters, ${r.counts.sections ?? 0} sections, ${r.counts.exercises ?? 0} exercises (${r.counts.visual ?? 0} visual), ${r.counts.media ?? 0} pictures.` +
   `\nThe learner's app gets it the next time it opens (or after tapping ☁️ → Sync now).` +
   (r.warnings.length ? `\n⚠️ Warnings:\n- ${r.warnings.slice(0, 20).join('\n- ')}` : '');
 

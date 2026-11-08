@@ -5,12 +5,18 @@ block, exercises, flashcards, traps, debug drills, sources), language courses (w
 fields, sentences, peculiarities) and the conversations with the character. Content others share in Discover is not
 searched here; Discover has its own search.
 
-Files: `src/features/catalog` (the records and the stored index, built in the Worker; `NoemaCore.catalog`),
-`engine/catalog.js` (the query: folding, scoring, snippets), `engine/search.js` (the sheet,
-the page, saved searches, the practice round); its words are in `engine/i18n_shell.js` as `sr_*` keys, in every
-interface language, like the rest of the new frame, engine hooks in `engine/src/40_views.js` (deep links, the
-`#/srun` round), `engine/shell.js` (🔎 in the top bar, `/` and Ctrl K, the `#/search` page). Tests:
-`tests/search_catalog.js` (Node) and `tests/search.js` (Playwright).
+Files:
+
+| Part | Where |
+|---|---|
+| The query side: the record's shape, folding, the transliteration rule, the query and its scores, snippets, the page's address, saved and recent searches, the scope and status filters, the practice round's steps | `src/features/search/domain/` (pure TypeScript), `src/features/search/application/search.ts` (the search with the interface language's collation); the page reads it as `NoemaCore.search` (`src/composition/community.ts`) |
+| The builders of the records and the stored index | `src/features/catalog` (`NoemaCore.catalog`: `fromPack`, `fromCurriculum`, `fromLangCourse`, `fromConvos`, `index(account, sources)`; the records are built in the Worker and kept in IndexedDB); the records keep the shape of §3 |
+| The sheet, the page, the collections, the round | `engine/search.js` |
+
+Its words are in `engine/i18n_shell.js` as `sr_*` keys, in every interface language, like the rest of the new frame,
+engine hooks in `engine/src/40_views.js` (deep links, the `#/srun` round), the frame (src/composition/shell/host.ts, src/ui/screens/shell) (🔎 in the top bar, `/`
+and Ctrl K, the `#/search` page). Tests: `src/features/search/domain/search.test.ts` (`npm run test:unit`),
+`tests/search_catalog.js` (Node, after `npm run build`) and `tests/search.js` (Playwright).
 
 ## 1. Where it is
 
@@ -49,7 +55,17 @@ Matching: accents, case, ß/ss, final sigma, Hebrew points, Arabic vowel marks a
 matches with tone marks, without them, or with tone numbers (`xing3`). A word is found by any of its forms. Exercise
 answers and explanations are never indexed.
 
-## 3. Records (src/features/catalog/domain/records.ts)
+**The transliteration rule (the whole app: this search, the vault, finding people):** a word matches in its original
+script, in its scholarly transliteration and in plain Latin letters. `viologia` and `biologia` find «Βιολογία»,
+«Βιολογία» finds "Biologia", `nikos papadakis` finds «Νίκος Παπαδάκης», `sahn` and `ṣaḥn` find «صحن» (through its
+transliteration). Greek and Cyrillic are transliterated (`src/features/search/domain/translit.ts`: Greek plain β v,
+η i, υ y, χ ch and scholarly β b, η e, υ u, χ kh; ου = ou); the scholarly letters of the other scripts fold to the
+plain ones typed (š sh, ǧ j, ḵ kh, ṯ th, ġ gh). A record is searched in its folded text and, when it has Greek or
+Cyrillic, in both Latin forms; a match in Latin letters is shown in the original script (the snippet maps it back).
+A match in the original script scores as before; one only in Latin letters scores the same (the query's words are what
+the learner typed).
+
+## 3. Records (`src/features/catalog/domain/records.ts`; their type for the query: `src/features/search/domain/records.ts`)
 
 ```
 { ty, w: 'know'|'lang', k: unique key, ti: title, f: [[field, text]…], h: address, pa: [path…],
@@ -59,6 +75,11 @@ answers and explanations are never indexed.
 Builders: `fromPack(pack, meta)`, `fromCurriculum(cur)`, `fromLangCourse(data, meta)`, `fromConvos(list)`. A change in
 what a pack, a course or a conversation holds that should be searchable is a change in its builder (and in
 `tests/search_catalog.js`). Bump `SCHEMA` in records.ts when records change shape: every stored index is rebuilt.
+
+The contract between the records' holder (`NoemaCore.catalog`) and the query side (`NoemaCore.search`): the builder gives plain `SearchRecord`s (no `_` fields, nothing precomputed); `NoemaCore.search.search(records,
+q, {w, types, langs, keep})` → `{exact, groups: [[kind, hits]…], total, q}` with each hit `{r, score, fi, at, via, form}`;
+`snip(hit)` → `{field, pre, hit, post}`. The folded and Latin texts of a record are computed once per record object
+and kept beside it (a WeakMap), so the holder should hand the same record objects to every search.
 
 The index is kept per account and source in IndexedDB `noema-lite-search` (store `src`, key `<account>|<source>`,
 value `{schema, sig, recs}`). Sources: `pack:<id>`, `cur:<id>`, `lang:<course>`, `convos`. Each has a signature

@@ -16,13 +16,12 @@ Which engine for which learning goal: `docs/INTERACTIVE_AUTHORING.md`.
   workerSource}` (`twin@1` also `bench: true`). Every run goes to a **Worker** whose source is its Worker bundle (the text a Worker runs), built by esbuild from the module and the kernel pieces it imports (`noemaWorkers` in `tools/esbuild.mjs`): the same code as on
   the page; `prepare` evaluates the
   spec's expressions (bindings, transient times, `at`) with the app's NoemaExpr on the main thread, so the worker gets numbers.
-- **Validated with the same messages in JS and Python.** `engine/packcheck.js` and `tools/activities.py` know the four in `ENGINES`
-  and call each engine's own check — `checkSpec(spec)` in JS (the engine file is loaded beside packcheck in the shell, the site,
-  the one-file bundle and the connector), `check_spec(spec)` in its Python twin (`tools/thermal.py`, `pid.py`, `rf.py`, `twin.py`,
-  shipped in the skill zip next to `activities.py`). A spec with an error is refused with `spec.<path>: <message>`. The engines
+- **Validated with one set of messages.** The content checks (`src/features/content`) know the four in `ENGINES`
+  and call each engine's own `checkSpec(spec)` (the engine library is in the app's bundle, the connector and
+  `build/noema-tools.cjs`, which the Python tools and the skill's scripts call). A spec with an error is refused with `spec.<path>: <message>`. The engines
   accept any non-empty text as an expression; the validators then check **every expression of the model** with NoemaExpr /
   simexpr against the spec's names (consts, params, derived): each binding's `expr`, and for `thermal@1` and `pid@1` also
-  `model.transient.tEnd` / `dt` and every output's `at`. `tests/activities.js` compares JS and Python on 50+ P6 specs.
+  `model.transient.tEnd` / `dt` and every output's `at`. `tests/activities.js` holds them to the golden messages of the former Python twins on 50+ P6 specs.
 - **`pack.requires`** gets `engine:thermal@1`, `engine:pid@1`, `engine:rf@1` or `engine:twin@1` (`make_pack.py` writes it).
 - Engines' codes and messages are for authors (the validators, `activity_lint.py`); a learner never sees them. A run that fails
   at runtime (a slider reaches an invalid value) gives NaN scalars and empty series; nothing throws into the page.
@@ -322,7 +321,7 @@ a board. What differs:
   twin's own: `log` (the event log: resets, lost messages, overrun wake-ups, and collisions and missed slots when there are any),
   `rssi` (the mean received signal strength, dBm), `T` (the thermometer: the last, lowest and highest temperature, °C) and `clock`
   (the clock against a reference: the mean drift in ppm and the worst error in s); these four take only `kind`. `R` and `logic` are the circuit's.
-- **faults** `apply` is a list of §5.2 faults (`[]` = a healthy device); `twin.checkFaults` / `twin.check_faults` (Python) check them.
+- **faults** `apply` is a list of §5.2 faults (`[]` = a healthy device); `twin.checkFaults` checks them.
 
 ```json
 "bench": { "faults": [ {"id": "antenna", "apply": [{"kind": "antenna-detached"}]}, {"id": "ageing", "apply": [{"kind": "battery-ageing"}]},

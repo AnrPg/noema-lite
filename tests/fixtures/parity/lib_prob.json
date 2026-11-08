@@ -1,0 +1,2120 @@
+{
+ "data": {
+  "in": null,
+  "out": {
+   "modes": [
+    "dist",
+    "mc",
+    "sampling",
+    "test",
+    "ci",
+    "power",
+    "bayes",
+    "screen",
+    "simpson",
+    "multi",
+    "markov",
+    "walk",
+    "queue",
+    "bootstrap",
+    "combin",
+    "gof",
+    "mcmc",
+    "multivar",
+    "rand"
+   ],
+   "families": {
+    "bernoulli": {
+     "disc": 1,
+     "p": {
+      "p": "unit!"
+     }
+    },
+    "binomial": {
+     "disc": 1,
+     "p": {
+      "n": "int:0:1000000000!",
+      "p": "unit!"
+     }
+    },
+    "geometric": {
+     "disc": 1,
+     "p": {
+      "p": "unit!",
+      "trials": "bool"
+     }
+    },
+    "negbinomial": {
+     "disc": 1,
+     "p": {
+      "r": "pos!",
+      "p": "unit!"
+     }
+    },
+    "poisson": {
+     "disc": 1,
+     "p": {
+      "lambda": "nonneg!"
+     }
+    },
+    "hypergeometric": {
+     "disc": 1,
+     "p": {
+      "N": "int:0:1000000000!",
+      "K": "int:0:1000000000!",
+      "n": "int:0:1000000000!"
+     }
+    },
+    "dunif": {
+     "disc": 1,
+     "p": {
+      "a": "int:-1000000000:1000000000!",
+      "b": "int:-1000000000:1000000000!"
+     }
+    },
+    "categorical": {
+     "disc": 1,
+     "p": {
+      "probs": "list!",
+      "values": "flist"
+     }
+    },
+    "uniform": {
+     "disc": 0,
+     "p": {
+      "a": "fin!",
+      "b": "fin!"
+     }
+    },
+    "normal": {
+     "disc": 0,
+     "p": {
+      "mu": "fin",
+      "sigma": "pos"
+     }
+    },
+    "lognormal": {
+     "disc": 0,
+     "p": {
+      "mu": "fin",
+      "sigma": "pos"
+     }
+    },
+    "exponential": {
+     "disc": 0,
+     "p": {
+      "rate": "pos"
+     }
+    },
+    "gamma": {
+     "disc": 0,
+     "p": {
+      "shape": "pos!",
+      "rate": "pos",
+      "scale": "pos"
+     }
+    },
+    "beta": {
+     "disc": 0,
+     "p": {
+      "a": "pos!",
+      "b": "pos!"
+     }
+    },
+    "chi2": {
+     "disc": 0,
+     "p": {
+      "df": "pos!"
+     }
+    },
+    "t": {
+     "disc": 0,
+     "p": {
+      "df": "pos!"
+     }
+    },
+    "f": {
+     "disc": 0,
+     "p": {
+      "d1": "pos!",
+      "d2": "pos!"
+     }
+    },
+    "cauchy": {
+     "disc": 0,
+     "p": {
+      "x0": "fin",
+      "gamma": "pos"
+     }
+    },
+    "weibull": {
+     "disc": 0,
+     "p": {
+      "shape": "pos!",
+      "scale": "pos"
+     }
+    },
+    "laplace": {
+     "disc": 0,
+     "p": {
+      "mu": "fin",
+      "b": "pos"
+     }
+    },
+    "logistic": {
+     "disc": 0,
+     "p": {
+      "mu": "fin",
+      "s": "pos"
+     }
+    },
+    "pareto": {
+     "disc": 0,
+     "p": {
+      "xm": "pos",
+      "alpha": "pos!"
+     }
+    },
+    "gumbel": {
+     "disc": 0,
+     "p": {
+      "mu": "fin",
+      "beta": "pos"
+     }
+    },
+    "triangular": {
+     "disc": 0,
+     "p": {
+      "a": "fin!",
+      "b": "fin!",
+      "c": "fin!"
+     }
+    },
+    "rayleigh": {
+     "disc": 0,
+     "p": {
+      "sigma": "pos"
+     }
+    }
+   },
+   "schema": {
+    "dist": {
+     "x": "numx",
+     "lo": "numx",
+     "hi": "numx",
+     "p": "numx",
+     "pu": "numx",
+     "from": "numx",
+     "to": "numx",
+     "points": "int:2:2000"
+    },
+    "mc": {
+     "expr": "expr!",
+     "n": "numx",
+     "seed": "int:0:4294967295",
+     "conf": "numx",
+     "bins": "int:2:200",
+     "exact": "numx"
+    },
+    "sampling": {
+     "size": "numx!",
+     "reps": "numx",
+     "stat": "enum:mean|sum|median|var|sd|min|max",
+     "seed": "int:0:4294967295",
+     "bins": "int:2:200"
+    },
+    "test": {
+     "kind": "enum:z-one|t-one|t-paired|t-welch|t-pooled|prop-one|prop-two|binom-exact|sign|chi2-gof|chi2-indep|g-test|fisher|mcnemar|f-var|anova|pearson|regression|mann-whitney|wilcoxon!",
+     "x": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "y": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "groups": {
+      "$list": {
+       "$list": "numx",
+       "max": 2000
+      },
+      "max": 20
+     },
+     "table": {
+      "$list": {
+       "$list": "numx",
+       "max": 20
+      },
+      "max": 20
+     },
+     "observed": {
+      "$list": "numx",
+      "max": 100
+     },
+     "probs": {
+      "$list": "numx",
+      "max": 100
+     },
+     "summary": {
+      "$obj": {
+       "mean": "numx!",
+       "sd": "numx!",
+       "n": "numx!",
+       "mean2": "numx",
+       "sd2": "numx",
+       "n2": "numx"
+      }
+     },
+     "k": "numx",
+     "n": "numx",
+     "k2": "numx",
+     "n2": "numx",
+     "mu0": "numx",
+     "p0": "numx",
+     "sigma": "numx",
+     "ratio0": "numx",
+     "alpha": "numx",
+     "alt": "enum:two-sided|less|greater",
+     "correct": "bool",
+     "exact": "bool",
+     "ddof": "numx",
+     "points": "int:2:2000"
+    },
+    "ci": {
+     "kind": "enum:prop|poisson|mean|variance!",
+     "k": "numx",
+     "n": "numx",
+     "t": "numx",
+     "x": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "summary": {
+      "$obj": {
+       "mean": "numx!",
+       "sd": "numx!",
+       "n": "numx!"
+      }
+     },
+     "sigma": "numx",
+     "conf": "numx",
+     "method": "enum:wald|wilson|agresti-coull|clopper-pearson|jeffreys|exact|t|z|chi2",
+     "p": "numx",
+     "points": "int:2:2000"
+    },
+    "power": {
+     "kind": "enum:z-one|t-one|t-paired|t-two|prop-two|binom-exact!",
+     "effect": "numx",
+     "p0": "numx",
+     "p1": "numx",
+     "p2": "numx",
+     "n": "numx",
+     "alpha": "numx",
+     "alt": "enum:two-sided|less|greater",
+     "target": "numx",
+     "nMax": "int:2:2000",
+     "dMax": "numx",
+     "points": "int:2:2000"
+    },
+    "bayes": {
+     "kind": "enum:beta-binomial|gamma-poisson|normal-normal!",
+     "prior": {
+      "$obj": {
+       "a": "numx",
+       "b": "numx",
+       "mu": "numx",
+       "sd": "numx"
+      }
+     },
+     "k": "numx",
+     "n": "numx",
+     "sum": "numx",
+     "t": "numx",
+     "xbar": "numx",
+     "sigma": "numx",
+     "theta0": "numx",
+     "conf": "numx",
+     "points": "int:2:2000",
+     "from": "numx",
+     "to": "numx"
+    },
+    "screen": {
+     "prev": "numx!",
+     "sens": "numx!",
+     "spec": "numx!",
+     "pop": "numx",
+     "tests": "numx"
+    },
+    "simpson": {
+     "strata": {
+      "$req": true,
+      "$list": {
+       "$obj": {
+        "k1": "numx!",
+        "n1": "numx!",
+        "k2": "numx!",
+        "n2": "numx!"
+       }
+      },
+      "max": 20,
+      "min": 1
+     }
+    },
+    "multi": {
+     "p": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "method": "enum:bonferroni|holm|hochberg|bh|by",
+     "alpha": "numx",
+     "sim": {
+      "$obj": {
+       "m": "numx!",
+       "m0": "numx!",
+       "effect": "numx!",
+       "reps": "numx",
+       "seed": "int:0:4294967295"
+      }
+     }
+    },
+    "markov": {
+     "states": {
+      "$req": true,
+      "$list": "id",
+      "max": 100,
+      "min": 1
+     },
+     "labels": {
+      "$list": "key",
+      "max": 100
+     },
+     "P": {
+      "$req": true,
+      "$list": {
+       "$list": "numx",
+       "max": 100
+      },
+      "max": 100,
+      "min": 1
+     },
+     "init": {
+      "$list": "numx",
+      "max": 100
+     },
+     "start": "ref",
+     "steps": "numx",
+     "normalize": "bool"
+    },
+    "walk": {
+     "kind": "enum:srw|ruin|galton-watson!",
+     "p": "numx",
+     "N": "numx",
+     "i": "numx",
+     "steps": "numx",
+     "paths": "numx",
+     "reps": "numx",
+     "seed": "int:0:4294967295",
+     "a": "numx",
+     "dim": "int:1:3",
+     "offspring": {
+      "$list": "numx",
+      "max": 64
+     },
+     "m": "numx",
+     "gens": "numx"
+    },
+    "queue": {
+     "lambda": "numx!",
+     "mu": "numx!",
+     "c": "numx",
+     "nMax": "int:1:2000"
+    },
+    "bootstrap": {
+     "x": {
+      "$req": true,
+      "$list": "numx",
+      "max": 2000,
+      "min": 2
+     },
+     "y": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "stat": "enum:mean|median|sd|var|trimmed|diff-means|corr",
+     "B": "numx",
+     "conf": "numx",
+     "seed": "int:0:4294967295",
+     "trim": "numx",
+     "perm": "bool",
+     "alt": "enum:two-sided|less|greater"
+    },
+    "combin": {
+     "kind": "enum:multinomial|coupon|birthday!",
+     "n": "numx",
+     "probs": {
+      "$list": "numx",
+      "max": 400
+     },
+     "x": {
+      "$list": "numx",
+      "max": 64
+     },
+     "i": "numx",
+     "j": "numx",
+     "types": "numx",
+     "copies": "numx",
+     "want": "numx",
+     "m": "numx",
+     "mMax": "int:1:2000",
+     "days": "numx",
+     "people": "numx",
+     "k": "numx",
+     "target": "numx",
+     "nMax": "int:1:2000"
+    },
+    "gof": {
+     "kind": "enum:ks-one|ks-two|shapiro-wilk|anderson-darling|chi2-fit!",
+     "x": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "y": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "estimate": "bool",
+     "alt": "enum:two-sided|less|greater",
+     "exact": "bool",
+     "bins": "int:2:100",
+     "ddof": "int:0:10",
+     "alpha": "numx",
+     "points": "int:2:2000"
+    },
+    "mcmc": {
+     "kind": "enum:metropolis|gibbs-bivnormal|gibbs-normal!",
+     "logdens": "expr",
+     "params": {
+      "$list": "name",
+      "max": 6,
+      "min": 1
+     },
+     "init": {
+      "$list": "numx",
+      "max": 6
+     },
+     "scale": {
+      "$list": "numx",
+      "max": 6
+     },
+     "iters": "numx",
+     "burn": "numx",
+     "thin": "numx",
+     "chains": "int:1:8",
+     "seed": "int:0:4294967295",
+     "spread": "numx",
+     "rho": "numx",
+     "x": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "prior": {
+      "$obj": {
+       "mu0": "numx",
+       "sd0": "numx",
+       "a": "numx",
+       "b": "numx"
+      }
+     },
+     "lags": "int:1:200",
+     "bins": "int:2:200"
+    },
+    "multivar": {
+     "kind": "enum:mvnormal|corr|ols|logistic|pca|dirichlet!",
+     "mu": {
+      "$list": "numx",
+      "max": 10,
+      "min": 1
+     },
+     "cov": {
+      "$list": {
+       "$list": "numx",
+       "max": 10
+      },
+      "max": 10
+     },
+     "x": {
+      "$list": "numx",
+      "max": 10
+     },
+     "data": {
+      "$list": {
+       "$list": "numx",
+       "max": 10,
+       "min": 1
+      },
+      "max": 2000,
+      "min": 1
+     },
+     "y": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "w": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "intercept": "bool",
+     "scale": "bool",
+     "conc": {
+      "$list": "numx",
+      "max": 10,
+      "min": 2
+     },
+     "conf": "numx",
+     "i": "int:0:9",
+     "j": "int:0:9",
+     "n": "numx",
+     "seed": "int:0:4294967295",
+     "maxIter": "int:1:200"
+    },
+    "rand": {
+     "kind": "enum:amplify|quicksort|quickselect|karger|freivalds|primality|rounding|balls|bloom|countmin|hll|reservoir|cover|twosat|bounds|skiplist|treap|mcpi!",
+     "err": "numx",
+     "sided": "enum:one|two",
+     "k": "numx",
+     "delta": "numx",
+     "p": "numx",
+     "n": "numx",
+     "r": "numx",
+     "m": "numx",
+     "d": "numx",
+     "L": "numx",
+     "N": "numx",
+     "T": "numx",
+     "w": "numx",
+     "s": "numx",
+     "t": "numx",
+     "i": "numx",
+     "a": "numx",
+     "b": "numx",
+     "bits": "numx",
+     "eps": "numx",
+     "target": "numx",
+     "kMax": "int:1:2000",
+     "x": {
+      "$list": "numx",
+      "max": 2000
+     },
+     "edges": {
+      "$list": {
+       "$list": "numx",
+       "max": 2,
+       "min": 2
+      },
+      "max": 400
+     },
+     "A": {
+      "$list": {
+       "$list": "numx",
+       "max": 16
+      },
+      "max": 16
+     },
+     "B": {
+      "$list": {
+       "$list": "numx",
+       "max": 16
+      },
+      "max": 16
+     },
+     "Cm": {
+      "$list": {
+       "$list": "numx",
+       "max": 16
+      },
+      "max": 16
+     },
+     "graph": "enum:path|cycle|complete|star|lollipop|hypercube",
+     "start": "numx",
+     "reps": "numx",
+     "seed": "int:0:4294967295",
+     "expr": "expr",
+     "exact": "numx",
+     "points": "int:2:2000"
+    }
+   },
+   "custom": {
+    "dist": [
+     "dist"
+    ],
+    "sampling": [
+     "parent"
+    ],
+    "mc": [
+     "draws"
+    ],
+    "gof": [
+     "dist"
+    ],
+    "rand": [
+     "dist"
+    ]
+   },
+   "ranges": {
+    "dist": {
+     "p": "unit",
+     "pu": "unit"
+    },
+    "mc": {
+     "n": "int:1:200000",
+     "conf": "unit"
+    },
+    "sampling": {
+     "size": "int:1:10000",
+     "reps": "int:1:10000"
+    },
+    "test": {
+     "alpha": "unit",
+     "p0": "unit",
+     "sigma": "pos",
+     "ddof": "int:0:100",
+     "k": "nonneg",
+     "n": "nonneg",
+     "k2": "nonneg",
+     "n2": "nonneg",
+     "ratio0": "pos"
+    },
+    "ci": {
+     "conf": "unit",
+     "k": "nonneg",
+     "n": "nonneg",
+     "t": "pos",
+     "p": "unit",
+     "sigma": "pos"
+    },
+    "power": {
+     "alpha": "unit",
+     "target": "unit",
+     "n": "pos",
+     "p0": "unit",
+     "p1": "unit",
+     "p2": "unit",
+     "dMax": "pos"
+    },
+    "bayes": {
+     "prior.a": "nonneg",
+     "prior.b": "nonneg",
+     "prior.sd": "pos",
+     "k": "nonneg",
+     "n": "nonneg",
+     "sum": "nonneg",
+     "t": "pos",
+     "sigma": "pos",
+     "conf": "unit"
+    },
+    "screen": {
+     "prev": "unit",
+     "sens": "unit",
+     "spec": "unit",
+     "pop": "int:1:2000",
+     "tests": "int:1:20"
+    },
+    "simpson": {},
+    "multi": {
+     "alpha": "unit",
+     "sim.m": "int:1:1000",
+     "sim.m0": "int:0:1000",
+     "sim.reps": "int:1:2000"
+    },
+    "markov": {
+     "steps": "int:0:1000000"
+    },
+    "walk": {
+     "p": "unit",
+     "N": "int:1:2000",
+     "i": "int:0:2000",
+     "steps": "int:1:10000",
+     "paths": "int:0:50",
+     "reps": "int:0:20000",
+     "a": "int:1:10000",
+     "m": "nonneg",
+     "gens": "int:1:200"
+    },
+    "queue": {
+     "lambda": "pos",
+     "mu": "pos",
+     "c": "int:1:1000"
+    },
+    "bootstrap": {
+     "B": "int:10:20000",
+     "conf": "unit",
+     "trim": "unit"
+    },
+    "combin": {
+     "n": "int:0:100000",
+     "i": "int:0:63",
+     "j": "int:0:63",
+     "types": "int:1:2000",
+     "copies": "int:1:20",
+     "want": "int:1:2000",
+     "m": "int:0:1000000",
+     "days": "int:1:100000",
+     "people": "int:0:100000",
+     "k": "int:2:100",
+     "target": "unit"
+    },
+    "gof": {
+     "alpha": "unit"
+    },
+    "mcmc": {
+     "iters": "int:10:200000",
+     "burn": "int:0:200000",
+     "thin": "int:1:100",
+     "spread": "nonneg",
+     "prior.sd0": "pos",
+     "prior.a": "pos",
+     "prior.b": "pos"
+    },
+    "multivar": {
+     "conf": "unit",
+     "n": "int:0:2000"
+    },
+    "rand": {
+     "err": "unit",
+     "delta": "unit",
+     "p": "unit",
+     "eps": "unit",
+     "target": "unit",
+     "k": "int:0:100000",
+     "n": "int:0:1000000",
+     "r": "int:1:1000000",
+     "m": "int:1:100000000",
+     "d": "int:1:64",
+     "L": "int:0:100000",
+     "N": "int:0:9007199254740991",
+     "T": "int:0:100000000",
+     "w": "int:1:1000000",
+     "s": "nonneg",
+     "t": "int:0:1000",
+     "i": "int:0:1000000",
+     "bits": "int:4:16",
+     "start": "int:0:1000",
+     "reps": "int:0:100000"
+    }
+   },
+   "kindField": {
+    "test": "kind",
+    "ci": "kind",
+    "power": "kind",
+    "bayes": "kind",
+    "walk": "kind",
+    "bootstrap": "stat",
+    "multi": "*",
+    "combin": "kind",
+    "gof": "kind",
+    "mcmc": "kind",
+    "multivar": "kind",
+    "rand": "kind"
+   },
+   "needs": {
+    "test": {
+     "z-one": [
+      [
+       "x",
+       "sigma"
+      ],
+      [
+       "summary",
+       "sigma"
+      ]
+     ],
+     "t-one": [
+      [
+       "x"
+      ],
+      [
+       "summary"
+      ]
+     ],
+     "t-paired": [
+      [
+       "x",
+       "y"
+      ]
+     ],
+     "t-welch": [
+      [
+       "x",
+       "y"
+      ],
+      [
+       "summary"
+      ]
+     ],
+     "t-pooled": [
+      [
+       "x",
+       "y"
+      ],
+      [
+       "summary"
+      ]
+     ],
+     "prop-one": [
+      [
+       "k",
+       "n"
+      ]
+     ],
+     "prop-two": [
+      [
+       "k",
+       "n",
+       "k2",
+       "n2"
+      ]
+     ],
+     "binom-exact": [
+      [
+       "k",
+       "n"
+      ]
+     ],
+     "sign": [
+      [
+       "x"
+      ]
+     ],
+     "chi2-gof": [
+      [
+       "observed",
+       "probs"
+      ]
+     ],
+     "chi2-indep": [
+      [
+       "table"
+      ]
+     ],
+     "g-test": [
+      [
+       "table"
+      ],
+      [
+       "observed",
+       "probs"
+      ]
+     ],
+     "fisher": [
+      [
+       "table"
+      ]
+     ],
+     "mcnemar": [
+      [
+       "table"
+      ]
+     ],
+     "f-var": [
+      [
+       "x",
+       "y"
+      ],
+      [
+       "summary"
+      ]
+     ],
+     "anova": [
+      [
+       "groups"
+      ]
+     ],
+     "pearson": [
+      [
+       "x",
+       "y"
+      ]
+     ],
+     "regression": [
+      [
+       "x",
+       "y"
+      ]
+     ],
+     "mann-whitney": [
+      [
+       "x",
+       "y"
+      ]
+     ],
+     "wilcoxon": [
+      [
+       "x"
+      ]
+     ]
+    },
+    "ci": {
+     "prop": [
+      [
+       "k",
+       "n"
+      ]
+     ],
+     "poisson": [
+      [
+       "k"
+      ]
+     ],
+     "mean": [
+      [
+       "x"
+      ],
+      [
+       "summary"
+      ]
+     ],
+     "variance": [
+      [
+       "x"
+      ],
+      [
+       "summary"
+      ]
+     ]
+    },
+    "power": {
+     "z-one": [
+      [
+       "effect"
+      ]
+     ],
+     "t-one": [
+      [
+       "effect"
+      ]
+     ],
+     "t-paired": [
+      [
+       "effect"
+      ]
+     ],
+     "t-two": [
+      [
+       "effect"
+      ]
+     ],
+     "prop-two": [
+      [
+       "p1",
+       "p2"
+      ]
+     ],
+     "binom-exact": [
+      [
+       "p0",
+       "p1"
+      ]
+     ]
+    },
+    "bayes": {
+     "beta-binomial": [
+      [
+       "prior.a",
+       "prior.b",
+       "k",
+       "n"
+      ]
+     ],
+     "gamma-poisson": [
+      [
+       "prior.a",
+       "prior.b",
+       "sum",
+       "t"
+      ]
+     ],
+     "normal-normal": [
+      [
+       "prior.mu",
+       "prior.sd",
+       "xbar",
+       "n",
+       "sigma"
+      ]
+     ]
+    },
+    "walk": {
+     "srw": [
+      [
+       "steps"
+      ]
+     ],
+     "ruin": [
+      [
+       "p",
+       "N",
+       "i"
+      ]
+     ],
+     "galton-watson": [
+      [
+       "offspring"
+      ],
+      [
+       "m"
+      ]
+     ]
+    },
+    "bootstrap": {
+     "diff-means": [
+      [
+       "y"
+      ]
+     ],
+     "corr": [
+      [
+       "y"
+      ]
+     ]
+    },
+    "multi": {
+     "*": [
+      [
+       "p"
+      ],
+      [
+       "sim"
+      ]
+     ]
+    },
+    "combin": {
+     "multinomial": [
+      [
+       "n",
+       "probs"
+      ]
+     ],
+     "coupon": [
+      [
+       "types"
+      ],
+      [
+       "probs"
+      ]
+     ]
+    },
+    "gof": {
+     "ks-one": [
+      [
+       "x",
+       "dist"
+      ]
+     ],
+     "ks-two": [
+      [
+       "x",
+       "y"
+      ]
+     ],
+     "shapiro-wilk": [
+      [
+       "x"
+      ]
+     ],
+     "anderson-darling": [
+      [
+       "x",
+       "dist"
+      ],
+      [
+       "x",
+       "estimate"
+      ]
+     ],
+     "chi2-fit": [
+      [
+       "x",
+       "dist"
+      ]
+     ]
+    },
+    "mcmc": {
+     "metropolis": [
+      [
+       "logdens",
+       "params",
+       "init"
+      ]
+     ],
+     "gibbs-normal": [
+      [
+       "x"
+      ]
+     ]
+    },
+    "multivar": {
+     "mvnormal": [
+      [
+       "mu",
+       "cov"
+      ]
+     ],
+     "corr": [
+      [
+       "data"
+      ]
+     ],
+     "ols": [
+      [
+       "data",
+       "y"
+      ]
+     ],
+     "logistic": [
+      [
+       "data",
+       "y"
+      ]
+     ],
+     "pca": [
+      [
+       "data"
+      ]
+     ],
+     "dirichlet": [
+      [
+       "conc"
+      ]
+     ]
+    },
+    "rand": {
+     "amplify": [
+      [
+       "err"
+      ],
+      [
+       "p"
+      ]
+     ],
+     "quicksort": [
+      [
+       "n"
+      ]
+     ],
+     "quickselect": [
+      [
+       "n",
+       "r"
+      ]
+     ],
+     "karger": [
+      [
+       "n"
+      ],
+      [
+       "edges"
+      ]
+     ],
+     "freivalds": [
+      [
+       "n"
+      ],
+      [
+       "A",
+       "B",
+       "Cm"
+      ]
+     ],
+     "primality": [
+      [
+       "N"
+      ]
+     ],
+     "rounding": [
+      [
+       "x"
+      ]
+     ],
+     "balls": [
+      [
+       "n"
+      ]
+     ],
+     "bloom": [
+      [
+       "m",
+       "n"
+      ]
+     ],
+     "countmin": [
+      [
+       "w",
+       "d"
+      ]
+     ],
+     "hll": [
+      [
+       "bits"
+      ]
+     ],
+     "reservoir": [
+      [
+       "n",
+       "k"
+      ]
+     ],
+     "cover": [
+      [
+       "graph",
+       "n"
+      ],
+      [
+       "edges"
+      ]
+     ],
+     "twosat": [
+      [
+       "n"
+      ]
+     ],
+     "bounds": [
+      [
+       "dist",
+       "a"
+      ]
+     ],
+     "skiplist": [
+      [
+       "n"
+      ]
+     ],
+     "treap": [
+      [
+       "n"
+      ]
+     ],
+     "mcpi": [
+      [
+       "n"
+      ]
+     ]
+    }
+   },
+   "ciMethods": {
+    "prop": [
+     "wald",
+     "wilson",
+     "agresti-coull",
+     "clopper-pearson",
+     "jeffreys"
+    ],
+    "poisson": [
+     "exact",
+     "wald"
+    ],
+    "mean": [
+     "t",
+     "z"
+    ],
+    "variance": [
+     "chi2"
+    ]
+   },
+   "outs": {
+    "dist": {
+     "scalar": [
+      "mean",
+      "var",
+      "sd",
+      "skew",
+      "kurt",
+      "median",
+      "mode",
+      "pdf",
+      "logpdf",
+      "cdf",
+      "sf",
+      "logcdf",
+      "logsf",
+      "prob",
+      "quantile",
+      "isf",
+      "normApprox",
+      "poissonApprox",
+      "supportLo",
+      "supportHi"
+     ],
+     "series": [
+      "x",
+      "pdf",
+      "cdf",
+      "area",
+      "normal"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "degenerate",
+      "moment-undefined",
+      "moment-infinite",
+      "underflow",
+      "no-convergence",
+      "approx",
+      "pdf-infinite",
+      "normalized"
+     ]
+    },
+    "mc": {
+     "scalar": [
+      "estimate",
+      "se",
+      "ciLo",
+      "ciHi",
+      "sd",
+      "n",
+      "nanFrac",
+      "err",
+      "covered",
+      "indicator"
+     ],
+     "series": [
+      "runN",
+      "runMean",
+      "runLo",
+      "runHi",
+      "histX",
+      "histDensity",
+      "exactDensity"
+     ],
+     "scene": [],
+     "issues": [
+      "few-samples",
+      "infinite-variance",
+      "rare-event",
+      "nan-draws",
+      "param",
+      "budget",
+      "normalized"
+     ]
+    },
+    "sampling": {
+     "scalar": [
+      "statMean",
+      "statSd",
+      "theoMean",
+      "theoSe",
+      "ratio",
+      "ks",
+      "skewStat"
+     ],
+     "series": [
+      "histX",
+      "histDensity",
+      "normalDensity",
+      "runN",
+      "runMean"
+     ],
+     "scene": [],
+     "issues": [
+      "infinite-variance",
+      "no-mean",
+      "param",
+      "budget",
+      "normalized"
+     ]
+    },
+    "test": {
+     "scalar": [
+      "stat",
+      "df",
+      "df2",
+      "p",
+      "reject",
+      "crit",
+      "ciLo",
+      "ciHi",
+      "estimate",
+      "se",
+      "effect",
+      "n",
+      "intercept",
+      "r2"
+     ],
+     "series": [
+      "nullX",
+      "nullPdf",
+      "dataX",
+      "dataY",
+      "fitY"
+     ],
+     "scene": [],
+     "issues": [
+      "zero-variance",
+      "low-expected",
+      "ties-approx",
+      "zero-cell",
+      "zero-diffs",
+      "few-data",
+      "bad-data",
+      "param"
+     ]
+    },
+    "ci": {
+     "scalar": [
+      "lo",
+      "hi",
+      "width",
+      "est",
+      "coverAt",
+      "meanCover",
+      "minCover"
+     ],
+     "prefix": {
+      "lo.": [
+       "wald",
+       "wilson",
+       "agresti-coull",
+       "clopper-pearson",
+       "jeffreys"
+      ],
+      "hi.": [
+       "wald",
+       "wilson",
+       "agresti-coull",
+       "clopper-pearson",
+       "jeffreys"
+      ],
+      "coverAt.": [
+       "wald",
+       "wilson",
+       "agresti-coull",
+       "clopper-pearson",
+       "jeffreys"
+      ],
+      "meanCover.": [
+       "wald",
+       "wilson",
+       "agresti-coull",
+       "clopper-pearson",
+       "jeffreys"
+      ],
+      "minCover.": [
+       "wald",
+       "wilson",
+       "agresti-coull",
+       "clopper-pearson",
+       "jeffreys"
+      ]
+     },
+     "series": [
+      "covP",
+      "cover"
+     ],
+     "sprefix": {
+      "cover.": [
+       "wald",
+       "wilson",
+       "agresti-coull",
+       "clopper-pearson",
+       "jeffreys"
+      ]
+     },
+     "scene": [],
+     "issues": [
+      "param",
+      "few-data"
+     ]
+    },
+    "power": {
+     "scalar": [
+      "power",
+      "nNeeded",
+      "nExact",
+      "crit",
+      "ncp",
+      "effectH"
+     ],
+     "series": [
+      "powerN",
+      "powerByN",
+      "powerD",
+      "powerByD"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "approx",
+      "not-reached"
+     ]
+    },
+    "bayes": {
+     "scalar": [
+      "postA",
+      "postB",
+      "postMean",
+      "postMode",
+      "postSd",
+      "ciLo",
+      "ciHi",
+      "hpdLo",
+      "hpdHi",
+      "pAbove",
+      "bf01",
+      "predNext",
+      "priorMean",
+      "mle"
+     ],
+     "series": [
+      "theta",
+      "prior",
+      "like",
+      "post"
+     ],
+     "scene": [],
+     "issues": [
+      "improper-posterior",
+      "hpd-not-interval",
+      "mode-boundary",
+      "param"
+     ]
+    },
+    "screen": {
+     "scalar": [
+      "ppv",
+      "npv",
+      "lrPos",
+      "lrNeg",
+      "tp",
+      "fp",
+      "fn",
+      "tn",
+      "posRate",
+      "accuracy",
+      "youden",
+      "dor",
+      "preOdds",
+      "postOdds",
+      "ppvRepeat"
+     ],
+     "series": [],
+     "scene": [
+      "icons"
+     ],
+     "issues": [
+      "param"
+     ]
+    },
+    "simpson": {
+     "scalar": [
+      "pooled1",
+      "pooled2",
+      "pooledDiff",
+      "std1",
+      "std2",
+      "stdDiff",
+      "paradox",
+      "mhOR",
+      "strata"
+     ],
+     "prefix": {
+      "rate1.": "$strata",
+      "rate2.": "$strata",
+      "diff.": "$strata"
+     },
+     "series": [
+      "stratum",
+      "rates1",
+      "rates2"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "zero-cell"
+     ]
+    },
+    "multi": {
+     "scalar": [
+      "m",
+      "rejected",
+      "rejectedRaw",
+      "minAdj",
+      "fwerIndep",
+      "threshold",
+      "simFwer",
+      "simFdr",
+      "simPower",
+      "simFwerRaw",
+      "simFdrRaw"
+     ],
+     "prefix": {
+      "adj.": "$p"
+     },
+     "series": [
+      "rank",
+      "sortedP",
+      "bhLine",
+      "adjSorted"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "budget"
+     ]
+    },
+    "markov": {
+     "scalar": [
+      "classes",
+      "closed",
+      "transient",
+      "period",
+      "irreducible",
+      "absorbing",
+      "tAbsorb",
+      "tAbsorbVar",
+      "tv",
+      "mixTime"
+     ],
+     "prefix": {
+      "pi.": "$states",
+      "p.": "$states",
+      "ret.": "$states",
+      "absorb.": "$states",
+      "hit.": "$states"
+     },
+     "series": [
+      "n",
+      "tv"
+     ],
+     "sprefix": {
+      "dist.": "$states"
+     },
+     "scene": [
+      "diagram"
+     ],
+     "issues": [
+      "not-stochastic",
+      "reducible",
+      "periodic",
+      "not-reached",
+      "param"
+     ]
+    },
+    "walk": {
+     "scalar": [
+      "pWin",
+      "pRuin",
+      "duration",
+      "simWin",
+      "simDuration",
+      "pZero",
+      "pReturn",
+      "mean",
+      "var",
+      "pMax",
+      "returnFrac",
+      "extinct",
+      "m",
+      "simExtinct"
+     ],
+     "series": [
+      "k",
+      "pmf",
+      "iGrid",
+      "pWinByI",
+      "gen",
+      "qByGen"
+     ],
+     "scene": [
+      "paths"
+     ],
+     "issues": [
+      "param",
+      "critical-slow",
+      "capped",
+      "budget",
+      "normalized"
+     ]
+    },
+    "queue": {
+     "scalar": [
+      "rho",
+      "a",
+      "p0",
+      "erlangB",
+      "erlangC",
+      "lq",
+      "l",
+      "wq",
+      "w"
+     ],
+     "series": [
+      "qn",
+      "qProb"
+     ],
+     "scene": [],
+     "issues": [
+      "unstable",
+      "param"
+     ]
+    },
+    "bootstrap": {
+     "scalar": [
+      "estimate",
+      "se",
+      "bias",
+      "pctLo",
+      "pctHi",
+      "basicLo",
+      "basicHi",
+      "bcaLo",
+      "bcaHi",
+      "normLo",
+      "normHi",
+      "permP",
+      "B"
+     ],
+     "series": [
+      "histX",
+      "histCount",
+      "histDensity"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "few-data",
+      "budget",
+      "bca-undefined"
+     ]
+    },
+    "combin": {
+     "scalar": [
+      "pmf",
+      "logpmf",
+      "outcomes",
+      "chi2",
+      "pChi2",
+      "pExact",
+      "cov",
+      "corr",
+      "eT",
+      "varT",
+      "sdT",
+      "pDone",
+      "median",
+      "eTApprox",
+      "pMatch",
+      "pNone",
+      "nFor",
+      "pApprox",
+      "expPairs"
+     ],
+     "prefix": {
+      "mean.": "$probs",
+      "var.": "$probs"
+     },
+     "series": [
+      "m",
+      "pmfT",
+      "cdfT",
+      "nGrid",
+      "pByN",
+      "approxByN",
+      "k",
+      "marg"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "budget",
+      "approx",
+      "normalized",
+      "underflow"
+     ]
+    },
+    "gof": {
+     "scalar": [
+      "stat",
+      "p",
+      "pAsym",
+      "n",
+      "n2",
+      "df",
+      "reject",
+      "dPlus",
+      "dMinus",
+      "w",
+      "statAdj",
+      "minExpected"
+     ],
+     "series": [
+      "ecdfX",
+      "ecdfY",
+      "cdfY",
+      "qqX",
+      "qqY",
+      "binLo",
+      "observed",
+      "expected"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "ties",
+      "few-data",
+      "approx",
+      "low-expected",
+      "estimated",
+      "zero-range",
+      "discrete",
+      "budget"
+     ]
+    },
+    "mcmc": {
+     "scalar": [
+      "accept",
+      "draws",
+      "rhatMax",
+      "essMin"
+     ],
+     "prefix": {
+      "mean.": "$params",
+      "sd.": "$params",
+      "q05.": "$params",
+      "q50.": "$params",
+      "q95.": "$params",
+      "ess.": "$params",
+      "essTail.": "$params",
+      "rhat.": "$params",
+      "mcse.": "$params"
+     },
+     "series": [
+      "iter",
+      "lag"
+     ],
+     "sprefix": {
+      "trace.": "$params",
+      "trace2.": "$params",
+      "acf.": "$params",
+      "histX.": "$params",
+      "histDensity.": "$params"
+     },
+     "scene": [],
+     "issues": [
+      "param",
+      "budget",
+      "no-kit",
+      "not-converged",
+      "low-ess",
+      "accept-extreme",
+      "nan-density"
+     ]
+    },
+    "multivar": {
+     "scalar": [
+      "logpdf",
+      "pdf",
+      "maha",
+      "cdf",
+      "pEllipse",
+      "logdet",
+      "dim",
+      "r",
+      "rho",
+      "tau",
+      "pR",
+      "pRho",
+      "pTau",
+      "r2",
+      "adjR2",
+      "sigma",
+      "fStat",
+      "fP",
+      "df",
+      "dfModel",
+      "logLik",
+      "aic",
+      "bic",
+      "deviance",
+      "nullDeviance",
+      "iter",
+      "totalVar",
+      "entropy",
+      "n"
+     ],
+     "prefix": {
+      "mean.": "$dim",
+      "var.": "$dim",
+      "sd.": "$dim",
+      "eig.": "$dim",
+      "prop.": "$dim",
+      "cumProp.": "$dim",
+      "coef.": "$coef",
+      "se.": "$coef",
+      "stat.": "$coef",
+      "p.": "$coef",
+      "ciLo.": "$coef",
+      "ciHi.": "$coef",
+      "load.": "$dim2",
+      "cov.": "$dim2",
+      "corr.": "$dim2",
+      "chol.": "$dim2"
+     },
+     "series": [
+      "fitted",
+      "resid",
+      "lev",
+      "cook",
+      "pc1",
+      "pc2",
+      "scree",
+      "drawX",
+      "drawY",
+      "ellX",
+      "ellY"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "not-pd",
+      "singular",
+      "separation",
+      "no-convergence",
+      "few-data",
+      "ties",
+      "dim",
+      "budget"
+     ]
+    },
+    "rand": {
+     "scalar": [
+      "errK",
+      "kNeeded",
+      "kHoeffding",
+      "lvExpected",
+      "lvTail",
+      "eComp",
+      "varComp",
+      "approxComp",
+      "simMean",
+      "simSd",
+      "pSuccess",
+      "pFailK",
+      "kRuns",
+      "minCut",
+      "simSuccess",
+      "pKS",
+      "errBound",
+      "errExact",
+      "pDetect",
+      "equal",
+      "isPrime",
+      "fermatLiars",
+      "mrLiars",
+      "fracFermat",
+      "fracMR",
+      "carmichael",
+      "witness",
+      "mu",
+      "pAbove",
+      "chernoffUpper",
+      "pBelow",
+      "chernoffLower",
+      "uncovered",
+      "uncoveredBound",
+      "eMax",
+      "pMaxLe",
+      "approxMax",
+      "simMax",
+      "eCollisions",
+      "pCollision",
+      "pCollisionBound",
+      "fpExact",
+      "fpApprox",
+      "fpClassic",
+      "kOpt",
+      "kOptInt",
+      "mFor",
+      "simFp",
+      "eps",
+      "delta",
+      "errAbs",
+      "wFor",
+      "dFor",
+      "simMaxErr",
+      "simMeanErr",
+      "simFracOver",
+      "stdErr",
+      "simRelSd",
+      "simRelBias",
+      "inclusion",
+      "chi2",
+      "pChi2",
+      "coverExact",
+      "hitMax",
+      "matthews",
+      "aleliunas",
+      "simCover",
+      "eSteps",
+      "worstSteps",
+      "pFailT",
+      "markovT",
+      "rounds",
+      "exact",
+      "markov",
+      "chebyshev",
+      "cantelli",
+      "chernoff",
+      "hoeffding",
+      "tightest",
+      "eHeight",
+      "searchCost",
+      "pointers",
+      "approxHeight",
+      "eDepth",
+      "eDepthAvg",
+      "heightApprox",
+      "estimate",
+      "se",
+      "err",
+      "seExact",
+      "errRootN"
+     ],
+     "series": [
+      "kGrid",
+      "errByK",
+      "histX",
+      "histDensity",
+      "loadGrid",
+      "pMax",
+      "fpByK",
+      "pos",
+      "freq",
+      "aGrid",
+      "exactBy",
+      "markovBy",
+      "chebyshevBy",
+      "cantelliBy",
+      "chernoffBy",
+      "hoeffdingBy",
+      "runN",
+      "runEst",
+      "runLo",
+      "runHi",
+      "tGrid",
+      "pFailByT"
+     ],
+     "scene": [],
+     "issues": [
+      "param",
+      "budget",
+      "no-kit",
+      "not-applicable",
+      "approx",
+      "big-number",
+      "disconnected"
+     ]
+    }
+   }
+  }
+ }
+}

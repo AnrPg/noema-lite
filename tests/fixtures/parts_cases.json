@@ -1,5 +1,5 @@
 {
- "about": "parity cases of spec.parts / spec.couple for packcheck.js checkSimSpec and activities.py check_spec (tests/parts.js); names starting with \"parts good\" must pass",
+ "about": "cases of spec.parts / spec.couple for checkSimSpec, with the golden messages of the former Python twin (tests/parts.js, tests/fixtures/parity/parts.json); names starting with \"parts good\" must pass",
  "lib": {
   "oral-pk": {
    "engine": "med@1",

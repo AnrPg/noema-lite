@@ -43,7 +43,7 @@ const TREE = `MOLECULAR INFORMATION BIOLOGY
 /* ---------- 1. the parser, without a browser ---------- */
 function unit() {
   console.log('— reading maps (no AI)');
-  const ctx = { window: {}, console }; ctx.globalThis = ctx; vm.createContext(ctx);
+  const ctx = { window: {}, console }; ctx.globalThis = ctx; require('./roadmaps_core')(ctx); vm.createContext(ctx);
   for (const f of ['engine/curriculum.js', 'engine/curimport.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const I = ctx.window.NoemaCurImport; const T = (g, id) => g.nodes[id].title; const pre = (g, id) => g.edges.filter(e => e.to === id).map(e => T(g, e.from));
   const g = I.parse(TREE);

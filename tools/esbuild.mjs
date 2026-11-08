@@ -12,18 +12,25 @@
                    /sw.js from it, with the precache list and the build hash in front.
      harness.js    src/composition/harness.ts — window.NoemaCore = { contracts, engines } for a page that is not the app: the
                    skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
-     ui.js         src/composition/ui.ts — the UI foundation of phase 3 (src/ui: the Lit component kit, the router, the frame) on its
-                   demo route #/ui-kit. Development only: engine/loader.js loads it for #/ui-kit on a local host; never at start,
-                   not in the site or the one-file bundle (kind "dev").
+     ui.js         src/composition/ui.ts — the app's UI root (src/composition/ui-root.ts: Lit, the kit, the frame and the shell's
+                   screens, window.Noema / NoemaThemes / NoemaShell), right after app.js and engine/i18n.js.
+     engines.js, contracts.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts and the
+                   content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
+                   (src/contracts/page.ts, pageContracts below).
+     ui-kit.js     src/composition/ui-kit.ts — the kit's demo on #/ui-kit (a local host only; kind "dev").
+     roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
+                   suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
      engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
                    (tests/engines.cjs). Not in the site.
+     noema-tools.cjs  src/composition/noema-tools.ts — the Node bridge of the Python tools (tools/noema_core.py): the content
+                   checks (src/features/content) as a CLI. The skill zip carries it as scripts/noema-tools.cjs. Not in the site.
      engine/tokens.css  the design tokens (src/ui/tokens, tools/tokens.mjs), written next to engine.css on every build.
      (the Claude connector, src/composition/connector.ts, is bundled by tools/connector_bundle.mjs: it needs the data
       tools/build.py collects, so build.py runs it → dist/functions/mcp.mjs)
      *.map         source maps (linked); meta.json (esbuild's metafile); manifest.json (what was built, sizes, the build hash).
 
    Why IIFE and no code splitting for the browser bundles: the app bundle must run synchronously before the older scripts
-   (a module script is deferred, so window.NoemaCore would not exist yet when engine/loader.js starts), and the one-file
+   (a module script is deferred, so window.NoemaCore would not exist yet when build/ui.js and the older scripts start), and the one-file
    offline bundle (dist/noema-lite.html, opened from file://) cannot fetch chunk files: module scripts and import() of
    files do not load from file://. esbuild bundles every import() of a string literal INTO the IIFE (it resolves to a
    promise of the module, as with splitting), so engine code may already use import() for lazy parts: the day the app
@@ -32,13 +39,14 @@
    text (<script type="text/plain" id="noema-worker:<name>">).
    (The connector stays one ESM file: Netlify treats every top-level file of the functions directory as a function.)
 
-   The engine library (src/engines) is in build/app.js: every engine is a plugin whose code esbuild wraps in a lazy initialiser
-   (it runs the first time NoemaCore.engines.load() asks for it) and whose Worker bundle is a string (noemaWorkers below), so
-   the page parses it but runs none of it at start (docs/ARCHITECTURE.md "Engines in the app bundle").
+   The engine library (src/engines) is split: build/app.js holds the expression language, the catalogue and every engine's
+   manifest (NoemaCore.engines answers at once); the code of every engine, its Worker bundle (a string: noemaWorkers below)
+   and the schema kernel are build/engines.js (kind "lazy"), which the page runs the first time NoemaCore.engines.load() or
+   schema() needs it (src/engines/lazy.ts) — the start path never downloads or parses them (docs/ARCHITECTURE.md).
 
    Minification is whitespace and names only, never syntax (minifySyntax): it would rewrite arithmetic (constant folding,
-   reordered operands), and the engines must compute every double exactly as their source writes it — their Python twins
-   (tools/lib_*.py, tools/{circuit,thermal,pid,rf,twin}.py) agree with them bit for bit.
+   reordered operands), and the engines must compute every double exactly as their source writes it (the golden outputs of
+   tests/fixtures/parity hold them to their numbers bit for bit).
 
    Every bundle has a size budget (KB, minified) and the build FAILS when one is exceeded: raise a budget only on purpose.
 
@@ -58,16 +66,25 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
 /** kind: page = a script of the site and the one-file bundle; worker = a Worker of the app; sw = the service worker;
     harness = a browser script for pages other than the app (not in the site); dev = a browser script the development pages load
     on demand (not in the site or the one-file bundle); node = a bundle for Node (format esm | cjs)
-    @typedef {{ name: string, in: string, kind: 'page' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
+    @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
+/** lazy = a script of the site and the one-file bundle the page runs only when it needs it (the one-file bundle keeps it as
+    text: <script type="text/plain" id="noema-lazy:<name>">) */
+const APP_KB = 480;   // the core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps,
+                      // community: about 330 KB) and the learning log's event contract (about 140 KB); the engines, the other contracts and the content checks are lazy pieces
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
-  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 5312 },   // 1.4 MB the core and the contracts + 3.6 MB the engine library (1.8 code, 1.8 Worker text) + the study area's pages (moved out of engine.js: −172 KB there)
+  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
+  { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
+  { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
-  { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
-  { name: 'ui', in: 'src/composition/ui.ts', kind: 'dev', out: 'ui.js', budgetKB: 256 },   // Lit + the kit + its demo; loaded only on #/ui-kit
+  { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5632 },   // the contracts + the engine library
+  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 320 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui)
+  { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
+  { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + engine/src/38, 44, 45
+  { name: 'roadmaps-node', in: 'src/composition/roadmaps-node.ts', kind: 'node', format: 'cjs', out: 'roadmaps-node.cjs', budgetKB: 256 },
 ];
 const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
 
@@ -164,18 +181,49 @@ export function noemaWorkers() {
   };
 }
 
+/** The esbuild plugin of `legacy:<path>` imports: the TEXT of that file of the repository (one of the app's engine/*.js
+    scripts, run by src/connector/engine/legacy.ts in a scope of its own: one copy, the app's own file). The connector
+    (tools/connector_bundle.mjs) and the Node tools (src/composition/noema-tools.ts) use it. */
+export function legacyText(root = ROOT) {
+  return {
+    name: 'noema-legacy',
+    setup(build) {
+      build.onResolve({ filter: /^legacy:/ }, a => {
+        const abs = path.resolve(root, a.path.slice('legacy:'.length));
+        if (!abs.startsWith(root + path.sep)) return { errors: [{ text: `legacy import outside the repository: ${a.path}` }] };
+        return { path: abs, namespace: 'legacy' };
+      });
+      build.onLoad({ filter: /.*/, namespace: 'legacy' }, a => ({ contents: 'export default ' + JSON.stringify(readFileSync(a.path, 'utf8')) + ';\n', loader: 'js', watchFiles: [a.path] }));
+    },
+  };
+}
+
+/** The esbuild plugin of the page's scripts (kind "page"): src/contracts/index.ts is bundled as src/contracts/page.ts, which
+    checks the learning log's events with its own few validators (src/contracts/validate-start.ts) and every other contract
+    with those of the lazy piece build/contracts.js once NoemaCore.contracts.ready() has handed it over. The domain modules
+    that check a shape import ./index.ts everywhere; only the page leaves its 1.4 MB of validators out of the start path. */
+export function pageContracts(root = ROOT) {
+  const index = path.join(root, 'src', 'contracts', 'index.ts'), page = path.join(root, 'src', 'contracts', 'page.ts');
+  return {
+    name: 'noema-page-contracts',
+    setup(b) {
+      b.onResolve({ filter: /(^|\/)index\.ts$/ }, a => (path.resolve(a.resolveDir, a.path) === index && a.importer !== page ? { path: page } : undefined));
+    },
+  };
+}
+
 /** esbuild options of one entry */
 function options(e, workers) {
   const common = {
     entryPoints: [path.join(ROOT, e.in)], outfile: path.join(OUT, e.out), bundle: true, ...MINIFY, sourcemap: 'linked',
-    metafile: true, legalComments: 'eof', charset: 'utf8', logLevel: 'silent', tsconfig: path.join(ROOT, 'tsconfig.json'), plugins: [workers],
+    metafile: true, legalComments: 'eof', charset: 'utf8', logLevel: 'silent', tsconfig: path.join(ROOT, 'tsconfig.json'), plugins: [workers, legacyText()],
   };
   if (e.kind === 'node') {
     const format = e.format ?? 'esm';
     return { ...common, platform: 'node', format, target: 'node22', packages: 'bundle',
       ...(format === 'esm' ? { banner: { js: "import { createRequire as __noemaRequire } from 'node:module'; const require = __noemaRequire(import.meta.url);" } } : {}) };
   }
-  return { ...common, platform: 'browser', format: 'iife', target: BROWSERS };
+  return { ...common, platform: 'browser', format: 'iife', target: BROWSERS, ...(e.kind === 'page' ? { plugins: [...common.plugins, pageContracts()] } : {}) };
 }
 
 const kb = n => Math.round(n / 102.4) / 10;

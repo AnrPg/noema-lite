@@ -30,16 +30,14 @@ the limits and edge cases, the reference values its tests assert).
 | `src/engines/library.ts` | the engine library on `NoemaCore.engines`: `ids()`, `load(ids)`, `loaded(id)`, `engine(id)`, `catalog`, `expr`, `schema()` |
 | `src/engines/kernel/schema.js` | `NoemaLibSchema`: turns an engine's `table` into the JSON Schema of its activities, from which the activity author (`#/author`) builds the form (§1.5) |
 | `src/engines/catalog.js` | `NoemaCore.engines.catalog`: every engine with its layer and search words; `suggest(text)` |
-| `tools/enginelib.py` | the Python twin of the core's checker (`walk`, `problems`, `check_outputs`) |
-| `tools/lib_<name>.py` | the Python twin of one engine's checks: `ID`, `check_spec(spec)`, `exprs(spec)`, `keys(spec)` — the same codes, paths and messages |
 | `docs/library/<name>.md` | the engine's chapter |
-| `tests/lib_<name>.js` | its tests: reference values from the literature (with the source in the test's message), the edge cases, the codes, speed, the Worker source; and `tests/fixtures/enginelib/<name>.json` (good and bad specs) for the JS ↔ Python parity run by `tests/enginelib.js` |
+| `tests/lib_<name>.js` | its tests: reference values from the literature (with the source in the test's message), the edge cases, the codes, speed, the Worker source; and `tests/fixtures/enginelib/<name>.json` (good and bad specs), whose checks `tests/enginelib.js` holds to the golden outputs of the former Python twins (`tests/fixtures/parity/enginelib.json`; a new engine's checks are recorded there with `NOEMA_GOLDEN_UPDATE=1`, tests/golden.cjs) |
 | `tools/activities_examples/<example>/` | at least one reference activity per engine (spec.json, strings.en/el/ru/de/fr.json, the registry entry), started with `activity_new.py --from <example>` |
 
 To add an engine: its module, its line in `src/engines/plugins.ts` and in `src/engines/node.ts` (`tools/esbuild.mjs` bundles
 them into `build/app.js`, the app's `NoemaCore.engines` in the site and the one-file bundle, into `build/harness.js`, the skill's
-activity host, and into the connector, `src/composition/connector.ts`); `tools/build.py` finds `tools/lib_*.py` by name; `packcheck.js`
-(`ACT.LIB`) and `tools/activities.py` (`LIB`) list the ids; the catalogue lists its search words (en, el, ru, de, fr) and the UI
+activity host, and into the connector, `src/composition/connector.ts`); the content checks
+(`LIB` in `src/features/content/domain/activities/rules.ts`; the app's activity core reads it as `ACT.LIB`) list the ids; the catalogue lists its search words (en, el, ru, de, fr) and the UI
 catalogue its one-line description (`engine.engines.<slug>.what`, every UI locale).
 
 ### 1.2 The module (JS)
@@ -76,12 +74,11 @@ import NoemaLibCore from '../kernel/core.js';     // the kernel pieces it needs,
   and in a comment beside the code; validity ranges are checked and reported as codes (never a silent wrong number); the tests assert
   published reference values.
 
-### 1.3 The Python twin
+### 1.3 The checks
 
-`tools/lib_<name>.py` does not simulate: `check_spec(spec)` returns the same problems as the JS `checkSpec` (code, path, message,
-level) on every spec of `tests/fixtures/enginelib/<name>.json`, `exprs(spec)` and `keys(spec)` the same lists. It uses
-`tools/enginelib.py` (`walk`, `problems`, `check_outputs`). `tools/activities.py check_lib` and `engine/packcheck.js checkLib` then
-check every expression and key with the spec's names: the messages a pack's author sees are the same in the skill
+The module's `checkSpec(spec)` gives the problems (code, path, message, level), `exprs(spec)` and `keys(spec)` the lists of
+the model's expressions and string keys; `checkLib` of the content checks (`src/features/content/domain/activities/simspec.ts`)
+then checks every expression and key with the spec's names: the messages a pack's author sees are the same in the skill
 (`activity_lint.py`, `make_pack.py`), the connector and the app.
 
 ### 1.4 What the app draws: `scene` and `sound` plots, line styles
@@ -163,8 +160,8 @@ const { engine, simEngine } = C.makeEngine({ id, checkSpec, run, prepare, steppe
   `circuit-mna@1` transient (no snapshot; its own grid a divisor of the first macro step, a step off the grid reported at the
   asked time by interpolation, a changed binding taken into the running transient with its capacitor and inductor state, its
   time counted from the part's t0): their instances answer `stepInit` / `stepTo` / `snapshot` / `restore` themselves
-  (docs/INTERACTIVE_ENGINES.md, docs/INTERACTIVE_CIRCUIT.md). The validators list them (`STEPPERS` in `engine/packcheck.js` and
-  `tools/activities.py`): add an engine there when it gains a stepper. Pure, bounded, never throws.
+  (docs/INTERACTIVE_ENGINES.md, docs/INTERACTIVE_CIRCUIT.md). The validators list them (`STEPPERS` in
+  `src/features/content/domain/activities/rules.ts`): add an engine there when it gains a stepper. Pure, bounded, never throws.
 
 ## 2. The catalogue (`NoemaCore.engines.catalog`)
 
@@ -179,9 +176,9 @@ When neither the library nor the free way fits, anyone asks for a new engine fro
 
 | layer | where | what |
 |---|---|---|
-| domain | `engine/enginereq.js` (`NoemaEngineRequests`; no DOM, no network; the connector runs the same file) | `FIELDS` and their limits, `normalize(input) → {row, problems}`, `ACCURACY` (`teaching`, `quantitative`, `research`), `STATUSES` (`new`, `seen`, `planned`, `building`, `available`, `declined`, `duplicate`; `OPEN` = the first four), `cleanPatch(patch)` (what an admin may change), `brief(row)` (the English markdown to build the engine from) |
-| port | `store = {kind, submit(row), mine(), all(status), update(id, patch), isAdmin()}` | |
-| adapters | `cloudStore` (Supabase REST, table `noema_engine_requests`, `cloud/supabase.sql` §16) · `localStore` (a profile without a cloud account: `localStorage noema1:<profile>:enginereq`, at most 100, downloadable as JSON) | `store(ACCOUNT)` picks one |
+| domain | `src/features/reports/domain/engine-requests.ts` (pure TypeScript; the app reads it as `NoemaCore.engineRequests`, the connector imports it) | `REQUEST_FIELDS` and their limits, `normalizeRequest(input, suggest) → {row, problems}`, `ACCURACY` (`teaching`, `quantitative`, `research`), `STATUSES` (`new`, `seen`, `planned`, `building`, `available`, `declined`, `duplicate`; `OPEN` = the first four), `cleanRequestPatch(patch)` (what an admin may change), `requestBrief(row)` (the English markdown to build the engine from) |
+| port | `EngineRequestServer` (`src/ports/reports.ts`); the use case `src/features/reports/application/engine-requests.ts` gives `store(account) = {kind, submit(row), mine(), all(status), update(id, patch), isAdmin()}` | |
+| adapters | the cloud (`src/adapters/supabase/reports.ts`, table `noema_engine_requests`, `cloud/supabase.sql` §16) · this device (a profile without a cloud account: the key-value store, `noema1:<profile>:enginereq`, at most 100, downloadable as JSON) | `store(ACCOUNT)` picks one |
 | UI | `engine/src/49_lib_view.js` + `49_lib_view.css`, the route `#/engines` (`#/engines/new` opens the form), the subject's ⋮ › *Engines of activities* | the catalogue (only the engines this app has), *Request a new engine*, *Your requests*; admins see every request and answer it in place |
 | connector | `src/connector/tools/request_engine.ts`, `engine_requests.ts`, `engine_request_update.ts` | `noema_request_engine` (with `check_only` it only ranks the catalogue), `noema_engine_requests` (own; admins all, with a status filter; `id` → the brief), `noema_engine_request_update` (admins) |
 
@@ -213,8 +210,8 @@ in its own way.
 | the API | `engine/src/34_activity_html.js` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
 | the host | `34_activity_html.js` `engineBridge` | declared ∩ `NoemaCore.engines.catalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
 | the Worker | `35_activity_sim.js` `ACT.engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
-| the rules | `tools/activities.py check_app_engines` = `engine/packcheck.js checkAppEngines`; `need_requires` / `needRequires` add `engine:<id>` | |
-| the tests | `tests/activities.js` (rules JS = Python, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |
+| the rules | `checkAppEngines` of the content checks (`src/features/content/domain/activities/registry.ts`); `needRequires` adds `engine:<id>` | |
+| the tests | `tests/activities.js` (the rules and their golden messages, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |
 | the reference | `tools/activities_examples/cheapest-route/` | a route game on `graph@1`: the learner picks roads, Dijkstra finds the cheapest route; keyboard, 320 px, five languages |
 
 Only library engines: pure, bounded, deterministic, with no hidden state (no fault bench, no learner data); the frame keeps its

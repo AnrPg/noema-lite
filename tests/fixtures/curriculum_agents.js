@@ -26,7 +26,7 @@ function plans(ids) {
 }
 const test = () => ({ questions: Array.from({ length: 10 }, (_, i) => ({ q: `Question ${i + 1}: which is right?`, options: ['The right answer', 'A tempting wrong one', 'Another wrong one'], answer: 0, explain: 'Because it is right.' })) });
 
-/** A chapter in noema-lite's own format, as Gemini would write it (valid for packcheck strict + packgen.quality). */
+/** A chapter in noema-lite's own format, as Gemini would write it (valid for checkPack strict + packgen.quality). */
 function chapter(num, title, { broken = false } = {}) {
   const id = 'ch' + String(num).padStart(2, '0'); const s = k => `${id}-s0${k}`; let e = 0; const E = o => ({ id: `${id}-e${String(++e).padStart(3, '0')}`, difficulty: 1, tags: ['concept'], explain: 'Because… and the tempting answer is wrong because…', ...o });
   const ex = [];

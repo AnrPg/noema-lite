@@ -260,9 +260,9 @@ function shareBanner() {
 /** ⋮ › Export learning record (xAPI): this subject's activity attempts (S.att) and answers (S.res) as an xAPI 1.0.3 file, made by
     NoemaXAPI (engine/src/43_xapi.js, docs/INTERACTIVE_XAPI.md) — nothing is sent anywhere. The actor is the account id, never an e-mail. The pack's own subject
     (title, language) goes with the pack's own chapters, never the name translated for the UI (SUBJ). */
-function exportXAPI() {
+async function exportXAPI() {
   let r;
-  try { r = NoemaXAPI.subjectRecord({ att: S.att, res: S.res, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
+  try { const { attempts, answers } = await LOG.xapi(SUBJ.id); r = NoemaXAPI.subjectRecord({ attempts, answers, pack: Noema.pack?.subject || SUBJ, chapters: Noema.pack?.chapters || COURSE, accountId: ACCOUNT.id, site: Noema.config?.siteUrl, now: Date.now() }); }
   catch (e) { toast('⚠️ ' + errText(e), 4000); return; }
   if (!r) { toast(tE('engine.xapi.none'), 3500); return; }
   saveBlob(r.name, new Blob([JSON.stringify(r.file, null, 1)], { type: 'application/json' }));

@@ -11,7 +11,9 @@ const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const FEATURES = join(ROOT, 'src/features');
 const SRC = [
   join(ROOT, 'src/ui'),
+  join(ROOT, 'src/composition/ui-kit-root.ts'),
   join(ROOT, 'src/composition/ui-root.ts'),
+  join(ROOT, 'src/composition/shell'),
   // the areas' own screens (src/features/<area>/ui) ask for their words from the same catalog
   ...readdirSync(FEATURES)
     .map(f => join(FEATURES, f, 'ui'))

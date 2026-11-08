@@ -22,6 +22,8 @@ export interface EventFeed {
   all(): AsyncResult<readonly LoggedEvent[]>;
   /** Called with the events appended (or synced from another device) after subscribing. */
   subscribe(listener: (events: readonly LoggedEvent[]) => void): Unsubscribe;
+  /** Called when what counts changed backwards (a restore, the log folded again): the model is built again from all(). */
+  onRebuild?(listener: () => void): Unsubscribe;
 }
 
 export interface StudyReadModels {
@@ -88,10 +90,16 @@ export function createStudyReadModels(d: StudyReadModelDeps): StudyReadModels {
     current: () => model,
     apply,
     async start() {
-      if (d.feed && !following)
+      if (d.feed && !following) {
         following = d.feed.subscribe(events => {
           apply(events);
         });
+        d.feed.onRebuild?.(() => {
+          void rebuild().then(r => {
+            if (!r.ok) d.report(r.error, 'study.readmodels.rebuild');
+          });
+        });
+      }
       return rebuild();
     },
     rebuild,

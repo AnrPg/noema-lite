@@ -1,0 +1,1672 @@
+{
+ "templates": {
+  "in": null,
+  "out": [
+   {
+    "reporters": [
+     "similar",
+     "unhappy",
+     "agents"
+    ],
+    "vars": [
+     "group"
+    ],
+    "breeds": [
+     "person"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "order",
+     "agents"
+    ],
+    "vars": [],
+    "breeds": [
+     "boid"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "S",
+     "I",
+     "R"
+    ],
+    "vars": [
+     "state"
+    ],
+    "breeds": [
+     "person"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "S",
+     "I",
+     "R"
+    ],
+    "vars": [
+     "state"
+    ],
+    "breeds": [
+     "person"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "S",
+     "I",
+     "R"
+    ],
+    "vars": [
+     "state"
+    ],
+    "breeds": [
+     "person"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "agents",
+     "meanWealth",
+     "gini",
+     "meanVision"
+    ],
+    "vars": [
+     "vision",
+     "metab",
+     "wealth"
+    ],
+    "breeds": [
+     "ant"
+    ],
+    "hist": [
+     "wealth"
+    ]
+   },
+   {
+    "reporters": [
+     "nSheep",
+     "nWolves",
+     "grass"
+    ],
+    "vars": [
+     "energy",
+     "energy"
+    ],
+    "breeds": [
+     "sheep",
+     "wolf"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "mean"
+    ],
+    "vars": [
+     "op"
+    ],
+    "breeds": [
+     "voter"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "m",
+     "absm"
+    ],
+    "vars": [
+     "s"
+    ],
+    "breeds": [
+     "spin"
+    ],
+    "hist": []
+   },
+   {
+    "reporters": [
+     "mean",
+     "spread",
+     "weighted",
+     "wsum"
+    ],
+    "vars": [
+     "x"
+    ],
+    "breeds": [
+     "node"
+    ],
+    "hist": []
+   }
+  ]
+ },
+ "tables": {
+  "in": null,
+  "out": [
+   [
+    "budget",
+    "repl-cut",
+    "agent-limit",
+    "message-limit",
+    "no-space",
+    "stopped",
+    "logic-fallback",
+    "norm-parse",
+    "kernel",
+    "nan",
+    "extinct",
+    "lp",
+    "no-agreement"
+   ],
+   [
+    "t",
+    "reporter",
+    "hist",
+    "histEdges",
+    "replValues",
+    "agentVar",
+    "messageCount",
+    "violations",
+    "protocolSeries"
+   ],
+   [
+    "final",
+    "stat",
+    "replMean",
+    "replLo",
+    "replHi",
+    "replHalf",
+    "replSd",
+    "count",
+    "steps",
+    "messages",
+    "violations",
+    "fulfilments",
+    "bdi",
+    "protocol",
+    "ops",
+    "flag",
+    "ok"
+   ],
+   [
+    "space"
+   ],
+   [
+    "set",
+    "move",
+    "die",
+    "reproduce",
+    "eat",
+    "hunt",
+    "contact",
+    "adopt",
+    "average",
+    "ising",
+    "send",
+    "flock"
+   ],
+   [
+    "contractnet",
+    "auction",
+    "negotiation",
+    "coalition",
+    "ipd"
+   ],
+   {
+    "contractnet": {
+     "scalar": [
+      "totalCost",
+      "optimalCost",
+      "makespan",
+      "messages",
+      "refusals",
+      "unassigned"
+     ],
+     "series": [
+      "load",
+      "winner"
+     ]
+    },
+    "auction": {
+     "scalar": [
+      "revenue",
+      "revenueHalf",
+      "expectedRevenue",
+      "efficiency",
+      "dominance",
+      "price",
+      "winner",
+      "secondValue"
+     ],
+     "series": [
+      "prices"
+     ]
+    },
+    "negotiation": {
+     "scalar": [
+      "share1",
+      "share2",
+      "rounds",
+      "closedForm",
+      "nashX",
+      "agreement"
+     ],
+     "series": [
+      "offers"
+     ]
+    },
+    "coalition": {
+     "scalar": [
+      "grand",
+      "coreEmpty",
+      "shapleyInCore",
+      "minCoreTotal"
+     ],
+     "series": [
+      "shapley"
+     ]
+    },
+    "ipd": {
+     "scalar": [
+      "winner",
+      "coopRate",
+      "best"
+     ],
+     "series": [
+      "scores",
+      "shares",
+      "share"
+     ]
+    }
+   },
+   [
+    "schelling",
+    "boids",
+    "sir",
+    "sirnet",
+    "sirwell",
+    "sugarscape",
+    "wolfsheep",
+    "voter",
+    "ising",
+    "degroot"
+   ],
+   {
+    "schelling": {
+     "size": 30,
+     "density": 0.9,
+     "want": 0.3,
+     "fracA": 0.5
+    },
+    "boids": {
+     "N": 150,
+     "w": 100,
+     "speed": 1,
+     "radius": 10,
+     "sep": 0.05,
+     "ali": 0.1,
+     "coh": 0.01,
+     "sepRadius": 2
+    },
+    "sir": {
+     "size": 50,
+     "beta": 0.25,
+     "gamma": 0.1,
+     "i0": 0.01
+    },
+    "sirnet": {
+     "N": 1000,
+     "k": 4,
+     "p": 0.1,
+     "beta": 0.1,
+     "gamma": 0.1,
+     "i0": 0.01
+    },
+    "sirwell": {
+     "N": 2000,
+     "contacts": 1,
+     "beta": 0.25,
+     "gamma": 0.1,
+     "i0": 0.005
+    },
+    "sugarscape": {
+     "N": 250,
+     "size": 50,
+     "regrow": 1
+    },
+    "wolfsheep": {
+     "size": 40,
+     "sheep": 200,
+     "wolves": 30,
+     "sheepGain": 4,
+     "wolfGain": 20,
+     "sheepRepro": 0.04,
+     "wolfRepro": 0.05,
+     "regrowTime": 30
+    },
+    "voter": {
+     "size": 30,
+     "p0": 0.5
+    },
+    "ising": {
+     "size": 32,
+     "T": 1.5,
+     "J": 1,
+     "h": 0,
+     "m0": 1
+    },
+    "degroot": {
+     "N": 20,
+     "k": 2,
+     "p": 0.2,
+     "selfw": 1
+    }
+   },
+   [
+    "allc",
+    "alld",
+    "tft",
+    "tf2t",
+    "grim",
+    "pavlov",
+    "random",
+    "gtft",
+    "joss"
+   ]
+  ]
+ },
+ "check": {
+  "in": "c777165e4b1b359ffcfaf6ca2b884b2663b315880587f79d98a7e35c24f18794",
+  "out": [
+   {
+    "p": [],
+    "x": [
+     [
+      "want",
+      "model.set.want",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "beta",
+      "model.set.beta",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "T",
+      "model.set.T",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "px/30",
+      "model.patches.vars.food",
+      [
+       "px",
+       "py",
+       "rate"
+      ]
+     ],
+     [
+      "min(1, food + rate)",
+      "model.patches.rules[0].expr",
+      [
+       "food",
+       "px",
+       "py",
+       "t",
+       "rate"
+      ]
+     ],
+     [
+      "0.1",
+      "model.patches.diffuse[0].rate",
+      [
+       "rate",
+       "t"
+      ]
+     ],
+     [
+      "5",
+      "model.breeds[0].vars.en.init",
+      [
+       "x",
+       "y",
+       "id",
+       "rnd",
+       "deg",
+       "rate"
+      ]
+     ],
+     [
+      "2",
+      "model.breeds[0].rules[0].vision",
+      [
+       "en",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "p_food",
+       "rate",
+       "t"
+      ]
+     ],
+     [
+      "0.5",
+      "model.breeds[0].rules[1].amount",
+      [
+       "en",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "p_food",
+       "rate",
+       "t"
+      ]
+     ],
+     [
+      "en - 0.3",
+      "model.breeds[0].rules[2].expr",
+      [
+       "en",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "p_food",
+       "rate",
+       "t"
+      ]
+     ],
+     [
+      "en < 0",
+      "model.breeds[0].rules[3].when",
+      [
+       "en",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "p_food",
+       "rate",
+       "t"
+      ]
+     ],
+     [
+      "en > 10",
+      "model.breeds[0].rules[4].when",
+      [
+       "en",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "p_food",
+       "rate",
+       "t"
+      ]
+     ],
+     [
+      "en",
+      "model.reporters[1].expr",
+      [
+       "en",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "p_food",
+       "rate",
+       "t"
+      ]
+     ],
+     [
+      "food",
+      "model.reporters[2].expr",
+      [
+       "food",
+       "px",
+       "py",
+       "t",
+       "rate"
+      ]
+     ],
+     [
+      "ants == 0",
+      "model.stop",
+      [
+       "ants",
+       "meanE",
+       "totalFood",
+       "rate",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "id < 2 ? 1 : 0",
+      "model.breeds[0].vars.op.init",
+      [
+       "x",
+       "y",
+       "id",
+       "rnd",
+       "deg"
+      ]
+     ],
+     [
+      "op",
+      "model.reporters[0].expr",
+      [
+       "op",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "id",
+      "model.breeds[0].vars.v.init",
+      [
+       "x",
+       "y",
+       "id",
+       "rnd",
+       "deg"
+      ]
+     ],
+     [
+      "v",
+      "model.breeds[0].rules[0].content",
+      [
+       "v",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "heard",
+       "sumc",
+       "t"
+      ]
+     ],
+     [
+      "heard > 0 ? sumc/heard : v",
+      "model.breeds[0].rules[1].expr",
+      [
+       "v",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "heard",
+       "sumc",
+       "t"
+      ]
+     ],
+     [
+      "content",
+      "model.aggregates[1].expr",
+      [
+       "v",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "my_v",
+       "my_x",
+       "my_y",
+       "my_id",
+       "content",
+       "from",
+       "t"
+      ]
+     ],
+     [
+      "v",
+      "model.reporters[0].expr",
+      [
+       "v",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "heard",
+       "sumc",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "0",
+      "model.breeds[0].vars.pos.init",
+      [
+       "x",
+       "y",
+       "id",
+       "rnd",
+       "deg",
+       "goal"
+      ]
+     ],
+     [
+      "5",
+      "model.breeds[0].vars.fuel.init",
+      [
+       "x",
+       "y",
+       "id",
+       "rnd",
+       "deg",
+       "goal"
+      ]
+     ],
+     [
+      "pos < goal",
+      "model.breeds[0].bdi.goals[0].when",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ],
+     [
+      "pos >= goal",
+      "model.breeds[0].bdi.goals[0].achieved",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ],
+     [
+      "fuel <= 0",
+      "model.breeds[0].bdi.goals[0].impossible",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ],
+     [
+      "1",
+      "model.breeds[0].bdi.goals[0].priority",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ],
+     [
+      "fuel > 0",
+      "model.breeds[0].bdi.plans[0].context",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ],
+     [
+      "pos + 1",
+      "model.breeds[0].bdi.plans[0].body[0].expr",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ],
+     [
+      "fuel - 1",
+      "model.breeds[0].bdi.plans[0].body[1].expr",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ],
+     [
+      "pos",
+      "model.reporters[0].expr",
+      [
+       "pos",
+       "fuel",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "goal",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "rnd*2",
+      "model.breeds[0].vars.speed.init",
+      [
+       "x",
+       "y",
+       "id",
+       "rnd",
+       "deg"
+      ]
+     ],
+     [
+      "0",
+      "model.breeds[0].vars.fine.init",
+      [
+       "x",
+       "y",
+       "id",
+       "rnd",
+       "deg"
+      ]
+     ],
+     [
+      "fine > 0 ? rnd : rnd*2",
+      "model.breeds[0].rules[0].expr",
+      [
+       "speed",
+       "fine",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "t"
+      ]
+     ],
+     [
+      "speed > 1",
+      "model.breeds[0].rules[1].when",
+      [
+       "speed",
+       "fine",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "t"
+      ]
+     ],
+     [
+      "fine",
+      "model.breeds[0].rules[1].expr",
+      [
+       "speed",
+       "fine",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "t"
+      ]
+     ],
+     [
+      "speed",
+      "model.reporters[0].expr",
+      [
+       "speed",
+       "fine",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "t"
+      ]
+     ],
+     [
+      "1",
+      "model.norms[0].sanction.add",
+      [
+       "speed",
+       "fine",
+       "x",
+       "y",
+       "heading",
+       "age",
+       "id",
+       "rnd",
+       "deg",
+       "intending",
+       "t"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "w >= 51 ? 1 : 0",
+      "model.protocol.v",
+      [
+       "s",
+       "w",
+       "k0",
+       "k1"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.breeds",
+      "msg": "missing (at least one breed of agents)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.space",
+      "msg": "missing (kind: continuous, grid, network or none)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.steps",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].reporter",
+      "msg": "a reporter of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.space",
+      "msg": "comes from the template schelling",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds",
+      "msg": "comes from the template schelling",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.set.beta",
+      "msg": "not a parameter of the template schelling (its parameters: size, density, want, fracA)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].reporter",
+      "msg": "a reporter of the model: similar, unhappy, agents",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].breed",
+      "msg": "a breed",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.set",
+      "msg": "needs a template",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds",
+      "msg": "a protocol runs on its own (no breeds)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.protocol.table",
+      "msg": "needs 2^players − 1 = 7 values (coalitions by bitmask 1…)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.replications",
+      "msg": "a protocol repeats by its own rounds",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].name",
+      "msg": "coalition gives as a scalar: grand, coreEmpty, shapleyInCore, minCoreTotal",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "a protocol has no space",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "dup-name",
+      "path": "model.globals",
+      "msg": "the name x is a built-in name of agents@1 (x, y, heading, age, id, rnd, deg, intending, my_…, p_…)",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.globals",
+      "msg": "the name beta is also a name of the spec (consts, params, derived)",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.aggregates",
+      "msg": "the name p_z is a built-in name of agents@1 (x, y, heading, age, id, rnd, deg, intending, my_…, p_…)",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.breeds",
+      "msg": "the breed a is listed twice",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[0].var",
+      "msg": "missing (set needs var)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[0].expr",
+      "msg": "missing (set needs expr)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[1].how",
+      "msg": "missing (random, heading, gradient, towards, away, empty, jump)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[1].how",
+      "msg": "a model without space has no movement",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[2].patch",
+      "msg": "missing (eat takes from a patch variable)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[2].into",
+      "msg": "missing (eat needs into)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[3].breed",
+      "msg": "the prey: a breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[3].into",
+      "msg": "missing (hunt needs into)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[4].set",
+      "msg": "missing (contact sets the other agent's variables)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[5].var",
+      "msg": "not a variable of a breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[6].perf",
+      "msg": "missing (a FIPA-ACL performative)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[7].do",
+      "msg": "flocking is for a continuous space",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[8].target",
+      "msg": "a breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[8].how",
+      "msg": "a model without space has no movement",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[9].share.q",
+      "msg": "not a variable of a breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].rules[10].breed",
+      "msg": "a breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].vars.v.n",
+      "msg": "missing (a category variable needs n, the number of categories)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.space.edges",
+      "msg": "only a network has edges",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.space.neighbourhood",
+      "msg": "only a grid has neighbourhood",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.space.capacity",
+      "msg": "only a grid has capacity",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.space.nx",
+      "msg": "a continuous space has w and h",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.patches.rules[0].var",
+      "msg": "not a patch variable",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.patches.diffuse[0].var",
+      "msg": "not a patch variable",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].place",
+      "msg": "node placement is for a network",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[1].rules[0].how",
+      "msg": "empty is for a grid or a network",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[1].place",
+      "msg": "empty placement is for a grid",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.space",
+      "msg": "a network needs edges or generate",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.patches",
+      "msg": "patches lie on a grid or a continuous space",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.breeds[0].bdi.plans[0].body[1].do",
+      "msg": "a plan body does not die",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].bdi.plans[1].goal",
+      "msg": "not a goal of this breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].bdi.plans[1].body[0].do",
+      "msg": "a plan body does not reproduce",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.breeds[0].bdi.goals",
+      "msg": "the goal g2 has no plan",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].name",
+      "msg": "one of adopted, achieved, dropped, actions",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].of",
+      "msg": "needs model.norms",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.aggregates[0].expr",
+      "msg": "missing (sum needs expr)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.aggregates[1].where",
+      "msg": "missing (frac needs where or expr)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.aggregates[1].perf",
+      "msg": "goes with of: inbox",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.reporters[0].fn",
+      "msg": "order (the alignment of headings) is for a continuous space",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.reporters[1].of",
+      "msg": "the model has no patches",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.reporters[2].breed",
+      "msg": "not a breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.hist[0].breed",
+      "msg": "not a breed",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].hist",
+      "msg": "a histogram of model.hist",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].var",
+      "msg": "a variable of a breed (or x, y, heading, age)",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].of",
+      "msg": "needs model.replications",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "event",
+      "path": "model.interrupts[0]",
+      "msg": "needs at (a step) or when (a condition), not both",
+      "level": "error"
+     },
+     {
+      "code": "event",
+      "path": "model.interrupts[1]",
+      "msg": "needs at (a step) or when (a condition), not both",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.interrupts[1].set.q",
+      "msg": "not a global of the model",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.norms[0].sanction",
+      "msg": "a permission is never violated",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.norms[1].breed",
+      "msg": "not a breed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.norms[1].sanction.var",
+      "msg": "not a variable of a breed",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].norm",
+      "msg": "a norm of model.norms",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].code",
+      "msg": "one of budget, repl-cut, agent-limit, message-limit, no-space, stopped, logic-fallback, norm-parse, kernel, nan, extinct, lp, no-agreement",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].code",
+      "msg": "one of budget, repl-cut, agent-limit, message-limit, no-space, stopped, logic-fallback, norm-parse, kernel, nan, extinct, lp, no-agreement",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].stat",
+      "msg": "one of final, min, max, mean, pp, rms",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].reporter",
+      "msg": "a reporter of the model",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].stat",
+      "msg": "one of final, min, max, mean, pp, rms",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.protocol.costs",
+      "msg": "needs tasks × contractors (3 × 2) costs",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.protocol.values",
+      "msg": "needs one value per bidder",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.protocol.strategy",
+      "msg": "in English and second-price auctions the equilibrium bid is the value itself (truthful)",
+      "level": "warning"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].name",
+      "msg": "auction gives as a series: prices",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.protocol.v",
+      "msg": "a coalitional game needs v (an expression over s, w, k0, k1) or table (2^n − 1 values), one of them",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.protocol.weights",
+      "msg": "needs one value per player (2)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.protocol.kinds",
+      "msg": "needs one value per player (2)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.space.nx",
+      "msg": "needs an integer from 2 to 200",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "model.schedule",
+      "msg": "one of random, sync, fixed",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.steps",
+      "msg": "needs an integer from 1 to 2000",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[0].of",
+      "msg": "agents@1 computes as a series: t, reporter, hist, histEdges, replValues, agentVar, messageCount, violations, protocolSeries",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   }
+  ]
+ }
+}

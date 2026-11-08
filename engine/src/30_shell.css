@@ -406,6 +406,10 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 /* 📦 subjects you already have, on steps · 📚 the Shelf (docs/CURRICULUM.md §9) */
 .cm-holdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:var(--warn-bg);border-bottom:1px solid var(--line);font-size:14px}
 .cm-holdbar:empty{padding:0;border:0}
+.cm-levelbar{display:flex;flex-direction:column;gap:4px;padding:6px 14px;border-bottom:1px solid var(--line);font-size:13px}
+.cm-levelbar:empty{padding:0;border:0}
+.cm-levelbar .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.cm-changes{margin:8px 0;padding-left:20px;line-height:1.5;overflow-wrap:anywhere}
 .cm-attachwarn{display:block;margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px;line-height:1.45}
 .cm-attachshared{margin-top:6px;font-weight:600}
 .cm-attachchips{max-height:42vh;overflow:auto;margin:8px 0}

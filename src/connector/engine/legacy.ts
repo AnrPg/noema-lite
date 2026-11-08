@@ -1,4 +1,4 @@
-/* The thin ESM wrapper around the app's script files the connector runs (engine/packcheck.js, curriculum.js, curjobs.js…):
+/* The thin ESM wrapper around the app's script files the connector runs (curriculum.js, curjobs.js, the runtimes' package checkers…):
    one copy of that code, shared with the app, without its globals leaking into the connector's runtime.
    Each file is a classic script that publishes its module on `window` (or `root`, `globalThis`) and reads the modules of
    the files before it by name (NoemaCurriculum, NoemaExpr…). Here every file runs inside ONE scope object of its own:

@@ -48,8 +48,8 @@ export function runView(app: StudyApp): void {
     return;
   }
   app.host.frame.chrome({ sub: true, crumbs: [[R0.title]], back: R0.back, reading: true });
-  const snap = R0.service.state;
-  if (snap.value === 'summary') {
+  const snap = R0.actor.snapshot;
+  if (snap.state === 'summary') {
     runSummary(app);
     return;
   }
@@ -61,7 +61,7 @@ export function runView(app: StudyApp): void {
   }
   setAccent(document.body, app.course.chapterOf(ex));
   app.tutor.setContext({ kind: 'section', id: ex.section });
-  const lastOne = (): boolean => R0.service.state.context.i + 1 >= R0.service.state.context.list.length;
+  const lastOne = (): boolean => R0.actor.snapshot.context.i + 1 >= R0.actor.snapshot.context.list.length;
   const nextBtn = h(
     'button',
     {
@@ -70,7 +70,7 @@ export function runView(app: StudyApp): void {
       'data-next': '1',
       style: { display: 'none' },
       onclick: () => {
-        R0.service.send({ type: 'NEXT' });
+        R0.actor.send({ type: 'NEXT' });
         runView(app);
       },
     },
@@ -81,8 +81,8 @@ export function runView(app: StudyApp): void {
   const card = exerciseCard(app, ex, {
     showSection: true,
     onDone: ok => {
-      R0.service.send({ type: 'ANSWER', ok });
-      const c = R0.service.state.context;
+      R0.actor.send({ type: 'ANSWER', ok });
+      const c = R0.actor.snapshot.context;
       if (heartsEl) heartsEl.textContent = hearts(c.lives);
       count.textContent = `${app.nf(c.i + 1)}/${app.nf(c.list.length)}`;
       nextBtn.textContent =
@@ -134,7 +134,7 @@ export function runView(app: StudyApp): void {
 function runSummary(app: StudyApp): void {
   const R0 = app.round;
   if (!R0) return;
-  const c = R0.service.state.context;
+  const c = R0.actor.snapshot.context;
   const r = roundResult(c);
   const n = r.answered,
     pct = r.share,

@@ -8,9 +8,7 @@ intervals by the kernel). On top of the agent loop it has the multi-agent-system
 norms monitored by `NoemaLibLogic`, and five protocols (Contract Net, auctions, bargaining, coalitions, the iterated prisoner's
 dilemma). Space comes from `NoemaSpaceKit` (`docs/library/space.md`), time/randomness/statistics from `NoemaSimKit`.
 
-Python twin: `tools/lib_agents.py` (`ID`, `check_spec`, `exprs`, `keys`, `CODES`, `SERIES`, `SCALARS`, `SCENES`, `ACTIONS`,
-`PROTOCOLS`, `PROTO_NAMES`, `TEMPLATES` with their parameters, `TPL` — each template's reporters, variables, breeds and
-histograms). Tests: `node tests/lib_agents.js` (70 assertions, §8); JS ↔ Python parity on `tests/fixtures/enginelib/agents.json`
+Tests: `node tests/lib_agents.js` (70 assertions, §8); the golden outputs of the former Python twin on `tests/fixtures/enginelib/agents.json`
 (32 specs: 18 good, 14 bad). Reference activity: `tools/activities_examples/schelling-segregation`.
 
 Pure, deterministic per seed, bounded (≤ 5000 agents, ≤ 2000 steps, an operation budget `maxOps` ≤ 4·10⁶ (default 2·10⁶) with

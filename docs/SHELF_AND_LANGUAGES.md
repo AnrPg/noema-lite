@@ -8,7 +8,7 @@ This file is on both `main` and `languages`, so whoever merges one into the othe
 keep working as they are. The only work is resolving three small merge conflicts, described below.
 
 ## What the Shelf work changes
-* **The subject picker** (`pickSubject` in `engine/loader.js`) no longer has a 📚 Subjects tab. Its `.cm-modes` row has one
+* **The subject picker** (`pickSubject` in `engine/app/languages.js`) no longer has a 📚 Subjects tab. Its `.cm-modes` row has one
   button, 🧭 Curricula, then an inline list of the learner's curricula, then **📚 the Shelf**: a folded `<details class="pick-shelf">`
   with the subjects that teach no step of any curriculum (the chips are the same `.noema-chip`s as before).
 * `pickSubject` keeps its contract: it returns a Promise that resolves with the chosen subject's meta (or `null`), and
@@ -18,7 +18,7 @@ keep working as they are. The only work is resolving three small merge conflicts
   branch already has: `grid-template-columns:repeat(auto-fit,minmax(130px,1fr))`. Identical on both sides, so it merges cleanly.
 * New: `Noema.shelf(acc)`, `Noema.openShelf(acc)`, `Noema.loadSubject(acc, id)`, `NoemaCurriculum.stepsOf(acc, id)`,
   `NoemaCurriculum.Edit.assign / detach / refreshAssigned`.
-* **🔔 updates** (`Notes` in `engine/loader.js`, the banner in `engine/src/40_views.js`): besides shares and curriculum
+* **🔔 updates** (`Notes` in `engine/app/languages.js`, the banner in `engine/src/40_views.js`): besides shares and curriculum
   invitations, the bell now lists updates that wait for the learner (kinds `curupdate`, `stepupdate`, `subjupdate`: a
   shared curriculum's changes, a new version of a prepared step, a new version of a subject from 🌍 Explore). The subject
   picker still lists only subject shares (`!x.kind`). Language courses never produce any of them.
@@ -35,7 +35,7 @@ keep working as they are. The only work is resolving three small merge conflicts
   the later line that sets `Noema.node`, which runs for subject packs only.)
 
 ## Resolving the conflicts when `languages` meets `main`
-1. **`engine/loader.js`, the `.cm-modes` row in `pickSubject`.** Keep main's single 🧭 Curricula button and add the
+1. **`engine/app/languages.js`, the `.cm-modes` row in `pickSubject`.** Keep main's single 🧭 Curricula button and add the
    🌍 Languages button after it (the 📚 Subjects button is gone, so do not bring it back):
    ```js
    const modes = el('div', { class: 'cm-modes', role: 'tablist' },

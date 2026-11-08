@@ -60,6 +60,8 @@ export const USER_ERROR_CODES = [
   'files.no_pack_json',
   'files.bad_pack_json',
   'files.no_writer',
+  // Roadmaps
+  'roadmap.restructure',
   // AI (Claude, Gemini)
   'ai.unauthorized',
   'ai.unauthorized_short',
@@ -121,6 +123,7 @@ export const INTERNAL_ERROR_CODES = [
   'storage.failed', // a storage operation failed for another reason (a transaction error)
   'remote.conflict', // compare-and-swap refused: the row changed since the version the writer read
   'remote.unknown_collection', // a Remote collection the adapter has no table for
+  'sync.invalid_event', // an event from the cloud that is not one (skipped; the others are kept)
   'compute.timeout', // a job ran longer than its time limit (its Worker is stopped)
   'compute.cancelled', // a job was cancelled by its caller
   'compute.unknown_job', // no handler is registered for the job name
@@ -132,6 +135,8 @@ export const INTERNAL_ERROR_CODES = [
   'hlc.overflow', // more events in one millisecond than the counter holds (the physical clock stands still)
   'day.invalid', // not a calendar day "YYYY-MM-DD"
   'id.invalid', // not a valid id of its kind
+  'events.invalid', // an event that is not a valid noema.events/v1 event (or not of the log's account)
+  'events.closed', // the learning log is not open (no account yet) or was opened for another account
   'study.invalid', // study data that does not fit its model: a rating, FSRS parameters, an answer of another shape
   'container.unknown', // the composition root has no registration for a token
   'container.cycle', // registrations that depend on each other in a circle

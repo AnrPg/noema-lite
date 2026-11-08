@@ -1,5 +1,5 @@
 /**
- * THE PHASE BRIDGE: window.NoemaCore, the one way the old UI (engine/loader.js, engine/shell.js, engine/src/*.js,
+ * THE PHASE BRIDGE: window.NoemaCore, the one way the old UI (build/ui.js, engine/app/*.js, engine/src/*.js,
  * engine/lang/*, engine/*.js) reaches the new core in phases 1 and 2. Phase 3 moves the last old screens into
  * src/features/ and deletes this file, the global and every `NoemaCore.` in engine/ (docs/ARCHITECTURE.md §6).
  *
@@ -21,7 +21,7 @@
  *   NoemaCore.storage.kv.get(key) → text | null · set(key, text) → boolean · delete(key) · keys(prefix) → string[]
  *   NoemaCore.storage.estimate() → Promise<{ usage, quota, persisted } | null> · persist() → Promise<boolean>
  *   NoemaCore.notify.toast(text, { ms }) · notice(text, { ms }) · alert(text, { ms }) · onOverflow(fn) → unsubscribe
- *   NoemaCore.i18n.t(key, params) · has(key) · err(e) · plural(n) · locale() · dir() · format.{number,percent,date,time,relative,list,compare} · onChange(fn)
+ *   NoemaCore.i18n.t(key, params) · has(key) · err(e) · plural(n) · locale() · chain(locale?) · dir() · format.{number,percent,date,time,relative,list,compare} · onChange(fn)
  *   NoemaCore.telemetry.count(name, by) · event(name, data) · snapshot() · reset()
  *   NoemaCore.compute.run(job, input, { timeoutMs, signal, onProgress }) → Promise<value> (rejects with a NoemaError)
  *   NoemaCore.NoemaError                    the error class (instanceof checks, coded errors)

@@ -9,6 +9,7 @@ function boot(ui) {
     Intl, Promise, Date, Array, Object, JSON, Math, String, Number, Map, Set, setTimeout, clearTimeout };
   w.window = w; w.addEventListener = () => { };
   if (ui) w.NoemaI18n = { locale: ui, chain: t => [...new Set([t, t.split('-')[0], 'en'])], t: k => k, err: e => String(e?.message || e) };
+  require('./roadmaps_core')(w);   // NoemaCore.roadmaps (build/roadmaps-node.cjs) and the I18n port's chain
   vm.createContext(w);
   for (const f of ['engine/curriculum.js', 'engine/curjobs.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), w, { filename: f });
   return w;

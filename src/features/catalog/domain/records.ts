@@ -11,6 +11,7 @@
  * snippets) reads them as they are.
  */
 import { textOf } from '../../../kernel/text.ts';
+import { toneNumbers } from '../../search/domain/fold.ts';
 
 /** Bump when records change shape: every source is rebuilt once. */
 export const SCHEMA = 4;
@@ -45,22 +46,8 @@ const list = (x: unknown): readonly unknown[] => (Array.isArray(x) ? x : []);
 const objs = (x: unknown): Obj[] => list(x).map(obj);
 const text = (x: unknown): string => (x == null ? '' : textOf(x));
 
-/** Pinyin with tone marks → with tone numbers ("nǐ hǎo" → "ni3 hao3"), so both ways of typing find the word. */
-const TONE: Readonly<Record<string, number>> = { '̄': 1, '́': 2, '̌': 3, '̀': 4 };
-export function toneNumbers(p: unknown): string {
-  return text(p)
-    .split(/(\s+|')/)
-    .map(syl => {
-      const d = syl.normalize('NFD');
-      let n = 0;
-      const base = d.replace(/[̄́̌̀]/g, m => {
-        n = TONE[m] ?? 0;
-        return '';
-      });
-      return n ? base.normalize('NFC') + String(n) : syl;
-    })
-    .join('');
-}
+/** Pinyin with tone marks → with tone numbers: the search's own rule (src/features/search/domain/fold.ts). */
+export { toneNumbers };
 
 /** Plain text from the packs' markdown-lite (bold, code, links, tags, math dollars). */
 export function plain(s: unknown): string {

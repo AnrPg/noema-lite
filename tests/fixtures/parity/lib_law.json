@@ -1,0 +1,1037 @@
+{
+ "check": {
+  "in": "ce87358fe91b6bae06263877639b71dfd8432fb039d8c1165ce059ee250647d5",
+  "out": [
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.toggles[0].on",
+      []
+     ],
+     [
+      "1 - k",
+      "model.toggles[1].on",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "ruleNoVehicles",
+      "model.rules[2].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.premises[1].on",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.schemes[0].cqs[0].on",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "expertArg",
+      "model.schemes[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 0.3 + 0.3",
+      "model.args[1].weight",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "argAlibi",
+      "model.args[2].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.positions[1].on",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.issues[1].rebut",
+      []
+     ],
+     [
+      "k * 10 + 1",
+      "model.issues[2].lr[1]",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "issueBase",
+      "model.issues[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.toggles[0].on",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "fSecurity",
+      "model.factors[0].label"
+     ],
+     [
+      "caseB",
+      "model.cases[1].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k + 1",
+      "model.period.n",
+      []
+     ],
+     [
+      "k * 30",
+      "model.asOf",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k + 2.5",
+      "model.events[2].t",
+      []
+     ],
+     [
+      "k * 20",
+      "model.parties[1].age",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "elConsideration",
+      "model.elements[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 200",
+      "model.items[0].avoidable",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "lostProfit",
+      "model.items[1].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 3",
+      "model.proven[0].mind",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "elParked",
+      "model.offences[2].elements[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 3",
+      "model.points",
+      []
+     ],
+     [
+      "k",
+      "model.adjust[0].on",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.alternatives[0].on",
+      []
+     ],
+     [
+      "k * 2 + 2",
+      "model.weights.Ij",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 10 + 25",
+      "model.yes",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.voters[1].yes",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "lux",
+      "model.voters[5].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k",
+      "model.positions[0].on",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 5",
+      "model.values[0].v",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "dimSecrecy",
+      "model.dimensions[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "1/8",
+      "model.heirs[0].share",
+      []
+     ],
+     [
+      "2/3",
+      "model.heirs[1].share",
+      []
+     ],
+     [
+      "1/6",
+      "model.heirs[2].share",
+      []
+     ],
+     [
+      "1/6",
+      "model.heirs[3].share",
+      []
+     ],
+     [
+      "k * 1000 + 24000",
+      "model.estate",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "heirWife",
+      "model.heirs[0].label"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "k * 100",
+      "model.norms[1].penalty",
+      []
+     ],
+     [
+      "k",
+      "model.norms[1].on",
+      []
+     ],
+     [
+      "k * 12",
+      "model.step",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "unknown-field",
+      "path": "model.extraField",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "unknown-field",
+      "path": "outputs[0].foo",
+      "msg": "ignored",
+      "level": "warning"
+     }
+    ],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.task",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.task",
+      "msg": "one of rules, aspic, carneades, hohfeld, proof, cases, deadline, contract, damages, crime, sentence, proportionality, vote, citation, shares, obligations",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.rules",
+      "msg": "missing (rules needs rules)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "literal",
+      "path": "model.query",
+      "msg": "needs a literal (p or ~p)",
+      "level": "error"
+     },
+     {
+      "code": "literal",
+      "path": "model.rules[0].if[0]",
+      "msg": "needs a literal (p or ~p)",
+      "level": "error"
+     },
+     {
+      "code": "literal",
+      "path": "model.rules[1].then",
+      "msg": "needs a literal (p or ~p)",
+      "level": "error"
+     },
+     {
+      "code": "parse-token",
+      "path": "model.rules[2].then",
+      "msg": "unexpected \"q\" at 2",
+      "level": "error"
+     },
+     {
+      "code": "duplicate",
+      "path": "model.rules[1].id",
+      "msg": "the rule a is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.sup[0].lose",
+      "msg": "not a rule of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "duplicate",
+      "path": "model.schemes[0].id",
+      "msg": "the id d is a rule too",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.rules[0].kind",
+      "msg": "aspic has strict and defeasible rules (a defeater is an undercutter: a rule that concludes ~<rule id>)",
+      "level": "error"
+     },
+     {
+      "code": "cq",
+      "path": "model.schemes[0].cqs[0].cq",
+      "msg": "not a critical question of expert: expertise, field, opinion, trustworthy, consistent, evidence",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.standards[0].ps",
+      "msg": "one of scintilla, preponderance, clear-convincing, brd, dv",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "cycle",
+      "path": "model.args",
+      "msg": "the arguments form a cycle through a (Carneades needs an acyclic graph)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "duplicate",
+      "path": "model.issues[3].id",
+      "msg": "the issue a is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.issues[0].presumed",
+      "msg": "not an issue of the model",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.issues[1].presumed",
+      "msg": "an issue cannot presume itself",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.issues[1].threshold",
+      "msg": "missing (a custom standard needs its threshold)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.costs",
+      "msg": "missing (the decision standard needs costs fp and fn)",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.claim[0]",
+      "msg": "not an issue of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.query",
+      "msg": "not an issue of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "ref",
+      "path": "model.cases[0].factors[1]",
+      "msg": "not a factor of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.cases[0].reason[0]",
+      "msg": "not a factor of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.facts[0]",
+      "msg": "not a factor of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.toggles[0].lit",
+      "msg": "not a factor of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.focus",
+      "msg": "not a case of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "date",
+      "path": "model.start",
+      "msg": "needs a date YYYY-MM-DD that exists (1600–2400)",
+      "level": "error"
+     },
+     {
+      "code": "date",
+      "path": "model.holidays[0]",
+      "msg": "needs a date YYYY-MM-DD that exists (1600–2400)",
+      "level": "error"
+     },
+     {
+      "code": "date",
+      "path": "model.holidays[1]",
+      "msg": "needs a date YYYY-MM-DD that exists (1600–2400)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.tolling[0].to",
+      "msg": "ends before it starts",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.period.unit",
+      "msg": "one of days, weeks, months, years, business",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.trace[0].day",
+      "msg": "give day or date, not both",
+      "level": "error"
+     },
+     {
+      "code": "date",
+      "path": "model.trace[1].date",
+      "msg": "needs a date YYYY-MM-DD that exists (1600–2400)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.start",
+      "msg": "missing (dated steps need the start date)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.start",
+      "msg": "missing (business days need the start date)",
+      "level": "error"
+     },
+     {
+      "code": "parse-paren",
+      "path": "model.norms[0].cond",
+      "msg": "\")\" is missing (to close \"(\" at 0) at 2",
+      "level": "error"
+     },
+     {
+      "code": "parse-eof",
+      "path": "model.norms[0].act",
+      "msg": "the formula ends too soon at 3",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "size",
+      "path": "model.offences[1].elements",
+      "msg": "fewer than 1 items",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "grid",
+      "path": "model.grid.rows[0]",
+      "msg": "needs 6 numbers (low and high for each of the 3 categories)",
+      "level": "error"
+     },
+     {
+      "code": "grid",
+      "path": "model.grid.cats[2]",
+      "msg": "the categories' lower bounds must rise",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.grid.rows",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.grid.cats",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "duplicate",
+      "path": "model.voters[1].id",
+      "msg": "the voter a is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.voter",
+      "msg": "not a voter of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[1].at",
+      "msg": "not an id of model.voters",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "size",
+      "path": "model.text",
+      "msg": "longer than 200 characters",
+      "level": "error"
+     },
+     {
+      "code": "pattern",
+      "path": "model.patterns[0].template",
+      "msg": "a placeholder is {name:int}, {name:word}, {name:text} or {name:year} (at 0)",
+      "level": "error"
+     },
+     {
+      "code": "pattern",
+      "path": "model.patterns[1].template",
+      "msg": "needs at least one placeholder",
+      "level": "error"
+     },
+     {
+      "code": "pattern",
+      "path": "model.patterns[2].template",
+      "msg": "a \"}\" without its \"{\" (at 2)",
+      "level": "error"
+     },
+     {
+      "code": "pattern",
+      "path": "model.patterns[3].template",
+      "msg": "the placeholder a is used twice",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "outputs[0].name",
+      "msg": "needs the name of a field (e.g. year, volume, page)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "outputs[1].name",
+      "msg": "needs the name of a field (e.g. year, volume, page)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.positions[1].kind",
+      "msg": "one of right, duty, privilege, noright, power, liability, immunity, disability",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.estate",
+      "msg": "missing (shares needs heirs, estate)",
+      "level": "error"
+     },
+     {
+      "code": "duplicate",
+      "path": "model.heirs[1].id",
+      "msg": "the heir h is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "outputs[1].code",
+      "msg": "one of inconsistent, undecided, unresolved, budget, no-stable, contradiction, conflict, conjunction, shifted, probability, no-precedent, month-end, rolled, tolled, longstop, expired, counteroffer, revoked, lapsed, rejected, in-transit, late, mirror, minor, unforeseeable, avoidable, penalty, negative, default-mind, strict-liability, causation, defence, grid-range, clamped, stalemate, scale, no-quorum, tie, casting, blocking, no-match, awl, radd, escheat, no-heirs, claims-short, parse, trace-truncated, weight, value, loop",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "outputs[2].code",
+      "msg": "one of inconsistent, undecided, unresolved, budget, no-stable, contradiction, conflict, conjunction, shifted, probability, no-precedent, month-end, rolled, tolled, longstop, expired, counteroffer, revoked, lapsed, rejected, in-transit, late, mirror, minor, unforeseeable, avoidable, penalty, negative, default-mind, strict-liability, causation, defence, grid-range, clamped, stalemate, scale, no-quorum, tie, casting, blocking, no-match, awl, radd, escheat, no-heirs, claims-short, parse, trace-truncated, weight, value, loop",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].of",
+      "msg": "scalar outputs of law@1 for shares: share, amount, total, awl, radd, residue, escheat, flag",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "outputs[4].at",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5].kind",
+      "msg": "one of scalar, series, scene",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[6].of",
+      "msg": "names what law@1 computes",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.rules[0].rank",
+      "msg": "needs a number",
+      "level": "error"
+     },
+     {
+      "code": "enum",
+      "path": "model.order[0]",
+      "msg": "one of superior, specialis, posterior",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "model.facts",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "format",
+      "path": "model",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "literal",
+      "path": "model.positions[0].act",
+      "msg": "needs a literal (p or ~p)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.positions[0].other",
+      "msg": "a jural relation holds between two different persons",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.ask.other",
+      "msg": "a jural relation holds between two different persons",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "duplicate",
+      "path": "model.offences[0].elements[1].id",
+      "msg": "the element e is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.proven[0].element",
+      "msg": "not an element of an offence",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.defences[0].offences[0]",
+      "msg": "not an offence of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "outputs[1].at",
+      "msg": "not an id of model.offences",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "parse-token",
+      "path": "model.assume[0]",
+      "msg": "unexpected \"s\" at 2",
+      "level": "error"
+     },
+     {
+      "code": "literal",
+      "path": "model.standards[0].lit",
+      "msg": "needs a literal (p or ~p)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "enum",
+      "path": "model.items[0].kind",
+      "msg": "one of loss, incidental, consequential, cost-avoided, loss-avoided, reliance, benefit",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.interest.years",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "format",
+      "path": "outputs",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.positions[0].act",
+      "msg": "a passive position names an atom (p, not ~p)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.lindahl.other",
+      "msg": "needs a second agent",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "duplicate",
+      "path": "model.dimensions[1].id",
+      "msg": "the dimension d1 is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.cases[0].values[0].dim",
+      "msg": "not a dimension of the model",
+      "level": "error"
+     },
+     {
+      "code": "ref",
+      "path": "model.values[0].dim",
+      "msg": "not a dimension of the model",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   }
+  ]
+ }
+}

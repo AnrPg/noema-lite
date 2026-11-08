@@ -200,12 +200,12 @@ test('one exercise (#/ex/<id>): answered right, it is recorded, gives XP, and th
   right.click();
   assert.equal(f.state.res['c1-e1']?.ok, 1);
   assert.ok(f.xp.reduce((a, b) => a + b, 0) > 0, 'XP for a right answer');
-  const ctx = ui.app.round?.service.state;
-  assert.equal(ctx?.value, 'answered');
+  const ctx = ui.app.round?.actor.snapshot;
+  assert.equal(ctx?.state, 'answered');
   const next = main().querySelector<HTMLButtonElement>('.btn.primary[data-next]');
   assert.ok(next, 'Next is the page’s primary button (Enter presses it)');
   next.click();
-  assert.equal(ui.app.round?.service.state.value, 'summary');
+  assert.equal(ui.app.round?.actor.snapshot.state, 'summary');
 });
 
 test('the 1–6 keys choose an option of the open exercise', () => {
@@ -233,11 +233,11 @@ test('“Only my level” keeps a round at the learner’s level', () => {
   assert.equal(ui.app.offersLevelFilter(), true);
   ui.app.onlyMyLevel = true;
   ui.app.startRound([...ui.app.course.exercises]);
-  const list = ui.app.round?.service.state.context.list ?? [];
+  const list = ui.app.round?.actor.snapshot.context.list ?? [];
   assert.ok(list.length > 0 && list.every(e => e.level === 'l1'));
   ui.app.onlyMyLevel = false;
   ui.app.startRound([...ui.app.course.exercises]);
-  assert.ok((ui.app.round?.service.state.context.list ?? []).some(e => e.level === 'l2'));
+  assert.ok((ui.app.round?.actor.snapshot.context.list ?? []).some(e => e.level === 'l2'));
 });
 
 test('the source filter: only one book’s chapters, the engine follows, and back to all', () => {

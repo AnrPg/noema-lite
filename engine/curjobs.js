@@ -24,55 +24,26 @@
     const F = root.IntlMessageFormat, M = F && (F.IntlMessageFormat || F.default || F);
     try { return M ? String(new M(m, 'en', undefined, { ignoreTag: true }).format(p || {})) : m; } catch (e) { return m; }
   }
-  const BATCH = 5, BATCH_FILES = 2, GRAPH = ['dag', 'audit', 'expand'], IN = 'a:curin:';
-  /* A step handed to a run of the learner's Claude is CLAIMED (KV a:curclaim:<cid>:<nid>, a lease): other runs — e.g. the
-     hourly scheduled ones, while this one is still building — skip it, so every queued step is prepared once. The claim
-     ends when the step is saved, or after LEASE (a run that died without saving). A step whose pack is built and only its
-     upload waits (the network blocked it; it is retried with the others at the end of the run, docs/PIPELINES.md §1b) is
-     WAITING: noema_start_upload marks its claim { waiting: true } and it lasts WAIT, so a long run never builds it twice. */
-  const CLAIM = 'a:curclaim:', LEASE = 4 * 3600e3, WAIT = 72 * 3600e3;
-  const claimKey = (cid, nid) => `${CLAIM}${cid}:${nid}`;
+  /* The queue, the claims and the inbox are the Roadmaps domain (src/features/roadmaps/domain: work.ts, claims.ts, inbox.ts),
+     through NoemaCore.roadmaps (the connector hands its own scope the same module). Here: the agents' tasks (prompts, checks,
+     answers), the texts for Claude, and the app's side of the inbox. */
+  const R = () => root.NoemaCore.roadmaps;
+  const { BATCH, BATCH_FILES, GRAPH, IN, CLAIM, LEASE, WAIT } = root.NoemaCore.roadmaps;
+  const claimKey = (cid, nid) => R().claimKey(cid, nid);
   /** How long a claim row (KV { value, updated_at }) lasts: WAIT once its upload waits, else LEASE. */
-  const leaseOf = (r, lease = LEASE, wait = WAIT) => { let v = r?.value; try { if (typeof v === 'string') v = JSON.parse(v); } catch (e) { v = null; } return v?.waiting ? Math.max(wait, lease) : lease; };
+  const leaseOf = (r, lease = LEASE, wait = WAIT) => R().leaseOf(r, lease, wait);
   /** Has this claim row run out? */
-  const claimExpired = (r, now = Date.now(), lease = LEASE, wait = WAIT) => now - ms(r?.updated_at) >= leaseOf(r, lease, wait);
-  const isApp = c => c?.provider === 'claudeapp';
-  const prepared = n => ['ready', 'generating'].includes(n?.pack?.status);
-  const needsPlan = n => (!prepared(n) || !!n.pack?.assigned) && (!n.chapters?.length || !!n.replan);   // 📦 a step taught by an attached subject is planned (from it), never prepared
-  const clone = o => JSON.parse(JSON.stringify(o));
-  const ms = v => Date.parse(v || '') || 0;
-
-  /** What is still to do outside the app: { graph: 'dag'|'audit'|'expand'|null, toPlan: [ids], steps: [ids], claimed: [ids], done }
-      steps: queued and free, in queue order · claimed: queued and being prepared by a run right now (see settle) */
-  const member = c => c?.shared?.role === 'member' && !c.shared.ended;   // 👥 a curriculum someone shared with the learner: its map and plans are the owner's
-  function work(c) {
-    const graph = isApp(c) && !member(c) && GRAPH.includes(c.stage) ? c.stage : null;
-    const toPlan = isApp(c) && !graph && c.stage !== 'dag' && !C().holding(c) ? C().order(c).filter(id => needsPlan(c.nodes[id]) && (!member(c) || !!c.nodes[id].pack?.assigned)) : [];   // holding: the learner attaches their own subjects first · a member plans only the steps their own subjects teach
-    const queued = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')) || a.localeCompare(b));
-    const steps = queued.filter(id => !c.nodes[id].pack.claimedAt), claimed = queued.filter(id => c.nodes[id].pack.claimedAt);
-    return { graph, toPlan, steps, claimed, done: !graph && !toPlan.length && !steps.length };
-  }
-  /** Saved already? The step's subject (KV a:packmeta:<packId>, written when it is saved) is newer than the step's place in the queue. */
-  const savedSince = (c, nid, meta) => !!meta && meta.id === C().packId(c, nid) && meta.curriculum === c.id && meta.node === nid && ms(meta.updatedAt) >= ms(c.nodes[nid]?.pack?.queuedAt);
-  /** The queue as it really is (the connector works on this): a queued step whose subject was saved after it was queued is
-      prepared — even when an older copy of the curriculum (another device) put it back in the queue; a queued step with a
-      live claim is being prepared by another run.  claims: KV rows a:curclaim:<cid>:*  · packs: KV rows a:packmeta:* */
+  const claimExpired = (r, now = Date.now(), lease = LEASE, wait = WAIT) => R().claimExpired(r, now, lease, wait);
+  const isApp = c => R().isApp(c), prepared = n => R().prepared(n), needsPlan = n => R().needsPlan(n);
+  const member = c => R().member(c);
+  /** What is still to do outside the app (docs/CURRICULUM.md §7): { graph, toPlan, steps, claimed, done }; level: only that level's steps. */
+  const work = (c, o) => R().work(c, o);
+  const savedSince = (c, nid, meta) => R().savedSince(c, nid, meta);
+  /** The queue as it really is (the connector works on this). claims: KV rows a:curclaim:<cid>:* · packs: KV rows a:packmeta:* ·
+      remote: 👥 rows of noema_curriculum_steps (a shared curriculum) */
   function settle(c, { claims = [], packs = [], remote = null, me = null, now = Date.now(), lease = LEASE, wait = WAIT } = {}) {
-    const cc = clone(c), live = {}, saved = {};
-    // 👥 a shared curriculum: what the other participants prepared / are preparing (rows of noema_curriculum_steps)
-    const rem = remote && cc.shared && !cc.shared.ended && root.NoemaCurShare ? root.NoemaCurShare.core.remoteOf(remote, me, now) : null;
-    if (rem) cc.remote = rem;
-    for (const r of claims) { if (!r.key.startsWith(CLAIM + c.id + ':')) continue; const t = ms(r.updated_at); if (!claimExpired(r, now, lease, wait)) live[r.key.slice(CLAIM.length + c.id.length + 1)] = t; }
-    for (const r of packs) { let m; try { m = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; } if (m?.curriculum === c.id && m.node) saved[m.node] = m; }
-    for (const [nid, n] of Object.entries(cc.nodes || {})) {
-      if (n.pack?.status !== 'app') continue;
-      if (savedSince(cc, nid, saved[nid])) { n.pack = { ...n.pack, status: 'ready', version: saved[nid].version || null }; continue; }
-      const x = rem?.[nid];
-      if (x?.status === 'ready') { n.pack = { ...n.pack, status: 'ready', version: x.version || null, by: x.by }; continue; }   // prepared already (by somebody, or by me elsewhere)
-      if (x && !x.mine) { n.pack = { ...n.pack, claimedAt: x.at || new Date(now).toISOString(), by: x.by }; continue; }     // being prepared by somebody else
-      if (live[nid]) n.pack = { ...n.pack, claimedAt: new Date(live[nid]).toISOString() };
-    }
-    return cc;
+    const rem = remote && c.shared && !c.shared.ended && root.NoemaCurShare ? root.NoemaCurShare.core.remoteOf(remote, me, now) : null;
+    return R().settle(c, { claims, packs, remote: rem, now, lease, wait });
   }
 
   /* ---------- tasks ---------- */
@@ -80,69 +51,48 @@
   const TITLES = { dag: 'Agent 1 — the Roadmap: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
   const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
-  /** Which re-plan requests a plan task answers: a hash of the replanAt of each of its steps, in order ('' when none was asked
-      for). An answer written for an older request (the learner asked again for any of its steps) no longer matches. */
-  const planGen = (c, ids) => {
-    const v = ids.map(i => c.nodes[i]?.replanAt || ''); if (!v.some(Boolean)) return '';
-    let h = 5381; for (const ch of v.join('|')) h = (Math.imul(h, 33) ^ ch.charCodeAt(0)) >>> 0;
-    return '@' + h.toString(36);
-  };
-  function spec(c, kind, ids) {
+  const planGen = (c, ids) => R().planGen(c, ids);
+  /** 🪜 The level a task targets (noema_curriculum_task level): what it is, its steps, what difficulty means there. */
+  const levelPart = (c, level) => level ? '\n\n' + R().levelBrief(c, level) : '';
+  function spec(c, kind, ids, { level = '' } = {}) {
     const P = C().prompts, S = C().schemas, x = C().ctx(c);
     if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S.S_DAG };
     if (kind === 'audit') return { kind, id: 'audit', title: TITLES.audit, system: SYS.audit, prompt: P.auditPrompt(x, C().snapshot(c, { withSummaries: true })), schema: S.S_AUDIT };
     if (kind === 'expand') return { kind, id: 'expand', title: TITLES.expand, system: SYS.expand, prompt: P.expandPrompt(x, C().snapshot(c), c.nodes[c.goalId]), schema: S.S_EXPAND };
-    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(',') + planGen(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + P.packageText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
+    if (kind === 'plan') return { kind, id: R().planTaskId(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + P.packageText(c, ids) + wishes(c, ids) + levelPart(c, level), schema: S.S_PLAN, downloads: downloadsOf(c, ids), ...(level ? { level } : {}) };
     return null;
   }
   /** The learner's files of some steps, each file once (even when several steps or page ranges use it). */
-  function downloadsOf(c, ids) {
-    const downloads = [], seen = new Set();
-    for (const nid of ids) for (const f of c.nodes[nid]?.pack?.assigned ? [] : c.nodes[nid]?.material?.files || []) {
-      const store = f.fileId ? C().curStore(c.id) : C().packId(c, nid), src = f.fileId || f.srcId, k = store + '/' + src;
-      if (seen.has(k)) continue; seen.add(k);
-      downloads.push({ store, src, name: f.name, size: f.size || 0, type: f.type || '', pages: f.pages || null, sha256: f.sha256 || null });
-    }
-    return downloads;
-  }
-  const hasFiles = (c, id) => !!c.nodes[id]?.material?.files?.length && !c.nodes[id].pack?.assigned;
+  const downloadsOf = (c, ids) => R().downloadsOf(c, ids);
   /** The next plan batch: up to 5 steps, of which at most 2 with files (Claude reads their pages before planning them). */
-  function planBatch(c, ids) {
-    const out = []; let withFiles = 0;
-    for (const id of ids) { const f = hasFiles(c, id); if (out.length && f && withFiles >= BATCH_FILES) continue; out.push(id); if (f) withFiles++; if (out.length >= BATCH) break; }
-    return out;
-  }
+  const planBatch = (c, ids) => R().planBatch(c, ids);
   /** One step to prepare: the brief, the subject id and the learner's files (each file once, even when several page ranges use it). */
-  function stepSpec(c, nid) {
+  function stepSpec(c, nid, { level = '' } = {}) {
     const n = c.nodes[nid]; if (!n) return null;
-    const downloads = downloadsOf(c, [nid]);
-    return { kind: 'step', id: 'step:' + nid, nid, packId: C().packId(c, nid), title: `Prepare the step “${n.title}”`, stepTitle: n.title, language: c.language, brief: C().nodeBrief(c, nid), downloads, planned: !!n.chapters?.length };
+    const lv = level || (n.level !== undefined ? (typeof n.level === 'string' ? n.level : n.level.from) : '');
+    return { kind: 'step', id: 'step:' + nid, nid, packId: C().packId(c, nid), title: `Prepare the step “${n.title}”`, stepTitle: n.title, language: c.language, brief: C().nodeBrief(c, nid) + levelPart(c, lv), downloads: downloadsOf(c, [nid]), planned: !!n.chapters?.length, ...(lv ? { level: lv } : {}) };
   }
-  /** The next task. want: 'any' | 'map' | 'plan' | 'step'; step: a step id or title (prepares that one). */
-  function next(c, { want = 'any', step = '', force = false } = {}) {
+  /** The next task. want: 'any' | 'map' | 'plan' | 'step'; step: a step id or title (prepares that one); level: only the steps at that level. */
+  function next(c, { want = 'any', step = '', force = false, level = '' } = {}) {
     if (step) {
-      const s = String(step).trim().toLowerCase(); const nid = c.nodes[step] ? step : Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase() === s) || Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase().includes(s));
+      const nid = R().findStep(c, String(step));
       if (!nid) return { error: `No step “${step}” in “${c.title}”.` };
-      if (c.nodes[nid].pack?.assigned) return needsPlan(c.nodes[nid]) && isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” is taught by “${c.nodes[nid].pack.title || c.nodes[nid].pack.id}”, a subject the learner attached to it — it is not prepared.` };
-      if (prepared(c.nodes[nid])) return { error: `“${c.nodes[nid].title}” is already prepared.` };
-      if (c.nodes[nid].pack?.claimedAt && !force) return { error: `“${c.nodes[nid].title}” is being prepared by another run since ${c.nodes[nid].pack.claimedAt} — do not prepare it twice. If that run has stopped without saving it, call noema_curriculum_task again with step and force = true.` };
-      if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared Roadmap — do not prepare it again (the learner gets it on the map).` };
-      if (!c.nodes[nid].chapters?.length) return member(c) ? { error: `“${c.nodes[nid].title}” has no chapter plan yet — the owner of this shared Roadmap plans it first.` } : isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
-      return stepSpec(c, nid);
+      const why = R().stepRefusal(c, nid, { force });
+      if (why === 'plan') return spec(c, 'plan', [nid], { level });
+      return why ? { error: why } : stepSpec(c, nid, { level });
     }
-    const w = work(c);
+    const w = work(c, { level });
     if (w.graph && /any|map/.test(want)) return spec(c, w.graph);
-    if (w.toPlan.length && /any|plan/.test(want)) return spec(c, 'plan', planBatch(c, w.toPlan));
-    if (w.steps.length && /any|step/.test(want)) return stepSpec(c, w.steps[0]);
+    if (w.toPlan.length && /any|plan/.test(want)) return spec(c, 'plan', planBatch(c, w.toPlan), { level });
+    if (w.steps.length && /any|step/.test(want)) return stepSpec(c, w.steps[0], { level });
     return null;
   }
   /** A submitted answer → its task, if that task is still open (else null: done already, or the curriculum changed). */
   function byId(c, id) {
     const w = work(c);
     if (GRAPH.includes(id)) return w.graph === id ? spec(c, id) : null;
-    const m = /^plan:([^@]+)(@[0-9a-z]+)?$/.exec(String(id || '')); if (!m) return null;
-    const ids = m[1].split(',').filter(Boolean);
-    return ids.length && ids.every(i => c.nodes[i] && needsPlan(c.nodes[i])) && (m[2] || '') === planGen(c, ids) ? spec(c, 'plan', ids) : null;
+    const ids = R().planTaskSteps(c, String(id || ''));
+    return ids ? spec(c, 'plan', ids) : null;
   }
   /** Problems of an answer (JSON Schema + the same semantic checks as the in-app agents) → [] when it is good. */
   function check(c, t, data) {
@@ -160,6 +110,7 @@
     if (t.kind === 'plan') return rt('roadmap.jobs.task.plan', { n: t.ids.length, list: t.ids.map(i => c.nodes[i]?.title).join(' · ') });
     return rt(t.kind === 'dag' ? 'roadmap.jobs.task.dag' : t.kind === 'audit' ? 'roadmap.jobs.task.audit' : 'roadmap.jobs.task.expand');
   }
+  const logApp = (c, m) => (c.log = c.log || []).push({ t: Date.now(), m, via: 'claude-app' });   // via: what the Claude app did (the words depend on the language)
   /** Apply a checked answer to the curriculum (mutates it) → a log line. */
   function apply(c, t, data) {
     let line;
@@ -167,24 +118,16 @@
     else if (t.kind === 'audit') { line = C().applyAudit(c, data); c.stage = 'expand'; }
     else if (t.kind === 'expand') { C().applyExpansion(c, data); line = C().expandLine(data); c.stage = 'plan'; c.title = c.nodes[c.goalId]?.goalTitle || c.title || c.goal; }
     else if (t.kind === 'plan') { C().applyPlans(c, data); line = '   ✓ ' + rt('roadmap.jobs.planned', { list: t.ids.map(i => c.nodes[i]?.title).filter(Boolean).join(', ') }); }
-    if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; c.errorInfo = null; if (c.stage === 'plan' && !Object.values(c.nodes).some(needsPlan)) c.stage = 'done'; }
-    (c.log = c.log || []).push({ t: Date.now(), m: '💬 ' + rt('roadmap.jobs.log', { kind: t.kind, line: line.replace(/^\s*/, '') }), via: 'claude-app' });   // via: what the Claude app did (the words depend on the language)
+    if (isApp(c) && !GRAPH.includes(c.stage)) { R().readyForApp(c); if (c.stage === 'plan' && !Object.values(c.nodes).some(needsPlan)) c.stage = 'done'; }
+    logApp(c, '💬 ' + rt('roadmap.jobs.log', { kind: t.kind, line: line.replace(/^\s*/, '') }));
     return line;
   }
   /** The curriculum as it will be once the app has applied the answers still in the inbox (the connector works on this). */
-  function merged(c, rows) {
-    const cc = clone(c);
-    for (const r of [...rows].sort((a, b) => a.key.localeCompare(b.key))) {
-      let e; try { e = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; }
-      if (e.kind === 'step') { const n = cc.nodes[e.nid]; if (n && !n.pack?.assigned) n.pack = { ...(n.pack || {}), id: e.packId, status: 'ready' }; continue; }
-      if (e.kind === 'assign') { const n = cc.nodes[e.nid]; if (n && !C().Edit?.cannotAssign?.(cc, n)) attachTo(cc, n, e); continue; }
-      if (e.kind === 'i18n') { if (!C().checkI18n(cc, e.locale, e.data).length) C().setI18n(cc, e.locale, e.data); continue; }   // 🌐 a Roadmap translation (noema_save_roadmap_translation)
-      if (e.kind === 'extend') { if (!extendProblems(cc, e).length) extend(cc, e); continue; }   // 🌱 a new part of the Roadmap (noema_extend_roadmap)
-      if (e.kind === 'link') { if (!linkProblems(cc, e).length) link(cc, e); continue; }   // 🔗 links between steps on the map (noema_link_roadmap_steps)
-      const t = byId(cc, e.task); if (t && !check(cc, t, e.data).length) apply(cc, t, e.data);
-    }
-    return cc;
-  }
+  const merged = (c, rows) => R().merged(c, rows, {
+    now: Date.now(),
+    answer: (cc, e) => { const t = byId(cc, e.task); if (t && !check(cc, t, e.data).length) apply(cc, t, e.data); },
+    assign: (cc, e) => { const n = cc.nodes[e.nid]; if (n && !C().Edit?.cannotAssign?.(cc, n)) attachTo(cc, n, e); },
+  });
   /** 📦 What an attached subject changes on its step (the same here, in the connector's view and in Edit.assign's effect on
       the plan): the step is taught by it, and re-planned from its outline. e: { packId, title, description, outline, at } */
   function attachTo(c, n, e) {
@@ -194,67 +137,30 @@
     if (n.chapters?.length || c.stage === 'done') { n.replan = true; n.replanAt = C().stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; } delete n.reviewed;
     if (c.stage === 'done') c.stage = 'plan';
   }
-  /** 🌱 A new part of the Roadmap (noema_extend_roadmap → NoemaSourcePlan.extendFromClaude, docs/FROM_SOURCES.md §6): can it
-      still be added to this copy? → [] when it can, ['applied'] when it is here already, else the problems (e.g. this copy
-      does not have yet a step it links to: the entry waits). */
-  /* i18n-ignore-start — problems for the console and the connector, not for the learner */
-  function extendProblems(c, e) {
-    if ((c.parts || []).some(p => p.id === e.part?.id)) return ['applied'];
-    const p = [], nodes = e.nodes || {}, ids = new Set([...Object.keys(c.nodes || {}), ...Object.keys(nodes)]);
-    if (!e.part?.id || !Object.keys(nodes).length) p.push('an empty part');
-    for (const id of Object.keys(nodes)) if (c.nodes[id]) p.push(`step id "${id}" is taken`);
-    for (const x of e.edges || []) {
-      if (!ids.has(x.from) || !ids.has(x.to)) p.push(`a link to a step this copy does not have (${x.from} → ${x.to})`);
-      else if (!nodes[x.to] && (c.nodes[x.to].pack?.assigned || ['ready', 'generating'].includes(c.nodes[x.to].pack?.status))) p.push(`“${c.nodes[x.to].title}” is prepared already: it gets no new prerequisite`);
-    }
-    if (!p.length && !C().topo([...ids], [...(c.edges || []), ...(e.edges || [])])) p.push('the links form a cycle');
-    return p;
-  }
-  /* i18n-ignore-end */
-  /** Add the part (mutates c; check extendProblems first): its steps (planned next, and queued for the Claude app in study
-      order when it was asked to prepare them), its links, and the part itself in c.parts — the first part being the map as it was. */
+  /** 🌱 A new part (noema_extend_roadmap): can it still be added to this copy? → [] / ['applied'] / the problems (src/features/roadmaps/domain/inbox.ts). */
+  const extendProblems = (c, e) => R().extendProblems(c, e);
+  /** Add the part (mutates c; check extendProblems first). */
   function extend(c, e) {
-    const at = e.part.at || new Date().toISOString();
-    if (!c.parts?.length) c.parts = [{ id: 'p1', title: c.title || c.goal, at: c.fromSources?.at || c.created || at, steps: Object.keys(c.nodes) }];
-    for (const [id, n] of Object.entries(e.nodes)) c.nodes[id] = { chapters: [], learningGoals: [], ...clone(n), id, part: C().PART[n.role] || 'core', addedIn: e.part.id };
-    for (const x of e.edges || []) if (!c.edges.some(y => y.from === x.from && y.to === x.to)) c.edges.push({ from: x.from, to: x.to, why: x.why || '' });
-    c.parts.push({ id: e.part.id, title: e.part.title, ...(e.part.summary ? { summary: e.part.summary } : {}), at, steps: Object.keys(e.nodes) });
-    c.paths = { minimal: c.paths?.minimal || [], deep: C().order(c) };
-    if (e.prepare) { const t0 = Date.parse(at) || Date.now(); C().order(c).filter(id => e.nodes[id]).forEach((id, i) => { c.nodes[id].pack = { id: C().packId(c, id), status: 'app', queuedAt: new Date(t0 + i).toISOString(), error: null, auto: false }; c.nodes[id].reviewed = at; }); }
-    if (c.stage === 'done' && Object.keys(e.nodes).some(id => needsPlan(c.nodes[id]))) c.stage = 'plan';
-    if (isApp(c) && !GRAPH.includes(c.stage)) { c.status = 'ready'; c.error = null; c.errorInfo = null; }
-    (c.log = c.log || []).push({ t: Date.now(), m: '🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }), via: 'claude-app' });
+    R().extend(c, e, Date.now());
+    logApp(c, '🌱 ' + rt('roadmap.jobs.partAdded', { title: e.part.title, n: Object.keys(e.nodes).length }));
     return true;
   }
-  /** 🔗 Links between steps already on the map (noema_link_roadmap_steps → NoemaSourcePlan.linkFromClaude): can they still be
-      applied to this copy? → [] when they can, ['applied'] when this copy has them already, else the problems (e.g. a step this
-      copy does not have yet: the entry waits). Prepared steps may get a new prerequisite: only the map changes. */
-  /* i18n-ignore-start — problems for the console and the connector, not for the learner */
-  function linkProblems(c, e) {
-    const add = e.links || [], rem = e.remove || [], has = (x, list) => list.some(y => y.from === x.from && y.to === x.to), p = [];
-    if (!add.length && !rem.length) return ['nothing to change'];
-    if (e.id && (c.linksApplied || []).includes(e.id)) return ['applied'];   // its receipt: never replayed (a later entry may have undone it)
-    const own = id => !!c.nodes && Object.hasOwn(c.nodes, id);
-    for (const x of [...add, ...rem]) if (!own(x.from) || !own(x.to)) p.push(`a link to a step this copy does not have (${x.from} → ${x.to})`);
-    if (p.length) return p;
-    if (add.every(x => has(x, c.edges || [])) && !rem.some(x => has(x, c.edges || []))) return ['applied'];
-    const after = [...(c.edges || []).filter(x => !has(x, rem)), ...add.filter(x => !has(x, c.edges || []))];
-    if (!C().topo(Object.keys(c.nodes), after)) p.push('the links form a cycle');
+  /** 🔗 Links between steps already on the map (noema_link_roadmap_steps): can they still be applied to this copy? */
+  const linkProblems = (c, e) => R().linkProblems(c, e);
+  /** Apply the links (mutates c; check linkProblems first) → { added, removed } */
+  function link(c, e) {
+    const r = R().link(c, e);
+    logApp(c, '🔗 ' + rt('roadmap.jobs.linksAdded', r));
+    return r;
+  }
+  /** 🪜 A restructuring proposal (noema_restructure_levels): kept on the Roadmap for the learner to decide (mutates c). */
+  const proposeProblems = (c, e) => R().proposeProblems(c, e);
+  function propose(c, e) {
+    const p = R().propose(c, e);
+    logApp(c, '🪜 ' + rt('roadmap.jobs.proposed'));
     return p;
   }
-  /* i18n-ignore-end */
-  /** Apply the links (mutates c; check linkProblems first): edges added (with their why) and removed, the study order
-      recomputed. Nothing else changes — no step is re-planned and no subject or progress is touched. */
-  function link(c, e) {
-    const has = (x, list) => list.some(y => y.from === x.from && y.to === x.to);
-    const rem = (e.remove || []).filter(x => has(x, c.edges || [])), add = (e.links || []).filter(x => !has(x, c.edges || []) && Object.hasOwn(c.nodes, x.from) && Object.hasOwn(c.nodes, x.to));
-    c.edges = [...(c.edges || []).filter(x => !has(x, rem)), ...add.map(x => ({ from: x.from, to: x.to, why: x.why || '' }))];
-    c.paths = { minimal: c.paths?.minimal || [], deep: C().order(c) };
-    if (e.id) c.linksApplied = [...(c.linksApplied || []), e.id].slice(-200);
-    (c.log = c.log || []).push({ t: Date.now(), m: '🔗 ' + rt('roadmap.jobs.linksAdded', { added: add.length, removed: rem.length }), via: 'claude-app' });
-    return { added: add.length, removed: rem.length };
-  }
-  const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;
+  const inboxKey = (cid, seq) => R().inboxKey(cid, seq || R().inboxSeq(Date.now(), Math.random().toString(36).slice(2, 6)));
 
   /* ---------- texts (the same words in the connector, the copied task and the step bundle) ---------- */
   /* i18n-ignore-start — what Claude reads: the tasks, a step's brief, the message the learner pastes into a Claude chat */
@@ -282,7 +188,7 @@
       !files && c.nodes[t.nid]?.chatFiles?.length ? chatText(c, [t.nid]).replace(/^\n/, '') : files ? `\n## The learner's files — THE sources of this step\n${fileLines.join('\n')}\nRead every page of them that belongs to this step and build the pack FROM them: each planned chapter teaches and tests everything its pages contain (its "From the material" pages) — every topic, definition, mechanism, example, figure, table and detail, nothing skipped — and cites those pages. Do NOT research the theory on the web (web search only for pictures). Where a planned chapter is not covered by the files, write it briefly from reliable knowledge and say so in the coverage notes. Package the files (SKILL.md §3b) with the source ids of the plan below (m1, m2…); when only some pages belong to this step, split those pages out (split_pdf.py --ranges, keeps firstPage) and package the part instead of the whole file.`
         : `\n## Sources\nThere are no files for this step: research it yourself — official, authoritative sources first (official documentation and standards, university course pages, open textbooks such as OpenStax and LibreTexts, review articles, reference works; Wikipedia only as a pointer to better sources). Read what you cite. Record every source in sources.json (title, url, retrieved date) and map each chapter to its main source.`,
       `\n## The plan (follow it exactly: one pack chapter per planned chapter, same order and titles; do not re-teach what the learner already mastered)\n${t.brief}`,
-      `\n## How to build and save it\n1. Use the noema-pack-builder skill if you have it; otherwise ${mode === 'connector' ? 'call noema_get_toolkit and noema_authoring_guide' : 'follow the noema-lite authoring guide you were given'}. Start with: python3 scripts/start_subject.py work ${t.packId} "${t.stepTitle.replace(/"/g, "'")}" --lang ${c.language}, then python3 scripts/pipeline.py start 2 work/${t.packId} and, after each step, pipeline.py next / pipeline.py check work/${t.packId} <step> (without the skill: noema_pipeline gives the same steps)\n2. Pictures only where they have real teaching value (from the files, from the web, drawn diagrams / function graphs) — none is better than a decorative one; each picture gets ≥ 3 exercises, and a chapter with pictures has every picture exercise type ≥ 3 times. In every chapter: every exercise type and focus tag that fits the chapter (declared in its map) ≥ 3 times; counts are a guide, never a target (tools/pack_rules.json). Quality rules Q1–Q8 (CONTENT_SPEC.md): before each chapter write its exhaustive knowledge map (map/chNN.json: every point not taught earlier on the map, learnables, the types and paradigms that fit, every question the files ask); every exercise is self-contained (never \"Q2\", \"page 5\" or \"the source\" — write the item out, origin only in \"cite\"); every exercise of the sources is in, written out in full (a source's own solution is taken as correct, answerFrom \"source\", but explained more deeply in your own words; one the source does not solve is solved twice and checked, answerFrom \"claude\"; never drop one to meet a quota: add exercises on top, or lightly adjust some source exercises into the needed type, focus or difficulty, keeping their substance, answer and cite); the theory of every chapter has all three kinds of table (table blocks with kind \"compare\" = a comparative matrix, \"summary\" = categorises or sums up the concepts, \"breakdown\" = related concepts across columns of different parameters); exercises test the idea, never the specifics of a lesson's example: an exercise never points at \"the example above\" and, when it uses an example, writes it out in full (data, code, table: it is also shown alone in drills and the Mistakes gym) and asks a question that needs thinking about it (only an interesting case in itself may be tested as such); every figure and diagram is explained in detail right after it (what it shows, how to read it, what it teaches); img_sequence (tap the parts in order) rarely on a graph diagram whose arrows already show the order (say why in map.sequenceWhy); difficulty ≈ 20/25/55 %, recall ≤ 25 %; then solve every exercise blind and write review/chNN.json. Then translate every chapter into ${(globalThis.NoemaPackCheck?.requiredLocales(c.language || 'en').translations || ['en', 'el', 'ru', 'de', 'fr']).join(', ')} (translations/<locale>/chNN.json, same ids and answers) and make 文A bridges into ${(globalThis.NoemaPackCheck?.requiredLocales(c.language || 'en').bridges || ['en', 'el', 'ru', 'ar', 'de', 'fr']).join(', ')}, everyday words included (bridge.py require). Validate with make_pack.py.\n` +
+      `\n## How to build and save it\n1. Use the noema-pack-builder skill if you have it; otherwise ${mode === 'connector' ? 'call noema_get_toolkit and noema_authoring_guide' : 'follow the noema-lite authoring guide you were given'}. Start with: python3 scripts/start_subject.py work ${t.packId} "${t.stepTitle.replace(/"/g, "'")}" --lang ${c.language}, then python3 scripts/pipeline.py start 2 work/${t.packId} and, after each step, pipeline.py next / pipeline.py check work/${t.packId} <step> (without the skill: noema_pipeline gives the same steps)\n2. Pictures only where they have real teaching value (from the files, from the web, drawn diagrams / function graphs) — none is better than a decorative one; each picture gets ≥ 3 exercises, and a chapter with pictures has every picture exercise type ≥ 3 times. In every chapter: every exercise type and focus tag that fits the chapter (declared in its map) ≥ 3 times; counts are a guide, never a target (tools/CONTENT_SPEC.md). Quality rules Q1–Q8 (CONTENT_SPEC.md): before each chapter write its exhaustive knowledge map (map/chNN.json: every point not taught earlier on the map, learnables, the types and paradigms that fit, every question the files ask); every exercise is self-contained (never \"Q2\", \"page 5\" or \"the source\" — write the item out, origin only in \"cite\"); every exercise of the sources is in, written out in full (a source's own solution is taken as correct, answerFrom \"source\", but explained more deeply in your own words; one the source does not solve is solved twice and checked, answerFrom \"claude\"; never drop one to meet a quota: add exercises on top, or lightly adjust some source exercises into the needed type, focus or difficulty, keeping their substance, answer and cite); the theory of every chapter has all three kinds of table (table blocks with kind \"compare\" = a comparative matrix, \"summary\" = categorises or sums up the concepts, \"breakdown\" = related concepts across columns of different parameters); exercises test the idea, never the specifics of a lesson's example: an exercise never points at \"the example above\" and, when it uses an example, writes it out in full (data, code, table: it is also shown alone in drills and the Mistakes gym) and asks a question that needs thinking about it (only an interesting case in itself may be tested as such); every figure and diagram is explained in detail right after it (what it shows, how to read it, what it teaches); img_sequence (tap the parts in order) rarely on a graph diagram whose arrows already show the order (say why in map.sequenceWhy); difficulty ≈ 20/25/55 %, recall ≤ 25 %; then solve every exercise blind and write review/chNN.json. Then translate every chapter into ${(globalThis.NoemaCore?.content?.requiredLocales(c.language || 'en').translations || ['en', 'el', 'ru', 'de', 'fr']).join(', ')} (translations/<locale>/chNN.json, same ids and answers) and make 文A bridges into ${(globalThis.NoemaCore?.content?.requiredLocales(c.language || 'en').bridges || ['en', 'el', 'ru', 'ar', 'de', 'fr']).join(', ')}, everyday words included (bridge.py require). Validate with make_pack.py.\n` +
         (mode === 'connector'
           ? `3. Save it with noema_start_upload → curl → noema_finish_upload, subject_id "${t.packId}" (it asks for the source files you packaged; the learner's own files are recognised and not uploaded twice). The step then appears ready on the learner's map by itself. If the network blocks the upload (curl refused, 403, timeout), do not stop: python3 scripts/pipeline.py defer work/${t.packId} upload --note "why" and go on with 4 and 5 (translations and bridges are made here and never need the upload); at the end of the run retry every waiting upload together — pack, source files, translations, bridges (python3 scripts/pipeline.py pending work) — and if they still fail give the learner each <id>.noema.zip and the bridge files, and say what is waiting.\n4. With the pack's translations (English, Greek, Russian, German, French minus its own language — every chapter and the subject's name, subject.i18n), translate this step on the Roadmap into the same languages: everything its panel shows — title, summary, learning goals, domains, and every chapter's title, teaching goals and coverage — with noema_save_roadmap_translation; then the 文A bridges for every pair, from the pack's language and from each translation (bridge.py --from <locale>, noema_save_bridge with source) (noema_finish_upload and noema_save_translation list the exact texts still untranslated).\n5. Then call noema_curriculum_task for the next step, if the learner asked for more than one — also when this step's upload is waiting.`
           : `3. Give the learner the package ${t.packId}.noema.zip to download. In noema-lite they open this step on the map and press “📥 Import its package”.`),
@@ -336,7 +242,7 @@
     return true;
   };
   /** The kinds of inbox entry this build knows, besides a task's answer ({ task }). Anything else (written by a newer connector) stays for a newer app. */
-  const KINDS = ['step', 'assign', 'i18n', 'extend', 'link'];
+  const KINDS = R().KINDS;
   /** Fetch the answers waiting in the cloud, check and apply them, delete them. → how many were applied */
   App.poll = async (acc = App.acc) => {
     const CL = root.NoemaCloud; if (!acc || App.busy || !CL?.session?.() || !CL.kvRows) return 0;
@@ -375,6 +281,11 @@
             if (!errs.length) { const r = link(c, e); C().save(acc, c); n++; notice('🔗 ' + rt('roadmap.jobs.linksAdded', r), 5000); }
             else if (errs[0] !== 'applied') { console.warn('[curjobs] links refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. this copy has not got a step yet: try again later
           }
+          else if (e.kind === 'restructure') {   // 🪜 Claude proposes a new arrangement by level: it waits for the learner's decision (App.decide)
+            const errs = proposeProblems(c, e);
+            if (!errs.length) { propose(c, e); C().save(acc, c); n++; notice('🪜 ' + rt('roadmap.levels.proposal.notice', { title: C().shownTitle(c) }), 8000); }
+            else if (errs[0] !== 'applied') { console.warn('[curjobs] proposal refused', errs); if (age < 7 * 864e5) continue; }   // 🛡 e.g. a step this copy does not have yet: try again later
+          }
           else {
             const t = byId(c, e.task);   // null: applied already (an earlier check) — or out of date
             if (t) { const errs = check(c, t, e.data); if (!errs.length) { apply(c, t, e.data); C().save(acc, c); n++; } else console.warn('[curjobs] answer refused', errs); }
@@ -408,6 +319,57 @@
     App.poll().catch(() => { }); App.timer = setTimeout(loop, 20000);
   };
   App.onChange = f => { App.listeners.add(f); return () => App.listeners.delete(f); };
+
+  /** 🪜 The learner's subjects as a restructuring needs them (src/features/roadmaps/application/ports.ts RoadmapPacks): a pack
+      with its translations and 文A bridges, saved as a Roadmap step's subject (engine/loader.js importPack keeps the
+      translations in their own files), the bridges attached again, the joined packs removed, the progress state moved. */
+  const ok = value => ({ ok: true, value }), fail = e => ({ ok: false, error: e });
+  const Packs = {
+    async load(acc, id) {
+      try {
+        const N = root.Noema; let pack = await N.getPackById(acc, id); if (!pack) return fail(new Error(id));
+        pack = await N.inlineTranslations(acc, JSON.parse(JSON.stringify(pack)));
+        const translations = {};
+        for (const [loc, t] of Object.entries(pack.translations || {})) if (Array.isArray(t?.chapters)) translations[loc] = { format: 'noema-translation', v: 1, locale: loc, pack: id, ...t };
+        delete pack.translations;
+        const B = root.NoemaBridge, bridges = [];
+        if (B) {
+          const own = pack.subject.language || 'en', srcs = [own, ...Object.keys(translations)];
+          for (const src of srcs) for (const [nat, m] of Object.entries(B.available(acc, id, { language: own }, src === own ? null : src, own))) {
+            if (!m.own) continue;   // a library bridge belongs to the library's pack, not to the learner's copy
+            const b = await B.load(acc, id, nat, src === own ? null : src, own).catch(() => null); if (b) bridges.push(JSON.parse(JSON.stringify(b)));
+          }
+        }
+        return ok({ pack, translations, bridges });
+      } catch (e) { return fail(e); }
+    },
+    async save(acc, b, step) {
+      try {
+        const p = { ...b.pack, translations: b.translations };
+        await root.Noema.importPack(acc, p, { curriculum: step.roadmap, node: step.node, curTitle: step.title, via: 'restructure' });
+        for (const x of b.bridges) await root.NoemaBridge?.attach(acc, x);
+        return ok(undefined);
+      } catch (e) { return fail(e); }
+    },
+    async remove(acc, id) {
+      try { const s = (await root.Noema.subjectsFor(acc)).find(x => x.id === id); if (s) await root.Noema.deleteSubject(s); return ok(undefined); } catch (e) { return fail(e); }
+    },
+    /* the subject's progress is the learning log's fold; what a subject is handed (its items moved here) becomes its events */
+    state(acc, id) { const p = root.NoemaCore.learning.progressOf(acc, id); return p ? JSON.parse(JSON.stringify(p)) : null; },
+    async setState(acc, id, st) { try { await root.NoemaCore.learning.adoptProgress(acc, id, st); return ok(undefined); } catch (e) { return fail(e); } },
+  };
+  /** 🪜 The learner decides on a restructuring proposal: approve (applied to the Roadmap and its subjects; nothing is lost) or
+      decline. In a shared Roadmap only its owner decides (the map is theirs). → { ok, changes } | { error } */
+  App.decide = async (acc, cid, id, approve) => {
+    const c = C().get(acc, cid); if (!c) return { error: rt('roadmap.jobs.notHere') };
+    if (member(c)) return { error: rt('roadmap.levels.proposal.ownerOnly', { owner: c.shared.ownerName || '' }) };
+    if (!approve) { C().save(acc, R().restructure.decline(c, id, Date.now())); return { ok: true }; }
+    const r = await R().restructure.apply(acc, c, id, Packs, Date.now());
+    if (!r.ok) return { error: errW(r.error) };
+    const cc = r.value.roadmap; logApp(cc, '🪜 ' + rt('roadmap.jobs.restructured'));
+    C().save(acc, cc);   // 👥 the owner's shared map follows by itself (NoemaCurShare.push on every save)
+    return { ok: true, before: r.value.before, after: r.value.after };
+  };
 
   /** Without the connector: the learner pasted Claude's answer to a copied task → { ok, line } | { errors } */
   App.paste = (acc, cid, taskId, text) => {
@@ -443,12 +405,12 @@
     if (SF && await SF.isZip(file)) { const b = await SF.readBundle(file); pack = b.pack; files = await SF.bundleFiles(b, pack); }   // its source files and its H5P activities' files
     else { try { pack = JSON.parse(await file.text()); } catch (e) { throw new Error(rt('roadmap.jobs.notPackage')); } }
     if (pack?.format !== 'noema-pack' && pack?.format !== 'noema-pack/v1' && !Array.isArray(pack?.chapters)) throw new Error(rt('roadmap.jobs.notPack'));
-    if (root.NoemaPackCheck && root.NoemaCore?.engines) await root.NoemaCore.engines.load(root.NoemaPackCheck.enginesNamed(pack));   // the engines its activities name check their models
-    const res = root.NoemaPackCheck?.checkPack(pack); if (res?.errors?.length) throw new Error(rt('roadmap.jobs.packErrors', { n: res.errors.length, list: res.errors.slice(0, 3).join('; ') }));   // the errors themselves: English diagnostics (engine/packcheck.js)
+    if (root.NoemaCore?.content && root.NoemaCore.engines) await root.NoemaCore.engines.load(root.NoemaCore.content.enginesNamed(pack));   // the engines its activities name check their models
+    const res = root.NoemaCore?.content?.checkPack(pack); if (res?.errors?.length) throw new Error(rt('roadmap.jobs.packErrors', { n: res.errors.length, list: res.errors.slice(0, 3).join('; ') }));   // the errors themselves: English diagnostics (src/features/content)
     const c = C().get(acc, cid); if (!c?.nodes[nid]) throw new Error(rt('roadmap.stepNotFound'));
     C().Gen.start(acc); await C().Gen.finish(c, nid, pack, { files, via: 'claude-chat' });
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, settle, extend, extendProblems, link, linkProblems, growMessage, attachTo, savedSince, claimKey, CLAIM, LEASE, WAIT, leaseOf, claimExpired, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, extend, extendProblems, link, linkProblems, propose, proposeProblems, growMessage, attachTo, savedSince, claimKey, CLAIM, LEASE, WAIT, leaseOf, claimExpired, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, taskLabel, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

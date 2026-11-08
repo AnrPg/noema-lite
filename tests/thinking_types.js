@@ -3,7 +3,7 @@
    Usage: node tests/thinking_types.js <prepared-repo-dir>   (needs the demo-physics fixture, see tests/run_e2e.sh) */
 const { chromium } = require(process.env.PW || 'playwright');
 const { appUrl } = require('./serve');   // the app over http, as the website serves it (tests/serve.js)
-const path = require('path'), fs = require('fs'), { execFileSync } = require('child_process');
+const path = require('path'), fs = require('fs');
 const REPO = path.join(__dirname, '..');
 const ROOT = path.resolve(process.argv[2] || REPO);
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
@@ -11,10 +11,10 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const FIX = JSON.parse(fs.readFileSync(path.join(REPO, 'tests/fixtures/quality/thinking_types.json'), 'utf8')).exercises;
 const byType = Object.fromEntries(FIX.map(e => [e.type, e]));
 
-/* ---------- schemas: the app's checker and validate.py agree ---------- */
+/* ---------- schemas: the app's checker, and the golden answers of the former validate.py check_exercise ---------- */
 console.log('— schemas');
-require(path.join(REPO, 'engine/packcheck.js')); const P = globalThis.NoemaPackCheck;
-for (const e of FIX) ok(P.checkExercise(e, {}).length === 0, `${e.type}: valid for engine/packcheck.js${P.checkExercise(e, {}).length ? ' — ' + P.checkExercise(e, {}).join('; ') : ''}`);
+const P = require('./engines.cjs').content();   // the content checks (build/noema-tools.cjs), as the app's NoemaCore.content
+for (const e of FIX) ok(P.checkExercise(e, {}).length === 0, `${e.type}: valid for checkExercise${P.checkExercise(e, {}).length ? ' — ' + P.checkExercise(e, {}).join('; ') : ''}`);
 const broken = [
   ['flaw', e => { e.reason = 9; }], ['flaw', e => { e.flaws = [7]; }],
   ['case', e => { e.parts = e.parts.slice(0, 1); }], ['case', e => { e.parts[0].type = 'order'; }],
@@ -23,17 +23,14 @@ const broken = [
   ['inquiry', e => { e.scores = [3, 3, 0, 0]; }], ['inquiry', e => { e.why = e.why.slice(1); }],
   ['debate', e => { e.sides[0].best = 5; }], ['debate', e => { e.sides = e.sides.slice(0, 1); }],
 ];
-const PYCHECK = `import json,sys; sys.argv=['validate.py']; sys.path.insert(0, ${JSON.stringify(path.join(REPO, 'tools'))}); import validate as V
-for e in json.load(sys.stdin):
-    V.errors.clear(); V.check_exercise(e['id'], e); print(len(V.errors))`;
 const cases = [...FIX, ...broken.map(([t, f]) => { const e = JSON.parse(JSON.stringify(byType[t])); f(e); return e; })];
-const py = execFileSync('python3', ['-c', PYCHECK], { input: JSON.stringify(cases), encoding: 'utf8' }).trim().split('\n').map(Number);
-FIX.forEach((e, i) => ok(py[i] === 0, `${e.type}: valid for tools/validate.py`));
+const py = require('./golden.cjs')('thinking_types')('validate', JSON.stringify(cases)).split('\n').filter(Boolean).map(Number);   // errors per case
+FIX.forEach((e, i) => ok(py[i] === 0, `${e.type}: valid for the authoring check (golden)`));
 broken.forEach(([t, f], i) => {
   const e = cases[FIX.length + i], js = P.checkExercise(e, {}).length;
-  ok(js > 0 && py[FIX.length + i] > 0, `${t}: a broken one is refused by both (${f.toString().replace(/^e => \{ | \}$/g, '')})`);
+  ok(js > 0 && py[FIX.length + i] > 0, `${t}: a broken one is refused by checkExercise and the authoring check (golden) (${f.toString().replace(/^e => \{ | \}$/g, '')})`);
 });
-ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.has(t) && P.QUALITY.vocab.types.includes(t)), 'the six types are in packcheck TYPES and pack_rules.json quality.vocab.types');
+ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.has(t) && P.QUALITY.vocab.types.includes(t)), 'the six types are in TYPES and QUALITY.vocab.types');
 
 /* ---------- in the app ---------- */
 (async () => {
@@ -132,8 +129,8 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   ok(await p.locator('.kmapbox .kmaplv').allTextContents().then(t => t.join('|') === 'Basics|Core|Taught earlier on the Roadmap'), 'knowledge map: grouped basics → core, then what an earlier step taught');
   ok(await p.locator('.kmapbox .kmaplr:has-text("Predict free fall") .pill:has-text("Easily confused")').count() === 1, 'knowledge map: the categories of a learnable are shown');
   await p.click('.kmapbox .kmaplr:has-text("Predict free fall") button'); await wait(300);
-  ok(await p.evaluate(() => { const r = NoemaCore.studyUi.current().app.round?.service.state.context; return !!r && r.list.length === 1 && r.list[0].id === 'ch01-e903'; }), 'knowledge map: ▶ practises that learnable');
-  await p.evaluate(() => { S.res['ch01-e903'] = { n: 1, ok: 0, last: false, t: Date.now() }; location.hash = '#/mistakes'; }); await wait(400);
+  ok(await p.evaluate(() => { const r = NoemaCore.studyUi.current().app.round?.actor.snapshot.context; return !!r && r.list.length === 1 && r.list[0].id === 'ch01-e903'; }), 'knowledge map: ▶ practises that learnable');
+  await p.evaluate(() => { NoemaCore.studyUi.current().app.record(EX['ch01-e903'], false); location.hash = '#/mistakes'; }); await wait(400);
   ok(await p.locator('.gymcats .fchip:has-text("Easily confused")').count() === 1 && await p.locator('.gymcats .fchip:has-text("Traps")').count() === 1, 'Mistakes gym: chips by kind of trap');
   await p.evaluate(() => NoemaCore.studyUi.current().inspect.reported()); await wait(200);
   ok(await p.locator('.modal .flaglist li').count() === 1, 'reported exercises: listed');

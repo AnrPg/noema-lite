@@ -2,7 +2,7 @@
 """H5P → noema-lite exercises (tools/h5p_import.py, docs/activities-dev/h5p_import.md).
 The three fixtures (tests/fixtures/h5p: mc, drag, tf) and small packages built here (Blanks, DragText as cloze and as bucket,
 MarkTheWords, QuestionSet with a picture, Summary, Dialogcards, DragQuestion on a picture and as bucket, SingleChoiceSet):
-the chapter validates (tools/validate.py with the pack's media, engine/packcheck.js checkExercise), the answers are right,
+the chapter validates (tools/validate.py with the pack's media, the content checks' checkExercise in build/noema-tools.cjs), the answers are right,
 the pictures are in media/media.json, and an unsupported package is reported, never a crash.
 Usage: python3 tests/h5p_import.py"""
 import io, json, os, shutil, struct, subprocess, sys, tempfile, zipfile, zlib
@@ -144,14 +144,14 @@ mp = os.path.join(TMP, '_media.json')
 json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in loaded.items()}, open(mp, 'w'))
 r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'validate.py'), os.path.join(SUBJ, 'chapters', 'ch05.json'), '--media', mp], capture_output=True, text=True)
 ok(r.returncode == 0 and r.stdout.strip().endswith('OK'), 'tools/validate.py accepts the chapter' + ('' if r.returncode == 0 else ': ' + ' | '.join(l for l in r.stdout.splitlines() if l.startswith('ERROR'))[:600]))
-# the app's own check (engine/packcheck.js checkExercise) agrees
-js = ("require(process.argv[1]); const C = globalThis.NoemaPackCheck; const ch = require(process.argv[2]); const m = require(process.argv[3]);"
+# the app's own check (checkExercise of the content checks, build/noema-tools.cjs) agrees
+js = ("const C = require(process.argv[1]).checks; const ch = require(process.argv[2]); const m = require(process.argv[3]);"
       "const out = []; for (const e of ch.exercises) out.push(...C.checkExercise(e, m)); console.log(JSON.stringify(out));")
 try:
-    r = subprocess.run(['node', '-e', js, os.path.join(ROOT, 'engine', 'packcheck.js'), os.path.join(SUBJ, 'chapters', 'ch05.json'), mp], capture_output=True, text=True, timeout=60)
+    r = subprocess.run(['node', '-e', js, os.path.join(ROOT, 'build', 'noema-tools.cjs'), os.path.join(SUBJ, 'chapters', 'ch05.json'), mp], capture_output=True, text=True, timeout=60)
     probs = json.loads(r.stdout or 'null')
-    ok(probs == [], 'engine/packcheck.js checkExercise accepts every exercise' + ('' if probs == [] else f': {probs or r.stderr[:300]}'))
-except FileNotFoundError: print('  ⏭  node not installed: packcheck parity skipped')
+    ok(probs == [], 'checkExercise (the content checks) accepts every exercise' + ('' if probs == [] else f': {probs or r.stderr[:300]}'))
+except FileNotFoundError: print('  ⏭  node not installed: the content checks skipped')
 
 # 3. the command line
 out = os.path.join(TMP, 'cli')

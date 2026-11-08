@@ -7,7 +7,8 @@
      • known            — every level a step or a pack's content names is a level of its ladder
      • prerequisite     — a prerequisite never sits at a higher level than the step that needs it: it starts at the
                           step's first level or lower (its from ≤ the step's from)
-     • difficultyMix    — the difficulty mix (tools/pack_rules.json quality "mix.difficulty": 20 / 25 / 55 % ± 5)
+     • difficultyMix    — the difficulty mix (the quality rule "mix.difficulty" of src/features/content/domain/rules.ts: 20 / 25 / 55 % ± 5;
+                          src/features/content/domain/pack.test.ts checks they agree)
                           holds within each level of a pack, not only over the whole pack */
 import { spec, all, type RuleIssue, type Spec } from './spec.ts';
 
@@ -48,7 +49,7 @@ export interface PackLike {
   readonly chapters: readonly ChapterLike[];
 }
 
-/** The difficulty mix of tools/pack_rules.json (quality, "mix.difficulty"): percent per difficulty, and the tolerance. */
+/** The difficulty mix (the quality rule "mix.difficulty"): percent per difficulty, and the tolerance. */
 export interface DifficultyMix {
   readonly target: Readonly<Record<string, number>>;
   readonly tol: number;

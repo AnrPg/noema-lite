@@ -2,9 +2,8 @@
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for genetics, from Mendel's crosses to population and quantitative
 genetics. There is one engine with 9 **modes** (`model.mode`): `cross`, `pedigree`, `hw`, `selection`, `drift`, `map`, `coalescent`,
-`ld`, `quant`. The Python twin is `tools/lib_genetics.py` (`ID`, `check_spec`, `exprs`, `keys`). It checks and does not compute, and
-it gives the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_genetics.js`
-(93 assertions) and `node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/genetics.json`, 29 specs). The
+`ld`, `quant`. The tests are `node tests/lib_genetics.js`
+(93 assertions) and `node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/genetics.json`, 29 specs). The
 reference activity is `tools/activities_examples/wf-drift` (Wright–Fisher drift: 200 seeded populations, N, p₀ and s as
 sliders, fixation against Kimura's u, heterozygosity against its decay). The research behind this chapter is in the project's
 `engine-library/research/life.md` (§ genetics).
@@ -47,7 +46,7 @@ sampler (inversion in chunks), all seeded from the core's `mulberry32(hash32(nam
   combinations in a pedigree; drift replicates × generations (× N for Moran) ≤ 200 000; ≤ 50 genes in the coalescent and replicates
   × n ≤ 200 000; the polygenic simulation N·L·generations ≤ 200 000; every series ≤ 2000 values; every scene ≤ 2000 items.
 
-### 1.1 Checker codes (`checkSpec`, the same in `tools/lib_genetics.py`)
+### 1.1 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

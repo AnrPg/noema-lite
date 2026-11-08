@@ -1,5 +1,5 @@
 {
- "about": "One valid exercise of each critical-thinking type (CONTENT_SPEC.md \"Types\"): tests/thinking_types.js validates them with engine/packcheck.js and tools/validate.py and plays them in the app.",
+ "about": "One valid exercise of each critical-thinking type (CONTENT_SPEC.md \"Types\"): tests/thinking_types.js validates them with checkExercise and the golden answers of the former validate.py check and plays them in the app.",
  "exercises": [
   {
    "id": "ch01-e901", "type": "flaw", "section": "ch01-s01", "difficulty": 3, "tags": ["pitfall", "calc"],

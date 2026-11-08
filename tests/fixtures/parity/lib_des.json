@@ -1,0 +1,681 @@
+{
+ "check": {
+  "in": "d3658190f930e9e1897b4ad153c39510db1cc408b85862a91281a8516ed2f516",
+  "out": [
+   {
+    "p": [],
+    "x": [
+     [
+      "lam",
+      "model.sources[0].arrival.rate",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "urgent",
+      "model.stations[0].route[0].when",
+      [
+       "prio",
+       "cls",
+       "visits",
+       "waited",
+       "now",
+       "urgent",
+       "minor"
+      ]
+     ],
+     [
+      "240",
+      "outputs[4].window",
+      []
+     ]
+    ],
+    "k": [
+     [
+      "clsUrgent",
+      "model.classes[0].key"
+     ],
+     [
+      "clsMinor",
+      "model.classes[1].key"
+     ],
+     [
+      "srcDoor",
+      "model.sources[0].key"
+     ],
+     [
+      "stTriage",
+      "model.stations[0].key"
+     ],
+     [
+      "stDoc",
+      "model.stations[1].key"
+     ]
+    ]
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "t1",
+      "model.sources[0].schedule[2]",
+      []
+     ],
+     [
+      "pp",
+      "model.stations[0].route[0].p",
+      []
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [
+     [
+      "visits > 2",
+      "model.stations[0].route[0].when",
+      [
+       "prio",
+       "cls",
+       "visits",
+       "waited",
+       "now"
+      ]
+     ]
+    ],
+    "k": []
+   },
+   {
+    "p": [],
+    "x": [],
+    "k": []
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.sources",
+      "msg": "missing",
+      "level": "error"
+     },
+     {
+      "code": "unreachable",
+      "path": "model.stations[0]",
+      "msg": "no entity can reach this station",
+      "level": "warning"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "dup-name",
+      "path": "model.stations[1].id",
+      "msg": "the id q is used twice",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.stations[0].id",
+      "msg": "exit is the name of the way out",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "dup-name",
+      "path": "model.classes[1].id",
+      "msg": "the class a is listed twice",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.classes[2].id",
+      "msg": "the class prio is a name des@1 gives (prio, cls, visits, waited, now)",
+      "level": "error"
+     },
+     {
+      "code": "dup-name",
+      "path": "model.classes[3].id",
+      "msg": "the class lam is also a name of the spec (consts, params, derived)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.sources[0]",
+      "msg": "needs one of arrival, schedule or rates",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.sources[0].period",
+      "msg": "goes with rates",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.sources[0]",
+      "msg": "needs to (a station) or shortest (stations)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.sources[0].shortest[1]",
+      "msg": "not a station",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.sources[0].to",
+      "msg": "not a station",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.sources[0].class",
+      "msg": "not a class",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.sources[0].mix.d",
+      "msg": "not a class",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.sources[0].mix",
+      "msg": "class or mix, not both",
+      "level": "error"
+     },
+     {
+      "code": "unreachable",
+      "path": "model.stations[0]",
+      "msg": "no entity can reach this station",
+      "level": "warning"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "dist",
+      "path": "model.sources[0].arrival",
+      "msg": "exp needs mean or rate (one of them)",
+      "level": "error"
+     },
+     {
+      "code": "dist",
+      "path": "model.stations[0].service",
+      "msg": "gamma needs shape and scale, or mean and cv",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "dist",
+      "path": "model.sources[0].arrival",
+      "msg": "needs a mean > 0",
+      "level": "error"
+     },
+     {
+      "code": "dist",
+      "path": "model.stations[0].service",
+      "msg": "needs 0 ≤ min ≤ mode ≤ max, min < max",
+      "level": "error"
+     },
+     {
+      "code": "dist",
+      "path": "model.stations[0].renege",
+      "msg": "needs 0 ≤ min ≤ max",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "dist",
+      "path": "model.stations[0].service.probs",
+      "msg": "one weight per value",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[1].servers",
+      "msg": "a delay station has no queue or servers",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[1].discipline",
+      "msg": "a delay station has no queue or servers",
+      "level": "error"
+     },
+     {
+      "code": "dist",
+      "path": "model.stations[1].service.value",
+      "msg": "const needs value",
+      "level": "error"
+     },
+     {
+      "code": "unreachable",
+      "path": "model.stations[1]",
+      "msg": "no entity can reach this station",
+      "level": "warning"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.stations[0].serviceBy.w",
+      "msg": "not a class",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].serviceBy",
+      "msg": "the class v has no service time (add it or a service)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].preempt",
+      "msg": "pre-emption needs discipline priority",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.stations[0].serviceBy",
+      "msg": "needs model.classes",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].serviceBy.u",
+      "msg": "not a class",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].discipline",
+      "msg": "priority needs model.classes (one class: FIFO)",
+      "level": "warning"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].balk.p",
+      "msg": "needs a number from 0 to 1",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.stations[0].shifts.plan[0]",
+      "msg": "needs 0 ≤ from < to",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].shifts.plan[1].to",
+      "msg": "after the period",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].shifts.plan[3]",
+      "msg": "overlaps another shift",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "route",
+      "path": "model.stations[0].route[0].to",
+      "msg": "not a station (or exit)",
+      "level": "error"
+     },
+     {
+      "code": "route",
+      "path": "model.stations[0].route[1].shortest[1]",
+      "msg": "not a station",
+      "level": "error"
+     },
+     {
+      "code": "route",
+      "path": "model.stations[0].route[2]",
+      "msg": "needs to (a station or exit) or shortest (stations)",
+      "level": "error"
+     },
+     {
+      "code": "route",
+      "path": "model.stations[0].route[3]",
+      "msg": "p or when, not both",
+      "level": "error"
+     },
+     {
+      "code": "route",
+      "path": "model.stations[0].route",
+      "msg": "either every way has p (probabilistic) or none (by condition)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "route",
+      "path": "model.stations[0].route",
+      "msg": "the probabilities add up to more than 1",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].jockey",
+      "msg": "jockeying needs the station in a shortest group (a source or route with shortest)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "route",
+      "path": "model.stations[0].route[0].p",
+      "msg": "needs a number >= 0",
+      "level": "error"
+     },
+     {
+      "code": "route",
+      "path": "model.stations[0].route",
+      "msg": "either every way has p (probabilistic) or none (by condition)",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.reps",
+      "msg": "batch means use one long run (reps 1)",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.warmup",
+      "msg": "must be from 0 to before tEnd",
+      "level": "error"
+     },
+     {
+      "code": "unknown-field",
+      "path": "model.warmup",
+      "msg": "mser5 finds the warm-up: model.warmup is ignored",
+      "level": "warning"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "value",
+      "path": "model.tEnd",
+      "msg": "needs a number > 0",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.warmup",
+      "msg": "must be from 0 to before tEnd",
+      "level": "error"
+     },
+     {
+      "code": "unreachable",
+      "path": "model.stations[1]",
+      "msg": "no entity can reach this station",
+      "level": "warning"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "output",
+      "path": "outputs[0].station",
+      "msg": "needs a station",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].station",
+      "msg": "a station of the model",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[1].class",
+      "msg": "a class of the model",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[2].measure",
+      "msg": "one of wq, w, lq, l, util, pwait, rho",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].class",
+      "msg": "a class of the model",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[3].class",
+      "msg": "util is not computed per class",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[4].est",
+      "msg": "one of mean, half, lo, hi, sd, n",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[5].code",
+      "msg": "one of budget, zeno, overflow, bad-dist, clipped, no-arrivals, route-sum, route-none, few-reps, warmup-short, batch-correlated, unstable, theory-na, theory-approx, little, model",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[6].station",
+      "msg": "needs a station",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[7].measure",
+      "msg": "one of wq, w, lq, l, util, busy, down, throughput, served, arrived, balked, reneged, lost, preempted, jockeyed, pwait, maxq, littleErr, pAbandon",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[8].of",
+      "msg": "des@1 computes as a scene: network, gantt, log",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[9].of",
+      "msg": "des@1 computes as a scalar: wq, w, lq, l, util, busy, down, throughput, served, arrived, balked, reneged, lost, preempted, jockeyed, pwait, maxq, littleErr, pAbandon, theory, covers, warmupT, events, reps, flag, ok",
+      "level": "error"
+     },
+     {
+      "code": "output",
+      "path": "outputs[10].window",
+      "msg": "needs a number or an expression",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "unknown-field",
+      "path": "model.zzz",
+      "msg": "ignored",
+      "level": "warning"
+     },
+     {
+      "code": "enum",
+      "path": "model.unit",
+      "msg": "one of ms, s, min, h, d, wk, yr",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.reps",
+      "msg": "needs an integer from 1 to 200",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.seed",
+      "msg": "needs an integer from 0 to 1000000",
+      "level": "error"
+     },
+     {
+      "code": "value",
+      "path": "model.stations[0].breakdowns.ttr",
+      "msg": "missing",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "format",
+      "path": "model.stations[0].service",
+      "msg": "not an object",
+      "level": "error"
+     },
+     {
+      "code": "dist",
+      "path": "model.stations[0].serviceBy.u.scale",
+      "msg": "weibull needs shape, scale",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "format",
+      "path": "model",
+      "msg": "not an object",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   },
+   {
+    "p": [
+     {
+      "code": "format",
+      "path": "outputs",
+      "msg": "not an array",
+      "level": "error"
+     }
+    ],
+    "x": null,
+    "k": null
+   }
+  ]
+ }
+}

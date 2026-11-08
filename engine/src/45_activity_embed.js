@@ -6,7 +6,7 @@
        credit, the licence, a link to the provider's terms) and an Open button. Open is remembered per provider (S.settings.embedOk,
        an account setting); the card is skipped next time, the credit line stays under the frame (attribution at the point of use).
      • The URL must match the allow-list exactly (PROVIDERS = tools/embed_allow.json): https, the origin one of the provider's, path,
-       query and hash fully matching its patterns, no user info, no tricks (check / match below; tools/embed_check.py the same rules).
+       query and hash fully matching its patterns, no user info, no tricks (check / match below; the content checks use the same rules).
      • Two frames, as in html-app@1: the app's frame holds a WRAPPER without scripts (CSP script-src 'none') whose policy says
        frame-src <the provider's origins>, and the provider's page runs in the wrapper's frame. So the page can navigate only within
        its provider; every other navigation is blocked by the wrapper's policy. Both frames: sandbox with the provider's tokens only
@@ -17,7 +17,7 @@
    No words here: the visible texts are tE() keys (engine.act.embed.*) and the pack's own strings (title, why).
    Off unless the deployment switches it on: NOEMA_CONFIG.activities['external-embed@1'] === true (the site CSP must list the
    providers in frame-src first). Loads in Node too (module.exports: the checks, for tests/activities_embed.js). */
-var NoemaEmbed = (() => {   // the page loads this file on its own, beside packcheck.js; engine.js leaves it out (tools/build.py PAGE_SRC)
+var NoemaEmbed = (() => {   // the page loads this file on its own, after build/app.js (the content checks read NoemaEmbed when they run); engine.js leaves it out (tools/build.py PAGE_SRC)
   /* i18n-ignore-start */   // code: codes, patterns, attribute values
   const PROVIDERS = /*@providers*/[
     {"id": "phet", "name": "PhET", "status": "allowed", "origins": ["https://phet.colorado.edu"], "path": "/sims/html/[a-z0-9-]+/(latest|[0-9]+\\.[0-9]+\\.[0-9]+)/[a-z0-9-]+_(all|[a-z]{2}(_[A-Z]{2})?)\\.html", "query": "(locale=[A-Za-z_]{2,6})?", "hash": null, "sandbox": ["allow-scripts", "allow-same-origin"], "licenses": ["CC-BY-4.0", "CC-BY-NC-4.0"], "creditMust": "PhET Interactive Simulations, University of Colorado Boulder", "credit": "PhET Interactive Simulations, University of Colorado Boulder · {title} · {license} · https://phet.colorado.edu", "terms": "https://phet.colorado.edu/en/licensing/html", "supportsResult": false, "notes": "HTML sims published before 2026-03-29: CC BY 4.0 (commercial use allowed; the credit, the licence and https://phet.colorado.edu as close to the point of use as possible; translating the credit is allowed). PhET's 2025 impact report announces a shift to CC BY-NC for newer sims, and its FAQ says commercial use needs a licence: read the sim's publication date in its About dialog and pick the licence. Every HTML sim page offers an Embed code. No result channel: PhET-iO (the instrumented API) is licensed separately. Language: ?locale=."},
@@ -61,7 +61,7 @@ var NoemaEmbed = (() => {   // the page loads this file on its own, beside packc
     if (u.hash != null && (p.hash == null || !full(p.hash, u.hash))) return { code: 'url-hash' };
     return { ok: true, provider: p, origin: u.origin };
   }
-  /** one registry item → { errors: ['code: what'], warnings } — the same rules as tools/embed_check.py check_item */
+  /** one registry item → { errors: ['code: what'], warnings } — the rules the content checks use for an embed */
   function check(a, opts) {
     const list = (opts && opts.providers) || PROVIDERS, E = [], W = [];
     const e = (code, what) => E.push(code + ': ' + what);

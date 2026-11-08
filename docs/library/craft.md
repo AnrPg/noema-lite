@@ -4,10 +4,9 @@ A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for the arithmet
 knitting and crochet, stitch and colourwork charts, weaving drafts, cross-stitch, patchwork, repeating patterns (frieze and
 wallpaper groups, tilings), sewing, woodworking, ceramics (cones, glazes), jewellery metalwork, bookbinding, leathercraft and dyeing.
 There is one engine with 13 **modes** (`model.mode`). They share a checker, the expression evaluation, a run finder for floats
-(knit colourwork, weaving, cross-stitch), the scene drawing and the table lookups. The Python twin is `tools/lib_craft.py`. It
-checks and does not compute, and it embeds **the same JSON** (`DATA`: every mode's schema, its outputs and the name lists; the test
-checks that the two copies are identical). The tests are `node tests/lib_craft.js` (187 assertions) and `node tests/enginelib.js`
-(JS ↔ Python parity on `tests/fixtures/enginelib/craft.json`, 36 specs). The reference activity is
+(knit colourwork, weaving, cross-stitch), the scene drawing and the table lookups. Its
+**`DATA`** (every mode's schema, its outputs and the name lists) is held to the golden one of the former Python twin. The tests are `node tests/lib_craft.js` (187 assertions) and `node tests/enginelib.js`
+(the golden outputs of the former Python twin on `tests/fixtures/enginelib/craft.json`, 36 specs). The reference activity is
 `tools/activities_examples/satin-move`. The research behind this chapter (scope decisions, the larger glaze, nesting and drafting
 engines left for later) is in the project's `engine-library/research/craft.md`.
 
@@ -40,7 +39,7 @@ recompute.
   glaze ≤ 16 recipe lines, ≤ 16 own materials of ≤ 20 oxides, batch ≤ 8 materials; sew ≤ 64 points per piece, ≤ 60 rectangles;
   every scene ≤ 2000 items, every series ≤ 2000 values.
 
-### 1.1 Checker codes (`checkSpec`, the same in `tools/lib_craft.py`)
+### 1.1 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

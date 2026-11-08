@@ -114,7 +114,7 @@ export async function translationStatus(ctx: ToolContext, sid: string, p: Pack):
       out.missing.push(loc);
       continue;
     }
-    const r = ctx.engine.packCheck.checkTranslation(f, p);
+    const r = ctx.engine.content.checkTranslation(f, p);
     if (r.errors.length) out.bad.push(`${loc}: ${r.errors.slice(0, 6).join('; ')}`);
   }
   return out;
@@ -166,7 +166,10 @@ export async function activityFileStatus(ctx: ToolContext, sid: string, p: Pack)
   }
   const have = actItems(p).filter(a => bytes[a.id]);
   if (have.length) {
-    const r = await ctx.engine.packCheck.checkActivityPackages({ activities: { items: have } }, a => bytes[a.id] ?? null);
+    const r = await ctx.engine.content.checkActivityPackages(
+      { activities: { items: have } },
+      a => (typeof a.id === 'string' ? bytes[a.id] : undefined) ?? null,
+    );
     out.errors.push(...r.errors);
   }
   return out;
@@ -178,17 +181,17 @@ export async function activityFileStatus(ctx: ToolContext, sid: string, p: Pack)
 export const brKey = (src: unknown, nat: unknown, own: unknown): string =>
   !src || lang0(src) === lang0(own) ? lang0(nat) : `${lang0(src)}.${lang0(nat)}`;
 
-/** What a new pack (subject.authoring.rules >= 2) still needs at the end of its flow: translations and 文A bridges (pack_rules.json "languages"). */
+/** What a new pack (subject.authoring.rules >= 2) still needs at the end of its flow: translations and 文A bridges (the pack rules' languages, CONTENT_SPEC.md). */
 export async function languagesTodo(ctx: ToolContext, p: Pack): Promise<string> {
   if (!(Number(p.subject.authoring?.rules) >= 2)) return '';
   const own = lang0(p.subject.language || 'en'),
-    want = ctx.engine.packCheck.requiredLocales(own),
+    want = ctx.engine.content.requiredLocales(own),
     have = Object.keys(p.translations ?? {}).map(lang0);
   const br = Object.keys((await ctx.bridges.all(p.subject.id))[p.subject.id] ?? {});
   const i18n = p.subject.i18n ?? {};
   const mt = want.translations.filter(l => !have.includes(l)),
     mn = have.filter(l => !i18n[l]?.title && !Object.keys(i18n).some(k => lang0(k) === l && i18n[k]?.title));
-  // 文A: every (content language → native) pair — the pack's own language and each translation (pack_rules.json "bridgesFrom")
+  // 文A: every (content language → native) pair — the pack's own language and each translation (languages.bridgesFrom)
   const mb = want.bridgePairs.filter(x => !br.includes(brKey(x.source, x.native, own))).map(x => `${x.source}→${x.native}`);
   const todo = [
     mt.length

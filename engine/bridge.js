@@ -85,9 +85,10 @@ window.NoemaBridge = (() => {
   }
 
   /* ---------- where the bridges are ---------- */
-  /** The key of one pair: "<native>" from the pack's own language, "<source>.<native>" from one of its translations. */
-  const pairKey = (src, nat, own) => !src || base(src) === base(own || src) ? base(nat) : `${base(src)}.${base(nat)}`;
-  const pairOf = (key, own) => { const [a, b] = String(key).split('.'); return b ? { src: base(a), nat: base(b) } : { src: base(own || 'en'), nat: base(a) }; };
+  /** The key of one pair: "<native>" from the pack's own language, "<source>.<native>" from one of its translations
+      (the bridges' lookup, src/features/bridges/domain/lookup.ts: NoemaCore.bridges). */
+  const BL = () => window.NoemaCore.bridges;
+  const pairKey = (src, nat, own) => BL().pairKey(src, nat, own);
   /** The language the subject is written in, and the one the learner reads now (a translation, or the same). */
   /** The language a subject is written in, and the one the learner reads: the open subject (Noema.subject with the pack)
       shows a translation when it has sourceLanguage; a card in a list (no pack) will show its contentLang. */
@@ -121,14 +122,10 @@ window.NoemaBridge = (() => {
   /** Every native language with a bridge for this pack FROM the language src (default: the pack's own, own) →
       { code: { status, coverage, chapters, of, previews, own, key } } (the account's own wins). */
   function available(acc, packId, subj, src, own) {
-    const out = {}, reg = subj?.bridgeLocales || regEntry(packId)?.bridgeLocales || {};
+    const reg = subj?.bridgeLocales || regEntry(packId)?.bridgeLocales || {};
     own = own || subj?.sourceLanguage || subj?.language || regEntry(packId)?.language || src || null;
     // no language given: the bridges from the pack's own language (keys without a source), whatever that language is
-    const add = (key, m, mine) => { if (!src) { if (!String(key).includes('.')) out[base(key)] = { ...m, own: mine, key: base(key) }; return; }
-      const p = pairOf(key, own); if (p.src === base(src) && p.nat !== base(src)) out[p.nat] = { ...m, own: mine, key: pairKey(p.src, p.nat, own) }; };
-    for (const [c, m] of Object.entries(reg)) add(c, m, false);
-    for (const [c, m] of Object.entries(index(acc)[packId] || {})) add(c, m, true);
-    return out;
+    return BL().available(reg, index(acc)[packId] || {}, src || null, own);
   }
   const loadScript = src => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error(src)); document.head.append(s); });
   /** The bridge of one pack for one pair (from src — default the pack's own language — into nat), or null. */
@@ -170,7 +167,7 @@ window.NoemaBridge = (() => {
       listed in the synced index so every device finds it. → { pack, native, title } */
   async function attach(acc, b) {
     acc = accNow(acc);
-    const C = window.NoemaPackCheck?.checkBridge;
+    const C = window.NoemaCore?.content?.checkBridge;
     const subs = N().subjectsFor ? await N().subjectsFor(acc) : [];
     const meta = subs.find(s => s.id === b?.pack);
     let pack = null; try { pack = meta && N().loadSubject ? await N().loadSubject(acc, b.pack) : null; } catch (e) { }

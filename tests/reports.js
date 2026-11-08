@@ -21,10 +21,10 @@ const PORT = 54383, BASE = `http://localhost:${PORT}`;
 
 function unit() {
   console.log('— the brief and the files, without a browser');
-  const ctx = { console }; ctx.window = ctx; vm.createContext(ctx);
-  vm.runInContext(fs.readFileSync(path.join(ROOT, 'engine/report.js'), 'utf8'), ctx);
-  const R = ctx.NoemaReport;
-  ok(R && typeof R.brief === 'function' && !R.open, 'engine/report.js loads without a page (as in the connector): only the pure part');
+  const ctx = { console, URL, URLSearchParams, TextEncoder, TextDecoder }; ctx.window = ctx; vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'build/app.js'), 'utf8'), ctx);   // window.NoemaCore (npm run build)
+  const R = ctx.NoemaCore.reports;
+  ok(R && typeof R.brief === 'function' && typeof R.send === 'function', 'NoemaCore.reports: the brief, the files, sending (src/features/reports; the connector imports the same domain)');
   const loc = { route: { hash: '#/s/ch01-s01', page: 's', args: ['ch01-s01'] }, app: { version: '1.0.0', commit: 'abc123', url: 'https://noema-lite.netlify.app/' },
     subject: { id: 'demo-physics', title: 'Demo Physics', origin: 'library', version: 'v1', translation: 'fr', packLanguage: 'en', shown: 'fr' },
     item: { chapter: { id: 'ch01', num: 1, title: 'Énergie' }, section: { id: 'ch01-s01', title: 'Énergie cinétique' }, exercise: { id: 'ch01-e003', type: 'mcq', q: 'Quelle…', qOwn: 'Which…' }, field: { path: 'options.2', shown: '8 J', own: '8 J' }, content: { packLanguage: 'en', shown: 'fr', translation: 'fr' } },
@@ -109,7 +109,7 @@ function unit() {
     await p.click('.nr-send'); await until(() => srv.state.ereps.length === 2);
     const L2 = srv.state.ereps[1].locator;
     ok(L2.subject.translation === 'fr' && L2.item.content.translation === 'fr' && /^blk:ch01-s01\//.test(srv.state.ereps[1].item) && L2.item.block.id && L2.item.block.text !== L2.item.block.textOwn && L2.item.block.textOwn, 'the block, with its text as shown (French) and in the pack’s own language: ' + srv.state.ereps[1].item);
-    const f2 = (await p.evaluate(l => NoemaReport.repoFiles(l), L2)).map(f => f.path);
+    const f2 = (await p.evaluate(l => NoemaCore.reports.repoFiles(l), L2)).map(f => f.path);
     ok(f2[0] === 'library/subjects/demo-physics/translations/fr/ch01.json', 'the place to fix it is the French translation file');
 
     console.log('— an interface word');

@@ -118,13 +118,13 @@ Each key must be a language the pack is read in (its own or a translation's), an
 
 ## 5. Validation
 
-The pack rules (`tools/activities.py` and `engine/packcheck.js`, same messages, compared by `tests/activities.js`): `entry` is
+The pack rules (the content checks, `src/features/content`; `tests/activities.js` holds them to their golden messages): `entry` is
 `activities/<id>/item.h5p`; `sha256`, `bytes` (≤ 100 MB) and `fallback` are required; no `html`; `h5pByLocale` keys are the pack's
 languages; then the **package rules** on the file itself (`check_h5p_packages` / `checkActivityPackages`: the file is there, sha256
 and bytes match, it is a zip, the rules below), in `make_pack.py`, `activity_lint.py`, `build.py` and the connector.
 
-The package rules: `python3 tools/h5p_check.py ITEM.h5p [--json]` (pure stdlib) and `NoemaH5P.check(files)` in the app apply **the
-same rules with the same messages** against **one allow-list**, `tools/h5p_allow.json` (the engine's copy is checked against it).
+The package rules: `NoemaH5P.check(files)` (in the app; `activity_lint.py` and `make_pack.py` run it through `build/noema-tools.cjs`) applies **one set of
+rules and messages** against **one allow-list**, `tools/h5p_allow.json` (the engine's copy is checked against it).
 
 * Errors: no/invalid `h5p.json` or no title; the main library not an allowed **content type**; any library (transitively) missing,
   off the allow-list (machine name + major.minor), or on the refuse list (`H5P.MathDisplay` loads MathJax from a CDN,

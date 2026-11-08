@@ -34,7 +34,7 @@ export function memoryStorage(options: MemoryStorageOptions = {}): Storage & { r
   const now = options.now ?? Date.now;
   const kvMap = new Map<string, string>();
   const docs = new Map<string, Map<DocKey, unknown>>();
-  for (const c of options.collections ?? ['packs', 'handles', 'restore', 'convos']) docs.set(c, new Map());
+  for (const c of options.collections ?? ['packs', 'handles', 'restore', 'convos', 'sync']) docs.set(c, new Map());
   const listeners = new Set<(e: StorageFullEvent) => void>();
   let persisted = false;
 
@@ -48,9 +48,10 @@ export function memoryStorage(options: MemoryStorageOptions = {}): Storage & { r
     for (const [k, v] of kvMap) n += k.length + v.length;
     return n;
   };
-  const docCount = (): number => {
+  /** The documents held, counting a transaction's own writes (`staged`) in place of its collections' committed ones. */
+  const docCount = (staged?: ReadonlyMap<string, Map<DocKey, unknown>>): number => {
     let n = 0;
-    for (const m of docs.values()) n += m.size;
+    for (const [c, m] of docs) n += (staged?.get(c) ?? m).size;
     return n;
   };
   const coll = (name: string): Result<Map<DocKey, unknown>> => {
@@ -75,7 +76,7 @@ export function memoryStorage(options: MemoryStorageOptions = {}): Storage & { r
   };
 
   const listIn = <T>(m: Map<DocKey, unknown>, o: DocListOptions = {}): Array<readonly [DocKey, T]> => {
-    const keys = [...m.keys()].filter(k => k.startsWith(o.prefix ?? '')).sort();
+    const keys = [...m.keys()].filter(k => k.startsWith(o.prefix ?? '') && (o.after === undefined || k > o.after)).sort();
     return keys.slice(0, o.limit ?? keys.length).map(k => [k, clone(m.get(k)) as T] as const);
   };
 
@@ -131,7 +132,7 @@ export function memoryStorage(options: MemoryStorageOptions = {}): Storage & { r
           promised(() => {
             write();
             const m = inTx(c);
-            if (options.docsQuota !== undefined && !m.has(k) && docCount() + 1 > options.docsQuota) {
+            if (options.docsQuota !== undefined && !m.has(k) && docCount(staged) + 1 > options.docsQuota) {
               failed.quota = full('docs', `${c}/${k}`);
               throw failed.quota;
             }

@@ -2,6 +2,8 @@
 import { argFlag, argStr, fail, text, type Tool } from '../tool.ts';
 import { claimStep, curState, downloadLines, pickCurriculum, sharedOn } from '../services/curricula.ts';
 import type { Task } from '../engine/api.ts';
+import { findLevel, ladderLine } from '../../features/roadmaps/domain/index.ts';
+import type { Roadmap } from '../../features/roadmaps/domain/model.ts';
 
 export const tool: Tool = {
   definition: {
@@ -33,6 +35,11 @@ export const tool: Tool = {
           type: 'boolean',
           description: 'with step: take over a step that another run claimed but stopped preparing without saving',
         },
+        level: {
+          type: 'string',
+          description:
+            '🪜 only the work of this level of the Roadmap (its id or name, e.g. "s2" or "Semester 2"; noema_roadmap_map lists the levels): its chapter plans and steps, and the task says what the level means — the difficulty of the exercises is relative to the level (a hard exercise of semester 1 is a semester-1 exercise), and the pack carries "levels": ["<id>"]',
+        },
       },
     },
   },
@@ -45,15 +52,28 @@ export const tool: Tool = {
       force = argFlag(args, 'force'),
       peek = argFlag(args, 'peek'),
       want = argStr(args, 'want'),
-      stepArg = argStr(args, 'step');
+      stepArg = argStr(args, 'step'),
+      levelArg = argStr(args, 'level');
+    let level = '';
+    if (levelArg) {
+      const R = c as unknown as Roadmap,
+        l = findLevel(R, levelArg);
+      if (!l)
+        return fail(
+          c.levels?.length
+            ? `“${c.title || c.goal}” has no level “${levelArg}”. Its levels: ${ladderLine(R)}.`
+            : `“${c.title || c.goal}” has no levels. Leave out level (or give the Roadmap levels with noema_restructure_levels).`,
+        );
+      level = l.id;
+    }
     let t: Task | null = null;
     for (let tries = 0; tries < 8; tries++) {
       // a step is handed out only once it is claimed for this run (another run may claim it a moment earlier → the next one)
-      t = CJ.next(c, { want: want || 'any', step: stepArg, force });
+      t = CJ.next(c, { want: want || 'any', step: stepArg, force, level });
       if (!t || t.error || t.kind !== 'step') break;
       if (peek)
         return text(
-          `Next step (not claimed — peek): “${t.stepTitle}” (${t.nid}) · subject_id ${t.packId}. ${CJ.work(c).steps.length} step(s) queued in all. To prepare it, call noema_curriculum_task again without peek.`,
+          `Next step (not claimed — peek): “${t.stepTitle}” (${t.nid}) · subject_id ${t.packId}. ${CJ.work(c, { level }).steps.length} step(s) queued in all${level ? ` at level ${level}` : ''}. To prepare it, call noema_curriculum_task again without peek.`,
         );
       if (await claimStep(ctx, c.id, t.nid, { force: force && !!stepArg, c, user: ctx.user })) break;
       if (stepArg) {
@@ -73,9 +93,9 @@ export const tool: Tool = {
     }
     if (t?.error) return fail(t.error);
     if (!t) {
-      const busy = CJ.work(c).claimed;
+      const busy = CJ.work(c, { level }).claimed;
       return text(
-        `✅ Nothing is waiting in “${c.title || c.goal}”${want && want !== 'any' ? ` (${want})` : ''}. ` +
+        `✅ Nothing is waiting in “${c.title || c.goal}”${want && want !== 'any' ? ` (${want})` : ''}${level ? ` at level ${level}` : ''}. ` +
           (busy.length
             ? `${busy.length} queued step(s) are being prepared by other runs right now (${busy
                 .slice(0, 5)

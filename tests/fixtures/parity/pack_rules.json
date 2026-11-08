@@ -1,0 +1,863 @@
+{
+ "quality": {
+  "in": null,
+  "out": [
+   [],
+   [
+    [
+     "error",
+     "map.present",
+     "ch01: [map.present] no knowledge map (write map/ch01.json before the exercises)"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types bucket: put it in fits.types or give the reason in unfit.bucket"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types case: put it in fits.types or give the reason in unfit.case"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types cloze: put it in fits.types or give the reason in unfit.cloze"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types debate: put it in fits.types or give the reason in unfit.debate"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types flaw: put it in fits.types or give the reason in unfit.flaw"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types free: put it in fits.types or give the reason in unfit.free"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types inquiry: put it in fits.types or give the reason in unfit.inquiry"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types match: put it in fits.types or give the reason in unfit.match"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types mcq: put it in fits.types or give the reason in unfit.mcq"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types odd: put it in fits.types or give the reason in unfit.odd"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types order: put it in fits.types or give the reason in unfit.order"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types predict: put it in fits.types or give the reason in unfit.predict"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types scenario: put it in fits.types or give the reason in unfit.scenario"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types tf: put it in fits.types or give the reason in unfit.tf"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types tree: put it in fits.types or give the reason in unfit.tree"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] bucket is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] cloze is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] free is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] match is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] mcq is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] odd is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] order is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] scenario is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] tf is used but not in fits.types"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] focus concept: put it in fits.focus or give the reason in unfit.concept"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] focus pitfall: put it in fits.focus or give the reason in unfit.pitfall"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] focus debug: put it in fits.focus or give the reason in unfit.debug"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] focus exam: put it in fits.focus or give the reason in unfit.exam"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] focus interview: put it in fits.focus or give the reason in unfit.interview"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] focus compare: put it in fits.focus or give the reason in unfit.compare"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] compare is used but not in fits.focus"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] concept is used but not in fits.focus"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] debug is used but not in fits.focus"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] exam is used but not in fits.focus"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] interview is used but not in fits.focus"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] pitfall is used but not in fits.focus"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes contradiction: put it in fits.modes or give the reason in unfit.contradiction"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes reverse: put it in fits.modes or give the reason in unfit.reverse"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes whatif: put it in fits.modes or give the reason in unfit.whatif"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes perturb: put it in fits.modes or give the reason in unfit.perturb"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes causal: put it in fits.modes or give the reason in unfit.causal"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes distinguish: put it in fits.modes or give the reason in unfit.distinguish"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes translate: put it in fits.modes or give the reason in unfit.translate"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes ambiguity: put it in fits.modes or give the reason in unfit.ambiguity"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes feynman: put it in fits.modes or give the reason in unfit.feynman"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes combine: put it in fits.modes or give the reason in unfit.combine"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes dialectic: put it in fits.modes or give the reason in unfit.dialectic"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] causal is used but not in fits.modes"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] contradiction is used but not in fits.modes"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] distinguish is used but not in fits.modes"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] perturb is used but not in fits.modes"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] reverse is used but not in fits.modes"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] whatif is used but not in fits.modes"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e001: lr \"ch01-l01\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "source.questions",
+     "ch01: [source.questions] ch01-e001: cite.sq \"ch01-q01\" is not a source question of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e002: lr \"ch01-l01\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "source.questions",
+     "ch01: [source.questions] ch01-e002: cite.sq \"ch01-q02\" is not a source question of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e003: lr \"ch01-l02\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e004: lr \"ch01-l02\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e005: lr \"ch01-l03\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e006: lr \"ch01-l03\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e007: lr \"ch01-l04\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e008: lr \"ch01-l04\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e009: lr \"ch01-l05\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e010: lr \"ch01-l05\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e011: lr \"ch01-l06\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e012: lr \"ch01-l06\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e013: lr \"ch01-l07\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e014: lr \"ch01-l07\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e015: lr \"ch01-l08\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e016: lr \"ch01-l08\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e017: lr \"ch01-l09\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e018: lr \"ch01-l09\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e019: lr \"ch01-l10\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e020: lr \"ch01-l10\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e021: lr \"ch01-l11\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e022: lr \"ch01-l11\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e023: lr \"ch01-l12\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e024: lr \"ch01-l12\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e025: lr \"ch01-l13\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e026: lr \"ch01-l13\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e027: lr \"ch01-l14\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e028: lr \"ch01-l14\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e029: lr \"ch01-l15\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e030: lr \"ch01-l15\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e031: lr \"ch01-l16\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e032: lr \"ch01-l16\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e033: lr \"ch01-l17\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e034: lr \"ch01-l17\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e035: lr \"ch01-l18\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e036: lr \"ch01-l18\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e037: lr \"ch01-l19\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e038: lr \"ch01-l19\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e039: lr \"ch01-l20\" is not a learnable of the map"
+    ],
+    [
+     "error",
+     "lr.link",
+     "ch01: [lr.link] ch01-e040: lr \"ch01-l20\" is not a learnable of the map"
+    ]
+   ],
+   [
+    [
+     "error",
+     "map.exhaustive",
+     "ch01: [map.exhaustive] ch01-k99: in no learnable and no taughtIn"
+    ]
+   ],
+   [
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types case: put it in fits.types or give the reason in unfit.case"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types debate: put it in fits.types or give the reason in unfit.debate"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types flaw: put it in fits.types or give the reason in unfit.flaw"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types inquiry: put it in fits.types or give the reason in unfit.inquiry"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types predict: put it in fits.types or give the reason in unfit.predict"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types tree: put it in fits.types or give the reason in unfit.tree"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes translate: put it in fits.modes or give the reason in unfit.translate"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes ambiguity: put it in fits.modes or give the reason in unfit.ambiguity"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes feynman: put it in fits.modes or give the reason in unfit.feynman"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes combine: put it in fits.modes or give the reason in unfit.combine"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] modes dialectic: put it in fits.modes or give the reason in unfit.dialectic"
+    ]
+   ],
+   [],
+   [
+    [
+     "error",
+     "fit.types",
+     "ch01: [fit.types] spotbug: 2 exercise(s), need >= 3"
+    ]
+   ],
+   [
+    [
+     "error",
+     "mode.coverage",
+     "ch01: [mode.coverage] contradiction: 1 exercise(s), need >= 2"
+    ]
+   ],
+   [
+    [
+     "error",
+     "mix.difficulty",
+     "ch01: [mix.difficulty] difficulty 1: 35 %, need 20 ± 5 %"
+    ],
+    [
+     "error",
+     "mix.difficulty",
+     "ch01: [mix.difficulty] difficulty 2: 10 %, need 25 ± 5 %"
+    ]
+   ],
+   [
+    [
+     "error",
+     "mix.think",
+     "ch01: [mix.think] recall 35 %, at most 25 %"
+    ]
+   ],
+   [
+    [
+     "error",
+     "mix.think",
+     "ch01: [mix.think] apply or higher 38 %, need >= 40 %"
+    ]
+   ],
+   [
+    [
+     "error",
+     "lr.facades",
+     "ch01: [lr.facades] ch01-l01: 1 exercise(s) in 1 type(s), need >= 2 in >= 2"
+    ]
+   ],
+   [
+    [
+     "error",
+     "self.contained",
+     "ch01: [self.contained] ch01-e005: “Q14” points at the source; write the example or question out in full"
+    ]
+   ],
+   [
+    [
+     "error",
+     "self.contained",
+     "ch01: [self.contained] ch01-s01: “σελίδα 3” points at the source; write the example or question out in full"
+    ]
+   ],
+   [
+    [
+     "error",
+     "explain.depth",
+     "ch01: [explain.depth] ch01-e003: the explanation is too short (why right, why the tempting wrong one is wrong)"
+    ]
+   ],
+   [
+    [
+     "error",
+     "mcq.why",
+     "ch01: [mcq.why] ch01-e001: needs a why for every option"
+    ]
+   ],
+   [
+    [
+     "error",
+     "trivial.answer",
+     "ch01: [trivial.answer] ch01-e001: the right option is written in the question"
+    ]
+   ],
+   [
+    [
+     "warn",
+     "trivial.longest",
+     "ch01: [trivial.longest] ch01-e001: the right option is by far the longest"
+    ]
+   ],
+   [
+    [
+     "error",
+     "cite.present",
+     "ch01: [cite.present] ch01-e006: cite {src, loc} missing"
+    ]
+   ],
+   [
+    [
+     "error",
+     "source.questions",
+     "ch01: [source.questions] ch01-q01: no exercise cites it (cite.sq)"
+    ]
+   ],
+   [
+    [
+     "error",
+     "source.questions",
+     "ch01: [source.questions] ch01-q02: answerFrom must be 'source' (the source's own solution) or 'claude' (solved here)"
+    ]
+   ],
+   [
+    [
+     "error",
+     "source.questions",
+     "ch01: [source.questions] ch01-q01: solved here, so say in check how the answer was double-checked"
+    ]
+   ],
+   [
+    [
+     "error",
+     "theory.tables",
+     "ch01: [theory.tables] no compare table (a table block with kind 'compare', >= 3 columns and >= 2 rows): a comparative matrix: concepts side by side against the same criteria"
+    ]
+   ],
+   [
+    [
+     "error",
+     "theory.tables",
+     "ch01: [theory.tables] no summary table (a table block with kind 'summary', >= 2 columns and >= 3 rows): a table that categorises or sums up the chapter's concepts"
+    ]
+   ],
+   [
+    [
+     "error",
+     "theory.tables",
+     "ch01: [theory.tables] no breakdown table (a table block with kind 'breakdown', >= 4 columns and >= 2 rows): related concepts brought together and broken down across columns of different parameters"
+    ]
+   ],
+   [
+    [
+     "error",
+     "theory.tables",
+     "ch01: [theory.tables] no breakdown table (a table block with kind 'breakdown', >= 4 columns and >= 2 rows): related concepts brought together and broken down across columns of different parameters"
+    ]
+   ],
+   [],
+   [
+    [
+     "error",
+     "mcq.why",
+     "ch01: [mcq.why] ch01-e004: needs a why for every option"
+    ],
+    [
+     "error",
+     "lr.facades",
+     "ch01: [lr.facades] ch01-l02: 2 exercise(s) in 1 type(s), need >= 2 in >= 2"
+    ],
+    [
+     "error",
+     "cats.facades",
+     "ch01: [cats.facades] ch01-k02 (confusable): 2 exercise(s) in 1 type(s), need >= 2 in >= 2"
+    ]
+   ],
+   [
+    [
+     "error",
+     "review.done",
+     "ch01: [review.done] no second-pass review (review/ch01.json)"
+    ]
+   ],
+   [
+    [
+     "error",
+     "review.done",
+     "ch01: [review.done] blind re-solve: mismatches not fixed: ch01-e003"
+    ]
+   ],
+   [
+    [
+     "warn",
+     "mix.order",
+     "ch01: [mix.order] ch01-s01: put the easier exercises first"
+    ]
+   ],
+   [
+    [
+     "warn",
+     "example.restated",
+     "ch01: [example.restated] ch01-e005: “the example above” points at a lesson's example; write the example out in the exercise and ask a question that needs thinking about it"
+    ]
+   ],
+   [
+    [
+     "warn",
+     "example.restated",
+     "ch01: [example.restated] ch01-e005: “Στο παράδειγμα της θεωρίας” points at a lesson's example; write the example out in the exercise and ask a question that needs thinking about it"
+    ]
+   ],
+   [],
+   [
+    [
+     "warn",
+     "figure.explained",
+     "ch01: [figure.explained] ch01-s01: the diagram is not explained right after it (what it shows, how to read it, what it teaches)"
+    ]
+   ],
+   [],
+   [
+    [
+     "warn",
+     "figure.explained",
+     "ch01: [figure.explained] ch01-s01: the diagram is not explained right after it (what it shows, how to read it, what it teaches)"
+    ]
+   ],
+   [
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_drag: put it in fits.types or give the reason in unfit.img_drag"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_hotspot: put it in fits.types or give the reason in unfit.img_hotspot"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_label: put it in fits.types or give the reason in unfit.img_label"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_occlusion: put it in fits.types or give the reason in unfit.img_occlusion"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_reveal: put it in fits.types or give the reason in unfit.img_reveal"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_select: put it in fits.types or give the reason in unfit.img_select"
+    ],
+    [
+     "error",
+     "fit.types",
+     "ch01: [fit.types] img_sequence: 1 exercise(s), need >= 3"
+    ],
+    [
+     "warn",
+     "sequence.arrows",
+     "ch01: [sequence.arrows] ch01-e041: img_sequence on \"flow\": if its arrows already show the order, use another type; else say why in map.sequenceWhy"
+    ],
+    [
+     "error",
+     "review.done",
+     "ch01: [review.done] blind re-solve: 40 of 41 exercises solved"
+    ]
+   ],
+   [
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_drag: put it in fits.types or give the reason in unfit.img_drag"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_hotspot: put it in fits.types or give the reason in unfit.img_hotspot"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_label: put it in fits.types or give the reason in unfit.img_label"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_occlusion: put it in fits.types or give the reason in unfit.img_occlusion"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_reveal: put it in fits.types or give the reason in unfit.img_reveal"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_select: put it in fits.types or give the reason in unfit.img_select"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] types img_sequence: put it in fits.types or give the reason in unfit.img_sequence"
+    ],
+    [
+     "error",
+     "fit.declared",
+     "ch01: [fit.declared] img_sequence is used but not in fits.types"
+    ],
+    [
+     "error",
+     "review.done",
+     "ch01: [review.done] blind re-solve: 40 of 41 exercises solved"
+    ]
+   ]
+  ]
+ }
+}

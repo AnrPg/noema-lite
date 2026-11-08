@@ -7,10 +7,9 @@ colouring, centralities and communities. It gives the result as scalars and seri
 draws the network as a scene **in the algorithm's state after k steps**. A slider bound to `model.run.step` walks through the
 run: the frontier, each relaxation, each augmenting path, each union.
 
-The Python twin is `tools/lib_graph.py` (`ID`, `check_spec`, `exprs`, `keys` and the same lists). It checks and does not compute,
-and it gives the same problems (code, path, message, level) as the JS `checkSpec`. The tests are `node tests/lib_graph.js` (119
+The tests are `node tests/lib_graph.js` (119
 assertions: published values, every edge case, the trace, the adapter, the Worker, speed, the reference activity) and
-`node tests/enginelib.js` (JS ↔ Python parity on `tests/fixtures/enginelib/graph.json`, 36 specs: 11 good, 25 bad). The reference
+`node tests/enginelib.js` (the golden outputs of the former Python twin on `tests/fixtures/enginelib/graph.json`, 36 specs: 11 good, 25 bad). The reference
 activity is `tools/activities_examples/dijkstra-steps`. The research behind this chapter is in the project's
 `engine-library/research/math.md` (§3, table G1–G20).
 
@@ -86,7 +85,7 @@ The values `dx`, `dt`, `hops` are those of the whole run; the step changes only 
 | `seed` | 0–2³²−1 | label propagation's order (else the run's seed) |
 | `normalized`, `weighted` | bool | betweenness normalised (true, networkx's); weights in centralities and modularity (false) |
 
-### 1.3 Checker codes (`checkSpec`, the same in `tools/lib_graph.py`)
+### 1.3 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|

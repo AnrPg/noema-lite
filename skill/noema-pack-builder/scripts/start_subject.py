@@ -3,7 +3,7 @@
   python3 start_subject.py WORKDIR SUBJECT_ID "Title" [--lang en] [--emoji 📘] [--group other] [--math] [--code] [--by claude|learner]
 WORKDIR/<id>/ gets subject.json, sources.json, chapters/, patches/, media/media.json, sources/, coverage/, map/ (knowledge maps)
 and review/ (second-pass reviews). authoring.rules = 2: make_pack.py holds every chapter to the quality rules
-(tools/pack_rules.json "quality", references/PIPELINES.md §4)."""
+(CONTENT_SPEC.md Q1–Q8, references/PIPELINES.md §4)."""
 import os, sys, json
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
     try: _s.reconfigure(encoding='utf-8', errors='replace')

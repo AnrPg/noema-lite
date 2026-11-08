@@ -5,7 +5,6 @@
  */
 import type { Clock } from '../../../ports/clock.ts';
 import type { I18n, MessageParams } from '../../../ports/i18n.ts';
-import { interpret, type Service } from '../../../kernel/statechart.ts';
 import {
   activeFilter,
   buildCourse,
@@ -32,14 +31,14 @@ import {
   siblingOf,
   type CardQueue,
 } from '../domain/queries.ts';
-import { roundMachine, startRound, type RoundContext, type RoundEvent, type RoundState } from '../domain/session.ts';
+import { roundMachine, startRound, type RoundActor } from '../domain/session.ts';
 import type { StudyHost } from './host.ts';
 import type { AiPort, TutorPort, ViewerPort } from './parts.ts';
 import { SourcesUi } from './sources.ts';
 
 /** A round in play: its exercises' statechart and what the screen shows around it. */
 export interface Round {
-  readonly service: Service<RoundContext<Exercise>, RoundEvent, RoundState>;
+  readonly actor: RoundActor<Exercise>;
   readonly title: string;
   readonly back: string;
   /** the XP the learner had when it began (the summary's +XP) */
@@ -345,11 +344,11 @@ export class StudyApp {
   startRound(list: readonly Exercise[], o: RoundOptions = {}): void {
     const pool = this.onlyMyLevel && !o.keepOrder ? this.atMyLevel(list) : list;
     const ordered = (o.keepOrder ? [...pool] : roundOrder(pool.length ? pool : list, this.state.res, Math.random)).slice(0, o.count ?? 10);
-    const m = roundMachine<Exercise>({
+    const m = roundMachine<Exercise>(ordered, { boss: o.boss ?? null }, {
       sibling: (ex, round) => siblingOf(ex, round, this.course.exercises, Math.random, e => this.course.chapterOf(e)),
     });
     this.round = {
-      service: interpret(m, startRound(m, ordered, { boss: o.boss ?? null })),
+      actor: startRound(m, () => this.clock.now()),
       title: o.title ?? this.t('engine.run.practice'),
       back: o.back ?? HOME,
       xp0: this.state.xp,

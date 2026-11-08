@@ -1,9 +1,10 @@
 /* wasm-module@1 and the sim-spec engine wasm@1 (engine/src/44_activity_wasm.js, docs/activities-dev/wasm.md).
    Node part (always):
      1. the fixtures: every tests/fixtures/wasm/*.wat assembles (watasm.py) to exactly the committed .wasm, and node's own WebAssembly accepts it;
-     2. parity: tools/wasm_check.py and NoemaWasm.inspect give the same report (imports, exports, memory, errors, sha256) on every fixture
-        and on broken binaries, at two page limits; checkItem / checkModel and check_item / check_model give the same messages;
-     3. the synchronous sha256 equals node's crypto; the sim spec of the browser part passes NoemaPackCheck.checkSimSpec;
+     2. the golden reports: NoemaWasm.inspect gives the report (imports, exports, memory, errors, sha256) of the former Python twin
+        (tools/wasm_check.py, tests/fixtures/parity/activities_wasm.json) on every fixture and on broken binaries, at two page limits;
+        checkItem / checkModel give its messages;
+     3. the synchronous sha256 equals node's crypto; the sim spec of the browser part passes NoemaCore.content.checkSimSpec;
      4. the ABI mapping: the worker's own code (run here in node) through the engine's prepare → the oscillator's numbers exactly,
         the seeded noema_random, the capped log, a capped memory grow; neutralise() removes the network globals.
    Browser part (unless --node): a stub host page like activity_harness.js builds (ACTP from 32_activities.js, the sim runtime, this
@@ -19,12 +20,11 @@ const ROOT = path.resolve(__dirname, '..'), FIX = path.join(__dirname, 'fixtures
 const args = process.argv.slice(2), NODE_ONLY = args.includes('--node'), APP = args.includes('--app') ? path.resolve(args[args.indexOf('--app') + 1]) : null;
 let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) { fails++; console.log('  ✗ ' + m); } else console.log('  ✓ ' + m); return c; };
 const canon = v => JSON.stringify(v, (k, x) => x && typeof x === 'object' && !Array.isArray(x) ? Object.fromEntries(Object.keys(x).sort().map(q => [q, x[q]])) : x);
-const py = (code, input) => JSON.parse(cp.execFileSync('python3', ['-c', `import sys, json; sys.path.insert(0, ${JSON.stringify(path.join(ROOT, 'tools'))}); import wasm_check as W\n` + code], { input: JSON.stringify(input), maxBuffer: 64 << 20 }).toString());
+const want = require('./golden.cjs')('activities_wasm');   // the golden outputs of the former Python twin (tests/golden.cjs)
 
-/* the app's pieces in node: NoemaExpr, packcheck, a stub ACT that captures what 44_activity_wasm.js registers */
+/* the app's pieces in node: NoemaExpr, the content checks (NoemaCore.content), a stub ACT that captures what 44_activity_wasm.js registers */
 const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
 const NoemaExpr = ENGINES.kernel('expr');
-require(path.join(ROOT, 'engine', 'packcheck.js'));
 const REGD = { engines: {}, runtimes: {} };
 globalThis.ACT = { ITEMS: {}, registerEngine: d => { REGD.engines[d.id] = d; }, registerRuntime: d => { REGD.runtimes[d.id] = d; }, runtime: id => REGD.runtimes[id] || null };
 const W = require(path.join(ROOT, 'engine', 'src', '44_activity_wasm.js'));
@@ -66,15 +66,15 @@ function nodePart() {
     ok(same && valid, `${f} assembles to the committed ${f.slice(0, -4)}.wasm, and WebAssembly accepts it`);
   }
 
-  console.log('— 2. parity: tools/wasm_check.py and NoemaWasm.inspect');
+  console.log('— 2. NoemaWasm.inspect, checkItem, checkModel: the golden reports');
   const bins = {};
   for (const f of ['osc', 'imem', 'forbidden', 'badsig', 'bigmem', 'nomax']) bins[f] = wasm(f);
   bins.truncated = wasm('osc').subarray(0, 200); bins.magic = Buffer.from('not wasm at all'); bins.empty = Buffer.alloc(0);
   bins.huge = Buffer.concat([wasm('osc').subarray(0, 8), Buffer.alloc(W.MAX_BYTES)]);
   bins.version2 = Buffer.from(wasm('osc')); bins.version2[4] = 2;
   const cases = []; for (const [k, b] of Object.entries(bins)) for (const mp of [16, 256]) cases.push({ k, mp, b64: b.toString('base64') });
-  const P = py('import base64\nC = json.load(sys.stdin)\nprint(json.dumps([W.inspect(base64.b64decode(c["b64"]), c["mp"]) for c in C]))', cases);
-  cases.forEach((c, i) => { const J = W.inspect(new Uint8Array(Buffer.from(c.b64, 'base64')), c.mp); ok(canon(J) === canon(P[i]), `${c.k} (max ${c.mp} pages): the same report${canon(J) === canon(P[i]) ? '' : '\n      js ' + canon(J) + '\n      py ' + canon(P[i])}`); });
+  const P = want('inspect', cases);
+  cases.forEach((c, i) => { const J = W.inspect(new Uint8Array(Buffer.from(c.b64, 'base64')), c.mp); ok(canon(J) === canon(P[i]), `${c.k} (max ${c.mp} pages): the same report${canon(J) === canon(P[i]) ? '' : '\n      js     ' + canon(J) + '\n      golden ' + canon(P[i])}`); });
   const verdict = f => W.inspect(new Uint8Array(bins[f]), 16);
   ok(verdict('osc').ok && verdict('imem').ok, 'osc and imem are fine');
   ok(/^import: env\.fetch_url \(func\) is not in the host ABI/.test(verdict('forbidden').errors[0]), 'a forbidden import is refused: ' + verdict('forbidden').errors[0]);
@@ -88,25 +88,25 @@ function nodePart() {
   const it = ITEMS['osc-core'];
   const itemCases = [it, { ...it, sha256: '0'.repeat(64) }, { ...it, wasm: 'not base64!' }, { ...it, abi: { scratch: 3, maxPages: 0, budgetMs: 10, extra: 1 } }, { ...it, abi: {} },
     { ...it, runtime: 'html-app@1' }, { ...it, bytes: 7 }, ITEMS['bad-core'], ITEMS['big-core'], ITEMS['imem-core'], { ...it, abi: { scratch: 1024, step: 'nope' } }, null];
-  const PI = py('C = json.load(sys.stdin)\nprint(json.dumps([W.check_item(c)[0] for c in C]))', itemCases);
-  itemCases.forEach((c, i) => { const J = W.checkItem(c).problems; ok(canon(J) === canon(PI[i]), `item case ${i}: the same problems ${canon(J)}${canon(J) === canon(PI[i]) ? '' : ' / py ' + canon(PI[i])}`); });
+  const PI = want('items', itemCases);
+  itemCases.forEach((c, i) => { const J = W.checkItem(c).problems; ok(canon(J) === canon(PI[i]), `item case ${i}: the same problems ${canon(J)}${canon(J) === canon(PI[i]) ? '' : ' / golden ' + canon(PI[i])}`); });
   ok(W.checkItem(it).problems.length === 0 && W.checkItem(itemCases[4]).problems[0].startsWith('abi.scratch:'), 'a good item passes; a module without alloc needs abi.scratch');
   const S = oscSpec('osc-core'), modelCases = [S,
     { ...S, model: { ...S.model, module: 'nope' } }, { ...S, model: { ...S.model, extra: 1, step: 'spin' } }, { ...S, model: { ...S.model, step: 'grow' } },
     { ...S, model: { ...S.model, outputs: [{ id: 't' }, { id: 'x', n: 50 }, { id: 'E', n: 3 }] } }, { ...S, model: { ...S.model, outputs: [{ id: 't', n: 50 }] } },
     { ...S, model: { ...S.model, inputs: ['k', 'nosuch + 1', ''] } }, { ...S, model: { ...S.model, inputs: [] } }, { ...S, model: { ...S.model, module: 'bad-core' } },
     { ...S, model: { ...S.model, init: 'step' } }, { ...S, model: null }];
-  const PM = py('C = json.load(sys.stdin)\nI = C.pop()\nprint(json.dumps([W.check_model(c, I) for c in C]))', [...modelCases, ITEMS]);
-  modelCases.forEach((c, i) => { const J = W.checkModel(c, ITEMS); ok(canon(J) === canon(PM[i]), `model case ${i}: the same problems ${canon(J)}${canon(J) === canon(PM[i]) ? '' : ' / py ' + canon(PM[i])}`); });
+  const PM = want('models', [...modelCases, ITEMS]);
+  modelCases.forEach((c, i) => { const J = W.checkModel(c, ITEMS); ok(canon(J) === canon(PM[i]), `model case ${i}: the same problems ${canon(J)}${canon(J) === canon(PM[i]) ? '' : ' / golden ' + canon(PM[i])}`); });
   ok(W.checkModel(S, ITEMS).length === 0, 'the oscillator model passes');
 
   console.log('— 3. sha256, the spec');
   let shaOk = true; for (const len of [0, 1, 55, 56, 63, 64, 65, 1000, 123457]) { const b = crypto.randomBytes(len); if (W.sha256(new Uint8Array(b)) !== crypto.createHash('sha256').update(b).digest('hex')) shaOk = false; }
   ok(shaOk, 'the synchronous sha256 equals node crypto (0 … 123 457 bytes)');
   const engs = ['formula@1', 'circuit-mna@1', 'wasm@1'];
-  for (const id of ['osc-sim', 'osc-spin', 'bad-sim']) { const p = globalThis.NoemaPackCheck.checkSimSpec(ITEMS[id].spec, STRINGS, engs); ok(p.length === 0, `the spec of ${id} passes checkSimSpec ${p.slice(0, 2).join(' | ')}`); }
+  for (const id of ['osc-sim', 'osc-spin', 'bad-sim']) { const p = globalThis.NoemaCore.content.checkSimSpec(ITEMS[id].spec, STRINGS, engs); ok(p.length === 0, `the spec of ${id} passes checkSimSpec ${p.slice(0, 2).join(' | ')}`); }
   const ownSpec = { ...ITEMS['osc-own'].spec, engine: 'wasm@1', model: { ...ITEMS['osc-own'].spec.model, module: 'osc-own' } };
-  ok(globalThis.NoemaPackCheck.checkSimSpec(ownSpec, STRINGS, engs).length === 0 && W.checkModel(ownSpec, ITEMS).length === 0, 'the own spec of osc-own (as the runtime completes it) passes');
+  ok(globalThis.NoemaCore.content.checkSimSpec(ownSpec, STRINGS, engs).length === 0 && W.checkModel(ownSpec, ITEMS).length === 0, 'the own spec of osc-own (as the runtime completes it) passes');
 
   console.log('— 4. the ABI mapping (the worker code, run in node)');
   const E = REGD.engines['wasm@1'];
@@ -154,7 +154,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 ${hline}
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${fs.readFileSync(path.join(ROOT, 'engine', 'packcheck.js'), 'utf8')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
+</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>${rd('35_activity_sim.js')}</script><script>${rd('44_activity_wasm.js')}</script><script>
 window.LOG = []; window.H = null;
 window.run = function (id, task) {
   var act = ACT.ITEMS[id], box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];

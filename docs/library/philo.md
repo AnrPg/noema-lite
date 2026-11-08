@@ -13,10 +13,9 @@ gives which verdict, which method elects whom, and which analysis counts a case 
   falls back to the core's mulberry32. This fallback is marked in the code; either way the same seed gives the same numbers.
 - The Worker source is NoemaExpr, the core, NoemaSimKit, logic@1 and this module.
 
-The Python twin is `tools/lib_philo.py`. It checks the spec and does not compute, and it embeds the same JSON tables (one source,
-written into both files). The tests are:
+The tests are:
 - `node tests/lib_philo.js`: 111 assertions covering the reference values below, the edge cases and their codes, the checker, the
-  JS ↔ Python parity on `tests/fixtures/enginelib/philo.json` (33 specs), the adapter, the Worker and speed.
+  the golden outputs of the former Python twin on `tests/fixtures/enginelib/philo.json` (33 specs), the adapter, the Worker and speed.
 - `node tests/enginelib.js`: the same parity once philo@1 is in the catalogue.
 
 The reference activity is `tools/activities_examples/condorcet-cycle`. The research is in the project's
@@ -72,14 +71,14 @@ act is returned as its **index** in the model's list (0 first), and **−1** mea
 | `ubuntu` (≤ 16) | `id`, `options` (1–12) `{id, effects (≤ 64) {who, identity, solidarity, byAgent}}`, `wI`, `wS` (1) | a choice in Metz's relational terms (§2.12): Δidentity and Δsolidarity −1…1 per relationship |
 | `poisson` (≤ 8) | `id`, `n` (expected electorate), `candidates` (2–6), `types` (1–16) `{id, r, u (one per candidate), vote?}` | a Poisson voting game (§2.14): a voter is of type t with probability r, values the candidates at u and votes for `vote` |
 
-Built-in content (`TABLES`, the same in Python):
+Built-in content (`TABLES`):
 - The trolley presets (§2.2), Kant's maxims, the trait lists, and the Gettier presets with the received intuition.
 - 19 thought experiments: `chineseRoom mary zombie brainVat teleporter ship twinEarth experienceMachine violinist veil gyges
   floatingMan butterfly chariot childWell swampman invertedSpectrum personhood cottonFire`, each with options and positions.
 - 100 thinkers in 12 traditions (`greek indian buddhist jain chinese islamic jewish latin modern analytic continental african`), with
   years (BCE negative; ancient dates are the conventional ones) and influences.
 
-### 1.2 Checker codes (`checkSpec`, the same in `tools/lib_philo.py`)
+### 1.2 Checker codes (`checkSpec`)
 
 | code | when |
 |---|---|
