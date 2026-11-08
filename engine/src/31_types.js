@@ -16,7 +16,8 @@ R.flaw = (ex, api) => {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.flawHint', { n: bad.size })),
       h('div', { class: 'codelines' + (code ? '' : ' prose') }, ...lines),
       h('div', { class: 'lbl', style: { margin: '12px 0 6px' } }, tE('engine.ex.flawWhy')), h('div', { class: 'opts' }, ...whyBtns)),
-    check() { if (!sel.size || why === null) return null; return sel.size === bad.size && [...sel].every(i => bad.has(i)) && why === ex.reason; },
+    answer: () => ({ lines: [...sel], reason: why }),
+    check() { return verdict(ex, this.answer()); },
     given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1)).join(', ') + (why === null ? '' : ' — because: ' + ex.reasons[why]),   // i18n-ignore (for the AI)
     reveal() {
       lines.forEach((b, i) => { if (bad.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); });
@@ -36,10 +37,10 @@ R.case = (ex, api) => {
   });
   return {
     el: h('div', { class: 'case' }, ...parts.map(x => x.box)),
-    check() { const r = parts.map(x => x.w.check()); return r.some(v => v === null) ? null : r.every(Boolean); },
-    score: () => parts.filter(x => x.w.check()).length / parts.length,
+    answer: () => ({ parts: parts.map(x => x.w.answer?.() ?? {}) }),
+    check() { return verdict(ex, this.answer()); },
     given: () => parts.map((x, i) => `(${i + 1}) ` + givenOf(x.w)).join('  '),
-    reveal() { parts.forEach(x => { const ok = x.w.check(); x.w.reveal?.(); x.box.classList.add(ok ? 'ok' : 'bad'); if (x.p.explain) x.box.append(h('div', { class: 'fb ' + (ok ? 'ok' : 'info'), html: fmt(x.p.explain) })); }); },
+    reveal() { const right = gradeOf(ex, this.answer()).items || []; parts.forEach((x, i) => { const ok = !!right[i]; x.w.reveal?.(); x.box.classList.add(ok ? 'ok' : 'bad'); if (x.p.explain) x.box.append(h('div', { class: 'fb ' + (ok ? 'ok' : 'info'), html: fmt(x.p.explain) })); }); },
   };
 };
 
@@ -60,7 +61,7 @@ R.tree = (ex, api) => {
   let mistakes = 0, steps = 0;
   const seen = new Set();
   function node(id) {
-    const n = ex.nodes[id]; if (!n || seen.has(id)) return api.done(mistakes === 0, mistakes);   // a malformed tree ends instead of looping
+    const n = ex.nodes[id]; if (!n || seen.has(id)) return api.done(verdict(ex, { mistakes }), mistakes);   // a malformed tree ends instead of looping
     seen.add(id); steps++;
     const div = h('div', { class: 'scstep' }, h('div', { class: 'sp' }, h('span', { class: 'pill c' }, '🌳 ' + nf(steps)), ' ', F(n.q)));
     const opts = h('div', { class: 'opts' }), fbBox = h('div');
@@ -73,7 +74,7 @@ R.tree = (ex, api) => {
           done = true; b.classList.add('right'); beep('ok');
           path.append(h('li', {}, F(o.text))); pathLbl.hidden = false;
           if (o.fb) fbBox.append(h('div', { class: 'fb ok', html: '✅ ' + fmt(o.fb) }));
-          if (o.to) node(o.to); else api.done(mistakes === 0, mistakes);
+          if (o.to) node(o.to); else api.done(verdict(ex, { mistakes }), mistakes);
         } else { mistakes++; b.classList.add('wrong', 'shake'); beep('bad'); fbBox.append(h('div', { class: 'fb bad', html: '↪ ' + fmt(o.fb) })); }
       } }, h('span', { class: 'k' }, String.fromCharCode(65 + i)), F(o.text));
       opts.append(b);
@@ -96,7 +97,8 @@ R.inquiry = (ex, api) => {
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, tE('engine.ex.inquiryHint')), h('div', { class: 'opts' }, ...btns)),
     keys: k => btns[k]?.click(),
-    check: () => pick === null ? null : ex.scores[pick] === best,
+    answer: () => ({ picked: pick }),
+    check() { return verdict(ex, this.answer()); },
     given: () => pick === null ? '' : ex.options[pick],
     reveal() {
       btns.forEach(b => {
@@ -122,7 +124,8 @@ R.debate = (ex, api) => {
   box.append(h('div', { class: 'lbl', style: { marginBottom: '6px' } }, tE('engine.ex.debatePick')), h('div', { class: 'opts' }, ...sideBtns));
   return {
     el: box, keys: k => (side === null ? sideBtns : cBtns)[k]?.click(),
-    check: () => pick === null ? null : pick === ex.sides[side].best,
+    answer: () => ({ side, pick }),
+    check() { return verdict(ex, this.answer()); },
     given: () => side === null ? '' : 'side: ' + ex.sides[side].position + (pick === null ? '' : ' — objection: ' + ex.sides[side].counters[pick]),   // i18n-ignore (for the AI)
     reveal() { const sd = ex.sides[side]; cBtns.forEach(b => { const ci = b._ci; if (ci === sd.best) b.classList.add('right'); else if (ci === pick) b.classList.add('wrong'); if (sd.why?.[ci]) b.children[1].append(h('span', { class: 'why', html: fmt(sd.why[ci]) })); }); },
   };

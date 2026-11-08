@@ -1015,6 +1015,62 @@ window.NoemaCurMap = (() => {
     return { X, Y, W, H, E, L, layers, T, way, code, sinks };
   }
   /** opts.page: draw into this element (a page of the shell) instead of a full-screen overlay; opts.chrome(menu): the page's ⋮ */
+  /* ---------- 🪜 levels (docs/CURRICULUM.md §11) ---------- */
+  const RL = () => window.NoemaCore?.roadmaps;
+  const notice = (m, ms) => window.Noema?.notice ? window.Noema.notice(m, ms) : toast?.(m, ms);
+  /** The catalog's name of a preset level (its own names come first). */
+  const PRESET = { 'kind.grade': 'roadmap.levels.kind.grade', 'kind.semester': 'roadmap.levels.kind.semester', 'kind.year': 'roadmap.levels.kind.year',
+    'difficulty.introductory': 'roadmap.levels.difficulty.introductory', 'difficulty.intermediate': 'roadmap.levels.difficulty.intermediate', 'difficulty.advanced': 'roadmap.levels.difficulty.advanced' };
+  /** A level's name for the learner: its own name in the UI language, else the catalog's for a preset, else any name it has. */
+  function levelLabel(c, id, ladder = null) {
+    const R = RL(), l = (ladder || R?.ladder(c) || []).find(x => x.id === id); if (!R || !l) return id;
+    const chain = window.NoemaCore?.i18n?.chain?.() || ['en'], own = R.levelName(l, chain), pre = R.presetOf(l);
+    return own || (pre && PRESET[pre.key] ? CM(PRESET[pre.key], { n: pre.n }) : R.levelName(l, chain, { any: true }));
+  }
+  /** One question after the other (the step test and the level test): done(right) at the end. */
+  function quiz(body, qs, done) {
+    let i = 0, right = 0;
+    const fmtQ = t => { const d = el('div', { class: 'cm-q' }); if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parseInline(String(t))); else d.textContent = t; return d; };
+    const ask = () => {
+      body.innerHTML = '';
+      if (i >= qs.length) { done(right); return; }
+      const q = qs[i]; body.append(el('div', { class: 'tiny' }, CM('roadmap.map.test.question', { n: i + 1, total: qs.length })), fmtQ(q.q));
+      const opts = el('div', { class: 'cm-opts' }, ...q.options.map((o, k) => el('button', { class: 'btn', onclick: () => {
+        const ok = k === q.answer; if (ok) right++;
+        [...opts.children].forEach((b, kk) => { b.disabled = true; if (kk === q.answer) b.classList.add('ok'); else if (kk === k) b.classList.add('bad'); });
+        body.append(el('p', { class: 'tiny' }, (ok ? '✅ ' : '❌ ') + (q.explain || '')), el('button', { class: 'btn primary', onclick: () => { i++; ask(); } }, i + 1 < qs.length ? CM('roadmap.map.test.next') + ' ' + cmOn() : CM('roadmap.map.test.result')));
+      } }, o)));
+      body.append(opts);
+    };
+    ask();
+  }
+  /** 🪜 Claude's new arrangement of the levels, change by change: the learner (in a shared Roadmap its owner) applies or declines it. */
+  function reviewProposal(acc, cid, id, { onDone = () => { } } = {}) {
+    const R = RL(), c = C().get(acc, cid), p = (c?.proposals || []).find(x => x.id === id); if (!R || !p) return;
+    const L = [...(p.plan.levels || []), ...R.ladder(c)];
+    const lv = x => x == null ? CM('roadmap.levels.none') : typeof x === 'string' ? levelLabel(c, x, L) : levelLabel(c, x.from, L) + '–' + levelLabel(c, x.to, L);
+    const line = x => x.kind === 'ladder' ? CM('roadmap.levels.change.ladder', { levels: x.levels.map(i => levelLabel(c, i, L)).join(' · ') })
+      : x.kind === 'level' ? CM('roadmap.levels.change.level', { step: x.title, from: lv(x.from), to: lv(x.to) })
+        : x.kind === 'chapter' ? CM('roadmap.levels.change.chapter', { step: x.title, chapter: x.chapter, level: lv(x.to) })
+          : x.kind === 'split' ? CM('roadmap.levels.change.split', { step: x.title, parts: x.parts.join(' · ') })
+            : x.kind === 'merge' ? CM('roadmap.levels.change.merge', { step: x.title, steps: x.from.join(' · ') })
+              : CM(x.kind === 'link' ? 'roadmap.levels.change.link' : 'roadmap.levels.change.unlink', { from: x.from, to: x.to });
+    overlay((b2, close2) => {
+      const go = async (approve, btn) => {
+        b2.querySelectorAll('button').forEach(b => { b.disabled = true; }); btn.setAttribute('aria-busy', 'true');
+        const r = await J().App.decide(acc, cid, id, approve);
+        if (r.error) { toast('⚠️ ' + r.error, 6000); b2.querySelectorAll('button').forEach(b => { b.disabled = false; }); btn.removeAttribute('aria-busy'); return; }
+        toast((approve ? '🪜 ' : '') + CM(approve ? 'roadmap.jobs.restructured' : 'roadmap.levels.proposal.declined'), 5000); close2(); onDone();
+      };
+      b2.append(head('🪜 ' + CM('roadmap.levels.proposal.title')), p.plan.why ? el('p', {}, p.plan.why) : null,
+        el('ul', { class: 'cm-changes' }, ...R.changes(c, p.plan).map(x => el('li', {}, line(x)))),
+        el('p', { class: 'tiny' }, CM('roadmap.levels.proposal.keep')),
+        el('div', { class: 'row noema-ovfoot' },
+          el('button', { class: 'btn primary cm-propapply', onclick: e => go(true, e.currentTarget) }, CM('roadmap.levels.proposal.approve')),
+          el('button', { class: 'btn small cm-propdecline', onclick: e => go(false, e.currentTarget) }, CM('roadmap.levels.proposal.decline'))));
+    });
+  }
+
   function map(acc, cid, { focus, onStudy, appHelp = false, page = null, chrome = null, settings: openSettings = false } = {}) {
     let c = C().get(acc, cid); if (!c) { toast?.(CM('roadmap.map.map.notHere')); return; }
     G().start(acc); window.NoemaCurJobs?.App.start(acc);
@@ -1039,6 +1095,30 @@ window.NoemaCurMap = (() => {
           el('button', { class: 'btn small cm-plannow', onclick: () => { close(); planNow(acc, cid, { onStudy }); } }, '▶ ' + CM('roadmap.map.build.planNow')));
       };
       const member = SH()?.isMember(c);   // 👥 someone shared this curriculum with me: the map is theirs, my progress is mine
+      /* 🪜 levels (docs/CURRICULUM.md §11): the learner's level, moving up (automatic; the level test where the Roadmap asks for
+         one), and a new arrangement Claude proposed (only the owner decides). The ladder is NoemaCore.roadmaps. */
+      const levelBar = el('div', { class: 'cm-levelbar', role: 'status' });
+      let levelRun = null;
+      const drawLevels = st => {
+        const R = RL(); levelBar.replaceChildren(); if (!R) return;
+        const prop = member ? null : R.pendingProposal(c);
+        if (prop) levelBar.append(el('div', { class: 'row' }, el('span', { class: 'grow' }, '🪜 ' + CM('roadmap.levels.proposal.banner')),
+          el('button', { class: 'btn small primary cm-proposal', onclick: () => reviewProposal(acc, cid, prop.id, { onDone: () => drawMap() }) }, CM('roadmap.levels.proposal.review'))));
+        if (!c.levels?.length || !R.levels) return;
+        const line = el('div', { class: 'row cm-levelnow' }); levelBar.append(line);
+        const mastered = id => !!st[id]?.mastered, cc = c;
+        if (levelRun) { line.remove(); levelRun.then(() => { if (box.isConnected && !levelRun) drawLevels(C().statuses(acc, c)); }); return; }
+        levelRun = R.levels.advance(acc, cc, mastered, Date.now()).then(r => {
+          if (r.ok) for (const e of r.value.reached) notice('🎉 ' + CM('roadmap.levels.reached', { level: levelLabel(cc, e.level) }), 6000);
+          return R.levels.view(acc, cc, mastered);
+        }).then(v => {
+          if (!v?.ok) return;
+          const { current, testDue } = v.value;
+          line.append(el('span', { class: 'grow tiny' }, current ? CM('roadmap.levels.current', { level: levelLabel(cc, current.id) }) : CM('roadmap.levels.top')));
+          if (testDue) line.append(el('span', { class: 'tiny' }, CM('roadmap.levels.test.due', { level: levelLabel(cc, testDue) })),
+            el('button', { class: 'btn small cm-leveltest', onclick: () => levelTest(testDue) }, CM('roadmap.levels.test.take')));
+        }).catch(e => console.warn('[levels]', e)).finally(() => { levelRun = null; });
+      };
       // 🌐 a member's view: the owner's step titles and learning goals, machine-translated on request (engine/mt.js, docs/i18n.md §11)
       const mtStep = node => member && window.NoemaMT ? NoemaMT.mark(node, { language: c.language, kind: 'shared.roadmap' }) : node;
       const shareBar = el('div', { class: 'cm-sharebar', role: 'status' });
@@ -1115,13 +1195,13 @@ window.NoemaCurMap = (() => {
         page ? null : el('button', { class: 'btn small', title: CM('roadmap.map.map.settingsTip'), onclick: () => settings() }, '⚙️'));
       const seg = page ? el('div', { class: 'ns-seg small cm-viewseg', role: 'radiogroup', 'aria-label': SL('mapOrList', 'Map or list') }, ...[[false, SL('viewMap', 'Map')], [true, SL('viewList', 'List')]].map(([v, l]) => el('button', { class: 'cm-vbtn', 'data-list': String(v), role: 'radio', onclick: () => setList(v) }, l))) : null;   // i18n-ignore (SL: the English fallback of an sh.* key of i18n/shell)
       box.append(el('div', { class: 'cm-top' }, page ? null : el('button', { class: 'btn small ghost', onclick: () => { close(); toLibrary(); } }, cmBack() + ' ' + CM('roadmap.map.lib.title')), el('div', { class: 'cm-title' }, el('b', {}, (page ? '' : '🧭 ') + C().shownTitle(c)), sum), seg, tools, page ? null : el('button', { class: 'btn small', 'aria-label': CM('roadmap.map.close'), onclick: close }, '✕')),
-        holdBar, appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
+        holdBar, levelBar, appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
         page ? null : legend());
 
       function drawMap() {
         c = C().get(acc, cid) || c; const st = C().statuses(acc, c); const L = C().layout(c); const s = C().summary(acc, c);
         sum.textContent = page ? SL('rmSummary', '', { m: s.mastered, n: s.total }) + (G().paused() ? ' · ' + SL('signPaused', 'Preparing is paused') : '')
-          : CM('roadmap.map.lib.cardStats', { m: s.mastered, total: s.total, open: s.open, ready: s.ready }) + (G().paused() ? ' · ⏸ ' + CM('roadmap.map.map.paused') : ''); drawBar(); drawShareBar(); drawHold();
+          : CM('roadmap.map.lib.cardStats', { m: s.mastered, total: s.total, open: s.open, ready: s.ready }) + (G().paused() ? ' · ⏸ ' + CM('roadmap.map.map.paused') : ''); drawBar(); drawShareBar(); drawHold(); drawLevels(st);
         box.classList.toggle('cm-listmode', !!listMode); seg?.querySelectorAll('button').forEach(b => { const on = (b.dataset.list === 'true') === !!listMode; b.classList.toggle('on', on); b.setAttribute('aria-checked', String(on)); });
         if (listMode) return drawList(st);
         if (vert) return drawTreasure(st);
@@ -1418,21 +1498,39 @@ window.NoemaCurMap = (() => {
         async function run(b2, close2) {
           b2.append(head('🎓 ' + n.title, CM('roadmap.map.test.sub')), el('p', {}, '⏳ ' + CM('roadmap.map.test.preparing')));
           let qs; try { qs = await G().placementTest(c, id); } catch (e) { b2.lastChild.textContent = '⚠️ ' + errMsg(e); b2.append(el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, CM('roadmap.map.close')))); return; }
-          let i = 0, right = 0; const body = el('div', { class: 'cm-test' }); b2.lastChild.replaceWith(body);
-          const fmtQ = t => { const d = el('div', { class: 'cm-q' }); if (window.marked && window.DOMPurify) d.innerHTML = DOMPurify.sanitize(marked.parseInline(String(t))); else d.textContent = t; return d; };
-          const ask = () => {
-            body.innerHTML = '';
-            if (i >= qs.length) { const ok = G().passTest(c, id, right / qs.length); body.append(el('div', { class: 'cg-status ' + (ok ? 'done' : 'error') }, ok ? '✅ ' + CM('roadmap.map.test.passed', { right, total: qs.length }) : CM('roadmap.map.test.failed', { right, total: qs.length })), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn primary', onclick: () => { close2(); drawMap(); showPanel(id); } }, CM('roadmap.map.test.ok')))); return; }
-            const q = qs[i]; body.append(el('div', { class: 'tiny' }, CM('roadmap.map.test.question', { n: i + 1, total: qs.length })), fmtQ(q.q));
-            const opts = el('div', { class: 'cm-opts' }, ...q.options.map((o, k) => el('button', { class: 'btn', onclick: () => {
-              const ok = k === q.answer; if (ok) right++;
-              [...opts.children].forEach((b, kk) => { b.disabled = true; if (kk === q.answer) b.classList.add('ok'); else if (kk === k) b.classList.add('bad'); });
-              body.append(el('p', { class: 'tiny' }, (ok ? '✅ ' : '❌ ') + (q.explain || '')), el('button', { class: 'btn primary', onclick: () => { i++; ask(); } }, i + 1 < qs.length ? CM('roadmap.map.test.next') + ' ' + cmOn() : CM('roadmap.map.test.result')));
-            } }, o)));
-            body.append(opts);
-          };
-          ask();
+          const body = el('div', { class: 'cm-test' }); b2.lastChild.replaceWith(body);
+          quiz(body, qs, right => {
+            const ok = G().passTest(c, id, right / qs.length);
+            body.append(el('div', { class: 'cg-status ' + (ok ? 'done' : 'error') }, ok ? '✅ ' + CM('roadmap.map.test.passed', { right, total: qs.length }) : CM('roadmap.map.test.failed', { right, total: qs.length })), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn primary', onclick: () => { close2(); drawMap(); showPanel(id); } }, CM('roadmap.map.test.ok'))));
+          });
         }
+      }
+      /** 🪜 The final test of a level (a Roadmap with levelTest): questions from the level's own prepared subjects, no AI. */
+      async function levelTest(level) {
+        const R = RL(), name = levelLabel(c, level);
+        const packs = [];
+        for (const nid of R.stepsAt(c, level)) {
+          const n = c.nodes[nid]; if (n?.pack?.status !== 'ready' || !n.pack.id) continue;
+          const p = await (window.Noema.loadSubject || window.Noema.getPackById)?.(acc, n.pack.id).catch(() => null); if (p) packs.push(p);
+        }
+        const qs = R.levelTestFrom(packs, { rand: Math.random, tf: [CM('roadmap.test.true'), CM('roadmap.test.false')] });
+        overlay((b2, close2) => {
+          const foot = (...b) => el('div', { class: 'row noema-ovfoot' }, ...b);
+          if (!qs.length) { b2.append(head('🎓 ' + CM('roadmap.levels.test.title', { level: name })), el('p', {}, CM('roadmap.levels.test.notReady')), foot(el('button', { class: 'btn small', onclick: close2 }, CM('roadmap.map.close')))); return; }
+          b2.append(head('🎓 ' + CM('roadmap.levels.test.title', { level: name })), el('p', {}, CM('roadmap.levels.test.intro', { n: qs.length })),
+            foot(el('button', { class: 'btn primary cm-teststart', onclick: () => {
+              b2.replaceChildren(head('🎓 ' + CM('roadmap.levels.test.title', { level: name })));
+              const body = el('div', { class: 'cm-test' }); b2.append(body);
+              quiz(body, qs, async right => {
+                const st = C().statuses(acc, c);
+                const r = await R.levels.testTaken(acc, c, level, right / qs.length, { now: Date.now(), attempt: String(Date.now()), mastered: id => !!st[id]?.mastered });
+                const passed = r.ok && r.value.passed;
+                if (!r.ok) toast('⚠️ ' + errMsg(r.error), 5000);
+                body.append(el('div', { class: 'cg-status ' + (passed ? 'done' : 'error') }, passed ? '✅ ' + CM('roadmap.levels.test.passed', { right, total: qs.length }) : CM('roadmap.levels.test.failed', { right, total: qs.length })),
+                  foot(el('button', { class: 'btn primary', onclick: () => { close2(); drawMap(); } }, CM('roadmap.map.test.ok'))));
+              });
+            } }, CM('roadmap.map.test.proceed')), el('button', { class: 'btn small', onclick: close2 }, CM('roadmap.map.test.back'))));
+        });
       }
       drawMap(); drawMenu(); if (sel) { showPanel(sel); setTimeout(() => scrollToNode(sel), 60); } else { const first = C().nextUp(acc, c)[0]; if (first) setTimeout(() => scrollToNode(first), 60); }
       if (page && !sel && !listMode) requestAnimationFrame(() => { fitted = false; drawMap(); const first = C().nextUp(acc, c)[0]; if (first) scrollToNode(first); });

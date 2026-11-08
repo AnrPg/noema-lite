@@ -21,6 +21,8 @@ import {
   type EventType,
   type LearningEvent,
 } from './index.ts';
+import { cardMemoryOf, FSRS6_DEFAULT_PARAMETERS, fromLeitner } from '../fsrs.ts';
+import { DEFAULT_FSRS, replay } from '../projections/model.ts';
 
 const schema = JSON.parse(readFileSync(new URL('../../../../contracts/schemas/noema.events.v1.schema.json', import.meta.url), 'utf8')) as {
   $defs: { event: { properties: { type: { enum: string[] } } } };
@@ -87,26 +89,36 @@ test('answers: tries, right ones, the last one and how sure; an import counts as
   assert.deepEqual(p.res['e2'], { n: 1, ok: 0, last: false, t: T0 + 2000, conf: 'guess' });
 });
 
-test('cards and playbooks: the Leitner boxes from the reviews, due from the review day; imports keep the later review', () => {
+test('cards and drills: FSRS-6 memories replayed on the imports; the import reviewed last counts; new FSRS settings schedule again', () => {
+  const later = { ...fromLeitner(4, '2026-11-20'), last: T0 + 3 }; // another copy, reviewed after the review here
   const evs = [
-    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { box: 2, due: '2026-11-03' } }, T0),
-    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { box: 3, due: '2026-11-02' } }, T0),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { state: { box: 2, due: '2026-11-03' } } }, T0),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { state: { box: 3, due: '2026-11-02' } } }, T0), // reviewed earlier: left out
     ev({ type: 'card.reviewed', subject: S, item: 'ch01-f001', data: { rating: 3 } }, T0 + 1, '2026-11-04'),
     ev({ type: 'card.reviewed', subject: S, item: 'ch01-f002', data: { rating: 4 } }, T0 + 2, '2026-11-04'),
-    ev({ type: 'card.reviewed', subject: S, item: 'ch01-f003', data: { rating: 1 } }, T0 + 3, '2026-11-04'),
+    ev({ type: 'card.reviewed', subject: S, item: 'ch01-f003', data: { rating: 1 } }, T0 + 2, '2026-11-04'),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f003', data: { state: later } }, T0 + 4),
     ev({ type: 'playbook.reviewed', subject: S, item: 'pb1', data: { rating: 4, score: 0.5 } }, T0 + 4, '2026-11-04'),
-    ev({ type: 'playbook.reviewed', subject: S, item: 'pb2', data: { rating: 4, score: 0.8 } }, T0 + 5, '2026-11-04'),
-    ev({ type: 'card.imported', subject: S, item: 'ch01#4', data: { box: 2, due: '2026-11-09' } }, T0),
-    ev({ type: 'card.imported', subject: S, item: 'ch01-f005', data: { box: 2, due: '2026-11-09', from: 'ch01#4' } }, T0 + 6),
+    ev({ type: 'card.imported', subject: S, item: 'ch01#4', data: { state: { box: 2, due: '2026-11-09' } } }, T0),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f005', data: { state: { box: 2, due: '2026-11-09' }, from: 'ch01#4' } }, T0 + 6),
   ];
   const p = Projection.fold(evs).subjectProgress(S);
-  assert.deepEqual(p.fc['ch01-f005'], { box: 2, due: '2026-11-09' }, "a card's positional progress moved to its id");
+  assert.deepEqual(p.fc['ch01-f005'], fromLeitner(2, '2026-11-09'), "a card's positional progress moved to its id");
   assert.equal(p.fc['ch01#4'], undefined, 'and the old key is gone');
-  assert.deepEqual(p.fc['ch01-f001'], { box: 3, due: '2026-11-11' }, 'the import with the later due day (box 2), then good: box 3, 7 days');
-  assert.deepEqual(p.fc['ch01-f002'], { box: 2, due: '2026-11-07' }, 'easy: two boxes');
-  assert.deepEqual(p.fc['ch01-f003'], { box: 1, due: '2026-11-04' }, 'again: box 1, due today');
-  assert.deepEqual(p.pb['pb1'], { box: 1, due: '2026-11-05' }, 'nailed, but under 70 % ticked: one box');
-  assert.deepEqual(p.pb['pb2'], { box: 2, due: '2026-11-07' });
+  assert.deepEqual(
+    p.fc['ch01-f001'],
+    replay(fromLeitner(2, '2026-11-03'), [[T0 + 1, 3]], DEFAULT_FSRS),
+    'the import reviewed last, then good',
+  );
+  assert.deepEqual(p.fc['ch01-f002'], replay(null, [[T0 + 2, 4]], DEFAULT_FSRS), 'a new card, easy');
+  assert.deepEqual(p.fc['ch01-f003'], cardMemoryOf(later), 'a copy reviewed after the review here takes over');
+  assert.deepEqual(p.pb['pb1'], replay(null, [[T0 + 4, 4]], DEFAULT_FSRS), 'a drill: the same scheduler');
+  // the learner's own parameters (fitted): every card scheduled again from its history
+  const fsrs = { parameters: FSRS6_DEFAULT_PARAMETERS.map((w, i) => (i === 0 ? w * 2 : w)), retention: 0.85 };
+  const q = Projection.fold([...evs, ev({ type: 'setting.changed', data: { key: 'fsrs', value: fsrs } }, T0 + 7)]).subjectProgress(S);
+  assert.deepEqual(q.fc['ch01-f002'], replay(null, [[T0 + 2, 4]], fsrs));
+  assert.notDeepEqual(q.fc['ch01-f002'], p.fc['ch01-f002']);
+  assert.deepEqual(q.fc['ch01-f001'], replay(fromLeitner(2, '2026-11-03'), [[T0 + 1, 3]], fsrs));
 });
 
 test('XP and streak: per subject, across subjects, per day; the import merged as the old copies merged', () => {
@@ -211,18 +223,20 @@ test('a snapshot gives the same fold, and folds on', () => {
     ev({ type: 'answers.imported', subject: S, item: 'e1', data: { n: 5, ok: 1, last: false, t: T0 - 9 } }, T0 + 1),
     ev({ type: 'stats.imported', data: { xp: 9, xpDay: {}, streak: 0, bySubject: {} } }, T0 + 2),
     ev({ type: 'setting.changed', data: { key: 'theme', value: 'dark' } }, T0 + 3),
-    ev({ type: 'level.reached', data: { roadmap: 'phys', level: 'sem2' } }, T0 + 4),
+    ev({ type: 'roadmap.level.reached', data: { roadmap: 'phys', level: 'sem2', from: null, how: 'auto' } }, T0 + 4),
+    ev({ type: 'card.reviewed', subject: S, item: 'ch01-f001', data: { rating: 3 } }, T0 + 4),
+    ev({ type: 'setting.changed', data: { key: 'fsrs', value: { retention: 0.8 } } }, T0 + 4),
   ];
   const p = Projection.fold(evs);
   const q = Projection.fromSnapshot(JSON.parse(JSON.stringify(p.snapshot())));
   assert.ok(q);
-  const more = ev({ type: 'answer.given', subject: S, item: 'e1', data: { ok: false } }, T0 + 5);
-  assert.ok(q.apply(more));
-  const whole = Projection.fold([...evs, more]);
+  const more = ev({ type: 'answer.given', subject: S, item: 'e1', data: { ok: false } }, T0 + 5),
+    again = ev({ type: 'card.reviewed', subject: S, item: 'ch01-f001', data: { rating: 2 } }, T0 + 6);
+  assert.ok(q.apply(more) && q.apply(again));
+  const whole = Projection.fold([...evs, more, again]);
   assert.deepEqual(q.subjectProgress(S), whole.subjectProgress(S));
   assert.deepEqual(q.stats, whole.stats);
   assert.deepEqual(q.settings(), whole.settings());
-  assert.deepEqual(q.levels, { phys: { level: 'sem2', at: T0 + 4 } });
   assert.equal(Projection.fromSnapshot({ version: 0 }), null);
 });
 
@@ -270,8 +284,10 @@ test('migration: every field of the old state becomes events whose fold is the o
   assert.equal(g.xp, 240);
   assert.deepEqual(g.read, OLD.read);
   assert.deepEqual(g.res, { ...OLD.res, 'ch02-e001': { n: 1, ok: 1, last: true, t: T0 + 100000 } });
-  assert.deepEqual(g.fc, OLD.fc);
-  assert.deepEqual(g.pb, OLD.pb);
+  const memories = (o: Record<string, unknown>): Record<string, unknown> =>
+    Object.fromEntries(Object.entries(o).map(([k, v]) => [k, cardMemoryOf(v)]));
+  assert.deepEqual(g.fc, memories(OLD.fc), 'the Leitner boxes as the FSRS memories they stand for');
+  assert.deepEqual(g.pb, memories(OLD.pb));
   assert.deepEqual(g.boss, OLD.boss);
   assert.equal(g.last, OLD.last);
   assert.deepEqual(g.att, OLD.att);
@@ -399,7 +415,7 @@ test("the read models' feed: flat records, the kinds they name, only what counts
   const evs = [
     ev({ type: 'answer.given', subject: S, item: 'e1', data: { ok: true, conf: 'sure' } }, T0),
     ev({ type: 'playbook.reviewed', subject: S, item: 'pb1', data: { rating: 4, score: 0.8 } }, T0 + 1),
-    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { box: 2, due: '2026-11-03', from: 'ch01#0' } }, T0 + 2),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { state: { box: 2, due: '2026-11-03' }, from: 'ch01#0' } }, T0 + 2),
     ev({ type: 'stats.imported', data: { xp: 50, xpDay: {}, streak: 3, lastDay: '2026-10-31', bySubject: { demo: 30 } } }, T0 + 3),
     ev({ type: 'subject.reset', subject: S, data: {} }, T0 + 4),
     ev({ type: 'answer.given', subject: S, item: 'e2', data: { ok: false } }, T0 + 10),
@@ -426,4 +442,34 @@ test("the read models' feed: flat records, the kinds they name, only what counts
   assert.equal(f[1]?.['kind'], 'drill');
   assert.deepEqual([f[2]?.['kind'], f[2]?.['state'], f[2]?.['from']], ['card', { box: 2, due: '2026-11-03' }, 'ch01#0']);
   assert.deepEqual([f[3]?.['days'], f[3]?.['through'], f[4]?.['amount']], [3, '2026-10-31', 20], 'the XP no subject held');
+});
+
+test('the feed hands on of the imports only what the ones before did not hold (two devices migrated the same progress)', () => {
+  const stats = (xp: number, demo: number, streak: number, lastDay: string): LearningEvent =>
+    ev({ type: 'stats.imported', data: { xp, xpDay: {}, streak, lastDay, bySubject: { demo } } }, T0);
+  const evs = [
+    stats(50, 30, 3, '2026-10-31'),
+    stats(60, 30, 2, '2026-10-30'), // the other device's copy: 10 XP more, an older streak
+    ev({ type: 'xp.earned', subject: S, data: { amount: 30, reason: 'import' }, origin: 'migration' }, T0),
+    ev({ type: 'xp.earned', subject: S, data: { amount: 25, reason: 'import' }, origin: 'migration' }, T0 + 1), // less: nothing
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { state: { box: 2 } } }, T0 + 1),
+    ev({ type: 'card.reviewed', subject: S, item: 'ch01-f001', data: { rating: 3 } }, T0 + 2),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { state: { box: 1 } } }, T0 + 3), // given already
+    ev({ type: 'roadmap.level.reached', data: { roadmap: 'cur1', level: 'sem2', from: 'sem1', how: 'test' } }, T0 + 4),
+  ];
+  const f = feedEvents(evs);
+  assert.deepEqual(
+    f.map(e => [e.type, e['amount'] ?? e['days'] ?? e['level'] ?? e['kind']]),
+    [
+      ['streak.imported', 3],
+      ['xp.earned', 20],
+      ['xp.earned', 10],
+      ['xp.earned', 30],
+      ['card.imported', 'card'],
+      ['card.reviewed', 'card'],
+      ['roadmap.level.reached', 'sem2'],
+    ],
+  );
+  const xp = f.filter(e => e.type === 'xp.earned').reduce((a, e) => a + Number(e['amount']), 0);
+  assert.equal(xp, 60, 'the read models count the merged total once');
 });

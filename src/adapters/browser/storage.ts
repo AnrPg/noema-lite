@@ -9,6 +9,7 @@ import { NoemaError } from '../../kernel/errors.ts';
 import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../kernel/result.ts';
 import { textOf } from '../../kernel/text.ts';
 import type { Unsubscribe } from '../../ports/common.ts';
+import { EVENT_COLLECTIONS } from '../local/event-store.ts';
 import {
   isQuotaError,
   type DocKey,
@@ -38,7 +39,7 @@ export interface StorageManagerLike {
 }
 
 export interface BrowserStorageOptions {
-  /** The IndexedDB database (default: the app's own, "noema-lite" version 1). */
+  /** The IndexedDB database (default: the app's own, "noema-lite" version 3). */
   readonly dbName?: string;
   readonly dbVersion?: number;
   /** Its object stores (created when missing). */
@@ -49,8 +50,15 @@ export interface BrowserStorageOptions {
   readonly now?: () => number;
 }
 
-/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once). */
-export const APP_DB = Object.freeze({ name: 'noema-lite', version: 1, collections: ['packs', 'handles', 'restore', 'convos'] as const });
+/** The app's IndexedDB as engine/loader.js opens it (same name, version and stores, so both can use it at once; also
+    engine/lang/95_claude.js). Version 2 added `sync` (the outbox, the settings registers and the sync cursors:
+    src/features/sync); version 3 the learning log (log.events, log.ids, log.snapshots, log.meta:
+    src/adapters/local/event-store.ts), so an event and its place in the outbox are written in one transaction. */
+export const APP_DB = Object.freeze({
+  name: 'noema-lite',
+  version: 3,
+  collections: ['packs', 'handles', 'restore', 'convos', 'sync', ...EVENT_COLLECTIONS] as const,
+});
 
 const unavailable = (what: string, cause?: unknown): NoemaError =>
   new NoemaError('storage.unavailable', `this browser gives no ${what} here`, cause === undefined ? {} : { cause });

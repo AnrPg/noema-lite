@@ -8,18 +8,19 @@
  *  • record(draft) — stamps an event (id, HLC, the learner's day, device, account), folds it at once (the screens read
  *    the change synchronously) and appends it to the store in the background, in order. A write that fails (a full
  *    storage) stays pending and is tried again with the next one and by flush().
- *  • append(events) — events from outside (another device, a backup): checked, appended (duplicates ignored), folded.
+ *  • append(events) — events from outside (a backup, an import): checked, appended (duplicates ignored), folded.
+ *  • receive(account, events) — what another device made (the sync): kept once each, never queued to be sent again.
+ *  • importLegacy(account, key, text) — an old progress value from elsewhere (the cloud's key/value row of a subject's
+ *    state or of a:stats): converted to events like this device's own old values, never through the KV.
+ *  • recordIn(account, drafts) — events of another feature (the Roadmaps) for an account, open here or not, once each.
  *  • settingsWritten(value) — the old screens still write the account's settings as one value (KV a:settings): each key
  *    that changed becomes a setting.changed. settings() is the fold; onSettings tells whoever keeps that old copy.
  *  • restore(events, upTo) — a backup or restore point brought back as an event (log.restored), never by deleting.
  *  • events() / exportLog() — the whole log (the xAPI export, backups, the card scheduler's optimiser).
  *  • compact() — forgets superseded "latest" events; ids stay known.
- * The application talks only to ports: EventStore, Clock, the key-value store of the old values, ErrorReporter,
- * Notifier and I18n (the warnings), Storage's estimate/persist.
+ * The application talks only to ports: EventStore, Clock, the device's hybrid clock (LogStamps: the sync's DeviceClock), the
+ * key-value store of the old values, ErrorReporter, Notifier and I18n (the warnings), Storage's estimate/persist.
  */
-import { addDays } from '../../../kernel/day.ts';
-import { decodeHlc, encodeHlc, HybridClock } from '../../../kernel/hlc.ts';
-import { deviceId as parseDeviceId } from '../../../kernel/ids.ts';
 import { NoemaError } from '../../../kernel/errors.ts';
 import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../../kernel/result.ts';
 import type { Clock } from '../../../ports/clock.ts';
@@ -49,13 +50,20 @@ import {
   type XapiInput,
 } from '../domain/events/index.ts';
 
+/** This device and its hybrid logical clock (src/features/sync/application/device.ts DeviceClock): the stamps of the events
+    it makes, and the stamps it sees (so every later one of its own is later still). */
+export interface LogStamps {
+  readonly id: string;
+  now(): Result<string>;
+  receive(stamp: string): Result<void>;
+}
+
 export interface LearningLogDeps {
   readonly store: EventStore;
   readonly clock: Clock;
   /** The key-value store the old progress is in (localStorage: noema1:<account>:…). */
   readonly kv: KeyValueStore;
-  /** This device's id (the HLC's node). */
-  readonly device: () => string;
+  readonly stamps: LogStamps;
   /** A new unique event id (a UUID). */
   readonly newId: () => string;
   readonly errors: ErrorReporter;
@@ -91,14 +99,12 @@ export const COMPACT_AT = 100;
 /** The share of the quota from which the learner is warned that space is running out. */
 export const LOW_SPACE = 0.9;
 
-const META = { migrated: 'migrated.v1', archive: 'legacy.archive', persist: 'persist.asked', hlc: 'hlc.last' } as const;
+const META = { migrated: 'migrated.v1', archive: 'legacy.archive', persist: 'persist.asked' } as const;
 
 export class LearningLog {
   readonly #d: LearningLogDeps;
   #account: string | null = null;
   #projection = new Projection();
-  #hlc: HybridClock | null = null;
-  #device = '';
   #queue: LearningEvent[] = [];
   #writing: Promise<void> = Promise.resolve();
   #sinceSnapshot = 0;
@@ -126,18 +132,6 @@ export class LearningLog {
     this.#unwatch?.();
     this.#account = account;
     this.#queue = [];
-    const dev = parseDeviceId(this.#d.device());
-    this.#device = dev.ok ? dev.value : 'device';
-    const node = parseDeviceId(this.#device);
-    if (!node.ok) return node;
-    const last = await this.#d.store.getMeta<string>(account, META.hlc);
-    const lastStamp = last.ok && last.value ? decodeHlc(last.value) : null;
-    this.#hlc = new HybridClock(
-      node.value,
-      () => this.#d.clock.now(),
-      lastStamp?.ok && lastStamp.value.node === node.value ? { last: lastStamp.value } : {},
-    );
-
     let fromSnapshot = false;
     const snap = await this.#d.store.getSnapshot(account);
     const fromSnap = snap.ok && snap.value ? Projection.fromSnapshot(snap.value.value) : null;
@@ -199,12 +193,9 @@ export class LearningLog {
   }
 
   #seeStamp(at: string): void {
-    if (!at || !this.#hlc) return;
-    const s = decodeHlc(at);
-    if (s.ok) {
-      const r = this.#hlc.receive(s.value);
-      if (!r.ok) this.#d.errors.report(r.error, { where: 'learning.hlc', severity: 'info' });
-    }
+    if (!at) return;
+    const r = this.#d.stamps.receive(at);
+    if (!r.ok) this.#d.errors.report(r.error, { where: 'learning.hlc', severity: 'info' }); // a clock far ahead: this one does not follow
   }
 
   /* ---------------- reading ---------------- */
@@ -218,21 +209,8 @@ export class LearningLog {
   stats(): AccountStats {
     return this.#projection.stats;
   }
-  /** Days in a row with study up to today (0 when the last one was before yesterday). */
-  streakNow(): number {
-    const s = this.#projection.stats;
-    if (!s.lastDay) return 0;
-    const today = this.#d.clock.today();
-    return s.lastDay >= addDays(today, -1) ? s.streak : 0;
-  }
-  todayXP(): number {
-    return this.#projection.stats.xpDay[this.#d.clock.today()] ?? 0;
-  }
   settings(subject?: string): Readonly<Record<string, unknown>> {
     return this.#projection.settings(subject ?? '');
-  }
-  levels(): Readonly<Record<string, { level: string; at: number }>> {
-    return this.#projection.levels;
   }
 
   /** The whole log of the account, in order (recorded events included once stored). */
@@ -259,16 +237,15 @@ export class LearningLog {
   /* ---------------- writing ---------------- */
   /** An event the learner caused: stamped, folded at once, stored in the background (in order). */
   record<T extends EventType>(draft: EventDraft<T>): Result<LearningEvent<T>> {
-    const acc = this.#account,
-      hlc = this.#hlc;
-    if (!acc || !hlc) return err(closed());
-    const at = hlc.now();
+    const acc = this.#account;
+    if (!acc) return err(closed());
+    const at = this.#d.stamps.now();
     if (!at.ok) return at;
     const e = makeEvent(draft, {
       id: this.#d.newId(),
-      hlc: encodeHlc(at.value),
+      hlc: at.value,
       day: this.#d.clock.today(),
-      device: this.#device,
+      device: this.#d.stamps.id,
       account: acc,
     });
     if (!e.ok) return e;
@@ -307,7 +284,56 @@ export class LearningLog {
     return ok(out);
   }
 
-  /** Events from outside (another device, a backup, an import): checked, the new ones stored and folded. */
+  /**
+   * Events another feature makes for an account (the Roadmaps' levels and restructurings), each with its own id: those the
+   * log has never seen are recorded — folded at once when the account is open here, else straight into its log → how many.
+   */
+  async recordIn(account: string, drafts: readonly EventDraft[]): AsyncResult<number> {
+    if (account === this.#account) {
+      const r = await this.recordOnce(drafts);
+      if (!r.ok) return r;
+      const f = await this.flush();
+      return f.ok ? ok(r.value.length) : f;
+    }
+    const list: LearningEvent[] = [];
+    for (const d of drafts) {
+      if (d.id === undefined) return err(new NoemaError('events.invalid', `recordIn: a ${d.type} without its own id`));
+      const e = makeEvent(d, { ...this.#legacyStamp(account), id: d.id });
+      if (!e.ok) return e;
+      list.push(e.value);
+    }
+    const r = await this.#d.store.append(account, list as StoredEvent[]);
+    return r.ok ? ok(r.value.length) : r;
+  }
+
+  /**
+   * What other devices of the account made (the sync's pull): each event the log lacks is kept — never queued to be sent
+   * again — and folded when the account is open here. An event that is not one (another version's, damaged) is left out
+   * and reported; the others are kept → how many were new.
+   */
+  async receive(account: string, events: readonly Readonly<Record<string, unknown>>[]): AsyncResult<number> {
+    const list: LearningEvent[] = [];
+    let bad = 0;
+    for (const x of events) {
+      const e = parseEvent({ ...x, account });
+      if (e.ok) list.push(e.value);
+      else bad++;
+    }
+    if (bad)
+      this.#d.errors.report(new NoemaError('events.invalid', `${bad} events from another device are not valid events (left out)`), {
+        where: 'learning.receive',
+        severity: 'warning',
+      });
+    if (!list.length) return ok(0);
+    if (account === this.#account) await this.flush();
+    const r = await this.#d.store.append(account, list as StoredEvent[], { received: true });
+    if (!r.ok) return r;
+    const added = r.value as LearningEvent[];
+    if (added.length && account === this.#account) this.#ingest(added, 'append');
+    return ok(added.length);
+  }
+
+  /** Events from outside (a backup, an import): checked, the new ones stored and folded. */
   async append(events: readonly unknown[]): AsyncResult<LearningEvent[]> {
     const acc = this.#account;
     if (!acc) return err(closed());
@@ -353,8 +379,6 @@ export class LearningLog {
       // one was there already (the same inbox row recorded by another tab at the same time): it was folded twice here
       if (r.value.length < batch.length) this.#refold();
       this.#sinceSnapshot += batch.length;
-      const lastAt = batch[batch.length - 1]?.hlc;
-      if (lastAt) void this.#d.store.putMeta(acc, META.hlc, lastAt);
       await this.#snapshotMaybe();
     });
   }
@@ -435,7 +459,7 @@ export class LearningLog {
   /** The old screens wrote the whole settings value: a setting.changed for each key that changed (or went). */
   settingsWritten(value: unknown): number {
     const acc = this.#account;
-    if (!acc || !this.#hlc) return 0;
+    if (!acc) return 0;
     const r = settingsEvents(value, this.#projection.settings(), k => this.#projection.settingStamp(k), this.#legacyStamp(acc), 'app');
     let n = 0;
     for (const e of r.events) {
@@ -490,7 +514,7 @@ export class LearningLog {
   backupStamp(events: readonly { hlc?: unknown }[], madeAt: number): string {
     let max = '';
     for (const e of events) if (typeof e.hlc === 'string' && e.hlc > max) max = e.hlc;
-    return max || `${String(Math.max(0, Math.floor(madeAt))).padStart(15, '0')}-00000-${this.#device || 'device'}`;
+    return max || `${String(Math.max(0, Math.floor(madeAt))).padStart(15, '0')}-00000-${this.#d.stamps.id}`;
   }
 
   /**
@@ -574,9 +598,10 @@ export class LearningLog {
 
   /* ---------------- the migration of the old values ---------------- */
   #legacyStamp(account: string): LegacyStamp {
-    const at = this.#hlc?.now();
-    const stamp = at?.ok ? encodeHlc(at.value) : `${String(Math.floor(this.#d.clock.now())).padStart(15, '0')}-00000-${this.#device}`;
-    return { hlc: stamp, day: this.#d.clock.today(), device: this.#device, account };
+    const at = this.#d.stamps.now(),
+      device = this.#d.stamps.id;
+    const stamp = at.ok ? at.value : `${String(Math.floor(this.#d.clock.now())).padStart(15, '0')}-00000-${device}`;
+    return { hlc: stamp, day: this.#d.clock.today(), device, account };
   }
 
   /** Converts what this device still keeps in the old places; run at every open and whenever old values arrive (no-op once done). */
@@ -633,40 +658,63 @@ export class LearningLog {
       const r = settingsEvents(parseJson(settingsText.value), {}, () => '', stamp, 'migration');
       events.push(...r.events);
     }
-    // the old values are kept in the log's archive first: nothing leaves the KV before it is safe elsewhere
-    const arch = await this.#d.store.getMeta<Record<string, string[]>>(account, META.archive);
-    const archive: Record<string, string[]> = arch.ok && arch.value ? arch.value : {};
-    const keep = (k: string, text: string): void => {
-      const list = (archive[k] ??= []);
-      if (!list.includes(text)) list.push(text);
-    };
-    for (const b of blobs) keep(b.key.slice(K.prefix.length), b.text);
-    if (st !== null) keep('a:stats', st);
-    if (settingsText?.ok && settingsText.value) keep('a:settings', settingsText.value);
-    const saved = await this.#d.store.putMeta(account, META.archive, archive);
-    if (!saved.ok) {
-      this.#d.errors.report(saved.error, { where: 'learning.migrate.archive', severity: 'error' });
-      return { added: 0, unknown };
-    }
-    const r = await this.#d.store.append(account, events as StoredEvent[]);
+    const old: Array<readonly [string, string]> = blobs.map(b => [b.key.slice(K.prefix.length), b.text] as const);
+    if (st !== null) old.push(['a:stats', st]);
+    if (settingsText?.ok && settingsText.value) old.push(['a:settings', settingsText.value]);
+    const r = await this.#keepOld(account, old, events, unknown);
     if (!r.ok) {
       this.#d.errors.report(r.error, { where: 'learning.migrate', severity: 'error' });
       return { added: 0, unknown };
     }
-    this.#ingest(r.value as LearningEvent[], 'append');
     // in the log now: the old copies leave the KV (silently: a removal here is not a change to send anywhere)
     for (const b of blobs) kv.delete(b.key);
     if (st !== null) kv.delete(K.stats);
     if (firstTime) await this.#d.store.putMeta(account, META.migrated, { at: this.#d.clock.now() });
+    return { added: r.value, unknown };
+  }
+
+  /**
+   * An old progress value from elsewhere — the cloud's key/value row of a subject's state (s:<subject>:state) or of the
+   * account's stats (a:stats) from before the log — converted as this device's own old values are (the same content
+   * gives the same ids, so a value seen twice, or by two devices, adds nothing), whether the account is open here or
+   * not. The device's own copy in the KV is left alone (its own migration takes it) → how many events it added.
+   */
+  async importLegacy(account: string, key: string, text: string): AsyncResult<number> {
+    const subject = legacyKeys(account).state.exec(key)?.[1];
+    if (key !== 'a:stats' && (!subject || subject.startsWith('lang:')))
+      return err(new NoemaError('events.invalid', 'not an old progress value of the learning log: ' + key.slice(0, 80)));
+    const stamp = this.#legacyStamp(account),
+      value = parseJson(text);
+    const r = subject ? subjectEvents(subject, value, stamp) : statsEvents(value, {}, stamp);
+    const unknown = r.unknown.map(f => `${key}.${f}`);
+    return this.#keepOld(account, [[key, text]], r.events, unknown);
+  }
+
+  /** The old texts into the log's archive first (nothing is dropped before it is safe), then their events → how many were new. */
+  async #keepOld(
+    account: string,
+    old: ReadonlyArray<readonly [string, string]>,
+    events: readonly LearningEvent[],
+    unknown: readonly string[],
+  ): AsyncResult<number> {
+    const arch = await this.#d.store.getMeta<Record<string, string[]>>(account, META.archive);
+    if (!arch.ok) return arch;
+    const archive: Record<string, string[]> = arch.value ?? {};
+    for (const [k, text] of old) {
+      const list = (archive[k] ??= []);
+      if (!list.includes(text)) list.push(text);
+    }
+    const saved = await this.#d.store.putMeta(account, META.archive, archive);
+    if (!saved.ok) return saved;
+    const r = await this.#d.store.append(account, events as StoredEvent[]);
+    if (!r.ok) return r;
+    if (account === this.#account && r.value.length) this.#ingest(r.value as LearningEvent[], 'append');
     if (unknown.length)
       this.#d.errors.report(
         new NoemaError('storage.corrupt', 'old progress fields without an event (kept in the archive): ' + unknown.slice(0, 10).join(', ')),
-        {
-          where: 'learning.migrate.unknown',
-          severity: 'info',
-        },
+        { where: 'learning.migrate.unknown', severity: 'info' },
       );
-    return { added: r.value.length, unknown };
+    return ok(r.value.length);
   }
 
   /** The old values the migration took in (KV suffix → every distinct text seen), for support and for the learner's backup. */

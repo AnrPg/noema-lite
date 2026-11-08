@@ -10,10 +10,19 @@ import { memoryEventStore } from '../adapters/memory/event-store.ts';
 import { recordingNotifier } from '../adapters/memory/notifier.ts';
 import { memoryStorage } from '../adapters/memory/storage.ts';
 import { LearningLog, SNAPSHOT_EVERY, type LearningLogDeps } from '../features/study/application/learning-log.ts';
+import { deviceClock } from '../features/sync/application/device.ts';
+import { DEFAULT_FSRS, replay } from '../features/study/domain/projections/model.ts';
 import { ok } from '../kernel/result.ts';
 import type { EventStore } from '../ports/event-store.ts';
 import { buildBridge } from './bridge.ts';
-import { DEVICE_KEY, deviceIdFrom, learningEventFeed, uuid } from './learning.ts';
+import { learningEventFeed, learningSeams, uuid } from './learning.ts';
+import { memoryCloud, type MemoryCloud } from '../adapters/memory/remote.ts';
+import { eventsChannel } from '../features/sync/application/events-channel.ts';
+import { createOutbox, SYNC_COLLECTION } from '../features/sync/application/outbox.ts';
+import { foldLevels, levelReached, levelTested } from '../features/roadmaps/domain/events.ts';
+import { ROADMAP_EVENTS } from './roadmaps.ts';
+import { STUDY, STUDY_REGISTRATIONS } from './study.ts';
+import { LEGACY_PROGRESS, SYNC_EVENT_LOG } from './sync.ts';
 import { createToolsContainer } from './tools.ts';
 import { LEARNING } from './tokens.ts';
 
@@ -38,7 +47,11 @@ function rig(o: { store?: EventStore; kv?: Rig['kv']; usage?: number; device?: s
     store,
     clock,
     kv,
-    device: () => o.device ?? 'dev1',
+    stamps: deviceClock(
+      kv,
+      () => clock.now(),
+      () => o.device ?? 'dev1',
+    ),
     newId: () => `evt-${String(++n).padStart(8, '0')}-${o.device ?? 'dev1'}`,
     errors: createErrorReporter({ now: () => clock.now() }),
     notifier,
@@ -63,8 +76,8 @@ test('record: folded at once, stored in order, and the same after a reopen (from
   assert.ok(a.log.record({ type: 'section.read', subject: 'demo', item: 'ch01-s01', data: {} }).ok);
   assert.deepEqual(a.log.progress('demo').res['ch01-e001'], { n: 1, ok: 1, last: true, t: T0 }, 'readable at once');
   assert.equal(a.log.stats().xp, 10);
-  assert.equal(a.log.todayXP(), 10);
-  assert.equal(a.log.streakNow(), 1);
+  assert.equal(a.log.stats().xpDay['2026-11-08'], 10);
+  assert.equal(a.log.stats().streak, 1);
   value(await a.log.flush());
   assert.equal(value(await a.store.read('anr')).length, 3);
 
@@ -109,10 +122,13 @@ test('the migration: the old KV state, a:stats and a:settings become events once
   assert.equal(p.xp, 30);
   assert.deepEqual(p.read, blob.read);
   assert.deepEqual(p.res, blob.res);
-  assert.deepEqual(p.fc, blob.fc);
+  assert.deepEqual(
+    Object.fromEntries(Object.entries(p.fc).map(([k, m]) => [k, [m.phase, m.s]])),
+    Object.fromEntries(Object.keys(blob.fc).map(k => [k, ['review', 7]])),
+    'a Leitner box 3 is an FSRS memory of its interval (7 days)',
+  );
   assert.deepEqual(r.log.settings('demo'), { srcOn: ['a'] });
   assert.deepEqual(r.log.stats(), { xp: 30, xpDay: { '2026-11-07': 30 }, streak: 1, lastDay: '2026-11-07', bySubject: { demo: 30 } });
-  assert.equal(r.log.streakNow(), 1, 'yesterday counts');
   assert.deepEqual(r.log.settings(), { theme: 'dark' }, 'never the device key');
   assert.equal(value(r.kv.get('noema1:anr:s:demo:state')), null, 'the old copy left the KV');
   assert.equal(value(r.kv.get('noema1:anr:a:stats')), null);
@@ -178,7 +194,18 @@ test('another device: its events (older stamps) fold in, the whole log refolds, 
   assert.equal(value(await a.log.append([old])).length, 0, 'twice: once');
   value(await a.log.flush());
   assert.equal(a.log.progress('demo'), held, 'the same object');
-  assert.deepEqual(held.fc['c1'], { box: 3, due: '2026-11-15' }, 'easy yesterday (box 2), good today (box 3, 7 days)');
+  assert.deepEqual(
+    held.fc['c1'],
+    replay(
+      null,
+      [
+        [T0 - 86400000, 4],
+        [T0, 3],
+      ],
+      DEFAULT_FSRS,
+    ),
+    'easy yesterday, good today: both reviews in time order',
+  );
   const bad = await a.log.append([{ ...old, id: 'evt-remote-0002', account: 'maria' }]);
   assert.ok(!bad.ok && bad.error.code === 'events.invalid');
 });
@@ -293,13 +320,15 @@ test('compaction forgets superseded saved states and opened sections; the fold s
   assert.equal(b.log.progress('demo').last, 's1');
 });
 
-test('the device id is a device preference, made once', () => {
-  const s = memoryStorage();
-  const id = deviceIdFrom(s.kv, uuid);
-  assert.match(id, /^d[0-9a-f]{16}$/);
-  assert.equal(deviceIdFrom(s.kv, uuid), id);
-  assert.equal(value(s.kv.get(DEVICE_KEY)), id);
+test('event ids are UUIDs; the stamps are the device clock of the sync (its id, later than every stamp seen)', async () => {
   assert.match(uuid(), /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
+  const a = rig({ device: 'devA' });
+  value(await a.log.open('anr'));
+  const e = value(a.log.record({ type: 'day.active', data: {} }));
+  assert.equal(e.device, 'devA');
+  assert.match(e.hlc, /-devA$/);
+  value(a.deps.stamps.receive(`${String(T0 + 60000).padStart(15, '0')}-00003-devZ`)); // a stamp from another device, ahead
+  assert.ok(value(a.log.record({ type: 'day.active', data: {} })).hlc > `${String(T0 + 60000).padStart(15, '0')}-00003`);
 });
 
 test('NoemaCore.learning: plain values for the old code', async () => {
@@ -344,4 +373,184 @@ test("the read models' feed: all() and the new events, and a restore asks them t
   const backup = value(await log.exportLog());
   value(await log.restore(backup.events, { mode: 'replace', madeAt: Date.now() }));
   assert.ok(rebuilds >= 1, 'a restore: build again');
+});
+
+/* ---------- the seams: the sync (outbox, events channel, old rows), the Roadmaps, the read models ---------- */
+
+/** A device of a cloud account: the log over a document store that also holds the sync's outbox, and the events channel. */
+async function cloudDevice(cloud: MemoryCloud, name: string, clock: ReturnType<typeof manualClock>) {
+  const storage = memoryStorage({ collections: [...EVENT_COLLECTIONS, SYNC_COLLECTION] });
+  const { remote, auth } = cloud.device();
+  value(await auth.signIn('ada@example.org', 'pw-123456'));
+  const outbox = createOutbox(storage.docs);
+  const told: string[] = [];
+  outbox.onEnqueue(a => told.push(a));
+  const store = documentEventStore({
+    docs: storage.docs,
+    onFull: l => storage.onFull(l),
+    outbox: {
+      collections: [SYNC_COLLECTION],
+      enqueueIn: (tx, a, e) => outbox.enqueueIn(tx, a, e),
+      notify: a => {
+        outbox.notify(a);
+      },
+    },
+  });
+  const stamps = deviceClock(
+    storage.kv,
+    () => clock.now(),
+    () => 'dev' + name,
+  );
+  const errors = createErrorReporter({ now: () => clock.now(), console: { debug() {}, info() {}, warn() {}, error() {} } });
+  let n = 0;
+  const log = new LearningLog({ store, clock, kv: storage.kv, stamps, newId: () => `evt-${name}-${String(++n).padStart(6, '0')}`, errors });
+  const channel = eventsChannel({
+    remote,
+    docs: storage.docs,
+    outbox,
+    log: { receive: (a, e) => log.receive(a, e) },
+    device: stamps,
+    errors,
+  });
+  return { log, outbox, channel, told, storage };
+}
+
+test('two devices of a cloud account: an event goes into the outbox in its own append, up once, into the other log once', async () => {
+  const clock = manualClock(T0, 'Europe/Athens');
+  const cloud = memoryCloud({ now: () => clock.now() });
+  cloud.addUser('ada@example.org', 'pw-123456', 'Ada');
+  const ACC = 'u_user1';
+  const A = await cloudDevice(cloud, 'A', clock),
+    B = await cloudDevice(cloud, 'B', clock);
+  value(await A.log.open(ACC));
+  value(await B.log.open(ACC));
+  A.log.record({ type: 'answer.given', subject: 'demo', item: 'e1', data: { ok: true } });
+  A.log.record({ type: 'card.reviewed', subject: 'demo', item: 'c1', data: { rating: 3 } });
+  value(await A.log.flush());
+  assert.equal(value(await A.outbox.count(ACC)), 2, 'both queued with the append');
+  assert.ok(A.told.includes(ACC), 'the loop was told');
+  const [, queued] = value(await A.outbox.peek(ACC, 1))[0] ?? [];
+  assert.deepEqual(
+    Object.keys(queued ?? {}).sort(),
+    ['data', 'day', 'device', 'hlc', 'id', 'item', 'subject', 'type', 'v'],
+    'the whole event, not its account',
+  );
+  assert.equal(value(await A.channel.push(ACC, { keepalive: false })), 2);
+  assert.equal(value(await A.outbox.count(ACC)), 0);
+  value(await B.channel.pull(ACC, { reason: 'manual' }));
+  assert.deepEqual(B.log.progress('demo').res['e1'], A.log.progress('demo').res['e1'], "A's answer folded on B");
+  assert.deepEqual(B.log.progress('demo').fc['c1'], A.log.progress('demo').fc['c1'], "and A's review, the same FSRS memory");
+  assert.equal(value(await B.outbox.count(ACC)), 0, 'what B received is never sent back');
+  // B studies too; A takes it in; a second pull adds nothing
+  clock.advance(60_000);
+  B.log.record({ type: 'answer.given', subject: 'demo', item: 'e1', data: { ok: false } });
+  value(await B.log.flush());
+  assert.equal(value(await B.channel.push(ACC, { keepalive: false })), 1);
+  value(await A.channel.pull(ACC, { reason: 'manual' }));
+  value(await A.channel.pull(ACC, { reason: 'manual' }));
+  assert.equal(A.log.progress('demo').res['e1']?.n, 2);
+  assert.deepEqual(A.log.progress('demo').res, B.log.progress('demo').res);
+  assert.equal(value(await A.log.events()).length, 3);
+  // a profile that is not a cloud account: nothing is queued
+  value(await A.log.open('anr'));
+  A.log.record({ type: 'day.active', data: {} });
+  value(await A.log.flush());
+  assert.equal(value(await A.outbox.count('anr')), 0);
+});
+
+test('receive: what another device made is kept once and folded; invalid ones are left out; an account not open here too', async () => {
+  const a = rig({ device: 'devA' }),
+    b = rig({ device: 'devB' });
+  value(await a.log.open('anr'));
+  value(await b.log.open('anr'));
+  a.log.record({ type: 'section.read', subject: 'demo', item: 's1', data: {} });
+  a.log.record({ type: 'xp.earned', subject: 'demo', data: { amount: 5 } });
+  const sent = value(await a.log.events()).map(e => {
+    const x: Record<string, unknown> = { ...e };
+    Reflect.deleteProperty(x, 'account');
+    return x;
+  });
+  assert.equal(value(await b.log.receive('anr', [...sent, { id: 'bad-0001', type: 'nope', hlc: 'x', device: 'z' }])), 2);
+  assert.equal(value(await b.log.receive('anr', sent)), 0, 'the same events again: nothing new');
+  assert.deepEqual(b.log.progress('demo').read, { s1: true });
+  assert.equal(b.log.stats().xp, 5);
+  assert.equal(value(await b.log.receive('other', sent)), 2, 'another account of this device: straight into its log');
+  assert.equal(value(await b.log.eventsOf('other')).length, 2);
+});
+
+test("the cloud's old progress rows: converted once like this device's own (open here or not), the KV left alone", async () => {
+  const r = rig();
+  value(await r.log.open('anr'));
+  const blob = JSON.stringify({ xp: 12, read: { s1: true }, res: { e1: { n: 2, ok: 1, last: true, t: T0 - 10 } } });
+  const stats = JSON.stringify({ xp: 12, xpDay: { '2026-11-07': 12 }, streak: 1, lastDay: '2026-11-07', bySubject: { demo: 12 } });
+  assert.ok(value(await r.log.importLegacy('anr', 's:demo:state', blob)) > 0);
+  assert.ok(value(await r.log.importLegacy('anr', 'a:stats', stats)) > 0);
+  assert.equal(
+    value(await r.log.importLegacy('anr', 's:demo:state', blob)),
+    0,
+    'the same row again (another device, a second pull): nothing',
+  );
+  assert.deepEqual(r.log.progress('demo').res['e1'], { n: 2, ok: 1, last: true, t: T0 - 10 });
+  assert.equal(r.log.stats().xp, 12);
+  assert.deepEqual(value(await r.log.archive())['s:demo:state'], [blob], 'its text kept in the archive');
+  assert.equal(value(r.kv.get('noema1:anr:s:demo:state')), null, 'never written to the KV');
+  assert.ok(value(await r.log.importLegacy('closed', 's:demo:state', blob)) > 0);
+  const b = rig({ store: r.store });
+  value(await b.log.open('closed'));
+  assert.deepEqual(b.log.progress('demo').read, { s1: true });
+  for (const key of ['a:settings', 's:lang:es:state', 'x:other'])
+    assert.equal((await r.log.importLegacy('anr', key, '{}')).ok, false, key + ' is not progress of the log');
+});
+
+test('the seams in the root: Roadmap events in the log (once by id, read back), the sync log, the read models follow the feed', async () => {
+  const clock = manualClock(T0, 'Europe/Athens');
+  const c = createToolsContainer({ clock }, [...STUDY_REGISTRATIONS, learningSeams]);
+  const log = c.get(LEARNING);
+  value(await log.open('anr'));
+  const rm = c.get(ROADMAP_EVENTS);
+  const reached = levelReached('cur1', 'sem1', null, 'auto', T0);
+  assert.equal(value(await rm.append('anr', [reached, levelTested('cur1', 'sem2', 0.9, true, T0, 'att 1')])), 2);
+  assert.equal(value(await rm.append('anr', [levelReached('cur1', 'sem1', null, 'auto', T0 + 5)])), 0, 'reached once per level');
+  assert.equal(value(await rm.append('other', [reached])), 1, 'an account not open here');
+  const got = value(await rm.list('anr', 'cur1'));
+  assert.deepEqual(
+    got.map(e => [e.type, e.id === reached.id || e.type !== 'roadmap.level.reached', e.at === T0]),
+    [
+      ['roadmap.level.reached', true, true],
+      ['roadmap.level.tested', true, true],
+    ],
+  );
+  assert.deepEqual(foldLevels(got, 'cur1').reached, new Set(['sem1']));
+  assert.equal(value(await rm.list('anr', 'cur2')).length, 0);
+  // the read models: built from the feed, then following it (the Roadmap level under one name for both)
+  const study = c.get(STUDY);
+  value(await study.start());
+  assert.equal(study.current().levels['cur1']?.level, 'sem1');
+  log.record({ type: 'answer.given', subject: 'demo', item: 'e1', data: { ok: true } });
+  assert.equal(study.current().subjects['demo']?.answers['e1']?.n, 1, 'an answer reaches the read models at once');
+  // the sync's log goes into the same log
+  const sync = c.get(SYNC_EVENT_LOG);
+  const other = {
+    id: 'evt-remote-001',
+    type: 'section.read',
+    hlc: `${String(T0 + 1).padStart(15, '0')}-00000-devR`,
+    device: 'devR',
+    v: 1,
+    day: '2026-11-08',
+    subject: 'demo',
+    item: 's9',
+    data: {},
+  };
+  assert.equal(value(await sync.receive('anr', [other])), 1);
+  assert.ok(log.progress('demo').read['s9']);
+  // a restore: the read models build again from the log
+  value(await log.flush());
+  const backup = value(await log.exportLog());
+  log.record({ type: 'answer.given', subject: 'demo', item: 'e2', data: { ok: true } });
+  value(await log.restore(backup.events, { mode: 'replace', madeAt: T0 }));
+  for (let i = 0; i < 20; i++) await new Promise(r => setImmediate(r));
+  assert.equal(study.current().subjects['demo']?.answers['e2'], undefined, 'built again: the undone answer is gone');
+  // the old rows: through LEGACY_PROGRESS
+  value(await c.get(LEGACY_PROGRESS).accept('anr', 's:demo:state', JSON.stringify({ read: { s7: true } })));
+  assert.ok(log.progress('demo').read['s7']);
 });

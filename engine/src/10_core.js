@@ -56,7 +56,6 @@ const F = s => h('span', { html: fmt(s) });
 /* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
 const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
 const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -172,12 +171,12 @@ let settingsSeen = {};
 const seeSettings = () => { settingsSeen = {}; for (const k of Object.keys(S.settings)) settingsSeen[k] = JSON.stringify(S.settings[k]); };
 seeSettings();
 /* flashcards have ids now (chNN-fNNN); their progress used to be keyed by position (chNN#k), which shifted when a card
-   was inserted. Positional progress moves to the card's id (card.imported from the old key: idempotent, a moved key is gone;
-   if both exist the id's later review wins). */
+   was inserted. Positional progress moves to the card's id (card.imported of its FSRS memory from the old key: a moved key
+   is gone; if both exist the one reviewed last wins). */
 COURSE.forEach(c => c.flashcards.forEach((f, k) => {
   const old = c.id + '#' + k, r = S.fc[old];
   if (!f.id || !r) return;
-  learnt('card.imported', f.id, { box: r.box || 0, ...(r.due ? { due: r.due } : {}), from: old });
+  learnt('card.imported', f.id, { state: { ...r }, from: old });
 }));
 let saveT;
 function flushSave() {
@@ -219,7 +218,7 @@ function addXP(n, el) {
 function record(ex, ok, firstTry = true, conf = null) {
   learnt('answer.given', ex.id, { ok: !!ok, firstTry: !!firstTry, ...(conf ? { conf } : {}) });
 }
-const solved = id => S.res[id]?.ok > 0;
+const solved = id => NoemaCore.study.practice.solved(S.res, id);
 
 /* ---------- sound ---------- */
 let AC;
@@ -276,12 +275,8 @@ function applyTheme() {
   if (t === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
 }
 
-/* ---------- progress ---------- */
-function chProgress(c) {
-  const sr = c.sections.filter(s => S.read[s.id]).length / c.sections.length;
-  const ex = c.exercises.filter(e => solved(e.id)).length / c.exercises.length;
-  return { sr, ex };
-}
+/* ---------- progress: the study domain's (src/features/study/domain/queries.ts) ---------- */
+const chProgress = c => NoemaCore.study.progress.chapter(c, S.read, S.res);
 
 /* ---------- section plain text (for AI context) ---------- */
 /* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)

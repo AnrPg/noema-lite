@@ -1,6 +1,11 @@
 /**
  * The log's own fold: what the events add up to, in the shape the screens of phases 1–2 read (a subject's progress as the
- * old state blob had it, the XP and streak across subjects, the settings, the current level per Roadmap). Pure: no I/O.
+ * old state blob had it, the XP and streak across subjects, the settings). Pure: no I/O.
+ *
+ * The cards and drills are scheduled by FSRS-6 (../fsrs.ts) as the read models do (../projections/model.ts): each keeps
+ * the schedule it was imported with (its seed) and its reviews since; its memory is the reviews replayed on the seed with
+ * the learner's FSRS settings (the account setting fsrs, else FSRS-6's), and a change of those settings schedules every
+ * card again.
  *
  * Folding is in log order (compareEvents). A new event that is the latest of the log is applied in place (apply → true);
  * one stamped before the latest already applied (another device's, arriving later), or a restore, changes what came
@@ -8,9 +13,12 @@
  * objects while events are applied in place, so a screen holding one sees every change.
  *
  * How the old copies merged is kept for the imported ones: several imports of an exercise's answers keep the most tries,
- * of a card's schedule the later due day (then the higher box), of the account's stats the larger counts per day.
+ * of a card's schedule the one reviewed last (fsrs.laterReview: it seeds the card, the reviews after it replay on it), of
+ * the account's stats the larger counts per day.
  */
 import { addDays, parseDay } from '../../../../kernel/day.ts';
+import { cardMemoryOf, laterReview, scheduler, type CardMemory, type Rating } from '../fsrs.ts';
+import { DEFAULT_FSRS, fsrsOf, replay, type FsrsSettings } from '../projections/model.ts';
 import { compareEvents, type Attempt, type LearningEvent } from './types.ts';
 import { counts, countsForSubject, exclusionsOf, NO_EXCLUSIONS, type Exclusions } from './windows.ts';
 
@@ -22,10 +30,6 @@ export interface AnswerRecord {
   /** When the last answer was given (ms). */
   t: number;
   conf?: Confidence;
-}
-export interface ScheduleRecord {
-  box: number;
-  due?: string;
 }
 export interface SavedState {
   v: number;
@@ -51,8 +55,10 @@ export interface SubjectProgress {
   xp: number;
   read: Record<string, true>;
   res: Record<string, AnswerRecord>;
-  fc: Record<string, ScheduleRecord>;
-  pb: Record<string, ScheduleRecord>;
+  /** Each flashcard's FSRS memory (by its key). */
+  fc: Record<string, CardMemory>;
+  /** Each drill's. */
+  pb: Record<string, CardMemory>;
   boss: Record<string, true>;
   /** The section opened last. */
   last: string | null;
@@ -80,13 +86,6 @@ export interface AccountStats {
   bySubject: Record<string, number>;
 }
 
-export interface LevelRecord {
-  level: string;
-  at: number;
-}
-
-/** The days of the old Leitner boxes 0–5 (the card scheduler until FSRS reads the log). */
-export const BOX_DAYS: readonly number[] = Object.freeze([0, 1, 3, 7, 16, 35]);
 /** How many entries of external study per app a subject keeps. */
 export const EXTERNAL_KEEP = 200;
 
@@ -118,22 +117,13 @@ export const emptyStats = (): AccountStats => ({ xp: 0, xpDay: {}, streak: 0, la
 
 const has = (o: object, k: string): boolean => Object.prototype.hasOwnProperty.call(o, k);
 
-/** The schedule after one review (rating 1 again → box 1; 4 easy → two boxes up, else one), due counted from `day`. */
-function leitner(r: ScheduleRecord | undefined, rating: number, day: string, double: boolean): ScheduleRecord {
-  const box = rating === 1 ? 1 : Math.min(5, (r?.box ?? 0) + (double ? 2 : 1));
-  const d = parseDay(day);
-  const out: ScheduleRecord = { box };
-  if (d.ok) out.due = addDays(d.value, BOX_DAYS[rating === 1 ? 0 : box] ?? 0);
-  return out;
+/** A card's or drill's history: the schedule it was imported with (null: none) and its reviews since ([ms, rating]). */
+interface CardHistory {
+  seed: CardMemory | null;
+  reviews: Array<[number, Rating]>;
 }
-/** Of two schedules, the one reviewed later (the later due day; on the same day the higher box). */
-function laterReview(a: ScheduleRecord | undefined, b: ScheduleRecord): ScheduleRecord {
-  if (!a) return b;
-  const da = a.due ?? '',
-    db = b.due ?? '';
-  if (da !== db) return da > db ? a : b;
-  return a.box >= b.box ? a : b;
-}
+type Deck = 'fc' | 'pb';
+const cardKey = (subject: string, deck: Deck, item: string): string => `${subject}|${deck}|${item}`;
 const maxMap = (a: Record<string, number>, b: Readonly<Record<string, number | undefined>>): void => {
   for (const [k, v] of Object.entries(b)) a[k] = Math.max(a[k] ?? 0, v ?? 0);
 };
@@ -171,7 +161,7 @@ export interface ProjectionSnapshot {
   readonly state: unknown;
 }
 /** Bumped whenever the fold changes: an older snapshot is then refolded from the events. */
-export const PROJECTION_VERSION = 1;
+export const PROJECTION_VERSION = 2;
 
 export class Projection {
   readonly #subjects = new Map<string, SubjectProgress>();
@@ -180,7 +170,8 @@ export class Projection {
   #statsParts: StatsParts = { imported: null, live: { xp: 0, xpDay: {}, bySubject: {} }, days: {} };
   readonly #settings = new Map<string, Map<string, SettingCell>>();
   readonly #settingValues = new Map<string, Record<string, unknown>>();
-  readonly #levels: Record<string, LevelRecord> = {};
+  readonly #cards = new Map<string, CardHistory>();
+  #fsrs: FsrsSettings = DEFAULT_FSRS;
   #x: Exclusions = NO_EXCLUSIONS;
   #lastAt = '';
   #lastId = '';
@@ -213,6 +204,7 @@ export class Projection {
       // the subject starts again (the same object: screens hold it); the XP across subjects stays
       Object.assign(this.subjectProgress(e.subject), emptyProgress());
       this.#answers.delete(e.subject);
+      for (const k of [...this.#cards.keys()]) if (k.startsWith(e.subject + '|')) this.#cards.delete(k);
     }
     this.#apply(e);
     return true;
@@ -266,9 +258,6 @@ export class Projection {
   replaceSettings(scope: string, held: Record<string, unknown>): void {
     this.#settingValues.set(scope, held);
   }
-  get levels(): Readonly<Record<string, LevelRecord>> {
-    return this.#levels;
-  }
 
   #apply(e: LearningEvent): void {
     this.#count++;
@@ -279,7 +268,7 @@ export class Projection {
     if (e.subject !== undefined && countsForSubject(e, this.#x)) this.#subject(e.subject, e);
   }
 
-  /** What an event changes across subjects: stats, settings, levels. */
+  /** What an event changes across subjects: stats, settings. */
   #account(e: LearningEvent): void {
     switch (e.type) {
       case 'xp.earned': {
@@ -299,9 +288,7 @@ export class Projection {
         return;
       case 'setting.changed':
         this.#setting(e);
-        return;
-      case 'level.reached':
-        this.#levels[e.data.roadmap] = { level: e.data.level, at: wallOf(e.hlc) };
+        if (e.subject === undefined && e.data.key === 'fsrs') this.#reschedule();
         return;
       default:
         return;
@@ -398,17 +385,20 @@ export class Projection {
         return;
       }
       case 'card.reviewed':
-        p.fc[item] = leitner(p.fc[item], e.data.rating, e.day, e.data.rating === 4);
+        this.#review(subject, p, 'fc', item, e.data.rating as Rating, wallOf(e.hlc));
         return;
       case 'card.imported':
-        p.fc[item] = laterReview(p.fc[item], e.data.due ? { box: e.data.box, due: e.data.due } : { box: e.data.box });
-        if (e.data.from !== undefined && e.data.from !== item) Reflect.deleteProperty(p.fc, e.data.from);
+        this.#import(subject, p, 'fc', item, e.data.state);
+        if (e.data.from !== undefined && e.data.from !== item) {
+          Reflect.deleteProperty(p.fc, e.data.from);
+          this.#cards.delete(cardKey(subject, 'fc', e.data.from));
+        }
         return;
       case 'playbook.reviewed':
-        p.pb[item] = leitner(p.pb[item], e.data.rating, e.day, e.data.rating === 4 && e.data.score >= 0.7);
+        this.#review(subject, p, 'pb', item, e.data.rating as Rating, wallOf(e.hlc));
         return;
       case 'playbook.imported':
-        p.pb[item] = laterReview(p.pb[item], e.data.due ? { box: e.data.box, due: e.data.due } : { box: e.data.box });
+        this.#import(subject, p, 'pb', item, e.data.state);
         return;
       case 'section.opened':
         p.last = item;
@@ -470,6 +460,47 @@ export class Projection {
     }
   }
 
+  #history(subject: string, deck: Deck, item: string): CardHistory {
+    const k = cardKey(subject, deck, item);
+    let h = this.#cards.get(k);
+    if (!h) {
+      h = { seed: null, reviews: [] };
+      this.#cards.set(k, h);
+    }
+    return h;
+  }
+
+  /** One more review: one step of the scheduler from the memory now (the log is folded in time order). */
+  #review(subject: string, p: SubjectProgress, deck: Deck, item: string, rating: Rating, at: number): void {
+    const h = this.#history(subject, deck, item);
+    h.reviews.push([at, rating]);
+    const now = p[deck][item] ?? h.seed;
+    p[deck][item] = now ? scheduler(this.#fsrs).review(now, rating, at) : replay(null, h.reviews, this.#fsrs);
+  }
+
+  /** A schedule carried over: it counts when the card has none, or when it was reviewed after the card's memory now. */
+  #import(subject: string, p: SubjectProgress, deck: Deck, item: string, state: unknown): void {
+    const m = cardMemoryOf(state);
+    if (!m) return;
+    const cur = p[deck][item];
+    if (cur && laterReview(cur, m) !== m) return;
+    const h = this.#history(subject, deck, item);
+    h.seed = m;
+    h.reviews = h.reviews.filter(([at]) => at > (m.last ?? 0));
+    p[deck][item] = replay(m, h.reviews, this.#fsrs);
+  }
+
+  /** The FSRS settings changed: every card and drill scheduled again from its history. */
+  #reschedule(): void {
+    const v = this.settings('')['fsrs'];
+    this.#fsrs = v === undefined ? DEFAULT_FSRS : fsrsOf(v, DEFAULT_FSRS);
+    for (const [k, h] of this.#cards) {
+      const [subject = '', deck, ...rest] = k.split('|');
+      const p = this.#subjects.get(subject);
+      if (p && (deck === 'fc' || deck === 'pb')) p[deck][rest.join('|')] = replay(h.seed, h.reviews, this.#fsrs);
+    }
+  }
+
   #answerParts(subject: string, item: string): AnswerParts {
     let m = this.#answers.get(subject);
     if (!m) {
@@ -511,7 +542,8 @@ export class Projection {
       stats: this.#stats,
       statsParts: this.#statsParts,
       settings,
-      levels: this.#levels,
+      cards: Object.fromEntries(this.#cards),
+      fsrs: this.#fsrs,
       x: this.#x,
       count: this.#count,
     };
@@ -536,7 +568,8 @@ export class Projection {
       const values = p.settings(scope);
       for (const [k, c] of m) if (!c.removed) values[k] = c.value;
     }
-    Object.assign(p.#levels, st.levels ?? {});
+    for (const [k, h] of Object.entries(st.cards ?? {})) p.#cards.set(k, h);
+    if (st.fsrs) p.#fsrs = st.fsrs;
     p.#x = st.x;
     p.#count = typeof st.count === 'number' ? st.count : 0;
     p.#lastAt = s.lastAt;
@@ -551,7 +584,8 @@ interface SnapshotState {
   stats: AccountStats;
   statsParts: StatsParts;
   settings: Record<string, Record<string, SettingCell>>;
-  levels: Record<string, LevelRecord>;
+  cards: Record<string, CardHistory>;
+  fsrs: FsrsSettings;
   x: Exclusions;
   count: number;
 }

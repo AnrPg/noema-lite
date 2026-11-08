@@ -24,35 +24,35 @@ window.NoemaSearch = (() => {
   const toast = (m, ms) => N()?.toast?.(m, ms);
 
   /** Where every record comes from: the subjects' packs, the Roadmaps, the language courses, the conversations. Each has
-      a signature: when it changes, that source is read again (engine/catalog.js Index). */
+      a signature: when it changes, that source's records are built again, in the Worker (NoemaCore.catalog.index,
+      src/features/catalog): input() gives what they are built from. */
   async function sources() {
     const a = acc(), w = world(), out = [];
     if (!a) return out;
     if (w !== 'lang') {
       const subs = (await N().subjectsFor(a).catch(() => [])).filter(s => !isLangSubj(s) && !s.hidden);
       for (const s of subs) out.push({ key: 'pack:' + s.id, label: s.title || s.id, sig: [s.version || '', s.updated || '', JSON.stringify(s.counts || {}), s.title || '', s.description || ''].join('|'),
-        build: async () => {
+        input: async () => {
           const had = !!window.NOEMA_PACKS?.[s.id];
           const p = await N().loadSubject(a, s.id);
-          const recs = C().fromPack(p, s);
           if (!had && window.NOEMA_PACKS && N().pack?.subject?.id !== s.id) delete window.NOEMA_PACKS[s.id];   // read once; the page keeps only the subject you study
-          return recs;
+          return { kind: 'pack', data: p, meta: s };
         } });
-      for (const c of window.NoemaCurriculum?.list(a) || []) out.push({ key: 'cur:' + c.id, label: c.title || c.goal || c.id, sig: String(c.updated || ''), build: async () => C().fromCurriculum(window.NoemaCurriculum.get(a, c.id) || c) });
+      for (const c of window.NoemaCurriculum?.list(a) || []) out.push({ key: 'cur:' + c.id, label: c.title || c.goal || c.id, sig: String(c.updated || ''), input: async () => ({ kind: 'curriculum', data: window.NoemaCurriculum.get(a, c.id) || c }) });
     }
     if (w !== 'know' && N().langCourses) {
       for (const m of N().langCourses()) {
         const own = m.account ? localStorage.getItem(`noema1:${a}:a:langcourse:${m.courseId}`) || '' : '';
-        out.push({ key: 'lang:' + m.courseId, label: m.title || m.courseId, sig: [m.version || '', m.path || '', window.NOEMA_REGISTRY?.builtAt || '', own ? C().hash36(own) : ''].join('|'), build: async () => C().fromLangCourse(await N().langData(m), m) });
+        out.push({ key: 'lang:' + m.courseId, label: m.title || m.courseId, sig: [m.version || '', m.path || '', window.NOEMA_REGISTRY?.builtAt || '', own ? NoemaCore.catalog.hash36(own) : ''].join('|'), input: async () => ({ kind: 'lang', data: await N().langData(m), meta: m }) });
       }
     }
     const cv = window.NoemaConvos ? await NoemaConvos.list(a).catch(() => []) : [];
     const live = cv.filter(r => !r.deleted && r.messages?.length && (!r.kind || r.kind === 'tutor'));
-    out.push({ key: 'convos', label: L('t_convo'), sig: live.length + '|' + live.reduce((m, r) => String(r.updatedAt || '') > m ? String(r.updatedAt) : m, '') + '|' + live.map(r => r.title || '').join('').length, build: async () => C().fromConvos(live) });
+    out.push({ key: 'convos', label: L('t_convo'), sig: live.length + '|' + live.reduce((m, r) => String(r.updatedAt || '') > m ? String(r.updatedAt) : m, '') + '|' + live.map(r => r.title || '').join('').length, input: async () => ({ kind: 'convos', data: live }) });
     return out;
   }
   let IDX = null, IDXacc = null;
-  function index() { if (!IDX || IDXacc !== acc()) { IDX = C().Index(acc(), sources); IDXacc = acc(); } return IDX; }
+  function index() { if (!IDX || IDXacc !== acc()) { IDX = NoemaCore.catalog.index(acc(), sources); IDXacc = acc(); } return IDX; }
   /** Read what is stored, then bring it up to date in the background. */
   function warm() { const I = index(); I.load().then(() => I.refresh()); jset(`noema1:${acc()}:meta:searchUsed`, Date.now()); return I; }
 

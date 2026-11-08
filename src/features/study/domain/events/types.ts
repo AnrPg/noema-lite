@@ -2,7 +2,7 @@
  * The learning log's events (event sourcing): the types of noema.events/v1 (src/contracts/schemas/noema.events.v1.schema.json,
  * the ONE source of the format) as a discriminated union, and what the log knows about each type.
  *
- * Every event has: v 1 · id (unique for ever) · type · at (the hybrid logical clock stamp, src/kernel/hlc.ts, encoded: it
+ * Every event has: v 1 · id (unique for ever) · type · hlc (the hybrid logical clock stamp, src/kernel/hlc.ts, encoded: it
  * sorts as text in time order) · day (the learner's local day when it happened) · device · account · subject and item
  * (what it is about; which of them a type needs is in SCOPES) · origin (app | migration | inbox | restore) · data.
  */
@@ -24,10 +24,12 @@ export interface EventDataMap {
   'exercise.flagged': G.DataExerciseFlagged;
   'exercise.unflagged': G.DataExerciseUnflagged;
   'external.studied': G.DataExternalStudied;
-  'level.reached': G.DataLevelReached;
   'log.restored': G.DataLogRestored;
   'playbook.imported': G.DataPlaybookImported;
   'playbook.reviewed': G.DataPlaybookReviewed;
+  'roadmap.level.reached': G.DataRoadmapLevelReached;
+  'roadmap.level.tested': G.DataRoadmapLevelTested;
+  'roadmap.restructured': G.DataRoadmapRestructured;
   'section.opened': G.DataSectionOpened;
   'section.read': G.DataSectionRead;
   'setting.changed': G.DataSettingChanged;
@@ -40,6 +42,7 @@ export interface EventDataMap {
 export type EventType = keyof EventDataMap;
 export type EventOrigin = NonNullable<G.Event['origin']>;
 export type Attempt = G.Attempt;
+export type CardState = G.CardState;
 
 /** The fields every event has. */
 export interface EventEnvelope {
@@ -86,10 +89,12 @@ export const EVENT_INFO: Readonly<Record<EventType, TypeInfo>> = Object.freeze({
   'exercise.flagged': { scope: 'item', retention: 'history' },
   'exercise.unflagged': { scope: 'item', retention: 'history' },
   'external.studied': { scope: 'item', retention: 'history' },
-  'level.reached': { scope: 'account', retention: 'history' },
   'log.restored': { scope: 'account', retention: 'history' },
   'playbook.imported': { scope: 'item', retention: 'history' },
   'playbook.reviewed': { scope: 'item', retention: 'history' },
+  'roadmap.level.reached': { scope: 'account', retention: 'history' },
+  'roadmap.level.tested': { scope: 'account', retention: 'history' },
+  'roadmap.restructured': { scope: 'account', retention: 'history' },
   'section.opened': { scope: 'item', retention: 'latest' },
   'section.read': { scope: 'item', retention: 'history' },
   'setting.changed': { scope: 'any', retention: 'latest' },
@@ -123,6 +128,7 @@ export function compareEvents(a: EventEnvelope, b: EventEnvelope): -1 | 0 | 1 {
   return 0;
 }
 
-/** The FSRS ratings (1 again · 2 hard · 3 good · 4 easy) of the old three buttons (0 again / blank · 1 good / partly · 2 easy / nailed). */
-export const CARD_RATING_OF_GRADE: readonly [1, 3, 4] = [1, 3, 4];
-export const PLAYBOOK_RATING_OF_GRADE: readonly [1, 2, 4] = [1, 2, 4];
+/** The FSRS rating (1 again · 2 hard · 3 good · 4 easy) of a card's three buttons: 0 again · 1 good · 2 easy. */
+export const cardRating = (grade: number): 1 | 3 | 4 => (grade === 0 ? 1 : grade === 2 ? 4 : 3);
+/** A drill's (0 blank → again · 1 partly → hard · 2 nailed → easy with most of the checklist ticked, else good). */
+export const playbookRating = (grade: number, ticked: number): 1 | 2 | 3 | 4 => (grade === 0 ? 1 : grade === 1 ? 2 : ticked >= 0.7 ? 4 : 3);

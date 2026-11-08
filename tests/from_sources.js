@@ -25,7 +25,7 @@ const FX = (p => (p.translations.fr = { chapters: JSON.parse(fs.readFileSync(pat
 /* ---------- 1. without a browser ---------- */
 function unit() {
   console.log('— the plan, without a browser');
-  const ctx = { window: {}, console }; ctx.globalThis = ctx; vm.createContext(ctx);
+  const ctx = { window: {}, console }; ctx.globalThis = ctx; require('./roadmaps_core')(ctx); vm.createContext(ctx);
   for (const f of ['engine/curriculum.js', 'engine/curimport.js', 'engine/sourceplan.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
   const P = ctx.window.NoemaSourcePlan;
   const doc = (p, pages, outline = []) => ({ path: p, name: p.split('/').pop(), size: pages * 40000, kind: 'pdf', paged: true, pages, outline, excerpt: '', file: { name: p.split('/').pop(), hint: p, size: pages * 40000 } });

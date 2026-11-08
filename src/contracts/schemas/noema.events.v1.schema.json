@@ -52,6 +52,71 @@
       "pattern": "^[^\\u0000-\\u001f]{1,300}$",
       "x-message": "is not an item id"
     },
+    "level": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,40}$",
+      "x-message": "is not a level id",
+      "description": "A level of a Roadmap's ladder (src/features/roadmaps/domain/levels.ts LEVEL_ID)."
+    },
+    "cardState": {
+      "description": "A card's or drill's schedule: the old Leitner one (box 0-5 and its due day) or an FSRS-6 memory (src/features/study/domain/fsrs.ts CardMemory: phase, step, stability s, difficulty d, dueAt and last in ms, reps, lapses).",
+      "anyOf": [
+        {
+          "type": "object",
+          "required": ["box"],
+          "additionalProperties": false,
+          "properties": {
+            "box": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "due": {
+              "$ref": "#/$defs/day"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["phase", "dueAt"],
+          "additionalProperties": false,
+          "properties": {
+            "phase": {
+              "enum": ["learning", "review", "relearning"]
+            },
+            "step": {
+              "type": ["integer", "null"],
+              "minimum": 0
+            },
+            "s": {
+              "type": ["number", "null"],
+              "minimum": 0
+            },
+            "d": {
+              "type": ["number", "null"],
+              "minimum": 0
+            },
+            "dueAt": {
+              "type": "number",
+              "minimum": 0
+            },
+            "last": {
+              "type": ["number", "null"],
+              "minimum": 0
+            },
+            "reps": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "lapses": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      ],
+      "x-message": "is not a card schedule"
+    },
     "attempt": {
       "description": "One attempt at an interactive exercise (engine/src/32_activities.js): its id, seed, start t0 and last change t (ms), hints used, result and its own events.",
       "type": "object",
@@ -115,10 +180,12 @@
             "exercise.flagged",
             "exercise.unflagged",
             "external.studied",
-            "level.reached",
             "log.restored",
             "playbook.imported",
             "playbook.reviewed",
+            "roadmap.level.reached",
+            "roadmap.level.tested",
+            "roadmap.restructured",
             "section.opened",
             "section.read",
             "setting.changed",
@@ -427,34 +494,6 @@
           "if": {
             "properties": {
               "type": {
-                "const": "level.reached"
-              }
-            },
-            "required": ["type"]
-          },
-          "then": {
-            "required": ["data"],
-            "properties": {
-              "data": {
-                "$ref": "#/$defs/data_level_reached"
-              }
-            },
-            "not": {
-              "anyOf": [
-                {
-                  "required": ["subject"]
-                },
-                {
-                  "required": ["item"]
-                }
-              ]
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "type": {
                 "const": "log.restored"
               }
             },
@@ -512,6 +551,90 @@
               "data": {
                 "$ref": "#/$defs/data_playbook_reviewed"
               }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "roadmap.level.reached"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_roadmap_level_reached"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": ["subject"]
+                },
+                {
+                  "required": ["item"]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "roadmap.level.tested"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_roadmap_level_tested"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": ["subject"]
+                },
+                {
+                  "required": ["item"]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "roadmap.restructured"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["data"],
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/data_roadmap_restructured"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": ["subject"]
+                },
+                {
+                  "required": ["item"]
+                }
+              ]
             }
           }
         },
@@ -757,18 +880,13 @@
       "properties": {}
     },
     "data_card_imported": {
-      "description": "A flashcard's schedule from before the log (the old Leitner box 0-5 and its due day). With from: the progress kept under an older key of the same card (its position, chNN#k, before cards had ids) moves to this one, and the old key is gone.",
+      "description": "A flashcard's schedule carried over (from before the log, or from an older key): its state as it was, which later reviews replay on. With from: the progress kept under an older key of the same card (its position, chNN#k, before cards had ids) moves to this one, and the old key is gone.",
       "type": "object",
-      "required": ["box"],
+      "required": ["state"],
       "additionalProperties": false,
       "properties": {
-        "box": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 5
-        },
-        "due": {
-          "$ref": "#/$defs/day"
+        "state": {
+          "$ref": "#/$defs/cardState"
         },
         "from": {
           "$ref": "#/$defs/item"
@@ -869,21 +987,6 @@
         }
       }
     },
-    "data_level_reached": {
-      "description": "The learner's current level of a Roadmap is now this level.",
-      "type": "object",
-      "required": ["roadmap", "level"],
-      "additionalProperties": false,
-      "properties": {
-        "roadmap": {
-          "$ref": "#/$defs/id"
-        },
-        "level": {
-          "type": "string",
-          "pattern": "^[a-z0-9][a-z0-9._-]{0,40}$"
-        }
-      }
-    },
     "data_log_restored": {
       "description": "A backup or restore point brought back: the events after upTo and before this one no longer count (they stay in the log).",
       "type": "object",
@@ -896,18 +999,13 @@
       }
     },
     "data_playbook_imported": {
-      "description": "A playbook's schedule from before the log (box and due day).",
+      "description": "A playbook's schedule carried over from before the log: its state as it was, which later rehearsals replay on.",
       "type": "object",
-      "required": ["box"],
+      "required": ["state"],
       "additionalProperties": false,
       "properties": {
-        "box": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 5
-        },
-        "due": {
-          "$ref": "#/$defs/day"
+        "state": {
+          "$ref": "#/$defs/cardState"
         }
       }
     },
@@ -926,6 +1024,92 @@
           "type": "number",
           "minimum": 0,
           "maximum": 1
+        }
+      }
+    },
+    "data_roadmap_level_reached": {
+      "description": "A level of a Roadmap is done (every step up to it mastered; its test passed when the Roadmap asks for one): the learner's current level per Roadmap is folded from these (src/features/roadmaps/domain/events.ts). One id per Roadmap and level, so two devices that both notice it append it once.",
+      "type": "object",
+      "required": ["roadmap", "level", "from", "how"],
+      "additionalProperties": false,
+      "properties": {
+        "roadmap": {
+          "$ref": "#/$defs/id"
+        },
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "from": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/level"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The level before (null: none)."
+        },
+        "how": {
+          "enum": ["auto", "test", "placement"]
+        }
+      }
+    },
+    "data_roadmap_level_tested": {
+      "description": "A final test of a Roadmap's level taken: its score (0-1) and whether it passed.",
+      "type": "object",
+      "required": ["roadmap", "level", "score", "passed"],
+      "additionalProperties": false,
+      "properties": {
+        "roadmap": {
+          "$ref": "#/$defs/id"
+        },
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "data_roadmap_restructured": {
+      "description": "A restructuring of a Roadmap approved and applied: the items (chapters, with their sections, exercises and cards) that changed subject. Progress kept per item id needs nothing; read models that keep it per (subject, item) re-key it.",
+      "type": "object",
+      "required": ["roadmap", "proposal", "moves"],
+      "additionalProperties": false,
+      "properties": {
+        "roadmap": {
+          "$ref": "#/$defs/id"
+        },
+        "proposal": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "moves": {
+          "type": "array",
+          "maxItems": 2000,
+          "items": {
+            "type": "object",
+            "required": ["item", "from", "to"],
+            "additionalProperties": false,
+            "properties": {
+              "item": {
+                "$ref": "#/$defs/item"
+              },
+              "from": {
+                "$ref": "#/$defs/id"
+              },
+              "to": {
+                "$ref": "#/$defs/id"
+              }
+            }
+          }
         }
       }
     },

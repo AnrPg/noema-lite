@@ -16,10 +16,12 @@ import { browserStorage } from '../adapters/browser/storage.ts';
 import { systemClock } from '../adapters/browser/clock.ts';
 import { noemaI18n } from '../adapters/browser/i18n.ts';
 import { browserNotifier } from '../adapters/browser/notifier.ts';
+import { browserLifecycle } from '../adapters/browser/lifecycle.ts';
 import { workerCompute, type WorkerLike } from '../adapters/browser/compute.ts';
 import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-reporter.ts';
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
 import { inlineCompute } from '../adapters/local/jobs.ts';
+import { STUDY_BRIDGE, STUDY_REGISTRATIONS } from './study.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
@@ -31,14 +33,36 @@ import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridg
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { browserLearning, learningBridge } from './learning.ts';
-import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ENGINES, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
+import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
+import { randomId, registerSync, syncBridge } from './sync.ts';
+import {
+  AI,
+  CLOCK,
+  CLOUD,
+  COMPUTE,
+  CONFIG,
+  ENGINES,
+  ERRORS,
+  I18N,
+  JOBS,
+  LIFECYCLE,
+  NOTIFIER,
+  STORAGE,
+  TELEMETRY,
+  type CoreConfig,
+} from './tokens.ts';
 
 /** Helpers append their registrations here (each registers its own tokens; a token already taken is an error). */
 export const APP_REGISTRATIONS: readonly Registration[] = [
   // the engine library (src/engines): its plugins' manifests at once, each engine's code and Worker bundle when first loaded
   c => c.register(ENGINES, () => createAppEngines()),
-  // the learning log (event sourcing, src/features/study): IndexedDB "noema-learning" and the account's LearningLog
+  // the learning log (event sourcing, src/features/study): the account's LearningLog over the app's IndexedDB, and the
+  // seams it fills: the read models' feed, the sync's event log and old progress, the Roadmap events
   browserLearning,
+  // the study read models (src/features/study) and the search index's store (src/features/catalog)
+  ...STUDY_REGISTRATIONS,
+  // local-first sync (src/features/sync, docs/SYNC.md): the outbox, the settings registers, the loop and the lease
+  registerSync,
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
@@ -49,6 +73,16 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'engines', build: r => r.get(ENGINES) },
   // the learning log: every write of progress is an event, every read its fold (src/composition/learning.ts has the surface)
   learningBridge,
+  // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
+  // index's records, built in the Worker): src/composition/study.ts
+  ...STUDY_BRIDGE,
+  // the sync loop, the settings, the lease ("in use on another device"): engine/cloud.js, engine/loader.js, the account page
+  syncBridge,
+  // the Roadmaps domain (graph, tasks, claims, inbox, levels, restructuring) and its services: curriculum.js, curjobs.js,
+  // curshare.js, curimport.js, sourceplan.js, curmap.js
+  { name: 'roadmaps', build: r => roadmapsSurface(r.get(ROADMAP_EVENTS)) },
+  // the 文A bridges' lookup (engine/bridge.js)
+  { name: 'bridges', build: () => bridgesDomain },
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */
@@ -99,6 +133,7 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   c.register(CLOCK, () => systemClock());
   c.register(I18N, () => noemaI18n());
   c.register(NOTIFIER, () => browserNotifier());
+  c.register(LIFECYCLE, () => browserLifecycle(() => page as never, randomId));
   c.register(TELEMETRY, r => localTelemetry({ store: r.get(STORAGE).kv }));
   c.register(ERRORS, r => {
     const errors = createErrorReporter({

@@ -10,7 +10,8 @@
  * application keeps the whole old value in its archive either way).
  */
 import { contentId, makeEvent, type EventDraft } from './event.ts';
-import type { Attempt, EventType, LearningEvent } from './types.ts';
+import { cardMemoryOf } from '../fsrs.ts';
+import type { Attempt, CardState, EventType, LearningEvent } from './types.ts';
 
 export interface LegacyStamp {
   /** The HLC stamp of the migration (every event of one run has it; ids keep them apart). */
@@ -104,10 +105,9 @@ export function subjectEvents(subject: string, blob: unknown, stamp: LegacyStamp
     ['pb', 'playbook.imported'],
   ] as const)
     each(field, (item, v) => {
-      if (!isObj(v)) return void b.skipped.push(`${field}.${item}`);
-      const data: { box: number; due?: string } = { box: Math.min(5, nat(v['box']) ?? 0) };
-      if (typeof v['due'] === 'string' && DAY.test(v['due'])) data.due = v['due'];
-      b.add({ type, subject, item, data }, `${field}.${item}`);
+      const state = isObj(v) ? cardStateOf(v) : null;
+      if (!state) return void b.skipped.push(`${field}.${item}`);
+      b.add({ type, subject, item, data: { state } }, `${field}.${item}`);
     });
   each('boss', (item, v) => {
     if (v) b.add({ type: 'boss.won', subject, item, data: {} }, 'boss.' + item);
@@ -175,6 +175,17 @@ const KNOWN = new Set([
   'ext',
   'srcOn',
 ]);
+
+/** A stored card schedule as the log keeps it: an FSRS memory as it is (checked), an old Leitner one as box and due day. */
+export function cardStateOf(v: Record<string, unknown>): CardState | null {
+  if ('phase' in v) {
+    const m = cardMemoryOf(v);
+    return m ? { ...m } : null;
+  }
+  const state: { box: number; due?: string } = { box: Math.min(5, nat(v['box']) ?? 0) };
+  if (typeof v['due'] === 'string' && DAY.test(v['due'])) state.due = v['due'];
+  return state;
+}
 
 function attemptOf(v: unknown): Attempt | null {
   if (!isObj(v)) return null;

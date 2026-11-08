@@ -1,21 +1,24 @@
 /**
- * The EventStore over a document store (src/ports/storage.ts DocumentStore): the browser gives it IndexedDB (its own
- * database "noema-learning", src/adapters/browser/event-store.ts), tests and Node tools the memory store. One
- * implementation, so both behave alike. Four collections:
- *   events     <account>|<at>|<id> → the event        (key order = log order: the stamp sorts as text)
- *   ids        <account>|<id>      → { hlc, gone? }     (every id ever appended: idempotency outlives compaction)
- *   snapshots  <account>           → { upTo, value }
- *   meta       <account>|<name>    → a small value
- * Appends are one transaction each: every new event and its id, and the snapshot dropped when an event lands at or
- * before what it folded. Tabs of one device hear of each other's appends through the channel (BroadcastChannel).
+ * The EventStore over a document store (src/ports/storage.ts DocumentStore): the browser gives it the app's IndexedDB
+ * ("noema-lite", src/adapters/browser/event-store.ts: the same database as the sync's outbox, so one transaction holds
+ * both), tests and Node tools the memory store. One implementation, so both behave alike. Four collections:
+ *   log.events     <account>|<hlc>|<id> → the event       (key order = log order: the stamp sorts as text)
+ *   log.ids        <account>|<id>       → { hlc, gone? }  (every id ever appended: idempotency outlives compaction)
+ *   log.snapshots  <account>            → { upTo, value }
+ *   log.meta       <account>|<name>     → a small value
+ * Appends are one transaction each: every new event and its id, the snapshot dropped when an event lands at or before
+ * what it folded, and — for events made here — the new ones queued in the sync's outbox (EventOutbox), which is told
+ * after the commit. Tabs of one device hear of each other's appends through the channel (BroadcastChannel).
  */
 import { NoemaError } from '../../kernel/errors.ts';
 import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../kernel/result.ts';
 import type { Unsubscribe } from '../../ports/common.ts';
-import type { EventStore, Snapshot, StoredEvent } from '../../ports/event-store.ts';
+import type { AppendOptions, EventOutbox, EventStore, OutboxEvent, Snapshot, StoredEvent } from '../../ports/event-store.ts';
 import type { DocumentStore, StorageFullEvent } from '../../ports/storage.ts';
 
-export const EVENT_COLLECTIONS = Object.freeze(['events', 'ids', 'snapshots', 'meta'] as const);
+/** The store's collections (in a database it may share with others: their names say whose they are). */
+export const LOG = Object.freeze({ events: 'log.events', ids: 'log.ids', snapshots: 'log.snapshots', meta: 'log.meta' } as const);
+export const EVENT_COLLECTIONS = Object.freeze([LOG.events, LOG.ids, LOG.snapshots, LOG.meta] as const);
 
 /** A message bus between the tabs of a device (the browser's BroadcastChannel, or an in-process one in tests). */
 export interface TabChannel {
@@ -28,6 +31,8 @@ export interface DocumentEventStoreOptions {
   /** The storage-full signal of the store under `docs`. */
   readonly onFull: (listener: (e: StorageFullEvent) => void) => Unsubscribe;
   readonly channel?: TabChannel | undefined;
+  /** The sync's outbox: the events made here go into it in their append's transaction (none: nothing is queued). */
+  readonly outbox?: EventOutbox | undefined;
 }
 
 interface IdEntry {
@@ -42,8 +47,15 @@ const eventKey = (acc: string, e: { hlc: string; id: string }): string => `${acc
 const isEvent = (x: unknown): x is StoredEvent =>
   !!x && typeof x === 'object' && typeof (x as { id?: unknown }).id === 'string' && typeof (x as { hlc?: unknown }).hlc === 'string';
 
+/** The event as the outbox carries it: all of it but the account. */
+function outboxEvent(e: StoredEvent): OutboxEvent {
+  const body: Record<string, unknown> = { ...e };
+  Reflect.deleteProperty(body, 'account');
+  return body as OutboxEvent;
+}
+
 export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
-  const { docs } = o;
+  const { docs, outbox } = o;
   const watchers = new Set<(account: string, events: readonly StoredEvent[]) => void>();
   o.channel?.listen(m => {
     if (!m || typeof m !== 'object') return;
@@ -55,31 +67,35 @@ export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
   let channelClosed = false;
   const checked = (account: string): Result<string> => (ACCOUNT.test(account) ? ok(account) : err(badAccount(account)));
 
-  async function append(account: string, events: readonly StoredEvent[]): AsyncResult<StoredEvent[]> {
+  async function append(account: string, events: readonly StoredEvent[], options: AppendOptions = {}): AsyncResult<StoredEvent[]> {
     const a = checked(account);
     if (!a.ok) return a;
     for (const e of events) if (e.account !== account) return err(badAccount(e.account));
     if (!events.length) return ok([]);
-    const r = await docs.transaction(['events', 'ids', 'snapshots'], 'readwrite', async tx => {
+    const queue = outbox && !options.received ? outbox : null;
+    const collections = [LOG.events, LOG.ids, LOG.snapshots, ...(queue ? queue.collections : [])];
+    const r = await docs.transaction(collections, 'readwrite', async tx => {
       const added: StoredEvent[] = [],
         seen = new Set<string>();
       for (const e of events) {
         if (seen.has(e.id)) continue;
         seen.add(e.id);
-        if ((await tx.get<IdEntry>('ids', `${account}|${e.id}`)) !== undefined) continue;
-        await tx.put('events', eventKey(account, e), e);
-        await tx.put('ids', `${account}|${e.id}`, { hlc: e.hlc } satisfies IdEntry);
+        if ((await tx.get<IdEntry>(LOG.ids, `${account}|${e.id}`)) !== undefined) continue;
+        await tx.put(LOG.events, eventKey(account, e), e);
+        await tx.put(LOG.ids, `${account}|${e.id}`, { hlc: e.hlc } satisfies IdEntry);
         added.push(e);
       }
       if (added.length) {
-        const snap = await tx.get<Snapshot>('snapshots', account);
+        const snap = await tx.get<Snapshot>(LOG.snapshots, account);
         if (snap) {
           const upTo = eventKey(account, snap.upTo);
-          if (added.some(e => eventKey(account, e) <= upTo)) await tx.delete('snapshots', account);
+          if (added.some(e => eventKey(account, e) <= upTo)) await tx.delete(LOG.snapshots, account);
         }
+        if (queue) await queue.enqueueIn(tx, account, added.map(outboxEvent));
       }
       return added.sort((x, y) => (x.hlc < y.hlc ? -1 : x.hlc > y.hlc ? 1 : x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
     });
+    if (r.ok && r.value.length && queue) queue.notify(account);
     if (r.ok && r.value.length && o.channel && !channelClosed) {
       try {
         o.channel.post({ account, events: r.value });
@@ -96,7 +112,7 @@ export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
     async read(account, options = {}) {
       const a = checked(account);
       if (!a.ok) return a;
-      const r = await docs.list<unknown>('events', {
+      const r = await docs.list<unknown>(LOG.events, {
         prefix: account + '|',
         ...(options.after !== undefined ? { after: `${account}|${options.after}|￿` } : {}),
       });
@@ -106,23 +122,23 @@ export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
     async known(account, ids) {
       const a = checked(account);
       if (!a.ok) return a;
-      return docs.transaction(['ids'], 'readonly', async tx => {
+      return docs.transaction([LOG.ids], 'readonly', async tx => {
         const out = new Set<string>();
-        for (const id of ids) if ((await tx.get('ids', `${account}|${id}`)) !== undefined) out.add(id);
+        for (const id of ids) if ((await tx.get(LOG.ids, `${account}|${id}`)) !== undefined) out.add(id);
         return out;
       });
     },
     async forget(account, ids) {
       const a = checked(account);
       if (!a.ok) return a;
-      return docs.transaction(['events', 'ids'], 'readwrite', async tx => {
+      return docs.transaction([LOG.events, LOG.ids], 'readwrite', async tx => {
         let n = 0;
         for (const id of ids) {
           const k = `${account}|${id}`,
-            entry = await tx.get<IdEntry>('ids', k);
+            entry = await tx.get<IdEntry>(LOG.ids, k);
           if (!entry || entry.gone) continue;
-          await tx.delete('events', eventKey(account, { hlc: entry.hlc, id }));
-          await tx.put('ids', k, { hlc: entry.hlc, gone: true } satisfies IdEntry);
+          await tx.delete(LOG.events, eventKey(account, { hlc: entry.hlc, id }));
+          await tx.put(LOG.ids, k, { hlc: entry.hlc, gone: true } satisfies IdEntry);
           n++;
         }
         return n;
@@ -131,30 +147,30 @@ export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
     async getSnapshot(account) {
       const a = checked(account);
       if (!a.ok) return a;
-      return docs.get<Snapshot>('snapshots', account);
+      return docs.get<Snapshot>(LOG.snapshots, account);
     },
     async putSnapshot(account, snapshot) {
       const a = checked(account);
       if (!a.ok) return a;
-      return docs.put('snapshots', account, snapshot);
+      return docs.put(LOG.snapshots, account, snapshot);
     },
     async getMeta<T>(account: string, name: string) {
       const a = checked(account);
       if (!a.ok) return a;
-      return docs.get<T>('meta', `${account}|${name}`);
+      return docs.get<T>(LOG.meta, `${account}|${name}`);
     },
     async putMeta(account, name, value) {
       const a = checked(account);
       if (!a.ok) return a;
-      return docs.put('meta', `${account}|${name}`, value);
+      return docs.put(LOG.meta, `${account}|${name}`, value);
     },
     async clear(account) {
       const a = checked(account);
       if (!a.ok) return a;
       const r = await docs.transaction([...EVENT_COLLECTIONS], 'readwrite', async tx => {
-        for (const c of ['events', 'ids', 'meta'] as const)
+        for (const c of [LOG.events, LOG.ids, LOG.meta])
           for (const [k] of await tx.list(c, { prefix: account + '|' })) await tx.delete(c, k);
-        await tx.delete('snapshots', account);
+        await tx.delete(LOG.snapshots, account);
       });
       return r.ok ? OK_VOID : r;
     },

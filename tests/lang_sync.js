@@ -47,7 +47,7 @@ const COURSE = 'polyglot-semitic-zh-de', PORT = 54333, URL = `http://localhost:$
   // ---------- device B continues ----------
   const B = await device({ width: 390, height: 844 }, false); await open(B.p);
   ok(await B.p.evaluate(id => !!NoemaLangUI.UI.L.langs.ar.items[id]?.p, W.ids[0]), 'device B (phone) starts with device A\'s progress');
-  ok(await A.p.evaluate(() => NoemaCloud.lease.check()) === 'other', 'device A waits while device B is in use');
+  ok(await A.p.evaluate(() => NoemaCore.sync.lease.check()) === 'other', 'device A waits while device B is in use');
 
   // ---------- the combining rules (the same as the cloud uses) ----------
   const m = await B.p.evaluate(({ KEY, FKEY }) => {

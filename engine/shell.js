@@ -71,8 +71,9 @@ window.NoemaShell = (() => {
   const hideKey = () => `noema1:${acc()}:meta:todayHide`;
   const hiddenToday = () => { const v = jget(hideKey(), null); return v?.d === today() && Array.isArray(v.ids) ? v.ids : []; };
   const hideToday = id => jset(hideKey(), { d: today(), ids: [...new Set([...hiddenToday(), id])] });
-  const dueCount = st => { const d = today(); let fc = 0, pb = 0; for (const r of Object.values(st?.fc || {})) if (r?.due && r.due <= d) fc++; for (const r of Object.values(st?.pb || {})) if (r?.due && r.due <= d) pb++; return { fc, pb }; };
-  const wrongCount = st => Object.values(st?.res || {}).filter(r => r && r.last === false).length;
+  // what is due and what was wrong in a subject's state: the study domain's (NoemaCore.study)
+  const dueCount = st => ({ fc: NoemaCore.study.cards.countDue(st?.fc || null), pb: NoemaCore.study.cards.countDue(st?.pb || null) });
+  const wrongCount = st => NoemaCore.study.practice.countMistakes(st?.res || null);
   let subjCache = null;
   async function subjects(force) { if (!subjCache || force) subjCache = await N().subjectsFor(acc()).catch(() => []); return subjCache; }
   const isLang = s => s && (s.kind === 'language' || String(s.id).startsWith('lang:'));
@@ -666,7 +667,7 @@ window.NoemaShell = (() => {
   };
 
   /* ---------- Progress: level, streak, the collection, the week, treasures found ---------- */
-  const LEVEL = xp => { let lv = 1, need = 100, left = xp; while (left >= need) { left -= need; lv++; need = Math.round(need * 1.18 / 10) * 10; } return { lv, into: left, need }; };
+  const LEVEL = xp => NoemaCore.study.xp.level(xp);
   PAGES.progress = async () => {
     const m = TH()?.current() || 'hedge', tx = TH()?.text(m) || {}, st = N().stats?.get() || { xp: 0, xpDay: {} }, sn = N().stats?.streakNow() || 0, lv = LEVEL(st.xp || 0);
     const v = page({ tab: 'progress', crumbs: [[L('progress')]], corner: true }, h('h1', {}, L('yourProgress')));
@@ -706,14 +707,8 @@ window.NoemaShell = (() => {
     return [[mastered >= 1, 'step', '1', L('medalStep'), 1], [fcN >= 100, 'cards', '100', L('medalCards', { n: Math.min(fcN, 100) }), 4], [sn >= 7, 'week', '7', L('medalWeek', { n: Math.min(sn, 7) }), 2], [boss >= 1, 'boss', svg('crown'), L('medalBoss'), 3], [xp >= 1000, 'xp', '1k', L('medalXp'), 1], [sn >= 30, 'month', '30', L('medalMonth', { n: Math.min(sn, 30) }), 2]];
   }
   const medalsEl = MED => h('div', { class: 'ns-medals' }, ...MED.map(([ok, , x, l, n]) => h('div', { class: 'ns-medal' + (ok ? '' : ' lock') }, h('div', { class: 'm', style: ok ? tone(n) : null }, x), h('small', {}, l))));
-  /** chapters of a subject with every section read (section ids are chNN-sNN); when the subject does not say how many
-      sections its chapters have, a chapter whose test is beaten counts */
-  function chaptersDone(s, x) {
-    const read = {}; Object.keys(x.read || {}).forEach(id => { const c = String(id).split('-s')[0]; read[c] = (read[c] || 0) + 1; });
-    const chs = s.chapters || s.meta?.chapters || [];
-    if (!chs.length) return Object.keys(x.boss || {}).filter(c => x.boss[c]).length;
-    return chs.filter(c => { const id = c.id || 'ch' + String(c.num).padStart(2, '0'), n = typeof c.sections === 'number' ? c.sections : (c.sections || []).length; return n > 0 && (read[id] || 0) >= n; }).length;
-  }
+  /** chapters of a subject with every section read (the study domain's count, NoemaCore.study.progress) */
+  const chaptersDone = (s, x) => NoemaCore.study.progress.chaptersDone(s.chapters || s.meta?.chapters || [], x.read, x.boss);
   const weekKey = () => NoemaCore.day.weekStart(today());   // the local Monday of this week
   function rememberMedals(n) { const k = `noema1:${acc()}:meta:medals`, was = jget(k, null); jset(k, n); if (was != null && n > was) window.NoemaReact?.big('medal'); }
 
