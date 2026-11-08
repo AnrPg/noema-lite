@@ -55,7 +55,7 @@ export function loadSchemas() {
 export function makeAjv(schemas, opts = {}) {
   const ajv = new Ajv2020({ allErrors: true, strict: true, strictTypes: false, strictTuples: false, strictRequired: false, validateFormats: false, inlineRefs: false, ...opts });
   ajv.addKeyword({ keyword: 'x-message', schemaType: 'string' });   // the message a failure here shows (src/contracts/messages.ts)
-  ajv.addKeyword({ keyword: 'x-noema' });                           // the authoring form's hints (engine/schemaform.js)
+  ajv.addKeyword({ keyword: 'x-noema' });                           // the authoring form's hints (src/features/author/domain/form.ts)
   for (const s of schemas) {
     ajv.addSchema(compiledForm(s.schema, s.id));
     for (const [d, sub] of Object.entries(s.schema.$defs || {})) ajv.addSchema({ $id: defId(s.id, d), ...compiledForm(sub, s.id) });

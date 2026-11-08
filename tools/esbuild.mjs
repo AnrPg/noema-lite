@@ -14,9 +14,9 @@
                    skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
      ui.js         src/composition/ui.ts — the app's UI root (src/composition/ui-root.ts: Lit, the kit, the frame and the shell's
                    screens, window.Noema / NoemaThemes / NoemaShell), right after app.js and engine/i18n.js.
-     engines.js, contracts.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts and the
-                   content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
-                   (src/contracts/page.ts, pageContracts below).
+     engines.js, contracts.js, author.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts
+                   and the content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
+                   (src/contracts/page.ts, pageContracts below); the activity author (src/composition/author.ts, #/author).
      ui-kit.js     src/composition/ui-kit.ts — the kit's demo on #/ui-kit (a local host only; kind "dev").
      roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
                    suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
@@ -76,6 +76,7 @@ export const ENTRIES = [
   { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
   { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
+  { name: 'author', in: 'src/composition/author.ts', kind: 'lazy', out: 'author.js', budgetKB: 160 },   // the activity author (#/author): its forms, checks and files; loaded on the first visit (src/composition/shell/author-page.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },

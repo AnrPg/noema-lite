@@ -68,7 +68,7 @@ def author_schemas_js():
         if not (isinstance(spec, dict) and (spec.get('engine') in noema_core.call('activities.rules')['LIB'] or (isinstance(parts, list) and parts))): continue
         refs[d] = {'item': rj(os.path.join(p, 'activity.json')), 'spec': spec,
                    'strings': {f.split('.')[1]: rj(os.path.join(p, f)) for f in sorted(os.listdir(p)) if re.fullmatch(r'strings\.[\w-]+\.json', f)}}
-    return ('/* noema-lite — the JSON Schemas of the activity author (engine/activity_author.js). GENERATED from src/contracts/schemas/ by\n'
+    return ('/* noema-lite — the JSON Schemas of the activity author (src/composition/author.ts). GENERATED from src/contracts/schemas/ by\n'
             '   tools/build.py (tests/activity_author.js checks that it is up to date). Do not edit. Schema data, not words a learner reads: */\n/* i18n-ignore-start */\n'
             '(function (root) { root.NoemaActivitySchemas = ' + json.dumps(sch, ensure_ascii=False, separators=(',', ':')) + ';\n'
             '  root.NoemaActivityRefs = ' + json.dumps(refs, ensure_ascii=False, separators=(',', ':')) + '; })(typeof window !== \'undefined\' ? window : globalThis);\n/* i18n-ignore-end */\n')
@@ -346,7 +346,7 @@ def build_site(metas):
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
     os.makedirs(os.path.join(out, 'engine', 'app'), exist_ok=True)
-    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
+    for f in ('engine.js', 'engine.css', 'tokens.css', 'i18n.js', 'art.js', *APP_AREAS, 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'report.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'activity_author_schemas.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's schemas and references load on #/author, with build/author.js)
     os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True)
     for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed for the content checks (wasm-module@1, external-embed@1)
     # the TypeScript bundles of the page (build/: npm run build) with their source maps — build/app.js holds the engine library
@@ -391,7 +391,7 @@ def build_site(metas):
 # the UI catalogs (any locale offline; not the test pseudo-locales), the language-course UI, the activity author's files
 # (#/author), the web manifest and its icons. Packs and data are not in it (network first, the last copy offline).
 APP_AREAS = ('app/library.js', 'app/community.js', 'app/roadmaps.js', 'app/languages.js')   # the areas of the app on the frame, in index.html's order
-SHELL_EXTRA = ('engine/engine.js', 'engine/i18n/*.js', 'engine/langcore.js', 'engine/langui.js', 'engine/langui.css', 'engine/schemaform.js', 'engine/activity_author*.js', 'engine/activity_author.css',
+SHELL_EXTRA = ('engine/engine.js', 'engine/i18n/*.js', 'engine/langcore.js', 'engine/langui.js', 'engine/langui.css', 'engine/activity_author_schemas.js',
                'build/*.js', 'manifest.webmanifest', 'icons/*.png', 'icons/*.svg', 'fonts/*.css')   # build/*.js: the page bundles and every Worker bundle (offline on first use)
 def write_service_worker(out):
     """dist/site/sw.js: { version, shell } + the service worker bundle (src/composition/sw.ts). The version is a hash of every
@@ -603,7 +603,7 @@ def build_bundle(metas):
     reg_metas = [dict(m, path=None) for m in metas if (not sel or m['id'] in sel)]
     local = ''
     if '--with-local-config' in args and os.path.exists(os.path.join(ROOT, 'config.local.js')): local = f'<script>{esc(rd("config.local.js"))}</script>'
-    css = rd('engine/engine.css') + '\n' + rd('engine/activity_author.css')
+    css = rd('engine/engine.css')
     # every UI catalog inline (the single file works offline in any locale; pseudo-locales only for tests)
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
     # the TypeScript core (build/app.js: window.NoemaCore) before every older script, and each Worker's code as text: the one
@@ -640,9 +640,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/src/43_xapi.js"))}</script>
 <script>{esc(rd("engine/src/44_activity_wasm.js"))}</script>
 <script>{esc(rd("engine/src/45_activity_embed.js"))}</script>
-<script>{esc(rd("engine/schemaform.js"))}</script>
 <script>{esc(rd("engine/activity_author_schemas.js"))}</script>
-<script>{esc(rd("engine/activity_author.js"))}</script>
 <script>{esc(rd("engine/llm.js"))}</script>
 <script>{esc(rd("engine/mt.js"))}</script>
 <script>{esc(rd("engine/wordlink.js"))}</script>
