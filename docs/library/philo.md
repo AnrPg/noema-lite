@@ -9,7 +9,7 @@ gives which verdict, which method elects whom, and which analysis counts a case 
 
 - Argument validity goes through **logic@1** (its module, imported: `parse`, `atomsOf`, `truthTable`, `entails`; `docs/library/logic.md`
   §9). It is never re-implemented here.
-- Seeded noise in tournaments uses **NoemaSimKit**'s MRG32k3a streams (`src/engines/kernel/simkit.js`, L'Ecuyer 1999). Without it, the engine
+- Seeded noise in tournaments uses **NoemaSimKit**'s MRG32k3a streams (`src/engines/kernel/simkit.ts`, L'Ecuyer 1999). Without it, the engine
   falls back to the core's mulberry32. This fallback is marked in the code; either way the same seed gives the same numbers.
 - The Worker source is NoemaExpr, the core, NoemaSimKit, logic@1 and this module.
 

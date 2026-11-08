@@ -109,7 +109,7 @@ that matches the facts, so `value` is NaN and the flag `empty` is set. Its exerc
 
 | code | when |
 |---|---|
-| `format`, `value`, `enum`, `size`, `unknown-field` (warning) | the core's table walk (`src/engines/kernel/core.js`) |
+| `format`, `value`, `enum`, `size`, `unknown-field` (warning) | the core's table walk (`src/engines/kernel/core.ts`) |
 | `value` | a part the task needs is missing (`missing (kripke needs worlds)`), two formulas for `equivalent`, two terms for `unify`, a mood that is not three of A E I O, `domain` and `size` together, `worlds` with `puzzle` or `preset`, a `loop` outside the trace, a world's atom that is not an atom name, a norm without `act` (and, for `norms`, without `kind`), `puzzle.muddy` > n |
 | `parse-empty` `parse-long` `parse-char` `parse-token` `parse-eof` `parse-paren` `parse-op` `parse-agent` `parse-ctl` `parse-deep` | a formula does not parse (§2.2); the message gives the place |
 | `term` | a unification term is a formula, not a term |

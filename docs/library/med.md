@@ -398,7 +398,7 @@ reflexes in the model: the activity shows the ventricle on its own, which its in
 
 **Shared change needed to ship it**: `pv-loop` (and `sepsis-case`, `docs/library/clinic.md`) must be added wherever the reference
 activities are registered (the pack builder's example list and `tests/activities.js`, if each engine's example is to be run there), and
-the catalogue (`src/engines/catalog.js`) must list `med@1` and `clinic@1` with their labels in the five languages.
+the catalogue (`src/engines/catalog.ts`) must list `med@1` and `clinic@1` with their labels in the five languages.
 
 ## Uses the kernel
 

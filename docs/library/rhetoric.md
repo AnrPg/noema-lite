@@ -1,4 +1,4 @@
-# `rhetoric@1` — debate and oratory (`src/engines/rhetoric/rhetoric.js`, `NoemaLibRhetoric`)
+# `rhetoric@1` — debate and oratory (`src/engines/rhetoric/rhetoric.ts`, `NoemaLibRhetoric`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for debating, argumentation, classical rhetoric and public speaking,
 built as a **computation engine over structured inputs**: a debate round (speeches, timings, points of information, ballots), an

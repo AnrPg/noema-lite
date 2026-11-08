@@ -30,8 +30,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('prob@1'),
-    () => import('./prob/prob.js'),
-    () => import('noema-worker:./prob/prob.js#simEngine'),
+    () => import('./prob/prob.ts'),
+    () => import('noema-worker:./prob/prob.ts#simEngine'),
   ),
   def(
     manifest('logic@1'),
@@ -55,8 +55,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('seq@1'),
-    () => import('./seq/seq.js'),
-    () => import('noema-worker:./seq/seq.js#simEngine'),
+    () => import('./seq/seq.ts'),
+    () => import('noema-worker:./seq/seq.ts#simEngine'),
   ),
   def(
     manifest('med@1'),
@@ -125,8 +125,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('rhetoric@1', ['engine:logic@1']),
-    () => import('./rhetoric/rhetoric.js'),
-    () => import('noema-worker:./rhetoric/rhetoric.js#simEngine'),
+    () => import('./rhetoric/rhetoric.ts'),
+    () => import('noema-worker:./rhetoric/rhetoric.ts#simEngine'),
   ),
   def(
     manifest('circuit-mna@1'),
@@ -145,8 +145,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('rf@1'),
-    () => import('./rf/rf.js'),
-    () => import('noema-worker:./rf/rf.js#simEngine'),
+    () => import('./rf/rf.ts'),
+    () => import('noema-worker:./rf/rf.ts#simEngine'),
   ),
   def(
     manifest('twin@1'),

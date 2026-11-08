@@ -108,7 +108,7 @@ const CATALOG = Object.freeze([
     'épidémie',
     'cinétique',
   ]),
-  E('prob@1', 'library', true, 'src/engines/prob/prob.js', 'prob', [
+  E('prob@1', 'library', true, 'src/engines/prob/prob.ts', 'prob', [
     'probability',
     'statistics',
     'distribution',
@@ -311,7 +311,7 @@ const CATALOG = Object.freeze([
     'hérédité',
     'évolution',
   ]),
-  E('seq@1', 'library', true, 'src/engines/seq/seq.js', 'seq', [
+  E('seq@1', 'library', true, 'src/engines/seq/seq.ts', 'seq', [
     'dna',
     'rna',
     'protein',
@@ -953,7 +953,7 @@ const CATALOG = Object.freeze([
     'paradoxe',
     'expérience de pensée',
   ]),
-  E('rhetoric@1', 'library', true, 'src/engines/rhetoric/rhetoric.js', 'rhetoric', [
+  E('rhetoric@1', 'library', true, 'src/engines/rhetoric/rhetoric.ts', 'rhetoric', [
     'rhetoric',
     'debate',
     'debating',
@@ -1107,7 +1107,7 @@ const CATALOG = Object.freeze([
     'régulation',
     'asservissement',
   ]),
-  E('rf@1', 'plugin', true, 'src/engines/rf/rf.js', 'rf', [
+  E('rf@1', 'plugin', true, 'src/engines/rf/rf.ts', 'rf', [
     'radio',
     'antenna',
     'link budget',

@@ -24,7 +24,7 @@ import NoemaSimKit from '../kernel/simkit.ts';
     return m ? parseFloat(m[1]) * (m[2] ? SI[m[2]] : 1) : NaN;
   }
 
-  // ---- the minimal radio formulas of rf@1 (src/engines/rf/rf.js; tests/twin.js checks they agree) ----
+  // ---- the minimal radio formulas of rf@1 (src/engines/rf/rf.ts; tests/twin.js checks they agree) ----
   const C0 = 299792458, KT_DBM_HZ = 10 * Math.log10(1.380649e-23 * 290 * 1000);
   const fspl = (d, f) => 20 * log10(4 * Math.PI * d * f / C0);
   const logDistance = (d, f, n, d0) => (d <= d0 ? fspl(d, f) : fspl(d0, f) + 10 * n * log10(d / d0));
