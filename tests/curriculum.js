@@ -12,6 +12,8 @@ const SHOTS = '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const until = async (fn, ms = 30000, step = 250) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await wait(step); } return false; };
+/** the words of an element as the learner reads them, through its shadow roots (the screens of src/features/<area>/ui) */
+const deepText = (p, sel) => p.evaluate(sel => { const walk = n => n.nodeType === 3 ? n.textContent : n.nodeType !== 1 && n.nodeType !== 11 ? '' : [...(n.shadowRoot ? [n.shadowRoot] : []), ...n.childNodes].map(walk).join(' '); const el = document.querySelector(sel); return el ? walk(el).replace(/\s+/g, ' ') : ''; }, sel);
 const PORT = 54337, BASE = `http://localhost:${PORT}`, APORT = 54338, ABASE = `http://localhost:${APORT}`;
 const KEY = 'sk-ant-api03-' + 'k'.repeat(40);
 const FX = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
@@ -152,12 +154,12 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(await p.evaluate(() => document.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-locked')), '“Probability basics” is locked (its prerequisite “Sets and events” is not mastered)');
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(300);
   await p.click('.cm-panel button:has-text("I already know this")'); await wait(200);
-  ok(/8 of 10 right/.test(await p.locator('.noema-ovbox').last().innerText()) && await p.locator('.cm-test').count() === 0, 'first it says what the test is (Proceed / Go back), nothing is prepared yet');
-  await p.click('.cm-teststart');
-  ok(await until(() => p.locator('.cm-test .cm-opts').count(), 10000), 'Proceed → a 10-question placement test opens');
-  for (let i = 0; i < 10; i++) { await p.click('.cm-opts button >> nth=0'); await p.click('.cm-test button.primary'); await wait(60); }
-  ok(/mastered/.test(await p.locator('.cm-test').innerText()), '10/10 → mastered');
-  await p.click('.cm-test button:has-text("OK")'); await wait(500);
+  ok(/8 of 10 right/.test(await deepText(p, 'noema-roadmap-step-test')) && await p.locator('noema-roadmap-step-test noema-roadmap-quiz').count() === 0, 'first it says what the test is (Proceed / Go back), nothing is prepared yet');
+  await p.click('noema-roadmap-step-test noema-button.start');
+  ok(await until(() => p.locator('noema-roadmap-step-test noema-roadmap-quiz .opt').count(), 10000), 'Proceed → a 10-question placement test opens');
+  for (let i = 0; i < 10; i++) { await p.click('noema-roadmap-step-test noema-roadmap-quiz .opt >> nth=0'); await p.click('noema-roadmap-step-test noema-button.next'); await wait(60); }
+  ok(/mastered/.test(await deepText(p, 'noema-roadmap-step-test')), '10/10 → mastered');
+  await p.click('noema-roadmap-step-test noema-button:has-text("OK")'); await wait(500);
   ok(await p.evaluate(() => document.querySelector('.cm-node[data-id="sets_and_events"]').classList.contains('cm-mastered') && document.querySelector('.cm-node[data-id="prob_basics"]').classList.contains('cm-open')), 'it is mastered and “Probability basics” is now open');
   await p.screenshot({ path: SHOTS + '/k6_progress.png' });
   await p.click('.cm-node[data-id="sets_and_events"]'); await wait(200); await p.click('.cm-panel button:has-text("Undo")'); await wait(400);

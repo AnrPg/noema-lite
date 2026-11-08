@@ -27,6 +27,10 @@ import { defineRoutes } from '../ui/router/routes.ts';
 export const KIT_ROUTES = defineRoutes({ kit: '/ui-kit', section: '/ui-kit/:section' });
 export type KitRoutes = typeof KIT_ROUTES.table;
 
+/** The kit's demo serves this page: #/ui-kit on a development host (localhost) — engine/loader.js asks the same. */
+export const isUiKitPage = (loc: Pick<Location, 'hash' | 'hostname'>): boolean =>
+  /^#\/ui-kit(?:[/?]|$)/.test(loc.hash) && /^(localhost|127\.0\.0\.1|\[::1\])$/.test(loc.hostname);
+
 /** the device preference of the demo's appearance (localStorage keeps device preferences only) */
 export const APPEARANCE_KEY = 'noema-ui:appearance';
 

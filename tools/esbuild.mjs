@@ -12,9 +12,9 @@
                    /sw.js from it, with the precache list and the build hash in front.
      harness.js    src/composition/harness.ts — window.NoemaCore = { contracts, engines } for a page that is not the app: the
                    skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
-     ui.js         src/composition/ui.ts — the UI foundation of phase 3 (src/ui: the Lit component kit, the router, the frame) on its
-                   demo route #/ui-kit. Development only: engine/loader.js loads it for #/ui-kit on a local host; never at start,
-                   not in the site or the one-file bundle (kind "dev").
+     ui.js         src/composition/ui.ts — the UI of phase 3 (src/ui: the Lit component kit, the router, the frame; the screens of
+                   src/features/<name>/ui as they replace the older ones). On every page right after app.js (a separate bundle: Lit
+                   needs a DOM, app.js also runs in the node suites' vm); the kit's demo #/ui-kit only on a local host.
      roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
                    suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
      engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
@@ -68,7 +68,7 @@ export const ENTRIES = [
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
-  { name: 'ui', in: 'src/composition/ui.ts', kind: 'dev', out: 'ui.js', budgetKB: 256 },   // Lit + the kit + its demo; loaded only on #/ui-kit
+  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 320 },   // Lit + the kit + its demo + the screens of phase 3
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
   { name: 'roadmaps-node', in: 'src/composition/roadmaps-node.ts', kind: 'node', format: 'cjs', out: 'roadmaps-node.cjs', budgetKB: 256 },
 ];

@@ -1,9 +1,11 @@
 /**
- * The entry of build/ui.js (tools/esbuild.mjs, kind "dev"): the UI foundation of phase 3 on its demo route #/ui-kit.
- * engine/loader.js loads this script instead of starting the older screens when a development page (localhost) opens
- * #/ui-kit; it never loads on the start screen or in the site. The only module with a side effect on import; tests
- * import ui-root.ts instead.
+ * The entry of build/ui.js (tools/esbuild.mjs, kind "page"; index.html loads it right after build/app.js): defines the
+ * Lit kit and the screens of phase 3 that the older screens already use (the Roadmap levels: roadmaps-ui.ts), and on a
+ * development page (localhost) serves the kit's demo #/ui-kit instead of the older screens (engine/loader.js then starts
+ * nothing). The only module with a side effect on import; tests import ui-root.ts and roadmaps-ui.ts instead.
  */
-import { startUiKit } from './ui-root.ts';
+import { startRoadmapsUi } from './roadmaps-ui.ts';
+import { isUiKitPage, startUiKit } from './ui-root.ts';
 
-void startUiKit();
+startRoadmapsUi();
+if (isUiKitPage(window.location)) void startUiKit();
