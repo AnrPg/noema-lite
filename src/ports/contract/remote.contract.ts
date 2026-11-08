@@ -75,7 +75,11 @@ export function remoteContract(name: string, make: RemoteFactory): void {
       assert.equal(value(await remote.rows.get('kv', 'a:stats')), null);
       const v1 = value(await remote.rows.put('kv', 'a:stats', '{"xp":1}', { expected: null }));
       assert.equal(v1.value, '{"xp":1}');
-      assert.equal(code(await remote.rows.put('kv', 'a:stats', '{"xp":9}', { expected: null })), 'remote.conflict', 'must-not-exist on a row that exists');
+      assert.equal(
+        code(await remote.rows.put('kv', 'a:stats', '{"xp":9}', { expected: null })),
+        'remote.conflict',
+        'must-not-exist on a row that exists',
+      );
       const v2 = value(await remote.rows.put('kv', 'a:stats', '{"xp":2}', { expected: v1.version }));
       assert.ok(v2.version > v1.version, 'the new version is later');
       const stale = await remote.rows.put('kv', 'a:stats', '{"xp":3}', { expected: v1.version });
@@ -93,22 +97,43 @@ export function remoteContract(name: string, make: RemoteFactory): void {
         row = value(await remote.rows.put('kv', 'a:k', String(i), { expected: row.version }));
         versions.push(row.version);
       }
-      for (let i = 1; i < versions.length; i++) assert.ok(versions[i]! > versions[i - 1]!, `${versions[i]} > ${versions[i - 1]}`);
+      for (const [i, v] of versions.entries()) if (i > 0) assert.ok(v > (versions[i - 1] ?? ''), `${v} > ${versions[i - 1] ?? ''}`);
       assert.equal(new Set(versions).size, versions.length);
     });
 
     test('rows: list by prefix (literally: _ % * are not wildcards), after a version, with a limit', async () => {
       let t = Date.parse('2026-11-07T12:00:00.000Z');
       const { remote } = await signedIn(() => t);
-      for (const k of ['s:a_b:state', 's:axb:state', 's:a%:x', 'a:other', 's:a_b:cards']) { t += 10; value(await remote.rows.put('kv', k, k, { expected: null })); }
-      assert.deepEqual(value(await remote.rows.list('kv', { prefix: 's:a_b:' })).map(r => r.key).sort(), ['s:a_b:cards', 's:a_b:state']);
-      assert.deepEqual(value(await remote.rows.list('kv', { prefix: 's:a%' })).map(r => r.key), ['s:a%:x']);
+      for (const k of ['s:a_b:state', 's:axb:state', 's:a%:x', 'a:other', 's:a_b:cards']) {
+        t += 10;
+        value(await remote.rows.put('kv', k, k, { expected: null }));
+      }
+      assert.deepEqual(
+        value(await remote.rows.list('kv', { prefix: 's:a_b:' }))
+          .map(r => r.key)
+          .sort(),
+        ['s:a_b:cards', 's:a_b:state'],
+      );
+      assert.deepEqual(
+        value(await remote.rows.list('kv', { prefix: 's:a%' })).map(r => r.key),
+        ['s:a%:x'],
+      );
       const all = value(await remote.rows.list('kv'));
       assert.equal(all.length, 5);
       assert.equal(value(await remote.rows.list('kv', { limit: 2 })).length, 2);
       const newest = [...all].sort((a, b) => (a.version < b.version ? -1 : 1));
-      const later = value(await remote.rows.list('kv', { after: newest[2]!.version })).map(r => r.key).sort();
-      assert.deepEqual(later, newest.slice(3).map(r => r.key).sort());
+      const third = newest[2];
+      assert.ok(third, 'five rows listed');
+      const later = value(await remote.rows.list('kv', { after: third.version }))
+        .map(r => r.key)
+        .sort();
+      assert.deepEqual(
+        later,
+        newest
+          .slice(3)
+          .map(r => r.key)
+          .sort(),
+      );
     });
 
     test('rows: delete (missing is fine; with a stale version it is refused)', async () => {
@@ -135,9 +160,17 @@ export function remoteContract(name: string, make: RemoteFactory): void {
       assert.equal(await value(await remote.objects.get('private', 'u1/files/a.txt'))?.text(), 'hello');
       assert.equal((await value(await remote.objects.get('private', 'u1/files/b.bin'))?.arrayBuffer())?.byteLength, 3);
       assert.equal(value(await remote.objects.get('private', 'u1/files/none')), null);
-      assert.deepEqual(value(await remote.objects.list('private', 'u1/files/')).map(o => o.path).sort(), ['u1/files/a.txt', 'u1/files/b.bin']);
+      assert.deepEqual(
+        value(await remote.objects.list('private', 'u1/files/'))
+          .map(o => o.path)
+          .sort(),
+        ['u1/files/a.txt', 'u1/files/b.bin'],
+      );
       value(await remote.objects.remove('private', ['u1/files/a.txt', 'u1/files/none']));
-      assert.deepEqual(value(await remote.objects.list('private', 'u1/files')).map(o => o.path), ['u1/files/b.bin']);
+      assert.deepEqual(
+        value(await remote.objects.list('private', 'u1/files')).map(o => o.path),
+        ['u1/files/b.bin'],
+      );
     });
 
     test('rpc answers JSON; offline is cloud.network', async () => {

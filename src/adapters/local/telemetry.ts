@@ -18,9 +18,17 @@ export interface LocalTelemetryOptions {
 }
 
 export function localTelemetry(o: LocalTelemetryOptions = {}): Telemetry {
-  const now = o.now ?? Date.now, max = o.maxEvents ?? 100, key = o.key ?? TELEMETRY_KEY;
+  const now = o.now ?? Date.now,
+    max = o.maxEvents ?? 100,
+    key = o.key ?? TELEMETRY_KEY;
   // no timers (a bare vm): the write happens at once instead of being gathered
-  const st = o.setTimeout ?? ((f: () => void, ms: number): unknown => (typeof globalThis.setTimeout === 'function' ? globalThis.setTimeout(f, ms) : f()));
+  const st =
+    o.setTimeout ??
+    ((f: () => void, ms: number): unknown => {
+      if (typeof globalThis.setTimeout === 'function') return globalThis.setTimeout(f, ms);
+      f();
+      return undefined;
+    });
   let counters: Record<string, number> = {};
   let events: TelemetryEvent[] = [];
   let pending = false;
@@ -30,7 +38,8 @@ export function localTelemetry(o: LocalTelemetryOptions = {}): Telemetry {
       try {
         const p = JSON.parse(raw.value) as Partial<TelemetrySnapshot>;
         counters = { ...(p.counters ?? {}) };
-        events = Array.isArray(p.events) ? p.events.slice(-max) : [];
+        const stored: unknown = p.events;
+        events = Array.isArray(stored) ? (stored as TelemetryEvent[]).slice(-max) : [];
       } catch {
         // counters that cannot be read start again from zero: they are statistics about this device, nothing a learner made
         counters = {};
@@ -47,13 +56,20 @@ export function localTelemetry(o: LocalTelemetryOptions = {}): Telemetry {
     }, o.saveEveryMs ?? 2000);
   };
   return {
-    count(name, by = 1) { counters[name] = (counters[name] ?? 0) + by; save(); },
+    count(name, by = 1) {
+      counters[name] = (counters[name] ?? 0) + by;
+      save();
+    },
     event(name, data: TelemetryData = {}) {
       events.push(Object.freeze({ at: now(), name, data: { ...data } }));
       if (events.length > max) events = events.slice(-max);
       save();
     },
     snapshot: () => ({ counters: { ...counters }, events: [...events] }),
-    reset() { counters = {}; events = []; save(); },
+    reset() {
+      counters = {};
+      events = [];
+      save();
+    },
   };
 }

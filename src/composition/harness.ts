@@ -12,6 +12,8 @@ const page = globalThis as { NoemaCore?: unknown };
 if (!page.NoemaCore) {
   Object.defineProperty(page, 'NoemaCore', {
     value: Object.freeze({ version: 1, contracts, engines: createAppEngines() }),
-    writable: false, enumerable: false, configurable: false,
+    writable: false,
+    enumerable: false,
+    configurable: false,
   });
 }

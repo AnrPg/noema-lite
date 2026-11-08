@@ -31,6 +31,7 @@
  */
 import { addDays, compareDays, dayOf, daysBetween, isLocalDay, parseDay, weekStart, type LocalDay } from '../kernel/day.ts';
 import { NoemaError, type ErrorCode } from '../kernel/errors.ts';
+import { textOf } from '../kernel/text.ts';
 import type { Clock } from '../ports/clock.ts';
 import type { Unsubscribe } from '../ports/common.ts';
 import type { RunOptions } from '../ports/compute.ts';
@@ -59,7 +60,8 @@ export interface ClockBridge {
 export interface StorageBridge {
   readonly kv: {
     get(key: string): string | null;
-    set(key: string, value: string): boolean;
+    /** The old engine's callers may pass any value: it is kept as its text, as localStorage keeps it. */
+    set(key: string, value: unknown): boolean;
     delete(key: string): void;
     keys(prefix?: string): string[];
   };
@@ -100,7 +102,9 @@ function day(x: string): LocalDay {
 }
 
 export function buildBridge(r: Resolver, extensions: readonly BridgeExtension[] = []): NoemaCoreBridge {
-  const clock: Clock = r.get(CLOCK), errors = r.get(ERRORS), storage = r.get(STORAGE);
+  const clock: Clock = r.get(CLOCK),
+    errors = r.get(ERRORS),
+    storage = r.get(STORAGE);
   const told = new Set<ErrorCode>();
   /** A storage failure the old code only sees as false / null: journaled once per code and page (a full storage is the signal's). */
   const failed = (e: NoemaError, where: string): void => {
@@ -112,7 +116,8 @@ export function buildBridge(r: Resolver, extensions: readonly BridgeExtension[] 
   const bridge: Record<string, unknown> = {
     version: 1,
     day: Object.freeze({
-      of: (moment?: Date | number | string) => (moment === undefined ? clock.today() : dayOf(moment instanceof Date || typeof moment === 'number' ? moment : new Date(moment))),
+      of: (moment?: Date | number | string) =>
+        moment === undefined ? clock.today() : dayOf(moment instanceof Date || typeof moment === 'number' ? moment : new Date(moment)),
       add: (d: string, n: number) => addDays(day(d), n),
       between: (a: string, b: string) => daysBetween(day(a), day(b)),
       weekStart: (d: string, firstDay = 1) => weekStart(day(d), firstDay),
@@ -128,20 +133,47 @@ export function buildBridge(r: Resolver, extensions: readonly BridgeExtension[] 
     errors,
     storage: Object.freeze({
       kv: Object.freeze({
-        get(key: string) { const x = storage.kv.get(key); if (x.ok) return x.value; failed(x.error, 'storage.kv.get'); return null; },
-        set(key: string, value: string) { const x = storage.kv.set(key, String(value)); if (!x.ok) failed(x.error, 'storage.kv.set'); return x.ok; },
-        delete(key: string) { const x = storage.kv.delete(key); if (!x.ok) failed(x.error, 'storage.kv.delete'); },
-        keys(prefix = '') { const x = storage.kv.keys(prefix); if (x.ok) return x.value; failed(x.error, 'storage.kv.keys'); return []; },
+        get(key: string) {
+          const x = storage.kv.get(key);
+          if (x.ok) return x.value;
+          failed(x.error, 'storage.kv.get');
+          return null;
+        },
+        set(key: string, value: unknown) {
+          const x = storage.kv.set(key, textOf(value));
+          if (!x.ok) failed(x.error, 'storage.kv.set');
+          return x.ok;
+        },
+        delete(key: string) {
+          const x = storage.kv.delete(key);
+          if (!x.ok) failed(x.error, 'storage.kv.delete');
+        },
+        keys(prefix = '') {
+          const x = storage.kv.keys(prefix);
+          if (x.ok) return x.value;
+          failed(x.error, 'storage.kv.keys');
+          return [];
+        },
       }),
-      async estimate() { const x = await storage.estimate(); if (x.ok) return x.value; failed(x.error, 'storage.estimate'); return null; },
-      async persist() { const x = await storage.persist(); if (x.ok) return x.value; failed(x.error, 'storage.persist'); return false; },
+      async estimate() {
+        const x = await storage.estimate();
+        if (x.ok) return x.value;
+        failed(x.error, 'storage.estimate');
+        return null;
+      },
+      async persist() {
+        const x = await storage.persist();
+        if (x.ok) return x.value;
+        failed(x.error, 'storage.persist');
+        return false;
+      },
     } satisfies StorageBridge),
     notify: r.get(NOTIFIER),
     i18n: r.get(I18N),
     telemetry: r.get(TELEMETRY),
     compute: Object.freeze({
       async run<O>(job: string, input: unknown, options?: RunOptions): Promise<O> {
-        const x = await r.get(COMPUTE).run<unknown, O>(job, input, options);
+        const x = await r.get(COMPUTE).run<O>(job, input, options);
         if (x.ok) return x.value;
         throw x.error;
       },
@@ -149,7 +181,8 @@ export function buildBridge(r: Resolver, extensions: readonly BridgeExtension[] 
     NoemaError,
   };
   for (const ext of extensions) {
-    if (CORE_NAMES.has(ext.name) || ext.name in bridge) throw new NoemaError('invariant.failed', `invariant failed: the bridge already has ${ext.name}`);
+    if (CORE_NAMES.has(ext.name) || ext.name in bridge)
+      throw new NoemaError('invariant.failed', `invariant failed: the bridge already has ${ext.name}`);
     bridge[ext.name] = ext.build(r);
   }
   return Object.freeze(bridge) as NoemaCoreBridge;

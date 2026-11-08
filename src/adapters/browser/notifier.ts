@@ -32,10 +32,22 @@ export interface TimersLike {
   clearTimeout(h: unknown): void;
 }
 
-export function domSurface(doc: () => DocumentLike | undefined = () => (globalThis as { document?: DocumentLike }).document, timers: TimersLike = { setTimeout: (f, ms) => globalThis.setTimeout(f, ms), clearTimeout: h => globalThis.clearTimeout(h as ReturnType<typeof globalThis.setTimeout>) }): NotifierSurface {
+export function domSurface(
+  doc: () => DocumentLike | undefined = () => (globalThis as { document?: DocumentLike }).document,
+  timers: TimersLike = {
+    setTimeout: (f, ms) => globalThis.setTimeout(f, ms),
+    clearTimeout: h => {
+      globalThis.clearTimeout(h as ReturnType<typeof globalThis.setTimeout>);
+    },
+  },
+): NotifierSurface {
   const box = (d: DocumentLike): ElementLike => {
     let t = d.querySelector('.toasts');
-    if (!t) { t = d.createElement('div'); t.className = 'toasts'; d.body?.append(t); }
+    if (!t) {
+      t = d.createElement('div');
+      t.className = 'toasts';
+      d.body?.append(t);
+    }
     return t;
   };
   return {
@@ -47,8 +59,16 @@ export function domSurface(doc: () => DocumentLike | undefined = () => (globalTh
       if (kind === 'notice') x.setAttribute('role', 'status');
       x.textContent = text;
       box(d).append(x);
-      const h = timers.setTimeout(() => x.remove(), ms);
-      return { remove: () => { timers.clearTimeout(h); x.remove(); }, isShown: () => x.isConnected };
+      const h = timers.setTimeout(() => {
+        x.remove();
+      }, ms);
+      return {
+        remove: () => {
+          timers.clearTimeout(h);
+          x.remove();
+        },
+        isShown: () => x.isConnected,
+      };
     },
     announce(text: string) {
       const d = doc();
@@ -64,9 +84,12 @@ export function domSurface(doc: () => DocumentLike | undefined = () => (globalTh
       }
       const region = live;
       region.textContent = '';
-      timers.setTimeout(() => { region.textContent = text; }, 50);
+      timers.setTimeout(() => {
+        region.textContent = text;
+      }, 50);
     },
   };
 }
 
-export const browserNotifier = (surface: NotifierSurface = domSurface(), options: NotifierOptions = {}): Notifier => policyNotifier(surface, options);
+export const browserNotifier = (surface: NotifierSurface = domSurface(), options: NotifierOptions = {}): Notifier =>
+  policyNotifier(surface, options);

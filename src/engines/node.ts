@@ -94,7 +94,14 @@ export const IN_HAND: Readonly<Record<string, readonly [EngineModule, string]>> 
   'twin@1': [m25, w25],
 });
 /** the kernels, for their own tests */
-export const KERNELS: Readonly<Record<string, KernelApi>> = Object.freeze({ expr: NoemaExpr as unknown as KernelApi, core: NoemaLibCore, simkit: NoemaSimKit, space: NoemaSpaceKit, schema: NoemaLibSchema as unknown as KernelApi, circuit: NoemaCircuit });
+export const KERNELS: Readonly<Record<string, KernelApi>> = Object.freeze({
+  expr: NoemaExpr as unknown as KernelApi,
+  core: NoemaLibCore,
+  simkit: NoemaSimKit,
+  space: NoemaSpaceKit,
+  schema: NoemaLibSchema as unknown as KernelApi,
+  circuit: NoemaCircuit,
+});
 /** a library with every engine loaded */
 export function nodeEngines(): EngineLibrary {
   const lib = createEngineLibrary({ plugins: ENGINE_PLUGINS, schema: () => Promise.resolve(NoemaLibSchema) });

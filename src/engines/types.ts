@@ -4,7 +4,12 @@
 import type { Plugin, PluginManifest } from '../plugins/index.ts';
 
 /** a problem of a model: the same codes and messages as the engine's Python twin (tools/lib_<name>.py, tools/<name>.py) */
-export interface Problem { readonly code: string; readonly path: string; readonly msg: string; readonly level: 'error' | 'warning' }
+export interface Problem {
+  readonly code: string;
+  readonly path: string;
+  readonly msg: string;
+  readonly level: 'error' | 'warning';
+}
 /** a spec of sim-spec@1, or the part of one an engine computes (its model and outputs): checked by the engine before any use */
 export type Spec = Readonly<Record<string, unknown>>;
 /** what a run takes: the spec's consts, params and derived values by name (numbers, booleans), and series inputs of a part */
@@ -21,7 +26,12 @@ export interface CreateOptions {
   readonly faults?: readonly unknown[];
 }
 /** a step of the parts orchestrator (docs/INTERACTIVE_LIBRARY.md §1.6) */
-export interface StepResult { readonly out: Outputs; readonly dt?: number; readonly events?: readonly unknown[]; readonly fail?: string }
+export interface StepResult {
+  readonly out: Outputs;
+  readonly dt?: number;
+  readonly events?: readonly unknown[];
+  readonly fail?: string;
+}
 /** one instance of an engine on one spec: run (or step) it with inputs */
 export interface EngineInstance {
   run?(inputs: Inputs): Outputs;
@@ -32,7 +42,9 @@ export interface EngineInstance {
   restore?(slot: number): boolean;
 }
 /** what runs an engine's instances: inline on the page, or in its Worker as self.noemaEngine */
-export interface SimEngine { create(spec: Spec, opts?: CreateOptions): EngineInstance }
+export interface SimEngine {
+  create(spec: Spec, opts?: CreateOptions): EngineInstance;
+}
 
 /** an engine as the module gives it: the shape ACT.registerEngine takes, without its Worker source */
 export interface EngineCore extends SimEngine {
@@ -46,7 +58,9 @@ export interface EngineCore extends SimEngine {
   readonly stepper?: boolean;
 }
 /** an engine registered in the app: its Worker bundle as text (defines self.noemaEngine: a SimEngine) */
-export interface RegisteredEngine extends EngineCore { readonly workerSource: string }
+export interface RegisteredEngine extends EngineCore {
+  readonly workerSource: string;
+}
 
 /** an engine module: its engine, and the functions the validators and the author call (each engine adds its own, for its tests) */
 export interface EngineModule {
@@ -60,7 +74,9 @@ export interface EngineModule {
   readonly [name: string]: unknown;
 }
 /** a loaded engine as the library hands it out: the module with its registered engine (Worker source included) */
-export interface LoadedEngine extends EngineModule { readonly engine: RegisteredEngine }
+export interface LoadedEngine extends EngineModule {
+  readonly engine: RegisteredEngine;
+}
 
 /** an engine plugin: its manifest, its code (lazy), and its Worker bundle as text (lazy) */
 export interface EnginePlugin extends Plugin<EngineModule> {
@@ -69,7 +85,11 @@ export interface EnginePlugin extends Plugin<EngineModule> {
 }
 
 /** the expression language of sim-spec@1 (kernel/simexpr.js, docs/INTERACTIVE_SIMEXPR.md) */
-export interface ExprProblem { readonly code: string; readonly msg: string; readonly at?: number }
+export interface ExprProblem {
+  readonly code: string;
+  readonly msg: string;
+  readonly at?: number;
+}
 export interface ExprApi {
   parse(src: string): unknown;
   check(src: string, opts?: { readonly vars?: readonly string[] }): ExprProblem[];
@@ -92,7 +112,13 @@ export interface CatalogEntry {
   readonly words: readonly string[];
   readonly runtime?: boolean | string;
 }
-export interface Suggestion { readonly id: string; readonly layer: string; readonly slug: string; readonly score: number; readonly hits: readonly string[] }
+export interface Suggestion {
+  readonly id: string;
+  readonly layer: string;
+  readonly slug: string;
+  readonly score: number;
+  readonly hits: readonly string[];
+}
 export interface CatalogApi {
   readonly CATALOG: readonly CatalogEntry[];
   readonly LIBRARY: readonly string[];

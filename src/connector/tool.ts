@@ -7,11 +7,20 @@ import type { Bridges, SourceFiles } from './services/rows.ts';
 import type { Sagas } from './services/sagas.ts';
 import type { Storage } from './services/storage.ts';
 import type { AuthUser, Supabase } from './services/supabase.ts';
+import { str } from './util.ts';
 import type { JsonSchema } from './validate.ts';
 
-export interface ToolDefinition { name: string; description: string; inputSchema: JsonSchema; annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean; idempotentHint?: boolean } }
+export interface ToolDefinition {
+  name: string;
+  description: string;
+  inputSchema: JsonSchema;
+  annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean; idempotentHint?: boolean };
+}
 export type Content = { type: 'text'; text: string } | { type: 'image'; data: string; mimeType: string };
-export interface ToolResult { content: Content[]; isError?: boolean }
+export interface ToolResult {
+  content: Content[];
+  isError?: boolean;
+}
 
 export interface ToolContext {
   env: ConnectorEnv;
@@ -38,7 +47,7 @@ export const text = (t: string): ToolResult => ({ content: [{ type: 'text', text
 export const fail = (t: string): ToolResult => ({ content: [{ type: 'text', text: '❌ ' + t }], isError: true });
 
 /** An argument as a trimmed string ('' when absent). */
-export const argStr = (args: Args, k: string): string => (args[k] == null ? '' : String(args[k]).trim());
+export const argStr = (args: Args, k: string): string => str(args[k]).trim();
 /** A yes/no argument given as a boolean or as "true" / "false". */
 export const argFlag = (args: Args, k: string): boolean => args[k] === true || args[k] === 'true';
 export const argOff = (args: Args, k: string): boolean => args[k] === false || args[k] === 'false';

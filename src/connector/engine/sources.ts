@@ -21,8 +21,18 @@ import type { LegacySource } from './legacy.ts';
 const S = (path: string, text: string): LegacySource => ({ path, text });
 
 export const LEGACY_SOURCES: readonly LegacySource[] = [
-  S('engine/report.js', report), S('engine/enginereq.js', enginereq), S('engine/src/38_activity_h5p.js', h5p),
-  S('engine/packcheck.js', packcheck), S('engine/src/44_activity_wasm.js', wasm), S('engine/src/45_activity_embed.js', embed),
-  S('engine/llm.js', llm), S('engine/curriculum.js', curriculum), S('engine/curjobs.js', curjobs), S('engine/curshare.js', curshare),
-  S('engine/imglib.js', imglib), S('engine/langcore.js', langcore), S('engine/curimport.js', curimport), S('engine/sourceplan.js', sourceplan),
+  S('engine/report.js', report),
+  S('engine/enginereq.js', enginereq),
+  S('engine/src/38_activity_h5p.js', h5p),
+  S('engine/packcheck.js', packcheck),
+  S('engine/src/44_activity_wasm.js', wasm),
+  S('engine/src/45_activity_embed.js', embed),
+  S('engine/llm.js', llm),
+  S('engine/curriculum.js', curriculum),
+  S('engine/curjobs.js', curjobs),
+  S('engine/curshare.js', curshare),
+  S('engine/imglib.js', imglib),
+  S('engine/langcore.js', langcore),
+  S('engine/curimport.js', curimport),
+  S('engine/sourceplan.js', sourceplan),
 ];

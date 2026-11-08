@@ -30,20 +30,13 @@
     },
     "region": {
       "type": "object",
-      "required": [
-        "id",
-        "shape"
-      ],
+      "required": ["id", "shape"],
       "properties": {
         "id": {
           "$ref": "#/$defs/id"
         },
         "shape": {
-          "enum": [
-            "rect",
-            "circle",
-            "poly"
-          ]
+          "enum": ["rect", "circle", "poly"]
         },
         "x": {
           "type": "number"
@@ -117,12 +110,7 @@
             }
           },
           "then": {
-            "required": [
-              "x",
-              "y",
-              "w",
-              "h"
-            ]
+            "required": ["x", "y", "w", "h"]
           }
         },
         {
@@ -134,11 +122,7 @@
             }
           },
           "then": {
-            "required": [
-              "cx",
-              "cy",
-              "r"
-            ]
+            "required": ["cx", "cy", "r"]
           }
         },
         {
@@ -150,22 +134,14 @@
             }
           },
           "then": {
-            "required": [
-              "points"
-            ]
+            "required": ["points"]
           }
         }
       ]
     },
     "mediaItem": {
       "type": "object",
-      "required": [
-        "id",
-        "file",
-        "alt",
-        "credit",
-        "license"
-      ],
+      "required": ["id", "file", "alt", "credit", "license"],
       "properties": {
         "id": {
           "$ref": "#/$defs/id"
@@ -207,12 +183,7 @@
           }
         },
         "origin": {
-          "enum": [
-            "drawn",
-            "plot",
-            "source",
-            "web"
-          ]
+          "enum": ["drawn", "plot", "source", "web"]
         },
         "url": {
           "type": "string",
@@ -230,9 +201,7 @@
       "allOf": [
         {
           "if": {
-            "required": [
-              "origin"
-            ],
+            "required": ["origin"],
             "properties": {
               "origin": {
                 "const": "web"
@@ -240,20 +209,14 @@
             }
           },
           "then": {
-            "required": [
-              "url",
-              "retrieved"
-            ]
+            "required": ["url", "retrieved"]
           }
         }
       ]
     },
     "mediaRegistry": {
       "type": "object",
-      "required": [
-        "format",
-        "items"
-      ],
+      "required": ["format", "items"],
       "properties": {
         "format": {
           "const": "noema.media/v1"
@@ -268,27 +231,10 @@
     },
     "visualExercise": {
       "type": "object",
-      "required": [
-        "id",
-        "type",
-        "section",
-        "difficulty",
-        "tags",
-        "q",
-        "explain",
-        "media"
-      ],
+      "required": ["id", "type", "section", "difficulty", "tags", "q", "explain", "media"],
       "properties": {
         "type": {
-          "enum": [
-            "img_hotspot",
-            "img_sequence",
-            "img_reveal",
-            "img_drag",
-            "img_label",
-            "img_select",
-            "img_occlusion"
-          ]
+          "enum": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"]
         },
         "media": {
           "$ref": "#/$defs/id"
@@ -396,10 +342,7 @@
           "maximum": 1
         },
         "order": {
-          "enum": [
-            "listed",
-            "random"
-          ]
+          "enum": ["listed", "random"]
         }
       },
       "allOf": [
@@ -407,17 +350,12 @@
           "if": {
             "properties": {
               "type": {
-                "enum": [
-                  "img_hotspot",
-                  "img_sequence"
-                ]
+                "enum": ["img_hotspot", "img_sequence"]
               }
             }
           },
           "then": {
-            "required": [
-              "answer"
-            ]
+            "required": ["answer"]
           }
         },
         {
@@ -429,20 +367,14 @@
             }
           },
           "then": {
-            "required": [
-              "options",
-              "answer"
-            ]
+            "required": ["options", "answer"]
           }
         }
       ]
     },
     "figureBlock": {
       "type": "object",
-      "required": [
-        "t",
-        "media"
-      ],
+      "required": ["t", "media"],
       "properties": {
         "t": {
           "const": "figure"

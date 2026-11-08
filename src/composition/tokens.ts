@@ -32,14 +32,17 @@ export interface Cloud {
 }
 
 export const CONFIG = token<CoreConfig>('core.config', 'the deployment settings (config.js)');
-export const STORAGE = token<Storage>('core.storage', 'this device\'s storage (Storage port)');
-export const CLOCK = token<Clock>('core.clock', 'the time and the learner\'s day (Clock port)');
+export const STORAGE = token<Storage>('core.storage', "this device's storage (Storage port)");
+export const CLOCK = token<Clock>('core.clock', "the time and the learner's day (Clock port)");
 export const I18N = token<I18n>('core.i18n', 'the interface language (I18n port)');
 export const NOTIFIER = token<Notifier>('core.notifier', 'toasts, notices, alerts (Notifier port)');
 export const TELEMETRY = token<Telemetry>('core.telemetry', 'local counters and events (Telemetry port)');
-export const ERRORS = token<ErrorReporter>('core.errors', 'the error journal and the learner\'s warnings (ErrorReporter port)');
+export const ERRORS = token<ErrorReporter>('core.errors', "the error journal and the learner's warnings (ErrorReporter port)");
 export const JOBS = token<MutableJobRegistry>('core.jobs', 'the Compute jobs by name');
 export const COMPUTE = token<Compute>('core.compute', 'jobs off the main thread (Compute port)');
 export const AI = token<AiFactory>('core.ai', 'makes the AI of a provider for a key (AI port)');
 export const CLOUD = token<Cloud | null>('core.cloud', 'Auth + Remote of the Supabase project, or null');
-export const ENGINES = token<EngineLibrary>('engines.library', 'the engine library of sim-spec@1 (src/engines): the expression language, the catalogue, every engine as a lazy plugin');
+export const ENGINES = token<EngineLibrary>(
+  'engines.library',
+  'the engine library of sim-spec@1 (src/engines): the expression language, the catalogue, every engine as a lazy plugin',
+);

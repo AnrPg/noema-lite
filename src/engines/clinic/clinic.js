@@ -663,7 +663,7 @@ import NoemaLibMed from '../med/med.js';
           else if (o.of === 'tree' && tr) res[o.id] = sceneTree(m.tree, tr);
           else if (o.of === 'cea' && ce) res[o.id] = sceneCea(ce);
           else if (o.of === 'vp' && vr) res[o.id] = sceneVp(m, out, vr);
-        } catch (e) { /* an empty scene */ }
+        } catch (e) { delete res[o.id]; /* an empty scene */ }
       } else res[o.id] = out[o.of];
     }
     return { out: res, all: out, codes: Object.fromEntries(Object.entries(codes).map(([k, s]) => [k, [...s]])) };

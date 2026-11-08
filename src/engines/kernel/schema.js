@@ -118,7 +118,7 @@ import NoemaLibCore from './core.js';
   /** what an output of `kind` may name for this model (suggestions, in the engine's order) */
   function ofs(table, model, kind) {
     const tb = table || {};
-    if (typeof tb.offered === 'function') { try { const o = tb.offered(isObj(model) ? model : {}); if (o && Array.isArray(o[kind])) return o[kind].slice(); } catch (e) { /* a model half typed */ } }
+    if (typeof tb.offered === 'function') { let o = null; try { o = tb.offered(isObj(model) ? model : {}); } catch (e) { o = null; /* a model half typed: the table's own outputs below */ } if (o && Array.isArray(o[kind])) return o[kind].slice(); }
     const o = tb.outputs;
     const pick = c => { const l = c && c[kind]; return Array.isArray(l) ? l.slice() : isObj(l) ? Object.keys(l) : []; };
     if (isObj(o) && o.$by) {

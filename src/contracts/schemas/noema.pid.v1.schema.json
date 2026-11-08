@@ -4,20 +4,13 @@
   "title": "noema-lite control loop (the model of pid@1)",
   "description": "The model of a sim-spec@1 spec whose engine is pid@1 (src/engines/pid/pid.js; docs/INTERACTIVE_ENGINES.md §3). The engine's own check() (twin: tools/pid.py) also tests what a schema cannot: uMin < uMax, Ts ≥ dt, the step budget (200000), bindings to fields that exist, steps ascending; and it warns on a step longer than half the plant's fastest time constant ('stiff'), anti-windup without limits and a controller without gain.",
   "type": "object",
-  "required": [
-    "plant",
-    "transient"
-  ],
+  "required": ["plant", "transient"],
   "properties": {
     "plant": {
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "type",
-            "K",
-            "tau"
-          ],
+          "required": ["type", "K", "tau"],
           "properties": {
             "type": {
               "const": "fopdt"
@@ -42,12 +35,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "type",
-            "K",
-            "wn",
-            "zeta"
-          ],
+          "required": ["type", "K", "wn", "zeta"],
           "properties": {
             "type": {
               "const": "second"
@@ -76,10 +64,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "type",
-            "K"
-          ],
+          "required": ["type", "K"],
           "properties": {
             "type": {
               "const": "integrator"
@@ -100,9 +85,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "type"
-          ],
+          "required": ["type"],
           "properties": {
             "type": {
               "const": "motor"
@@ -128,10 +111,7 @@
               "minimum": 0
             },
             "output": {
-              "enum": [
-                "speed",
-                "position"
-              ]
+              "enum": ["speed", "position"]
             },
             "theta": {
               "type": "number",
@@ -143,11 +123,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "type",
-            "C",
-            "R"
-          ],
+          "required": ["type", "C", "R"],
           "properties": {
             "type": {
               "const": "thermal"
@@ -176,11 +152,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "type",
-            "A",
-            "k"
-          ],
+          "required": ["type", "A", "k"],
           "properties": {
             "type": {
               "const": "tank"
@@ -245,11 +217,7 @@
           "type": "number"
         },
         "antiWindup": {
-          "enum": [
-            "none",
-            "clamp",
-            "backcalc"
-          ]
+          "enum": ["none", "clamp", "backcalc"]
         },
         "Tt": {
           "type": "number",
@@ -266,10 +234,7 @@
       "additionalProperties": false
     },
     "mode": {
-      "enum": [
-        "closed",
-        "open"
-      ],
+      "enum": ["closed", "open"],
       "default": "closed"
     },
     "setpoint": {
@@ -279,15 +244,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "step"
-          ],
+          "required": ["step"],
           "properties": {
             "step": {
               "type": "object",
-              "required": [
-                "to"
-              ],
+              "required": ["to"],
               "properties": {
                 "from": {
                   "type": "number"
@@ -307,15 +268,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "ramp"
-          ],
+          "required": ["ramp"],
           "properties": {
             "ramp": {
               "type": "object",
-              "required": [
-                "slope"
-              ],
+              "required": ["slope"],
               "properties": {
                 "from": {
                   "type": "number"
@@ -339,16 +296,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "sine"
-          ],
+          "required": ["sine"],
           "properties": {
             "sine": {
               "type": "object",
-              "required": [
-                "amp",
-                "freq"
-              ],
+              "required": ["amp", "freq"],
               "properties": {
                 "offset": {
                   "type": "number"
@@ -371,9 +323,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "steps"
-          ],
+          "required": ["steps"],
           "properties": {
             "steps": {
               "type": "array",
@@ -407,15 +357,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "step"
-          ],
+          "required": ["step"],
           "properties": {
             "step": {
               "type": "object",
-              "required": [
-                "to"
-              ],
+              "required": ["to"],
               "properties": {
                 "from": {
                   "type": "number"
@@ -435,15 +381,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "ramp"
-          ],
+          "required": ["ramp"],
           "properties": {
             "ramp": {
               "type": "object",
-              "required": [
-                "slope"
-              ],
+              "required": ["slope"],
               "properties": {
                 "from": {
                   "type": "number"
@@ -467,16 +409,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "sine"
-          ],
+          "required": ["sine"],
           "properties": {
             "sine": {
               "type": "object",
-              "required": [
-                "amp",
-                "freq"
-              ],
+              "required": ["amp", "freq"],
               "properties": {
                 "offset": {
                   "type": "number"
@@ -499,9 +436,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "steps"
-          ],
+          "required": ["steps"],
           "properties": {
             "steps": {
               "type": "array",
@@ -535,15 +470,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "step"
-          ],
+          "required": ["step"],
           "properties": {
             "step": {
               "type": "object",
-              "required": [
-                "to"
-              ],
+              "required": ["to"],
               "properties": {
                 "from": {
                   "type": "number"
@@ -563,15 +494,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "ramp"
-          ],
+          "required": ["ramp"],
           "properties": {
             "ramp": {
               "type": "object",
-              "required": [
-                "slope"
-              ],
+              "required": ["slope"],
               "properties": {
                 "from": {
                   "type": "number"
@@ -595,16 +522,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "sine"
-          ],
+          "required": ["sine"],
           "properties": {
             "sine": {
               "type": "object",
-              "required": [
-                "amp",
-                "freq"
-              ],
+              "required": ["amp", "freq"],
               "properties": {
                 "offset": {
                   "type": "number"
@@ -627,9 +549,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "steps"
-          ],
+          "required": ["steps"],
           "properties": {
             "steps": {
               "type": "array",
@@ -658,9 +578,7 @@
     },
     "noise": {
       "type": "object",
-      "required": [
-        "std"
-      ],
+      "required": ["std"],
       "properties": {
         "std": {
           "type": "number",
@@ -687,9 +605,7 @@
     },
     "transient": {
       "type": "object",
-      "required": [
-        "tEnd"
-      ],
+      "required": ["tEnd"],
       "properties": {
         "tEnd": {
           "oneOf": [
@@ -725,30 +641,16 @@
       "maxItems": 24,
       "items": {
         "type": "object",
-        "required": [
-          "element",
-          "expr"
-        ],
+        "required": ["element", "expr"],
         "properties": {
           "element": {
-            "enum": [
-              "plant",
-              "controller",
-              "setpoint",
-              "load",
-              "disturbance",
-              "noise"
-            ]
+            "enum": ["plant", "controller", "setpoint", "load", "disturbance", "noise"]
           },
           "prop": {
             "type": "string"
           },
           "expr": {
-            "type": [
-              "string",
-              "number",
-              "boolean"
-            ]
+            "type": ["string", "number", "boolean"]
           }
         },
         "additionalProperties": false

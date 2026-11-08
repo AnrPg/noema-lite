@@ -5,7 +5,7 @@ declare module 'legacy:*' {
   export default text;
 }
 declare module 'virtual:noema-connector-data' {
-  import type { ConnectorData } from './env.ts';
+  import type { ConnectorData } from '@/connector/env.ts';
   /** the public configuration and the documents (tools/build.py → tools/connector_bundle.mjs) */
   const data: ConnectorData;
   export default data;

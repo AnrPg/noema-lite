@@ -15,14 +15,7 @@
       "properties": {
         "part": {
           "type": "string",
-          "enum": [
-            "workflow",
-            "content",
-            "visual",
-            "interactive",
-            "languages",
-            "all"
-          ],
+          "enum": ["workflow", "content", "visual", "interactive", "languages", "all"],
           "description": "Default: all (subject packs). \"interactive\": interactive activities — the contract (docs/INTERACTIVE.md: tiers, the interactive block, the sim exercise, the window.noema API, sim-spec@1 specs and the checks grader, h5p@1 items (.h5p files beside the pack, h5pByLocale), limits, fallbacks), the authoring playbook, the expression language of sim-spec@1 and the H5P runtime. \"languages\": the binding rules for language courses (docs/LANGUAGE_RULES.md — D19 first: taught through the learner's native language, docs/language-packs.md — and how to answer a task)"
         }
       }
@@ -49,9 +42,7 @@
           "description": "Optional: a translation of the pack (e.g. el, ru) instead of the pack itself"
         }
       },
-      "required": [
-        "subject_id"
-      ]
+      "required": ["subject_id"]
     },
     "noema_start_upload": {
       "description": "Step 1 of saving a pack built in your sandbox: returns a signed URL (valid 2 h) and the exact curl command to PUT the pack (work/<id>/build/<id>.json, written by make_pack.py) to it. Then call noema_finish_upload — it also asks for the source files packaged with the pack. The upload is never a prerequisite: if the network blocks the curl, do not stop — pipeline.py defer work/<id> upload, go on with the flow (the next Roadmap step too), and retry every waiting upload together at the end (pipeline.py pending work); if it still fails, give the learner the <id>.noema.zip. For a Roadmap step this call also keeps the step reserved for the run while its upload waits (72 h, renewed by every call), so no other run builds it again.",
@@ -62,9 +53,7 @@
           "description": "pack.subject.id"
         }
       },
-      "required": [
-        "subject_id"
-      ]
+      "required": ["subject_id"]
     },
     "noema_start_source_upload": {
       "description": "Upload ONE original source file (PDF, slides, document… or one part of a split PDF) so the learner can open it inside noema-lite (👁 preview, at the cited page). Normally not needed: noema_finish_upload gives the commands for every source file the pack contains. Use it to add or replace a single file; returns a signed URL + curl command.",
@@ -82,11 +71,7 @@
           "description": "original file name, e.g. ecb-ch5.pdf"
         }
       },
-      "required": [
-        "subject_id",
-        "source_id",
-        "filename"
-      ]
+      "required": ["subject_id", "source_id", "filename"]
     },
     "noema_finish_upload": {
       "description": "Step 2: checks the uploaded pack, its source files (every file packaged by make_pack.py — each part of a split PDF — must be uploaded, with the right size) and the .h5p files of its H5P activities (activities/<id>/item.h5p: size, sha256 and the package rules) and adds it to the user’s subject picker. Returns errors to fix, the upload commands of missing source or activity files (run them, then call it again), or a summary.",
@@ -104,9 +89,7 @@
           "description": "optional: the step (id or title) of curriculum_id that this subject teaches"
         }
       },
-      "required": [
-        "subject_id"
-      ]
+      "required": ["subject_id"]
     },
     "noema_save_pack": {
       "description": "Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.",
@@ -125,9 +108,7 @@
           "description": "optional: the step (id or title) of curriculum_id that this subject teaches"
         }
       },
-      "required": [
-        "pack_json"
-      ]
+      "required": ["pack_json"]
     },
     "noema_pipeline": {
       "description": "Which content flow is this, and its steps in order (docs/PIPELINES.md). Call it FIRST for any content work: a Roadmap from sources or a goal, a new part of a Roadmap that exists, one Roadmap step, one subject, an addition, a translation, a language bridge, an import, a language-course task or a new language. action \"detect\" with the facts of the request gives the flow; \"steps\" gives each step: what to do, how it is checked (the local command python3 scripts/pipeline.py check …, a connector call, or a judgement) and its doc; \"flows\" lists every flow. In the sandbox the same steps run with scripts/pipeline.py (start → next → check), which records run.json; never skip a strict step.",
@@ -135,11 +116,7 @@
       "properties": {
         "action": {
           "type": "string",
-          "enum": [
-            "detect",
-            "steps",
-            "flows"
-          ]
+          "enum": ["detect", "steps", "flows"]
         },
         "flow": {
           "type": "string",
@@ -193,9 +170,7 @@
           }
         }
       },
-      "required": [
-        "action"
-      ]
+      "required": ["action"]
     },
     "noema_bridge_guide": {
       "description": "Language help (文A, docs/BRIDGE.md) for students who study a subject in a language that is not their own: a sidecar per pack × native language with the words of the pack in the meaning they have IN it, translated, plus per section the key words and a short preview. Returns the format, the workflow (tools/bridge.py todo → core.json → <native>.json → check → build → noema_save_bridge), the bridges this account already has and the mistakes learners reported in them. Works for any pair of languages (tested: every direction among English, Greek, Russian, Arabic, German and French). Read it before writing a bridge.",
@@ -250,10 +225,7 @@
           "description": "Optional: the subject's name in this language, { \"title\", \"appTitle\", \"description\", \"searchExamples\", \"hero\": {…}, \"tutor\": {…} } (only fields the subject has) — merged into the translation (the one given, or the one already saved)"
         }
       },
-      "required": [
-        "subject_id",
-        "locale"
-      ]
+      "required": ["subject_id", "locale"]
     },
     "noema_save_roadmap_translation": {
       "description": "Save the translation of a Roadmap's own words into one language: its title and goal, and per step EVERYTHING its panel shows: title, summary, learning goals, domains, and each chapter's title, teaching goals and coverage (the map, the list and the step panel then show them when the learner's app is in that language — nothing of a translated step may stay in the Roadmap's own language). Made together with the packs' translations, into the same languages (English, Greek, Russian, German, French minus the Roadmap's own): the whole map (title + every step's title and summary) right after noema_create_roadmap, then each step's learning goals, domains and chapters (title, goals, coverage) when that step's pack is translated. It is written straight into the Roadmap, so every device shows it at its next sync. Partial objects are merged into what is there. noema_save_translation and noema_curriculum_task list exactly what is still untranslated.",
@@ -271,11 +243,7 @@
           "description": "ONE JSON object: { \"title\": \"…\", \"goal\": \"…\", \"nodes\": { \"<step id>\": { \"title\": \"…\", \"summary\": \"…\", \"learningGoals\": [\"…\" one per goal, same order], \"domains\": [\"…\" one per domain], \"chapters\": { \"<chapter ref>\": { \"title\": \"…\", \"goals\": [\"…\" one per teaching goal], \"coverage\": [\"…\" one per coverage item] } } } } } — any subset (a chapter may also be its title alone, \"…\")"
         }
       },
-      "required": [
-        "curriculum_id",
-        "locale",
-        "translation_json"
-      ]
+      "required": ["curriculum_id", "locale", "translation_json"]
     },
     "noema_image_search": {
       "description": "Search pictures for a pack on the whole web and in open collections at once: Bing Images and DuckDuckGo Images (any site — what a Google image search shows too), Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome Collection, Art Institute of Chicago. Returns candidates (image url, page, size, licence, credit). The packs are for the learner's personal study: any licence is fine, the source is recorded. Look at the best ones with noema_image_fetch.",
@@ -293,23 +261,12 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "bing",
-              "duckduckgo",
-              "commons",
-              "openverse",
-              "nasa",
-              "inaturalist",
-              "wellcome",
-              "artic"
-            ]
+            "enum": ["bing", "duckduckgo", "commons", "openverse", "nasa", "inaturalist", "wellcome", "artic"]
           },
           "description": "Only these (default: bing, commons, openverse, duckduckgo)"
         }
       },
-      "required": [
-        "query"
-      ]
+      "required": ["query"]
     },
     "noema_image_fetch": {
       "description": "Get one picture from the web — an image url, OR a page: Wikimedia / Wikipedia file pages (any language, “#/media/File:…”) and any other page are resolved to their picture. Shows you the picture and returns its file url, size (W×H pixels for regions) and a ready media.json entry (\"fetch\": \"app\": the noema-lite app downloads and embeds it). Use it when your sandbox cannot download the picture itself (no network to that site) — or simply to look at a candidate.",
@@ -327,9 +284,7 @@
           "description": "what it shows (optional)"
         }
       },
-      "required": [
-        "url"
-      ]
+      "required": ["url"]
     },
     "noema_curricula": {
       "description": "The learner's noema-lite curricula (maps of steps, each step becomes a subject) and what is waiting for you in each: building the map, planning the chapters of steps, preparing queued steps as subjects.",
@@ -339,9 +294,7 @@
     "noema_create_roadmap": {
       "description": "Make a new Roadmap (a curriculum: a map of steps, each step becomes a subject) in the learner's noema-lite account from the material the learner gave you — the From-your-sources way (skill §0b): use it when the material is several topics that build on each other, or more than one subject can hold; for ONE coherent topic build one subject pack instead. New material for a Roadmap that exists (the next lectures of the same course) is a new PART of that Roadmap: noema_extend_roadmap, never a second Roadmap. Read every file first, then send the steps (each with its prerequisites and the files and pages it is made from). It is checked like the app's own proposal; then plan the chapters and prepare the steps with noema_curriculum_task.",
       "type": "object",
-      "required": [
-        "plan_json"
-      ],
+      "required": ["plan_json"],
       "properties": {
         "plan_json": {
           "type": "string",
@@ -374,9 +327,7 @@
     "noema_extend_roadmap": {
       "description": "Grow an EXISTING Roadmap with a new part, from new material the learner gave you (e.g. this week's lectures) — the way to build a Roadmap little by little as a course goes on (skill §0c, pipeline flow 9). Never make a second Roadmap for new material of a course that has one. First call noema_roadmap_map and read every new file. Send only the NEW steps, each joined to the map by the one canonical connection: \"@<step id>\" (ids from noema_roadmap_map) — in \"prerequisites\" for what a new step builds on, in \"before\" for a step on the map (not prepared yet) that a new step must come before. A topic the map already has is linked, never added again. It is checked like noema_create_roadmap plus the joins (every \"@id\" exists, no cycle, the part is connected); the learner's app adds it at its next sync and nothing already prepared changes. Then plan and prepare the new steps with noema_curriculum_task.",
       "type": "object",
-      "required": [
-        "plan_json"
-      ],
+      "required": ["plan_json"],
       "properties": {
         "curriculum_id": {
           "type": "string",
@@ -399,9 +350,7 @@
     "noema_link_roadmap_steps": {
       "description": "Add prerequisite links between steps that are ALREADY on a Roadmap (and remove wrong ones) — for a connection found later, e.g. while growing the map, that noema_extend_roadmap cannot make because it only joins new steps. Prepared steps may get a new prerequisite too: adding or removing a link changes only the map (study order, arrows, the \"after …\" lines); it never changes any prepared subject, never re-plans a step and never touches the learner's progress. First call noema_roadmap_map for the \"@<step id>\"s. Checked all at once: both steps exist, from ≠ to, no cycle (from must not come after to), a removed link exists; a link already there is reported, not an error. The learner's app applies it the next time it is open or syncs; noema_roadmap_map shows it at once.",
       "type": "object",
-      "required": [
-        "links_json"
-      ],
+      "required": ["links_json"],
       "properties": {
         "curriculum_id": {
           "type": "string",
@@ -423,12 +372,7 @@
         },
         "want": {
           "type": "string",
-          "enum": [
-            "any",
-            "map",
-            "plan",
-            "step"
-          ],
+          "enum": ["any", "map", "plan", "step"],
           "description": "only this kind of work (default any: map first, then plans, then queued steps)"
         },
         "step": {
@@ -460,14 +404,7 @@
         },
         "want": {
           "type": "string",
-          "enum": [
-            "any",
-            "core",
-            "node",
-            "function",
-            "compare",
-            "refill"
-          ],
+          "enum": ["any", "core", "node", "function", "compare", "refill"],
           "description": "only this kind of task (default any, in queue order)"
         },
         "task": {
@@ -498,11 +435,7 @@
           "description": "ONE JSON object matching the task's JSON Schema"
         }
       },
-      "required": [
-        "course_id",
-        "task_id",
-        "result_json"
-      ]
+      "required": ["course_id", "task_id", "result_json"]
     },
     "noema_language_package_guide": {
       "description": "Add a whole new language to one of the learner's noema-lite language courses from ONE request (e.g. \"add Persian to my polyglot course\"): returns the complete instructions — the skill noema-language-builder specialised for this course and language (D19 first: the language is taught through each learner's native language — neutral texts that name no language outside the course, and on every grammar page a contrast note for each supported native (en el ru fr ar de hi zh ja it es sq pt tr) and the five type notes, every note structured (R2); R3: the FIRST step maps the word's parameters per part of speech, before any word): the playbook's steps in order (typology, phenomena and the word-parameter map WORD_PARAMETERS.md, the facade, the foundations, the fields, the core, links, audit; each step as a sub-agent with its audit turn), the batches with the node ids of THIS course, the toolkit and course file links, the checks, a progress file to resume, and the upload (noema_lang_package_start → curl → noema_lang_package_finish). Hours of work in a sandbox that runs long tasks; it cannot be done in a plain chat.",
@@ -517,9 +450,7 @@
           "description": "the language to add: ISO 639 code (fa) or English name (Persian)"
         }
       },
-      "required": [
-        "language"
-      ]
+      "required": ["language"]
     },
     "noema_lang_package_start": {
       "description": "Step 1 of saving a language package (work/<code>.langpack.json, made by lang_course.py package): returns a signed URL (valid 2 h) into the learner's private storage and the exact curl command to PUT the package. Then call noema_lang_package_finish.",
@@ -534,10 +465,7 @@
           "description": "the ISO 639 code of the language in the package"
         }
       },
-      "required": [
-        "course_id",
-        "language"
-      ]
+      "required": ["course_id", "language"]
     },
     "noema_lang_package_finish": {
       "description": "Step 2: checks the uploaded language package exactly as noema-lite does (every form against its paradigm cells, the facade of every word, sentences, grammar pages, the catalogue of phenomena, the parallel order — and that it fills the course's nodes without adding any) and, when it passes, records it in the learner's account: the app adds the language to the course on every device. Otherwise it lists every problem — fix them, package again, upload again.",
@@ -551,10 +479,7 @@
           "description": "the ISO 639 code"
         }
       },
-      "required": [
-        "course_id",
-        "language"
-      ]
+      "required": ["course_id", "language"]
     },
     "noema_vault_fields_queue": {
       "description": "The field graph of the noema-lite vault (docs/VAULT.md §Fields: fields of study, each under one or more parents — a DAG, e.g. Medical physics under Physics AND Medicine; top: the ten ISCED-F broad fields b_ed … b_sv; Wikidata ids Q…; fields people proposed u_…). For admins of the app (the person in noema_admins): what waits — fields people PROPOSED (their name in one language, the parents they chose, how many files use them and some titles) and accepted fields still MISSING a name in some UI locale. Then decide with noema_vault_fields_save: accept (with names in every locale and the right parents), merge into an existing field, or reject; and fill the missing names.",
@@ -591,9 +516,7 @@
           "description": "The items, a JSON array (≤ 200)"
         }
       },
-      "required": [
-        "items_json"
-      ]
+      "required": ["items_json"]
     },
     "noema_reports": {
       "description": "The problem reports people sent from the noema-lite app (the ⚑ button: a screenshot + the exact place). For the app's admins (noema_admins) only. Lists them newest first: id, kind (content, translation, display, broken, idea, other), status, the item id that locates the problem uniquely (ex:<exercise id> · card:<key> · blk:<section>/<block> · trap:<chapter>/<id> · drill:<id> · sec:<id> · ui:<i18n key> · lang:<course>/…), subject, address, the learner's words. Then read one with noema_report.",
@@ -601,16 +524,7 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": [
-            "open",
-            "new",
-            "seen",
-            "fixing",
-            "fixed",
-            "wontfix",
-            "duplicate",
-            "all"
-          ],
+          "enum": ["open", "new", "seen", "fixing", "fixed", "wontfix", "duplicate", "all"],
           "description": "default open (= new, seen, fixing)"
         },
         "subject": {
@@ -636,9 +550,7 @@
           "description": "include the screenshot (default true)"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "noema_report_update": {
       "description": "Answer a problem report (admins only): its status (seen, fixing, fixed, wontfix, duplicate), a note for the team, and where it was fixed (a commit, a pull request, a pack version). What the reporter sent never changes.",
@@ -649,14 +561,7 @@
         },
         "status": {
           "type": "string",
-          "enum": [
-            "new",
-            "seen",
-            "fixing",
-            "fixed",
-            "wontfix",
-            "duplicate"
-          ]
+          "enum": ["new", "seen", "fixing", "fixed", "wontfix", "duplicate"]
         },
         "note": {
           "type": "string",
@@ -667,9 +572,7 @@
           "description": "commit sha, pull request URL or pack version (≤ 300)"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "noema_request_engine": {
       "description": "Ask for a NEW engine of interactive activities (sim-spec@1) when no engine of the library fits (docs/INTERACTIVE_LIBRARY.md §3): what should be simulated, as precisely as possible. FIRST read noema_authoring_guide part \"interactive\": the library (formula, ode, prob, graph, geom, genetics, seq, med, clinic, anatomy, timeline, music, map, text, craft) and the free way (html-app@1, py-module@1) usually fit. With check_only true it only ranks what may already do it (nothing is stored). The app's admins answer each request (status, the engine that now does it, a note, the PR); the person sees the answer on #/engines (⋮ › Engines of activities) and with noema_engine_requests. At most 20 a day.",
@@ -705,11 +608,7 @@
         },
         "accuracy": {
           "type": "string",
-          "enum": [
-            "teaching",
-            "quantitative",
-            "research"
-          ],
+          "enum": ["teaching", "quantitative", "research"],
           "description": "default teaching (the right behaviour); quantitative = numbers a course checks; research = research-grade"
         },
         "subject": {
@@ -725,10 +624,7 @@
           "description": "only show what the catalogue suggests; store nothing"
         }
       },
-      "required": [
-        "title",
-        "what"
-      ]
+      "required": ["title", "what"]
     },
     "noema_engine_requests": {
       "description": "The requests for new engines of interactive activities: this account's own, with their status and answer; for the app's admins (noema_admins) every request (status filter), each with its brief — the markdown to build the engine from (docs/INTERACTIVE_LIBRARY.md §1). Answer one with noema_engine_request_update.",
@@ -736,17 +632,7 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": [
-            "open",
-            "new",
-            "seen",
-            "planned",
-            "building",
-            "available",
-            "declined",
-            "duplicate",
-            "all"
-          ],
+          "enum": ["open", "new", "seen", "planned", "building", "available", "declined", "duplicate", "all"],
           "description": "default: all of your own; for admins default open (= new, seen, planned, building)"
         },
         "id": {
@@ -768,15 +654,7 @@
         },
         "status": {
           "type": "string",
-          "enum": [
-            "new",
-            "seen",
-            "planned",
-            "building",
-            "available",
-            "declined",
-            "duplicate"
-          ]
+          "enum": ["new", "seen", "planned", "building", "available", "declined", "duplicate"]
         },
         "engine_id": {
           "type": "string",
@@ -791,9 +669,7 @@
           "description": "pull request URL or commit (≤ 300)"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "noema_curriculum_submit": {
       "description": "Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner's app by themselves.",
@@ -811,11 +687,7 @@
           "description": "ONE JSON object matching the task's JSON Schema"
         }
       },
-      "required": [
-        "curriculum_id",
-        "task_id",
-        "result_json"
-      ]
+      "required": ["curriculum_id", "task_id", "result_json"]
     }
   }
 }

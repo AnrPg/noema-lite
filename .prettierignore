@@ -1,3 +1,8 @@
 # Prettier formats the TypeScript of src/ (npm run format, npm run format:check in CI); the older code keeps its layout until phase 3
 src/contracts/generated/
 src/package.json
+# the engines' own code (src/engines/**/*.js): plain ES modules kept in their dense layout, line for line with their Python twins
+# (tools/lib_*.py, tools/{circuit,thermal,pid,rf,twin}.py); the TypeScript around them (manifests, the library, the types) is formatted
+src/**/*.js
+# vendored code and data, byte for byte as published (src/engines/map/vendor/README.md)
+src/engines/map/vendor/

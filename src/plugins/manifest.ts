@@ -44,7 +44,8 @@ export function checkManifest(m: PluginManifest): ManifestProblem[] {
   const out: ManifestProblem[] = [];
   if (!PLUGIN_ID_RE.test(m.id)) out.push({ path: 'id', code: 'id' });
   if (!PLUGIN_KINDS.includes(m.kind)) out.push({ path: 'kind', code: 'kind' });
-  const v = SEMVER_RE.exec(m.version), major = m.id.split('@')[1];
+  const v = SEMVER_RE.exec(m.version),
+    major = m.id.split('@')[1];
   if (!v || v[1] !== major) out.push({ path: 'version', code: 'version' });
   const caps = (list: readonly string[], at: string): void => {
     const seen = new Set<string>();
@@ -56,11 +57,18 @@ export function checkManifest(m: PluginManifest): ManifestProblem[] {
   };
   caps(m.needs, 'needs');
   caps(m.provides, 'provides');
-  m.locales.forEach((l, i) => { if (!LOCALE_RE.test(l)) out.push({ path: `locales[${i}]`, code: 'locale' }); });
+  m.locales.forEach((l, i) => {
+    if (!LOCALE_RE.test(l)) out.push({ path: `locales[${i}]`, code: 'locale' });
+  });
   return out;
 }
 
 /** a manifest frozen with its lists, so no caller can change what the registry holds */
 export function freezeManifest(m: PluginManifest): PluginManifest {
-  return Object.freeze({ ...m, needs: Object.freeze([...m.needs]), provides: Object.freeze([...m.provides]), locales: Object.freeze([...m.locales]) });
+  return Object.freeze({
+    ...m,
+    needs: Object.freeze([...m.needs]),
+    provides: Object.freeze([...m.provides]),
+    locales: Object.freeze([...m.locales]),
+  });
 }

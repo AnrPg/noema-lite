@@ -16,7 +16,10 @@ export interface PluginError {
 }
 export type Outcome<T> = { readonly ok: true; readonly value: T } | { readonly ok: false; readonly error: PluginError };
 export type PluginState = 'registered' | 'loading' | 'loaded' | 'failed';
-export interface Support { readonly ok: boolean; readonly missing: readonly string[] }
+export interface Support {
+  readonly ok: boolean;
+  readonly missing: readonly string[];
+}
 
 export interface PluginRegistry<T> {
   /** adds a plugin (its manifest is checked; an id is registered once) */
@@ -42,13 +45,24 @@ export interface PluginRegistry<T> {
   onLoad(listener: (id: string, value: T) => void): () => void;
 }
 
-interface Slot<T> { readonly plugin: Plugin<T>; state: PluginState; value: T | null; pending: Promise<Outcome<T>> | null }
+interface Slot<T> {
+  readonly plugin: Plugin<T>;
+  state: PluginState;
+  value: T | null;
+  pending: Promise<Outcome<T>> | null;
+}
+
+/** the id of a manifest as text for an error, whatever a bad manifest holds there (its type is only what checkManifest proves) */
+const shownId = (id: unknown): string => (typeof id === 'string' ? id : JSON.stringify(id) || String(id));
 
 export function createPluginRegistry<T>(opts: { readonly host?: readonly string[] } = {}): PluginRegistry<T> {
   const slots = new Map<string, Slot<T>>();
   const host = new Set(opts.host ?? []);
   const listeners: Array<(id: string, value: T) => void> = [];
-  const fail = (code: PluginErrorCode, id: string, extra: Partial<PluginError> = {}): { ok: false; error: PluginError } => ({ ok: false, error: { code, id, ...extra } });
+  const fail = (code: PluginErrorCode, id: string, extra: Partial<PluginError> = {}): { ok: false; error: PluginError } => ({
+    ok: false,
+    error: { code, id, ...extra },
+  });
 
   function provided(): ReadonlySet<string> {
     const out = new Set(host);
@@ -62,7 +76,9 @@ export function createPluginRegistry<T>(opts: { readonly host?: readonly string[
     return s.plugin.manifest.needs.filter(c => !have.has(c));
   }
   function settle(id: string, s: Slot<T>, value: T): Outcome<T> {
-    s.state = 'loaded'; s.value = value; s.pending = null;
+    s.state = 'loaded';
+    s.value = value;
+    s.pending = null;
     for (const f of listeners.slice()) f(id, value);
     return { ok: true, value };
   }
@@ -70,7 +86,7 @@ export function createPluginRegistry<T>(opts: { readonly host?: readonly string[
   return {
     register(plugin) {
       const problems = checkManifest(plugin.manifest);
-      if (problems.length) return fail('invalid-manifest', String(plugin.manifest.id), { problems });
+      if (problems.length) return fail('invalid-manifest', shownId(plugin.manifest.id), { problems });
       const m = freezeManifest(plugin.manifest);
       if (slots.has(m.id)) return fail('duplicate', m.id);
       slots.set(m.id, { plugin: { manifest: m, entry: plugin.entry }, state: 'registered', value: null, pending: null });
@@ -81,7 +97,8 @@ export function createPluginRegistry<T>(opts: { readonly host?: readonly string[
     manifests: kind => [...slots.values()].map(s => s.plugin.manifest).filter(m => !kind || m.kind === kind),
     provided,
     supports(requires) {
-      const have = provided(), missing = requires.filter(r => !have.has(r));
+      const have = provided(),
+        missing = requires.filter(r => !have.has(r));
       return { ok: missing.length === 0, missing };
     },
     missingFor,
@@ -96,7 +113,12 @@ export function createPluginRegistry<T>(opts: { readonly host?: readonly string[
       s.state = 'loading';
       s.pending = s.plugin.entry().then(
         value => (s.state === 'loaded' && s.value !== null ? { ok: true as const, value: s.value } : settle(id, s, value)),
-        (e: unknown) => { s.state = 'failed'; s.pending = null; return fail('load-failed', id, { cause: e instanceof Error ? e.message : String(e) }); });
+        (e: unknown) => {
+          s.state = 'failed';
+          s.pending = null;
+          return fail('load-failed', id, { cause: e instanceof Error ? e.message : String(e) });
+        },
+      );
       return s.pending;
     },
     loaded: id => slots.get(id)?.value ?? null,
@@ -108,7 +130,10 @@ export function createPluginRegistry<T>(opts: { readonly host?: readonly string[
     },
     onLoad(listener) {
       listeners.push(listener);
-      return () => { const i = listeners.indexOf(listener); if (i >= 0) listeners.splice(i, 1); };
+      return () => {
+        const i = listeners.indexOf(listener);
+        if (i >= 0) listeners.splice(i, 1);
+      };
     },
   };
 }

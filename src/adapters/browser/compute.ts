@@ -28,14 +28,18 @@ export interface WorkerComputeOptions {
   readonly onUnavailable?: (error: NoemaError) => void;
 }
 
-interface Slot { worker: WorkerLike; busy: boolean }
+interface Slot {
+  worker: WorkerLike;
+  busy: boolean;
+}
 
 export function workerCompute(o: WorkerComputeOptions): Compute {
   const max = Math.max(1, o.maxWorkers ?? 2);
   const slots: Slot[] = [];
   const waiting: Array<() => void> = [];
   const active = new Set<() => void>(); // cancels every running job (dispose)
-  let nextId = 1, broken = false;
+  let nextId = 1,
+    broken = false;
 
   const spawn = (): Result<Slot> => {
     try {
@@ -55,24 +59,37 @@ export function workerCompute(o: WorkerComputeOptions): Compute {
     if (i >= 0) slots.splice(i, 1);
     waiting.shift()?.();
   };
-  const release = (s: Slot): void => { s.busy = false; s.worker.onmessage = null; s.worker.onerror = null; waiting.shift()?.(); };
+  const release = (s: Slot): void => {
+    s.busy = false;
+    s.worker.onmessage = null;
+    s.worker.onerror = null;
+    waiting.shift()?.();
+  };
   /** A free Worker: an idle one, a new one while the pool is not full, else the next one to be released. */
   const acquire = async (): Promise<Result<Slot>> => {
     for (;;) {
       const idle = slots.find(s => !s.busy);
-      if (idle) { idle.busy = true; return ok(idle); }
-      if (slots.length < max) { const s = spawn(); if (s.ok) s.value.busy = true; return s; }
+      if (idle) {
+        idle.busy = true;
+        return ok(idle);
+      }
+      if (slots.length < max) {
+        const s = spawn();
+        if (s.ok) s.value.busy = true;
+        return s;
+      }
       await new Promise<void>(r => waiting.push(r));
     }
   };
 
   return {
-    async run<I, O>(job: string, input: I, ro: RunOptions = {}): AsyncResult<O> {
-      if (broken) return o.fallback.run<I, O>(job, input, ro);
+    async run<O>(job: string, input: unknown, ro: RunOptions = {}): AsyncResult<O> {
+      if (broken) return o.fallback.run<O>(job, input, ro);
       if (ro.signal?.aborted) return err(cancelledError(job));
       const got = await acquire();
-      if (!got.ok) return o.fallback.run<I, O>(job, input, ro);
-      const slot = got.value, id = nextId++;
+      if (!got.ok) return o.fallback.run<O>(job, input, ro);
+      const slot = got.value,
+        id = nextId++;
       const ms = ro.timeoutMs ?? o.defaultTimeoutMs ?? DEFAULT_TIMEOUT_MS;
       return new Promise(resolve => {
         let done = false;
@@ -82,11 +99,16 @@ export function workerCompute(o: WorkerComputeOptions): Compute {
           active.delete(onAbort);
           clearTimeout(timer);
           ro.signal?.removeEventListener('abort', onAbort);
-          if (kill) drop(slot); else release(slot);
+          if (kill) drop(slot);
+          else release(slot);
           resolve(r);
         };
-        const onAbort = (): void => finish(err(cancelledError(job)), true);
-        const timer = setTimeout(() => finish(err(timeoutError(job, ms)), true), ms);
+        const onAbort = (): void => {
+          finish(err(cancelledError(job)), true);
+        };
+        const timer = setTimeout(() => {
+          finish(err(timeoutError(job, ms)), true);
+        }, ms);
         ro.signal?.addEventListener('abort', onAbort, { once: true });
         active.add(onAbort);
         slot.worker.onmessage = ({ data }) => {
@@ -95,11 +117,19 @@ export function workerCompute(o: WorkerComputeOptions): Compute {
           else if (data.t === 'done') finish(ok(data.value as O), false);
           else finish(err(NoemaError.fromInfo(data.error, 'compute.failed')), false);
         };
-        slot.worker.onerror = ev => finish(err(new NoemaError('compute.failed', `the Worker of ${job} stopped: ${ev.message ?? 'error'}`, { params: { job } })), true);
+        slot.worker.onerror = ev => {
+          finish(
+            err(new NoemaError('compute.failed', `the Worker of ${job} stopped: ${ev.message ?? 'error'}`, { params: { job } })),
+            true,
+          );
+        };
         try {
           slot.worker.postMessage({ t: 'run', id, job, input });
         } catch (e) {
-          finish(err(new NoemaError('compute.failed', `the input of ${job} cannot be sent to a Worker`, { cause: e, params: { job } })), false);
+          finish(
+            err(new NoemaError('compute.failed', `the input of ${job} cannot be sent to a Worker`, { cause: e, params: { job } })),
+            false,
+          );
         }
       });
     },

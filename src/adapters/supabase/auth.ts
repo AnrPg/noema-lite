@@ -16,7 +16,9 @@ export const toSession = (s: StoredSession): AuthSession => Object.freeze({ user
 
 export function supabaseAuth(client: SupabaseClient): Auth {
   const listeners = new Set<(e: AuthEvent) => void>();
-  const emit = (e: AuthEvent): void => { for (const l of [...listeners]) l(e); };
+  const emit = (e: AuthEvent): void => {
+    for (const l of [...listeners]) l(e);
+  };
   client.onSession = (s, why) => {
     if (s && why === 'signed_in') emit({ type: 'signed_in', session: toSession(s) });
     else if (s && why === 'refreshed') emit({ type: 'refreshed', session: toSession(s) });
@@ -27,7 +29,10 @@ export function supabaseAuth(client: SupabaseClient): Auth {
     return s ? ok(toSession(s)) : err(notSignedIn());
   };
   return {
-    session() { const s = client.session(); return s ? toSession(s) : null; },
+    session() {
+      const s = client.session();
+      return s ? toSession(s) : null;
+    },
     async signIn(email, password) {
       const r = await client.call('/auth/v1/token?grant_type=password', { method: 'POST', auth: false, body: { email, password } });
       return r.ok ? signedIn(r.value.body) : r;
@@ -36,7 +41,11 @@ export function supabaseAuth(client: SupabaseClient): Auth {
       const data: Record<string, string> = {};
       if (input.name) data['name'] = input.name;
       if (input.locale) data['locale'] = input.locale;
-      const r = await client.call('/auth/v1/signup', { method: 'POST', auth: false, body: { email: input.email, password: input.password, data } });
+      const r = await client.call('/auth/v1/signup', {
+        method: 'POST',
+        auth: false,
+        body: { email: input.email, password: input.password, data },
+      });
       if (!r.ok) return r;
       const body = r.value.body as { access_token?: unknown } | null;
       if (!body || typeof body.access_token !== 'string') return ok(null); // the e-mail must be confirmed first
@@ -56,6 +65,11 @@ export function supabaseAuth(client: SupabaseClient): Auth {
       const r = await client.fresh();
       return r.ok ? ok(toSession(r.value)) : r;
     },
-    onChange(listener): Unsubscribe { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    onChange(listener): Unsubscribe {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
   };
 }

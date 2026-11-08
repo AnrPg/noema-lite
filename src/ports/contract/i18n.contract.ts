@@ -39,7 +39,10 @@ export function i18nContract(name: string, make: I18nFactory): void {
       const { i18n } = make(CONTRACT_CATALOGS);
       const coded = Object.assign(new Error('Network error — are you offline? (x)'), { code: 'cloud.network', params: { detail: 'x' } });
       assert.equal(i18n.err(coded), 'Network error — are you offline? (x)');
-      assert.equal(i18n.err({ error: { code: 'cloud.network', params: { detail: 'y' }, message: 'm' } }), 'Network error — are you offline? (y)');
+      assert.equal(
+        i18n.err({ error: { code: 'cloud.network', params: { detail: 'y' }, message: 'm' } }),
+        'Network error — are you offline? (y)',
+      );
       assert.equal(i18n.err(Object.assign(new Error('The server said no'), { code: 'cloud.unknown' })), 'The server said no');
       assert.equal(i18n.err(null), '');
     });
@@ -58,7 +61,7 @@ export function i18nContract(name: string, make: I18nFactory): void {
       assert.deepEqual(seen, ['el', 'ar-EG']);
     });
 
-    test('formats are Intl\'s; a broken date is empty, never a RangeError', () => {
+    test("formats are Intl's; a broken date is empty, never a RangeError", () => {
       const { i18n } = make(CONTRACT_CATALOGS);
       assert.equal(i18n.format.number(1234.5), '1,234.5');
       assert.equal(i18n.format.date('not a date'), '');

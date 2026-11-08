@@ -25,14 +25,28 @@ function coerce(v: unknown, s: JsonSchema, at: string, out: string[]): unknown {
   if (t === 'string' && (typeof x === 'number' || typeof x === 'boolean')) x = String(x);
   else if ((t === 'integer' || t === 'number') && typeof x === 'string' && x.trim() !== '' && Number.isFinite(Number(x))) x = Number(x);
   else if (t === 'boolean' && (x === 'true' || x === 'false')) x = x === 'true';
-  const ok = t == null ? true
-    : t === 'integer' ? typeof x === 'number' && Number.isInteger(x)
-    : t === 'number' ? typeof x === 'number' && Number.isFinite(x)
-    : t === 'array' ? Array.isArray(x)
-    : t === 'object' ? typeOf(x) === 'object'
-    : typeof x === t;
-  if (!ok) { out.push(`${at}: must be ${t === 'integer' ? 'an integer' : t === 'array' || t === 'object' ? 'an ' + t : 'a ' + t} (got ${typeOf(v)})`); return v; }
-  if (s.enum && !s.enum.includes(x as string | number | boolean)) { out.push(`${at}: must be one of ${s.enum.join(', ')} (got ${JSON.stringify(x)})`); return x; }
+  const ok =
+    t == null
+      ? true
+      : t === 'integer'
+        ? typeof x === 'number' && Number.isInteger(x)
+        : t === 'number'
+          ? typeof x === 'number' && Number.isFinite(x)
+          : t === 'array'
+            ? Array.isArray(x)
+            : t === 'object'
+              ? typeOf(x) === 'object'
+              : typeof x === t;
+  if (!ok) {
+    out.push(
+      `${at}: must be ${t === 'integer' ? 'an integer' : t === 'array' || t === 'object' ? `an ${t}` : `a ${t ?? ''}`} (got ${typeOf(v)})`,
+    );
+    return v;
+  }
+  if (s.enum && !s.enum.includes(x as string | number | boolean)) {
+    out.push(`${at}: must be one of ${s.enum.join(', ')} (got ${JSON.stringify(x)})`);
+    return x;
+  }
   if (t === 'array' && s.items && Array.isArray(x)) return x.map((e, i) => coerce(e, s.items as JsonSchema, `${at}[${i}]`, out));
   if (t === 'object' && s.properties && typeOf(x) === 'object') return object(x as Record<string, unknown>, s, at, out);
   return x;

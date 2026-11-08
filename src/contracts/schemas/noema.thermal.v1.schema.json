@@ -4,10 +4,7 @@
   "title": "noema-lite thermal network (noema.thermal/v1)",
   "description": "The lumped thermal network run by the thermal engine thermal@1 (src/engines/thermal/thermal.js; docs/INTERACTIVE_ENGINES.md §2). Temperatures in °C, R in K/W, G in W/K, C in J/K, P in W, h in W/(m²·K), A in m². The engine's own check() (twin: tools/thermal.py) also tests what a schema cannot: ids unique across nodes, links, sources and thermostats; links to known nodes; no source on a fixed node; one thermostat per source; low < high; a group of massless nodes without a path to a boundary ('singular'); an insulated group ('floating', a warning); the limits (50 nodes, 200 links, 24 sources, 8 thermostats).",
   "type": "object",
-  "required": [
-    "nodes",
-    "links"
-  ],
+  "required": ["nodes", "links"],
   "properties": {
     "format": {
       "const": "noema.thermal/v1"
@@ -29,9 +26,7 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "properties": {
               "id": {
                 "type": "string",
@@ -61,10 +56,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "id",
-              "fixed"
-            ],
+            "required": ["id", "fixed"],
             "properties": {
               "id": {
                 "type": "string",
@@ -95,10 +87,7 @@
       "maxItems": 200,
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "a"
-        ],
+        "required": ["id", "a"],
         "properties": {
           "id": {
             "type": "string",
@@ -137,10 +126,7 @@
           "conv": {
             "type": "object",
             "description": "convection: q = h·A·(Ta − Tb)",
-            "required": [
-              "h",
-              "A"
-            ],
+            "required": ["h", "A"],
             "properties": {
               "h": {
                 "type": "number",
@@ -156,10 +142,7 @@
           "rad": {
             "type": "object",
             "description": "radiation: q = ε·σ·A·((Ta+273.15)⁴ − (Tb+273.15)⁴)",
-            "required": [
-              "eps",
-              "A"
-            ],
+            "required": ["eps", "A"],
             "properties": {
               "eps": {
                 "type": "number",
@@ -176,24 +159,16 @@
         },
         "oneOf": [
           {
-            "required": [
-              "R"
-            ]
+            "required": ["R"]
           },
           {
-            "required": [
-              "G"
-            ]
+            "required": ["G"]
           },
           {
-            "required": [
-              "conv"
-            ]
+            "required": ["conv"]
           },
           {
-            "required": [
-              "rad"
-            ]
+            "required": ["rad"]
           }
         ],
         "additionalProperties": false
@@ -204,11 +179,7 @@
       "maxItems": 24,
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "node",
-          "P"
-        ],
+        "required": ["id", "node", "P"],
         "properties": {
           "id": {
             "type": "string",
@@ -243,13 +214,7 @@
       "items": {
         "type": "object",
         "description": "gates a source on/off with hysteresis: heat — on at T ≤ low, off at T ≥ high; cool — on at T ≥ high, off at T ≤ low",
-        "required": [
-          "id",
-          "sensor",
-          "source",
-          "low",
-          "high"
-        ],
+        "required": ["id", "sensor", "source", "low", "high"],
         "properties": {
           "id": {
             "type": "string",
@@ -279,10 +244,7 @@
             "type": "number"
           },
           "mode": {
-            "enum": [
-              "heat",
-              "cool"
-            ],
+            "enum": ["heat", "cool"],
             "default": "heat"
           },
           "label": {
@@ -304,15 +266,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "step"
-          ],
+          "required": ["step"],
           "properties": {
             "step": {
               "type": "object",
-              "required": [
-                "P"
-              ],
+              "required": ["P"],
               "properties": {
                 "P": {
                   "type": "number"
@@ -332,17 +290,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "pwm"
-          ],
+          "required": ["pwm"],
           "properties": {
             "pwm": {
               "type": "object",
-              "required": [
-                "P",
-                "freq",
-                "duty"
-              ],
+              "required": ["P", "freq", "duty"],
               "properties": {
                 "P": {
                   "type": "number"
@@ -371,16 +323,11 @@
         },
         {
           "type": "object",
-          "required": [
-            "sine"
-          ],
+          "required": ["sine"],
           "properties": {
             "sine": {
               "type": "object",
-              "required": [
-                "amp",
-                "freq"
-              ],
+              "required": ["amp", "freq"],
               "properties": {
                 "offset": {
                   "type": "number"

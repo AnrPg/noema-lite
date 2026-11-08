@@ -1,30 +1,73 @@
 /* The connector's prompts (claude.ai: "+" → noema-lite → Create a subject, …). */
 export type PromptArgs = Partial<Record<string, string>>;
 export interface Prompt {
-  name: string; title: string; description: string;
+  name: string;
+  title: string;
+  description: string;
   arguments: { name: string; description: string; required: boolean }[];
   text: (a: PromptArgs) => string;
 }
 
-export const PROMPTS: readonly Prompt[] = [{
-  name: 'create_subject', title: 'Create a noema-lite subject', description: 'Turn the files attached to this chat into a noema-lite subject pack and save it to your account.',
-  arguments: [{ name: 'title', description: 'Subject title, e.g. Human heart anatomy', required: true }, { name: 'language', description: 'Language of the material (en, el, …)', required: false }, { name: 'goal', description: 'exam / understanding / project', required: false }],
-  text: (a: PromptArgs) => `Create a noema-lite subject pack from the sources attached to this chat${a.title ? ` — title: "${a.title}"` : ''}${a.language ? `, language: ${a.language}` : ''}${a.goal ? `, goal: ${a.goal}` : ''}.\n` +
-    `Call noema_pipeline first (action detect) and follow its steps in order. Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources and follow the quality rules Q1–Q8 (knowledge map per chapter first; self-contained exercises that never point to "Q2", pages or "the source"; every exercise of the sources included in full, a source's own solution taken as correct but explained more deeply, an unsolved one solved and double-checked, and none ever dropped to meet a quota: add exercises on top, or lightly adjust some source exercises into the needed type, focus or difficulty (same substance and answer, only a small change, source citation kept); all three kinds of table in the theory: a comparative matrix, a summary table, a breakdown across parameters; exercises test the idea, never the specifics of a lesson's example: an exercise never points at "the example above" and, when it uses an example, writes it out in full (data, code, table: it is also shown alone in drills and the Mistakes gym) and asks a question that needs thinking about it (only an interesting case in itself may be tested as such); every figure and diagram is explained in detail right after it (what it shows, how to read it, what it teaches); img_sequence (tap the parts in order) rarely on a graph diagram whose arrows already show the order (say why in map.sequenceWhy); difficulty about 20/25/55 %; blind solve and review at the end), include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, put every attached file in the package (if you split a PDF: its parts, each its own source, never the unsplit original too), translate every chapter into English, Greek, Russian, German and French (those that are not the material's language) and make 文A bridges for every pair into English, Greek, Russian, Arabic, German and French, everyday words included, validate with make_pack.py, and save the pack AND its source files, translations and bridges to my noema-lite account with the noema-lite tools (noema_finish_upload asks for the files; noema_save_bridge for each bridge). The upload is never a prerequisite: if the network blocks it, go on with everything else, retry it at the end, and if it still fails give me the .noema.zip package. Do not ask me questions unless something essential is missing — choose sensible defaults.`,
-}, {
-  name: 'language_help', title: 'Language help for a noema-lite subject', description: 'Make 文A language help for a subject the learner studies in a language that is not their own: the subject\'s words, in the meaning they have in it, in the learner\'s language — with your Claude plan.',
-  arguments: [{ name: 'subject', description: 'The subject (its name or id)', required: true }, { name: 'native', description: 'The learner\'s own language (en, el, ru, ar, de, fr, …)', required: true }, { name: 'chapters', description: 'Which chapters (default: all, the first ones first)', required: false }],
-  text: (a: PromptArgs) => `Make 文A language help for my noema-lite subject${a.subject ? ` “${a.subject}”` : ''} into ${a.native || 'my native language'}${a.chapters ? `, chapters ${a.chapters}` : ''}.\nCall noema_bridge_guide first and follow it exactly: get the pack (noema_get_pack_url), run the toolkit's bridge.py (todo → write bridges/core.json with content words only, their forms, senses as used in THIS subject and cues where a word has two senses → anchor → terms (key words per section) → write bridges/<native>.json with natural translations for a student and a preview per section → check, 0 errors → coverage) chapter by chapter, then build and save it with noema_save_bridge. A bridge is one pair (the language I read → my native language): when the subject has translations, make the bridges from each translation too (bridge.py --from <locale>, saved with source = that locale), so whichever version I open has help. Also fix the mistakes learners reported (listed by noema_bridge_guide). Do not ask me questions — choose sensible defaults.`,
-}, {
-  name: 'curriculum_work', title: 'Work on my noema-lite curriculum', description: 'Build the map, plan the chapters and prepare the queued steps of a noema-lite curriculum — with your Claude plan.',
-  arguments: [{ name: 'curriculum', description: 'Its name or id (optional when only one curriculum has work)', required: false }, { name: 'steps', description: 'How many steps to prepare in this chat (default 1)', required: false }],
-  text: (a: PromptArgs) => `Use the noema-lite connector to work on my noema-lite curriculum${a.curriculum ? ` “${a.curriculum}”` : ''}: build its map and plan the chapters of its steps if that is still open, then prepare ${Number(a.steps) > 1 ? `the next ${Number(a.steps)} queued steps, one after the other` : 'the next queued step'}.\nStart with noema_curricula, then call noema_curriculum_task${a.curriculum ? ` with that curriculum_id` : ''} and follow what it returns; after each accepted answer or saved step call it again. Do not ask me questions — choose sensible defaults.`,
-}, {
-  name: 'language_course_work', title: 'Write my noema-lite language course', description: 'Work through the tasks of a language course made through Claude (the core, the nodes in each language, grammar, comparisons, refills) — with your Claude plan.',
-  arguments: [{ name: 'course', description: 'Its name or id (optional when only one course has work)', required: false }, { name: 'tasks', description: 'How many tasks to do in this chat (default 1)', required: false }],
-  text: (a: PromptArgs) => `Use the noema-lite connector to write my noema-lite language course${a.course ? ` “${a.course}”` : ''}: do ${Number(a.tasks) > 1 ? `the next ${Number(a.tasks)} queued tasks, one after the other` : 'the next queued task'}.\nStart with noema_lang_courses, then call noema_lang_task${a.course ? ' with that course_id' : ''} and follow what it returns — follow its binding rules — D19 first: the language is taught through each learner's native language (neutral texts that name no language outside the course; a contrast note for every supported native and type on every grammar page; R2: every note structured — paragraphs, "- " lists, **bold** for the key point, "→ " example lines; R3: every word states every parameter of its part of speech) —, and check every answer in your sandbox with the toolkit (lang_course.py, validate_lang.py, lang_refcheck.py, lang_facade.py lint) before noema_lang_submit; after each accepted answer call noema_lang_task again. Do not ask me questions — choose sensible defaults.`,
-}, {
-  name: 'add_language', title: 'Add a language to my course', description: 'Build a whole new language for one of your noema-lite language courses (the playbook, run by Claude as sub-agents) and upload it straight into the app — with your Claude plan. Needs a sandbox that runs long tasks.',
-  arguments: [{ name: 'language', description: 'The language to add, e.g. Persian', required: true }, { name: 'course', description: 'The course (name or id; optional when there is only one)', required: false }],
-  text: (a: PromptArgs) => `Add ${a.language || 'a new language'} to my noema-lite language course${a.course ? ` “${a.course}”` : ''} — the whole language, in full, and upload it to the app when it is done.\nCall noema_language_package_guide${a.course ? ` with course_id "${a.course}" and` : ' with'} language "${a.language || ''}" and follow its instructions exactly — D19 first (the language is taught through each learner's native language: neutral texts that name no language outside the course, a contrast note for every supported native and type on every grammar page, every note structured; R3: first the exhaustive map of the word's parameters per part of speech, before any word) —, every step in order (as sub-agents if you can), every audit turn, every check, the progress file; then package it and save it with noema_lang_package_start → curl → noema_lang_package_finish. Never invent a form. If this environment cannot run long tasks with code execution, tell me what is needed instead of starting. Do not ask me other questions — choose sensible defaults.`,
-}];
+export const PROMPTS: readonly Prompt[] = [
+  {
+    name: 'create_subject',
+    title: 'Create a noema-lite subject',
+    description: 'Turn the files attached to this chat into a noema-lite subject pack and save it to your account.',
+    arguments: [
+      { name: 'title', description: 'Subject title, e.g. Human heart anatomy', required: true },
+      { name: 'language', description: 'Language of the material (en, el, …)', required: false },
+      { name: 'goal', description: 'exam / understanding / project', required: false },
+    ],
+    text: (a: PromptArgs) =>
+      `Create a noema-lite subject pack from the sources attached to this chat${a.title ? ` — title: "${a.title}"` : ''}${a.language ? `, language: ${a.language}` : ''}${a.goal ? `, goal: ${a.goal}` : ''}.\n` +
+      `Call noema_pipeline first (action detect) and follow its steps in order. Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources and follow the quality rules Q1–Q8 (knowledge map per chapter first; self-contained exercises that never point to "Q2", pages or "the source"; every exercise of the sources included in full, a source's own solution taken as correct but explained more deeply, an unsolved one solved and double-checked, and none ever dropped to meet a quota: add exercises on top, or lightly adjust some source exercises into the needed type, focus or difficulty (same substance and answer, only a small change, source citation kept); all three kinds of table in the theory: a comparative matrix, a summary table, a breakdown across parameters; exercises test the idea, never the specifics of a lesson's example: an exercise never points at "the example above" and, when it uses an example, writes it out in full (data, code, table: it is also shown alone in drills and the Mistakes gym) and asks a question that needs thinking about it (only an interesting case in itself may be tested as such); every figure and diagram is explained in detail right after it (what it shows, how to read it, what it teaches); img_sequence (tap the parts in order) rarely on a graph diagram whose arrows already show the order (say why in map.sequenceWhy); difficulty about 20/25/55 %; blind solve and review at the end), include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, put every attached file in the package (if you split a PDF: its parts, each its own source, never the unsplit original too), translate every chapter into English, Greek, Russian, German and French (those that are not the material's language) and make 文A bridges for every pair into English, Greek, Russian, Arabic, German and French, everyday words included, validate with make_pack.py, and save the pack AND its source files, translations and bridges to my noema-lite account with the noema-lite tools (noema_finish_upload asks for the files; noema_save_bridge for each bridge). The upload is never a prerequisite: if the network blocks it, go on with everything else, retry it at the end, and if it still fails give me the .noema.zip package. Do not ask me questions unless something essential is missing — choose sensible defaults.`,
+  },
+  {
+    name: 'language_help',
+    title: 'Language help for a noema-lite subject',
+    description:
+      "Make 文A language help for a subject the learner studies in a language that is not their own: the subject's words, in the meaning they have in it, in the learner's language — with your Claude plan.",
+    arguments: [
+      { name: 'subject', description: 'The subject (its name or id)', required: true },
+      { name: 'native', description: "The learner's own language (en, el, ru, ar, de, fr, …)", required: true },
+      { name: 'chapters', description: 'Which chapters (default: all, the first ones first)', required: false },
+    ],
+    text: (a: PromptArgs) =>
+      `Make 文A language help for my noema-lite subject${a.subject ? ` “${a.subject}”` : ''} into ${a.native || 'my native language'}${a.chapters ? `, chapters ${a.chapters}` : ''}.\nCall noema_bridge_guide first and follow it exactly: get the pack (noema_get_pack_url), run the toolkit's bridge.py (todo → write bridges/core.json with content words only, their forms, senses as used in THIS subject and cues where a word has two senses → anchor → terms (key words per section) → write bridges/<native>.json with natural translations for a student and a preview per section → check, 0 errors → coverage) chapter by chapter, then build and save it with noema_save_bridge. A bridge is one pair (the language I read → my native language): when the subject has translations, make the bridges from each translation too (bridge.py --from <locale>, saved with source = that locale), so whichever version I open has help. Also fix the mistakes learners reported (listed by noema_bridge_guide). Do not ask me questions — choose sensible defaults.`,
+  },
+  {
+    name: 'curriculum_work',
+    title: 'Work on my noema-lite curriculum',
+    description: 'Build the map, plan the chapters and prepare the queued steps of a noema-lite curriculum — with your Claude plan.',
+    arguments: [
+      { name: 'curriculum', description: 'Its name or id (optional when only one curriculum has work)', required: false },
+      { name: 'steps', description: 'How many steps to prepare in this chat (default 1)', required: false },
+    ],
+    text: (a: PromptArgs) =>
+      `Use the noema-lite connector to work on my noema-lite curriculum${a.curriculum ? ` “${a.curriculum}”` : ''}: build its map and plan the chapters of its steps if that is still open, then prepare ${Number(a.steps) > 1 ? `the next ${Number(a.steps)} queued steps, one after the other` : 'the next queued step'}.\nStart with noema_curricula, then call noema_curriculum_task${a.curriculum ? ` with that curriculum_id` : ''} and follow what it returns; after each accepted answer or saved step call it again. Do not ask me questions — choose sensible defaults.`,
+  },
+  {
+    name: 'language_course_work',
+    title: 'Write my noema-lite language course',
+    description:
+      'Work through the tasks of a language course made through Claude (the core, the nodes in each language, grammar, comparisons, refills) — with your Claude plan.',
+    arguments: [
+      { name: 'course', description: 'Its name or id (optional when only one course has work)', required: false },
+      { name: 'tasks', description: 'How many tasks to do in this chat (default 1)', required: false },
+    ],
+    text: (a: PromptArgs) =>
+      `Use the noema-lite connector to write my noema-lite language course${a.course ? ` “${a.course}”` : ''}: do ${Number(a.tasks) > 1 ? `the next ${Number(a.tasks)} queued tasks, one after the other` : 'the next queued task'}.\nStart with noema_lang_courses, then call noema_lang_task${a.course ? ' with that course_id' : ''} and follow what it returns — follow its binding rules — D19 first: the language is taught through each learner's native language (neutral texts that name no language outside the course; a contrast note for every supported native and type on every grammar page; R2: every note structured — paragraphs, "- " lists, **bold** for the key point, "→ " example lines; R3: every word states every parameter of its part of speech) —, and check every answer in your sandbox with the toolkit (lang_course.py, validate_lang.py, lang_refcheck.py, lang_facade.py lint) before noema_lang_submit; after each accepted answer call noema_lang_task again. Do not ask me questions — choose sensible defaults.`,
+  },
+  {
+    name: 'add_language',
+    title: 'Add a language to my course',
+    description:
+      'Build a whole new language for one of your noema-lite language courses (the playbook, run by Claude as sub-agents) and upload it straight into the app — with your Claude plan. Needs a sandbox that runs long tasks.',
+    arguments: [
+      { name: 'language', description: 'The language to add, e.g. Persian', required: true },
+      { name: 'course', description: 'The course (name or id; optional when there is only one)', required: false },
+    ],
+    text: (a: PromptArgs) =>
+      `Add ${a.language || 'a new language'} to my noema-lite language course${a.course ? ` “${a.course}”` : ''} — the whole language, in full, and upload it to the app when it is done.\nCall noema_language_package_guide${a.course ? ` with course_id "${a.course}" and` : ' with'} language "${a.language || ''}" and follow its instructions exactly — D19 first (the language is taught through each learner's native language: neutral texts that name no language outside the course, a contrast note for every supported native and type on every grammar page, every note structured; R3: first the exhaustive map of the word's parameters per part of speech, before any word) —, every step in order (as sub-agents if you can), every audit turn, every check, the progress file; then package it and save it with noema_lang_package_start → curl → noema_lang_package_finish. Never invent a form. If this environment cannot run long tasks with code execution, tell me what is needed instead of starting. Do not ask me other questions — choose sensible defaults.`,
+  },
+];

@@ -14,8 +14,22 @@ const BASE = 'https://proj.supabase.test';
 remoteContract('supabase (fake project)', ({ now }) => {
   const sb = fakeSupabase(BASE, { now });
   sb.addUser('ada@example.org', 'correct-horse-1', 'Ada');
-  const { auth, remote } = createSupabase({ url: BASE, key: 'sb_publishable_test', fetch: (u, i) => sb.fetch(u, i), store: memoryStorage().kv, now });
-  return { auth, remote, credentials: { email: 'ada@example.org', password: 'correct-horse-1' }, rpcName: 'echo', setOffline: x => { sb.offline = x; } };
+  const { auth, remote } = createSupabase({
+    url: BASE,
+    key: 'sb_publishable_test',
+    fetch: (u, i) => sb.fetch(u, i),
+    store: memoryStorage().kv,
+    now,
+  });
+  return {
+    auth,
+    remote,
+    credentials: { email: 'ada@example.org', password: 'correct-horse-1' },
+    rpcName: 'echo',
+    setOffline: x => {
+      sb.offline = x;
+    },
+  };
 });
 
 test('versionAfter: strictly later than the version it replaces, even with a clock behind or frozen', () => {
@@ -33,7 +47,13 @@ test('the session is kept where engine/cloud.js keeps it; it is refreshed before
   sb.addUser('ada@example.org', 'pw-123456');
   sb.tokenSeconds = 120;
   const store = memoryStorage();
-  const { auth, remote } = createSupabase({ url: BASE, key: 'sb_publishable_test', fetch: (u, i) => sb.fetch(u, i), store: store.kv, now: () => t });
+  const { auth, remote } = createSupabase({
+    url: BASE,
+    key: 'sb_publishable_test',
+    fetch: (u, i) => sb.fetch(u, i),
+    store: store.kv,
+    now: () => t,
+  });
   const s = await auth.signIn('ada@example.org', 'pw-123456');
   assert.ok(s.ok);
   assert.ok(!JSON.stringify(s.value).includes('at1'), 'no token in the session the app sees');
@@ -43,7 +63,10 @@ test('the session is kept where engine/cloud.js keeps it; it is refreshed before
   const events: string[] = [];
   auth.onChange(e => events.push(e.type));
   assert.ok((await remote.rows.get('kv', 'a:x')).ok);
-  assert.ok(sb.requests.some(r => r.path.includes('grant_type=refresh_token')), 'refreshed first');
+  assert.ok(
+    sb.requests.some(r => r.path.includes('grant_type=refresh_token')),
+    'refreshed first',
+  );
   assert.deepEqual(events, ['refreshed']);
 });
 
@@ -53,8 +76,20 @@ test('a refused refresh signs out (expired) and says auth.session_expired', asyn
   sb.addUser('ada@example.org', 'pw-123456');
   sb.tokenSeconds = 30;
   const store = memoryStorage();
-  const client = new SupabaseClient({ url: BASE, key: 'sb_publishable_test', fetch: (u, i) => sb.fetch(u, i), store: store.kv, now: () => t });
-  const { auth, remote } = createSupabase({ url: BASE, key: 'sb_publishable_test', fetch: (u, i) => sb.fetch(u, i), store: store.kv, now: () => t });
+  const client = new SupabaseClient({
+    url: BASE,
+    key: 'sb_publishable_test',
+    fetch: (u, i) => sb.fetch(u, i),
+    store: store.kv,
+    now: () => t,
+  });
+  const { auth, remote } = createSupabase({
+    url: BASE,
+    key: 'sb_publishable_test',
+    fetch: (u, i) => sb.fetch(u, i),
+    store: store.kv,
+    now: () => t,
+  });
   await auth.signIn('ada@example.org', 'pw-123456');
   const kept = JSON.parse(store.kvMap.get(SESSION_KEY) ?? '{}') as Record<string, unknown>;
   store.kv.set(SESSION_KEY, JSON.stringify({ ...kept, refresh_token: 'stolen-or-old' }));
@@ -69,13 +104,29 @@ test('a refused refresh signs out (expired) and says auth.session_expired', asyn
 });
 
 test('the ACL: Supabase answers → contract codes (docs/i18n.md §6.2)', () => {
-  assert.deepEqual(classify('/auth/v1/token', { error_code: 'invalid_credentials' }, 400, 'Invalid login credentials'), ['auth.invalid_credentials', {}]);
-  assert.deepEqual(classify('/auth/v1/token', {}, 400, 'Email not confirmed'), ['auth.email_not_confirmed', {}], 'an older server without error_code');
-  assert.deepEqual(classify('/auth/v1/signup', { error_code: 'weak_password' }, 422, 'Password should be at least 8 characters.'), ['auth.weak_password', { min: 8 }]);
-  assert.deepEqual(classify('/auth/v1/signup', { error_code: 'weak_password' }, 422, 'Password is known to be weak'), ['auth.weak_password_other', {}]);
+  assert.deepEqual(classify('/auth/v1/token', { error_code: 'invalid_credentials' }, 400, 'Invalid login credentials'), [
+    'auth.invalid_credentials',
+    {},
+  ]);
+  assert.deepEqual(
+    classify('/auth/v1/token', {}, 400, 'Email not confirmed'),
+    ['auth.email_not_confirmed', {}],
+    'an older server without error_code',
+  );
+  assert.deepEqual(classify('/auth/v1/signup', { error_code: 'weak_password' }, 422, 'Password should be at least 8 characters.'), [
+    'auth.weak_password',
+    { min: 8 },
+  ]);
+  assert.deepEqual(classify('/auth/v1/signup', { error_code: 'weak_password' }, 422, 'Password is known to be weak'), [
+    'auth.weak_password_other',
+    {},
+  ]);
   assert.deepEqual(classify('/auth/v1/token', {}, 503, 'down'), ['auth.server', { status: 503 }]);
   assert.deepEqual(classify('/rest/v1/noema_kv', { code: 'PGRST205' }, 404, 'Could not find the table'), ['cloud.schema_old', {}]);
-  assert.deepEqual(classify('/rest/v1/noema_kv', { code: '42501' }, 403, 'new row violates row-level security policy'), ['cloud.permission', {}]);
+  assert.deepEqual(classify('/rest/v1/noema_kv', { code: '42501' }, 403, 'new row violates row-level security policy'), [
+    'cloud.permission',
+    {},
+  ]);
   assert.deepEqual(classify('/storage/v1/object/x', {}, 413, 'Payload too large'), ['cloud.too_large', {}]);
   assert.deepEqual(classify('/rest/v1/noema_kv', {}, 401, 'JWT expired'), ['auth.session_expired', {}]);
   assert.deepEqual(classify('/rest/v1/noema_kv', {}, 429, 'slow down'), ['cloud.rate_limit', {}]);
@@ -86,7 +137,12 @@ test('the ACL: Supabase answers → contract codes (docs/i18n.md §6.2)', () => 
 test('the ACL: no Supabase field name crosses the port', async () => {
   const sb = fakeSupabase(BASE);
   sb.addUser('ada@example.org', 'pw-123456');
-  const { auth, remote } = createSupabase({ url: BASE, key: 'sb_publishable_test', fetch: (u, i) => sb.fetch(u, i), store: memoryStorage().kv });
+  const { auth, remote } = createSupabase({
+    url: BASE,
+    key: 'sb_publishable_test',
+    fetch: (u, i) => sb.fetch(u, i),
+    store: memoryStorage().kv,
+  });
   await auth.signIn('ada@example.org', 'pw-123456');
   const row = await remote.rows.put('kv', 'a:x', '1', { expected: null });
   assert.ok(row.ok);

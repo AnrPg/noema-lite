@@ -53,8 +53,16 @@
         "appTitle": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
         "description": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
         "searchExamples": { "$ref": "noema.common.v1.schema.json#/$defs/text" },
-        "hero": { "type": "object", "additionalProperties": { "type": "string" }, "x-message": "must be an object of strings like the subject's hero" },
-        "tutor": { "type": "object", "additionalProperties": { "type": "string" }, "x-message": "must be an object of strings like the subject's tutor" }
+        "hero": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "x-message": "must be an object of strings like the subject's hero"
+        },
+        "tutor": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "x-message": "must be an object of strings like the subject's tutor"
+        }
       },
       "additionalProperties": false,
       "x-message": "(allowed: title, appTitle, description, searchExamples, hero, tutor)"

@@ -5,18 +5,25 @@ import { HLC_MAX_COUNT, HybridClock, compareHlc, decodeHlc, encodeHlc, hlcReceiv
 import { trustedId, type DeviceId } from './ids.ts';
 import { unwrap } from './result.ts';
 
-const A = trustedId<DeviceId>('devA'), B = trustedId<DeviceId>('devB');
+const A = trustedId<DeviceId>('devA'),
+  B = trustedId<DeviceId>('devB');
 
 test('local ticks are strictly increasing, even when the physical clock stands still or goes back', () => {
   let now = 1000;
   const c = new HybridClock(A, () => now);
-  const s1 = unwrap(c.now()), s2 = unwrap(c.now());
+  const s1 = unwrap(c.now()),
+    s2 = unwrap(c.now());
   now = 500; // the device's clock was set back
   const s3 = unwrap(c.now());
   now = 2000;
   const s4 = unwrap(c.now());
   assert.deepEqual([s1.wall, s1.count, s2.wall, s2.count, s3.wall, s3.count, s4.wall, s4.count], [1000, 0, 1000, 1, 1000, 2, 2000, 0]);
-  for (const [x, y] of [[s1, s2], [s2, s3], [s3, s4]] as const) assert.equal(compareHlc(x, y), -1);
+  for (const [x, y] of [
+    [s1, s2],
+    [s2, s3],
+    [s3, s4],
+  ] as const)
+    assert.equal(compareHlc(x, y), -1);
 });
 
 test('receive: later than both sides; the counter follows the larger wall', () => {

@@ -4,33 +4,21 @@
   "title": "noema-lite IoT device twin (noema.twin/v1)",
   "description": "The device run by the twin engine twin@1 (src/engines/twin/twin.js). Units: capacity mAh, currents mA, times s, voltages V, rInt ohm (the whole pack), selfDischarge a fraction of the capacity per month, radio f Hz, d m, power dBm. Human-readable spec: docs/INTERACTIVE_ENGINES.md §5. The engine's check() (twin: tools/twin.py) also tests: duplicate sensor ids, a custom battery curve (soc 0 to 1, rising), sense shorter than the period, LoRa bandwidths and the event budget (code 'budget'). Faults (create's opts.faults, a bench fault's apply) are $defs.fault, checked by checkFaults.",
   "type": "object",
-  "required": [
-    "battery",
-    "schedule",
-    "sim"
-  ],
+  "required": ["battery", "schedule", "sim"],
   "properties": {
     "format": {
       "const": "noema.twin/v1"
     },
     "battery": {
       "type": "object",
-      "required": [
-        "capacity"
-      ],
+      "required": ["capacity"],
       "properties": {
         "capacity": {
           "$ref": "#/$defs/quantity",
           "description": "> 0"
         },
         "chem": {
-          "enum": [
-            "li-ion",
-            "lifepo4",
-            "alkaline",
-            "nimh",
-            "custom"
-          ]
+          "enum": ["li-ion", "lifepo4", "alkaline", "nimh", "custom"]
         },
         "cells": {
           "type": "integer",
@@ -42,10 +30,7 @@
           "maxItems": 32,
           "items": {
             "type": "object",
-            "required": [
-              "soc",
-              "v"
-            ],
+            "required": ["soc", "v"],
             "properties": {
               "soc": {
                 "$ref": "#/$defs/quantity",
@@ -110,9 +95,7 @@
     },
     "schedule": {
       "type": "object",
-      "required": [
-        "period"
-      ],
+      "required": ["period"],
       "properties": {
         "period": {
           "$ref": "#/$defs/quantity",
@@ -151,9 +134,7 @@
       "maxItems": 8,
       "items": {
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string",
@@ -195,11 +176,7 @@
       "type": "object",
       "properties": {
         "tech": {
-          "enum": [
-            "lora",
-            "ble",
-            "fsk"
-          ]
+          "enum": ["lora", "ble", "fsk"]
         },
         "f": {
           "$ref": "#/$defs/quantity",
@@ -283,9 +260,7 @@
     },
     "sim": {
       "type": "object",
-      "required": [
-        "duration"
-      ],
+      "required": ["duration"],
       "properties": {
         "duration": {
           "$ref": "#/$defs/quantity",
@@ -411,9 +386,7 @@
     },
     "fault": {
       "type": "object",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "properties": {
         "kind": {
           "enum": [
@@ -473,10 +446,7 @@
     },
     "binding": {
       "type": "object",
-      "required": [
-        "field",
-        "expr"
-      ],
+      "required": ["field", "expr"],
       "properties": {
         "field": {
           "enum": [
@@ -545,19 +515,13 @@
     },
     "output": {
       "type": "object",
-      "required": [
-        "id",
-        "kind"
-      ],
+      "required": ["id", "kind"],
       "properties": {
         "id": {
           "type": "string"
         },
         "kind": {
-          "enum": [
-            "scalar",
-            "series"
-          ]
+          "enum": ["scalar", "series"]
         },
         "of": {
           "enum": [

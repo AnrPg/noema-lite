@@ -8,7 +8,10 @@ import { err, ok, type AsyncResult, type Result } from '../../kernel/result.ts';
 import type { KeyValueStore } from '../../ports/storage.ts';
 import { failedAnswer, networkError, notSignedIn } from './errors.ts';
 
-export type FetchLike = (url: string, init: { method: string; headers: Record<string, string>; body?: BodyInit | null; signal?: AbortSignal; keepalive?: boolean }) => Promise<Response>;
+export type FetchLike = (
+  url: string,
+  init: { method: string; headers: Record<string, string>; body?: BodyInit | null; signal?: AbortSignal; keepalive?: boolean },
+) => Promise<Response>;
 
 /** The session as GoTrue gives it and engine/cloud.js keeps it ('noema1:cloud:session'). */
 export interface StoredSession {
@@ -16,7 +19,8 @@ export interface StoredSession {
   readonly refresh_token: string;
   /** Seconds since the epoch. */
   readonly expires_at: number;
-  readonly user: { readonly id: string; readonly email: string; readonly user_metadata: { readonly [key: string]: unknown } };
+  /** engine/cloud.js may keep a session without it */
+  readonly user: { readonly id: string; readonly email: string; readonly user_metadata?: { readonly [key: string]: unknown } };
 }
 
 export interface SupabaseConfig {
@@ -31,6 +35,13 @@ export interface SupabaseConfig {
 }
 
 export const SESSION_KEY = 'noema1:cloud:session';
+
+/** A kept session that has what every call needs: its access token and its user's id. */
+function isStoredSession(s: unknown): s is StoredSession {
+  if (!s || typeof s !== 'object') return false;
+  const o = s as { access_token?: unknown; user?: { id?: unknown } | null };
+  return typeof o.access_token === 'string' && !!o.user && typeof o.user.id === 'string';
+}
 
 export interface CallOptions {
   readonly method?: string;
@@ -68,14 +79,16 @@ export class SupabaseClient {
     this.now = config.now ?? Date.now;
   }
 
-  get key(): string { return this.#c.sessionKey ?? SESSION_KEY; }
+  get key(): string {
+    return this.#c.sessionKey ?? SESSION_KEY;
+  }
 
   session(): StoredSession | null {
     const raw = this.#c.store.get(this.key);
     if (!raw.ok || !raw.value) return null;
     try {
-      const s = JSON.parse(raw.value) as StoredSession;
-      return s && typeof s.access_token === 'string' && s.user && typeof s.user.id === 'string' ? s : null;
+      const s: unknown = JSON.parse(raw.value);
+      return isStoredSession(s) ? s : null;
     } catch {
       // a session copy that cannot be read is no session: the learner signs in again (nothing of theirs is lost)
       return null;
@@ -89,7 +102,13 @@ export class SupabaseClient {
       this.onSession?.(null, why);
       return null;
     }
-    const a = answer as { access_token: string; refresh_token: string; expires_at?: number; expires_in?: number; user: { id: string; email?: string; user_metadata?: Record<string, unknown> } };
+    const a = answer as {
+      access_token: string;
+      refresh_token: string;
+      expires_at?: number;
+      expires_in?: number;
+      user: { id: string; email?: string; user_metadata?: Record<string, unknown> };
+    };
     const s: StoredSession = {
       access_token: a.access_token,
       refresh_token: a.refresh_token,
@@ -106,12 +125,19 @@ export class SupabaseClient {
     const s = this.session();
     if (!s) return err(notSignedIn());
     if (s.expires_at - 60 > this.now() / 1000) return ok(s);
-    if (!this.#refreshing) this.#refreshing = this.#refresh(s).finally(() => { this.#refreshing = null; });
+    if (!this.#refreshing)
+      this.#refreshing = this.#refresh(s).finally(() => {
+        this.#refreshing = null;
+      });
     return this.#refreshing;
   }
 
   async #refresh(s: StoredSession): AsyncResult<StoredSession> {
-    const r = await this.call('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: s.refresh_token }, auth: false });
+    const r = await this.call('/auth/v1/token?grant_type=refresh_token', {
+      method: 'POST',
+      body: { refresh_token: s.refresh_token },
+      auth: false,
+    });
     if (!r.ok) {
       if (r.error.code === 'auth.session_expired') this.setSession(null, 'expired');
       return r;
@@ -128,11 +154,28 @@ export class SupabaseClient {
       bearer = s.value.access_token;
     }
     const isBinary = o.body instanceof Blob || o.body instanceof Uint8Array;
-    const headers: Record<string, string> = { apikey: this.#c.key, ...(bearer ? { Authorization: 'Bearer ' + bearer } : {}), ...(o.body !== undefined && !isBinary && typeof o.body !== 'string' ? { 'Content-Type': 'application/json' } : {}), ...o.headers };
-    const body: BodyInit | null = o.body === undefined ? null : o.body instanceof Blob || typeof o.body === 'string' ? o.body : o.body instanceof Uint8Array ? new Blob([o.body as Uint8Array<ArrayBuffer>]) : JSON.stringify(o.body);
+    const headers: Record<string, string> = {
+      apikey: this.#c.key,
+      ...(bearer ? { Authorization: 'Bearer ' + bearer } : {}),
+      ...(o.body !== undefined && !isBinary && typeof o.body !== 'string' ? { 'Content-Type': 'application/json' } : {}),
+      ...o.headers,
+    };
+    const body: BodyInit | null =
+      o.body === undefined
+        ? null
+        : o.body instanceof Blob || typeof o.body === 'string'
+          ? o.body
+          : o.body instanceof Uint8Array
+            ? new Blob([o.body as Uint8Array<ArrayBuffer>])
+            : JSON.stringify(o.body);
     let response: Response;
     try {
-      response = await this.#c.fetch(this.#base + path, { method: o.method ?? 'GET', headers, body, ...(o.signal ? { signal: o.signal } : {}) });
+      response = await this.#c.fetch(this.#base + path, {
+        method: o.method ?? 'GET',
+        headers,
+        body,
+        ...(o.signal ? { signal: o.signal } : {}),
+      });
     } catch (e) {
       return err(networkError(path, e));
     }
@@ -140,7 +183,11 @@ export class SupabaseClient {
     if (!response.ok) {
       const text = await response.text().catch(() => '');
       let parsed: unknown = text;
-      try { parsed = text ? JSON.parse(text) : null; } catch { parsed = text; } // not JSON: the server's plain words are the body
+      try {
+        parsed = text ? JSON.parse(text) : null;
+      } catch {
+        parsed = text;
+      } // not JSON: the server's plain words are the body
       return err(failedAnswer(path, parsed, response.status));
     }
     if (!/json/.test(ct)) return ok({ status: response.status, body: null, response });
@@ -148,7 +195,12 @@ export class SupabaseClient {
     try {
       return ok({ status: response.status, body: text ? (JSON.parse(text) as unknown) : null, response });
     } catch (e) {
-      return err(new NoemaError('cloud.unknown', 'the cloud answered something that is not JSON', { cause: e, params: { status: response.status, detail: text.slice(0, 120) } }));
+      return err(
+        new NoemaError('cloud.unknown', 'the cloud answered something that is not JSON', {
+          cause: e,
+          params: { status: response.status, detail: text.slice(0, 120) },
+        }),
+      );
     }
   }
 }

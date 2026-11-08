@@ -33,9 +33,35 @@
       "properties": {
         "id": { "$ref": "noema.chapter.v1.schema.json#/$defs/chapterId" },
         "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" },
-        "sections": { "type": "array", "items": { "type": "object", "required": ["id"], "properties": { "id": { "type": "string" }, "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" }, "blocks": { "type": "array", "items": { "type": "object" } } } } },
-        "exercises": { "type": "array", "items": { "type": "object", "required": ["id", "type"], "properties": { "id": { "type": "string" }, "type": { "$ref": "noema.chapter.v1.schema.json#/$defs/exerciseType" }, "section": { "type": "string" }, "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" } } } },
-        "flashcards": { "type": "array", "items": { "type": "object", "properties": { "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" } } } },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": { "type": "string" },
+              "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" },
+              "blocks": { "type": "array", "items": { "type": "object" } }
+            }
+          }
+        },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "type"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "$ref": "noema.chapter.v1.schema.json#/$defs/exerciseType" },
+              "section": { "type": "string" },
+              "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" }
+            }
+          }
+        },
+        "flashcards": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "level": { "$ref": "noema.common.v1.schema.json#/$defs/levelId" } } }
+        },
         "debug": { "type": "array", "items": { "type": "object" } },
         "pitfalls": { "type": "array", "items": { "type": "object" } }
       }
@@ -58,10 +84,19 @@
       "allOf": [
         {
           "if": { "required": ["fetch"], "properties": { "fetch": { "const": "app" } }, "not": { "required": ["data"] } },
-          "then": { "required": ["url"], "properties": { "url": { "pattern": "^https?://", "x-message": "a \"fetch\": \"app\" picture needs its image url" } } },
-          "else": { "required": ["data"], "properties": { "data": { "pattern": "^data:image/", "x-message": "data must be a data:image/… URI" } } }
+          "then": {
+            "required": ["url"],
+            "properties": { "url": { "pattern": "^https?://", "x-message": "a \"fetch\": \"app\" picture needs its image url" } }
+          },
+          "else": {
+            "required": ["data"],
+            "properties": { "data": { "pattern": "^data:image/", "x-message": "data must be a data:image/… URI" } }
+          }
         },
-        { "if": { "required": ["origin"], "properties": { "origin": { "const": "web" } } }, "then": { "required": ["url"], "properties": { "url": { "minLength": 1, "x-message": "a web picture needs its source url" } } } }
+        {
+          "if": { "required": ["origin"], "properties": { "origin": { "const": "web" } } },
+          "then": { "required": ["url"], "properties": { "url": { "minLength": 1, "x-message": "a web picture needs its source url" } } }
+        }
       ]
     },
     "translations": {
@@ -71,8 +106,26 @@
       "additionalProperties": {
         "type": "object",
         "if": { "required": ["file"], "properties": { "file": { "const": true } } },
-        "then": { "required": ["chapters"], "properties": { "chapters": { "type": "integer", "minimum": 1, "x-message": "a translation in its own file says {\"file\": true, \"chapters\": <how many chapters it translates>}" } } },
-        "else": { "required": ["chapters"], "properties": { "chapters": { "type": "array", "items": { "$ref": "#/$defs/chapter" }, "x-message": "must be a list of chapters (or {\"file\": true, …} for a translation in its own file)" } } }
+        "then": {
+          "required": ["chapters"],
+          "properties": {
+            "chapters": {
+              "type": "integer",
+              "minimum": 1,
+              "x-message": "a translation in its own file says {\"file\": true, \"chapters\": <how many chapters it translates>}"
+            }
+          }
+        },
+        "else": {
+          "required": ["chapters"],
+          "properties": {
+            "chapters": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/chapter" },
+              "x-message": "must be a list of chapters (or {\"file\": true, …} for a translation in its own file)"
+            }
+          }
+        }
       }
     }
   }

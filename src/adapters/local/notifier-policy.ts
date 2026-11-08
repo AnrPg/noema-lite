@@ -34,9 +34,12 @@ export function policyNotifier(surface: NotifierSurface, options: NotifierOption
   let burstUntil = 0;
   const listeners = new Set<(n: readonly OverflowNotice[]) => void>();
   return {
-    toast(text, o = {}) { surface.show(text, 'toast', o.ms ?? R.toastMs); },
+    toast(text, o = {}) {
+      surface.show(text, 'toast', o.ms ?? R.toastMs);
+    },
     notice(text, o = {}) {
-      const ms = o.ms ?? R.noticeMs, at = now();
+      const ms = o.ms ?? R.noticeMs,
+        at = now();
       shown = shown.filter(x => x.toast.isShown());
       if (shown.length >= R.maxNotices || at < burstUntil) {
         const moved = shown.splice(0);
@@ -52,6 +55,11 @@ export function policyNotifier(surface: NotifierSurface, options: NotifierOption
       surface.show(text, 'alert', o.ms ?? R.alertMs);
       surface.announce(text);
     },
-    onOverflow(listener): Unsubscribe { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    onOverflow(listener): Unsubscribe {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
   };
 }

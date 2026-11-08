@@ -35,13 +35,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "ref",
-              "title",
-              "summary",
-              "role",
-              "knowledgeDomains"
-            ],
+            "required": ["ref", "title", "summary", "role", "knowledgeDomains"],
             "properties": {
               "ref": {
                 "type": "string",
@@ -59,11 +53,7 @@
               },
               "role": {
                 "type": "string",
-                "enum": [
-                  "foundation",
-                  "goal",
-                  "application"
-                ]
+                "enum": ["foundation", "goal", "application"]
               },
               "knowledgeDomains": {
                 "type": "array",
@@ -97,11 +87,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "fromRef",
-              "toRef",
-              "rationale"
-            ],
+            "required": ["fromRef", "toRef", "rationale"],
             "properties": {
               "fromRef": {
                 "type": "string",
@@ -125,10 +111,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "nodeRef",
-              "explanation"
-            ],
+            "required": ["nodeRef", "explanation"],
             "properties": {
               "nodeRef": {
                 "type": "string",
@@ -165,11 +148,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "nodeRef",
-              "knowledgeDomain",
-              "processingLevels"
-            ],
+            "required": ["nodeRef", "knowledgeDomain", "processingLevels"],
             "properties": {
               "nodeRef": {
                 "type": "string",
@@ -177,11 +156,7 @@
               },
               "knowledgeDomain": {
                 "type": "string",
-                "enum": [
-                  "information",
-                  "mental_procedure",
-                  "psychomotor_procedure"
-                ]
+                "enum": ["information", "mental_procedure", "psychomotor_procedure"]
               },
               "processingLevels": {
                 "type": "array",
@@ -189,14 +164,7 @@
                 "maxItems": 6,
                 "items": {
                   "type": "string",
-                  "enum": [
-                    "retrieval",
-                    "comprehension",
-                    "analysis",
-                    "knowledge_utilization",
-                    "metacognitive_system",
-                    "self_system"
-                  ]
+                  "enum": ["retrieval", "comprehension", "analysis", "knowledge_utilization", "metacognitive_system", "self_system"]
                 }
               }
             }
@@ -207,13 +175,7 @@
     "audit": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "schemaVersion",
-        "stage",
-        "added",
-        "edges",
-        "notes"
-      ],
+      "required": ["schemaVersion", "stage", "added", "edges", "notes"],
       "properties": {
         "schemaVersion": {
           "type": "integer",
@@ -229,15 +191,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "ref",
-              "title",
-              "summary",
-              "knowledgeDomains",
-              "knowledgeDomain",
-              "processingLevels",
-              "why"
-            ],
+            "required": ["ref", "title", "summary", "knowledgeDomains", "knowledgeDomain", "processingLevels", "why"],
             "properties": {
               "ref": {
                 "type": "string",
@@ -265,25 +219,14 @@
               },
               "knowledgeDomain": {
                 "type": "string",
-                "enum": [
-                  "information",
-                  "mental_procedure",
-                  "psychomotor_procedure"
-                ]
+                "enum": ["information", "mental_procedure", "psychomotor_procedure"]
               },
               "processingLevels": {
                 "type": "array",
                 "minItems": 1,
                 "items": {
                   "type": "string",
-                  "enum": [
-                    "retrieval",
-                    "comprehension",
-                    "analysis",
-                    "knowledge_utilization",
-                    "metacognitive_system",
-                    "self_system"
-                  ]
+                  "enum": ["retrieval", "comprehension", "analysis", "knowledge_utilization", "metacognitive_system", "self_system"]
                 }
               },
               "why": {
@@ -300,11 +243,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "fromRef",
-              "toRef",
-              "rationale"
-            ],
+            "required": ["fromRef", "toRef", "rationale"],
             "properties": {
               "fromRef": {
                 "type": "string",
@@ -380,12 +319,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "ref",
-              "title",
-              "coverage",
-              "atomic"
-            ],
+            "required": ["ref", "title", "coverage", "atomic"],
             "properties": {
               "ref": {
                 "type": "string",
@@ -413,12 +347,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "ref",
-              "title",
-              "coverage",
-              "aspectRef"
-            ],
+            "required": ["ref", "title", "coverage", "aspectRef"],
             "properties": {
               "ref": {
                 "type": "string",
@@ -447,11 +376,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "ref",
-              "title",
-              "parentRef"
-            ],
+            "required": ["ref", "title", "parentRef"],
             "properties": {
               "ref": {
                 "type": "string",
@@ -494,10 +419,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "fromRef",
-              "toRef"
-            ],
+            "required": ["fromRef", "toRef"],
             "properties": {
               "fromRef": {
                 "type": "string",
@@ -515,11 +437,7 @@
     "plan": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "schemaVersion",
-        "stage",
-        "plans"
-      ],
+      "required": ["schemaVersion", "stage", "plans"],
       "properties": {
         "schemaVersion": {
           "type": "integer",
@@ -536,11 +454,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "nodeId",
-              "learningGoals",
-              "chapters"
-            ],
+            "required": ["nodeId", "learningGoals", "chapters"],
             "properties": {
               "nodeId": {
                 "type": "string",
@@ -563,12 +477,7 @@
                 "items": {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "ref",
-                    "title",
-                    "teachingGoals",
-                    "requiredCoverage"
-                  ],
+                  "required": ["ref", "title", "teachingGoals", "requiredCoverage"],
                   "properties": {
                     "ref": {
                       "type": "string",

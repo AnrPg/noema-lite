@@ -9,15 +9,25 @@ export interface RecordedToast {
   shown: boolean;
 }
 
-export function recordingNotifier(now: () => number = Date.now): Notifier & { readonly toasts: RecordedToast[]; readonly announced: string[]; onScreen(): RecordedToast[] } {
-  const toasts: RecordedToast[] = [], announced: string[] = [];
+export function recordingNotifier(
+  now: () => number = Date.now,
+): Notifier & { readonly toasts: RecordedToast[]; readonly announced: string[]; onScreen(): RecordedToast[] } {
+  const toasts: RecordedToast[] = [],
+    announced: string[] = [];
   const surface: NotifierSurface = {
     show(text, kind, ms) {
       const t: RecordedToast = { text, kind, ms, shown: true };
       toasts.push(t);
-      return { remove: () => { t.shown = false; }, isShown: () => t.shown };
+      return {
+        remove: () => {
+          t.shown = false;
+        },
+        isShown: () => t.shown,
+      };
     },
-    announce: text => { announced.push(text); },
+    announce: text => {
+      announced.push(text);
+    },
   };
   return Object.assign(policyNotifier(surface, { now }), { toasts, announced, onScreen: () => toasts.filter(t => t.shown) });
 }

@@ -19,14 +19,28 @@
       "else": { "required": ["entry"] },
       "properties": {
         "id": { "title": "actId", "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,60}$" },
-        "runtime": { "title": "runtime", "enum": ["html-app@1", "sim-spec@1", "py-module@1", "h5p@1", "wasm-module@1", "external-embed@1"] },
+        "runtime": {
+          "title": "runtime",
+          "enum": ["html-app@1", "sim-spec@1", "py-module@1", "h5p@1", "wasm-module@1", "external-embed@1"]
+        },
         "entry": { "title": "entry", "type": "string", "pattern": "^activities/[a-z0-9][a-z0-9-]{1,60}/[A-Za-z0-9_.-]+$" },
         "stateVersion": { "title": "stateVersion", "type": "integer", "minimum": 1, "default": 1 },
-        "capabilities": { "title": "capabilities", "type": "array", "uniqueItems": true, "items": { "enum": ["state", "events", "resize", "result", "hints", "announce"] } },
+        "capabilities": {
+          "title": "capabilities",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "enum": ["state", "events", "resize", "result", "hints", "announce"] }
+        },
         "height": { "title": "height", "type": "integer", "minimum": 120, "maximum": 2000 },
-        "fallback": { "title": "fallback", "type": "object", "required": ["media", "text"], "properties": {
-          "media": { "title": "fallbackMedia", "type": "string", "minLength": 1 },
-          "text": { "title": "fallbackText", "type": "string", "minLength": 40, "x-noema": "longtext" } } },
+        "fallback": {
+          "title": "fallback",
+          "type": "object",
+          "required": ["media", "text"],
+          "properties": {
+            "media": { "title": "fallbackMedia", "type": "string", "minLength": 1 },
+            "text": { "title": "fallbackText", "type": "string", "minLength": 40, "x-noema": "longtext" }
+          }
+        },
         "origin": { "title": "origin", "type": "string" },
         "credit": { "title": "credit", "type": "string" },
         "license": { "title": "license", "type": "string" }

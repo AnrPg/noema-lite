@@ -215,7 +215,7 @@ import NoemaSimKit from './simkit.js';
       },
       stepTo(inp, t, dt, inbox) {
         if (!ok) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
-        if (S.onEvent) for (const ev of Array.isArray(inbox) ? inbox : []) { try { const s2 = S.onEvent(state, ev, t); if (s2 !== undefined) state = s2; } catch (e) { /* the event is dropped */ } }
+        if (S.onEvent) for (const ev of Array.isArray(inbox) ? inbox : []) { let s2; try { s2 = S.onEvent(state, ev, t); } catch (e) { s2 = undefined; /* a handler that throws drops the event */ } if (s2 !== undefined) state = s2; }
         let r = null; try { r = S.step(state, scal(inp), t, dt, ctx); } catch (e) { r = null; }
         if (!isObj(r)) return { fail: 'part-failed', out: {}, dt: 0, events: [] };
         if (r.state !== undefined) state = r.state;

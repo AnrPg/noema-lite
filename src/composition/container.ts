@@ -34,7 +34,11 @@ export type Factory<T> = (r: Resolver) => T;
 /** What a helper module exports to add its part to a root: `export const registerX: Registration = c => { c.register(…) }`. */
 export type Registration = (c: Container) => void;
 
-interface Entry { factory: Factory<unknown>; made: boolean; value: unknown }
+interface Entry {
+  factory: Factory<unknown>;
+  made: boolean;
+  value: unknown;
+}
 
 export class Container implements Resolver {
   readonly #entries = new Map<string, Entry>();
@@ -42,8 +46,10 @@ export class Container implements Resolver {
   #frozen = false;
 
   register<T>(t: Token<T>, factory: Factory<T>, options: { readonly replace?: boolean } = {}): this {
-    if (this.#frozen) throw new NoemaError('container.frozen', `cannot register ${t.key}: the container is frozen`, { params: { token: t.key } });
-    if (this.#entries.has(t.key) && !options.replace) throw new NoemaError('invariant.failed', `invariant failed: ${t.key} is registered twice`, { params: { token: t.key } });
+    if (this.#frozen)
+      throw new NoemaError('container.frozen', `cannot register ${t.key}: the container is frozen`, { params: { token: t.key } });
+    if (this.#entries.has(t.key) && !options.replace)
+      throw new NoemaError('invariant.failed', `invariant failed: ${t.key} is registered twice`, { params: { token: t.key } });
     this.#entries.set(t.key, { factory, made: false, value: undefined });
     return this;
   }

@@ -30,7 +30,9 @@ export function dayOf(moment: Date | number): LocalDay {
 function parts(text: string): [number, number, number] | null {
   const m = FORMAT.exec(text);
   if (!m) return null;
-  const y = Number(m[1]), mo = Number(m[2]), d = Number(m[3]);
+  const y = Number(m[1]),
+    mo = Number(m[2]),
+    d = Number(m[3]);
   if (mo < 1 || mo > 12 || d < 1) return null;
   const last = new Date(Date.UTC(y, mo, 0)).getUTCDate(); // the month's last day
   return d > last ? null : [y, mo, d];
@@ -41,7 +43,9 @@ export const isLocalDay = (x: unknown): x is LocalDay => typeof x === 'string' &
 
 /** Text → LocalDay, or day.invalid. */
 export function parseDay(text: unknown): Result<LocalDay> {
-  return isLocalDay(text) ? ok(text) : err(new NoemaError('day.invalid', 'not a calendar day "YYYY-MM-DD": ' + JSON.stringify(String(text).slice(0, 40))));
+  return isLocalDay(text)
+    ? ok(text)
+    : err(new NoemaError('day.invalid', 'not a calendar day "YYYY-MM-DD": ' + JSON.stringify(String(text).slice(0, 40))));
 }
 
 function ymd(day: LocalDay): [number, number, number] {
@@ -66,7 +70,8 @@ export function addDays(day: LocalDay, n: number): LocalDay {
 
 /** Whole calendar days from a to b (b later → positive). */
 export function daysBetween(a: LocalDay, b: LocalDay): number {
-  const [ya, ma, da] = ymd(a), [yb, mb, db] = ymd(b);
+  const [ya, ma, da] = ymd(a),
+    [yb, mb, db] = ymd(b);
   return Math.round((Date.UTC(yb, mb - 1, db) - Date.UTC(ya, ma - 1, da)) / 864e5);
 }
 

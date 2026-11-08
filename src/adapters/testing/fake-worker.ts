@@ -7,8 +7,13 @@ import type { JobRegistry } from '../../ports/compute.ts';
 import type { WorkerLike } from '../browser/compute.ts';
 import { serveJobs, type FromWorker, type ToWorker, type WorkerScopeLike } from '../browser/worker-protocol.ts';
 
-export function fakeWorkerFactory(registry: JobRegistry): { create: () => WorkerLike; readonly started: () => number; readonly alive: () => number } {
-  let started = 0, alive = 0;
+export function fakeWorkerFactory(registry: JobRegistry): {
+  create: () => WorkerLike;
+  readonly started: () => number;
+  readonly alive: () => number;
+} {
+  let started = 0,
+    alive = 0;
   return {
     started: () => started,
     alive: () => alive,
@@ -20,18 +25,29 @@ export function fakeWorkerFactory(registry: JobRegistry): { create: () => Worker
       const scope: WorkerScopeLike = {
         postMessage(m: FromWorker) {
           const copy = structuredClone(m);
-          setTimeout(() => { if (!dead) worker.onmessage?.({ data: copy }); }, 0);
+          setTimeout(() => {
+            if (!dead) worker.onmessage?.({ data: copy });
+          }, 0);
         },
-        addEventListener: (_t, l) => { inbox.push(l); },
+        addEventListener: (_t, l) => {
+          inbox.push(l);
+        },
       };
       const worker: WorkerLike = {
         onmessage: null,
         onerror: null,
         postMessage(m: ToWorker) {
           const copy = structuredClone(m); // throws DataCloneError like a real Worker
-          setTimeout(() => { if (!dead) for (const l of inbox) l({ data: copy }); }, 0);
+          setTimeout(() => {
+            if (!dead) for (const l of inbox) l({ data: copy });
+          }, 0);
         },
-        terminate() { if (!dead) { dead = true; alive--; } },
+        terminate() {
+          if (!dead) {
+            dead = true;
+            alive--;
+          }
+        },
       };
       serveJobs(registry, scope);
       return worker;

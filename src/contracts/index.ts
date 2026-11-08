@@ -25,8 +25,13 @@ export const isContractId = (id: string): boolean => Object.prototype.hasOwnProp
 
 /** Validate data against a contract. */
 export function check(id: string, data: unknown): CheckResult {
-  const v = validators[id], ref = refs[id];
-  if (!v || !ref) return { ok: false, issues: [{ path: '', pointer: '', keyword: 'contract', message: `unknown contract "${id}"`, text: `unknown contract "${id}"` }] };
+  const v = validators[id],
+    ref = refs[id];
+  if (!v || !ref)
+    return {
+      ok: false,
+      issues: [{ path: '', pointer: '', keyword: 'contract', message: `unknown contract "${id}"`, text: `unknown contract "${id}"` }],
+    };
   if (v(data)) return { ok: true, issues: [] };
   return { ok: false, issues: word(index, ref, v.errors ?? [], data) };
 }

@@ -4,13 +4,12 @@
  *   worker → app   { t: 'progress', id, progress }   { t: 'done', id, value }   { t: 'fail', id, error: { code, params, message } }
  * Everything is structured-clone data; an error crosses as its ErrorInfo and becomes a NoemaError again on the app's side.
  */
-import { NoemaError, type ErrorInfo } from '../../kernel/errors.ts';
+import type { NoemaError, ErrorInfo } from '../../kernel/errors.ts';
 import type { JobContext, JobRegistry, Progress } from '../../ports/compute.ts';
 import { cancelledError, failedError, unknownJobError } from '../local/jobs.ts';
 
 export type ToWorker =
-  | { readonly t: 'run'; readonly id: number; readonly job: string; readonly input: unknown }
-  | { readonly t: 'cancel'; readonly id: number };
+  { readonly t: 'run'; readonly id: number; readonly job: string; readonly input: unknown } | { readonly t: 'cancel'; readonly id: number };
 
 export type FromWorker =
   | { readonly t: 'progress'; readonly id: number; readonly progress: Progress }
@@ -26,23 +25,42 @@ export interface WorkerScopeLike {
 /** Serves the registry's jobs on a worker scope: one AbortController per running job. */
 export function serveJobs(registry: JobRegistry, scope: WorkerScopeLike): void {
   const running = new Map<number, AbortController>();
-  const fail = (id: number, e: NoemaError): void => scope.postMessage({ t: 'fail', id, error: e.toJSON() });
+  const fail = (id: number, e: NoemaError): void => {
+    scope.postMessage({ t: 'fail', id, error: e.toJSON() });
+  };
   scope.addEventListener('message', ({ data }) => {
-    if (data.t === 'cancel') { running.get(data.id)?.abort(cancelledError('#' + data.id)); return; }
+    if (data.t === 'cancel') {
+      running.get(data.id)?.abort(cancelledError(`#${data.id}`));
+      return;
+    }
     const { id, job, input } = data;
     const handler = registry.get(job);
-    if (!handler) return fail(id, unknownJobError(job));
+    if (!handler) {
+      fail(id, unknownJobError(job));
+      return;
+    }
     const ac = new AbortController();
     running.set(id, ac);
-    const ctx: JobContext = { signal: ac.signal, progress: progress => scope.postMessage({ t: 'progress', id, progress }) };
+    const ctx: JobContext = {
+      signal: ac.signal,
+      progress: progress => {
+        scope.postMessage({ t: 'progress', id, progress });
+      },
+    };
     Promise.resolve()
       .then(() => handler(input, ctx))
       .then(
         value => {
           // a value that cannot be cloned (a function, a DOM node) fails the job instead of leaving the caller waiting
-          try { scope.postMessage({ t: 'done', id, value }); } catch (e) { fail(id, failedError(job, e)); }
+          try {
+            scope.postMessage({ t: 'done', id, value });
+          } catch (e) {
+            fail(id, failedError(job, e));
+          }
         },
-        (e: unknown) => fail(id, failedError(job, e)),
+        (e: unknown) => {
+          fail(id, failedError(job, e));
+        },
       )
       .finally(() => running.delete(id));
   });

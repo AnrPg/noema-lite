@@ -14,7 +14,7 @@ export function telemetryContract(name: string, make: () => Telemetry): void {
       const s = t.snapshot();
       assert.equal(s.counters['sync.conflict'], 3);
       assert.equal(s.events[0]?.name, 'compute.timeout');
-      assert.equal(s.events[0]?.data['ms'], 50);
+      assert.equal(s.events[0].data['ms'], 50);
       t.count('sync.conflict');
       assert.equal(s.counters['sync.conflict'], 3, 'the snapshot did not change');
       t.reset();
@@ -34,11 +34,19 @@ export function telemetryContract(name: string, make: () => Telemetry): void {
       const g = globalThis as { fetch?: unknown; XMLHttpRequest?: unknown; navigator?: unknown };
       const saved = { fetch: g.fetch, xhr: g.XMLHttpRequest };
       let calls = 0;
-      g.fetch = () => { calls++; throw new Error('telemetry used the network'); };
-      g.XMLHttpRequest = function () { calls++; };
+      g.fetch = () => {
+        calls++;
+        throw new Error('telemetry used the network');
+      };
+      g.XMLHttpRequest = function () {
+        calls++;
+      };
       try {
         const t = make();
-        for (let i = 0; i < 20; i++) { t.count('x'); t.event('y'); }
+        for (let i = 0; i < 20; i++) {
+          t.count('x');
+          t.event('y');
+        }
         t.snapshot();
       } finally {
         g.fetch = saved.fetch;

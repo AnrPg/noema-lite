@@ -34,7 +34,28 @@ export interface Palette {
   readonly deco2: Colour;
   readonly deco3: Colour;
 }
-export const PALETTE_KEYS = ['bg', 'paper', 'ink', 'ink2', 'ink3', 'line', 'acc', 'accInk', 'accSoft', 't1', 't1i', 't2', 't2i', 't3', 't3i', 't4', 't4i', 'deco1', 'deco2', 'deco3'] as const satisfies readonly (keyof Palette)[];
+export const PALETTE_KEYS = [
+  'bg',
+  'paper',
+  'ink',
+  'ink2',
+  'ink3',
+  'line',
+  'acc',
+  'accInk',
+  'accSoft',
+  't1',
+  't1i',
+  't2',
+  't2i',
+  't3',
+  't3i',
+  't4',
+  't4i',
+  'deco1',
+  'deco2',
+  'deco3',
+] as const satisfies readonly (keyof Palette)[];
 
 /** the typography of a character: its display face (titles), a display face for Cyrillic when the first has none, its body face */
 export interface CharacterType {
@@ -96,5 +117,7 @@ export interface BaseTokens {
   /** durations and easings */
   readonly motion: Readonly<Record<'fast' | 'base' | 'slow' | 'view', string>> & { readonly ease: string; readonly spring: string };
   /** the stacking layers, bottom to top */
-  readonly z: Readonly<Record<'tabs' | 'bar' | 'sticky' | 'top' | 'fx' | 'drawer' | 'modal' | 'toast' | 'tip' | 'popover' | 'confetti' | 'overlay', number>>;
+  readonly z: Readonly<
+    Record<'tabs' | 'bar' | 'sticky' | 'top' | 'fx' | 'drawer' | 'modal' | 'toast' | 'tip' | 'popover' | 'confetti' | 'overlay', number>
+  >;
 }

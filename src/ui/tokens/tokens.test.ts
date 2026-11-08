@@ -23,7 +23,7 @@ test('the characters are those of engine/themes.js, in its order, each with a fu
   }
 });
 
-test('the CSS sets the base set on :root, its dark set twice (the app\'s setting, the system\'s) and every character with its swatches', () => {
+test("the CSS sets the base set on :root, its dark set twice (the app's setting, the system's) and every character with its swatches", () => {
   const base = baseCss();
   assert.ok(base.startsWith(`:root{--bg:${BASE.colour.light.bg};`));
   assert.ok(base.includes(`:root[data-theme="dark"]{--bg:${BASE.colour.dark.bg};`));
@@ -31,7 +31,10 @@ test('the CSS sets the base set on :root, its dark set twice (the app\'s setting
   const css = tokensCss();
   for (const id of CHARACTER_IDS) {
     assert.ok(css.includes(`[data-m="${id}"]{--bg:${CHARACTERS[id].light.bg};`), id);
-    assert.ok(css.includes(`:root[data-theme="dark"][data-m="${id}"],:root[data-theme="dark"] [data-m="${id}"]{--bg:${CHARACTERS[id].dark.bg};`), id);
+    assert.ok(
+      css.includes(`:root[data-theme="dark"][data-m="${id}"],:root[data-theme="dark"] [data-m="${id}"]{--bg:${CHARACTERS[id].dark.bg};`),
+      id,
+    );
     assert.ok(css.includes(`[data-m="${id}"]{--swatch1:${CHARACTERS[id].light.acc};`), id);
   }
 });

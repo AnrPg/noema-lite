@@ -8,8 +8,17 @@ import NoemaEngineCatalog from './catalog.js';
 import { EXPR } from './plugins.ts';
 import type { CatalogApi, EngineModule, EnginePlugin, ExprApi, LoadedEngine, RegisteredEngine, SchemaApi } from './types.ts';
 
-export interface LoadFailure { readonly id: string; readonly code: string; readonly missing?: readonly string[]; readonly cause?: string }
-export interface LoadReport { readonly ok: boolean; readonly loaded: readonly string[]; readonly failed: readonly LoadFailure[] }
+export interface LoadFailure {
+  readonly id: string;
+  readonly code: string;
+  readonly missing?: readonly string[];
+  readonly cause?: string;
+}
+export interface LoadReport {
+  readonly ok: boolean;
+  readonly loaded: readonly string[];
+  readonly failed: readonly LoadFailure[];
+}
 
 export interface EngineLibrary {
   /** the expression language of sim-spec@1 (docs/INTERACTIVE_SIMEXPR.md): every check and formula of the app uses it */
@@ -49,11 +58,13 @@ export function createEngineLibrary(opts: LibraryOptions): EngineLibrary {
   const workers = new Map<string, () => Promise<string>>();
   for (const p of opts.plugins) {
     const r = registry.register(p);
-    if (!r.ok) throw new Error(`engine plugin ${r.error.id}: ${r.error.code}`);   // a programming error of plugins.ts (its test catches it)
+    if (!r.ok) throw new Error(`engine plugin ${r.error.id}: ${r.error.code}`); // a programming error of plugins.ts (its test catches it)
     workers.set(p.manifest.id, p.worker);
   }
-  const ready = new Map<string, LoadedEngine>(), pending = new Map<string, Promise<LoadFailure | null>>();
-  let schema: SchemaApi | null = null, schemaP: Promise<SchemaApi> | null = null;
+  const ready = new Map<string, LoadedEngine>(),
+    pending = new Map<string, Promise<LoadFailure | null>>();
+  let schema: SchemaApi | null = null,
+    schemaP: Promise<SchemaApi> | null = null;
 
   function compose(id: string, module: EngineModule, workerSource: string): LoadedEngine {
     const engine: RegisteredEngine = Object.freeze({ ...module.engine, workerSource });
@@ -67,10 +78,24 @@ export function createEngineLibrary(opts: LibraryOptions): EngineLibrary {
     if (had) return had;
     const worker = workers.get(id);
     if (!worker) return Promise.resolve({ id, code: 'unknown-plugin' });
-    const p = registry.load(id).then(async r => {
-      if (!r.ok) return { id, code: r.error.code, ...(r.error.missing ? { missing: r.error.missing } : {}), ...(r.error.cause ? { cause: r.error.cause } : {}) };
-      try { compose(id, r.value, await worker()); return null; } catch (e: unknown) { return { id, code: 'load-failed', cause: e instanceof Error ? e.message : String(e) }; }
-    }).finally(() => pending.delete(id));
+    const p = registry
+      .load(id)
+      .then(async r => {
+        if (!r.ok)
+          return {
+            id,
+            code: r.error.code,
+            ...(r.error.missing ? { missing: r.error.missing } : {}),
+            ...(r.error.cause ? { cause: r.error.cause } : {}),
+          };
+        try {
+          compose(id, r.value, await worker());
+          return null;
+        } catch (e: unknown) {
+          return { id, code: 'load-failed', cause: e instanceof Error ? e.message : String(e) };
+        }
+      })
+      .finally(() => pending.delete(id));
     pending.set(id, p);
     return p;
   }
@@ -99,11 +124,20 @@ export function createEngineLibrary(opts: LibraryOptions): EngineLibrary {
     },
     loadSchema() {
       if (schema) return Promise.resolve(schema);
-      if (!schemaP) schemaP = opts.schema().then(s => (schema = s), (e: unknown) => { schemaP = null; throw e; });
+      if (!schemaP)
+        schemaP = opts.schema().then(
+          s => (schema = s),
+          (e: unknown) => {
+            schemaP = null;
+            throw e;
+          },
+        );
       return schemaP;
     },
     schema: () => schema,
-    adoptSchema(s) { schema = s; },
+    adoptSchema(s) {
+      schema = s;
+    },
     supports(requires) {
       const mine = requires.filter(r => r.startsWith('engine:'));
       return registry.supports(mine);

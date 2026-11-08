@@ -11,7 +11,19 @@
         "lang": { "type": "string", "description": "the interface locale" },
         "chatLang": { "type": "string" },
         "native": { "type": ["string", "null"] },
-        "knows": { "type": "array", "items": { "type": "object", "properties": { "code": { "type": "string" }, "name": { "type": "string" }, "level": { "type": "string" }, "type": { "type": "string" }, "family": { "type": "string" } } } },
+        "knows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": { "type": "string" },
+              "name": { "type": "string" },
+              "level": { "type": "string" },
+              "type": { "type": "string" },
+              "family": { "type": "string" }
+            }
+          }
+        },
         "studyLangs": { "type": "array", "items": { "type": "string" }, "description": "D21: the languages the learner chose to study" },
         "theme": { "type": "string" },
         "character": { "type": ["string", "object", "null"] },
@@ -20,7 +32,11 @@
         "models": { "type": "object" },
         "sound": { "type": "boolean" },
         "chunk": { "type": "boolean" },
-        "embedOk": { "type": "object", "additionalProperties": { "type": "number" }, "description": "external-embed@1 providers the learner allowed, with the time" },
+        "embedOk": {
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "description": "external-embed@1 providers the learner allowed, with the time"
+        },
         "hiddenSubjects": { "type": "array", "items": { "type": "string" } },
         "askSubjectOnStart": { "type": "boolean" },
         "mt": { "type": "object" }
@@ -69,7 +85,18 @@
       "required": ["groups"],
       "properties": {
         "_doc": { "type": "string" },
-        "groups": { "type": "array", "items": { "type": "object", "required": ["id", "title"], "properties": { "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" }, "title": { "type": "string" }, "emoji": { "type": "string" } } } }
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+              "title": { "type": "string" },
+              "emoji": { "type": "string" }
+            }
+          }
+        }
       }
     }
   }

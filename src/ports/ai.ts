@@ -103,23 +103,56 @@ export interface AI {
 /** Makes the AI of a provider for one key (keys are per account and device, so the root registers factories). */
 export type AiFactory = (provider: AiProviderId, apiKey: string) => AI;
 
-export type AiErrorKind = 'no_key' | 'unauthorized' | 'forbidden' | 'no_credit' | 'rate_limited' | 'overloaded' | 'too_large' | 'network' | 'aborted' | 'bad_answer' | 'unsupported' | 'other';
+export type AiErrorKind =
+  | 'no_key'
+  | 'unauthorized'
+  | 'forbidden'
+  | 'no_credit'
+  | 'rate_limited'
+  | 'overloaded'
+  | 'too_large'
+  | 'network'
+  | 'aborted'
+  | 'bad_answer'
+  | 'unsupported'
+  | 'other';
 
 /** The vendor-neutral kind of an AI error, read from its contract code. */
 export function aiErrorKind(e: NoemaError): AiErrorKind {
   switch (e.code) {
-    case 'ai.no_key.device': case 'ai.no_key.claude': case 'ai.no_key.gemini': case 'ai.no_key.any': return 'no_key';
-    case 'ai.unauthorized': case 'ai.unauthorized_short': return 'unauthorized';
-    case 'ai.forbidden': return 'forbidden';
-    case 'ai.no_credit': case 'ai.no_credit_short': return 'no_credit';
-    case 'ai.rate_limited': case 'ai.quota': return 'rate_limited';
-    case 'ai.overloaded': return 'overloaded';
-    case 'ai.too_large': return 'too_large';
-    case 'ai.network': case 'ai.no_connection': case 'ai.network_gemini': return 'network';
-    case 'ai.aborted': return 'aborted';
-    case 'ai.not_json': case 'ai.invalid': return 'bad_answer';
-    case 'ai.unsupported': return 'unsupported';
-    default: return 'other';
+    case 'ai.no_key.device':
+    case 'ai.no_key.claude':
+    case 'ai.no_key.gemini':
+    case 'ai.no_key.any':
+      return 'no_key';
+    case 'ai.unauthorized':
+    case 'ai.unauthorized_short':
+      return 'unauthorized';
+    case 'ai.forbidden':
+      return 'forbidden';
+    case 'ai.no_credit':
+    case 'ai.no_credit_short':
+      return 'no_credit';
+    case 'ai.rate_limited':
+    case 'ai.quota':
+      return 'rate_limited';
+    case 'ai.overloaded':
+      return 'overloaded';
+    case 'ai.too_large':
+      return 'too_large';
+    case 'ai.network':
+    case 'ai.no_connection':
+    case 'ai.network_gemini':
+      return 'network';
+    case 'ai.aborted':
+      return 'aborted';
+    case 'ai.not_json':
+    case 'ai.invalid':
+      return 'bad_answer';
+    case 'ai.unsupported':
+      return 'unsupported';
+    default:
+      return 'other';
   }
 }
 

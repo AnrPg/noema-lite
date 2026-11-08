@@ -16,7 +16,11 @@
       "type": "object",
       "required": ["id"],
       "properties": {
-        "id": { "type": "string", "pattern": "^[A-Za-z0-9_.-]{1,60}$", "x-message": "is not a source id (letters, digits, _ . -, at most 60)" },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]{1,60}$",
+          "x-message": "is not a source id (letters, digits, _ . -, at most 60)"
+        },
         "title": { "type": "string" },
         "short": { "type": "string" },
         "subtitle": { "type": "string" },
@@ -36,7 +40,10 @@
       "then": {
         "required": ["file", "size"],
         "properties": {
-          "file": { "pattern": "^sources/(?!\\.\\.(?:/|$))(?!.*/\\.\\.(?:/|$))[^/].*$", "x-message": "a packaged file must be \"sources/<name>\"" },
+          "file": {
+            "pattern": "^sources/(?!\\.\\.(?:/|$))(?!.*/\\.\\.(?:/|$))[^/].*$",
+            "x-message": "a packaged file must be \"sources/<name>\""
+          },
           "size": { "exclusiveMinimum": 0, "x-message": "must be a positive number of bytes" }
         }
       }

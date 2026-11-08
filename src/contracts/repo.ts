@@ -70,7 +70,10 @@ export function repoFiles(root: string): { rel: string; kind: FileKind }[] {
       if (SKIP.has(e.name)) continue;
       const rel = dir ? `${dir}/${e.name}` : e.name;
       if (e.isDirectory()) walk(rel);
-      else if (e.name.endsWith('.json')) { const k = kindOf(rel); if (k) out.push({ rel, kind: k }); }
+      else if (e.name.endsWith('.json')) {
+        const k = kindOf(rel);
+        if (k) out.push({ rel, kind: k });
+      }
     }
   };
   for (const top of ['library', 'tests/fixtures', 'tools/activities_examples']) if (fs.existsSync(path.join(root, top))) walk(top);

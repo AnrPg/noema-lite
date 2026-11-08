@@ -30,7 +30,11 @@ export function errorReporterContract(name: string, make: ReporterFactory, harne
     test('a report is a journal entry with its code, site, severity and context', () => {
       const d = harness.deps();
       const r = make(d);
-      const e = r.report(new NoemaError('storage.corrupt', 'bad settings', { params: { key: 'a:settings' } }), { where: 'loader.settings', severity: 'warning', context: { acc: 'u1', n: 2 } });
+      const e = r.report(new NoemaError('storage.corrupt', 'bad settings', { params: { key: 'a:settings' } }), {
+        where: 'loader.settings',
+        severity: 'warning',
+        context: { acc: 'u1', n: 2 },
+      });
       assert.equal(e.code, 'storage.corrupt');
       assert.equal(e.where, 'loader.settings');
       assert.equal(e.severity, 'warning');
@@ -49,17 +53,19 @@ export function errorReporterContract(name: string, make: ReporterFactory, harne
 
     test('catcher reports with its site and returns undefined (for .catch)', async () => {
       const r = make(harness.deps());
-      const v = await Promise.reject(new Error('lost')).catch(r.catcher('loader.idb.put', { severity: 'debug' }));
-      assert.equal(v, undefined);
+      const gaveUndefined = await Promise.reject(new Error('lost'))
+        .catch(r.catcher('loader.idb.put', { severity: 'debug' }))
+        .then((v: unknown) => v === undefined);
+      assert.ok(gaveUndefined);
       const last = r.journal().at(-1);
       assert.equal(last?.where, 'loader.idb.put');
-      assert.equal(last?.severity, 'debug');
+      assert.equal(last.severity, 'debug');
     });
 
     test('the journal survives a reload (same store) and is bounded', () => {
       const d = harness.deps();
       const r1 = make(d);
-      for (let i = 0; i < 500; i++) r1.report(new Error('e' + i), { severity: 'debug' });
+      for (let i = 0; i < 500; i++) r1.report(new Error(`e${i}`), { severity: 'debug' });
       assert.ok(r1.journal().length <= 500 && r1.journal().length >= 50);
       const r2 = make(d);
       assert.equal(r2.journal().length, r1.journal().length);
@@ -77,7 +83,10 @@ export function errorReporterContract(name: string, make: ReporterFactory, harne
       assert.equal(d.told().length, 1);
       assert.equal(d.told()[0]?.kind, 'alert');
       assert.match(d.told()[0]?.text ?? '', /storage of this browser is full/);
-      r.report(new NoemaError('cloud.network', 'Network error — are you offline? (x)', { params: { detail: 'x' } }), { notify: true, severity: 'warning' });
+      r.report(new NoemaError('cloud.network', 'Network error — are you offline? (x)', { params: { detail: 'x' } }), {
+        notify: true,
+        severity: 'warning',
+      });
       assert.equal(d.told().length, 2);
       assert.equal(d.told()[1]?.kind, 'toast');
       assert.match(d.told()[1]?.text ?? '', /OFFLINE x/);
@@ -91,7 +100,9 @@ export function errorReporterContract(name: string, make: ReporterFactory, harne
     test('listeners hear every report; a failing listener breaks nothing', () => {
       const r = make(harness.deps());
       const seen: string[] = [];
-      r.onReport(() => { throw new Error('listener bug'); });
+      r.onReport(() => {
+        throw new Error('listener bug');
+      });
       const off = r.onReport(e => seen.push(e.code));
       r.report(new NoemaError('day.invalid', 'x'));
       off();

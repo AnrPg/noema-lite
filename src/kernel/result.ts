@@ -50,12 +50,14 @@ export function unwrapOr<T, E, F>(r: Result<T, E>, fallback: F): T | F {
   return r.ok ? r.value : fallback;
 }
 /** The value, or the error thrown (for the phase bridge and tests: old callers expect exceptions). */
-export function unwrap<T, E>(r: Result<T, E>): T {
+export function unwrap<T, E extends Error>(r: Result<T, E>): T {
   if (r.ok) return r.value;
   throw r.error;
 }
 
-type OkValues<R extends readonly Result<unknown, unknown>[]> = { -readonly [K in keyof R]: R[K] extends Result<infer T, unknown> ? T : never };
+type OkValues<R extends readonly Result<unknown, unknown>[]> = {
+  -readonly [K in keyof R]: R[K] extends Result<infer T, unknown> ? T : never;
+};
 type ErrOf<R extends readonly Result<unknown, unknown>[]> = R[number] extends Result<unknown, infer E> ? E : never;
 /** Every value (in order), or the first error. */
 export function all<const R extends readonly Result<unknown, unknown>[]>(results: R): Result<OkValues<R>, ErrOf<R>> {

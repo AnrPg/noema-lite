@@ -18,13 +18,17 @@ const PACKS = FILES.filter(f => f.kind.contract === 'noema.pack.v3').map(f => f.
 test('every file of the repository is migrated already, and a run over it changes nothing', () => {
   const pending = FILES.filter(f => migrateText(read(f.rel)).applied.length).map(f => f.rel);
   assert.deepEqual(pending, []);
-  for (const f of FILES.slice(0, 50)) { const t = read(f.rel); assert.equal(migrateText(t).text, t, f.rel); }
+  for (const f of FILES.slice(0, 50)) {
+    const t = read(f.rel);
+    assert.equal(migrateText(t).text, t, f.rel);
+  }
 });
 
 test('pack.v3: a pack of v 1 or 2 becomes v 3 — the same bytes but the version, the same counts, its contract met', () => {
   assert.ok(PACKS.length >= 6, PACKS.join(', '));
   for (const rel of PACKS) {
-    const now = read(rel), doc = JSON.parse(now) as Record<string, unknown>;
+    const now = read(rel),
+      doc = JSON.parse(now) as Record<string, unknown>;
     assert.equal(doc.v, 3, rel);
     for (const old of [1, 2]) {
       const before = now.replace(/("format"\s*:\s*"noema-pack"\s*,\s*"v"\s*:\s*)3/, `$1${old}`);
@@ -41,24 +45,42 @@ test('pack.v3: a pack of v 1 or 2 becomes v 3 — the same bytes but the version
 
 test('the counts of the learning material, file by file (what a migration must keep)', () => {
   const pack = counts(JSON.parse(read('library/subjects/databricks/pack.json')));
-  assert.ok(pack.chapters === 13 && (pack.sections ?? 0) > 100 && (pack.exercises ?? 0) > 1000 && (pack.flashcards ?? 0) > 100 && pack.sources === 2, JSON.stringify(pack));
-  const lex = FILES.filter(f => f.kind.contract === 'noema.lang.v1#lexicon').reduce((n, f) => n + (counts(JSON.parse(read(f.rel))).words ?? 0), 0);
-  const bank = FILES.filter(f => f.kind.contract === 'noema.lang.v1#bank').reduce((n, f) => n + (counts(JSON.parse(read(f.rel))).sentences ?? 0), 0);
+  assert.ok(
+    pack.chapters === 13 &&
+      (pack.sections ?? 0) > 100 &&
+      (pack.exercises ?? 0) > 1000 &&
+      (pack.flashcards ?? 0) > 100 &&
+      pack.sources === 2,
+    JSON.stringify(pack),
+  );
+  const lex = FILES.filter(f => f.kind.contract === 'noema.lang.v1#lexicon').reduce(
+    (n, f) => n + (counts(JSON.parse(read(f.rel))).words ?? 0),
+    0,
+  );
+  const bank = FILES.filter(f => f.kind.contract === 'noema.lang.v1#bank').reduce(
+    (n, f) => n + (counts(JSON.parse(read(f.rel))).sentences ?? 0),
+    0,
+  );
   assert.ok(lex > 2000 && bank > 100, `${lex} words, ${bank} sentences`);
   for (const f of FILES) {
-    const d = JSON.parse(read(f.rel)) as unknown, after = migrate(d).doc;
+    const d = JSON.parse(read(f.rel)) as unknown,
+      after = migrate(d).doc;
     assert.deepEqual(counts(after), counts(d), f.rel);
   }
 });
 
 test('a migration is idempotent and keeps the order of the keys', () => {
   const p = { format: 'noema-pack', subject: { id: 'x', title: 'X' }, chapters: [{ id: 'ch01' }] };
-  const once = migrate(p), twice = migrate(once.doc);
+  const once = migrate(p),
+    twice = migrate(once.doc);
   assert.deepEqual(once.applied, ['pack.v3']);
   assert.deepEqual(Object.keys(once.doc as object), ['format', 'v', 'subject', 'chapters']);
   assert.deepEqual(twice.applied, []);
   assert.equal(twice.doc, once.doc);
   assert.ok(!packV3.applies({ format: 'noema-translation', v: 1 }) && !packV3.applies({ format: 'noema-pack', v: 3 }));
   // a text the patch cannot reach is written out again in the file's own layout
-  assert.equal(migrateText('{\n  "subject": {},\n  "format": "noema-pack"\n}\n').text, stringifyLike('{\n  "x": 1\n}\n', { subject: {}, format: 'noema-pack', v: 3 }));
+  assert.equal(
+    migrateText('{\n  "subject": {},\n  "format": "noema-pack"\n}\n').text,
+    stringifyLike('{\n  "x": 1\n}\n', { subject: {}, format: 'noema-pack', v: 3 }),
+  );
 });

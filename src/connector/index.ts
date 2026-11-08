@@ -19,7 +19,18 @@ export { TOOLS } from './tools/index.ts';
 /** The services of one signed-in call. */
 export function contextFor(env: ConnectorEnv, token: string, user: AuthUser): ToolContext {
   const sb = new Supabase(env.config, token, env.fetch);
-  return { env, engine: env.engine, user, uid: user.id, sb, kv: new KvStore(sb, user.id), storage: new Storage(sb), sourceFiles: new SourceFiles(sb, user.id), bridges: new Bridges(sb, user.id), sagas: new Sagas(sb, user.id) };
+  return {
+    env,
+    engine: env.engine,
+    user,
+    uid: user.id,
+    sb,
+    kv: new KvStore(sb, user.id),
+    storage: new Storage(sb),
+    sourceFiles: new SourceFiles(sb, user.id),
+    bridges: new Bridges(sb, user.id),
+    sagas: new Sagas(sb, user.id),
+  };
 }
 
 export function createConnector(env: ConnectorEnv, tools: readonly Tool[] = TOOLS): Router {

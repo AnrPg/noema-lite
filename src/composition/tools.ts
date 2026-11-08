@@ -32,7 +32,9 @@ export function createToolsContainer(o: ToolsCoreOptions = {}, extra: readonly R
   c.register(I18N, () => catalogI18n(o.catalogs ?? {}, o.locale ?? 'en'));
   c.register(NOTIFIER, r => recordingNotifier(() => r.get(CLOCK).now()));
   c.register(TELEMETRY, r => localTelemetry({ now: () => r.get(CLOCK).now() }));
-  c.register(ERRORS, r => createErrorReporter({ now: () => r.get(CLOCK).now(), notifier: r.get(NOTIFIER), i18n: r.get(I18N), telemetry: r.get(TELEMETRY) }));
+  c.register(ERRORS, r =>
+    createErrorReporter({ now: () => r.get(CLOCK).now(), notifier: r.get(NOTIFIER), i18n: r.get(I18N), telemetry: r.get(TELEMETRY) }),
+  );
   c.register(JOBS, () => buildJobRegistry());
   c.register(COMPUTE, r => inlineCompute(r.get(JOBS)));
   c.value(CLOUD, null);

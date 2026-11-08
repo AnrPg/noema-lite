@@ -7,8 +7,20 @@
  */
 import { NoemaError } from '../../kernel/errors.ts';
 import { err, ok, OK_VOID, type AsyncResult, type Result } from '../../kernel/result.ts';
+import { textOf } from '../../kernel/text.ts';
 import type { Unsubscribe } from '../../ports/common.ts';
-import { isQuotaError, type DocKey, type DocListOptions, type DocumentStore, type DocumentTransaction, type KeyValueStore, type QuotaEstimate, type Storage, type StorageFullEvent, type TransactionMode } from '../../ports/storage.ts';
+import {
+  isQuotaError,
+  type DocKey,
+  type DocListOptions,
+  type DocumentStore,
+  type DocumentTransaction,
+  type KeyValueStore,
+  type QuotaEstimate,
+  type Storage,
+  type StorageFullEvent,
+  type TransactionMode,
+} from '../../ports/storage.ts';
 
 /** The DOM's localStorage, as far as the adapter uses it. */
 export interface WebStorageLike {
@@ -70,7 +82,11 @@ export function browserStorage(o: BrowserStorageOptions = {}): Storage {
     get(key) {
       const s = ls();
       if (!s.ok) return s;
-      try { return ok(s.value.getItem(key)); } catch (e) { return err(unavailable('localStorage', e)); }
+      try {
+        return ok(s.value.getItem(key));
+      } catch (e) {
+        return err(unavailable('localStorage', e));
+      }
     },
     set(key, value) {
       const s = ls();
@@ -79,20 +95,32 @@ export function browserStorage(o: BrowserStorageOptions = {}): Storage {
         s.value.setItem(key, value);
         return OK_VOID;
       } catch (e) {
-        return err(isQuotaError(e) ? signal('kv', key) : new NoemaError('storage.failed', 'localStorage refused a write', { cause: e, params: { key } }));
+        return err(
+          isQuotaError(e)
+            ? signal('kv', key)
+            : new NoemaError('storage.failed', 'localStorage refused a write', { cause: e, params: { key } }),
+        );
       }
     },
     delete(key) {
       const s = ls();
       if (!s.ok) return s;
-      try { s.value.removeItem(key); return OK_VOID; } catch (e) { return err(unavailable('localStorage', e)); }
+      try {
+        s.value.removeItem(key);
+        return OK_VOID;
+      } catch (e) {
+        return err(unavailable('localStorage', e));
+      }
     },
     keys(prefix = '') {
       const s = ls();
       if (!s.ok) return s;
       try {
         const out: string[] = [];
-        for (let i = 0; i < s.value.length; i++) { const k = s.value.key(i); if (k !== null && k.startsWith(prefix)) out.push(k); }
+        for (let i = 0; i < s.value.length; i++) {
+          const k = s.value.key(i);
+          if (k !== null && k.startsWith(prefix)) out.push(k);
+        }
         return ok(out);
       } catch (e) {
         return err(unavailable('localStorage', e));
@@ -125,9 +153,18 @@ export function browserStorage(o: BrowserStorageOptions = {}): Storage {
     async persist() {
       const sm = getSM();
       if (!sm?.persist) return ok(false);
-      try { return ok(await sm.persist()); } catch (e) { return err(new NoemaError('storage.failed', 'the persist request failed', { cause: e })); }
+      try {
+        return ok(await sm.persist());
+      } catch (e) {
+        return err(new NoemaError('storage.failed', 'the persist request failed', { cause: e }));
+      }
     },
-    onFull(listener): Unsubscribe { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    onFull(listener): Unsubscribe {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
   };
 }
 
@@ -139,10 +176,15 @@ interface IdbOptions {
   readonly onQuota: (key: string) => NoemaError;
 }
 
-const req = <T>(r: IDBRequest<T>): Promise<T> => new Promise((resolve, reject) => {
-  r.onsuccess = () => resolve(r.result);
-  r.onerror = () => reject(r.error);
-});
+const req = <T>(r: IDBRequest<T>): Promise<T> =>
+  new Promise((resolve, reject) => {
+    r.onsuccess = () => {
+      resolve(r.result);
+    };
+    r.onerror = () => {
+      reject(r.error ?? new DOMException('the IndexedDB request failed', 'UnknownError'));
+    };
+  });
 
 /** An IndexedDB document store: one object store per collection (out-of-line keys). */
 export function idbDocuments(o: IdbOptions): DocumentStore {
@@ -151,62 +193,111 @@ export function idbDocuments(o: IdbOptions): DocumentStore {
     if (opening) return opening;
     opening = new Promise(resolve => {
       let factory: IDBFactory | undefined;
-      try { factory = o.indexedDB(); } catch (e) { return resolve(err(unavailable('IndexedDB', e))); }
-      if (!factory) return resolve(err(unavailable('IndexedDB')));
+      try {
+        factory = o.indexedDB();
+      } catch (e) {
+        resolve(err(unavailable('IndexedDB', e)));
+        return;
+      }
+      if (!factory) {
+        resolve(err(unavailable('IndexedDB')));
+        return;
+      }
       let r: IDBOpenDBRequest;
-      try { r = factory.open(o.name, o.version); } catch (e) { return resolve(err(unavailable('IndexedDB', e))); }
-      r.onupgradeneeded = () => { for (const c of o.collections) if (!r.result.objectStoreNames.contains(c)) r.result.createObjectStore(c); };
+      try {
+        r = factory.open(o.name, o.version);
+      } catch (e) {
+        resolve(err(unavailable('IndexedDB', e)));
+        return;
+      }
+      r.onupgradeneeded = () => {
+        for (const c of o.collections) if (!r.result.objectStoreNames.contains(c)) r.result.createObjectStore(c);
+      };
       r.onsuccess = () => {
         const db = r.result;
-        db.onversionchange = () => { db.close(); opening = null; }; // another tab upgrades: let it, reopen on next use
+        db.onversionchange = () => {
+          db.close();
+          opening = null;
+        }; // another tab upgrades: let it, reopen on next use
         resolve(ok(db));
       };
-      r.onerror = () => { opening = null; resolve(err(unavailable('IndexedDB', r.error))); };
+      r.onerror = () => {
+        opening = null;
+        resolve(err(unavailable('IndexedDB', r.error)));
+      };
     });
     return opening;
   };
 
-  async function transaction<R>(collections: readonly string[], mode: TransactionMode, work: (tx: DocumentTransaction) => Promise<R>): AsyncResult<R> {
+  async function transaction<R>(
+    collections: readonly string[],
+    mode: TransactionMode,
+    work: (tx: DocumentTransaction) => Promise<R>,
+  ): AsyncResult<R> {
     const db = await open();
     if (!db.ok) return db;
     let t: IDBTransaction;
-    try { t = db.value.transaction([...collections], mode); } catch (e) {
+    try {
+      t = db.value.transaction([...collections], mode);
+    } catch (e) {
       return err(new NoemaError('storage.failed', 'could not start a transaction on ' + collections.join(', '), { cause: e }));
     }
     let lastKey = collections.join(',');
     const store = (c: string): IDBObjectStore => t.objectStore(c);
     const tx: DocumentTransaction = {
       get: <T>(c: string, k: DocKey) => req(store(c).get(k)) as Promise<T | undefined>,
-      put: async (c, k, d) => { lastKey = c + '/' + k; await req(store(c).put(d, k)); },
-      delete: async (c, k) => { await req(store(c).delete(k)); },
-      list: <T>(c: string, lo: DocListOptions = {}) => new Promise<Array<readonly [DocKey, T]>>((resolve, reject) => {
-        const range = lo.prefix ? IDBKeyRange.bound(lo.prefix, lo.prefix + '￿') : undefined;
-        const out: Array<readonly [DocKey, T]> = [];
-        const cur = store(c).openCursor(range);
-        cur.onsuccess = () => {
-          const x = cur.result;
-          if (!x || (lo.limit !== undefined && out.length >= lo.limit)) return resolve(out);
-          out.push([String(x.key), x.value as T]);
-          x.continue();
-        };
-        cur.onerror = () => reject(cur.error);
-      }),
+      put: async (c, k, d) => {
+        lastKey = c + '/' + k;
+        await req(store(c).put(d, k));
+      },
+      delete: async (c, k) => {
+        await req(store(c).delete(k));
+      },
+      list: <T>(c: string, lo: DocListOptions = {}) =>
+        new Promise<Array<readonly [DocKey, T]>>((resolve, reject) => {
+          const range = lo.prefix ? IDBKeyRange.bound(lo.prefix, lo.prefix + '￿') : undefined;
+          const out: Array<readonly [DocKey, T]> = [];
+          const cur = store(c).openCursor(range);
+          cur.onsuccess = () => {
+            const x = cur.result;
+            if (!x || (lo.limit !== undefined && out.length >= lo.limit)) {
+              resolve(out);
+              return;
+            }
+            out.push([textOf(x.key), x.value as T]);
+            x.continue();
+          };
+          cur.onerror = () => {
+            reject(cur.error ?? new DOMException('the IndexedDB cursor failed', 'UnknownError'));
+          };
+        }),
     };
     return new Promise(resolve => {
-      let value: { v: R } | null = null, failed: unknown = null;
-      t.oncomplete = () => resolve(value ? ok(value.v) : err(new NoemaError('storage.failed', 'the transaction ended without its work')));
+      let value: { v: R } | null = null,
+        failed: unknown = null;
+      t.oncomplete = () => {
+        resolve(value ? ok(value.v) : err(new NoemaError('storage.failed', 'the transaction ended without its work')));
+      };
       const fail = (): void => {
         const e = failed ?? t.error;
         resolve(err(isQuotaError(e) ? o.onQuota(lastKey) : NoemaError.from(e, 'storage.failed')));
       };
       t.onabort = fail;
-      t.onerror = ev => { failed = failed ?? t.error ?? (ev.target as IDBRequest | null)?.error; };
+      t.onerror = ev => {
+        failed = failed ?? t.error ?? (ev.target as IDBRequest | null)?.error;
+      };
       work(tx).then(
-        v => { value = { v }; },
+        v => {
+          value = { v };
+        },
         (e: unknown) => {
           failed = failed ?? e;
           // the work failed: undo everything it wrote (abort throws only when the transaction has already ended)
-          try { t.abort(); } catch { fail(); }
+          try {
+            t.abort();
+          } catch {
+            fail();
+          }
         },
       );
     });

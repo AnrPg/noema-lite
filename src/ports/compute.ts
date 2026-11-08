@@ -23,7 +23,7 @@ export interface RunOptions {
 }
 
 export interface Compute {
-  run<I, O>(job: string, input: I, options?: RunOptions): AsyncResult<O>;
+  run<O>(job: string, input: unknown, options?: RunOptions): AsyncResult<O>;
   /** Stops every Worker (running jobs end as compute.cancelled). */
   dispose(): void;
 }

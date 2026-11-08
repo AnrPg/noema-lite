@@ -41,7 +41,8 @@ const rank = (s: Severity): number => SEVERITIES.indexOf(s);
 function cleanContext(c: ReportOptions['context']): JournalEntry['context'] {
   if (!c) return null;
   const out: Record<string, string | number | boolean | null> = {};
-  for (const [k, v] of Object.entries(c)) if (v === null || ['string', 'number', 'boolean'].includes(typeof v)) out[k] = typeof v === 'string' ? v.slice(0, 300) : v;
+  for (const [k, v] of Object.entries(c))
+    if (v === null || ['string', 'number', 'boolean'].includes(typeof v)) out[k] = typeof v === 'string' ? v.slice(0, 300) : v;
   return out;
 }
 
@@ -62,7 +63,12 @@ export function createErrorReporter(deps: ErrorReporterDeps = {}): ErrorReporter
         const parsed: unknown = JSON.parse(raw.value);
         if (Array.isArray(parsed)) entries = (parsed as JournalEntry[]).slice(-max);
       } catch (e) {
-        entries = [entry(new NoemaError('storage.corrupt', 'the error journal was not readable and starts again', { cause: e }), { where: 'errors.journal', severity: 'warning' })];
+        entries = [
+          entry(new NoemaError('storage.corrupt', 'the error journal was not readable and starts again', { cause: e }), {
+            where: 'errors.journal',
+            severity: 'warning',
+          }),
+        ];
       }
     }
   }
@@ -90,7 +96,8 @@ export function createErrorReporter(deps: ErrorReporterDeps = {}): ErrorReporter
   function tell(e: NoemaError, severity: Severity): void {
     const { notifier, i18n } = deps;
     if (!notifier) return;
-    const at = now(), last = lastNotice.get(e.code);
+    const at = now(),
+      last = lastNotice.get(e.code);
     if (last !== undefined && at - last < (deps.noticeEveryMs ?? 60_000)) return;
     lastNotice.set(e.code, at);
     const k = NOTICE_KEYS[e.code];
@@ -119,7 +126,11 @@ export function createErrorReporter(deps: ErrorReporterDeps = {}): ErrorReporter
         if (o.notify) tell(e, severity);
         for (const l of [...listeners]) {
           // a listener that fails must not turn one report into a crash of the caller, nor into a report loop: console only
-          try { l(x); } catch (le) { out.error('[noema] an error-journal listener failed', le); }
+          try {
+            l(x);
+          } catch (le) {
+            out.error('[noema] an error-journal listener failed', le);
+          }
         }
       } finally {
         busy = false;
@@ -127,11 +138,22 @@ export function createErrorReporter(deps: ErrorReporterDeps = {}): ErrorReporter
       return x;
     },
     catcher(where, o = {}) {
-      return (thrown: unknown) => { reporter.report(thrown, { ...o, where }); return undefined; };
+      return (thrown: unknown) => {
+        reporter.report(thrown, { ...o, where });
+        return undefined;
+      };
     },
     journal: () => [...entries],
-    clearJournal() { entries = []; save(); },
-    onReport(listener): Unsubscribe { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    clearJournal() {
+      entries = [];
+      save();
+    },
+    onReport(listener): Unsubscribe {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
   };
   return reporter;
 }

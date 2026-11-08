@@ -43,9 +43,27 @@
     "chapterSource": {
       "description": "A chapter file as authored (tools/CONTENT_SPEC.md \"Chapter object\"): every field of the contract, exercise ids chNN-eNNN with their difficulty, focus tags and explanation, complete playbooks.",
       "allOf": [{ "$ref": "#/$defs/chapter" }],
-      "required": ["id", "num", "title", "subtitle", "emoji", "sourcePages", "mantra", "objectives", "sections", "debug", "pitfalls", "flashcards", "exercises"],
+      "required": [
+        "id",
+        "num",
+        "title",
+        "subtitle",
+        "emoji",
+        "sourcePages",
+        "mantra",
+        "objectives",
+        "sections",
+        "debug",
+        "pitfalls",
+        "flashcards",
+        "exercises"
+      ],
       "properties": {
-        "sections": { "items": { "properties": { "id": { "type": "string", "pattern": "^ch[0-9]{2}-s[0-9]{2}$", "x-message": "is not a section id (chNN-sNN)" } } } },
+        "sections": {
+          "items": {
+            "properties": { "id": { "type": "string", "pattern": "^ch[0-9]{2}-s[0-9]{2}$", "x-message": "is not a section id (chNN-sNN)" } }
+          }
+        },
         "exercises": { "items": { "$ref": "#/$defs/exerciseSource" } },
         "debug": { "items": { "required": ["title", "symptom", "askYourself", "steps", "rootCauses", "fix"] } }
       }
@@ -67,24 +85,137 @@
       "type": "object",
       "required": ["t"],
       "properties": {
-        "t": { "enum": ["p", "list", "code", "diagram", "table", "callout", "compare", "flow", "reveal", "ask", "terms", "figure", "interactive"], "x-message": "unknown block type" },
+        "t": {
+          "enum": [
+            "p",
+            "list",
+            "code",
+            "diagram",
+            "table",
+            "callout",
+            "compare",
+            "flow",
+            "reveal",
+            "ask",
+            "terms",
+            "figure",
+            "interactive"
+          ],
+          "x-message": "unknown block type"
+        },
         "src": { "type": "string" },
         "caption": { "type": "string" }
       },
       "allOf": [
-        { "if": { "properties": { "t": { "const": "p" } }, "required": ["t"] }, "then": { "required": ["text"], "properties": { "text": { "type": "string" } } } },
-        { "if": { "properties": { "t": { "const": "list" } }, "required": ["t"] }, "then": { "required": ["items"], "properties": { "items": { "type": "array", "items": { "type": "string" } }, "ordered": { "type": "boolean" } } } },
-        { "if": { "properties": { "t": { "const": "code" } }, "required": ["t"] }, "then": { "required": ["code"], "properties": { "code": { "type": "string" }, "lang": { "type": "string" } } } },
-        { "if": { "properties": { "t": { "const": "diagram" } }, "required": ["t"] }, "then": { "required": ["text"], "properties": { "text": { "type": "string" } } } },
-        { "if": { "properties": { "t": { "const": "table" } }, "required": ["t"] }, "then": { "required": ["head", "rows"], "properties": { "head": { "type": "array", "items": { "type": "string" } }, "rows": { "type": "array", "items": { "type": "array", "items": { "type": "string" } } }, "kind": { "enum": ["compare", "summary", "breakdown"] } } } },
-        { "if": { "properties": { "t": { "const": "callout" } }, "required": ["t"] }, "then": { "required": ["kind", "text"], "properties": { "kind": { "enum": ["key", "pitfall", "tip", "exam", "warn", "analogy", "debug", "interview"], "x-message": "is not a callout kind (key, pitfall, tip, exam, warn, analogy, debug, interview)" }, "title": { "type": "string" }, "text": { "type": "string" } } } },
-        { "if": { "properties": { "t": { "const": "compare" } }, "required": ["t"] }, "then": { "required": ["items"], "properties": { "items": { "type": "array", "items": { "type": "object", "required": ["title", "points"], "properties": { "title": { "$ref": "#/$defs/text" }, "points": { "type": "array", "items": { "type": "string" } } } } } } } },
-        { "if": { "properties": { "t": { "const": "flow" } }, "required": ["t"] }, "then": { "required": ["items"], "properties": { "items": { "type": "array", "items": { "type": "string" } } } } },
-        { "if": { "properties": { "t": { "const": "reveal" } }, "required": ["t"] }, "then": { "required": ["label", "text"], "properties": { "label": { "type": "string" }, "text": { "type": "string" } } } },
-        { "if": { "properties": { "t": { "const": "ask" } }, "required": ["t"] }, "then": { "required": ["questions"], "properties": { "title": { "type": "string" }, "questions": { "type": "array", "items": { "type": "string" } } } } },
-        { "if": { "properties": { "t": { "const": "terms" } }, "required": ["t"] }, "then": { "required": ["items"], "properties": { "items": { "type": "array", "items": { "type": "object", "required": ["term", "def"], "properties": { "term": { "$ref": "#/$defs/text" }, "def": { "$ref": "#/$defs/text" } } } } } } },
-        { "if": { "properties": { "t": { "const": "figure" } }, "required": ["t"] }, "then": { "required": ["media"], "properties": { "media": { "type": "string" }, "regions": { "type": "array", "items": { "$ref": "noema.visual.v1.schema.json#/$defs/region" } }, "explore": { "type": "boolean" } } } },
-        { "if": { "properties": { "t": { "const": "interactive" } }, "required": ["t"] }, "then": { "required": ["activity"], "properties": { "activity": { "type": "string" }, "height": { "type": ["string", "number"] } } } }
+        {
+          "if": { "properties": { "t": { "const": "p" } }, "required": ["t"] },
+          "then": { "required": ["text"], "properties": { "text": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "t": { "const": "list" } }, "required": ["t"] },
+          "then": {
+            "required": ["items"],
+            "properties": { "items": { "type": "array", "items": { "type": "string" } }, "ordered": { "type": "boolean" } }
+          }
+        },
+        {
+          "if": { "properties": { "t": { "const": "code" } }, "required": ["t"] },
+          "then": { "required": ["code"], "properties": { "code": { "type": "string" }, "lang": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "t": { "const": "diagram" } }, "required": ["t"] },
+          "then": { "required": ["text"], "properties": { "text": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "t": { "const": "table" } }, "required": ["t"] },
+          "then": {
+            "required": ["head", "rows"],
+            "properties": {
+              "head": { "type": "array", "items": { "type": "string" } },
+              "rows": { "type": "array", "items": { "type": "array", "items": { "type": "string" } } },
+              "kind": { "enum": ["compare", "summary", "breakdown"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "t": { "const": "callout" } }, "required": ["t"] },
+          "then": {
+            "required": ["kind", "text"],
+            "properties": {
+              "kind": {
+                "enum": ["key", "pitfall", "tip", "exam", "warn", "analogy", "debug", "interview"],
+                "x-message": "is not a callout kind (key, pitfall, tip, exam, warn, analogy, debug, interview)"
+              },
+              "title": { "type": "string" },
+              "text": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "t": { "const": "compare" } }, "required": ["t"] },
+          "then": {
+            "required": ["items"],
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["title", "points"],
+                  "properties": { "title": { "$ref": "#/$defs/text" }, "points": { "type": "array", "items": { "type": "string" } } }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "t": { "const": "flow" } }, "required": ["t"] },
+          "then": { "required": ["items"], "properties": { "items": { "type": "array", "items": { "type": "string" } } } }
+        },
+        {
+          "if": { "properties": { "t": { "const": "reveal" } }, "required": ["t"] },
+          "then": { "required": ["label", "text"], "properties": { "label": { "type": "string" }, "text": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "t": { "const": "ask" } }, "required": ["t"] },
+          "then": {
+            "required": ["questions"],
+            "properties": { "title": { "type": "string" }, "questions": { "type": "array", "items": { "type": "string" } } }
+          }
+        },
+        {
+          "if": { "properties": { "t": { "const": "terms" } }, "required": ["t"] },
+          "then": {
+            "required": ["items"],
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["term", "def"],
+                  "properties": { "term": { "$ref": "#/$defs/text" }, "def": { "$ref": "#/$defs/text" } }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "t": { "const": "figure" } }, "required": ["t"] },
+          "then": {
+            "required": ["media"],
+            "properties": {
+              "media": { "type": "string" },
+              "regions": { "type": "array", "items": { "$ref": "noema.visual.v1.schema.json#/$defs/region" } },
+              "explore": { "type": "boolean" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "t": { "const": "interactive" } }, "required": ["t"] },
+          "then": {
+            "required": ["activity"],
+            "properties": { "activity": { "type": "string" }, "height": { "type": ["string", "number"] } }
+          }
+        }
       ]
     },
 
@@ -93,7 +224,34 @@
       "properties": { "src": { "type": "string" }, "loc": { "type": "string" }, "sq": { "type": "string" } }
     },
     "exerciseType": {
-      "enum": ["mcq", "tf", "odd", "order", "match", "bucket", "cloze", "spotbug", "calc", "scenario", "free", "write", "flaw", "case", "predict", "tree", "inquiry", "debate", "sim", "img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"],
+      "enum": [
+        "mcq",
+        "tf",
+        "odd",
+        "order",
+        "match",
+        "bucket",
+        "cloze",
+        "spotbug",
+        "calc",
+        "scenario",
+        "free",
+        "write",
+        "flaw",
+        "case",
+        "predict",
+        "tree",
+        "inquiry",
+        "debate",
+        "sim",
+        "img_hotspot",
+        "img_sequence",
+        "img_reveal",
+        "img_drag",
+        "img_label",
+        "img_select",
+        "img_occlusion"
+      ],
       "x-message": "unknown type"
     },
     "tag": { "enum": ["concept", "syntax", "pitfall", "debug", "exam", "interview", "calc", "compare"] },
@@ -119,27 +277,186 @@
         "src": { "type": "string" }
       },
       "allOf": [
-        { "if": { "properties": { "type": { "not": { "enum": ["cloze", "scenario"] } } } }, "then": { "required": ["q"], "properties": { "q": { "$ref": "#/$defs/text" } } } },
+        {
+          "if": { "properties": { "type": { "not": { "enum": ["cloze", "scenario"] } } } },
+          "then": { "required": ["q"], "properties": { "q": { "$ref": "#/$defs/text" } } }
+        },
         { "if": { "properties": { "type": { "enum": ["mcq", "odd"] } }, "required": ["type"] }, "then": { "$ref": "#/$defs/choice" } },
-        { "if": { "properties": { "type": { "const": "odd" } }, "required": ["type"] }, "then": { "properties": { "options": { "minItems": 4 } } } },
+        {
+          "if": { "properties": { "type": { "const": "odd" } }, "required": ["type"] },
+          "then": { "properties": { "options": { "minItems": 4 } } }
+        },
         { "if": { "properties": { "type": { "const": "tf" } }, "required": ["type"] }, "then": { "$ref": "#/$defs/tf" } },
-        { "if": { "properties": { "type": { "const": "order" } }, "required": ["type"] }, "then": { "required": ["items"], "properties": { "items": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 3, "maxItems": 9, "uniqueItems": true, "x-message": "needs 3–9 different texts in the correct order" } } } },
-        { "if": { "properties": { "type": { "const": "match" } }, "required": ["type"] }, "then": { "required": ["pairs"], "properties": { "pairs": { "type": "array", "minItems": 3, "maxItems": 7, "items": { "type": "array", "prefixItems": [{ "$ref": "#/$defs/text" }, { "$ref": "#/$defs/text" }], "minItems": 2, "maxItems": 2 }, "x-message": "needs 3–7 [left, right] pairs" } } } },
-        { "if": { "properties": { "type": { "const": "bucket" } }, "required": ["type"] }, "then": { "required": ["buckets", "items"], "properties": { "buckets": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2, "maxItems": 4 }, "items": { "type": "array", "minItems": 3, "items": { "type": "object", "required": ["text", "bucket"], "properties": { "text": { "$ref": "#/$defs/text" }, "bucket": { "$ref": "#/$defs/index" } } } } } } },
-        { "if": { "properties": { "type": { "const": "cloze" } }, "required": ["type"] }, "then": { "required": ["text"], "properties": { "text": { "type": "string", "pattern": "\\[\\[[^\\]]+\\]\\]", "x-message": "needs at least one [[blank|alternative]]" }, "bank": { "type": "array", "items": { "type": "string" } }, "asCode": { "type": "boolean" } } } },
-        { "if": { "properties": { "type": { "const": "spotbug" } }, "required": ["type"] }, "then": { "required": ["lines", "bugs"], "properties": { "lines": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2 }, "bugs": { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 }, "fix": { "type": "string" } } } },
+        {
+          "if": { "properties": { "type": { "const": "order" } }, "required": ["type"] },
+          "then": {
+            "required": ["items"],
+            "properties": {
+              "items": {
+                "allOf": [{ "$ref": "#/$defs/texts" }],
+                "minItems": 3,
+                "maxItems": 9,
+                "uniqueItems": true,
+                "x-message": "needs 3–9 different texts in the correct order"
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "match" } }, "required": ["type"] },
+          "then": {
+            "required": ["pairs"],
+            "properties": {
+              "pairs": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 7,
+                "items": {
+                  "type": "array",
+                  "prefixItems": [{ "$ref": "#/$defs/text" }, { "$ref": "#/$defs/text" }],
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "x-message": "needs 3–7 [left, right] pairs"
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "bucket" } }, "required": ["type"] },
+          "then": {
+            "required": ["buckets", "items"],
+            "properties": {
+              "buckets": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2, "maxItems": 4 },
+              "items": {
+                "type": "array",
+                "minItems": 3,
+                "items": {
+                  "type": "object",
+                  "required": ["text", "bucket"],
+                  "properties": { "text": { "$ref": "#/$defs/text" }, "bucket": { "$ref": "#/$defs/index" } }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "cloze" } }, "required": ["type"] },
+          "then": {
+            "required": ["text"],
+            "properties": {
+              "text": { "type": "string", "pattern": "\\[\\[[^\\]]+\\]\\]", "x-message": "needs at least one [[blank|alternative]]" },
+              "bank": { "type": "array", "items": { "type": "string" } },
+              "asCode": { "type": "boolean" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "spotbug" } }, "required": ["type"] },
+          "then": {
+            "required": ["lines", "bugs"],
+            "properties": {
+              "lines": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2 },
+              "bugs": { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 },
+              "fix": { "type": "string" }
+            }
+          }
+        },
         { "if": { "properties": { "type": { "const": "calc" } }, "required": ["type"] }, "then": { "$ref": "#/$defs/calc" } },
-        { "if": { "properties": { "type": { "const": "scenario" } }, "required": ["type"] }, "then": { "required": ["steps"], "properties": { "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/scenarioStep" } } } } },
-        { "if": { "properties": { "type": { "const": "free" } }, "required": ["type"] }, "then": { "required": ["model"], "properties": { "model": { "$ref": "#/$defs/text" }, "rubric": { "type": "array", "items": { "type": "string" } } } } },
-        { "if": { "properties": { "type": { "const": "write" } }, "required": ["type"] }, "then": { "required": ["solution", "keywords"], "properties": { "solution": { "$ref": "#/$defs/text" }, "keywords": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 1 }, "lang": { "type": "string" } } } },
-        { "if": { "properties": { "type": { "const": "flaw" } }, "required": ["type"] }, "then": { "required": ["lines", "flaws", "reasons", "reason"], "properties": { "lines": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 3 }, "flaws": { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 }, "reasons": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2 }, "reason": { "$ref": "#/$defs/index" }, "fix": { "type": "string" }, "asCode": { "type": "boolean" }, "lang": { "type": "string" } } } },
-        { "if": { "properties": { "type": { "const": "case" } }, "required": ["type"] }, "then": { "required": ["parts"], "properties": { "parts": { "type": "array", "minItems": 2, "maxItems": 4, "items": { "$ref": "#/$defs/casePart" }, "x-message": "needs 2–4 questions [{q, type: mcq|tf|calc, …}]" } } } },
+        {
+          "if": { "properties": { "type": { "const": "scenario" } }, "required": ["type"] },
+          "then": {
+            "required": ["steps"],
+            "properties": { "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/scenarioStep" } } }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "free" } }, "required": ["type"] },
+          "then": {
+            "required": ["model"],
+            "properties": { "model": { "$ref": "#/$defs/text" }, "rubric": { "type": "array", "items": { "type": "string" } } }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "write" } }, "required": ["type"] },
+          "then": {
+            "required": ["solution", "keywords"],
+            "properties": {
+              "solution": { "$ref": "#/$defs/text" },
+              "keywords": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 1 },
+              "lang": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "flaw" } }, "required": ["type"] },
+          "then": {
+            "required": ["lines", "flaws", "reasons", "reason"],
+            "properties": {
+              "lines": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 3 },
+              "flaws": { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 },
+              "reasons": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2 },
+              "reason": { "$ref": "#/$defs/index" },
+              "fix": { "type": "string" },
+              "asCode": { "type": "boolean" },
+              "lang": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "case" } }, "required": ["type"] },
+          "then": {
+            "required": ["parts"],
+            "properties": {
+              "parts": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 4,
+                "items": { "$ref": "#/$defs/casePart" },
+                "x-message": "needs 2–4 questions [{q, type: mcq|tf|calc, …}]"
+              }
+            }
+          }
+        },
         { "if": { "properties": { "type": { "const": "predict" } }, "required": ["type"] }, "then": { "$ref": "#/$defs/predict" } },
-        { "if": { "properties": { "type": { "const": "tree" } }, "required": ["type"] }, "then": { "required": ["start", "nodes"], "properties": { "start": { "type": "string" }, "nodes": { "type": "object", "minProperties": 1, "additionalProperties": { "$ref": "#/$defs/treeNode" } } } } },
-        { "if": { "properties": { "type": { "const": "inquiry" } }, "required": ["type"] }, "then": { "required": ["options", "scores", "why"], "properties": { "options": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 3 }, "scores": { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 3 } }, "why": { "type": "array", "items": { "type": "string" } } } } },
-        { "if": { "properties": { "type": { "const": "debate" } }, "required": ["type"] }, "then": { "required": ["sides"], "properties": { "sides": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "$ref": "#/$defs/debateSide" } } } } },
+        {
+          "if": { "properties": { "type": { "const": "tree" } }, "required": ["type"] },
+          "then": {
+            "required": ["start", "nodes"],
+            "properties": {
+              "start": { "type": "string" },
+              "nodes": { "type": "object", "minProperties": 1, "additionalProperties": { "$ref": "#/$defs/treeNode" } }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "inquiry" } }, "required": ["type"] },
+          "then": {
+            "required": ["options", "scores", "why"],
+            "properties": {
+              "options": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 3 },
+              "scores": { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 3 } },
+              "why": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "debate" } }, "required": ["type"] },
+          "then": {
+            "required": ["sides"],
+            "properties": { "sides": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "$ref": "#/$defs/debateSide" } } }
+          }
+        },
         { "if": { "properties": { "type": { "const": "sim" } }, "required": ["type"] }, "then": { "$ref": "#/$defs/sim" } },
-        { "if": { "properties": { "type": { "enum": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"] } }, "required": ["type"] }, "then": { "$ref": "#/$defs/visual" } }
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"] }
+            },
+            "required": ["type"]
+          },
+          "then": { "$ref": "#/$defs/visual" }
+        }
       ]
     },
     "exerciseSource": {
@@ -148,20 +465,42 @@
       "properties": {
         "id": { "pattern": "^ch[0-9]{2}-e[0-9]{3}$", "x-message": "is not an exercise id (chNN-eNNN)" },
         "difficulty": { "enum": [1, 2, 3], "x-message": "must be 1, 2 or 3" },
-        "tags": { "type": "array", "items": { "$ref": "#/$defs/tag" }, "minItems": 1, "x-message": "needs focus tags of concept, syntax, pitfall, debug, exam, interview, calc, compare" }
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tag" },
+          "minItems": 1,
+          "x-message": "needs focus tags of concept, syntax, pitfall, debug, exam, interview, calc, compare"
+        }
       },
       "allOf": [
-        { "if": { "properties": { "type": { "not": { "const": "scenario" } } } }, "then": { "required": ["explain", "q"], "properties": { "explain": { "$ref": "#/$defs/text" }, "q": { "$ref": "#/$defs/text" } } } },
-        { "if": { "properties": { "type": { "const": "free" } }, "required": ["type"] }, "then": { "required": ["rubric"], "properties": { "rubric": { "minItems": 1 } } } },
-        { "if": { "properties": { "type": { "const": "spotbug" } }, "required": ["type"] }, "then": { "required": ["fix"], "properties": { "fix": { "$ref": "#/$defs/text" } } } }
+        {
+          "if": { "properties": { "type": { "not": { "const": "scenario" } } } },
+          "then": { "required": ["explain", "q"], "properties": { "explain": { "$ref": "#/$defs/text" }, "q": { "$ref": "#/$defs/text" } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "free" } }, "required": ["type"] },
+          "then": { "required": ["rubric"], "properties": { "rubric": { "minItems": 1 } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "spotbug" } }, "required": ["type"] },
+          "then": { "required": ["fix"], "properties": { "fix": { "$ref": "#/$defs/text" } } }
+        }
       ]
     },
 
     "choice": {
       "required": ["options", "answer"],
       "properties": {
-        "options": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2, "uniqueItems": true, "x-message": "must be a list of different texts" },
-        "answer": { "oneOf": [{ "$ref": "#/$defs/index" }, { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 }], "x-message": "must be the index of an option (or a list of them with multi: true)" },
+        "options": {
+          "allOf": [{ "$ref": "#/$defs/texts" }],
+          "minItems": 2,
+          "uniqueItems": true,
+          "x-message": "must be a list of different texts"
+        },
+        "answer": {
+          "oneOf": [{ "$ref": "#/$defs/index" }, { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 }],
+          "x-message": "must be the index of an option (or a list of them with multi: true)"
+        },
         "multi": { "type": "boolean" },
         "why": { "type": "array", "items": { "type": "string" } }
       },
@@ -174,7 +513,11 @@
     },
     "calc": {
       "required": ["answer"],
-      "properties": { "answer": { "type": "number", "x-message": "must be a number" }, "tolerance": { "type": "number", "minimum": 0 }, "unit": { "type": "string" } }
+      "properties": {
+        "answer": { "type": "number", "x-message": "must be a number" },
+        "tolerance": { "type": "number", "minimum": 0 },
+        "unit": { "type": "string" }
+      }
     },
     "predict": {
       "required": ["outcome", "answer"],
@@ -187,7 +530,11 @@
       },
       "if": { "required": ["options"] },
       "then": { "properties": { "answer": { "$ref": "#/$defs/index" } } },
-      "else": { "properties": { "answer": { "type": "number", "x-message": "options + answer (an option index), or a numeric answer (with tolerance, unit)" } } }
+      "else": {
+        "properties": {
+          "answer": { "type": "number", "x-message": "options + answer (an option index), or a numeric answer (with tolerance, unit)" }
+        }
+      }
     },
     "scenarioStep": {
       "type": "object",
@@ -198,7 +545,11 @@
         "options": {
           "type": "array",
           "minItems": 2,
-          "items": { "type": "object", "required": ["text", "fb"], "properties": { "text": { "$ref": "#/$defs/text" }, "ok": { "type": "boolean" }, "fb": { "$ref": "#/$defs/text" } } },
+          "items": {
+            "type": "object",
+            "required": ["text", "fb"],
+            "properties": { "text": { "$ref": "#/$defs/text" }, "ok": { "type": "boolean" }, "fb": { "$ref": "#/$defs/text" } }
+          },
           "contains": { "type": "object", "required": ["ok"], "properties": { "ok": { "const": true } } },
           "minContains": 1,
           "maxContains": 1,
@@ -209,7 +560,11 @@
     "casePart": {
       "type": "object",
       "required": ["q", "type"],
-      "properties": { "q": { "$ref": "#/$defs/text" }, "type": { "enum": ["mcq", "tf", "calc"], "x-message": "must be mcq, tf or calc" }, "explain": { "type": "string" } },
+      "properties": {
+        "q": { "$ref": "#/$defs/text" },
+        "type": { "enum": ["mcq", "tf", "calc"], "x-message": "must be mcq, tf or calc" },
+        "explain": { "type": "string" }
+      },
       "allOf": [
         { "if": { "properties": { "type": { "const": "mcq" } }, "required": ["type"] }, "then": { "$ref": "#/$defs/choice" } },
         { "if": { "properties": { "type": { "const": "tf" } }, "required": ["type"] }, "then": { "$ref": "#/$defs/tf" } },
@@ -227,7 +582,12 @@
           "items": {
             "type": "object",
             "required": ["text"],
-            "properties": { "text": { "$ref": "#/$defs/text" }, "ok": { "type": "boolean" }, "fb": { "type": "string" }, "to": { "type": ["string", "null"] } },
+            "properties": {
+              "text": { "$ref": "#/$defs/text" },
+              "ok": { "type": "boolean" },
+              "fb": { "type": "string" },
+              "to": { "type": ["string", "null"] }
+            },
             "if": { "not": { "required": ["ok"], "properties": { "ok": { "const": true } } } },
             "then": { "required": ["fb"], "properties": { "fb": { "$ref": "#/$defs/text" } } }
           },
@@ -265,14 +625,31 @@
         "media": { "$ref": "#/$defs/text" },
         "regions": { "type": "array", "items": { "$ref": "noema.visual.v1.schema.json#/$defs/region" } },
         "targets": { "type": "array", "items": { "type": "string" } },
-        "answer": { "oneOf": [{ "$ref": "#/$defs/index" }, { "type": "array", "items": { "oneOf": [{ "$ref": "#/$defs/index" }, { "type": "string" }] } }] },
+        "answer": {
+          "oneOf": [
+            { "$ref": "#/$defs/index" },
+            { "type": "array", "items": { "oneOf": [{ "$ref": "#/$defs/index" }, { "type": "string" }] } }
+          ]
+        },
         "multi": { "type": "boolean" },
         "maskLabels": { "type": "boolean" },
         "any": { "type": "boolean" },
         "mask": { "type": "boolean" },
-        "why": { "description": "img_hotspot: {regionId: why this tempting place is wrong}; img_reveal: one text per option", "oneOf": [{ "type": "object", "additionalProperties": { "type": "string" } }, { "type": "array", "items": { "type": "string" } }] },
+        "why": {
+          "description": "img_hotspot: {regionId: why this tempting place is wrong}; img_reveal: one text per option",
+          "oneOf": [
+            { "type": "object", "additionalProperties": { "type": "string" } },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
         "options": { "type": "array", "items": { "type": "string" } },
-        "grid": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 8 }, "minItems": 2, "maxItems": 2, "x-message": "must be [cols, rows] (1–8)" },
+        "grid": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 8 },
+          "minItems": 2,
+          "maxItems": 2,
+          "x-message": "must be [cols, rows] (1–8)"
+        },
         "start": { "type": "array", "items": { "type": "string" } },
         "distractors": { "type": "array", "items": { "type": "string" } },
         "fuzzy": { "type": "boolean" },
@@ -280,9 +657,36 @@
         "order": { "enum": ["listed", "random"] }
       },
       "allOf": [
-        { "if": { "properties": { "type": { "enum": ["img_hotspot", "img_sequence"] } }, "required": ["type"] }, "then": { "required": ["answer"], "properties": { "answer": { "type": "array", "items": { "type": "string" }, "minItems": 1, "x-message": "must list region ids" } } } },
-        { "if": { "properties": { "type": { "const": "img_sequence" } }, "required": ["type"] }, "then": { "properties": { "answer": { "minItems": 2, "maxItems": 9, "uniqueItems": true, "x-message": "a sequence needs 2–9 different steps" } } } },
-        { "if": { "properties": { "type": { "const": "img_reveal" } }, "required": ["type"] }, "then": { "required": ["options", "answer"], "properties": { "options": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2 }, "answer": { "oneOf": [{ "$ref": "#/$defs/index" }, { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 }], "x-message": "must be an option index" } } } }
+        {
+          "if": { "properties": { "type": { "enum": ["img_hotspot", "img_sequence"] } }, "required": ["type"] },
+          "then": {
+            "required": ["answer"],
+            "properties": {
+              "answer": { "type": "array", "items": { "type": "string" }, "minItems": 1, "x-message": "must list region ids" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "img_sequence" } }, "required": ["type"] },
+          "then": {
+            "properties": {
+              "answer": { "minItems": 2, "maxItems": 9, "uniqueItems": true, "x-message": "a sequence needs 2–9 different steps" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "img_reveal" } }, "required": ["type"] },
+          "then": {
+            "required": ["options", "answer"],
+            "properties": {
+              "options": { "allOf": [{ "$ref": "#/$defs/texts" }], "minItems": 2 },
+              "answer": {
+                "oneOf": [{ "$ref": "#/$defs/index" }, { "type": "array", "items": { "$ref": "#/$defs/index" }, "minItems": 1 }],
+                "x-message": "must be an option index"
+              }
+            }
+          }
+        }
       ]
     },
 
@@ -307,7 +711,13 @@
         "section": { "type": "string" },
         "symptom": { "type": "string" },
         "askYourself": { "type": "array", "items": { "type": "string" } },
-        "steps": { "type": "array", "items": { "type": "object", "properties": { "do": { "type": "string" }, "why": { "type": "string" }, "code": { "type": "string" } } } },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": { "do": { "type": "string" }, "why": { "type": "string" }, "code": { "type": "string" } }
+          }
+        },
         "rootCauses": { "type": "array", "items": { "type": "string" } },
         "fix": { "type": "string" },
         "mnemonic": { "type": "string" },
@@ -317,7 +727,12 @@
     },
     "pitfall": {
       "type": "object",
-      "properties": { "title": { "type": "string" }, "text": { "type": "string" }, "fix": { "type": "string" }, "src": { "type": "string" } }
+      "properties": {
+        "title": { "type": "string" },
+        "text": { "type": "string" },
+        "fix": { "type": "string" },
+        "src": { "type": "string" }
+      }
     },
 
     "map": {
@@ -326,12 +741,56 @@
       "properties": {
         "format": { "const": "noema.map/v1" },
         "chapter": { "type": "string" },
-        "points": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "text": { "type": "string" }, "level": { "type": "string" }, "cats": { "type": "array", "items": { "type": "string" } }, "with": { "type": "array", "items": { "type": "string" } }, "cite": { "$ref": "#/$defs/cite" }, "taughtIn": { "type": "string" } } } },
-        "learnables": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "kp": { "type": "array", "items": { "type": "string" } }, "goal": { "type": "string" } } } },
-        "fits": { "type": "object", "properties": { "types": { "type": "array", "items": { "type": "string" } }, "focus": { "type": "array", "items": { "type": "string" } }, "modes": { "type": "array", "items": { "type": "string" } } } },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "level": { "type": "string" },
+              "cats": { "type": "array", "items": { "type": "string" } },
+              "with": { "type": "array", "items": { "type": "string" } },
+              "cite": { "$ref": "#/$defs/cite" },
+              "taughtIn": { "type": "string" }
+            }
+          }
+        },
+        "learnables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "kp": { "type": "array", "items": { "type": "string" } },
+              "goal": { "type": "string" }
+            }
+          }
+        },
+        "fits": {
+          "type": "object",
+          "properties": {
+            "types": { "type": "array", "items": { "type": "string" } },
+            "focus": { "type": "array", "items": { "type": "string" } },
+            "modes": { "type": "array", "items": { "type": "string" } }
+          }
+        },
         "unfit": { "type": "object", "additionalProperties": { "type": "string" } },
         "sequenceWhy": { "type": "object", "additionalProperties": { "type": "string" } },
-        "sourceQuestions": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "text": { "type": "string" }, "answer": { "type": "string" }, "answerFrom": { "enum": ["source", "claude"] }, "check": { "type": "string" }, "cite": { "$ref": "#/$defs/cite" } } } }
+        "sourceQuestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "answer": { "type": "string" },
+              "answerFrom": { "enum": ["source", "claude"] },
+              "check": { "type": "string" },
+              "cite": { "$ref": "#/$defs/cite" }
+            }
+          }
+        }
       }
     },
     "review": {
@@ -340,8 +799,23 @@
       "properties": {
         "format": { "const": "noema.review/v1" },
         "chapter": { "type": "string" },
-        "rubric": { "type": "array", "items": { "type": "object", "properties": { "lr": { "type": "string" }, "ok": { "type": "boolean" }, "notes": { "type": "string" } } } },
-        "blind": { "type": "object", "properties": { "solved": { "type": "integer", "minimum": 0 }, "mismatches": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "fixed": { "type": "boolean" } } } } } }
+        "rubric": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": { "lr": { "type": "string" }, "ok": { "type": "boolean" }, "notes": { "type": "string" } }
+          }
+        },
+        "blind": {
+          "type": "object",
+          "properties": {
+            "solved": { "type": "integer", "minimum": 0 },
+            "mismatches": {
+              "type": "array",
+              "items": { "type": "object", "properties": { "id": { "type": "string" }, "fixed": { "type": "boolean" } } }
+            }
+          }
+        }
       }
     },
 
@@ -368,7 +842,14 @@
         "appendDebug": { "type": "array", "items": { "$ref": "#/$defs/playbook" } },
         "reviseExercises": { "type": "array", "items": { "$ref": "#/$defs/exercise" } },
         "reviseFlashcards": { "type": "array", "items": { "allOf": [{ "$ref": "#/$defs/flashcard" }], "required": ["id"] } },
-        "reviseBlocks": { "type": "array", "items": { "type": "object", "required": ["section", "index", "block"], "properties": { "section": { "type": "string" }, "index": { "$ref": "#/$defs/index" }, "block": { "$ref": "#/$defs/block" } } } }
+        "reviseBlocks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["section", "index", "block"],
+            "properties": { "section": { "type": "string" }, "index": { "$ref": "#/$defs/index" }, "block": { "$ref": "#/$defs/block" } }
+          }
+        }
       }
     }
   }

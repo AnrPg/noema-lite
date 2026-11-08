@@ -35,10 +35,16 @@ export function notifierContract(name: string, make: () => NotifierHarness): voi
       h.notifier.notice('Step C ready');
       assert.deepEqual(h.onScreen(), []);
       assert.equal(over.length, 1);
-      assert.deepEqual(over[0]?.map(n => n.text), ['Step A ready', 'Step B ready', 'Step C ready']);
+      assert.deepEqual(
+        over[0]?.map(n => n.text),
+        ['Step A ready', 'Step B ready', 'Step C ready'],
+      );
       h.notifier.notice('Step D ready');
       assert.deepEqual(h.onScreen(), [], 'the rest of a burst goes to the bell too');
-      assert.deepEqual(over[1]?.map(n => n.text), ['Step D ready']);
+      assert.deepEqual(
+        over[1]?.map(n => n.text),
+        ['Step D ready'],
+      );
       h.advance(60_000);
       h.notifier.notice('Later news');
       assert.deepEqual(h.onScreen(), ['Later news'], 'after a quiet while, toasts again');
