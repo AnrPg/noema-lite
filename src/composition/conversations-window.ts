@@ -110,7 +110,7 @@ export function conversationsWindow(
     try {
       sessionStorage.setItem(OPEN_CONVO, JSON.stringify({ acc: a, sid, id: r.id }));
     } catch (e) {
-      console.warn('[Noema] no sessionStorage: the conversation does not reopen by itself', e);
+      W().NoemaCore?.errors.report(e, { where: 'tutor.goConvo', severity: 'info' }); // no sessionStorage: it does not reopen by itself
     }
     void W().Noema?.switchTo(a, sid, '#/subject');
   }

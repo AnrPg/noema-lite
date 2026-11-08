@@ -13,6 +13,7 @@ import { markdown } from '../features/study/ui/text.ts';
 export const OPEN_CONVO = 'noema-device:openConvo';
 
 export interface PageGlobals {
+  NoemaCore?: { errors: { report(e: unknown, o: { where: string; severity: string }): void } };
   NoemaConvos?: PageConvos & { toMarkdown?: (r: unknown, o: unknown) => string; KIND_NAME?: Record<string, string> };
   NoemaClaude?: { Key: { get(acc: string): string } };
   NoemaLLM?: {

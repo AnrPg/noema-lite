@@ -108,7 +108,7 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
   const fetchOf = (u: string, init: RequestInit): Promise<Response> => fetch(u, init);
   const settings = (): TutorSettings => host.settings();
   const acc = host.account.id;
-  const gem = (): AI => geminiAI({ apiKey: settings().apiKey ?? '', fetch: fetchOf });
+  const gem = (): AI => geminiAI({ apiKey: settings().apiKey ?? '', fetch: fetchOf, maxRetries: 1 }); // one try, as before: the learner sees a busy or offline answer at once
   /** the Gemini models of the key, best first: kept in the settings with the chosen one */
   async function detect(): Promise<string[]> {
     const r = await gem().models();
@@ -249,7 +249,7 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
       host.touchStreak();
     },
     report: (e, where) => {
-      console.warn('[Noema] ' + where, e);
+      W().NoemaCore?.errors.report(e, { where: 'tutor.' + where, severity: 'warning' });
     },
     preloaded: host.preloaded,
   });
@@ -327,7 +327,6 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
       panel = document.createElement('noema-tutor-panel') as NoemaTutorPanel;
       panel.view = view;
       d.replaceChildren(panel);
-      if (!d.hasAttribute('aria-label')) d.setAttribute('aria-label', host.tutor().name);
     }
     d.classList.toggle('open', session.open);
     sc?.classList.toggle('on', session.open);
