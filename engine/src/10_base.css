@@ -55,7 +55,7 @@ h3{font-size:18px;font-weight:750}
 .btn.small{padding:7px 13px;font-size:14px;border-radius:11px}
 .btn[disabled]{opacity:.45;pointer-events:none}
 .pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--bg2);color:var(--ink2)}
-.pill.c{background:var(--c-bg);color:var(--c)}
+.pill.c{background:var(--c-bg);color:var(--c-ink)}
 .hr{height:1px;background:var(--line);margin:22px 0}
 
 /* ---------- home ---------- */
@@ -82,7 +82,7 @@ h3{font-size:18px;font-weight:750}
 .chcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
 .chcard:hover::after{transform:scale(1.25)}
 .chcard .emo{font-size:34px;position:relative;z-index:1}
-.chcard .num{font-size:12px;font-weight:800;color:var(--c);letter-spacing:.08em;text-transform:uppercase;position:relative;z-index:1}
+.chcard .num{font-size:12px;font-weight:800;color:var(--c-ink);letter-spacing:.08em;text-transform:uppercase;position:relative;z-index:1}
 .chcard h3{margin:4px 0 4px;position:relative;z-index:1}
 .chcard p{margin:0 0 14px;font-size:14px;color:var(--ink2);position:relative;z-index:1}
 .bars{display:grid;gap:6px;position:relative;z-index:1}
@@ -103,14 +103,14 @@ h3{font-size:18px;font-weight:750}
 /* ---------- chapter ---------- */
 .chhead{display:flex;gap:18px;align-items:flex-start;margin-bottom:18px}
 .chhead .emo{font-size:48px;line-height:1;animation:pop .5s}
-.chhead .num{font-size:12px;font-weight:800;color:var(--c);letter-spacing:.1em;text-transform:uppercase}
+.chhead .num{font-size:12px;font-weight:800;color:var(--c-ink);letter-spacing:.1em;text-transform:uppercase}
 .back{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--ink2);margin-bottom:14px;font-size:14px}
 .back:hover{color:var(--ink)}
 .mantrabox{border-radius:var(--r);padding:16px 18px;background:var(--c-bg);color:var(--ink);font-weight:600;margin:6px 0 18px;display:flex;gap:12px;align-items:flex-start}
 .tabs{display:flex;gap:6px;background:var(--bg2);padding:5px;border-radius:16px;margin-bottom:22px;flex-wrap:wrap}
 .tabs button{padding:9px 16px;border-radius:12px;font-weight:700;color:var(--ink2);white-space:nowrap;transition:background .2s,color .2s}
 .tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 8px -3px rgba(0,0,0,.18)}
-.tabs button .n{font-size:11px;background:var(--c-bg);color:var(--c);padding:1px 7px;border-radius:9px;margin-inline-start:5px}
+.tabs button .n{font-size:11px;background:var(--c-bg);color:var(--c-ink);padding:1px 7px;border-radius:9px;margin-inline-start:5px}
 .path{display:grid;gap:10px}
 .node{display:flex;gap:14px;align-items:center;text-align:start;padding:14px 16px;border-radius:18px;background:var(--card);border:1px solid var(--line);transition:transform .2s,border-color .2s;animation:slideIn .4s both}
 .node:hover{transform:translateX(4px);border-color:var(--c)}
@@ -183,7 +183,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-bg) 40%,transparent)}
 .ask.recall li.shown span{filter:none}
 .terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
 .term{border-radius:14px;background:var(--card);border:1px solid var(--line);padding:11px 14px}
-.term b{color:var(--c)}
+.term b{color:var(--c-ink)}
 .continue{display:flex;justify-content:center;margin:24px 0}
 .secnav{display:flex;justify-content:space-between;gap:10px;margin-top:30px;flex-wrap:wrap}
 .quickzone{margin-top:28px}
@@ -278,7 +278,7 @@ textarea.answer:focus{border-color:var(--c)}
 .treepath{margin:4px 0 0;padding-inline-start:20px;font-size:13.5px;color:var(--ink2)}
 .treepath:empty{display:none}
 .opt.dim{opacity:.62}
-.opt .value{letter-spacing:1px;color:var(--c);font-weight:800}
+.opt .value{letter-spacing:1px;color:var(--c-ink);font-weight:800}
 .confrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px}
 .confrow .tiny{margin-inline-end:2px}
 .confchip{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink2);display:inline-flex;gap:5px;align-items:center}

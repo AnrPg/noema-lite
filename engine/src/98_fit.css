@@ -25,6 +25,8 @@ select,input,textarea,img,video,canvas,iframe{max-width:100%}
 .grow{min-width:0}
 .field{grid-template-columns:minmax(0,1fr)}
 @media (max-width:420px){.chhead{gap:10px} body.ns-on .chhead .emo{display:none}}
+/* a section's head (Me › settings): when its status no longer fits beside the title, the status goes under it instead of squeezing the title into broken words */
+@media (max-width:420px){details.accsec>summary{flex-wrap:wrap} details.accsec>summary>.grow{flex:1 1 8em}}
 /* the file viewer: a spreadsheet's cells wrap like the other tables */
 .vw-table{width:100%}.vw-table :is(td,th){overflow-wrap:anywhere}
 /* windows, overlays and drawers: never wider than the screen, their insides give way */

@@ -4,3 +4,4 @@ export { PALETTE_KEYS } from './types.ts';
 export { BASE } from './base.ts';
 export { CHARACTERS, CHARACTER_IDS, type CharacterId } from './characters.ts';
 export { BRIDGE, baseCss, charactersCss, tokensCss } from './css.ts';
+export { TEXT_MIN, TEXT_ON, contrast, contrastFailures, luminance, mixSrgb, surface, type Surface } from './contrast.ts';

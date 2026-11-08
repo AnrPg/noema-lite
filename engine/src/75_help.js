@@ -1,7 +1,13 @@
 /* ===================== Help: ⓘ tooltips, setup guides, first-sessions setup banner ===================== */
-/** Small ⓘ that shows an explanation on hover / focus / tap. */
-function tip(text) {
-  const t = h('span', { class: 'htip', tabindex: '0', role: 'button', 'aria-label': tE('engine.help.moreInfo'), onclick: e => { e.stopPropagation(); e.preventDefault(); t.classList.toggle('show'); } }, 'i', h('span', { class: 'htipbox', html: fmt(text) }));
+/** Small ⓘ that shows an explanation on hover / focus / tap. Inside another control (a section's summary: { within: true }) it is no
+    control of its own (no control within a control): a tap still shows it, and the control it sits in is described by it and shows it
+    while focused (30_shell.css) — the caller sets that control's aria-describedby to t.dataset.box. */
+let tipN = 0;
+function tip(text, { within = false } = {}) {
+  const box = h('span', { class: 'htipbox', html: fmt(text), id: 'htip-' + (++tipN) });
+  const toggle = e => { e.stopPropagation(); e.preventDefault(); t.classList.toggle('show'); };
+  const t = within ? h('span', { class: 'htip', 'aria-hidden': 'true', 'data-box': box.id, onclick: toggle }, 'i', box)
+    : h('span', { class: 'htip', tabindex: '0', role: 'button', 'aria-label': tE('engine.help.moreInfo'), 'aria-describedby': box.id, onclick: toggle }, 'i', box);
   return t;
 }
 document.addEventListener('click', () => $$('.htip.show').forEach(t => t.classList.remove('show')));

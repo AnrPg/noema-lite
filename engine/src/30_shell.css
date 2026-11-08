@@ -68,10 +68,11 @@
 @media (max-width:720px){.topbar .hide-m{display:none}.topbar{overflow:hidden}.subjchip{padding:6px 10px;font-size:13px}}
 @media (max-width:440px){.topbar .hide-s{display:none}.subjchip .st{max-width:84px}.iconbtn.tutor{padding:0 10px}}
 /* ---------- help: tooltips, collapsible sections, guides, setup banner ---------- */
-.htip{position:relative;display:inline-grid;place-items:center;width:18px;height:18px;margin-inline-start:6px;border-radius:50%;font-size:11px;font-weight:800;font-style:italic;font-family:Georgia,serif;background:var(--bg2);color:var(--ink2);border:1px solid var(--line);cursor:help;vertical-align:middle;flex:none}
+/* the ⓘ: an 18 px disc in a 24 px target (WCAG 2.5.8): the transparent border is the extra room, the negative margin keeps the line as it was */
+.htip{position:relative;display:inline-grid;place-items:center;width:24px;height:24px;margin-inline-start:3px;margin-block:-3px;border-radius:50%;font-size:11px;font-weight:800;font-style:italic;font-family:Georgia,serif;background:var(--bg2);background-clip:padding-box;color:var(--ink2);border:3px solid transparent;box-shadow:inset 0 0 0 1px var(--line);cursor:help;vertical-align:middle;flex:none}
 .htip .htipbox{position:absolute;z-index:120;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);width:min(280px,72vw);padding:10px 12px;border-radius:12px;background:var(--ink);color:var(--bg);font:500 13px/1.45 var(--font);font-style:normal;text-align:start;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
 .htip .htipbox code{background:rgba(255,255,255,.15);color:inherit;border:none}
-.htip:hover .htipbox,.htip:focus .htipbox,.htip.show .htipbox{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.htip:hover .htipbox,.htip:focus .htipbox,.htip.show .htipbox,summary:focus-visible>.htip .htipbox{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
 details.accsec{border:1px solid var(--line);border-radius:16px;background:var(--bg);margin-bottom:10px;overflow:visible}
 details.accsec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:13px 14px;font-weight:750;user-select:none}
 details.accsec>summary::-webkit-details-marker{display:none}
@@ -80,7 +81,7 @@ details.accsec[open]>summary .chev{transform:rotate(90deg)}
 details.accsec>summary .accico svg.i{width:18px;height:18px;vertical-align:-3px;color:var(--ink2)}
 details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 .accsecbody{padding:12px 14px 14px;animation:slideIn .3s}
-.pill.warnpill{background:var(--warn-bg);color:#a05a00}
+.pill.warnpill{background:var(--warn-bg);color:var(--warn)}
 .guide .gsteps{margin:6px 0 8px;padding-inline-start:22px;display:grid;gap:7px}
 .guide .gsteps li{line-height:1.5}
 .guide a,.gnotes a{color:var(--violet);font-weight:650;word-break:break-all}

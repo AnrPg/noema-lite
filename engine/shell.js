@@ -241,6 +241,15 @@ window.NoemaShell = (() => {
   let tipT = 0;
   function tip(text) { F.layer.querySelector('.ns-tip')?.remove(); const parts = String(text).split(/(?<=[.!?;·])\s+(?=\S)/).filter(Boolean), t = h('div', { class: 'ns-tip', role: 'status', onclick: () => t.remove() }, ...(parts.length > 1 ? parts.map(x => h('p', {}, x)) : [text])); F.layer.append(t); clearTimeout(tipT); tipT = setTimeout(() => t.remove(), Math.max(5500, String(text).length * 70)); }   // a long hint reads as short lines, stays long enough to read, and goes on a tap
   const hint = text => h('button', { class: 'ns-hint', 'aria-label': L('whatIsThis'), title: L('whatIsThis'), onclick: e => { e.stopPropagation(); tip(text); } }, 'i');
+  /** A card that opens something, with an (i) beside its title: the card is clicked anywhere, its title is the button (keyboard and screen
+      readers), and the (i) is a button of its own next to it, never inside it (no control within a control). */
+  let vcardN = 0;
+  function vcard(go, icon, badge, title, tipText, sub) {
+    const id = 'ns-vcard-' + (++vcardN);
+    return h('div', { class: 'ns-vcard', onclick: go }, h('span', { class: 'top' }, icon, badge),
+      h('b', {}, h('button', { class: 'ns-vgo', type: 'button', 'aria-describedby': id, onclick: e => { e.stopPropagation(); go(); } }, title), ' ', hint(tipText)),
+      h('small', { id }, sub));
+  }
   /** A sheet from the bottom (phones) / the right (wide screens). build(body, close) */
   function sheet(title, build, { cls = '' } = {}) {
     const close = () => { F.layer.replaceChildren(); };
@@ -434,8 +443,8 @@ window.NoemaShell = (() => {
     for (const s of subs) { if (!fits(s)) continue; const st = stateOf(s.id); if (!st) continue; const d = dueCount(st), wr = wrongCount(st); if (d.fc + d.pb + wr) per.push({ s, ...d, wr }); dueFc += d.fc; duePb += d.pb; wrong += wr; }
     due = dueFc + duePb;
     box.append(h('div', {}, h('span', { class: 'ns-label' }, L('forToday')), h('div', { class: 'ns-duo' },
-      h('button', { class: 'ns-vcard', onclick: () => reviewGo('review', per) }, h('span', { class: 'top' }, ico('cards', 4), due ? pill(due, 4) : null), h('b', {}, L('review'), ' ', hint(L('reviewTip'))), h('small', {}, due ? L('reviewSub', { fc: dueFc, pb: duePb }) : L('reviewNone'))),
-      h('button', { class: 'ns-vcard', onclick: () => reviewGo('gym', per) }, h('span', { class: 'top' }, ico('gym', 3), wrong ? pill(wrong, 3) : null), h('b', {}, L('gym'), ' ', hint(L('gymTip'))), h('small', {}, wrong ? L('gymSub', { n: wrong }) : L('gymNone'))))));
+      vcard(() => reviewGo('review', per), ico('cards', 4), due ? pill(due, 4) : null, L('review'), L('reviewTip'), due ? L('reviewSub', { fc: dueFc, pb: duePb }) : L('reviewNone')),
+      vcard(() => reviewGo('gym', per), ico('gym', 3), wrong ? pill(wrong, 3) : null, L('gym'), L('gymTip'), wrong ? L('gymSub', { n: wrong }) : L('gymNone')))));
     // the streak, gently
     const sn = N().stats?.streakNow() || 0;
     box.append(h('button', { class: 'ns-cheer', onclick: () => go('#/progress') }, h('span', { class: 'lines' }, h('b', {}, sn ? L('streakDays', { n: sn }) : L('streakStart')), h('span', {}, sn && sn % 7 === 6 ? L('streakTomorrowWeek') : L('streakKeep'))), h('span', { class: 'more' }, L('progress') + ' ›')));

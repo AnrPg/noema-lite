@@ -4,8 +4,9 @@ const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
   // icon: an emoji (the older sections) or { line: '<engine/art.js key>' }, a line icon of the new frame (no emoji on new headers)
   const head = icon && typeof icon === 'object' ? [h('span', { class: 'ns-svg accico', html: window.NoemaArt ? NoemaArt.svg(icon.line, 'i') : '' }), ' ', title] : [`${icon} ${title}`];
+  const ti = info ? tip(info, { within: true }) : null;   // the summary is the control: the ⓘ describes it, never a control inside it
   const d = h('details', { class: 'accsec', open: open || null },
-    h('summary', {}, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, ...head), info ? tip(info) : null, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
+    h('summary', { 'aria-describedby': ti ? ti.dataset.box : null }, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, ...head), ti, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
     h('div', { class: 'accsecbody' }, body));
   return d;
 }

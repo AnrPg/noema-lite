@@ -60,7 +60,7 @@ function characterVars(t: CharacterTokens, dark: boolean): string {
 export const BRIDGE =
   '--card:var(--paper);--bg2:color-mix(in srgb,var(--line) 60%,var(--bg));--r-sm:var(--br);' +
   '--ok:var(--t1i);--ok-bg:var(--t1);--bad:var(--t3i);--bad-bg:var(--t3);--warn:var(--t2i);--warn-bg:var(--t2);--info:var(--t4i);--info-bg:var(--t4);' +
-  '--violet:var(--acc);--violet-bg:var(--acc-soft);--c:var(--acc);--c-bg:var(--acc-soft);' +
+  '--violet:var(--acc);--violet-bg:var(--acc-soft);--c:var(--acc);--c-bg:var(--acc-soft);--c-ink:var(--t1i);' +
   '--shadow:0 1px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 24px -14px color-mix(in srgb,var(--ink) 22%,transparent)';
 
 /** every character's set, then the bridge */

@@ -71,7 +71,7 @@ function vStage(ex, { regions } = {}) {
   function toggleFull(on = !wrap.classList.contains('full')) {
     if (on === wrap.classList.contains('full')) return;
     if (on) {
-      const cs = getComputedStyle(wrap); wrap.style.setProperty('--c', cs.getPropertyValue('--c')); wrap.style.setProperty('--c-bg', cs.getPropertyValue('--c-bg'));
+      const cs = getComputedStyle(wrap); wrap.style.setProperty('--c', cs.getPropertyValue('--c')); wrap.style.setProperty('--c-bg', cs.getPropertyValue('--c-bg')); wrap.style.setProperty('--c-ink', cs.getPropertyValue('--c-ink'));
       holder = document.createComment('vx'); wrap.replaceWith(holder); document.body.append(wrap);
     } else if (holder) { holder.replaceWith(wrap); holder = null; }
     wrap.classList.toggle('full', on); document.body.classList.toggle('vx-noscroll', on); zoomBtn.textContent = on ? '✕' : '⤢';

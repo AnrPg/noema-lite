@@ -103,6 +103,8 @@ export interface BaseColours {
   /** the accent of the older screens */
   readonly c: Colour;
   readonly cBg: Colour;
+  /** the accent as text (a chapter's number, its pills); a chapter sets its own (engine/src/10_core.js setAccent) */
+  readonly cInk: Colour;
   readonly codeBg: Colour;
   readonly codeInk: Colour;
 }
