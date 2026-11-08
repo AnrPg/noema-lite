@@ -8,7 +8,7 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { icon } from '../../../ui/kit/icons.ts';
 import { openDialog } from '../../community/ui/dialogs.ts';
-import { langName, mb } from '../../community/ui/format.ts';
+import { langName, size } from '../../community/ui/format.ts';
 import type { PublicItem, ScreenChrome } from '../../community/ui/host.ts';
 import { CommunityScreen, type ScreenBase } from '../../community/ui/screen.ts';
 import { adopt, COMMON } from '../../community/ui/styles.ts';
@@ -91,8 +91,9 @@ export class NoemaExplorePage extends CommunityScreen {
     return this.#L(this.#rm ? 'exploreRoadmaps' : 'exploreShared');
   }
   /** a shared text, translatable on request */
-  #mt(text: string, x: PublicItem, tag: 'b' | 'small' | 'span'): HTMLElement {
-    const key = [x.id, tag, text].join('\u0000'),
+  #mt(text: string, x: PublicItem, tag: 'b' | 'small' | 'span', where = 'info'): HTMLElement {
+    // one element per place it shows in (a node is in one place only: the sections, the results, the details)
+    const key = [where, x.id, tag, text].join('\u0000'),
       had = this.#texts.get(key);
     if (had) return had;
     const el = this.ownerDocument.createElement(tag);
@@ -108,15 +109,15 @@ export class NoemaExplorePage extends CommunityScreen {
   #done(): void {
     this.dispatchEvent(new CustomEvent(EXPLORE_DONE, { bubbles: true }));
   }
-  #row(x: PublicItem, i: number): TemplateResult {
+  #row(x: PublicItem, i: number, where: string): TemplateResult {
     const tone = `--bgc: var(--t${(i % 4) + 1}); --fgc: var(--t${(i % 4) + 1}i)`;
     const who = x.owner_name || '…';
     const main = this.#rm
       ? html`<button type="button" class="nc-item ex-item" data-id=${x.id} @click=${(e: Event) => void this.#open(e, x)}>
           <span class="nc-ico" style=${tone} aria-hidden="true">${icon('map')}</span>
           <span class="t"
-            >${this.#mt(x.title, x, 'b')}<small
-              >${x.description ? html`${this.#mt(x.description, x, 'span')} · ` : nothing}${this.#L('rmPubMeta', {
+            >${this.#mt(x.title, x, 'b', where)}<small
+              >${x.description ? html`${this.#mt(x.description, x, 'span', where)} · ` : nothing}${this.#L('rmPubMeta', {
                 who,
                 n: n(x.steps),
                 p: n(x.prepared),
@@ -128,7 +129,7 @@ export class NoemaExplorePage extends CommunityScreen {
       : html`<button type="button" class="nc-item ex-item" data-id=${x.id} @click=${(e: Event) => void this.#open(e, x)}>
           <span class="nc-ico ${x.emoji ? 'emo' : 'txt'}" style=${tone} aria-hidden="true">${x.emoji || (x.title || '?').slice(0, 1)}</span>
           <span class="t"
-            >${this.#mt(x.title, x, 'b')}${this.host.langTag(x) ?? nothing}${x.description ? this.#mt(x.description, x, 'small') : nothing}</span
+            >${this.#mt(x.title, x, 'b', where)}${this.host.langTag(x) ?? nothing}${x.description ? this.#mt(x.description, x, 'small', where) : nothing}</span
           >
           <span class="chev" aria-hidden="true">${icon('forward')}</span>
         </button>`;
@@ -227,7 +228,7 @@ export class NoemaExplorePage extends CommunityScreen {
               ? html`<p class="nc-tiny">
                   ${
                     n(m['sourceBytes'])
-                      ? T('sourceFilesSize', { n: n(m['sourceFiles']), size: mb(this.i18n, n(m['sourceBytes'])) })
+                      ? T('sourceFilesSize', { n: n(m['sourceFiles']), size: size(this.i18n, n(m['sourceBytes'])) })
                       : T('sourceFiles', { n: n(m['sourceFiles']) })
                   }
                 </p>`
@@ -305,12 +306,12 @@ export class NoemaExplorePage extends CommunityScreen {
                 <span class="ex-domt">${this.#L('dom_' + d)}</span><span class="nc-pill">${this.i18n.format.number(l.length)}</span
                 ><span class="ex-domchev" aria-hidden="true">${icon('forward')}</span>
               </summary>
-              <div class="nc-list">${l.map((x, i) => this.#row(x, i))}</div>
+              <div class="nc-list">${l.map((x, i) => this.#row(x, i, 'dom'))}</div>
             </details>`,
         )}
       </div>
       <div class="nc-list ex-results" ?hidden=${!this.#q.trim()}>
-        ${hits.length ? hits.map((x, i) => this.#row(x, i)) : html`<p class="nc-muted ex-noresults">${this.#L('noResults')}</p>`}
+        ${hits.length ? hits.map((x, i) => this.#row(x, i, 'hit')) : html`<p class="nc-muted ex-noresults">${this.#L('noResults')}</p>`}
       </div>
     </div>`;
   }

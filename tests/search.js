@@ -125,7 +125,7 @@ const ready = async page => { await wait(600); return until(() => page.evaluate(
   console.log('F. Greek');
   await page.evaluate(() => NoemaThemes.putSettings({ lang: 'el' })); await page.goto(url + '#/search?q=kinetic'); await page.reload(); await ready(page); await until(() => page.$('.ns-srfilt'), 8000);
   await page.click('.ns-srfilt'); await wait(200);
-  ok(await page.$eval('.ns-srchip[data-ty="all"]', b => b.textContent.startsWith('Όλα')) && (await page.$eval('.ns-srfilt', b => b.textContent)).startsWith('Φίλτρα'), 'Greek words: ' + (await texts(page, '.ns-srchip')).join(' · '));
+  ok(await page.$eval('.ns-srchip[data-ty="all"]', b => b.textContent.trim().startsWith('Όλα')) && (await page.$eval('.ns-srfilt', b => b.textContent.trim())).startsWith('Φίλτρα'), 'Greek words: ' + (await texts(page, '.ns-srchip')).join(' · '));
   await openGroup(page, 'theory');
   ok(await page.$eval('.ns-srgrp[data-ty="theory"] .ns-sr .ns-srw', x => x.textContent.trim() === 'Γνώσεις'), 'Knowledge = Γνώσεις on each result');
 

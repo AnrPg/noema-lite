@@ -7,7 +7,7 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import type { I18n } from '../../../ports/i18n.ts';
 import { openDialog } from '../../community/ui/dialogs.ts';
-import { mb } from '../../community/ui/format.ts';
+import { size } from '../../community/ui/format.ts';
 import type { HostSubject, SharePrep } from '../../community/ui/host.ts';
 import { CommunityElement, type ScreenBase } from '../../community/ui/screen.ts';
 import { adopt, COMMON } from '../../community/ui/styles.ts';
@@ -153,7 +153,7 @@ export class NoemaSharePanel extends CommunityElement<ShareDeps> {
                 @change=${(e: Event) => {
                   this.#withFiles = (e.target as HTMLInputElement).checked;
                 }}
-              /><span>${this.#T('includeFiles', { n: p.files.n, size: mb(this.i18n, p.files.bytes) })}</span></label
+              /><span>${this.#T('includeFiles', { n: p.files.n, size: size(this.i18n, p.files.bytes) })}</span></label
             >`
           : nothing
       }

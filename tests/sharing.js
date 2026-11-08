@@ -42,7 +42,7 @@ async function signUp(browser, email, name) {
   const sb = A.p.locator('.noema-chipwrap:has-text("Heart test") .noema-sharebtn');
   ok(await sb.count() === 1 && await A.p.locator('.noema-chipwrap:has-text("Databricks") .noema-sharebtn').count() === 0, 'personal subjects carry a subtle 🔗 share button (library ones don’t)');
   await A.p.hover('.noema-chipwrap:has-text("Heart test")'); await sb.click(); await A.p.waitForSelector('noema-dialog.nx-share .nx-sec', { timeout: 10000 }).catch(() => { });
-  ok(/Share “Heart test”/.test(await A.p.getAttribute('noema-dialog.nx-share', 'heading')), 'the share dialog opens');
+  ok(/Share “Heart test”/.test(await A.p.$eval('noema-dialog.nx-share', d => d.heading)), 'the share dialog opens');
   ok(await A.p.locator('.nx-warn').count() === 1, 'a pack with non-open pictures shows the licence warning');
   ok(/Include its 2 source files \(\d+ KB\)/.test(await A.p.locator('.nx-files').innerText()) && await A.p.isChecked('.nx-files input'), 'the dialog offers to include the 2 source files (ticked)');
   await A.p.click('.nx-share .nx-publish'); await wait(400);
@@ -97,7 +97,7 @@ async function signUp(browser, email, name) {
   await B.p.evaluate(() => document.querySelectorAll('.ex-dlg details.ex-dom').forEach(d => { d.open = true; }));   // every domain's section open
   const cards = await B.p.locator('.ex-dlg .ex-doms .ex-item').allInnerTexts();
   ok(cards.some(t => /Databricks/.test(t)) && cards.some(t => /Heart test/.test(t)) && cards.every(t => !/\d+ ch|exercises|library|Anna/.test(t)), 'Explore rows show only emoji + title (the details are behind ⓘ)');
-  const infoOf = async (pg, title) => { await pg.click(`.ex-dlg .ex-doms .ex-row:has(.ex-item:has-text("${title}")) .ex-infobtn`); await wait(450); return pg.locator('noema-dialog.ex-info').innerText(); };
+  const infoOf = async (pg, title) => { await pg.click(`.ex-dlg .ex-doms .ex-row:has(.ex-item:has-text("${title}")) .ex-infobtn`); await wait(450); return (await pg.$eval('noema-dialog.ex-info', d => d.heading)) + '\n' + await pg.locator('noema-dialog.ex-info').innerText(); };
   const hov = await infoOf(B.p, 'Databricks');
   ok(/chapters/.test(hov) && /Foundations: Storage, Tables/.test(hov) && /exercises/.test(hov) && /library/.test(hov), 'ⓘ → the details: statistics, owner and the chapter list');
   const ch = await B.p.$eval('noema-dialog.ex-info .ex-chapters', e => ({ items: e.querySelectorAll('ol > li').length, bold: !!e.querySelector('li strong'), scroll: e.scrollHeight > e.clientHeight, h: e.clientHeight, oflow: getComputedStyle(e).overflowY }));
@@ -116,9 +116,9 @@ async function signUp(browser, email, name) {
   await ph.goto(BASE + '/'); await wait(2000);
   await ph.evaluate(() => { Noema.explore(); }).catch(() => { }); await ph.waitForSelector('.ex-dlg .ex-dom', { timeout: 8000 }).catch(() => { });
   await ph.evaluate(() => document.querySelectorAll('.ex-dlg details.ex-dom').forEach(d => { d.open = true; }));
-  const ib = await ph.locator('.ex-dlg .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn').boundingBox();
+  const ib = await ph.locator('.ex-dlg .ex-doms .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn').boundingBox();
   ok(ib && ib.width >= 24 && ib.height >= 24, 'phone: the details are a button of their own beside the row (a 24 px target at least)');
-  await ph.tap('.ex-dlg .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn'); await wait(450);
+  await ph.tap('.ex-dlg .ex-doms .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn'); await wait(450);
   ok(await ph.locator('noema-dialog.ex-info[placement="sheet"]').count() === 1 && /Foundations: Storage, Tables/.test(await ph.locator('noema-dialog.ex-info').innerText()) && await ph.locator('.ex-dlg').count() === 1, 'ⓘ → the info opens as a bottom sheet (and does not select the subject)');
   await ph.screenshot({ path: SHOTS + '/x7_phone_sheet.png' });
   await ph.tap('noema-dialog.ex-info .ctl.x'); await wait(300);
