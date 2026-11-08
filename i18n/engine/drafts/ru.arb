@@ -2599,5 +2599,8 @@
   "engine.author.f.lib.wpmHi": "Наибольший темп (слов в минуту)",
   "engine.author.f.lib.wpmLo": "Наименьший темп (слов в минуту)",
   "engine.author.f.benchPart": "Измеряемая часть",
-  "engine.author.f.lib.eq": "Равновесие (номер)"
+  "engine.author.f.lib.eq": "Равновесие (номер)",
+  "engine.tutor.thinking": "Наставник пишет…",
+  "engine.tutor.copyPrompt": "Скопировать запрос",
+  "engine.tutor.promptCopied": "Запрос скопирован — вставьте его в свой чат с ИИ."
 }

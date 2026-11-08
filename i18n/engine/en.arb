@@ -498,6 +498,18 @@
   "@engine.tutor.howKey": {
     "description": "Button under an AI error about the API key (after 🔑): opens the guide to get a free Gemini key."
   },
+  "engine.tutor.thinking": "The tutor is writing…",
+  "@engine.tutor.thinking": {
+    "description": "Screen-reader label of the three animated dots shown while the tutor (the learner's character) writes its answer."
+  },
+  "engine.tutor.copyPrompt": "Copy the prompt",
+  "@engine.tutor.copyPrompt": {
+    "description": "Button under the tutor's \"no AI key\" error (after 📋): copies the whole request (instructions and the conversation) so the learner can paste it into any AI chat they use."
+  },
+  "engine.tutor.promptCopied": "Prompt copied — paste it into your AI chat.",
+  "@engine.tutor.promptCopied": {
+    "description": "Toast after the learner copied the tutor's prompt (after 📋). Short."
+  },
   "engine.log.exCtx": "{ch} · {id}",
   "@engine.log.exCtx": {
     "description": "Context label of a saved AI grading conversation: chapter and section (engine.common.chTitle), then the exercise’s id. Usually unchanged.",

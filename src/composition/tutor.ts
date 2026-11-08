@@ -89,6 +89,9 @@ export interface TutorUi {
   /** continue the conversation the frame's window asked for (sessionStorage noema-device:openConvo) */
   resumeAsked(): void;
   changed(id: string, patch: { readonly title?: string } | null): void;
+  /** ⬇️ a conversation as a Markdown file (named first when it has grown), and every conversation of the subject in one */
+  exportOne(cv: Conversation | null): void;
+  exportAll(): void;
   /** the character changed: draw the drawer again */
   refresh(): void;
   close(): void;
@@ -452,6 +455,13 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
     },
     changed: (id, patch) => {
       session.changedElsewhere(id, patch);
+    },
+    exportOne: cv => {
+      if (cv) view.exportOne(cv);
+      else host.toast(i18n.t('engine.cv.nothingToExport'));
+    },
+    exportAll: () => {
+      view.exportAll();
     },
     refresh: () => {
       session.changed();

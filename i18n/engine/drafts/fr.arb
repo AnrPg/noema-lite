@@ -2599,5 +2599,8 @@
   "engine.author.f.lib.wpmHi": "Débit maximal (mots par minute)",
   "engine.author.f.lib.wpmLo": "Débit minimal (mots par minute)",
   "engine.author.f.benchPart": "Partie mesurée",
-  "engine.author.f.lib.eq": "Équilibre (indice)"
+  "engine.author.f.lib.eq": "Équilibre (indice)",
+  "engine.tutor.thinking": "Le tuteur écrit…",
+  "engine.tutor.copyPrompt": "Copier le prompt",
+  "engine.tutor.promptCopied": "Prompt copié — collez-le dans votre chat IA."
 }

@@ -2599,5 +2599,8 @@
   "engine.author.f.lib.wpmHi": "Μέγιστες λέξεις ανά λεπτό",
   "engine.author.f.lib.wpmLo": "Ελάχιστες λέξεις ανά λεπτό",
   "engine.author.f.benchPart": "Μέρος που μετράται",
-  "engine.author.f.lib.eq": "Ισορροπία (δείκτης)"
+  "engine.author.f.lib.eq": "Ισορροπία (δείκτης)",
+  "engine.tutor.thinking": "Ο βοηθός γράφει…",
+  "engine.tutor.copyPrompt": "Αντιγραφή του prompt",
+  "engine.tutor.promptCopied": "Το prompt αντιγράφηκε — επικόλλησέ το στη συνομιλία AI που χρησιμοποιείς."
 }

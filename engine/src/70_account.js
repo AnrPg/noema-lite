@@ -27,8 +27,15 @@ const WHEN_DAY = { year: 'numeric', month: 'numeric', day: 'numeric' }, WHEN_TIM
 const fmtWhen = t => t ? (window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, { ...WHEN_DAY, ...WHEN_TIME }) : new Date(t).toLocaleString()) : '—';
 const fmtDay = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.date(t, WHEN_DAY) : new Date(t).toLocaleDateString();
 const fmtTime = t => window.NoemaI18n?.fmt ? NoemaI18n.fmt.time(t, WHEN_TIME) : new Date(t).toLocaleTimeString();
-/** A language's name in the UI language (Intl.DisplayNames), for the learner; langName() keeps the English one for the prompts. */
-const uiLangName = code => window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(code) : langName(code);
+/** A language's name in the UI language (Intl.DisplayNames), for the learner (else the English one the prompts use). */
+const uiLangName = code => window.NoemaI18n?.fmt?.langName ? NoemaI18n.fmt.langName(code) : window.NoemaLLM?.langLabel ? NoemaLLM.langLabel(code) : code;
+/** the 🗣 language the tutor writes in ('' = automatic: the app's language) */
+const chatLang = () => S.settings.chatLang || '';
+/** 🗣 the language of the AI conversations: automatic, the course's language, every UI language (the tutor's choices) */
+function chatLangSelect({ cls = '', onChange = null, persist = true } = {}) {
+  return h('select', { class: cls, title: tE('engine.tutor.chatLangTip'), 'aria-label': tE('engine.tutor.chatLangAria'), onchange: e => { if (persist) { S.settings.chatLang = e.target.value; save(); } onChange?.(e.target.value); } },
+    ...TUTOR_UI.chatLangs().map(([v, l]) => h('option', { value: v, selected: TUTOR_UI.chatLangIs(v) || (!v && !chatLang()), ...(v ? { lang: v } : {}) }, '🗣 ' + l)));
+}
 /** A restore point's name in the UI language of now: its catalog key (k, p) when it has one, else the words it was saved with. */
 const storedLabel = x => x.k && window.NoemaI18n?.has(x.k) ? tE(x.k, x.p || {}) : x.label;
 /** A cloud snapshot's name: the app's own snapshots are stored with fixed English names (matched by engine/cloud.js too) → the UI language;
@@ -40,7 +47,7 @@ function putAccountSettings(patch) { flushSave(); const s = Object.assign(accoun
 
 const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
 function openAccountMenu(tab = 'profile') {
-  if (SHL()) { closeTutor(); $$('.modal').forEach(m => m.remove()); return go('#/me/' + (ME_PAGE[tab] || '')); }   // the shell's “Me” pages (engine/shell.js)
+  if (SHL()) { TUTOR_UI?.close(); $$('.modal').forEach(m => m.remove()); return go('#/me/' + (ME_PAGE[tab] || '')); }   // the shell's “Me” pages (engine/shell.js)
   modal((box, close) => {
     box.classList.add('accbox');
     const body = h('div', { class: 'accbody' });
@@ -71,15 +78,15 @@ const ACC_VIEWS = {
     const set = accountSettings(); const CL = window.NoemaClaude; const acc = ACCOUNT.id;
     // — Gemini (the tutor and every in-app AI helper)
     const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': tE('engine.acc.geminiKey') });   // i18n-ignore (the shape of a key)
-    const sel = h('select', { 'aria-label': tE('engine.acc.geminiModel') }, ...(S.settings.models.length ? S.settings.models : FALLBACK_MODELS).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
+    const sel = h('select', { 'aria-label': tE('engine.acc.geminiModel') }, ...(S.settings.models.length ? S.settings.models : TUTOR_UI.gemini.fallbackModels).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
     const gstat = h('div', { class: 'tiny' }, S.settings.model ? tE('engine.acc.currentModel', { model: S.settings.model }) : tE('engine.acc.modelOnFirstUse'));
     const geminiBox = h('div', {},
       !S.settings.apiKey ? h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, tE('engine.acc.noGeminiKey')), h('div', {}, tE('engine.acc.freeTwoMin') + ' ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, tE('engine.acc.showMeHow')))) : null,
       h('div', { class: 'field' }, h('label', {}, tE('engine.acc.geminiKey') + ' ', tip(tE('engine.acc.geminiKeyTip'))), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? tE('engine.acc.keyStoredCloud') : tE('engine.acc.keyStoredLocal'))),
       h('div', { class: 'field' }, h('label', {}, tE('engine.acc.geminiModel')), sel,
         h('div', { class: 'row' },
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = tE('engine.acc.detecting'); try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = tE('engine.acc.foundModels', { n: ms.length, model: S.settings.model }); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🔍 ' + tE('engine.acc.detectModels')),
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = tE('engine.acc.testing'); try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: ' + tE('engine.acc.testReply') }] }], temperature: 0 }); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🧪 ' + tE('engine.acc.test'))),   // i18n-ignore (a prompt)
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = tE('engine.acc.detecting'); try { const ms = await TUTOR_UI.gemini.detect(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = tE('engine.acc.foundModels', { n: ms.length, model: S.settings.model }); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🔍 ' + tE('engine.acc.detectModels')),
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = tE('engine.acc.testing'); try { const t = await TUTOR_UI.gemini.test('Reply with exactly: ' + tE('engine.acc.testReply')); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + errText(e); } } }, '🧪 ' + tE('engine.acc.test'))),   // i18n-ignore (a prompt)
         gstat));
     // — Claude (optional): the API key for ✨ Create with Claude and curricula; never synced
     const ckey = h('input', { type: 'password', value: CL ? CL.Key.get(acc) : '', placeholder: 'sk-ant-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': tE('engine.acc.claudeKey') });   // i18n-ignore (the shape of a key)
@@ -118,7 +125,7 @@ const ACC_VIEWS = {
       ...NoemaI18n.LOCALES.filter(l => NoemaI18n.available().includes(l) || l.tag === S.settings.lang).map(l => h('option', { value: l.tag, selected: S.settings.lang === l.tag, lang: l.tag }, `${l.name} · ${l.tag}`)));
     const chatL = chatLangSelect({ persist: false });
     const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, tE('engine.acc.chatLang') + ' ', tip(tE('engine.acc.chatLangTip'))), chatL,
-      h('div', { class: 'tiny' }, tE('engine.acc.chatLangNote', { title: SUBJ.title, lang: uiLangName(COURSE_LANG) }))));
+      h('div', { class: 'tiny' }, tE('engine.acc.chatLangNote', { title: SUBJ.title, lang: uiLangName(SUBJ.language || 'en') }))));
     const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, tE('engine.acc.theme')), theme), h('div', { class: 'field' }, h('label', {}, tE('engine.acc.goal')), goal)),
       h('div', { class: 'field' }, h('label', {}, t('set.uiLang') + ' ', tip(t('set.uiLangTip'))), uiL),
       h('label', { class: 'row', style: { margin: '8px 0' } }, snd, tE('engine.acc.sound')),

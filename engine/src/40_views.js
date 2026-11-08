@@ -17,7 +17,7 @@ const go = hash => { location.hash = hash; };
 /* ---------- the study area's host (src/features/study/ui/host.ts) ---------- */
 let STUDY = null;   // NoemaCore.studyUi.mount(studyHost()) at boot: { app, show(hash), segments, figure, figureText, exerciseText, inspect }
 const MEDIA = Noema.pack?.media || {};   // the pack's pictures by id (the study area's media; 32_activities.js)
-const FULL_COURSE = COURSE.slice();   // the pack's chapters before the source filter (15_inbox.js, 60_convos.js, 85_locate.js)
+const FULL_COURSE = COURSE.slice();   // the pack's chapters before the source filter (15_inbox.js, the tutor's host, 85_locate.js)
 FULL_COURSE.forEach(c => c.flashcards.forEach((f, k) => { f._key = f.id || f._key || c.id + '#' + k; }));   // SRS keys: the card's id (packs without ids: its position), independent of filtering
 { /* tell sibling apps (Meletee, a:caps) that card progress is keyed by card id; each feature merges only its own flag */
   const k = Noema.kv.accountKey('caps'); let c = {}; try { c = JSON.parse(Noema.kv.get(k) || '{}') || {}; } catch (e) { }
@@ -35,18 +35,59 @@ function followCourse(course) {
     c.debug.forEach(d => { d._ch = c; PB[d.id] = d; });
   });
 }
-/** The tutor's "Ask <character>" about an exercise — each its own conversation, mode and task: before answering → hints
-    (never the answer) · "Help me get it" after a wrong answer → Socratic, from the learner's answer · "Explain differently"
-    → a free, in-depth explanation from another angle. */
-function askAIAbout(ex, mode, given = '') {
-  const m = mode === 'explain' ? 'explain' : mode === 'socratic' ? 'socratic' : 'hint';
-  const ctx = { kind: 'exercise', id: ex.id, text: STUDY.exerciseText(ex), origin: { via: m === 'explain' ? 'explainDifferently' : m === 'socratic' ? 'helpSocratic' : 'askHint', ex: ex.id, ...(ex.section ? { sec: ex.section } : {}) } };   // i18n-ignore (ids)
-  const key = ex.id + '|' + m;
-  T.hist[key] = []; delete T.tstate[key];
-  const mine = { answered: given ? 'yes' : 'no', given: given.length > 300 ? given.slice(0, 300) + '…' : given };   // the learner's first message (their bubble, in the UI language)
-  if (m === 'explain') openTutor(ctx, 'explain', tE('engine.aimsg.exExplain', mine), { intent: INTENT.exExplain(given) });
-  else if (m === 'socratic') openTutor(ctx, 'socratic', tE('engine.aimsg.exSocratic', mine), { intent: INTENT.exSocratic(given) });
-  else openTutor(ctx, 'hint', tE('engine.aimsg.exHint'), { intent: INTENT.exHint(given) });
+/* ---------- the tutor's host (src/composition/tutor.ts TutorPageHost) ---------- */
+/* The tutor, its conversations and its threads are src/features/tutor (the session, the prompts, the screens), mounted from
+   the study piece (NoemaCore.studyUi.tutor) before the study area, which gets its two ports (TUTOR_UI.port, TUTOR_UI.ai).
+   This host gives it the open subject: the course after the source filter, the character, the settings, the page's drawer. */
+let TUTOR_UI = null;   // NoemaCore.studyUi.tutor(tutorHost()) at boot: { session, port, ai, md, gemini, chatLangs, chatLangIs, open, close, … }
+/* i18n-ignore-start */   // the learner profile is part of the AI's prompts (English)
+function learnerProfile() {
+  let learner = '';
+  try { learner = JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }   // no settings yet: the default profile
+  learner = learner || ACCOUNT.learner || `The learner (${ACCOUNT.name || 'the student'}) learns best when challenged, tested and given tightly structured, co-located information.`;
+  return `${learner} ${TUTOR.prior || ''}`.trim();
+}
+/* i18n-ignore-end */
+/** a part of the whole pack (before the source filter): its chapter, or the exercise itself */
+function findFull(kind, id) {
+  for (const c of FULL_COURSE) {
+    if (kind === 'chapter' && c.id === id) return c;
+    if (kind === 'section' && c.sections.some(s => s.id === id)) return c;
+    if (kind === 'playbook' && c.debug.some(d => d.id === id)) return c;
+    if (kind === 'exercise') { const e = c.exercises.find(x => x.id === id); if (e) return e; }
+  }
+  return null;
+}
+function tutorHost() {
+  const fullSec = s => s._full ? { ...s, blocks: s._full.blocks } : s;
+  const visible = (kind, id) => kind === 'section' ? SEC[id] : kind === 'chapter' ? CH[id] : kind === 'playbook' ? PB[id] : kind === 'exercise' ? findFull('exercise', id) : null;
+  const learner = learnerProfile();
+  return {
+    account: { id: ACCOUNT.id, name: ACCOUNT.name || '', kind: ACCOUNT.kind || 'local' },
+    subject: () => ({ id: SUBJ.id, title: SUBJ.title, language: SUBJ.language || 'en', math: !!SUBJ.features?.math, code: !!SUBJ.features?.code, packVersion: Noema.pack?.version || null }),
+    persona: () => ({ name: TUTOR.name, avatar: TUTOR.avatar, domain: TUTOR.domain, prior: TUTOR.prior || '', examples: TUTOR.examples, interviewer: TUTOR.interviewer, simulation: TUTOR.simulation, terminology: TUTOR.terminology, examinerRole: TUTOR.examinerRole }),
+    learner: () => learner,
+    course: {
+      outlines: () => COURSE.map(chapterOutline),
+      section: id => { const s = SEC[id]; return s ? { title: s.title, chapter: s._ch.id, text: sectionText(fullSec(s)), mantra: s._ch.mantra || '' } : null; },
+      chapter: id => { const c = CH[id]; return c ? { num: c.num, title: c.title, outline: chapterOutline(c) } : null; },
+      playbook: id => PB[id] || null,
+    },
+    exerciseText: id => { const e = findFull('exercise', id); return e ? STUDY.exerciseText(e) : null; },
+    exerciseTextOf: ex => STUDY.exerciseText(ex),
+    sectionOf: id => EX[id]?.section || null,
+    filteredOut: (kind, id) => !visible(kind, id) && !!findFull(kind, id),
+    showAll: () => STUDY.app.setFilter(null),
+    preloaded: Noema.preloadedConvos || [],
+    settings: () => S.settings, save, toast, touchStreak,
+    openSettings: () => openAccountMenu('settings'), openGuide: () => openGuide('gemini'),
+    drawer: () => $('aside.drawer'), scrim: () => $('.scrim'),
+    framed: () => !!SHL(),
+    face: () => SHL() && window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : '',
+    tutor: () => ({ name: TUTOR.name, avatar: TUTOR.avatar, plural: !!window.NoemaThemes?.tutor?.()?.pl }),
+    uiLang,
+    appTitle: APP_TITLE, appName: Noema.config.appName || 'noema-lite',   // i18n-ignore (the app's name)
+  };
 }
 /** the Roadmap step this subject is attached to (its first), or null */
 function stepAt() { const CU = window.NoemaCurriculum; return CU?.stepsOf && ACCOUNT?.id ? CU.stepsOf(ACCOUNT.id, SUBJ.id)[0] || null : null; }
@@ -179,14 +220,8 @@ function studyHost() {
     refitFsrs: last => NoemaCore.study.models.refit(last),
     blockIds: blocks => NoemaCore.catalog.blockIds(blocks),
     trapId: p => NoemaCore.catalog.trapId(p),
-    tutor: {
-      open: (ctx, mode, first, o) => openTutor(ctx, mode, first, o || {}),
-      close: () => closeTutor(), setContext: ctx => setTutorContext(ctx),
-      askAbout: (ex, mode, given) => askAIAbout(ex, mode, given || ''),
-      explainable: (el, what) => explainable(el, what),
-      intent: (name, given) => typeof INTENT[name] === 'function' ? INTENT[name](given || '') : INTENT[name] || '',
-    },
-    ai: { grade: (...a) => aiGrade(...a), question: (...a) => aiQuestion(...a), drillGrade: (...a) => aiDrillGrade(...a), md: x => md(x) },
+    tutor: TUTOR_UI.port,   // the tutor (src/composition/tutor.ts): mounted first
+    ai: TUTOR_UI.ai,
   };
 }
 
@@ -211,7 +246,7 @@ function topbar() {
     h('button', { class: 'iconbtn srcbtn', title: t('top.sources'), onclick: () => STUDY.app.sourcesUi.toggleDeck() }, '📚'),
     h('button', { class: 'iconbtn hide-m', title: t('top.theme'), onclick: () => { S.settings.theme = isDark() ? 'light' : 'dark'; save(); applyTheme(); route(); } }, '🌓'),
     bellButton(),
-    h('button', { class: 'iconbtn tutor', title: t('top.tutorTitle'), onclick: () => openTutor() }, TUTOR.avatar, h('span', {}, t('top.tutor'))),
+    h('button', { class: 'iconbtn tutor', title: t('top.tutorTitle'), onclick: () => TUTOR_UI.open() }, TUTOR.avatar, h('span', {}, t('top.tutor'))),
     h('button', { class: 'acchip', title: t('top.account', { name: ACCOUNT.name }), onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
 }
 
@@ -316,7 +351,7 @@ function route() {
   if (p[0] !== 'author' && window.NoemaActivityAuthor?.current) { try { NoemaActivityAuthor.current.destroy(); } catch (e) { } NoemaActivityAuthor.current = null; }   // left the author: its preview and keys stop
   const X = SHL();
   if (X && !X.ENGINE_ROUTES.has(p[0])) return X.route();
-  if (innerWidth < 720) closeTutor();
+  if (innerWidth < 720) TUTOR_UI.close();
   if (p[0] === 'author') return authorView();
   if (p[0] === 'engines') return enginesView(p[1]);   // the engines of activities and requests for new ones (49_lib_view.js)
   if (!STUDY.show(location.hash || '#/')) STUDY.show('#/subject');
@@ -328,15 +363,16 @@ function route() {
 function boot() {
   applyTheme();
   const X = SHL();
-  if (X) document.body.append(h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));   // the shell has the top bar, the banner and <main>
-  else document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
+  if (X) document.body.append(h('div', { class: 'scrim', onclick: () => TUTOR_UI.close() }), h('aside', { class: 'drawer' }));   // the shell has the top bar, the banner and <main>
+  else document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: () => TUTOR_UI.close() }), h('aside', { class: 'drawer' }));
   renderTopStats();
   STUDY.app.onSprint(sprintClock);
   if (!X) addEventListener('hashchange', route);
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());   // i18n-ignore
-  if (X) { X.attachEngine({ route, locate: locateItem, openTutor: () => openTutor(), focus: () => STUDY.app.toggleSprint(), history: () => X.convos(), resumeConvo, convoChanged,
-    accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => { renderTutorHead?.(); } });
-    setTimeout(resumeConvo, 300); }
+  if (X) { X.attachEngine({ route, locate: locateItem, openTutor: () => TUTOR_UI.open(), focus: () => STUDY.app.toggleSprint(), history: () => X.convos(),
+    resumeConvo: () => TUTOR_UI.resumeAsked(), convoChanged: (id, patch) => TUTOR_UI.changed(id, patch),
+    accView: (tab, body, close, opts) => ACC_VIEWS[tab](body, close, opts || {}), retheme: () => TUTOR_UI.refresh() });
+    setTimeout(() => TUTOR_UI.resumeAsked(), 300); }
   else route();
-  if (S.settings.apiKey && !S.settings.models.length) detectModels().catch(() => { });
+  if (S.settings.apiKey && !S.settings.models.length) TUTOR_UI.gemini.detect().catch(() => { });   // offline or a bad key: ⚙️ Settings says why
 }
