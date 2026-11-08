@@ -118,36 +118,40 @@ export class StudyChapter extends StudyScreen {
           <div class="num">${app.L('chOf', { n: c.num, of: app.course.chapters.length })}</div>
           <h1>${c.title}</h1>
           ${c.subtitle ? html`<p class="muted" style="margin:6px 0 0">${c.subtitle}</p>` : nothing} ${this.#chips ?? nothing}
-          ${c.map?.learnables?.length
-            ? html`<button
-                class="kmapbtn"
-                type="button"
-                @click=${() => {
-                  knowledgeMap(app, c.id);
-                }}
-              >
-                ⓘ ${app.t('engine.kmap.chip', { n: c.map.learnables.length })}
-              </button>`
-            : nothing}
+          ${
+            c.map?.learnables?.length
+              ? html`<button
+                  class="kmapbtn"
+                  type="button"
+                  @click=${() => {
+                    knowledgeMap(app, c.id);
+                  }}
+                >
+                  ⓘ ${app.t('engine.kmap.chip', { n: c.map.learnables.length })}
+                </button>`
+              : nothing
+          }
         </div>
         <div class="chring">
           ${ring((p.sr + p.ex) / 2, 76, 9)}
           <div class="chringc">${app.pct(Math.round((p.sr + p.ex) * 50))}</div>
         </div>
       </div>
-      ${c.mantra
-        ? html`<div
-            class="mantrabox"
-            ${explainable(app, () => ({
-              label: c.mantra ?? '',
-              text: `The mental model of chapter ${String(c.num)} "${c.title}": ${c.mantra ?? ''}`, // for the AI (English)
-              ch: c,
-              what: 'mental model',
-            }))}
-          >
-            <span>🧭</span><span>${F(c.mantra)}</span>
-          </div>`
-        : nothing}
+      ${
+        c.mantra
+          ? html`<div
+              class="mantrabox"
+              ${explainable(app, () => ({
+                label: c.mantra ?? '',
+                text: `The mental model of chapter ${String(c.num)} "${c.title}": ${c.mantra ?? ''}`, // for the AI (English)
+                ch: c,
+                what: 'mental model',
+              }))}
+            >
+              <span>🧭</span><span>${F(c.mantra)}</span>
+            </div>`
+          : nothing
+      }
       <div class="tabs" role="tablist">
         ${tabs.map(
           ([k, l, n]) =>
@@ -203,11 +207,13 @@ export class StudyChapter extends StudyScreen {
         })}
       </div>
       <div class="row" style="margin-top:22px">
-        ${nextSec
-          ? html`<button class="btn primary" type="button" @click=${go(`#/s/${nextSec.id}`)}>
-              ${c.sections[0] && S.read[c.sections[0].id] ? app.L('continueSec', { title: nextSec.title }) : app.L('startReading')}
-            </button>`
-          : html`<button class="btn primary" type="button" @click=${go(`#/ch/${c.id}/practice`)}>🎯 ${app.L('practiceChapter')}</button>`}
+        ${
+          nextSec
+            ? html`<button class="btn primary" type="button" @click=${go(`#/s/${nextSec.id}`)}>
+                ${c.sections[0] && S.read[c.sections[0].id] ? app.L('continueSec', { title: nextSec.title }) : app.L('startReading')}
+              </button>`
+            : html`<button class="btn primary" type="button" @click=${go(`#/ch/${c.id}/practice`)}>🎯 ${app.L('practiceChapter')}</button>`
+        }
         ${nextAfterChapter(app, c)}
         <button
           class="btn ghost"
@@ -258,32 +264,36 @@ export class StudyChapter extends StudyScreen {
       tf = c.exercises.filter(e => e.type === 'tf');
     return html`<p class="muted">${app.L('trapsIntro')}</p>
       <div class="row" style="margin-bottom:14px">
-        ${traps.length
-          ? html`<button
-              class="btn primary"
-              type="button"
-              @click=${() => {
-                app.startRound(traps, {
-                  title: `⚠️ ${app.L('trapDrill')} · ${app.chShort(c.num)}`,
-                  count: 12,
-                  back: `#/ch/${c.id}/traps`,
-                });
-              }}
-            >
-              ⚠️ ${app.L('trapsNoTimer')}
-            </button>`
-          : nothing}
-        ${tf.length >= 3
-          ? html`<button
-              class="btn"
-              type="button"
-              @click=${() => {
-                app.go(`#/lightning/${c.id}`);
-              }}
-            >
-              ⚡ ${app.L('trapsTimed')}
-            </button>`
-          : nothing}
+        ${
+          traps.length
+            ? html`<button
+                class="btn primary"
+                type="button"
+                @click=${() => {
+                  app.startRound(traps, {
+                    title: `⚠️ ${app.L('trapDrill')} · ${app.chShort(c.num)}`,
+                    count: 12,
+                    back: `#/ch/${c.id}/traps`,
+                  });
+                }}
+              >
+                ⚠️ ${app.L('trapsNoTimer')}
+              </button>`
+            : nothing
+        }
+        ${
+          tf.length >= 3
+            ? html`<button
+                class="btn"
+                type="button"
+                @click=${() => {
+                  app.go(`#/lightning/${c.id}`);
+                }}
+              >
+                ⚡ ${app.L('trapsTimed')}
+              </button>`
+            : nothing
+        }
       </div>
       <div style="display:grid;gap:10px">
         ${c.pitfalls.map(
@@ -568,12 +578,14 @@ class StudyRoundFilters extends StudyElement {
           },
         )}
       </div>
-      ${level === nothing
-        ? nothing
-        : html`<div>
-            <div class="lbl">${app.t('ui.study.level')}</div>
-            ${level}
-          </div>`}
+      ${
+        level === nothing
+          ? nothing
+          : html`<div>
+              <div class="lbl">${app.t('ui.study.level')}</div>
+              ${level}
+            </div>`
+      }
       <div class="row">
         <button
           class="btn primary"

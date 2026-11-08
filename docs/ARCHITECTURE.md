@@ -438,9 +438,12 @@ to merge into the app's.
 - **Only my level.** A chip in the round's filters and the mixed round (`app.onlyMyLevel`, saved in
   `settings.onlyMyLevel`): offered when the subject has a level ladder (the Roadmap's or the pack's) with exercises at
   several levels; it keeps the exercises at the level the read models say the learner reached.
-- **DOM, not Lit.** The pages are typed DOM (`ui/dom.ts` `h()`) drawing the classes the existing CSS and suites know;
-  the bundle stays free of Lit (it is `build/ui.js`'s). With the new frame (`frame.framed`) the frame draws the crumbs
-  and ⋮; without it (an old index.html) each page keeps its back button and tiles.
+- **Lit, light DOM.** Every page and element is a Lit element on the study base (`ui/lit/base.ts`: `StudyElement`,
+  `StudyScreen` and `show()`, `StudyPage`, `tag()` and `defineStudyElements()`), drawn in the light DOM with the classes
+  the existing CSS and suites know, and drawn at once (`redraw()` renders synchronously: the keys, the suites and the unit
+  tests read the page in the same task). An exercise type is an `ExerciseWidget` (`ui/exercise/widget.ts`), a picture type
+  a `PictureWidget` (`ui/exercise/picture/`); grading stays the domain's `verdictOf`. Each tag is named once (`tag()`
+  refuses a second). `build/study.js` carries its own copy of Lit. The frame draws the crumbs and ⋮.
 - **Tests.** `src/composition/study-ui.test.ts` (the pages over a fake host in happy-dom), the domain's tests, and the
   browser suites (`e2e`, `socratic`, `visual`, `visual_pack`, `thinking_types`, `sources`, `bridge`, `shell`), which look
   in through `NoemaCore.studyUi.current()` (`app`, `exerciseCard`, `inspect`).

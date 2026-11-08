@@ -4,12 +4,11 @@
  * button, and opening a source in the file viewer ("What's new" itself, #/new, is screens/whats-new.ts).
  *
  * SourcesUi is the screens' handle on them (and the viewer's entry: `open`); what it draws are light-DOM elements on the
- * study base (lit/base.ts): `study-source-chips`, `study-filter-bar`, `study-whats-new` and the deck, `study-sources-deck`.
+ * study base (lit/base.ts): `study-source-chips`, `study-filter-bar`, `study-whats-new-btn` and the deck, `study-sources-deck`.
  */
 import { sourceChapters, sourceStats, type SourceInfo, type SourceStats } from '../domain/course.ts';
 import type { Chapter } from '../domain/pack.ts';
 import type { StudyApp } from './app.ts';
-import { h } from './dom.ts';
 import { html, nothing, StudyElement, tag, type TemplateResult } from './lit/base.ts';
 import type { ViewerPort } from './parts.ts';
 
@@ -76,7 +75,7 @@ export class SourcesUi implements ViewerPort {
 
   /** ✨ only what's new (the subject's page, while new sources came) */
   whatsNewButton(): HTMLElement | null {
-    return this.#app.newSources().length ? new StudyWhatsNew(this.#app).redraw() : null;
+    return this.#app.newSources().length ? new StudyWhatsNewButton(this.#app).redraw() : null;
   }
 
   setFilter(ids: readonly string[] | null): void {
@@ -162,9 +161,9 @@ class StudySourceChips extends StudyElement {
             this.#ui.open(r.src, { page: r.page, start: r.start });
           }}
         >
-          <span class="e">${s.emoji ?? '📘'}</span><span>${short(label)}</span>${av
-            ? html`<span class="eye" aria-hidden="true">👁</span>`
-            : nothing}
+          <span class="e">${s.emoji ?? '📘'}</span><span>${short(label)}</span>${
+            av ? html`<span class="eye" aria-hidden="true">👁</span>` : nothing
+          }
         </button>`;
       })}
     </div>`;
@@ -214,7 +213,7 @@ class StudyFilterBar extends StudyElement {
 tag('study-filter-bar', StudyFilterBar);
 
 /** ✨ only what's new: to #/new (a part of the row it sits in: display: contents) */
-class StudyWhatsNew extends StudyElement {
+class StudyWhatsNewButton extends StudyElement {
   readonly #app: StudyApp;
   constructor(app: StudyApp) {
     super();
@@ -233,7 +232,7 @@ class StudyWhatsNew extends StudyElement {
     </button>`;
   }
 }
-tag('study-whats-new', StudyWhatsNew);
+tag('study-whats-new-btn', StudyWhatsNewButton);
 
 type Stat = readonly [emoji: string, n: number, key: string];
 
@@ -268,9 +267,11 @@ class StudySourcesDeck extends StudyElement {
           <b>📚 ${app.t('engine.src.sources')}</b
           ><span class="tiny">
             ·
-            ${on
-              ? app.t('engine.deck.countSome', { n: sources.length, shown: on.size })
-              : app.t('engine.deck.countAll', { n: sources.length })}</span
+            ${
+              on
+                ? app.t('engine.deck.countSome', { n: sources.length, shown: on.size })
+                : app.t('engine.deck.countAll', { n: sources.length })
+            }</span
           >
         </div>
         <button
@@ -282,17 +283,19 @@ class StudySourcesDeck extends StudyElement {
         >
           ${app.t('engine.deck.all')}
         </button>
-        ${ns.length
-          ? html`<button
-              class="fchip${on && [...on].every(id => app.isNewSource(id)) ? ' on' : ''}"
-              type="button"
-              @click=${() => {
-                ui.setFilter(ns);
-              }}
-            >
-              ✨ ${app.t('engine.deck.onlyNew')}
-            </button>`
-          : nothing}
+        ${
+          ns.length
+            ? html`<button
+                class="fchip${on && [...on].every(id => app.isNewSource(id)) ? ' on' : ''}"
+                type="button"
+                @click=${() => {
+                  ui.setFilter(ns);
+                }}
+              >
+                ✨ ${app.t('engine.deck.onlyNew')}
+              </button>`
+            : nothing
+        }
         <button
           class="iconbtn"
           type="button"
@@ -350,17 +353,19 @@ class StudySourcesDeck extends StudyElement {
           <b>${s.title}${app.isNewSource(s.id) ? html`<span class="newpill srcnew">✨ ${app.t('engine.src.new')}</span>` : nothing}</b>
           <small>${(s.subtitle ?? '') + (pagesText ? ` · ${pagesText}` : '')}</small>
         </button>
-        ${fm || web
-          ? html`<button
-              class="iconbtn srceye"
-              type="button"
-              title=${`👁 ${app.t('engine.deck.preview')}${fm ? ` ${fm.name}` : ''}`}
-              aria-label=${app.t('engine.deck.previewAria')}
-              @click=${preview}
-            >
-              👁
-            </button>`
-          : nothing}
+        ${
+          fm || web
+            ? html`<button
+                class="iconbtn srceye"
+                type="button"
+                title=${`👁 ${app.t('engine.deck.preview')}${fm ? ` ${fm.name}` : ''}`}
+                aria-label=${app.t('engine.deck.previewAria')}
+                @click=${preview}
+              >
+                👁
+              </button>`
+            : nothing
+        }
         <button class="iconbtn" type="button" aria-label=${s.title} aria-expanded=${String(exp)} @click=${fold}>
           <span class="chev${exp ? ' open' : ''}">▸</span>
         </button>
@@ -426,11 +431,13 @@ class StudySourcesDeck extends StudyElement {
             <button class="btn small primary" type="button" @click=${preview}>👁 ${app.t('engine.deck.preview')}</button>
             ${pick(`📎 ${app.t('engine.deck.attachInstead')}`, false)}`
         : html`<span class="tiny"
-              >${s.sha256
-                ? `📦 ${app.t('engine.deck.inPackage', { name: s.fileName ?? (s.file ?? '').split('/').pop() ?? '' })}`
-                : s.file
-                  ? `📄 ${app.t('engine.deck.notAttached', { name: s.file.split('/').pop() ?? '' })}`
-                  : app.t('engine.deck.noFile')}</span
+              >${
+                s.sha256
+                  ? `📦 ${app.t('engine.deck.inPackage', { name: s.fileName ?? (s.file ?? '').split('/').pop() ?? '' })}`
+                  : s.file
+                    ? `📄 ${app.t('engine.deck.notAttached', { name: s.file.split('/').pop() ?? '' })}`
+                    : app.t('engine.deck.noFile')
+              }</span
             >
             ${pick(`📎 ${app.t('engine.deck.attach')}`, true)}`;
     return html`<div class="srcbody">
@@ -439,29 +446,33 @@ class StudySourcesDeck extends StudyElement {
       </div>
       <div class="srcfile">${file}</div>
       <div class="tiny srcmeta">
-        ${(s.pages ? `${/^\d/.test(s.pages) ? app.t('engine.deck.pages', { pages: s.pages }) : s.pages} · ` : '') +
-        app.t('engine.deck.added', { date: s.added ?? '—' })}
+        ${
+          (s.pages ? `${/^\d/.test(s.pages) ? app.t('engine.deck.pages', { pages: s.pages }) : s.pages} · ` : '') +
+          app.t('engine.deck.added', { date: s.added ?? '—' })
+        }
       </div>
-      ${chs.length
-        ? html`<div class="srcchs">
-            ${chs.map(
-              ({ c, ref }) =>
-                html`<button
-                  class="srcch${ref.main ? '' : ' also'}"
-                  type="button"
-                  title=${ref.label}
-                  @click=${() => {
-                    ui.toggleDeck(false);
-                    app.go(`#/ch/${c.id}`);
-                  }}
-                >
-                  ${`${c.emoji ?? ''} ${app.chTitle(c.num, c.title)}`}${ref.label
-                    ? html`<small> — ${ref.label.length > 60 ? `${ref.label.slice(0, 58)}…` : ref.label}</small>`
-                    : nothing}${ref.main ? nothing : html`<small> ${app.t('engine.deck.also')}</small>`}
-                </button>`,
-            )}
-          </div>`
-        : html`<div class="tiny">${app.t('engine.deck.noChapter')}</div>`}
+      ${
+        chs.length
+          ? html`<div class="srcchs">
+              ${chs.map(
+                ({ c, ref }) =>
+                  html`<button
+                    class="srcch${ref.main ? '' : ' also'}"
+                    type="button"
+                    title=${ref.label}
+                    @click=${() => {
+                      ui.toggleDeck(false);
+                      app.go(`#/ch/${c.id}`);
+                    }}
+                  >
+                    ${`${c.emoji ?? ''} ${app.chTitle(c.num, c.title)}`}${
+                      ref.label ? html`<small> — ${ref.label.length > 60 ? `${ref.label.slice(0, 58)}…` : ref.label}</small>` : nothing
+                    }${ref.main ? nothing : html`<small> ${app.t('engine.deck.also')}</small>`}
+                  </button>`,
+              )}
+            </div>`
+          : html`<div class="tiny">${app.t('engine.deck.noChapter')}</div>`
+      }
       <div class="row srcacts">
         <button
           class="btn small"
@@ -472,30 +483,34 @@ class StudySourcesDeck extends StudyElement {
         >
           🔎 ${app.t('engine.deck.onlyThis')}
         </button>
-        ${app.isNewSource(s.id)
-          ? html`<button
-              class="btn small"
-              type="button"
-              @click=${() => {
-                app.markSeen([s.id]);
-                this.#refresh();
-              }}
-            >
-              ✔ ${app.t('engine.new.markSeen')}
-            </button>`
-          : nothing}
-        ${s.id !== sources[0]?.id && app.state.seenSrc?.[s.id]
-          ? html`<button
-              class="btn small ghost"
-              type="button"
-              @click=${() => {
-                app.markUnseen(s.id);
-                this.#refresh();
-              }}
-            >
-              ↺ ${app.t('engine.deck.markNew')}
-            </button>`
-          : nothing}
+        ${
+          app.isNewSource(s.id)
+            ? html`<button
+                class="btn small"
+                type="button"
+                @click=${() => {
+                  app.markSeen([s.id]);
+                  this.#refresh();
+                }}
+              >
+                ✔ ${app.t('engine.new.markSeen')}
+              </button>`
+            : nothing
+        }
+        ${
+          s.id !== sources[0]?.id && app.state.seenSrc?.[s.id]
+            ? html`<button
+                class="btn small ghost"
+                type="button"
+                @click=${() => {
+                  app.markUnseen(s.id);
+                  this.#refresh();
+                }}
+              >
+                ↺ ${app.t('engine.deck.markNew')}
+              </button>`
+            : nothing
+        }
       </div>
     </div>`;
   }

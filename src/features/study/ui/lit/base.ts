@@ -91,6 +91,7 @@ export class StudyPage extends StudyScreen {
 /** the study area's elements by tag (defineStudyElements defines them) */
 export const STUDY_TAGS = new Map<string, CustomElementConstructor>();
 export function tag(name: string, ctor: CustomElementConstructor): void {
+  if (STUDY_TAGS.has(name)) throw new Error(`study element <${name}> is tagged twice`); // one name, one element
   STUDY_TAGS.set(name, ctor);
 }
 tag('study-page', StudyPage);
