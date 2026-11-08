@@ -331,7 +331,7 @@ window.NoemaCurriculum = (() => {
    the same node. Claude (API key) → the noema-pack-builder skill job (engine/claude.js, web research);
    otherwise Gemini → engine/packgen.js. */
 window.NoemaCurriculum.Gen = (() => {
-  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, SH = () => window.NoemaCurShare, rt = C.rt, errW = C.errW;
+  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, SH = () => window.NoemaCurShare, R = () => window.NoemaCore.roadmaps, rt = C.rt, errW = C.errW;
   const TAB = 't' + Math.random().toString(36).slice(2, 9);
   const live = {};            // nodeKey → { msg, at } (in memory: progress lines are not synced)
   const listeners = new Set(); const emit = () => listeners.forEach(f => { try { f(); } catch (e) { } });

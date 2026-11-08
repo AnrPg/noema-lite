@@ -81,6 +81,7 @@ export class NoemaRoadmapLevels extends RoadmapElement {
 
   /** Reads the Roadmap again: moves up where a level is done, then shows where the learner is. One run at a time. */
   refresh(): void {
+    if (!this.isConnected) return; // connectedCallback refreshes
     if (this.#run) {
       this.#again = true;
       return;
