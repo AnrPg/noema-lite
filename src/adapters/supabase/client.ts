@@ -50,6 +50,8 @@ export interface CallOptions {
   /** With the user's session (default) or only the project key. */
   readonly auth?: boolean;
   readonly signal?: AbortSignal;
+  /** Leave the answer's body unread (a file to download: Answer.response has it). */
+  readonly raw?: boolean;
 }
 
 export interface Answer {
@@ -180,6 +182,7 @@ export class SupabaseClient {
       return err(networkError(path, e));
     }
     const ct = response.headers.get('content-type') ?? '';
+    if (o.raw && response.ok) return ok({ status: response.status, body: null, response });
     if (!response.ok) {
       const text = await response.text().catch(() => '');
       let parsed: unknown = text;
