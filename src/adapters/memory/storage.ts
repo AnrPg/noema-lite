@@ -34,7 +34,7 @@ export function memoryStorage(options: MemoryStorageOptions = {}): Storage & { r
   const now = options.now ?? Date.now;
   const kvMap = new Map<string, string>();
   const docs = new Map<string, Map<DocKey, unknown>>();
-  for (const c of options.collections ?? ['packs', 'handles', 'restore', 'convos']) docs.set(c, new Map());
+  for (const c of options.collections ?? ['packs', 'handles', 'restore', 'convos', 'sync']) docs.set(c, new Map());
   const listeners = new Set<(e: StorageFullEvent) => void>();
   let persisted = false;
 

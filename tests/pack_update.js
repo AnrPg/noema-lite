@@ -44,7 +44,7 @@ const PORT = 54351, BASE = `http://localhost:${PORT}`;
   ok(await chip.count() === 1 && /✨/.test(await chip.innerText()), 'the subject chip shows ✨ (a new version is ready)');
   await chip.click();
   ok(await until(() => p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.id === 'cellbio' && COURSE.length === 2)), 'it opens the NEW version (2 chapters) — no manual cleanup');
-  ok(await p.evaluate(async () => (await new Promise(r => { const q = indexedDB.open('noema-lite', 1); q.onsuccess = () => { const g = q.result.transaction('packs').objectStore('packs').get(Noema.account.id + '|cellbio'); g.onsuccess = () => r(g.result?.version); }; })) === 'v2'), 'the copy saved on this device is now version 2');
+  ok(await p.evaluate(async () => (await new Promise(r => { const q = indexedDB.open('noema-lite', 2); q.onsuccess = () => { const g = q.result.transaction('packs').objectStore('packs').get(Noema.account.id + '|cellbio'); g.onsuccess = () => r(g.result?.version); }; })) === 'v2'), 'the copy saved on this device is now version 2');
   await p.goto(BASE + '/'); await wait(1200);
   ok(!/✨/.test(await p.locator('.noema-chip:has-text("Cell Biology")').innerText()), 'afterwards no ✨ (up to date)');
   await p.click('.noema-chip:has-text("Cell Biology")'); await wait(1500);

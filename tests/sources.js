@@ -72,7 +72,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p2.goto(BASE + '/?subject=kytt#/ch/ch01'); await wait(2500); if (await p2.isVisible('.noema-inuse')) { await p2.click('.noema-inuse .btn'); await wait(1000); }   // the first device is still in use: continue here
   await p2.click('.srcref:has-text("ECB")');
   ok(await until(() => p2.locator('.vw-ov .vw-page canvas').count()), 'a device without the file downloads it from the cloud and opens it');
-  await c2.close(); await p.evaluate(() => NoemaCloud.lease.check({ take: true }));   // back on the first device ("Use here")
+  await c2.close(); await p.evaluate(() => NoemaCore.sync.lease.check({ take: true }));   // back on the first device ("Use here")
 
   console.log('— every format in the viewer');
   const files = { 'book.pdf': ['.vw-page', 3], 'figure.png': ['img.vw-img'], 'photo.jpg': ['img.vw-img'], 'anim.gif': ['img.vw-img'], 'diagram.svg': ['img.vw-img'], 'scan.tiff': ['canvas.vw-img'],

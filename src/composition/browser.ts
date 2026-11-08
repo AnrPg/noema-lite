@@ -16,6 +16,7 @@ import { browserStorage } from '../adapters/browser/storage.ts';
 import { systemClock } from '../adapters/browser/clock.ts';
 import { noemaI18n } from '../adapters/browser/i18n.ts';
 import { browserNotifier } from '../adapters/browser/notifier.ts';
+import { browserLifecycle } from '../adapters/browser/lifecycle.ts';
 import { workerCompute, type WorkerLike } from '../adapters/browser/compute.ts';
 import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-reporter.ts';
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
@@ -30,12 +31,30 @@ import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
-import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ENGINES, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
+import { randomId, registerSync, syncBridge } from './sync.ts';
+import {
+  AI,
+  CLOCK,
+  CLOUD,
+  COMPUTE,
+  CONFIG,
+  ENGINES,
+  ERRORS,
+  I18N,
+  JOBS,
+  LIFECYCLE,
+  NOTIFIER,
+  STORAGE,
+  TELEMETRY,
+  type CoreConfig,
+} from './tokens.ts';
 
 /** Helpers append their registrations here (each registers its own tokens; a token already taken is an error). */
 export const APP_REGISTRATIONS: readonly Registration[] = [
   // the engine library (src/engines): its plugins' manifests at once, each engine's code and Worker bundle when first loaded
   c => c.register(ENGINES, () => createAppEngines()),
+  // local-first sync (src/features/sync, docs/SYNC.md): the outbox, the settings registers, the loop and the lease
+  registerSync,
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
@@ -44,6 +63,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: () => contracts },
   // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
+  // the sync loop, the settings, the lease ("in use on another device"): engine/cloud.js, engine/loader.js, the account page
+  syncBridge,
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */
@@ -94,6 +115,7 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
   c.register(CLOCK, () => systemClock());
   c.register(I18N, () => noemaI18n());
   c.register(NOTIFIER, () => browserNotifier());
+  c.register(LIFECYCLE, () => browserLifecycle(() => page as never, randomId));
   c.register(TELEMETRY, r => localTelemetry({ store: r.get(STORAGE).kv }));
   c.register(ERRORS, r => {
     const errors = createErrorReporter({
