@@ -85,8 +85,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('map@1'),
-    () => import('./map/map.js'),
-    () => import('noema-worker:./map/map.js#simEngine'),
+    () => import('./map/map.ts'),
+    () => import('noema-worker:./map/map.ts#simEngine'),
   ),
   def(
     manifest('text@1'),

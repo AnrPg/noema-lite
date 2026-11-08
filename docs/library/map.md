@@ -1,4 +1,4 @@
-# `map@1` — maps, projections, geodesy and journeys (`src/engines/map/map.js`, `NoemaLibMap`)
+# `map@1` — maps, projections, geodesy and journeys (`src/engines/map/map.ts`, `NoemaLibMap`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for history, geography, archaeology and the classics: map
 projections and their distortion, distances and bearings on the sphere and on the ellipsoid, territories through time (area,
@@ -307,7 +307,7 @@ Worker source (vendor + core + engine) giving identical outputs in a fresh `vm` 
 | `src/engines/map/vendor/` | world-atlas `land-110m.json` (M. Bostock), Natural Earth 4.1.0 1:110m | 2.0.2 | ISC; data public domain | 55 kB (wrapper `noema-land-110m.js` 56 kB) | the basemap; decoded by the engine (no topojson-client) |
 
 Each directory's README gives the source URL and sha256. The page must load `noema-geodesic.js` and `noema-land-110m.js` before
-`src/engines/map/map.js` (the Worker source is assembled when the module loads). The Python checker needs neither.
+`src/engines/map/map.ts` (the Worker source is assembled when the module loads). The Python checker needs neither.
 
 ## 15. Not covered (and why)
 
