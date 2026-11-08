@@ -1,10 +1,14 @@
 /* ===================== xAPI 1.0.3 / cmi5 export of the learner's activity attempts (docs/activities-dev/xapi.md, docs/adr/001 D12) =====================
    Pure functions: no network, no LRS. The app (later) offers the result as a JSON file to download.
-     NoemaXAPI.statements(input, opts) → [statement]      input: { att: S.att, res?: S.res, pack?: {id, title}, chapters?: [chapter] }
+     NoemaXAPI.statements(input, opts) → [statement]      input: { attempts, answers?, pack?: {id, title}, chapters?: [chapter] }
+        attempts: [{ exercise, id, seed, t, t0?, hints, result: {score, passed, detail, t}, events: [{t, name, data}] }] (each attempt
+        at an interactive exercise, in its last version) · answers: [{ id, exercise, ok, t, conf?, n?, okCount? }] (each answer to
+        an ordinary exercise; n / okCount: one entry that stands for several, counted before the learning log). Both come from the
+        learning log: NoemaCore.learning.xapi(subject) (src/features/study/domain/events/xapi.ts).
      NoemaXAPI.exportFile(input, opts) → { format: 'noema.xapi-export/v1', … statements }   (src/contracts/schemas/noema.xapi-export.v1.schema.json)
      NoemaXAPI.cmi5Package(course, opts) → { files: { 'cmi5.xml': xml }, aus: [{id, chapter, exercise?}] }
      NoemaXAPI.validate(stmt) → [problem]   ·   NoemaXAPI.validateAll(list) → [problem] (also the cmi5 rules across statements)
-     NoemaXAPI.subjectRecord({ att, res, pack, chapters, accountId, site, now }) → { name: '<id>.xapi.json', file } | null (nothing recorded)
+     NoemaXAPI.subjectRecord({ attempts, answers, pack, chapters, accountId, site, now }) → { name: '<id>.xapi.json', file } | null (nothing recorded)
      NoemaXAPI.subjectCmi5({ pack, chapters, site }) → { name: '<id>.cmi5.zip', files: { 'cmi5.xml': xml } }   (what the app's two menus download:
        the subject's ⋮ in the engine and the shell's "My subjects" ⋮; the same ids and AUs either way)
    opts: { actor: { name?, account: { homePage, name } } (never an email: mbox / mbox_sha1sum / openid are never written),
@@ -138,11 +142,10 @@ var NoemaXAPI = (() => {   // the page loads this file on its own (the shell's "
   const auId = (C, ch, exId) => C.base + 'au/' + enc(C.granularity === 'activity' && exId ? exId : (ch || 'pack'));
   const auObject = (C, ch, exId) => ({ objectType: 'Activity', id: auId(C, ch, exId), definition: { type: ACT_TYPE.lesson, name: langMap(C.locale, C.granularity === 'activity' && exId ? ((C.EXS[exId] && plain(C.EXS[exId].ex.q)) || exId) : ((C.CHS[ch] && C.CHS[ch].title) || ch || 'pack')) } });
 
-  /** the attempts of S.att: { exId: { id, seed, t, t0?, hints, result: {score, passed, detail, t}, events: [{t, name, data}] } } (or a list with `exercise`) */
+  /** the attempts: [{ exercise, id, seed, t, t0?, hints, result: {score, passed, detail, t}, events: [{t, name, data}] }] */
   function attemptsOf(input) {
-    const src = input && (input.att || input.attempts), out = [];
-    if (Array.isArray(src)) { for (const a of src) if (a && typeof a.exercise === 'string') out.push([a.exercise, a]); }
-    else if (src && typeof src === 'object') for (const k of Object.keys(src)) if (src[k] && typeof src[k] === 'object') out.push([k, src[k]]);
+    const src = input && input.attempts, out = [];
+    if (Array.isArray(src)) for (const a of src) if (a && typeof a === 'object' && typeof a.exercise === 'string') out.push([a.exercise, a]);
     const t0 = a => { const ev = Array.isArray(a.events) ? a.events.filter(e => e && num(e.t)) : []; return num(a.t0) ? a.t0 : ev.length ? Math.min(...ev.map(e => e.t)) : num(a.result && a.result.t) ? a.result.t : num(a.t) ? a.t : 0; };
     return out.map(([k, a]) => ({ exId: k, a, t0: t0(a) })).sort((x, y) => (x.t0 - y.t0) || (x.exId < y.exId ? -1 : x.exId > y.exId ? 1 : 0));
   }
@@ -222,19 +225,19 @@ var NoemaXAPI = (() => {   // the page loads this file on its own (the shell's "
       push('terminated', au, { t: end, parents: auParents, category: [CMI5_CAT], session, ctxExt: base, key: key('end'), result: { duration: duration(end - t0) } });
     }
 
-    // the ordinary exercises: S.res { exId: { n, ok, last, t, conf } } → one "answered" each (the latest answer)
-    const res = input && (input.res || input.answers);
-    if (res && typeof res === 'object' && !Array.isArray(res)) {
-      for (const exId of Object.keys(res).sort()) {
-        const r = res[exId]; if (!r || typeof r !== 'object' || typeof r.last !== 'boolean') continue;
-        const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, null);
-        const ext = { [C.X('answers-count')]: Number.isInteger(r.n) ? r.n : 1, [C.X('correct-count')]: Number.isInteger(r.ok) ? r.ok : (r.last ? 1 : 0) };
-        if (typeof r.conf === 'string') ext[C.X('confidence')] = r.conf;
-        const result = { success: r.last, completion: true, extensions: ext };
-        const k = 'res|' + exId + '|' + stable([r.n, r.ok, r.last, r.t]);
-        if (cmi5) push('answered', obj, { t: r.t, parents: [auObject(C, ch, exId)], session: uuid5('session|' + C.registration + '|answers|' + (C.granularity === 'activity' ? exId : ch)), result, key: k });
-        else push('answered', obj, { t: r.t, parents: ch ? [chapterRef(C, ch)] : [], result, key: k });
-      }
+    // the ordinary exercises: every answer → one "answered" at its own time (its id: the answer's, so the same answer is the same statement)
+    const answers = (input && Array.isArray(input.answers) ? input.answers : [])
+      .filter(r => r && typeof r === 'object' && typeof r.id === 'string' && typeof r.exercise === 'string' && typeof r.ok === 'boolean')
+      .sort((a, b) => ((num(a.t) ? a.t : 0) - (num(b.t) ? b.t : 0)) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    for (const r of answers) {
+      const exId = r.exercise;
+      const ch = C.chapterOf(exId), obj = exerciseObject(C, exId, null);
+      const ext = { [C.X('answers-count')]: Number.isInteger(r.n) ? r.n : 1, [C.X('correct-count')]: Number.isInteger(r.okCount) ? r.okCount : (r.ok ? 1 : 0) };
+      if (typeof r.conf === 'string') ext[C.X('confidence')] = r.conf;
+      const result = { success: r.ok, completion: true, extensions: ext };
+      const k = 'ans|' + r.id;
+      if (cmi5) push('answered', obj, { t: r.t, parents: [auObject(C, ch, exId)], session: uuid5('session|' + C.registration + '|answers|' + (C.granularity === 'activity' ? exId : ch)), result, key: k });
+      else push('answered', obj, { t: r.t, parents: ch ? [chapterRef(C, ch)] : [], result, key: k });
     }
     return out;
   }
@@ -385,12 +388,12 @@ var NoemaXAPI = (() => {   // the page loads this file on its own (the shell's "
   /* ---------- one subject, as the app exports it (the subject's ⋮ and the shell's "My subjects" ⋮) ---------- */
   const siteOf = s => String(s || 'https://noema-lite.netlify.app').replace(/\/+$/, '') + '/';
   const baseOf = (site, id) => site + 'xapi/' + encodeURIComponent(id) + '/';
-  /** the learner's record of one subject: S.att (activity attempts) and S.res (answers); the actor is the account id, never an e-mail */
-  function subjectRecord({ att, res, pack, chapters, accountId, site, now } = {}) {
-    att = att || {}; res = res || {};
-    if (!Object.keys(att).length && !Object.keys(res).length) return null;
+  /** the learner's record of one subject: its activity attempts and answers (NoemaCore.learning.xapi); the actor is the account id, never an e-mail */
+  function subjectRecord({ attempts, answers, pack, chapters, accountId, site, now } = {}) {
+    attempts = Array.isArray(attempts) ? attempts : []; answers = Array.isArray(answers) ? answers : [];
+    if (!attempts.length && !answers.length) return null;
     const S = siteOf(site), p = pack || {};
-    const file = exportFile({ att, res, pack: { id: p.id, title: p.title, language: p.language }, chapters: chapters || [] },
+    const file = exportFile({ attempts, answers, pack: { id: p.id, title: p.title, language: p.language }, chapters: chapters || [] },
       { actor: { account: { homePage: S, name: String(accountId) } }, activityBase: baseOf(S, p.id), registrationSeed: [String(accountId), p.id], now });
     return { name: p.id + '.xapi.json', file };
   }

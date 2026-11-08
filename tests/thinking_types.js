@@ -132,7 +132,7 @@ ok(['flaw', 'case', 'predict', 'tree', 'inquiry', 'debate'].every(t => P.TYPES.h
   ok(await p.locator('.kmapbox .kmaplr:has-text("Predict free fall") .pill:has-text("Easily confused")').count() === 1, 'knowledge map: the categories of a learnable are shown');
   await p.click('.kmapbox .kmaplr:has-text("Predict free fall") button'); await wait(300);
   ok(await p.evaluate(() => RUN && RUN.list.length === 1 && RUN.list[0].id === 'ch01-e903'), 'knowledge map: ▶ practises that learnable');
-  await p.evaluate(() => { S.res['ch01-e903'] = { n: 1, ok: 0, last: false, t: Date.now() }; location.hash = '#/mistakes'; }); await wait(400);
+  await p.evaluate(() => { record(EX['ch01-e903'], false); location.hash = '#/mistakes'; }); await wait(400);
   ok(await p.locator('.gymcats .fchip:has-text("Easily confused")').count() === 1 && await p.locator('.gymcats .fchip:has-text("Traps")').count() === 1, 'Mistakes gym: chips by kind of trap');
   await p.evaluate(() => reportedView()); await wait(200);
   ok(await p.locator('.modal .flaglist li').count() === 1, 'reported exercises: listed');

@@ -14,7 +14,7 @@ import type { Attempt, EventType, LearningEvent } from './types.ts';
 
 export interface LegacyStamp {
   /** The HLC stamp of the migration (every event of one run has it; ids keep them apart). */
-  readonly at: string;
+  readonly hlc: string;
   /** The learner's day of the migration. */
   readonly day: string;
   readonly device: string;

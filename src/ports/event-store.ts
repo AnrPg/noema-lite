@@ -28,7 +28,7 @@ export interface ReadOptions {
 
 export interface Snapshot {
   /** The stamp and id of the last event the snapshot folded. */
-  readonly upTo: { readonly at: string; readonly id: string };
+  readonly upTo: { readonly hlc: string; readonly id: string };
   readonly value: unknown;
 }
 

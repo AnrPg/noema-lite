@@ -48,5 +48,5 @@ export const ENGINES = token<EngineLibrary>(
   'engines.library',
   'the engine library of sim-spec@1 (src/engines): the expression language, the catalogue, every engine as a lazy plugin',
 );
-export const EVENT_STORE = token<EventStore>('study.events', 'the learning log on this device (EventStore port)');
+export const EVENT_STORE = token<EventStore>('study.eventStore', 'the learning log on this device (EventStore port)');
 export const LEARNING = token<LearningLog>('study.log', 'the learning log of the account in use (src/features/study/application)');

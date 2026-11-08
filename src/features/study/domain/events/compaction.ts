@@ -1,8 +1,8 @@
 /**
  * Compaction: what the log may forget. Only events whose type keeps "latest" (EVENT_INFO.retention) and that a later
  * event of the same key supersedes: an older saved state of an activity, an older "section opened", a setting changed
- * again. Answers, reviews, XP, attempts, restores and every other "history" event are kept for ever (the card
- * scheduler's optimiser and the xAPI export read them). The ids of forgotten events stay known to the store, so the
+ * again, an attempt saved again (its last version has all of it). Answers, reviews, XP, restores and every other "history"
+ * event are kept for ever (the card scheduler's optimiser and the xAPI export read them). The ids of forgotten events stay known to the store, so the
  * same event arriving again (another device) is still a duplicate.
  */
 import { compareEvents, EVENT_INFO, keyOf, type LearningEvent } from './types.ts';

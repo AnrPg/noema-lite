@@ -3,7 +3,7 @@
  * database "noema-learning", src/adapters/browser/event-store.ts), tests and Node tools the memory store. One
  * implementation, so both behave alike. Four collections:
  *   events     <account>|<at>|<id> → the event        (key order = log order: the stamp sorts as text)
- *   ids        <account>|<id>      → { at, gone? }     (every id ever appended: idempotency outlives compaction)
+ *   ids        <account>|<id>      → { hlc, gone? }     (every id ever appended: idempotency outlives compaction)
  *   snapshots  <account>           → { upTo, value }
  *   meta       <account>|<name>    → a small value
  * Appends are one transaction each: every new event and its id, and the snapshot dropped when an event lands at or
@@ -31,16 +31,16 @@ export interface DocumentEventStoreOptions {
 }
 
 interface IdEntry {
-  readonly at: string;
+  readonly hlc: string;
   readonly gone?: true;
 }
 
 const ACCOUNT = /^[A-Za-z0-9][A-Za-z0-9._@-]{0,199}$/;
 const badAccount = (a: string): NoemaError =>
   new NoemaError('events.invalid', 'not an account of the learning log: ' + JSON.stringify(a.slice(0, 80)));
-const eventKey = (acc: string, e: { at: string; id: string }): string => `${acc}|${e.at}|${e.id}`;
+const eventKey = (acc: string, e: { hlc: string; id: string }): string => `${acc}|${e.hlc}|${e.id}`;
 const isEvent = (x: unknown): x is StoredEvent =>
-  !!x && typeof x === 'object' && typeof (x as { id?: unknown }).id === 'string' && typeof (x as { at?: unknown }).at === 'string';
+  !!x && typeof x === 'object' && typeof (x as { id?: unknown }).id === 'string' && typeof (x as { hlc?: unknown }).hlc === 'string';
 
 export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
   const { docs } = o;
@@ -68,7 +68,7 @@ export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
         seen.add(e.id);
         if ((await tx.get<IdEntry>('ids', `${account}|${e.id}`)) !== undefined) continue;
         await tx.put('events', eventKey(account, e), e);
-        await tx.put('ids', `${account}|${e.id}`, { at: e.at } satisfies IdEntry);
+        await tx.put('ids', `${account}|${e.id}`, { hlc: e.hlc } satisfies IdEntry);
         added.push(e);
       }
       if (added.length) {
@@ -78,7 +78,7 @@ export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
           if (added.some(e => eventKey(account, e) <= upTo)) await tx.delete('snapshots', account);
         }
       }
-      return added.sort((x, y) => (x.at < y.at ? -1 : x.at > y.at ? 1 : x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+      return added.sort((x, y) => (x.hlc < y.hlc ? -1 : x.hlc > y.hlc ? 1 : x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
     });
     if (r.ok && r.value.length && o.channel && !channelClosed) {
       try {
@@ -121,8 +121,8 @@ export function documentEventStore(o: DocumentEventStoreOptions): EventStore {
           const k = `${account}|${id}`,
             entry = await tx.get<IdEntry>('ids', k);
           if (!entry || entry.gone) continue;
-          await tx.delete('events', eventKey(account, { at: entry.at, id }));
-          await tx.put('ids', k, { at: entry.at, gone: true } satisfies IdEntry);
+          await tx.delete('events', eventKey(account, { hlc: entry.hlc, id }));
+          await tx.put('ids', k, { hlc: entry.hlc, gone: true } satisfies IdEntry);
           n++;
         }
         return n;

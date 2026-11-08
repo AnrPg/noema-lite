@@ -85,6 +85,7 @@ fake of its service (`src/adapters/testing/`).
 | I18n | `t`, `has`, `err`, `plural`, `format.*`, locale and direction | browser (over `NoemaI18n`), memory (catalogs) |
 | Telemetry | local counters and events only, never sent | local |
 | Notifier | toast · notice (at most 2 on screen, then overflow to the 🔔 bell) · alert (also the assertive live region `#noema-alert`) | browser (DOM), memory (recording) |
+| EventStore | the learning log of each account: append-only, idempotent by event id (a forgotten event's id stays known), read in order or after a stamp, one snapshot of the fold (dropped when an event lands at or before it), meta values, a watch for other tabs, the **storage-full signal** (all or nothing per append) | browser (IndexedDB `noema-learning` v1, its own database; BroadcastChannel to the other tabs), memory; both over the document store (`adapters/local/event-store.ts`) |
 
 ## 5. Composition roots and the container
 
@@ -106,7 +107,8 @@ The rules:
 - An unknown token fails with `container.unknown`.
 
 The core's tokens are in `src/composition/tokens.ts`: `CONFIG`, `STORAGE`, `CLOCK`, `I18N`, `NOTIFIER`, `TELEMETRY`,
-`ERRORS`, `JOBS`, `COMPUTE`, `AI` and `CLOUD`; `ENGINES` is the engine library (`src/engines`).
+`ERRORS`, `JOBS`, `COMPUTE`, `AI` and `CLOUD`; `ENGINES` is the engine library (`src/engines`); `EVENT_STORE` and `LEARNING`
+are the learning log (`src/composition/learning.ts`).
 
 | Root | Built to | What it picks |
 |---|---|---|
@@ -148,8 +150,27 @@ NoemaCore.NoemaError                    the error class
 NoemaCore.contracts                     the compiled data contracts (src/contracts)
 NoemaCore.engines                       the engine library (src/engines/library.ts): expr, catalog, plugins, ids(), has(id),
                                         load(ids) → Promise<report>, loaded(id), engine(id), loadSchema(), schema(), supports(requires)
+NoemaCore.learning.open(account) → Promise<report>   the learning log (src/composition/learning.ts, its header is the source)
+NoemaCore.learning.record({ type, subject?, item?, data, origin?, id?, day? }) → event | null · recordOnce(drafts) → Promise
+NoemaCore.learning.progress(subject) · progressOf(account, subject) · hasProgress · stats() · streakNow() · todayXP() · levels()
+NoemaCore.learning.settings(subject?) · settingsWritten(value) · setSubjectSetting(subject, key, value) · onSettings · onChange
+NoemaCore.learning.events() · eventsOf(account) · exportLog() · xapi(subject) · archive() · append(events) · restore(events, o)
+NoemaCore.learning.cardRating(grade) · playbookRating(grade) · idFor(prefix, parts) · backupStamp · flush · pending · migrate
+                                        · compact() · clear(account) · account()
 NoemaCore.<extension>                   names helpers add through BRIDGE_EXTENSIONS (browser.ts)
 ```
+
+**The learning log.** What the learner does is an event (`noema.events/v1`,
+`src/contracts/schemas/noema.events.v1.schema.json`: an id, an HLC stamp, the learner's day, the device, the account, the subject
+and item, and the data of its type — answer given, card reviewed, section read, XP earned, setting changed, …). The log only
+grows: an undo is itself an event (`log.restored` for a backup brought back, `subject.reset`). The progress the screens read
+is its fold (`src/features/study/domain/events/projection.ts`; the old screens hold the same objects while events fold in),
+kept as a snapshot with the tail after it; compaction forgets only events a later one of the same key supersedes ("latest"
+types: an activity's saved state, a section opened, a setting). On each open the log converts what this device still keeps in
+the old places (`s:<subject>:state`, `a:stats`, the first time `a:settings`): the old texts are archived in the log's meta, the
+events are added (their ids are made from their content, so converting twice adds nothing), then the old keys leave the
+key-value store. `a:settings` stays the old screens' copy: what they write there becomes `setting.changed` events
+(`engine/loader.js`) and the copy follows the log. Backups (version 3) carry the events.
 
 The bridge speaks the old code's language. It returns plain values and throws exceptions instead of returning
 Results: a failed write is `false`, and a bad day throws `day.invalid`. Every failure it swallows goes to the
@@ -223,7 +244,8 @@ on a token colour or a token colour as text without such a pair.
 | Schema-first contracts | `src/contracts/` (helper 2) |
 | Microkernel plugins | `src/plugins/` (manifest, registry, capability checks), the engines in `src/engines/` (§6.1) |
 | Design tokens | `src/ui/tokens/` → `engine/tokens.css` (§6.2) |
-| Saga with idempotency keys, event sourcing of learning events, CQRS read models in a Worker (Compute jobs), local-first with an outbox, statecharts, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
+| Event sourcing of learning events (append-only log, content-hash ids, snapshots, compaction, undo as an event) | `src/features/study/domain/events/`, `application/learning-log.ts`, the EventStore port (§4, §6) |
+| Saga with idempotency keys, CQRS read models in a Worker (Compute jobs), local-first with an outbox, statecharts, specifications | phases 2–3; Compute, Storage (documents and transactions), the HLC and the container already leave room for them |
 
 ## 8. How to add …
 

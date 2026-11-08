@@ -9,6 +9,7 @@ import {
   contentId,
   EVENT_INFO,
   EVENT_TYPES,
+  feedEvents,
   makeEvent,
   parseEvent,
   Projection,
@@ -30,7 +31,7 @@ const T0 = Date.UTC(2026, 10, 1, 9);
 let seq = 0;
 function ev<T extends EventType>(draft: EventDraft<T>, wall: number, day = '2026-11-01', account = 'anr'): LearningEvent<T> {
   const id = draft.id ?? `evt-${String(++seq).padStart(6, '0')}`;
-  const r = makeEvent(draft, { id, at: at(wall), day, device: 'dev1', account });
+  const r = makeEvent(draft, { id, hlc: at(wall), day, device: 'dev1', account });
   if (!r.ok) throw r.error;
   return r.value;
 }
@@ -48,7 +49,7 @@ test('events are checked against noema.events/v1: data, scope (subject / item) a
   assert.ok(
     makeEvent(
       { type: 'answer.given', subject: S, item: 'ch01-e001', data: { ok: true } },
-      { id: 'evt-000001', at: at(T0), day: '2026-11-01', device: 'd1', account: 'anr' },
+      { id: 'evt-000001', hlc: at(T0), day: '2026-11-01', device: 'd1', account: 'anr' },
     ).ok,
   );
   const bad = [
@@ -60,7 +61,7 @@ test('events are checked against noema.events/v1: data, scope (subject / item) a
     { type: 'nope', data: {} },
   ];
   for (const d of bad) {
-    const r = makeEvent(d as unknown as EventDraft, { id: 'evt-000002', at: at(T0), day: '2026-11-01', device: 'd1', account: 'anr' });
+    const r = makeEvent(d as unknown as EventDraft, { id: 'evt-000002', hlc: at(T0), day: '2026-11-01', device: 'd1', account: 'anr' });
     assert.ok(!r.ok && r.error.code === 'events.invalid', JSON.stringify(d));
   }
   assert.ok(!parseEvent({ v: 1, id: 'x', type: 'day.active' }).ok);
@@ -71,7 +72,7 @@ test('content ids: the same parts give the same id, any difference another', () 
   assert.equal(a, contentId('mig', ['anr', 'demo', { n: 1 }]));
   assert.notEqual(a, contentId('mig', ['anr', 'demo', { n: 2 }]));
   assert.match(a, /^mig\.[0-9a-f]{32}$/);
-  assert.ok(parseEvent({ v: 1, id: a, type: 'day.active', at: at(T0), day: '2026-11-01', device: 'd', account: 'anr', data: {} }).ok);
+  assert.ok(parseEvent({ v: 1, id: a, type: 'day.active', hlc: at(T0), day: '2026-11-01', device: 'd', account: 'anr', data: {} }).ok);
 });
 
 test('answers: tries, right ones, the last one and how sure; an import counts as the copy with most tries', () => {
@@ -95,8 +96,12 @@ test('cards and playbooks: the Leitner boxes from the reviews, due from the revi
     ev({ type: 'card.reviewed', subject: S, item: 'ch01-f003', data: { rating: 1 } }, T0 + 3, '2026-11-04'),
     ev({ type: 'playbook.reviewed', subject: S, item: 'pb1', data: { rating: 4, score: 0.5 } }, T0 + 4, '2026-11-04'),
     ev({ type: 'playbook.reviewed', subject: S, item: 'pb2', data: { rating: 4, score: 0.8 } }, T0 + 5, '2026-11-04'),
+    ev({ type: 'card.imported', subject: S, item: 'ch01#4', data: { box: 2, due: '2026-11-09' } }, T0),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f005', data: { box: 2, due: '2026-11-09', from: 'ch01#4' } }, T0 + 6),
   ];
   const p = Projection.fold(evs).subjectProgress(S);
+  assert.deepEqual(p.fc['ch01-f005'], { box: 2, due: '2026-11-09' }, "a card's positional progress moved to its id");
+  assert.equal(p.fc['ch01#4'], undefined, 'and the old key is gone');
   assert.deepEqual(p.fc['ch01-f001'], { box: 3, due: '2026-11-11' }, 'the import with the later due day (box 2), then good: box 3, 7 days');
   assert.deepEqual(p.fc['ch01-f002'], { box: 2, due: '2026-11-07' }, 'easy: two boxes');
   assert.deepEqual(p.fc['ch01-f003'], { box: 1, due: '2026-11-04' }, 'again: box 1, due today');
@@ -148,7 +153,7 @@ test('settings: the latest change wins per key (by stamp, in any order), removal
     [e, d, c, b, a],
   ]) {
     const p = new Projection();
-    for (const x of [...order].sort((m, n) => (m.at < n.at ? -1 : 1))) p.apply(x);
+    for (const x of [...order].sort((m, n) => (m.hlc < n.hlc ? -1 : 1))) p.apply(x);
     assert.deepEqual(p.settings(), { theme: 'dark' });
     assert.deepEqual(Projection.fold(order).settings(), { theme: 'dark' });
     assert.deepEqual(Projection.fold(order).settings(S), { srcOn: ['s1'] });
@@ -190,11 +195,11 @@ test('reset: the subject starts again (XP across subjects stays); a restore undo
   assert.deepEqual(live.subjectProgress(S), p.subjectProgress(S), 'in place, the same');
 
   // restore to the point after `base` (T0+1): the reset and e2 no longer count
-  const r1 = ev({ type: 'log.restored', data: { upTo: base[1]?.at ?? '' } }, T0 + 10);
+  const r1 = ev({ type: 'log.restored', data: { upTo: base[1]?.hlc ?? '' } }, T0 + 10);
   const q = Projection.fold([...base, reset, after, r1]);
   assert.deepEqual(Object.keys(q.subjectProgress(S).res), ['e1']);
   // a later restore to a point between the reset and e2 (T0+2): the first restore sits inside it, so it no longer counts
-  const r2 = ev({ type: 'log.restored', data: { upTo: reset.at } }, T0 + 20);
+  const r2 = ev({ type: 'log.restored', data: { upTo: reset.hlc } }, T0 + 20);
   const q2 = Projection.fold([...base, reset, after, r1, r2]);
   assert.deepEqual(Object.keys(q2.subjectProgress(S).res), [], 'back to just after the reset');
   assert.equal(q2.stats.xp, 10);
@@ -254,7 +259,7 @@ const OLD = {
   srcOn: ['src1', 'src2'],
   inboxDone: { 'a:inbox:meletee:001': T0 },
 };
-const stamp = { at: at(T0 + 100000), day: '2026-11-01', device: 'dev1', account: 'anr' };
+const stamp = { hlc: at(T0 + 100000), day: '2026-11-01', device: 'dev1', account: 'anr' };
 
 test('migration: every field of the old state becomes events whose fold is the old state', () => {
   const r = subjectEvents(S, OLD, stamp);
@@ -288,7 +293,7 @@ test('migration: every field of the old state becomes events whose fold is the o
 
 test('migration: idempotent (the same ids every run), and a second copy merges as the old sync merged', () => {
   const a = subjectEvents(S, OLD, stamp).events.map(e => e.id);
-  const b = subjectEvents(S, OLD, { ...stamp, at: at(T0 + 999999) }).events.map(e => e.id);
+  const b = subjectEvents(S, OLD, { ...stamp, hlc: at(T0 + 999999) }).events.map(e => e.id);
   assert.deepEqual(a, b, 'another run, another time: the same ids');
   const other = { ...OLD, res: { ...OLD.res, 'ch01-e001': { n: 5, ok: 3, last: false, t: T0 - 10 } } };
   const both = [...subjectEvents(S, OLD, stamp).events, ...subjectEvents(S, other, stamp).events];
@@ -376,6 +381,8 @@ test('the xAPI input: every attempt (latest version per attempt id) and every an
   ];
   const x = xapiInput(S, evs);
   assert.equal(x.attempts.length, 1);
+  assert.deepEqual(compactable(evs), [evs[0]?.id], 'an attempt saved again: its earlier version can go');
+  assert.deepEqual(xapiInput(S, evs.slice(1)), x, 'and the export is the same without it');
   assert.equal(x.attempts[0]?.t, T0 + 20);
   assert.deepEqual(
     x.answers.map(a => [a.exercise, a.ok, a.t, a.n ?? 1]),
@@ -386,4 +393,37 @@ test('the xAPI input: every attempt (latest version per attempt id) and every an
   );
   const reset = ev({ type: 'subject.reset', subject: S, data: {} }, T0 + 25);
   assert.equal(xapiInput(S, [...evs, reset]).answers.length, 1, 'a reset leaves the earlier ones out');
+});
+
+test("the read models' feed: flat records, the kinds they name, only what counts", () => {
+  const evs = [
+    ev({ type: 'answer.given', subject: S, item: 'e1', data: { ok: true, conf: 'sure' } }, T0),
+    ev({ type: 'playbook.reviewed', subject: S, item: 'pb1', data: { rating: 4, score: 0.8 } }, T0 + 1),
+    ev({ type: 'card.imported', subject: S, item: 'ch01-f001', data: { box: 2, due: '2026-11-03', from: 'ch01#0' } }, T0 + 2),
+    ev({ type: 'stats.imported', data: { xp: 50, xpDay: {}, streak: 3, lastDay: '2026-10-31', bySubject: { demo: 30 } } }, T0 + 3),
+    ev({ type: 'subject.reset', subject: S, data: {} }, T0 + 4),
+    ev({ type: 'answer.given', subject: S, item: 'e2', data: { ok: false } }, T0 + 10),
+    ev({ type: 'log.restored', data: { upTo: at(T0 + 5) } }, T0 + 20),
+  ];
+  const f = feedEvents(evs);
+  assert.deepEqual(
+    f.map(e => e.type),
+    ['answer.given', 'card.reviewed', 'card.imported', 'streak.imported', 'xp.earned', 'progress.reset'],
+    'the answer inside the restore window and the restore itself are left out',
+  );
+  assert.deepEqual(f[0], {
+    id: evs[0]?.id,
+    type: 'answer.given',
+    hlc: at(T0),
+    device: 'dev1',
+    at: T0,
+    day: '2026-11-01',
+    subject: S,
+    item: 'e1',
+    ok: true,
+    conf: 'sure',
+  });
+  assert.equal(f[1]?.['kind'], 'drill');
+  assert.deepEqual([f[2]?.['kind'], f[2]?.['state'], f[2]?.['from']], ['card', { box: 2, due: '2026-11-03' }, 'ch01#0']);
+  assert.deepEqual([f[3]?.['days'], f[3]?.['through'], f[4]?.['amount']], [3, '2026-10-31', 20], 'the XP no subject held');
 });

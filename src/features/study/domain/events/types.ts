@@ -45,7 +45,7 @@ export type Attempt = G.Attempt;
 export interface EventEnvelope {
   readonly v: 1;
   readonly id: string;
-  readonly at: string;
+  readonly hlc: string;
   readonly day: string;
   readonly device: string;
   readonly account: string;
@@ -72,7 +72,7 @@ interface TypeInfo {
 }
 
 export const EVENT_INFO: Readonly<Record<EventType, TypeInfo>> = Object.freeze({
-  'activity.attempted': { scope: 'item', retention: 'history' },
+  'activity.attempted': { scope: 'item', retention: 'latest' },
   'activity.saved': { scope: 'item', retention: 'latest' },
   'answer.given': { scope: 'item', retention: 'history' },
   'answers.imported': { scope: 'item', retention: 'history' },
@@ -104,15 +104,21 @@ export const EVENT_TYPES: readonly EventType[] = Object.freeze(Object.keys(EVENT
 
 export const isEventType = (x: unknown): x is EventType => typeof x === 'string' && Object.prototype.hasOwnProperty.call(EVENT_INFO, x);
 
-/** The key a "latest" event supersedes the older ones of: its type, subject and item (a setting: its key). */
+/** The key a "latest" event supersedes the older ones of: its type, subject and item (a setting: its key; an attempt: its
+ * exercise and the attempt's own id, so every attempt is kept in its last version). */
 export function keyOf(e: LearningEvent): string {
-  const what = e.type === 'setting.changed' ? 'k:' + e.data.key : 'i:' + (e.item ?? '');
+  const what =
+    e.type === 'setting.changed'
+      ? 'k:' + e.data.key
+      : e.type === 'activity.attempted'
+        ? 'a:' + (e.item ?? '') + '|' + (e.data.attempt.id ?? e.id)
+        : 'i:' + (e.item ?? '');
   return `${e.type}|${e.subject ?? ''}|${what}`;
 }
 
 /** The order of the log: by stamp, then by id (two events never share both). */
 export function compareEvents(a: EventEnvelope, b: EventEnvelope): -1 | 0 | 1 {
-  if (a.at !== b.at) return a.at < b.at ? -1 : 1;
+  if (a.hlc !== b.hlc) return a.hlc < b.hlc ? -1 : 1;
   if (a.id !== b.id) return a.id < b.id ? -1 : 1;
   return 0;
 }

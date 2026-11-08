@@ -39,14 +39,14 @@ export function xapiInput(subject: string, events: readonly LearningEvent[]): Xa
       const had = attempts.get(key);
       if (!had || had.t <= a.t) attempts.set(key, { ...a, exercise: e.item });
     } else if (e.type === 'answer.given' && e.item !== undefined) {
-      answers.push({ id: e.id, exercise: e.item, ok: e.data.ok, t: wallOf(e.at), ...(e.data.conf ? { conf: e.data.conf } : {}) });
+      answers.push({ id: e.id, exercise: e.item, ok: e.data.ok, t: wallOf(e.hlc), ...(e.data.conf ? { conf: e.data.conf } : {}) });
     } else if (e.type === 'answers.imported' && e.item !== undefined) {
       const d = e.data;
       answers.push({
         id: e.id,
         exercise: e.item,
         ok: d.last,
-        t: d.t ?? wallOf(e.at),
+        t: d.t ?? wallOf(e.hlc),
         n: d.n,
         okCount: d.ok,
         ...(d.conf ? { conf: d.conf } : {}),

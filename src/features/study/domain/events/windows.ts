@@ -32,9 +32,9 @@ export function counts(at: string, x: Exclusions): boolean {
 
 /** Whether an event counts for its subject's progress (not in a restore window, not before the subject's reset). */
 export function countsForSubject(e: LearningEvent, x: Exclusions): boolean {
-  if (!counts(e.at, x)) return false;
+  if (!counts(e.hlc, x)) return false;
   const r = e.subject === undefined ? undefined : x.resets[e.subject];
-  return r === undefined || e.at >= r;
+  return r === undefined || e.hlc >= r;
 }
 
 /** The windows and resets in force, from every restore and reset of the log (in any order). */
@@ -49,15 +49,15 @@ export function exclusionsOf(events: Iterable<LearningEvent>): Exclusions {
   restores.sort((a, b) => compareEvents(b, a)); // the latest first: it decides whether the earlier ones still count
   const windows: Window[] = [];
   for (const r of restores) {
-    if (windows.some(w => inside(r.at, w))) continue;
-    if (r.data.upTo < r.at) windows.push({ from: r.data.upTo, to: r.at });
+    if (windows.some(w => inside(r.hlc, w))) continue;
+    if (r.data.upTo < r.hlc) windows.push({ from: r.data.upTo, to: r.hlc });
   }
   const x: Exclusions = { windows, resets: {} };
   const out: Record<string, string> = {};
   for (const r of resets) {
-    if (r.subject === undefined || !counts(r.at, x)) continue;
+    if (r.subject === undefined || !counts(r.hlc, x)) continue;
     const had = out[r.subject];
-    if (had === undefined || r.at > had) out[r.subject] = r.at;
+    if (had === undefined || r.hlc > had) out[r.subject] = r.hlc;
   }
   return { windows, resets: out };
 }

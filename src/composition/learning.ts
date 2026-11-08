@@ -6,21 +6,32 @@
  *   NoemaCore.learning.open(account) → Promise<{ account, events, migrated, unknown, fromSnapshot }>   (before any screen)
  *   NoemaCore.learning.account() → the account the log is open for, or null
  *   NoemaCore.learning.record({ type, subject?, item?, data, origin?, id?, day? }) → the event | null (reported when refused)
+ *   NoemaCore.learning.recordOnce([draft with its id]) → Promise<the events recorded> (those never seen) · idFor(prefix, parts)
  *   NoemaCore.learning.cardRating(grade 0|1|2) · playbookRating(grade 0|1|2) → the FSRS rating (1–4) of the old buttons
  *   NoemaCore.learning.progress(subject) → the subject's progress (xp, read, res, fc, pb, boss, last, att, act, flags, …:
  *                                         the same object while events fold in; read only) · hasProgress(subject)
+ *   NoemaCore.learning.progressOf(account, subject) → the same, or null (no progress, or the log is open for another account)
  *   NoemaCore.learning.stats() → { xp, xpDay, streak, lastDay, bySubject } · streakNow() · todayXP()
  *   NoemaCore.learning.settings(subject?) → the settings in force · settingsWritten(value) → changes recorded
  *   NoemaCore.learning.setSubjectSetting(subject, key, value) · onSettings(fn) → unsubscribe · levels()
  *   NoemaCore.learning.onChange(fn(events, why)) → unsubscribe        (why: local | tab | append | refold)
- *   NoemaCore.learning.events() · exportLog() · xapi(subject) · archive() → Promise
- *   NoemaCore.learning.append(events) → Promise<added> · restore(events, { mode, madeAt }) → Promise<{ added }>
+ *   NoemaCore.learning.events() · eventsOf(account) · exportLog() · xapi(subject) · archive() → Promise
+ *   NoemaCore.learning.append(events) → Promise<added> · restore(events, { mode, madeAt, account? }) → Promise<{ added }>
  *   NoemaCore.learning.backupStamp(events, madeAt) · flush() → Promise<boolean> · pending() · migrate() · compact() · clear(account)
  */
 import { browserEventStore } from '../adapters/browser/event-store.ts';
 import { memoryEventStore } from '../adapters/memory/event-store.ts';
 import { LearningLog } from '../features/study/application/learning-log.ts';
-import { CARD_RATING_OF_GRADE, PLAYBOOK_RATING_OF_GRADE, type EventDraft } from '../features/study/domain/events/index.ts';
+import {
+  CARD_RATING_OF_GRADE,
+  contentId,
+  feedEvents,
+  PLAYBOOK_RATING_OF_GRADE,
+  type EventDraft,
+  type FeedEvent,
+} from '../features/study/domain/events/index.ts';
+import { ok, type AsyncResult } from '../kernel/result.ts';
+import type { Unsubscribe } from '../ports/common.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { Result } from '../kernel/result.ts';
 import type { KeyValueStore } from '../ports/storage.ts';
@@ -97,6 +108,48 @@ export const memoryLearning: Registration = c => {
   c.register(LEARNING, logOf);
 };
 
+/**
+ * The log as the study read models read it (their EventFeed, src/composition/study.ts STUDY_EVENTS): every event that
+ * counts, flat (domain/events/feed.ts), and the new ones as they are recorded, come from another tab or are appended.
+ * When what counts changed backwards (a restore, an event older than the latest from another device: the log folds
+ * again) the feed calls onRebuild: the read models build again from all().
+ */
+export interface LearningEventFeed {
+  all(): AsyncResult<readonly FeedEvent[]>;
+  subscribe(listener: (events: readonly FeedEvent[]) => void): Unsubscribe;
+  onRebuild(listener: () => void): Unsubscribe;
+}
+export function learningEventFeed(r: Resolver): LearningEventFeed {
+  const log = r.get(LEARNING),
+    errors = r.get(ERRORS);
+  const safely = (f: () => void, where: string): void => {
+    try {
+      f();
+    } catch (e) {
+      errors.report(e, { where, severity: 'error' });
+    }
+  };
+  return {
+    async all() {
+      const x = await log.events();
+      return x.ok ? ok(feedEvents(x.value)) : x;
+    },
+    subscribe: f =>
+      log.onChange((evs, why) => {
+        if (why === 'refold' || evs.some(e => e.type === 'log.restored')) return;
+        const list = feedEvents(evs);
+        if (list.length)
+          safely(() => {
+            f(list);
+          }, 'learning.feed.listener');
+      }),
+    onRebuild: f =>
+      log.onChange((evs, why) => {
+        if (why === 'refold' || evs.some(e => e.type === 'log.restored')) safely(f, 'learning.feed.rebuild');
+      }),
+  };
+}
+
 /** NoemaCore.learning: the log for the old screens. */
 export const learningBridge: BridgeExtension = {
   name: 'learning',
@@ -124,10 +177,14 @@ export const learningBridge: BridgeExtension = {
         errors.report(x.error, { where: 'learning.record.' + String((draft as { type?: unknown }).type), severity: 'error' });
         return null;
       },
+      recordOnce: (drafts: readonly EventDraft[]) => plain(L().recordOnce(drafts), 'learning.recordOnce', []),
+      idFor: (prefix: string, parts: readonly string[]) => contentId(prefix, parts),
       cardRating: (grade: number) => CARD_RATING_OF_GRADE[grade === 2 ? 2 : grade === 0 ? 0 : 1],
       playbookRating: (grade: number) => PLAYBOOK_RATING_OF_GRADE[grade === 2 ? 2 : grade === 0 ? 0 : 1],
       progress: (subject: string) => L().progress(subject),
       hasProgress: (subject: string) => L().hasProgress(subject),
+      progressOf: (account: string, subject: string) =>
+        L().account === account && L().hasProgress(subject) ? L().progress(subject) : null,
       stats: () => L().stats(),
       streakNow: () => L().streakNow(),
       todayXP: () => L().todayXP(),
@@ -146,8 +203,10 @@ export const learningBridge: BridgeExtension = {
       xapi: (subject: string) => thrown(L().xapi(subject)),
       archive: () => plain(L().archive(), 'learning.archive', {}),
       append: (events: readonly unknown[]) => thrown(L().append(events)),
-      restore: (events: readonly unknown[], o: { mode: 'replace' | 'merge'; madeAt: number }) => thrown(L().restore(events, o)),
-      backupStamp: (events: readonly { at?: unknown }[], madeAt: number) => L().backupStamp(events, madeAt),
+      restore: (events: readonly unknown[], o: { mode: 'replace' | 'merge'; madeAt: number; account?: string }) =>
+        thrown(L().restore(events, o)),
+      eventsOf: (account: string) => plain(L().eventsOf(account), 'learning.events', []),
+      backupStamp: (events: readonly { hlc?: unknown }[], madeAt: number) => L().backupStamp(events, madeAt),
       async flush() {
         return (await L().flush()).ok;
       },

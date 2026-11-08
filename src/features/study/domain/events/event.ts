@@ -46,7 +46,7 @@ export interface EventDraft<T extends EventType = EventType> {
 /** What the application adds to a draft. */
 export interface Stamp {
   readonly id: string;
-  readonly at: string;
+  readonly hlc: string;
   readonly day: string;
   readonly device: string;
   readonly account: string;
@@ -58,7 +58,7 @@ export function makeEvent<T extends EventType>(draft: EventDraft<T>, stamp: Stam
     v: 1,
     id: draft.id ?? stamp.id,
     type: draft.type,
-    at: stamp.at,
+    hlc: stamp.hlc,
     day: draft.day ?? stamp.day,
     device: stamp.device,
     account: stamp.account,

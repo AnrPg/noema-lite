@@ -88,9 +88,9 @@
       }
     },
     "event": {
-      "description": "One event of the learning log: v 1, a unique id, its type, the HLC stamp at, the learner's local day, the device and account, the subject and item it is about, and its data (one shape per type).",
+      "description": "One event of the learning log: v 1, a unique id, its type, its HLC stamp hlc (the order of the log), the learner's local day, the device and account, the subject and item it is about, and its data (one shape per type).",
       "type": "object",
-      "required": ["v", "id", "type", "at", "day", "device", "account", "data"],
+      "required": ["v", "id", "type", "hlc", "day", "device", "account", "data"],
       "additionalProperties": false,
       "properties": {
         "v": {
@@ -129,7 +129,7 @@
             "xp.earned"
           ]
         },
-        "at": {
+        "hlc": {
           "$ref": "#/$defs/hlc"
         },
         "day": {
@@ -684,7 +684,7 @@
       ]
     },
     "data_activity_attempted": {
-      "description": "An attempt at an interactive exercise (item: the exercise id): its seed, hints, result and its own events (the xAPI export reads them). The latest attempt is the one the exercise shows.",
+      "description": "An attempt at an interactive exercise (item: the exercise id): its seed, hints, result and its own events (the xAPI export reads them). The same attempt saved again supersedes its earlier versions; the latest attempt is the one the exercise shows.",
       "type": "object",
       "required": ["attempt"],
       "additionalProperties": false,
@@ -757,7 +757,7 @@
       "properties": {}
     },
     "data_card_imported": {
-      "description": "A flashcard's schedule from before the log (the old Leitner box 0-5 and its due day).",
+      "description": "A flashcard's schedule from before the log (the old Leitner box 0-5 and its due day). With from: the progress kept under an older key of the same card (its position, chNN#k, before cards had ids) moves to this one, and the old key is gone.",
       "type": "object",
       "required": ["box"],
       "additionalProperties": false,
@@ -769,6 +769,9 @@
         },
         "due": {
           "$ref": "#/$defs/day"
+        },
+        "from": {
+          "$ref": "#/$defs/item"
         }
       }
     },

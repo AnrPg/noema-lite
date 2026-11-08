@@ -206,10 +206,10 @@ export class Projection {
 
   /** Apply one more event in place → false when it cannot be (stamped before the latest one, or a restore): fold again. */
   apply(e: LearningEvent): boolean {
-    if (this.#count && compareEvents(e, { at: this.#lastAt, id: this.#lastId } as LearningEvent) <= 0) return false;
+    if (this.#count && compareEvents(e, { hlc: this.#lastAt, id: this.#lastId } as LearningEvent) <= 0) return false;
     if (e.type === 'log.restored') return false;
     if (e.type === 'subject.reset' && e.subject !== undefined) {
-      this.#x = { windows: this.#x.windows, resets: { ...this.#x.resets, [e.subject]: e.at } };
+      this.#x = { windows: this.#x.windows, resets: { ...this.#x.resets, [e.subject]: e.hlc } };
       // the subject starts again (the same object: screens hold it); the XP across subjects stays
       Object.assign(this.subjectProgress(e.subject), emptyProgress());
       this.#answers.delete(e.subject);
@@ -272,9 +272,9 @@ export class Projection {
 
   #apply(e: LearningEvent): void {
     this.#count++;
-    this.#lastAt = e.at;
+    this.#lastAt = e.hlc;
     this.#lastId = e.id;
-    if (!counts(e.at, this.#x)) return;
+    if (!counts(e.hlc, this.#x)) return;
     this.#account(e);
     if (e.subject !== undefined && countsForSubject(e, this.#x)) this.#subject(e.subject, e);
   }
@@ -301,7 +301,7 @@ export class Projection {
         this.#setting(e);
         return;
       case 'level.reached':
-        this.#levels[e.data.roadmap] = { level: e.data.level, at: wallOf(e.at) };
+        this.#levels[e.data.roadmap] = { level: e.data.level, at: wallOf(e.hlc) };
         return;
       default:
         return;
@@ -367,9 +367,9 @@ export class Projection {
       this.#settings.set(scope, cells);
     }
     const had = cells.get(e.data.key);
-    if (had && (had.at > e.at || (had.at === e.at && had.id > e.id))) return; // the later one wins (LWW by HLC)
+    if (had && (had.at > e.hlc || (had.at === e.hlc && had.id > e.id))) return; // the later one wins (LWW by HLC)
     const removed = e.data.removed === true;
-    cells.set(e.data.key, { value: removed ? undefined : e.data.value, removed, at: e.at, id: e.id });
+    cells.set(e.data.key, { value: removed ? undefined : e.data.value, removed, at: e.hlc, id: e.id });
     const values = this.settings(scope);
     if (removed) Reflect.deleteProperty(values, e.data.key);
     else values[e.data.key] = e.data.value;
@@ -383,7 +383,7 @@ export class Projection {
         const a = this.#answerParts(subject, item);
         a.n++;
         if (e.data.ok) a.ok++;
-        a.lastAt = wallOf(e.at);
+        a.lastAt = wallOf(e.hlc);
         a.last = e.data.ok;
         a.conf = e.data.conf;
         this.#answer(p, item, a);
@@ -391,7 +391,7 @@ export class Projection {
       }
       case 'answers.imported': {
         const a = this.#answerParts(subject, item);
-        const b: AnswerRecord = { n: e.data.n, ok: e.data.ok, last: e.data.last, t: e.data.t ?? wallOf(e.at) };
+        const b: AnswerRecord = { n: e.data.n, ok: e.data.ok, last: e.data.last, t: e.data.t ?? wallOf(e.hlc) };
         if (e.data.conf) b.conf = e.data.conf;
         if (!a.base || b.n > a.base.n || (b.n === a.base.n && b.t > a.base.t)) a.base = b;
         this.#answer(p, item, a);
@@ -402,6 +402,7 @@ export class Projection {
         return;
       case 'card.imported':
         p.fc[item] = laterReview(p.fc[item], e.data.due ? { box: e.data.box, due: e.data.due } : { box: e.data.box });
+        if (e.data.from !== undefined && e.data.from !== item) Reflect.deleteProperty(p.fc, e.data.from);
         return;
       case 'playbook.reviewed':
         p.pb[item] = leitner(p.pb[item], e.data.rating, e.day, e.data.rating === 4 && e.data.score >= 0.7);
@@ -425,10 +426,10 @@ export class Projection {
         p.boss[item] = true;
         return;
       case 'subject.finished':
-        p.nodeDone ??= wallOf(e.at);
+        p.nodeDone ??= wallOf(e.hlc);
         return;
       case 'subject.reset':
-        p.resetAt = wallOf(e.at);
+        p.resetAt = wallOf(e.hlc);
         return;
       case 'xp.earned':
         p.xp += e.data.amount;
@@ -440,10 +441,10 @@ export class Projection {
       }
       case 'activity.saved':
         if (e.data.state === null) Reflect.deleteProperty(p.act, item);
-        else p.act[item] = { v: e.data.v, data: e.data.state, t: wallOf(e.at) };
+        else p.act[item] = { v: e.data.v, data: e.data.state, t: wallOf(e.hlc) };
         return;
       case 'exercise.flagged':
-        p.flags[item] = { why: e.data.why, note: e.data.note ?? '', t: wallOf(e.at) };
+        p.flags[item] = { why: e.data.why, note: e.data.note ?? '', t: wallOf(e.hlc) };
         return;
       case 'exercise.unflagged':
         Reflect.deleteProperty(p.flags, item);
@@ -457,7 +458,7 @@ export class Projection {
         return;
       case 'external.studied': {
         const log = (p.ext[e.data.app] ??= []);
-        const x: ExternalRecord = { kind: e.data.kind, id: item, event: e.data.event, at: new Date(wallOf(e.at)).toISOString() };
+        const x: ExternalRecord = { kind: e.data.kind, id: item, event: e.data.event, at: new Date(wallOf(e.hlc)).toISOString() };
         if (e.data.rating !== undefined) x.rating = e.data.rating;
         if (e.data.date !== undefined) x.date = e.data.date;
         log.push(x);

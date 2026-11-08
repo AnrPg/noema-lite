@@ -6,3 +6,4 @@ export * from './projection.ts';
 export * from './migrate.ts';
 export * from './compaction.ts';
 export * from './xapi.ts';
+export * from './feed.ts';

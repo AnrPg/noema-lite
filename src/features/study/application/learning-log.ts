@@ -142,7 +142,7 @@ export class LearningLog {
     const snap = await this.#d.store.getSnapshot(account);
     const fromSnap = snap.ok && snap.value ? Projection.fromSnapshot(snap.value.value) : null;
     if (fromSnap && snap.ok && snap.value) {
-      const tail = await this.#read(account, snap.value.upTo.at);
+      const tail = await this.#read(account, snap.value.upTo.hlc);
       if (!tail.ok) return tail;
       const p = fromSnap;
       let whole = true;
@@ -163,10 +163,11 @@ export class LearningLog {
     this.#seeStamp(this.#projection.lastAt);
     this.#unwatch = this.#d.store.watch((acc, evs) => {
       if (acc !== this.#account) return;
-      const list: LearningEvent[] = [];
+      const list: LearningEvent[] = [],
+        mine = new Set(this.#queue.map(e => e.id));
       for (const x of evs) {
         const e = parseEvent(x);
-        if (e.ok) list.push(e.value);
+        if (e.ok && !mine.has(e.value.id)) list.push(e.value); // one recorded here too (an inbox row both tabs read): folded already
       }
       if (list.length) this.#ingest(list, 'tab');
     });
@@ -265,7 +266,7 @@ export class LearningLog {
     if (!at.ok) return at;
     const e = makeEvent(draft, {
       id: this.#d.newId(),
-      at: encodeHlc(at.value),
+      hlc: encodeHlc(at.value),
       day: this.#d.clock.today(),
       device: this.#device,
       account: acc,
@@ -279,13 +280,40 @@ export class LearningLog {
     return e;
   }
 
+  /**
+   * Events whose id the caller made from their content (an inbox row of another app, read again by another tab or after a
+   * failed delete): only those the log has never seen are recorded; the others are left out → what was recorded.
+   */
+  async recordOnce(drafts: readonly EventDraft[]): AsyncResult<LearningEvent[]> {
+    const acc = this.#account;
+    if (!acc) return err(closed());
+    const ids: string[] = [];
+    for (const d of drafts) {
+      if (d.id === undefined) return err(new NoemaError('events.invalid', `recordOnce: a ${d.type} without its own id`));
+      ids.push(d.id);
+    }
+    const known = await this.#d.store.known(acc, ids);
+    if (!known.ok) return known;
+    if (this.#account !== acc) return err(closed());
+    const seen = new Set([...known.value, ...this.#queue.map(e => e.id)]);
+    const out: LearningEvent[] = [];
+    for (const d of drafts) {
+      if (d.id === undefined || seen.has(d.id)) continue;
+      seen.add(d.id);
+      const r = this.record(d);
+      if (!r.ok) return r;
+      out.push(r.value);
+    }
+    return ok(out);
+  }
+
   /** Events from outside (another device, a backup, an import): checked, the new ones stored and folded. */
-  async append(events: readonly unknown[], origin?: 'restore'): AsyncResult<LearningEvent[]> {
+  async append(events: readonly unknown[]): AsyncResult<LearningEvent[]> {
     const acc = this.#account;
     if (!acc) return err(closed());
     const list: LearningEvent[] = [];
     for (const x of events) {
-      const e = parseEvent(origin ? { ...(x as object), origin } : x);
+      const e = parseEvent(x);
       if (!e.ok) return e;
       if (e.value.account !== acc) return err(new NoemaError('events.invalid', `an event of another account (${e.value.account})`));
       list.push(e.value);
@@ -322,8 +350,10 @@ export class LearningLog {
       if (this.#account !== acc) return;
       const sent = new Set(batch.map(e => e.id));
       this.#queue = this.#queue.filter(e => !sent.has(e.id));
+      // one was there already (the same inbox row recorded by another tab at the same time): it was folded twice here
+      if (r.value.length < batch.length) this.#refold();
       this.#sinceSnapshot += batch.length;
-      const lastAt = batch[batch.length - 1]?.at;
+      const lastAt = batch[batch.length - 1]?.hlc;
       if (lastAt) void this.#d.store.putMeta(acc, META.hlc, lastAt);
       await this.#snapshotMaybe();
     });
@@ -337,7 +367,7 @@ export class LearningLog {
   }
 
   #ingest(events: readonly LearningEvent[], why: 'tab' | 'append'): void {
-    for (const e of events) this.#seeStamp(e.at);
+    for (const e of events) this.#seeStamp(e.hlc);
     this.#fold(events);
     this.#emit(events, why);
     if (events.some(e => e.type === 'setting.changed' && e.subject === undefined) || events.some(e => e.type === 'log.restored'))
@@ -396,7 +426,7 @@ export class LearningLog {
     if (!acc || this.#sinceSnapshot < SNAPSHOT_EVERY || this.#queue.length || this.#refolding) return;
     const s = this.#projection.snapshot();
     if (!s.lastAt) return;
-    const r = await this.#d.store.putSnapshot(acc, { upTo: { at: s.lastAt, id: s.lastId }, value: s });
+    const r = await this.#d.store.putSnapshot(acc, { upTo: { hlc: s.lastAt, id: s.lastId }, value: s });
     if (r.ok) this.#sinceSnapshot = 0;
     else if (r.error.code !== 'storage.quota') this.#d.errors.report(r.error, { where: 'learning.snapshot', severity: 'warning' });
   }
@@ -457,9 +487,9 @@ export class LearningLog {
 
   /* ---------------- restore ---------------- */
   /** The stamp a backup holds up to: its latest event's, else the stamp of when it was made. */
-  backupStamp(events: readonly { at?: unknown }[], madeAt: number): string {
+  backupStamp(events: readonly { hlc?: unknown }[], madeAt: number): string {
     let max = '';
-    for (const e of events) if (typeof e.at === 'string' && e.at > max) max = e.at;
+    for (const e of events) if (typeof e.hlc === 'string' && e.hlc > max) max = e.hlc;
     return max || `${String(Math.max(0, Math.floor(madeAt))).padStart(15, '0')}-00000-${this.#device || 'device'}`;
   }
 
@@ -468,17 +498,35 @@ export class LearningLog {
    * event); "merge": nothing is undone. Either way the backup's events this log lacks are added — those of another
    * account get ids of their own for this one (the same backup restored twice adds them once).
    */
-  async restore(events: readonly unknown[], o: { mode: 'replace' | 'merge'; madeAt: number }): AsyncResult<{ added: number }> {
-    const acc = this.#account;
+  async restore(
+    events: readonly unknown[],
+    o: { mode: 'replace' | 'merge'; madeAt: number; account?: string },
+  ): AsyncResult<{ added: number }> {
+    const acc = o.account ?? this.#account;
     if (!acc) return err(closed());
-    const mine: unknown[] = [];
+    const mine: LearningEvent[] = [];
     for (const x of events) {
       const e = parseEvent(x);
       if (!e.ok) continue; // a backup's damaged entry: the rest is restored (the file itself is kept by the learner)
-      mine.push(e.value.account === acc ? e.value : { ...e.value, account: acc, id: contentId('rst', [acc, e.value.account, e.value.id]) });
+      const v = e.value;
+      const moved = v.account === acc ? v : { ...v, account: acc, id: contentId('rst', [acc, v.account, v.id]) };
+      mine.push(moved.origin === undefined || moved.origin === 'app' ? { ...moved, origin: 'restore' } : moved);
     }
-    const upTo = this.backupStamp(mine as { at?: unknown }[], o.madeAt);
-    const added = await this.append(mine, 'restore');
+    const upTo = this.backupStamp(mine, o.madeAt);
+    if (acc !== this.#account) {
+      // a profile that is not open here (a copy into another account): straight into its log
+      const r = await this.#d.store.append(acc, mine as StoredEvent[]);
+      if (!r.ok) return r;
+      if (o.mode === 'replace') {
+        const id = this.#d.newId(),
+          m = makeEvent({ type: 'log.restored', data: { upTo } }, { ...this.#legacyStamp(acc), id });
+        if (!m.ok) return m;
+        const w = await this.#d.store.append(acc, [m.value] as LearningEvent[] as StoredEvent[]);
+        if (!w.ok) return w;
+      }
+      return ok({ added: r.value.length });
+    }
+    const added = await this.append(mine);
     if (!added.ok) return added;
     if (o.mode === 'replace') {
       const r = this.record({ type: 'log.restored', data: { upTo } });
@@ -487,6 +535,12 @@ export class LearningLog {
       await this.#refolding;
     }
     return ok({ added: added.value.length });
+  }
+
+  /** The log of any account of this device (the open one's includes what is still pending). */
+  async eventsOf(account: string): AsyncResult<LearningEvent[]> {
+    if (account === this.#account) return this.events();
+    return this.#read(account);
   }
 
   /** Removes the account's log from this device (the profile is deleted here). */
@@ -522,7 +576,7 @@ export class LearningLog {
   #legacyStamp(account: string): LegacyStamp {
     const at = this.#hlc?.now();
     const stamp = at?.ok ? encodeHlc(at.value) : `${String(Math.floor(this.#d.clock.now())).padStart(15, '0')}-00000-${this.#device}`;
-    return { at: stamp, day: this.#d.clock.today(), device: this.#device, account };
+    return { hlc: stamp, day: this.#d.clock.today(), device: this.#device, account };
   }
 
   /** Converts what this device still keeps in the old places; run at every open and whenever old values arrive (no-op once done). */
@@ -635,7 +689,7 @@ export class LearningLog {
     const e = await q.estimate();
     if (!e.ok || e.value.usage === null || !e.value.quota) return;
     if (e.value.usage / e.value.quota >= LOW_SPACE && this.#d.notifier && this.#d.i18n)
-      this.#d.notifier.alert('⚠️ ' + this.#d.i18n.t('learning.storage.low', { pct: Math.round((100 * e.value.usage) / e.value.quota) }), {
+      this.#d.notifier.alert('⚠️ ' + this.#d.i18n.t('loader.storage.low', { pct: Math.round((100 * e.value.usage) / e.value.quota) }), {
         ms: 8000,
       });
   }

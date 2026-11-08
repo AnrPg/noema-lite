@@ -73,7 +73,7 @@ window.NoemaSearch = (() => {
 
   /** The filters as one test per record (scope and status: they need the learner's state or a Roadmap's stations). */
   function keeper(P) {
-    const a = acc(), states = {}, st = id => states[id] !== undefined ? states[id] : (states[id] = jget(`noema1:${a}:s:${id}:state`, null));
+    const a = acc(), states = {}, st = id => states[id] !== undefined ? states[id] : (states[id] = NoemaCore.learning.progressOf(a, id));   // the learning log's fold
     const tests = [];
     const hh = hereOf(P);
     if (hh && P.in) {

@@ -23,7 +23,7 @@ export function sampleEvent(id: string, wall: number, acc = 'anr', over: Partial
     v: 1,
     id,
     type: 'answer.given',
-    at: stamp(wall),
+    hlc: stamp(wall),
     day: '2026-11-08',
     device: 'dev1',
     account: acc,
@@ -89,7 +89,7 @@ export function eventStoreContract(name: string, make: EventStoreFactory): void 
     test('a snapshot survives later events and is dropped by an event at or before what it folded', async () => {
       const s = await make({});
       value(await s.append('anr', [sampleEvent('evt-0001', 10), sampleEvent('evt-0005', 50)]));
-      value(await s.putSnapshot('anr', { upTo: { at: stamp(50), id: 'evt-0005' }, value: { n: 2 } }));
+      value(await s.putSnapshot('anr', { upTo: { hlc: stamp(50), id: 'evt-0005' }, value: { n: 2 } }));
       value(await s.append('anr', [sampleEvent('evt-0006', 60)]));
       assert.deepEqual(value(await s.getSnapshot('anr'))?.value, { n: 2 }, 'a later event leaves it');
       value(await s.append('anr', [sampleEvent('evt-0005', 50)]));
@@ -104,7 +104,7 @@ export function eventStoreContract(name: string, make: EventStoreFactory): void 
       value(await s.putMeta('maria', 'migrated', { at: 2 }));
       value(await s.append('anr', [sampleEvent('evt-0001', 10)]));
       value(await s.append('maria', [sampleEvent('evt-0001', 10, 'maria')]));
-      value(await s.putSnapshot('anr', { upTo: { at: stamp(10), id: 'evt-0001' }, value: 1 }));
+      value(await s.putSnapshot('anr', { upTo: { hlc: stamp(10), id: 'evt-0001' }, value: 1 }));
       assert.deepEqual(value(await s.getMeta('anr', 'migrated')), { at: 1 });
       value(await s.clear('anr'));
       assert.equal(value(await s.getMeta('anr', 'migrated')), undefined);

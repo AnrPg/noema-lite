@@ -13,8 +13,9 @@ import { LearningLog, SNAPSHOT_EVERY, type LearningLogDeps } from '../features/s
 import { ok } from '../kernel/result.ts';
 import type { EventStore } from '../ports/event-store.ts';
 import { buildBridge } from './bridge.ts';
-import { DEVICE_KEY, deviceIdFrom, uuid } from './learning.ts';
+import { DEVICE_KEY, deviceIdFrom, learningEventFeed, uuid } from './learning.ts';
 import { createToolsContainer } from './tools.ts';
+import { LEARNING } from './tokens.ts';
 
 const T0 = Date.UTC(2026, 10, 8, 9);
 interface Rig {
@@ -31,7 +32,7 @@ function rig(o: { store?: EventStore; kv?: Rig['kv']; usage?: number; device?: s
   const kv = o.kv ?? storage.kv;
   const store = o.store ?? memoryEventStore();
   const notifier = recordingNotifier(() => clock.now());
-  const i18n = catalogI18n({ en: { 'learning.storage.low': 'Space is {pct}% used' } }, 'en');
+  const i18n = catalogI18n({ en: { 'loader.storage.low': 'Space is {pct}% used' } }, 'en');
   let n = 0;
   const deps: LearningLogDeps = {
     store,
@@ -165,7 +166,7 @@ test('another device: its events (older stamps) fold in, the whole log refolds, 
     v: 1,
     id: 'evt-remote-0001',
     type: 'card.reviewed',
-    at: `${String(T0 - 86400000).padStart(15, '0')}-00000-dev9`,
+    hlc: `${String(T0 - 86400000).padStart(15, '0')}-00000-dev9`,
     day: '2026-11-07',
     device: 'dev9',
     account: 'anr',
@@ -202,6 +203,16 @@ test("restore: a backup brought back undoes what came after it, by an event; ano
   value(await m.log.restore(backup.events, { mode: 'merge', madeAt: T0 }));
   assert.deepEqual(Object.keys(m.log.progress('demo').res), ['e1']);
   assert.equal(value(await m.store.read('maria')).length, 1, 'restored twice: once');
+
+  // into a profile that is not open here (the copy to a cloud account): straight into its log, read by eventsOf
+  value(await r.log.restore(backup.events, { mode: 'replace', madeAt: T0, account: 'cloud1' }));
+  const there = value(await r.log.eventsOf('cloud1'));
+  assert.deepEqual(there.map(e => e.type).sort(), ['answer.given', 'log.restored']);
+  assert.ok(there.every(e => e.account === 'cloud1'));
+  assert.equal(value(await r.log.eventsOf('anr')).length, value(await r.store.read('anr')).length);
+  const c = rig({ store: r.store });
+  value(await c.log.open('cloud1'));
+  assert.deepEqual(Object.keys(c.log.progress('demo').res), ['e1'], 'the copy folds when that account opens');
 });
 
 test('two tabs: an event recorded in one is folded in the other', async () => {
@@ -218,6 +229,39 @@ test('two tabs: an event recorded in one is folded in the other', async () => {
   value(await a.log.flush());
   assert.deepEqual(b.log.progress('demo').boss, { ch01: true });
   assert.deepEqual(seen, ['tab:1']);
+
+  // an inbox row read by both tabs at once (ids from its content): counted once, also in the tab that lost the race
+  const row = [
+    { type: 'answer.given' as const, subject: 'demo', item: 'e1', data: { ok: true }, origin: 'inbox' as const, id: 'inbox.row1-0000' },
+  ];
+  assert.equal(value(await a.log.recordOnce(row)).length, 1);
+  assert.equal(value(await a.log.recordOnce(row)).length, 0, 'the same row again: nothing');
+  const late = rig({ store: memoryEventStore() });
+  value(await late.log.open('anr'));
+  assert.equal(value(await late.log.recordOnce(row)).length, 1);
+  value(await late.log.append(value(await a.log.events()).filter(e => e.id === 'inbox.row1-0000')));
+  value(await late.log.flush());
+  assert.equal(late.log.progress('demo').res['e1']?.n, 1);
+  const bad = await a.log.recordOnce([{ type: 'day.active', data: {} }]);
+  assert.ok(!bad.ok && bad.error.code === 'events.invalid', 'a draft without its id');
+});
+
+test('recordOnce: an event stored by another tab between the check and the write is folded once', async () => {
+  const hub = memoryTabHub();
+  const docs = memoryStorage({ collections: EVENT_COLLECTIONS });
+  const mk = (): EventStore => documentEventStore({ docs: docs.docs, onFull: l => docs.onFull(l), channel: hub() });
+  const a = rig({ store: mk() }),
+    b = rig({ store: mk(), device: 'dev2' });
+  value(await a.log.open('anr'));
+  value(await b.log.open('anr'));
+  const d = { type: 'answer.given' as const, subject: 'demo', item: 'e7', data: { ok: true }, id: 'inbox.row7-0000' };
+  a.log.record(d);
+  b.log.record(d); // both recorded it before either was stored
+  value(await a.log.flush());
+  value(await b.log.flush());
+  assert.equal(value(await a.store.read('anr')).length, 1);
+  assert.equal(a.log.progress('demo').res['e7']?.n, 1);
+  assert.equal(b.log.progress('demo').res['e7']?.n, 1, 'the tab whose copy was a duplicate folds again');
 });
 
 test('a full storage: the events wait in memory (still read), flush says so; the space warning; the account is closed before open', async () => {
@@ -279,4 +323,25 @@ test('NoemaCore.learning: plain values for the old code', async () => {
   );
   assert.equal(await L.flush(), true);
   assert.equal((await L.events()).length, 1);
+});
+
+test("the read models' feed: all() and the new events, and a restore asks them to build again", async () => {
+  const c = createToolsContainer();
+  const log = c.get(LEARNING);
+  value(await log.open('anr'));
+  const feed = learningEventFeed(c);
+  const got: string[] = [];
+  let rebuilds = 0;
+  feed.subscribe(evs => got.push(...evs.map(e => e.type)));
+  feed.onRebuild(() => rebuilds++);
+  log.record({ type: 'answer.given', subject: 'demo', item: 'e1', data: { ok: true } });
+  log.record({ type: 'card.reviewed', subject: 'demo', item: 'c1', data: { rating: 3 } });
+  assert.deepEqual(got, ['answer.given', 'card.reviewed']);
+  assert.deepEqual(
+    value(await feed.all()).map(e => e.type),
+    ['answer.given', 'card.reviewed'],
+  );
+  const backup = value(await log.exportLog());
+  value(await log.restore(backup.events, { mode: 'replace', madeAt: Date.now() }));
+  assert.ok(rebuilds >= 1, 'a restore: build again');
 });
