@@ -44,6 +44,7 @@ const COMPONENT: Readonly<Record<string, readonly string[]>> = {
   packs: ['packs'],
   email: ['email'],
   report: ['report'],
+  ui: ['ui'],
   top: ['core'],
   home: ['core'],
   ch: ['core'],
