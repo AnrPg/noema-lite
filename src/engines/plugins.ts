@@ -115,8 +115,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('des@1'),
-    () => import('./des/des.js'),
-    () => import('noema-worker:./des/des.js#simEngine'),
+    () => import('./des/des.ts'),
+    () => import('noema-worker:./des/des.ts#simEngine'),
   ),
   def(
     manifest('philo@1', ['engine:logic@1']),
