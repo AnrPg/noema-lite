@@ -86,7 +86,7 @@ const has = f => fs.existsSync(path.join(srcDir, f));
 // every engine of sim-spec@1, the catalogue) and the content checks (the spec check of sim-spec@1) — the skill's
 // activity_host/noema-core.js, or the repository's build/harness.js (npm run build)
 const corePath = [path.join(srcDir, 'noema-core.js'), path.join(srcDir, '..', '..', 'build', 'harness.js')].find(f => fs.existsSync(f));
-const SIMOK = !!corePath;   // sim-spec@1 is a typed runtime of noema-core.js (NoemaCore.runtimes)
+const SIMOK = !!corePath;   // html-app@1 and sim-spec@1 are typed runtimes of noema-core.js (NoemaCore.runtimes)
 const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
@@ -116,7 +116,7 @@ ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
 var RT = {}, EN = { 'formula@1': { id: 'formula@1', check: function () { return []; }, create: function () { return { run: function () { return {}; } }; } } };
 var ACT = { ITEMS: {}, PARTS: ${inl(JSON.stringify(PARTSLIB))}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, loadedRuntime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || (window.NoemaCore && NoemaCore.engines.engine(id)) || null; }, engines: function () { return Object.keys(EN).concat(window.NoemaCore ? NoemaCore.engines.ids() : []); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); },
-  simView: function (box, ctx, host) { return RT['sim-spec@1'].view(box, ctx, host); }, engineRunner: function (E, s, o, f) { return RT['sim-spec@1'].engineRunner(E, s, o, f); }, partsRunner: function (s, o, f) { return RT['sim-spec@1'].partsRunner(s, o, f); } };
+  simView: function (box, ctx, host) { return RT['sim-spec@1'].view(box, ctx, host); } };
 function nf(n) { return String(n); } function fmtBytes(n) { return n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B'; } function tip(t) { return document.createTextNode(''); }
 var WORDS = ${JSON.stringify(HOSTWORDS)};
 function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
@@ -128,7 +128,7 @@ var HOSTPORT = { t: tE, message: function (type, payload, extra) { return ACTP.o
   flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); }, asset: function (p) { return p; },
   compute: { engine: function (id) { return ACT.engine(id); }, engines: function () { return ACT.engines(); }, library: function () { return window.NoemaCore ? NoemaCore.engines.catalog.LIBRARY.slice() : []; },
     compile: function (src) { return NoemaCore.engines.expr.compile(src); }, content: function () { return window.NoemaCore ? NoemaCore.content : null; }, parts: function () { return ACT.PARTS; } } };
-</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script>${SIMOK ? `${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
 /* every engine of the library loaded first (once: the app loads only those an activity needs), and the typed runtimes (src/runtimes) made for this host */
@@ -205,7 +205,7 @@ function mount(act, init, modules) {
     const PY = a.runtime === 'py-module@1', WA = a.runtime === 'wasm-module@1', SIM = a.runtime === 'sim-spec@1' || PY || WA;
     const H5 = a.runtime === 'h5p@1';
     if (PY && !PYOK) { skipped++; console.log(`  (skipped: ${PYSITE ? 'the Python runner (activity_host/37_activity_py*.js) is missing from the toolkit' : 'the Python files are not here — set NOEMA_PYODIDE_SITE to a folder with vendor/pyodide/ (python3 tools/fetch_pyodide.py --site DIR)'})`); continue; }
-    if (!(a.runtime === 'html-app@1' || (SIM && !WA && SIMOK) || (WA && WASMOK) || (H5 && H5POK))) { say(false, `runtime ${a.runtime}: this toolkit runs html-app@1${SIMOK ? ', sim-spec@1, py-module@1' : ''}${WASMOK ? ', wasm-module@1' : ''}${H5POK ? ', h5p@1' : ''} only for now`); continue; }
+    if (!((a.runtime === 'html-app@1' && SIMOK) || (SIM && !WA && SIMOK) || (WA && WASMOK) || (H5 && H5POK))) { say(false, `runtime ${a.runtime}: this toolkit runs ${SIMOK ? 'html-app@1, sim-spec@1, py-module@1' : 'no runtime without noema-core.js'}${WASMOK ? ', wasm-module@1' : ''}${H5POK ? ', h5p@1' : ''} only for now`); continue; }
     if (H5 && a._missing) { say(false, `${a.entry || 'item.h5p'}: not found`); continue; }
     if (SIM && !a.spec) { say(false, `${PY || WA ? 'activities/' + a.id + '/spec.json' : a.entry || 'spec.json'}: not found or not JSON`); continue; }
     if (PY && !a.python) { say(false, `${a.entry || 'activities/' + a.id + '/main.py'}: not found`); continue; }

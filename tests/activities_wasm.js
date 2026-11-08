@@ -159,7 +159,7 @@ var HOSTPORT = { t: tE, message: function (type, payload, extra) { return ACTP.o
   flags: function () { return {}; }, warn: function () { console.warn.apply(console, arguments); }, now: function () { return Date.now(); }, asset: function (p) { return p; },
   compute: { engine: function (id) { return ACT.engine(id); }, engines: function () { return ACT.engines(); }, library: function () { return NoemaCore.engines.catalog.LIBRARY.slice(); },
     compile: function (src) { return NoemaCore.engines.expr.compile(src); }, content: function () { return NoemaCore.content; }, parts: function () { return null; } } };
-</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script')}</script><script>window.SIMREADY = NoemaCore.runtimes.load('sim-spec@1').then(function (m) { var d = m.create(HOSTPORT); RT[d.id] = d; });</script><script>${rd('44_activity_wasm.js')}</script><script>
+</script><script>${fs.readFileSync(path.join(ROOT, 'build', 'harness.js'), 'utf8').replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\x21--')}</script><script>window.SIMREADY = NoemaCore.runtimes.load('sim-spec@1').then(function (m) { var d = m.create(HOSTPORT); RT[d.id] = d; });</script><script>${rd('44_activity_wasm.js')}</script><script>
 window.LOG = []; window.H = null;
 window.run = async function (id, task) {
   await window.SIMREADY;
@@ -188,7 +188,7 @@ window.run = async function (id, task) {
     const errs = []; p.on('pageerror', e => errs.push(e.message));
     pageHits.length = 0; beaconHits.length = 0;
     await p.goto(PAGE);
-    ok(await p.evaluate(() => !!(window.NoemaWasm && EN['wasm@1'] && RT['wasm-module@1'] && RT['sim-spec@1'])), 'the page has the sim runtime, wasm@1 and wasm-module@1');
+    ok(await p.evaluate(async () => { await window.SIMREADY; return !!(window.NoemaWasm && EN['wasm@1'] && RT['wasm-module@1'] && RT['sim-spec@1']); }), 'the page has the sim runtime, wasm@1 and wasm-module@1');
     const started = () => until(() => p.evaluate(() => LOG.some(m => m.type === 'ready' || m.type === 'fail')));
     const values = () => until(() => p.evaluate(() => { const v = window.H && H.values && H.values(); return !!(v && typeof v.E === 'number' && v.E === v.E); }));
 

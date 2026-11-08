@@ -1,5 +1,5 @@
 /* Interactive activities without a browser (docs/INTERACTIVE.md, docs/adr/001):
-   1. the loop guard (engine/src/33_activity_guard.js): every loop gets the guard, nothing else changes, the program still runs
+   1. the loop guard (src/runtimes/loop-guard.ts): every loop gets the guard, nothing else changes, the program still runs
       the same, an endless loop throws; strings, templates, regexes and comments are left alone;
    2. the protocol checks (ACTP in engine/src/32_activities.js): sizes, types, payloads, a newer version;
    3. the rules (the content checks, src/features/content: checkActivities) give the golden errors of the former Python twin
@@ -13,8 +13,10 @@ const ROOT = path.resolve(__dirname, '..');
 let n = 0, fails = 0; const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 
 // 1. the loop guard
-require(path.join(ROOT, 'engine', 'src', '33_activity_guard.js'));
-const LG = globalThis.NoemaLoopGuard;
+const RTN = require(path.join(ROOT, 'build', 'runtimes-node.cjs'));   // the typed runtimes (npm run build): the loop guard, html-app@1's engine bridge
+const LG = RTN.loopGuard;
+/** the sources of a typed runtime (src/runtimes/<dir>), joined */
+const RTSRC = dir => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', dir)).filter(f => f.endsWith('.ts')).sort().map(f => fs.readFileSync(path.join(ROOT, 'src', 'runtimes', dir, f), 'utf8')).join('\n');
 const T = src => LG.transform(src, 'G').code;
 ok(T('while (a) b();') === 'while (G()&&(a)) b();', 'while (c) → while (G()&&(c))');
 ok(T('do { x++ } while (x < 3);') === 'do { x++ } while (G()&&(x < 3));', 'do … while (c) gets the guard too');
@@ -41,7 +43,7 @@ try { runIn('while (true) {}', 200); } catch (e) { thrown = e; }
 ok(thrown && /ran too long/.test(thrown.message) && Date.now() - t0 < 2000, `an endless loop throws after the budget (${Date.now() - t0} ms)`);
 try { const x = runIn('var it = { [Symbol.iterator]() { return { next: () => ({ done: false, value: 1 }) }; } }; for (var v of it) {}', 200); ctxT = x.ctx; } catch (e) { thrown = e; }
 ok(/ran too long/.test(thrown.message), 'an endless iterator (for … of) is stopped too');
-ok(fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8').includes('NoemaLoopGuard.transform(s.textContent, G)'), 'html-app@1 guards every script of the bundle before it hashes it');
+ok(/s\.textContent = transform\(s\.textContent, G\)\.code;\s+hashes\.push\(await sha256\(s\.textContent\)\)/.test(RTSRC('html-app')), 'html-app@1 guards every script of the bundle before it hashes it');
 
 // 2. the protocol checks
 const src32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
@@ -638,7 +640,7 @@ const SIMSRC = () => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec
 }
 
 { // html-app@1 + the engine library (docs/INTERACTIVE.md §8.1): the "engines" a mini-app lists — the golden words, pack.requires,
-  // the protocol messages, the host bridge (34_activity_html.js) and the reference mini-game cheapest-route (graph@1)
+  // the protocol messages, the host bridge (src/runtimes/html-app/bridge.ts) and the reference mini-game cheapest-route (graph@1)
   const CR = path.join(ROOT, 'tools', 'activities_examples', 'cheapest-route'), crHtml = fs.readFileSync(path.join(CR, 'app.html'), 'utf8');
   const crItem = { ...JSON.parse(fs.readFileSync(path.join(CR, 'activity.json'), 'utf8')), html: crHtml, sha256: crypto.createHash('sha256').update(crHtml).digest('hex'), bytes: Buffer.byteLength(crHtml),
     strings: Object.fromEntries(['en', 'el', 'ru', 'de', 'fr'].map(l => [l, JSON.parse(fs.readFileSync(path.join(CR, `strings.${l}.json`), 'utf8'))])) };
@@ -684,21 +686,18 @@ const SIMSRC = () => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec
   ok(!ACTP.check(M('engine:run', { engine: 'graph@1', spec: 'x' })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, seed: -1 })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: {}, inputs: [1] })).ok
     && !ACTP.check(M('engine:check', { engine: 7, spec: {} })).ok && !ACTP.check(M('engine:run', { engine: 'graph@1', spec: { big: 'x'.repeat(70 * 1024) } })).ok, 'a spec that is not an object, a bad seed, inputs that are a list, an engine that is not a text and a request over 64 KB are refused (strikes)');
   // the host bridge: the frame's policy is unchanged (no Worker in the frame); only library engines, only declared ones, only in a Worker, with limits
-  const h34 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8'), s35 = SIMSRC();
-  ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /NoemaCore\?\.engines\?\.catalog\.LIBRARY/.test(h34) && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
+  const h34 = RTSRC('html-app'), s35 = SIMSRC(), s32 = fs.readFileSync(path.join(ROOT, 'engine', 'src', '32_activities.js'), 'utf8');
+  ok(/"worker-src 'none'"/.test(h34) && /"connect-src 'none'"/.test(h34) && /new Set\(cmp\.library\(\)\)/.test(h34) && /library: \(\) => \[\.\.\.\(LIBR\(\)\?\.catalog\?\.LIBRARY \|\| \[\]\)\]/.test(s32)
+    && /declaredOf\(act\)\.filter\(id => lib\.has\(id\)/.test(h34) && /!s\.runner\.inWorker\(\)/.test(h34)
     && /outBytes: 512 \* 1024, perSec: 30, timeouts: 3/.test(h34) && /bridge\.close\(\)/.test(h34) && /'superseded'/.test(h34),
     'html-app@1: the frame still has no Worker and no network; the host runs only declared library engines, only in their Worker, ≤ 512 KB out, ≤ 30 requests/s, 3 timeouts and the engine is off, every Worker ended on unmount');
-  ok(/engineRunner: \(E, spec, opts, onFail\) =>\s+engineRunner\(E, spec, opts, onFail/.test(s35) && /function respec\(s2: unknown, o2\?: EngineOpts\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
+  ok(/import \{ engineRunner, type EngineRunner, type MakeRunner \} from '\.\.\/sim-spec\/runner\.ts'/.test(h34) && /function respec\(s2: unknown, o2\?: EngineOpts\)/.test(s35) && /self\.__i=null;self\.__i=self\.noemaEngine\.create/.test(s35), 'the mini-apps reuse the sim runtime\'s Worker runner (respec: another model in the same Worker; a failed model never leaves the old one behind)');
   // the bridge itself, in Node with a fake Worker runner: codes, the queue, the limits
-  const vmctx = { console, Promise, Date, JSON, Object, Array, Set, String, Number, Math, Error, isFinite, setTimeout, clearTimeout };
-  vmctx.window = vmctx; vmctx.Worker = function () { };
   let runs = [], closed = 0, inW = true;
   const graphE = { id: 'graph@1', workerSource: 'x', check: sp => (sp.model.bad ? ['model.bad: no'] : []), create() { } };
-  vmctx.NoemaCore = { engines: { catalog: { LIBRARY: ['graph@1', 'timeline@1'] } } };
-  vmctx.ACTP = ACTP;
-  vmctx.ACT = { registerRuntime() { }, engine: id => (id === 'graph@1' ? graphE : null), engineRunner(E, spec, opts, onFail) { const r = { spec, opts, onFail, run(inp, done) { runs.push({ inp, done, r }); }, respec(sp, o) { r.spec = sp; r.opts = o; }, close() { closed++; }, inWorker: () => inW }; return r; } };
-  vm.createContext(vmctx);
-  vm.runInContext(h34.replace('ACT.registerRuntime({', 'globalThis.__bridge = engineBridge; ACT.registerRuntime({'), vmctx);
+  const BHOST = { compute: { engine: id => (id === 'graph@1' ? graphE : null), engines: () => ['graph@1'], library: () => ['graph@1', 'timeline@1'], compile: () => null, content: () => null, parts: () => null }, warn() { } };
+  const DEPS = { workers: true, runner(E, spec, opts, onFail) { const r = { spec, opts, onFail, run(inp, done) { runs.push({ inp, done, r }); }, respec(sp, o) { r.spec = sp; r.opts = o; }, close() { closed++; }, inWorker: () => inW }; return r; } };
+  const vmctx = { __bridge: (act, seed, reply) => RTN.engineBridge(BHOST, act, seed, reply, DEPS) };
   const out = [], B = vmctx.__bridge({ engines: ['graph@1', 'timeline@1', 'warp@1'] }, 99, (type, payload, extra) => out.push({ type, payload, re: extra.re }));
   const last = () => out[out.length - 1].payload, spec = { model: { graph: {} }, outputs: [{ id: 'd', kind: 'scalar', of: 'result' }] };
   const R = (id, type, payload) => B.handle({ type, id, payload });
@@ -727,7 +726,7 @@ const SIMSRC = () => fs.readdirSync(path.join(ROOT, 'src', 'runtimes', 'sim-spec
 }
 
 // 4. never allow-same-origin
-const files = cp.execSync('git ls-files engine cloud tools skill', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
+const files = cp.execSync('git ls-files engine cloud tools skill src/runtimes', { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(f => /\.(js|mjs|py|html|ts)$/.test(f) && !f.startsWith('engine/i18n/') && !f.includes('vendor/'));
 const bad = [];
 for (const f of files) {
   const s = fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -735,7 +734,7 @@ for (const f of files) {
 }
 const okFiles = ['engine/viewer.js'];   // (the source viewer frames an outside web page from its own URL: its own origin, never pack content)
 ok(bad.filter(b => !okFiles.some(f => b.startsWith(f))).length === 0, 'no code gives a frame allow-same-origin ' + JSON.stringify(bad.filter(b => !okFiles.some(f => b.startsWith(f))).slice(0, 3)));
-ok(/setAttribute\('sandbox', 'allow-scripts'\)/.test(fs.readFileSync(path.join(ROOT, 'engine', 'src', '34_activity_html.js'), 'utf8')), 'html-app@1 sets sandbox to exactly allow-scripts');
+ok(/frame\.setAttribute\('sandbox', 'allow-scripts'\)/.test(RTSRC('html-app')) && /wf\.setAttribute\('sandbox', 'allow-scripts'\)/.test(RTSRC('html-app')), 'html-app@1 sets sandbox to exactly allow-scripts (the wrapper frame and the mini-app\'s)');
 // h5p@1 in the toolkit, the connector, the site and the bundle (docs/INTERACTIVE_H5P.md)
 const COMPOSE = { browser: fs.readFileSync(path.join(ROOT, 'src', 'composition', 'browser.ts'), 'utf8'), connector: fs.readFileSync(path.join(ROOT, 'src', 'composition', 'connector.ts'), 'utf8') };   // the composition roots that wire the engine library
 const srv = (function all(d) { return fs.readdirSync(d, { withFileTypes: true }).map(e => e.isDirectory() ? all(path.join(d, e.name)) : e.name.endsWith('.ts') ? fs.readFileSync(path.join(d, e.name), 'utf8') : '').join('\n'); })(path.join(ROOT, 'src', 'connector')), bld = fs.readFileSync(path.join(ROOT, 'tools', 'build.py'), 'utf8');
@@ -749,7 +748,7 @@ ok(/bundle_h5p\(metas, sel\)/.test(bld) && /engine\/vendor\/h5p\/3\.8\.2\/player
 
 ok(/["']?enum["']?: \[\s*["']workflow["'],\s*["']content["'],\s*["']visual["'],\s*["']interactive["']/.test(srv) && /interactive: D\.interactive/.test(srv) && /docs\['interactive'\] = rd\('docs\/INTERACTIVE\.md'\)/.test(bld), 'noema_authoring_guide serves part "interactive" (and in "all")');
 for (const f of ['activity_new.py', 'activity_lint.py', 'activity_test.py', 'activity_preview.py', 'activity_harness.js']) ok(fs.existsSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', f)), 'the skill has ' + f);
-ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'34_activity_html\.js', '37_activity_py\.js'/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
+ok(/'noema_core\.py'/.test(bld) && /activity_host/.test(bld) && /'33_activity_guard\.js', '37_activity_py\.js'/.test(bld) && /activity_host\/noema-core\.js', bundle_text\('harness'\)/.test(bld) && /activities_examples/.test(bld), 'the skill zip carries noema_core.py (the content checks through noema-tools.cjs), the runtimes for the harness (html-app, sim-spec), NoemaCore of the harness (noema-core.js: the contracts, the engine library and the content checks) and the reference activities');
 ok(NoemaCore.engines.has('circuit-mna@1') && /'INTERACTIVE_SIMEXPR\.md', 'INTERACTIVE_CIRCUIT\.md'[,)]/.test(bld), 'the circuit engine for the harness (in noema-core.js) and the scripts (in noema-tools.cjs); the guide part "interactive" includes the circuit engine');
 ok(['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(id => NoemaCore.engines.has(id)) && /'INTERACTIVE_CIRCUIT\.md', 'INTERACTIVE_ENGINES\.md'(?:, 'INTERACTIVE_[A-Z0-9]+\.md')*\)(?: \+ INTERACTIVE_P6)? if/.test(bld)
   && COMPOSE.connector.includes('engines: nodeEngines()') && /\{ name: 'engines', build: r => r\.get\(ENGINES\) \}/.test(COMPOSE.browser) && /core_scripts = \(f'<script>\{esc\(bundle_text\("app"\)\)\}<\/script>/.test(bld),

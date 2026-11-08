@@ -1,4 +1,4 @@
-/* ===================== interactive activities (32_activities.js, 34_activity_html.js) ===================== */
+/* ===================== interactive activities (32_activities.js, src/runtimes/html-app) ===================== */
 .act { position: relative; margin: 4px 0; }
 .act-box { position: relative; border: 1px solid var(--line); border-radius: var(--r-sm, 10px); background: var(--card); overflow: hidden; max-width: 100%; }
 .act-box.act-running { min-height: 160px; }

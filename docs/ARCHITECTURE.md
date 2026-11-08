@@ -358,8 +358,9 @@ read `build/runtimes-node.cjs` (`src/runtimes/node.ts`). A runtime's styles are 
 adds them to `engine/engine.css`). The runtimes that compute reach the engines, the expression language, the content checks
 and the pack's parts only through `host.compute` (`compute.ts`; the core hands them over), never by importing those layers.
 Moved so far: `external-embed@1`, `sim-spec@1` (`sim-spec/`: the view, the bench, the engine runner and the parts orchestrator;
-the core keeps `ACT.simView` for the runtimes built on it). Still scripts of `engine/src`: `html-app@1` (34), `py-module@1` (37),
-`h5p@1` (38), `wasm-module@1` / `wasm@1` (44).
+the core keeps `ACT.simView` for the runtimes built on it), `html-app@1` (`html-app/`: the bootstrap, the document with its policy
+and wrapper frame, the engine bridge; the loop guard is `loop-guard.ts`). Still scripts of `engine/src`: `py-module@1` (37),
+`h5p@1` (38, with the loop guard's old copy 33), `wasm-module@1` / `wasm@1` (44).
 
 ## 7. Patterns
 

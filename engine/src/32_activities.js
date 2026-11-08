@@ -2,8 +2,8 @@
    A pack may carry activities (pack.activities, format noema.activities/v1): mini-apps, minigames and simulations. They appear as a
    theory block { t: 'interactive', activity } (an explorer, not graded) or as an exercise { type: 'sim', activity, task, grade, hints }.
    This file is the trusted core (ports & adapters): it knows only the RuntimeAdapter port, never a runtime by name.
-     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (src/runtimes: loaded by runtime(id); html-app@1 in 34_activity_html.js, sim-spec@1 in
-                                                                       src/runtimes/sim-spec; more in P3–P4). autoHeight: it renders in the
+     registerRuntime({ id, version, mount(slot, ctx) → port, autoHeight? })   a runtime (src/runtimes: loaded by runtime(id); html-app@1 and sim-spec@1 in
+                                                                       src/runtimes; more in P3–P4). autoHeight: it renders in the
                                                                        app's own DOM and takes the height it needs (no frame)
      registerEngine({ id, check?(spec) → problems, create(spec, {seed, task}) → { run(inputs) → outputs }, workerSource? })
                                                                        an engine of sim-spec@1 (formula@1 built in; the circuit engine in P3)
@@ -34,7 +34,7 @@ const ACTP = (() => {
     // py-module@1 (37_activity_py.js): the runner's own messages, checked in full by NoemaPy.protocol before they get here; the core only notes them
     'py:out': p => (p.outputs == null || isObj(p.outputs)) && (p.error == null || (isObj(p.error) && CODE.test(p.error.code || ''))),
     'py:status': p => typeof p.phase === 'string' && p.phase.length <= 20,
-    // html-app@1: a mini-app asks for an engine of the library (34_activity_html.js engineBridge checks the rest: declared, the spec, the inputs)
+    // html-app@1: a mini-app asks for an engine of the library (src/runtimes/html-app/bridge.ts checks the rest: declared, the spec, the inputs)
     'engine:check': p => str(p.engine, 40) && isObj(p.spec),
     'engine:run': p => str(p.engine, 40) && isObj(p.spec) && (p.inputs == null || isObj(p.inputs)) && (p.seed == null || (isInt(p.seed) && p.seed >= 0 && p.seed <= 4294967295)),
     // html-app@1: several engines of the library in one spec (docs/INTERACTIVE.md §12.8: {consts?, derived?, parts, couple?}), noema.sim(spec).run(inputs)
@@ -117,8 +117,8 @@ const ACT = (() => {
   });
   const SIM = 'sim-spec@1';
   /** the typed runtimes an item needs before it mounts: its own, and the sim-spec view that the runtimes built on it draw with
-      (an item with its own spec: py-module@1, wasm-module@1; a mini-app that lists engines runs them with the sim runtime's runners) */
-  const needs = a => [...new Set([a.runtime, ...(a.runtime !== SIM && ((a.spec && typeof a.spec === 'object') || (Array.isArray(a.engines) && a.engines.length)) ? [SIM] : [])])];
+      (an item with its own spec: py-module@1, wasm-module@1) */
+  const needs = a => [...new Set([a.runtime, ...(a.runtime !== SIM && a.spec && typeof a.spec === 'object' ? [SIM] : [])])];
   const pendingRt = {};
   /** a runtime ready to mount: one registered here, or a typed one loaded now (once) and made for this app → Promise<runtime | null> */
   function runtime(id) {
@@ -315,7 +315,7 @@ const ACT = (() => {
       } catch (e) { console.warn('[noema] activity mount failed', e); return stop(tE('engine.act.failed')); }
       if (notice) note.textContent = notice;
       if (!waiting) LIVE.push(sess);
-      // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, 34_activity_html.js)
+      // watchdog: ping every 2 s; three missed answers → stopped, with Restart (the loop guard trips sooner, src/runtimes/loop-guard.ts)
       pingT = setInterval(() => {
         if (!root.isConnected) return destroy();
         if (!sess.port) return;
@@ -363,10 +363,7 @@ const ACT = (() => {
   }
   /** the sim-spec view (src/runtimes/sim-spec) for the runtimes that compute the outputs themselves (py-module@1): loaded before they mount (needs) */
   const simView = (box, ctx, host) => RUNTIMES[SIM].view(box, ctx, host);
-  /** the sim runtime's runners for the engines a mini-app lists (html-app@1, 34_activity_html.js): loaded before it mounts (needs) */
-  const engineRunner = (E, spec, opts, onFail) => RUNTIMES[SIM].engineRunner(E, spec, opts, onFail);
-  const partsRunner = (spec, opts, onFail) => RUNTIMES[SIM].partsRunner(spec, opts, onFail);
-  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, simView, engineRunner, partsRunner, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
+  return { ITEMS, PARTS, mount, sweep, registerRuntime, runtime, loadedRuntime: id => RUNTIMES[id] || null, simView, hasRuntime: enabled, enabled, registerGrader, registerEngine, engine, engines, caps, canRun, keepRunnable, strings, theme, LIVE };
 })();
 
 /* the exercises already indexed (10_core.js) that this app cannot run leave the indexes; the pack is unchanged */

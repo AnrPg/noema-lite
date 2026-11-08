@@ -22,6 +22,7 @@ export interface RuntimeDescriptor {
 const LIST: readonly (readonly [`${string}@${number}`, RuntimeSwitch])[] = [
   ['external-embed@1', 'opt-in'],
   ['sim-spec@1', 'on'],
+  ['html-app@1', 'on'],
 ];
 
 /** every runtime the registry holds */

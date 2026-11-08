@@ -12,3 +12,6 @@ export const runtimes = createRuntimeLibrary(RUNTIME_PLUGINS, () => RUNTIME_CHEC
 export { partsRunner, withParts, partsEngine } from './sim-spec/parts.ts';
 export { engineRunner } from './sim-spec/runner.ts';
 export { fmtNum } from './sim-spec/format.ts';
+/** the loop guard (tests/activities.js) and html-app@1's engine bridge (tests/activities.js, tests/parts.js) */
+export * as loopGuard from './loop-guard.ts';
+export { engineBridge, enginesFor, declaredOf } from './html-app/bridge.ts';

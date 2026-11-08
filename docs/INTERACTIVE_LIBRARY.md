@@ -207,8 +207,8 @@ in its own way.
 
 | | where | what |
 |---|---|---|
-| the API | `engine/src/34_activity_html.js` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
-| the host | `34_activity_html.js` `engineBridge` | declared ∩ `NoemaCore.engines.catalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
+| the API | `src/runtimes/html-app/bootstrap.ts` (the bootstrap) | `noema.engines()`, `noema.engine(id).check(spec)`, `.run(spec, inputs, {seed})` |
+| the host | `src/runtimes/html-app/bridge.ts` `engineBridge` | declared ∩ `NoemaCore.engines.catalog.LIBRARY` ∩ registered; every field checked; the engine's `check`; one run at a time + one waiting; ≤ 30 requests/s; outputs ≤ 512 KB; codes, never a crash |
 | the Worker | `src/runtimes/sim-spec/runner.ts` `engineRunner` (the sim runner; `respec` gives the same Worker another model) | one per mini-app and engine, lazy, reused, 5 s per run, ended on unmount |
 | the rules | `checkAppEngines` of the content checks (`src/features/content/domain/activities/registry.ts`); `needRequires` adds `engine:<id>` | |
 | the tests | `tests/activities.js` (the rules and their golden messages, the protocol, the bridge with a fake runner), `tests/activities_app.js` (in the app), `activity_test.py` | |

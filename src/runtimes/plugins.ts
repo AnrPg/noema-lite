@@ -6,6 +6,7 @@ import type { RuntimeModule, RuntimePlugin } from './types.ts';
 const ENTRIES: Readonly<Record<string, () => Promise<{ default: RuntimeModule }>>> = {
   'external-embed@1': () => import('./external-embed/runtime.ts'),
   'sim-spec@1': () => import('./sim-spec/runtime.ts'),
+  'html-app@1': () => import('./html-app/runtime.ts'),
 };
 
 export const RUNTIME_PLUGINS: readonly RuntimePlugin[] = Object.freeze(

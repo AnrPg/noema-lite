@@ -146,15 +146,12 @@ function runParts(spec, env, o) {
   const pyPlan = want('plan', JSON.stringify(fp), PC.partsPlan(fp, null).order);
   ok(JSON.stringify(pyPlan) === JSON.stringify(PC.partsPlan(fp, null).order), 'partsPlan = the golden plan');
 
-  // the mini-apps' noema.sim(spec).run(inputs) (34_activity_html.js engineBridge): declared engines only, the spec checks, the orchestrator
+  // the mini-apps' noema.sim(spec).run(inputs) (src/runtimes/html-app/bridge.ts engineBridge): declared engines only, the spec checks, the orchestrator
   {
-    const vm = require('vm'), h34 = fs.readFileSync(path.join(SRC, '34_activity_html.js'), 'utf8'), s32 = fs.readFileSync(path.join(SRC, '32_activities.js'), 'utf8');
+    const vm = require('vm'), s32 = fs.readFileSync(path.join(SRC, '32_activities.js'), 'utf8');
     const ACTP = vm.runInNewContext(s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = (')) + '; ACTP', { TextEncoder, JSON, Object, Array, Number, String, Math });
     ok(ACTP.check({ p: 'noema.activity', v: 1, type: 'sim:run', id: 's1', payload: { spec: { parts: [] }, inputs: { D: 1 }, seed: 3 } }).ok && !ACTP.check({ p: 'noema.activity', v: 1, type: 'sim:run', payload: { spec: 'x' } }).ok, 'ACTP: sim:run {spec, inputs?, seed?}');
-    const ctx = { console, Promise, Date, JSON, Object, Array, Set, Map, String, Number, Math, Error, isFinite, setTimeout, clearTimeout, ACTP, Worker: function () { } };
-    ctx.window = ctx; ctx.NoemaCore = NoemaCore;
-    ctx.ACT = { registerRuntime() { }, engine: A.engine, engines: A.engines, engineRunner: A.engineRunner, partsRunner: A.partsRunner };
-    vm.createContext(ctx); vm.runInContext(h34.replace('ACT.registerRuntime({', 'globalThis.__bridge = engineBridge; ACT.registerRuntime({'), ctx);
+    const ctx = { __bridge: (act, seed, reply) => RTN.engineBridge(CX, act, seed, reply, { workers: true }) };   // (Node has no Worker: the parts run inline)
     const got = [], B = ctx.__bridge({ engines: ['med@1', 'ode@1'] }, 5, (type, payload, extra) => got.push({ type, payload, re: extra.re }));
     const sp = { consts: { D: 5 }, parts: [pk(), od()] }, wait = re => new Promise(res => { const t = setInterval(() => { const m = got.find(g => g.re === re); if (m) { clearInterval(t); res(m.payload); } }, 5); });
     B.handle({ type: 'sim:run', id: 'a', payload: { spec: sp, inputs: { D: 5 } } });
