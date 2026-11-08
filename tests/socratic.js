@@ -57,8 +57,13 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   const packBefore = await p.evaluate(() => (s => [s.title, JSON.stringify(s.blocks)].join('|'))(Noema.pack.chapters[4].sections[3]));
   ok(!/LANGUAGE:/.test(systems[systems.length - 1]), 'an English course, no choice made → no language rule');
   await p.evaluate(() => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); }); await wait(200);
-  ok(await p.locator('.drawer select.chatlang').count() === 1, 'the tutor has a 🗣 language picker next to the topic');
-  await p.selectOption('.drawer select.chatlang', 'el'); await wait(200);
+  const NoemaShellL = k => k === 'chatLangItem' ? 'Language|language' : k;
+  // the frame's tutor: ⋮ › 🗣 Language of the conversation › Ελληνικά
+  const pick = async re => p.evaluate(async src => { const it = [...document.querySelectorAll('.ns-pop [role=menuitem]')].find(x => new RegExp(src).test(x.textContent)); it?.click(); await new Promise(r => setTimeout(r, 150)); return !!it; }, re);
+  await p.evaluate(() => { const b = [...document.querySelectorAll('.drawer .ns-dh button')].find(x => x.getAttribute('aria-haspopup') === 'menu' || x.dataset.pop); b.click(); }); await wait(200);
+  ok(await pick(NoemaShellL('chatLangItem')), 'the tutor’s ⋮ has the 🗣 language of the conversation');
+  await wait(200);
+  ok(await pick('Ελληνικά'), '… with the languages to choose from'); await wait(200);
   await send('What is a deletion vector?');
   const lastSys = systems[systems.length - 1];
   await p.screenshot({ path: '/tmp/noema_shots/s3_lang.png' });
@@ -85,7 +90,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   await wait(200);
   await p.click('#tcard button:has-text("Ask")'); await wait(700);
   ok(await p.evaluate(() => T.mode) === 'hint' && /NEVER reveal the answer/.test(sysNow()) && /BEFORE answering/.test(sysNow()) && !/TUTOR STATE/.test(sysNow()), '“Ask Brick” before answering → hint mode: hints only, never the answer');
-  ok((await p.$$eval('.drawer .modechips button.on', b => b.map(x => x.innerText).join('|'))).includes('Hint'), 'the hint mode shows as the current mode chip');
+  ok((await p.$eval('.drawer .ns-modesel b', b => b.innerText)).includes('Hint'), 'the hint mode shows as the current mode');
   await p.evaluate(() => { closeTutor(); const ex = window.__ex; [...document.querySelectorAll('#tcard .opt')].find(b => b.dataset.nf !== 'options.' + ex.answer).click(); });
   await wait(300);
   const given = await p.evaluate(() => document.getElementById('tcard')._w.given());
@@ -107,19 +112,20 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   ok(await p.evaluate(() => T.mode) === 'explain' && /pressed 💡 "Explain this" on ONE term/.test(sys) && /FOCUS — the part of the lesson the learner asks about:\nDeletion vectors mark/.test(sys) && /as intuitively and insightfully/.test(sys), '💡 on a lesson part → Explain mode focused on that part');
   await p.evaluate(() => { closeTutor(); document.getElementById('tcard')?.remove(); location.hash = '#/s/ch05-s04'; }); await wait(700);
   if (await p.locator('.continue button:has-text("show all")').count()) { await p.click('.continue button:has-text("show all")'); await wait(300); }
-  const btnSys = async (label, re, mode) => { await p.evaluate(() => { closeTutor(); for (const k of Object.keys(T.hist)) if (k.startsWith('ch05-s04|')) T.hist[k] = []; }); await p.click(`.quickzone button:has-text("${label}")`); await wait(700); return (await p.evaluate(() => T.mode)) === mode && re.test(sysNow()); };
+  const btnSys = async (label, re, mode) => { await p.evaluate(() => { closeTutor(); for (const k of Object.keys(T.hist)) if (k.startsWith('ch05-s04|')) T.hist[k] = []; }); await p.evaluate(() => [...document.querySelectorAll('.ns-top button')].find(x => (x.getAttribute('aria-label') || x.textContent).trim() === NoemaShell.L('more')).click()); await wait(200); await p.evaluate(l => [...document.querySelectorAll('.ns-pop [role=menuitem]')].find(x => x.textContent.includes(l)).click(), label); await wait(700); return (await p.evaluate(() => T.mode)) === mode && re.test(sysNow()); };
   ok(await btnSys('Socratic dialogue on this', /Socratic dialogue on THIS section/, 'socratic'), 'section → Socratic dialogue has its own task');
   ok(await btnSys('Debug simulation', /simulation built on THIS section/, 'debug'), 'section → Debug simulation has its own task');
   ok(await btnSys('Interview me', /Mock interview \/ oral exam on THIS section/, 'interview'), 'section → Interview me has its own task');
   await p.evaluate(() => { closeTutor(); location.hash = '#/'; }); await wait(400);
-  // 🌐 no 🗣 choice → the AI answers in the app's language (docs/i18n.md approach 6); the learner's automatic first messages are in it too
-  for (const [tag, name, addr, bubble] of [['el', 'Greek \\(Ελληνικά\\)', 'εσύ', /^Κάνε μου σωκρατικό διάλογο για: /], ['ru', 'Russian \\(русский\\)', 'ты', /^Начни сократовский диалог на тему: /]]) {
+  // 🌐 no 🗣 choice → the AI answers in the app's language (docs/i18n.md approach 6); the tutor greets in it too
+  for (const [tag, name, addr, hello] of [['el', 'Greek \\(Ελληνικά\\)', 'εσύ', 'Γεια'], ['ru', 'Russian \\(русский\\)', 'ты', 'Привет']]) {
     await p.evaluate(async tag => { S.settings.chatLang = ''; S.settings.lang = tag; await NoemaI18n.use(tag); T.hist = {}; T.tstate = {}; openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic'); }, tag); await wait(300);
-    await p.click('.drawer .starters button >> nth=0'); await wait(700);
+    const greet = await p.$eval('.drawer .ns-greet', g => [g.lang, g.textContent]);
+    await send(hello);
     sys = sysNow();
     ok(new RegExp('LANGUAGE: always write to the learner in ' + name + ', although the course material and the notes below are in English').test(sys) && sys.includes('Address the learner with the informal singular (' + addr + ')'), `${tag} UI → the tutor is told to answer in ${tag} (${addr}), the notes stay English`);
     ok(new RegExp('Write the "question", "answer" and "lesson" texts .* in ' + name).test(sys), `${tag} UI → TUTOR STATE asks for the thread texts in ${tag}`);
-    ok(bubble.test(await visible()), `${tag} UI → the starter bubble is in ${tag}: ` + (await visible()).slice(0, 60));
+    ok(greet[0] === tag && greet[1].startsWith(hello), `${tag} UI → the tutor greets in ${tag}: ` + greet[1].slice(0, 60));
     await p.evaluate(() => aiGrade({ type: 'free', q: 'Q', model: 'M', rubric: ['r'], section: Noema.pack.chapters[0].sections[0].id }, 'my answer'));
     ok(new RegExp('Write the verdict, covered, missing and mistakes texts in ' + name).test(sysJ.at(-1) || ''), `${tag} UI → the AI feedback on answers is in ${tag}`);
     await p.evaluate(() => closeTutor());

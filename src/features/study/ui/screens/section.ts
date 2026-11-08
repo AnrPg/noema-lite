@@ -356,6 +356,20 @@ function sectionMenu(app: StudyApp, s: Section, c: Chapter, fresh: () => HTMLEle
           askSection(app, s, 'socratic');
         },
       },
+      {
+        label: app.L('askDebug'),
+        icon: '🔧',
+        run: () => {
+          askSection(app, s, 'debug');
+        },
+      },
+      {
+        label: app.L('askInterview'),
+        icon: '🎤',
+        run: () => {
+          askSection(app, s, 'interview');
+        },
+      },
       slot
         ? {
             label: app.L('askFresh'),

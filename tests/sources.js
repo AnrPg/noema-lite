@@ -14,7 +14,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
 
 (async () => {
   execFileSync('python3', [path.join(ROOT, 'tests/fixtures/make_viewer_files.py'), TF], { stdio: 'ignore' });
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, onboarding: false, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000); const E = []; p.on('pageerror', e => E.push(e.message));
@@ -106,8 +106,8 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   const op1 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
   ok(op0 === 0 && op1 > 0.5, `the icon is hidden and appears on hover (opacity ${op0} → ${op1})`);
   await p.click('.reader .blk >> nth=0 >> .xbtn'); await wait(500);
-  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ctxchip')?.textContent, mode: T.mode, ctx: tutorContextText(), sec: SEC[T.ctx.sec]?.title }));
-  ok(xs.open && /^🔎 /.test(xs.chip) && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
+  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ns-forchip')?.textContent, mode: T.mode, ctx: tutorContextText(), sec: SEC[T.ctx.sec]?.title }));
+  ok(xs.open && /Kinetic energy/.test(xs.chip || '') && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
   ok(/^FOCUS/.test(xs.ctx) && xs.ctx.includes('WIDER CONTEXT') && xs.ctx.includes(xs.sec) && /THE CHAPTER/.test(xs.ctx), 'the AI gets the part itself first, then its section and chapter as wider context');
   await p.evaluate(() => closeTutor());
   await p.screenshot({ path: SHOTS + '/s7_explain.png' });
@@ -162,10 +162,10 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-bad.noema.zip')).blob(); await Noema.importPackFile(Noema.account.id, new File([b], 'pkg-bad.noema.zip')); });
   await wait(1500);
   const badIdx = JSON.parse(await p.evaluate(() => localStorage.getItem(`noema1:${Noema.account.id}:a:srcfiles:pkg-bad`) || '{}'));
-  ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && /missing or damaged: ecb-1/.test(await p.locator('body').innerText()), 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
+  ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && (await p.locator('text=/missing or damaged: ecb-1/').count()) > 0, 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
   // a plain .json: imported, and the learner is told the files are in the package
   await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-physics.json')).text(); const pk = JSON.parse(b); pk.subject.id = 'pkg-json'; await Noema.importPackFile(Noema.account.id, new File([JSON.stringify(pk)], 'pkg-json.json', { type: 'application/json' })); });
-  ok(await until(async () => /not in this \.json — import the \.noema\.zip/.test(await p.locator('body').innerText()), 5000), 'importing only the .json says the 3 source files are in the .noema.zip package');
+  ok(await until(async () => (await p.locator('text=/not in this \\.json — import the \\.noema\\.zip/').count()) > 0, 5000), 'importing only the .json says the 3 source files are in the .noema.zip package');
   // ⬇️ export: a package again, with every attached file
   const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 20000 }), p.evaluate(() => Noema.exportPackage(Noema.account.id, Noema.pack))]);
   const dlp = path.join(PK, 'export.zip'); await dl.saveAs(dlp);
@@ -180,8 +180,8 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(await p.locator('.noema-chip:has-text("Spark & Delta (my notes)")').count() === 1, 'a library subject can be renamed (only for you) — the list updates');
   await p.screenshot({ path: SHOTS + '/s5_rename.png' });
   await p.click('.noema-chip:has-text("Spark & Delta")');
-  const renamed = await until(async () => /Spark & Delta \(my notes\)/.test(await p.locator('.subjchip').textContent()), 20000);
-  if (!renamed) console.log('   subjchip:', await p.locator('.subjchip').innerText().catch(e => e.message), await p.evaluate(() => location.href + ' ' + JSON.stringify(Noema.subject?.title)));
+  const renamed = await until(async () => /Spark & Delta \(my notes\)/.test(await p.evaluate(() => document.title)), 20000);   // the open subject's name (the frame's crumbs and the tab's title)
+  if (!renamed) console.log('   title:', await p.evaluate(() => document.title), await p.evaluate(() => location.href + ' ' + JSON.stringify(Noema.subject?.title)));
   ok(renamed, 'the new name is used in the app');
   ok(await until(() => /Spark & Delta/.test(srv.state.kv[gia]?.['a:subjoverride:databricks']?.value || ''), 15000), 'and synced to every device');
   await p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);

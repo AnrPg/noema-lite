@@ -449,7 +449,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
   /* ======================= D. cloud: sign-in and its errors, sharing, invitations, the OAuth consent page ======================= */
   if (only('D')) {
     console.log('D. cloud (en-XA)');
-    const page = await newPage({ config: { askSubjectOnStart: true, shell: false } });
+    const page = await newPage({ config: { askSubjectOnStart: true, onboarding: false, shell: false } });
     await page.goto(BASE + '/index.html'); await page.evaluate(() => localStorage.clear()); await page.reload(); await wait(1000);
     extra.push('authorization not found', 'back in Claude');   // the emulator's own words (a server's detail; its callback page)
     extra.push('Anna', 'anna@example.com', 'Bob', 'bob@example.com', 'nobody@example.com', 'a@example.com', 'not-an-address', 'upstream unavailable', 'Heart test', 'Data engineering', 'Data engineer', 'Python basics');
@@ -507,7 +507,7 @@ const CONFIG = extra => `(() => { let c; Object.defineProperty(window, 'NOEMA_CO
     await visit(page, 'the shared map', () => page.evaluate(id => NoemaCurMap.map(Noema.account.id, id), cid2), 1500);
     await page.context().close();
     // Bob: the requests, the banner, the bell, the invitation
-    const bob = await newPage({ config: { askSubjectOnStart: true, shell: false } });
+    const bob = await newPage({ config: { askSubjectOnStart: true, onboarding: false, shell: false } });
     await bob.goto(BASE + '/index.html'); await bob.evaluate(() => localStorage.clear()); await bob.reload(); await wait(900);
     await form(bob, 'Bob signs up', signUp(bob, 'Bob', 'bob@example.com', 'secret123'));
     await wait(1500); await grab(bob, 'Bob: picker with requests');
