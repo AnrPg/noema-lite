@@ -109,14 +109,15 @@ how-to. Each locale: ≈200 k characters of drafts → review in Weblate → fla
 **Think first:** Turkish suffixes after placeholders (vowel harmony: rephrase so no suffix follows `{name}`); zh-Hant is
 Taiwan vocabulary, not a conversion of zh-Hans; Arabic: MSA, gender-neutral phrasing, digits from ICU only.
 
-**Redesign status (2026-11-08, phases 2–3):** the owner kept the rule: new UI strings get drafts for el, fr, ru and **de**
-only; every other locale waits here. Already drafted in all 14 locales during the redesign (keep, review later): `i18n/ui`
+**Redesign status (2026-11-08, phases 2–3):** the owner (14:17 UTC) skipped translation work for the rest of the redesign:
+new UI strings are written in English only (en.arb) and every other locale waits here; the lead lists the new keys per catalog
+at the end of phase 3. Already drafted in all 14 locales during the redesign (keep, review later): `i18n/ui`
 (the Lit kit, 147+ keys) and `i18n/roadmaps`. Waiting, per catalog:
 
 | Catalog | Done | Waiting |
 |---|---|---|
-| `i18n/roadmaps-map` (754 keys) | el, fr, ru, de | es-ES (480/754 drafted), ar-EG, hi, it, ja, pt-PT, sq, tr, zh-Hans, zh-Hant (0/754) |
-| new phase-3 catalogs (study, community, languages, shell) | en + el, fr, ru, de | the other 10 locales |
+| `i18n/roadmaps-map` (754 keys) | el, fr, ru (de partly drafted) | es-ES (480/754 drafted), ar-EG, hi, it, ja, pt-PT, sq, tr, zh-Hans, zh-Hant (0/754) |
+| new phase-3 keys (study, community, languages, shell, roadmaps) | en | all 14 locales |
 
 ### TD-10 · Language lessons: etymology, folk tradition and culture as sections of each lesson — ⏸ parked by the owner (2026-10-18)
 **What:** the aspect sections of a theory lesson (D29) exist for what the data already says (sounds, word forms, sentences, meaning, vocabulary, use — from the grammar points' `category`) and the library lists writing, listening & speaking and reading. **Etymology, folk tradition and culture** are not sections of the lessons: grammar points carry no such category, so each language needs new content per lesson (and exercises for it, D27) before the lesson can show them.
