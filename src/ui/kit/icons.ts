@@ -48,7 +48,6 @@ export const ICONS = {
   list: 'M9 6h11M9 12h11M9 18h11M4 6v.01M4 12v.01M4 18v.01',
   lock: 'M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3',
   // the community screens (src/features/{search,vault,social,reports,sharing}/ui): the vault, people, ⚑ reports
-  upload: 'M12 16V4M7 9l5-5 5 5M4 20h16',
   vault: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 10h18',
   filter: 'M4 5h16l-6 8v6l-4-2v-4z',
   pushpin: 'M9 3h6l-1 6 3 3v2H7v-2l3-3zM12 14v7',
