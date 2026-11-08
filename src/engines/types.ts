@@ -119,6 +119,3 @@ export interface CatalogApi {
 
 /** the engine library's model tables as JSON Schemas, for the activity author (kernel/schema.ts, docs/INTERACTIVE_LIBRARY.md §1.5) */
 export type SchemaApi = typeof NoemaLibSchema;
-
-/** the kernels of the library as modules (their own tests use them; the app reaches them only through the engines) */
-export type KernelApi = Readonly<Record<string, unknown>>;

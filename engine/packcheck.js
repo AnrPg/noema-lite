@@ -363,9 +363,9 @@
     CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1', 'twin@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
     // the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (the module under src/engines, loaded through NoemaCore.engines; the Python twins in tools/)
     P6: { 'thermal@1': 'thermal/thermal.js', 'pid@1': 'pid/pid.js', 'rf@1': 'rf/rf.js', 'twin@1': 'twin/twin.js' },
-    // the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core (src/engines/kernel/core.js); each checks its model with its own checkSpec and
+    // the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core (src/engines/kernel/core.ts); each checks its model with its own checkSpec and
     // lists the expressions (exprs: [src, where, local names]) and string keys (keys: [key, where]) of its model; Python twins tools/lib_<name>.py
-    LIB: { 'ode@1': 'ode/ode.js', 'prob@1': 'prob/prob.js', 'graph@1': 'graph/graph.js', 'geom@1': 'geom/geom.js', 'genetics@1': 'genetics/genetics.js', 'seq@1': 'seq/seq.js', 'med@1': 'med/med.js', 'clinic@1': 'clinic/clinic.js', 'anatomy@1': 'anatomy/anatomy.js', 'timeline@1': 'timeline/timeline.js', 'music@1': 'music/music.js', 'map@1': 'map/map.js', 'text@1': 'text/text.js', 'craft@1': 'craft/craft.js', 'logic@1': 'logic/logic.js', 'rhetoric@1': 'rhetoric/rhetoric.js', 'philo@1': 'philo/philo.js', 'des@1': 'des/des.js', 'field@1': 'field/field.js', 'agents@1': 'agents/agents.js', 'law@1': 'law/law.js' },
+    LIB: { 'ode@1': 'ode/ode.js', 'prob@1': 'prob/prob.js', 'graph@1': 'graph/graph.js', 'geom@1': 'geom/geom.js', 'genetics@1': 'genetics/genetics.js', 'seq@1': 'seq/seq.js', 'med@1': 'med/med.js', 'clinic@1': 'clinic/clinic.ts', 'anatomy@1': 'anatomy/anatomy.ts', 'timeline@1': 'timeline/timeline.js', 'music@1': 'music/music.js', 'map@1': 'map/map.js', 'text@1': 'text/text.js', 'craft@1': 'craft/craft.js', 'logic@1': 'logic/logic.js', 'rhetoric@1': 'rhetoric/rhetoric.js', 'philo@1': 'philo/philo.js', 'des@1': 'des/des.js', 'field@1': 'field/field.js', 'agents@1': 'agents/agents.ts', 'law@1': 'law/law.js' },
     LIB_KINDS: ['scalar', 'series', 'scene', 'sound'], LINE_STYLES: ['line', 'bars', 'steps', 'points'],
     APP_ENGINES_MAX: 8,   // html-app@1: the engines of the library a mini-app may use ("engines": [...], docs/INTERACTIVE.md §8.1) — the same rule in tools/activities.py
     P6_TIMED: ['thermal@1', 'pid@1'],   // engines whose model.transient times and outputs' at may be expressions
@@ -454,7 +454,7 @@
     for (const name of [...ACT.PY_BASE, ...ACT.PY_EXTRAS]) if (!decl.has(name) && new RegExp('^\\s*(?:import|from)\\s+' + name + '\\b', 'm').test(src)) E.push(`the Python file imports ${name}: list it in "packages"`);
     return { errors: E, warnings: W };
   }
-  /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through the expression language (NoemaCore.engines.expr, src/engines/kernel/simexpr.js) ---------- */
+  /* ---------- sim-spec@1 (docs/INTERACTIVE.md §12): every expression through the expression language (NoemaCore.engines.expr, src/engines/kernel/simexpr.ts) ---------- */
   const isObj = v => v != null && typeof v === 'object' && !Array.isArray(v);
   const isNum = v => typeof v === 'number' && isFinite(v);
   const list = v => Array.isArray(v) ? v : [];
@@ -521,7 +521,7 @@
     const m = spec.model, L = ACT.BENCH_LIM;
     if (!isObj(m)) { E.push(`spec.model: ${ACT.CIRCUIT} needs a model {netlist, bindings?, transient?, noise?}`); return; }
     unknownKeys(m, ACT.MODEL_KEYS, 'spec.model', E);
-    if (!CK()) { E.push(`spec.model: the ${ACT.CIRCUIT} checker (src/engines/circuit/sim.js) is not loaded here`); return; }
+    if (!CK()) { E.push(`spec.model: the ${ACT.CIRCUIT} checker (src/engines/circuit/sim.ts) is not loaded here`); return; }
     if (!isObj(m.netlist)) { E.push('spec.model.netlist must be a netlist {format: "noema.circuit/v1", nodes, elements}'); return; }
     const probs = CK().check(m.netlist).filter(p => p.level === 'error');
     for (const p of probs) E.push(`spec.model.netlist${p.path ? '.' + p.path : ''}: ${p.msg}`);

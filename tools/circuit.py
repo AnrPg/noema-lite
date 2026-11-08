@@ -1,5 +1,5 @@
 """The netlist checks of the circuit engine circuit-mna@1 in Python (its whole model, §9 included) (docs/INTERACTIVE_CIRCUIT.md): the twin of check() and
-checkFaults() in src/engines/circuit/circuit.js — the same codes, paths and messages (tests/activities.js runs both on the
+checkFaults() in src/engines/circuit/circuit.ts — the same codes, paths and messages (tests/activities.js runs both on the
 same netlists). tools/activities.py uses it to check a sim-spec@1 spec whose engine is circuit-mna@1; it does not simulate.
 
   num(v)                  → a float (a number, or a text with an SI prefix: "4.7k", "100n", "2meg"), else nan

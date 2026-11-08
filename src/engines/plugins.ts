@@ -130,8 +130,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('circuit-mna@1'),
-    () => import('./circuit/sim.js'),
-    () => import('noema-worker:./circuit/sim.js#simEngine'),
+    () => import('./circuit/sim.ts'),
+    () => import('noema-worker:./circuit/sim.ts#simEngine'),
   ),
   def(
     manifest('thermal@1'),

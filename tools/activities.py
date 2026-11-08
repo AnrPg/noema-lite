@@ -24,8 +24,8 @@ pictures (ADR D2).
                                                                twin of NoemaPackCheck.checkActivityPackages"""
 import base64, glob, hashlib, json, math, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import simexpr as SX   # the expression language of sim-spec@1 (docs/INTERACTIVE_SIMEXPR.md), twin of src/engines/kernel/simexpr.js
-import circuit as CK   # the netlist checks of circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md), twin of src/engines/circuit/circuit.js
+import simexpr as SX   # the expression language of sim-spec@1 (docs/INTERACTIVE_SIMEXPR.md), twin of src/engines/kernel/simexpr.ts
+import circuit as CK   # the netlist checks of circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md), twin of src/engines/circuit/circuit.ts
 import importlib
 import thermal, pid, rf, twin   # the model checks of the P6 engines (docs/INTERACTIVE_ENGINES.md), twins of src/engines/{thermal,pid,rf,twin}/
 import wasm_check as WK   # wasm-module@1 (docs/INTERACTIVE_WASM.md), twin of engine/src/44_activity_wasm.js

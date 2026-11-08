@@ -1045,7 +1045,7 @@ const CATALOG = Object.freeze([
     { runtime: true },
   ),
   // the domain plugins: exact models of one field
-  E('circuit-mna@1', 'plugin', true, 'src/engines/circuit/sim.js', 'circuit', [
+  E('circuit-mna@1', 'plugin', true, 'src/engines/circuit/sim.ts', 'circuit', [
     'circuit',
     'electronics',
     'resistor',

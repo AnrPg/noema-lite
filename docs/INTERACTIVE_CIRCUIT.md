@@ -92,7 +92,7 @@ the learner checks the diagnosis on the bench and can take **another device**.
 
 ## 3. The engine — `src/engines/circuit/`
 
-`src/engines/circuit/circuit.js` is the engine (an ES module, its default export below); `src/engines/circuit/sim.js` adds the
+`src/engines/circuit/circuit.ts` is the engine (an ES module, its default export below); `src/engines/circuit/sim.ts` adds the
 sim-spec engine `circuit-mna@1` (`bench: true`, a `prepare` that evaluates the expressions on the main thread), a plugin of the engine
 library (`NoemaCore.engines.engine('circuit-mna@1')`, whose `workerSource` is its Worker bundle (the text a Worker runs), built by esbuild from the module and the kernel pieces it imports (`noemaWorkers` in `tools/esbuild.mjs`)). Pure JS, deterministic, no DOM, no learner text: results are
 numbers and codes; the activity words them. Schema: `src/contracts/schemas/noema.circuit.v1.schema.json`. Tests: `node tests/circuit.js`;
@@ -151,7 +151,7 @@ same stamp, a linear circuit factored once per (h, θ). Before each step the eng
 a step that holds a source breakpoint, trapezoidal otherwise — and sets the lines' waves from td ago; the junction limiting (pnjlim)
 stays in the stamp and a limited iterate forces another Newton iteration (`limit`). A step the kernel cannot solve, even halved, is
 taken by the own step with gmin stepping, then the kernel goes on. Against the own companion models: ≤ 3e-9 relative over the
-transients of tests/circuit.js and circuit2.js. FALLBACK without the kernel (marked): the own companion-model transient. It is
+transients of tests/circuit.js and circuit2.js. It is
 resumable (`tranStart` / `tranAdvance` / `tranAdvanceK`): `runTransient()` and the new
 **stepper** of `circuit-mna@1` (`stepper: true`; the instance's `stepInit` / `stepTo`, `docs/INTERACTIVE_LIBRARY.md` §1.6) share it.
 The stepper holds the transient open on the grid `transient.dt`; a node / branch / power series gives its value now, `stat` and `at`
@@ -185,7 +185,7 @@ open trace it is on the far side). `b` / `ref` default to `gnd`.
 | `{kind:'bode', node, ref?, source, fStart, fStop, points?}` | `{kind:'bode', f, db, phase, stats:{dcDb, peakDb, fPeak, f3db, fLow3db, fUnity, pm}}` — the AC analysis (§9.6) |
 | `{kind:'logic', nodes, threshold = 1.5, tEnd, dt?, tStart?, zin?}` | `{t, traces:{node:[0/1]}, edges:{node:[{t, to}]}, stats:{node:{freq, duty, edges}}, threshold}` — edge times interpolated between samples; noise is not applied |
 
-**Noise** `{noise: {rel, abs = 0, seed}}` (or `opts.seed`): reading · (1 + rel·u) + abs·u′, u uniform in [−1, 1] from mulberry32 seeded
+**Noise** `{noise: {rel, abs = 0, seed}}` (or `opts.seed`): reading · (1 + rel·u) + abs·u′, u uniform in [−1, 1] from the kernel's MRG32k3a stream seeded
 by the seed and the probe itself. The same probe on the same sim always reads the same; same seed ⇒ identical numbers everywhere.
 
 ## 6. Analysis
