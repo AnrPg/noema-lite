@@ -145,8 +145,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('rf@1'),
-    () => import('./rf/rf.js'),
-    () => import('noema-worker:./rf/rf.js#simEngine'),
+    () => import('./rf/rf.ts'),
+    () => import('noema-worker:./rf/rf.ts#simEngine'),
   ),
   def(
     manifest('twin@1'),

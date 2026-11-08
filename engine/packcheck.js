@@ -362,7 +362,7 @@
     // circuit-mna@1 (docs/INTERACTIVE_CIRCUIT.md): the model, the outputs it can compute, the fault-finding bench (docs/INTERACTIVE.md §12.7)
     CIRCUIT: 'circuit-mna@1', BENCH_ENGINES: new Set(['circuit-mna@1', 'twin@1']), BENCH_NAMES: ['diagnosis', 'measurements', 'correct'],
     // the P6 engines (docs/INTERACTIVE_ENGINES.md): each checks its model with its own checkSpec (the module under src/engines, loaded through NoemaCore.engines; the Python twins in tools/)
-    P6: { 'thermal@1': 'thermal/thermal.js', 'pid@1': 'pid/pid.js', 'rf@1': 'rf/rf.js', 'twin@1': 'twin/twin.js' },
+    P6: { 'thermal@1': 'thermal/thermal.js', 'pid@1': 'pid/pid.js', 'rf@1': 'rf/rf.ts', 'twin@1': 'twin/twin.js' },
     // the engine library (docs/INTERACTIVE_LIBRARY.md): general engines on one core (src/engines/kernel/core.js); each checks its model with its own checkSpec and
     // lists the expressions (exprs: [src, where, local names]) and string keys (keys: [key, where]) of its model; Python twins tools/lib_<name>.py
     LIB: { 'ode@1': 'ode/ode.js', 'prob@1': 'prob/prob.js', 'graph@1': 'graph/graph.js', 'geom@1': 'geom/geom.js', 'genetics@1': 'genetics/genetics.js', 'seq@1': 'seq/seq.js', 'med@1': 'med/med.js', 'clinic@1': 'clinic/clinic.js', 'anatomy@1': 'anatomy/anatomy.js', 'timeline@1': 'timeline/timeline.js', 'music@1': 'music/music.js', 'map@1': 'map/map.js', 'text@1': 'text/text.js', 'craft@1': 'craft/craft.js', 'logic@1': 'logic/logic.js', 'rhetoric@1': 'rhetoric/rhetoric.js', 'philo@1': 'philo/philo.js', 'des@1': 'des/des.js', 'field@1': 'field/field.js', 'agents@1': 'agents/agents.js', 'law@1': 'law/law.js' },

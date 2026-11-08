@@ -59,8 +59,8 @@ import m22 from './thermal/thermal.js';
 import w22 from 'noema-worker:./thermal/thermal.js#adapter';
 import m23 from './pid/pid.js';
 import w23 from 'noema-worker:./pid/pid.js#adapter';
-import m24 from './rf/rf.js';
-import w24 from 'noema-worker:./rf/rf.js#simEngine';
+import m24 from './rf/rf.ts';
+import w24 from 'noema-worker:./rf/rf.ts#simEngine';
 import m25 from './twin/twin.js';
 import w25 from 'noema-worker:./twin/twin.js#simEngine';
 
