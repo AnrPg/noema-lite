@@ -202,7 +202,11 @@ async function appEngines(p, ctx, E) {
   const CR = path.join(__dirname, '..', 'tools', 'activities_examples', 'cheapest-route'), html = fs.readFileSync(path.join(CR, 'app.html'), 'utf8');
   const item = { ...JSON.parse(fs.readFileSync(path.join(CR, 'activity.json'), 'utf8')), html, strings: { en: JSON.parse(fs.readFileSync(path.join(CR, 'strings.en.json'), 'utf8')) } }; delete item.entry;
   await p.evaluate(() => { const W = window.Worker; window.__W = W; window.__wn = 0; window.__wt = 0;
-    window.Worker = class extends W { constructor(...a) { super(...a); window.__wn++; } terminate() { window.__wt++; return super.terminate(); } }; });
+    // window.__hold: the replies of the Workers wait (the queue check below: run 1 cannot end before runs 2 and 3 reach the host)
+    window.__hold = false; window.__held = [];
+    window.Worker = class extends W { constructor(...a) { super(...a); window.__wn++; this.addEventListener('message', e => { if (window.__hold && !e.__again) { e.stopImmediatePropagation(); window.__held.push([this, e.data]); } }); }
+      terminate() { window.__wt++; return super.terminate(); } };
+    window.__release = () => { window.__hold = false; for (const [w, data] of window.__held.splice(0)) { const e = new MessageEvent('message', { data }); e.__again = true; w.dispatchEvent(e); } }; });
   const mount = async (it) => {
     await p.evaluate(it => { ACT.ITEMS[it.id] = it; const m = document.querySelector('main'); m.innerHTML = ''; ACT.sweep(); m.append(interactiveBlock({ t: 'interactive', activity: it.id })); scrollTo(0, 0); }, it);
     if (!await until(() => p.evaluate(() => !!document.querySelector('main iframe.act-frame')), 3000)) { const b = p.locator('main .act-bar button'); if (await b.count()) await b.first().click({ timeout: 5000 }).catch(() => {}); }
@@ -234,8 +238,15 @@ async function appEngines(p, ctx, E) {
     r.undeclared = await err(noema.engine('timeline@1').run(sp, {}));
     r.inputs = await err(g.run(sp, { 'not a name': 1 }));
     r.clone = await err(g.run(Object.assign({}, sp, { f: function () { } }), {}));
-    r.queue = (await Promise.allSettled([g.run(sp, {}), g.run(sp, {}), g.run(sp, {})])).map(x => x.status === 'fulfilled' ? x.value.outputs.best : x.reason.code);
+    window.__sp = sp;
     return r; });
+  // one run at a time and one waiting: the host holds run 1's reply until the frame has the middle run's answer (each message of the
+  // port is a task of its own, so without the hold run 1 may end before runs 2 and 3 reach the host, and nothing is waiting to be replaced)
+  await p.evaluate(() => { window.__hold = true; });
+  await f.evaluate(() => { const g = noema.engine('graph@1'), sp = window.__sp; window.__q = [g.run(sp, {}), g.run(sp, {}), g.run(sp, {})].map(pr => pr.then(v => v.outputs.best, e => e.code)); window.__q2 = null; window.__q[1].then(v => { window.__q2 = v; }); });
+  await until(() => f.evaluate(() => window.__q2 !== null));
+  await p.evaluate(() => window.__release());
+  codes.queue = await f.evaluate(() => Promise.all(window.__q));
   ok(codes.run.best === 5 && JSON.stringify(codes.run.path) === '[0,1,2]', 'noema.engine(\'graph@1\').run(spec, inputs) → the outputs the spec names (Dijkstra: 5 along a – b – c) ' + JSON.stringify(codes.run));
   ok(codes.check.length >= 1 && codes.spec[0] === 'spec' && codes.spec[1] >= 1, 'check(spec) → the engine\'s own problems; run on a bad model is refused with code spec and the problems ' + JSON.stringify([codes.check, codes.spec]));
   ok(codes.undeclared[0] === 'undeclared' && codes.inputs[0] === 'inputs' && codes.clone[0] === 'spec', 'an engine the entry does not list, bad inputs and a spec that is not plain data are refused with their codes ' + JSON.stringify([codes.undeclared, codes.inputs, codes.clone]));
@@ -429,8 +440,8 @@ async function simSpec(p, ctx, E) {
   await p.reload(); await wait(1200);
   ok(await openSec() && /995\s*Hz/.test((await ro())[0]) && await p.locator(SEL + ' input.sim-num[data-param="R"]').inputValue() === '1600', 'after a reload the saved values come back');
   // Reset puts the defaults back
-  await p.locator(SEL + ' .sim-foot button').click(); await wait(150);
-  ok(/339\s*Hz/.test((await ro())[0]), 'Reset brings back the defaults');
+  await p.locator(SEL + ' .sim-foot button').click();
+  ok(await until(async () => /339\s*Hz/.test((await ro())[0])), 'Reset brings back the defaults ' + JSON.stringify((await ro())[0]));
   // pause (the block left the screen): nothing is computed until resume
   await p.evaluate(() => ACT.LIVE.find(s => s.act.id === 'rc-lowpass').send('pause'));
   await p.locator(SEL + ' input.sim-num[data-param="R"]').fill('2000'); await p.locator(SEL + ' input.sim-num[data-param="R"]').press('Tab'); await wait(100);
