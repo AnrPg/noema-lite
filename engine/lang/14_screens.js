@@ -45,6 +45,10 @@ const COURSE_PORT = {
   },
   continueLesson: (nid, langs) => runLesson(nid, [...langs]),
   session: c => runSession(planFor([c])),
+  lanes: () => lanesModel(),
+  setLanesView(k) { UI.prefs.lanesView = k || undefined; save(); },
+  laneInfo: (c, nid) => laneInfo(c, nid),
+  openStep: (c, nid) => laneOpen(c, nid),
 };
 /** The address the new screens know a course page by: #/lang/<code or course>/<the course's own address>. */
 function screenHash() {

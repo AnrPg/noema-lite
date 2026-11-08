@@ -2,8 +2,9 @@
    the device's keys (the ones engine/loader.js and the course runtime write). */
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
-import { manualClock } from '../../../adapters/memory/clock.ts';
-import { memoryStorage } from '../../../adapters/memory/storage.ts';
+import { ok } from '../../../kernel/result.ts';
+import type { Clock } from '../../../ports/clock.ts';
+import type { KeyValueStore } from '../../../ports/storage.ts';
 import { chosenLangs, courseFor, courseProgress, langDay, listCourses, offeredLangs, studiesAny } from '../domain/courses.ts';
 import { coursesService } from './courses.ts';
 
@@ -41,8 +42,9 @@ describe('domain', () => {
     assert.ok(studiesAny(c, null) && studiesAny(c, ['ar']) && !studiesAny(c, ['zh']));
   });
   test('progress: words met and reviews due per language studied, from the stored records', () => {
-    const course = listCourses(LIB, [], () => [])[0]!,
+    const course = listCourses(LIB, [], () => [])[0],
       day = 100;
+    assert.ok(course);
     const p = courseProgress(
       course,
       ['de', 'el'],
@@ -72,13 +74,32 @@ describe('domain', () => {
   });
 });
 
+/** a key-value store in a Map, and a clock that stands still (the service reads only now()) */
+function mapKv(): KeyValueStore {
+  const m = new Map<string, string>();
+  return {
+    get: k => ok(m.get(k) ?? null),
+    set: (k, v) => {
+      m.set(k, v);
+      return ok(undefined);
+    },
+    delete: k => {
+      m.delete(k);
+      return ok(undefined);
+    },
+    keys: (p = '') => ok([...m.keys()].filter(k => k.startsWith(p))),
+  };
+}
+const NOW = Date.UTC(2026, 10, 7, 10);
+const clock = { now: () => NOW } as unknown as Clock;
+
 describe('the service over the device keys', () => {
   const make = () => {
-    const st = memoryStorage(),
+    const st = { kv: mapKv() },
       written: unknown[] = [];
     const svc = coursesService({
       kv: st.kv,
-      clock: manualClock(Date.UTC(2026, 10, 7, 10)),
+      clock,
       library: () => LIB,
       putSettings: (acc, patch) => {
         written.push([acc, patch]);
@@ -111,10 +132,12 @@ describe('the service over the device keys', () => {
   });
   test('progress reads the stored records of the course; a course opens on a language', () => {
     const { kv, svc } = make();
-    const day = Math.floor(Date.UTC(2026, 10, 7, 10) / 864e5);
+    const day = Math.floor(NOW / 864e5);
     kv.set('noema1:anr:s:lang:poly:lang:de:node:x', JSON.stringify({ items: { a: { r: { due: day } }, b: {} } }));
     kv.set('noema1:anr:meta:langsum', JSON.stringify({ poly: { next: { step: '2', title: 'Food' } } }));
-    const p = svc.progress('anr', svc.course('anr', 'poly')!);
+    const poly = svc.course('anr', 'poly');
+    assert.ok(poly);
+    const p = svc.progress('anr', poly);
     assert.equal(p.words, 2);
     assert.equal(p.due, 1);
     assert.equal(p.sum?.next?.step, '2');

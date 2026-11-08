@@ -60,6 +60,50 @@ export interface LangStripModel {
   readonly explainName: string;
 }
 
+/** The look of the lanes: automatic (by the width), tiles or dots. */
+export type LanesView = '' | 'tiles' | 'dots';
+
+/** A step in one lane: its node, step label (S03; empty for a field), short title, compact code (S3, V2a), state. */
+export interface LaneCell {
+  readonly node: string;
+  readonly step: string;
+  readonly title: string;
+  readonly short: string;
+  readonly code: string;
+  /** the learner state (passed, learning, open, locked …): the tile's tint */
+  readonly state: string;
+  /** that state in words, for a name or a tip */
+  readonly stateLabel: string;
+  /** ✓ ★ ◑ ○ 🔒 … or empty */
+  readonly sign: string;
+}
+
+/** One level of the lanes: the section it starts (its label, or null), whether every lane has it, its cells by language. */
+export interface LaneRow {
+  readonly section: string | null;
+  readonly common: boolean;
+  readonly cells: Readonly<Record<string, LaneCell | null>>;
+}
+
+export interface LanesModel {
+  readonly langs: readonly CourseLang[];
+  readonly view: LanesView;
+  readonly rows: readonly LaneRow[];
+  /** the width the lanes have now (px) */
+  width(): number;
+}
+
+/** A step's card in one language: what it teaches there, the words, how far the learner is, its other languages. */
+export interface LaneInfo {
+  readonly node: string;
+  readonly title: string;
+  readonly lang: CourseLang;
+  readonly state: string;
+  readonly functions: readonly { readonly title: string; readonly note: string | null }[];
+  readonly words: number;
+  readonly others: readonly { readonly code: string; readonly label: string; readonly state: string }[];
+}
+
 export interface CoursePort {
   /** the home of one language of the course */
   home(code: string): LangHomeModel;
@@ -72,4 +116,10 @@ export interface CoursePort {
   continueLesson(id: string, langs: readonly string[]): void;
   /** today's session of one language: reviews and new words */
   session(code: string): void;
+  /** ⫴ the parallel lanes of the learner's languages */
+  lanes(): LanesModel;
+  setLanesView(view: LanesView): void;
+  laneInfo(code: string, node: string): LaneInfo;
+  /** opens a step of the path in that language (its lesson or its page) */
+  openStep(code: string, node: string): void;
 }

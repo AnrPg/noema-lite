@@ -13,12 +13,14 @@
  *   study-chooser   "Which languages do you want to study?" (languages/study-chooser.ts); options { course, none, onDone }
  *   lang-courses    the courses as rows (Choose another course); options { onPick }
  *   lang-today      Today's card of a course (languages/lang-today.ts); options { course }
+ *   lang-lanes      ⫴ the parallel lanes of the open course (languages/lang-lanes.ts)
  */
 import { defineRoutes, type RouteMatch } from '../router/routes.ts';
 import type { EnginesPort } from './activities/engines-port.ts';
 import { NoemaEngineRequestForm, NoemaEnginesPage } from './activities/engines-page.ts';
 import type { CoursePort } from './languages/course-port.ts';
 import { NoemaLangHome } from './languages/lang-home.ts';
+import { NoemaLangLanes } from './languages/lang-lanes.ts';
 import { NoemaLangStrip } from './languages/lang-strip.ts';
 import { NoemaLangToday } from './languages/lang-today.ts';
 import { NoemaLangCourses, NoemaLanguagesPage } from './languages/languages-page.ts';
@@ -42,7 +44,7 @@ export interface Area5Ports {
   languages(): LanguagesPort;
 }
 
-export const AREA5_PARTS = ['lang-strip', 'study-chooser', 'lang-courses', 'lang-today'] as const;
+export const AREA5_PARTS = ['lang-strip', 'study-chooser', 'lang-courses', 'lang-today', 'lang-lanes'] as const;
 export type Area5Part = (typeof AREA5_PARTS)[number];
 export const isArea5Part = (s: string): s is Area5Part => (AREA5_PARTS as readonly string[]).includes(s);
 
@@ -76,6 +78,7 @@ export const AREA5_ELEMENTS = {
   'noema-lang-today': NoemaLangToday,
   'noema-lang-home': NoemaLangHome,
   'noema-lang-strip': NoemaLangStrip,
+  'noema-lang-lanes': NoemaLangLanes,
 } as const;
 
 declare global {
@@ -88,6 +91,7 @@ declare global {
     'noema-lang-today': NoemaLangToday;
     'noema-lang-home': NoemaLangHome;
     'noema-lang-strip': NoemaLangStrip;
+    'noema-lang-lanes': NoemaLangLanes;
   }
 }
 
@@ -152,6 +156,12 @@ export function mountArea5Part(part: Area5Part, host: HTMLElement, ports: Area5P
       s.port = P;
       s.rows = P.courses();
       if (o.onPick) s.onPick = o.onPick;
+      el = s;
+      break;
+    }
+    case 'lang-lanes': {
+      const s = make(doc, 'noema-lang-lanes');
+      s.port = ports.course();
       el = s;
       break;
     }
