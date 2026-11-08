@@ -43,7 +43,7 @@
     E('thermal@1', 'plugin', true, 'src/engines/thermal/thermal.ts', 'thermal', ['heat', 'thermal', 'temperature', 'heatsink', 'thermostat', 'cooling', 'θερμότητα', 'θερμοκρασία', 'ψύκτρα', 'тепло', 'температур', 'Wärme', 'Temperatur', 'chaleur', 'température']),
     E('pid@1', 'plugin', true, 'src/engines/pid/pid.js', 'pid', ['control', 'pid', 'feedback', 'controller', 'setpoint', 'overshoot', 'motor', 'έλεγχος', 'ελεγκτής', 'ανάδραση', 'управлени', 'регулятор', 'Regelung', 'Regler', 'régulation', 'asservissement']),
     E('rf@1', 'plugin', true, 'src/engines/rf/rf.js', 'rf', ['radio', 'antenna', 'link budget', 'path loss', 'wireless', 'lora', 'wifi', 'bluetooth', 'signal strength', 'ραδιο', 'κεραία', 'ασύρματ', 'радио', 'антенн', 'Funk', 'Antenne', 'radio', 'antenne']),
-    E('twin@1', 'plugin', true, 'src/engines/twin/twin.js', 'twin', ['iot', 'battery', 'sensor node', 'duty cycle', 'embedded', 'digital twin', 'μπαταρία', 'αισθητήρας', 'батаре', 'Batterie', 'batterie']),
+    E('twin@1', 'plugin', true, 'src/engines/twin/twin.ts', 'twin', ['iot', 'battery', 'sensor node', 'duty cycle', 'embedded', 'digital twin', 'μπαταρία', 'αισθητήρας', 'батаре', 'Batterie', 'batterie']),
     E('wasm@1', 'plugin', false, 'engine/src/44_activity_wasm.js', 'wasm', ['webassembly', 'wasm', 'compiled', 'c', 'rust', 'fast simulation'], { runtime: 'wasm-module@1' }),
   ]);
   const LIBRARY = CATALOG.filter(e => e.layer === 'library' && e.plugin).map(e => e.id);

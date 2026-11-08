@@ -150,7 +150,7 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('twin@1'),
-    () => import('./twin/twin.js'),
-    () => import('noema-worker:./twin/twin.js#simEngine'),
+    () => import('./twin/twin.ts'),
+    () => import('noema-worker:./twin/twin.ts#simEngine'),
   ),
 ]);

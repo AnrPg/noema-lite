@@ -61,8 +61,8 @@ import m23 from './pid/pid.js';
 import w23 from 'noema-worker:./pid/pid.js#adapter';
 import m24 from './rf/rf.js';
 import w24 from 'noema-worker:./rf/rf.js#simEngine';
-import m25 from './twin/twin.js';
-import w25 from 'noema-worker:./twin/twin.js#simEngine';
+import m25 from './twin/twin.ts';
+import w25 from 'noema-worker:./twin/twin.ts#simEngine';
 
 /** id → [module, Worker bundle] */
 export const IN_HAND: Readonly<Record<string, readonly [EngineModule, string]>> = Object.freeze({
