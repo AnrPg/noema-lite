@@ -1,8 +1,6 @@
-/* The app's script files the connector runs, in load order (= the order index.html loads them): the activity runtimes'
-   package checker (h5p: the content checks of src/features/content read it; the typed runtimes' checks are src/runtimes), the curriculum code, the picture library, the language courses' core. tools/connector_bundle.mjs bundles each "legacy:<path>"
+/* The app's script files the connector runs, in load order (= the order index.html loads them): the curriculum code, the picture library, the language courses' core. tools/connector_bundle.mjs bundles each "legacy:<path>"
    import as its text (one copy: the app's own file). The data contracts and the engine library they read are ES modules
    (src/contracts, src/engines): src/composition/connector.ts hands them to these files as NoemaCore. */
-import h5p from 'legacy:engine/src/38_activity_h5p.js';
 import llm from 'legacy:engine/llm.js';
 import curriculum from 'legacy:engine/curriculum.js';
 import curjobs from 'legacy:engine/curjobs.js';
@@ -16,7 +14,6 @@ import type { LegacySource } from './legacy.ts';
 const S = (path: string, text: string): LegacySource => ({ path, text });
 
 export const LEGACY_SOURCES: readonly LegacySource[] = [
-  S('engine/src/38_activity_h5p.js', h5p),
   S('engine/llm.js', llm),
   S('engine/curriculum.js', curriculum),
   S('engine/curjobs.js', curjobs),

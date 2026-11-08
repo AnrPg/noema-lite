@@ -57,8 +57,10 @@ export const MAX_BYTES = 512 * 1024;
 
 /** an Error with the code the core shows the fallback for */
 export class BuildError extends Error {
-  constructor(readonly code: string) {
+  readonly code: string;
+  constructor(code: string) {
     super(code);
+    this.code = code; // (a field, not a parameter property: node runs this file with its types stripped)
   }
 }
 

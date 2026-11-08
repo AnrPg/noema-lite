@@ -454,7 +454,7 @@ export function createActivityChecks(env: CheckEnv) {
     const reg = isObj(p) ? p.activities : null;
     const items = (isObj(reg) ? objs(reg.items) : []).filter(a => a.runtime === H5P && typeof a.id === 'string');
     if (!items.length) return { errors: E, warnings: W };
-    if (!H) return { errors: E, warnings: ['h5p@1: the package checker (NoemaH5P, engine/src/38_activity_h5p.js) is not loaded here'] };
+    if (!H) return { errors: E, warnings: ['h5p@1: the package checker (src/runtimes/h5p) is not loaded here'] };
     const b64 = (x: unknown): Uint8Array => fromBase64(s(x)) ?? new Uint8Array(0);
     const unzip = async (u: Uint8Array): Promise<Readonly<Record<string, Uint8Array>> | null> => {
       try {

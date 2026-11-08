@@ -17,8 +17,8 @@
    over a small local http server that also serves the pinned Python files: from $NOEMA_PYODIDE_SITE (a folder with vendor/pyodide/manifest.json,
    e.g. dist/site after `python3 tools/fetch_pyodide.py`) or the repository's dist/site. Without them the Python activities are skipped
    (and the harness exits 2 when nothing else was checked).
-   h5p@1 items (an ordinary .h5p file, docs/INTERACTIVE_H5P.md) play in the app's own H5P runtime (38_activity_h5p.js + the vendored
-   player): in every language of the pack (the subject's own and each content.<locale>.json); a step {"click": selector} or
+   h5p@1 items (an ordinary .h5p file, docs/INTERACTIVE_H5P.md) play in the app's own H5P runtime (src/runtimes/h5p inside noema-core.js + the vendored
+   player, inlined here: the runtime finds it on the page): in every language of the pack (the subject's own and each content.<locale>.json); a step {"click": selector} or
    {"set": selector, "value": v} acts inside the item, "passed" is the score H5P reports (xAPI answered), "state" the saved
    state ({"h5p": …}), a case's "locale" plays it in that language.
    html-app@1 mini-apps that list engines of the library ("engines": ["graph@1"], docs/INTERACTIVE.md §8.1) get them through
@@ -98,9 +98,10 @@ const pySw = () => 'self.NOEMA_SW = {"version":"harness","shell":[]};\n' + fs.re
 // py-module@1 (P4): a typed runtime (src/runtimes/py-module) inside noema-core.js, like wasm-module@1
 const PYOK = WASMOK && !!PYSITE && !!PYSW;
 const NEEDHTTP = PYOK && items.some(a => a.runtime === 'py-module@1');
-// h5p@1: the runtime and the app's own H5P player (skill zip: activity_host/h5p/player.js; repository: engine/vendor/h5p/<version>/player.js)
+// h5p@1: a typed runtime (src/runtimes/h5p) inside noema-core.js, like wasm-module@1, and the app's own H5P player (skill zip:
+// activity_host/h5p/player.js; repository: engine/vendor/h5p/<version>/player.js)
 const playerPath = [path.join(srcDir, 'h5p', 'player.js'), path.join(srcDir, '..', 'vendor', 'h5p', '3.8.2', 'player.js')].find(f => fs.existsSync(f));
-const H5POK = has('38_activity_h5p.js') && !!playerPath;
+const H5POK = WASMOK && !!playerPath;
 const OWN = (() => { try { return rj(path.join(SDIR, 'subject.json')).language || 'en'; } catch (e) { return 'en'; } })();
 // the host words of sim-spec@1 (the app shows them in the learner's language; here English is enough)
 const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.noConverge': 'These values did not settle: the parts of the model kept changing each other, so some results are not shown. Try other settings.', 'engine.act.sim.partFailed': 'One part of this simulation could not compute its results for these settings.', 'engine.act.sim.computing': 'Computing…', 'engine.act.sim.results': 'Results', 'engine.act.sim.plot': 'Plot of {y} against {x}',
@@ -125,7 +126,7 @@ function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, functi
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script>${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script>` : ''}<script>
 /* the typed runtimes (src/runtimes), made for this page as the app's ACT.runtime(id) makes them: what they get from their host — the words,
    the protocol, the engines and the content checks (as the app's ACT gives them) */
 var RTHOST = { t: tE, message: function (type, payload, extra) { return ACTP.out(type, payload, extra); }, check: function (raw) { return ACTP.check(raw); }, setting: function () { return undefined; }, setSetting: function () {},

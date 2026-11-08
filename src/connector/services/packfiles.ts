@@ -144,8 +144,8 @@ export const actItems = (p: Pack): PackActivity[] =>
 export const actPath = (uid: string, sid: string, a: PackActivity): string => `${uid}/packs/${sid}/${a.entry}`; // = engine/srcfiles.js actCloudPath
 export const actCurl = async (ctx: ToolContext, sid: string, a: PackActivity): Promise<string> =>
   `# activity ${a.id} — ${a.entry} (${Math.ceil((a.bytes || 0) / 1024)} KB)\ncurl -sS -X PUT -H "Content-Type: application/zip" -H "x-upsert: true" -H "apikey: ${ctx.sb.key}" --data-binary @"work/${sid}/${a.entry}" "${await ctx.storage.uploadUrl(actPath(ctx.uid, sid, a))}"`;
-/** Every .h5p file the pack names is in the account with its size, its sha256 and the package rules (NoemaH5P.check through
-    checkActivityPackages, the same rules as make_pack.py) → { missing: [item], errors: [text] } */
+/** Every .h5p file the pack names is in the account with its size, its sha256 and the package rules (the h5p@1 checks of
+    src/runtimes/h5p through checkActivityPackages, the same rules as make_pack.py) → { missing: [item], errors: [text] } */
 export async function activityFileStatus(ctx: ToolContext, sid: string, p: Pack): Promise<{ missing: PackActivity[]; errors: string[] }> {
   const out = { missing: [] as PackActivity[], errors: [] as string[] },
     bytes: Record<string, Uint8Array> = {};

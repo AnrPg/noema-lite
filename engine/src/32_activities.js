@@ -87,6 +87,10 @@ const ACT = (() => {
   const liveMax = () => innerWidth < 720 ? 1 : 2;
   const rnd32 = () => (crypto.getRandomValues(new Uint32Array(1))[0]) >>> 0;
   const uid = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('');
+  /** the URL of one of the app's own files under engine/ (host.asset: the H5P player), as this page reaches it: NOEMA_ENGINE_BASE, else
+      the folder this script was loaded from (engine/engine.js, or engine/src/ in a test page), else engine/ beside the page */
+  const ME = (document.currentScript && document.currentScript.src) || '';
+  const asset = p => (window.NOEMA_ENGINE_BASE || (ME.includes('/engine/') ? ME.slice(0, ME.lastIndexOf('/engine/') + 8) : 'engine/')) + String(p).replace(/^\/+/, '');
   /* i18n-ignore-end */
 
   /** The strings of an activity in the language the pack is shown in (then the pack's own, then English, then any). */
@@ -110,7 +114,7 @@ const ACT = (() => {
     t: (k, v) => tE(k, v), message: (type, payload, extra) => ACTP.out(type, payload, extra),
     setting: k => (S.settings ? S.settings[k] : undefined), setSetting: (k, v) => { if (!S.settings) return; S.settings[k] = v; if (typeof save === 'function') save(); },
     flags: () => flags(), warn: (...w) => console.warn(...w), now: () => Date.now(),
-    check: raw => ACTP.check(raw),
+    check: raw => ACTP.check(raw), asset,
     // the engines (this core's and the library's), the expression language, the content checks and the pack's parts (src/runtimes/compute.ts)
     compute: Object.freeze({
       engine: id => engine(id), engines: () => engines(), library: () => [...(LIBR()?.catalog?.LIBRARY || [])],

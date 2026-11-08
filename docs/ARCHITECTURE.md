@@ -387,8 +387,10 @@ engines, the expression language, the content checks and the pack's parts only t
 hands them over), never by importing those layers; `host.check` is the protocol's rules for a message a frame sent. Moved so far:
 `external-embed@1`, `wasm-module@1` / `wasm@1`, `py-module@1`, `sim-spec@1` (`sim-spec/`: the view, the bench, the engine runner
 and the parts orchestrator; the core preloads it for an item that draws with its view), `html-app@1` (`html-app/`: the bootstrap,
-the document with its policy and wrapper frame, the engine bridge; the loop guard is `loop-guard.ts`). Still a script of
-`engine/src`: `h5p@1` (38, with the loop guard's old copy 33).
+the document with its policy and wrapper frame, the engine bridge; the loop guard is `loop-guard.ts`) and `h5p@1` (`h5p/`: the package
+rules of `tools/h5p_allow.json` in `RUNTIME_CHECKS.h5p`, the frame's bootstrap, the document in html-app@1's frames, the reader and
+the mount; the player is the app's own file, loaded through `host.asset`, which the core answers with the folder `engine.js` came
+from). No runtime is a script of `engine/src` any more.
 
 ### 6.5 Area 5's screens: languages and activities (phase 3)
 

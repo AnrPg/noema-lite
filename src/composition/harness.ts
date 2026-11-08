@@ -10,7 +10,7 @@
  */
 import * as contracts from '../contracts/index.ts';
 import { createAppEngines } from '../engines/register.ts';
-import { contentChecks, scopeCheckers } from '../features/content/application/index.ts';
+import { contentChecks, runtimeCheckers } from '../features/content/application/index.ts';
 import { RUNTIME_CHECKS } from '../runtimes/checks.ts';
 import { createRuntimeLibrary } from '../runtimes/library.ts';
 import { RUNTIME_PLUGINS } from '../runtimes/plugins.ts';
@@ -46,10 +46,7 @@ if (!page.NoemaCore) {
       engines,
       runtimes,
       attachRuntimes,
-      content: contentChecks(
-        engines,
-        scopeCheckers(() => globalThis as unknown as Readonly<Record<string, unknown>>, RUNTIME_CHECKS),
-      ),
+      content: contentChecks(engines, runtimeCheckers(RUNTIME_CHECKS)),
     }),
     writable: false,
     enumerable: false,

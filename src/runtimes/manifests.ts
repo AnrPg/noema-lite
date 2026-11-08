@@ -30,6 +30,7 @@ const LIST: readonly (readonly [`${string}@${number}`, RuntimeSwitch, (readonly 
   ['wasm-module@1', 'on', ['wasm@1']],
   // Python needs the site's service worker and cache, Workers and WebAssembly: never file:// or the one-file bundle
   ['py-module@1', 'on', [], { where: 'website', note: 'engine.act.py.noHere' }],
+  ['h5p@1', 'on'],
 ];
 
 /** every runtime the registry holds */

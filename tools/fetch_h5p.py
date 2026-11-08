@@ -17,7 +17,7 @@ and, because the H5P core is GPL-3.0 (h5p/h5p-php-library), its corresponding re
   source/COPYING              the GNU General Public License version 3 (pinned by its sha256)
   LICENSE-NOTICE.txt          who, what, where the source is, and how the core runs (written here)
 and player.js, generated here: one script that defines window.NoemaH5PPlayer = {version, js, css} with the core as a string and
-the css with its fonts inlined as data: URIs. The runtime (engine/src/38_activity_h5p.js) loads player.js with a <script> tag
+the css with its fonts inlined as data: URIs. The runtime (src/runtimes/h5p) loads player.js with a <script> tag
 (so it works from file:// too) and puts the core inline in the sandboxed frame, allowed there by its hash.
 Pure stdlib."""
 import hashlib, io, json, os, re, sys, tarfile, base64, urllib.request
