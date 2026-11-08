@@ -150,4 +150,4 @@ peculiarities, the lesson body, "In other languages", underlined words, Aa·). W
 - speech, transliteration and the in-lesson Claude as adapters behind ports;
 - the remaining views (vocab2, grammar2, poly, prod, script, speech, qa, claude, notes, session) as Lit screens, and the
   old files deleted.
-Read docs/LANGUAGE_RULES.md first. Postponed to save the owner's weekly usage; do it next, as two helpers (rules and progress; screens).
+Read docs/LANGUAGE_RULES.md first. Postponed to save the owner's weekly usage; start only when the owner says so (suggested split: two helpers, rules and progress; screens).
