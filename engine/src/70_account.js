@@ -188,7 +188,7 @@ const ACC_VIEWS = {
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
             if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }
           if (relabel) { flushSave(); location.reload(); return; }   // the menus are drawn once: show them in the new language
-          applyTheme(); close(); route(); renderTopStats(); toast(tE('engine.acc.saved'));
+          applyTheme(); close(); route(); toast(tE('engine.acc.saved'));
         } }, tE('engine.acc.saveSettings'))));
   },
 

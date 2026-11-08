@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "減少動態效果",
   "ui.kit.motion.full": "完整",
   "ui.kit.language": "介面語言",
-  "ui.kit.lookNote": "這裡的選擇只適用於此裝置和此頁面。"
+  "ui.kit.lookNote": "這裡的選擇只適用於此裝置和此頁面。",
+  "ui.study.onlyMyLevel": "僅限我的程度（{level}）",
+  "ui.study.myLevelTip": "只練習你已達到的程度的題目",
+  "ui.study.level": "程度"
 }

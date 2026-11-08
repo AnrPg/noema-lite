@@ -8,6 +8,6 @@ window.NOEMA_CONFIG = {
   autoBackupMinutes: 5,     // folder auto-backup interval (Chrome/Edge)
   askSubjectOnStart: false, // true: show the subject picker every time the app opens (each profile can change this)
   // onboarding: false,     // skip the first-time questions (what do you learn, which character)
-  // shell: false,          // the older single-subject screens instead of the new frame (tabs, Today, Roadmaps…)
+  // shell: false,          // start on the subject picker instead of the frame's Today; a language course takes the whole page (a subject always opens in the frame)
   // character: 'prism', lockCharacter: true,   // an organisation fixes the character (and the tutor) for everybody
 };

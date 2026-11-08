@@ -201,7 +201,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   ok(await p.evaluate(t => typeof SUBJ !== 'undefined' && SUBJ.id === t, target.pack.id), 'the step opens as a full subject in the engine (theory, exercises, tutor…)');
   ok(await p.locator('.nodebanner').count() === 1 && await p.locator('.curchip:has-text("Map")').count() === 1, 'the subject shows its place in the curriculum, its mastery and a 🧭 Map button');
   await p.screenshot({ path: SHOTS + '/k5_node_subject.png' });
-  await p.evaluate(() => { COURSE.forEach(ch => { ch.sections.forEach(s => learnt('section.read', s.id)); ch.exercises.forEach(e => record(e, true)); }); flushSave(); });
+  await p.evaluate(() => { COURSE.forEach(ch => { ch.sections.forEach(s => learnt('section.read', s.id)); ch.exercises.forEach(e => NoemaCore.studyUi.current().app.record(e, true)); }); flushSave(); });
   await p.click('.nodebanner button:has-text("Map")'); await wait(800);
   ok(await p.evaluate(t => document.querySelector('noema-roadmap-map').shadowRoot.querySelector(`.cm-node[data-id="${t}"]`).classList.contains('cm-mastered'), target.id), 'all sections read + exercises solved → the step is ✅ mastered (automatically)');
 

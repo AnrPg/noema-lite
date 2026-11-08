@@ -70,15 +70,17 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
     @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
 /** lazy = a script of the site and the one-file bundle the page runs only when it needs it (the one-file bundle keeps it as
     text: <script type="text/plain" id="noema-lazy:<name>">) */
-const APP_KB = 512;   // the core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
+const APP_KB = 520;   // the core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
                       // with the agents' prompts that left engine/curriculum.js, community: about 360 KB) and the learning log's event contract
-                      // (about 140 KB); the engines, the other contracts and the content checks are lazy pieces
+                      // (about 140 KB); the engines, the other contracts and the content checks are lazy pieces. 520 since the runtimes'
+                      // manifests (src/runtimes) and the study pages' bridge and route table (src/composition/study-ui.ts) joined it
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
   { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
   { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
   { name: 'runtimes', in: 'src/composition/runtimes.ts', kind: 'lazy', out: 'runtimes.js', budgetKB: 512 },   // the activity runtimes' code (src/runtimes): loaded when an activity first needs one (ACT.runtime)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
+  { name: 'study', in: 'src/composition/study-pages.ts', kind: 'lazy', out: 'study.js', budgetKB: 320 },   // the study area's pages (src/features/study/ui): loaded before the first subject opens (src/composition/study-ui.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },

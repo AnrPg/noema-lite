@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "Më pak lëvizje",
   "ui.kit.motion.full": "E plotë",
   "ui.kit.language": "Gjuha e ndërfaqes",
-  "ui.kit.lookNote": "Zgjedhjet këtu vlejnë për këtë pajisje dhe vetëm për këtë faqe."
+  "ui.kit.lookNote": "Zgjedhjet këtu vlejnë për këtë pajisje dhe vetëm për këtë faqe.",
+  "ui.study.onlyMyLevel": "Vetëm niveli im ({level})",
+  "ui.study.myLevelTip": "Ushtrohu vetëm me ushtrimet e nivelit që ke arritur",
+  "ui.study.level": "Niveli"
 }

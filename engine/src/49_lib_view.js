@@ -26,7 +26,7 @@ function engineRow(e) {
 async function enginesView(sub) {
   shellChrome({ sub: true, crumbs: [[tE('engine.engines.title')]], back: HOME() });
   const K = window.NoemaCore?.engines?.catalog, R = window.NoemaCore?.engineRequests;
-  const v = view(SHL() ? null : backBtn('← ' + SUBJ.title, HOME()));
+  const v = view();
   if (!K || !R) { v.append(h('p', {}, tE('engine.engines.unavailable'))); return; }
   const store = R.store(ACCOUNT);
   const ask = h('button', { class: 'btn primary', type: 'button', 'data-act': 'request', onclick: () => requestEngineDialog(store, () => paintMine()) }, tE('engine.engines.request'));

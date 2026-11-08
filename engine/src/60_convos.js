@@ -193,8 +193,8 @@ function openConvo(cv) {
   const r = cv.ctx;
   if (r) {
     const visible = r.kind === 'section' ? SEC[r.id] : r.kind === 'chapter' ? CH[r.id] : r.kind === 'playbook' ? PB[r.id] : r.kind === 'exercise' ? findFull('exercise', r.id) : null;
-    if (!visible && findFull(r.kind, r.id)) { setSrcFilter(null); }   // its source is filtered out → show everything again
-    if (r.kind === 'exercise') { const e = findFull('exercise', r.id); ctx = e ? { kind: 'exercise', id: r.id, text: exerciseAsText(e) } : null; }
+    if (!visible && findFull(r.kind, r.id)) { STUDY.app.setFilter(null); }   // its source is filtered out → show everything again
+    if (r.kind === 'exercise') { const e = findFull('exercise', r.id); ctx = e ? { kind: 'exercise', id: r.id, text: STUDY.exerciseText(e) } : null; }
     else ctx = { kind: r.kind, id: r.id, label: r.label, ...(r.kind === 'item' ? { sec: r.sec || null, ch: r.ch || null, text: r.text || r.label } : {}) };
   }
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor') || cv.mode ? 'explain' : 'socratic';   // another app's mode (e.g. Meletee's feynman) continues as a plain explanation; the record keeps its mode

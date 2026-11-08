@@ -22,6 +22,8 @@ import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-report
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
 import { inlineCompute } from '../adapters/local/jobs.ts';
 import { STUDY_BRIDGE, STUDY_REGISTRATIONS } from './study.ts';
+import { STUDY_PIECE, STUDY_UI_BRIDGE } from './study-ui.ts';
+import type { StudyPiece } from './study-pages.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
@@ -109,6 +111,8 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
         },
       }),
   },
+  // NoemaCore.studyUi: the study area's pages (area 2), mounted by the older page for the open subject: src/composition/study-ui.ts
+  ...STUDY_UI_BRIDGE,
 ];
 
 /** the data contracts of the page, their validators loaded on demand (NoemaCore.contracts) */
@@ -253,6 +257,8 @@ export function registerBrowser(c: Container, page: PageLike, scriptUrl: string 
     const load = checksLoader(page, script);
     return () => load().then(p => (checksPiece = p));
   });
+  // the study area's pages (src/features/study/ui): build/study.js, loaded before the first subject opens
+  c.register(STUDY_PIECE, () => pieceLoader<StudyPiece>(page, script, 'study', '__noemaStudyPiece'));
   c.register(CONTRACTS, r => {
     const load = r.get(CHECKS_PIECE);
     return lazyContracts(() =>

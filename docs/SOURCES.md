@@ -2,7 +2,7 @@
 
 ## 1. Which sources a chapter uses
 A chapter often draws on several sources (a textbook chapter, a second book, a lecture, a web article).
-The app finds **all** of them, strongest signal first (`engine/src/50_sources.js`, `chapterRefs`):
+The app finds **all** of them, strongest signal first (`src/features/study/domain/course.ts`, `chapterRefs`):
 
 1. `chapter.sources: [{ "id": "ecb", "pages": "σ. 23–42" }, …]` — written by the skill (CONTENT_SPEC);
 2. the chapter's main source (`sources.json → chapters`);

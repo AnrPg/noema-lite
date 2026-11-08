@@ -146,5 +146,8 @@
   "ui.kit.motion.reduced": "कम गति",
   "ui.kit.motion.full": "पूरी",
   "ui.kit.language": "इंटरफ़ेस की भाषा",
-  "ui.kit.lookNote": "यहाँ के विकल्प इसी डिवाइस के लिए और सिर्फ़ इस पेज के लिए हैं।"
+  "ui.kit.lookNote": "यहाँ के विकल्प इसी डिवाइस के लिए और सिर्फ़ इस पेज के लिए हैं।",
+  "ui.study.onlyMyLevel": "सिर्फ़ मेरा स्तर ({level})",
+  "ui.study.myLevelTip": "सिर्फ़ उसी स्तर के अभ्यास करें जहाँ तक आप पहुँचे हैं",
+  "ui.study.level": "स्तर"
 }
