@@ -24,7 +24,7 @@ export function explainable(
     o.explain(get());
   });
   // a block with its own buttons on top (a picture's ⤢, a question set's recall switch) takes the 💡 into that row, so it never covers them
-  const dock = el.querySelector(':scope > .vx-fig > .vx > .vx-tools, :scope > .ask > .hd');
+  const dock = el.querySelector(':scope > study-figure > .vx-fig > .vx > .vx-tools, :scope > .ask > .hd');
   if (dock) {
     b.classList.add('docked');
     const zoom = dock.querySelector(':scope > .vx-zoom');

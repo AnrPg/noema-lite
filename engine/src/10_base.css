@@ -278,17 +278,17 @@ textarea.answer:focus{border-color:var(--c)}
 .casepart .fb{margin-top:8px}
 .treepath{margin:4px 0 0;padding-inline-start:20px;font-size:13.5px;color:var(--ink2)}
 .treepath:empty{display:none}
-.opt.dim{opacity:.62}
+.opt.dim{color:var(--ink2);background:transparent}
 .opt .value{letter-spacing:1px;color:var(--c-ink);font-weight:800}
 .confrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px}
 .confrow .tiny{margin-inline-end:2px}
-.confchip{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink2);display:inline-flex;gap:5px;align-items:center}
+.confchip{font-size:12px;min-height:24px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink2);display:inline-flex;gap:5px;align-items:center}
 .confchip span[aria-hidden]{letter-spacing:-1px;font-size:9px;opacity:.7}
 .confchip[aria-pressed=true]{border-color:var(--c);background:var(--c-bg);color:var(--ink)}
-.confrow.locked .confchip:not([aria-pressed=true]){opacity:.4}
+.confrow.locked .confchip{cursor:default}.confrow.locked .confchip:not([aria-pressed=true]){opacity:.4}
 .confnote{margin-top:8px}
 @media (max-width:480px){.confrow>.tiny{display:none}}
-.exflag{background:none;border:0;color:var(--ink3,var(--ink2));opacity:.35;font-size:14px;padding:2px 6px;cursor:pointer;margin-inline-start:4px}
+.exflag{background:none;border:0;color:var(--ink3,var(--ink2));opacity:.35;font-size:14px;min-width:24px;min-height:24px;padding:2px 6px;cursor:pointer;margin-inline-start:4px}
 .exflag:hover,.exflag:focus-visible{opacity:.9}
 .exflag.on{opacity:.9;color:var(--warn)}
 .excite{margin-top:10px}
@@ -305,6 +305,7 @@ textarea.answer:focus{border-color:var(--c)}
 .kmapcats .pill{font-size:11px}
 .gymcats{margin:0 0 18px}
 .flaglist{padding-inline-start:18px;display:grid;gap:10px}
+.kmapfoot{justify-content:flex-end;margin-top:14px}
 .fb{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15px;animation:slideIn .3s}
 .fb.ok{background:var(--ok-bg)}
 .fb.bad{background:var(--bad-bg)}
@@ -344,11 +345,28 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
 .flash .back{transform:rotateY(180deg);background:var(--c-bg);font-weight:550;font-size:17px}
 .flash .face small{position:absolute;top:14px;inset-inline-start:18px;font-size:12px;color:var(--ink3);font-weight:700}
 .rate{display:flex;gap:8px;justify-content:center;margin-top:18px}
+.deckcounts{margin:6px 0 16px}
+.flash .flipnote{position:absolute;bottom:14px}
+.deckopen{text-align:center;margin-top:10px}.deckopen .linkish{text-decoration:underline}
 
 /* ---------- debug drill ---------- */
 .pb{border-radius:20px;border:1px solid var(--line);background:var(--card);padding:16px 18px;display:flex;gap:14px;align-items:center;text-align:start;transition:transform .2s;animation:slideIn .4s both}
 .pb:hover{transform:translateY(-2px);border-color:var(--c)}
 .pb .ic{font-size:26px}
+.drillnext{margin-bottom:14px}
+.drilltiles{display:grid;gap:10px}
+.pill.rested{background:var(--ok-bg);color:var(--ok)}
+.drillch{margin:20px 0 10px}
+.drilltitle{margin:10px 0 14px}
+.drilllbl{font-weight:700;margin-bottom:6px}
+.reader .drillh{margin:22px 0 10px}
+.drillacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.drillorder,.drillcheck{margin-top:18px}
+.drilltick{margin-inline-start:auto}
+.drillhook{margin-top:14px}
+.stepc .stepwhy{color:var(--ink2);font-size:14px}
+.stepc .stepcode{margin-top:8px}
+.drillfix{margin-top:12px}
 .boxes{display:flex;gap:3px}
 .boxes i{width:8px;height:8px;border-radius:3px;background:var(--line)}
 .boxes i.on{background:#e8590c}
