@@ -1,6 +1,6 @@
 # Where everything went: the new frame, control by control
 
-The redesign (engine/shell.js, engine/src/95_shell.css, the views in engine/src/40_views.js) keeps every function of the
+The redesign (the frame (src/composition/shell/host.ts, src/ui/screens/shell), engine/src/95_shell.css, the views in engine/src/40_views.js) keeps every function of the
 older screens. The ones you use every day stay on the page. The rest move into a **⋮** menu (top right), a **▾** menu next
 to the button they belong to, or appear only where they are needed. This file maps each of the 528 controls of the older
 screens (the survey ids in the left column: T = top bar, H = subject home, C = chapter, S = section, …) to its new home.
@@ -38,7 +38,7 @@ test suites run that way. `tests/shell.js` checks the new homes.
 | B9–B10 source filter banner | Unchanged, on every page while a filter is on |
 | B11 step banner (🗺️ Map) | The subject page's one header: a small "Station of …" line above the title (opens the map), the bar counts the station's mastery |
 | N1–N7 🔔 contents | Unchanged rows, in a sheet |
-| N8 🔔 news | What arrives (a step ready, a subject attached, a new part, links added, inbox results: `Noema.notice`) is a short toast while at most 2 are on screen; a 3rd moves them all, and the rest of that burst, into 🔔 as rows with ✕ and **Clear all** (kept on this device, `engine/loader.js` Notices; tests/notices.js) |
+| N8 🔔 news | What arrives (a step ready, a subject attached, a new part, links added, inbox results: `Noema.notice`) is a short toast while at most 2 are on screen; a 3rd moves them all, and the rest of that burst, into 🔔 as rows with ✕ and **Clear all** (kept on this device, the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js) Notices; tests/notices.js) |
 
 ## 2. A subject (`#/subject`, was `#/`)
 | Old | New home |

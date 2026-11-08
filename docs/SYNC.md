@@ -1,7 +1,7 @@
 # Sync between devices (cloud accounts)
 
 Sync is automatic. You never press a button, and no device can overwrite progress made on another one.
-The code lives in `engine/cloud.js`, the "in use" card in `engine/loader.js`, and the in-memory refresh in `engine/src/10_core.js`.
+The code lives in `engine/cloud.js`, the "in use" card in the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js), and the in-memory refresh in `engine/src/10_core.js`.
 
 ## The three rules
 

@@ -41,11 +41,14 @@ export class AccountKv {
   /** an account just restored: the page reloads, and its last save must not write the old state back */
   sealed: string | null = null;
 
-  constructor(
-    private readonly kv: DeviceKv,
-    private readonly now: () => number,
-    private readonly onListenerError: (e: unknown) => void,
-  ) {}
+  private readonly kv: DeviceKv;
+  private readonly now: () => number;
+  private readonly onListenerError: (e: unknown) => void;
+  constructor(kv: DeviceKv, now: () => number, onListenerError: (e: unknown) => void) {
+    this.kv = kv;
+    this.now = now;
+    this.onListenerError = onListenerError;
+  }
 
   paused(key: string): boolean {
     return [this.frozen, this.sealed].some(a => !!a && key.startsWith(`${P}${a}:`) && !key.startsWith(`${P}${a}:meta:`));
@@ -150,11 +153,14 @@ export function profileId(name: string, taken: ReadonlySet<string>): string {
 }
 
 export class LocalAccounts {
-  constructor(
-    private readonly kv: DeviceKv,
-    private readonly seeds: () => readonly SavedAccount[],
-    private readonly now: () => number,
-  ) {}
+  private readonly kv: DeviceKv;
+  private readonly seeds: () => readonly SavedAccount[];
+  private readonly now: () => number;
+  constructor(kv: DeviceKv, seeds: () => readonly SavedAccount[], now: () => number) {
+    this.kv = kv;
+    this.seeds = seeds;
+    this.now = now;
+  }
   list(): Account[] {
     return mergeAccounts(
       this.seeds(),
@@ -191,10 +197,12 @@ export class LocalAccounts {
 
 /** The account-level stats (XP and streak across every subject): a:stats of the open account. */
 export class AccountStats {
-  constructor(
-    private readonly store: AccountKv,
-    private readonly today: () => LocalDay,
-  ) {}
+  private readonly store: AccountKv;
+  private readonly today: () => LocalDay;
+  constructor(store: AccountKv, today: () => LocalDay) {
+    this.store = store;
+    this.today = today;
+  }
   get(): Stats {
     return statsOf(jsonOf(this.store, this.store.accountKey('stats'), {}));
   }
@@ -222,11 +230,14 @@ export class AccountStats {
 
 /** The Gemini key: on this device only (never in a:settings, so never synced nor in a backup without secrets). */
 export class GeminiKey {
-  constructor(
-    private readonly kv: DeviceKv,
-    private readonly store: AccountKv,
-    private readonly builtIn: () => string,
-  ) {}
+  private readonly kv: DeviceKv;
+  private readonly store: AccountKv;
+  private readonly builtIn: () => string;
+  constructor(kv: DeviceKv, store: AccountKv, builtIn: () => string) {
+    this.kv = kv;
+    this.store = store;
+    this.builtIn = builtIn;
+  }
   k(acc: string): string {
     return 'noema-device:geminiKey:' + acc;
   }
@@ -264,10 +275,12 @@ export const NOTICE_KEEP = 200;
 /** The 🔔 news that arrived here (not synced): what the notifier moved off the screen waits here until cleared. */
 export class NoticeStore {
   readonly #listeners = new Set<() => void>();
-  constructor(
-    private readonly kv: DeviceKv,
-    private readonly rand: () => string,
-  ) {}
+  private readonly kv: DeviceKv;
+  private readonly rand: () => string;
+  constructor(kv: DeviceKv, rand: () => string) {
+    this.kv = kv;
+    this.rand = rand;
+  }
   key(acc: string | null): string {
     return 'noema-notices:' + (acc || 'local');
   }

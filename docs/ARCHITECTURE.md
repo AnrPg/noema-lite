@@ -218,10 +218,21 @@ on a token colour or a token colour as text without such a pair.
 - the surface only grows (a new name, never a changed meaning);
 - `version` goes up when a name is removed.
 
-### 6.3 The UI foundation
+### 6.3 The UI foundation and the app's root
 
-`src/ui/` is the new UI's foundation in Lit (`lit` 3.3.3): the parts every phase-3 screen is built from. Nothing of the old
-UI is replaced yet; a screen moves over when its feature does.
+`src/ui/` is the new UI's foundation in Lit (`lit` 3.3.3): the parts every phase-3 screen is built from. The app's root is
+`build/ui.js` (`src/composition/ui.ts` → `ui-root.ts`, kind `page`), loaded right after `engine/i18n.js`. It publishes the
+bridge's UI half and starts the app:
+
+| Part | Where | What |
+|---|---|---|
+| `window.Noema` | `src/composition/shell/core.ts` | the profiles, the timed key/value store, the stats, the Gemini key (this device only), the app's IndexedDB, backups and restore points, the auto-backup, the 🔔 news of this device, the start's overlays |
+| `window.NoemaThemes` | `src/composition/shell/themes.ts` over `src/features/shell/domain/characters.ts` | the characters on the tokens: the 5-minute try, free changes for 15 days, then one every 5 days |
+| `window.NoemaShell` | `src/composition/shell/host.ts`, `src/ui/screens/shell/` | the frame (`noema-shell-frame`), the router over every hash route (`routes.ts`), Today, Progress, Settings, the character gallery, the Me menu, the first-time questions, the profile picker; the toolkit the areas draw their pages with |
+| the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage`, their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
+
+`NoemaCore.notify` draws on the kit's toaster once the root has started (`NoemaCore.toasts.use`); what does not fit goes to
+the 🔔. With `config.shell: false` the classic screens run without the frame (the older browser suites use them).
 
 | Folder | Holds |
 |---|---|
@@ -239,9 +250,10 @@ The rules:
   least 24 × 24 px; nothing scrolls sideways at 320 px; logical properties and the `--u-flip` switch mirror right to left.
 - **Look.** Only the tokens (`engine/tokens.css`), pale surfaces, few and short animations (`data-motion="reduced"` and the
   system setting stop them).
-- **Loading.** The bundle `build/ui.js` is kind `dev`: `engine/loader.js` adds it only for `#/ui-kit` on localhost, so the
-  start screen never loads it. Phase 3's shell makes it a `page` entry and its root the app's root.
-- **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-root.test.ts`, and in a
+- **Loading.** `build/ui.js` is on the start path (with `build/app.js`, §6.1); the kit's demo `build/ui-kit.js` is kind `dev`:
+  the root adds it only for `#/ui-kit` on localhost.
+- **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-kit-root.test.ts`,
+  `src/features/shell/domain/domain.test.ts`, `src/composition/shell/kv.test.ts`, `src/ui/screens/shell/routes.test.ts`, and in a
   browser `tests/ui_kit.js` (layout, targets, focus, form association, right to left) and `tests/a11y.js` (axe).
 
 ## 7. Patterns

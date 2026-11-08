@@ -8,7 +8,7 @@ searched here; Discover has its own search.
 Files: `engine/catalog.js` (the catalogue: records, folding, scoring, the stored index), `engine/search.js` (the sheet,
 the page, saved searches, the practice round); its words are in `engine/i18n_shell.js` as `sr_*` keys, in every
 interface language, like the rest of the new frame, engine hooks in `engine/src/40_views.js` (deep links, the
-`#/srun` round), `engine/shell.js` (🔎 in the top bar, `/` and Ctrl K, the `#/search` page). Tests:
+`#/srun` round), the frame (src/composition/shell/host.ts, src/ui/screens/shell) (🔎 in the top bar, `/` and Ctrl K, the `#/search` page). Tests:
 `tests/search_catalog.js` (Node) and `tests/search.js` (Playwright).
 
 ## 1. Where it is

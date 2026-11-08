@@ -101,7 +101,7 @@ In the app: **✨ Create with Claude** — any user can do it, three ways (docs/
 Everything is **noema-lite**: repository, folder, website, docs, browser storage (`noema1:…` keys, IndexedDB `noema-lite`),
 the `Noema` JavaScript namespace, Supabase tables `noema_*` and bucket `noema-private`, pack format `noema-pack`,
 backup format `noema-lite-backup`, conversation schema `noema.conversation/v1`.
-Data written by the app before it was renamed is copied over automatically on first start (see `LEGACY` in `engine/loader.js`).
+Data written by the app before it was renamed is copied over automatically on first start (see `LEGACY` in the UI root (src/composition/ui-root.ts) and the areas (engine/app/*.js)).
 
 ## Γρήγορος οδηγός (Ελληνικά)
 * Άνοιγμα: μία φορά `npm ci`, μετά `npm run dev` και άνοιξε το <http://localhost:8080> (ή ένα αρχείο για offline: `python3 tools/build.py bundle` → `dist/noema-lite.html`, διπλό κλικ). Διαλέγεις προφίλ και μάθημα από τα chips.
