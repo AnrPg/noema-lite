@@ -102,7 +102,7 @@ ok(G.id === 'geom@1' && Object.isFrozen(G) && G.engine.id === 'geom@1' && G.engi
   ok(bad === 0, 'E10 Kettner et al. 2008: orient2d (Shewchuk 1997, robust-predicates 3.0.3) gives sign(l − k) for all 65 536 points — 0 wrong (exact)');
   ok(naive > 1000, `E10 the naive float formula gets ${naive} of them wrong (the noisy picture of the paper)`);
   ok(G.incircle(0, 0, 1, 0, 0, 1, 0.5, 0.5) > 0 && G.incircle(0, 0, 1, 0, 0, 1, 2, 2) < 0 && G.incircle(0, 0, 1, 0, 0, 1, 1, 1) === 0, 'incircle: inside > 0, outside < 0, on the circle exactly 0 (ccw a, b, c)');
-  const src = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'geom', 'geom.js'), 'utf8'), V = path.join(ROOT, 'engine', 'vendor', 'robust-predicates@3.0.3');
+  const src = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'geom', 'vendor', 'robust-predicates.cjs'), 'utf8'), V = path.join(ROOT, 'engine', 'vendor', 'robust-predicates@3.0.3');
   const same = ['orient2d.min.js', 'incircle.min.js'].every(f => src.includes(fs.readFileSync(path.join(V, f), 'utf8').trim()));
   ok(same && fs.existsSync(path.join(V, 'LICENSE')), 'the embedded predicates are the vendored robust-predicates@3.0.3 files byte for byte (Unlicense)');
 }

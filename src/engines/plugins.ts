@@ -45,8 +45,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('geom@1'),
-    () => import('./geom/geom.js'),
-    () => import('noema-worker:./geom/geom.js#simEngine'),
+    () => import('./geom/geom.ts'),
+    () => import('noema-worker:./geom/geom.ts#simEngine'),
   ),
   def(
     manifest('genetics@1'),
