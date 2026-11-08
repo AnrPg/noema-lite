@@ -75,8 +75,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('timeline@1'),
-    () => import('./timeline/timeline.js'),
-    () => import('noema-worker:./timeline/timeline.js#simEngine'),
+    () => import('./timeline/timeline.ts'),
+    () => import('noema-worker:./timeline/timeline.ts#simEngine'),
   ),
   def(
     manifest('music@1'),
