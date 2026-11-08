@@ -1,4 +1,4 @@
-/* clinic@1 (src/engines/clinic/clinic.js, docs/library/clinic.md): reference values (the source in each message, with its tolerance),
+/* clinic@1 (src/engines/clinic/clinic.ts, docs/library/clinic.md): reference values (the source in each message, with its tolerance),
    the edge cases and their codes, the checker's codes, the virtual patient's physiology and the grade of a reasoning path, the sim
    adapter, the Worker source (with med@1 inside) in a fresh global, speed.  Run: node tests/lib_clinic.js */
 'use strict';

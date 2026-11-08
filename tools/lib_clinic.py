@@ -1,4 +1,4 @@
-"""clinic@1 — the Python twin of src/engines/clinic/clinic.js (docs/library/clinic.md): check_spec(spec), exprs(spec), keys(spec) give
+"""clinic@1 — the Python twin of src/engines/clinic/clinic.ts (docs/library/clinic.md): check_spec(spec), exprs(spec), keys(spec) give
 the same problems (code, path, msg, level) and lists as the JS checkSpec / exprs / keys. It does not compute."""
 import enginelib as L
 

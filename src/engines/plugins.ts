@@ -65,8 +65,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('clinic@1', ['engine:med@1']),
-    () => import('./clinic/clinic.js'),
-    () => import('noema-worker:./clinic/clinic.js#simEngine'),
+    () => import('./clinic/clinic.ts'),
+    () => import('noema-worker:./clinic/clinic.ts#simEngine'),
   ),
   def(
     manifest('anatomy@1'),

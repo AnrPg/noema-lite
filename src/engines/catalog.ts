@@ -410,7 +410,7 @@ const CATALOG = Object.freeze([
     'pharmacologie',
     'diagnostic',
   ]),
-  E('clinic@1', 'library', true, 'src/engines/clinic/clinic.js', 'clinic', [
+  E('clinic@1', 'library', true, 'src/engines/clinic/clinic.ts', 'clinic', [
     'clinical reasoning',
     'differential diagnosis',
     'diagnosis',
