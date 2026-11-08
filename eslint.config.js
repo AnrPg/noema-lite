@@ -15,8 +15,13 @@ const ELEMENTS = [
   { type: 'ports', pattern: 'src/ports', partialMatch: false },
   { type: 'domain', pattern: 'src/features/*/domain', partialMatch: false, capture: ['feature'] },
   { type: 'application', pattern: 'src/features/*/application', partialMatch: false, capture: ['feature'] },
+  // a feature's screens (src/features/<name>/ui/: Lit on the kit) and their tests (…/ui/test/, listed first: 'feature-ui' would match them)
+  { type: 'feature-ui-test', pattern: 'src/features/*/ui/test', partialMatch: false, capture: ['feature'] },
+  { type: 'feature-ui', pattern: 'src/features/*/ui', partialMatch: false, capture: ['feature'] },
   { type: 'plugins', pattern: 'src/plugins', partialMatch: false },
   { type: 'engines', pattern: 'src/engines', partialMatch: false },
+  // the activity runtimes (src/runtimes): plugins that draw into the box the activity core gives them (a driving adapter, like the UI)
+  { type: 'runtimes', pattern: 'src/runtimes', partialMatch: false },
   { type: 'adapters', pattern: 'src/adapters', partialMatch: false },
   // the UI's tests (src/ui/test/) wire the components to the memory adapters, as a composition root would (listed before 'ui',
   // which would match them too)
@@ -35,11 +40,15 @@ const MAY_IMPORT = {
   application: ['kernel', 'contracts', 'ports', 'domain', 'application'],
   plugins: ['kernel', 'contracts', 'ports', 'plugins'],
   engines: ['kernel', 'contracts', 'ports', 'plugins', 'engines'],
+  runtimes: ['kernel', 'contracts', 'ports', 'plugins', 'runtimes'],
   adapters: ['kernel', 'contracts', 'ports', 'adapters'],
   // the UI (src/ui: the component kit, the router, the frame) is a driving adapter: it reaches the core through the ports
   ui: ['kernel', 'contracts', 'ports', 'ui'],
   'ui-test': ['kernel', 'contracts', 'ports', 'adapters', 'ui'],
-  connector: ['kernel', 'contracts', 'ports', 'domain', 'application', 'plugins', 'engines', 'connector'],
+  // a feature's screens: the kit and the feature's own domain and application, the rest through ports (the data port of the screen)
+  'feature-ui': ['kernel', 'contracts', 'ports', 'domain', 'application', 'ui', 'feature-ui'],
+  'feature-ui-test': ['kernel', 'contracts', 'ports', 'adapters', 'domain', 'application', 'ui', 'ui-test', 'feature-ui', 'feature-ui-test'],
+  connector: ['kernel', 'contracts', 'ports', 'domain', 'application', 'plugins', 'engines', 'runtimes', 'connector'],
   composition: ELEMENTS.map(e => e.type),
 };
 /** the layers that never touch the DOM, the network, storage or the clock directly (they get them through ports) */

@@ -1007,8 +1007,8 @@ export function createSimSpec(env: CheckEnv) {
             key(k, partMsg(wk, w), nd);
           });
         if (eng === WASM_ENGINE && items) {
-          if (!env.wasm) E2.push('spec.model: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here');
-          else E2.push(...env.wasm.checkModel(sub, items));
+          if (!env.wasm) E2.push('spec.model: the WebAssembly checker (src/runtimes/wasm-module) is not loaded here');
+          else E2.push(...env.wasm.checkModel(sub, items, env.expr));
         }
       }
       E.push(...E2.map(m => partMsg(m, w)));
@@ -1470,8 +1470,8 @@ export function createSimSpec(env: CheckEnv) {
     else if (isP6(eng)) checkEngine(spec, eng, inNames, E);
     else if (lib && !PT && typeof eng === 'string') checkLib(spec, eng, inNames, E, key);
     if (eng === WASM_ENGINE && items) {
-      if (!env.wasm) E.push('spec.model: the WebAssembly checker (NoemaWasm, engine/src/44_activity_wasm.js) is not loaded here');
-      else E.push(...env.wasm.checkModel(spec, items));
+      if (!env.wasm) E.push('spec.model: the WebAssembly checker (src/runtimes/wasm-module) is not loaded here');
+      else E.push(...env.wasm.checkModel(spec, items, env.expr));
     }
     if (spec.bench != null && !PT) {
       if (typeof eng !== 'string' || !BENCH_ENGINES.has(eng))

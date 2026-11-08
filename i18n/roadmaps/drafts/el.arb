@@ -169,5 +169,16 @@
   "roadmap.levels.kind.year": "Έτος {n}",
   "roadmap.levels.difficulty.introductory": "Εισαγωγικό",
   "roadmap.levels.difficulty.intermediate": "Μέσο",
-  "roadmap.levels.difficulty.advanced": "Προχωρημένο"
+  "roadmap.levels.difficulty.advanced": "Προχωρημένο",
+  "roadmap.levels.title": "Επίπεδα",
+  "roadmap.levels.ladder": "Τα επίπεδα αυτού του Οδικού χάρτη",
+  "roadmap.levels.progress": "Κατακτημένα βήματα του επιπέδου {level}",
+  "roadmap.levels.moment.title": "Νέο επίπεδο",
+  "roadmap.levels.moment.next": "Επόμενο: {level}",
+  "roadmap.levels.moment.go": "Συνέχεια",
+  "roadmap.levels.test.loading": "Συγκεντρώνονται οι ερωτήσεις…",
+  "roadmap.levels.proposal.gone": "Γι’ αυτή την πρόταση έχει ήδη αποφασιστεί.",
+  "roadmap.quiz.answers": "Απαντήσεις",
+  "roadmap.quiz.right": "Σωστά.",
+  "roadmap.quiz.wrong": "Λάθος."
 }

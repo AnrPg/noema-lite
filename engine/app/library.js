@@ -315,15 +315,15 @@
     };
     return { list, draw };
   }
-  /** 📚 The Shelf on its own (from 🧭 Curricula and ⚙️ → Subjects). onStudy(id) — default: open the subject. */
-  async function openShelf(acc, { onStudy } = {}) {
-    const study = id => onStudy ? onStudy(id) : Noema.switchTo(acc, id);
+  /** 📚 The Shelf on its own (from 🧭 Curricula and ⚙️ → Subjects): a subject chosen opens. */
+  async function openShelf(acc) {
+    const study = id => Noema.switchTo(acc, id);
     overlay(async (box, close) => {
       const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
       const S = shelfChips(acc, { q, onPick: s => { close(); study(s.id); }, onChange: async () => S.draw(await shelf(acc)) });
       const subs = await shelf(acc);
       box.append(brandHead(tr('pick.shelf', { n: subs.length }, acc), tr('pick.shelfSub', null, acc)), q, S.list,
-        el('div', { class: 'row noema-ovfoot' }, window.NoemaCurMap ? el('button', { class: 'btn small', onclick: () => { close(); NoemaCurMap.library(acc, { onStudy }); } }, tr('pick.curricula', null, acc)) : null, el('button', { class: 'btn small', onclick: close }, tr('pick.close', null, acc))));
+        el('div', { class: 'row noema-ovfoot' }, window.NoemaCurMap ? el('button', { class: 'btn small', onclick: () => { close(); Noema.curricula(); } }, tr('pick.curricula', null, acc)) : null, el('button', { class: 'btn small', onclick: close }, tr('pick.close', null, acc))));
       S.draw(subs);
     }, { closable: true });
   }
@@ -334,7 +334,6 @@
     return new Promise(resolve => {
       overlay((box, close) => {
         const pick = s => { close(); resolve(s); };
-        const onStudy = async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) pick(s); };
         const q = el('input', { class: 'noema-input noema-search', placeholder: tr('pick.search', null, acc), oninput: () => S.draw() });
         const S = shelfChips(acc, { q, onPick: pick, onChange: async () => { subs = await shelf(acc); S.draw(subs); drawCurs(); sum.textContent = tr('pick.shelf', { n: subs.length }, acc); } });
         const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); if (!s) { S.draw(await shelf(acc)); return; } landed(acc, s); pick(s); } catch (er) { toastL('⚠️ ' + errMsg(er), 4000); } } }));
@@ -342,16 +341,16 @@
         Notes.on(all => { const pending = all.filter(x => !x.kind); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
         // the way to study: a curriculum — a map of steps, each step a subject (the subjects on no map wait on 📚 the Shelf below)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
-          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => CM()?.library(acc, { onStudy }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))),
+          el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => Noema.curricula() }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))),
           (REG.languages || []).length || langAccount(acc).length ? el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => pickLanguage(acc, s => { close(); resolve(s); }) }, '🌍 ' + tr('loader.pick.languages'), el('small', {}, tr('loader.pick.languagesSub'))) : null);
         const curs = el('div', { class: 'pick-curs' });
         const drawCurs = () => {
           curs.innerHTML = ''; const list = CU?.list(acc) || [];
-          if (!list.length) { curs.append(el('div', { class: 'tiny pick-nocur' }, tr('pick.noCurricula', null, acc), ' ', CM() ? el('button', { class: 'btn small', onclick: () => CM().create(acc, { onStudy }) }, tr('pick.newCurriculum', null, acc)) : null, ' ', CM() ? el('button', { class: 'btn small ghost', onclick: () => CM().importMap(acc, { onStudy }) }, tr('pick.importMap', null, acc)) : null)); return; }
+          if (!list.length) { curs.append(el('div', { class: 'tiny pick-nocur' }, tr('pick.noCurricula', null, acc), ' ', CM() ? el('button', { class: 'btn small', onclick: () => CM().create(acc) }, tr('pick.newCurriculum', null, acc)) : null, ' ', CM() ? el('button', { class: 'btn small ghost', onclick: () => CM().importMap(acc) }, tr('pick.importMap', null, acc)) : null)); return; }
           curs.append(...list.slice(0, 6).map(c => { const sm = c.status === 'ready' ? CU.summary(acc, c) : null;
-            return el('button', { class: 'pick-cur', onclick: () => c.status === 'ready' || c.status === 'attach' ? CM()?.map(acc, c.id, { onStudy }) : CM()?.progress(acc, c, { onStudy }) },
+            return el('button', { class: 'pick-cur', onclick: () => c.status === 'ready' || c.status === 'attach' ? Noema.curriculumMap(c.id) : CM()?.progress(acc, c) },
               el('b', {}, (c.shared && !c.shared.ended ? '👥 ' : '🧭 ') + (CU.shownTitle?.(c) || c.title || c.goal)), el('span', { class: 'tiny' }, sm ? tr('loader.pick.curSummary', { mastered: sm.mastered, total: sm.total, open: sm.open }) : '⏳')); }),
-            list.length > 6 ? el('button', { class: 'pick-cur', onclick: () => CM()?.library(acc, { onStudy }) }, el('b', {}, `+${list.length - 6}`), el('span', { class: 'tiny' }, tr('pick.curricula', null, acc))) : null);
+            list.length > 6 ? el('button', { class: 'pick-cur', onclick: () => Noema.curricula() }, el('b', {}, `+${list.length - 6}`), el('span', { class: 'tiny' }, tr('pick.curricula', null, acc))) : null);
         };
         // 📚 the Shelf: folded away once the learner has a map (it remembers, per device, whether it was left open)
         const SK = `${P}${acc}:pickShelfOpen`; let remembered = null; remembered = ls.get(SK);
@@ -479,7 +478,7 @@
   APP.dropSubjects = () => { subjCache = null; };
   Object.assign(N, {
     subjectsFor, pickSubject, shelf, loadSubject, stepOf, importedPacks, importPackFile, exportPackage, langTag, localizedSubject,
-    openShelf: (acc, opts) => openShelf(acc || N.account?.id || KV.acc, opts || {}),
+    openShelf: acc => openShelf(acc || N.account?.id || KV.acc),
     editSubject(s, o) { return editSubject(N.account.id, s, o); }, deleteSubject(s) { return deleteSubject(N.account.id, s); }, setHidden(id, h) { return setHidden(N.account.id, id, h); },
     getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }), inlineTranslations: (acc, pack) => inlineTranslations(acc, null, pack),
     bridgeTag: s => window.NoemaBridge?.tag(s) || null,
@@ -522,7 +521,6 @@
   const open = S.open;
   const page = S.page;
   const isLang = S.isLang;
-  const onStudy = (...a) => APP.onStudy(...a);
   /* ---------- the Shelf: subjects that teach no step of any Roadmap ---------- */
   PAGES.shelf = async () => {
     const v = page({ tab: 'learn', crumbs: [[L('knowledge'), '#/learn'], [L('shelf')]], back: '#/learn', corner: true, menu: shelfMenu() },
@@ -542,7 +540,7 @@
     draw();
   };
   function shelfMenu() {
-    return [CM()?.fromSources ? { label: L('fromSources'), sub: L('fromSourcesSub'), icon: 'upload', run: () => CM().fromSources(acc(), { onStudy }) } : null, { label: L('importFile'), sub: L('importFileSub'), icon: 'upload', run: importFile }, { label: L('createClaude'), sub: L('createClaudeSub'), icon: 'spark', run: () => N().claudeGuide({ onDone: s => landedOpen(s) }) },
+    return [{ label: L('fromSources'), sub: L('fromSourcesSub'), icon: 'upload', run: () => N().fromSources(acc()) }, { label: L('importFile'), sub: L('importFileSub'), icon: 'upload', run: importFile }, { label: L('createClaude'), sub: L('createClaudeSub'), icon: 'spark', run: () => N().claudeGuide({ onDone: s => landedOpen(s) }) },
       { label: L('exploreShared'), icon: 'globe', href: '#/explore/subjects' }, { label: L('allSubjects'), sub: L('allSubjectsSub'), icon: 'book', run: () => N().openSubjectPicker?.() }];
   }
   function shelfItem(s, i, refresh) {

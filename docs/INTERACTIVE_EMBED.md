@@ -5,7 +5,7 @@ It is **opt-in, needs the network, and is explore only**: a theory block, never 
 activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §13.
 
 Files: the allow-list `tools/embed_allow.json` (in the toolkit as `embed_allow.json`), the runtime
-`engine/src/45_activity_embed.js` (+ `45_activity_embed.css`), the checks `NoemaEmbed.check` /
+`src/runtimes/external-embed/` (a typed runtime: `check.ts` the rules, `runtime.ts` the frames, `embed.css`), the checks `check` /
 `checkPack` (the content checks call them: the app, the connector and the toolkit's `activity_lint.py` / `make_pack.py`), tests `tests/activities_embed.js`.
 
 **Use it rarely.** A pack is meant to work offline and on its own. Prefer a `sim-spec@1` activity of your own; embed an outside
@@ -42,7 +42,7 @@ origin) — a later decision, not this runtime.
 `{format: "noema.embed-allow/v1", providers: [{ id, name, status: "allowed"|"pending", origins: ["https://exact.host"],
 path, query|null, hash|null, sandbox: [tokens], licenses: [...], creditMust, credit (template), terms, supportsResult, notes }]}`.
 `path` / `query` / `hash` are regexes matched against the **whole** part (anchored; a portable subset of regex syntax);
-`query: null` = no query allowed. The runtime carries an exact copy (`/*@providers*/ … /*@end*/`); the test fails when they
+`query: null` = no query allowed. The runtime imports this file as it is (`check.ts`: one copy, no copy to keep equal); the test checks they
 differ. Adding a provider: research its terms, add it as `pending`, switch to `allowed` only when embedding is clearly permitted.
 
 ## 3. The item (in `activities/activities.json`)
@@ -80,7 +80,7 @@ Check them with `python3 activity_lint.py <subject-dir>`; `make_pack.py` runs th
    and `ctx.onLive()`, `engine/src/32_activities.js`), and then the oldest explorer is parked to make room.
 2. **Remembered per provider.** Open stores `S.settings.embedOk[<provider>] = time` (an account setting, synced); next time the
    frame opens without the card. **Me › Data and sync** shows one quiet line, *"Outside activities that open without asking:
-   PhET, …"* with an ⓘ and **Ask again** (`NoemaEmbed.consent.list()` / `forget(id)`); the line is absent when nothing was opened.
+   PhET, …"* with an ⓘ and **Ask again** (the account setting `embedOk`, `consentOf` in `runtime.ts`); the line is absent when nothing was opened.
 3. **The frame.** Two frames as in `html-app@1`: the app's frame is a wrapper without scripts (CSP `script-src 'none';
    frame-src <provider origins>`); the provider's page runs in the wrapper's frame and can navigate only within its provider.
    Both: `sandbox` = the provider's tokens (`allow-scripts allow-same-origin` — the provider's own origin, for its storage;

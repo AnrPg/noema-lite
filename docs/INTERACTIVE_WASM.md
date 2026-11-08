@@ -5,7 +5,7 @@ microcontroller emulator, a DSP kernel, a physics step function). The page aroun
 renderer (sliders, readouts, plots, the checks grader: `docs/INTERACTIVE.md` §12); the module only computes numbers.
 The contract of every activity is `docs/INTERACTIVE.md`; the decision is the ADR's D12 (P6), as built in its §13.
 
-Code: `engine/src/44_activity_wasm.js` (`window.NoemaWasm`) · checked by the content checks (`activity_lint.py` and `make_pack.py` in the toolkit, through `noema-tools.cjs`)
+Code: `src/runtimes/wasm-module/` (a typed runtime: `check.ts` the rules, `worker.ts` the Worker's code, `runtime.ts` the runtime, its engine `wasm@1` and `load`; docs/ARCHITECTURE.md §6.4) · checked by the content checks (`activity_lint.py` and `make_pack.py` in the toolkit, through `noema-tools.cjs`)
 · the reference activity: `wasm-oscillator` · tests: `tests/activities_wasm.js`, `tests/activities.js`, `tests/activities_pack.py`
 · fixtures: `tests/fixtures/wasm/`.
 
@@ -80,7 +80,7 @@ pack item (base64 + sha256 + abi) → page: decode, sha256, inspect() (our binar
    each call: inputs (f64) written at ptr_in → step(ptr_in, n_in, ptr_out, n_out) → outputs (f64) read at ptr_out
 ```
 
-## 4. The rules (`NoemaWasm.inspect()`: the app, the connector and the toolkit run the same code)
+## 4. The rules (`inspect()` of `src/runtimes/wasm-module/check.ts`: the app, the connector and the toolkit run the same code)
 
 | code | refused when |
 |---|---|
@@ -116,7 +116,7 @@ The test probes each of them inside the worker against a beacon server and expec
 * Failures reuse the core's codes, so the runtime adds **no UI words**: a refused module (`import`, `memory`, `spec`, `size`,
   `format`) → the fallback, no Restart; `runaway` (a run over budget, an endless loop) → "stopped responding" with Restart;
   `unsupported` (no WebAssembly, the one-file bundle without workers) → the fallback.
-* **`window.NoemaWasm.load(item, {budgetMs, seed})`** → a handle for host code (a future emulator UI, the tests):
+* **`(await NoemaCore.runtimes.load('wasm-module@1')).api.load(item, {budgetMs, seed})`** → a handle for host code (a future emulator UI, the tests):
   `call(fn, inputs, nOut) → {out: Float64Array, log, ms, pages}`, `raw(fn, …i32) → {value}`, `restart()`, `close()`,
   `state()`. Each call has `budgetMs` (50–5000, default 1000; loading max(1 s, budget)): over it the worker is terminated, the
   call rejects with code `runaway`, later calls with `stopped`, `restart()` starts a fresh worker from the same checked bytes.

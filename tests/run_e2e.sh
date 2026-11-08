@@ -6,7 +6,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"; T="${TMPDIR:-/tmp}/noema-e2e"
 [ -d "$ROOT/node_modules/esbuild" ] || (cd "$ROOT" && npm ci --no-audit --no-fund)
 (cd "$ROOT" && python3 tools/build.py --no-validate >/dev/null)
 export NOEMA_BUILT=1   # tests/built.js: every suite finds the files built (no suite builds again)
-rm -rf "$T"; mkdir -p "$T"; (cd "$ROOT" && tar --exclude=.git --exclude=dist --exclude=data --exclude=node_modules -cf - .) | (cd "$T" && tar xf -)
+rm -rf "$T"; mkdir -p "$T"; (cd "$ROOT" && tar --exclude=.git --exclude=.claude --exclude=dist --exclude=data --exclude=node_modules -cf - .) | (cd "$T" && tar xf -)
 ln -s "$ROOT/node_modules" "$T/node_modules"   # the copy builds with the repo's own tools (esbuild)
 cp -r "$T/tests/fixtures/demo-physics" "$T/library/subjects/demo-physics"
 mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/accounts/anr/packs/secret-notes"
@@ -49,6 +49,7 @@ run h5p_import python3 "$ROOT/tests/h5p_import.py"   # H5P import into the exerc
 run shell node "$ROOT/tests/shell.js" "$T"
 run subject_switch node "$ROOT/tests/subject_switch.js" "$T"   # opening another subject reopens that one, even over a slow network
 run notices node "$ROOT/tests/notices.js" "$T"   # news (a step ready, a new part…): at most 2 toasts at once, the rest in the 🔔 until cleared
+run roadmap_levels node "$ROOT/tests/roadmap_levels.js" "$T"   # 🪜 the levels of a Roadmap (src/features/roadmaps/ui): the ladder, the level-reached moment, the level test, Claude’s proposed arrangement; 320 px, axe, keyboard, RTL
 run search_catalog node "$ROOT/tests/search_catalog.js"   # the search catalogue (docs/SEARCH.md)
 run search node "$ROOT/tests/search.js" "$T"     # search, stable addresses, collections, the practice round
 run e2e node "$ROOT/tests/e2e.js" "$T"

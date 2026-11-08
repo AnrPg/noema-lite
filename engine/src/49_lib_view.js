@@ -17,7 +17,7 @@ const engWhat = e => tE('engine.engines.' + e.slug + '.what');
 /** an engine (or runtime) this app can run (an engine of the library counts before it is loaded: it loads when an activity needs it) */
 function engineHere(e) {
   if (typeof ACT === 'undefined') return false;
-  if (e.runtime) return !!(ACT.runtime(typeof e.runtime === 'string' ? e.runtime : e.id) || ACT.runtime(e.id));
+  if (e.runtime) return !!(ACT.hasRuntime(typeof e.runtime === 'string' ? e.runtime : e.id) || ACT.hasRuntime(e.id));
   return ACT.engines().includes(e.id);
 }
 function engineRow(e) {

@@ -13,7 +13,8 @@
      harness.js    src/composition/harness.ts — window.NoemaCore = { contracts, engines } for a page that is not the app: the
                    skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
      ui.js         src/composition/ui.ts — the app's UI root (src/composition/ui-root.ts: Lit, the kit, the frame and the shell's
-                   screens, window.Noema / NoemaThemes / NoemaShell), right after app.js and engine/i18n.js.
+                   screens, window.Noema / NoemaThemes / NoemaShell; the areas' screens of src/features/<name>/ui with their data
+                   ports, e.g. src/composition/roadmaps-ui.ts), right after app.js and engine/i18n.js.
      engines.js, contracts.js, author.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts
                    and the content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
                    (src/contracts/page.ts, pageContracts below); the activity author (src/composition/author.ts, #/author).
@@ -69,22 +70,25 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
     @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
 /** lazy = a script of the site and the one-file bundle the page runs only when it needs it (the one-file bundle keeps it as
     text: <script type="text/plain" id="noema-lazy:<name>">) */
-const APP_KB = 480;   // the core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps,
-                      // community: about 330 KB) and the learning log's event contract (about 140 KB); the engines, the other contracts and the content checks are lazy pieces
+const APP_KB = 512;   // the core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
+                      // with the agents' prompts that left engine/curriculum.js, community: about 360 KB) and the learning log's event contract
+                      // (about 140 KB); the engines, the other contracts and the content checks are lazy pieces
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
   { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
   { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
+  { name: 'runtimes', in: 'src/composition/runtimes.ts', kind: 'lazy', out: 'runtimes.js', budgetKB: 512 },   // the activity runtimes' code (src/runtimes): loaded when an activity first needs one (ACT.runtime)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
   { name: 'author', in: 'src/composition/author.ts', kind: 'lazy', out: 'author.js', budgetKB: 160 },   // the activity author (#/author): its forms, checks and files; loaded on the first visit (src/composition/shell/author-page.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5632 },   // the contracts + the engine library
-  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 320 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui)
+  { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 384 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui)
   { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
-  { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + engine/src/38, 44, 45
+  { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + the runtimes' checks (src/runtimes) + engine/src/38
+  { name: 'runtimes-node', in: 'src/runtimes/node.ts', kind: 'node', format: 'cjs', out: 'runtimes-node.cjs', budgetKB: 512 },   // the runtimes' checks and code for the node suites
   { name: 'roadmaps-node', in: 'src/composition/roadmaps-node.ts', kind: 'node', format: 'cjs', out: 'roadmaps-node.cjs', budgetKB: 256 },
 ];
 const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
