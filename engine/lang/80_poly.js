@@ -154,7 +154,7 @@ WIDGETS.parallel_align = (it, done) => {
     box.append(h('div', { class: 'lx-fb ' + (ok ? 'ok' : 'bad') }, ok ? '✅ ' + LT('lang.poly.allMatched') : '❌ ' + LT('lang.poly.wrongTaps', { n: mistakes }), h('div', { class: 'tiny' }, it.gloss),
       h('ul', { class: 'lx-list tiny' }, ...it.rows.map(row => h('li', {}, h('b', {}, row.gloss), ': ', ...it.langs.flatMap(c => {
         const s = LX(c).sentenceById[it.sentences[c]], is = c === pv ? [row.pivot] : row.hits[c] || [];
-        return is.length ? [info(c).flag, ' ', h('span', { class: 'lx-w', lang: c, dir: LX(c).language.dir || 'ltr' }, is.map(i => tokText(c, s.tokens[i].t)).join(' ')), ' '] : [];
+        return is.length ? [info(c).flag, ' ', word(c, is.map(i => tokText(c, s.tokens[i].t)).join(' '), { sub: false }), ' '] : [];
     }))))));
     done(ok);
   };

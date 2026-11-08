@@ -1291,8 +1291,10 @@
   }
   /** Is a built sentence right? (the tiles in order vs the sentence and its alternatives) */
   function checkBuilt(C, code, item, tiles) {
-    const X = C.lang[code], text = joinTokens(tiles.map(t => ({ t })), item.join || X.language.tokenJoin);
-    return item.answers.some(a => cmpText(code, a) === cmpText(code, text));
+    const X = C.lang[code], how = item.join || X.language.tokenJoin, text = joinTokens(tiles.map(t => ({ t })), how);
+    // a language written without spaces (Chinese): the punctuation inside the sentence (，、) is no tile, so it must not leave a space
+    const key = s => how === 'none' ? cmpText(code, s).replace(/\s+/g, '') : cmpText(code, s);
+    return item.answers.some(a => key(a) === key(text));
   }
   /** Recognition items for words: the word → its meaning (distractors: other words of the same lesson/node first). */
   function wordItems(C, L, code, lexIds, opts = {}) {

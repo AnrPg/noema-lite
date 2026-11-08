@@ -186,6 +186,7 @@ NoemaCore.vault                         the vault (src/features/vault): FORMATS,
 NoemaCore.social                        people (src/features/social): state, onChange, refresh, search, putFile, the rules
 NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
                                         reject with a NoemaError
+NoemaCore.languages                     the language courses before any is loaded (src/features/languages, §6.5)
 ```
 
 **The learning log.** What the learner does is an event (`noema.events/v1`,
@@ -258,13 +259,15 @@ kernels several engines share built once.
 **Lazy pieces.** The start path of the page is `build/app.js` (about 470 KB, 133 KB gzipped: the core, the expression
 language, the catalogue and the 26 manifests of `src/engines/manifests.ts`; phase 2's learning log, sync, read models, Roadmaps
 and community, about 330 KB; and the learning log's event contract, about 140 KB) and `build/ui.js` (the frame and the shell's
-screens: about 240 KB). Two pieces of kind `lazy` stay out of it:
+screens: about 240 KB). Pieces of kind `lazy` stay out of it:
 
 | piece | entry | what | when it runs |
 |---|---|---|---|
 | `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, the content checks before they check a pack that names an engine, the author |
+| `build/lang-activities.js` | `src/composition/lang-activities.ts` | the screens of area 5 (languages and activities) on `build/ui.js`'s Lit and kit (about 36 KB) | the first language page (`NoemaShell.area5`, §6.5) |
 | `build/runtimes.js` | `src/composition/runtimes.ts` | the code of every typed activity runtime (§6.4) | the first time an activity needs one (`ACT.runtime(id)`) |
 | `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) and the content checks built on them (`src/features/content`, about 120 KB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`, which brings both), after the first screen on Today, and before the Roadmaps start their jobs; a check before that is a bug and throws (`src/contracts/lazy.ts`, `src/features/content/application/lazy.ts`) |
+| `build/author.js` | `src/composition/author.ts` | the activity author (`src/features/author`, `src/ui/screens/author`: `noema-schema-form`, `noema-author`; about 115 KB) | the first time `#/author` opens (`src/composition/shell/author-page.ts`, after the engines, the schema kernel and the content checks) |
 
 The learning log checks every event it reads or makes, and it opens before the first screen: its contract
 (`noema.events.v1#event`, `tools/contracts.mjs` `START_CONTRACTS`) is compiled a second time into
@@ -317,6 +320,7 @@ bridge's UI half and starts the app:
 | `window.NoemaThemes` | `src/composition/shell/themes.ts` over `src/features/shell/domain/characters.ts` | the characters on the tokens: the 5-minute try, free changes for 15 days, then one every 5 days |
 | `window.NoemaShell` | `src/composition/shell/host.ts`, `src/ui/screens/shell/` | the frame (`noema-shell-frame`), the router over every hash route (`routes.ts`), Today, Progress, Settings, the character gallery, the Me menu, the first-time questions, the profile picker; the toolkit the areas draw their pages with |
 | the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage`, their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
+| the activity author | `src/composition/shell/author-page.ts`, the piece `build/author.js` (`src/features/author`, `src/ui/screens/author`) | `#/author` (`NoemaShell.registerPage`; `Noema.app.author` for the classic router): `noema-schema-form`, a form from a JSON Schema, and `noema-author` (docs/activities-dev/authoring_ui.md) |
 
 `NoemaCore.notify` draws on the kit's toaster once the root has started (`NoemaCore.toasts.use`); what does not fit goes to
 the 🔔. With `config.shell: false` the classic screens run without the frame (the older browser suites use them).
@@ -387,6 +391,34 @@ the document with its policy and wrapper frame, the engine bridge; the loop guar
 rules of `tools/h5p_allow.json` in `RUNTIME_CHECKS.h5p`, the frame's bootstrap, the document in html-app@1's frames, the reader and
 the mount; the player is the app's own file, loaded through `host.asset`, which the core answers with the folder `engine.js` came
 from). No runtime is a script of `engine/src` any more.
+
+### 6.5 Area 5's screens: languages and activities (phase 3)
+
+The screens of area 5 are Lit elements in the light DOM (`src/ui/screens/screen.ts`, `NoemaScreen`): the page's sheets
+(`engine/engine.css`, the course sheet `engine/langui.css` generated from `engine/lang/*.css`) style them, so their markup
+keeps the class names those sheets and the browser suites use. Each screen reads through one port of its own, a small
+interface beside it (`languages-port.ts`, `course-port.ts`); the root that mounts a screen hands it the
+adapter.
+
+| File | Holds |
+|---|---|
+| `src/ui/screens/languages-activities.ts` | **the one route file of area 5**: `AREA5_ROUTES` (`#/lang`, `#/lang/:code`), `mountArea5(match, host, ports, t)` → the element and the frame's chrome (crumbs, back, tab), the parts that are not pages (`mountArea5Part`: `lang-strip`, `study-chooser`, `lang-courses`, `lang-today`, `lang-lanes`, `lang-lesson`), `defineArea5()` |
+| `src/ui/screens/languages/` | the Languages tab (`languages-page.ts`, D21), the question "Which languages do you want to study?" (`study-chooser.ts`), Today's card (`lang-today.ts`), a language's home (`lang-home.ts`, D29: continue, the path, the study areas, the bookshelf, the tools) the chip strip (`lang-strip.ts`), ⫴ the parallel lanes (`lang-lanes.ts`), the head of a lesson: its four-step ladder, Continue, Deepen, Aa· (`lang-lesson-head.ts`); and the elements the course runtime makes itself (`document.createElement`, `.port` = the course: `screenEl` in `engine/lang/14_screens.js`): `noema-lang-word` — every foreign word and run, its reading under it (D24), its words underlined and opening their card, the new-word marker (D23), plain inside controls and exercises (`lang-word.ts`, with the Aa· switch `noema-lang-translit`) —, the aspect pages (`lang-aspect.ts`), 🧩 sorting and 🔁 principal parts (`lang-drills.ts`), the peculiarities (`lang-peculiar.ts`), a lesson's page, its run and its result (`lang-lesson.ts`), *In other languages* and the table of a meaning (`lang-others.ts`). The course's own parts not ported yet (grammar cards, word cards, exercises, notes) reach them as nodes |
+| `src/features/languages/` | the courses of the device before any course is loaded: the pure rules (`domain/courses.ts`: the courses, the languages offered and studied, a course's progress from its stored records, the course of a language) and the service over the device's keys (`application/courses.ts`) |
+| `src/composition/languages.ts` | `NoemaCore.languages`: that service over the root's storage, clock and settings writer (`NoemaThemes.putSettings`) |
+| `src/composition/area5.ts` | `NoemaShell.area5`: `has(hash)`, `mount(hash, host, ctx)` → the chrome, `part(name, host, ctx, options)`, `load()`, `now()`; the first call runs the lazy piece `build/lang-activities.js` (`src/composition/pieces.ts`, kind `lazy`: next to `build/ui.js`, or the one-file bundle's inline copy) |
+| `src/composition/ui-shared.ts` | the modules `build/ui.js` shares with that piece (Lit, its directives, the kit's core, dialog, icons, the router's routes) on `globalThis.__noemaUiShared`; the esbuild plugin `uiShared` (`tools/esbuild.mjs`) reads every such import from there and fails the build on any other module of Lit or `src/ui/{core,kit,frame,router}`, so the page keeps one Lit, one overlay stack and one class per element |
+| `src/composition/lang-activities-root.ts` · `-ports.ts` | the root of that piece: the services (the I18n port over `engine/i18n.js`, the system clock, the interface languages) and the adapters of the ports (`NoemaCore.languages`, the open course's port that `engine/lang/14_screens.js` hands over) |
+
+The pages mount these screens through `NoemaShell.area5`: `engine/app/languages.js` (the Languages tab, registered with
+`NoemaShell.registerPage('lang', …)`; Today's card; Choose another course; the course runtime is loaded with the piece) and
+the course runtime (`engine/lang/14_screens.js`: a language's home, the strip, the chooser inside a course, the lanes, a
+lesson's head).
+`#/engines` belongs to the Community area (`src/features/reports/ui/engines.ts`). A dialog of a screen goes to the frame, outside the screen, and gets
+the screen's services itself (`NoemaScreen.openDialog`).
+
+Tests: `src/ui/test/languages.test.ts` (happy-dom), `src/features/languages/application/courses.test.ts`, and in a browser
+`tests/lang_home.js`, `tests/lang_select.js`, `tests/lang_lanes.js`, `tests/lang_lessons.js`.
 
 ## 7. Patterns
 

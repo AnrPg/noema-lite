@@ -479,14 +479,14 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 ## 14. As built — P6 (the authoring UI, 2026-11-04)
 
 * **A route, not a page of its own.** The preview must be the real `sim-spec@1` runtime, which lives in `engine.js` and starts only
-  with a subject open, so the author is the engine route `#/author` (`authorView` in `engine/src/40_views.js`; `author` is one of
-  the shell's `ENGINE_ROUTES`, so the frame draws it with `shellChrome({ sub: true, crumbs: [[Activity author]] })`). It works
+  with a subject open, so the author is the route `#/author` (since phase 3 a page of the frame, `NoemaShell.registerPage`, drawn with
+  `subjectChrome({ sub: true, crumbs: [[Activity author]] })`, and `Noema.app.author` for the classic router). It works
   with any subject open and never changes that subject: the activity leaves the device only as the downloaded folder.
 * **One quiet way in**: subject ⋮ › *Create an activity* (line icon `wrench`, a one-line explanation under it), next to Edit —
   where docs/UI_MAP.md keeps the tools that change content. No button on the subject page, nothing in Me.
-* **Loaded on first use.** `schemaform.js`, `activity_author_schemas.js`, `activity_author.js` and `activity_author.css` (≈ 110 KB)
-  are fetched from `NOEMA_ENGINE_BASE` the first time the route opens (the pattern of the language UI); the site copies them, the
-  one-file bundle has them inline. Leaving the route destroys the page (its keys, its preview session).
+* **Loaded on first use.** `activity_author_schemas.js` and the lazy piece `build/author.js` (strict TS and Lit since phase 3:
+  `src/features/author`, `src/ui/screens/author`; the old `schemaform.js`, `activity_author.js` and `.css` are gone) load the first
+  time the route opens; the site copies them, the one-file bundle has them inline. Leaving the route destroys the page (its keys, its preview session).
 * **The schemas** are copied into `engine/activity_author_schemas.js` by `tools/build.py` (a `file://` page cannot fetch them);
   `python3 tools/build.py --author-schemas` prints the copy, and `tests/activity_author.js` checks that the committed one is current.
 * **The words are engine strings.** The 287 `engine.author.*` keys (UI, field labels `f.<schema title>` / `p.<netlist property>`,

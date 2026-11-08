@@ -49,7 +49,7 @@ function selectFor(slot, { foreign, c, label }) {
 /** A word of a sentence in a widget: font and direction, 🆕 when the learner has not learned it (meaning on hover, its card on tap). */
 function unitWord(c, u, unknown) {
   const X = LX(c), isNew = u.l && unknown.includes(u.l), shown = X.language.vowelMarks && UI.prefs.marks === false ? N.stripMarks(c, u.t) : u.t;
-  if (!u.l || !X.lex[u.l]) return h('span', { class: 'lx-w', lang: c, dir: dirOf(c) }, shown);
+  if (!u.l || !X.lex[u.l]) return word(c, u.t, { sub: false });
   return h('span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, dir: dirOf(c), tabindex: '0', title: (isNew ? '🆕 ' : '') + gloss(c, u.l),
     onclick: e => { e.stopPropagation(); wordPopup(c, u.l); }, onkeydown: e => { if (e.key === 'Enter') { e.stopPropagation(); e.preventDefault(); wordPopup(c, u.l); } } }, shown);
 }

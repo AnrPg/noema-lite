@@ -15,10 +15,13 @@
      ui.js         src/composition/ui.ts — the app's UI root (src/composition/ui-root.ts: Lit, the kit, the frame and the shell's
                    screens, window.Noema / NoemaThemes / NoemaShell; the areas' screens of src/features/<name>/ui with their data
                    ports, e.g. src/composition/roadmaps-ui.ts), right after app.js and engine/i18n.js.
-     engines.js, contracts.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts and the
-                   content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
-                   (src/contracts/page.ts, pageContracts below).
+     engines.js, contracts.js, author.js  the lazy pieces (kind "lazy", below): every engine's code; the compiled data contracts
+                   and the content checks (src/composition/contracts.ts) — app.js keeps only the learning log's event contract
+                   (src/contracts/page.ts, pageContracts below); the activity author (src/composition/author.ts, #/author).
      ui-kit.js     src/composition/ui-kit.ts — the kit's demo on #/ui-kit (a local host only; kind "dev").
+     lang-activities.js  src/composition/lang-activities.ts — the screens of area 5 (languages and activities, src/ui/screens/
+                   languages-activities.ts), kind "lazy": the shell loads it on the first language page (NoemaShell.area5). It
+                   brings no Lit and no kit of its own: those are build/ui.js's (src/composition/ui-shared.ts, uiShared below).
      roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
                    suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
      engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
@@ -67,24 +70,26 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
 /** kind: page = a script of the site and the one-file bundle; worker = a Worker of the app; sw = the service worker;
     harness = a browser script for pages other than the app (not in the site); dev = a browser script the development pages load
     on demand (not in the site or the one-file bundle); node = a bundle for Node (format esm | cjs)
-    @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
+    @typedef {{ name: string, in: string, kind: 'page' | 'lazy' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs', shared?: 'ui' }} Entry */
 /** lazy = a script of the site and the one-file bundle the page runs only when it needs it (the one-file bundle keeps it as
     text: <script type="text/plain" id="noema-lazy:<name>">) */
-const APP_KB = 512;   // the core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
+const APP_KB = 520;   // the core of the start path (with build/ui.js): phase 2's core (the learning log, sync, read models, Roadmaps
                       // with the agents' prompts that left engine/curriculum.js, community: about 360 KB) and the learning log's event contract
-                      // (about 140 KB); the engines, the other contracts and the content checks are lazy pieces
+                      // (about 140 KB), the engines' catalogue (about 28 KB) and the language courses before one is loaded (NoemaCore.languages, about 5 KB); the engines, the other contracts and the content checks are lazy pieces
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
   { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: APP_KB },   // the core, the expression language and the engines' catalogue
   { name: 'engines', in: 'src/composition/engines.ts', kind: 'lazy', out: 'engines.js', budgetKB: 4096 },   // every engine's code and Worker text + the schema kernel: loaded when first needed (src/engines/lazy.ts)
   { name: 'runtimes', in: 'src/composition/runtimes.ts', kind: 'lazy', out: 'runtimes.js', budgetKB: 512 },   // the activity runtimes' code (src/runtimes): loaded when an activity first needs one (ACT.runtime)
   { name: 'contracts', in: 'src/composition/contracts.ts', kind: 'lazy', out: 'contracts.js', budgetKB: 1792 },   // the compiled data contracts and the content checks: loaded after the first screen, before a subject opens (src/contracts/lazy.ts)
+  { name: 'author', in: 'src/composition/author.ts', kind: 'lazy', out: 'author.js', budgetKB: 160 },   // the activity author (#/author): its forms, checks and files; loaded on the first visit (src/composition/shell/author-page.ts)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5632 },   // the contracts + the engine library
   { name: 'ui', in: 'src/composition/ui.ts', kind: 'page', out: 'ui.js', budgetKB: 384 },   // the app's UI root: Lit, the kit, the frame and the shell's screens (src/ui), the Roadmap screens (src/features/roadmaps/ui)
   { name: 'ui-kit', in: 'src/composition/ui-kit.ts', kind: 'dev', out: 'ui-kit.js', budgetKB: 256 },   // the kit's demo; loaded only on #/ui-kit
+  { name: 'lang-activities', in: 'src/composition/lang-activities.ts', kind: 'lazy', shared: 'ui', out: 'lang-activities.js', budgetKB: 256 },   // the screens of languages and activities on build/ui.js's Lit and kit; loaded on the first language page
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
   { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + the runtimes' checks (src/runtimes) + engine/src/38
   { name: 'runtimes-node', in: 'src/runtimes/node.ts', kind: 'node', format: 'cjs', out: 'runtimes-node.cjs', budgetKB: 512 },   // the runtimes' checks and code for the node suites
@@ -217,6 +222,46 @@ export function pageContracts(root = ROOT) {
   };
 }
 
+/** The esbuild plugin of a lazy piece of screens (an entry with `shared: 'ui'`, e.g. build/lang-activities.js): an import of a
+    module that build/ui.js shares (src/composition/ui-shared.ts, UI_SHARED) reads it from globalThis.__noemaUiShared, so
+    the page keeps one Lit, one kit and one class per element; an import of any other module of Lit or of
+    src/ui/{core,kit,frame,router} fails the build (it would be a second copy: add it to ui-shared.ts). */
+export function uiShared(root = ROOT) {
+  const table = readFileSync(path.join(root, 'src', 'composition', 'ui-shared.ts'), 'utf8');
+  const keys = new Set([...table.matchAll(/^\s+'?([\w@./-]+)'?: \w+,$/gm)].map(m => m[1]));
+  const guarded = abs => {
+    const r = path.relative(root, abs).split(path.sep).join('/');
+    return /^node_modules\/(lit|lit-html|lit-element|@lit)\//.test(r) || /^src\/ui\/(core|kit|frame|router)\//.test(r);
+  };
+  const names = new Map();   // key → Promise<string[]> (the module's exports)
+  const exportsOf = (key, abs) => {
+    if (!names.has(key)) names.set(key, esbuild.build({ stdin: { contents: `export * from ${JSON.stringify(abs)};`, resolveDir: root, loader: 'ts' }, bundle: true,
+      write: false, format: 'esm', metafile: true, logLevel: 'silent', tsconfig: path.join(root, 'tsconfig.json'), platform: 'browser' })
+      .then(r => Object.values(r.metafile.outputs)[0].exports));
+    return names.get(key);
+  };
+  return {
+    name: 'noema-ui-shared',
+    setup(b) {
+      b.onResolve({ filter: /.*/ }, async a => {
+        if (a.pluginData?.uiShared || a.kind === 'entry-point') return undefined;
+        const r = await b.resolve(a.path, { resolveDir: a.resolveDir, kind: a.kind, importer: a.importer, pluginData: { uiShared: true } });
+        if (r.errors.length) return { errors: r.errors };
+        const rel = path.relative(root, r.path).split(path.sep).join('/');
+        const key = keys.has(a.path) ? a.path : keys.has(rel) ? rel : null;
+        if (key) return { path: key, namespace: 'noema-ui-shared', pluginData: { abs: r.path } };
+        if (guarded(r.path)) return { errors: [{ text: `${a.path} (${rel}) is not shared by build/ui.js: add it to src/composition/ui-shared.ts` }] };
+        return r;
+      });
+      b.onLoad({ filter: /.*/, namespace: 'noema-ui-shared' }, async a => {
+        const ex = await exportsOf(a.path, a.pluginData.abs);
+        const m = `globalThis.__noemaUiShared[${JSON.stringify(a.path)}]`;
+        return { contents: `const m = ${m};\nif (!m) throw new Error(${JSON.stringify('build/ui.js shares no ' + a.path)});\n` + (ex.length ? `export const { ${ex.join(', ')} } = m;\n` : ''), loader: 'js' };
+      });
+    },
+  };
+}
+
 /** esbuild options of one entry */
 function options(e, workers) {
   const common = {
@@ -228,7 +273,8 @@ function options(e, workers) {
     return { ...common, platform: 'node', format, target: 'node22', packages: 'bundle',
       ...(format === 'esm' ? { banner: { js: "import { createRequire as __noemaRequire } from 'node:module'; const require = __noemaRequire(import.meta.url);" } } : {}) };
   }
-  return { ...common, platform: 'browser', format: 'iife', target: BROWSERS, ...(e.kind === 'page' ? { plugins: [...common.plugins, pageContracts()] } : {}) };
+  return { ...common, platform: 'browser', format: 'iife', target: BROWSERS,
+    ...(e.kind === 'page' ? { plugins: [...common.plugins, pageContracts()] } : e.shared === 'ui' ? { plugins: [...common.plugins, uiShared()] } : {}) };
 }
 
 const kb = n => Math.round(n / 102.4) / 10;

@@ -827,33 +827,8 @@ function drillView(id) {
 
 /* ---------- router ---------- */
 /** The subject's pages. In the shell, #/ is Today and the subject lives at #/subject; any other address is the shell's. */
-/* ---------- ✎ the activity author (#/author): an interactive activity built with a form, the real sim-spec@1 runtime as its preview
-   (docs/INTERACTIVE_AUTHORING.md, docs/activities-dev/authoring_ui.md). Its scripts load on the first visit (the single-file
-   bundle has them inline); the activity is not added to the open subject — the author downloads its folder. ---------- */
-let AUTHOR_LOAD = null;
-function loadAuthor() {
-  if (window.NoemaActivityAuthor) return Promise.resolve();
-  const base = window.NOEMA_ENGINE_BASE || 'engine/';
-  const js = f => new Promise((ok, no) => { const s = document.createElement('script'); s.src = base + f; s.onload = ok; s.onerror = () => no(new Error(f)); document.head.append(s); });
-  return AUTHOR_LOAD || (AUTHOR_LOAD = (async () => {
-    if (!document.querySelector('link[data-author-css]')) document.head.append(h('link', { rel: 'stylesheet', href: base + 'activity_author.css', 'data-author-css': '1' }));
-    for (const f of ['schemaform.js', 'activity_author_schemas.js', 'activity_author.js']) if (!(f === 'schemaform.js' ? window.NoemaSchemaForm : f === 'activity_author.js' ? window.NoemaActivityAuthor : window.NoemaActivitySchemas)) await js(f);
-    const L = window.NoemaCore.engines;   // the author offers every engine of the library: each one's table and checks, and the schema kernel its forms come from
-    await Promise.all([L.load(L.ids()), L.loadSchema()]);
-  })().catch(e => { AUTHOR_LOAD = null; throw e; }));
-}
-async function authorView() {
-  shellChrome({ sub: true, crumbs: [[tE('engine.author.title')]], back: HOME() });
-  const v = view(backBtn('← ' + SUBJ.title, HOME()), h('p', { class: 'muted' }, tE('engine.author.loading')));
-  try { await loadAuthor(); } catch (e) { v.replaceChildren(...[backBtn('← ' + SUBJ.title, HOME()), h('p', {}, tE('engine.author.loadFailed'))].filter(Boolean)); return; }
-  if ((location.hash || '').slice(2).split('/')[0] !== 'author') return;   // the learner went elsewhere while it loaded
-  const m = main(); m.dataset.page = '@engine';
-  NoemaActivityAuthor.view(m);
-  if (!SHL()) m.prepend(backBtn('← ' + SUBJ.title, HOME()));
-}
 function route() {
   const p = (location.hash || '#/').slice(2).split('/');
-  if (p[0] !== 'author' && window.NoemaActivityAuthor?.current) { try { NoemaActivityAuthor.current.destroy(); } catch (e) { } NoemaActivityAuthor.current = null; }   // left the author: its preview and keys stop
   const X = SHL();
   if (X && !X.ENGINE_ROUTES.has(p[0])) return X.route();
   closeTutorIfMobile();
@@ -873,7 +848,7 @@ function route() {
   if (p[0] === 'drill') return drillView(p[1]);
   if (p[0] === 'mistakes') return mistakesView();
   if (p[0] === 'new') return whatsNewView();
-  if (p[0] === 'author') return authorView();
+  if (p[0] === 'author') { const m = main(); m.dataset.page = '@engine'; return Noema.app.author(m, backBtn('← ' + SUBJ.title, HOME())); }   // ✎ the activity author (src/composition/shell/author-page.ts; in the frame it is a page of its own)
   if (p[0] === 'engines') return enginesView(p[1]);   // the engines of activities and requests for new ones (49_lib_view.js)
   if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
   homeView();

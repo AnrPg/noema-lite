@@ -313,7 +313,7 @@ ok(codes(mk({ task: 'rules', rules: [{ id: 'a', then: 'p' }] }, [sc('x', 'weight
   const allCodes = new Set(js.flatMap(r => r.p.map(q => q.code)));
   ok(['format', 'value', 'enum', 'size', 'unknown-field', 'literal', 'duplicate', 'ref', 'cq', 'cycle', 'date', 'grid', 'pattern', 'output', 'parse-token', 'parse-paren', 'parse-eof'].every(c => allCodes.has(c)), 'the fixtures cover every check code: ' + [...allCodes].sort().join(' '));
   ok(X.exprs(fx[0]).some(e => e[1] === 'model.toggles[0].on') && X.keys(fx[0]).some(k => k[0] === 'ruleNoVehicles'), 'exprs lists the numx of the model, keys its labels');
-  const SF = require(path.join(ROOT, 'engine', 'schemaform.js')), LS = NoemaLibSchema, sim = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/contracts/schemas/noema.sim-spec.v1.schema.json'), 'utf8'));
+  const SF = require(path.join(ROOT, 'build', 'noema-tools.cjs')).schemaForm, LS = NoemaLibSchema,   /* the author's JSON Schema core (src/features/author/domain/schema.ts) */ sim = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/contracts/schemas/noema.sim-spec.v1.schema.json'), 'utf8'));
   const sch = LS.specSchema(X.id, X.table, sim), Rg = SF.registry([sim, sch]), sid = LS.schemaId(X.id);
   const bad = []; fx.forEach((sp, i) => { if (!sp || X.checkSpec(sp).some(q => q.level === 'error')) return; const er = SF.validate(Rg, sch, sp, sid).filter(x => ['engine', 'model', 'outputs'].includes(x.path[0])); if (er.length) bad.push(i + ' ' + JSON.stringify(er[0])); });
   ok(!bad.length, 'the author\'s form (table → JSON Schema) accepts every fixture checkSpec accepts ' + bad.slice(0, 2).join(' | ')); }

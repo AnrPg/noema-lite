@@ -81,6 +81,13 @@ const tokC = (c, t) => (t.l ? [t.l] : (t.parts || []).map(p => p.l).filter(Boole
     return !(sA.frame === sB.frame && N.glossKey(sA.gloss).key === N.glossKey(sB.gloss).key && it.answers.includes(sB.text) && tiles.every(t => it.tiles.includes(t)) && N.checkBuilt(C, it.lang, it, tiles) && it.from !== it.lang);
   });
   ok(T.length === 60 && !tBad.length && new Set(T.map(it => it.from + it.lang)).size >= 6, `parallel_translate: ${T.length} items over ${new Set(T.map(it => it.from + it.lang)).size} language pairs — same frame and meaning, the target's tiles build it ${tBad.length ? JSON.stringify(tBad[0]).slice(0, 300) : ''}`);
+  // the sentence built from its own words is right for every seed: a Chinese sentence with punctuation inside (我不喝茶，也不喝咖啡。) too
+  const builtBad = [];
+  for (let seed = 1; seed <= 60; seed++) for (const it of N.polyItems(C, all, 'parallel_translate', { k: kAll, rng: N.seeded(seed), max: 8 })) {
+    const words = C.lang[it.lang].sentenceById[it.sentence].tokens.filter(t => !t.p).map(t => t.t);
+    if (!N.checkBuilt(C, it.lang, it, words)) builtBad.push(it.sentence);
+  }
+  ok(!builtBad.length, `parallel_translate: the target sentence built from its own words is right, 60 seeds${builtBad.length ? ' — not: ' + [...new Set(builtBad)].join(', ') : ''}`);
   const wrongOk = T.filter(it => it.tiles.length > it.size).every(it => {
     const sB = C.lang[it.lang].sentenceById[it.sentence], words = sB.tokens.filter(k => !k.p), extra = it.tiles.find(t => !words.some(k => k.t === t)); if (!extra) return true;
     const at = words.findIndex(k => k.l && Object.values(C.lang[it.lang].lex[k.l]?.forms || {}).includes(extra));
