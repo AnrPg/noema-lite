@@ -255,12 +255,13 @@ kernels several engines share built once.
 **Lazy pieces.** The start path of the page is `build/app.js` (about 470 KB, 133 KB gzipped: the core, the expression
 language, the catalogue and the 26 manifests of `src/engines/manifests.ts`; phase 2's learning log, sync, read models, Roadmaps
 and community, about 330 KB; and the learning log's event contract, about 140 KB) and `build/ui.js` (the frame and the shell's
-screens: about 240 KB). Two pieces of kind `lazy` stay out of it:
+screens: about 240 KB). Pieces of kind `lazy` stay out of it:
 
 | piece | entry | what | when it runs |
 |---|---|---|---|
 | `build/engines.js` | `src/composition/engines.ts` | every engine's code, its Worker bundle (text) and the schema kernel (about 3.6 MB) | the first time `NoemaCore.engines.load()` or `schema()` asks (`src/engines/lazy.ts`): an activity before it mounts, the content checks before they check a pack that names an engine, the author |
 | `build/contracts.js` | `src/composition/contracts.ts` | the compiled data contracts (`src/contracts`, about 1.4 MB) and the content checks built on them (`src/features/content`, about 120 KB) | before the shell opens a subject or a language course (`ui-root.ts` awaits `NoemaCore.contracts.ready()`, which brings both), after the first screen on Today, and before the Roadmaps start their jobs; a check before that is a bug and throws (`src/contracts/lazy.ts`, `src/features/content/application/lazy.ts`) |
+| `build/author.js` | `src/composition/author.ts` | the activity author (`src/features/author`, `src/ui/screens/author`: `noema-schema-form`, `noema-author`; about 115 KB) | the first time `#/author` opens (`src/composition/shell/author-page.ts`, after the engines, the schema kernel and the content checks) |
 
 The learning log checks every event it reads or makes, and it opens before the first screen: its contract
 (`noema.events.v1#event`, `tools/contracts.mjs` `START_CONTRACTS`) is compiled a second time into
@@ -313,6 +314,7 @@ bridge's UI half and starts the app:
 | `window.NoemaThemes` | `src/composition/shell/themes.ts` over `src/features/shell/domain/characters.ts` | the characters on the tokens: the 5-minute try, free changes for 15 days, then one every 5 days |
 | `window.NoemaShell` | `src/composition/shell/host.ts`, `src/ui/screens/shell/` | the frame (`noema-shell-frame`), the router over every hash route (`routes.ts`), Today, Progress, Settings, the character gallery, the Me menu, the first-time questions, the profile picker; the toolkit the areas draw their pages with |
 | the areas | `engine/app/library.js`, `community.js`, `roadmaps.js`, `languages.js` | the older screens of each feature: they add their parts to `Noema`, their pages with `NoemaShell.registerPage`, their steps of the start to `Noema.boot` (`openEngine`, `started`, `connectClaude`, `wanted`, `langBoot`, `startLanguage`); what one needs of another goes through `Noema.app` |
+| the activity author | `src/composition/shell/author-page.ts`, the piece `build/author.js` (`src/features/author`, `src/ui/screens/author`) | `#/author` (`NoemaShell.registerPage`; `Noema.app.author` for the classic router): `noema-schema-form`, a form from a JSON Schema, and `noema-author` (docs/activities-dev/authoring_ui.md) |
 
 `NoemaCore.notify` draws on the kit's toaster once the root has started (`NoemaCore.toasts.use`); what does not fit goes to
 the 🔔. With `config.shell: false` the classic screens run without the frame (the older browser suites use them).
