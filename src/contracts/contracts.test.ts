@@ -146,16 +146,6 @@ test('a Roadmap with levels, its inbox entries and claims', () => {
 });
 
 /* ---------- the copies of a format that live elsewhere are the contract's ---------- */
-test("noema.curriculum-agents.v1 is engine/curriculum.js's agent schemas", () => {
-  const g = globalThis as unknown as Record<string, unknown>;
-  g.window ??= globalThis;
-  g.localStorage ??= { getItem: () => null, setItem: () => undefined, key: () => null, length: 0 };
-  require(path.join(ROOT, 'engine', 'curriculum.js'));
-  const S = (g.NoemaCurriculum as { schemas: Record<string, unknown> }).schemas;
-  const defs = (readJson('src/contracts/schemas/noema.curriculum-agents.v1.schema.json') as { $defs: Record<string, unknown> }).$defs;
-  assert.deepEqual(defs, { dag: S.S_DAG, audit: S.S_AUDIT, expand: S.S_EXPAND, plan: S.S_PLAN });
-});
-
 test("engine/packcheck.js: its types and blocks are the contract's, and it checks shapes with the contracts", () => {
   require(path.join(ROOT, 'engine', 'packcheck.js'));
   const P = (
