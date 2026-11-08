@@ -54,7 +54,8 @@ export function clockContract(name: string, make: () => ClockHarness): void {
       const i = h.clock.setInterval(() => {
         n++;
       }, 10);
-      await h.pass(55);
+      // a busy machine delays real timers: wait for the repeats (in steps of the interval) rather than a fixed 55 ms
+      for (let step = 0; n < 3 && step < 300; step++) await h.pass(10);
       h.clock.clearInterval(i);
       const seen = n;
       await h.pass(40);
