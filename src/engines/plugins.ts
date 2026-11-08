@@ -50,8 +50,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('genetics@1'),
-    () => import('./genetics/genetics.js'),
-    () => import('noema-worker:./genetics/genetics.js#simEngine'),
+    () => import('./genetics/genetics.ts'),
+    () => import('noema-worker:./genetics/genetics.ts#simEngine'),
   ),
   def(
     manifest('seq@1'),
