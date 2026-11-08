@@ -22,7 +22,7 @@
    Pure, deterministic per seed, bounded (≤ 5000 agents, ≤ 2000 steps, an operation budget with the code budget), never throws.
    Tests: node tests/lib_agents.js. */
 import NoemaLibCore from '../kernel/core.js';
-import NoemaExpr from '../kernel/simexpr.js';
+import NoemaExpr from '../kernel/simexpr.ts';
 import NoemaSimKit from '../kernel/simkit.js';
 import NoemaSpaceKit from '../kernel/space.js';
 import NoemaLibLogic from '../logic/logic.js';

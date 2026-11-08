@@ -7,7 +7,7 @@
      E.kernel(name)   expr | core | simkit | space | schema | circuit (the netlist simulator of circuit-mna@1)
      E.core()         globalThis.NoemaCore = { engines: E.lib }: what engine/packcheck.js and the activity core read
      E.worker(id)     the global of a fresh vm context that ran the engine's Worker bundle: .noemaEngine, and .__noemaShared[key]
-                      the shared pieces in it (kernel/simexpr.js, kernel/core.js, kernel/simkit.js, kernel/space.js, logic/logic.js, med/med.js) */
+                      the shared pieces in it (kernel/simexpr, kernel/core, kernel/simkit, kernel/space, logic/logic, med/med: tools/esbuild.mjs SHARED_PIECES) */
 'use strict';
 const path = require('path'), vm = require('vm');
 const { ensureBuilt } = require('./built');

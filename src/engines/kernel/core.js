@@ -10,7 +10,7 @@
        takes (the same shape as circuit-mna@1 and the P6 engines); every run goes to a Worker that runs the engine's Worker bundle
        (esbuild: NoemaExpr, this core and the engine module, the same code as on the page; src/engines/plugins.ts).
    Pure JS, no DOM, no learner text: codes and numbers only. Tests: node tests/enginelib.js. */
-import NoemaExpr from './simexpr.js';
+import NoemaExpr from './simexpr.ts';
 import NoemaSimKit from './simkit.js';
   /* i18n-ignore-start */   // code, not text: only codes, keys and numbers leave this module
   const MAX_POINTS = 2000, MAX_SCENE = 2000;

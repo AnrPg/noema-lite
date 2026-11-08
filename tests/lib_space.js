@@ -189,7 +189,7 @@ ok(Object.isFrozen(S) && S.MAX_N === 200 && S.MAX_N1 === 2000, 'NoemaSpaceKit: f
   ok(S.heatmap(C.scene([0, 1, 0, 1]), new Float64Array(4).fill(NaN), 2, 2, [0, 1, 0, 1], {}) === 0, 'an all-NaN field draws nothing');
   let threw = false; try { S.moranI([], { off: new Int32Array(1), nbr: new Int32Array(0) }); S.ripleyK([], [], 1, 1, [0.1]); S.walk(rng('j'), 'x', null); S.grid(null); S.latticeNeighbours(1, 1, 'nope', 0, true); S.buckets(0, 0, 0, true).query(0, 0, 1, () => {}); } catch (e) { threw = true; console.log(e); }
   ok(!threw, 'junk input never throws');
-  const W = ENGINES.worker('field@1').__noemaShared['kernel/space.js'], a = W.moranI([0, 1, 0, 1, 0, 1, 0, 1, 0], W.latticeWeights(3, 3, 'rook', false)), b = S.moranI([0, 1, 0, 1, 0, 1, 0, 1, 0], S.latticeWeights(3, 3, 'rook', false));
+  const W = ENGINES.worker('field@1').__noemaShared['kernel/space'], a = W.moranI([0, 1, 0, 1, 0, 1, 0, 1, 0], W.latticeWeights(3, 3, 'rook', false)), b = S.moranI([0, 1, 0, 1, 0, 1, 0, 1, 0], S.latticeWeights(3, 3, 'rook', false));
   ok(W && JSON.stringify(a) === JSON.stringify(b) && JSON.stringify(Array.from(W.thomasPeriodic([-1, -1, -1, -1], [4, 4, 4, 4], [-1, -1, -1, -1], [1, 2, 3, 4], 4))) === JSON.stringify(Array.from(S.thomasPeriodic([-1, -1, -1, -1], [4, 4, 4, 4], [-1, -1, -1, -1], [1, 2, 3, 4], 4))), 'the source in a fresh Worker global gives the same numbers');
 }
 console.log(`\n${n - fails}/${n} passed`);

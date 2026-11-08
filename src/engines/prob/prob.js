@@ -34,7 +34,7 @@
    randomness only (the kernel's streams). A value outside a method's validity range is never a silent wrong number: it is NaN or
    Infinity with an issue counted (outputs issue.<code>). */
 import NoemaLibCore from '../kernel/core.js';
-import NoemaExpr from '../kernel/simexpr.js';
+import NoemaExpr from '../kernel/simexpr.ts';
   /* i18n-ignore-start */   // code, not text: only codes, numbers and the model's own state names leave this module
   const C = NoemaLibCore;
   const ID = 'prob@1';

@@ -45,7 +45,7 @@ ok(ENGINES.lib.ids().every(id => typeof ENGINES.mod(id).engine.workerSource === 
 { const vm = require('vm'), ctx = { self: {} }; ctx.self.self = ctx.self; vm.createContext(ctx);
   vm.runInContext('var self = this.self;' + ENGINES.mod('ode@1').engine.workerSource, ctx);
   const S = ctx.self.__noemaShared || {};
-  ok(!!S['kernel/simexpr.js'] && !!S['kernel/core.js'] && S['kernel/core.js'].cx('3*x')({ x: 2 }) === 6 && !!ctx.self.noemaEngine, 'the core and the expression language run in a fresh global (the Worker)'); }
+  ok(!!S['kernel/simexpr'] && !!S['kernel/core'] && S['kernel/core'].cx('3*x')({ x: 2 }) === 6 && !!ctx.self.noemaEngine, 'the core and the expression language run in a fresh global (the Worker)'); }
 
 // ---- 4. the catalogue ----
 const ids = K.CATALOG.map(e => e.id);

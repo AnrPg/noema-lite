@@ -100,7 +100,7 @@ const s3 = K.engine.create(FX[3]).run({ pre: 0.3 }); ok(s3.ch === 1 && near(s3.t
 { const ctx = { self: {} }; ctx.self.self = ctx.self; vm.createContext(ctx);
   vm.runInContext('var self = this.self;' + K.engine.workerSource, ctx);
   const w = ctx.self.noemaEngine.create(FX[7]).run(good), mm = K.engine.create(FX[7]).run(good);
-  ok(!!(ctx.self.__noemaShared || {})['med/med.js'] && JSON.stringify(w) === JSON.stringify(mm), 'the Worker source (NoemaExpr + core + med@1 + clinic@1) in a fresh global gives the same outputs'); }
+  ok(!!(ctx.self.__noemaShared || {})['med/med'] && JSON.stringify(w) === JSON.stringify(mm), 'the Worker source (NoemaExpr + core + med@1 + clinic@1) in a fresh global gives the same outputs'); }
 { let t0 = Date.now(); for (let i = 0; i < 20; i++) K.engine.create(FX[0]).run({ pre: 0.1 + i / 100, dd: true }); const tA = (Date.now() - t0) / 20;
   t0 = Date.now(); K.engine.create(FX[7]).run(good); const tB = Date.now() - t0;
   const big = JSON.parse(JSON.stringify(FX[7])); big.model.vp.tEnd = 1440; t0 = Date.now(); K.engine.create(big).run(good); const tC = Date.now() - t0;

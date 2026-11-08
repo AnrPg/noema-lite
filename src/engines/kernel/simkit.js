@@ -19,7 +19,7 @@
    181); Morris 1991 (Technometrics 33:2), Campolongo, Cariboni & Saltelli 2007; White 1997, White, Cobb & Spratt 2000 (MSER-5),
    Franklin & White 2008; Schmeiser 1982 and Kelton/Law ch. 9 (batch means); Little 1961.
    Pure JS: no DOM, no network, no clock; every loop bounded; never throws out of a run (NaN + codes). Runs in a Worker: source(). */
-import NoemaExpr from './simexpr.js';
+import NoemaExpr from './simexpr.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this module
   const FX = NoemaExpr ? NoemaExpr.FUNCS : null;
   // the transcendental functions: NoemaExpr's fdlibm ports (bit-identical on every device), Math.* only when NoemaExpr is absent

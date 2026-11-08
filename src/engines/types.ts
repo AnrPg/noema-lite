@@ -1,7 +1,10 @@
-/* The public boundary of every engine plugin of sim-spec@1 (docs/INTERACTIVE.md §12.6, docs/INTERACTIVE_LIBRARY.md §1). The engines'
-   own code (./<name>/<name>.js) is plain ES modules, typed here at the edge only: what the activity core, the pack checker, the
-   activity author and the tests call. Codes and numbers cross this boundary, never learner text. */
+/* The public boundary of every engine plugin of sim-spec@1 (docs/INTERACTIVE.md §12.6, docs/INTERACTIVE_LIBRARY.md §1): what the
+   activity core, the pack checker, the activity author and the tests call. The engines' own code (./<name>/<name>.ts, TypeScript
+   strict) is typed through and through; the kernels' APIs are the types of their modules. Codes and numbers cross this boundary,
+   never learner text. */
 import type { Plugin, PluginManifest } from '../plugins/index.ts';
+import type NoemaExpr from './kernel/simexpr.ts';
+import type { Evaluator } from './kernel/simexpr.ts';
 
 /** a problem of a model: the same codes and messages as the engine's Python twin (tools/lib_<name>.py, tools/<name>.py) */
 export interface Problem {
@@ -16,8 +19,8 @@ export type Spec = Readonly<Record<string, unknown>>;
 export type Inputs = Readonly<Record<string, unknown>>;
 /** what a run gives: the spec's outputs by id (a number, an array of numbers ≤ 2000, a scene, a sound) */
 export type Outputs = Record<string, unknown>;
-/** a compiled formula of the expression language (kernel/simexpr.js compile) */
-export type Compiled = (env: Readonly<Record<string, unknown>>) => unknown;
+/** a compiled formula of the expression language (kernel/simexpr.ts compile) */
+export type Compiled = Evaluator;
 
 export interface CreateOptions {
   readonly seed?: number;
@@ -84,22 +87,8 @@ export interface EnginePlugin extends Plugin<EngineModule> {
   readonly worker: () => Promise<string>;
 }
 
-/** the expression language of sim-spec@1 (kernel/simexpr.js, docs/INTERACTIVE_SIMEXPR.md) */
-export interface ExprProblem {
-  readonly code: string;
-  readonly msg: string;
-  readonly at?: number;
-}
-export interface ExprApi {
-  parse(src: string): unknown;
-  check(src: string, opts?: { readonly vars?: readonly string[] }): ExprProblem[];
-  compile(src: string): Compiled;
-  evaluate(src: string, env?: Readonly<Record<string, unknown>>): unknown;
-  print(tree: unknown): string;
-  readonly FUNCS: Readonly<Record<string, { readonly fn: (...a: number[]) => number; readonly arity?: unknown }>>;
-  readonly CONSTS: Readonly<Record<string, number>>;
-  readonly LIMITS: Readonly<Record<string, number>>;
-}
+/** the expression language of sim-spec@1 (kernel/simexpr.ts, docs/INTERACTIVE_SIMEXPR.md) */
+export type ExprApi = typeof NoemaExpr;
 
 /** the catalogue of every way an activity can compute (catalog.js, docs/INTERACTIVE_LIBRARY.md §2) */
 export interface CatalogEntry {

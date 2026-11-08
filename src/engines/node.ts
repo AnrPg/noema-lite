@@ -5,7 +5,7 @@
 import { createEngineLibrary, type EngineLibrary } from './library.ts';
 import { ENGINE_PLUGINS } from './plugins.ts';
 import type { EngineModule, KernelApi } from './types.ts';
-import NoemaExpr from './kernel/simexpr.js';
+import NoemaExpr from './kernel/simexpr.ts';
 import NoemaLibCore from './kernel/core.js';
 import NoemaSimKit from './kernel/simkit.js';
 import NoemaSpaceKit from './kernel/space.js';
@@ -94,8 +94,9 @@ export const IN_HAND: Readonly<Record<string, readonly [EngineModule, string]>> 
   'twin@1': [m25, w25],
 });
 /** the kernels, for their own tests */
-export const KERNELS: Readonly<Record<string, KernelApi>> = Object.freeze({
-  expr: NoemaExpr as unknown as KernelApi,
+export const KERNELS = Object.freeze({
+  expr: NoemaExpr,
+
   core: NoemaLibCore,
   simkit: NoemaSimKit,
   space: NoemaSpaceKit,

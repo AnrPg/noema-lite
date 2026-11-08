@@ -233,7 +233,7 @@ else {
   ok(worst <= 1, 'the fdlibm ports are within 1 ulp of this platform\'s Math (' + exact + '/' + total + ' identical, worst ' + worst.toFixed(2) + ' ulp)');
 }
 {
-  const js = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'kernel', 'simexpr.js'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+  const js = fs.readFileSync(path.join(ROOT, 'src', 'engines', 'kernel', 'simexpr.ts'), 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
   const pysrc = fs.readFileSync(PY, 'utf8');
   ok(!/\beval\s*\(|\bnew\s+Function\b|\bFunction\s*\(|\bsetTimeout\s*\(|\bimport\s*\(|\brequire\s*\(/.test(js), 'the JS twin has no eval, no new Function, no dynamic import');
   ok(!/\b(eval|exec)\s*\(|__import__|\bimportlib\b|\bbuiltins\b/.test(pysrc.replace(/'''[\s\S]*?'''|"""[\s\S]*?"""/g, '')), 'the Python twin has no eval / exec / __import__');

@@ -17,7 +17,7 @@
    Pure, deterministic (the transcendental functions are NoemaExpr's fdlibm ports, never Math.*), bounded (≤ 200 000 steps in all).
    No learner text: numbers, codes and the model's own names only. Tests: node tests/lib_ode.js. */
 import NoemaLibCore from '../kernel/core.js';
-import NoemaExpr from '../kernel/simexpr.js';
+import NoemaExpr from '../kernel/simexpr.ts';
   /* i18n-ignore-start */   // code, not text: only codes and numbers leave this module
   const C = NoemaLibCore;
   const ID = 'ode@1';
