@@ -180,6 +180,13 @@ function flagRail(cid, current, onPick) {
   }));
 }
 
+/** The same rail as data for the screens (src/ui/screens/languages/lang-drills.ts rail): null in the frame (the strip picks) or with one language. */
+function railModel(cid, current, onPick) {
+  if (UI.C.languages.length < 2) return null;
+  if (FR.on) { if (!UI.scope) { FR.pick = { cur: current, fn: onPick }; syncStrip(); } return null; }
+  UI.railPick = onPick;
+  return { label: LT('lang.shell.languages'), langs: UI.C.languages.map(c => { const st = cid ? N.conceptState(UI.C, UI.L, c, cid) : null; return { code: c, flag: info(c).flag, title: `${info(c).label} — ${STATE_LABEL[st] || ''}`, on: c === current, state: st }; }) };
+}
 /* ---------- home ---------- */
 VIEWS.home = (v) => {
   if (UI.scope) return screenHost(v);   // the home of one language (src/ui/screens/languages/lang-home.ts)

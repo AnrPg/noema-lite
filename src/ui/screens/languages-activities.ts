@@ -19,6 +19,9 @@
  *   noema-lang-word      a foreign word or run: its reading, its words opening their cards (languages/lang-word.ts)
  *   noema-lang-translit  the Aa· switch of a running lesson (languages/lang-word.ts)
  *   noema-lang-aspect    the page of one study area of a language, #/aspects/<code>/<aspect> (languages/lang-aspect.ts)
+ *   noema-lang-sort      🧩 sorting a field's words into its groups, #/sort/<field> (languages/lang-drills.ts)
+ *   noema-lang-parts     🔁 the principal parts of the words met, #/parts/<code> (languages/lang-drills.ts)
+ *   noema-lang-peculiar  the peculiarities of a language, #/peculiar/<code> (languages/lang-peculiar.ts)
  */
 import { defineRoutes, type RouteMatch } from '../router/routes.ts';
 import type { CoursePort } from './languages/course-port.ts';
@@ -32,6 +35,8 @@ import type { LanguagesPort } from './languages/languages-port.ts';
 import { NoemaStudyChooser } from './languages/study-chooser.ts';
 import { NoemaLangTranslit, NoemaLangWord } from './languages/lang-word.ts';
 import { NoemaLangAspect } from './languages/lang-aspect.ts';
+import { NoemaLangParts, NoemaLangSort } from './languages/lang-drills.ts';
+import { NoemaLangPeculiar } from './languages/lang-peculiar.ts';
 
 export const AREA5_ROUTES = defineRoutes({
   languages: '/lang',
@@ -86,6 +91,9 @@ export const AREA5_ELEMENTS = {
   'noema-lang-word': NoemaLangWord,
   'noema-lang-translit': NoemaLangTranslit,
   'noema-lang-aspect': NoemaLangAspect,
+  'noema-lang-sort': NoemaLangSort,
+  'noema-lang-parts': NoemaLangParts,
+  'noema-lang-peculiar': NoemaLangPeculiar,
 } as const;
 
 declare global {
@@ -101,6 +109,9 @@ declare global {
     'noema-lang-word': NoemaLangWord;
     'noema-lang-translit': NoemaLangTranslit;
     'noema-lang-aspect': NoemaLangAspect;
+    'noema-lang-sort': NoemaLangSort;
+    'noema-lang-parts': NoemaLangParts;
+    'noema-lang-peculiar': NoemaLangPeculiar;
   }
 }
 

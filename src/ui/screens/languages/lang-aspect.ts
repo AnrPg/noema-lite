@@ -148,17 +148,21 @@ export class NoemaLangAspect extends NoemaScreen {
       m = this.#model;
     if (!P || !m) return html``;
     const G = m.grammar;
-    return html`<div class="lx-back">
-        <button
-          class="btn ghost small"
-          type="button"
-          @click=${() => {
-            P.go('#/');
-          }}
-        >
-          ${this.dir === 'rtl' ? '→' : '←'} ${this.t('lang.card.map')}
-        </button>
-      </div>
+    return html`${
+        P.inFrame()
+          ? nothing
+          : html`<div class="lx-back">
+              <button
+                class="btn ghost small"
+                type="button"
+                @click=${() => {
+                  P.go('#/');
+                }}
+              >
+                ${this.dir === 'rtl' ? '→' : '←'} ${this.t('lang.card.map')}
+              </button>
+            </div>`
+      }
       <h1>${this.t('lang.aspect.' + m.aspect)}<span class="tiny"> · ${m.lang.flag} ${m.lang.label}</span></h1>
       <div class=${'lx-asp lx-asp-' + m.aspect + ' lx-aspbox'} data-aspect=${m.aspect}>
         ${

@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { afterEach, describe, test } from 'node:test';
 import { defineUi } from '../index.ts';
 import { AREA5_ROUTES, defineArea5, mountArea5, mountArea5Part, type Area5Ports } from '../screens/languages-activities.ts';
-import type { AspectPage, WordOptions, WordView } from '../screens/languages/course-port.ts';
+import type { AspectPage, SortDrill, WordOptions, WordView } from '../screens/languages/course-port.ts';
 import type { CourseRow, LanguagesPort } from '../screens/languages/languages-port.ts';
 import { laneDots } from '../screens/languages/lang-lanes.ts';
 import { langNames } from '../screens/languages/study-chooser.ts';
@@ -293,6 +293,36 @@ describe('⫴ parallel lanes', () => {
       openWord: (code: string, lex: string) => {
         log.push(`card ${code} ${lex}`);
       },
+      sortDrill: (field: string): SortDrill | null =>
+        field === 'veg'
+          ? {
+              field: { id: 'veg', title: 'Vegetables' },
+              lang: lang('de'),
+              rail: null,
+              groups: [
+                { id: 'root', title: 'Roots', emoji: '🥕' },
+                { id: 'leafy', title: 'Leaves', emoji: '🥬' },
+              ],
+              pool: ['a', 'b', 'c', 'd'].map((x, i) => ({
+                id: 'de.' + x,
+                cid: 'c.' + x,
+                group: i % 2 ? 'leafy' : 'root',
+                lemma: x,
+                gloss: x,
+              })),
+            }
+          : null,
+      sortRecord: (code: string, res: readonly { id: string; ok: boolean }[]) => {
+        log.push(`sorted ${code} ${res.filter(x => x.ok).length}/${res.length}`);
+      },
+      partsDrill: () => null,
+      partsRecord: () => undefined,
+      setLang: () => undefined,
+      peculiar: () => null,
+      setPeculiarFilter: () => undefined,
+      back: () => undefined,
+      inFrame: () => false,
+      hint: (t: string) => document.createTextNode(t),
       fold: (x: string) => x.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase(),
       aspect: (code: string, aspect: string): AspectPage | null =>
         aspect === 'nope'
@@ -430,6 +460,31 @@ describe('⫴ parallel lanes', () => {
     assert.equal(host.querySelectorAll('.lx-aspentry').length, 1, 'a chip keeps its register');
     assert.equal(host.querySelector('.lx-chip[data-v="slang"]')?.getAttribute('aria-pressed'), 'true');
     assert.ok(host.querySelector('.lx-aspword noema-lang-word'), 'the word in its own element');
+  });
+  test('🧩 sorting: a word, then its group; a wrong group shakes and counts; the last one records the drill', async () => {
+    const C = coursePort(),
+      host = mount();
+    const e = document.createElement('noema-lang-sort');
+    Object.assign(e, { port: C, field: 'veg' });
+    host.append(e);
+    await settle(host);
+    assert.equal(host.querySelectorAll('.lx-sortchip').length, 4);
+    await click(host, '.lx-sortchip[data-id="de.a"]');
+    await click(host, '.lx-sortbin[data-group="leafy"]');
+    assert.ok(host.querySelector('.lx-sortbin.lx-shake'), 'a wrong group shakes');
+    for (const [id, g] of [
+      ['de.a', 'root'],
+      ['de.b', 'leafy'],
+      ['de.c', 'root'],
+      ['de.d', 'leafy'],
+    ] as const) {
+      await click(host, `.lx-sortchip[data-id="${id}"]`);
+      await click(host, `.lx-sortbin[data-group="${g}"]`);
+    }
+    assert.equal(host.querySelectorAll('.lx-sortchip').length, 0);
+    assert.equal(host.querySelectorAll('.lx-sortin').length, 4);
+    assert.ok(host.querySelector('.lx-sortdone'));
+    assert.equal(C.log.at(-1), 'sorted de 3/4');
   });
   test('tiles or dots: as chosen, else by the width', () => {
     assert.equal(laneDots('', 352, 4), false);

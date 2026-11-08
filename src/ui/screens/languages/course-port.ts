@@ -233,7 +233,107 @@ export interface AspectPage {
   readonly views: readonly string[];
 }
 
+/** The rail of a page's languages outside the app's frame. */
+export interface RailModel {
+  readonly label: string;
+  readonly langs: readonly {
+    readonly code: string;
+    readonly flag: string;
+    readonly title: string;
+    readonly on: boolean;
+    readonly state: string | null;
+  }[];
+}
+
+export interface SortWord {
+  readonly id: string;
+  readonly cid: string;
+  readonly group: string;
+  readonly lemma: string;
+  readonly gloss: string;
+}
+/** 🧩 a field's words met, to sort into its groups. */
+export interface SortDrill {
+  readonly field: { readonly id: string; readonly title: string };
+  readonly lang: CourseLang;
+  readonly rail: RailModel | null;
+  readonly pool: readonly SortWord[];
+  readonly groups: readonly { readonly id: string; readonly title: string; readonly emoji: string }[];
+}
+
+export interface PartsItem {
+  readonly id: string;
+  readonly lemma: string;
+  readonly gloss: string;
+  /** the part asked: its words, its stable id, its value */
+  readonly label: string;
+  readonly pid: string;
+  readonly val: string;
+  /** the value is written in the language's script */
+  readonly foreign: boolean;
+  /** the question */
+  readonly ask: string;
+  /** the reading under the word (not when it is the answer: pinyin) */
+  readonly sub: boolean;
+  /** null: nothing to choose among, the part is shown */
+  readonly options: readonly { readonly val: string; readonly ok: boolean; readonly foreign: boolean }[] | null;
+}
+/** 🔁 the principal parts of the words met. */
+export interface PartsDrill {
+  readonly lang: CourseLang;
+  readonly rail: RailModel | null;
+  readonly items: readonly PartsItem[];
+}
+
+/** The peculiarities of a language (D18). Texts with foreign runs come as the course draws them (their words link). */
+export interface PeculiarPage {
+  readonly lang: CourseLang;
+  readonly rail: RailModel | null;
+  /** the course has a catalogue of phenomena */
+  readonly catalogue: boolean;
+  readonly nNew: number;
+  readonly nFam: number;
+  /** the learner's languages the familiar ones come from, as a list */
+  readonly from: string;
+  readonly filter: 'all' | 'new' | 'familiar';
+  readonly areas: readonly {
+    readonly area: string;
+    readonly label: string;
+    readonly n: string;
+    readonly items: readonly {
+      readonly id: string;
+      readonly title: string;
+      readonly lacks: boolean;
+      readonly isNew: boolean;
+      /** the learner's languages it is familiar from, as a list ('' : not familiar) */
+      readonly familiarFrom: string;
+      readonly what: readonly Node[];
+      readonly examples: readonly { readonly text: readonly Node[]; readonly translit: string; readonly note: string }[];
+      readonly notes: readonly Node[];
+      readonly when: string;
+    }[];
+  }[];
+}
+
 export interface CoursePort extends WordPort {
+  /** the peculiarities of a language (null: not a language of the course) */
+  peculiar(code: string): PeculiarPage | null;
+  setPeculiarFilter(f: 'all' | 'new' | 'familiar'): void;
+  /** back where the learner came from (else the course's home) */
+  back(): void;
+  /** the course is drawn inside the app's frame (its ← and crumbs are the frame's) */
+  inFrame(): boolean;
+  /** an ⓘ hint of the frame with this text */
+  hint(text: string): Node;
+  /** 🧩 the field's sorting drill in the language shown (null: no such field) */
+  sortDrill(field: string): SortDrill | null;
+  /** records the sorting: first try right = good */
+  sortRecord(code: string, results: readonly { readonly id: string; readonly ok: boolean }[]): void;
+  /** 🔁 the principal parts drill of a language */
+  partsDrill(code: string): PartsDrill | null;
+  partsRecord(code: string, lex: string, ok: boolean): void;
+  /** the page shows another language (the rail) */
+  setLang(code: string): void;
   /** the page of one study area of a language (null: no such aspect) */
   aspect(code: string, aspect: string): AspectPage | null;
   /** folds a text as the search does: a word matches in its script, its scholarly transliteration and plain Latin */
