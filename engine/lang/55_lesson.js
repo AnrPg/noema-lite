@@ -15,19 +15,37 @@ const stepTitle = id => LT('lang.step.' + id);
 /** The one primary button of a lesson: Continue · <next step> (all done: review). */
 const continueButton = (nid, langs, cls = 'btn primary') => { const L = ladderOf(nid, langs); return h('button', { class: cls + ' lx-continue', 'data-step': L.next || 'done', onclick: () => runLesson(nid, langs) }, '▶ ' + (L.next ? LT('lang.step.continue', { step: stepTitle(L.next) }) : LT('lang.step.review'))); };
 
+/** The head of a lesson's page as the screen draws it (course-port.ts LessonHead). */
+function lessonHead(nid) {
+  const n = UI.C.nodes[nid]; if (!n || n.kind !== 'lesson') return null;
+  const langs = lessonLangs(nid); if (!langs.length) return null;
+  const c = langs.includes(UI.lang) ? UI.lang : langs[0];
+  const st = Object.fromEntries(langs.map(x => [x, N.nodeStates(UI.C, UI.L, x)[nid]]));
+  const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(st[x]));
+  const L = can.length ? ladderOf(nid, can) : null, dn = deepenCount(nid, c);
+  return {
+    step: stepLabel(n), title: n.title, can,
+    langs: langs.map(x => { const ch = UI.L.langs[x]?.checks?.[nid]; return { code: x, flag: info(x).flag, state: st[x], stateLabel: STATE_LABEL[st[x]] || st[x], pct: ch ? Math.round(ch.best * 100) : null }; }),
+    ladder: L ? { steps: L.steps.map(s => ({ id: s.id, done: s.done, open: s.open })), next: L.next } : null,
+    deepen: dn ? { n: dn, href: `#/deepen/${encodeURIComponent(nid)}/${c}` } : null,
+    translit: hasTranslit() ? { on: UI.prefs.translit !== false } : null,
+    frame: !!FR.on,
+  };
+}
 VIEWS.lesson = (v, r) => {
   const nid = r.arg, n = UI.C.nodes[nid]; if (!n || n.kind !== 'lesson') return VIEWS.home(v);
   const langs = lessonLangs(nid); if (!langs.length) return VIEWS.home(v);
   const c = langs.includes(UI.lang) ? UI.lang : langs[0], X = LX(c), k = N.known(UI.C, UI.L, c);
-  const st = Object.fromEntries(langs.map(x => [x, N.nodeStates(UI.C, UI.L, x)[nid]]));
-  const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(st[x]));
-  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))),
-    h('h1', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', n.title),
-    h('div', { class: 'row' }, flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); }),
-      ...langs.map(x => h('span', { class: 'lx-ns ns-' + st[x] }, info(x).flag, ' ', STATE_LABEL[st[x]] || st[x], UI.L.langs[x]?.checks?.[nid] ? ' · ' + LT('lang.lesson.pct', { pct: Math.round(UI.L.langs[x].checks[nid].best * 100) }) : ''))),
-    can.length ? ladderList(nid, can) : null,
-    h('div', { class: 'row lx-actions' },
-      can.length ? continueButton(nid, can) : h('span', { class: 'lx-note' }, '🔒 ' + LT('lang.lesson.locked')), deepenButton(nid, c), translitToggle()));
+  const can = langs.filter(x => ['open', 'learning', 'passed', 'known', 'mastered'].includes(N.nodeStates(UI.C, UI.L, x)[nid]));
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))));
+  const rail = flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); });
+  if (rail) v.append(h('div', { class: 'row' }, rail));
+  screenPart(v, 'lang-lesson', 'lx-screen lx-lessonhead', { node: nid });
+  if (FR.on) {   // the frame: one primary action on the page, Deepen and Aa· wait in its ⋮
+    const dn = deepenCount(nid, c);
+    if (dn) FR.viewActs.push({ label: LT('lang.deep.deepenN', { n: dn }), icon: 'gym', run: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) });
+    if (hasTranslit()) { const on = UI.prefs.translit !== false; FR.viewActs.push({ label: LT(on ? 'lang.translit.hide' : 'lang.translit.show'), run: () => setTranslit(!on) }); }
+  }
   const theoryOpen = !can.includes(c) || ladderOf(nid, [c]).steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (theoryOpen) {
@@ -46,10 +64,6 @@ VIEWS.lesson = (v, r) => {
   }
 };
 
-function ladderList(nid, langs) {
-  const L = ladderOf(nid, langs);
-  return h('ol', { class: 'lx-ladder' }, ...L.steps.map(st => h('li', { class: st.done ? 'done' : st.id === L.next ? 'now' : st.open ? 'open' : 'later', 'data-step': st.id }, (st.done ? '✓ ' : '') + stepTitle(st.id))));
-}
 
 /** Run a lesson for some languages together: grammar (the first time) → a batch of words in every language → drills → the check once every word is in. */
 function runLesson(nid, langs, { checkOnly = false, step = null } = {}) {

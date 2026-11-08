@@ -167,9 +167,13 @@ function deepButton(c, lid) {
   return h('button', { class: 'btn small lx-deepbtn', onclick: () => { document.querySelector('.lx-pop')?.remove(); go(`#/deep/${c}/${encodeURIComponent(lid)}`); } }, '🏋️ ' + LT('lang.view.deep'));
 }
 /** 🏋️ deepen on a node or lesson page: when the learner has met some of its words in this language. */
+function deepenCount(nid, c) {
+  const k = N.known(UI.C, UI.L, c);
+  return (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]) && hasDepthData(LX(c).lex[id])).length;
+}
 function deepenButton(nid, c) {
-  const k = N.known(UI.C, UI.L, c), met = (LX(c).byNode[nid] || []).filter(id => MET_DEEP.includes(k.state[id]) && hasDepthData(LX(c).lex[id]));
-  return met.length ? h('button', { class: 'btn small lx-deepenbtn', 'data-icon': 'gym', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n: met.length })) : null;
+  const n = deepenCount(nid, c);
+  return n ? h('button', { class: 'btn small lx-deepenbtn', 'data-icon': 'gym', onclick: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) }, '🏋️ ' + LT('lang.deep.deepenN', { n })) : null;
 }
 VIEWS.deep = (v, r) => {
   const c = r.arg, lid = r.arg2, x = UI.C.lang[c]?.lex[lid]; if (!x) return VIEWS.home(v);

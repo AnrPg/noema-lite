@@ -439,7 +439,7 @@ const tutorRow = (ctx, intents) => h('div', { class: 'row lx-tutorrow' }, h('spa
   const fn = VIEWS.fn;
   VIEWS.fn = (v, r) => { fn(v, r); const fid = r.arg; if (!UI.C.functions[fid] || fid === 'fn.overview') return; const c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; v.querySelector('.lx-gram')?.before(tutorRow({ lang: c, fn: fid }, ['explain', 'compare', 'quiz'])); };
   const lesson = VIEWS.lesson;
-  VIEWS.lesson = (v, r) => { lesson(v, r); const n = UI.C.nodes[r.arg]; if (!n || n.kind !== 'lesson') return; const langs = lessonLangs(r.arg); if (!langs.length) return; const c = langs.includes(UI.lang) ? UI.lang : langs[0]; v.querySelector('.lx-actions')?.after(tutorRow({ lang: c, node: r.arg }, ['quiz', 'chat'])); };
+  VIEWS.lesson = (v, r) => { lesson(v, r); const n = UI.C.nodes[r.arg]; if (!n || n.kind !== 'lesson') return; const langs = lessonLangs(r.arg); if (!langs.length) return; const c = langs.includes(UI.lang) ? UI.lang : langs[0]; v.querySelector(':scope > .lx-lessonhead')?.after(tutorRow({ lang: c, node: r.arg }, ['quiz', 'chat'])); };   // after the lesson's head (src/ui/screens/languages/lang-lesson-head.ts)
   const node = VIEWS.node;
   VIEWS.node = (v, r) => { node(v, r); const n = UI.C.nodes[r.arg]; if (!n || n.kind === 'lesson') return; v.querySelector('.lx-actions')?.after(tutorRow({ lang: UI.lang, node: r.arg }, ['quiz', 'chat'])); };
 }

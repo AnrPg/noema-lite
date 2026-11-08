@@ -47,13 +47,13 @@ ok(secs[0] === 'foundations' && secs.includes('core') && secs.some(s => s.starts
     const info = await p.evaluate(() => (document.querySelector('.lx-linfo') || document.querySelector('.ns-sheet') || {}).innerText || '');
     ok(/Chinese/.test(info) && /Also in/.test(info) && /Open/.test(info), `${w}px: a tap on a step tells what it is there and where else it is`);
     // dots: chosen, or automatic when the lanes are too narrow for tiles; hover / focus tells more, a tap opens the step
-    await p.evaluate(() => document.querySelector('.lx-pop')?.remove()); await p.click('.lx-lviewpick button:has-text("Dots")'); await wait(300);
+    await p.keyboard.press('Escape'); await wait(200); /* the step's card is a dialog: Escape closes it */ await p.click('.lx-lviewpick button:has-text("Dots")'); await wait(300);
     ok(await p.locator('.lx-ldot').count() > 200 && await p.locator('.lx-lnode').count() === 0 && /^S\d+$/.test(await p.locator('.lx-ldot').first().innerText()), `${w}px: Dots — small round steps with their code (S0, S1 …)`);
     await p.locator('.lx-ldot[data-lang="he"]').nth(3).hover(); await wait(200);
     ok(/Hebrew/.test(await p.locator('.lx-lhover').innerText().catch(() => '')), `${w}px: pointing at a dot tells what it is`);
     await p.locator('.lx-ldot[data-lang="he"]').nth(3).click(); await wait(300);
     ok(/Also in/.test(await p.evaluate(() => (document.querySelector('.lx-linfo') || document.querySelector('.ns-sheet') || {}).innerText || '')), `${w}px: a tap on a dot opens its card`);
-    await p.evaluate(() => document.querySelector('.lx-pop')?.remove());
+    await p.keyboard.press('Escape'); await wait(200);
     await p.click('.lx-lviewpick button:has-text("Auto")'); await wait(300);
     await ctx.close();
   }

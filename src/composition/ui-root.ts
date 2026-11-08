@@ -8,6 +8,7 @@
  * The other areas' screens still live in engine/app/*.js and the engine modules; they add their parts to window.Noema
  * and register their pages with NoemaShell.registerPage while the page loads (docs/ARCHITECTURE.md §6.3).
  */
+import { area5Door, type Area5Door } from './area5.ts';
 import { systemClock } from '../adapters/browser/clock.ts';
 import { noemaI18n } from '../adapters/browser/i18n.ts';
 import { CHARACTER_GROUPS, isCharacter, type CharacterGroup, type World } from '../features/shell/domain/characters.ts';
@@ -33,7 +34,7 @@ import { runtimeLocales, type I18nRuntimeLocales } from './ui-kit-root.ts';
 export interface App {
   readonly Noema: NoemaCoreObject & NoemaAreas & AppExtras;
   readonly themes: Themes;
-  readonly shell: Host;
+  readonly shell: Host & { readonly area5: Area5Door };
   start(): Promise<void>;
 }
 interface AppExtras {
@@ -926,5 +927,7 @@ export function createApp(win: Window = window): App {
     await boot.openEngine?.(a, subs, meta);
   }
   themes.apply(); // the first screen already wears the learner's character
-  return { Noema: N, themes, shell, start };
+  // the screens of area 5 (languages and activities): a lazy piece next to this script, on its Lit and kit
+  const area5 = area5Door({ document }, (document.currentScript as HTMLScriptElement | null)?.src);
+  return { Noema: N, themes, shell: Object.assign(shell, { area5 }), start };
 }
