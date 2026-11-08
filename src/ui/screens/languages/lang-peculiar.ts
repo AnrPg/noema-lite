@@ -9,7 +9,7 @@
 import { html, nothing, type TemplateResult } from 'lit';
 import { NoemaScreen } from '../screen.ts';
 import { rail } from './lang-drills.ts';
-import type { CoursePort, PeculiarPage } from './course-port.ts';
+import type { CoursePort } from './course-port.ts';
 
 const FILTERS = ['all', 'new', 'familiar'] as const;
 
