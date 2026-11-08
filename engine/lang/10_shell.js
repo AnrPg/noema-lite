@@ -153,10 +153,11 @@ function render() {
   const m = $('.lx-main'); m.innerHTML = ''; window.scrollTo(0, 0);
   const v = h('div', { class: 'view lx-view' });
   m.append(v);
+  FR.viewActs = [];   // actions a view hands the frame's ⋮ itself (a screen's buttons are drawn later than frameTidy looks)
   (VIEWS[r.name] || VIEWS.home)(v, r);
   if (!FR.on) return;
   if (r.name === 'home') frameSummary(v);
-  let acts = []; try { acts = frameTidy(v, r); } catch (e) { console.warn('[lang] frame', e); }   // main's calm style: one primary action, the rest in ⋮ (99z_frame.js)
+  let acts = []; try { acts = [...frameTidy(v, r), ...FR.viewActs]; } catch (e) { console.warn('[lang] frame', e); }   // main's calm style: one primary action, the rest in ⋮ (99z_frame.js)
   try { FR.onRoute?.({ view: r.name, label: viewLabel(r), home: r.name === 'home' && !r.arg, acts }); } catch (e) { console.warn('[lang] frame', e); }
 }
 /** What the frame's Languages tab and Today card show without loading the course: the next lesson (device-local, docs/LANGUAGES.md §8). */

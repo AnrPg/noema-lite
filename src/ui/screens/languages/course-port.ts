@@ -129,6 +129,8 @@ export interface LessonHead {
   readonly deepen: { readonly n: number; readonly href: string } | null;
   /** D23: the line under foreign words, where a studied language has one (null: none has) */
   readonly translit: { readonly on: boolean } | null;
+  /** inside the app's frame: one primary action and no pictographs; the states, Deepen and Aa· are in the frame's ⋮ */
+  readonly frame: boolean;
 }
 
 export interface CoursePort {

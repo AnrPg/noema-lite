@@ -39,16 +39,22 @@ export class NoemaLangLessonHead extends NoemaScreen {
       m = P?.lessonHead(this.node);
     if (!P || !m) return html``;
     const next = m.ladder?.next ?? null,
-      tr = m.translit;
+      tr = m.frame ? null : m.translit,
+      deepen = m.frame ? null : m.deepen,
+      pic = (x: string): string => (m.frame ? '' : x + ' ');
     return html`<h1><span class="lx-step">${m.step}</span> ${m.title}</h1>
-      <div class="row">
-        ${m.langs.map(
-          l =>
-            html`<span class=${'lx-ns ns-' + l.state} data-lang=${l.code}
-              >${l.flag} ${l.stateLabel}${l.pct != null ? ' · ' + this.t('lang.lesson.pct', { pct: l.pct }) : ''}</span
-            >`,
-        )}
-      </div>
+      ${
+        m.frame
+          ? nothing
+          : html`<div class="row">
+              ${m.langs.map(
+                l =>
+                  html`<span class=${'lx-ns ns-' + l.state} data-lang=${l.code}
+                    >${l.flag} ${l.stateLabel}${l.pct != null ? ' · ' + this.t('lang.lesson.pct', { pct: l.pct }) : ''}</span
+                  >`,
+              )}
+            </div>`
+      }
       ${this.#ladder(m)}
       <div class="row lx-actions">
         ${
@@ -61,21 +67,21 @@ export class NoemaLangLessonHead extends NoemaScreen {
                   P.continueLesson(this.node, m.can);
                 }}
               >
-                ▶ ${next ? this.t('lang.step.continue', { step: this.t('lang.step.' + next) }) : this.t('lang.step.review')}
+                ${pic('▶')}${next ? this.t('lang.step.continue', { step: this.t('lang.step.' + next) }) : this.t('lang.step.review')}
               </button>`
-            : html`<span class="lx-note">🔒 ${this.t('lang.lesson.locked')}</span>`
+            : html`<span class="lx-note">${pic('🔒')}${this.t('lang.lesson.locked')}</span>`
         }
         ${
-          m.deepen
+          deepen
             ? html`<button
                 class="btn small lx-deepenbtn"
                 type="button"
                 data-icon="gym"
                 @click=${() => {
-                  if (m.deepen) P.go(m.deepen.href);
+                  P.go(deepen.href);
                 }}
               >
-                🏋️ ${this.t('lang.deep.deepenN', { n: m.deepen.n })}
+                🏋️ ${this.t('lang.deep.deepenN', { n: deepen.n })}
               </button>`
             : nothing
         }

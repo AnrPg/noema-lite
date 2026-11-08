@@ -29,6 +29,7 @@ function lessonHead(nid) {
     ladder: L ? { steps: L.steps.map(s => ({ id: s.id, done: s.done, open: s.open })), next: L.next } : null,
     deepen: dn ? { n: dn, href: `#/deepen/${encodeURIComponent(nid)}/${c}` } : null,
     translit: hasTranslit() ? { on: UI.prefs.translit !== false } : null,
+    frame: !!FR.on,
   };
 }
 VIEWS.lesson = (v, r) => {
@@ -39,7 +40,12 @@ VIEWS.lesson = (v, r) => {
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))));
   const rail = flagRail(null, c, x => { UI.lang = x; UI.prefs.lang = x; save(); render(); });
   if (rail) v.append(h('div', { class: 'row' }, rail));
-  screenPart(v, 'lang-lesson', 'lx-screen', { node: nid });
+  screenPart(v, 'lang-lesson', 'lx-screen lx-lessonhead', { node: nid });
+  if (FR.on) {   // the frame: one primary action on the page, Deepen and Aa· wait in its ⋮
+    const dn = deepenCount(nid, c);
+    if (dn) FR.viewActs.push({ label: LT('lang.deep.deepenN', { n: dn }), icon: 'gym', run: () => go(`#/deepen/${encodeURIComponent(nid)}/${c}`) });
+    if (hasTranslit()) { const on = UI.prefs.translit !== false; FR.viewActs.push({ label: LT(on ? 'lang.translit.hide' : 'lang.translit.show'), run: () => setTranslit(!on) }); }
+  }
   const theoryOpen = !can.includes(c) || ladderOf(nid, [c]).steps.find(x => x.id === 'tr').open;   // D22: the theory is read after the words
   const fns = N.lessonFunctions(UI.C, c, nid);
   if (theoryOpen) {

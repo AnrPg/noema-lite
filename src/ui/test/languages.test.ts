@@ -209,6 +209,7 @@ describe('⫴ parallel lanes', () => {
       translit = true;
     const P = {
       log,
+      frame: false,
       home: () => {
         throw new Error('no home here');
       },
@@ -261,6 +262,7 @@ describe('⫴ parallel lanes', () => {
               can: ['de'],
               deepen: { n: 4, href: '#/deepen/fd.01/de' },
               translit: { on: translit },
+              frame: P.frame,
             }
           : null,
       setTranslit: (on: boolean) => {
@@ -324,5 +326,12 @@ describe('⫴ parallel lanes', () => {
     mountArea5Part('lang-lesson', none, { ...ports(fakePort([])), course: () => C }, { node: 'nope' });
     await settle(none);
     assert.equal(none.querySelector('h1'), null, 'not a lesson: nothing');
+    C.frame = true;
+    const fr = mount();
+    mountArea5Part('lang-lesson', fr, { ...ports(fakePort([])), course: () => C }, { node: 'fd.01' });
+    await settle(fr);
+    assert.ok(fr.querySelector('.lx-continue') && fr.querySelector('.lx-ladder'), 'in the frame: the ladder and Continue');
+    assert.equal(fr.querySelectorAll('.lx-ns, .lx-deepenbtn, .lx-translit').length, 0, 'the rest waits in the frame’s ⋮');
+    assert.ok(!fr.querySelector('.lx-continue')?.textContent.includes('▶'), 'no pictographs in the frame');
   });
 });
