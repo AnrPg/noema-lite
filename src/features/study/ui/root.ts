@@ -8,9 +8,10 @@ import type { I18n } from '../../../ports/i18n.ts';
 import { StudyApp } from './app.ts';
 import { chapterOutline, figureAsText, sectionText } from '../domain/as-text.ts';
 import type { Block, Chapter, Exercise, Section } from '../domain/pack.ts';
-import { exerciseCard, exerciseText, type CardElement, type CardOptions } from './exercise/card.ts';
+import { ExerciseCard, exerciseCard, exerciseText, type CardElement, type CardOptions } from './exercise/card.ts';
 import { figureBlock, rCenter, vRegions, vTargets } from './exercise/visual.ts';
 import { knowledgeMap, reportedView } from './kmap.ts';
+import { defineStudyElements } from './lit/base.ts';
 import type { MenuEntry, StudyHost } from './host.ts';
 import type { AiPort, TutorPort } from './parts.ts';
 import { showStudyRoute, STUDY_SEGMENTS } from './routes.ts';
@@ -47,6 +48,7 @@ export interface StudyUi {
 }
 
 export function createStudyUi(host: StudyHost & { readonly tutor: TutorPort; readonly ai: AiPort }, i18n: I18n, clock: Clock): StudyUi {
+  defineStudyElements();
   const app = new StudyApp(host, i18n, clock);
   app.tutor = host.tutor;
   app.ai = host.ai;
@@ -106,14 +108,14 @@ function wireKeys(app: StudyApp): void {
       return;
     }
     const main = app.host.frame.main();
-    const card = [...main.querySelectorAll<CardElement>('.ex')].find(c => !c._locked?.());
+    const card = [...main.querySelectorAll('.ex')].find((c): c is CardElement => c instanceof ExerciseCard && !c._locked());
     if (!card) {
       if (e.key !== 'Enter') return;
       const next = main.querySelector<HTMLButtonElement>('.btn.primary[data-next]');
       if (next?.offsetParent) next.click();
       return;
     }
-    if (/^[1-6]$/.test(e.key) && card._w?.keys) card._w.keys(Number(e.key) - 1);
-    else if (e.key === 'Enter') card._check?.();
+    if (/^[1-6]$/.test(e.key) && card._w.keys) card._w.keys(Number(e.key) - 1);
+    else if (e.key === 'Enter') card._check();
   });
 }
