@@ -31,6 +31,8 @@ import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { COMMUNITY_BRIDGE, COMMUNITY_REGISTRATIONS } from './community.ts';
+import { languagesBridge } from './languages.ts';
+import { screensBridge } from './screens-bridge.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
 import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
@@ -85,6 +87,11 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'roadmaps', build: r => roadmapsSurface(r.get(ROADMAP_EVENTS)) },
   // the 文A bridges' lookup (engine/bridge.js)
   { name: 'bridges', build: () => bridgesDomain },
+  // the screens of languages and activities (build/lang-activities.js, loaded on the first mount): #/engines, #/author,
+  // the language courses — mounted by the older shell until the new root owns the router (src/composition/screens-bridge.ts)
+  screensBridge,
+  // the language courses before any course is loaded (src/features/languages): the Languages tab, Today, the loader
+  languagesBridge,
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */

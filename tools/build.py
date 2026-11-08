@@ -609,7 +609,8 @@ def build_bundle(metas):
     i18n_cats = ''.join(f'<script>{esc(rd("engine/i18n/" + f))}</script>\n' for f in sorted(os.listdir(os.path.join(ENGINE, 'i18n'))) if f.endswith('.js') and f[:-3] not in ('en-XA', 'ar-XB'))
     # the TypeScript core (build/app.js: window.NoemaCore) before every older script, and each Worker's code as text: the one
     # file cannot load build/<worker>.js from file://, so the app starts a Worker from a Blob of <script id="noema-worker:<name>">
-    core_scripts = (f'<script>{esc(bundle_text("app"))}</script>\n' if bundle_file('app') else '') + ''.join(
+    core_scripts = (f'<script>{esc(bundle_text("app"))}</script>\n' if bundle_file('app') else '') + (
+        f'<script>{esc(bundle_text("lang-activities"))}</script>\n' if bundle_file('lang-activities') else '') + ''.join(
         f'<script type="text/plain" id="noema-worker:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'worker')
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">

@@ -1,4 +1,4 @@
-/* ---------- ⚙ #/engines (49_lib_view.js): the catalogue of engines and the requests for new ones — quiet, one column, wraps at 320px ---------- */
+/* ---------- ⚙ #/engines (src/ui/screens/activities/engines-page.ts): the catalogue of engines and the requests for new ones — quiet, one column, wraps at 320px ---------- */
 .eng-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
 .eng-head h2 { margin: 0; }
 .eng-intro { max-width: 64ch; }
@@ -27,3 +27,5 @@
 .eng-more > summary { cursor: pointer; margin: 8px 0 2px; font-size: .9em; opacity: .85; }
 .eng-sug:empty { display: none; }
 .eng-sug { margin: 4px 0 6px; }
+noema-engines-page, noema-engine-request-form { display: block; }
+.eng-foot { justify-content: flex-end; margin-top: 12px; }

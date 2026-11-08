@@ -15,6 +15,8 @@
      ui.js         src/composition/ui.ts — the UI foundation of phase 3 (src/ui: the Lit component kit, the router, the frame) on its
                    demo route #/ui-kit. Development only: engine/loader.js loads it for #/ui-kit on a local host; never at start,
                    not in the site or the one-file bundle (kind "dev").
+     lang-activities.js  src/composition/lang-activities.ts — the screens of languages and activities (src/ui/screens): the language
+                   courses, #/author, #/engines. Loaded by NoemaCore.screens on their first mount (never at start); inline in the one-file bundle.
      roadmaps-node.cjs  src/composition/roadmaps-node.ts — the Roadmaps domain and the bridges' lookup, CommonJS, for the node
                    suites that run the older Roadmap files in a vm (tests/roadmaps_core.js). Not in the site.
      engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
@@ -63,12 +65,13 @@ const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Base
     @typedef {{ name: string, in: string, kind: 'page' | 'worker' | 'sw' | 'harness' | 'dev' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
-  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 5248 },   // 1.4 MB the core and the contracts + 3.6 MB the engine library (1.8 code, 1.8 Worker text)
+  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 5376 },   // 1.5 MB (the phase-2 domains merged) the core and the contracts + 3.6 MB the engine library (1.8 code, 1.8 Worker text)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
   { name: 'ui', in: 'src/composition/ui.ts', kind: 'dev', out: 'ui.js', budgetKB: 256 },   // Lit + the kit + its demo; loaded only on #/ui-kit
+  { name: 'lang-activities', in: 'src/composition/lang-activities.ts', kind: 'page', out: 'lang-activities.js', budgetKB: 512 },   // Lit + the kit + the screens of languages and activities; loaded on their first mount (NoemaCore.screens)
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
   { name: 'roadmaps-node', in: 'src/composition/roadmaps-node.ts', kind: 'node', format: 'cjs', out: 'roadmaps-node.cjs', budgetKB: 256 },
 ];

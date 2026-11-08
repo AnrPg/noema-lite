@@ -321,11 +321,11 @@ const studyAnswer = () => { const s = accSettings().studyLangs; return Array.isA
 /** N.studyLangs for the open course: {langs, chosen, none}. */
 const studyChoice = (data = UI.data) => N.studyLangs(data.course.languages, studyAnswer(), UI.L && UI.L.course === UI.id ? UI.L.settings.languages : storedCourseSettings().languages);
 /** Every language the app offers to study (the library's courses and the learner's own, loader.js), this course's first. */
-const offeredLangs = () => uniq([...(UI.data?.course.languages || []), ...((window.Noema?.langStudy?.offered?.(UI.acc)) || []).map(x => x.code)]);
+const offeredLangs = () => uniq([...(UI.data?.course.languages || []), ...NoemaCore.languages.offered(UI.acc).map(x => x.code)]);
 /** Store a new answer (codes, in any order) for the whole app. */
 function putStudy(codes) {
   const all = offeredLangs(), want = all.filter(c => codes.includes(c)).concat(codes.filter(c => !all.includes(c)));
-  if (window.Noema?.langStudy?.set) Noema.langStudy.set(UI.acc, want); else putAccSettings({ studyLangs: want });
+  NoemaCore.languages.setStudy(UI.acc, want);
 }
 /** Study / stop studying one language of this course (⚙️ Settings): the answer so far (all the app's languages before the first
     one) with this language in or out — a course never ends up with none. */

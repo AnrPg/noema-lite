@@ -138,18 +138,18 @@ function nativeAsk() {
     home until the learner answers (until then the course teaches what it taught before); none: the learner chose languages this
     course does not have — it asks for its own and shows nothing else. */
 function studyAsk(none = false) {
-  const S = window.Noema?.langStudy;
-  if (!S?.chooser || (!none && (studyAnswer() || offeredLangs().length < 2))) return null;
-  return h('div', { class: 'lx-card lx-study-ask', 'data-ask': 'study' }, S.chooser(UI.acc, { course: UI.id, none, onDone: () => restudy() }));
+  if (!none && (studyAnswer() || offeredLangs().length < 2)) return null;
+  const box = h('div', { class: 'lx-card lx-study-ask', 'data-ask': 'study' });
+  screenPart(box, 'study-chooser', 'lx-studypart', { course: UI.id, none, onDone: () => restudy() });
+  return box;
 }
 /** The same question at any time (⚙️ Settings, the frame's ⋮): in a sheet inside the frame, else over the page. */
 function studySheet() {
-  const S = window.Noema?.langStudy; if (!S?.chooser) return;
-  if (FR.on && window.NoemaShell?.sheet) return NoemaShell.sheet(LT('lang.study.menu'), (body, close) => body.append(S.chooser(UI.acc, { course: UI.id, onDone: () => { close(); restudy(); } })));
+  if (FR.on && window.NoemaShell?.sheet) return NoemaShell.sheet(LT('lang.study.menu'), (body, close) => screenPart(body, 'study-chooser', 'lx-studypart', { course: UI.id, onDone: () => { close(); restudy(); } }));
   document.querySelector('.lx-pop')?.remove();
-  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } },
-    h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, LT('lang.study.menu')), h('button', { class: 'btn ghost small', 'aria-label': LT('lang.study.close'), onclick: () => pop.remove() }, '✕')),
-      S.chooser(UI.acc, { course: UI.id, onDone: () => { pop.remove(); restudy(); } })));
+  const box = h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, LT('lang.study.menu')), h('button', { class: 'btn ghost small', 'aria-label': LT('lang.study.close'), onclick: () => pop.remove() }, '✕')));
+  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } }, box);
+  screenPart(box, 'study-chooser', 'lx-studypart', { course: UI.id, onDone: () => { pop.remove(); restudy(); } });
   document.body.append(pop);
 }
 /** D19: the language of the explanations — automatic (the native language's, else the UI's, when its facade is on) or the learner's choice (settings.speaker). */
@@ -197,7 +197,7 @@ VIEWS.settings = (v) => {
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, arrowBack() + ' ' + LT('lang.card.map'))), h('h1', {}, '⚙️ ' + LT('lang.shell.settings')),
     h('h3', { class: 'lx-h3' }, LT('lang.set.studyNow')), langBox,
     h('p', { class: 'tiny lx-studynote' }, LT(UI.C.languages.length < UI.C.allLanguages.length ? 'lang.study.keptNote' : 'lang.study.note'), ' ',
-      window.Noema?.langStudy?.chooser ? h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp')) : null),
+      h('button', { class: 'btn ghost small lx-studyall', onclick: () => studySheet() }, LT('lang.study.allApp'))),
     h('h3', { class: 'lx-h3' }, LT('lang.native.label')), nativePicker(() => { applyExplanationLocale(); render(); }), h('p', { class: 'tiny' }, LT('lang.native.note')), speakerPicker(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.knowAlready')), knowsEditor(),
     h('h3', { class: 'lx-h3' }, LT('lang.set.sessions')), num(LT('lang.set.batch'), 'batch', 3, 30, 12), num(LT('lang.set.minutes'), 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),

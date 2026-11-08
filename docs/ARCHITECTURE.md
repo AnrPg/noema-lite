@@ -171,6 +171,8 @@ NoemaCore.vault                         the vault (src/features/vault): FORMATS,
 NoemaCore.social                        people (src/features/social): state, onChange, refresh, search, putFile, the rules
 NoemaCore.reports · engineRequests      problem reports ⚑ and engine requests (src/features/reports); promised calls
                                         reject with a NoemaError
+NoemaCore.languages                     the language courses before any is loaded (src/features/languages, §6.4)
+NoemaCore.screens                       area 5's screens: has, mount, part, load (src/composition/screens-bridge.ts, §6.4)
 ```
 
 The community parts are composed in `src/composition/community.ts` (`COMMUNITY_REGISTRATIONS`, `COMMUNITY_BRIDGE`): the
@@ -283,6 +285,33 @@ The rules:
   start screen never loads it. Phase 3's shell makes it a `page` entry and its root the app's root.
 - **Tests.** `src/ui/test/` (happy-dom: roles, keyboard, events, the catalogs), `src/composition/ui-root.test.ts`, and in a
   browser `tests/ui_kit.js` (layout, targets, focus, form association, right to left) and `tests/a11y.js` (axe).
+
+### 6.4 Area 5's screens: languages and activities (phase 3)
+
+The screens of area 5 are Lit elements in the light DOM (`src/ui/screens/screen.ts`, `NoemaScreen`): the page's sheets
+(`engine/engine.css`, the course sheet `engine/langui.css` generated from `engine/lang/*.css`) style them, so their markup
+keeps the class names those sheets and the browser suites use. Each screen reads through one port of its own, a small
+interface beside it (`engines-port.ts`, `languages-port.ts`, `course-port.ts`); the root that mounts a screen hands it the
+adapter.
+
+| File | Holds |
+|---|---|
+| `src/ui/screens/languages-activities.ts` | **the one route file of area 5**: `AREA5_ROUTES` (`#/lang`, `#/lang/:code`, `#/engines/:sub?`), `mountArea5(match, host, ports, t)` → the element and the frame's chrome (crumbs, back, tab), the parts that are not pages (`mountArea5Part`: `lang-strip`, `study-chooser`, `lang-courses`, `lang-today`), `defineArea5()` |
+| `src/ui/screens/languages/` | the Languages tab (`languages-page.ts`, D21), the question "Which languages do you want to study?" (`study-chooser.ts`), Today's card (`lang-today.ts`), a language's home (`lang-home.ts`, D29: continue, the path, the study areas, the bookshelf, the tools) and the chip strip (`lang-strip.ts`) |
+| `src/ui/screens/activities/` | `#/engines`: the catalogue of engines and the requests for new ones (`engines-page.ts`) |
+| `src/features/languages/` | the courses of the device before any course is loaded: the pure rules (`domain/courses.ts`: the courses, the languages offered and studied, a course's progress from its stored records, the course of a language) and the service over the device's keys (`application/courses.ts`) |
+| `src/composition/languages.ts` | `NoemaCore.languages`: that service over the root's storage, clock and settings writer (`NoemaThemes.putSettings`) |
+| `src/composition/screens-bridge.ts` | `NoemaCore.screens`: `has(hash)`, `mount(hash, host, ctx)` → the chrome, `part(name, host, ctx, options)`, `load()`; the first call loads `build/lang-activities.js` (a `page` entry; inline in the one-file bundle) |
+| `src/composition/lang-activities-root.ts` · `-ports.ts` | the root of that bundle: the services (the I18n port over `engine/i18n.js`, the system clock, the interface languages) and the adapters of the ports (the engine catalogue and requests, `NoemaCore.languages`, the open course's port that `engine/lang/14_screens.js` hands over) |
+
+Until the phase-3 shell owns the router, the older pages mount these screens through `NoemaCore.screens`:
+`engine/loader.js` (the Languages tab, Today's card, Choose another course), `engine/src/40_views.js` (`#/engines`) and the
+course runtime (`engine/lang/14_screens.js`: a language's home, the strip, the chooser inside a course). The new shell
+imports the route file and calls `mountArea5` itself. A dialog of a screen goes to the frame, outside the screen, and gets
+the screen's services itself (`NoemaScreen.openDialog`).
+
+Tests: `src/ui/test/languages.test.ts` (happy-dom), `src/features/languages/application/courses.test.ts`, and in a browser
+`tests/lang_home.js`, `tests/lang_select.js`, `tests/enginereq.js`.
 
 ## 7. Patterns
 
