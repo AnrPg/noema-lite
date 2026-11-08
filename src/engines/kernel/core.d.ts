@@ -10,7 +10,7 @@ export type Report = (code: string, path: string, msg: string) => void;
 export type Shape =
   | { readonly $obj: Table; readonly $req?: boolean }
   | { readonly $list: string | Shape; readonly min?: number; readonly max: number; readonly $req?: boolean }
-  | { readonly $map: string; readonly max: number; readonly $req?: boolean };
+  | { readonly $map: string | Shape; readonly max: number; readonly $req?: boolean };
 /** a model table: field → kind or shape */
 export interface Table {
   readonly [field: string]: string | Shape;
@@ -44,8 +44,8 @@ export interface SceneItem {
   readonly [field: string]: unknown;
 }
 export interface Scene {
-  readonly view: number[];
-  readonly items: SceneItem[];
+  view: number[];
+  items: SceneItem[];
 }
 export interface SceneBuilder {
   readonly items: SceneItem[];
