@@ -2,6 +2,8 @@
    engine/legacy.ts loads the files; these interfaces are their contract as the connector uses it. */
 import type { Json } from '../util.ts';
 import type { RequestOptions } from '../services/supabase.ts';
+import type { Level, LevelRef } from '../../contracts/rules/levels.ts';
+import type { Proposal } from '../../features/roadmaps/domain/model.ts';
 
 export interface CheckResult {
   errors: string[];
@@ -100,10 +102,12 @@ export interface CurNode {
   addedIn?: string;
   learningGoals?: unknown;
   domains?: unknown;
-  chapters?: { ref: string; title?: string; goals?: unknown[]; coverage?: unknown[] }[];
+  chapters?: { ref: string; title?: string; goals?: unknown[]; coverage?: unknown[]; level?: string }[];
   pack?: { id?: string; status?: string; assigned?: boolean; title?: string; claimedAt?: string; [k: string]: unknown } | null;
   chatFiles?: unknown;
   reviewed?: string;
+  /** 🪜 the step's level (docs/CURRICULUM.md §11): a level id, or a range */
+  level?: LevelRef;
   [k: string]: unknown;
 }
 export interface Curriculum {
@@ -122,6 +126,10 @@ export interface Curriculum {
   shared?: { role?: string; ended?: boolean; ownerName?: string; files?: Record<string, SharedFile> } | null;
   files?: Record<string, { sha256?: string }>;
   fromSources?: unknown;
+  /** 🪜 the level ladder; levelTest: a level test before moving up; proposals: restructurings waiting for the learner */
+  levels?: Level[];
+  levelTest?: boolean;
+  proposals?: Proposal[];
   [k: string]: unknown;
 }
 export interface SharedFile {
@@ -168,8 +176,8 @@ export interface NoemaCurJobs {
   claimExpired(row: KvRowLike): boolean;
   merged(c: Curriculum, inbox: KvRowLike[]): Curriculum;
   settle(c: Curriculum, o: { claims: KvRowLike[]; packs: KvRowLike[]; remote: unknown; me: string | null }): Curriculum;
-  work(c: Curriculum): Work;
-  next(c: Curriculum, o: { want: string; step: string; force: boolean }): Task | null;
+  work(c: Curriculum, o?: { level?: string }): Work;
+  next(c: Curriculum, o: { want: string; step: string; force: boolean; level?: string }): Task | null;
   byId(c: Curriculum, id: string): Task | null;
   check(c: Curriculum, t: Task, data: unknown): string[];
   taskText(c: Curriculum, t: Task, mode: string, o: { fileLines: string[] }): string;
@@ -223,7 +231,8 @@ export interface InboxEntry {
   nodes: Record<string, CurNode>;
   edges: { from: string; to: string }[];
   part: { title: string };
-  [k: string]: Json | Record<string, CurNode> | { from: string; to: string }[] | { title: string };
+  levels?: Level[];
+  [k: string]: Json | Record<string, CurNode> | { from: string; to: string }[] | { title: string } | Level[] | undefined;
 }
 export interface LinkEntry {
   links: { from: string; to: string }[];
@@ -231,7 +240,10 @@ export interface LinkEntry {
   [k: string]: unknown;
 }
 export interface NoemaSourcePlan {
-  fromClaude(d: unknown): { errors?: string[]; parsed: unknown; chat: Record<string, unknown>; plan: { summary?: string } };
+  fromClaude(
+    d: unknown,
+    o?: { lang?: string },
+  ): { errors?: string[]; parsed: unknown; chat: Record<string, unknown>; plan: { summary?: string }; levels: Level[] };
   extendFromClaude(c: Curriculum, d: unknown, o: { independent: boolean; prepare: boolean }): { errors?: string[]; entry: InboxEntry };
   linkFromClaude(c: Curriculum, d: unknown): { errors?: string[]; entry: LinkEntry | null; already: { from: string; to: string }[] };
 }

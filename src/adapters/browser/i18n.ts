@@ -13,6 +13,7 @@ export interface NoemaI18nRuntime {
   has(key: string): boolean;
   err(e: unknown): string;
   readonly locale: string;
+  chain(tag: string): string[];
   readonly dir: TextDirection;
   onChange(listener: (locale: string) => void): void;
   readonly fmt: {
@@ -59,6 +60,10 @@ export function noemaI18n(
     err: e => rt()?.err(e) ?? fallback.err(e),
     plural: n => rt()?.fmt.plural(n) ?? fallback.plural(n),
     locale: () => rt()?.locale ?? 'en',
+    chain: l => {
+      const r = rt();
+      return r ? r.chain(l ?? r.locale) : fallback.chain(l ?? 'en');
+    },
     dir: () => rt()?.dir ?? 'ltr',
     format,
     onChange(listener): Unsubscribe {

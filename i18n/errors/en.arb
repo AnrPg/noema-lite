@@ -220,6 +220,11 @@
   "@err.files.no_writer": {
     "description": "Source files and subject packages (.noema.zip): error shown in a toast or the import log. The zip writer could not be loaded."
   },
+  "err.roadmap.restructure": "The new arrangement could not be applied: {detail}",
+  "@err.roadmap.restructure": {
+    "description": "Roadmaps: shown when the learner approved Claude's new arrangement of a Roadmap's levels (steps moved, split or joined) and it could not be applied; nothing was changed. {detail} is a technical reason in English.",
+    "placeholders": { "detail": { "type": "String" } }
+  },
   "err.ai.unauthorized": "The key was not accepted — check that you copied all of it (it starts with sk-ant-), or create a new one.",
   "@err.ai.unauthorized": {
     "description": "Error of the AI provider (the learner’s own Claude API key or Gemini key), shown in “Create with Claude”, Roadmaps, the language tutor. HTTP 401. sk-ant- is the start of every Claude API key: keep it."

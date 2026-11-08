@@ -42,6 +42,7 @@
   "err.files.no_pack_json": "Этот zip не пакет noema-lite (внутри нет pack.json).",
   "err.files.bad_pack_json": "pack.json в пакете повреждён: {detail}",
   "err.files.no_writer": "Модуль записи пакетов недоступен.",
+  "err.roadmap.restructure": "Новую структуру применить не удалось: {detail}",
   "err.ai.unauthorized": "Ключ не принят — проверь, что он скопирован целиком (начинается с sk-ant-), или создай новый.",
   "err.ai.unauthorized_short": "API-ключ Claude не принят.",
   "err.ai.forbidden": "Этому ключу это не разрешено ({detail}). Возьми ключ из своего рабочего пространства.",

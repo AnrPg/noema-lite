@@ -42,6 +42,7 @@
   "err.files.no_pack_json": "Αυτό το zip δεν είναι πακέτο του noema-lite (δεν περιέχει pack.json).",
   "err.files.bad_pack_json": "Το pack.json μέσα στο πακέτο δεν είναι έγκυρο: {detail}",
   "err.files.no_writer": "Η δημιουργία πακέτων δεν είναι διαθέσιμη.",
+  "err.roadmap.restructure": "Η νέα διάταξη δεν εφαρμόστηκε: {detail}",
   "err.ai.unauthorized": "Το κλειδί δεν έγινε δεκτό — έλεγξε ότι το αντέγραψες ολόκληρο (ξεκινά με sk-ant-) ή φτιάξε καινούργιο.",
   "err.ai.unauthorized_short": "Το κλειδί API του Claude δεν έγινε δεκτό.",
   "err.ai.forbidden": "Αυτό το κλειδί δεν επιτρέπεται να το κάνει αυτό ({detail}). Χρησιμοποίησε κλειδί από το δικό σου workspace.",

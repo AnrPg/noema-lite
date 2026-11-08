@@ -32,7 +32,8 @@ import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
-import { randomId, registerSync, syncBridge } from './sync.ts';
+import { bridgesDomain, ROADMAP_EVENTS, roadmapsSurface } from './roadmaps.ts';
+import { accountKvStore, kvRoadmapEventLog } from './roadmap-events.ts';
 import {
   AI,
   CLOCK,
@@ -58,6 +59,8 @@ export const APP_REGISTRATIONS: readonly Registration[] = [
   ...STUDY_REGISTRATIONS,
   // local-first sync (src/features/sync, docs/SYNC.md): the outbox, the settings registers, the loop and the lease
   registerSync,
+  // the Roadmap events (levels reached, restructurings) of the account, in its synced store
+  c => c.register(ROADMAP_EVENTS, r => kvRoadmapEventLog(accountKvStore(() => r.get(STORAGE).kv))),
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
@@ -71,6 +74,11 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   ...STUDY_BRIDGE,
   // the sync loop, the settings, the lease ("in use on another device"): engine/cloud.js, engine/loader.js, the account page
   syncBridge,
+  // the Roadmaps domain (graph, tasks, claims, inbox, levels, restructuring) and its services: curriculum.js, curjobs.js,
+  // curshare.js, curimport.js, sourceplan.js, curmap.js
+  { name: 'roadmaps', build: r => roadmapsSurface(r.get(ROADMAP_EVENTS)) },
+  // the 文A bridges' lookup (engine/bridge.js)
+  { name: 'bridges', build: () => bridgesDomain },
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */
