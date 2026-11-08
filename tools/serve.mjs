@@ -43,7 +43,9 @@ export function serve(dir, o = {}) {
     let f = path.join(root, path.normalize(p));
     if (f !== root && !f.startsWith(root + path.sep)) return send(403, 'text/plain', 'outside the folder');
     if (existsSync(f) && statSync(f).isDirectory()) f = path.join(f, 'index.html');
-    if (!existsSync(f) || !statSync(f).isFile()) return send(404, 'text/plain', 'not found: ' + p);
+    // a missing script keeps its script type (as Netlify answers): the page's onerror handles it (config.local.js is optional),
+    // where a text/plain answer under nosniff is a MIME refusal the browser reports as an error
+    if (!existsSync(f) || !statSync(f).isFile()) return path.extname(f).toLowerCase() === '.js' ? send(404, TYPES['.js'], '/* not found: ' + p + ' */') : send(404, 'text/plain', 'not found: ' + p);
     const type = TYPES[path.extname(f).toLowerCase()] || 'application/octet-stream';
     if (o.live && path.basename(f) === 'index.html') return send(200, type, readFileSync(f, 'utf8').replace('</body>', LIVE + '</body>'));
     res.writeHead(200, { 'content-type': type, 'content-length': statSync(f).size, 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' });
