@@ -18,22 +18,22 @@ export interface WidgetApi {
 
 export interface Widget {
   readonly el: HTMLElement;
-  answer?(): Answer;
+  readonly answer?: () => Answer;
   /** the verdict now: true, false, or null when the answer is not finished */
-  check?(): boolean | null;
+  readonly check?: () => boolean | null;
   /** marks right and wrong after the check */
-  reveal?(): void;
+  readonly reveal?: () => void;
   /** what the learner entered, as text for the tutor */
-  given?(): string;
+  readonly given?: () => string;
   /** the 1–6 keys choose option k */
-  keys?(k: number): void;
-  focus?(): void;
+  readonly keys?: (k: number) => void;
+  readonly focus?: () => void;
   /** answering is the check (no Check button) */
   readonly auto?: boolean;
   /** the widget reports its own verdict (api.done) */
   readonly selfDone?: boolean;
   /** extra XP (answering early in a reveal) */
-  bonus?(): number;
+  readonly bonus?: () => number;
 }
 
 export interface WidgetCtx {
