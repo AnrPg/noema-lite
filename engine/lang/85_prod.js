@@ -378,7 +378,7 @@ function tutorText(c, text, targets) {
         const hit = ts.map(t => [t, rest.indexOf(t)]).filter(([, i]) => i >= 0).sort((a, b) => a[1] - b[1])[0];
         if (!hit) { holder.append(...wordsIn(c, rest)); break; }
         const [t, i] = hit; if (i) holder.append(...wordsIn(c, rest.slice(0, i)));
-        holder.append(h('span', { class: 'lx-w lx-tl', lang: c, dir: X.language.dir || 'ltr' }, t)); rest = rest.slice(i + t.length);
+        holder.append(word(c, t, { sub: false, cls: 'lx-tl' })); rest = rest.slice(i + t.length);
       }
       out.append(holder);
     }

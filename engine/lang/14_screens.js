@@ -51,6 +51,11 @@ const COURSE_PORT = {
   openStep: (c, nid) => laneOpen(c, nid),
   lessonHead: nid => lessonHead(nid),
   setTranslit: on => setTranslit(on),
+  translit: () => ({ has: !!UI.C && hasTranslit(), on: UI.prefs.translit !== false }),
+  word: (code, text, o) => wordView(code, text, o),
+  aspect: (c, a) => aspectPage(c, a),
+  fold: x => searchFold(x),
+  openWord: (code, lex) => { if (UI.C?.lang[code]?.lex[lex]) wordPopup(code, lex); },
 };
 /** The address the new screens know a course page by: #/lang/<code or course>/<the course's own address>. */
 function screenHash() {
@@ -67,6 +72,12 @@ function screenHost(v, hash = screenHash(), cls = 'lx-screen') {
   v.append(host);
   NoemaShell.area5.mount(hash, host, { account: { id: UI.acc }, course: COURSE_PORT }).catch(screenFailed(host));
   return host;
+}
+/** A screen element the course's view makes itself (src/ui/screens/languages/*.ts): the course's port and its properties. */
+function screenEl(tag, props = {}) {
+  const e = document.createElement(tag);
+  Object.assign(e, { port: COURSE_PORT, ...props });
+  return e;
 }
 /** A host for a part of a page (the strip of languages, the chooser of languages: src/ui/screens/languages-activities.ts). */
 function screenPart(v, name, cls, options) {

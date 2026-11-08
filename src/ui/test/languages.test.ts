@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import { afterEach, describe, test } from 'node:test';
 import { defineUi } from '../index.ts';
 import { AREA5_ROUTES, defineArea5, mountArea5, mountArea5Part, type Area5Ports } from '../screens/languages-activities.ts';
+import type { AspectPage, WordOptions, WordView } from '../screens/languages/course-port.ts';
 import type { CourseRow, LanguagesPort } from '../screens/languages/languages-port.ts';
 import { laneDots } from '../screens/languages/lang-lanes.ts';
 import { langNames } from '../screens/languages/study-chooser.ts';
@@ -269,9 +270,167 @@ describe('⫴ parallel lanes', () => {
         translit = on;
         log.push('translit ' + String(on));
       },
+      translit: () => ({ has: true, on: translit }),
+      word: (code: string, text: string, o: WordOptions): WordView | null =>
+        code === 'xx'
+          ? null
+          : {
+              lang: code,
+              dir: code === 'he' ? 'rtl' : 'ltr',
+              shown: text,
+              help: o.sub && o.lex ? { text: 'shalom', lang: 'und-Latn' } : null,
+              run: o.link
+                ? {
+                    title: 'Hebrew',
+                    tokens: [
+                      { text: 'שָׁלוֹם', lex: 'he.shalom', reading: o.sub && o.lex ? undefined : 'shalom', gloss: 'peace', fresh: true },
+                      { text: ' ' },
+                      { text: 'עוֹלָם', ruled: true, reading: 'olam' },
+                    ],
+                  }
+                : null,
+            },
+      openWord: (code: string, lex: string) => {
+        log.push(`card ${code} ${lex}`);
+      },
+      fold: (x: string) => x.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase(),
+      aspect: (code: string, aspect: string): AspectPage | null =>
+        aspect === 'nope'
+          ? null
+          : {
+              lang: lang(code),
+              aspect,
+              grammar:
+                aspect === 'grammar'
+                  ? {
+                      forms: [{ tag: 'Number', fns: [{ id: 'fn.plural', title: 'Plural' }] }],
+                      sentences: [{ level: 'A1', fns: [{ id: 'fn.order', title: 'Order' }] }],
+                    }
+                  : null,
+              points: [],
+              views: aspect === 'writing' ? ['script', 'write'] : [],
+              parts:
+                aspect === 'use'
+                  ? [
+                      {
+                        key: 'registers',
+                        facets: [
+                          {
+                            facet: 'reg',
+                            values: [
+                              { v: 'formal', label: 'formal' },
+                              { v: 'slang', label: 'slang' },
+                            ],
+                          },
+                        ],
+                        entries: [
+                          {
+                            lex: 'he.a',
+                            lemma: 'אֶרֶץ',
+                            href: '#/w/he/he.a',
+                            hay: 'ארץ erets ḥ',
+                            meta: { reg: ['formal'] },
+                            kind: 'use',
+                            gloss: 'land',
+                            badges: [{ cls: 'reg', text: 'formal' }],
+                          },
+                          {
+                            lex: 'he.b',
+                            lemma: 'סַבַּבָּה',
+                            href: '#/w/he/he.b',
+                            hay: 'סבבה sababa',
+                            meta: { reg: ['slang'] },
+                            kind: 'use',
+                            gloss: 'cool',
+                            badges: [],
+                          },
+                        ],
+                      },
+                    ]
+                  : [],
+            },
     };
     return P;
   }
+  test('a foreign word: its reading under it, its words opening their cards, plain inside a control; Aa·', async () => {
+    const C = coursePort(),
+      host = mount();
+    const w = document.createElement('noema-lang-word');
+    Object.assign(w, { port: C, code: 'he', text: 'שָׁלוֹם עוֹלָם' });
+    w.append('שָׁלוֹם עוֹלָם');
+    host.append(w);
+    await settle(host);
+    const run = host.querySelector<HTMLElement>('.lx-w.lx-run');
+    assert.ok(run && run.getAttribute('dir') === 'rtl' && run.lang === 'he', 'the run in its language and direction');
+    assert.ok(
+      w.children.length === 1 && ![...w.childNodes].some(n => n.nodeType === 3 && n.textContent?.trim()),
+      'the plain text it held is gone',
+    );
+    const tok = host.querySelector<HTMLElement>('ruby.lx-rw.lx-tok.lx-newword');
+    assert.ok(tok && tok.getAttribute('role') === 'button' && tok.tabIndex === 0, 'a word of the course: a button, new to the learner');
+    assert.equal(tok.querySelector('rt.lx-help')?.textContent, 'shalom');
+    assert.ok(host.querySelector('ruby.lx-ru:not(.lx-tok)'), 'a word read by rule: its reading, no card');
+    tok.click();
+    tok.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    assert.deepEqual(C.log, ['card he he.shalom', 'card he he.shalom']);
+    // inside a button: shown whole; with its word: the reading under it
+    const b = document.createElement('button'),
+      w2 = document.createElement('noema-lang-word');
+    Object.assign(w2, { port: C, code: 'he', text: 'שָׁלוֹם', lex: 'he.shalom' });
+    b.append(w2);
+    host.append(b);
+    await settle(host);
+    assert.ok(b.querySelector('.lx-wbox > .lx-w:not(.lx-run)') && b.querySelector('.lx-wbox > .lx-help')?.textContent === 'shalom');
+    assert.equal(b.querySelectorAll('.lx-tok').length, 0);
+    // inside prose: the reading in [brackets]
+    const p = document.createElement('p'),
+      w3 = document.createElement('noema-lang-word');
+    Object.assign(w3, { port: C, code: 'he', text: 'שָׁלוֹם' });
+    p.append('It means ', w3);
+    host.append(p);
+    await settle(host);
+    assert.equal(p.querySelector('.lx-rw .lx-br')?.textContent, ' [shalom]');
+    const aa = document.createElement('noema-lang-translit');
+    aa.port = C;
+    host.append(aa);
+    await settle(host);
+    await click(host, 'noema-lang-translit .lx-translit');
+    assert.equal(host.querySelector('noema-lang-translit .lx-translit')?.getAttribute('aria-pressed'), 'false');
+    assert.equal(C.log.at(-1), 'translit false');
+  });
+  test('an aspect page: grammar folded by feature and level, a profile part with its filter (plain Latin matches) and chips', async () => {
+    const C = coursePort(),
+      host = mount();
+    const g = document.createElement('noema-lang-aspect');
+    Object.assign(g, { port: C, code: 'he', aspect: 'grammar' });
+    host.append(g);
+    await settle(host);
+    assert.ok(host.querySelector('[data-aspect="grammar"]'));
+    assert.equal(host.querySelectorAll('.lx-aspfold').length, 2);
+    await click(host, '.lx-lhtile');
+    assert.equal(C.log.at(-1), 'go #/fn/fn.plural/he');
+    host.replaceChildren();
+    const u = document.createElement('noema-lang-aspect');
+    Object.assign(u, { port: C, code: 'he', aspect: 'use' });
+    host.append(u);
+    await settle(host);
+    const part = host.querySelector<HTMLDetailsElement>('.lx-aspart[data-part="registers"]');
+    assert.ok(part?.open, 'one part: open');
+    assert.equal(host.querySelectorAll('.lx-aspentry').length, 2);
+    const inp = host.querySelector<HTMLInputElement>('.lx-aspart input');
+    assert.ok(inp);
+    inp.value = 'Erets';
+    inp.dispatchEvent(new Event('input'));
+    await settle(host);
+    assert.equal(host.querySelectorAll('.lx-aspentry').length, 1, 'plain Latin finds the word');
+    inp.value = '';
+    inp.dispatchEvent(new Event('input'));
+    await settle(host);
+    await click(host, '.lx-facet .lx-chip[data-v="slang"]');
+    assert.equal(host.querySelectorAll('.lx-aspentry').length, 1, 'a chip keeps its register');
+    assert.equal(host.querySelector('.lx-chip[data-v="slang"]')?.getAttribute('aria-pressed'), 'true');
+    assert.ok(host.querySelector('.lx-aspword noema-lang-word'), 'the word in its own element');
+  });
   test('tiles or dots: as chosen, else by the width', () => {
     assert.equal(laneDots('', 352, 4), false);
     assert.equal(laneDots('', 320, 4), true);

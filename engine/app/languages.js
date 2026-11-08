@@ -196,6 +196,7 @@
     const v = h('div', { class: 'ns-langpage' }, h('div', { class: 'ns-wait' }, faceEl(undefined, 'breathe')));
     page({ tab: 'lang', crumbs: [[L('languages')]], corner: true, menu: W?.menu?.() || null },
       h('h1', {}, L('languages')), h('div', { class: 'row spread' }, h('span', { class: 'ns-label' }, L('yourLanguages')), W?.create ? h('button', { class: 'btn small ghost', onclick: () => W.create() }, '+ ' + L('newLanguage')) : null), v);
+    if (W?.page) { W.page(v.replaceChildren() || v, { h, open, L }); return; }   // a world that draws its own list
     const at = location.hash;
     try {
       const c = await S.area5.mount('#/lang', v, APP.langCtx());

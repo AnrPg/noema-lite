@@ -14,6 +14,11 @@
  *   lang-today      Today's card of a course (languages/lang-today.ts); options { course }
  *   lang-lanes      ⫴ the parallel lanes of the open course (languages/lang-lanes.ts)
  *   lang-lesson     the head of a lesson's page: the ladder, Continue, Deepen, Aa· (languages/lang-lesson-head.ts); options { node }
+ *
+ * Elements the course's views make themselves (document.createElement, .port = the course):
+ *   noema-lang-word      a foreign word or run: its reading, its words opening their cards (languages/lang-word.ts)
+ *   noema-lang-translit  the Aa· switch of a running lesson (languages/lang-word.ts)
+ *   noema-lang-aspect    the page of one study area of a language, #/aspects/<code>/<aspect> (languages/lang-aspect.ts)
  */
 import { defineRoutes, type RouteMatch } from '../router/routes.ts';
 import type { CoursePort } from './languages/course-port.ts';
@@ -25,6 +30,8 @@ import { NoemaLangToday } from './languages/lang-today.ts';
 import { NoemaLangCourses, NoemaLanguagesPage } from './languages/languages-page.ts';
 import type { LanguagesPort } from './languages/languages-port.ts';
 import { NoemaStudyChooser } from './languages/study-chooser.ts';
+import { NoemaLangTranslit, NoemaLangWord } from './languages/lang-word.ts';
+import { NoemaLangAspect } from './languages/lang-aspect.ts';
 
 export const AREA5_ROUTES = defineRoutes({
   languages: '/lang',
@@ -76,6 +83,9 @@ export const AREA5_ELEMENTS = {
   'noema-lang-strip': NoemaLangStrip,
   'noema-lang-lanes': NoemaLangLanes,
   'noema-lang-lesson-head': NoemaLangLessonHead,
+  'noema-lang-word': NoemaLangWord,
+  'noema-lang-translit': NoemaLangTranslit,
+  'noema-lang-aspect': NoemaLangAspect,
 } as const;
 
 declare global {
@@ -88,6 +98,9 @@ declare global {
     'noema-lang-strip': NoemaLangStrip;
     'noema-lang-lanes': NoemaLangLanes;
     'noema-lang-lesson-head': NoemaLangLessonHead;
+    'noema-lang-word': NoemaLangWord;
+    'noema-lang-translit': NoemaLangTranslit;
+    'noema-lang-aspect': NoemaLangAspect;
   }
 }
 

@@ -133,7 +133,111 @@ export interface LessonHead {
   readonly frame: boolean;
 }
 
-export interface CoursePort {
+/** One piece of a run of foreign text (lang-word.ts): plain text, a word of the course (it opens its card), or a word read by rule. */
+export interface WordToken {
+  readonly text: string;
+  /** the word of the course it is (its card opens on tap) */
+  readonly lex?: string;
+  /** read by rule: not in the course, but its vowel marks give its reading (Hebrew, Arabic) */
+  readonly ruled?: boolean;
+  /** its reading in Latin letters (D24), when the run shows readings */
+  readonly reading?: string | undefined;
+  /** D23: not taught to this learner yet (the dotted underline) */
+  readonly fresh?: boolean;
+  /** what it means, in the explanation language (its title) */
+  readonly gloss?: string;
+}
+
+/** A foreign word or run as the learner should see it. */
+export interface WordView {
+  readonly lang: string;
+  readonly dir: 'ltr' | 'rtl';
+  /** the text with its vowel marks as far as the learner reads them */
+  readonly shown: string;
+  /** the reading under the word (a word of the course with sub): transliteration or pinyin */
+  readonly help: { readonly text: string; readonly lang: string } | null;
+  /** the words of the run, when they may open their cards (null: shown whole) */
+  readonly run: { readonly title: string; readonly tokens: readonly WordToken[] } | null;
+}
+
+export interface WordOptions {
+  readonly lex: string | null;
+  readonly sub: boolean;
+  readonly marks: string | null;
+  /** the words may open their cards here */
+  readonly link: boolean;
+}
+
+/** What a foreign word needs of the course (lang-word.ts). */
+export interface WordPort {
+  /** null: not a language of the course */
+  word(code: string, text: string, o: WordOptions): WordView | null;
+  /** the card of a word over the page */
+  openWord(code: string, lex: string): void;
+  /** D23: is there a line under foreign words, and is it shown */
+  translit(): { readonly has: boolean; readonly on: boolean };
+  /** D23: show or hide the transliteration / pinyin under foreign words */
+  setTranslit(on: boolean): void;
+}
+
+/** A grammar point as a tile: its function id and title. */
+export interface PointTile {
+  readonly id: string;
+  readonly title: string;
+}
+
+/** One entry of a profile part of an aspect page: the word, then what its profile says. */
+export interface AspectEntry {
+  readonly lex: string;
+  readonly lemma: string;
+  /** the word's card (an address of the page) */
+  readonly href: string;
+  /** what the filter searches, folded (the word in its script, its readings, the entry's text) */
+  readonly hay: string;
+  /** the entry's values per facet (reg, conn, status) */
+  readonly meta: Readonly<Record<string, readonly string[]>>;
+  readonly kind: 'use' | 'phrase' | 'etymology' | 'fact';
+  readonly badges?: readonly { readonly cls: string; readonly text: string }[];
+  readonly gloss?: string;
+  readonly text?: string;
+  readonly tr?: string;
+  readonly meaning?: string;
+  readonly source?: string;
+  readonly src?: string;
+  /** a fun fact as the course writes its notes (R2), drawn by the course */
+  readonly note?: Node;
+}
+
+export interface AspectPart {
+  /** idioms, registers, sayings, facts, etymology */
+  readonly key: string;
+  readonly entries: readonly AspectEntry[];
+  /** the chips: each facet with two values or more */
+  readonly facets: readonly { readonly facet: string; readonly values: readonly { readonly v: string; readonly label: string }[] }[];
+}
+
+/** The page of one study area of a language (D29). */
+export interface AspectPage {
+  readonly lang: CourseLang;
+  readonly aspect: string;
+  /** grammar: the word forms by the feature they inflect, the sentences by level (null: another aspect) */
+  readonly grammar: {
+    readonly forms: readonly { readonly tag: string; readonly fns: readonly PointTile[] }[];
+    readonly sentences: readonly { readonly level: string; readonly fns: readonly PointTile[] }[];
+  } | null;
+  /** the aspect's grammar points (an aspect other than grammar) */
+  readonly points: readonly PointTile[];
+  /** what the word profiles hold for it (null: the profiles are still loading) */
+  readonly parts: readonly AspectPart[] | null;
+  /** the course's views of the aspect (writing: script, write) */
+  readonly views: readonly string[];
+}
+
+export interface CoursePort extends WordPort {
+  /** the page of one study area of a language (null: no such aspect) */
+  aspect(code: string, aspect: string): AspectPage | null;
+  /** folds a text as the search does: a word matches in its script, its scholarly transliteration and plain Latin */
+  fold(text: string): string;
   /** the home of one language of the course */
   home(code: string): LangHomeModel;
   strip(): LangStripModel;
@@ -153,6 +257,4 @@ export interface CoursePort {
   openStep(code: string, node: string): void;
   /** the head of a lesson's page (null: not a lesson of the languages shown) */
   lessonHead(node: string): LessonHead | null;
-  /** D23: show or hide the transliteration / pinyin under foreign words */
-  setTranslit(on: boolean): void;
 }

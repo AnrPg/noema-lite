@@ -92,30 +92,39 @@ function romanTok(code, text, lexId) {
   if (lx && lx.translit && (N.nfc(lx.lemma || '') === nt || (!/\p{M}/u.test(nt) && N.stripMarks(code, lx.lemma || '') === nt))) return lx.translit;   // the lemma, or its plain spelling
   return N.romanize(code, nt) || (lx && lx.translit) || null;
 }
-/** Is the run inside a sentence of another language (prose with its own words around it)? Then the reading goes in [square brackets] after the word. */
 const wantRoman = code => UI.prefs.translit !== false || needTranslit(code);   // the learner's setting, but always until the letters are known (§5.5)
-const inProse = run => { const p = run.parentElement; if (!p) return false; let t = ''; for (const n of p.childNodes) if (n !== run && n.nodeType === 3) t += n.textContent; return /\p{L}/u.test(t); };
 /** D23: does a studied language have a line under its foreign words (transliteration / pinyin)? Then the lesson's Aa· switch shows it. */
 const hasTranslit = () => activeLangs().some(c => LX(c).language.script !== 'Latn' && LX(c).language.romanization);
 /** D23: show or hide that line (the switch on a lesson's page, src/ui/screens/languages/lang-lesson-head.ts). */
 function setTranslit(on) {
   UI.prefs.translit = on; UI.prefs.pinyin = on; save(); document.body.classList.toggle('lx-nohelp', !on); if (!$('.lx-session')) render();
 }
-/** The same switch in a running lesson (the lesson's run is not a screen yet). */
+/** The same switch in a running lesson: noema-lang-translit (src/ui/screens/languages/lang-word.ts). */
 function translitToggle() {
   if (!hasTranslit()) return null;
-  const b = h('button', { class: 'btn ghost small lx-translit', onclick: () => { setTranslit(UI.prefs.translit === false); paint(); } }, 'Aa·');
-  const paint = () => { const on = UI.prefs.translit !== false; b.setAttribute('aria-pressed', String(on)); b.title = LT(on ? 'lang.translit.hide' : 'lang.translit.show'); };
-  paint(); return b;
+  const b = document.createElement('noema-lang-translit'); b.port = COURSE_PORT; return b;
 }
-/** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it. */
-function word(code, text, { lex = null, cls = '', sub = true, marks = null } = {}) {
-  const X = LX(code), shown = shownMarks(code, text, lex, marks);   // vowel marks: full · fading · none (P4, 90_script.js)
-  const e = h('span', { class: 'lx-w ' + cls, lang: code, dir: X.language.dir || 'ltr' }, shown);
-  if (!sub || !lex) return e;
-  const helper = code === 'zh' ? (UI.prefs.pinyin !== false && lex.pinyin && text === lex.lemma ? lex.pinyin.replace(/\s+/g, '') : null)
-    : (UI.prefs.translit !== false || needTranslit(code)) ? romanTok(code, text, lex.id) : null;   // always until the letters are known (§5.5)
-  return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
+/** A foreign word as the learner should see it: right font and direction; vowel marks on/off; transliteration or pinyin under it;
+    its words open their cards — noema-lang-word (src/ui/screens/languages/lang-word.ts, answered by COURSE_PORT.word). It holds
+    the plain text until it is drawn. */
+function word(code, text, { lex = null, cls = '', sub = true, marks = null, plain = false } = {}) {
+  const e = document.createElement('noema-lang-word');
+  Object.assign(e, { port: COURSE_PORT, code, text: text == null ? '' : String(text), lex: lex ? lex.id || '' : '', cls: cls || '', sub: !!sub, marks: marks || '', plain: !!plain });
+  e.append(shownMarks(code, text, lex, marks) ?? '');
+  return e;
+}
+/** The word as the element draws it (COURSE_PORT.word): its marks, its reading under it, the words of the run when they may link. */
+function wordView(code, text, { lex = null, sub = true, marks = null, link = false } = {}) {
+  const X = UI.C?.lang[code]; if (!X) return null;
+  const lx = lex && X.lex[lex] || null, t = String(text ?? '');
+  const help = !sub || !lx ? null : code === 'zh' ? (UI.prefs.pinyin !== false && lx.pinyin && t === lx.lemma ? { text: lx.pinyin.replace(/\s+/g, ''), lang: 'zh-Latn-pinyin' } : null)
+    : (UI.prefs.translit !== false || needTranslit(code)) ? (r => r ? { text: r, lang: 'und-Latn' } : null)(romanTok(code, t, lx.id)) : null;   // always until the letters are known (§5.5)
+  const view = { lang: code, dir: X.language.dir || 'ltr', shown: shownMarks(code, t, lx, marks), help, run: null };
+  if (link && t.trim()) {
+    const toks = runTokens(code, t, { quiet: !!help || !wantRoman(code) });
+    view.run = { title: info(code).label + (toks?.some(k => k.lex) ? '' : ' · ' + LT('lang.prod.notInCourseTitle')), tokens: toks || [{ text: view.shown }] };   // what the coloured underline means; no card to open
+  }
+  return view;
 }
 /* ---------- the learner's native language (D19, docs/language-packs.md §2.2) and words met before they are learned (D20) ---------- */
 /** The account's settings (a:settings: synced; the native language lives there, for every course). */
@@ -164,7 +173,7 @@ function wordPopup(c, lid) {
   document.body.append(pop);
 }
 const formsMemo = new WeakMap();
-/** A word of the course → every way the course writes it (its lemma and its forms; splitRun). */
+/** A word of the course → every way the course writes it (its lemma and its forms; runTokens). */
 function formsOf(X, l) {
   let m = formsMemo.get(X);
   if (!m) { m = new Map(); for (const [f, ms] of X.forms) for (const x of ms) (m.get(x.l) || m.set(x.l, []).get(x.l)).push(f); formsMemo.set(X, m); }
@@ -181,8 +190,8 @@ function sameWord(code, a, b) {
   return x.every((v, i) => i === x.length - 1 || !v || !y[i] || [...v].sort().join('') === [...y[i]].sort().join(''));
 }
 /** The words of a course language anywhere on screen (every .lx-w: word(), the runs in explanations and notes, examples, lists …):
- *  the coloured underline is the language's colour (§9.5). splitRun marks the words the course knows in such a text (.lx-rw), so that
- *  linkRuns can make them open their card. A word of several readings: the one written exactly so, else the one whose spelling agrees
+ *  the coloured underline is the language's colour (§9.5). runTokens finds the words the course knows in such a text (.lx-rw), so that
+ *  noema-lang-word can make them open their card. A word of several readings: the one written exactly so, else the one whose spelling agrees
  *  (vowel marks included), else the first; a vocalized spelling that agrees with none (كَتَبَ “he wrote” against كُتُب “books”) stays plain. */
 function wordOf(code, X, t, matches) {
   const ls = [...new Set(matches.map(m => m.l))].filter(l => X.lex[l]); if (!ls.length) return null;
@@ -191,60 +200,30 @@ function wordOf(code, X, t, matches) {
   const ok = ls.filter(l => formsOf(X, l).some(f => /\p{M}/u.test(f) && sameWord(code, nt, f)));   // the unvocalized keys of the form index agree with anything
   return ok.find(lemmaIs) || ok[0] || null;
 }
-function splitRun(run, code, text) {
+/** The words of a run the course knows (they open their card) and the words read by rule, with their readings → [{ text, lex?, ruled?, reading?, fresh?, gloss? }],
+ *  or null when nothing in it is a word (the run is shown whole). quiet: no readings (the word's own box already has one). */
+function runTokens(code, text, { quiet = false } = {}) {
   const X = LX(code), s = N.nfc(text);
   let toks = null; try { toks = N.tokenize(UI.C, code, s); } catch (err) { }
-  if (!toks) return;
+  if (!toks) return null;
+  let kn = null; const fresh = l => { try { kn = kn || N.known(UI.C, UI.L, code); return kn.state[l] === 'locked' || kn.state[l] === 'ready'; } catch (err) { return false; } };   // D23: not taught to this learner yet
   const parts = []; let at = 0;
-  const quiet = run.parentElement?.classList.contains('lx-wbox') || !wantRoman(code);   // the word's own box already has its reading
-  const reading = (k, cls, l, body) => {   // a word with its reading under it, or in [brackets] inside prose
-    const rm = quiet ? null : romanTok(code, k.t, l), at0 = l ? { 'data-l': l } : {};
-    return !rm ? h('span', { class: cls, ...at0 }, body)
-      : inProse(run) ? h('span', { class: cls, ...at0 }, body, h('span', { class: 'lx-help lx-br', lang: 'und-Latn', dir: 'ltr' }, ' [' + rm + ']'))
-      : h('ruby', { class: cls, ...at0 }, body, h('rt', { class: 'lx-help', lang: 'und-Latn', dir: 'ltr' }, rm));
-  };
+  const plainText = x => parts.push({ text: shownMarks(code, x, null) });
   for (const k of toks) {
     if (k.p) continue;
-    const i = s.indexOf(k.t, at); if (i < 0) return;
+    const i = s.indexOf(k.t, at); if (i < 0) return null;
     const last = k.parts ? k.parts[k.parts.length - 1] : k, l = k.unknown ? null : wordOf(code, X, last.t, last.matches || []);
     if (!l) {   // not in the course: no card, but the learner still gets its reading (rule-based, Hebrew / Arabic)
       if (quiet || !/\p{L}/u.test(k.t) || !/\p{M}/u.test(k.t) || !N.romanize(code, N.nfc(k.t))) continue;   // only words that carry their vowel marks can be read by rule
-      if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
-      parts.push(reading(k, 'lx-ru', null, shownMarks(code, k.t, null))); at = i + k.t.length; continue;
+      if (i > at) plainText(s.slice(at, i));
+      parts.push({ text: shownMarks(code, k.t, null), ruled: true, reading: romanTok(code, k.t, null) || undefined }); at = i + k.t.length; continue;
     }
-    if (i > at) parts.push(shownMarks(code, s.slice(at, i), null));
-    parts.push(reading(k, 'lx-rw', l, shownMarks(code, k.t, X.lex[l]))); at = i + k.t.length;
+    if (i > at) plainText(s.slice(at, i));
+    parts.push({ text: shownMarks(code, k.t, X.lex[l]), lex: l, reading: (quiet ? null : romanTok(code, k.t, l)) || undefined, fresh: fresh(l), gloss: gloss(code, l) }); at = i + k.t.length;
   }
-  if (!parts.length) return;
-  if (at < s.length) parts.push(shownMarks(code, s.slice(at), null));
-  run.classList.add('lx-run'); run.replaceChildren(...parts);
-}
-/** The words of every .lx-w open their card on tap (meaning on hover, Enter / Space from the keyboard); a run says its language on hover.
- *  Not inside an exercise's prompt or options (the same rule as the 🔊 buttons, 98_speech.js): there the word stays plain. */
-{
-  const SKIP = 'button, a, .lx-opts, .lx-opt, select, option, label, .lx-tile, .lx-tile1, .lx-slot, .lx-tiles, .lx-cands, .lx-hidecol, .lx-input, .lx-diff, .lx-tutor';   // i18n-ignore (selectors)
-  const IN_STAGE = '.lx-fb, .lx-ref, .lx-intro, .lx-readtext, .lx-gram, .lx-typology, .lx-overview';   // i18n-ignore (selectors)
-  const linkable = el => !el.closest(SKIP) && !(el.closest('.lx-stage') && !el.closest(IN_STAGE));
-  const linkRuns = root => {
-    if (!UI.C) return;
-    const kn = {}, fresh = (c, l) => { try { const k = kn[c] = kn[c] || N.known(UI.C, UI.L, c); return k.state[l] === 'locked' || k.state[l] === 'ready'; } catch (err) { return false; } };   // D24: not taught to this learner yet
-    for (const run of root.querySelectorAll('.lx-w[lang]:not(.lx-tok):not([data-lk])')) {
-      run.dataset.lk = '1';
-      const c = run.getAttribute('lang'); if (!UI.C.lang[c] || !linkable(run)) continue;
-      if (!run.children.length && run.textContent.trim()) splitRun(run, c, run.dataset.say || run.textContent);   // data-say: the stored text, not the faded display
-      if (!run.title) run.title = info(c).label + (run.querySelector('.lx-rw') ? '' : ' · ' + LT('lang.prod.notInCourseTitle'));   // what the coloured underline means; no card to open
-      for (const w of run.querySelectorAll('.lx-rw[data-l]')) if (LX(c).lex[w.dataset.l]) {
-        w.classList.add('lx-tok'); w.tabIndex = 0; w.setAttribute('role', 'button'); w.title = gloss(c, w.dataset.l);
-        if (fresh(c, w.dataset.l)) { w.classList.add('lx-newword'); w.title = LT('lang.words.newTip') + ' · ' + w.title; }
-      }
-    }
-  };
-  const open = (e, w) => { e.stopPropagation(); e.preventDefault(); wordPopup(w.closest('.lx-run').getAttribute('lang'), w.dataset.l); };
-  document.addEventListener('click', e => { const w = e.target.closest?.('.lx-rw.lx-tok'); if (w) open(e, w); });
-  document.addEventListener('keydown', e => { const w = (e.key === 'Enter' || e.key === ' ') && e.target.closest?.('.lx-rw.lx-tok'); if (w) open(e, w); });
-  let pending = false;
-  new MutationObserver(() => { if (pending) return; pending = true; queueMicrotask(() => { pending = false; try { linkRuns(document.body || document.documentElement); } catch (err) { console.warn(err); } }); })
-    .observe(document.documentElement, { childList: true, subtree: true });
+  if (!parts.length) return null;
+  if (at < s.length) plainText(s.slice(at));
+  return parts;
 }
 /** Words met before they were learned (D20): remembered per session, listed at the end of a lesson. */
 const metNew = new Map();
