@@ -14,6 +14,8 @@
                    skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
      engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
                    (tests/engines.cjs). Not in the site.
+     noema-tools.cjs  src/composition/noema-tools.ts — the Node bridge of the Python tools (tools/noema_core.py): the content
+                   checks (src/features/content) as a CLI. The skill zip carries it as scripts/noema-tools.cjs. Not in the site.
      engine/tokens.css  the design tokens (src/ui/tokens, tools/tokens.mjs), written next to engine.css on every build.
      (the Claude connector, src/composition/connector.ts, is bundled by tools/connector_bundle.mjs: it needs the data
       tools/build.py collects, so build.py runs it → dist/functions/mcp.mjs)
@@ -34,8 +36,8 @@
    the page parses it but runs none of it at start (docs/ARCHITECTURE.md "Engines in the app bundle").
 
    Minification is whitespace and names only, never syntax (minifySyntax): it would rewrite arithmetic (constant folding,
-   reordered operands), and the engines must compute every double exactly as their source writes it — their Python twins
-   (tools/lib_*.py, tools/{circuit,thermal,pid,rf,twin}.py) agree with them bit for bit.
+   reordered operands), and the engines must compute every double exactly as their source writes it (the golden outputs of
+   tests/fixtures/parity hold them to their numbers bit for bit).
 
    Every bundle has a size budget (KB, minified) and the build FAILS when one is exceeded: raise a budget only on purpose.
 
@@ -63,6 +65,7 @@ export const ENTRIES = [
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
   { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
   { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
+  { name: 'noema-tools', in: 'src/composition/noema-tools.ts', kind: 'node', format: 'cjs', out: 'noema-tools.cjs', budgetKB: 5632 },   // the engine library + the content checks + engine/src/38, 44, 45
 ];
 const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
 
@@ -159,11 +162,28 @@ export function noemaWorkers() {
   };
 }
 
+/** The esbuild plugin of `legacy:<path>` imports: the TEXT of that file of the repository (one of the app's engine/*.js
+    scripts, run by src/connector/engine/legacy.ts in a scope of its own: one copy, the app's own file). The connector
+    (tools/connector_bundle.mjs) and the Node tools (src/composition/noema-tools.ts) use it. */
+export function legacyText(root = ROOT) {
+  return {
+    name: 'noema-legacy',
+    setup(build) {
+      build.onResolve({ filter: /^legacy:/ }, a => {
+        const abs = path.resolve(root, a.path.slice('legacy:'.length));
+        if (!abs.startsWith(root + path.sep)) return { errors: [{ text: `legacy import outside the repository: ${a.path}` }] };
+        return { path: abs, namespace: 'legacy' };
+      });
+      build.onLoad({ filter: /.*/, namespace: 'legacy' }, a => ({ contents: 'export default ' + JSON.stringify(readFileSync(a.path, 'utf8')) + ';\n', loader: 'js', watchFiles: [a.path] }));
+    },
+  };
+}
+
 /** esbuild options of one entry */
 function options(e, workers) {
   const common = {
     entryPoints: [path.join(ROOT, e.in)], outfile: path.join(OUT, e.out), bundle: true, ...MINIFY, sourcemap: 'linked',
-    metafile: true, legalComments: 'eof', charset: 'utf8', logLevel: 'silent', tsconfig: path.join(ROOT, 'tsconfig.json'), plugins: [workers],
+    metafile: true, legalComments: 'eof', charset: 'utf8', logLevel: 'silent', tsconfig: path.join(ROOT, 'tsconfig.json'), plugins: [workers, legacyText()],
   };
   if (e.kind === 'node') {
     const format = e.format ?? 'esm';

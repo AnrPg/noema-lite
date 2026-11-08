@@ -6,6 +6,7 @@ import { ACTIVITY_RULES } from '../domain/activities/rules.ts';
 import { ownSpec, partMsg, partSpec, resolveParts } from '../domain/activities/simspec.ts';
 import { checkBalance } from '../domain/balance.ts';
 import { checkBridge } from '../domain/bridge.ts';
+import { checkChapter, checkSubject, type ChapterOptions } from '../domain/chapter.ts';
 import type { CheckEnv } from '../domain/env.ts';
 import { checkExercise } from '../domain/exercise.ts';
 import { checkPack, BLOCKS, ID_RE, TYPES, type PackCheckOptions } from '../domain/pack.ts';
@@ -21,6 +22,10 @@ export function createContentChecks(env: CheckEnv) {
   return {
     /** checkPack(p, expectId?, { strict, balance, requireQuality }) → { errors, warnings, counts } */
     checkPack: (p: unknown, expectId?: unknown, opts: PackCheckOptions = {}) => checkPack(p, expectId, opts, x => act.checkActivities(x)),
+    /** the authoring check of one chapter file (the skill's validate): checkChapter(chapter, options) → { errors, warnings, summary } */
+    checkChapter: (ch: unknown, o: Omit<ChapterOptions, 'checkBlock' | 'checkSim'> = {}) =>
+      checkChapter(ch, { ...o, checkBlock: act.checkBlockAct, checkSim: act.checkSim }),
+    checkSubject,
     checkActivities: act.checkActivities,
     checkActivityPackages: act.checkActivityPackages,
     checkSimSpec: act.checkSimSpec,

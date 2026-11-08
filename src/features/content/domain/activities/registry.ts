@@ -107,7 +107,7 @@ export function enginesNamed(p: unknown): string[] {
   if (parts) for (const d of Object.values(parts)) if (isObj(d) && typeof d.engine === 'string') ids.add(d.engine);
   return [...ids].filter(id => ENGINES.has(id) && id !== DEFAULT_ENGINE).sort();
 }
-function checkBlockAct(b: Obj, items: Obj): string[] {
+export function checkBlockAct(b: Obj, items: Obj): string[] {
   const E: string[] = [];
   if (typeof b.activity !== 'string' || !has(items, b.activity))
     E.push(`interactive: activity ${qv(b.activity)} is not in pack.activities`);
@@ -501,6 +501,17 @@ export function createActivityChecks(env: CheckEnv) {
     return { errors: E, warnings: W };
   }
 
-  return { ...sim, checkActivities, checkActivityPackages, checkAppEngines, needRequires, enginesNamed, lintHtml, lintPython };
+  return {
+    ...sim,
+    checkActivities,
+    checkActivityPackages,
+    checkBlockAct,
+    checkSim,
+    checkAppEngines,
+    needRequires,
+    enginesNamed,
+    lintHtml,
+    lintPython,
+  };
 }
 export type ActivityChecks = ReturnType<typeof createActivityChecks>;
