@@ -20,6 +20,7 @@ import { workerCompute, type WorkerLike } from '../adapters/browser/compute.ts';
 import { createErrorReporter, JOURNAL_KEY } from '../adapters/local/error-reporter.ts';
 import { localTelemetry, TELEMETRY_KEY } from '../adapters/local/telemetry.ts';
 import { inlineCompute } from '../adapters/local/jobs.ts';
+import { STUDY_BRIDGE, STUDY_REGISTRATIONS } from './study.ts';
 import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
@@ -39,6 +40,8 @@ export const APP_REGISTRATIONS: readonly Registration[] = [
   c => c.register(ENGINES, () => createAppEngines()),
   // the community features (src/features/{search,vault,social,reports}): their Supabase adapters and use cases
   ...COMMUNITY_REGISTRATIONS,
+  // the study read models (src/features/study) and the search index's store (src/features/catalog)
+  ...STUDY_REGISTRATIONS,
 ];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
@@ -47,8 +50,11 @@ export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   { name: 'contracts', build: () => contracts },
   // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
   { name: 'engines', build: r => r.get(ENGINES) },
-  // search, vault, social, reports, engineRequests: engine/search.js, catalog.js, vault.js, social.js, report.js, #/engines
+  // search, vault, social, reports, engineRequests: engine/search.js, vault.js, social.js, report.js, #/engines
   ...COMMUNITY_BRIDGE,
+  // NoemaCore.study (grading, FSRS-6, the queues, progress, XP and the read models) and NoemaCore.catalog (the search
+  // index's records, built in the Worker): src/composition/study.ts
+  ...STUDY_BRIDGE,
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */

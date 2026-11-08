@@ -1,7 +1,7 @@
 /**
  * The search as the app runs it (docs/SEARCH.md): the query domain with the learner's collation (results of equal score
- * in the order of the interface language). The records come from whoever holds the index (engine/catalog.js Index today,
- * the Worker's read models in phase 2); this side never builds or stores them.
+ * in the order of the interface language). The records come from whoever holds the index (NoemaCore.catalog: src/features/catalog,
+ * its records built in the Worker); this side never builds or stores them.
  */
 import type { I18n } from '../../../ports/i18n.ts';
 import type { SearchRecord } from '../domain/records.ts';

@@ -56,7 +56,6 @@ const F = s => h('span', { html: fmt(s) });
 /* an arrow written into a text points along the reading direction: mirrored in a right-to-left interface (docs/i18n.md §5) */
 const arrowBack = () => window.NoemaI18n?.dir === 'rtl' ? '→' : '←', arrowOn = () => window.NoemaI18n?.dir === 'rtl' ? '←' : '→';
 const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const norm = s => String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim().replace(/;$/, '').trim();
 const today = () => NoemaCore.clock.today();   // the learner's local day (src/kernel/day.ts)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -227,7 +226,7 @@ function record(ex, ok, firstTry = true, conf = null) {
   if (conf) r.conf = conf; else delete r.conf;   // how sure the learner was this time: sure | think | guess
   S.res[ex.id] = r; save();
 }
-const solved = id => S.res[id]?.ok > 0;
+const solved = id => NoemaCore.study.practice.solved(S.res, id);
 
 /* ---------- sound ---------- */
 let AC;
@@ -284,12 +283,8 @@ function applyTheme() {
   if (t === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
 }
 
-/* ---------- progress ---------- */
-function chProgress(c) {
-  const sr = c.sections.filter(s => S.read[s.id]).length / c.sections.length;
-  const ex = c.exercises.filter(e => solved(e.id)).length / c.exercises.length;
-  return { sr, ex };
-}
+/* ---------- progress: the study domain's (src/features/study/domain/queries.ts) ---------- */
+const chProgress = c => NoemaCore.study.progress.chapter(c, S.read, S.res);
 
 /* ---------- section plain text (for AI context) ---------- */
 /* i18n-ignore-start */   // context for the AI's prompts (English, like the prompts themselves)

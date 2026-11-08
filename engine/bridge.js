@@ -51,7 +51,7 @@ window.NoemaBridge = (() => {
   const endonym = code => { try { const n = new Intl.DisplayNames([code], { type: 'language' }).of(code); return n ? n.charAt(0).toLocaleUpperCase(code) + n.slice(1) : code; } catch (e) { return code; } };
   const langName = code => I()?.fmt?.langName ? I().fmt.langName(code) : endonym(code);
   const pct = r => I()?.fmt?.percent ? I().fmt.percent(r) : Math.round(r * 100) + '%';
-  const hash36 = s => window.NoemaCatalog ? NoemaCatalog.hash36(s) : String(s.length);
+  const hash36 = s => NoemaCore.catalog.hash36(s);   // the version stamp of a bridge's content (src/features/catalog)
 
   /* ---------- settings: a:settings.bridge { on, level, cefr, asked } and the native language a:settings.native ---------- */
   const accSettings = acc => jget(aKey(acc, 'settings'), {}) || {};

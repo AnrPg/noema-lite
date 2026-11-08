@@ -1,6 +1,6 @@
 /**
  * The record of the search: one searchable piece of the app (docs/SEARCH.md §3). This is the contract between whoever
- * BUILDS records (the catalogue's builders and the index: engine/catalog.js today, the Worker's read models in phase 2)
+ * BUILDS records (the catalogue's builders and the index: src/features/catalog, NoemaCore.catalog)
  * and the query side here (scoring.ts), which only reads them.
  */
 
