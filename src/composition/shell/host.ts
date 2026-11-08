@@ -6,7 +6,7 @@
  * page …) is what those pages draw with until their areas replace them.
  */
 import type { NoemaCoreBridge as CoreBridge } from '../bridge.ts';
-import { arrive, backFrom, type TrailStep } from '../../features/shell/domain/trail.ts';
+import { TRAIL_KEEP, arrive, backFrom, type TrailStep } from '../../features/shell/domain/trail.ts';
 import { CHARACTER_GROUPS, isCharacter } from '../../features/shell/domain/characters.ts';
 import { EMPTY_FRAME, type FrameModel, type FrameTab, type NoemaShellFrame } from '../../ui/screens/shell/frame.ts';
 import { ENGINE_ROUTES, placeOf } from '../../ui/screens/shell/routes.ts';
@@ -299,7 +299,15 @@ export function createHost(core: HostCore) {
   let memTrail: TrailStep[] = [];
   let backTo: TrailStep | null = null; // the address ← (or the browser's back) is returning to: its scroll position comes back too
   let lastInput = 0;
+  /** every address of this page in order (the trail forgets a screen that forwarded on its own; this does not) */
+  const seen: string[] = [];
+  /** the last address seen outside `prefix` before the one now (where a page under it was opened from), else '' */
+  function outside(prefix: string): string {
+    for (let i = seen.length - 2; i >= 0; i--) if (!seen[i]?.startsWith(prefix)) return seen[i] ?? '';
+    return '';
+  }
   function noteTrail(): void {
+    if (seen.at(-1) !== here0()) seen.splice(0, Math.max(0, seen.push(here0()) - TRAIL_KEEP));
     const r = arrive(trailGet().length ? trailGet() : memTrail, here0(), { now: Date.now(), lastInput, scrollY });
     backTo = r.backTo;
     trailPut(r.trail);
@@ -771,6 +779,7 @@ export function createHost(core: HostCore) {
     route,
     go,
     goBack,
+    outside,
     open,
     here,
     chrome,

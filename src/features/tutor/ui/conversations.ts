@@ -21,6 +21,8 @@ export interface ConvoRow {
   subject?: { readonly id: string; readonly title?: string } | null;
   context?: { readonly type: string; readonly label?: string | null } | null;
   updatedAt?: string;
+  /** who wrote it (meta.app: another app of the same schema, e.g. Meletee) */
+  meta?: Readonly<Record<string, unknown>>;
   messages: readonly { readonly role: string; readonly content: string }[];
 }
 /** where a subject sits: its Roadmap (or "no Roadmap") and its step (or the subject itself) */
@@ -43,6 +45,8 @@ export interface ConversationsHost {
   resume(r: ConvoRow): void;
   /** the kind or mode of a record, in the learner's words */
   modeOf(r: ConvoRow): string;
+  /** "from <app>" when another app wrote it, else null */
+  fromApp(r: ConvoRow): string | null;
   tutorName(): string;
   date(iso: string | undefined): string;
   md(text: string): HTMLElement;
@@ -116,6 +120,10 @@ export class NoemaConversations extends LitElement {
   }
   #title(r: ConvoRow): string {
     return r.title || (r.messages.find(m => m.role === 'user')?.content ?? '').replace(/\s+/g, ' ').slice(0, 60) || this.#L('untitled');
+  }
+  #from(r: ConvoRow): TemplateResult | typeof nothing {
+    const f = this.host?.fromApp(r);
+    return f ? html`<span class="ns-cvfrom">${f}</span>` : nothing;
   }
   #what(r: ConvoRow): string {
     // a whole-subject chat needs no label (it read like a filter)
@@ -300,7 +308,7 @@ export class NoemaConversations extends LitElement {
             >
               <b>${this.#title(r)}</b>
               <small
-                >${[h.modeOf(r), this.#what(r), h.date(r.updatedAt), this.#L('nMessages', { n: r.messages.length })].filter(Boolean).join(' · ')}</small
+                >${this.#from(r)}${[h.modeOf(r), this.#what(r), h.date(r.updatedAt), this.#L('nMessages', { n: r.messages.length })].filter(Boolean).join(' · ')}</small
               >
             </button>`
       }
@@ -325,7 +333,9 @@ export class NoemaConversations extends LitElement {
   }
   #oneView(h: ConversationsHost, r: ConvoRow): TemplateResult {
     const p = h.placeOf(r.subject?.id ?? '', r.subject?.title);
-    return html`<p class="tiny ns-muted">${[p.st, h.modeOf(r), this.#what(r), h.date(r.updatedAt)].filter(Boolean).join(' · ')}</p>
+    return html`<p class="tiny ns-muted">
+        ${this.#from(r)}${[p.st, h.modeOf(r), this.#what(r), h.date(r.updatedAt)].filter(Boolean).join(' · ')}
+      </p>
       <div class="ns-cvmsgs">
         ${r.messages
           .filter(m => visibleText(m.content))

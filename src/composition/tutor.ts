@@ -65,8 +65,6 @@ export interface TutorPageHost {
   /** the drawer (aside.drawer) and its scrim, once the page has drawn them */
   drawer(): HTMLElement | null;
   scrim(): HTMLElement | null;
-  /** the page has the frame */
-  framed(): boolean;
   /** the character's face (SVG markup) and its names */
   face(): string;
   tutor(): { readonly name: string; readonly avatar: string; readonly plural: boolean };
@@ -267,13 +265,10 @@ export function mountTutor(host: TutorPageHost, i18n: I18n): TutorUi {
   const view: TutorView = {
     session,
     i18n,
-    framed: () => host.framed(),
     L: (k, p) => shell()?.L(k, p) ?? k,
     face: () => host.face(),
     tutor: () => host.tutor(),
     accountName: () => host.account.name,
-    subjectTitle: () => host.subject().title,
-    model: () => (settings().apiKey ? (settings().model ?? '') : claudeModel()),
     uiLang: () => host.uiLang(),
     md,
     fmt: t => inlineMd(t),

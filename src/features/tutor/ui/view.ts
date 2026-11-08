@@ -20,17 +20,12 @@ export interface MenuItem {
 export interface TutorView {
   readonly session: TutorSession;
   readonly i18n: I18n;
-  /** the page has the new frame (the frame's tutor), else the classic drawer */
-  framed(): boolean;
   /** a word of the shell's catalog (sh.*) with the tutor's names */
   L(key: string, params?: MessageParams): string;
   /** the character's face as SVG markup ('' without the art) */
   face(): string;
   tutor(): { readonly name: string; readonly avatar: string; readonly plural: boolean };
   accountName(): string;
-  subjectTitle(): string;
-  /** the AI model the classic header names ('' = automatic) */
-  model(): string;
   /** the language of the frame's menus (the page has the subject's) */
   uiLang(): string;
   md(text: string): HTMLElement;

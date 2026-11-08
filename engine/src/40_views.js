@@ -80,7 +80,6 @@ function tutorHost() {
     settings: () => S.settings, save, toast, touchStreak,
     openSettings: () => openAccountMenu('settings'), openGuide: () => openGuide('gemini'),
     drawer: () => $('aside.drawer'), scrim: () => $('.scrim'),
-    framed: () => !!SHL(),
     face: () => SHL() && window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : '',
     tutor: () => ({ name: TUTOR.name, avatar: TUTOR.avatar, plural: !!window.NoemaThemes?.tutor?.()?.pl }),
     uiLang,

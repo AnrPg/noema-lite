@@ -81,14 +81,6 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
   };
   const isLangSubj = (s: HostSubject): boolean => s.kind === 'language' || s.id.startsWith('lang:');
 
-  /* the last address that was not the search page (where its ← goes) */
-  const outsideOf = new Map<string, string>();
-  const noteOutside = (): void => {
-    const h = win.location.hash;
-    for (const p of outsideOf.keys()) if (!h.startsWith(p)) outsideOf.set(p, h);
-  };
-  if (typeof win.addEventListener === 'function') win.addEventListener('hashchange', noteOutside); // (Node and the tests' vm: no page)
-
   /** where every record of the search comes from: the subjects' packs, the Roadmaps, the language courses, the conversations */
   async function searchSources(): Promise<HostSearchSource[]> {
     const a = acc(),
@@ -168,10 +160,8 @@ export function oldAppHost(win: Win, parts: OldAppHostParts): CommunityHost {
       win.history.replaceState(win.history.state, '', l.pathname + l.search + hash);
     },
     link: hash => win.location.origin + win.location.pathname + hash,
-    outside: prefix => {
-      if (!outsideOf.has(prefix)) outsideOf.set(prefix, win.location.hash.startsWith(prefix) ? '' : win.location.hash);
-      return outsideOf.get(prefix) ?? '';
-    },
+    // where a page under prefix was opened from: the frame keeps every address of the page (this piece may load later)
+    outside: prefix => call<string>(S(), 'outside', prefix) ?? '',
 
     /* ---------- the account ---------- */
     account: () => {

@@ -95,11 +95,11 @@ async function signUp(browser, email, name) {
   ok(await until(() => B.p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart test')), 'and it opens');
 
   console.log('— 🌍 Explore');
-  await B.p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.explore(); }); await B.p.waitForSelector('.ex-dlg .ex-dom', { timeout: 10000 }).catch(() => { });   // the subject's page in the frame has no 🌍 chip: Explore opens from the picker
-  await B.p.evaluate(() => document.querySelectorAll('.ex-dlg details.ex-dom').forEach(d => { d.open = true; }));   // every domain's section open
-  const cards = await B.p.locator('.ex-dlg .ex-doms .ex-item').allInnerTexts();
+  await B.p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); Noema.explore(); }); await B.p.waitForSelector('noema-explore-page .ex-dom', { timeout: 10000 }).catch(() => { });   // Explore is the frame's page #/explore/subjects (a subject is open: the frame is up)
+  await B.p.evaluate(() => document.querySelectorAll('noema-explore-page details.ex-dom').forEach(d => { d.open = true; }));   // every domain's section open
+  const cards = await B.p.locator('noema-explore-page .ex-doms .ex-item').allInnerTexts();
   ok(cards.some(t => /Databricks/.test(t)) && cards.some(t => /Heart test/.test(t)) && cards.every(t => !/\d+ ch|exercises|library|Anna/.test(t)), 'Explore rows show only emoji + title (the details are behind ⓘ)');
-  const infoOf = async (pg, title) => { await pg.click(`.ex-dlg .ex-doms .ex-row:has(.ex-item:has-text("${title}")) .ex-infobtn`); await wait(450); return (await pg.$eval('noema-dialog.ex-info', d => d.heading)) + '\n' + await pg.locator('noema-dialog.ex-info').innerText(); };
+  const infoOf = async (pg, title) => { await pg.click(`noema-explore-page .ex-doms .ex-row:has(.ex-item:has-text("${title}")) .ex-infobtn`); await wait(450); return (await pg.$eval('noema-dialog.ex-info', d => d.heading)) + '\n' + await pg.locator('noema-dialog.ex-info').innerText(); };
   const hov = await infoOf(B.p, 'Databricks');
   ok(/chapters/.test(hov) && /Foundations: Storage, Tables/.test(hov) && /exercises/.test(hov) && /library/.test(hov), 'ⓘ → the details: statistics, owner and the chapter list');
   const ch = await B.p.$eval('noema-dialog.ex-info .ex-chapters', e => ({ items: e.querySelectorAll('ol > li').length, bold: !!e.querySelector('li strong'), scroll: e.scrollHeight > e.clientHeight, h: e.clientHeight, oflow: getComputedStyle(e).overflowY }));
@@ -110,18 +110,18 @@ async function signUp(browser, email, name) {
   ok(/Heart test/.test(info) && /Anna/.test(info) && /chapter/i.test(info) && /sources/i.test(info) && /not openly licensed/.test(info), 'info: owner, stats, chapters, sources, licence note');
   await B.p.screenshot({ path: SHOTS + '/x4_info.png' });
   await B.p.click('noema-dialog.ex-info .ctl.x'); await wait(300);
-  await B.p.click('.ex-dlg .ex-doms .ex-item:has-text("Heart test")'); await wait(1800);
+  await B.p.click('noema-explore-page .ex-doms .ex-item:has-text("Heart test")'); await wait(1800);
   ok(await B.p.locator('.nx-menu').count() === 0 && await B.p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart test'), 'click → selects the subject straight away (no extra menu)');
 
   console.log('— 🌍 Explore on a phone');
   const phc = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, storageState: await B.ctx.storageState() }); const ph = await phc.newPage();
   await ph.goto(BASE + '/'); await wait(2000);
-  await ph.evaluate(() => { Noema.explore(); }).catch(() => { }); await ph.waitForSelector('.ex-dlg .ex-dom', { timeout: 8000 }).catch(() => { });
-  await ph.evaluate(() => document.querySelectorAll('.ex-dlg details.ex-dom').forEach(d => { d.open = true; }));
-  const ib = await ph.locator('.ex-dlg .ex-doms .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn').boundingBox();
+  await ph.evaluate(() => { Noema.explore(); }).catch(() => { }); await ph.waitForSelector('noema-explore-page .ex-dom', { timeout: 8000 }).catch(() => { });
+  await ph.evaluate(() => document.querySelectorAll('noema-explore-page details.ex-dom').forEach(d => { d.open = true; }));
+  const ib = await ph.locator('noema-explore-page .ex-doms .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn').boundingBox();
   ok(ib && ib.width >= 24 && ib.height >= 24, 'phone: the details are a button of their own beside the row (a 24 px target at least)');
-  await ph.tap('.ex-dlg .ex-doms .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn'); await wait(450);
-  ok(await ph.locator('noema-dialog.ex-info[placement="sheet"]').count() === 1 && /Foundations: Storage, Tables/.test(await ph.locator('noema-dialog.ex-info').innerText()) && await ph.locator('.ex-dlg').count() === 1, 'ⓘ → the info opens as a bottom sheet (and does not select the subject)');
+  await ph.tap('noema-explore-page .ex-doms .ex-row:has(.ex-item:has-text("Databricks")) .ex-infobtn'); await wait(450);
+  ok(await ph.locator('noema-dialog.ex-info[placement="sheet"]').count() === 1 && /Foundations: Storage, Tables/.test(await ph.locator('noema-dialog.ex-info').innerText()) && await ph.locator('noema-explore-page').count() === 1, 'ⓘ → the info opens as a bottom sheet (and does not select the subject)');
   await ph.screenshot({ path: SHOTS + '/x7_phone_sheet.png' });
   await ph.tap('noema-dialog.ex-info .ctl.x'); await wait(300);
   ok(await ph.locator('noema-dialog.ex-info').count() === 0, '✕ closes the sheet');
@@ -131,7 +131,7 @@ async function signUp(browser, email, name) {
   const Cc = await signUp(browser, 'carl@example.com', 'Carl');
   ok(await Cc.p.locator('.nx-reqs').count() === 0 || (await Cc.p.locator('.nx-reqs').innerText()) === '', 'Carl gets no requests');
   await Cc.p.click('.noema-ovfoot button:has-text("Explore")'); await wait(700);
-  await Cc.p.fill('.ex-dlg .ex-q', 'Heart'); await wait(200); await Cc.p.click('.ex-dlg .ex-results .ex-item:has-text("Heart test")'); await wait(2200);
+  await Cc.p.fill('noema-explore-page .ex-q', 'Heart'); await wait(200); await Cc.p.click('noema-explore-page .ex-results .ex-item:has-text("Heart test")'); await wait(2200);
   await Cc.p.screenshot({ path: SHOTS + '/x6_carl.png' });
   ok(await Cc.p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart test'), 'Choose → downloaded from the public bucket, added to Carl’s subjects and opened');
   ok(await Cc.p.evaluate(async () => { const r = await NoemaSrcFiles.get(ACCOUNT.id, 'heart-test', 'atlas'); return r?.blob.size; }) === BIG, 'the public subject comes with its source files (the big one joined again)');

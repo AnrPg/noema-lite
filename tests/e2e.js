@@ -60,8 +60,8 @@ async function mockGemini(ctx) {
   ok(recs.some(r => r[0] === 'tutor' && r[2] === 'section' && r[3] === 'ch05-s04' && r[4] >= 2), 'tutor chat saved automatically with its context: ' + JSON.stringify(recs.find(r => r[0] === 'tutor' && r[3] === 'ch05-s04')));
   ok(['grading', 'code-review', 'question'].every(k => recs.some(r => r[0] === k)), 'AI grading, code review and generated question are saved as conversations');
   await page.screenshot({ path: SHOTS + '/a2b_tutor.png' });
-  await page.evaluate(() => { NoemaTutor.current().session.toggleHistory(true); }); await wait(300);
-  await page.screenshot({ path: SHOTS + '/a2c_history.png' });
+  await page.evaluate(() => { NoemaShell.convos(); }); await page.waitForSelector('.ns-cvmain', { timeout: 5000 }).catch(() => { });
+  await page.screenshot({ path: SHOTS + '/a2c_history.png' }); await page.keyboard.press('Escape'); await wait(200);
   // a conversation written by Meletee (same schema, its own tutor modes): kept as written, not read as 'socratic'
   const mel = await page.evaluate(async () => {
     const base = { kind: 'tutor', subject: { id: 'databricks', title: 'Databricks' }, model: { provider: 'claude', name: 'claude-x' }, meta: { app: 'meletee', task: 'feynman' }, messages: [{ role: 'user', content: 'Delta in plain words' }, { role: 'assistant', content: 'Try again, simpler.' }] };
@@ -73,7 +73,10 @@ async function mockGemini(ctx) {
   await page.evaluate(() => NoemaTutor.current().session.close());
   await page.reload(); await wait(900); await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   ok(await page.evaluate(() => NoemaTutor.current().session.list.length >= 5 && NoemaTutor.current().session.list.some(c => c.kind === 'tutor' && c.msgs.length >= 2)), 'conversations survive a reload (loaded from IndexedDB)');
-  ok(await page.evaluate(async () => { NoemaTutor.current().session.openTutor(); NoemaTutor.current().session.toggleHistory(true); await new Promise(r => setTimeout(r, 200)); const c = [...$$('.cvcard')].find(x => x.textContent.includes('Feynman: Delta')); return !!c && c.querySelector('.cvfrom')?.textContent === 'from Meletee' && c.textContent.includes('Feynman coach'); }), 'conversation list: Meletee’s chat shows “from Meletee” and its mode');
+  await page.evaluate(() => { NoemaShell.convos(); }); await page.waitForSelector('.ns-cvrow:has-text("Feynman: Delta")', { timeout: 5000 }).catch(() => { });
+  const melRow = await page.evaluate(() => { const c = [...document.querySelectorAll('.ns-cvrow')].find(x => x.textContent.includes('Feynman: Delta')); return c ? [c.querySelector('.ns-cvfrom')?.textContent, c.querySelector('.ns-cvmain small')?.textContent] : null; });
+  ok(!!melRow && melRow[0] === 'from Meletee' && /Feynman coach/.test(melRow[1]), 'Me › Conversations: Meletee’s chat shows “from Meletee” and its mode: ' + JSON.stringify(melRow));
+  await page.keyboard.press('Escape'); await wait(200);
   await page.screenshot({ path: SHOTS + '/a2d_history_meletee.png' });
   const melOpen = await page.evaluate(async () => { const T = NoemaTutor.current().session, cv = T.list.find(c => c.id === 'cv_000000mel1aaaaaa'); T.openConversation(cv); const m = T.mode; cv.title = 'Feynman: Delta Lake'; cv.titleSource = 'user'; T.save(cv); await new Promise(r => setTimeout(r, 300)); const r = await Noema.convos.get('anr', cv.id); T.close(); return [m, r.mode, r.meta?.app, r.model?.provider, r.title]; });
   ok(melOpen.join() === 'explain,feynman,meletee,claude,Feynman: Delta Lake', 'opened in the tutor as a plain explanation; saving again keeps its mode, app and provider: ' + melOpen.join());

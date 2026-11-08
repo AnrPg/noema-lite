@@ -116,30 +116,6 @@
   "@engine.gemini.empty": {
     "description": "Error when Gemini answered with no text."
   },
-  "engine.mode.socratic": "Socratic",
-  "@engine.mode.socratic": {
-    "description": "Tutor mode chip (after the tutor’s emoji): a Socratic dialogue. One word if possible."
-  },
-  "engine.mode.explain": "Explain",
-  "@engine.mode.explain": {
-    "description": "Tutor mode chip (after 💡): the tutor explains in depth. One word."
-  },
-  "engine.mode.hint": "Hint",
-  "@engine.mode.hint": {
-    "description": "Tutor mode chip (after 🪜): hints on an exercise, never the answer. One word."
-  },
-  "engine.mode.quiz": "Quiz me",
-  "@engine.mode.quiz": {
-    "description": "Tutor mode chip (after ⚡): rapid-fire quiz questions. Short imperative."
-  },
-  "engine.mode.interview": "Interview",
-  "@engine.mode.interview": {
-    "description": "Tutor mode chip (after 🎤): a mock interview / oral exam. One word."
-  },
-  "engine.mode.debug": "Case sim",
-  "@engine.mode.debug": {
-    "description": "Tutor mode chip (after 🔧): an interactive case / debugging simulation. Very short."
-  },
   "engine.tutor.explainThis": "Explain this (AI)",
   "@engine.tutor.explainThis": {
     "description": "Tooltip of the 💡 button on a part of a lesson: the AI tutor explains that part."
@@ -364,18 +340,6 @@
   "@engine.aimsg.wrapUp": {
     "description": "The learner’s own first message to the AI tutor, sent when they press a button; shown as THEIR chat bubble (first person, addressed to the tutor). Button “🎓 Wrap up” of the tutor."
   },
-  "engine.tutor.history": "Conversation history",
-  "@engine.tutor.history": {
-    "description": "Tutor drawer menu item / tooltip: shows earlier conversations."
-  },
-  "engine.tutor.export": "Export this conversation (.md)",
-  "@engine.tutor.export": {
-    "description": "Tutor drawer menu item: download this conversation as a Markdown file."
-  },
-  "engine.tutor.newConvo": "New conversation",
-  "@engine.tutor.newConvo": {
-    "description": "Tutor drawer menu item: start a new, empty conversation."
-  },
   "engine.tutor.more": "More",
   "@engine.tutor.more": {
     "description": "Label of the ⋮ (more actions) menu button in the tutor drawer."
@@ -393,92 +357,6 @@
         "example": "MERGE needs a unique match per target row."
       }
     }
-  },
-  "engine.tutor.poweredBy": "Your Gemini-powered tutor · {model}",
-  "@engine.tutor.poweredBy": {
-    "description": "Subtitle under the tutor’s name (classic layout). model = the Gemini model’s id or engine.tutor.autoModel.",
-    "placeholders": {
-      "model": {
-        "type": "String",
-        "example": "gemini-2.5-flash"
-      }
-    }
-  },
-  "engine.tutor.autoModel": "auto model",
-  "@engine.tutor.autoModel": {
-    "description": "Shown instead of a model id when the app picks the Gemini model itself. Lowercase."
-  },
-  "engine.tutor.close": "Close",
-  "@engine.tutor.close": {
-    "description": "Tooltip of the ✕ button that closes the tutor drawer."
-  },
-  "engine.tutor.useWhole": "use whole course",
-  "@engine.tutor.useWhole": {
-    "description": "Small link next to the tutor’s context chip: talk about the whole course instead. Lowercase."
-  },
-  "engine.tutor.placeholder": "Your answer or question…",
-  "@engine.tutor.placeholder": {
-    "description": "Placeholder of the tutor chat’s text box."
-  },
-  "engine.tutor.greet": "Hi {name}! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
-  "@engine.tutor.greet": {
-    "description": "First message of the tutor (classic layout), Markdown: keep the ** marks. name = the learner, tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label (e.g. “💡 Explain”).",
-    "placeholders": {
-      "name": {
-        "type": "String",
-        "example": "Maria"
-      },
-      "tutor": {
-        "type": "String",
-        "example": "Brick"
-      },
-      "avatar": {
-        "type": "String",
-        "example": "🦉"
-      },
-      "mode": {
-        "type": "String",
-        "example": "🦉 Socratic"
-      }
-    }
-  },
-  "engine.tutor.greetAnon": "Hi there! I'm **{tutor}** {avatar}. Mode: **{mode}**. Pick a starter or just type.",
-  "@engine.tutor.greetAnon": {
-    "description": "First message of the tutor (classic layout) when the learner has no name, Markdown: keep the ** marks. tutor = the tutor’s name, avatar = an emoji, mode = the mode’s label.",
-    "placeholders": {
-      "tutor": {
-        "type": "String",
-        "example": "Brick"
-      },
-      "avatar": {
-        "type": "String",
-        "example": "🦉"
-      },
-      "mode": {
-        "type": "String",
-        "example": "🦉 Socratic"
-      }
-    }
-  },
-  "engine.tutor.starterSocratic": "Question me Socratically on this",
-  "@engine.tutor.starterSocratic": {
-    "description": "Starter button in an empty tutor chat (after the tutor’s emoji): starts a Socratic dialogue."
-  },
-  "engine.tutor.starterQuiz": "Rapid-fire quiz, traps only",
-  "@engine.tutor.starterQuiz": {
-    "description": "Starter button (after ⚡): a fast quiz with trick questions only."
-  },
-  "engine.tutor.starterDebug": "Simulate a broken scenario",
-  "@engine.tutor.starterDebug": {
-    "description": "Starter button (after 🔧): a simulated case where something is broken, to diagnose."
-  },
-  "engine.tutor.starterInterview": "Interview me",
-  "@engine.tutor.starterInterview": {
-    "description": "Starter button (after 🎤): a mock interview."
-  },
-  "engine.tutor.starterExplain": "Explain it differently",
-  "@engine.tutor.starterExplain": {
-    "description": "Starter button (after 💡): explain the topic differently from the notes."
   },
   "engine.tutor.lessonsLearned": "{n, plural, one {# lesson learned} other {# lessons learned}}",
   "@engine.tutor.lessonsLearned": {
@@ -2672,50 +2550,6 @@
   "@engine.cv.md.contents": {
     "description": "Heading of the table of contents of the export of all conversations."
   },
-  "engine.cv.title": "Conversations ({n, number})",
-  "@engine.cv.title": {
-    "description": "Heading (after 🕘) of the conversation history in the tutor drawer.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.cv.tip": "Every conversation with the tutor — and every AI grading, code review and generated question — is saved automatically in the background: in this browser, in your backup folder (if set) and in the cloud (cloud accounts). ⬇️ exports a readable Markdown copy on demand.",
-  "@engine.cv.tip": {
-    "description": "Info tooltip of the conversation history."
-  },
-  "engine.cv.exportAll": "Export all",
-  "@engine.cv.exportAll": {
-    "description": "Button (after ⬇️): export all conversations as one Markdown file."
-  },
-  "engine.cv.chat": "Chat",
-  "@engine.cv.chat": {
-    "description": "Button (after ←): back from the history to the chat."
-  },
-  "engine.cv.alsoShow": "{n, plural, one {Also show # AI grading / review / question record} other {Also show # AI grading / review / question records}}",
-  "@engine.cv.alsoShow": {
-    "description": "Checkbox in the conversation history: also list the saved one-shot AI records.",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.cv.search": "Search conversations…",
-  "@engine.cv.search": {
-    "description": "Placeholder of the search box of the conversation history."
-  },
-  "engine.cv.empty": "No conversations yet. Every chat with your tutor is saved here automatically, ready to export as Markdown.",
-  "@engine.cv.empty": {
-    "description": "Empty conversation history."
-  },
-  "engine.cv.namingShort": "naming…",
-  "@engine.cv.namingShort": {
-    "description": "After a conversation’s temporary title while the AI writes its title. Lowercase."
-  },
   "engine.cv.fromApp": "from {app}",
   "@engine.cv.fromApp": {
     "description": "Conversation list: the conversation was made in another app. app = its name (e.g. Meletee).",
@@ -2725,32 +2559,6 @@
         "example": "Meletee"
       }
     }
-  },
-  "engine.cv.messages": "{n, plural, one {# messages} other {# messages}}",
-  "@engine.cv.messages": {
-    "description": "Conversation list: number of messages (after the date). (English uses “messages” also for 1.)",
-    "placeholders": {
-      "n": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "engine.cv.rename": "Rename",
-  "@engine.cv.rename": {
-    "description": "Tooltip of the ✏️ button of a conversation."
-  },
-  "engine.cv.exportMd": "Export .md",
-  "@engine.cv.exportMd": {
-    "description": "Tooltip of the ⬇️ button of a conversation (Markdown file)."
-  },
-  "engine.cv.delete": "Delete",
-  "@engine.cv.delete": {
-    "description": "Tooltip of the 🗑️ button of a conversation."
-  },
-  "engine.cv.deleteAgain": "Click again to delete",
-  "@engine.cv.deleteAgain": {
-    "description": "Tooltip of the delete button after the first click (confirm by clicking again)."
   },
   "engine.thr.workingOn": "Working on:",
   "@engine.thr.workingOn": {

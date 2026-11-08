@@ -37,6 +37,15 @@ export class StudyElement extends NoemaElement {
     this.performUpdate();
     return this;
   }
+  /** A study element is built with its arguments (new X(app, …)), so the browser cannot make one bare: a copy (the ⚑
+      report's screenshot clones the page) is a plain element with the same attributes and content, never a second
+      element without its app. */
+  override cloneNode(deep = false): Node {
+    const c = this.ownerDocument.createElement('span');
+    for (const a of Array.from(this.attributes)) c.setAttribute(a.name, a.value);
+    if (deep) for (const k of Array.from(this.childNodes)) c.append(k.cloneNode(true));
+    return c;
+  }
 }
 
 /** A study page: its <main>'s one .view (the source filter's bar, the 🔒 bar of a locked step and the setup reminders first). */

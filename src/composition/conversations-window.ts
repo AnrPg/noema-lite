@@ -8,7 +8,7 @@
  */
 import type { StoredConversation } from '../ports/conversations.ts';
 import type { I18n, MessageParams } from '../ports/i18n.ts';
-import { isTutor, kindBadge, modeName } from '../features/tutor/domain/conversation.ts';
+import { isTutor, kindBadge, modeName, otherApp } from '../features/tutor/domain/conversation.ts';
 import { defineConversationsUi, type ConvoRow, type NoemaConversations } from '../features/tutor/ui/conversations.ts';
 import { OPEN_CONVO, W, download, mdElement } from './tutor-page.ts';
 
@@ -76,6 +76,10 @@ export function conversationsWindow(
             const m = r.mode ?? '',
               k = 'mode' + m.charAt(0).toUpperCase() + m.slice(1);
             return m && i18n.has('sh.' + k) ? L(k) : m ? modeName(m, i18n) : '';
+          },
+          fromApp: r => {
+            const app = otherApp(r);
+            return app ? i18n.t('engine.cv.fromApp', { app }) : null;
           },
           tutorName: () => S.tv().tutor,
           date: iso => S.fmtDate(iso, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }),
