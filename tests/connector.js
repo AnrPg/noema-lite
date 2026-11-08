@@ -159,19 +159,20 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   await fetch(buUrl, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...br, native: 'el', status: 'reviewed' }) });
   const bu2 = await tool('noema_save_bridge', { subject_id: 'tiny-inline', native: 'el' });
   const bix2 = srv.bridges(uid);
-  ok(buWrong.isError && /not tiny-inline → el/.test(buWrong.content[0].text) && !bu2.isError && /\(reviewed\)/.test(bu2.content[0].text) && srv.state.files[`${uid}/bridges/tiny-inline.el.json`] && !srv.state.files[`${uid}/bridges/incoming/tiny-inline.el.json`] && bix2['tiny-inline']?.el?.status === 'reviewed' && bix2['tiny-inline']?.ru?.entries === 1, 'save_bridge from an upload: refuses the wrong file, saves the right one, clears the upload, keeps the other natives in a:bridges');
-  // several agents saving bridges at the same moment: compare-and-swap keeps every entry (no lost update)
+  ok(buWrong.isError && /not tiny-inline → el/.test(buWrong.content[0].text) && !bu2.isError && /\(reviewed\)/.test(bu2.content[0].text) && srv.state.files[`${uid}/bridges/tiny-inline.el.json`] && !srv.state.files[`${uid}/bridges/incoming/tiny-inline.el.json`] && bix2['tiny-inline']?.el?.status === 'reviewed' && bix2['tiny-inline']?.ru?.entries === 1, 'save_bridge from an upload: refuses the wrong file, saves the right one, clears the upload, keeps the other natives\' rows of noema_bridges');
+  // several agents saving bridges at the same moment: each pair is its own row of noema_bridges, so no save is lost
   const natsC = ['de', 'fr', 'ar', 'es', 'it'];
   const parC = await Promise.all(natsC.map(n => tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, native: n }) })));
-  const bixC = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}')['tiny-inline'] || {};
-  ok(parC.every(r => !r.isError) && natsC.every(n => bixC[n]?.entries === 1) && bixC.ru?.entries === 1 && bixC.el?.status === 'reviewed', 'save_bridge: 5 saves at the same time all keep their entry in a:bridges (compare-and-swap)');
+  const bixC = srv.bridges(uid)['tiny-inline'] || {};
+  ok(parC.every(r => !r.isError) && natsC.every(n => bixC[n]?.entries === 1 && srv.state.files[`${uid}/bridges/tiny-inline.${n}.json`]) && bixC.ru?.entries === 1 && bixC.el?.status === 'reviewed' && !srv.state.kv[uid]['a:bridges'],
+    'save_bridge: 5 saves at the same time all keep their row of noema_bridges (and the rows saved before)');
   { // the same again with the clock standing still: every write in the same millisecond (a version stamp must still change)
     const RealDate = Date, FIXED = RealDate.now();
     globalThis.Date = class extends RealDate { constructor(...a) { super(...(a.length ? a : [FIXED])); } static now() { return FIXED; } };
     const natsF = ['ja', 'hi', 'tr', 'sq'];
     let parF; try { parF = await Promise.all(natsF.map(n => tool('noema_save_bridge', { bridge_json: JSON.stringify({ ...br, native: n }) }))); } finally { globalThis.Date = RealDate; }
-    const bixF = JSON.parse(srv.state.kv[uid]['a:bridges']?.value || '{}')['tiny-inline'] || {};
-    ok(parF.every(r => !r.isError) && [...natsF, ...natsC].every(n => bixF[n]?.entries === 1), 'save_bridge: 4 saves in the same millisecond all keep their entry (the version stamp always moves on)');
+    const bixF = srv.bridges(uid)['tiny-inline'] || {};
+    ok(parF.every(r => !r.isError) && [...natsF, ...natsC].every(n => bixF[n]?.entries === 1), 'save_bridge: 4 saves in the same millisecond all keep their row of noema_bridges');
   }
   srv.state.kv[uid]['a:bridgeReports'] = { value: JSON.stringify([{ pack: 'tiny-inline', native: 'ru', k: 'energy', sense: '1', form: 'energy', sid: sid0, note: 'better: энергия (физ.)' }]), updated_at: new Date().toISOString() };
   const bg = (await tool('noema_bridge_guide', { subject_id: 'tiny-inline' })).content[0].text;

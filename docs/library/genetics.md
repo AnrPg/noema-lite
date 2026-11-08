@@ -1,4 +1,4 @@
-# `genetics@1` — heredity and population genetics (`engine/src/48_lib_genetics.js`, `NoemaLibGenetics`)
+# `genetics@1` — heredity and population genetics (`src/engines/genetics/genetics.js`, `NoemaLibGenetics`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for genetics, from Mendel's crosses to population and quantitative
 genetics. There is one engine with 9 **modes** (`model.mode`): `cross`, `pedigree`, `hw`, `selection`, `drift`, `map`, `coalescent`,

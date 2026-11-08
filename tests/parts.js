@@ -15,13 +15,9 @@ const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; cons
 const near = (a, b, tol) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(b));
 globalThis.window = globalThis;
 const ENG = {};
-globalThis.ACT = { PARTS: {}, registerEngine: d => { ENG[d.id] = d; }, registerRuntime() { }, engine: id => ENG[id] || null, engines: () => Object.keys(ENG) };
-require(path.join(SRC, '35_simexpr.js'));
-for (const f of ['36_engine_circuit.js', '39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(SRC, f));
-require(path.join(SRC, '46_lib_core.js'));
-for (const f of fs.readdirSync(SRC).filter(f => /^46_lib_[a-z_]+\.js$/.test(f) && f !== '46_lib_core.js').sort()) require(path.join(SRC, f));
-for (const f of fs.readdirSync(SRC).filter(f => /^4[78]_lib_[a-z_]+\.js$/.test(f)).sort()) require(path.join(SRC, f));
-require(path.join(SRC, '49_lib_catalog.js'));
+globalThis.ACT = { PARTS: {}, registerEngine: d => { ENG[d.id] = d; }, registerRuntime() { }, engine: id => ENG[id] || NoemaCore.engines.engine(id), engines: () => [...Object.keys(ENG), ...NoemaCore.engines.ids()] };   // = ACT of engine/src/32_activities.js: its own engines, then the library's
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibCore = ENGINES.kernel('core'), NoemaEngineCatalog = ENGINES.lib.catalog, NoemaLibODE = ENGINES.mod('ode@1');
 require(path.join(ROOT, 'engine', 'packcheck.js'));
 require(path.join(SRC, '35_activity_sim.js'));
 const PC = globalThis.NoemaPackCheck, A = globalThis.ACT;
@@ -64,7 +60,7 @@ const errs = (spec, lib) => PC.checkSimSpec(spec, null, null, { parts: lib || {}
 }
 
 // ---------- 2. steppers ----------
-const C = globalThis.NoemaLibCore;
+const C = NoemaLibCore;
 function stepAll(E, spec, inp, tEnd, dt) {
   const i = E.create(spec, { seed: 1 }), r0 = i.stepInit(inp, 0), outs = [r0.out];
   for (let t = 0; t < tEnd - 1e-12; t += dt) outs.push(i.stepTo(inp, t, Math.min(dt, tEnd - t), []).out);
@@ -72,7 +68,7 @@ function stepAll(E, spec, inp, tEnd, dt) {
 }
 {
   const E = A.engine('ode@1');
-  ok(!!E && E.stepper === true && typeof globalThis.NoemaLibODE.simEngine.stepper === 'object', 'ode@1 declares a stepper (engine.stepper, simEngine.stepper)');
+  ok(!!E && E.stepper === true && typeof NoemaLibODE.simEngine.stepper === 'object', 'ode@1 declares a stepper (engine.stepper, simEngine.stepper)');
   const spec = { format: 'noema.sim-spec/v1', engine: 'ode@1', consts: { k: 0.3 }, model: { rhs: { y: '-k * y' }, states: [{ id: 'y', init: 1 }], solve: { tEnd: 10 } }, outputs: [{ id: 'yy', kind: 'series', of: 'state', var: 'y' }, { id: 'yf', kind: 'scalar', of: 'final', var: 'y' }] };
   const { i, outs } = stepAll(E, spec, { k: 0.3 }, 5, 0.5);
   ok(near(outs[outs.length - 1].yf, Math.exp(-1.5), 1e-5), 'ode@1 stepper: y′ = −k y over 10 macro steps = e^{−kt}');
@@ -152,8 +148,8 @@ function runParts(spec, env, o) {
     const ACTP = vm.runInNewContext(s32.slice(s32.indexOf('const ACTP = '), s32.indexOf('const ACT = (')) + '; ACTP', { TextEncoder, JSON, Object, Array, Number, String, Math });
     ok(ACTP.check({ p: 'noema.activity', v: 1, type: 'sim:run', id: 's1', payload: { spec: { parts: [] }, inputs: { D: 1 }, seed: 3 } }).ok && !ACTP.check({ p: 'noema.activity', v: 1, type: 'sim:run', payload: { spec: 'x' } }).ok, 'ACTP: sim:run {spec, inputs?, seed?}');
     const ctx = { console, Promise, Date, JSON, Object, Array, Set, Map, String, Number, Math, Error, isFinite, setTimeout, clearTimeout, ACTP, Worker: function () { } };
-    ctx.window = ctx; ctx.NoemaEngineCatalog = globalThis.NoemaEngineCatalog; ctx.NoemaPackCheck = PC;
-    ctx.ACT = { registerRuntime() { }, engine: id => ENG[id] || null, engines: () => Object.keys(ENG), engineRunner: A.engineRunner, partsRunner: A.partsRunner };
+    ctx.window = ctx; ctx.NoemaCore = NoemaCore; ctx.NoemaPackCheck = PC;
+    ctx.ACT = { registerRuntime() { }, engine: A.engine, engines: A.engines, engineRunner: A.engineRunner, partsRunner: A.partsRunner };
     vm.createContext(ctx); vm.runInContext(h34.replace('ACT.registerRuntime({', 'globalThis.__bridge = engineBridge; ACT.registerRuntime({'), ctx);
     const got = [], B = ctx.__bridge({ engines: ['med@1', 'ode@1'] }, 5, (type, payload, extra) => got.push({ type, payload, re: extra.re }));
     const sp = { consts: { D: 5 }, parts: [pk(), od()] }, wait = re => new Promise(res => { const t = setInterval(() => { const m = got.find(g => g.re === re); if (m) { clearInterval(t); res(m.payload); } }, 5); });
@@ -172,7 +168,6 @@ function runParts(spec, env, o) {
 
   // ---------- 3b. the old plugins as parts: thermal@1, pid@1, twin@1, circuit-mna@1 (transient) have steppers ----------
   {
-    require(path.join(SRC, '43_engines_p6.js')); require(path.join(SRC, '36_engine_circuit_sim.js'));
     const exSpec = id => JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'activities_examples', id, 'spec.json'), 'utf8'));
     const envOf = sp => { const e = { ...(sp.consts || {}) }; for (const q of sp.params || []) e[q.id] = q.default; return e; };
     /** step a plugin's instance from 0 to tEnd by macro steps dt; → [the last outputs, run()'s outputs] */

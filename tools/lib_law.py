@@ -1,4 +1,4 @@
-"""law@1 — the Python twin of engine/src/48_lib_law.js (docs/library/law.md): check_spec(spec), exprs(spec), keys(spec) give the same
+"""law@1 — the Python twin of src/engines/law/law.js (docs/library/law.md): check_spec(spec), exprs(spec), keys(spec) give the same
 problems (code, path, msg, level) and lists as the JS checkSpec / exprs / keys (tests/enginelib.js and tests/lib_law.js compare them on
 tests/fixtures/enginelib/law.json). Literals are parsed by logic@1's parser (tools/lib_logic.py parse), as the JS does with
 NoemaLibLogic.parse. It does not compute the tasks. The tables below are the JS module's own (MODEL_T, REQ, TASK_OUT, AT_OF, CODES,

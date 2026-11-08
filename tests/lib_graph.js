@@ -1,4 +1,4 @@
-/* graph@1 (engine/src/47_lib_graph.js, docs/library/graph.md) against published values:
+/* graph@1 (src/engines/graph/graph.js, docs/library/graph.md) against published values:
    1. CLRS (Cormen, Leiserson, Rivest & Stein, Introduction to Algorithms, 3rd ed. 2009 / 4th ed. 2022) figures: Dijkstra, Bellman–Ford
       (and its negative cycle), Floyd–Warshall, MST, max flow / min cut, SCC; Königsberg (Euler 1736); two triangles bridged;
    2. Zachary's karate club (Zachary 1977) against networkx 3.x: clustering, transitivity, diameter, average path, PageRank,
@@ -10,8 +10,9 @@
 const path = require('path'), fs = require('fs'), vm = require('vm');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '47_lib_graph.js'));
-const G = globalThis.NoemaLibGraph;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibGraph = ENGINES.mod('graph@1');
+const G = NoemaLibGraph;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, t) => Math.abs(a - b) <= t;
@@ -321,7 +322,7 @@ const KA = { generate: { kind: 'karate' } };
   const AD = path.join(ROOT, 'tools', 'activities_examples', 'dijkstra-steps'), rd = f => JSON.parse(fs.readFileSync(path.join(AD, f), 'utf8'));
   const ex = rd('spec.json'), sim = G.engine.create(ex, { seed: 1 });
   const LOC = ['en', 'el', 'ru', 'de', 'fr'], tables = Object.fromEntries(LOC.map(l => [l, rd(`strings.${l}.json`)]));
-  require(path.join(SRC, '49_lib_catalog.js')); require(path.join(ROOT, 'engine', 'packcheck.js'));
+  require(path.join(ROOT, 'engine', 'packcheck.js'));
   const js = globalThis.NoemaPackCheck.checkSimSpec(ex, tables);
   const py = JSON.parse(require('child_process').execFileSync('python3', ['-c', 'import json, sys, activities as A; d = json.loads(sys.stdin.read()); print(json.dumps(A.check_spec(d[0], tables=d[1])))'], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify([ex, tables]), encoding: 'utf8' }));
   ok(js.length === 0 && py.length === 0, `dijkstra-steps: the spec passes packcheck (JS) and activities.check_spec (Python) with its five string tables${js.length + py.length ? ': ' + js.concat(py).join('; ') : ''}`);

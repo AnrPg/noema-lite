@@ -1,0 +1,184 @@
+/* The token set of every character (engine/themes.js: one character = one theme and its mascot): its palette in light and dark,
+   its typography and its shape. The order is the gallery's (animals, fairy tales, grown-up); who is in which group and how
+   playful each one is stay in engine/themes.js, the words in i18n/characters/. */
+import type { CharacterTokens } from './types.ts';
+
+export const CHARACTERS = {
+  hedge: {
+    type: { display: 'Alegreya', displayRu: null, body: 'Alegreya Sans', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '20px', buttonRadius: '14px', iconRadius: '13px', stroke: '1.8', cap: 'round' },
+    light: { bg: '#faf7f0', paper: '#ffffff', ink: '#2f2a24', ink2: '#6b6358', ink3: '#a39a8c', line: '#ece5d8', acc: '#5f8d5a', accInk: '#ffffff', accSoft: '#e6efe2', t1: '#e6efe2', t1i: '#557a51', t2: '#f6ead0', t2i: '#9a7424', t3: '#f5e1dc', t3i: '#a5584c', t4: '#e8e4f2', t4i: '#6a5f97', deco1: '#e7eedd', deco2: '#efe8d6', deco3: '#dfe8d3' },
+    dark: { bg: '#1b1d18', paper: '#24271f', ink: '#eeeadf', ink2: '#b7b0a2', ink3: '#857e71', line: '#34382c', acc: '#9cc596', accInk: '#1b1d18', accSoft: '#2c3a2a', t1: '#2c3a2a', t1i: '#a9d0a3', t2: '#3a3222', t2i: '#e5c37a', t3: '#3b2a27', t3i: '#e7a497', t4: '#2d2a3c', t4i: '#b9aee6', deco1: '#22281e', deco2: '#262920', deco3: '#283024' },
+  },
+  owl: {
+    type: { display: 'EB Garamond', displayRu: null, body: 'Literata', displayWeight: 600, displayStyle: 'normal' },
+    shape: { radius: '14px', buttonRadius: '10px', iconRadius: '10px', stroke: '1.5', cap: 'round' },
+    light: { bg: '#f8f7fc', paper: '#ffffff', ink: '#2b2840', ink2: '#625e7c', ink3: '#9d99b5', line: '#e9e6f3', acc: '#7466b8', accInk: '#ffffff', accSoft: '#ece8f8', t1: '#ece8f8', t1i: '#5f52a6', t2: '#f7efd6', t2i: '#93721f', t3: '#f6e3ea', t3i: '#a4566f', t4: '#e2eef3', t4i: '#3f7a8e', deco1: '#ece9f7', deco2: '#f3f0fb', deco3: '#e4e0f3' },
+    dark: { bg: '#17162a', paper: '#201f36', ink: '#eeecfa', ink2: '#b3aed0', ink3: '#7f7a9e', line: '#2f2d4a', acc: '#b1a6ec', accInk: '#17162a', accSoft: '#2b2850', t1: '#2b2850', t1i: '#c4bbf5', t2: '#3a3322', t2i: '#e8cf8a', t3: '#3a2632', t3i: '#eeb0c4', t4: '#1f3340', t4i: '#9fd0e0', deco1: '#1d1c33', deco2: '#22213a', deco3: '#25233f' },
+  },
+  axo: {
+    type: { display: 'M PLUS Rounded 1c', displayRu: null, body: 'M PLUS Rounded 1c', displayWeight: 800, displayStyle: 'normal' },
+    shape: { radius: '26px', buttonRadius: '999px', iconRadius: '50%', stroke: '2', cap: 'round' },
+    light: { bg: '#f5fafa', paper: '#ffffff', ink: '#233236', ink2: '#5b6f73', ink3: '#97a9ac', line: '#e1ecec', acc: '#3f978f', accInk: '#ffffff', accSoft: '#dff1ef', t1: '#dff1ef', t1i: '#2f7e77', t2: '#fbe3ea', t2i: '#b45773', t3: '#f6ecd8', t3i: '#946c25', t4: '#e3e9f8', t4i: '#4f63a8', deco1: '#e1f1f0', deco2: '#fbeef2', deco3: '#d5ebea' },
+    dark: { bg: '#13201f', paper: '#1b2b2a', ink: '#e8f3f2', ink2: '#a9c0bf', ink3: '#738d8c', line: '#2a3d3c', acc: '#86d1c9', accInk: '#13201f', accSoft: '#1f3a37', t1: '#1f3a37', t1i: '#9fe0d8', t2: '#3a2530', t2i: '#f2aec2', t3: '#352d1d', t3i: '#e6c886', t4: '#222b42', t4i: '#aab9ef', deco1: '#172726', deco2: '#1d2a2c', deco3: '#1a302e' },
+  },
+  dragon: {
+    type: { display: 'Zen Antique', displayRu: 'Oranienbaum', body: 'Murecho', displayWeight: 400, displayStyle: 'normal' },
+    shape: { radius: '18px', buttonRadius: '12px', iconRadius: '12px', stroke: '1.8', cap: 'round' },
+    light: { bg: '#f6f9f7', paper: '#ffffff', ink: '#263130', ink2: '#5d6b69', ink3: '#9aa8a5', line: '#e2ebe8', acc: '#4f9a86', accInk: '#ffffff', accSoft: '#e0f0ea', t1: '#e0f0ea', t1i: '#3d7f6d', t2: '#efe6f7', t2i: '#7a5aa6', t3: '#fbe6ea', t3i: '#b0566b', t4: '#fbf1d9', t4i: '#94702a', deco1: '#e6efeb', deco2: '#eee8f5', deco3: '#dde9e4' },
+    dark: { bg: '#141c1b', paper: '#1c2726', ink: '#e8f1ee', ink2: '#a8bab5', ink3: '#72847f', line: '#2a3936', acc: '#8fd3bf', accInk: '#141c1b', accSoft: '#1f3a33', t1: '#1f3a33', t1i: '#9fe0cc', t2: '#2c2440', t2i: '#c7b0ee', t3: '#3a2229', t3i: '#f0aab9', t4: '#362f1c', t4i: '#e9cf8a', deco1: '#18221f', deco2: '#1f1d2c', deco3: '#1b2a26' },
+  },
+  alien: {
+    type: { display: 'Tektur', displayRu: null, body: 'Geologica', displayWeight: 600, displayStyle: 'normal' },
+    shape: { radius: '22px', buttonRadius: '999px', iconRadius: '50%', stroke: '1.6', cap: 'round' },
+    light: { bg: '#f5f7fc', paper: '#ffffff', ink: '#222a3a', ink2: '#5a6479', ink3: '#98a1b5', line: '#e3e8f3', acc: '#5b6fd6', accInk: '#ffffff', accSoft: '#e6e9fb', t1: '#e6e9fb', t1i: '#4a5bbf', t2: '#dff4f6', t2i: '#2f8592', t3: '#f4eafb', t3i: '#8a56b0', t4: '#fbf4d4', t4i: '#8a6d10', deco1: '#e8ecf8', deco2: '#e2f2f5', deco3: '#ecebfa' },
+    dark: { bg: '#10131f', paper: '#181c2c', ink: '#eaedf8', ink2: '#aab1c9', ink3: '#737b96', line: '#272d44', acc: '#a3b2ff', accInk: '#10131f', accSoft: '#232a4d', t1: '#232a4d', t1i: '#b6c1ff', t2: '#173238', t2i: '#8fdbe6', t3: '#2c2140', t3i: '#d0b0ef', t4: '#33301a', t4i: '#ecdb8a', deco1: '#141828', deco2: '#13212a', deco3: '#1b1a33' },
+  },
+  bear: {
+    type: { display: 'Brygada 1918', displayRu: 'Kelly Slab', body: 'Commissioner', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '16px', buttonRadius: '12px', iconRadius: '50%', stroke: '1.9', cap: 'round' },
+    light: { bg: '#fbf7ef', paper: '#ffffff', ink: '#2e2a26', ink2: '#6a6157', ink3: '#a59b8e', line: '#eee6d8', acc: '#3d6a9e', accInk: '#ffffff', accSoft: '#e4ecf6', t1: '#e4ecf6', t1i: '#355d8c', t2: '#f8ecd0', t2i: '#9a7420', t3: '#f7e2dc', t3i: '#ad5a48', t4: '#e0f1ee', t4i: '#2d7c70', deco1: '#efe6d2', deco2: '#dcebf0', deco3: '#e6eedb' },
+    dark: { bg: '#171a20', paper: '#1f232b', ink: '#eeeae2', ink2: '#b5ada0', ink3: '#807868', line: '#2f3440', acc: '#9dbbe6', accInk: '#171a20', accSoft: '#24324a', t1: '#24324a', t1i: '#aac6ee', t2: '#3a3220', t2i: '#e8cc84', t3: '#3a2622', t3i: '#eba696', t4: '#1b3532', t4i: '#94d6c9', deco1: '#1d1f22', deco2: '#17232b', deco3: '#1c241d' },
+  },
+  fruit: {
+    type: { display: 'Playpen Sans', displayRu: 'Pangolin', body: 'Zen Maru Gothic', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '28px', buttonRadius: '22px', iconRadius: '48% 52% 46% 54% / 55% 50% 50% 45%', stroke: '2.2', cap: 'round' },
+    light: { bg: '#fffaf3', paper: '#ffffff', ink: '#33291f', ink2: '#6e6152', ink3: '#a99a87', line: '#f1e7d8', acc: '#e39a55', accInk: '#3a2414', accSoft: '#fcebd9', t1: '#fcebd9', t1i: '#b0611f', t2: '#e8f3dd', t2i: '#4f8a3a', t3: '#fbe3e6', t3i: '#b8495e', t4: '#e6e9f7', t4i: '#5161a8', deco1: '#fbeedd', deco2: '#eef5e3', deco3: '#f7e2d0' },
+    dark: { bg: '#1d1914', paper: '#262019', ink: '#f3ece2', ink2: '#bcae9d', ink3: '#877a69', line: '#3a3127', acc: '#f0ad6a', accInk: '#1d1914', accSoft: '#3d2b1b', t1: '#3d2b1b', t1i: '#f4b97c', t2: '#23331d', t2i: '#a9d796', t3: '#3a2026', t3i: '#f0a6b4', t4: '#24283d', t4i: '#aeb8ee', deco1: '#221c16', deco2: '#1f261a', deco3: '#2a2019' },
+  },
+  knight: {
+    type: { display: 'Alegreya SC', displayRu: 'Ruslan Display', body: 'Gentium Book Plus', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '8px', buttonRadius: '6px', iconRadius: '4px', stroke: '1.8', cap: 'square' },
+    light: { bg: '#f7f6f3', paper: '#ffffff', ink: '#2a2c33', ink2: '#626673', ink3: '#9c9faa', line: '#e6e5ec', acc: '#5d74a8', accInk: '#ffffff', accSoft: '#e5eaf5', t1: '#e5eaf5', t1i: '#4c639a', t2: '#f6e6e8', t2i: '#a24f62', t3: '#f4eed9', t3i: '#8f7426', t4: '#e4efe6', t4i: '#4b7d58', deco1: '#ebeaf0', deco2: '#e9ecf3', deco3: '#e2e4ea' },
+    dark: { bg: '#16171c', paper: '#1f2027', ink: '#ecebf2', ink2: '#b0b1bf', ink3: '#7a7c8b', line: '#2e3039', acc: '#a8bbe8', accInk: '#16171c', accSoft: '#262f45', t1: '#262f45', t1i: '#b5c6ef', t2: '#3a2228', t2i: '#eaa9b8', t3: '#36301a', t3i: '#e5cf87', t4: '#1e3224', t4i: '#a3d4ae', deco1: '#1a1b21', deco2: '#1c1f29', deco3: '#202229' },
+  },
+  berry: {
+    type: { display: 'Comic Relief', displayRu: null, body: 'Comfortaa', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '26px', buttonRadius: '999px', iconRadius: '50% 50% 46% 46% / 40% 40% 60% 60%', stroke: '2', cap: 'round' },
+    light: { bg: '#fff7f8', paper: '#ffffff', ink: '#3a2730', ink2: '#77606b', ink3: '#b39aa5', line: '#f5e3e8', acc: '#d9587a', accInk: '#ffffff', accSoft: '#fde4ea', t1: '#fde4ea', t1i: '#b8476a', t2: '#e4f4e4', t2i: '#4e8a4e', t3: '#fff1d6', t3i: '#93701c', t4: '#efe6f8', t4i: '#7a5aa6', deco1: '#fdeef1', deco2: '#eaf5e6', deco3: '#fbe3e9' },
+    dark: { bg: '#1f1619', paper: '#2a1e22', ink: '#f7eaee', ink2: '#c7aab4', ink3: '#91747f', line: '#3f2c33', acc: '#f59ab0', accInk: '#1f1619', accSoft: '#47252f', t1: '#47252f', t1i: '#f8b3c4', t2: '#1f3320', t2i: '#a5d9a2', t3: '#3a311c', t3i: '#ecd28c', t4: '#2e2540', t4i: '#cdb6f0', deco1: '#261b1f', deco2: '#1c261c', deco3: '#2c1d23' },
+  },
+  hood: {
+    type: { display: 'Mynerve', displayRu: 'Neucha', body: 'Ysabeau', displayWeight: 400, displayStyle: 'normal' },
+    shape: { radius: '20px', buttonRadius: '16px', iconRadius: '50% 50% 12px 12px', stroke: '1.8', cap: 'round' },
+    light: { bg: '#fcf8f4', paper: '#ffffff', ink: '#33282a', ink2: '#6d5f61', ink3: '#a8999a', line: '#f0e6e1', acc: '#c96a63', accInk: '#ffffff', accSoft: '#f8e3e0', t1: '#f8e3e0', t1i: '#b2544d', t2: '#e5efe0', t2i: '#557a4b', t3: '#f6ecd6', t3i: '#937027', t4: '#e9e6f3', t4i: '#675d96', deco1: '#eaf0e3', deco2: '#f4ebe2', deco3: '#e1ead9' },
+    dark: { bg: '#1c1819', paper: '#262022', ink: '#f2eaea', ink2: '#bba9aa', ink3: '#857475', line: '#3a3032', acc: '#eb9f98', accInk: '#1c1819', accSoft: '#3f2526', t1: '#3f2526', t1i: '#f1aba4', t2: '#22301f', t2i: '#a7d39b', t3: '#36301e', t3i: '#e6cd88', t4: '#29263a', t4i: '#bdb2e8', deco1: '#1e1f1a', deco2: '#241e1f', deco3: '#1d241b' },
+  },
+  piglet: {
+    type: { display: 'Dela Gothic One', displayRu: 'Russo One', body: 'Ubuntu', displayWeight: 400, displayStyle: 'normal' },
+    shape: { radius: '10px', buttonRadius: '8px', iconRadius: '5px', stroke: '2.2', cap: 'square' },
+    light: { bg: '#fdf8f5', paper: '#ffffff', ink: '#322a28', ink2: '#6c605c', ink3: '#a69894', line: '#f1e5e0', acc: '#c9735a', accInk: '#ffffff', accSoft: '#f8e5de', t1: '#f8e5de', t1i: '#a85a43', t2: '#fce6ec', t2i: '#b45a78', t3: '#fbf0cf', t3i: '#8c6d0f', t4: '#e3ebf5', t4i: '#46679a', deco1: '#f3e9e2', deco2: '#fbeaea', deco3: '#efe2d9' },
+    dark: { bg: '#1c1716', paper: '#261f1e', ink: '#f3ebe8', ink2: '#bdaca7', ink3: '#887773', line: '#3b302e', acc: '#ec9f86', accInk: '#1c1716', accSoft: '#40271f', t1: '#40271f', t1i: '#f0ae97', t2: '#3c2330', t2i: '#f2a9c2', t3: '#38301a', t3i: '#ecd585', t4: '#1f2a3c', t4i: '#a9c2ec', deco1: '#211b19', deco2: '#261c20', deco3: '#2a211e' },
+  },
+  candy: {
+    type: { display: 'Ysabeau Infant', displayRu: 'Comfortaa', body: 'Comfortaa', displayWeight: 800, displayStyle: 'normal' },
+    shape: { radius: '24px', buttonRadius: '999px', iconRadius: '50%', stroke: '2', cap: 'round' },
+    light: { bg: '#fdf8f8', paper: '#ffffff', ink: '#38282e', ink2: '#71606a', ink3: '#ab99a2', line: '#f2e6ea', acc: '#c25f88', accInk: '#ffffff', accSoft: '#f9e3ec', t1: '#f9e3ec', t1i: '#a84d74', t2: '#e1f3ec', t2i: '#3f8a6e', t3: '#fbf0d2', t3i: '#8c6a14', t4: '#efe4da', t4i: '#7a5236', deco1: '#f6e9ee', deco2: '#e7f3ee', deco3: '#fbf2e1' },
+    dark: { bg: '#1e171a', paper: '#281f23', ink: '#f5eaee', ink2: '#c0aab4', ink3: '#8a757f', line: '#3c2e34', acc: '#f0a2c2', accInk: '#1e171a', accSoft: '#432634', t1: '#432634', t1i: '#f4b3cd', t2: '#1d332b', t2i: '#9fdcc3', t3: '#37301a', t3i: '#ecd38a', t4: '#33271f', t4i: '#d9b393', deco1: '#241b1f', deco2: '#1c2622', deco3: '#2a231b' },
+  },
+  jack: {
+    type: { display: 'Vollkorn', displayRu: null, body: 'Source Sans 3', displayWeight: 800, displayStyle: 'normal' },
+    shape: { radius: '18px', buttonRadius: '12px', iconRadius: '5px 50% 5px 50%', stroke: '1.9', cap: 'round' },
+    light: { bg: '#f7faf4', paper: '#ffffff', ink: '#29301f', ink2: '#5f6a52', ink3: '#9aa48d', line: '#e5ecdc', acc: '#5e8a32', accInk: '#ffffff', accSoft: '#e7f1da', t1: '#e7f1da', t1i: '#4d7a26', t2: '#e4eef7', t2i: '#3d6f99', t3: '#f6ecd8', t3i: '#8d6a2c', t4: '#f5e6dc', t4i: '#9a5a3a', deco1: '#e9f1df', deco2: '#e6eef6', deco3: '#dfead2' },
+    dark: { bg: '#151a12', paper: '#1d241a', ink: '#e9f0e1', ink2: '#aebaa2', ink3: '#7a866e', line: '#2c3627', acc: '#a6d17f', accInk: '#151a12', accSoft: '#283a1d', t1: '#283a1d', t1i: '#b6dc92', t2: '#1c2c3a', t2i: '#a5c9ea', t3: '#352e1c', t3i: '#e2c98c', t4: '#38261e', t4i: '#e7b09a', deco1: '#192015', deco2: '#172029', deco3: '#1c2618' },
+  },
+  frog: {
+    type: { display: 'Noto Serif Display', displayRu: null, body: 'Manrope', displayWeight: 700, displayStyle: 'italic' },
+    shape: { radius: '24px', buttonRadius: '18px', iconRadius: '50%', stroke: '1.8', cap: 'round' },
+    light: { bg: '#f6faf2', paper: '#ffffff', ink: '#26301f', ink2: '#5e6b55', ink3: '#9aa690', line: '#e3ecdb', acc: '#d2a536', accInk: '#33270a', accSoft: '#f7eccb', t1: '#e6f1db', t1i: '#4e7e3a', t2: '#f7eccb', t2i: '#8a6a12', t3: '#f8e3ea', t3i: '#ad5675', t4: '#e0eef3', t4i: '#3a7488', deco1: '#e4f0dc', deco2: '#e6f1ee', deco3: '#f4efda' },
+    dark: { bg: '#141a12', paper: '#1c2419', ink: '#e8f0e2', ink2: '#abb9a2', ink3: '#77856e', line: '#2b3627', acc: '#e6c160', accInk: '#141a12', accSoft: '#3a3218', t1: '#243a1f', t1i: '#acd89a', t2: '#3a3218', t2i: '#ecd27e', t3: '#3a2430', t3i: '#f0aec6', t4: '#1a2f36', t4i: '#9cd2e2', deco1: '#18211a', deco2: '#16231f', deco3: '#232417' },
+  },
+  puss: {
+    type: { display: 'Piazzolla', displayRu: null, body: 'Fira Sans', displayWeight: 700, displayStyle: 'italic' },
+    shape: { radius: '14px', buttonRadius: '10px', iconRadius: '10px 10px 50% 50%', stroke: '1.7', cap: 'round' },
+    light: { bg: '#fcf8f3', paper: '#ffffff', ink: '#2c2a28', ink2: '#68625b', ink3: '#a49c92', line: '#efe7dd', acc: '#2d7480', accInk: '#ffffff', accSoft: '#e0eff0', t1: '#e0eff0', t1i: '#236670', t2: '#fbe6dc', t2i: '#b1593b', t3: '#f8ead2', t3i: '#8e6420', t4: '#efe5db', t4i: '#7a5236', deco1: '#f4ebe0', deco2: '#e2efee', deco3: '#f7e6dc' },
+    dark: { bg: '#18191a', paper: '#202324', ink: '#efebe6', ink2: '#b6aea5', ink3: '#827a70', line: '#33363a', acc: '#86c8cf', accInk: '#18191a', accSoft: '#1f3a3e', t1: '#1f3a3e', t1i: '#9dd6dc', t2: '#3d2620', t2i: '#efac94', t3: '#382e1b', t3i: '#e8c983', t4: '#33271f', t4i: '#d9b393', deco1: '#1d1d1c', deco2: '#18262a', deco3: '#2a2120' },
+  },
+  wolf: {
+    type: { display: 'Sofia Sans Extra Condensed', displayRu: null, body: 'IBM Plex Sans', displayWeight: 800, displayStyle: 'normal' },
+    shape: { radius: '12px', buttonRadius: '8px', iconRadius: '0', stroke: '2.1', cap: 'round' },
+    light: { bg: '#f5f6f6', paper: '#ffffff', ink: '#25292d', ink2: '#5d646b', ink3: '#99a0a6', line: '#e3e6e8', acc: '#56687a', accInk: '#ffffff', accSoft: '#e3e8ed', t1: '#e3e8ed', t1i: '#45586a', t2: '#f3ecdc', t2i: '#86692a', t3: '#f5e4dc', t3i: '#a2563a', t4: '#e6eadc', t4i: '#5a6a35', deco1: '#e6e9eb', deco2: '#eceee8', deco3: '#dde1e4' },
+    dark: { bg: '#14171a', paper: '#1c2024', ink: '#e9ecee', ink2: '#aab1b7', ink3: '#757d84', line: '#2b3036', acc: '#a5b7c9', accInk: '#14171a', accSoft: '#26313c', t1: '#26313c', t1i: '#b4c4d4', t2: '#352f22', t2i: '#e2c98c', t3: '#3a2620', t3i: '#eaa98e', t4: '#272c1d', t4i: '#bccb94', deco1: '#181b1e', deco2: '#1b1e1b', deco3: '#1d2125' },
+  },
+  eagle: {
+    type: { display: 'Roboto Slab', displayRu: null, body: 'Inter Tight', displayWeight: 600, displayStyle: 'normal' },
+    shape: { radius: '10px', buttonRadius: '6px', iconRadius: '50%', stroke: '1.8', cap: 'square' },
+    light: { bg: '#f7f6f2', paper: '#ffffff', ink: '#25282f', ink2: '#5d626c', ink3: '#9a9ea8', line: '#e6e5e0', acc: '#3f5a86', accInk: '#ffffff', accSoft: '#e3e9f2', t1: '#e3e9f2', t1i: '#344d78', t2: '#f4ebd6', t2i: '#86682a', t3: '#f1e3d6', t3i: '#8a5a36', t4: '#e0eef5', t4i: '#3a6d88', deco1: '#e9ecf1', deco2: '#eeeae0', deco3: '#e1e6ee' },
+    dark: { bg: '#12161f', paper: '#1a1f2a', ink: '#e9ebf0', ink2: '#aeb3bf', ink3: '#787e8c', line: '#2a303d', acc: '#a6bce6', accInk: '#12161f', accSoft: '#243250', t1: '#243250', t1i: '#b3c6ec', t2: '#352f1d', t2i: '#e4cd8e', t3: '#36271c', t3i: '#e2b190', t4: '#1a2f3a', t4i: '#9fcde2', deco1: '#161b25', deco2: '#1b1d20', deco3: '#182030' },
+  },
+  robot: {
+    type: { display: 'Jura', displayRu: null, body: 'Inter', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '10px', buttonRadius: '6px', iconRadius: '6px', stroke: '1.8', cap: 'square' },
+    light: { bg: '#f4f5f7', paper: '#ffffff', ink: '#1f2329', ink2: '#5a616c', ink3: '#9aa1ab', line: '#e2e5ea', acc: '#2f6f8f', accInk: '#ffffff', accSoft: '#e0edf3', t1: '#e0edf3', t1i: '#285f7a', t2: '#f2ead8', t2i: '#8a6a1e', t3: '#e6e9ee', t3i: '#4a5566', t4: '#e3efe9', t4i: '#3e7a5f', deco1: '#e8ebef', deco2: '#eef0f3', deco3: '#e1e5ea' },
+    dark: { bg: '#111418', paper: '#191d22', ink: '#e6e9ed', ink2: '#a7aeb8', ink3: '#727a85', line: '#2a3038', acc: '#7fbcd8', accInk: '#111418', accSoft: '#1d3440', t1: '#1d3440', t1i: '#9ccbe0', t2: '#352e1b', t2i: '#e2c47e', t3: '#262b33', t3i: '#b6bfcc', t4: '#1d3329', t4i: '#9fd2b8', deco1: '#15191e', deco2: '#181c21', deco3: '#1a1f25' },
+  },
+  heron: {
+    type: { display: 'Noto Serif Display', displayRu: null, body: 'Noto Sans', displayWeight: 600, displayStyle: 'normal' },
+    shape: { radius: '16px', buttonRadius: '10px', iconRadius: '50%', stroke: '1.5', cap: 'round' },
+    light: { bg: '#f6f6f4', paper: '#ffffff', ink: '#2a2b30', ink2: '#62646c', ink3: '#9d9fa6', line: '#e7e6e3', acc: '#5f7591', accInk: '#ffffff', accSoft: '#e6ebf1', t1: '#e6ebf1', t1i: '#506680', t2: '#f3e5e6', t2i: '#9a5a66', t3: '#e7eee6', t3i: '#5b7a5a', t4: '#f2ecdf', t4i: '#85692f', deco1: '#eceeef', deco2: '#f1eceb', deco3: '#e6ebe6' },
+    dark: { bg: '#16171b', paper: '#1e2025', ink: '#ebebef', ink2: '#b0b2ba', ink3: '#7a7c85', line: '#2e3037', acc: '#a9bcd4', accInk: '#16171b', accSoft: '#27303d', t1: '#27303d', t1i: '#b9c9de', t2: '#3a2629', t2i: '#e5b0b9', t3: '#223024', t3i: '#acd0aa', t4: '#352e1e', t4i: '#e0c98f', deco1: '#1a1c20', deco2: '#1f1b1d', deco3: '#1a201c' },
+  },
+  litM: {
+    type: { display: 'Gentium Book Plus', displayRu: null, body: 'Source Serif 4', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '6px', buttonRadius: '4px', iconRadius: '4px', stroke: '1.6', cap: 'round' },
+    light: { bg: '#f7f3ea', paper: '#fffdf8', ink: '#33291f', ink2: '#6e6253', ink3: '#aca397', line: '#e8dfcd', acc: '#8a5a3c', accInk: '#fffdf8', accSoft: '#f1e4d8', t1: '#f1e4d8', t1i: '#7a5137', t2: '#f4ebd6', t2i: '#86682a', t3: '#f3e1de', t3i: '#9a4a3e', t4: '#e3ebf2', t4i: '#3f5f7a', deco1: '#efe6d6', deco2: '#e6d9c2', deco3: '#d3bf9e' },
+    dark: { bg: '#17120f', paper: '#201a15', ink: '#edeae8', ink2: '#bab1ab', ink3: '#847871', line: '#372f2a', acc: '#d4b19b', accInk: '#17120f', accSoft: '#412d1f', t1: '#412d1f', t1i: '#e0c7b8', t2: '#39301d', t2i: '#e3d1ab', t3: '#39211d', t3i: '#dfb5af', t4: '#1e2d39', t4i: '#b5c8d9', deco1: '#262119', deco2: '#2c271d', deco3: '#383125' },
+  },
+  litF: {
+    type: { display: 'Old Standard TT', displayRu: null, body: 'Noto Serif', displayWeight: 700, displayStyle: 'italic' },
+    shape: { radius: '14px', buttonRadius: '10px', iconRadius: '50%', stroke: '1.5', cap: 'round' },
+    light: { bg: '#f4f6f2', paper: '#ffffff', ink: '#2c3330', ink2: '#5f6b66', ink3: '#a2aaa5', line: '#e1e7e1', acc: '#5f8573', accInk: '#ffffff', accSoft: '#e3eee8', t1: '#e3eee8', t1i: '#567667', t2: '#f3ead8', t2i: '#8a6a24', t3: '#f4e3e3', t3i: '#a0525a', t4: '#e5e8f3', t4i: '#5a5f97', deco1: '#e8efea', deco2: '#dbe6df', deco3: '#bfd0c5' },
+    dark: { bg: '#101613', paper: '#161f1b', ink: '#e8edeb', ink2: '#abbab3', ink3: '#71847b', line: '#2a3731', acc: '#acc4b8', accInk: '#101613', accSoft: '#283931', t1: '#283931', t1i: '#c3d5cc', t2: '#39311d', t2i: '#e3d1ab', t3: '#391d20', t3i: '#d9b5b9', t4: '#202236', t4i: '#b9bbd5', deco1: '#17221a', deco2: '#1b261f', deco3: '#232f27' },
+  },
+  techM: {
+    type: { display: 'JetBrains Mono', displayRu: null, body: 'IBM Plex Sans', displayWeight: 800, displayStyle: 'normal' },
+    shape: { radius: '4px', buttonRadius: '3px', iconRadius: '2px', stroke: '1.8', cap: 'square' },
+    light: { bg: '#f2f5f6', paper: '#ffffff', ink: '#1f2a33', ink2: '#586673', ink3: '#9da6ae', line: '#dfe5ea', acc: '#2f7d6b', accInk: '#ffffff', accSoft: '#dcefe9', t1: '#dcefe9', t1i: '#2c6e61', t2: '#f3ecd6', t2i: '#86692a', t3: '#f5e3df', t3i: '#a24f3f', t4: '#e2ebf5', t4i: '#3a5f8f', deco1: '#e6edef', deco2: '#d6e2e4', deco3: '#b9cbcf' },
+    dark: { bg: '#0f1715', paper: '#15201e', ink: '#e8edec', ink2: '#abbab7', ink3: '#718480', line: '#2a3734', acc: '#97d8c9', accInk: '#0f1715', accSoft: '#1f413a', t1: '#1f413a', t1i: '#b5e3d8', t2: '#39301d', t2i: '#e3d1ab', t3: '#39221d', t3i: '#e0b6ae', t4: '#1d2a39', t4i: '#afc4df', deco1: '#172023', deco2: '#1b2628', deco3: '#222f32' },
+  },
+  techF: {
+    type: { display: 'Fira Code', displayRu: null, body: 'Manrope', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '10px', buttonRadius: '6px', iconRadius: '6px', stroke: '1.8', cap: 'square' },
+    light: { bg: '#f6f4f9', paper: '#ffffff', ink: '#2a2638', ink2: '#635d78', ink3: '#a5a1b2', line: '#e6e2ef', acc: '#7b5cc4', accInk: '#ffffff', accSoft: '#ebe5f8', t1: '#ebe5f8', t1i: '#6c52ab', t2: '#f5edd6', t2i: '#8a6a1e', t3: '#f6e2e6', t3i: '#a64a62', t4: '#dff0ea', t4i: '#2f7d6b', deco1: '#ece8f4', deco2: '#e0d9ee', deco3: '#c7bce0' },
+    dark: { bg: '#110f17', paper: '#191520', ink: '#eae8ed', ink2: '#afabba', ink3: '#767184', line: '#2e2a37', acc: '#aa96d9', accInk: '#110f17', accSoft: '#2a1f41', t1: '#2a1f41', t1i: '#c2b4e4', t2: '#39311d', t2i: '#e3d2ab', t3: '#391d25', t3i: '#dcb1bd', t4: '#1d3933', t4i: '#ade0d5', deco1: '#1a1621', deco2: '#1d1926', deco3: '#241f2f' },
+  },
+  physM: {
+    type: { display: 'STIX Two Text', displayRu: null, body: 'Commissioner', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '6px', buttonRadius: '4px', iconRadius: '4px', stroke: '1.6', cap: 'round' },
+    light: { bg: '#f1f5f2', paper: '#ffffff', ink: '#23302b', ink2: '#5a6b64', ink3: '#9ea9a4', line: '#dfe6e2', acc: '#3d6b58', accInk: '#ffffff', accSoft: '#e0ece6', t1: '#e0ece6', t1i: '#386050', t2: '#f4ebd6', t2i: '#86682a', t3: '#f4e2dc', t3i: '#9e5038', t4: '#e2e9f4', t4i: '#3f5f94', deco1: '#eef3ef', deco2: '#9fb8aa', deco3: '#8aa598' },
+    dark: { bg: '#0f1714', paper: '#15201c', ink: '#e8edeb', ink2: '#abbab4', ink3: '#71847c', line: '#2a3732', acc: '#a4cbbb', accInk: '#0f1714', accSoft: '#233e33', t1: '#233e33', t1i: '#bedace', t2: '#39301d', t2i: '#e3d1ab', t3: '#39241d', t3i: '#e2b9ac', t4: '#1d2839', t4i: '#b0c1dd', deco1: '#161f18', deco2: '#2b3b32', deco3: '#32413a' },
+  },
+  physF: {
+    type: { display: 'Manrope', displayRu: null, body: 'Ubuntu', displayWeight: 800, displayStyle: 'normal' },
+    shape: { radius: '12px', buttonRadius: '8px', iconRadius: '50%', stroke: '1.7', cap: 'round' },
+    light: { bg: '#f3f5f9', paper: '#ffffff', ink: '#222b3a', ink2: '#5a6478', ink3: '#9fa5b2', line: '#e0e5ee', acc: '#3f62a8', accInk: '#ffffff', accSoft: '#e3e9f6', t1: '#e3e9f6', t1i: '#3a5894', t2: '#f4ebd6', t2i: '#86682a', t3: '#f4e2e2', t3i: '#a2484e', t4: '#e0efe8', t4i: '#3a7a5c', deco1: '#edf0f6', deco2: '#a9b7cc', deco3: '#8f9fb8' },
+    dark: { bg: '#0f1217', paper: '#151920', ink: '#e8eaed', ink2: '#abb0ba', ink3: '#717784', line: '#2a2e37', acc: '#97add8', accInk: '#0f1217', accSoft: '#1f2b41', t1: '#1f2b41', t1i: '#b5c4e3', t2: '#39301d', t2i: '#e3d1ab', t3: '#391d1f', t3i: '#dcb1b4', t4: '#1d392c', t4i: '#b3dbc8', deco1: '#151920', deco2: '#252c37', deco3: '#2b3340' },
+  },
+  bioM: {
+    type: { display: 'Fira Sans Condensed', displayRu: null, body: 'Fira Sans', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '10px', buttonRadius: '6px', iconRadius: '6px', stroke: '1.8', cap: 'round' },
+    light: { bg: '#f3f7f0', paper: '#ffffff', ink: '#26301f', ink2: '#5e6b55', ink3: '#a1aa9b', line: '#e0e8da', acc: '#5e8f3e', accInk: '#ffffff', accSoft: '#e5f0dc', t1: '#e5f0dc', t1i: '#547e38', t2: '#f5ecd4', t2i: '#8a6a1e', t3: '#f5e2e6', t3i: '#a64a62', t4: '#e2e9f5', t4i: '#3f62a8', deco1: '#e9f0e3', deco2: '#d6e6cb', deco3: '#b8d1a6' },
+    dark: { bg: '#12170f', paper: '#1a2015', ink: '#eaede8', ink2: '#b1baab', ink3: '#788471', line: '#2f372a', acc: '#b2d49b', accInk: '#12170f', accSoft: '#2d411f', t1: '#2d411f', t1i: '#c8e0b8', t2: '#39311d', t2i: '#e3d2ab', t3: '#391d25', t3i: '#dcb1bd', t4: '#1d2739', t4i: '#adbee0', deco1: '#1d2317', deco2: '#222a1c', deco3: '#2c3624' },
+  },
+  bioF: {
+    type: { display: 'Commissioner', displayRu: null, body: 'Ubuntu', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '18px', buttonRadius: '12px', iconRadius: '50%', stroke: '1.6', cap: 'round' },
+    light: { bg: '#f8f4f5', paper: '#ffffff', ink: '#33262b', ink2: '#6e5d63', ink3: '#aca1a5', line: '#eee2e6', acc: '#b0506e', accInk: '#ffffff', accSoft: '#f5e3e9', t1: '#f5e3e9', t1i: '#9a4862', t2: '#f4ebd6', t2i: '#86682a', t3: '#f5e4d8', t3i: '#a0522d', t4: '#e1ecf3', t4i: '#3a6a8a', deco1: '#f4eaee', deco2: '#ecd9e1', deco3: '#d9b6c4' },
+    dark: { bg: '#170f12', paper: '#201519', ink: '#ede8ea', ink2: '#baabb0', ink3: '#847177', line: '#372a2e', acc: '#d39dad', accInk: '#170f12', accSoft: '#411f2a', t1: '#411f2a', t1i: '#dfb9c5', t2: '#39301d', t2i: '#e3d1ab', t3: '#39261d', t3i: '#e3bdab', t4: '#1d2e39', t4i: '#b0cbde', deco1: '#21161a', deco2: '#26191f', deco3: '#312127' },
+  },
+  hydra: {
+    type: { display: 'Noto Serif', displayRu: null, body: 'Noto Sans', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '20px', buttonRadius: '14px', iconRadius: '13px', stroke: '1.8', cap: 'round' },
+    light: { bg: '#f0f6f5', paper: '#ffffff', ink: '#213432', ink2: '#56706c', ink3: '#9bacaa', line: '#dcebe8', acc: '#2f8a83', accInk: '#ffffff', accSoft: '#dcefed', t1: '#dcefed', t1i: '#2c7b74', t2: '#f4ebd6', t2i: '#86682a', t3: '#f5e3df', t3i: '#a24f3f', t4: '#e8e3f3', t4i: '#5f52a6', deco1: '#e4f0ee', deco2: '#d0e6e2', deco3: '#a9cfc8' },
+    dark: { bg: '#0f1717', paper: '#15201f', ink: '#e8eded', ink2: '#abbab9', ink3: '#718483', line: '#2a3736', acc: '#94dbd5', accInk: '#0f1717', accSoft: '#1f413f', t1: '#1f413f', t1i: '#b3e5e1', t2: '#39301d', t2i: '#e3d1ab', t3: '#39221d', t3i: '#e0b6ae', t4: '#221d39', t4i: '#bab4da', deco1: '#172321', deco2: '#1b2927', deco3: '#243633' },
+  },
+  prism: {
+    type: { display: 'Inter', displayRu: null, body: 'Inter', displayWeight: 700, displayStyle: 'normal' },
+    shape: { radius: '6px', buttonRadius: '4px', iconRadius: '3px', stroke: '1.6', cap: 'square' },
+    light: { bg: '#f7f8fa', paper: '#ffffff', ink: '#1b1f26', ink2: '#545c69', ink3: '#9299a5', line: '#e4e7ec', acc: '#3b5bb5', accInk: '#ffffff', accSoft: '#e5eaf7', t1: '#e5eaf7', t1i: '#33509f', t2: '#e7ecef', t2i: '#46566a', t3: '#e3efec', t3i: '#2e6f63', t4: '#f2ece0', t4i: '#7d6430', deco1: '#eef0f3', deco2: '#e9ecf0', deco3: '#f1f2f5' },
+    dark: { bg: '#0f1217', paper: '#171b22', ink: '#e7eaef', ink2: '#a5adb9', ink3: '#6f7785', line: '#282e38', acc: '#8ea7f0', accInk: '#0f1217', accSoft: '#1f2a47', t1: '#1f2a47', t1i: '#a9bcf3', t2: '#232a33', t2i: '#b8c3d1', t3: '#19302b', t3i: '#94d1c3', t4: '#332c1c', t4i: '#dcc690', deco1: '#13161c', deco2: '#151a20', deco3: '#12151a' },
+  },
+} as const satisfies Readonly<Record<string, CharacterTokens>>;
+
+export type CharacterId = keyof typeof CHARACTERS;
+export const CHARACTER_IDS = Object.keys(CHARACTERS) as CharacterId[];

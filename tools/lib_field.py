@@ -1,4 +1,4 @@
-"""field@1 — the Python twin of the checks of engine/src/47_lib_field.js (docs/library/field.md): check_spec(spec), exprs(spec) and
+"""field@1 — the Python twin of the checks of src/engines/field/field.js (docs/library/field.md): check_spec(spec), exprs(spec) and
 keys(spec) give the same problems (code, path, message, level) and the same lists as the JS checkSpec / exprs / keys
 (tests/lib_field.js and tests/enginelib.js compare them on tests/fixtures/enginelib/field.json). It does not simulate."""
 import re

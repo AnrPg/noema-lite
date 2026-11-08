@@ -1,4 +1,4 @@
-"""des@1 — the Python twin of the checks of engine/src/47_lib_des.js (docs/library/des.md): check_spec(spec), exprs(spec) and keys(spec)
+"""des@1 — the Python twin of the checks of src/engines/des/des.js (docs/library/des.md): check_spec(spec), exprs(spec) and keys(spec)
 give the same problems (code, path, message, level) and the same lists as the JS checkSpec / exprs / keys (tests/lib_des.js and
 tests/enginelib.js compare them on tests/fixtures/enginelib/des.json). It does not simulate."""
 import math

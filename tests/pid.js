@@ -1,4 +1,4 @@
-/* The control-loop engine pid@1 (engine/src/40_engine_pid.js, docs/INTERACTIVE_ENGINES.md §3) against analytic results:
+/* The control-loop engine pid@1 (src/engines/pid/pid.js, docs/INTERACTIVE_ENGINES.md §3) against analytic results:
    1. metrics on known curves (first order, second order: rise, overshoot, peak time, settling 2 %);
    2. plants in open loop: first order (+ dead time), second order overshoot vs ζ, integrator, DC motor, thermal, tank;
    3. closed loop: P control ess = 1/(1 + K), PI removes it, IAE / ISE analytic, an integrator follows a ramp with ess = slope/(K·Kp),
@@ -8,8 +8,9 @@
    Usage: node tests/pid.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '40_engine_pid.js'));
-const P = globalThis.NoemaPID;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaPID = ENGINES.mod('pid@1');
+const P = NoemaPID;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const rel = (a, b) => Math.abs(a - b) / Math.abs(b);

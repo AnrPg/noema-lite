@@ -265,6 +265,7 @@ Each chapter has "diagrams": 0–2 objects — only a diagram with real teaching
     const pack = { format: 'noema-pack', v: 3, subject, sources, chapters: run.chapters, media: run.media, builtAt: new Date().toISOString(), generatedBy: 'gemini', curriculum: { id: c.id, node: nodeId } };
     if (Object.keys(run.tr).length) { pack.v = 2; pack.translations = Object.fromEntries(Object.entries(run.tr).map(([loc, chs]) => [loc, { chapters: chs }])); }   // the app keeps each in its own file (loader storeTranslations)
     /* i18n-ignore-end */
+    await window.NoemaCore.engines.load(window.NoemaPackCheck.enginesNamed(pack));   // the engines its activities name check their models (none for a chapter of text)
     const r = window.NoemaPackCheck.checkPack(pack, packId, { strict: true });
     if (r.errors.length) throw new Error(rt('roadmap.gen.invalid', { list: r.errors.slice(0, 3).join('; ') }));   // the errors: English diagnostics (engine/packcheck.js)
     pack.counts = { chapters: r.counts.chapters, sections: r.counts.sections, exercises: r.counts.exercises, visual: r.counts.visual, pictures: r.counts.media, flashcards: run.chapters.reduce((a, ch) => a + ch.flashcards.length, 0) };

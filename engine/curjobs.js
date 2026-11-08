@@ -443,6 +443,7 @@
     if (SF && await SF.isZip(file)) { const b = await SF.readBundle(file); pack = b.pack; files = await SF.bundleFiles(b, pack); }   // its source files and its H5P activities' files
     else { try { pack = JSON.parse(await file.text()); } catch (e) { throw new Error(rt('roadmap.jobs.notPackage')); } }
     if (pack?.format !== 'noema-pack' && pack?.format !== 'noema-pack/v1' && !Array.isArray(pack?.chapters)) throw new Error(rt('roadmap.jobs.notPack'));
+    if (root.NoemaPackCheck && root.NoemaCore?.engines) await root.NoemaCore.engines.load(root.NoemaPackCheck.enginesNamed(pack));   // the engines its activities name check their models
     const res = root.NoemaPackCheck?.checkPack(pack); if (res?.errors?.length) throw new Error(rt('roadmap.jobs.packErrors', { n: res.errors.length, list: res.errors.slice(0, 3).join('; ') }));   // the errors themselves: English diagnostics (engine/packcheck.js)
     const c = C().get(acc, cid); if (!c?.nodes[nid]) throw new Error(rt('roadmap.stepNotFound'));
     C().Gen.start(acc); await C().Gen.finish(c, nid, pack, { files, via: 'claude-chat' });

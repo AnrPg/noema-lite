@@ -1,4 +1,4 @@
-"""graph@1 — the Python twin of engine/src/47_lib_graph.js (docs/library/graph.md): check_spec(spec), exprs(spec), keys(spec) give the
+"""graph@1 — the Python twin of src/engines/graph/graph.js (docs/library/graph.md): check_spec(spec), exprs(spec), keys(spec) give the
 same problems (code, path, msg, level) and lists as the JS checkSpec / exprs / keys (tests/enginelib.js compares them on
 tests/fixtures/enginelib/graph.json). It does not run the algorithms."""
 import enginelib as L

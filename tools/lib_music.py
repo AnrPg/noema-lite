@@ -1,4 +1,4 @@
-"""music@1 — the Python twin of engine/src/48_lib_music.js (docs/library/music.md): the same check_spec (codes, paths, messages),
+"""music@1 — the Python twin of src/engines/music/music.js (docs/library/music.md): the same check_spec (codes, paths, messages),
 exprs and keys. It does not compute pitches or sounds (the engine does, in the app). The tables are the engine's own, as JSON."""
 import json
 import re

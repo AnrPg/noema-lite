@@ -83,15 +83,11 @@ const THEMES = {
 };
 const has = f => fs.existsSync(path.join(srcDir, f));
 const pcPath = [path.join(srcDir, 'packcheck.js'), path.join(srcDir, '..', 'packcheck.js')].find(f => fs.existsSync(f));
-const ctPath = pcPath && path.join(path.dirname(pcPath), 'contracts.js');   // the data contracts packcheck.js checks shapes with (NoemaCore.contracts)
-const SIMOK = has('35_activity_sim.js') && has('35_simexpr.js') && !!pcPath && fs.existsSync(ctPath);
-const KERNEL = has('46_lib_simkit.js');   // the simulation kernel (NoemaSimKit): before the plugins and the library, which use it
-const CIRCUIT = has('36_engine_circuit.js') && has('36_engine_circuit_sim.js');   // the circuit engine circuit-mna@1 (P3)
-const P6 = ['39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js', '43_engines_p6.js'].filter(has);   // thermal@1, pid@1, rf@1, twin@1 (P6)
-// the engine library (docs/INTERACTIVE_LIBRARY.md): the core, every general engine and the catalogue that registers them, after the P6 engines
-const LIB = has('46_lib_core.js') ? ['46_lib_core.js', ...fs.readdirSync(srcDir).filter(f => /^46_lib_[a-z_]+\.js$/.test(f) && f !== '46_lib_core.js').sort(), ...fs.readdirSync(srcDir).filter(f => /^4[78]_lib_[a-z_]+\.js$/.test(f)).sort(), '49_lib_catalog.js'].filter(has) : [];
-// their vendored code (map@1: exact geodesics, Natural Earth land), loaded before them: the skill's activity_host/vendor/, or the repository's engine/vendor/<name@version>/
-const LIBV = !LIB.length ? [] : ['noema-geodesic.js', 'noema-land-110m.js'].map(b => [path.join(srcDir, 'vendor', b), ...(fs.existsSync(path.join(srcDir, '..', 'vendor')) ? fs.readdirSync(path.join(srcDir, '..', 'vendor')).map(d => path.join(srcDir, '..', 'vendor', d, b)) : [])].find(f => fs.existsSync(f))).filter(Boolean);
+// NoemaCore of an activity host (src/composition/harness.ts): the data contracts packcheck.js checks shapes with and the engine
+// library (the expression language, every engine of sim-spec@1, the catalogue) — the skill's activity_host/noema-core.js, or the
+// repository's build/harness.js (npm run build)
+const corePath = [path.join(srcDir, 'noema-core.js'), path.join(srcDir, '..', '..', 'build', 'harness.js')].find(f => fs.existsSync(f));
+const SIMOK = has('35_activity_sim.js') && !!corePath && !!pcPath;
 const WASMOK = SIMOK && has('44_activity_wasm.js');   // wasm-module@1 and the engine wasm@1 (P6)
 // py-module@1 (P4): the runner and its view, and the pinned Python files to serve (never fetched by the harness itself)
 const PYSITE = [process.env.NOEMA_PYODIDE_SITE, path.join(HERE, '..', '..', '..', 'dist', 'site')].filter(Boolean).map(d => path.resolve(d)).find(d => fs.existsSync(path.join(d, 'vendor', 'pyodide', 'manifest.json')));
@@ -119,17 +115,21 @@ const HOSTWORDS = { 'engine.act.sim.reset': 'Reset the values', 'engine.act.sim.
 const HOST = `<!doctype html><meta charset="utf-8"><style>#box iframe{display:block;width:100%;height:100%;border:0}
 ${has('32_activities.css') ? rd('32_activities.css') : ''}
 body{margin:0;font-family:var(--font,system-ui);background:var(--bg);color:var(--ink)}.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit}</style><body><div id="box" class="act-box" style="position:relative;box-sizing:border-box;width:100%;height:360px"></div><script>
-var RT = {}, EN = {}; var ACT = { ITEMS: {}, PARTS: ${inl(JSON.stringify(PARTSLIB))}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || null; }, engines: function () { return Object.keys(EN); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); } };
+var RT = {}, EN = {}; var ACT = { ITEMS: {}, PARTS: ${inl(JSON.stringify(PARTSLIB))}, registerRuntime: function (d) { RT[d.id] = d; }, runtime: function (id) { return RT[id] || null; }, registerEngine: function (d) { EN[d.id] = d; }, engine: function (id) { return EN[id] || (window.NoemaCore && NoemaCore.engines.engine(id)) || null; }, engines: function () { return Object.keys(EN).concat(window.NoemaCore ? NoemaCore.engines.ids() : []); }, enabled: function (id) { return !!RT[id] && (!RT[id].available || RT[id].available()); } };
 function nf(n) { return String(n); } function fmtBytes(n) { return n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B'; } function tip(t) { return document.createTextNode(''); }
 var WORDS = ${JSON.stringify(HOSTWORDS)};
 function tE(k, v) { return String(WORDS[k] || k).replace(/\\{(\\w+)\\}/g, function (_, n) { return v && v[n] != null ? v[n] : ''; }); }
 function h(tag, attrs, ...kids) { const el = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (v == null || v === false) continue; if (k === 'class') el.className = v; else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v); else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v); } for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid))); return el; }
 ${ACTP}
 window.ACTP = ACTP;
-</script><script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${rs('35_simexpr.js')}</script>${KERNEL ? `<script>${rs('46_lib_simkit.js')}</script>` : ''}<script>${inl(fs.readFileSync(ctPath, 'utf8'))}</script><script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${CIRCUIT ? `<script>${rs('36_engine_circuit.js')}</script><script>${rs('36_engine_circuit_sim.js')}</script>` : ''}${LIBV.map(f => `<script>${inl(fs.readFileSync(f, 'utf8'))}</script>`).join('')}${[...P6, ...LIB.filter(f => f !== '46_lib_simkit.js')].map(f => `<script>${rs(f)}</script>`).join('')}${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
+</script>${corePath ? `<script>${inl(fs.readFileSync(corePath, 'utf8'))}</script>` : ''}<script>${rs('33_activity_guard.js')}</script><script>${rs('34_activity_html.js')}</script>${SIMOK ? `<script>${inl(fs.readFileSync(pcPath, 'utf8'))}</script><script>${rs('35_activity_sim.js')}</script>${WASMOK ? `<script>${rs('44_activity_wasm.js')}</script>` : ''}${PYOK ? `<script>${rs('37_activity_py.js')}</script><script>${rs('37_activity_py_ui.js')}</script>` : ''}` : ''}${H5POK ? `<script>${inl(fs.readFileSync(playerPath, 'utf8'))}</script><script>${rs('38_activity_h5p.js')}</script>` : ''}<script>
 window.setTheme = function (t) { var r = document.documentElement; for (var k in t.tokens) r.style.setProperty('--' + k, t.tokens[k]); r.style.colorScheme = t.scheme; };
 window.LOG = []; window.H = null;
+/* every engine of the library loaded first (once: the app loads only those an activity needs) */
 window.run = function (act, init, modules) {
+  return (window.NoemaCore ? NoemaCore.engines.load(NoemaCore.engines.ids()) : Promise.resolve()).then(function () { mount(act, init, modules); });
+};
+function mount(act, init, modules) {
   if (modules) ACT.ITEMS = modules;
   var box = document.getElementById('box'); box.innerHTML = ''; window.LOG = [];
   if (window.H) try { window.H.close(); } catch (e) {}
@@ -173,7 +173,7 @@ window.run = function (act, init, modules) {
   const start = async (p, a, o = {}) => {
     const init = { activityId: a.id, exerciseId: o.exerciseId || null, attemptId: 'test', seed: o.seed ?? 12345, task: o.task || {}, locale: o.locale, strings: a.strings[o.locale] || {},
       theme: THEMES[o.theme || 'light'], state: o.state || null, stateVersion: a.stateVersion || 1, capabilities: a.capabilities || [], limits: { msgBytes: 65536, stateBytes: 262144, eventsPerSec: 50 } };
-    await p.evaluate(([act, init, th, mods]) => { window.setTheme(th); window.run(act, init, mods); }, [a, init, THEMES[o.theme || 'light'], MODULES]);
+    await p.evaluate(([act, init, th, mods]) => { window.setTheme(th); return window.run(act, init, mods); }, [a, init, THEMES[o.theme || 'light'], MODULES]);
     const t0 = Date.now(); while (Date.now() - t0 < 8000) { const L = await p.evaluate(() => window.LOG); if (L.some(m => m.type === 'ready' || m.type === 'fail')) break; await p.waitForTimeout(100); }
     if (a.runtime === 'py-module@1') await pyValues(p);   // Python loads (first use: the whole runtime) and computes the first outputs
     await p.waitForTimeout(o.settle ?? 400);
@@ -264,7 +264,7 @@ window.run = function (act, init, modules) {
         let res = [...log].reverse().find(m => m.type === 'result');
         const vals = SIM ? await p.evaluate(() => window.H && window.H.values ? window.H.values() : null) : null;
         if (SIM && ex && ex.grade && ex.grade.mode === 'checks') {   // the app's checks grader, on the values the runtime exposes
-          res = await p.evaluate(([g, v]) => { let tot = 0, got = 0; for (const c of g.checks || []) { const w = c.weight > 0 ? c.weight : 1; let ok = false; try { const r = NoemaExpr.evaluate(c.expr, v); ok = typeof r === 'boolean' ? r : (r !== 0 && r === r); } catch (e) { } tot += w; if (ok) got += w; } const share = tot ? got / tot : 0; return { payload: { passed: share >= (g.pass ?? 1) - 1e-9, score: share } }; }, [ex.grade, vals || {}]);
+          res = await p.evaluate(([g, v]) => { let tot = 0, got = 0; for (const c of g.checks || []) { const w = c.weight > 0 ? c.weight : 1; let ok = false; try { const r = NoemaCore.engines.expr.evaluate(c.expr, v); ok = typeof r === 'boolean' ? r : (r !== 0 && r === r); } catch (e) { } tot += w; if (ok) got += w; } const share = tot ? got / tot : 0; return { payload: { passed: share >= (g.pass ?? 1) - 1e-9, score: share } }; }, [ex.grade, vals || {}]);
         }
         const why = [];
         if ('passed' in (c.expect || {}) && (res ? res.payload.passed : null) !== c.expect.passed) why.push(`passed: expected ${c.expect.passed}, got ${res ? res.payload.passed : 'no result'}`);

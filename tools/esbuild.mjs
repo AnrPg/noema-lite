@@ -10,6 +10,11 @@
      worker.js     src/composition/worker.ts and every <name>.worker.ts — one self-contained IIFE per Worker.
      sw.js         src/composition/sw.ts — the ONE service worker (app shell + Python files). tools/build.py writes the site's
                    /sw.js from it, with the precache list and the build hash in front.
+     harness.js    src/composition/harness.ts — window.NoemaCore = { contracts, engines } for a page that is not the app: the
+                   skill's activity host (activity_host/noema-core.js) and the test pages that host one activity. Not in the site.
+     engines-node.cjs  src/engines/node.ts — the engine library with every engine in hand, CommonJS, for the node suites
+                   (tests/engines.cjs). Not in the site.
+     engine/tokens.css  the design tokens (src/ui/tokens, tools/tokens.mjs), written next to engine.css on every build.
      (the Claude connector, src/composition/connector.ts, is bundled by tools/connector_bundle.mjs: it needs the data
       tools/build.py collects, so build.py runs it → dist/functions/mcp.mjs)
      *.map         source maps (linked); meta.json (esbuild's metafile); manifest.json (what was built, sizes, the build hash).
@@ -24,6 +29,14 @@
    text (<script type="text/plain" id="noema-worker:<name>">).
    (The connector stays one ESM file: Netlify treats every top-level file of the functions directory as a function.)
 
+   The engine library (src/engines) is in build/app.js: every engine is a plugin whose code esbuild wraps in a lazy initialiser
+   (it runs the first time NoemaCore.engines.load() asks for it) and whose Worker bundle is a string (noemaWorkers below), so
+   the page parses it but runs none of it at start (docs/ARCHITECTURE.md "Engines in the app bundle").
+
+   Minification is whitespace and names only, never syntax (minifySyntax): it would rewrite arithmetic (constant folding,
+   reordered operands), and the engines must compute every double exactly as their source writes it — their Python twins
+   (tools/lib_*.py, tools/{circuit,thermal,pid,rf,twin}.py) agree with them bit for bit.
+
    Every bundle has a size budget (KB, minified) and the build FAILS when one is exceeded: raise a budget only on purpose.
 
    Usage: node tools/esbuild.mjs [--quiet]     (npm run build; npm run dev rebuilds with watch()) */
@@ -33,18 +46,23 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync
 import { gzipSync } from 'node:zlib';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeTokensCss } from './tokens.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const OUT = path.join(ROOT, 'build');
 const BROWSERS = ['chrome111', 'edge111', 'firefox114', 'safari16.4'];   // Baseline 2023: the oldest browsers the site supports
 
-/** @typedef {{ name: string, in: string, kind: 'page' | 'worker' | 'sw' | 'node', out: string, budgetKB: number }} Entry */
+/** kind: page = a script of the site and the one-file bundle; worker = a Worker of the app; sw = the service worker;
+    harness = a browser script for pages other than the app (not in the site); node = a bundle for Node (format esm | cjs)
+    @typedef {{ name: string, in: string, kind: 'page' | 'worker' | 'sw' | 'harness' | 'node', out: string, budgetKB: number, format?: 'esm' | 'cjs' }} Entry */
 /** @type {Entry[]} the bundles (the one place that names them) */
 export const ENTRIES = [
-  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 2048 },
+  { name: 'app', in: 'src/composition/app.ts', kind: 'page', out: 'app.js', budgetKB: 5248 },   // 1.4 MB the core and the contracts + 3.6 MB the engine library (1.8 code, 1.8 Worker text)
   { name: 'pwa', in: 'src/composition/pwa.ts', kind: 'page', out: 'pwa.js', budgetKB: 16 },
   { name: 'worker', in: 'src/composition/worker.ts', kind: 'worker', out: 'worker.js', budgetKB: 600 },
   { name: 'sw', in: 'src/composition/sw.ts', kind: 'sw', out: 'sw.js', budgetKB: 24 },
+  { name: 'harness', in: 'src/composition/harness.ts', kind: 'harness', out: 'harness.js', budgetKB: 5248 },   // the contracts + the engine library
+  { name: 'engines-node', in: 'src/engines/node.ts', kind: 'node', format: 'cjs', out: 'engines-node.cjs', budgetKB: 4096 },
 ];
 const WORKER_BUDGET_KB = 600;   // each src/**/<name>.worker.ts
 
@@ -72,14 +90,86 @@ export function entries() {
   return { present: all.filter(e => existsSync(path.join(ROOT, e.in))), skipped: all.filter(e => !existsSync(path.join(ROOT, e.in))) };
 }
 
-/** esbuild options of one entry */
-function options(e) {
-  const common = {
-    entryPoints: [path.join(ROOT, e.in)], outfile: path.join(OUT, e.out), bundle: true, minify: true, sourcemap: 'linked',
-    metafile: true, legalComments: 'eof', charset: 'utf8', logLevel: 'silent', tsconfig: path.join(ROOT, 'tsconfig.json'),
+/** whitespace and names only, never syntax (the engines' arithmetic stays exactly as written: see the header) */
+const MINIFY = { minifyWhitespace: true, minifyIdentifiers: true, minifySyntax: false };
+const ENGINES = path.join(ROOT, 'src', 'engines');
+/** the modules of src/engines built once as their own piece and shared by the Worker bundles that import them */
+export const SHARED_PIECES = ['kernel/simexpr.js', 'kernel/simkit.js', 'kernel/core.js', 'kernel/space.js', 'logic/logic.js', 'med/med.js'];
+
+/** The esbuild plugin of the engines' Worker bundles (src/engines/plugins.ts, node.ts):
+    `import src from 'noema-worker:./prob/prob.js#simEngine'` is the Worker bundle of that engine as TEXT — the module and what
+    it imports, as one IIFE script that sets self.noemaEngine to the named export. The kernels several engines share
+    (SHARED_PIECES) are built once each as a piece that sets self.__noemaShared[<path>]: a Worker's text is the pieces it needs,
+    each after its own dependencies, then its own part, and a bundle holds each piece's text once. One instance per build()
+    keeps the pieces for every entry of that build (the app, the harness, the node bundle and the connector). */
+export function noemaWorkers() {
+  const keyOf = abs => { const r = path.relative(ENGINES, abs).split(path.sep).join('/'); return SHARED_PIECES.includes(r) ? r : null; };
+  const pieces = new Map();   // key → Promise<{ text, deps }>
+  /** an import of a shared module (other than the piece being built) reads it from self.__noemaShared */
+  const shared = (own, used) => ({
+    name: 'noema-shared',
+    setup(b) {
+      b.onResolve({ filter: /^\.{1,2}\// }, a => {
+        const k = keyOf(path.resolve(a.resolveDir, a.path));
+        if (!k || k === own) return undefined;
+        used.add(k);
+        return { path: k, namespace: 'noema-shared' };
+      });
+      b.onLoad({ filter: /.*/, namespace: 'noema-shared' }, a => ({ contents: `export default self.__noemaShared[${JSON.stringify(a.path)}];`, loader: 'js' }));
+    },
+  });
+  async function text(contents, own) {
+    const used = new Set();
+    const r = await esbuild.build({ ...MINIFY, bundle: true, format: 'iife', write: false, platform: 'browser', target: BROWSERS, legalComments: 'none', logLevel: 'silent',
+      stdin: { contents, resolveDir: ENGINES, sourcefile: own ? 'shared-piece:' + own : 'worker-part', loader: 'js' }, plugins: [shared(own, used)] });
+    return { text: r.outputFiles[0].text, deps: [...used] };
+  }
+  const piece = k => {
+    if (!pieces.has(k)) pieces.set(k, text(`import M from ${JSON.stringify('./' + k)};\n(self.__noemaShared = self.__noemaShared || {})[${JSON.stringify(k)}] = M;\n`, k));
+    return pieces.get(k);
   };
-  if (e.kind === 'node') return { ...common, platform: 'node', format: 'esm', target: 'node22', packages: 'bundle',
-    banner: { js: "import { createRequire as __noemaRequire } from 'node:module'; const require = __noemaRequire(import.meta.url);" } };
+  async function order(deps, out = [], seen = new Set()) {
+    for (const k of deps) {
+      if (seen.has(k)) continue;
+      seen.add(k);
+      await order((await piece(k)).deps, out, seen);
+      out.push(k);
+    }
+    return out;
+  }
+  return {
+    name: 'noema-workers',
+    setup(b) {
+      b.onResolve({ filter: /^noema-worker:/ }, a => {
+        const [mod, exp] = a.path.slice('noema-worker:'.length).split('#');
+        if (!mod || !exp || !/^[A-Za-z_$][\w$]*$/.test(exp)) return { errors: [{ text: `noema-worker: "${a.path}" must be <module>#<export>` }] };
+        return { path: path.resolve(a.resolveDir, mod) + '#' + exp, namespace: 'noema-worker' };
+      });
+      b.onLoad({ filter: /.*/, namespace: 'noema-worker' }, async a => {
+        const [abs, exp] = a.path.split('#'), rel = './' + path.relative(ENGINES, abs).split(path.sep).join('/');
+        const part = await text(`import M from ${JSON.stringify(rel)};\nself.noemaEngine = M[${JSON.stringify(exp)}];\n`, null);
+        const ks = await order(part.deps), names = ks.map((_, i) => 's' + i);
+        const contents = ks.map((k, i) => `import ${names[i]} from ${JSON.stringify('noema-shared-text:' + k)};\n`).join('')
+          + `export default ${[...names, JSON.stringify(part.text)].join(' + ')};\n`;
+        return { contents, loader: 'js', resolveDir: ENGINES, watchFiles: [abs] };
+      });
+      b.onResolve({ filter: /^noema-shared-text:/ }, a => ({ path: a.path.slice('noema-shared-text:'.length), namespace: 'noema-shared-text' }));
+      b.onLoad({ filter: /.*/, namespace: 'noema-shared-text' }, async a => ({ contents: `export default ${JSON.stringify((await piece(a.path)).text)};\n`, loader: 'js' }));
+    },
+  };
+}
+
+/** esbuild options of one entry */
+function options(e, workers) {
+  const common = {
+    entryPoints: [path.join(ROOT, e.in)], outfile: path.join(OUT, e.out), bundle: true, ...MINIFY, sourcemap: 'linked',
+    metafile: true, legalComments: 'eof', charset: 'utf8', logLevel: 'silent', tsconfig: path.join(ROOT, 'tsconfig.json'), plugins: [workers],
+  };
+  if (e.kind === 'node') {
+    const format = e.format ?? 'esm';
+    return { ...common, platform: 'node', format, target: 'node22', packages: 'bundle',
+      ...(format === 'esm' ? { banner: { js: "import { createRequire as __noemaRequire } from 'node:module'; const require = __noemaRequire(import.meta.url);" } } : {}) };
+  }
   return { ...common, platform: 'browser', format: 'iife', target: BROWSERS };
 }
 
@@ -91,7 +181,10 @@ export async function build({ quiet = false } = {}) {
   rmSync(OUT, { recursive: true, force: true }); mkdirSync(OUT, { recursive: true });
   const meta = { inputs: {}, outputs: {} }, manifest = { format: 'noema.build-manifest/v1', hash: '', entries: {}, skipped: skipped.map(e => e.in) };
   const over = [], h = createHash('sha256');
-  const results = await Promise.all(present.map(e => esbuild.build(options(e)).then(r => ({ e, r }), err => ({ e, err }))));
+  const workers = noemaWorkers();
+  const tokens = writeTokensCss();   // engine/tokens.css (the page links it beside engine.css)
+  const results = await Promise.all(present.map(e => esbuild.build(options(e, workers)).then(r => ({ e, r }), err => ({ e, err }))));
+  await tokens;
   const failed = results.filter(x => x.err);
   if (failed.length) throw new Error(failed.map(x => `${x.e.in}:\n${(x.err.errors || []).map(m => '  ' + (m.location ? `${m.location.file}:${m.location.line}: ` : '') + m.text).join('\n') || x.err.message}`).join('\n'));
   for (const { e, r } of results) {

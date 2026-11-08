@@ -1,4 +1,4 @@
-"""agents@1 — the Python twin of the checks of engine/src/47_lib_agents.js (docs/library/agents.md): check_spec(spec), exprs(spec)
+"""agents@1 — the Python twin of the checks of src/engines/agents/agents.js (docs/library/agents.md): check_spec(spec), exprs(spec)
 and keys(spec) give the same problems (code, path, message, level) and the same lists as the JS checkSpec / exprs / keys
 (tests/lib_agents.js and tests/enginelib.js compare them on tests/fixtures/enginelib/agents.json). It does not simulate."""
 import enginelib as L

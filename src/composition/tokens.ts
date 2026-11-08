@@ -13,6 +13,7 @@ import type { Remote } from '../ports/remote.ts';
 import type { Storage } from '../ports/storage.ts';
 import type { Telemetry } from '../ports/telemetry.ts';
 import type { MutableJobRegistry } from '../adapters/local/jobs.ts';
+import type { EngineLibrary } from '../engines/register.ts';
 import { token } from './container.ts';
 
 /** The public settings of this deployment (config.js → window.NOEMA_CONFIG), as far as the core reads them. */
@@ -41,3 +42,4 @@ export const JOBS = token<MutableJobRegistry>('core.jobs', 'the Compute jobs by 
 export const COMPUTE = token<Compute>('core.compute', 'jobs off the main thread (Compute port)');
 export const AI = token<AiFactory>('core.ai', 'makes the AI of a provider for a key (AI port)');
 export const CLOUD = token<Cloud | null>('core.cloud', 'Auth + Remote of the Supabase project, or null');
+export const ENGINES = token<EngineLibrary>('engines.library', 'the engine library of sim-spec@1 (src/engines): the expression language, the catalogue, every engine as a lazy plugin');

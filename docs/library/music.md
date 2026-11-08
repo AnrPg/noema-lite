@@ -1,4 +1,4 @@
-# `music@1` — music theory and acoustics (`engine/src/48_lib_music.js`, `NoemaLibMusic`)
+# `music@1` — music theory and acoustics (`src/engines/music/music.js`, `NoemaLibMusic`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for pitch, tuning, intervals, scales, chords, pitch-class sets,
 voice leading, rhythm, timbre and roughness, with **sounds to play**. Pitches are **spelled** (on the line of fifths, Temperley

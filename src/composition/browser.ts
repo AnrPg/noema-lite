@@ -24,20 +24,26 @@ import { claudeAI } from '../adapters/claude/index.ts';
 import { geminiAI } from '../adapters/gemini/index.ts';
 import { createSupabase } from '../adapters/supabase/index.ts';
 import * as contracts from '../contracts/index.ts';
+import { createAppEngines } from '../engines/register.ts';
 import { NoemaError } from '../kernel/errors.ts';
 import type { AiFactory } from '../ports/ai.ts';
 import { buildBridge, type BridgeExtension, type NoemaCoreBridge } from './bridge.ts';
 import { Container, type Registration } from './container.ts';
 import { buildJobRegistry } from './jobs.ts';
-import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
+import { AI, CLOCK, CLOUD, COMPUTE, CONFIG, ENGINES, ERRORS, I18N, JOBS, NOTIFIER, STORAGE, TELEMETRY, type CoreConfig } from './tokens.ts';
 
 /** Helpers append their registrations here (each registers its own tokens; a token already taken is an error). */
-export const APP_REGISTRATIONS: readonly Registration[] = [];
+export const APP_REGISTRATIONS: readonly Registration[] = [
+  // the engine library (src/engines): its plugins' manifests at once, each engine's code and Worker bundle when first loaded
+  c => c.register(ENGINES, () => createAppEngines()),
+];
 /** Helpers append the names they add to window.NoemaCore here (a core name is refused). */
 export const BRIDGE_EXTENSIONS: readonly BridgeExtension[] = [
   // the compiled data contracts (src/contracts): the shape checks of engine/packcheck.js and every other reader. Node,
   // the connector and the skill get the same module as engine/contracts.js (tools/contracts.mjs builds both from it).
   { name: 'contracts', build: () => contracts },
+  // the engine library: the activity core (engine/src/32_activities.js), packcheck.js, the activity author and #/engines
+  { name: 'engines', build: r => r.get(ENGINES) },
 ];
 
 /** The id of the inline copy of build/worker.js in the one-file bundle (tools/build.py writes it). */

@@ -1,5 +1,5 @@
 """The link checks of the radio engine rf@1 in Python (docs/INTERACTIVE_ENGINES.md §4): the twin of check() and checkSpec() in
-engine/src/41_engine_rf.js — the same codes, paths and messages (tests/rf.js runs both on the same specs). It does not simulate.
+src/engines/rf/rf.js — the same codes, paths and messages (tests/rf.js runs both on the same specs). It does not simulate.
 
   num(v)            → a float (a number, or a text with an SI prefix: "868M", "125k"), else nan
   check(link)       → [{code, path, msg, level: 'error' | 'warning'}]

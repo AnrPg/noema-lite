@@ -90,16 +90,16 @@ the learner checks the diagnosis on the bench and can take **another device**.
 - Each measurement runs in the engine's Worker, in order (the latest run of the outputs wins; measurements are first in, first
   out); the noise is seeded by the exercise's seed, so the same device always reads the same numbers.
 
-## 3. The engine — `window.NoemaCircuit`
+## 3. The engine — `src/engines/circuit/`
 
-`engine/src/36_engine_circuit.js` → `window.NoemaCircuit` (also `globalThis` in node); `engine/src/36_engine_circuit_sim.js`
-registers it with `ACT.registerEngine` (`bench: true`, a `prepare` that evaluates the expressions on the main thread, and a
-`workerSource` made of the engine's own source and the adapter). Pure JS, deterministic, no DOM, no learner text: results are
+`src/engines/circuit/circuit.js` is the engine (an ES module, its default export below); `src/engines/circuit/sim.js` adds the
+sim-spec engine `circuit-mna@1` (`bench: true`, a `prepare` that evaluates the expressions on the main thread), a plugin of the engine
+library (`NoemaCore.engines.engine('circuit-mna@1')`, whose `workerSource` is its Worker bundle (the text a Worker runs), built by esbuild from the module and the kernel pieces it imports (`noemaWorkers` in `tools/esbuild.mjs`)). Pure JS, deterministic, no DOM, no learner text: results are
 numbers and codes; the activity words them. Schema: `src/contracts/schemas/noema.circuit.v1.schema.json`. Tests: `node tests/circuit.js`;
 JS and Python (`tools/circuit.py`, the validators' twin) give the same findings for `check` / `checkFaults` (`tests/activities.js`).
 
 ```js
-NoemaCircuit = { id: 'circuit-mna@1', format: 'noema.circuit/v1', limits: {nodes: 60, elements: 200, steps: 200000}, FAULT_KINDS, check, checkFaults, create, num, source }
+circuit = { id: 'circuit-mna@1', format: 'noema.circuit/v1', limits: {nodes: 60, elements: 200, steps: 200000}, FAULT_KINDS, check, checkFaults, create, num }
 check(netlist)                    → [] | [{code, path, msg, level: 'error'|'warning'}]     (msg is for authors, never shown to learners)
 checkFaults(netlist, faults)      → [] | [{code: 'fault', path: 'faults[i].x', msg, level: 'error'}]   (what create() would throw, as a list)
 create(netlist, {faults, noise: {rel, abs, seed}, seed}) → sim                             (throws code 'invalid' with .problems)

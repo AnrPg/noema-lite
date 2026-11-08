@@ -12,11 +12,9 @@ const rel = (a, b, tol) => Number.isFinite(a) && (a === b || Math.abs(a - b) <= 
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 const allRel = (a, b, tol) => a.length === b.length && a.every((v, i) => rel(v, b[i], tol));
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '46_lib_simkit.js'));   // the streams of the later modes (mcmc, multivar draws, rand)
-require(path.join(SRC, '47_lib_prob.js'));
-const M = globalThis.NoemaLibProb;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibProb = ENGINES.mod('prob@1');
+const M = NoemaLibProb;
 const X = (model, seed) => M.compute(model, {}, null, { seed: seed === undefined ? 1 : seed });
 const S = (model, keys, seed) => { const r = X(model, seed); return keys.map(k => r.scalar(k)); };
 const s1 = (model, key) => X(model).scalar(key);
@@ -331,9 +329,6 @@ const dist = (d, extra, key) => s1(Object.assign({ mode: 'dist', dist: d }, extr
   const far = X({ mode: 'mcmc', kind: 'metropolis', logdens: '-a^2/2', params: ['a'], init: [0], scale: [0.05], iters: 400, chains: 4, spread: 50 });
   ok(far.scalar('rhat.a') > 1.1 && far.issues['not-converged'] === 1, 'chains started far apart with tiny steps: R̂ > 1.1, not-converged');
   ok(iss({ mode: 'mcmc', kind: 'metropolis', logdens: '-a^2/2', params: ['a'], init: [0], iters: 200000, chains: 8 }, 'budget', 'accept') === 1, '8 chains of 2e5 density evaluations exceed the budget');
-  const SK = globalThis.NoemaSimKit; delete globalThis.NoemaSimKit;
-  const nk = X({ mode: 'mcmc', kind: 'gibbs-bivnormal', rho: 0.5 }); const nkv = nk.scalar('mean.x'); globalThis.NoemaSimKit = SK;
-  ok(nkv === undefined || Number.isNaN(nkv), 'without NoemaSimKit the samplers give no numbers and say no-kit') ; ok(nk.issues['no-kit'] >= 1, 'no-kit is counted');
 }
 // ===== multivar (NIST StRD Longley certified values; statsmodels 0.15 Logit on Spector & Mazzeo 1980; scipy; mpmath) =====
 {

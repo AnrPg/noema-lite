@@ -58,7 +58,7 @@ These are self-hosted copies of Google Fonts, so the app (the site and every pag
 `scripts.css` / `scripts.json` and the `noto-*` folders are made by `python3 tools/fonts_subset.py` (fonttools + brotli) from the
 variable Noto fonts of the google/fonts repository (OFL-1.1, `<slug>/LICENSE.txt`), weights 400–700, no hinting. Every rule has a
 `unicode-range` and `font-display: swap`, so a browser downloads a file only when a page shows one of its characters; the font
-stacks (`--font` in `engine/src/10_base.css`, `SYS` in `engine/themes.js`) list them before the system fonts, the Han font
+stacks (`BASE.typography` in `src/ui/tokens/base.ts`, generated into `engine/tokens.css`) list them before the system fonts, the Han font
 following the UI locale (`--noema-cjk`: SC, TC for zh-Hant, JP for ja). The course's own text keeps its families
 (`'Noto Naskh Arabic'`, `'Noto Sans Hebrew'`, `'Noto Sans SC'` in `engine/lang/*.css`).
 

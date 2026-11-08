@@ -1003,11 +1003,11 @@ window.NoemaShell = (() => {
     for (const g of ['animals', 'tales', 'grown']) {
       const gal = h('div', { class: 'ns-gal' }); v.append(charGroup(g, gal));
       for (const k of TH().GROUPS[g]) {
-        const t = TH().text(k), d = TH().DATA[k], cur = k === own, nm = tv(k).tutor;
+        const t = TH().text(k), cur = k === own, nm = tv(k).tutor;
         gal.append(h('div', { class: 'ns-gcard' + (cur ? ' cur' : ''), 'data-m': k, 'data-char': k },
           cur ? h('span', { class: 'badge' }, pill(L('yours'), 1)) : null, faceEl(k, 'breathe'),
           h('h3', {}, nm), h('span', { class: 'tiny' }, `${t.name} · ${t.world}`),
-          h('span', { class: 'sws' }, ...[d.light[6], d.light[9], d.light[11], d.light[13], d.light[15]].map(c => h('i', { style: { background: c } }))),
+          h('span', { class: 'sws' }, ...[1, 2, 3, 4, 5].map(i => h('i', { style: { background: `var(--swatch${i})` } }))),   // the character's light accent and tints (engine/tokens.css): the card wears its character
           h('span', { class: 'fs' }, sample),
           cur || locked ? null : h('div', { class: 'row' }, h('button', { class: 'btn small soft', 'data-try': k, onclick: () => { TH().startPreview(k); toast(L('tryingNow', { tutor: nm }), 2500); } }, L('try5'))
             , !TH().settings().character || can ? h('button', { class: 'btn small', 'data-choose': k, onclick: () => { TH().choose(k); window.NoemaReact?.big('level', L('welcomeWorld')); } }, L('choose')) : null)));

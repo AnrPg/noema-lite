@@ -1,4 +1,4 @@
-/* philo@1 (engine/src/48_lib_philo.js, docs/library/philo.md): published reference values (the source in each message), the edge cases
+/* philo@1 (src/engines/philo/philo.js, docs/library/philo.md): published reference values (the source in each message), the edge cases
    and their codes, the checker's codes and the JS ↔ Python parity on the fixtures, the sim adapter, the Worker source in a fresh
    global, speed. Run: node tests/lib_philo.js */
 'use strict';
@@ -8,8 +8,9 @@ let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 globalThis.window = globalThis;
-for (const f of ['35_simexpr.js', '46_lib_core.js', '46_lib_simkit.js', '47_lib_logic.js', '48_lib_philo.js']) require(path.join(SRC, f));
-const L = globalThis.NoemaLibPhilo;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibPhilo = ENGINES.mod('philo@1');
+const L = NoemaLibPhilo;
 const spec = (model, outputs, params) => ({ format: 'noema.sim-spec/v1', engine: 'philo@1', params: params || [], model: model || {}, outputs: outputs || [] });
 const runAll = (model, outs, env) => L.run(spec(model, outs.map((o, i) => Object.assign({ id: 'o' + i, kind: 'scalar' }, o))), env || {}, { seed: 7 });
 const one = (model, o, env) => runAll(model, [o], env).out.o0;
@@ -285,7 +286,7 @@ print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify
   ok(JSON.stringify(wr) === JSON.stringify(r), 'the Worker source in a fresh global gives the same outputs');
   const sa = spec(Object.assign({}, AR, G), [{ id: 'v', kind: 'scalar', of: 'valid', argument: 'cd' }, { id: 'i', kind: 'scalar', of: 'ipd', strategy: 'tft', what: 'share' }]);
   const wa = ctx.self.noemaEngine.create(sa, { seed: 3 }).run({}), pa = L.engine.create(sa, { seed: 3 }).run({});
-  ok(!!ctx.self.NoemaLibLogic && !!ctx.self.NoemaSimKit && wa.v === 1 && wa.i === pa.i, 'the Worker carries logic@1 and NoemaSimKit: arguments and seeded tournaments agree');
+  ok(!!ctx.self.__noemaShared['logic/logic.js'] && !!ctx.self.__noemaShared['kernel/simkit.js'] && wa.v === 1 && wa.i === pa.i, 'the Worker carries logic@1 and NoemaSimKit: arguments and seeded tournaments agree');
   const param = spec({ populations: [{ id: 'A', groups: [{ n: 'na', w: 100 }] }, { id: 'Z', groups: [{ n: 1e7, w: 'wz' }] }] }, [{ id: 'c', kind: 'scalar', of: 'compare', a: 'A', b: 'Z', rule: 'total' }]);
   const en = L.engine.create(param, {});
   ok(en.run({ na: 1000, wz: 0.1 }).c === -1 && en.run({ na: 1e5, wz: 0.1 }).c === 1, 'numbers of the model may be expressions over the spec\'s names');

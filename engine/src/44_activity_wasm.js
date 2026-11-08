@@ -217,7 +217,7 @@
       ins.forEach((src, i) => {
         const w = `spec.model.inputs[${i}]`;
         if (typeof src !== 'string' || !src.trim()) { E.push(`${w}: an expression (a text such as “2*x + 1”) is required`); return; }
-        if (root.NoemaExpr) { const p = root.NoemaExpr.check(src, { vars: names }); if (p.length) E.push(`${w}: ${p[0].msg} in “${src.slice(0, 60)}”`); }
+        const X = root.NoemaCore?.engines?.expr; if (X) { const p = X.check(src, { vars: names }); if (p.length) E.push(`${w}: ${p[0].msg} in “${src.slice(0, 60)}”`); }
       });
     }
     const outs = m.outputs, decl = new Map();
@@ -414,7 +414,7 @@
   root.NoemaWasm = api;
   if (typeof module === 'object' && module && module.exports) module.exports = api;
 
-  /** join the app's activity core: at load when it is there already (the activity harness), else engine.js calls it (43_engines_p6.js) */
+  /** join the app's activity core: at load when it is there already (the activity harness), else engine.js calls it (43_page_runtimes.js) */
   api.registerWith = function registerWith(ACTREF) {
   if (!ACTREF || typeof ACTREF.registerEngine !== 'function') return;
   ACTREF.registerEngine({

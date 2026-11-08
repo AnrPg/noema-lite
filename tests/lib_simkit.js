@@ -1,4 +1,4 @@
-/* NoemaSimKit (engine/src/46_lib_simkit.js, docs/library/simkit.md) against published values and exact solutions:
+/* NoemaSimKit (src/engines/kernel/simkit.js, docs/library/simkit.md) against published values and exact solutions:
    1. randomness: MRG32k3a's jump-ahead matrices (RngStreams.c A1p76 … A2p127), its recurrence checked in exact BigInt arithmetic,
       streams / substreams / antithetics, every variate's moments, KS tests; special functions (AS241, t quantiles, Γ, incomplete Γ, β);
    2. the calendar's tie rule, the executive (three-phase, activities with pre-emption, Zeno, budget);
@@ -12,8 +12,9 @@
 const path = require('path'), vm = require('vm');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '46_lib_simkit.js'));
-const S = globalThis.NoemaSimKit;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibCore = ENGINES.kernel('core'), NoemaSimKit = ENGINES.kernel('simkit');
+const S = NoemaSimKit;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const max2 = (a, b) => (a > b ? a : b);
@@ -21,7 +22,7 @@ const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 const rel = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol * Math.abs(b);
 const mv = a => { let m = 0; for (const x of a) m += x; m /= a.length; let v = 0; for (const x of a) v += (x - m) ** 2; return [m, v / (a.length - 1)]; };
 
-ok(Object.isFrozen(S) && typeof S.source === 'function' && S.version === 1, 'NoemaSimKit: a frozen module with source()');
+ok(Object.isFrozen(S) && S.version === 1, 'NoemaSimKit: a frozen module');
 
 // ---------- 1. randomness ----------
 {
@@ -462,10 +463,8 @@ ok(Object.isFrozen(S) && typeof S.source === 'function' && S.version === 1, 'Noe
   ok(st.restore(snap).y[0] === 1 && near(s1.y[0], Math.exp(-1), 1e-5) && s0.y[0] === 1, 'stepper snapshot / restore (deep copies of plain state)');
   const wr = S.wrapRun('f', (inp, t) => ({ v: 2 * t })); ok(wr.step(wr.init(), {}, 1, 0.5).out.v === 3, 'wrapRun: a part without time recomputes at the step\'s end');
   // the Worker: a fresh global runs NoemaExpr + core + kit and draws the same numbers
-  const ctx = { self: {} }; ctx.self.self = ctx.self; vm.createContext(ctx);
-  vm.runInContext('var self = this.self;' + NoemaExpr.source() + '\n;' + NoemaLibCore.source() + '\n;' + S.source(), ctx);
-  const W = ctx.self.NoemaSimKit, a = S.stream(5, 'w'), b = W.stream(5, 'w');
-  ok(!!W && [1, 2, 3, 4].every(() => a.gamma(2, 1) === b.gamma(2, 1)) && W.integrate({ f: (t, y, d) => { d[0] = -y[0]; }, y0: [1], tEnd: 1 }).y[0] === S.integrate({ f: (t, y, d) => { d[0] = -y[0]; }, y0: [1], tEnd: 1 }).y[0], 'the Worker source (source()) in a fresh global gives the same numbers, bit for bit');
+  const W = ENGINES.worker('ode@1').__noemaShared['kernel/simkit.js'], a = S.stream(5, 'w'), b = W.stream(5, 'w');
+  ok(!!W && [1, 2, 3, 4].every(() => a.gamma(2, 1) === b.gamma(2, 1)) && W.integrate({ f: (t, y, d) => { d[0] = -y[0]; }, y0: [1], tEnd: 1 }).y[0] === S.integrate({ f: (t, y, d) => { d[0] = -y[0]; }, y0: [1], tEnd: 1 }).y[0], 'the Worker bundle (an engine\'s, with the kit inside) in a fresh global gives the same numbers, bit for bit');
   ok(S.deterministic(sd => { const r = S.stream(sd, 'd'); return [r(), r.normal(0, 1), r.poisson(40)]; }, 42), 'determinism: the same seed gives the same results');
   const t0 = process.hrtime.bigint(); const rr = S.stream(1, 'speed'); let acc = 0; for (let i = 0; i < 1e6; i++) acc += rr(); const ms = Number(process.hrtime.bigint() - t0) / 1e6;
   ok(ms < 500 && acc > 0, `speed: 1 000 000 uniforms in ${ms.toFixed(0)} ms`);

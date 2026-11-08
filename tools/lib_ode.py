@@ -1,4 +1,4 @@
-"""ode@1 — the Python twin of the checks of engine/src/47_lib_ode.js (docs/library/ode.md): check_spec(spec), exprs(spec) and keys(spec)
+"""ode@1 — the Python twin of the checks of src/engines/ode/ode.js (docs/library/ode.md): check_spec(spec), exprs(spec) and keys(spec)
 give the same problems (code, path, message, level) and the same lists as the JS checkSpec / exprs / keys (tests/enginelib.js compares
 them on tests/fixtures/enginelib/ode.json). It does not simulate. TMETA is the JS templateMeta() (tests/lib_ode.js checks they agree)."""
 import enginelib as L

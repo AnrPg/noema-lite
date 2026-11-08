@@ -1,4 +1,4 @@
-# `agents@1` — agent-based models and multi-agent systems (`engine/src/47_lib_agents.js`, `NoemaLibAgents`)
+# `agents@1` — agent-based models and multi-agent systems (`src/engines/agents/agents.js`, `NoemaLibAgents`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`). A model is described in the terms of the ODD protocol (Grimm et
 al. 2006, 2020; Railsback & Grimm 2019): **entities** (breeds of agents with typed state, patches, globals), **space** (continuous,
@@ -85,7 +85,7 @@ until achieved; **single-minded** until achieved or impossible; **open-minded** 
 
 `norms: [{id, kind O|F|P, act, cond, deadline, within, until, rank, issued, mode achieve|maintain, breed, sanction {var, add}}]`:
 obligations, prohibitions and permissions over the actions agents take (`act` names) and the facts (bool variables, `breed_<id>`,
-true globals). They are monitored each step by `NoemaLibLogic.normMonitor` (47_lib_logic.js, `docs/library/logic.md` §9) per
+true globals). They are monitored each step by `NoemaLibLogic.normMonitor` (src/engines/logic/logic.js, `docs/library/logic.md` §9) per
 agent; without it a fallback monitor with the same records runs (code `logic-fallback`; tested to give the same violations). A
 violation applies its sanction to the agent's variable. Outputs `violations` (series per step, or a total / per norm),
 `fulfilments`.

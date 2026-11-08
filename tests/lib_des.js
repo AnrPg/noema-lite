@@ -1,4 +1,4 @@
-/* des@1 (engine/src/47_lib_des.js, docs/library/des.md) against queueing theory and exact solutions:
+/* des@1 (src/engines/des/des.js, docs/library/des.md) against queueing theory and exact solutions:
    1. the spec check: tests/fixtures/enginelib/des.json (good and bad specs) and its Python twin tools/lib_des.py (check_spec, exprs, keys);
    2. analytic values whose CI must hold the theory: M/M/1, M/M/c (Erlang C), M/D/1 and M/G/1 (Pollaczek–Khinchine), M/M/1/K,
       a Jackson network, non-preemptive and preemptive-resume priorities (Cobham 1954; Conway, Maxwell & Miller 1967), M/G/∞,
@@ -12,8 +12,9 @@
 const path = require('path'), fs = require('fs'), vm = require('vm'), { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-for (const f of ['35_simexpr.js', '46_lib_core.js', '46_lib_simkit.js', '47_lib_des.js']) require(path.join(SRC, f));
-const D = globalThis.NoemaLibDES, C = globalThis.NoemaLibCore;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibCore = ENGINES.kernel('core'), NoemaLibDES = ENGINES.mod('des@1');
+const D = NoemaLibDES, C = NoemaLibCore;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const f3 = v => (Number.isFinite(v) ? +v.toFixed(3) : v);

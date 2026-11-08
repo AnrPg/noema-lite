@@ -1,4 +1,4 @@
-# `craft@1` — handcrafts (`engine/src/48_lib_craft.js`, `NoemaLibCraft`)
+# `craft@1` — handcrafts (`src/engines/craft/craft.js`, `NoemaLibCraft`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for the arithmetic, geometry and tables of handcrafts. It covers
 knitting and crochet, stitch and colourwork charts, weaving drafts, cross-stitch, patchwork, repeating patterns (frieze and

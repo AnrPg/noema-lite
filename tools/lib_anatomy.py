@@ -1,12 +1,11 @@
-"""anatomy@1 — computable anatomy (docs/library/anatomy.md): the Python twin of engine/src/48_lib_anatomy.js.
+"""anatomy@1 — computable anatomy (docs/library/anatomy.md): the Python twin of src/engines/anatomy/anatomy.js.
 
 It checks and does not compute: check_spec(spec) gives the same problems (code, path, message, level) as the JS checkSpec, and
 exprs(spec) / keys(spec) the same lists. The data it needs (every structure id and its type, the levels of every nerve, the
-movements, the output names, the model tables…) is INDEX below: the SAME JSON as NoemaLibAnatomy.index() in the JS module
+movements, the output names, the model tables…) is INDEX below: the SAME JSON as index() of the JS module (src/engines/anatomy/anatomy.js)
 (tests/lib_anatomy.js checks that the two are identical). After a change to the module's data, regenerate it with
 
-    node -e "globalThis.window=globalThis;['35_simexpr','46_lib_core','48_lib_anatomy'].forEach(f=>require('./engine/src/'+f+'.js'));
-             console.log(JSON.stringify(NoemaLibAnatomy.index()))" > /tmp/idx.json      (then paste it as INDEX_JSON)
+    node -e "console.log(JSON.stringify(require('./tests/engines.cjs').mod('anatomy@1').index()))" > /tmp/idx.json      (then paste it as INDEX_JSON)
 """
 import json
 import enginelib as L

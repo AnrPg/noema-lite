@@ -6,6 +6,7 @@ config.local.js
 /build/
 /engine/engine.js
 /engine/engine.css
+/engine/tokens.css
 /engine/langui.js
 /engine/langui.css
 /engine/authoring.js

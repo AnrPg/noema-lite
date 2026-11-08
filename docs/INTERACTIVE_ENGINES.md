@@ -8,12 +8,13 @@ Which engine for which learning goal: `docs/INTERACTIVE_AUTHORING.md`.
 
 ## 1. Common to the four
 
-- **Trusted app code, data in the pack.** Each engine is pure JS in `engine/src/` (39–42), deterministic (seeded noise), bounded,
+- **Trusted app code, data in the pack.** Each engine is a pure ES module in `src/engines/<name>/`, deterministic (seeded noise), bounded,
   with no DOM and no learner text: it gives codes and numbers only. The pack carries only data: the model, the bindings of the
   controls, the outputs (and, for `twin@1`, a bench).
-- **Registered like `circuit-mna@1`.** `engine/src/43_engines_p6.js` calls `ACT.registerEngine(Noema….engine)` for each; the
-  engine object is `{id, check, prepare, create, workerSource}` (`twin@1` also `bench: true`). Every run goes to a **Worker** whose
-  source is the engine's own module (`Function.toString`, the same code as on the page) plus its adapter; `prepare` evaluates the
+- **Plugins of the engine library, like `circuit-mna@1`.** Each is one line of `src/engines/plugins.ts`; the page loads it when an
+  activity needs it (`NoemaCore.engines.load`), and `ACT.engine(id)` gives the engine object `{id, check, prepare, create,
+  workerSource}` (`twin@1` also `bench: true`). Every run goes to a **Worker** whose source is its Worker bundle (the text a Worker runs), built by esbuild from the module and the kernel pieces it imports (`noemaWorkers` in `tools/esbuild.mjs`): the same code as on
+  the page; `prepare` evaluates the
   spec's expressions (bindings, transient times, `at`) with the app's NoemaExpr on the main thread, so the worker gets numbers.
 - **Validated with the same messages in JS and Python.** `engine/packcheck.js` and `tools/activities.py` know the four in `ENGINES`
   and call each engine's own check — `checkSpec(spec)` in JS (the engine file is loaded beside packcheck in the shell, the site,
@@ -27,7 +28,7 @@ Which engine for which learning goal: `docs/INTERACTIVE_AUTHORING.md`.
   at runtime (a slider reaches an invalid value) gives NaN scalars and empty series; nothing throws into the page.
 - Schemas: `src/contracts/schemas/noema.{thermal,pid,rf,twin}.v1.schema.json`. Tests: `node tests/{thermal,pid,rf,twin}.js`.
 
-## 2. `thermal@1` — lumped thermal networks (`engine/src/39_engine_thermal.js`, `NoemaThermal`)
+## 2. `thermal@1` — lumped thermal networks (`src/engines/thermal/thermal.js`)
 
 A MOSFET on a heatsink, a PCB trace, a thermal time constant, a room with a heater and a thermostat.
 
@@ -76,7 +77,7 @@ Grading: `{"expr": "tjSS <= 125", "label": "checkTj"}` (keep the junction under 
 ### 2.3 The engine
 
 ```js
-NoemaThermal = { id: 'thermal@1', format, SIGMA, STATS, limits, check, checkSpec, create, source, adapter, engine }
+thermal = { id: 'thermal@1', format, SIGMA, STATS, limits, check, checkSpec, create, adapter, engine }
 check(network) / checkSpec(spec) → [{code, path, msg, level: 'error'|'warning'}]
 create(network) → sim;  sim.steady({mode}) → {nodes, links, sources};  sim.transient({tEnd, dt, method, start, points, at}) → {t, nodes, …, stats, at};  sim.taus()
 ```
@@ -108,7 +109,7 @@ start, sets P̄ (each source's exact mean over the step, on the engine's own gri
 read at every step; a series output gives its value now, `stat` runs over every internal step, `at` once passed, the steady and τ
 outputs as in `run()`. Stepped to tEnd it equals `transient()` (tests/parts.js).
 
-## 3. `pid@1` — control loops (`engine/src/40_engine_pid.js`, `NoemaPID`)
+## 3. `pid@1` — control loops (`src/engines/pid/pid.js`)
 
 Tune a PID on a plant, watch windup, compare P and PI, see dead time and noise.
 
@@ -159,11 +160,11 @@ Grading: `[{"expr": "os < 10", "label": "checkOs"}, {"expr": "ts < 2", "label": 
 ### 3.3 The engine
 
 ```js
-NoemaPID = { id: 'pid@1', STATS, SIGNALS, METRICS, ZN, MOTOR, limits, check, checkSpec, create, metrics, source, adapter, engine }
+pid = { id: 'pid@1', STATS, SIGNALS, METRICS, ZN, MOTOR, limits, check, checkSpec, create, metrics, adapter, engine }
 create(model, {seed}).run({tEnd, dt}) → {t, r, y, ym, u, e, metrics, steps, dt};  metrics(t, y, {t0, y0?, yf?, band})
 ```
 
-**Ziegler–Nichols** (`NoemaPID.ZN`; parallel gains Ki = Kp/Ti, Kd = Kp·Td): ultimate gain Ku, period Tu — P: Kp = 0.5 Ku; PI: 0.45
+**Ziegler–Nichols** (`pid.ZN`; parallel gains Ki = Kp/Ti, Kd = Kp·Td): ultimate gain Ku, period Tu — P: Kp = 0.5 Ku; PI: 0.45
 Ku, Ti = Tu/1.2; PID: 0.6 Ku, Ti = Tu/2, Td = Tu/8. Reaction curve K, L, T — P: Kp = T/(K·L); PI: 0.9 T/(K·L), Ti = L/0.3; PID:
 1.2 T/(K·L), Ti = 2 L, Td = L/2.
 
@@ -185,7 +186,7 @@ dead time reads the input history at t − θ. The same core serves `run()` and 
 its value now, the metrics and stats run over the history so far. Without the kernel: a marked FALLBACK (the same RK4 here).
 The Worker source carries NoemaExpr and the kernel.
 
-## 4. `rf@1` — radio links and propagation (`engine/src/41_engine_rf.js`, `NoemaRF`)
+## 4. `rf@1` — radio links and propagation (`src/engines/rf/rf.js`)
 
 IoT radio benches: link budgets, path loss, range, error rates, airtime.
 
@@ -236,7 +237,7 @@ prx prxMedian margin` over the sweep; `snrAxis per ber` over the SNR sweep (≤ 
 ### 4.3 The engine
 
 ```js
-NoemaRF = { id: 'rf@1', format: 'noema.rf/v1', limits, MODELS, MODS, SCALARS, SERIES, NUM_FIELDS, check, checkSpec, create, num, source, engine, simEngine,
+rf = { id: 'rf@1', format: 'noema.rf/v1', limits, MODELS, MODS, SCALARS, SERIES, NUM_FIELDS, check, checkSpec, create, num, engine, simEngine,
             fspl, twoRay, crossover, logDistance, hata, indoor, fresnelRadius, knifeEdge, noiseFloor, Q, erfc, ber, per, loraAirtime, bleAirtime, wifiAirtime }
 create(link, {seed}) → {run() → {scalars, series, codes}, at(d), range()}
 ```
@@ -254,7 +255,7 @@ normals by inversion), the maximum range and the required Eb/N0 are Brent's root
 bisection; erfc (the BER curves' Q) is the kernel's `SK.erfc` (Q(½, x²), accurate in the far tail) instead of NR erfcc (1.2e-7).
 FALLBACK without the kernel (marked): mulberry32, bisection, erfcc. No stepper (a link budget has no time).
 
-## 5. `twin@1` — the digital twin of an IoT node (`engine/src/42_engine_twin.js`, `NoemaTwin`)
+## 5. `twin@1` — the digital twin of an IoT node (`src/engines/twin/twin.js`)
 
 A small discrete-event simulator of a battery-powered microcontroller node: "design the duty cycle" exercises and fault-finding
 benches (a device with one hidden fault: the learner reads the battery, the current, the radio and the event log, then diagnoses).
@@ -321,7 +322,7 @@ a board. What differs:
   twin's own: `log` (the event log: resets, lost messages, overrun wake-ups, and collisions and missed slots when there are any),
   `rssi` (the mean received signal strength, dBm), `T` (the thermometer: the last, lowest and highest temperature, °C) and `clock`
   (the clock against a reference: the mean drift in ppm and the worst error in s); these four take only `kind`. `R` and `logic` are the circuit's.
-- **faults** `apply` is a list of §5.2 faults (`[]` = a healthy device); `NoemaTwin.checkFaults` / `twin.check_faults` check them.
+- **faults** `apply` is a list of §5.2 faults (`[]` = a healthy device); `twin.checkFaults` / `twin.check_faults` (Python) check them.
 
 ```json
 "bench": { "faults": [ {"id": "antenna", "apply": [{"kind": "antenna-detached"}]}, {"id": "ageing", "apply": [{"kind": "battery-ageing"}]},
@@ -343,7 +344,7 @@ log for a brown-out level set too high) and a tempting wrong option ("nothing is
 ### 5.4 The engine
 
 ```js
-NoemaTwin = { id: 'twin@1', format: 'noema.twin/v1', limits, FAULT_KINDS, SCALARS, SERIES, NUM_FIELDS, EVENT_CODES, CHEMS,
+twin = { id: 'twin@1', format: 'noema.twin/v1', limits, FAULT_KINDS, SCALARS, SERIES, NUM_FIELDS, EVENT_CODES, CHEMS,
               check, checkFaults, checkSpec, create, num, source, engine, simEngine, radio: {…} }
 create(device, {seed, faults}) → { run() → {scalars, perSensor, series, readings, truth, log, logCount, counts}, measure(probe), analytic() }
 measure: {kind: 'V', a: 'vbat' | 'vload', at?} · {kind: 'I'} (A) · {kind: 'scope', node: 'i', tStart, tEnd} (A, unit: 'A') · {kind: 'log'} (→ `events`: the first 1000 entries, `count`, `counts`: per code over the whole run) · {kind: 'rssi'} · {kind: 'T'} (→ value, min, max, °C) · {kind: 'clock'} (→ value ppm, err s)

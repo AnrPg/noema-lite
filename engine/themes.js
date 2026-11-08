@@ -1,42 +1,47 @@
 /* =====================================================================================
    noema-lite — characters (themes). One character = one theme: palette (light and dark), fonts, the shape of
    cards, buttons and icon tiles, the still landscape, the collection on Progress, and the tutor's face; the names and words of the characters are in i18n/characters/.
-   Data: 29 characters in three groups (animals, fairy tales, grown-up). Loaded before the loader, so the first
-   screen already wears the learner's character. Pictures live in engine/art.js. docs/UI_MAP.md
+   29 characters in three groups (animals, fairy tales, grown-up). Their look is the design tokens (src/ui/tokens: one token set
+   per character, engine/tokens.css): this file puts the character on the page (html[data-m], html[data-tone]) and keeps the
+   learner's choice. Loaded before the loader, so the first screen already wears the learner's character. Pictures live in
+   engine/art.js. docs/UI_MAP.md
    ===================================================================================== */
 window.NoemaThemes = (() => {
   'use strict';
-  /* i18n-ignore-start — fonts, colours and shapes, no words for learners */
-  /* palette order: bg paper ink ink2 ink3 line acc acc-ink acc-soft t1 t1i t2 t2i t3 t3i t4 t4i deco1 deco2 deco3 · shape: r br ir sw cap */
-  const DATA = {"hedge":{"group":"animals","tone":"cute","disp":"Alegreya","dw":700,"dsty":"normal","body":"Alegreya Sans","ru":null,"shape":["20px","14px","13px","1.8","round"],"light":["#faf7f0","#ffffff","#2f2a24","#6b6358","#a39a8c","#ece5d8","#5f8d5a","#ffffff","#e6efe2","#e6efe2","#557a51","#f6ead0","#9a7424","#f5e1dc","#a5584c","#e8e4f2","#6a5f97","#e7eedd","#efe8d6","#dfe8d3"],"dark":["#1b1d18","#24271f","#eeeadf","#b7b0a2","#857e71","#34382c","#9cc596","#1b1d18","#2c3a2a","#2c3a2a","#a9d0a3","#3a3222","#e5c37a","#3b2a27","#e7a497","#2d2a3c","#b9aee6","#22281e","#262920","#283024"]},
-    "owl":{"group":"animals","tone":"cute","disp":"EB Garamond","dw":600,"dsty":"normal","body":"Literata","ru":null,"shape":["14px","10px","10px","1.5","round"],"light":["#f8f7fc","#ffffff","#2b2840","#625e7c","#9d99b5","#e9e6f3","#7466b8","#ffffff","#ece8f8","#ece8f8","#5f52a6","#f7efd6","#93721f","#f6e3ea","#a4566f","#e2eef3","#3f7a8e","#ece9f7","#f3f0fb","#e4e0f3"],"dark":["#17162a","#201f36","#eeecfa","#b3aed0","#7f7a9e","#2f2d4a","#b1a6ec","#17162a","#2b2850","#2b2850","#c4bbf5","#3a3322","#e8cf8a","#3a2632","#eeb0c4","#1f3340","#9fd0e0","#1d1c33","#22213a","#25233f"]},
-    "axo":{"group":"animals","tone":"cute","disp":"M PLUS Rounded 1c","dw":800,"dsty":"normal","body":"M PLUS Rounded 1c","ru":null,"shape":["26px","999px","50%","2","round"],"light":["#f5fafa","#ffffff","#233236","#5b6f73","#97a9ac","#e1ecec","#3f978f","#ffffff","#dff1ef","#dff1ef","#2f7e77","#fbe3ea","#b45773","#f6ecd8","#946c25","#e3e9f8","#4f63a8","#e1f1f0","#fbeef2","#d5ebea"],"dark":["#13201f","#1b2b2a","#e8f3f2","#a9c0bf","#738d8c","#2a3d3c","#86d1c9","#13201f","#1f3a37","#1f3a37","#9fe0d8","#3a2530","#f2aec2","#352d1d","#e6c886","#222b42","#aab9ef","#172726","#1d2a2c","#1a302e"]},
-    "dragon":{"group":"animals","tone":"cute","disp":"Zen Antique","dw":400,"dsty":"normal","body":"Murecho","ru":"Oranienbaum","shape":["18px","12px","12px","1.8","round"],"light":["#f6f9f7","#ffffff","#263130","#5d6b69","#9aa8a5","#e2ebe8","#4f9a86","#ffffff","#e0f0ea","#e0f0ea","#3d7f6d","#efe6f7","#7a5aa6","#fbe6ea","#b0566b","#fbf1d9","#94702a","#e6efeb","#eee8f5","#dde9e4"],"dark":["#141c1b","#1c2726","#e8f1ee","#a8bab5","#72847f","#2a3936","#8fd3bf","#141c1b","#1f3a33","#1f3a33","#9fe0cc","#2c2440","#c7b0ee","#3a2229","#f0aab9","#362f1c","#e9cf8a","#18221f","#1f1d2c","#1b2a26"]},
-    "alien":{"group":"animals","tone":"cute","disp":"Tektur","dw":600,"dsty":"normal","body":"Geologica","ru":null,"shape":["22px","999px","50%","1.6","round"],"light":["#f5f7fc","#ffffff","#222a3a","#5a6479","#98a1b5","#e3e8f3","#5b6fd6","#ffffff","#e6e9fb","#e6e9fb","#4a5bbf","#dff4f6","#2f8592","#f4eafb","#8a56b0","#fbf4d4","#8a6d10","#e8ecf8","#e2f2f5","#ecebfa"],"dark":["#10131f","#181c2c","#eaedf8","#aab1c9","#737b96","#272d44","#a3b2ff","#10131f","#232a4d","#232a4d","#b6c1ff","#173238","#8fdbe6","#2c2140","#d0b0ef","#33301a","#ecdb8a","#141828","#13212a","#1b1a33"]},
-    "bear":{"group":"animals","tone":"cute","disp":"Brygada 1918","dw":700,"dsty":"normal","body":"Commissioner","ru":"Kelly Slab","shape":["16px","12px","50%","1.9","round"],"light":["#fbf7ef","#ffffff","#2e2a26","#6a6157","#a59b8e","#eee6d8","#3d6a9e","#ffffff","#e4ecf6","#e4ecf6","#355d8c","#f8ecd0","#9a7420","#f7e2dc","#ad5a48","#e0f1ee","#2d7c70","#efe6d2","#dcebf0","#e6eedb"],"dark":["#171a20","#1f232b","#eeeae2","#b5ada0","#807868","#2f3440","#9dbbe6","#171a20","#24324a","#24324a","#aac6ee","#3a3220","#e8cc84","#3a2622","#eba696","#1b3532","#94d6c9","#1d1f22","#17232b","#1c241d"]},
-    "fruit":{"group":"animals","tone":"cute","disp":"Playpen Sans","dw":700,"dsty":"normal","body":"Zen Maru Gothic","ru":"Pangolin","shape":["28px","22px","48% 52% 46% 54% / 55% 50% 50% 45%","2.2","round"],"light":["#fffaf3","#ffffff","#33291f","#6e6152","#a99a87","#f1e7d8","#e39a55","#3a2414","#fcebd9","#fcebd9","#b0611f","#e8f3dd","#4f8a3a","#fbe3e6","#b8495e","#e6e9f7","#5161a8","#fbeedd","#eef5e3","#f7e2d0"],"dark":["#1d1914","#262019","#f3ece2","#bcae9d","#877a69","#3a3127","#f0ad6a","#1d1914","#3d2b1b","#3d2b1b","#f4b97c","#23331d","#a9d796","#3a2026","#f0a6b4","#24283d","#aeb8ee","#221c16","#1f261a","#2a2019"]},
-    "knight":{"group":"animals","tone":"cute","disp":"Alegreya SC","dw":700,"dsty":"normal","body":"Gentium Book Plus","ru":"Ruslan Display","shape":["8px","6px","4px","1.8","square"],"light":["#f7f6f3","#ffffff","#2a2c33","#626673","#9c9faa","#e6e5ec","#5d74a8","#ffffff","#e5eaf5","#e5eaf5","#4c639a","#f6e6e8","#a24f62","#f4eed9","#8f7426","#e4efe6","#4b7d58","#ebeaf0","#e9ecf3","#e2e4ea"],"dark":["#16171c","#1f2027","#ecebf2","#b0b1bf","#7a7c8b","#2e3039","#a8bbe8","#16171c","#262f45","#262f45","#b5c6ef","#3a2228","#eaa9b8","#36301a","#e5cf87","#1e3224","#a3d4ae","#1a1b21","#1c1f29","#202229"]},
-    "berry":{"group":"animals","tone":"cute","disp":"Comic Relief","dw":700,"dsty":"normal","body":"Comfortaa","ru":null,"shape":["26px","999px","50% 50% 46% 46% / 40% 40% 60% 60%","2","round"],"light":["#fff7f8","#ffffff","#3a2730","#77606b","#b39aa5","#f5e3e8","#d9587a","#ffffff","#fde4ea","#fde4ea","#b8476a","#e4f4e4","#4e8a4e","#fff1d6","#93701c","#efe6f8","#7a5aa6","#fdeef1","#eaf5e6","#fbe3e9"],"dark":["#1f1619","#2a1e22","#f7eaee","#c7aab4","#91747f","#3f2c33","#f59ab0","#1f1619","#47252f","#47252f","#f8b3c4","#1f3320","#a5d9a2","#3a311c","#ecd28c","#2e2540","#cdb6f0","#261b1f","#1c261c","#2c1d23"]},
-    "hood":{"group":"tales","tone":"cute","disp":"Mynerve","dw":400,"dsty":"normal","body":"Ysabeau","ru":"Neucha","shape":["20px","16px","50% 50% 12px 12px","1.8","round"],"light":["#fcf8f4","#ffffff","#33282a","#6d5f61","#a8999a","#f0e6e1","#c96a63","#ffffff","#f8e3e0","#f8e3e0","#b2544d","#e5efe0","#557a4b","#f6ecd6","#937027","#e9e6f3","#675d96","#eaf0e3","#f4ebe2","#e1ead9"],"dark":["#1c1819","#262022","#f2eaea","#bba9aa","#857475","#3a3032","#eb9f98","#1c1819","#3f2526","#3f2526","#f1aba4","#22301f","#a7d39b","#36301e","#e6cd88","#29263a","#bdb2e8","#1e1f1a","#241e1f","#1d241b"]},
-    "piglet":{"group":"tales","tone":"cute","disp":"Dela Gothic One","dw":400,"dsty":"normal","body":"Ubuntu","ru":"Russo One","shape":["10px","8px","5px","2.2","square"],"light":["#fdf8f5","#ffffff","#322a28","#6c605c","#a69894","#f1e5e0","#c9735a","#ffffff","#f8e5de","#f8e5de","#a85a43","#fce6ec","#b45a78","#fbf0cf","#8c6d0f","#e3ebf5","#46679a","#f3e9e2","#fbeaea","#efe2d9"],"dark":["#1c1716","#261f1e","#f3ebe8","#bdaca7","#887773","#3b302e","#ec9f86","#1c1716","#40271f","#40271f","#f0ae97","#3c2330","#f2a9c2","#38301a","#ecd585","#1f2a3c","#a9c2ec","#211b19","#261c20","#2a211e"]},
-    "candy":{"group":"tales","tone":"cute","disp":"Ysabeau Infant","dw":800,"dsty":"normal","body":"Comfortaa","ru":"Comfortaa","shape":["24px","999px","50%","2","round"],"light":["#fdf8f8","#ffffff","#38282e","#71606a","#ab99a2","#f2e6ea","#c25f88","#ffffff","#f9e3ec","#f9e3ec","#a84d74","#e1f3ec","#3f8a6e","#fbf0d2","#8c6a14","#efe4da","#7a5236","#f6e9ee","#e7f3ee","#fbf2e1"],"dark":["#1e171a","#281f23","#f5eaee","#c0aab4","#8a757f","#3c2e34","#f0a2c2","#1e171a","#432634","#432634","#f4b3cd","#1d332b","#9fdcc3","#37301a","#ecd38a","#33271f","#d9b393","#241b1f","#1c2622","#2a231b"]},
-    "jack":{"group":"tales","tone":"cute","disp":"Vollkorn","dw":800,"dsty":"normal","body":"Source Sans 3","ru":null,"shape":["18px","12px","5px 50% 5px 50%","1.9","round"],"light":["#f7faf4","#ffffff","#29301f","#5f6a52","#9aa48d","#e5ecdc","#5e8a32","#ffffff","#e7f1da","#e7f1da","#4d7a26","#e4eef7","#3d6f99","#f6ecd8","#8d6a2c","#f5e6dc","#9a5a3a","#e9f1df","#e6eef6","#dfead2"],"dark":["#151a12","#1d241a","#e9f0e1","#aebaa2","#7a866e","#2c3627","#a6d17f","#151a12","#283a1d","#283a1d","#b6dc92","#1c2c3a","#a5c9ea","#352e1c","#e2c98c","#38261e","#e7b09a","#192015","#172029","#1c2618"]},
-    "frog":{"group":"tales","tone":"cute","disp":"Noto Serif Display","dw":700,"dsty":"italic","body":"Manrope","ru":null,"shape":["24px","18px","50%","1.8","round"],"light":["#f6faf2","#ffffff","#26301f","#5e6b55","#9aa690","#e3ecdb","#d2a536","#33270a","#f7eccb","#e6f1db","#4e7e3a","#f7eccb","#8a6a12","#f8e3ea","#ad5675","#e0eef3","#3a7488","#e4f0dc","#e6f1ee","#f4efda"],"dark":["#141a12","#1c2419","#e8f0e2","#abb9a2","#77856e","#2b3627","#e6c160","#141a12","#3a3218","#243a1f","#acd89a","#3a3218","#ecd27e","#3a2430","#f0aec6","#1a2f36","#9cd2e2","#18211a","#16231f","#232417"]},
-    "puss":{"group":"tales","tone":"cute","disp":"Piazzolla","dw":700,"dsty":"italic","body":"Fira Sans","ru":null,"shape":["14px","10px","10px 10px 50% 50%","1.7","round"],"light":["#fcf8f3","#ffffff","#2c2a28","#68625b","#a49c92","#efe7dd","#2d7480","#ffffff","#e0eff0","#e0eff0","#236670","#fbe6dc","#b1593b","#f8ead2","#8e6420","#efe5db","#7a5236","#f4ebe0","#e2efee","#f7e6dc"],"dark":["#18191a","#202324","#efebe6","#b6aea5","#827a70","#33363a","#86c8cf","#18191a","#1f3a3e","#1f3a3e","#9dd6dc","#3d2620","#efac94","#382e1b","#e8c983","#33271f","#d9b393","#1d1d1c","#18262a","#2a2120"]},
-    "wolf":{"group":"grown","tone":"serious","disp":"Sofia Sans Extra Condensed","dw":800,"dsty":"normal","body":"IBM Plex Sans","ru":null,"shape":["12px","8px","0","2.1","round"],"light":["#f5f6f6","#ffffff","#25292d","#5d646b","#99a0a6","#e3e6e8","#56687a","#ffffff","#e3e8ed","#e3e8ed","#45586a","#f3ecdc","#86692a","#f5e4dc","#a2563a","#e6eadc","#5a6a35","#e6e9eb","#eceee8","#dde1e4"],"dark":["#14171a","#1c2024","#e9ecee","#aab1b7","#757d84","#2b3036","#a5b7c9","#14171a","#26313c","#26313c","#b4c4d4","#352f22","#e2c98c","#3a2620","#eaa98e","#272c1d","#bccb94","#181b1e","#1b1e1b","#1d2125"]},
-    "eagle":{"group":"grown","tone":"serious","disp":"Roboto Slab","dw":600,"dsty":"normal","body":"Inter Tight","ru":null,"shape":["10px","6px","50%","1.8","square"],"light":["#f7f6f2","#ffffff","#25282f","#5d626c","#9a9ea8","#e6e5e0","#3f5a86","#ffffff","#e3e9f2","#e3e9f2","#344d78","#f4ebd6","#86682a","#f1e3d6","#8a5a36","#e0eef5","#3a6d88","#e9ecf1","#eeeae0","#e1e6ee"],"dark":["#12161f","#1a1f2a","#e9ebf0","#aeb3bf","#787e8c","#2a303d","#a6bce6","#12161f","#243250","#243250","#b3c6ec","#352f1d","#e4cd8e","#36271c","#e2b190","#1a2f3a","#9fcde2","#161b25","#1b1d20","#182030"]},
-    "robot":{"group":"grown","tone":"serious","disp":"Jura","dw":700,"dsty":"normal","body":"Inter","ru":null,"shape":["10px","6px","6px","1.8","square"],"light":["#f4f5f7","#ffffff","#1f2329","#5a616c","#9aa1ab","#e2e5ea","#2f6f8f","#ffffff","#e0edf3","#e0edf3","#285f7a","#f2ead8","#8a6a1e","#e6e9ee","#4a5566","#e3efe9","#3e7a5f","#e8ebef","#eef0f3","#e1e5ea"],"dark":["#111418","#191d22","#e6e9ed","#a7aeb8","#727a85","#2a3038","#7fbcd8","#111418","#1d3440","#1d3440","#9ccbe0","#352e1b","#e2c47e","#262b33","#b6bfcc","#1d3329","#9fd2b8","#15191e","#181c21","#1a1f25"]},
-    "heron":{"group":"grown","tone":"serious","disp":"Noto Serif Display","dw":600,"dsty":"normal","body":"Noto Sans","ru":null,"shape":["16px","10px","50%","1.5","round"],"light":["#f6f6f4","#ffffff","#2a2b30","#62646c","#9d9fa6","#e7e6e3","#5f7591","#ffffff","#e6ebf1","#e6ebf1","#506680","#f3e5e6","#9a5a66","#e7eee6","#5b7a5a","#f2ecdf","#85692f","#eceeef","#f1eceb","#e6ebe6"],"dark":["#16171b","#1e2025","#ebebef","#b0b2ba","#7a7c85","#2e3037","#a9bcd4","#16171b","#27303d","#27303d","#b9c9de","#3a2629","#e5b0b9","#223024","#acd0aa","#352e1e","#e0c98f","#1a1c20","#1f1b1d","#1a201c"]},
-    "litM":{"group":"grown","tone":"serious","disp":"Gentium Book Plus","dw":700,"dsty":"normal","body":"Source Serif 4","ru":null,"shape":["6px","4px","4px","1.6","round"],"light":["#f7f3ea","#fffdf8","#33291f","#6e6253","#aca397","#e8dfcd","#8a5a3c","#fffdf8","#f1e4d8","#f1e4d8","#7a5137","#f4ebd6","#86682a","#f3e1de","#9a4a3e","#e3ebf2","#3f5f7a","#efe6d6","#e6d9c2","#d3bf9e"],"dark":["#17120f","#201a15","#edeae8","#bab1ab","#847871","#372f2a","#d4b19b","#17120f","#412d1f","#412d1f","#e0c7b8","#39301d","#e3d1ab","#39211d","#dfb5af","#1e2d39","#b5c8d9","#262119","#2c271d","#383125"]},
-    "litF":{"group":"grown","tone":"serious","disp":"Old Standard TT","dw":700,"dsty":"italic","body":"Noto Serif","ru":null,"shape":["14px","10px","50%","1.5","round"],"light":["#f4f6f2","#ffffff","#2c3330","#5f6b66","#a2aaa5","#e1e7e1","#5f8573","#ffffff","#e3eee8","#e3eee8","#567667","#f3ead8","#8a6a24","#f4e3e3","#a0525a","#e5e8f3","#5a5f97","#e8efea","#dbe6df","#bfd0c5"],"dark":["#101613","#161f1b","#e8edeb","#abbab3","#71847b","#2a3731","#acc4b8","#101613","#283931","#283931","#c3d5cc","#39311d","#e3d1ab","#391d20","#d9b5b9","#202236","#b9bbd5","#17221a","#1b261f","#232f27"]},
-    "techM":{"group":"grown","tone":"serious","disp":"JetBrains Mono","dw":800,"dsty":"normal","body":"IBM Plex Sans","ru":null,"shape":["4px","3px","2px","1.8","square"],"light":["#f2f5f6","#ffffff","#1f2a33","#586673","#9da6ae","#dfe5ea","#2f7d6b","#ffffff","#dcefe9","#dcefe9","#2c6e61","#f3ecd6","#86692a","#f5e3df","#a24f3f","#e2ebf5","#3a5f8f","#e6edef","#d6e2e4","#b9cbcf"],"dark":["#0f1715","#15201e","#e8edec","#abbab7","#718480","#2a3734","#97d8c9","#0f1715","#1f413a","#1f413a","#b5e3d8","#39301d","#e3d1ab","#39221d","#e0b6ae","#1d2a39","#afc4df","#172023","#1b2628","#222f32"]},
-    "techF":{"group":"grown","tone":"serious","disp":"Fira Code","dw":700,"dsty":"normal","body":"Manrope","ru":null,"shape":["10px","6px","6px","1.8","square"],"light":["#f6f4f9","#ffffff","#2a2638","#635d78","#a5a1b2","#e6e2ef","#7b5cc4","#ffffff","#ebe5f8","#ebe5f8","#6c52ab","#f5edd6","#8a6a1e","#f6e2e6","#a64a62","#dff0ea","#2f7d6b","#ece8f4","#e0d9ee","#c7bce0"],"dark":["#110f17","#191520","#eae8ed","#afabba","#767184","#2e2a37","#aa96d9","#110f17","#2a1f41","#2a1f41","#c2b4e4","#39311d","#e3d2ab","#391d25","#dcb1bd","#1d3933","#ade0d5","#1a1621","#1d1926","#241f2f"]},
-    "physM":{"group":"grown","tone":"serious","disp":"STIX Two Text","dw":700,"dsty":"normal","body":"Commissioner","ru":null,"shape":["6px","4px","4px","1.6","round"],"light":["#f1f5f2","#ffffff","#23302b","#5a6b64","#9ea9a4","#dfe6e2","#3d6b58","#ffffff","#e0ece6","#e0ece6","#386050","#f4ebd6","#86682a","#f4e2dc","#9e5038","#e2e9f4","#3f5f94","#eef3ef","#9fb8aa","#8aa598"],"dark":["#0f1714","#15201c","#e8edeb","#abbab4","#71847c","#2a3732","#a4cbbb","#0f1714","#233e33","#233e33","#bedace","#39301d","#e3d1ab","#39241d","#e2b9ac","#1d2839","#b0c1dd","#161f18","#2b3b32","#32413a"]},
-    "physF":{"group":"grown","tone":"serious","disp":"Manrope","dw":800,"dsty":"normal","body":"Ubuntu","ru":null,"shape":["12px","8px","50%","1.7","round"],"light":["#f3f5f9","#ffffff","#222b3a","#5a6478","#9fa5b2","#e0e5ee","#3f62a8","#ffffff","#e3e9f6","#e3e9f6","#3a5894","#f4ebd6","#86682a","#f4e2e2","#a2484e","#e0efe8","#3a7a5c","#edf0f6","#a9b7cc","#8f9fb8"],"dark":["#0f1217","#151920","#e8eaed","#abb0ba","#717784","#2a2e37","#97add8","#0f1217","#1f2b41","#1f2b41","#b5c4e3","#39301d","#e3d1ab","#391d1f","#dcb1b4","#1d392c","#b3dbc8","#151920","#252c37","#2b3340"]},
-    "bioM":{"group":"grown","tone":"serious","disp":"Fira Sans Condensed","dw":700,"dsty":"normal","body":"Fira Sans","ru":null,"shape":["10px","6px","6px","1.8","round"],"light":["#f3f7f0","#ffffff","#26301f","#5e6b55","#a1aa9b","#e0e8da","#5e8f3e","#ffffff","#e5f0dc","#e5f0dc","#547e38","#f5ecd4","#8a6a1e","#f5e2e6","#a64a62","#e2e9f5","#3f62a8","#e9f0e3","#d6e6cb","#b8d1a6"],"dark":["#12170f","#1a2015","#eaede8","#b1baab","#788471","#2f372a","#b2d49b","#12170f","#2d411f","#2d411f","#c8e0b8","#39311d","#e3d2ab","#391d25","#dcb1bd","#1d2739","#adbee0","#1d2317","#222a1c","#2c3624"]},
-    "bioF":{"group":"grown","tone":"serious","disp":"Commissioner","dw":700,"dsty":"normal","body":"Ubuntu","ru":null,"shape":["18px","12px","50%","1.6","round"],"light":["#f8f4f5","#ffffff","#33262b","#6e5d63","#aca1a5","#eee2e6","#b0506e","#ffffff","#f5e3e9","#f5e3e9","#9a4862","#f4ebd6","#86682a","#f5e4d8","#a0522d","#e1ecf3","#3a6a8a","#f4eaee","#ecd9e1","#d9b6c4"],"dark":["#170f12","#201519","#ede8ea","#baabb0","#847177","#372a2e","#d39dad","#170f12","#411f2a","#411f2a","#dfb9c5","#39301d","#e3d1ab","#39261d","#e3bdab","#1d2e39","#b0cbde","#21161a","#26191f","#312127"]},
-    "hydra":{"group":"grown","tone":"serious","disp":"Noto Serif","dw":700,"dsty":"normal","body":"Noto Sans","ru":null,"shape":["20px","14px","13px","1.8","round"],"light":["#f0f6f5","#ffffff","#213432","#56706c","#9bacaa","#dcebe8","#2f8a83","#ffffff","#dcefed","#dcefed","#2c7b74","#f4ebd6","#86682a","#f5e3df","#a24f3f","#e8e3f3","#5f52a6","#e4f0ee","#d0e6e2","#a9cfc8"],"dark":["#0f1717","#15201f","#e8eded","#abbab9","#718483","#2a3736","#94dbd5","#0f1717","#1f413f","#1f413f","#b3e5e1","#39301d","#e3d1ab","#39221d","#e0b6ae","#221d39","#bab4da","#172321","#1b2927","#243633"]},
-    "prism":{"group":"grown","tone":"strict","disp":"Inter","dw":700,"dsty":"normal","body":"Inter","ru":null,"shape":["6px","4px","3px","1.6","square"],"light":["#f7f8fa","#ffffff","#1b1f26","#545c69","#9299a5","#e4e7ec","#3b5bb5","#ffffff","#e5eaf7","#e5eaf7","#33509f","#e7ecef","#46566a","#e3efec","#2e6f63","#f2ece0","#7d6430","#eef0f3","#e9ecf0","#f1f2f5"],"dark":["#0f1217","#171b22","#e7eaef","#a5adb9","#6f7785","#282e38","#8ea7f0","#0f1217","#1f2a47","#1f2a47","#a9bcf3","#232a33","#b8c3d1","#19302b","#94d1c3","#332c1c","#dcc690","#13161c","#151a20","#12151a"]}};
+  /* i18n-ignore-start — ids, no words for learners */
+  /* each character: its group in the gallery and its tone (cute · serious · strict: how much game it brings); the order is the gallery's
+     and the token sets' (src/ui/tokens/characters.ts) */
+  const DATA = {
+    hedge: { group: 'animals', tone: 'cute' },
+    owl: { group: 'animals', tone: 'cute' },
+    axo: { group: 'animals', tone: 'cute' },
+    dragon: { group: 'animals', tone: 'cute' },
+    alien: { group: 'animals', tone: 'cute' },
+    bear: { group: 'animals', tone: 'cute' },
+    fruit: { group: 'animals', tone: 'cute' },
+    knight: { group: 'animals', tone: 'cute' },
+    berry: { group: 'animals', tone: 'cute' },
+    hood: { group: 'tales', tone: 'cute' },
+    piglet: { group: 'tales', tone: 'cute' },
+    candy: { group: 'tales', tone: 'cute' },
+    jack: { group: 'tales', tone: 'cute' },
+    frog: { group: 'tales', tone: 'cute' },
+    puss: { group: 'tales', tone: 'cute' },
+    wolf: { group: 'grown', tone: 'serious' },
+    eagle: { group: 'grown', tone: 'serious' },
+    robot: { group: 'grown', tone: 'serious' },
+    heron: { group: 'grown', tone: 'serious' },
+    litM: { group: 'grown', tone: 'serious' },
+    litF: { group: 'grown', tone: 'serious' },
+    techM: { group: 'grown', tone: 'serious' },
+    techF: { group: 'grown', tone: 'serious' },
+    physM: { group: 'grown', tone: 'serious' },
+    physF: { group: 'grown', tone: 'serious' },
+    bioM: { group: 'grown', tone: 'serious' },
+    bioF: { group: 'grown', tone: 'serious' },
+    hydra: { group: 'grown', tone: 'serious' },
+    prism: { group: 'grown', tone: 'strict' }
+  };
   /* i18n-ignore-end */
   /* The characters' words live in the catalog i18n/characters/<locale>.arb (docs/i18n.md), keys char.<id>.…: the tutor's name
      (name; nameNom with article as a subject, nameAcc as an object, nameTo after "to/at" — every language gives the forms it needs,
@@ -49,42 +54,7 @@ window.NoemaThemes = (() => {
   /* a text-friendly face for places where only a character fits (titles of conversations, plain-text buttons) */
   const EMOJI = { hedge: '🦔', owl: '🦉', axo: '🦎', dragon: '🐉', alien: '👽', bear: '🐻', fruit: '🍊', knight: '🛡️', berry: '🍓', hood: '🧺', piglet: '🐷', candy: '🍬', jack: '🌱', frog: '🐸', puss: '🐱', wolf: '🐺', eagle: '🦅', robot: '🤖', heron: '🪶', prism: '🔷',
     litM: '📚', litF: '✒️', techM: '💻', techF: '🖥️', physM: '⚛️', physF: '🪐', bioM: '🧪', bioF: '🧬', hydra: '🐲' };
-  const KEYS = ['bg', 'paper', 'ink', 'ink2', 'ink3', 'line', 'acc', 'acc-ink', 'acc-soft', 't1', 't1i', 't2', 't2i', 't3', 't3i', 't4', 't4i', 'deco1', 'deco2', 'deco3'];
-  const SYS = '"Noto Sans Arabic","Noto Sans Hebrew","Noto Sans Devanagari",var(--noema-cjk,"Noto Sans SC"),ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';   // + the scripts’ self-hosted Noto fonts (fonts/scripts.css, docs/i18n.md §2)   // i18n-ignore (font stack)
-  const q = f => `"${f}"`;
   const DAY = 864e5, FREE_DAYS = 15, CHANGE_DAYS = 5, PREVIEW_MS = 5 * 60e3, DEFAULT = 'hedge';
-
-  /* i18n-ignore-start — CSS */
-  /* ---------- CSS: one block per character; every [data-m] element wears its own theme (the gallery shows each in its own clothes) ---------- */
-  function vars(m, dark) {
-    const d = DATA[m], c = dark ? d.dark : d.light;
-    const [r, br, ir, sw, cap] = d.shape;
-    const disp = [q(d.disp), d.ru ? q(d.ru) : null, q(d.body), SYS].filter(Boolean).join(',');
-    return KEYS.map((k, i) => `--${k}:${c[i]}`).concat([`--display:${disp}`, `--font:${q(d.body)},${SYS}`, `--dw:${d.dw}`, `--dsty:${d.dsty}`,
-      `--r:${r}`, `--br:${br}`, `--ir:${ir}`, `--sw:${sw}`, `--cap:${cap}`, `color-scheme:${dark ? 'dark' : 'light'}`]).join(';');
-  }
-  /* the older engine tokens, mapped onto the character's palette: every existing screen picks the theme up */
-  const BRIDGE = '--card:var(--paper);--bg2:color-mix(in srgb,var(--line) 60%,var(--bg));--r-sm:var(--br);'
-    + '--ok:var(--t1i);--ok-bg:var(--t1);--bad:var(--t3i);--bad-bg:var(--t3);--warn:var(--t2i);--warn-bg:var(--t2);--info:var(--t4i);--info-bg:var(--t4);'
-    + '--violet:var(--acc);--violet-bg:var(--acc-soft);--c:var(--acc);--c-bg:var(--acc-soft);'
-    + '--shadow:0 1px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 24px -14px color-mix(in srgb,var(--ink) 22%,transparent)';
-  let cssDone = false;
-  function css() {
-    let out = '';
-    for (const m of ORDER) {
-      const L = vars(m, false), D = vars(m, true), s = `[data-m="${m}"]`;
-      out += `${s}{${L}}\n`;
-      out += `@media (prefers-color-scheme:dark){:root:not([data-theme="light"])${s},:root:not([data-theme="light"]) ${s}{${D}}}\n`;
-      out += `:root[data-theme="dark"]${s},:root[data-theme="dark"] ${s}{${D}}\n`;
-    }
-    // html[data-m][data-m]: outranks the engine's own dark-mode tokens (:root[data-theme=dark] …), so every screen wears the character
-    return out + `[data-m],html[data-m][data-m]{${BRIDGE}}\n`;
-  }
-  /* i18n-ignore-end */
-  function ensureCSS() {
-    if (cssDone || typeof document === 'undefined') return; cssDone = true;
-    const st = document.createElement('style'); st.id = 'noema-themes'; st.textContent = css(); document.head.append(st);
-  }
 
   /* ---------- the learner's character: a:settings.character (synced). Changes are free for 15 days after the first choice, then once every
      5 days; any other can be tried for 5 minutes. current() is THE character on screen: every surface asks it, never owned() or settings. ---------- */
@@ -116,7 +86,6 @@ window.NoemaThemes = (() => {
   const onChange = f => { listeners.push(f); return () => listeners.splice(listeners.indexOf(f), 1); };
   function apply(m = current()) {
     if (typeof document === 'undefined') return m;
-    ensureCSS();
     const root = document.documentElement;
     if (root.dataset.m !== m) { root.dataset.m = m; root.dataset.tone = DATA[m].tone; listeners.forEach(f => { try { f(m); } catch (e) { } }); }
     return m;
@@ -171,7 +140,7 @@ window.NoemaThemes = (() => {
     addEventListener('noema:remote', e => { if ((e.detail?.keys || []).some(isSettings)) apply(); });
     addEventListener('storage', e => { if (isSettings(e.key)) apply(); });
   }
-  return { DATA, ORDER, GROUPS, EMOJI, css, ensureCSS, apply, current, owned, preview, startPreview, endPreview, choose, canChange, nextChangeAt, freeUntil, locked, onChange,
+  return { DATA, ORDER, GROUPS, EMOJI, apply, current, owned, preview, startPreview, endPreview, choose, canChange, nextChangeAt, freeUntil, locked, onChange,
     tutor, text, uiLang, world, game, settings: settingsOf, putSettings, tone: (m = current()) => DATA[m].tone, PREVIEW_MS, CHANGE_DAYS, FREE_DAYS };
 })();
 if (window.NoemaThemes) window.NoemaThemes.apply();

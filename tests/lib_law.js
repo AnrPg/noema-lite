@@ -1,4 +1,4 @@
-/* law@1 (engine/src/48_lib_law.js, docs/library/law.md): published reference values (Carneades DSL's murder example, van Gijzel &
+/* law@1 (src/engines/law/law.js, docs/library/law.md): published reference values (Carneades DSL's murder example, van Gijzel &
    Nilsson 2014; the Talmud's estate division, Aumann & Maschler 1985; the Minbariyya ʿawl case; the EEC 1958 Council's voting power,
    Felsenthal & Machover 1998; USSG level 20 / category I; Kaplan's threshold with Blackstone's ratio; the MPC homicide ladder; Byrne v
    Van Tienhoven vs CISG 16(1); EU Reg. 1182/71 month ends; Hart's vehicles in the park; the Nixon diamond in ASPIC+), every edge case
@@ -11,8 +11,9 @@ let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol, m) => ok(Number.isFinite(a) && Math.abs(a - b) <= tol, `${m}: ${a} ≈ ${b} (± ${tol})`);
 globalThis.window = globalThis;
-for (const f of ['35_simexpr.js', '46_lib_core.js', '46_lib_schema.js', '47_lib_logic.js', '48_lib_law.js']) require(path.join(SRC, f));
-const X = globalThis.NoemaLibLaw;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaExpr = ENGINES.kernel('expr'), NoemaLibSchema = ENGINES.kernel('schema'), NoemaLibLaw = ENGINES.mod('law@1');
+const X = NoemaLibLaw;
 const sc = (id, of, f) => Object.assign({ id, kind: 'scalar', of }, f || {});
 const R = (model, outputs, env) => X.run({ model, outputs }, env || {}, {});
 const has = (r, c) => r.codes.includes(c);
@@ -316,7 +317,7 @@ print(json.dumps(out))`], { cwd: path.join(ROOT, 'tools'), input: JSON.stringify
   const allCodes = new Set(js.flatMap(r => r.p.map(q => q.code)));
   ok(['format', 'value', 'enum', 'size', 'unknown-field', 'literal', 'duplicate', 'ref', 'cq', 'cycle', 'date', 'grid', 'pattern', 'output', 'parse-token', 'parse-paren', 'parse-eof'].every(c => allCodes.has(c)), 'the fixtures cover every check code: ' + [...allCodes].sort().join(' '));
   ok(X.exprs(fx[0]).some(e => e[1] === 'model.toggles[0].on') && X.keys(fx[0]).some(k => k[0] === 'ruleNoVehicles'), 'exprs lists the numx of the model, keys its labels');
-  const SF = require(path.join(ROOT, 'engine', 'schemaform.js')), LS = globalThis.NoemaLibSchema, sim = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/contracts/schemas/noema.sim-spec.v1.schema.json'), 'utf8'));
+  const SF = require(path.join(ROOT, 'engine', 'schemaform.js')), LS = NoemaLibSchema, sim = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/contracts/schemas/noema.sim-spec.v1.schema.json'), 'utf8'));
   const sch = LS.specSchema(X.id, X.table, sim), Rg = SF.registry([sim, sch]), sid = LS.schemaId(X.id);
   const bad = []; fx.forEach((sp, i) => { if (!sp || X.checkSpec(sp).some(q => q.level === 'error')) return; const er = SF.validate(Rg, sch, sp, sid).filter(x => ['engine', 'model', 'outputs'].includes(x.path[0])); if (er.length) bad.push(i + ' ' + JSON.stringify(er[0])); });
   ok(!bad.length, 'the author\'s form (table → JSON Schema) accepts every fixture checkSpec accepts ' + bad.slice(0, 2).join(' | ')); }

@@ -1,22 +1,17 @@
-/* The engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core (46_lib_core.js and its twin tools/enginelib.py),
-   the catalogue (49_lib_catalog.js), the validators' hook (packcheck.js checkLib, activities.py check_lib), and — for every engine whose
+/* The engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core (src/engines/kernel/core.js and its twin tools/enginelib.py),
+   the catalogue (src/engines/catalog.js), the validators' hook (packcheck.js checkLib, activities.py check_lib), and — for every engine whose
    module exists — the JS ↔ Python parity of checkSpec / exprs / keys on its fixtures tests/fixtures/enginelib/<name>.json
    ({"specs": [spec, …]}). Each engine's own science tests are tests/lib_<name>.js.  Run: node tests/enginelib.js */
 'use strict';
 const path = require('path'), fs = require('fs'), { execFileSync } = require('child_process');
-const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
+const ROOT = path.join(__dirname, '..');
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-for (const f of ['36_engine_circuit.js', '39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js']) require(path.join(SRC, f));   // the plugins (their old messages must stay)
-require(path.join(SRC, '46_lib_core.js'));
-for (const f of fs.readdirSync(SRC).filter(f => /^46_lib_[a-z_]+\.js$/.test(f) && f !== '46_lib_core.js').sort()) require(path.join(SRC, f));   // the shared kits (simkit, space) the engines build on
-const LIBFILES = fs.readdirSync(SRC).filter(f => /^4[78]_lib_[a-z_]+\.js$/.test(f)).sort();
-for (const f of LIBFILES) require(path.join(SRC, f));
-require(path.join(SRC, '49_lib_catalog.js'));
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibCore = ENGINES.kernel('core'), NoemaEngineCatalog = ENGINES.lib.catalog;
 require(path.join(ROOT, 'engine', 'packcheck.js'));
-const C = globalThis.NoemaLibCore, K = globalThis.NoemaEngineCatalog, PC = globalThis.NoemaPackCheck;
+const C = NoemaLibCore, K = NoemaEngineCatalog, PC = globalThis.NoemaPackCheck;
 const py = (code, input) => execFileSync('python3', ['-c', code], { cwd: path.join(ROOT, 'tools'), input, encoding: 'utf8', maxBuffer: 1 << 26 });
 
 // ---- 1. the core's checker and its Python twin agree ----
@@ -46,10 +41,11 @@ const sc = C.scene([0, 1, 0, 1]); sc.pt(0.5, 0.5, { c: 'hi', key: 'a' }); sc.pt(
 ok(sc.done().items.length === 2 && sc.done().items[0].k === 'pt', 'scenes keep only finite items');
 
 // ---- 3. the Worker source ----
-ok(typeof NoemaExpr.source === 'function' && /noemaExprModule/.test(NoemaExpr.source()), 'NoemaExpr.source(): the expression language travels to the Worker');
+ok(ENGINES.lib.ids().every(id => typeof ENGINES.mod(id).engine.workerSource === 'string'), 'every engine has its Worker bundle: the expression language travels to the Worker with it');
 { const vm = require('vm'), ctx = { self: {} }; ctx.self.self = ctx.self; vm.createContext(ctx);
-  vm.runInContext('var self = this.self;' + NoemaExpr.source() + '\n;' + C.source(), ctx);
-  ok(!!ctx.self.NoemaExpr && !!ctx.self.NoemaLibCore && ctx.self.NoemaLibCore.cx('3*x')({ x: 2 }) === 6, 'the core and NoemaExpr run in a fresh global (the Worker)'); }
+  vm.runInContext('var self = this.self;' + ENGINES.mod('ode@1').engine.workerSource, ctx);
+  const S = ctx.self.__noemaShared || {};
+  ok(!!S['kernel/simexpr.js'] && !!S['kernel/core.js'] && S['kernel/core.js'].cx('3*x')({ x: 2 }) === 6 && !!ctx.self.noemaEngine, 'the core and the expression language run in a fresh global (the Worker)'); }
 
 // ---- 4. the catalogue ----
 const ids = K.CATALOG.map(e => e.id);
@@ -61,7 +57,7 @@ ok(JSON.stringify(pyLib[0]) === JSON.stringify(libJS) && JSON.stringify(pyLib[1]
 for (const [q, want] of [['predator prey population oscillations', 'ode@1'], ['Ύφανση σε αργαλειό', 'craft@1'], ['the brachial plexus: a nerve lesion', 'anatomy@1'], ['Hijri and Hebrew calendar dates of an event', 'timeline@1'], ['sensitivity and specificity of a test', 'med@1'], ['Wahrscheinlichkeit und Verteilung', 'prob@1'], ['кратчайший путь в графе', 'graph@1'], ['intervalle et accord', 'music@1']])
   ok((K.suggest(q)[0] || {}).id === want, `suggest("${q}") → ${want}`);
 ok(K.suggest('').length === 0 && K.suggest('zz').length === 0, 'suggest of nothing is nothing');
-for (const e of K.CATALOG.filter(e => e.layer === 'library' && e.global)) ok(fs.existsSync(path.join(SRC, e.file)), `${e.id}: its module ${e.file} exists`);
+for (const e of K.CATALOG.filter(e => e.layer === 'library' && e.plugin)) ok(fs.existsSync(path.join(ROOT, e.file)), `${e.id}: its module ${e.file} exists`);
 
 // ---- 5. the validators' hook, scene / sound plots and line styles (the old messages stay for other engines) ----
 const base = { format: 'noema.sim-spec/v1', params: [{ id: 'k', kind: 'slider', label: 'k', min: 0, max: 1, default: 0.5 }] };
@@ -76,9 +72,9 @@ ok(st1.length === 1 && /series\[1\]\.style is one of line, bars, steps, points/.
 
 // ---- 6. every engine that exists: JS ↔ Python parity on its fixtures ----
 const FIX = path.join(ROOT, 'tests', 'fixtures', 'enginelib');
-for (const e of K.CATALOG.filter(e => e.layer === 'library' && e.global)) {
-  const M = globalThis[e.global], name = e.slug, pyFile = path.join(ROOT, 'tools', `lib_${name}.py`), fx = path.join(FIX, name + '.json');
-  if (!M) { console.log(`· ${e.id}: not built yet (no ${e.global})`); continue; }
+for (const e of K.CATALOG.filter(e => e.layer === 'library' && e.plugin)) {
+  const M = ENGINES.lib.loaded(e.id), name = e.slug, pyFile = path.join(ROOT, 'tools', `lib_${name}.py`), fx = path.join(FIX, name + '.json');
+  if (!M) { console.log(`· ${e.id}: not built yet (no module ${e.file})`); continue; }
   ok(typeof M.checkSpec === 'function' && typeof M.exprs === 'function' && typeof M.keys === 'function' && M.engine && M.engine.id === e.id && typeof M.engine.workerSource === 'string', `${e.id}: the module API (checkSpec, exprs, keys, engine with workerSource)`);
   ok(fs.existsSync(pyFile), `${e.id}: its Python twin tools/lib_${name}.py`);
   ok(fs.existsSync(fx), `${e.id}: its fixtures tests/fixtures/enginelib/${name}.json`);
@@ -101,7 +97,7 @@ print(json.dumps(out))`, JSON.stringify(specs)));
 {
   const EX = path.join(ROOT, 'tools', 'activities_examples'), anew = fs.readFileSync(path.join(ROOT, 'skill', 'noema-pack-builder', 'scripts', 'activity_new.py'), 'utf8');
   const refs = fs.readdirSync(EX).filter(d => fs.existsSync(path.join(EX, d, 'spec.json'))).map(d => ({ d, spec: JSON.parse(fs.readFileSync(path.join(EX, d, 'spec.json'), 'utf8')) })).filter(r => Object.prototype.hasOwnProperty.call(PC.ACTIVITY_RULES.LIB, r.spec.engine));
-  for (const e of K.CATALOG.filter(x => x.layer === 'library' && x.global && globalThis[x.global] && globalThis[x.global].checkSpec)) {
+  for (const e of K.CATALOG.filter(x => x.layer === 'library' && x.plugin && ENGINES.lib.loaded(x.id) && ENGINES.lib.loaded(x.id).checkSpec)) {
     const mine = refs.filter(r => r.spec.engine === e.id);
     ok(mine.length > 0, `${e.id}: has a reference activity (${mine.map(r => r.d).join(', ') || 'none'})`);
     for (const { d, spec } of mine) {

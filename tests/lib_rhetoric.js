@@ -1,4 +1,4 @@
-/* rhetoric@1 (engine/src/48_lib_rhetoric.js, docs/library/rhetoric.md): the format rules (WUDC BP manual, WSDC rules, NSDA LD and
+/* rhetoric@1 (src/engines/rhetoric/rhetoric.js, docs/library/rhetoric.md): the format rules (WUDC BP manual, WSDC rules, NSDA LD and
    policy, IDEA Karl Popper, Intelligence Squared), the readability formulas with their published coefficients (Flesch 1948, Kincaid
    et al. 1975, Amstad 1978, Bamberger & Vanecek 1984, Kandel & Moles 1958, Oborneva 2006, Björnsson 1968, Anderson 1983), figures on
    classic texts in five languages (Churchill 1940, Lincoln 1863, Kennedy 1961, Caesar, Dickens 1859, Molière 1668, Mark 2:27 in German
@@ -11,11 +11,9 @@ let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol, m) => ok(Number.isFinite(a) && Math.abs(a - b) <= tol, `${m}: ${a} ≈ ${b} (± ${tol})`);
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js'));
-require(path.join(SRC, '46_lib_core.js'));
-require(path.join(SRC, '47_lib_logic.js'));
-require(path.join(SRC, '48_lib_rhetoric.js'));
-const X = globalThis.NoemaLibRhetoric;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibLogic = ENGINES.mod('logic@1'), NoemaLibRhetoric = ENGINES.mod('rhetoric@1');
+const X = NoemaLibRhetoric;
 const sc = (id, of, f) => Object.assign({ id, kind: 'scalar', of }, f || {});
 const run = (model, outputs, env) => X.run({ model, outputs }, env || {}, {});
 const has = (r, id, c) => r.codes.some(x => x.id === id && x.code === c);
@@ -146,8 +144,8 @@ const ballot = (id, ranks, pts, chair, round) => ({ id, chair: !!chair, round: r
 { const r = run({ speeches: [], debate: { format: 'bp', teams: bpTeams } }, [sc('w', 'winner')]); ok(Number.isNaN(r.out.w) && has(r, 'w', 'no_ballots'), 'no ballots: NaN, code no_ballots'); }
 
 // ---- 5. argumentation: Dung 1995 through logic@1, Toulmin, schemes and fallacies, weighing, the flow ----
-const L = globalThis.NoemaLibLogic;
-ok(!!(L && L.afSolve && L.parse && L.rowsOf && L.evalProp && L.syllogism && L.source), 'logic@1 exports afSolve, parse, atomsOf, evalProp, rowsOf, syllogism, source (rhetoric@1 calls them, never re-implements them)');
+const L = NoemaLibLogic;
+ok(!!(L && L.afSolve && L.parse && L.rowsOf && L.evalProp && L.syllogism), 'logic@1 exports afSolve, parse, atomsOf, evalProp, rowsOf, syllogism (rhetoric@1 calls them, never re-implements them)');
 { const nodes = ['a', 'b', 'c'].map(id => ({ id })), map = { nodes, edges: [{ from: 'c', to: 'b', kind: 'attack' }, { from: 'b', to: 'a', kind: 'attack' }] };
   const r = run({ map }, ['a', 'b', 'c'].map(x => sc(x, 'label', { node: x })));
   ok(r.out.a === 1 && r.out.b === 0 && r.out.c === 1, 'Dung 1995 reinstatement: c attacks b attacks a — grounded labels a in, b out, c in'); }

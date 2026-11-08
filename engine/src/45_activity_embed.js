@@ -137,7 +137,7 @@ var NoemaEmbed = (() => {   // the page loads this file on its own, beside packc
     w.head.replaceChildren(m, s); w.body.replaceChildren(f);
     return '<!doctype html>' + w.documentElement.outerHTML;
   }
-  /** join the app's activity core: at load when it is there already (the activity harness), else engine.js calls it (43_engines_p6.js) */
+  /** join the app's activity core: at load when it is there already (the activity harness), else engine.js calls it (43_page_runtimes.js) */
   function register(ACT = typeof globalThis.ACT === 'object' ? globalThis.ACT : (typeof window !== 'undefined' ? window.ACT : null)) {
     if (typeof ACT !== 'object' || !ACT || typeof ACT.registerRuntime !== 'function' || typeof document === 'undefined') return;
     if (!(window.NOEMA_CONFIG && window.NOEMA_CONFIG.activities && window.NOEMA_CONFIG.activities[RUNTIME] === true)) return;   // opt-in per deployment

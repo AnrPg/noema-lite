@@ -1,4 +1,4 @@
-/* timeline@1 (engine/src/48_lib_timeline.js, docs/library/timeline.md): published reference values (the source in each message),
+/* timeline@1 (src/engines/timeline/timeline.js, docs/library/timeline.md): published reference values (the source in each message),
    the calendars against ICU (node's Intl, an independent implementation) on thousands of days, the edge cases and their codes, the
    checker's codes, the sim adapter, the Worker source in a fresh global, speed.  Run: node tests/lib_timeline.js */
 'use strict';
@@ -8,8 +8,9 @@ let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '48_lib_timeline.js'));
-const L = globalThis.NoemaLibTimeline, J0 = L.J0;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibTimeline = ENGINES.mod('timeline@1');
+const L = NoemaLibTimeline, J0 = L.J0;
 const G = (y, m, d) => L.gToRD(y, m, d), J = (y, m, d) => L.jToRD(y, m, d);
 const cv = (rd, cal, o) => L.convert(rd, cal, o);
 const to = (f, o) => L.toRD(f, o);

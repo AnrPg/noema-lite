@@ -578,8 +578,8 @@ async function circuit(p, ctx, E) {
   ok(!sc.id && !sc.verdict && !sc.reveal, 'the hidden fault is nowhere in the page before the diagnosis (no id, no verdict, no reveal)');
   await measure({ i: 'V', a: 'TP3', b: 'GND' }); await measure({ i: 'V', a: 'LK', b: 'GND' }); await measure({ i: 'V', a: 'LA', b: 'GND' }); await measure({ i: 'I', part: 0 });
   let L = await logs();
-  // the same readings from NoemaCircuit itself: the netlist, the fault ledReversed, the seeded noise of the exercise (seed 7), the same order
-  const want = await p.evaluate(() => { const sp = ACT.ITEMS['led-bench'].spec, s = NoemaCircuit.create(sp.model.netlist, { faults: sp.bench.faults.find(f => f.id === 'ledReversed').apply, seed: 7, noise: { rel: sp.model.noise.rel, abs: 0, seed: 7 } });
+  // the same readings from the circuit engine itself (NoemaCore.engines.loaded('circuit-mna@1')): the netlist, the fault ledReversed, the seeded noise of the exercise (seed 7), the same order
+  const want = await p.evaluate(() => { const sp = ACT.ITEMS['led-bench'].spec, s = NoemaCore.engines.loaded('circuit-mna@1').create(sp.model.netlist, { faults: sp.bench.faults.find(f => f.id === 'ledReversed').apply, seed: 7, noise: { rel: sp.model.noise.rel, abs: 0, seed: 7 } });
     return [{ kind: 'V', a: 'TP3', b: 'gnd' }, { kind: 'V', a: '@D1.1', b: 'gnd' }, { kind: 'V', a: '@D1.0', b: 'gnd' }, { kind: 'I', element: 'R1' }].map(q => s.measure(q).value); });
   const close = L.length === 4 && L.every((t, i) => Math.abs(val(t) - want[i]) <= 0.005 * Math.abs(want[i]) + 1e-3);
   ok(close && val(L[0]) > 4.9 && val(L[1]) > 4.9 && Math.abs(val(L[2])) < 0.05, `the multimeter shows the engine's numbers: ${L.join(' · ')} (NoemaCircuit: ${want.map(v => +v.toPrecision(3)).join(' · ')})`);
@@ -693,10 +693,10 @@ async function p6engines(p, ctx, E) {
   };
   const ro = (sel, i) => p.evaluate(([s, k]) => document.querySelectorAll(s + ' .sim-ro dd')[k]?.textContent || '', [sel, i]);
   const setNum = async (sel, id, v) => { await p.locator(sel + ` input.sim-num[data-param="${id}"]`).fill(String(v)); await p.locator(sel + ` input.sim-num[data-param="${id}"]`).press('Tab'); };
-  // what the engine itself gives on the page for these values (the same spec, the app's NoemaExpr): the reference for the worker's numbers
+  // what the engine itself gives on the page for these values (the same spec, the app's NoemaCore.engines.expr): the reference for the worker's numbers
   const direct = (aid, vals) => p.evaluate(([a, v]) => { const sp = ACT.ITEMS[a].spec, E = ACT.engine(sp.engine), env = { ...(sp.consts || {}) };
-    for (const q of sp.params) env[q.id] = q.id in v ? v[q.id] : q.default; for (const d of sp.derived || []) env[d.id] = NoemaExpr.compile(d.expr)(env);
-    return E.create(sp, { seed: 1 }).run(E.prepare(sp, NoemaExpr.compile)(env)); }, [aid, vals]);
+    for (const q of sp.params) env[q.id] = q.id in v ? v[q.id] : q.default; for (const d of sp.derived || []) env[d.id] = NoemaCore.engines.expr.compile(d.expr)(env);
+    return E.create(sp, { seed: 1 }).run(E.prepare(sp, NoemaCore.engines.expr.compile)(env)); }, [aid, vals]);
   ok(await p.evaluate(() => ['thermal@1', 'pid@1', 'rf@1', 'twin@1'].every(e => ACT.caps().has('engine:' + e) && typeof ACT.engine(e)?.workerSource === 'string') && ACT.engine('twin@1').bench === true && checkRequires().every(x => x === 'runtime:py-module@1' && !ACT.enabled('py-module@1'))),
     'the app has engine:thermal@1, engine:pid@1, engine:rf@1 and engine:twin@1 (each with a workerSource; twin@1 runs benches); pack.requires is met (but for Python where it cannot run) ' + JSON.stringify(await p.evaluate(() => checkRequires())));
 
@@ -778,7 +778,7 @@ async function p6engines(p, ctx, E) {
   ok(/sim-dx-out (ok|bad)/.test(v.cls) && v.txt.length > 5 && v.dis, `"Check my diagnosis": the verdict (${v.txt}) and the bench locks`);
   // the readings are the engine's: the same device and fault, measured by NoemaTwin on the page
   const want = await p.evaluate(() => { const sp = ACT.ITEMS['node-bench'].spec, E = ACT.engine('twin@1'), env = { ...(sp.consts || {}), period: 60, perDay: 1440 };
-    return ['antenna', 'ageing', 'wake'].map(id => E.create(sp, { seed: 1, faults: sp.bench.faults.find(f => f.id === id).apply }).measure(E.prepare(sp, NoemaExpr.compile)(env), { kind: 'I' }).value); });
+    return ['antenna', 'ageing', 'wake'].map(id => E.create(sp, { seed: 1, faults: sp.bench.faults.find(f => f.id === id).apply }).measure(E.prepare(sp, NoemaCore.engines.expr.compile)(env), { kind: 'I' }).value); });
   ok(want.some(w => Math.abs(val(L[1]) - w) <= 0.01 * w), `the ammeter shows the engine's average current for the drawn device (${L[1]}; NoemaTwin: ${want.map(w => (w * 1e6).toFixed(1) + ' µA').join(', ')})`);
   ok(E.length === E0, 'no page errors ' + JSON.stringify(E.slice(E0, E0 + 3)));
 }

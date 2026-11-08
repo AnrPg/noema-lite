@@ -24,6 +24,7 @@ engine/
   loader.js                profiles, subject picker, pack loading, namespaced storage, backups, restore points
   cloud.js                 Supabase adapter (auth, sync, snapshots, private storage) — dependency-free
   src/*.js, src/*.css      the study engine source  →  engine.js / engine.css (GENERATED, like engine/i18n/ and langui.*)
+  tokens.css               the design tokens: the base set and every character's (GENERATED from ../src/ui/tokens by npm run build)
   vendor/                  marked, DOMPurify, KaTeX
 library/
   groups.json              groups of the subject picker

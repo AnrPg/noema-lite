@@ -1,4 +1,4 @@
-/* The thermal engine thermal@1 (engine/src/39_engine_thermal.js, docs/INTERACTIVE_ENGINES.md §2) against analytic results:
+/* The thermal engine thermal@1 (src/engines/thermal/thermal.js, docs/INTERACTIVE_ENGINES.md §2) against analytic results:
    1. steady state: ΔT = P·Rth exactly (a MOSFET on a heatsink), convection h·A, radiation, parallel paths, energy balance (a PCB trace);
    2. transients: the RC step (τ = RC within 0.5 %), trapezoidal vs backward Euler, a sine source's amplitude, PWM mean and ripple;
    3. the time constants (one node, a massless node in the path, two nodes); a room with a thermostat (hysteresis, duty);
@@ -7,8 +7,9 @@
    Usage: node tests/thermal.js */
 const path = require('path'), fs = require('fs'), cp = require('child_process'), os = require('os');
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '39_engine_thermal.js'));
-const T = globalThis.NoemaThermal;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaThermal = ENGINES.mod('thermal@1');
+const T = NoemaThermal;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const rel = (a, b) => Math.abs(a - b) / Math.abs(b);

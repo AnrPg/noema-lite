@@ -286,8 +286,8 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 9. As built — P3 (`circuit-mna@1` and the fault-finding bench, 2026-11-04)
 
-* **The engine in sim-spec.** `engine/src/36_engine_circuit.js` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
-  instruments, seeded noise) is registered by `engine/src/36_engine_circuit_sim.js` as `circuit-mna@1` with `{bench: true, check,
+* **The engine in sim-spec.** `src/engines/circuit/circuit.js` (NoemaCircuit: MNA, Newton, trapezoidal transients, faults,
+  instruments, seeded noise) is registered by `src/engines/circuit/sim.js` as `circuit-mna@1` with `{bench: true, check,
   prepare, create, workerSource}`. `workerSource` is the engine's own source (`NoemaCircuit.source()`, the module's
   `Function.toString`) plus the adapter's: one copy of the code, the same in the page and in the worker. `prepare` evaluates the
   spec's expressions (bindings, transient times, `at`) with the app's NoemaExpr on the main thread, so the worker gets numbers only
@@ -393,8 +393,8 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
 
 ## 12. As built — P6 engines (`thermal@1`, `pid@1`, `rf@1`, `twin@1`, 2026-11-04)
 
-* **Registration like `circuit-mna@1`.** The four engines (`engine/src/39_engine_thermal.js` … `42_engine_twin.js`, each with its
-  Python twin `tools/{thermal,pid,rf,twin}.py`) are registered by `engine/src/43_engines_p6.js`, one `ACT.registerEngine(…engine)`
+* **Registration like `circuit-mna@1`.** The four engines (`src/engines/thermal/thermal.js` … `src/engines/twin/twin.js`, each with its
+  Python twin `tools/{thermal,pid,rf,twin}.py`) are registered by `engine/src/43_page_runtimes.js`, one `ACT.registerEngine(…engine)`
   each: `{id, check, prepare, create, workerSource}`, and `bench: true` for `twin@1`. Every run is in a Worker built from the
   engine's own source; `prepare` evaluates the expressions on the main thread. Formats and APIs: `docs/INTERACTIVE_ENGINES.md`
   (folded from the four development notes, now removed).
@@ -415,7 +415,7 @@ mode, audits. The content work (the electronics Roadmap) starts only after the h
   should not list them (INTERACTIVE_AUTHORING.md).
 * **Loaded wherever NoemaCircuit is.** The four engine files sit beside `packcheck.js` in the shell (`index.html`), the site, the
   one-file bundle and the MCP connector (`tools/build.py`, `tests/connector.js`); the skill zip ships the Python twins next to
-  `activities.py`, and the activity harness loads the engines and `43_engines_p6.js` after the circuit engine.
+  `activities.py`, and the activity harness loads the engines and `engine/src/43_page_runtimes.js` after the circuit engine.
 * **Reference activities** `heatsink` (thermal), `pid-tune`, `lora-link` and `sensor-node` (twin), each with en/el/ru/fr strings, a
   fallback picture and text and six `tests.json` cases; `tests/activities_pack.py` builds them into a pack (11 activities with
   wasm-oscillator, py-filter and planets-quiz) and back; `activity_new.py --from heatsink | pid-tune | lora-link | sensor-node` starts from them.
@@ -507,7 +507,7 @@ request for each subject; Γ: a library of general engines), **Γ is the canonic
 - **Γ, the library** (`docs/INTERACTIVE_LIBRARY.md`): general engines, each for a whole family of subjects — mathematics (`formula@1`,
   `ode@1`, `prob@1`, `graph@1`, `geom@1`), life sciences and medicine (`genetics@1`, `seq@1`, `med@1`, `clinic@1` — clinical reasoning,
   its own engine and the deepest — `anatomy@1`), humanities, arts and crafts (`timeline@1` with every calendar first-class, `music@1`,
-  `map@1`, `text@1`, `craft@1`). One contract (`46_lib_core.js` + a module per engine + a Python twin of its checks), new output kinds
+  `map@1`, `text@1`, `craft@1`). One contract (`src/engines/kernel/core.js` + a module per engine + a Python twin of its checks), new output kinds
   `scene` and `sound` and line styles for library engines only. Models follow current published science; every source, validity
   range and "check before release" value is in the engine's chapter (`docs/library/<name>.md`).
 - **A, the free way**, stays: `formula@1` is in the library; `html-app@1` and `py-module@1` when no engine fits.
@@ -540,3 +540,18 @@ a spec without `parts` is checked, run and graded exactly as before, and every o
   engines the item declares, under the same host checks as `noema.engine` (§15).
 - **Tests.** `tests/parts.js` (the plan, both validators on `tests/fixtures/parts_cases.json`, the steppers, the orchestrator, the
   mini-app bridge, the three references), `tests/activities_pack.py` (the `_parts` round trip) and the activity harness in Chromium.
+
+## 17. Addendum — the engines as ES modules, plugins of the microkernel (2026-11-07)
+
+The sections above describe the engines as page scripts (`engine/src/35–49_*.js`, globals such as `NoemaCircuit`, `NoemaLibCore`,
+a Worker source made with `Function.toString`). They are now ES modules in `src/engines/<name>/` (the shared kernel in
+`src/engines/kernel/`), each a plugin of the microkernel (`src/plugins`, one line of `src/engines/plugins.ts`: its manifest
+`engine:<id>`, its module, its Worker bundle). The page reaches them only through `NoemaCore.engines` (`src/engines/library.ts`):
+`ids()`, `load(ids)` (lazy: an activity loads the engines it needs before it starts; `packcheck.js` loads `enginesNamed(pack)` before
+checking a pack), `loaded(id)`, `engine(id)`, `catalog`, `expr`, `schema()`. A Worker runs the engine's **Worker bundle**, built by
+esbuild from the same module (`noemaWorkers` in `tools/esbuild.mjs`), so the page and the Worker still run one copy of the
+code. The library is in three entries of `tools/esbuild.mjs`: `build/app.js` (the app root registers it as `NoemaCore.engines`: the
+site, the one-file bundle), `build/harness.js` (`NoemaCore` of an activity host: the skill's `activity_host/noema-core.js`) and
+`build/engines-node.cjs` (`tests/engines.cjs`); the connector imports `src/engines/node.ts` in its root. The Python twins and
+the parity fixtures are unchanged; the outputs of every engine were compared run by run with the page scripts they replace.
+`engine/src/43_engines_p6.js` became `engine/src/43_page_runtimes.js` (only `wasm-module@1` and `external-embed@1` stay page runtimes).

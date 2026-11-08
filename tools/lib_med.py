@@ -1,4 +1,4 @@
-"""med@1 — the Python twin of engine/src/48_lib_med.js (docs/library/med.md): check_spec(spec), exprs(spec), keys(spec) give the same
+"""med@1 — the Python twin of src/engines/med/med.js (docs/library/med.md): check_spec(spec), exprs(spec), keys(spec) give the same
 problems (code, path, msg, level) and lists as the JS checkSpec / exprs / keys. It does not compute; SIG (the table of functions, their
 inputs, outputs, series, scenes, options and units) is the same JSON as the engine's (tests/lib_med.js compares them)."""
 import json

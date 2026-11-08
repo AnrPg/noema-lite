@@ -1,4 +1,4 @@
-"""geom@1 — the Python twin of engine/src/47_lib_geom.js (docs/library/geom.md): check_spec(spec), exprs(spec), keys(spec) give the
+"""geom@1 — the Python twin of src/engines/geom/geom.js (docs/library/geom.md): check_spec(spec), exprs(spec), keys(spec) give the
 same problems (code, path, msg, level) and lists as the JS checkSpec / exprs / keys (tests/enginelib.js compares them on
 tests/fixtures/enginelib/geom.json). It does not build the construction."""
 import re

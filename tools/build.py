@@ -343,10 +343,11 @@ def build_site(metas):
             dst = os.path.join(out, f['path']); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f['path']), dst)
         for f in m.get('media') or []:
             dst = os.path.join(out, f); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy(os.path.join(ROOT, f), dst)
-    for f in ('engine.js', 'engine.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
-    os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True); [shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f)) for f in ('35_simexpr.js', '36_engine_circuit.js', *P6_ENGINES, *LIB_ENGINES)]   # NoemaExpr, NoemaCircuit and the P6 engines beside packcheck.js: the shell checks sim-spec@1 packs before any subject (and engine.js) is open
-    for f in ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js'): shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
-    # the TypeScript bundles (build/: npm run build) with their source maps; the connector is a function, not a page file
+    for f in ('engine.js', 'engine.css', 'tokens.css', 'loader.js', 'i18n.js', 'themes.js', 'art.js', 'shell.js', 'react.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'mt.js', 'wordlink.js', 'bridge.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'sourceplan.js', 'vault.js', 'social.js', 'packgen.js', 'curmap.js', 'search.js', 'catalog.js', 'report.js', 'enginereq.js', 'authoring.js', 'srcfiles.js', 'viewer.js', 'schemaform.js', 'activity_author_schemas.js', 'activity_author.js', 'activity_author.css'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))   # (the activity author's four load on #/author)
+    os.makedirs(os.path.join(out, 'engine', 'src'), exist_ok=True)
+    for f in PAGE_SRC: shutil.copy(os.path.join(ENGINE, 'src', f), os.path.join(out, 'engine', 'src', f))   # NoemaXAPI for the shell's ⋮; NoemaWasm and NoemaEmbed beside packcheck.js (wasm-module@1, external-embed@1)
+    # the TypeScript bundles of the page (build/: npm run build) with their source maps — build/app.js holds the engine library
+    # too (NoemaCore.engines); the connector is a function, the harness and the node bundles are not the site's
     os.makedirs(os.path.join(out, 'build'))
     for e in BUILD_MANIFEST['entries'].values():
         if e['kind'] in ('page', 'worker'):
@@ -355,6 +356,7 @@ def build_site(metas):
     shutil.copy(os.path.join(ROOT, 'manifest.webmanifest'), out)
     shutil.copytree(os.path.join(ROOT, 'icons'), os.path.join(out, 'icons'))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
+    for f in ENGINES_LICENSES: shutil.copy(os.path.join(ROOT, f), os.path.join(out, 'engine', 'vendor', os.path.basename(f)))   # the licences of the vendored code inside build/app.js (map@1)
     shutil.copytree(os.path.join(ENGINE, 'i18n'), os.path.join(out, 'engine', 'i18n'))   # the UI catalogs (docs/i18n.md), loaded per locale
     shutil.copytree(os.path.join(ROOT, 'fonts'), os.path.join(out, 'fonts'), ignore=shutil.ignore_patterns('*.md', '*.json'))   # the characters' self-hosted fonts
     for m in metas:
@@ -405,22 +407,20 @@ def write_service_worker(out):
        + json.dumps(cfg, separators=(',', ':')) + ';\n' + open(sw, encoding='utf-8').read().replace('//# sourceMappingURL=sw.js.map', ''))
     print(f'service worker: {len(cfg["shell"])} files precached · version {cfg["version"]}')
 
-# the P6 engines of sim-spec@1 (docs/INTERACTIVE_ENGINES.md): their check code is loaded beside packcheck.js like NoemaCircuit; registered by 43_engines_p6.js
-P6_ENGINES = ('39_engine_thermal.js', '40_engine_pid.js', '41_engine_rf.js', '42_engine_twin.js')
-KERNEL = '46_lib_simkit.js'   # the simulation kernel (docs/library/simkit.md): loaded after NoemaExpr, before the plugins 39–42 and the library, which use it
-# the engine library of sim-spec@1 (docs/INTERACTIVE_LIBRARY.md): the shared core, every general engine (47–48_lib_*.js) and the catalogue
-# (which also registers them); loaded beside packcheck.js like the P6 engines; their Python twins tools/enginelib.py + tools/lib_<name>.py
-LIB_ENGINES = ('46_lib_core.js', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '46_lib_*.js')) if not f.endswith('46_lib_core.js')), *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ENGINE, 'src', '4[78]_lib_*.js'))), '49_lib_catalog.js')
-LIB_VENDOR = ('geographiclib-geodesic@2.2.0/noema-geodesic.js', 'world-atlas@2.0.2/noema-land-110m.js')   # vendored code of library engines (engine/vendor/, each with its licence), loaded before 46–49_lib_*.js: map@1's exact geodesics and land
+# the engine library (src/engines, docs/INTERACTIVE_LIBRARY.md): every engine of sim-spec@1 is an ES module and a plugin of the
+# microkernel, bundled by tools/esbuild.mjs into build/app.js (NoemaCore.engines; the site, the one-file bundle), build/harness.js
+# (the skill's activity_host/noema-core.js) and build/engines-node.cjs (the node suites); the connector imports it
+# (src/composition/connector.ts). Their Python twins: tools/enginelib.py + tools/lib_<name>.py, tools/{circuit,thermal,pid,rf,twin}.py.
+ENGINES_LICENSES = ('src/engines/map/vendor/LICENSE-geographiclib-geodesic.txt', 'src/engines/map/vendor/LICENSE-world-atlas')   # map@1's vendored code, inside the bundles
 
 # engine/src files the page loads by themselves, before engine.js (the shell checks packs with them and the ⋮ exports with
 # NoemaXAPI before any subject is open). They run once: engine.js leaves them out, and every page that starts the engine
 # (index.html, the one-file bundle) must load each of them — check_page_src() stops the build when one is missing.
-PAGE_SRC = ('35_simexpr.js', KERNEL, '36_engine_circuit.js', *P6_ENGINES, *LIB_ENGINES, '43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js')
+PAGE_SRC = ('43_xapi.js', '44_activity_wasm.js', '45_activity_embed.js')
 def check_page_src():
     html = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
-    miss = [f for f in PAGE_SRC if f'<script src="engine/src/{f}"></script>' not in html]
-    if miss: sys.exit('index.html must load these engine/src files itself (engine.js leaves them out): ' + ', '.join(miss))
+    miss = [f for f in ('engine/src/' + f for f in PAGE_SRC) if f'<script src="{f}"></script>' not in html]
+    if miss: sys.exit('index.html must load these files itself (engine.js leaves them out): ' + ', '.join(miss))
 LIB_DOCS = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'docs', 'library', '*.md')))   # the chapters of the engine library (skill references/library/, the connector's guide part "interactive")
 LIB_TOOLS = ['enginelib.py', *sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, 'tools', 'lib_*.py')))]
 # py-module@1 (docs/INTERACTIVE_PYTHON.md §Deployment): the site's one service worker (/sw.js) keeps the Python files; the
@@ -482,13 +482,12 @@ def build_skill(out_zip):
             for f in sorted(glob.glob(os.path.join(ex_root, '**', '*'), recursive=True)):
                 if os.path.isfile(f) and '__pycache__' not in f: ez.write(f, os.path.relpath(f, ex_root).replace(os.sep, '/'))
         z.writestr('noema-pack-builder/scripts/activities_examples.zip', ex_buf.getvalue())
-        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '35_simexpr.js', '36_engine_circuit.js', '36_engine_circuit_sim.js', *P6_ENGINES, '43_engines_p6.js', *LIB_ENGINES, '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
+        z.writestr('noema-pack-builder/scripts/activity_host/noema-core.js', bundle_text('harness'))   # NoemaCore of the harness (build/harness.js): the data contracts and the engine library
+        for f in ('32_activities.js', '33_activity_guard.js', '34_activity_html.js', '35_activity_sim.js', '37_activity_py.js', '37_activity_py_ui.js', '38_activity_h5p.js', '32_activities.css', '44_activity_wasm.js'): z.write(os.path.join(ENGINE, 'src', f), f'noema-pack-builder/scripts/activity_host/{f}')
         h5pv = os.path.join(ENGINE, 'vendor', 'h5p', '3.8.2')   # h5p@1: the app's own H5P player for the harness, with its licences and readable source (GPL-3.0)
         for f in ['player.js', 'LICENSE', 'LICENSE-NOTICE.txt'] + sorted(os.path.relpath(g, h5pv).replace(os.sep, '/') for g in glob.glob(os.path.join(h5pv, 'source', '**', '*'), recursive=True) if os.path.isfile(g)):
             z.write(os.path.join(h5pv, f), 'noema-pack-builder/scripts/activity_host/h5p/' + f)
-        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', f), 'noema-pack-builder/scripts/activity_host/vendor/' + os.path.basename(f))   # the library engines' vendored code (map@1), with its licences
-        for f in LIB_VENDOR: z.write(os.path.join(ENGINE, 'vendor', os.path.dirname(f), next(l for l in os.listdir(os.path.join(ENGINE, 'vendor', os.path.dirname(f))) if l.startswith('LICENSE'))), 'noema-pack-builder/scripts/activity_host/vendor/LICENSE-' + os.path.dirname(f))
-        z.write(os.path.join(ENGINE, 'contracts.js'), 'noema-pack-builder/scripts/activity_host/contracts.js')   # the data contracts packcheck.js checks shapes with
+        for f in ENGINES_LICENSES: z.write(os.path.join(ROOT, f), 'noema-pack-builder/scripts/activity_host/vendor/' + os.path.basename(f))   # the licences of the vendored code inside noema-core.js (map@1)
         z.write(os.path.join(ENGINE, 'packcheck.js'), 'noema-pack-builder/scripts/activity_host/packcheck.js')   # sim-spec@1: the spec check the runtime runs
         for f in ('INTERACTIVE.md', 'INTERACTIVE_AUTHORING.md', 'INTERACTIVE_LIBRARY.md', 'INTERACTIVE_SIMEXPR.md', 'INTERACTIVE_CIRCUIT.md', 'INTERACTIVE_ENGINES.md', 'INTERACTIVE_PYTHON.md', 'INTERACTIVE_H5P.md') + INTERACTIVE_P6:
             if os.path.exists(os.path.join(ROOT, 'docs', f)): z.write(os.path.join(ROOT, 'docs', f), f'noema-pack-builder/references/{f}')
@@ -519,10 +518,10 @@ def public_config():
     g = lambda k: (re.search(k + r"\s*:\s*'([^']*)'", txt) or [None, ''])[1]
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
-# the app's own code the connector runs, in load order (pack checks with the engines they check activities with; curriculum
-# tasks, checks and how answers change a curriculum; pictures; language courses): src/connector/engine/sources.ts lists them
-# and tools/connector_bundle.mjs bundles each as its text. Every engine of the library must be there.
-CONNECTOR_ENGINE = ('engine/contracts.js', 'engine/report.js', 'engine/enginereq.js', 'engine/src/38_activity_h5p.js', 'engine/src/35_simexpr.js', 'engine/src/36_engine_circuit.js', *('engine/src/' + f for f in P6_ENGINES), *('engine/src/' + f for f in LIB_ENGINES), 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
+# the app's own code the connector runs, in load order (pack checks; curriculum tasks, checks and how answers change a
+# curriculum; pictures; language courses): src/connector/engine/sources.ts lists them and tools/connector_bundle.mjs bundles
+# each as its text. The data contracts and the engine library are ES modules the connector's composition root hands them.
+CONNECTOR_ENGINE = ('engine/report.js', 'engine/enginereq.js', 'engine/src/38_activity_h5p.js', 'engine/packcheck.js', 'engine/src/44_activity_wasm.js', 'engine/src/45_activity_embed.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js', 'engine/langcore.js', 'engine/curimport.js', 'engine/sourceplan.js')
 
 def connector_engine_files():
     """The engine files src/connector/engine/sources.ts loads (LEGACY_SOURCES, in order)."""
@@ -609,13 +608,13 @@ def build_bundle(metas):
     # file cannot load build/<worker>.js from file://, so the app starts a Worker from a Blob of <script id="noema-worker:<name>">
     core_scripts = (f'<script>{esc(bundle_text("app"))}</script>\n' if bundle_file('app') else '') + ''.join(
         f'<script type="text/plain" id="noema-worker:{n}">{esc(bundle_text(n))}</script>\n' for n, e in sorted(BUILD_MANIFEST['entries'].items()) if e['kind'] == 'worker')
-    p6_scripts = ''.join(f'<script>{esc(rd("engine/vendor/" + f))}</script>\n' for f in LIB_VENDOR) + ''.join(f'<script>{esc(rd("engine/src/" + f))}</script>\n' for f in (KERNEL, *P6_ENGINES, *(f for f in LIB_ENGINES if f != KERNEL)))   # the kernel first (the plugins 39–42 and the library use it; circuit-mna@1 reaches it only at run time), then the P6 engines' checks beside packcheck, like NoemaCircuit
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>noema-lite</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f8d5a' stroke-width='2.4' stroke-linecap='round'><circle cx='5' cy='19' r='2'/><circle cx='19' cy='5' r='2'/><path d='M7 19h7a3.5 3.5 0 0 0 0-7h-4a3.5 3.5 0 0 1 0-7h7'/></svg>">
 <link href="{google_fonts_url()}" rel="stylesheet">
-<style>{css}</style></head>
+<style>{css}</style>
+<style>{rd('engine/tokens.css')}</style></head>
 <body><div id="noema-splash"><div class="logo"></div></div>
 <script>{esc(rd("config.js"))}</script>{local}
 <script>window.NOEMA_BUNDLE = true;</script>
@@ -634,9 +633,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/claude.js"))}</script>
 <script>{esc(rd("engine/srcfiles.js"))}</script>
 <script>{esc(rd("engine/viewer.js"))}</script>
-<script>{esc(rd("engine/src/35_simexpr.js"))}</script>
-<script>{esc(rd("engine/src/36_engine_circuit.js"))}</script>
-{p6_scripts}<script>{esc(rd("engine/packcheck.js"))}</script>
+<script>{esc(rd("engine/packcheck.js"))}</script>
 <script>{esc(rd("engine/src/43_xapi.js"))}</script>
 <script>{esc(rd("engine/src/44_activity_wasm.js"))}</script>
 <script>{esc(rd("engine/src/45_activity_embed.js"))}</script>

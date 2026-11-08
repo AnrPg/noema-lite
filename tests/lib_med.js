@@ -1,12 +1,13 @@
-/* med@1 (engine/src/48_lib_med.js, docs/library/med.md): published reference values (the source in each message, with its tolerance),
+/* med@1 (src/engines/med/med.js, docs/library/med.md): published reference values (the source in each message, with its tolerance),
    the edge cases and their codes, the checker's codes, the sim adapter, the Worker source in a fresh global, speed, and the SIG table
    being the same in JS and in the Python twin (tools/lib_med.py).  Run: node tests/lib_med.js */
 'use strict';
 const path = require('path'), { execFileSync } = require('child_process'), vm = require('vm');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'engine', 'src');
 globalThis.window = globalThis;
-require(path.join(SRC, '35_simexpr.js')); require(path.join(SRC, '46_lib_core.js')); require(path.join(SRC, '48_lib_med.js'));
-const M = globalThis.NoemaLibMed;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaLibMed = ENGINES.mod('med@1');
+const M = NoemaLibMed;
 let fails = 0, n = 0;
 const ok = (c, m) => { n++; if (c) console.log('✓ ' + m); else { fails++; console.log('✗ ' + m); } };
 const near = (a, b, tol) => Number.isFinite(a) && Math.abs(a - b) <= tol;

@@ -1,4 +1,4 @@
-# `timeline@1` — chronology in every calendar (`engine/src/48_lib_timeline.js`, `NoemaLibTimeline`)
+# `timeline@1` — chronology in every calendar (`src/engines/timeline/timeline.js`, `NoemaLibTimeline`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for dates and time spans: events and periods on one time axis, in
 33 calendars and eras, none of them "the" calendar. Any era can be the main axis of the picture (the Hijri years, the Hebrew years,

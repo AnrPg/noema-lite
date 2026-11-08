@@ -1,4 +1,4 @@
-"""rhetoric@1 in Python (docs/library/rhetoric.md): the twin of the checks of engine/src/48_lib_rhetoric.js — check_spec(spec),
+"""rhetoric@1 in Python (docs/library/rhetoric.md): the twin of the checks of src/engines/rhetoric/rhetoric.js — check_spec(spec),
 exprs(spec), keys(spec) give the same problems (code, path, msg, level) and the same lists as the JS module; tests/enginelib.js and
 tests/lib_rhetoric.js compare both on tests/fixtures/enginelib/rhetoric.json. It does not compute."""
 import re

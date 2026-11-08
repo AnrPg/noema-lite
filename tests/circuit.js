@@ -1,4 +1,4 @@
-/* The circuit engine circuit-mna@1 (engine/src/36_engine_circuit.js, docs/INTERACTIVE_CIRCUIT.md) against analytic results:
+/* The circuit engine circuit-mna@1 (src/engines/circuit/circuit.js, docs/INTERACTIVE_CIRCUIT.md) against analytic results:
    1. DC: divider, diode and LED with a resistor, BJT switch (Ebers–Moll saturation voltage), MOSFET switch, op-amp inverting gain;
    2. transients: RC charge, RL, series RLC (frequency and decay), RC low-pass at fc (sine steady state), PWM average through RC;
    3. instruments: ohmmeter, scope stats, logic analyser edges on a PWM node;
@@ -7,8 +7,9 @@
    Usage: node tests/circuit.js */
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
-require(path.join(ROOT, 'engine', 'src', '36_engine_circuit.js'));
-const C = globalThis.NoemaCircuit;
+const ENGINES = require('./engines.cjs'); ENGINES.core();   // the engine library (src/engines), every engine loaded (globalThis.NoemaCore.engines)
+const NoemaCircuit = ENGINES.kernel('circuit');
+const C = NoemaCircuit;
 let n = 0, fails = 0;
 const ok = (c, m) => { n++; if (!c) { fails++; console.log('✗ ' + m); } else console.log('✓ ' + m); };
 const rel = (a, b) => Math.abs(a - b) / Math.abs(b);
@@ -223,8 +224,11 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   ok(cf([{ element: 'D1', kind: 'reverse' }, { element: 'R1', kind: 'open' }, { element: 'R1', kind: 'drift', factor: 10 }, { node: 'a', kind: 'open-trace' }, { element: 'R1', kind: 'short' }]).length === 0, 'checkFaults: good faults pass');
   const bad = cf([{ element: 'R9', kind: 'open' }, { element: 'R1', kind: 'melt' }, { node: 'zz', kind: 'open-trace' }, { element: 'R1', kind: 'drift', factor: 0 }, { element: 'D1', kind: 'drift', param: 'gain' }, { element: 'R1', kind: 'open', pin: 2 }, { node: 'a', kind: 'open-trace', side: ['V1'] }, { element: 'R1', kind: 'open', colour: 'red' }]);
   ok(bad.length === 8 && /faults\[0\]\.element/.test(bad[0]) && /faults\[6\]\.side\[0\] does not touch/.test(bad[6]), 'checkFaults: unknown part, kind, node, factor, param, pin, side and field are each reported ' + JSON.stringify(bad));
-  ok(typeof C.source() === 'string' && /^\(function noemaCircuitModule\(root\)/.test(C.source()) && C.FAULT_KINDS.includes('reverse'), 'source(): the engine as text, to run it in a worker');
-  { const g = {}; (new Function('self', C.source()))(g); ok(Math.abs(g.NoemaCircuit.create(divider()).dc().nodes.out - 7.5) < 1e-6, 'the engine built from its own source computes the same'); }
+  const W = ENGINES.mod('circuit-mna@1').engine.workerSource;
+  ok(typeof W === 'string' && W.length > 1000 && C.FAULT_KINDS.includes('reverse'), 'workerSource: the engine as text (its Worker bundle), to run it in a worker');
+  { const g = {}, probe = { kind: 'V', a: 'out', b: 'gnd' }, spec = { model: { netlist: divider() } }; (new Function('self', W))(g);
+    const w = g.noemaEngine.create(spec, { seed: 1, faults: [] }).measure({}, probe), here = ENGINES.mod('circuit-mna@1').simEngine.create(spec, { seed: 1, faults: [] }).measure({}, probe);
+    ok(w.value === here.value && Math.abs(w.value - 7.5) < 0.01, `the engine built from its own Worker bundle computes the same (a seeded meter reading ${w.value.toFixed(4)} V)`); }
   const s = JSON.stringify(base.dc()); ok(!/fault|open|short/.test(JSON.stringify(trace.dc())) && s.length > 0, 'the results never name the fault');
 }
 {
@@ -287,9 +291,8 @@ const pwmRc = { nodes: ['p', 'out'], elements: [{ id: 'V1', type: 'V', n: ['p', 
   ok(ms2 < 3000, `nonlinear (BJT driven by PWM) transient of 20000 steps in ${ms2.toFixed(1)} ms`);
 }
 
-{ // the sim-spec adapter (36_engine_circuit_sim.js): a logic capture of more than 2000 edges is cut where the edges kept end, never drawn flat to tEnd
-  let def = null; globalThis.window = globalThis; globalThis.ACT = { registerEngine: d => { def = d; } };
-  require(path.join(ROOT, 'engine', 'src', '36_engine_circuit_sim.js')); delete globalThis.ACT;
+{ // the sim-spec adapter (src/engines/circuit/sim.js): a logic capture of more than 2000 edges is cut where the edges kept end, never drawn flat to tEnd
+  const def = ENGINES.mod('circuit-mna@1').engine;
   const nl = { nodes: ['p'], elements: [{ id: 'V1', type: 'V', n: ['p', 'gnd'], value: { pwm: { v: 5, freq: 100000, duty: 0.5 } } }, { id: 'R1', type: 'R', n: ['p', 'gnd'], value: 1000 }] };
   const m = def.create({ model: { netlist: nl } }, { seed: 1, faults: [] }).measure({}, { kind: 'logic', nodes: ['p'], threshold: 2.5, tEnd: 0.03, dt: 1e-6 });
   const tr = m.traces && m.traces.p, last = tr && tr.edges[tr.edges.length - 1];

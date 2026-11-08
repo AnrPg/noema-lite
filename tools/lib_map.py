@@ -1,4 +1,4 @@
-"""map@1 in Python (docs/library/map.md): the twin of the checks of engine/src/48_lib_map.js — check_spec(spec), exprs(spec), keys(spec)
+"""map@1 in Python (docs/library/map.md): the twin of the checks of src/engines/map/map.js — check_spec(spec), exprs(spec), keys(spec)
 give the same problems (code, path, msg, level) and the same lists as the JS module; tests/enginelib.js compares both on
 tests/fixtures/enginelib/map.json. It does not compute maps."""
 import enginelib as L

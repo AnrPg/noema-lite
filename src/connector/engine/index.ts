@@ -23,6 +23,7 @@ export function engineFrom(sources: readonly LegacySource[], provide: LegacyScop
     lang: need<NoemaLang>(s, 'NoemaLang'),
     report: need<NoemaReport>(s, 'NoemaReport'),
     engineRequests: need<NoemaEngineRequests>(s, 'NoemaEngineRequests'),
-    engineCatalog: (s.NoemaEngineCatalog as NoemaEngineCatalog | undefined) ?? null,
+    // the catalogue of the engine library (src/engines/catalog.js), on the NoemaCore the composition root provides
+    engineCatalog: (s.NoemaCore as { engines?: { catalog?: NoemaEngineCatalog } } | undefined)?.engines?.catalog ?? null,
   };
 }
