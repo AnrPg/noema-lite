@@ -138,6 +138,8 @@ export class ExerciseCard extends StudyElement {
   #nudge = '';
   #conf: Conf | null = null;
   #outcome: Outcome | null = null;
+  /** reported on this card (before the state folds the event in) */
+  #flagged = false;
 
   constructor(app: StudyApp, ex: Exercise, o: CardOptions = {}) {
     super();
@@ -162,7 +164,9 @@ export class ExerciseCard extends StudyElement {
     setTimeout(() => {
       if (!this.isConnected) return;
       const r = this.getBoundingClientRect();
-      if (r.top >= 0 && r.bottom <= innerHeight) this._w.focus?.();
+      // (a type's own focus: an element's built-in one would only take the focus off the page's place)
+      const f = this._w.focus;
+      if (f && f !== HTMLElement.prototype.focus && r.top >= 0 && r.bottom <= innerHeight) f.call(this._w);
     }, 50);
   }
 
@@ -298,6 +302,7 @@ export class ExerciseCard extends StudyElement {
           html`<button
             class="confchip"
             type="button"
+            ?disabled=${this.#locked}
             aria-pressed=${String(this.#conf === k)}
             data-k=${k}
             title=${app.t(`engine.ex.conf_${k}`)}
@@ -317,7 +322,7 @@ export class ExerciseCard extends StudyElement {
   #flag(): TemplateResult {
     const app = this.#app,
       ex = this.#ex;
-    const done = !!app.state.flags?.[ex.id];
+    const done = this.#flagged || !!app.state.flags?.[ex.id];
     return html`<button
       class="exflag${done ? ' on' : ''}"
       type="button"
@@ -377,6 +382,7 @@ export class ExerciseCard extends StudyElement {
                   const nt = (box.querySelector('textarea')?.value ?? '').trim().slice(0, 2000);
                   app.host.learn('exercise.flagged', ex.id, { why, ...(nt ? { note: nt } : {}) });
                   close();
+                  this.#flagged = true;
                   this.redraw();
                   app.toast(`⚑ ${app.t('engine.ex.reportSaved')}`);
                 }}

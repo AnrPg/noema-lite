@@ -278,17 +278,17 @@ textarea.answer:focus{border-color:var(--c)}
 .casepart .fb{margin-top:8px}
 .treepath{margin:4px 0 0;padding-inline-start:20px;font-size:13.5px;color:var(--ink2)}
 .treepath:empty{display:none}
-.opt.dim{opacity:.62}
+.opt.dim{color:var(--ink2);background:transparent}
 .opt .value{letter-spacing:1px;color:var(--c-ink);font-weight:800}
 .confrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px}
 .confrow .tiny{margin-inline-end:2px}
-.confchip{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink2);display:inline-flex;gap:5px;align-items:center}
+.confchip{font-size:12px;min-height:24px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink2);display:inline-flex;gap:5px;align-items:center}
 .confchip span[aria-hidden]{letter-spacing:-1px;font-size:9px;opacity:.7}
 .confchip[aria-pressed=true]{border-color:var(--c);background:var(--c-bg);color:var(--ink)}
-.confrow.locked .confchip:not([aria-pressed=true]){opacity:.4}
+.confrow.locked .confchip{cursor:default}.confrow.locked .confchip:not([aria-pressed=true]){opacity:.4}
 .confnote{margin-top:8px}
 @media (max-width:480px){.confrow>.tiny{display:none}}
-.exflag{background:none;border:0;color:var(--ink3,var(--ink2));opacity:.35;font-size:14px;padding:2px 6px;cursor:pointer;margin-inline-start:4px}
+.exflag{background:none;border:0;color:var(--ink3,var(--ink2));opacity:.35;font-size:14px;min-width:24px;min-height:24px;padding:2px 6px;cursor:pointer;margin-inline-start:4px}
 .exflag:hover,.exflag:focus-visible{opacity:.9}
 .exflag.on{opacity:.9;color:var(--warn)}
 .excite{margin-top:10px}

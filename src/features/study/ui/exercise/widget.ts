@@ -77,6 +77,8 @@ export const strings = (x: unknown): string[] => (Array.isArray(x) ? x.map(v => 
 export const indices = (x: unknown): number[] =>
   Array.isArray(x) ? x.filter((v): v is number => typeof v === 'number') : typeof x === 'number' ? [x] : [];
 
+const CONTRACT_METHODS = ['answer', 'check', 'reveal', 'given', 'keys', 'focus', 'bonus'] as const;
+
 /** The base of a type's answer area: a light-DOM study element holding its exercise, the card's API and the pictures. It
  *  draws from its own state (`redraw()` after each change); `revealed` is set once the card has checked the answer. */
 export abstract class ExerciseWidget extends StudyElement {
@@ -86,6 +88,13 @@ export abstract class ExerciseWidget extends StudyElement {
   constructor(ctx: WidgetCtx) {
     super();
     this.ctx = ctx;
+    // the contract's members are functions a caller may take apart ({ ...w }, w.answer passed on): bound to the element
+    const self = this as unknown as Record<string, unknown>;
+    for (const k of CONTRACT_METHODS) {
+      const f = self[k];
+      // (an element's own focus() is not the type's: it stays the element's)
+      if (typeof f === 'function' && f !== HTMLElement.prototype.focus) self[k] = (f as (...a: unknown[]) => unknown).bind(this);
+    }
   }
   get el(): HTMLElement {
     return this;
