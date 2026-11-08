@@ -1,4 +1,4 @@
-# `philo@1` — the computable parts of philosophy (`src/engines/philo/philo.js`, `NoemaLibPhilo`)
+# `philo@1` — the computable parts of philosophy (`src/engines/philo/philo.ts`, `NoemaLibPhilo`)
 
 A general engine of the library (`docs/INTERACTIVE_LIBRARY.md`) for the parts of philosophy that have exact models and can be graded.
 It covers ethics calculi, social choice, decision theory, game theory, formal epistemology, Indian and Buddhist forms of inference,

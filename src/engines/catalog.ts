@@ -48,7 +48,7 @@ const CATALOG = Object.freeze([
     'οικονομικά',
     'τόκος',
   ]),
-  E('ode@1', 'library', true, 'src/engines/ode/ode.js', 'ode', [
+  E('ode@1', 'library', true, 'src/engines/ode/ode.ts', 'ode', [
     'differential equation',
     'ode',
     'dynamics',
@@ -548,7 +548,7 @@ const CATALOG = Object.freeze([
     'calendrier',
     'époque',
   ]),
-  E('music@1', 'library', true, 'src/engines/music/music.js', 'music', [
+  E('music@1', 'library', true, 'src/engines/music/music.ts', 'music', [
     'music',
     'note',
     'pitch',
@@ -906,7 +906,7 @@ const CATALOG = Object.freeze([
     'simulation',
     'guichet',
   ]),
-  E('philo@1', 'library', true, 'src/engines/philo/philo.js', 'philo', [
+  E('philo@1', 'library', true, 'src/engines/philo/philo.ts', 'philo', [
     'philosophy',
     'ethics',
     'utilitarian',
@@ -1089,7 +1089,7 @@ const CATALOG = Object.freeze([
     'chaleur',
     'température',
   ]),
-  E('pid@1', 'plugin', true, 'src/engines/pid/pid.js', 'pid', [
+  E('pid@1', 'plugin', true, 'src/engines/pid/pid.ts', 'pid', [
     'control',
     'pid',
     'feedback',

@@ -25,8 +25,8 @@ const def = (
 export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   def(
     manifest('ode@1'),
-    () => import('./ode/ode.js'),
-    () => import('noema-worker:./ode/ode.js#simEngine'),
+    () => import('./ode/ode.ts'),
+    () => import('noema-worker:./ode/ode.ts#simEngine'),
   ),
   def(
     manifest('prob@1'),
@@ -80,8 +80,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('music@1'),
-    () => import('./music/music.js'),
-    () => import('noema-worker:./music/music.js#simEngine'),
+    () => import('./music/music.ts'),
+    () => import('noema-worker:./music/music.ts#simEngine'),
   ),
   def(
     manifest('map@1'),
@@ -120,8 +120,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('philo@1', ['engine:logic@1']),
-    () => import('./philo/philo.js'),
-    () => import('noema-worker:./philo/philo.js#simEngine'),
+    () => import('./philo/philo.ts'),
+    () => import('noema-worker:./philo/philo.ts#simEngine'),
   ),
   def(
     manifest('rhetoric@1', ['engine:logic@1']),
@@ -140,8 +140,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('pid@1'),
-    () => import('./pid/pid.js'),
-    () => import('noema-worker:./pid/pid.js#adapter'),
+    () => import('./pid/pid.ts'),
+    () => import('noema-worker:./pid/pid.ts#adapter'),
   ),
   def(
     manifest('rf@1'),
