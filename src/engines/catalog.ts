@@ -506,7 +506,7 @@ const CATALOG = Object.freeze([
     'artère',
     'articulation',
   ]),
-  E('timeline@1', 'library', true, 'src/engines/timeline/timeline.js', 'timeline', [
+  E('timeline@1', 'library', true, 'src/engines/timeline/timeline.ts', 'timeline', [
     'timeline',
     'chronology',
     'history',
@@ -632,7 +632,7 @@ const CATALOG = Object.freeze([
     'géographie',
     'distance',
   ]),
-  E('text@1', 'library', true, 'src/engines/text/text.js', 'text', [
+  E('text@1', 'library', true, 'src/engines/text/text.ts', 'text', [
     'text',
     'word',
     'frequency',
@@ -1072,7 +1072,7 @@ const CATALOG = Object.freeze([
     'circuit',
     'électronique',
   ]),
-  E('thermal@1', 'plugin', true, 'src/engines/thermal/thermal.js', 'thermal', [
+  E('thermal@1', 'plugin', true, 'src/engines/thermal/thermal.ts', 'thermal', [
     'heat',
     'thermal',
     'temperature',
@@ -1127,7 +1127,7 @@ const CATALOG = Object.freeze([
     'radio',
     'antenne',
   ]),
-  E('twin@1', 'plugin', true, 'src/engines/twin/twin.js', 'twin', [
+  E('twin@1', 'plugin', true, 'src/engines/twin/twin.ts', 'twin', [
     'iot',
     'battery',
     'sensor node',

@@ -75,8 +75,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('timeline@1'),
-    () => import('./timeline/timeline.js'),
-    () => import('noema-worker:./timeline/timeline.js#simEngine'),
+    () => import('./timeline/timeline.ts'),
+    () => import('noema-worker:./timeline/timeline.ts#simEngine'),
   ),
   def(
     manifest('music@1'),
@@ -90,8 +90,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('text@1'),
-    () => import('./text/text.js'),
-    () => import('noema-worker:./text/text.js#simEngine'),
+    () => import('./text/text.ts'),
+    () => import('noema-worker:./text/text.ts#simEngine'),
   ),
   def(
     manifest('craft@1'),
@@ -135,8 +135,8 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('thermal@1'),
-    () => import('./thermal/thermal.js'),
-    () => import('noema-worker:./thermal/thermal.js#adapter'),
+    () => import('./thermal/thermal.ts'),
+    () => import('noema-worker:./thermal/thermal.ts#adapter'),
   ),
   def(
     manifest('pid@1'),
@@ -150,7 +150,7 @@ export const ENGINE_PLUGINS: readonly EnginePlugin[] = Object.freeze([
   ),
   def(
     manifest('twin@1'),
-    () => import('./twin/twin.js'),
-    () => import('noema-worker:./twin/twin.js#simEngine'),
+    () => import('./twin/twin.ts'),
+    () => import('noema-worker:./twin/twin.ts#simEngine'),
   ),
 ]);

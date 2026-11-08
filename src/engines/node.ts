@@ -31,14 +31,14 @@ import m8 from './clinic/clinic.ts';
 import w8 from 'noema-worker:./clinic/clinic.ts#simEngine';
 import m9 from './anatomy/anatomy.ts';
 import w9 from 'noema-worker:./anatomy/anatomy.ts#simEngine';
-import m10 from './timeline/timeline.js';
-import w10 from 'noema-worker:./timeline/timeline.js#simEngine';
+import m10 from './timeline/timeline.ts';
+import w10 from 'noema-worker:./timeline/timeline.ts#simEngine';
 import m11 from './music/music.ts';
 import w11 from 'noema-worker:./music/music.ts#simEngine';
 import m12 from './map/map.ts';
 import w12 from 'noema-worker:./map/map.ts#simEngine';
-import m13 from './text/text.js';
-import w13 from 'noema-worker:./text/text.js#simEngine';
+import m13 from './text/text.ts';
+import w13 from 'noema-worker:./text/text.ts#simEngine';
 import m14 from './craft/craft.ts';
 import w14 from 'noema-worker:./craft/craft.ts#simEngine';
 import m15 from './law/law.ts';
@@ -55,14 +55,14 @@ import m20 from './rhetoric/rhetoric.ts';
 import w20 from 'noema-worker:./rhetoric/rhetoric.ts#simEngine';
 import m21 from './circuit/sim.ts';
 import w21 from 'noema-worker:./circuit/sim.ts#simEngine';
-import m22 from './thermal/thermal.js';
-import w22 from 'noema-worker:./thermal/thermal.js#adapter';
+import m22 from './thermal/thermal.ts';
+import w22 from 'noema-worker:./thermal/thermal.ts#adapter';
 import m23 from './pid/pid.ts';
 import w23 from 'noema-worker:./pid/pid.ts#adapter';
 import m24 from './rf/rf.ts';
 import w24 from 'noema-worker:./rf/rf.ts#simEngine';
-import m25 from './twin/twin.js';
-import w25 from 'noema-worker:./twin/twin.js#simEngine';
+import m25 from './twin/twin.ts';
+import w25 from 'noema-worker:./twin/twin.ts#simEngine';
 
 /** id → [module, Worker bundle] */
 export const IN_HAND: Readonly<Record<string, readonly [EngineModule, string]>> = Object.freeze({

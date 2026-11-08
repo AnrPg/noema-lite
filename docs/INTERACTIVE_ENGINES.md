@@ -27,7 +27,7 @@ Which engine for which learning goal: `docs/INTERACTIVE_AUTHORING.md`.
   at runtime (a slider reaches an invalid value) gives NaN scalars and empty series; nothing throws into the page.
 - Schemas: `src/contracts/schemas/noema.{thermal,pid,rf,twin}.v1.schema.json`. Tests: `node tests/{thermal,pid,rf,twin}.js`.
 
-## 2. `thermal@1` — lumped thermal networks (`src/engines/thermal/thermal.js`)
+## 2. `thermal@1` — lumped thermal networks (`src/engines/thermal/thermal.ts`)
 
 A MOSFET on a heatsink, a PCB trace, a thermal time constant, a room with a heater and a thermostat.
 
@@ -254,7 +254,7 @@ normals by inversion), the maximum range and the required Eb/N0 are Brent's root
 bisection; erfc (the BER curves' Q) is the kernel's `SK.erfc` (Q(½, x²), accurate in the far tail) instead of NR erfcc (1.2e-7).
 FALLBACK without the kernel (marked): mulberry32, bisection, erfcc. No stepper (a link budget has no time).
 
-## 5. `twin@1` — the digital twin of an IoT node (`src/engines/twin/twin.js`)
+## 5. `twin@1` — the digital twin of an IoT node (`src/engines/twin/twin.ts`)
 
 A small discrete-event simulator of a battery-powered microcontroller node: "design the duty cycle" exercises and fault-finding
 benches (a device with one hidden fault: the learner reads the battery, the current, the radio and the event log, then diagnoses).
