@@ -1,11 +1,9 @@
 /**
- * The page of a study screen: <main> cleared and filled (the source filter's bar and the 🔒 bar of a locked Roadmap
- * step on top), the frame's top bar told the crumbs, and the few pieces several screens draw (a progress ring, a list of
- * choices, Practice ▾, a found place outlined). Without the frame (the older page, an old index.html) a screen keeps its
+ * The pieces several study screens draw: the frame's top bar told the crumbs, a progress ring, a list of choices,
+ * Practice ▾, a found place outlined. Without the frame (the older page, an old index.html) a screen keeps its
  * own back button and plain tiles instead of the ▾ list.
  */
 import type { StudyApp } from './app.ts';
-import { h, type Child } from './dom.ts';
 import type { Chrome, MenuEntry } from './host.ts';
 import { html, M, nothing, ref, type TemplateResult } from './lit/base.ts';
 import type { ExplainWhat } from './parts.ts';
@@ -13,22 +11,6 @@ import type { ExplainWhat } from './parts.ts';
 /** The screen's frame: its crumbs and ⋮. */
 export function chrome(app: StudyApp, c: Chrome): void {
   app.host.frame.chrome(c);
-}
-
-/** Replaces the page's content: <main> holds one .view (the filter's bar and the lock bar first); → the view. */
-export function view(app: StudyApp, ...kids: readonly (Child | readonly Child[])[]): HTMLDivElement {
-  const m = app.host.frame.main();
-  m.replaceChildren();
-  m.dataset['page'] = '@engine';
-  const v = h('div', { class: 'view' }, ...kids);
-  const setup = app.route === 'home' || app.route === 'subject' ? app.host.frame.setupBanner() : null;
-  if (setup) v.prepend(setup);
-  const fb = app.sourcesUi.filterBanner();
-  if (fb) v.prepend(fb);
-  if (app.lock) v.prepend(h('div', { class: 'lockbar', role: 'note' }, `🔒 ${app.L('lockedPreview')}`));
-  m.append(v);
-  scrollTo({ top: 0 });
-  return v;
 }
 
 /** the note on a locked step's exercises */
@@ -102,9 +84,9 @@ export function choiceList(app: StudyApp, items: readonly (Choice | null)[]): Te
             }}
           >
             <span class="pic">${it.icon}</span
-            ><span class="grow"><b>${it.label}</b>${it.sub ? html`<small>${it.sub}</small>` : nothing}</span>${it.badge
-              ? html`<span class="pill c">${it.badge}</span>`
-              : nothing}<span class="chev" aria-hidden="true">›</span>
+            ><span class="grow"><b>${it.label}</b>${it.sub ? html`<small>${it.sub}</small>` : nothing}</span>${
+              it.badge ? html`<span class="pill c">${it.badge}</span>` : nothing
+            }<span class="chev" aria-hidden="true">›</span>
           </button>`,
       )}
   </div>`;
