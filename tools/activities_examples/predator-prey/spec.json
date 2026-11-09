@@ -28,7 +28,7 @@
  "readouts": [
   { "label": "swingLabel", "expr": "swing", "digits": 3 },
   { "label": "xStarLabel", "expr": "xStar", "digits": 3 },
-  { "label": "stableLabel", "expr": "stable == 1" }
+  { "label": "stableLabel", "expr": "stable == 1 && K > xStar" }
  ],
  "plots": [
   { "kind": "series", "title": "plotTitle",

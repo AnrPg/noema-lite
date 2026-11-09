@@ -55,9 +55,20 @@ if runtime not in REF: sys.exit(f'✗ --runtime is one of {", ".join(REF)}')
 sdir, nid = os.path.abspath(a[0]), a[1]
 if not re.fullmatch(r'[a-z0-9][a-z0-9-]{1,60}', nid): sys.exit('✗ the id is lower-case letters, digits and - (2–61 characters)')
 ref = ref or REF[runtime]
-_ez = os.path.join(HERE, 'activities_examples.zip')   # the skill ships the references as one zip (claude.ai's 200-file limit)
-if not os.path.isdir(os.path.join(HERE, 'activities_examples')) and os.path.isfile(_ez):
-    import zipfile; zipfile.ZipFile(_ez).extractall(os.path.join(HERE, 'activities_examples'))
+_eb, _ed = os.path.join(HERE, 'activities_examples.json'), os.path.join(HERE, 'activities_examples')   # the skill ships the references as one bundle (claude.ai: ≤ 200 files, no zip inside)
+if not os.path.isdir(_ed) and os.path.isfile(_eb):
+    import base64, tempfile
+    with open(_eb, encoding='utf-8') as fh: _files = json.load(fh)['files']
+    _tmp = tempfile.mkdtemp(prefix='.activities_examples-', dir=HERE)   # unpacked aside, renamed when whole: an interrupted run leaves no half folder
+    for _p, _b in _files.items():
+        _parts = _p.split('/')
+        _t = os.path.realpath(os.path.join(_tmp, *_parts))
+        if (not _p or _p.startswith('/') or '\\' in _p or ':' in _p or any(x in ('', '.', '..') for x in _parts)
+                or os.path.commonpath([_t, os.path.realpath(_tmp)]) != os.path.realpath(_tmp)):   # no drive anywhere (a/D:/x), never outside the folder
+            shutil.rmtree(_tmp); sys.exit(f'✗ activities_examples.json: the path {_p!r} is not a plain relative path')
+        os.makedirs(os.path.dirname(_t), exist_ok=True)
+        with open(_t, 'wb') as fh: fh.write(base64.b64decode(_b, validate=True))
+    os.replace(_tmp, _ed)
 src = next((d for d in (os.path.join(HERE, 'activities_examples', ref), os.path.join(HERE, '..', '..', '..', 'tools', 'activities_examples', ref)) if os.path.isdir(d)), None)
 if not src: sys.exit(f'✗ the reference activity (activities_examples/{ref}) is missing from the toolkit')
 dst = os.path.join(sdir, 'activities', nid)

@@ -376,4 +376,24 @@ refused('an H5P item without its file', lambda w: os.remove(os.path.join(w, 'act
 def noacts(w):
     shutil.rmtree(os.path.join(w, 'activities'))
 refused('a block without activities/', noacts, "activity 'alias-lab' is not in pack.activities")
+
+# the shipped skill on its own (claude.ai: at most 200 files and no zip inside one): the reference activities travel as ONE JSON bundle
+# that activity_new.py unpacks on first use, from an extracted skill with no checkout beside it (T is a temporary folder)
+with zipfile.ZipFile(SKZ) as z_:
+    names_ = z_.namelist(); nested_ = [n_ for n_ in names_ if zipfile.is_zipfile(__import__('io').BytesIO(z_.read(n_)))]
+check(len(names_) <= 200 and not nested_ and 'noema-pack-builder/scripts/activities_examples.json' in names_, f'the skill zip: {len(names_)} files (≤ 200), no zip inside it {nested_}, the references as activities_examples.json')
+check(not os.path.exists(os.path.join(S, 'activities_examples')) and not os.path.isdir(os.path.join(S, '..', '..', '..', 'tools', 'activities_examples')), 'the extracted skill has no unpacked references and no checkout to fall back on')
+nw = os.path.join(T, 'w-new'); shutil.copytree(os.path.join(ROOT, 'tests', 'fixtures', 'demo-physics'), nw)
+for ref_, id_ in (('led-bench', 'my-bench'), ('planets-quiz', 'my-quiz')):
+    r = run(os.path.join(S, 'activity_new.py'), nw, id_, '--from', ref_)
+    check(r.returncode == 0 and os.path.isdir(os.path.join(nw, 'activities', id_)), f'activity_new.py --from {ref_} works from the extracted skill alone', r.stdout + r.stderr)
+with open(os.path.join(nw, 'activities', 'my-quiz', 'item.h5p'), 'rb') as a_, open(os.path.join(ROOT, 'tools', 'activities_examples', 'planets-quiz', 'item.h5p'), 'rb') as b_:
+    check(a_.read() == b_.read(), 'the .h5p restored from the bundle is byte-identical to its source')
+check(not any(f.startswith('.activities_examples-') for f in os.listdir(S)), 'the bundle is unpacked aside and renamed whole (no temporary folder left)')
+for bad_ in ('../escape.txt', '/abs.txt', 'a/../../escape.txt', 'C:/x.txt', 'a/D:/escape.txt', 'a\\..\\x.txt'):
+    S2 = os.path.join(T, 'tampered'); shutil.rmtree(S2, ignore_errors=True); os.makedirs(S2)
+    shutil.copy(os.path.join(S, 'activity_new.py'), S2); wj(os.path.join(S2, 'activities_examples.json'), {'format': 'noema.files/v1', 'files': {bad_: ''}})
+    w2 = os.path.join(T, 'w-bad'); shutil.rmtree(w2, ignore_errors=True); os.makedirs(w2)
+    r = run(os.path.join(S2, 'activity_new.py'), w2, 'x-bad', '--from', 'led-bench')
+    check(r.returncode != 0 and 'not a plain relative path' in r.stdout + r.stderr and not os.path.exists(os.path.join(T, 'escape.txt')) and not os.path.exists(os.path.join(S2, 'activities_examples')), f'a bundle path {bad_!r} is refused before anything is written', r.stdout + r.stderr)
 print(f'\nactivities_pack: {ok} checks passed')
